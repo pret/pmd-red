@@ -47,8 +47,6 @@ SECTIONS {
         asm/code_2.o(.text);
         src/code.o(.text);
         asm/event_flag.o(.text);
-        src/event_flag_1.o(.text);
-        asm/event_flag_1.o(.text);
         src/event_flag.o(.text);
         asm/code_8002774.o(.text);
         src/memory.o(.text);
@@ -92,7 +90,6 @@ SECTIONS {
         src/debug.o(.text);
         src/save.o(.text);
         src/code_8012A18.o(.text);
-        src/more_input.o(.text);
         src/menu_input.o(.text);
         asm/menu_input.o(.text);
         src/menu_input_1.o(.text);
@@ -100,8 +97,6 @@ SECTIONS {
         src/code_8012A18_1.o(.text);
         src/felicity_bank.o(.text);
         src/kangaskhan_storage.o(.text);
-        asm/kangaskhan_storage.o(.text);
-        src/kangaskhan_storage_1.o(.text);
         src/kecleon_items.o(.text);
         asm/kecleon_items.o(.text);
         src/kecleon_items_1.o(.text);
@@ -117,7 +112,13 @@ SECTIONS {
         src/code_801EE10.o(.text);
         asm/code_801EE10.o(.text);
         src/code_801EE10_mid.o(.text);
+        src/gulpin_shop_1.o(.text);
+        src/code_8021774_pre.o(.text);
         asm/code_801EE10_mid.o(.text);
+        src/code_8021774.o(.text);
+        src/wigglytuff_shop.o(.text);
+        src/code_8023144_pre.o(.text);
+        asm/code_8023144.o(.text);
         src/code_8023144.o(.text);
         asm/code_801EE10_1.o(.text);
         src/code_801EE10_1.o(.text);
@@ -155,6 +156,7 @@ SECTIONS {
         src/trade_items_menu.o(.text);
         src/other_menus.o(.text);
         asm/other_menus.o(.text);
+        src/other_menus_1.o(.text);
         src/adventure_log_menu.o(.text);
         src/unk_menu_203B360.o(.text);
         src/save_menu.o(.text);
@@ -284,7 +286,6 @@ SECTIONS {
         asm/code_8094148.o(.text);
         src/number_util.o(.text);
         src/code_809447C.o(.text);
-        asm/code_809447C.o(.text);
         src/code_8092334.o(.text);
         src/game_options.o(.text);
         asm/code_8094D28.o(.text);
@@ -304,8 +305,6 @@ SECTIONS {
         asm/code_8097DD0.o(.text);
         src/code_8097F40.o(.text);
         src/exclusive_pokemon.o(.text);
-        asm/exclusive_pokemon.o(.text);
-        src/exclusive_pokemon_1.o(.text);
         src/position_util.o(.text);
         asm/code_8098468.o(.text);
         src/ground_main.o(.text);

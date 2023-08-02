@@ -8,11 +8,12 @@
 #include "code_8094F88.h"
 #include "code_800D090.h"
 #include "code_802C39C.h"
+#include "menu_input.h"
 
 struct unkStruct_203B324
 {
     // size: 0x78
-    u8 fill0[0xC];
+    struct MenuInputStructSub unk0;
     u8 mailIndex;
     u32 unk10;
     struct UnkTextStruct2 *unk14;
@@ -47,9 +48,7 @@ const u8 gUnknown_80E0938[] = "%-4d";
 static const u8 wonder_mail_fill[] = "pksdir0";
 
 extern void sub_8030DD4(void);
-extern void sub_801317C(void *);
 extern void PlayMenuSoundEffect(u32);
-extern u32 sub_8012A64(void *, u32);
 extern void CreateRescueDescription(struct unkStruct_802C39C *);
 extern void sub_80073E0(u32);
 extern void sub_80073B8(u32);
@@ -61,7 +60,7 @@ bool8 sub_8030D40(u8 mailIndex, s32 param_2)
 { 
   gUnknown_203B324 = MemoryAlloc(sizeof(struct unkStruct_203B324), 8);
   gUnknown_203B324->mailIndex = mailIndex;
-  sub_801317C(gUnknown_203B324);
+  sub_801317C(&gUnknown_203B324->unk0);
   gUnknown_203B324->unk10 = param_2;
   gUnknown_203B324->unk14 = &gUnknown_203B324->unk18[param_2];
   sub_8006518(gUnknown_203B324->unk18);
@@ -72,7 +71,7 @@ bool8 sub_8030D40(u8 mailIndex, s32 param_2)
 
 u8 sub_8030DA0(void)
 { 
-  switch(sub_8012A64(gUnknown_203B324, gUnknown_203B324->unk10))
+  switch(sub_8012A64(&gUnknown_203B324->unk0, gUnknown_203B324->unk10))
   {
     case 2:
         PlayMenuSoundEffect(1);
@@ -127,12 +126,12 @@ void sub_8030E48(void)
   stack.clientSpecies = mail->clientSpecies;
   stack.targetSpecies = mail->clientSpecies;
   stack.targetItem = ITEM_NOTHING;
-  if (mail->unk20.id == ITEM_NOTHING) {
+  if (mail->item.id == ITEM_NOTHING) {
     stack.unk2E = 5;
   }
   else {
     stack.unk2E = 2;
-    stack.unk34 = mail->unk20.id;
+    stack.unk34 = mail->item.id;
   }
   switch(mail->mailType)
   {

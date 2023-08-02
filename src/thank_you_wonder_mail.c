@@ -11,6 +11,7 @@
 #include "input.h"
 #include "rescue_password_menu.h"
 #include "text.h"
+#include "text_util.h"
 #include "team_inventory.h"
 #include "code_800D090.h"
 #include "menu_input.h"
@@ -218,7 +219,6 @@ extern u32 sub_80144A4(s32 *r0);
 extern void SetThankYouMailMenuState(u32);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void SetMenuItems(struct MenuStruct *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
-extern void sub_80922B4(u8 *, u8 *, u32);
 extern void sub_802F204(struct unkStruct_802F204 *, u32);
 extern void sub_80151C0(u32, u8 *);
 extern void xxx_call_start_bg_music(void);
@@ -288,7 +288,7 @@ u32 CreateThankYouMailPelipper(void)
   index = GetFirstIndexofMailType(6);
   if (index != -1) {
     mail = GetMailatIndex(index);
-    gUnknown_203B2C4->unk41C = mail->unk20;
+    gUnknown_203B2C4->unk41C = mail->item;
     gUnknown_203B2C4->mailIndex = index;
     gUnknown_203B2C4->unk430 = mail->unk10.unk10;
     SetThankYouMailMenuState(5);
@@ -957,7 +957,7 @@ void HandleConfirmItemtoSendMenu(void)
                 mail = GetMailatIndex(gUnknown_203B2C4->mailIndex);
                 if(gUnknown_203B2C4->unk41C.id != ITEM_NOTHING)
                 {
-                    mail->unk20 = gUnknown_203B2C4->unk41C;
+                    mail->item = gUnknown_203B2C4->unk41C;
                 }
                 gTeamInventory_203B460->teamStorage[gUnknown_203B2C4->unk41C.id]--;
                 SetThankYouMailMenuState(0x29);
@@ -1144,7 +1144,7 @@ void HandleMailCommunicationMenu(void)
                 {
                     case WONDER_MAIL_MODE_SEND:
                         mail = GetMailatIndex(GetFirstIndexofMailType(WONDER_MAIL_TYPE_THANK_YOU));
-                        if(mail->unk20.id != ITEM_NOTHING)
+                        if(mail->item.id != ITEM_NOTHING)
                         {
                             SetThankYouMailMenuState(ITEM_EXISTS_ON_THANK_YOU_MAIL);
                         }
@@ -1409,7 +1409,7 @@ void UpdateThankYouMailText(void)
         gUnknown_203B2C4->unk53C.moneyReward = 0; // 0x554
         mailIndex = GetMailIndex(6,gUnknown_203B2C4->unk430);
         mail = GetMailatIndex(mailIndex);
-        itemIndex = mail->unk20.id;
+        itemIndex = mail->item.id;
         if (itemIndex != ITEM_NOTHING)
             gUnknown_203B2C4->unk53C.itemRewards[0] = itemIndex; // unk558
         else

@@ -40,7 +40,7 @@ struct unkStruct_8035D94
         u8 itemIndex_u8;
         u32 itemIndex_u32;
     } itemIndex;
-    u32 numItems;
+    s32 numItems;
 };
 
 struct MainMenuSub

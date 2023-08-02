@@ -196,6 +196,7 @@ void CopyMonsterNametoBuffer(u8 * buffer, s16 index);
 void CopyYellowMonsterNametoBuffer(u8 *buffer, s16 index);
 void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index);
 void PrintColoredPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon, s32 colorNum);
+void sub_808D930(u8 *buffer, s32 index);
 void sub_808D9DC(u8 *buffer, struct PokemonStruct2 *param_2, s32 colorNum);
 void sub_808DA0C(u8 *buffer, struct PokemonStruct2 *param_2);
 void PeekPokemonItem(s16 index_, struct BulkItem* item);

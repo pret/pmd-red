@@ -3,6 +3,7 @@
 #include "constants/monster.h"
 #include "constants/wonder_mail.h"
 #include "text.h"
+#include "text_util.h"
 #include "input.h"
 #include "item.h"
 #include "team_inventory.h"
@@ -316,7 +317,6 @@ extern void sub_8035CF4(struct MenuStruct *, u32, u32);
 extern s32 sub_8037B28(u32);
 extern s32 sub_8037D64(u32, void *, void *);
 extern s32 sub_80381F4(u32, void *, void *);
-extern void sub_80922B4(u8 *buffer, u8 *string, s32 size);
 
 extern s32 CountMailType(u8 mailType);
 extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
@@ -1188,8 +1188,8 @@ void sub_8032828(void)
             gUnknown_203B33C->unk53C.moneyReward = 0;
             mail = GetMailatIndex(GetMailIndex(6, gUnknown_203B33C->unk420));
             // ABSOLUTELY GENIUS
-            if (mail->unk20.id != ITEM_NOTHING)
-                gUnknown_203B33C->unk53C.itemRewards[0] = mail->unk20.id;
+            if (mail->item.id != ITEM_NOTHING)
+                gUnknown_203B33C->unk53C.itemRewards[0] = mail->item.id;
             else
                 gUnknown_203B33C->unk53C.itemRewards[0] = ITEM_NOTHING;
             gUnknown_203B33C->unk53C.quantity = 1;
@@ -2691,7 +2691,7 @@ void sub_8034F88(void)
             case 6:
                 mail = GetMailatIndex(gUnknown_203B33C->unk218);
                 if(gUnknown_203B33C->item.id != ITEM_NOTHING)
-                    mail->unk20 = gUnknown_203B33C->item;
+                    mail->item = gUnknown_203B33C->item;
                 gTeamInventory_203B460->teamStorage[gUnknown_203B33C->item.id]--;
                 SetFriendRescueMenuState(0x75);
                 break;
@@ -2892,7 +2892,7 @@ void sub_8035210(void)
                 if(gUnknown_203B33C->unk528 == 0x13)
                 {
                     mail = GetMailatIndex(GetFirstIndexofMailType(5));
-                    if(mail->unk20.id != ITEM_NOTHING)
+                    if(mail->item.id != ITEM_NOTHING)
                         SetFriendRescueMenuState(0x53);
                     else
                         SetFriendRescueMenuState(0x55);

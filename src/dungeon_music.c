@@ -61,7 +61,7 @@ void sub_8083AB0(s16 param_0, struct Entity * target, struct Entity * entity)
   }
   sub_80709C8(buffer,entityInfo);
   CopyStringtoBuffer(temp->buffer2, buffer);
-  temp->unk14 = param_0_s32;
+  temp->moveID = param_0_s32;
   temp->heldItem = entityInfo->heldItem;
   temp->exp = entityInfo->exp;
   temp->level = entityInfo->level;
@@ -108,7 +108,7 @@ bool8 sub_8083C24(void)
 
   temp = &gDungeon->unk1CE98;
 
-  if (temp->unk14 < 0x226) {
+  if (temp->moveID < 0x226) {
     return TRUE;
   }
   else {
@@ -122,7 +122,7 @@ bool8 sub_8083C50(void)
 
   temp = &gDungeon->unk1CE98;
 
-  if ((temp->unk14 == 0x227) || (temp->unk14 == 0x22A) || (temp->unk14 == 0x228)) {
+  if ((temp->moveID == 0x227) || (temp->moveID == 0x22A) || (temp->moveID == 0x228)) {
     return TRUE;
   }
   else {
@@ -138,7 +138,7 @@ bool8 sub_8083C88(u8 param_1)
 
   if ((!HasCheckpoint(gDungeon->dungeonLocation.id) && 
       ((gDungeon->unk65C != 0) || (param_1 != 0))) ||
-     (temp->unk14 != 0x227)) {
+     (temp->moveID != 0x227)) {
     return TRUE;
   }
   else {
@@ -197,7 +197,7 @@ void PlayDungeonFailBGM(void)
 {
   DungeonStartNewBGM(MUS_DUNGEON_FAIL);
   gDungeon->unk66F = 0;
-  gDungeon->unk672 = 0;
+  gDungeon->monsterHouseTriggeredEvent = FALSE;
   gDungeon->unk699 = 0;
   gDungeon->bossSongIndex = STOP_BGM;
 }
@@ -206,7 +206,7 @@ void PlayDungeonCompleteBGM(void)
 {
   DungeonStartNewBGM(MUS_DUNGEON_COMPLETE);
   gDungeon->unk66F = 0;
-  gDungeon->unk672 = 0;
+  gDungeon->monsterHouseTriggeredEvent = FALSE;
   gDungeon->unk699 = 0;
   gDungeon->bossSongIndex = STOP_BGM;
 }
@@ -296,7 +296,7 @@ void UpdateDungeonMusic(void)
     if (gDungeon->unk66F != 0) {
         newSongIndex = MUS_STOP_THIEF;
     }
-    else if (gDungeon->unk672 != 0) {
+    else if (gDungeon->monsterHouseTriggeredEvent) {
         newSongIndex = MUS_MONSTER_HOUSE;
       }
     else if (gDungeon->unk699 != 0) {

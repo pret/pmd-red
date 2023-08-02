@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants/ability.h"
 #include "constants/move_id.h"
+#include "constants/status.h"
 #include "constants/type.h"
 #include "constants/weather.h"
 #include "dungeon_entity.h"
@@ -43,7 +44,6 @@ extern void sub_806A2BC(struct Entity *, u8);
 extern void sub_804178C(u32);
 extern void sub_803F508(struct Entity *);
 extern void sub_804AC20(struct Position *);
-extern u8 sub_8092364(u8);
 extern void sub_803E46C(u32);
 extern void sub_803E708(u32 r0, u32 r1);
 
@@ -211,7 +211,7 @@ void sub_806A120(struct Entity * pokemon, struct Entity * target, struct Move* m
   struct EntityInfo *entityInfo;
 
   if ((((EntityExists(pokemon)) && (EntityExists(target))) && (pokemon != target))
-     && (entityInfo = target->info, entityInfo->protectionStatus == 0xC)) {
+     && (entityInfo = target->info, entityInfo->protectionStatus == STATUS_CONVERSION2)) {
     moveType = GetMoveTypeForMonster(pokemon, move);
     uVar2_u32 = sub_8092364(moveType);
     if (uVar2_u32 != TYPE_NONE) {

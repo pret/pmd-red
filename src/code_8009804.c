@@ -1,9 +1,11 @@
 #include "global.h"
+#include "file_system.h"
 
 extern u8 gUnknown_202D238[4];
-
 extern s32 gUnknown_202D23C;
 extern u16 gUnknown_202B038[4][32][32];
+extern u8 gUnknown_80B88CC[];
+extern struct FileArchive gSystemFileArchive;
 
 struct unkStruct_202D240
 {
@@ -16,16 +18,37 @@ extern struct unkStruct_202D240 gUnknown_202D240[8];
 struct unkStruct_202D038
 {
      // size: 0x40
-     u32 unk0;
-     u32 unk4;
-     u8 fill[0x40 - 0x8];
+     u32 unk0[0x10];
 };
 
 extern struct unkStruct_202D038 gUnknown_202D038[8];
 
 extern void CpuCopy(void* dest, void *src, s32 size);
+extern void SetBGPaletteBufferColorArray(s32 index, void *colorArray);
 extern void sub_8009A1C(u32);
+u32 sub_80063B0(void);
 
+void sub_80097B0(void)
+{
+    struct OpenedFile *fontpalFile;
+    s32 index;
+    u32 *ptr;
+
+    fontpalFile = OpenFileAndGetFileDataPtr(gUnknown_80B88CC,&gSystemFileArchive); // fontpal
+    CpuCopy(gUnknown_202D038, fontpalFile->data, sizeof(gUnknown_202D038));
+    if (sub_80063B0() == 1) {
+        ptr = &gUnknown_202D038[0].unk0[0];
+    }
+    else
+    {
+        ptr = &gUnknown_202D038[1].unk0[0];
+    }
+    for(index = 0; index < 0x10; ptr++, index++)
+    {
+        SetBGPaletteBufferColorArray(index + 0xf0, ptr);
+    }
+    CloseFile(fontpalFile);
+}
 
 void vram_related_8009804(void)
 {
@@ -131,7 +154,7 @@ void sub_80099F0(u32 r0)
     s32 iVar2;
     for(iVar2 = 0; iVar2 < 8; iVar2++)
     {
-        gUnknown_202D038[iVar2].unk4 = r0;
+        gUnknown_202D038[iVar2].unk0[1] = r0;
     }
 }
 

@@ -13,6 +13,7 @@
 #include "text.h"
 #include "text_util.h"
 #include "menu.h"
+#include "menu_input.h"
 
 enum
 {
@@ -37,7 +38,6 @@ enum
 EWRAM_DATA_2 struct PersonalityTestTracker *gPersonalityTestTracker = {0};
 EWRAM_DATA_2 struct PersonalityStruct_203B404 *gUnknown_203B404 = {0};
 
-extern void sub_801317C(u32 *);
 extern void sub_8001024(u32 *);
 extern s32 sub_8094E4C(void);
 extern void sub_8094D28(s32);
@@ -61,16 +61,9 @@ extern void sub_800836C(u32, u8 *r0, u32);
 extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);
 
 extern void RedrawPartnerSelectionMenu(void);
-extern void sub_8013818(struct MenuInputStruct *r0, s32, u32, u32);
 
-extern u32 GetKeyPress(struct MenuInputStruct *r0);
-extern u8 sub_80138B8(struct MenuInputStruct *r0, u32);
 extern void PlayMenuSoundEffect(u32);
 
-
-extern void sub_8013984(struct MenuInputStruct *r0);
-u32 sub_8013800(struct MenuInputStruct *r0, u32);
-extern void AddMenuCursorSprite(struct MenuInputStruct *r0);
 extern u32 sub_80095E4(s16, u32);
 
 extern struct GameOptions *gGameOptionsRef;
@@ -410,7 +403,7 @@ const char personality_test_fill[] = "pksdir0";
 u8 CreateTestTracker(void)
 {
   gPersonalityTestTracker = MemoryAlloc(sizeof(struct PersonalityTestTracker),8);
-  sub_801317C(&gPersonalityTestTracker->unkb4);
+  sub_801317C(&gPersonalityTestTracker->input);
   InitializeTestStats();
   sub_8099690(1);
   return 1;

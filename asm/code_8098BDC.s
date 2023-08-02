@@ -5573,7 +5573,7 @@ _0809BC26:
 	lsrs r4, 31
 	bl sub_809B294
 	adds r0, r4, 0
-	bl DisplayKangaskhanDialogueSprite
+	bl CreateKangaskhanStorage
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809BC5C

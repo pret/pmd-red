@@ -1,7 +1,7 @@
 #ifndef GUARD_TEXT_UTIL_H
 #define GUARD_TEXT_UTIL_H
 
-void sub_80922B4(u8 *buffer, u8 *string, s32 size);
+void sub_80922B4(u8 *buffer, const u8 *string, s32 size);
 u32 sub_80922E4(u32 r0);
 void CopyStringtoBuffer(u8 *buffer, u8 *string);
 void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size);

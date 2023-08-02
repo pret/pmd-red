@@ -23,9 +23,7 @@ struct unkStruct_203B230
     u32 unk20;
     u32 unk24;
     struct UnkTextStruct2 unk28[4];
-    u32 unk88;
-    u32 unk8C;
-    u32 unk90;
+    struct MenuInputStructSub unk88;
 };
 extern struct unkStruct_203B230 *gUnknown_203B230;
 
@@ -93,7 +91,6 @@ extern void sub_80073B8(u32);
 extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8013F84(void);
-extern u32 sub_8012A64(u32 *, u32);
 extern s32 sub_80913E0(struct Item *, u32, struct subStruct_203B240 **);
 extern void sub_80141B4(u8 *, u32, u32 *, u32);
 extern void sub_801BB20(void);
@@ -102,7 +99,6 @@ extern void sub_801A9E0(void);
 extern void sub_801BC24(void);
 extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_8014248(const char *, u32, u32, struct MenuItem *, u32, u32, u32, u32, u32);
-extern void sub_801317C(u32 *);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 extern void sub_801B46C(u32);
 extern void ResetSprites(u32);

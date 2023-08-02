@@ -1,16 +1,16 @@
 #include "global.h"
 #include "rescue_team_info.h"
 #include "code_8092334.h"
+#include "text_util.h"
 
 EWRAM_DATA_2 struct RescueTeamData *gRescueTeamInfoRef = {0};
 EWRAM_DATA struct RescueTeamData gRescueTeamInfo = {0};
 
 extern bool8 sub_80023E4(u32);
-extern void sub_80922B4(u8 *buffer, u8 *string, s32 size);
 extern void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size);
 
 extern const u8 *gRescueTeamRanks[];
-extern s32 gRescueRankMaxPoints[7];
+extern s32 gRescueRankMaxPoints[MAX_TEAM_RANKS];
 extern u8 gTeamNamePlaceholder[0x8]; // Pokemon
 
 void LoadRescueTeamInfo(void)

@@ -323,7 +323,7 @@ void sub_80313D8(u32 state)
                     unused = &gUnknown_203B480[index];
                     gUnknown_203B480[index].mailType = 0;
                     unused = &gUnknown_203B480[index];
-                    gUnknown_203B480[index].unk20.id = ITEM_NOTHING;
+                    gUnknown_203B480[index].item.id = ITEM_NOTHING;
                 }
                 break;
         }

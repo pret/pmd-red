@@ -6,6 +6,8 @@
 #include "code_800D090.h"
 #include "moves.h"
 #include "code_801EE10.h"
+#include "menu_input.h"
+#include "subStruct_203B240.h"
 
 extern struct unkStruct_203B270 *gUnknown_203B270;
 
@@ -22,22 +24,50 @@ struct unkStruct_203B274
     u8 unk3E4[4];
 };
 extern struct unkStruct_203B274 *gUnknown_203B274;
+
+struct unkStruct_203B278
+{
+    s32 state;
+    u16 *moveIDs;
+    u16 unk8;
+    u16 fillA;
+    s32 unkC;
+    s32 unk10;
+    struct subStruct_203B240 *unk14[4];
+    u32 unk24;
+    struct MenuInputStruct unk28;
+    u32 unk5C;
+    struct UnkTextStruct2 *unk60;
+    struct UnkTextStruct2 unk64[4];
+    u8 unkC4[4];
+    struct MenuInputStructSub unkC8;
+};
+
+extern struct unkStruct_203B278 *gUnknown_203B278;
+
 extern struct UnkTextStruct2 gUnknown_80DC2C4;
 extern struct UnkTextStruct2 gUnknown_80DC2AC;
+extern struct UnkTextStruct2 gUnknown_80DC2F8;
 
+extern u8 gAvailablePokemonNames[];
+extern u8 gUnknown_80DC310[];
 extern u8 gUnknown_80DC2DC[];
 
-extern void sub_8013818(struct MenuInputStruct*, u32, u32, u32);
-extern s32 GetKeyPress(struct MenuInputStruct*);
-extern void sub_8013660(struct MenuInputStruct*);
-extern void AddMenuCursorSprite(struct MenuInputStruct*);
-extern u8 sub_80138B8(struct MenuInputStruct*, u32);
 extern void PlayMenuSoundEffect(u32);
-extern void sub_8013984(struct MenuInputStruct*);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
-extern s32 sub_8013800(struct MenuInputStruct*, s32);
+extern void ResetSprites(u32);
+extern void sub_80140B4(struct UnkTextStruct2 *);
+extern void sub_801F918(s32);
+extern void sub_801FA58(void);
+extern void sub_801FAD4(void);
+extern void sub_801F930(void);
+extern void sub_801F9A4(void);
+int unk_MoveIDPrintMoveDescription(int a1, u16 moveID, int a3, struct subStruct_203B240** a4);
+extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
+void sub_8013F84(void);
+
 
 u32 sub_801F7E4(void);
 void sub_801F690(void);
@@ -80,7 +110,7 @@ bool8 sub_801F428(s16 index, s32 param_2) {
     sub_8013818(&gUnknown_203B274->input, sub_801F7E4(), 4, param_2);
     sub_801F690();
     sub_801F700();
-    return 1;
+    return TRUE;
 }
 
 u32 sub_801F520(u8 param_1)
@@ -223,4 +253,179 @@ u32 sub_801F7E4(void)
 {
     sub_808E218(gUnknown_203B274->unk4, gUnknown_203B274->pokeStruct);
     return gUnknown_203B274->unk4->count;
+}
+
+bool8 sub_801F808(u16 *moveIDs)
+{
+    s32 index;
+
+    ResetSprites(1);
+    gUnknown_203B278 = MemoryAlloc(sizeof(struct unkStruct_203B278), 8);
+    gUnknown_203B278->unk5C = 0;
+    gUnknown_203B278->unk60 = gUnknown_203B278->unk64;
+    sub_80140B4(gUnknown_203B278->unk64);
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B278->unk64,1,1);
+    gUnknown_203B278->moveIDs = moveIDs;
+
+    for(index = 4; index > 1; index--)
+    {
+        if(gUnknown_203B278->moveIDs[index - 1] != 0) break;
+    }
+    sub_8013818(&gUnknown_203B278->unk28,index,1,gUnknown_203B278->unk5C);
+    sub_801317C(&gUnknown_203B278->unkC8);
+    sub_801F918(0);
+    return 1;
+}
+
+s32 sub_801F890(void)
+{
+    switch(gUnknown_203B278->state)
+    {
+        case 0:
+            sub_801FA58();
+            break;
+        case 1:
+            sub_801FAD4();
+            break;
+        case 3:
+            return 3;
+        default:
+        case 2:
+            return 2;
+    }
+    return 0;
+}
+
+void sub_801F8D0(void)
+{
+    if(gUnknown_203B278)
+    {
+        gUnknown_203B278->unk64[gUnknown_203B278->unk5C] = gUnknown_80DC2F8;
+        ResetUnusedInputStruct();
+        sub_800641C(gUnknown_203B278->unk64, 1, 1);
+        MemoryFree(gUnknown_203B278);
+        gUnknown_203B278 = NULL;
+    }
+}
+
+void sub_801F918(s32 newState)
+{
+    gUnknown_203B278->state = newState;
+    sub_801F930();
+    sub_801F9A4();
+}
+
+void sub_801F930(void)
+{
+    sub_80140B4(gUnknown_203B278->unk64);
+    switch(gUnknown_203B278->state)
+    {
+        case 0:
+            gUnknown_203B278->unk60->unk14 = gUnknown_203B278->unkC4;
+            gUnknown_203B278->unkC4[0] = gUnknown_203B278->unk28.unk20;
+            gUnknown_203B278->unkC4[1] = gUnknown_203B278->unk28.unk1E;
+            gUnknown_203B278->unkC4[2] = 0x10;
+            gUnknown_203B278->unkC4[3] = 0;
+            ResetUnusedInputStruct();
+            sub_800641C(gUnknown_203B278->unk64, 1, 1);
+            break;
+        case 1:
+            ResetUnusedInputStruct();
+            sub_800641C(gUnknown_203B278->unk64, 1, 1);
+            break;
+        default:
+            break;
+    }
+}
+
+void sub_801F9A4(void)
+{
+    char **name;
+    switch(gUnknown_203B278->state)
+    {
+        case 0:
+            sub_8008C54(gUnknown_203B278->unk5C);
+            gUnknown_203B278->unk8 = gUnknown_203B278->moveIDs[gUnknown_203B278->unk28.unk1E];
+            gUnknown_203B278->unk10 = unk_MoveIDPrintMoveDescription(gUnknown_203B278->unk28.unk1E,gUnknown_203B278->unk8,gUnknown_203B278->unk5C,gUnknown_203B278->unk14);
+            gUnknown_203B278->unk24 = 0;
+            break;
+        case 1:
+            sub_8008C54(gUnknown_203B278->unk5C);
+            sub_80073B8(gUnknown_203B278->unk5C);
+            name = &(gUnknown_203B278->unk14[gUnknown_203B278->unkC]->pokeName);
+            strcpy(gAvailablePokemonNames, *name);
+            xxx_format_and_draw(0x10,0,gUnknown_80DC310,gUnknown_203B278->unk5C,0); // $m0
+            xxx_format_and_draw(4,0x10,gUnknown_203B278->unk14[gUnknown_203B278->unkC]->unk4,gUnknown_203B278->unk5C,0);
+            sub_80073E0(gUnknown_203B278->unk5C);
+            break;
+        case 2:
+            break;
+    }
+}
+
+void sub_801FA58(void)
+{
+    if(gUnknown_203B278->unk10 != 0)
+    {
+        if(gUnknown_203B278->unk24 & 8)
+        {
+            sub_8013F84();
+        }
+        gUnknown_203B278->unk24++;
+    }
+    switch(sub_8012A64(&gUnknown_203B278->unkC8, gUnknown_203B278->unk5C))
+    {
+        case 1:
+            PlayMenuSoundEffect(0);
+            if(gUnknown_203B278->unk10 != 0)
+            {
+                gUnknown_203B278->unkC = 0;
+                sub_801F918(1);
+            }
+            else
+            {
+                sub_801F918(3);
+            }
+            break;
+        case 2:
+            PlayMenuSoundEffect(1);
+            sub_801F918(2);
+            break;
+        default:
+            if(sub_8013938(&gUnknown_203B278->unk28))
+            {
+                sub_801F918(0);
+            }
+    }
+}
+
+void sub_801FAD4(void)
+{
+    if(gUnknown_203B278->unkC < gUnknown_203B278->unk10 - 1)
+    {
+        if(gUnknown_203B278->unk24 & 8)
+        {
+            sub_8013F84();
+        }
+        gUnknown_203B278->unk24++;
+    }
+    switch(sub_8012A64(&gUnknown_203B278->unkC8, gUnknown_203B278->unk5C))
+    {
+        case 1:
+            PlayMenuSoundEffect(0);
+            gUnknown_203B278->unkC++;
+            if(gUnknown_203B278->unkC < gUnknown_203B278->unk10)
+            {
+                sub_801F918(1);
+            }
+            else {
+                sub_801F918(0);
+            }
+            break;
+        case 2:
+            PlayMenuSoundEffect(1);
+            sub_801F918(2);
+            break;
+    }
 }

@@ -14,7 +14,7 @@ struct unkStruct_203B25C
     u32 chosenHintIndex;
     struct GameOptions newOptions;
     u32 menuAction;
-    struct MenuStruct unk1C;
+    struct MenuStruct menu;
     struct MenuItem menuItems[8];
     u16 unkAC[8];
     struct UnkTextStruct2 unkBC[4];
@@ -23,13 +23,8 @@ struct unkStruct_203B25C
 struct unkStruct_203B260  
 { 
     struct GameOptions *optionsMenu;
-    u32 unk4;
-    u8  unk8;
-    u8 fill9[0x10 - 0x9];
-    u32 unk10;
-    u8 fill14[0x28 - 0x14];
-    s16 unk28;
-    u8 fill2A[0x44 - 0x2A];
+    struct MenuInputStructSub unk4;
+    struct MenuInputStruct input;
     u32 unk44;
     struct UnkTextStruct2 * unk48;
     struct UnkTextStruct2 unk4C[4];
@@ -60,13 +55,9 @@ extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern s32 sub_8008ED0(u8 *);
-extern s32 sub_8013800(u32 *, u32);
+extern void CreateOthersMenu(void);
 extern void sub_80078A4(u32, u32, u32, u32, u32);
-extern u8 sub_80138B8(u32 *, u32);
 void PlayMenuSoundEffect(u32);
-s32 sub_8012AE8(void);
-void sub_801317C(u32 *);
-extern void sub_8013818(void *, u32, u32, u32);
 void CreateOptionsMenu(void);
 void nullsub_38(void);
 extern void SetOptionsMenuState(u32);
@@ -166,235 +157,58 @@ void SetOptionsMenuState(u32 newState)
     sub_801DED0();
 }
 
-#ifdef NONMATCHING
 void sub_801DD84(void)
 {
-    s32 iVar3;
+    s32 index;
     sub_8006518(gUnknown_203B25C->unkBC);
     switch(gUnknown_203B25C->state)
     {
-        case 0:
+        case OPTIONS_MENU_INIT:
             CreateOthersMenu();
-            // TODO probably could be cleaned up to actually match
-            iVar3 = 0;
-            if (gUnknown_203B25C->unkAC[iVar3] == 0) {
-                gUnknown_203B25C->unk18 = gUnknown_203B25C->menuItems[iVar3].menuAction;
-            }
-            else {
-                do {
-                    iVar3++;
-                    if(iVar3 > 7)
-                        break;
-                    if(gUnknown_203B25C->unkAC[iVar3] == 0){
-                        gUnknown_203B25C->unk18 = gUnknown_203B25C->menuItems[iVar3].menuAction;
-                        break;
-                    }
-                } while (iVar3 < 8);
-            }
-            for(iVar3 = 0; iVar3 < 4; iVar3++)
+            for(index = 0; index < 8; index++)
             {
-                gUnknown_203B25C->unkBC[iVar3] = gUnknown_80DBFCC;
+                if(gUnknown_203B25C->unkAC[index] == 0)
+                {
+                    gUnknown_203B25C->menuAction = gUnknown_203B25C->menuItems[index].menuAction;
+                    break;
+                }
             }
-            gUnknown_203B25C->unkBC[0] = gUnknown_80DBFB0;
-            sub_8012CAC(&gUnknown_203B25C->unkBC[0], gUnknown_203B25C->menuItems);
-            gUnknown_203B25C->unkBC[0].unk0c = 0xA;
-            break;
-        case 1:
-            CreateOthersMenu();
-            for(iVar3 = 0; iVar3 < 4; iVar3++)
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B25C->unkBC[iVar3] = gUnknown_80DBFB0;
+                gUnknown_203B25C->unkBC[index] = gUnknown_80DBFB0;
             }
             gUnknown_203B25C->unkBC[0] = gUnknown_80DBFCC;
             sub_8012CAC(&gUnknown_203B25C->unkBC[0], gUnknown_203B25C->menuItems);
-            gUnknown_203B25C->unkBC[0].unk0c = 0xA;
+            gUnknown_203B25C->unkBC[0].unkC = 0xA;
+            break;
+        case OPTIONS_MENU_MAIN:
+            CreateOthersMenu();
+            for(index = 0; index < 4; index++)
+            {
+                gUnknown_203B25C->unkBC[index] = gUnknown_80DBFB0;
+            }
+            gUnknown_203B25C->unkBC[0] = gUnknown_80DBFCC;
+            sub_8012CAC(&gUnknown_203B25C->unkBC[0], gUnknown_203B25C->menuItems);
+            gUnknown_203B25C->unkBC[0].unkC = 0xA;
             break;
         default:
-            for(iVar3 = 0; iVar3 < 4; iVar3++)
+            for(index = 0; index < 4; index++)
             {
-                gUnknown_203B25C->unkBC[iVar3] = gUnknown_80DBFB0;
+                gUnknown_203B25C->unkBC[index] = gUnknown_80DBFB0;
             }
             break;
     }
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B25C->unkBC, 1, 1);
 }
-#else
-NAKED
-void sub_801DD84(void)
-{
-	asm_unified("\tpush {r4-r7,lr}\n"
-	"\tmov r7, r9\n"
-	"\tmov r6, r8\n"
-	"\tpush {r6,r7}\n"
-	"\tldr r4, _0801DDAC\n"
-	"\tldr r0, [r4]\n"
-	"\tadds r0, 0xBC\n"
-	"\tbl sub_8006518\n"
-	"\tldr r0, [r4]\n"
-	"\tldr r0, [r0]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0801DDB4\n"
-	"\tcmp r0, 0x1\n"
-	"\tbeq _0801DE38\n"
-	"\tmovs r3, 0\n"
-	"\tadds r7, r4, 0\n"
-	"\tldr r2, _0801DDB0\n"
-	"\tb _0801DE90\n"
-	"\t.align 2, 0\n"
-"_0801DDAC: .4byte gUnknown_203B25C\n"
-"_0801DDB0: .4byte gUnknown_80DBFB0\n"
-"_0801DDB4:\n"
-	"\tbl CreateOthersMenu\n"
-	"\tmovs r3, 0\n"
-	"\tldr r1, [r4]\n"
-	"\tadds r0, r1, 0\n"
-	"\tadds r0, 0xAC\n"
-	"\tldrh r0, [r0]\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0801DDCE\n"
-	"\tldr r0, [r1, 0x70]\n"
-	"\tstr r0, [r1, 0x18]\n"
-	"\tadds r7, r4, 0\n"
-	"\tb _0801DDF2\n"
-"_0801DDCE:\n"
-	"\tadds r3, 0x1\n"
-	"\tldr r7, _0801DE2C\n"
-	"\tcmp r3, 0x7\n"
-	"\tbgt _0801DDF2\n"
-	"\tldr r2, [r7]\n"
-	"\tlsls r0, r3, 1\n"
-	"\tadds r1, r2, 0\n"
-	"\tadds r1, 0xAC\n"
-	"\tadds r1, r0\n"
-	"\tldrh r0, [r1]\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0801DDCE\n"
-	"\tlsls r0, r3, 3\n"
-	"\tadds r1, r2, 0\n"
-	"\tadds r1, 0x70\n"
-	"\tadds r1, r0\n"
-	"\tldr r0, [r1]\n"
-	"\tstr r0, [r2, 0x18]\n"
-"_0801DDF2:\n"
-	"\tldr r0, _0801DE30\n"
-	"\tmov r9, r0\n"
-	"\tldr r2, _0801DE2C\n"
-	"\tmov r12, r2\n"
-	"\tldr r3, _0801DE34\n"
-	"\tmov r8, r3\n"
-	"\tmovs r2, 0\n"
-	"\tmovs r3, 0x3\n"
-"_0801DE02:\n"
-	"\tmov r4, r12\n"
-	"\tldr r1, [r4]\n"
-	"\tadds r1, r2\n"
-	"\tadds r1, 0xBC\n"
-	"\tmov r0, r8\n"
-	"\tldm r0!, {r4-r6}\n"
-	"\tstm r1!, {r4-r6}\n"
-	"\tldm r0!, {r4-r6}\n"
-	"\tstm r1!, {r4-r6}\n"
-	"\tadds r2, 0x18\n"
-	"\tsubs r3, 0x1\n"
-	"\tcmp r3, 0\n"
-	"\tbge _0801DE02\n"
-	"\tldr r1, [r7]\n"
-	"\tadds r1, 0xBC\n"
-	"\tmov r0, r9\n"
-	"\tldm r0!, {r2,r5,r6}\n"
-	"\tstm r1!, {r2,r5,r6}\n"
-	"\tldm r0!, {r3-r5}\n"
-	"\tstm r1!, {r3-r5}\n"
-	"\tb _0801DE70\n"
-	"\t.align 2, 0\n"
-"_0801DE2C: .4byte gUnknown_203B25C\n"
-"_0801DE30: .4byte gUnknown_80DBFCC\n"
-"_0801DE34: .4byte gUnknown_80DBFB0\n"
-"_0801DE38:\n"
-	"\tbl CreateOthersMenu\n"
-	"\tmov r8, r4\n"
-	"\tldr r6, _0801DE88\n"
-	"\tmov r12, r6\n"
-	"\tmov r7, r8\n"
-	"\tmovs r2, 0\n"
-	"\tmovs r3, 0x3\n"
-"_0801DE48:\n"
-	"\tmov r0, r8\n"
-	"\tldr r1, [r0]\n"
-	"\tadds r1, r2\n"
-	"\tadds r1, 0xBC\n"
-	"\tmov r0, r12\n"
-	"\tldm r0!, {r4-r6}\n"
-	"\tstm r1!, {r4-r6}\n"
-	"\tldm r0!, {r4-r6}\n"
-	"\tstm r1!, {r4-r6}\n"
-	"\tadds r2, 0x18\n"
-	"\tsubs r3, 0x1\n"
-	"\tcmp r3, 0\n"
-	"\tbge _0801DE48\n"
-	"\tldr r1, [r7]\n"
-	"\tadds r1, 0xBC\n"
-	"\tldr r0, _0801DE8C\n"
-	"\tldm r0!, {r2-r4}\n"
-	"\tstm r1!, {r2-r4}\n"
-	"\tldm r0!, {r2,r5,r6}\n"
-	"\tstm r1!, {r2,r5,r6}\n"
-"_0801DE70:\n"
-	"\tldr r1, [r7]\n"
-	"\tadds r0, r1, 0\n"
-	"\tadds r0, 0xBC\n"
-	"\tadds r1, 0x6C\n"
-	"\tbl sub_8012CAC\n"
-	"\tldr r0, [r7]\n"
-	"\tadds r0, 0xC8\n"
-	"\tmovs r1, 0xA\n"
-	"\tstrh r1, [r0]\n"
-	"\tb _0801DEAC\n"
-	"\t.align 2, 0\n"
-"_0801DE88: .4byte gUnknown_80DBFB0\n"
-"_0801DE8C: .4byte gUnknown_80DBFCC\n"
-"_0801DE90:\n"
-	"\tldr r0, [r7]\n"
-	"\tlsls r1, r3, 1\n"
-	"\tadds r1, r3\n"
-	"\tlsls r1, 3\n"
-	"\tadds r0, r1\n"
-	"\tadds r0, 0xBC\n"
-	"\tadds r1, r2, 0\n"
-	"\tldm r1!, {r4-r6}\n"
-	"\tstm r0!, {r4-r6}\n"
-	"\tldm r1!, {r4-r6}\n"
-	"\tstm r0!, {r4-r6}\n"
-	"\tadds r3, 0x1\n"
-	"\tcmp r3, 0x3\n"
-	"\tble _0801DE90\n"
-"_0801DEAC:\n"
-	"\tbl ResetUnusedInputStruct\n"
-	"\tldr r0, _0801DECC\n"
-	"\tldr r0, [r0]\n"
-	"\tadds r0, 0xBC\n"
-	"\tmovs r1, 0x1\n"
-	"\tmovs r2, 0x1\n"
-	"\tbl sub_800641C\n"
-	"\tpop {r3,r4}\n"
-	"\tmov r8, r3\n"
-	"\tmov r9, r4\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_0801DECC: .4byte gUnknown_203B25C");
-}
-#endif
 
 void sub_801DED0(void)
 {
   switch(gUnknown_203B25C->state) {
     case OPTIONS_MENU_INIT:
     case OPTIONS_MENU_MAIN:
-        gUnknown_203B25C->unk1C.unk0 = gOthers_MenuOption;
-        sub_8012D60(&gUnknown_203B25C->unk1C,gUnknown_203B25C->menuItems,0,gUnknown_203B25C->unkAC,gUnknown_203B25C->menuAction,0);
+        gUnknown_203B25C->menu.unk0 = gOthers_MenuOption;
+        sub_8012D60(&gUnknown_203B25C->menu,gUnknown_203B25C->menuItems,0,gUnknown_203B25C->unkAC,gUnknown_203B25C->menuAction,0);
         break;
     case OPTIONS_MENU_PRE_HINT_SELECTION:
         sub_801E3F0(0);
@@ -458,8 +272,8 @@ void HandleOthersMenu(void)
   s32 menuAction;
   
   menuAction = 0;
-  if (sub_8012FD8(&gUnknown_203B25C->unk1C) == '\0') {
-    sub_8013114(&gUnknown_203B25C->unk1C,&menuAction);
+  if (sub_8012FD8(&gUnknown_203B25C->menu) == '\0') {
+    sub_8013114(&gUnknown_203B25C->menu,&menuAction);
     gUnknown_203B25C->menuAction = menuAction;
   }
   switch(menuAction)
@@ -570,7 +384,7 @@ bool8 sub_801E198(struct GameOptions *optionsMenu)
   sub_8012D08(gUnknown_203B260->unk48,1);
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_203B260->unk4C,1,1);
-  sub_8013818(&gUnknown_203B260->unk10,1,1,gUnknown_203B260->unk44);
+  sub_8013818(&gUnknown_203B260->input,1,1,gUnknown_203B260->unk44);
   nullsub_38();
   CreateOptionsMenu();
   return TRUE;
@@ -591,7 +405,7 @@ u32 sub_801E218(void)
             PlayMenuSoundEffect(0);
             return 3;
         case INPUT_DPAD_LEFT:
-            if (gUnknown_203B260->unk28 == 0)
+            if (gUnknown_203B260->input.menuIndex == 0)
             {
                 if (gUnknown_203B260->optionsMenu->windowColor == WINDOW_COLOR_BLUE) {
                     gUnknown_203B260->optionsMenu->windowColor = WINDOW_COLOR_GREEN;
@@ -604,7 +418,7 @@ u32 sub_801E218(void)
             }
             break;
         case INPUT_DPAD_RIGHT:
-            if(gUnknown_203B260->unk28 == 0)
+            if(gUnknown_203B260->input.menuIndex == 0)
             {
                 if (gUnknown_203B260->optionsMenu->windowColor > WINDOW_COLOR_RED) {
                     gUnknown_203B260->optionsMenu->windowColor = WINDOW_COLOR_BLUE;
@@ -618,7 +432,7 @@ u32 sub_801E218(void)
     }
 
     // == 1 is needed for matching
-    if ((sub_80138B8(&gUnknown_203B260->unk10,1) != 0) || (flag == TRUE)) {
+    if ((sub_80138B8(&gUnknown_203B260->input,1) != 0) || (flag == TRUE)) {
         nullsub_38();
         CreateOptionsMenu();
         return 1;
@@ -654,7 +468,7 @@ void CreateOptionsMenu(void)
   sub_8008C54(gUnknown_203B260->unk44);
   sub_80073B8(gUnknown_203B260->unk44);
   xxx_call_draw_string(0x10,0,gWindowBGTitle,gUnknown_203B260->unk44,0);
-  y = sub_8013800(&gUnknown_203B260->unk10,0);
+  y = sub_8013800(&gUnknown_203B260->input,0);
   xxx_call_draw_string(8,y,gUnknown_80DC064,gUnknown_203B260->unk44,0);
 
   switch(gUnknown_203B260->optionsMenu->windowColor)

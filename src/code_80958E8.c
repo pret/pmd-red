@@ -10,11 +10,9 @@
 #include "pokemon.h"
 #include "code_8094F88.h"
 
-extern s32 GetDungeonFloorCount(u8);
 extern bool8 sub_809017C(struct DungeonLocation *);
 extern s16 GetBaseSpecies(s16);
 extern u8 sub_803C1D0(struct DungeonLocation *, u8);
-extern u32 GetMaxItemsAllowed(u8);
 extern bool8 sub_803C0DC(s16);
 extern void ResetMailboxSlot(u8);
 extern void ResetPelipperBoardSlot(u8);
@@ -22,7 +20,7 @@ extern void ResetJobSlot(u8);
 extern bool8 ValidateWonderMail(struct WonderMail *);
 
 EWRAM_DATA_2 struct unkStruct_203B490 *gUnknown_203B490 = {0};
-extern struct unkStruct_203B490 gUnknown_2039448;
+EWRAM_DATA struct unkStruct_203B490 gUnknown_2039448 = {0};
 
 void LoadMailInfo(void)
 {

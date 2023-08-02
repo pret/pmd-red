@@ -11,11 +11,26 @@
 #include "menu_input.h"
 #include "text.h"
 
+struct unkStruct_203B214
+{
+    // size: 0xA0
+    struct MenuInputStruct input;
+    u32 unk34;
+    struct UnkTextStruct2 *unk38;
+    struct UnkTextStruct2 unk3C[4];
+    u8 unk9C[4];
+};
+
+
 extern struct unkStruct_203B210 *gUnknown_203B210;
+extern struct unkStruct_203B214 *gUnknown_203B214;
 extern u16 gUnknown_203B218;
+extern struct unkStruct_203B214 *gUnknown_203B21C;
 extern u16 gUnknown_203B220;
+extern struct unkStruct_203B224 *gUnknown_203B224;
 extern u16 gUnknown_203B228;
 extern u16 gUnknown_203B22A;
+
 extern u8 gUnknown_80DB8E4[];
 extern u8 gUnknown_80DB8EC[];
 extern u8 gUnknown_80DB92C[];
@@ -46,7 +61,6 @@ extern void DrawTeamMoneyBox(u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
-extern s32 sub_8013800(struct MenuInputStruct *, u32);
 extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 extern s32 sub_801AED0(s32);
 void sub_8007B7C(s32, s32, s32, s32, s32);
@@ -59,29 +73,9 @@ extern s32 sub_801AEA8(void);
 s32 sub_801AE24(u32);
 
 
-extern struct unkStruct_203B224 *gUnknown_203B224;
-
-struct unkStruct_203B214
-{;
-    // size: 0xA0
-    struct MenuInputStruct input;
-    u32 unk34;
-    struct UnkTextStruct2 *unk38;
-    struct UnkTextStruct2 unk3C[4];
-    u8 unk9C[4];
-};
-
-extern struct unkStruct_203B214 *gUnknown_203B214;
-extern struct unkStruct_203B214 *gUnknown_203B21C;
-
-extern void sub_8013818(struct MenuInputStruct *, u32, u32, u32);
-
 extern u8 sub_8019FB0(void);
-extern u8 sub_80138B8(struct MenuInputStruct *, u32);
 
 extern void PlayMenuSoundEffect(u32);
-extern s32 GetKeyPress(struct MenuInputStruct *);
-extern void sub_8013660(struct MenuInputStruct *);
 
 extern struct UnkTextStruct2 gUnknown_80DB8CC;
 extern struct UnkTextStruct2 gUnknown_80DB8B4;
@@ -91,10 +85,8 @@ extern struct UnkTextStruct2 gUnknown_80DB95C;
 extern const struct UnkTextStruct2 gUnknown_80DB914;
 extern void sub_801A430(void);
 extern void sub_801A4A4(void);
-extern void sub_8013984(struct MenuInputStruct*);
 extern void sub_801A064(void);
 extern void sub_801A0D8(void);
-extern void AddMenuCursorSprite(struct MenuInputStruct *);
 extern u8 sub_801A37C(void);
 
 extern void sub_801A010(void);

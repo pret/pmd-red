@@ -60,7 +60,8 @@ struct unkStruct_8090F58
 enum ItemFlag
 {
     ITEM_FLAG_EXISTS = 1 << 0,
-    ITEM_FLAG_IN_SHOP = 1 << 1,
+    ITEM_FLAG_IN_SHOP = 1 << 1, // in a Kecleon shop
+    ITEM_FLAG_UNPAID = 1 << 2, // Picked up in Kecleon shop but not paid for yet
     ITEM_FLAG_STICKY = 1 << 3,
     ITEM_FLAG_SET = 1 << 4 // This item can be thrown by pressing L+R instead of having to go to the bag menu.
 };

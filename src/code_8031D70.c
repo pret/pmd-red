@@ -13,8 +13,7 @@ struct unkStruct_203B334
 {
     // size: 0x7C
     u32 mailIndex;
-    u32 unk4;
-    u8 fill8[0x10 - 0x8];
+    struct MenuInputStructSub unk4;
     u32 unk10;
     struct UnkTextStruct2 *unk14;
     struct UnkTextStruct2 unk18[4];
@@ -52,8 +51,6 @@ extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void sub_80078A4(u32, u32, u32, u32, u32);
 extern void sub_803D2C0(u8 *, struct unkStruct_203B480 *);
-extern void sub_801317C(u32 *);
-extern u32 sub_8012A64(u32 *, u32);
 extern void PlayMenuSoundEffect(u32);
 
 void sub_8031E00(void);

@@ -8,6 +8,8 @@
 #include "text.h"
 #include "menu_input.h"
 
+EWRAM_DATA_2 struct FelicityBankWork *gFelicityBankWork = {0};
+
 extern u32 gUnknown_202DE30;
 extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];

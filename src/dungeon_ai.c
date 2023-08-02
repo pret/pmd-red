@@ -147,7 +147,7 @@ void sub_8075900(struct Entity *pokemon, u8 r1)
                     {
                         // It's a monster house!
                         SendMessage(GetLeader(), gPtrItsaMonsterHouseMessage);
-                        gDungeon->unk672 = 1;
+                        gDungeon->monsterHouseTriggeredEvent = TRUE;
                         sub_807AB38(pokemon, r1);
                         sub_8041888(0);
                         if(sub_803F428(&pokemon->pos.x) != 0)

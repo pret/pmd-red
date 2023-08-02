@@ -13,10 +13,11 @@ EWRAM_DATA_2 struct unkStruct_203B484 *gUnknown_203B484 = {0};
 EWRAM_DATA_2 u32 *gUnknown_203B488 = {0};
 EWRAM_DATA_2 struct unkStruct_203B48C *gUnknown_203B48C = {0};
 
-extern struct unkStruct_203B480 gUnknown_2038C88;
-extern struct unkStruct_203B484 gUnknown_2039288;
-extern u32 gUnknown_20392E8;
-extern struct unkStruct_203B48C gUnknown_20393C0;
+EWRAM_DATA struct unkStruct_203B480 gUnknown_2038C88[0x20] = {0};
+EWRAM_DATA struct unkStruct_203B484 gUnknown_2039288 = {0};
+EWRAM_DATA UNUSED static u32 fill0 = {0}; // 203B484 is size 0x5C and I need to fill a gap of 0x4
+EWRAM_DATA u32 gUnknown_20392E8[0x36] = {0};
+EWRAM_DATA struct unkStruct_203B48C gUnknown_20393C0 = {0};
 
 extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
 extern void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
@@ -32,15 +33,15 @@ extern void sub_8094D28(s32);
 
 void sub_80950BC(void)
 {
-    gUnknown_203B480 = &gUnknown_2038C88;
+    gUnknown_203B480 = gUnknown_2038C88;
     gUnknown_203B484 = &gUnknown_2039288;
-    gUnknown_203B488 = &gUnknown_20392E8;
+    gUnknown_203B488 = gUnknown_20392E8;
     gUnknown_203B48C = &gUnknown_20393C0;
 }
 
 struct unkStruct_203B480 *sub_80950F8(void)
 {
-    return &gUnknown_2038C88;
+    return gUnknown_2038C88;
 }
 
 struct unkStruct_203B484 *sub_8095100(void)
@@ -50,7 +51,7 @@ struct unkStruct_203B484 *sub_8095100(void)
 
 u32 *sub_8095108(void)
 {
-    return &gUnknown_20392E8;
+    return gUnknown_20392E8;
 }
 
 struct unkStruct_203B48C *sub_8095110(void)
@@ -72,7 +73,7 @@ void sub_8095118(void)
     unused = &gUnknown_203B480[index];
     gUnknown_203B480[index].mailType = WONDER_MAIL_TYPE_NONE;
     unused = &gUnknown_203B480[index];
-    gUnknown_203B480[index].unk20.id = ITEM_NOTHING;
+    gUnknown_203B480[index].item.id = ITEM_NOTHING;
     unused = &gUnknown_203B480[index];
     gUnknown_203B480[index].unk2D = 0;
   }
@@ -152,7 +153,7 @@ void DeleteMailAtIndex(u8 index)
   unused = &gUnknown_203B480[index];
   gUnknown_203B480[index].mailType = 0;
   unused = &gUnknown_203B480[index];
-  gUnknown_203B480[index].unk20.id = 0;
+  gUnknown_203B480[index].item.id = 0;
 }
 
 void sub_8095274(u32 param_1)
@@ -424,9 +425,9 @@ void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     RestoreIntegerBits(a, &b->clientSpecies, 0x9);
     RestoreIntegerBits(a, &b->unk10.unk10, 0x20);
     RestoreIntegerBits(a, &b->playerName, 0x50);
-    RestoreIntegerBits(a, &b->unk20.flags, 0x8);
-    RestoreIntegerBits(a, &b->unk20.quantity, 0x8);
-    RestoreIntegerBits(a, &b->unk20.id, 0x8);
+    RestoreIntegerBits(a, &b->item.flags, 0x8);
+    RestoreIntegerBits(a, &b->item.quantity, 0x8);
+    RestoreIntegerBits(a, &b->item.id, 0x8);
     RestoreIntegerBits(a, &b->unk24, 0x20);
     RestoreIntegerBits(a, &b->unk28, 0x20);
     RestoreIntegerBits(a, &b->rescuesAllowed, 0x8);
@@ -449,9 +450,9 @@ void sub_8095824(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     SaveIntegerBits(a, &b->clientSpecies, 0x9);
     SaveIntegerBits(a, &b->unk10.unk10, 0x20);
     SaveIntegerBits(a, &b->playerName, 0x50);
-    SaveIntegerBits(a, &b->unk20.flags, 0x8);
-    SaveIntegerBits(a, &b->unk20.quantity, 0x8);
-    SaveIntegerBits(a, &b->unk20.id, 0x8);
+    SaveIntegerBits(a, &b->item.flags, 0x8);
+    SaveIntegerBits(a, &b->item.quantity, 0x8);
+    SaveIntegerBits(a, &b->item.id, 0x8);
     SaveIntegerBits(a, &b->unk24, 0x20);
     SaveIntegerBits(a, &b->unk28, 0x20);
     SaveIntegerBits(a, &b->rescuesAllowed, 0x8);

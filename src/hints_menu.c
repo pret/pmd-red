@@ -2,6 +2,7 @@
 #include "memory.h"
 #include "text.h"
 #include "input.h"
+#include "menu_input.h"
 
 #define MAX_HINTS 5
 
@@ -42,24 +43,15 @@ extern struct Hints gGameHints[MAX_HINTS];
 extern u8 gUnknown_80DC0D4[MAX_HINTS];
 
 extern void sub_801E714(void);
-extern void sub_8013818(struct MenuInputStruct *, u32, u32, u32);
-extern bool8 sub_8013938(struct MenuInputStruct *);
-extern s32 GetKeyPress(struct MenuInputStruct *);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_801E714(void);
 extern void sub_801E76C(void);
 extern void DisplayChosenHint(void);
 extern void sub_80073E0(u32);
 extern void sub_80073B8(u32);
-extern s32 sub_8013800(struct MenuInputStruct *, u32);
 extern void sub_8008C54(u32);
 void DrawHintSelectionMenu(void);
 void sub_801E594(void);
-void sub_8013984(struct MenuInputStruct *);
-void AddMenuCursorSprite(struct MenuInputStruct *);
-extern u8 sub_80138B8(struct MenuInputStruct *, u32);
-extern void sub_8013660(struct MenuInputStruct *);
-extern void sub_8012D08(struct UnkTextStruct2 *, u32);
 
 u32 sub_801E3F0(u32 r0)
 {

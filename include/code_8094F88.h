@@ -17,13 +17,12 @@ struct unkStruct_203B480
         u32 unk10;
         u16 unk10_u16;
     } unk10;
-    /* 0x14 */ u8 playerName[0x20 - 0x14];;
-    struct Item unk20;
+    /* 0x14 */ u8 playerName[0x20 - 0x14];
+    struct Item item;
     u32 unk24;
     u32 unk28;
     /* 0x2C */ s8 rescuesAllowed;
     u8 unk2D;
-    u8 padding4[0x30 - 0x2E];
 };
 
 // size: 0x5C

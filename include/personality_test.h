@@ -2,6 +2,7 @@
 #define GUARD_PERSONALITY_TEST_H
 
 #include "constants/personality_test.h"
+#include "input.h"
 #include "text.h"
 
 // Definitely wrong but need to figure out better structure later
@@ -38,9 +39,7 @@ struct PersonalityTestTracker
     /* 0x44 */ s32 NatureTotals[NUM_PERSONALITIES];
     /* 0x78 */ u8 QuestionTracker[NUM_QUIZ_QUESTIONS];
     /* 0xB0 */ u32 playerGender; // 1 = Female, 0 = Male
-    u32 unkb4;
-    u32 unkb8;
-    u32 unkbc;
+    /* 0xB4 */ struct MenuInputStructSub input;
 };
 
 struct PersonalityStruct_203B404

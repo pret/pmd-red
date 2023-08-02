@@ -29,15 +29,9 @@ extern struct unkStruct_203B258 *gUnknown_203B258;
 extern struct UnkTextStruct2 gUnknown_80DBF88;
 extern struct UnkTextStruct2 gUnknown_80DBF70;
 
-extern void sub_8013818(struct MenuInputStruct*, u32, u32, u32);
-extern void sub_8013878(struct MenuInputStruct *, s32);
-extern u8 sub_80138B8(struct MenuInputStruct *, u32);
-extern u32 GetKeyPress(struct MenuInputStruct *);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_801DB54();
 extern void sub_801DBD4();
-extern void sub_8013984(struct MenuInputStruct *);
-extern void AddMenuCursorSprite(struct MenuInputStruct *);
 
 extern u32 sub_801BF48(void);
 extern void sub_801BF98(void);
