@@ -701,11 +701,11 @@ void sub_8020950(void)
 
 void sub_80209AC(void)
 {
-    s32 menuAciton;
-    if(sub_80144A4(&menuAciton) == 0)
+    s32 menuAction;
+    if(sub_80144A4(&menuAction) == 0)
     {
-        gUnknown_203B27C->menuAction1 = menuAciton;
-        switch(menuAciton)
+        gUnknown_203B27C->menuAction1 = menuAction;
+        switch(menuAction)
         {
             case 2:
                 sub_801FDA8(0xe);
