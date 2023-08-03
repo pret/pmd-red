@@ -138,11 +138,11 @@ void sub_80063D8(int a0)
 
 void sub_800641C(struct UnkTextStruct2 *a0, u8 a1, u8 a2)
 {
-    u32 r3 = 0;
+    struct UnkTextStruct2_sub r3 = {0, 0};
     sub_8006438(a0, a1, a2, &r3);
 }
 
-void sub_8006438(const struct UnkTextStruct2 *a0, u8 a1, u8 a2, u32 *a3)
+void sub_8006438(const struct UnkTextStruct2 *a0, u8 a1, u8 a2, struct UnkTextStruct2_sub *a3)
 {
     int i;
     u32 r9 = 2;
@@ -158,7 +158,7 @@ void sub_8006438(const struct UnkTextStruct2 *a0, u8 a1, u8 a2, u32 *a3)
         gUnknown_202AFC0[i] = a0[i];
 
         if (a0[i].unkC) {
-            sub_8006554(gUnknown_2027370, (void *)VRAM, gUnknown_20274B4, gUnknown_202B038, gUnknown_80B8804[i], a0 + i, a1, r9, a3, 0);
+            sub_8006554(gUnknown_2027370, (void *)VRAM, gUnknown_20274B4, &gUnknown_202B038[0][0][0], gUnknown_80B8804[i], a0 + i, a1, r9, a3, 0);
             sub_80089AC(a0 + i, a3);
             r9 += a0[i].unkC * a0[i].unk10;
         }

@@ -8,7 +8,7 @@ struct UnkTextStruct1
     s16 unk2;
     s16 unk4;
     s16 unk6;
-    u16 unk8;
+    s16 unk8;
     u32 unkC;
     u32 unk10;
     u32 unk14;
@@ -29,8 +29,9 @@ struct UnkTextStruct1
 // size: 0x4
 struct UnkTextStruct2_sub
 {
-    u16 unk0;
-    u16 unk2;
+    //s16 unk0[2]; // TODO: Try union and see if it fixes kecleon
+    s16 unk0;
+    s16 unk4;
 };
 
 // size: 0x18
@@ -50,12 +51,13 @@ struct UnkTextStruct2
 void LoadCharmaps(void);
 void SelectCharmap(u32);
 u32 xxx_update_some_bg_tiles(u32 a0);
-void sub_8006438(const struct UnkTextStruct2 *a0, u8 a1, u8 a2, u32 *a3);
-void sub_8006554(void *a0, void *a1, void *a2, void *a3, u32 a4, const struct UnkTextStruct2 *a5, u8 a6, u32 a7, u32 *a8, u32 a9);
-void sub_800898C(void);
-void sub_80089AC(const struct UnkTextStruct2 *a0, void *a1);
-void sub_8009388(void);
 void sub_800641C(struct UnkTextStruct2 *a0, u8 a1, u8 a2);
+void sub_8006438(const struct UnkTextStruct2 *, u8, u8, struct UnkTextStruct2_sub *);
 void sub_8006518(struct UnkTextStruct2 *);
+void sub_8006554(struct UnkTextStruct1 *, void *, u8 *, u16 *, u32, const struct UnkTextStruct2 *, u8, u32, struct UnkTextStruct2_sub *, u8);
+void sub_800898C(void);
+void sub_80089AC(const struct UnkTextStruct2 *, struct UnkTextStruct2_sub *);
+void sub_8009388(void);
+
 extern void xxx_call_draw_string(s32 x, u32 y, const u8 *str, u32 , u32);
 #endif
