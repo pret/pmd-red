@@ -1,5 +1,5 @@
 #ifndef GUARD_TEXT_H
-#define GUARD_TEXT_H 
+#define GUARD_TEXT_H
 
 // size: 0x48
 struct UnkTextStruct1
@@ -36,7 +36,7 @@ struct UnkTextStruct2_sub
     union {
         struct {
         s16 unk0;
-        s16 unk4;
+        s16 unk2;
         } separate;
         s16 arr[2];
     } unk0;
@@ -68,4 +68,5 @@ void sub_80089AC(const struct UnkTextStruct2 *, struct UnkTextStruct2_sub *);
 void sub_8009388(void);
 
 extern void xxx_call_draw_string(s32 x, u32 y, const u8 *str, u32 , u32);
+
 #endif

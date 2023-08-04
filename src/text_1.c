@@ -39,12 +39,12 @@ void sub_8006554(struct UnkTextStruct1 *a0, void *a1, u8 *a2, u16 *a3, u32 a4, c
     s32 iVar3;
     s32 iVar5;
     s32 iVar6;
-    s32 local_2c;
+    s32 numI;
     u32 uVar1;
 
     s32 temp;
-    s32 eye;
-    s32 jay;
+    s32 i;
+    s32 j;
 
     t1 = &a0[a4];
     iVar3 = a5->unk8.unk0.arr[0] + a8->unk0.arr[0];
@@ -91,22 +91,22 @@ void sub_8006554(struct UnkTextStruct1 *a0, void *a1, u8 *a2, u16 *a3, u32 a4, c
 
             temp = iVar5 + 2;
             uVar1 = (a6 != 0) ? t1->unk14 + t1->unk4 * (a5->unk12 + 2) : 0;
-            local_2c = t1->unk6 - 2;
+            numI = t1->unk6 - 2;
         }
         else {
             sub_800677C(t1, temp, a3, a9);
 
             temp = iVar5;
             uVar1 = (a6 != 0) ? t1->unk14 : 0;
-            local_2c = t1->unk6;
+            numI = t1->unk6;
         }
 
-        for (eye = 0; eye < local_2c; eye++) {
+        for (i = 0; i < numI; i++) {
             iVar6 = iVar3 - 1;
-            sub_80069CC(t1, iVar6, temp, eye, a3);
+            sub_80069CC(t1, iVar6, temp, i, a3);
             iVar6 = iVar3;
 
-            for (jay = 0; jay < t1->unk4; jay++) {
+            for (j = 0; j < t1->unk4; j++) {
                 sub_8006AC4(t1, iVar6, temp, uVar1, a3);
 
                 iVar6++;
@@ -114,7 +114,7 @@ void sub_8006554(struct UnkTextStruct1 *a0, void *a1, u8 *a2, u16 *a3, u32 a4, c
                     uVar1++;
             }
 
-            sub_8006B70(t1, iVar6, temp, eye, a3);
+            sub_8006B70(t1, iVar6, temp, i, a3);
             temp++;
         }
         sub_8006C44(t1, temp, a3, a9);
