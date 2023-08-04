@@ -41,6 +41,13 @@ struct unkStruct_203B31C
     u8 unkCC[4];
 };
 
+void DestroyMakuhitaShop(void);
+
+u32 sub_802FE58(void);
+s16 sub_802FED0(void);
 bool8 sub_80302E8(s32, struct UnkTextStruct2_sub *, u32);
+u32 sub_80303AC(bool8);
+s16 sub_8030418(void);
+void sub_8030480(void);
 
 #endif // GUARD_MAKUHITA_DOJO_H
