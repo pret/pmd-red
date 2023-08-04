@@ -1,9 +1,12 @@
 #include "global.h"
 #include "constants/bg_music.h"
 #include "constants/colors.h"
+#include "constants/evolution_status.h"
+#include "input.h"
 #include "item.h"
 #include "memory.h"
 #include "pokemon.h"
+#include "pokemon_3.h"
 #include "random.h"
 #include "text1.h"
 #include "text2.h"
@@ -15,40 +18,7 @@
 #include "code_8012A18_1.h"
 #include "code_801B3C0.h"
 #include "code_80118A4.h"
-
-struct unkStruct_203B2B0
-{
-    // size: 0x174
-    bool8 evolutionComplete;
-    u8 fill1[0x3];
-    u8 evoItem1_itemIndex;
-    u8 evoItem2_ItemIndex;
-    u8 unk6;
-    u16 evolutionConditionStatus;
-    /* 0xA */ s16 targetSpecies; // species # of the evolved pokemon (what we are evolving to)
-    struct PokemonStruct *pokeStruct;
-    /* 0x10 */ bool8 pokeRenamed;
-    /* 0x14 */ u32 evoItem1_InvIndex; // inventory index of item
-    /* 0x18 */ u32 evoItem2_InvIndex; // inventory index of item
-    struct Item chosenItem;
-    u32 state;
-    u32 fallbackState;
-    u32 menuAction1;
-    u32 menuAction2;
-    u32 menuAction3;
-    struct MenuItem unk34[8];
-    u16 unk74[0x8];
-    struct MenuStruct unk84;
-    u8 fillD4[0x104 - 0xD4];
-    struct OpenedFile *unk104;
-    u8 *unk108;
-    u16 unk10C;
-    u16 unk10E;
-    u8 unk110;
-    u8 unk111;
-    u8 unk112;
-    struct UnkTextStruct2 unk114[4];
-};
+#include "luminous_cave.h"
 
 EWRAM_DATA_2 struct unkStruct_203B2B0 *gUnknown_203B2B0 = {0};
 extern struct UnkTextStruct2 gUnknown_80DCA00;
@@ -195,10 +165,10 @@ extern void nullsub_104();
 void sub_8024DBC(void);
 void sub_8024E30(void);
 void sub_801AEE4(u32, u32);
-void sub_808F734(struct PokemonStruct *, s16);
+u32 sub_801602C(u32 r0, u8 *name);
+extern s32 sub_80144A4(s32 *);
+extern s32 sub_801A8AC(void);
 extern void sub_8099690(u32);
-extern void sub_808F468(struct PokemonStruct *, u8 *, u32);
-
 bool8 LuminousCave_HasOnly1Member(void);
 
 enum
@@ -224,17 +194,6 @@ enum
     LUMINOUS_CAVE_LACK_IQ = 0x1B,
     LUMINOUS_CAVE_LACK_ITEM = 0x1C,
     LUMINOUS_CAVE_CANT_EVOLVE_YET = 0x1D,
-};
-
-enum evolutionStatus
-{
-    EVOLUTION_GOOD = 1,
-    EVOLUTION_LACK_LEVEL = 1 << 1,
-    EVOLUTION_NO_MORE = 1 << 2,
-    EVOLUTION_LACK_ITEM = 1 << 3,
-    EVOLUTION_LACK_IQ = 1 << 4,
-    EVOLUTION_LACK_FRIEND_AREA = 1 << 5,
-    EVOLUTION_LACK_ROOM = 1 << 6,
 };
 
 u32 sub_802465C(void)
@@ -436,19 +395,19 @@ void UpdateLuminousCaveDialogue(void)
     case LUMINOUS_CAVE_LET_US_BEGIN:
         sub_8025254();
 
-        if((gUnknown_203B2B0->evolutionConditionStatus & EVOLUTION_GOOD))
+        if((gUnknown_203B2B0->evolveStatus.evolutionConditionStatus & EVOLUTION_GOOD))
             gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_CHANGED_APPEARANCE;
-        else if(gUnknown_203B2B0->evolutionConditionStatus == EVOLUTION_NO_MORE)
+        else if(gUnknown_203B2B0->evolveStatus.evolutionConditionStatus == EVOLUTION_NO_MORE)
             gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_CANT_EVOLVE_ANYMORE;
-        else if(gUnknown_203B2B0->evolutionConditionStatus == EVOLUTION_LACK_LEVEL)
+        else if(gUnknown_203B2B0->evolveStatus.evolutionConditionStatus == EVOLUTION_LACK_LEVEL)
             gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_LACK_LEVEL;
-        else if(gUnknown_203B2B0->evolutionConditionStatus == EVOLUTION_LACK_IQ)
+        else if(gUnknown_203B2B0->evolveStatus.evolutionConditionStatus == EVOLUTION_LACK_IQ)
             gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_LACK_IQ;
-        else if(gUnknown_203B2B0->evolutionConditionStatus == EVOLUTION_LACK_FRIEND_AREA)
+        else if(gUnknown_203B2B0->evolveStatus.evolutionConditionStatus == EVOLUTION_LACK_FRIEND_AREA)
             gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_LACK_FRIEND_AREA;
-        else if(gUnknown_203B2B0->evolutionConditionStatus == EVOLUTION_LACK_ROOM)
+        else if(gUnknown_203B2B0->evolveStatus.evolutionConditionStatus == EVOLUTION_LACK_ROOM)
             gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_LACK_ROOM;
-        else if(gUnknown_203B2B0->evolutionConditionStatus == EVOLUTION_LACK_ITEM)
+        else if(gUnknown_203B2B0->evolveStatus.evolutionConditionStatus == EVOLUTION_LACK_ITEM)
             gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_LACK_ITEM;
         else
             gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_CANT_EVOLVE_YET;
@@ -464,11 +423,11 @@ void UpdateLuminousCaveDialogue(void)
     case LUMINOUS_CAVE_EVOLVED:
         monName = GetMonSpecies(gUnknown_203B2B0->pokeStruct->speciesNum);
         strcpy(gAvailablePokemonNames,monName);
-        monName = GetMonSpecies(gUnknown_203B2B0->targetSpecies);
+        monName = GetMonSpecies(gUnknown_203B2B0->evolveStatus.targetEvolveSpecies);
         strcpy(gAvailablePokemonNames + 0x50,monName);
         gUnknown_203B2B0->evolutionComplete = TRUE;
         sub_80977D0();
-        sub_808F734(gUnknown_203B2B0->pokeStruct,gUnknown_203B2B0->targetSpecies);
+        sub_808F734(gUnknown_203B2B0->pokeStruct,gUnknown_203B2B0->evolveStatus.targetEvolveSpecies);
         nullsub_104();
         gUnknown_203B2B0->pokeStruct = GetPlayerPokemonStruct();
         if (gUnknown_203B2B0->evoItem1_InvIndex != INVENTORY_SIZE) {
@@ -874,20 +833,20 @@ void LuminousCave_AdvancetoFallbackState(void)
 void sub_8025254(void)
 {
     if(gUnknown_203B2B0->evoItem1_InvIndex == INVENTORY_SIZE)
-        gUnknown_203B2B0->evoItem1_itemIndex = 0;
+        gUnknown_203B2B0->evolveStatus.evoItem1 = 0;
     else
     {
-        gUnknown_203B2B0->evoItem1_itemIndex = gTeamInventoryRef->teamItems[gUnknown_203B2B0->evoItem1_InvIndex].id;
+        gUnknown_203B2B0->evolveStatus.evoItem1 = gTeamInventoryRef->teamItems[gUnknown_203B2B0->evoItem1_InvIndex].id;
     }
     if(gUnknown_203B2B0->evoItem2_InvIndex == INVENTORY_SIZE)
-        gUnknown_203B2B0->evoItem2_ItemIndex = 0;
+        gUnknown_203B2B0->evolveStatus.evoItem2 = 0;
     else
     {
-        gUnknown_203B2B0->evoItem2_ItemIndex = gTeamInventoryRef->teamItems[gUnknown_203B2B0->evoItem2_InvIndex].id;
+        gUnknown_203B2B0->evolveStatus.evoItem2 = gTeamInventoryRef->teamItems[gUnknown_203B2B0->evoItem2_InvIndex].id;
     }
 
-    gUnknown_203B2B0->unk6 = RandInt(0xFF);
-    sub_808F468(gUnknown_203B2B0->pokeStruct, &gUnknown_203B2B0->evoItem1_itemIndex, 1);
+    gUnknown_203B2B0->evolveStatus.unk6 = RandInt(0xFF);
+    sub_808F468(gUnknown_203B2B0->pokeStruct, &gUnknown_203B2B0->evolveStatus, 1);
 }
 
 bool8 LuminousCave_HasOnly1Member(void)

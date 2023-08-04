@@ -104,13 +104,13 @@ struct unkStruct_203B45C
 struct PreEvolution
 {
     /* 0x0 */ s16 evolveFrom;
-    /* 0x2 */ s16 evolveType;
+    /* 0x2 */ u16 evolveType;
 };
 
 // size: 0x4
 struct EvolutionRequirements
 {
-    /* 0x0 */ u16 mainRequirement;
+    /* 0x0 */ s16 mainRequirement;
     /* 0x2 */ u16 additionalRequirement;
 };
 

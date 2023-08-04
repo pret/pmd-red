@@ -1,11 +1,16 @@
 #include "global.h"
-#include "pokemon_3.h"
 
 #include "pokemon.h"
+#include "pokemon_3.h"
 #include "random.h"
+#include "constants/evolve_type.h"
+#include "constants/evolution_status.h"
 #include "constants/iq_skill.h"
 #include "constants/tactic.h"
 #include "sprite.h"
+#include "text_util.h"
+#include "friend_area.h"
+#include "luminous_cave.h"
 
 extern u8 *gIQSkillNames[];
 extern u32 gIQSkillDescriptions[];
@@ -53,7 +58,11 @@ extern void sub_808F448(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
 extern void sub_80941FC(struct unkStruct_8094924*, void*);
 extern void sub_809447C(struct unkStruct_8094924*, void*);
 extern void sub_808F428(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
+s16 GetPokemonEvolveConditions(s16 index, struct unkEvolve *r1);
 
+void sub_8092638(u8 friendArea, struct unkStruct_8092638 *param_2, u8 param_3, u8 param_4);
+u32 sub_808F798(struct PokemonStruct *, s16);
+void sub_8097848(void);
 
 bool8 sub_808E668(s16 species, s16* a2, s16* a3)
 {
@@ -902,4 +911,211 @@ void sub_808F448(struct unkStruct_8094924* a1, struct unkStruct_808E6F4* a2)
 {
   SaveIntegerBits(a1, &a2->unk0, 10);
   SaveIntegerBits(a1, &a2->unk2, 5);
+}
+
+void sub_808F468(struct PokemonStruct *param_1, struct EvolveStatus *evolveStatus, u8 param_3)
+{
+    bool8 evolFlag;
+    u8 friendArea;
+    u8 uVar2;
+    s32 numPokemon;
+    struct unkStruct_8092638 local_40; // sp 0x0
+    struct unkEvolve evolveConditions; // r7
+    s32 index, index2;
+#ifndef NONMATCHING
+    register s32 defaultReason asm("sl");
+#else
+    s32 defaultReason;
+#endif
+
+    evolveStatus->evolutionConditionStatus = 0;
+    for(index = MONSTER_BULBASAUR; index < 0x1A8; index++)
+    {
+        if ((s16)index == MONSTER_ALAKAZAM) {
+            GetPokemonEvolveConditions(MONSTER_ALAKAZAM, &evolveConditions);
+        }
+        else {
+            GetPokemonEvolveConditions(index, &evolveConditions);
+        }
+        if(((evolveConditions.preEvolution.evolveType != EVOLVE_TYPE_NONE) && (param_1->speciesNum == evolveConditions.preEvolution.evolveFrom)))
+            break;
+    };
+    if (index == 0x1a8) {
+        evolveStatus->evolutionConditionStatus = EVOLUTION_NO_MORE;
+    }
+    else {
+        for(index = MONSTER_BULBASAUR, defaultReason = EVOLUTION_LACK_ITEM; index < 0x1A8; index++)
+        {
+            evolFlag = FALSE;
+            index2 = (s16)index;
+            GetPokemonEvolveConditions(index2, &evolveConditions);
+            if ((evolveConditions.preEvolution.evolveType == EVOLVE_TYPE_NONE) || (param_1->speciesNum != evolveConditions.preEvolution.evolveFrom)) continue;
+            friendArea = ((u8 (*)(s32))GetFriendArea)(index2); // UB
+            uVar2 = GetFriendArea(param_1->speciesNum);
+            sub_8092638(friendArea,&local_40,0,0);
+            if (!local_40.hasFriendArea) {
+                evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_FRIEND_AREA;
+                evolFlag = TRUE;
+            }
+            else {
+                numPokemon = local_40.unk2;
+                if (friendArea == uVar2) {
+                    numPokemon--;
+                }
+                if (local_40.numPokemon <= numPokemon) {
+                    evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_ROOM;
+                    evolFlag = TRUE;
+                }
+            }
+            if (evolveConditions.preEvolution.evolveType == EVOLVE_TYPE_LEVEL) {
+                if ((evolveStatus->evolutionConditionStatus & EVOLUTION_GOOD)) continue;
+                if (param_1->unkHasNextStage < evolveConditions.evolutionRequirements.mainRequirement) {
+                    evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_LEVEL;
+                    evolFlag = TRUE;
+                }
+            }
+            else if (evolveConditions.preEvolution.evolveType == EVOLVE_TYPE_IQ) {
+                if (param_1->IQ < evolveConditions.evolutionRequirements.mainRequirement) {
+                    evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_IQ;
+                    evolFlag = TRUE;
+                }
+            }
+            else if (evolveConditions.preEvolution.evolveType == EVOLVE_TYPE_ITEM) {
+                if (param_3 != 0) {
+                    if ((evolveStatus->evoItem1 != evolveConditions.evolutionRequirements.mainRequirement) &&
+                        (evolveStatus->evoItem2 != evolveConditions.evolutionRequirements.mainRequirement)) {
+                        evolveStatus->evolutionConditionStatus |= defaultReason;
+                        evolFlag = TRUE;
+                    }
+                }
+                else 
+                {
+                    if (FindItemInInventory(evolveConditions.evolutionRequirements.mainRequirement) < 0) {
+                        evolveStatus->evolutionConditionStatus |= defaultReason;
+                        evolFlag = TRUE;
+                    }
+                }
+            }
+            if (evolveConditions.evolutionRequirements.additionalRequirement == 4) {
+                if (param_3 != 0) {
+                    if ((evolveStatus->evoItem1 != ITEM_LINK_CABLE) && (evolveStatus->evoItem2 != ITEM_LINK_CABLE))
+                    {
+                        evolveStatus->evolutionConditionStatus |= defaultReason;
+                        continue;
+                    }
+                }
+                else
+                {
+                    if (-1 < FindItemInInventory(ITEM_LINK_CABLE)) goto _0808F6CA;
+                    evolveStatus->evolutionConditionStatus |= defaultReason;
+                    continue;
+                }
+            }
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 5) {
+                if ((param_1->offense).att[0] > (param_1->offense).def[0]) goto _0808F6CA;
+                else continue;
+            }
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 6) {
+                if ((param_1->offense).att[0] < (param_1->offense).def[0]) goto _0808F6CA;
+                else continue;
+            }
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 7) {
+                if ((param_1->offense).att[0] == (param_1->offense).def[0]) goto _0808F6CA;
+                else continue;
+            }
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 8)
+            {
+                if (param_3 != 0) {
+                    if ((evolveStatus->evoItem1 != ITEM_SUN_RIBBON) && (evolveStatus->evoItem2 != ITEM_SUN_RIBBON))
+                    {
+                        evolveStatus->evolutionConditionStatus |= defaultReason;
+                        continue;
+                    }
+                    else goto _0808F6CA;
+                }
+                else {
+                    if (-1 < FindItemInInventory(ITEM_SUN_RIBBON)) goto _0808F6CA;
+                    evolveStatus->evolutionConditionStatus |= defaultReason;
+                    continue;                
+                }
+            }
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 9) {
+                if (param_3 != 0) {
+                    if ((evolveStatus->evoItem1 != ITEM_LUNAR_RIBBON) && (evolveStatus->evoItem2 != ITEM_LUNAR_RIBBON))
+                    {
+                        evolveStatus->evolutionConditionStatus |= defaultReason;
+                        continue;
+                    }
+                    else goto _0808F6CA;
+                }
+                else
+                {
+                    if (-1 < FindItemInInventory(ITEM_LUNAR_RIBBON)) goto _0808F6CA;
+                    evolveStatus->evolutionConditionStatus |= defaultReason;
+                    continue;
+                }
+            }
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 0xb) {
+                if ((evolveStatus->unk6 & 1) == 0) goto _0808F6CA;
+                else  continue;
+            }
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 0xc) {
+                if ((evolveStatus->unk6 & 1)) goto _0808F6CA;
+                else  continue;
+            }
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 10) {
+                if (param_3 != 0) {
+                    if ((evolveStatus->evoItem1 == ITEM_BEAUTY_SCARF) || (evolveStatus->evoItem2 == ITEM_BEAUTY_SCARF)) goto _0808F6CA; 
+                    else continue;
+                }
+                else
+                {
+                    if ( FindItemInInventory(ITEM_BEAUTY_SCARF) < 0) evolFlag = TRUE;
+                }
+            }
+        _0808F6CA:
+            if (!evolFlag) {
+                evolveStatus->evolutionConditionStatus |= EVOLUTION_GOOD;
+                evolveStatus->targetEvolveSpecies = index2;
+            }
+        }
+    }
+}
+
+u8 sub_808F700(struct PokemonStruct *pokemon)
+{
+    struct EvolveStatus evolveStatus;
+
+    sub_808F468(pokemon, &evolveStatus, 0);
+    if ((evolveStatus.evolutionConditionStatus & EVOLUTION_GOOD)) {
+        return 1;
+    }
+    else if ((evolveStatus.evolutionConditionStatus & EVOLUTION_NO_MORE)) {
+        return 2;
+    }
+    else {
+        return 0;
+    }
+}
+
+u32 sub_808F734(struct PokemonStruct *pokemon, s16 _species)
+{
+    u32 uVar1;
+    int iVar3;
+    struct PokemonStruct pokeStruct;
+    s32 species = _species;
+
+    iVar3 = 0;
+    pokeStruct = *pokemon;
+    uVar1 = sub_808F798(pokemon, species);
+    if (species == MONSTER_NINJASK) {
+        pokeStruct.isTeamLeader = FALSE;
+        pokeStruct.heldItem.id = ITEM_NOTHING;
+        BoundedCopyStringtoBuffer(pokeStruct.name, GetMonSpecies(MONSTER_SHEDINJA),POKEMON_NAME_LENGTH);
+        iVar3 = sub_808F798(&pokeStruct,MONSTER_SHEDINJA);
+    }
+    if (iVar3 != 0) {
+        sub_8097848();
+    }
+    return uVar1;
 }

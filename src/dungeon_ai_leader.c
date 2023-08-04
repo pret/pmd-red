@@ -6,6 +6,7 @@
 #include "dungeon_ai_targeting.h"
 #include "dungeon_leader.h"
 #include "dungeon_visibility.h"
+#include "pokemon.h"
 #include "pokemon_3.h"
 
 bool8 TargetLeader(struct Entity *pokemon)
