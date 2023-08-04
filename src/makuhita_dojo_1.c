@@ -1,6 +1,5 @@
 #include "global.h"
 #include "constants/colors.h"
-#include "constants/dungeon.h"
 #include "constants/input.h"
 #include "code_800D090.h"
 #include "dungeon.h"
@@ -11,19 +10,10 @@
 #include "makuhita_dojo.h"
 #include "menu_input.h"
 
-// size: 0xD0
-struct unkStruct_203B31C
-{
-    s16 unk0[NUM_DUNGEON_MAZE];
-    /* 0x30 */ struct MenuInputStruct input;
-    u32 unk64;
-    struct UnkTextStruct2 *unk68;
-    struct UnkTextStruct2 unk6C[4];
-    u8 unkCC[4];
-};
-
 extern struct unkStruct_203B31C *gUnknown_203B31C;
 extern struct unkStruct_203B318 *gUnknown_203B318;
+extern u8 gAvailablePokemonNames[];
+extern u8 gPlayerName[];
 
 static const u8 makuhita_dojo_fill[] = "pksdir0";
 
@@ -49,33 +39,108 @@ ALIGNED(4) const u8 gUnknown_80E0824[] = _("{STAR_BULLET}");
 ALIGNED(4) const u8 gMakuhitaCoursePlaceholder[] = _("{COLOR_2}%c%s{END_COLOR_TEXT_2}");
 static const u8 makuhita_dojo_fill2[] = "pksdir0";
 
+extern const u8 *gMakuhitaDialogue[2][10];
 extern u8 gMakuhitaDojoGoTrain[];
+extern const u8 gMakuhitaDojoBonslyDoll[];
 extern u8 *gUnknown_80D4934[];
 extern u8 *gUnknown_80D4970[];
 
-extern bool8 sub_8097504(s16);
-extern s16 sub_80A26CC(s16 r0);
-extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
-extern u8 sub_80A2740(s32 r0);
-extern s16 sub_80A2668(u32 r0);
-extern bool8 IsMazeCompleted(s32);
-extern s32 sub_8030668(void);
-extern void sub_80304C8();
-extern void DrawDojoCourseList(void);
-
-extern void PlayMenuSoundEffect(u32);
-extern void sub_803053C(void);
-extern u8 sub_80306A4(void);
+extern void sub_8008C54(u32);
+extern u32 sub_80095E4(s16, u32);
+extern void sub_80141B4(const u8 *, u32, struct OpenedFile **, u32);
+extern void sub_8014248(const u8 *, u32, u32, const struct MenuItem *, void *, u32, u32, struct OpenedFile **, u32);
 extern s32 sub_80144A4(s32 *);
-void UpdateMakuhitaState(s32);
+extern u32 sub_801B60C(u32, u8, u8);
 extern u32 sub_801B6AC(void);
 extern void sub_801B72C(void);
-extern s16 sub_8030418(void);
 extern u32 sub_80303AC(u8);
+extern s16 sub_8030418(void);
 extern void sub_8030480(void);
+extern void sub_80304C8();
+extern void sub_803053C(void);
+extern s32 sub_8030668(void);
+extern u8 sub_80306A4(void);
+extern bool8 sub_8097504(s16);
+extern s16 sub_80A2668(u32 r0);
+extern s16 sub_80A26CC(s16 r0);
+extern u8 sub_80A2740(s32 r0);
 
+extern void DrawDojoCourseList(void);
+extern struct PokemonStruct *GetPlayerPokemonStruct(void);
+extern bool8 IsMazeCompleted(s32);
+extern void PlayMenuSoundEffect(u32);
+extern void PlaySound(u16);
+extern void PrintColoredPokeNameToBuffer(u8 *, struct PokemonStruct *, s32);
+extern void PrintYellowDungeonNametoBuffer(u8 *, struct DungeonLocation *);
+
+void DrawMakuhitaMainMenu(void);
+void UpdateMakuhitaState(s32);
+
+void UpdateMakuhitaDialogue(void)
+{
+    struct DungeonLocation dLoc;
+
+    switch (gUnknown_203B318->state) {
+        case 0:
+            DrawMakuhitaMainMenu();
+            sub_8014248(gMakuhitaDialogue[gUnknown_203B318->unk4][0], 0, gUnknown_203B318->menuAction, gUnknown_203B318->unk18, NULL, 4, 0, gUnknown_203B318->unk68, 12);
+            break;
+        case 1:
+            sub_8014248(gMakuhitaDialogue[gUnknown_203B318->unk4][1], 0, gUnknown_203B318->menuAction, gUnknown_203B318->unk18, NULL, 4, 0, gUnknown_203B318->unk68, 12);
+            break;
+        case 2:
+            gUnknown_203B318->fallbackState = 13;
+            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->unk4][2], 0, gUnknown_203B318->unk68, 0x10D);
+            break;
+        case 3:
+            gUnknown_203B318->fallbackState = 4;
+            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->unk4][3], 0, gUnknown_203B318->unk68, 0x10D);
+            break;
+        case 4:
+            sub_80302E8(3, NULL, 10);
+            break;
+        case 5:
+            gUnknown_203B318->fallbackState = 13;
+            dLoc.id = sub_80A2740(gUnknown_203B318->unk10);
+            dLoc.floor = 1;
+            PrintYellowDungeonNametoBuffer(gAvailablePokemonNames, &dLoc);
+            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->unk4][4], 0, gUnknown_203B318->unk68, 0x10D);
+            break;
+        case 7:
+            gUnknown_203B318->fallbackState = 13;
+            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->unk4][6], 0, gUnknown_203B318->unk68, 0x10D);
+            break;
+        case 6:
+            gUnknown_203B318->fallbackState = 13;
+            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->unk4][5], 0, gUnknown_203B318->unk68, 0x10D);
+            break;
+        case 8:
+            gUnknown_203B318->fallbackState = 9;
+            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->unk4][7], 0, gUnknown_203B318->unk68, 0x10D);
+            break;
+        case 9:
+            PrintColoredPokeNameToBuffer(gPlayerName, GetPlayerPokemonStruct(), COLOR_YELLOW);
+            gUnknown_203B318->fallbackState = 11;
+            PlaySound(0xCB);
+            sub_80141B4(gMakuhitaDojoBonslyDoll, 0, 0, 0x101);
+            break;
+        case 10:
+            gUnknown_203B318->fallbackState = 13;
+            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->unk4][8], 0, gUnknown_203B318->unk68, 0x10D);
+            break;
+        case 11:
+            sub_801B60C(1, ITEM_GINSENG, 1);
+            break;
+        case 12:
+            gUnknown_203B318->fallbackState = 1;
+            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->unk4][9], 0, gUnknown_203B318->unk68, 0x10D);
+            break;
+        case 13:
+            return;
+    }
+}
 
 void DrawMakuhitaMainMenu(void) {
 
@@ -105,6 +170,7 @@ void sub_8030208(void)
     s32 menuAction;
     if (sub_80144A4(&menuAction) == 0) {
         gUnknown_203B318->menuAction = menuAction;
+
         switch (menuAction) {
             case 2:
                 UpdateMakuhitaState(3);
@@ -159,10 +225,10 @@ void GotoMakuhitaFallbackState(void)
         UpdateMakuhitaState(gUnknown_203B318->fallbackState);
 }
 
-bool8 sub_80302E8(int param_1, struct UnkTextStruct2_sub *param_2, u32 param_3)
+bool8 sub_80302E8(s32 param_1, struct UnkTextStruct2_sub *param_2, u32 param_3)
 {
     if (sub_80306A4())
-        return 0;
+        return FALSE;
 
     if (gUnknown_203B31C == NULL)
         gUnknown_203B31C = MemoryAlloc(sizeof(struct unkStruct_203B31C), 8);
@@ -176,38 +242,38 @@ bool8 sub_80302E8(int param_1, struct UnkTextStruct2_sub *param_2, u32 param_3)
     if (param_2 != NULL)
         gUnknown_203B31C->unk6C[gUnknown_203B31C->unk64].unk8 = *param_2;
 
-    sub_8012D08(gUnknown_203B31C->unk68,param_3);
+    sub_8012D08(gUnknown_203B31C->unk68, param_3);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B31C->unk6C,1,1);
-    sub_8013818(&gUnknown_203B31C->input,sub_8030668(),param_3,param_1);
+    sub_800641C(gUnknown_203B31C->unk6C, 1, 1);
+    sub_8013818(&gUnknown_203B31C->input, sub_8030668(), param_3, param_1);
     sub_80304C8();
     DrawDojoCourseList();
-    return 1;
+    return TRUE;
 }
 
 u32 sub_80303AC(u8 param_1)
 {
-  if (param_1 == 0) {
-    sub_8013660(&gUnknown_203B31C->input);
-    return 0;
-  }
+    if (param_1 == 0) {
+        sub_8013660(&gUnknown_203B31C->input);
+        return 0;
+    }
 
-  switch (GetKeyPress(&gUnknown_203B31C->input)) {
-    case INPUT_B_BUTTON:
-        PlayMenuSoundEffect(1);
-        return 2;
-    case INPUT_A_BUTTON:
-        PlayMenuSoundEffect(0);
-        return 3;
-    default:
-        if (sub_80138B8(&gUnknown_203B31C->input, 1)) {
-            sub_80304C8();
-            DrawDojoCourseList();
-            return 1;
-        }
-        else
-            return 0;
-  }
+    switch (GetKeyPress(&gUnknown_203B31C->input)) {
+        case INPUT_B_BUTTON:
+            PlayMenuSoundEffect(1);
+            return 2;
+        case INPUT_A_BUTTON:
+            PlayMenuSoundEffect(0);
+            return 3;
+        default:
+            if (sub_80138B8(&gUnknown_203B31C->input, 1)) {
+                sub_80304C8();
+                DrawDojoCourseList();
+                return 1;
+            }
+            else
+                return 0;
+    }
 }
 
 s16 sub_8030418(void)
@@ -236,6 +302,23 @@ void sub_8030480(void)
     }
 }
 
+#ifdef NONMATCHING
+void sub_80304C8(void)
+{
+    s16 test;
+    
+    gUnknown_203B31C->unkCC[0] = 1;
+    gUnknown_203B31C->unkCC[1] = 0;
+    gUnknown_203B31C->unkCC[2] = 8;
+    gUnknown_203B31C->unkCC[3] = 0;
+
+    test = sub_80095E4(gUnknown_203B31C->input.unk1A, 12) + 2;
+    gUnknown_203B31C->unk6C[gUnknown_203B31C->unk64].unkE = test;
+    gUnknown_203B31C->unk6C[gUnknown_203B31C->unk64].unk10 = test + 2;
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B31C->unk6C, 1, 1);
+}
+#else
 NAKED
 void sub_80304C8(void)
 {
@@ -295,6 +378,7 @@ void sub_80304C8(void)
 	"\t.align 2, 0\n"
 "_08030538: .4byte gUnknown_203B31C");
 }
+#endif // NONMATCHING
 
 void DrawDojoCourseList(void)
 {
@@ -331,18 +415,18 @@ void DrawDojoCourseList(void)
 
 s32 sub_8030668(void)
 {
-  s32 index;
-  s32 counter;
-  
-  counter = 0;
+    s32 index;
+    s32 counter;
 
-  for (index = 0; index < NUM_DUNGEON_MAZE; index++) {
-    if (sub_8097504(index)) {
-      gUnknown_203B31C->unk0[counter] = sub_80A26CC(index);
-      counter++;
+    counter = 0;
+
+    for (index = 0; index < NUM_DUNGEON_MAZE; index++) {
+        if (sub_8097504(index)) {
+            gUnknown_203B31C->unk0[counter] = sub_80A26CC(index);
+            counter++;
+        }
     }
-  }
-  return counter;
+    return counter;
 }
 
 bool8 sub_80306A4(void)

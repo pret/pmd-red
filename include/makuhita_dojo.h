@@ -1,3 +1,8 @@
+#ifndef GUARD_MAKUHITA_DOJO_H
+#define GUARD_MAKUHITA_DOJO_H
+
+#include "constants/dungeon.h"
+
 // size: 0xCC
 struct unkStruct_203B318
 {
@@ -21,3 +26,17 @@ struct unkStruct_203B318
     struct UnkTextStruct2 unk6C[4];
 };
 
+// size: 0xD0
+struct unkStruct_203B31C
+{
+    s16 unk0[NUM_DUNGEON_MAZE];
+    /* 0x30 */ struct MenuInputStruct input;
+    u32 unk64;
+    struct UnkTextStruct2 *unk68;
+    struct UnkTextStruct2 unk6C[4];
+    u8 unkCC[4];
+};
+
+bool8 sub_80302E8(s32, struct UnkTextStruct2_sub *, u32);
+
+#endif // GUARD_MAKUHITA_DOJO_H
