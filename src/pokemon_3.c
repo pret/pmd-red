@@ -691,7 +691,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
             }
         }
         else {
-            pokemon->unkHasNextStage = 0;
+            pokemon->level = 0;
         }
         SavePokemonStruct(&backup, pokemon);
     }
@@ -754,7 +754,7 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
 
 void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokemon)
 {
-  SaveIntegerBits(a1, &pokemon->unkHasNextStage, 7);
+  SaveIntegerBits(a1, &pokemon->level, 7);
   SaveIntegerBits(a1, &pokemon->speciesNum, 9);
   SaveDungeonLocation(a1, &pokemon->dungeonLocation);
   xxx_save_poke_sub_c_808F41C(a1, &pokemon->unkC[0]);
@@ -765,9 +765,9 @@ void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokem
   SaveIntegerBits(a1, &pokemon->offense.att[1], 8);
   SaveIntegerBits(a1, &pokemon->offense.def[0], 8);
   SaveIntegerBits(a1, &pokemon->offense.def[1], 8);
-  SaveIntegerBits(a1, &pokemon->unk1C, 24);
+  SaveIntegerBits(a1, &pokemon->currExp, 24);
   SaveIntegerBits(a1, &pokemon->IQSkills, 24);
-  SaveIntegerBits(a1, &pokemon->unk24, 4);
+  SaveIntegerBits(a1, &pokemon->tacticIndex, 4);
   SaveHeldItem(a1, &pokemon->heldItem);
   SavePokemonMoves(a1, pokemon->moves);
   SaveIntegerBits(a1, pokemon->name, 80);
@@ -778,8 +778,8 @@ void RestorePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* po
   memset(pokemon, 0, sizeof(struct PokemonStruct));
   pokemon->unk0 = 0;
   pokemon->isTeamLeader = 0;
-  RestoreIntegerBits(a1, &pokemon->unkHasNextStage, 7);
-  if (pokemon->unkHasNextStage) {
+  RestoreIntegerBits(a1, &pokemon->level, 7);
+  if (pokemon->level) {
       pokemon->unk0 |= 1;
   }
   RestoreIntegerBits(a1, &pokemon->speciesNum, 9);
@@ -792,9 +792,9 @@ void RestorePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* po
   RestoreIntegerBits(a1, &pokemon->offense.att[1], 8);
   RestoreIntegerBits(a1, &pokemon->offense.def[0], 8);
   RestoreIntegerBits(a1, &pokemon->offense.def[1], 8);
-  RestoreIntegerBits(a1, &pokemon->unk1C, 24);
+  RestoreIntegerBits(a1, &pokemon->currExp, 24);
   RestoreIntegerBits(a1, &pokemon->IQSkills, 24);
-  RestoreIntegerBits(a1, &pokemon->unk24, 4);
+  RestoreIntegerBits(a1, &pokemon->tacticIndex, 4);
   RestoreHeldItem(a1, &pokemon->heldItem);
   RestorePokemonMoves(a1, pokemon->moves);
   RestoreIntegerBits(a1, pokemon->name, 80);
@@ -816,7 +816,7 @@ s32 SavePokemonStruct2(u8* a1, s32 size)
     SaveIntegerBits(&backup, &pokemon2->unk0, 2);
 
     SaveIntegerBits(&backup, pokemon2->isTeamLeader ? &data_u8_neg1 : &data_u8_zero, 1);
-    SaveIntegerBits(&backup, &pokemon2->unkHasNextStage, 7);
+    SaveIntegerBits(&backup, &pokemon2->level, 7);
 
     SaveDungeonLocation(&backup, &pokemon2->dungeonLocation);
     SaveIntegerBits(&backup, &pokemon2->IQ, 10);
@@ -829,13 +829,13 @@ s32 SavePokemonStruct2(u8* a1, s32 size)
     SaveIntegerBits(&backup, &pokemon2->offense.att[1], 8);
     SaveIntegerBits(&backup, &pokemon2->offense.def[0], 8);
     SaveIntegerBits(&backup, &pokemon2->offense.def[1], 8);
-    SaveIntegerBits(&backup, &pokemon2->unk18, 24);
+    SaveIntegerBits(&backup, &pokemon2->currExp, 24);
     sub_8094184(&backup, &pokemon2->moves);
     SaveItemSlot(&backup, &pokemon2->itemSlot);
     sub_809449C(&backup, &pokemon2->unk44);
     sub_809449C(&backup, &pokemon2->unk48);
     SaveIntegerBits(&backup, &pokemon2->IQSkills, 24);
-    SaveIntegerBits(&backup, &pokemon2->unk50, 4);
+    SaveIntegerBits(&backup, &pokemon2->tacticIndex, 4);
     sub_808F448(&backup, &pokemon2->unk54);
     SaveIntegerBits(&backup, &pokemon2->name, 80);
   }
@@ -864,7 +864,7 @@ s32 RestorePokemonStruct2(u8* a1, s32 size)
     else {
         pokemon2->isTeamLeader = FALSE;
     }
-    RestoreIntegerBits(&backup, &pokemon2->unkHasNextStage, 7);
+    RestoreIntegerBits(&backup, &pokemon2->level, 7);
 
     RestoreDungeonLocation(&backup, &pokemon2->dungeonLocation);
     RestoreIntegerBits(&backup, &pokemon2->IQ, 10);
@@ -877,13 +877,13 @@ s32 RestorePokemonStruct2(u8* a1, s32 size)
     RestoreIntegerBits(&backup, &pokemon2->offense.att[1], 8);
     RestoreIntegerBits(&backup, &pokemon2->offense.def[0], 8);
     RestoreIntegerBits(&backup, &pokemon2->offense.def[1], 8);
-    RestoreIntegerBits(&backup, &pokemon2->unk18, 24);
+    RestoreIntegerBits(&backup, &pokemon2->currExp, 24);
     sub_80941FC(&backup, &pokemon2->moves);
     RestoreItemSlot(&backup, &pokemon2->itemSlot);
     sub_809447C(&backup, &pokemon2->unk44);
     sub_809447C(&backup, &pokemon2->unk48);
     RestoreIntegerBits(&backup, &pokemon2->IQSkills, 24);
-    RestoreIntegerBits(&backup, &pokemon2->unk50, 4);
+    RestoreIntegerBits(&backup, &pokemon2->tacticIndex, 4);
     sub_808F428(&backup, &pokemon2->unk54);
     RestoreIntegerBits(&backup, &pokemon2->name, 80);
   }
@@ -893,12 +893,12 @@ s32 RestorePokemonStruct2(u8* a1, s32 size)
 
 void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924* a1, struct unkPokeSubStruct_C* unkC)
 {
-  RestoreIntegerBits(a1, &unkC->unk0, 7);
+  RestoreIntegerBits(a1, &unkC->level, 7);
 }
 
 void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924* a1, struct unkPokeSubStruct_C* unkC)
 {
-  SaveIntegerBits(a1, &unkC->unk0, 7);
+  SaveIntegerBits(a1, &unkC->level, 7);
 }
 
 void sub_808F428(struct unkStruct_8094924* a1, struct unkStruct_808E6F4* a2)
@@ -969,7 +969,7 @@ void sub_808F468(struct PokemonStruct *param_1, struct EvolveStatus *evolveStatu
             }
             if (evolveConditions.preEvolution.evolveType == EVOLVE_TYPE_LEVEL) {
                 if ((evolveStatus->evolutionConditionStatus & EVOLUTION_GOOD)) continue;
-                if (param_1->unkHasNextStage < evolveConditions.evolutionRequirements.mainRequirement) {
+                if (param_1->level < evolveConditions.evolutionRequirements.mainRequirement) {
                     evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_LEVEL;
                     evolFlag = TRUE;
                 }

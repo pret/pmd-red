@@ -346,7 +346,7 @@ u32 sub_80954CC(u8 *a, u32 b)
     memset(temp, 0, sizeof(struct PokemonStruct));
     RestoreIntegerBits(&backup, &temp->unk0, 2);
     RestoreIntegerBits(&backup, &temp->isTeamLeader, 1);
-    RestoreIntegerBits(&backup, &temp->unkHasNextStage, 7);
+    RestoreIntegerBits(&backup, &temp->level, 7);
     RestoreDungeonLocation(&backup, &temp->dungeonLocation);
     RestoreIntegerBits(&backup, &temp->speciesNum, 9);
     xxx_restore_poke_sub_c_808F410(&backup, &temp->unkC[0]);
@@ -357,9 +357,9 @@ u32 sub_80954CC(u8 *a, u32 b)
     RestoreIntegerBits(&backup, &temp->offense.att[1], 8);
     RestoreIntegerBits(&backup, &temp->offense.def[0], 8);
     RestoreIntegerBits(&backup, &temp->offense.def[1], 8);
-    RestoreIntegerBits(&backup, &temp->unk1C, 0x18);
+    RestoreIntegerBits(&backup, &temp->currExp, 0x18);
     RestoreIntegerBits(&backup, &temp->IQSkills, 0x18);
-    RestoreIntegerBits(&backup, &temp->unk24, 4);
+    RestoreIntegerBits(&backup, &temp->tacticIndex, 4);
     RestoreHeldItem(&backup, &temp->heldItem);
     RestorePokemonMoves(&backup, temp->moves);
     RestoreIntegerBits(&backup, temp->name, 0x50);
@@ -388,7 +388,7 @@ u32 sub_8095624(u8 *a, u32 b)
     temp  = &gUnknown_203B484->unk4;
     SaveIntegerBits(&backup, &temp->unk0, 2);
     SaveIntegerBits(&backup, &temp->isTeamLeader, 1);
-    SaveIntegerBits(&backup, &temp->unkHasNextStage, 7);
+    SaveIntegerBits(&backup, &temp->level, 7);
     SaveDungeonLocation(&backup, &temp->dungeonLocation);
     SaveIntegerBits(&backup, &temp->speciesNum, 9);
     xxx_save_poke_sub_c_808F41C(&backup, &temp->unkC[0]);
@@ -399,9 +399,9 @@ u32 sub_8095624(u8 *a, u32 b)
     SaveIntegerBits(&backup, &temp->offense.att[1], 8);
     SaveIntegerBits(&backup, &temp->offense.def[0], 8);
     SaveIntegerBits(&backup, &temp->offense.def[1], 8);
-    SaveIntegerBits(&backup, &temp->unk1C, 0x18);
+    SaveIntegerBits(&backup, &temp->currExp, 0x18);
     SaveIntegerBits(&backup, &temp->IQSkills, 0x18);
-    SaveIntegerBits(&backup, &temp->unk24, 4);
+    SaveIntegerBits(&backup, &temp->tacticIndex, 4);
     SaveHeldItem(&backup, &temp->heldItem);
     SavePokemonMoves(&backup, temp->moves);
     SaveIntegerBits(&backup, temp->name, 0x50);
