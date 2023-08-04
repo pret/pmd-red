@@ -2,6 +2,10 @@
 #define GUARD_MAKUHITA_DOJO_H
 
 #include "constants/dungeon.h"
+#include "file_system.h"
+#include "input.h"
+#include "menu.h"
+#include "text.h"
 
 // size: 0xCC
 struct unkStruct_203B318
