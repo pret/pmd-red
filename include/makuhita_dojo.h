@@ -41,7 +41,8 @@ struct unkStruct_203B31C
     u8 unkCC[4];
 };
 
-void DestroyMakuhitaShop(void);
+u32 MakuhitaDojo_New(u32);
+void MakuhitaDojo_Delete(void);
 
 u32 sub_802FE58(void);
 s16 sub_802FED0(void);

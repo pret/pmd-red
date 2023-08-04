@@ -101,7 +101,7 @@ void sub_80302A8(void);
 void sub_80304C8(void);
 s32 sub_8030668(void);
 
-u32 CreateMakuhitaShop(u32 param_1)
+u32 MakuhitaDojo_New(u32 param_1)
 {
     char *monName;
     struct OpenedFile *faceFile;
@@ -198,7 +198,7 @@ s16 sub_802FED0(void)
     return gUnknown_203B318->unk10;
 }
 
-void DestroyMakuhitaShop(void)
+void MakuhitaDojo_Delete(void)
 {
     if (gUnknown_203B318 != NULL) {
         CloseFile(gUnknown_203B318->faceFile);
