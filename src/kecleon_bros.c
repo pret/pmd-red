@@ -105,7 +105,6 @@ void sub_801A398(u8);
 void sub_801A3DC(void);
 void sub_801A430(void);
 void sub_801A4A4(void);
-u32 sub_801A6E8(bool8);
 void sub_801A998(void);
 s32 sub_801AE24(u32);
 
