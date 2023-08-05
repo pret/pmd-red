@@ -47,7 +47,7 @@ extern u8 gUnknown_80DB9A0[];
 extern u8 gUnknown_80DB9A8[];
 extern u8 gUnknown_80DB9B0[];
 
-extern const u8 *gKecleonShopDialogue[4][23];
+extern const u8 *gKecleonShopDialogue[KECLEON_BROS_MODE_COUNT][23];
 extern const u8 gTeamToolboxA[];
 extern const u8 gTeamToolboxB[];
 
