@@ -786,7 +786,7 @@ _0805DEFC: .4byte gGameOptionsRef
 _0805DF00: .4byte gRealInputs
 _0805DF04: .4byte gUnknown_202F22D
 _0805DF08: .4byte 0x01000200
-_0805DF0C: .4byte gTeamInventory_203B460
+_0805DF0C: .4byte gTeamInventoryRef
 _0805DF10: .4byte gDungeon
 _0805DF14: .4byte 0x0001820a
 _0805DF18: .4byte gUnknown_202EE00
@@ -4319,7 +4319,7 @@ _0805FBB8: .4byte gFieldMenuGroundPtr
 _0805FBBC: .4byte gPlayTimeRef
 _0805FBC0: .4byte gUnknown_202DE30
 _0805FBC4: .4byte gUnknown_80F9174
-_0805FBC8: .4byte gTeamInventory_203B460
+_0805FBC8: .4byte gTeamInventoryRef
 _0805FBCC: .4byte gUnknown_80F9190
 _0805FBD0: .4byte gAvailablePokemonNames
 _0805FBD4: .4byte gUnknown_80F91A8
@@ -4807,7 +4807,7 @@ _0805FF66:
 	b _0805FFE8
 	.align 2, 0
 _0805FFA8: .4byte gUnknown_202F240
-_0805FFAC: .4byte gTeamInventory_203B460
+_0805FFAC: .4byte gTeamInventoryRef
 _0805FFB0: .4byte gDungeon
 _0805FFB4: .4byte 0x0001357c
 _0805FFB8: .4byte gUnknown_202F258
@@ -5256,7 +5256,7 @@ _0806033C:
 	.align 2, 0
 _0806034C: .4byte gUnknown_202EE10
 _08060350: .4byte gUnknown_202F248
-_08060354: .4byte gTeamInventory_203B460
+_08060354: .4byte gTeamInventoryRef
 _08060358: .4byte gUnknown_202F240
 _0806035C: .4byte gRealInputs
 _08060360: .4byte gDungeon
@@ -5553,7 +5553,7 @@ _08060592:
 	b _08060794
 	.align 2, 0
 _080605C0: .4byte gTeamToolboxAPtr
-_080605C4: .4byte gTeamInventory_203B460
+_080605C4: .4byte gTeamInventoryRef
 _080605C8: .4byte gUnknown_8106B60
 _080605CC:
 	ldr r0, _08060630
@@ -5605,7 +5605,7 @@ _080605FC:
 	b _08060794
 	.align 2, 0
 _08060630: .4byte gTeamToolboxBPtr
-_08060634: .4byte gTeamInventory_203B460
+_08060634: .4byte gTeamInventoryRef
 _08060638: .4byte gUnknown_8106B60
 _0806063C:
 	mov r1, r9
@@ -6012,7 +6012,7 @@ _08060964: .4byte gUnknown_202F238
 _08060968: .4byte gUnknown_202EE6C
 _0806096C: .4byte gDungeon
 _08060970: .4byte 0x0000065b
-_08060974: .4byte gTeamInventory_203B460
+_08060974: .4byte gTeamInventoryRef
 _08060978:
 	mov r0, r10
 	adds r0, 0x60
@@ -6182,7 +6182,7 @@ _08060ABE:
 	bl sub_8044FF0
 	b _08060B3C
 	.align 2, 0
-_08060AD4: .4byte gTeamInventory_203B460
+_08060AD4: .4byte gTeamInventoryRef
 _08060AD8: .4byte gUnknown_202F238
 _08060ADC: .4byte gDungeon
 _08060AE0: .4byte 0x0001357c
@@ -6210,7 +6210,7 @@ _08060AE8:
 	.align 2, 0
 _08060B10: .4byte gDungeon
 _08060B14: .4byte 0x0000065b
-_08060B18: .4byte gTeamInventory_203B460
+_08060B18: .4byte gTeamInventoryRef
 _08060B1C:
 	ldrb r1, [r7, 0x2]
 	movs r0, 0x37
@@ -6356,7 +6356,7 @@ _08060C32:
 	.align 2, 0
 _08060C50: .4byte gDungeon
 _08060C54: .4byte 0x0001357c
-_08060C58: .4byte gTeamInventory_203B460
+_08060C58: .4byte gTeamInventoryRef
 _08060C5C: .4byte 0x0000065b
 _08060C60:
 	ldrb r1, [r7, 0x2]
@@ -6586,7 +6586,7 @@ _08060E1A:
 	.align 2, 0
 _08060E28: .4byte gDungeon
 _08060E2C: .4byte 0x0000065b
-_08060E30: .4byte gTeamInventory_203B460
+_08060E30: .4byte gTeamInventoryRef
 _08060E34: .4byte 0x0001357c
 	thumb_func_end sub_8060D64
 
@@ -17762,7 +17762,7 @@ _08066798:
 	ldr r0, _080667CC
 	b _080667DE
 	.align 2, 0
-_080667C0: .4byte gTeamInventory_203B460
+_080667C0: .4byte gTeamInventoryRef
 _080667C4: .4byte gUnknown_202DE58
 _080667C8: .4byte 0x00000133
 _080667CC: .4byte gUnknown_80F8D04
@@ -17857,7 +17857,7 @@ _08066856:
 	bl SendMessage
 	b _080668BE
 	.align 2, 0
-_0806688C: .4byte gTeamInventory_203B460
+_0806688C: .4byte gTeamInventoryRef
 _08066890: .4byte gUnknown_202DE58
 _08066894: .4byte gUnknown_80F8C7C
 _08066898:
@@ -18139,7 +18139,7 @@ sub_8066AC0:
 	ldr r0, _08066AF4
 	b _08066B10
 	.align 2, 0
-_08066AF0: .4byte gTeamInventory_203B460
+_08066AF0: .4byte gTeamInventoryRef
 _08066AF4: .4byte gUnknown_80F8D60
 _08066AF8:
 	ldrb r1, [r5]

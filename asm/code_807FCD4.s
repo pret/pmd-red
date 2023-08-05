@@ -791,7 +791,7 @@ _08080300:
 	bl sub_80522F4
 	b _0808034A
 	.align 2, 0
-_0808030C: .4byte gTeamInventory_203B460
+_0808030C: .4byte gTeamInventoryRef
 _08080310: .4byte gUnknown_80FDC40
 _08080314:
 	adds r0, r6, 0
@@ -1032,7 +1032,7 @@ _080804B6:
 	ldr r0, _080804C8
 	b _080804D4
 	.align 2, 0
-_080804C0: .4byte gTeamInventory_203B460
+_080804C0: .4byte gTeamInventoryRef
 _080804C4: .4byte gUnknown_80F4E0E
 _080804C8: .4byte gUnknown_80FD788
 _080804CC:

@@ -810,14 +810,14 @@ void sub_8026B64(void)
     {
         case 3:
             gUnknown_203B2B8->id = sub_801A8AC();
-            gUnknown_203B2B8->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->id].id;
-            gUnknown_203B2B8->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->id].quantity;
+            gUnknown_203B2B8->item1.id = gTeamInventoryRef->teamItems[gUnknown_203B2B8->id].id;
+            gUnknown_203B2B8->item1.quantity = gTeamInventoryRef->teamItems[gUnknown_203B2B8->id].quantity;
             sub_8026074(0x14);
             break;
         case 4:
             gUnknown_203B2B8->id = sub_801A8AC();
-            gUnknown_203B2B8->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->id].id;
-            gUnknown_203B2B8->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->id].quantity;
+            gUnknown_203B2B8->item1.id = gTeamInventoryRef->teamItems[gUnknown_203B2B8->id].id;
+            gUnknown_203B2B8->item1.quantity = gTeamInventoryRef->teamItems[gUnknown_203B2B8->id].quantity;
             sub_8099690(0);
             sub_8026074(0x15);
             break;
@@ -1023,12 +1023,12 @@ bool8 CanTakePokemonHeldItem(struct PokemonStruct *r0)
     {
         if(IsThrowableItem(r0->heldItem.id))
         {
-            if((gTeamInventory_203B460->teamStorage[r0->heldItem.id] + r0->heldItem.quantity) > 999)
+            if((gTeamInventoryRef->teamStorage[r0->heldItem.id] + r0->heldItem.quantity) > 999)
                 return FALSE;
         }
         else
         {
-            if(gTeamInventory_203B460->teamStorage[r0->heldItem.id] > 998)
+            if(gTeamInventoryRef->teamStorage[r0->heldItem.id] > 998)
                 return FALSE;
         }
     }
@@ -1054,11 +1054,11 @@ void sub_8026FA4(void)
             PlaySound(0x14d);
             if(IsThrowableItem(gUnknown_203B2B8->item2.id))
             {
-                gTeamInventory_203B460->teamStorage[gUnknown_203B2B8->item2.id] += gUnknown_203B2B8->item2.quantity;
+                gTeamInventoryRef->teamStorage[gUnknown_203B2B8->item2.id] += gUnknown_203B2B8->item2.quantity;
             }
             else
             {
-                gTeamInventory_203B460->teamStorage[gUnknown_203B2B8->item2.id] += 1;
+                gTeamInventoryRef->teamStorage[gUnknown_203B2B8->item2.id] += 1;
             }
 
             gUnknown_203B2B8->item2.id = ITEM_NOTHING;

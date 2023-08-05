@@ -243,7 +243,7 @@ u32 sub_801FC40(void)
             break;
         case 0xd:
             if (gUnknown_203B27C->unk15 == TRUE) {
-                gTeamInventory_203B460->teamMoney -= 150;
+                gTeamInventoryRef->teamMoney -= 150;
             }
             return 3;
         default:
@@ -1049,7 +1049,7 @@ void sub_8020EB4(void)
             sub_801FDA8(0x1F);
             break;
         case 8:
-            if(gTeamInventory_203B460->teamMoney < 150)
+            if(gTeamInventoryRef->teamMoney < 150)
             {
                 PlayMenuSoundEffect(2);
                 sub_801FDA8(0x3);        

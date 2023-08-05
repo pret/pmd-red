@@ -173,7 +173,7 @@ _08021502:
 	.align 2, 0
 _08021568: .4byte gUnknown_203B280
 _0802156C: .4byte gUnknown_80DC494
-_08021570: .4byte gTeamInventory_203B460
+_08021570: .4byte gTeamInventoryRef
 _08021574:
 	mov r0, r10
 	ldr r1, _08021598

@@ -367,10 +367,10 @@ void sub_8016FF8(void)
             gKangaskhanStorageWork->unkB8 = 2;
             gKangaskhanStorageWork->unkB0 = 1;
 
-            if (gTeamInventory_203B460->teamStorage[gKangaskhanStorageWork->storedItem.id] >= 100)
+            if (gTeamInventoryRef->teamStorage[gKangaskhanStorageWork->storedItem.id] >= 100)
                 gKangaskhanStorageWork->unkB4 = 99;
             else
-                gKangaskhanStorageWork->unkB4 = gTeamInventory_203B460->teamStorage [gKangaskhanStorageWork->storedItem.id];
+                gKangaskhanStorageWork->unkB4 = gTeamInventoryRef->teamStorage [gKangaskhanStorageWork->storedItem.id];
 
             gKangaskhanStorageWork->unkAC = gKangaskhanStorageWork->unkB4;
             gKangaskhanStorageWork->unkBC = 1;
@@ -620,7 +620,7 @@ void sub_8017928(void)
 
     switch (menuAction) {
         case 4:
-            gTeamInventory_203B460->teamStorage[gKangaskhanStorageWork->storedItem.id] -= gKangaskhanStorageWork->storedItem.quantity;
+            gTeamInventoryRef->teamStorage[gKangaskhanStorageWork->storedItem.id] -= gKangaskhanStorageWork->storedItem.quantity;
             item.id = gKangaskhanStorageWork->storedItem.id;
             item.quantity = gKangaskhanStorageWork->storedItem.quantity;
             AddHeldItemToInventory(&item);
@@ -645,9 +645,9 @@ void sub_80179A8(void)
         case 4:
             for (index = 0; index < INVENTORY_SIZE; index++) {
                 if (sub_801AED0(index) != 0) {
-                    MoveToStorage(&gTeamInventory_203B460->teamItems[index]);
-                    gTeamInventory_203B460->teamItems[index].id = 0;
-                    gTeamInventory_203B460->teamItems[index].flags = 0;
+                    MoveToStorage(&gTeamInventoryRef->teamItems[index]);
+                    gTeamInventoryRef->teamItems[index].id = 0;
+                    gTeamInventoryRef->teamItems[index].flags = 0;
                 }
             }
 
@@ -677,14 +677,14 @@ void sub_8017A1C(void)
                 if (sub_801CFE0(itemID) != 0) {
                     item.id = itemID;
                     if (IsThrowableItem(item.id)) {
-                        if (gTeamInventory_203B460->teamStorage[item.id] > 99)
+                        if (gTeamInventoryRef->teamStorage[item.id] > 99)
                             item.quantity = 99;
                         else
-                            item.quantity = gTeamInventory_203B460->teamStorage[item.id];
+                            item.quantity = gTeamInventoryRef->teamStorage[item.id];
                     }
                     else
                         item.quantity = 1;
-                    gTeamInventory_203B460->teamStorage[item.id] -= item.quantity;
+                    gTeamInventoryRef->teamStorage[item.id] -= item.quantity;
                     AddHeldItemToInventory(&item);
                 }
             }
@@ -710,13 +710,13 @@ void sub_8017AF8(void)
             }
             else {
                 gKangaskhanStorageWork->itemIndex = sub_801A8AC();
-                gKangaskhanStorageWork->storedItem = gTeamInventory_203B460->teamItems[gKangaskhanStorageWork->itemIndex];
+                gKangaskhanStorageWork->storedItem = gTeamInventoryRef->teamItems[gKangaskhanStorageWork->itemIndex];
                 UpdateKangaskhanStorageState(15);
             }
             break;
         case 4:
             gKangaskhanStorageWork->itemIndex = sub_801A8AC();
-            gKangaskhanStorageWork->storedItem = gTeamInventory_203B460->teamItems[gKangaskhanStorageWork->itemIndex];
+            gKangaskhanStorageWork->storedItem = gTeamInventoryRef->teamItems[gKangaskhanStorageWork->itemIndex];
             UpdateKangaskhanStorageState(16);
             break;
         case 2:
@@ -1021,10 +1021,10 @@ void sub_8018100(void)
             gUnknown_203B20C->unkD0 = 2;
             gUnknown_203B20C->unkC8 = 1;
 
-            if (gTeamInventory_203B460->teamStorage[gUnknown_203B20C->item.id] > 99)
+            if (gTeamInventoryRef->teamStorage[gUnknown_203B20C->item.id] > 99)
                 gUnknown_203B20C->unkCC = 99;
             else
-                gUnknown_203B20C->unkCC = gTeamInventory_203B460->teamStorage[gUnknown_203B20C->item.id];
+                gUnknown_203B20C->unkCC = gTeamInventoryRef->teamStorage[gUnknown_203B20C->item.id];
 
             gUnknown_203B20C->unkC4 = gUnknown_203B20C->unkCC;
             gUnknown_203B20C->unkD4 = 1;
@@ -1214,9 +1214,9 @@ void sub_8018620(void)
             if (sub_801AEA8() != 0) {
                 for (index = 0; index < INVENTORY_SIZE; index++) {
                     if (sub_801AED0(index) != 0) {
-                        MoveToStorage(&gTeamInventory_203B460->teamItems[index]);
-                        gTeamInventory_203B460->teamItems[index].id = 0;
-                        gTeamInventory_203B460->teamItems[index].flags = 0;
+                        MoveToStorage(&gTeamInventoryRef->teamItems[index]);
+                        gTeamInventoryRef->teamItems[index].id = 0;
+                        gTeamInventoryRef->teamItems[index].flags = 0;
                     }
                 }
 
@@ -1232,13 +1232,13 @@ void sub_8018620(void)
             }
             else {
                 gUnknown_203B20C->itemIndex = sub_801A8AC();
-                gUnknown_203B20C->item = gTeamInventory_203B460->teamItems[gUnknown_203B20C->itemIndex];
+                gUnknown_203B20C->item = gTeamInventoryRef->teamItems[gUnknown_203B20C->itemIndex];
                 sub_8017F10(6);
             }
             break;
         case 4:
             gUnknown_203B20C->itemIndex = sub_801A8AC();
-            gUnknown_203B20C->item = gTeamInventory_203B460->teamItems[gUnknown_203B20C->itemIndex];
+            gUnknown_203B20C->item = gTeamInventoryRef->teamItems[gUnknown_203B20C->itemIndex];
             sub_8017F10(7);
             break;
         case 2:
@@ -1261,15 +1261,15 @@ void sub_80186F8(void)
                         item.id = itemID;
 
                         if (IsThrowableItem(item.id)) {
-                            if (gTeamInventory_203B460->teamStorage[item.id] > 99)
+                            if (gTeamInventoryRef->teamStorage[item.id] > 99)
                                 item.quantity = 99;
                             else
-                                item.quantity = gTeamInventory_203B460->teamStorage[item.id];
+                                item.quantity = gTeamInventoryRef->teamStorage[item.id];
                         }
                         else
                             item.quantity = 1;
 
-                        gTeamInventory_203B460->teamStorage[item.id] -= item.quantity;
+                        gTeamInventoryRef->teamStorage[item.id] -= item.quantity;
                         AddHeldItemToInventory(&item);
                     }
                 }
@@ -1317,7 +1317,7 @@ void sub_8018854(void)
     switch (sub_8013BBC(&gUnknown_203B20C->unkC0)) {
         case 3:
             gUnknown_203B20C->item.quantity = gUnknown_203B20C->unkC0;
-            gTeamInventory_203B460->teamStorage[gUnknown_203B20C->item.id] -= gUnknown_203B20C->item.quantity;
+            gTeamInventoryRef->teamStorage[gUnknown_203B20C->item.id] -= gUnknown_203B20C->item.quantity;
             item.id = gUnknown_203B20C->item.id;
             item.quantity = gUnknown_203B20C->item.quantity;
             AddHeldItemToInventory(&item);
@@ -1412,7 +1412,7 @@ void sub_80189C8(void)
             else if (IsThrowableItem(gUnknown_203B20C->item.id))
                 sub_8017F10(12);
             else {
-                gTeamInventory_203B460->teamStorage[gUnknown_203B20C->item.id] -= gUnknown_203B20C->item.quantity;
+                gTeamInventoryRef->teamStorage[gUnknown_203B20C->item.id] -= gUnknown_203B20C->item.quantity;
                 item.id = gUnknown_203B20C->item.id;
                 item.quantity = gUnknown_203B20C->item.quantity;
                 AddHeldItemToInventory(&item);

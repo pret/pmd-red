@@ -122,7 +122,7 @@ _08045E94:
 	.align 2, 0
 _08045EA8: .4byte gDungeon
 _08045EAC: .4byte 0x0000065b
-_08045EB0: .4byte gTeamInventory_203B460
+_08045EB0: .4byte gTeamInventoryRef
 _08045EB4:
 	ldr r0, [sp, 0xAC]
 	adds r0, 0x60

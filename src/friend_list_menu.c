@@ -611,14 +611,14 @@ void sub_8025C04(void)
     {
         case 3:
             gUnknown_203B2B4->itemIndex = sub_801A8AC();
-            gUnknown_203B2B4->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B4->itemIndex].id;
-            gUnknown_203B2B4->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B4->itemIndex].quantity;
+            gUnknown_203B2B4->item1.id = gTeamInventoryRef->teamItems[gUnknown_203B2B4->itemIndex].id;
+            gUnknown_203B2B4->item1.quantity = gTeamInventoryRef->teamItems[gUnknown_203B2B4->itemIndex].quantity;
             sub_8025434(0xD);
             break;
         case 4:
             gUnknown_203B2B4->itemIndex = sub_801A8AC();
-            gUnknown_203B2B4->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B4->itemIndex].id;
-            gUnknown_203B2B4->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B4->itemIndex].quantity;
+            gUnknown_203B2B4->item1.id = gTeamInventoryRef->teamItems[gUnknown_203B2B4->itemIndex].id;
+            gUnknown_203B2B4->item1.quantity = gTeamInventoryRef->teamItems[gUnknown_203B2B4->itemIndex].quantity;
             sub_8099690(0);
             sub_8025434(0xE);
             break;

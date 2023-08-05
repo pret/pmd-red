@@ -1470,7 +1470,7 @@ _0807F204:
 	movs r0, 0x2
 	b _0807F31C
 	.align 2, 0
-_0807F224: .4byte gTeamInventory_203B460
+_0807F224: .4byte gTeamInventoryRef
 _0807F228: .4byte gUnknown_80FE520
 _0807F22C:
 	movs r0, 0xA6
@@ -1597,7 +1597,7 @@ _0807F31C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0807F324: .4byte gTeamInventory_203B460
+_0807F324: .4byte gTeamInventoryRef
 _0807F328: .4byte gDungeon
 _0807F32C: .4byte 0x000135cc
 _0807F330: .4byte 0x00000694
@@ -1723,7 +1723,7 @@ _0807F41C: .4byte gDungeon
 _0807F420: .4byte 0x0000066e
 _0807F424: .4byte 0x0000066f
 _0807F428: .4byte gUnknown_80FE4B8
-_0807F42C: .4byte gTeamInventory_203B460
+_0807F42C: .4byte gTeamInventoryRef
 _0807F430: .4byte 0x000135cc
 _0807F434: .4byte 0x00000694
 _0807F438: .4byte 0x0000068c

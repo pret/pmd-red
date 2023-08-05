@@ -959,7 +959,7 @@ void HandleConfirmItemtoSendMenu(void)
                 {
                     mail->item = gUnknown_203B2C4->unk41C;
                 }
-                gTeamInventory_203B460->teamStorage[gUnknown_203B2C4->unk41C.id]--;
+                gTeamInventoryRef->teamStorage[gUnknown_203B2C4->unk41C.id]--;
                 SetThankYouMailMenuState(0x29);
                 break;
             case 8:

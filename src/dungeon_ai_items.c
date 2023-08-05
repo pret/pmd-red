@@ -38,7 +38,7 @@ extern s32 gNumPotentialTargets;
 extern u32 gPotentialItemTargetWeights[NUM_DIRECTIONS];
 extern u32 gPotentialItemTargetDirections[NUM_DIRECTIONS];
 extern bool8 gTargetAhead[NUM_DIRECTIONS];
-extern struct TeamInventory *gTeamInventory_203B460;
+extern struct TeamInventory *gTeamInventoryRef;
 
 void sub_807360C(struct Entity *pokemon)
 {
@@ -176,7 +176,7 @@ void DecideUseItem(struct Entity *pokemon)
             }
             else if (pokemonInfo->isTeamLeader)
             {
-                item = &gTeamInventory_203B460->teamItems[toolboxIndex - 2];
+                item = &gTeamInventoryRef->teamItems[toolboxIndex - 2];
                 selectedToolboxIndex = toolboxIndex - 1;
             }
             else

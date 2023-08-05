@@ -478,7 +478,7 @@ void HandleWigglytuffConfirmFriendAreaMenu(void)
         switch(menuAction)
         {
             case 5:
-                gTeamInventory_203B460->teamMoney -= gWigglytuffShop->friendAreaPrice;
+                gTeamInventoryRef->teamMoney -= gWigglytuffShop->friendAreaPrice;
                 UnlockFriendArea(gWigglytuffShop->chosenFriendArea);
                 PlaySound(0x14C);
                 SetWigglytuffState(CONFIRM_BUY_FRIEND_AREA);
@@ -530,11 +530,11 @@ void sub_80225C8(void)
     switch(menuAction)
     {
         case 2:
-            if(gTeamInventory_203B460->teamMoney == 0)
+            if(gTeamInventoryRef->teamMoney == 0)
             {
                 SetWigglytuffState(NO_MONEY);
             }
-            else if(gWigglytuffShop->friendAreaPrice > gTeamInventory_203B460->teamMoney)
+            else if(gWigglytuffShop->friendAreaPrice > gTeamInventoryRef->teamMoney)
             {
                 SetWigglytuffState(NOT_ENOUGH_MONEY);
             }

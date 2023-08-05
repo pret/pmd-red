@@ -173,7 +173,7 @@ _08073E48:
 	.align 2, 0
 _08073E64: .4byte gDungeon
 _08073E68: .4byte 0x0000065b
-_08073E6C: .4byte gTeamInventory_203B460
+_08073E6C: .4byte gTeamInventoryRef
 _08073E70:
 	mov r0, r10
 	adds r0, 0x60

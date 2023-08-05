@@ -185,14 +185,14 @@ void sub_8037E38(struct unkStruct_8035D94 *param_1,struct unkStruct_8035D94 *par
     r3 = sub_800D588() == 0 ? param_1 : param_2;
 
     if ((r4->itemIndex).itemIndex_u8 == (r3->itemIndex).itemIndex_u8) {
-         load = gTeamInventory_203B460->teamStorage[r4->itemIndex.itemIndex_u8];
+         load = gTeamInventoryRef->teamStorage[r4->itemIndex.itemIndex_u8];
          load += r3->numItems;
-         gTeamInventory_203B460->teamStorage[r4->itemIndex.itemIndex_u8] = load;
+         gTeamInventoryRef->teamStorage[r4->itemIndex.itemIndex_u8] = load;
     }
     else {
-        load = gTeamInventory_203B460->teamStorage[r3->itemIndex.itemIndex_u8];
+        load = gTeamInventoryRef->teamStorage[r3->itemIndex.itemIndex_u8];
         load += r3->numItems;
-        gTeamInventory_203B460->teamStorage[r3->itemIndex.itemIndex_u8] = load;
+        gTeamInventoryRef->teamStorage[r3->itemIndex.itemIndex_u8] = load;
     }
 }
 
@@ -295,7 +295,7 @@ s32 sub_8038014(struct unkStruct_8035D94 *param_1,struct unkStruct_8035D94 *para
     r3 = sub_800D588() == 0 ? param_1 : param_2;
 
     if ((r4->itemIndex).itemIndex_u8 == (r3->itemIndex).itemIndex_u8) {
-        r2 = gTeamInventory_203B460->teamStorage[r4->itemIndex.itemIndex_u8];
+        r2 = gTeamInventoryRef->teamStorage[r4->itemIndex.itemIndex_u8];
         r2 += r3->numItems;
         if (r2 > 999) {
             linkStatus = COMMS_NO_ROOM_STORAGE;
@@ -304,7 +304,7 @@ s32 sub_8038014(struct unkStruct_8035D94 *param_1,struct unkStruct_8035D94 *para
             linkStatus = COMMS_GOOD;
     }
     else {
-        r2 = gTeamInventory_203B460->teamStorage[r3->itemIndex.itemIndex_u8];
+        r2 = gTeamInventoryRef->teamStorage[r3->itemIndex.itemIndex_u8];
         r2 += r3->numItems;
         if (r2 > 999) {
             linkStatus = COMMS_NO_ROOM_STORAGE;

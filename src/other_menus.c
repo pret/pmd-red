@@ -642,7 +642,7 @@ void sub_80371B8(void)
     sub_8035CF4(gUnknown_203B35C->unk1C, 0, 1);
     if ((gUnknown_203B35C->linkStatus != COMMS_GOOD) && (gUnknown_203B35C->unk0 == 0) &&
         (item = sub_8035D94(), item->itemIndex.itemIndex_u8 != ITEM_NOTHING) && (item->numItems != 0)) {
-            gTeamInventory_203B460->teamStorage[item->itemIndex.itemIndex_u8] += item->numItems;
+            gTeamInventoryRef->teamStorage[item->itemIndex.itemIndex_u8] += item->numItems;
     }
   }
 }

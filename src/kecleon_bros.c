@@ -455,7 +455,7 @@ void UpdateKecleonStoreDialogue(void)
             sub_801B3C0(&gKecleonBrosWork->soldItem);
             break;
         case 25:
-            if (GetNumberOfFilledInventorySlots() == 0 || gTeamInventory_203B460->teamMoney >= MAX_TEAM_MONEY) {
+            if (GetNumberOfFilledInventorySlots() == 0 || gTeamInventoryRef->teamMoney >= MAX_TEAM_MONEY) {
                 sub_801A928();
                 gKecleonBrosWork->fallbackState = 1;
             }
@@ -632,7 +632,7 @@ void sub_8019730(void)
                 SetKecleonBrosState(KECLEON_STORE_NO_ITEMS_TO_SELL);
             else if (gKecleonBrosWork->numInventoryItemToSell == 0)
                 SetKecleonBrosState(8);
-            else if (gTeamInventory_203B460->teamMoney < MAX_TEAM_MONEY)
+            else if (gTeamInventoryRef->teamMoney < MAX_TEAM_MONEY)
                 SetKecleonBrosState(23);
             else
                 SetKecleonBrosState(7);
@@ -642,7 +642,7 @@ void sub_8019730(void)
                 SetKecleonBrosState(KECLEON_STORE_NO_ITEMS_TO_SELL);
             else if (gKecleonBrosWork->numInventoryItemToSell == 0)
                 SetKecleonBrosState(8);
-            else if (gKecleonBrosWork->inventoryItemSellPrice + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY)
+            else if (gKecleonBrosWork->inventoryItemSellPrice + gTeamInventoryRef->teamMoney > MAX_TEAM_MONEY)
                 SetKecleonBrosState(7);
             else
                 SetKecleonBrosState(31);
@@ -717,7 +717,7 @@ void sub_8019944(void)
         switch (menuAction) {
             case 5:
                 for (slotIndex = 0; slotIndex < INVENTORY_SIZE; slotIndex++) {
-                    item = &gTeamInventory_203B460->teamItems[slotIndex];
+                    item = &gTeamInventoryRef->teamItems[slotIndex];
 
                     if ((item->flags & ITEM_FLAG_EXISTS) && CanSellItem(item->id))
                         ClearItemSlotAt(slotIndex);
@@ -799,13 +799,13 @@ void sub_8019B08(void)
             break;
         case 3:
             gKecleonBrosWork->soldItemInventoryIndex = sub_801A8AC();
-            gKecleonBrosWork->soldItem = gTeamInventory_203B460->teamItems[gKecleonBrosWork->soldItemInventoryIndex];
+            gKecleonBrosWork->soldItem = gTeamInventoryRef->teamItems[gKecleonBrosWork->soldItemInventoryIndex];
             gKecleonBrosWork->itemSellPrice = GetStackSellPrice(&gKecleonBrosWork->soldItem);
             SetKecleonBrosState(28);
             break;
         case 4:
             gKecleonBrosWork->soldItemInventoryIndex = sub_801A8AC();
-            gKecleonBrosWork->soldItem = gTeamInventory_203B460->teamItems[gKecleonBrosWork->soldItemInventoryIndex];
+            gKecleonBrosWork->soldItem = gTeamInventoryRef->teamItems[gKecleonBrosWork->soldItemInventoryIndex];
             gKecleonBrosWork->itemSellPrice = GetStackSellPrice(&gKecleonBrosWork->soldItem);
             sub_8099690(0);
             SetKecleonBrosState(29);
@@ -837,9 +837,9 @@ void sub_8019BBC(void)
 
     switch (menuAction) {
         case 2:
-            if (gTeamInventory_203B460->teamMoney == 0)
+            if (gTeamInventoryRef->teamMoney == 0)
                 SetKecleonBrosState(KECLEON_STORE_NO_MONEY);
-            else if (gKecleonBrosWork->itemSellPrice > gTeamInventory_203B460->teamMoney)
+            else if (gKecleonBrosWork->itemSellPrice > gTeamInventoryRef->teamMoney)
                 SetKecleonBrosState(KECLEON_STORE_NOT_ENOUGH_MONEY);
             else
                 SetKecleonBrosState(22);
@@ -869,7 +869,7 @@ void sub_8019C78(void)
 
             if (!CanSellItem(gKecleonBrosWork->soldItem.id))
                 SetKecleonBrosState(KECLEON_STORE_CANT_SELL_ITEM);
-            else if (gKecleonBrosWork->itemSellPrice + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY)
+            else if (gKecleonBrosWork->itemSellPrice + gTeamInventoryRef->teamMoney > MAX_TEAM_MONEY)
                 SetKecleonBrosState(14);
             else
                 SetKecleonBrosState(30);
@@ -937,7 +937,7 @@ void sub_8019DAC(void)
     gKecleonBrosWork->numInventoryItemToSell = 0;
     gKecleonBrosWork->inventoryItemSellPrice = 0;
     for (index = 0; index < INVENTORY_SIZE; index++) {
-        item = &gTeamInventory_203B460->teamItems[index];
+        item = &gTeamInventoryRef->teamItems[index];
 
         if ((item->flags & ITEM_FLAG_EXISTS) != 0 && CanSellItem(item->id)) {
             sellPrice = GetStackSellPrice(item);
@@ -1003,7 +1003,7 @@ u32 sub_8019EDC(u8 r0)
             slot.id = item->id;
             slot.quantity = item->quantity;
 
-            if (GetStackBuyPrice(&slot) > gTeamInventory_203B460->teamMoney)
+            if (GetStackBuyPrice(&slot) > gTeamInventoryRef->teamMoney)
                 PlayMenuSoundEffect(2);
             else
                 PlayMenuSoundEffect(0);
@@ -1157,7 +1157,7 @@ void sub_801A0D8(void)
         sub_8090E14(auStack204, &item, &local_7c);
         buyPrice = GetStackBuyPrice(&item);
 
-        if (buyPrice <= gTeamInventory_203B460->teamMoney) {
+        if (buyPrice <= gTeamInventoryRef->teamMoney) {
             y = sub_8013800(&gUnknown_203B214->input, index);
             xxx_call_draw_string(8, y, auStack204, gUnknown_203B214->unk34, 0);
         }
@@ -1212,7 +1212,7 @@ u32 sub_801A2A8(u8 r0)
             slot.id = item->id;
             slot.quantity = item->quantity;
 
-            if (GetStackBuyPrice(&slot) > gTeamInventory_203B460->teamMoney)
+            if (GetStackBuyPrice(&slot) > gTeamInventoryRef->teamMoney)
                 PlayMenuSoundEffect(2);
             else
                 PlayMenuSoundEffect(0);
@@ -1365,7 +1365,7 @@ void sub_801A4A4(void)
         sub_8090E14(buffer1, &item, &local_7c);
         buyPrice = GetStackBuyPrice(&item);
 
-        if (buyPrice <= gTeamInventory_203B460->teamMoney) {
+        if (buyPrice <= gTeamInventoryRef->teamMoney) {
             y = sub_8013800(&gUnknown_203B21C->input, index);
             xxx_call_draw_string(8, y, buffer1, gUnknown_203B21C->unk34, 0);
         }
@@ -1442,9 +1442,9 @@ u32 sub_801A6E8(bool8 param_1)
                         PlayMenuSoundEffect(2);
                     break;
                 case 4:
-                    item = gTeamInventory_203B460->teamItems[sub_801A8AC()];
+                    item = gTeamInventoryRef->teamItems[sub_801A8AC()];
 
-                    if (CanSellItem(item.id) && GetStackSellPrice(&item) + gTeamInventory_203B460->teamMoney <= MAX_TEAM_MONEY)
+                    if (CanSellItem(item.id) && GetStackSellPrice(&item) + gTeamInventoryRef->teamMoney <= MAX_TEAM_MONEY)
                         PlayMenuSoundEffect(0);
                     else
                         PlayMenuSoundEffect(2);
@@ -1562,7 +1562,7 @@ void sub_801A9E0(void)
 
     for (r7 = 0; r7 < gUnknown_203B224->input.unk1A; r7++) {
         teamItemIndex = (gUnknown_203B224->input.unk1E * gUnknown_203B224->input.unk1C) + r7;
-        item = gTeamInventory_203B460->teamItems[teamItemIndex];
+        item = gTeamInventoryRef->teamItems[teamItemIndex];
 
         switch (gUnknown_203B224->unk0) {
             case 0:
@@ -1601,7 +1601,7 @@ void sub_801A9E0(void)
                     item.flags = 3;
                     sub_8090E14(buffer1, &item, &stack2);
 
-                    if (GetStackSellPrice(&item) + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY) {
+                    if (GetStackSellPrice(&item) + gTeamInventoryRef->teamMoney > MAX_TEAM_MONEY) {
                         // very dumb but this matches...
                         sprintfStatic((char *)&stack3, gUnknown_80DB9A0, buffer1);
                         xxx_call_draw_string(8, sub_8013800(&gUnknown_203B224->input, r7), (u8 *)&stack3, gUnknown_203B224->unk88, 0);
@@ -1660,13 +1660,13 @@ bool8 sub_801ADA0(s32 param_1)
     s32 sum2;
     struct Item item;
 
-    item = gTeamInventory_203B460->teamItems[param_1];
+    item = gTeamInventoryRef->teamItems[param_1];
     if (!IsNotMoneyOrUsedTMItem(item.id))
         return FALSE;
 
     if (IsThrowableItem(item.id)) {
         uVar3_32 = sub_801AE24(item.id);
-        sum1 = gTeamInventory_203B460->teamStorage[item.id];
+        sum1 = gTeamInventoryRef->teamStorage[item.id];
         uVar3 = uVar3_32;
         sum1 += uVar3;
         sum1 += (item.quantity);
@@ -1675,7 +1675,7 @@ bool8 sub_801ADA0(s32 param_1)
     }
     else {
         uVar2_32 = sub_801AE24(item.id);
-        sum2 = gTeamInventory_203B460->teamStorage[item.id];
+        sum2 = gTeamInventoryRef->teamStorage[item.id];
         uVar2 = uVar2_32;
         sum2 += uVar2;
         if (sum2 > 998)
@@ -1693,7 +1693,7 @@ s32 sub_801AE24(u32 itemID)
     count = 0;
     for (invIndex = 0; invIndex < GetNumberOfFilledInventorySlots(); invIndex++) {
         if (gUnknown_203B224->unk4[invIndex] != 0) {
-            item = gTeamInventory_203B460->teamItems[invIndex];
+            item = gTeamInventoryRef->teamItems[invIndex];
 
             if (item.id == itemID) {
                 if (IsThrowableItem(item.id))
@@ -1751,14 +1751,14 @@ void SortInventoryItems(void)
 
     for (itemL = 0; itemL < GetNumberOfFilledInventorySlots() - 1; itemL++) {
         for (itemR = itemL + 1; itemR < GetNumberOfFilledInventorySlots(); itemR++) {
-            orderL = GetItemOrder(gTeamInventory_203B460->teamItems[itemL].id);
-            orderR = GetItemOrder(gTeamInventory_203B460->teamItems[itemR].id);
+            orderL = GetItemOrder(gTeamInventoryRef->teamItems[itemL].id);
+            orderR = GetItemOrder(gTeamInventoryRef->teamItems[itemR].id);
 
             if (orderL > orderR
-                         || (orderL == orderR && gTeamInventory_203B460->teamItems[itemL].quantity < gTeamInventory_203B460->teamItems[itemR].quantity)) {
-                itemSlotL = gTeamInventory_203B460->teamItems[itemL];
-                itemSlotR = &gTeamInventory_203B460->teamItems[itemR];
-                gTeamInventory_203B460->teamItems[itemL] = *itemSlotR;
+                         || (orderL == orderR && gTeamInventoryRef->teamItems[itemL].quantity < gTeamInventoryRef->teamItems[itemR].quantity)) {
+                itemSlotL = gTeamInventoryRef->teamItems[itemL];
+                itemSlotR = &gTeamInventoryRef->teamItems[itemR];
+                gTeamInventoryRef->teamItems[itemL] = *itemSlotR;
                 *itemSlotR = itemSlotL;
 
                 base = gUnknown_203B224->unk4;

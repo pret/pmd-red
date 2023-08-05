@@ -734,11 +734,11 @@ void sub_8024FD4(void)
         case 3:
             gUnknown_203B2B0->evoItem1_InvIndex = sub_801A8AC();
             gUnknown_203B2B0->evoItem2_InvIndex = INVENTORY_SIZE;
-            gUnknown_203B2B0->chosenItem = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem1_InvIndex];
+            gUnknown_203B2B0->chosenItem = gTeamInventoryRef->teamItems[gUnknown_203B2B0->evoItem1_InvIndex];
             UpdateLuminousCaveState(8);
             break;
         case 4:
-            gUnknown_203B2B0->chosenItem = gTeamInventory_203B460->teamItems[sub_801A8AC()];
+            gUnknown_203B2B0->chosenItem = gTeamInventoryRef->teamItems[sub_801A8AC()];
             sub_8099690(0);
             UpdateLuminousCaveState(9);
             break;
@@ -757,14 +757,14 @@ void sub_8025058(void)
             if(gUnknown_203B2B0->evoItem1_InvIndex != sub_801A8AC())
             {
                 gUnknown_203B2B0->evoItem2_InvIndex = sub_801A8AC();
-                gUnknown_203B2B0->chosenItem = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem2_InvIndex];
+                gUnknown_203B2B0->chosenItem = gTeamInventoryRef->teamItems[gUnknown_203B2B0->evoItem2_InvIndex];
                 UpdateLuminousCaveState(0xD);
             }
             else
                 PlayMenuSoundEffect(2);
             break;
         case 4:
-            gUnknown_203B2B0->chosenItem = gTeamInventory_203B460->teamItems[sub_801A8AC()];
+            gUnknown_203B2B0->chosenItem = gTeamInventoryRef->teamItems[sub_801A8AC()];
             sub_8099690(0);
             UpdateLuminousCaveState(0xE);
             break;
@@ -888,13 +888,13 @@ void sub_8025254(void)
         gUnknown_203B2B0->evoItem1_itemIndex = 0;
     else
     {
-        gUnknown_203B2B0->evoItem1_itemIndex = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem1_InvIndex].id;
+        gUnknown_203B2B0->evoItem1_itemIndex = gTeamInventoryRef->teamItems[gUnknown_203B2B0->evoItem1_InvIndex].id;
     }
     if(gUnknown_203B2B0->evoItem2_InvIndex == INVENTORY_SIZE)
         gUnknown_203B2B0->evoItem2_ItemIndex = 0;
     else
     {
-        gUnknown_203B2B0->evoItem2_ItemIndex = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem2_InvIndex].id;
+        gUnknown_203B2B0->evoItem2_ItemIndex = gTeamInventoryRef->teamItems[gUnknown_203B2B0->evoItem2_InvIndex].id;
     }
 
     gUnknown_203B2B0->unk6 = RandInt(0xFF);

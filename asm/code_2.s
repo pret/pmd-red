@@ -1548,7 +1548,7 @@ _08001298:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080012B8: .4byte gTeamInventory_203B460
+_080012B8: .4byte gTeamInventoryRef
 _080012BC: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_8001248
 
@@ -1607,7 +1607,7 @@ _08001306:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08001324: .4byte gTeamInventory_203B460
+_08001324: .4byte gTeamInventoryRef
 _08001328: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_80012C0
 

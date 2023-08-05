@@ -1857,7 +1857,7 @@ _0806DEC8:
 	bl SendWaitingEndMessage
 	b _0806DEF2
 	.align 2, 0
-_0806DED4: .4byte gTeamInventory_203B460
+_0806DED4: .4byte gTeamInventoryRef
 _0806DED8: .4byte gDungeon
 _0806DEDC: .4byte 0x00000679
 _0806DEE0: .4byte 0x00000676

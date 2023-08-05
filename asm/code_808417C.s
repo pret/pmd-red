@@ -406,7 +406,7 @@ _080844FC: .4byte gDungeon
 _08084500: .4byte 0x0000068a
 _08084504: .4byte gUnknown_80FA32C
 _08084508: .4byte gUnknown_202DE58
-_0808450C: .4byte gTeamInventory_203B460
+_0808450C: .4byte gTeamInventoryRef
 _08084510: .4byte gUnknown_80FA448
 _08084514:
 	lsls r1, r3, 2

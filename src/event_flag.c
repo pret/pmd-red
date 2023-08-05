@@ -252,7 +252,7 @@ void sub_8001D88(void)
     }
     if (auStack8 > 0x11) {
       sub_80973A8(0x25,1);
-      if (((FindItemInInventory(ITEM_HM_DIVE) != -1) || (gTeamInventory_203B460->teamStorage[ITEM_HM_DIVE] != 0)) ||
+      if (((FindItemInInventory(ITEM_HM_DIVE) != -1) || (gTeamInventoryRef->teamStorage[ITEM_HM_DIVE] != 0)) ||
          (sub_8001D44(5,0x21,3) != 0)) {
         sub_80973A8(0x22,1);
       }
@@ -278,7 +278,7 @@ void sub_8001D88(void)
       if (sub_8001D08(5,0,0)) {
         ScenarioCalc(5,0x21,1);
       }
-      if ((FindItemInInventory(ITEM_HM_SURF) != -1) || (gTeamInventory_203B460->teamStorage[ITEM_HM_SURF] != 0)) {
+      if ((FindItemInInventory(ITEM_HM_SURF) != -1) || (gTeamInventoryRef->teamStorage[ITEM_HM_SURF] != 0)) {
         if (sub_8001D08(7,0,0)) {
           ScenarioCalc(7,0x26,1);
         }

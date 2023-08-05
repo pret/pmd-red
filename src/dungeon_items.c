@@ -111,7 +111,7 @@ void MusicBoxCreation(void)
     indexes[1] = -1;
     indexes[2] = -1;
 
-    for(iVar4 = 0, pbVar3 = &gTeamInventory_203B460->teamItems[iVar4]; iVar4 < 20; pbVar3++, iVar4++)
+    for(iVar4 = 0, pbVar3 = &gTeamInventoryRef->teamItems[iVar4]; iVar4 < 20; pbVar3++, iVar4++)
     {
       if (pbVar3->flags & ITEM_FLAG_EXISTS) {
         if (pbVar3->id == ITEM_ROCK_PART) {
@@ -136,23 +136,23 @@ void MusicBoxCreation(void)
       createMusicBox = TRUE;
 
       // clear out each of the parts
-      pbVar4 = &gTeamInventory_203B460->teamItems[indexes[0]];
+      pbVar4 = &gTeamInventoryRef->teamItems[indexes[0]];
       pbVar4->id = 0;
       pbVar4->quantity = 0;
       pbVar4->flags = 0;
 
-      pbVar5 = &gTeamInventory_203B460->teamItems[indexes[1]];
+      pbVar5 = &gTeamInventoryRef->teamItems[indexes[1]];
       pbVar5->id = 0;
       pbVar5->quantity = 0;
       pbVar5->flags = 0;
 
-      pbVar5 = &gTeamInventory_203B460->teamItems[indexes[2]];
+      pbVar5 = &gTeamInventoryRef->teamItems[indexes[2]];
       pbVar5->id = 0;
       pbVar5->quantity = 0;
       pbVar5->flags = 0;
 
       // init the music box
-      xxx_init_itemslot_8090A8C(&gTeamInventory_203B460->teamItems[indexes[0]], ITEM_MUSIC_BOX, 0);
+      xxx_init_itemslot_8090A8C(&gTeamInventoryRef->teamItems[indexes[0]], ITEM_MUSIC_BOX, 0);
     }
   } while (musicBoxOnce);
 
@@ -342,7 +342,7 @@ void MusicBoxCreation(void)
 	"\tpop {r0}\n"
 	"\tbx r0\n"
 	"\t.align 2, 0\n"
-"_08046EDC: .4byte gTeamInventory_203B460\n"
+"_08046EDC: .4byte gTeamInventoryRef\n"
 "_08046EE0: .4byte sub_80861A8\n"
 "_08046EE4: .4byte gDungeon\n"
 "_08046EE8: .4byte 0x0001356c\n"
@@ -394,7 +394,7 @@ void sub_8046F84(s32 itemFlag)
 
   for(index = 0; index < INVENTORY_SIZE; index++)
   {
-    item = &gTeamInventory_203B460->teamItems[index];
+    item = &gTeamInventoryRef->teamItems[index];
     if ((item->flags & ITEM_FLAG_EXISTS) && (item->flags & itemFlag)) {
       item->id = 0;
       item->quantity = 0;
@@ -427,7 +427,7 @@ void sub_804700C(void)
 
   for(index = 0; index < INVENTORY_SIZE; index++)
   {
-    item = &gTeamInventory_203B460->teamItems[index];
+    item = &gTeamInventoryRef->teamItems[index];
     if ((item->flags & ITEM_FLAG_EXISTS)) {
       xxx_init_itemslot_8090A8C(item, ITEM_PLAIN_SEED, 0);
     }
@@ -456,7 +456,7 @@ bool8 sub_8047084(s32 itemFlag)
 
   // NEED THIS ORDERING TO MATCH
   index = 0;
-  item = &gTeamInventory_203B460->teamItems[index];
+  item = &gTeamInventoryRef->teamItems[index];
 
   for(index = 0; index < INVENTORY_SIZE; item++, index++)
   {
@@ -487,7 +487,7 @@ void sub_8047104(void)
 
   for(index = 0; index < INVENTORY_SIZE; index++)
   {
-    item = &gTeamInventory_203B460->teamItems[index];
+    item = &gTeamInventoryRef->teamItems[index];
     if (item->flags & ITEM_FLAG_EXISTS)
     {
         if(item->id == ITEM_POKE)

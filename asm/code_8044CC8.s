@@ -24,7 +24,7 @@ sub_8044CC8:
 	adds r0, r1
 	b _08044D34
 	.align 2, 0
-_08044CE8: .4byte gTeamInventory_203B460
+_08044CE8: .4byte gTeamInventoryRef
 _08044CEC:
 	adds r0, r1, 0
 	cmp r0, 0x80
@@ -97,7 +97,7 @@ sub_8044D40:
 	bl FillInventoryGaps
 	b _08044D88
 	.align 2, 0
-_08044D70: .4byte gTeamInventory_203B460
+_08044D70: .4byte gTeamInventoryRef
 _08044D74:
 	lsls r0, r1, 24
 	lsrs r0, 24

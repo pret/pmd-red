@@ -128,12 +128,12 @@ void sub_8022E78(void)
   {
       case 3:
         gUnknown_203B294->itemIndex = sub_801A8AC();
-        gUnknown_203B294->item = gTeamInventory_203B460->teamItems[gUnknown_203B294->itemIndex];
+        gUnknown_203B294->item = gTeamInventoryRef->teamItems[gUnknown_203B294->itemIndex];
         sub_8022924(2);
         break;
       case 4:
         gUnknown_203B294->itemIndex = sub_801A8AC();
-        gUnknown_203B294->item = gTeamInventory_203B460->teamItems[gUnknown_203B294->itemIndex];
+        gUnknown_203B294->item = gTeamInventoryRef->teamItems[gUnknown_203B294->itemIndex];
         sub_8099690(0);
         sub_8022924(4);
         break;
@@ -170,7 +170,7 @@ void sub_8022EF4(void)
         gUnknown_203B294->unk40 = 1;
         boostAmount = gUnknown_203B294->gummi.boostAmount;
 
-        sub_8090E14(gUnknown_202DE58, &gTeamInventory_203B460->teamItems[gUnknown_203B294->itemIndex], NULL);
+        sub_8090E14(gUnknown_202DE58, &gTeamInventoryRef->teamItems[gUnknown_203B294->itemIndex], NULL);
         
         if(boostAmount != -1)
             ShiftItemsDownFrom(gUnknown_203B294->itemIndex);

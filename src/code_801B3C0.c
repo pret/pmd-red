@@ -401,14 +401,14 @@ void sub_801B874(void)
                 {
                     if(IsNotMoneyOrUsedTMItem(gUnknown_203B234->unk10.id))
                     {
-                        if((gTeamInventory_203B460->teamStorage[gUnknown_203B234->unk10.id] + gUnknown_203B234->unkC) > 0x3e7)
+                        if((gTeamInventoryRef->teamStorage[gUnknown_203B234->unk10.id] + gUnknown_203B234->unkC) > 0x3e7)
                         {
     store:
                             gUnknown_203B234->fallbackState = 6;
                         }
                         else
                         {
-                            gTeamInventory_203B460->teamStorage[gUnknown_203B234->unk10.id] += gUnknown_203B234->unkC;
+                            gTeamInventoryRef->teamStorage[gUnknown_203B234->unk10.id] += gUnknown_203B234->unkC;
                             PlaySound(0xCB);
                             gUnknown_203B234->fallbackState = 5;
                         }
@@ -612,13 +612,13 @@ void sub_801BCCC(void)
             break;
         case 3:
             gUnknown_203B234->unk24 = sub_801A8AC();
-            gUnknown_203B234->unk20 = gTeamInventory_203B460->teamItems[gUnknown_203B234->unk24];
+            gUnknown_203B234->unk20 = gTeamInventoryRef->teamItems[gUnknown_203B234->unk24];
             sub_8090E14(gUnknown_202DEA8, &gUnknown_203B234->unk20, &gUnknown_203B234->unk14);
             sub_801B748(0xA);
             break;
         case 4:
             gUnknown_203B234->unk24 = sub_801A8AC();
-            gUnknown_203B234->unk20 = gTeamInventory_203B460->teamItems[gUnknown_203B234->unk24];
+            gUnknown_203B234->unk20 = gTeamInventoryRef->teamItems[gUnknown_203B234->unk24];
             sub_8090E14(gUnknown_202DEA8, &gUnknown_203B234->unk20, &gUnknown_203B234->unk14);
             sub_8099690(0);
             sub_801B748(0xB);

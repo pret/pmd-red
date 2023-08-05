@@ -596,10 +596,10 @@ bool8 RecycleMoveAction(struct Entity * pokemon, struct Entity * target)
     for(index = 0; index < INVENTORY_SIZE; index++)
     {
 #ifdef NONMATCHING
-    item = &gTeamInventory_203B460->teamItems[index];
+    item = &gTeamInventoryRef->teamItems[index];
 #else
         register size_t offset asm("r1") = offsetof(struct TeamInventory, teamItems[index]);
-        struct Item* p = gTeamInventory_203B460->teamItems;
+        struct Item* p = gTeamInventoryRef->teamItems;
         size_t addr = offset + (size_t)p;
         item = (struct Item*)addr;
 #endif
@@ -832,11 +832,11 @@ bool8 CleanseOrbAction(struct Entity * pokemon, struct Entity * target)
     if (!entityInfo->isNotTeamMember) {
         for(index = 0; index < INVENTORY_SIZE; index++){
             // WTF why does this work...
-            UNUSED struct Item* current = &gTeamInventory_203B460->teamItems[index];
-            flag = index[gTeamInventory_203B460->teamItems].flags;
+            UNUSED struct Item* current = &gTeamInventoryRef->teamItems[index];
+            flag = index[gTeamInventoryRef->teamItems].flags;
             if (((flag & ITEM_FLAG_EXISTS) != 0) && ((flag & ITEM_FLAG_IN_SHOP) == 0))
                 if((flag & ITEM_FLAG_STICKY) != 0) {
-                    gTeamInventory_203B460->teamItems[index].flags = flag & 0xf7;
+                    gTeamInventoryRef->teamItems[index].flags = flag & 0xf7;
                     isItemCleaned = TRUE;
                 }
         }

@@ -2732,7 +2732,7 @@ _080441A4:
 	.align 2, 0
 _080441AC: .4byte gDungeon
 _080441B0: .4byte 0x00000644
-_080441B4: .4byte gTeamInventory_203B460
+_080441B4: .4byte gTeamInventoryRef
 _080441B8: .4byte gRecruitedPokemonRef
 	thumb_func_end sub_8044124
 

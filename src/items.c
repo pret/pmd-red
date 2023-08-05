@@ -35,8 +35,8 @@ extern u8 gInvalidItemIDs[0x10];
 
 EWRAM_DATA struct OpenedFile *gItemParametersFile = {0};
 EWRAM_DATA struct ItemDataEntry *gItemParametersData = {0};
-EWRAM_DATA struct TeamInventory gUnknown_20389A8 = {0};
-EWRAM_DATA_2 struct TeamInventory *gTeamInventory_203B460 = {0};
+EWRAM_DATA struct TeamInventory gTeamInventory = {0};
+EWRAM_DATA_2 struct TeamInventory *gTeamInventoryRef = {0};
 
 extern s32 sub_8090FEC(s32 a1, u8* a2, u8 a3);
 extern void sub_80073B8(u32);
@@ -50,14 +50,14 @@ bool8 AddKecleonWareItem(u8);
 
 void LoadItemParameters(void)
 {
-  gTeamInventory_203B460 = &gUnknown_20389A8;
+  gTeamInventoryRef = &gTeamInventory;
   gItemParametersFile = OpenFileAndGetFileDataPtr(gItemParaFileName,&gSystemFileArchive);
   gItemParametersData = (struct ItemDataEntry *) gItemParametersFile->data;
 }
 
 struct TeamInventory *GetMoneyItemsInfo(void)
 {
-    return &gUnknown_20389A8;
+    return &gTeamInventory;
 }
 
 void InitializeMoneyItems(void)
@@ -66,20 +66,20 @@ void InitializeMoneyItems(void)
 
   for(i = 0; i < INVENTORY_SIZE; i++)
   {
-    gTeamInventory_203B460->teamItems[i].flags = 0;
+    gTeamInventoryRef->teamItems[i].flags = 0;
   }
 
   for(i = 0; i < STORAGE_SIZE; i++)
   {
-    gTeamInventory_203B460->teamStorage[i] = 0;
+    gTeamInventoryRef->teamStorage[i] = 0;
   }
 
   for(i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++)
   {
     InitKecleonShopItem(i);
   }
-  gTeamInventory_203B460->teamMoney = 0;
-  gTeamInventory_203B460->teamSavings = 0;
+  gTeamInventoryRef->teamMoney = 0;
+  gTeamInventoryRef->teamSavings = 0;
 }
 
 s32 GetNumberOfFilledInventorySlots(void)
@@ -90,7 +90,7 @@ s32 GetNumberOfFilledInventorySlots(void)
   count = 0;
   for(i = 0; i < INVENTORY_SIZE; i++)
   {
-    if ((gTeamInventory_203B460->teamItems[i].flags & ITEM_FLAG_EXISTS) != 0) {
+    if ((gTeamInventoryRef->teamItems[i].flags & ITEM_FLAG_EXISTS) != 0) {
       count++;
     }
   }
@@ -465,7 +465,7 @@ void FillInventoryGaps()
 
   do {
     while (slot_checking < INVENTORY_SIZE) {
-      if (slot_checking[gTeamInventory_203B460->teamItems].flags & ITEM_FLAG_EXISTS) {
+      if (slot_checking[gTeamInventoryRef->teamItems].flags & ITEM_FLAG_EXISTS) {
         break;
       }
       // find next empty slot
@@ -478,7 +478,7 @@ void FillInventoryGaps()
 
     if (slot_checking > last_filled) {
       // shift it down
-      gTeamInventory_203B460->teamItems[last_filled] = gTeamInventory_203B460->teamItems[slot_checking];
+      gTeamInventoryRef->teamItems[last_filled] = gTeamInventoryRef->teamItems[slot_checking];
     }
     slot_checking++;
     last_filled++;
@@ -488,12 +488,12 @@ void FillInventoryGaps()
   for (; last_filled < INVENTORY_SIZE; last_filled++) {
       struct Item *slot;
 #ifdef NONMATCHING
-      slot = &gTeamInventory_203B460->teamItems[last_filled];
+      slot = &gTeamInventoryRef->teamItems[last_filled];
 #else
       size_t offs = last_filled << 2;
       size_t _slot = offs;
-      _slot += (size_t)gTeamInventory_203B460->teamItems;
-      slot = (struct Item*)_slot; // &gTeamInventory_203B460->teamItems[end];
+      _slot += (size_t)gTeamInventoryRef->teamItems;
+      slot = (struct Item*)_slot; // &gTeamInventoryRef->teamItems[end];
 #endif
       slot->id = ITEM_NOTHING;
       slot->quantity = 0;
@@ -505,7 +505,7 @@ s32 FindItemInInventory(u8 id)
 {
   s32 i;
   for (i = 0; i < INVENTORY_SIZE; i++) {
-    if ((gTeamInventory_203B460->teamItems[i].flags & ITEM_FLAG_EXISTS) && (gTeamInventory_203B460->teamItems[i].id == id)) {
+    if ((gTeamInventoryRef->teamItems[i].flags & ITEM_FLAG_EXISTS) && (gTeamInventoryRef->teamItems[i].id == id)) {
       return i;
     }
   }
@@ -518,7 +518,7 @@ s32 GetItemCountInInventory(u8 _id)
   s32 count = 0;
   s32 i;
   for (i = 0; i < INVENTORY_SIZE; i++) {
-    if ((gTeamInventory_203B460->teamItems[i].unk0 & 1) && (gTeamInventory_203B460->teamItems[i].id == _id)) {
+    if ((gTeamInventoryRef->teamItems[i].unk0 & 1) && (gTeamInventoryRef->teamItems[i].id == _id)) {
       count++;
     }
   }
@@ -527,7 +527,7 @@ s32 GetItemCountInInventory(u8 _id)
   // have to do hacky stuff to fix initialization order of r6 and r2
   u32 id = _id;
   s32 count = 0;
-  struct Item *slot = gTeamInventory_203B460->teamItems;
+  struct Item *slot = gTeamInventoryRef->teamItems;
   s32 one = 1;
   s32 i = 19;
 
@@ -566,16 +566,16 @@ void ShiftItemsDownFrom(s32 start)
 {
   s32 i, j;
   for (i = start, j = start + 1; i < INVENTORY_SIZE - 1; i++, j++) {
-    gTeamInventory_203B460->teamItems[i] = gTeamInventory_203B460->teamItems[j];
+    gTeamInventoryRef->teamItems[i] = gTeamInventoryRef->teamItems[j];
   }
-  gTeamInventory_203B460->teamItems[INVENTORY_SIZE - 1].id = ITEM_NOTHING;
-  gTeamInventory_203B460->teamItems[INVENTORY_SIZE - 1].flags = 0;
+  gTeamInventoryRef->teamItems[INVENTORY_SIZE - 1].id = ITEM_NOTHING;
+  gTeamInventoryRef->teamItems[INVENTORY_SIZE - 1].flags = 0;
 }
 
 void ClearItemSlotAt(u32 index)
 {
-  gTeamInventory_203B460->teamItems[index].id = ITEM_NOTHING;
-  gTeamInventory_203B460->teamItems[index].flags = 0;
+  gTeamInventoryRef->teamItems[index].id = ITEM_NOTHING;
+  gTeamInventoryRef->teamItems[index].flags = 0;
 }
 
 bool8 sub_809124C(u8 id, u8 param_3)
@@ -599,9 +599,9 @@ bool8 AddItemToInventory(const struct Item* slot)
 
   // try to add item to inventory, return 1 if failed
   for (i = 0; i < INVENTORY_SIZE; i++) {
-    UNUSED struct Item* current = &gTeamInventory_203B460->teamItems[i];
-    if (!(i[gTeamInventory_203B460->teamItems].flags & ITEM_FLAG_EXISTS)) {
-      gTeamInventory_203B460->teamItems[i] = *slot;
+    UNUSED struct Item* current = &gTeamInventoryRef->teamItems[i];
+    if (!(i[gTeamInventoryRef->teamItems].flags & ITEM_FLAG_EXISTS)) {
+      gTeamInventoryRef->teamItems[i] = *slot;
       return FALSE;
     }
   }
@@ -613,10 +613,10 @@ void ConvertMoneyItemToMoney()
   s32 i = 0;
 
   do {
-    UNUSED struct TeamInventory * _gTeamInventory_203B460 = gTeamInventory_203B460;
+    UNUSED struct TeamInventory * _gTeamInventoryRef = gTeamInventoryRef;
     UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[i]);
 
-    struct Item* current_slot = &gTeamInventory_203B460->teamItems[i];
+    struct Item* current_slot = &gTeamInventoryRef->teamItems[i];
     if ((current_slot->flags & ITEM_FLAG_EXISTS) && (current_slot->id == ITEM_POKE)) {
       u32 result;
 
@@ -634,27 +634,27 @@ void ConvertMoneyItemToMoney()
     s32 lowest_index = -1;
     UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[i]);
 
-    bool8 item_occupied = i[gTeamInventory_203B460->teamItems].flags & ITEM_FLAG_EXISTS;
+    bool8 item_occupied = i[gTeamInventoryRef->teamItems].flags & ITEM_FLAG_EXISTS;
     s32 next = i + 1;
 
     if (item_occupied) {
-      s32 lowest_order = GetItemOrder(gTeamInventory_203B460->teamItems[i].id);
+      s32 lowest_order = GetItemOrder(gTeamInventoryRef->teamItems[i].id);
       s32 j;
 
       // find next lowest
       for (j = next; j < INVENTORY_SIZE; j++) {
         UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[j]);
-        if ((j[gTeamInventory_203B460->teamItems].flags & ITEM_FLAG_EXISTS) && (lowest_order > GetItemOrder(gTeamInventory_203B460->teamItems[j].id))) {
+        if ((j[gTeamInventoryRef->teamItems].flags & ITEM_FLAG_EXISTS) && (lowest_order > GetItemOrder(gTeamInventoryRef->teamItems[j].id))) {
           lowest_index = j;
-          lowest_order = GetItemOrder(gTeamInventory_203B460->teamItems[j].id);
+          lowest_order = GetItemOrder(gTeamInventoryRef->teamItems[j].id);
         }
       }
 
       if (lowest_index >= 0) {
         // swap the slots
-        struct Item current = gTeamInventory_203B460->teamItems[i];
-        gTeamInventory_203B460->teamItems[i] = gTeamInventory_203B460->teamItems[lowest_index];
-        gTeamInventory_203B460->teamItems[lowest_index] = current;
+        struct Item current = gTeamInventoryRef->teamItems[i];
+        gTeamInventoryRef->teamItems[i] = gTeamInventoryRef->teamItems[lowest_index];
+        gTeamInventoryRef->teamItems[lowest_index] = current;
       }
     }
   } while (++i < INVENTORY_SIZE);
@@ -664,17 +664,17 @@ void ConvertMoneyItemToMoney()
 void AddToTeamMoney(s32 amount)
 {
   s32 clamped_money;
-  gTeamInventory_203B460->teamMoney += amount;
+  gTeamInventoryRef->teamMoney += amount;
 
   // clamp money
   clamped_money = MAX_TEAM_MONEY;
-  if (gTeamInventory_203B460->teamMoney <= MAX_TEAM_MONEY) {
-    if (gTeamInventory_203B460->teamMoney >= 0) {
+  if (gTeamInventoryRef->teamMoney <= MAX_TEAM_MONEY) {
+    if (gTeamInventoryRef->teamMoney >= 0) {
       return;
     }
     clamped_money = 0;
   }
-  gTeamInventory_203B460->teamMoney = clamped_money;
+  gTeamInventoryRef->teamMoney = clamped_money;
 }
 
 u16 GetItemMoveID(u8 index)
@@ -932,7 +932,7 @@ bool8 HasGummiItem()
   s32 i;
   for (i = 0; i < INVENTORY_SIZE; i++) {
     UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[i]);
-    if ((i[gTeamInventory_203B460->teamItems].flags & ITEM_FLAG_EXISTS) && IsGummiItem(i[gTeamInventory_203B460->teamItems].id)) {
+    if ((i[gTeamInventoryRef->teamItems].flags & ITEM_FLAG_EXISTS) && IsGummiItem(i[gTeamInventoryRef->teamItems].id)) {
       return TRUE;
     }
   }
@@ -942,14 +942,14 @@ bool8 HasGummiItem()
 void MoveToStorage(struct Item* slot)
 {
   if (IsThrowableItem(slot->id)) {
-    gTeamInventory_203B460->teamStorage[slot->id] += slot->quantity;
+    gTeamInventoryRef->teamStorage[slot->id] += slot->quantity;
   }
   else {
-    gTeamInventory_203B460->teamStorage[slot->id]++;
+    gTeamInventoryRef->teamStorage[slot->id]++;
   }
 
-  if (gTeamInventory_203B460->teamStorage[slot->id] > 999) {
-    gTeamInventory_203B460->teamStorage[slot->id] = 999;
+  if (gTeamInventoryRef->teamStorage[slot->id] > 999) {
+    gTeamInventoryRef->teamStorage[slot->id] = 999;
   }
 }
 
@@ -958,7 +958,7 @@ s32 CountKecleonShopItems(void)
   s32 i;
   s32 counter = 0;
   for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
-    if (gTeamInventory_203B460->kecleonShopItems[i].id) {
+    if (gTeamInventoryRef->kecleonShopItems[i].id) {
       counter++;
     }
   }
@@ -969,14 +969,14 @@ void InitKecleonShopItem(u8 index)
 {
   struct BulkItem* shopItem;
 
-  shopItem = &gTeamInventory_203B460->kecleonShopItems[index];
+  shopItem = &gTeamInventoryRef->kecleonShopItems[index];
   shopItem->id = ITEM_NOTHING;
   shopItem->quantity = 0;
 }
 
 struct BulkItem* GetKecleonShopItem(u8 i)
 {
-  return &gTeamInventory_203B460->kecleonShopItems[i];
+  return &gTeamInventoryRef->kecleonShopItems[i];
 }
 
 void FillKecleonShopGaps(void)
@@ -986,7 +986,7 @@ void FillKecleonShopGaps(void)
 
   do {
     while (slot_checking < MAX_KECLEON_ITEM_SHOP_ITEMS) {
-      if (gTeamInventory_203B460->kecleonShopItems[slot_checking].id) {
+      if (gTeamInventoryRef->kecleonShopItems[slot_checking].id) {
         break;
       }
       // find next empty slot
@@ -999,7 +999,7 @@ void FillKecleonShopGaps(void)
 
     if (slot_checking > last_filled) {
       // shift it down
-      gTeamInventory_203B460->kecleonShopItems[last_filled] = gTeamInventory_203B460->kecleonShopItems[slot_checking];
+      gTeamInventoryRef->kecleonShopItems[last_filled] = gTeamInventoryRef->kecleonShopItems[slot_checking];
     }
     slot_checking++;
     last_filled++;
@@ -1017,12 +1017,12 @@ void SortKecleonShopInventory(void) {
   for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS - 1; i++) {
     s32 j;
     for (j = i + 1; j < MAX_KECLEON_ITEM_SHOP_ITEMS; j++) {
-      s32 order_i = GetItemOrder(gTeamInventory_203B460->kecleonShopItems[i].id);
-      s32 order_j = GetItemOrder(gTeamInventory_203B460->kecleonShopItems[j].id);
-      if (order_i > order_j || (order_i == order_j && gTeamInventory_203B460->kecleonShopItems[i].quantity < gTeamInventory_203B460->kecleonShopItems[j].quantity)) {
-        struct BulkItem str_i = gTeamInventory_203B460->kecleonShopItems[i];
-        gTeamInventory_203B460->kecleonShopItems[i] = gTeamInventory_203B460->kecleonShopItems[j];
-        gTeamInventory_203B460->kecleonShopItems[j] = str_i;
+      s32 order_i = GetItemOrder(gTeamInventoryRef->kecleonShopItems[i].id);
+      s32 order_j = GetItemOrder(gTeamInventoryRef->kecleonShopItems[j].id);
+      if (order_i > order_j || (order_i == order_j && gTeamInventoryRef->kecleonShopItems[i].quantity < gTeamInventoryRef->kecleonShopItems[j].quantity)) {
+        struct BulkItem str_i = gTeamInventoryRef->kecleonShopItems[i];
+        gTeamInventoryRef->kecleonShopItems[i] = gTeamInventoryRef->kecleonShopItems[j];
+        gTeamInventoryRef->kecleonShopItems[j] = str_i;
       }
     }
   }
@@ -1051,8 +1051,8 @@ bool8 AddKecleonShopItem(u8 itemIndex) {
 
   xxx_init_helditem_8090B08(&held, itemIndex);  // initialize
   for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
-    if (!gTeamInventory_203B460->kecleonShopItems[i].id) {
-      gTeamInventory_203B460->kecleonShopItems[i] = held;
+    if (!gTeamInventoryRef->kecleonShopItems[i].id) {
+      gTeamInventoryRef->kecleonShopItems[i] = held;
       return FALSE;
     }
   }
@@ -1063,7 +1063,7 @@ u32 CountKecleonWareItems(void) {
   s32 i;
   u32 count = 0;
   for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
-    if (gTeamInventory_203B460->kecleonWareItems[i].id) {
+    if (gTeamInventoryRef->kecleonWareItems[i].id) {
       count++;
     }
   }
@@ -1071,13 +1071,13 @@ u32 CountKecleonWareItems(void) {
 }
 
 void InitKecleonWareItem(u8 index) {
-  struct BulkItem* wareItem = &gTeamInventory_203B460->kecleonWareItems[index];
+  struct BulkItem* wareItem = &gTeamInventoryRef->kecleonWareItems[index];
   wareItem->id = ITEM_NOTHING;
   wareItem->quantity = 0;
 }
 
 struct BulkItem* GetKecleonWareItem(u8 index) {
-    return &gTeamInventory_203B460->kecleonWareItems[index];
+    return &gTeamInventoryRef->kecleonWareItems[index];
 }
 
 void FillKecleonWareGaps(void) {
@@ -1086,7 +1086,7 @@ void FillKecleonWareGaps(void) {
 
   do {
     while (slot_checking < MAX_KECLEON_WARE_SHOP_ITEMS) {
-      if (gTeamInventory_203B460->kecleonWareItems[slot_checking].id != ITEM_NOTHING) {
+      if (gTeamInventoryRef->kecleonWareItems[slot_checking].id != ITEM_NOTHING) {
         break;
       }
       slot_checking++;
@@ -1098,7 +1098,7 @@ void FillKecleonWareGaps(void) {
 
     if (slot_checking > last_filled) {
       // shift it down
-      gTeamInventory_203B460->kecleonWareItems[last_filled] = gTeamInventory_203B460->kecleonWareItems[slot_checking];
+      gTeamInventoryRef->kecleonWareItems[last_filled] = gTeamInventoryRef->kecleonWareItems[slot_checking];
     }
     slot_checking++;
     last_filled++;
@@ -1116,12 +1116,12 @@ void SortKecleonWareInventory(void) {
   for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS - 1; i++) {
     s32 j;
     for (j = i + 1; j < MAX_KECLEON_WARE_SHOP_ITEMS; j++) {
-      s32 order_i = GetItemOrder(gTeamInventory_203B460->kecleonWareItems[i].id);
-      s32 order_j = GetItemOrder(gTeamInventory_203B460->kecleonWareItems[j].id);
-      if (order_i > order_j || (order_i == order_j && gTeamInventory_203B460->kecleonWareItems[i].quantity < gTeamInventory_203B460->kecleonWareItems[j].quantity)) {
-        struct BulkItem str_i = gTeamInventory_203B460->kecleonWareItems[i];
-        gTeamInventory_203B460->kecleonWareItems[i] = gTeamInventory_203B460->kecleonWareItems[j];
-        gTeamInventory_203B460->kecleonWareItems[j] = str_i;
+      s32 order_i = GetItemOrder(gTeamInventoryRef->kecleonWareItems[i].id);
+      s32 order_j = GetItemOrder(gTeamInventoryRef->kecleonWareItems[j].id);
+      if (order_i > order_j || (order_i == order_j && gTeamInventoryRef->kecleonWareItems[i].quantity < gTeamInventoryRef->kecleonWareItems[j].quantity)) {
+        struct BulkItem str_i = gTeamInventoryRef->kecleonWareItems[i];
+        gTeamInventoryRef->kecleonWareItems[i] = gTeamInventoryRef->kecleonWareItems[j];
+        gTeamInventoryRef->kecleonWareItems[j] = str_i;
       }
     }
   }
@@ -1149,8 +1149,8 @@ bool8 AddKecleonWareItem(u8 itemIndex) {
 
   xxx_init_helditem_8090B08(&held, itemIndex);  // initialize
   for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
-    if (!gTeamInventory_203B460->kecleonWareItems[i].id) {
-      gTeamInventory_203B460->kecleonWareItems[i] = held;
+    if (!gTeamInventoryRef->kecleonWareItems[i].id) {
+      gTeamInventoryRef->kecleonWareItems[i] = held;
       return FALSE;
     }
   }
@@ -1164,19 +1164,19 @@ s32 SaveTeamInventory(u8* unk0, u32 size)
 
   xxx_init_struct_8094924_save_809486C(&unk, unk0, size);
   for (i = 0; i < INVENTORY_SIZE; i++) {
-    SaveItemSlot(&unk, &gTeamInventory_203B460->teamItems[i]);
+    SaveItemSlot(&unk, &gTeamInventoryRef->teamItems[i]);
   }
   for (i = 0; i < STORAGE_SIZE; i++) {
-    SaveIntegerBits(&unk, &gTeamInventory_203B460->teamStorage[i], 10);
+    SaveIntegerBits(&unk, &gTeamInventoryRef->teamStorage[i], 10);
   }
   for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
-    SaveHeldItem(&unk, &gTeamInventory_203B460->kecleonShopItems[i]);
+    SaveHeldItem(&unk, &gTeamInventoryRef->kecleonShopItems[i]);
   }
   for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
-    SaveHeldItem(&unk, &gTeamInventory_203B460->kecleonWareItems[i]);
+    SaveHeldItem(&unk, &gTeamInventoryRef->kecleonWareItems[i]);
   }
-  SaveIntegerBits(&unk, &gTeamInventory_203B460->teamMoney, 24);
-  SaveIntegerBits(&unk, &gTeamInventory_203B460->teamSavings, 24);
+  SaveIntegerBits(&unk, &gTeamInventoryRef->teamMoney, 24);
+  SaveIntegerBits(&unk, &gTeamInventoryRef->teamSavings, 24);
   nullsub_102(&unk);
   return unk.unk8;
 }
@@ -1188,19 +1188,19 @@ s32 RestoreTeamInventory(u8 *unk0, u32 size)
 
   xxx_init_struct_8094924_restore_809485C(&unk, unk0, size);
   for (i = 0; i < INVENTORY_SIZE; i++) {
-    RestoreItemSlot(&unk, &gTeamInventory_203B460->teamItems[i]);
+    RestoreItemSlot(&unk, &gTeamInventoryRef->teamItems[i]);
   }
   for (i = 0; i < STORAGE_SIZE; i++) {
-    RestoreIntegerBits(&unk, &gTeamInventory_203B460->teamStorage[i], 10);
+    RestoreIntegerBits(&unk, &gTeamInventoryRef->teamStorage[i], 10);
   }
   for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
-    RestoreHeldItem(&unk, &gTeamInventory_203B460->kecleonShopItems[i]);
+    RestoreHeldItem(&unk, &gTeamInventoryRef->kecleonShopItems[i]);
   }
   for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
-    RestoreHeldItem(&unk, &gTeamInventory_203B460->kecleonWareItems[i]);
+    RestoreHeldItem(&unk, &gTeamInventoryRef->kecleonWareItems[i]);
   }
-  RestoreIntegerBits(&unk, &gTeamInventory_203B460->teamMoney, 24);
-  RestoreIntegerBits(&unk, &gTeamInventory_203B460->teamSavings, 24);
+  RestoreIntegerBits(&unk, &gTeamInventoryRef->teamMoney, 24);
+  RestoreIntegerBits(&unk, &gTeamInventoryRef->teamSavings, 24);
   nullsub_102(&unk);
   return unk.unk8;
 }
@@ -1467,7 +1467,7 @@ void ClearAllItems_8091FB4() {
   s32 i;
 
   for (i = 0; i < INVENTORY_SIZE; i++) {
-    struct Item* slot = &gTeamInventory_203B460->teamItems[i];
+    struct Item* slot = &gTeamInventoryRef->teamItems[i];
     if (slot->flags & ITEM_FLAG_EXISTS) {
       slot->flags &= 0xf7;
       if (slot->id == ITEM_POKE) {

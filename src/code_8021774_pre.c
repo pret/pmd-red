@@ -75,7 +75,7 @@ u32 sub_8021274(u8 param_1)
             PlayMenuSoundEffect(1);
             return 2;
         case INPUT_A_BUTTON:
-            if ((gUnknown_203B280->unk3C == 2)  && (GetFriendAreaPrice(sub_802132C()) > gTeamInventory_203B460->teamMoney)) 
+            if ((gUnknown_203B280->unk3C == 2)  && (GetFriendAreaPrice(sub_802132C()) > gTeamInventoryRef->teamMoney)) 
             {
                 PlayMenuSoundEffect(2);
             }
