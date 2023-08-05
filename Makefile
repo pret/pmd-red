@@ -125,7 +125,7 @@ $(C_BUILDDIR)/agb_flash_mx.o: CC1FLAGS := -O -mthumb-interwork
 $(C_BUILDDIR)/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
 
 # Stack size in sub_801A9E0 is funky with an unused var
-$(C_BUILDDIR)/kecleon_items.o: CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
+$(C_BUILDDIR)/kecleon_bros.o: CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 
 
 #### Main Rules ####

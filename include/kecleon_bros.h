@@ -1,5 +1,5 @@
-#ifndef GUARD_KECLEON_ITEMS_H
-#define GUARD_KECLEON_ITEMS_H
+#ifndef GUARD_KECLEON_BROS_H
+#define GUARD_KECLEON_BROS_H
 
 #include "file_system.h"
 #include "item.h"
@@ -84,4 +84,4 @@ enum KecleonStoreStates
 // mode corresponds to the enum: KecleonShopMode
 u32 DisplayKeckleonDialogueSprite(u32 mode);
 
-#endif // GUARD_KECLEON_ITEMS_H
+#endif // GUARD_KECLEON_BROS_H

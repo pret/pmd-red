@@ -1,7 +1,7 @@
 #include "global.h"
 #include "code_800D090.h"
 #include "constants/input.h"
-#include "kecleon_items.h"
+#include "kecleon_bros.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
