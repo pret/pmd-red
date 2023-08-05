@@ -127,3 +127,77 @@ void sub_8006554(struct UnkTextStruct1 *a0, void *a1, u8 *a2, u16 *a3, u32 a4, c
 
     t1->unk46 = 0;
 }
+
+void sub_800677C(struct UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
+{
+    s32 iVar5;
+    s32 i;
+
+    iVar5 = a0->unk0 - 1;
+    
+    if (a1 > 28)
+        return;
+    // Cannot combine these ifs for matching
+    if (a1 < 0)
+        return;
+    
+    switch (a0->unkC) {
+        case 0:
+        case 1:
+        case 2:
+        case 6:
+            break;
+        case 3:
+            (a2 + a1 * 0x20)[iVar5] = 0xF2D8;
+            if (a3 != 0)
+                (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF293;
+            else
+                (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
+            iVar5++;
+            for (i = 0; i < a0->unk4; i++) {
+                (a2 + a1 * 0x20)[iVar5] = 0xF2D9;
+                (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
+                iVar5++;
+            }
+
+            (a2 + a1 * 0x20)[iVar5] = 0xF6D8;
+            if (a3 != 0)
+                (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF693;
+            else
+                (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
+            break;
+        case 4:
+            (a2 + a1 * 0x20)[iVar5] = 0xF2E8;
+            (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
+            iVar5++;
+            for (i = 0; i < a0->unk4; i++) {
+                (a2 + a1 * 0x20)[iVar5] = 0xF2E9;
+                (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
+                iVar5++;
+            }
+
+            (a2 + a1 * 0x20)[iVar5] = 0xF6E8;
+            (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
+            break;
+        case 5:
+            (a2 + a1 * 0x20)[iVar5] = 0xF2DC;
+            iVar5++;
+            for (i = 0; i < a0->unk4; i++) {
+                (a2 + a1 * 0x20)[iVar5] = 0xF2DD;
+                iVar5++;
+            }
+
+            (a2 + a1 * 0x20)[iVar5] = 0xF6DC;
+            break;
+        case 7:
+           (a2 + a1 * 0x20)[iVar5] = 0xF293;
+            iVar5++;
+            for (i = 0; i < a0->unk4; i++) {
+                (a2 + a1 * 0x20)[iVar5] = 0xF297;
+                iVar5++;
+            }
+
+            (a2 + a1 * 0x20)[iVar5] = 0xF693;
+            break;
+    }
+}
