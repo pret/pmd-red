@@ -5573,7 +5573,7 @@ _0809BC26:
 	lsrs r4, 31
 	bl sub_809B294
 	adds r0, r4, 0
-	bl KangaskhanStorage_New
+	bl CreateKangaskhanStorage
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809BC5C
@@ -5658,7 +5658,7 @@ _0809BCE8:
 	beq _0809BCF0
 	movs r0, 0x3
 _0809BCF0:
-	bl KecleonBros_New
+	bl CreateKecleonBros
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809BD10

@@ -113,7 +113,7 @@ void Kecleon_SortItems(void);
 void KecleonBros_SetState(u32);
 void UpdateKecleonStoreDialogue(void);
 
-u32 KecleonBros_New(u32 mode)
+u32 CreateKecleonBros(u32 mode)
 {
     char *monName;
     struct OpenedFile *faceFile;
@@ -173,7 +173,7 @@ u32 KecleonBros_New(u32 mode)
     return 1;
 }
 
-u32 KecleonBros_Callback(void)
+u32 KecleonBrosCallback(void)
 {
     switch (gKecleonBrosWork->currState) {
         case KECLEON_STORE_INIT:
@@ -218,7 +218,7 @@ u32 KecleonBros_Callback(void)
     return 0;
 }
 
-void KecleonBros_Delete(void)
+void DeleteKecleonBros(void)
 {
     if (gKecleonBrosWork != NULL) {
         CloseFile(gKecleonBrosWork->faceFile);

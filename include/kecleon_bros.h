@@ -82,10 +82,10 @@ enum KecleonStoreStates
     KECLEON_STORE_CANT_SELL_ITEM = 13,
 };
 
-u32 KecleonBros_Callback(void);
-void KecleonBros_Delete(void);
 // mode corresponds to the enum: KecleonBrosMode
-u32 KecleonBros_New(u32 mode);
+u32 CreateKecleonBros(u32 mode);
+void DeleteKecleonBros(void);
+u32 KecleonBrosCallback(void);
 
 bool32 sub_801A5D8(u32, s32, struct UnkTextStruct2_sub *, u32);
 u32 sub_801A6E8(bool8);

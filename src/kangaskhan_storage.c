@@ -105,7 +105,7 @@ void sub_8018AE4(void);
 void AdvanceToKangaskhanStorageFallbackState(void);
 void UpdateKangaskhanStorageState(u32);
 
-u32 KangaskhanStorage_New(bool32 isAsleep)
+u32 CreateKangaskhanStorage(bool32 isAsleep)
 {
     char *monName;
     struct OpenedFile *faceFile;
@@ -139,7 +139,7 @@ u32 KangaskhanStorage_New(bool32 isAsleep)
     return 1;
 }
 
-u32 KangaskhanStorage_Callback(void)
+u32 KangaskhanStorageCallback(void)
 {
     switch (gKangaskhanStorageWork->currState) {
         case KANGASKHAN_STORAGE_INIT:
@@ -190,7 +190,7 @@ u32 KangaskhanStorage_Callback(void)
     return 0;
 }
 
-void KangaskhanStorage_Delete(void)
+void DeleteKangaskhanStorage(void)
 {
     if (gKangaskhanStorageWork != NULL) {
         CloseFile(gKangaskhanStorageWork->faceFile);

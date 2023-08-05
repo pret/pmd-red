@@ -81,7 +81,8 @@ enum KangaskhanStorageStates
     KANGASKHAN_STORAGE_IS_MONEY_USED_TM = 9,
 };
 
-u32 KangaskhanStorage_Callback(void);
-u32 KangaskhanStorage_New(bool32 isAsleep);
+u32 CreateKangaskhanStorage(bool32 isAsleep);
+void DeleteKangaskhanStorage(void);
+u32 KangaskhanStorageCallback(void);
 
 #endif
