@@ -10,8 +10,8 @@
 // size: 0xCC
 struct unkStruct_203B318
 {
-    u32 mode; // Corresponds to the enum: MakuhitaDojoMode
-    bool32 isAsleep;
+    /* 0x0 */ u32 mode; // Corresponds to the enum: MakuhitaDojoMode
+    /* 0x4 */ bool32 isAsleep;
     /* 0x8 */ s32 state;
     /* 0xC */ s32 fallbackState;
     s16 unk10;
