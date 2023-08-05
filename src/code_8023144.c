@@ -14,6 +14,7 @@
 #include "code_8023144.h"
 #include "code_800D090.h"
 #include "friend_area.h"
+#include "kecleon_bros.h"
 
 struct unkStruct_3001B5C
 {
@@ -70,9 +71,7 @@ void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 id, bool8 checkBoos
 
 extern u32 sub_801A6E8(bool8);
 extern void sub_8099690(u32);
-extern void sub_801A928(void);
 s32 GetNumAvailableIQSkills(u8 *iqSkillBuffer, s32 pokeIQ);
-extern u32 sub_801A8AC(void);
 
 void sub_8022D2C(void) {
     s32 index;

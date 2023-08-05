@@ -7,6 +7,7 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "team_inventory.h"
+#include "kecleon_bros.h"
 
 EWRAM_DATA_2 struct unkStruct_203B208 *gUnknown_203B208 = {0};
 EWRAM_DATA_2 struct unkStruct_203B20C *gUnknown_203B20C = {0};
@@ -58,26 +59,18 @@ extern void sub_8013C68(u32 *);
 extern void sub_80073E0(u32);
 extern s32 sub_80144A4(s32 *);
 extern u8 sub_801CF50(u32);
-extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_801C8C4(u32, u32, u32, u32);
 extern void sub_801CB5C(u32);
-extern void sub_801A8D0(u32);
 extern u32 sub_801CFE0(u8);
 extern void sub_801CF94(void);
-extern void sub_801AE84(void);
-extern s32 sub_801AED0(s32);
 extern u8 sub_801CF14(u32);
 extern u8 sub_801CF50(u32);
 extern u32 sub_801A6E8(bool8);
-extern u32 sub_801AEA8(void);
-extern u32 sub_801A8AC(void);
-extern void sub_801A928(void);
 extern void sub_80182E4(void);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_8013C68(u32 *);
 extern void sub_80073E0(u32);
-extern bool8 sub_801ADA0(u32);
 extern void sub_8099690(u32);
 extern u32 sub_8013BBC(u32 *);
 extern void sub_8017598(void);
@@ -97,7 +90,6 @@ extern void sub_80189C8(void);
 extern void sub_8018AE4(void);
 extern void sub_8017F28();
 extern void sub_8018100();
-extern void sub_801A9E0();
 extern void sub_801841C();
 extern void sub_801CCD8();
 extern void sub_80184D4();
@@ -105,19 +97,14 @@ extern void sub_8018280();
 void sub_80175FC(void);
 extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u16 *, u32, u32, struct OpenedFile **r5, u32);
-extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_801C8C4(u32, u32, u32, u32);
 extern void sub_801CB5C(u32);
-extern void sub_801A8D0(u32);
 extern void sub_801BB20(void);
-extern void sub_801A8D0(u32);
-extern void sub_801A9E0(void);
 extern void sub_801BC24(void);
 void sub_80176B8(void);
 void sub_80177F8(void);
 void sub_8017758(void);
 void sub_801A928(void);
-extern void sub_801AD34(u32);
 extern void sub_8013AA0(u32 *);
 extern void sub_8017598(void);
 extern void sub_801CCD8(void);

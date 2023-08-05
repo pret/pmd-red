@@ -9,6 +9,7 @@
 #include "team_inventory.h"
 #include "menu_input.h"
 #include "subStruct_203B240.h"
+#include "kecleon_bros.h"
 
 // based off of 203B240..
 struct unkStruct_203B230
@@ -73,11 +74,8 @@ extern u8 *gUnknown_80D4928[];
 
 extern s32 sub_80144A4(s32 *);
 extern u32 sub_801A6E8(bool8);
-extern u32 sub_801A8AC();
 extern void sub_8099690(u32);
-extern void sub_801A928(void);
 
-extern bool8 sub_801ADA0(s32);
 extern struct UnkTextStruct2 gUnknown_80DBA58;
 extern struct UnkTextStruct2 gUnknown_80DBA88;
 extern struct UnkTextStruct2 gUnknown_80DBA70;
@@ -94,10 +92,7 @@ extern void sub_8013F84(void);
 extern s32 sub_80913E0(struct Item *, u32, struct subStruct_203B240 **);
 extern void sub_80141B4(u8 *, u32, u32 *, u32);
 extern void sub_801BB20(void);
-extern void sub_801A8D0(u32);
-extern void sub_801A9E0(void);
 extern void sub_801BC24(void);
-extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_8014248(const char *, u32, u32, struct MenuItem *, u32, u32, u32, u32, u32);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 extern void sub_801B46C(u32);

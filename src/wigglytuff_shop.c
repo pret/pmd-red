@@ -10,6 +10,7 @@
 #include "menu_input.h"
 #include "friend_area.h"
 #include "wigglytuff_shop.h"
+#include "felicity_bank.h"
 
 extern struct UnkTextStruct2 gUnknown_80DC534;
 extern struct UnkTextStruct2 gUnknown_80DC564;
@@ -38,7 +39,6 @@ u8 sub_8021700(u32);
 void sub_8092578(u8 *buffer, u8 index, u8 r2);
 extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u16 *, u32, u32,u8 *r5, u32);
 extern void sub_80141B4(const u8 *, u32, u8*, u32);
-extern void DrawTeamMoneyBox(u32);
 extern void sub_80211AC(u32, u32);
 extern void sub_8021354(u32);
 extern void sub_8021494();

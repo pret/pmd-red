@@ -11,6 +11,7 @@
 #include "text_util.h"
 #include "team_inventory.h"
 #include "menu_input.h"
+#include "kecleon_bros.h"
 
 struct unkStruct_203B2B0
 {
@@ -193,9 +194,6 @@ void PlaySound(u32);
 void sub_8024CFC(void);
 void sub_8025254(void);
 void sub_8024D48(void);
-extern void sub_801A5D8(u32, u32, u32, u32);
-extern void sub_801A8D0(u32);
-extern void sub_801A9E0();
 extern void sub_801B3C0(struct Item *);
 extern void nullsub_104();
 void sub_8024DBC(void);
@@ -205,9 +203,7 @@ void sub_808F734(struct PokemonStruct *, s16);
 u32 sub_801602C(u32 r0, u8 *name);
 extern s32 sub_80144A4(s32 *);
 extern u32 sub_801A6E8(bool8);
-extern s32 sub_801A8AC(void);
 extern void sub_8099690(u32);
-extern void sub_801A928(void);
 extern void PlayMenuSoundEffect(u32);
 extern u32 sub_801B410(void);
 extern void sub_801B450(void);

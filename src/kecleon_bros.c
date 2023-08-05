@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_800D090.h"
 #include "constants/input.h"
+#include "felicity_bank.h"
 #include "kecleon_bros.h"
 #include "memory.h"
 #include "menu_input.h"
@@ -50,69 +51,62 @@ extern const u8 *gKecleonShopDialogue[4][23];
 extern const u8 gTeamToolboxA[];
 extern const u8 gTeamToolboxB[];
 
+// text.s
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void sub_8007B7C(s32, s32, s32, s32, s32);
 extern void sub_8008C54(u32);
-extern void sub_8012D60(struct MenuStruct *, const struct MenuItem *, u32 *, u16 *, s32, s32);
+// code_80130A8.s
 extern void sub_80141B4(const u8 *, u32, struct OpenedFile **, u32);
 extern void sub_8014248(const u8 *, u32, u32, const struct MenuItem *, void *, u32, u32, struct OpenedFile **, u32);
 extern s32 sub_80144A4(s32 *);
-extern void sub_8018D30(void);
-extern void sub_80194F8(void);
-extern void sub_80195C0(void);
-extern void sub_8019660(void);
-extern void sub_8019700(void);
-extern void sub_8019730(void);
-extern void sub_8019850(void);
-extern void sub_80198E8(void);
-extern void sub_8019944(void);
-extern void sub_80199CC(void);
-extern void sub_8019B08(void);
-extern void sub_8019BBC(void);
-extern void sub_8019C78(void);
-extern void sub_8019D30(void);
-extern void sub_8019D4C(void);
-extern void sub_8019D68(void);
-extern void sub_8019DAC(void);
-extern u32 sub_8019E40(u32);
-extern u32 sub_8019EDC(u8);
-extern u8 sub_8019FB0(void);
-extern void sub_8019FCC(u8);
-extern void sub_801A010(void);
-extern void sub_801A064(void);
-extern void sub_801A0D8(void);
-extern u32 sub_801A20C(u32);
-extern u32 sub_801A2A8(u8);
-extern u8 sub_801A37C(void);
-extern void sub_801A398(u8);
-extern void sub_801A3DC(void);
-extern void sub_801A430(void);
-extern void sub_801A4A4(void);
-extern u32 sub_801A5D8(u32, s32, struct UnkTextStruct2_sub *, u32);
-extern s32 sub_801A8AC(void);
-extern void sub_801A8D0(u8);
-extern void sub_801A928(void);
-extern void sub_801A998(void);
-extern void sub_801A9E0(void);
-extern void sub_801AD34(u32);
-extern bool8 sub_801ADA0(s32);
-extern void sub_801AE84(void);
-extern s32 sub_801AED0(s32);
-extern s32 sub_801AEA8(void);
+// code_801B3C0.c
 extern u32 sub_801B3C0(struct Item *);
 extern u32 sub_801B410(void);
 extern void sub_801B450(void);
-extern void sub_8090E14(u8 *, struct Item *, struct unkStruct_8090F58 *);
+// code_8098BDC.s
 extern void sub_8099690(u32);
 
-extern void DrawTeamMoneyBox(u32);
+// code_80118A4.c
 extern void PlayMenuSoundEffect(u32);
 extern void PlaySound(u16 songIndex);
+// code_80130A8.s
 extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 
+void sub_8018D30(void);
+void sub_80194F8(void);
+void sub_80195C0(void);
+void sub_8019660(void);
+void sub_8019700(void);
+void sub_8019730(void);
+void sub_8019850(void);
+void sub_80198E8(void);
+void sub_8019944(void);
+void sub_80199CC(void);
+void sub_8019B08(void);
+void sub_8019BBC(void);
+void sub_8019C78(void);
+void sub_8019D30(void);
+void sub_8019D4C(void);
+void sub_8019D68(void);
+void sub_8019DAC(void);
 void sub_8019E04(bool32);
+u32 sub_8019E40(u32);
+u32 sub_8019EDC(u8);
+u8 sub_8019FB0(void);
+void sub_8019FCC(u8);
+void sub_801A010(void);
+void sub_801A064(void);
+void sub_801A0D8(void);
+u32 sub_801A20C(u32);
+u32 sub_801A2A8(u8);
+u8 sub_801A37C(void);
+void sub_801A398(u8);
+void sub_801A3DC(void);
+void sub_801A430(void);
+void sub_801A4A4(void);
 u32 sub_801A6E8(bool8);
+void sub_801A998(void);
 s32 sub_801AE24(u32);
 
 u32 CountKecleonItems(void);
@@ -120,7 +114,7 @@ void Kecleon_SortItems(void);
 void UpdateKecleonStoreDialogue(void);
 void UpdateKecleonStoreState(u32);
 
-u32 DisplayKeckleonDialogueSprite(u32 mode)
+u32 KecleonShop_New(u32 mode)
 {
     char *monName;
     struct OpenedFile *faceFile;
@@ -1443,7 +1437,7 @@ u32 sub_801A6E8(bool8 param_1)
                         PlayMenuSoundEffect(0);
                     break;
                 case 3:
-                    if (sub_801AEA8() != 0 || sub_801ADA0(sub_801A8AC()) != FALSE)
+                    if (sub_801AEA8() != 0 || sub_801ADA0(sub_801A8AC()))
                         PlayMenuSoundEffect(0);
                     else
                         PlayMenuSoundEffect(2);
@@ -1470,7 +1464,7 @@ u32 sub_801A6E8(bool8 param_1)
                 goto _0801A87C;
 
             index = sub_801A8AC();
-            if (gUnknown_203B224->unk4[index] != 0 || sub_801ADA0(index) != FALSE) {
+            if (gUnknown_203B224->unk4[index] != 0 || sub_801ADA0(index)) {
                 PlayMenuSoundEffect(6);
                 gUnknown_203B224->unk4[index] ^= 1;
                 sub_80138B8(&gUnknown_203B224->input, 0);
@@ -1592,7 +1586,7 @@ void sub_801A9E0(void)
                 item.flags = 1;
                 sub_8090E14(buffer1, &item, &stack1);
 
-                if (gUnknown_203B224->unk4[teamItemIndex] != 0 || sub_801ADA0(teamItemIndex) != FALSE)
+                if (gUnknown_203B224->unk4[teamItemIndex] != 0 || sub_801ADA0(teamItemIndex))
                     xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->input,r7),buffer1,gUnknown_203B224->unk88, 0);
                 else {
                     strncpy(gUnknown_202DE58, buffer1, 0x50);

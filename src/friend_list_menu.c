@@ -9,7 +9,7 @@
 #include "moves.h"
 #include "menu_input.h"
 #include "team_inventory.h"
-
+#include "kecleon_bros.h"
 
 // there might be more overlap with unkStruct_203B2BC
 // I was working on the moves and put the data that seemed to correspond to that
@@ -126,9 +126,6 @@ extern bool8 sub_8024108(u32);
 extern u32 sub_801B3C0(struct Item *param_1);
 extern void sub_8023868(u32, u32, u32, u32);
 extern void sub_801F1B0(u32, u32);
-extern void sub_801A5D8(u32,u32, u32, u32);
-extern void sub_801A8D0(u32);
-extern void sub_801A9E0(void);
 extern void PlaySound(u32);
 extern void sub_8024458(s16, u32);
 extern void sub_801BEEC(s16);
@@ -150,9 +147,7 @@ extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
 extern void sub_801F808(u16 *);
 extern u32 sub_801602C(u32 r0, u8 *name);
 extern u32 sub_801A6E8(bool8);
-extern u32 sub_801A8AC(void);
 extern void sub_8099690(u32);
-extern void sub_801A928(void);
 extern void sub_801F8D0(void);
 extern u32 sub_801F890(void);
 extern void sub_80160D8(void);

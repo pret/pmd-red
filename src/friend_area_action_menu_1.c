@@ -9,6 +9,7 @@
 #include "pokemon.h"
 #include "friend_area_action_menu.h"
 #include "menu_input.h"
+#include "kecleon_bros.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 extern struct TeamInventory *gTeamInventory_203B460;
@@ -21,9 +22,7 @@ extern void sub_801F214();
 extern void SetFriendAreaActionMenuState(u32);
 extern void PlaySound(u32);
 extern void nullsub_104();
-extern void sub_801A928();
 extern void sub_8099690(u32);
-extern u32 sub_801A8AC();
 extern u32 sub_801A6E8(bool8);
 
 extern s32 sub_80144A4(s32 *);

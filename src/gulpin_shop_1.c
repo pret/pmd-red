@@ -10,6 +10,7 @@
 #include "menu_input.h"
 #include "gulpin_shop.h"
 #include "moves.h"
+#include "felicity_bank.h"
 
 // size: 0x1E0
 struct unkStruct_203B27C
@@ -90,7 +91,6 @@ bool8 sub_8021178(void);
 void CreateGulpinShopMenu(void);
 extern void sub_8014248(const u8 *, u32, u32, const struct MenuItem *, void *, u32, u32, struct OpenedFile **, u32);
 extern void sub_80141B4(const u8 *, u32, struct OpenedFile **, u32);
-extern void DrawTeamMoneyBox(u32);
 void sub_8020950(void);
 void sub_8020900(void);
 bool8 sub_801F808(u16 *moveIDs);

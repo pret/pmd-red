@@ -12,6 +12,7 @@
 #include "code_800D090.h"
 #include "menu_input.h"
 #include "moves.h"
+#include "kecleon_bros.h"
 
 struct unkStruct_203B2B8
 {
@@ -180,10 +181,8 @@ extern void sub_801F8D0(void);
 extern u32 sub_801B410(void);
 extern void sub_801B450(void);
 extern void nullsub_104(void);
-extern void sub_801A928(void);
 extern void sub_8099690(u32);
 extern u32 sub_801A6E8(bool8);
-extern u32 sub_801A8AC(void);
 extern u32 sub_8022860(void);
 extern void sub_8022908(void);
 extern void sub_801BF98(void);
@@ -197,10 +196,7 @@ bool8 sub_8026E88(struct PokemonStruct *r0);
 bool8 HasGummiItem();
 bool8 sub_8026EB8(struct PokemonStruct *r0);
 extern void sub_801BB20(void);
-extern void sub_801A8D0(u32);
-extern void sub_801A9E0(void);
 extern void sub_801BC24(void);
-extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_8024458(s16, u32);
 void sub_8026E08(u32 r0);
 void sub_8026DAC(u32 r0, struct BulkItem *item);
