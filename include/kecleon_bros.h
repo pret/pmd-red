@@ -88,6 +88,7 @@ void KecleonBros_Delete(void);
 u32 KecleonBros_New(u32 mode);
 
 bool32 sub_801A5D8(u32, s32, struct UnkTextStruct2_sub *, u32);
+u32 sub_801A6E8(bool8);
 s32 sub_801A8AC(void);
 void sub_801A8D0(u8);
 void sub_801A928(void);

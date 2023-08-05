@@ -73,7 +73,6 @@ extern u8 *gUnknown_80D4920[];
 extern u8 *gUnknown_80D4928[];
 
 extern s32 sub_80144A4(s32 *);
-extern u32 sub_801A6E8(bool8);
 extern void sub_8099690(u32);
 
 extern struct UnkTextStruct2 gUnknown_80DBA58;
@@ -91,8 +90,6 @@ extern void PlayMenuSoundEffect(u32);
 extern void sub_8013F84(void);
 extern s32 sub_80913E0(struct Item *, u32, struct subStruct_203B240 **);
 extern void sub_80141B4(u8 *, u32, u32 *, u32);
-extern void sub_801BB20(void);
-extern void sub_801BC24(void);
 extern void sub_8014248(const char *, u32, u32, struct MenuItem *, u32, u32, u32, u32, u32);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 extern void sub_801B46C(u32);
@@ -111,9 +108,11 @@ extern void sub_800199C(u32, u32, u32, u32);
 extern void PlaySound(u32);
 extern s32 sub_808D544(u32);
 
-void sub_801B51C();
-void sub_801B590();
-void sub_801B480();
+void sub_801B480(void);
+void sub_801B51C(void);
+void sub_801B590(void);
+void sub_801BB20(void);
+void sub_801BC24(void);
 
 
 u32 sub_801B3C0(struct Item *item)

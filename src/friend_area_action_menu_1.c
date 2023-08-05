@@ -23,7 +23,6 @@ extern void SetFriendAreaActionMenuState(u32);
 extern void PlaySound(u32);
 extern void nullsub_104();
 extern void sub_8099690(u32);
-extern u32 sub_801A6E8(bool8);
 
 extern s32 sub_80144A4(s32 *);
 extern void sub_8027EB8();

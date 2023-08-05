@@ -202,7 +202,6 @@ void sub_801AEE4(u32, u32);
 void sub_808F734(struct PokemonStruct *, s16);
 u32 sub_801602C(u32 r0, u8 *name);
 extern s32 sub_80144A4(s32 *);
-extern u32 sub_801A6E8(bool8);
 extern void sub_8099690(u32);
 extern void PlayMenuSoundEffect(u32);
 extern u32 sub_801B410(void);

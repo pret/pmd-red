@@ -140,18 +140,15 @@ extern u8 gUnknown_80DBDC8[];
 extern u8 *gUnknown_80D4970[];
 
 extern void sub_8007B7C(s32, s32, s32, s32, s32);
-extern bool8 sub_801CF14(s32);
 extern u32 sub_801CE58(void);
 extern void sub_801CC38(void);
-extern void sub_801CCD8(void);
-extern void sub_801CF94(void);
 extern void ResetSprites(u32);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
-extern void sub_8013F84();
+extern void sub_8013F84(void);
 extern void PlayMenuSoundEffect(u32);
 extern char * GetIQSkillDescription(u8 r0);
 extern s32 GetNumAvailableIQSkills(u8 *param_1, s32 pokeIQ);
@@ -167,9 +164,12 @@ extern void sub_801C6B4(void);
 
 void sub_801BFB4(s32);
 void sub_801C6D0(s32);
-void sub_801C7D4();
-void sub_801C6E4();
-void sub_801C848();
+void sub_801C7D4(void);
+void sub_801C6E4(void);
+void sub_801C848(void);
+void sub_801CCD8(void);
+bool8 sub_801CF14(s32);
+void sub_801CF94(void);
 
 u32 sub_801C308(u8);
 extern void PlaySound(u32);
@@ -184,15 +184,15 @@ void sub_801C3B0(u8);
 void sub_801BFCC(void);
 void sub_801C03C(void);
 
-void sub_801C118();
-void sub_801C1A0();
-void sub_801C228();
+void sub_801C118(void);
+void sub_801C1A0(void);
+void sub_801C228(void);
+u8 sub_801CB24(void);
 
-extern u8 sub_801CB24();
-extern u32 sub_801CFE0(u8);
-extern s32 sub_801CFB8(void);
-extern void sub_801D220();
-extern void sub_801D3A8();
+u32 sub_801CFE0(u8);
+s32 sub_801CFB8(void);
+extern void sub_801D220(void);
+extern void sub_801D3A8(void);
 
 
 bool8 sub_801BEEC(s16 species)

@@ -133,8 +133,8 @@ gUnknown_81161B8: @ 81161B8
 gUnknown_81161C8: @ 81161C8
         .byte 0x01, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .4byte sub_8016E40
-        .4byte sub_8016D54
+        .4byte KangaskhanStorage_Delete
+        .4byte KangaskhanStorage_Callback
 
 	.global gUnknown_81161D8
 gUnknown_81161D8: @ 81161D8

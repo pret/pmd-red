@@ -69,7 +69,6 @@ extern void sub_801B450(void);
 
 void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 id, bool8 checkBoostFlags, struct Gummi* gummi);
 
-extern u32 sub_801A6E8(bool8);
 extern void sub_8099690(u32);
 s32 GetNumAvailableIQSkills(u8 *iqSkillBuffer, s32 pokeIQ);
 

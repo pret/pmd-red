@@ -7,7 +7,7 @@
 #include "text.h"
 
 // size: 0x14C
-struct unkStruct_203B208
+struct KangaskhanStorageWork
 {
     /* 0x0 */ bool32 isAsleep;
     /* 0x4 */ u32 currState;
@@ -80,5 +80,8 @@ enum KangaskhanStorageStates
     KANGASKHAN_STORAGE_TOO_MANY_ITEMS = 6,
     KANGASKHAN_STORAGE_IS_MONEY_USED_TM = 9,
 };
+
+u32 KangaskhanStorage_Callback(void);
+u32 KangaskhanStorage_New(bool32 isAsleep);
 
 #endif

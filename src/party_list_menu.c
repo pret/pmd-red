@@ -182,7 +182,6 @@ extern u32 sub_801B410(void);
 extern void sub_801B450(void);
 extern void nullsub_104(void);
 extern void sub_8099690(u32);
-extern u32 sub_801A6E8(bool8);
 extern u32 sub_8022860(void);
 extern void sub_8022908(void);
 extern void sub_801BF98(void);

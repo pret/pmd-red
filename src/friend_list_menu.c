@@ -146,7 +146,6 @@ extern void sub_801F214(void);
 extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
 extern void sub_801F808(u16 *);
 extern u32 sub_801602C(u32 r0, u8 *name);
-extern u32 sub_801A6E8(bool8);
 extern void sub_8099690(u32);
 extern void sub_801F8D0(void);
 extern u32 sub_801F890(void);
