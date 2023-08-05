@@ -67,7 +67,6 @@ extern u32 sub_801CFE0(u8);
 // code_8098BDC.s
 extern void sub_8099690(u32);
 
-
 void sub_8016E80(void);
 void sub_8016FF8(void);
 void sub_8017598(void);
