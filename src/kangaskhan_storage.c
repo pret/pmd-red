@@ -25,13 +25,13 @@ extern struct UnkTextStruct2 gUnknown_80DB748;
 extern struct UnkTextStruct2 gUnknown_80DB760;
 extern struct UnkTextStruct2 gUnknown_80DB778;
 extern struct UnkTextStruct2 gUnknown_80DB790;
-extern const u8 gUnknown_80DB7A8;
+extern const u8 gUnknown_80DB7A8[]; // "Number?\0"
 extern struct UnkTextStruct2 gUnknown_80DB7B8;
 extern struct UnkTextStruct2 gUnknown_80DB7D0;
 extern struct UnkTextStruct2 gUnknown_80DB7E8;
 extern struct UnkTextStruct2 gUnknown_80DB800;
 extern struct UnkTextStruct2 gUnknown_80DB818;
-extern const u8 gUnknown_80DB830[];
+extern const u8 gUnknown_80DB830[]; // "Number?\0"
 
 extern const u8 *gKangaskhanStorageDialogue[2][20];
 
@@ -421,7 +421,7 @@ void sub_8017598(void)
 {
     sub_8008C54(gKangaskhanStorageWork->unkBC);
     sub_80073B8(gKangaskhanStorageWork->unkBC);
-    xxx_call_draw_string(4, 0, &gUnknown_80DB7A8,gKangaskhanStorageWork->unkBC, 0); // Number?
+    xxx_call_draw_string(4, 0, gUnknown_80DB7A8, gKangaskhanStorageWork->unkBC, 0);
     sub_8013C68(&gKangaskhanStorageWork->unkA8);
     sub_80073E0(gKangaskhanStorageWork->unkBC);
     sub_801CCD8();
@@ -1053,7 +1053,7 @@ void sub_8018280(void)
 {
     sub_8008C54(gUnknown_203B20C->unkD4);
     sub_80073B8(gUnknown_203B20C->unkD4);
-    xxx_call_draw_string(4, 0, gUnknown_80DB830, gUnknown_203B20C->unkD4, 0); // Number?
+    xxx_call_draw_string(4, 0, gUnknown_80DB830, gUnknown_203B20C->unkD4, 0);
     sub_8013C68(&gUnknown_203B20C->unkC0);
     sub_80073E0(gUnknown_203B20C->unkD4);
     sub_801CCD8();
