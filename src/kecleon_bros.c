@@ -7,6 +7,8 @@
 #include "menu_input.h"
 #include "pokemon.h"
 #include "team_inventory.h"
+#include "text1.h"
+#include "text2.h"
 
 extern struct KecleonBrosWork *gKecleonBrosWork;
 extern struct unkStruct_203B214 *gUnknown_203B214;

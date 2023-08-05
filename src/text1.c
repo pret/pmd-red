@@ -3,6 +3,7 @@
 #include "code_800558C.h"
 #include "code_800B540.h"
 #include "text1.h"
+#include "text2.h"
 
 EWRAM_DATA struct UnkTextStruct1 gUnknown_2027370[4];
 EWRAM_DATA u8 *gCharmaps[2];

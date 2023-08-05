@@ -3,7 +3,7 @@
 #include "file_system.h"
 #include "memory.h"
 #include "input.h"
-#include "text.h"
+#include "text1.h"
 #include "text_util.h"
 
 struct unkStruct_203B200

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "text1.h"
 #include "text2.h"
 
 // data.s

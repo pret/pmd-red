@@ -7,7 +7,8 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "team_inventory.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "subStruct_203B240.h"
 #include "menu_input.h"
 

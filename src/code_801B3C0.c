@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants/colors.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "input.h"
 #include "item.h"
 #include "memory.h"

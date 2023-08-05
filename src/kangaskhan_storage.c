@@ -7,6 +7,8 @@
 #include "menu_input.h"
 #include "pokemon.h"
 #include "team_inventory.h"
+#include "text1.h"
+#include "text2.h"
 
 extern u8 gUnknown_202DE58[];
 extern u8 gUnknown_202E1C8[];

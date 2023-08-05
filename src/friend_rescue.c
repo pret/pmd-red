@@ -2,7 +2,8 @@
 #include "constants/communication_error_codes.h"
 #include "constants/monster.h"
 #include "constants/wonder_mail.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "text_util.h"
 #include "input.h"
 #include "item.h"
@@ -294,8 +295,6 @@ extern void sub_802F2C0(void);
 extern void sub_8030DE4(void);
 extern void sub_802453C(void);
 extern void sub_801B450(void);
-extern void sub_800641C(struct UnkTextStruct2 *a0, u8 a1, u8 a2);
-extern void sub_8006518(struct UnkTextStruct2 *);
 extern u8 sub_800D588(void);
 extern void sub_8011830(void);
 extern void sub_80141B4(const u8 *, u32, struct OpenedFile **, u32);

@@ -1,7 +1,8 @@
 #include "global.h"
 #include "input.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 
 // size: 0x6C
 struct unkCreditsStruct_203B340

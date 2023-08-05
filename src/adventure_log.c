@@ -2,7 +2,8 @@
 #include "constants/input.h"
 #include "input.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "menu_input.h"
 
 struct AdventureLog

@@ -6,7 +6,7 @@
 #include "pokemon.h"
 #include "pokemon_mail.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
 #include "menu.h"
 #include "save.h"
 #include "game_options.h"

@@ -5,6 +5,7 @@
 
 #include "memory.h"
 #include "text1.h"
+#include "text2.h"
 #include "input.h"
 #include "mailbox.h"
 #include "menu.h"

@@ -9,7 +9,8 @@
 #include "save.h"
 #include "menu.h"
 #include "menu_input.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 
 EWRAM_DATA_2 struct TradeItemsMenu *gTradeItemsMenu = {0};
 

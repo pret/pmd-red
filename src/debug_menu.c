@@ -10,6 +10,7 @@
 #include "save.h"
 #include "text_util.h"
 #include "menu_input.h"
+#include "text1.h"
 
 EWRAM_DATA_2 struct DebugMenu *gUnknown_203B3EC = {0};
 

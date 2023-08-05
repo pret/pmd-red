@@ -1,6 +1,7 @@
 #include "global.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "pokemon.h"
 #include "input.h"
 #include "code_800D090.h"

@@ -6,7 +6,7 @@
 #include "team_inventory.h"
 #include "menu.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
 #include "menu_input.h"
 #include "dungeon_global_data.h"
 #include "pokemon.h"

@@ -2,7 +2,7 @@
 #include "crt0.h"
 #include "random.h"
 #include "flash.h"
-#include "text.h"
+#include "text1.h"
 
 extern char ewram_start[];
 

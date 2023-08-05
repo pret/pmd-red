@@ -5,6 +5,8 @@
 #include "code_802C39C.h"
 #include "wonder_mail.h"
 #include "menu_input.h"
+#include "text1.h"
+#include "text2.h"
 
 struct unkStruct_203B2FC
 {

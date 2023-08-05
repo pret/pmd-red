@@ -1,6 +1,7 @@
 #include "constants/input.h"
 #include "global.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "input.h"
 #include "memory.h"
 #include "item.h"

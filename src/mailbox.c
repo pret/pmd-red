@@ -1,6 +1,7 @@
 #include "global.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "menu.h"
 #include "input.h"
 #include "mailbox.h"

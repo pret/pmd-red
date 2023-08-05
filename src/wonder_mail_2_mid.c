@@ -4,6 +4,7 @@
 #include "code_800D090.h"
 #include "input.h"
 #include "memory.h"
+#include "text1.h"
 #include "text2.h"
 #include "pokemon_mail.h"
 #include "wonder_mail.h"

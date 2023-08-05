@@ -2,7 +2,7 @@
 #include "constants/colors.h"
 #include "constants/input.h"
 #include "menu.h"
-#include "text.h"
+#include "text2.h"
 #include "util.h"
 #include "code_800D090.h"
 #include "menu_input.h"

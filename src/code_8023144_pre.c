@@ -7,12 +7,12 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "team_inventory.h"
-#include "text.h"
+#include "text1.h"
 #include "input.h"
 #include "item.h"
 #include "menu_input.h"
 #include "code_8023144.h"
-#include "text.h"
+#include "text2.h"
 
 struct unkStruct_203B294 *gUnknown_203B294;
 extern u8 gAvailablePokemonNames[];

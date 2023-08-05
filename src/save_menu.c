@@ -3,7 +3,7 @@
 #include "menu.h"
 #include "main_menu.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
 #include "save.h"
 #include "menu_input.h"
 

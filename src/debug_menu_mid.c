@@ -4,7 +4,8 @@
 #include "team_inventory.h"
 #include "memory.h"
 #include "menu.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "menu_input.h"
 #include "friend_area.h"
 

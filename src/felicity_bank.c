@@ -1,12 +1,13 @@
 #include "global.h"
-#include "pokemon.h"
+#include "felicity_bank.h"
 #include "file_system.h"
 #include "input.h"
-#include "felicity_bank.h"
 #include "memory.h"
-#include "team_inventory.h"
-#include "text.h"
 #include "menu_input.h"
+#include "pokemon.h"
+#include "team_inventory.h"
+#include "text1.h"
+#include "text2.h"
 
 EWRAM_DATA_2 struct FelicityBankWork *gFelicityBankWork = {0};
 
