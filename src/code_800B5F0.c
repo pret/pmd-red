@@ -7,6 +7,7 @@
 typedef void (*IntrCallback)(void);
 extern IntrCallback gIntrCallbacks[];
 
+// size: 0x8
 struct unkStruct_202D648
 {
     s16 unk0;
@@ -25,7 +26,7 @@ EWRAM_DATA u8 gUnknown_203B09B;
 EWRAM_DATA u32 gUnknown_203B09C;
 EWRAM_DATA u32 gUnknown_203B0A0;
 EWRAM_DATA u32 gUnknown_203B0A4;
-EWRAM_DATA u32 gUnknown_203B0A8;
+EWRAM_DATA s16 gUnknown_203B0A8;
 EWRAM_DATA s16 gUnknown_203B0AA;
 EWRAM_DATA s16 gUnknown_203B0AC;
 EWRAM_DATA s16 gUnknown_203B0AE;
