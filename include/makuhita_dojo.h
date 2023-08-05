@@ -10,8 +10,8 @@
 // size: 0xCC
 struct unkStruct_203B318
 {
-    u32 unk0;
-    u32 unk4;
+    u32 mode; // Corresponds to the enum: MakuhitaDojoMode
+    bool32 isAsleep;
     /* 0x8 */ s32 state;
     /* 0xC */ s32 fallbackState;
     s16 unk10;
@@ -41,7 +41,8 @@ struct unkStruct_203B31C
     u8 unkCC[4];
 };
 
-u32 MakuhitaDojo_New(u32);
+// mode corresponds to the enum: MakuhitaDojoMode
+u32 MakuhitaDojo_New(u32 mode);
 void MakuhitaDojo_Delete(void);
 
 u32 sub_802FE58(void);
@@ -50,5 +51,17 @@ bool8 sub_80302E8(s32, struct UnkTextStruct2_sub *, u32);
 u32 sub_80303AC(bool8);
 s16 sub_8030418(void);
 void sub_8030480(void);
+
+enum MakuhitaDojoMode
+{
+    MAKUHITA_DOJO_MODE_UNK0_AWAKE = 0,
+    MAKUHITA_DOJO_MODE_UNK1_AWAKE = 1,
+    MAKUHITA_DOJO_MODE_UNK2_AWAKE = 2,
+    MAKUHITA_DOJO_MODE_UNK3_AWAKE = 3,
+    MAKUHITA_DOJO_MODE_UNK4_ASLEEP = 4,
+    MAKUHITA_DOJO_MODE_UNK5_ASLEEP = 5,
+    MAKUHITA_DOJO_MODE_UNK6_ASLEEP = 6,
+    MAKUHITA_DOJO_MODE_UNK7_ASLEEP = 7,
+};
 
 #endif // GUARD_MAKUHITA_DOJO_H

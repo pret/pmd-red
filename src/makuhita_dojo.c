@@ -101,7 +101,7 @@ void sub_80302A8(void);
 void sub_80304C8(void);
 s32 sub_8030668(void);
 
-u32 MakuhitaDojo_New(u32 param_1)
+u32 MakuhitaDojo_New(u32 mode)
 {
     char *monName;
     struct OpenedFile *faceFile;
@@ -111,45 +111,45 @@ u32 MakuhitaDojo_New(u32 param_1)
     sub_800641C(NULL, 1, 1);
     gUnknown_203B318 = MemoryAlloc(sizeof(struct unkStruct_203B318), 8);
     gUnknown_203B318->unk10 = -1;
-    gUnknown_203B318->unk0 = param_1;
+    gUnknown_203B318->mode = mode;
 
-    switch (param_1) {
-        case 0:
+    switch (mode) {
+        case MAKUHITA_DOJO_MODE_UNK0_AWAKE:
             initialState = 0;
-            gUnknown_203B318->unk4 = 0;
+            gUnknown_203B318->isAsleep = FALSE;
             break;
-        case 1:
+        case MAKUHITA_DOJO_MODE_UNK1_AWAKE:
             initialState = 7;
-            gUnknown_203B318->unk4 = 0;
+            gUnknown_203B318->isAsleep = FALSE;
             break;
-        case 2:
+        case MAKUHITA_DOJO_MODE_UNK2_AWAKE:
             initialState = 6;
-            gUnknown_203B318->unk4 = 0;
+            gUnknown_203B318->isAsleep = FALSE;
             break;
-        case 3:
+        case MAKUHITA_DOJO_MODE_UNK3_AWAKE:
             initialState = 8;
-            gUnknown_203B318->unk4 = 0;
+            gUnknown_203B318->isAsleep = FALSE;
             break;
-        case 4:
+        case MAKUHITA_DOJO_MODE_UNK4_ASLEEP:
             initialState = 0;
-            gUnknown_203B318->unk4 = 1;
+            gUnknown_203B318->isAsleep = TRUE;
             break;
-        case 5:
+        case MAKUHITA_DOJO_MODE_UNK5_ASLEEP:
             initialState = 7;
-            gUnknown_203B318->unk4 = 1;
+            gUnknown_203B318->isAsleep = TRUE;
             break;
-        case 6:
+        case MAKUHITA_DOJO_MODE_UNK6_ASLEEP:
             initialState = 6;
-            gUnknown_203B318->unk4 = 1;
+            gUnknown_203B318->isAsleep = TRUE;
             break;
-        case 7:
+        case MAKUHITA_DOJO_MODE_UNK7_ASLEEP:
         default:
             initialState = 8;
-            gUnknown_203B318->unk4 = 1;
+            gUnknown_203B318->isAsleep = TRUE;
             break;
     }
 
-    if (gUnknown_203B318->unk4 == 1)
+    if (gUnknown_203B318->isAsleep == TRUE)
         gUnknown_203B318->unk68 = NULL;
     else
         gUnknown_203B318->unk68 = &gUnknown_203B318->faceFile;
@@ -242,18 +242,18 @@ void MakuhitaDojo_UpdateDialogue(void)
     switch (gUnknown_203B318->state) {
         case 0:
             MakuhitaDojo_DrawMainMenu();
-            sub_8014248(gMakuhitaDialogue[gUnknown_203B318->unk4][0], 0, gUnknown_203B318->menuAction, gUnknown_203B318->unk18, NULL, 4, 0, gUnknown_203B318->unk68, 12);
+            sub_8014248(gMakuhitaDialogue[gUnknown_203B318->isAsleep][0], 0, gUnknown_203B318->menuAction, gUnknown_203B318->unk18, NULL, 4, 0, gUnknown_203B318->unk68, 12);
             break;
         case 1:
-            sub_8014248(gMakuhitaDialogue[gUnknown_203B318->unk4][1], 0, gUnknown_203B318->menuAction, gUnknown_203B318->unk18, NULL, 4, 0, gUnknown_203B318->unk68, 12);
+            sub_8014248(gMakuhitaDialogue[gUnknown_203B318->isAsleep][1], 0, gUnknown_203B318->menuAction, gUnknown_203B318->unk18, NULL, 4, 0, gUnknown_203B318->unk68, 12);
             break;
         case 2:
             gUnknown_203B318->fallbackState = 13;
-            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->unk4][2], 0, gUnknown_203B318->unk68, 0x10D);
+            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->isAsleep][2], 0, gUnknown_203B318->unk68, 0x10D);
             break;
         case 3:
             gUnknown_203B318->fallbackState = 4;
-            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->unk4][3], 0, gUnknown_203B318->unk68, 0x10D);
+            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->isAsleep][3], 0, gUnknown_203B318->unk68, 0x10D);
             break;
         case 4:
             sub_80302E8(3, NULL, 10);
@@ -263,19 +263,19 @@ void MakuhitaDojo_UpdateDialogue(void)
             dLoc.id = sub_80A2740(gUnknown_203B318->unk10);
             dLoc.floor = 1;
             PrintYellowDungeonNametoBuffer(gAvailablePokemonNames, &dLoc);
-            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->unk4][4], 0, gUnknown_203B318->unk68, 0x10D);
+            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->isAsleep][4], 0, gUnknown_203B318->unk68, 0x10D);
             break;
         case 7:
             gUnknown_203B318->fallbackState = 13;
-            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->unk4][6], 0, gUnknown_203B318->unk68, 0x10D);
+            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->isAsleep][6], 0, gUnknown_203B318->unk68, 0x10D);
             break;
         case 6:
             gUnknown_203B318->fallbackState = 13;
-            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->unk4][5], 0, gUnknown_203B318->unk68, 0x10D);
+            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->isAsleep][5], 0, gUnknown_203B318->unk68, 0x10D);
             break;
         case 8:
             gUnknown_203B318->fallbackState = 9;
-            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->unk4][7], 0, gUnknown_203B318->unk68, 0x10D);
+            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->isAsleep][7], 0, gUnknown_203B318->unk68, 0x10D);
             break;
         case 9:
             PrintColoredPokeNameToBuffer(gPlayerName, GetPlayerPokemonStruct(), COLOR_YELLOW);
@@ -285,14 +285,14 @@ void MakuhitaDojo_UpdateDialogue(void)
             break;
         case 10:
             gUnknown_203B318->fallbackState = 13;
-            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->unk4][8], 0, gUnknown_203B318->unk68, 0x10D);
+            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->isAsleep][8], 0, gUnknown_203B318->unk68, 0x10D);
             break;
         case 11:
             sub_801B60C(1, ITEM_GINSENG, 1);
             break;
         case 12:
             gUnknown_203B318->fallbackState = 1;
-            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->unk4][9], 0, gUnknown_203B318->unk68, 0x10D);
+            sub_80141B4(gMakuhitaDialogue[gUnknown_203B318->isAsleep][9], 0, gUnknown_203B318->unk68, 0x10D);
             break;
         case 13:
             return;
