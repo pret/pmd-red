@@ -7,6 +7,7 @@
 #include "code_80958E8.h"
 #include "team_inventory.h"
 #include "random.h"
+#include "pokemon.h"
 
 struct unkStruct_8096AF8
 {
