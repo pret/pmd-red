@@ -481,7 +481,7 @@ void sub_801D894(void)
   rank = GetRescueTeamRank();
   sprintfStatic(buffer, r5, GetTeamRankString(rank), GetTeamRankPts());
   xxx_call_draw_string(32, 4, buffer, 2, 0);
-  sprintfStatic(buffer, gUnknown_80DBF4C, gTeamInventory_203B460->teamMoney);
+  sprintfStatic(buffer, gUnknown_80DBF4C, gTeamInventoryRef->teamMoney);
   xxx_call_draw_string(32, 18, buffer, 2, 0);
   sub_80073E0(2);
 }

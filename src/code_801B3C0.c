@@ -9,6 +9,7 @@
 #include "team_inventory.h"
 #include "menu_input.h"
 #include "subStruct_203B240.h"
+#include "kecleon_bros.h"
 
 // based off of 203B240..
 struct unkStruct_203B230
@@ -72,12 +73,8 @@ extern u8 *gUnknown_80D4920[];
 extern u8 *gUnknown_80D4928[];
 
 extern s32 sub_80144A4(s32 *);
-extern u32 sub_801A6E8(u32);
-extern u32 sub_801A8AC();
 extern void sub_8099690(u32);
-extern void sub_801A928(void);
 
-extern bool8 sub_801ADA0(s32);
 extern struct UnkTextStruct2 gUnknown_80DBA58;
 extern struct UnkTextStruct2 gUnknown_80DBA88;
 extern struct UnkTextStruct2 gUnknown_80DBA70;
@@ -93,11 +90,6 @@ extern void PlayMenuSoundEffect(u32);
 extern void sub_8013F84(void);
 extern s32 sub_80913E0(struct Item *, u32, struct subStruct_203B240 **);
 extern void sub_80141B4(u8 *, u32, u32 *, u32);
-extern void sub_801BB20(void);
-extern void sub_801A8D0(u32);
-extern void sub_801A9E0(void);
-extern void sub_801BC24(void);
-extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_8014248(const char *, u32, u32, struct MenuItem *, u32, u32, u32, u32, u32);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 extern void sub_801B46C(u32);
@@ -116,9 +108,11 @@ extern void sub_800199C(u32, u32, u32, u32);
 extern void PlaySound(u32);
 extern s32 sub_808D544(u32);
 
-void sub_801B51C();
-void sub_801B590();
-void sub_801B480();
+void sub_801B480(void);
+void sub_801B51C(void);
+void sub_801B590(void);
+void sub_801BB20(void);
+void sub_801BC24(void);
 
 
 u32 sub_801B3C0(struct Item *item)
@@ -407,14 +401,14 @@ void sub_801B874(void)
                 {
                     if(IsNotMoneyOrUsedTMItem(gUnknown_203B234->unk10.id))
                     {
-                        if((gTeamInventory_203B460->teamStorage[gUnknown_203B234->unk10.id] + gUnknown_203B234->unkC) > 0x3e7)
+                        if((gTeamInventoryRef->teamStorage[gUnknown_203B234->unk10.id] + gUnknown_203B234->unkC) > 0x3e7)
                         {
     store:
                             gUnknown_203B234->fallbackState = 6;
                         }
                         else
                         {
-                            gTeamInventory_203B460->teamStorage[gUnknown_203B234->unk10.id] += gUnknown_203B234->unkC;
+                            gTeamInventoryRef->teamStorage[gUnknown_203B234->unk10.id] += gUnknown_203B234->unkC;
                             PlaySound(0xCB);
                             gUnknown_203B234->fallbackState = 5;
                         }
@@ -611,20 +605,20 @@ void sub_801BC94(void)
 
 void sub_801BCCC(void)
 {
-    switch(sub_801A6E8(1))
+    switch(sub_801A6E8(TRUE))
     {
         case 0:
         case 1:
             break;
         case 3:
             gUnknown_203B234->unk24 = sub_801A8AC();
-            gUnknown_203B234->unk20 = gTeamInventory_203B460->teamItems[gUnknown_203B234->unk24];
+            gUnknown_203B234->unk20 = gTeamInventoryRef->teamItems[gUnknown_203B234->unk24];
             sub_8090E14(gUnknown_202DEA8, &gUnknown_203B234->unk20, &gUnknown_203B234->unk14);
             sub_801B748(0xA);
             break;
         case 4:
             gUnknown_203B234->unk24 = sub_801A8AC();
-            gUnknown_203B234->unk20 = gTeamInventory_203B460->teamItems[gUnknown_203B234->unk24];
+            gUnknown_203B234->unk20 = gTeamInventoryRef->teamItems[gUnknown_203B234->unk24];
             sub_8090E14(gUnknown_202DEA8, &gUnknown_203B234->unk20, &gUnknown_203B234->unk14);
             sub_8099690(0);
             sub_801B748(0xB);
@@ -641,7 +635,7 @@ void sub_801BD80(void)
   s32 menuAction;
   
   menuAction = 0;
-  sub_801A6E8(0);
+  sub_801A6E8(FALSE);
   if (!sub_8012FD8(&gUnknown_203B234->unk28)) {
     sub_8013114(&gUnknown_203B234->unk28,&menuAction);
     if (menuAction != 1) gUnknown_203B234->menuAction = menuAction;
@@ -676,7 +670,7 @@ void sub_801BE30(void)
   s32 menuAction;
   
   menuAction = 0;
-  sub_801A6E8(0);
+  sub_801A6E8(FALSE);
   sub_8012FD8(&gUnknown_203B234->unk28);
   if (!sub_8012FD8(&gUnknown_203B234->unk78)) {
     sub_8013114(&gUnknown_203B234->unk78,&menuAction);

@@ -287,7 +287,7 @@ void sub_8096AF8(struct unkStruct_8096AF8 *param_1, u8 slotIndex,u8 dungeon)
             if (jobSlot->mailType == MAIL_TYPE_TAKEN_JOB) {
                 for(index = 0; index < INVENTORY_SIZE; index++)
                 {
-                    item = &gTeamInventory_203B460->teamItems[index];
+                    item = &gTeamInventoryRef->teamItems[index];
                     if (((item->flags & ITEM_FLAG_EXISTS)) && (item->id == jobSlot->targetItem)) {
                         param_1->unk0 = TRUE;
                     }

@@ -14,6 +14,7 @@
 #include "code_8023144.h"
 #include "code_800D090.h"
 #include "friend_area.h"
+#include "kecleon_bros.h"
 
 struct unkStruct_3001B5C
 {
@@ -68,11 +69,8 @@ extern void sub_801B450(void);
 
 void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 id, bool8 checkBoostFlags, struct Gummi* gummi);
 
-extern u32 sub_801A6E8(u32);
 extern void sub_8099690(u32);
-extern void sub_801A928(void);
 s32 GetNumAvailableIQSkills(u8 *iqSkillBuffer, s32 pokeIQ);
-extern u32 sub_801A8AC(void);
 
 void sub_8022D2C(void) {
     s32 index;
@@ -126,16 +124,16 @@ void sub_8022D2C(void) {
 
 void sub_8022E78(void)
 { 
-  switch(sub_801A6E8(1))
+  switch(sub_801A6E8(TRUE))
   {
       case 3:
         gUnknown_203B294->itemIndex = sub_801A8AC();
-        gUnknown_203B294->item = gTeamInventory_203B460->teamItems[gUnknown_203B294->itemIndex];
+        gUnknown_203B294->item = gTeamInventoryRef->teamItems[gUnknown_203B294->itemIndex];
         sub_8022924(2);
         break;
       case 4:
         gUnknown_203B294->itemIndex = sub_801A8AC();
-        gUnknown_203B294->item = gTeamInventory_203B460->teamItems[gUnknown_203B294->itemIndex];
+        gUnknown_203B294->item = gTeamInventoryRef->teamItems[gUnknown_203B294->itemIndex];
         sub_8099690(0);
         sub_8022924(4);
         break;
@@ -151,7 +149,7 @@ void sub_8022EF4(void)
   s32 boostAmount;
   
   menuAction = 0;
-  sub_801A6E8(0);
+  sub_801A6E8(FALSE);
   if (sub_8012FD8(&gUnknown_203B294->unk54) == 0) {
     sub_8013114(&gUnknown_203B294->unk54,&menuAction);
     if(menuAction != 1) gUnknown_203B294->menuAction = menuAction;
@@ -172,7 +170,7 @@ void sub_8022EF4(void)
         gUnknown_203B294->unk40 = 1;
         boostAmount = gUnknown_203B294->gummi.boostAmount;
 
-        sub_8090E14(gUnknown_202DE58, &gTeamInventory_203B460->teamItems[gUnknown_203B294->itemIndex], NULL);
+        sub_8090E14(gUnknown_202DE58, &gTeamInventoryRef->teamItems[gUnknown_203B294->itemIndex], NULL);
         
         if(boostAmount != -1)
             ShiftItemsDownFrom(gUnknown_203B294->itemIndex);
@@ -219,7 +217,7 @@ void sub_8023068(void)
   s32 menuAction;
   
   menuAction = 0;
-  sub_801A6E8(0);
+  sub_801A6E8(FALSE);
   sub_8012FD8(&gUnknown_203B294->unk54);
   if (sub_8012FD8(&gUnknown_203B294->unkA4) == 0) {
     sub_8013114(&gUnknown_203B294->unkA4,&menuAction);

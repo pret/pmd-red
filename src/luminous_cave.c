@@ -11,6 +11,7 @@
 #include "text_util.h"
 #include "team_inventory.h"
 #include "menu_input.h"
+#include "kecleon_bros.h"
 
 struct unkStruct_203B2B0
 {
@@ -193,9 +194,6 @@ void PlaySound(u32);
 void sub_8024CFC(void);
 void sub_8025254(void);
 void sub_8024D48(void);
-extern void sub_801A5D8(u32, u32, u32, u32);
-extern void sub_801A8D0(u32);
-extern void sub_801A9E0();
 extern void sub_801B3C0(struct Item *);
 extern void nullsub_104();
 void sub_8024DBC(void);
@@ -204,10 +202,7 @@ void sub_801AEE4(u32, u32);
 void sub_808F734(struct PokemonStruct *, s16);
 u32 sub_801602C(u32 r0, u8 *name);
 extern s32 sub_80144A4(s32 *);
-extern u32 sub_801A6E8(u32);
-extern s32 sub_801A8AC(void);
 extern void sub_8099690(u32);
-extern void sub_801A928(void);
 extern void PlayMenuSoundEffect(u32);
 extern u32 sub_801B410(void);
 extern void sub_801B450(void);
@@ -734,16 +729,16 @@ void sub_8024F70(void)
 
 void sub_8024FD4(void)
 {
-    switch(sub_801A6E8(1))
+    switch(sub_801A6E8(TRUE))
     {
         case 3:
             gUnknown_203B2B0->evoItem1_InvIndex = sub_801A8AC();
             gUnknown_203B2B0->evoItem2_InvIndex = INVENTORY_SIZE;
-            gUnknown_203B2B0->chosenItem = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem1_InvIndex];
+            gUnknown_203B2B0->chosenItem = gTeamInventoryRef->teamItems[gUnknown_203B2B0->evoItem1_InvIndex];
             UpdateLuminousCaveState(8);
             break;
         case 4:
-            gUnknown_203B2B0->chosenItem = gTeamInventory_203B460->teamItems[sub_801A8AC()];
+            gUnknown_203B2B0->chosenItem = gTeamInventoryRef->teamItems[sub_801A8AC()];
             sub_8099690(0);
             UpdateLuminousCaveState(9);
             break;
@@ -756,20 +751,20 @@ void sub_8024FD4(void)
 
 void sub_8025058(void)
 {
-    switch(sub_801A6E8(1))
+    switch(sub_801A6E8(TRUE))
     {
         case 3:
             if(gUnknown_203B2B0->evoItem1_InvIndex != sub_801A8AC())
             {
                 gUnknown_203B2B0->evoItem2_InvIndex = sub_801A8AC();
-                gUnknown_203B2B0->chosenItem = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem2_InvIndex];
+                gUnknown_203B2B0->chosenItem = gTeamInventoryRef->teamItems[gUnknown_203B2B0->evoItem2_InvIndex];
                 UpdateLuminousCaveState(0xD);
             }
             else
                 PlayMenuSoundEffect(2);
             break;
         case 4:
-            gUnknown_203B2B0->chosenItem = gTeamInventory_203B460->teamItems[sub_801A8AC()];
+            gUnknown_203B2B0->chosenItem = gTeamInventoryRef->teamItems[sub_801A8AC()];
             sub_8099690(0);
             UpdateLuminousCaveState(0xE);
             break;
@@ -784,7 +779,7 @@ void sub_80250EC(void)
 {
     s32 menuAction;
     menuAction = 0;
-    sub_801A6E8(0);
+    sub_801A6E8(FALSE);
 
     if(!sub_8012FD8(&gUnknown_203B2B0->unk84))
     {
@@ -811,7 +806,7 @@ void sub_802515C(void)
 {
     s32 menuAction;
     menuAction = 0;
-    sub_801A6E8(0);
+    sub_801A6E8(FALSE);
 
     if(!sub_8012FD8(&gUnknown_203B2B0->unk84))
     {
@@ -893,13 +888,13 @@ void sub_8025254(void)
         gUnknown_203B2B0->evoItem1_itemIndex = 0;
     else
     {
-        gUnknown_203B2B0->evoItem1_itemIndex = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem1_InvIndex].id;
+        gUnknown_203B2B0->evoItem1_itemIndex = gTeamInventoryRef->teamItems[gUnknown_203B2B0->evoItem1_InvIndex].id;
     }
     if(gUnknown_203B2B0->evoItem2_InvIndex == INVENTORY_SIZE)
         gUnknown_203B2B0->evoItem2_ItemIndex = 0;
     else
     {
-        gUnknown_203B2B0->evoItem2_ItemIndex = gTeamInventory_203B460->teamItems[gUnknown_203B2B0->evoItem2_InvIndex].id;
+        gUnknown_203B2B0->evoItem2_ItemIndex = gTeamInventoryRef->teamItems[gUnknown_203B2B0->evoItem2_InvIndex].id;
     }
 
     gUnknown_203B2B0->unk6 = RandInt(0xFF);

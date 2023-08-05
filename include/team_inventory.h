@@ -15,7 +15,7 @@ struct TeamInventory
     /* 0x264 */ s32 teamSavings;
 };
 
-extern struct TeamInventory *gTeamInventory_203B460;
+extern struct TeamInventory *gTeamInventoryRef;
 
 #define MAX_TEAM_MONEY 99999
 #define MAX_TEAM_SAVINGS 9999999

@@ -401,9 +401,9 @@ void TradeItem_SendItemConfirm(void)
         case 5:
             sub_801CBB8();
             // Used temp var to get correct statements
-            load = gTeamInventory_203B460->teamStorage[gTradeItemsMenu->itemToSend.id];
+            load = gTeamInventoryRef->teamStorage[gTradeItemsMenu->itemToSend.id];
             load -= gTradeItemsMenu->quantityToSend;
-            gTeamInventory_203B460->teamStorage[gTradeItemsMenu->itemToSend.id] = load;
+            gTeamInventoryRef->teamStorage[gTradeItemsMenu->itemToSend.id] = load;
             SetTradeItemMenu(TRADE_ITEMS_PREPARE_TRADE_SAVING);
             PrepareSavePakWrite(MONSTER_NONE);
             break;
@@ -497,9 +497,9 @@ void TradeItem_AddItem(void)
 {
     // Use temp var to get correct statements
     u16 load;
-    load = gTeamInventory_203B460->teamStorage[gTradeItemsMenu->sentItem.itemIdx.id];
+    load = gTeamInventoryRef->teamStorage[gTradeItemsMenu->sentItem.itemIdx.id];
     load += gTradeItemsMenu->sentItem.quantity;
-    gTeamInventory_203B460->teamStorage[gTradeItemsMenu->sentItem.itemIdx.id] = load;
+    gTeamInventoryRef->teamStorage[gTradeItemsMenu->sentItem.itemIdx.id] = load;
 }
 
 void sub_80369FC(void)
@@ -790,7 +790,7 @@ void sub_8036F30(void)
 void sub_8036F74(void)
 {
   sub_8006518(gTradeItemsMenu->unk184);
-  sub_8036ECC(2, gTeamInventory_203B460->teamStorage[gTradeItemsMenu->itemToSend.id]);
+  sub_8036ECC(2, gTeamInventoryRef->teamStorage[gTradeItemsMenu->itemToSend.id]);
   sub_801CCD8();
   sub_8035CF4(gTradeItemsMenu->unk44, 3, 0);
   sub_8036F30();

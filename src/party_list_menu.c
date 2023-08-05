@@ -12,6 +12,7 @@
 #include "code_800D090.h"
 #include "menu_input.h"
 #include "moves.h"
+#include "kecleon_bros.h"
 
 struct unkStruct_203B2B8
 {
@@ -180,10 +181,7 @@ extern void sub_801F8D0(void);
 extern u32 sub_801B410(void);
 extern void sub_801B450(void);
 extern void nullsub_104(void);
-extern void sub_801A928(void);
 extern void sub_8099690(u32);
-extern u32 sub_801A6E8(u32);
-extern u32 sub_801A8AC(void);
 extern u32 sub_8022860(void);
 extern void sub_8022908(void);
 extern void sub_801BF98(void);
@@ -197,10 +195,7 @@ bool8 sub_8026E88(struct PokemonStruct *r0);
 bool8 HasGummiItem();
 bool8 sub_8026EB8(struct PokemonStruct *r0);
 extern void sub_801BB20(void);
-extern void sub_801A8D0(u32);
-extern void sub_801A9E0(void);
 extern void sub_801BC24(void);
-extern void sub_801A5D8(u32, u32, u32, u32);
 extern void sub_8024458(s16, u32);
 void sub_8026E08(u32 r0);
 void sub_8026DAC(u32 r0, struct BulkItem *item);
@@ -811,18 +806,18 @@ void sub_8026B48(void)
 
 void sub_8026B64(void)
 {
-    switch(sub_801A6E8(1))
+    switch(sub_801A6E8(TRUE))
     {
         case 3:
             gUnknown_203B2B8->id = sub_801A8AC();
-            gUnknown_203B2B8->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->id].id;
-            gUnknown_203B2B8->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->id].quantity;
+            gUnknown_203B2B8->item1.id = gTeamInventoryRef->teamItems[gUnknown_203B2B8->id].id;
+            gUnknown_203B2B8->item1.quantity = gTeamInventoryRef->teamItems[gUnknown_203B2B8->id].quantity;
             sub_8026074(0x14);
             break;
         case 4:
             gUnknown_203B2B8->id = sub_801A8AC();
-            gUnknown_203B2B8->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->id].id;
-            gUnknown_203B2B8->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B8->id].quantity;
+            gUnknown_203B2B8->item1.id = gTeamInventoryRef->teamItems[gUnknown_203B2B8->id].id;
+            gUnknown_203B2B8->item1.quantity = gTeamInventoryRef->teamItems[gUnknown_203B2B8->id].quantity;
             sub_8099690(0);
             sub_8026074(0x15);
             break;
@@ -844,7 +839,7 @@ void sub_8026C14(void)
   struct Item slot;
 
   menuAction = 0;
-  sub_801A6E8(0);
+  sub_801A6E8(FALSE);
   if ((sub_8012FD8(&gUnknown_203B2B8->unkCC) == '\0') && (sub_8013114(&gUnknown_203B2B8->unkCC,&menuAction), menuAction != 1)) {
     gUnknown_203B2B8->menuAction2 = menuAction;
   }
@@ -1028,12 +1023,12 @@ bool8 CanTakePokemonHeldItem(struct PokemonStruct *r0)
     {
         if(IsThrowableItem(r0->heldItem.id))
         {
-            if((gTeamInventory_203B460->teamStorage[r0->heldItem.id] + r0->heldItem.quantity) > 999)
+            if((gTeamInventoryRef->teamStorage[r0->heldItem.id] + r0->heldItem.quantity) > 999)
                 return FALSE;
         }
         else
         {
-            if(gTeamInventory_203B460->teamStorage[r0->heldItem.id] > 998)
+            if(gTeamInventoryRef->teamStorage[r0->heldItem.id] > 998)
                 return FALSE;
         }
     }
@@ -1059,11 +1054,11 @@ void sub_8026FA4(void)
             PlaySound(0x14d);
             if(IsThrowableItem(gUnknown_203B2B8->item2.id))
             {
-                gTeamInventory_203B460->teamStorage[gUnknown_203B2B8->item2.id] += gUnknown_203B2B8->item2.quantity;
+                gTeamInventoryRef->teamStorage[gUnknown_203B2B8->item2.id] += gUnknown_203B2B8->item2.quantity;
             }
             else
             {
-                gTeamInventory_203B460->teamStorage[gUnknown_203B2B8->item2.id] += 1;
+                gTeamInventoryRef->teamStorage[gUnknown_203B2B8->item2.id] += 1;
             }
 
             gUnknown_203B2B8->item2.id = ITEM_NOTHING;

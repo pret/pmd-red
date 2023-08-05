@@ -232,7 +232,7 @@ void sub_803A5A0(void)
         gUnknown_203B3F0->unkAC = 3;
         gUnknown_203B3F0->unkA4 = 0;
         gUnknown_203B3F0->unkA8 = 0x3e7;
-        gUnknown_203B3F0->unkA0 = gTeamInventory_203B460->teamStorage[gUnknown_203B3F0->id];
+        gUnknown_203B3F0->unkA0 = gTeamInventoryRef->teamStorage[gUnknown_203B3F0->id];
         gUnknown_203B3F0->unkB0 = 1;
         gUnknown_203B3F0->unkB4 = &gUnknown_203B3F0->unkD8[1];
         gUnknown_203B3F0->unkB8 = 0x2C;
@@ -331,7 +331,7 @@ void sub_803A810(void)
   switch(sub_8013BBC(&gUnknown_203B3F0->unk9C))
   {
       case 3:
-        gTeamInventory_203B460->teamStorage[gUnknown_203B3F0->id] = gUnknown_203B3F0->unk9C;
+        gTeamInventoryRef->teamStorage[gUnknown_203B3F0->id] = gUnknown_203B3F0->unk9C;
         // Fallthrough needed to match
       case 2:
         sub_803A504(1);

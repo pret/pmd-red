@@ -1,22 +1,23 @@
 #ifndef GUARD_KANGASKHAN_STORAGE_H
 #define GUARD_KANGASKHAN_STORAGE_H
 
-#include "text.h"
-#include "menu.h"
+#include "file_system.h"
 #include "item.h"
+#include "menu.h"
+#include "text.h"
 
-struct unkStruct_203B208
+// size: 0x14C
+struct KangaskhanStorageWork
 {
-    // size: 0x14C
-    bool32 isAsleep;
-    u32 currState;
-    u32 fallbackState;
-    struct Item storedItem;
-    u32 itemIndex;
-    u8 id; // another id?
-    u32 menuAction1;
-    u32 menuAction2;
-    u32 menuAction3;
+    /* 0x0 */ bool32 isAsleep;
+    /* 0x4 */ u32 currState;
+    /* 0x8 */ u32 fallbackState;
+    /* 0xC */ struct Item storedItem;
+    /* 0x10 */ u32 itemIndex;
+    /* 0x14 */ u8 id; // another id?
+    /* 0x18 */ u32 menuAction1;
+    /* 0x1C */ u32 menuAction2;
+    /* 0x20 */ u32 menuAction3;
     struct MenuItem unk24[5];
     u16 unk4C[5];
     struct MenuStruct unk58;
@@ -31,8 +32,8 @@ struct unkStruct_203B208
     u32 unkC8;
     u8 unkCC[0xD4 - 0xCC];
     u32 unkD4;
-    struct OpenedFile *faceFile;
-    u8 *faceData;
+    /* 0xD8 */ struct OpenedFile *faceFile;
+    /* 0xDC */ u8 *faceData;
     u16 unkE0;
     u16 unkE2;
     u8 unkE4;
@@ -43,16 +44,17 @@ struct unkStruct_203B208
     struct UnkTextStruct2 unkEC[4];
 };
 
+// size: 0x150
 struct unkStruct_203B20C
 {
-    u32 state;
+    /* 0x0 */ u32 state;
     u8 unk4[4];
-    struct Item item;
-    u32 itemIndex;
-    u8 id;
-    u32 menuAction1;
-    u32 menuAction2;
-    u32 menuAction3;
+    /* 0x8 */ struct Item item;
+    /* 0xC */ u32 itemIndex;
+    /* 0x10 */ u8 id;
+    /* 0x14 */ u32 menuAction1;
+    /* 0x18 */ u32 menuAction2;
+    /* 0x1C */ u32 menuAction3;
     struct MenuItem unk20[8];
     u16 unk60[8];
     struct MenuStruct unk70;
@@ -69,7 +71,8 @@ struct unkStruct_203B20C
     struct UnkTextStruct2 unkF0[4];
 };
 
-enum KangaskhanStorageStates {
+enum KangaskhanStorageStates
+{
     KANGASKHAN_STORAGE_INIT = 0,
     KANGASKHAN_STORAGE_MAIN_MENU = 1,
     KANGASKHAN_STORAGE_EXIT = 4,
@@ -77,5 +80,9 @@ enum KangaskhanStorageStates {
     KANGASKHAN_STORAGE_TOO_MANY_ITEMS = 6,
     KANGASKHAN_STORAGE_IS_MONEY_USED_TM = 9,
 };
+
+u32 CreateKangaskhanStorage(bool32 isAsleep);
+void DeleteKangaskhanStorage(void);
+u32 KangaskhanStorageCallback(void);
 
 #endif

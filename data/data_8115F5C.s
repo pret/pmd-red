@@ -133,8 +133,8 @@ gUnknown_81161B8: @ 81161B8
 gUnknown_81161C8: @ 81161C8
         .byte 0x01, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .4byte sub_8016E40
-        .4byte sub_8016D54
+        .4byte DeleteKangaskhanStorage
+        .4byte KangaskhanStorageCallback
 
 	.global gUnknown_81161D8
 gUnknown_81161D8: @ 81161D8
@@ -154,8 +154,8 @@ gUnknown_81161E8: @ 81161E8
 gUnknown_81161F8: @ 81161F8
         .byte 0x01, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .4byte sub_8018CF0
-        .4byte sub_8018C04
+        .4byte DeleteKecleonBros
+        .4byte KecleonBrosCallback
 
 	.global gUnknown_8116208
 gUnknown_8116208: @ 8116208

@@ -8,6 +8,7 @@
 #include "team_inventory.h"
 #include "friend_area_action_menu.h"
 #include "menu_input.h"
+#include "kecleon_bros.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 
@@ -22,9 +23,6 @@ extern void sub_801BEEC(s16);
 extern void GetLinkedSequence(u32, struct Move *, u16*);
 extern void sub_801F808(u16*);
 extern void sub_8027794();
-extern void sub_801A5D8(u32, u32, u32, u32);
-extern void sub_801A8D0(u32);
-extern void sub_801A9E0();
 extern void sub_801F1B0(u32, u32);
 extern void sub_801B3C0(struct Item *);
 extern void unk_CopyMoves4To8(struct Move *, struct Move *);

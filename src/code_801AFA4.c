@@ -63,7 +63,7 @@ u32 sub_801AFA4(u32 index)
 {
     gUnknown_203B22C = MemoryAlloc(sizeof(struct unkStruct_203B22C), 8);
     gUnknown_203B22C->teamItemIndex = index;
-    gUnknown_203B22C->id = gTeamInventory_203B460->teamItems[index].id;
+    gUnknown_203B22C->id = gTeamInventoryRef->teamItems[index].id;
     gUnknown_203B22C->moveID = GetItemMoveID(gUnknown_203B22C->id);
     sub_8092C84(gUnknown_202E1C8, gUnknown_203B22C->moveID);
     sub_8099690(0);
@@ -135,8 +135,8 @@ void sub_801B080(void)
             sub_8094060(gUnknown_203B22C->moves, gUnknown_203B22C->pokeStruct->moves);
             if(!IsHMItem(gUnknown_203B22C->id))
             {
-                gTeamInventory_203B460->teamItems[gUnknown_203B22C->teamItemIndex].quantity = gUnknown_203B22C->id - 0x7D;
-                gTeamInventory_203B460->teamItems[gUnknown_203B22C->teamItemIndex].id = ITEM_TM_USED_TM;
+                gTeamInventoryRef->teamItems[gUnknown_203B22C->teamItemIndex].quantity = gUnknown_203B22C->id - 0x7D;
+                gTeamInventoryRef->teamItems[gUnknown_203B22C->teamItemIndex].id = ITEM_TM_USED_TM;
             }
             PlaySound(0x9C << 1);
             // {CENTER_ALIGN}CM{ARG_POKEMON_8}{END_COLOR_TEXT_1} learned

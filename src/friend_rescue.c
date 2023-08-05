@@ -24,7 +24,7 @@ extern u32 sub_802F298();
 
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
-extern struct TeamInventory *gTeamInventory_203B460;
+extern struct TeamInventory *gTeamInventoryRef;
 
 extern u8 gUnknown_80E44A4[];
 extern u8 gUnknown_80E4500[];
@@ -2692,7 +2692,7 @@ void sub_8034F88(void)
                 mail = GetMailatIndex(gUnknown_203B33C->unk218);
                 if(gUnknown_203B33C->item.id != ITEM_NOTHING)
                     mail->item = gUnknown_203B33C->item;
-                gTeamInventory_203B460->teamStorage[gUnknown_203B33C->item.id]--;
+                gTeamInventoryRef->teamStorage[gUnknown_203B33C->item.id]--;
                 SetFriendRescueMenuState(0x75);
                 break;
             case 7:

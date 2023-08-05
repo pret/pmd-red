@@ -175,11 +175,11 @@ void UpdateFelicityBankDialogue(void)
         case 0x1:
             CreateFelicityBankShopMenu();
             gFelicityBankWork->fallbackState = 2;
-            if (gTeamInventory_203B460->teamSavings == 0)
+            if (gTeamInventoryRef->teamSavings == 0)
                 sub_8014248(gFelicityDialogue[gFelicityBankWork->isAsleep][1], 0, gFelicityBankWork->menuAction,
                     gFelicityBankWork->unk14, gFelicityBankWork->unk54, 4, 0, gFelicityBankWork->unkA4, 0xC);
             else {
-                gUnknown_202DE30 = gTeamInventory_203B460->teamSavings;
+                gUnknown_202DE30 = gTeamInventoryRef->teamSavings;
                 sub_8014248(gFelicityDialogue[gFelicityBankWork->isAsleep][2], 0, gFelicityBankWork->menuAction,
                     gFelicityBankWork->unk14, gFelicityBankWork->unk54, 4, 0, gFelicityBankWork->unkA4, 0xC);
             }
@@ -190,10 +190,10 @@ void UpdateFelicityBankDialogue(void)
             break;
         case 0x4:
             gFelicityBankWork->fallbackState = 6;
-            if (gTeamInventory_203B460->teamSavings == 0)
+            if (gTeamInventoryRef->teamSavings == 0)
                 sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][4], 0, gFelicityBankWork->unkA4, 0x10D);
             else {
-                gUnknown_202DE30 = gTeamInventory_203B460->teamSavings;
+                gUnknown_202DE30 = gTeamInventoryRef->teamSavings;
                 sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][5], 0, gFelicityBankWork->unkA4, 0x10D);
             }
             break;
@@ -202,11 +202,11 @@ void UpdateFelicityBankDialogue(void)
             sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][3], 0, gFelicityBankWork->unkA4, 0x10D);
             break;
         case 0x7:
-            if (gTeamInventory_203B460->teamMoney == 0) {
+            if (gTeamInventoryRef->teamMoney == 0) {
                 gFelicityBankWork->fallbackState = 1;
                 sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][7], 0, gFelicityBankWork->unkA4, 0x10D);
             }
-            else if (gTeamInventory_203B460->teamSavings >= MAX_TEAM_SAVINGS) {
+            else if (gTeamInventoryRef->teamSavings >= MAX_TEAM_SAVINGS) {
                 gFelicityBankWork->fallbackState = 1;
                 sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][8], 0, gFelicityBankWork->unkA4, 0x10D);
             }
@@ -216,9 +216,9 @@ void UpdateFelicityBankDialogue(void)
             }
             break;
         case 0x8:
-            gFelicityBankWork->maximumDepositWithdraw = MAX_TEAM_SAVINGS - gTeamInventory_203B460->teamSavings;
-            if (gFelicityBankWork->maximumDepositWithdraw > gTeamInventory_203B460->teamMoney)
-                gFelicityBankWork->maximumDepositWithdraw = gTeamInventory_203B460->teamMoney;
+            gFelicityBankWork->maximumDepositWithdraw = MAX_TEAM_SAVINGS - gTeamInventoryRef->teamSavings;
+            if (gFelicityBankWork->maximumDepositWithdraw > gTeamInventoryRef->teamMoney)
+                gFelicityBankWork->maximumDepositWithdraw = gTeamInventoryRef->teamMoney;
             gFelicityBankWork->unk68 = gFelicityBankWork->maximumDepositWithdraw;
             gFelicityBankWork->unk6C = 1;
             gFelicityBankWork->unk74 = 5;
@@ -236,24 +236,24 @@ void UpdateFelicityBankDialogue(void)
             sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][9], 0, gFelicityBankWork->unkA4, 0x10D);
             break;
         case 0xA:
-            if (gTeamInventory_203B460->teamMoney >= MAX_TEAM_MONEY) {
+            if (gTeamInventoryRef->teamMoney >= MAX_TEAM_MONEY) {
                 gFelicityBankWork->fallbackState = 1;
                 sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][12], 0, gFelicityBankWork->unkA4, 0x10D);
             }
-            else if (gTeamInventory_203B460->teamSavings == 0) {
+            else if (gTeamInventoryRef->teamSavings == 0) {
                 gFelicityBankWork->fallbackState = 1;
                 sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][11], 0, gFelicityBankWork->unkA4, 0x10D);
             }
             else {
                 gFelicityBankWork->fallbackState = 11;
-                gUnknown_202DE30 = gTeamInventory_203B460->teamSavings;
+                gUnknown_202DE30 = gTeamInventoryRef->teamSavings;
                 sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][10], 0, gFelicityBankWork->unkA4, 0x10D);
             }
             break;
         case 0xB:
-            gFelicityBankWork->maximumDepositWithdraw = MAX_TEAM_MONEY - gTeamInventory_203B460->teamMoney;
-            if (gFelicityBankWork->maximumDepositWithdraw > gTeamInventory_203B460->teamSavings)
-                gFelicityBankWork->maximumDepositWithdraw = gTeamInventory_203B460->teamSavings;
+            gFelicityBankWork->maximumDepositWithdraw = MAX_TEAM_MONEY - gTeamInventoryRef->teamMoney;
+            if (gFelicityBankWork->maximumDepositWithdraw > gTeamInventoryRef->teamSavings)
+                gFelicityBankWork->maximumDepositWithdraw = gTeamInventoryRef->teamSavings;
             gFelicityBankWork->unk68 = gFelicityBankWork->maximumDepositWithdraw;
             gFelicityBankWork->unk6C = 1;
             gFelicityBankWork->unk74 = 5;
@@ -343,8 +343,8 @@ void Felicity_DepositMoney(void)
         break;
       case 3:
           gFelicityBankWork->chosenAmount = gFelicityBankWork->unk64;
-          gTeamInventory_203B460->teamSavings += gFelicityBankWork->chosenAmount;
-          gTeamInventory_203B460->teamMoney -= gFelicityBankWork->chosenAmount;
+          gTeamInventoryRef->teamSavings += gFelicityBankWork->chosenAmount;
+          gTeamInventoryRef->teamMoney -= gFelicityBankWork->chosenAmount;
           PlaySound(0x14c);
           UpdateFelicityBankState(9);
           break;
@@ -364,8 +364,8 @@ void Felicity_WithdrawMoney(void)
         break;
       case 3:
           gFelicityBankWork->chosenAmount = gFelicityBankWork->unk64;
-          gTeamInventory_203B460->teamMoney += gFelicityBankWork->chosenAmount;
-          gTeamInventory_203B460->teamSavings -= gFelicityBankWork->chosenAmount;
+          gTeamInventoryRef->teamMoney += gFelicityBankWork->chosenAmount;
+          gTeamInventoryRef->teamSavings -= gFelicityBankWork->chosenAmount;
           PlaySound(0x14c);
           UpdateFelicityBankState(0xc);
           break;
@@ -410,9 +410,9 @@ void CreateFelicityMoneySavingsHeader(u32 param_1)
   sub_8008C54(param_1);
   sub_80073B8(param_1);
   xxx_call_draw_string(16, 4, gFelicityMoney, param_1, 0);
-  sub_8012BC4(96, 4, gTeamInventory_203B460->teamMoney, 5, 5, param_1);
+  sub_8012BC4(96, 4, gTeamInventoryRef->teamMoney, 5, 5, param_1);
   xxx_call_draw_string(112, 4, gFelicitySavings, param_1, 0);
-  sub_8012BC4(200, 4, gTeamInventory_203B460->teamSavings, 7, 5, param_1);
+  sub_8012BC4(200, 4, gTeamInventoryRef->teamSavings, 7, 5, param_1);
   sub_80073E0(param_1);
 }
 
@@ -421,6 +421,6 @@ void DrawTeamMoneyBox(u32 param_1)
   sub_8008C54(param_1);
   sub_80073B8(param_1);
   xxx_call_draw_string(6, 0, &gUnknown_80DB738, param_1, 0); // Money
-  sub_8012BC4(42, 12, gTeamInventory_203B460->teamMoney, 5, 5, param_1);
+  sub_8012BC4(42, 12, gTeamInventoryRef->teamMoney, 5, 5, param_1);
   sub_80073E0(param_1);
 }

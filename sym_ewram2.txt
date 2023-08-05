@@ -139,7 +139,7 @@ gUnknown_203B200: /* 203B200 */
 .include "src/felicity_bank.o"
 .include "src/kangaskhan_storage.o"
 
-gUnknown_203B210: /* 203B210 */
+gKecleonBrosWork: /* 203B210 */
 	.space 0x4
 
 gUnknown_203B214: /* 203B214 */

@@ -717,7 +717,7 @@ _08086104:
 	movs r0, 0x1
 	b _0808611C
 	.align 2, 0
-_08086108: .4byte gTeamInventory_203B460
+_08086108: .4byte gTeamInventoryRef
 _0808610C: .4byte gDungeon
 _08086110: .4byte 0x0001357c
 _08086114:

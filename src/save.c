@@ -609,7 +609,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
     gUnknown_203B184 = r0;
     if(r0 != NULL)
     {
-       gTeamInventory_203B460 = r0->MoneyItems;
+       gTeamInventoryRef = r0->MoneyItems;
        gRecruitedPokemonRef = r0->recruitedPokemon;
        gUnknown_203B480 = r0->unk8;
        gUnknown_203B484 = r0->unkC;
@@ -624,7 +624,7 @@ void sub_8012334(struct UnkStruct_203B184 *r0)
        gPlayTimeRef     = r0->playTime;
        return;
     }
-       gTeamInventory_203B460 = GetMoneyItemsInfo();
+       gTeamInventoryRef = GetMoneyItemsInfo();
        gRecruitedPokemonRef = GetRecruitedPokemon();
        gUnknown_203B480 = sub_80950F8();
        gUnknown_203B484 = sub_8095100();

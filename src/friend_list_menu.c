@@ -9,7 +9,7 @@
 #include "moves.h"
 #include "menu_input.h"
 #include "team_inventory.h"
-
+#include "kecleon_bros.h"
 
 // there might be more overlap with unkStruct_203B2BC
 // I was working on the moves and put the data that seemed to correspond to that
@@ -126,9 +126,6 @@ extern bool8 sub_8024108(u32);
 extern u32 sub_801B3C0(struct Item *param_1);
 extern void sub_8023868(u32, u32, u32, u32);
 extern void sub_801F1B0(u32, u32);
-extern void sub_801A5D8(u32,u32, u32, u32);
-extern void sub_801A8D0(u32);
-extern void sub_801A9E0(void);
 extern void PlaySound(u32);
 extern void sub_8024458(s16, u32);
 extern void sub_801BEEC(s16);
@@ -149,10 +146,7 @@ extern void sub_801F214(void);
 extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
 extern void sub_801F808(u16 *);
 extern u32 sub_801602C(u32 r0, u8 *name);
-extern u32 sub_801A6E8(u32);
-extern u32 sub_801A8AC(void);
 extern void sub_8099690(u32);
-extern void sub_801A928(void);
 extern void sub_801F8D0(void);
 extern u32 sub_801F890(void);
 extern void sub_80160D8(void);
@@ -613,18 +607,18 @@ void sub_8025BE8(void)
 
 void sub_8025C04(void)
 {
-    switch(sub_801A6E8(1))
+    switch(sub_801A6E8(TRUE))
     {
         case 3:
             gUnknown_203B2B4->itemIndex = sub_801A8AC();
-            gUnknown_203B2B4->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B4->itemIndex].id;
-            gUnknown_203B2B4->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B4->itemIndex].quantity;
+            gUnknown_203B2B4->item1.id = gTeamInventoryRef->teamItems[gUnknown_203B2B4->itemIndex].id;
+            gUnknown_203B2B4->item1.quantity = gTeamInventoryRef->teamItems[gUnknown_203B2B4->itemIndex].quantity;
             sub_8025434(0xD);
             break;
         case 4:
             gUnknown_203B2B4->itemIndex = sub_801A8AC();
-            gUnknown_203B2B4->item1.id = gTeamInventory_203B460->teamItems[gUnknown_203B2B4->itemIndex].id;
-            gUnknown_203B2B4->item1.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2B4->itemIndex].quantity;
+            gUnknown_203B2B4->item1.id = gTeamInventoryRef->teamItems[gUnknown_203B2B4->itemIndex].id;
+            gUnknown_203B2B4->item1.quantity = gTeamInventoryRef->teamItems[gUnknown_203B2B4->itemIndex].quantity;
             sub_8099690(0);
             sub_8025434(0xE);
             break;
@@ -646,7 +640,7 @@ void sub_8025CB4(void)
   struct Item item;
   
   menuAction = 0;
-  sub_801A6E8(0);
+  sub_801A6E8(FALSE);
   if ((!sub_8012FD8(&gUnknown_203B2B4->unk78)) && (sub_8013114(&gUnknown_203B2B4->unk78,&menuAction), menuAction != 1)) {
     gUnknown_203B2B4->menuAction2 = menuAction;
   }

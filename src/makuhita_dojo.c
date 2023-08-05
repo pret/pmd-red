@@ -462,7 +462,7 @@ void sub_8030480(void)
     }
 }
 
-#ifdef NONMATCHING
+#ifdef NONMATCHING // https://decomp.me/scratch/lM7lE
 void sub_80304C8(void)
 {
     s16 test;

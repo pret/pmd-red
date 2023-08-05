@@ -36,7 +36,7 @@ _08047180:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804718C: .4byte gTeamInventory_203B460
+_0804718C: .4byte gTeamInventoryRef
 	thumb_func_end sub_8047158
 
 	thumb_func_start sub_8047190

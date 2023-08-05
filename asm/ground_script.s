@@ -7579,7 +7579,7 @@ _080A1C5E:
 	b _080A236A
 	.align 2, 0
 _080A1C64: .4byte gUnknown_81167E4
-_080A1C68: .4byte gTeamInventory_203B460
+_080A1C68: .4byte gTeamInventoryRef
 _080A1C6C: .4byte 0x000003e6
 _080A1C70:
 	ldr r0, _080A1C80
@@ -8016,7 +8016,7 @@ _080A1FE0:
 	.align 2, 0
 _080A200C: .4byte gUnknown_8116844
 _080A2010: .4byte 0x000003e6
-_080A2014: .4byte gTeamInventory_203B460
+_080A2014: .4byte gTeamInventoryRef
 _080A2018:
 	ldrb r0, [r6, 0x2]
 	movs r1, 0

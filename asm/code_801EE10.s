@@ -192,7 +192,7 @@ _0801F074:
 	b _0801F12E
 	.align 2, 0
 _0801F0C8: .4byte gUnknown_203B270
-_0801F0CC: .4byte gTeamInventory_203B460
+_0801F0CC: .4byte gTeamInventoryRef
 _0801F0D0:
 	ldr r0, _0801F0E0
 	ldr r1, [r0]

@@ -9,9 +9,10 @@
 #include "pokemon.h"
 #include "friend_area_action_menu.h"
 #include "menu_input.h"
+#include "kecleon_bros.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
-extern struct TeamInventory *gTeamInventory_203B460;
+extern struct TeamInventory *gTeamInventoryRef;
 
 extern u32 sub_801B410();
 extern void sub_801B450();
@@ -21,10 +22,7 @@ extern void sub_801F214();
 extern void SetFriendAreaActionMenuState(u32);
 extern void PlaySound(u32);
 extern void nullsub_104();
-extern void sub_801A928();
 extern void sub_8099690(u32);
-extern u32 sub_801A8AC();
-extern u32 sub_801A6E8(u32);
 
 extern s32 sub_80144A4(s32 *);
 extern void sub_8027EB8();
@@ -320,18 +318,18 @@ void sub_8027AE4(void)
 
 void sub_8027B28(void)
 {
-  switch(sub_801A6E8(1))
+  switch(sub_801A6E8(TRUE))
   {
     case 3:
         gUnknown_203B2BC->id = sub_801A8AC();
-        gUnknown_203B2BC->itemToGive.id = gTeamInventory_203B460->teamItems[gUnknown_203B2BC->id].id;
-        gUnknown_203B2BC->itemToGive.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2BC->id].quantity;
+        gUnknown_203B2BC->itemToGive.id = gTeamInventoryRef->teamItems[gUnknown_203B2BC->id].id;
+        gUnknown_203B2BC->itemToGive.quantity = gTeamInventoryRef->teamItems[gUnknown_203B2BC->id].quantity;
         SetFriendAreaActionMenuState(0xc);
         break;
     case 4:
         gUnknown_203B2BC->id = sub_801A8AC();
-        gUnknown_203B2BC->itemToGive.id = gTeamInventory_203B460->teamItems[gUnknown_203B2BC->id].id;
-        gUnknown_203B2BC->itemToGive.quantity = gTeamInventory_203B460->teamItems[gUnknown_203B2BC->id].quantity;
+        gUnknown_203B2BC->itemToGive.id = gTeamInventoryRef->teamItems[gUnknown_203B2BC->id].id;
+        gUnknown_203B2BC->itemToGive.quantity = gTeamInventoryRef->teamItems[gUnknown_203B2BC->id].quantity;
         sub_8099690(0);
         SetFriendAreaActionMenuState(0xd);
         break;
@@ -350,7 +348,7 @@ void sub_8027BD8(void)
   s32 menuAction;
 
   menuAction = 0;
-  sub_801A6E8(0);
+  sub_801A6E8(FALSE);
   if ((sub_8012FD8(&gUnknown_203B2BC->unk7C) == 0) && (sub_8013114(&gUnknown_203B2BC->unk7C,&menuAction), menuAction != 1)) {
     gUnknown_203B2BC->menuAction2 = menuAction;
   }
@@ -518,10 +516,10 @@ bool8 sub_8027E4C(struct PokemonStruct *pokeStruct)
     {
         if(IsThrowableItem(pokeStruct->heldItem.id))
         {
-            if(gTeamInventory_203B460->teamStorage[pokeStruct->heldItem.id] + pokeStruct->heldItem.quantity > 0x3e7)
+            if(gTeamInventoryRef->teamStorage[pokeStruct->heldItem.id] + pokeStruct->heldItem.quantity > 0x3e7)
                 return FALSE;
         }
-        else if(gTeamInventory_203B460->teamStorage[pokeStruct->heldItem.id] > 0x3e6)
+        else if(gTeamInventoryRef->teamStorage[pokeStruct->heldItem.id] > 0x3e6)
         {
             return FALSE;
         }
@@ -545,9 +543,9 @@ void sub_8027EB8(void)
         case 2:
             PlaySound(0x14d);
             if(IsThrowableItem(gUnknown_203B2BC->item2.id))
-                gTeamInventory_203B460->teamStorage[gUnknown_203B2BC->item2.id] += gUnknown_203B2BC->item2.quantity;
+                gTeamInventoryRef->teamStorage[gUnknown_203B2BC->item2.id] += gUnknown_203B2BC->item2.quantity;
             else
-                gTeamInventory_203B460->teamStorage[gUnknown_203B2BC->item2.id] += 1;
+                gTeamInventoryRef->teamStorage[gUnknown_203B2BC->item2.id] += 1;
             gUnknown_203B2BC->item2.id = ITEM_NOTHING;
             gUnknown_203B2BC->item2.quantity = 0;
             GivePokemonItem(gUnknown_203B2BC->targetPoke, &gUnknown_203B2BC->item2);
