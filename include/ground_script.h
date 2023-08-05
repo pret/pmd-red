@@ -18,7 +18,7 @@ struct GroundScript_ExecutePP_1_sub
     /* 0xE */ u8 unkE;
     /* 0xF */ u8 fillF;
     /* 0x10 */ u32 unk10;
-    /* 0x14 */ u32 unk14;
+    /* 0x14 */ u8 *unk14;
     /* 0x18 */ u8 fill18[0x22 - 0x18];
     /* 0x22 */ u16 unk22;
     /* 0x24 */ u16 unk24;
@@ -32,6 +32,7 @@ struct GroundScript_ExecutePP_1_sub2
     Callback callbacks[10]; // IDK the size..
 };
 
+// size: 0x110
 struct GroundScript_ExecutePP_1
 {
     struct GroundScript_ExecutePP_1_sub2 *unk0;
@@ -40,7 +41,7 @@ struct GroundScript_ExecutePP_1
     u32 unkC;
     u16 unk10;
     u8 unk12;
-    u8 fill18[0x24 - 0x13];
+    u8 *unk14[4];
     struct GroundScript_ExecutePP_1_sub unk24;
     struct GroundScript_ExecutePP_1_sub unk84;
     u16 unkE4;

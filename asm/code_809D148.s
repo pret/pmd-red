@@ -641,40 +641,4 @@ _0809D6D2:
 	bx r1
 	thumb_func_end sub_809D684
 
-	thumb_func_start sub_809D6D8
-sub_809D6D8:
-	lsls r1, 16
-	asrs r1, 14
-	adds r0, 0x14
-	adds r0, r1
-	str r2, [r0]
-	bx lr
-	thumb_func_end sub_809D6D8
-
-	thumb_func_start sub_809D6E4
-sub_809D6E4:
-	push {r4,lr}
-	lsls r2, 16
-	asrs r2, 16
-	lsls r4, r2, 2
-	adds r3, r0, 0
-	adds r3, 0x14
-	adds r3, r4
-	ldr r3, [r3]
-	str r3, [r1]
-	strh r2, [r1, 0x4]
-	ldrh r2, [r0, 0x10]
-	strh r2, [r1, 0x6]
-	ldrb r0, [r0, 0x12]
-	strb r0, [r1, 0x8]
-	adds r0, r3, 0
-	cmp r0, 0
-	beq _0809D708
-	movs r0, 0x1
-_0809D708:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_809D6E4
-
         .align 2,0
