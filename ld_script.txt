@@ -98,7 +98,6 @@ SECTIONS {
         src/felicity_bank.o(.text);
         src/kangaskhan_storage.o(.text);
         src/kecleon_items.o(.text);
-        asm/kecleon_items.o(.text);
         src/kecleon_items_1.o(.text);
         src/code_801AFA4.o(.text);
         src/code_801B3C0.o(.text);
