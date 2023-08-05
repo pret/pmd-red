@@ -59,7 +59,7 @@ s32 sub_801AE24(u32);
 
 
 extern u8 sub_8019FB0(void);
-
+extern void PlaySound(u16 songIndex);
 extern void PlayMenuSoundEffect(u32);
 
 extern struct UnkTextStruct2 gUnknown_80DB8CC;
@@ -68,16 +68,16 @@ extern struct UnkTextStruct2 gUnknown_80DB8FC;
 extern struct UnkTextStruct2 gUnknown_80DB944;
 extern struct UnkTextStruct2 gUnknown_80DB95C;
 extern const struct UnkTextStruct2 gUnknown_80DB914;
-extern void sub_801A430(void);
-extern void sub_801A4A4(void);
+
+extern u32 sub_80095E4(s16, u32);
 extern void sub_801A064(void);
 extern void sub_801A0D8(void);
 extern u8 sub_801A37C(void);
-
+extern void sub_801A430(void);
+extern void sub_801A4A4(void);
 extern void sub_801A010(void);
 extern void sub_801A3DC(void);
 extern void sub_801AD34(u32);
-extern void PlaySound(u16 songIndex);
 
 u32 CountKecleonItems(void);
 
@@ -658,6 +658,23 @@ void sub_801A010(void)
     }
 }
 
+#if NONMATCHING // https://decomp.me/scratch/VjeuO
+void sub_801A064(void)
+{
+    s16 val;
+
+    gUnknown_203B214->unk9C[0] = gUnknown_203B214->input.unk20;
+    gUnknown_203B214->unk9C[1] = gUnknown_203B214->input.unk1E;
+    gUnknown_203B214->unk9C[2] = 10;
+    gUnknown_203B214->unk9C[3] = 0;
+
+    val = sub_80095E4(gUnknown_203B214->input.unk1A, 12) + 2;
+    gUnknown_203B214->unk3C[gUnknown_203B214->unk34].unkE = val;
+    gUnknown_203B214->unk3C[gUnknown_203B214->unk34].unk10 = val + 2;
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B214->unk3C, 1, 1);
+}
+#else
 NAKED
 void sub_801A064(void)
 {
@@ -717,6 +734,7 @@ void sub_801A064(void)
             "\t.align 2, 0\n"
     "_0801A0D4: .4byte gUnknown_203B214");
 }
+#endif // NONMATCHING
 
 void sub_801A0D8(void)
 {
@@ -849,6 +867,23 @@ void sub_801A3DC(void)
     }
 }
 
+#if NONMATCHING // https://decomp.me/scratch/L78xC
+void sub_801A430(void)
+{
+    s16 val;
+
+    gUnknown_203B21C->unk9C[0] = gUnknown_203B21C->input.unk20;
+    gUnknown_203B21C->unk9C[1] = gUnknown_203B21C->input.unk1E;
+    gUnknown_203B21C->unk9C[2] = 10;
+    gUnknown_203B21C->unk9C[3] = 0;
+
+    val = sub_80095E4(gUnknown_203B21C->input.unk1A, 12) + 2;
+    gUnknown_203B21C->unk3C[gUnknown_203B21C->unk34].unkE = val;
+    gUnknown_203B21C->unk3C[gUnknown_203B21C->unk34].unk10 = val + 2;
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B21C->unk3C, 1, 1);
+}
+#else
 NAKED
 void sub_801A430(void)
 {
@@ -907,6 +942,7 @@ void sub_801A430(void)
 	"\t.align 2, 0\n"
 "_0801A4A0: .4byte gUnknown_203B21C");
 }
+#endif // NONMATCHING
 
 void sub_801A4A4(void)
 {
