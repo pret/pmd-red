@@ -109,8 +109,8 @@ void sub_801A998(void);
 s32 sub_801AE24(u32);
 
 u32 CountKecleonItems(void);
-void Kecleon_SortItems(void);
-void KecleonBros_SetState(u32);
+void SetKecleonBrosState(u32);
+void SortInventoryItems(void);
 void UpdateKecleonStoreDialogue(void);
 
 u32 CreateKecleonBros(u32 mode)
@@ -169,7 +169,7 @@ u32 CreateKecleonBros(u32 mode)
     gKecleonBrosWork->unkE2 = 0;
     gKecleonBrosWork->unkDC = 2;
     gKecleonBrosWork->unkDE = 8;
-    KecleonBros_SetState(KECLEON_STORE_INIT);
+    SetKecleonBrosState(KECLEON_STORE_INIT);
     return 1;
 }
 
@@ -227,7 +227,7 @@ void DeleteKecleonBros(void)
     }
 }
 
-void KecleonBros_SetState(u32 newState)
+void SetKecleonBrosState(u32 newState)
 {
     gKecleonBrosWork->currState = newState;
     sub_8018D30();
@@ -621,37 +621,37 @@ void sub_8019730(void)
     switch (menuAction) {
         case 2:
             if (CountKecleonItems() == 0)
-                KecleonBros_SetState(KECLEON_STORE_NO_STORE_ITEMS);
+                SetKecleonBrosState(KECLEON_STORE_NO_STORE_ITEMS);
             else if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
-                KecleonBros_SetState(KECLEON_STORE_TOO_MANY_ITEMS);
+                SetKecleonBrosState(KECLEON_STORE_TOO_MANY_ITEMS);
             else
-                KecleonBros_SetState(15);
+                SetKecleonBrosState(15);
             break;
         case 3:
             if (GetNumberOfFilledInventorySlots() == 0)
-                KecleonBros_SetState(KECLEON_STORE_NO_ITEMS_TO_SELL);
+                SetKecleonBrosState(KECLEON_STORE_NO_ITEMS_TO_SELL);
             else if (gKecleonBrosWork->numInventoryItemToSell == 0)
-                KecleonBros_SetState(8);
+                SetKecleonBrosState(8);
             else if (gTeamInventory_203B460->teamMoney < MAX_TEAM_MONEY)
-                KecleonBros_SetState(23);
+                SetKecleonBrosState(23);
             else
-                KecleonBros_SetState(7);
+                SetKecleonBrosState(7);
             break;
         case 4:
             if (GetNumberOfFilledInventorySlots() == 0)
-                KecleonBros_SetState(KECLEON_STORE_NO_ITEMS_TO_SELL);
+                SetKecleonBrosState(KECLEON_STORE_NO_ITEMS_TO_SELL);
             else if (gKecleonBrosWork->numInventoryItemToSell == 0)
-                KecleonBros_SetState(8);
+                SetKecleonBrosState(8);
             else if (gKecleonBrosWork->inventoryItemSellPrice + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY)
-                KecleonBros_SetState(7);
+                SetKecleonBrosState(7);
             else
-                KecleonBros_SetState(31);
+                SetKecleonBrosState(31);
             break;
         case 7:
-            KecleonBros_SetState(2);
+            SetKecleonBrosState(2);
             break;
         case 1:
-            KecleonBros_SetState(3);
+            SetKecleonBrosState(3);
             break;
     }
 }
@@ -677,11 +677,11 @@ void sub_8019850(void)
                 }
 
                 PlaySound(0x14c);
-                KecleonBros_SetState(17);
+                SetKecleonBrosState(17);
                 break;
             case 6:
             case 1:
-                KecleonBros_SetState(16);
+                SetKecleonBrosState(16);
                 break;
         }
     }
@@ -697,11 +697,11 @@ void sub_80198E8(void)
                 AddToTeamMoney(gKecleonBrosWork->itemSellPrice);
                 ShiftItemsDownFrom(gKecleonBrosWork->soldItemInventoryIndex);
                 PlaySound(0x14c);
-                KecleonBros_SetState(25);
+                SetKecleonBrosState(25);
                 break;
             case 6:
             case 1:
-                KecleonBros_SetState(24);
+                SetKecleonBrosState(24);
                 break;
         }
     }
@@ -726,11 +726,11 @@ void sub_8019944(void)
                 FillInventoryGaps();
                 AddToTeamMoney(gKecleonBrosWork->inventoryItemSellPrice);
                 PlaySound(0x14c);
-                KecleonBros_SetState(32);
+                SetKecleonBrosState(32);
                 break;
             case 1:
             case 6:
-                KecleonBros_SetState(KECLEON_STORE_MAIN_MENU);
+                SetKecleonBrosState(KECLEON_STORE_MAIN_MENU);
                 break;
         }
     }
@@ -760,7 +760,7 @@ void sub_80199CC(void)
             xxx_init_itemslot_8090A8C(&gKecleonBrosWork->soldItem, item->id, 0);
             gKecleonBrosWork->soldItem.quantity = item->quantity;
             gKecleonBrosWork->itemSellPrice = GetStackBuyPrice(&gKecleonBrosWork->soldItem);
-            KecleonBros_SetState(20);
+            SetKecleonBrosState(20);
             break;
         case 4:
             if (gKecleonBrosWork->isKecleonItemShop) {
@@ -775,7 +775,7 @@ void sub_80199CC(void)
             xxx_init_itemslot_8090A8C(&gKecleonBrosWork->soldItem, item->id, 0);
             gKecleonBrosWork->soldItem.quantity = item->quantity;
             gKecleonBrosWork->itemSellPrice = GetStackBuyPrice(&gKecleonBrosWork->soldItem);
-            KecleonBros_SetState(21);
+            SetKecleonBrosState(21);
             break;
         case 2:
             if (gKecleonBrosWork->isKecleonItemShop)
@@ -783,7 +783,7 @@ void sub_80199CC(void)
             else
                 sub_801A3DC();
 
-            KecleonBros_SetState(KECLEON_STORE_MAIN_MENU);
+            SetKecleonBrosState(KECLEON_STORE_MAIN_MENU);
             break;
         case 1:
             sub_801AD34(0);
@@ -801,18 +801,18 @@ void sub_8019B08(void)
             gKecleonBrosWork->soldItemInventoryIndex = sub_801A8AC();
             gKecleonBrosWork->soldItem = gTeamInventory_203B460->teamItems[gKecleonBrosWork->soldItemInventoryIndex];
             gKecleonBrosWork->itemSellPrice = GetStackSellPrice(&gKecleonBrosWork->soldItem);
-            KecleonBros_SetState(28);
+            SetKecleonBrosState(28);
             break;
         case 4:
             gKecleonBrosWork->soldItemInventoryIndex = sub_801A8AC();
             gKecleonBrosWork->soldItem = gTeamInventory_203B460->teamItems[gKecleonBrosWork->soldItemInventoryIndex];
             gKecleonBrosWork->itemSellPrice = GetStackSellPrice(&gKecleonBrosWork->soldItem);
             sub_8099690(0);
-            KecleonBros_SetState(29);
+            SetKecleonBrosState(29);
             break;
         case 2:
             sub_801A928();
-            KecleonBros_SetState(KECLEON_STORE_MAIN_MENU);
+            SetKecleonBrosState(KECLEON_STORE_MAIN_MENU);
             break;
         case 1:
         default:
@@ -838,17 +838,17 @@ void sub_8019BBC(void)
     switch (menuAction) {
         case 2:
             if (gTeamInventory_203B460->teamMoney == 0)
-                KecleonBros_SetState(KECLEON_STORE_NO_MONEY);
+                SetKecleonBrosState(KECLEON_STORE_NO_MONEY);
             else if (gKecleonBrosWork->itemSellPrice > gTeamInventory_203B460->teamMoney)
-                KecleonBros_SetState(KECLEON_STORE_NOT_ENOUGH_MONEY);
+                SetKecleonBrosState(KECLEON_STORE_NOT_ENOUGH_MONEY);
             else
-                KecleonBros_SetState(22);
+                SetKecleonBrosState(22);
             break;
         case 7:
-            KecleonBros_SetState(21);
+            SetKecleonBrosState(21);
             break;
         case 1:
-            KecleonBros_SetState(19);
+            SetKecleonBrosState(19);
             break;
     }
 }
@@ -868,18 +868,18 @@ void sub_8019C78(void)
             sub_8099690(0);
 
             if (!CanSellItem(gKecleonBrosWork->soldItem.id))
-                KecleonBros_SetState(KECLEON_STORE_CANT_SELL_ITEM);
+                SetKecleonBrosState(KECLEON_STORE_CANT_SELL_ITEM);
             else if (gKecleonBrosWork->itemSellPrice + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY)
-                KecleonBros_SetState(14);
+                SetKecleonBrosState(14);
             else
-                KecleonBros_SetState(30);
+                SetKecleonBrosState(30);
             break;
         case 7:
             sub_8099690(0);
-            KecleonBros_SetState(29);
+            SetKecleonBrosState(29);
             break;
         case 1:
-            KecleonBros_SetState(27);
+            SetKecleonBrosState(27);
             break;
     }
 }
@@ -890,7 +890,7 @@ void sub_8019D30(void)
         case 2:
         case 3:
             sub_801B450();
-            KecleonBros_SetState(19);
+            SetKecleonBrosState(19);
             break;
         case 0:
         case 1:
@@ -904,7 +904,7 @@ void sub_8019D4C(void)
         case 2:
         case 3:
             sub_801B450();
-            KecleonBros_SetState(27);
+            SetKecleonBrosState(27);
             break;
         case 0:
         case 1:
@@ -917,7 +917,7 @@ void sub_8019D68(void)
 {
     s32 temp;
     if (sub_80144A4(&temp) == 0)
-        KecleonBros_SetState(gKecleonBrosWork->fallbackState);
+        SetKecleonBrosState(gKecleonBrosWork->fallbackState);
 }
 
 u32 CountKecleonItems(void)
@@ -1476,7 +1476,7 @@ u32 sub_801A6E8(bool8 param_1)
         case INPUT_SELECT_BUTTON:
             if (gUnknown_203B224->unk0 != 2) {
                 PlayMenuSoundEffect(5);
-                Kecleon_SortItems();
+                SortInventoryItems();
                 sub_801A9E0();
             }
             // NOTE: fallthrough needed here
@@ -1734,10 +1734,10 @@ s32 sub_801AED0(s32 index)
 
 void sub_801AEE4(s32 index, s32 value)
 {
-    gUnknown_203B224->unk4[index] = value ;
+    gUnknown_203B224->unk4[index] = value;
 }
 
-void Kecleon_SortItems(void)
+void SortInventoryItems(void)
 {
     struct Item *itemSlotR;
     u32 *itemIDR;
