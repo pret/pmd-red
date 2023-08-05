@@ -7,9 +7,9 @@
 #include "text.h"
 
 // size: 0x148
-struct unkStruct_203B210
+struct KecleonBrosWork
 {
-    /* 0x0 */ u32 mode; // Corresponds to the enum: KecleonShopMode
+    /* 0x0 */ u32 mode; // Corresponds to the enum: KecleonBrosMode
     /* 0x4 */ bool8 isKecleonItemShop; // FALSE indicates it is Kecleon TM Shop
     /* 0x8 */ u32 currState;
     /* 0xC */ u32 fallbackState;
@@ -60,12 +60,12 @@ struct unkStruct_203B224
     u8 unkF0[4];
 };
 
-enum KecleonShopMode
+enum KecleonBrosMode
 {
-    KECLEON_SHOP_MODE_ITEMS_AWAKE = 0,
-    KECLEON_SHOP_MODE_ITEMS_ASLEEP = 1,
-    KECLEON_SHOP_MODE_WARES_AWAKE = 2,
-    KECLEON_SHOP_MODE_WARES_ASLEEP = 3,
+    KECLEON_BROS_MODE_ITEMS_AWAKE = 0,
+    KECLEON_BROS_MODE_ITEMS_ASLEEP = 1,
+    KECLEON_BROS_MODE_WARES_AWAKE = 2,
+    KECLEON_BROS_MODE_WARES_ASLEEP = 3,
 };
 
 enum KecleonStoreStates
@@ -81,8 +81,10 @@ enum KecleonStoreStates
     KECLEON_STORE_CANT_SELL_ITEM = 13,
 };
 
-// mode corresponds to the enum: KecleonShopMode
-u32 KecleonShop_New(u32 mode);
+u32 KecleonBros_Callback(void);
+void KecleonBros_Delete(void);
+// mode corresponds to the enum: KecleonBrosMode
+u32 KecleonBros_New(u32 mode);
 
 bool32 sub_801A5D8(u32, s32, struct UnkTextStruct2_sub *, u32);
 s32 sub_801A8AC(void);

@@ -5658,7 +5658,7 @@ _0809BCE8:
 	beq _0809BCF0
 	movs r0, 0x3
 _0809BCF0:
-	bl KecleonShop_New
+	bl KecleonBros_New
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809BD10

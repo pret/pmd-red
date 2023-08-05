@@ -154,8 +154,8 @@ gUnknown_81161E8: @ 81161E8
 gUnknown_81161F8: @ 81161F8
         .byte 0x01, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .4byte sub_8018CF0
-        .4byte sub_8018C04
+        .4byte KecleonBros_Delete
+        .4byte KecleonBros_Callback
 
 	.global gUnknown_8116208
 gUnknown_8116208: @ 8116208

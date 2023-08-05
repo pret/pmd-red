@@ -8,7 +8,7 @@
 #include "pokemon.h"
 #include "team_inventory.h"
 
-extern struct unkStruct_203B210 *gUnknown_203B210;
+extern struct KecleonBrosWork *gKecleonBrosWork;
 extern struct unkStruct_203B214 *gUnknown_203B214;
 extern u16 gUnknown_203B218;
 extern struct unkStruct_203B214 *gUnknown_203B21C;
@@ -111,48 +111,48 @@ s32 sub_801AE24(u32);
 
 u32 CountKecleonItems(void);
 void Kecleon_SortItems(void);
+void KecleonBros_SetState(u32);
 void UpdateKecleonStoreDialogue(void);
-void UpdateKecleonStoreState(u32);
 
-u32 KecleonShop_New(u32 mode)
+u32 KecleonBros_New(u32 mode)
 {
     char *monName;
     struct OpenedFile *faceFile;
 
-    gUnknown_203B210 = MemoryAlloc(sizeof(struct unkStruct_203B210), 8);
-    gUnknown_203B210->menuAction1 = 0;
-    gUnknown_203B210->menuAction2 = 0;
-    gUnknown_203B210->menuAction3 = 0;
-    gUnknown_203B210->mode = mode;
+    gKecleonBrosWork = MemoryAlloc(sizeof(struct KecleonBrosWork), 8);
+    gKecleonBrosWork->menuAction1 = 0;
+    gKecleonBrosWork->menuAction2 = 0;
+    gKecleonBrosWork->menuAction3 = 0;
+    gKecleonBrosWork->mode = mode;
 
     switch (mode) {
-        case KECLEON_SHOP_MODE_ITEMS_AWAKE:
-            gUnknown_203B210->isKecleonItemShop = TRUE;
-            gUnknown_203B210->unkE4 = &gUnknown_203B210->faceFile;
+        case KECLEON_BROS_MODE_ITEMS_AWAKE:
+            gKecleonBrosWork->isKecleonItemShop = TRUE;
+            gKecleonBrosWork->unkE4 = &gKecleonBrosWork->faceFile;
             CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
             CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);
             monName = GetMonSpecies(MONSTER_KECLEON);
             strcpy(gUnknown_202E1C8 - 0x50, monName);
             break;
-        case KECLEON_SHOP_MODE_ITEMS_ASLEEP:
-            gUnknown_203B210->isKecleonItemShop = TRUE;
-            gUnknown_203B210->unkE4 = NULL;
+        case KECLEON_BROS_MODE_ITEMS_ASLEEP:
+            gKecleonBrosWork->isKecleonItemShop = TRUE;
+            gKecleonBrosWork->unkE4 = NULL;
             CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
             CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);
             monName = GetMonSpecies(MONSTER_KECLEON);
             strcpy(gUnknown_202E1C8 - 0x50, monName);
             break;
-        case KECLEON_SHOP_MODE_WARES_AWAKE:
-            gUnknown_203B210->isKecleonItemShop = FALSE;
-            gUnknown_203B210->unkE4 = &gUnknown_203B210->faceFile;
+        case KECLEON_BROS_MODE_WARES_AWAKE:
+            gKecleonBrosWork->isKecleonItemShop = FALSE;
+            gKecleonBrosWork->unkE4 = &gKecleonBrosWork->faceFile;
             CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
             CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);
             monName = GetMonSpecies(MONSTER_KECLEON);
             strcpy(gUnknown_202E1C8 - 0x50, monName);
             break;
-        case KECLEON_SHOP_MODE_WARES_ASLEEP:
-            gUnknown_203B210->isKecleonItemShop = FALSE;
-            gUnknown_203B210->unkE4 = NULL;
+        case KECLEON_BROS_MODE_WARES_ASLEEP:
+            gKecleonBrosWork->isKecleonItemShop = FALSE;
+            gKecleonBrosWork->unkE4 = NULL;
             CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
             CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);
             monName = GetMonSpecies(MONSTER_KECLEON);
@@ -163,20 +163,20 @@ u32 KecleonShop_New(u32 mode)
     }
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_KECLEON);
-    gUnknown_203B210->faceFile = faceFile;
-    gUnknown_203B210->faceData = faceFile->data;
-    gUnknown_203B210->unkE0 = 0;
-    gUnknown_203B210->unkE1 = 0;
-    gUnknown_203B210->unkE2 = 0;
-    gUnknown_203B210->unkDC = 2;
-    gUnknown_203B210->unkDE = 8;
-    UpdateKecleonStoreState(KECLEON_STORE_INIT);
+    gKecleonBrosWork->faceFile = faceFile;
+    gKecleonBrosWork->faceData = faceFile->data;
+    gKecleonBrosWork->unkE0 = 0;
+    gKecleonBrosWork->unkE1 = 0;
+    gKecleonBrosWork->unkE2 = 0;
+    gKecleonBrosWork->unkDC = 2;
+    gKecleonBrosWork->unkDE = 8;
+    KecleonBros_SetState(KECLEON_STORE_INIT);
     return 1;
 }
 
-u32 sub_8018C04(void)
+u32 KecleonBros_Callback(void)
 {
-    switch (gUnknown_203B210->currState) {
+    switch (gKecleonBrosWork->currState) {
         case KECLEON_STORE_INIT:
         case KECLEON_STORE_MAIN_MENU:
             sub_8019730();
@@ -219,18 +219,18 @@ u32 sub_8018C04(void)
     return 0;
 }
 
-void sub_8018CF0(void)
+void KecleonBros_Delete(void)
 {
-    if (gUnknown_203B210 != NULL) {
-        CloseFile(gUnknown_203B210->faceFile);
-        MemoryFree(gUnknown_203B210);
-        gUnknown_203B210 = NULL;
+    if (gKecleonBrosWork != NULL) {
+        CloseFile(gKecleonBrosWork->faceFile);
+        MemoryFree(gKecleonBrosWork);
+        gKecleonBrosWork = NULL;
     }
 }
 
-void UpdateKecleonStoreState(u32 newState)
+void KecleonBros_SetState(u32 newState)
 {
-    gUnknown_203B210->currState = newState;
+    gKecleonBrosWork->currState = newState;
     sub_8018D30();
     UpdateKecleonStoreDialogue();
 }
@@ -238,26 +238,26 @@ void UpdateKecleonStoreState(u32 newState)
 void sub_8018D30(void)
 {
     s32 index;
-    sub_8006518(gUnknown_203B210->unkE8);
+    sub_8006518(gKecleonBrosWork->unkE8);
 
-    switch (gUnknown_203B210->currState) {
+    switch (gKecleonBrosWork->currState) {
         case 0x12:
         case 0x13:
-            gUnknown_203B210->unkE8[0] = gUnknown_80DB840;
-            gUnknown_203B210->unkE8[2] = gUnknown_80DB840;
-            gUnknown_203B210->unkE8[0] = gUnknown_80DB870;
-            gUnknown_203B210->unkE8[1] = gUnknown_80DB888;
+            gKecleonBrosWork->unkE8[0] = gUnknown_80DB840;
+            gKecleonBrosWork->unkE8[2] = gUnknown_80DB840;
+            gKecleonBrosWork->unkE8[0] = gUnknown_80DB870;
+            gKecleonBrosWork->unkE8[1] = gUnknown_80DB888;
             break;
         case 0x1A:
         case 0x1B:
-            gUnknown_203B210->unkE8[0] = gUnknown_80DB840;
-            gUnknown_203B210->unkE8[1] = gUnknown_80DB840;
-            gUnknown_203B210->unkE8[2] = gUnknown_80DB840;
-            gUnknown_203B210->unkE8[1] = gUnknown_80DB888;
+            gKecleonBrosWork->unkE8[0] = gUnknown_80DB840;
+            gKecleonBrosWork->unkE8[1] = gUnknown_80DB840;
+            gKecleonBrosWork->unkE8[2] = gUnknown_80DB840;
+            gKecleonBrosWork->unkE8[1] = gUnknown_80DB888;
             break;
         case 0x14:
         case 0x1C:
-            gUnknown_203B210->unkE8[2] = gUnknown_80DB858;
+            gKecleonBrosWork->unkE8[2] = gUnknown_80DB858;
             break;
         default:
         case 0x15:
@@ -266,104 +266,104 @@ void sub_8018D30(void)
         case 0x18:
         case 0x19:
             for(index = 0; index < 4; index++)
-                gUnknown_203B210->unkE8[index] = gUnknown_80DB840;
+                gKecleonBrosWork->unkE8[index] = gUnknown_80DB840;
             break;
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B210->unkE8, 1, 1);
+    sub_800641C(gKecleonBrosWork->unkE8, 1, 1);
 }
 
 void UpdateKecleonStoreDialogue(void)
 {
-    switch (gUnknown_203B210->currState) {
+    switch (gKecleonBrosWork->currState) {
         case 0:
             sub_8019DAC();
             sub_80194F8();
-            sub_8019E04(0);
-            sub_8014248(gKecleonShopDialogue[gUnknown_203B210->mode][0], 0, gUnknown_203B210->menuAction1,
-                gUnknown_203B210->menuItems, gUnknown_203B210->unk74, 4, 0, gUnknown_203B210->unkE4, 12);
+            sub_8019E04(FALSE);
+            sub_8014248(gKecleonShopDialogue[gKecleonBrosWork->mode][0], 0, gKecleonBrosWork->menuAction1,
+                gKecleonBrosWork->menuItems, gKecleonBrosWork->unk74, 4, 0, gKecleonBrosWork->unkE4, 12);
             break;
         case 1:
             sub_8019DAC();
             sub_80194F8();
-            sub_8019E04(0);
-            sub_8014248(gKecleonShopDialogue[gUnknown_203B210->mode][1], 0, gUnknown_203B210->menuAction1,
-                gUnknown_203B210->menuItems, gUnknown_203B210->unk74, 4, 0, gUnknown_203B210->unkE4, 12);
+            sub_8019E04(FALSE);
+            sub_8014248(gKecleonShopDialogue[gKecleonBrosWork->mode][1], 0, gKecleonBrosWork->menuAction1,
+                gKecleonBrosWork->menuItems, gKecleonBrosWork->unk74, 4, 0, gKecleonBrosWork->unkE4, 12);
             break;
         case 2:
-            gUnknown_203B210->fallbackState = 1;
-            sub_8019E04(0);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][22], 0, gUnknown_203B210->unkE4, 0x10D);
+            gKecleonBrosWork->fallbackState = 1;
+            sub_8019E04(FALSE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][22], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
         case 3:         
-            gUnknown_203B210->fallbackState = 4;
-            sub_8019E04(0);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][2], 0, gUnknown_203B210->unkE4, 0x30D);
+            gKecleonBrosWork->fallbackState = 4;
+            sub_8019E04(FALSE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][2], 0, gKecleonBrosWork->unkE4, 0x30D);
             break;
         case 5:
-            gUnknown_203B210->fallbackState = 1;
-            sub_8019E04(0);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][12], 0, gUnknown_203B210->unkE4, 0x10D);
+            gKecleonBrosWork->fallbackState = 1;
+            sub_8019E04(FALSE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][12], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
         case 6:
-            gUnknown_203B210->fallbackState = 16;
-            sub_8019E04(1);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][13], 0, gUnknown_203B210->unkE4, 0x10D);
+            gKecleonBrosWork->fallbackState = 16;
+            sub_8019E04(TRUE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][13], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
         case 7:
-            gUnknown_203B210->fallbackState = 1;
-            sub_8019E04(1);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][14], 0, gUnknown_203B210->unkE4, 0x10D);
+            gKecleonBrosWork->fallbackState = 1;
+            sub_8019E04(TRUE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][14], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
         case 8:
-            gUnknown_203B210->fallbackState = 1;
-            sub_8019E04(1);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][15], 0, gUnknown_203B210->unkE4, 0x10D);
+            gKecleonBrosWork->fallbackState = 1;
+            sub_8019E04(TRUE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][15], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
         case 9:
-            gUnknown_203B210->fallbackState = 1;
-            sub_8019E04(1);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][16], 0, gUnknown_203B210->unkE4, 0x10D);
+            gKecleonBrosWork->fallbackState = 1;
+            sub_8019E04(TRUE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][16], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
         case 10:
-            gUnknown_203B210->fallbackState = 1;
-            sub_8019E04(1);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][17], 0, gUnknown_203B210->unkE4, 0x10D);
+            gKecleonBrosWork->fallbackState = 1;
+            sub_8019E04(TRUE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][17], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
         case 11:
-            gUnknown_203B210->fallbackState = 1;
-            sub_8019E04(0);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][18], 0, gUnknown_203B210->unkE4, 0x10D);
+            gKecleonBrosWork->fallbackState = 1;
+            sub_8019E04(FALSE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][18], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
         case 12:
-            gUnknown_203B210->fallbackState = 16;
-            sub_8019E04(1);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][19], 0, gUnknown_203B210->unkE4, 0x10D);
+            gKecleonBrosWork->fallbackState = 16;
+            sub_8019E04(TRUE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][19], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
         case 13:
-            sub_8090E14(gUnknown_202DE58, &gUnknown_203B210->soldItem, NULL);
-            gUnknown_203B210->fallbackState = 24;
-            sub_8019E04(1);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][20], 0, gUnknown_203B210->unkE4, 0x10D);
+            sub_8090E14(gUnknown_202DE58, &gKecleonBrosWork->soldItem, NULL);
+            gKecleonBrosWork->fallbackState = 24;
+            sub_8019E04(TRUE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][20], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
         case 14:
-            gUnknown_203B210->fallbackState = 24;
-            sub_8019E04(1);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][21], 0, gUnknown_203B210->unkE4, 0x10D);
+            gKecleonBrosWork->fallbackState = 24;
+            sub_8019E04(TRUE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][21], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
         case 15:
-            gUnknown_203B210->fallbackState = 18;
-            sub_8019E04(0); // These are probably bool
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][3], 0, gUnknown_203B210->unkE4, 0x10D);
+            gKecleonBrosWork->fallbackState = 18;
+            sub_8019E04(FALSE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][3], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
         case 16:
-            gUnknown_203B210->fallbackState = 19;
-            sub_8019E04(0);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][4], 0, gUnknown_203B210->unkE4, 0x10D);
+            gKecleonBrosWork->fallbackState = 19;
+            sub_8019E04(FALSE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][4], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
         case 18:
-            if (gUnknown_203B210->isKecleonItemShop != FALSE)
+            if (gKecleonBrosWork->isKecleonItemShop != FALSE)
                 sub_8019E40(3);
             else
                 sub_801A20C(3);
@@ -372,7 +372,7 @@ void UpdateKecleonStoreDialogue(void)
             DrawTeamMoneyBox(1);
             break;
         case 19:
-            if (gUnknown_203B210->isKecleonItemShop != FALSE)
+            if (gKecleonBrosWork->isKecleonItemShop != FALSE)
                 sub_8019FCC(1);
             else
                 sub_801A398(1);
@@ -381,7 +381,7 @@ void UpdateKecleonStoreDialogue(void)
             DrawTeamMoneyBox(1);
             break;
         case 20:
-            if (gUnknown_203B210->isKecleonItemShop != FALSE)
+            if (gKecleonBrosWork->isKecleonItemShop != FALSE)
                 sub_801A0D8();
             else
                 sub_801A4A4();
@@ -389,46 +389,46 @@ void UpdateKecleonStoreDialogue(void)
             sub_801AD34(0);
             DrawTeamMoneyBox(1);
             sub_80195C0();
-            sub_8012D60(&gUnknown_203B210->menu, gUnknown_203B210->menuItems, 0, gUnknown_203B210->unk74, gUnknown_203B210->menuAction3, 2);
+            sub_8012D60(&gKecleonBrosWork->menu, gKecleonBrosWork->menuItems, 0, gKecleonBrosWork->unk74, gKecleonBrosWork->menuAction3, 2);
             break;
         case 22:
             sub_8019700();
-            sub_8090E14(gUnknown_202DE58, &gUnknown_203B210->soldItem, 0);
-            gUnknown_202DE30 = gUnknown_203B210->itemSellPrice;
-            sub_8019E04(0);  
-            sub_8014248(gKecleonShopDialogue[gUnknown_203B210->mode][5], 0, 5,gUnknown_203B210->menuItems, NULL, 4, 0, gUnknown_203B210->unkE4, 12);
+            sub_8090E14(gUnknown_202DE58, &gKecleonBrosWork->soldItem, 0);
+            gUnknown_202DE30 = gKecleonBrosWork->itemSellPrice;
+            sub_8019E04(FALSE);
+            sub_8014248(gKecleonShopDialogue[gKecleonBrosWork->mode][5], 0, 5,gKecleonBrosWork->menuItems, NULL, 4, 0, gKecleonBrosWork->unkE4, 12);
             break;
         case 17:
             if (CountKecleonItems() == 0) {
-                if (gUnknown_203B210->isKecleonItemShop != FALSE)
+                if (gKecleonBrosWork->isKecleonItemShop != FALSE)
                     sub_801A010();
                 else
                     sub_801A3DC();
-                gUnknown_203B210->fallbackState = 11;
+                gKecleonBrosWork->fallbackState = 11;
             }
             else {
                 if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE) {
-                    if (gUnknown_203B210->isKecleonItemShop != FALSE)
+                    if (gKecleonBrosWork->isKecleonItemShop != FALSE)
                         sub_801A010();
                     else
                         sub_801A3DC();
-                    gUnknown_203B210->fallbackState = 1;
+                    gKecleonBrosWork->fallbackState = 1;
                 }
                 else
-                    gUnknown_203B210->fallbackState = 16;
+                    gKecleonBrosWork->fallbackState = 16;
             }
-            sub_8019E04(0);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][6], 0, gUnknown_203B210->unkE4, 0x10D);
+            sub_8019E04(FALSE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][6], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
         case 23:
-            gUnknown_203B210->fallbackState = 26;
-            sub_8019E04(0);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][7], 0, gUnknown_203B210->unkE4, 0x10D);
+            gKecleonBrosWork->fallbackState = 26;
+            sub_8019E04(FALSE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][7], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
         case 24:
-            gUnknown_203B210->fallbackState = 27;
-            sub_8019E04(0);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][8], 0, gUnknown_203B210->unkE4, 0x10D);
+            gKecleonBrosWork->fallbackState = 27;
+            sub_8019E04(FALSE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][8], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
         case 26:
             sub_801A5D8(4, 3, NULL, 10);
@@ -442,40 +442,40 @@ void UpdateKecleonStoreDialogue(void)
             sub_801A9E0();
             DrawTeamMoneyBox(1);
             sub_8019660();
-            sub_8012D60(&gUnknown_203B210->menu, gUnknown_203B210->menuItems, 0, gUnknown_203B210->unk74, gUnknown_203B210->menuAction2, 2);
+            sub_8012D60(&gKecleonBrosWork->menu, gKecleonBrosWork->menuItems, 0, gKecleonBrosWork->unk74, gKecleonBrosWork->menuAction2, 2);
             break;
         case 30:
             sub_8019700();
-            sub_8090E14(gUnknown_202DE58, &gUnknown_203B210->soldItem, NULL);
-            gUnknown_202DE30 = gUnknown_203B210->itemSellPrice;
-            sub_8019E04(0);
-            sub_8014248(gKecleonShopDialogue[gUnknown_203B210->mode][9], 0, 5, gUnknown_203B210->menuItems, NULL, 4, 0, gUnknown_203B210->unkE4, 12);
+            sub_8090E14(gUnknown_202DE58, &gKecleonBrosWork->soldItem, NULL);
+            gUnknown_202DE30 = gKecleonBrosWork->itemSellPrice;
+            sub_8019E04(FALSE);
+            sub_8014248(gKecleonShopDialogue[gKecleonBrosWork->mode][9], 0, 5, gKecleonBrosWork->menuItems, NULL, 4, 0, gKecleonBrosWork->unkE4, 12);
             break;
         case 21:
         case 29:
-            sub_801B3C0(&gUnknown_203B210->soldItem);
+            sub_801B3C0(&gKecleonBrosWork->soldItem);
             break;
         case 25:
             if (GetNumberOfFilledInventorySlots() == 0 || gTeamInventory_203B460->teamMoney >= MAX_TEAM_MONEY) {
                 sub_801A928();
-                gUnknown_203B210->fallbackState = 1;
+                gKecleonBrosWork->fallbackState = 1;
             }
             else
-                gUnknown_203B210->fallbackState = 24;
+                gKecleonBrosWork->fallbackState = 24;
 
-            sub_8019E04(0);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][11], 0, gUnknown_203B210->unkE4, 0x10D);
+            sub_8019E04(FALSE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][11], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
-        case 31:            
+        case 31:
             sub_8019700();
-            gUnknown_202DE30 = gUnknown_203B210->inventoryItemSellPrice;
-            sub_8019E04(0);
-            sub_8014248(gKecleonShopDialogue[gUnknown_203B210->mode][10], 0, 5, gUnknown_203B210->menuItems, NULL, 4, 0, gUnknown_203B210->unkE4, 12);
+            gUnknown_202DE30 = gKecleonBrosWork->inventoryItemSellPrice;
+            sub_8019E04(FALSE);
+            sub_8014248(gKecleonShopDialogue[gKecleonBrosWork->mode][10], 0, 5, gKecleonBrosWork->menuItems, NULL, 4, 0, gKecleonBrosWork->unkE4, 12);
             break;
-        case 32:            
-            gUnknown_203B210->fallbackState = 1;
-            sub_8019E04(0);
-            sub_80141B4(gKecleonShopDialogue[gUnknown_203B210->mode][11], 0, gUnknown_203B210->unkE4, 0x10D);
+        case 32:
+            gKecleonBrosWork->fallbackState = 1;
+            sub_8019E04(FALSE);
+            sub_80141B4(gKecleonShopDialogue[gKecleonBrosWork->mode][11], 0, gKecleonBrosWork->unkE4, 0x10D);
             break;
     }
 }
@@ -485,42 +485,42 @@ void sub_80194F8(void)
     s32 index;
     s32 loopMax;
 
-    MemoryFill16(gUnknown_203B210->unk74, 0, sizeof(gUnknown_203B210->unk74));
+    MemoryFill16(gKecleonBrosWork->unk74, 0, sizeof(gKecleonBrosWork->unk74));
 
     loopMax = 0;
-    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4978;
-    gUnknown_203B210->menuItems[loopMax].menuAction = 2;
+    gKecleonBrosWork->menuItems[loopMax].text = *gUnknown_80D4978;
+    gKecleonBrosWork->menuItems[loopMax].menuAction = 2;
 
     loopMax += 1;
-    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4984;
-    gUnknown_203B210->menuItems[loopMax].menuAction = 3;
+    gKecleonBrosWork->menuItems[loopMax].text = *gUnknown_80D4984;
+    gKecleonBrosWork->menuItems[loopMax].menuAction = 3;
 
     loopMax += 1;
-    gUnknown_203B210->menuItems[loopMax].text = gUnknown_80DB8A0;
-    gUnknown_203B210->menuItems[loopMax].menuAction = 4;
+    gKecleonBrosWork->menuItems[loopMax].text = gUnknown_80DB8A0;
+    gKecleonBrosWork->menuItems[loopMax].menuAction = 4;
 
     loopMax += 1;
-    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4970;
-    gUnknown_203B210->menuItems[loopMax].menuAction = 7;
+    gKecleonBrosWork->menuItems[loopMax].text = *gUnknown_80D4970;
+    gKecleonBrosWork->menuItems[loopMax].menuAction = 7;
 
     loopMax += 1;
-    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4934;
-    gUnknown_203B210->menuItems[loopMax].menuAction = 1;
+    gKecleonBrosWork->menuItems[loopMax].text = *gUnknown_80D4934;
+    gKecleonBrosWork->menuItems[loopMax].menuAction = 1;
 
     loopMax += 1;
-    gUnknown_203B210->menuItems[loopMax].text = NULL;
-    gUnknown_203B210->menuItems[loopMax].menuAction = 1;
+    gKecleonBrosWork->menuItems[loopMax].text = NULL;
+    gKecleonBrosWork->menuItems[loopMax].menuAction = 1;
 
     for (index = 0; index < loopMax; index++) {
-        if (gUnknown_203B210->unk74[index] == 0) {
-            if (gUnknown_203B210->menuItems[index].menuAction == gUnknown_203B210->menuAction1)
+        if (gKecleonBrosWork->unk74[index] == 0) {
+            if (gKecleonBrosWork->menuItems[index].menuAction == gKecleonBrosWork->menuAction1)
                 return;
         }
     }
 
     for (index = 0; index < loopMax; index++) {
-        if (gUnknown_203B210->unk74[index] == 0) {
-            gUnknown_203B210->menuAction1 =  gUnknown_203B210->menuItems[index].menuAction;
+        if (gKecleonBrosWork->unk74[index] == 0) {
+            gKecleonBrosWork->menuAction1 =  gKecleonBrosWork->menuItems[index].menuAction;
             break;
         }
     }
@@ -531,30 +531,30 @@ void sub_80195C0(void)
     s32 index;
     s32 loopMax;
 
-    MemoryFill16(gUnknown_203B210->unk74, 0, sizeof(gUnknown_203B210->unk74));
+    MemoryFill16(gKecleonBrosWork->unk74, 0, sizeof(gKecleonBrosWork->unk74));
 
     loopMax = 0;
-    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4978;
-    gUnknown_203B210->menuItems[loopMax].menuAction = 2;
+    gKecleonBrosWork->menuItems[loopMax].text = *gUnknown_80D4978;
+    gKecleonBrosWork->menuItems[loopMax].menuAction = 2;
 
     loopMax += 1;
-    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4970;
-    gUnknown_203B210->menuItems[loopMax].menuAction = 7;
+    gKecleonBrosWork->menuItems[loopMax].text = *gUnknown_80D4970;
+    gKecleonBrosWork->menuItems[loopMax].menuAction = 7;
 
     loopMax += 1;
-    gUnknown_203B210->menuItems[loopMax].text = NULL;
-    gUnknown_203B210->menuItems[loopMax].menuAction = 1;
+    gKecleonBrosWork->menuItems[loopMax].text = NULL;
+    gKecleonBrosWork->menuItems[loopMax].menuAction = 1;
 
     for (index = 0; index < loopMax; index++) {
-        if (gUnknown_203B210->unk74[index] == 0) {
-            if (gUnknown_203B210->menuItems[index].menuAction == gUnknown_203B210->menuAction3)
+        if (gKecleonBrosWork->unk74[index] == 0) {
+            if (gKecleonBrosWork->menuItems[index].menuAction == gKecleonBrosWork->menuAction3)
                 return;
         }
     }
 
     for (index = 0; index < loopMax; index++) {
-        if (gUnknown_203B210->unk74[index] == 0) {
-            gUnknown_203B210->menuAction3 = gUnknown_203B210->menuItems[index].menuAction;
+        if (gKecleonBrosWork->unk74[index] == 0) {
+            gKecleonBrosWork->menuAction3 = gKecleonBrosWork->menuItems[index].menuAction;
             break;
         }
     }
@@ -565,30 +565,30 @@ void sub_8019660(void)
     s32 index;
     s32 loopMax;
 
-    MemoryFill16(gUnknown_203B210->unk74, 0, sizeof(gUnknown_203B210->unk74));
+    MemoryFill16(gKecleonBrosWork->unk74, 0, sizeof(gKecleonBrosWork->unk74));
 
     loopMax = 0;
-    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4984;
-    gUnknown_203B210->menuItems[loopMax].menuAction = 3;
+    gKecleonBrosWork->menuItems[loopMax].text = *gUnknown_80D4984;
+    gKecleonBrosWork->menuItems[loopMax].menuAction = 3;
 
     loopMax += 1;
-    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4970;
-    gUnknown_203B210->menuItems[loopMax].menuAction = 7;
+    gKecleonBrosWork->menuItems[loopMax].text = *gUnknown_80D4970;
+    gKecleonBrosWork->menuItems[loopMax].menuAction = 7;
 
     loopMax += 1;
-    gUnknown_203B210->menuItems[loopMax].text = NULL;
-    gUnknown_203B210->menuItems[loopMax].menuAction = 1;
+    gKecleonBrosWork->menuItems[loopMax].text = NULL;
+    gKecleonBrosWork->menuItems[loopMax].menuAction = 1;
 
     for (index = 0; index < loopMax; index++) {
-        if (gUnknown_203B210->unk74[index] == 0) {
-            if (gUnknown_203B210->menuItems[index].menuAction == gUnknown_203B210->menuAction2)
+        if (gKecleonBrosWork->unk74[index] == 0) {
+            if (gKecleonBrosWork->menuItems[index].menuAction == gKecleonBrosWork->menuAction2)
                 return;
         }
     }
 
     for (index = 0; index < loopMax; index++) {
-        if (gUnknown_203B210->unk74[index] == 0) {
-            gUnknown_203B210->menuAction2 =  gUnknown_203B210->menuItems[index].menuAction;
+        if (gKecleonBrosWork->unk74[index] == 0) {
+            gKecleonBrosWork->menuAction2 =  gKecleonBrosWork->menuItems[index].menuAction;
             break;
         }
     }
@@ -597,16 +597,16 @@ void sub_8019660(void)
 void sub_8019700(void)
 {
     s32 loopMax = 0;
-    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4920;
-    gUnknown_203B210->menuItems[loopMax].menuAction = 5;
+    gKecleonBrosWork->menuItems[loopMax].text = *gUnknown_80D4920;
+    gKecleonBrosWork->menuItems[loopMax].menuAction = 5;
 
     loopMax += 1;
-    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4928;
-    gUnknown_203B210->menuItems[loopMax].menuAction = 6;
+    gKecleonBrosWork->menuItems[loopMax].text = *gUnknown_80D4928;
+    gKecleonBrosWork->menuItems[loopMax].menuAction = 6;
 
     loopMax += 1;
-    gUnknown_203B210->menuItems[loopMax].text = NULL;
-    gUnknown_203B210->menuItems[loopMax].menuAction = 1;
+    gKecleonBrosWork->menuItems[loopMax].text = NULL;
+    gKecleonBrosWork->menuItems[loopMax].menuAction = 1;
 }
 
 void sub_8019730(void)
@@ -617,42 +617,42 @@ void sub_8019730(void)
         return;
 
     if (menuAction != 1)
-        gUnknown_203B210->menuAction1 = menuAction;
+        gKecleonBrosWork->menuAction1 = menuAction;
 
     switch (menuAction) {
         case 2:
             if (CountKecleonItems() == 0)
-                UpdateKecleonStoreState(KECLEON_STORE_NO_STORE_ITEMS);
+                KecleonBros_SetState(KECLEON_STORE_NO_STORE_ITEMS);
             else if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
-                UpdateKecleonStoreState(KECLEON_STORE_TOO_MANY_ITEMS);
+                KecleonBros_SetState(KECLEON_STORE_TOO_MANY_ITEMS);
             else
-                UpdateKecleonStoreState(15);
+                KecleonBros_SetState(15);
             break;
         case 3:
             if (GetNumberOfFilledInventorySlots() == 0)
-                UpdateKecleonStoreState(KECLEON_STORE_NO_ITEMS_TO_SELL);
-            else if (gUnknown_203B210->numInventoryItemToSell == 0)
-                UpdateKecleonStoreState(8);
+                KecleonBros_SetState(KECLEON_STORE_NO_ITEMS_TO_SELL);
+            else if (gKecleonBrosWork->numInventoryItemToSell == 0)
+                KecleonBros_SetState(8);
             else if (gTeamInventory_203B460->teamMoney < MAX_TEAM_MONEY)
-                UpdateKecleonStoreState(23);
+                KecleonBros_SetState(23);
             else
-                UpdateKecleonStoreState(7);
+                KecleonBros_SetState(7);
             break;
         case 4:
             if (GetNumberOfFilledInventorySlots() == 0)
-                UpdateKecleonStoreState(KECLEON_STORE_NO_ITEMS_TO_SELL);
-            else if (gUnknown_203B210->numInventoryItemToSell == 0)
-                UpdateKecleonStoreState(8);
-            else if (gUnknown_203B210->inventoryItemSellPrice + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY)
-                UpdateKecleonStoreState(7);
+                KecleonBros_SetState(KECLEON_STORE_NO_ITEMS_TO_SELL);
+            else if (gKecleonBrosWork->numInventoryItemToSell == 0)
+                KecleonBros_SetState(8);
+            else if (gKecleonBrosWork->inventoryItemSellPrice + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY)
+                KecleonBros_SetState(7);
             else
-                UpdateKecleonStoreState(31);
+                KecleonBros_SetState(31);
             break;
         case 7:
-            UpdateKecleonStoreState(2);
+            KecleonBros_SetState(2);
             break;
         case 1:
-            UpdateKecleonStoreState(3);
+            KecleonBros_SetState(3);
             break;
     }
 }
@@ -664,25 +664,25 @@ void sub_8019850(void)
     if (sub_80144A4(&menuAction) == 0) {
         switch (menuAction) {
             case 5:
-                AddToTeamMoney(-gUnknown_203B210->itemSellPrice);
+                AddToTeamMoney(-gKecleonBrosWork->itemSellPrice);
 
-                if (gUnknown_203B210->isKecleonItemShop) {
-                    AddHeldItemToInventory(GetKecleonShopItem(gUnknown_203B210->itemShopItemIndex));
-                    InitKecleonShopItem(gUnknown_203B210->itemShopItemIndex);
+                if (gKecleonBrosWork->isKecleonItemShop) {
+                    AddHeldItemToInventory(GetKecleonShopItem(gKecleonBrosWork->itemShopItemIndex));
+                    InitKecleonShopItem(gKecleonBrosWork->itemShopItemIndex);
                     FillKecleonShopGaps();
                 }
                 else {
-                    AddHeldItemToInventory(GetKecleonWareItem(gUnknown_203B210->wareShopItemIndex));
-                    InitKecleonWareItem(gUnknown_203B210->wareShopItemIndex);
+                    AddHeldItemToInventory(GetKecleonWareItem(gKecleonBrosWork->wareShopItemIndex));
+                    InitKecleonWareItem(gKecleonBrosWork->wareShopItemIndex);
                     FillKecleonWareGaps();
                 }
 
                 PlaySound(0x14c);
-                UpdateKecleonStoreState(17);
+                KecleonBros_SetState(17);
                 break;
             case 6:
             case 1:
-                UpdateKecleonStoreState(16);
+                KecleonBros_SetState(16);
                 break;
         }
     }
@@ -695,14 +695,14 @@ void sub_80198E8(void)
     if (sub_80144A4(&menuAction) == 0) {
         switch (menuAction) {
             case 5:
-                AddToTeamMoney(gUnknown_203B210->itemSellPrice);
-                ShiftItemsDownFrom(gUnknown_203B210->soldItemInventoryIndex);
+                AddToTeamMoney(gKecleonBrosWork->itemSellPrice);
+                ShiftItemsDownFrom(gKecleonBrosWork->soldItemInventoryIndex);
                 PlaySound(0x14c);
-                UpdateKecleonStoreState(25);
+                KecleonBros_SetState(25);
                 break;
             case 6:
             case 1:
-                UpdateKecleonStoreState(24);
+                KecleonBros_SetState(24);
                 break;
         }
     }
@@ -725,13 +725,13 @@ void sub_8019944(void)
                 }
 
                 FillInventoryGaps();
-                AddToTeamMoney(gUnknown_203B210->inventoryItemSellPrice);
+                AddToTeamMoney(gKecleonBrosWork->inventoryItemSellPrice);
                 PlaySound(0x14c);
-                UpdateKecleonStoreState(32);
+                KecleonBros_SetState(32);
                 break;
             case 1:
             case 6:
-                UpdateKecleonStoreState(KECLEON_STORE_MAIN_MENU);
+                KecleonBros_SetState(KECLEON_STORE_MAIN_MENU);
                 break;
         }
     }
@@ -742,49 +742,49 @@ void sub_80199CC(void)
     u32 menuAction;
     struct BulkItem *item;
 
-    if (gUnknown_203B210->isKecleonItemShop)
+    if (gKecleonBrosWork->isKecleonItemShop)
         menuAction = sub_8019EDC(1);
     else
         menuAction = sub_801A2A8(1);
 
     switch (menuAction) {
         case 3:
-            if (gUnknown_203B210->isKecleonItemShop) {
-                gUnknown_203B210->itemShopItemIndex = sub_8019FB0();
-                item = GetKecleonShopItem(gUnknown_203B210->itemShopItemIndex);
+            if (gKecleonBrosWork->isKecleonItemShop) {
+                gKecleonBrosWork->itemShopItemIndex = sub_8019FB0();
+                item = GetKecleonShopItem(gKecleonBrosWork->itemShopItemIndex);
             }
             else {
-                gUnknown_203B210->wareShopItemIndex = sub_801A37C();
-                item = GetKecleonWareItem(gUnknown_203B210->wareShopItemIndex);
+                gKecleonBrosWork->wareShopItemIndex = sub_801A37C();
+                item = GetKecleonWareItem(gKecleonBrosWork->wareShopItemIndex);
             }
 
-            xxx_init_itemslot_8090A8C(&gUnknown_203B210->soldItem, item->id, 0);
-            gUnknown_203B210->soldItem.quantity = item->quantity;
-            gUnknown_203B210->itemSellPrice = GetStackBuyPrice(&gUnknown_203B210->soldItem);
-            UpdateKecleonStoreState(20);
+            xxx_init_itemslot_8090A8C(&gKecleonBrosWork->soldItem, item->id, 0);
+            gKecleonBrosWork->soldItem.quantity = item->quantity;
+            gKecleonBrosWork->itemSellPrice = GetStackBuyPrice(&gKecleonBrosWork->soldItem);
+            KecleonBros_SetState(20);
             break;
         case 4:
-            if (gUnknown_203B210->isKecleonItemShop) {
-                gUnknown_203B210->itemShopItemIndex = sub_8019FB0();
-                item = GetKecleonShopItem(gUnknown_203B210->itemShopItemIndex);
+            if (gKecleonBrosWork->isKecleonItemShop) {
+                gKecleonBrosWork->itemShopItemIndex = sub_8019FB0();
+                item = GetKecleonShopItem(gKecleonBrosWork->itemShopItemIndex);
             }
             else {
-                gUnknown_203B210->wareShopItemIndex = sub_801A37C();
-                item = GetKecleonWareItem(gUnknown_203B210->wareShopItemIndex);
+                gKecleonBrosWork->wareShopItemIndex = sub_801A37C();
+                item = GetKecleonWareItem(gKecleonBrosWork->wareShopItemIndex);
             }
 
-            xxx_init_itemslot_8090A8C(&gUnknown_203B210->soldItem, item->id, 0);
-            gUnknown_203B210->soldItem.quantity = item->quantity;
-            gUnknown_203B210->itemSellPrice = GetStackBuyPrice(&gUnknown_203B210->soldItem);
-            UpdateKecleonStoreState(21);
+            xxx_init_itemslot_8090A8C(&gKecleonBrosWork->soldItem, item->id, 0);
+            gKecleonBrosWork->soldItem.quantity = item->quantity;
+            gKecleonBrosWork->itemSellPrice = GetStackBuyPrice(&gKecleonBrosWork->soldItem);
+            KecleonBros_SetState(21);
             break;
         case 2:
-            if (gUnknown_203B210->isKecleonItemShop)
+            if (gKecleonBrosWork->isKecleonItemShop)
                 sub_801A010();
             else
                 sub_801A3DC();
 
-            UpdateKecleonStoreState(KECLEON_STORE_MAIN_MENU);
+            KecleonBros_SetState(KECLEON_STORE_MAIN_MENU);
             break;
         case 1:
             sub_801AD34(0);
@@ -799,21 +799,21 @@ void sub_8019B08(void)
         case 0:
             break;
         case 3:
-            gUnknown_203B210->soldItemInventoryIndex = sub_801A8AC();
-            gUnknown_203B210->soldItem = gTeamInventory_203B460->teamItems[gUnknown_203B210->soldItemInventoryIndex];
-            gUnknown_203B210->itemSellPrice = GetStackSellPrice(&gUnknown_203B210->soldItem);
-            UpdateKecleonStoreState(28);
+            gKecleonBrosWork->soldItemInventoryIndex = sub_801A8AC();
+            gKecleonBrosWork->soldItem = gTeamInventory_203B460->teamItems[gKecleonBrosWork->soldItemInventoryIndex];
+            gKecleonBrosWork->itemSellPrice = GetStackSellPrice(&gKecleonBrosWork->soldItem);
+            KecleonBros_SetState(28);
             break;
         case 4:
-            gUnknown_203B210->soldItemInventoryIndex = sub_801A8AC();
-            gUnknown_203B210->soldItem = gTeamInventory_203B460->teamItems[gUnknown_203B210->soldItemInventoryIndex];
-            gUnknown_203B210->itemSellPrice = GetStackSellPrice(&gUnknown_203B210->soldItem);
+            gKecleonBrosWork->soldItemInventoryIndex = sub_801A8AC();
+            gKecleonBrosWork->soldItem = gTeamInventory_203B460->teamItems[gKecleonBrosWork->soldItemInventoryIndex];
+            gKecleonBrosWork->itemSellPrice = GetStackSellPrice(&gKecleonBrosWork->soldItem);
             sub_8099690(0);
-            UpdateKecleonStoreState(29);
+            KecleonBros_SetState(29);
             break;
         case 2:
             sub_801A928();
-            UpdateKecleonStoreState(KECLEON_STORE_MAIN_MENU);
+            KecleonBros_SetState(KECLEON_STORE_MAIN_MENU);
             break;
         case 1:
         default:
@@ -828,28 +828,28 @@ void sub_8019BBC(void)
 
     menuAction = 0;
 
-    if (gUnknown_203B210->isKecleonItemShop)
+    if (gKecleonBrosWork->isKecleonItemShop)
         sub_8019EDC(0);
     else
         sub_801A2A8(0);
 
-    if (sub_8012FD8(&gUnknown_203B210->menu) == 0 && (sub_8013114(&gUnknown_203B210->menu, &menuAction), menuAction != 1))
-        gUnknown_203B210->menuAction3 = menuAction;
+    if (sub_8012FD8(&gKecleonBrosWork->menu) == 0 && (sub_8013114(&gKecleonBrosWork->menu, &menuAction), menuAction != 1))
+        gKecleonBrosWork->menuAction3 = menuAction;
 
     switch (menuAction) {
         case 2:
             if (gTeamInventory_203B460->teamMoney == 0)
-                UpdateKecleonStoreState(KECLEON_STORE_NO_MONEY);
-            else if (gUnknown_203B210->itemSellPrice > gTeamInventory_203B460->teamMoney)
-                UpdateKecleonStoreState(KECLEON_STORE_NOT_ENOUGH_MONEY);
+                KecleonBros_SetState(KECLEON_STORE_NO_MONEY);
+            else if (gKecleonBrosWork->itemSellPrice > gTeamInventory_203B460->teamMoney)
+                KecleonBros_SetState(KECLEON_STORE_NOT_ENOUGH_MONEY);
             else
-                UpdateKecleonStoreState(22);
+                KecleonBros_SetState(22);
             break;
         case 7:
-            UpdateKecleonStoreState(21);
+            KecleonBros_SetState(21);
             break;
         case 1:
-            UpdateKecleonStoreState(19);
+            KecleonBros_SetState(19);
             break;
     }
 }
@@ -861,26 +861,26 @@ void sub_8019C78(void)
     menuAction = 0;
     sub_801A6E8(FALSE);
 
-    if (sub_8012FD8(&gUnknown_203B210->menu) == FALSE && (sub_8013114(&gUnknown_203B210->menu, &menuAction), menuAction != 1))
-        gUnknown_203B210->menuAction2 = menuAction;
+    if (sub_8012FD8(&gKecleonBrosWork->menu) == FALSE && (sub_8013114(&gKecleonBrosWork->menu, &menuAction), menuAction != 1))
+        gKecleonBrosWork->menuAction2 = menuAction;
 
     switch (menuAction) {
         case 3:
             sub_8099690(0);
 
-            if (!CanSellItem(gUnknown_203B210->soldItem.id))
-                UpdateKecleonStoreState(KECLEON_STORE_CANT_SELL_ITEM);
-            else if (gUnknown_203B210->itemSellPrice + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY)
-                UpdateKecleonStoreState(14);
+            if (!CanSellItem(gKecleonBrosWork->soldItem.id))
+                KecleonBros_SetState(KECLEON_STORE_CANT_SELL_ITEM);
+            else if (gKecleonBrosWork->itemSellPrice + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY)
+                KecleonBros_SetState(14);
             else
-                UpdateKecleonStoreState(30);
+                KecleonBros_SetState(30);
             break;
         case 7:
             sub_8099690(0);
-            UpdateKecleonStoreState(29);
+            KecleonBros_SetState(29);
             break;
         case 1:
-            UpdateKecleonStoreState(27);
+            KecleonBros_SetState(27);
             break;
     }
 }
@@ -891,7 +891,7 @@ void sub_8019D30(void)
         case 2:
         case 3:
             sub_801B450();
-            UpdateKecleonStoreState(19);
+            KecleonBros_SetState(19);
             break;
         case 0:
         case 1:
@@ -905,7 +905,7 @@ void sub_8019D4C(void)
         case 2:
         case 3:
             sub_801B450();
-            UpdateKecleonStoreState(27);
+            KecleonBros_SetState(27);
             break;
         case 0:
         case 1:
@@ -918,12 +918,12 @@ void sub_8019D68(void)
 {
     s32 temp;
     if (sub_80144A4(&temp) == 0)
-        UpdateKecleonStoreState(gUnknown_203B210->fallbackState);
+        KecleonBros_SetState(gKecleonBrosWork->fallbackState);
 }
 
 u32 CountKecleonItems(void)
 {
-    if (gUnknown_203B210->isKecleonItemShop)
+    if (gKecleonBrosWork->isKecleonItemShop)
         return CountKecleonShopItems();
     else
         return CountKecleonWareItems();
@@ -935,32 +935,32 @@ void sub_8019DAC(void)
     struct Item *item;
     s32 index;
 
-    gUnknown_203B210->numInventoryItemToSell = 0;
-    gUnknown_203B210->inventoryItemSellPrice = 0;
+    gKecleonBrosWork->numInventoryItemToSell = 0;
+    gKecleonBrosWork->inventoryItemSellPrice = 0;
     for (index = 0; index < INVENTORY_SIZE; index++) {
         item = &gTeamInventory_203B460->teamItems[index];
 
         if ((item->flags & ITEM_FLAG_EXISTS) != 0 && CanSellItem(item->id)) {
             sellPrice = GetStackSellPrice(item);
-            gUnknown_203B210->inventoryItemSellPrice += sellPrice;
-            gUnknown_203B210->numInventoryItemToSell++;
+            gKecleonBrosWork->inventoryItemSellPrice += sellPrice;
+            gKecleonBrosWork->numInventoryItemToSell++;
         }
     }
 }
 
 void sub_8019E04(bool32 param_1)
 {
-    if (gUnknown_203B210->isKecleonItemShop) {
+    if (gKecleonBrosWork->isKecleonItemShop) {
         if (param_1 == TRUE)
-            gUnknown_203B210->unkE0 = 1;
+            gKecleonBrosWork->unkE0 = 1;
         else
-            gUnknown_203B210->unkE0 = 0;
+            gKecleonBrosWork->unkE0 = 0;
     }
     else {
         if (param_1 == TRUE)
-            gUnknown_203B210->unkE0 = 7;
+            gKecleonBrosWork->unkE0 = 7;
         else
-            gUnknown_203B210->unkE0  = 6;
+            gKecleonBrosWork->unkE0  = 6;
     }
 }
 
