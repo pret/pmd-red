@@ -1,26 +1,11 @@
 #include "global.h"
 #include "constants/input.h"
-#include "file_system.h"
 #include "memory.h"
 #include "pokemon.h"
-#include "input.h"
-#include "item.h"
 #include "kecleon_items.h"
 #include "team_inventory.h"
 #include "code_800D090.h"
 #include "menu_input.h"
-#include "text.h"
-
-struct unkStruct_203B214
-{
-    // size: 0xA0
-    struct MenuInputStruct input;
-    u32 unk34;
-    struct UnkTextStruct2 *unk38;
-    struct UnkTextStruct2 unk3C[4];
-    u8 unk9C[4];
-};
-
 
 extern struct unkStruct_203B210 *gUnknown_203B210;
 extern struct unkStruct_203B214 *gUnknown_203B214;
@@ -55,7 +40,7 @@ extern void sub_8099690(u32);
 extern u32 sub_8019EDC(u8);
 extern u32 sub_801A2A8(u8);
 extern s32 sub_801A8AC(void);
-extern u32 sub_801A6E8(u8);
+u32 sub_801A6E8(bool8);
 extern void sub_801A928(void);
 extern void DrawTeamMoneyBox(u32);
 extern void sub_8008C54(u32);
@@ -104,114 +89,116 @@ extern u8 *gUnknown_80D4934[];
 
 void sub_80194F8(void)
 {
-  int index;
+    s32 index;
+    s32 loopMax;
 
-  s32 loopMax;
-  MemoryFill16(gUnknown_203B210->unk74,0,sizeof(gUnknown_203B210->unk74));
-  loopMax = 0;
-  gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4978;
-  gUnknown_203B210->menuItems[loopMax].menuAction = 2;
-  loopMax += 1;
-  gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4984;
-  gUnknown_203B210->menuItems[loopMax].menuAction = 3;
-  loopMax += 1;
-  gUnknown_203B210->menuItems[loopMax].text = gUnknown_80DB8A0;
-  gUnknown_203B210->menuItems[loopMax].menuAction = 4;
-  loopMax += 1;
-  gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4970;
-  gUnknown_203B210->menuItems[loopMax].menuAction = 7;
-  loopMax += 1;
-  gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4934;
-  gUnknown_203B210->menuItems[loopMax].menuAction = 1;
-  loopMax += 1;
-  gUnknown_203B210->menuItems[loopMax].text = NULL;
-  gUnknown_203B210->menuItems[loopMax].menuAction = 1;
+    MemoryFill16(gUnknown_203B210->unk74, 0, sizeof(gUnknown_203B210->unk74));
 
-  for(index = 0; index < loopMax; index++)
-  {
-      if(gUnknown_203B210->unk74[index] == 0)
-      {
-          if(gUnknown_203B210->menuItems[index].menuAction == gUnknown_203B210->menuAction1)
-              return;
-      }
-  }
-  for(index = 0; index < loopMax; index++)
-  {
-      if (gUnknown_203B210->unk74[index] == 0)
-      {
-           gUnknown_203B210->menuAction1 =  gUnknown_203B210->menuItems[index].menuAction;
-           break;
-      }
-  }
+    loopMax = 0;
+    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4978;
+    gUnknown_203B210->menuItems[loopMax].menuAction = 2;
+
+    loopMax += 1;
+    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4984;
+    gUnknown_203B210->menuItems[loopMax].menuAction = 3;
+
+    loopMax += 1;
+    gUnknown_203B210->menuItems[loopMax].text = gUnknown_80DB8A0;
+    gUnknown_203B210->menuItems[loopMax].menuAction = 4;
+
+    loopMax += 1;
+    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B210->menuItems[loopMax].menuAction = 7;
+
+    loopMax += 1;
+    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4934;
+    gUnknown_203B210->menuItems[loopMax].menuAction = 1;
+
+    loopMax += 1;
+    gUnknown_203B210->menuItems[loopMax].text = NULL;
+    gUnknown_203B210->menuItems[loopMax].menuAction = 1;
+
+    for (index = 0; index < loopMax; index++) {
+        if (gUnknown_203B210->unk74[index] == 0) {
+            if (gUnknown_203B210->menuItems[index].menuAction == gUnknown_203B210->menuAction1)
+                return;
+        }
+    }
+
+    for (index = 0; index < loopMax; index++) {
+        if (gUnknown_203B210->unk74[index] == 0) {
+            gUnknown_203B210->menuAction1 =  gUnknown_203B210->menuItems[index].menuAction;
+            break;
+        }
+    }
 }
 
 void sub_80195C0(void)
 {
-  int index;
+    s32 index;
+    s32 loopMax;
 
-  s32 loopMax;
-  MemoryFill16(gUnknown_203B210->unk74,0,sizeof(gUnknown_203B210->unk74));
-  loopMax = 0;
-  gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4978;
-  gUnknown_203B210->menuItems[loopMax].menuAction = 2;
-  loopMax += 1;
-  gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4970;
-  gUnknown_203B210->menuItems[loopMax].menuAction = 7;
-  loopMax += 1;
-  gUnknown_203B210->menuItems[loopMax].text = NULL;
-  gUnknown_203B210->menuItems[loopMax].menuAction = 1;
+    MemoryFill16(gUnknown_203B210->unk74, 0, sizeof(gUnknown_203B210->unk74));
 
-  for(index = 0; index < loopMax; index++)
-  {
-      if(gUnknown_203B210->unk74[index] == 0)
-      {
-          if(gUnknown_203B210->menuItems[index].menuAction == gUnknown_203B210->menuAction3)
-              return;
-      }
-  }
-  for(index = 0; index < loopMax; index++)
-  {
-      if (gUnknown_203B210->unk74[index] == 0)
-      {
-           gUnknown_203B210->menuAction3 =  gUnknown_203B210->menuItems[index].menuAction;
-           break;
-      }
-  }
+    loopMax = 0;
+    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4978;
+    gUnknown_203B210->menuItems[loopMax].menuAction = 2;
+
+    loopMax += 1;
+    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B210->menuItems[loopMax].menuAction = 7;
+
+    loopMax += 1;
+    gUnknown_203B210->menuItems[loopMax].text = NULL;
+    gUnknown_203B210->menuItems[loopMax].menuAction = 1;
+
+    for (index = 0; index < loopMax; index++) {
+        if (gUnknown_203B210->unk74[index] == 0) {
+            if (gUnknown_203B210->menuItems[index].menuAction == gUnknown_203B210->menuAction3)
+                return;
+        }
+    }
+
+    for (index = 0; index < loopMax; index++) {
+        if (gUnknown_203B210->unk74[index] == 0) {
+            gUnknown_203B210->menuAction3 = gUnknown_203B210->menuItems[index].menuAction;
+            break;
+        }
+    }
 }
 
- 
 void sub_8019660(void)
 {
-  int index;
+    s32 index;
+    s32 loopMax;
 
-  s32 loopMax;
-  MemoryFill16(gUnknown_203B210->unk74,0, sizeof(gUnknown_203B210->unk74));
-  loopMax = 0;
-  gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4984;
-  gUnknown_203B210->menuItems[loopMax].menuAction = 3;
-  loopMax += 1;
-  gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4970;
-  gUnknown_203B210->menuItems[loopMax].menuAction = 7;
-  loopMax += 1;
-  gUnknown_203B210->menuItems[loopMax].text = NULL;
-  gUnknown_203B210->menuItems[loopMax].menuAction = 1;
+    MemoryFill16(gUnknown_203B210->unk74, 0, sizeof(gUnknown_203B210->unk74));
 
-  for(index = 0; index < loopMax; index++)
-  {
-      if(gUnknown_203B210->unk74[index] == 0)
-      {
-          if(gUnknown_203B210->menuItems[index].menuAction == gUnknown_203B210->menuAction2)
-              return;
-      }
-  }
-  for(index = 0; index < loopMax; index++)
-  {
-      if (gUnknown_203B210->unk74[index] == 0)
-      {
-           gUnknown_203B210->menuAction2 =  gUnknown_203B210->menuItems[index].menuAction;
-           break;
-      }
-  }
+    loopMax = 0;
+    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4984;
+    gUnknown_203B210->menuItems[loopMax].menuAction = 3;
+
+    loopMax += 1;
+    gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B210->menuItems[loopMax].menuAction = 7;
+
+    loopMax += 1;
+    gUnknown_203B210->menuItems[loopMax].text = NULL;
+    gUnknown_203B210->menuItems[loopMax].menuAction = 1;
+
+    for (index = 0; index < loopMax; index++) {
+        if (gUnknown_203B210->unk74[index] == 0) {
+            if (gUnknown_203B210->menuItems[index].menuAction == gUnknown_203B210->menuAction2)
+                return;
+        }
+    }
+
+    for (index = 0; index < loopMax; index++) {
+        if (gUnknown_203B210->unk74[index] == 0) {
+            gUnknown_203B210->menuAction2 =  gUnknown_203B210->menuItems[index].menuAction;
+            break;
+        }
+    }
 }
 
 void sub_8019700(void)
@@ -219,9 +206,11 @@ void sub_8019700(void)
     s32 loopMax = 0;
     gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4920;
     gUnknown_203B210->menuItems[loopMax].menuAction = 5;
+
     loopMax += 1;
     gUnknown_203B210->menuItems[loopMax].text = *gUnknown_80D4928;
     gUnknown_203B210->menuItems[loopMax].menuAction = 6;
+
     loopMax += 1;
     gUnknown_203B210->menuItems[loopMax].text = NULL;
     gUnknown_203B210->menuItems[loopMax].menuAction = 1;
@@ -229,286 +218,287 @@ void sub_8019700(void)
 
 void sub_8019730(void)
 {
-  s32 menuAction;
+    s32 menuAction;
 
-  if (sub_80144A4(&menuAction) != 0)
-    return;
-  if (menuAction != 1)
-    gUnknown_203B210->menuAction1 = menuAction;
-  switch(menuAction) {
-    case 2:
-        if (CountKecleonItems() == 0)
-            UpdateKecleonStoreState(KECLEON_STORE_NO_STORE_ITEMS);
-        else if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
-            UpdateKecleonStoreState(KECLEON_STORE_TOO_MANY_ITEMS);
-        else
-            UpdateKecleonStoreState(0xF);
-        break;
-    case 3:
-        if (GetNumberOfFilledInventorySlots() == 0)
-            UpdateKecleonStoreState(KECLEON_STORE_NO_ITEMS_TO_SELL);
-        else if (gUnknown_203B210->numInventoryItemToSell == 0)
-            UpdateKecleonStoreState(8);
-        else if (gTeamInventory_203B460->teamMoney < MAX_TEAM_MONEY)
-            UpdateKecleonStoreState(0x17);
-        else
-            UpdateKecleonStoreState(7);
-        break;
-    case 4:
-        if (GetNumberOfFilledInventorySlots() == 0)
-            UpdateKecleonStoreState(KECLEON_STORE_NO_ITEMS_TO_SELL);
-        else if (gUnknown_203B210->numInventoryItemToSell == 0)
-            UpdateKecleonStoreState(8);
-        else if (gUnknown_203B210->inventoryItemSellPrice + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY)
-            UpdateKecleonStoreState(7);
-        else
-            UpdateKecleonStoreState(0x1f);
-        break;
-    case 7:
-        UpdateKecleonStoreState(2);
-        break;
-    case 1:
-        UpdateKecleonStoreState(3);
-        break;
-  }
+    if (sub_80144A4(&menuAction) != 0)
+        return;
+
+    if (menuAction != 1)
+        gUnknown_203B210->menuAction1 = menuAction;
+
+    switch (menuAction) {
+        case 2:
+            if (CountKecleonItems() == 0)
+                UpdateKecleonStoreState(KECLEON_STORE_NO_STORE_ITEMS);
+            else if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
+                UpdateKecleonStoreState(KECLEON_STORE_TOO_MANY_ITEMS);
+            else
+                UpdateKecleonStoreState(15);
+            break;
+        case 3:
+            if (GetNumberOfFilledInventorySlots() == 0)
+                UpdateKecleonStoreState(KECLEON_STORE_NO_ITEMS_TO_SELL);
+            else if (gUnknown_203B210->numInventoryItemToSell == 0)
+                UpdateKecleonStoreState(8);
+            else if (gTeamInventory_203B460->teamMoney < MAX_TEAM_MONEY)
+                UpdateKecleonStoreState(23);
+            else
+                UpdateKecleonStoreState(7);
+            break;
+        case 4:
+            if (GetNumberOfFilledInventorySlots() == 0)
+                UpdateKecleonStoreState(KECLEON_STORE_NO_ITEMS_TO_SELL);
+            else if (gUnknown_203B210->numInventoryItemToSell == 0)
+                UpdateKecleonStoreState(8);
+            else if (gUnknown_203B210->inventoryItemSellPrice + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY)
+                UpdateKecleonStoreState(7);
+            else
+                UpdateKecleonStoreState(31);
+            break;
+        case 7:
+            UpdateKecleonStoreState(2);
+            break;
+        case 1:
+            UpdateKecleonStoreState(3);
+            break;
+    }
 }
 
 void sub_8019850(void)
 {
-  s32 menuAction;
+    s32 menuAction;
 
-  if (sub_80144A4(&menuAction) == 0) {
-      switch(menuAction)
-      {
-          case 5:
-            AddToTeamMoney(-gUnknown_203B210->itemSellPrice);
-            if (gUnknown_203B210->isKecleonItemShop) {
-                AddHeldItemToInventory(GetKecleonShopItem(gUnknown_203B210->itemShopItemIndex));
-                InitKecleonShopItem(gUnknown_203B210->itemShopItemIndex);
-                FillKecleonShopGaps();
-            }
-            else {
-                AddHeldItemToInventory(GetKecleonWareItem(gUnknown_203B210->wareShopItemIndex));
-                InitKecleonWareItem(gUnknown_203B210->wareShopItemIndex);
-                FillKecleonWareGaps();
-            }
-            PlaySound(0x14c);
-            UpdateKecleonStoreState(0x11);
-            break;
-        case 6:
-        case 1:
-            UpdateKecleonStoreState(0x10);
-            break;
-      }
-  }
+    if (sub_80144A4(&menuAction) == 0) {
+        switch (menuAction) {
+            case 5:
+                AddToTeamMoney(-gUnknown_203B210->itemSellPrice);
+
+                if (gUnknown_203B210->isKecleonItemShop) {
+                    AddHeldItemToInventory(GetKecleonShopItem(gUnknown_203B210->itemShopItemIndex));
+                    InitKecleonShopItem(gUnknown_203B210->itemShopItemIndex);
+                    FillKecleonShopGaps();
+                }
+                else {
+                    AddHeldItemToInventory(GetKecleonWareItem(gUnknown_203B210->wareShopItemIndex));
+                    InitKecleonWareItem(gUnknown_203B210->wareShopItemIndex);
+                    FillKecleonWareGaps();
+                }
+
+                PlaySound(0x14c);
+                UpdateKecleonStoreState(17);
+                break;
+            case 6:
+            case 1:
+                UpdateKecleonStoreState(16);
+                break;
+        }
+    }
 }
 
 void sub_80198E8(void)
 {
-  s32 menuAction;
+    s32 menuAction;
 
-  if (sub_80144A4(&menuAction) == 0) {
-      switch(menuAction)
-      {
-          case 5:
-            AddToTeamMoney(gUnknown_203B210->itemSellPrice);
-            ShiftItemsDownFrom(gUnknown_203B210->soldItemInventoryIndex);
-            PlaySound(0x14c);
-            UpdateKecleonStoreState(0x19);
-            break;
-        case 6:
-        case 1:
-            UpdateKecleonStoreState(0x18);
-            break;
-      }
-  }
+    if (sub_80144A4(&menuAction) == 0) {
+        switch (menuAction) {
+            case 5:
+                AddToTeamMoney(gUnknown_203B210->itemSellPrice);
+                ShiftItemsDownFrom(gUnknown_203B210->soldItemInventoryIndex);
+                PlaySound(0x14c);
+                UpdateKecleonStoreState(25);
+                break;
+            case 6:
+            case 1:
+                UpdateKecleonStoreState(24);
+                break;
+        }
+    }
 }
 
 void sub_8019944(void)
 {
-  s32 slotIndex;
-  s32 menuAction;
-  struct Item *item;
+    s32 slotIndex;
+    s32 menuAction;
+    struct Item *item;
 
-  if (sub_80144A4(&menuAction) == 0) {
-    switch(menuAction)
-    {
-        case 5:
-            for(slotIndex = 0; slotIndex < INVENTORY_SIZE; slotIndex++)
-            {
-                item = &gTeamInventory_203B460->teamItems[slotIndex];
-                if ((item->flags & ITEM_FLAG_EXISTS) && CanSellItem(item->id)) {
-                    ClearItemSlotAt(slotIndex);
+    if (sub_80144A4(&menuAction) == 0) {
+        switch (menuAction) {
+            case 5:
+                for (slotIndex = 0; slotIndex < INVENTORY_SIZE; slotIndex++) {
+                    item = &gTeamInventory_203B460->teamItems[slotIndex];
+
+                    if ((item->flags & ITEM_FLAG_EXISTS) && CanSellItem(item->id))
+                        ClearItemSlotAt(slotIndex);
                 }
-            }
-            FillInventoryGaps();
-            AddToTeamMoney(gUnknown_203B210->inventoryItemSellPrice);
-            PlaySound(0x14c);
-            UpdateKecleonStoreState(0x20);
-            break;
-        case 1:
-        case 6:
-            UpdateKecleonStoreState(KECLEON_STORE_MAIN_MENU);
-            break;
+
+                FillInventoryGaps();
+                AddToTeamMoney(gUnknown_203B210->inventoryItemSellPrice);
+                PlaySound(0x14c);
+                UpdateKecleonStoreState(32);
+                break;
+            case 1:
+            case 6:
+                UpdateKecleonStoreState(KECLEON_STORE_MAIN_MENU);
+                break;
+        }
     }
-  }
 }
 
 void sub_80199CC(void)
 {
-  u32 menuAction;
-  struct BulkItem *item;
+    u32 menuAction;
+    struct BulkItem *item;
 
-  if (gUnknown_203B210->isKecleonItemShop) {
-    menuAction = sub_8019EDC(1);
-  }
-  else {
-    menuAction = sub_801A2A8(1);
-  }
+    if (gUnknown_203B210->isKecleonItemShop)
+        menuAction = sub_8019EDC(1);
+    else
+        menuAction = sub_801A2A8(1);
 
-  switch(menuAction)
-  {
-    case 3:
-        if (gUnknown_203B210->isKecleonItemShop) {
-            gUnknown_203B210->itemShopItemIndex = sub_8019FB0();
-            item = GetKecleonShopItem(gUnknown_203B210->itemShopItemIndex);
-        }
-        else {
-            gUnknown_203B210->wareShopItemIndex = sub_801A37C();
-            item = GetKecleonWareItem(gUnknown_203B210->wareShopItemIndex);
-        }
-        xxx_init_itemslot_8090A8C(&gUnknown_203B210->soldItem,item->id,0);
-        gUnknown_203B210->soldItem.quantity =item->quantity;
-        gUnknown_203B210->itemSellPrice = GetStackBuyPrice(&gUnknown_203B210->soldItem);
-        UpdateKecleonStoreState(0x14);
-        break;
-    case 4:
-        if (gUnknown_203B210->isKecleonItemShop) {
-            gUnknown_203B210->itemShopItemIndex = sub_8019FB0();
-            item = GetKecleonShopItem(gUnknown_203B210->itemShopItemIndex);
-        }
-        else {
-            gUnknown_203B210->wareShopItemIndex = sub_801A37C();
-            item = GetKecleonWareItem(gUnknown_203B210->wareShopItemIndex);
-        }
-        xxx_init_itemslot_8090A8C(&gUnknown_203B210->soldItem,item->id,0);
-        gUnknown_203B210->soldItem.quantity = item->quantity;
-        gUnknown_203B210->itemSellPrice = GetStackBuyPrice(&gUnknown_203B210->soldItem);
-        UpdateKecleonStoreState(0x15);
-        break;
-    case 2:
-        if (gUnknown_203B210->isKecleonItemShop)
-            sub_801A010();
-        else
-            sub_801A3DC();
-        UpdateKecleonStoreState(KECLEON_STORE_MAIN_MENU);
-        break;
-    case 1:
-        sub_801AD34(0);
-        DrawTeamMoneyBox(1);
-        break;
-  }
+    switch (menuAction) {
+        case 3:
+            if (gUnknown_203B210->isKecleonItemShop) {
+                gUnknown_203B210->itemShopItemIndex = sub_8019FB0();
+                item = GetKecleonShopItem(gUnknown_203B210->itemShopItemIndex);
+            }
+            else {
+                gUnknown_203B210->wareShopItemIndex = sub_801A37C();
+                item = GetKecleonWareItem(gUnknown_203B210->wareShopItemIndex);
+            }
+
+            xxx_init_itemslot_8090A8C(&gUnknown_203B210->soldItem, item->id, 0);
+            gUnknown_203B210->soldItem.quantity = item->quantity;
+            gUnknown_203B210->itemSellPrice = GetStackBuyPrice(&gUnknown_203B210->soldItem);
+            UpdateKecleonStoreState(20);
+            break;
+        case 4:
+            if (gUnknown_203B210->isKecleonItemShop) {
+                gUnknown_203B210->itemShopItemIndex = sub_8019FB0();
+                item = GetKecleonShopItem(gUnknown_203B210->itemShopItemIndex);
+            }
+            else {
+                gUnknown_203B210->wareShopItemIndex = sub_801A37C();
+                item = GetKecleonWareItem(gUnknown_203B210->wareShopItemIndex);
+            }
+
+            xxx_init_itemslot_8090A8C(&gUnknown_203B210->soldItem, item->id, 0);
+            gUnknown_203B210->soldItem.quantity = item->quantity;
+            gUnknown_203B210->itemSellPrice = GetStackBuyPrice(&gUnknown_203B210->soldItem);
+            UpdateKecleonStoreState(21);
+            break;
+        case 2:
+            if (gUnknown_203B210->isKecleonItemShop)
+                sub_801A010();
+            else
+                sub_801A3DC();
+
+            UpdateKecleonStoreState(KECLEON_STORE_MAIN_MENU);
+            break;
+        case 1:
+            sub_801AD34(0);
+            DrawTeamMoneyBox(1);
+            break;
+    }
 }
 
 void sub_8019B08(void)
 {
-  switch(sub_801A6E8(1))
-  {
-    case 0:
-        break;
-    case 3:
-        gUnknown_203B210->soldItemInventoryIndex = sub_801A8AC();
-        gUnknown_203B210->soldItem = gTeamInventory_203B460->teamItems[gUnknown_203B210->soldItemInventoryIndex];
-        gUnknown_203B210->itemSellPrice = GetStackSellPrice(&gUnknown_203B210->soldItem);
-        UpdateKecleonStoreState(0x1c);
-        break;
-    case 4:
-        gUnknown_203B210->soldItemInventoryIndex = sub_801A8AC();
-        gUnknown_203B210->soldItem = gTeamInventory_203B460->teamItems[gUnknown_203B210->soldItemInventoryIndex];
-        gUnknown_203B210->itemSellPrice = GetStackSellPrice(&gUnknown_203B210->soldItem);
-        sub_8099690(0);
-        UpdateKecleonStoreState(0x1d);
-        break;
-    case 2:
-        sub_801A928();
-        UpdateKecleonStoreState(KECLEON_STORE_MAIN_MENU);
-        break;
-    case 1:
-    default:
-        DrawTeamMoneyBox(1);
-        break;
-  }
+    switch (sub_801A6E8(TRUE)) {
+        case 0:
+            break;
+        case 3:
+            gUnknown_203B210->soldItemInventoryIndex = sub_801A8AC();
+            gUnknown_203B210->soldItem = gTeamInventory_203B460->teamItems[gUnknown_203B210->soldItemInventoryIndex];
+            gUnknown_203B210->itemSellPrice = GetStackSellPrice(&gUnknown_203B210->soldItem);
+            UpdateKecleonStoreState(28);
+            break;
+        case 4:
+            gUnknown_203B210->soldItemInventoryIndex = sub_801A8AC();
+            gUnknown_203B210->soldItem = gTeamInventory_203B460->teamItems[gUnknown_203B210->soldItemInventoryIndex];
+            gUnknown_203B210->itemSellPrice = GetStackSellPrice(&gUnknown_203B210->soldItem);
+            sub_8099690(0);
+            UpdateKecleonStoreState(29);
+            break;
+        case 2:
+            sub_801A928();
+            UpdateKecleonStoreState(KECLEON_STORE_MAIN_MENU);
+            break;
+        case 1:
+        default:
+            DrawTeamMoneyBox(1);
+            break;
+    }
 }
 
 void sub_8019BBC(void)
 {
-  int menuAction;
+    s32 menuAction;
 
-  menuAction = 0;
-  if (gUnknown_203B210->isKecleonItemShop) {
-    sub_8019EDC(0);
-  }
-  else {
-    sub_801A2A8(0);
-  }
-  if ((sub_8012FD8(&gUnknown_203B210->menu) == 0) && (sub_8013114(&gUnknown_203B210->menu,&menuAction), menuAction != 1)) {
-    gUnknown_203B210->menuAction3 = menuAction;
-  }
-  switch(menuAction){
-      case 2:
-        if (gTeamInventory_203B460->teamMoney == 0)
-            UpdateKecleonStoreState(KECLEON_STORE_NO_MONEY);
-        else if (gUnknown_203B210->itemSellPrice > gTeamInventory_203B460->teamMoney)
-            UpdateKecleonStoreState(KECLEON_STORE_NOT_ENOUGH_MONEY);
-        else
-            UpdateKecleonStoreState(0x16);
-        break;
-    case 7:
-        UpdateKecleonStoreState(0x15);
-        break;
-    case 1:
-        UpdateKecleonStoreState(0x13);
-        break;
-  }
+    menuAction = 0;
+
+    if (gUnknown_203B210->isKecleonItemShop)
+        sub_8019EDC(0);
+    else
+        sub_801A2A8(0);
+
+    if (sub_8012FD8(&gUnknown_203B210->menu) == 0 && (sub_8013114(&gUnknown_203B210->menu, &menuAction), menuAction != 1))
+        gUnknown_203B210->menuAction3 = menuAction;
+
+    switch (menuAction) {
+        case 2:
+            if (gTeamInventory_203B460->teamMoney == 0)
+                UpdateKecleonStoreState(KECLEON_STORE_NO_MONEY);
+            else if (gUnknown_203B210->itemSellPrice > gTeamInventory_203B460->teamMoney)
+                UpdateKecleonStoreState(KECLEON_STORE_NOT_ENOUGH_MONEY);
+            else
+                UpdateKecleonStoreState(22);
+            break;
+        case 7:
+            UpdateKecleonStoreState(21);
+            break;
+        case 1:
+            UpdateKecleonStoreState(19);
+            break;
+    }
 }
 
 void sub_8019C78(void)
 {
-  int menuAction;
+    s32 menuAction;
 
-  menuAction = 0;
-  sub_801A6E8(0);
-  if ((sub_8012FD8(&gUnknown_203B210->menu) == '\0') && (sub_8013114(&gUnknown_203B210->menu,&menuAction), menuAction != 1)) {
-    gUnknown_203B210->menuAction2 = menuAction;
-  }
-  switch(menuAction){
-      case 3:
-        sub_8099690(0);
-        if (!CanSellItem(gUnknown_203B210->soldItem.id))
-            UpdateKecleonStoreState(KECLEON_STORE_CANT_SELL_ITEM);
-        else if (gUnknown_203B210->itemSellPrice + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY)
-            UpdateKecleonStoreState(0xe);
-        else
-            UpdateKecleonStoreState(0x1e);
-        break;
-    case 7:
-        sub_8099690(0);
-        UpdateKecleonStoreState(0x1d);
-        break;
-    case 1:
-        UpdateKecleonStoreState(0x1b);
-        break;
-  }
+    menuAction = 0;
+    sub_801A6E8(FALSE);
+
+    if (sub_8012FD8(&gUnknown_203B210->menu) == FALSE && (sub_8013114(&gUnknown_203B210->menu, &menuAction), menuAction != 1))
+        gUnknown_203B210->menuAction2 = menuAction;
+
+    switch (menuAction) {
+        case 3:
+            sub_8099690(0);
+
+            if (!CanSellItem(gUnknown_203B210->soldItem.id))
+                UpdateKecleonStoreState(KECLEON_STORE_CANT_SELL_ITEM);
+            else if (gUnknown_203B210->itemSellPrice + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY)
+                UpdateKecleonStoreState(14);
+            else
+                UpdateKecleonStoreState(30);
+            break;
+        case 7:
+            sub_8099690(0);
+            UpdateKecleonStoreState(29);
+            break;
+        case 1:
+            UpdateKecleonStoreState(27);
+            break;
+    }
 }
 
 void sub_8019D30(void)
 {
-    switch(sub_801B410())
-    {
+    switch (sub_801B410()) {
         case 2:
         case 3:
             sub_801B450();
-            UpdateKecleonStoreState(0x13);
+            UpdateKecleonStoreState(19);
             break;
         case 0:
         case 1:
@@ -518,12 +508,11 @@ void sub_8019D30(void)
 
 void sub_8019D4C(void)
 {
-    switch(sub_801B410())
-    {
+    switch (sub_801B410()) {
         case 2:
         case 3:
             sub_801B450();
-            UpdateKecleonStoreState(0x1B);
+            UpdateKecleonStoreState(27);
             break;
         case 0:
         case 1:
@@ -535,15 +524,13 @@ void sub_8019D4C(void)
 void sub_8019D68(void)
 {
     s32 temp;
-    if(sub_80144A4(&temp) == 0)
-    {
+    if (sub_80144A4(&temp) == 0)
         UpdateKecleonStoreState(gUnknown_203B210->fallbackState);
-    }
 }
 
 u32 CountKecleonItems(void)
 {
-    if(gUnknown_203B210->isKecleonItemShop)
+    if (gUnknown_203B210->isKecleonItemShop)
         return CountKecleonShopItems();
     else
         return CountKecleonWareItems();
@@ -551,63 +538,58 @@ u32 CountKecleonItems(void)
 
 void sub_8019DAC(void)
 {
-  s32 sellPrice;
-  struct Item *item;
-  s32 index;
+    s32 sellPrice;
+    struct Item *item;
+    s32 index;
 
-  gUnknown_203B210->numInventoryItemToSell = 0;
-  gUnknown_203B210->inventoryItemSellPrice = 0;
-  for(index = 0; index < INVENTORY_SIZE; index++){
-    item = &gTeamInventory_203B460->teamItems[index];
-    if (((item->flags & ITEM_FLAG_EXISTS) != 0) && (CanSellItem(item->id))) {
-      sellPrice = GetStackSellPrice(item);
-      gUnknown_203B210->inventoryItemSellPrice += sellPrice;
-      gUnknown_203B210->numInventoryItemToSell++;
+    gUnknown_203B210->numInventoryItemToSell = 0;
+    gUnknown_203B210->inventoryItemSellPrice = 0;
+    for (index = 0; index < INVENTORY_SIZE; index++) {
+        item = &gTeamInventory_203B460->teamItems[index];
+
+        if ((item->flags & ITEM_FLAG_EXISTS) != 0 && CanSellItem(item->id)) {
+            sellPrice = GetStackSellPrice(item);
+            gUnknown_203B210->inventoryItemSellPrice += sellPrice;
+            gUnknown_203B210->numInventoryItemToSell++;
+        }
     }
-  }
 }
 
-void sub_8019E04(s32 param_1)
+void sub_8019E04(bool32 param_1)
 {
-
-  if (gUnknown_203B210->isKecleonItemShop) {
-    if (param_1 == 1)
-        gUnknown_203B210->unkE0 = 1;
-    else
-        gUnknown_203B210->unkE0 = 0;
-  }
-  else
-  {
-    if (param_1 == 1)
-      gUnknown_203B210->unkE0 = 7;
-    else
-      gUnknown_203B210->unkE0  = 6;
-  }
+    if (gUnknown_203B210->isKecleonItemShop) {
+        if (param_1 == TRUE)
+            gUnknown_203B210->unkE0 = 1;
+        else
+            gUnknown_203B210->unkE0 = 0;
+    }
+    else {
+        if (param_1 == TRUE)
+            gUnknown_203B210->unkE0 = 7;
+        else
+            gUnknown_203B210->unkE0  = 6;
+    }
 }
 
-u32 sub_8019E40(u32 r0)
+bool32 sub_8019E40(u32 r0)
 {
-    if(CountKecleonShopItems() == 0)
-    {
-        return 0;
-    }
-    else
-    {
-        gUnknown_203B214 = MemoryAlloc(sizeof(struct unkStruct_203B214), 0x8);
-        gUnknown_203B214->unk34 = r0;
-        gUnknown_203B214->unk38 = &gUnknown_203B214->unk3C[gUnknown_203B214->unk34];
-        sub_8006518(gUnknown_203B214->unk3C);
-        gUnknown_203B214->unk3C[gUnknown_203B214->unk34] = gUnknown_80DB8CC;
-        gUnknown_203B214->unk38->unk14 = gUnknown_203B214->unk9C;
-        ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B214->unk3C, 1, 1);
-        sub_8013818(&gUnknown_203B214->input, CountKecleonShopItems(), 0xA, r0);
-        gUnknown_203B214->input.menuIndex = gUnknown_203B218;
-        sub_8013984(&gUnknown_203B214->input);
-        sub_801A064();
-        sub_801A0D8();
-        return 1;
-    }
+    if (CountKecleonShopItems() == 0)
+        return FALSE;
+
+    gUnknown_203B214 = MemoryAlloc(sizeof(struct unkStruct_203B214), 8);
+    gUnknown_203B214->unk34 = r0;
+    gUnknown_203B214->unk38 = &gUnknown_203B214->unk3C[gUnknown_203B214->unk34];
+    sub_8006518(gUnknown_203B214->unk3C);
+    gUnknown_203B214->unk3C[gUnknown_203B214->unk34] = gUnknown_80DB8CC;
+    gUnknown_203B214->unk38->unk14 = gUnknown_203B214->unk9C;
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B214->unk3C, 1, 1);
+    sub_8013818(&gUnknown_203B214->input, CountKecleonShopItems(), 10, r0);
+    gUnknown_203B214->input.menuIndex = gUnknown_203B218;
+    sub_8013984(&gUnknown_203B214->input);
+    sub_801A064();
+    sub_801A0D8();
+    return TRUE;
 }
 
 u32 sub_8019EDC(u8 r0)
@@ -615,46 +597,35 @@ u32 sub_8019EDC(u8 r0)
     struct Item slot;
     struct BulkItem *item;
 
-    if(r0 == 0)
-    {
+    if (r0 == 0) {
         sub_8013660(&gUnknown_203B214->input);
         return 0;
     }
-    else
-    {
-        switch(GetKeyPress(&gUnknown_203B214->input))
-        {
-            case INPUT_B_BUTTON:
-                PlayMenuSoundEffect(1);
-                return 2;
-            case INPUT_A_BUTTON:
-                item = GetKecleonShopItem(sub_8019FB0());
-                slot.id = item->id;
-                slot.quantity = item->quantity;
-                if(GetStackBuyPrice(&slot) > gTeamInventory_203B460->teamMoney)
-                {
-                    PlayMenuSoundEffect(2);
-                }
-                else
-                {
-                    PlayMenuSoundEffect(0);
-                }
-                 return 3;
-            case INPUT_START_BUTTON:
-                PlayMenuSoundEffect(4);
-                return 4;
-            default:
-                if(sub_80138B8(&gUnknown_203B214->input, 1) != 0)
-                {
-                    sub_801A064();
-                    sub_801A0D8();
-                    return 1;
-                }
-                else
-                {
-                    return 0;
-                }
-        }
+
+    switch (GetKeyPress(&gUnknown_203B214->input)) {
+        case INPUT_B_BUTTON:
+            PlayMenuSoundEffect(1);
+            return 2;
+        case INPUT_A_BUTTON:
+            item = GetKecleonShopItem(sub_8019FB0());
+            slot.id = item->id;
+            slot.quantity = item->quantity;
+
+            if (GetStackBuyPrice(&slot) > gTeamInventory_203B460->teamMoney)
+                PlayMenuSoundEffect(2);
+            else
+                PlayMenuSoundEffect(0);
+            return 3;
+        case INPUT_START_BUTTON:
+            PlayMenuSoundEffect(4);
+            return 4;
+        default:
+            if (sub_80138B8(&gUnknown_203B214->input, 1) != FALSE) {
+                sub_801A064();
+                sub_801A0D8();
+                return 1;
+            }
+            return 0;
     }
 }
 
@@ -671,14 +642,13 @@ void sub_8019FCC(u8 r0)
     sub_8013984(&gUnknown_203B214->input);
     sub_801A064();
     sub_801A0D8();
-    if(r0)
+    if (r0)
         AddMenuCursorSprite(&gUnknown_203B214->input);
 }
 
 void sub_801A010(void)
 {
-    if(gUnknown_203B214 != NULL)
-    {
+    if (gUnknown_203B214 != NULL) {
         gUnknown_203B218 = gUnknown_203B214->input.menuIndex;
         gUnknown_203B214->unk3C[gUnknown_203B214->unk34] = gUnknown_80DB8B4;
         ResetUnusedInputStruct();
@@ -750,70 +720,66 @@ void sub_801A064(void)
 
 void sub_801A0D8(void)
 {
-  struct BulkItem *heldItem;
-  s32 buyPrice;
-  s32 y;
-  s32 index;
-  u8 auStack204 [80];
-  struct unkStruct_8090F58 local_7c;
-  u8 auStack112 [80];
-  struct Item item;
-  u8 temp_calc;
+    struct BulkItem *heldItem;
+    s32 buyPrice;
+    s32 y;
+    s32 index;
+    u8 auStack204 [80];
+    struct unkStruct_8090F58 local_7c;
+    u8 auStack112 [80];
+    struct Item item;
+    u8 temp_calc;
 
-  sub_8008C54(gUnknown_203B214->unk34);
-  sub_80073B8(gUnknown_203B214->unk34);
-  xxx_call_draw_string(gUnknown_203B214->input.unk1E * 8 + 10,0,gUnknown_80DB8E4,
-                        gUnknown_203B214->unk34,0);
+    sub_8008C54(gUnknown_203B214->unk34);
+    sub_80073B8(gUnknown_203B214->unk34);
+    xxx_call_draw_string((gUnknown_203B214->input.unk1E * 8) + 10, 0, gUnknown_80DB8E4, gUnknown_203B214->unk34, 0);
 
-  for(index = 0; index < gUnknown_203B214->input.unk1A; index++)
-    {
-      temp_calc = (gUnknown_203B214->input.unk1E * gUnknown_203B214->input.unk1C) + index;
-      heldItem = GetKecleonShopItem(temp_calc);
-      item.id = heldItem->id;
-      item.quantity = heldItem->quantity;
-      item.flags = (ITEM_FLAG_EXISTS | ITEM_FLAG_IN_SHOP);
-      local_7c.unk0 = 1;
-      local_7c.unk4 = 0;
-      local_7c.unk6 = 0x58;
-      local_7c.unk8 = 1;
-      sub_8090E14(auStack204,&item,&local_7c);
-      buyPrice = GetStackBuyPrice(&item);
-      if (buyPrice <= gTeamInventory_203B460->teamMoney) {
-        y = sub_8013800(&gUnknown_203B214->input,index);
-        xxx_call_draw_string(8,y,auStack204,gUnknown_203B214->unk34,0);
-      }
-      else {
-        sprintfStatic(auStack112,gUnknown_80DB8EC,auStack204);
-        y = sub_8013800(&gUnknown_203B214->input,index);
-        xxx_call_draw_string(8,y,auStack112,gUnknown_203B214->unk34,0);
-      }
-   }
-  sub_80073E0(gUnknown_203B214->unk34);
+    for (index = 0; index < gUnknown_203B214->input.unk1A; index++) {
+        temp_calc = (gUnknown_203B214->input.unk1E * gUnknown_203B214->input.unk1C) + index;
+        heldItem = GetKecleonShopItem(temp_calc);
+        item.id = heldItem->id;
+        item.quantity = heldItem->quantity;
+        item.flags = (ITEM_FLAG_EXISTS | ITEM_FLAG_IN_SHOP);
+        local_7c.unk0 = 1;
+        local_7c.unk4 = 0;
+        local_7c.unk6 = 88;
+        local_7c.unk8 = 1;
+        sub_8090E14(auStack204, &item, &local_7c);
+        buyPrice = GetStackBuyPrice(&item);
+
+        if (buyPrice <= gTeamInventory_203B460->teamMoney) {
+            y = sub_8013800(&gUnknown_203B214->input, index);
+            xxx_call_draw_string(8, y, auStack204, gUnknown_203B214->unk34, 0);
+        }
+        else {
+            sprintfStatic(auStack112, gUnknown_80DB8EC, auStack204);
+            y = sub_8013800(&gUnknown_203B214->input, index);
+            xxx_call_draw_string(8, y, auStack112, gUnknown_203B214->unk34, 0);
+        }
+    }
+
+    sub_80073E0(gUnknown_203B214->unk34);
 }
 
 u32 sub_801A20C(u32 r0)
 {
-    if(CountKecleonWareItems() == 0)
-    {
+    if (CountKecleonWareItems() == 0)
         return 0;
-    }
-    else
-    {
-        gUnknown_203B21C = MemoryAlloc(sizeof(struct unkStruct_203B214), 0x8);
-        gUnknown_203B21C->unk34 = r0;
-        gUnknown_203B21C->unk38 = &gUnknown_203B21C->unk3C[gUnknown_203B21C->unk34];
-        sub_8006518(gUnknown_203B21C->unk3C);
-        gUnknown_203B21C->unk3C[gUnknown_203B21C->unk34] = gUnknown_80DB914;
-        gUnknown_203B21C->unk38->unk14 = gUnknown_203B21C->unk9C;
-        ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B21C->unk3C, 1, 1);
-        sub_8013818(&gUnknown_203B21C->input, CountKecleonWareItems(), 0xA, r0);
-        gUnknown_203B21C->input.menuIndex = gUnknown_203B220;
-        sub_8013984(&gUnknown_203B21C->input);
-        sub_801A430();
-        sub_801A4A4();
-        return 1;
-    }
+
+    gUnknown_203B21C = MemoryAlloc(sizeof(struct unkStruct_203B214), 8);
+    gUnknown_203B21C->unk34 = r0;
+    gUnknown_203B21C->unk38 = &gUnknown_203B21C->unk3C[gUnknown_203B21C->unk34];
+    sub_8006518(gUnknown_203B21C->unk3C);
+    gUnknown_203B21C->unk3C[gUnknown_203B21C->unk34] = gUnknown_80DB914;
+    gUnknown_203B21C->unk38->unk14 = gUnknown_203B21C->unk9C;
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B21C->unk3C, 1, 1);
+    sub_8013818(&gUnknown_203B21C->input, CountKecleonWareItems(), 10, r0);
+    gUnknown_203B21C->input.menuIndex = gUnknown_203B220;
+    sub_8013984(&gUnknown_203B21C->input);
+    sub_801A430();
+    sub_801A4A4();
+    return 1;
 }
 
 u32 sub_801A2A8(u8 r0)
@@ -821,48 +787,36 @@ u32 sub_801A2A8(u8 r0)
     struct Item slot;
     struct BulkItem *item;
 
-    if(r0 == 0)
-    {
+    if (r0 == 0) {
         sub_8013660(&gUnknown_203B21C->input);
         return 0;
     }
-    else
-    {
-        switch(GetKeyPress(&gUnknown_203B21C->input))
-        {
-            case INPUT_B_BUTTON:
-                PlayMenuSoundEffect(1);
-                return 2;
-            case INPUT_A_BUTTON:
-                item = GetKecleonWareItem(sub_801A37C());
 
-                slot.id = item->id;
-                slot.quantity = item->quantity;
+    switch (GetKeyPress(&gUnknown_203B21C->input)) {
+        case INPUT_B_BUTTON:
+            PlayMenuSoundEffect(1);
+            return 2;
+        case INPUT_A_BUTTON:
+            item = GetKecleonWareItem(sub_801A37C());
 
-                if(GetStackBuyPrice(&slot) > gTeamInventory_203B460->teamMoney)
-                {
-                    PlayMenuSoundEffect(2);
-                }
-                else
-                {
-                    PlayMenuSoundEffect(0);
-                }
-                 return 3;
-            case INPUT_START_BUTTON:
-                PlayMenuSoundEffect(4);
-                return 4;
-            default:
-                if(sub_80138B8(&gUnknown_203B21C->input, 1) != 0)
-                {
-                    sub_801A430();
-                    sub_801A4A4();
-                    return 1;
-                }
-                else
-                {
-                    return 0;
-                }
-        }
+            slot.id = item->id;
+            slot.quantity = item->quantity;
+
+            if (GetStackBuyPrice(&slot) > gTeamInventory_203B460->teamMoney)
+                PlayMenuSoundEffect(2);
+            else
+                PlayMenuSoundEffect(0);
+            return 3;
+        case INPUT_START_BUTTON:
+            PlayMenuSoundEffect(4);
+            return 4;
+        default:
+            if (sub_80138B8(&gUnknown_203B21C->input, 1) != 0) {
+                sub_801A430();
+                sub_801A4A4();
+                return 1;
+            }
+            return 0;
     }
 }
 
@@ -879,14 +833,13 @@ void sub_801A398(u8 r0)
     sub_8013984(&gUnknown_203B21C->input);
     sub_801A430();
     sub_801A4A4();
-    if(r0)
+    if (r0)
         AddMenuCursorSprite(&gUnknown_203B21C->input);
 }
 
 void sub_801A3DC(void)
 {
-    if(gUnknown_203B21C != NULL)
-    {
+    if (gUnknown_203B21C != NULL) {
         gUnknown_203B220 = gUnknown_203B21C->input.menuIndex;
         gUnknown_203B21C->unk3C[gUnknown_203B21C->unk34] = gUnknown_80DB8FC;
         ResetUnusedInputStruct();
@@ -957,165 +910,160 @@ void sub_801A430(void)
 
 void sub_801A4A4(void)
 {
-  struct BulkItem *heldItem;
-  s32 buyPrice;
-  s32 y;
-  s32 index;
-  u8 buffer1 [80];
-  struct unkStruct_8090F58 local_7c;
-  u8 buffer2 [80];
-  struct Item item;
-  u8 temp_calc;
+    struct BulkItem *heldItem;
+    s32 buyPrice;
+    s32 y;
+    s32 index;
+    u8 buffer1 [80];
+    struct unkStruct_8090F58 local_7c;
+    u8 buffer2 [80];
+    struct Item item;
+    u8 temp_calc;
 
-  sub_8008C54(gUnknown_203B21C->unk34);
-  sub_80073B8(gUnknown_203B21C->unk34);
-  xxx_call_draw_string(gUnknown_203B21C->input.unk1E * 8 + 10,0,gUnknown_80DB92C,
-                        gUnknown_203B21C->unk34,0);
+    sub_8008C54(gUnknown_203B21C->unk34);
+    sub_80073B8(gUnknown_203B21C->unk34);
+    xxx_call_draw_string(gUnknown_203B21C->input.unk1E * 8 + 10,0,gUnknown_80DB92C,
+    gUnknown_203B21C->unk34,0);
 
-  for(index = 0; index < gUnknown_203B21C->input.unk1A; index++)
-    {
-      temp_calc = (gUnknown_203B21C->input.unk1E * gUnknown_203B21C->input.unk1C) + index;
-      heldItem = GetKecleonWareItem(temp_calc);
-      item.id = heldItem->id;
-      item.quantity = heldItem->quantity;
-      item.flags =  (ITEM_FLAG_EXISTS | ITEM_FLAG_IN_SHOP);
-      local_7c.unk0 = 1;
-      local_7c.unk4 = 0;
-      local_7c.unk6 = 0x58;
-      local_7c.unk8 = 1;
-      sub_8090E14(buffer1,&item,&local_7c);
-      buyPrice = GetStackBuyPrice(&item);
-      if (buyPrice <= gTeamInventory_203B460->teamMoney) {
-        y = sub_8013800(&gUnknown_203B21C->input,index);
-        xxx_call_draw_string(8,y,buffer1,gUnknown_203B21C->unk34,0);
-      }
-      else {
-        sprintfStatic(buffer2,gUnknown_80DB934,buffer1);
-        y = sub_8013800(&gUnknown_203B21C->input,index);
-        xxx_call_draw_string(8,y,buffer2,gUnknown_203B21C->unk34,0);
-      }
-   }
-  sub_80073E0(gUnknown_203B21C->unk34);
+    for (index = 0; index < gUnknown_203B21C->input.unk1A; index++) {
+        temp_calc = (gUnknown_203B21C->input.unk1E * gUnknown_203B21C->input.unk1C) + index;
+        heldItem = GetKecleonWareItem(temp_calc);
+        item.id = heldItem->id;
+        item.quantity = heldItem->quantity;
+        item.flags = (ITEM_FLAG_EXISTS | ITEM_FLAG_IN_SHOP);
+        local_7c.unk0 = 1;
+        local_7c.unk4 = 0;
+        local_7c.unk6 = 88;
+        local_7c.unk8 = 1;
+        sub_8090E14(buffer1, &item, &local_7c);
+        buyPrice = GetStackBuyPrice(&item);
+
+        if (buyPrice <= gTeamInventory_203B460->teamMoney) {
+            y = sub_8013800(&gUnknown_203B21C->input, index);
+            xxx_call_draw_string(8, y, buffer1, gUnknown_203B21C->unk34, 0);
+        }
+        else {
+            sprintfStatic(buffer2, gUnknown_80DB934, buffer1);
+            y = sub_8013800(&gUnknown_203B21C->input, index);
+            xxx_call_draw_string(8, y, buffer2, gUnknown_203B21C->unk34, 0);
+        }
+    }
+    sub_80073E0(gUnknown_203B21C->unk34);
 }
 
-u32 sub_801A5D8(u32 param_1,int param_2,struct UnkTextStruct2_sub *param_3,u32 param_4)
+bool32 sub_801A5D8(u32 param_1, s32 param_2, struct UnkTextStruct2_sub *param_3, u32 param_4)
 {
+    if (GetNumberOfFilledInventorySlots() == 0)
+        return FALSE;
 
-  if (GetNumberOfFilledInventorySlots() == 0) {
-      return 0;
-  }
-  else {
-    if (gUnknown_203B224 == NULL) {
-        gUnknown_203B224 = MemoryAlloc(sizeof(struct unkStruct_203B224),8);
-    }
+    if (gUnknown_203B224 == NULL)
+        gUnknown_203B224 = MemoryAlloc(sizeof(struct unkStruct_203B224), 8);
+
     gUnknown_203B224->unk0 = param_1;
     FillInventoryGaps();
     sub_801AE84();
-
     gUnknown_203B224->unk88 = param_2;
     gUnknown_203B224->unk8C = &gUnknown_203B224->unk90[param_2];
-
     sub_8006518(gUnknown_203B224->unk90);
     gUnknown_203B224->unk90[gUnknown_203B224->unk88] = gUnknown_80DB95C;
-
     gUnknown_203B224->unk8C->unk14 = gUnknown_203B224->unkF0;
 
     if (param_3 != NULL)
         gUnknown_203B224->unk90[gUnknown_203B224->unk88].unk8 = *param_3;
 
-    sub_8012D08(gUnknown_203B224->unk8C,param_4);
+    sub_8012D08(gUnknown_203B224->unk8C, param_4);
     sub_8099690(1);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B224->unk90,1,1);
-    sub_8013818(&gUnknown_203B224->input,GetNumberOfFilledInventorySlots(),param_4,param_2);
+    sub_800641C(gUnknown_203B224->unk90, 1, 1);
+    sub_8013818(&gUnknown_203B224->input, GetNumberOfFilledInventorySlots(), param_4, param_2);
     gUnknown_203B224->input.menuIndex = gUnknown_203B228;
     gUnknown_203B224->input.unk1E = gUnknown_203B22A;
     sub_8013984(&gUnknown_203B224->input);
     sub_801A998();
     sub_801A9E0();
-    return 1;
-  }
+    return TRUE;
 }
 
-u32 sub_801A6E8(u8 param_1)
+u32 sub_801A6E8(bool8 param_1)
 {
-  s32 index;
-  struct Item item;
+    s32 index;
+    struct Item item;
 
-  if (param_1 == 0) {
-    sub_8013660(&gUnknown_203B224->input);
-    return 0;
-  }
-  switch(GetKeyPress(&gUnknown_203B224->input)) {
-    case INPUT_B_BUTTON:
-        PlayMenuSoundEffect(1);
-        return 2;
-    case INPUT_A_BUTTON:
-        switch(gUnknown_203B224->unk0) {
-            case 0:
-            case 1:
-            case 2:
-                if (gUnknown_203B224->unk4[sub_801A8AC()] != 0)
-                    PlayMenuSoundEffect(2);
-                else
+    if (param_1 == FALSE) {
+        sub_8013660(&gUnknown_203B224->input);
+        return 0;
+    }
+
+    switch (GetKeyPress(&gUnknown_203B224->input)) {
+        case INPUT_B_BUTTON:
+            PlayMenuSoundEffect(1);
+            return 2;
+        case INPUT_A_BUTTON:
+            switch (gUnknown_203B224->unk0) {
+                case 0:
+                case 1:
+                case 2:
+                    if (gUnknown_203B224->unk4[sub_801A8AC()] != 0)
+                        PlayMenuSoundEffect(2);
+                    else
+                        PlayMenuSoundEffect(0);
+                    break;
+                case 3:
+                    if (sub_801AEA8() != 0 || sub_801ADA0(sub_801A8AC()) != FALSE)
+                        PlayMenuSoundEffect(0);
+                    else
+                        PlayMenuSoundEffect(2);
+                    break;
+                case 4:
+                    item = gTeamInventory_203B460->teamItems[sub_801A8AC()];
+
+                    if (CanSellItem(item.id) && GetStackSellPrice(&item) + gTeamInventory_203B460->teamMoney <= MAX_TEAM_MONEY)
+                        PlayMenuSoundEffect(0);
+                    else
+                        PlayMenuSoundEffect(2);
+                    break;
+                case 5:
                     PlayMenuSoundEffect(0);
-                break;
-            case 3:
-                if ((sub_801AEA8() != 0) || (sub_801ADA0(sub_801A8AC()) != 0))
-                    PlayMenuSoundEffect(0);
-                else
-                    PlayMenuSoundEffect(2);
-                break;
-            case 4:
-                item = gTeamInventory_203B460->teamItems[sub_801A8AC()];
-                if (CanSellItem(item.id) && (GetStackSellPrice(&item) + gTeamInventory_203B460->teamMoney <= MAX_TEAM_MONEY))
-                    PlayMenuSoundEffect(0);
-                else
-                    PlayMenuSoundEffect(2);
-                break;
-            case 5:
-                PlayMenuSoundEffect(0);
-                break;
-        }
-        return 3;
-    case INPUT_START_BUTTON:
-        PlayMenuSoundEffect(4);
-        return 4;
-    case INPUT_L_BUTTON:
-    case INPUT_R_BUTTON:
-        if (gUnknown_203B224->unk0 != 3) goto _0801A87C;
-        index = sub_801A8AC();
-        if ((gUnknown_203B224->unk4[index] != 0) || (sub_801ADA0(index) != 0)) {
-            PlayMenuSoundEffect(6);
-            gUnknown_203B224->unk4[index] ^= 1;
-            sub_80138B8(&gUnknown_203B224->input,0);
-            sub_801A9E0();
-            return 1;
-        }
-        else
-        {
+                    break;
+            }
+            return 3;
+        case INPUT_START_BUTTON:
+            PlayMenuSoundEffect(4);
+            return 4;
+        case INPUT_L_BUTTON:
+        case INPUT_R_BUTTON:
+            if (gUnknown_203B224->unk0 != 3)
+                goto _0801A87C;
+
+            index = sub_801A8AC();
+            if (gUnknown_203B224->unk4[index] != 0 || sub_801ADA0(index) != FALSE) {
+                PlayMenuSoundEffect(6);
+                gUnknown_203B224->unk4[index] ^= 1;
+                sub_80138B8(&gUnknown_203B224->input, 0);
+                sub_801A9E0();
+                return 1;
+            }
+
             PlayMenuSoundEffect(2);
             goto _0801A87C;
-        }
-    case INPUT_SELECT_BUTTON:
-        if (gUnknown_203B224->unk0 != 2) {
-            PlayMenuSoundEffect(5);
-            Kecleon_SortItems();
-            sub_801A9E0();
-        }
-        // NOTE: fallthrough needed here
-    default:
-_0801A87C:
-        if (sub_80138B8(&gUnknown_203B224->input,1) != '\0') {
-            sub_801A998();
-            sub_801A9E0();
-            return 1;
-        }
-        else {
-            return 0;
-        }
-        break;
-  }
+        case INPUT_SELECT_BUTTON:
+            if (gUnknown_203B224->unk0 != 2) {
+                PlayMenuSoundEffect(5);
+                Kecleon_SortItems();
+                sub_801A9E0();
+            }
+            // NOTE: fallthrough needed here
+        default:
+            _0801A87C:
+            if (sub_80138B8(&gUnknown_203B224->input, 1) != FALSE) {
+                sub_801A998();
+                sub_801A9E0();
+                return 1;
+            }
+            else
+                return 0;
+            break;
+    }
 }
 
 s32 sub_801A8AC(void)
@@ -1133,14 +1081,13 @@ void sub_801A8D0(u8 r0)
     sub_8013984(&gUnknown_203B224->input);
     sub_801A998();
     sub_801A9E0();
-    if(r0)
+    if (r0)
         AddMenuCursorSprite(&gUnknown_203B224->input);
 }
 
 void sub_801A928(void)
 {
-    if(gUnknown_203B224 != NULL)
-    {
+    if (gUnknown_203B224 != NULL) {
         gUnknown_203B228 = gUnknown_203B224->input.menuIndex;
         gUnknown_203B22A = gUnknown_203B224->input.unk1E;
         gUnknown_203B224->unk90[gUnknown_203B224->unk88] = gUnknown_80DB944;
@@ -1156,7 +1103,7 @@ void sub_801A998(void)
 {
     gUnknown_203B224->unkF0[0] = gUnknown_203B224->input.unk20;
     gUnknown_203B224->unkF0[1] = gUnknown_203B224->input.unk1E;
-    gUnknown_203B224->unkF0[2] = 0xB;
+    gUnknown_203B224->unkF0[2] = 11;
     gUnknown_203B224->unkF0[3] = 0;
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B224->unk90, 1, 1);
@@ -1180,20 +1127,20 @@ void sub_801A9E0(void)
     sub_8008C54(gUnknown_203B224->unk88);
     sub_80073B8(gUnknown_203B224->unk88);
     x = gUnknown_203B224->input.unk1E * 8 + 10;
-    if (gUnknown_203B224->input.unk1E == 0) {
-        xxx_call_draw_string(x,0,gTeamToolboxA,gUnknown_203B224->unk88,0);
-    }
-    else {
-        xxx_call_draw_string(x,0,gTeamToolboxB,gUnknown_203B224->unk88,0);
-    }
-    for(r7 = 0; r7 < gUnknown_203B224->input.unk1A; r7++)
-    {
+
+    if (gUnknown_203B224->input.unk1E == 0)
+        xxx_call_draw_string(x, 0, gTeamToolboxA, gUnknown_203B224->unk88, 0);
+    else
+        xxx_call_draw_string(x, 0, gTeamToolboxB, gUnknown_203B224->unk88, 0);
+
+    for (r7 = 0; r7 < gUnknown_203B224->input.unk1A; r7++) {
         teamItemIndex = (gUnknown_203B224->input.unk1E * gUnknown_203B224->input.unk1C) + r7;
         item = gTeamInventory_203B460->teamItems[teamItemIndex];
-        switch(gUnknown_203B224->unk0) {
+
+        switch (gUnknown_203B224->unk0) {
             case 0:
-                sub_8090E14(buffer1,&item,0);
-                xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->input,r7),buffer1,gUnknown_203B224->unk88,0);
+                sub_8090E14(buffer1, &item, 0);
+                xxx_call_draw_string(8, sub_8013800(&gUnknown_203B224->input, r7), buffer1, gUnknown_203B224->unk88, 0);
                 break;
             case 1:
             case 2:
@@ -1201,22 +1148,21 @@ void sub_801A9E0(void)
                 stack.unk4 = 0;
                 stack.unk8 = 1;
                 item.flags = 1;
-                sub_8090E14(buffer1,&item, &stack);
-                xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->input,r7),buffer1,gUnknown_203B224->unk88,0);
+                sub_8090E14(buffer1, &item, &stack);
+                xxx_call_draw_string(8, sub_8013800(&gUnknown_203B224->input, r7), buffer1, gUnknown_203B224->unk88, 0);
                 break;
             case 3:
                 stack1.unk0 = 0;
                 stack1.unk4 = 0;
                 stack1.unk8 = 1;
                 item.flags = 1;
-                sub_8090E14(buffer1,&item,&stack1);
-                if (gUnknown_203B224->unk4[teamItemIndex] != 0 || sub_801ADA0(teamItemIndex) != '\0'){
-                    xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->input,r7),buffer1,gUnknown_203B224->unk88,0);
-                }
-                else
-                {
-                    strncpy(gUnknown_202DE58,buffer1,0x50);
-                    xxx_format_and_draw(8,sub_8013800(&gUnknown_203B224->input,r7),gUnknown_80DB994,gUnknown_203B224->unk88,0);  
+                sub_8090E14(buffer1, &item, &stack1);
+
+                if (gUnknown_203B224->unk4[teamItemIndex] != 0 || sub_801ADA0(teamItemIndex) != FALSE)
+                    xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->input,r7),buffer1,gUnknown_203B224->unk88, 0);
+                else {
+                    strncpy(gUnknown_202DE58, buffer1, 0x50);
+                    xxx_format_and_draw(8, sub_8013800(&gUnknown_203B224->input, r7), gUnknown_80DB994, gUnknown_203B224->unk88, 0);
                 }
                 break;
             case 4:
@@ -1226,19 +1172,20 @@ void sub_801A9E0(void)
                     stack2.unk6 = 0x58;
                     stack2.unk8 = 1;
                     item.flags = 3;
-                    sub_8090E14(buffer1,&item, &stack2);
-                    if (GetStackSellPrice(&item) + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY){
+                    sub_8090E14(buffer1, &item, &stack2);
+
+                    if (GetStackSellPrice(&item) + gTeamInventory_203B460->teamMoney > MAX_TEAM_MONEY) {
                         // very dumb but this matches...
-                        sprintfStatic((char *)&stack3,gUnknown_80DB9A0,buffer1);
-                        xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->input,r7),(u8 *)&stack3,gUnknown_203B224->unk88,0);
+                        sprintfStatic((char *)&stack3, gUnknown_80DB9A0, buffer1);
+                        xxx_call_draw_string(8, sub_8013800(&gUnknown_203B224->input, r7), (u8 *)&stack3, gUnknown_203B224->unk88, 0);
                     }
                     else
-                        xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->input,r7),buffer1,gUnknown_203B224->unk88,0);;
+                        xxx_call_draw_string(8, sub_8013800(&gUnknown_203B224->input, r7), buffer1, gUnknown_203B224->unk88, 0);
                 }
                 else {
-                    sub_8090E14(buffer1,&item, 0);
-                    strncpy(gUnknown_202DE58,buffer1,0x50);
-                    xxx_format_and_draw(8,sub_8013800(&gUnknown_203B224->input,r7),gUnknown_80DB994,gUnknown_203B224->unk88,0);
+                    sub_8090E14(buffer1, &item, 0);
+                    strncpy(gUnknown_202DE58, buffer1, 0x50);
+                    xxx_format_and_draw(8, sub_8013800(&gUnknown_203B224->input, r7), gUnknown_80DB994, gUnknown_203B224->unk88, 0);
                 }
                 break;
             case 5:
@@ -1246,120 +1193,111 @@ void sub_801A9E0(void)
                 stack3.unk4 = 0;
                 stack3.unk8 = 1;
                 item.flags = 1;
-                sub_8090E14(buffer1,&item,&stack3);
-                if (IsGummiItem(item.id)) {
-                    xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->input,r7),buffer1,gUnknown_203B224->unk88,0);
-                }
-                else
-                {
-                    strncpy(gUnknown_202DE58,buffer1,0x50);
-                    xxx_format_and_draw(8,sub_8013800(&gUnknown_203B224->input,r7),gUnknown_80DB994,gUnknown_203B224->unk88,0);
+                sub_8090E14(buffer1, &item, &stack3);
+
+                if (IsGummiItem(item.id))
+                    xxx_call_draw_string(8, sub_8013800(&gUnknown_203B224->input, r7), buffer1, gUnknown_203B224->unk88, 0);
+                else {
+                    strncpy(gUnknown_202DE58, buffer1, 0x50);
+                    xxx_format_and_draw(8, sub_8013800(&gUnknown_203B224->input, r7), gUnknown_80DB994, gUnknown_203B224->unk88, 0);
                 }
                 break;
         }
-        if ((sub_801AED0(teamItemIndex) & 1) != 0) {
-            sub_8007B7C(gUnknown_203B224->unk88,8,sub_8013800(&gUnknown_203B224->input,r7),(gUnknown_203B224->unk8C->unkC - 2) * 8,10);
-        }
+
+        if ((sub_801AED0(teamItemIndex) & 1) != 0)
+            sub_8007B7C(gUnknown_203B224->unk88, 8, sub_8013800(&gUnknown_203B224->input, r7), (gUnknown_203B224->unk8C->unkC - 2) * 8, 10);
     }
+
     sub_80073E0(gUnknown_203B224->unk88);
 }
 
-
 void sub_801AD34(u32 param_1)
 { 
-  sub_8008C54(param_1);
-  sub_80073B8(param_1);
-  xxx_call_draw_string(6,0,gUnknown_80DB9A8,param_1,0);
-  sub_8012BC4(0x12,0xd,GetNumberOfFilledInventorySlots(),2,7,param_1);
-  xxx_call_draw_string(0x16,0xd,gUnknown_80DB9B0,param_1,0);
-  sub_8012BC4(0x2b,0xd,INVENTORY_SIZE,2,7,param_1);
-  sub_80073E0(param_1);
+    sub_8008C54(param_1);
+    sub_80073B8(param_1);
+    xxx_call_draw_string(6, 0, gUnknown_80DB9A8, param_1, 0);
+    sub_8012BC4(18, 13, GetNumberOfFilledInventorySlots(), 2, 7, param_1);
+    xxx_call_draw_string(22, 13, gUnknown_80DB9B0, param_1, 0);
+    sub_8012BC4(43, 13, INVENTORY_SIZE, 2, 7, param_1);
+    sub_80073E0(param_1);
 }
 
 bool8 sub_801ADA0(s32 param_1)
 {
-  u16 uVar2;
-  u32 uVar2_32;
+    u16 uVar2;
+    u32 uVar2_32;
 
-  u16 uVar3;
-  u32 uVar3_32;
-  s32 sum1;
-  s32 sum2;
-  struct Item item;
- 
-  item = gTeamInventory_203B460->teamItems[param_1];
-  if (!IsNotMoneyOrUsedTMItem(item.id)) {
-      return FALSE;
-  }
-  else
-  {
-    if (IsThrowableItem(item.id)) {
-      uVar3_32 = sub_801AE24(item.id);
-      sum1 = gTeamInventory_203B460->teamStorage[item.id];
-      uVar3 = uVar3_32;
-      sum1 += uVar3;
-      sum1 += (item.quantity);
-      if (sum1 > 999)
+    u16 uVar3;
+    u32 uVar3_32;
+    s32 sum1;
+    s32 sum2;
+    struct Item item;
+
+    item = gTeamInventory_203B460->teamItems[param_1];
+    if (!IsNotMoneyOrUsedTMItem(item.id))
         return FALSE;
+
+    if (IsThrowableItem(item.id)) {
+        uVar3_32 = sub_801AE24(item.id);
+        sum1 = gTeamInventory_203B460->teamStorage[item.id];
+        uVar3 = uVar3_32;
+        sum1 += uVar3;
+        sum1 += (item.quantity);
+        if (sum1 > 999)
+            return FALSE;
     }
     else {
-      uVar2_32 = sub_801AE24(item.id);
-      sum2 = gTeamInventory_203B460->teamStorage[item.id];
-      uVar2 = uVar2_32;
-      sum2 +=  uVar2;
-      if (sum2 > 998)
-        return FALSE;
+        uVar2_32 = sub_801AE24(item.id);
+        sum2 = gTeamInventory_203B460->teamStorage[item.id];
+        uVar2 = uVar2_32;
+        sum2 += uVar2;
+        if (sum2 > 998)
+            return FALSE;
     }
-  }
-  return 1;
+    return 1;
 }
 
 s32 sub_801AE24(u32 itemID)
 {
-  struct Item item;
-  u16 count;
-  s32 invIndex;
+    struct Item item;
+    u16 count;
+    s32 invIndex;
 
-  count = 0;
-  for (invIndex = 0; invIndex < GetNumberOfFilledInventorySlots(); invIndex++) {
-    if (gUnknown_203B224->unk4[invIndex] != 0) {
-      item = gTeamInventory_203B460->teamItems[invIndex];
-      if (item.id == itemID) {
-        if (IsThrowableItem(item.id)) {
-            count += item.quantity;
+    count = 0;
+    for (invIndex = 0; invIndex < GetNumberOfFilledInventorySlots(); invIndex++) {
+        if (gUnknown_203B224->unk4[invIndex] != 0) {
+            item = gTeamInventory_203B460->teamItems[invIndex];
+
+            if (item.id == itemID) {
+                if (IsThrowableItem(item.id))
+                    count += item.quantity;
+                else
+                    count++;
+            }
         }
-        else {
-            count++;
-        }
-      }
     }
-  }
-  return count;
+    return count;
 }
 
 void sub_801AE84(void)
 {
-  s32 index;
+    s32 index;
 
-  for(index = 0; index < INVENTORY_SIZE; index++)
-  {
-    gUnknown_203B224->unk4[index] = 0;
-  }
+    for (index = 0; index < INVENTORY_SIZE; index++)
+        gUnknown_203B224->unk4[index] = 0;
 }
 
 s32 sub_801AEA8(void)
 {
-  s32 index;
-  s32 count;
+    s32 index;
+    s32 count;
 
-  count = 0;
-  for(index = 0; index < INVENTORY_SIZE; index++)
-  {
-    if (gUnknown_203B224->unk4[index] != 0) {
-      count++;
+    count = 0;
+    for (index = 0; index < INVENTORY_SIZE; index++) {
+        if (gUnknown_203B224->unk4[index] != 0)
+            count++;
     }
-  }
-  return count;
+    return count;
 }
 
 s32 sub_801AED0(s32 index)
@@ -1374,39 +1312,39 @@ void sub_801AEE4(s32 index, s32 value)
 
 void Kecleon_SortItems(void)
 {
-  struct Item *itemSlotR;
-  u32 *itemIDR;
-  u32 *base;
-  s32 orderL;
-  s32 orderR;
-  u32 itemIDL;
-  struct Item itemSlotL;
-  s32 itemR;
-  s32 itemL;
+    struct Item *itemSlotR;
+    u32 *itemIDR;
+    u32 *base;
+    s32 orderL;
+    s32 orderR;
+    u32 itemIDL;
+    struct Item itemSlotL;
+    s32 itemR;
+    s32 itemL;
 
-  for (itemL = 0; itemL < GetNumberOfFilledInventorySlots() - 1; itemL++) {
-    for (itemR = itemL + 1; itemR < GetNumberOfFilledInventorySlots(); itemR++) {
-      orderL = GetItemOrder(gTeamInventory_203B460->teamItems[itemL].id);
-      orderR = GetItemOrder(gTeamInventory_203B460->teamItems[itemR].id);
-      if ((orderL > orderR) || ((orderL == orderR) &&
-        (gTeamInventory_203B460->teamItems[itemL].quantity < gTeamInventory_203B460->teamItems[itemR].quantity))) {
+    for (itemL = 0; itemL < GetNumberOfFilledInventorySlots() - 1; itemL++) {
+        for (itemR = itemL + 1; itemR < GetNumberOfFilledInventorySlots(); itemR++) {
+            orderL = GetItemOrder(gTeamInventory_203B460->teamItems[itemL].id);
+            orderR = GetItemOrder(gTeamInventory_203B460->teamItems[itemR].id);
 
-        itemSlotL = gTeamInventory_203B460->teamItems[itemL];
-        itemSlotR = &gTeamInventory_203B460->teamItems[itemR];
-        gTeamInventory_203B460->teamItems[itemL] = *itemSlotR;
-        *itemSlotR = itemSlotL;
+            if (orderL > orderR
+                         || (orderL == orderR && gTeamInventory_203B460->teamItems[itemL].quantity < gTeamInventory_203B460->teamItems[itemR].quantity)) {
+                itemSlotL = gTeamInventory_203B460->teamItems[itemL];
+                itemSlotR = &gTeamInventory_203B460->teamItems[itemR];
+                gTeamInventory_203B460->teamItems[itemL] = *itemSlotR;
+                *itemSlotR = itemSlotL;
 
-        base = gUnknown_203B224->unk4;
-        itemIDL = gUnknown_203B224->unk4[itemL];
-        itemIDR = &base[itemR];
-        base[itemL] = *itemIDR;
-        *itemIDR = itemIDL;
-      }
+                base = gUnknown_203B224->unk4;
+                itemIDL = gUnknown_203B224->unk4[itemL];
+                itemIDR = &base[itemR];
+                base[itemL] = *itemIDR;
+                *itemIDR = itemIDL;
+            }
+        }
     }
-  }
 }
 
-struct unkStruct_203B224 * sub_801AF98(void)
+struct unkStruct_203B224 *sub_801AF98(void)
 {
     return gUnknown_203B224;
 }

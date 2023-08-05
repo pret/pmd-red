@@ -204,7 +204,7 @@ void sub_801AEE4(u32, u32);
 void sub_808F734(struct PokemonStruct *, s16);
 u32 sub_801602C(u32 r0, u8 *name);
 extern s32 sub_80144A4(s32 *);
-extern u32 sub_801A6E8(u32);
+extern u32 sub_801A6E8(bool8);
 extern s32 sub_801A8AC(void);
 extern void sub_8099690(u32);
 extern void sub_801A928(void);
@@ -734,7 +734,7 @@ void sub_8024F70(void)
 
 void sub_8024FD4(void)
 {
-    switch(sub_801A6E8(1))
+    switch(sub_801A6E8(TRUE))
     {
         case 3:
             gUnknown_203B2B0->evoItem1_InvIndex = sub_801A8AC();
@@ -756,7 +756,7 @@ void sub_8024FD4(void)
 
 void sub_8025058(void)
 {
-    switch(sub_801A6E8(1))
+    switch(sub_801A6E8(TRUE))
     {
         case 3:
             if(gUnknown_203B2B0->evoItem1_InvIndex != sub_801A8AC())
@@ -784,7 +784,7 @@ void sub_80250EC(void)
 {
     s32 menuAction;
     menuAction = 0;
-    sub_801A6E8(0);
+    sub_801A6E8(FALSE);
 
     if(!sub_8012FD8(&gUnknown_203B2B0->unk84))
     {
@@ -811,7 +811,7 @@ void sub_802515C(void)
 {
     s32 menuAction;
     menuAction = 0;
-    sub_801A6E8(0);
+    sub_801A6E8(FALSE);
 
     if(!sub_8012FD8(&gUnknown_203B2B0->unk84))
     {

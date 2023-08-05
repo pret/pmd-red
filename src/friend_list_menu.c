@@ -149,7 +149,7 @@ extern void sub_801F214(void);
 extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
 extern void sub_801F808(u16 *);
 extern u32 sub_801602C(u32 r0, u8 *name);
-extern u32 sub_801A6E8(u32);
+extern u32 sub_801A6E8(bool8);
 extern u32 sub_801A8AC(void);
 extern void sub_8099690(u32);
 extern void sub_801A928(void);
@@ -613,7 +613,7 @@ void sub_8025BE8(void)
 
 void sub_8025C04(void)
 {
-    switch(sub_801A6E8(1))
+    switch(sub_801A6E8(TRUE))
     {
         case 3:
             gUnknown_203B2B4->itemIndex = sub_801A8AC();
@@ -646,7 +646,7 @@ void sub_8025CB4(void)
   struct Item item;
   
   menuAction = 0;
-  sub_801A6E8(0);
+  sub_801A6E8(FALSE);
   if ((!sub_8012FD8(&gUnknown_203B2B4->unk78)) && (sub_8013114(&gUnknown_203B2B4->unk78,&menuAction), menuAction != 1)) {
     gUnknown_203B2B4->menuAction2 = menuAction;
   }

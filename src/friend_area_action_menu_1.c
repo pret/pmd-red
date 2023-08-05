@@ -24,7 +24,7 @@ extern void nullsub_104();
 extern void sub_801A928();
 extern void sub_8099690(u32);
 extern u32 sub_801A8AC();
-extern u32 sub_801A6E8(u32);
+extern u32 sub_801A6E8(bool8);
 
 extern s32 sub_80144A4(s32 *);
 extern void sub_8027EB8();
@@ -320,7 +320,7 @@ void sub_8027AE4(void)
 
 void sub_8027B28(void)
 {
-  switch(sub_801A6E8(1))
+  switch(sub_801A6E8(TRUE))
   {
     case 3:
         gUnknown_203B2BC->id = sub_801A8AC();
@@ -350,7 +350,7 @@ void sub_8027BD8(void)
   s32 menuAction;
 
   menuAction = 0;
-  sub_801A6E8(0);
+  sub_801A6E8(FALSE);
   if ((sub_8012FD8(&gUnknown_203B2BC->unk7C) == 0) && (sub_8013114(&gUnknown_203B2BC->unk7C,&menuAction), menuAction != 1)) {
     gUnknown_203B2BC->menuAction2 = menuAction;
   }

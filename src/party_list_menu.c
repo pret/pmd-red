@@ -182,7 +182,7 @@ extern void sub_801B450(void);
 extern void nullsub_104(void);
 extern void sub_801A928(void);
 extern void sub_8099690(u32);
-extern u32 sub_801A6E8(u32);
+extern u32 sub_801A6E8(bool8);
 extern u32 sub_801A8AC(void);
 extern u32 sub_8022860(void);
 extern void sub_8022908(void);
@@ -811,7 +811,7 @@ void sub_8026B48(void)
 
 void sub_8026B64(void)
 {
-    switch(sub_801A6E8(1))
+    switch(sub_801A6E8(TRUE))
     {
         case 3:
             gUnknown_203B2B8->id = sub_801A8AC();
@@ -844,7 +844,7 @@ void sub_8026C14(void)
   struct Item slot;
 
   menuAction = 0;
-  sub_801A6E8(0);
+  sub_801A6E8(FALSE);
   if ((sub_8012FD8(&gUnknown_203B2B8->unkCC) == '\0') && (sub_8013114(&gUnknown_203B2B8->unkCC,&menuAction), menuAction != 1)) {
     gUnknown_203B2B8->menuAction2 = menuAction;
   }

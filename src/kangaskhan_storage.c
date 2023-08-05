@@ -68,7 +68,7 @@ extern void sub_801AE84(void);
 extern s32 sub_801AED0(s32);
 extern u8 sub_801CF14(u32);
 extern u8 sub_801CF50(u32);
-extern u32 sub_801A6E8(u32);
+extern u32 sub_801A6E8(bool8);
 extern u32 sub_801AEA8(void);
 extern u32 sub_801A8AC(void);
 extern void sub_801A928(void);
@@ -742,7 +742,7 @@ void sub_8017A1C(void)
 
 void sub_8017AF8(void)
 {
-    switch(sub_801A6E8(1))
+    switch(sub_801A6E8(TRUE))
     {
         case 3:
             if(sub_801AEA8() != 0)
@@ -827,7 +827,7 @@ void sub_8017C7C(void)
 {
     s32 menuAction;
     menuAction = 0;
-    sub_801A6E8(0);
+    sub_801A6E8(FALSE);
     if (sub_8012FD8(&gUnknown_203B208->unk58) == 0) {
         sub_8013114(&gUnknown_203B208->unk58, &menuAction);
         if(menuAction != 1) gUnknown_203B208->menuAction2 = menuAction;
@@ -1263,7 +1263,7 @@ void sub_8018588(void)
 void sub_8018620(void)
 {
     s32 index;
-    switch(sub_801A6E8(1))
+    switch(sub_801A6E8(TRUE))
     {
         case 3:
             if(sub_801AEA8() != 0)
@@ -1418,7 +1418,7 @@ void sub_8018904(void)
 
     menuAction = 0;
 
-    sub_801A6E8(0);
+    sub_801A6E8(FALSE);
     if(sub_8012FD8(&gUnknown_203B20C->unk70) == 0)
     {
         sub_8013114(&gUnknown_203B20C->unk70, &menuAction);

@@ -68,7 +68,7 @@ extern void sub_801B450(void);
 
 void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 id, bool8 checkBoostFlags, struct Gummi* gummi);
 
-extern u32 sub_801A6E8(u32);
+extern u32 sub_801A6E8(bool8);
 extern void sub_8099690(u32);
 extern void sub_801A928(void);
 s32 GetNumAvailableIQSkills(u8 *iqSkillBuffer, s32 pokeIQ);
@@ -126,7 +126,7 @@ void sub_8022D2C(void) {
 
 void sub_8022E78(void)
 { 
-  switch(sub_801A6E8(1))
+  switch(sub_801A6E8(TRUE))
   {
       case 3:
         gUnknown_203B294->itemIndex = sub_801A8AC();
@@ -151,7 +151,7 @@ void sub_8022EF4(void)
   s32 boostAmount;
   
   menuAction = 0;
-  sub_801A6E8(0);
+  sub_801A6E8(FALSE);
   if (sub_8012FD8(&gUnknown_203B294->unk54) == 0) {
     sub_8013114(&gUnknown_203B294->unk54,&menuAction);
     if(menuAction != 1) gUnknown_203B294->menuAction = menuAction;
@@ -219,7 +219,7 @@ void sub_8023068(void)
   s32 menuAction;
   
   menuAction = 0;
-  sub_801A6E8(0);
+  sub_801A6E8(FALSE);
   sub_8012FD8(&gUnknown_203B294->unk54);
   if (sub_8012FD8(&gUnknown_203B294->unkA4) == 0) {
     sub_8013114(&gUnknown_203B294->unkA4,&menuAction);
