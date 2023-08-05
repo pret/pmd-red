@@ -6044,7 +6044,7 @@ _0809BFFC:
 	ands r4, r0
 	bl sub_809B294
 	adds r0, r4, 0
-	bl CreateMakuhitaShop
+	bl MakuhitaDojo_New
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C032
@@ -6068,7 +6068,7 @@ _0809C046:
 	lsls r0, 16
 	asrs r0, 16
 	str r0, [r1]
-	bl DestroyMakuhitaShop
+	bl MakuhitaDojo_Delete
 	b _0809C392
 _0809C05E:
 	ldr r0, [r6]
@@ -6078,7 +6078,7 @@ _0809C05E:
 	movs r1, 0x1
 	negs r1, r1
 	str r1, [r0]
-	bl DestroyMakuhitaShop
+	bl MakuhitaDojo_Delete
 	b _0809C392
 _0809C072:
 	movs r4, 0x1
@@ -6091,7 +6091,7 @@ _0809C072:
 _0809C082:
 	bl sub_809B294
 	adds r0, r4, 0
-	bl CreateMakuhitaShop
+	bl MakuhitaDojo_New
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C0A8
@@ -6125,7 +6125,7 @@ _0809C0B8:
 _0809C0C8:
 	bl sub_809B294
 	adds r0, r4, 0
-	bl CreateMakuhitaShop
+	bl MakuhitaDojo_New
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C0F0
@@ -6156,7 +6156,7 @@ _0809C0FC:
 _0809C10C:
 	bl sub_809B294
 	adds r0, r4, 0
-	bl CreateMakuhitaShop
+	bl MakuhitaDojo_New
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C134

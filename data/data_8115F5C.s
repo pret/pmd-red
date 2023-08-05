@@ -224,21 +224,21 @@ gUnknown_8116288: @ 8116288
 gUnknown_8116298: @ 8116298
         .byte 0x01, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .4byte DestroyMakuhitaShop
+        .4byte MakuhitaDojo_Delete
         .4byte sub_802FE58
 
 	.global gUnknown_81162A8
 gUnknown_81162A8: @ 81162A8
         .byte 0x01, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .4byte DestroyMakuhitaShop
+        .4byte MakuhitaDojo_Delete
         .4byte sub_802FE58
 
 	.global gUnknown_81162B8
 gUnknown_81162B8: @ 81162B8
         .byte 0x01, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .4byte DestroyMakuhitaShop
+        .4byte MakuhitaDojo_Delete
         .4byte sub_802FE58
 
 	.global gUnknown_81162C8
