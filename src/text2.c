@@ -6,13 +6,14 @@
 extern const u32 gUnknown_80B8814[];
 
 // text.s
-extern void sub_800677C(struct UnkTextStruct1 *, s32, u16 *, u8);
-extern void sub_80069CC(struct UnkTextStruct1 *, s32, s32, s32, u16 *);
 extern void sub_8006AC4(struct UnkTextStruct1 *, s32, s32, u32, u16 *);
 extern void sub_8006B70(struct UnkTextStruct1 *, s32, s32, s32, u16 *);
 extern void sub_8006C44(struct UnkTextStruct1 *, s32, u16 *, u8);
 extern void sub_8006E94(struct UnkTextStruct1 *, s32, u32, const u8 *, u16 *);
 extern void sub_8008C6C(struct UnkTextStruct1 *, u32);
+
+void sub_800677C(struct UnkTextStruct1 *, s32, u16 *, u8);
+void sub_80069CC(struct UnkTextStruct1 *, s32, s32, s32, u16 *);
 
 void nullsub_152(void)
 {
@@ -198,6 +199,48 @@ void sub_800677C(struct UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
             }
 
             (a2 + a1 * 0x20)[iVar5] = 0xF693;
+            break;
+    }
+}
+
+void sub_80069CC(struct UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
+{    
+    if (a2 > 28)
+        return;
+    // Cannot combine these ifs for matching
+    if (a2 < 0)
+        return;
+    
+    switch (a0->unkC) {
+        case 1:
+        case 2:
+            break;
+        case 0:
+            if (a3 == 0) {
+                (a4 + a2 * 0x20)[a1] = 0xF297;
+                (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
+                break;
+            }
+            if (a3 == a0->unk6 - 1) {
+                (a4 + a2 * 0x20)[a1] = 0xFA97;
+                (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
+                break;
+            }
+            // Fallthrough
+        case 3:
+        case 6:
+            (a4 + a2 * 0x20)[a1] = 0xF2DA;
+            (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
+            break;
+        case 4:
+            (a4 + a2 * 0x20)[a1] = 0xF2EA;
+            (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
+            break;
+        case 5:
+            (a4 + a2 * 0x20)[a1] = 0xF2DE;
+            break;
+        case 7:
+            (a4 + a2 * 0x20)[a1] = 0xF2B6;
             break;
     }
 }
