@@ -139,7 +139,7 @@ extern char gUnknown_80DBE30[]; // {ARG_POKEMON_0}
 extern u8 gUnknown_80DBDC8[];
 extern u8 *gUnknown_80D4970[];
 
-void sub_8007B7C(s32, s32, s32, s32, s32);
+extern void sub_8007B7C(s32, s32, s32, s32, s32);
 extern bool8 sub_801CF14(s32);
 extern u32 sub_801CE58(void);
 extern void sub_801CC38(void);
