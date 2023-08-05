@@ -67,8 +67,8 @@ SECTIONS {
         asm/code_8005838.o(.text);
         src/code_800558C.o(.text);
         src/random.o(.text);
-        src/text.o(.text);
-        src/text_1.o(.text);
+        src/text1.o(.text);
+        src/text2.o(.text);
         asm/text.o(.text);
         src/code_8009804.o(.text);
         asm/code_8009804.o(.text);

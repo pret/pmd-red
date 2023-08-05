@@ -3,7 +3,7 @@
 #include "main_menu.h"
 #include "memory.h"
 #include "menu.h"
-#include "text.h"
+#include "text1.h"
 #include "menu_input.h"
 
 struct unkSprite

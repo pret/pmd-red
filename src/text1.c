@@ -2,9 +2,7 @@
 #include "file_system.h"
 #include "code_800558C.h"
 #include "code_800B540.h"
-#include "text.h"
-
-extern char gUnknown_3000E94[];
+#include "text1.h"
 
 EWRAM_DATA struct UnkTextStruct1 gUnknown_2027370[4];
 EWRAM_DATA u8 *gCharmaps[2];
@@ -22,14 +20,26 @@ EWRAM_DATA u32 gUnknown_202B030;
 EWRAM_DATA u8 gUnknown_202B034;
 EWRAM_DATA u16 gUnknown_202B038[2][32][32];
 
+// ?
+extern char gUnknown_3000E94[];
+
+// data.s
 extern const struct UnkTextStruct2 gUnknown_80B857C[4];
-extern const char gKanjiA_file_string[];
-extern const char gKanjiB_file_string[];
-extern const struct FileArchive gSystemFileArchive;
 extern const u32 gUnknown_80B87C4[8];
 extern const u32 gUnknown_80B87E4[8];
 extern const u32 gUnknown_80B8804[4];
-extern u32 gUnknown_80B8814[];
+extern const u32 gUnknown_80B8814[];
+extern const char gKanjiA_file_string[];
+extern const char gKanjiB_file_string[];
+// system_sbin.s
+extern const struct FileArchive gSystemFileArchive;
+
+// text.s
+extern void sub_800898C(void);
+extern void sub_80089AC(const struct UnkTextStruct2 *, struct UnkTextStruct2_sub *);
+extern void sub_8009388(void);
+
+void sub_8006438(const struct UnkTextStruct2 *, u8, u8, struct UnkTextStruct2_sub *);
 
 void LoadCharmaps(void)
 {

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "constants/dungeon.h"
 #include "memory.h"
-#include "text.h"
+#include "text2.h"
 #include "input.h"
 #include "menu.h"
 #include "item.h"

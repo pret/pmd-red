@@ -4,7 +4,7 @@
 #include "constants/input.h"
 
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
 #include "input.h"
 #include "mailbox.h"
 #include "menu.h"

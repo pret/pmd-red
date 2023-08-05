@@ -5,7 +5,7 @@
 #include "pokemon_3.h"
 #include "file_system.h"
 #include "input.h"
-#include "text.h"
+#include "text1.h"
 #include "team_inventory.h"
 #include "menu_input.h"
 #include "gulpin_shop.h"

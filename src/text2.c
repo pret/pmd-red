@@ -1,9 +1,10 @@
 #include "global.h"
-#include "text.h"
+#include "text2.h"
 
-extern struct UnkTextStruct2 gUnknown_202AFC0[4];
-extern u32 gUnknown_80B8814[];
+// data.s
+extern const u32 gUnknown_80B8814[];
 
+// text.s
 extern void sub_800677C(struct UnkTextStruct1 *, s32, u16 *, u8);
 extern void sub_80069CC(struct UnkTextStruct1 *, s32, s32, s32, u16 *);
 extern void sub_8006AC4(struct UnkTextStruct1 *, s32, s32, u32, u16 *);

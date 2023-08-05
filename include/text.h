@@ -32,7 +32,7 @@ struct UnkTextStruct2_sub
     // I haven't found a func that reads these separately yet, but simply making an arr[2] will cause assignments to break.
     // Some funcs only match with this union for some reason even though they don't access the variables separately...
     // The first func to break is currently sub_801A5D8 in kecleon_bros.c
-    // The first func I matched that uses the array is sub_8006554 in text_1.c (using the separated fields doesn't match or get even close)
+    // The first func I matched that uses the array is sub_8006554 in text2.c (using the separated fields doesn't match or get even close)
     union {
         struct {
         s16 unk0;
@@ -55,18 +55,5 @@ struct UnkTextStruct2
     s16 unk12;
     const u8 *unk14;
 };
-
-void LoadCharmaps(void);
-void SelectCharmap(u32);
-u32 xxx_update_some_bg_tiles(u32 a0);
-void sub_800641C(struct UnkTextStruct2 *a0, u8 a1, u8 a2);
-void sub_8006438(const struct UnkTextStruct2 *, u8, u8, struct UnkTextStruct2_sub *);
-void sub_8006518(struct UnkTextStruct2 *);
-void sub_8006554(struct UnkTextStruct1 *, void *, u8 *, u16 *, u32, const struct UnkTextStruct2 *, u8, u32, struct UnkTextStruct2_sub *, u8);
-void sub_800898C(void);
-void sub_80089AC(const struct UnkTextStruct2 *, struct UnkTextStruct2_sub *);
-void sub_8009388(void);
-
-extern void xxx_call_draw_string(s32 x, u32 y, const u8 *str, u32 , u32);
 
 #endif
