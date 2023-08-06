@@ -6,14 +6,14 @@
 extern const u32 gUnknown_80B8814[];
 
 // text.s
-extern void sub_8006AC4(struct UnkTextStruct1 *, s32, s32, u32, u16 *);
-extern void sub_8006B70(struct UnkTextStruct1 *, s32, s32, s32, u16 *);
-extern void sub_8006C44(struct UnkTextStruct1 *, s32, u16 *, u8);
 extern void sub_8006E94(struct UnkTextStruct1 *, s32, u32, const u8 *, u16 *);
 extern void sub_8008C6C(struct UnkTextStruct1 *, u32);
 
 void sub_800677C(struct UnkTextStruct1 *, s32, u16 *, u8);
 void sub_80069CC(struct UnkTextStruct1 *, s32, s32, s32, u16 *);
+void sub_8006AC4(struct UnkTextStruct1 *, s32, s32, s32, u16 *);
+void sub_8006B70(struct UnkTextStruct1 *, s32, s32, s32, u16 *);
+void sub_8006C44(struct UnkTextStruct1 *, s32, u16 *, u8);
 
 void nullsub_152(void)
 {
@@ -135,13 +135,13 @@ void sub_800677C(struct UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
     s32 i;
 
     iVar5 = a0->unk0 - 1;
-    
+
     if (a1 > 28)
         return;
     // Cannot combine these ifs for matching
     if (a1 < 0)
         return;
-    
+
     switch (a0->unkC) {
         case 0:
         case 1:
@@ -204,13 +204,13 @@ void sub_800677C(struct UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
 }
 
 void sub_80069CC(struct UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
-{    
+{
     if (a2 > 28)
         return;
     // Cannot combine these ifs for matching
     if (a2 < 0)
         return;
-    
+
     switch (a0->unkC) {
         case 1:
         case 2:
@@ -241,6 +241,150 @@ void sub_80069CC(struct UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
             break;
         case 7:
             (a4 + a2 * 0x20)[a1] = 0xF2B6;
+            break;
+    }
+}
+
+void sub_8006AC4(struct UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
+{
+    if (a2 > 28)
+        return;
+    // Cannot combine these ifs for matching
+    if (a2 < 0)
+        return;
+
+    switch (a0->unkC) {
+        case 2:
+            (a4 + a2 * 0x20)[a1] = a3 | 0xF000;
+            (a4 + a2 * 0x20)[a1 + 0x400] = 0xF278;
+            break;
+        case 0:
+        case 1:
+        case 3:
+        case 4:
+        case 6:
+            (a4 + a2 * 0x20)[a1] = a3 | 0xF000;
+            (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
+            break;
+        case 5:
+        case 7:
+            (a4 + a2 * 0x20)[a1] = a3 | 0xF000;
+            break;
+    }
+}
+
+void sub_8006B70(struct UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
+{
+    if (a2 > 28)
+        return;
+    // Cannot combine these ifs for matching
+    if (a2 < 0)
+        return;
+
+    switch (a0->unkC) {
+        case 1:
+        case 2:
+            break;
+        case 0:
+            if (a3 == 0) {
+                (a4 + a2 * 0x20)[a1] = 0xF697;
+                (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
+                break;
+            }
+            if (a3 == a0->unk6 - 1) {
+                (a4 + a2 * 0x20)[a1] = 0xFE97;
+                (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
+                break;
+            }
+            // Fallthrough
+        case 3:
+        case 6:
+            (a4 + a2 * 0x20)[a1] = 0xF6DA;
+            (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
+            break;
+        case 4:
+            (a4 + a2 * 0x20)[a1] = 0xF6EA;
+            (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
+            break;
+        case 5:
+            (a4 + a2 * 0x20)[a1] = 0xF6DE;
+            break;
+        case 7:
+            (a4 + a2 * 0x20)[a1] = 0xF6B6;
+            break;
+    }
+}
+
+void sub_8006C44(struct UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
+{
+    s32 iVar5;
+    s32 i;
+
+    iVar5 = a0->unk0 - 1;
+
+    if (a1 > 28)
+        return;
+    // Cannot combine these ifs for matching
+    if (a1 < 0)
+        return;
+
+    switch (a0->unkC) {
+        case 0:
+        case 1:
+        case 2:
+            break;
+        case 3:
+        case 6:
+            (a2 + a1 * 0x20)[iVar5] = 0xFAD8;
+            if (a3 != 0)
+                (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xFA93;
+            else
+                (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
+            iVar5++;
+            for (i = 0; i < a0->unk4; i++) {
+                (a2 + a1 * 0x20)[iVar5] = 0xFAD9;
+                (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
+                iVar5++;
+            }
+
+            (a2 + a1 * 0x20)[iVar5] = 0xFED8;
+            if (a3 != 0)
+                (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xFE93;
+            else
+                (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
+            break;
+        case 4:
+            (a2 + a1 * 0x20)[iVar5] = 0xFAE8;
+            (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
+            iVar5++;
+            for (i = 0; i < a0->unk4; i++) {
+                (a2 + a1 * 0x20)[iVar5] = 0xFAE9;
+                (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
+                iVar5++;
+            }
+
+            (a2 + a1 * 0x20)[iVar5] = 0xFEE8;
+            (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
+            break;
+        case 5:
+            (a2 + a1 * 0x20)[iVar5] = 0xFADC;
+            iVar5++;
+            for (i = 0; i < a0->unk4; i++) {
+                (a2 + a1 * 0x20)[iVar5] = 0xFADD;
+                iVar5++;
+            }
+
+            (a2 + a1 * 0x20)[iVar5] = 0xFEDC;
+            break;
+        case 7:
+           (a2 + a1 * 0x20)[iVar5] = 0xFA93;
+            iVar5++;
+            for (i = 0; i < a0->unk4; i++) {
+                (a2 + a1 * 0x20)[iVar5] = 0xFA97;
+                iVar5++;
+            }
+
+            (a2 + a1 * 0x20)[iVar5] = 0xFE93;
             break;
     }
 }
