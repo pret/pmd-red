@@ -1,7 +1,7 @@
 #include "global.h"
-#include "code_800B5F0.h"
 #include "input.h"
 #include "random.h"
+#include "reg_control.h"
 
 void sub_800BA5C();
 

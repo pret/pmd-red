@@ -75,7 +75,7 @@ SECTIONS {
         src/file_system.o(.text);
         src/main.o(.text);
         src/unused_vblank.o(.text);
-        src/code_800B5F0.o(.text);
+        src/reg_control.o(.text);
         src/music.o(.text);
         src/code_800C9CC.o(.text);
         src/bg_control.o(.text);

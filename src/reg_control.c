@@ -1,9 +1,9 @@
 #include "global.h"
 #include "bg.h"
-#include "code_800B5F0.h"
 #include "debug.h"
 #include "input.h"
 #include "music.h"
+#include "reg_control.h"
 #include "sprite.h"
 
 extern struct unkStruct_202D648 gUnknown_202D608[8];

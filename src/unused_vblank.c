@@ -1,5 +1,5 @@
 #include "global.h"
-#include "code_800B5F0.h"
+#include "reg_control.h"
 
 extern struct unkStruct_202D648 gUnknown_202D608[8];
 extern struct unkStruct_202D648 gUnknown_202D648[8];
