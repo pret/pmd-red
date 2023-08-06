@@ -29,6 +29,7 @@ void UnlockFriendArea(u8 index);
 u8 *GetFriendAreaDescription(u8 index);
 u8 GetFriendAreaUnlockCondition(u8 index);
 s32 GetFriendAreaPrice(u8 index);
+void sub_8092578(u8 *buffer, u8 index, bool8 printPrice);
 const char *GetFriendAreaName(u8 index);
 void sub_809249C(u8 friendArea, u8 clear);
 void sub_8092638(u8 friendArea, struct unkStruct_8092638 *param_2, u8 param_3, u8 param_4);

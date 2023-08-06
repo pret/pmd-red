@@ -17,6 +17,7 @@
 #include "menu_input.h"
 #include "code_8021774.h"
 #include "code_80118A4.h"
+#include "wigglytuff_shop.h"
 
 struct unkStruct_203B258
 {
@@ -151,7 +152,7 @@ void sub_801D3A8(void)
             sub_801BEEC(gUnknown_203B250->index);
             break;
         case 10:
-            sub_8021774(gUnknown_203B250->currFriendAreaLocation, 1, 2);
+            sub_8021774(gUnknown_203B250->currFriendAreaLocation, TRUE, 2);
             break;
         case 11:
             InitializeJobListMenu(0);

@@ -515,11 +515,11 @@ void sub_8092558(u8 *buffer, u8 index)
     sprintfStatic(buffer, &gUnknown_81098A4, gFriendAreaNames[index]);
 }
 
-void sub_8092578(u8 *buffer, u8 index, u8 r2)
+void sub_8092578(u8 *buffer, u8 index, bool8 printPrice)
 {
     // I think this is when we buy the friend area from wigglytuff
     u8 priceBuffer[0x14];
-    if(r2)
+    if(printPrice)
     {
         sub_8090FEC(gFriendAreaSettings[index].price, priceBuffer, 1);
         sprintfStatic(buffer, &gUnknown_81098AC, gFriendAreaNames[index], 96, priceBuffer);
@@ -574,7 +574,7 @@ void sub_8092638(u8 friendArea, struct unkStruct_8092638 *param_2, u8 param_3, u
     param_2->unk8 = iVar4;
 
     param_2->hasFriendArea = gFriendAreas[counter];
-    if (param_2->hasFriendArea != 0) {
+    if (param_2->hasFriendArea) {
         param_2->unk2 = 0;
         param_2->numPokemon = gFriendAreaSettings[counter].num_pokemon;
 

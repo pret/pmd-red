@@ -390,7 +390,6 @@ extern u8 JirachiFriendAreaSearch(void);
 
 extern u8 sub_80860A8(u32);
 extern void sub_8049ED4();
-extern void sub_8092578(u8 *buffer, u8 index, u8 r2);
 extern void sub_8052D44(s16 *, struct Entity *, struct Entity *);
 extern void SetMessageArgument(u8 *, struct Entity *, u32);
 extern struct Entity *GetLeader();
@@ -3736,7 +3735,7 @@ void JirachiWish(void)
           PlaySoundEffect(0xd4);
           LeaderEntity = GetLeader();
           SetMessageArgument(gAvailablePokemonNames,LeaderEntity,0);
-          sub_8092578(gUnknown_202DE58,friendArea,0);
+          sub_8092578(gUnknown_202DE58,friendArea,FALSE);
           // Obtained the friend area!
           DisplayDungeonDialogue(&gUnknown_8105B68);
         }
