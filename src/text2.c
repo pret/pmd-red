@@ -6,7 +6,6 @@
 extern const u32 gUnknown_80B8814[];
 
 // text.s
-extern void sub_8006E94(struct UnkTextStruct1 *, s32, u32, const u8 *, u16 *);
 extern void sub_8008C6C(struct UnkTextStruct1 *, u32);
 
 void sub_800677C(struct UnkTextStruct1 *, s32, u16 *, u8);
@@ -14,6 +13,7 @@ void sub_80069CC(struct UnkTextStruct1 *, s32, s32, s32, u16 *);
 void sub_8006AC4(struct UnkTextStruct1 *, s32, s32, s32, u16 *);
 void sub_8006B70(struct UnkTextStruct1 *, s32, s32, s32, u16 *);
 void sub_8006C44(struct UnkTextStruct1 *, s32, u16 *, u8);
+void sub_8006E94(struct UnkTextStruct1 *, s32, u32, const u8 *, u16 *);
 
 void nullsub_152(void)
 {
