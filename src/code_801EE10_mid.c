@@ -9,6 +9,7 @@
 #include "code_801EE10.h"
 #include "menu_input.h"
 #include "subStruct_203B240.h"
+#include "sprite.h"
 
 extern struct unkStruct_203B270 *gUnknown_203B270;
 
@@ -58,7 +59,6 @@ extern void PlayMenuSoundEffect(u32);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
-extern void ResetSprites(u32);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 extern void sub_801F918(s32);
 extern void sub_801FA58(void);
@@ -260,7 +260,7 @@ bool8 sub_801F808(u16 *moveIDs)
 {
     s32 index;
 
-    ResetSprites(1);
+    ResetSprites(TRUE);
     gUnknown_203B278 = MemoryAlloc(sizeof(struct unkStruct_203B278), 8);
     gUnknown_203B278->unk5C = 0;
     gUnknown_203B278->unk60 = gUnknown_203B278->unk64;

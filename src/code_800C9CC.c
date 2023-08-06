@@ -1,9 +1,9 @@
 #include "global.h"
+#include "code_800B5F0.h"
 #include "input.h"
 #include "random.h"
 
 void sub_800BA5C();
-void xxx_update_bg_sound_input();
 
 extern u32 gUnknown_203B0B8;
 extern u16 gRawKeyInput;

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "cpu.h"
 
 extern u32 gUnknown_202D800;
 extern u16 gBldCnt; // used to update Blend Count Reg

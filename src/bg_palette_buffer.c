@@ -1,4 +1,5 @@
 #include "global.h"
+#include "bg_palette_buffer.h"
 
 #define BG_PALETTE_BUFFER_SIZE 512
 #define BG_PALETTE_BUFFER_CHUNK_SIZE 16

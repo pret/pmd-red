@@ -32,6 +32,7 @@ struct UnkFileStruct1
     /* 0x4 */ u32 unk4;
 };
 
+void InitFileSystem(void);
 struct OpenedFile *OpenFile(const char *filename, const struct FileArchive *arc);
 u8 *GetFileDataPtr(struct OpenedFile *openedFile, int unused);
 struct OpenedFile *OpenFileAndGetFileDataPtr(const char *filename, const struct FileArchive *arc);

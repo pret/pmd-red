@@ -11,6 +11,7 @@
 #include "text2.h"
 #include "subStruct_203B240.h"
 #include "menu_input.h"
+#include "sprite.h"
 
 struct unkStruct_203B238
 {
@@ -143,7 +144,6 @@ extern u8 *gUnknown_80D4970[];
 extern void sub_8007B7C(s32, s32, s32, s32, s32);
 extern u32 sub_801CE58(void);
 extern void sub_801CC38(void);
-extern void ResetSprites(u32);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 extern void sub_8008C54(u32);
 extern void sub_80073B8(u32);
@@ -619,7 +619,7 @@ bool8 HasNoAvailIQSkills(s16 species)
 
 u32 sub_801C620(u8 iqSkill)
 {
-  ResetSprites(1);
+  ResetSprites(TRUE);
   gUnknown_203B240 = MemoryAlloc(sizeof(struct unkStruct_203B240),8);
   gUnknown_203B240->chosenIQSkill = iqSkill;
   sub_801317C(&gUnknown_203B240->unk88);

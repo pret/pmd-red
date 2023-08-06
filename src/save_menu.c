@@ -6,6 +6,7 @@
 #include "text1.h"
 #include "save.h"
 #include "menu_input.h"
+#include "sprite.h"
 
 struct unkSprite
 {
@@ -132,7 +133,6 @@ ALIGNED(4) const u8 gUnknown_80E7178[] = _("{CENTER_ALIGN}The data could not be 
 
 ALIGNED(4) static const u8 save_menu_fill0[] = "pksdir0";
 
-extern void ResetSprites(u32);
 extern void sub_8038440();
 extern void sub_8035CF4(struct MenuStruct *, u32, u32);
 extern void SetMenuItems(struct MenuStruct *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
@@ -338,7 +338,7 @@ void sub_8038830(void)
     sprite->unk6 = r2;
     
     gUnknown_203B364->unk1B0 = r5;
-    ResetSprites(0);
+    ResetSprites(FALSE);
 }
 
 void sub_80388C4(void) {

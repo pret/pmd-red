@@ -74,7 +74,7 @@ SECTIONS {
         asm/code_8009804.o(.text);
         src/file_system.o(.text);
         src/main.o(.text);
-        asm/code_800B5F0.o(.text);
+        src/unused_vblank.o(.text);
         src/code_800B5F0.o(.text);
         src/music.o(.text);
         src/code_800C9CC.o(.text);

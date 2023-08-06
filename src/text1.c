@@ -1,7 +1,7 @@
 #include "global.h"
-#include "file_system.h"
 #include "code_800558C.h"
-#include "code_800B540.h"
+#include "cpu.h"
+#include "file_system.h"
 #include "text1.h"
 #include "text2.h"
 

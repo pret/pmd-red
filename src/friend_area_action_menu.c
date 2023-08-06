@@ -10,6 +10,7 @@
 #include "friend_area_action_menu.h"
 #include "menu_input.h"
 #include "kecleon_bros.h"
+#include "sprite.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 
@@ -30,7 +31,6 @@ extern void unk_CopyMoves4To8(struct Move *, struct Move *);
 extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
 
 extern void SetFriendAreaActionMenuState(u32);
-extern void ResetSprites(u8 );
 extern void sub_802719C();
 extern void sub_8027274();
 extern void sub_80277FC();
@@ -124,7 +124,7 @@ ALIGNED(4) const u8 gUnknown_80DD8D0[] = _(
 
 u32 sub_8027074(void)
 {
-    ResetSprites(0);
+    ResetSprites(FALSE);
     gUnknown_203B2BC = MemoryAlloc(sizeof(struct unkStruct_203B2BC), 8);
     gUnknown_203B2BC->menuAction1 = 0;
     gUnknown_203B2BC->menuAction2 = 0;

@@ -11,6 +11,7 @@
 #include "menu_input.h"
 #include "subStruct_203B240.h"
 #include "kecleon_bros.h"
+#include "sprite.h"
 
 // based off of 203B240..
 struct unkStruct_203B230
@@ -94,7 +95,6 @@ extern void sub_80141B4(u8 *, u32, u32 *, u32);
 extern void sub_8014248(const char *, u32, u32, struct MenuItem *, u32, u32, u32, u32, u32);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 extern void sub_801B46C(u32);
-extern void ResetSprites(u32);
 extern void sub_801BC64(void);
 extern void sub_801BC94(void);
 extern void sub_801BCCC(void);
@@ -118,7 +118,7 @@ void sub_801BC24(void);
 
 u32 sub_801B3C0(struct Item *item)
 {
-  ResetSprites(1);
+  ResetSprites(TRUE);
   gUnknown_203B230 = MemoryAlloc(sizeof(struct unkStruct_203B230),8);
   gUnknown_203B230->item = *item;
   sub_801317C(&gUnknown_203B230->unk88);
