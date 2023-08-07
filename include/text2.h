@@ -20,6 +20,11 @@ struct unkChar
     s16 unk6;
 };
 
+struct unkStruct_80B8824
+{
+    u32 arr[9];
+};
+
 u32 xxx_call_draw_char(s32, s32, u32, u32, u32);
 
 void sub_8006518(struct UnkTextStruct2 *);
