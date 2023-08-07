@@ -7,7 +7,7 @@
 
 EWRAM_DATA struct UnkTextStruct1 gUnknown_2027370[4];
 EWRAM_DATA u8 *gCharmaps[2];
-EWRAM_DATA u16 gCharacterSpacing;
+EWRAM_DATA s16 gCharacterSpacing;
 EWRAM_DATA u8 gUnknown_20274A5;
 EWRAM_DATA u32 gCurrentCharmap;
 EWRAM_DATA vu32 gUnknown_20274B0;

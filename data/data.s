@@ -1823,12 +1823,15 @@ gUnknown_80B853C: @ 80B853C
 
 	.global gUnknown_80B857C
 gUnknown_80B857C: @ 80B857C
-    .4byte 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0
+    @ Type: UnkTextStruct2[4]
+    .4byte 0, 3, 0, 0, 0, 0
+    .4byte 0, 3, 0, 0, 0, 0
+    .4byte 0, 3, 0, 0, 0, 0
+    .4byte 0, 3, 0, 0, 0, 0
 
 	.global gUnknown_80B85DC
 gUnknown_80B85DC: @ 80B85DC
-    @ Some kind of bit shifting and masking table
-    @      byte1, byte2, shift_left, shift_right
+    @ Type: unkShiftData[8]
     .4byte 0xFFFFFFFF, 0x00000000, 0x00, 0x20
     .4byte 0x0FFFFFFF, 0xF0000000, 0x04, 0x1C
     .4byte 0x00FFFFFF, 0xFF000000, 0x08, 0x18

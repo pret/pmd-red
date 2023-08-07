@@ -4,6 +4,7 @@
 #include "memory.h"
 #include "input.h"
 #include "text1.h"
+#include "text2.h"
 #include "text_util.h"
 
 struct unkStruct_203B200
@@ -52,15 +53,6 @@ enum
 };
 
 extern u32 ReturnIntFromChar2(u8);
-
-struct unkChar
-{
-    u32 unk0;
-    s16 unk4;
-    s16 unk6;
-};
-
-struct unkChar *GetCharacter(u32);
 
 
 s32 sub_8015FEC(u8 *buffer, s32 size)

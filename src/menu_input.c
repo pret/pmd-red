@@ -8,12 +8,6 @@
 #include "code_800D090.h"
 #include "menu_input.h"
 
-struct unkChar
-{
-    u32 unk0;
-    s16 unk4;
-    s16 unk6;
-};
 extern u8 gUnknown_80D4828[];
 
 extern void PlayMenuSoundEffect(u32);
@@ -24,7 +18,6 @@ void sub_8012EBC(struct MenuStruct *param_1);
 extern void sub_8013134(struct MenuInputStruct *, u32, u32);
 extern s16 sub_8009614(u32, u32);
 extern u32 ReturnIntFromChar2(u8);
-struct unkChar *GetCharacter(u32);
 extern void nullsub_7(u16 *);
 extern void nullsub_34(struct MenuInputStructSub *r0);
 
