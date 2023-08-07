@@ -30,7 +30,6 @@ extern u8 gFelicityMoney[];
 extern u8 gUnknown_80DB738;
 
 extern void PlaySound(u32);
-extern void sub_80073E0(u32);
 extern void sub_8008C54(u32);
 extern void sub_8013AA0(u32 *);
 extern u32 sub_8013BBC(u32 *);

@@ -49,7 +49,6 @@ extern u8 gUnknown_80DC4F0[];
 extern u8 *gUnknown_80D49BC[];
 extern u8 gUnknown_80DC524[];
 extern void sub_8008C54(u32);
-extern void sub_80073E0(u32);
 extern void sub_8092578(u8 *buffer, u8 index, u8 r2);
 void sub_800792C(u32, u32, u32, u32, u32);
 void sub_8007A78(u32, u32, u32, u32, u32);

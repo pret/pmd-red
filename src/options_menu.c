@@ -53,7 +53,6 @@ extern const char *gUnknown_80D4920[];
 extern const char *gUnknown_80D4928[];
 
 extern void sub_8008C54(u32);
-extern void sub_80073E0(u32);
 extern s32 sub_8008ED0(u8 *);
 extern void CreateOthersMenu(void);
 extern void sub_80078A4(u32, u32, u32, u32, u32);

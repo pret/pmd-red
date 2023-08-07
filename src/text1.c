@@ -11,7 +11,7 @@ EWRAM_DATA u16 gCharacterSpacing;
 EWRAM_DATA u8 gUnknown_20274A5;
 EWRAM_DATA u32 gCurrentCharmap;
 EWRAM_DATA vu32 gUnknown_20274B0;
-EWRAM_DATA u8 gUnknown_20274B4[0x3b00];
+EWRAM_DATA u32 gUnknown_20274B4[0xEC0];
 EWRAM_DATA struct OpenedFile *gCharmapFiles[2];
 EWRAM_DATA struct UnkTextStruct2 gUnknown_202AFC0[4];
 EWRAM_DATA u32 gUnknown_202B020;
@@ -169,7 +169,7 @@ void sub_8006438(const struct UnkTextStruct2 *a0, u8 a1, u8 a2, struct UnkTextSt
         gUnknown_202AFC0[i] = a0[i];
 
         if (a0[i].unkC) {
-            sub_8006554(gUnknown_2027370, (void *)VRAM, gUnknown_20274B4, &gUnknown_202B038[0][0][0], gUnknown_80B8804[i], a0 + i, a1, r9, a3, 0);
+            sub_8006554(gUnknown_2027370, (u32 *)VRAM, gUnknown_20274B4, &gUnknown_202B038[0][0][0], gUnknown_80B8804[i], a0 + i, a1, r9, a3, 0);
             sub_80089AC(a0 + i, a3);
             r9 += a0[i].unkC * a0[i].unk10;
         }

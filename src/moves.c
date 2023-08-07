@@ -60,7 +60,6 @@ int unk_PrintMoveDescription(int, struct Move*, int, struct subStruct_203B240**)
 void sub_80928C0(u8 *buffer, struct Move *move, struct unkStruct_80928C0 *param_3);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern void unk_MovePrintData(struct Move*, int);  // print something
-extern void sub_80073E0(u32);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 
 extern void sub_80078A4(u32, u32, u32, u32, u32);

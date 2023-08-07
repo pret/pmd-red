@@ -38,7 +38,6 @@ extern const u8 gUnknown_80DB830[]; // "Number?\0"
 extern const u8 *gKangaskhanStorageDialogue[2][20];
 
 // text.s
-extern void sub_80073E0(u32);
 extern void sub_8008C54(u32);
 // code_80130A8.s
 extern void sub_8013AA0(u32 *);

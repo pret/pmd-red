@@ -464,7 +464,6 @@ void sub_8023420(void)
 extern u8 gUnknown_80DC934[];
 
 extern void sub_8008C54(u32);
-extern void sub_80073E0(u32);
 bool8 HasRecruitedMon(s16 species_);
 extern u8 gUnknown_80DC93C[];
 

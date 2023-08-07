@@ -57,7 +57,6 @@ extern u8 gUnknown_80DC2DC[];
 
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8008C54(u32);
-extern void sub_80073E0(u32);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 extern void sub_801F918(s32);
 extern void sub_801FA58(void);

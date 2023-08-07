@@ -146,7 +146,6 @@ extern u32 sub_801CE58(void);
 extern void sub_801CC38(void);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 extern void sub_8008C54(u32);
-extern void sub_80073E0(u32);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 extern void sub_8013F84(void);
 extern void PlayMenuSoundEffect(u32);

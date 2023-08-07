@@ -42,7 +42,6 @@ extern void xxx_format_string(const char *, u8 *, void *, u32);
 void PrintYellowDungeonNametoBuffer(u8 *buffer, struct DungeonLocation *dungeonLocation);
 extern void xxx_format_and_draw(s32, s32, const u8 *, ...);
 extern s32 sub_8008ED0(u8 *);
-extern void sub_80073E0(u32);
 
 void sub_809447C(struct unkStruct_8094924 *r0, u8 *r1)
 {

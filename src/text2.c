@@ -8,6 +8,8 @@ extern const u32 gUnknown_80B8814[];
 // text.s
 extern void sub_8008C6C(struct UnkTextStruct1 *, u32);
 
+u32 xxx_draw_char(struct UnkTextStruct1 *, u32, u32, u32, u32, u32);
+
 void sub_800677C(struct UnkTextStruct1 *, s32, u16 *, u8);
 void sub_80069CC(struct UnkTextStruct1 *, s32, s32, s32, u16 *);
 void sub_8006AC4(struct UnkTextStruct1 *, s32, s32, s32, u16 *);
@@ -36,7 +38,7 @@ u32 sub_8006544(u32 index)
 }
 
 // a1 is a VRAM pointer
-void sub_8006554(struct UnkTextStruct1 *a0, void *a1, u8 *a2, u16 *a3, u32 a4, const struct UnkTextStruct2 *a5, u8 a6, u32 a7, struct UnkTextStruct2_sub *a8, u8 a9)
+void sub_8006554(struct UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const struct UnkTextStruct2 *a5, u8 a6, u32 a7, struct UnkTextStruct2_sub *a8, u8 a9)
 {
     struct UnkTextStruct1 *t1;
     s32 iVar3;
@@ -65,10 +67,10 @@ void sub_8006554(struct UnkTextStruct1 *a0, void *a1, u8 *a2, u16 *a3, u32 a4, c
     else
         t1->unk14 = a7 + a5->unk12 * t1->unk4;
 
-    t1->unk18 = &a2[t1->unk10 * 0x20];
-    t1->unk1C = &a2[t1->unk14 * 0x20];
+    t1->unk18 = &a2[t1->unk10 * 8];
+    t1->unk1C = &a2[t1->unk14 * 8];
     t1->unk24 = a5->unk12;
-    t1->unk28 = a1 + (t1->unk14 * 0x20);
+    t1->unk28 = &a1[t1->unk14 * 8];
 
     if (t1->unkC == 6)
         t1->unk2C = t1->unk4 * (t1->unk6 + a5->unk12) * 32;
@@ -1265,7 +1267,7 @@ void sub_8007334(s32 a0)
 }
 #endif // NONMATCHING
 
-// Unused?
+// Unused
 void nullsub_154(void)
 {
 }
@@ -1273,15 +1275,57 @@ void nullsub_154(void)
 void sub_80073B8(s32 a0)
 {
     struct UnkTextStruct1 *r1;
-    
+
     r1 = &gUnknown_2027370[a0];
-    
-    r1->unk3C = r1->unk1C + (r1->unk2C >> 2 << 2);
+
+    r1->unk3C = &r1->unk1C[(u32)r1->unk2C >> 2];
     r1->unk40 = r1->unk1C;
     r1->unk46 = 1;
 }
 
-// Unused?
+// Unused
 void nullsub_155(void)
 {
 }
+
+void sub_80073E0(s32 a0)
+{
+    struct UnkTextStruct1 *r1;
+
+    r1 = &gUnknown_2027370[a0];
+
+    if (r1->unk44 == 0) {
+        r1->unk30 = &r1->unk28[r1->unk3C - r1->unk1C];
+        r1->unk34 = r1->unk3C;
+        r1->unk38 = (r1->unk40 - r1->unk3C + 1) * 4;
+
+        if (r1->unk38 >= r1->unk2C)
+            r1->unk38 = r1->unk2C;
+
+        if (r1->unk38 < 0)
+            r1->unk38 = 0;
+    }
+
+    r1->unk46 = 0;
+}
+
+// Unused
+void nullsub_156(void)
+{
+}
+
+u32 xxx_call_draw_char(u32 x, u32 y, u32 a2, u32 color, u32 a4)
+{ 
+    return xxx_draw_char(gUnknown_2027370, x, y, a2, color, a4);
+}
+
+// Unused
+bool8 sub_8007464(void)
+{
+    return FALSE;
+}
+
+/*u32 xxx_draw_char(struct UnkTextStruct1 *a0, u32 x, u32 y, u32 a3, u32 color, u32 a5)
+{
+
+}*/

@@ -19,14 +19,12 @@ extern u8 gUnknown_80D4828[];
 extern void PlayMenuSoundEffect(u32);
 extern s32 sub_8008ED0(const u8 *);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
-extern void sub_80073E0(u32);
 void AddMenuCursorSprite_(struct MenuInputStruct *, u32);
 void sub_8012EBC(struct MenuStruct *param_1);
 extern void sub_8013134(struct MenuInputStruct *, u32, u32);
 extern s16 sub_8009614(u32, u32);
 extern u32 ReturnIntFromChar2(u8);
 struct unkChar *GetCharacter(u32);
-extern void xxx_call_draw_char(u32, u32, u32, u32, u32);
 extern void nullsub_7(u16 *);
 extern void nullsub_34(struct MenuInputStructSub *r0);
 

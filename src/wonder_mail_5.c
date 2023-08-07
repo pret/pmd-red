@@ -51,7 +51,6 @@ static const u8 wonder_mail_fill[] = "pksdir0";
 extern void sub_8030DD4(void);
 extern void PlayMenuSoundEffect(u32);
 extern void CreateRescueDescription(struct unkStruct_802C39C *);
-extern void sub_80073E0(u32);
 
 void sub_8030E2C(void);
 void sub_8030E48(void);

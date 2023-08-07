@@ -132,7 +132,6 @@ extern u32 sub_801B60C(u32, u8, u8);
 extern void sub_8092578(u8 *buffer, u8 index, u8 r2);
 void HandleMissionReward(void);
 extern void sub_8008C54(u32);
-extern void sub_80073E0(u32);
 const u8 *sub_80974A0(s16 index);
 
 const struct UnkTextStruct2 gUnknown_80E03C4 = {

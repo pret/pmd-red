@@ -81,7 +81,6 @@ extern void sub_802DE84(struct unkStruct_802C39C *);
 extern void InitializeJobListMenu(u32);
 
 extern void sub_8008C54(u32);
-extern void sub_80073E0(u32);
 extern u32 sub_802C898(void);
 extern void sub_802C8F4(void);
 extern u32 sub_802DEE0(void);

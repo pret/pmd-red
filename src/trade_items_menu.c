@@ -101,7 +101,6 @@ extern void sub_80141B4(const u8 *, u32, u32, u32);
 
 extern void sub_8008C54(u32);
 extern void sub_8013C68(u32 *);
-extern void sub_80073E0(u32);
 extern u8 sub_801CF14(u32);
 extern u32 sub_801D008();
 extern void sub_801C8C4(u32, u32, s32 *, u32);

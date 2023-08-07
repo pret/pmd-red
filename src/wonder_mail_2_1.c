@@ -98,7 +98,6 @@ static const u8 wonder_mail_fill1[] = "pksdir0";
 extern void sub_802CAA4(void);
 extern u8 IsJobSlotEmpty(u8);
 extern void sub_8008C54(u32);
-extern void sub_80073E0(u32);
 extern struct WonderMail* GetJobSlotInfo(u8);
 extern void sub_803B35C(struct WonderMail *, struct unkStruct_802C39C *);
 extern void CreateRescueTitle(struct unkStruct_802C39C *);

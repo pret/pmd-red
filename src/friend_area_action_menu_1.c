@@ -34,7 +34,6 @@ extern u32 sub_801F890(void);
 extern void sub_801F8D0(void);
 extern void xxx_format_and_draw(u32, u32, const u8 *, ...);
 extern void sub_8008C54(u32);
-extern void sub_80073E0(u32);
 extern u8 gUnknown_202DE58[];
 extern u32 sub_801F194(void);
 

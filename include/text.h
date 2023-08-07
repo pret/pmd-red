@@ -12,18 +12,18 @@ struct UnkTextStruct1
     u32 unkC;
     u32 unk10;
     u32 unk14;
-    u8 *unk18;
-    u8 *unk1C;
+    u32 *unk18;
+    u32 *unk1C;
     s32 unk20;
     s32 unk24;
-    void *unk28; // Somewhere in VRAM
-    u32 unk2C;
-    s32 unk30;
-    s32 unk34;
+    u32 *unk28; // Somewhere in VRAM
+    s32 unk2C;
+    u32 *unk30; // Somewhere in VRAM?
+    u32 *unk34;
     s32 unk38;
-    u8 *unk3C;
-    u8 *unk40;
-    u8 fill44;
+    u32 *unk3C;
+    u32 *unk40;
+    u8 unk44;
     bool8 unk45;
     u8 unk46;
 };

@@ -189,7 +189,6 @@ extern u8 *sub_80975DC(u32 r0);
 extern u8 sub_8099360(u8 *);
 extern u8 sub_8099394(volatile u8 *);
 extern struct WonderMail *GetJobSlotInfo(u8);
-extern void sub_80073E0(u32);
 extern void sub_803B6B0(u32, u32, u32, u32);
 extern s16 sub_80A2688(u8 r0);
 extern u8 sub_80992E0(s16 *, s16 *);
