@@ -1898,3 +1898,9 @@ u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u3
 "_0800789C: .4byte gUnknown_202B030\n"
 "_080078A0: .4byte gCharacterSpacing");
 }
+
+void sub_80078A4(u32 a0, s32 x, s32 y, u32 a3, u32 color)
+{
+    sub_800792C(a0, x, y, a3, color);
+    sub_800792C(a0, x, y + 1, a3, gUnknown_202B030 & 0xF);
+}

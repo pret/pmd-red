@@ -26,10 +26,13 @@ void sub_8006518(struct UnkTextStruct2 *);
 void sub_8006554(struct UnkTextStruct1 *, u32 *, u32 *, u16 *, u32, const struct UnkTextStruct2 *, u8, u32, struct UnkTextStruct2_sub *, u8);
 void sub_80073B8(s32);
 void sub_80073E0(s32);
+void sub_80078A4(u32, s32, s32, u32, u32);
 
 // text.s
 extern struct unkChar *GetCharacter(u32);
 extern void InitGraphics(void);
 extern void xxx_call_draw_string(s32 x, u32 y, const u8 *str, u32 , u32);
+
+extern void sub_800792C(u32, s32, s32, u32, u32);
 
 #endif // GUARD_TEXT2_H

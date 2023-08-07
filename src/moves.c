@@ -62,7 +62,6 @@ extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern void unk_MovePrintData(struct Move*, int);  // print something
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 
-extern void sub_80078A4(u32, u32, u32, u32, u32);
 extern u8 sub_8092B00(struct Move*);
 extern u32 sub_8092BC0(struct Move*);
 extern u32 gUnknown_202DE30;
