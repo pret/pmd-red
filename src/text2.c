@@ -6,9 +6,10 @@
 extern const u32 gUnknown_80B8814[];
 
 // text.s
+extern void sub_8007958(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, u32 a4, u32 color);
 extern void sub_8008C6C(struct UnkTextStruct1 *, u32);
 
-void nullsub_129(u32 a0, s32 x, s32 y, u32 a3, u32 color);
+void nullsub_129(u32, s32, s32, u32, u32);
 u32 xxx_draw_char(struct UnkTextStruct1 *, s32, s32, u32, u32, u32);
 
 void sub_800677C(struct UnkTextStruct1 *, s32, u16 *, u8);
@@ -1911,4 +1912,13 @@ void sub_80078E8(u32 a0, s32 x, s32 y, u32 a3, u32 color)
 {
     nullsub_129(a0, x, y, a3, color);
     nullsub_129(a0, x, y + 1, a3, gUnknown_202B030 & 0xF);
+}
+
+void sub_800792C(u32 a0, s32 x, s32 y, u32 a3, u32 color)
+{ 
+    sub_8007958(gUnknown_2027370, a0, x, y, a3, color);
+}
+
+void nullsub_129(u32 a0, s32 x, s32 y, u32 a3, u32 color)
+{
 }
