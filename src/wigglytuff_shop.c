@@ -21,6 +21,7 @@
 #include "code_80118A4.h"
 #include "code_800D090.h"
 #include "event_flag.h"
+#include "exclusive_pokemon.h"
 
 struct unkStruct_203B280
 {
@@ -128,6 +129,7 @@ void sub_8021820(void);
 void sub_8021A60(void);
 s32 sub_8021664(void);
 void sub_8021410(void);
+s32 sub_8021B58(s16 species);
 
 extern void PlayMenuSoundEffect(u32);
 
@@ -532,179 +534,44 @@ void sub_8021894(void)
     sub_80073E0(gUnknown_203B28C->unk74);
 }
 
-// https://decomp.me/scratch/P2BiC 
-// 99.40% matching (Seth)
-#ifndef NONMATCHING
-NAKED
 void sub_8021A60(void)
 {
-    asm_unified(
-	"\tpush {r4-r7,lr}\n"
-	"\tldr r2, _08021B4C\n"
-	"\tldr r1, [r2]\n"
-	"\tmovs r0, 0\n"
-	"\tstr r0, [r1, 0x70]\n"
-	"\tmovs r6, 0\n"
-	"\tadds r4, r2, 0\n"
-	"\tmovs r3, 0\n"
-"_08021A70:\n"
-	"\tldr r1, [r4]\n"
-	"\tlsls r2, r6, 1\n"
-	"\tadds r0, r1, 0\n"
-	"\tadds r0, 0xE\n"
-	"\tadds r0, r2\n"
-	"\tstrh r3, [r0]\n"
-	"\tlsls r0, r6, 2\n"
-	"\tadds r1, 0x30\n"
-	"\tadds r1, r0\n"
-	"\tstr r3, [r1]\n"
-	"\tadds r6, 0x1\n"
-	"\tcmp r6, 0xF\n"
-	"\tble _08021A70\n"
-	"\tmovs r6, 0\n"
-	"\tldr r7, _08021B4C\n"
-"_08021A8E:\n"
-	"\tlsls r0, r6, 16\n"
-	"\tasrs r5, r0, 16\n"
-	"\tldr r4, [r7]\n"
-	"\tadds r0, r5, 0\n"
-	"\tbl GetFriendArea\n"
-	"\tldrb r1, [r4, 0xC]\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tcmp r1, r0\n"
-	"\tbne _08021AC4\n"
-	"\tadds r0, r5, 0\n"
-	"\tbl GetBaseSpeciesNoUnown\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r0, 16\n"
-	"\tcmp r5, r0\n"
-	"\tbne _08021AC4\n"
-	"\tldr r3, [r7]\n"
-	"\tldr r1, [r3, 0x70]\n"
-	"\tlsls r2, r1, 1\n"
-	"\tadds r0, r3, 0\n"
-	"\tadds r0, 0xE\n"
-	"\tadds r0, r2\n"
-	"\tstrh r5, [r0]\n"
-	"\tadds r1, 0x1\n"
-	"\tstr r1, [r3, 0x70]\n"
-"_08021AC4:\n"
-	"\tadds r6, 0x1\n"
-	"\tldr r0, _08021B50\n"
-	"\tcmp r6, r0\n"
-	"\tble _08021A8E\n"
-	"\tmovs r6, 0\n"
-"_08021ACE:\n"
-	"\tlsls r0, r6, 16\n"
-	"\tasrs r4, r0, 16\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sub_8098134\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _08021AFC\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sub_8021B58\n"
-	"\tadds r2, r0, 0\n"
-	"\tmovs r0, 0x1\n"
-	"\tnegs r0, r0\n"
-	"\tcmp r2, r0\n"
-	"\tbeq _08021AFC\n"
-	"\tldr r0, _08021B4C\n"
-	"\tldr r1, [r0]\n"
-	"\tlsls r0, r2, 2\n"
-	"\tadds r1, 0x30\n"
-	"\tadds r1, r0\n"
-	"\tmovs r0, 0x1\n"
-	"\tstr r0, [r1]\n"
-"_08021AFC:\n"
-	"\tadds r6, 0x1\n"
-	"\tldr r0, _08021B50\n"
-	"\tcmp r6, r0\n"
-	"\tble _08021ACE\n"
-	"\tmovs r6, 0\n"
-	"\tldr r4, _08021B54\n"
-"_08021B08:\n"
-	"\tmovs r0, 0x58\n"
-	"\tadds r1, r6, 0\n"
-	"\tmuls r1, r0\n"
-	"\tldr r0, [r4]\n"
-	"\tadds r2, r0, r1\n"
-	"\tldrb r1, [r2]\n"
-	"\tmovs r0, 0x1\n"
-	"\tands r0, r1\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _08021B3C\n"
-	"\tmovs r1, 0x8\n"
-	"\tldrsh r0, [r2, r1]\n"
-	"\tbl sub_8021B58\n"
-	"\tadds r2, r0, 0\n"
-	"\tmovs r0, 0x1\n"
-	"\tnegs r0, r0\n"
-	"\tcmp r2, r0\n"
-	"\tbeq _08021B3C\n"
-	"\tldr r0, _08021B4C\n"
-	"\tldr r1, [r0]\n"
-	"\tlsls r0, r2, 2\n"
-	"\tadds r1, 0x30\n"
-	"\tadds r1, r0\n"
-	"\tmovs r0, 0x2\n"
-	"\tstr r0, [r1]\n"
-"_08021B3C:\n"
-	"\tadds r6, 0x1\n"
-	"\tmovs r0, 0xCE\n"
-	"\tlsls r0, 1\n"
-	"\tcmp r6, r0\n"
-	"\tble _08021B08\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_08021B4C: .4byte gUnknown_203B28C\n"
-"_08021B50: .4byte 0x000001a7\n"
-"_08021B54: .4byte gRecruitedPokemonRef");
+    s32 sVar4;
+    s32 iVar6;
+    s32 index;
+    struct PokemonStruct *pokeStruct;
 
+    gUnknown_203B28C->numPokemoninFriendArea = 0;
+    for(index = 0; index < 0x10; index++)
+    {
+        gUnknown_203B28C->unkE[index] = 0;
+        gUnknown_203B28C->unk30[index] = 0;
+    }
+    for(index = 0; index < 0x1A8; index++)
+    {
+        s32 index2 = (s16)index;
+        if ((gUnknown_203B28C->friendArea == GetFriendArea(index2)) &&
+            (index2 == GetBaseSpeciesNoUnown(index2))) {
+            iVar6 = gUnknown_203B28C->numPokemoninFriendArea;
+            gUnknown_203B28C->unkE[iVar6] = index2;
+            gUnknown_203B28C->numPokemoninFriendArea = iVar6 + 1;
+        }
+    }
+    for(index = 0; index < 0x1A8; index++)
+    {
+        if ((sub_8098134(index)) && (sVar4 = sub_8021B58(index), sVar4 != -1)) {
+            gUnknown_203B28C->unk30[sVar4] = 1;
+        }
+    }
+    for(index = 0; index < 0x19d; index++)
+    {
+        pokeStruct = &gRecruitedPokemonRef->pokemon[index];
+        if (((*(u8 *)&pokeStruct->unk0 & 1) != 0) &&
+            (sVar4 = sub_8021B58(pokeStruct->speciesNum), sVar4 != -1)) {
+            gUnknown_203B28C->unk30[sVar4] = 2;
+        }
+    }
 }
-#else
-void sub_8021A60(void)
-{
-  s32 sVar4;
-  s32 iVar6;
-  s32 index;
-  struct PokemonStruct *pokeStruct;
-  
-  gUnknown_203B28C->unk70 = 0;
-  for(index = 0; index < 0x10; index++)
-  {
-    gUnknown_203B28C->unkE[index] = 0;
-    gUnknown_203B28C->unk30[index] = 0;
-  }
-  for(index = 0; index < 0x1A8; index++)
-  {
-    if ((gUnknown_203B28C->friendArea == GetFriendArea((s16)index)) &&
-       ((s16)index == GetBaseSpeciesNoUnown(index))) {
-      iVar6 = gUnknown_203B28C->unk70;
-      gUnknown_203B28C->unkE[iVar6] = index;
-      gUnknown_203B28C->unk70 = iVar6 + 1;
-    }
-  }
-  for(index = 0; index < 0x1A8; index++)
-  {
-    if ((sub_8098134(index) != '\0') && (sVar4 = sub_8021B58(index), sVar4 != -1)) {
-      gUnknown_203B28C->unk30[sVar4] = 1;
-    }
-  }
-  for(index = 0; index < 0x19d; index++)
-  {
-    pokeStruct = &gRecruitedPokemonRef->pokemon[index];
-    if (((*(u8 *)&pokeStruct->unk0 & 1) != 0) &&
-       (sVar4 = sub_8021B58(pokeStruct->speciesNum), sVar4 != -1)) {
-      gUnknown_203B28C->unk30[sVar4] = 2;
-    }
-  }
-  return;
-}
-#endif
 
 s32 sub_8021B58(s16 species)
 {
