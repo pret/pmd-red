@@ -17,7 +17,6 @@ struct unkChar
 extern u8 gUnknown_80D4828[];
 
 extern void PlayMenuSoundEffect(u32);
-extern void sub_80073B8(u32);
 extern s32 sub_8008ED0(const u8 *);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern void sub_80073E0(u32);

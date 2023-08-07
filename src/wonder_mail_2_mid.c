@@ -18,7 +18,6 @@ extern void DrawPelipperBoardJobMenu(void);
 extern void PlayMenuSoundEffect(u32);
 extern u8 HasNoPelipperBoardJobs(void);
 extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 
 extern struct WonderMail *GetPelipperBoardSlotInfo(u32);

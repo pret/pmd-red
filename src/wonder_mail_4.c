@@ -82,7 +82,6 @@ extern void sub_803092C(void);
 
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void CreateRescueTitle(struct unkStruct_802C39C *);
 

@@ -114,7 +114,6 @@ ALIGNED(4) const u8 gFriendListItem[] = _("Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0
 ALIGNED(4) static const u8 fill0[] = "pksdir0";
 
 extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void xxx_format_and_draw(s32, s32, const u8 *, ...);
 extern u32 sub_8023A94(u32);

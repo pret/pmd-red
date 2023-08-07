@@ -86,7 +86,6 @@ extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void sub_801B748(u32);
 extern void sub_8008C54(u32);
 extern void sub_80073E0(u32);
-extern void sub_80073B8(u32);
 extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8013F84(void);

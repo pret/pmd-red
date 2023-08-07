@@ -6,7 +6,7 @@
 #include "subStruct_203B240.h"
 #include "code_809447C.h"
 #include "text_util.h"
-
+#include "text2.h"
 #include "constants/colors.h"
 #include "constants/monster.h"
 #include "file_system.h"
@@ -57,7 +57,6 @@ bool8 DoesMoveCharge(u16 move);
 
 int unk_PrintMoveDescription(int, struct Move*, int, struct subStruct_203B240**);
 
-extern void sub_80073B8(u32);
 void sub_80928C0(u8 *buffer, struct Move *move, struct unkStruct_80928C0 *param_3);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern void unk_MovePrintData(struct Move*, int);  // print something

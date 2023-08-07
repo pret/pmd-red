@@ -11,7 +11,7 @@
 #include "team_inventory.h"
 #include "code_800D090.h"
 #include "text_util.h"
-
+#include "text2.h"
 #include <stddef.h>
 
 extern struct FileArchive gSystemFileArchive;
@@ -39,7 +39,6 @@ EWRAM_DATA struct TeamInventory gTeamInventory = {0};
 EWRAM_DATA_2 struct TeamInventory *gTeamInventoryRef = {0};
 
 extern s32 sub_8090FEC(s32 a1, u8* a2, u8 a3);
-extern void sub_80073B8(u32);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 extern void sub_80078A4(u32, u32, u32, u32, u32);
 extern void sub_80073E0(u32);

@@ -1269,3 +1269,19 @@ void sub_8007334(s32 a0)
 void nullsub_154(void)
 {
 }
+
+void sub_80073B8(s32 a0)
+{
+    struct UnkTextStruct1 *r1;
+    
+    r1 = &gUnknown_2027370[a0];
+    
+    r1->unk3C = r1->unk1C + (r1->unk2C >> 2 << 2);
+    r1->unk40 = r1->unk1C;
+    r1->unk46 = 1;
+}
+
+// Unused?
+void nullsub_155(void)
+{
+}

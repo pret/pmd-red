@@ -170,7 +170,6 @@ extern void sub_8013E54(void);
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
 extern void sub_802BC7C(void);
 extern void sub_80073E0(u32);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);

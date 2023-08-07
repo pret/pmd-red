@@ -103,7 +103,6 @@ const struct UnkTextStruct2 gUnknown_80E0264 =
 
 static const u8 wonder_mail_802DF88_fill1[] = "pksdir0";
 
-extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void CreateRescueDescription(struct unkStruct_802C39C *);
 extern void PlayMenuSoundEffect(u32);

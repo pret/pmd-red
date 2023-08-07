@@ -58,7 +58,6 @@ extern const char *sub_8098FB4();
 extern void xxx_format_string(const char *, u8 *, u32 **, u32);
 extern s32 sub_8008ED0(u8 *);
 extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 void LoadTeamRankBadge(u32, u32, u32);
 extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);

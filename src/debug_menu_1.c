@@ -48,7 +48,6 @@ extern u32 sub_8023A94(u32);
 extern s16 sub_8023B44(void);
 extern void sub_8023C60(void);
 extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
 extern void sub_8013C68(u32 *);
 extern void sub_80073E0(u32);
 extern void sub_8023DA4(void);

@@ -66,7 +66,6 @@ ALIGNED(4) const u8 gUnknown_80E0824[] = _("{STAR_BULLET}");
 ALIGNED(4) const u8 gMakuhitaCoursePlaceholder[] = _("{COLOR_2}%c%s{END_COLOR_TEXT_2}");
 static const u8 makuhita_dojo_fill3[] = "pksdir0";
 
-extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void sub_8008C54(u32);
 extern u32 sub_80095E4(s16, u32);

@@ -5,6 +5,7 @@
 
 void sub_8006518(struct UnkTextStruct2 *);
 void sub_8006554(struct UnkTextStruct1 *, void *, u8 *, u16 *, u32, const struct UnkTextStruct2 *, u8, u32, struct UnkTextStruct2_sub *, u8);
+void sub_80073B8(s32);
 
 // text.s
 extern void InitGraphics(void);

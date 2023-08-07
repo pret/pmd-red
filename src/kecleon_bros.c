@@ -54,7 +54,6 @@ extern const u8 gTeamToolboxA[];
 extern const u8 gTeamToolboxB[];
 
 // text.s
-extern void sub_80073B8(u32);
 extern void sub_80073E0(u32);
 extern void sub_8007B7C(s32, s32, s32, s32, s32);
 extern void sub_8008C54(u32);
