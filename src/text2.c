@@ -7,9 +7,9 @@ extern const u32 gUnknown_80B853C[16];
 extern const struct unkShiftData gUnknown_80B85DC[8];
 extern const u32 gUnknown_80B8814[];
 extern const struct unkStruct_80B8824 gUnknown_80B8824;
+extern const struct unkStruct_80B8848 gUnknown_80B8848;
 
 // text.s
-extern void sub_8007AA4(struct UnkTextStruct1 *, u32, u32, u32, u32, u32);
 extern void sub_8008C6C(struct UnkTextStruct1 *, u32);
 
 void nullsub_129(u32, s32, s32, u32, u32);
@@ -22,6 +22,7 @@ void sub_8006B70(struct UnkTextStruct1 *, s32, s32, s32, u16 *);
 void sub_8006C44(struct UnkTextStruct1 *, s32, u16 *, u8);
 void sub_8006E94(struct UnkTextStruct1 *, s32, u32, const u8 *, u16 *);
 void sub_8007958(struct UnkTextStruct1 *, u32, s32, s32, s32, u32);
+void sub_8007AA4(struct UnkTextStruct1 *, u32, s32, s32, s32, u32);
 
 void nullsub_152(void)
 {
@@ -1938,7 +1939,7 @@ void sub_8007958(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 co
     struct UnkTextStruct1 *r5;
     s32 r6;
     u32 r9;
-    
+
     const struct unkShiftData *shiftData;
     struct unkStruct_80B8824 dataLOL;
     s32 lol;
@@ -2171,4 +2172,122 @@ void sub_8007A78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4)
 // Unused
 void nullsub_157()
 {
+}
+
+NAKED // https://decomp.me/scratch/xE2Tn
+void sub_8007AA4(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color)
+{
+    asm_unified(
+    "push {r4-r7,lr}\n"
+    "\tmov r7, r9\n"
+    "\tmov r6, r8\n"
+    "\tpush {r6,r7}\n"
+    "\tsub sp, 0x20\n"
+    "\tmov r9, r2\n"
+    "\tadds r5, r3, 0\n"
+    "\tldr r7, [sp, 0x3C]\n"
+    "\tldr r3, [sp, 0x40]\n"
+    "\tlsls r2, r1, 3\n"
+    "\tadds r2, r1\n"
+    "\tlsls r2, 3\n"
+    "\tadds r4, r0, r2\n"
+    "\tldr r1, _08007B28\n"
+    "\tmovs r0, 0xF\n"
+    "\tands r3, r0\n"
+    "\tlsls r3, 2\n"
+    "\tadds r3, r1\n"
+    "\tldr r0, [r3]\n"
+    "\tldr r1, _08007B2C\n"
+    "\tadds r1, r0\n"
+    "\tmov r12, r1\n"
+    "\tmov r1, sp\n"
+    "\tldr r0, _08007B30\n"
+    "\tldm r0!, {r2,r3,r6}\n"
+    "\tstm r1!, {r2,r3,r6}\n"
+    "\tldm r0!, {r2,r3,r6}\n"
+    "\tstm r1!, {r2,r3,r6}\n"
+    "\tldm r0!, {r2,r3}\n"
+    "\tstm r1!, {r2,r3}\n"
+    "\tadds r0, r5, 0\n"
+    "\tcmp r5, 0\n"
+    "\tbge _08007AE8\n"
+    "\tadds r0, r5, 0x7\n"
+"_08007AE8:\n"
+    "\tasrs r3, r0, 3\n"
+    "\tmovs r0, 0x4\n"
+    "\tldrsh r6, [r4, r0]\n"
+    "\tmov r8, r6\n"
+    "\tmov r0, r8\n"
+    "\tmuls r0, r3\n"
+    "\tmov r2, r9\n"
+    "\tcmp r2, 0\n"
+    "\tbge _08007AFC\n"
+    "\tadds r2, 0x7\n"
+"_08007AFC:\n"
+    "\tasrs r2, 3\n"
+    "\tadds r0, r2\n"
+    "\tlsls r0, 5\n"
+    "\tldr r1, [r4, 0x18]\n"
+    "\tadds r1, r0\n"
+    "\tlsls r0, r3, 3\n"
+    "\tsubs r0, r5, r0\n"
+    "\tlsls r0, 2\n"
+    "\tadds r1, r0\n"
+    "\tmovs r0, 0x7\n"
+    "\tmov r6, r9\n"
+    "\tands r0, r6\n"
+    "\tlsls r0, 2\n"
+    "\tadd r0, sp\n"
+    "\tldr r0, [r0]\n"
+    "\tmov r6, r12\n"
+    "\tands r6, r0\n"
+    "\tmov r12, r6\n"
+    "\tcmp r2, r8\n"
+    "\tbge _08007B6E\n"
+    "\tb _08007B48\n"
+    "\t.align 2, 0\n"
+"_08007B28: .4byte gUnknown_80B853C\n"
+"_08007B2C: .4byte 0x11111111\n"
+"_08007B30: .4byte gUnknown_80B8848\n"
+"_08007B34:\n"
+    "\tadds r5, 0x1\n"
+    "\tadds r1, 0x4\n"
+    "\tmovs r0, 0x7\n"
+    "\tands r0, r5\n"
+    "\tcmp r0, 0\n"
+    "\tbne _08007B46\n"
+    "\tldr r0, [r4, 0x20]\n"
+    "\tlsls r0, 2\n"
+    "\tadds r1, r0\n"
+"_08007B46:\n"
+    "\tsubs r7, 0x1\n"
+"_08007B48:\n"
+    "\tcmp r7, 0\n"
+    "\tble _08007B6E\n"
+    "\tmovs r2, 0x8\n"
+    "\tldrsh r0, [r4, r2]\n"
+    "\tcmp r3, r0\n"
+    "\tbge _08007B6E\n"
+    "\tldr r0, [r1]\n"
+    "\tmov r6, r12\n"
+    "\torrs r0, r6\n"
+    "\tstr r0, [r1]\n"
+    "\tldr r0, [r4, 0x3C]\n"
+    "\tcmp r0, r1\n"
+    "\tbls _08007B64\n"
+    "\tstr r1, [r4, 0x3C]\n"
+"_08007B64:\n"
+    "\tldr r0, [r4, 0x40]\n"
+    "\tcmp r0, r1\n"
+    "\tbcs _08007B34\n"
+    "\tstr r1, [r4, 0x40]\n"
+    "\tb _08007B34\n"
+"_08007B6E:\n"
+    "\tadd sp, 0x20\n"
+    "\tpop {r3,r4}\n"
+    "\tmov r8, r3\n"
+    "\tmov r9, r4\n"
+    "\tpop {r4-r7}\n"
+    "\tpop {r0}\n"
+    "\tbx r0");
 }

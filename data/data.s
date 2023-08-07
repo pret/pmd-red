@@ -1927,6 +1927,7 @@ gUnknown_80B8824: @ 80B8824
 
 	.global gUnknown_80B8848
 gUnknown_80B8848: @ 80B8848
+        @ Type: unkStruct_80B8848
         .byte 0x0F, 0x00, 0x00, 0x00
         .byte 0xF0, 0x00, 0x00, 0x00
         .byte 0x00, 0x0F, 0x00, 0x00
