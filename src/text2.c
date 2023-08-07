@@ -12,7 +12,7 @@ extern const struct unkStruct_80B8848 gUnknown_80B8848;
 // text.s
 extern void sub_8008C6C(struct UnkTextStruct1 *, u32);
 
-void nullsub_129(u32, s32, s32, u32, u32);
+void nullsub_129(u32, s32, s32, s32, u32);
 u32 xxx_draw_char(struct UnkTextStruct1 *, s32, s32, u32, u32, u32);
 
 void sub_800677C(struct UnkTextStruct1 *, s32, u16 *, u8);
@@ -23,6 +23,7 @@ void sub_8006C44(struct UnkTextStruct1 *, s32, u16 *, u8);
 void sub_8006E94(struct UnkTextStruct1 *, s32, u32, const u8 *, u16 *);
 void sub_8007958(struct UnkTextStruct1 *, u32, s32, s32, s32, u32);
 void sub_8007AA4(struct UnkTextStruct1 *, u32, s32, s32, s32, u32);
+void sub_8007BA8(struct UnkTextStruct1 *, u32, s32, s32, s32, u32);
 
 void nullsub_152(void)
 {
@@ -1906,25 +1907,25 @@ u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u3
 "_080078A0: .4byte gCharacterSpacing");
 }
 
-void sub_80078A4(u32 a0, s32 x, s32 y, u32 a3, u32 color)
+void sub_80078A4(u32 a0, s32 x, s32 y, s32 a3, u32 color)
 {
     sub_800792C(a0, x, y, a3, color);
     sub_800792C(a0, x, y + 1, a3, gUnknown_202B030 & 0xF);
 }
 
 // Unused
-void sub_80078E8(u32 a0, s32 x, s32 y, u32 a3, u32 color)
+void sub_80078E8(u32 a0, s32 x, s32 y, s32 a3, u32 color)
 {
     nullsub_129(a0, x, y, a3, color);
     nullsub_129(a0, x, y + 1, a3, gUnknown_202B030 & 0xF);
 }
 
-void sub_800792C(u32 a0, s32 x, s32 y, u32 a3, u32 color)
+void sub_800792C(u32 a0, s32 x, s32 y, s32 a3, u32 color)
 { 
     sub_8007958(gUnknown_2027370, a0, x, y, a3, color);
 }
 
-void nullsub_129(u32 a0, s32 x, s32 y, u32 a3, u32 color)
+void nullsub_129(u32 a0, s32 x, s32 y, s32 a3, u32 color)
 {
 }
 
@@ -2164,13 +2165,13 @@ void sub_8007958(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 co
 }
 #endif // NONMATCHING
 
-void sub_8007A78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4)
+void sub_8007A78(u32 a0, s32 x, s32 y, s32 a3, u32 color)
 {
-    sub_8007AA4(gUnknown_2027370, a0, a1, a2, a3, a4);
+    sub_8007AA4(gUnknown_2027370, a0, x, y, a3, color);
 }
 
 // Unused
-void nullsub_157()
+void nullsub_157(void)
 {
 }
 
@@ -2290,4 +2291,14 @@ void sub_8007AA4(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 co
     "\tpop {r4-r7}\n"
     "\tpop {r0}\n"
     "\tbx r0");
+}
+
+void sub_8007B7C(u32 a0, s32 x, s32 y, s32 a3, u32 color)
+{
+    sub_8007BA8(gUnknown_2027370, a0, x, y, a3, color);
+}
+
+// Unused
+void nullsub_158(void)
+{
 }

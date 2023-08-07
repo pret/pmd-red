@@ -54,7 +54,6 @@ extern const u8 gTeamToolboxA[];
 extern const u8 gTeamToolboxB[];
 
 // text.s
-extern void sub_8007B7C(s32, s32, s32, s32, s32);
 extern void sub_8008C54(u32);
 // code_80130A8.s
 extern void sub_80141B4(const u8 *, u32, struct OpenedFile **, u32);

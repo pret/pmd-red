@@ -5,34 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8007B7C
-sub_8007B7C:
-	push {r4-r6,lr}
-	sub sp, 0x8
-	adds r4, r0, 0
-	adds r5, r1, 0
-	adds r6, r2, 0
-	ldr r1, [sp, 0x18]
-	ldr r0, _08007BA0
-	str r3, [sp]
-	str r1, [sp, 0x4]
-	adds r1, r4, 0
-	adds r2, r5, 0
-	adds r3, r6, 0
-	bl sub_8007BA8
-	add sp, 0x8
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08007BA0: .4byte gUnknown_2027370
-	thumb_func_end sub_8007B7C
-
-	thumb_func_start nullsub_158
-nullsub_158:
-	bx lr
-	thumb_func_end nullsub_158
-
 	thumb_func_start sub_8007BA8
 sub_8007BA8:
 	push {r4-r7,lr}
