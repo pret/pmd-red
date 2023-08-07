@@ -9,6 +9,7 @@ extern const u32 gUnknown_80B8814[];
 extern const struct unkStruct_80B8824 gUnknown_80B8824;
 
 // text.s
+extern void sub_8007AA4(struct UnkTextStruct1 *, u32, u32, u32, u32, u32);
 extern void sub_8008C6C(struct UnkTextStruct1 *, u32);
 
 void nullsub_129(u32, s32, s32, u32, u32);
@@ -2161,3 +2162,13 @@ void sub_8007958(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 co
 "_08007A74: .4byte 0x11111111");
 }
 #endif // NONMATCHING
+
+void sub_8007A78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4)
+{
+    sub_8007AA4(gUnknown_2027370, a0, a1, a2, a3, a4);
+}
+
+// Unused
+void nullsub_157()
+{
+}

@@ -33,6 +33,7 @@ void sub_80073B8(s32);
 void sub_80073E0(s32);
 void sub_80078A4(u32, s32, s32, u32, u32);
 void sub_800792C(u32, s32, s32, u32, u32);
+void sub_8007A78(u32, u32, u32, u32, u32);
 
 // text.s
 extern struct unkChar *GetCharacter(u32);
