@@ -2,11 +2,11 @@
 #include "rescue_team_info.h"
 #include "code_8092334.h"
 #include "text_util.h"
+#include "event_flag.h"
 
 EWRAM_DATA_2 struct RescueTeamData *gRescueTeamInfoRef = {0};
 EWRAM_DATA struct RescueTeamData gRescueTeamInfo = {0};
 
-extern bool8 sub_80023E4(u32);
 extern void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size);
 
 extern const u8 *gRescueTeamRanks[];

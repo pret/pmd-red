@@ -13,8 +13,8 @@
 #include "luminous_cave.h"
 
 extern u8 *gIQSkillNames[];
-extern u32 gIQSkillDescriptions[];
-extern u32 gTacticsDescriptions[];
+extern u8 *gIQSkillDescriptions[];
+extern u8 *gTacticsDescriptions[];
 extern u8 *gTactics[];
 extern bool8 gTacticsTargetLeader[];
 
@@ -60,7 +60,6 @@ extern void sub_809447C(struct unkStruct_8094924*, void*);
 extern void sub_808F428(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
 s16 GetPokemonEvolveConditions(s16 index, struct unkEvolve *r1);
 
-void sub_8092638(u8 friendArea, struct unkStruct_8092638 *param_2, u8 param_3, u8 param_4);
 u32 sub_808F798(struct PokemonStruct *, s16);
 void sub_8097848(void);
 
@@ -120,7 +119,7 @@ bool8 HasRecruitedMon(s16 species_) {
     return FALSE;
 }
 
-s32 GetBaseSpecies(s16 index) {
+s16 GetBaseSpecies(s16 index) {
     if (index == MONSTER_CASTFORM_SNOWY)
         return MONSTER_CASTFORM;
     if (index == MONSTER_CASTFORM_SUNNY)
@@ -462,24 +461,24 @@ void sub_808E9EC(struct PokemonStruct *r0, struct unkStruct_808E9EC *r1)
 }
 #endif
 
-u8 *GetIQSkillName(u8 r0)
+u8 *GetIQSkillName(u8 skill)
 {
-    return gIQSkillNames[r0];
+    return gIQSkillNames[skill];
 }
 
-void CopyTacticsNameToBuffer(char *r0, u8 r1)
+void CopyTacticsNameToBuffer(char *buffer, u8 tactic)
 {
-    strncpy(r0, gTactics[r1], 0x14);
+    strncpy(buffer, gTactics[tactic], 0x14);
 }
 
-u32 GetIQSkillDescription(u8 r0)
+u8 *GetIQSkillDescription(u8 skill)
 {
-    return gIQSkillDescriptions[r0];
+    return gIQSkillDescriptions[skill];
 }
 
-u32 GetTacticsDescription(u8 r0)
+u8 *GetTacticsDescription(u8 tactic)
 {
-    return gTacticsDescriptions[r0];
+    return gTacticsDescriptions[tactic];
 }
 
 bool8 TacticsTargetLeader(u8 tactic)
@@ -952,7 +951,7 @@ void sub_808F468(struct PokemonStruct *param_1, struct EvolveStatus *evolveStatu
             if ((evolveConditions.preEvolution.evolveType == EVOLVE_TYPE_NONE) || (param_1->speciesNum != evolveConditions.preEvolution.evolveFrom)) continue;
             friendArea = ((u8 (*)(s32))GetFriendArea)(index2); // UB
             uVar2 = GetFriendArea(param_1->speciesNum);
-            sub_8092638(friendArea,&local_40,0,0);
+            sub_8092638(friendArea,&local_40,FALSE,FALSE);
             if (!local_40.hasFriendArea) {
                 evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_FRIEND_AREA;
                 evolFlag = TRUE;

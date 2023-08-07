@@ -1,5 +1,6 @@
 #include "global.h"
 #include "pokemon.h"
+#include "pokemon_3.h"
 #include "file_system.h"
 #include "item.h"
 #include "moves.h"
@@ -29,7 +30,6 @@ extern u16 gLevelCurrentPokeId;
 extern struct LevelData gLevelCurrentData[];
 
 
-extern s16 GetBaseSpecies(s16);
 extern int sprintf(char *, const char *, ...);
 extern u32 ReturnIntFromChar(u8 r0);
 extern void CopyAndResetMoves(void*, void*);

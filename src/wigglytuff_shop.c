@@ -162,9 +162,9 @@ bool8 sub_80211AC(u32 mode, u32 param_2)
     }
 }
 
-u32 sub_8021274(u8 param_1)
+u32 sub_8021274(bool8 param_1)
 {
-    if (param_1 == 0) {
+    if (!param_1) {
         sub_8013660(&gUnknown_203B280->unk40);
         return 0;
     }
@@ -563,7 +563,7 @@ void sub_8021A60(void)
             gUnknown_203B28C->unk30[sVar4] = 1;
         }
     }
-    for(index = 0; index < 0x19d; index++)
+    for(index = 0; index < NUM_MONSTERS; index++)
     {
         pokeStruct = &gRecruitedPokemonRef->pokemon[index];
         if (((*(u8 *)&pokeStruct->unk0 & 1) != 0) &&
@@ -816,7 +816,7 @@ void UpdateWigglytuffDialogue(void)
             sub_8023354(1);
             break;
         case DISPLAY_POKEMON_FRIEND_AREA_INFO:
-            sub_8092638(gWigglytuffShop->chosenFriendArea,&uStack_14,0,0);
+            sub_8092638(gWigglytuffShop->chosenFriendArea,&uStack_14,FALSE,FALSE);
             if (uStack_14.hasFriendArea) {
                 gWigglytuffShop->fallbackState = WIGGLYTUFF_CHECK_HAS_FRIEND_AREA;
             }

@@ -18,6 +18,7 @@
 #include "code_8021774.h"
 #include "code_80118A4.h"
 #include "wigglytuff_shop.h"
+#include "event_flag.h"
 
 struct unkStruct_203B258
 {
@@ -104,7 +105,6 @@ struct unk_203B250 *gUnknown_203B250;
 extern bool8 HasNoAcceptedJobs(void);
 extern bool8 sub_8024108(u32);
 extern bool8 sub_8096E2C(void);
-extern bool8 sub_80023E4(u32);
 extern u32 sub_801DCC4(void);
 extern u32 sub_8027074(void);
 extern void sub_80227B8(struct PokemonStruct *);

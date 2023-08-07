@@ -12,6 +12,7 @@
 #include "code_8094F88.h"
 #include "menu_input.h"
 #include "code_80130A8.h"
+#include "event_flag.h"
 
 struct unkStruct_203B2C8
 {
@@ -52,7 +53,6 @@ extern void sub_802B624(void);
 extern void sub_802F204(struct unkStruct_802F204 *, u32);
 extern void sub_803C37C(struct DungeonLocation *, u32, u8 *);
 extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
-extern bool8 sub_80023E4(u32);
 
 ALIGNED(4) const char gRescueTeamNamePlaceholder[] = "????";
 

@@ -464,7 +464,7 @@ NAKED void sub_8092404(u8 r0, u16 *r1, bool8 r2, bool8 r3)
 }
 #endif
 
-void sub_809249C(u8 friendArea, u8 clear)
+void sub_809249C(u8 friendArea, bool8 clear)
 {
     s32 index;
     bool32 dungeonCheck;
@@ -558,7 +558,7 @@ bool8 HasAllFriendAreas(void)
     return TRUE;
 }
 
-void sub_8092638(u8 friendArea, struct unkStruct_8092638 *param_2, u8 param_3, u8 param_4)
+void sub_8092638(u8 friendArea, struct unkStruct_8092638 *param_2, bool8 checkLeader, bool8 checkDungeon)
 {
     struct PokemonStruct *pokeStruct;
     s32 counter;
@@ -582,8 +582,8 @@ void sub_8092638(u8 friendArea, struct unkStruct_8092638 *param_2, u8 param_3, u
         {
             pokeStruct = &gRecruitedPokemonRef->pokemon[iVar4];
             if (((((u8)pokeStruct->unk0 & 1) != 0) &&
-                ((param_3 == 0 || (!pokeStruct->isTeamLeader)))) &&
-                ((param_4 == 0 || ((pokeStruct->dungeonLocation).id != DUNGEON_JOIN_LOCATION_PARTNER)))) {
+                ((checkLeader == 0 || (!pokeStruct->isTeamLeader)))) &&
+                ((checkDungeon == 0 || ((pokeStruct->dungeonLocation).id != DUNGEON_JOIN_LOCATION_PARTNER)))) {
                 param_2->unk2++;
             }
         }

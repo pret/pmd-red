@@ -1,7 +1,7 @@
 #include "global.h"
 #include "code_80A26CC.h"
+#include "event_flag.h"
 
-extern bool8 sub_80023E4(u32);
 extern u8 sub_80973F4(s16);
 extern u8 sub_8097384(s16);
 s16 sub_80A26B8(s16);

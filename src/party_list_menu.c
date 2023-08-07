@@ -15,6 +15,7 @@
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
 #include "code_80118A4.h"
+#include "event_flag.h"
 
 struct unkStruct_203B2B8
 {
@@ -165,7 +166,6 @@ ALIGNED(4) static const u8 fill0[] = "pksdir0";
 extern u32 sub_8026F04(struct PokemonStruct *);
 extern void sub_8026074(s32);
 bool8 CanTakePokemonHeldItem(struct PokemonStruct *r0);
-extern bool8 sub_80023E4(u8);
 extern struct PokemonStruct *sub_808D3F8(void);
 extern struct PokemonStruct *sub_808D3BC(void);
 extern void sub_801F214(void);

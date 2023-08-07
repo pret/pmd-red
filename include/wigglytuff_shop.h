@@ -68,7 +68,7 @@ enum WigglytuffStates
 
 bool8 sub_80211AC(u32 mode, u32 param_2);
 bool8 sub_8021774(u8 friendArea, bool8 param_2, s32 param_3);
-u32 sub_8021274(u8 param_1);
+u32 sub_8021274(bool8 param_1);
 u8 sub_802132C(void);
 void sub_8021354(bool8 param_1);
 void sub_80213A0(void);

@@ -12,6 +12,7 @@
 #include "code_801EE10_1.h"
 #include "code_801B3C0.h"
 #include "code_80118A4.h"
+#include "event_flag.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 extern struct TeamInventory *gTeamInventoryRef;
@@ -25,7 +26,6 @@ extern void sub_8099690(u32);
 
 extern void sub_8027EB8();
 extern void sub_808D31C(struct PokemonStruct *);
-extern bool8 sub_80023E4(u32);
 extern struct PokemonStruct *sub_808D3F8(void);
 extern struct PokemonStruct *sub_808D3BC(void);
 extern u32 sub_801F890(void);

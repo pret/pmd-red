@@ -13,6 +13,7 @@
 #include "friend_area.h"
 #include "item.h"
 #include "pokemon.h"
+#include "pokemon_3.h"
 #include "position_util.h"
 #include "exclusive_pokemon.h"
 
@@ -330,7 +331,6 @@ extern void IncreaseEntityPixelPos(struct Entity *, u32, u32);
 extern void sub_8042B0C(struct Entity *);
 extern void DisplayDungeonDialogue(u32 *);
 extern void sub_803E708(u32, u32);
-extern u8 HasRecruitedMon(u32);
 extern u8 sub_806FD18(struct Entity *);
 extern void sub_80861D4(struct Entity *, u32, s32 direction);
 extern void sub_806FDF4(struct Entity *, struct Entity *, struct Entity **);

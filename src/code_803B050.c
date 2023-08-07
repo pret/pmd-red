@@ -1,5 +1,8 @@
 #include "global.h"
 #include "pokemon.h"
+#include "pokemon_3.h"
+#include "event_flag.h"
+#include "exclusive_pokemon.h"
 
 extern s16 gUnknown_80E8126[];
 
@@ -7,9 +10,6 @@ extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern struct PokemonStruct *sub_808D378(void);
 
 extern bool8 sub_803C0DC(s16);
-extern bool8 sub_8098134(s16);
-extern s16 GetBaseSpecies(s16);
-extern bool8 sub_80023E4(u32);
 
 bool8 sub_803C110(s16 index)
 {
