@@ -19,7 +19,7 @@ EWRAM_DATA u32 gUnknown_202B024;
 EWRAM_DATA u32 gUnknown_202B028[2];
 EWRAM_DATA u32 gUnknown_202B030;
 EWRAM_DATA u8 gUnknown_202B034;
-EWRAM_DATA u16 gUnknown_202B038[2][32][32];
+EWRAM_DATA u16 gUnknown_202B038[4][32][32];
 
 // ?
 extern char gUnknown_3000E94[];

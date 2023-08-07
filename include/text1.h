@@ -4,6 +4,7 @@
 #include "text.h"
 
 extern EWRAM_DATA struct UnkTextStruct2 gUnknown_202AFC0[4];
+extern EWRAM_DATA u16 gUnknown_202B038[4][32][32];
 
 void LoadCharmaps(void);
 void SelectCharmap(u32);
