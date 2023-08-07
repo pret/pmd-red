@@ -3,6 +3,7 @@
 
 #include "text.h"
 
+extern EWRAM_DATA struct UnkTextStruct1 gUnknown_2027370[4];
 extern EWRAM_DATA struct UnkTextStruct2 gUnknown_202AFC0[4];
 extern EWRAM_DATA u16 gUnknown_202B038[4][32][32];
 

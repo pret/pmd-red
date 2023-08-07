@@ -2,6 +2,7 @@
 #include "constants/colors.h"
 #include "constants/input.h"
 #include "menu.h"
+#include "text1.h"
 #include "text2.h"
 #include "util.h"
 #include "code_800D090.h"
@@ -13,7 +14,6 @@ struct unkChar
     s16 unk4;
     s16 unk6;
 };
-extern struct UnkTextStruct1 gUnknown_2027370[4];
 extern u8 gUnknown_80D4828[];
 
 extern void PlayMenuSoundEffect(u32);
