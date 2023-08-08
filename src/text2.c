@@ -1929,59 +1929,40 @@ void nullsub_129(u32 a0, s32 x, s32 y, s32 a3, u32 color)
 {
 }
 
-#if NONMATCHING // Close... https://decomp.me/scratch/t6ImV
 void sub_8007958(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color)
 {
-    s32 iVar2;
     u32 uVar4;
-
-    s32 r2;
+    u32 *dest;
     s32 r4;
+    const struct unkShiftData *shiftData;
     struct UnkTextStruct1 *r5;
     s32 r6;
     u32 r9;
-
-    const struct unkShiftData *shiftData;
     struct unkStruct_80B8824 dataLOL;
-    s32 lol;
-    s32 helpmepls;
-    u32 *dest;
 
     r5 = &a0[a1];
     r9 = gUnknown_80B853C[color & 0xf];
 
-    helpmepls = y;
-    if (helpmepls < 0)
-        helpmepls += 7;
-    r4 = helpmepls >> 3;
-    lol = r4 * r5->unk4;
+    r4 = y / 8;
 
-    helpmepls = x;
-    if (helpmepls < 0)
-        helpmepls += 7;
-    r2 = helpmepls >> 3;
+    dest = r5->unk18 + ((r5->unk4 * r4 + x / 8) * 8);
+    dest += (r4 * -8 + y);
+    r6 = x / 8;
 
-    dest = r5->unk18 + ((lol + r2) * 8) + (r4 * -2) + y;
-    r6 = r2;
-
-    if (r4 >= r5->unk8)
+    if (y / 8 >= r5->unk8)
         return;
 
     dataLOL = gUnknown_80B8824;
 
     for (; a4 > 0; a4 -= 8) {
-        lol = a4;
-        if (a4 > 7)
+        s32 lol = a4;
+        if (lol > 7)
             lol = 8;
 
-        iVar2 = x;
-        if (x < 0)
-            iVar2 = x + 7;
-        iVar2 >>= 3;
+        shiftData = &gUnknown_80B85DC[x + (x / 8 * -8)];
 
-        shiftData = &gUnknown_80B85DC[x + (iVar2 * -8)];
-
-        uVar4 = (dataLOL.arr[lol] & 0x11111111) + (dataLOL.arr[lol] & r9);
+        uVar4 = dataLOL.arr[lol];
+        uVar4 = (uVar4 & 0x11111111) + (uVar4 & r9);
 
         if (uVar4 != 0) {
             if (r6 < r5->unk4) {
@@ -2007,163 +1988,6 @@ void sub_8007958(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 co
         dest += 8;
     }
 }
-#else
-NAKED
-void sub_8007958(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color)
-{
-    asm_unified(
-    "push {r4-r7,lr}\n"
-    "\tmov r7, r9\n"
-    "\tmov r6, r8\n"
-    "\tpush {r6,r7}\n"
-    "\tsub sp, 0x24\n"
-    "\tmov r8, r2\n"
-    "\tadds r7, r3, 0\n"
-    "\tldr r2, [sp, 0x40]\n"
-    "\tmov r12, r2\n"
-    "\tldr r3, [sp, 0x44]\n"
-    "\tlsls r2, r1, 3\n"
-    "\tadds r2, r1\n"
-    "\tlsls r2, 3\n"
-    "\tadds r5, r0, r2\n"
-    "\tldr r1, _08007A68\n"
-    "\tmovs r0, 0xF\n"
-    "\tands r3, r0\n"
-    "\tlsls r3, 2\n"
-    "\tadds r3, r1\n"
-    "\tldr r3, [r3]\n"
-    "\tmov r9, r3\n"
-    "\tadds r0, r7, 0\n"
-    "\tcmp r7, 0\n"
-    "\tbge _0800798A\n"
-    "\tadds r0, r7, 0x7\n"
-"_0800798A:\n"
-    "\tasrs r4, r0, 3\n"
-    "\tmovs r1, 0x4\n"
-    "\tldrsh r0, [r5, r1]\n"
-    "\tmuls r0, r4\n"
-    "\tmov r2, r8\n"
-    "\tcmp r2, 0\n"
-    "\tbge _0800799A\n"
-    "\tadds r2, 0x7\n"
-"_0800799A:\n"
-    "\tasrs r2, 3\n"
-    "\tadds r0, r2\n"
-    "\tlsls r0, 5\n"
-    "\tldr r1, [r5, 0x18]\n"
-    "\tadds r3, r1, r0\n"
-    "\tlsls r0, r4, 3\n"
-    "\tsubs r0, r7, r0\n"
-    "\tlsls r0, 2\n"
-    "\tadds r3, r0\n"
-    "\tadds r6, r2, 0\n"
-    "\tmovs r2, 0x8\n"
-    "\tldrsh r0, [r5, r2]\n"
-    "\tcmp r4, r0\n"
-    "\tbge _08007A58\n"
-    "\tmov r1, sp\n"
-    "\tldr r0, _08007A6C\n"
-    "\tldm r0!, {r2,r4,r7}\n"
-    "\tstm r1!, {r2,r4,r7}\n"
-    "\tldm r0!, {r2,r4,r7}\n"
-    "\tstm r1!, {r2,r4,r7}\n"
-    "\tldm r0!, {r2,r4,r7}\n"
-    "\tstm r1!, {r2,r4,r7}\n"
-    "\tmov r4, r12\n"
-    "\tcmp r4, 0\n"
-    "\tble _08007A58\n"
-    "\tldr r7, _08007A70\n"
-"_080079CE:\n"
-    "\tmov r1, r12\n"
-    "\tcmp r1, 0x7\n"
-    "\tble _080079D6\n"
-    "\tmovs r1, 0x8\n"
-"_080079D6:\n"
-    "\tmov r0, r8\n"
-    "\tcmp r0, 0\n"
-    "\tbge _080079DE\n"
-    "\tadds r0, 0x7\n"
-"_080079DE:\n"
-    "\tasrs r0, 3\n"
-    "\tlsls r0, 3\n"
-    "\tmov r2, r8\n"
-    "\tsubs r0, r2, r0\n"
-    "\tlsls r0, 4\n"
-    "\tadds r4, r0, r7\n"
-    "\tlsls r0, r1, 2\n"
-    "\tadd r0, sp\n"
-    "\tldr r2, [r0]\n"
-    "\tldr r1, _08007A74\n"
-    "\tands r1, r2\n"
-    "\tmov r0, r9\n"
-    "\tands r0, r2\n"
-    "\tadds r2, r1, r0\n"
-    "\tcmp r2, 0\n"
-    "\tbeq _08007A48\n"
-    "\tmovs r1, 0x4\n"
-    "\tldrsh r0, [r5, r1]\n"
-    "\tcmp r6, r0\n"
-    "\tbge _08007A24\n"
-    "\tldr r1, [r4]\n"
-    "\tands r1, r2\n"
-    "\tldr r0, [r4, 0x8]\n"
-    "\tlsls r1, r0\n"
-    "\tldr r0, [r3]\n"
-    "\torrs r0, r1\n"
-    "\tstr r0, [r3]\n"
-    "\tldr r0, [r5, 0x3C]\n"
-    "\tcmp r0, r3\n"
-    "\tbls _08007A1C\n"
-    "\tstr r3, [r5, 0x3C]\n"
-"_08007A1C:\n"
-    "\tldr r0, [r5, 0x40]\n"
-    "\tcmp r0, r3\n"
-    "\tbcs _08007A24\n"
-    "\tstr r3, [r5, 0x40]\n"
-"_08007A24:\n"
-    "\tmovs r1, 0x4\n"
-    "\tldrsh r0, [r5, r1]\n"
-    "\tsubs r0, 0x1\n"
-    "\tcmp r6, r0\n"
-    "\tbge _08007A48\n"
-    "\tadds r3, 0x20\n"
-    "\tldr r0, [r4, 0x4]\n"
-    "\tands r2, r0\n"
-    "\tldr r0, [r4, 0xC]\n"
-    "\tlsrs r2, r0\n"
-    "\tldr r0, [r3]\n"
-    "\torrs r0, r2\n"
-    "\tstr r0, [r3]\n"
-    "\tldr r0, [r5, 0x40]\n"
-    "\tcmp r0, r3\n"
-    "\tbcs _08007A46\n"
-    "\tstr r3, [r5, 0x40]\n"
-"_08007A46:\n"
-    "\tsubs r3, 0x20\n"
-"_08007A48:\n"
-    "\tadds r6, 0x1\n"
-    "\tadds r3, 0x20\n"
-    "\tmovs r2, 0x8\n"
-    "\tnegs r2, r2\n"
-    "\tadd r12, r2\n"
-    "\tmov r4, r12\n"
-    "\tcmp r4, 0\n"
-    "\tbgt _080079CE\n"
-"_08007A58:\n"
-    "\tadd sp, 0x24\n"
-    "\tpop {r3,r4}\n"
-    "\tmov r8, r3\n"
-    "\tmov r9, r4\n"
-    "\tpop {r4-r7}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-"_08007A68: .4byte gUnknown_80B853C\n"
-"_08007A6C: .4byte gUnknown_80B8824\n"
-"_08007A70: .4byte gUnknown_80B85DC\n"
-"_08007A74: .4byte 0x11111111");
-}
-#endif // NONMATCHING
 
 void sub_8007A78(u32 a0, s32 x, s32 y, s32 a3, u32 color)
 {
