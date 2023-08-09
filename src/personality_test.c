@@ -1,11 +1,9 @@
 #include "global.h"
-#include "input.h"
 #include "personality_test.h"
 #include "constants/emotions.h"
 #include "constants/input.h"
 #include "constants/type.h"
 #include "random.h"
-#include "file_system.h"
 #include "pokemon.h"
 #include "save.h"
 #include "memory.h"
@@ -13,8 +11,8 @@
 #include "text1.h"
 #include "text2.h"
 #include "text_util.h"
-#include "menu.h"
 #include "menu_input.h"
+#include "code_80130A8.h"
 
 enum
 {
@@ -44,18 +42,12 @@ extern s32 sub_8094E4C(void);
 extern void sub_8094D28(s32);
 extern void sub_8001044(u32 *);
 
-extern void sub_80141B4(const char *text, u32 r1, u32 r2, u16 r3);
-extern void sub_8014248(const char *text, u32, u32, const struct MenuItem *r0, u32, u32, u32, u32, u32);
-
-extern u32 sub_80144A4(s32 *);
-
 extern void sub_801602C(u32, char *r0);
 
 extern u32 sub_8016080(void);
 extern void sub_80160D8(void);
 extern void sub_8099690(u32);
 
-extern void sub_8008C54(u32);
 extern void sub_800836C(u32, u8 *r0, u32);
 extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);
 

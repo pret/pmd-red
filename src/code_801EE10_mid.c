@@ -3,13 +3,13 @@
 #include "text1.h"
 #include "text2.h"
 #include "pokemon.h"
-#include "input.h"
 #include "code_800D090.h"
 #include "moves.h"
 #include "code_801EE10.h"
 #include "menu_input.h"
 #include "subStruct_203B240.h"
 #include "sprite.h"
+#include "code_80130A8.h"
 
 extern struct unkStruct_203B270 *gUnknown_203B270;
 
@@ -56,7 +56,6 @@ extern u8 gUnknown_80DC310[];
 extern u8 gUnknown_80DC2DC[];
 
 extern void PlayMenuSoundEffect(u32);
-extern void sub_8008C54(u32);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 extern void sub_801F918(s32);
 extern void sub_801FA58(void);
@@ -64,7 +63,6 @@ extern void sub_801FAD4(void);
 extern void sub_801F930(void);
 extern void sub_801F9A4(void);
 int unk_MoveIDPrintMoveDescription(int a1, u16 moveID, int a3, struct subStruct_203B240** a4);
-extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 void sub_8013F84(void);
 
 

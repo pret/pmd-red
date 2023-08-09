@@ -1,5 +1,5 @@
 #include "global.h"
-#include "input.h"
+#include "code_80130A8.h"
 #include "item.h"
 #include "kangaskhan_storage.h"
 #include "kecleon_bros.h"
@@ -37,15 +37,6 @@ extern const u8 gUnknown_80DB830[]; // "Number?\0"
 
 extern const u8 *gKangaskhanStorageDialogue[2][20];
 
-// text.s
-extern void sub_8008C54(u32);
-// code_80130A8.s
-extern void sub_8013AA0(u32 *);
-extern u32 sub_8013BBC(u32 *);
-extern void sub_8013C68(u32 *);
-extern void sub_80141B4(const u8 *r0, u32, struct OpenedFile **r1, u32);
-extern void sub_8014248(const u8 *r0, u32, u32, const struct MenuItem *r4, u16 *, u32, u32, struct OpenedFile **r5, u32);
-extern s32 sub_80144A4(s32 *);
 // code_801B3C0.c
 extern void sub_801B3C0(struct Item *);
 extern u32 sub_801B410(void);

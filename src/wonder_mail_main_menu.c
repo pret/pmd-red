@@ -7,8 +7,8 @@
 #include "text2.h"
 #include "input.h"
 #include "wonder_mail.h"
-#include "menu.h"
 #include "code_8094F88.h"
+#include "code_80130A8.h"
 
 #define SELECT_WONDER_MAIL_MODE_MAIN_SCREEN 0
 #define SEND_WONDER_MAIL_MAIN_SCREEN 1
@@ -121,7 +121,6 @@ struct unkStruct_203B3E8
 
 EWRAM_DATA_2 struct unkStruct_203B3E8 *gUnknown_203B3E8 = {0};
 
-extern u32 sub_80144A4(s32 *);
 extern u32 sub_8011C1C(void);
 extern void SetWonderMailMainMenuState(u8);
 extern void sub_8030DE4(void);
@@ -137,7 +136,6 @@ extern s32 sub_80381F4(u32, void *, void *);
 extern void sub_8011830(void);
 extern void sub_80151C0(u32, u8 *);
 extern void xxx_call_start_bg_music(void);
-extern void sub_8014248(const char *, u32, u32, const struct MenuItem *, u32, u32, u32, u32, u32);
 extern void nullsub_23(u32);
 extern void sub_802EF48(void);
 extern void sub_802D098(struct WonderMail *);
@@ -156,7 +154,6 @@ extern void sub_802D184();
 extern s32 sub_80154F0();
 extern bool8 DecodeWonderMailPassword(u8 *, struct WonderMail *);
 extern bool8 IsValidWonderMail(struct WonderMail *WonderMailData);
-extern void sub_80141B4(const char *r0, u32, u32 *r1, u32);
 
 void PrintWonderMailMainMenuError(u32);
 void HandleWonderMailMainScreen(void);

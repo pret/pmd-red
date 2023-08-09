@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "text.h"
 
 u32 sub_8012A64(struct MenuInputStructSub *r0, s32 r1);
 s32 GetKeyPress(struct MenuInputStruct *r0);

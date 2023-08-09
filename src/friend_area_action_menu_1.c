@@ -2,14 +2,13 @@
 #include "constants/dungeon.h"
 #include "memory.h"
 #include "text2.h"
-#include "input.h"
-#include "menu.h"
 #include "item.h"
 #include "team_inventory.h"
 #include "pokemon.h"
 #include "friend_area_action_menu.h"
 #include "menu_input.h"
 #include "kecleon_bros.h"
+#include "code_80130A8.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 extern struct TeamInventory *gTeamInventoryRef;
@@ -24,7 +23,6 @@ extern void PlaySound(u32);
 extern void nullsub_104();
 extern void sub_8099690(u32);
 
-extern s32 sub_80144A4(s32 *);
 extern void sub_8027EB8();
 extern void sub_808D31C(struct PokemonStruct *);
 extern bool8 sub_80023E4(u32);
@@ -32,8 +30,6 @@ extern struct PokemonStruct *sub_808D3F8(void);
 extern struct PokemonStruct *sub_808D3BC(void);
 extern u32 sub_801F890(void);
 extern void sub_801F8D0(void);
-extern void xxx_format_and_draw(u32, u32, const u8 *, ...);
-extern void sub_8008C54(u32);
 extern u8 gUnknown_202DE58[];
 extern u32 sub_801F194(void);
 

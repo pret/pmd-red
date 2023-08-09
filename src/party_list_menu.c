@@ -1,8 +1,6 @@
 #include "global.h"
 #include "constants/dungeon.h"
 #include "item.h"
-#include "input.h"
-#include "menu.h"
 #include "memory.h"
 #include "pokemon.h"
 #include "text1.h"
@@ -14,6 +12,7 @@
 #include "menu_input.h"
 #include "moves.h"
 #include "kecleon_bros.h"
+#include "code_80130A8.h"
 
 struct unkStruct_203B2B8
 {
@@ -171,10 +170,7 @@ extern struct PokemonStruct *sub_808D3BC(void);
 extern void sub_801F214(void);
 extern u32 sub_801F194(void);
 extern u32 sub_801EF38(u32);
-extern void sub_8008C54(u32);
 extern s32 sub_8008ED0(u8 *);
-extern void xxx_format_and_draw(s32, s32, const u8 *, ...);
-extern s32 sub_80144A4(s32 *);
 extern u32 sub_801F890(void);
 extern void sub_801F8D0(void);
 extern u32 sub_801B410(void);
@@ -206,8 +202,6 @@ extern void sub_80227B8(struct PokemonStruct *);
 extern void sub_801B3C0(struct Item *);
 extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
 extern void sub_801F1B0(u32, u32);
-extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, void *r5, u32);
-extern void sub_80141B4(const u8 *, u32, u32 *, u32);
 extern void sub_808D31C(struct PokemonStruct *);
 
 void sub_802678C(void);

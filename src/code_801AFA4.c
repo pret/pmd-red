@@ -6,6 +6,7 @@
 #include "menu.h"
 #include "pokemon.h"
 #include "gulpin_shop.h"
+#include "code_80130A8.h"
 
 extern void sub_8092C84(u8 *, u16);
 extern void sub_8099690(u32);
@@ -19,9 +20,9 @@ extern void sub_801B2D8(void);
 extern void nullsub_37();
 extern void sub_801B080();
 
-extern u32 gUnknown_80DB9BC;
-extern u32 gUnknown_80DB9E4;
-extern u32 gUnknown_80DBA0C;
+extern const u8 gUnknown_80DB9BC[];
+extern const u8 gUnknown_80DB9E4[];
+extern const u8 gUnknown_80DBA0C[];
 
 extern u8 gUnknown_202E1C8[0x50];
 extern u8 gAvailablePokemonNames[0x50];
@@ -33,10 +34,7 @@ extern bool8 IsHMItem(u8);
 extern void sub_801B178(void);
 extern void sub_8094060(void *, struct Move *);
 extern void PlaySound(u32);
-extern void sub_80141B4(u32 *, u32, u32 ,u32);
-extern void sub_8014248(u32 *, u32, u32, struct MenuItem *, u32, u32, u32, u32, u32);
 extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
-extern s32 sub_80144A4(s32 *);
 extern u32 sub_801E8C0(void);
 
 extern bool8 CanMonLearnMove(u16 moveID, s16 _species);
@@ -126,7 +124,7 @@ void sub_801B080(void)
             sub_801B178();
             // {CENTER_ALIGN}Who will learn the move
             // {CENTER_ALIGN}{COLOR_1 CYAN}{ARG_POKEMON_7}{END_COLOR_TEXT_1}?
-            sub_8014248(&gUnknown_80DB9BC, 0, gUnknown_203B22C->unk60, gUnknown_203B22C->menuItems, 0, 4, 0, 0, 0x20);
+            sub_8014248(gUnknown_80DB9BC, 0, gUnknown_203B22C->unk60, gUnknown_203B22C->menuItems, 0, 4, 0, 0, 0x20);
             break;
         case 1:
             CreateGulpinShop(2, gUnknown_203B22C->chosenPokemon, gUnknown_203B22C->moves);
@@ -141,12 +139,12 @@ void sub_801B080(void)
             PlaySound(0x9C << 1);
             // {CENTER_ALIGN}CM{ARG_POKEMON_8}{END_COLOR_TEXT_1} learned
             // {CENTER_ALIGN}the move {COLOR_1 CYAN}{ARG_POKEMON_7}{END_COLOR_TEXT_1}!
-            sub_80141B4(&gUnknown_80DB9E4, 0, 0, 0x121);
+            sub_80141B4(gUnknown_80DB9E4, 0, 0, 0x121);
             break;
         case 3:
             // {CENTER_ALIGN}No one in the current team
             // {CENTER_ALIGN}can learn this move.
-            sub_80141B4(&gUnknown_80DBA0C, 0, 0, 0x121);
+            sub_80141B4(gUnknown_80DBA0C, 0, 0, 0x121);
             break;
         default:
         case 4:

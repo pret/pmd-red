@@ -81,7 +81,6 @@ extern void sub_80308A0(void);
 extern void sub_803092C(void);
 
 extern void PlayMenuSoundEffect(u32);
-extern void sub_8008C54(u32);
 extern void CreateRescueTitle(struct unkStruct_802C39C *);
 
 u32 sub_80306A8(u32 wonderMailType, u32 r1, struct UnkTextStruct2_sub *r2, u32 r3)

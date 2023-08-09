@@ -47,7 +47,6 @@ const struct UnkTextStruct2 gUnknown_80E1FC4 = {
 ALIGNED(4) const u8 gUnknown_80E1FDC[] = "Password";
 ALIGNED(4) static const u8 fill0[] = "pksdir0";
 
-extern void sub_8008C54(u32);
 extern void sub_803D2C0(u8 *, struct unkStruct_203B480 *);
 extern void PlayMenuSoundEffect(u32);
 

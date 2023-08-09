@@ -2,8 +2,6 @@
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
-#include "input.h"
-#include "menu.h"
 #include "item.h"
 #include "pokemon.h"
 #include "team_inventory.h"
@@ -11,11 +9,10 @@
 #include "menu_input.h"
 #include "kecleon_bros.h"
 #include "sprite.h"
+#include "code_80130A8.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 
-extern void sub_80141B4(const char *r0, u32, u32 *r1, u32);
-extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u32, u32, u32, u32 *r5, u32);
 extern void sub_8027D40(u32, struct BulkItem *);
 extern void sub_8023868(u32, u32, u32, u32);
 extern void sub_8023B7C(u32);

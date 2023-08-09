@@ -1,7 +1,8 @@
 #include "global.h"
+#include "code_800D090.h"
+#include "code_80130A8.h"
 #include "constants/colors.h"
 #include "constants/input.h"
-#include "code_800D090.h"
 #include "dungeon.h"
 #include "makuhita_dojo.h"
 #include "memory.h"
@@ -66,11 +67,7 @@ ALIGNED(4) const u8 gUnknown_80E0824[] = _("{STAR_BULLET}");
 ALIGNED(4) const u8 gMakuhitaCoursePlaceholder[] = _("{COLOR_2}%c%s{END_COLOR_TEXT_2}");
 static const u8 makuhita_dojo_fill3[] = "pksdir0";
 
-extern void sub_8008C54(u32);
 extern u32 sub_80095E4(s16, u32);
-extern void sub_80141B4(const u8 *, u32, struct OpenedFile **, u32);
-extern void sub_8014248(const u8 *, u32, u32, const struct MenuItem *, void *, u32, u32, struct OpenedFile **, u32);
-extern s32 sub_80144A4(s32 *);
 extern u32 sub_801B60C(u32, u8, u8);
 extern u32 sub_801B6AC(void);
 extern void sub_801B72C(void);

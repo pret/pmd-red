@@ -1,15 +1,13 @@
 #include "constants/input.h"
 #include "global.h"
-#include "file_system.h"
-#include "input.h"
 #include "pokemon.h"
 #include "pokemon_mail.h"
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
-#include "menu.h"
 #include "save.h"
 #include "menu_input.h"
+#include "code_80130A8.h"
 
 struct unkStruct_203B2CC
 {
@@ -169,9 +167,7 @@ extern void sub_802BB28(void);
 extern void sub_8013E54(void);
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
-extern void sub_8008C54(u32);
 extern void sub_802BC7C(void);
-extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern void sub_803B6B0(u32, u32, u32, u32);
 extern struct PokemonStruct *sub_808D3BC(void);
 extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);

@@ -1,13 +1,12 @@
 #include "global.h"
-#include "input.h"
 #include "item.h"
 #include "team_inventory.h"
 #include "memory.h"
-#include "menu.h"
 #include "text1.h"
 #include "text2.h"
 #include "menu_input.h"
 #include "friend_area.h"
+#include "code_80130A8.h"
 
 struct unkStruct_203B3F0
 {
@@ -97,16 +96,12 @@ extern bool8 *gFriendAreas;
 extern const char *gUnknown_80D4970[];
 
 extern void sub_801B3C0(struct Item *);
-extern void sub_8013AA0(u32 *);
 extern void sub_801C8C4(u32, u32, u32, u32);
 extern void sub_801CB5C(u32);
 extern void sub_801CCD8();
-extern void sub_8008C54(u32);
-extern void sub_8013C68(u32 *);
 extern u32 sub_801CA08(u32);
 extern u8 sub_801CB24();
 extern void sub_801CBB8();
-extern u32 sub_8013BBC(u32 *);
 extern u32 sub_801B410();
 extern void sub_801B450();
 extern void sub_80211AC(u32, u32);

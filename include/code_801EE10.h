@@ -1,6 +1,10 @@
 #ifndef CODE_801EE10_H
 #define CODE_801EE10_H
 
+#include "input.h"
+#include "pokemon.h"
+#include "text.h"
+
 struct unkStruct_203B270
 {
     // size 0xBC

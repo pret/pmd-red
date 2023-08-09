@@ -1,13 +1,11 @@
 #include "global.h"
 #include "memory.h"
-#include "input.h"
-#include "file_system.h"
 #include "text1.h"
 #include "text2.h"
 #include "pokemon.h"
-#include "menu.h"
 #include "code_8094F88.h"
 #include "menu_input.h"
+#include "code_80130A8.h"
 
 extern bool8 HasNoWonderMailType(u32);
 
@@ -80,7 +78,6 @@ ALIGNED(4) const u8 gUnknown_80E0A0C[] = _(
 const u8 wonder_mail_6_fill[] = "pksdir0";
 
 extern void sub_80306A8(s32, u32, u32, u32);
-extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void sub_8031300(void);
 extern void sub_803136C(void);
 extern void sub_80313D8(u32);

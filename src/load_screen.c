@@ -54,7 +54,6 @@ extern u32 GetNumAdventures(void);
 extern void PrintDungeonLocationtoBuffer(u8 *, u8 *);
 extern u32 sub_8001658(u32, u32);
 
-extern void sub_8008C54(u32);
 extern void xxx_format_string(u8 *, u8 *, u8 *, u32);
 
 extern void SetBGPaletteBufferColorArray(s32, s32);
@@ -396,8 +395,7 @@ void sub_80397B4(void)
   for(index = 0; index < 12; index++)
   {
     if (sub_80023E4(gUnknown_203B3B8[index])) {
-      sub_8007E20(0,x,y,0x10,0x10,*(int *)(clmkFile->data) + index * 0x80,
-                  gUnknown_203B388[index]);
+      sub_8007E20(0,x,y,0x10,0x10,(u8 *)(*((s32*)clmkFile->data) + index * 0x80), gUnknown_203B388[index]);
       x += 16;
     }
   }

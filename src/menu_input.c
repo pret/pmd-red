@@ -1,18 +1,17 @@
 #include "global.h"
 #include "constants/colors.h"
 #include "constants/input.h"
-#include "menu.h"
 #include "text1.h"
 #include "text2.h"
 #include "util.h"
 #include "code_800D090.h"
 #include "menu_input.h"
+#include "code_80130A8.h"
 
 extern u8 gUnknown_80D4828[];
 
 extern void PlayMenuSoundEffect(u32);
 extern s32 sub_8008ED0(const u8 *);
-extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 void AddMenuCursorSprite_(struct MenuInputStruct *, u32);
 void sub_8012EBC(struct MenuStruct *param_1);
 extern void sub_8013134(struct MenuInputStruct *, u32, u32);

@@ -2,22 +2,19 @@
 #include "constants/communication_error_codes.h"
 #include "save.h"
 #include "pokemon.h"
-#include "file_system.h"
 #include "item.h"
-#include "input.h"
 #include "wonder_mail.h"
 #include "memory.h"
-#include "menu.h"
 #include "text1.h"
 #include "text2.h"
 #include "team_inventory.h"
 #include "rescue_password_menu.h"
 #include "menu_input.h"
 #include "code_8094F88.h"
+#include "code_80130A8.h"
 
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 
-extern u32 sub_80144A4(s32 *r0);
 extern void sub_8011C28(u32);
 
 extern void sub_809927C(u8);
@@ -29,7 +26,6 @@ extern bool8 sub_80A2824(u8);
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 
-extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void nullsub_130(void);
 extern void sub_8028348(void);
 extern void sub_803084C();
@@ -45,7 +41,6 @@ extern void sub_803092C(void);
 
 extern u32 sub_80154F0();
 extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_203B480 *r0);
-extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, void *r5, u32);
 extern void sub_8095274(u32);
 extern void sub_80155F0();
 extern void sub_8023C60();

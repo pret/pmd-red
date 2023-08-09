@@ -87,7 +87,6 @@ extern void InitializeJobListMenu(u32);
 extern void sub_802B640(u32, u32, u32);
 extern void sub_802B7D0(u32);
 extern void sub_802B9FC(u8);
-extern void sub_8008C54(u32);
 extern u32 sub_802BA8C(void);
 extern void sub_802BACC(void);
 extern u8 GetPokemonNewsIndex(void);

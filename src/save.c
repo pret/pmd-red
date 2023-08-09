@@ -9,7 +9,7 @@
 #include "team_inventory.h"
 #include "exclusive_pokemon.h"
 #include "game_options.h"
-
+#include "code_80130A8.h"
 
 EWRAM_DATA_2 u32 gUnknown_203B17C = {0};
 EWRAM_DATA_2 char *gUnknown_203B180 = {0};
@@ -145,8 +145,6 @@ extern bool8 sub_800DAB8(void);
 extern void sub_8011830(void);
 extern void sub_80140DC();
 extern void sub_8014114();
-extern void sub_80141B4(const char *r0, u32 r1, u8 *r2, u16 r3);
-extern u32 sub_80144A4(u32 *a);
 extern u32 SaveRecruitedPokemon(u8 *, u32);
 extern u32 RestoreRecruitedPokemon(void* a, s32 b);
 extern u32 SavePokemonStruct2(u8 *, u32);
@@ -707,7 +705,7 @@ void PrepareSavePakWrite(s16 PokemonID)
 {
   struct OpenedFile *file;
   s32 id_s32;
-  u8 *preload_face;
+  struct OpenedFile **preload_face;
 
   id_s32 = PokemonID; // had to cast for asr shift
 
@@ -727,11 +725,11 @@ void PrepareSavePakWrite(s16 PokemonID)
     gSavePakWrite->unk16 = 8;
   }
   if (gSavePakWrite->faceFile != 0) {
-      preload_face = (u8 *)&gSavePakWrite->faceFile;
+      preload_face = &gSavePakWrite->faceFile;
       sub_80141B4(gSavingAdventure,0,preload_face,0x20);
   }
   else {
-      sub_80141B4(gSavingAdventure,0,0,0x20);
+      sub_80141B4(gSavingAdventure,0,NULL,0x20);
   }
   gSavePakWrite->state = 3;
 }
@@ -771,9 +769,9 @@ bool8 WriteSavePak(void)
         {
             case SAVE_COMPLETED:
                 if(gSavePakWrite->faceFile != NULL)
-                    sub_80141B4(gSaveCompleted, 0, (u8 *)faceFile, 0x101);
+                    sub_80141B4(gSaveCompleted, 0, faceFile, 0x101);
                 else
-                    sub_80141B4(gSaveCompleted, 0, (u8 *)faceFile, 0x101);
+                    sub_80141B4(gSaveCompleted, 0, faceFile, 0x101);
                 gSavePakWrite->state = 5;
                 break;
             case SAVE_NOT_WRTTEN:
@@ -782,9 +780,9 @@ bool8 WriteSavePak(void)
                 break;
             default:
                 if(gSavePakWrite->faceFile != NULL)
-                    sub_80141B4(gSaveFailed, 0, (u8 *)faceFile, 0x101);
+                    sub_80141B4(gSaveFailed, 0, faceFile, 0x101);
                 else
-                    sub_80141B4(gSaveFailed, 0, (u8 *)faceFile, 0x101);
+                    sub_80141B4(gSaveFailed, 0, faceFile, 0x101);
                 gSavePakWrite->state = 5;
                 break;
         }

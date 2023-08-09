@@ -1,13 +1,12 @@
 #include "global.h"
+#include "code_80130A8.h"
 #include "constants/communication_error_codes.h"
-#include "input.h"
 #include "item.h"
 #include "main_menu.h"
 #include "team_inventory.h"
 #include "trade_items_menu.h"
 #include "memory.h"
 #include "save.h"
-#include "menu.h"
 #include "menu_input.h"
 #include "text1.h"
 #include "text2.h"
@@ -82,10 +81,7 @@ const struct MenuItem gUnknown_80E618C[3] = {
 
 #include "data/trade_items.h"
 
-extern void sub_8013AA0(u32 *);
-
 extern void sub_8035C1C();
-extern s32 sub_80144A4(s32 *);
 extern u32 sub_801CA08(u32);
 extern void sub_801CBB8();
 extern u8 sub_801CB24();
@@ -96,17 +92,12 @@ extern u32 sub_801B410();
 extern void sub_801B450();
 extern void sub_801CB5C(u32);
 extern void sub_8035CF4(struct MenuStruct *, u32, u32);
-extern u32 sub_8013BBC(u32 *);
-extern void sub_80141B4(const u8 *, u32, u32, u32);
 
-extern void sub_8008C54(u32);
-extern void sub_8013C68(u32 *);
 extern u8 sub_801CF14(u32);
 extern u32 sub_801D008();
 extern void sub_801C8C4(u32, u32, s32 *, u32);
 extern s32 sub_8037B28(u32);
 extern void sub_8011830(void);
-extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, void *r5, u32);
 extern void SetMenuItems(struct MenuStruct *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
 extern void nullsub_23(u32);
 extern void xxx_call_start_bg_music(void);

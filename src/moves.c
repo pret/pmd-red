@@ -9,8 +9,8 @@
 #include "text2.h"
 #include "constants/colors.h"
 #include "constants/monster.h"
-#include "file_system.h"
 #include "code_800D090.h"
+#include "code_80130A8.h"
 
 struct MoveLearnset {
     u8 *levelUpMoves;
@@ -58,7 +58,6 @@ bool8 DoesMoveCharge(u16 move);
 int unk_PrintMoveDescription(int, struct Move*, int, struct subStruct_203B240**);
 
 void sub_80928C0(u8 *buffer, struct Move *move, struct unkStruct_80928C0 *param_3);
-extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern void unk_MovePrintData(struct Move*, int);  // print something
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 

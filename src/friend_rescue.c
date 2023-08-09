@@ -5,21 +5,19 @@
 #include "text1.h"
 #include "text2.h"
 #include "text_util.h"
-#include "input.h"
 #include "item.h"
 #include "team_inventory.h"
 #include "pokemon.h"
 #include "friend_rescue.h"
 #include "memory.h"
 #include "save.h"
-#include "menu.h"
 #include "rescue_password_menu.h"
 #include "menu_input.h"
 #include "code_8094F88.h"
+#include "code_80130A8.h"
 
 extern void SetFriendRescueMenuState(u32);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
-extern s32 sub_80144A4(s32 *);
 extern void sub_802F2C0();
 extern u32 sub_802F298();
 
@@ -297,8 +295,6 @@ extern void sub_802453C(void);
 extern void sub_801B450(void);
 extern u8 sub_800D588(void);
 extern void sub_8011830(void);
-extern void sub_80141B4(const u8 *, u32, struct OpenedFile **, u32);
-extern void sub_8014248(const u8 *, u32, u32, const struct MenuItem *, void *, u32, u32, struct OpenedFile **, u32);
 extern void sub_80151C0(u32, u8 *);
 extern void sub_801C8C4(u32, u32, s32 * , u32);
 extern void sub_801CCD8(void);

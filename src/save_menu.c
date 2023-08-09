@@ -1,12 +1,11 @@
 #include "global.h"
-#include "input.h"
-#include "menu.h"
 #include "main_menu.h"
 #include "memory.h"
 #include "text1.h"
 #include "save.h"
 #include "menu_input.h"
 #include "sprite.h"
+#include "code_80130A8.h"
 
 struct unkSprite
 {
@@ -142,7 +141,6 @@ extern void sub_80388C4(void);
 extern void sub_8014114();
 extern void sub_80140F8(void);
 extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
-extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern void AddSprite(struct unkSprite *, u32, u32, u32);
 
 void CreateSaveMenu(s32 currMenu)

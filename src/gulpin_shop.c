@@ -1,12 +1,10 @@
 #include "global.h"
-#include "file_system.h"
+#include "code_80130A8.h"
 #include "pokemon.h"
 #include "memory.h"
 #include "moves.h"
 #include "text1.h"
 #include "text2.h"
-#include "input.h"
-#include "menu.h"
 #include "gulpin_shop.h"
 #include "menu_input.h"
 
@@ -23,8 +21,6 @@ extern const u8 gUnknown_80DC230[];
 extern u8 gAvailablePokemonNames[0x50 * 2];
 extern const u8 *gGulpinDialogue[2][25];
 
-extern void sub_8014248(const u8 *, u32, u32, const struct MenuItem *, void *, u32, u32, struct OpenedFile **, u32);
-extern u32 sub_80144A4(s32 *);
 void sub_801EC7C(void);
 void sub_801ECBC(void);
 void sub_801ED28(void);

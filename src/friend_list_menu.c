@@ -3,14 +3,13 @@
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
-#include "input.h"
-#include "menu.h"
 #include "item.h"
 #include "pokemon.h"
 #include "moves.h"
 #include "menu_input.h"
 #include "team_inventory.h"
 #include "kecleon_bros.h"
+#include "code_80130A8.h"
 
 // there might be more overlap with unkStruct_203B2BC
 // I was working on the moves and put the data that seemed to correspond to that
@@ -113,12 +112,9 @@ ALIGNED(4) const u8 gFriendListCheckIQ[] = "Check IQ";
 ALIGNED(4) const u8 gFriendListItem[] = _("Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} ");
 ALIGNED(4) static const u8 fill0[] = "pksdir0";
 
-extern void sub_8008C54(u32);
-extern void xxx_format_and_draw(s32, s32, const u8 *, ...);
 extern u32 sub_8023A94(u32);
 extern s16 sub_8023B44(void);
 extern void sub_8023C60(void);
-extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern s16 sub_80A5728(void);
 extern u8 sub_8002658(s16);
 extern bool8 sub_8024108(u32);
@@ -150,7 +146,6 @@ extern void sub_801F8D0(void);
 extern u32 sub_801F890(void);
 extern void sub_80160D8(void);
 extern u32 sub_8016080(void);
-extern s32 sub_80144A4(s32 *);
 extern bool8 sub_80023E4(u32);
 
 void sub_8025434(s32);

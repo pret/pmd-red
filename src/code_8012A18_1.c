@@ -1,6 +1,5 @@
 #include "global.h"
-#include "menu.h"
-#include "file_system.h"
+#include "code_80130A8.h"
 #include "memory.h"
 #include "input.h"
 #include "text1.h"
@@ -26,10 +25,6 @@ extern const char gUnknown_80DB6BC;
 extern const char gUnknown_80DB688;
 extern u8 gAvailablePokemonNames[0x58];
 
-extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
-extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, struct OpenedFile **r5, u32);
-
-extern s32 sub_80144A4(s32 *);
 extern void sub_80151C0(u32, u8 *);
 extern void CreateConfirmNameMenu(void);
 extern void sub_80160F4(u32);

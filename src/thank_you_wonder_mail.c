@@ -2,13 +2,10 @@
 #include "constants/communication_error_codes.h"
 #include "save.h"
 #include "pokemon.h"
-#include "file_system.h"
 #include "item.h"
 #include "code_8094F88.h"
 #include "wonder_mail.h"
 #include "memory.h"
-#include "menu.h"
-#include "input.h"
 #include "rescue_password_menu.h"
 #include "text1.h"
 #include "text2.h"
@@ -16,6 +13,7 @@
 #include "team_inventory.h"
 #include "code_800D090.h"
 #include "menu_input.h"
+#include "code_80130A8.h"
 
 extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 
@@ -157,8 +155,6 @@ const struct MenuItem gUnknown_80DEEE4[4] =
 #include "data/thank_you_wonder_mail.h"
 
 
-extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
-extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, struct OpenedFile **r5, u32);
 extern void sub_8035CC0(struct UnkTextStruct2 *r0, u32);
 extern void sub_8030810(u32);
 extern u32 sub_8031DCC(void);
@@ -216,7 +212,6 @@ extern void sub_801CBB8();
 extern void sub_80155F0();
 extern void sub_8031E10();
 extern void sub_802F2C0();
-extern u32 sub_80144A4(s32 *r0);
 extern void SetThankYouMailMenuState(u32);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void SetMenuItems(struct MenuStruct *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);

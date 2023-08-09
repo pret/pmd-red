@@ -1,11 +1,10 @@
 #include "global.h"
+#include "code_80130A8.h"
 #include "pokemon.h"
 #include "debug_menu.h"
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
-#include "input.h"
-#include "menu.h"
 #include "menu_input.h"
 
 extern struct unkStruct_203B3F8 *gUnknown_203B3F8;
@@ -39,7 +38,6 @@ ALIGNED(4) const u8 gDebug_LevelText[] = "LEVEL";
 ALIGNED(4) const u8 gDebug_Name[] = "Name";
 static const u8 fill0[] = "pksdir0";
 
-extern u32 sub_8013BBC(u32 *);
 extern void sub_803AE58(void);
 extern u32 sub_8016080(void);
 extern void sub_803ACD0(u32);
@@ -47,8 +45,6 @@ extern void sub_80160D8(void);
 extern u32 sub_8023A94(u32);
 extern s16 sub_8023B44(void);
 extern void sub_8023C60(void);
-extern void sub_8008C54(u32);
-extern void sub_8013C68(u32 *);
 extern void sub_8023DA4(void);
 extern void sub_803ACE8();
 extern void sub_803AD88();
@@ -58,7 +54,6 @@ extern void sub_803AFE8();
 extern void sub_803B034();
 extern void sub_8023868(u32, u32, u32, u32);
 extern void sub_8023B7C(u32);
-extern void sub_8013AA0(u32 *);
 extern void sub_801602C(u32, u8 *);
 extern void sub_803AEB0();
 

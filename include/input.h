@@ -1,5 +1,5 @@
 #ifndef GUARD_INPUT_H
-#define GUARD_INPUT_H  
+#define GUARD_INPUT_H
 
 // size: 0x10
 struct Inputs

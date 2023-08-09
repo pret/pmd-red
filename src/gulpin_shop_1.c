@@ -1,10 +1,7 @@
 #include "global.h"
 #include "memory.h"
-#include "menu.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
-#include "file_system.h"
-#include "input.h"
 #include "text1.h"
 #include "text2.h"
 #include "team_inventory.h"
@@ -12,6 +9,7 @@
 #include "gulpin_shop.h"
 #include "moves.h"
 #include "felicity_bank.h"
+#include "code_80130A8.h"
 
 // size: 0x1E0
 struct unkStruct_203B27C
@@ -85,13 +83,10 @@ extern u8 gUnknown_80DC438[];
 extern u8 gUnknown_80DC448[];
 extern u8 gUnknown_202E128[];
 
-extern s32 sub_80144A4(s32 *);
 void PlayMenuSoundEffect(u32);
 void PlaySound(u32);
 bool8 sub_8021178(void);
 void CreateGulpinShopMenu(void);
-extern void sub_8014248(const u8 *, u32, u32, const struct MenuItem *, void *, u32, u32, struct OpenedFile **, u32);
-extern void sub_80141B4(const u8 *, u32, struct OpenedFile **, u32);
 void sub_8020950(void);
 void sub_8020900(void);
 bool8 sub_801F808(u16 *moveIDs);
