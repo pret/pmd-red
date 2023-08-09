@@ -60,7 +60,6 @@ extern s32 sub_8008ED0(u8 *);
 extern void sub_8008C54(u32);
 void LoadTeamRankBadge(u32, u32, u32);
 extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);
-extern void sub_8007E20(u32, u32, u32, u32, u32, u8 *, u32);
 
 extern struct FileArchive gTitleMenuFileArchive;
 extern const char gTeamRankBadgeFileName;

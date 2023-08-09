@@ -58,7 +58,6 @@ extern void sub_8008C54(u32);
 extern void xxx_format_string(u8 *, u8 *, u8 *, u32);
 
 extern void SetBGPaletteBufferColorArray(s32, s32);
-extern void sub_8007E20(s32, s32, s32, u32, u32, s32, u32);
 
 const struct UnkTextStruct2 gUnknown_80E75F8 = {
    0x00, 0x00, 0x00, 0x00,
