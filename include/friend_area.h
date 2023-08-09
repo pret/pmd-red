@@ -17,7 +17,6 @@ struct unkStruct_8092638
     s32 unk8;
 };
 
-// friend_area.c
 extern EWRAM_DATA_2 bool8 *gFriendAreas;
 
 void LoadFriendAreas(void);
