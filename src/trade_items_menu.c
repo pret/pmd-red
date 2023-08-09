@@ -1,5 +1,7 @@
 #include "global.h"
 #include "code_80130A8.h"
+#include "code_801B3C0.h"
+#include "code_801C620.h"
 #include "constants/communication_error_codes.h"
 #include "item.h"
 #include "main_menu.h"
@@ -82,18 +84,8 @@ const struct MenuItem gUnknown_80E618C[3] = {
 #include "data/trade_items.h"
 
 extern void sub_8035C1C();
-extern u32 sub_801CA08(u32);
-extern void sub_801CBB8();
-extern u8 sub_801CB24();
-extern void sub_801B3C0(struct Item *);
-extern void sub_801CCD8();
-extern u32 sub_801B410();
-extern void sub_801B450();
-extern void sub_801CB5C(u32);
 
-extern u8 sub_801CF14(u32);
 extern u32 sub_801D008();
-extern void sub_801C8C4(u32, u32, s32 *, u32);
 extern s32 sub_8037B28(u32);
 extern void sub_8011830(void);
 extern void nullsub_23(u32);
@@ -267,7 +259,7 @@ void sub_80365AC(void)
   gTradeItemsMenu->itemToSend.id = ITEM_NOTHING;
   gTradeItemsMenu->itemToSend.quantity = 1;
   gTradeItemsMenu->itemToSend.flags = 0;
-  switch(sub_801CA08(1)){
+  switch(sub_801CA08(TRUE)){
     case 2:
         // Cancel
         sub_801CBB8();
@@ -297,7 +289,7 @@ void sub_8036674(void)
   int menuAction;
 
   menuAction = -1;
-  sub_801CA08(0);
+  sub_801CA08(FALSE);
   if (sub_8012FD8(&gTradeItemsMenu->unk44[3]) == '\0') {
     sub_8013114(&gTradeItemsMenu->unk44[3], &menuAction);
   }
@@ -332,7 +324,7 @@ void sub_8036728(void)
         sub_801B450();
         ResetUnusedInputStruct();
         sub_800641C(gTradeItemsMenu->unk1E4, 1, 1);
-        sub_801CB5C(1);
+        sub_801CB5C(TRUE);
         if (gTradeItemsMenu->fallbackState == 0x13) {
             sub_8035CF4(gTradeItemsMenu->unk44, 3, TRUE);
             SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_POPUP_MENU);
@@ -349,7 +341,7 @@ void sub_8036728(void)
 void sub_8036788(void)
 {
   sub_8012FD8(&gTradeItemsMenu->unk44[3]);
-  sub_801CA08(0);
+  sub_801CA08(FALSE);
   switch(sub_8013BBC(&gTradeItemsMenu->quantityToSend)){
     case 1:
         // When you change the #
@@ -589,7 +581,6 @@ void nullsub_52(void)
 void sub_8036B28(void)
 {
   int linkStatus;
-  s32 local_10;
   u32 load_2;
   struct TradeSubStruct *temp;
   struct TradeSubStruct *temp2;
@@ -600,7 +591,7 @@ void sub_8036B28(void)
 
   switch(gTradeItemsMenu->currMenu) {
     case TRADE_ITEMS_MAIN_MENU:
-        if (sub_801CF14(0) != 0) {
+        if (sub_801CF14(0)) {
             sub_8014248(gUnknown_80E61A4,0,1,gUnknown_80E60D4,0,4,0,0,0x101);
         }
         else {
@@ -614,8 +605,10 @@ void sub_8036B28(void)
         if (sub_801D008() == 0) {
             ResetUnusedInputStruct();
             sub_800641C(0,1,1);
-            local_10 = 0x20003;
+            {
+            struct UnkTextStruct2_sub local_10 = {3, 2};
             sub_801C8C4(0,1,&local_10,9);
+            }
         }
         break;
     case TRADE_ITEMS_SEND_ITEM_POPUP_MENU:

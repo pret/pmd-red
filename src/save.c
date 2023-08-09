@@ -75,7 +75,6 @@ EWRAM_DATA_2 struct QuickSaveWrite *gQuickSaveWrite = {0};
 
 
 extern s32 gUnknown_202DE28;
-extern bool8 *gFriendAreas;
 extern u32 *gUnknown_203B488;
 extern u32 gUnknown_203B494;
 

@@ -1,16 +1,17 @@
 #include "global.h"
 #include "code_8097670.h"
 #include "constants/friend_area.h"
-#include "debug_menu.h"
+#include "debug_menu1.h"
 #include "friend_area.h"
 #include "main_menu.h"
-#include "menu_input.h"
 #include "memory.h"
+#include "menu_input.h"
+#include "pokemon.h"
 #include "save.h"
 #include "text_util.h"
 #include "text1.h"
 
-EWRAM_DATA_2 struct DebugMenu *gUnknown_203B3EC = {0};
+EWRAM_DATA_2 static struct DebugMenu *sDebugMenu = {0};
 
 static const struct UnkTextStruct2 sUnknown_80E7D40 =
 {
@@ -52,28 +53,24 @@ ALIGNED(4) static const u8 sDebugMenuFill5[] = "pksdir0";
 ALIGNED(4) static const u8 sDebugMenuFill6[] = "pksdir0";
 ALIGNED(4) static const u8 sDebugMenuFill7[] = "pksdir0";
 
-// pokemon.s
-extern void sub_808CFD0(u8 *, s32, u8 *, u32, u32 *, u16 *);
-extern void sub_808D1DC(u8 *);
-
 void SetDebugMenuItems(void);
 void sub_803A3A0(void);
 void sub_803A3BC(void);
 
 void CreateDebugMenu(void)
 {
-    s32 index;
+    s32 i;
 
-    if (gUnknown_203B3EC == NULL) {
-        gUnknown_203B3EC = MemoryAlloc(sizeof(struct DebugMenu), 8);
-        MemoryFill8((u8 *)gUnknown_203B3EC, 0, sizeof(struct DebugMenu));
+    if (sDebugMenu == NULL) {
+        sDebugMenu = MemoryAlloc(sizeof(struct DebugMenu), 8);
+        MemoryFill8((u8 *)sDebugMenu, 0, sizeof(struct DebugMenu));
     }
 
-    for (index = 0; index < 4; index++)
-        gUnknown_203B3EC->unk140[index] = sUnknown_80E7D40;
+    for (i = 0; i < 4; i++)
+        sDebugMenu->unk140[i] = sUnknown_80E7D40;
 
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B3EC->unk140, 1, 1);
+    sub_800641C(sDebugMenu->unk140, 1, 1);
     SetDebugMenuItems();
 }
 
@@ -81,9 +78,9 @@ void DeleteDebugMenu(void)
 {
     ResetUnusedInputStruct();
     sub_800641C(NULL, 1, 1);
-    if (gUnknown_203B3EC != NULL) {
-        MemoryFree(gUnknown_203B3EC);
-        gUnknown_203B3EC = NULL;
+    if (sDebugMenu != NULL) {
+        MemoryFree(sDebugMenu);
+        sDebugMenu = NULL;
     }
 }
 
@@ -96,8 +93,8 @@ u32 UpdateDebugMenu(void)
     nextMenu = MENU_NO_SCREEN_CHANGE;
     debugMenuAction = 11;
 
-    if (sub_8012FD8(&gUnknown_203B3EC->unk0[0]) == 0)
-        sub_8013114(&gUnknown_203B3EC->unk0[0], &debugMenuAction);
+    if (sub_8012FD8(&sDebugMenu->unk0[0]) == 0)
+        sub_8013114(&sDebugMenu->unk0[0], &debugMenuAction);
 
     switch (debugMenuAction) {
         case MENU_DEBUG_MENU_DUNGEONS:
@@ -123,7 +120,7 @@ u32 UpdateDebugMenu(void)
             nextMenu = MENU_MAIN_SCREEN;
             break;
         case MENU_DEBUG_MENU_H_OPEN:
-            for(counter = 0; counter < 0x20; counter++)
+            for (counter = 0; counter < 0x20; counter++)
                 sub_80976F8(counter);
 
             nextMenu = MENU_MAIN_SCREEN;
@@ -141,13 +138,13 @@ u32 UpdateDebugMenu(void)
 
 void SetDebugMenuItems(void)
 {
-    SetMenuItems(gUnknown_203B3EC->unk0, gUnknown_203B3EC->unk140, 0, &sUnknown_80E7D58, sDebugMenuItems, 1, 13, 0);
-    sub_8035CF4(gUnknown_203B3EC->unk0, 0, 1);
+    SetMenuItems(sDebugMenu->unk0, sDebugMenu->unk140, 0, &sUnknown_80E7D58, sDebugMenuItems, 1, 13, 0);
+    sub_8035CF4(sDebugMenu->unk0, 0, 1);
 }
 
 void sub_803A3A0(void)
 {
-    sub_8035CC0(gUnknown_203B3EC->unk140, 0);
+    sub_8035CC0(sDebugMenu->unk140, 0);
 }
 
 void sub_803A3BC(void)
@@ -184,7 +181,7 @@ void sub_803A3BC(void)
         CopyMonsterNametoBuffer(buffer, speciesIndex);
         CopyStringtoBuffer(buffer, buffer);
         buffer[0] = 0x40;
-        sub_808CFD0(sp_0x8, speciesIndex,buffer, 0x43, &sp_0x7C, r7);
+        sub_808CFD0(sp_0x8, speciesIndex, buffer, 0x43, &sp_0x7C, r7);
         sub_808D1DC(sp_0x8);
     } while (index < 300);
 

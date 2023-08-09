@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_801B3C0.h"
 #include "constants/colors.h"
 #include "text1.h"
 #include "text2.h"
@@ -7,26 +8,10 @@
 #include "pokemon.h"
 #include "team_inventory.h"
 #include "menu_input.h"
-#include "subStruct_203B240.h"
 #include "kecleon_bros.h"
 #include "sprite.h"
 #include "code_80130A8.h"
 
-// based off of 203B240..
-struct unkStruct_203B230
-{
-    // size: 0x94
-    s32 state;
-    struct Item item;
-    s32 unk8;
-    s32 unkC;
-    struct subStruct_203B240 *unk10[2];
-    u8 fill14[0x20 - 0x18];
-    u32 unk20;
-    u32 unk24;
-    struct UnkTextStruct2 unk28[4];
-    struct MenuInputStructSub unk88;
-};
 extern struct unkStruct_203B230 *gUnknown_203B230;
 
 struct unkStruct_203B234

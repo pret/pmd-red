@@ -15,6 +15,7 @@
 #include "friend_area.h"
 #include "kecleon_bros.h"
 #include "code_80130A8.h"
+#include "code_801B3C0.h"
 
 struct unkStruct_3001B5C
 {
@@ -63,8 +64,6 @@ extern u8 *gUnknown_80D4970[];
 extern void sub_8022924(s32);
 extern u32 sub_801B00C(void);
 extern void sub_801B048(void);
-extern u32 sub_801B410(void);
-extern void sub_801B450(void);
 
 void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 id, bool8 checkBoostFlags, struct Gummi* gummi);
 

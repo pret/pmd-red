@@ -9,6 +9,7 @@
 #include "friend_area.h"
 #include "code_800D090.h"
 #include "menu_input.h"
+#include "code_8021774.h"
 
 struct unkStruct_203B28C
 {
@@ -56,7 +57,6 @@ extern void sub_8021894(void);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8021A60(void);
 void sub_8021820(void);
-extern u8 *gFriendAreas;
 u8 sub_80023E4(u32);
 
 s32 sub_8021664(void)

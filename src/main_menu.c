@@ -3,7 +3,7 @@
 #include "text2.h"
 #include "menu_input.h"
 #include "adventure_log.h"
-#include "debug_menu.h"
+#include "debug_menu1.h"
 #include "ds_menus.h"
 #include "pokemon.h"
 #include "friend_rescue.h"

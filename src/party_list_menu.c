@@ -13,6 +13,7 @@
 #include "moves.h"
 #include "kecleon_bros.h"
 #include "code_80130A8.h"
+#include "code_801B3C0.h"
 
 struct unkStruct_203B2B8
 {
@@ -173,8 +174,6 @@ extern u32 sub_801EF38(u32);
 extern s32 sub_8008ED0(u8 *);
 extern u32 sub_801F890(void);
 extern void sub_801F8D0(void);
-extern u32 sub_801B410(void);
-extern void sub_801B450(void);
 extern void nullsub_104(void);
 extern void sub_8099690(u32);
 extern u32 sub_8022860(void);
@@ -189,8 +188,6 @@ extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 bool8 sub_8026E88(struct PokemonStruct *r0);
 bool8 HasGummiItem();
 bool8 sub_8026EB8(struct PokemonStruct *r0);
-extern void sub_801BB20(void);
-extern void sub_801BC24(void);
 extern void sub_8024458(s16, u32);
 void sub_8026E08(u32 r0);
 void sub_8026DAC(u32 r0, struct BulkItem *item);
@@ -199,7 +196,6 @@ void sub_8026FA4(void);
 void sub_8026878(void);
 extern void sub_801F808(u16*);
 extern void sub_80227B8(struct PokemonStruct *);
-extern void sub_801B3C0(struct Item *);
 extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
 extern void sub_801F1B0(u32, u32);
 extern void sub_808D31C(struct PokemonStruct *);

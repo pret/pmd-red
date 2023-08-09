@@ -12,6 +12,8 @@
 #include "menu_input.h"
 #include "kecleon_bros.h"
 #include "code_80130A8.h"
+#include "code_8012A18_1.h"
+#include "code_801B3C0.h"
 
 struct unkStruct_203B2B0
 {
@@ -192,19 +194,13 @@ void PlaySound(u32);
 void sub_8024CFC(void);
 void sub_8025254(void);
 void sub_8024D48(void);
-extern void sub_801B3C0(struct Item *);
 extern void nullsub_104();
 void sub_8024DBC(void);
 void sub_8024E30(void);
 void sub_801AEE4(u32, u32);
 void sub_808F734(struct PokemonStruct *, s16);
-u32 sub_801602C(u32 r0, u8 *name);
 extern void sub_8099690(u32);
 extern void PlayMenuSoundEffect(u32);
-extern u32 sub_801B410(void);
-extern void sub_801B450(void);
-extern u32 sub_8016080(void);
-extern void sub_80160D8(void);
 extern void sub_808F468(struct PokemonStruct *, u8 *, u32);
 
 bool8 LuminousCave_HasOnly1Member(void);

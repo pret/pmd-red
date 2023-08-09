@@ -1,5 +1,6 @@
-#include "constants/item.h"
 #include "global.h"
+#include "code_801C620.h"
+#include "constants/item.h"
 #include "constants/iq_skill.h"
 #include "item.h"
 #include "memory.h"
@@ -162,9 +163,6 @@ void sub_801C6D0(s32);
 void sub_801C7D4(void);
 void sub_801C6E4(void);
 void sub_801C848(void);
-void sub_801CCD8(void);
-bool8 sub_801CF14(s32);
-void sub_801CF94(void);
 
 u32 sub_801C308(u8);
 extern void PlaySound(u32);
@@ -182,10 +180,7 @@ void sub_801C03C(void);
 void sub_801C118(void);
 void sub_801C1A0(void);
 void sub_801C228(void);
-u8 sub_801CB24(void);
 
-u32 sub_801CFE0(u8);
-s32 sub_801CFB8(void);
 extern void sub_801D220(void);
 extern void sub_801D3A8(void);
 
@@ -783,13 +778,13 @@ bool8 sub_801C8C4(s32 param_1, s32 param_2, struct UnkTextStruct2_sub *param_3, 
   }
 }
 
-bool8 sub_801CA08(u8 param_1)
+u32 sub_801CA08(bool8 param_1)
 {
   u32 index;
   u32 temp;
   u32 flag;
   
-  if (param_1 == 0) {
+  if (param_1 == FALSE) {
     sub_8013660(&gUnknown_203B244->input);
     return 0;
   }
@@ -838,7 +833,7 @@ u8 sub_801CB24(void) {
    return gUnknown_203B244->itemIDs[(gUnknown_203B244->input.unk1E * gUnknown_203B244->input.unk1C) + gUnknown_203B244->input.menuIndex];
 }
 
-void sub_801CB5C(u8 r0) {
+void sub_801CB5C(bool8 r0) {
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B244->unk4F0, 0, 0);
     gUnknown_203B244->input.unk22 = sub_801CE58();

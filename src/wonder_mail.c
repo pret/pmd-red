@@ -13,6 +13,7 @@
 #include "code_8094F88.h"
 #include "code_80130A8.h"
 #include "main_menu.h"
+#include "code_801EE10_1.h"
 
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 
@@ -42,11 +43,7 @@ extern u32 sub_80154F0();
 extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_203B480 *r0);
 extern void sub_8095274(u32);
 extern void sub_80155F0();
-extern void sub_8023C60();
-extern u32 sub_8023A94(u32);
 extern void sub_8024458(s16, u32);
-extern u16 sub_8023B44();
-extern void sub_8023B7C(u32);
 extern u32 sub_80244E4();
 extern void sub_802452C();
 extern void sub_802453C();
@@ -62,7 +59,6 @@ extern void sub_8030DE4();
 extern void nullsub_23(u32);
 extern s32 sub_8037D64(u32, void *, void *);
 extern s32 sub_80381F4(u32, void *, void *);
-extern void sub_8023868(u32, u32, u32, u32);
 extern void sub_80306A8(u32, u32, u32, u32);
 extern s32 sub_8037B28(u32);
 extern void sub_8011830(void);
@@ -72,7 +68,6 @@ extern void xxx_call_start_bg_music(void);
 extern u32 sub_8023CE8(void);
 extern u32 sub_8030894(void);
 extern void sub_8030F58(u32);
-extern void sub_8023DA4(void);
 extern void sub_8029B34(void);
 extern void sub_8029AD8(void);
 extern void sub_8029AF4(void);
@@ -125,7 +120,6 @@ extern void sub_8029044(void);
 extern void sub_8028CFC(void);
 extern void sub_8028D4C(void);
 extern void sub_8031E10(void);
-extern void sub_8023C60(void);
 extern void sub_803084C(void);
 extern void sub_80155F0(void);
 extern void sub_80310B4(void);
@@ -1651,7 +1645,7 @@ void sub_80297B8(void)
 
 void sub_80297D4(void)
 {
-    switch(sub_8023A94(1))
+    switch(sub_8023A94(TRUE))
     {
         case 2:
             sub_8023C60();
@@ -1678,7 +1672,7 @@ void sub_8029884(void)
 {
     s32 menuAction;
     menuAction = -1;
-    sub_8023A94(0);
+    sub_8023A94(FALSE);
     if(sub_8012FD8(&(gUnknown_203B2C0->unk21C[3])) == 0)
     {
         sub_8013114(&(gUnknown_203B2C0->unk21C[3]), &menuAction);

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_800D090.h"
 #include "code_80130A8.h"
+#include "code_801B3C0.h"
 #include "constants/input.h"
 #include "felicity_bank.h"
 #include "kecleon_bros.h"
@@ -54,10 +55,6 @@ extern const u8 *gKecleonShopDialogue[KECLEON_BROS_MODE_COUNT][23];
 extern const u8 gTeamToolboxA[];
 extern const u8 gTeamToolboxB[];
 
-// code_801B3C0.c
-extern u32 sub_801B3C0(struct Item *);
-extern u32 sub_801B410(void);
-extern void sub_801B450(void);
 // code_8098BDC.s
 extern void sub_8099690(u32);
 

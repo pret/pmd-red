@@ -15,6 +15,8 @@
 #include "menu_input.h"
 #include "code_80130A8.h"
 #include "main_menu.h"
+#include "code_801C620.h"
+#include "code_801B3C0.h"
 
 extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 
@@ -160,7 +162,6 @@ extern void sub_8030810(u32);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E00(void);
 extern u32 sub_802F298();
-extern u8 sub_801CF14(u32);
 extern u32 sub_8030768(u32);
 extern s8 sub_80307EC(void);
 extern void sub_8030D40(u8, u32);
@@ -206,9 +207,7 @@ extern void sub_802A9FC();
 extern void sub_802A828();
 extern void sub_802A850();
 extern void sub_8030DE4();
-extern void sub_801B450();
 extern void sub_803084C();
-extern void sub_801CBB8();
 extern void sub_80155F0();
 extern void sub_8031E10();
 extern void sub_802F2C0();
@@ -218,7 +217,6 @@ extern void sub_802F204(struct unkStruct_802F204 *, u32);
 extern void sub_80151C0(u32, u8 *);
 extern void xxx_call_start_bg_music(void);
 extern void sub_803092C(void);
-extern void sub_801CCD8(void);
 extern void sub_8011830(void);
 extern void nullsub_23(u32);
 extern s32 sub_8037B28(u32);
@@ -227,20 +225,11 @@ extern u32 sub_801D008(void);
 extern void sub_80306A8(u32, u32, u32, u32);
 extern s32 sub_8037D64(u32, void *, void *);
 extern s32 sub_80381F4(u32, void *, void *);
-extern void sub_801C8C4(u32, u32, s32 * , u32);
 extern u8 sub_800D588(void);
 extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
 extern void sub_8031D70(u8, u32);
 
 extern void sub_803092C(void);
-extern u32 sub_801CA08(u32);
-extern void sub_801CBB8(void);
-extern void sub_801B3C0(struct Item *);
-extern u8 sub_801CB24(void);
-extern void sub_801B450(void);
-extern u32 sub_801B410(void);
-extern void sub_801CB5C(u32);
-extern void sub_801CCD8(void);
 extern void sub_8011C28(u32);
 extern u32 sub_80154F0(void);
 extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_203B480 *r0);
@@ -671,7 +660,7 @@ void sub_802A28C(void)
   gUnknown_203B2C4->unk41C.quantity = 1;
   gUnknown_203B2C4->unk41C.flags = 0;
 
-  switch(sub_801CA08(1))
+  switch(sub_801CA08(TRUE))
   {
     case 2:
         sub_801CBB8();
@@ -702,7 +691,7 @@ void sub_802A33C(void)
         sub_801B450();
         ResetUnusedInputStruct();
         sub_800641C(gUnknown_203B2C4->unk3BC,1,1);
-        sub_801CB5C(1);
+        sub_801CB5C(TRUE);
         if (gUnknown_203B2C4->fallbackState == 0x2b) {
             sub_8035CF4(gUnknown_203B2C4->unk21C,3,TRUE);
             SetThankYouMailMenuState(0x14);
@@ -722,7 +711,7 @@ void sub_802A39C(void)
   s32 menuAction;
 
   menuAction = -1;
-  sub_801CA08(0);
+  sub_801CA08(FALSE);
   if (sub_8012FD8(&gUnknown_203B2C4->unk21C[3]) == 0) {
     sub_8013114(&gUnknown_203B2C4->unk21C[3], &menuAction);
   }
@@ -1042,7 +1031,7 @@ void sub_802A910(void)
         switch(menuAction)
         {
             case 9:
-                if(sub_801CF14(0) != 0)
+                if(sub_801CF14(0))
                 {
                     SetThankYouMailMenuState(THANK_YOU_MAIL_STORAGE_EMPTY);
                 }
@@ -1301,10 +1290,9 @@ void UpdateThankYouMailText(void)
             break;
         ResetUnusedInputStruct();
         sub_800641C(0,1,1);
-        // TODO: Probably a macro - Pika
         {
-        struct {u16 a; u16 b;} local_x = {3, 2};
-        sub_801C8C4(0, 1, (s32 *)&local_x, 9);
+        struct UnkTextStruct2_sub local_x = {3, 2};
+        sub_801C8C4(0, 1, &local_x, 9);
         }
         break;
     case 0x14:

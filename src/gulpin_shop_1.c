@@ -10,6 +10,7 @@
 #include "moves.h"
 #include "felicity_bank.h"
 #include "code_80130A8.h"
+#include "code_801EE10_1.h"
 
 // size: 0x1E0
 struct unkStruct_203B27C
@@ -93,9 +94,6 @@ bool8 sub_801F808(u16 *moveIDs);
 void sub_801F700(void);
 bool8 sub_801F428(s16 index, s32 param_2);
 void sub_801F5F0(u8 r0);
-extern void sub_8023DA4(void);
-extern void sub_8023868(u32, u32, u32, u32);
-extern void sub_8023B7C(u32);
 extern void sub_801F1B0(u32, u32);
 extern void sub_801F280(u32);
 void sub_8024458(u32, u32);
@@ -124,9 +122,6 @@ extern void sub_80209FC(void);
 extern void sub_8020A34(void);
 extern void sub_801FDC0(void);
 extern void sub_801FF28(void);
-u32 sub_8023A94(u32);
-void sub_8023C60(void);
-extern s16 sub_8023B44(void);
 extern u32 sub_80244E4(void);
 extern u32 sub_801BF48(void);
 extern void sub_802453C(void);
@@ -759,7 +754,7 @@ void sub_8020A34(void)
 
 void sub_8020A80(void)
 {
-    switch(sub_8023A94(1))
+    switch(sub_8023A94(TRUE))
     {
         case 3:
             gUnknown_203B27C->speciesNum = sub_8023B44();
@@ -790,7 +785,7 @@ void sub_8020B38(void)
     s32 menuAction;
 
     menuAction = 0;
-    sub_8023A94(0);
+    sub_8023A94(FALSE);
     if (!sub_8012FD8(&gUnknown_203B27C->unkCC)) {
         sub_8013114(&gUnknown_203B27C->unkCC,&menuAction);
         if (menuAction != 1) {

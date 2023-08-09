@@ -19,7 +19,6 @@ extern u8 IsJobSlotEmpty(u8);
 extern struct WonderMail * GetJobSlotInfo(u8);
 extern bool8 IsValidWonderMail(struct WonderMail *WonderMailData);
 extern u8 sub_8095E38(struct WonderMail *, u8, u8, bool8);
-extern void sub_808CFD0(s32, s16, u8, u8, u32 *, u32);
 extern void ResetJobSlot(u8);
 extern void sub_8096C80(void);
 extern void sub_8096D24(void);
@@ -212,7 +211,7 @@ s32 CountJobsinDungeon(u8 dungeon)
   return count;
 }
 
-bool8 sub_8096A08(u8 dungeon, s32 param_2)
+bool8 sub_8096A08(u8 dungeon, u8 *param_2)
 {
   struct WonderMail *mail;
   s32 index;
@@ -236,7 +235,7 @@ bool8 sub_8096A08(u8 dungeon, s32 param_2)
                 temp = 0x100;
                 local_14 |= temp;
 
-                sub_808CFD0(param_2,mail->clientSpecies,0,0,&local_14,0);
+                sub_808CFD0(param_2,mail->clientSpecies,NULL,0,&local_14,NULL);
                 return TRUE;
             }
   }

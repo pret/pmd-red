@@ -10,20 +10,18 @@
 #include "kecleon_bros.h"
 #include "sprite.h"
 #include "code_80130A8.h"
+#include "code_801EE10_1.h"
+#include "code_801B3C0.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 
 extern void sub_8027D40(u32, struct BulkItem *);
-extern void sub_8023868(u32, u32, u32, u32);
-extern void sub_8023B7C(u32);
-extern void sub_8023DA4();
 extern void sub_8024458(s16, u32);
 extern void sub_801BEEC(s16);
 extern void GetLinkedSequence(u32, struct Move *, u16*);
 extern void sub_801F808(u16*);
 extern void sub_8027794();
 extern void sub_801F1B0(u32, u32);
-extern void sub_801B3C0(struct Item *);
 extern void unk_CopyMoves4To8(struct Move *, struct Move *);
 extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
 

@@ -10,6 +10,9 @@
 #include "wigglytuff_shop.h"
 #include "felicity_bank.h"
 #include "code_80130A8.h"
+#include "code_8021774_pre.h"
+#include "code_801EE10_mid.h"
+#include "code_8021774.h"
 
 extern struct UnkTextStruct2 gUnknown_80DC534;
 extern struct UnkTextStruct2 gUnknown_80DC564;
@@ -34,17 +37,6 @@ extern const u8 *gUnknown_80D4978[];
 
 u8 sub_8021700(u32);
 void sub_8092578(u8 *buffer, u8 index, u8 r2);
-extern void sub_80211AC(u32, u32);
-extern void sub_8021354(u32);
-extern void sub_8021494();
-extern void sub_803AA34();
-extern void sub_8021774(u8,u32, u32);
-extern void sub_809249C(u8, u32);
-extern void sub_8021830(void);
-extern u32 sub_80217EC(void);
-extern u32 sub_8021274(u32);
-extern u8 sub_802132C(void);
-extern void sub_80213A0(void);
 extern void sub_8022380(void);
 extern void PlaySound(u32);
 bool8 sub_8023144(s32 param_1, s32 index, struct UnkTextStruct2_sub *sub, u32 param_4);
@@ -245,7 +237,7 @@ void UpdateWigglytuffDialogue(void)
             DrawTeamMoneyBox(1);
             break;
         case WIGGLYTUFF_UNKA:
-            sub_8021354(1);
+            sub_8021354(TRUE);
             DrawTeamMoneyBox(1);
             break;
         case WIGGLYTUFF_UNKB:
@@ -487,7 +479,7 @@ void HandleWigglytuffConfirmFriendAreaMenu(void)
 
 void sub_8022538(void)
 {
-    switch(sub_8021274(1))
+    switch(sub_8021274(TRUE))
     {
         case 3:
             gWigglytuffShop->chosenFriendArea = sub_802132C();
@@ -515,7 +507,7 @@ void sub_8022538(void)
 void sub_80225C8(void)
 {
     s32 menuAction = 0;
-    sub_8021274(0);
+    sub_8021274(FALSE);
     if(sub_8012FD8(&gWigglytuffShop->unk6C) == 0)
     {
         sub_8013114(&gWigglytuffShop->unk6C, &menuAction);

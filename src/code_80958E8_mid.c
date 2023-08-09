@@ -7,7 +7,6 @@
 #include "friend_area.h"
 #include "code_80958E8.h"
 
-extern u8 *gFriendAreas;
 bool8 sub_8095E38(struct WonderMail *mail, u8 dungeon, u32 floor, u8 param_4);
 extern s32 sub_80A29B0(u8 *param_1);
 extern s32 GetDungeonFloorCount(u8);

@@ -13,6 +13,7 @@
 #include "text_util.h"
 #include "menu_input.h"
 #include "code_80130A8.h"
+#include "code_8012A18_1.h"
 
 enum
 {
@@ -42,10 +43,6 @@ extern s32 sub_8094E4C(void);
 extern void sub_8094D28(s32);
 extern void sub_8001044(u32 *);
 
-extern void sub_801602C(u32, char *r0);
-
-extern u32 sub_8016080(void);
-extern void sub_80160D8(void);
 extern void sub_8099690(u32);
 
 extern void sub_800836C(u32, u8 *r0, u32);

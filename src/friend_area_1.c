@@ -1,8 +1,7 @@
 #include "global.h"
 #include "constants/friend_area.h"
 #include "code_8092334.h"
-
-extern bool8 *gFriendAreas;
+#include "friend_area.h"
 
 u32 SaveFriendAreas(u8 *r0, u32 size)
 {

@@ -9,6 +9,8 @@
 #include "wonder_mail.h"
 #include "code_8094F88.h"
 #include "code_80130A8.h"
+#include "code_801C620.h"
+#include "code_801B3C0.h"
 
 #define SELECT_WONDER_MAIL_MODE_MAIN_SCREEN 0
 #define SEND_WONDER_MAIL_MAIN_SCREEN 1
@@ -124,9 +126,7 @@ EWRAM_DATA_2 struct unkStruct_203B3E8 *gUnknown_203B3E8 = {0};
 extern u32 sub_8011C1C(void);
 extern void SetWonderMailMainMenuState(u8);
 extern void sub_8030DE4(void);
-extern void sub_801B450(void);
 extern void sub_803084C(void);
-extern void sub_801CBB8(void);
 extern void sub_80155F0(void);
 extern void sub_8031E10(void);
 

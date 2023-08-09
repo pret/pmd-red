@@ -10,6 +10,7 @@
 #include "subStruct_203B240.h"
 #include "sprite.h"
 #include "code_80130A8.h"
+#include "code_801EE10_mid.h"
 
 extern struct unkStruct_203B270 *gUnknown_203B270;
 

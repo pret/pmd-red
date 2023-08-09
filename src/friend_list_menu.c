@@ -10,6 +10,9 @@
 #include "team_inventory.h"
 #include "kecleon_bros.h"
 #include "code_80130A8.h"
+#include "code_801EE10_1.h"
+#include "code_8012A18_1.h"
+#include "code_801B3C0.h"
 
 // there might be more overlap with unkStruct_203B2BC
 // I was working on the moves and put the data that seemed to correspond to that
@@ -112,40 +115,28 @@ ALIGNED(4) const u8 gFriendListCheckIQ[] = "Check IQ";
 ALIGNED(4) const u8 gFriendListItem[] = _("Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} ");
 ALIGNED(4) static const u8 fill0[] = "pksdir0";
 
-extern u32 sub_8023A94(u32);
-extern s16 sub_8023B44(void);
-extern void sub_8023C60(void);
 extern s16 sub_80A5728(void);
 extern u8 sub_8002658(s16);
 extern bool8 sub_8024108(u32);
-extern u32 sub_801B3C0(struct Item *param_1);
-extern void sub_8023868(u32, u32, u32, u32);
 extern void sub_801F1B0(u32, u32);
 extern void PlaySound(u32);
 extern void sub_8024458(s16, u32);
 extern void sub_801BEEC(s16);
-extern void sub_8023B7C(u32);
-extern void sub_8023DA4(void);
 extern void nullsub_104(void);
 extern void sub_808ED00(void);
 extern u32 sub_80244E4(void);
 extern void sub_802453C(void);
 extern u32 sub_801BF48(void);
 extern void sub_801BF98(void);
-extern void sub_801B450(void);
-extern u32 sub_801B410(void);
 
 extern u32 sub_801EF38(u32);
 extern u32 sub_801F194(void);
 extern void sub_801F214(void);
 extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
 extern void sub_801F808(u16 *);
-extern u32 sub_801602C(u32 r0, u8 *name);
 extern void sub_8099690(u32);
 extern void sub_801F8D0(void);
 extern u32 sub_801F890(void);
-extern void sub_80160D8(void);
-extern u32 sub_8016080(void);
 extern bool8 sub_80023E4(u32);
 
 void sub_8025434(s32);
@@ -487,7 +478,7 @@ void sub_802591C(void)
 
 void sub_80259F0(void)
 {
-    switch(sub_8023A94(1))
+    switch(sub_8023A94(TRUE))
     {
         case 3:
             gUnknown_203B2B4->species = sub_8023B44();
@@ -512,7 +503,7 @@ void sub_8025A84(void)
 {
     s32 menuAction = 0;
 
-    sub_8023A94(0);
+    sub_8023A94(FALSE);
     if(!sub_8012FD8(&gUnknown_203B2B4->unk78))
     {
         sub_8013114(&gUnknown_203B2B4->unk78, &menuAction);

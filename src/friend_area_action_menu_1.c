@@ -9,12 +9,12 @@
 #include "menu_input.h"
 #include "kecleon_bros.h"
 #include "code_80130A8.h"
+#include "code_801EE10_1.h"
+#include "code_801B3C0.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 extern struct TeamInventory *gTeamInventoryRef;
 
-extern u32 sub_801B410();
-extern void sub_801B450();
 extern u32 sub_801EF38(u8 r0);
 extern void sub_801F214();
 
@@ -41,12 +41,9 @@ extern void sub_801BF98(void);
 extern u32 sub_80244E4(void);
 extern void sub_802453C(void);
 
-extern u32 sub_8023A94(u32);
 extern bool8 sub_808D750(s16 index_);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void sub_808ED00();
-extern s16 sub_8023B44(void);
-extern void sub_8023C60(void);
 
 ALIGNED(4) const u8 gFriendActionStandby[] = "Stand By";
 ALIGNED(4) const u8 gFriendActionMakeLeader[] = "Make Leader";
@@ -124,7 +121,7 @@ void sub_80277FC(void)
 {
   struct PokemonStruct *pokeStruct;
 
-  switch(sub_8023A94(1)) {
+  switch(sub_8023A94(TRUE)) {
       case 0:
       case 1:
         break;
@@ -159,7 +156,7 @@ void sub_80278B4(void)
   u32 menuAction;
 
   menuAction = 0;
-  sub_8023A94(0);
+  sub_8023A94(FALSE);
   if ((sub_8012FD8(&gUnknown_203B2BC->unk7C) == 0) && (sub_8013114(&gUnknown_203B2BC->unk7C,&menuAction), menuAction != 1)) {
     gUnknown_203B2BC->menuAction1 = menuAction;
   }

@@ -242,5 +242,8 @@ void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokem
 void RestorePokemonStruct(struct unkStruct_8094924*, struct PokemonStruct*);
 s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon);
 
+// pokemon.s
+extern void sub_808CFD0(u8 *, s16, u8 *, u8, u32 *, u16 *);
+extern u32 sub_808D1DC(u8 *);
 
 #endif // GUARD_POKEMON_H
