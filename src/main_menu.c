@@ -1,10 +1,7 @@
 #include "global.h"
 #include "text1.h"
 #include "text2.h"
-#include "menu.h"
-#include "input.h"
 #include "menu_input.h"
-
 #include "adventure_log.h"
 #include "debug_menu.h"
 #include "ds_menus.h"
@@ -18,12 +15,12 @@
 #include "trade_items_menu.h"
 #include "constants/wonder_mail.h"
 
-// NOTE: 0x13 and 0x14 
+// NOTE: 0x13 and 0x14
 // Communication Screen?
 // Got Communication warning when I wrote them to the struct
 
 // NOTE: 0x29, 0x2A, 0x2B, 0x2C
-// Triggers a save 
+// Triggers a save
 
 // NOTE: 0x2D
 // Triggers a save and then goes to 0x13 (comms warning)
@@ -623,8 +620,8 @@ void sub_8035C1C(void)
     gMainMenu->sub.unk2D = 0;
 }
 
-void
-SetMenuItems(struct MenuStruct *param_1, struct UnkTextStruct2 *unkData, s32 index, const struct UnkTextStruct2 *param_4, const struct MenuItem *menuItems, u8 param_6 ,u32 menuAction, u32 unused_8)
+void SetMenuItems(struct MenuStruct *param_1, struct UnkTextStruct2 *unkData, s32 index,
+        const struct UnkTextStruct2 *param_4, const struct MenuItem *menuItems, u8 param_6, u32 menuAction, u32 unused_8)
 {
   unkData[index] = *param_4;
   ResetUnusedInputStruct();
@@ -778,10 +775,10 @@ void DrawMainMenu(void)
 
     if(SetMainMenuText())
     {
-        sub_8035CF4(gUnknown_203B34C->unk4,2,0);
+        sub_8035CF4(gUnknown_203B34C->unk4,2,FALSE);
     }
 
-    sub_8035CF4(gUnknown_203B34C->unk4,0,1);
+    sub_8035CF4(gUnknown_203B34C->unk4,0,TRUE);
     gUnknown_203B34C->unk0 = 1;
 }
 
@@ -808,8 +805,8 @@ u32 UpdateMainMenu(void)
 
             if(SetMainMenuText())
             {
-                sub_8035CF4(gUnknown_203B34C->unk4, 0, 1);
-                sub_8035CF4(gUnknown_203B34C->unk4, 2, 0);
+                sub_8035CF4(gUnknown_203B34C->unk4, 0, TRUE);
+                sub_8035CF4(gUnknown_203B34C->unk4, 2, FALSE);
             }
             switch(nextMenu)
             {
@@ -820,8 +817,8 @@ u32 UpdateMainMenu(void)
                     gUnknown_203B34C->unk0 = 1;
                     nextMenu = MENU_NO_SCREEN_CHANGE;
                     ResetUnusedInputStruct();
-                    sub_8035CF4(gUnknown_203B34C->unk4, 0, 1);
-                    sub_8035CF4(gUnknown_203B34C->unk4, 2, 0);
+                    sub_8035CF4(gUnknown_203B34C->unk4, 0, TRUE);
+                    sub_8035CF4(gUnknown_203B34C->unk4, 2, FALSE);
                     break;
                 case MENU_TRADE_ITEMS:
                     sub_8035DA0();
@@ -950,9 +947,9 @@ void sub_803623C(void)
   SetMainMenuItems();
   gUnknown_203B34C->currMenuChoice = -1;
   if (SetMainMenuText()) {
-    sub_8035CF4(gUnknown_203B34C->unk4,2,0);
+    sub_8035CF4(gUnknown_203B34C->unk4,2,FALSE);
   }
-  sub_8035CF4(gUnknown_203B34C->unk4,0,1);
+  sub_8035CF4(gUnknown_203B34C->unk4,0,TRUE);
 }
 
 void SetMainMenuItems(void)

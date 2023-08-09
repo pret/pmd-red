@@ -42,9 +42,6 @@ u8 IsQuickSave(void);
 void DrawLoadScreenText(void);
 void sub_80397B4(void);
 
-extern void sub_8035CF4(struct MenuStruct *, u32, u32);
-extern void SetMenuItems(struct MenuStruct *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
-
 extern void sub_80920D8(u8 *);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern bool8 sub_80023E4(u32);

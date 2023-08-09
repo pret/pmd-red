@@ -1,6 +1,9 @@
 #ifndef GUARD_MAIN_MENU_H
 #define GUARD_MAIN_MENU_H
 
+#include "menu.h"
+#include "text.h"
+
 enum MainMenuScreens
 {
     MENU_MAIN_SCREEN = 1,
@@ -30,12 +33,12 @@ enum MainMenuScreens
     MENU_DEBUG_FIELD_SCRIPT,
     MENU_DEBUG_DEBUG_MENU,
     MENU_DEBUG_UNKNOWN_1,
-    MENU_NO_SCREEN_CHANGE = 0xffdc
+    MENU_NO_SCREEN_CHANGE = 65500
 };
 
+// size: 0x8
 struct unkStruct_8035D94
 {
-    
     union {
         u8 itemIndex_u8;
         u32 itemIndex_u32;
@@ -43,6 +46,7 @@ struct unkStruct_8035D94
     s32 numItems;
 };
 
+// size: 0x4
 struct MainMenuSub
 {
     u8 unk2C;
@@ -50,6 +54,7 @@ struct MainMenuSub
     u8 unk2E;
 };
 
+// size: 0x40
 struct MainMenu
 {
     /* 0x0 */ s32 currMenu;
@@ -57,23 +62,24 @@ struct MainMenu
     /* 0x8 */ s32 lastMenu;
     u8 padding[0x20];
     /* 0x2C */ struct MainMenuSub sub;
-    /* 0x30 */ struct unkStruct_8035D94 unk30;
+    struct unkStruct_8035D94 unk30;
     s16 unk38;
     u8 unk3A;
     u8 unk3B;
     s32 unk3C;
 };
 
-
-
-void InitMainMenu(void);
-void DeleteMainMenu(void);
-void SetUpMenu(void);
-s32 UpdateMenu(void);
 void CleanUpMenu(void);
-bool8 sub_80363E0(void);
+void DeleteMainMenu(void);
+struct MainMenu *GetMainMenu(void);
+void InitMainMenu(void);
+void SetMenuItems(struct MenuStruct *, struct UnkTextStruct2 *, s32, const struct UnkTextStruct2 *, const struct MenuItem *, u8, u32, u32);
+void SetUpMenu(void);
+void sub_8035CC0(struct UnkTextStruct2 *, u32);
+void sub_8035CF4(struct MenuStruct*, u32, bool8);
 struct unkStruct_8035D94 *sub_8035D94(void);
 void sub_8035DA0(void);
-struct MainMenu *GetMainMenu(void);
+bool8 sub_80363E0(void);
+s32 UpdateMenu(void);
 
 #endif // GUARD_MAIN_MENU_H

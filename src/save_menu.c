@@ -133,14 +133,11 @@ ALIGNED(4) const u8 gUnknown_80E7178[] = _("{CENTER_ALIGN}The data could not be 
 ALIGNED(4) static const u8 save_menu_fill0[] = "pksdir0";
 
 extern void sub_8038440();
-extern void sub_8035CF4(struct MenuStruct *, u32, u32);
-extern void SetMenuItems(struct MenuStruct *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
 extern void sub_80384D0();
 extern void sub_8038830();
 extern void sub_80388C4(void);
 extern void sub_8014114();
 extern void sub_80140F8(void);
-extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
 extern void AddSprite(struct unkSprite *, u32, u32, u32);
 
 void CreateSaveMenu(s32 currMenu)
@@ -167,7 +164,7 @@ void CreateSaveMenu(s32 currMenu)
     SetMenuItems(gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,gSavingAdventureMenuItems,
                  0,6,0);
   }
-  sub_8035CF4(gUnknown_203B364->unk8,0,1);
+  sub_8035CF4(gUnknown_203B364->unk8,0,TRUE);
   gUnknown_203B364->unk4 = 0;
   gUnknown_203B364->currMenu = currMenu;
   sub_8038830();
@@ -222,7 +219,7 @@ s32 UpdateSaveMenu(void)
                     gUnknown_203B364->unk4 = 1;
                     return MENU_COMMUNICATION_1;
                 }
-                sub_8035CF4(gUnknown_203B364->unk8,0,1);
+                sub_8035CF4(gUnknown_203B364->unk8,0,TRUE);
                 gUnknown_203B364->unk4 = 1;
                 break;
             case SAVE_NOT_WRTTEN:
@@ -239,7 +236,7 @@ s32 UpdateSaveMenu(void)
                     SetMenuItems(gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,
                                     gAdventureCouldNotBeSavedMenuItems,0,6,0);
                 }
-                sub_8035CF4(gUnknown_203B364->unk8,0,1);
+                sub_8035CF4(gUnknown_203B364->unk8,0,TRUE);
                 gUnknown_203B364->unk4 = 1;
                 break;
         }

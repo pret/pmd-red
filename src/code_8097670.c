@@ -1,27 +1,12 @@
 #include "global.h"
+#include "code_8097670.h"
 #include "pokemon.h"
-
-struct unkStruct_203B494
-{
-    // size: 0xC4
-    u32 unk0; // 32 bit bitfield, I think
-    s32 numAdventures;
-    s32 unk8;
-    s32 unkC;
-    struct DungeonLocation dungeonLocation;
-    s16 unk14;
-    s16 unk16;
-    s16 unk18;
-    u32 unk1C[0xE];
-    u32 unk54[0xE];
-    u32 unk8C[0xD];
-    s32 unkC0;
-};
+#include "pokemon_3.h"
 
 EWRAM_DATA_2 struct unkStruct_203B494 *gUnknown_203B494 = {0};
 EWRAM_DATA struct unkStruct_203B494 gUnknown_2039778 = {0};
+
 extern const u8 *gAdventureLogText[];
-s16 GetBaseSpeciesNoUnown(s16 index);
 
 void sub_8097670(void)
 {

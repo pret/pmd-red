@@ -10,7 +10,7 @@
 #include "other_random.h"
 #include "friend_area.h"
 #include "team_inventory.h"
-
+#include "code_8097670.h"
 
 extern u8 gUnknown_2000A88[0x400];
 
@@ -52,7 +52,6 @@ extern void sub_80018D8(u32, u32, u32);
 extern void sub_809733C(u32, u32);
 extern void sub_80973A8(u32, u32);
 extern u8 HasRecruitedMon(u32);
-extern void sub_80976F8(u32);
 extern void sub_800199C(u32, s32, u32, s32);
 extern s32 sub_8001784(u32, s32, u16);
 

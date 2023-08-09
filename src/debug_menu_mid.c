@@ -1,16 +1,17 @@
 #include "global.h"
+#include "code_80130A8.h"
+#include "friend_area.h"
 #include "item.h"
-#include "team_inventory.h"
 #include "memory.h"
+#include "menu_input.h"
+#include "pokemon.h"
+#include "team_inventory.h"
 #include "text1.h"
 #include "text2.h"
-#include "menu_input.h"
-#include "friend_area.h"
-#include "code_80130A8.h"
 
+// size: 0x138
 struct unkStruct_203B3F0
 {
-    // size: 0x138
     u32 state;
     u8 id;
     u32 menuAction;
@@ -31,9 +32,9 @@ struct unkStruct_203B3F0
 
 extern struct unkStruct_203B3F0 *gUnknown_203B3F0;
 
+// size: 0xFC
 struct unkStruct_203B3F4
 {
-    // size: 0xFC
     u32 state;
     u8 friendArea;
     u8 fill5[0x8 - 5];
@@ -44,8 +45,6 @@ struct unkStruct_203B3F4
 };
 
 extern struct unkStruct_203B3F4 *gUnknown_203B3F4;
-
-
 
 const struct UnkTextStruct2 gUnknown_80E7E34 = {
     0x00, 0x00, 0x00, 0x00,
@@ -71,8 +70,10 @@ const struct UnkTextStruct2 gUnknown_80E7E64 = {
     0x04, 0x00,
     NULL
 };
+
 ALIGNED(4) const char gDebug_NumberText[] = "Number?";
 ALIGNED(4) static const u8 fill0[] = "pksdir0";
+
 const struct UnkTextStruct2 gUnknown_80E7E8C = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -89,52 +90,56 @@ const struct UnkTextStruct2 gUnknown_80E7EA4 = {
     0x03, 0x00,
     NULL
 };
+
 ALIGNED(4) const u8 gDebug_CloseText[] = "CLOSE";
 ALIGNED(4) const u8 gDebug_OpenText[] = "OPEN";
 ALIGNED(4) static const u8 fill1[] = "pksdir0";
+
+// friend_area.c
 extern bool8 *gFriendAreas;
+// data_80D47B8.s
 extern const char *gUnknown_80D4970[];
 
 extern void sub_801B3C0(struct Item *);
 extern void sub_801C8C4(u32, u32, u32, u32);
 extern void sub_801CB5C(u32);
-extern void sub_801CCD8();
+extern void sub_801CCD8(void);
 extern u32 sub_801CA08(u32);
-extern u8 sub_801CB24();
-extern void sub_801CBB8();
-extern u32 sub_801B410();
-extern void sub_801B450();
+extern u8 sub_801CB24(void);
+extern void sub_801CBB8(void);
+extern u32 sub_801B410(void);
+extern void sub_801B450(void);
 extern void sub_80211AC(u32, u32);
 extern void sub_8021354(u32);
-extern void sub_8021494();
-extern void sub_803AA34();
+extern void sub_8021494(void);
+extern void sub_803AA34(void);
 extern void sub_8021774(u8,u32, u32);
 extern void sub_809249C(u8, u32);
 extern void sub_8021830(void);
 extern u32 sub_80217EC(void);
-extern u8 sub_803ABC8(void);
 extern u32 sub_8021274(u32);
 extern u8 sub_802132C(void);
 extern void sub_80213A0(void);
-extern void sub_803AAC4();
-extern void sub_803AB34();
-extern void sub_803ABAC();
+extern void sub_803AAC4(void);
+extern void sub_803AB34(void);
+void sub_803ABAC(void);
 
 void sub_803A924(u32);
-void sub_803A93C();
-void sub_803A9AC();
+void sub_803A93C(void);
+void sub_803A9AC(void);
 
 void sub_803A504(u32);
-void sub_803A51C();
-void sub_803A5A0();
-void sub_803A690();
-void sub_803A6F0();
-void sub_803A740();
-void sub_803A7B0();
-void sub_803A810();
-void sub_803A86C();
+void sub_803A51C(void);
+void sub_803A5A0(void);
+void sub_803A690(void);
+void sub_803A6F0(void);
+void sub_803A740(void);
+void sub_803A7B0(void);
+void sub_803A810(void);
+void sub_803A86C(void);
+bool8 sub_803ABC8(void);
 
-
+// Unused
 u32 sub_803A45C(void)
 {
   ResetUnusedInputStruct();
@@ -144,6 +149,7 @@ u32 sub_803A45C(void)
   return 1;
 }
 
+// Unused
 u32 sub_803A48C(void)
 {
   switch(gUnknown_203B3F0->state) {
@@ -166,6 +172,7 @@ u32 sub_803A48C(void)
   return 0;
 }
 
+// Unused
 void sub_803A4E8(void)
 {
     if(gUnknown_203B3F0 != NULL)
@@ -536,3 +543,74 @@ void sub_803ABAC(void)
             break;
     }
 }
+
+#if NONMATCHING // https://decomp.me/scratch/LQcwz
+bool8 sub_803ABC8(void)
+{
+    struct PokemonStruct *mon;
+    s32 i;
+    s32 mask;
+    
+    for (i = 0, mask = 1; i < NUM_MONSTERS; i++) {
+        mon = &gRecruitedPokemonRef->pokemon[i];
+
+        if ((mask & mon->unk0) != 0
+            && ((mon->unk0 >> 1) & mask) != 0
+            && gUnknown_203B3F4->friendArea == GetFriendArea(mon->speciesNum))
+            return FALSE;
+
+    }
+    return TRUE;
+}
+#else
+NAKED
+bool8 sub_803ABC8(void)
+{
+    asm_unified(
+    "push {r4-r6,lr}\n"
+    "\tmovs r5, 0\n"
+    "\tmovs r6, 0x1\n"
+"_0803ABCE:\n"
+    "\tldr r2, _0803AC08\n"
+    "\tmovs r0, 0x58\n"
+    "\tadds r1, r5, 0\n"
+    "\tmuls r1, r0\n"
+    "\tldr r0, [r2]\n"
+    "\tadds r2, r0, r1\n"
+    "\tldrh r1, [r2]\n"
+    "\tadds r0, r6, 0\n"
+    "\tands r0, r1\n"
+    "\tcmp r0, 0\n"
+    "\tbeq _0803AC10\n"
+    "\tlsrs r0, r1, 1\n"
+    "\tands r0, r6\n"
+    "\tcmp r0, 0\n"
+    "\tbeq _0803AC10\n"
+    "\tldr r0, _0803AC0C\n"
+    "\tldr r4, [r0]\n"
+    "\tmovs r1, 0x8\n"
+    "\tldrsh r0, [r2, r1]\n"
+    "\tbl GetFriendArea\n"
+    "\tldrb r1, [r4, 0x4]\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r0, 24\n"
+    "\tcmp r1, r0\n"
+    "\tbne _0803AC10\n"
+    "\tmovs r0, 0\n"
+    "\tb _0803AC1C\n"
+    "\t.align 2, 0\n"
+"_0803AC08: .4byte gRecruitedPokemonRef\n"
+"_0803AC0C: .4byte gUnknown_203B3F4\n"
+"_0803AC10:\n"
+    "\tadds r5, 0x1\n"
+    "\tmovs r0, 0xCE\n"
+    "\tlsls r0, 1\n"
+    "\tcmp r5, r0\n"
+    "\tble _0803ABCE\n"
+    "\tmovs r0, 0x1\n"
+"_0803AC1C:\n"
+    "\tpop {r4-r6}\n"
+    "\tpop {r1}\n"
+    "\tbx r1");
+}
+#endif // NONMATCHING

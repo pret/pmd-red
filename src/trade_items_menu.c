@@ -86,19 +86,16 @@ extern u32 sub_801CA08(u32);
 extern void sub_801CBB8();
 extern u8 sub_801CB24();
 extern void sub_801B3C0(struct Item *);
-extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
 extern void sub_801CCD8();
 extern u32 sub_801B410();
 extern void sub_801B450();
 extern void sub_801CB5C(u32);
-extern void sub_8035CF4(struct MenuStruct *, u32, u32);
 
 extern u8 sub_801CF14(u32);
 extern u32 sub_801D008();
 extern void sub_801C8C4(u32, u32, s32 *, u32);
 extern s32 sub_8037B28(u32);
 extern void sub_8011830(void);
-extern void SetMenuItems(struct MenuStruct *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
 extern void nullsub_23(u32);
 extern void xxx_call_start_bg_music(void);
 extern s32 sub_80381F4(u32, void *, void *);
@@ -337,7 +334,7 @@ void sub_8036728(void)
         sub_800641C(gTradeItemsMenu->unk1E4, 1, 1);
         sub_801CB5C(1);
         if (gTradeItemsMenu->fallbackState == 0x13) {
-            sub_8035CF4(gTradeItemsMenu->unk44, 3, 1);
+            sub_8035CF4(gTradeItemsMenu->unk44, 3, TRUE);
             SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_POPUP_MENU);
         }
         else {
@@ -357,14 +354,14 @@ void sub_8036788(void)
     case 1:
         // When you change the #
         sub_801CCD8();
-        sub_8035CF4(gTradeItemsMenu->unk44, 3, 0);
+        sub_8035CF4(gTradeItemsMenu->unk44, 3, FALSE);
         sub_8036F30();
         break;
     case 2:
         // If you back out of the # selection
         sub_8035CC0(gTradeItemsMenu->unk184, 2);
         sub_801CCD8();
-        sub_8035CF4(gTradeItemsMenu->unk44, 3, 1);
+        sub_8035CF4(gTradeItemsMenu->unk44, 3, TRUE);
         SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_POPUP_MENU);
         break;
     case 3:
@@ -626,7 +623,7 @@ void sub_8036B28(void)
         SetMenuItems(gTradeItemsMenu->unk44,gTradeItemsMenu->unk184,3,&gUnknown_80E60EC,
                     gUnknown_80E6104,1,0,0);
         sub_801CCD8();
-        sub_8035CF4(gTradeItemsMenu->unk44,3,1);
+        sub_8035CF4(gTradeItemsMenu->unk44,3,TRUE);
         break;
     case TRADE_ITEMS_SEND_ITEM_NUMBER:
         sub_8036F74();
@@ -782,7 +779,7 @@ void sub_8036F74(void)
   sub_8006518(gTradeItemsMenu->unk184);
   sub_8036ECC(2, gTeamInventoryRef->teamStorage[gTradeItemsMenu->itemToSend.id]);
   sub_801CCD8();
-  sub_8035CF4(gTradeItemsMenu->unk44, 3, 0);
+  sub_8035CF4(gTradeItemsMenu->unk44, 3, FALSE);
   sub_8036F30();
 }
 

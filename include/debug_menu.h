@@ -1,39 +1,26 @@
 #ifndef GUARD_DEBUG_MENU_H
 #define GUARD_DEBUG_MENU_H
 
-#include "text.h"
+#include "pokemon.h"
 #include "menu.h"
-#include "menu_input.h"
+#include "text.h"
 
-enum DebugMenuOptions
-{
-    MENU_DEBUG_MENU_DUNGEONS = 0,
-    MENU_DEBUG_MENU_FIELD,
-    MENU_DEBUG_MENU_FIELD_MAP,
-    MENU_DEBUG_MENU_FIELD_SCRIPT,
-    MENU_DEBUG_MENU_DEBUG_MENU,
-    MENU_DEBUG_MENU_UNKNOWN_1,
-    MENU_DEBUG_MENU_STORAGE,
-    MENU_DEBUG_MENU_H_OPEN = 9,
-};
-
+// size: 0x1A4
 struct DebugMenu
 {
-    // size: 0x1A4
     struct MenuStruct unk0[4];
-    /* 0x140 */ struct UnkTextStruct2 unk140[4];
+    struct UnkTextStruct2 unk140[4];
     u32 fill1A0;
 };
 
-
+// size: 0x140
 struct unkStruct_203B3F8
 {
-    // size: 0x140
-    u32 state;
+    /* 0x0 */ u32 state;
     s16 unk4;
     u16 unk6;
-    struct PokemonStruct *pokemon;
-    u32 menuAction;
+    /* 0x8 */ struct PokemonStruct *pokemon;
+    /* 0xC */ u32 menuAction;
     struct MenuStruct unk10;
     u32 unk60;
     u32 unk64;
@@ -50,11 +37,20 @@ struct unkStruct_203B3F8
     struct UnkTextStruct2 unkE0[4];
 };
 
+enum DebugMenuOptions
+{
+    MENU_DEBUG_MENU_DUNGEONS = 0,
+    MENU_DEBUG_MENU_FIELD,
+    MENU_DEBUG_MENU_FIELD_MAP,
+    MENU_DEBUG_MENU_FIELD_SCRIPT,
+    MENU_DEBUG_MENU_DEBUG_MENU,
+    MENU_DEBUG_MENU_UNKNOWN_1,
+    MENU_DEBUG_MENU_STORAGE,
+    MENU_DEBUG_MENU_H_OPEN = 9,
+};
 
 void CreateDebugMenu(void);
 void DeleteDebugMenu(void);
 u32 UpdateDebugMenu(void);
-void SetDebugMenuItems(void);
-void sub_803A3A0(void);
 
 #endif

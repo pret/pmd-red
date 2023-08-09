@@ -12,6 +12,7 @@
 #include "menu_input.h"
 #include "code_8094F88.h"
 #include "code_80130A8.h"
+#include "main_menu.h"
 
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 
@@ -33,8 +34,6 @@ extern u32 sub_8030768(u32);
 extern s8 sub_80307EC();
 extern void sub_8030D40(u8, u32);
 extern void sub_8030810(u32);
-extern void sub_8035CC0(struct UnkTextStruct2 *r0, u32);
-extern void sub_8035CF4(struct MenuStruct *r0, u32, u32);
 extern u32 sub_8030DA0(void);
 extern void sub_8030DE4(void);
 extern void sub_803092C(void);
@@ -74,7 +73,6 @@ extern u32 sub_8023CE8(void);
 extern u32 sub_8030894(void);
 extern void sub_8030F58(u32);
 extern void sub_8023DA4(void);
-extern void SetMenuItems(struct MenuStruct *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
 extern void sub_8029B34(void);
 extern void sub_8029AD8(void);
 extern void sub_8029AF4(void);
@@ -559,7 +557,7 @@ void sub_8028348(void)
             sub_8006518(gUnknown_203B2C0->unk35C);
             SetMenuItems(gUnknown_203B2C0->unk21C, gUnknown_203B2C0->unk35C, 3, &gUnknown_80DDAE4, gUnknown_80DDAFC, 1, 0, 0);
             sub_8023DA4();
-            sub_8035CF4(gUnknown_203B2C0->unk21C, 3, 1);
+            sub_8035CF4(gUnknown_203B2C0->unk21C, 3, TRUE);
             break;
         case NO_POKEMON_IN_FRIEND_AREA:
             sub_8014248(gUnknown_80DDD2C, 0, 0xA, gUnknown_80DDAA0, 0, 4, 0, &gUnknown_203B2C0->faceFile,0xC);
@@ -714,7 +712,7 @@ void sub_8028348(void)
             sub_8006518(gUnknown_203B2C0->unk35C);
             SetMenuItems(gUnknown_203B2C0->unk21C, gUnknown_203B2C0->unk35C, 3, &gUnknown_80DDACC, gUnknown_80DDAFC, 1, 0, 0);
             sub_803092C();
-            sub_8035CF4(gUnknown_203B2C0->unk21C, 3, 1);
+            sub_8035CF4(gUnknown_203B2C0->unk21C, 3, TRUE);
             break;
         case 0xA:
             gUnknown_203B2C0->mailCount = CountAllMail();
@@ -1273,7 +1271,7 @@ void sub_80291AC(void)
             sub_803092C();
             if(gUnknown_203B2C0->fallbackState == DEFAULT_FALLBACK_STATE)
             {
-                sub_8035CF4(gUnknown_203B2C0->unk21C, 3, 1);
+                sub_8035CF4(gUnknown_203B2C0->unk21C, 3, TRUE);
                 SetFriendRescueCounterState(0x20);
             }
             else
@@ -1620,7 +1618,7 @@ void sub_8029740(void)
             sub_803092C();
             if(gUnknown_203B2C0->fallbackState == DEFAULT_FALLBACK_STATE)
             {
-                sub_8035CF4(gUnknown_203B2C0->unk21C, 3, 1);
+                sub_8035CF4(gUnknown_203B2C0->unk21C, 3, TRUE);
                 SetFriendRescueCounterState(0x2B);
             }
             else
@@ -1729,7 +1727,7 @@ void sub_8029944(void)
             sub_8023B7C(1);
             if(gUnknown_203B2C0->fallbackState == DEFAULT_FALLBACK_STATE)
             {
-                sub_8035CF4(gUnknown_203B2C0->unk21C, 3, 1);
+                sub_8035CF4(gUnknown_203B2C0->unk21C, 3, TRUE);
                 SetFriendRescueCounterState(0x34);
             }
             else

@@ -15,6 +15,7 @@
 #include "menu_input.h"
 #include "code_8094F88.h"
 #include "code_80130A8.h"
+#include "main_menu.h"
 
 extern void SetFriendRescueMenuState(u32);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
@@ -253,11 +254,9 @@ extern void sub_80155F0();
 extern u32 sub_801CA08(u32);
 extern void sub_801CBB8(void);
 extern void sub_801CB5C(u32);
-extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
 extern void sub_801B3C0(struct Item *);
 extern u32 sub_801B410(void);
 extern void sub_801B450(void);
-extern void sub_8035CF4(struct MenuStruct *, u32, u32);
 extern u8 sub_801CB24(void);
 extern u32 sub_8030DA0(void);
 extern void sub_8030DE4(void);
@@ -308,7 +307,6 @@ extern u32 sub_80306A8(u32 wonderMailType, u32, struct UnkTextStruct2_sub *, u32
 extern u32 sub_8030894(void);
 extern void sub_803092C(void);
 extern bool8 sub_8031D70(u32 mailIndex, s32);
-extern void sub_8035CF4(struct MenuStruct *, u32, u32);
 extern s32 sub_8037B28(u32);
 extern s32 sub_8037D64(u32, void *, void *);
 extern s32 sub_80381F4(u32, void *, void *);
@@ -322,7 +320,6 @@ extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void MemoryFill8(u8 *dest, u8 value, s32 size);
 extern void nullsub_23(u32);
 extern void ResetUnusedInputStruct(void);
-extern void SetMenuItems(struct MenuStruct *param_1, struct UnkTextStruct2 *unkData, s32 index, const struct UnkTextStruct2 *param_4, const struct MenuItem *menuItems, u8 param_6, u32 menuAction, u32 unused_8);
 extern void sprintfStatic(char *buffer, const char *text, ...);
 extern void xxx_call_start_bg_music(void);
 

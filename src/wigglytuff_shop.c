@@ -42,7 +42,6 @@ extern void sub_8021774(u8,u32, u32);
 extern void sub_809249C(u8, u32);
 extern void sub_8021830(void);
 extern u32 sub_80217EC(void);
-extern u8 sub_803ABC8(void);
 extern u32 sub_8021274(u32);
 extern u8 sub_802132C(void);
 extern void sub_80213A0(void);

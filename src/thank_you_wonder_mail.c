@@ -14,6 +14,7 @@
 #include "code_800D090.h"
 #include "menu_input.h"
 #include "code_80130A8.h"
+#include "main_menu.h"
 
 extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 
@@ -155,7 +156,6 @@ const struct MenuItem gUnknown_80DEEE4[4] =
 #include "data/thank_you_wonder_mail.h"
 
 
-extern void sub_8035CC0(struct UnkTextStruct2 *r0, u32);
 extern void sub_8030810(u32);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E00(void);
@@ -214,7 +214,6 @@ extern void sub_8031E10();
 extern void sub_802F2C0();
 extern void SetThankYouMailMenuState(u32);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
-extern void SetMenuItems(struct MenuStruct *menu, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *entries, u32, u32, u32);
 extern void sub_802F204(struct unkStruct_802F204 *, u32);
 extern void sub_80151C0(u32, u8 *);
 extern void xxx_call_start_bg_music(void);
@@ -234,7 +233,6 @@ extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
 extern void sub_8031D70(u8, u32);
 
 extern void sub_803092C(void);
-extern void sub_8035CF4(struct MenuStruct *, u32, u32);
 extern u32 sub_801CA08(u32);
 extern void sub_801CBB8(void);
 extern void sub_801B3C0(struct Item *);
@@ -654,7 +652,7 @@ void sub_802A230(void)
         sub_800641C(gUnknown_203B2C4->unk3BC, 1, 1);
         sub_803092C();
         if (gUnknown_203B2C4->fallbackState == 0x2b) {
-            sub_8035CF4(gUnknown_203B2C4->unk21C, 3, 1);
+            sub_8035CF4(gUnknown_203B2C4->unk21C, 3, TRUE);
             SetThankYouMailMenuState(0x11);
         }
         else {
@@ -706,7 +704,7 @@ void sub_802A33C(void)
         sub_800641C(gUnknown_203B2C4->unk3BC,1,1);
         sub_801CB5C(1);
         if (gUnknown_203B2C4->fallbackState == 0x2b) {
-            sub_8035CF4(gUnknown_203B2C4->unk21C,3,1);
+            sub_8035CF4(gUnknown_203B2C4->unk21C,3,TRUE);
             SetThankYouMailMenuState(0x14);
         }
         else {
@@ -1296,7 +1294,7 @@ void UpdateThankYouMailText(void)
         sub_8006518(gUnknown_203B2C4->unk35C);
         SetMenuItems(gUnknown_203B2C4->unk21C,gUnknown_203B2C4->unk35C,3,&gUnknown_80DED60,gUnknown_80DED78,1,0,0);
         sub_803092C();
-        sub_8035CF4(gUnknown_203B2C4->unk21C,3,1);
+        sub_8035CF4(gUnknown_203B2C4->unk21C,3,TRUE);
         break;
     case 0x13:
         if (sub_801D008() != 0)
@@ -1313,7 +1311,7 @@ void UpdateThankYouMailText(void)
         sub_8006518(gUnknown_203B2C4->unk35C);
         SetMenuItems(gUnknown_203B2C4->unk21C,gUnknown_203B2C4->unk35C,3,&gUnknown_80DED48,gUnknown_80DED78,1,0,0);
         sub_801CCD8();
-        sub_8035CF4(gUnknown_203B2C4->unk21C,3,1);
+        sub_8035CF4(gUnknown_203B2C4->unk21C,3,TRUE);
         break;
     case THANK_YOU_MAIL_COMMS_FINISHED:
         gUnknown_203B2C4->linkError = COMMS_GOOD;
