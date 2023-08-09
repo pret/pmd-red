@@ -35,11 +35,6 @@ extern const char gKanjiB_file_string[];
 // system_sbin.s
 extern const struct FileArchive gSystemFileArchive;
 
-// text.s
-extern void sub_800898C(void);
-extern void sub_80089AC(const struct UnkTextStruct2 *, struct UnkTextStruct2_sub *);
-extern void sub_8009388(void);
-
 void sub_8006438(const struct UnkTextStruct2 *, u8, u8, struct UnkTextStruct2_sub *);
 
 void LoadCharmaps(void)

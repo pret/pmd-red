@@ -44,7 +44,10 @@ void sub_8007E20(u32, u32, u32, u32, u32, u8 *, u32);
 // text.s
 extern struct unkChar *GetCharacter(u32);
 extern void InitGraphics(void);
+extern void sub_800898C(void);
+extern void sub_80089AC(const struct UnkTextStruct2 *, struct UnkTextStruct2_sub *);
 extern void sub_8008C54(u32);
+extern void sub_8009388(void);
 extern void xxx_call_draw_string(s32 x, u32 y, const u8 *str, u32 , u32);
 
 #endif // GUARD_TEXT2_H
