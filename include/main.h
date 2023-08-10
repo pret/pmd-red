@@ -3,7 +3,7 @@
 
 typedef void (*IntrCallback)(void);
 
-extern EWRAM_DATA IntrCallback gIntrCallbacks[6];
+extern IntrCallback gIntrCallbacks[6];
 
 void AckInterrupt(u16);
 bool8 EnableInterrupts(void);

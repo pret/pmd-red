@@ -11,10 +11,10 @@ struct unkStruct_202D648
     IntrCallback unk4; // some function... just making it IntrCallback for now
 };
 
-extern EWRAM_DATA s16 gUnknown_203B0A8;
-extern EWRAM_DATA s16 gUnknown_203B0AA;
-extern EWRAM_DATA s16 gUnknown_203B0AC;
-extern EWRAM_DATA s16 gUnknown_203B0AE;
+extern s16 gUnknown_203B0A8;
+extern s16 gUnknown_203B0AA;
+extern s16 gUnknown_203B0AC;
+extern s16 gUnknown_203B0AE;
 
 void nullsub_17(void);
 void xxx_update_bg_sound_input(void);
