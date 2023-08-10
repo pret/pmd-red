@@ -662,6 +662,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
     s16 data_s16;
     s32 count;
     s32 i;
+    struct PokemonStruct *pokemon;
 
     xxx_init_struct_8094924_save_809486C(&backup, a1, a2);
 
@@ -673,14 +674,13 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
     data_s16 = -data_s16;
     count = 0;
     for (i = 0; i < NUM_MONSTERS; i++) {
-#ifdef NONMATCHING
-        struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[i];
-#else
-        struct PokemonStruct* pokemon;
-        register struct unkStruct_203B45C** recruited asm("r2") = &gRecruitedPokemonRef;
+        // Some check was optimized out. Needed for matching. Thanks kaz
+        if (i) {
+            u8 unk = -unk;
+        }
 
-        pokemon = &(*recruited)->pokemon[i];
-#endif
+        pokemon = &gRecruitedPokemonRef->pokemon[i];
+
         if (pokemon->unk0 & 1) {
             if (pokemon->unk0 & 2) {
                 buffer[count++] = i;

@@ -237,12 +237,12 @@ bool8 sub_803ABC8(void)
     s32 mask;
     
     for (i = 0, mask = 1; i < NUM_MONSTERS; i++) {
-#ifdef NONMATCHING
-        struct PokemonStruct* mon = &gRecruitedPokemonRef->pokemon[i];
-#else
-        register struct unkStruct_203B45C** recruited asm("r2") = &gRecruitedPokemonRef;
-        mon = &(*recruited)->pokemon[i];
-#endif
+        // Some check was optimized out. Needed for matching. Thanks kaz
+        if (i) {
+            u8 unk = -unk;
+        }
+
+        mon = &gRecruitedPokemonRef->pokemon[i];
 
         if ((mask & mon->unk0) != 0
             && ((mon->unk0 >> 1) & mask) != 0
