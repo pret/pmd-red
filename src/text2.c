@@ -2014,7 +2014,9 @@ void sub_8007AA4(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 co
 
     r4 = &a0[a1];
     ip = gUnknown_80B853C[color & 0xF] + 0x11111111;
+    #ifndef NONMATCHING
     asm("":::"r8");
+    #endif // NONMATCHING
     dataLOL = gUnknown_80B8848;
     a4++; a4--;
     r3 = y / 8;
