@@ -1,6 +1,7 @@
 #include "global.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "menu.h"
 #include "input.h"
 #include "mailbox.h"
@@ -86,9 +87,6 @@ extern void InitializeJobListMenu(u32);
 extern void sub_802B640(u32, u32, u32);
 extern void sub_802B7D0(u32);
 extern void sub_802B9FC(u8);
-extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
-extern void sub_80073E0(u32);
 extern u32 sub_802BA8C(void);
 extern void sub_802BACC(void);
 extern u8 GetPokemonNewsIndex(void);

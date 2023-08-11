@@ -2,23 +2,26 @@
 #include "constants/communication_error_codes.h"
 #include "constants/monster.h"
 #include "constants/wonder_mail.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "text_util.h"
-#include "input.h"
 #include "item.h"
 #include "team_inventory.h"
 #include "pokemon.h"
 #include "friend_rescue.h"
 #include "memory.h"
 #include "save.h"
-#include "menu.h"
 #include "rescue_password_menu.h"
 #include "menu_input.h"
 #include "code_8094F88.h"
+#include "code_80130A8.h"
+#include "main_menu.h"
+#include "code_801EE10_1.h"
+#include "code_801C620.h"
+#include "code_801B3C0.h"
 
 extern void SetFriendRescueMenuState(u32);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
-extern s32 sub_80144A4(s32 *);
 extern void sub_802F2C0();
 extern u32 sub_802F298();
 
@@ -251,15 +254,6 @@ extern void sub_8034848(void);
 
 extern u32 sub_80154F0();
 extern void sub_80155F0();
-extern u32 sub_801CA08(u32);
-extern void sub_801CBB8(void);
-extern void sub_801CB5C(u32);
-extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
-extern void sub_801B3C0(struct Item *);
-extern u32 sub_801B410(void);
-extern void sub_801B450(void);
-extern void sub_8035CF4(struct MenuStruct *, u32, u32);
-extern u8 sub_801CB24(void);
 extern u32 sub_8030DA0(void);
 extern void sub_8030DE4(void);
 extern void sub_803092C(void);
@@ -275,45 +269,26 @@ extern u8 sub_8024108(u32);
 extern void sub_802452C(void);
 extern u32 sub_80244E4(void);
 extern void sub_802453C(void);
-extern void sub_8023B7C(u32);
-extern u32 sub_8023A94(u32);
-extern void sub_8023C60(void);
 extern void sub_8024458(s16, u32);
-extern void sub_8023DA4(void);
 extern void sub_8035D1C(void);
-extern u16 sub_8023B44(void);
 extern u32 sub_8039068(u32, u8 *passwordBuffer, struct unkStruct_203B480 *r0);
-extern bool8 sub_801CF14(s32);
 
 extern void sub_803084C(void);
 extern void sub_8031E10(void);
-extern void sub_8023C60(void);
 extern void sub_80155F0(void);
-extern void sub_801CBB8(void);
 extern void sub_802F2C0(void);
 extern void sub_8030DE4(void);
 extern void sub_802453C(void);
-extern void sub_801B450(void);
-extern void sub_800641C(struct UnkTextStruct2 *a0, u8 a1, u8 a2);
-extern void sub_8006518(struct UnkTextStruct2 *);
 extern u8 sub_800D588(void);
 extern void sub_8011830(void);
-extern void sub_80141B4(const u8 *, u32, struct OpenedFile **, u32);
-extern void sub_8014248(const u8 *, u32, u32, const struct MenuItem *, void *, u32, u32, struct OpenedFile **, u32);
 extern void sub_80151C0(u32, u8 *);
-extern void sub_801C8C4(u32, u32, s32 * , u32);
-extern void sub_801CCD8(void);
 extern u32 sub_801D008(void);
-extern void sub_8023868(u32, u32, u32, u32);
-extern void sub_8023C60(void);
 extern u32 sub_8023CE8(void);
-extern void sub_8023DA4(void);
 extern void sub_802F204(struct unkStruct_802F204 *, u32);
 extern u32 sub_80306A8(u32 wonderMailType, u32, struct UnkTextStruct2_sub *, u32);
 extern u32 sub_8030894(void);
 extern void sub_803092C(void);
 extern bool8 sub_8031D70(u32 mailIndex, s32);
-extern void sub_8035CF4(struct MenuStruct *, u32, u32);
 extern s32 sub_8037B28(u32);
 extern s32 sub_8037D64(u32, void *, void *);
 extern s32 sub_80381F4(u32, void *, void *);
@@ -327,7 +302,6 @@ extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void MemoryFill8(u8 *dest, u8 value, s32 size);
 extern void nullsub_23(u32);
 extern void ResetUnusedInputStruct(void);
-extern void SetMenuItems(struct MenuStruct *param_1, struct UnkTextStruct2 *unkData, s32 index, const struct UnkTextStruct2 *param_4, const struct MenuItem *menuItems, u8 param_6, u32 menuAction, u32 unused_8);
 extern void sprintfStatic(char *buffer, const char *text, ...);
 extern void xxx_call_start_bg_music(void);
 
@@ -1096,8 +1070,8 @@ void sub_8032828(void)
                 ResetUnusedInputStruct();
                 sub_800641C(0,1,1);
                 {
-                struct {u16 a; u16 b;} local_x = {3, 2};
-                sub_801C8C4(0, 1, (s32 *)&local_x, 9);
+                struct UnkTextStruct2_sub local_x = {3, 2};
+                sub_801C8C4(0, 1, &local_x, 9);
                 }
             }
             break;
@@ -1872,7 +1846,7 @@ void sub_8034130(void)
 
 void sub_803418C(void)
 {
-    switch(sub_8023A94(1))
+    switch(sub_8023A94(TRUE))
     {
         case 2:
             sub_8023C60();
@@ -1904,7 +1878,7 @@ void sub_8034254(void)
     s32 menuAction;
     menuAction = -1;
 
-    sub_8023A94(0);
+    sub_8023A94(FALSE);
     if(!sub_8012FD8(&gUnknown_203B33C->unk21C[3]))
         sub_8013114(&gUnknown_203B33C->unk21C[3], &menuAction);
     switch(menuAction)
@@ -2477,7 +2451,7 @@ void sub_8034B88(void)
     gUnknown_203B33C->item.id = ITEM_NOTHING;
     gUnknown_203B33C->item.quantity = 1;
     gUnknown_203B33C->item.flags = 0;
-    switch(sub_801CA08(1))
+    switch(sub_801CA08(TRUE))
     {
         case 2:
             sub_801CBB8();
@@ -2508,7 +2482,7 @@ void sub_8034C38(void)
             sub_801B450();
             ResetUnusedInputStruct();
             sub_800641C(gUnknown_203B33C->unk3BC, 1, 1);
-            sub_801CB5C(1);
+            sub_801CB5C(TRUE);
             if(gUnknown_203B33C->fallbackState == FRIEND_RESCUE_MENU_DEFAULT_FALLBACK)
             {
                 sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
@@ -2528,7 +2502,7 @@ void sub_8034C98(void)
     s32 menuAction;
 
     menuAction = -1;
-    sub_801CA08(0);
+    sub_801CA08(FALSE);
     if(!sub_8012FD8(&gUnknown_203B33C->unk21C[3]))
         sub_8013114(&gUnknown_203B33C->unk21C[3], &menuAction);
     switch(menuAction)
@@ -2548,7 +2522,7 @@ void sub_8034C98(void)
         case 5:
         case 8:
             sub_8035CC0(gUnknown_203B33C->unk35C, 3);
-            sub_801CB5C(0x1);
+            sub_801CB5C(TRUE);
             SetFriendRescueMenuState(0x5F);
             break;
     }
@@ -2788,7 +2762,7 @@ void sub_80350F4(void)
         switch(menuAction)
         {
             case 0x15:
-                if(sub_801CF14(0) != 0)
+                if(sub_801CF14(0))
                     SetFriendRescueMenuState(0x56);
                 else
                     SetFriendRescueMenuState(0x57);

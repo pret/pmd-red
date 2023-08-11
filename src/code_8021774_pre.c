@@ -1,14 +1,18 @@
 #include "global.h"
+#include "code_801EE10_mid.h"
+#include "code_8021774_pre.h"
 #include "constants/friend_area.h"
 #include "constants/input.h"
 #include "friend_area.h"
 #include "input.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "item.h"
 #include "team_inventory.h"
 #include "menu_input.h"
 
+// size: 0xE0
 struct unkStruct_203B280
 {
     u8 unk0[NUM_FRIEND_AREAS];
@@ -19,6 +23,7 @@ struct unkStruct_203B280
     struct UnkTextStruct2 unk7C[4];
     u8 unkDC[4];
 };
+
 extern struct unkStruct_203B280 *gUnknown_203B280;
 extern u32 gUnknown_203B284;
 extern u16 gUnknown_203B288;
@@ -29,9 +34,7 @@ extern struct UnkTextStruct2 gUnknown_80DC464;
 
 u8 sub_8021700(u32 mode);
 s32 sub_8021664(void);
-extern u8 sub_802132C(void);
 extern void sub_8021410(void);
-extern void sub_8021494(void);
 extern void PlayMenuSoundEffect(u32);
 
 bool8 sub_80211AC(u32 param_1, u32 param_2)
@@ -63,7 +66,7 @@ bool8 sub_80211AC(u32 param_1, u32 param_2)
     }
 }
 
-u32 sub_8021274(u8 param_1)
+u32 sub_8021274(bool8 param_1)
 {
     if (param_1 == 0) {
         sub_8013660(&gUnknown_203B280->unk40);
@@ -104,7 +107,7 @@ u8 sub_802132C(void)
     return gUnknown_203B280->unk0[gUnknown_203B280->unk40.unk1E * gUnknown_203B280->unk40.unk1C + gUnknown_203B280->unk40.menuIndex];
 }
 
-void sub_8021354(u8 param_1)
+void sub_8021354(bool8 param_1)
 {
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B280->unk7C,0,0);

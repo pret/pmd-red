@@ -3,18 +3,19 @@
 #include "constants/input.h"
 #include "constants/iq_skill.h"
 #include "memory.h"
-#include "menu.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "team_inventory.h"
-#include "text.h"
-#include "input.h"
+#include "text1.h"
+#include "text2.h"
 #include "item.h"
 #include "menu_input.h"
 #include "code_8023144.h"
 #include "code_800D090.h"
 #include "friend_area.h"
 #include "kecleon_bros.h"
+#include "code_80130A8.h"
+#include "code_801B3C0.h"
 
 struct unkStruct_3001B5C
 {
@@ -61,11 +62,8 @@ extern u8 gUnknown_80DC8F8[];
 extern u8 *gUnknown_80D4940[];
 extern u8 *gUnknown_80D4970[];
 extern void sub_8022924(s32);
-extern s32 sub_80144A4(s32 *);
 extern u32 sub_801B00C(void);
 extern void sub_801B048(void);
-extern u32 sub_801B410(void);
-extern void sub_801B450(void);
 
 void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 id, bool8 checkBoostFlags, struct Gummi* gummi);
 
@@ -462,9 +460,6 @@ void sub_8023420(void)
 
 extern u8 gUnknown_80DC934[];
 
-extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
-extern void sub_80073E0(u32);
 bool8 HasRecruitedMon(s16 species_);
 extern u8 gUnknown_80DC93C[];
 

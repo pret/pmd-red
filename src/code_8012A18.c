@@ -2,6 +2,7 @@
 #include "code_800558C.h"
 #include "input.h"
 #include "game_options.h"
+#include "sprite.h"
 
 extern void sub_8011860();
 extern void xxx_draw_string_80144C4();
@@ -14,7 +15,6 @@ extern void TransferBGPaletteBuffer();
 extern void xxx_call_update_bg_vram();
 extern void sub_8009908();
 extern void xxx_call_update_bg_sound_input();
-extern void ResetSprites(u8 r0);
 
 extern struct GameOptions *gGameOptionsRef;
 
@@ -34,6 +34,6 @@ void sub_8012A18()
     xxx_call_update_bg_vram();
     sub_8009908();
     xxx_call_update_bg_sound_input();
-    ResetSprites(0);
+    ResetSprites(FALSE);
 }
 

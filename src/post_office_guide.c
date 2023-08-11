@@ -1,15 +1,14 @@
 #include "global.h"
 #include "pokemon.h"
-#include "file_system.h"
-#include "input.h"
 #include "constants/mailbox.h"
-#include "menu.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "wonder_mail.h"
 #include "code_800D090.h"
 #include "code_8094F88.h"
 #include "menu_input.h"
+#include "code_80130A8.h"
 
 struct PostOfficeHelper
 {
@@ -178,8 +177,6 @@ extern u8 gUnknown_202DE58[];
 extern u8 gUnknown_202E5D8[];
 extern u8 gAvailablePokemonNames[];
 
-extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
-extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, struct OpenedFile **r5, u32);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8031A84();
 extern void DisplayMissionObjectives();
@@ -188,8 +185,6 @@ extern u8 *sub_80975DC(u32 r0);
 extern u8 sub_8099360(u8 *);
 extern u8 sub_8099394(volatile u8 *);
 extern struct WonderMail *GetJobSlotInfo(u8);
-extern void sub_80073B8(u32);
-extern void sub_80073E0(u32);
 extern void sub_803B6B0(u32, u32, u32, u32);
 extern s16 sub_80A2688(u8 r0);
 extern u8 sub_80992E0(s16 *, s16 *);
@@ -205,7 +200,6 @@ extern void HandlePostOfficeHelpGoRescueMenuSelection();
 extern void ReturntoGoRescueMenu();
 extern void HandlePostOfficeHelpGetHelpMenuSelection();
 extern void ReturnToGetHelpMenu();
-extern s32 sub_80144A4(s32 *);
 extern s32 CountJobsinDungeon(u8);
 
 u32 CreateHelperPelipperMenu(s16 speciesID)

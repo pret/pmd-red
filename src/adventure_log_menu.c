@@ -1,12 +1,12 @@
 #include "global.h"
+#include "adventure_log.h"
 #include "input.h"
 #include "main_menu.h"
-#include "adventure_log.h"
-#include "text.h"
+#include "text1.h"
 
 extern void CreateAdventureLogScreen(u32);
 extern u32 HandleAdventureLogInput(u32);
-extern void CleanAdventureLogScreen();
+extern void CleanAdventureLogScreen(void);
 
 void CreateAdventureLogMenu(void)
 {
@@ -24,8 +24,7 @@ u32 UpdateAdventureLogMenu(void)
     u32 nextMenu;
     nextMenu = MENU_NO_SCREEN_CHANGE;
 
-    switch(HandleAdventureLogInput(1))
-    {
+    switch (HandleAdventureLogInput(1)) {
         case 0:
         case 1:
             break;

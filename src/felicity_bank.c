@@ -1,12 +1,12 @@
 #include "global.h"
-#include "pokemon.h"
-#include "file_system.h"
-#include "input.h"
+#include "code_80130A8.h"
 #include "felicity_bank.h"
 #include "memory.h"
-#include "team_inventory.h"
-#include "text.h"
 #include "menu_input.h"
+#include "pokemon.h"
+#include "team_inventory.h"
+#include "text1.h"
+#include "text2.h"
 
 EWRAM_DATA_2 struct FelicityBankWork *gFelicityBankWork = {0};
 
@@ -29,15 +29,6 @@ extern u8 gFelicityMoney[];
 extern u8 gUnknown_80DB738;
 
 extern void PlaySound(u32);
-extern void sub_80073B8(u32);
-extern void sub_80073E0(u32);
-extern void sub_8008C54(u32);
-extern void sub_8013AA0(u32 *);
-extern u32 sub_8013BBC(u32 *);
-extern void sub_8013C68(u32 *);
-extern void sub_80141B4(const u8 *, u32, struct OpenedFile **, u32);
-extern void sub_8014248(const u8 *, u32, u32, const struct MenuItem *, void *, u32, u32, struct OpenedFile **, u32);
-extern s32 sub_80144A4(s32 *);
 extern void sub_801645C();
 extern void sub_80169BC();
 extern void sub_8016B00();

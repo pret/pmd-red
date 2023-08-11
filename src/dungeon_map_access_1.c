@@ -1,13 +1,11 @@
 #include "global.h"
 #include "dungeon_map_access.h"
-
 #include "dungeon_global_data.h"
 #include "file_system.h"
 #include "tile_types.h"
 #include "random.h"
 #include "dungeon_engine.h"
-
-extern u16 gUnknown_202B038[4][32][32];
+#include "text1.h"
 
 extern void sub_80402AC(s32, s32);
 extern void sub_80098F8(u32);

@@ -3,7 +3,8 @@
 #include "pokemon.h"
 #include "item.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "menu.h"
 #include "input.h"
 #include "wonder_mail.h"
@@ -12,7 +13,6 @@
 #include "pelipper_board.h"
 
 EWRAM_DATA_2 struct unkStruct_203B308 *gPelipperBoard = {0};
-extern void SetPelipperBoardState(u32);
 
 const struct UnkTextStruct2 gUnknown_80E0330 =
 {
@@ -58,7 +58,7 @@ const u8 gPelipperBoard_BulletinBoard[] = "Bulletin Board";
 const u8 gPelipperBoard_JobList[] = "Job List";
 const u8 gPelipperBoard_Accepted[] = "Accepted";
 const u8 gPelipperStatusSlash[] = "/";
-static const u8 gPelipperfill[] = "pksdir0";
+static const u8 sPelipperfill[] = "pksdir0";
 
 extern void sub_802ECB4(void);
 extern void nullsub_134(void);
@@ -79,9 +79,6 @@ extern void sub_803B35C(struct WonderMail *, struct unkStruct_802C39C *);
 extern void sub_802DE84(struct unkStruct_802C39C *);
 extern void InitializeJobListMenu(u32);
 
-extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
-extern void sub_80073E0(u32);
 extern u32 sub_802C898(void);
 extern void sub_802C8F4(void);
 extern u32 sub_802DEE0(void);
@@ -471,4 +468,3 @@ void CreatePelipperAcceptedStatusBox(u32 r0)
     sub_8012BC4(0x23, 0xD, MAX_ACCEPTED_JOBS, 2, 7, r0);
     sub_80073E0(r0);
 }
-

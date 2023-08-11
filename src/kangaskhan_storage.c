@@ -1,5 +1,7 @@
 #include "global.h"
-#include "input.h"
+#include "code_80130A8.h"
+#include "code_801B3C0.h"
+#include "code_801C620.h"
 #include "item.h"
 #include "kangaskhan_storage.h"
 #include "kecleon_bros.h"
@@ -7,6 +9,8 @@
 #include "menu_input.h"
 #include "pokemon.h"
 #include "team_inventory.h"
+#include "text1.h"
+#include "text2.h"
 
 extern u8 gUnknown_202DE58[];
 extern u8 gUnknown_202E1C8[];
@@ -35,35 +39,6 @@ extern const u8 gUnknown_80DB830[]; // "Number?\0"
 
 extern const u8 *gKangaskhanStorageDialogue[2][20];
 
-// text.s
-extern void sub_80073B8(u32);
-extern void sub_80073E0(u32);
-extern void sub_8008C54(u32);
-// code_80130A8.s
-extern void sub_8013AA0(u32 *);
-extern u32 sub_8013BBC(u32 *);
-extern void sub_8013C68(u32 *);
-extern void sub_80141B4(const u8 *r0, u32, struct OpenedFile **r1, u32);
-extern void sub_8014248(const u8 *r0, u32, u32, const struct MenuItem *r4, u16 *, u32, u32, struct OpenedFile **r5, u32);
-extern s32 sub_80144A4(s32 *);
-// code_801B3C0.c
-extern void sub_801B3C0(struct Item *);
-extern u32 sub_801B410(void);
-extern void sub_801B450(void);
-extern void sub_801BB20(void);
-extern void sub_801BC24(void);
-// code_801C620.c
-extern void sub_801C8C4(u32, u32, u32, u32);
-extern u32 sub_801CA08(u32);
-extern u8 sub_801CB24(void);
-extern void sub_801CB5C(u32);
-extern void sub_801CBB8(void);
-extern void sub_801CCD8(void);
-extern bool8 sub_801CF14(u32);
-extern bool8 sub_801CF50(u32);
-extern void sub_801CF94(void);
-extern u32 sub_801CFB8(void);
-extern u32 sub_801CFE0(u8);
 // code_8098BDC.s
 extern void sub_8099690(u32);
 
@@ -360,7 +335,7 @@ void sub_8016FF8(void)
             sub_801AD34(0);
             break;
         case 23:
-            sub_801CB5C(1);
+            sub_801CB5C(TRUE);
             sub_801AD34(0);
             break;
         case 24:
@@ -728,7 +703,7 @@ void sub_8017AF8(void)
 
 void sub_8017B88(void)
 {
-    switch (sub_801CA08(1)) {
+    switch (sub_801CA08(TRUE)) {
         case 3:
             if (sub_801CFB8() != 0)
                 UpdateKangaskhanStorageState(28);
@@ -757,7 +732,7 @@ void sub_8017B88(void)
 
 void sub_8017C28(void)
 {
-    sub_801CA08(0);
+    sub_801CA08(FALSE);
     sub_8012FD8(&gKangaskhanStorageWork->unk58);
 
     switch (sub_8013BBC(&gKangaskhanStorageWork->unkA8)) {
@@ -814,7 +789,7 @@ void sub_8017D24(void)
     s32 menuAction;
     menuAction = 0;
 
-    sub_801CA08(0);
+    sub_801CA08(FALSE);
     if (sub_8012FD8(&gKangaskhanStorageWork->unk58) == 0) {
         sub_8013114(&gKangaskhanStorageWork->unk58, &menuAction);
         if (menuAction != 1)
@@ -1014,7 +989,7 @@ void sub_8018100(void)
             sub_801AD34(0);
             break;
         case 11:
-            sub_801CB5C(1);
+            sub_801CB5C(TRUE);
             sub_801AD34(0);
             break;
         case 12:
@@ -1253,7 +1228,7 @@ void sub_80186F8(void)
     struct BulkItem item;
     s32 itemID;
 
-    switch (sub_801CA08(1)) {
+    switch (sub_801CA08(TRUE)) {
         case 3:
             if (sub_801CFB8() != 0) {
                 for (itemID = 0; itemID < NUMBER_OF_ITEM_IDS; itemID++) {
@@ -1311,7 +1286,7 @@ void sub_8018854(void)
 {
     struct BulkItem item;
 
-    sub_801CA08(0);
+    sub_801CA08(FALSE);
     sub_8012FD8(&gUnknown_203B20C->unk70);
 
     switch (sub_8013BBC(&gUnknown_203B20C->unkC0)) {
@@ -1398,7 +1373,7 @@ void sub_80189C8(void)
 
     menuAction = 0;
 
-    sub_801CA08(0);
+    sub_801CA08(FALSE);
     if (sub_8012FD8(&gUnknown_203B20C->unk70) == 0) {
         sub_8013114(&gUnknown_203B20C->unk70, &menuAction);
         if (menuAction != 1)

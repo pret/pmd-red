@@ -3,7 +3,8 @@
 #include "constants/colors.h"
 #include "input.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "dungeon_global_data.h"
 #include "pokemon.h"
 #include "code_8094F88.h"
@@ -46,10 +47,6 @@ const struct UnkTextStruct2 gUnknown_80E1FC4 = {
 ALIGNED(4) const u8 gUnknown_80E1FDC[] = "Password";
 ALIGNED(4) static const u8 fill0[] = "pksdir0";
 
-extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
-extern void sub_80073E0(u32);
-extern void sub_80078A4(u32, u32, u32, u32, u32);
 extern void sub_803D2C0(u8 *, struct unkStruct_203B480 *);
 extern void PlayMenuSoundEffect(u32);
 

@@ -4,6 +4,8 @@
 #define MAX_KECLEON_ITEM_SHOP_ITEMS 8
 #define MAX_KECLEON_WARE_SHOP_ITEMS 4
 
+#include "item.h"
+
 // size: 0x268
 struct TeamInventory
 {
@@ -15,6 +17,7 @@ struct TeamInventory
     /* 0x264 */ s32 teamSavings;
 };
 
+// Declared in items.c
 extern struct TeamInventory *gTeamInventoryRef;
 
 #define MAX_TEAM_MONEY 99999

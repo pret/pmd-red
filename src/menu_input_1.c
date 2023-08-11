@@ -1,10 +1,9 @@
 #include "global.h"
 #include "constants/input.h"
 #include "input.h"
-#include "text.h"
+#include "text1.h"
 #include "menu_input.h"
 
-extern struct UnkTextStruct1 gUnknown_2027370[4];
 extern void PlayMenuSoundEffect(u32);
 void sub_801332C(u16 *);
 

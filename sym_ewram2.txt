@@ -373,16 +373,10 @@ gUnknown_203B328: /* 203B328 */
 .include "src/rescue_password_menu.o"
 .include "src/load_screen.o"
 .include "src/wonder_mail_main_menu.o"
-.include "src/debug_menu.o"
-
-gUnknown_203B3F0: /* 203B3F0 */
-	.space 0x4
-
-gUnknown_203B3F4: /* 203B3F4 */
-	.space 0x4
-
-gUnknown_203B3F8: /* 203B3F8 */
-	.space 0x4
+.include "src/debug_menu1.o"
+.include "src/debug_menu2.o"
+.include "src/debug_menu3.o"
+.include "src/debug_menu4.o"
 
 gUnknown_203B3FC: /* 203B3FC */
 	.space 0x4

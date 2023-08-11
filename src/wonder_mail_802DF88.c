@@ -1,10 +1,12 @@
 #include "global.h"
 #include "exclusive_pokemon.h"
-#include "input.h"
 #include "memory.h"
 #include "code_802C39C.h"
 #include "wonder_mail.h"
 #include "menu_input.h"
+#include "text1.h"
+#include "text2.h"
+#include "code_80130A8.h"
 
 struct unkStruct_203B2FC
 {
@@ -101,17 +103,13 @@ const struct UnkTextStruct2 gUnknown_80E0264 =
 
 static const u8 wonder_mail_802DF88_fill1[] = "pksdir0";
 
-extern void sub_80073B8(u32);
-extern void sub_80073E0(u32);
 extern void CreateRescueDescription(struct unkStruct_802C39C *);
 extern void PlayMenuSoundEffect(u32);
-extern s32 sub_80144A4(s32 *);
 extern void sub_802DC28(u32);
 extern void sub_802F2C0(void);
 extern void sub_802DC28(u32);
 extern u32 sub_802F298(void);
 extern void sub_802F204(u32 *, u32);
-extern void sub_80141B4(const u8 *r0, u32, struct OpenedFile **r1, u32);
 extern void sub_802DC40(void);
 extern void sub_802DC9C(void);
 struct WonderMail *GetJobSlotInfo(u8);

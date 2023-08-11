@@ -1,31 +1,17 @@
 #include "global.h"
+#include "code_801B3C0.h"
 #include "constants/colors.h"
-#include "text.h"
-#include "input.h"
+#include "text1.h"
+#include "text2.h"
 #include "item.h"
 #include "memory.h"
-#include "menu.h"
 #include "pokemon.h"
 #include "team_inventory.h"
 #include "menu_input.h"
-#include "subStruct_203B240.h"
 #include "kecleon_bros.h"
+#include "sprite.h"
+#include "code_80130A8.h"
 
-// based off of 203B240..
-struct unkStruct_203B230
-{
-    // size: 0x94
-    s32 state;
-    struct Item item;
-    s32 unk8;
-    s32 unkC;
-    struct subStruct_203B240 *unk10[2];
-    u8 fill14[0x20 - 0x18];
-    u32 unk20;
-    u32 unk24;
-    struct UnkTextStruct2 unk28[4];
-    struct MenuInputStructSub unk88;
-};
 extern struct unkStruct_203B230 *gUnknown_203B230;
 
 struct unkStruct_203B234
@@ -72,7 +58,6 @@ extern u8 gUnknown_202DEA8[];
 extern u8 *gUnknown_80D4920[];
 extern u8 *gUnknown_80D4928[];
 
-extern s32 sub_80144A4(s32 *);
 extern void sub_8099690(u32);
 
 extern struct UnkTextStruct2 gUnknown_80DBA58;
@@ -82,18 +67,11 @@ extern struct UnkTextStruct2 gUnknown_80DBA70;
 extern void sub_801BB5C(void);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void sub_801B748(u32);
-extern void sub_8008C54(u32);
-extern void sub_80073E0(u32);
-extern void sub_80073B8(u32);
-extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8013F84(void);
 extern s32 sub_80913E0(struct Item *, u32, struct subStruct_203B240 **);
-extern void sub_80141B4(u8 *, u32, u32 *, u32);
-extern void sub_8014248(const char *, u32, u32, struct MenuItem *, u32, u32, u32, u32, u32);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 extern void sub_801B46C(u32);
-extern void ResetSprites(u32);
 extern void sub_801BC64(void);
 extern void sub_801BC94(void);
 extern void sub_801BCCC(void);
@@ -117,7 +95,7 @@ void sub_801BC24(void);
 
 u32 sub_801B3C0(struct Item *item)
 {
-  ResetSprites(1);
+  ResetSprites(TRUE);
   gUnknown_203B230 = MemoryAlloc(sizeof(struct unkStruct_203B230),8);
   gUnknown_203B230->item = *item;
   sub_801317C(&gUnknown_203B230->unk88);

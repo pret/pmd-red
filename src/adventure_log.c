@@ -1,9 +1,10 @@
 #include "global.h"
+#include "code_80130A8.h"
 #include "constants/input.h"
-#include "input.h"
 #include "memory.h"
-#include "text.h"
 #include "menu_input.h"
+#include "text1.h"
+#include "text2.h"
 
 struct AdventureLog
 {
@@ -50,10 +51,6 @@ extern s16 sub_8097838();
 extern s16 sub_8097870();
 extern s32 sub_80977B8();
 extern s32 sub_80977F8();
-extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
-extern void sub_80073E0(u32);
-extern void xxx_format_and_draw(u32, u32, const char *, u32, u32);
 const u8 *GetAdventureLogLine(u8 index);
 extern u32 gUnknown_202DE30;
 

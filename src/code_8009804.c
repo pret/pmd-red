@@ -1,9 +1,9 @@
 #include "global.h"
 #include "file_system.h"
+#include "text1.h"
 
 extern u8 gUnknown_202D238[4];
 extern s32 gUnknown_202D23C;
-extern u16 gUnknown_202B038[4][32][32];
 extern u8 gUnknown_80B88CC[];
 extern struct FileArchive gSystemFileArchive;
 

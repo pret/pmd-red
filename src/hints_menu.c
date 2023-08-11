@@ -1,6 +1,7 @@
 #include "global.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "input.h"
 #include "menu_input.h"
 
@@ -47,9 +48,6 @@ extern void PlayMenuSoundEffect(u32);
 extern void sub_801E714(void);
 extern void sub_801E76C(void);
 extern void DisplayChosenHint(void);
-extern void sub_80073E0(u32);
-extern void sub_80073B8(u32);
-extern void sub_8008C54(u32);
 void DrawHintSelectionMenu(void);
 void sub_801E594(void);
 

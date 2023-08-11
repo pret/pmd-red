@@ -3,7 +3,7 @@
 #include "main_menu.h"
 #include "memory.h"
 #include "menu.h"
-#include "text.h"
+#include "text1.h"
 #include "menu_input.h"
 
 struct unkSprite
@@ -64,8 +64,6 @@ static const u8 fill0[] = "pksdir0";
 
 extern void AddSprite(struct unkSprite *, u32, u32, u32);
 extern void sub_8038440();
-extern void sub_8035CF4(struct MenuStruct *, u32, u32);
-extern void SetMenuItems(struct MenuStruct *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
 extern void sub_80384D0();
 
 void sub_80382E4(s32 currMenu)
@@ -88,7 +86,7 @@ void sub_80382E4(s32 currMenu)
     SetMenuItems(gUnknown_203B360->unk8,gUnknown_203B360->unk148,0,&gUnknown_80E6E94,gUnknown_80E6EAC,
                  0,4,0);
   }
-  sub_8035CF4(gUnknown_203B360->unk8,0,1);
+  sub_8035CF4(gUnknown_203B360->unk8,0,TRUE);
   gUnknown_203B360->currMenu = currMenu;
   gUnknown_203B360->unk4 = 0;
   sub_8038440();

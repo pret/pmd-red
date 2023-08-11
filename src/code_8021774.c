@@ -2,12 +2,14 @@
 #include "global.h"
 #include "input.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "pokemon.h"
 #include "exclusive_pokemon.h"
 #include "friend_area.h"
 #include "code_800D090.h"
 #include "menu_input.h"
+#include "code_8021774.h"
 
 struct unkStruct_203B28C
 {
@@ -48,18 +50,13 @@ extern u8 gUnknown_80DC4F0[];
 extern u8 *gUnknown_80D49BC[];
 extern u8 gUnknown_80DC524[];
 extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
-extern void sub_80073E0(u32);
 extern void sub_8092578(u8 *buffer, u8 index, u8 r2);
-void sub_800792C(u32, u32, u32, u32, u32);
-void sub_8007A78(u32, u32, u32, u32, u32);
 
 extern void sub_8021878(void);
 extern void sub_8021894(void);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8021A60(void);
 void sub_8021820(void);
-extern u8 *gFriendAreas;
 u8 sub_80023E4(u32);
 
 s32 sub_8021664(void)

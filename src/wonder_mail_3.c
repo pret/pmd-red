@@ -2,17 +2,16 @@
 #include "global.h"
 #include "constants/dungeon.h"
 #include "constants/input.h"
-
 #include "memory.h"
-#include "text.h"
-#include "input.h"
+#include "text1.h"
+#include "text2.h"
 #include "mailbox.h"
-#include "menu.h"
 #include "wonder_mail.h"
 #include "wonder_mail_3.h"
 #include "menu_input.h"
 #include "code_80958E8.h"
 #include "wonder_mail_2_1.h"
+#include "code_80130A8.h"
 
 const struct UnkTextStruct2 gUnknown_80DFDD4 =
 {
@@ -144,14 +143,9 @@ extern void sub_8097418(u32, u32);
 extern void sub_802D690(void);
 extern void sub_8096C80(void);
 extern void sub_8096D24(void);
-extern void sub_80141B4(const u8 *, u32, u32, u32);
 extern u8 *sub_8096DE8(void);
 extern void AcceptJob(struct unkSubStruct_203B2F8 *);
-extern void sub_8014248(const char *text, u32, u32, struct MenuItem *r0, u32, u32, u32, u32, u32);
 struct unkStruct_803B344 *sub_803B344(u8);
-extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
-extern void sub_80073E0(u32);
 extern void CreateRescueTitle(struct unkStruct_802C39C *);
 extern u8 gUnknown_80DFDBC[];
 extern void sub_802CF5C(void);
@@ -833,9 +827,6 @@ void sub_802D73C(void) {
     }
     gUnknown_203B2F8->menuAction2 = 4;
 }
-
-extern s32 sub_80144A4(s32 *);
-
 
 void sub_802D7D0(void)
 {

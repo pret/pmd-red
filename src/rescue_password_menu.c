@@ -5,14 +5,14 @@
 #include "menu.h"
 #include "pokemon.h"
 #include "save.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "main_menu.h"
 #include "rescue_password_menu.h"
 #include "code_8094F88.h"
 #include "wonder_mail.h"
 #include "menu_input.h"
 #include "dungeon.h"
-#include "main_menu.h"
 
 #define RESCUE_PASSWORD_SIZE 0x36
 
@@ -250,8 +250,6 @@ extern void sub_8031E10(void);
 extern u32 sub_80154F0(void);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E00(void);
-extern void SetMenuItems(struct MenuStruct *, struct UnkTextStruct2 *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
-extern void sub_8035CF4(struct MenuStruct *r0, u32, u32);
 extern void AddSprite(struct unkSprite *, u32, u32, u32);
 extern void xxx_draw_string_80144C4(void);
 
@@ -588,7 +586,7 @@ void DisplayRescuePasswordError(u32 passwordError)
     default:
         break;
   }
-  sub_8035CF4(gRescuePasswordMenu->unk8,0,1);
+  sub_8035CF4(gRescuePasswordMenu->unk8,0,TRUE);
 }
 
 void DisplayPasswordAcceptScreen(void)
@@ -598,7 +596,7 @@ void DisplayPasswordAcceptScreen(void)
   sub_800641C(0,1,1);
   sub_80155F0();
   SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7278,gUnknown_80E7290,0,0xd,0);
-  sub_8035CF4(gRescuePasswordMenu->unk8,0,1);
+  sub_8035CF4(gRescuePasswordMenu->unk8,0,TRUE);
 }
 
 u32 ConvertMenutoRescuePasswordState(u32 unused)

@@ -1,4 +1,8 @@
+#ifndef GUARD_MENU_INPUT_H
+#define GUARD_MENU_INPUT_H
+
 #include "menu.h"
+#include "text.h"
 
 u32 sub_8012A64(struct MenuInputStructSub *r0, s32 r1);
 s32 GetKeyPress(struct MenuInputStruct *r0);
@@ -36,3 +40,5 @@ bool8 sub_8013938(struct MenuInputStruct *param_1);
 void sub_8013984(struct MenuInputStruct * param_1);
 void sub_8013A54(struct MenuInputStruct *param_1);
 void sub_8013A7C(struct MenuInputStruct *param_1);
+
+#endif // GUARD_MENU_INPUT_H

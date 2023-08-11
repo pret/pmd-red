@@ -4,7 +4,8 @@
 #include "pokemon.h"
 #include "input.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "text_util.h"
 #include "menu_input.h"
 

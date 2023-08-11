@@ -1,16 +1,18 @@
 #include "global.h"
 #include "constants/friend_area.h"
-#include "file_system.h"
-#include "menu.h"
 #include "pokemon.h"
-#include "input.h"
 #include "team_inventory.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "friend_area.h"
 #include "wigglytuff_shop.h"
 #include "felicity_bank.h"
+#include "code_80130A8.h"
+#include "code_8021774_pre.h"
+#include "code_801EE10_mid.h"
+#include "code_8021774.h"
 
 extern struct UnkTextStruct2 gUnknown_80DC534;
 extern struct UnkTextStruct2 gUnknown_80DC564;
@@ -25,32 +27,16 @@ extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E1C8[];
 extern u8 gAvailablePokemonNames[];
 
-extern u8 *gWigglytuffDialogue[2][20];
-extern u8 *gWigglytuffCheck[];
-extern u8 *gUnknown_80D4920[];
-extern u8 *gUnknown_80D4928[];
-extern u8 *gUnknown_80D4934[];
-extern u8 *gUnknown_80D4970[];
-extern u8 *gUnknown_80D4978[];
+extern const u8 *gWigglytuffDialogue[2][20];
+extern const u8 *gWigglytuffCheck[];
+extern const u8 *gUnknown_80D4920[];
+extern const u8 *gUnknown_80D4928[];
+extern const u8 *gUnknown_80D4934[];
+extern const u8 *gUnknown_80D4970[];
+extern const u8 *gUnknown_80D4978[];
 
-
-s32 sub_80144A4(s32 *);
 u8 sub_8021700(u32);
 void sub_8092578(u8 *buffer, u8 index, u8 r2);
-extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u16 *, u32, u32,u8 *r5, u32);
-extern void sub_80141B4(const u8 *, u32, u8*, u32);
-extern void sub_80211AC(u32, u32);
-extern void sub_8021354(u32);
-extern void sub_8021494();
-extern void sub_803AA34();
-extern void sub_8021774(u8,u32, u32);
-extern void sub_809249C(u8, u32);
-extern void sub_8021830(void);
-extern u32 sub_80217EC(void);
-extern u8 sub_803ABC8(void);
-extern u32 sub_8021274(u32);
-extern u8 sub_802132C(void);
-extern void sub_80213A0(void);
 extern void sub_8022380(void);
 extern void PlaySound(u32);
 bool8 sub_8023144(s32 param_1, s32 index, struct UnkTextStruct2_sub *sub, u32 param_4);
@@ -98,7 +84,7 @@ bool8 CreateWigglytuffShop(bool32 isAsleep)
         gWigglytuffShop->unkCC = NULL;
     }
     else {
-        gWigglytuffShop->unkCC = (u8 *)&gWigglytuffShop->faceFile;
+        gWigglytuffShop->unkCC = &gWigglytuffShop->faceFile;
     }
     file = GetDialogueSpriteDataPtr(MONSTER_WIGGLYTUFF);
     gWigglytuffShop->faceFile = file;
@@ -251,7 +237,7 @@ void UpdateWigglytuffDialogue(void)
             DrawTeamMoneyBox(1);
             break;
         case WIGGLYTUFF_UNKA:
-            sub_8021354(1);
+            sub_8021354(TRUE);
             DrawTeamMoneyBox(1);
             break;
         case WIGGLYTUFF_UNKB:
@@ -493,7 +479,7 @@ void HandleWigglytuffConfirmFriendAreaMenu(void)
 
 void sub_8022538(void)
 {
-    switch(sub_8021274(1))
+    switch(sub_8021274(TRUE))
     {
         case 3:
             gWigglytuffShop->chosenFriendArea = sub_802132C();
@@ -521,7 +507,7 @@ void sub_8022538(void)
 void sub_80225C8(void)
 {
     s32 menuAction = 0;
-    sub_8021274(0);
+    sub_8021274(FALSE);
     if(sub_8012FD8(&gWigglytuffShop->unk6C) == 0)
     {
         sub_8013114(&gWigglytuffShop->unk6C, &menuAction);
@@ -590,10 +576,8 @@ void sub_80226CC(void)
 {
     s32 temp;
 
-    if (sub_80144A4(&temp) == 0) 
-    {
+    if (sub_80144A4(&temp) == 0)
         SetWigglytuffState(gWigglytuffShop->fallbackState);
-    }
 }
 
 void sub_80226F0(void)
@@ -632,11 +616,8 @@ void sub_80226F0(void)
 
 void sub_8022790(void)
 {
-    if(gWigglytuffShop->unk134 != 0)
-    {
+    if (gWigglytuffShop->unk134 != 0)
         gWigglytuffShop->unk134--;
-    }
-    else {
+    else
         SetWigglytuffState(gWigglytuffShop->fallbackState);
-    }
 }

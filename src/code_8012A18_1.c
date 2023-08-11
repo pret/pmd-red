@@ -1,9 +1,10 @@
 #include "global.h"
-#include "menu.h"
-#include "file_system.h"
+#include "code_8012A18_1.h"
+#include "code_80130A8.h"
 #include "memory.h"
 #include "input.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "text_util.h"
 
 struct unkStruct_203B200
@@ -25,10 +26,6 @@ extern const char gUnknown_80DB6BC;
 extern const char gUnknown_80DB688;
 extern u8 gAvailablePokemonNames[0x58];
 
-extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
-extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, struct OpenedFile **r5, u32);
-
-extern s32 sub_80144A4(s32 *);
 extern void sub_80151C0(u32, u8 *);
 extern void CreateConfirmNameMenu(void);
 extern void sub_80160F4(u32);
@@ -52,15 +49,6 @@ enum
 };
 
 extern u32 ReturnIntFromChar2(u8);
-
-struct unkChar
-{
-    u32 unk0;
-    s16 unk4;
-    s16 unk6;
-};
-
-struct unkChar *GetCharacter(u32);
 
 
 s32 sub_8015FEC(u8 *buffer, s32 size)

@@ -1,7 +1,8 @@
 #include "global.h"
-#include "m4a.h"
-#include "music.h"
 #include "constants/bg_music.h"
+#include "m4a.h"
+#include "main.h"
+#include "music.h"
 
 EWRAM_DATA u16 gBGMusicPlayerState = {0};
 EWRAM_DATA u16 gCurrentBGSong = {0};
@@ -14,8 +15,6 @@ EWRAM_DATA bool8 gRestartBGM = {0};
 IWRAM_DATA struct PMDMusicPlayer gBGMusicPlayers[NUM_BG_PLAYERS] = {0};
 IWRAM_DATA struct PMDMusicPlayer gSEMusicPlayers[NUM_SE_PLAYERS] = {0};
 
-extern bool8 EnableInterrupts(void);
-extern bool8 DisableInterrupts(void);
 void nullsub_21(u16);
 
 void InitMusic(void)

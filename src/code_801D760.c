@@ -10,10 +10,12 @@
 #include "team_inventory.h"
 #include "memory.h"
 #include "input.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "rescue_team_info.h"
 #include "code_800D090.h"
 #include "menu_input.h"
+#include "code_8021774.h"
 
 struct unkStruct_203B258
 {
@@ -38,8 +40,6 @@ extern void sub_801BF98(void);
 extern void sub_801D208(u8);
 extern u32 sub_801DCE8(void);
 extern void sub_801DD50(void);
-extern u32 sub_80217EC(void);
-extern void sub_8021830(void);
 extern u32 sub_8022860();
 extern void sub_8022908();
 extern u32 sub_80244E4(void);
@@ -56,12 +56,8 @@ extern void InitializeJobListMenu(u32);
 extern const char *sub_8098FB4();
 extern void xxx_format_string(const char *, u8 *, u32 **, u32);
 extern s32 sub_8008ED0(u8 *);
-extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
-extern void sub_80073E0(u32);
 void LoadTeamRankBadge(u32, u32, u32);
 extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);
-extern void sub_8007E20(u32, u32, u32, u32, u32, u8 *, u32);
 
 extern struct FileArchive gTitleMenuFileArchive;
 extern const char gTeamRankBadgeFileName;
@@ -113,7 +109,6 @@ extern u32 sub_8027074(void);
 extern void sub_80227B8(struct PokemonStruct *);
 extern bool8 sub_8024458(s16, u32);
 extern bool8 sub_801BEEC(s16);
-extern void sub_8021774(u8, u32, u32);
 void sub_801D894(void);
 u32 sub_8025EF4(struct PokemonStruct *);
 

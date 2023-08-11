@@ -1,19 +1,17 @@
 #include "global.h"
 #include "constants/item.h"
 #include "constants/wonder_mail.h"
-#include "file_system.h"
-#include "input.h"
 #include "pokemon.h"
 #include "pokemon_mail.h"
 #include "memory.h"
-#include "text.h"
-#include "menu.h"
+#include "text1.h"
 #include "save.h"
 #include "game_options.h"
 #include "wonder_mail.h"
 #include "code_800D090.h"
 #include "code_8094F88.h"
 #include "menu_input.h"
+#include "code_80130A8.h"
 
 struct unkStruct_203B2C8
 {
@@ -36,8 +34,6 @@ struct unkStruct_203B2C8
 
 extern struct unkStruct_203B2C8 *gUnknown_203B2C8;
 
-extern void sub_8014248(const char *r0, u32, u32, const struct MenuItem *r4, u32, u32, u32, struct OpenedFile **r5, u32);
-
 extern void sub_80920D8(u8 *buffer);
 extern void sub_8097790(void);
 extern char gUnknown_202E5D8[0x50];
@@ -46,7 +42,6 @@ extern u32 sub_802F298(void);
 extern void sub_802F2C0(void);
 extern u8 sub_8099394(u8 *);
 extern void sub_802B548(u32);
-extern u32 sub_80144A4(s32 *);
 
 extern void sub_802B560(void);
 extern void sub_802B57C(void);
@@ -57,7 +52,6 @@ extern void sub_802B624(void);
 extern void sub_802F204(struct unkStruct_802F204 *, u32);
 extern void sub_803C37C(struct DungeonLocation *, u32, u8 *);
 extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
-extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
 extern bool8 sub_80023E4(u32);
 
 ALIGNED(4) const char gRescueTeamNamePlaceholder[] = "????";

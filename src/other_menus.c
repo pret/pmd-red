@@ -6,11 +6,12 @@
 #include "team_inventory.h"
 #include "menu.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
 #include "menu_input.h"
 #include "dungeon_global_data.h"
 #include "pokemon.h"
 #include "code_8094F88.h"
+#include "sprite.h"
 
 struct unkSprite
 {
@@ -446,10 +447,7 @@ static const u8 fill3[] = "pksdir0";
 static const u8 fill4[] = "pksdir0";
 
 extern void sub_8037400(void);
-extern void ResetSprites(u32);
-extern void sub_8035CF4(struct MenuStruct *,u32, u32);
 extern void sub_80376CC();
-extern void sub_8035CC0(struct UnkTextStruct2 *, u32);
 
 extern u32 sub_8037C10(u32);
 extern void sub_8037748(void);
@@ -457,7 +455,6 @@ extern void sub_80371B8(void);
 extern void sub_8037900(void);
 extern void PlayMenuSoundEffect(u32);
 extern u32 sub_8037798(void);
-extern void SetMenuItems(struct MenuStruct *, void *, u32, const struct UnkTextStruct2 *, const struct MenuItem *, u32, u32, u32);
 extern void sub_8005838(u32, u32);
 extern void sub_80060EC();
 extern void sub_800CB20();
@@ -483,7 +480,7 @@ void sub_8036FDC(s32 param_1)
   
   ResetUnusedInputStruct();
   sub_800641C(0,1,1);
-  ResetSprites(0);
+  ResetSprites(FALSE);
   if (gUnknown_203B35C == NULL) {
     gUnknown_203B35C = MemoryAlloc(0x504,8);
     MemoryFill8((u8 *)gUnknown_203B35C,0,0x504);
@@ -503,7 +500,7 @@ void sub_8036FDC(s32 param_1)
   ResetUnusedInputStruct();
   sub_800641C(gUnknown_203B35C->unk15C,1,1);
   SetMenuItems(gUnknown_203B35C->unk1C,gUnknown_203B35C->unk15C,0,&gUnknown_80E6CD0,gUnknown_80E6CE8,0,6,0);
-  sub_8035CF4(gUnknown_203B35C->unk1C,0,1);
+  sub_8035CF4(gUnknown_203B35C->unk1C,0,TRUE);
   sub_80376CC();
 }
 
@@ -579,7 +576,7 @@ void sub_80371B8(void)
       // The item exchange with your friend
       // went through successfully
       SetMenuItems(gUnknown_203B35C->unk1C, gUnknown_203B35C->unk15C, 0, &gUnknown_80E6C50, gUnknown_80E6C68, 0, 6, 0);
-      sub_8035CF4(gUnknown_203B35C->unk1C, 0, 1);
+      sub_8035CF4(gUnknown_203B35C->unk1C, 0, TRUE);
     }
   }
   else {
@@ -639,7 +636,7 @@ void sub_80371B8(void)
           break;
     }
     SetMenuItems(gUnknown_203B35C->unk1C, gUnknown_203B35C->unk15C, 0, puVar5, MenuItems, 0, 6, 0);
-    sub_8035CF4(gUnknown_203B35C->unk1C, 0, 1);
+    sub_8035CF4(gUnknown_203B35C->unk1C, 0, TRUE);
     if ((gUnknown_203B35C->linkStatus != COMMS_GOOD) && (gUnknown_203B35C->unk0 == 0) &&
         (item = sub_8035D94(), item->itemIndex.itemIndex_u8 != ITEM_NOTHING) && (item->numItems != 0)) {
             gTeamInventoryRef->teamStorage[item->itemIndex.itemIndex_u8] += item->numItems;
@@ -657,7 +654,7 @@ void sub_80373C4(void)
   xxx_call_update_bg_vram();
   sub_8009908();
   xxx_call_update_bg_sound_input();
-  ResetSprites(0);
+  ResetSprites(FALSE);
 }
 
 // Unused

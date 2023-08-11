@@ -1,11 +1,12 @@
 #include "global.h"
-#include "constants/input.h"
+#include "code_80130A8.h"
 #include "constants/colors.h"
-#include "input.h"
-#include "memory.h"
-#include "text.h"
+#include "constants/input.h"
 #include "game_options.h"
+#include "memory.h"
 #include "menu_input.h"
+#include "text1.h"
+#include "text2.h"
 
 struct unkStruct_203B25C
 {
@@ -51,12 +52,8 @@ extern const char gOthers_Hints[];
 extern const char *gUnknown_80D4920[];
 extern const char *gUnknown_80D4928[];
 
-extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
-extern void sub_80073E0(u32);
 extern s32 sub_8008ED0(u8 *);
 extern void CreateOthersMenu(void);
-extern void sub_80078A4(u32, u32, u32, u32, u32);
 void PlayMenuSoundEffect(u32);
 void CreateOptionsMenu(void);
 void nullsub_38(void);
@@ -69,7 +66,6 @@ extern void HandleChangeSettingsMenu();
 extern void sub_801DD84();
 extern void sub_801DED0();
 extern bool8 sub_801E198(struct GameOptions *);
-extern void sub_8014248(const char *, u32, u32, struct MenuItem *, u32, u32, u32, u32, u32);
 extern void CreateHintDisplayScreen(u32);
 extern void sub_801E3F0(u32);
 extern void CreateHintSelectionScreen(u32);
@@ -81,7 +77,6 @@ extern u32 HandleHintDisplayScreenInput(void);
 extern void DestroyHintDisplayScreen(void);
 extern u32 sub_801E218(void);
 extern void sub_801E2C4(void);
-extern s32 sub_80144A4(s32 *);
 extern void SetWindowBGColor(void);
 extern void sub_8099690(u32);
 

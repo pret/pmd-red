@@ -4,7 +4,8 @@
 #include "code_800D090.h"
 #include "input.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "pokemon_mail.h"
 #include "wonder_mail.h"
 #include "code_802C39C.h"
@@ -16,9 +17,6 @@ extern void sub_802C328(void);
 extern void DrawPelipperBoardJobMenu(void);
 extern void PlayMenuSoundEffect(u32);
 extern u8 HasNoPelipperBoardJobs(void);
-extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
-extern void sub_80073E0(u32);
 
 extern struct WonderMail *GetPelipperBoardSlotInfo(u32);
 extern void sub_803B35C(struct WonderMail *, u32 *);

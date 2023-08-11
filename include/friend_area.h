@@ -17,6 +17,8 @@ struct unkStruct_8092638
     s32 unk8;
 };
 
+extern bool8 *gFriendAreas;
+
 void LoadFriendAreas(void);
 bool8 *GetBoughtFriendAreas(void);
 void InitializeFriendAreas(void);
@@ -28,6 +30,7 @@ u8 *GetFriendAreaDescription(u8 index);
 u8 GetFriendAreaUnlockCondition(u8 index);
 s32 GetFriendAreaPrice(u8 index);
 const char *GetFriendAreaName(u8 index);
+void sub_809249C(u8 friendArea, u8 clear);
 void sub_8092638(u8 friendArea, struct unkStruct_8092638 *param_2, u8 param_3, u8 param_4);
 
 u32 SaveFriendAreas(u8 *r0, u32 r1);

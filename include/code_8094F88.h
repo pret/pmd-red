@@ -67,5 +67,4 @@ s32 GetFirstIndexofMailType(u8 mailType);
 void sub_8095824(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b);
 void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b);
 
-
 #endif

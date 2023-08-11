@@ -1,10 +1,8 @@
 #include "global.h"
-
-void ResetSprites(bool32);
-void SetSavingIconCoords(u32);  
+#include "sprite.h"
 
 void InitSprites(void)
 {
-    ResetSprites(1);
+    ResetSprites(TRUE);
     SetSavingIconCoords(0);
 }

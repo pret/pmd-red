@@ -1,16 +1,16 @@
 #include "global.h"
 #include "constants/input.h"
 #include "memory.h"
-#include "text.h"
-#include "input.h"
+#include "text1.h"
+#include "text2.h"
 #include "wonder_mail.h"
-#include "menu.h"
 #include "pokemon.h"
 #include "rescue_team_info.h"
 #include "friend_area.h"
 #include "item.h"
 #include "menu_input.h"
 #include "code_802C39C.h"
+#include "code_80130A8.h"
 
 struct unkStruct_803B344
 {
@@ -107,7 +107,6 @@ extern void sub_802F088();
 extern void sub_801B72C(void);
 extern u32 sub_801B6AC(void);
 extern void sub_802F108(void);
-extern s32 sub_80144A4(s32 *);
 extern void sub_803B35C(struct WonderMail*, struct unkStruct_802C39C *);
 extern void sub_802DE84(struct unkStruct_802C39C *);
 extern void sub_802CDD4(u32);
@@ -126,13 +125,9 @@ extern void PlayMenuSoundEffect(u32);
 extern void sub_802F300(void);
 extern void PlaySound(u32);
 extern s32 sub_808D544(u32);
-extern void sub_80141B4(const u8 *, u32, struct OpenedFile **, u32);
 extern u32 sub_801B60C(u32, u8, u8);
 extern void sub_8092578(u8 *buffer, u8 index, u8 r2);
 void HandleMissionReward(void);
-extern void sub_8008C54(u32);
-extern void sub_80073B8(u32);
-extern void sub_80073E0(u32);
 const u8 *sub_80974A0(s16 index);
 
 const struct UnkTextStruct2 gUnknown_80E03C4 = {

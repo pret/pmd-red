@@ -1,8 +1,7 @@
 #include "global.h"
-#include "pokemon.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "memory.h"
-#include "input.h"
 #include "code_801EE10.h"
 #include "menu_input.h"
 

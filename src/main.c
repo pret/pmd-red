@@ -1,66 +1,61 @@
 #include "global.h"
+#include "bg_palette_buffer.h"
+#include "cpu.h"
 #include "crt0.h"
-#include "random.h"
+#include "file_system.h"
 #include "flash.h"
-#include "text.h"
-
-extern char ewram_start[];
-
-typedef void (*IntrCallback)(void);
+#include "input.h"
+#include "main.h"
+#include "random.h"
+#include "reg_control.h"
+#include "sprite.h"
+#include "text1.h"
+#include "text2.h"
 
 EWRAM_DATA u8 IntrMain_Buffer[0x120] = {0};
 EWRAM_DATA IntrCallback gIntrTable[6] = {0};
 EWRAM_DATA IntrCallback gIntrCallbacks[6] = {0};
+
+extern char ewram_start[];
 extern u16 gBldCnt;
 extern u8 gUnknown_202D7FE;
-EWRAM_DATA_2 u8 gInterruptsEnabled = {0};
-extern u16 gUnknown_203B0AC;
-extern s16 gUnknown_203B0AE;
-
-
 extern char alt_203B038[];
-
 extern char gTitlePaletteFile[];
 extern char gUnknown_203BC04[];
-
 extern char iwram_start[];
-
 extern char alt_3001B58[];
-
+extern char unk_code[];
 extern char unk_code_ram[];
 extern char unk_code_ram_end[];
 
-extern u8 gUnknown_80B9BF1[];
-extern IntrCallback gInitialIntrTable[6];
+EWRAM_DATA_2 u8 gInterruptsEnabled = {0};
 
-extern char gUnknown_8270000[];
+// data_8270000.s
+extern const char gUnknown_8270000[];
+// data_80B9BB8.s
+extern const u8 gUnknown_80B9BF1[];
+extern const IntrCallback gInitialIntrTable[6];
 
-extern char unk_code[];
-
-extern void sub_800CDA8(int);
-extern void sub_800B540(void);
-extern void InitSprites(void);
+// code_800558C_1.c
 extern void nullsub_9(void);
-extern void nullsub_6(void);
-extern void InitInput(void);
-extern void InitBGPaletteBuffer(void);
 extern void sub_80057E8(void);
-extern void InitFileSystem(void);
+// code_8009804.c
 extern void sub_80098A0(void);
-extern void InitGraphics(void);
+// code_2.c
 extern void GameLoop(void);
+// code_800D090.c
 extern void Hang(void);
-extern void VBlank_CB(void);
-
-extern void nullsub_17(void);
-extern void InitMusic(void); // music initializer
 extern void sub_800D6AC(void);
 extern void sub_800D7D0(void);
+// music.c
+extern void InitMusic(void); // music initializer
+// code_8004AA0.s
+extern void nullsub_6(void);
 
-bool8 EnableInterrupts(void);
 void InitIntrTable(const IntrCallback *interrupt_table);
 IntrCallback SetInterruptCallback(u32 index, IntrCallback new_callback);
 
+void sub_800B540(void);
 
 void AgbMain(void)
 {
@@ -77,8 +72,7 @@ void AgbMain(void)
     if (gUnknown_203BC04 - gTitlePaletteFile > 0)
         CpuCopy32(gUnknown_8270000, gTitlePaletteFile, gUnknown_203BC04 - gTitlePaletteFile);
 
-    if (alt_203B038 - ewram_start > 0)
-    {
+    if (alt_203B038 - ewram_start > 0) {
         memset(value, 0, 4);
         CpuSet(&value, ewram_start, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (((alt_203B038 - ewram_start) / 4) & 0x1FFFFF));
     }
@@ -86,8 +80,7 @@ void AgbMain(void)
     if (unk_code_ram_end - unk_code_ram > 0)
         CpuCopy32(unk_code, unk_code_ram, unk_code_ram_end - unk_code_ram);
 
-    if (alt_3001B58 - iwram_start > 0)
-    {
+    if (alt_3001B58 - iwram_start > 0) {
         memset(value, 0, 4);
         CpuSet(&value, iwram_start, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (((alt_3001B58 - iwram_start) / 4) & 0x1FFFFF));
     }
@@ -121,7 +114,7 @@ void AgbMain(void)
     LoadCharmaps();
     sub_80098A0();
     InitGraphics();
-    SetInterruptCallback(1, (IntrCallback)VBlank_CB);
+    SetInterruptCallback(1, VBlank_CB);
     REG_DISPCNT = DISPCNT_WIN1_ON | DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP; // 32576
     GameLoop();
     Hang();
@@ -130,14 +123,14 @@ void AgbMain(void)
 void sub_800B540(void)
 {
     s32 i;
-    for (i = 0; i < 6; i++) {
+
+    for (i = 0; i < 6; i++)
         gIntrCallbacks[i] = NULL;
-    }
 
     nullsub_17();
     InitMusic(); // initialize music and stop DMAs
 
-    while(REG_VCOUNT < 160){}
+    while (REG_VCOUNT < 160){}
 
     REG_IE ^= INTR_FLAG_TIMER3 | INTR_FLAG_VBLANK | INTR_FLAG_VCOUNT; // 0x45
 
@@ -161,64 +154,43 @@ void sub_800B540(void)
 
 bool8 EnableInterrupts(void)
 {
-    if(!gInterruptsEnabled)
-    {
+    if (!gInterruptsEnabled)
         return FALSE;
-    }
 
-    if(REG_IME & 1)
-    {
+    if (REG_IME & 1)
         return FALSE;
-    }
-    else
-    {
-        REG_IME = 1;
-        return TRUE;
-    }
+
+    REG_IME = 1;
+    return TRUE;
 }
 
 bool8 DisableInterrupts(void)
 {
-    if(!gInterruptsEnabled)
-    {
+    if (!gInterruptsEnabled)
         return FALSE;
-    }
 
-    if(!(REG_IME & 1))
-    {
+    if (!(REG_IME & 1))
         return FALSE;
-    }
-    else
-    {
-        REG_IME = 0;
-        return TRUE;
-    }
 
+    REG_IME = 0;
+    return TRUE;
 }
 
 bool8 sub_800B650(void)
 {
-    if(!gInterruptsEnabled)
-    {
+    if (!gInterruptsEnabled)
         return FALSE;
-    }
 
-    if(REG_IME & 1)
-    {
+    if (REG_IME & 1)
         return FALSE;
-    }
-    else
-    {
-        return TRUE;
-    }
+
+    return TRUE;
 }
 
 void AckInterrupt(u16 flag)
 {
-    if(!gInterruptsEnabled)
-    {
+    if (!gInterruptsEnabled)
         return;
-    }
 
     REG_IME = 0;
     INTR_CHECK |= flag;
@@ -227,8 +199,8 @@ void AckInterrupt(u16 flag)
 
 void InitIntrTable(const IntrCallback *interrupt_table)
 {
-    CpuCopy32(interrupt_table, gIntrTable, sizeof(gIntrTable)); // 0x18 = 0x6 * 4 (0x4f00 is 32 bits)
-    CpuCopy32(IntrMain, IntrMain_Buffer, sizeof(IntrMain_Buffer)); // 0x120 = 0x48 * 4 (0x4f00 is 32 bits)
+    CpuCopy32(interrupt_table, gIntrTable, sizeof(gIntrTable)); // 0x18 = 0x6 * 4 (0x4F00 is 32 bits)
+    CpuCopy32(IntrMain, IntrMain_Buffer, sizeof(IntrMain_Buffer)); // 0x120 = 0x48 * 4 (0x4F00 is 32 bits)
     INTR_VECTOR = IntrMain_Buffer;
 }
 
@@ -245,9 +217,9 @@ IntrCallback SetInterruptCallback(u32 index, IntrCallback new_callback)
     interrupt_var = DisableInterrupts();
     old_callback = gIntrCallbacks[index];
     gIntrCallbacks[index] = new_callback;
-    if(interrupt_var){
+
+    if (interrupt_var)
         EnableInterrupts();
-    }
+
     return old_callback;
 }
-

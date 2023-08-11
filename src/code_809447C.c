@@ -1,10 +1,12 @@
 #include "global.h"
+#include "code_80130A8.h"
 #include "code_8092334.h"
 #include "code_809447C.h"
 #include "item.h"
 #include "moves.h"
 #include "dungeon_global_data.h"
 #include "text_util.h"
+#include "text2.h"
 
 struct unkStruct_8113080
 {
@@ -39,10 +41,7 @@ extern struct unkStruct_8113080 gUnknown_8113080[];
 void sub_80928C0(u8 *buffer, struct Move *move, struct unkStruct_80928C0 *param_3);
 extern void xxx_format_string(const char *, u8 *, void *, u32);
 void PrintYellowDungeonNametoBuffer(u8 *buffer, struct DungeonLocation *dungeonLocation);
-extern void sub_80073B8(u32);
-extern void xxx_format_and_draw(s32, s32, const u8 *, ...);
 extern s32 sub_8008ED0(u8 *);
-extern void sub_80073E0(u32);
 
 void sub_809447C(struct unkStruct_8094924 *r0, u8 *r1)
 {

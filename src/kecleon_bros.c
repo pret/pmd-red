@@ -1,5 +1,7 @@
 #include "global.h"
 #include "code_800D090.h"
+#include "code_80130A8.h"
+#include "code_801B3C0.h"
 #include "constants/input.h"
 #include "felicity_bank.h"
 #include "kecleon_bros.h"
@@ -7,6 +9,8 @@
 #include "menu_input.h"
 #include "pokemon.h"
 #include "team_inventory.h"
+#include "text1.h"
+#include "text2.h"
 
 extern struct KecleonBrosWork *gKecleonBrosWork;
 extern struct unkStruct_203B214 *gUnknown_203B214;
@@ -51,27 +55,12 @@ extern const u8 *gKecleonShopDialogue[KECLEON_BROS_MODE_COUNT][23];
 extern const u8 gTeamToolboxA[];
 extern const u8 gTeamToolboxB[];
 
-// text.s
-extern void sub_80073B8(u32);
-extern void sub_80073E0(u32);
-extern void sub_8007B7C(s32, s32, s32, s32, s32);
-extern void sub_8008C54(u32);
-// code_80130A8.s
-extern void sub_80141B4(const u8 *, u32, struct OpenedFile **, u32);
-extern void sub_8014248(const u8 *, u32, u32, const struct MenuItem *, void *, u32, u32, struct OpenedFile **, u32);
-extern s32 sub_80144A4(s32 *);
-// code_801B3C0.c
-extern u32 sub_801B3C0(struct Item *);
-extern u32 sub_801B410(void);
-extern void sub_801B450(void);
 // code_8098BDC.s
 extern void sub_8099690(u32);
 
 // code_80118A4.c
 extern void PlayMenuSoundEffect(u32);
 extern void PlaySound(u16 songIndex);
-// code_80130A8.s
-extern void xxx_format_and_draw(u32, u32, u8 *, u32, u32);
 
 void sub_8018D30(void);
 void sub_80194F8(void);

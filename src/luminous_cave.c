@@ -1,17 +1,19 @@
 #include "global.h"
 #include "constants/bg_music.h"
 #include "constants/colors.h"
-#include "input.h"
 #include "item.h"
 #include "memory.h"
-#include "menu.h"
 #include "pokemon.h"
 #include "random.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "text_util.h"
 #include "team_inventory.h"
 #include "menu_input.h"
 #include "kecleon_bros.h"
+#include "code_80130A8.h"
+#include "code_8012A18_1.h"
+#include "code_801B3C0.h"
 
 struct unkStruct_203B2B0
 {
@@ -184,8 +186,6 @@ extern void LuminousCave_AdvancetoFallbackState(void);
 extern void sub_8024804(void);
 extern void UpdateLuminousCaveDialogue(void);
 
-extern void sub_80141B4(const char *r0, u32, struct OpenedFile **r1, u32);
-extern void sub_8014248(const char *r0, u32, u32, struct MenuItem *r4, u16 *, u32, u32, struct OpenedFile **r5, u32);
 void xxx_call_fade_out_bgm(u16 speed);
 void xxx_call_stop_fanfare_se(u16 songIndex);
 void xxx_call_fade_in_new_bgm(u16 songIndex, u16 speed);
@@ -194,20 +194,13 @@ void PlaySound(u32);
 void sub_8024CFC(void);
 void sub_8025254(void);
 void sub_8024D48(void);
-extern void sub_801B3C0(struct Item *);
 extern void nullsub_104();
 void sub_8024DBC(void);
 void sub_8024E30(void);
 void sub_801AEE4(u32, u32);
 void sub_808F734(struct PokemonStruct *, s16);
-u32 sub_801602C(u32 r0, u8 *name);
-extern s32 sub_80144A4(s32 *);
 extern void sub_8099690(u32);
 extern void PlayMenuSoundEffect(u32);
-extern u32 sub_801B410(void);
-extern void sub_801B450(void);
-extern u32 sub_8016080(void);
-extern void sub_80160D8(void);
 extern void sub_808F468(struct PokemonStruct *, u8 *, u32);
 
 bool8 LuminousCave_HasOnly1Member(void);

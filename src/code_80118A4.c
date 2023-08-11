@@ -8,6 +8,7 @@
 #include "input.h"
 #include "config.h"
 #include "game_options.h"
+#include "sprite.h"
 
 void xxx_call_stop_bgm(void);
 
@@ -47,7 +48,6 @@ extern void sub_8005180(void);
 extern void sub_80060EC(void);
 extern void sub_8011860(void);
 extern void sub_800CB20(void);
-extern void ResetSprites(u32);
 extern void sub_8004AF0(u8, u32 *r1, u32, u32, u32 *r2, u32);
 extern u8 sub_80111C4();
 extern void sub_8010F28();
@@ -75,7 +75,7 @@ void sub_801169C(void)
     sub_8009908();
     xxx_call_update_bg_sound_input();
     sub_8011860();
-    ResetSprites(0);
+    ResetSprites(FALSE);
 }
 
 void sub_8011760(void)

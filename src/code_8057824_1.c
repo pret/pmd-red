@@ -359,7 +359,6 @@ void LugiaScreenFlash2();
 extern void sub_80861B8(struct Entity *, u32, u32);
 
 void nullsub_99();
-extern bool8 *gFriendAreas;
 
 extern void sub_8049884();
 extern void sub_8049B8C();

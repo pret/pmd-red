@@ -1,7 +1,8 @@
 #include "global.h"
 #include "constants/wonder_mail.h"
 #include "memory.h"
-#include "text.h"
+#include "text1.h"
+#include "text2.h"
 #include "input.h"
 #include "dungeon.h"
 #include "pokemon.h"
@@ -50,8 +51,6 @@ static const u8 wonder_mail_fill[] = "pksdir0";
 extern void sub_8030DD4(void);
 extern void PlayMenuSoundEffect(u32);
 extern void CreateRescueDescription(struct unkStruct_802C39C *);
-extern void sub_80073E0(u32);
-extern void sub_80073B8(u32);
 
 void sub_8030E2C(void);
 void sub_8030E48(void);
