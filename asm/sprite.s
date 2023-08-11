@@ -5,23 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8004E8C
-sub_8004E8C:
-	ldr r1, _08004EA4
-	strh r1, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	strh r1, [r0, 0x2]
-	strh r1, [r0, 0x4]
-	movs r1, 0
-	strh r1, [r0, 0x6]
-	strh r1, [r0, 0x8]
-	strh r1, [r0, 0xA]
-	bx lr
-	.align 2, 0
-_08004EA4: .4byte 0x0000ffff
-	thumb_func_end sub_8004E8C
-
 	thumb_func_start sub_8004EA8
 sub_8004EA8:
 	push {r4-r7,lr}

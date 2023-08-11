@@ -113,3 +113,13 @@ void ResetSprites(bool8 a0)
     gUnknown_20256A0.unk800 = 0;
     gUnknown_20256A0.unk804 = 0;
 }
+
+void sub_8004E8C(struct unkStruct_2039DB0 *a0)
+{
+    a0->unk0 = 0xFFFF;
+    a0->unk2 = -1;
+    a0->unk4 = -1;
+    a0->unk6 = 0;
+    a0->unk8 = 0;
+    a0->unkA = 0;
+}
