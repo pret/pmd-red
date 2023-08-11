@@ -2,6 +2,8 @@
 #include "sprite.h"
 
 extern u16 gUnknown_2025670;
+extern struct Position gUnknown_2025694;
+extern u32 gUnknown_2025698;
 extern struct SpriteList gUnknown_20256A0;
 extern struct UnkSpriteLink gUnknown_2025EA8[128];
 extern struct unkSprite gUnknown_20262A8[128];
@@ -13,7 +15,7 @@ extern u32 *gUnknown_203B074;
 void InitSprites(void)
 {
     ResetSprites(TRUE);
-    SetSavingIconCoords(0);
+    SetSavingIconCoords(NULL);
 }
 
 void ResetSprites(bool8 a0)
@@ -26,7 +28,7 @@ void ResetSprites(bool8 a0)
     struct UnkSpriteLink *e;
 
     gSpriteCount = 0;
-    gCharMemCursor = (u32*)0x6010000;
+    gCharMemCursor = (u32*)OBJ_VRAM0;
     gUnknown_203B074 = &gUnknown_20266B0;
 
     a = &gUnknown_20256A0.sprites[0];
@@ -577,7 +579,7 @@ void CopySpritesToOam(void)
 {
     struct UnkSpriteLink *sLink;
     struct unkSprite *spr;
-    u16 *oam;
+    volatile u16 *oam;
     s32 count;
 
     sLink = &gUnknown_20256A0.sprites[0];
@@ -621,4 +623,56 @@ void CopySpritesToOam(void)
     }
 
     gUnknown_2025670 = count;
+}
+
+void SetSavingIconCoords(struct Position *pos)
+{
+    if (pos == NULL) {
+        gUnknown_2025694.x = 0;
+        gUnknown_2025694.y = DISPLAY_HEIGHT;
+    }
+    else {
+        gUnknown_2025694.x = pos->x;
+        gUnknown_2025694.y = pos->y;
+        gUnknown_2025698 = 0;
+    }
+}
+
+void BlinkSavingIcon(void)
+{
+    volatile u16 *oam;
+    u32 uVar1;
+
+    oam = (u16 *)OAM;
+    uVar1 = gUnknown_2025698++;
+
+    if (uVar1 & 16) {
+        // Set y to 160
+        // Set affineMode/objMode/mosaic/bpp/shape to 0
+        *oam++ = DISPLAY_HEIGHT;
+        // Set x/matrixNum to 0
+        // Set size to 1
+        *oam++ = 0x4000;
+        // Set tileNum to 0x3FC
+        // Set priority to 0
+        // Set paletteNum to 15
+        *oam++ = 0xF3FC;
+        // Set affineParam to 0
+        *oam = 0;
+    }
+    else {
+        // Set y to gUnknown_2025694.y
+        // Set affineMode/objMode/mosaic/bpp/shape to 0
+        *oam++ = gUnknown_2025694.y;
+        // Set x to gUnknown_2025694.x
+        // Set matrixNum to 0
+        // Set size to 1
+        *oam++ = gUnknown_2025694.x + 0x4000;
+        // Set tileNum to 0x3FC
+        // Set priority to 0
+        // Set paletteNum to 15
+        *oam++ = 0xF3FC;
+        // Set affineParam to 0
+        *oam = 0;
+    }
 }

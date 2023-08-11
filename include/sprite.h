@@ -1,6 +1,8 @@
 #ifndef GUARD_SPRITE_H
 #define GUARD_SPRITE_H
 
+#include "position.h"
+
 // size: 0x8
 struct unkSprite
 {
@@ -39,15 +41,15 @@ struct unkStruct_2039DB0
     u16 unkA;
 };
 
+void BlinkSavingIcon(void);
 void CopySpritesToOam(void);
 void InitSprites(void);
 void ResetSprites(bool8);
+void SetSavingIconCoords(struct Position *);
 void sub_8004E8C(struct unkStruct_2039DB0 *);
 void sub_8005180(void);
 
 // sprite.s
 extern void AddSprite(struct unkSprite *, s32, u32 *, struct unkStruct_2039DB0 *);
-extern void BlinkSavingIcon(void);
-extern void SetSavingIconCoords(u32);
 
 #endif // GUARD_SPRITE_H

@@ -96,7 +96,7 @@ void GameLoop(void)
     InitializeGameOptions(TRUE);
     SetWindowTitle(gPMDBuildVersion);
     sub_800DAAC();
-    SetSavingIconCoords(0);
+    SetSavingIconCoords(NULL);
     tmp = 0;
     if (ReadSaveFromPak(&tmp))
         sub_800135C();
