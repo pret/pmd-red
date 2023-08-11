@@ -7,7 +7,6 @@
 extern void sub_8011860();
 extern void xxx_draw_string_80144C4();
 extern void nullsub_8(u8);
-extern void sub_8005180();
 extern void sub_800CB20();
 extern void CopySpritesToOam();
 extern void sub_8005304();

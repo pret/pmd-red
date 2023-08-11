@@ -45,6 +45,7 @@ struct unkStruct_2039DB0
 void InitSprites(void);
 void ResetSprites(bool8);
 void sub_8004E8C(struct unkStruct_2039DB0 *);
+void sub_8005180(void);
 
 // sprite.s
 extern void AddSprite(struct unkSprite *, s32, u32 *, struct unkStruct_2039DB0 *);

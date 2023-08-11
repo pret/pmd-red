@@ -44,7 +44,6 @@ extern void TransferBGPaletteBuffer(void);
 extern void xxx_call_update_bg_vram(void);
 extern void sub_8009908(void);
 extern void xxx_call_update_bg_sound_input(void);
-extern void sub_8005180(void);
 extern void sub_80060EC(void);
 extern void sub_8011860(void);
 extern void sub_800CB20(void);
