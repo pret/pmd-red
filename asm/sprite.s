@@ -5,63 +5,6 @@
 
 	.text
 
-	thumb_func_start CopySpritesToOam
-CopySpritesToOam:
-	push {r4-r6,lr}
-	ldr r3, _08005204
-	ldr r2, _08005208
-	movs r4, 0
-	ldr r6, _0800520C
-	cmp r3, 0
-	beq _080051E0
-	ldr r5, _08005210
-_080051BC:
-	ldr r1, [r3, 0x4]
-	cmp r1, 0
-	beq _080051D6
-	subs r2, 0x4
-	ldrh r0, [r1, 0x4]
-	strh r0, [r2]
-	subs r2, 0x2
-	ldrh r0, [r1, 0x2]
-	strh r0, [r2]
-	subs r2, 0x2
-	ldrh r0, [r1]
-	strh r0, [r2]
-	adds r4, 0x1
-_080051D6:
-	ldr r3, [r3]
-	cmp r3, 0
-	beq _080051E0
-	cmp r2, r5
-	bhi _080051BC
-_080051E0:
-	ldr r1, _08005210
-	cmp r2, r1
-	bls _080051FA
-	movs r0, 0
-	movs r3, 0xA0
-_080051EA:
-	subs r2, 0x4
-	strh r0, [r2]
-	subs r2, 0x2
-	strh r0, [r2]
-	subs r2, 0x2
-	strh r3, [r2]
-	cmp r2, r1
-	bhi _080051EA
-_080051FA:
-	strh r4, [r6]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08005204: .4byte gUnknown_20256A0
-_08005208: .4byte 0x07000400
-_0800520C: .4byte gUnknown_2025670
-_08005210: .4byte 0x07000008
-	thumb_func_end CopySpritesToOam
-
 	thumb_func_start SetSavingIconCoords
 SetSavingIconCoords:
 	push {lr}

@@ -1,8 +1,9 @@
 #include "global.h"
 #include "sprite.h"
 
+extern u16 gUnknown_2025670;
 extern struct SpriteList gUnknown_20256A0;
-extern struct UnkSpriteLink2 gUnknown_2025EA8[128];
+extern struct UnkSpriteLink gUnknown_2025EA8[128];
 extern struct unkSprite gUnknown_20262A8[128];
 extern u32 gSpriteCount; /* 20266A8 */
 extern u32 gUnknown_20266B0;
@@ -20,10 +21,9 @@ void ResetSprites(bool8 a0)
     s32 i;
     struct UnkSpriteLink *a;
     struct UnkSpriteLink *b;
-    struct UnkSpriteLink *c;
-    struct UnkSpriteLink2 *bro;
+    struct unkSprite *c;
     struct unkSprite *d;
-    struct unkSprite *deez;
+    struct UnkSpriteLink *e;
 
     gSpriteCount = 0;
     gCharMemCursor = (u32*)0x6010000;
@@ -102,14 +102,14 @@ void ResetSprites(bool8 a0)
     }
 
     if (a0) {
-        deez = NULL;
+        e = NULL;
         d = &gUnknown_20262A8[0];
-        bro = &gUnknown_2025EA8[0];
+        a = &gUnknown_2025EA8[0];
         for (i = 0; i < 128; i++) {
-            bro->unk0 = deez;
-            bro->unk4 = d;
+            a->unk0 = e;
+            a->unk4 = d;
             d++;
-            bro++;
+            a++;
         }
     }
 
@@ -571,4 +571,54 @@ void sub_8005180(void)
     }
 
     r2->unk0 = NULL;
+}
+
+void CopySpritesToOam(void)
+{
+    struct UnkSpriteLink *sLink;
+    struct unkSprite *spr;
+    u16 *oam;
+    s32 count;
+
+    sLink = &gUnknown_20256A0.sprites[0];
+    oam = (u16 *)(OAM + OAM_SIZE); // End of OAM. Work backwards
+    count = 0;
+
+    while (sLink != NULL && (u32)oam > (OAM + sizeof(struct OamData))) {
+        spr = sLink->unk4;
+
+        // Each OAM entry is 8 bytes [struct OamData]
+        if (spr != NULL) {
+            // Skip affineParam
+            oam -= 2;
+            // Set tileNum/priority/paletteNum
+            *oam = spr->unk4;
+            // Set x/matrixNum/size
+            oam--;
+            *oam = spr->unk2;
+            // Set y/affineMode/objMode/mosaic/bpp/shape
+            oam--;
+            *oam = spr->unk0;
+
+            count++;
+        }
+
+        sLink = sLink->unk0;
+    }
+
+    // Clear remaining object slots
+    while ((u32)oam > (OAM + sizeof(struct OamData))) {
+        // Skip affineParam
+        oam -= 2;
+        // Set tileNum/priority/paletteNum
+        *oam = 0;
+        // Set x/matrixNum/size
+        oam--;
+        *oam = 0;
+        // Set y/affineMode/objMode/mosaic/bpp/shape
+        oam--;
+        *oam = DISPLAY_HEIGHT;
+    }
+
+    gUnknown_2025670 = count;
 }

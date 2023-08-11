@@ -51,7 +51,6 @@ extern void nullsub_8(u32);
 extern void sub_80060EC(void);
 extern void sub_8011860(void);
 extern void sub_800CB20(void);
-extern void CopySpritesToOam(void);
 extern void sub_8005304(void);
 extern void TransferBGPaletteBuffer(void);
 extern void xxx_call_update_bg_vram(void);

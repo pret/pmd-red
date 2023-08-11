@@ -4,8 +4,11 @@
 // size: 0x8
 struct unkSprite
 {
+    // y/affineMode/objMode/mosaic/bpp/shape
     u16 unk0;
+    // x/matrixNum/size
     u16 unk2;
+    // tileNum/priority/paletteNum
     u16 unk4;
     u16 unk6;
 };
@@ -14,12 +17,6 @@ struct unkSprite
 struct UnkSpriteLink
 {
     struct UnkSpriteLink *unk0;
-    struct UnkSpriteLink *unk4;
-};
-// size: 0x8
-struct UnkSpriteLink2
-{
-    struct unkSprite *unk0;
     struct unkSprite *unk4;
 };
 
@@ -42,6 +39,7 @@ struct unkStruct_2039DB0
     u16 unkA;
 };
 
+void CopySpritesToOam(void);
 void InitSprites(void);
 void ResetSprites(bool8);
 void sub_8004E8C(struct unkStruct_2039DB0 *);

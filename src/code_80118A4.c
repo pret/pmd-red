@@ -38,7 +38,6 @@ EWRAM_DATA s16 gUnknown_202DE24;
 
 void nullsub_8(u32);
 void sub_8005838(u32, u32);
-extern void CopySpritesToOam(void);
 extern void sub_8005304(void);
 extern void TransferBGPaletteBuffer(void);
 extern void xxx_call_update_bg_vram(void);
