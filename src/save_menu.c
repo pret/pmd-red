@@ -7,14 +7,6 @@
 #include "sprite.h"
 #include "code_80130A8.h"
 
-struct unkSprite
-{
-    u16 unk0;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
-};
-
 struct unkStruct_203B360
 {
     // size: 0x1b4
@@ -138,7 +130,6 @@ extern void sub_8038830();
 extern void sub_80388C4(void);
 extern void sub_8014114();
 extern void sub_80140F8(void);
-extern void AddSprite(struct unkSprite *, u32, u32, u32);
 
 void CreateSaveMenu(s32 currMenu)
 {
@@ -338,7 +329,7 @@ void sub_8038830(void)
 
 void sub_80388C4(void) {
     if ((gUnknown_203B364->unk1B0 & 8) != 0) {
-    AddSprite(&gUnknown_203B364->unk1A8, 0x100, 0, 0);
+    AddSprite(&gUnknown_203B364->unk1A8, 0x100, NULL, NULL);
   }
   gUnknown_203B364->unk1B0++;
 }

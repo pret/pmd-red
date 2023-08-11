@@ -13,15 +13,6 @@
 #include "code_8094F88.h"
 #include "sprite.h"
 
-struct unkSprite
-{
-    u16 unk0;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
-};
-
-
 struct unkStruct_203B35C
 {
     // size: 0x504
@@ -471,7 +462,6 @@ s32 sub_8035D3C(void);
 extern s32 sub_8035D74(void);
 extern void xxx_call_start_bg_music(void);
 extern void xxx_draw_string_80144C4(void);
-extern void AddSprite(struct unkSprite *, u32, u32, u32);
 
 void sub_8036FDC(s32 param_1)
 {
@@ -839,7 +829,7 @@ void sub_8037748(void)
   gUnknown_203B35C->unkC.unk6 = (gUnknown_203B35C->unkC.unk6 & 0xf) | temp2;
 
   if ((gUnknown_203B35C->unk14 & 8) != 0) {
-    AddSprite(&gUnknown_203B35C->unkC,0x100,0,0x0);
+    AddSprite(&gUnknown_203B35C->unkC, 0x100, NULL, NULL);
   }
   xxx_draw_string_80144C4();
   gUnknown_203B35C->unk14++;

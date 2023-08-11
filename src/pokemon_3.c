@@ -5,6 +5,7 @@
 #include "random.h"
 #include "constants/iq_skill.h"
 #include "constants/tactic.h"
+#include "sprite.h"
 
 extern u8 *gIQSkillNames[];
 extern u32 gIQSkillDescriptions[];
@@ -29,15 +30,7 @@ struct unkStruct_808E9EC
 };
 extern u32 gUnknown_81076C4[];
 
-struct unkStruct_202F3E8
-{
-    u16 unk0;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
-};
-
-extern struct unkStruct_202F3E8 gUnknown_202F3E8[];
+extern struct unkSprite gUnknown_202F3E8[3]; // Shadow sprites of some kind
 extern s16 gUnknown_810AC60; // 0xC
 extern s16 gUnknown_810AC62; // 0xC
 extern s16 gUnknown_810AC68; // 0x8
@@ -46,8 +39,6 @@ extern s16 gUnknown_810AC66; // 0x8
 
 // 2, 4, 6, 7, 8, 9, 0xA, 0xD, 0xF, 0x11
 extern s32 gUnknown_810AC90[10];
-
-extern void AddSprite(u16 *, u32, u32, u32);
 
 extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
 extern void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
@@ -71,7 +62,7 @@ bool8 sub_808E668(s16 a1, s16* a2, s16* a3)
     if (((shifted - 0x320000) >> 16) > 1) {
         u8 shadowSize = GetShadowSize(a1);
         u32 unk2, unk6;
-        struct unkStruct_202F3E8* arg0;
+        struct unkSprite* arg0;
 
         unk2 = a2[0] + a3[8];
         unk6 = a2[1] + a3[9];
@@ -84,7 +75,7 @@ bool8 sub_808E668(s16 a1, s16* a2, s16* a3)
         unk6 &= 0xfff;
         unk6 <<= 4;
         arg0->unk6 = (arg0->unk6 & 0xf) | unk6;
-        AddSprite((u16*)arg0, 0, 0, 0);
+        AddSprite(arg0, 0, NULL, NULL);
     }
     return 1;
 }

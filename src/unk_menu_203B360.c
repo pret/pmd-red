@@ -5,14 +5,7 @@
 #include "menu.h"
 #include "text1.h"
 #include "menu_input.h"
-
-struct unkSprite
-{
-    u16 unk0;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
-};
+#include "sprite.h"
 
 // Similar to RescuePasswordMenu
 struct unkStruct_203B360
@@ -61,8 +54,6 @@ ALIGNED(4) const u8 StorageEmpty_80E6EE4[] = _("{CENTER_ALIGN}The storage space 
 ALIGNED(4) const u8 Caution_80E6F04[] = _("{CENTER_ALIGN}{COLOR_1 RED}Caution!{END_COLOR_TEXT_1} ");
 static const u8 fill0[] = "pksdir0";
 
-
-extern void AddSprite(struct unkSprite *, u32, u32, u32);
 extern void sub_8038440();
 extern void sub_80384D0();
 
@@ -188,7 +179,7 @@ void sub_8038440(void)
 void sub_80384D0(void)
 {
   if ((gUnknown_203B360->unk1B0 & 8) != 0) {
-    AddSprite(&gUnknown_203B360->unk1A8, 0x100, 0, 0);
+    AddSprite(&gUnknown_203B360->unk1A8, 0x100, NULL, NULL);
   }
   gUnknown_203B360->unk1B0++;
 }

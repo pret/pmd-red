@@ -250,7 +250,6 @@ extern void sub_8031E10(void);
 extern u32 sub_80154F0(void);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E00(void);
-extern void AddSprite(struct unkSprite *, u32, u32, u32);
 extern void xxx_draw_string_80144C4(void);
 
 void DisplayRescuePasswordError(u32 error);
@@ -747,7 +746,7 @@ void sub_80391F8(void)
   iVar2->unk6 = temp | temp2;
 
   if ((gRescuePasswordMenu->unk210 & 8) != 0) {
-    AddSprite(iVar2,0x100,0,0);
+    AddSprite(iVar2, 0x100, NULL, NULL);
   }
   xxx_draw_string_80144C4();
   gRescuePasswordMenu->unk210 += 1;
