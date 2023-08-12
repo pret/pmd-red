@@ -1,6 +1,7 @@
 #ifndef GUARD_SPRITE_H
 #define GUARD_SPRITE_H
 
+#include "ground_sprite.h"
 #include "position.h"
 
 // size: 0x8
@@ -28,17 +29,6 @@ struct SpriteList
     struct UnkSpriteLink sprites[256];
     u32 unk800;
     u32 unk804;
-};
-
-// size: 0xC
-struct unkStruct_2039DB0
-{
-    u16 unk0;
-    s16 unk2;
-    s16 unk4;
-    u16 unk6;
-    u16 unk8;
-    u16 unkA;
 };
 
 void BlinkSavingIcon(void);

@@ -1,0 +1,6 @@
+#ifndef GUARD_GROUND_MAP_1_H
+#define GUARD_GROUND_MAP_1_H
+
+bool8 sub_80A4D48(s16);
+
+#endif // GUARD_GROUND_MAP_1_H

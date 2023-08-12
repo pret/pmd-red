@@ -1,5 +1,6 @@
 #include "global.h"
 #include "debug.h"
+#include "ground_map_1.h"
 #include "ground_script.h"
 
 extern struct GroundScript_ExecutePP_1 *gUnknown_3001B6C;

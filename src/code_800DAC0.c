@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_800DAC0.h"
 #include "file_system.h"
 #include "memory.h"
 

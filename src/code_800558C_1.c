@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_800558C_1.h"
 
 extern u8 gUnknown_2026E38;
 extern u32 gUnknown_2026E3C;
@@ -36,7 +37,7 @@ void nullsub_8(void)
 void nullsub_9(void)
 {}
 
-void nullsub_10(void)
+void nullsub_10(bool8 a0)
 {}
 
 void nullsub_144(void)

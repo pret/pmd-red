@@ -315,6 +315,7 @@ SECTIONS {
         src/ground_map_1.o(.text);
         asm/ground_map_1.o(.text);
         src/ground_map_2.o(.text);
+        src/ground_sprite.o(.text);
         asm/ground_sprite.o(.text);
         src/code_80A7714.o(.text);
         asm/ground_lives.o(.text);

@@ -123,7 +123,7 @@ void sub_8004E8C(struct unkStruct_2039DB0 *a0)
 {
     a0->unk0 = 0xFFFF;
     a0->unk2 = -1;
-    a0->unk4 = -1;
+    a0->unk4 = 0xFFFF;
     a0->unk6 = 0;
     a0->unk8 = 0;
     a0->unkA = 0;
@@ -394,8 +394,8 @@ void sub_8004EA8(s32 a0, s16 *a1, u32 *a2, u16 *a3)
 "_080050AC: .4byte gUnknown_20256A0");
 }
 
-#ifdef NONMATCHING // https://decomp.me/scratch/YCfKG
 // a2 and a3 are always called with NULL lol
+#ifdef NONMATCHING // https://decomp.me/scratch/YCfKG
 void AddSprite(struct unkSprite *a0, s32 a1, u32 *a2, struct unkStruct_2039DB0 *a3)
 {
     u16 uVar1;
