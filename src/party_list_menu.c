@@ -638,14 +638,14 @@ void sub_80268CC(void)
             pokeStruct = (struct PokemonStruct*)addr;
 #endif
 
-            pokeStruct->unk0 |= 2;
+            pokeStruct->unk0 |= FLAG_ON_TEAM;
             nullsub_104();
         }
         sub_808ED00();
         sub_8026074(5);
         break;
     case 7:
-        gUnknown_203B2B8->pokeStruct->unk0 &= 0xfffd;
+        gUnknown_203B2B8->pokeStruct->unk0 &= ~(FLAG_ON_TEAM);
         nullsub_104();
         sub_808ED00();
         sub_8026074(6);

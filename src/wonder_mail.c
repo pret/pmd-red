@@ -1162,7 +1162,7 @@ void sub_8028FDC(void)
     {
         case 8:
             mail = GetMailatIndex(gUnknown_203B2C0->mailIndex);
-            if(!sub_80A2824(mail->dungeon.id))
+            if(!sub_80A2824(mail->unk4.dungeon.id))
             {
                 SetFriendRescueCounterState(CANT_GO_TO_DUNGEON);
             }

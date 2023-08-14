@@ -49,9 +49,9 @@ bool8 sub_8096F50(struct WonderMail *mail)
     for(index = 0; index < 0x10; index++)
     {
         temp  = &gUnknown_203B490->unk230[index];
-        if(temp->dungeon.id == mail->dungeon.id)
-            if(temp->dungeon.floor == mail->dungeon.floor)
-                if(temp->unk4 == mail->unk8)
+        if(temp->dungeon.id == mail->unk4.dungeon.id)
+            if(temp->dungeon.floor == mail->unk4.dungeon.floor)
+                if(temp->seed == mail->unk4.seed)
                     if(temp->unk8 == temp2)
                         return TRUE;
     }
@@ -96,7 +96,7 @@ u32 RestoreMailInfo(u8 *r0, u32 size)
     for(index = 0; index < 0x10; index++)
     {
         RestoreIntegerBits(&backup, &gUnknown_203B490->unk230[index].unk8, 0x20);
-        RestoreIntegerBits(&backup, &gUnknown_203B490->unk230[index].unk4, 0x18);
+        RestoreIntegerBits(&backup, &gUnknown_203B490->unk230[index].seed, 0x18);
         RestoreDungeonLocation(&backup, &gUnknown_203B490->unk230[index].dungeon);
     }
     nullsub_102(&backup);
@@ -140,7 +140,7 @@ u32 SaveMailInfo(u8 *r0, u32 size)
     for(index = 0; index < 0x10; index++)
     {
         SaveIntegerBits(&backup, &gUnknown_203B490->unk230[index].unk8, 0x20);
-        SaveIntegerBits(&backup, &gUnknown_203B490->unk230[index].unk4, 0x18);
+        SaveIntegerBits(&backup, &gUnknown_203B490->unk230[index].seed, 0x18);
         SaveDungeonLocation(&backup, &gUnknown_203B490->unk230[index].dungeon);
     }
     nullsub_102(&backup);
@@ -158,8 +158,8 @@ void RestoreWonderMail(struct unkStruct_8094924 *a, struct WonderMail *b)
     RestoreIntegerBits(a, &b->rewardType, 4);
     RestoreIntegerBits(a, &b->itemReward, 8);
     RestoreIntegerBits(a, &b->friendAreaReward, 6);
-    RestoreIntegerBits(a, &b->unk8, 0x18);
-    RestoreDungeonLocation(a, &b->dungeon);
+    RestoreIntegerBits(a, &b->unk4.seed, 0x18);
+    RestoreDungeonLocation(a, &b->unk4.dungeon);
 }
 
 void SaveWonderMail(struct unkStruct_8094924 *a, struct WonderMail *b)
@@ -173,8 +173,8 @@ void SaveWonderMail(struct unkStruct_8094924 *a, struct WonderMail *b)
     SaveIntegerBits(a, &b->rewardType, 4);
     SaveIntegerBits(a, &b->itemReward, 8);
     SaveIntegerBits(a, &b->friendAreaReward, 6);
-    SaveIntegerBits(a, &b->unk8, 0x18);
-    SaveDungeonLocation(a, &b->dungeon);
+    SaveIntegerBits(a, &b->unk4.seed, 0x18);
+    SaveDungeonLocation(a, &b->unk4.dungeon);
 }
 
 void sub_80972F4(void)

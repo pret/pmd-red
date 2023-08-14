@@ -682,7 +682,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
         pokemon = &gRecruitedPokemonRef->pokemon[i];
 
         if (pokemon->unk0 & 1) {
-            if (pokemon->unk0 & 2) {
+            if (pokemon->unk0 & FLAG_ON_TEAM) {
                 buffer[count++] = i;
             }
             if (pokemon->isTeamLeader) {
@@ -730,7 +730,7 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
         RestoreIntegerBits(&backup, &data_u8, 1);
         RestorePokemonStruct(&backup, &gRecruitedPokemonRef->team[i]);
         if (data_u8 & 1) {
-            gRecruitedPokemonRef->team[i].unk0 = 3;
+            gRecruitedPokemonRef->team[i].unk0 = 3; // FLAG_ON_TEAM (2) + ??? (1)
         }
         else {
             gRecruitedPokemonRef->team[i].unk0 = 0;
@@ -740,12 +740,12 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
     for (i = 0; i < 6; i++) {
         RestoreIntegerBits(&backup, &data_s16, 16);
         if ((u16)data_s16 < NUM_MONSTERS) {
-            gRecruitedPokemonRef->pokemon[data_s16].unk0 |= 2;
+            gRecruitedPokemonRef->pokemon[data_s16].unk0 |= FLAG_ON_TEAM;
         }
     }
     RestoreIntegerBits(&backup, &data_s16, 16);
     if ((u16)data_s16 < NUM_MONSTERS) {
-        gRecruitedPokemonRef->pokemon[data_s16].isTeamLeader = 1;
+        gRecruitedPokemonRef->pokemon[data_s16].isTeamLeader = TRUE;
     }
     nullsub_102(&backup);
     return backup.unk8;

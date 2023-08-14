@@ -5,7 +5,7 @@ struct subStruct_203B490
 {
     // size: 0xC
     struct DungeonLocation dungeon;
-    u32 unk4;
+    u32 seed;
     u32 unk8;
 };
  

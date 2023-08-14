@@ -42,8 +42,8 @@ void SortPelipperJobs(void)
         {
             if(gUnknown_203B490->pelipperBoardJobs[index2].mailType != MAIL_TYPE_NONE)
             {
-                if((gUnknown_203B490->pelipperBoardJobs[index1].dungeon.id > gUnknown_203B490->pelipperBoardJobs[index2].dungeon.id) ||
-                ((gUnknown_203B490->pelipperBoardJobs[index1].dungeon.id == gUnknown_203B490->pelipperBoardJobs[index2].dungeon.id) && (gUnknown_203B490->pelipperBoardJobs[index1].dungeon.floor > gUnknown_203B490->pelipperBoardJobs[index2].dungeon.floor)))
+                if((gUnknown_203B490->pelipperBoardJobs[index1].unk4.dungeon.id > gUnknown_203B490->pelipperBoardJobs[index2].unk4.dungeon.id) ||
+                ((gUnknown_203B490->pelipperBoardJobs[index1].unk4.dungeon.id == gUnknown_203B490->pelipperBoardJobs[index2].unk4.dungeon.id) && (gUnknown_203B490->pelipperBoardJobs[index1].unk4.dungeon.floor > gUnknown_203B490->pelipperBoardJobs[index2].unk4.dungeon.floor)))
                 {
                     mail = gUnknown_203B490->pelipperBoardJobs[index1];
                     gUnknown_203B490->pelipperBoardJobs[index1] = gUnknown_203B490->pelipperBoardJobs[index2]; 
@@ -72,9 +72,9 @@ void GeneratePelipperJobs(void)
     mail->mailType = MAIL_TYPE_UNK2;
     mail->missionType = WONDER_MAIL_MISSION_TYPE_UNK6;
     mail->unk2 = 1;
-    mail->dungeon.id = DUNGEON_UPROAR_FOREST;
-    mail->dungeon.floor = 10;
-    mail->unk8 = Rand32Bit() & 0xffffff;
+    mail->unk4.dungeon.id = DUNGEON_UPROAR_FOREST;
+    mail->unk4.dungeon.floor = 10;
+    mail->unk4.seed = Rand32Bit() & 0xffffff;
     mail->clientSpecies = MONSTER_WYNAUT;
     mail->targetSpecies = MONSTER_MANKEY;
     mail->targetItem = 0;
@@ -90,9 +90,9 @@ void GeneratePelipperJobs(void)
     mail->mailType = MAIL_TYPE_UNK3;
     mail->missionType = WONDER_MAIL_MISSION_TYPE_UNK6;
     mail->unk2 = 2;
-    mail->dungeon.id = DUNGEON_HOWLING_FOREST;
-    mail->dungeon.floor = 15;
-    mail->unk8 = Rand32Bit() & 0xffffff;
+    mail->unk4.dungeon.id = DUNGEON_HOWLING_FOREST;
+    mail->unk4.dungeon.floor = 15;
+    mail->unk4.seed = Rand32Bit() & 0xffffff;
     mail->clientSpecies = MONSTER_SMEARGLE;
     mail->targetSpecies = MONSTER_SMEARGLE;
     mail->targetItem = 0;
@@ -107,9 +107,9 @@ void GeneratePelipperJobs(void)
     mail->mailType = MAIL_TYPE_UNK4;
     mail->missionType = WONDER_MAIL_MISSION_TYPE_UNK6;
     mail->unk2 = 3;
-    mail->dungeon.id = DUNGEON_WISH_CAVE;
-    mail->dungeon.floor = 20;
-    mail->unk8 = Rand32Bit() & 0xffffff;
+    mail->unk4.dungeon.id = DUNGEON_WISH_CAVE;
+    mail->unk4.dungeon.floor = 20;
+    mail->unk4.seed = Rand32Bit() & 0xffffff;
     mail->clientSpecies = MONSTER_MEDICHAM;
     mail->targetSpecies = MONSTER_MEDICHAM;
     mail->targetItem = 0;
@@ -136,9 +136,9 @@ bool8 IsMailinJobSlot(struct WonderMail *mail)
       if(jobSlot->mailType != MAIL_TYPE_NONE)
         if(mail->missionType == jobSlot->missionType) 
             if(mail->unk2 == jobSlot->unk2)
-                    if(mail->dungeon.id == jobSlot->dungeon.id)
-                        if(mail->dungeon.floor == jobSlot->dungeon.floor)
-                            if(mail->unk8 == jobSlot->unk8)
+                    if(mail->unk4.dungeon.id == jobSlot->unk4.dungeon.id)
+                        if(mail->unk4.dungeon.floor == jobSlot->unk4.dungeon.floor)
+                            if(mail->unk4.seed == jobSlot->unk4.seed)
                                 if(mail->clientSpecies == jobSlot->clientSpecies)
                                     if(mail->targetSpecies == jobSlot->targetSpecies)
                                         if(mail->targetItem == jobSlot->targetItem)
@@ -157,8 +157,8 @@ bool8 sub_809693C(struct WonderMail *mail)
   bool8 escortMission;
   s32 index;
   
-  dungeonIndex = mail->dungeon.id;
-  floor = mail->dungeon.floor;
+  dungeonIndex = mail->unk4.dungeon.id;
+  floor = mail->unk4.dungeon.floor;
   escortMission = FALSE;
   if (!IsValidWonderMail(mail)) {
       return FALSE;
@@ -204,7 +204,7 @@ s32 CountJobsinDungeon(u8 dungeon)
   for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
   {
     mail = GetJobSlotInfo(index);
-    if ((mail->dungeon.id == dungeon) &&
+    if ((mail->unk4.dungeon.id == dungeon) &&
        (((mail->mailType == MAIL_TYPE_TAKEN_JOB || (mail->mailType == MAIL_TYPE_UNK8)) || (mail->mailType == MAIL_TYPE_UNK9)))) {
       count++;
     }
@@ -222,7 +222,7 @@ bool8 sub_8096A08(u8 dungeon, u8 *param_2)
   for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
   {
       mail = GetJobSlotInfo(index);
-      if(mail->dungeon.id == dungeon)
+      if(mail->unk4.dungeon.id == dungeon)
         if(mail->mailType == MAIL_TYPE_TAKEN_JOB)
             if(mail->missionType == WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT)
             {
@@ -281,7 +281,7 @@ void sub_8096AF8(struct unkStruct_8096AF8 *param_1, u8 slotIndex,u8 dungeon)
   param_1->unk0 = FALSE;
   param_1->clientSpecies = jobSlot->clientSpecies;
   param_1->targetSpecies = MONSTER_NONE;
-  if (jobSlot->dungeon.id == dungeon) {
+  if (jobSlot->unk4.dungeon.id == dungeon) {
     switch(jobSlot->missionType) {
         case WONDER_MAIL_MISSION_TYPE_FIND_ITEM:
             if (jobSlot->mailType == MAIL_TYPE_TAKEN_JOB) {
@@ -322,7 +322,7 @@ s16 sub_8096B98(u8 dungeon)
     mail = GetJobSlotInfo(index);
     if(mail->mailType == MAIL_TYPE_TAKEN_JOB)
         if(mail->missionType == WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT)
-            if(mail->dungeon.id == dungeon)
+            if(mail->unk4.dungeon.id == dungeon)
                 return mail->targetSpecies;
   }
   return 0;
@@ -368,7 +368,7 @@ bool8 sub_8096C08(u8 *jobIndex)
 void ResetJobSlot(u8 index)
 {
   gUnknown_203B490->jobSlots[index].mailType = MAIL_TYPE_NONE;
-  gUnknown_203B490->jobSlots[index].dungeon.id = 99;
-  gUnknown_203B490->jobSlots[index].dungeon.floor = 0;
+  gUnknown_203B490->jobSlots[index].unk4.dungeon.id = 99;
+  gUnknown_203B490->jobSlots[index].unk4.dungeon.floor = 0;
   gUnknown_203B490->jobSlots[index].rewardType = MONEY1;
 }

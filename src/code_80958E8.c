@@ -58,7 +58,7 @@ void InitializeMailJobsNews(void)
     {
         gUnknown_203B490->unk230[index].dungeon.id = 99;
         gUnknown_203B490->unk230[index].dungeon.floor = 1;
-        gUnknown_203B490->unk230[index].unk4 = 0;
+        gUnknown_203B490->unk230[index].seed = 0;
         gUnknown_203B490->unk230[index].unk8 = 0;
     }
 }
@@ -85,17 +85,17 @@ bool8 ValidateWonderMail(struct WonderMail *data)
         return FALSE;
     else
     {
-        if(data->missionType == WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM && GetMaxItemsAllowed(data->dungeon.id) == 0)
+        if(data->missionType == WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM && GetMaxItemsAllowed(data->unk4.dungeon.id) == 0)
             return FALSE;
 
         if(data->unk2 > 9)
             return FALSE;
 
-        if(sub_809095C(data->dungeon.id))
+        if(sub_809095C(data->unk4.dungeon.id))
             return FALSE;
-        if(data->dungeon.floor >= GetDungeonFloorCount(data->dungeon.id))
+        if(data->unk4.dungeon.floor >= GetDungeonFloorCount(data->unk4.dungeon.id))
             return FALSE;
-        if(sub_809017C(&data->dungeon))
+        if(sub_809017C(&data->unk4.dungeon))
             return FALSE;
 
         if(data->clientSpecies == MONSTER_NONE)
@@ -127,7 +127,7 @@ bool8 ValidateWonderMail(struct WonderMail *data)
             return FALSE;
 
         // Item finding
-        if(data->missionType == WONDER_MAIL_MISSION_TYPE_FIND_ITEM && xxx_bit_lut_lookup_8091E50(data->dungeon.id, data->targetItem) == 0)
+        if(data->missionType == WONDER_MAIL_MISSION_TYPE_FIND_ITEM && xxx_bit_lut_lookup_8091E50(data->unk4.dungeon.id, data->targetItem) == 0)
             return FALSE;
 
         if(data->rewardType == BLANK_4 || data->rewardType == END_REWARDS || data->rewardType > END_REWARDS)
@@ -144,7 +144,7 @@ bool8 ValidateWonderMail(struct WonderMail *data)
         {
             if(GetFriendAreaUnlockCondition(data->friendAreaReward) != UNLOCK_WONDER_MAIL)
                 return FALSE;
-            if(sub_803C1D0(&data->dungeon, data->missionType) == 0)
+            if(sub_803C1D0(&data->unk4.dungeon, data->missionType) == 0)
                 return FALSE;
         }
         return TRUE;

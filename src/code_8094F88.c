@@ -296,15 +296,15 @@ void sub_809542C(struct unkStruct_809542C *param_1)
   gUnknown_203B480->mailType = 1;
   preload = gUnknown_203B480;
   uVar4 = param_1->unk4;
-  preload->dungeon = param_1->unk0;
-  preload->unk8 = uVar4;
+  preload->unk4.dungeon = param_1->unk0;
+  preload->unk4.seed = uVar4;
   sub_8094D28(Rand32Bit());
   gUnknown_203B480->unk10.unk10 = sub_8094E4C();
   gUnknown_203B480->clientSpecies = GetPlayerPokemonStruct()->speciesNum;
   PrintPokeNameToBuffer(buffer, GetPlayerPokemonStruct());
   CopyStringtoBuffer(gUnknown_203B480->playerName, buffer);
   gUnknown_203B480->unk24 = sub_8011C34();
-  gUnknown_203B480->rescuesAllowed = GetRescuesAllowed(gUnknown_203B480->dungeon.id);
+  gUnknown_203B480->rescuesAllowed = GetRescuesAllowed(gUnknown_203B480->unk4.dungeon.id);
 }
 
 void sub_8095494(struct unkStruct_809542C *param_1, u8 index)
@@ -316,8 +316,8 @@ void sub_8095494(struct unkStruct_809542C *param_1, u8 index)
   mail = gUnknown_203B480;
   mail += index;
 
-  temp = mail->dungeon;
-  uVar1 = mail->unk8;
+  temp = mail->unk4.dungeon;
+  uVar1 = mail->unk4.seed;
   param_1->unk0 = temp;
   param_1->unk4 = uVar1;
 }
@@ -420,8 +420,8 @@ void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     u8 temp;
 
     RestoreIntegerBits(a, &b->mailType, 4);
-    RestoreDungeonLocation(a, &b->dungeon);
-    RestoreIntegerBits(a, &b->unk8, 0x18);
+    RestoreDungeonLocation(a, &b->unk4.dungeon);
+    RestoreIntegerBits(a, &b->unk4.seed, 0x18);
     RestoreIntegerBits(a, &b->clientSpecies, 0x9);
     RestoreIntegerBits(a, &b->unk10.unk10, 0x20);
     RestoreIntegerBits(a, &b->playerName, 0x50);
@@ -445,8 +445,8 @@ void sub_8095824(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     zero = 0;
 
     SaveIntegerBits(a, &b->mailType, 4);
-    SaveDungeonLocation(a, &b->dungeon);
-    SaveIntegerBits(a, &b->unk8, 0x18);
+    SaveDungeonLocation(a, &b->unk4.dungeon);
+    SaveIntegerBits(a, &b->unk4.seed, 0x18);
     SaveIntegerBits(a, &b->clientSpecies, 0x9);
     SaveIntegerBits(a, &b->unk10.unk10, 0x20);
     SaveIntegerBits(a, &b->playerName, 0x50);

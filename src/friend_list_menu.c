@@ -536,7 +536,7 @@ void sub_8025A84(void)
             sub_8025434(0xA);
             break;
         case 9:
-            gUnknown_203B2B4->pokeStruct->unk0 &= 0xfffd;
+            gUnknown_203B2B4->pokeStruct->unk0 &= ~(FLAG_ON_TEAM);
             nullsub_104();
             sub_808ED00();
             sub_8023C60();

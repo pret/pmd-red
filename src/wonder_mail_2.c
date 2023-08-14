@@ -175,8 +175,8 @@ void sub_802B3E0(void)
         gUnknown_203B2C8->unk114.moneyReward = 0;
         sub_8097790();
         mail = GetMailatIndex(gUnknown_203B2C8->unk1);
-        sub_803C37C(&mail->dungeon, 0, gUnknown_203B2C8->unk114.itemRewards);
-        gUnknown_203B2C8->unk114.teamRankPtsReward = GetDungeonTeamRankPts(&mail->dungeon, 0);
+        sub_803C37C(&mail->unk4.dungeon, 0, gUnknown_203B2C8->unk114.itemRewards);
+        gUnknown_203B2C8->unk114.teamRankPtsReward = GetDungeonTeamRankPts(&mail->unk4.dungeon, 0);
         gUnknown_203B2C8->unk114.itemRewards[1] = ITEM_NOTHING;
         gUnknown_203B2C8->unk114.itemRewards[2] = ITEM_NOTHING;
         gUnknown_203B2C8->unk114.quantity = 10;

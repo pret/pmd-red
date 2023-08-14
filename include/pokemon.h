@@ -24,6 +24,10 @@ struct unkPokeSubStruct_C
     u8 fill1[3];
 };
 
+enum PokemonUnk0Flags {
+    FLAG_ON_TEAM = 2,
+};
+
 // size: 0x58
 struct PokemonStruct
 {

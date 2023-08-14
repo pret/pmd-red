@@ -25,14 +25,13 @@ struct unkStruct_802F204
 };
 
 // size: 0x14
+
 struct WonderMail
 {
     /* 0x0 */ u8 mailType; // mail type
     /* 0x1 */ u8 missionType; // mission type
     u8 unk2;
-    u8 unk3;
-    /* 0x4 */ struct DungeonLocation dungeon;
-    u32 unk8;
+    /* 0x4 */ struct WonderMailSub unk4;
     /* 0xC */ s16 clientSpecies; // client pokemon
     /* 0xE */ s16 targetSpecies; // target
     /* 0x10 */ u8 targetItem; // item to find/deliver
