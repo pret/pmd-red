@@ -66,7 +66,7 @@ void sub_8095118(void)
   struct unkStruct_203B480 *unused;
   
   MemoryFill8((u8*)gUnknown_203B480,0, 0x20 * sizeof(struct unkStruct_203B480));
-  MemoryFill8((u8*)gUnknown_203B484,0, 0x5c);
+  MemoryFill8((u8*)gUnknown_203B484,0, sizeof(struct unkStruct_203B484));
   for(index = 0; index < 0x20; index++){
 
     // NOTE: we use a temp variable here to force the match
@@ -123,12 +123,6 @@ bool8 sub_80951BC(struct unkStruct_203B480 *mail)
         return 1;
     }
 }
-
-struct unkStruct_809542C
-{
-    struct DungeonLocation unk0;
-    u32 unk4;
-};
 
 bool8 sub_80951FC(struct unkStruct_203B480 *param_1)
 {
@@ -281,9 +275,9 @@ s32 sub_8095400(u32 param_1)
   return -1;
 }
 
-void sub_809542C(struct unkStruct_809542C *param_1)
+void sub_809542C(struct WonderMailSub *param_1)
 {
-  u32 uVar4;
+  u32 seed;
 
 #ifndef NONMATCHING
   register struct unkStruct_203B480 *preload asm("r2");
@@ -295,9 +289,9 @@ void sub_809542C(struct unkStruct_809542C *param_1)
   
   gUnknown_203B480->mailType = 1;
   preload = gUnknown_203B480;
-  uVar4 = param_1->unk4;
-  preload->unk4.dungeon = param_1->unk0;
-  preload->unk4.seed = uVar4;
+  seed = param_1->seed;
+  preload->unk4.dungeon = param_1->dungeon;
+  preload->unk4.seed = seed;
   sub_8094D28(Rand32Bit());
   gUnknown_203B480->unk10.unk10 = sub_8094E4C();
   gUnknown_203B480->clientSpecies = GetPlayerPokemonStruct()->speciesNum;
@@ -307,19 +301,19 @@ void sub_809542C(struct unkStruct_809542C *param_1)
   gUnknown_203B480->rescuesAllowed = GetRescuesAllowed(gUnknown_203B480->unk4.dungeon.id);
 }
 
-void sub_8095494(struct unkStruct_809542C *param_1, u8 index)
+void sub_8095494(struct WonderMailSub *param_1, u8 index)
 {
-  u32 uVar1;
-  struct DungeonLocation temp;
+  u32 seed;
+  struct DungeonLocation dungeon;
   struct unkStruct_203B480 *mail;
   
   mail = gUnknown_203B480;
   mail += index;
 
-  temp = mail->unk4.dungeon;
-  uVar1 = mail->unk4.seed;
-  param_1->unk0 = temp;
-  param_1->unk4 = uVar1;
+  dungeon = mail->unk4.dungeon;
+  seed = mail->unk4.seed;
+  param_1->dungeon = dungeon;
+  param_1->seed = seed;
 }
 
 u32 sub_80954B4(void)
