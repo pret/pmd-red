@@ -14,6 +14,7 @@
 #include "code_80130A8.h"
 #include "main_menu.h"
 #include "code_801EE10_1.h"
+#include "cpu.h"
 
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 
@@ -56,7 +57,6 @@ extern void sub_8099690(u32);
 extern void sub_8031E10(void);
 extern void sub_803084C(void);
 extern void sub_8030DE4();
-extern void nullsub_23(u32);
 extern s32 sub_8037D64(u32, void *, void *);
 extern s32 sub_80381F4(u32, void *, void *);
 extern void sub_80306A8(u32, u32, u32, u32);
@@ -589,7 +589,7 @@ void sub_8028348(void)
             sub_8014248(gUnknown_80DDFB8, 0, 8, gUnknown_80DDA48, 0, 4, 0, &gUnknown_203B2C0->faceFile,0xC);
             break;
         case FRIEND_RESCUE_COMMUNICATING_PRE:
-            nullsub_23(0);
+            nullsub_23(FALSE);
             sub_80141B4(gUnknown_80DE01C, 0 , 0, 0);
             break;
         case FRIEND_RESCUE_COMMUNICATING:

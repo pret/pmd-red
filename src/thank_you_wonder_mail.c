@@ -17,6 +17,7 @@
 #include "main_menu.h"
 #include "code_801C620.h"
 #include "code_801B3C0.h"
+#include "cpu.h"
 
 extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 
@@ -218,7 +219,6 @@ extern void sub_80151C0(u32, u8 *);
 extern void xxx_call_start_bg_music(void);
 extern void sub_803092C(void);
 extern void sub_8011830(void);
-extern void nullsub_23(u32);
 extern s32 sub_8037B28(u32);
 extern u32 sub_8030894(void);
 extern u32 sub_801D008(void);
@@ -1405,7 +1405,7 @@ void UpdateThankYouMailText(void)
         break;
     case COMMUNICATING_THANK_YOU_MAIL:
         // Communicating..
-        nullsub_23(0);
+        nullsub_23(FALSE);
         sub_80141B4(gUnknown_80DF544,0,0,0);
         break;
     case 0x17:

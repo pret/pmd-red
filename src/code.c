@@ -27,7 +27,7 @@ void xxx_dungeon_8001340(u32 r0)
     NDS_LoadOverlay_GroundMain();
 }
 
-void nullsub_3(void)
+void nullsub_3(s32 a0, s32 a1)
 {
 
 }

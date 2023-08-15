@@ -1,4 +1,5 @@
 #include "global.h"
+#include "cpu.h"
 #include "sprite.h"
 
 extern u16 gUnknown_2025670;
@@ -8,9 +9,14 @@ extern struct SpriteList gUnknown_20256A0;
 extern struct UnkSpriteLink gUnknown_2025EA8[128];
 extern struct unkSprite gUnknown_20262A8[128];
 extern u32 gSpriteCount; /* 20266A8 */
-extern u32 gUnknown_20266B0;
-extern u32 *gCharMemCursor; /* 2026E30 */
-extern u32 *gUnknown_203B074;
+extern struct unkStruct_20266B0 gUnknown_20266B0[160];
+extern void *gCharMemCursor; /* 2026E30 */
+extern struct unkStruct_20266B0 *gUnknown_203B074;
+
+// code.c
+extern void nullsub_3(s32, s32);
+
+void sub_80052BC(struct UnkSpriteMem *);
 
 void InitSprites(void)
 {
@@ -28,8 +34,8 @@ void ResetSprites(bool8 a0)
     struct UnkSpriteLink *e;
 
     gSpriteCount = 0;
-    gCharMemCursor = (u32*)OBJ_VRAM0;
-    gUnknown_203B074 = &gUnknown_20266B0;
+    gCharMemCursor = OBJ_VRAM0;
+    gUnknown_203B074 = &gUnknown_20266B0[0];
 
     a = &gUnknown_20256A0.sprites[0];
     b = a + 1;
@@ -396,9 +402,9 @@ void sub_8004EA8(s32 a0, s16 *a1, u32 *a2, u16 *a3)
 
 // a2 and a3 are always called with NULL lol
 #ifdef NONMATCHING // https://decomp.me/scratch/YCfKG
-void AddSprite(struct unkSprite *a0, s32 a1, u32 *a2, struct unkStruct_2039DB0 *a3)
+void AddSprite(struct unkSprite *a0, s32 a1, struct UnkSpriteMem *a2, struct unkStruct_2039DB0 *a3)
 {
-    u16 uVar1;
+    s32 uVar1;
     struct unkSprite *spr;
     struct UnkSpriteLink *a;
     struct UnkSpriteLink *b;
@@ -420,15 +426,18 @@ void AddSprite(struct unkSprite *a0, s32 a1, u32 *a2, struct unkStruct_2039DB0 *
         spr->unk6 = a0->unk6;
     }
     else {
-        spr->unk0 = (a3->unk0 & a0->unk0) | a3->unk6;
-        spr->unk2 = (a3->unk2 & a0->unk2) | a3->unk8;
-        spr->unk4 = (a3->unk4 & a0->unk4) | a3->unkA;
+        spr->unk0 = (a0->unk0 & a3->unk0) | a3->unk6;
+        spr->unk2 = (a0->unk2 & a3->unk2) | a3->unk8;
+        spr->unk4 = (a0->unk4 & a3->unk4) | a3->unkA;
         spr->unk6 = a0->unk6;
     }
 
-    uVar1 = spr->unk6 >> 4;
+    uVar1 = spr->unk6 / 16;
     nullsub_3(uVar1, 0);
-    spr->unk0 = (uVar1 & 0xFF) | (spr->unk0 & 0xFF00);
+    // uVar1 is the Y position of the sprite, then the rest remains
+    uVar1 &= 0xFF;
+    spr->unk0 &= 0xFF00;
+    spr->unk0 |= uVar1;
 
     if (a2 != NULL)
         sub_80052BC(a2);
@@ -444,7 +453,7 @@ void AddSprite(struct unkSprite *a0, s32 a1, u32 *a2, struct unkStruct_2039DB0 *
 }
 #else
 NAKED
-void AddSprite(struct unkSprite *a0, s32 a1, u32 *a2, struct unkStruct_2039DB0 *a3)
+void AddSprite(struct unkSprite *a0, s32 a1, struct UnkSpriteMem *a2, struct unkStruct_2039DB0 *a3)
 {
     asm_unified(
     "push {r4-r7,lr}\n"
@@ -674,5 +683,82 @@ void BlinkSavingIcon(void)
         *oam++ = 0xF3FC;
         // Set affineParam to 0
         *oam = 0;
+    }
+}
+
+#ifdef NONMATCHING // https://decomp.me/scratch/taTIU
+extern u32 sub_80052BC_end[0] asm("gCharMemCursor");
+void sub_80052BC(struct UnkSpriteMem *a0)
+{
+    if (a0->byteCount) {
+        struct unkStruct_20266B0 **r5 = &gUnknown_203B074;
+        void *r6 = sub_80052BC_end;
+        void **r4 = &gCharMemCursor;
+        do {
+            struct unkStruct_20266B0 *r2 = *r5;
+            if ((uintptr_t)r2 >= (uintptr_t)r6)
+                return;
+            r2->byteCount = a0->byteCount;
+            r2->src = a0->src;
+            r2->dest = *r4;
+            *r4 = r2->dest + a0->byteCount;
+            *r5 = r2 + 1;
+            a0++;
+        } while (a0->byteCount);
+    }
+}
+#else
+NAKED
+void sub_80052BC(struct UnkSpriteMem *a0)
+{
+    asm_unified(
+    "push {r4-r6,lr}\n"
+    "\tadds r3, r0, 0\n"
+    "\tldr r0, [r3, 0x4]\n"
+    "\tcmp r0, 0\n"
+    "\tbeq _080052F2\n"
+    "\tldr r5, _080052F8\n"
+    "\tldr r6, _080052FC\n"
+    "\tldr r4, _08005300\n"
+"_080052CC:\n"
+    "\tldr r2, [r5]\n"
+    "\tcmp r2, r6\n"
+    "\tbcs _080052F2\n"
+    "\tldr r0, [r3, 0x4]\n"
+    "\tstr r0, [r2]\n"
+    "\tldr r0, [r3]\n"
+    "\tstr r0, [r2, 0x4]\n"
+    "\tldr r1, [r4]\n"
+    "\tstr r1, [r2, 0x8]\n"
+    "\tldr r0, [r3, 0x4]\n"
+    "\tadds r1, r0\n"
+    "\tstr r1, [r4]\n"
+    "\tadds r0, r2, 0\n"
+    "\tadds r0, 0xC\n"
+    "\tstr r0, [r5]\n"
+    "\tadds r3, 0x8\n"
+    "\tldr r0, [r3, 0x4]\n"
+    "\tcmp r0, 0\n"
+    "\tbne _080052CC\n"
+"_080052F2:\n"
+    "\tpop {r4-r6}\n"
+    "\tpop {r0}\n"
+    "\tbx r0\n"
+    "\t.align 2, 0\n"
+"_080052F8: .4byte gUnknown_203B074\n"
+"_080052FC: .4byte gCharMemCursor\n"
+"_08005300: .4byte gCharMemCursor");
+}
+#endif // NONMATCHING
+
+void sub_8005304(void)
+{
+    struct unkStruct_20266B0 *s;
+
+    for (s = &gUnknown_20266B0[0]; s < gUnknown_203B074; s++) {
+        if (s->src != NULL)
+            CpuCopy(s->dest, s->src, s->byteCount);
+        else
+            CpuClear(s->dest, s->byteCount);
     }
 }

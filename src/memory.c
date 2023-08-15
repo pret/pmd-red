@@ -1,4 +1,5 @@
 #include "global.h"
+#include "cpu.h"
 #include "memory.h"
 
 extern struct HeapFreeListElement gMainHeapFreeList[32];
@@ -7,8 +8,6 @@ extern struct HeapDescriptor gMainHeapDescriptor;
 
 EWRAM_DATA struct HeapDescriptor *gHeapDescriptorList[8] = {0};
 EWRAM_DATA u32 gHeapCount = {0};
-
-extern void CpuClear(u32 *dest, s32 size);
 
 void InitHeapInternal(void);
 

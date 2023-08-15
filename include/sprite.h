@@ -31,6 +31,22 @@ struct SpriteList
     u32 unk804;
 };
 
+// size: 0xC
+struct unkStruct_20266B0
+{
+    /* 0x0 */ s32 byteCount;
+    /* 0x4 */ void *src;
+    /* 0x8 */ void *dest;
+};
+
+// size: 0x8
+struct UnkSpriteMem
+{
+    /* 0x0 */ void *src;
+    /* 0x4 */ s32 byteCount;
+};
+
+void AddSprite(struct unkSprite *, s32, struct UnkSpriteMem *, struct unkStruct_2039DB0 *);
 void BlinkSavingIcon(void);
 void CopySpritesToOam(void);
 void InitSprites(void);
@@ -38,8 +54,6 @@ void ResetSprites(bool8);
 void SetSavingIconCoords(struct Position *);
 void sub_8004E8C(struct unkStruct_2039DB0 *);
 void sub_8005180(void);
-
-// sprite.s
-extern void AddSprite(struct unkSprite *, s32, u32 *, struct unkStruct_2039DB0 *);
+void sub_8005304(void);
 
 #endif // GUARD_SPRITE_H

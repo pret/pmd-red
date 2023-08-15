@@ -1,13 +1,12 @@
 #include "global.h"
 #include "bg_palette_buffer.h"
+#include "cpu.h"
 
 #define BG_PALETTE_BUFFER_SIZE 512
 #define BG_PALETTE_BUFFER_CHUNK_SIZE 16
 
 EWRAM_DATA bool8 gBGPaletteUsed[BG_PALETTE_BUFFER_SIZE / BG_PALETTE_BUFFER_CHUNK_SIZE] = {0};
 EWRAM_DATA u16 gBGPaletteBuffer[BG_PALETTE_BUFFER_SIZE] = {0};
-
-extern void CpuCopy(void* src, void* dest, u32 size);
 
 #ifndef NONMATCHING
 NAKED
