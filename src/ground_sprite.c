@@ -21,10 +21,13 @@ extern struct unkStruct_3001B7C *gUnknown_3001B7C;
 extern const struct FileArchive gDungeonFileArchive;
 // monster_sbin.s
 extern const struct FileArchive gMonsterFileArchive;
+// ornament_sbin.s
+extern const struct FileArchive gOrnamentFileArchive;
 // data_8115F5C.s
 extern const u8 gUnknown_81177CC[];
 extern const u8 gUnknown_81177D8[];
 extern const u8 gUnknown_81177EC[];
+extern const u8 *gUnknown_81178F4[];
 
 // code_8098BDC.s
 extern void sub_809971C(u16, u8 *, s16);
@@ -126,4 +129,53 @@ void sub_80A6460(void)
     }
 
     CloseFile(file);
+}
+
+void sub_80A64A4(void)
+{
+    u8 *r2;
+    u16 r4;
+    u32 r5;
+    struct OpenedFile *file;
+    struct unkStruct_3001B7C_sub108 *r7;
+    s32 i;
+    s16 r9;
+    u16 sl;
+    u16 flag;
+    u16 flag2;
+
+    r7 = gUnknown_3001B7C->unk108;
+    sub_80A6460();
+
+    for (i = 0; i < 2; i++, r7++)
+    {
+        if (r7->unk2 > 0) {
+            r5 = r7->unk0;
+            sl = i + 29;
+            r9 = 0x1D0 + i * 16;
+
+            flag = r5 & 0x200;
+            if (flag) {
+                file = OpenFileAndGetFileDataPtr(gUnknown_81177EC, &gMonsterFileArchive);
+                r2 = file->data + (r5 & 0xFF) * 0x40;
+            }
+            else {
+                file = OpenFileAndGetFileDataPtr((r5 & 0xFF)[gUnknown_81178F4], &gOrnamentFileArchive);
+                r2 = file->data;
+            }
+
+            flag2 = r5 & 0x1000;
+            r4 = flag2 != 0;
+
+            flag = r5 & 0x2000;
+            if (flag)
+                r4 |= 2;
+
+            sub_809971C(r9, r2, 16);
+            sub_80997F4(sl, r4);
+
+            if (file != NULL)
+                CloseFile(file);
+        }
+    }
 }

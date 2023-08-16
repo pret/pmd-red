@@ -23,7 +23,7 @@ struct unkStruct_3001B7C_sub0
 struct unkStruct_3001B7C_sub108
 {
     u16 unk0;
-    u16 unk2;
+    s16 unk2;
 };
 // size: 0x110
 struct unkStruct_3001B7C
