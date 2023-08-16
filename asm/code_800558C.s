@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_800558C
-sub_800558C:
+	thumb_func_start DoAxFrame_800558C
+DoAxFrame_800558C:
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -72,7 +72,7 @@ _08005602:
 	bx r0
 	.align 2, 0
 _0800560C: .4byte 0x0000f7ff
-	thumb_func_end sub_800558C
+	thumb_func_end DoAxFrame_800558C
 
 	thumb_func_start sub_8005610
 sub_8005610:

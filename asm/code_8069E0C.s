@@ -5208,7 +5208,7 @@ _0806CAD2:
 	ldr r1, [sp, 0x2C]
 	ldr r2, [sp, 0x30]
 	mov r3, r9
-	bl sub_800558C
+	bl DoAxFrame_800558C
 	b _0806CB16
 _0806CAF8:
 	cmp r1, 0x1
@@ -5224,7 +5224,7 @@ _0806CAF8:
 	ldr r1, [sp, 0x2C]
 	ldr r2, [sp, 0x30]
 	mov r3, r9
-	bl sub_800558C
+	bl DoAxFrame_800558C
 _0806CB16:
 	ldr r0, [r6, 0xC]
 	cmp r0, 0

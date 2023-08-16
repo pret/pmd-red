@@ -5,67 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800533C
-sub_800533C:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	mov r8, r1
-	adds r5, r2, 0
-	adds r7, r3, 0
-	ldr r1, [sp, 0x18]
-	lsls r1, 24
-	lsrs r6, r1, 24
-	movs r2, 0x18
-	ldrsh r1, [r5, r2]
-	lsls r1, 2
-	adds r1, r0
-	ldr r4, [r1]
-	ldr r1, _08005368
-	movs r2, 0x14
-	ldrsh r0, [r5, r2]
-	lsls r0, 5
-	ldr r2, _0800536C
-	adds r0, r2
-	str r0, [r1]
-	b _0800538E
-	.align 2, 0
-_08005368: .4byte gCharMemCursor
-_0800536C: .4byte 0x06010000
-_08005370:
-	cmp r6, 0
-	beq _08005382
-	movs r1, 0
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	blt _08005382
-	lsls r0, 2
-	add r0, r8
-	ldr r2, [r0]
-_08005382:
-	adds r0, r4, 0
-	adds r1, r5, 0
-	adds r3, r7, 0
-	bl sub_8004EA8
-	adds r4, 0xA
-_0800538E:
-	movs r2, 0
-	ldrh r1, [r4]
-	ldr r0, _080053A8
-	cmp r1, r0
-	bne _08005370
-	ldrh r0, [r4, 0x2]
-	cmp r0, r1
-	bne _08005370
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080053A8: .4byte 0x0000ffff
-	thumb_func_end sub_800533C
-
 	thumb_func_start sub_80053AC
 sub_80053AC:
 	push {r4-r6,lr}

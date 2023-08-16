@@ -154,7 +154,7 @@ _0800DDCA:
 	str r0, [sp, 0x4]
 	mov r0, r8
 	adds r1, r4, 0
-	bl sub_800558C
+	bl DoAxFrame_800558C
 _0800DE26:
 	movs r0, 0x1
 _0800DE28:
@@ -6081,7 +6081,7 @@ sub_8010A88:
 	add r3, sp, 0x8
 	str r3, [sp, 0x4]
 	movs r3, 0x3
-	bl sub_800558C
+	bl DoAxFrame_800558C
 _08010AF6:
 	lsls r0, r5, 16
 	asrs r0, 16
@@ -6118,7 +6118,7 @@ _08010B04:
 	str r3, [sp, 0x4]
 	adds r0, r5, 0
 	movs r3, 0x1
-	bl sub_800558C
+	bl DoAxFrame_800558C
 _08010B40:
 	adds r7, 0x44
 	subs r6, 0x1
@@ -6632,7 +6632,7 @@ sub_8010F28:
 	str r3, [sp, 0x4]
 	adds r0, r4, 0
 	movs r3, 0x3
-	bl sub_800558C
+	bl DoAxFrame_800558C
 	movs r7, 0
 	mov r10, r6
 	ldr r6, _0801109C
@@ -6667,7 +6667,7 @@ _08010F98:
 	str r0, [sp, 0x4]
 	adds r0, r4, 0
 	movs r3, 0x1
-	bl sub_800558C
+	bl DoAxFrame_800558C
 _08010FD8:
 	adds r6, 0x50
 	adds r7, 0x1
@@ -6737,7 +6737,7 @@ _0801101E:
 	add r3, sp, 0x8
 	str r3, [sp, 0x4]
 	movs r3, 0x2
-	bl sub_800558C
+	bl DoAxFrame_800558C
 _08011062:
 	adds r6, 0x3C
 	ldr r4, [sp, 0x14]

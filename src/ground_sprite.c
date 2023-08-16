@@ -45,8 +45,7 @@ void sub_80A62F0(void)
     gUnknown_2039DD4 = 22;
     gUnknown_2039DD0 = 1;
 
-    for (r0 = 0; r0 < 22; r0 = (s16)(r0 + 1), sub0++)
-    {
+    for (r0 = 0; r0 < 22; r0 = (s16)(r0 + 1), sub0++) {
         sub0->unk0 = 0;
         sub0->unk4 = r0 * 16;
         sub0->unk8 = 0;

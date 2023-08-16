@@ -1877,7 +1877,7 @@ _080A71BC:
 	adds r0, r7, 0
 	movs r2, 0xD0
 	movs r3, 0
-	bl sub_800558C
+	bl DoAxFrame_800558C
 	adds r0, r7, 0
 	adds r0, 0x70
 	mov r3, r9
@@ -1909,7 +1909,7 @@ _080A7234:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	mov r2, r8
-	bl sub_800558C
+	bl DoAxFrame_800558C
 	movs r0, 0
 	strb r0, [r4]
 	mov r2, r10
@@ -1942,7 +1942,7 @@ _080A7274:
 	adds r0, r7, 0
 	movs r2, 0xD0
 	movs r3, 0
-	bl sub_800558C
+	bl DoAxFrame_800558C
 	movs r0, 0
 	strb r0, [r4]
 _080A72A6:
