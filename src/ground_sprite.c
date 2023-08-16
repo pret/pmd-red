@@ -17,11 +17,17 @@ extern u32 gUnknown_2039DD4;
 extern struct OpenedFile *gUnknown_203B4B4;
 extern struct unkStruct_3001B7C *gUnknown_3001B7C;
 
+// dungeon_sbin.s
 extern const struct FileArchive gDungeonFileArchive;
+// monster_sbin.s
+extern const struct FileArchive gMonsterFileArchive;
+// data_8115F5C.s
 extern const u8 gUnknown_81177CC[];
 extern const u8 gUnknown_81177D8[];
+extern const u8 gUnknown_81177EC[];
 
 // code_8098BDC.s
+extern void sub_809971C(u16, u8 *, s16);
 extern void sub_80997F4(u16, u16);
 // pokemon_2.s
 extern void sub_808E53C(u32, u32);
@@ -99,4 +105,25 @@ void GroundSprite_Reset(s16 a0)
 
     ResetSprites(TRUE);
     nullsub_10(TRUE);
+}
+
+void sub_80A6460(void)
+{
+    struct OpenedFile *file;
+    s32 i;
+    u8 *data;
+    u16 something;
+
+    file = OpenFileAndGetFileDataPtr(gUnknown_81177EC, &gMonsterFileArchive);
+
+    something = 0x100;
+    data = file->data;
+
+    for (i = 0; i < 13; i++) {
+        sub_809971C(something, data, 0x10);
+        something += 0x10;
+        data += 0x40;
+    }
+
+    CloseFile(file);
 }

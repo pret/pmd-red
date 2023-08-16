@@ -5,40 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80A6460
-sub_80A6460:
-	push {r4-r7,lr}
-	ldr r0, _080A649C
-	ldr r1, _080A64A0
-	bl OpenFileAndGetFileDataPtr
-	adds r7, r0, 0
-	movs r5, 0x80
-	lsls r5, 1
-	ldr r4, [r7, 0x4]
-	movs r6, 0xC
-_080A6474:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	movs r2, 0x10
-	bl sub_809971C
-	adds r0, r5, 0
-	adds r0, 0x10
-	lsls r0, 16
-	lsrs r5, r0, 16
-	adds r4, 0x40
-	subs r6, 0x1
-	cmp r6, 0
-	bge _080A6474
-	adds r0, r7, 0
-	bl CloseFile
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080A649C: .4byte gUnknown_81177EC
-_080A64A0: .4byte gMonsterFileArchive
-	thumb_func_end sub_80A6460
-
 	thumb_func_start sub_80A64A4
 sub_80A64A4:
 	push {r4-r7,lr}
