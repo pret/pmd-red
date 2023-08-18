@@ -636,7 +636,7 @@ u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, struct unkStruct_203B480 *para
 {
   if ( (!sub_803D204(passwordBuffer, param_3)) || (WONDER_MAIL_TYPE_OKD < param_3->mailType) ||
        (param_3->dungeon.floor >= GetDungeonFloorCount(param_3->dungeon.id)) ||
-       (param_3->clientSpecies == MONSTER_NONE) || (MONSTER_RAYQUAZA_CUTSCENE < param_3->clientSpecies) ||
+       (param_3->clientSpecies == MONSTER_NONE) || (MONSTER_MAX < param_3->clientSpecies) ||
        (IsInvalidItemReward(param_3->item.id))) {
         return PASSWORD_ENTRY_INCORRECT_PASSWORD;
   }

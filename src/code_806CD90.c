@@ -1,20 +1,20 @@
 #include "global.h"
+#include "code_805D8C8.h"
 #include "constants/direction.h"
 #include "constants/status.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
 #include "dungeon_util.h"
 #include "pokemon.h"
-#include "tile_types.h"
 #include "random.h"
+#include "sprite.h"
+#include "tile_types.h"
 
 extern u8 sub_806CEBC(struct Entity *);
 extern void sub_806CCB4(struct Entity *, u8);
 extern void sub_803E46C(u32);
 extern bool8 sub_808DA44(s32 a1_, u32 a2_);
 extern u32 sub_806CF98(struct Entity *);
-extern u32 sub_80687D0(s16);
-void sub_80053AC(u8 *, s32, u32, u32, u32, u32, u8);
 void sub_806CDD4(struct Entity *, u8, u32);
 
 extern const u8 gUnknown_8106EEF[];
@@ -53,28 +53,29 @@ void sub_806CC70(void)
 
 void sub_806CCB4(struct Entity *entity, u8 param_2)
 {
-  s32 sVar1;
-  bool8 flag;
-  struct EntityInfo *info;
+    s32 sVar1;
+    bool8 flag;
+    struct EntityInfo *info;
 
-  info = entity->info;
-  flag = gDungeon->hallucinating;
-  if (entity == gDungeon->cameraTarget) {
-    flag = FALSE;
-  }
-  entity->unk6B = param_2;
-  entity->unk6A = param_2;
-  entity->direction2 = info->action.direction;
-  entity->direction = info->action.direction;
-  entity->unk6F = 0;
-  sVar1 = entity->unk68;
-  if ((info->waitingStatus != STATUS_DECOY) && (!flag)) {
-    sub_80053AC(entity->fill28,entity->unk64,entity->unk6A,entity->direction,sVar1,Rand32Bit() & 3,0);
-  }
-  else {
-    sub_80053AC(entity->fill28,sub_80687D0(0x1a5),entity->unk6A,entity->direction,sVar1,Rand32Bit() & 3,0);
-  }
-  entity->unk6E = 0;
+    info = entity->info;
+    flag = gDungeon->hallucinating;
+
+    if (entity == gDungeon->cameraTarget)
+        flag = FALSE;
+
+    entity->unk6B = param_2;
+    entity->unk6A = param_2;
+    entity->direction2 = info->action.direction;
+    entity->direction = info->action.direction;
+    entity->unk6F = 0;
+    sVar1 = entity->unk68;
+
+    if (info->waitingStatus != STATUS_DECOY && !flag)
+        sub_80053AC(&entity->sub28, entity->unk64, entity->unk6A, entity->direction, sVar1, Rand32Bit() & 3, FALSE);
+    else
+        sub_80053AC(&entity->sub28, sub_80687D0(MONSTER_DECOY), entity->unk6A, entity->direction, sVar1, Rand32Bit() & 3, FALSE);
+
+    entity->unk6E = 0;
 }
 
 void sub_806CD90(void)

@@ -5,26 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80053AC
-sub_80053AC:
-	push {r4-r6,lr}
-	sub sp, 0xC
-	ldr r5, [sp, 0x1C]
-	ldr r6, [sp, 0x20]
-	ldr r4, [sp, 0x24]
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r1, [r1, 0x4]
-	str r5, [sp]
-	str r6, [sp, 0x4]
-	str r4, [sp, 0x8]
-	bl sub_80053D0
-	add sp, 0xC
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80053AC
-
 	thumb_func_start sub_80053D0
 sub_80053D0:
 	push {r4-r7,lr}

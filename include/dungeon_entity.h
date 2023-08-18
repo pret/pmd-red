@@ -5,6 +5,7 @@
 #include "constants/move.h"
 #include "item.h"
 #include "position.h"
+#include "sprite.h"
 
 #define MAX_STAT_STAGE 20
 #define STAT_MULTIPLIER_THRESHOLD 63
@@ -270,32 +271,8 @@ struct Entity
     // The global spawn index counter starts at 10. Each Pokémon that spawns increments the counter and
     // gets assigned the current counter value as its spawn index.
     /* 0x26 */ u16 spawnGenID;
-    u8 fill28[0x2A - 0x28];
-    // 0x2A and 0x2E seem to be related to the sprite animation, though not sure how they're related.
-    /* 0x2A */ u16 spriteAnimationCounter;
-    // Each animation has a few different sprites that it transitions between.
-    // This is the index of the currently displayed sprite within the animation.
-    // Differs from 0x34 as this index is only between the sprites used by the animation,
-    // while 0x34 is a shared index among all sprites.
-    /* 0x2C */ u16 spriteAnimationIndex;
-    /* 0x2E */ u16 spriteAnimationCounter2;
-    // The position of the sprite within the tile. The animation may change the position slightly.
-    /* 0x30 */ struct Position spritePos;
-    // Offset of the sprite from its position at the start of the animation. Changes alongside spritePos.
-    /* 0x34 */ struct Position spritePosOffset;
-    u8 fill38[0x48 - 0x38];
-    // The sprite index to display, among the Pokémon's possible sprites.
-    /* 0x48 */ u16 spriteIndexForEntity;
-    /* 0x4A */ u16 spriteIndexForEntity2;
-    u8 unk4C[0x50 - 0x4C];
-    // Some kind of base sprite index depending on which way the Pokémon is facing.
-    // and which animation is playing (e.g., idle, moving).
-    // Compared to 0x48, 0x50 and 0x54 are much larger and could be global indexes among all sprites in the game.
-    /* 0x50 */ u16 spriteBaseForDirection;
-    u8 fill52[0x54 - 0x52];
-    /* 0x54 */ u16 spriteGlobalIndex;
-    u8 fill56[0x64 - 0x56];
-    u32 unk64;
+    /* 0x28*/ struct Entity_Sub28 sub28;
+    struct Dungeon_Sub17B44 *unk64;
     s16 unk68;
     u8 unk6A;
     u8 unk6B;

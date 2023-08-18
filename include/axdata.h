@@ -54,13 +54,13 @@ struct ax_anim
 // size: 0x3C
 struct axdata
 {
-    /* 0x0 */ u16 flags;
-    /* 0x2 */ u16 animFrames;
-    /* 0x4 */ u16 animWaitFrames;
-    /* 0x6 */ s16 totalFrames;
+    /* 0x0 */ u16 flags; // 0x8000 - animating, 0x2000 finished? 0x1000 continue
+    /* 0x2 */ u16 animFrames; // frames left in the current animation frame
+    /* 0x4 */ u16 animWaitFrames; // frames to not update the animation for
+    /* 0x6 */ s16 totalFrames; // max 30000
     /* 0x8 */ struct axdata1 sub1;
-    /* 0x28 */ struct ax_anim *nextAnimData;
-    /* 0x2C */ struct ax_anim *activeAnimData;
+    /* 0x28 */ struct ax_anim *nextAnimData; // next animation data (if flags&0x1000)
+    /* 0x2C */ struct ax_anim *activeAnimData; // current animation data
     /* 0x30 */ void *paletteData; // ?
     /* 0x34 */ struct ax_pose *poseData;
     /* 0x38 */ struct UnkSpriteMem **spriteData;

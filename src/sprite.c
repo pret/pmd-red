@@ -884,3 +884,8 @@ void sub_800533C(struct ax_pose **a0, struct UnkSpriteMem **a1, struct axdata1 *
         sub_8004EA8(r4, a2, mem, spriteMasks);
     }
 }
+
+void sub_80053AC(struct Entity_Sub28 *a0, struct Dungeon_Sub17B44 *a1, u32 a2, u32 a3, u32 a4, u32 spriteAnimIndex, bool8 a6)
+{
+    sub_80053D0(a0, a1->unk4, a2, a3, a4, spriteAnimIndex, a6);
+}
