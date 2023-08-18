@@ -57,7 +57,6 @@ extern u8 gefob001_string[];
 extern struct FileArchive gEffectFileArchive;
 
 extern void sub_8005610(struct OpenedFile *, u32, u32,u32);
-extern void sub_800DB7C(void);
 extern void sub_800F034(void);
 extern void sub_800ED38(u32);
 extern void sub_800DC14(void);

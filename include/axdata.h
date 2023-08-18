@@ -1,0 +1,107 @@
+#ifndef GUARD_AXDATA_H
+#define GUARD_AXDATA_H
+
+#include "file_system.h"
+
+// size: 0x8
+struct UnkSpriteMem
+{
+    /* 0x0 */ void *src;
+    /* 0x4 */ s32 byteCount;
+};
+
+// size: 0x20
+struct axdata1
+{
+    /* 0x0 */ s16 xPos;
+    /* 0x2 */ s16 yPos;
+    /* 0x4 */ u16 xOffset;
+    /* 0x6 */ u16 yOffset;
+    /* 0x8 */ u16 xShadow;
+    /* 0xA */ u16 yShadow;
+    u32 unkC;
+    u32 unk10;
+    /* 0x14 */ s16 vramTileOrMaybeAnimTimer;
+    s16 unk16;
+    /* 0x18 */ s16 poseId;
+    /* 0x1A */ s16 lastPoseId;
+    u8 fill1C[0x1E - 0x1C];
+    u8 paletteNum;
+};
+
+// size: 0xA
+struct __attribute__ ((packed, aligned(2))) ax_pose
+{
+    /* 0x0 */ s16 sprite;
+    u16 unk2; // Always 0 in red (except for end markers which are 0xFFFF)
+    /* 0x4 */ u16 flags1;
+    /* 0x6 */ u16 flags2;
+    /* 0x8 */ u16 flags3;
+};
+
+// size: 0xC
+struct ax_anim
+{
+    /* 0x0 */ u8 frames;
+    /* 0x1 */ u8 unkFlags;
+    /* 0x2 */ s16 poseId;
+    /* 0x4 */ s16 xOffset;
+    /* 0x6 */ s16 yOffset;
+    /* 0x8 */ s16 xShadow;
+    /* 0xA */ s16 yShadow;
+};
+
+// size: 0x3C
+struct axdata
+{
+    /* 0x0 */ u16 flags;
+    /* 0x2 */ u16 animFrames;
+    /* 0x4 */ u16 animWaitFrames;
+    /* 0x6 */ s16 totalFrames;
+    /* 0x8 */ struct axdata1 sub1;
+    /* 0x28 */ struct ax_anim *nextAnimData;
+    /* 0x2C */ struct ax_anim *activeAnimData;
+    /* 0x30 */ void *paletteData; // ?
+    /* 0x34 */ struct ax_pose *poseData;
+    /* 0x38 */ struct UnkSpriteMem **spriteData;
+};
+
+// size: 0x14
+struct axmain
+{
+    /* 0x0 */ struct ax_pose **poses;
+    /* 0x4 */ struct ax_anim ****animations;
+    /* 0x8 */ u32 animCount;
+    /* 0xC */ void *spriteData; // ?
+    /* 0x10 */ void *palettes; // ?
+};
+
+// size: ?
+struct axPokemon
+{
+    /* 0x0 */ struct axdata axdata;
+    /* 0x3C */ struct OpenedFile *spriteFile;
+    u16 unk40_maybeAnimTimer;
+    u8 unk42_animId1;
+    u8 unk43_animId2;
+    u8 unk44;
+    u8 unk45_orientation;
+    u8 unk46;
+    u8 unk47;
+    u8 unk48;
+    u8 fill49[0x4C - 0x49];
+    /* 0x4C */ struct axmain *axmain;
+    u8 flags_0x50;
+    u8 fill51;
+    s16 unk52;
+    u8 fill54[0x66 - 0x54];
+    s16 unk66;
+    u8 fill68[0x6C - 0x68];
+    u16 unk6C;
+    u16 unk6E;
+    u8 unk70;
+    u8 fill71[0x7C - 0x71];
+    s32 unk7C;
+};
+
+#endif // GUARD_AXDATA_H

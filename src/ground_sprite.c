@@ -179,3 +179,30 @@ void sub_80A64A4(void)
         }
     }
 }
+
+void sub_80A658C(void)
+{
+    sub_800DB7C();
+    ResetSprites(FALSE);
+    nullsub_10(0);
+    sub_8005180();
+    nullsub_12();
+    CopySpritesToOam();
+    nullsub_13();
+    sub_8005304();
+    nullsub_14();
+    CloseFile(gUnknown_203B4B4);
+    MemoryFree(gUnknown_3001B7C);
+    gUnknown_3001B7C = NULL;
+}
+
+// Unused
+u16 sub_80A65D8(u16 *a0)
+{
+    return a0[40];
+}
+
+u16 sub_80A65E0(u32 a0)
+{
+    return (a0 >> 16) & 0x337F;
+}

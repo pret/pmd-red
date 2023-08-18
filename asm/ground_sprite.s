@@ -5,54 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80A658C
-sub_80A658C:
-	push {r4,lr}
-	bl sub_800DB7C
-	movs r0, 0
-	bl ResetSprites
-	movs r0, 0
-	bl nullsub_10
-	bl sub_8005180
-	bl nullsub_12
-	bl CopySpritesToOam
-	bl nullsub_13
-	bl sub_8005304
-	bl nullsub_14
-	ldr r0, _080A65D0
-	ldr r0, [r0]
-	bl CloseFile
-	ldr r4, _080A65D4
-	ldr r0, [r4]
-	bl MemoryFree
-	movs r0, 0
-	str r0, [r4]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080A65D0: .4byte gUnknown_203B4B4
-_080A65D4: .4byte gUnknown_3001B7C
-	thumb_func_end sub_80A658C
-
-	thumb_func_start sub_80A65D8
-sub_80A65D8:
-	adds r0, 0x50
-	ldrh r0, [r0]
-	bx lr
-	thumb_func_end sub_80A65D8
-
-	thumb_func_start sub_80A65E0
-sub_80A65E0:
-	lsrs r0, 16
-	ldr r2, _080A65EC
-	adds r1, r2, 0
-	ands r0, r1
-	bx lr
-	.align 2, 0
-_080A65EC: .4byte 0x0000337f
-	thumb_func_end sub_80A65E0
-
 	thumb_func_start sub_80A65F0
 sub_80A65F0:
 	push {r4-r6,lr}
