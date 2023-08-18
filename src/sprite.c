@@ -19,6 +19,7 @@ extern struct unkStruct_20266B0 *gUnknown_203B074;
 extern void nullsub_3(s32, s32);
 
 void RegisterSpriteParts_80052BC(struct UnkSpriteMem *);
+void sub_800545C(struct Entity_Sub28 *, struct Dungeon_Sub17B44_Sub4 *, u32, u32, u32, bool8);
 
 void InitSprites(void)
 {
@@ -911,4 +912,31 @@ void sub_80053D0(struct Entity_Sub28 *a0, struct Dungeon_Sub17B44_Sub4 *a1, u32 
     a0->unk34 = a1->unk0;
     a0->unk38 = a1->unkC;
     a0->unk30 = a1->unk10;
+}
+
+void sub_800543C(struct Entity_Sub28 *a0, struct Dungeon_Sub17B44 *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
+{
+    sub_800545C(a0, a1->unk4, a2, a3, spriteAnimIndex, a5);
+}
+
+void sub_800545C(struct Entity_Sub28 *a0, struct Dungeon_Sub17B44_Sub4 *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
+{
+    a0->unk0 = 0x8000;
+    if (a5)
+        a0->unk0 |= 0x1000;
+
+    a0->spriteAnimationCounter = 0;
+    a0->spriteAnimationIndex = spriteAnimIndex;
+    a0->spritePosOffset.x = 0;
+    a0->spritePosOffset.y = 0;
+    a0->unk1C = a3;
+    a0->spriteIndexForEntity = 0xFFFF;
+    a0->spriteIndexForEntity2 = 0xFFFF;
+    a0->unk14 = 0;
+    a0->unk18 = 0;
+    a0->spriteAnimationCounter2 = 0;
+    a0->spriteBaseForDirection = a1->unk4[a2][0];
+    a0->spriteGlobalIndex = a0->spriteBaseForDirection;
+    a0->unk34 = a1->unk0;
+    a0->unk30 = 0;
 }
