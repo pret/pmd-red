@@ -5,65 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80053D0
-sub_80053D0:
-	push {r4-r7,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	adds r6, r2, 0
-	adds r7, r3, 0
-	ldr r0, [sp, 0x1C]
-	lsls r0, 24
-	movs r2, 0
-	movs r3, 0x80
-	lsls r3, 8
-	strh r3, [r4]
-	cmp r0, 0
-	beq _080053F6
-	movs r0, 0x80
-	lsls r0, 5
-	adds r1, r0, 0
-	adds r0, r3, 0
-	orrs r0, r1
-	strh r0, [r4]
-_080053F6:
-	strh r2, [r4, 0x2]
-	ldr r0, [sp, 0x18]
-	strh r0, [r4, 0x4]
-	strh r2, [r4, 0xC]
-	strh r2, [r4, 0xE]
-	ldr r0, [sp, 0x14]
-	strh r0, [r4, 0x1C]
-	ldr r0, _08005438
-	strh r0, [r4, 0x20]
-	movs r0, 0x1
-	negs r0, r0
-	strh r0, [r4, 0x22]
-	str r2, [r4, 0x14]
-	str r2, [r4, 0x18]
-	strh r2, [r4, 0x6]
-	ldr r1, [r5, 0x4]
-	lsls r0, r6, 2
-	adds r0, r1
-	ldr r1, [r0]
-	lsls r0, r7, 2
-	adds r0, r1
-	ldr r0, [r0]
-	str r0, [r4, 0x28]
-	str r0, [r4, 0x2C]
-	ldr r0, [r5]
-	str r0, [r4, 0x34]
-	ldr r0, [r5, 0xC]
-	str r0, [r4, 0x38]
-	ldr r0, [r5, 0x10]
-	str r0, [r4, 0x30]
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08005438: .4byte 0x0000ffff
-	thumb_func_end sub_80053D0
-
 	thumb_func_start sub_800543C
 sub_800543C:
 	push {r4,r5,lr}

@@ -889,3 +889,26 @@ void sub_80053AC(struct Entity_Sub28 *a0, struct Dungeon_Sub17B44 *a1, u32 a2, u
 {
     sub_80053D0(a0, a1->unk4, a2, a3, a4, spriteAnimIndex, a6);
 }
+
+void sub_80053D0(struct Entity_Sub28 *a0, struct Dungeon_Sub17B44_Sub4 *a1, u32 a2, u32 direction, u32 a4, u32 spriteAnimIndex, bool8 a6)
+{
+    a0->unk0 = 0x8000;
+    if (a6)
+        a0->unk0 |= 0x1000;
+
+    a0->spriteAnimationCounter = 0;
+    a0->spriteAnimationIndex = spriteAnimIndex;
+    a0->spritePosOffset.x = 0;
+    a0->spritePosOffset.y = 0;
+    a0->unk1C = a4;
+    a0->spriteIndexForEntity = 0xFFFF;
+    a0->spriteIndexForEntity2 = 0xFFFF;
+    a0->unk14 = 0;
+    a0->unk18 = 0;
+    a0->spriteAnimationCounter2 = 0;
+    a0->spriteBaseForDirection = a1->unk4[a2][direction];
+    a0->spriteGlobalIndex = a0->spriteBaseForDirection;
+    a0->unk34 = a1->unk0;
+    a0->unk38 = a1->unkC;
+    a0->unk30 = a1->unk10;
+}
