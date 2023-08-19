@@ -172,7 +172,7 @@ extern void SetMessageArgument(u8 *buffer, struct Entity *r1, u32);
 extern void sub_80522F4(struct Entity *pokemon, struct Entity *r1, const char[]);
 extern void EntityUpdateStatusSprites(struct Entity *);
 extern void sub_8042A74(struct Entity *r0);
-extern void sub_807EC28(u32);
+extern void sub_807EC28(bool8);
 extern s32 sub_8069F54(struct Entity *param_1, s16 param_2);
 extern void sub_806A898(struct Entity *, u32, u32);
 extern void HealTargetHP(struct Entity *pokemon, struct Entity *r1, s16, s16, u32);
@@ -1515,7 +1515,7 @@ void SendTransformEndMessage(struct Entity * pokemon, struct Entity *target)
   entityInfo->transformStatus = STATUS_NONE;
   EntityUpdateStatusSprites(target);
   if (isInvisible) {
-    sub_807EC28(1);
+    sub_807EC28(TRUE);
   }
 }
 

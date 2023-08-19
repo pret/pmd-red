@@ -102,7 +102,7 @@ extern u8 sub_8044B28(void);
 extern u8 sub_803F428(struct Position *pos);
 extern void IncreaseEntityPixelPos(struct Entity *, u32, u32);
 extern void sub_803E46C(u32);
-extern void sub_807EC28(u32);
+extern void sub_807EC28(bool8);
 extern void sub_806F370(struct Entity *r0, struct Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 void sub_8075900(struct Entity *pokemon, u8 r1);
 extern void sub_804535C(struct Entity *, u32);
@@ -1219,7 +1219,7 @@ _0805AA5E:
       }
       if (target->info->isTeamLeader) {
         sub_804AC20(r9);
-        sub_807EC28(0);
+        sub_807EC28(FALSE);
       }
       sub_806A5B8(target);
       sub_8075900(target,gDungeon->unk3A08);
