@@ -1,5 +1,6 @@
 #include "global.h"
 #include "cpu.h"
+#include "random.h"
 #include "sprite.h"
 
 extern u16 gUnknown_2025670;
@@ -940,3 +941,176 @@ void sub_800545C(struct Entity_Sub28 *a0, struct Dungeon_Sub17B44_Sub4 *a1, u32 
     a0->unk34 = a1->unk0;
     a0->unk30 = 0;
 }
+
+#if NONMATCHING // https://decomp.me/scratch/n4Umb
+void sub_80054BC(struct axPokemon *a0)
+{
+    struct ax_anim *aData;
+    s32 flag;
+
+    if (a0->axdata.flags & 0x2000)
+        flag = 0;
+    else
+        flag = a0->axdata.flags >> 15;
+
+    flag++; flag--;
+
+    if (flag == 0)
+        return;
+
+    if (a0->axdata.sub1.poseId >= 0) {
+        if (a0->axdata.flags & 0x4000)
+            return;
+
+        if (a0->axdata.totalFrames < 30000)
+            a0->axdata.totalFrames++;
+
+        if (a0->axdata.animWaitFrames != 0) {
+            a0->axdata.animWaitFrames--;
+            return;
+        }
+
+        if (a0->axdata.animFrames != 0 && --a0->axdata.animFrames > 0)
+            return;
+    }
+
+    if (a0->axdata.activeAnimData->frames == 0) {
+        if (!(a0->axdata.flags & 0x1000)) {
+            a0->axdata.flags |= 0x2000;
+            return;
+        }
+
+        a0->axdata.activeAnimData = a0->axdata.nextAnimData;
+        a0->axdata.animWaitFrames = Rand32Bit() & 1;
+    }
+
+    a0->axdata.flags |= 0x800;
+    
+    aData = a0->axdata.activeAnimData;
+    a0->axdata.animFrames = aData->frames;
+    a0->axdata.sub1.poseId = aData->poseId;
+    a0->axdata.sub1.xOffset = aData->xOffset;
+    a0->axdata.sub1.yOffset = aData->yOffset;
+    a0->axdata.sub1.xShadow = aData->xShadow;
+    a0->axdata.sub1.yShadow = aData->yShadow;
+    a0->axdata.sub1.unkC = aData->unkFlags;
+    a0->axdata.sub1.unk10 |= aData->unkFlags;
+    a0->axdata.activeAnimData = aData + 1;
+}
+#else
+NAKED
+void sub_80054BC(struct axPokemon *a0)
+{
+    asm_unified(
+    "push {r4,lr}\n"
+    "\tadds r4, r0, 0\n"
+    "\tldrh r1, [r4]\n"
+    "\tmovs r0, 0x80\n"
+    "\tlsls r0, 6\n"
+    "\tands r0, r1\n"
+    "\tcmp r0, 0\n"
+    "\tbeq _080054D0\n"
+    "\tmovs r0, 0\n"
+    "\tb _080054D2\n"
+"_080054D0:\n"
+    "\tlsrs r0, r1, 15\n"
+"_080054D2:\n"
+    "\tcmp r0, 0\n"
+    "\tbeq _08005586\n"
+    "\tmovs r1, 0x20\n"
+    "\tldrsh r0, [r4, r1]\n"
+    "\tldrh r3, [r4]\n"
+    "\tcmp r0, 0\n"
+    "\tblt _08005524\n"
+    "\tmovs r0, 0x80\n"
+    "\tlsls r0, 7\n"
+    "\tands r0, r3\n"
+    "\tcmp r0, 0\n"
+    "\tbne _08005586\n"
+    "\tldrh r2, [r4, 0x6]\n"
+    "\tmovs r0, 0x6\n"
+    "\tldrsh r1, [r4, r0]\n"
+    "\tldr r0, _0800550C\n"
+    "\tcmp r1, r0\n"
+    "\tbgt _080054FA\n"
+    "\tadds r0, r2, 0x1\n"
+    "\tstrh r0, [r4, 0x6]\n"
+"_080054FA:\n"
+    "\tldrh r1, [r4, 0x4]\n"
+    "\tmovs r2, 0x4\n"
+    "\tldrsh r0, [r4, r2]\n"
+    "\tcmp r0, 0\n"
+    "\tbeq _08005510\n"
+    "\tsubs r0, r1, 0x1\n"
+    "\tstrh r0, [r4, 0x4]\n"
+    "\tb _08005586\n"
+    "\t.align 2, 0\n"
+"_0800550C: .4byte 0x0000752f\n"
+"_08005510:\n"
+    "\tldrh r1, [r4, 0x2]\n"
+    "\tmovs r2, 0x2\n"
+    "\tldrsh r0, [r4, r2]\n"
+    "\tcmp r0, 0\n"
+    "\tbeq _08005524\n"
+    "\tsubs r0, r1, 0x1\n"
+    "\tstrh r0, [r4, 0x2]\n"
+    "\tlsls r0, 16\n"
+    "\tcmp r0, 0\n"
+    "\tbgt _08005586\n"
+"_08005524:\n"
+    "\tldr r0, [r4, 0x2C]\n"
+    "\tldrb r0, [r0]\n"
+    "\tcmp r0, 0\n"
+    "\tbne _08005550\n"
+    "\tmovs r0, 0x80\n"
+    "\tlsls r0, 5\n"
+    "\tands r0, r3\n"
+    "\tcmp r0, 0\n"
+    "\tbne _08005542\n"
+    "\tmovs r1, 0x80\n"
+    "\tlsls r1, 6\n"
+    "\tadds r0, r1, 0\n"
+    "\torrs r0, r3\n"
+    "\tstrh r0, [r4]\n"
+    "\tb _08005586\n"
+"_08005542:\n"
+    "\tldr r0, [r4, 0x28]\n"
+    "\tstr r0, [r4, 0x2C]\n"
+    "\tbl Rand32Bit\n"
+    "\tmovs r1, 0x1\n"
+    "\tands r0, r1\n"
+    "\tstrh r0, [r4, 0x4]\n"
+"_08005550:\n"
+    "\tldrh r1, [r4]\n"
+    "\tmovs r2, 0x80\n"
+    "\tlsls r2, 4\n"
+    "\tadds r0, r2, 0\n"
+    "\torrs r0, r1\n"
+    "\tstrh r0, [r4]\n"
+    "\tldr r1, [r4, 0x2C]\n"
+    "\tldrb r0, [r1]\n"
+    "\tstrh r0, [r4, 0x2]\n"
+    "\tldrh r0, [r1, 0x2]\n"
+    "\tstrh r0, [r4, 0x20]\n"
+    "\tldrh r0, [r1, 0x4]\n"
+    "\tstrh r0, [r4, 0xC]\n"
+    "\tldrh r0, [r1, 0x6]\n"
+    "\tstrh r0, [r4, 0xE]\n"
+    "\tldrh r0, [r1, 0x8]\n"
+    "\tstrh r0, [r4, 0x10]\n"
+    "\tldrh r0, [r1, 0xA]\n"
+    "\tstrh r0, [r4, 0x12]\n"
+    "\tldrb r0, [r1, 0x1]\n"
+    "\tstr r0, [r4, 0x14]\n"
+    "\tldrb r2, [r1, 0x1]\n"
+    "\tldr r0, [r4, 0x18]\n"
+    "\torrs r0, r2\n"
+    "\tstr r0, [r4, 0x18]\n"
+    "\tadds r1, 0xC\n"
+    "\tstr r1, [r4, 0x2C]\n"
+"_08005586:\n"
+    "\tpop {r4}\n"
+    "\tpop {r0}\n"
+    "\tbx r0");
+}
+#endif // NONMATCHING

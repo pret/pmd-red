@@ -104,5 +104,6 @@ void sub_8005304(void);
 void sub_80053AC(struct Entity_Sub28 *, struct Dungeon_Sub17B44 *, u32, u32, u32, u32, bool8);
 void sub_80053D0(struct Entity_Sub28 *, struct Dungeon_Sub17B44_Sub4 *, u32, u32, u32, u32, bool8);
 void sub_800543C(struct Entity_Sub28 *, struct Dungeon_Sub17B44 *, u32, u32, u32, bool8);
+void sub_80054BC(struct axPokemon *);
 
 #endif // GUARD_SPRITE_H

@@ -61,7 +61,6 @@ SECTIONS {
         src/input.o(.text);
         asm/code_8004AA0.o(.text);
         src/sprite.o(.text);
-        asm/sprite.o(.text);
         asm/code_800558C.o(.text);
         src/code_800558C_1.o(.text);
         asm/code_8005838.o(.text);
