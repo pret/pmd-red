@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/colors.h"
 #include "constants/wonder_mail.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
@@ -10,6 +11,7 @@
 #include "text2.h"
 #include "code_800D090.h"
 #include "menu_input.h"
+#include "wonder_mail.h"
 
 struct unkStruct_80E9920
 {
@@ -89,7 +91,7 @@ extern void PrintDungeonLocationtoBuffer(u8 *, void *);
 extern void PrintYellowDungeonNametoBuffer(u8 *, void *);
 extern u8 sub_803C1D0(struct WonderMailSub *, u8);
 extern u8 *sub_803C1F0(u8);
-void sub_803D414(u8 *, u8 *);
+void sub_803D414(u8 *, struct WonderMail *);
 
 void sub_803B6B0(s32 x, s32 y, u8 index, u32 param_4)
 {
@@ -190,7 +192,7 @@ void CreateRescueTitle(struct unkStruct_802C39C *param_1)
         uVar1 = sub_803C1D0(param_1->unk8,0);
     }
     else {
-        uVar1 = sub_803C1D0(param_1->unk8,param_1->unk50[1][1]);
+        uVar1 = sub_803C1D0(param_1->unk8,param_1->mail->missionType);
     }
     xxx_call_draw_string(0xb4,param_1->y,sub_803C1F0(uVar1),param_1->unk0[0],0);
 }
@@ -217,7 +219,7 @@ void CreateRescueDescription(struct unkStruct_802C39C *param_1)
     y += 0x10;
     switch(param_1->mailDescriptionType) {
         case 3:
-            xxx_call_draw_string(10,y,param_1->unk50[0],param_1->unk0[0],0);
+            xxx_call_draw_string(10,y,param_1->unk50,param_1->unk0[0],0);
             break;
         case 0:
             xxx_call_draw_string(10,y,gMankeyMissionDescription,param_1->unk0[0],0);
@@ -386,7 +388,7 @@ void CreateRescueDescription(struct unkStruct_802C39C *param_1)
         uVar3 = sub_803C1D0(param_1->unk8, 0);
     }
     else {
-        uVar3 = sub_803C1D0(param_1->unk8,param_1->unk50[1][1]);
+        uVar3 = sub_803C1D0(param_1->unk8,param_1->mail->missionType);
     }
 
     y += 0xC;
@@ -420,23 +422,23 @@ void CreateRescueDescription(struct unkStruct_802C39C *param_1)
 
     // Draw the Password
     y += 0xC;
-    if (((2 < (u8)(param_1->mailDescriptionType - 9)) && (param_1->mailDescriptionType != 3)) && (*param_1->unk50[1] == 5))
+    if (((2 < (u8)(param_1->mailDescriptionType - 9)) && (param_1->mailDescriptionType != 3)) && (param_1->mail->mailType == 5))
     {
         xxx_call_draw_string(10,y,gUnknown_80E8B7C,param_1->unk0[0],0); // Wonder Mail: 
-        sub_803D414(local_34,param_1->unk50[1]);
+        sub_803D414(local_34,param_1->mail);
         for(counter = 0; counter < 24; counter++)
         {
             if (counter == 12) {
                 y += 12;
             }
-            color = 7;
-            if (((3 < counter) && (color = 6, 7 < counter)) && ((color = 7))) 
+            color = COLOR_WHITE_2;
+            if (((3 < counter) && (color = COLOR_YELLOW, 7 < counter)) && ((color = COLOR_WHITE_2))) 
             {
                 if(counter > 15)
                 {
                     if(counter < 20)
                     {
-                        color = 6;
+                        color = COLOR_YELLOW;
                     }
                 }
 

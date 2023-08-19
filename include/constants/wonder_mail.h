@@ -37,6 +37,24 @@ enum WonderMailTypes {
     WONDER_MAIL_TYPE_OKD = 7,
 };
 
+// Used in CreateRescueTitle and CreateRescueDescription
+enum MailStatuses {
+    MAIL_STATUS_SUSPENDED,
+    MAIL_STATUS_TAKE_JOB,
+    MAIL_STATUS_DONE
+};
+
+// Used in CreateRescueTitle and CreateRescueDescription
+enum MissionTypes {
+    MISSION_TYPE_FRIEND_RESCUE,
+    MISSION_TYPE_FIND_ITEM,
+    MISSION_TYPE_DELIVER_ITEM,
+    MISSION_TYPE_RESCUE_CLIENT,
+    MISSION_TYPE_RESCUE_TARGET,
+    MISSION_TYPE_ESCORT_CLIENT,
+    MISSION_TYPE_SPECIAL_MISSION
+};
+
 enum WonderMailMissionTypes
 {
     WONDER_MAIL_MISSION_TYPE_RESCUE_CLIENT = 0,

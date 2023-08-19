@@ -731,7 +731,7 @@ void sub_802D2A8(void)
         sub_803B35C(&gUnknown_203B2F8->mail->wonderMail,&gUnknown_203B2F8->unk14);
         gUnknown_203B2F8->unk14.unk0[0] = 3;
         gUnknown_203B2F8->unk14.mailStatus = MAIL_STATUS_SUSPENDED;
-        gUnknown_203B2F8->unk14.unk50[0] = gUnknown_203B2F8->mail->unk18;
+        gUnknown_203B2F8->unk14.unk50 = gUnknown_203B2F8->mail->unk18;
         sub_802DE84(&gUnknown_203B2F8->unk14);
         break;
   }

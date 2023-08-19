@@ -19,5 +19,6 @@ struct unkStruct_802C39C
     u8 mailStatus; // mail status (suspend / take job / done)
     /* 0x48 */ u32 y;
     /* 0x4C */ u8 *unk4C;
-    /* 0x50 */ u8 *unk50[2];
+    u8 *unk50;
+    /* 0x54 */ struct WonderMail *mail;
 };

@@ -22,7 +22,7 @@
 typedef bool8 (*MoveCallback)(struct Entity *pokemon, struct Entity *target, struct Move *move, s32 param_4);
 struct NaturePowerMove
 {
-    s16 moveID;
+    u16 moveID;
     u16 unk2;
     MoveCallback move;
 };
