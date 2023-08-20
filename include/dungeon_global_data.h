@@ -120,7 +120,8 @@ struct Dungeon
     u8 unk678;
     u8 unk679;
     u8 unk67A;
-    u8 unk67B[0x68A - 0x67B];
+    u8 unk67B[0x688 - 0x67B];
+    s16 unk688;
     /* 0x68A */ u8 unk68A;
     u8 fill68B[0x699 - 0x68B];
     u8 unk699;   
@@ -128,12 +129,15 @@ struct Dungeon
     /* 0x69C */ struct EntityInfo unk69C[4];
     u8 fillEBC[0x363C - 0xEBC]; 
     /* 0x363C */ u8 expYieldRankings[NUM_MONSTERS];
-    u8 fill37E3[0x37F4 - 0x37D9];
+    u8 fill37D9[0x37F0 - 0x37D9];
+    /* 0x37F0 */ u32 unk37F0;
     /* 0x37F4 */ s32 unk37F4;
     /* 0x37F8 */ bool8 plusIsActive[2]; // Index 0: Enemy , Index 1: Team
     /* 0x37FA */ bool8 minusIsActive[2]; // Index 0: Enemy , Index 1: Team 
     /* 0x37FC */ bool8 decoyActive;
-    u8 fill37FD[0x3904 - 0x37FD];
+    u8 fill37FD[0x3800 - 0x37FD];
+    s16 unk3800;
+    u8 fill3802[0x3904 - 0x3802];
     /* 0x3904 */ s16 unk3904;
     u8 fill3906[0x3A08 - 0x3906];
     /* 0x3A08 */ u8 unk3A08;
@@ -201,7 +205,7 @@ struct Dungeon
     /* 0x17B3C */ u32 unk17B3C;
     u8 fill17B40[0x17B44 - 0x17B40];
     /* 0x17B44 */ struct OpenedFile *sprites[MONSTER_MAX + 1];
-    u8 fill181E4[0x181E8 - 0x181E4];
+    /* 0x181E4 */ struct OpenedFile *paletFile;
     /* 0x181E8 */ struct Position cameraPos;
     /* 0x181EC */ struct Position cameraPosMirror;
     /* 0x181F0 */ struct Position cameraPixelPos;

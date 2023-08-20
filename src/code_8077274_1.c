@@ -174,6 +174,7 @@ extern void EntityUpdateStatusSprites(struct Entity *);
 extern void sub_8042A74(struct Entity *r0);
 extern void sub_807EC28(bool8);
 extern s32 sub_8069F54(struct Entity *param_1, s16 param_2);
+extern struct OpenedFile *sub_80687D0(s16);
 extern void sub_806A898(struct Entity *, u32, u32);
 extern void HealTargetHP(struct Entity *pokemon, struct Entity *r1, s16, s16, u32);
 extern void sub_806CE68(struct Entity *, s32);
@@ -236,7 +237,7 @@ void MuzzleTarget(struct Entity *pokemon, struct Entity *target)
   }
 }
 
-void sub_8078E18(struct Entity * pokemon, struct Entity * target)
+void TransformStatusTarget(struct Entity * pokemon, struct Entity * target)
 {
     s16 species;
     s32 iVar5;
@@ -279,7 +280,7 @@ void sub_8078E18(struct Entity * pokemon, struct Entity * target)
                 sub_80522F4(pokemon, target, *gUnknown_80FBEE4);
             else {
                 entityInfo->apparentID = apparentID;
-                target->unk64 = iVar9;
+                target->sprite = iVar9;
                 entityInfo->transformStatus = STATUS_TRANSFORMED;
                 entityInfo->transformStatusTurns = CalculateStatusTurns(target, gUnknown_80F4EFC, TRUE) + 1;
                 sub_806CF98(target);
@@ -480,7 +481,7 @@ void RestorePPTarget(struct Entity * pokemon,struct Entity * target, s32 param_3
     {
       movePtr = &entityInfo->moves[index];
       movePtr1 = movePtr;
-      if ((movePtr->moveFlags & MOVE_FLAG_EXISTS) != 0) {
+      if ((movePtr->moveFlags & MOVE_FLAG_EXISTS)) {
         PP = movePtr->PP;
         basePP = GetMoveBasePP(movePtr1);
         if (PP < basePP) {
@@ -1124,7 +1125,7 @@ void sub_8079F20(struct Entity * pokemon, struct Entity * target, u8 param_3, u8
         if ((move->moveFlags & MOVE_FLAG_EXISTS) && (move->moveFlags2 & MOVE_FLAG_EXISTS)) {
             bVar8 = TRUE;
             moveUnsealed = TRUE;
-            move->moveFlags2 &= 0xfe;
+            move->moveFlags2 &= ~(MOVE_FLAG_EXISTS);
         }
     }
 
@@ -1158,8 +1159,8 @@ void sub_807A0CC(struct Entity * pokemon, struct Entity * target)
     for(index = 0; index < MAX_MON_MOVES; index++)
     {
         move = &entityInfo->moves[index];
-        if ((move->moveFlags & MOVE_FLAG_EXISTS) != 0) {
-            move->moveFlags2 = move->moveFlags2 & 0xfe;
+        if ((move->moveFlags & MOVE_FLAG_EXISTS)) {
+            move->moveFlags2 &= ~(MOVE_FLAG_EXISTS);
         }
     }
     EntityUpdateStatusSprites(target);
@@ -1506,7 +1507,7 @@ void SendTransformEndMessage(struct Entity * pokemon, struct Entity *target)
             break;
         case STATUS_TRANSFORMED:
             entityInfo->apparentID = sub_8069F54(target, entityInfo->id);
-            target->unk64 = sub_80687D0(entityInfo->apparentID);
+            target->sprite = sub_80687D0(entityInfo->apparentID);
             uVar3 = sub_806CEBC(target);
             sub_806CCB4(target,uVar3);
             SendMessage(target,*gUnknown_80FAB6C);

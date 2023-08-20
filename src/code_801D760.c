@@ -34,6 +34,32 @@ extern struct unkStruct_203B258 *gUnknown_203B258;
 extern struct UnkTextStruct2 gUnknown_80DBF88;
 extern struct UnkTextStruct2 gUnknown_80DBF70;
 
+struct unkStruct_811BAF4
+{
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6;
+    u8 *text;
+};
+
+extern struct unkStruct_811BAF4 gUnknown_811BAF4[10];
+
+struct unkStruct_81188F0
+{
+    u8 *text1;
+    u8 *text2;
+    u8 *text3;
+    u8 *text4;
+    u32 unk1;
+    u32 unk2;
+    u32 unk3;
+};
+
+extern struct unkStruct_81188F0 gUnknown_81188F0[10];
+extern u8 gUnknown_80DBFA0[]; // Field
+
+
 extern void sub_801DB54();
 extern void sub_801DBD4();
 
@@ -575,4 +601,100 @@ void sub_801DB0C(void)
         MemoryFree(gUnknown_203B258);
         gUnknown_203B258 = NULL;
     }
+}
+
+NAKED
+void sub_801DB54(void)
+{
+    asm_unified(
+	"\tpush {r4,lr}\n"
+	"\tldr r4, _0801DBD0\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, 0x9C\n"
+	"\tmovs r2, 0\n"
+	"\tmovs r1, 0x1\n"
+	"\tstrb r1, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, 0x9D\n"
+	"\tstrb r2, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, 0x9E\n"
+	"\tmovs r1, 0x8\n"
+	"\tstrb r1, [r0]\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, 0x9F\n"
+	"\tstrb r2, [r0]\n"
+	"\tbl ResetUnusedInputStruct\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, 0x3C\n"
+	"\tmovs r1, 0x1\n"
+	"\tmovs r2, 0x1\n"
+	"\tbl sub_800641C\n"
+	"\tldr r0, [r4]\n"
+	"\tmovs r1, 0x1A\n"
+	"\tldrsh r0, [r0, r1]\n"
+	"\tmovs r1, 0xC\n"
+	"\tbl sub_80095E4\n"
+	"\tadds r0, 0x2\n"
+	"\tlsls r0, 16\n"
+	"\tldr r2, [r4]\n"
+	"\tldr r3, [r2, 0x34]\n"
+	"\tlsls r1, r3, 1\n"
+	"\tadds r1, r3\n"
+	"\tlsls r1, 3\n"
+	"\tadds r1, r2, r1\n"
+	"\tadds r1, 0x4A\n"
+	"\tasrs r3, r0, 16\n"
+	"\tlsrs r0, 16\n"
+	"\tstrh r0, [r1]\n"
+	"\tldr r1, [r2, 0x34]\n"
+	"\tlsls r0, r1, 1\n"
+	"\tadds r0, r1\n"
+	"\tlsls r0, 3\n"
+	"\tadds r2, r0\n"
+	"\tadds r3, 0x2\n"
+	"\tadds r2, 0x4C\n"
+	"\tstrh r3, [r2]\n"
+	"\tbl ResetUnusedInputStruct\n"
+	"\tldr r0, [r4]\n"
+	"\tadds r0, 0x3C\n"
+	"\tmovs r1, 0x1\n"
+	"\tmovs r2, 0x1\n"
+	"\tbl sub_800641C\n"
+	"\tpop {r4}\n"
+	"\tpop {r0}\n"
+	"\tbx r0\n"
+	"\t.align 2, 0\n"
+"_0801DBD0: .4byte gUnknown_203B258");
+}
+
+void sub_801DBD4(void)
+{
+    struct unkStruct_811BAF4 *temp;
+    struct unkStruct_81188F0 *temp2;
+    s32 y;
+#ifndef NONMATCHING
+    register s32 x asm("r4");
+#else
+    register s32 x;
+#endif
+    s16 index;
+    int counter;
+
+    sub_8008C54(gUnknown_203B258->unk34);
+    sub_80073B8(gUnknown_203B258->unk34);
+    xxx_call_draw_string(10,0,gUnknown_80DBFA0,gUnknown_203B258->unk34,0); // Field
+    x = gUnknown_203B258->unk9C[2] * 8 - 2;
+    sub_8012BC4(x,0,gUnknown_203B258->input.unk1E + 1,2,7,gUnknown_203B258->unk34);
+    for(counter = 0; counter < gUnknown_203B258->input.unk1A; counter++)
+    {
+        index = gUnknown_203B258->input.unk1E * gUnknown_203B258->input.unk1C + counter;
+        temp = &gUnknown_811BAF4[index];
+        temp2 = &gUnknown_81188F0[temp->unk4];
+        y = sub_8013800(&gUnknown_203B258->input, counter);
+        xxx_call_draw_string(8,y,temp2->text1,gUnknown_203B258->unk34,0);
+        y = sub_8013800(&gUnknown_203B258->input,counter);
+        xxx_call_draw_string(0x3e,y,temp->text,gUnknown_203B258->unk34,0);
+    }
+    sub_80073E0(gUnknown_203B258->unk34);
 }

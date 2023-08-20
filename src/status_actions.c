@@ -218,7 +218,7 @@ bool8 TransformMoveAction(struct Entity * pokemon, struct Entity * target, struc
   }
   else {
     move->PP = 0;
-    sub_8078E18(pokemon,target);
+    TransformStatusTarget(pokemon,target);
     return TRUE;
   }
 }

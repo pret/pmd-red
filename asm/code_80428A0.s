@@ -1665,7 +1665,7 @@ _080438AC:
 	adds r2, r4, 0
 	bl sub_8083AB0
 _08043926:
-	bl sub_80688CC
+	bl CloseAllSpriteFiles
 	bl sub_8049820
 	ldr r0, _08043994
 	ldr r0, [r0]

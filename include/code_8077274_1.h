@@ -2,7 +2,7 @@
 #define GUARD_CODE_8077274_1_H
 
 void MuzzleTarget(struct Entity *pokemon, struct Entity *target);
-void sub_8078E18(struct Entity * pokemon, struct Entity * target);
+void TransformStatusTarget(struct Entity * pokemon, struct Entity * target);
 void MobileStatusTarget(struct Entity * pokemon, struct Entity * target);
 void ExposeStatusTarget(struct Entity * pokemon, struct Entity * target, s16 param_3);
 void IdentityItemHolders(struct Entity *pokemon, struct Entity *target);

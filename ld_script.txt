@@ -99,7 +99,6 @@ SECTIONS {
         src/code_801B3C0.o(.text);
         src/code_801C620.o(.text);
         src/code_801D760.o(.text);
-        asm/code_801D760.o(.text);
         src/options_menu.o(.text);
         src/hints_menu.o(.text);
         src/gulpin_shop.o(.text);
@@ -199,6 +198,8 @@ SECTIONS {
         src/status_actions.o(.text);
         src/move_checks.o(.text);
         asm/code_805D8C8.o(.text);
+        src/code_805D8C8.o(.text);
+        asm/code_805D8C8_1.o(.text);
         src/targeting.o(.text);
         src/code_8069E0C.o(.text);
         asm/code_8069E0C.o(.text);
