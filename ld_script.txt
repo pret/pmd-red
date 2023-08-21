@@ -116,7 +116,6 @@ SECTIONS {
         src/friend_list_menu.o(.text);
         src/party_list_menu.o(.text);
         src/friend_area_action_menu.o(.text);
-        src/friend_area_action_menu_1.o(.text);
         src/wonder_mail.o(.text);
         src/thank_you_wonder_mail.o(.text);
         src/wonder_mail_2.o(.text);
@@ -393,7 +392,6 @@ SECTIONS {
         src/friend_list_menu.o(.rodata);
         src/party_list_menu.o(.rodata);
         src/friend_area_action_menu.o(.rodata);
-        src/friend_area_action_menu_1.o(.rodata);
         src/wonder_mail.o(.rodata);
         src/thank_you_wonder_mail.o(.rodata);
         src/wonder_mail_2.o(.rodata);

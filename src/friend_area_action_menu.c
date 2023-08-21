@@ -14,19 +14,22 @@
 #include "code_801EE10_1.h"
 #include "code_801B3C0.h"
 #include "event_flag.h"
+#include "moves.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 
-extern void sub_8027D40(u32, struct BulkItem *);
+extern u8 *gUnknown_80D4920[];
+extern u8 *gUnknown_80D4928[];
+extern u8 *gUnknown_80D4970[];
+
 extern void sub_8024458(s16, u32);
 extern void sub_801BEEC(s16);
-extern void GetLinkedSequence(u32, struct Move *, u16*);
 extern void sub_801F808(u16*);
-extern void sub_8027794();
 extern void sub_801F1B0(u32, u32);
-extern void unk_CopyMoves4To8(struct Move *, struct Move *);
 extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
 
+void sub_8027D40(u32, struct BulkItem *heldItem);
+void sub_8027794(void);
 extern void SetFriendAreaActionMenuState(u32);
 extern void sub_802719C();
 extern void sub_8027274();
@@ -49,6 +52,7 @@ extern u8 sub_8027DCC(struct PokemonStruct *);
 extern u32 sub_801EF38(u8 r0);
 extern void sub_801F214();
 
+extern void SetFriendAreaActionMenuState(u32);
 extern void PlaySound(u32);
 extern void nullsub_104();
 extern void sub_8099690(u32);
@@ -145,6 +149,18 @@ ALIGNED(4) const u8 gUnknown_80DD8A0[] = _(
 ALIGNED(4) const u8 gUnknown_80DD8D0[] = _(
          "{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n{CENTER_ALIGN}sent to storage.");
 
+ALIGNED(4) const u8 gFriendActionStandby[] = "Stand By";
+ALIGNED(4) const u8 gFriendActionMakeLeader[] = "Make Leader";
+ALIGNED(4) const u8 gFriendActionJoinTeam[] = "Join Team";
+ALIGNED(4) const u8 gFriendActionSayFarewell[] = "Say Farewell";
+ALIGNED(4) const u8 gFriendActionGive[] = "Give";
+ALIGNED(4) const u8 gFriendActionTake[] = "Take";
+ALIGNED(4) const u8 gFriendActionSummary[] = "Summary";
+ALIGNED(4) const u8 gFriendActionMoves[] = "Moves";
+ALIGNED(4) const u8 gFriendActionCheckIQ[] = "Check IQ";
+
+ALIGNED(4) const u8 gUnknown_80DD958[] = _("Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} ");
+static const u8 filler[] = "pksdir0";
 
 u32 sub_8027074(void)
 {
@@ -326,21 +342,6 @@ void sub_8027274(void)
   }
 }
 
-extern u8 gFriendActionStandby[];
-extern u8 gFriendActionMakeLeader[];
-extern u8 gFriendActionJoinTeam[];
-extern u8 gFriendActionSayFarewell[];
-extern u8 gFriendActionGive[];
-extern u8 gFriendActionTake[];
-extern u8 gFriendActionSummary[];
-extern u8 gFriendActionMoves[];
-extern u8 gFriendActionCheckIQ[];
-extern u8 *gUnknown_80D4920[];
-extern u8 *gUnknown_80D4928[];
-extern u8 *gUnknown_80D4970[];
-extern u8 gUnknown_80DD958[];
-
-
 void CreateFriendActionMenu(void)
 {
   int index;
@@ -413,7 +414,6 @@ void CreateFriendActionMenu(void)
   gUnknown_203B2BC->menuItems[loopMax].text = 0;
   gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_NONE;
 
-
   for(index = 0; index < loopMax; index++)
   {
       if(gUnknown_203B2BC->unk16C[index] == 0)
@@ -451,7 +451,6 @@ void sub_80276A8(void)
   loopMax += 1;
   gUnknown_203B2BC->menuItems[loopMax].text = 0;
   gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_NONE;
-
 
   for(index = 0; index < loopMax; index++)
   {
@@ -918,3 +917,4 @@ void sub_8027EB8(void)
             break;
     }
 }
+
