@@ -13,6 +13,34 @@ extern u8 *gUnknown_8108084[];
 s32 sub_8091E94(s32 a1, s32 a2, s32 a3); // items.c
 
 
+bool8 sub_8090820(u16 moveID)
+{
+    struct PokemonStruct *pokeStruct;
+    struct Move *move;
+    s32 moveIndex;
+    s32 index;
+    s32 one;
+
+    for(index = 0; index < 0x19d; index++)
+    {
+        pokeStruct = &gRecruitedPokemonRef->pokemon[index];
+        one = 1;
+        if (pokeStruct->unk0 & 1)
+        {
+            if(pokeStruct->unk0 >> 1 & one){
+                for(moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+                {
+                    move = &pokeStruct->moves[moveIndex];
+                    if ((move->moveFlags & MOVE_FLAG_EXISTS) && (move->id == moveID)) {
+                        return TRUE;
+                    }
+                }
+            }
+        }
+    }
+    return FALSE;
+}
+
 void sub_8090888(u8 *param_1, u8 *param_2)
 {
     s32 iVar3;

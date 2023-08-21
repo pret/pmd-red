@@ -17,8 +17,6 @@ struct unkStruct_202EE10
 
 extern struct unkStruct_202EE10 gUnknown_202EE10;
 
-EWRAM_DATA_2 u32 gUnknown_203B458 = {0};
-
 extern u8 *gUnknown_80FE6F4[];
 extern u8 gUnknown_810AC60; // 0xC
 extern u8 gUnknown_810AC62; // 0xC
@@ -354,10 +352,4 @@ void UpdateDungeonMusic(void)
             musPlayer->state = 1;
         }
   }
-}
-
-
-void sub_808408C(u32 param_1)
-{
-  gUnknown_203B458 = (1 | param_1) & 0xffffff;
 }
