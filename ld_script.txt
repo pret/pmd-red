@@ -90,7 +90,6 @@ SECTIONS {
         src/save.o(.text);
         src/code_8012A18.o(.text);
         src/menu_input.o(.text);
-        src/menu_input_1.o(.text);
         asm/code_80130A8.o(.text);
         src/code_8012A18_1.o(.text);
         src/felicity_bank.o(.text);
