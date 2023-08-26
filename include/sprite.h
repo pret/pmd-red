@@ -4,24 +4,13 @@
 #include "axdata.h"
 #include "ground_sprite.h"
 #include "position.h"
-
-// size: 0x8
-struct unkSprite
-{
-    // y/affineMode/objMode/mosaic/bpp/shape
-    u16 unk0;
-    // x/matrixNum/size
-    u16 unk2;
-    // tileNum/priority/paletteNum
-    u16 unk4;
-    u16 unk6;
-};
+#include "sprite_oam.h"
 
 // size: 0x8
 struct UnkSpriteLink
 {
     struct UnkSpriteLink *unk0;
-    struct unkSprite *unk4;
+    struct SpriteOAM *unk4;
 };
 
 // size: 0x808
@@ -92,7 +81,7 @@ struct Dungeon_Sub17B44
     struct Dungeon_Sub17B44_Sub4 *unk4;
 };
 
-void AddSprite(struct unkSprite *, s32, struct UnkSpriteMem *, struct unkStruct_2039DB0 *);
+void AddSprite(struct SpriteOAM *, s32, struct UnkSpriteMem *, struct unkStruct_2039DB0 *);
 void BlinkSavingIcon(void);
 void CopySpritesToOam(void);
 void InitSprites(void);

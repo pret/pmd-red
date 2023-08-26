@@ -15,7 +15,7 @@ struct unkStruct_203B360
     u32 unk4; // state
     struct MenuStruct unk8[4];
     struct UnkTextStruct2 unk148[4];
-    struct unkSprite unk1A8;
+    struct SpriteOAM unk1A8;
     u32 unk1B0; // sprite count?
 };
 
@@ -135,43 +135,52 @@ void sub_8038440(void)
     u32 r1;
     u32 r4;
     u32 r5;
-    struct unkSprite *sprite;
-    
+    struct SpriteOAM *sprite;
+
     r5 = 0;
     sprite = &gUnknown_203B360->unk1A8;
 
-    r1 = sprite->unk0;
-    r0 = 0xfeff;
+    r1 = sprite->atrib1;
+    r0 = (u16)~SPRITEOAM_MASK_AFFINEMODE1;
     r0 &= r1;
-    r0 &= 0xfdff;
-    r0 &= 0xf3ff;
-    r0 &= 0xefff;
-    r0 &= 0xdfff;
-    r2 = 0x4000;
-    r0 &= 0x3fff;
-    r0 |= r2;
-    sprite->unk0 = r0;
 
-    r2 = 0x3F0;
-    r1 = sprite->unk4;
-    r0 = 0xFC00;
+    r0 &= (u16)~SPRITEOAM_MASK_AFFINEMODE2;
+
+    r0 &= (u16)~SPRITEOAM_MASK_OBJMODE;
+
+    r0 &= (u16)~SPRITEOAM_MASK_MOSAIC;
+
+    r0 &= (u16)~SPRITEOAM_MASK_BPP;
+
+    r2 = 1 << SPRITEOAM_SHIFT_SHAPE;
+    r0 &= (u16)~SPRITEOAM_MASK_SHAPE;
+    r0 |= r2;
+
+    sprite->atrib1 = r0;
+
+    r2 = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
+    r1 = sprite->atrib3;
+    r0 = (u16)~SPRITEOAM_MASK_TILENUM;
     r0 &= r1;
     r0 |= r2;
-    r0 &= 0xf3ff;
-    r2 = 0xF;
-    r4 = 0xF000;
-    r0 &= 0xfff;
+
+    r0 &= (u16)~SPRITEOAM_MASK_PRIORITY;
+
+    r2 = (u16)~SPRITEOAM_MASK_UNK6_4;
+
+    r4 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
+    r0 &= (u16)~SPRITEOAM_MASK_PALETTENUM;
     r0 |= r4;
 
-    sprite->unk4 = r0;
-    
-    sprite->unk2 = 0x70;
-    
-    r1 = 0x700;
+    sprite->atrib3 = r0;
+
+    sprite->atrib2 = 112; // Set x to 112. Set matrixNum/size to 0
+
+    r1 = 112 << SPRITEOAM_SHIFT_UNK6_4;
     r2 &= sprite->unk6;
     r2 |= r1;
     sprite->unk6 = r2;
-    
+
     gUnknown_203B360->unk1B0 = r5;
 }
 

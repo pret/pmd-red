@@ -28,9 +28,9 @@ struct unkStruct_808E9EC
     u8 unk12;
     u8 unk13;
 };
-extern u32 gUnknown_81076C4[];
+extern s32 gUnknown_81076C4[6]; // x-coord positioning for shadow sprites
 
-extern struct unkSprite gUnknown_202F3E8[3]; // Shadow sprites of some kind
+extern struct SpriteOAM gUnknown_202F3E8[3]; // Shadow sprites of some kind
 extern s16 gUnknown_810AC60; // 0xC
 extern s16 gUnknown_810AC62; // 0xC
 extern s16 gUnknown_810AC68; // 0x8
@@ -55,29 +55,30 @@ extern void sub_809447C(struct unkStruct_8094924*, void*);
 extern void sub_808F428(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
 
 
-bool8 sub_808E668(s16 a1, s16* a2, s16* a3)
+bool8 sub_808E668(s16 species, s16* a2, s16* a3)
 {
-    u32 shifted = a1 << 16;
+    if (species != MONSTER_DIGLETT && species != MONSTER_DUGTRIO) {
+        u8 shadowSize = GetShadowSize(species);
+        u32 x, unk6;
+        struct SpriteOAM* spr;
 
-    if (((shifted - 0x320000) >> 16) > 1) {
-        u8 shadowSize = GetShadowSize(a1);
-        u32 unk2, unk6;
-        struct unkSprite* arg0;
-
-        unk2 = a2[0] + a3[8];
+        x = a2[0] + a3[8];
         unk6 = a2[1] + a3[9];
-        unk2 += gUnknown_81076C4[shadowSize];
+        x += gUnknown_81076C4[shadowSize];
         unk6 -= 4;
-        unk2 &= 0x1ff;
+        x &= SPRITEOAM_MAX_X;
 
-        arg0 = &gUnknown_202F3E8[shadowSize];
-        arg0->unk2 = (arg0->unk2 & 0xfe00) | unk2;
-        unk6 &= 0xfff;
-        unk6 <<= 4;
-        arg0->unk6 = (arg0->unk6 & 0xf) | unk6;
-        AddSprite(arg0, 0, NULL, NULL);
+        spr = &gUnknown_202F3E8[shadowSize];
+        spr->atrib2 &= ~SPRITEOAM_MASK_X;
+        spr->atrib2 |= x;
+        unk6 &= SPRITEOAM_MAX_UNK6_4;
+        unk6 <<= SPRITEOAM_SHIFT_UNK6_4;
+        spr->unk6 &= ~SPRITEOAM_MASK_UNK6_4;
+        spr->unk6 |= unk6;
+        AddSprite(spr, 0, NULL, NULL);
     }
-    return 1;
+
+    return TRUE;
 }
 
 

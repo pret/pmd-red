@@ -14,7 +14,7 @@ struct RescuePasswordMenu
     struct MenuStruct unk8[4];
     struct UnkTextStruct2 unk148[4];
     struct UnkTextStruct2 unk1A8[4];
-    struct unkSprite unk208;
+    struct SpriteOAM unk208;
     u32 unk210;
 };
 
