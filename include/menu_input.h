@@ -40,5 +40,7 @@ bool8 sub_8013938(struct MenuInputStruct *param_1);
 void sub_8013984(struct MenuInputStruct * param_1);
 void sub_8013A54(struct MenuInputStruct *param_1);
 void sub_8013A7C(struct MenuInputStruct *param_1);
+void AddMenuCursorSprite_(struct MenuInputStruct *, u32);
+void nullsub_34(struct MenuInputStructSub *);
 
 #endif // GUARD_MENU_INPUT_H

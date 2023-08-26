@@ -7,21 +7,21 @@
 #include "code_800D090.h"
 #include "menu_input.h"
 #include "code_80130A8.h"
+#include "sprite.h"
 
 extern u8 gUnknown_80D4828[];
 
 extern void PlayMenuSoundEffect(u32);
 extern s32 sub_8008ED0(const u8 *);
-void AddMenuCursorSprite_(struct MenuInputStruct *, u32);
 void sub_8012EBC(struct MenuStruct *param_1);
 extern void sub_8013134(struct MenuInputStruct *, u32, u32);
 extern s16 sub_8009614(u32, u32);
 extern u32 ReturnIntFromChar2(u8);
 extern void nullsub_7(u16 *);
-extern void nullsub_34(struct MenuInputStructSub *r0);
+void sub_8013470(struct MenuInputStruct *);
+void sub_801332C(s16 *);
 
 const u32 gDefaultMenuTextColors[] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
-
 
 u32 sub_8012A64(struct MenuInputStructSub *r0, s32 r1)
 {
@@ -594,4 +594,85 @@ void sub_801317C(struct MenuInputStructSub *param_1)
 void AddMenuCursorSprite(struct MenuInputStruct *param_1)
 {
     AddMenuCursorSprite_(param_1, 0);
+}
+
+void AddMenuCursorSprite_(struct MenuInputStruct *a0, u32 a1)
+{
+    struct SpriteOAM sp = {};
+    struct SpriteOAM* ptr;
+    s32 value;
+    s32 r0;
+    s32 r1;
+    s32 r2;
+    s32 r5;
+
+    if (a0->unk1A > 0) {
+        UpdateMenuCursorSpriteCoords(a0);
+
+        if (!(a0->unk24 & 8)) {
+            register u32 tmp asm("r0"), tmp2 asm("r1"), r4;
+
+            tmp = sp.atrib1;
+            sp.atrib1 = tmp & ~SPRITEOAM_MASK_AFFINEMODE1;
+            sp.atrib1 = sp.atrib1;
+
+            tmp2 = sp.atrib1;
+            sp.atrib1 = tmp2 & ~SPRITEOAM_MASK_AFFINEMODE2;
+            sp.atrib1 = sp.atrib1;
+
+            tmp2 = sp.atrib1;
+            tmp = r4 = (u16)~SPRITEOAM_MASK_OBJMODE;
+            sp.atrib1 = tmp & tmp2;
+            sp.atrib1 = sp.atrib1;
+
+            tmp2 = sp.atrib1;
+            sp.atrib1 = tmp2 & ~SPRITEOAM_MASK_MOSAIC;
+            sp.atrib1 = sp.atrib1;
+
+            tmp2 = sp.atrib1;
+            sp.atrib1 = tmp2 & ~SPRITEOAM_MASK_BPP;
+            sp.atrib1 = sp.atrib1;
+
+            tmp2 = sp.atrib1;
+            sp.atrib1 = tmp2 & ~SPRITEOAM_MASK_SHAPE;
+            sp.atrib1 = sp.atrib1;
+
+            ptr = &sp;
+
+            r2 = 0x3F4 << SPRITEOAM_SHIFT_TILENUM;
+            ptr->atrib3 &= ~SPRITEOAM_MASK_TILENUM;
+            ptr->atrib3 |= r2;
+
+            ptr->atrib3 &= r4; // ~SPRITEOAM_MASK_PRIORITY
+
+            r5 = (u16)~SPRITEOAM_MASK_UNK6_4;
+
+            r1 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
+            ptr->atrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
+            ptr->atrib3 |= r1;
+
+            ptr->unk6 &= ~SPRITEOAM_MASK_UNK6_0;
+            ptr->unk6 &= ~SPRITEOAM_MASK_UNK6_1;
+
+            r0 = a0->unk8;
+            r0 &= SPRITEOAM_MAX_X;
+            ptr->atrib2 = r0;
+
+            value = ((a0->unkA + 1) & SPRITEOAM_MAX_UNK6_4) << SPRITEOAM_SHIFT_UNK6_4;
+            ptr->unk6 &= r5;
+            ptr->unk6 |= value;
+
+            AddSprite(&sp, 0xFF, 0, 0);
+        }
+    }
+
+    sub_8013470(a0);
+    if (a0->unk14 != 0)
+        sub_801332C(&a0->unk14);
+
+    a0->unk24++;
+}
+
+void nullsub_34(struct MenuInputStructSub *a0)
+{
 }

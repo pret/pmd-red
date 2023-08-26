@@ -68,8 +68,8 @@ struct MenuInputStruct
     s32 unk0;
     u16 unk4;
     s16 unk6;
-    u16 unk8;
-    u16 unkA;
+    s16 unk8;
+    s16 unkA;
     u16 unkC;
     u16 unkE;
     u32 unk10;
