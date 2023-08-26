@@ -18,6 +18,7 @@
 #include "code_801C620.h"
 #include "code_801B3C0.h"
 #include "cpu.h"
+#include "code_80118A4.h"
 
 extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 
@@ -216,9 +217,7 @@ extern void SetThankYouMailMenuState(u32);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void sub_802F204(struct unkStruct_802F204 *, u32);
 extern void sub_80151C0(u32, u8 *);
-extern void xxx_call_start_bg_music(void);
 extern void sub_803092C(void);
-extern void sub_8011830(void);
 extern s32 sub_8037B28(u32);
 extern u32 sub_8030894(void);
 extern u32 sub_801D008(void);

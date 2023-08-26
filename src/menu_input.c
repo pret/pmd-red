@@ -1,236 +1,228 @@
 #include "global.h"
+#include "code_800558C_1.h"
+#include "code_800D090.h"
+#include "code_80118A4.h"
+#include "code_80130A8.h"
 #include "constants/colors.h"
 #include "constants/input.h"
+#include "menu_input.h"
+#include "sprite.h"
+#include "text_util.h"
 #include "text1.h"
 #include "text2.h"
 #include "util.h"
-#include "code_800D090.h"
-#include "menu_input.h"
-#include "code_80130A8.h"
-#include "sprite.h"
 
-extern u8 gUnknown_80D4828[];
+// data_80D47B8.s
+extern const u8 gUnknown_80D4828[];
 
-extern void PlayMenuSoundEffect(u32);
+// text.s
 extern s32 sub_8008ED0(const u8 *);
-void sub_8012EBC(struct MenuStruct *param_1);
-extern void sub_8013134(struct MenuInputStruct *, u32, u32);
 extern s16 sub_8009614(u32, u32);
-extern u32 ReturnIntFromChar2(u8);
-extern void nullsub_7(u16 *);
-extern void PlayMenuSoundEffect(u32);
 
-void sub_801332C(s16 *);
-void sub_8013470(struct MenuInputStruct *);
+static void sub_8013134(struct MenuInputStruct *, u32, u32);
+static void sub_801332C(s16 *);
+static void sub_8013470(struct MenuInputStruct *);
 
-const u32 gDefaultMenuTextColors[] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
+const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
 u32 sub_8012A64(struct MenuInputStructSub *r0, s32 r1)
 {
-    if(r0 == NULL)
-    {
+    if (r0 == NULL)
         return sub_8012AE8();
-    }
-    if(r1 != -1)
-    {
+
+    if (r1 != -1)
         nullsub_34(r0);
-    }
-    if(r0->a_button != 0)
-    {
+
+    if (r0->a_button != 0) {
         r0->a_button = 0;
         return INPUT_A_BUTTON;
     }
-    else if(r0->b_button == 0)
-    {
+
+    if (r0->b_button == 0)
         return sub_8012AE8();
-    }
-    else
-    {
-        r0->b_button = 0;
-        return INPUT_B_BUTTON;
-    }
+
+    r0->b_button = 0;
+    return INPUT_B_BUTTON;
 }
 
 s32 GetKeyPress(struct MenuInputStruct *r0)
 {
-    if(r0 != NULL)
-    {
-        if(r0->unk28.a_button != 0)
-        {
+    if (r0 != NULL) {
+        if (r0->unk28.a_button != 0)
             return INPUT_A_BUTTON;
-        }
-        if(r0->unk28.b_button != 0)
-        {
+
+        if (r0->unk28.b_button != 0)
             return INPUT_B_BUTTON;
-        }
-        if(r0->unk28.dpad_left != 0)
-        {
+
+        if (r0->unk28.dpad_left != 0)
             return INPUT_DPAD_LEFT;
-        }
-        if(r0->unk28.dpad_right != 0)
-        {
+
+        if (r0->unk28.dpad_right != 0)
             return INPUT_DPAD_RIGHT;
-        }
     }
+
     return sub_8012AE8();
 }
 
 s32 sub_8012AE8(void)
 {
-  if ((gRealInputs.held & R_BUTTON) != 0) {
-    if ((gRealInputs.pressed & A_BUTTON) != 0) {
-        return INPUT_R_A_BUTTONS;
+    if (gRealInputs.held & R_BUTTON) {
+        if (gRealInputs.pressed & A_BUTTON)
+            return INPUT_R_A_BUTTONS;
+
+        if (gRealInputs.repeated & DPAD_UP)
+            return INPUT_R_DPAD_UP_BUTTONS;
+
+        if (gRealInputs.repeated & DPAD_DOWN)
+            return INPUT_R_DPAD_DOWN_BUTTONS;
+
+        if (gRealInputs.repeated & DPAD_LEFT)
+            return INPUT_R_DPAD_LEFT_BUTTONS;
+
+        if (gRealInputs.repeated & DPAD_RIGHT)
+            return INPUT_R_DPAD_RIGHT_BUTTONS;
+
+        if (gRealInputs.repeated & R_BUTTON)
+            return INPUT_R_BUTTON;
     }
-    if ((gRealInputs.repeated & DPAD_UP) != 0) {
-        return INPUT_R_DPAD_UP_BUTTONS;
+    else {
+        if (gRealInputs.pressed & A_BUTTON)
+            return INPUT_A_BUTTON;
+
+        if (gRealInputs.pressed & B_BUTTON)
+            return INPUT_B_BUTTON;
+
+        if (gRealInputs.pressed & SELECT_BUTTON)
+            return INPUT_SELECT_BUTTON;
+
+        if (gRealInputs.pressed & START_BUTTON)
+            return INPUT_START_BUTTON;
+
+        if (gRealInputs.repeated & DPAD_UP)
+            return INPUT_DPAD_UP;
+
+        if (gRealInputs.repeated & DPAD_DOWN)
+            return INPUT_DPAD_DOWN;
+
+        if (gRealInputs.repeated & DPAD_LEFT)
+            return INPUT_DPAD_LEFT;
+
+        if (gRealInputs.repeated & DPAD_RIGHT)
+            return INPUT_DPAD_RIGHT;
+
+        if (gRealInputs.repeated & L_BUTTON)
+            return INPUT_L_BUTTON;
     }
-    if ((gRealInputs.repeated & DPAD_DOWN) != 0) {
-        return INPUT_R_DPAD_DOWN_BUTTONS;
-    }
-    if ((gRealInputs.repeated & DPAD_LEFT) != 0) {
-        return INPUT_R_DPAD_LEFT_BUTTONS;
-    }
-    if ((gRealInputs.repeated & DPAD_RIGHT) != 0) {
-        return INPUT_R_DPAD_RIGHT_BUTTONS;
-    }
-    if ((gRealInputs.repeated & R_BUTTON) != 0) {
-        return INPUT_R_BUTTON;
-    }
-  }
-  else
-  {
-    if ((gRealInputs.pressed & A_BUTTON) != 0) {
-        return INPUT_A_BUTTON;
-    }
-    if ((gRealInputs.pressed & B_BUTTON) != 0) {
-        return INPUT_B_BUTTON;
-    }
-    if ((gRealInputs.pressed & SELECT_BUTTON) != 0) {
-        return INPUT_SELECT_BUTTON;
-    }
-    if ((gRealInputs.pressed & START_BUTTON) != 0) {
-        return INPUT_START_BUTTON;
-    }
-    if ((gRealInputs.repeated & DPAD_UP) != 0) {
-        return INPUT_DPAD_UP;
-    }
-    if ((gRealInputs.repeated & DPAD_DOWN) != 0) {
-        return INPUT_DPAD_DOWN;
-    }
-    if ((gRealInputs.repeated & DPAD_LEFT) != 0) {
-        return INPUT_DPAD_LEFT;
-    }
-    if ((gRealInputs.repeated & DPAD_RIGHT) != 0) {
-        return INPUT_DPAD_RIGHT;
-    }
-    if ((gRealInputs.repeated & L_BUTTON) != 0) {
-        return INPUT_L_BUTTON;
-    }
-  }
-  return INPUT_NONE;
+
+    return INPUT_NONE;
 }
 
-void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 param_6)
+void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 a5)
 {
-  s32 iVar1;
-  u32 uVar2;
-  struct unkChar *iVar3;
-  s32 counter;
-  s32 *piVar3;
-  s32 *piVar4;
-  s32 total_x;
-  s32 decimal [8];
-  
-  total_x = 0;
-  ConvertToDecimal(decimal,n,len);
-  counter = len - 1;
-  if (0 < counter) {
-    piVar3 = &decimal[counter];
-    if(*piVar3 == 0)
-    {
-        do  {
-          *piVar3 = 0xff;
-          piVar3--;
-          counter--;
-          if (counter <= 0) break;
-        } while(*piVar3 == 0);
-    }
-  }
+    s32 iVar1;
+    u32 uVar2;
+    struct unkChar *iVar3;
+    s32 counter;
+    s32 *piVar3;
+    s32 *piVar4;
+    s32 total_x;
+    s32 decimal[8];
     
-  counter = 0;
-  if ((counter < len) && (decimal[0] != 0xFF)) {
-    piVar4 = &decimal[0];
-    do {
-      iVar1 = *piVar4;
-      piVar4++;
-      uVar2 = ReturnIntFromChar2(iVar1 + 0x30);
-      iVar3 = GetCharacter(uVar2);
-      total_x += iVar3->unk6;
-      xxx_call_draw_char(x - total_x,y,uVar2,color,param_6);
-      counter++;
-      if (counter >= len) {
-        break;
-      }
-    } while (*piVar4 != 0xff);
-  }
+    total_x = 0;
+
+    ConvertToDecimal(decimal, n, len);
+
+    counter = len - 1;
+    if (counter > 0) {
+        piVar3 = &decimal[counter];
+        if (*piVar3 == 0) {
+            do {
+                *piVar3 = 0xFF;
+                piVar3--;
+                counter--;
+                if (counter <= 0)
+                    break;
+            } while(*piVar3 == 0);
+        }
+    }
+
+    counter = 0;
+    if (counter < len && decimal[0] != 0xFF) {
+        piVar4 = &decimal[0];
+        do {
+            iVar1 = *piVar4;
+            piVar4++;
+            uVar2 = ReturnIntFromChar2(iVar1 + 0x30);
+            iVar3 = GetCharacter(uVar2);
+            total_x += iVar3->unk6;
+            xxx_call_draw_char(x - total_x, y, uVar2, color, a5);
+            counter++;
+            if (counter >= len)
+                break;
+        } while (*piVar4 != 0xff);
+    }
 }
 
-void sub_8012C60(u32 x,u32 y,u32 param_3,u32 color,u32 param_5)
+void sub_8012C60(u32 x, u32 y, u32 a2, u32 color, u32 a4)
 {
-  u32 add_x;
-  struct unkChar *iVar3;
-  u32 uVar2;
-  
-  uVar2 = ReturnIntFromChar2(param_3);
-  iVar3 = GetCharacter(uVar2);
-  if (iVar3->unk6 < 0xc) {
-    add_x = ((0xc - iVar3->unk6) / 2);
-  }
-  else {
-    add_x = 0;
-  }
-  xxx_call_draw_char(x + add_x,y,uVar2,color,param_5);
+    u32 add_x;
+    struct unkChar *iVar3;
+    u32 uVar2;
+
+    uVar2 = ReturnIntFromChar2(a2);
+    iVar3 = GetCharacter(uVar2);
+
+    if (iVar3->unk6 < 12)
+        add_x = ((12 - iVar3->unk6) / 2);
+    else
+        add_x = 0;
+
+    xxx_call_draw_char(x + add_x, y, uVar2, color, a4);
 }
 
-void sub_8012CAC(struct UnkTextStruct2 *param_1, const struct MenuItem *param_2)
+void sub_8012CAC(struct UnkTextStruct2 *a0, const struct MenuItem *a1)
 {
-  s16 length;
-  int r5;
-  int r6;
-  int r7;
-  s32 iVar4;
-#ifndef NONMATCHING
-  register s32 r0 asm("r0");
-#else
-  s32 r0;
-#endif
-  
-  r7 = 0;
-  r6 = 0;
-  if (param_2->text != NULL) {
-    r5 = 0x10000;
-    r0 = r5;
-    do {
-      r0 = r5;
-      r5 = r5 + 0x10000;
-      r7 = r0 >> 0x10;
-      length = sub_8008ED0(param_2->text);
-      if (length > r6) {
-        r6 = length;
-      }
-      param_2++;
-    } while (param_2->text != NULL);
-  }
-  if (r6 < 0)
-    iVar4 = r6 + 7;
-  else
-    iVar4 = r6;
-  param_1->unkC = (iVar4 >> 3) + 2;
-  sub_8012D08(param_1, r7);
+    s16 length;
+    int r5;
+    int r6;
+    int r7;
+    s32 iVar4;
+    #ifndef NONMATCHING
+    register s32 r0 asm("r0");
+    #else
+    s32 r0;
+    #endif
+    
+    r7 = 0;
+    r6 = 0;
+
+    if (a1->text != NULL) {
+        r5 = 0x10000; // s16 memes?
+        r0 = r5;
+        do {
+            r0 = r5;
+            r5 = r5 + 0x10000;
+            r7 = r0 >> 0x10;
+            length = sub_8008ED0(a1->text);
+
+            if (length > r6)
+                r6 = length;
+
+            a1++;
+        } while (a1->text != NULL);
+    }
+
+    if (r6 < 0)
+        iVar4 = r6 + 7;
+    else
+        iVar4 = r6;
+
+    a0->unkC = (iVar4 >> 3) + 2;
+    sub_8012D08(a0, r7);
 }
 
 NAKED
-void sub_8012D08(struct UnkTextStruct2 *param_1, s32 param_2)
+void sub_8012D08(struct UnkTextStruct2 *a0, s32 a1)
 {
     asm_unified(
 	"\tpush {r4,lr}\n"
@@ -258,7 +250,7 @@ void sub_8012D08(struct UnkTextStruct2 *param_1, s32 param_2)
 
 // https://decomp.me/scratch/QadfW  (200 - 90% matched)  - Seth
 NAKED
-void sub_8012D34(struct UnkTextStruct2 *param_1, s32 param_2)
+void sub_8012D34(struct UnkTextStruct2 *a0, s32 a1)
 {
     asm_unified(
 	"\tpush {r4,lr}\n"
@@ -284,96 +276,99 @@ void sub_8012D34(struct UnkTextStruct2 *param_1, s32 param_2)
 	"\tbx r0");
 }
 
-void sub_8012D60(struct MenuStruct *param_1,const struct MenuItem *menuItems,u32 *colorArray,u16 *param_4,s32 menuAction,
-                s32 index)
+void sub_8012D60(struct MenuStruct *param_1, const struct MenuItem *menuItems, u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
 {
-  const u8 *textPtr;
-  s32 counter;
-  s32 menuIndex;
-  s32 iVar1;
-  
-  counter = 0;
-  menuIndex = -1;
-  iVar1 = 0;
-  param_1->index = index;
-  param_1->menuItems = menuItems;
-  param_1->menuTextColorArray = colorArray;
-  if (colorArray == NULL) {
-    param_1->menuTextColorArray = gDefaultMenuTextColors;
-  }
-  param_1->unkC = param_4;
-  textPtr = menuItems->text;
-  if(textPtr)
-  {
-      while (textPtr != 0) {
-        if ((0 <= menuAction) && (menuAction == menuItems->menuAction)) {
-          menuIndex = counter;
+    const u8 *textPtr;
+    s32 counter;
+    s32 menuIndex;
+    s32 iVar1;
+
+    counter = 0;
+    menuIndex = -1;
+    iVar1 = 0;
+    param_1->index = index;
+    param_1->menuItems = menuItems;
+    param_1->menuTextColorArray = colorArray;
+
+    if (colorArray == NULL)
+        param_1->menuTextColorArray = gDefaultMenuTextColors;
+
+    param_1->unkC = param_4;
+    textPtr = menuItems->text;
+
+    if (textPtr) {
+        while (textPtr != 0) {
+            if (menuAction >= 0 && menuAction == menuItems->menuAction)
+                menuIndex = counter;
+
+            if (*menuItems->text == '*')
+                iVar1 = counter;
+
+            menuItems++;
+            counter++;
+            textPtr = menuItems->text;
         }
-        if (*menuItems->text == '*') {
-          iVar1 = counter;
-        }
-        menuItems++;
-        counter++;
-        textPtr = menuItems->text;
-      }
-  }
-  if (menuIndex < 0) {
-    menuIndex = iVar1;
-  }
-  sub_8013134(&param_1->input,counter,index);
-  param_1->input.menuIndex = menuIndex;
-  sub_80137B0(&param_1->input,0);
-  param_1->unk4C = TRUE;
-  param_1->unk4D = TRUE;
-  param_1->unk4E = TRUE;
-  param_1->menuAction = -1;
+    }
+
+    if (menuIndex < 0)
+        menuIndex = iVar1;
+
+    sub_8013134(&param_1->input, counter, index);
+    param_1->input.menuIndex = menuIndex;
+    sub_80137B0(&param_1->input, 0);
+
+    param_1->unk4C = TRUE;
+    param_1->unk4D = TRUE;
+    param_1->unk4E = TRUE;
+    param_1->menuAction = -1;
 }
 
-void sub_8012E04(struct MenuStruct *param_1,const struct MenuItem *menuItems,u32 *colorArray,u16 *param_4,s32 menuAction,
-                s32 index)
+void sub_8012E04(struct MenuStruct *param_1, const struct MenuItem *menuItems, u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
 {
-  const u8 *textPtr;
-  s32 counter;
-  const struct MenuItem *menuItemPtr;
-  s32 iVar1;
-  s32 menuIndex;
-  
-  counter = 0;
-  menuIndex = -1;
-  iVar1 = 0;
-  textPtr = menuItems->text;
-  if (textPtr) {
-    menuItemPtr = menuItems;
-    while (textPtr != NULL) {
-      if ((0 <= menuAction) && (menuAction == menuItemPtr->menuAction)) {
-        menuIndex = counter;
-      }
-      if (*menuItemPtr->text == '*') {
-        iVar1 = counter;
-      }
-      menuItemPtr++;
-      counter++;
-      textPtr = menuItemPtr->text;
+    const u8 *textPtr;
+    s32 counter;
+    const struct MenuItem *menuItemPtr;
+    s32 iVar1;
+    s32 menuIndex;
+
+    counter = 0;
+    menuIndex = -1;
+    iVar1 = 0;
+    textPtr = menuItems->text;
+
+    if (textPtr) {
+        menuItemPtr = menuItems;
+        while (textPtr != NULL) {
+            if (menuAction >= 0 && menuAction == menuItemPtr->menuAction)
+                menuIndex = counter;
+
+            if (*menuItemPtr->text == '*')
+                iVar1 = counter;
+
+            menuItemPtr++;
+            counter++;
+            textPtr = menuItemPtr->text;
+        }
     }
-  }
-    
-  if (menuIndex < 0) {
-    menuIndex = iVar1;
-  }
-  sub_8013134(&param_1->input,counter,index);
-  param_1->input.menuIndex = menuIndex;
-  sub_80137B0(&param_1->input,0);
-  param_1->index = index;
-  param_1->menuTextColorArray = colorArray;
-  if (colorArray == NULL) {
-    param_1->menuTextColorArray = gDefaultMenuTextColors;
-  }
-  param_1->unkC = param_4;
-  param_1->menuItems = menuItems;
-  param_1->unk4E = FALSE;
-  param_1->unk4C = TRUE;
-  param_1->unk4D = TRUE;
-  param_1->menuAction = -1;
+
+    if (menuIndex < 0)
+        menuIndex = iVar1;
+
+    sub_8013134(&param_1->input, counter, index);
+    param_1->input.menuIndex = menuIndex;
+    sub_80137B0(&param_1->input, 0);
+
+    param_1->index = index;
+    param_1->menuTextColorArray = colorArray;
+    if (colorArray == NULL)
+        param_1->menuTextColorArray = gDefaultMenuTextColors;
+
+    param_1->unkC = param_4;
+    param_1->menuItems = menuItems;
+    param_1->unk4E = FALSE;
+    param_1->unk4C = TRUE;
+    param_1->unk4D = TRUE;
+    param_1->menuAction = -1;
 }
 
 void sub_8012EA4(struct MenuStruct *param_1, bool8 r1)
@@ -385,173 +380,169 @@ void sub_8012EA4(struct MenuStruct *param_1, bool8 r1)
 
 void sub_8012EBC(struct MenuStruct *param_1)
 {
-  s32 x;
-  s32 y;
-  u32 color;
-  const u8 *textPtr;
-  const struct MenuItem *menuItemsPtr;
-  u16 *_puVar2;
-  const u32 *colorArray;
-  s32 counter;
-  s32 index;
-  struct UnkTextStruct2 textStack[4];
-  u8 buffer [256];
-  struct UnkTextStruct1 *ptr_text;
-  struct UnkTextStruct2 *ptr_text2;
-  
-  if (param_1->unk4D) {
-    sub_80073B8(param_1->index);
-    index = param_1->index;
-    ptr_text = &gUnknown_2027370[index];
-    if ((ptr_text->unkC) == 6) {
-      ptr_text2 = &textStack[index];
-      sub_8006518(textStack);
-      x = sub_8008ED0(param_1->unk0);
-      xxx_format_and_draw((((ptr_text2->unk14[2]) * 8 - x) /2) + 8,
-          0,param_1->unk0, param_1->index, 0);
-    }
-    colorArray = param_1->menuTextColorArray;
-    menuItemsPtr = param_1->menuItems;
-    _puVar2 = param_1->unkC;
-    counter = 0;
-    if (menuItemsPtr->text != NULL) {
-      do {
-        textPtr = menuItemsPtr->text;
-        if (*textPtr == '*') {
-          textPtr++;
+    s32 x;
+    s32 y;
+    u32 color;
+    const u8 *textPtr;
+    const struct MenuItem *menuItemsPtr;
+    u16 *_puVar2;
+    const u32 *colorArray;
+    s32 counter;
+    s32 index;
+    struct UnkTextStruct2 textStack[4];
+    u8 buffer[256];
+    struct UnkTextStruct1 *ptr_text;
+    struct UnkTextStruct2 *ptr_text2;
+
+    if (param_1->unk4D) {
+        sub_80073B8(param_1->index);
+        index = param_1->index;
+        ptr_text = &gUnknown_2027370[index];
+
+        if (ptr_text->unkC == 6) {
+            ptr_text2 = &textStack[index];
+            sub_8006518(textStack);
+            x = sub_8008ED0(param_1->unk0);
+            xxx_format_and_draw(((ptr_text2->unk14[2] * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
         }
-        if (_puVar2 != NULL) {
-            color = colorArray[*_puVar2];
-            _puVar2++;
+
+        colorArray = param_1->menuTextColorArray;
+        menuItemsPtr = param_1->menuItems;
+        _puVar2 = param_1->unkC;
+        counter = 0;
+
+        if (menuItemsPtr->text != NULL) {
+            do {
+                textPtr = menuItemsPtr->text;
+                if (*textPtr == '*')
+                    textPtr++;
+
+                if (_puVar2 != NULL) {
+                    color = colorArray[*_puVar2];
+                    _puVar2++;
+                }
+                else if (menuItemsPtr->menuAction < 0)
+                    color = colorArray[1]; // Color the action red
+                else
+                    color = colorArray[0]; // Use the default white
+
+                sprintfStatic(buffer,gUnknown_80D4828, color, textPtr);
+                y = sub_8013800(&param_1->input, counter);
+                xxx_format_and_draw(8, y, buffer, param_1->index, 0);
+                menuItemsPtr++;
+                counter++;
+            } while (menuItemsPtr->text != NULL);
         }
-        else if (menuItemsPtr->menuAction < 0) {
-            // Color the action red
-            color = colorArray[1];
-        }
-        else {
-            // Use the default white
-            color = colorArray[0];
-        }
-        sprintfStatic(buffer,gUnknown_80D4828,color,textPtr);
-        y = sub_8013800(&param_1->input,counter);
-        xxx_format_and_draw(8,y,buffer,param_1->index,0);
-        menuItemsPtr++;
-        counter++;
-      } while (menuItemsPtr->text != NULL);
+    
+        sub_80073E0(param_1->index);
+        param_1->unk4D = FALSE;
     }
-    sub_80073E0(param_1->index);
-    param_1->unk4D = FALSE;
-  }
-  if (param_1->unk4E) {
-    if (param_1->unk4C) {
-      AddMenuCursorSprite(&param_1->input);
+
+    if (param_1->unk4E) {
+        if (param_1->unk4C)
+            AddMenuCursorSprite(&param_1->input);
+        else
+            sub_8013660(&param_1->input);
     }
-    else {
-      sub_8013660(&param_1->input);
-    }
-  }
 }
 
 bool8 sub_8012FD8(struct MenuStruct *param_1)
 {
-  u32 prevMenuIndex;
-  s32 index;
-  const struct MenuItem *item;
-  
-  prevMenuIndex = param_1->input.menuIndex;
-  if (param_1->unk4C) {
-    switch(GetKeyPress(&param_1->input))
-    {
-        case INPUT_DPAD_DOWN:
-            MoveMenuCursorDown(&param_1->input);
-            if (prevMenuIndex != param_1->input.menuIndex) {
-                PlayMenuSoundEffect(3);
-            }
-            break;
-        case INPUT_DPAD_UP:
-            MoveMenuCursorUp(&param_1->input);
-            if (prevMenuIndex != param_1->input.menuIndex) {
-                PlayMenuSoundEffect(3);
-            }
-            break;
-        case INPUT_A_BUTTON:
-            index = sub_80137A8(&param_1->input);
-            item = &param_1->menuItems[index];
-            if ((-1 < item->menuAction) &&
-               ((param_1->unkC == NULL || (param_1->unkC[index] != 1)))) {
-              param_1->menuAction = item->menuAction;
-              ++param_1; --param_1;
-              param_1->unk4C = FALSE;
-              param_1->input.unk24 = 0;
-            }
-            else
-            {
-                PlayMenuSoundEffect(2);
+    u32 prevMenuIndex;
+    s32 index;
+    const struct MenuItem *item;
+
+    prevMenuIndex = param_1->input.menuIndex;
+
+    if (param_1->unk4C) {
+        switch (GetKeyPress(&param_1->input)) {
+            case INPUT_DPAD_DOWN:
+                MoveMenuCursorDown(&param_1->input);
+                if (prevMenuIndex != param_1->input.menuIndex)
+                    PlayMenuSoundEffect(3);
                 break;
-            }
-            if ((param_1->unkC != NULL) && (param_1->unkC[index] == 2)) {
-                PlayMenuSoundEffect(2);
-            }
-            else
-                PlayMenuSoundEffect(0);
-            break;
-        case INPUT_B_BUTTON:
-            if (-1 < param_1->menuItems[param_1->input.unk1A].menuAction) {
-                param_1->menuAction = param_1->menuItems[param_1->input.unk1A].menuAction;
-                param_1->unk4C = FALSE;
-                PlayMenuSoundEffect(1);
-            }
-            break;
+            case INPUT_DPAD_UP:
+                MoveMenuCursorUp(&param_1->input);
+                if (prevMenuIndex != param_1->input.menuIndex)
+                    PlayMenuSoundEffect(3);
+                break;
+            case INPUT_A_BUTTON:
+                index = sub_80137A8(&param_1->input);
+                item = &param_1->menuItems[index];
+
+                if (item->menuAction > -1 && (param_1->unkC == NULL || param_1->unkC[index] != 1)) {
+                    param_1->menuAction = item->menuAction;
+                    ++param_1; --param_1;
+                    param_1->unk4C = FALSE;
+                    param_1->input.unk24 = 0;
+                }
+                else {
+                    PlayMenuSoundEffect(2);
+                    break;
+                }
+
+                if (param_1->unkC != NULL && param_1->unkC[index] == 2)
+                    PlayMenuSoundEffect(2);
+                else
+                    PlayMenuSoundEffect(0);
+                break;
+            case INPUT_B_BUTTON:
+                if (param_1->menuItems[param_1->input.unk1A].menuAction > -1) {
+                    param_1->menuAction = param_1->menuItems[param_1->input.unk1A].menuAction;
+                    param_1->unk4C = FALSE;
+                    PlayMenuSoundEffect(1);
+                }
+                break;
+        }
     }
-  }
-  sub_8012EBC(param_1);
-  return param_1->unk4C;
+
+    sub_8012EBC(param_1);
+    return param_1->unk4C;
 }
 
 bool8 sub_80130A8(struct MenuStruct *param_1)
 {
-  s32 index;
-  s32 menuAction;
-  const struct MenuItem *menuItem;
-  
-  if (param_1->unk4C) {
+    s32 index;
+    const struct MenuItem *menuItem;
 
-    switch(GetKeyPress(&param_1->input))
-    {
-        case INPUT_A_BUTTON:
-            index = sub_80137A8(&param_1->input);
-            menuItem = &param_1->menuItems[index];
-            param_1->menuAction = menuItem->menuAction;
-            param_1->unk4C = FALSE;
-            param_1->input.unk24 = 0;
-            PlayMenuSoundEffect(0);
-            break;
-        case INPUT_B_BUTTON:
-            if(menuAction = param_1->menuItems[param_1->input.unk1A].menuAction, -1 < menuAction) {
-              param_1->menuAction = menuAction;
-              param_1->unk4C = FALSE;
-              PlayMenuSoundEffect(0);
-            }
-            break;
+    if (param_1->unk4C) {
+        switch (GetKeyPress(&param_1->input))
+        {
+            case INPUT_A_BUTTON:
+                index = sub_80137A8(&param_1->input);
+                menuItem = &param_1->menuItems[index];
+                param_1->menuAction = menuItem->menuAction;
+                param_1->unk4C = FALSE;
+                param_1->input.unk24 = 0;
+                PlayMenuSoundEffect(0);
+                break;
+            case INPUT_B_BUTTON:
+                if (param_1->menuItems[param_1->input.unk1A].menuAction > -1) {
+                    param_1->menuAction = param_1->menuItems[param_1->input.unk1A].menuAction;
+                    param_1->unk4C = FALSE;
+                    PlayMenuSoundEffect(0);
+                }
+                break;
+        }
     }
-  }
-  sub_8012EBC(param_1);
-  return param_1->unk4C;
+
+    sub_8012EBC(param_1);
+    return param_1->unk4C;
 }
 
 bool8 sub_8013114(struct MenuStruct *param_1, s32 *menuAction)
 {
-    if(param_1->unk4C){
+    if (param_1->unk4C)
         return TRUE;
-    }
-    if (menuAction != NULL){
+
+    if (menuAction != NULL)
         *menuAction = param_1->menuAction;
-    }
+
     return FALSE;
 }
 
-void sub_8013134(struct MenuInputStruct *param_1, u32 menuItemCounter, u32 index) {
-
+static void sub_8013134(struct MenuInputStruct *param_1, u32 menuItemCounter, u32 index)
+{
     struct UnkTextStruct1 *temp;
 
     temp = &gUnknown_2027370[index];
@@ -563,15 +554,10 @@ void sub_8013134(struct MenuInputStruct *param_1, u32 menuItemCounter, u32 index
     param_1->unk1E = 0;
     param_1->unk4 = 0;
 
-    if(temp->unkC == 6)
-    {
-        param_1->unk6 = 0x10;
-    }
+    if (temp->unkC == 6)
+        param_1->unk6 = 16;
     else
-    {
-        param_1->unk6 = 0x2;
-    }
-
+        param_1->unk6 = 2;
 
     param_1->unkC = 0;
     param_1->unkE = 0;
@@ -681,7 +667,7 @@ void nullsub_34(struct MenuInputStructSub *a0)
 }
 
 // Maybe struct Position
-void sub_801332C(s16 *a0)
+static void sub_801332C(s16 *a0)
 {
     struct SpriteOAM sp = {};
     struct SpriteOAM* ptr;
@@ -747,7 +733,7 @@ void sub_801332C(s16 *a0)
     AddSprite(&sp, 0xFF, NULL, NULL);
 }
 
-void sub_8013470(struct MenuInputStruct *a0)
+static void sub_8013470(struct MenuInputStruct *a0)
 {
     struct SpriteOAM sp = {};
     register struct SpriteOAM* ptr asm("r3");
@@ -873,8 +859,7 @@ void sub_8013470(struct MenuInputStruct *a0)
 
 void sub_8013660(struct MenuInputStruct *param_1)
 {
-    if (0 < param_1->unk1A) 
-    {
+    if (0 < param_1->unk1A) {
         UpdateMenuCursorSpriteCoords(param_1);
         sub_801332C(&param_1->unk8);
     }
@@ -894,33 +879,31 @@ void UpdateMenuCursorSpriteCoords(struct MenuInputStruct *param_1)
 void MoveMenuCursorDown(struct MenuInputStruct *param_1)
 { 
     param_1->unk24 = 0;
-    if (param_1->unk1A < 1) {
+
+    if (param_1->unk1A < 1)
         param_1->menuIndex = 0;
-    }
     else {
         param_1->menuIndex++;
-        if (param_1->menuIndex >= param_1->unk1A) {
+
+        if (param_1->menuIndex >= param_1->unk1A)
             param_1->menuIndex = 0;
-        }
     }
 }
 
 void sub_80136E0(struct MenuInputStruct *param_1, u8 param_2)
 { 
     param_1->unk24 = 0;
-    if (param_1->unk1A < 1) {
+
+    if (param_1->unk1A < 1)
         param_1->menuIndex = 0;
-    }
     else {
         param_1->menuIndex++;
+
         if (param_1->menuIndex >= param_1->unk1A) {
-            if (param_2 != 0) {
-                param_1->menuIndex = 0;    
-            }
+            if (param_2 != 0)
+                param_1->menuIndex = 0;
             else
-            {
                 param_1->menuIndex = param_1->unk1A - 1;
-            }
         }
     }
 }
@@ -928,47 +911,44 @@ void sub_80136E0(struct MenuInputStruct *param_1, u8 param_2)
 void MoveMenuCursorUp(struct MenuInputStruct *param_1)
 { 
     param_1->unk24 = 0;
-    if (param_1->unk1A < 1) {
+
+    if (param_1->unk1A < 1)
         param_1->menuIndex = 0;
-    }
     else {
         param_1->menuIndex--;
-        if (param_1->menuIndex < 0) {
-            param_1->menuIndex = param_1->unk1A + -1;
-        }
+
+        if (param_1->menuIndex < 0)
+            param_1->menuIndex = param_1->unk1A - 1;
     }
 }
 
 void sub_8013744(struct MenuInputStruct *param_1, u8 param_2)
 { 
     param_1->unk24 = 0;
-    if (param_1->unk1A < 1) {
+
+    if (param_1->unk1A < 1)
         param_1->menuIndex = 0;
-    }
     else {
         param_1->menuIndex--;
+
         if (param_1->menuIndex < 0) {
-            if (param_2 != 0) {
-                param_1->menuIndex = param_1->unk1A + -1;
-            }
-            else {
+            if (param_2 != 0)
+                param_1->menuIndex = param_1->unk1A - 1;
+            else
                 param_1->menuIndex = 0;
-            }
         }
     }
 }
 
 void sub_8013780(struct MenuInputStruct *param_1, s32 param_2)
 {
-    if (param_2 < 0) {
+    if (param_2 < 0)
         param_1->menuIndex = 0;
-    }
-    else if (param_2 >= param_1->unk1A) {
+    else if (param_2 >= param_1->unk1A)
         param_1->menuIndex = param_1->unk1A - 1;
-    }
-    else {
+    else
         param_1->menuIndex = param_2;
-    }
+
     param_1->unk24 = 0;
 }
 
@@ -986,22 +966,18 @@ void sub_80137B0(struct MenuInputStruct *param_1, s32 param_2)
     s32 iVar2;
 #endif
 
-    if (param_2 >= 1) {
+    if (param_2 >= 1)
         iVar2 = param_2 << 8;
-    }
-    else
-    {
+    else {
         if (gUnknown_2027370[param_1->unk0].unkC == 6)
-        {
-            iVar1 = 0x10;
-        }
+            iVar1 = 16;
         else
-        {
             iVar1 = 0;
-        }
-        iVar2 = (gUnknown_2027370[param_1->unk0].unk6 * 8 - iVar1);
+
+        iVar2 = gUnknown_2027370[param_1->unk0].unk6 * 8 - iVar1;
         iVar2 <<= 8;
     }
+
     param_1->unk10 = iVar2 / param_1->unk1C;
 }
 
@@ -1017,10 +993,10 @@ s32 sub_8013800(struct MenuInputStruct *param_1, s32 param_2)
 
     iVar2 = param_1->unk6;
     iVar1 = param_2 * param_1->unk10;
-    if (iVar1 < 0) {
+    if (iVar1 < 0)
         iVar1 = iVar1 + 0xff;
-    }
-    return (iVar2 + (iVar1 >> 8));
+
+    return iVar2 + (iVar1 >> 8);
 }
 
 void sub_8013818(struct MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4)
@@ -1032,9 +1008,10 @@ void sub_8013818(struct MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 
     param_1->unk24 = 0;
     param_1->menuIndex = 0;
     param_1->unk1E = 0;
+
     sub_801317C(&param_1->unk28);
     sub_8013984(param_1);
-    sub_80137F8(param_1,0xC);
+    sub_80137F8(param_1, 12);
 }
 
 
@@ -1047,19 +1024,19 @@ void sub_8013848(struct MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 
     param_1->unk24 = 0;
     param_1->menuIndex = 0;
     param_1->unk1E = 0;
+
     sub_801317C(&param_1->unk28);
     sub_8013984(param_1);
-    sub_80137F8(param_1,0x18);
+    sub_80137F8(param_1, 24);
 }
 
 void sub_8013878(struct MenuInputStruct *param_1, s32 param_2)
 {
-    if (param_2 < 0) {
+    if (param_2 < 0)
         param_2 = 0;
-    }
-    else if (param_2 >= param_1->unk22) {
-        param_2 = param_1->unk22 + -1;
-    }
+    else if (param_2 >= param_1->unk22)
+        param_2 = param_1->unk22 - 1;
+
     param_1->unk1E = param_2 / param_1->unk1C;
     param_1->menuIndex = param_2 % param_1->unk1C;
     param_1->unk24 = 0;
@@ -1074,18 +1051,17 @@ bool8 sub_80138B8(struct MenuInputStruct *param_1, bool8 param_2)
     sVar1 = param_1->unk1E;
     oldIndex = param_1->menuIndex;
     AddMenuCursorSprite(param_1);
-    if(param_2)
-    {
-        switch(GetKeyPress(param_1))
-        {
+
+    if (param_2) {
+        switch (GetKeyPress(param_1)) {
             case INPUT_DPAD_UP:
                 MoveMenuCursorUp(param_1);
-                if(oldIndex != param_1->menuIndex)
+                if (oldIndex != param_1->menuIndex)
                     PlayMenuSoundEffect(3);
                 break;
             case INPUT_DPAD_DOWN:
                 MoveMenuCursorDown(param_1);
-                if(oldIndex != param_1->menuIndex)
+                if (oldIndex != param_1->menuIndex)
                     PlayMenuSoundEffect(3);
                 break;
             case INPUT_DPAD_LEFT:
@@ -1096,14 +1072,12 @@ bool8 sub_80138B8(struct MenuInputStruct *param_1, bool8 param_2)
                 break;
         }
     }
+
     if (sVar1 != param_1->unk1E) {
         PlayMenuSoundEffect(4);
         return TRUE;
     }
-    else
-    {
-        return FALSE;
-    }
+    return FALSE;
 }
 
 bool8 sub_8013938(struct MenuInputStruct *param_1)
@@ -1114,8 +1088,8 @@ bool8 sub_8013938(struct MenuInputStruct *param_1)
     param_1->unk1A = 0;
     param_1->unk14 = 0;
     AddMenuCursorSprite(param_1);
-    switch(GetKeyPress(param_1))
-    {
+
+    switch (GetKeyPress(param_1)) {
         case INPUT_DPAD_LEFT:
             sub_8013A7C(param_1);
             break;
@@ -1123,17 +1097,15 @@ bool8 sub_8013938(struct MenuInputStruct *param_1)
             sub_8013A54(param_1);
             break;
     }
+
     if (sVar1 != param_1->unk1E) {
         PlayMenuSoundEffect(4);
         return TRUE;
     }
-    else
-    {
-        return FALSE;
-    }
+    return FALSE;
 }
 
-void sub_8013984(struct MenuInputStruct * param_1)
+void sub_8013984(struct MenuInputStruct *param_1)
 {
     s32 iVar2;
     s32 iVar4;
@@ -1141,64 +1113,57 @@ void sub_8013984(struct MenuInputStruct * param_1)
 
     iVar4 = param_1->unk0;
     ptr = &gUnknown_2027370[iVar4];
-    if (param_1->unk1C == 0) {
+
+    if (param_1->unk1C == 0)
         param_1->unk1C++;
-    }
+
     param_1->unk20 = param_1->unk22 / param_1->unk1C;
-    iVar2 = (param_1->unk22 % param_1->unk1C);
-    if (iVar2 != 0) {
+    iVar2 = param_1->unk22 % param_1->unk1C;
+    if (iVar2 != 0)
         param_1->unk20++;
-    }
-    if (param_1->unk1E > param_1->unk20 - 1) {
+
+    if (param_1->unk1E > param_1->unk20 - 1)
         param_1->unk1E = param_1->unk20 - 1;
-    }
-    if ((param_1->unk1E != param_1->unk20 - 1) || (param_1->unk22 % param_1->unk1C == 0)) 
-    {
+
+    if (param_1->unk1E != param_1->unk20 - 1 || param_1->unk22 % param_1->unk1C == 0)
         param_1->unk1A = param_1->unk1C;
-    }
     else
-    {
         param_1->unk1A = param_1->unk22 % param_1->unk1C;
-    }
-    if (param_1->menuIndex > param_1->unk1A - 1) {
+
+    if (param_1->menuIndex > param_1->unk1A - 1)
         param_1->menuIndex = param_1->unk1A - 1;
-    }
+
     param_1->unk4 = 0;
-    if (ptr->unkC == 6) {
-        param_1->unk6 = 0x10;
-    }
-    else {
+
+    if (ptr->unkC == 6)
+        param_1->unk6 = 16;
+    else
         param_1->unk6 = 0;
-    }
-    if (param_1->unk20 < 2) {
+
+    if (param_1->unk20 < 2)
         param_1->unkC = 0;
-    }
-    else {
-        param_1->unkC = (ptr->unk0 + ptr->unk4 + -2) * 8;
-    }
-    param_1->unkE = ((ptr->unk2) + 1) * 8 + -2;
+    else
+        param_1->unkC = (ptr->unk0 + ptr->unk4 - 2) * 8;
+
+    param_1->unkE = (ptr->unk2 + 1) * 8 - 2;
 }
 
 void sub_8013A54(struct MenuInputStruct *param_1)
 {
-  if (param_1->unk1E < param_1->unk20 - 1) {
-    param_1->unk1E++;
-  }
-  else
-  {
-    param_1->unk1E = 0;
-  }
-  sub_8013984(param_1);
+    if (param_1->unk1E < param_1->unk20 - 1)
+        param_1->unk1E++;
+    else
+        param_1->unk1E = 0;
+
+    sub_8013984(param_1);
 }
 
 void sub_8013A7C(struct MenuInputStruct *param_1)
 {
-  if (param_1->unk1E < 1) {
-    param_1->unk1E = param_1->unk20 - 1;
-  }
-  else
-  {
-    param_1->unk1E--;
-  }
-  sub_8013984(param_1);
+    if (param_1->unk1E < 1)
+        param_1->unk1E = param_1->unk20 - 1;
+    else
+        param_1->unk1E--;
+
+    sub_8013984(param_1);
 }

@@ -11,5 +11,6 @@ u8 sub_8092354(u8 index);
 u8 sub_8092364(u8 index);
 void CopyAbilityNametoBuffer(char *buffer, u8 index);
 u8 *GetAbilityDescription(u8 index);
+u32 ReturnIntFromChar2(u8);
 
 #endif

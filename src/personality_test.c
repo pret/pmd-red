@@ -14,6 +14,7 @@
 #include "menu_input.h"
 #include "code_80130A8.h"
 #include "code_8012A18_1.h"
+#include "code_80118A4.h"
 
 enum
 {
@@ -49,8 +50,6 @@ extern void sub_800836C(u32, u8 *r0, u32);
 extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);
 
 extern void RedrawPartnerSelectionMenu(void);
-
-extern void PlayMenuSoundEffect(u32);
 
 extern u32 sub_80095E4(s16, u32);
 

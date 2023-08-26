@@ -7,6 +7,7 @@
 #include "text1.h"
 #include "text2.h"
 #include "code_80130A8.h"
+#include "code_80118A4.h"
 
 struct unkStruct_203B2FC
 {
@@ -104,7 +105,6 @@ const struct UnkTextStruct2 gUnknown_80E0264 =
 static const u8 wonder_mail_802DF88_fill1[] = "pksdir0";
 
 extern void CreateRescueDescription(struct unkStruct_802C39C *);
-extern void PlayMenuSoundEffect(u32);
 extern void sub_802DC28(u32);
 extern void sub_802F2C0(void);
 extern void sub_802DC28(u32);

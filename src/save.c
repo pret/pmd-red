@@ -10,6 +10,7 @@
 #include "exclusive_pokemon.h"
 #include "game_options.h"
 #include "code_80130A8.h"
+#include "code_80118A4.h"
 
 EWRAM_DATA_2 u32 gUnknown_203B17C = {0};
 EWRAM_DATA_2 char *gUnknown_203B180 = {0};
@@ -141,7 +142,6 @@ ALIGNED(4) static const char fill_save7[] = _("pksdir0");
 extern bool8 sub_800DAB0(u16, u8*, s32);
 extern bool8 sub_800DAB4(u16, u8*, s32);
 extern bool8 sub_800DAB8(void);
-extern void sub_8011830(void);
 extern void sub_80140DC();
 extern void sub_8014114();
 extern u32 SaveRecruitedPokemon(u8 *, u32);
@@ -167,9 +167,6 @@ extern u32 *GetDungeonLocationInfo(void);
 extern void sub_80974E8(void);
 extern void ResetNumAdventures(void);
 extern void sub_80993D8(void);
-
-extern void xxx_call_start_bg_music(void);
-
 
 u32 sub_8011C1C(void)
 {

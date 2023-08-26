@@ -1,9 +1,10 @@
 #include "global.h"
+#include "code_80118A4.h"
 #include "memory.h"
+#include "menu_input.h"
 #include "text1.h"
 #include "text2.h"
 #include "input.h"
-#include "menu_input.h"
 
 #define MAX_HINTS 5
 
@@ -44,7 +45,6 @@ extern struct Hints gGameHints[MAX_HINTS];
 extern u8 gUnknown_80DC0D4[MAX_HINTS];
 
 extern void sub_801E714(void);
-extern void PlayMenuSoundEffect(u32);
 extern void sub_801E714(void);
 extern void sub_801E76C(void);
 extern void DisplayChosenHint(void);

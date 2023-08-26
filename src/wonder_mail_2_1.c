@@ -9,6 +9,7 @@
 #include "code_802C39C.h"
 #include "menu_input.h"
 #include "wonder_mail_2_1.h"
+#include "code_80118A4.h"
 
 extern struct unkStruct_203B2F0 *gUnknown_203B2F0;
 extern struct unkStruct_203B2E8* gUnknown_203B2E8;
@@ -103,7 +104,6 @@ extern void CreateRescueTitle(struct unkStruct_802C39C *);
 
 extern void sub_802C6DC(void);
 extern void DrawJobListMenu(void);
-extern void PlayMenuSoundEffect(u32);
 extern bool8 IsPelipperBoardSlotEmpty(u8);
 extern void SetJobListState(u32);
 extern void sub_802CC00(void);

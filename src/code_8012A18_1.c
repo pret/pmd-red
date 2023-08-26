@@ -48,9 +48,6 @@ enum
     MENU_ACTION_NO,
 };
 
-extern u32 ReturnIntFromChar2(u8);
-
-
 s32 sub_8015FEC(u8 *buffer, s32 size)
 {
   struct unkChar *iVar2;

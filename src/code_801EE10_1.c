@@ -8,6 +8,7 @@
 #include "text2.h"
 #include "text_util.h"
 #include "menu_input.h"
+#include "code_80118A4.h"
 
 struct unkStruct_203B2AC
 {
@@ -52,7 +53,6 @@ extern bool8 sub_80023E4(u32);
 extern void sub_808FF20(u32 *, struct PokemonStruct *, bool8);
 extern void CreatePokemonInfoTabScreen(u32, s16, u32 *, u32 *, u32);
 extern void sub_802452C(void);
-extern void PlayMenuSoundEffect(u32);
 bool8 ComparePokemonNames(s16 a1, s16 a2);
 
 void sub_8024588(void);

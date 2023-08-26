@@ -4,6 +4,7 @@
 #include "debug.h"
 #include "code_80A26CC.h"
 #include "event_flag.h"
+#include "code_80118A4.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA u32 gUnknown_20398AC = {0};
@@ -49,7 +50,6 @@ extern void sub_809CA20();
 extern void sub_80A6E80();
 extern void sub_8099BE4();
 extern void sub_8099744();
-extern void sub_8011860();
 extern void sub_800CB20();
 extern void nullsub_120();
 extern void sub_80A5E70();
@@ -78,7 +78,6 @@ extern void sub_80961B4();
 extern void ClearAllItems_8091FB4();
 extern const char *sub_80A2B18(s16);
 extern void ChooseKecleonShopInventory(u32);
-extern void FadeOutAllMusic(u16);
 extern u8 sub_809C730();
 extern s16 sub_80A2750(s16);
 

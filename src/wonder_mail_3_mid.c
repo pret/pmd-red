@@ -11,6 +11,7 @@
 #include "menu_input.h"
 #include "code_802C39C.h"
 #include "code_80130A8.h"
+#include "code_80118A4.h"
 
 struct unkStruct_803B344
 {
@@ -121,9 +122,7 @@ extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void sub_802F6FC(void);
 extern void ProceedToNextRewardSceneState(void);
-extern void PlayMenuSoundEffect(u32);
 extern void sub_802F300(void);
-extern void PlaySound(u32);
 extern s32 sub_808D544(u32);
 extern u32 sub_801B60C(u32, u8, u8);
 extern void sub_8092578(u8 *buffer, u8 index, u8 r2);

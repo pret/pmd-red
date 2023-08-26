@@ -13,6 +13,7 @@
 #include "code_801EE10_1.h"
 #include "code_8012A18_1.h"
 #include "code_801B3C0.h"
+#include "code_80118A4.h"
 
 // there might be more overlap with unkStruct_203B2BC
 // I was working on the moves and put the data that seemed to correspond to that
@@ -119,7 +120,6 @@ extern s16 sub_80A5728(void);
 extern u8 sub_8002658(s16);
 extern bool8 sub_8024108(u32);
 extern void sub_801F1B0(u32, u32);
-extern void PlaySound(u32);
 extern void sub_8024458(s16, u32);
 extern void sub_801BEEC(s16);
 extern void nullsub_104(void);

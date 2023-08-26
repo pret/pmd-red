@@ -9,13 +9,13 @@
 #include "pokemon_mail.h"
 #include "wonder_mail.h"
 #include "code_802C39C.h"
-#include "menu_input.h" 
+#include "menu_input.h"
+#include "code_80118A4.h"
 
 bool8 IsMailSlotEmpty(u8);
 extern s32 CountPelipperBoardSlots(void);
 extern void sub_802C328(void);
 extern void DrawPelipperBoardJobMenu(void);
-extern void PlayMenuSoundEffect(u32);
 extern u8 HasNoPelipperBoardJobs(void);
 
 extern struct WonderMail *GetPelipperBoardSlotInfo(u32);

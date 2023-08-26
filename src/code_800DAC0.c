@@ -1,5 +1,6 @@
 #include "global.h"
 #include "code_800DAC0.h"
+#include "code_80118A4.h"
 #include "file_system.h"
 #include "memory.h"
 
@@ -50,7 +51,6 @@ extern void sub_803EAF0(u32, u32);
 extern void sub_800CD64(u32, u32);
 extern struct unkStruct_800F18C *sub_800F18C(s32);
 extern void sub_800DCA8(struct unkStruct_203B0CC_sub *);
-extern void PlaySound(u16);
 
 extern u8 gefob000_string[];
 extern u8 gefob001_string[];

@@ -11,6 +11,7 @@
 #include "code_80130A8.h"
 #include "code_801EE10_1.h"
 #include "code_801B3C0.h"
+#include "code_80118A4.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 extern struct TeamInventory *gTeamInventoryRef;
@@ -19,7 +20,6 @@ extern u32 sub_801EF38(u8 r0);
 extern void sub_801F214();
 
 extern void SetFriendAreaActionMenuState(u32);
-extern void PlaySound(u32);
 extern void nullsub_104();
 extern void sub_8099690(u32);
 

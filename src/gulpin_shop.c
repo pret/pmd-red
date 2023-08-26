@@ -1,12 +1,13 @@
 #include "global.h"
+#include "code_80118A4.h"
 #include "code_80130A8.h"
+#include "gulpin_shop.h"
 #include "pokemon.h"
 #include "memory.h"
+#include "menu_input.h"
 #include "moves.h"
 #include "text1.h"
 #include "text2.h"
-#include "gulpin_shop.h"
-#include "menu_input.h"
 
 extern struct GulpinShopWork *gGulpinShopWork;
 extern const struct UnkTextStruct2 gUnknown_80DC11C;
@@ -38,7 +39,6 @@ extern void sub_801F280(u32);
 extern void sub_801F808(u16 *);
 extern u32 sub_801F890(void);
 extern void sub_801F8D0(void);
-extern void PlaySound(u32);
 void SetGulpinShopState(u32);
 
 u32 CreateGulpinShop(s32 isAsleep, s16 pokeSpecies, struct Move *moves)

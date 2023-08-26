@@ -11,6 +11,7 @@
 #include "sprite.h"
 #include "code_80130A8.h"
 #include "code_801EE10_mid.h"
+#include "code_80118A4.h"
 
 extern struct unkStruct_203B270 *gUnknown_203B270;
 
@@ -56,7 +57,6 @@ extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_80DC310[];
 extern u8 gUnknown_80DC2DC[];
 
-extern void PlayMenuSoundEffect(u32);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 extern void sub_801F918(s32);
 extern void sub_801FA58(void);

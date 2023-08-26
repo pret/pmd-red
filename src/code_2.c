@@ -20,8 +20,8 @@
 #include "cpu.h"
 #include "code_8094F88.h"
 #include "sprite.h"
+#include "code_80118A4.h"
 
-extern void sub_801180C(void);
 extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);
 extern void sub_8097670(void);
@@ -48,7 +48,6 @@ extern void xxx_draw_string_80144C4(void);
 extern void sub_8005838(u32, u32);
 extern void nullsub_8(u32);
 extern void sub_80060EC(void);
-extern void sub_8011860(void);
 extern void sub_800CB20(void);
 extern void TransferBGPaletteBuffer(void);
 extern void xxx_call_update_bg_vram(void);

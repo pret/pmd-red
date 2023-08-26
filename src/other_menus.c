@@ -12,6 +12,7 @@
 #include "pokemon.h"
 #include "code_8094F88.h"
 #include "sprite.h"
+#include "code_80118A4.h"
 
 struct unkStruct_203B35C
 {
@@ -444,7 +445,6 @@ extern u32 sub_8037C10(u32);
 extern void sub_8037748(void);
 extern void sub_80371B8(void);
 extern void sub_8037900(void);
-extern void PlayMenuSoundEffect(u32);
 extern u32 sub_8037798(void);
 extern void sub_8005838(u32, u32);
 extern void sub_80060EC();
@@ -456,11 +456,9 @@ extern void xxx_call_update_bg_sound_input();
 extern s32 sub_8037D64(u32 mode, void *, void *);
 extern s32 sub_80381F4(u32 mode, void *, void *);
 extern void sub_8037810(void);
-extern void sub_8011830(void);
 extern s32 sub_8037B28(u32);
 s32 sub_8035D3C(void);
 extern s32 sub_8035D74(void);
-extern void xxx_call_start_bg_music(void);
 extern void xxx_draw_string_80144C4(void);
 
 void sub_8036FDC(s32 param_1)

@@ -16,6 +16,7 @@
 #include "code_800D090.h"
 #include "menu_input.h"
 #include "code_8021774.h"
+#include "code_80118A4.h"
 
 struct unkStruct_203B258
 {
@@ -31,7 +32,6 @@ extern struct unkStruct_203B258 *gUnknown_203B258;
 extern struct UnkTextStruct2 gUnknown_80DBF88;
 extern struct UnkTextStruct2 gUnknown_80DBF70;
 
-extern void PlayMenuSoundEffect(u32);
 extern void sub_801DB54();
 extern void sub_801DBD4();
 

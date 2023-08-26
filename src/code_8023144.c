@@ -16,6 +16,7 @@
 #include "kecleon_bros.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
+#include "code_80118A4.h"
 
 struct unkStruct_3001B5C
 {
@@ -52,7 +53,6 @@ extern u8 sub_8023704(u8);
 extern void sub_8023420(void);
 extern void sub_80234BC(void);
 extern u32 sub_80236A4(void);
-extern void PlayMenuSoundEffect(u32);
 
 
 extern u8 gUnknown_80DC5EC[];

@@ -7,6 +7,7 @@
 #include "mailbox.h"
 #include "wonder_mail.h"
 #include "menu_input.h"
+#include "code_80118A4.h"
 
 EWRAM_DATA_2 struct unkStruct_203B304 *gUnknown_203B304 = {0};
 
@@ -105,8 +106,6 @@ extern void sub_8096D24(void);
 extern void ResetMailboxSlot(u8);
 extern void ReceivePKMNNews(u8);
 extern void sub_8096078(void);
-extern void PlayMenuSoundEffect(u32);
-extern void PlaySound(u32);
 extern void sub_802BEDC(void);
 extern u8 sub_802BE74(void);
 extern u8 HasNoAcceptedJobs(void);

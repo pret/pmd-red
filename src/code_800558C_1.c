@@ -28,8 +28,10 @@ void sub_8005770(s32 param_1, u8 *RGBArray, s32 a1, u8 *a2)
   }
 }
 
-void nullsub_7(void)
-{}
+// Maybe struct Position
+void nullsub_7(s16 *a0)
+{
+}
 
 void nullsub_8(void)
 {}

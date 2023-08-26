@@ -1,10 +1,10 @@
 #include "global.h"
 #include "code_800558C.h"
-#include "input.h"
+#include "code_80118A4.h"
 #include "game_options.h"
+#include "input.h"
 #include "sprite.h"
 
-extern void sub_8011860();
 extern void xxx_draw_string_80144C4();
 extern void nullsub_8(u8);
 extern void sub_800CB20();

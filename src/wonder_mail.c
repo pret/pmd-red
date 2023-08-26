@@ -15,6 +15,7 @@
 #include "main_menu.h"
 #include "code_801EE10_1.h"
 #include "cpu.h"
+#include "code_80118A4.h"
 
 extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 
@@ -61,10 +62,8 @@ extern s32 sub_8037D64(u32, void *, void *);
 extern s32 sub_80381F4(u32, void *, void *);
 extern void sub_80306A8(u32, u32, u32, u32);
 extern s32 sub_8037B28(u32);
-extern void sub_8011830(void);
 extern void sub_8031D70(u8, u32);
 extern void sub_80151C0(u32, u8 *);
-extern void xxx_call_start_bg_music(void);
 extern u32 sub_8023CE8(void);
 extern u32 sub_8030894(void);
 extern void sub_8030F58(u32);

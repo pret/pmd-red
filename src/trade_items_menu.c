@@ -13,6 +13,7 @@
 #include "text1.h"
 #include "text2.h"
 #include "cpu.h"
+#include "code_80118A4.h"
 
 EWRAM_DATA_2 struct TradeItemsMenu *gTradeItemsMenu = {0};
 
@@ -88,8 +89,6 @@ extern void sub_8035C1C();
 
 extern u32 sub_801D008();
 extern s32 sub_8037B28(u32);
-extern void sub_8011830(void);
-extern void xxx_call_start_bg_music(void);
 extern s32 sub_80381F4(u32, void *, void *);
 extern s32 sub_8037D64(u32, void *, void *);
 

@@ -1,6 +1,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include "global.h"
+#include "code_80118A4.h"
 #include "music.h"
 #include "constants/bg_music.h"
 #include "play_time.h"
@@ -10,13 +11,11 @@
 #include "game_options.h"
 #include "sprite.h"
 
-void xxx_call_stop_bgm(void);
-
 extern bool8 sub_80023E4(u8);
-extern void xxx_call_stop_fanfare_se(u16 r0);
 
 extern struct GameOptions *gGameOptionsRef;
 
+// size: 0x4DD8
 struct UnkBgStruct
 {
     u8 padding[0x4c4b];
@@ -24,8 +23,8 @@ struct UnkBgStruct
     u8 padding2[0x17A];
     u32 *unk4dcc;
     u32 unk4dd0;
-    s16 xoffset;
-    s16 yoffset;
+    /* 0x4DD4 */ s16 xoffset;
+    /* 0x4DD6 */ s16 yoffset;
 };
 extern struct UnkBgStruct *gUnknown_203B0E4;
 
@@ -43,7 +42,6 @@ extern void xxx_call_update_bg_vram(void);
 extern void sub_8009908(void);
 extern void xxx_call_update_bg_sound_input(void);
 extern void sub_80060EC(void);
-extern void sub_8011860(void);
 extern void sub_800CB20(void);
 extern void sub_8004AF0(u8, u32 *r1, u32, u32, u32 *r2, u32);
 extern u8 sub_80111C4();
@@ -77,15 +75,15 @@ void sub_801169C(void)
 
 void sub_8011760(void)
 {
-    if(sub_80023E4(0xD))
+    if (sub_80023E4(13))
         StartNewBGM(MUS_WORLD_CALAMITY);
-    else if(sub_80023E4(0xC))
+    else if (sub_80023E4(12))
         StartNewBGM(MUS_POKEMON_SQUARE);
 }
 
 void sub_801178C(void)
 {
-    if(sub_80023E4(0xD))
+    if (sub_80023E4(13))
         StartNewBGM(MUS_WORLD_CALAMITY);
     else
         StartNewBGM(MUS_POKEMON_SQUARE);
@@ -93,13 +91,13 @@ void sub_801178C(void)
 
 void sub_80117AC(void)
 {
-    if(!sub_80023E4(0xD))
-        FadeOutBGM(0x1E);
+    if (!sub_80023E4(13))
+        FadeOutBGM(30);
 }
 
 void sub_80117C4(void)
 {
-    FadeOutBGM(0x1E);
+    FadeOutBGM(30);
 }
 
 // Some sound effect
@@ -143,18 +141,14 @@ void xxx_call_start_bg_music(void)
 
 void sub_8011860(void)
 {
-    if(gUnknown_202DE20 > 0)
-    {
+    if (gUnknown_202DE20 > 0)
         gUnknown_202DE20--;
-    }
-    if(gUnknown_202DE22 > 0)
-    {
+
+    if (gUnknown_202DE22 > 0)
         gUnknown_202DE22--;
-    }
-    if(gUnknown_202DE24 > 0)
-    {
+
+    if (gUnknown_202DE24 > 0)
         gUnknown_202DE24--;
-    }
 }
 
 void StopAllMusic_1(void)
@@ -196,14 +190,13 @@ void xxx_call_fade_out_bgm(u16 speed)
     FadeOutBGM(speed);
 }
 
-u32 IsEqualtoBGTrack(u16 songIndex)
+bool8 IsEqualtoBGTrack(u16 songIndex)
 {
     u32 currBGSong;
     currBGSong = GetCurrentBGSong();
 
-    if(songIndex == STOP_BGM)
+    if (songIndex == STOP_BGM)
         return currBGSong != STOP_BGM;
-
     return currBGSong == songIndex;
 }
 
@@ -232,23 +225,25 @@ bool8 IsFanfareSEPlaying_1(u16 songIndex)
     return IsFanfareSEPlaying(songIndex);
 }
 
-void PlayMenuSoundEffect(u32 r0)
+void PlayMenuSoundEffect(u32 a0)
 {
-    if(gUnknown_202DE20 > 0)
+    if (gUnknown_202DE20 > 0)
         return;
-    PlayFanfareSE(gUnknown_80D4144[r0], MAX_VOLUME);
+
+    PlayFanfareSE(gUnknown_80D4144[a0], MAX_VOLUME);
     gUnknown_202DE20 = 4;
 }
 
 void sub_8011A04(void)
 {
-    if(gUnknown_202DE22 > 0)
+    if (gUnknown_202DE22 > 0)
         return;
+
     gUnknown_202DE22 = 3;
     PlayFanfareSE(305, MAX_VOLUME);
 }
 
-void sub_8011A2C(u32 r0)
+UNUSED static void sub_8011A2C(u32 a0)
 {
-    gUnknown_202DE1C = r0;
+    gUnknown_202DE1C = a0;
 }
