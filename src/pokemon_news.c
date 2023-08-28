@@ -8,6 +8,7 @@
 #include "save.h"
 #include "menu_input.h"
 #include "code_80130A8.h"
+#include "code_80118A4.h"
 
 struct unkStruct_203B2CC
 {
@@ -153,7 +154,6 @@ extern u16 gUnknown_203B2DC;
 extern s32 GetNumPKMNNews(void);
 extern void sub_802B880(void);
 extern void CreatePKMNNewsMenu(void);
-extern void PlayMenuSoundEffect(u32);
 extern void sub_802BCC4(void);
 extern void sub_802BB14(u32);
 extern u8 HasNoMailinMailbox(void);

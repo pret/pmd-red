@@ -250,7 +250,6 @@ extern void sub_8031E10(void);
 extern u32 sub_80154F0(void);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E00(void);
-extern void AddSprite(struct unkSprite *, u32, u32, u32);
 extern void xxx_draw_string_80144C4(void);
 
 void DisplayRescuePasswordError(u32 error);
@@ -637,7 +636,7 @@ u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, struct unkStruct_203B480 *para
 {
   if ( (!sub_803D204(passwordBuffer, param_3)) || (WONDER_MAIL_TYPE_OKD < param_3->mailType) ||
        (param_3->dungeon.floor >= GetDungeonFloorCount(param_3->dungeon.id)) ||
-       (param_3->clientSpecies == MONSTER_NONE) || (MONSTER_RAYQUAZA_CUTSCENE < param_3->clientSpecies) ||
+       (param_3->clientSpecies == MONSTER_NONE) || (MONSTER_MAX < param_3->clientSpecies) ||
        (IsInvalidItemReward(param_3->item.id))) {
         return PASSWORD_ENTRY_INCORRECT_PASSWORD;
   }
@@ -693,39 +692,43 @@ void sub_8039174(void)
     #else
     u32 r2; // r4 but should be r2
     #endif //NONMATCHING
-    struct unkSprite* spr; // r2 but should be r3
+    struct SpriteOAM* spr; // r2 but should be r3
     u16 r4; // r3 but should be r4
-    
+
     spr = &gRescuePasswordMenu->unk208;
 
-    spr->unk0 &= ~0x100;
-    spr->unk0 &= ~0x200;
-    r4 = ~(0x800 | 0x400);
-    spr->unk0 &= r4;
-    spr->unk0 &= ~0x1000;
-    spr->unk0 &= ~0x2000;
-    r2 = 0x4000;
-    temp = 0x8000;
-    temp = ~(temp | 0x4000);
-    spr->unk0 &= temp;
-    spr->unk0 |= r2;
+    spr->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
 
-    r2 = 0x200 | 0x100 | 0x80 | 0x40 | 0x20 | 0x10;
-    spr->unk4 &= ~(0x200 | 0x100 | 0x80 | 0x40 | 0x20 | 0x10 | 0x8 | 0x4 | 0x2 | 0x1);
-    spr->unk4 |= r2;
-    spr->unk4 &= r4;
-    r2 = 0x1 | 0x2 | 0x4 | 0x8;
-    r4 = 0x1000 | 0x2000 | 0x4000 | 0x8000;
-    temp = ~r4;
-    spr->unk4 &= temp;
-    spr->unk4 |= r4;
+    spr->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+
+    spr->attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
+
+    spr->attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
+
+    spr->attrib1 &= ~SPRITEOAM_MASK_BPP;
+
+    r2 = 1 << SPRITEOAM_SHIFT_SHAPE;
+    spr->attrib1 &= ~SPRITEOAM_MASK_SHAPE;
+    spr->attrib1 |= r2;
+
+    r2 = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
+    spr->attrib3 &= ~SPRITEOAM_MASK_TILENUM;
+    spr->attrib3 |= r2;
+
+    spr->attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
+
+    r2 = (u16)~SPRITEOAM_MASK_UNK6_4;
+
+    r4 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
+    spr->attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
+    spr->attrib3 |= r4;
 
     #ifndef NONMATCHING
     while (0) ;
     #endif //NONMATCHING
-    spr->unk2 = 0; // Without the while(0), this 0 is loaded super early and also into r3
+    spr->attrib2 = 0; // Without the while(0), this 0 is loaded super early and also into r3
 
-    temp = 0x800 | 0x400;
+    temp = 192 << SPRITEOAM_SHIFT_UNK6_4;
     r2 &= spr->unk6;
     r2 |= temp;
     spr->unk6 = r2;
@@ -733,22 +736,21 @@ void sub_8039174(void)
 
 void sub_80391F8(void)
 {
-  struct unkSprite *iVar2;
-  u32 temp;
-  u32 temp2;
+    struct SpriteOAM *spr;
+    u32 val;
 
-  iVar2 = &gRescuePasswordMenu->unk208;
-  
-  temp = (iVar2->unk2 & 0xfe00);
-  iVar2->unk2 = temp | 0x70;
+    spr = &gRescuePasswordMenu->unk208;
 
-  temp2 = 0x700;
-  temp = (iVar2->unk6 & 0xf);
-  iVar2->unk6 = temp | temp2;
+    spr->attrib2 &= ~SPRITEOAM_MASK_X;
+    spr->attrib2 |= 112;
 
-  if ((gRescuePasswordMenu->unk210 & 8) != 0) {
-    AddSprite(iVar2,0x100,0,0);
-  }
-  xxx_draw_string_80144C4();
-  gRescuePasswordMenu->unk210 += 1;
+    val = 112 << SPRITEOAM_SHIFT_UNK6_4;
+    spr->unk6 &= ~SPRITEOAM_MASK_UNK6_4;
+    spr->unk6 |= val;
+
+    if (gRescuePasswordMenu->unk210 & 8)
+        AddSprite(spr, 0x100, NULL, NULL);
+
+    xxx_draw_string_80144C4();
+    gRescuePasswordMenu->unk210++;
 }

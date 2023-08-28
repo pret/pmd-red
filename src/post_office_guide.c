@@ -9,6 +9,7 @@
 #include "code_8094F88.h"
 #include "menu_input.h"
 #include "code_80130A8.h"
+#include "code_80118A4.h"
 
 struct PostOfficeHelper
 {
@@ -177,7 +178,6 @@ extern u8 gUnknown_202DE58[];
 extern u8 gUnknown_202E5D8[];
 extern u8 gAvailablePokemonNames[];
 
-extern void PlayMenuSoundEffect(u32);
 extern void sub_8031A84();
 extern void DisplayMissionObjectives();
 extern u8 *GetCurrentMissionText(s16 r0);

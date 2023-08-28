@@ -12,6 +12,7 @@
 #include "code_80958E8.h"
 #include "wonder_mail_2_1.h"
 #include "code_80130A8.h"
+#include "code_80118A4.h"
 
 const struct UnkTextStruct2 gUnknown_80DFDD4 =
 {
@@ -150,7 +151,6 @@ extern void CreateRescueTitle(struct unkStruct_802C39C *);
 extern u8 gUnknown_80DFDBC[];
 extern void sub_802CF5C(void);
 extern void sub_802CFD0(void);
-extern void PlayMenuSoundEffect(u32);
 
 extern void sub_802DF24(void);
 extern void SetJobListState(u32);
@@ -159,7 +159,6 @@ extern void ResetJobSlot(u8);
 extern u8 HasNoAcceptedJobs(void);
 u32 sub_802C598(u8 param_1);
 extern void sub_802C688(void);
-extern void PlaySound(u32);
 extern u8 GetPelipperBoardSlotIndex(void);
 
 extern struct UnkTextStruct2 gUnknown_80DFD8C;

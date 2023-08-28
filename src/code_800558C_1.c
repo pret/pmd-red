@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_800558C_1.h"
 
 extern u8 gUnknown_2026E38;
 extern u32 gUnknown_2026E3C;
@@ -27,8 +28,10 @@ void sub_8005770(s32 param_1, u8 *RGBArray, s32 a1, u8 *a2)
   }
 }
 
-void nullsub_7(void)
-{}
+// Maybe struct Position
+void nullsub_7(s16 *a0)
+{
+}
 
 void nullsub_8(void)
 {}
@@ -36,7 +39,7 @@ void nullsub_8(void)
 void nullsub_9(void)
 {}
 
-void nullsub_10(void)
+void nullsub_10(bool8 a0)
 {}
 
 void nullsub_144(void)

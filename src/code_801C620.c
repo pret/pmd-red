@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_80118A4.h"
 #include "code_801C620.h"
 #include "constants/item.h"
 #include "constants/iq_skill.h"
@@ -152,7 +153,6 @@ extern void sub_801CC38(void);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 extern void sub_8013F84(void);
-extern void PlayMenuSoundEffect(u32);
 extern char * GetIQSkillDescription(u8 r0);
 extern s32 GetNumAvailableIQSkills(u8 *param_1, s32 pokeIQ);
 extern char * GetIQSkillName(u8 r0);
@@ -170,7 +170,6 @@ void sub_801C6E4(void);
 void sub_801C848(void);
 
 u32 sub_801C308(u8);
-extern void PlaySound(u32);
 void ToggleIQSkill(u8 *param_1, u32 skillIndex);
 s32 sub_801C390(void);
 void sub_801C3F8(void);

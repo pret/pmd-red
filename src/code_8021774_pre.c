@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_80118A4.h"
 #include "code_801EE10_mid.h"
 #include "code_8021774_pre.h"
 #include "constants/friend_area.h"
@@ -35,7 +36,6 @@ extern struct UnkTextStruct2 gUnknown_80DC464;
 u8 sub_8021700(u32 mode);
 s32 sub_8021664(void);
 extern void sub_8021410(void);
-extern void PlayMenuSoundEffect(u32);
 
 bool8 sub_80211AC(u32 param_1, u32 param_2)
 {

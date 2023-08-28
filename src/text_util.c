@@ -1,4 +1,5 @@
 #include "global.h"
+#include "text_util.h"
 
 #define NUM_POKEMON_TYPES 18
 
@@ -107,8 +108,7 @@ u32 ReturnIntFromChar2(u8 r0)
     return r0;
 }
 
-// Unused
-void sub_8092290(u8 *buffer, u8 *string)
+UNUSED static void sub_8092290(u8 *buffer, u8 *string)
 {
   while( *string != '\0' ) {
     *buffer++ = ReturnIntFromChar2(*string++);
@@ -116,7 +116,7 @@ void sub_8092290(u8 *buffer, u8 *string)
   *buffer = 0; // append a 0
 }
 
-void sub_80922B4(u8 *buffer, u8 *string, s32 size)
+void sub_80922B4(u8 *buffer, const u8 *string, s32 size)
 {
     while(1)
     {

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "felicity_bank.h"
 #include "memory.h"
@@ -28,7 +29,6 @@ extern u8 gFelicitySavings[];
 extern u8 gFelicityMoney[];
 extern u8 gUnknown_80DB738;
 
-extern void PlaySound(u32);
 extern void sub_801645C();
 extern void sub_80169BC();
 extern void sub_8016B00();

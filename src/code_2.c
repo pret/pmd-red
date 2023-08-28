@@ -20,8 +20,8 @@
 #include "cpu.h"
 #include "code_8094F88.h"
 #include "sprite.h"
+#include "code_80118A4.h"
 
-extern void sub_801180C(void);
 extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);
 extern void sub_8097670(void);
@@ -30,7 +30,6 @@ extern void SetWindowBGColor(void);
 extern void LoadItemParameters(void);
 extern void LoadMailInfo(void);
 extern void sub_800CD64(u32, u32);
-extern void SetWindowTitle(char *);
 extern void sub_800DAAC(void);
 extern void sub_800135C(void);
 extern void xxx_script_related_8001334(u32);
@@ -48,12 +47,8 @@ extern u32 sub_80009D0(u32);
 extern void xxx_draw_string_80144C4(void);
 extern void sub_8005838(u32, u32);
 extern void nullsub_8(u32);
-extern void sub_8005180(void);
 extern void sub_80060EC(void);
-extern void sub_8011860(void);
 extern void sub_800CB20(void);
-extern void CopySpritesToOam(void);
-extern void sub_8005304(void);
 extern void TransferBGPaletteBuffer(void);
 extern void xxx_call_update_bg_vram(void);
 extern void sub_8009908(void);
@@ -98,7 +93,7 @@ void GameLoop(void)
     InitializeGameOptions(TRUE);
     SetWindowTitle(gPMDBuildVersion);
     sub_800DAAC();
-    SetSavingIconCoords(0);
+    SetSavingIconCoords(NULL);
     tmp = 0;
     if (ReadSaveFromPak(&tmp))
         sub_800135C();

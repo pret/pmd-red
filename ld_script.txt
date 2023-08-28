@@ -61,7 +61,6 @@ SECTIONS {
         src/input.o(.text);
         asm/code_8004AA0.o(.text);
         src/sprite.o(.text);
-        asm/sprite.o(.text);
         asm/code_800558C.o(.text);
         src/code_800558C_1.o(.text);
         asm/code_8005838.o(.text);
@@ -91,8 +90,6 @@ SECTIONS {
         src/save.o(.text);
         src/code_8012A18.o(.text);
         src/menu_input.o(.text);
-        asm/menu_input.o(.text);
-        src/menu_input_1.o(.text);
         asm/code_80130A8.o(.text);
         src/code_8012A18_1.o(.text);
         src/felicity_bank.o(.text);
@@ -234,7 +231,6 @@ SECTIONS {
         asm/code_8077274_1.o(.text);
         src/dungeon_ai_movement.o(.text);
         src/dungeon_ai_attack.o(.text);
-        asm/code_807CABC.o(.text);
         src/targeting_flags.o(.text);
         asm/code_807CD9C.o(.text);
         src/code_807CD9C.o(.text);
@@ -315,6 +311,7 @@ SECTIONS {
         src/ground_map_1.o(.text);
         asm/ground_map_1.o(.text);
         src/ground_map_2.o(.text);
+        src/ground_sprite.o(.text);
         asm/ground_sprite.o(.text);
         src/code_80A7714.o(.text);
         asm/ground_lives.o(.text);

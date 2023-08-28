@@ -1,5 +1,6 @@
 #include "global.h"
 #include "code_800D090.h"
+#include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "constants/colors.h"
 #include "constants/input.h"
@@ -79,8 +80,6 @@ extern u8 sub_80A2740(s32 r0);
 
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern bool8 IsMazeCompleted(s32);
-extern void PlayMenuSoundEffect(u32);
-extern void PlaySound(u16);
 extern void PrintColoredPokeNameToBuffer(u8 *, struct PokemonStruct *, s32);
 extern void PrintYellowDungeonNametoBuffer(u8 *, struct DungeonLocation *);
 

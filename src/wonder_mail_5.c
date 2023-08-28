@@ -10,6 +10,7 @@
 #include "code_800D090.h"
 #include "code_802C39C.h"
 #include "menu_input.h"
+#include "code_80118A4.h"
 
 struct unkStruct_203B324
 {
@@ -49,7 +50,6 @@ const u8 gUnknown_80E0938[] = "%-4d";
 static const u8 wonder_mail_fill[] = "pksdir0";
 
 extern void sub_8030DD4(void);
-extern void PlayMenuSoundEffect(u32);
 extern void CreateRescueDescription(struct unkStruct_802C39C *);
 
 void sub_8030E2C(void);

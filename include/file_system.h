@@ -1,35 +1,40 @@
 #ifndef GUARD_FILE_SYSTEM_H
 #define GUARD_FILE_SYSTEM_H
 
+// size: 0x8
 struct File
 {
-    char *name;
-    u8 *data;
+    /* 0x0 */ char *name;
+    /* 0x4 */ u8 *data;
 };
 
+// size: 0x8
 struct OpenedFile
 {
-    struct File *file;
-    u8 *data;
+    /* 0x0 */ struct File *file;
+    /* 0x4 */ u8 *data;
 };
 
+// size: 0x10
 struct FileArchive
 {
-    char magic[8];
-    s32 count;
-    struct File *entries;
+    /* 0x0 */ char magic[8];
+    /* 0x8 */ s32 count;
+    /* 0xC */ struct File *entries;
 };
 
+// size: 0x8
 struct SiroArchive
 {
-    u32 magic;
-    u8 *data;
+    /* 0x0 */ u32 magic;
+    /* 0x4 */ u8 *data;
 };
 
+// size: 0x8
 struct UnkFileStruct1
 {
-    /* 0x0 */ u32 unk0;
-    /* 0x4 */ u32 unk4;
+    u32 unk0;
+    u32 unk4;
 };
 
 void InitFileSystem(void);

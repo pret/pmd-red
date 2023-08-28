@@ -1,4 +1,5 @@
 #include "global.h"
+#include "cpu.h"
 #include "file_system.h"
 #include "text1.h"
 
@@ -23,7 +24,6 @@ struct unkStruct_202D038
 
 extern struct unkStruct_202D038 gUnknown_202D038[8];
 
-extern void CpuCopy(void* dest, void *src, s32 size);
 extern void SetBGPaletteBufferColorArray(s32 index, void *colorArray);
 extern void sub_8009A1C(u32);
 u32 sub_80063B0(void);

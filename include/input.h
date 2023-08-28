@@ -68,13 +68,13 @@ struct MenuInputStruct
     s32 unk0;
     u16 unk4;
     s16 unk6;
-    u16 unk8;
-    u16 unkA;
-    u16 unkC;
-    u16 unkE;
+    s16 unk8; // Maybe struct Position
+    s16 unkA;
+    s16 unkC; // Maybe struct Position
+    s16 unkE;
     u32 unk10;
-    s16 unk14;
-    u16 unk16;
+    s16 unk14; // Maybe struct Position
+    s16 unk16;
     /* 0x18 */ s16 menuIndex;
     s16 unk1A;
     s16 unk1C;

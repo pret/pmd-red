@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_80118A4.h"
 #include "code_801B3C0.h"
 #include "constants/colors.h"
 #include "text1.h"
@@ -67,7 +68,6 @@ extern struct UnkTextStruct2 gUnknown_80DBA70;
 extern void sub_801BB5C(void);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void sub_801B748(u32);
-extern void PlayMenuSoundEffect(u32);
 extern void sub_8013F84(void);
 extern s32 sub_80913E0(struct Item *, u32, struct subStruct_203B240 **);
 extern void sub_80140B4(struct UnkTextStruct2 *);
@@ -83,7 +83,6 @@ extern void sub_801B760(void);
 extern void sub_801B874(void);
 extern u32 sub_8001784(u32, u32, u16);
 extern void sub_800199C(u32, u32, u32, u32);
-extern void PlaySound(u32);
 extern s32 sub_808D544(u32);
 
 void sub_801B480(void);

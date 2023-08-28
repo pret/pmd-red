@@ -13,6 +13,7 @@
 #include "code_8021774_pre.h"
 #include "code_801EE10_mid.h"
 #include "code_8021774.h"
+#include "code_80118A4.h"
 
 extern struct UnkTextStruct2 gUnknown_80DC534;
 extern struct UnkTextStruct2 gUnknown_80DC564;
@@ -38,7 +39,6 @@ extern const u8 *gUnknown_80D4978[];
 u8 sub_8021700(u32);
 void sub_8092578(u8 *buffer, u8 index, u8 r2);
 extern void sub_8022380(void);
-extern void PlaySound(u32);
 bool8 sub_8023144(s32 param_1, s32 index, struct UnkTextStruct2_sub *sub, u32 param_4);
 void sub_8023354(u8 param_1);
 extern bool8 sub_80023E4(u32);

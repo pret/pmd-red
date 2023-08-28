@@ -2,14 +2,8 @@
 #define GUARD_RESCUE_PASSWORD_MENU_H
 
 #include "menu.h"
-
-struct unkSprite
-{
-    u16 unk0;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
-};
+#include "sprite.h"
+#include "text.h"
 
 // Similar to unkStruct_203B360
 struct RescuePasswordMenu
@@ -20,7 +14,7 @@ struct RescuePasswordMenu
     struct MenuStruct unk8[4];
     struct UnkTextStruct2 unk148[4];
     struct UnkTextStruct2 unk1A8[4];
-    struct unkSprite unk208;
+    struct SpriteOAM unk208;
     u32 unk210;
 };
 

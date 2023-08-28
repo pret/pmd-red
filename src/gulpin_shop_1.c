@@ -11,6 +11,7 @@
 #include "felicity_bank.h"
 #include "code_80130A8.h"
 #include "code_801EE10_1.h"
+#include "code_80118A4.h"
 
 // size: 0x1E0
 struct unkStruct_203B27C
@@ -84,8 +85,6 @@ extern u8 gUnknown_80DC438[];
 extern u8 gUnknown_80DC448[];
 extern u8 gUnknown_202E128[];
 
-void PlayMenuSoundEffect(u32);
-void PlaySound(u32);
 bool8 sub_8021178(void);
 void CreateGulpinShopMenu(void);
 void sub_8020950(void);

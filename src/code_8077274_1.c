@@ -17,6 +17,7 @@
 #include "move_effects_target.h"
 #include "pokemon.h"
 #include "status_checks_1.h"
+#include "code_805D8C8.h"
 
 extern u8 gAvailablePokemonNames[0x58];
 extern u8 gUnknown_202DFE8[0x58];
@@ -171,9 +172,8 @@ extern void SetMessageArgument(u8 *buffer, struct Entity *r1, u32);
 extern void sub_80522F4(struct Entity *pokemon, struct Entity *r1, const char[]);
 extern void EntityUpdateStatusSprites(struct Entity *);
 extern void sub_8042A74(struct Entity *r0);
-extern void sub_807EC28(u32);
+extern void sub_807EC28(bool8);
 extern s32 sub_8069F54(struct Entity *param_1, s16 param_2);
-extern u32 sub_80687D0(s16);
 extern void sub_806A898(struct Entity *, u32, u32);
 extern void HealTargetHP(struct Entity *pokemon, struct Entity *r1, s16, s16, u32);
 extern void sub_806CE68(struct Entity *, s32);
@@ -236,62 +236,61 @@ void MuzzleTarget(struct Entity *pokemon, struct Entity *target)
   }
 }
 
-// TODO: still gross but does match
 void sub_8078E18(struct Entity * pokemon, struct Entity * target)
 {
-  s16 species;
-  s32 iVar5;
-  s32 apparentID;
-  s16 apparentID_s16;
-  s32 index;
-  struct EntityInfo *entityInfo;
-  s32 iVar9;
-  struct PokemonStruct *auStack544[128];
-  
+    s16 species;
+    s32 iVar5;
+    s32 apparentID;
+    s16 apparentID_s16;
+    s32 index;
+    struct EntityInfo *entityInfo;
+    struct OpenedFile *iVar9;
+    struct PokemonStruct *auStack544[128];
 
-  if (EntityExists(target)) {
+    if (!EntityExists(target))
+        return;
+
     entityInfo = target->info;
-    if (entityInfo->transformStatus == STATUS_TRANSFORMED) {
-      sub_80522F4(pokemon,target,*gUnknown_80FBF04);
-    }
-    else {
-      SetMessageArgument(gAvailablePokemonNames,target,0);
-      iVar5 = sub_803D870(auStack544,0);
-      if (iVar5 == 0) {
-        goto print;
-      }
-      else
-      {
-        iVar9 = 0;
 
-        for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
-        {
-          species = ExtractSpeciesIndex(&auStack544[DungeonRandInt(iVar5) << 1]);
-          apparentID_s16 = sub_8069F54(target, species);
-          apparentID = apparentID_s16;
-          if (((apparentID != entityInfo->apparentID) && (sub_806AA0C(apparentID, 1))) &&
-             (iVar9 = sub_80687D0(apparentID), iVar9 != 0)) break;
+    if (entityInfo->transformStatus == STATUS_TRANSFORMED)
+        sub_80522F4(pokemon, target, *gUnknown_80FBF04);
+    else {
+        SetMessageArgument(gAvailablePokemonNames, target, 0);
+        iVar5 = sub_803D870(auStack544, 0);
+
+        if (iVar5 == 0)
+            sub_80522F4(pokemon, target, *gUnknown_80FBEE4);
+        else {
+            iVar9 = NULL;
+
+            for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
+                species = ExtractSpeciesIndex(&auStack544[DungeonRandInt(iVar5) * 2]);
+                apparentID_s16 = sub_8069F54(target, species);
+                apparentID = apparentID_s16;
+
+                if (apparentID != entityInfo->apparentID && sub_806AA0C(apparentID, 1)) {
+                    iVar9 = sub_80687D0(apparentID);
+                    if (iVar9 != NULL)
+                        break;
+                }
+            }
+
+            if (index == DUNGEON_MAX_POKEMON || iVar9 == NULL)
+                sub_80522F4(pokemon, target, *gUnknown_80FBEE4);
+            else {
+                entityInfo->apparentID = apparentID;
+                target->unk64 = iVar9;
+                entityInfo->transformStatus = STATUS_TRANSFORMED;
+                entityInfo->transformStatusTurns = CalculateStatusTurns(target, gUnknown_80F4EFC, TRUE) + 1;
+                sub_806CF98(target);
+                nullsub_87(target);
+                sub_806CCB4(target, sub_806CEBC(target));
+                CopyCyanMonsterNametoBuffer(gUnknown_202DFE8, entityInfo->apparentID);
+                sub_80522F4(pokemon, target, *gUnknown_80FBEC0);
+                EntityUpdateStatusSprites(target);
+            }
         }
-        if ((index == DUNGEON_MAX_POKEMON) || (iVar9 == 0)) {
-print:
-            sub_80522F4(pokemon,target,*gUnknown_80FBEE4);
-        }
-        else
-        {
-          entityInfo->apparentID = apparentID;
-          target->unk64 = iVar9;
-          entityInfo->transformStatus = STATUS_TRANSFORMED;
-          entityInfo->transformStatusTurns = CalculateStatusTurns(target,gUnknown_80F4EFC,TRUE) + 1;
-          sub_806CF98(target);
-          nullsub_87(target);
-          sub_806CCB4(target, sub_806CEBC(target));
-          CopyCyanMonsterNametoBuffer(gUnknown_202DFE8, entityInfo->apparentID);
-          sub_80522F4(pokemon,target,*gUnknown_80FBEC0);
-          EntityUpdateStatusSprites(target);
-        }
-      }
     }
-  }
 }
 
 void MobileStatusTarget(struct Entity * pokemon, struct Entity * target)
@@ -1516,7 +1515,7 @@ void SendTransformEndMessage(struct Entity * pokemon, struct Entity *target)
   entityInfo->transformStatus = STATUS_NONE;
   EntityUpdateStatusSprites(target);
   if (isInvisible) {
-    sub_807EC28(1);
+    sub_807EC28(TRUE);
   }
 }
 

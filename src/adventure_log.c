@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "constants/input.h"
 #include "memory.h"
@@ -42,7 +43,6 @@ const u8 fill_adven[] = "pksdir0";
 
 void sub_8032084();
 void DisplayAdventureLog();
-extern void PlayMenuSoundEffect(u32);
 extern bool8 sub_8097710(u8);
 
 extern s16 sub_80978B8();

@@ -14,6 +14,7 @@
 #include "code_80130A8.h"
 #include "code_8012A18_1.h"
 #include "code_801B3C0.h"
+#include "code_80118A4.h"
 
 struct unkStruct_203B2B0
 {
@@ -186,11 +187,7 @@ extern void LuminousCave_AdvancetoFallbackState(void);
 extern void sub_8024804(void);
 extern void UpdateLuminousCaveDialogue(void);
 
-void xxx_call_fade_out_bgm(u16 speed);
-void xxx_call_stop_fanfare_se(u16 songIndex);
-void xxx_call_fade_in_new_bgm(u16 songIndex, u16 speed);
 void sub_80977D0(void);
-void PlaySound(u32);
 void sub_8024CFC(void);
 void sub_8025254(void);
 void sub_8024D48(void);
@@ -200,7 +197,6 @@ void sub_8024E30(void);
 void sub_801AEE4(u32, u32);
 void sub_808F734(struct PokemonStruct *, s16);
 extern void sub_8099690(u32);
-extern void PlayMenuSoundEffect(u32);
 extern void sub_808F468(struct PokemonStruct *, u8 *, u32);
 
 bool8 LuminousCave_HasOnly1Member(void);

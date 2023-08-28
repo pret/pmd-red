@@ -11,6 +11,7 @@
 #include "menu_input.h"
 #include "team_inventory.h"
 #include "pelipper_board.h"
+#include "code_80118A4.h"
 
 EWRAM_DATA_2 struct unkStruct_203B308 *gPelipperBoard = {0};
 
@@ -92,7 +93,6 @@ extern void ResetPelipperBoardSlot(u8);
 extern void sub_80965F4(void);
 extern void sub_802C2D4(void);
 extern u32 sub_802C1E4(u32);
-extern void PlaySound(u32);
 extern u8 sub_802C26C(void);
 extern u8 HasNoAcceptedJobs(void);
 extern bool8 IsMailinJobSlot(struct WonderMail *mail);

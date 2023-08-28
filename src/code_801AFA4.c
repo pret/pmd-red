@@ -7,6 +7,7 @@
 #include "pokemon.h"
 #include "gulpin_shop.h"
 #include "code_80130A8.h"
+#include "code_80118A4.h"
 
 extern void sub_8092C84(u8 *, u16);
 extern void sub_8099690(u32);
@@ -33,7 +34,6 @@ extern void unk_CopyMoves4To8(struct Move *, struct Move *);
 extern bool8 IsHMItem(u8);
 extern void sub_801B178(void);
 extern void sub_8094060(void *, struct Move *);
-extern void PlaySound(u32);
 extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
 extern u32 sub_801E8C0(void);
 

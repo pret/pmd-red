@@ -1,5 +1,6 @@
 #include "global.h"
 #include "code_800D090.h"
+#include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
 #include "constants/input.h"
@@ -57,10 +58,6 @@ extern const u8 gTeamToolboxB[];
 
 // code_8098BDC.s
 extern void sub_8099690(u32);
-
-// code_80118A4.c
-extern void PlayMenuSoundEffect(u32);
-extern void PlaySound(u16 songIndex);
 
 void sub_8018D30(void);
 void sub_80194F8(void);

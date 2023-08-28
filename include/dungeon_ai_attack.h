@@ -5,6 +5,7 @@
 
 #define RANGED_ATTACK_RANGE 10
 
+// size: 0x8
 struct AIPossibleMove
 {
     bool8 canBeUsed;

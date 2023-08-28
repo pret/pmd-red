@@ -12,15 +12,7 @@
 #include "pokemon.h"
 #include "code_8094F88.h"
 #include "sprite.h"
-
-struct unkSprite
-{
-    u16 unk0;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
-};
-
+#include "code_80118A4.h"
 
 struct unkStruct_203B35C
 {
@@ -28,7 +20,7 @@ struct unkStruct_203B35C
     u32 unk0;
     u32 linkStatus;
     u32 state;
-    struct unkSprite unkC;
+    struct SpriteOAM unkC;
     u32 unk14;
     u8 fill18[0x1C - 0x18];
     struct MenuStruct unk1C[4];
@@ -453,7 +445,6 @@ extern u32 sub_8037C10(u32);
 extern void sub_8037748(void);
 extern void sub_80371B8(void);
 extern void sub_8037900(void);
-extern void PlayMenuSoundEffect(u32);
 extern u32 sub_8037798(void);
 extern void sub_8005838(u32, u32);
 extern void sub_80060EC();
@@ -465,13 +456,10 @@ extern void xxx_call_update_bg_sound_input();
 extern s32 sub_8037D64(u32 mode, void *, void *);
 extern s32 sub_80381F4(u32 mode, void *, void *);
 extern void sub_8037810(void);
-extern void sub_8011830(void);
 extern s32 sub_8037B28(u32);
 s32 sub_8035D3C(void);
 extern s32 sub_8035D74(void);
-extern void xxx_call_start_bg_music(void);
 extern void xxx_draw_string_80144C4(void);
-extern void AddSprite(struct unkSprite *, u32, u32, u32);
 
 void sub_8036FDC(s32 param_1)
 {
@@ -792,57 +780,67 @@ void sub_80376CC(void)
 #endif
     u32 r1;
     u32 r4;
-    
 
-    r1 = gUnknown_203B35C->unkC.unk0;
-    r0 = 0xfeff;
+    r1 = gUnknown_203B35C->unkC.attrib1;
+    r0 = (u16)~SPRITEOAM_MASK_AFFINEMODE1;
     r0 &= r1;
-    r0 &= 0xfdff;
-    r0 &= 0xf3ff;
-    r0 &= 0xefff;
-    r0 &= 0xdfff;
-    r2 = 0x4000;
-    r0 &= 0x3fff;
-    r0 |= r2;
-    gUnknown_203B35C->unkC.unk0 = r0;
 
-    r2 = 0x3F0;
-    r1 = gUnknown_203B35C->unkC.unk4;
-    r0 = 0xFC00;
+    r0 &= (u16)~SPRITEOAM_MASK_AFFINEMODE2;
+
+    r0 &= (u16)~SPRITEOAM_MASK_OBJMODE;
+
+    r0 &= (u16)~SPRITEOAM_MASK_MOSAIC;
+
+    r0 &= (u16)~SPRITEOAM_MASK_BPP;
+
+    r2 = 1 << SPRITEOAM_SHIFT_SHAPE;
+    r0 &= (u16)~SPRITEOAM_MASK_SHAPE;
+    r0 |= r2;
+
+    gUnknown_203B35C->unkC.attrib1 = r0;
+
+    r2 = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
+    r1 = gUnknown_203B35C->unkC.attrib3;
+    r0 = (u16)~SPRITEOAM_MASK_TILENUM;
     r0 &= r1;
     r0 |= r2;
-    r0 &= 0xf3ff;
-    r2 = 0xF;
-    r4 = 0xF000;
-    r0 &= 0xfff;
+
+    r0 &= (u16)~SPRITEOAM_MASK_PRIORITY;
+
+    r2 = (u16)~SPRITEOAM_MASK_UNK6_4;
+
+    r4 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
+    r0 &= (u16)~SPRITEOAM_MASK_PALETTENUM;
     r0 |= r4;
 
-    gUnknown_203B35C->unkC.unk4 = r0;
-    r0 = 0;
-    gUnknown_203B35C->unkC.unk2 = r0;
+    gUnknown_203B35C->unkC.attrib3 = r0;
 
-    r1 = 0xC00;
+    r0 = 0; // Set x/matrixNum/size to 0
+    gUnknown_203B35C->unkC.attrib2 = r0;
+
+    r1 = 192 << SPRITEOAM_SHIFT_UNK6_4;
     r0 = gUnknown_203B35C->unkC.unk6;
     r2 &= r0;
     r2 |= r1;
     gUnknown_203B35C->unkC.unk6 = r2;
-
 }
 
 void sub_8037748(void)
 {
-  u32 temp2;
+    u16 temp2;
 
-  gUnknown_203B35C->unkC.unk2 = (gUnknown_203B35C->unkC.unk2 & 0xfe00) | 0x70;
+    gUnknown_203B35C->unkC.attrib2 &= ~SPRITEOAM_MASK_X; // Clear x
+    gUnknown_203B35C->unkC.attrib2 |= 112; // Set x to 112
 
-  temp2 = 0x680;
-  gUnknown_203B35C->unkC.unk6 = (gUnknown_203B35C->unkC.unk6 & 0xf) | temp2;
+    temp2 = 104 << SPRITEOAM_SHIFT_UNK6_4;
+    gUnknown_203B35C->unkC.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
+    gUnknown_203B35C->unkC.unk6 |= temp2;
 
-  if ((gUnknown_203B35C->unk14 & 8) != 0) {
-    AddSprite(&gUnknown_203B35C->unkC,0x100,0,0x0);
-  }
-  xxx_draw_string_80144C4();
-  gUnknown_203B35C->unk14++;
+    if ((gUnknown_203B35C->unk14 & 8) != 0)
+      AddSprite(&gUnknown_203B35C->unkC, 0x100, NULL, NULL);
+
+    xxx_draw_string_80144C4();
+    gUnknown_203B35C->unk14++;
 }
 
 u32 sub_8037798(void)

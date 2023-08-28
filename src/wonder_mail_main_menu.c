@@ -11,6 +11,8 @@
 #include "code_80130A8.h"
 #include "code_801C620.h"
 #include "code_801B3C0.h"
+#include "cpu.h"
+#include "code_80118A4.h"
 
 #define SELECT_WONDER_MAIL_MODE_MAIN_SCREEN 0
 #define SEND_WONDER_MAIL_MAIN_SCREEN 1
@@ -133,10 +135,7 @@ extern void sub_8031E10(void);
 extern u8 sub_800D588(void);
 extern s32 sub_8037D64(u32, void *, void *);
 extern s32 sub_80381F4(u32, void *, void *);
-extern void sub_8011830(void);
 extern void sub_80151C0(u32, u8 *);
-extern void xxx_call_start_bg_music(void);
-extern void nullsub_23(u32);
 extern void sub_802EF48(void);
 extern void sub_802D098(struct WonderMail *);
 
@@ -595,7 +594,7 @@ void WonderMailMainMenuCallback(void)
         sub_8014248(gUnknown_80E7BEC,0,6,gUnknown_80E78F8,0,4,0,0,0x101);
         break;
     case 6:
-        nullsub_23(0);
+        nullsub_23(FALSE);
         sub_80141B4(gUnknown_80E7C48,0,0,0);
         break;
     case 9:

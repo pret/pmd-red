@@ -10,6 +10,7 @@
 #include "code_800D090.h"
 #include "menu_input.h"
 #include "code_8021774.h"
+#include "code_80118A4.h"
 
 struct unkStruct_203B28C
 {
@@ -54,7 +55,6 @@ extern void sub_8092578(u8 *buffer, u8 index, u8 r2);
 
 extern void sub_8021878(void);
 extern void sub_8021894(void);
-extern void PlayMenuSoundEffect(u32);
 extern void sub_8021A60(void);
 void sub_8021820(void);
 u8 sub_80023E4(u32);

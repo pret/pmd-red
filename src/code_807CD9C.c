@@ -24,7 +24,7 @@ extern void sub_806F370(struct Entity *r0, struct Entity *r1, u32, u32, u8 *, u8
 extern void sub_80694C0(struct Entity *, s32, s32, u32);
 extern void sub_804535C(struct Entity *, u32);
 extern void sub_804AC20(struct Position *);
-extern void sub_807EC28(u32);
+extern void sub_807EC28(bool8);
 extern void sub_806A5B8(struct Entity *);
 
 extern u32 gUnknown_80F5FAC[];
@@ -101,7 +101,7 @@ void sub_807E254(struct Entity *pokemon,struct Entity *target)
     if (EntityExists(pokemon)) {
       if (pokemon->info->isTeamLeader) {
         sub_804AC20(&pokemon->pos);
-        sub_807EC28(0);
+        sub_807EC28(FALSE);
       }
       sub_806A5B8(pokemon);
       sub_8075900(pokemon,gDungeon->unk3A08);
@@ -110,7 +110,7 @@ void sub_807E254(struct Entity *pokemon,struct Entity *target)
     if (EntityExists(target)) {
       if (target->info->isTeamLeader) {
         sub_804AC20(&target->pos);
-        sub_807EC28(0);
+        sub_807EC28(FALSE);
       }
       sub_806A5B8(target);
       sub_8075900(target,gDungeon->unk3A08);

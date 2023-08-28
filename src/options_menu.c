@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "constants/colors.h"
 #include "constants/input.h"
@@ -54,7 +55,6 @@ extern const char *gUnknown_80D4928[];
 
 extern s32 sub_8008ED0(u8 *);
 extern void CreateOthersMenu(void);
-void PlayMenuSoundEffect(u32);
 void CreateOptionsMenu(void);
 void nullsub_38(void);
 extern void SetOptionsMenuState(u32);

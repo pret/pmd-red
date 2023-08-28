@@ -100,14 +100,14 @@ bool8 ValidateWonderMail(struct WonderMail *data)
 
         if(data->clientSpecies == MONSTER_NONE)
             return FALSE;
-        if(data->clientSpecies > MONSTER_RAYQUAZA_CUTSCENE)
+        if(data->clientSpecies > MONSTER_MAX)
             return FALSE;
         if(data->clientSpecies != GetBaseSpecies(data->clientSpecies))
             return FALSE;
         if(!sub_803C0DC(data->clientSpecies))
             return FALSE;
 
-        if(data->targetSpecies > MONSTER_RAYQUAZA_CUTSCENE)
+        if(data->targetSpecies > MONSTER_MAX)
             return FALSE;
         if(data->targetSpecies != GetBaseSpecies(data->targetSpecies))
             return FALSE;

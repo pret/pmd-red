@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_80118A4.h"
 #include "constants/bg_music.h"
 #include "dungeon.h"
 #include "music.h"
@@ -26,8 +27,6 @@ extern u8 gUnknown_810AC64; // 0x8
 extern u8 gUnknown_810AC66; // 0x8
 
 extern void sub_80709C8(u8 *buffer, struct EntityInfo *entityInfo);
-void FadeOutAllMusic(u16);
-void xxx_call_stop_bgm(void);
 
 // Dungeon Music Player adds in this flag to tell
 // the system to fade in rather than immediately playing

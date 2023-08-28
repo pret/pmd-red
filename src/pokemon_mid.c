@@ -880,7 +880,7 @@ s32 sub_808E400(s32 _species, s16* _a2, s32 _a3, s32 _a4)
   register s16* a2 asm("r6");
   i = 1;
   a2 = _a2;
-  for (i = 1; i <= MONSTER_RAYQUAZA_CUTSCENE; i++) {
+  for (i = 1; i <= MONSTER_MAX; i++) {
     register s32 current asm("r8") = (s16)i;
     if (species != GetPokemonEvolveFrom(i)) {
       continue;

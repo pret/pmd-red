@@ -20,30 +20,32 @@ void SetWindowTitle(char *title)
 {
 }
 
-void nullsub_23(void)
+void nullsub_23(bool8 a0)
 {
 }
 
+// Unused
 void nullsub_182(void)
 {
 }
 
-u32 sub_800CDE0(void)
+// Unused
+bool8 sub_800CDE0(void)
 {
-    return 1;
+    return TRUE;
 }
 
-void CpuCopy(void* dest, void *src, s32 size)
+void CpuCopy(void *dest, void *src, s32 size)
 {
     CpuCopy32(src, dest, size);
 }
 
-void CpuClear(void* dest, s32 size)
+void CpuClear(void *dest, s32 size)
 {
     CpuFill32(NULL, dest, size);
 }
 
-void CpuFill(void* dest, void *value, s32 size)
+void CpuFill(void *dest, void *value, s32 size)
 {
     CpuFill32(value, dest, size);
 }
@@ -52,12 +54,12 @@ void CpuFill(void* dest, void *value, s32 size)
 void VBlank_CB(void)
 {
     // TODO this is so gross.. looks like a macro or something else but I don't want to deal with this rn
-    REG_DMA0CNT_H = (REG_DMA0CNT_H | DMA_ENABLE) & 0xcdff;
+    REG_DMA0CNT_H = (REG_DMA0CNT_H | DMA_ENABLE) & 0xCDFF;
     asm("mov \tr8, r8");
     asm("mov \tr8, r8");
     asm("mov \tr8, r8");
     asm("mov \tr8, r8");
-    REG_DMA0CNT_H &= 0x7fff;
+    REG_DMA0CNT_H &= 0x7FFF;
 
     // Everything below matches
 
@@ -65,16 +67,14 @@ void VBlank_CB(void)
     REG_WINOUT = WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WIN01_BG3 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG0;
     REG_BLDCNT = gBldCnt;
     REG_BLDALPHA = gBldAlpha;
-    if(gUnknown_2026E38 != 0)
-    {
-        DmaSet(0, &gUnknown_2026E3C[2], REG_ADDR_WIN0H, 0xa2600002);
+    if (gUnknown_2026E38 != 0) {
+        DmaSet(0, &gUnknown_2026E3C[2], REG_ADDR_WIN0H, 0xA2600002);
         REG_WIN0H = gUnknown_2026E3C[0];
         REG_WIN1H = gUnknown_2026E3C[1];
-        REG_WIN0V = 160;
-        REG_WIN1V = 160;
+        REG_WIN0V = DISPLAY_HEIGHT;
+        REG_WIN1V = DISPLAY_HEIGHT;
     }
-    else
-    {
+    else {
         REG_WIN0H = 0;
         REG_WIN1H = 0;
         REG_WIN0V = 0;
