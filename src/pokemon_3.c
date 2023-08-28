@@ -69,8 +69,8 @@ bool8 sub_808E668(s16 species, s16* a2, s16* a3)
         x &= SPRITEOAM_MAX_X;
 
         spr = &gUnknown_202F3E8[shadowSize];
-        spr->atrib2 &= ~SPRITEOAM_MASK_X;
-        spr->atrib2 |= x;
+        spr->attrib2 &= ~SPRITEOAM_MASK_X;
+        spr->attrib2 |= x;
         unk6 &= SPRITEOAM_MAX_UNK6_4;
         unk6 <<= SPRITEOAM_SHIFT_UNK6_4;
         spr->unk6 &= ~SPRITEOAM_MASK_UNK6_4;

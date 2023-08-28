@@ -781,7 +781,7 @@ void sub_80376CC(void)
     u32 r1;
     u32 r4;
 
-    r1 = gUnknown_203B35C->unkC.atrib1;
+    r1 = gUnknown_203B35C->unkC.attrib1;
     r0 = (u16)~SPRITEOAM_MASK_AFFINEMODE1;
     r0 &= r1;
 
@@ -797,10 +797,10 @@ void sub_80376CC(void)
     r0 &= (u16)~SPRITEOAM_MASK_SHAPE;
     r0 |= r2;
 
-    gUnknown_203B35C->unkC.atrib1 = r0;
+    gUnknown_203B35C->unkC.attrib1 = r0;
 
     r2 = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
-    r1 = gUnknown_203B35C->unkC.atrib3;
+    r1 = gUnknown_203B35C->unkC.attrib3;
     r0 = (u16)~SPRITEOAM_MASK_TILENUM;
     r0 &= r1;
     r0 |= r2;
@@ -813,10 +813,10 @@ void sub_80376CC(void)
     r0 &= (u16)~SPRITEOAM_MASK_PALETTENUM;
     r0 |= r4;
 
-    gUnknown_203B35C->unkC.atrib3 = r0;
+    gUnknown_203B35C->unkC.attrib3 = r0;
 
     r0 = 0; // Set x/matrixNum/size to 0
-    gUnknown_203B35C->unkC.atrib2 = r0;
+    gUnknown_203B35C->unkC.attrib2 = r0;
 
     r1 = 192 << SPRITEOAM_SHIFT_UNK6_4;
     r0 = gUnknown_203B35C->unkC.unk6;
@@ -829,8 +829,8 @@ void sub_8037748(void)
 {
     u16 temp2;
 
-    gUnknown_203B35C->unkC.atrib2 &= ~SPRITEOAM_MASK_X; // Clear x
-    gUnknown_203B35C->unkC.atrib2 |= 112; // Set x to 112
+    gUnknown_203B35C->unkC.attrib2 &= ~SPRITEOAM_MASK_X; // Clear x
+    gUnknown_203B35C->unkC.attrib2 |= 112; // Set x to 112
 
     temp2 = 104 << SPRITEOAM_SHIFT_UNK6_4;
     gUnknown_203B35C->unkC.unk6 &= ~SPRITEOAM_MASK_UNK6_4;

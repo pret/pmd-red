@@ -600,50 +600,50 @@ void AddMenuCursorSprite_(struct MenuInputStruct *a0, u32 a1)
         if (!(a0->unk24 & 8)) {
             register u32 tmp asm("r0"), tmp2 asm("r1");
 
-            tmp = sp.atrib1;
-            sp.atrib1 = tmp & ~SPRITEOAM_MASK_AFFINEMODE1;
-            sp.atrib1 = sp.atrib1;
+            tmp = sp.attrib1;
+            sp.attrib1 = tmp & ~SPRITEOAM_MASK_AFFINEMODE1;
+            sp.attrib1 = sp.attrib1;
 
-            tmp2 = sp.atrib1;
-            sp.atrib1 = tmp2 & ~SPRITEOAM_MASK_AFFINEMODE2;
-            sp.atrib1 = sp.atrib1;
+            tmp2 = sp.attrib1;
+            sp.attrib1 = tmp2 & ~SPRITEOAM_MASK_AFFINEMODE2;
+            sp.attrib1 = sp.attrib1;
 
-            tmp2 = sp.atrib1;
-            sp.atrib1 = tmp2 & ~SPRITEOAM_MASK_OBJMODE;
-            sp.atrib1 = sp.atrib1;
+            tmp2 = sp.attrib1;
+            sp.attrib1 = tmp2 & ~SPRITEOAM_MASK_OBJMODE;
+            sp.attrib1 = sp.attrib1;
 
-            tmp2 = sp.atrib1;
-            sp.atrib1 = tmp2 & ~SPRITEOAM_MASK_MOSAIC;
-            sp.atrib1 = sp.atrib1;
+            tmp2 = sp.attrib1;
+            sp.attrib1 = tmp2 & ~SPRITEOAM_MASK_MOSAIC;
+            sp.attrib1 = sp.attrib1;
 
-            tmp2 = sp.atrib1;
-            sp.atrib1 = tmp2 & ~SPRITEOAM_MASK_BPP;
-            sp.atrib1 = sp.atrib1;
+            tmp2 = sp.attrib1;
+            sp.attrib1 = tmp2 & ~SPRITEOAM_MASK_BPP;
+            sp.attrib1 = sp.attrib1;
 
-            tmp2 = sp.atrib1;
-            sp.atrib1 = tmp2 & ~SPRITEOAM_MASK_SHAPE;
-            sp.atrib1 = sp.atrib1;
+            tmp2 = sp.attrib1;
+            sp.attrib1 = tmp2 & ~SPRITEOAM_MASK_SHAPE;
+            sp.attrib1 = sp.attrib1;
 
             ptr = &sp;
 
             r2 = 0x3F4 << SPRITEOAM_SHIFT_TILENUM;
-            ptr->atrib3 &= ~SPRITEOAM_MASK_TILENUM;
-            ptr->atrib3 |= r2;
+            ptr->attrib3 &= ~SPRITEOAM_MASK_TILENUM;
+            ptr->attrib3 |= r2;
 
-            ptr->atrib3 &= ~SPRITEOAM_MASK_PRIORITY;
+            ptr->attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
 
             r5 = (u16)~SPRITEOAM_MASK_UNK6_4;
 
             r1 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
-            ptr->atrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-            ptr->atrib3 |= r1;
+            ptr->attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
+            ptr->attrib3 |= r1;
 
             ptr->unk6 &= ~SPRITEOAM_MASK_UNK6_0;
             ptr->unk6 &= ~SPRITEOAM_MASK_UNK6_1;
 
             r0 = a0->unk8;
             r0 &= SPRITEOAM_MAX_X;
-            ptr->atrib2 = r0;
+            ptr->attrib2 = r0;
 
             value = a0->unkA + 1;
             value &= SPRITEOAM_MAX_UNK6_4;
@@ -678,51 +678,51 @@ static void sub_801332C(s16 *a0)
     u32 r5;
     u32 r6;
 
-    r1 = sp.atrib1;
-    sp.atrib1 = r1 & ~SPRITEOAM_MASK_AFFINEMODE1;
-    sp.atrib1 = sp.atrib1;
+    r1 = sp.attrib1;
+    sp.attrib1 = r1 & ~SPRITEOAM_MASK_AFFINEMODE1;
+    sp.attrib1 = sp.attrib1;
 
-    r2 = sp.atrib1;
-    sp.atrib1 = r2 & ~SPRITEOAM_MASK_AFFINEMODE2;
-    sp.atrib1 = sp.atrib1;
+    r2 = sp.attrib1;
+    sp.attrib1 = r2 & ~SPRITEOAM_MASK_AFFINEMODE2;
+    sp.attrib1 = sp.attrib1;
 
     r5 = 1 << SPRITEOAM_SHIFT_OBJMODE;
-    r2 = sp.atrib1;
-    sp.atrib1 = r2 & ~SPRITEOAM_MASK_OBJMODE;
-    sp.atrib1 = sp.atrib1 | r5;
+    r2 = sp.attrib1;
+    sp.attrib1 = r2 & ~SPRITEOAM_MASK_OBJMODE;
+    sp.attrib1 = sp.attrib1 | r5;
 
-    r2 = sp.atrib1;
-    sp.atrib1 = r2 & ~SPRITEOAM_MASK_MOSAIC;
-    sp.atrib1 = sp.atrib1;
+    r2 = sp.attrib1;
+    sp.attrib1 = r2 & ~SPRITEOAM_MASK_MOSAIC;
+    sp.attrib1 = sp.attrib1;
 
-    r2 = sp.atrib1;
-    sp.atrib1 = r2 & ~SPRITEOAM_MASK_BPP;
-    sp.atrib1 = sp.atrib1;
+    r2 = sp.attrib1;
+    sp.attrib1 = r2 & ~SPRITEOAM_MASK_BPP;
+    sp.attrib1 = sp.attrib1;
 
-    r2 = sp.atrib1;
-    sp.atrib1 = r2 & ~SPRITEOAM_MASK_SHAPE;
-    sp.atrib1 = sp.atrib1;
+    r2 = sp.attrib1;
+    sp.attrib1 = r2 & ~SPRITEOAM_MASK_SHAPE;
+    sp.attrib1 = sp.attrib1;
 
     ptr = &sp;
 
     r3 = 0x3F5 << SPRITEOAM_SHIFT_TILENUM;
-    ptr->atrib3 &= ~SPRITEOAM_MASK_TILENUM;
-    ptr->atrib3 |= r3;
+    ptr->attrib3 &= ~SPRITEOAM_MASK_TILENUM;
+    ptr->attrib3 |= r3;
 
-    ptr->atrib3 &= ~SPRITEOAM_MASK_PRIORITY;
+    ptr->attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
 
     r6 = (u16)~SPRITEOAM_MASK_UNK6_4;
 
     r2 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
-    ptr->atrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-    ptr->atrib3 |= r2;
+    ptr->attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
+    ptr->attrib3 |= r2;
 
     ptr->unk6 &= ~SPRITEOAM_MASK_UNK6_0;
     ptr->unk6 &= ~SPRITEOAM_MASK_UNK6_1;
 
     r1 = a0[0];
     r1 &= SPRITEOAM_MAX_X;
-    ptr->atrib2 = r1;
+    ptr->attrib2 = r1;
 
     r0 = a0[1] + 1;
     r0 &= SPRITEOAM_MAX_UNK6_4;
@@ -744,34 +744,34 @@ static void sub_8013470(struct MenuInputStruct *a0)
 
     if (a0->unkC != 0) {
         if (a0->unk1E != 0) {
-            r0 = sp.atrib1;
-            sp.atrib1 = r0 & ~SPRITEOAM_MASK_AFFINEMODE1;
-            sp.atrib1 = sp.atrib1;
+            r0 = sp.attrib1;
+            sp.attrib1 = r0 & ~SPRITEOAM_MASK_AFFINEMODE1;
+            sp.attrib1 = sp.attrib1;
 
-            r1 = sp.atrib1;
-            sp.atrib1 = r1 & ~SPRITEOAM_MASK_AFFINEMODE2;
-            sp.atrib1 = sp.atrib1;
+            r1 = sp.attrib1;
+            sp.attrib1 = r1 & ~SPRITEOAM_MASK_AFFINEMODE2;
+            sp.attrib1 = sp.attrib1;
 
-            r1 = sp.atrib1;
-            sp.atrib1 = r1 & (u16)~SPRITEOAM_MASK_OBJMODE;
-            sp.atrib1 = sp.atrib1;
+            r1 = sp.attrib1;
+            sp.attrib1 = r1 & (u16)~SPRITEOAM_MASK_OBJMODE;
+            sp.attrib1 = sp.attrib1;
 
-            r1 = sp.atrib1;
-            sp.atrib1 = r1 & ~SPRITEOAM_MASK_MOSAIC;
-            sp.atrib1 = sp.atrib1;
+            r1 = sp.attrib1;
+            sp.attrib1 = r1 & ~SPRITEOAM_MASK_MOSAIC;
+            sp.attrib1 = sp.attrib1;
 
-            r1 = sp.atrib1;
-            sp.atrib1 = r1 & ~SPRITEOAM_MASK_BPP;
-            sp.atrib1 = sp.atrib1;
+            r1 = sp.attrib1;
+            sp.attrib1 = r1 & ~SPRITEOAM_MASK_BPP;
+            sp.attrib1 = sp.attrib1;
 
-            r1 = sp.atrib1;
-            sp.atrib1 = r1 & ~SPRITEOAM_MASK_SHAPE;
-            sp.atrib1 = sp.atrib1;
+            r1 = sp.attrib1;
+            sp.attrib1 = r1 & ~SPRITEOAM_MASK_SHAPE;
+            sp.attrib1 = sp.attrib1;
 
             ptr = &sp;
 
             r2 = 0x3F2 << SPRITEOAM_SHIFT_TILENUM;
-            r1 = ptr->atrib3;
+            r1 = ptr->attrib3;
             r0 = r1 & (u16)~SPRITEOAM_MASK_TILENUM;
             r0 |= r2;
         
@@ -782,7 +782,7 @@ static void sub_8013470(struct MenuInputStruct *a0)
             r1 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
             r0 &= (u16)~SPRITEOAM_MASK_PALETTENUM;
             r0 |= r1;
-            ptr->atrib3 = r0;
+            ptr->attrib3 = r0;
 
             r0 = ptr->unk6;
             r1 = r0 & (u16)~SPRITEOAM_MASK_UNK6_0;
@@ -790,7 +790,7 @@ static void sub_8013470(struct MenuInputStruct *a0)
 
             r0 = a0->unkC;
             r0 &= SPRITEOAM_MAX_X;
-            ptr->atrib2 = r0;
+            ptr->attrib2 = r0;
 
             r0 = a0->unkE;
             r0 &= SPRITEOAM_MAX_UNK6_4;
@@ -802,29 +802,29 @@ static void sub_8013470(struct MenuInputStruct *a0)
             AddSprite(&sp, 0xFF, NULL, NULL);
         }
         if (a0->unk20 != 0 && a0->unk20 != a0->unk1E + 1) {
-            r0 = sp.atrib1;
-            sp.atrib1 = r0 & ~SPRITEOAM_MASK_AFFINEMODE1;
-            sp.atrib1 = sp.atrib1;
+            r0 = sp.attrib1;
+            sp.attrib1 = r0 & ~SPRITEOAM_MASK_AFFINEMODE1;
+            sp.attrib1 = sp.attrib1;
 
-            sp.atrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
-            sp.atrib1 = sp.atrib1;
+            sp.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+            sp.attrib1 = sp.attrib1;
 
-            sp.atrib1 &= (u16)~SPRITEOAM_MASK_OBJMODE;
-            sp.atrib1 = sp.atrib1;
+            sp.attrib1 &= (u16)~SPRITEOAM_MASK_OBJMODE;
+            sp.attrib1 = sp.attrib1;
 
-            sp.atrib1 &= ~SPRITEOAM_MASK_MOSAIC;
-            sp.atrib1 = sp.atrib1;
+            sp.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
+            sp.attrib1 = sp.attrib1;
 
-            sp.atrib1 &= ~SPRITEOAM_MASK_BPP;
-            sp.atrib1 = sp.atrib1;
+            sp.attrib1 &= ~SPRITEOAM_MASK_BPP;
+            sp.attrib1 = sp.attrib1;
 
-            sp.atrib1 &= ~SPRITEOAM_MASK_SHAPE;
-            sp.atrib1 = sp.atrib1;
+            sp.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
+            sp.attrib1 = sp.attrib1;
 
             ptr = &sp;
 
             r2 = 0x3F3 << SPRITEOAM_SHIFT_TILENUM;
-            r1 = ptr->atrib3;
+            r1 = ptr->attrib3;
             r0 = r1 & (u16)~SPRITEOAM_MASK_TILENUM;
             r0 |= r2;
         
@@ -835,7 +835,7 @@ static void sub_8013470(struct MenuInputStruct *a0)
             r1 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
             r0 &= (u16)~SPRITEOAM_MASK_PALETTENUM;
             r0 |= r1;
-            ptr->atrib3 = r0;
+            ptr->attrib3 = r0;
 
             r0 = ptr->unk6;
             r1 = r0 & (u16)~SPRITEOAM_MASK_UNK6_0;
@@ -843,7 +843,7 @@ static void sub_8013470(struct MenuInputStruct *a0)
 
             r0 = a0->unkC + 10;
             r0 &= SPRITEOAM_MAX_X;
-            ptr->atrib2 = r0;
+            ptr->attrib2 = r0;
 
             r0 = a0->unkE;
             r0 &= SPRITEOAM_MAX_UNK6_4;

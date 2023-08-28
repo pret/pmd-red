@@ -697,36 +697,36 @@ void sub_8039174(void)
 
     spr = &gRescuePasswordMenu->unk208;
 
-    spr->atrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
+    spr->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
 
-    spr->atrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+    spr->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
 
-    spr->atrib1 &= ~SPRITEOAM_MASK_OBJMODE;
+    spr->attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
 
-    spr->atrib1 &= ~SPRITEOAM_MASK_MOSAIC;
+    spr->attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
 
-    spr->atrib1 &= ~SPRITEOAM_MASK_BPP;
+    spr->attrib1 &= ~SPRITEOAM_MASK_BPP;
 
     r2 = 1 << SPRITEOAM_SHIFT_SHAPE;
-    spr->atrib1 &= ~SPRITEOAM_MASK_SHAPE;
-    spr->atrib1 |= r2;
+    spr->attrib1 &= ~SPRITEOAM_MASK_SHAPE;
+    spr->attrib1 |= r2;
 
     r2 = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
-    spr->atrib3 &= ~SPRITEOAM_MASK_TILENUM;
-    spr->atrib3 |= r2;
+    spr->attrib3 &= ~SPRITEOAM_MASK_TILENUM;
+    spr->attrib3 |= r2;
 
-    spr->atrib3 &= ~SPRITEOAM_MASK_PRIORITY;
+    spr->attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
 
     r2 = (u16)~SPRITEOAM_MASK_UNK6_4;
 
     r4 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
-    spr->atrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-    spr->atrib3 |= r4;
+    spr->attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
+    spr->attrib3 |= r4;
 
     #ifndef NONMATCHING
     while (0) ;
     #endif //NONMATCHING
-    spr->atrib2 = 0; // Without the while(0), this 0 is loaded super early and also into r3
+    spr->attrib2 = 0; // Without the while(0), this 0 is loaded super early and also into r3
 
     temp = 192 << SPRITEOAM_SHIFT_UNK6_4;
     r2 &= spr->unk6;
@@ -741,8 +741,8 @@ void sub_80391F8(void)
 
     spr = &gRescuePasswordMenu->unk208;
 
-    spr->atrib2 &= ~SPRITEOAM_MASK_X;
-    spr->atrib2 |= 112;
+    spr->attrib2 &= ~SPRITEOAM_MASK_X;
+    spr->attrib2 |= 112;
 
     val = 112 << SPRITEOAM_SHIFT_UNK6_4;
     spr->unk6 &= ~SPRITEOAM_MASK_UNK6_4;

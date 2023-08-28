@@ -291,7 +291,7 @@ void sub_8038830(void)
     r5 = 0;
     sprite = &gUnknown_203B364->unk1A8;
 
-    r1 = sprite->atrib1;
+    r1 = sprite->attrib1;
     r0 = (u16)~SPRITEOAM_MASK_AFFINEMODE1;
     r0 &= r1;
 
@@ -306,10 +306,10 @@ void sub_8038830(void)
     r2 = 1 << SPRITEOAM_SHIFT_SHAPE;
     r0 &= (u16)~SPRITEOAM_MASK_SHAPE;
     r0 |= r2;
-    sprite->atrib1 = r0;
+    sprite->attrib1 = r0;
 
     r2 = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
-    r1 = sprite->atrib3;
+    r1 = sprite->attrib3;
     r0 = (u16)~SPRITEOAM_MASK_TILENUM;
     r0 &= r1;
     r0 |= r2;
@@ -321,9 +321,9 @@ void sub_8038830(void)
     r4 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
     r0 &= (u16)~SPRITEOAM_MASK_PALETTENUM;
     r0 |= r4;
-    sprite->atrib3 = r0;
+    sprite->attrib3 = r0;
 
-    sprite->atrib2 = 112; // Set x to 112. Set matrixNum/size to 0
+    sprite->attrib2 = 112; // Set x to 112. Set matrixNum/size to 0
 
     r1 = 104 << SPRITEOAM_SHIFT_UNK6_4;
     r2 &= sprite->unk6;

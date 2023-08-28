@@ -185,15 +185,15 @@ void sub_8004EA8(struct ax_pose *a0, struct axdata1 *a1, struct UnkSpriteMem *a2
         r7 = 255;
 
     if (spriteMasks == NULL) {
-        sprite->atrib1 = sp.flags1;
-        sprite->atrib2 = sp.flags2;
-        sprite->atrib3 = sp.flags3;
+        sprite->attrib1 = sp.flags1;
+        sprite->attrib2 = sp.flags2;
+        sprite->attrib3 = sp.flags3;
         sprite->unk6 = sp.unkA;
     }
     else {
-        sprite->atrib1 = (spriteMasks[0] & sp.flags1) | spriteMasks[3];
-        sprite->atrib2 = (spriteMasks[1] & sp.flags2) | spriteMasks[4];
-        sprite->atrib3 = (spriteMasks[2] & sp.flags3) | spriteMasks[5];
+        sprite->attrib1 = (spriteMasks[0] & sp.flags1) | spriteMasks[3];
+        sprite->attrib2 = (spriteMasks[1] & sp.flags2) | spriteMasks[4];
+        sprite->attrib3 = (spriteMasks[2] & sp.flags3) | spriteMasks[5];
         sprite->unk6 = sp.unkA;
     }
 
@@ -201,14 +201,14 @@ void sub_8004EA8(struct ax_pose *a0, struct axdata1 *a1, struct UnkSpriteMem *a2
         tileNum = gUnknown_2025672[sp.unk2] & 0x3FF;
     }
     else {
-        tileNum = (sprite->atrib3 & 0x3FF) + a1->vramTileOrMaybeAnimTimer;
+        tileNum = (sprite->attrib3 & 0x3FF) + a1->vramTileOrMaybeAnimTimer;
         tileNum &= 0x3FF;
     }
 
     // Set tileNum, maintain priority/paletteNum
-    sprite->atrib3 = tileNum | (sprite->atrib3 & 0xFC00);
+    sprite->attrib3 = tileNum | (sprite->attrib3 & 0xFC00);
 
-    x = (sprite->atrib2 & 0x1FF) - 256;
+    x = (sprite->attrib2 & 0x1FF) - 256;
     x += a1->xPos;
     if (x < -64)
         return;
@@ -216,7 +216,7 @@ void sub_8004EA8(struct ax_pose *a0, struct axdata1 *a1, struct UnkSpriteMem *a2
         return;
 
     // Set x, maintain matrixNum/size
-    sprite->atrib2 = (x & 0x1FF) | (sprite->atrib2 & 0xFE00);
+    sprite->attrib2 = (x & 0x1FF) | (sprite->attrib2 & 0xFE00);
 
     uVar9 = sprite->unk6 << 16;
     earlyMask = 0xFFF;
@@ -229,14 +229,14 @@ void sub_8004EA8(struct ax_pose *a0, struct axdata1 *a1, struct UnkSpriteMem *a2
         return;
 
     // Set y, maintain affineMode/objMode/mosaic/bpp/shape
-    sprite->atrib1 = (y & 0xFF) | (sprite->atrib1 & 0xFF00);
+    sprite->attrib1 = (y & 0xFF) | (sprite->attrib1 & 0xFF00);
 
     // Set paletteNum, maintain tileNum/priority
     if (((uVar9 >> 17) & 1) == 0)
-        sprite->atrib3 = ((a1->paletteNum & 0xF) << 12) | (sprite->atrib3 & earlyMask);
+        sprite->attrib3 = ((a1->paletteNum & 0xF) << 12) | (sprite->attrib3 & earlyMask);
 
     if (sp.unk2 != 0)
-        sprite->atrib3 = ((gUnknown_2025682[sp.unk2] & 0xF) << 12) | (sprite->atrib3 & earlyMask);
+        sprite->attrib3 = ((gUnknown_2025682[sp.unk2] & 0xF) << 12) | (sprite->attrib3 & earlyMask);
 
     gUnknown_2025EA8[gSpriteCount].unk0 = gUnknown_20256A0.sprites[r7].unk0;
     gUnknown_20256A0.sprites[r7].unk0 = gUnknown_2025EA8 + gSpriteCount;
@@ -528,23 +528,23 @@ void AddSprite(struct SpriteOAM *a0, s32 a1, struct UnkSpriteMem *a2, struct unk
         a1 = 255;
 
     if (a3 == NULL) {
-        spr->atrib1 = a0->atrib1;
-        spr->atrib2 = a0->atrib2;
-        spr->atrib3 = a0->atrib3;
+        spr->attrib1 = a0->attrib1;
+        spr->attrib2 = a0->attrib2;
+        spr->attrib3 = a0->attrib3;
         spr->unk6 = a0->unk6;
     }
     else {
-        spr->atrib1 = (a0->atrib1 & a3->unk0) | a3->unk6;
-        spr->atrib2 = (a0->atrib2 & a3->unk2) | a3->unk8;
-        spr->atrib3 = (a0->atrib3 & a3->unk4) | a3->unkA;
+        spr->attrib1 = (a0->attrib1 & a3->unk0) | a3->unk6;
+        spr->attrib2 = (a0->attrib2 & a3->unk2) | a3->unk8;
+        spr->attrib3 = (a0->attrib3 & a3->unk4) | a3->unkA;
         spr->unk6 = a0->unk6;
     }
 
     yPos = spr->unk6 / 16;
     nullsub_3(yPos, 0);
     yPos &= SPRITEOAM_MAX_Y;
-    spr->atrib1 &= ~SPRITEOAM_MASK_Y;
-    spr->atrib1 |= yPos;
+    spr->attrib1 &= ~SPRITEOAM_MASK_Y;
+    spr->attrib1 |= yPos;
 
     if (a2 != NULL)
         RegisterSpriteParts_80052BC(a2);
@@ -710,13 +710,13 @@ void CopySpritesToOam(void)
             // Skip affineParam
             oam -= 2;
             // Set tileNum/priority/paletteNum
-            *oam = spr->atrib3;
+            *oam = spr->attrib3;
             // Set x/matrixNum/size
             oam--;
-            *oam = spr->atrib2;
+            *oam = spr->attrib2;
             // Set y/affineMode/objMode/mosaic/bpp/shape
             oam--;
-            *oam = spr->atrib1;
+            *oam = spr->attrib1;
 
             count++;
         }

@@ -5,11 +5,11 @@
 struct SpriteOAM
 {
     // y:8  affineMode1:1  affineMode2:1  objMode:2  mosaic:1  bpp:1  shape:2
-    /* 0x0 */ u16 atrib1;
+    /* 0x0 */ u16 attrib1;
     // x:9  matrixNum:5  size:2
-    /* 0x2 */ u16 atrib2;
+    /* 0x2 */ u16 attrib2;
     // tileNum:10  priority:2  paletteNum:4
-    /* 0x4 */ u16 atrib3;
+    /* 0x4 */ u16 attrib3;
     // unk6_0:1  unk6_1:1  unk6_2:2?  unk6_4:12
     u16 unk6;
 };
@@ -18,7 +18,7 @@ struct SpriteOAM
 // Most funcs that deal with it look the same and do some weird bit manipulations one by one on the attributes.
 // It seems like there is a macro to initialize the structure to some default values...
 
-// atrib1
+// attrib1
 
 #define SPRITEOAM_MAX_Y 0xFF
 #define SPRITEOAM_SHIFT_Y 0
@@ -48,7 +48,7 @@ struct SpriteOAM
 #define SPRITEOAM_SHIFT_SHAPE 14
 #define SPRITEOAM_MASK_SHAPE (SPRITEOAM_MAX_SHAPE << SPRITEOAM_SHIFT_SHAPE)
 
-// atrib2
+// attrib2
 
 #define SPRITEOAM_MAX_X 0x1FF
 #define SPRITEOAM_SHIFT_X 0
@@ -62,7 +62,7 @@ struct SpriteOAM
 #define SPRITEOAM_SHIFT_SIZE 12
 #define SPRITEOAM_MASK_SIZE (SPRITEOAM_MAX_SIZE << SPRITEOAM_SHIFT_SIZE)
 
-// atrib3
+// attrib3
 
 #define SPRITEOAM_MAX_TILENUM 0x3FF
 #define SPRITEOAM_SHIFT_TILENUM 0
