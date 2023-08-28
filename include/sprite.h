@@ -30,7 +30,7 @@ struct unkStruct_20266B0
 };
 
 // size: ? 0x3C for now
-struct Entity_Sub28
+struct EntitySpriteInfo
 {
     u16 unk0;
     // 0x2 and 0x6 seem to be related to the sprite animation, though not sure how they're related.
@@ -90,9 +90,9 @@ void SetSavingIconCoords(struct Position *);
 void sub_8004E8C(struct unkStruct_2039DB0 *);
 void sub_8005180(void);
 void sub_8005304(void);
-void sub_80053AC(struct Entity_Sub28 *, struct Dungeon_Sub17B44 *, u32, u32, u32, u32, bool8);
-void sub_80053D0(struct Entity_Sub28 *, struct Dungeon_Sub17B44_Sub4 *, u32, u32, u32, u32, bool8);
-void sub_800543C(struct Entity_Sub28 *, struct Dungeon_Sub17B44 *, u32, u32, u32, bool8);
+void sub_80053AC(struct EntitySpriteInfo *, struct Dungeon_Sub17B44 *, u32, u32, u32, u32, bool8);
+void sub_80053D0(struct EntitySpriteInfo *, struct Dungeon_Sub17B44_Sub4 *, u32, u32, u32, u32, bool8);
+void sub_800543C(struct EntitySpriteInfo *, struct Dungeon_Sub17B44 *, u32, u32, u32, bool8);
 void sub_80054BC(struct axPokemon *);
 
 #endif // GUARD_SPRITE_H

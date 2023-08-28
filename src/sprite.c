@@ -20,7 +20,7 @@ extern struct unkStruct_20266B0 *gUnknown_203B074;
 extern void nullsub_3(s32, s32);
 
 void RegisterSpriteParts_80052BC(struct UnkSpriteMem *);
-void sub_800545C(struct Entity_Sub28 *, struct Dungeon_Sub17B44_Sub4 *, u32, u32, u32, bool8);
+void sub_800545C(struct EntitySpriteInfo *, struct Dungeon_Sub17B44_Sub4 *, u32, u32, u32, bool8);
 
 void InitSprites(void)
 {
@@ -886,12 +886,12 @@ void sub_800533C(struct ax_pose **a0, struct UnkSpriteMem **a1, struct axdata1 *
     }
 }
 
-void sub_80053AC(struct Entity_Sub28 *a0, struct Dungeon_Sub17B44 *a1, u32 a2, u32 a3, u32 a4, u32 spriteAnimIndex, bool8 a6)
+void sub_80053AC(struct EntitySpriteInfo *a0, struct Dungeon_Sub17B44 *a1, u32 a2, u32 a3, u32 a4, u32 spriteAnimIndex, bool8 a6)
 {
     sub_80053D0(a0, a1->unk4, a2, a3, a4, spriteAnimIndex, a6);
 }
 
-void sub_80053D0(struct Entity_Sub28 *a0, struct Dungeon_Sub17B44_Sub4 *a1, u32 a2, u32 direction, u32 a4, u32 spriteAnimIndex, bool8 a6)
+void sub_80053D0(struct EntitySpriteInfo *a0, struct Dungeon_Sub17B44_Sub4 *a1, u32 a2, u32 direction, u32 a4, u32 spriteAnimIndex, bool8 a6)
 {
     a0->unk0 = 0x8000;
     if (a6)
@@ -914,12 +914,12 @@ void sub_80053D0(struct Entity_Sub28 *a0, struct Dungeon_Sub17B44_Sub4 *a1, u32 
     a0->unk30 = a1->unk10;
 }
 
-void sub_800543C(struct Entity_Sub28 *a0, struct Dungeon_Sub17B44 *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
+void sub_800543C(struct EntitySpriteInfo *a0, struct Dungeon_Sub17B44 *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
 {
     sub_800545C(a0, a1->unk4, a2, a3, spriteAnimIndex, a5);
 }
 
-void sub_800545C(struct Entity_Sub28 *a0, struct Dungeon_Sub17B44_Sub4 *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
+void sub_800545C(struct EntitySpriteInfo *a0, struct Dungeon_Sub17B44_Sub4 *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
 {
     a0->unk0 = 0x8000;
     if (a5)

@@ -71,9 +71,9 @@ void sub_806CCB4(struct Entity *entity, u8 param_2)
     sVar1 = entity->unk68;
 
     if (info->waitingStatus != STATUS_DECOY && !flag)
-        sub_80053AC(&entity->sub28, entity->unk64, entity->unk6A, entity->direction, sVar1, Rand32Bit() & 3, FALSE);
+        sub_80053AC(&entity->spriteInfo, entity->unk64, entity->unk6A, entity->direction, sVar1, Rand32Bit() & 3, FALSE);
     else
-        sub_80053AC(&entity->sub28, sub_80687D0(MONSTER_DECOY), entity->unk6A, entity->direction, sVar1, Rand32Bit() & 3, FALSE);
+        sub_80053AC(&entity->spriteInfo, sub_80687D0(MONSTER_DECOY), entity->unk6A, entity->direction, sVar1, Rand32Bit() & 3, FALSE);
 
     entity->unk6E = 0;
 }

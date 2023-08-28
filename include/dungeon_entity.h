@@ -271,7 +271,7 @@ struct Entity
     // The global spawn index counter starts at 10. Each Pokémon that spawns increments the counter and
     // gets assigned the current counter value as its spawn index.
     /* 0x26 */ u16 spawnGenID;
-    /* 0x28*/ struct Entity_Sub28 sub28;
+    /* 0x28*/ struct EntitySpriteInfo spriteInfo;
     struct Dungeon_Sub17B44 *unk64;
     s16 unk68;
     u8 unk6A;
