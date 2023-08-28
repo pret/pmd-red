@@ -1,9 +1,10 @@
 #ifndef GUARD_DUNGEON_DATA_H
 #define GUARD_DUNGEON_DATA_H
 
+#include "global.h"
 #include "constants/monster.h"
 #include "dungeon_entity.h"
-#include "global.h"
+#include "file_system.h"
 #include "map.h"
 #include "position.h"
 #include "sprite.h"
@@ -199,8 +200,8 @@ struct Dungeon
     /* 0x17B38 */ u32 unk17B38;
     /* 0x17B3C */ u32 unk17B3C;
     u8 fill17B40[0x17B44 - 0x17B40];
-    struct Dungeon_ax *sub17B44[MONSTER_MAX]; // Assuming MONSTER_MAX since the highest value I've seen read is MONSTER_DECOY
-    u8 fill181E0[0x181E8 - 0x181E0];
+    /* 0x17B44 */ struct OpenedFile *sprites[MONSTER_MAX + 1];
+    u8 fill181E4[0x181E8 - 0x181E4];
     /* 0x181E8 */ struct Position cameraPos;
     /* 0x181EC */ struct Position cameraPosMirror;
     /* 0x181F0 */ struct Position cameraPixelPos;

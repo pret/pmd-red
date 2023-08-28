@@ -272,7 +272,7 @@ struct Entity
     // gets assigned the current counter value as its spawn index.
     /* 0x26 */ u16 spawnGenID;
     /* 0x28*/ struct EntitySpriteInfo spriteInfo;
-    struct Dungeon_ax *unk64;
+    struct OpenedFile *unk64;
     s16 unk68;
     u8 unk6A;
     u8 unk6B;

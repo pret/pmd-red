@@ -65,20 +65,13 @@ struct EntitySpriteInfo
 };
 
 // size: ?
-struct Dungeon_ax_Sub4
+struct Dungeon_ax
 {
     u32 unk0;
     u32 **unk4;
     u8 fill8[0xC - 0x8];
     u32 unkC;
     u32 unk10;
-};
-
-// size: ?
-struct Dungeon_ax
-{
-    u8 fill0[0x4 - 0x0];
-    struct Dungeon_ax_Sub4 *unk4;
 };
 
 void AddSprite(struct SpriteOAM *, s32, struct UnkSpriteMem *, struct unkStruct_2039DB0 *);
@@ -90,9 +83,9 @@ void SetSavingIconCoords(struct Position *);
 void sub_8004E8C(struct unkStruct_2039DB0 *);
 void sub_8005180(void);
 void sub_8005304(void);
-void sub_80053AC(struct EntitySpriteInfo *, struct Dungeon_ax *, u32, u32, u32, u32, bool8);
-void sub_80053D0(struct EntitySpriteInfo *, struct Dungeon_ax_Sub4 *, u32, u32, u32, u32, bool8);
-void sub_800543C(struct EntitySpriteInfo *, struct Dungeon_ax *, u32, u32, u32, bool8);
+void sub_80053AC(struct EntitySpriteInfo *, struct OpenedFile *, u32, u32, u32, u32, bool8);
+void sub_80053D0(struct EntitySpriteInfo *, struct Dungeon_ax *, u32, u32, u32, u32, bool8);
+void sub_800543C(struct EntitySpriteInfo *, struct OpenedFile *, u32, u32, u32, bool8);
 void sub_80054BC(struct axPokemon *);
 
 #endif // GUARD_SPRITE_H
