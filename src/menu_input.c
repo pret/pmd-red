@@ -598,7 +598,11 @@ void AddMenuCursorSprite_(struct MenuInputStruct *a0, u32 a1)
         UpdateMenuCursorSpriteCoords(a0);
 
         if (!(a0->unk24 & 8)) {
+            #ifdef NONMATCHING
+            u32 tmp, tmp2;
+            #else
             register u32 tmp asm("r0"), tmp2 asm("r1");
+            #endif
 
             tmp = sp.attrib1;
             sp.attrib1 = tmp & ~SPRITEOAM_MASK_AFFINEMODE1;
@@ -671,9 +675,13 @@ static void sub_801332C(s16 *a0)
 {
     struct SpriteOAM sp = {};
     struct SpriteOAM* ptr;
+    #ifdef NONMATCHING
+    u32 r0, r1, r2;
+    #else
     register u32 r0 asm("r0");
     register u32 r1 asm("r1");
     register u32 r2 asm("r2");
+    #endif
     u32 r3;
     u32 r5;
     u32 r6;
@@ -736,11 +744,16 @@ static void sub_801332C(s16 *a0)
 static void sub_8013470(struct MenuInputStruct *a0)
 {
     struct SpriteOAM sp = {};
-    register struct SpriteOAM* ptr asm("r3");
+    #if NONMATCHING
+    struct SpriteOAM *ptr;
+    u32 r0, r1, r5;
+    #else
+    register struct SpriteOAM *ptr asm("r3");
     register u32 r0 asm("r0");
     register u32 r1 asm("r1");
-    u32 r2;
     register u32 r5 asm("r5");
+    #endif
+    u32 r2;
 
     if (a0->unkC != 0) {
         if (a0->unk1E != 0) {
