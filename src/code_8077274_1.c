@@ -244,7 +244,7 @@ void sub_8078E18(struct Entity * pokemon, struct Entity * target)
     s16 apparentID_s16;
     s32 index;
     struct EntityInfo *entityInfo;
-    struct Dungeon_Sub17B44 *iVar9;
+    struct Dungeon_ax *iVar9;
     struct PokemonStruct *auStack544[128];
 
     if (!EntityExists(target))
