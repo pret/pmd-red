@@ -211,17 +211,14 @@ void SetBGPaletteBufferColor(s32 index, u16 *color)
     gBGPaletteBuffer[index] = *color;
 }
 
-void nullsub_4(void)
+void nullsub_4(s32 index, u8 *RGBArray, s32 a1, u8 *a2)
 {
-
 }
 void nullsub_5(void)
 {
-
 }
 void nullsub_143(void)
 {
-
 }
 
 void TransferBGPaletteBuffer(void)

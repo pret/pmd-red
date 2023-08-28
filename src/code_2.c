@@ -21,6 +21,7 @@
 #include "code_8094F88.h"
 #include "sprite.h"
 #include "code_80118A4.h"
+#include "bg_palette_buffer.h"
 
 extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);
@@ -38,7 +39,6 @@ extern u32 sub_8001658(u32, u32);
 extern void sub_800A8F8(u32);
 extern void sub_80097B0(void);
 extern void LoadTitleScreen(void);
-extern void SetBGPaletteBufferColorRGB(s32, u8 *, s32, u8 *);
 extern void sub_80095CC(u32, u32);
 extern s32 GetFirstIndexofMailType(u8);
 extern void nullsub_33(void);
