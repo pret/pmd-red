@@ -1,9 +1,8 @@
 #include "global.h"
+#include "code_8004AA0.h"
 #include "constants/walkable_tile.h"
 #include "dungeon_map_access.h"
-
 #include "dungeon_global_data.h"
-#include "file_system.h"
 #include "tile_types.h"
 #include "random.h"
 #include "dungeon_engine.h"
@@ -24,12 +23,11 @@ extern const struct FileArchive gDungeonFileArchive;
 
 extern struct OpenedFile *gUnknown_202F18C;
 extern struct OpenedFile *gDungeonPaletteFile;
-extern u8 gUnknown_202EE8C[];
+extern struct unkStruct_202EE8C gUnknown_202EE8C[32];
 extern u8 gWalkableTileToCrossableTerrain[8];
 extern const u8 gDungeonWaterType[];
 extern u8 sub_8043CE4(u32);
 
-extern void sub_8004AA4(u8 *, struct OpenedFile *, u32);
 extern int sprintf(char *, const char *, ...);
 void sub_8049BB0(s32, s32);
 void sub_80498A8(s32, s32);
@@ -334,4 +332,3 @@ void sub_8049B8C(void)
     }
   }
 }
-

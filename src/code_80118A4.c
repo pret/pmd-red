@@ -1,6 +1,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include "global.h"
+#include "code_8004AA0.h"
 #include "code_80118A4.h"
 #include "music.h"
 #include "constants/bg_music.h"
@@ -19,10 +20,9 @@ extern struct GameOptions *gGameOptionsRef;
 struct UnkBgStruct
 {
     u8 padding[0x4c4b];
-    u32 unk4c4c;
-    u8 padding2[0x17A];
-    u32 *unk4dcc;
-    u32 unk4dd0;
+    /* 0x4C4C */ struct unkStruct_202EE8C unk4C4C[16];
+    u32 unk4DCC;
+    u32 unk4DD0;
     /* 0x4DD4 */ s16 xoffset;
     /* 0x4DD6 */ s16 yoffset;
 };
@@ -43,19 +43,15 @@ extern void sub_8009908(void);
 extern void xxx_call_update_bg_sound_input(void);
 extern void sub_80060EC(void);
 extern void sub_800CB20(void);
-extern void sub_8004AF0(u8, u32 *r1, u32, u32, u32 *r2, u32);
-extern u8 sub_80111C4();
+extern bool8 sub_80111C4();
 extern void sub_8010F28();
 
 void sub_801169C(void)
 {
-    u8 return_var;
-
     SetBG2RegOffsets(gUnknown_203B0E4->xoffset, gUnknown_203B0E4->yoffset);
     SetBG3RegOffsets(gUnknown_203B0E4->xoffset, gUnknown_203B0E4->yoffset);
     sub_8010F28();
-    return_var = sub_80111C4();
-    sub_8004AF0(return_var, &(gUnknown_203B0E4->unk4c4c), 0xB0, 0x10, (gUnknown_203B0E4->unk4dcc), 0);
+    sub_8004AF0(sub_80111C4(), gUnknown_203B0E4->unk4C4C, 0xB0, 16, gUnknown_203B0E4->unk4DCC, NULL);
     sub_8005838(0, 0);
     nullsub_8(gGameOptionsRef->unkA);
     sub_8005180();

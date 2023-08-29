@@ -1,5 +1,7 @@
 #include "global.h"
 #include "bg_palette_buffer.h"
+#include "code_8004AA0.h"
+#include "code_800558C_1.h"
 #include "cpu.h"
 #include "crt0.h"
 #include "file_system.h"
@@ -36,9 +38,6 @@ extern const char gUnknown_8270000[];
 extern const u8 gUnknown_80B9BF1[];
 extern const IntrCallback gInitialIntrTable[6];
 
-// code_800558C_1.c
-extern void nullsub_9(void);
-extern void sub_80057E8(void);
 // code_8009804.c
 extern void sub_80098A0(void);
 // code_2.c
@@ -49,8 +48,6 @@ extern void sub_800D6AC(void);
 extern void sub_800D7D0(void);
 // music.c
 extern void InitMusic(void); // music initializer
-// code_8004AA0.s
-extern void nullsub_6(void);
 
 void InitIntrTable(const IntrCallback *interrupt_table);
 IntrCallback SetInterruptCallback(u32 index, IntrCallback new_callback);
