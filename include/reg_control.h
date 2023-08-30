@@ -18,5 +18,6 @@ extern s16 gUnknown_203B0AE;
 
 void nullsub_17(void);
 void xxx_update_bg_sound_input(void);
+void sub_800BA5C(void);
 
 #endif // GUARD_CODE_800B5F0_H

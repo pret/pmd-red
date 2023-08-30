@@ -1,5 +1,5 @@
 #include "global.h"
-#include "bg.h"
+#include "bg_control.h"
 #include "constants/bg_music.h"
 #include "debug.h"
 #include "file_system.h"
@@ -30,7 +30,6 @@ extern void LoadGameOptions(void);
 extern void SetWindowBGColor(void);
 extern void LoadItemParameters(void);
 extern void LoadMailInfo(void);
-extern void sub_800CD64(u32, u32);
 extern void sub_800DAAC(void);
 extern void sub_800135C(void);
 extern void xxx_script_related_8001334(u32);
@@ -88,7 +87,7 @@ void GameLoop(void)
     LoadWazaParameters();
     sub_80950BC();
     LoadMailInfo();
-    sub_800CD64(0x8000, 0);
+    sub_800CD64(0x8000, FALSE);
     sub_8012284();
     InitializeGameOptions(TRUE);
     SetWindowTitle(gPMDBuildVersion);

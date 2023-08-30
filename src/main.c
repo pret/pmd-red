@@ -1,4 +1,5 @@
 #include "global.h"
+#include "bg_control.h"
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
 #include "code_800558C_1.h"
@@ -19,8 +20,6 @@ EWRAM_DATA IntrCallback gIntrTable[6] = {0};
 EWRAM_DATA IntrCallback gIntrCallbacks[6] = {0};
 
 extern char ewram_start[];
-extern u16 gBldCnt;
-extern u8 gUnknown_202D7FE;
 extern char alt_203B038[];
 extern char gTitlePaletteFile[];
 extern char gUnknown_203BC04[];
@@ -90,7 +89,7 @@ void AgbMain(void)
     REG_WINOUT = WINOUT_WIN01_BG0 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR; // 61
     gBldCnt = REG_BLDCNT = BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_BD | BLDCNT_TGT2_OBJ; // 15426
     REG_BLDALPHA = BLDALPHA_BLEND(10, 6); // 1546
-    gUnknown_202D7FE = 0;
+    gUnknown_202D7FE = FALSE;
     REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_WRAP | BGCNT_SCREENBASE(12); // 11264
     REG_BG1CNT = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_WRAP | BGCNT_SCREENBASE(13); // 11521
     REG_BG2CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_WRAP | BGCNT_SCREENBASE(14); // 11786

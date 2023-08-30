@@ -1,4 +1,5 @@
 #include "global.h"
+#include "bg_control.h"
 #include "code_800DAC0.h"
 #include "code_80118A4.h"
 #include "file_system.h"
@@ -48,7 +49,6 @@ extern void sub_8009BE4(void);
 extern void sub_8040238(void);
 extern void sub_800F204(void);
 extern void sub_803EAF0(u32, u32);
-extern void sub_800CD64(u32, u32);
 extern struct unkStruct_800F18C *sub_800F18C(s32);
 extern void sub_800DCA8(struct unkStruct_203B0CC_sub *);
 

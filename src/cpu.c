@@ -1,8 +1,8 @@
 #include "global.h"
+#include "bg_control.h"
 #include "cpu.h"
 
 extern u32 gUnknown_202D800;
-extern u16 gBldCnt; // used to update Blend Count Reg
 extern u16 gUnknown_203B0BE[];
 
 void sub_800CDA8(u32 r0)
@@ -16,7 +16,7 @@ u32 sub_800CDC8(void)
     return gUnknown_202D800;
 }
 
-void SetWindowTitle(char *title)
+void SetWindowTitle(u8 *title)
 {
 }
 
@@ -24,13 +24,11 @@ void nullsub_23(bool8 a0)
 {
 }
 
-// Unused
-void nullsub_182(void)
+UNUSED static void nullsub_182(void)
 {
 }
 
-// Unused
-bool8 sub_800CDE0(void)
+UNUSED static bool8 sub_800CDE0(void)
 {
     return TRUE;
 }
