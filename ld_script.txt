@@ -61,9 +61,6 @@ SECTIONS {
         src/input.o(.text);
         src/code_8004AA0.o(.text);
         src/sprite.o(.text);
-        asm/code_800558C.o(.text);
-        src/code_800558C_1.o(.text);
-        asm/code_8005838.o(.text);
         src/code_800558C.o(.text);
         src/random.o(.text);
         src/text1.o(.text);
@@ -190,7 +187,6 @@ SECTIONS {
         asm/code_80521D0.o(.text);
         src/charge_move.o(.text);
         src/move_util.o(.text);
-        asm/code_805744C.o(.text);
         src/code_8057824.o(.text);
         asm/code_8057824.o(.text);
         src/code_805A120.o(.text);

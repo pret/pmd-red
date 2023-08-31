@@ -2,11 +2,12 @@
 #include <stdio.h>
 #include "global.h"
 #include "code_8004AA0.h"
+#include "code_800558C.h"
 #include "code_80118A4.h"
 #include "music.h"
 #include "constants/bg_music.h"
 #include "play_time.h"
-#include "bg.h"
+#include "bg_control.h"
 #include "input.h"
 #include "config.h"
 #include "game_options.h"
@@ -40,7 +41,6 @@ extern void TransferBGPaletteBuffer(void);
 extern void xxx_call_update_bg_vram(void);
 extern void sub_8009908(void);
 extern void xxx_call_update_bg_sound_input(void);
-extern void sub_80060EC(void);
 extern void sub_800CB20(void);
 extern bool8 sub_80111C4();
 extern void sub_8010F28();

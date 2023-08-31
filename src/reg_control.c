@@ -1,5 +1,5 @@
 #include "global.h"
-#include "bg.h"
+#include "bg_control.h"
 #include "debug.h"
 #include "input.h"
 #include "music.h"
@@ -8,10 +8,6 @@
 
 extern struct unkStruct_202D648 gUnknown_202D608[8];
 extern struct unkStruct_202D648 gUnknown_202D648[8];
-
-// bg_control.c
-extern u8 gUnknown_202D7FE;
-extern u16 gBldCnt;
 
 EWRAM_DATA bool8 gUnknown_203B099;
 EWRAM_DATA bool8 gUnknown_203B09A;
@@ -25,6 +21,8 @@ EWRAM_DATA s16 gUnknown_203B0AC;
 EWRAM_DATA s16 gUnknown_203B0AE;
 EWRAM_DATA s16 gUnknown_203B0B0; // Written to but never read
 EWRAM_DATA s16 gUnknown_203B0B2; // Written to but never read
+
+static void UpdateBGControlRegisters(void);
 
 void VBlankIntr(void)
 {
@@ -243,18 +241,16 @@ void Timer3Intr(void)
     AckInterrupt(INTR_FLAG_TIMER3);
 }
 
-// Unused
-u32 sub_800BB34(void)
+UNUSED static u32 sub_800BB34(void)
 {
     return gUnknown_203B0A0;
 }
 
-void nullsub_178(void)
+UNUSED static void nullsub_178(void)
 {
 }
 
-// Unused
-void sub_800BB44(void)
+UNUSED static void sub_800BB44(void)
 {
     u16 ie_store;
     u16 dispcnt_store;
@@ -296,11 +292,11 @@ void nullsub_17(void)
 {
 }
 
-void UpdateBGControlRegisters(void)
+static void UpdateBGControlRegisters(void)
 {
     u32 BGCNT_Priority[NUM_BGS];
 
-    if (gUnknown_202D7FE == 1) {
+    if (gUnknown_202D7FE == TRUE) {
         BGCNT_Priority[BG0] = BGCNT_PRIORITY(1);
         BGCNT_Priority[BG1] = BGCNT_PRIORITY(2);
         BGCNT_Priority[BG2] = BGCNT_PRIORITY(0);

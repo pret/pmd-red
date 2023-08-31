@@ -1,5 +1,5 @@
 #include "global.h"
-#include "code_800558C_1.h"
+#include "code_800558C.h"
 #include "code_800DAC0.h"
 #include "debug.h"
 #include "file_system.h"

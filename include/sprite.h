@@ -83,6 +83,7 @@ void SetSavingIconCoords(struct Position *);
 void sub_8004E8C(struct unkStruct_2039DB0 *);
 void sub_8005180(void);
 void sub_8005304(void);
+void sub_800533C(struct ax_pose **, struct UnkSpriteMem **, struct axdata1 *, u16 *, bool8);
 void sub_80053AC(struct EntitySpriteInfo *, struct OpenedFile *, u32, u32, u32, u32, bool8);
 void sub_80053D0(struct EntitySpriteInfo *, struct Dungeon_ax *, u32, u32, u32, u32, bool8);
 void sub_800543C(struct EntitySpriteInfo *, struct OpenedFile *, u32, u32, u32, bool8);

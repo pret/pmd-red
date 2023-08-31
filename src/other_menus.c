@@ -13,6 +13,7 @@
 #include "code_8094F88.h"
 #include "sprite.h"
 #include "code_80118A4.h"
+#include "code_800558C.h"
 
 struct unkStruct_203B35C
 {
@@ -446,7 +447,6 @@ extern void sub_80371B8(void);
 extern void sub_8037900(void);
 extern u32 sub_8037798(void);
 extern void sub_8005838(u32, u32);
-extern void sub_80060EC();
 extern void sub_800CB20();
 extern void TransferBGPaletteBuffer();
 extern void xxx_call_update_bg_vram();

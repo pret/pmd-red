@@ -870,8 +870,8 @@ void sub_8005304(void)
     }
 }
 
-// spriteMasks is a u16[6]. a4 might be a bool8
-void sub_800533C(struct ax_pose **a0, struct UnkSpriteMem **a1, struct axdata1 *a2, u16 *spriteMasks, char a4)
+// spriteMasks is a u16[6]
+void sub_800533C(struct ax_pose **a0, struct UnkSpriteMem **a1, struct axdata1 *a2, u16 *spriteMasks, bool8 a4)
 {
     struct UnkSpriteMem *mem;
     struct ax_pose *r4;

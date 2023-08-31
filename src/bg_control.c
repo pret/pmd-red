@@ -1,51 +1,42 @@
 #include "global.h"
+#include "bg_control.h"
 #include "input.h"
-#include "bg.h"
 
 EWRAM_DATA struct BGControlStruct gBG0Control = {0};
 EWRAM_DATA struct BGControlStruct gBG1Control = {0};
 EWRAM_DATA struct BGControlStruct gBG2Control = {0};
 EWRAM_DATA struct BGControlStruct gBG3Control = {0};
-EWRAM_DATA u8 gBldAlpha_CoeffA = {0};
-EWRAM_DATA u8 gBldAlpha_CoeffB = {0};
-
+static EWRAM_DATA u8 sBldAlpha_CoeffA = {0};
+static EWRAM_DATA u8 sBldAlpha_CoeffB = {0};
 EWRAM_DATA u16 gBldAlpha;
 EWRAM_DATA u16 gBldCnt;
-EWRAM_DATA u8 gUnknown_202D7FE;
+EWRAM_DATA bool8 gUnknown_202D7FE;
 
 void SetBldAlphaReg(s32 lowAlpha, s32 highAlpha)
 {
-    if(lowAlpha < 0)
-    {
+    if (lowAlpha < 0)
         lowAlpha = 0;
-    }
-    else if(lowAlpha > 16)
-    {
+    else if (lowAlpha > 16)
         lowAlpha = 16;
-    }
 
-    if(highAlpha < 0)
-    {
+    if (highAlpha < 0)
         highAlpha = 0;
-    }
-    else if(highAlpha > 16)
-    {
+    else if (highAlpha > 16)
         highAlpha = 16;
-    }
 
-    gBldAlpha_CoeffA = lowAlpha;
-    gBldAlpha_CoeffB = highAlpha;
+    sBldAlpha_CoeffA = lowAlpha;
+    sBldAlpha_CoeffB = highAlpha;
 
-    gBldAlpha = BLDALPHA_BLEND1(gBldAlpha_CoeffA, gBldAlpha_CoeffB);
+    gBldAlpha = BLDALPHA_BLEND1(sBldAlpha_CoeffA, sBldAlpha_CoeffB);
 }
 
-void SetBG0RegOffsets(s32 xoffset, s32 yoffset)
+static void SetBG0RegOffsets(s32 xoffset, s32 yoffset)
 {
     gBG0Control.hofs = xoffset;
     gBG0Control.vofs = yoffset;
 }
 
-void SetBG1RegOffsets(s32 xoffset, s32 yoffset)
+static void SetBG1RegOffsets(s32 xoffset, s32 yoffset)
 {
     gBG1Control.hofs = xoffset;
     gBG1Control.vofs = yoffset;
@@ -63,7 +54,7 @@ void SetBG3RegOffsets(s32 xoffset, s32 yoffset)
     gBG3Control.vofs = yoffset;
 }
 
-void SetBGRegOffsets(s32 reg, u32 xoffset, s32 yoffset)
+UNUSED static void SetBGRegOffsets(s32 reg, u32 xoffset, s32 yoffset)
 {
     switch (reg) {
         default:
@@ -74,7 +65,7 @@ void SetBGRegOffsets(s32 reg, u32 xoffset, s32 yoffset)
     }
 }
 
-void SetBGRegXOffset(s32 reg, s32 offset)
+UNUSED static void SetBGRegXOffset(s32 reg, s32 offset)
 {
     switch (reg) {
         default:
@@ -93,7 +84,7 @@ void SetBGRegXOffset(s32 reg, s32 offset)
     }
 }
 
-void SetBGRegYOffset(s32 reg, s32 offset)
+UNUSED static void SetBGRegYOffset(s32 reg, s32 offset)
 {
     switch (reg) {
         default:
@@ -112,14 +103,13 @@ void SetBGRegYOffset(s32 reg, s32 offset)
     }
 }
 
-void sub_800CD64(s32 r0, u8 r1)
+void sub_800CD64(s32 r0, bool8 r1)
 {
     gUnknown_202D7FE = r1;
-    gBG2Control.unk2 = r0 ? 0x8000 : 0; 
+    gBG2Control.unk2 = r0 ? 0x8000 : 0;
 }
 
 void SetBGOBJEnableFlags(u32 mask)
 {
-    REG_DISPCNT = (REG_DISPCNT & 0xe0ff) | (~(mask << 8) & (DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON));
+    REG_DISPCNT = (REG_DISPCNT & 0xE0FF) | (~(mask << 8) & (DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON));
 }
-

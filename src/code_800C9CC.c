@@ -3,8 +3,6 @@
 #include "random.h"
 #include "reg_control.h"
 
-void sub_800BA5C();
-
 extern u32 gUnknown_203B0B8;
 extern u16 gRawKeyInput;
 
