@@ -118,10 +118,6 @@ void sub_8021D5C(void);
 void UpdateWigglytuffDialogue(void);
 
 extern void sub_8008C54(u32);
-//extern void sub_80073B8(u32);
-//extern void sub_80073E0(u32);
-//void sub_800792C(u32, u32, u32, u32, u32);
-//void sub_8007A78(u32, u32, u32, u32, u32);
 
 void sub_8021878(void);
 void sub_8021894(void);

@@ -676,7 +676,7 @@ void sub_801DBD4(void)
 #ifndef NONMATCHING
     register s32 x asm("r4");
 #else
-    register s32 x;
+    s32 x;
 #endif
     s16 index;
     int counter;

@@ -104,14 +104,14 @@ void sub_808E6F4(struct unkStruct_808E6F4* a1)
     a1->unk2 = 2;
 }
 
-bool8 HasRecruitedMon(s16 species_) {
-    s32 species = species_;
+bool8 HasRecruitedMon(s16 species) {
+    s32 species_s32 = species;
     s32 i = 0;
     struct PokemonStruct *pokemon = gRecruitedPokemonRef->pokemon;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
         if (((u8)pokemon->unk0 & 1)) {
-            if(pokemon->speciesNum == species)
+            if(pokemon->speciesNum == species_s32)
                 return TRUE;
         }
         pokemon++;
@@ -928,7 +928,7 @@ void sub_808F468(struct PokemonStruct *param_1, struct EvolveStatus *evolveStatu
 #endif
 
     evolveStatus->evolutionConditionStatus = 0;
-    for(index = MONSTER_BULBASAUR; index < 0x1A8; index++)
+    for(index = MONSTER_BULBASAUR; index <= MONSTER_MAX; index++)
     {
         if ((s16)index == MONSTER_ALAKAZAM) {
             GetPokemonEvolveConditions(MONSTER_ALAKAZAM, &evolveConditions);
@@ -939,11 +939,11 @@ void sub_808F468(struct PokemonStruct *param_1, struct EvolveStatus *evolveStatu
         if(((evolveConditions.preEvolution.evolveType != EVOLVE_TYPE_NONE) && (param_1->speciesNum == evolveConditions.preEvolution.evolveFrom)))
             break;
     };
-    if (index == 0x1a8) {
+    if (index == MONSTER_MAX + 1) {
         evolveStatus->evolutionConditionStatus = EVOLUTION_NO_MORE;
     }
     else {
-        for(index = MONSTER_BULBASAUR, defaultReason = EVOLUTION_LACK_ITEM; index < 0x1A8; index++)
+        for(index = MONSTER_BULBASAUR, defaultReason = EVOLUTION_LACK_ITEM; index <= MONSTER_MAX; index++)
         {
             evolFlag = FALSE;
             index2 = (s16)index;

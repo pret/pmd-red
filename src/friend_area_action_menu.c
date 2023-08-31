@@ -533,7 +533,7 @@ void sub_80278B4(void)
       case FRIEND_AREA_ACTION_MENU_ACTION_JOIN_TEAM:
         if (sub_808D750(gUnknown_203B2BC->targetPoke)) {
 #ifdef NONMATCHING
-            pokeStruct1 = &gRecruiedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
+            pokeStruct1 = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
 #else
         register size_t offset asm("r1") = offsetof(struct unkStruct_203B45C, pokemon[gUnknown_203B2BC->targetPoke]);
         struct PokemonStruct* p = gRecruitedPokemonRef->pokemon;
