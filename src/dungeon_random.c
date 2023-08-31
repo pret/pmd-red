@@ -2,6 +2,30 @@
 #include "dungeon_random.h"
 
 EWRAM_DATA_2 u32 gDungeonRngState = {0};
+EWRAM_DATA_2 u32 gUnknown_203B458 = {0};
+
+void sub_808408C(u32 param_1)
+{
+    gUnknown_203B458 = (1 | param_1) & 0xffffff;
+}
+
+u32 sub_80840A4(void)
+{
+    u32 r0;
+    u32 r1;
+
+    r1 = gUnknown_203B458 * 0x5d588b65;
+    r1++;
+    r0 = r1 >> 16;
+    r1 *= 0x5d588b65;
+    r1++;
+    gUnknown_203B458 = r1;
+    r1 &= 0xffff0000;
+    r0 |= r1;
+    r0 &= 0x0ffffff;
+    r0 |= 1;
+    return r0;
+}
 
 void InitDungeonRNG(u32 value)
 {

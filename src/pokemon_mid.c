@@ -1,5 +1,6 @@
 #include "global.h"
 #include "pokemon.h"
+#include "pokemon_3.h"
 #include "file_system.h"
 #include "item.h"
 #include "moves.h"
@@ -29,7 +30,6 @@ extern u16 gLevelCurrentPokeId;
 extern struct LevelData gLevelCurrentData[];
 
 
-extern s16 GetBaseSpecies(s16);
 extern int sprintf(char *, const char *, ...);
 extern u32 ReturnIntFromChar(u8 r0);
 extern void CopyAndResetMoves(void*, void*);
@@ -524,7 +524,7 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct Po
     u32 somestruct2_80943A0;
 
     a1->unk0 = pokemon->unk0;
-    a1->unkHasNextStage = pokemon->unkHasNextStage;
+    a1->level = pokemon->level;
     a1->IQ = pokemon->IQ;
     a1->IQSkills = pokemon->IQSkills;
     sub_808E6F4(&a1->unk54);
@@ -532,7 +532,7 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct Po
     a1->isTeamLeader = pokemon->isTeamLeader;
     a1->unkA = a3;
     a1->speciesNum = pokemon->speciesNum;
-    a1->unk50 = pokemon->unk24;
+    a1->tacticIndex = pokemon->tacticIndex;
     a1->unk12 = pokemon->pokeHP;
     a1->unk10 = pokemon->pokeHP;
 
@@ -541,7 +541,7 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct Po
         a1->offense.def[i] = pokemon->offense.def[i];
     }
 
-    a1->unk18 = pokemon->unk1C;
+    a1->currExp = pokemon->currExp;
     CopyAndResetMoves(&a1->moves, &pokemon->moves);
 
     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
@@ -578,13 +578,13 @@ void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct
     s32 i;
 
     pokemon->unk0 = a2->unk0;
-    pokemon->unkHasNextStage = a2->unkHasNextStage;
+    pokemon->level = a2->level;
     pokemon->IQ = a2->IQ;
     pokemon->IQSkills = a2->IQSkills;
     pokemon->dungeonLocation = a2->dungeonLocation;
     pokemon->isTeamLeader = a2->isTeamLeader;
     pokemon->speciesNum = a2->speciesNum;
-    pokemon->unk24 = a2->unk50;
+    pokemon->tacticIndex = a2->tacticIndex;
     pokemon->pokeHP = a2->unk12;
 
     for (i = 0; i < 2; i++) {
@@ -592,7 +592,7 @@ void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct
         pokemon->offense.def[i] = a2->offense.def[i];
     }
 
-    pokemon->unk1C = a2->unk18;
+    pokemon->currExp = a2->currExp;
     CopyBareMoveData(pokemon->moves, &a2->moves);
 
     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
@@ -771,7 +771,7 @@ s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon)
       ptr = DecompressMoveID(ptr, &result);
       value = *ptr++;
 
-      if (value > evolve_sequence[i].unkHasNextStage) {
+      if (value > evolve_sequence[i].level) {
         break;
       }
 
@@ -815,14 +815,14 @@ s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2)
   s32 i;
 
   a2[0].specesNum = pokemon->speciesNum;
-  a2[0].unkHasNextStage = pokemon->unkHasNextStage;
+  a2[0].level = pokemon->level;
 
   count = 1;
   species = pokemon->speciesNum;
   i = 0;
 
   for (; i < 2; i++) {
-      if (!pokemon->unkC[i].unk0) {
+      if (!pokemon->unkC[i].level) {
           break;
       }
       species = GetPokemonEvolveFrom(species);
@@ -830,7 +830,7 @@ s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2)
           break;
       }
       a2[1 + i].speciesNum = species;
-      a2[1 + i].unkHasNextStage = pokemon->unkC[i].unk0;
+      a2[1 + i].level = pokemon->unkC[i].level;
       // wrong increment order:
       count++;
   }
@@ -843,7 +843,7 @@ s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2)
   struct unkPokeSubStruct_C* has_next_stage;
 
   a2[0].speciesNum = pokemon->speciesNum;
-  a2[0].unkHasNextStage = pokemon->unkHasNextStage;
+  a2[0].level = pokemon->level;
 
   count = 1;
   species = pokemon->speciesNum;
@@ -852,7 +852,7 @@ s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2)
   stage = &a2[1];
 
   for (; i < 2; i++) {
-      if (!has_next_stage->unk0) {
+      if (!has_next_stage->level) {
           break;
       }
       species = GetPokemonEvolveFrom(species);
@@ -860,7 +860,7 @@ s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2)
           break;
       }
       stage->speciesNum = species;
-      stage->unkHasNextStage = has_next_stage->unk0;
+      stage->level = has_next_stage->level;
       stage++;
       count++;
       has_next_stage++;

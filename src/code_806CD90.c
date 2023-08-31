@@ -15,6 +15,7 @@ extern void sub_806CCB4(struct Entity *, u8);
 extern void sub_803E46C(u32);
 extern bool8 sub_808DA44(s32 a1_, u32 a2_);
 extern u32 sub_806CF98(struct Entity *);
+extern struct OpenedFile *sub_80687D0(s16);
 void sub_806CDD4(struct Entity *, u8, u32);
 
 extern const u8 gUnknown_8106EEF[];
@@ -71,7 +72,7 @@ void sub_806CCB4(struct Entity *entity, u8 param_2)
     sVar1 = entity->unk68;
 
     if (info->waitingStatus != STATUS_DECOY && !flag)
-        sub_80053AC(&entity->spriteInfo, entity->unk64, entity->unk6A, entity->direction, sVar1, Rand32Bit() & 3, FALSE);
+        sub_80053AC(&entity->spriteInfo, entity->sprite, entity->unk6A, entity->direction, sVar1, Rand32Bit() & 3, FALSE);
     else
         sub_80053AC(&entity->spriteInfo, sub_80687D0(MONSTER_DECOY), entity->unk6A, entity->direction, sVar1, Rand32Bit() & 3, FALSE);
 

@@ -47,63 +47,65 @@ void InitializeRecruitedPokemon(void)
   }
 }
 
-// void sub_808CE74(s32 _species, u8 a2, u8* a3)  
-// {
-//     struct PokemonStruct pokemon;
-//     u8 name_buffer[20];
-//     u8 friend_area;
-//     s32 i;
-//     register s16 species asm("r7") = (s16)_species;
-//     s32 cond = a2 << 24;
-
-//     pokemon.unk0 = 3;
-//     if (cond) {
-//         pokemon.unk2 = 1;
-//         pokemon.unk4.unk4 = 64;
-//     }
-//     else {
-//         pokemon.unk2 = 1;
-//         pokemon.unk4.unk4 = 65;
-//     }
-//     pokemon.unkHasNextStage = 1;
-//     pokemon.pokeHP = GetBaseHP(species);
-//     pokemon.offense.att[0] = GetBaseOffensiveStat(species, 0);
-//     pokemon.offense.att[1] = GetBaseOffensiveStat(species, 1);
-//     pokemon.offense.def[0] = GetBaseDefensiveStat(species, 0);
-//     pokemon.offense.def[1] = GetBaseDefensiveStat(species, 1);
-//     pokemon.IQ = 1;
-//     pokemon.unkC[0].unk0 = 0;
-//     pokemon.unkC[1].unk0 = 0;
-//     SetDefaultIQSkills((u8*)&pokemon.IQSkills, 0);
-//     pokemon.speciesNum = species;
-//     pokemon.heldItem.id = 0;
-//     pokemon.heldItem.quantity = 0;
-//     pokemon.unk1C = 0;
-//     pokemon.unk24 = 0;
-//     pokemon.unk4.unk5 = 0;
-//     sub_808E490(pokemon.moves, species);
-
-//     // mostly incorrect below this:
-//     if (!a3) {
-//         CopyMonsterNametoBuffer(name_buffer, species);
-//         BoundedCopyStringtoBuffer(pokemon.name, name_buffer, 10);
-//     }
-//     else {
-//         s32 j;
-//         for (j = 0; j < 10; j++) {
-//             pokemon.name[j] = a3[j];
-//         }
-//     }
-//     friend_area = gMonsterParameters[species].friend_area;
-//     for (i = 0; i < 413; i++) {
-//         if (!((u8)gRecruitedPokemonRef->pokemon[i].unk0 & 1)) {
-//             u8 species_friend_area = sub_80923D4(i);
-//             if (species_friend_area == friend_area) {
-//                 gRecruitedPokemonRef->pokemon[i] = pokemon;
-//                 gFriendAreas[species_friend_area] = 1;
-//                 sub_80980B4(species);
-//                 break;
-//             }
-//         }
-//     }  
-// }
+// https://decomp.me/scratch/wQbZB 
+ // void sub_808CE74(s16 _species, bool8 _isLeader, u8* name)  
+ // {
+ //     struct PokemonStruct pokemon;
+ //     struct PokemonStruct *temp;
+ //     u8 name_buffer[20];
+ //     u32 friendArea;
+ //     s32 i;
+ //     s32 species = _species;
+ //     bool32 isLeader = _isLeader << 24;
+ //
+ //     pokemon.unk0 = 3;
+ //     if (isLeader) {
+ //         pokemon.isTeamLeader = TRUE;
+ //         pokemon.dungeonLocation.id = DUNGEON_JOIN_LOCATION_LEADER; 
+ //     }
+ //     else {
+ //         pokemon.isTeamLeader = FALSE;
+ //         pokemon.dungeonLocation.id = DUNGEON_JOIN_LOCATION_PARTNER;
+ //     }
+ //     pokemon.level = 1;
+ //     pokemon.pokeHP = GetBaseHP(species);
+ //     pokemon.offense.att[0] = GetBaseOffensiveStat(species, 0);
+ //     pokemon.offense.att[1] = GetBaseOffensiveStat(species, 1);
+ //     pokemon.offense.def[0] = GetBaseDefensiveStat(species, 0);
+ //     pokemon.offense.def[1] = GetBaseDefensiveStat(species, 1);
+ //     pokemon.IQ = 1;
+ //     pokemon.unkC[0].level = 0;
+ //     pokemon.unkC[1].level = 0;
+ //     SetDefaultIQSkills((u8*)&pokemon.IQSkills, FALSE);
+ //     pokemon.speciesNum = species;
+ //     pokemon.heldItem.id = ITEM_NOTHING;
+ //     pokemon.heldItem.quantity = 0;
+ //     pokemon.currExp = 0;
+ //     pokemon.tacticIndex = 0; // TACTIC_LETS_GO_TOGETHER
+ //     pokemon.dungeonLocation.floor = 0;
+ //     sub_808E490(pokemon.moves, species);
+ //
+ //     if (name == NULL) {
+ //         CopyMonsterNametoBuffer(name_buffer, species);
+ //         BoundedCopyStringtoBuffer(pokemon.name, name_buffer, POKEMON_NAME_LENGTH);
+ //     }
+ //     else {
+ //         s32 j;
+ //         for (j = 0; j < POKEMON_NAME_LENGTH; j++) {
+ //             pokemon.name[j] = name[j];
+ //         }
+ //     }
+ //     friendArea = gMonsterParameters[species].friendArea;
+ //     for (i = 0; i < NUM_MONSTERS; i++) {
+ //         temp = &gRecruitedPokemonRef->pokemon[i];
+ //         if (!((u8)gRecruitedPokemonRef->pokemon[i].unk0 & 1)) {
+ //             u8 speciesFriendArea = sub_80923D4(i);
+ //             if (speciesFriendArea == friendArea) {
+ //                 gRecruitedPokemonRef->pokemon[i] = pokemon;
+ //                 gFriendAreas[speciesFriendArea] = TRUE;
+ //                 sub_80980B4(species);
+ //                 break;
+ //             }
+ //         }
+ //     }  
+ // }

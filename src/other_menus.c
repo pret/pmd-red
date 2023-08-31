@@ -34,9 +34,8 @@ struct unkStruct_203B35C
    struct PokemonStruct unk2BC; 
    struct unkStruct_203B480 unk314;
    struct PokemonStruct unk344;
-   s32 unk39C;
-   u8 fill3A0[0x450 - 0x3A0];
-   s32 unk450;
+   u8 unk39C[0xB4];
+   u8 unk450[0xB4];
 };
 
 EWRAM_DATA_2 struct unkStruct_203B35C *gUnknown_203B35C = {0};
@@ -470,8 +469,8 @@ void sub_8036FDC(s32 param_1)
   sub_800641C(0,1,1);
   ResetSprites(FALSE);
   if (gUnknown_203B35C == NULL) {
-    gUnknown_203B35C = MemoryAlloc(0x504,8);
-    MemoryFill8((u8 *)gUnknown_203B35C,0,0x504);
+    gUnknown_203B35C = MemoryAlloc(sizeof(struct unkStruct_203B35C),8);
+    MemoryFill8((u8 *)gUnknown_203B35C,0,sizeof(struct unkStruct_203B35C));
   }
 
   gUnknown_203B35C->unk0 = param_1;

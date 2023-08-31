@@ -9,6 +9,7 @@
 #include "text_util.h"
 #include "menu_input.h"
 #include "code_80118A4.h"
+#include "event_flag.h"
 
 struct unkStruct_203B2AC
 {
@@ -49,7 +50,6 @@ extern struct unkStruct_3001B60 *gUnknown_3001B60;
 extern struct UnkTextStruct2 gUnknown_80DC9B0;
 extern struct UnkTextStruct2 gUnknown_80DC9C8;
 
-extern bool8 sub_80023E4(u32);
 extern void sub_808FF20(u32 *, struct PokemonStruct *, bool8);
 extern void CreatePokemonInfoTabScreen(u32, s16, u32 *, u32 *, u32);
 extern void sub_802452C(void);

@@ -153,9 +153,9 @@ extern void sub_801CC38(void);
 extern void sub_80140B4(struct UnkTextStruct2 *);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 extern void sub_8013F84(void);
-extern char * GetIQSkillDescription(u8 r0);
-extern s32 GetNumAvailableIQSkills(u8 *param_1, s32 pokeIQ);
-extern char * GetIQSkillName(u8 r0);
+extern void PlayMenuSoundEffect(u32);
+extern void sub_8013C68(u32 *);
+extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern u32 sub_80095E4(s16, u32);
 extern void sub_801C440(void);
 extern void sub_801C4C8(void);
@@ -170,7 +170,6 @@ void sub_801C6E4(void);
 void sub_801C848(void);
 
 u32 sub_801C308(u8);
-void ToggleIQSkill(u8 *param_1, u32 skillIndex);
 s32 sub_801C390(void);
 void sub_801C3F8(void);
 

@@ -158,7 +158,7 @@ typedef bool8 (*MoveCallback)(struct Entity *pokemon, struct Entity *target, str
 
 struct NaturePowerMove
 {
-    s16 moveID;
+    u16 moveID;
     u16 unk2;
     MoveCallback move;
 };
@@ -218,7 +218,7 @@ bool8 TransformMoveAction(struct Entity * pokemon, struct Entity * target, struc
   }
   else {
     move->PP = 0;
-    sub_8078E18(pokemon,target);
+    TransformStatusTarget(pokemon,target);
     return TRUE;
   }
 }

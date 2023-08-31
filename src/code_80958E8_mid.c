@@ -72,8 +72,8 @@ bool8 GenerateMailJobDungeonInfo(struct WonderMail *mail)
       }
 
       if (flag) {
-        mail->dungeon.id = dungeon;
-        mail->dungeon.floor = floor;
+        mail->unk4.dungeon.id = dungeon;
+        mail->unk4.dungeon.floor = floor;
         return TRUE;
       }
       floor++;
@@ -96,11 +96,11 @@ bool8 sub_8095E38(struct WonderMail *mail, u8 dungeon, u32 floor, u8 param_4)
 {
     if (mail->mailType != MAIL_TYPE_NONE) {
         if ((mail->missionType == WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT) && (param_4 == 1)) {
-            if (mail->dungeon.id == dungeon) {
+            if (mail->unk4.dungeon.id == dungeon) {
                 return TRUE;
             }
         }
-        else if ((mail->dungeon.id == dungeon) && (mail->dungeon.floor == floor)) {
+        else if ((mail->unk4.dungeon.id == dungeon) && (mail->unk4.dungeon.floor == floor)) {
             return TRUE;
         }
     }

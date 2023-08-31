@@ -14,6 +14,7 @@
 #include "code_800D090.h"
 #include "code_8094F88.h"
 #include "menu_input.h"
+#include "event_flag.h"
 
 extern const struct FileArchive gTitleMenuFileArchive;
 
@@ -44,7 +45,6 @@ void sub_80397B4(void);
 
 extern void sub_80920D8(u8 *);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
-extern bool8 sub_80023E4(u32);
 extern u8 *sub_8098FB4();
 extern u8 *GetDungeonLocationInfo(void);
 extern u32 GetNumAdventures(void);

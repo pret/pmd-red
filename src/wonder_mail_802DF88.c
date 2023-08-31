@@ -14,11 +14,7 @@ struct unkStruct_203B2FC
     // size: 0xA8
     /* 0x0 */ u32 state;
     /* 0x4 */ u32 fallbackState;
-    u32 unk8;
-    s16 unkC;
-    s16 unkE;
-    u8 unk10;
-    u8 fill11[0x30 - 0x11];
+    struct unkStruct_802F204 unk8;
     u8 jobSlotIndex;
     struct WonderMail *jobInfo;
     struct OpenedFile *faceFile;
@@ -38,7 +34,7 @@ struct unkStruct_203B300
 {
     // size: 0x7C
     struct MenuInputStructSub unk0;
-    struct unkStruct_802C39C *unkC;
+    struct unkStruct_802C39C *mail;
     u32 unk10;
     struct UnkTextStruct2 *unk14;
     struct UnkTextStruct2 unk18[4];
@@ -109,13 +105,13 @@ extern void sub_802DC28(u32);
 extern void sub_802F2C0(void);
 extern void sub_802DC28(u32);
 extern u32 sub_802F298(void);
-extern void sub_802F204(u32 *, u32);
+extern void sub_802F204(struct unkStruct_802F204*, u32);
 extern void sub_802DC40(void);
 extern void sub_802DC9C(void);
 struct WonderMail *GetJobSlotInfo(u8);
 extern void sub_8096AF8(u8 *, u32, u32);
 extern void sub_8096EEC(void);
-extern void sub_803C21C(struct WonderMail *, u32 *);
+extern void sub_803C21C(struct WonderMail *, struct unkStruct_802F204*);
 extern u32 sub_802C598(s32);
 extern void sub_802C688(void);
 extern void sub_8096C80(void);
@@ -306,12 +302,12 @@ void sub_802DE60(void)
     }
 }
 
-u32 sub_802DE84(struct unkStruct_802C39C *r0)
+u32 sub_802DE84(struct unkStruct_802C39C *mail)
 {
     gUnknown_203B300 = MemoryAlloc(sizeof(struct unkStruct_203B300), 8);
-    gUnknown_203B300->unkC = r0;
+    gUnknown_203B300->mail = mail;
     sub_801317C(&gUnknown_203B300->unk0);
-    gUnknown_203B300->unk10 = gUnknown_203B300->unkC->unk0[0];
+    gUnknown_203B300->unk10 = gUnknown_203B300->mail->unk0[0];
     gUnknown_203B300->unk14 = &gUnknown_203B300->unk18[gUnknown_203B300->unk10];
     sub_8006518(gUnknown_203B300->unk18);
     gUnknown_203B300->unk18[gUnknown_203B300->unk10] = gUnknown_80E0264;
@@ -361,6 +357,6 @@ void sub_802DF6C(void)
 void sub_802DF88(void)
 {
     sub_80073B8(gUnknown_203B300->unk10);
-    CreateRescueDescription(gUnknown_203B300->unkC);
+    CreateRescueDescription(gUnknown_203B300->mail);
     sub_80073E0(gUnknown_203B300->unk10);
 }

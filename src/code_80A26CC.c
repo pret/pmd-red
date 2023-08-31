@@ -1,7 +1,7 @@
 #include "global.h"
 #include "code_80A26CC.h"
+#include "event_flag.h"
 
-extern bool8 sub_80023E4(u32);
 extern u8 sub_80973F4(s16);
 extern u8 sub_8097384(s16);
 s16 sub_80A26B8(s16);
@@ -15,6 +15,36 @@ extern const u8 *gUnknown_8117000[];
 
 extern void sub_809AC18(s32, s32);
 extern void sub_809ABB4(s32, s32);
+extern void sub_809AB4C(s32, s32);
+
+s16 sub_80A8BBC(s16);
+
+void sub_80A2500(s32 param_1, s16 *param_2)
+{
+    s16 temp;
+    if (*param_2 == 1) {
+        temp = param_1;
+        sub_809AB4C(temp, sub_80A8BBC(param_2[1]));
+    }
+}
+
+void sub_80A252C(s32 param_1, s16 *param_2)
+{
+    s16 temp;
+    if (*param_2 == 1) {
+        temp = param_1;
+        sub_809ABB4(temp, sub_80A8BBC(param_2[1]));
+    }
+}
+
+void sub_80A2558(s32 param_1, s16 *param_2)
+{
+    s16 temp;
+    if (*param_2 == 1) {
+        temp = param_1;
+        sub_809AC18(temp, sub_80A8BBC(param_2[1]));
+    }
+}
 
 void sub_80A2584(s16 r0, s16 r1)
 {
@@ -32,29 +62,29 @@ void sub_80A2598(s16 r0, s16 r1)
 
 u32 sub_80A25AC(u16 param_1)
 {
-  if (sub_8098F88() != 0) {
-      return param_1;
-  }
-  else
-  {
-    if (param_1 == 0x32) {
-        return 0x32;
-    }
-    else if (!sub_80023E4(0xc)) {
-        return 999;
-    }
-    else if (sub_80023E4(0xd)) {
-        return 0x13;
-    }
-    else if (param_1 != 1) {
+    if (sub_8098F88() != 0) {
         return param_1;
     }
     else
     {
-        sub_8001658(0,0x28);
-        return 1;
+        if (param_1 == 0x32) {
+            return 0x32;
+        }
+        else if (!sub_80023E4(0xc)) {
+            return 999;
+        }
+        else if (sub_80023E4(0xd)) {
+            return 0x13;
+        }
+        else if (param_1 != 1) {
+            return param_1;
+        }
+        else
+    {
+            sub_8001658(0,0x28);
+            return 1;
+        }
     }
-  }
 }
 
 struct unkStruct_80A2608 *sub_80A2608(s16 index)
@@ -98,19 +128,19 @@ s32 sub_80A2668(u32 r0)
 
 u32 sub_80A2688(u8 r0)
 {
-  u32 uVar1;
-  
-  uVar1 = r0 - 0x4B;
+    u32 uVar1;
 
-  // u8 cast is needed for only this compare
-  if ((u8)uVar1 < 0x17)
-      return uVar1;
-  else if(r0 == 0x2F)
-    return 0x17;
-  else if (r0 == 0x30)
-    return 0x18;
-  else
-    return -1;
+    uVar1 = r0 - 0x4B;
+
+    // u8 cast is needed for only this compare
+    if ((u8)uVar1 < 0x17)
+        return uVar1;
+    else if(r0 == 0x2F)
+        return 0x17;
+    else if (r0 == 0x30)
+        return 0x18;
+    else
+        return -1;
 }
 
 s16 sub_80A26B8(s16 r0)

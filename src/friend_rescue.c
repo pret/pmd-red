@@ -1165,7 +1165,7 @@ void sub_8032828(void)
             else
                 gUnknown_203B33C->unk53C.itemRewards[0] = ITEM_NOTHING;
             gUnknown_203B33C->unk53C.quantity = 1;
-            gUnknown_203B33C->unk53C.teamRankPtsReward = GetDungeonTeamRankPts(&mail->dungeon, 0);
+            gUnknown_203B33C->unk53C.teamRankPtsReward = GetDungeonTeamRankPts(&mail->unk4.dungeon, 0);
             gUnknown_203B33C->unk53C.itemRewards[1] = 0;
             gUnknown_203B33C->unk53C.itemRewards[2] = 0;
             gUnknown_203B33C->unk53C.friendAreaReward = 0;

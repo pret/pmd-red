@@ -146,7 +146,7 @@ void sub_803AD88(void)
             sUnknown_203B3F8->unk70 = 3;
             sUnknown_203B3F8->unk68 = 1;
             sUnknown_203B3F8->unk6C = 100;
-            sUnknown_203B3F8->unk64 = sUnknown_203B3F8->pokemon->unkHasNextStage;
+            sUnknown_203B3F8->unk64 = sUnknown_203B3F8->pokemon->level;
             sUnknown_203B3F8->unk74 = 3;
             sUnknown_203B3F8->unk78 = &sUnknown_203B3F8->unkE0[3];
             sUnknown_203B3F8->unk7C = 44;
@@ -256,7 +256,7 @@ void sub_803AFE8(void)
         default:
             break;
         case 3:
-            sUnknown_203B3F8->pokemon->unkHasNextStage = sUnknown_203B3F8->unk60;
+            sUnknown_203B3F8->pokemon->level = sUnknown_203B3F8->unk60;
             // Fallthrough is needed to match
         case 2:
             sub_803ACD0(2);

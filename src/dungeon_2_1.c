@@ -12,6 +12,66 @@ extern u8 *gUnknown_8108084[];
 
 s32 sub_8091E94(s32 a1, s32 a2, s32 a3); // items.c
 
+
+bool8 sub_8090820(u16 moveID)
+{
+    struct PokemonStruct *pokeStruct;
+    struct Move *move;
+    s32 moveIndex;
+    s32 index;
+    s32 one;
+
+    for(index = 0; index < 0x19d; index++)
+    {
+        pokeStruct = &gRecruitedPokemonRef->pokemon[index];
+        one = 1;
+        if (pokeStruct->unk0 & 1)
+        {
+            if(pokeStruct->unk0 >> 1 & one){
+                for(moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+                {
+                    move = &pokeStruct->moves[moveIndex];
+                    if ((move->moveFlags & MOVE_FLAG_EXISTS) && (move->id == moveID)) {
+                        return TRUE;
+                    }
+                }
+            }
+        }
+    }
+    return FALSE;
+}
+
+void sub_8090888(u8 *param_1, u8 *param_2)
+{
+    s32 iVar3;
+
+    iVar3 = 0;
+
+    if(*param_1 != 0)  
+    {
+        do {
+            if (*param_1 == 0xA) {
+                iVar3++;
+            }
+            param_1++;
+        } while (*param_1 != 0);
+    }
+
+    while (iVar3 % 3) {
+        *param_1 = 0xA;
+        param_1++;
+        iVar3++;
+    }
+
+    while (*param_2 != 0) {
+        *param_1 = *param_2;
+        param_1++;
+        param_2++;
+    }
+
+    *param_1 = 0;
+}
+
 u32 sub_80908D8(struct DungeonLocation *dungeon)
 {
   if ((dungeon->id < DUNGEON_OUT_ON_RESCUE) && (dungeon->floor < gDungeonFloorCount[dungeon->id])) {

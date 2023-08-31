@@ -11,8 +11,7 @@
 #include "config.h"
 #include "game_options.h"
 #include "sprite.h"
-
-extern bool8 sub_80023E4(u8);
+#include "event_flag.h"
 
 extern struct GameOptions *gGameOptionsRef;
 

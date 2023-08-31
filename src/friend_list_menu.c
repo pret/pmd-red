@@ -14,6 +14,7 @@
 #include "code_8012A18_1.h"
 #include "code_801B3C0.h"
 #include "code_80118A4.h"
+#include "event_flag.h"
 
 // there might be more overlap with unkStruct_203B2BC
 // I was working on the moves and put the data that seemed to correspond to that
@@ -137,7 +138,9 @@ extern void sub_801F808(u16 *);
 extern void sub_8099690(u32);
 extern void sub_801F8D0(void);
 extern u32 sub_801F890(void);
-extern bool8 sub_80023E4(u32);
+extern void sub_80160D8(void);
+extern u32 sub_8016080(void);
+extern s32 sub_80144A4(s32 *);
 
 void sub_8025434(s32);
 void sub_802544C(void);
@@ -533,7 +536,7 @@ void sub_8025A84(void)
             sub_8025434(0xA);
             break;
         case 9:
-            gUnknown_203B2B4->pokeStruct->unk0 &= 0xfffd;
+            gUnknown_203B2B4->pokeStruct->unk0 &= ~(FLAG_ON_TEAM);
             nullsub_104();
             sub_808ED00();
             sub_8023C60();

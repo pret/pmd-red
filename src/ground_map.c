@@ -19,7 +19,7 @@ extern void sub_80A5EBC(void);
 extern void sub_80A2D00(void *);
 extern void sub_80015C0(u32, u32);
 extern void sub_80A5EDC(u32);
-extern void sub_809D754(void *, struct DebugLocation *);
+extern void sub_809D754(struct GroundScript_ExecutePP_1 *, struct DebugLocation *);
 extern void sub_80A2D68(void *);
 extern void nullsub_121(void);
 extern void sub_80A2D88(void *);

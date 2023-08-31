@@ -117,33 +117,33 @@ void sub_8030E48(void)
   mail = &gUnknown_203B480[gUnknown_203B324->mailIndex];
   sub_80073B8(gUnknown_203B324->unk10);
   stack.unk0[0] = gUnknown_203B324->unk10;
-  stack.unk40 = 7;
-  stack.unk42 = 0;
-  stack.unk44 = 0;
-  stack.dungeon = &mail->dungeon;
+  stack.mailTitleType = 7;
+  stack.mailMissionType = MISSION_TYPE_FRIEND_RESCUE;
+  stack.mailStatus = MAIL_STATUS_SUSPENDED;
+  stack.unk8 = &mail->unk4;
   stack.playerName = mail->playerName;
   stack.clientSpecies = mail->clientSpecies;
   stack.targetSpecies = mail->clientSpecies;
   stack.targetItem = ITEM_NOTHING;
   if (mail->item.id == ITEM_NOTHING) {
-    stack.unk2E = 5;
+    stack.rewardType = 5;
   }
   else {
-    stack.unk2E = 2;
-    stack.unk34 = mail->item.id;
+    stack.rewardType = 2;
+    stack.rewardItem = mail->item.id;
   }
   switch(mail->mailType)
   {
     case 2:
     case WONDER_MAIL_TYPE_AOK:
-        stack.unk41 = 10;
+        stack.mailDescriptionType = 10;
         break;
     case 5:
-        stack.unk41 = 11;
+        stack.mailDescriptionType = 11;
         break;
     case WONDER_MAIL_TYPE_NONE:
     default:
-        stack.unk41 = 9;
+        stack.mailDescriptionType = 9;
         break;
   }
   CreateRescueDescription(&stack);

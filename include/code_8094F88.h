@@ -3,13 +3,18 @@
 
 #include "item.h"
 
+struct WonderMailSub
+{
+    /* 0x4 */ struct DungeonLocation dungeon;
+    u32 seed;
+};
+
 // size: 0x30
 struct unkStruct_203B480
 {
     /* 0x0 */ u8 mailType;
     /* 0x1 */ u8 missionType;
-    /* 0x4 */ struct DungeonLocation dungeon;
-    /* 0x8 */ u32 unk8;
+    struct WonderMailSub unk4;
     /* 0xC */ s16 clientSpecies;
     /* 0xE */ s16 targetSpecies;
     union unk10_temp

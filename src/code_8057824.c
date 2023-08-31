@@ -22,7 +22,7 @@
 typedef bool8 (*MoveCallback)(struct Entity *pokemon, struct Entity *target, struct Move *move, s32 param_4);
 struct NaturePowerMove
 {
-    s16 moveID;
+    u16 moveID;
     u16 unk2;
     MoveCallback move;
 };
@@ -502,18 +502,18 @@ bool8 sub_8057C88(struct Entity *pokemon, struct Entity *target, struct Move * m
   return flag;
 }
 
-s32 sub_8057CD0(struct Entity * pokemon, struct Entity * target, struct Move * move, u32 param_4)
+bool32 sub_8057CD0(struct Entity * pokemon, struct Entity * target, struct Move * move, u32 param_4)
 {
-  u32 uVar1;
-  s32 iVar2;
+  u32 weather;
+  s32 flag;
   
-  uVar1 = GetApparentWeather(pokemon);
-  iVar2 = sub_80556BC(pokemon,target,gUnknown_80F51E4[uVar1],move,
-                      gUnknown_80F51EC[uVar1],param_4);
-  if (iVar2 != 0) {
-    iVar2 = 1;
+  weather = GetApparentWeather(pokemon);
+  flag = sub_80556BC(pokemon,target,gUnknown_80F51E4[weather],move,
+                      gUnknown_80F51EC[weather],param_4);
+  if (flag) {
+    flag = TRUE;
   }
-  return iVar2;
+  return flag;
 }
 
 bool8 WhirlpoolMoveAction(struct Entity * pokemon, struct Entity * target, struct Move * move, u32 param_4)

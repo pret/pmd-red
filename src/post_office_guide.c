@@ -605,7 +605,7 @@ void DisplayMissionObjectives(void)
             mail = GetMailatIndex(local_94);
             sub_803B6B0(10,16,3,gUnknown_203B330->unk10);
             // %dF
-            sprintfStatic(buffer,gUnknown_80E1F3C,mail->dungeon.floor);
+            sprintfStatic(buffer,gUnknown_80E1F3C,mail->unk4.dungeon.floor);
             xxx_call_draw_string(0x15,16,buffer,gUnknown_203B330->unk10,0);
             // Rescue #C6%s#R
             sprintfStatic(buffer,gUnknown_80E1F40,GetMonSpecies(mail->clientSpecies));
@@ -624,11 +624,11 @@ void DisplayMissionObjectives(void)
                 for(jobSlotIdx = 0; jobSlotIdx < MAX_ACCEPTED_JOBS; jobSlotIdx++)
                 {
                     jobInfo = GetJobSlotInfo(jobSlotIdx);
-                    if ((((jobInfo->dungeon.id == gUnknown_203B330->dungeonIndex) && (jobInfo->mailType != 0)
+                    if ((((jobInfo->unk4.dungeon.id == gUnknown_203B330->dungeonIndex) && (jobInfo->mailType != 0)
                         ) && (jobInfo->mailType != MAIL_TYPE_SUSPENDED_JOB)) && (jobInfo->mailType != MAIL_TYPE_UNK7)) {
                         sub_803B6B0(10,yCoord,3,gUnknown_203B330->unk10);
                         if (jobInfo->missionType != WONDER_MAIL_MISSION_TYPE_FIND_ITEM) {
-                            sprintfStatic(buffer1,gUnknown_80E1F3C,jobInfo->dungeon.floor);
+                            sprintfStatic(buffer1,gUnknown_80E1F3C,jobInfo->unk4.dungeon.floor);
                             xxx_call_draw_string(21,yCoord,buffer1,gUnknown_203B330->unk10,0);
                         }
                         switch(jobInfo->missionType)

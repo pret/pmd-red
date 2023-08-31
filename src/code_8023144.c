@@ -17,6 +17,7 @@
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
 #include "code_80118A4.h"
+#include "exclusive_pokemon.h"
 
 struct unkStruct_3001B5C
 {
@@ -47,7 +48,6 @@ extern struct UnkTextStruct2 gUnknown_80DC904;
 
 void sub_8023758(void);
 void sub_80237E0(void);
-extern bool8 sub_8098134(s32);
 extern void sub_8023730(void);
 extern u8 sub_8023704(u8);
 extern void sub_8023420(void);
@@ -68,7 +68,7 @@ extern void sub_801B048(void);
 void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 id, bool8 checkBoostFlags, struct Gummi* gummi);
 
 extern void sub_8099690(u32);
-s32 GetNumAvailableIQSkills(u8 *iqSkillBuffer, s32 pokeIQ);
+extern void sub_801A928(void);
 
 void sub_8022D2C(void) {
     s32 index;
@@ -460,7 +460,7 @@ void sub_8023420(void)
 
 extern u8 gUnknown_80DC934[];
 
-bool8 HasRecruitedMon(s16 species_);
+extern void sub_8008C54(u32);
 extern u8 gUnknown_80DC93C[];
 
 void sub_80234BC(void)
@@ -485,7 +485,7 @@ void sub_80234BC(void)
     {
         y = sub_8013800(&gUnknown_3001B5C->input,index);
         species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->input.unk1E * gUnknown_3001B5C->input.unk1C + index)];
-        sub_8092638(GetFriendArea(species),&auStack_2c,0,0);
+        sub_8092638(GetFriendArea(species),&auStack_2c,FALSE,FALSE);
         color = COLOR_WHITE_2;
         if (auStack_2c.hasFriendArea) {
             color = HasRecruitedMon(species) ? COLOR_CYAN : COLOR_GREEN;

@@ -220,7 +220,7 @@ void sub_802EA58(void)
         case PELIPPER_JOB_INFO:
             sub_803B35C(GetPelipperBoardSlotInfo(gPelipperBoard->jobIndex), &gPelipperBoard->unkC);
             gPelipperBoard->unkC.unk0[0] = 3;
-            gPelipperBoard->unkC.unk44 = 0;
+            gPelipperBoard->unkC.mailStatus = MAIL_STATUS_SUSPENDED;
             sub_802DE84(&gPelipperBoard->unkC);
             break;
         case PELIPPER_JOB_LIST_MENU:

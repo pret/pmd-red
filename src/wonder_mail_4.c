@@ -265,17 +265,17 @@ void sub_803092C(void)
       mail = GetMailatIndex(gUnknown_203B320->unk0[(gUnknown_203B320->input.unk1E * gUnknown_203B320->input.unk1C) + index]);
       local.unk0[0] = gUnknown_203B320->unk58;
       local.y = sub_8013800(&gUnknown_203B320->input,index);
-      local.unk40 = 7;
-      local.unk42 = 0;
-      local.unk44 = 0;
+      local.mailTitleType = 7;
+      local.mailMissionType = MISSION_TYPE_FRIEND_RESCUE;
+      local.mailStatus = MAIL_STATUS_SUSPENDED;
 
-      local.dungeon = &mail->dungeon;
+      local.unk8 = &mail->unk4;
       local.playerName = mail->playerName;
 
       local.clientSpecies = mail->clientSpecies;
       local.targetSpecies = mail->clientSpecies;
       local.targetItem = ITEM_NOTHING;
-      local.unk2E = 5;
+      local.rewardType = 5;
 
       switch(mail->mailType)
       {

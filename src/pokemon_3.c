@@ -1,15 +1,20 @@
 #include "global.h"
-#include "pokemon_3.h"
 
 #include "pokemon.h"
+#include "pokemon_3.h"
 #include "random.h"
+#include "constants/evolve_type.h"
+#include "constants/evolution_status.h"
 #include "constants/iq_skill.h"
 #include "constants/tactic.h"
 #include "sprite.h"
+#include "text_util.h"
+#include "friend_area.h"
+#include "luminous_cave.h"
 
 extern u8 *gIQSkillNames[];
-extern u32 gIQSkillDescriptions[];
-extern u32 gTacticsDescriptions[];
+extern u8 *gIQSkillDescriptions[];
+extern u8 *gTacticsDescriptions[];
 extern u8 *gTactics[];
 extern bool8 gTacticsTargetLeader[];
 
@@ -53,7 +58,10 @@ extern void sub_808F448(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
 extern void sub_80941FC(struct unkStruct_8094924*, void*);
 extern void sub_809447C(struct unkStruct_8094924*, void*);
 extern void sub_808F428(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
+s16 GetPokemonEvolveConditions(s16 index, struct unkEvolve *r1);
 
+u32 sub_808F798(struct PokemonStruct *, s16);
+void sub_8097848(void);
 
 bool8 sub_808E668(s16 species, s16* a2, s16* a3)
 {
@@ -96,14 +104,14 @@ void sub_808E6F4(struct unkStruct_808E6F4* a1)
     a1->unk2 = 2;
 }
 
-bool8 HasRecruitedMon(s16 species_) {
-    s32 species = species_;
+bool8 HasRecruitedMon(s16 species) {
+    s32 species_s32 = species;
     s32 i = 0;
     struct PokemonStruct *pokemon = gRecruitedPokemonRef->pokemon;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
         if (((u8)pokemon->unk0 & 1)) {
-            if(pokemon->speciesNum == species)
+            if(pokemon->speciesNum == species_s32)
                 return TRUE;
         }
         pokemon++;
@@ -111,7 +119,7 @@ bool8 HasRecruitedMon(s16 species_) {
     return FALSE;
 }
 
-s32 GetBaseSpecies(s16 index) {
+s16 GetBaseSpecies(s16 index) {
     if (index == MONSTER_CASTFORM_SNOWY)
         return MONSTER_CASTFORM;
     if (index == MONSTER_CASTFORM_SUNNY)
@@ -453,24 +461,24 @@ void sub_808E9EC(struct PokemonStruct *r0, struct unkStruct_808E9EC *r1)
 }
 #endif
 
-u8 *GetIQSkillName(u8 r0)
+u8 *GetIQSkillName(u8 skill)
 {
-    return gIQSkillNames[r0];
+    return gIQSkillNames[skill];
 }
 
-void CopyTacticsNameToBuffer(char *r0, u8 r1)
+void CopyTacticsNameToBuffer(char *buffer, u8 tactic)
 {
-    strncpy(r0, gTactics[r1], 0x14);
+    strncpy(buffer, gTactics[tactic], 0x14);
 }
 
-u32 GetIQSkillDescription(u8 r0)
+u8 *GetIQSkillDescription(u8 skill)
 {
-    return gIQSkillDescriptions[r0];
+    return gIQSkillDescriptions[skill];
 }
 
-u32 GetTacticsDescription(u8 r0)
+u8 *GetTacticsDescription(u8 tactic)
 {
-    return gTacticsDescriptions[r0];
+    return gTacticsDescriptions[tactic];
 }
 
 bool8 TacticsTargetLeader(u8 tactic)
@@ -674,7 +682,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
         pokemon = &gRecruitedPokemonRef->pokemon[i];
 
         if (pokemon->unk0 & 1) {
-            if (pokemon->unk0 & 2) {
+            if (pokemon->unk0 & FLAG_ON_TEAM) {
                 buffer[count++] = i;
             }
             if (pokemon->isTeamLeader) {
@@ -682,7 +690,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
             }
         }
         else {
-            pokemon->unkHasNextStage = 0;
+            pokemon->level = 0;
         }
         SavePokemonStruct(&backup, pokemon);
     }
@@ -722,7 +730,7 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
         RestoreIntegerBits(&backup, &data_u8, 1);
         RestorePokemonStruct(&backup, &gRecruitedPokemonRef->team[i]);
         if (data_u8 & 1) {
-            gRecruitedPokemonRef->team[i].unk0 = 3;
+            gRecruitedPokemonRef->team[i].unk0 = 3; // FLAG_ON_TEAM (2) + ??? (1)
         }
         else {
             gRecruitedPokemonRef->team[i].unk0 = 0;
@@ -732,12 +740,12 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
     for (i = 0; i < 6; i++) {
         RestoreIntegerBits(&backup, &data_s16, 16);
         if ((u16)data_s16 < NUM_MONSTERS) {
-            gRecruitedPokemonRef->pokemon[data_s16].unk0 |= 2;
+            gRecruitedPokemonRef->pokemon[data_s16].unk0 |= FLAG_ON_TEAM;
         }
     }
     RestoreIntegerBits(&backup, &data_s16, 16);
     if ((u16)data_s16 < NUM_MONSTERS) {
-        gRecruitedPokemonRef->pokemon[data_s16].isTeamLeader = 1;
+        gRecruitedPokemonRef->pokemon[data_s16].isTeamLeader = TRUE;
     }
     nullsub_102(&backup);
     return backup.unk8;
@@ -745,7 +753,7 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
 
 void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokemon)
 {
-  SaveIntegerBits(a1, &pokemon->unkHasNextStage, 7);
+  SaveIntegerBits(a1, &pokemon->level, 7);
   SaveIntegerBits(a1, &pokemon->speciesNum, 9);
   SaveDungeonLocation(a1, &pokemon->dungeonLocation);
   xxx_save_poke_sub_c_808F41C(a1, &pokemon->unkC[0]);
@@ -756,9 +764,9 @@ void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokem
   SaveIntegerBits(a1, &pokemon->offense.att[1], 8);
   SaveIntegerBits(a1, &pokemon->offense.def[0], 8);
   SaveIntegerBits(a1, &pokemon->offense.def[1], 8);
-  SaveIntegerBits(a1, &pokemon->unk1C, 24);
+  SaveIntegerBits(a1, &pokemon->currExp, 24);
   SaveIntegerBits(a1, &pokemon->IQSkills, 24);
-  SaveIntegerBits(a1, &pokemon->unk24, 4);
+  SaveIntegerBits(a1, &pokemon->tacticIndex, 4);
   SaveHeldItem(a1, &pokemon->heldItem);
   SavePokemonMoves(a1, pokemon->moves);
   SaveIntegerBits(a1, pokemon->name, 80);
@@ -769,8 +777,8 @@ void RestorePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* po
   memset(pokemon, 0, sizeof(struct PokemonStruct));
   pokemon->unk0 = 0;
   pokemon->isTeamLeader = 0;
-  RestoreIntegerBits(a1, &pokemon->unkHasNextStage, 7);
-  if (pokemon->unkHasNextStage) {
+  RestoreIntegerBits(a1, &pokemon->level, 7);
+  if (pokemon->level) {
       pokemon->unk0 |= 1;
   }
   RestoreIntegerBits(a1, &pokemon->speciesNum, 9);
@@ -783,9 +791,9 @@ void RestorePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* po
   RestoreIntegerBits(a1, &pokemon->offense.att[1], 8);
   RestoreIntegerBits(a1, &pokemon->offense.def[0], 8);
   RestoreIntegerBits(a1, &pokemon->offense.def[1], 8);
-  RestoreIntegerBits(a1, &pokemon->unk1C, 24);
+  RestoreIntegerBits(a1, &pokemon->currExp, 24);
   RestoreIntegerBits(a1, &pokemon->IQSkills, 24);
-  RestoreIntegerBits(a1, &pokemon->unk24, 4);
+  RestoreIntegerBits(a1, &pokemon->tacticIndex, 4);
   RestoreHeldItem(a1, &pokemon->heldItem);
   RestorePokemonMoves(a1, pokemon->moves);
   RestoreIntegerBits(a1, pokemon->name, 80);
@@ -807,7 +815,7 @@ s32 SavePokemonStruct2(u8* a1, s32 size)
     SaveIntegerBits(&backup, &pokemon2->unk0, 2);
 
     SaveIntegerBits(&backup, pokemon2->isTeamLeader ? &data_u8_neg1 : &data_u8_zero, 1);
-    SaveIntegerBits(&backup, &pokemon2->unkHasNextStage, 7);
+    SaveIntegerBits(&backup, &pokemon2->level, 7);
 
     SaveDungeonLocation(&backup, &pokemon2->dungeonLocation);
     SaveIntegerBits(&backup, &pokemon2->IQ, 10);
@@ -820,13 +828,13 @@ s32 SavePokemonStruct2(u8* a1, s32 size)
     SaveIntegerBits(&backup, &pokemon2->offense.att[1], 8);
     SaveIntegerBits(&backup, &pokemon2->offense.def[0], 8);
     SaveIntegerBits(&backup, &pokemon2->offense.def[1], 8);
-    SaveIntegerBits(&backup, &pokemon2->unk18, 24);
+    SaveIntegerBits(&backup, &pokemon2->currExp, 24);
     sub_8094184(&backup, &pokemon2->moves);
     SaveItemSlot(&backup, &pokemon2->itemSlot);
     sub_809449C(&backup, &pokemon2->unk44);
     sub_809449C(&backup, &pokemon2->unk48);
     SaveIntegerBits(&backup, &pokemon2->IQSkills, 24);
-    SaveIntegerBits(&backup, &pokemon2->unk50, 4);
+    SaveIntegerBits(&backup, &pokemon2->tacticIndex, 4);
     sub_808F448(&backup, &pokemon2->unk54);
     SaveIntegerBits(&backup, &pokemon2->name, 80);
   }
@@ -855,7 +863,7 @@ s32 RestorePokemonStruct2(u8* a1, s32 size)
     else {
         pokemon2->isTeamLeader = FALSE;
     }
-    RestoreIntegerBits(&backup, &pokemon2->unkHasNextStage, 7);
+    RestoreIntegerBits(&backup, &pokemon2->level, 7);
 
     RestoreDungeonLocation(&backup, &pokemon2->dungeonLocation);
     RestoreIntegerBits(&backup, &pokemon2->IQ, 10);
@@ -868,13 +876,13 @@ s32 RestorePokemonStruct2(u8* a1, s32 size)
     RestoreIntegerBits(&backup, &pokemon2->offense.att[1], 8);
     RestoreIntegerBits(&backup, &pokemon2->offense.def[0], 8);
     RestoreIntegerBits(&backup, &pokemon2->offense.def[1], 8);
-    RestoreIntegerBits(&backup, &pokemon2->unk18, 24);
+    RestoreIntegerBits(&backup, &pokemon2->currExp, 24);
     sub_80941FC(&backup, &pokemon2->moves);
     RestoreItemSlot(&backup, &pokemon2->itemSlot);
     sub_809447C(&backup, &pokemon2->unk44);
     sub_809447C(&backup, &pokemon2->unk48);
     RestoreIntegerBits(&backup, &pokemon2->IQSkills, 24);
-    RestoreIntegerBits(&backup, &pokemon2->unk50, 4);
+    RestoreIntegerBits(&backup, &pokemon2->tacticIndex, 4);
     sub_808F428(&backup, &pokemon2->unk54);
     RestoreIntegerBits(&backup, &pokemon2->name, 80);
   }
@@ -884,12 +892,12 @@ s32 RestorePokemonStruct2(u8* a1, s32 size)
 
 void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924* a1, struct unkPokeSubStruct_C* unkC)
 {
-  RestoreIntegerBits(a1, &unkC->unk0, 7);
+  RestoreIntegerBits(a1, &unkC->level, 7);
 }
 
 void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924* a1, struct unkPokeSubStruct_C* unkC)
 {
-  SaveIntegerBits(a1, &unkC->unk0, 7);
+  SaveIntegerBits(a1, &unkC->level, 7);
 }
 
 void sub_808F428(struct unkStruct_8094924* a1, struct unkStruct_808E6F4* a2)
@@ -902,4 +910,211 @@ void sub_808F448(struct unkStruct_8094924* a1, struct unkStruct_808E6F4* a2)
 {
   SaveIntegerBits(a1, &a2->unk0, 10);
   SaveIntegerBits(a1, &a2->unk2, 5);
+}
+
+void sub_808F468(struct PokemonStruct *param_1, struct EvolveStatus *evolveStatus, u8 param_3)
+{
+    bool8 evolFlag;
+    u8 friendArea;
+    u8 uVar2;
+    s32 numPokemon;
+    struct unkStruct_8092638 local_40; // sp 0x0
+    struct unkEvolve evolveConditions; // r7
+    s32 index, index2;
+#ifndef NONMATCHING
+    register s32 defaultReason asm("sl");
+#else
+    s32 defaultReason;
+#endif
+
+    evolveStatus->evolutionConditionStatus = 0;
+    for(index = MONSTER_BULBASAUR; index <= MONSTER_MAX; index++)
+    {
+        if ((s16)index == MONSTER_ALAKAZAM) {
+            GetPokemonEvolveConditions(MONSTER_ALAKAZAM, &evolveConditions);
+        }
+        else {
+            GetPokemonEvolveConditions(index, &evolveConditions);
+        }
+        if(((evolveConditions.preEvolution.evolveType != EVOLVE_TYPE_NONE) && (param_1->speciesNum == evolveConditions.preEvolution.evolveFrom)))
+            break;
+    };
+    if (index == MONSTER_MAX + 1) {
+        evolveStatus->evolutionConditionStatus = EVOLUTION_NO_MORE;
+    }
+    else {
+        for(index = MONSTER_BULBASAUR, defaultReason = EVOLUTION_LACK_ITEM; index <= MONSTER_MAX; index++)
+        {
+            evolFlag = FALSE;
+            index2 = (s16)index;
+            GetPokemonEvolveConditions(index2, &evolveConditions);
+            if ((evolveConditions.preEvolution.evolveType == EVOLVE_TYPE_NONE) || (param_1->speciesNum != evolveConditions.preEvolution.evolveFrom)) continue;
+            friendArea = ((u8 (*)(s32))GetFriendArea)(index2); // UB
+            uVar2 = GetFriendArea(param_1->speciesNum);
+            sub_8092638(friendArea,&local_40,FALSE,FALSE);
+            if (!local_40.hasFriendArea) {
+                evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_FRIEND_AREA;
+                evolFlag = TRUE;
+            }
+            else {
+                numPokemon = local_40.unk2;
+                if (friendArea == uVar2) {
+                    numPokemon--;
+                }
+                if (local_40.numPokemon <= numPokemon) {
+                    evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_ROOM;
+                    evolFlag = TRUE;
+                }
+            }
+            if (evolveConditions.preEvolution.evolveType == EVOLVE_TYPE_LEVEL) {
+                if ((evolveStatus->evolutionConditionStatus & EVOLUTION_GOOD)) continue;
+                if (param_1->level < evolveConditions.evolutionRequirements.mainRequirement) {
+                    evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_LEVEL;
+                    evolFlag = TRUE;
+                }
+            }
+            else if (evolveConditions.preEvolution.evolveType == EVOLVE_TYPE_IQ) {
+                if (param_1->IQ < evolveConditions.evolutionRequirements.mainRequirement) {
+                    evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_IQ;
+                    evolFlag = TRUE;
+                }
+            }
+            else if (evolveConditions.preEvolution.evolveType == EVOLVE_TYPE_ITEM) {
+                if (param_3 != 0) {
+                    if ((evolveStatus->evoItem1 != evolveConditions.evolutionRequirements.mainRequirement) &&
+                        (evolveStatus->evoItem2 != evolveConditions.evolutionRequirements.mainRequirement)) {
+                        evolveStatus->evolutionConditionStatus |= defaultReason;
+                        evolFlag = TRUE;
+                    }
+                }
+                else 
+                {
+                    if (FindItemInInventory(evolveConditions.evolutionRequirements.mainRequirement) < 0) {
+                        evolveStatus->evolutionConditionStatus |= defaultReason;
+                        evolFlag = TRUE;
+                    }
+                }
+            }
+            if (evolveConditions.evolutionRequirements.additionalRequirement == 4) {
+                if (param_3 != 0) {
+                    if ((evolveStatus->evoItem1 != ITEM_LINK_CABLE) && (evolveStatus->evoItem2 != ITEM_LINK_CABLE))
+                    {
+                        evolveStatus->evolutionConditionStatus |= defaultReason;
+                        continue;
+                    }
+                }
+                else
+                {
+                    if (-1 < FindItemInInventory(ITEM_LINK_CABLE)) goto _0808F6CA;
+                    evolveStatus->evolutionConditionStatus |= defaultReason;
+                    continue;
+                }
+            }
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 5) {
+                if ((param_1->offense).att[0] > (param_1->offense).def[0]) goto _0808F6CA;
+                else continue;
+            }
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 6) {
+                if ((param_1->offense).att[0] < (param_1->offense).def[0]) goto _0808F6CA;
+                else continue;
+            }
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 7) {
+                if ((param_1->offense).att[0] == (param_1->offense).def[0]) goto _0808F6CA;
+                else continue;
+            }
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 8)
+            {
+                if (param_3 != 0) {
+                    if ((evolveStatus->evoItem1 != ITEM_SUN_RIBBON) && (evolveStatus->evoItem2 != ITEM_SUN_RIBBON))
+                    {
+                        evolveStatus->evolutionConditionStatus |= defaultReason;
+                        continue;
+                    }
+                    else goto _0808F6CA;
+                }
+                else {
+                    if (-1 < FindItemInInventory(ITEM_SUN_RIBBON)) goto _0808F6CA;
+                    evolveStatus->evolutionConditionStatus |= defaultReason;
+                    continue;                
+                }
+            }
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 9) {
+                if (param_3 != 0) {
+                    if ((evolveStatus->evoItem1 != ITEM_LUNAR_RIBBON) && (evolveStatus->evoItem2 != ITEM_LUNAR_RIBBON))
+                    {
+                        evolveStatus->evolutionConditionStatus |= defaultReason;
+                        continue;
+                    }
+                    else goto _0808F6CA;
+                }
+                else
+                {
+                    if (-1 < FindItemInInventory(ITEM_LUNAR_RIBBON)) goto _0808F6CA;
+                    evolveStatus->evolutionConditionStatus |= defaultReason;
+                    continue;
+                }
+            }
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 0xb) {
+                if ((evolveStatus->unk6 & 1) == 0) goto _0808F6CA;
+                else  continue;
+            }
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 0xc) {
+                if ((evolveStatus->unk6 & 1)) goto _0808F6CA;
+                else  continue;
+            }
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 10) {
+                if (param_3 != 0) {
+                    if ((evolveStatus->evoItem1 == ITEM_BEAUTY_SCARF) || (evolveStatus->evoItem2 == ITEM_BEAUTY_SCARF)) goto _0808F6CA; 
+                    else continue;
+                }
+                else
+                {
+                    if ( FindItemInInventory(ITEM_BEAUTY_SCARF) < 0) evolFlag = TRUE;
+                }
+            }
+        _0808F6CA:
+            if (!evolFlag) {
+                evolveStatus->evolutionConditionStatus |= EVOLUTION_GOOD;
+                evolveStatus->targetEvolveSpecies = index2;
+            }
+        }
+    }
+}
+
+u8 sub_808F700(struct PokemonStruct *pokemon)
+{
+    struct EvolveStatus evolveStatus;
+
+    sub_808F468(pokemon, &evolveStatus, 0);
+    if ((evolveStatus.evolutionConditionStatus & EVOLUTION_GOOD)) {
+        return 1;
+    }
+    else if ((evolveStatus.evolutionConditionStatus & EVOLUTION_NO_MORE)) {
+        return 2;
+    }
+    else {
+        return 0;
+    }
+}
+
+u32 sub_808F734(struct PokemonStruct *pokemon, s16 _species)
+{
+    u32 uVar1;
+    int iVar3;
+    struct PokemonStruct pokeStruct;
+    s32 species = _species;
+
+    iVar3 = 0;
+    pokeStruct = *pokemon;
+    uVar1 = sub_808F798(pokemon, species);
+    if (species == MONSTER_NINJASK) {
+        pokeStruct.isTeamLeader = FALSE;
+        pokeStruct.heldItem.id = ITEM_NOTHING;
+        BoundedCopyStringtoBuffer(pokeStruct.name, GetMonSpecies(MONSTER_SHEDINJA),POKEMON_NAME_LENGTH);
+        iVar3 = sub_808F798(&pokeStruct,MONSTER_SHEDINJA);
+    }
+    if (iVar3 != 0) {
+        sub_8097848();
+    }
+    return uVar1;
 }

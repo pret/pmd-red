@@ -189,7 +189,7 @@ void sub_802CAA4(void) {
         {
             case 5:
                 gUnknown_203B2F0->unk10C[loopMax].text = gUnknown_80DFD70; // Take Job
-                if(sub_809693C(mail) || !sub_80A2824(mail->dungeon.id))
+                if(sub_809693C(mail) || !sub_80A2824(mail->unk4.dungeon.id))
                 {
                     gUnknown_203B2F0->unk10C[loopMax].menuAction = -1;
                 }
@@ -679,7 +679,7 @@ void sub_802D2A8(void)
           MemoryCopy8(sub_8096DD8(),gUnknown_203B2F8->mail->unk14,0x28);
           MemoryCopy8(sub_8096DE8(),gUnknown_203B2F8->mail->unk18,0x78);
         }
-        switch(gUnknown_203B2F8->mail->wonderMail.dungeon.id)
+        switch(gUnknown_203B2F8->mail->wonderMail.unk4.dungeon.id)
         {
             // NOTE: subtract 1 from each of the case as the input??
             case DUNGEON_ODDITY_CAVE: // 0x2B
@@ -730,8 +730,8 @@ void sub_802D2A8(void)
       case 0x10:
         sub_803B35C(&gUnknown_203B2F8->mail->wonderMail,&gUnknown_203B2F8->unk14);
         gUnknown_203B2F8->unk14.unk0[0] = 3;
-        gUnknown_203B2F8->unk14.unk44 = 0;
-        gUnknown_203B2F8->unk14.unk50[0] = gUnknown_203B2F8->mail->unk18;
+        gUnknown_203B2F8->unk14.mailStatus = MAIL_STATUS_SUSPENDED;
+        gUnknown_203B2F8->unk14.unk50 = gUnknown_203B2F8->mail->unk18;
         sub_802DE84(&gUnknown_203B2F8->unk14);
         break;
   }
@@ -928,7 +928,7 @@ void sub_802D940(void)
   {
     // Delete
     case 2:
-        if ((gUnknown_203B2F8->unk9) && (((mail = &gUnknown_203B490->jobSlots[gUnknown_203B2F8->jobSlotIndex]), mail->mailType > MAIL_TYPE_SUSPENDED_JOB) && (gUnknown_203B2F8->dungeonID == mail->dungeon.id)))
+        if ((gUnknown_203B2F8->unk9) && (((mail = &gUnknown_203B490->jobSlots[gUnknown_203B2F8->jobSlotIndex]), mail->mailType > MAIL_TYPE_SUSPENDED_JOB) && (gUnknown_203B2F8->dungeonID == mail->unk4.dungeon.id)))
         {
             sub_802D1A0(7);
         }
@@ -1008,7 +1008,7 @@ bool8 sub_802DAA8(void)
     return TRUE;
   }
   else {
-    if ( (mail->mailType != WONDER_MAIL_TYPE_THANK_YOU) && (gUnknown_203B2F8->dungeonID == mail->dungeon.id)) return FALSE;
+    if ( (mail->mailType != WONDER_MAIL_TYPE_THANK_YOU) && (gUnknown_203B2F8->dungeonID == mail->unk4.dungeon.id)) return FALSE;
     return TRUE;
   }
 }
@@ -1028,7 +1028,7 @@ _0802DAE8:
     {
       mailType = mail->mailType;
       if (((mailType == 0) || (mailType == WONDER_MAIL_TYPE_THANK_YOU)) ||
-         ((WONDER_MAIL_TYPE_THANK_YOU < mailType && (gUnknown_203B2F8->dungeonID != mail->dungeon.id)))) goto _0802DAE8;
+         ((WONDER_MAIL_TYPE_THANK_YOU < mailType && (gUnknown_203B2F8->dungeonID != mail->unk4.dungeon.id)))) goto _0802DAE8;
     }
     return FALSE;
   }

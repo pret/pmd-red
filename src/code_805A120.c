@@ -51,7 +51,7 @@ extern s16 gUnknown_80F4E00;
 extern u8 *gUnknown_80FD128[];
 extern u8 *gUnknown_80FAD2C[];
 extern u32 gUnknown_80F4F64;
-extern u8 gUnknown_80F5978[];
+extern u8 gSecretPowerTable[];
 extern s16 gUnknown_80F4E74;
 extern s16 gUnknown_80F4E06;
 extern s16 gUnknown_80F4E94[];
@@ -1271,7 +1271,7 @@ bool8 SecretPowerMoveAction(struct Entity * pokemon, struct Entity * target, str
   if ( sub_8055640(pokemon, target, move, 0x100, param_4) != 0) {
     flag = TRUE;
     if (sub_805727C(pokemon,target,gUnknown_80F4E06) != 0) {
-        switch(gUnknown_80F5978[gDungeon->tileset]) {
+        switch(gSecretPowerTable[gDungeon->tileset]) {
             case 0:
                 PoisonedStatusTarget(pokemon,target,FALSE);
                 break;

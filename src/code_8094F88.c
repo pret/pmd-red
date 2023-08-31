@@ -66,7 +66,7 @@ void sub_8095118(void)
   struct unkStruct_203B480 *unused;
   
   MemoryFill8((u8*)gUnknown_203B480,0, 0x20 * sizeof(struct unkStruct_203B480));
-  MemoryFill8((u8*)gUnknown_203B484,0, 0x5c);
+  MemoryFill8((u8*)gUnknown_203B484,0, sizeof(struct unkStruct_203B484));
   for(index = 0; index < 0x20; index++){
 
     // NOTE: we use a temp variable here to force the match
@@ -123,12 +123,6 @@ bool8 sub_80951BC(struct unkStruct_203B480 *mail)
         return 1;
     }
 }
-
-struct unkStruct_809542C
-{
-    struct DungeonLocation unk0;
-    u32 unk4;
-};
 
 bool8 sub_80951FC(struct unkStruct_203B480 *param_1)
 {
@@ -281,9 +275,9 @@ s32 sub_8095400(u32 param_1)
   return -1;
 }
 
-void sub_809542C(struct unkStruct_809542C *param_1)
+void sub_809542C(struct WonderMailSub *param_1)
 {
-  u32 uVar4;
+  u32 seed;
 
 #ifndef NONMATCHING
   register struct unkStruct_203B480 *preload asm("r2");
@@ -295,31 +289,31 @@ void sub_809542C(struct unkStruct_809542C *param_1)
   
   gUnknown_203B480->mailType = 1;
   preload = gUnknown_203B480;
-  uVar4 = param_1->unk4;
-  preload->dungeon = param_1->unk0;
-  preload->unk8 = uVar4;
+  seed = param_1->seed;
+  preload->unk4.dungeon = param_1->dungeon;
+  preload->unk4.seed = seed;
   sub_8094D28(Rand32Bit());
   gUnknown_203B480->unk10.unk10 = sub_8094E4C();
   gUnknown_203B480->clientSpecies = GetPlayerPokemonStruct()->speciesNum;
   PrintPokeNameToBuffer(buffer, GetPlayerPokemonStruct());
   CopyStringtoBuffer(gUnknown_203B480->playerName, buffer);
   gUnknown_203B480->unk24 = sub_8011C34();
-  gUnknown_203B480->rescuesAllowed = GetRescuesAllowed(gUnknown_203B480->dungeon.id);
+  gUnknown_203B480->rescuesAllowed = GetRescuesAllowed(gUnknown_203B480->unk4.dungeon.id);
 }
 
-void sub_8095494(struct unkStruct_809542C *param_1, u8 index)
+void sub_8095494(struct WonderMailSub *param_1, u8 index)
 {
-  u32 uVar1;
-  struct DungeonLocation temp;
+  u32 seed;
+  struct DungeonLocation dungeon;
   struct unkStruct_203B480 *mail;
   
   mail = gUnknown_203B480;
   mail += index;
 
-  temp = mail->dungeon;
-  uVar1 = mail->unk8;
-  param_1->unk0 = temp;
-  param_1->unk4 = uVar1;
+  dungeon = mail->unk4.dungeon;
+  seed = mail->unk4.seed;
+  param_1->dungeon = dungeon;
+  param_1->seed = seed;
 }
 
 u32 sub_80954B4(void)
@@ -346,7 +340,7 @@ u32 sub_80954CC(u8 *a, u32 b)
     memset(temp, 0, sizeof(struct PokemonStruct));
     RestoreIntegerBits(&backup, &temp->unk0, 2);
     RestoreIntegerBits(&backup, &temp->isTeamLeader, 1);
-    RestoreIntegerBits(&backup, &temp->unkHasNextStage, 7);
+    RestoreIntegerBits(&backup, &temp->level, 7);
     RestoreDungeonLocation(&backup, &temp->dungeonLocation);
     RestoreIntegerBits(&backup, &temp->speciesNum, 9);
     xxx_restore_poke_sub_c_808F410(&backup, &temp->unkC[0]);
@@ -357,9 +351,9 @@ u32 sub_80954CC(u8 *a, u32 b)
     RestoreIntegerBits(&backup, &temp->offense.att[1], 8);
     RestoreIntegerBits(&backup, &temp->offense.def[0], 8);
     RestoreIntegerBits(&backup, &temp->offense.def[1], 8);
-    RestoreIntegerBits(&backup, &temp->unk1C, 0x18);
+    RestoreIntegerBits(&backup, &temp->currExp, 0x18);
     RestoreIntegerBits(&backup, &temp->IQSkills, 0x18);
-    RestoreIntegerBits(&backup, &temp->unk24, 4);
+    RestoreIntegerBits(&backup, &temp->tacticIndex, 4);
     RestoreHeldItem(&backup, &temp->heldItem);
     RestorePokemonMoves(&backup, temp->moves);
     RestoreIntegerBits(&backup, temp->name, 0x50);
@@ -388,7 +382,7 @@ u32 sub_8095624(u8 *a, u32 b)
     temp  = &gUnknown_203B484->unk4;
     SaveIntegerBits(&backup, &temp->unk0, 2);
     SaveIntegerBits(&backup, &temp->isTeamLeader, 1);
-    SaveIntegerBits(&backup, &temp->unkHasNextStage, 7);
+    SaveIntegerBits(&backup, &temp->level, 7);
     SaveDungeonLocation(&backup, &temp->dungeonLocation);
     SaveIntegerBits(&backup, &temp->speciesNum, 9);
     xxx_save_poke_sub_c_808F41C(&backup, &temp->unkC[0]);
@@ -399,9 +393,9 @@ u32 sub_8095624(u8 *a, u32 b)
     SaveIntegerBits(&backup, &temp->offense.att[1], 8);
     SaveIntegerBits(&backup, &temp->offense.def[0], 8);
     SaveIntegerBits(&backup, &temp->offense.def[1], 8);
-    SaveIntegerBits(&backup, &temp->unk1C, 0x18);
+    SaveIntegerBits(&backup, &temp->currExp, 0x18);
     SaveIntegerBits(&backup, &temp->IQSkills, 0x18);
-    SaveIntegerBits(&backup, &temp->unk24, 4);
+    SaveIntegerBits(&backup, &temp->tacticIndex, 4);
     SaveHeldItem(&backup, &temp->heldItem);
     SavePokemonMoves(&backup, temp->moves);
     SaveIntegerBits(&backup, temp->name, 0x50);
@@ -420,8 +414,8 @@ void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     u8 temp;
 
     RestoreIntegerBits(a, &b->mailType, 4);
-    RestoreDungeonLocation(a, &b->dungeon);
-    RestoreIntegerBits(a, &b->unk8, 0x18);
+    RestoreDungeonLocation(a, &b->unk4.dungeon);
+    RestoreIntegerBits(a, &b->unk4.seed, 0x18);
     RestoreIntegerBits(a, &b->clientSpecies, 0x9);
     RestoreIntegerBits(a, &b->unk10.unk10, 0x20);
     RestoreIntegerBits(a, &b->playerName, 0x50);
@@ -445,8 +439,8 @@ void sub_8095824(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     zero = 0;
 
     SaveIntegerBits(a, &b->mailType, 4);
-    SaveDungeonLocation(a, &b->dungeon);
-    SaveIntegerBits(a, &b->unk8, 0x18);
+    SaveDungeonLocation(a, &b->unk4.dungeon);
+    SaveIntegerBits(a, &b->unk4.seed, 0x18);
     SaveIntegerBits(a, &b->clientSpecies, 0x9);
     SaveIntegerBits(a, &b->unk10.unk10, 0x20);
     SaveIntegerBits(a, &b->playerName, 0x50);

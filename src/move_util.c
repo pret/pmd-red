@@ -13,7 +13,16 @@
 
 extern bool8 sub_8044B28(void);
 extern void sub_80429C8(struct Entity *r0);
-extern u16 gNaturePowerMoveTable[];
+
+typedef bool8 (*MoveCallback)(struct Entity *pokemon, struct Entity *target, struct Move *move, s32 param_4);
+struct NaturePowerMove
+{
+    u16 moveID;
+    u16 unk2;
+    MoveCallback move;
+};
+
+extern struct NaturePowerMove gNaturePowerMoveTable[76];
 bool8 sub_805755C(struct Entity* pokemon,u16 param_2);
 
 u32 sub_8057144(struct Entity * pokemon)
@@ -104,7 +113,7 @@ bool8 sub_80571F0(struct Entity * pokemon, struct Move *move)
                 if (0x4a < tileset) {
                     tileset = 0x4a;
                 }
-                if (gNaturePowerMoveTable[tileset << 2] == MOVE_EARTHQUAKE) return FALSE;
+                if (gNaturePowerMoveTable[tileset].moveID == MOVE_EARTHQUAKE) return FALSE;
             }
         }
         return TRUE;

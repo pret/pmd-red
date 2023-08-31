@@ -99,7 +99,6 @@ SECTIONS {
         src/code_801B3C0.o(.text);
         src/code_801C620.o(.text);
         src/code_801D760.o(.text);
-        asm/code_801D760.o(.text);
         src/options_menu.o(.text);
         src/hints_menu.o(.text);
         src/gulpin_shop.o(.text);
@@ -107,9 +106,6 @@ SECTIONS {
         asm/code_801EE10.o(.text);
         src/code_801EE10_mid.o(.text);
         src/gulpin_shop_1.o(.text);
-        src/code_8021774_pre.o(.text);
-        asm/code_801EE10_mid.o(.text);
-        src/code_8021774.o(.text);
         src/wigglytuff_shop.o(.text);
         src/code_8023144_pre.o(.text);
         asm/code_8023144.o(.text);
@@ -120,8 +116,6 @@ SECTIONS {
         src/friend_list_menu.o(.text);
         src/party_list_menu.o(.text);
         src/friend_area_action_menu.o(.text);
-        asm/friend_area_action_menu.o(.text);
-        src/friend_area_action_menu_1.o(.text);
         src/wonder_mail.o(.text);
         src/thank_you_wonder_mail.o(.text);
         src/wonder_mail_2.o(.text);
@@ -203,6 +197,8 @@ SECTIONS {
         src/status_actions.o(.text);
         src/move_checks.o(.text);
         asm/code_805D8C8.o(.text);
+        src/code_805D8C8.o(.text);
+        asm/code_805D8C8_1.o(.text);
         src/targeting.o(.text);
         src/code_8069E0C.o(.text);
         asm/code_8069E0C.o(.text);
@@ -245,7 +241,6 @@ SECTIONS {
         src/dungeon_leader.o(.text);
         asm/code_8083654.o(.text);
         src/dungeon_music.o(.text);
-        asm/dungeon_music.o(.text);
         src/dungeon_random.o(.text);
         src/code_808417C.o(.text);
         asm/code_808417C.o(.text);
@@ -397,7 +392,6 @@ SECTIONS {
         src/friend_list_menu.o(.rodata);
         src/party_list_menu.o(.rodata);
         src/friend_area_action_menu.o(.rodata);
-        src/friend_area_action_menu_1.o(.rodata);
         src/wonder_mail.o(.rodata);
         src/thank_you_wonder_mail.o(.rodata);
         src/wonder_mail_2.o(.rodata);

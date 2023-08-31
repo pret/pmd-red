@@ -125,7 +125,6 @@ extern void ProceedToNextRewardSceneState(void);
 extern void sub_802F300(void);
 extern s32 sub_808D544(u32);
 extern u32 sub_801B60C(u32, u8, u8);
-extern void sub_8092578(u8 *buffer, u8 index, u8 r2);
 void HandleMissionReward(void);
 const u8 *sub_80974A0(s16 index);
 
@@ -348,8 +347,8 @@ void sub_802F088(void)
             temp = sub_803B344(gUnknown_203B30C->unk4);
             sub_803B35C(&temp->mail, &gUnknown_203B30C->unk8);
             gUnknown_203B30C->unk8.unk0[0] = 3;
-            gUnknown_203B30C->unk8.unk44 = 0;
-            gUnknown_203B30C->unk8.unk50[0] = temp->unk18;
+            gUnknown_203B30C->unk8.mailStatus = MAIL_STATUS_SUSPENDED;
+            gUnknown_203B30C->unk8.unk50 = temp->unk18;
             sub_802DE84(&gUnknown_203B30C->unk8);
     }
 }
@@ -555,7 +554,7 @@ void HandleMissionReward(void)
             SetRewardSceneState(PREP_ITEM_REWARD);
         }
         else {
-            sub_8092578(gUnknown_202E628,gUnknown_203B310->unk10->friendAreaReward,0);
+            sub_8092578(gUnknown_202E628,gUnknown_203B310->unk10->friendAreaReward,FALSE);
             if (gUnknown_203B310->displayClientDialogueSprite) {
                 sub_80141B4(gUnknown_80E04B4,0,&gUnknown_203B310->faceFile,0x10d);
                 gUnknown_203B310->nextState = UNLOCK_FRIEND_AREA;

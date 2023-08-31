@@ -7,13 +7,12 @@
 #include "dungeon_music.h"
 #include "dungeon_pokemon_attributes.h"
 #include "pokemon.h"
+#include "pokemon_3.h"
 #include "dungeon_util_1.h"
 #include "dungeon_util.h"
 #include "exclusive_pokemon.h"
 
-extern void SetDefaultIQSkills(u8 *param_1, u8 param_2);
 extern u8 sub_8044B28(void);
-extern u8 HasRecruitedMon(u32);
 extern u8 gUnknown_202E038[];
 extern void sub_8085374();
 extern void sub_80855E4(void *);

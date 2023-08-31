@@ -464,7 +464,7 @@ NAKED void sub_8092404(u8 r0, u16 *r1, bool8 r2, bool8 r3)
 }
 #endif
 
-void sub_809249C(u8 friendArea, u8 clear)
+void sub_809249C(u8 friendArea, bool8 clear)
 {
     s32 index;
     bool32 dungeonCheck;
@@ -515,11 +515,11 @@ void sub_8092558(u8 *buffer, u8 index)
     sprintfStatic(buffer, &gUnknown_81098A4, gFriendAreaNames[index]);
 }
 
-void sub_8092578(u8 *buffer, u8 index, u8 r2)
+void sub_8092578(u8 *buffer, u8 index, bool8 printPrice)
 {
     // I think this is when we buy the friend area from wigglytuff
     u8 priceBuffer[0x14];
-    if(r2)
+    if(printPrice)
     {
         sub_8090FEC(gFriendAreaSettings[index].price, priceBuffer, 1);
         sprintfStatic(buffer, &gUnknown_81098AC, gFriendAreaNames[index], 96, priceBuffer);
@@ -558,7 +558,7 @@ bool8 HasAllFriendAreas(void)
     return TRUE;
 }
 
-void sub_8092638(u8 friendArea, struct unkStruct_8092638 *param_2, u8 param_3, u8 param_4)
+void sub_8092638(u8 friendArea, struct unkStruct_8092638 *param_2, bool8 checkLeader, bool8 checkDungeon)
 {
     struct PokemonStruct *pokeStruct;
     s32 counter;
@@ -574,7 +574,7 @@ void sub_8092638(u8 friendArea, struct unkStruct_8092638 *param_2, u8 param_3, u
     param_2->unk8 = iVar4;
 
     param_2->hasFriendArea = gFriendAreas[counter];
-    if (param_2->hasFriendArea != 0) {
+    if (param_2->hasFriendArea) {
         param_2->unk2 = 0;
         param_2->numPokemon = gFriendAreaSettings[counter].num_pokemon;
 
@@ -582,8 +582,8 @@ void sub_8092638(u8 friendArea, struct unkStruct_8092638 *param_2, u8 param_3, u
         {
             pokeStruct = &gRecruitedPokemonRef->pokemon[iVar4];
             if (((((u8)pokeStruct->unk0 & 1) != 0) &&
-                ((param_3 == 0 || (!pokeStruct->isTeamLeader)))) &&
-                ((param_4 == 0 || ((pokeStruct->dungeonLocation).id != DUNGEON_JOIN_LOCATION_PARTNER)))) {
+                ((checkLeader == 0 || (!pokeStruct->isTeamLeader)))) &&
+                ((checkDungeon == 0 || ((pokeStruct->dungeonLocation).id != DUNGEON_JOIN_LOCATION_PARTNER)))) {
                 param_2->unk2++;
             }
         }

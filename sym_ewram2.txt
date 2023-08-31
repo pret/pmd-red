@@ -228,21 +228,6 @@ gUnknown_203B278: /* 203B278 */
 
 .include "src/gulpin_shop_1.o"
 
-gUnknown_203B280: /* 203B280 */
-	.space 0x4
-
-gUnknown_203B284: /* 203B284 */
-	.space 0x4
-
-gUnknown_203B288: /* 203B288 */
-	.space 0x2
-
-gUnknown_203B28A: /* 203B28A */
-	.space 0x2
-
-gUnknown_203B28C: /* 203B28C */
-	.space 0x4
-
 .include "src/wigglytuff_shop.o"
 
 gUnknown_203B294: /* 203B294 */
