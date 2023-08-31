@@ -35,7 +35,7 @@ extern const char gKanjiB_file_string[];
 // system_sbin.s
 extern const struct FileArchive gSystemFileArchive;
 
-void sub_8006438(const struct UnkTextStruct2 *, u8, u8, struct UnkTextStruct2_sub *);
+static void sub_8006438(const struct UnkTextStruct2 *, u8, u8, struct UnkTextStruct2_sub *);
 
 void LoadCharmaps(void)
 {
@@ -148,10 +148,19 @@ void sub_800641C(struct UnkTextStruct2 *a0, u8 a1, u8 a2)
     sub_8006438(a0, a1, a2, &r3);
 }
 
-void sub_8006438(const struct UnkTextStruct2 *a0, u8 a1, u8 a2, struct UnkTextStruct2_sub *a3)
+static void sub_8006438(const struct UnkTextStruct2 *a0, u8 a1, u8 a2, struct UnkTextStruct2_sub *a3)
 {
-    int i;
-    u32 r9 = 2;
+    s32 i;
+    u32 r9;
+    #if NONMATCHING // Simple regswap: https://decomp.me/scratch/EN6n0 99.79%
+    s16 **ptr2; // r2
+    #else
+    register s16 **ptr2 asm("r2");
+    #endif
+    s16 *ptr0; // r0
+    u8 *ptr1; // r1
+
+    r9 = 2;
 
     if (a0 == NULL)
         a0 = gUnknown_80B857C;
@@ -170,15 +179,9 @@ void sub_8006438(const struct UnkTextStruct2 *a0, u8 a1, u8 a2, struct UnkTextSt
         }
     }
 
-#ifdef NONMATCHING
-    gUnknown_203B078 = gUnknown_3000E94;
-    gUnknown_20274A5 = 1;
-#else
-    asm_unified("\tldr r2, =gUnknown_203B078\n"
-        "\tldr r0, =gUnknown_3000E94\n"
-        "\tldr r1, =gUnknown_20274A5\n"
-        "\tstr r0, [r2]\n"
-        "\tmovs r0, 0x1\n"
-        "\tstrb r0, [r1]");
-#endif
+    ptr2 = &gUnknown_203B078;
+    ptr0 = gUnknown_3000E94;
+    ptr1 = &gUnknown_20274A5;
+    *ptr2 = ptr0;
+    *ptr1 = 1;
 }
