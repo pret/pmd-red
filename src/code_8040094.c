@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_800558C.h"
 #include "code_80118A4.h"
 #include "code_80521D0.h"
 #include "dungeon_entity.h"
@@ -15,7 +16,6 @@ extern struct FileArchive gDungeonFileArchive;
 extern struct OpenedFile *gUnknown_202EE04;
 
 extern void sub_803F7BC(void);
-extern void sub_80060EC(void);
 extern void sub_800CB20(void);
 extern void LoadBufferedInputs(void);
 extern void xxx_call_update_bg_sound_input(void);
