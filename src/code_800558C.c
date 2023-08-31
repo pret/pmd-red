@@ -3,11 +3,11 @@
 #include "code_800558C.h"
 
 extern u8 gUnknown_2026E38;
-extern u32 gUnknown_2026E3C;
+extern u32 *gUnknown_2026E3C;
 extern u16 gUnknown_2026E4E;
 extern bool32 gUnknown_2026E50;
 extern bool32 gUnknown_2026E54;
-extern u32 gUnknown_2026E58;
+extern u32 *gUnknown_2026E58;
 
 UNUSED static void sub_80060A8(void)
 {

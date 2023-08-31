@@ -1,5 +1,6 @@
 #include "global.h"
 #include "bg_control.h"
+#include "code_800558C_1.h"
 #include "code_800DAC0.h"
 #include "code_80118A4.h"
 #include "file_system.h"
@@ -56,7 +57,6 @@ extern u8 gefob000_string[];
 extern u8 gefob001_string[];
 extern struct FileArchive gEffectFileArchive;
 
-extern void sub_8005610(struct OpenedFile *, u32, u32,u32);
 extern void sub_800F034(void);
 extern void sub_800ED38(u32);
 extern void sub_800DC14(void);

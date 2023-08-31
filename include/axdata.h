@@ -62,7 +62,7 @@ struct axdata
     /* 0x28 */ struct ax_anim *nextAnimData; // next animation data (if flags&0x1000)
     /* 0x2C */ struct ax_anim *activeAnimData; // current animation data
     /* 0x30 */ void *paletteData; // ?
-    /* 0x34 */ struct ax_pose *poseData;
+    /* 0x34 */ struct ax_pose **poseData;
     /* 0x38 */ struct UnkSpriteMem **spriteData;
 };
 
