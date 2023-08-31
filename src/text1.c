@@ -22,7 +22,7 @@ EWRAM_DATA u8 gUnknown_202B034;
 EWRAM_DATA u16 gUnknown_202B038[4][32][32];
 
 // ?
-extern char gUnknown_3000E94[];
+extern s16 gUnknown_3000E94[];
 
 // data.s
 extern const struct UnkTextStruct2 gUnknown_80B857C[4];
