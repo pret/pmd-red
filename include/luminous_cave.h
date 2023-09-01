@@ -1,7 +1,10 @@
 #ifndef GUARD_LUMINOUS_CAVE_H
 #define GUARD_LUMINOUS_CAVE_H
 
+#include "file_system.h"
+#include "item.h"
 #include "menu.h"
+#include "pokemon_3.h"
 #include "text.h"
 
 struct unkStruct_203B2B0

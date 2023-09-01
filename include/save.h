@@ -55,7 +55,7 @@ struct UnkStruct_203B184 {
     /* 0x14 */ struct unkStruct_203B48C *unk14;
     /* 0x18 */ struct unkStruct_203B490 *mailInfo;
     /* 0x1C */ struct RescueTeamData *RescueTeamInfo;
-    /* 0x20 */ u32 unk20;
+    /* 0x20 */ struct unkStruct_203B494 *unk20;
     /* 0x24 */ struct ExclusivePokemonData *ExclusivePokemon;
     /* 0x28 */ bool8 *BoughtFriendAreas;
     /* 0x2C */ struct GameOptions *gameOptions;

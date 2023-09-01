@@ -1,7 +1,6 @@
 #include "global.h"
-#include "constants/wonder_mail.h"
-#include "pokemon.h"
 #include "code_8094F88.h"
+#include "constants/wonder_mail.h"
 #include "memory.h"
 #include "dungeon.h"
 #include "random.h"

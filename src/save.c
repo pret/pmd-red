@@ -1,30 +1,31 @@
 #include "global.h"
+#include "code_80118A4.h"
+#include "code_80130A8.h"
+#include "code_8097670.h"
 #include "event_flag.h"
+#include "exclusive_pokemon.h"
 #include "flash.h"
 #include "friend_area.h"
+#include "game_options.h"
 #include "memory.h"
 #include "pokemon.h"
 #include "random.h"
 #include "save.h"
 #include "team_inventory.h"
-#include "exclusive_pokemon.h"
-#include "game_options.h"
-#include "code_80130A8.h"
-#include "code_80118A4.h"
 
 EWRAM_DATA_2 u32 gUnknown_203B17C = {0};
 EWRAM_DATA_2 char *gUnknown_203B180 = {0};
 EWRAM_DATA_2 struct UnkStruct_203B184 *gUnknown_203B184 = {0};
 extern struct GameOptions *gGameOptionsRef;
 
+// size: 0x800
 struct unk_struct
 {
-    // size: 0x800
     u32 unk0;
-    u8 gameInternalName[0x10]; // has "POKE_DUNGEON__05
+    u8 gameInternalName[16]; // has "POKE_DUNGEON__05
     u32 checksum;
     u32 unk18;
-    u32 dungeonLocation;
+    struct DungeonLocation dungeonLocation;
     u32 unk20;
     u32 padding[503];
 };
@@ -77,7 +78,6 @@ EWRAM_DATA_2 struct QuickSaveWrite *gQuickSaveWrite = {0};
 
 extern s32 gUnknown_202DE28;
 extern u32 *gUnknown_203B488;
-extern u32 gUnknown_203B494;
 
 ALIGNED(4) const char sGameInternalVersion[] = _("POKE_DUNGEON__05");
 
@@ -153,7 +153,6 @@ extern u32 sub_80954CC(void* a, s32 b);
 extern u32 sub_8095624(u8 *, u32);
 extern u32 RestoreMailInfo(void* a, s32 b);
 extern u32 SaveMailInfo(u8 *, u32);
-extern void sub_80976A8();
 extern u32 sub_8097D60(u8 *, u32);
 extern u32 sub_8097D98(void* a, s32 b);
 extern void sub_80993E4();
@@ -162,10 +161,7 @@ extern void sub_80958E4(u32 *a, u32 b);
 extern struct unkStruct_203B490 *GetMailInfo(void);
 extern void InitializeMailJobsNews(void);
 extern void sub_80972F4(void);
-extern u32 sub_8097680(void);
-extern u32 *GetDungeonLocationInfo(void);
 extern void sub_80974E8(void);
-extern void ResetNumAdventures(void);
 extern void sub_80993D8(void);
 
 u32 sub_8011C1C(void)
@@ -592,46 +588,43 @@ void InitializePlayerData(void)
 }
 
 
-// Unused
-void nullsub_200(u32 r0)
+UNUSED static void nullsub_200(u32 r0)
 {
 }
 
-// Unused
-void sub_8012334(struct UnkStruct_203B184 *r0)
+UNUSED static void sub_8012334(struct UnkStruct_203B184 *r0)
 {
     gUnknown_203B184 = r0;
-    if(r0 != NULL)
-    {
-       gTeamInventoryRef = r0->MoneyItems;
-       gRecruitedPokemonRef = r0->recruitedPokemon;
-       gUnknown_203B480 = r0->unk8;
-       gUnknown_203B484 = r0->unkC;
-       gUnknown_203B488 = r0->unk10;
-       gUnknown_203B48C = r0->unk14;
-       gUnknown_203B490 = r0->mailInfo;
-       gRescueTeamInfoRef = r0->RescueTeamInfo;
-       gUnknown_203B494 = r0->unk20;
-       gUnknown_203B498 = r0->ExclusivePokemon;
-       gFriendAreas     = r0->BoughtFriendAreas;
-       gGameOptionsRef = r0->gameOptions;
-       gPlayTimeRef     = r0->playTime;
-       return;
+    if (r0 != NULL) {
+        gTeamInventoryRef = r0->MoneyItems;
+        gRecruitedPokemonRef = r0->recruitedPokemon;
+        gUnknown_203B480 = r0->unk8;
+        gUnknown_203B484 = r0->unkC;
+        gUnknown_203B488 = r0->unk10;
+        gUnknown_203B48C = r0->unk14;
+        gUnknown_203B490 = r0->mailInfo;
+        gRescueTeamInfoRef = r0->RescueTeamInfo;
+        gUnknown_203B494 = r0->unk20;
+        gUnknown_203B498 = r0->ExclusivePokemon;
+        gFriendAreas = r0->BoughtFriendAreas;
+        gGameOptionsRef = r0->gameOptions;
+        gPlayTimeRef = r0->playTime;
     }
-       gTeamInventoryRef = GetMoneyItemsInfo();
-       gRecruitedPokemonRef = GetRecruitedPokemon();
-       gUnknown_203B480 = sub_80950F8();
-       gUnknown_203B484 = sub_8095100();
-       gUnknown_203B488 = sub_8095108();
-       gUnknown_203B48C = sub_8095110();
-       gUnknown_203B490 = GetMailInfo();
-       gRescueTeamInfoRef = GetRescueTeamInfo();
-       gUnknown_203B494 = sub_8097680();
-       gUnknown_203B498 = GetExclusivePokemon();
-       gFriendAreas     = GetBoughtFriendAreas();
-       gGameOptionsRef = GetGameOptions();
-       gPlayTimeRef     = GetPlayTime();
-
+    else {
+        gTeamInventoryRef = GetMoneyItemsInfo();
+        gRecruitedPokemonRef = GetRecruitedPokemon();
+        gUnknown_203B480 = sub_80950F8();
+        gUnknown_203B484 = sub_8095100();
+        gUnknown_203B488 = sub_8095108();
+        gUnknown_203B48C = sub_8095110();
+        gUnknown_203B490 = GetMailInfo();
+        gRescueTeamInfoRef = GetRescueTeamInfo();
+        gUnknown_203B494 = sub_8097680();
+        gUnknown_203B498 = GetExclusivePokemon();
+        gFriendAreas = GetBoughtFriendAreas();
+        gGameOptionsRef = GetGameOptions();
+        gPlayTimeRef = GetPlayTime();
+    }
 }
 
 void PrepareSavePakRead(void)

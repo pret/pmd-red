@@ -1,24 +1,22 @@
 #include "global.h"
+#include "code_80118A4.h"
+#include "code_8012A18_1.h"
+#include "code_80130A8.h"
+#include "code_801B3C0.h"
+#include "code_8097670.h"
 #include "constants/bg_music.h"
 #include "constants/colors.h"
 #include "constants/evolution_status.h"
 #include "input.h"
-#include "item.h"
+#include "kecleon_bros.h"
+#include "luminous_cave.h"
 #include "memory.h"
-#include "pokemon.h"
-#include "pokemon_3.h"
+#include "menu_input.h"
 #include "random.h"
+#include "team_inventory.h"
+#include "text_util.h"
 #include "text1.h"
 #include "text2.h"
-#include "text_util.h"
-#include "team_inventory.h"
-#include "menu_input.h"
-#include "kecleon_bros.h"
-#include "code_80130A8.h"
-#include "code_8012A18_1.h"
-#include "code_801B3C0.h"
-#include "code_80118A4.h"
-#include "luminous_cave.h"
 
 EWRAM_DATA_2 struct unkStruct_203B2B0 *gUnknown_203B2B0 = {0};
 extern struct UnkTextStruct2 gUnknown_80DCA00;
@@ -157,7 +155,6 @@ extern void LuminousCave_AdvancetoFallbackState(void);
 extern void sub_8024804(void);
 extern void UpdateLuminousCaveDialogue(void);
 
-void sub_80977D0(void);
 void sub_8024CFC(void);
 void sub_8025254(void);
 void sub_8024D48(void);

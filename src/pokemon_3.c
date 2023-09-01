@@ -11,6 +11,7 @@
 #include "text_util.h"
 #include "friend_area.h"
 #include "luminous_cave.h"
+#include "code_8097670.h"
 
 extern u8 *gIQSkillNames[];
 extern u8 *gIQSkillDescriptions[];
@@ -61,7 +62,6 @@ extern void sub_808F428(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
 s16 GetPokemonEvolveConditions(s16 index, struct unkEvolve *r1);
 
 u32 sub_808F798(struct PokemonStruct *, s16);
-void sub_8097848(void);
 
 bool8 sub_808E668(s16 species, s16* a2, s16* a3)
 {

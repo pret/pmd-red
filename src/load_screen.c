@@ -1,20 +1,21 @@
 #include "global.h"
-#include "constants/wonder_mail.h"
-#include "input.h"
-#include "main_menu.h"
-#include "play_time.h"
-#include "file_system.h"
-#include "memory.h"
-#include "menu.h"
-#include "text1.h"
-#include "text2.h"
-#include "text_util.h"
-#include "pokemon.h"
-#include "save.h"
 #include "code_800D090.h"
 #include "code_8094F88.h"
-#include "menu_input.h"
+#include "code_8097670.h"
+#include "constants/wonder_mail.h"
 #include "event_flag.h"
+#include "file_system.h"
+#include "input.h"
+#include "main_menu.h"
+#include "memory.h"
+#include "menu.h"
+#include "menu_input.h"
+#include "play_time.h"
+#include "pokemon.h"
+#include "save.h"
+#include "text_util.h"
+#include "text1.h"
+#include "text2.h"
 
 extern const struct FileArchive gTitleMenuFileArchive;
 
@@ -46,9 +47,7 @@ void sub_80397B4(void);
 extern void sub_80920D8(u8 *);
 extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern u8 *sub_8098FB4();
-extern u8 *GetDungeonLocationInfo(void);
-extern u32 GetNumAdventures(void);
-extern void PrintDungeonLocationtoBuffer(u8 *, u8 *);
+extern void PrintDungeonLocationtoBuffer(u8 *, struct DungeonLocation *);
 extern u32 sub_8001658(u32, u32);
 
 extern void xxx_format_string(u8 *, u8 *, u8 *, u32);

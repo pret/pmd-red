@@ -2,7 +2,7 @@
 #include "text1.h"
 #include "text2.h"
 #include "menu_input.h"
-#include "adventure_log.h"
+#include "adventure_log_menu.h"
 #include "debug_menu1.h"
 #include "ds_menus.h"
 #include "pokemon.h"

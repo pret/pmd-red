@@ -1,26 +1,8 @@
 #include "global.h"
 #include "code_8092334.h"
+#include "code_8097670.h"
 #include "pokemon.h"
 #include "exclusive_pokemon.h"
-
-struct unkStruct_203B494
-{
-    // size: 0xC8?
-    u32 unk0; // 32 bit bitfield, I think
-    s32 numAdventures;
-    s32 unk8;
-    s32 unkC;
-    struct DungeonLocation dungeonLocation;
-    s16 unk14;
-    s16 unk16;
-    s16 unk18;
-    u32 unk1C[0xE];
-    u32 unk54[0xE];
-    u32 unk8C[0xD];
-    s32 unkC0;
-};
-
-extern struct unkStruct_203B494 *gUnknown_203B494;
 
 extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
 extern void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);

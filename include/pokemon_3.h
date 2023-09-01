@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEMON_3_H
 #define GUARD_POKEMON_3_H
 
+#include "pokemon.h"
+
 struct EvolveStatus
 {
     u8 evoItem1;

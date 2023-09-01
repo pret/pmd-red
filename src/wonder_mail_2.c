@@ -1,18 +1,19 @@
 #include "global.h"
+#include "code_800D090.h"
+#include "code_80130A8.h"
+#include "code_8094F88.h"
+#include "code_8097670.h"
 #include "constants/item.h"
 #include "constants/wonder_mail.h"
+#include "event_flag.h"
+#include "game_options.h"
+#include "memory.h"
+#include "menu_input.h"
 #include "pokemon.h"
 #include "pokemon_mail.h"
-#include "memory.h"
-#include "text1.h"
 #include "save.h"
-#include "game_options.h"
+#include "text1.h"
 #include "wonder_mail.h"
-#include "code_800D090.h"
-#include "code_8094F88.h"
-#include "menu_input.h"
-#include "code_80130A8.h"
-#include "event_flag.h"
 
 struct unkStruct_203B2C8
 {
@@ -36,7 +37,6 @@ struct unkStruct_203B2C8
 extern struct unkStruct_203B2C8 *gUnknown_203B2C8;
 
 extern void sub_80920D8(u8 *buffer);
-extern void sub_8097790(void);
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 extern u32 sub_802F298(void);
