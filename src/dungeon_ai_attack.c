@@ -354,7 +354,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, struct Entity *pokemon
     targetingFlags = GetMoveTargetAndRangeForPokemon(pokemon, move, TRUE);
     hasStatusChecker = IQSkillIsEnabled(pokemon, IQ_STATUS_CHECKER);
     aiPossibleMove->canBeUsed = FALSE;
-    if ((pokemonInfo->volatileStatus == STATUS_TAUNTED && !MovesIgnoresTaunted(move)) ||
+    if ((pokemonInfo->volatileStatus == STATUS_TAUNTED && !MoveIgnoresTaunted(move)) ||
         (hasStatusChecker && !CanUseOnSelfWithStatusChecker(pokemon, move)))
     {
         return 1;

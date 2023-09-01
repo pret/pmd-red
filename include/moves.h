@@ -1,70 +1,92 @@
 #ifndef GUARD_MOVES_H
 #define GUARD_MOVES_H
 
+#include "code_809447C.h"
 #include "constants/move.h"
 #include "constants/move_id.h"
+#include "pokemon.h"
+#include "subStruct_203B240.h"
 
+// size: 0x8
+struct MoveLearnset
+{
+    const u8 *levelUpMoves;
+    const u8 *HMTMMoves;
+};
+
+// size: 0x8
+struct MoveDataFile
+{
+    struct MoveDataEntry *moveData;
+    struct MoveLearnset *moveLearnsets;
+};
+
+bool8 CanBeSnatched(u16);
+void CopyAndResetMoves(struct Move *, struct Move *);
+void CopyBareMoveData(struct Move *, struct Move *);
+bool8 DoesMoveCharge(u16);
+bool8 FailsWhileMuzzled(u16);
+const u8 *GetHMTMMoves(s16);
+const u8 *GetLevelUpMoves(s16);
+s32 GetLinkedSequence(s32, struct Move *, u16 *);
+s32 GetMoveAccuracyOrAIChance(struct Move *, u32);
+u8 GetMoveAIWeight(struct Move *);
+s32 GetMoveBasePower(struct Move *);
+u32 GetMoveBasePP(struct Move *);
+u32 GetMoveCritChance(struct Move *);
+u32 GetMoveMaxUpgradeLevel(struct Move *);
+u32 GetMoveNumberOfChainedHits(struct Move *);
+s16 GetMoveTargetAndRange(struct Move *, bool32);
+u8 *GetMoveUseText(u16);
+u8 GetMoveType(struct Move *);
+void InitPokemonMove(struct Move *, u16);
+void InitZeroedPPPokemonMove(struct Move *, u16);
+bool8 IsAnyMoveLinked(s32, struct Move *);
+bool8 IsMoveEnabled(s32, struct Move *);
+bool8 IsMoveSet(s32, struct Move *);
+bool8 IsNextMoveLinked(s32, struct Move *);
+bool8 IsReflectedByMagicCoat(u16);
+bool8 IsSoundMove(struct Move *);
 void LoadWazaParameters(void);
-u8 sub_809287C(struct Move *move);
-void InitPokemonMove(struct Move *move, u16 moveID);
-void sub_8092AA8(struct Move *move, u16 moveID);
-void InitZeroedPPPokemonMove(struct Move *move, u16 moveID);
-s16 GetMoveTargetAndRange(struct Move *move, u32 isAI);
-u8 GetMoveType(struct Move *move);
-u8* GetLevelUpMoves(s16 species);
-u8* GetHMTMMoves(s16 species);
-u8 GetMoveAIWeight(struct Move *move);
-u32 GetMoveNumberOfChainedHits(struct Move *move);
-s32 GetMoveBasePower(struct Move *move);
-s32 GetMoveAccuracyOrAIChance(struct Move *move, u32 accuracyType);
-u32 GetMoveBasePP(struct Move *move);
-u32 GetMoveMaxUpgradeLevel(struct Move *move);
-u32 GetMoveCritChance(struct Move *move);
-bool8 MoveCannotHitFrozen(struct Move *move);
-bool8 MovesIgnoresTaunted(struct Move *move);
-u32 GetMoveRangeID(struct Move *move);
-void sub_8092C84(u8 *buffer, u16 moveID);
-u8 *GetMoveUseText(u16 moveID);
-bool8 IsReflectedByMagicCoat(u16 moveID);
-bool8 CanBeSnatched(u16 moveID);
-bool8 FailsWhileMuzzled(u16 moveID);
-bool8 IsSoundMove(struct Move *move);
-bool8 DoesMoveCharge(u16 move);
+bool8 MoveCannotHitFrozen(struct Move *);
+bool8 MoveIgnoresTaunted(struct Move *);
+void RemoveLinkSequenceFromMoves8(struct Move *, s32);
+void RestorePokemonMoves(struct unkStruct_8094924 *, struct Move *);
+void SavePokemonMoves(struct unkStruct_8094924 *, struct Move *);
+bool8 ToggleMoveEnabled(s32, struct Move *);
+bool8 ToggleSetMove(s32, struct Move *);
+bool8 TryLinkMovesAfter(s32, struct Move *);
+void unk_CopyMoves4To8(struct Move *, struct Move *);
+void unk_CopyMoves4To8AndClearFlag2Unk4(struct Move *, struct Move *);
+s32 unk_FindMoveEnabledForAIAfter4(struct Move *, s32);
+s32 unk_FindMoveEnabledForAIAfter8(struct Move *, s32);
+s32 unk_FindMoveEnabledForAIAfter8_v2(struct Move *, s32);
+s32 unk_FindMoveEnabledForAIBefore8(struct Move *, s32);
+s32 unk_FindMoveEnabledForAIBefore8_v2(struct Move *, s32);
+void unk_FixLinkedMovesSetEnabled4(struct Move *);
+void unk_FixLinkedMovesSetEnabled8(struct Move *);
+void unk_FixLinkedMovesSetEnabled8_v2(struct Move *);
+s32 unk_MoveIDPrintMoveDescription(s32, u16, s32, struct subStruct_203B240 **);
+s32 unk_PrintMoveDescription(s32, struct Move *, s32, struct subStruct_203B240 **);
+s32 unk_SetMoveToFirstInLinkedSequence4(struct Move *, s32);
+s32 unk_SetMoveToFirstInLinkedSequence8_v2(struct Move *, s32);
+s32 unk_SetMoveToLastInLinkedSequence4(struct Move *, s32);
+s32 unk_SetMoveToLastInLinkedSequence8_v2(struct Move *, s32);
+bool8 UnlinkMovesAfter(s32, struct Move *);
+void UnSetMove(s32, struct Move *);
 
-bool8 IsAnyMoveLinked(int unused, struct Move* moves);
-bool8 IsNextMoveLinked(int index, struct Move* moves);
-void RemoveLinkSequenceFromMoves8(struct Move* moves, int index);
-int GetLinkedSequence(int index, struct Move* moves, u16* sequenceMoveIDs);
-void unk_CopyMoves4To8(struct Move* destMoves, struct Move* srcMoves);
-void sub_8094060(struct Move* srcMoves, struct Move* destMoves);
-
-void unk_FixLinkedMovesSetEnabled8_v2(struct Move* move);
-
-void sub_8092D54(u8 *buffer, struct Move *move);
-extern void CopyAndResetMove(struct Move *, struct Move *);
-
-void unk_GetLinkedSequences4(struct Move* moves, struct Move linkedSequences[4][4]);
-void unk_LinkedSequencesToMoves4(struct Move* moves, struct Move linkedSequences[4][4]);
-void unk_GetLinkedSequences8(struct Move* moves, struct Move linkedSequences[8][8]);
-void unk_LinkedSequencesToMoves8(struct Move* moves, struct Move linkedSequences[8][8]);
-void unk_GetLinkedSequences8_v2(struct Move* moves, struct Move linkedSequences[8][8]);
-void unk_LinkedSequencesToMoves8_v2(struct Move* moves, struct Move linkedSequences[8][8]);
-
-int unk_FindMarkedMoveInLinkedSequences44(struct Move linkedSequences[4][4]);
-void unk_LinkedSequencesToMoves4(struct Move* moves, struct Move linkedSequences[4][4]);
-int unk_FindMarkedMoveInLinkedSequences88(struct Move linkedSequences[8][8]);
-void unk_LinkedSequencesToMoves8(struct Move* moves, struct Move linkedSequences[8][8]);
-int unk_FindMarkedMoveInLinkedSequences88_v2(struct Move linkedSequences[8][8]);
-void unk_LinkedSequencesToMoves8_v2(struct Move* moves, struct Move linkedSequences[8][8]);
-
-bool8 IsMoveSet(int index, struct Move* struct_ptr);
-bool8 IsMoveEnabled(int index, struct Move* struct_ptr);
-bool8 TryLinkMovesAfter(int index, struct Move* moves);
-bool8 UnlinkMovesAfter(int index, struct Move* moves);
-bool8 ToggleSetMove(int index, struct Move* moves);
-void UnSetMove(int index, struct Move* moves);
-bool8 ToggleMoveEnabled(int index, struct Move* moves);
-bool8 sub_8093318(int param_1, void* src_struct);
-bool8 sub_809333C(int param_1, void* src_struct);
+u8 sub_809287C(struct Move *);
+void sub_80928A0(u8 *, struct Move *, const struct unkStruct_80928C0 *);
+void sub_80928C0(u8 *, struct Move *, const struct unkStruct_80928C0 *);
+void sub_8092AA8(struct Move *, u16);
+void sub_8092C84(u8 *, u16);
+s32 sub_8092DB8(struct Move *, s32);
+s32 sub_8092F4C(struct Move *, s32);
+bool8 sub_8093318(s32, struct Move *);
+bool8 sub_809333C(s32, struct Move *);
+s32 sub_80935B8(struct Move *, s32);
+void sub_8094060(struct Move *, struct Move *);
+void sub_8094184(struct unkStruct_8094924 *, struct unkStruct_8094184 *);
+void sub_80941FC(struct unkStruct_8094924 *, struct unkStruct_8094184 *);
 
 #endif // GUARD_MOVES_H

@@ -1,25 +1,24 @@
 #include "global.h"
-#include "constants/dungeon.h"
-#include "item.h"
-#include "memory.h"
-#include "pokemon.h"
-#include "text1.h"
-#include "text2.h"
-#include "text_util.h"
-#include "team_inventory.h"
-#include "constants/move.h"
 #include "code_800D090.h"
-#include "menu_input.h"
-#include "moves.h"
-#include "kecleon_bros.h"
+#include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
-#include "code_80118A4.h"
+#include "constants/dungeon.h"
 #include "event_flag.h"
+#include "item.h"
+#include "kecleon_bros.h"
+#include "memory.h"
+#include "menu_input.h"
+#include "moves.h"
+#include "pokemon.h"
+#include "team_inventory.h"
+#include "text_util.h"
+#include "text1.h"
+#include "text2.h"
 
+// size: 0x280
 struct unkStruct_203B2B8
 {
-    // size: 0x280
     s32 state;
     s32 fallbackState;
     bool8 unk8;

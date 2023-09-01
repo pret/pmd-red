@@ -1,15 +1,15 @@
 #include "global.h"
-#include "memory.h"
-#include "text.h"
-#include "item.h"
-#include "team_inventory.h"
-#include "menu.h"
-#include "pokemon.h"
-#include "gulpin_shop.h"
-#include "code_80130A8.h"
 #include "code_80118A4.h"
+#include "code_80130A8.h"
+#include "gulpin_shop.h"
+#include "item.h"
+#include "memory.h"
+#include "menu.h"
+#include "moves.h"
+#include "pokemon.h"
+#include "team_inventory.h"
+#include "text.h"
 
-extern void sub_8092C84(u8 *, u16);
 extern void sub_8099690(u32);
 extern s32 GetNumMonsAbleToLearnItemMove(void);
 extern void sub_801B064(s32);
@@ -29,11 +29,8 @@ extern u8 gUnknown_202E1C8[0x50];
 extern u8 gAvailablePokemonNames[0x50];
 extern u8 gUnknown_202E218[0x50];
 
-extern void InitZeroedPPPokemonMove(struct Move*, u16);
-extern void unk_CopyMoves4To8(struct Move *, struct Move *);
 extern bool8 IsHMItem(u8);
 extern void sub_801B178(void);
-extern void sub_8094060(void *, struct Move *);
 extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
 extern u32 sub_801E8C0(void);
 

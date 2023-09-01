@@ -25,6 +25,7 @@ extern u8 *gUnknown_80F8994[];
 extern u8 *gUnknown_80F8968[];
 extern u8 *gUnknown_80F8988[];
 extern u8 gUnknown_8106FA4[];
+void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index);
 
 s32 sub_8070828(struct Entity *pokemon, bool8 displayMessage)
 {

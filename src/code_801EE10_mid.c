@@ -63,7 +63,6 @@ extern void sub_801FA58(void);
 extern void sub_801FAD4(void);
 extern void sub_801F930(void);
 extern void sub_801F9A4(void);
-int unk_MoveIDPrintMoveDescription(int a1, u16 moveID, int a3, struct subStruct_203B240** a4);
 void sub_8013F84(void);
 
 

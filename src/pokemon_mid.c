@@ -1,14 +1,14 @@
 #include "global.h"
-#include "pokemon.h"
-#include "pokemon_3.h"
-#include "pokemon_mid.h"
+#include "code_800D090.h"
+#include "constants/colors.h"
+#include "constants/move_id.h"
 #include "file_system.h"
 #include "item.h"
 #include "moves.h"
+#include "pokemon.h"
+#include "pokemon_3.h"
+#include "pokemon_mid.h"
 #include "subStruct_203B240.h"
-#include "constants/colors.h"
-#include "constants/move_id.h"
-#include "code_800D090.h"
 #include "text_util.h"
 
 extern struct MonsterDataEntry *gMonsterParameters;
@@ -33,11 +33,12 @@ extern struct LevelData gLevelCurrentData[];
 
 extern int sprintf(char *, const char *, ...);
 extern u32 ReturnIntFromChar(u8 r0);
-extern void CopyAndResetMoves(void*, void*);
 extern void sub_80943A0(void*, s32);
 extern void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct*, struct PokemonStruct2*);
-extern u8* DecompressMoveID(u8* a1, u16* a2);
+extern const u8 *DecompressMoveID(const u8 *a1, u16 *a2);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
+
+extern u8 GetBodySize(s16 index);
 
 struct unkStruct_8107654 {
   s16 unk0;
@@ -543,7 +544,7 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct Po
     }
 
     a1->currExp = pokemon->currExp;
-    CopyAndResetMoves(&a1->moves, &pokemon->moves);
+    CopyAndResetMoves(a1->moves.moves, pokemon->moves);
 
     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
         a1->name[i] = pokemon->name[i];
@@ -571,8 +572,6 @@ void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, struct PokemonStruct2* 
     xxx_pokemon2_to_pokemonstruct_808DF44(&a1[gRecruitedPokemonRef->pokemon], a2);
 }
 
-extern void CopyBareMoveData(struct Move*, struct unkStruct_8094184*);
-
 
 void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct PokemonStruct2* a2)
 {
@@ -594,7 +593,7 @@ void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct
     }
 
     pokemon->currExp = a2->currExp;
-    CopyBareMoveData(pokemon->moves, &a2->moves);
+    CopyBareMoveData(pokemon->moves, a2->moves.moves);
 
     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
         pokemon->name[i] = a2->name[i];
@@ -643,7 +642,7 @@ void GetPokemonLevelData(struct LevelData* a1, s16 _id, s32 level)
    *a1 = gLevelCurrentData[level];
 }
 
-u8* DecompressMoveID(u8* a1, u16* moveID)
+const u8* DecompressMoveID(const u8* a1, u16* moveID)
 {
     u32 r1 = *a1++;
     u32 r3;
@@ -672,7 +671,7 @@ u8* DecompressMoveID(u8* a1, u16* moveID)
 
 s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 IQPoints)
 {
-  u8* stream;
+  const u8* stream;
   u16 moveID;  // moveID
   s32 count;
   register s32 _species asm("r2");  // weird regalloc
@@ -721,7 +720,7 @@ bool8 CanMonLearnMove(u16 moveID, s16 _species)
   u16 levelUpMoveID;
   u16 HMTMMoveID;
   s32 species = _species;  // r4
-  u8* learnsetPtr;
+  const u8* learnsetPtr;
 
   if (species == MONSTER_DECOY) return 0;
   if (species == MONSTER_NONE) return 0;
@@ -763,7 +762,7 @@ s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon)
 
   sequence_length = GetEvolutionSequence(pokemon, evolve_sequence);
   for (i = 0; i < sequence_length; i++) {
-    u8* ptr;
+    const u8 *ptr;
     u16 result;
 
     ptr = GetLevelUpMoves(evolve_sequence[i].speciesNum);

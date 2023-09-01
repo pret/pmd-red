@@ -128,15 +128,6 @@ extern u8 *gUnknown_80FE330[];
 extern u8 *gUnknown_80FE36C[];
 extern u8 *gPtrForecastPreventsTypeSwitchMessage[];
 
-struct unkStruct_80928C0
-{
-    u32 unk0;
-    s32 unk4;
-    u8 unk8;
-    u8 unk9;
-};
-
-void sub_80928C0(u8 *buffer, struct Move *move, struct unkStruct_80928C0 *param_3);
 extern u8 sub_806F4A4(struct Entity *, u32);
 extern void sub_807DF38(struct Entity *pokemon, struct Entity *target, struct Position *pos, u32, u8 moveType, s16);
 

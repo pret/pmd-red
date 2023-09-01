@@ -225,7 +225,7 @@ bool8 CanMonsterUseMove(struct Entity *pokemon, struct Move *move, bool8 hasPPCh
         {
             return FALSE;
         }
-        if (pokemonInfo->volatileStatus == STATUS_TAUNTED && !MovesIgnoresTaunted(move))
+        if (pokemonInfo->volatileStatus == STATUS_TAUNTED && !MoveIgnoresTaunted(move))
         {
             return FALSE;
         }
@@ -257,7 +257,7 @@ bool8 sub_805744C(struct Entity * pokemon, struct Move *move, bool8 param_3)
         return FALSE;
     }
     if (param_3 != 0) {
-      if ((entityInfo->volatileStatus == STATUS_TAUNTED) && (!MovesIgnoresTaunted(move))) return FALSE;
+      if ((entityInfo->volatileStatus == STATUS_TAUNTED) && (!MoveIgnoresTaunted(move))) return FALSE;
       if (entityInfo->volatileStatus == STATUS_ENCORE) {
         if (move->id == MOVE_STRUGGLE) {
           if((entityInfo->struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0) return FALSE;

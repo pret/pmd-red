@@ -211,6 +211,7 @@ extern void sub_8041DD8(struct Entity *r0, s32 r1); // NOTE: is s16 in another f
 extern s32 sub_803D870(void *, u32);
 extern bool8 sub_806AA0C(s32, u32);
 u32 ExtractSpeciesIndex(struct PokemonStruct **r0); // TODO: look more into this and fix it.
+void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index);
 
 void MuzzleTarget(struct Entity *pokemon, struct Entity *target)
 {

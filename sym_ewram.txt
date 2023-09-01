@@ -799,15 +799,7 @@ gLevelCurrentData: /* 20384F0 */
     .include "src/friend_area.o"
     .space 0x2
 
-gWazaParametersFile: /* 2038C64 */
-	.space 0x4
-
-gMovesData: /* 2038C68 */
-	.space 0x4
-
-gMoveLearnsets: /* 2038C6C */
-	.space 0x4
-
+    .include "src/moves.o"
     .include "src/game_options.o"
     .include "src/play_time.o"
 

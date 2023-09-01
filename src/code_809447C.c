@@ -38,7 +38,6 @@ extern u8 *gUnknown_8113870[];
 
 extern struct unkStruct_8113080 gUnknown_8113080[];
 
-void sub_80928C0(u8 *buffer, struct Move *move, struct unkStruct_80928C0 *param_3);
 extern void xxx_format_string(const char *, u8 *, void *, u32);
 void PrintYellowDungeonNametoBuffer(u8 *buffer, struct DungeonLocation *dungeonLocation);
 extern s32 sub_8008ED0(u8 *);

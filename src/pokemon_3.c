@@ -1,5 +1,4 @@
 #include "global.h"
-
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "random.h"
@@ -12,6 +11,7 @@
 #include "friend_area.h"
 #include "luminous_cave.h"
 #include "code_8097670.h"
+#include "moves.h"
 
 extern u8 *gIQSkillNames[];
 extern u8 *gIQSkillDescriptions[];
@@ -48,15 +48,11 @@ extern s32 gUnknown_810AC90[10];
 
 extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
 extern void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
-extern void SavePokemonMoves(struct unkStruct_8094924*, struct Move*);
 void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
 void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
-void RestorePokemonMoves(struct unkStruct_8094924*, struct Move*);
 
-extern void sub_8094184(struct unkStruct_8094924*, void*);
 extern void sub_809449C(struct unkStruct_8094924*, void*);
 extern void sub_808F448(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
-extern void sub_80941FC(struct unkStruct_8094924*, void*);
 extern void sub_809447C(struct unkStruct_8094924*, void*);
 extern void sub_808F428(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
 s16 GetPokemonEvolveConditions(s16 index, struct unkEvolve *r1);

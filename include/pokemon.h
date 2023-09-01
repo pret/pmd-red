@@ -193,10 +193,14 @@ void LoadMonsterParameters(void);
 struct unkStruct_203B45C *GetRecruitedPokemon(void);
 void InitializeRecruitedPokemon(void);
 
+// These two need to be overridden in status_actions.c
+// Uncomment when fixed
+//void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index);
+//u8 GetBodySize(s16 index);
+
 
 void CopyMonsterNametoBuffer(u8 * buffer, s16 index);
 void CopyYellowMonsterNametoBuffer(u8 *buffer, s16 index);
-void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index);
 void PrintColoredPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon, s32 colorNum);
 void sub_808D930(u8 *buffer, s32 index);
 void sub_808D9DC(u8 *buffer, struct PokemonStruct2 *param_2, s32 colorNum);
@@ -207,7 +211,6 @@ bool8 IsPokemonRenamed(struct PokemonStruct* pokemon);
 bool8 CanMonLearnMove(u16 moveID, s16 _species);
 
 u8 *GetCategoryString(s16 index);
-u8 GetBodySize(s16 index);
 u8 GetShadowSize(s16 index);
 char * GetMonSpecies(s16 index);
 s32 GetMovementSpeed(s16 index);
