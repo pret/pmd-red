@@ -59,7 +59,7 @@ void sub_803A86C(void);
 u32 sub_803A45C(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(0, 1, 1);
+    sub_800641C(NULL, TRUE, TRUE);
     sUnknown_203B3F0 = MemoryAlloc(sizeof(struct unkStruct_203B3F0), 8);
     sub_803A504(0);
     return 1;
@@ -124,7 +124,7 @@ void sub_803A51C(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B3F0->unkD8, 1, 1);
+    sub_800641C(sUnknown_203B3F0->unkD8, TRUE, TRUE);
 }
 
 void sub_803A5A0(void)

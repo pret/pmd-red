@@ -141,7 +141,7 @@ void sub_801E980(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(gGulpinShopWork->unk12C, 1, 1);
+    sub_800641C(gGulpinShopWork->unk12C, TRUE, TRUE);
 }
 
 void sub_801EA28(void)

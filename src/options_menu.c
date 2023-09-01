@@ -194,7 +194,7 @@ void sub_801DD84(void)
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B25C->unkBC, 1, 1);
+    sub_800641C(gUnknown_203B25C->unkBC, TRUE, TRUE);
 }
 
 void sub_801DED0(void)
@@ -378,7 +378,7 @@ bool8 sub_801E198(struct GameOptions *optionsMenu)
   gUnknown_203B260->unk4C[gUnknown_203B260->unk44] = gUnknown_80DC03C;
   sub_8012D08(gUnknown_203B260->unk48,1);
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B260->unk4C,1,1);
+  sub_800641C(gUnknown_203B260->unk4C, TRUE, TRUE);
   sub_8013818(&gUnknown_203B260->input,1,1,gUnknown_203B260->unk44);
   nullsub_38();
   CreateOptionsMenu();
@@ -443,7 +443,7 @@ void sub_801E2C4(void)
     {
         gUnknown_203B260->unk4C[gUnknown_203B260->unk44] = gUnknown_80DC020;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B260->unk4C, 1, 1);
+        sub_800641C(gUnknown_203B260->unk4C, TRUE, TRUE);
         MemoryFree(gUnknown_203B260);
         gUnknown_203B260 = NULL;
     }

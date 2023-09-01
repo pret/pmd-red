@@ -35,7 +35,7 @@ extern const char gKanjiB_file_string[];
 // system_sbin.s
 extern const struct FileArchive gSystemFileArchive;
 
-static void sub_8006438(const struct UnkTextStruct2 *, u8, u8, struct UnkTextStruct2_sub *);
+static void sub_8006438(const struct UnkTextStruct2 *, bool8, bool8, struct UnkTextStruct2_sub *);
 
 void LoadCharmaps(void)
 {
@@ -142,13 +142,14 @@ void sub_80063D8(int a0)
     gUnknown_202B030 = retval;
 }
 
-void sub_800641C(struct UnkTextStruct2 *a0, u8 a1, u8 a2)
+// TODO: Move sub_800641C and sub_8006438 to text2.c ?
+void sub_800641C(struct UnkTextStruct2 *a0, bool8 a1, bool8 a2)
 {
     struct UnkTextStruct2_sub r3 = {0, 0};
     sub_8006438(a0, a1, a2, &r3);
 }
 
-static void sub_8006438(const struct UnkTextStruct2 *a0, u8 a1, u8 a2, struct UnkTextStruct2_sub *a3)
+static void sub_8006438(const struct UnkTextStruct2 *a0, bool8 a1, bool8 a2, struct UnkTextStruct2_sub *a3)
 {
     s32 i;
     u32 r9;

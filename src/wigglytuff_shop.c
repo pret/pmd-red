@@ -144,7 +144,7 @@ bool8 sub_80211AC(u32 mode, u32 param_2)
         gUnknown_203B280->unk7C[gUnknown_203B280->unk74] = gUnknown_80DC47C;
         gUnknown_203B280->unk78->unk14 = gUnknown_203B280->unkDC;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B280->unk7C, 1, 1);
+        sub_800641C(gUnknown_203B280->unk7C, TRUE, TRUE);
         sub_8013818(&gUnknown_203B280->unk40, sub_8021664(), 10, param_2);
         if(gUnknown_203B284 == gUnknown_203B280->mode)
         {
@@ -202,7 +202,7 @@ u8 sub_802132C(void)
 void sub_8021354(bool8 param_1)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B280->unk7C,0,0);
+    sub_800641C(gUnknown_203B280->unk7C, FALSE, FALSE);
     gUnknown_203B280->unk40.unk22 = sub_8021664();
     sub_8013984(&gUnknown_203B280->unk40);
     sub_8021410();
@@ -221,7 +221,7 @@ void sub_80213A0(void)
         gUnknown_203B28A = gUnknown_203B280->unk40.unk1E;
         gUnknown_203B280->unk7C[gUnknown_203B280->unk74] = gUnknown_80DC464;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B280->unk7C, 1, 1);
+        sub_800641C(gUnknown_203B280->unk7C, TRUE, TRUE);
         MemoryFree(gUnknown_203B280);
         gUnknown_203B280 = NULL;
     }
@@ -466,7 +466,7 @@ void sub_8021830(void)
     {
         gUnknown_203B28C->unk7C[gUnknown_203B28C->unk74] = gUnknown_80DC4BC;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B28C->unk7C, 1, 1);
+        sub_800641C(gUnknown_203B28C->unk7C, TRUE, TRUE);
         MemoryFree(gUnknown_203B28C);
         gUnknown_203B28C = NULL;
     }
@@ -475,7 +475,7 @@ void sub_8021830(void)
 void sub_8021878(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B28C->unk7C, 1, 1);
+    sub_800641C(gUnknown_203B28C->unk7C, TRUE, TRUE);
 }
 
 void sub_8021894(void)
@@ -588,7 +588,7 @@ bool8 CreateWigglytuffShop(bool32 isAsleep)
     struct OpenedFile *file;
 
     ResetUnusedInputStruct();
-    sub_800641C(0, 1, 1);
+    sub_800641C(NULL, TRUE, TRUE);
     gWigglytuffShop = MemoryAlloc(sizeof(struct WigglytuffShop), 8);
     gWigglytuffShop->menuAction1 = 0;
     gWigglytuffShop->menuAction2 = 0;
@@ -697,7 +697,7 @@ void sub_8021D5C(void)
     
     }
     ResetUnusedInputStruct();
-    sub_800641C(gWigglytuffShop->unkD0, 1, 1);
+    sub_800641C(gWigglytuffShop->unkD0, TRUE, TRUE);
 }
 
 void UpdateWigglytuffDialogue(void)

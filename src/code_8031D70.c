@@ -94,7 +94,7 @@ void sub_8031E10(void)
     {
         gUnknown_203B334->unk18[gUnknown_203B334->unk10]  = gUnknown_80E1FA8;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B334->unk18, 1, 1);
+        sub_800641C(gUnknown_203B334->unk18, TRUE, TRUE);
         MemoryFree(gUnknown_203B334);
         gUnknown_203B334 = NULL;
     }
@@ -103,7 +103,7 @@ void sub_8031E10(void)
 void sub_8031E58(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B334->unk18, 1, 1);
+    sub_800641C(gUnknown_203B334->unk18, TRUE, TRUE);
 }
 
 void DrawSOSPasswordScreen(void)

@@ -210,7 +210,7 @@ u32 CreateHelperPelipperMenu(s16 speciesID)
 
   species_32 = speciesID;
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
+  sub_800641C(NULL, TRUE, TRUE);
   gPostOfficeHelper = MemoryAlloc(sizeof(struct PostOfficeHelper), 8);
   CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, speciesID);
   monName = GetMonSpecies(speciesID);
@@ -559,7 +559,7 @@ void sub_8031A3C(void)
     {
         gUnknown_203B330->unk18[gUnknown_203B330->unk10] = gUnknown_80E1EFC;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B330->unk18, 1, 1);
+        sub_800641C(gUnknown_203B330->unk18, TRUE, TRUE);
         MemoryFree(gUnknown_203B330);
         gUnknown_203B330 = NULL;
     }
@@ -579,7 +579,7 @@ void sub_8031A84(void)
     sub_8012D08(gUnknown_203B330->unk14,jobs);
   }
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B330->unk18,1,1);
+  sub_800641C(gUnknown_203B330->unk18, TRUE, TRUE);
 }
 
 void DisplayMissionObjectives(void)

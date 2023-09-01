@@ -538,7 +538,7 @@ u32 sub_801D9E4(void)
   gUnknown_203B258->unk3C[gUnknown_203B258->unk34] = gUnknown_80DBF88;
   gUnknown_203B258->unk38->unk14 = gUnknown_203B258->unk9C;
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B258->unk3C,1,1);
+  sub_800641C(gUnknown_203B258->unk3C, TRUE, TRUE);
   sub_8013818(&gUnknown_203B258->input,0xe5,10,gUnknown_203B258->unk34);
   sub_801DB54();
   sub_801DBD4();
@@ -597,7 +597,7 @@ void sub_801DB0C(void)
     {
         gUnknown_203B258->unk3C[gUnknown_203B258->unk34] = gUnknown_80DBF70;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B258->unk3C, 1, 1);
+        sub_800641C(gUnknown_203B258->unk3C, TRUE, TRUE);
         MemoryFree(gUnknown_203B258);
         gUnknown_203B258 = NULL;
     }

@@ -146,7 +146,7 @@ bool8 sub_801FB50(bool32 isAsleep)
   struct OpenedFile *faceFile;
   
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
+  sub_800641C(NULL, TRUE, TRUE);
   gUnknown_203B27C = MemoryAlloc(sizeof(struct unkStruct_203B27C), 0x8);
   gUnknown_203B27C->menuAction2 = 0;
   gUnknown_203B27C->menuAction3 = 0;
@@ -273,21 +273,21 @@ void sub_801FDC0(void)
             gUnknown_203B27C->unk180[2].unk0 = 0x80;
             gUnknown_203B27C->unk180[3] = gUnknown_80DC37C;
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B27C->unk180, 1, 0);
+            sub_800641C(gUnknown_203B27C->unk180, TRUE, FALSE);
             break;
         case 0x11:
             sub_80205D0();
             gUnknown_203B27C->unk180[2] = gUnknown_80DC334;
             sub_8012CAC(&gUnknown_203B27C->unk180[2], gUnknown_203B27C->unk7C);
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B27C->unk180, 1, 1);
+            sub_800641C(gUnknown_203B27C->unk180, TRUE, TRUE);
             break;
         case 0x17:
             sub_802069C();
             gUnknown_203B27C->unk180[2] = gUnknown_80DC334;
             sub_8012CAC(&gUnknown_203B27C->unk180[2], gUnknown_203B27C->unk7C);
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B27C->unk180, 1, 1);
+            sub_800641C(gUnknown_203B27C->unk180, TRUE, TRUE);
             break;
         case 0x20:
             CreateGulpinLinkMenu();
@@ -295,15 +295,15 @@ void sub_801FDC0(void)
             gUnknown_203B27C->unk180[2] = gUnknown_80DC34C;
             sub_8012CAC(&gUnknown_203B27C->unk180[2], gUnknown_203B27C->unk7C);
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B27C->unk180, 1, 1);
+            sub_800641C(gUnknown_203B27C->unk180, TRUE, TRUE);
             break;
         default:
             for(index = 0; index < 4; index++)
             {
-                gUnknown_203B27C->unk180[index]  = gUnknown_80DC31C;
+                gUnknown_203B27C->unk180[index] = gUnknown_80DC31C;
             }
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B27C->unk180, 1, 1);
+            sub_800641C(gUnknown_203B27C->unk180, TRUE, TRUE);
             break;
     }
 }

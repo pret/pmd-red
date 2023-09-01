@@ -269,7 +269,7 @@ void sub_802453C(void)
     {
         gUnknown_203B2AC->unkE8[gUnknown_203B2AC->unkE0] = gUnknown_80DC9B0;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B2AC->unkE8, 1, 1);
+        sub_800641C(gUnknown_203B2AC->unkE8, TRUE, TRUE);
         MemoryFree(gUnknown_203B2AC);
         gUnknown_203B2AC = NULL;
     }
@@ -281,7 +281,7 @@ void sub_8024588(void)
    gUnknown_203B2AC->unk148[1] = gUnknown_203B2AC->input.unk1E;
    gUnknown_203B2AC->unk148[3] = 0;
    ResetUnusedInputStruct();
-   sub_800641C(gUnknown_203B2AC->unkE8,1,1);
+   sub_800641C(gUnknown_203B2AC->unkE8, TRUE, TRUE);
 }
 
 void sub_80245D0(void)

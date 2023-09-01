@@ -86,7 +86,7 @@ u32 CreateKangaskhanStorage(bool32 isAsleep)
     struct OpenedFile *faceFile;
     
     ResetUnusedInputStruct();
-    sub_800641C(0, 1, 1);
+    sub_800641C(NULL, TRUE, TRUE);
     gKangaskhanStorageWork = MemoryAlloc(sizeof(struct KangaskhanStorageWork), 8);
     gKangaskhanStorageWork->menuAction1 = 0;
     gKangaskhanStorageWork->menuAction2 = 0;
@@ -216,7 +216,7 @@ void sub_8016E80(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(gKangaskhanStorageWork->unkEC, 1, 1);
+    sub_800641C(gKangaskhanStorageWork->unkEC, TRUE, TRUE);
 }
 
 void sub_8016FF8(void)
@@ -856,7 +856,7 @@ void AdvanceToKangaskhanStorageFallbackState(void)
 u32 sub_8017E1C(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(NULL, 1, 1);
+    sub_800641C(NULL, TRUE, TRUE);
     gUnknown_203B20C = MemoryAlloc(sizeof(struct unkStruct_203B20C), 8);
     gUnknown_203B20C->menuAction1 = 0;
     gUnknown_203B20C->menuAction2 = 0;
@@ -961,7 +961,7 @@ void sub_8017F28(void)
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B20C->unkF0, 1, 1);
+    sub_800641C(gUnknown_203B20C->unkF0, TRUE, TRUE);
 }
 
 void sub_8018100(void)

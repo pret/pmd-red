@@ -22,6 +22,7 @@
 #include "sprite.h"
 #include "code_80118A4.h"
 #include "bg_palette_buffer.h"
+#include "code_800558C.h"
 
 extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);
@@ -44,7 +45,6 @@ extern void nullsub_33(void);
 extern u32 sub_80009D0(u32);
 
 extern void xxx_draw_string_80144C4(void);
-extern void sub_8005838(u32, u32);
 extern void nullsub_8(u32);
 extern void sub_80060EC(void);
 extern void sub_800CB20(void);
@@ -110,7 +110,7 @@ void GameLoop(void)
         xxx_update_some_bg_tiles(0);
         sub_80097B0();
         sub_800CDA8(2);
-        sub_800641C(0, 1, 1);
+        sub_800641C(NULL, TRUE, TRUE);
         gUnknown_2026E4E = 0x1000;
         LoadTitleScreen();
         SetBG2RegOffsets(0, 0);
@@ -192,7 +192,7 @@ void GameLoop(void)
 void xxx_update_stuff(u32 r0)
 {
     xxx_draw_string_80144C4();
-    sub_8005838(0, 0);
+    sub_8005838(NULL, 0);
     nullsub_8(gGameOptionsRef->unkA);
     sub_8005180();
     sub_80060EC();

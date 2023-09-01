@@ -104,7 +104,7 @@ bool8 sub_801F428(s16 index, s32 param_2) {
     gUnknown_203B274->unk3E4[2] = 0xC;
     gUnknown_203B274->unk3E4[3] = 0;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B274->unk384, 1, 1);
+    sub_800641C(gUnknown_203B274->unk384, TRUE, TRUE);
     sub_8013818(&gUnknown_203B274->input, sub_801F7E4(), 4, param_2);
     sub_801F690();
     sub_801F700();
@@ -151,7 +151,7 @@ u16 sub_801F5B4(void)
 void sub_801F5F0(u8 r0)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B274->unk384, 0, 0);
+    sub_800641C(gUnknown_203B274->unk384, FALSE, FALSE);
     sub_8013984(&gUnknown_203B274->input);
     sub_801F690();
     sub_801F700();
@@ -165,7 +165,7 @@ void sub_801F63C(void)
     {
         gUnknown_203B274->unk384[gUnknown_203B274->unk37C] = gUnknown_80DC2AC;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B274->unk384, 1, 1);
+        sub_800641C(gUnknown_203B274->unk384, TRUE, TRUE);
         MemoryFree(gUnknown_203B274);
         gUnknown_203B274 = NULL;
     }
@@ -263,7 +263,7 @@ bool8 sub_801F808(u16 *moveIDs)
     gUnknown_203B278->unk60 = gUnknown_203B278->unk64;
     sub_80140B4(gUnknown_203B278->unk64);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B278->unk64,1,1);
+    sub_800641C(gUnknown_203B278->unk64, TRUE, TRUE);
     gUnknown_203B278->moveIDs = moveIDs;
 
     for(index = 4; index > 1; index--)
@@ -301,7 +301,7 @@ void sub_801F8D0(void)
     {
         gUnknown_203B278->unk64[gUnknown_203B278->unk5C] = gUnknown_80DC2F8;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B278->unk64, 1, 1);
+        sub_800641C(gUnknown_203B278->unk64, TRUE, TRUE);
         MemoryFree(gUnknown_203B278);
         gUnknown_203B278 = NULL;
     }
@@ -326,11 +326,11 @@ void sub_801F930(void)
             gUnknown_203B278->unkC4[2] = 0x10;
             gUnknown_203B278->unkC4[3] = 0;
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B278->unk64, 1, 1);
+            sub_800641C(gUnknown_203B278->unk64, TRUE, TRUE);
             break;
         case 1:
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B278->unk64, 1, 1);
+            sub_800641C(gUnknown_203B278->unk64, TRUE, TRUE);
             break;
         default:
             break;

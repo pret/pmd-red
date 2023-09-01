@@ -192,7 +192,7 @@ u32 sub_802B640(u32 r0, struct UnkTextStruct2_sub *r1, u32 r2)
 
     sub_8012D08(gUnknown_203B2CC->unk70, r2);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2CC->unk74, 1, 1);
+    sub_800641C(gUnknown_203B2CC->unk74, TRUE, TRUE);
 
     sub_8013818(&gUnknown_203B2CC->input, GetNumPKMNNews(), r2, r0);
 
@@ -244,7 +244,7 @@ u8 GetPokemonNewsIndex(void)
 void sub_802B7D0(u8 r0)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2CC->unk74, 0, 0);
+    sub_800641C(gUnknown_203B2CC->unk74, FALSE, FALSE);
 
     gUnknown_203B2CC->input.unk22 = GetNumPKMNNews();
     sub_8013984(&gUnknown_203B2CC->input);
@@ -265,7 +265,7 @@ void sub_802B81C(void)
         gUnknown_203B2CC->unk74[gUnknown_203B2CC->unk6C] = gUnknown_80DFBD0;
 
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B2CC->unk74, 1, 1);
+        sub_800641C(gUnknown_203B2CC->unk74, TRUE, TRUE);
 
         MemoryFree(gUnknown_203B2CC);
         gUnknown_203B2CC = NULL;
@@ -381,7 +381,7 @@ u32 sub_802B9FC(u8 mailIndex)
     gUnknown_203B2D4->unk28[2] = gUnknown_80DFC18;
     gUnknown_203B2D4->unk28[3] = gUnknown_80DFC18;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2D4->unk28, 1, 1);
+    sub_800641C(gUnknown_203B2D4->unk28, TRUE, TRUE);
     gUnknown_203B2D4->unk8 = 0;
     sub_802BCC4();
     sub_802BC7C();
@@ -413,7 +413,7 @@ void sub_802BACC(void)
     if (gUnknown_203B2D4 != NULL) {
         gUnknown_203B2D4->unk28[gUnknown_203B2D4->unk24] = gUnknown_80DFC18;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B2D4->unk28, 1, 1);
+        sub_800641C(gUnknown_203B2D4->unk28, TRUE, TRUE);
         MemoryFree(gUnknown_203B2D4);
         gUnknown_203B2D4 = NULL;
     }
@@ -540,7 +540,7 @@ u32 sub_802BD14(s32 param_1, struct UnkTextStruct2_sub *param_2, u32 param_3)
     
     sub_8012D34(gUnknown_203B2D8->unk3C,param_3);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2D8->unk40,1,1);
+    sub_800641C(gUnknown_203B2D8->unk40, TRUE, TRUE);
     sub_8013848(&gUnknown_203B2D8->input,CountEmptyMailSlots(),param_3,param_1);
     gUnknown_203B2D8->input.menuIndex = gUnknown_203B2DC;
     sub_8013984(&gUnknown_203B2D8->input);
@@ -585,7 +585,7 @@ u8 sub_802BE74(void)
 void sub_802BE94(u8 r0)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2D8->unk40, 0, 0);
+    sub_800641C(gUnknown_203B2D8->unk40, FALSE, FALSE);
 
     gUnknown_203B2D8->input.unk22 = CountEmptyMailSlots();
     sub_8013984(&gUnknown_203B2D8->input);
@@ -602,7 +602,7 @@ void sub_802BEDC(void)
         gUnknown_203B2DC = gUnknown_203B2D8->input.menuIndex;
         gUnknown_203B2D8->unk40[gUnknown_203B2D8->unk38] = gUnknown_80DFC5C;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B2D8->unk40, 1, 1);
+        sub_800641C(gUnknown_203B2D8->unk40, TRUE, TRUE);
         MemoryFree(gUnknown_203B2D8);
         gUnknown_203B2D8 = NULL;
     }

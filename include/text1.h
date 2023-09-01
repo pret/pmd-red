@@ -12,6 +12,6 @@ void LoadCharmaps(void);
 void SelectCharmap(u32);
 u32 xxx_update_some_bg_tiles(u32 a0);
 
-void sub_800641C(struct UnkTextStruct2 *a0, u8 a1, u8 a2);
+void sub_800641C(struct UnkTextStruct2 *a0, bool8 a1, bool8 a2);
 
 #endif // GUARD_TEXT1_H

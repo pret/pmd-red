@@ -165,7 +165,7 @@ bool8 sub_802C4C8(int param_1,struct UnkTextStruct2_sub *param_2,u32 param_3)
 
     sub_8012D34(gUnknown_203B2E8->unk40,param_3);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2E8->unk44,1,1);
+    sub_800641C(gUnknown_203B2E8->unk44, TRUE, TRUE);
     sub_8013848(&gUnknown_203B2E8->input,CountAcceptedJobs(),param_3,param_1);
     gUnknown_203B2E8->input.menuIndex = gUnknown_203B2EC;
     sub_8013984(&gUnknown_203B2E8->input);
@@ -213,7 +213,7 @@ u8 GetPelipperBoardSlotIndex(void)
 void sub_802C640(u8 r0)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2E8->unk44, 0, 0);
+    sub_800641C(gUnknown_203B2E8->unk44, FALSE, FALSE);
     gUnknown_203B2E8->input.unk22 = CountAcceptedJobs();
     sub_8013984(&gUnknown_203B2E8->input);
     sub_802C6DC();
@@ -229,7 +229,7 @@ void sub_802C688(void)
         gUnknown_203B2EC = gUnknown_203B2E8->input.menuIndex;
         gUnknown_203B2E8->unk44[gUnknown_203B2E8->unk3C] = gUnknown_80DFCE4;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B2E8->unk44, 1, 1);
+        sub_800641C(gUnknown_203B2E8->unk44, TRUE, TRUE);
         MemoryFree(gUnknown_203B2E8);
         gUnknown_203B2E8 = NULL;
     }
@@ -428,7 +428,7 @@ void sub_802C928(void)
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2F0->unk19C, 1, 1);
+    sub_800641C(gUnknown_203B2F0->unk19C, TRUE, TRUE);
 }
 
 void sub_802C9D8(void)

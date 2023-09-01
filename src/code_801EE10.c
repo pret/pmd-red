@@ -59,7 +59,7 @@ u8 sub_801EE10(u32 param_1, s16 species, struct Move *moves, u32 param_4, u8 *te
   }
   sub_8012D08(&gUnknown_203B270->unk58[gUnknown_203B270->unk50],iVar8);
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B270->unk58,1,1);
+  sub_800641C(gUnknown_203B270->unk58, TRUE, TRUE);
   sub_8013818(&gUnknown_203B270->input,iVar5,iVar5,param_6);
   sub_8013780(&gUnknown_203B270->input,0);
   sub_801F280(1);

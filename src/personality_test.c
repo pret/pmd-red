@@ -728,7 +728,7 @@ void PersonalityTest_DisplayStarterSprite(void)
   sub_8006518(stackArray);
   stackArray[1] = gUnknown_80F4244;
   ResetUnusedInputStruct();
-  sub_800641C(stackArray, 1, 0);
+  sub_800641C(stackArray, TRUE, FALSE);
   sub_8008C54(1);
   sub_80073B8(1);
   faceFile = GetDialogueSpriteDataPtr(starterID);
@@ -764,7 +764,7 @@ void CreatePartnerSelectionMenu(s16 starterID)
     gUnknown_203B404->unkb4[2] = 6;
     gUnknown_203B404->unkb4[3] = 0;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B404->unk54, 1, 1);
+    sub_800641C(gUnknown_203B404->unk54, TRUE, TRUE);
     sub_8013818(&gUnknown_203B404->input, GetValidPartners(), 0xA, gUnknown_203B404->unk4C);
     RedrawPartnerSelectionMenu();
     PersonalityTest_DisplayPartnerSprite();
@@ -812,7 +812,7 @@ void sub_803CE6C()
 {
   gUnknown_203B404->unk54[gUnknown_203B404->unk4C] = gUnknown_80F4278;
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B404->unk54, 1, 1);
+  sub_800641C(gUnknown_203B404->unk54, TRUE, TRUE);
   sub_803CECC(); // Free 203B404
 }
 
@@ -856,7 +856,7 @@ void RedrawPartnerSelectionMenu(void)
 
   // Everything after this matches
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B404->unk54,1,1);
+  sub_800641C(gUnknown_203B404->unk54, TRUE, TRUE);
   sub_8008C54(gUnknown_203B404->unk4C);
   sub_80073B8(gUnknown_203B404->unk4C);
   xxx_call_draw_string(0xc, 0, gPartnerSelectionHeaderText, gUnknown_203B404->unk4C, 0);

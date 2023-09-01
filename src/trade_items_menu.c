@@ -144,7 +144,7 @@ s32 CreateTradeItemsMenu(void)
 {
 
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
+  sub_800641C(NULL, TRUE, TRUE);
   gTradeItemsMenu = MemoryAlloc(sizeof(struct TradeItemsMenu), 8);
   MemoryFill8((u8 *)gTradeItemsMenu, 0, sizeof(struct TradeItemsMenu));
   sub_8035C1C();
@@ -276,7 +276,7 @@ void sub_80365AC(void)
         gTradeItemsMenu->itemToSend.quantity = 1;
         sub_8006518(gTradeItemsMenu->unk1E4);
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_801B3C0(&gTradeItemsMenu->itemToSend);
         SetTradeItemMenu(TRADE_ITEMS_ITEM_INFO);
         break;
@@ -300,7 +300,7 @@ void sub_8036674(void)
         gTradeItemsMenu->fallbackState = 0x13;
         sub_8006518(gTradeItemsMenu->unk1E4);
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_801B3C0(&gTradeItemsMenu->itemToSend);
         SetTradeItemMenu(TRADE_ITEMS_ITEM_INFO);
         break;
@@ -322,7 +322,7 @@ void sub_8036728(void)
       case 3:
         sub_801B450();
         ResetUnusedInputStruct();
-        sub_800641C(gTradeItemsMenu->unk1E4, 1, 1);
+        sub_800641C(gTradeItemsMenu->unk1E4, TRUE, TRUE);
         sub_801CB5C(TRUE);
         if (gTradeItemsMenu->fallbackState == 0x13) {
             sub_8035CF4(gTradeItemsMenu->unk44, 3, TRUE);
@@ -603,7 +603,7 @@ void sub_8036B28(void)
     case TRADE_ITEMS_SEND_ITEM_SELECTION:
         if (sub_801D008() == 0) {
             ResetUnusedInputStruct();
-            sub_800641C(0,1,1);
+            sub_800641C(NULL, TRUE, TRUE);
             {
             struct UnkTextStruct2_sub local_10 = {3, 2};
             sub_801C8C4(0,1,&local_10,9);
@@ -750,7 +750,7 @@ void sub_8036ECC(u32 index, u32 r1)
   sub_8013AA0(&gTradeItemsMenu->quantityToSend);
   gTradeItemsMenu->unk184[index] = gUnknown_80E6174;
   ResetUnusedInputStruct();
-  sub_800641C(gTradeItemsMenu->unk184, 1, 1);
+  sub_800641C(gTradeItemsMenu->unk184, TRUE, TRUE);
 }
 
 void sub_8036F30(void)

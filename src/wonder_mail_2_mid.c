@@ -145,7 +145,7 @@ bool8 sub_802C10C(s32 param_1,struct UnkTextStruct2_sub *param_2,s32 param_3)
 
     sub_8012D34(gUnknown_203B2E0->unk40,param_3);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2E0->unk44,1,1);
+    sub_800641C(gUnknown_203B2E0->unk44, TRUE, TRUE);
     sub_8013848(&gUnknown_203B2E0->input,CountPelipperBoardSlots(),param_3,param_1);
     gUnknown_203B2E0->input.menuIndex = gUnknown_203B2E4;
     sub_8013984(&gUnknown_203B2E0->input);
@@ -194,7 +194,7 @@ u8 sub_802C26C(void)
 void sub_802C28C(u8 r0)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2E0->unk44, 0, 0);
+    sub_800641C(gUnknown_203B2E0->unk44, FALSE, FALSE);
     gUnknown_203B2E0->input.unk22 = CountPelipperBoardSlots();
     sub_8013984(&gUnknown_203B2E0->input);
     sub_802C328();
@@ -210,7 +210,7 @@ void sub_802C2D4(void)
         gUnknown_203B2E4 = gUnknown_203B2E0->input.menuIndex;
         gUnknown_203B2E0->unk44[gUnknown_203B2E0->unk3C] = gUnknown_80DFC9C;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B2E0->unk44, 1, 1);
+        sub_800641C(gUnknown_203B2E0->unk44, TRUE, TRUE);
         MemoryFree(gUnknown_203B2E0);
         gUnknown_203B2E0 = NULL;
     }

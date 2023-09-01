@@ -103,7 +103,7 @@ u32 sub_80306A8(u32 wonderMailType, u32 r1, struct UnkTextStruct2_sub *r2, u32 r
 
     sub_8012D08(gUnknown_203B320->unk5C, r3);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B320->unk60, 1, 1);
+    sub_800641C(gUnknown_203B320->unk60, TRUE, TRUE);
     sub_8013818(&gUnknown_203B320->input, sub_8030A74(), r3, r1);
     sub_80308A0();
     sub_803092C();
@@ -162,7 +162,7 @@ void sub_803084C()
     {
         gUnknown_203B320->unk60[gUnknown_203B320->unk58] = gUnknown_80E083C;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B320->unk60, 1, 1);
+        sub_800641C(gUnknown_203B320->unk60, TRUE, TRUE);
         MemoryFree(gUnknown_203B320);
         gUnknown_203B320 = NULL;
     }

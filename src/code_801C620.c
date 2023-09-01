@@ -259,7 +259,7 @@ void sub_801BFCC(void)
 
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B238->unkC4, 1, 1);
+    sub_800641C(gUnknown_203B238->unkC4, TRUE, TRUE);
 }
 
 void sub_801C03C(void)
@@ -403,7 +403,7 @@ bool8 sub_801C244(s16 species, u32 index, u32 param_3)
     gUnknown_203B23C->unk5C->unk14 = &gUnknown_203B23C->unkC0;
     sub_8012D08(gUnknown_203B23C->unk5C,param_3);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B23C->unk60,1,1);
+    sub_800641C(gUnknown_203B23C->unk60, TRUE, TRUE);
     sub_8013818(&gUnknown_203B23C->input,gUnknown_203B23C->numIQSkills,param_3,index);
     sub_801C440();
     sub_801C4C8();
@@ -449,7 +449,7 @@ s32 sub_801C390(void)
 void sub_801C3B0(u8 r0)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B23C->unk60, 0, 0);
+    sub_800641C(gUnknown_203B23C->unk60, FALSE, FALSE);
     gUnknown_203B23C->input.unk22 = gUnknown_203B23C->numIQSkills;
     sub_8013984(&gUnknown_203B23C->input);
     sub_801C440();
@@ -464,7 +464,7 @@ void sub_801C3F8(void)
     {
         gUnknown_203B23C->unk60[gUnknown_203B23C->unk58] = gUnknown_80DBDD8;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B23C->unk60, 1, 1);
+        sub_800641C(gUnknown_203B23C->unk60, TRUE, TRUE);
         MemoryFree(gUnknown_203B23C);
         gUnknown_203B23C = NULL;
     }
@@ -481,12 +481,12 @@ void sub_801C440(void)
   gUnknown_203B23C->unkC2 = 0xA;
   gUnknown_203B23C->unkC3 = 0;
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B23C->unk60, 1, 1);
+  sub_800641C(gUnknown_203B23C->unk60, TRUE, TRUE);
   sVar2 = sub_80095E4(gUnknown_203B23C->unk24.unk1A, 0xc) + 2;
   gUnknown_203B23C->unk60[gUnknown_203B23C->unk58].unkE = sVar2;
   gUnknown_203B23C->unk60[gUnknown_203B23C->unk58].unk10 = sVar2;
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B23C->unk60, 1, 1);
+  sub_800641C(gUnknown_203B23C->unk60, TRUE, TRUE);
 }
 #else
 NAKED
@@ -618,7 +618,7 @@ u32 sub_801C620(u8 iqSkill)
   gUnknown_203B240->unk24 = 0;
   sub_80140B4(gUnknown_203B240->unk28);
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B240->unk28,1,1);
+  sub_800641C(gUnknown_203B240->unk28, TRUE, TRUE);
   sub_801C6D0(0);
   return 1;
 }
@@ -768,7 +768,7 @@ bool8 sub_801C8C4(s32 param_1, s32 param_2, struct UnkTextStruct2_sub *param_3, 
 
     sub_8012D08(gUnknown_203B244->unk4EC, param_4);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B244->unk4F0,1,1);
+    sub_800641C(gUnknown_203B244->unk4F0, TRUE, TRUE);
     sub_8013818(&gUnknown_203B244->input, sub_801CE58(), param_4, param_2);
     if (gUnknown_203B248 == gUnknown_203B244->unk0) {
       gUnknown_203B244->input.menuIndex = gUnknown_203B24C;
@@ -838,7 +838,7 @@ u8 sub_801CB24(void) {
 
 void sub_801CB5C(bool8 r0) {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B244->unk4F0, 0, 0);
+    sub_800641C(gUnknown_203B244->unk4F0, FALSE, FALSE);
     gUnknown_203B244->input.unk22 = sub_801CE58();
     sub_8013984(&gUnknown_203B244->input);
     sub_801CC38();
@@ -857,7 +857,7 @@ void sub_801CBB8(void) {
         gUnknown_203B24E = gUnknown_203B244->input.unk1E;
         gUnknown_203B244->unk4F0[gUnknown_203B244->unk4E8] = gUnknown_80DBE3C;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B244->unk4F0, 1, 1);
+        sub_800641C(gUnknown_203B244->unk4F0, TRUE, TRUE);
         MemoryFree(gUnknown_203B244);
         gUnknown_203B244 = NULL;
     }
@@ -1079,7 +1079,7 @@ bool8 sub_801D014(struct PokemonStruct *param_1)
     struct unk_203B250 *preload;
 
     ResetUnusedInputStruct();
-    sub_800641C(0,1,1);
+    sub_800641C(NULL, TRUE, TRUE);
     gUnknown_203B250 = MemoryAlloc(sizeof(struct unk_203B250), 8);
     gUnknown_203B250->menuAction = gUnknown_203B254;
     gUnknown_203B250->pokeStruct = param_1;
@@ -1264,5 +1264,5 @@ void sub_801D220(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B250->unkB8, 1, 1);
+    sub_800641C(gUnknown_203B250->unkB8, TRUE, TRUE);
 }

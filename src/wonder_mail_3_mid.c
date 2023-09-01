@@ -324,7 +324,7 @@ void sub_802F004(void)
             }
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B30C->unkF0, 1, 1);
+    sub_800641C(gUnknown_203B30C->unkF0, TRUE, TRUE);
 }
 
 void sub_802F088(void)
@@ -433,7 +433,7 @@ u32 sub_802F204(struct unkStruct_802F204 *r0, bool8 displayClientSprite)
     struct unkStruct_203B310 *preload;
 
     ResetUnusedInputStruct();
-    sub_800641C(0, 1, 1);
+    sub_800641C(NULL, TRUE, TRUE);
     gUnknown_203B310 = MemoryAlloc(sizeof(struct unkStruct_203B310), 8);
     gUnknown_203B310->unk10 = r0;
     gUnknown_203B310->itemRewardIndex = 0;
@@ -507,7 +507,7 @@ void sub_802F300(void)
                 gUnknown_203B310->unk24[index] = gUnknown_80E041C;
             }
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B310->unk24, 1, 1);
+            sub_800641C(gUnknown_203B310->unk24, TRUE, TRUE);
         default:
             break;
     }
@@ -721,7 +721,7 @@ u32 sub_802F73C(u32 r0, struct UnkTextStruct2_sub *r1, u32 r2, u8 r3)
 
     sub_8012D08(gUnknown_203B314->unkF4, r2);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B314->unkF8, 1, 1);
+    sub_800641C(gUnknown_203B314->unkF8, TRUE, TRUE);
     sub_8013818(&gUnknown_203B314->input, sub_802FBF4(), r2, r0);
     sub_802F9C0();
     sub_802FA50();
@@ -801,7 +801,7 @@ void sub_802F974(void)
     {
         gUnknown_203B314->unkF8[gUnknown_203B314->unkF0] = gUnknown_80E06FC;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B314->unkF8, 1, 1);
+        sub_800641C(gUnknown_203B314->unkF8, TRUE, TRUE);
         MemoryFree(gUnknown_203B314);
         gUnknown_203B314 = NULL;
     }

@@ -137,7 +137,7 @@ bool8 sub_802DB28(u8 jobSlotIndex, u8 dungeon)
   }
   else {
     ResetUnusedInputStruct();
-    sub_800641C(0,1,1);
+    sub_800641C(NULL, TRUE, TRUE);
     gUnknown_203B2FC = MemoryAlloc(sizeof(struct unkStruct_203B2FC),8);
     gUnknown_203B2FC->jobSlotIndex = jobSlotIndex;
     gUnknown_203B2FC->jobInfo = GetJobSlotInfo(jobSlotIndex);
@@ -209,7 +209,7 @@ void sub_802DC40(void)
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2FC->unk48, 1, 1);
+    sub_800641C(gUnknown_203B2FC->unk48, TRUE, TRUE);
 }
 
 void sub_802DC9C(void)
@@ -342,7 +342,7 @@ void sub_802DF24(void)
     {
         gUnknown_203B300->unk18[gUnknown_203B300->unk10] = gUnknown_80E0248;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B300->unk18, 1, 1);
+        sub_800641C(gUnknown_203B300->unk18, TRUE, TRUE);
         MemoryFree(gUnknown_203B300);
         gUnknown_203B300 = NULL;
     }
@@ -351,7 +351,7 @@ void sub_802DF24(void)
 void sub_802DF6C(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B300->unk18, 1, 1);
+    sub_800641C(gUnknown_203B300->unk18, TRUE, TRUE);
 }
 
 void sub_802DF88(void)

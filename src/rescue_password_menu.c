@@ -275,7 +275,7 @@ void CreateRescuePasswordMenu(u32 currMenu)
         gRescuePasswordMenu->unk148[counter] = gUnknown_80E71E4;
 
     ResetUnusedInputStruct();
-    sub_800641C(gRescuePasswordMenu->unk148, 1, 1);
+    sub_800641C(gRescuePasswordMenu->unk148, TRUE, TRUE);
 
     if ((gUnknown_203B368 != 0) || (gUnknown_203B36C != currMenu)) {
         for(counter = 0; counter < RESCUE_PASSWORD_SIZE; counter++)
@@ -320,7 +320,7 @@ void CleanRescuePasswordMenu(void)
 {
 
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
+  sub_800641C(NULL, TRUE, TRUE);
   if (gRescuePasswordMenu != NULL) {
     sub_80155F0();
     sub_8031E10();
@@ -501,7 +501,7 @@ s32 UpdateRescuePasswordMenu(void)
             case 0xC:
                 sub_8039174();
                 ResetUnusedInputStruct();
-                sub_800641C(0,1,1);
+                sub_800641C(NULL, TRUE, TRUE);
                 sub_80151C0(4,gRescuePasswordBuffer);
                 gRescuePasswordMenu->state = 8;
                 subtract = gRescuePasswordMenu->currMenu - 0x21;
@@ -529,7 +529,7 @@ s32 UpdateRescuePasswordMenu(void)
             case 0xC:
                 sub_8039174();
                 ResetUnusedInputStruct();
-                sub_800641C(0,1,1);
+                sub_800641C(NULL, TRUE, TRUE);
                 sub_80151C0(4,gRescuePasswordBuffer);
                 gRescuePasswordMenu->state = ConvertMenutoRescuePasswordState(gRescuePasswordMenu->currMenu);
                 subtract = gRescuePasswordMenu->currMenu - 0x21;
@@ -552,7 +552,7 @@ void DisplayRescuePasswordError(u32 passwordError)
 {
   sub_8006518(gRescuePasswordMenu->unk1A8);
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
+  sub_800641C(NULL, TRUE, TRUE);
   sub_80155F0();
   switch(passwordError) {
     case PASSWORD_ENTRY_INCORRECT_PASSWORD:
@@ -592,7 +592,7 @@ void DisplayPasswordAcceptScreen(void)
 {
   sub_8006518(gRescuePasswordMenu->unk1A8);
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
+  sub_800641C(NULL, TRUE, TRUE);
   sub_80155F0();
   SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7278,gUnknown_80E7290,0,0xd,0);
   sub_8035CF4(gRescuePasswordMenu->unk8,0,TRUE);

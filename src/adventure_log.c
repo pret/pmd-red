@@ -64,7 +64,7 @@ u32 CreateAdventureLogScreen(u32 param_1)
   gAdventureLog->unk38->unk14 = gAdventureLog->unk9C;
 
   ResetUnusedInputStruct();
-  sub_800641C(gAdventureLog->unk3C,1,1);
+  sub_800641C(gAdventureLog->unk3C, TRUE, TRUE);
   sub_8013818(&gAdventureLog->input,0x20,8,param_1);
   sub_8032084();
   DisplayAdventureLog();
@@ -104,7 +104,7 @@ void CleanAdventureLogScreen(void)
   if (gAdventureLog != NULL) {
     gAdventureLog->unk3C[gAdventureLog->unk34] = gUnknown_80E1FF0;
     ResetUnusedInputStruct();
-    sub_800641C(gAdventureLog->unk3C,1,1);
+    sub_800641C(gAdventureLog->unk3C, TRUE, TRUE);
     MemoryFree(gAdventureLog);
     gAdventureLog = 0;
   }
@@ -128,7 +128,7 @@ void sub_8032084(void)
   // Good past here except regs for this store
   gAdventureLog->unk3C[gAdventureLog->unk34].unk10 = sVar2 + 2;
   ResetUnusedInputStruct();
-  sub_800641C(gAdventureLog->unk3C,1,1);
+  sub_800641C(gAdventureLog->unk3C, TRUE, TRUE);
 }
 #else
 NAKED

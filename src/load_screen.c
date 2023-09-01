@@ -167,7 +167,7 @@ void CreateLoadScreen(u32 currMenu)
     gLoadScreen->unk144[index] = gUnknown_80E75F8;
   }
   ResetUnusedInputStruct();
-  sub_800641C(gLoadScreen->unk144,1,1);
+  sub_800641C(gLoadScreen->unk144, TRUE, TRUE);
   SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,0,&gUnknown_80E7610,gUnknown_203B378,0,6,0);
   switch(gLoadScreen->currMenu){
     case MENU_CONTINUE:
@@ -196,7 +196,7 @@ void CreateLoadScreen(u32 currMenu)
 void CleanLoadScreen(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(NULL, 1, 1);
+    sub_800641C(NULL, TRUE, TRUE);
     if(gLoadScreen != NULL)
     {
         MemoryFree(gLoadScreen);

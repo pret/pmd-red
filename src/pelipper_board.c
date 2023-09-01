@@ -196,7 +196,7 @@ void sub_802E94C(void)
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(gPelipperBoard->unk10C, 1, 1);
+    sub_800641C(gPelipperBoard->unk10C, TRUE, TRUE);
 }
 
 void sub_802EA58(void)

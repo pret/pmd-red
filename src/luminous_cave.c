@@ -201,7 +201,7 @@ u32 sub_802465C(void)
   struct OpenedFile *faceFile;
 
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
+  sub_800641C(NULL, TRUE, TRUE);
   gUnknown_203B2B0 = MemoryAlloc(sizeof(struct unkStruct_203B2B0),8);
   gUnknown_203B2B0->menuAction1 = 0;
   gUnknown_203B2B0->menuAction2 = 0;
@@ -317,7 +317,7 @@ void sub_8024804(void)
         break;
   }
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B2B0->unk114, 1, 1);
+  sub_800641C(gUnknown_203B2B0->unk114, TRUE, TRUE);
 }
 
 void UpdateLuminousCaveDialogue(void)

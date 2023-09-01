@@ -272,7 +272,7 @@ u32 sub_8027F88(void)
   s32 counter;
 
   ResetUnusedInputStruct();
-  sub_800641C(0, 1, 1);
+  sub_800641C(NULL, TRUE, TRUE);
   gUnknown_203B2C0 = MemoryAlloc(sizeof(struct WonderMailStruct_203B2C0), 8);
   MemoryFill8((u8 *)gUnknown_203B2C0, 0, sizeof(struct WonderMailStruct_203B2C0));
   gUnknown_203B2C0->unk53C = 0;
@@ -507,7 +507,7 @@ void sub_8028348(void)
         case 0x3B:
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8031D70(gUnknown_203B2C0->mailIndex, 0);
             break;
         case 0x3C:
@@ -542,7 +542,7 @@ void sub_8028348(void)
             if(sub_8023CE8() == 0)
             {
                 ResetUnusedInputStruct();
-                sub_800641C(0, 1, 1);
+                sub_800641C(NULL, TRUE, TRUE);
                 sub_8023868(3, 0, 0, 9);
             }
             break;
@@ -568,7 +568,7 @@ void sub_8028348(void)
             if(sub_8030894() == 0)
             {
                 ResetUnusedInputStruct();
-                sub_800641C(0, 1, 1);
+                sub_800641C(NULL, TRUE, TRUE);
                 sub_80306A8(WONDER_MAIL_TYPE_AOK, 0, 0, 6);
             }
             break;
@@ -659,7 +659,7 @@ void sub_8028348(void)
         case 0x27:
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_80151C0(4, gUnknown_203B2C0->passwordBuffer);
             break;
         case 8:
@@ -695,7 +695,7 @@ void sub_8028348(void)
             if(sub_8030894() == 0)
             {
                 ResetUnusedInputStruct();
-                sub_800641C(0, 1, 1);
+                sub_800641C(NULL, TRUE, TRUE);
                 // SOS Mail
                 sub_80306A8(2, 0, 0, 6);
             }
@@ -1201,7 +1201,7 @@ void sub_8029044(void)
             gUnknown_203B2C0->mailIndex = sub_80307EC();
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B2C0->mailIndex, 0);
             SetFriendRescueCounterState(0x21);
             break;
@@ -1237,7 +1237,7 @@ void sub_80290F0(void)
             gUnknown_203B2C0->fallbackState = DEFAULT_FALLBACK_STATE;
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B2C0->mailIndex, 0);
             SetFriendRescueCounterState(0x21);
             break;
@@ -1260,7 +1260,7 @@ void sub_80291AC(void)
         case 3:
             sub_8030DE4();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B2C0->unk3BC, TRUE, TRUE);
             sub_803092C();
             if(gUnknown_203B2C0->fallbackState == DEFAULT_FALLBACK_STATE)
             {
@@ -1477,7 +1477,7 @@ void sub_80293F4(void)
         case 2:
             sub_80155F0();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B2C0->unk3BC, TRUE, TRUE);
             SetFriendRescueCounterState(FRIEND_RESCUE_MAIN);
             break;
         default:
@@ -1550,7 +1550,7 @@ void sub_80295D8(void)
             gUnknown_203B2C0->mailIndex = sub_80307EC();
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B2C0->mailIndex, 0);
             SetFriendRescueCounterState(0x2C);
             break;
@@ -1586,7 +1586,7 @@ void sub_8029684(void)
             gUnknown_203B2C0->fallbackState = DEFAULT_FALLBACK_STATE;
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B2C0->mailIndex, 0);
             SetFriendRescueCounterState(0x2C);
             break;
@@ -1607,7 +1607,7 @@ void sub_8029740(void)
         case 3:
             sub_8030DE4();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B2C0->unk3BC, TRUE, TRUE);
             sub_803092C();
             if(gUnknown_203B2C0->fallbackState == DEFAULT_FALLBACK_STATE)
             {
@@ -1660,7 +1660,7 @@ void sub_80297D4(void)
             gUnknown_203B2C0->speciesNum = sub_8023B44();
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8024458(gUnknown_203B2C0->speciesNum, 0);
             SetFriendRescueCounterState(0x35);
             break;
@@ -1686,7 +1686,7 @@ void sub_8029884(void)
             gUnknown_203B2C0->fallbackState = DEFAULT_FALLBACK_STATE;
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8024458(gUnknown_203B2C0->speciesNum, 0);
             SetFriendRescueCounterState(0x35);
             break;
@@ -1716,7 +1716,7 @@ void sub_8029944(void)
         case 3:
             sub_802453C();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B2C0->unk3BC, TRUE, TRUE);
             sub_8023B7C(1);
             if(gUnknown_203B2C0->fallbackState == DEFAULT_FALLBACK_STATE)
             {
@@ -1856,7 +1856,7 @@ void sub_8029AF4(void)
         case 3:
             sub_8031E10();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B2C0->unk3BC, TRUE, TRUE);
             SetFriendRescueCounterState(0x3C);
             break;
         case 1:

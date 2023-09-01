@@ -95,7 +95,7 @@ void sub_8030DE4(void)
   {
       gUnknown_203B324->unk18[gUnknown_203B324->unk10] = gUnknown_80E0900;
       ResetUnusedInputStruct();
-      sub_800641C(gUnknown_203B324->unk18, 1, 1);
+      sub_800641C(gUnknown_203B324->unk18, TRUE, TRUE);
       MemoryFree(gUnknown_203B324);
       gUnknown_203B324 = NULL;
   }
@@ -104,7 +104,7 @@ void sub_8030DE4(void)
 void sub_8030E2C(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B324->unk18, 1, 1);
+    sub_800641C(gUnknown_203B324->unk18, TRUE, TRUE);
 }
 
 void sub_8030E48(void)

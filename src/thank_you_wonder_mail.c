@@ -243,7 +243,7 @@ u32 CreateThankYouMailPelipper(void)
   struct unkStruct_203B480 *mail;
 
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
+  sub_800641C(NULL, TRUE, TRUE);
   gUnknown_203B2C4 = MemoryAlloc(sizeof(struct WonderMailStruct_203B2C4), 8);
   MemoryFill8((u8 *)gUnknown_203B2C4, 0, sizeof(struct WonderMailStruct_203B2C4));
 
@@ -531,7 +531,7 @@ void sub_802A050(void)
         case 2:
             sub_8031E10();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B2C4->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B2C4->unk3BC, TRUE, TRUE);
             SetThankYouMailMenuState(0x1B);
             break;
         case 1:
@@ -579,7 +579,7 @@ void sub_802A0C8(void)
         gUnknown_203B2C4->mailIndex = sub_80307EC();
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_8030D40(gUnknown_203B2C4->mailIndex,0);
         SetThankYouMailMenuState(0x12);
         break;
@@ -615,7 +615,7 @@ void sub_802A174(void)
         gUnknown_203B2C4->fallbackState = 0x2b;
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_8030D40(gUnknown_203B2C4->mailIndex,0);
         SetThankYouMailMenuState(0x12);
         break;
@@ -637,7 +637,7 @@ void sub_802A230(void)
       case 3:
         sub_8030DE4();
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B2C4->unk3BC, 1, 1);
+        sub_800641C(gUnknown_203B2C4->unk3BC, TRUE, TRUE);
         sub_803092C();
         if (gUnknown_203B2C4->fallbackState == 0x2b) {
             sub_8035CF4(gUnknown_203B2C4->unk21C, 3, TRUE);
@@ -674,7 +674,7 @@ void sub_802A28C(void)
         gUnknown_203B2C4->unk41C.id = sub_801CB24();
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_801B3C0(&gUnknown_203B2C4->unk41C);
         SetThankYouMailMenuState(SHOW_ITEM_TO_SEND_INFO);
         break;
@@ -689,7 +689,7 @@ void sub_802A33C(void)
      case 3:
         sub_801B450();
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B2C4->unk3BC,1,1);
+        sub_800641C(gUnknown_203B2C4->unk3BC, TRUE, TRUE);
         sub_801CB5C(TRUE);
         if (gUnknown_203B2C4->fallbackState == 0x2b) {
             sub_8035CF4(gUnknown_203B2C4->unk21C,3,TRUE);
@@ -725,7 +725,7 @@ void sub_802A39C(void)
             gUnknown_203B2C4->fallbackState = 0x2b;
             sub_8006518(gUnknown_203B2C4->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0,1,1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_801B3C0(&gUnknown_203B2C4->unk41C);
             SetThankYouMailMenuState(SHOW_ITEM_TO_SEND_INFO);
             break;
@@ -838,7 +838,7 @@ void HandleThankYouMailPasswordMenu(void)
   case 2:
     sub_80155F0();
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2C4->unk3BC, 1, 1);
+    sub_800641C(gUnknown_203B2C4->unk3BC, TRUE, TRUE);
     SetThankYouMailMenuState(ANYTHING_ELSE_THANK_YOU_MAIN_MENU);
     break;
   }
@@ -1275,7 +1275,7 @@ void UpdateThankYouMailText(void)
         if (sub_8030894() != 0)
             break;
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_80306A8(WONDER_MAIL_TYPE_THANK_YOU,0,0,6);
         break;
     case 0x11:
@@ -1288,7 +1288,7 @@ void UpdateThankYouMailText(void)
         if (sub_801D008() != 0)
             break;
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         {
         struct UnkTextStruct2_sub local_x = {3, 2};
         sub_801C8C4(0, 1, &local_x, 9);
@@ -1344,13 +1344,13 @@ void UpdateThankYouMailText(void)
     case PROCESS_THANK_YOU_PASSWORD:
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_80151C0(4,gUnknown_203B2C4->passwordBuffer);
         break;
     case 0x1a:
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_8031D70(gUnknown_203B2C4->mailIndex,0);
         break;
     case 0x1b:

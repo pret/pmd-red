@@ -61,7 +61,7 @@ u32 sub_801E3F0(u32 r0)
     gUnknown_203B264->unk3C[gUnknown_203B264->unk34] = gUnknown_80DC0BC;
     sub_8012D08(gUnknown_203B264->unk38, 0xA);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B264->unk3C, 1, 1);
+    sub_800641C(gUnknown_203B264->unk3C, TRUE, TRUE);
     sub_8013818(&gUnknown_203B264->input, 0x5, 0xA, r0);
     sub_801E594();
     DrawHintSelectionMenu();
@@ -106,7 +106,7 @@ s32 GetChosenHintIndex(void)
 void CreateHintSelectionScreen(u8 r0)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B264->unk3C, 0, 0);
+    sub_800641C(gUnknown_203B264->unk3C, FALSE, FALSE);
     sub_8013984(&gUnknown_203B264->input);
     sub_801E594();
     DrawHintSelectionMenu();
@@ -120,7 +120,7 @@ void sub_801E54C(void)
     {
         gUnknown_203B264->unk3C[gUnknown_203B264->unk34] = gUnknown_80DC0A0;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B264->unk3C, 1, 1);
+        sub_800641C(gUnknown_203B264->unk3C, TRUE, TRUE);
         MemoryFree(gUnknown_203B264);
         gUnknown_203B264 = NULL;
     }
@@ -195,7 +195,7 @@ u32 CreateHintDisplayScreen(u32 index)
     gUnknown_203B268->unk3C[gUnknown_203B268->unk34] = gUnknown_80DC0FC;
     gUnknown_203B268->unk38->unk14 = gUnknown_203B268->unk9C;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B268->unk3C, 1, 1);
+    sub_800641C(gUnknown_203B268->unk3C, TRUE, TRUE);
     sub_8013818(&gUnknown_203B268->input, 5, 1, gUnknown_203B268->unk34);
     gUnknown_203B268->input.unk1E = index;
     sub_801E714();
@@ -235,7 +235,7 @@ void DestroyHintDisplayScreen(void)
     {
         gUnknown_203B268->unk3C[gUnknown_203B268->unk34] = gUnknown_80DC0E4;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B268->unk3C, 1, 1);
+        sub_800641C(gUnknown_203B268->unk3C, TRUE, TRUE);
         MemoryFree(gUnknown_203B268);
         gUnknown_203B268 = NULL;
     }
@@ -248,7 +248,7 @@ void sub_801E76C(void)
     gUnknown_203B268->unk9C[2] = 0xF;
     gUnknown_203B268->unk9C[3] = 0;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B268->unk3C, 1, 1);
+    sub_800641C(gUnknown_203B268->unk3C, TRUE, TRUE);
 }
 
 void DisplayChosenHint(void)

@@ -69,7 +69,7 @@ void sub_80382E4(s32 currMenu)
     gUnknown_203B360->unk148[index] = gUnknown_80E6E7C;
   } 
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B360->unk148,1,1);
+  sub_800641C(gUnknown_203B360->unk148, TRUE, TRUE);
   if (currMenu == 0x25) {
       // Caution!
       // The storage space is empty!
@@ -86,7 +86,7 @@ void sub_80382E4(s32 currMenu)
 void sub_80383A8(void)
 {
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
+  sub_800641C(NULL, TRUE, TRUE);
   if (gUnknown_203B360 != 0) {
     MemoryFree(gUnknown_203B360);
     gUnknown_203B360 = 0;

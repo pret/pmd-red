@@ -446,7 +446,6 @@ extern void sub_8037748(void);
 extern void sub_80371B8(void);
 extern void sub_8037900(void);
 extern u32 sub_8037798(void);
-extern void sub_8005838(u32, u32);
 extern void sub_800CB20();
 extern void TransferBGPaletteBuffer();
 extern void xxx_call_update_bg_vram();
@@ -466,7 +465,7 @@ void sub_8036FDC(s32 param_1)
   int index2;
   
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
+  sub_800641C(NULL, TRUE, TRUE);
   ResetSprites(FALSE);
   if (gUnknown_203B35C == NULL) {
     gUnknown_203B35C = MemoryAlloc(sizeof(struct unkStruct_203B35C),8);
@@ -485,7 +484,7 @@ void sub_8036FDC(s32 param_1)
     gUnknown_203B35C->unk15C[index2] = gUnknown_80E653C;
   }
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B35C->unk15C,1,1);
+  sub_800641C(gUnknown_203B35C->unk15C, TRUE, TRUE);
   SetMenuItems(gUnknown_203B35C->unk1C,gUnknown_203B35C->unk15C,0,&gUnknown_80E6CD0,gUnknown_80E6CE8,0,6,0);
   sub_8035CF4(gUnknown_203B35C->unk1C,0,TRUE);
   sub_80376CC();
@@ -633,19 +632,18 @@ void sub_80371B8(void)
 
 void sub_80373C4(void)
 {
-  sub_8005838(0,0);
-  sub_80060EC();
-  sub_800CB20();
-  LoadBufferedInputs();
-  TransferBGPaletteBuffer();
-  xxx_call_update_bg_vram();
-  sub_8009908();
-  xxx_call_update_bg_sound_input();
-  ResetSprites(FALSE);
+    sub_8005838(NULL, 0);
+    sub_80060EC();
+    sub_800CB20();
+    LoadBufferedInputs();
+    TransferBGPaletteBuffer();
+    xxx_call_update_bg_vram();
+    sub_8009908();
+    xxx_call_update_bg_sound_input();
+    ResetSprites(FALSE);
 }
 
-// Unused
-struct unkStruct_203B35C *sub_80373F4(void)
+UNUSED static struct unkStruct_203B35C *sub_80373F4(void)
 {
     return gUnknown_203B35C;
 }

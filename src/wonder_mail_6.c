@@ -99,7 +99,7 @@ bool8 sub_8030F58(u32 wonderMailType)
   struct OpenedFile *file;
   
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
+  sub_800641C(NULL, TRUE, TRUE);
   if (gUnknown_203B328 == NULL) {
     gUnknown_203B328 = MemoryAlloc(sizeof(struct unkStruct_203B328),8);
     MemoryFill8((u8 *)gUnknown_203B328,0,sizeof(struct unkStruct_203B328));
@@ -207,11 +207,11 @@ void sub_80310FC(void)
         case 6:
         default:
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B328->unkA8, 1, 1);
+    sub_800641C(gUnknown_203B328->unkA8, TRUE, TRUE);
 }
 
 void sub_8031258(void)

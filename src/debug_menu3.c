@@ -51,7 +51,7 @@ bool8 sub_803ABC8(void);
 u32 sub_803A888(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(0, 1, 1);
+    sub_800641C(NULL, TRUE, TRUE);
     sUnknown_203B3F4 = MemoryAlloc(sizeof(struct unkStruct_203B3F4), 8);
     sub_803A924(0);
     return 1;
@@ -107,7 +107,7 @@ void sub_803A93C(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B3F4->unk9C, 1, 1);
+    sub_800641C(sUnknown_203B3F4->unk9C, TRUE, TRUE);
 }
 
 void sub_803A9AC(void)

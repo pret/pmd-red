@@ -104,7 +104,7 @@ u32 MakuhitaDojo_New(u32 mode)
     u32 initialState;
 
     ResetUnusedInputStruct();
-    sub_800641C(NULL, 1, 1);
+    sub_800641C(NULL, TRUE, TRUE);
     gUnknown_203B318 = MemoryAlloc(sizeof(struct unkStruct_203B318), 8);
     gUnknown_203B318->unk10 = -1;
     gUnknown_203B318->mode = mode;
@@ -228,7 +228,7 @@ void sub_802FF1C(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B318->unk6C, 1, 1);
+    sub_800641C(gUnknown_203B318->unk6C, TRUE, TRUE);
 }
 
 void MakuhitaDojo_UpdateDialogue(void)
@@ -399,7 +399,7 @@ bool8 sub_80302E8(s32 param_1, struct UnkTextStruct2_sub *param_2, u32 param_3)
 
     sub_8012D08(gUnknown_203B31C->unk68, param_3);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B31C->unk6C, 1, 1);
+    sub_800641C(gUnknown_203B31C->unk6C, TRUE, TRUE);
     sub_8013818(&gUnknown_203B31C->input, sub_8030668(), param_3, param_1);
     sub_80304C8();
     MakuhitaDojo_DrawCourseList();
@@ -452,7 +452,7 @@ void sub_8030480(void)
     if (gUnknown_203B31C != NULL) {
         gUnknown_203B31C->unk6C[gUnknown_203B31C->unk64] = gUnknown_80E07EC;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B31C->unk6C, 1, 1);
+        sub_800641C(gUnknown_203B31C->unk6C, TRUE, TRUE);
         MemoryFree(gUnknown_203B31C);
         gUnknown_203B31C = NULL;
     }
@@ -472,7 +472,7 @@ void sub_80304C8(void)
     gUnknown_203B31C->unk6C[gUnknown_203B31C->unk64].unkE = test;
     gUnknown_203B31C->unk6C[gUnknown_203B31C->unk64].unk10 = test + 2;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B31C->unk6C, 1, 1);
+    sub_800641C(gUnknown_203B31C->unk6C, TRUE, TRUE);
 }
 #else
 NAKED

@@ -48,7 +48,7 @@ u32 sub_8006544(u32 index)
 }
 
 // a1 is a VRAM pointer
-void sub_8006554(struct UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const struct UnkTextStruct2 *a5, u8 a6, u32 a7, struct UnkTextStruct2_sub *a8, u8 a9)
+void sub_8006554(struct UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const struct UnkTextStruct2 *a5, bool8 a6, u32 a7, struct UnkTextStruct2_sub *a8, u8 a9)
 {
     struct UnkTextStruct1 *t1;
     s32 iVar3;
@@ -100,19 +100,19 @@ void sub_8006554(struct UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, c
         temp = iVar5 - 1;
 
         if (t1->unkC == 6) {
-            uVar1 = (a6 != 0) ? t1->unk14 : 0;
+            uVar1 = a6 ? t1->unk14 : 0;
 
             sub_8006E94(t1, temp, uVar1, a5->unk14, a3);
 
             temp = iVar5 + 2;
-            uVar1 = (a6 != 0) ? t1->unk14 + t1->unk4 * (a5->unk12 + 2) : 0;
+            uVar1 = a6 ? t1->unk14 + t1->unk4 * (a5->unk12 + 2) : 0;
             numI = t1->unk6 - 2;
         }
         else {
             sub_800677C(t1, temp, a3, a9);
 
             temp = iVar5;
-            uVar1 = (a6 != 0) ? t1->unk14 : 0;
+            uVar1 = a6 ? t1->unk14 : 0;
             numI = t1->unk6;
         }
 
@@ -125,7 +125,7 @@ void sub_8006554(struct UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, c
                 sub_8006AC4(t1, iVar6, temp, uVar1, a3);
 
                 iVar6++;
-                if (a6 != 0)
+                if (a6)
                     uVar1++;
             }
 

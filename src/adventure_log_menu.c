@@ -16,7 +16,7 @@ void CreateAdventureLogMenu(void)
 void CleanAdventureLogMenu(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(0, 1, 1);
+    sub_800641C(NULL, TRUE, TRUE);
 }
 
 u32 UpdateAdventureLogMenu(void)

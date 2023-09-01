@@ -625,7 +625,7 @@ void SetMenuItems(struct MenuStruct *param_1, struct UnkTextStruct2 *unkData, s3
 {
   unkData[index] = *param_4;
   ResetUnusedInputStruct();
-  sub_800641C(unkData,1,1);
+  sub_800641C(unkData, TRUE, TRUE);
   if (param_6 != 0) {
        sub_8012D60(&param_1[index],menuItems,0,0,menuAction,index);
   }
@@ -640,7 +640,7 @@ void sub_8035CC0(struct UnkTextStruct2 *dataArray, u32 index)
     sub_8006518(dataArray);
     dataArray[index] = gUnknown_80E59A8;
     ResetUnusedInputStruct();
-    sub_800641C(dataArray, 1, 1);
+    sub_800641C(dataArray, TRUE, TRUE);
 }
 
 void sub_8035CF4(struct MenuStruct * Menu, u32 index, bool8 r2)
@@ -769,7 +769,7 @@ void DrawMainMenu(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B34C->unk144, 1, 1);
+    sub_800641C(gUnknown_203B34C->unk144, TRUE, TRUE);
     SetMainMenuItems();
     gUnknown_203B34C->currMenuChoice = -1;
 
@@ -785,7 +785,7 @@ void DrawMainMenu(void)
 void CleanMainMenu(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(NULL, 1, 1);
+    sub_800641C(NULL, TRUE, TRUE);
     if(gUnknown_203B34C != NULL)
     {
         MemoryFree(gUnknown_203B34C);

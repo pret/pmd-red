@@ -303,7 +303,7 @@ bool8 sub_8023144(s32 param_1, s32 index, struct UnkTextStruct2_sub *sub, u32 pa
 
   sub_8012D08(gUnknown_3001B5C->unk394,param_4);
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_3001B5C->unk398,1,1);
+  sub_800641C(gUnknown_3001B5C->unk398, TRUE, TRUE);
   sub_8013818(&gUnknown_3001B5C->input,sub_80236A4(),param_4,index);
   gUnknown_3001B5C->input.menuIndex = gUnknown_203B29C;
   gUnknown_3001B5C->input.unk1E = gUnknown_203B29E;
@@ -358,7 +358,7 @@ s16 sub_802331C(void)
 void sub_8023354(u8 param_1)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_3001B5C->unk398,0,0);
+    sub_800641C(gUnknown_3001B5C->unk398, FALSE, FALSE);
     sub_8013984(&gUnknown_3001B5C->input);
     sub_8023420();
     sub_80234BC();
@@ -376,7 +376,7 @@ void sub_80233A0(void)
         gUnknown_203B29E = gUnknown_3001B5C->input.unk1E;
         gUnknown_3001B5C->unk398[gUnknown_3001B5C->unk390] = gUnknown_80DC904;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_3001B5C->unk398,1,1);
+        sub_800641C(gUnknown_3001B5C->unk398, TRUE, TRUE);
         MemoryFree(gUnknown_3001B5C);
         gUnknown_3001B5C = NULL;
     }

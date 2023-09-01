@@ -256,7 +256,7 @@ void sub_8018D30(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(gKecleonBrosWork->unkE8, 1, 1);
+    sub_800641C(gKecleonBrosWork->unkE8, TRUE, TRUE);
 }
 
 void UpdateKecleonStoreDialogue(void)
@@ -961,7 +961,7 @@ bool32 sub_8019E40(u32 r0)
     gUnknown_203B214->unk3C[gUnknown_203B214->unk34] = gUnknown_80DB8CC;
     gUnknown_203B214->unk38->unk14 = gUnknown_203B214->unk9C;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B214->unk3C, 1, 1);
+    sub_800641C(gUnknown_203B214->unk3C, TRUE, TRUE);
     sub_8013818(&gUnknown_203B214->input, CountKecleonShopItems(), 10, r0);
     gUnknown_203B214->input.menuIndex = gUnknown_203B218;
     sub_8013984(&gUnknown_203B214->input);
@@ -1015,7 +1015,7 @@ u8 sub_8019FB0(void)
 void sub_8019FCC(u8 r0)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B214->unk3C, 0, 0);
+    sub_800641C(gUnknown_203B214->unk3C, FALSE, FALSE);
     gUnknown_203B214->input.unk22 = CountKecleonShopItems();
     sub_8013984(&gUnknown_203B214->input);
     sub_801A064();
@@ -1030,7 +1030,7 @@ void sub_801A010(void)
         gUnknown_203B218 = gUnknown_203B214->input.menuIndex;
         gUnknown_203B214->unk3C[gUnknown_203B214->unk34] = gUnknown_80DB8B4;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B214->unk3C, 1, 1);
+        sub_800641C(gUnknown_203B214->unk3C, TRUE, TRUE);
         MemoryFree(gUnknown_203B214);
         gUnknown_203B214 = NULL;
     }
@@ -1050,7 +1050,7 @@ void sub_801A064(void)
     gUnknown_203B214->unk3C[gUnknown_203B214->unk34].unkE = val;
     gUnknown_203B214->unk3C[gUnknown_203B214->unk34].unk10 = val + 2;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B214->unk3C, 1, 1);
+    sub_800641C(gUnknown_203B214->unk3C, TRUE, TRUE);
 }
 #else
 NAKED
@@ -1169,7 +1169,7 @@ u32 sub_801A20C(u32 r0)
     gUnknown_203B21C->unk3C[gUnknown_203B21C->unk34] = gUnknown_80DB914;
     gUnknown_203B21C->unk38->unk14 = gUnknown_203B21C->unk9C;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B21C->unk3C, 1, 1);
+    sub_800641C(gUnknown_203B21C->unk3C, TRUE, TRUE);
     sub_8013818(&gUnknown_203B21C->input, CountKecleonWareItems(), 10, r0);
     gUnknown_203B21C->input.menuIndex = gUnknown_203B220;
     sub_8013984(&gUnknown_203B21C->input);
@@ -1224,7 +1224,7 @@ u8 sub_801A37C(void)
 void sub_801A398(u8 r0)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B21C->unk3C, 0, 0);
+    sub_800641C(gUnknown_203B21C->unk3C, FALSE, FALSE);
     gUnknown_203B21C->input.unk22 = CountKecleonWareItems();
     sub_8013984(&gUnknown_203B21C->input);
     sub_801A430();
@@ -1239,7 +1239,7 @@ void sub_801A3DC(void)
         gUnknown_203B220 = gUnknown_203B21C->input.menuIndex;
         gUnknown_203B21C->unk3C[gUnknown_203B21C->unk34] = gUnknown_80DB8FC;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B21C->unk3C, 1, 1);
+        sub_800641C(gUnknown_203B21C->unk3C, TRUE, TRUE);
         MemoryFree(gUnknown_203B21C);
         gUnknown_203B21C = NULL;
     }
@@ -1259,7 +1259,7 @@ void sub_801A430(void)
     gUnknown_203B21C->unk3C[gUnknown_203B21C->unk34].unkE = val;
     gUnknown_203B21C->unk3C[gUnknown_203B21C->unk34].unk10 = val + 2;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B21C->unk3C, 1, 1);
+    sub_800641C(gUnknown_203B21C->unk3C, TRUE, TRUE);
 }
 #else
 NAKED
@@ -1387,7 +1387,7 @@ bool32 sub_801A5D8(u32 param_1, s32 param_2, struct UnkTextStruct2_sub *param_3,
     sub_8012D08(gUnknown_203B224->unk8C, param_4);
     sub_8099690(1);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B224->unk90, 1, 1);
+    sub_800641C(gUnknown_203B224->unk90, TRUE, TRUE);
     sub_8013818(&gUnknown_203B224->input, GetNumberOfFilledInventorySlots(), param_4, param_2);
     gUnknown_203B224->input.menuIndex = gUnknown_203B228;
     gUnknown_203B224->input.unk1E = gUnknown_203B22A;
@@ -1488,7 +1488,7 @@ void sub_801A8D0(u8 r0)
 {
     sub_8099690(1);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B224->unk90, 0, 0);
+    sub_800641C(gUnknown_203B224->unk90, FALSE, FALSE);
     FillInventoryGaps();
     gUnknown_203B224->input.unk22 = GetNumberOfFilledInventorySlots();
     sub_8013984(&gUnknown_203B224->input);
@@ -1506,7 +1506,7 @@ void sub_801A928(void)
         gUnknown_203B224->unk90[gUnknown_203B224->unk88] = gUnknown_80DB944;
         sub_8099690(0);
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B224->unk90, 1, 1);
+        sub_800641C(gUnknown_203B224->unk90, TRUE, TRUE);
         MemoryFree(gUnknown_203B224);
         gUnknown_203B224 = NULL;
     }
@@ -1519,7 +1519,7 @@ void sub_801A998(void)
     gUnknown_203B224->unkF0[2] = 11;
     gUnknown_203B224->unkF0[3] = 0;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B224->unk90, 1, 1);
+    sub_800641C(gUnknown_203B224->unk90, TRUE, TRUE);
 }
 
 void sub_801A9E0(void)

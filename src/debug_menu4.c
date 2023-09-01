@@ -126,7 +126,7 @@ void sub_803ACE8(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B3F8->unkE0, 1, 1);
+    sub_800641C(sUnknown_203B3F8->unkE0, TRUE, TRUE);
 }
 
 void sub_803AD88(void)

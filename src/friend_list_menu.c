@@ -279,7 +279,7 @@ void sub_802544C(void)
 
   }
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B2B4->unk118,1,1);
+  sub_800641C(gUnknown_203B2B4->unk118, TRUE, TRUE);
 }
 
 void sub_8025518(void)

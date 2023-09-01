@@ -36,7 +36,7 @@ extern struct UnkTextStruct2 gUnknown_80DC5BC;
 bool8 sub_80227B8(struct PokemonStruct *pokeStruct)
 {
     ResetUnusedInputStruct();
-    sub_800641C(NULL, 1, 1);
+    sub_800641C(NULL, TRUE, TRUE);
     gUnknown_203B294 = MemoryAlloc(sizeof(struct unkStruct_203B294), 8);
     gUnknown_203B294->menuAction = 0;
     gUnknown_203B294->pokeStruct = pokeStruct;
@@ -136,6 +136,6 @@ void sub_802293C(void) {
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B294->unk148, 1, 1);
+    sub_800641C(gUnknown_203B294->unk148, TRUE, TRUE);
 
 }

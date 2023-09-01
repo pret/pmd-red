@@ -86,7 +86,7 @@ u32 sub_802B2D4(void)
   struct OpenedFile *faceFile;
 
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
+  sub_800641C(NULL, TRUE, TRUE);
   gUnknown_203B2C8 = MemoryAlloc(sizeof(struct unkStruct_203B2C8),8);
   MemoryFill8((u8 *)gUnknown_203B2C8,0,sizeof(struct unkStruct_203B2C8));
   gUnknown_203B2C8->unk1 = -1;

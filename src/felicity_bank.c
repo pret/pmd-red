@@ -48,7 +48,7 @@ u32 CreateFelicityBank(s32 isAsleep)
   struct OpenedFile * faceFile;
   
   ResetUnusedInputStruct();
-  sub_800641C(0, 1, 1);
+  sub_800641C(NULL, TRUE, TRUE);
   gFelicityBankWork = MemoryAlloc(sizeof(struct FelicityBankWork), 8);
   gFelicityBankWork->menuAction = 0;
   gFelicityBankWork->isAsleep = isAsleep;
@@ -135,7 +135,7 @@ void sub_801645C(void)
             gFelicityBankWork->unkA8[2].unk0 = 0x80;
             gFelicityBankWork->unkA8[3] = gUnknown_80DB6F4;
             ResetUnusedInputStruct();
-            sub_800641C(gFelicityBankWork->unkA8, 1, 0);
+            sub_800641C(gFelicityBankWork->unkA8, TRUE, FALSE);
             break;
         case 8:
         case 11:
@@ -144,14 +144,14 @@ void sub_801645C(void)
             gFelicityBankWork->unkA8[3] = gUnknown_80DB6F4;
             gFelicityBankWork->unkA8[2] = gUnknown_80DB70C;
             ResetUnusedInputStruct();
-            sub_800641C(gFelicityBankWork->unkA8, 1, 0);
+            sub_800641C(gFelicityBankWork->unkA8, TRUE, FALSE);
             break;
         default:
             for (index = 0; index < 4; index++) {
                 gFelicityBankWork->unkA8[index] = gUnknown_80DB6DC;
             }
             ResetUnusedInputStruct();
-            sub_800641C(gFelicityBankWork->unkA8, 1, 1);
+            sub_800641C(gFelicityBankWork->unkA8, TRUE, TRUE);
             break;
     }
 }

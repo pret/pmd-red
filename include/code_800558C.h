@@ -23,6 +23,7 @@ void nullsub_14(void);
 void sub_8005610(struct OpenedFile *, s32, s32, u8 *);
 void sub_8005770(s32, u8 *, s32, u8 *);
 void sub_80057E8(void);
+void sub_8005838(s32 *, u8);
 void sub_80060EC(void);
 
 #endif // GUARD_CODE_800558C_H

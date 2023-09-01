@@ -181,7 +181,7 @@ bool8 CreateWonderMailMenu(void)
   s32 index;
 
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
+  sub_800641C(NULL, TRUE, TRUE);
 
   gUnknown_203B3E8 = MemoryAlloc(sizeof(struct unkStruct_203B3E8), 8);
   MemoryFill8((u8 *)gUnknown_203B3E8, 0, sizeof(struct unkStruct_203B3E8));
@@ -417,7 +417,7 @@ void HandlePasswordEntryScreen(void)
     case 3:
       sub_80155F0();
       ResetUnusedInputStruct();
-      sub_800641C(gUnknown_203B3E8->unk1EC,1,1);
+      sub_800641C(gUnknown_203B3E8->unk1EC, TRUE, TRUE);
       if ( !DecodeWonderMailPassword(gUnknown_203B3E8->PasswordEntryBuffer, &gUnknown_203B3E8->UNK38.decodedMail) || !IsValidWonderMail(&gUnknown_203B3E8->UNK38.decodedMail) )
       {
         // Invalid password
@@ -435,7 +435,7 @@ void HandlePasswordEntryScreen(void)
     case 2:
         sub_80155F0();
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B3E8->unk1EC,1,1);
+        sub_800641C(gUnknown_203B3E8->unk1EC, TRUE, TRUE);
         SetWonderMailMainMenuState(EXIT_TO_MAIN_MENU);
         break;
   }
@@ -542,7 +542,7 @@ void WonderMailMainMenuCallback(void)
         break;
     case 3:
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_802EF48();
         break;
     case RECEIVE_WONDER_MAIL_MAIN_SCREEN:
@@ -646,7 +646,7 @@ void WonderMailMainMenuCallback(void)
     case PASSWORD_ENTRY_SCREEN:
         sub_8006518(gUnknown_203B3E8->unk1EC);
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_80151C0(5,gUnknown_203B3E8->PasswordEntryBuffer);
         break;
     case PASSWORD_INVALID:
