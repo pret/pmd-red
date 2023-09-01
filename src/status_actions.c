@@ -1,6 +1,6 @@
 #include "global.h"
 #include "status_actions.h"
-
+#include "code_806CD90.h"
 #include "code_80521D0.h"
 #include "code_8077274_1.h"
 #include "code_808417C.h"
@@ -45,7 +45,6 @@ extern void sub_8042A64(struct Position *);
 extern void sub_8040A84(void);
 extern void sub_8049ED4(void);
 extern void sub_80498A8(s32, s32);
-extern void sub_806CF60();
 extern void sub_8042A54(struct Position *);
 extern void sub_8049BB0(s32, s32);
 extern s16 sub_8057600(struct Move*, u32);

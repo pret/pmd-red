@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_806CD90.h"
 #include "dungeon_ai_attack.h"
 
 #include "constants/direction.h"

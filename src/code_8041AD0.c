@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_806CD90.h"
 #include "constants/direction.h"
 #include "constants/status.h"
 #include "constants/type.h"
@@ -34,7 +35,6 @@ extern void sub_803ED30(u8, struct Entity *pokemon, u8, u8);
 extern void sub_804151C(struct Entity *pokemon, u32 r1, u8 r2);
 extern void sub_80416E0(struct Entity *pokemon, u32, u32);
 extern u8 sub_8042768(struct Entity *pokemon);
-extern void sub_806CDD4(struct Entity *pokemon, u8, u32);
 extern u32 sub_806F62C(u32);
 extern void PlaySoundEffect(u32);
 extern u8 sub_803F428(struct Position *pos);

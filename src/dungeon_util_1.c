@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_806CD90.h"
 #include "dungeon_util_1.h"
 
 #include "constants/direction.h"
@@ -10,7 +11,6 @@
 
 extern const u8 gUnknown_8107358[25];
 
-extern void sub_806CE68(struct Entity *, u32);
 extern void sub_804535C(struct Entity *, u32);
 extern s32 GetCameraXPos(void);
 extern s32 GetCameraYPos(void);

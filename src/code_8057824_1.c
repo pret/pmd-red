@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_806CD90.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
 #include "constants/friend_area.h"
@@ -324,9 +325,7 @@ extern void sub_8086598(void);
 extern void SpriteLookAroundEffect(struct Entity *);
 extern void SpriteShockEffect(struct Entity *);
 extern void PlaySoundEffect(u32);
-extern void sub_806CDD4(struct Entity *, u32, u32);
 extern void sub_80869E4(struct Entity *, u32, u32, u32);
-extern void sub_806CE68(struct Entity *, u32);
 extern void IncreaseEntityPixelPos(struct Entity *, u32, u32);
 extern void sub_8042B0C(struct Entity *);
 extern void DisplayDungeonDialogue(u32 *);
@@ -443,7 +442,6 @@ extern u8 sub_8086AE4(u32);
 
 extern void sub_8072008(struct Entity *, struct Entity *, s16, u32, u32);
 extern void sub_80869E4(struct Entity *, u32, u32, u32);
-extern void sub_806CDD4(struct Entity *, u32, u32);
 extern void sub_8085374();
 
 extern void sub_8086848(u32 ,u32);

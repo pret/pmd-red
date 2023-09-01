@@ -1,6 +1,5 @@
 #include "global.h"
-
-
+#include "code_806CD90.h"
 #include "constants/ability.h"
 #include "constants/dungeon_action.h"
 #include "constants/direction.h"
@@ -69,7 +68,6 @@ extern u8 *gUnknown_80FB564[];
 extern u8 *gUnknown_80FB548[];
 extern u8 *gUnknown_80FCE84[];
 extern u8 *gUnknown_80FCE5C[];
-extern const u8 gDungeonWaterType[];
 extern u8 *gUnknown_80FD524[];
 extern s16 gUnknown_80F4E34[];
 extern u8 *gUnknown_80FCEDC[];
@@ -135,7 +133,6 @@ extern void sub_8076CB4(s32);
 extern void sub_8041F08(struct Entity *);
 extern void sub_8041C7C(struct Entity *);
 extern void sub_8041C6C(struct Entity *);
-extern void sub_806CE94(struct Entity *, u32);
 extern void sub_8041C34(struct Entity *);
 extern void sub_8041EF8(struct Entity *);
 extern void sub_8041EE8(struct Entity *);
@@ -146,7 +143,6 @@ extern void SetMessageArgument(char[], struct Entity*, u32);
 extern void SetMessageArgument_2(char[], struct EntityInfo*, u32);
 extern void sub_8041AF4(struct Entity *);
 extern void sub_80522F4(struct Entity *r1, struct Entity *r2, u8 *);
-extern void sub_806CE68(struct Entity *, s32);
 extern void nullsub_91(struct Entity *);
 extern void nullsub_90(struct Entity *);
 extern void nullsub_72(struct Entity *);

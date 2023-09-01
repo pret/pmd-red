@@ -35,8 +35,8 @@ static const u8 sFill1[] = "pksdir0";
 // ???
 extern u32 gUnknown_202DE30;
 
-static void sub_8032084();
 static void DisplayAdventureLog();
+static void sub_8032084();
 
 bool8 CreateAdventureLogScreen(u32 kind)
 {

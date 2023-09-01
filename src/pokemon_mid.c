@@ -1,6 +1,7 @@
 #include "global.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
+#include "pokemon_mid.h"
 #include "file_system.h"
 #include "item.h"
 #include "moves.h"

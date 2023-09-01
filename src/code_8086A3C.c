@@ -1,5 +1,6 @@
 #include "constants/monster.h"
 #include "global.h"
+#include "code_806CD90.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
 #include "dungeon_entity.h"
@@ -18,7 +19,6 @@ extern void sub_8085374();
 extern void sub_80855E4(void *);
 extern void sub_8068FE0(struct Entity *, u32, u32);
 extern void DisplayDungeonDialogue(u8 *);
-extern void sub_806CDD4(struct Entity *, u32, u32);
 extern void sub_80869E4(struct Entity *, u32, u32, u32);
 extern void sub_803E708(u32, u32);
 extern void sub_8086448(void);

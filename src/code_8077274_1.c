@@ -1,23 +1,24 @@
 #include "global.h"
+#include "code_80521D0.h"
+#include "code_805D8C8.h"
+#include "code_806CD90.h"
+#include "code_8077274_1.h"
+#include "code_808417C.h"
 #include "constants/ability.h"
 #include "constants/item.h"
 #include "constants/status.h"
 #include "constants/type.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
+#include "dungeon_items.h"
 #include "dungeon_movement.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
-#include "dungeon_items.h"
 #include "dungeon_util.h"
-#include "code_80521D0.h"
-#include "code_8077274_1.h"
-#include "code_808417C.h"
 #include "moves.h"
 #include "move_effects_target.h"
 #include "pokemon.h"
 #include "status_checks_1.h"
-#include "code_805D8C8.h"
 
 extern u8 gAvailablePokemonNames[0x58];
 extern u8 gUnknown_202DFE8[0x58];
@@ -166,18 +167,14 @@ extern u8 *gUnknown_80FBF84[];
 extern void sub_8049ED4();
 extern void sub_8040A84();
 extern void sub_803E46C(u32);
-extern u8 sub_806CEBC(struct Entity *);
-extern void sub_806CCB4(struct Entity *, u8);
 extern void SetMessageArgument(u8 *buffer, struct Entity *r1, u32);
 extern void sub_80522F4(struct Entity *pokemon, struct Entity *r1, const char[]);
 extern void EntityUpdateStatusSprites(struct Entity *);
 extern void sub_8042A74(struct Entity *r0);
 extern void sub_807EC28(bool8);
 extern s32 sub_8069F54(struct Entity *param_1, s16 param_2);
-extern struct OpenedFile *sub_80687D0(s16);
 extern void sub_806A898(struct Entity *, u32, u32);
 extern void HealTargetHP(struct Entity *pokemon, struct Entity *r1, s16, s16, u32);
-extern void sub_806CE68(struct Entity *, s32);
 extern void sub_806F324(struct Entity *, s16, u32, u32);
 extern void sub_806BFC0(struct EntityInfo *, u32);
 extern void sub_80420C8(struct Entity *r0);
@@ -212,7 +209,6 @@ extern void nullsub_86(struct Entity *);
 extern void sub_8041E0C(struct Entity *);
 extern void sub_8041DD8(struct Entity *r0, s32 r1); // NOTE: is s16 in another file
 extern s32 sub_803D870(void *, u32);
-extern void sub_806CF98(struct Entity *);
 extern bool8 sub_806AA0C(s32, u32);
 u32 ExtractSpeciesIndex(struct PokemonStruct **r0); // TODO: look more into this and fix it.
 

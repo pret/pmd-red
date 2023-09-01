@@ -1,5 +1,6 @@
 #include "global.h"
 #include "status.h"
+#include "code_806CD90.h"
 #include "constants/ability.h"
 #include "constants/status.h"
 #include "constants/type.h"
@@ -125,10 +126,8 @@ extern void sub_8041D5C(struct Entity *);
 extern void RaiseAttackStageTarget(struct Entity *, struct Entity *, u32, u32);
 extern void RaiseDefenseStageTarget(struct Entity *, struct Entity *, u32, u32);
 extern void sub_8041D48(struct Entity *);
-extern u8 sub_806CEBC(struct Entity *);
 extern void sub_8041D38(struct Entity * pokemon);
 extern void sub_803E46C(u32);
-extern void sub_806CCB4(struct Entity *, u8);
 extern u8 sub_8043D10(void);
 extern void sub_8041CDC(struct Entity *pokemon);
 extern void sub_8041CEC(struct Entity *pokemon);

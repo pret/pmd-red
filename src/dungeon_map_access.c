@@ -25,7 +25,6 @@ extern struct OpenedFile *gUnknown_202F18C;
 extern struct OpenedFile *gDungeonPaletteFile;
 extern struct unkStruct_202EE8C gUnknown_202EE8C[32];
 extern u8 gWalkableTileToCrossableTerrain[8];
-extern const u8 gDungeonWaterType[];
 extern u8 sub_8043CE4(u32);
 
 extern int sprintf(char *, const char *, ...);

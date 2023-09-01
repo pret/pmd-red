@@ -1,6 +1,6 @@
 #include "global.h"
 #include "tile_types.h"
-
+#include "code_806CD90.h"
 #include "dungeon_global_data.h"
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
@@ -87,7 +87,6 @@ const u8 gDungeonWaterType[] = {
 extern void sub_80498A8(s32, s32);
 extern void sub_80402AC(s32, s32);
 extern void sub_8049BB0(s32, s32);
-extern u32 sub_806CF98(struct Entity *);
 void sub_8042A14(struct Position *);
 extern void sub_8049ED4(void);
 

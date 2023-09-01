@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_806CD90.h"
 #include "constants/ability.h"
 #include "constants/move_id.h"
 #include "constants/status.h"
@@ -97,7 +98,6 @@ extern s16 gUnknown_80F501A[];
 extern u32 sub_8055864(struct Entity *pokemon, struct Entity *target, struct Move *param_3, s32 param_4, s32 param_5);
 extern void sub_80943A0(void*, s32);
 extern s16 sub_8057600(struct Move*, u32);
-extern void sub_806CDD4(struct Entity *, u32, u32);
 extern u8 sub_8044B28(void);
 extern u8 sub_803F428(struct Position *pos);
 extern void IncreaseEntityPixelPos(struct Entity *, u32, u32);

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_806CD90.h"
 #include "constants/direction.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
@@ -40,8 +41,6 @@ extern s32 GetCameraYPos(void);
 extern void sub_803F878(u32, u32);
 extern void sub_8086384(struct Entity *entity);
 extern void IncreaseEntityPixelPos(struct Entity *, u32, u32);
-extern void sub_806CE68(struct Entity *, u32);
-extern void sub_806CDD4(struct Entity *, u8, u32);
 extern void sub_804535C(struct Entity *, struct Position32 *);
 extern void sub_8086A54(struct Entity *);
 extern void sub_8086A3C(struct Entity *);
