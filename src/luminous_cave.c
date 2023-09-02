@@ -13,130 +13,25 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "random.h"
-
 #include "text_util.h"
 #include "text1.h"
 #include "text2.h"
 
 EWRAM_DATA_2 struct unkStruct_203B2B0 *gUnknown_203B2B0 = {0};
-extern UnkTextStruct2 gUnknown_80DCA00;
-extern UnkTextStruct2 gUnknown_80DC9E8;
+
 extern u8 gPlayerName[];
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DFE8[];
 
-extern u8 *gUnknown_80D4970[];
-extern u8 *gUnknown_80D4934[];
+extern const u8 *gUnknown_80D4934[];
+extern const u8 *gUnknown_80D4970[];
+extern const UnkTextStruct2 gUnknown_80DC9E8;
+extern const UnkTextStruct2 gUnknown_80DCA00;
+extern const u8 gUnknown_80DCA18[];
+extern const u8 gUnknown_80DCA24[];
+extern const u8 gUnknown_80DCA2C[];
 
-extern u8 gUnknown_80DCA18[];
-extern u8 gUnknown_80DCA24[];
-extern u8 gUnknown_80DCA2C[];
-
-ALIGNED(4) const u8 gLuminousCaveSeekAwakening[] = _(
-	 "{CENTER_ALIGN}...{WAIT_PRESS}A voice emanates from somewhere...{EXTRA_MSG}"
-	 "{CENTER_ALIGN}...Ye who seek awakening...{EXTRA_MSG}"
-	 "{CENTER_ALIGN}This is Luminous Cave.{WAIT_PRESS}\n"
-	 "{CENTER_ALIGN}Do ye seek a new evolution?");
-
-ALIGNED(4) const u8 gLuminousCaveAskEvolution[] = _(
-	 "{CENTER_ALIGN}Do ye seek evolution?");
-
-ALIGNED(4) const u8 gLuminousCaveEvolutionInfo[] = _(
-	 "{CENTER_ALIGN}There are those among Pokémon\n"
-	 "{CENTER_ALIGN}that can evolve.{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Such Pokémon can evolve at this very\n"
-	 "{CENTER_ALIGN}spot if they satisfy certain conditions.{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Evolution brings about changes\n"
-	 "{CENTER_ALIGN}in appearance and abilities.{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Not only that{COMMA} some Pokémon even change\n"
-	 "{CENTER_ALIGN}type and learn different moves.{EXTRA_MSG}"
-	 "{CENTER_ALIGN}However...{WAIT_PRESS} The requirements for\n"
-	 "{CENTER_ALIGN}evolution differ among Pokémon.{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Some become ready for evolution\n"
-	 "{CENTER_ALIGN}merely by leveling up.{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Still others may need special items\n"
-	 "{CENTER_ALIGN}to attain evolution.{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Ye must also be aware of this:{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Once it has evolved{COMMA} a Pokémon\n"
-	 "{CENTER_ALIGN}can never regain its previous form.{EXTRA_MSG}"
-	 "{CENTER_ALIGN}That is why ye must think carefully\n"
-	 "{CENTER_ALIGN}before committing to evolution.");
-
-ALIGNED(4) const u8 gLuminousCaveYeShallReturn[] = _(
-	 "{CENTER_ALIGN}Ye shall return if evolution\n"
-	 "{CENTER_ALIGN}is what ye seek...");
-
-ALIGNED(4) const u8 gLuminousCaveGiveItem[] = _(
-	 "{CENTER_ALIGN}Will ye give an item for evolution?");
-
-ALIGNED(4) const u8 gLuminousCaveGiveAnotherItem[] = _(
-	 "{CENTER_ALIGN}Will ye give yet another item?");
-
-ALIGNED(4) const u8 gLuminousCaveLackWhatIsNeeded[] = _(
-	 "{CENTER_ALIGN}Alas{COMMA} ye seem to lack what is needed\n"
-	 "{CENTER_ALIGN}for evolution.");
-
-ALIGNED(4) const u8 gLuminousCaveOnlyOneItem[] = _(
-	 "{CENTER_ALIGN}Ye seem to have but one item.");
-
-ALIGNED(4) const u8 gLuminousCaveLetUsBegin[] = _(
-	 "{CENTER_ALIGN}...Ye who seek awakening...\n"
-	 "{CENTER_ALIGN}Let us begin.");
-
-ALIGNED(4) const u8 gLuminousCaveChangedAppearance[] = _(
-	 "{CENTER_ALIGN}...{WAIT_PRESS}$n0 is undergoing changes...{EXTRA_MSG}"
-	 "{CENTER_ALIGN}$n0{APOSTROPHE}s appearance changed...{EXTRA_MSG}");
-
-ALIGNED(4) const u8 gLuminousCaveEvolved[] = _(
-	 "{CENTER_ALIGN}It evolved from {COLOR_1 GREEN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}\n"
-	 "{CENTER_ALIGN}to {COLOR_1 YELLOW}{ARG_POKEMON_1}{END_COLOR_TEXT_1}!");
-
-ALIGNED(4) const u8 gLuminousCaveComeAlone[] = _(
-	 "{CENTER_ALIGN}...{EXTRA_MSG}"
-	 "{CENTER_ALIGN}One cannot evolve if one\n"
-	 "{CENTER_ALIGN}is in the company of others.{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Come alone if ye wish to evolve.");
-
-ALIGNED(4) const u8 gLuminousCaveLackLevel[] = _(
-	 "{CENTER_ALIGN}...{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Ye cannot evolve yet.{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Ye have not high enough a level.");
-
-ALIGNED(4) const u8 gLuminousCaveCantEvolveAnymore[] = _(
-	 "{CENTER_ALIGN}...{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Ye cannot evolve anymore.");
-
-ALIGNED(4) const u8 gLuminousCaveLackFriendArea[] = _(
-	 "{CENTER_ALIGN}...{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Ye cannot evolve yet.{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Ye need your Friend Area to evolve.");
-
-ALIGNED(4) const u8 gLuminousCaveLackRoom[] = _(
-	 "{CENTER_ALIGN}...{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Ye cannot evolve yet.{EXTRA_MSG}"
-	 "{CENTER_ALIGN}The Friend Area to which ye shall go\n"
-	 "{CENTER_ALIGN}has no room for ye.");
-
-ALIGNED(4) const u8 gLuminousCaveLackIQ[] = _(
-	 "{CENTER_ALIGN}...{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Ye cannot evolve yet.{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Ye seem to lack the IQ to evolve.");
-
-ALIGNED(4) const u8 gLuminousCaveLackItem[] = _(
-	 "{CENTER_ALIGN}{CENTER_ALIGN}...{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Ye cannot evolve yet.{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Ye seem to lack an item to evolve.");
-
-ALIGNED(4) const u8 gLuminousCaveCantEvolveYet[] = _(
-	 "{CENTER_ALIGN}{CENTER_ALIGN}...{EXTRA_MSG}"
-	 "{CENTER_ALIGN}Ye cannot evolve yet. ");
-
-ALIGNED(4) const u8 gLuminousCaveGiveName[] = _(
-	 "{CENTER_ALIGN}Ye must give a name to\n"
-	 "{CENTER_ALIGN}the evolved Pokémon. ");
-
-ALIGNED(4) static const u8 fill0[] = "pksdir0";
-ALIGNED(4) static const u8 fill1[] = "pksdir0";
+#include "data/luminous_cave.h"
 
 extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern void UpdateLuminousCaveState(u32);
@@ -330,25 +225,25 @@ void UpdateLuminousCaveDialogue(void)
             gUnknown_203B2B0->menuAction1 = 1;
         }
         sub_8024CFC();
-        sub_8014248(gLuminousCaveSeekAwakening,0,gUnknown_203B2B0->menuAction1,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
+        sub_8014248(sLuminousCaveSeekAwakening,0,gUnknown_203B2B0->menuAction1,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
         break;
     case LUMINOUS_CAVE_ASK_EVOLVE:
         sub_8024CFC();
-        sub_8014248(gLuminousCaveAskEvolution,0,gUnknown_203B2B0->menuAction1,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
+        sub_8014248(sLuminousCaveAskEvolution,0,gUnknown_203B2B0->menuAction1,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
         break;
     case LUMINOUS_CAVE_EVOLVE_INFO:
         gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_ASK_EVOLVE;
-        sub_80141B4(gLuminousCaveEvolutionInfo,0,0,0x105);
+        sub_80141B4(sLuminousCaveEvolutionInfo,0,0,0x105);
         break;
     case LUMINOUS_CAVE_SHALL_RETURN:
         gUnknown_203B2B0->fallbackState = 4;
         xxx_call_fade_in_new_bgm(MUS_FILE_SELECT,0x3c);
-        sub_80141B4(gLuminousCaveYeShallReturn,0,0,0x305);
+        sub_80141B4(sLuminousCaveYeShallReturn,0,0,0x305);
         break;
 
     case LUMINOUS_CAVE_GIVE_ITEM_1:
         sub_8024D48();
-        sub_8014248(gLuminousCaveGiveItem,0,gUnknown_203B2B0->menuAction2,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
+        sub_8014248(sLuminousCaveGiveItem,0,gUnknown_203B2B0->menuAction2,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
         break;
     case 6:
         sub_801A5D8(2,3,0,10);
@@ -358,7 +253,7 @@ void UpdateLuminousCaveDialogue(void)
         break;
     case LUMINOUS_CAVE_GIVE_ITEM_2:
         sub_8024DBC();
-        sub_8014248(gLuminousCaveGiveAnotherItem,0,gUnknown_203B2B0->menuAction2,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
+        sub_8014248(sLuminousCaveGiveAnotherItem,0,gUnknown_203B2B0->menuAction2,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
         break;
     case 0xb:
         sub_801A5D8(2,3,0,10);
@@ -383,11 +278,11 @@ void UpdateLuminousCaveDialogue(void)
         break;
     case LUMINOUS_CAVE_LACK_WHAT_NEEDED:
         gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_GIVE_ITEM_1;
-        sub_80141B4(gLuminousCaveLackWhatIsNeeded,0,0,0x105);
+        sub_80141B4(sLuminousCaveLackWhatIsNeeded,0,0,0x105);
         break;
     case LUMINOUS_CAVE_ONLY_ONE_ITEM:
         gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_GIVE_ITEM_2;
-        sub_80141B4(gLuminousCaveOnlyOneItem,0,0,0x105);
+        sub_80141B4(sLuminousCaveOnlyOneItem,0,0,0x105);
         break;
     case LUMINOUS_CAVE_LET_US_BEGIN:
         sub_8025254();
@@ -409,13 +304,13 @@ void UpdateLuminousCaveDialogue(void)
         else
             gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_CANT_EVOLVE_YET;
         xxx_call_fade_out_bgm(0x3c);
-        sub_80141B4(gLuminousCaveLetUsBegin,0,0,0x105);
+        sub_80141B4(sLuminousCaveLetUsBegin,0,0,0x105);
         break;
     case LUMINOUS_CAVE_CHANGED_APPEARANCE:
         PrintColoredPokeNameToBuffer(gPlayerName,gUnknown_203B2B0->pokeStruct, COLOR_CYAN);
         PlaySound(0x1ff);
         gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_EVOLVED;
-        sub_80141B4(gLuminousCaveChangedAppearance,0,0,0x105);
+        sub_80141B4(sLuminousCaveChangedAppearance,0,0,0x105);
         break;
     case LUMINOUS_CAVE_EVOLVED:
         monName = GetMonSpecies(gUnknown_203B2B0->pokeStruct->speciesNum);
@@ -440,44 +335,44 @@ void UpdateLuminousCaveDialogue(void)
                 BoundedCopyStringtoBuffer(gUnknown_203B2B0->pokeStruct->name,GetMonSpecies(gUnknown_203B2B0->pokeStruct->speciesNum),POKEMON_NAME_LENGTH);
         }
         gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-        sub_80141B4(gLuminousCaveEvolved,0,0,0x105);
+        sub_80141B4(sLuminousCaveEvolved,0,0,0x105);
         break;
     case LUMINOUS_CAVE_COME_ALONE:
         gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-        sub_80141B4(gLuminousCaveComeAlone,0,0,0x105);
+        sub_80141B4(sLuminousCaveComeAlone,0,0,0x105);
         break;
     case LUMINOUS_CAVE_LACK_LEVEL:
         gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-        sub_80141B4(gLuminousCaveLackLevel,0,0,0x105);
+        sub_80141B4(sLuminousCaveLackLevel,0,0,0x105);
         break;
     case LUMINOUS_CAVE_CANT_EVOLVE_ANYMORE:
         gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-        sub_80141B4(gLuminousCaveCantEvolveAnymore,0,0,0x105);
+        sub_80141B4(sLuminousCaveCantEvolveAnymore,0,0,0x105);
         break;
     case LUMINOUS_CAVE_LACK_FRIEND_AREA:
         gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-        sub_80141B4(gLuminousCaveLackFriendArea,0,0,0x105);
+        sub_80141B4(sLuminousCaveLackFriendArea,0,0,0x105);
         break;
     case LUMINOUS_CAVE_LACK_ROOM:
         gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-        sub_80141B4(gLuminousCaveLackRoom,0,0,0x105);
+        sub_80141B4(sLuminousCaveLackRoom,0,0,0x105);
         break;
     case LUMINOUS_CAVE_LACK_IQ:
         gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-        sub_80141B4(gLuminousCaveLackIQ,0,0,0x105);
+        sub_80141B4(sLuminousCaveLackIQ,0,0,0x105);
         break;
     case LUMINOUS_CAVE_LACK_ITEM:
         gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-        sub_80141B4(gLuminousCaveLackItem,0,0,0x105);
+        sub_80141B4(sLuminousCaveLackItem,0,0,0x105);
         break;
     case LUMINOUS_CAVE_CANT_EVOLVE_YET:
         gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-        sub_80141B4(gLuminousCaveCantEvolveYet,0,0,0x105);
+        sub_80141B4(sLuminousCaveCantEvolveYet,0,0,0x105);
         break;
     case LUMINOUS_CAVE_PROMPT_NAME:
         xxx_call_fade_in_new_bgm(8,0x3c);
         gUnknown_203B2B0->fallbackState = LUMINOUS_CAVE_FINISH_NAME;
-        sub_80141B4(gLuminousCaveGiveName,0,0,0x105);
+        sub_80141B4(sLuminousCaveGiveName,0,0,0x105);
         break;
     case LUMINOUS_CAVE_FINISH_NAME:
         if (gUnknown_203B2B0->pokeRenamed) {
