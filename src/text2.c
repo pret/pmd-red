@@ -10,28 +10,28 @@ extern const struct unkStruct_80B8824 gUnknown_80B8824;
 extern const struct unkStruct_80B8848 gUnknown_80B8848;
 
 // text.s
-extern void sub_8007E64(struct UnkTextStruct1 *, u16 *, u32, u32, u32, u32, u32, u8 *, u32);
-extern void sub_8008C6C(struct UnkTextStruct1 *, u32);
+extern void sub_8007E64(UnkTextStruct1 *, u16 *, u32, u32, u32, u32, u32, u8 *, u32);
+extern void sub_8008C6C(UnkTextStruct1 *, u32);
 
 void nullsub_129(u32, s32, s32, s32, u32);
-u32 xxx_draw_char(struct UnkTextStruct1 *, s32, s32, u32, u32, u32);
+u32 xxx_draw_char(UnkTextStruct1 *, s32, s32, u32, u32, u32);
 
-void sub_800677C(struct UnkTextStruct1 *, s32, u16 *, u8);
-void sub_80069CC(struct UnkTextStruct1 *, s32, s32, s32, u16 *);
-void sub_8006AC4(struct UnkTextStruct1 *, s32, s32, s32, u16 *);
-void sub_8006B70(struct UnkTextStruct1 *, s32, s32, s32, u16 *);
-void sub_8006C44(struct UnkTextStruct1 *, s32, u16 *, u8);
-void sub_8006E94(struct UnkTextStruct1 *, s32, u32, const u8 *, u16 *);
-void sub_8007958(struct UnkTextStruct1 *, u32, s32, s32, s32, u32);
-void sub_8007AA4(struct UnkTextStruct1 *, u32, s32, s32, s32, u32);
-void sub_8007BA8(struct UnkTextStruct1 *, u32, s32, s32, s32, s32);
-void sub_8007D00(struct UnkTextStruct1 *, u32, s32, s32, s32, s32);
+void sub_800677C(UnkTextStruct1 *, s32, u16 *, u8);
+void sub_80069CC(UnkTextStruct1 *, s32, s32, s32, u16 *);
+void sub_8006AC4(UnkTextStruct1 *, s32, s32, s32, u16 *);
+void sub_8006B70(UnkTextStruct1 *, s32, s32, s32, u16 *);
+void sub_8006C44(UnkTextStruct1 *, s32, u16 *, u8);
+void sub_8006E94(UnkTextStruct1 *, s32, u32, const u8 *, u16 *);
+void sub_8007958(UnkTextStruct1 *, u32, s32, s32, s32, u32);
+void sub_8007AA4(UnkTextStruct1 *, u32, s32, s32, s32, u32);
+void sub_8007BA8(UnkTextStruct1 *, u32, s32, s32, s32, s32);
+void sub_8007D00(UnkTextStruct1 *, u32, s32, s32, s32, s32);
 
 void nullsub_152(void)
 {
 }
 
-void sub_8006518(struct UnkTextStruct2 *unkData)
+void sub_8006518(UnkTextStruct2 *unkData)
 {
     s32 iVar2;
     for (iVar2 = 0; iVar2 < 4; iVar2++)
@@ -48,9 +48,9 @@ u32 sub_8006544(u32 index)
 }
 
 // a1 is a VRAM pointer
-void sub_8006554(struct UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const struct UnkTextStruct2 *a5, bool8 a6, u32 a7, struct UnkTextStruct2_sub *a8, u8 a9)
+void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const UnkTextStruct2 *a5, bool8 a6, u32 a7, UnkTextStruct2_sub *a8, u8 a9)
 {
-    struct UnkTextStruct1 *t1;
+    UnkTextStruct1 *t1;
     s32 iVar3;
     s32 iVar5;
     s32 iVar6;
@@ -141,7 +141,7 @@ void sub_8006554(struct UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, c
     t1->unk46 = 0;
 }
 
-void sub_800677C(struct UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
+void sub_800677C(UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
 {
     s32 iVar5;
     s32 i;
@@ -214,7 +214,7 @@ void sub_800677C(struct UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
     }
 }
 
-void sub_80069CC(struct UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
+void sub_80069CC(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
 {
     if (a2 > 28)
         return;
@@ -255,7 +255,7 @@ void sub_80069CC(struct UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
     }
 }
 
-void sub_8006AC4(struct UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
+void sub_8006AC4(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
 {
     if (a2 > 28)
         return;
@@ -282,7 +282,7 @@ void sub_8006AC4(struct UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
     }
 }
 
-void sub_8006B70(struct UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
+void sub_8006B70(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
 {
     if (a2 > 28)
         return;
@@ -323,7 +323,7 @@ void sub_8006B70(struct UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
     }
 }
 
-void sub_8006C44(struct UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
+void sub_8006C44(UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
 {
     s32 iVar5;
     s32 i;
@@ -398,7 +398,7 @@ void sub_8006C44(struct UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
 
 #ifdef NONMATCHING
 // Not even close but I don't feel like continuing atm https://decomp.me/scratch/F58jg
-void sub_8006E94(struct UnkTextStruct1 *a0, s32 a1, u32 a2, const u8 *a3, u16 *a4)
+void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const u8 *a3, u16 *a4)
 {
     s32 bVar1;
     s32 iVar2;
@@ -582,7 +582,7 @@ void sub_8006E94(struct UnkTextStruct1 *a0, s32 a1, u32 a2, const u8 *a3, u16 *a
 }
 #else
 NAKED
-void sub_8006E94(struct UnkTextStruct1 *a0, s32 a1, u32 a2, const u8 *a3, u16 *a4)
+void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const u8 *a3, u16 *a4)
 {
     asm_unified(
     "\tpush {r4-r7,lr}\n"
@@ -1183,7 +1183,7 @@ void sub_8007334(s32 a0)
 {
     s32 r1;
     s32 r2;
-    struct UnkTextStruct1 *r3;
+    UnkTextStruct1 *r3;
     s32 r4;
     u32 r5;
     s32 r6;
@@ -1284,7 +1284,7 @@ void nullsub_154(void)
 
 void sub_80073B8(s32 a0)
 {
-    struct UnkTextStruct1 *r1;
+    UnkTextStruct1 *r1;
 
     r1 = &gUnknown_2027370[a0];
 
@@ -1300,7 +1300,7 @@ void nullsub_155(void)
 
 void sub_80073E0(s32 a0)
 {
-    struct UnkTextStruct1 *r1;
+    UnkTextStruct1 *r1;
 
     r1 = &gUnknown_2027370[a0];
 
@@ -1337,7 +1337,7 @@ bool8 sub_8007464(void)
 
 // https://decomp.me/scratch/F06Ty
 NAKED
-u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u32 a5)
+u32 xxx_draw_char(UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u32 a5)
 {
     asm_unified(
     "push {r4-r7,lr}\n"
@@ -1931,13 +1931,13 @@ void nullsub_129(u32 a0, s32 x, s32 y, s32 a3, u32 color)
 {
 }
 
-void sub_8007958(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color)
+void sub_8007958(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color)
 {
     u32 uVar4;
     u32 *dest;
     s32 r4;
     const struct unkShiftData *shiftData;
-    struct UnkTextStruct1 *r5;
+    UnkTextStruct1 *r5;
     s32 r6;
     u32 r9;
     struct unkStruct_80B8824 dataLOL;
@@ -2003,11 +2003,11 @@ void nullsub_157(void)
 }
 
 // https://decomp.me/scratch/4tFKb
-void sub_8007AA4(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color)
+void sub_8007AA4(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color)
 {
     s32 r2;
     s32 r3;
-    struct UnkTextStruct1 *r4;
+    UnkTextStruct1 *r4;
     u32 ip;
     u32 *dest;
     struct unkStruct_80B8848 dataLOL;
@@ -2059,7 +2059,7 @@ void nullsub_158(void)
 }
 
 #if NONMATCHING // https://decomp.me/scratch/AU1bH
-void sub_8007BA8(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
+void sub_8007BA8(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
 {
     s32 iVar1; // r1
     s32 iVar3;
@@ -2068,7 +2068,7 @@ void sub_8007BA8(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 co
     u32 *r4;
     u32 r5;
     u32 r6;
-    struct UnkTextStruct1 *ip;
+    UnkTextStruct1 *ip;
     s32 sp4;
     s32 sp8;
     u32 sp1C; // Used correctly
@@ -2131,7 +2131,7 @@ void sub_8007BA8(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 co
 }
 #else
 NAKED
-void sub_8007BA8(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
+void sub_8007BA8(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
 {
     asm_unified(
     "push {r4-r7,lr}\n"
@@ -2311,7 +2311,7 @@ void nullsub_159(void)
 }
 
 NAKED // Very similar to sub_8007BA8
-void sub_8007D00(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
+void sub_8007D00(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
 {
     asm_unified(
     "push {r4-r7,lr}\n"

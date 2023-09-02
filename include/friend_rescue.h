@@ -2,7 +2,7 @@
 #define GUARD_FRIEND_RESCUE_H
 
 #include "code_8094F88.h"
-#include "item.h"
+#include "items.h"
 #include "pokemon.h"
 #include "wonder_mail.h"
 #include "menu.h"
@@ -22,10 +22,10 @@ struct WonderMailStruct_203B33C
     struct unkStruct_203B480 unk1B8;
     struct unkStruct_203B480 unk1E8;
     u8 unk218;
-    struct MenuStruct unk21C[4];
-    struct UnkTextStruct2 unk35C[4];
-    struct UnkTextStruct2 unk3BC[4];
-    /* 0x41C */ struct Item item;
+    MenuStruct unk21C[4];
+    UnkTextStruct2 unk35C[4];
+    UnkTextStruct2 unk3BC[4];
+    /* 0x41C */ Item item;
     u32 unk420; // Is this supposed to be a File like 203B2C4?
     u8 unk424[0x100];
     s32 unk524;

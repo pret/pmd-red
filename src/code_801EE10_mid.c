@@ -13,18 +13,18 @@
 #include "code_801EE10_mid.h"
 #include "code_80118A4.h"
 
-extern struct unkStruct_203B270 *gUnknown_203B270;
+extern unkStruct_203B270 *gUnknown_203B270;
 
 struct unkStruct_203B274
 {
     // size: 0x3e8
-    struct PokemonStruct *pokeStruct;
-    struct unkStruct_808E218_arg *unk4;
-    struct unkStruct_808E218_arg unk8;
-    struct MenuInputStruct input;
+    PokemonStruct1 *pokeStruct;
+    unkStruct_808E218_arg *unk4;
+    unkStruct_808E218_arg unk8;
+    MenuInputStruct input;
     s32 unk37C;
-    struct UnkTextStruct2 *unk380;
-    struct UnkTextStruct2 unk384[4];
+    UnkTextStruct2 *unk380;
+    UnkTextStruct2 unk384[4];
     u8 unk3E4[4];
 };
 extern struct unkStruct_203B274 *gUnknown_203B274;
@@ -39,25 +39,25 @@ struct unkStruct_203B278
     s32 unk10;
     struct subStruct_203B240 *unk14[4];
     u32 unk24;
-    struct MenuInputStruct unk28;
+    MenuInputStruct unk28;
     u32 unk5C;
-    struct UnkTextStruct2 *unk60;
-    struct UnkTextStruct2 unk64[4];
+    UnkTextStruct2 *unk60;
+    UnkTextStruct2 unk64[4];
     u8 unkC4[4];
-    struct MenuInputStructSub unkC8;
+    MenuInputStructSub unkC8;
 };
 
 extern struct unkStruct_203B278 *gUnknown_203B278;
 
-extern struct UnkTextStruct2 gUnknown_80DC2C4;
-extern struct UnkTextStruct2 gUnknown_80DC2AC;
-extern struct UnkTextStruct2 gUnknown_80DC2F8;
+extern UnkTextStruct2 gUnknown_80DC2C4;
+extern UnkTextStruct2 gUnknown_80DC2AC;
+extern UnkTextStruct2 gUnknown_80DC2F8;
 
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_80DC310[];
 extern u8 gUnknown_80DC2DC[];
 
-extern void sub_80140B4(struct UnkTextStruct2 *);
+extern void sub_80140B4(UnkTextStruct2 *);
 extern void sub_801F918(s32);
 extern void sub_801FA58(void);
 extern void sub_801FAD4(void);

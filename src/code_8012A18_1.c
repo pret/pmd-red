@@ -14,7 +14,7 @@ struct unkStruct_203B200
     u32 unk4;
     u8 *pokeName;
     s32 state;
-    /* 0x10 */ struct MenuItem menus[3];
+    /* 0x10 */ MenuItem menus[3];
     u8 fill[0x50 - 0x28];
 };
 extern struct unkStruct_203B200 *gUnknown_203B200;

@@ -5,8 +5,8 @@
 #include "text1.h"
 #include "text2.h"
 #include "text_util.h"
-#include "item.h"
-#include "team_inventory.h"
+#include "items.h"
+
 #include "pokemon.h"
 #include "friend_rescue.h"
 #include "memory.h"
@@ -23,13 +23,13 @@
 #include "code_80118A4.h"
 
 extern void SetFriendRescueMenuState(u32);
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
+extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern void sub_802F2C0();
 extern u32 sub_802F298();
 
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
-extern struct TeamInventory *gTeamInventoryRef;
+extern TeamInventory *gTeamInventoryRef;
 
 extern u8 gUnknown_80E44A4[];
 extern u8 gUnknown_80E4500[];
@@ -137,37 +137,37 @@ extern u8 gUnknown_80E499C[];
 extern u8 gUnknown_80E460C[];
 extern u8 gUnknown_80E31FC[];
 
-extern struct MenuItem gUnknown_80E20B8;
-extern struct MenuItem gUnknown_80E2108;
-extern struct MenuItem gUnknown_80E20E0;
-extern struct MenuItem gUnknown_80E2068;
-extern struct MenuItem gUnknown_80E24F8;
-extern struct MenuItem gUnknown_80E2554;
-extern struct MenuItem gUnknown_80E22F0;
-extern struct MenuItem gUnknown_80E236C;
-extern struct MenuItem gUnknown_80E2440;
-extern struct MenuItem gUnknown_80E2470;
-extern struct MenuItem gUnknown_80E24B0;
-extern struct MenuItem gUnknown_80E2130;
-extern struct MenuItem gUnknown_80E2190;
-extern struct MenuItem gUnknown_80E21B8;
-extern struct MenuItem gUnknown_80E2268;
-extern struct MenuItem gUnknown_80E2218;
-extern struct MenuItem gUnknown_80E2240;
-extern struct MenuItem gUnknown_80E2290;
-extern struct MenuItem gUnknown_80E22D0;
-extern struct MenuItem gUnknown_80E234C;
-extern struct MenuItem gUnknown_80E24D8;
-extern struct MenuItem gUnknown_80E2458;
-extern struct MenuItem gUnknown_80E2408;
-extern struct MenuItem gUnknown_80E23A8;
-extern struct MenuItem gUnknown_80E22B4;
+extern MenuItem gUnknown_80E20B8;
+extern MenuItem gUnknown_80E2108;
+extern MenuItem gUnknown_80E20E0;
+extern MenuItem gUnknown_80E2068;
+extern MenuItem gUnknown_80E24F8;
+extern MenuItem gUnknown_80E2554;
+extern MenuItem gUnknown_80E22F0;
+extern MenuItem gUnknown_80E236C;
+extern MenuItem gUnknown_80E2440;
+extern MenuItem gUnknown_80E2470;
+extern MenuItem gUnknown_80E24B0;
+extern MenuItem gUnknown_80E2130;
+extern MenuItem gUnknown_80E2190;
+extern MenuItem gUnknown_80E21B8;
+extern MenuItem gUnknown_80E2268;
+extern MenuItem gUnknown_80E2218;
+extern MenuItem gUnknown_80E2240;
+extern MenuItem gUnknown_80E2290;
+extern MenuItem gUnknown_80E22D0;
+extern MenuItem gUnknown_80E234C;
+extern MenuItem gUnknown_80E24D8;
+extern MenuItem gUnknown_80E2458;
+extern MenuItem gUnknown_80E2408;
+extern MenuItem gUnknown_80E23A8;
+extern MenuItem gUnknown_80E22B4;
 
-extern struct UnkTextStruct2 gUnknown_80E231C;
-extern struct UnkTextStruct2 gUnknown_80E23F0;
-extern struct UnkTextStruct2 gUnknown_80E2334;
+extern UnkTextStruct2 gUnknown_80E231C;
+extern UnkTextStruct2 gUnknown_80E23F0;
+extern UnkTextStruct2 gUnknown_80E2334;
 
-extern struct MenuItem gUnknown_80E25B4;
+extern MenuItem gUnknown_80E25B4;
 
 EWRAM_DATA_2 struct WonderMailStruct_203B33C *gUnknown_203B33C = {0};
 
@@ -286,7 +286,7 @@ extern void sub_80151C0(u32, u8 *);
 extern u32 sub_801D008(void);
 extern u32 sub_8023CE8(void);
 extern void sub_802F204(struct unkStruct_802F204 *, u32);
-extern u32 sub_80306A8(u32 wonderMailType, u32, struct UnkTextStruct2_sub *, u32);
+extern u32 sub_80306A8(u32 wonderMailType, u32, UnkTextStruct2_sub *, u32);
 extern u32 sub_8030894(void);
 extern void sub_803092C(void);
 extern bool8 sub_8031D70(u32 mailIndex, s32);
@@ -295,11 +295,11 @@ extern s32 sub_8037D64(u32, void *, void *);
 extern s32 sub_80381F4(u32, void *, void *);
 
 extern s32 CountMailType(u8 mailType);
-extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
+extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
 struct unkStruct_203B480 * GetMailatIndex(u8 index);
 extern s32 GetMailIndex(u8 mailType, u32 param_2);
 extern char * GetMonSpecies(s16 index);
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
+extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern void MemoryFill8(u8 *dest, u8 value, s32 size);
 extern void ResetUnusedInputStruct(void);
 extern void sprintfStatic(char *buffer, const char *text, ...);
@@ -702,8 +702,8 @@ void sub_8032828(void)
     struct unkStruct_203B480 *mail;
     u32 temp;
     u8 buffer [80];
-    struct PokemonStruct *pokeStruct1;
-    struct PokemonStruct *pokeStruct2;
+    PokemonStruct1 *pokeStruct1;
+    PokemonStruct1 *pokeStruct2;
     char *monName;
     
     switch (gUnknown_203B33C->state) {
@@ -980,7 +980,7 @@ void sub_8032828(void)
                             pokeStruct1 = &gUnknown_203B33C->unkA8.pokemon;
                             pokeStruct2 = gRecruitedPokemonRef->pokemon;
                             pokeStruct2 += gUnknown_203B33C->speciesNum;
-                            memcpy(pokeStruct1, pokeStruct2, sizeof(struct PokemonStruct));
+                            memcpy(pokeStruct1, pokeStruct2, sizeof(PokemonStruct1));
                         }
                         gUnknown_203B33C->status = sub_8037D64(gUnknown_203B33C->unk40, &gUnknown_203B33C->unkA8, &gUnknown_203B33C->unk130);
                         break;
@@ -1068,7 +1068,7 @@ void sub_8032828(void)
                 ResetUnusedInputStruct();
                 sub_800641C(NULL, TRUE, TRUE);
                 {
-                struct UnkTextStruct2_sub local_x = {3, 2};
+                UnkTextStruct2_sub local_x = {3, 2};
                 sub_801C8C4(0, 1, &local_x, 9);
                 }
             }
@@ -2262,7 +2262,7 @@ void sub_8034848(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        MemoryFill8((u8 *)&gUnknown_203B33C->item, 0 , sizeof(struct Item));
+        MemoryFill8((u8 *)&gUnknown_203B33C->item, 0 , sizeof(Item));
         gUnknown_203B33C->item.id = ITEM_NOTHING;
         gUnknown_203B33C->item.quantity = 1;
         gUnknown_203B33C->item.flags = 0;
@@ -2292,7 +2292,7 @@ void sub_80348C4(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        MemoryFill8((u8 *)&gUnknown_203B33C->item, 0 , sizeof(struct Item));
+        MemoryFill8((u8 *)&gUnknown_203B33C->item, 0 , sizeof(Item));
         gUnknown_203B33C->item.id = ITEM_NOTHING;
         gUnknown_203B33C->item.quantity = 1;
         gUnknown_203B33C->item.flags = 0;

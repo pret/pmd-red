@@ -11,7 +11,7 @@
 
 extern const u8 gUnknown_8107358[25];
 
-extern void sub_804535C(struct Entity *, u32);
+extern void sub_804535C(Entity *, u32);
 extern s32 GetCameraXPos(void);
 extern s32 GetCameraYPos(void);
 extern void sub_803F4A0(u32);
@@ -19,22 +19,22 @@ extern void sub_803F878(s32, s32);
 extern void sub_803E46C(u32);
 extern void sub_803E708(u32, u32);
 
-extern void sub_8068FE0(struct Entity *, u32, u8 *);
+extern void sub_8068FE0(Entity *, u32, u8 *);
 extern void sub_80457DC(u8 *);
-extern void sub_80861D4(struct Entity *, u32, s32 direction);
-extern void sub_80694C0(struct Entity *, s32, s32, u32);
+extern void sub_80861D4(Entity *, u32, s32 direction);
+extern void sub_80694C0(Entity *, s32, s32, u32);
 
-typedef void (*DungeonCallback)(struct Entity *);
+typedef void (*DungeonCallback)(Entity *);
 
-struct Entity *xxx_call_GetLeader(void)
+Entity *xxx_call_GetLeader(void)
 {
     return GetLeader();
 }
 
-struct Entity *GetPartnerEntity(void)
+Entity *GetPartnerEntity(void)
 {
     s32 counter;
-    struct Entity *entity;
+    Entity *entity;
     for(counter = 0; counter < MAX_TEAM_MEMBERS; counter++)
     {
         entity = gDungeon->teamPokemon[counter];
@@ -48,15 +48,15 @@ struct Entity *GetPartnerEntity(void)
 
 void sub_80854D4(void)
 {
-    struct Entity *stack1[MAX_TEAM_MEMBERS];
-    struct Entity *stack2[MAX_TEAM_MEMBERS];
+    Entity *stack1[MAX_TEAM_MEMBERS];
+    Entity *stack2[MAX_TEAM_MEMBERS];
     s32 counter = 0;
     s32 index;
-    struct Entity *entity;
-    struct Entity *entity2;
-    struct Entity *entity3;
-    struct Entity *entity4;
-    struct Entity *entity5;
+    Entity *entity;
+    Entity *entity2;
+    Entity *entity3;
+    Entity *entity4;
+    Entity *entity5;
     
     for(index = 0; index < MAX_TEAM_MEMBERS; index++)
     {
@@ -117,8 +117,8 @@ void sub_80854D4(void)
 void sub_80855E4(DungeonCallback func)
 {
     bool8 flag;
-    struct Entity * entity;
-    struct Entity * partnerEntity;
+    Entity * entity;
+    Entity * partnerEntity;
     s32 index;
 
     flag = FALSE;
@@ -139,7 +139,7 @@ void sub_80855E4(DungeonCallback func)
 
 void sub_808563C(DungeonCallback func)
 {
-    struct Entity * entity;
+    Entity * entity;
     s32 index;
 
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
@@ -151,9 +151,9 @@ void sub_808563C(DungeonCallback func)
     }
 }
 
-struct Entity *GetEntityFromClientType(u8 entityType)
+Entity *GetEntityFromClientType(u8 entityType)
 {
-    struct Entity * entity;
+    Entity * entity;
     s32 index;
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
@@ -164,15 +164,15 @@ struct Entity *GetEntityFromClientType(u8 entityType)
     return NULL;
 }
 
-void sub_80856C8(struct Entity * pokemon, s32 x, s32 y)
+void sub_80856C8(Entity * pokemon, s32 x, s32 y)
 {
     sub_80694C0(pokemon, x, y, 1);
     sub_804535C(pokemon,0);
 }
 
-void sub_80856E0(struct Entity * pokemon, s32 direction)
+void sub_80856E0(Entity * pokemon, s32 direction)
 {
-    struct EntityInfo *entityInfo;
+    EntityInfo *entityInfo;
     s32 counter;
 
     entityInfo = pokemon->info;
@@ -197,7 +197,7 @@ void sub_80856E0(struct Entity * pokemon, s32 direction)
 
 void sub_8085764(void)
 {
-    struct Entity *entity;
+    Entity *entity;
     s32 index;
     u8 auStack128 [116];
 
@@ -214,8 +214,8 @@ void sub_8085764(void)
 void sub_80857B8(void)
 {
     u8 *direction;
-    struct EntityInfo *entityInfo;
-    struct Entity *entity;
+    EntityInfo *entityInfo;
+    Entity *entity;
     int index;
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
@@ -248,7 +248,7 @@ void sub_8085890(s32 x, s32 y)
     sub_803F878(x, y);
 }
 
-void ShiftCameraToPosition(struct Position32 *posStruct, s32 cameraSteps)
+void ShiftCameraToPosition(Position32 *posStruct, s32 cameraSteps)
 {
   s32 XPos;
   s32 YPos;
@@ -273,7 +273,7 @@ void ShiftCameraToPosition(struct Position32 *posStruct, s32 cameraSteps)
   sub_803E46C(0x46);
 }
 
-void SetFacingDirection(struct Entity *pokemon, s32 direction)
+void SetFacingDirection(Entity *pokemon, s32 direction)
 {
     pokemon->info->action.direction = direction & DIRECTION_MASK;
     sub_806CE68(pokemon, direction);
@@ -282,7 +282,7 @@ void SetFacingDirection(struct Entity *pokemon, s32 direction)
 void sub_8085930(s32 direction)
 {
     s32 index;
-    struct Entity *entity;
+    Entity *entity;
     for(index = 0; index < MAX_TEAM_MEMBERS; index++)
     {
         entity = gDungeon->teamPokemon[index];
@@ -323,7 +323,7 @@ void sub_8085930(s32 direction)
 void sub_80859F0(s32 direction)
 {
     s32 index;
-    struct Entity *entity;
+    Entity *entity;
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
         entity = gDungeon->wildPokemon[index];
@@ -342,9 +342,9 @@ void sub_80859F0(s32 direction)
     }
 }
 
-bool8 IsMovingClient(struct Entity *pokemon)
+bool8 IsMovingClient(Entity *pokemon)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     switch (pokemonInfo->clientType)
     {
         case CLIENT_TYPE_CLIENT:
@@ -390,7 +390,7 @@ bool8 IsMovingClient(struct Entity *pokemon)
     }
 }
 
-void sub_8085B0C(struct Entity *pokemon)
+void sub_8085B0C(Entity *pokemon)
 {
   s32 index;
   u8 local_28 [25];

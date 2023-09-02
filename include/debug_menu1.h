@@ -7,8 +7,8 @@
 // size: 0x1A4
 struct DebugMenu
 {
-    struct MenuStruct unk0[4];
-    struct UnkTextStruct2 unk140[4];
+    MenuStruct unk0[4];
+    UnkTextStruct2 unk140[4];
     u32 fill1A0;
 };
 

@@ -17,9 +17,9 @@
 
 const u8 gDirectionBitMasks_1[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 
-bool8 CannotMove(struct Entity *pokemon, bool8 checkBlinker)
+bool8 CannotMove(Entity *pokemon, bool8 checkBlinker)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
 
     if ((checkBlinker && pokemonInfo->eyesightStatus == STATUS_BLINKER)
         || pokemonInfo->sleep == STATUS_SLEEP
@@ -36,9 +36,9 @@ bool8 CannotMove(struct Entity *pokemon, bool8 checkBlinker)
     return FALSE;
 }
 
-bool8 sub_8070BC0(struct Entity* entity)
+bool8 sub_8070BC0(Entity* entity)
 {
-    struct EntityInfo *entityInfo = entity->info;
+    EntityInfo *entityInfo = entity->info;
 
     if (IsCharging(entity, FALSE)
         || entityInfo->sleep == STATUS_YAWNING
@@ -74,7 +74,7 @@ bool8 sub_8070BC0(struct Entity* entity)
     return FALSE;
 }
 
-static inline bool8 JoinLocationCannotUseItems(struct EntityInfo *pokemonInfo)
+static inline bool8 JoinLocationCannotUseItems(EntityInfo *pokemonInfo)
 {
     if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
         return TRUE;
@@ -83,9 +83,9 @@ static inline bool8 JoinLocationCannotUseItems(struct EntityInfo *pokemonInfo)
     return FALSE;
 }
 
-bool8 CannotUseItems(struct Entity *pokemon)
+bool8 CannotUseItems(Entity *pokemon)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
 
     if (pokemonInfo->clientType == CLIENT_TYPE_CLIENT
         || JoinLocationCannotUseItems(pokemonInfo)
@@ -100,9 +100,9 @@ bool8 CannotUseItems(struct Entity *pokemon)
     return FALSE;
 }
 
-bool8 HasStatusThatPreventsActing(struct Entity *pokemon)
+bool8 HasStatusThatPreventsActing(Entity *pokemon)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
 
     if ((pokemonInfo->sleep != STATUS_SLEEPLESS
         && pokemonInfo->sleep != STATUS_NONE)
@@ -116,9 +116,9 @@ bool8 HasStatusThatPreventsActing(struct Entity *pokemon)
     return FALSE;
 }
 
-bool8 CannotAttack(struct Entity *pokemon, bool8 skipSleep)
+bool8 CannotAttack(Entity *pokemon, bool8 skipSleep)
 {
-  struct EntityInfo *pokemonInfo = pokemon->info;
+  EntityInfo *pokemonInfo = pokemon->info;
 
   if ((skipSleep ||
       pokemonInfo->sleep == STATUS_SLEEPLESS ||
@@ -138,7 +138,7 @@ bool8 CannotAttack(struct Entity *pokemon, bool8 skipSleep)
   return TRUE;
 }
 
-bool8 CanMoveInDirection(struct Entity *pokemon, u32 direction)
+bool8 CanMoveInDirection(Entity *pokemon, u32 direction)
 {
     u8 crossableTerrain = GetCrossableTerrain(pokemon->info->id);
     struct Tile *currentMapTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x,

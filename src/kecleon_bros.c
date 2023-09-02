@@ -9,7 +9,7 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
-#include "team_inventory.h"
+
 #include "text1.h"
 #include "text2.h"
 
@@ -32,21 +32,21 @@ extern u8 *gUnknown_80D4934[];
 extern u8 *gUnknown_80D4970[];
 extern u8 * gUnknown_80D4978[];
 extern u8 *gUnknown_80D4984[];
-extern struct UnkTextStruct2 gUnknown_80DB840;
-extern struct UnkTextStruct2 gUnknown_80DB858;
-extern struct UnkTextStruct2 gUnknown_80DB870;
-extern struct UnkTextStruct2 gUnknown_80DB888;
+extern UnkTextStruct2 gUnknown_80DB840;
+extern UnkTextStruct2 gUnknown_80DB858;
+extern UnkTextStruct2 gUnknown_80DB870;
+extern UnkTextStruct2 gUnknown_80DB888;
 extern u8 gUnknown_80DB8A0[];
-extern struct UnkTextStruct2 gUnknown_80DB8B4;
-extern struct UnkTextStruct2 gUnknown_80DB8CC;
+extern UnkTextStruct2 gUnknown_80DB8B4;
+extern UnkTextStruct2 gUnknown_80DB8CC;
 extern u8 gUnknown_80DB8E4[];
 extern u8 gUnknown_80DB8EC[];
-extern struct UnkTextStruct2 gUnknown_80DB8FC;
-extern const struct UnkTextStruct2 gUnknown_80DB914;
+extern UnkTextStruct2 gUnknown_80DB8FC;
+extern const UnkTextStruct2 gUnknown_80DB914;
 extern u8 gUnknown_80DB92C[];
 extern u8 gUnknown_80DB934[];
-extern struct UnkTextStruct2 gUnknown_80DB944;
-extern struct UnkTextStruct2 gUnknown_80DB95C;
+extern UnkTextStruct2 gUnknown_80DB944;
+extern UnkTextStruct2 gUnknown_80DB95C;
 extern u8 gUnknown_80DB994[];
 extern u8 gUnknown_80DB9A0[];
 extern u8 gUnknown_80DB9A8[];
@@ -102,7 +102,7 @@ void UpdateKecleonStoreDialogue(void);
 u32 CreateKecleonBros(u32 mode)
 {
     char *monName;
-    struct OpenedFile *faceFile;
+    OpenedFile *faceFile;
 
     gKecleonBrosWork = MemoryAlloc(sizeof(struct KecleonBrosWork), 8);
     gKecleonBrosWork->menuAction1 = 0;
@@ -697,7 +697,7 @@ void sub_8019944(void)
 {
     s32 slotIndex;
     s32 menuAction;
-    struct Item *item;
+    Item *item;
 
     if (sub_80144A4(&menuAction) == 0) {
         switch (menuAction) {
@@ -725,7 +725,7 @@ void sub_8019944(void)
 void sub_80199CC(void)
 {
     u32 menuAction;
-    struct BulkItem *item;
+    BulkItem *item;
 
     if (gKecleonBrosWork->isKecleonItemShop)
         menuAction = sub_8019EDC(1);
@@ -917,7 +917,7 @@ u32 CountKecleonItems(void)
 void sub_8019DAC(void)
 {
     s32 sellPrice;
-    struct Item *item;
+    Item *item;
     s32 index;
 
     gKecleonBrosWork->numInventoryItemToSell = 0;
@@ -972,8 +972,8 @@ bool32 sub_8019E40(u32 r0)
 
 u32 sub_8019EDC(u8 r0)
 {
-    struct Item slot;
-    struct BulkItem *item;
+    Item slot;
+    BulkItem *item;
 
     if (r0 == 0) {
         sub_8013660(&gUnknown_203B214->input);
@@ -1116,14 +1116,14 @@ void sub_801A064(void)
 
 void sub_801A0D8(void)
 {
-    struct BulkItem *heldItem;
+    BulkItem *heldItem;
     s32 buyPrice;
     s32 y;
     s32 index;
     u8 auStack204 [80];
     struct unkStruct_8090F58 local_7c;
     u8 auStack112 [80];
-    struct Item item;
+    Item item;
     u8 temp_calc;
 
     sub_8008C54(gUnknown_203B214->unk34);
@@ -1180,8 +1180,8 @@ u32 sub_801A20C(u32 r0)
 
 u32 sub_801A2A8(u8 r0)
 {
-    struct Item slot;
-    struct BulkItem *item;
+    Item slot;
+    BulkItem *item;
 
     if (r0 == 0) {
         sub_8013660(&gUnknown_203B21C->input);
@@ -1324,14 +1324,14 @@ void sub_801A430(void)
 
 void sub_801A4A4(void)
 {
-    struct BulkItem *heldItem;
+    BulkItem *heldItem;
     s32 buyPrice;
     s32 y;
     s32 index;
     u8 buffer1 [80];
     struct unkStruct_8090F58 local_7c;
     u8 buffer2 [80];
-    struct Item item;
+    Item item;
     u8 temp_calc;
 
     sub_8008C54(gUnknown_203B21C->unk34);
@@ -1364,7 +1364,7 @@ void sub_801A4A4(void)
     sub_80073E0(gUnknown_203B21C->unk34);
 }
 
-bool32 sub_801A5D8(u32 param_1, s32 param_2, struct UnkTextStruct2_sub *param_3, u32 param_4)
+bool32 sub_801A5D8(u32 param_1, s32 param_2, UnkTextStruct2_sub *param_3, u32 param_4)
 {
     if (GetNumberOfFilledInventorySlots() == 0)
         return FALSE;
@@ -1400,7 +1400,7 @@ bool32 sub_801A5D8(u32 param_1, s32 param_2, struct UnkTextStruct2_sub *param_3,
 u32 sub_801A6E8(bool8 param_1)
 {
     s32 index;
-    struct Item item;
+    Item item;
 
     if (param_1 == FALSE) {
         sub_8013660(&gUnknown_203B224->input);
@@ -1535,7 +1535,7 @@ void sub_801A9E0(void)
     // NOTE: this var is unused but makes sure we get correct stack size
     // This is also why we need special build flag for this file
     u8 local_6c[0x44]; // sp 0x78 ?? (why is this at same location..)
-    struct Item item; // sp 0xC8
+    Item item; // sp 0xC8
 
     sub_8008C54(gUnknown_203B224->unk88);
     sub_80073B8(gUnknown_203B224->unk88);
@@ -1644,7 +1644,7 @@ bool8 sub_801ADA0(s32 param_1)
     u32 uVar3_32;
     s32 sum1;
     s32 sum2;
-    struct Item item;
+    Item item;
 
     item = gTeamInventoryRef->teamItems[param_1];
     if (!IsNotMoneyOrUsedTMItem(item.id))
@@ -1672,7 +1672,7 @@ bool8 sub_801ADA0(s32 param_1)
 
 s32 sub_801AE24(u32 itemID)
 {
-    struct Item item;
+    Item item;
     u16 count;
     s32 invIndex;
 
@@ -1725,13 +1725,13 @@ void sub_801AEE4(s32 index, s32 value)
 
 void SortInventoryItems(void)
 {
-    struct Item *itemSlotR;
+    Item *itemSlotR;
     u32 *itemIDR;
     u32 *base;
     s32 orderL;
     s32 orderR;
     u32 itemIDL;
-    struct Item itemSlotL;
+    Item itemSlotL;
     s32 itemR;
     s32 itemL;
 

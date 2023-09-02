@@ -18,11 +18,11 @@
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
-#include "item.h"
+#include "items.h"
 #include "position.h"
 #include "position_util.h"
 #include "status.h"
-#include "team_inventory.h"
+
 
 #define NUM_POTENTIAL_ROCK_TARGETS 20
 #define GROUND_ITEM_TOOLBOX_INDEX 0x80
@@ -38,12 +38,12 @@ extern s32 gNumPotentialTargets;
 extern u32 gPotentialItemTargetWeights[NUM_DIRECTIONS];
 extern u32 gPotentialItemTargetDirections[NUM_DIRECTIONS];
 extern bool8 gTargetAhead[NUM_DIRECTIONS];
-extern struct TeamInventory *gTeamInventoryRef;
+extern TeamInventory *gTeamInventoryRef;
 
-void sub_807360C(struct Entity *pokemon)
+void sub_807360C(Entity *pokemon)
 {
     s32 index;
-    struct Entity *entity;
+    Entity *entity;
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
@@ -59,11 +59,11 @@ void sub_807360C(struct Entity *pokemon)
     }
 }
 
-void DecideUseItem(struct Entity *pokemon)
+void DecideUseItem(Entity *pokemon)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     void *null;
-    struct Item *item;
+    Item *item;
     s32 toolboxIndex;
     u8 selectedToolboxIndex;
     u32 *potentialTargetWeights;
@@ -108,7 +108,7 @@ void DecideUseItem(struct Entity *pokemon)
             }
             else if (itemType == CATEGORY_THROWN_ARC)
             {
-                struct Position potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
+                Position potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
                 FindRockItemTargets(pokemon, item, potentialTargetPositions, TRUE);
                 if (gNumPotentialTargets == 0)
                 {
@@ -155,7 +155,7 @@ void DecideUseItem(struct Entity *pokemon)
             {
                 // This seems unused. toolboxIndex can never be 0.
                 struct Tile *mapTile = GetTile(pokemon->pos.x, pokemon->pos.y);
-                struct Entity *object = mapTile->object;
+                Entity *object = mapTile->object;
                 if (object != null)
                 {
                     u32 objectType = GetEntityType(object);
@@ -231,7 +231,7 @@ void DecideUseItem(struct Entity *pokemon)
                         u8 itemType = GetItemCategory(item->id);
                         if (itemType == CATEGORY_THROWN_ARC)
                         {
-                            struct Position potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
+                            Position potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
                             FindRockItemTargets(pokemon, item, potentialTargetPositions, FALSE);
                             if (gNumPotentialTargets != 0)
                             {
@@ -269,7 +269,7 @@ void DecideUseItem(struct Entity *pokemon)
     }
 }
 
-void FindStraightThrowableTargets(struct Entity *pokemon, s32 thrownAIFlag, struct Item *item, bool8 ignoreRollChance)
+void FindStraightThrowableTargets(Entity *pokemon, s32 thrownAIFlag, Item *item, bool8 ignoreRollChance)
 {
     s32 i;
     gNumPotentialTargets = 0;
@@ -279,7 +279,7 @@ void FindStraightThrowableTargets(struct Entity *pokemon, s32 thrownAIFlag, stru
     }
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
-        struct Entity *targetPokemon = gDungeon->allPokemon[i];
+        Entity *targetPokemon = gDungeon->allPokemon[i];
         if (EntityExists(targetPokemon) && pokemon != targetPokemon)
         {
             s32 targetingFlags;
@@ -310,13 +310,13 @@ void FindStraightThrowableTargets(struct Entity *pokemon, s32 thrownAIFlag, stru
     }
 }
 
-void FindRockItemTargets(struct Entity *pokemon, struct Item *item, struct Position potentialTargets[], bool8 ignoreRollChance)
+void FindRockItemTargets(Entity *pokemon, Item *item, Position potentialTargets[], bool8 ignoreRollChance)
 {
     s32 i;
     gNumPotentialTargets = 0;
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
-        struct Entity *targetPokemon = gDungeon->allPokemon[i];
+        Entity *targetPokemon = gDungeon->allPokemon[i];
         if (EntityExists(targetPokemon) && pokemon != targetPokemon &&
             CanSeeTarget(pokemon, targetPokemon) && CanTarget(pokemon, targetPokemon, FALSE, TRUE) == TARGET_CAPABILITY_CAN_TARGET)
         {
@@ -338,7 +338,7 @@ void FindRockItemTargets(struct Entity *pokemon, struct Item *item, struct Posit
             }
             if (distance <= 10)
             {
-                struct Position *newPotentialTarget;
+                Position *newPotentialTarget;
                 if (!ignoreRollChance)
                 {
                     u32 itemWeight = EvaluateItem(targetPokemon, item, ITEM_TARGET_OTHER);
@@ -356,7 +356,7 @@ void FindRockItemTargets(struct Entity *pokemon, struct Item *item, struct Posit
     }
 }
 
-void TargetThrownItem(struct Entity *pokemon, struct Entity *targetPokemon, struct Item *item, s32 targetingFlags, bool8 ignoreRollChance)
+void TargetThrownItem(Entity *pokemon, Entity *targetPokemon, Item *item, s32 targetingFlags, bool8 ignoreRollChance)
 {
     s32 distanceX = pokemon->pos.x - targetPokemon->pos.x;
     s32 distanceY;

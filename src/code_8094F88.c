@@ -19,14 +19,14 @@ EWRAM_DATA UNUSED static u32 fill0 = {0}; // 203B484 is size 0x5C and I need to 
 EWRAM_DATA u32 gUnknown_20392E8[0x36] = {0};
 EWRAM_DATA struct unkStruct_203B48C gUnknown_20393C0 = {0};
 
-extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
-extern void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
+extern void SaveDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
+extern void RestoreDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
 extern void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924* a1, struct unkPokeSubStruct_C* unkC);
 extern void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
 
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
+extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern s32 sub_8094E4C(void);
-extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
+extern void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
 extern void sub_8094D28(s32);
 
 void sub_80950BC(void)
@@ -302,7 +302,7 @@ void sub_809542C(struct WonderMailSub *param_1)
 void sub_8095494(struct WonderMailSub *param_1, u8 index)
 {
   u32 seed;
-  struct DungeonLocation dungeon;
+  DungeonLocation dungeon;
   struct unkStruct_203B480 *mail;
   
   mail = gUnknown_203B480;
@@ -325,7 +325,7 @@ u32 sub_80954B4(void)
 u32 sub_80954CC(u8 *a, u32 b)
 {
     struct unkStruct_8094924 backup;
-    struct PokemonStruct *temp;
+    PokemonStruct1 *temp;
     s32 index;
 
     xxx_init_struct_8094924_restore_809485C(&backup, a, b);
@@ -335,7 +335,7 @@ u32 sub_80954CC(u8 *a, u32 b)
     }
     RestoreIntegerBits(&backup, &gUnknown_203B484->unk0, 0x20);
     temp  = &gUnknown_203B484->unk4;
-    memset(temp, 0, sizeof(struct PokemonStruct));
+    memset(temp, 0, sizeof(PokemonStruct1));
     RestoreIntegerBits(&backup, &temp->unk0, 2);
     RestoreIntegerBits(&backup, &temp->isTeamLeader, 1);
     RestoreIntegerBits(&backup, &temp->level, 7);
@@ -368,7 +368,7 @@ u32 sub_80954CC(u8 *a, u32 b)
 u32 sub_8095624(u8 *a, u32 b)
 {
     struct unkStruct_8094924 backup;
-    struct PokemonStruct *temp;
+    PokemonStruct1 *temp;
     s32 index;
 
     xxx_init_struct_8094924_save_809486C(&backup, a, b);

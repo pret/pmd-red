@@ -12,7 +12,7 @@
 #include "dungeon_util.h"
 #include "dungeon_util_1.h"
 #include "friend_area.h"
-#include "item.h"
+#include "items.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "position_util.h"
@@ -314,48 +314,48 @@ extern u8 gUnknown_81074FC[];
 extern u8 sub_800E9A8(u32);
 extern void sub_800DC14(u32);
 
-extern void sub_8086A3C(struct Entity *r0);
+extern void sub_8086A3C(Entity *r0);
 extern void sub_80854D4(void);
 extern void sub_80855E4(void *);
-extern void sub_8068FE0(struct Entity *, u32, u32);
+extern void sub_8068FE0(Entity *, u32, u32);
 
 extern void sub_803E708(u32, u32);
 extern void sub_8086448(void);
 extern void sub_8086598(void);
-extern void SpriteLookAroundEffect(struct Entity *);
-extern void SpriteShockEffect(struct Entity *);
+extern void SpriteLookAroundEffect(Entity *);
+extern void SpriteShockEffect(Entity *);
 extern void PlaySoundEffect(u32);
-extern void sub_80869E4(struct Entity *, u32, u32, u32);
-extern void IncreaseEntityPixelPos(struct Entity *, u32, u32);
-extern void sub_8042B0C(struct Entity *);
+extern void sub_80869E4(Entity *, u32, u32, u32);
+extern void IncreaseEntityPixelPos(Entity *, u32, u32);
+extern void sub_8042B0C(Entity *);
 extern void DisplayDungeonDialogue(u32 *);
 extern void sub_803E708(u32, u32);
-extern u8 sub_806FD18(struct Entity *);
-extern void sub_80861D4(struct Entity *, u32, s32 direction);
-extern void sub_806FDF4(struct Entity *, struct Entity *, struct Entity **);
-extern u32 sub_80861F8(u32, struct Entity *, u32);
+extern u8 sub_806FD18(Entity *);
+extern void sub_80861D4(Entity *, u32, s32 direction);
+extern void sub_806FDF4(Entity *, Entity *, Entity **);
+extern u32 sub_80861F8(u32, Entity *, u32);
 extern s32 GetCameraXPos();
 extern s32 GetCameraYPos();
 extern void sub_803F878(u32, s32);
-extern void SetupBossFightHP(struct Entity *, u32, u32);
+extern void SetupBossFightHP(Entity *, u32, u32);
 extern void sub_803E9D0(void);
 extern void DeoxysScreenFlash(void);
 extern void sub_8085EB0();
 extern void sub_808563C(void *);
 
-void SetupDeoxysFightHP(struct Entity *r0);
+void SetupDeoxysFightHP(Entity *r0);
 void sub_808C550(void);
-void sub_808C590(struct Entity *r0);
-void SetupDeoxysFacingDirection(struct Entity *r0);
+void sub_808C590(Entity *r0);
+void SetupDeoxysFacingDirection(Entity *r0);
 void sub_808C9B0();
-void sub_808C8E0(struct Entity *param_1);
+void sub_808C8E0(Entity *param_1);
 void sub_808C360(void);
 void KyogreScreenFlash();
 
 void sub_808C0CC();
 void LugiaScreenFlash();
 void LugiaScreenFlash2();
-extern void sub_80861B8(struct Entity *, u32, u32);
+extern void sub_80861B8(Entity *, u32, u32);
 
 void nullsub_99();
 
@@ -363,39 +363,39 @@ extern void sub_8049884();
 extern void sub_8049B8C();
 extern void sub_8049ED4();
 extern void sub_8040A84();
-extern void sub_8086A54(struct Entity *);
+extern void sub_8086A54(Entity *);
 
-extern void sub_806BFC0(struct EntityInfo *, u32);
+extern void sub_806BFC0(EntityInfo *, u32);
 
 
-extern struct Entity *xxx_call_GetLeader(void);
-extern void sub_808BBA8(struct Entity * );
+extern Entity *xxx_call_GetLeader(void);
+extern void sub_808BBA8(Entity * );
 extern void sub_80855E4(void *);
 extern void sub_8041888(u32);
-extern void sub_80861B8(struct Entity *, u32, u32);
+extern void sub_80861B8(Entity *, u32, u32);
 extern void sub_803E708(u32, u32);
 extern void DisplayDungeonDialogue(u32 *r0);
 
-extern void SpriteShockEffect(struct Entity *);
-extern u32 sub_80861F8(u32, struct Entity *, u32);
+extern void SpriteShockEffect(Entity *);
+extern u32 sub_80861F8(u32, Entity *, u32);
 
 
 extern void JirachiWish();
-extern void JirachiSpinEffect(struct Entity *);
-extern void JirachiWishGrantDialogue(struct Entity *jirachiEntity);
+extern void JirachiSpinEffect(Entity *);
+extern void JirachiWishGrantDialogue(Entity *jirachiEntity);
 extern void JirachiWishGrantFlash();
-extern void JirachiDropInEffect(struct Entity *param_1);
+extern void JirachiDropInEffect(Entity *param_1);
 extern u8 JirachiFriendAreaSearch(void);
 
 extern u8 sub_80860A8(u32);
 extern void sub_8049ED4();
-extern void sub_8052D44(s16 *, struct Entity *, struct Entity *);
-extern void SetMessageArgument(u8 *, struct Entity *, u32);
-extern struct Entity *GetLeader();
-extern void sub_80421C0(struct Entity *, u32);
+extern void sub_8052D44(s16 *, Entity *, Entity *);
+extern void SetMessageArgument(u8 *, Entity *, u32);
+extern Entity *GetLeader();
+extern void sub_80421C0(Entity *, u32);
 extern void sub_8046D20();
 extern void sub_808B1CC(u8);
-extern void sub_80464C8(struct Entity *, u32 *, struct Item *);
+extern void sub_80464C8(Entity *, u32 *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern void sub_803E46C(u32);
 extern void sub_80866C4(u32 *);
@@ -403,7 +403,7 @@ extern void sub_808692C();
 
 extern void sub_80868F4();
 extern void sub_8086910();
-extern u32 sub_8085EC8(u32, u32, u32, struct Position *, u32);
+extern u32 sub_8085EC8(u32, u32, u32, Position *, u32);
 extern void sub_808680C();
 extern void sub_808682C();
 extern void sub_8086854();
@@ -417,21 +417,21 @@ extern void sub_8086794();
 
 void EnteiScreenFlash(void);
 void RaikouScreenFlash(void);
-void sub_808A528(struct Entity * param_1);
+void sub_808A528(Entity * param_1);
 void SuicuneScreenFlash();
-void HoOhDropInEffect(struct Entity * param_1);
+void HoOhDropInEffect(Entity * param_1);
 void HoOhScreenFlash(void);
 void LatiosScreenFlash(void);
-void SetupRegiFacingDirection(struct Entity *r0);
-void SetupRegirockFightHP(struct Entity *r0);
-void SetupRegiceFightHP(struct Entity *r0);
-void SetupRegisteelFightHP(struct Entity *r0);
+void SetupRegiFacingDirection(Entity *r0);
+void SetupRegirockFightHP(Entity *r0);
+void SetupRegiceFightHP(Entity *r0);
+void SetupRegisteelFightHP(Entity *r0);
 void sub_808B50C(void);
-void MewtwoDropInEffect(struct Entity *param_1);
+void MewtwoDropInEffect(Entity *param_1);
 void MewtwoScreenFlash(void);
-void sub_80898F8(struct Entity *r0);
-void sub_8089908(struct Entity *r0);
-void RayquazaDropInEffect(struct Entity *param_1);
+void sub_80898F8(Entity *r0);
+void sub_8089908(Entity *r0);
+void RayquazaDropInEffect(Entity *param_1);
 void RayquazaScreenFlash(void);
 void sub_80891F0(void);
 void sub_8089294(void);
@@ -440,25 +440,25 @@ void GroudonScreenFlash2(void);
 extern u8 sub_8086AE4(u32);
 
 
-extern void sub_8072008(struct Entity *, struct Entity *, s16, u32, u32);
-extern void sub_80869E4(struct Entity *, u32, u32, u32);
+extern void sub_8072008(Entity *, Entity *, s16, u32, u32);
+extern void sub_80869E4(Entity *, u32, u32, u32);
 extern void sub_8085374();
 
 extern void sub_8086848(u32 ,u32);
-extern void sub_80856C8(struct Entity *, s32, s32);
+extern void sub_80856C8(Entity *, s32, s32);
 extern void sub_8086738();
-extern void sub_8086A54(struct Entity *);
+extern void sub_8086A54(Entity *);
 extern void sub_8086764();
 
 extern void sub_803F878(u32,s32);
 
-void SceneGroudonMovement(struct Entity * param_1);
+void SceneGroudonMovement(Entity * param_1);
 void GroudonScreenFlash(void);
 void ArticunoScreenFlash(void);
-void sub_8088484(struct Entity *param_1);
+void sub_8088484(Entity *param_1);
 void sub_8088574(void);
 
-void MoltresDropInEffect(struct Entity * param_1);
+void MoltresDropInEffect(Entity * param_1);
 void MoltresScreenFlash1(s32 r0, s32 r1);
 void MoltresScreenFlash2(s32 r0, s32 r1);
 void MoltresScreenFlash3(void);
@@ -472,21 +472,21 @@ extern void sub_8086500(void);
 extern void sub_8086690(void);
 void MoltresScreenDarken(void);
 extern void sub_808663C(void);
-void ZapdosDropInEffect(struct Entity *param_1);
+void ZapdosDropInEffect(Entity *param_1);
 void ZapdosScreenFlash(int param_1);
 
 extern s32 sub_8052C68(u32, u8 *, u32 *, u32);
 extern void sub_80861A8(void);
-extern void sub_8045C28(struct Item *, u8 , u8 *);
+extern void sub_8045C28(Item *, u8 , u8 *);
 extern void EnableJirachiWishWarpTile(void);
-extern void sub_808BB3C(struct Position *);
-extern void sub_8046860(struct Entity *, struct Position *, struct Item *, u32);
+extern void sub_808BB3C(Position *);
+extern void sub_8046860(Entity *, Position *, Item *, u32);
 extern u32 sub_803D73C(u32);
 
 void ZapdosReFightDialogue(void)
 {
-  struct Entity *LeaderEntity;
-  struct Entity *ZapdosEntity;
+  Entity *LeaderEntity;
+  Entity *ZapdosEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   ZapdosEntity = GetEntityFromClientType(8);
@@ -510,8 +510,8 @@ void ZapdosReFightDialogue(void)
 
 void ZapdosPostStoryPreFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * ZapdosEntity;
+  Entity * LeaderEntity;
+  Entity * ZapdosEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   ZapdosEntity = GetEntityFromClientType(8);
@@ -538,7 +538,7 @@ void ZapdosPostStoryPreFightDialogue(void)
 }
 
 
-void ZapdosDropInEffect(struct Entity *zapdosEntity)
+void ZapdosDropInEffect(Entity *zapdosEntity)
 {
   int iVar1;
 
@@ -588,8 +588,8 @@ void ZapdosScreenFlash(s32 numFlashes)
 
 void sub_80877E8(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * MoltresEntity;
+  Entity * LeaderEntity;
+  Entity * MoltresEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   MoltresEntity = GetEntityFromClientType(9);
@@ -606,8 +606,8 @@ void sub_80877E8(void)
 
 void sub_8087848(void)
 {
-  struct Entity *LeaderEntity;
-  struct Entity *MoltresEntity;
+  Entity *LeaderEntity;
+  Entity *MoltresEntity;
 
   u32 XPos;
   s32 YPos;
@@ -643,9 +643,9 @@ void sub_80878F4(u8 param_1, u8 param_2)
 
 void MoltresPreFightDialogue(void)
 {
-  struct Entity *LeaderEntity;
-  struct Entity *PartnerEntity;
-  struct Entity *MoltresEntity;
+  Entity *LeaderEntity;
+  Entity *PartnerEntity;
+  Entity *MoltresEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   PartnerEntity = GetPartnerEntity();
@@ -713,9 +713,9 @@ void MoltresPreFightDialogue(void)
 
 void MoltresReFightDialogue(void)
 {
-  struct Entity *LeaderEntity;
-  struct Entity *PartnerEntity;
-  struct Entity *MoltresEntity;
+  Entity *LeaderEntity;
+  Entity *PartnerEntity;
+  Entity *MoltresEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   PartnerEntity = GetPartnerEntity();
@@ -755,8 +755,8 @@ void MoltresReFightDialogue(void)
 
 void MoltresPostStoryPreFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * MoltresEntity;
+  Entity * LeaderEntity;
+  Entity * MoltresEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   MoltresEntity = GetEntityFromClientType(9);
@@ -792,7 +792,7 @@ void MoltresPostStoryPreFightDialogue(void)
   }
 }
 
-void MoltresDropInEffect(struct Entity * moltresEntity)
+void MoltresDropInEffect(Entity * moltresEntity)
 {
   s32 iVar1;
 
@@ -997,8 +997,8 @@ void MoltresScreenDarken(void)
 
 void sub_8087F54(void)
 {
-  struct Entity  *LeaderEntity;
-  struct Entity *ArticunoEntity;
+  Entity  *LeaderEntity;
+  Entity *ArticunoEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   ArticunoEntity = GetEntityFromClientType(0xd);
@@ -1015,7 +1015,7 @@ void sub_8087F54(void)
 
 void sub_8087FB4(void)
 {
-  struct Entity  *ArticunoEntity;
+  Entity  *ArticunoEntity;
 
   ArticunoEntity = GetEntityFromClientType(0xd);
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
@@ -1029,8 +1029,8 @@ void sub_8087FB4(void)
 
 void sub_8087FF8(void)
 {
-  struct Entity  *LeaderEntity;
-  struct Entity *ArticunoEntity;
+  Entity  *LeaderEntity;
+  Entity *ArticunoEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   ArticunoEntity = GetEntityFromClientType(0xd);
@@ -1060,9 +1060,9 @@ void sub_8088088(u8 param_1, u8 param_2)
 
 void ArticunoPreFightDialogue(void)
 {
-  struct Entity *LeaderEntity;
-  struct Entity *PartnerEntity;
-  struct Entity *ArticunoEntity;
+  Entity *LeaderEntity;
+  Entity *PartnerEntity;
+  Entity *ArticunoEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   PartnerEntity = GetPartnerEntity();
@@ -1138,8 +1138,8 @@ void ArticunoPreFightDialogue(void)
 
 void ArticunoReFightDialogue(void)
 {
-  struct Entity *LeaderEntity;
-  struct Entity *ArticunoEntity;
+  Entity *LeaderEntity;
+  Entity *ArticunoEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   ArticunoEntity = GetEntityFromClientType(0xd);
@@ -1160,8 +1160,8 @@ void ArticunoReFightDialogue(void)
 
 void ArticunoPostStoryPreFightDialogue(void)
 {
-  struct Entity *LeaderEntity;
-  struct Entity *ArticunoEntity;
+  Entity *LeaderEntity;
+  Entity *ArticunoEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   ArticunoEntity = GetEntityFromClientType(0xd);
@@ -1195,7 +1195,7 @@ void ArticunoPostStoryPreFightDialogue(void)
   }
 }
 
-void sub_8088484(struct Entity *param_1)
+void sub_8088484(Entity *param_1)
 {
   int iVar1;
 
@@ -1257,7 +1257,7 @@ void sub_80885A0(void)
 
 void sub_80885C4(void)
 {
-  struct Entity * LeaderEntity;
+  Entity * LeaderEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   DungeonFadeOutBGM(0x3c);
@@ -1285,9 +1285,9 @@ void sub_8088618(void)
 
 void sub_808862C(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * AlakazamEntity;
-  struct Entity * GroudonEntity;
+  Entity * LeaderEntity;
+  Entity * AlakazamEntity;
+  Entity * GroudonEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   AlakazamEntity = GetEntityFromClientType(10);
@@ -1309,9 +1309,9 @@ void sub_808862C(void)
 
 void sub_80886C4(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * AlakazamEntity;
-  struct Entity * GroudonEntity;
+  Entity * LeaderEntity;
+  Entity * AlakazamEntity;
+  Entity * GroudonEntity;
 
   u32 XPos;
   s32 YPos;
@@ -1337,9 +1337,9 @@ void sub_80886C4(void)
 
 void sub_808875C(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * AlakazamEntity;
-  struct Entity * GroudonEntity;
+  Entity * LeaderEntity;
+  Entity * AlakazamEntity;
+  Entity * GroudonEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   AlakazamEntity = GetEntityFromClientType(10);
@@ -1377,10 +1377,10 @@ void sub_8088848(void)
 
 void GroudonPreFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * PartnerEntity;
-  struct Entity * AlakazamEntity;
-  struct Entity * GroudonEntity;
+  Entity * LeaderEntity;
+  Entity * PartnerEntity;
+  Entity * AlakazamEntity;
+  Entity * GroudonEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   PartnerEntity = GetPartnerEntity();
@@ -1459,8 +1459,8 @@ void GroudonPreFightDialogue(void)
 
 void GroudonReFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * GroudonEntity;
+  Entity * LeaderEntity;
+  Entity * GroudonEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   GroudonEntity = GetEntityFromClientType(0xe);
@@ -1491,8 +1491,8 @@ void GroudonReFightDialogue(void)
 
 void GroudonPostStoryPreFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * GroudonEntity;
+  Entity * LeaderEntity;
+  Entity * GroudonEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   GroudonEntity = GetEntityFromClientType(0xe);
@@ -1519,7 +1519,7 @@ void GroudonPostStoryPreFightDialogue(void)
 }
 
 // Moves Groudon down in a walking fashion
-void SceneGroudonMovement(struct Entity * GroudonEntity)
+void SceneGroudonMovement(Entity * GroudonEntity)
 {
   int iVar1;
 
@@ -1602,9 +1602,9 @@ void GroudonScreenFlash2(void)
 
 void sub_8088DC0(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * uVar2;
-  struct Entity * uVar3;
+  Entity * LeaderEntity;
+  Entity * uVar2;
+  Entity * uVar3;
 
   LeaderEntity = xxx_call_GetLeader();
   uVar2 = GetEntityFromClientType(0xb);
@@ -1626,9 +1626,9 @@ void sub_8088DC0(void)
 
 void sub_8088E5C(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * uVar2;
-  struct Entity * uVar3;
+  Entity * LeaderEntity;
+  Entity * uVar2;
+  Entity * uVar3;
 
   LeaderEntity = xxx_call_GetLeader();
   uVar2 = GetEntityFromClientType(0xb);
@@ -1653,12 +1653,12 @@ void sub_8088EE8(void)
 
 void MagmaCavernMidDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * PartnerEntity;
-  struct Entity * iVar3;
-  struct Entity * iVar4;
+  Entity * LeaderEntity;
+  Entity * PartnerEntity;
+  Entity * iVar3;
+  Entity * iVar4;
   s16 IDStack [2];
-  struct Position32 local_20;
+  Position32 local_20;
 
   LeaderEntity = xxx_call_GetLeader();
   PartnerEntity = GetPartnerEntity();
@@ -1774,7 +1774,7 @@ void MagmaCavernMidDialogue(void)
 
 void sub_8089168(void)
 {
-  struct Entity *LeaderEntity;
+  Entity *LeaderEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   sub_8086448();
@@ -1784,19 +1784,19 @@ void sub_8089168(void)
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
 
-void sub_808919C(struct Entity *r0)
+void sub_808919C(Entity *r0)
 {
     IncreaseEntityPixelPos(r0, 0, 0xfffffe00);
 }
 
-void sub_80891B0(struct Entity *r0)
+void sub_80891B0(Entity *r0)
 {
     sub_806CDD4(r0, 0, DIRECTION_NORTH);
     r0->info->unk15F = 1;
 }
 
 
-void sub_80891D0(struct Entity *r0)
+void sub_80891D0(Entity *r0)
 {
     sub_806CDD4(r0, 7, DIRECTION_NORTH);
     r0->info->unk15F = 0;
@@ -1815,7 +1815,7 @@ void sub_80891F0(void)
   sub_80855E4(sub_80891D0);
 }
 
-void sub_8089224(struct Entity * entity)
+void sub_8089224(Entity * entity)
 {
   s32 xPixelPos;
 
@@ -1872,8 +1872,8 @@ void sub_8089294(void)
 
 void sub_80892C8(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * RayquazaEntity;
+  Entity * LeaderEntity;
+  Entity * RayquazaEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   RayquazaEntity = GetEntityFromClientType(0xf);
@@ -1890,8 +1890,8 @@ void sub_80892C8(void)
 
 void sub_8089328(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * RayquazaEntity;
+  Entity * LeaderEntity;
+  Entity * RayquazaEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   RayquazaEntity = GetEntityFromClientType(0xf);
@@ -1920,9 +1920,9 @@ void sub_80893B4(u8 param_1, u8 param_2)
 
 void RayquazaPreFightDialogue(void)
 {
-  struct Entity *LeaderEntity;
-  struct Entity *PartnerEntity;
-  struct Entity *RayquazaEntity;
+  Entity *LeaderEntity;
+  Entity *PartnerEntity;
+  Entity *RayquazaEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   PartnerEntity = GetPartnerEntity();
@@ -1961,8 +1961,8 @@ void RayquazaPreFightDialogue(void)
 
 void RayquazaReFightDialogue(void)
 {
-  struct Entity *LeaderEntity;
-  struct Entity *RayquazaEntity;
+  Entity *LeaderEntity;
+  Entity *RayquazaEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   RayquazaEntity = GetEntityFromClientType(0xf);
@@ -1985,8 +1985,8 @@ void RayquazaReFightDialogue(void)
 
 void RayquazaPostStoryPreFightDialogue(void)
 {
-  struct Entity *LeaderEntity;
-  struct Entity *RayquazaEntity;
+  Entity *LeaderEntity;
+  Entity *RayquazaEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   RayquazaEntity = GetEntityFromClientType(0xf);
@@ -2010,7 +2010,7 @@ void RayquazaPostStoryPreFightDialogue(void)
   }
 }
 
-void RayquazaDropInEffect(struct Entity *rayquazaEntity)
+void RayquazaDropInEffect(Entity *rayquazaEntity)
 {
   s32 iVar1;
   s32 iVar2;
@@ -2061,7 +2061,7 @@ void RayquazaScreenFlash(void)
 
 void sub_808970C(void)
 {
-  struct Entity *LeaderEntity;
+  Entity *LeaderEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   DungeonStartNewBGM(MUS_TINY_WOODS);
@@ -2074,7 +2074,7 @@ void sub_808970C(void)
 
 void sub_808974C(void)
 {
-  struct Entity *LeaderEntity;
+  Entity *LeaderEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   sub_80854D4();
@@ -2084,9 +2084,9 @@ void sub_808974C(void)
   sub_8085860(LeaderEntity->pos.x,LeaderEntity->pos.y + -3);
 }
 
-void sub_8089788(struct Entity *entity, u8 param_2, u8 param_3)
+void sub_8089788(Entity *entity, u8 param_2, u8 param_3)
 {
-  struct Entity *monEntity;
+  Entity *monEntity;
   s32 index;
   u32 unk1;
 
@@ -2110,7 +2110,7 @@ void sub_8089788(struct Entity *entity, u8 param_2, u8 param_3)
 
 void sub_80897F0(void)
 {
-  struct Entity *LeaderEntity;
+  Entity *LeaderEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   sub_8086448();
@@ -2147,7 +2147,7 @@ void sub_80897F0(void)
 
 void sub_8089878(void)
 {
-  struct Entity *LeaderEntity;
+  Entity *LeaderEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   sub_8086448();
@@ -2169,20 +2169,20 @@ void sub_80898E4(void)
     sub_80866C4(&gUnknown_8103E34);
 }
 
-void sub_80898F8(struct Entity *r0)
+void sub_80898F8(Entity *r0)
 {
     sub_8068FE0(r0, 0x21C, 0);
 }
 
-void sub_8089908(struct Entity *r0)
+void sub_8089908(Entity *r0)
 {
     SetFacingDirection(r0, DIRECTION_NORTH);
 }
 
 void sub_8089914(void)
 {
-  struct Entity *LeaderEntity;
-  struct Entity *MewtwoEntity;
+  Entity *LeaderEntity;
+  Entity *MewtwoEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   MewtwoEntity = GetEntityFromClientType(0x11);
@@ -2199,8 +2199,8 @@ void sub_8089914(void)
 
 void sub_8089978(void)
 {
-  struct Entity *LeaderEntity;
-  struct Entity *MewtwoEntity;
+  Entity *LeaderEntity;
+  Entity *MewtwoEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   MewtwoEntity = GetEntityFromClientType(0x11);
@@ -2231,8 +2231,8 @@ void sub_8089A00(u8 param_1, u8 param_2)
 
 void MewtwoPreFightDialogue(void)
 {
-  struct Entity *LeaderEntity;
-  struct Entity *MewtwoEntity;
+  Entity *LeaderEntity;
+  Entity *MewtwoEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   MewtwoEntity = GetEntityFromClientType(0x11);
@@ -2258,8 +2258,8 @@ void MewtwoPreFightDialogue(void)
 
 void MewtwoReFightDialogue(void)
 {
-  struct Entity *LeaderEntity;
-  struct Entity *MewtwoEntity;
+  Entity *LeaderEntity;
+  Entity *MewtwoEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   MewtwoEntity = GetEntityFromClientType(0x11);
@@ -2283,7 +2283,7 @@ void MewtwoReFightDialogue(void)
   }
 }
 
-void MewtwoDropInEffect(struct Entity *mewtwoEntity)
+void MewtwoDropInEffect(Entity *mewtwoEntity)
 {
   s32 iVar1;
   s32 iVar2;
@@ -2333,8 +2333,8 @@ void MewtwoScreenFlash(void)
 
 void sub_8089C44(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * EnteiEntity;
+  Entity * LeaderEntity;
+  Entity * EnteiEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   EnteiEntity = GetEntityFromClientType(0x12);
@@ -2349,8 +2349,8 @@ void sub_8089C44(void)
 
 void sub_8089C90(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * EnteiEntity;
+  Entity * LeaderEntity;
+  Entity * EnteiEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   EnteiEntity = GetEntityFromClientType(0x12);
@@ -2377,8 +2377,8 @@ void sub_8089CFC(u8 param_1, u8 param_2)
 
 void EnteiPreFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * EnteiEntity;
+  Entity * LeaderEntity;
+  Entity * EnteiEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   EnteiEntity = GetEntityFromClientType(0x12);
@@ -2395,8 +2395,8 @@ void EnteiPreFightDialogue(void)
 
 void EnteiReFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * EnteiEntity;
+  Entity * LeaderEntity;
+  Entity * EnteiEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   EnteiEntity = GetEntityFromClientType(0x12);
@@ -2413,8 +2413,8 @@ void EnteiReFightDialogue(void)
 
 void EnteiPostStoryPreFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * EnteiEntity;
+  Entity * LeaderEntity;
+  Entity * EnteiEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   EnteiEntity = GetEntityFromClientType(0x12);
@@ -2462,8 +2462,8 @@ void EnteiScreenFlash(void)
 
 void sub_8089EFC(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * RaikouEntity;
+  Entity * LeaderEntity;
+  Entity * RaikouEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   RaikouEntity = GetEntityFromClientType(0x13);
@@ -2478,8 +2478,8 @@ void sub_8089EFC(void)
 
 void sub_8089F44(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * RaikouEntity;
+  Entity * LeaderEntity;
+  Entity * RaikouEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   RaikouEntity = GetEntityFromClientType(0x13);
@@ -2494,8 +2494,8 @@ void sub_8089F44(void)
 
 void sub_8089F8C(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * RaikouEntity;
+  Entity * LeaderEntity;
+  Entity * RaikouEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   RaikouEntity = GetEntityFromClientType(0x13);
@@ -2522,8 +2522,8 @@ void sub_8089FF0(u8 param_1, u8 param_2)
 
 void RaikouPreFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * RaikouEntity;
+  Entity * LeaderEntity;
+  Entity * RaikouEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   RaikouEntity = GetEntityFromClientType(0x13);
@@ -2547,8 +2547,8 @@ void RaikouPreFightDialogue(void)
 
 void RaikouReFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * RaikouEntity;
+  Entity * LeaderEntity;
+  Entity * RaikouEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   RaikouEntity = GetEntityFromClientType(0x13);
@@ -2567,8 +2567,8 @@ void RaikouReFightDialogue(void)
 
 void RaikouPostStoryPreFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * RaikouEntity;
+  Entity * LeaderEntity;
+  Entity * RaikouEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   RaikouEntity = GetEntityFromClientType(0x13);
@@ -2617,8 +2617,8 @@ void RaikouScreenFlash(void)
 
 void sub_808A264(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * SuicuneEntity;
+  Entity * LeaderEntity;
+  Entity * SuicuneEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   SuicuneEntity = GetEntityFromClientType(0x14);
@@ -2634,8 +2634,8 @@ void sub_808A264(void)
 
 void sub_808A2C0(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * SuicuneEntity;
+  Entity * LeaderEntity;
+  Entity * SuicuneEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   SuicuneEntity = GetEntityFromClientType(0x14);
@@ -2649,8 +2649,8 @@ void sub_808A2C0(void)
 
 void sub_808A308(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * SuicuneEntity;
+  Entity * LeaderEntity;
+  Entity * SuicuneEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   SuicuneEntity = GetEntityFromClientType(0x14);
@@ -2677,8 +2677,8 @@ void sub_808A36C(u8 param_1, u8 param_2)
 
 void SuicunePreFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * SuicuneEntity;
+  Entity * LeaderEntity;
+  Entity * SuicuneEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   SuicuneEntity = GetEntityFromClientType(0x14);
@@ -2705,8 +2705,8 @@ void SuicunePreFightDialogue(void)
 
 void SuicuneReFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * SuicuneEntity;
+  Entity * LeaderEntity;
+  Entity * SuicuneEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   SuicuneEntity = GetEntityFromClientType(0x14);
@@ -2722,8 +2722,8 @@ void SuicuneReFightDialogue(void)
 
 void SuicunePostStoryPreFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * SuicuneEntity;
+  Entity * LeaderEntity;
+  Entity * SuicuneEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   SuicuneEntity = GetEntityFromClientType(0x14);
@@ -2742,7 +2742,7 @@ void SuicunePostStoryPreFightDialogue(void)
   }
 }
 
-void sub_808A528(struct Entity * param_1)
+void sub_808A528(Entity * param_1)
 {
   s32 iVar1;
   s32 iVar2;
@@ -2792,8 +2792,8 @@ void SuicuneScreenFlash(void)
 
 void sub_808A608(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * HoOhEntity;
+  Entity * LeaderEntity;
+  Entity * HoOhEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   HoOhEntity = GetEntityFromClientType(0x15);
@@ -2810,8 +2810,8 @@ void sub_808A608(void)
 
 void sub_808A668(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * HoOhEntity;
+  Entity * LeaderEntity;
+  Entity * HoOhEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   HoOhEntity = GetEntityFromClientType(0x15);
@@ -2846,9 +2846,9 @@ void sub_808A718(void)
 
 void HoOhPreFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * HoOhEntity;
-  struct Position32 local_14;
+  Entity * LeaderEntity;
+  Entity * HoOhEntity;
+  Position32 local_14;
 
   LeaderEntity = xxx_call_GetLeader();
   HoOhEntity = GetEntityFromClientType(0x15);
@@ -2885,9 +2885,9 @@ void HoOhPreFightDialogue(void)
 
 void HoOhReFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * HoOhEntity;
-  struct Position32 local_14;
+  Entity * LeaderEntity;
+  Entity * HoOhEntity;
+  Position32 local_14;
 
   LeaderEntity = xxx_call_GetLeader();
   HoOhEntity = GetEntityFromClientType(0x15);
@@ -2920,7 +2920,7 @@ void HoOhReFightDialogue(void)
   }
 }
 
-void HoOhDropInEffect(struct Entity * param_1)
+void HoOhDropInEffect(Entity * param_1)
 {
   s32 iVar1;
   s32 iVar2;
@@ -2970,8 +2970,8 @@ void HoOhScreenFlash(void)
 
 void sub_808A9E4(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * LatiosEntity;
+  Entity * LeaderEntity;
+  Entity * LatiosEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   LatiosEntity = GetEntityFromClientType(0x16);
@@ -2986,8 +2986,8 @@ void sub_808A9E4(void)
 
 void sub_808AA3C(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * LatiosEntity;
+  Entity * LeaderEntity;
+  Entity * LatiosEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   LatiosEntity = GetEntityFromClientType(0x16);
@@ -3002,8 +3002,8 @@ void sub_808AA3C(void)
 
 void sub_808AA94(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * LatiosEntity;
+  Entity * LeaderEntity;
+  Entity * LatiosEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   LatiosEntity = GetEntityFromClientType(0x16);
@@ -3026,10 +3026,10 @@ void sub_808AAF0(u8 param_1, u8 param_2)
 
 void LatiosPreFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * LatiosEntity;
-  struct Position32 local_18;
-  struct Position local_19;
+  Entity * LeaderEntity;
+  Entity * LatiosEntity;
+  Position32 local_18;
+  Position local_19;
 
   LeaderEntity = xxx_call_GetLeader();
   LatiosEntity = GetEntityFromClientType(0x16);
@@ -3059,8 +3059,8 @@ void LatiosPreFightDialogue(void)
 
 void LatiosReFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * LatiosEntity;
+  Entity * LeaderEntity;
+  Entity * LatiosEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   LatiosEntity = GetEntityFromClientType(0x16);
@@ -3106,7 +3106,7 @@ void LatiosScreenFlash(void)
 
 void sub_808ACC0(void)
 {
-  struct Entity * uVar2;
+  Entity * uVar2;
 
   if (HasRecruitedMon(MONSTER_REGIROCK)) {
     uVar2 = GetEntityFromClientType(0x17);
@@ -3133,7 +3133,7 @@ void sub_808ACC0(void)
 
 void sub_808AD48(void)
 {
-  struct Entity * uVar2;
+  Entity * uVar2;
 
   if (HasRecruitedMon(MONSTER_REGICE)) {
     uVar2 = GetEntityFromClientType(0x18);
@@ -3161,7 +3161,7 @@ void sub_808AD48(void)
 void sub_808ADCC(void)
 {
 
-  struct Entity * uVar2;
+  Entity * uVar2;
 
   if (HasRecruitedMon(MONSTER_REGISTEEL)) {
     uVar2 = GetEntityFromClientType(0x19);
@@ -3188,9 +3188,9 @@ void sub_808ADCC(void)
 
 void sub_808AE54(char param_1,char param_2,u32 *param_3)
 {
-  struct Entity * LeaderEntity;
+  Entity * LeaderEntity;
   s16 IDStack[2];
-  struct Item item;
+  Item item;
 
 
   LeaderEntity = xxx_call_GetLeader();
@@ -3211,9 +3211,9 @@ void sub_808AE54(char param_1,char param_2,u32 *param_3)
 
 void sub_808AEC8(char param_1,char param_2,u32 *param_3)
 {
-  struct Entity * LeaderEntity;
+  Entity * LeaderEntity;
   s16 IDStack[2];
-  struct Item item;
+  Item item;
 
 
   LeaderEntity = xxx_call_GetLeader();
@@ -3233,9 +3233,9 @@ void sub_808AEC8(char param_1,char param_2,u32 *param_3)
 
 void sub_808AF3C(char param_1,char param_2,u32 *param_3)
 {
-  struct Entity * LeaderEntity;
+  Entity * LeaderEntity;
   s16 IDStack[2];
-  struct Item item;
+  Item item;
 
 
   LeaderEntity = xxx_call_GetLeader();
@@ -3255,7 +3255,7 @@ void sub_808AF3C(char param_1,char param_2,u32 *param_3)
 
 void sub_808AFB0(char param_1)
 {
-  struct Entity * LeaderEntity;
+  Entity * LeaderEntity;
   s16 IDStack [2];
 
   LeaderEntity = xxx_call_GetLeader();
@@ -3273,7 +3273,7 @@ void sub_808AFB0(char param_1)
 
 void sub_808B030(char param_1)
 {
-  struct Entity * LeaderEntity;
+  Entity * LeaderEntity;
   s16 IDStack [2];
 
   LeaderEntity = xxx_call_GetLeader();
@@ -3291,7 +3291,7 @@ void sub_808B030(char param_1)
 
 void sub_808B0B0(char param_1)
 {
-  struct Entity * LeaderEntity;
+  Entity * LeaderEntity;
   s16 IDStack [2];
 
   LeaderEntity = xxx_call_GetLeader();
@@ -3455,34 +3455,34 @@ void sub_808B1CC(u8 r0)
 }
 
 
-void SetupRegiFacingDirection(struct Entity *regiEntity)
+void SetupRegiFacingDirection(Entity *regiEntity)
 {
     regiEntity->info->action.direction = DIRECTION_NORTH;
     sub_806CE68(regiEntity, DIRECTION_NORTH);
 }
 
 
-void SetupRegirockFightHP(struct Entity *r0)
+void SetupRegirockFightHP(Entity *r0)
 {
     SetupBossFightHP(r0, 450, MUS_BOSS_BATTLE);
 }
 
 
-void SetupRegiceFightHP(struct Entity *r0)
+void SetupRegiceFightHP(Entity *r0)
 {
     SetupBossFightHP(r0, 450, MUS_BOSS_BATTLE);
 }
 
 
-void SetupRegisteelFightHP(struct Entity *r0)
+void SetupRegisteelFightHP(Entity *r0)
 {
     SetupBossFightHP(r0, 450, MUS_BOSS_BATTLE);
 }
 
 void sub_808B2F4(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * JirachiEntity;
+  Entity * LeaderEntity;
+  Entity * JirachiEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   JirachiEntity = GetEntityFromClientType(0x1a);
@@ -3500,8 +3500,8 @@ void sub_808B2F4(void)
 
 void sub_808B35C(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * JirachiEntity;
+  Entity * LeaderEntity;
+  Entity * JirachiEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   JirachiEntity = GetEntityFromClientType(0x1a);
@@ -3550,8 +3550,8 @@ void sub_808B3E4(u8 param_1, u8 param_2, u8 param_3)
 
 void JirachiPreFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * JirachiEntity;
+  Entity * LeaderEntity;
+  Entity * JirachiEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   JirachiEntity = GetEntityFromClientType(0x1a);
@@ -3577,7 +3577,7 @@ void JirachiPreFightDialogue(void)
 
 void sub_808B50C(void)
 {
-  struct Entity * JirachiEntity;
+  Entity * JirachiEntity;
 
   JirachiEntity = GetEntityFromClientType(0x1a);
   CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_JIRACHI);
@@ -3606,19 +3606,19 @@ void sub_808B50C(void)
 void JirachiWish(void)
 {
   u8 friendArea;
-  struct Entity *JirachiEntity;
-  struct Position *LeaderPos;
-  struct Entity *LeaderEntity;
+  Entity *JirachiEntity;
+  Position *LeaderPos;
+  Entity *LeaderEntity;
   s32 wishChoice;
   s32 counter;
   u32 direction;
   s32 index;
-  struct Item auStack152 [9];
-  struct Item itemStack [9];
-  struct Item strengthItems [9];
-  struct Position pos1;
-  struct Position pos2;
-  struct Position pos3;
+  Item auStack152 [9];
+  Item itemStack [9];
+  Item strengthItems [9];
+  Position pos1;
+  Position pos2;
+  Position pos3;
 
   JirachiEntity = GetEntityFromClientType(0x1a);
   CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_JIRACHI);
@@ -3835,14 +3835,14 @@ void JirachiWishGrantFlash(void)
   sub_8085EB0();
 }
 
-void sub_808BB3C(struct Position *param_1)
+void sub_808BB3C(Position *param_1)
 {
 #ifndef NONMATCHING
   register s32 iVar1 asm("r0");
 #else
   s32 iVar1;
 #endif
-  struct Position local_8;
+  Position local_8;
   
   iVar1 = param_1->x * 0x1800 + 0xc00;
   if (iVar1 < 0) {
@@ -3859,12 +3859,12 @@ void sub_808BB3C(struct Position *param_1)
   sub_8085EC8(100,0,0,&local_8,0);
 }
 
-void sub_808BBA8(struct Entity *jirachiEntity)
+void sub_808BBA8(Entity *jirachiEntity)
 {
   sub_806BFC0(jirachiEntity->info,0);
 }
 
-void JirachiDropInEffect(struct Entity *jirachiEntity)
+void JirachiDropInEffect(Entity *jirachiEntity)
 {
   s32 iVar1;
   s32 iVar2;
@@ -3887,7 +3887,7 @@ void JirachiDropInEffect(struct Entity *jirachiEntity)
  jirachiEntity->info->unk174 = 0;
 }
 
-void JirachiSpinEffect(struct Entity * jirachiEntity)
+void JirachiSpinEffect(Entity * jirachiEntity)
 {
   s32 uVar1;
 
@@ -3901,7 +3901,7 @@ void JirachiSpinEffect(struct Entity * jirachiEntity)
   sub_80861F8(99,jirachiEntity,1);
 }
 
-void JirachiWishGrantDialogue(struct Entity *jirachiEntity)
+void JirachiWishGrantDialogue(Entity *jirachiEntity)
 {
   u32 uVar2;
 
@@ -3987,8 +3987,8 @@ u8 JirachiFriendAreaSearch(void)
 
 void sub_808BDEC(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * LugiaEntity;
+  Entity * LeaderEntity;
+  Entity * LugiaEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   LugiaEntity = GetEntityFromClientType(0x1b);
@@ -4018,8 +4018,8 @@ void sub_808BE70(u8 param_1,u8 param_2)
 
 void LugiaPreFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * LugiaEntity;
+  Entity * LeaderEntity;
+  Entity * LugiaEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   LugiaEntity = GetEntityFromClientType(0x1b);
@@ -4124,8 +4124,8 @@ void sub_808C0CC(void)
 
 void sub_808C10C(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * KyogreEntity;
+  Entity * LeaderEntity;
+  Entity * KyogreEntity;
 
   u32 XPos;
   s32 YPos;
@@ -4161,8 +4161,8 @@ void sub_808C1A4(u8 param_1,u8 param_2)
 
 void KyogrePreFightDialogue(void)
 {
-  struct Entity *LeaderEntity;
-  struct Entity *KyogreEntity;
+  Entity *LeaderEntity;
+  Entity *KyogreEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   KyogreEntity = GetEntityFromClientType(0x1c);
@@ -4246,7 +4246,7 @@ void sub_808C360(void)
 
 void sub_808C3A0(void)
 {
-  struct Entity * LeaderEntity;
+  Entity * LeaderEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   DungeonStopBGM();
@@ -4274,7 +4274,7 @@ void sub_808C414(u8 param_1,u8 param_2)
 
 void DeoxysPreFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
+  Entity * LeaderEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   sub_8086448();
@@ -4331,25 +4331,25 @@ void sub_808C550(void)
   DeoxysScreenFlash();
 }
 
-void sub_808C590(struct Entity *r0)
+void sub_808C590(Entity *r0)
 {
     sub_8068FE0(r0, 0x21C, 0);
 }
 
-void SetupDeoxysFacingDirection(struct Entity *deoxysEntity)
+void SetupDeoxysFacingDirection(Entity *deoxysEntity)
 {
     SetFacingDirection(deoxysEntity, DIRECTION_SOUTH);
 }
 
-void SetupDeoxysFightHP(struct Entity *deoxysEntity)
+void SetupDeoxysFightHP(Entity *deoxysEntity)
 {
     SetupBossFightHP(deoxysEntity, 950, MUS_BATTLE_WITH_RAYQUAZA);
 }
 
 void sub_808C5C0(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * CelebiEntity;
+  Entity * LeaderEntity;
+  Entity * CelebiEntity;
 
   u32 XPos;
   s32 YPos;
@@ -4374,10 +4374,10 @@ void nullsub_100(u8 r0, u8 r1, u32 r2)
 #ifdef NONMATCHING
 void CelebiJoinDialogue(void)
 {
-  struct Entity *LeaderEntity;
+  Entity *LeaderEntity;
   s32 state;
   s32 menuChoice;
-  struct Entity *CelebiEntity;
+  Entity *CelebiEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   CelebiEntity = GetEntityFromClientType(0x1e);
@@ -4778,7 +4778,7 @@ void CelebiJoinDialogue(void)
 }
 #endif
 
-void sub_808C8E0(struct Entity *param_1)
+void sub_808C8E0(Entity *param_1)
 {
   s32 iVar1;
 
@@ -4800,11 +4800,11 @@ void sub_808C938(void)
     sub_80855E4(sub_808C9B0);
 }
 
-void sub_808C948(struct Entity *entity, u8 param_2)
+void sub_808C948(Entity *entity, u8 param_2)
 {
   bool8 flag;
   s32 index;
-  struct Entity *pokeEntity;
+  Entity *pokeEntity;
 
   if (param_2 == 0x37) {
     flag = FALSE;
@@ -4829,7 +4829,7 @@ void sub_808C998(void)
     sub_803E708(0xA, 0x46);
 }
 
-void sub_808C9B0(struct Entity *param_1)
+void sub_808C9B0(Entity *param_1)
 {
     param_1->info->action.direction = DIRECTION_NORTH;
     sub_806CE68(param_1, DIRECTION_NORTH);
@@ -4837,8 +4837,8 @@ void sub_808C9B0(struct Entity *param_1)
 
 void sub_808C9C4(void)
 {
-    struct Entity *LeaderEntity;
-    struct Entity *MedichamEntity;
+    Entity *LeaderEntity;
+    Entity *MedichamEntity;
 
     LeaderEntity = xxx_call_GetLeader();
     MedichamEntity = GetEntityFromClientType(7);
@@ -4854,7 +4854,7 @@ void sub_808C9C4(void)
 // Medicham Rescue Dialogue?
 void MedichamRescueDialogue(void)
 {
-    struct Entity *MedichamEntity;
+    Entity *MedichamEntity;
     s32 counter;
 
     MedichamEntity = GetEntityFromClientType(7);
@@ -4906,8 +4906,8 @@ void MedichamRescueDialogue(void)
 
 void sub_808CB5C(void)
 {
-    struct Entity *LeaderEntity;
-    struct Entity *MedichamEntity;
+    Entity *LeaderEntity;
+    Entity *MedichamEntity;
 
     LeaderEntity = xxx_call_GetLeader();
     MedichamEntity = GetEntityFromClientType(7);
@@ -4925,8 +4925,8 @@ void DummyFightDialogue(void)
 
 void sub_808CBB0(void)
 {
-    struct Entity *LeaderEntity;
-    struct Entity *SmeargleEntity;
+    Entity *LeaderEntity;
+    Entity *SmeargleEntity;
 
     LeaderEntity = xxx_call_GetLeader();
     SmeargleEntity = GetEntityFromClientType(0x1F);
@@ -4942,7 +4942,7 @@ void sub_808CBB0(void)
 // Smeargle Rescue dialogue scene
 void SmeargleRescueDialogue(void)
 {
-    struct Entity *SmeargleEntity;
+    Entity *SmeargleEntity;
     s32 counter;
 
     SmeargleEntity = GetEntityFromClientType(0x1F);
@@ -4997,8 +4997,8 @@ void SmeargleRescueDialogue(void)
 
 void sub_808CD44(void)
 {
-    struct Entity *LeaderEntity;
-    struct Entity *SmeargleEntity;
+    Entity *LeaderEntity;
+    Entity *SmeargleEntity;
 
     LeaderEntity = xxx_call_GetLeader();
     SmeargleEntity = GetEntityFromClientType(0x1F);

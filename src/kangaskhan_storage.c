@@ -2,13 +2,13 @@
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
 #include "code_801C620.h"
-#include "item.h"
+#include "items.h"
 #include "kangaskhan_storage.h"
 #include "kecleon_bros.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
-#include "team_inventory.h"
+
 #include "text1.h"
 #include "text2.h"
 
@@ -25,16 +25,16 @@ extern const u8 *gUnknown_80D4958[];
 extern const u8 *gUnknown_80D4964[];
 extern const u8 *gUnknown_80D4970[];
 extern const u8 *gUnknown_80D4984[];
-extern struct UnkTextStruct2 gUnknown_80DB748;
-extern struct UnkTextStruct2 gUnknown_80DB760;
-extern struct UnkTextStruct2 gUnknown_80DB778;
-extern struct UnkTextStruct2 gUnknown_80DB790;
+extern UnkTextStruct2 gUnknown_80DB748;
+extern UnkTextStruct2 gUnknown_80DB760;
+extern UnkTextStruct2 gUnknown_80DB778;
+extern UnkTextStruct2 gUnknown_80DB790;
 extern const u8 gUnknown_80DB7A8[]; // "Number?\0"
-extern struct UnkTextStruct2 gUnknown_80DB7B8;
-extern struct UnkTextStruct2 gUnknown_80DB7D0;
-extern struct UnkTextStruct2 gUnknown_80DB7E8;
-extern struct UnkTextStruct2 gUnknown_80DB800;
-extern struct UnkTextStruct2 gUnknown_80DB818;
+extern UnkTextStruct2 gUnknown_80DB7B8;
+extern UnkTextStruct2 gUnknown_80DB7D0;
+extern UnkTextStruct2 gUnknown_80DB7E8;
+extern UnkTextStruct2 gUnknown_80DB800;
+extern UnkTextStruct2 gUnknown_80DB818;
 extern const u8 gUnknown_80DB830[]; // "Number?\0"
 
 extern const u8 *gKangaskhanStorageDialogue[2][20];
@@ -83,7 +83,7 @@ void UpdateKangaskhanStorageState(u32);
 u32 CreateKangaskhanStorage(bool32 isAsleep)
 {
     char *monName;
-    struct OpenedFile *faceFile;
+    OpenedFile *faceFile;
     
     ResetUnusedInputStruct();
     sub_800641C(NULL, TRUE, TRUE);
@@ -588,7 +588,7 @@ void sub_80178D0(void)
 void sub_8017928(void)
 {
     s32 menuAction;
-    struct BulkItem item;
+    BulkItem item;
 
     if (sub_80144A4(&menuAction) != 0)
         return;
@@ -641,7 +641,7 @@ void sub_8017A1C(void)
 {
     s32 itemID;
     int menuAction;
-    struct BulkItem item;
+    BulkItem item;
 
     if (sub_80144A4(&menuAction) != 0)
         return;
@@ -1225,7 +1225,7 @@ void sub_8018620(void)
 
 void sub_80186F8(void)
 {
-    struct BulkItem item;
+    BulkItem item;
     s32 itemID;
 
     switch (sub_801CA08(TRUE)) {
@@ -1284,7 +1284,7 @@ void sub_80186F8(void)
 
 void sub_8018854(void)
 {
-    struct BulkItem item;
+    BulkItem item;
 
     sub_801CA08(FALSE);
     sub_8012FD8(&gUnknown_203B20C->unk70);
@@ -1368,7 +1368,7 @@ void sub_8018904(void)
 
 void sub_80189C8(void)
 {
-    struct BulkItem item;
+    BulkItem item;
     s32 menuAction;
 
     menuAction = 0;

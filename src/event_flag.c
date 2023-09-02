@@ -1,7 +1,7 @@
 #include "global.h"
 #include "constants/friend_area.h"
 #include "constants/item.h"
-#include "item.h"
+#include "items.h"
 #include "event_flag.h"
 #include "debug.h"
 #include "memory.h"
@@ -9,7 +9,7 @@
 #include "rescue_team_info.h"
 #include "other_random.h"
 #include "friend_area.h"
-#include "team_inventory.h"
+
 #include "code_8097670.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
@@ -36,14 +36,14 @@ extern u8 gUnknown_80B7144[];
 extern u8 *gUnknown_80B714C[];
 extern u8 *gUnknown_80B71A0[];
 extern u8 gUnknown_80B72CC[];
-extern struct DebugLocation gUnknown_80B7318;
+extern DebugLocation gUnknown_80B7318;
 extern u8 gUnknown_80B7324[];
-extern struct DebugLocation gUnknown_80B7350;
+extern DebugLocation gUnknown_80B7350;
 extern u8 gUnknown_80B735C[];
 extern u8 gUnknown_80B7378[];
 extern u8 gUnknown_80B7388[];
 
-void FatalError(struct DebugLocation *, const char *, ...) __attribute__((noreturn));
+void FatalError(DebugLocation *, const char *, ...) __attribute__((noreturn));
 extern u8 sub_80973F4(u32);
 extern bool8 HasCompletedAllMazes(void);
 extern void sub_8097418(u32, u32);

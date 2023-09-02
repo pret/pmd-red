@@ -7,7 +7,7 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "input.h"
-#include "team_inventory.h"
+
 #include "text1.h"
 #include "text2.h"
 #include "memory.h"
@@ -27,10 +27,10 @@ struct unkStruct_203B280
 {
     /* 0x0 */ u8 friendAreas[NUM_FRIEND_AREAS];
     /* 0x3C */ u32 mode;
-    struct MenuInputStruct unk40;
+    MenuInputStruct unk40;
     s32 unk74;
-    struct UnkTextStruct2 *unk78;
-    struct UnkTextStruct2 unk7C[4];
+    UnkTextStruct2 *unk78;
+    UnkTextStruct2 unk7C[4];
     u8 unkDC[4];
 };
 EWRAM_DATA_2 struct unkStruct_203B280 *gUnknown_203B280 = {0};
@@ -40,15 +40,15 @@ EWRAM_DATA_2 u16 gUnknown_203B28A = {0};
 
 struct unkStruct_203B28C
 {
-    struct MenuInputStructSub unk0;
+    MenuInputStructSub unk0;
     /* 0xC */ u8 friendArea;
     bool8 unkD;
     s16 unkE[0x10];
     u32 unk30[0x10];
     /* 0x70 */ s32 numPokemoninFriendArea;
     s32 unk74;
-    struct UnkTextStruct2 *unk78;
-    struct UnkTextStruct2 unk7C[4];
+    UnkTextStruct2 *unk78;
+    UnkTextStruct2 unk7C[4];
     u8 unkDC[4];
 };
 EWRAM_DATA_2 struct unkStruct_203B28C *gUnknown_203B28C = {0};
@@ -69,13 +69,13 @@ extern const u8 *gUnknown_80D4928[];
 extern const u8 *gUnknown_80D4934[];
 extern const u8 *gUnknown_80D4970[];
 extern const u8 *gUnknown_80D4978[];
-extern struct UnkTextStruct2 gUnknown_80DC464;
-extern struct UnkTextStruct2 gUnknown_80DC47C;
-extern struct UnkTextStruct2 gUnknown_80DC4BC;
-extern struct UnkTextStruct2 gUnknown_80DC4D8;
-extern struct UnkTextStruct2 gUnknown_80DC534;
-extern struct UnkTextStruct2 gUnknown_80DC54C;
-extern struct UnkTextStruct2 gUnknown_80DC564;
+extern UnkTextStruct2 gUnknown_80DC464;
+extern UnkTextStruct2 gUnknown_80DC47C;
+extern UnkTextStruct2 gUnknown_80DC4BC;
+extern UnkTextStruct2 gUnknown_80DC4D8;
+extern UnkTextStruct2 gUnknown_80DC534;
+extern UnkTextStruct2 gUnknown_80DC54C;
+extern UnkTextStruct2 gUnknown_80DC564;
 
 extern u8 *gUnknown_80D49BC[];
 extern u8 gUnknown_80DC4A4[];
@@ -92,7 +92,7 @@ extern void sub_803AA34();
 extern u8 sub_803ABC8(void);
 extern u8 sub_802132C(void);
 extern void sub_8022380(void);
-bool8 sub_8023144(s32 param_1, s32 index, struct UnkTextStruct2_sub *sub, u32 param_4);
+bool8 sub_8023144(s32 param_1, s32 index, UnkTextStruct2_sub *sub, u32 param_4);
 void sub_8023354(u8 param_1);
 extern void CreateWigglytuffConfirmFriendAreaMenu(void);
 extern u8 sub_8099B94(void);
@@ -535,7 +535,7 @@ void sub_8021A60(void)
     s32 sVar4;
     s32 iVar6;
     s32 index;
-    struct PokemonStruct *pokeStruct;
+    PokemonStruct1 *pokeStruct;
 
     gUnknown_203B28C->numPokemoninFriendArea = 0;
     for(index = 0; index < 0x10; index++)
@@ -585,7 +585,7 @@ s32 sub_8021B58(s16 species)
 bool8 CreateWigglytuffShop(bool32 isAsleep)
 {
     char *string;
-    struct OpenedFile *file;
+    OpenedFile *file;
 
     ResetUnusedInputStruct();
     sub_800641C(NULL, TRUE, TRUE);
@@ -703,7 +703,7 @@ void sub_8021D5C(void)
 void UpdateWigglytuffDialogue(void)
 {
     char *string;
-    struct unkStruct_8092638 uStack_14;
+    unkStruct_8092638 uStack_14;
 
     switch(gWigglytuffShop->state) 
     {

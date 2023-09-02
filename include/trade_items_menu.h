@@ -2,7 +2,7 @@
 #define GUARD_TRADE_ITEMS_MENU_H
 
 #include "text.h"
-#include "item.h"
+#include "items.h"
 #include "menu.h"
 
 struct TradeSubStruct
@@ -29,13 +29,13 @@ struct TradeItemsMenu
     u32 unk20;
     u32 unk24;
     u32 unk28;
-    struct UnkTextStruct2 *unk2C;
+    UnkTextStruct2 *unk2C;
     u32 unk30;
     u32 unk34;
     u8 fill38[0x44 - 0x38];
-    struct MenuStruct unk44[4];
-    struct UnkTextStruct2 unk184[4];
-    struct UnkTextStruct2 unk1E4[4];
+    MenuStruct unk44[4];
+    UnkTextStruct2 unk184[4];
+    UnkTextStruct2 unk1E4[4];
 
     // TODO These might be structs...
     struct TradeSubStruct unk244;
@@ -44,7 +44,7 @@ struct TradeItemsMenu
 
     /* 0x254 */ struct TradeSubStruct sentItem;
 
-    /* 0x25C */ struct Item itemToSend;
+    /* 0x25C */ Item itemToSend;
 
     u8 fill25F[0x3A0 - 0x260];
 };

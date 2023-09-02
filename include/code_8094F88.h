@@ -3,12 +3,12 @@
 
 #include "code_8092334.h"
 #include "dungeon_global_data.h"
-#include "item.h"
+#include "items.h"
 #include "pokemon.h"
 
 struct WonderMailSub
 {
-    /* 0x4 */ struct DungeonLocation dungeon;
+    /* 0x4 */ DungeonLocation dungeon;
     u32 seed;
 };
 
@@ -26,7 +26,7 @@ struct unkStruct_203B480
         u16 unk10_u16;
     } unk10;
     /* 0x14 */ u8 playerName[0x20 - 0x14];
-    struct Item item;
+    Item item;
     u32 unk24;
     u32 unk28;
     /* 0x2C */ s8 rescuesAllowed;
@@ -37,7 +37,7 @@ struct unkStruct_203B480
 struct unkStruct_203B484
 {
     /* 0x0 */ u32 unk0;
-    /* 0x4 */ struct PokemonStruct unk4;
+    /* 0x4 */ PokemonStruct1 unk4;
 };
 
 // size: 0x84

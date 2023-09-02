@@ -34,14 +34,14 @@
 extern const char Cancel_80E7D24[];
 extern const char Yes_80E7D2C[];
 
-const struct MenuItem gSelectWonderMailModeMainMenuItems[3] =
+const MenuItem gSelectWonderMailModeMainMenuItems[3] =
 {
     {"Send", WONDER_MAIL_MODE_SEND},
     {"Receive", WONDER_MAIL_MODE_RECEIVE},
     {NULL, 0}
 };
 
-const struct MenuItem gSendWonderMailMainMenuItems[4] =
+const MenuItem gSendWonderMailMainMenuItems[4] =
 {
     {"Game Link cable", WONDER_MAIL_GAME_LINK},
     {"Password", -1},
@@ -50,7 +50,7 @@ const struct MenuItem gSendWonderMailMainMenuItems[4] =
 
 };
 
-const struct MenuItem gReceiveWonderMailMainMenuItems[4] =
+const MenuItem gReceiveWonderMailMainMenuItems[4] =
 {
     {"Game Link cable", WONDER_MAIL_GAME_LINK},
     {"Password", WONDER_MAIL_PASSWORD},
@@ -58,7 +58,7 @@ const struct MenuItem gReceiveWonderMailMainMenuItems[4] =
     {NULL, 0}
 };
 
-const struct MenuItem gUnknown_80E78F8[3] =
+const MenuItem gUnknown_80E78F8[3] =
 {
     {"Yes", 6},
     {"Cancel", 0},
@@ -68,7 +68,7 @@ const struct MenuItem gUnknown_80E78F8[3] =
 
 #include "data/wonder_mail_main_menu.h"
 
-const struct MenuItem WonderMailMainUnused[3] =
+const MenuItem WonderMailMainUnused[3] =
 {
     {Yes_80E7D2C, 1},
     {Cancel_80E7D24, 0},
@@ -103,7 +103,7 @@ struct unkStruct_203B3E8
         u8 unk38_u8[0x30]; // idk why it fills to 0x30 instead...
     } UNK38;
     u8 fill68[0x1EC - 0x68];
-    struct UnkTextStruct2 unk1EC[4];
+    UnkTextStruct2 unk1EC[4];
     u32 unk24C;
     u32 wonderMailStatus;
 

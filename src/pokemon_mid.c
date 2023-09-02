@@ -3,7 +3,7 @@
 #include "constants/colors.h"
 #include "constants/move_id.h"
 #include "file_system.h"
-#include "item.h"
+#include "items.h"
 #include "moves.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
@@ -11,7 +11,7 @@
 #include "subStruct_203B240.h"
 #include "text_util.h"
 
-extern struct MonsterDataEntry *gMonsterParameters;
+extern MonsterDataEntry *gMonsterParameters;
 extern const char gUnknown_8107600[];
 extern const char gUnknown_8107608[];
 extern const char gUnownLetters[];
@@ -28,13 +28,13 @@ extern char* gFormattedStatusNames[];
 
 // wram data:
 extern u16 gLevelCurrentPokeId;
-extern struct LevelData gLevelCurrentData[];
+extern LevelData gLevelCurrentData[];
 
 
 extern int sprintf(char *, const char *, ...);
 extern u32 ReturnIntFromChar(u8 r0);
 extern void sub_80943A0(void*, s32);
-extern void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct*, struct PokemonStruct2*);
+extern void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1*, PokemonStruct2*);
 extern const u8 *DecompressMoveID(const u8 *a1, u16 *a2);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 
@@ -48,7 +48,7 @@ struct unkStruct_8107654 {
 
 extern u8 gUnknown_8107645[12];
 extern struct unkStruct_8107654 gUnknown_8107654[6];
-extern struct MonsterDataEntry *gMonsterParameters;
+extern MonsterDataEntry *gMonsterParameters;
 extern struct FileArchive gMonsterFileArchive;
 extern const char gUnknown_8107684[];
 
@@ -59,7 +59,7 @@ bool8 sub_808D6E8()
     s32 count = 0;
     s32 size_count = 0;
     for (i = 0; i < NUM_MONSTERS; i++) {
-        struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[i];
+        PokemonStruct1* pokemon = &gRecruitedPokemonRef->pokemon[i];
         if ((1 & pokemon->unk0) && ((pokemon->unk0 >> 1) % 2)) {
             size_count += GetBodySize(pokemon->speciesNum);
             count++;
@@ -156,7 +156,7 @@ bool8 sub_808D750(s16 index_) {
 //     s32 size_count = 0;
 
 //     for (i = 0; i < 413; i++) {
-//         register struct PokemonStruct* pokemon = &i[gRecruitedPokemonRef->pokemon];
+//         register PokemonStruct1* pokemon = &i[gRecruitedPokemonRef->pokemon];
 //         register u16 unk0 = pokemon->unk0;
 //         if ((unk0 & 1) && ((pokemon->unk0 >> 1) & 1)) {
 //             size_count += GetBodySize(pokemon->speciesNum);
@@ -165,7 +165,7 @@ bool8 sub_808D750(s16 index_) {
 //     }
 
 //     if (count < 4) {
-//         struct PokemonStruct* pokemon;
+//         PokemonStruct1* pokemon;
 
 //         pokemon = &gRecruitedPokemonRef->pokemon[index];
 
@@ -178,21 +178,21 @@ bool8 sub_808D750(s16 index_) {
 // }
 
 
-void PeekPokemonItem(s16 index_, struct BulkItem* item) {
+void PeekPokemonItem(s16 index_, BulkItem* item) {
     s32 index = index_;
-    struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[index];
+    PokemonStruct1* pokemon = &gRecruitedPokemonRef->pokemon[index];
     item->id = pokemon->heldItem.id;
     item->quantity = pokemon->heldItem.quantity;
 }
 
-void GivePokemonItem(s16 index_, struct BulkItem* item) {
+void GivePokemonItem(s16 index_, BulkItem* item) {
     s32 index = index_;
-    struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[index];
+    PokemonStruct1* pokemon = &gRecruitedPokemonRef->pokemon[index];
     pokemon->heldItem.id = item->id;
     pokemon->heldItem.quantity = item->quantity;
 }
 
-bool8 IsPokemonRenamed(struct PokemonStruct* pokemon) {
+bool8 IsPokemonRenamed(PokemonStruct1* pokemon) {
     char species_name[20];
     char* species = GetMonSpecies(pokemon->speciesNum);
     s32 i;
@@ -270,7 +270,7 @@ char * GetMonSpecies(s16 index)
     return gMonsterParameters[index].species;
 }
 
-void PrintColoredPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon, s32 colorNum)
+void PrintColoredPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon, s32 colorNum)
 {
   u8 nameBuffer [20];
 
@@ -281,7 +281,7 @@ void PrintColoredPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon, s32
   sprintfStatic(buffer,gUnknown_810763C,colorNum,nameBuffer); // {COLOR_2}%c%s{END_COLOR_TEXT_2}
 }
 
-void sub_808D9DC(u8 *buffer, struct PokemonStruct2 *param_2, s32 colorNum)
+void sub_808D9DC(u8 *buffer, PokemonStruct2 *param_2, s32 colorNum)
 {
   u8 nameBuffer [20];
 
@@ -292,7 +292,7 @@ void sub_808D9DC(u8 *buffer, struct PokemonStruct2 *param_2, s32 colorNum)
   sprintfStatic(buffer,gUnknown_810763C,colorNum,nameBuffer); // {COLOR_2}%c%s{END_COLOR_TEXT_2}
 }
 
-void sub_808DA0C(u8 *buffer, struct PokemonStruct2 *param_2)
+void sub_808DA0C(u8 *buffer, PokemonStruct2 *param_2)
 {
   u8 nameBuffer [20];
 
@@ -300,7 +300,7 @@ void sub_808DA0C(u8 *buffer, struct PokemonStruct2 *param_2)
   sprintfStatic(buffer,gUnknown_8107638,nameBuffer); // %s
 }
 
-void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon)
+void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon)
 {
   sub_80922B4(buffer, pokemon->name, POKEMON_NAME_LENGTH);
 }
@@ -453,10 +453,10 @@ s32 CalculateEXPGain(s16 index, s32 level)
     return expYield + (expYield * (level - 1)) / 10;
 }
 
-s16 GetPokemonEvolveConditions(s16 index, struct unkEvolve *r1)
+s16 GetPokemonEvolveConditions(s16 index, unkEvolve *r1)
 {
-    struct PreEvolution temp2;
-    struct EvolutionRequirements temp1;
+    PreEvolution temp2;
+    EvolutionRequirements temp1;
     temp1 = gMonsterParameters[index].evolutionRequirements;
     temp2 = gMonsterParameters[index].preEvolution;
     r1->preEvolution = temp2;
@@ -480,7 +480,7 @@ u8 GetPokemonOverworldPalette(s16 index, u32 r1)
     }
 }
 
-struct OpenedFile *OpenPokemonDialogueSpriteFile(s16 index)
+OpenedFile *OpenPokemonDialogueSpriteFile(s16 index)
 {
     // Looks like this loads the dialogue sprite for the pokemon
 
@@ -493,7 +493,7 @@ struct OpenedFile *OpenPokemonDialogueSpriteFile(s16 index)
     return OpenFile(buffer, &gMonsterFileArchive);
 }
 
-struct OpenedFile *GetDialogueSpriteDataPtr(s16 index)
+OpenedFile *GetDialogueSpriteDataPtr(s16 index)
 {
     // Looks like this loads the dialogue sprite for the pokemon
 
@@ -517,11 +517,11 @@ void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1)
     xxx_pokemonstruct_to_pokemon2_808DE50(r0, &gRecruitedPokemonRef->pokemon[r1], r1);
 }
 
-void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct PokemonStruct *pokemon, s32 a3)
+void xxx_pokemonstruct_to_pokemon2_808DE50(PokemonStruct2 * a1, PokemonStruct1 *pokemon, s32 a3)
 {
     s32 i;
-    struct BulkItem* held;
-    struct Item* slot;
+    BulkItem* held;
+    Item* slot;
     u32 somestruct_80943A0;
     u32 somestruct2_80943A0;
 
@@ -567,13 +567,13 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(struct PokemonStruct2 * a1, struct Po
   a1->unk48 = somestruct2_80943A0;
 }
 
-void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, struct PokemonStruct2* a2)
+void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, PokemonStruct2* a2)
 {
     xxx_pokemon2_to_pokemonstruct_808DF44(&a1[gRecruitedPokemonRef->pokemon], a2);
 }
 
 
-void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct PokemonStruct2* a2)
+void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1* pokemon, PokemonStruct2* a2)
 {
     s32 i;
 
@@ -607,10 +607,10 @@ void xxx_pokemon2_to_pokemonstruct_808DF44(struct PokemonStruct* pokemon, struct
     }
 }
 
-void sub_808DFDC(s32 a1, struct PokemonStruct2* a2)
+void sub_808DFDC(s32 a1, PokemonStruct2* a2)
 {
     // transfer item from unk to pokemon at index
-    struct PokemonStruct* pokemon = &gRecruitedPokemonRef->pokemon[a1];
+    PokemonStruct1* pokemon = &gRecruitedPokemonRef->pokemon[a1];
     if (a2->itemSlot.flags & ITEM_FLAG_EXISTS) {
         SlotToHeldItem(&pokemon->heldItem, &a2->itemSlot);
     }
@@ -619,14 +619,14 @@ void sub_808DFDC(s32 a1, struct PokemonStruct2* a2)
     }
 }
 
-void GetPokemonLevelData(struct LevelData* a1, s16 _id, s32 level)
+void GetPokemonLevelData(LevelData* a1, s16 _id, s32 level)
 {
   u8 buffer[12];
   s32 id = _id;
 
   if ((s16)gLevelCurrentPokeId != id)
   {
-    struct OpenedFile *file;
+    OpenedFile *file;
 
     gLevelCurrentPokeId = id;
     // lvmp%03d\0
@@ -747,7 +747,7 @@ bool8 CanMonLearnMove(u16 moveID, s16 _species)
 }
 
 
-s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon)
+s32 sub_808E218(unkStruct_808E218_arg* a1, PokemonStruct1* pokemon)
 {
   s32 i;
   s32 count;
@@ -807,7 +807,7 @@ s32 sub_808E218(struct unkStruct_808E218_arg* a1, struct PokemonStruct* pokemon)
 }
 
 
-s32 GetEvolutionSequence(struct PokemonStruct* pokemon, struct EvolveStage* a2)
+s32 GetEvolutionSequence(PokemonStruct1* pokemon, struct EvolveStage* a2)
 {
 #ifdef NONMATCHING
   s32 count;

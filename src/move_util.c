@@ -12,9 +12,9 @@
 
 
 extern bool8 sub_8044B28(void);
-extern void sub_80429C8(struct Entity *r0);
+extern void sub_80429C8(Entity *r0);
 
-typedef bool8 (*MoveCallback)(struct Entity *pokemon, struct Entity *target, struct Move *move, s32 param_4);
+typedef bool8 (*MoveCallback)(Entity *pokemon, Entity *target, struct Move *move, s32 param_4);
 struct NaturePowerMove
 {
     u16 moveID;
@@ -23,16 +23,16 @@ struct NaturePowerMove
 };
 
 extern struct NaturePowerMove gNaturePowerMoveTable[76];
-bool8 sub_805755C(struct Entity* pokemon,u16 param_2);
+bool8 sub_805755C(Entity* pokemon,u16 param_2);
 
-u32 sub_8057144(struct Entity * pokemon)
+u32 sub_8057144(Entity * pokemon)
 {
   struct Move **ppbVar3;
   s32 entityIndex;
   struct Move *move1;
   struct Move *move2;
   s32 index;
-  struct Entity *entity;
+  Entity *entity;
   s32 counter;
   struct Move *moveStack [80];
   struct Move **local_20;
@@ -83,11 +83,11 @@ u32 sub_8057144(struct Entity * pokemon)
   }
 }
 
-bool8 sub_80571F0(struct Entity * pokemon, struct Move *move)
+bool8 sub_80571F0(Entity * pokemon, struct Move *move)
 {
     u16 moveID;
     s32 tileset;
-    struct EntityInfo *entityInfo;
+    EntityInfo *entityInfo;
 
     entityInfo = pokemon->info;
 
@@ -121,7 +121,7 @@ bool8 sub_80571F0(struct Entity * pokemon, struct Move *move)
     return FALSE;
 }
 
-bool8 sub_805727C(struct Entity * pokemon, struct Entity * target, s32 chance)
+bool8 sub_805727C(Entity * pokemon, Entity * target, s32 chance)
 {
     bool8 uVar2;
     if (!sub_8044B28() && EntityExists(pokemon) && EntityExists(target) && 
@@ -153,7 +153,7 @@ end:
     goto end;
 }
 
-bool8 sub_8057308(struct Entity *pokemon, s32 chance)
+bool8 sub_8057308(Entity *pokemon, s32 chance)
 {
     if(!EntityExists(pokemon))
         return FALSE;
@@ -165,9 +165,9 @@ bool8 sub_8057308(struct Entity *pokemon, s32 chance)
         return DungeonRandOutcome_2(chance);
 }
 
-bool8 CanAIUseMove(struct Entity *pokemon, s32 moveIndex, bool8 hasPPChecker)
+bool8 CanAIUseMove(Entity *pokemon, s32 moveIndex, bool8 hasPPChecker)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     struct Move *move = &pokemonInfo->moves[moveIndex];
     s32 i;
     if (!(move->moveFlags & MOVE_FLAG_EXISTS))
@@ -208,9 +208,9 @@ bool8 CanAIUseMove(struct Entity *pokemon, s32 moveIndex, bool8 hasPPChecker)
     goto incMoveIndex;
 }
 
-bool8 CanMonsterUseMove(struct Entity *pokemon, struct Move *move, bool8 hasPPChecker)
+bool8 CanMonsterUseMove(Entity *pokemon, struct Move *move, bool8 hasPPChecker)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     if (move->id == MOVE_REGULAR_ATTACK)
     {
         return TRUE;
@@ -247,9 +247,9 @@ bool8 CanMonsterUseMove(struct Entity *pokemon, struct Move *move, bool8 hasPPCh
     return TRUE;
 }
 
-bool8 sub_805744C(struct Entity * pokemon, struct Move *move, bool8 param_3)
+bool8 sub_805744C(Entity * pokemon, struct Move *move, bool8 param_3)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   entityInfo = pokemon->info;
   if (move->id != MOVE_REGULAR_ATTACK) {

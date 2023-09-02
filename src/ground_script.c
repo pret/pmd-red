@@ -14,7 +14,7 @@ extern u8 gUnknown_8116594[];
 extern u8 gUnknown_8116544[];
 extern u8 gUnknown_811656C[];
 
-extern struct DebugLocation gUnknown_81165C8;
+extern DebugLocation gUnknown_81165C8;
 
 extern void sub_809D520(void *);
 extern void sub_809D568(void *);
@@ -22,24 +22,24 @@ extern u8 sub_80AC378(void);
 extern u8 sub_80AD290(void);
 extern u8 sub_80A8B74(void);
 extern u8 sub_809A750(void);
-extern u8 *sub_80A2460(struct GroundScript_ExecutePP_1 *param_1, u32);
+extern u8 *sub_80A2460(GroundScript_ExecutePP_1 *param_1, u32);
 void FatalError(u32 *, const char *, ...) __attribute__((noreturn));
 
-struct FunctionScript
+typedef struct FunctionScript
 {
     u32 unk0;
     u8 *funcName;
     u8 *script;
-};
+} FunctionScript;
 
-extern struct FunctionScript gFunctionScriptTable[];
+extern FunctionScript gFunctionScriptTable[];
 
-void sub_809D6D8(struct GroundScript_ExecutePP_1 *param_1, s16 index, u8 *param_3)
+void sub_809D6D8(GroundScript_ExecutePP_1 *param_1, s16 index, u8 *param_3)
 {
     param_1->unk14[index] = param_3;
 }
 
-bool8 sub_809D6E4(struct GroundScript_ExecutePP_1 *param_1, struct GroundScript_ExecutePP_3 *script, s16 _index)
+bool8 sub_809D6E4(GroundScript_ExecutePP_1 *param_1, GroundScript_ExecutePP_3 *script, s16 _index)
 {
     u8 *scriptPtr;
     s32 index = _index;
@@ -52,7 +52,7 @@ bool8 sub_809D6E4(struct GroundScript_ExecutePP_1 *param_1, struct GroundScript_
     return scriptPtr != NULL;
 }
 
-void sub_809D710(struct GroundScript_ExecutePP_1 *param_1, struct GroundScript_ExecutePP_3 *script, s16 index)
+void sub_809D710(GroundScript_ExecutePP_1 *param_1, GroundScript_ExecutePP_3 *script, s16 index)
 {
     s32 index_s32 = index;
     script->scriptPointer = gFunctionScriptTable[index_s32].script;
@@ -67,14 +67,14 @@ void sub_809D710(struct GroundScript_ExecutePP_1 *param_1, struct GroundScript_E
     }
 }
 
-bool8 sub_809D754(struct GroundScript_ExecutePP_1 *param_1, struct DebugLocation *unused)
+bool8 sub_809D754(GroundScript_ExecutePP_1 *param_1, DebugLocation *unused)
 {
     sub_809D568(&param_1->unk24);
     sub_809D568(&param_1->unk84);
     return TRUE;
 }
 
-bool8 sub_809D770(struct GroundScript_ExecutePP_1 *param_1, struct DebugLocation *unused)
+bool8 sub_809D770(GroundScript_ExecutePP_1 *param_1, DebugLocation *unused)
 {
     sub_809D568(&param_1->unk24);
     sub_809D568(&param_1->unk84);
@@ -82,7 +82,7 @@ bool8 sub_809D770(struct GroundScript_ExecutePP_1 *param_1, struct DebugLocation
     return TRUE;
 }
 
-bool8 GroundScript_ExecutePP(struct GroundScript_ExecutePP_1 *param_1, s32 *param_2, struct GroundScript_ExecutePP_3 *param_3, struct DebugLocation *unused)
+bool8 GroundScript_ExecutePP(GroundScript_ExecutePP_1 *param_1, s32 *param_2, GroundScript_ExecutePP_3 *param_3, DebugLocation *unused)
 {
     if ((param_3 == NULL) || (param_3->scriptPointer == NULL)) {
         return FALSE;
@@ -143,15 +143,15 @@ bool8 GroundScript_ExecutePP(struct GroundScript_ExecutePP_1 *param_1, s32 *para
     return TRUE;
 }
 
-bool8 sub_809D8C0(struct GroundScript_ExecutePP_1 *param_1, s32 *param_2, s16 index, struct DebugLocation *debug)
+bool8 sub_809D8C0(GroundScript_ExecutePP_1 *param_1, s32 *param_2, s16 index, DebugLocation *debug)
 {
-    struct GroundScript_ExecutePP_3 auStack28;
+    GroundScript_ExecutePP_3 auStack28;
 
     sub_809D6E4(param_1,&auStack28,index);
     return GroundScript_ExecutePP(param_1, param_2, &auStack28, debug);
 }
 
-u8 sub_809D8EC(struct GroundScript_ExecutePP_1 *param_1, s16 param_2)
+u8 sub_809D8EC(GroundScript_ExecutePP_1 *param_1, s16 param_2)
 {
     s32 param_2_s32;
 
@@ -170,7 +170,7 @@ u8 sub_809D8EC(struct GroundScript_ExecutePP_1 *param_1, s16 param_2)
 }
 
 
-bool8 GroundScript_Cancel(struct GroundScript_ExecutePP_1 *r0)
+bool8 GroundScript_Cancel(GroundScript_ExecutePP_1 *r0)
 {
     // NOTE: Will always return TRUE
     return sub_809D770(r0, &gUnknown_81165C8);
@@ -186,7 +186,7 @@ u8 sub_809D940(void)
   return ret;
 }
 
-bool8 sub_809D968(struct GroundScript_ExecutePP_1 * param_1, s16 param_2)
+bool8 sub_809D968(GroundScript_ExecutePP_1 *param_1, s16 param_2)
 {
   s16 sVar1;
   s16 sVar2;
@@ -224,7 +224,7 @@ void sub_809D9E0(s16 index, s32 r1)
   gUnknown_2039A36 = 1;
 }
 
-bool8 sub_809DA08(struct GroundScript_ExecutePP_1 *param_1, s16 index, u32 param_3)
+bool8 sub_809DA08(GroundScript_ExecutePP_1 *param_1, s16 index, u32 param_3)
 {
   s32 index_s32;
   

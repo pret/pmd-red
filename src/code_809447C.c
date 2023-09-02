@@ -2,7 +2,7 @@
 #include "code_80130A8.h"
 #include "code_8092334.h"
 #include "code_809447C.h"
-#include "item.h"
+#include "items.h"
 #include "moves.h"
 #include "dungeon_global_data.h"
 #include "text_util.h"
@@ -39,7 +39,7 @@ extern u8 *gUnknown_8113870[];
 extern struct unkStruct_8113080 gUnknown_8113080[];
 
 extern void xxx_format_string(const char *, u8 *, void *, u32);
-void PrintYellowDungeonNametoBuffer(u8 *buffer, struct DungeonLocation *dungeonLocation);
+void PrintYellowDungeonNametoBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 extern s32 sub_8008ED0(u8 *);
 
 void sub_809447C(struct unkStruct_8094924 *r0, u8 *r1)
@@ -83,12 +83,12 @@ static u8 sub_8094528(s16 moveID)
     }
 }
 
-void sub_8094558(u32 param_1,u8 *param_2,struct unkDungeonGlobal_unk1CE98_sub *param_3)
+void sub_8094558(u32 param_1,u8 *param_2,unkDungeonGlobal_unk1CE98_sub *param_3)
 {
     int iVar2;
     u8 buffer [200];
     s32 y;
-    struct Item *item;
+    Item *item;
     s32 var;
 
     sub_80073B8(param_1);

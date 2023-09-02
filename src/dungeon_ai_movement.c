@@ -43,9 +43,9 @@ struct CanMoveInDirectionInfo
 
 const s32 gFaceDirectionIncrements[] = {0, 1, -1, 2, -2, 3, -3, 4, 0, -1, 1, -2, 2, -3, 3, 4};
 
-void MoveIfPossible(struct Entity *pokemon, bool8 showRunAwayEffect)
+void MoveIfPossible(Entity *pokemon, bool8 showRunAwayEffect)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     pokemonInfo->aiNotNextToTarget = FALSE;
     pokemonInfo->aiTargetingEnemy = FALSE;
     pokemonInfo->aiTurningAround = FALSE;
@@ -101,11 +101,11 @@ void MoveIfPossible(struct Entity *pokemon, bool8 showRunAwayEffect)
     }
 }
 
-bool8 CanTakeItem(struct Entity *pokemon)
+bool8 CanTakeItem(Entity *pokemon)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     struct Tile *mapTile;
-    struct Entity *object;
+    Entity *object;
     if (!EntityExists(pokemon) || CannotUseItems(pokemon))
     {
         return FALSE;
@@ -137,12 +137,12 @@ bool8 CanTakeItem(struct Entity *pokemon)
     return FALSE;
 }
 
-bool8 ChooseTargetPosition(struct Entity *pokemon)
+bool8 ChooseTargetPosition(Entity *pokemon)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     if (!TargetLeader(pokemon))
     {
-        struct Entity **possibleTargets;
+        Entity **possibleTargets;
         s32 maxPossibleTargets;
         s32 targetIndex;
         bool8 canCrossWalls;
@@ -168,7 +168,7 @@ bool8 ChooseTargetPosition(struct Entity *pokemon)
         targetDistance = INFINITY;
         for (i = 0; i < maxPossibleTargets; i++)
         {
-            struct Entity *target = possibleTargets[i];
+            Entity *target = possibleTargets[i];
             if (EntityExists(target) && target->info->clientType == CLIENT_TYPE_NONE)
             {
                 if (gDungeon->decoyActive)
@@ -264,7 +264,7 @@ bool8 ChooseTargetPosition(struct Entity *pokemon)
         {
             if (!pokemonInfo->isNotTeamMember)
             {
-                struct Entity *leader = GetLeaderIfVisible(pokemon);
+                Entity *leader = GetLeaderIfVisible(pokemon);
                 if (EntityExists(leader))
                 {
                     pokemonInfo->aiObjective = AI_CHASE_TARGET;
@@ -310,7 +310,7 @@ bool8 ChooseTargetPosition(struct Entity *pokemon)
         {
             for (x = minX; x <= maxX; x++)
             {
-                struct Entity *object = GetTileSafe(x, y)->object;
+                Entity *object = GetTileSafe(x, y)->object;
                 if (object && GetEntityType(object) == ENTITY_ITEM)
                 {
                     pokemonInfo->aiObjective = AI_TAKE_ITEM;
@@ -330,7 +330,7 @@ bool8 ChooseTargetPosition(struct Entity *pokemon)
         {
             if (pokemonInfo->aiTarget->spawnGenID == pokemonInfo->aiTargetSpawnGenID)
             {
-                struct EntityInfo *targetData = pokemonInfo->aiTarget->info;
+                EntityInfo *targetData = pokemonInfo->aiTarget->info;
                 s32 i;
                 for (i = 0; i < NUM_PREV_POS; i++)
                 {
@@ -355,9 +355,9 @@ bool8 ChooseTargetPosition(struct Entity *pokemon)
     return TRUE;
 }
 
-void DecideMovement(struct Entity *pokemon, bool8 showRunAwayEffect)
+void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     s32 direction;
     s32 turnLimit;
     s32 i;
@@ -500,15 +500,15 @@ void DecideMovement(struct Entity *pokemon, bool8 showRunAwayEffect)
     }
 }
 
-bool8 AvoidEnemies(struct Entity *pokemon)
+bool8 AvoidEnemies(Entity *pokemon)
 {
     bool8 pokemonInFront;
     u8 closestTargetRoom;
     s32 closestTargetDistance = INFINITY_2;
-    struct Entity *closestTarget;
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    Entity *closestTarget;
+    EntityInfo *pokemonInfo = pokemon->info;
     u8 room = GetEntityRoom(pokemon);
-    struct Entity **possibleTargets;
+    Entity **possibleTargets;
     s32 numPossibleTargets;
     s32 i;
     if (gDungeon->decoyActive)
@@ -530,7 +530,7 @@ bool8 AvoidEnemies(struct Entity *pokemon)
     closestTargetRoom = CORRIDOR_ROOM;
     for (i = 0; i < numPossibleTargets; i++)
     {
-        struct Entity *target = possibleTargets[i];
+        Entity *target = possibleTargets[i];
         if (EntityExists(target) && CanSeeTarget(pokemon, target))
         {
             s32 distance;
@@ -556,7 +556,7 @@ bool8 AvoidEnemies(struct Entity *pokemon)
             struct Tile *tile = GetTile(pokemon->pos.x, pokemon->pos.y);
             if (tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
             {
-                struct Position aiTargetPos;
+                Position aiTargetPos;
                 s32 targetDir;
                 aiTargetPos.x = pokemon->pos.x;
                 aiTargetPos.y = pokemon->pos.y;
@@ -593,7 +593,7 @@ bool8 AvoidEnemies(struct Entity *pokemon)
                 // If there are any room exits that the Pokémon can head towards without moving
                 // closer to the target, head towards the furthest eligible exit.
                 s32 naturalJunctionListCounts;
-                struct Position *naturalJunctionList = gDungeon->naturalJunctionList[room];
+                Position *naturalJunctionList = gDungeon->naturalJunctionList[room];
                 s32 furthestTargetExitIndex;
                 s32 furthestTargetToExitDistance;
                 s32 distanceX;
@@ -700,9 +700,9 @@ bool8 AvoidEnemies(struct Entity *pokemon)
 }
 
 #ifdef NONMATCHING
-bool8 Wander(struct Entity *pokemon)
+bool8 Wander(Entity *pokemon)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     s32 room = GetEntityRoom(pokemon);
     s32 targetFacingDir;
     if (room == CORRIDOR_ROOM)
@@ -737,7 +737,7 @@ bool8 Wander(struct Entity *pokemon)
     else
     {
         s32 naturalJunctionListCounts = gDungeon->naturalJunctionListCounts[room];
-        struct Position *naturalJunctionList = gDungeon->naturalJunctionList[room];
+        Position *naturalJunctionList = gDungeon->naturalJunctionList[room];
         if (pokemonInfo->moveRandomly)
         {
             s32 targetFacingDir = DungeonRandInt(NUM_DIRECTIONS);
@@ -802,7 +802,7 @@ bool8 Wander(struct Entity *pokemon)
 }
 #else
 NAKED
-bool8 Wander(struct Entity *pokemon)
+bool8 Wander(Entity *pokemon)
 {
     asm_unified("push {r4-r7,lr}\n"
 "mov r7, r10\n"
@@ -1103,9 +1103,9 @@ bool8 Wander(struct Entity *pokemon)
 }
 #endif
 
-void sub_807BB78(struct Entity *pokemon)
+void sub_807BB78(Entity *pokemon)
 {
-    struct EntityInfo *entityInfo;
+    EntityInfo *entityInfo;
 
     entityInfo = pokemon->info;
     entityInfo->aiObjective = 0;

@@ -17,21 +17,21 @@ extern u8 sub_8044B28(void);
 extern u8 gUnknown_202E038[];
 extern void sub_8085374();
 extern void sub_80855E4(void *);
-extern void sub_8068FE0(struct Entity *, u32, u32);
+extern void sub_8068FE0(Entity *, u32, u32);
 extern void DisplayDungeonDialogue(u8 *);
-extern void sub_80869E4(struct Entity *, u32, u32, u32);
+extern void sub_80869E4(Entity *, u32, u32, u32);
 extern void sub_803E708(u32, u32);
 extern void sub_8086448(void);
-extern void SpriteShockEffect(struct Entity *);
-extern void SkarmoryEntry(struct Entity *);
-extern void SpriteLookAroundEffect(struct Entity *);
-extern void sub_8086A54(struct Entity *);
+extern void SpriteShockEffect(Entity *);
+extern void SkarmoryEntry(Entity *);
+extern void SpriteLookAroundEffect(Entity *);
+extern void sub_8086A54(Entity *);
 extern void sub_808563C(void *);
 extern void sub_8087144();
 void sub_80866C4(u8 *);
-extern void sub_8072008(struct Entity *pokemon, struct Entity *r1, u32 r2, u8 r3, u32);
+extern void sub_8072008(Entity *pokemon, Entity *r1, u32 r2, u8 r3, u32);
 extern bool8 sub_8085B80(u8 *);
-extern void sub_8085B4C(u8 *, void *, struct Entity **, u32);
+extern void sub_8085B4C(u8 *, void *, Entity **, u32);
 extern void sub_803E46C(u32);
 
 extern u8 gUnknown_810739C[];
@@ -66,24 +66,24 @@ extern u8 gTeamMeaniesReFightDialogue_5;
 
 extern u8 gUnknown_8100D3C;
 
-void sub_8086A3C(struct Entity *pokemon)
+void sub_8086A3C(Entity *pokemon)
 {
     pokemon->info->unk15C = 1;
     pokemon->info->unk15E = 1;
 }
 
-void sub_8086A54(struct Entity *pokemon)
+void sub_8086A54(Entity *pokemon)
 {
     pokemon->info->unk15C = 1;
     pokemon->info->unk15E = 0;
 }
 
-void SetupBossFightHP(struct Entity *pokemon, s32 newHP, u16 songIndex)
+void SetupBossFightHP(Entity *pokemon, s32 newHP, u16 songIndex)
 {
 
   // NOTE: needed two of these to match.. very dumb
-  struct EntityInfo *entityInfo;
-  struct EntityInfo *enityData_1;
+  EntityInfo *entityInfo;
+  EntityInfo *enityData_1;
 
   entityInfo = pokemon->info;
   enityData_1 = pokemon->info;
@@ -124,9 +124,9 @@ u8 sub_8086AE4(s16 _index)
 
 void sub_8086B14(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * DiglettEntity;
-  struct Entity * SkarmoryEntity;
+  Entity * LeaderEntity;
+  Entity * DiglettEntity;
+  Entity * SkarmoryEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   DiglettEntity = GetEntityFromClientType(4);
@@ -145,9 +145,9 @@ void sub_8086B14(void)
 
 void sub_8086B94(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * DiglettEntity;
-  struct Entity * SkarmoryEntity;
+  Entity * LeaderEntity;
+  Entity * DiglettEntity;
+  Entity * SkarmoryEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   DiglettEntity = GetEntityFromClientType(4);
@@ -170,13 +170,13 @@ void sub_8086BDC(char param_1, s32 param_2)
 
 void SkarmoryPreFightDialogue(void)
 {
-  struct Entity *LeaderEntity;
-  struct Entity *PartnerEntity;
-  struct Entity * DiglettEntity;
-  struct Entity * SkarmoryEntity;
+  Entity *LeaderEntity;
+  Entity *PartnerEntity;
+  Entity * DiglettEntity;
+  Entity * SkarmoryEntity;
 
-  struct Position32 pos1;
-  struct Position32 pos2;
+  Position32 pos1;
+  Position32 pos2;
 
   LeaderEntity = xxx_call_GetLeader(); // Player
   PartnerEntity = GetPartnerEntity(); // Partner
@@ -230,9 +230,9 @@ void SkarmoryPreFightDialogue(void)
 
 void SkarmoryReFightDialogue(void)
 {
-  struct Entity * LeaderEntity;
-  struct Entity * SkarmoryEntity;
-  struct Position32 pos;
+  Entity * LeaderEntity;
+  Entity * SkarmoryEntity;
+  Position32 pos;
 
   LeaderEntity = xxx_call_GetLeader();
   SkarmoryEntity = GetEntityFromClientType(3);
@@ -262,7 +262,7 @@ void sub_8086E40(void)
   gDungeon->unk2 = 1;
 }
 
-void SkarmoryEntry(struct Entity * skarmoryEntity)
+void SkarmoryEntry(Entity * skarmoryEntity)
 {
   sub_806CDD4(skarmoryEntity,0xf,0);
   sub_8086A54(skarmoryEntity);
@@ -272,7 +272,7 @@ void SkarmoryEntry(struct Entity * skarmoryEntity)
 
 void sub_8086E9C(void)
 {
-  struct Entity * LeaderEntity;
+  Entity * LeaderEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
@@ -289,7 +289,7 @@ void sub_8086E9C(void)
 
 void sub_8086F00(void)
 {
-  struct Entity * LeaderEntity;
+  Entity * LeaderEntity;
 
   LeaderEntity = xxx_call_GetLeader();
   sub_80854D4();
@@ -306,7 +306,7 @@ void sub_8086F00(void)
 // https://decomp.me/scratch/BTqWo 
 void sub_8086F54(u8 param_1, u8 param_2)
 {
-  struct Entity *entity;
+  Entity *entity;
   s32 index;
   u32 unk1 = 0;
 
@@ -333,7 +333,7 @@ void sub_8086F54(u8 param_1, u8 param_2)
 
 void TeamMeaniesPreFightDialogue(void)
 {
-    struct Entity *LeaderEntity;
+    Entity *LeaderEntity;
 
     LeaderEntity = xxx_call_GetLeader();
     sub_8086448();
@@ -359,8 +359,8 @@ void TeamMeaniesPreFightDialogue(void)
 
 void TeamMeaniesReFightDialogue(void)
 {
-    struct Entity *LeaderEntity;
-    struct Entity *PartnerEntity;
+    Entity *LeaderEntity;
+    Entity *PartnerEntity;
 
     LeaderEntity = xxx_call_GetLeader();
     PartnerEntity = GetPartnerEntity();
@@ -395,14 +395,14 @@ void sub_8087130(void)
 
 void sub_8087144(void)
 {
-    struct Entity *iVar2;
-    struct Entity *iVar3;
-    struct Entity *iVar4;
+    Entity *iVar2;
+    Entity *iVar3;
+    Entity *iVar4;
     u8 auStack_10c [56];
     u8 puStack_60[56];
     u8 puStack_5c[56];
     u8 *puStack_64[3];
-    struct Entity *pEStack_58[3];
+    Entity *pEStack_58[3];
     u8 auStack_4c [48];
 
     iVar2 = GetEntityFromClientType(5);
@@ -436,8 +436,8 @@ void sub_8087144(void)
 
 void sub_8087230(void)
 {
-    struct Entity *LeaderEntity;
-    struct Entity *ZapdosEntity;
+    Entity *LeaderEntity;
+    Entity *ZapdosEntity;
 
     LeaderEntity = xxx_call_GetLeader();
     ZapdosEntity = GetEntityFromClientType(0x8);
@@ -455,8 +455,8 @@ void sub_8087230(void)
 
 void sub_808729C(void)
 {
-  struct Entity *LeaderEntity;
-  struct Entity *ZapdosEntity;
+  Entity *LeaderEntity;
+  Entity *ZapdosEntity;
   
   LeaderEntity = xxx_call_GetLeader();
   ZapdosEntity = GetEntityFromClientType(8);

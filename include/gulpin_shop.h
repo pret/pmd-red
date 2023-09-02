@@ -20,11 +20,11 @@ struct GulpinShopWork
     u16 unk1E;
     u32 unk20;
     u32 unk24;
-    struct MenuItem unk28[8];
+    MenuItem unk28[8];
     u16 unk68[8];
-    struct MenuStruct unk78;
+    MenuStruct unk78;
     u8 fillC8[0x118 - 0xC8];
-    /* 0x118 */ struct OpenedFile *faceFile;
+    /* 0x118 */ OpenedFile *faceFile;
     /* 0x11C */ u8 *faceData;
     u16 unk120;
     u16 unk122;
@@ -32,8 +32,8 @@ struct GulpinShopWork
     u8 unk125;
     u8 unk126;
     u8 unk127;
-    struct OpenedFile **unk128;
-    struct UnkTextStruct2 unk12C[4];
+    OpenedFile **unk128;
+    UnkTextStruct2 unk12C[4];
 };
 
 u32 CreateGulpinShop(s32 isAsleep, s16 pokeSpecies, struct Move *moves);

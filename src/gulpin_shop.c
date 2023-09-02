@@ -10,8 +10,8 @@
 #include "text2.h"
 
 extern struct GulpinShopWork *gGulpinShopWork;
-extern const struct UnkTextStruct2 gUnknown_80DC11C;
-extern const struct UnkTextStruct2 gUnknown_80DC134;
+extern const UnkTextStruct2 gUnknown_80DC11C;
+extern const UnkTextStruct2 gUnknown_80DC134;
 extern const u8 *gUnknown_80D4920[];
 extern const u8 *gUnknown_80D4928[];
 extern const u8 *gUnknown_80D4970[];
@@ -43,7 +43,7 @@ void SetGulpinShopState(u32);
 
 u32 CreateGulpinShop(s32 isAsleep, s16 pokeSpecies, struct Move *moves)
 {
-  struct OpenedFile *faceFile;
+  OpenedFile *faceFile;
   s32 species_32;
 
   species_32 = pokeSpecies; // dumb cast needed to get lsr/asr combo

@@ -6,7 +6,7 @@
 #include "exclusive_pokemon.h"
 #include "rescue_team_info.h"
 #include "pokemon.h"
-#include "item.h"
+#include "items.h"
 #include "code_80958E8.h"
 
 enum
@@ -47,8 +47,8 @@ struct UnkStruct_sub_8011DAC {
 
 
 struct UnkStruct_203B184 {
-    /* 0x0 */ struct TeamInventory *MoneyItems;
-    /* 0x4 */ struct unkStruct_203B45C *recruitedPokemon;
+    /* 0x0 */ TeamInventory *MoneyItems;
+    /* 0x4 */ unkStruct_203B45C *recruitedPokemon;
     /* 0x8 */ struct unkStruct_203B480 *unk8;
     /* 0xC */ struct unkStruct_203B484 *unkC;
     /* 0x10 */ u32 *unk10;

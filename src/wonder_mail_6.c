@@ -14,10 +14,10 @@ struct unkStruct_203B328
     // size: 0x11C
     u32 state;
     u8 mailIndex;
-    struct MenuStruct unk8;
-    struct MenuStruct unk58;
-    struct UnkTextStruct2 unkA8[4];
-    /* 0x108 */ struct OpenedFile *faceFile;
+    MenuStruct unk8;
+    MenuStruct unk58;
+    UnkTextStruct2 unkA8[4];
+    /* 0x108 */ OpenedFile *faceFile;
     /* 0x10C */ u8 *faceData;
     u16 unk110;
     u16 unk112;
@@ -29,21 +29,21 @@ struct unkStruct_203B328
 extern struct unkStruct_203B328 *gUnknown_203B328;
 extern struct unkStruct_203B480 *gUnknown_203B480;
 
-const struct MenuItem gUnknown_80E0948[] = 
+const MenuItem gUnknown_80E0948[] = 
 {
     {"Yes", 0x2},
     {"No", 0x3},
     {NULL, 0x1}
 };
 
-const struct MenuItem gUnknown_80E0968[] = 
+const MenuItem gUnknown_80E0968[] = 
 {
     {"Delete", 0x4},
     {"Info", 0x5},
     {NULL, 0x1}
 };
 
-const struct UnkTextStruct2 gUnknown_80E0990 = {
+const UnkTextStruct2 gUnknown_80E0990 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x00, 0x00,
@@ -51,7 +51,7 @@ const struct UnkTextStruct2 gUnknown_80E0990 = {
     0x00, 0x00,
     NULL
 };
-const struct UnkTextStruct2 gUnknown_80E09A8 = {
+const UnkTextStruct2 gUnknown_80E09A8 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x13, 0x0B,
@@ -59,7 +59,7 @@ const struct UnkTextStruct2 gUnknown_80E09A8 = {
     0x03, 0x00,
     NULL
 };
-const struct UnkTextStruct2 gUnknown_80E09C0 = {
+const UnkTextStruct2 gUnknown_80E09C0 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x11, 0x0F,
@@ -96,7 +96,7 @@ extern void sub_8030D40(u8, u32);
 
 bool8 sub_8030F58(u32 wonderMailType)
 {
-  struct OpenedFile *file;
+  OpenedFile *file;
   
   ResetUnusedInputStruct();
   sub_800641C(NULL, TRUE, TRUE);

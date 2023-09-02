@@ -2,12 +2,12 @@
 #include "constants/communication_error_codes.h"
 #include "save.h"
 #include "pokemon.h"
-#include "item.h"
+#include "items.h"
 #include "wonder_mail.h"
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
-#include "team_inventory.h"
+
 #include "rescue_password_menu.h"
 #include "menu_input.h"
 #include "code_8094F88.h"
@@ -166,7 +166,7 @@ enum FriendRescueStates {
     DEFAULT_FALLBACK_STATE = 0x3D
 };
 
-const struct MenuItem gUnknown_80DD970[] =
+const MenuItem gUnknown_80DD970[] =
 {
     {"Receive SOS Mail", 0x0},
     {"Leave for Rescue", 0x1},
@@ -176,7 +176,7 @@ const struct MenuItem gUnknown_80DD970[] =
     {NULL, 0xA}
 };
 
-const struct MenuItem gUnknown_80DD9EC[] =
+const MenuItem gUnknown_80DD9EC[] =
 {
     {"Delete SOS Mail", 0x5},
     {"Delete A-OK Mail", 0x6},
@@ -185,21 +185,21 @@ const struct MenuItem gUnknown_80DD9EC[] =
     {NULL, 0xA}
 };
 
-const struct MenuItem gUnknown_80DDA48[] =
+const MenuItem gUnknown_80DDA48[] =
 {
     {"Yes", 0x8},
     {"Cancel", 0xA},
     {NULL, 0xA}
 };
 
-const struct MenuItem gUnknown_80DDA64[] =
+const MenuItem gUnknown_80DDA64[] =
 {
     {"Yes", 0x8},
     {"No", 0x9},
     {NULL, 0xA}
 };
 
-const struct MenuItem gUnknown_80DDA80[] =
+const MenuItem gUnknown_80DDA80[] =
 {
     {"Yes", 0x8},
     {"No", 0x9},
@@ -207,7 +207,7 @@ const struct MenuItem gUnknown_80DDA80[] =
     {NULL, 0xA}
 };
 
-const struct MenuItem gUnknown_80DDAA0[] =
+const MenuItem gUnknown_80DDAA0[] =
 {
     {SendWOPokemon, 0x12},
     {"Cancel", 0xA},
@@ -216,7 +216,7 @@ const struct MenuItem gUnknown_80DDAA0[] =
 
 ALIGNED(4) const u8 SendWOPokemon[] = _("Send w/o Pokémon");
 
-const struct UnkTextStruct2 gUnknown_80DDACC =
+const UnkTextStruct2 gUnknown_80DDACC =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -226,7 +226,7 @@ const struct UnkTextStruct2 gUnknown_80DDACC =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80DDAE4 =
+const UnkTextStruct2 gUnknown_80DDAE4 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -236,14 +236,14 @@ const struct UnkTextStruct2 gUnknown_80DDAE4 =
     NULL
 };
 
-const struct MenuItem gUnknown_80DDAFC[] =
+const MenuItem gUnknown_80DDAFC[] =
 {
     {"Confirm", 0xB},
     {"Info", 0xC},
     {NULL, 0xA},
 };
 
-const struct MenuItem gUnknown_80DDB24[] =
+const MenuItem gUnknown_80DDB24[] =
 {
     {"Game Link cable", 0xD},
     {"Password", 0xF},
@@ -251,7 +251,7 @@ const struct MenuItem gUnknown_80DDB24[] =
     {NULL, 0xA},
 };
 
-const struct MenuItem gUnknown_80DDB60[] =
+const MenuItem gUnknown_80DDB60[] =
 {
     {SendPokemon_80DDB98, 0x11},
     {DontSendPokemon_80DDB80, 0x12},
@@ -268,7 +268,7 @@ ALIGNED(4) const u8 SendPokemon_80DDB98[] = _("Send Pokémon");
 u32 sub_8027F88(void)
 {
   char *monName;
-  struct OpenedFile *faceFile;
+  OpenedFile *faceFile;
   s32 counter;
 
   ResetUnusedInputStruct();

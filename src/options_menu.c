@@ -16,29 +16,29 @@ struct unkStruct_203B25C
     u32 chosenHintIndex;
     struct GameOptions newOptions;
     u32 menuAction;
-    struct MenuStruct menu;
-    struct MenuItem menuItems[8];
+    MenuStruct menu;
+    MenuItem menuItems[8];
     u16 unkAC[8];
-    struct UnkTextStruct2 unkBC[4];
+    UnkTextStruct2 unkBC[4];
 };
 
 struct unkStruct_203B260  
 { 
     struct GameOptions *optionsMenu;
-    struct MenuInputStructSub unk4;
-    struct MenuInputStruct input;
+    MenuInputStructSub unk4;
+    MenuInputStruct input;
     u32 unk44;
-    struct UnkTextStruct2 * unk48;
-    struct UnkTextStruct2 unk4C[4];
+    UnkTextStruct2 * unk48;
+    UnkTextStruct2 unk4C[4];
 };
 struct unkStruct_203B260  *gUnknown_203B260;
 extern struct GameOptions *gGameOptionsRef;
 extern struct unkStruct_203B25C *gUnknown_203B25C;
 
-extern const struct UnkTextStruct2 gUnknown_80DBFB0;
-extern const struct UnkTextStruct2 gUnknown_80DBFCC;
-extern const struct UnkTextStruct2 gUnknown_80DC020;
-extern const struct UnkTextStruct2 gUnknown_80DC03C;
+extern const UnkTextStruct2 gUnknown_80DBFB0;
+extern const UnkTextStruct2 gUnknown_80DBFCC;
+extern const UnkTextStruct2 gUnknown_80DC020;
+extern const UnkTextStruct2 gUnknown_80DC03C;
 
 extern u8 gWindowBGTitle[];
 extern u8 gUnknown_80DC064[];

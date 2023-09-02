@@ -1,7 +1,7 @@
 #include "global.h"
 #include "memory.h"
 #include "input.h"
-#include "item.h"
+#include "items.h"
 #include "menu.h"
 #include "pokemon.h"
 #include "save.h"
@@ -25,7 +25,7 @@ EWRAM_DATA_2 u8 gUnknown_203B368 = {0};
 EWRAM_DATA_2 u32 gUnknown_203B36C = {0};
 EWRAM_DATA_2 struct RescuePasswordMenu *gRescuePasswordMenu = {0};
 
-const struct UnkTextStruct2 gUnknown_80E71E4 = {
+const UnkTextStruct2 gUnknown_80E71E4 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x00, 0x00,
@@ -34,7 +34,7 @@ const struct UnkTextStruct2 gUnknown_80E71E4 = {
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80E71FC = {
+const UnkTextStruct2 gUnknown_80E71FC = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x03, 0x09,
@@ -47,7 +47,7 @@ const u8 Error_80E7268[];
 const u8 IncorrectPassword_80E7250[];
 const u8 CheckAgain_80E7234[];
 
-const struct MenuItem gUnknown_80E7214[4] = {
+const MenuItem gUnknown_80E7214[4] = {
     {Error_80E7268, 0xC},
     {IncorrectPassword_80E7250, 0xC},
     {CheckAgain_80E7234, 0xC},
@@ -58,7 +58,7 @@ ALIGNED(4) const u8 CheckAgain_80E7234[] = _("{CENTER_ALIGN}Please check it agai
 ALIGNED(4) const u8 IncorrectPassword_80E7250[] = _("{CENTER_ALIGN}Incorrect password!");
 ALIGNED(4) const u8 Error_80E7268[] = _("{CENTER_ALIGN}{COLOR_1 RED}Error!{END_COLOR_TEXT_1} ");
 
-const struct UnkTextStruct2 gUnknown_80E7278 = {
+const UnkTextStruct2 gUnknown_80E7278 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x03, 0x09,
@@ -71,7 +71,7 @@ const u8 Success_80E72D8[];
 const u8 PasswordAccept_80E72B4[];
 const u8 DATA_80E72B0[];
 
-const struct MenuItem gUnknown_80E7290[4] = {
+const MenuItem gUnknown_80E7290[4] = {
     {Success_80E72D8, 0xC},
     {PasswordAccept_80E72B4, 0xC},
     {DATA_80E72B0, 0xC},
@@ -82,7 +82,7 @@ ALIGNED(4) const u8 DATA_80E72B0[] = "  ";
 ALIGNED(4) const u8 PasswordAccept_80E72B4[] = _("{CENTER_ALIGN}The password has been accepted.");
 ALIGNED(4) const u8 Success_80E72D8[] = _("{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE}Success!{END_COLOR_TEXT_1} ");
 
-const struct UnkTextStruct2 gUnknown_80E72EC = {
+const UnkTextStruct2 gUnknown_80E72EC = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x03, 0x09,
@@ -93,7 +93,7 @@ const struct UnkTextStruct2 gUnknown_80E72EC = {
 
 const u8 NotSOSMail_80E7324[];
 
-const struct MenuItem gUnknown_80E7304[4] = {
+const MenuItem gUnknown_80E7304[4] = {
     {Error_80E7268, 0xC},
     {NotSOSMail_80E7324, 0xC},
     {CheckAgain_80E7234, 0xC},
@@ -102,7 +102,7 @@ const struct MenuItem gUnknown_80E7304[4] = {
 
 ALIGNED(4) const u8 NotSOSMail_80E7324[] = _("{CENTER_ALIGN}This is not an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.");
 
-const struct UnkTextStruct2 gUnknown_80E7344 = {
+const UnkTextStruct2 gUnknown_80E7344 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x03, 0x09,
@@ -113,7 +113,7 @@ const struct UnkTextStruct2 gUnknown_80E7344 = {
 
 const u8 ReceiveSOSMail_80E737C[];
 
-const struct MenuItem gUnknown_80E735C[4] = {
+const MenuItem gUnknown_80E735C[4] = {
     {Error_80E7268, 0xC},
     {ReceiveSOSMail_80E737C, 0xC},
     {CheckAgain_80E7234, 0xC},
@@ -122,7 +122,7 @@ const struct MenuItem gUnknown_80E735C[4] = {
 
 ALIGNED(4) const u8 ReceiveSOSMail_80E737C[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} has been received already.");
 
-const struct UnkTextStruct2 gUnknown_80E73AC = {
+const UnkTextStruct2 gUnknown_80E73AC = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x03, 0x09,
@@ -133,7 +133,7 @@ const struct UnkTextStruct2 gUnknown_80E73AC = {
 
 const u8 sUnknown_80E73E4[];
 
-const struct MenuItem gUnknown_80E73C4[4] = {
+const MenuItem gUnknown_80E73C4[4] = {
     {Error_80E7268, 0xC},
     {sUnknown_80E73E4, 0xC},
     {CheckAgain_80E7234, 0xC},
@@ -142,7 +142,7 @@ const struct MenuItem gUnknown_80E73C4[4] = {
 
 ALIGNED(4) const u8 sUnknown_80E73E4[] = _("{CENTER_ALIGN}This is not an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.");
 
-const struct UnkTextStruct2 gUnknown_80E7408 = {
+const UnkTextStruct2 gUnknown_80E7408 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x03, 0x09,
@@ -153,7 +153,7 @@ const struct UnkTextStruct2 gUnknown_80E7408 = {
 
 const u8 sUnknown_80E7440[];
 
-const struct MenuItem gUnknown_80E7420[4] = {
+const MenuItem gUnknown_80E7420[4] = {
     {Error_80E7268, 0xC},
     {sUnknown_80E7440, 0xC},
     {CheckAgain_80E7234, 0xC},
@@ -162,7 +162,7 @@ const struct MenuItem gUnknown_80E7420[4] = {
 
 ALIGNED(4) const u8 sUnknown_80E7440[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} cannot be used.");
 
-const struct UnkTextStruct2 gUnknown_80E7468 = {
+const UnkTextStruct2 gUnknown_80E7468 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x03, 0x09,
@@ -173,7 +173,7 @@ const struct UnkTextStruct2 gUnknown_80E7468 = {
 
 const u8 sUnknown_80E74A0[];
 
-const struct MenuItem gUnknown_80E7480[4] = {
+const MenuItem gUnknown_80E7480[4] = {
     {Error_80E7268, 0xC},
     {sUnknown_80E74A0, 0xC},
     {CheckAgain_80E7234, 0xC},
@@ -181,7 +181,7 @@ const struct MenuItem gUnknown_80E7480[4] = {
 };
 ALIGNED(4) const u8 sUnknown_80E74A0[] = _("{CENTER_ALIGN}This is not a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.");
 
-const struct UnkTextStruct2 gUnknown_80E74C8 = {
+const UnkTextStruct2 gUnknown_80E74C8 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x03, 0x09,
@@ -192,7 +192,7 @@ const struct UnkTextStruct2 gUnknown_80E74C8 = {
 
 const u8 sUnknown_80E7500[];
 
-const struct MenuItem gUnknown_80E74E0[4] = {
+const MenuItem gUnknown_80E74E0[4] = {
     {Error_80E7268, 0xC},
     {sUnknown_80E7500, 0xC},
     {CheckAgain_80E7234, 0xC},
@@ -201,7 +201,7 @@ const struct MenuItem gUnknown_80E74E0[4] = {
 
 ALIGNED(4) const u8 sUnknown_80E7500[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} cannot be used.");
 
-const struct UnkTextStruct2 gUnknown_80E752C = {
+const UnkTextStruct2 gUnknown_80E752C = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x03, 0x09,
@@ -212,7 +212,7 @@ const struct UnkTextStruct2 gUnknown_80E752C = {
 
 const u8 sUnknown_80E7564[];
 
-const struct MenuItem gUnknown_80E7544[4] = {
+const MenuItem gUnknown_80E7544[4] = {
     {Error_80E7268, 0xC},
     {sUnknown_80E7564, 0xC},
     {CheckAgain_80E7234, 0xC},
@@ -220,7 +220,7 @@ const struct MenuItem gUnknown_80E7544[4] = {
 };
 ALIGNED(4) const u8 sUnknown_80E7564[] = _("{CENTER_ALIGN}This is not a {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1}.");
 
-const struct UnkTextStruct2 gUnknown_80E7588 = {
+const UnkTextStruct2 gUnknown_80E7588 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x03, 0x09,
@@ -231,7 +231,7 @@ const struct UnkTextStruct2 gUnknown_80E7588 = {
 
 const u8 sUnknown_80E75C0[];
 const u8 sUnknown_80E75CC[];
-const struct MenuItem gUnknown_80E75A0[4] = {
+const MenuItem gUnknown_80E75A0[4] = {
     {Error_80E7268, 0xC},
     {sUnknown_80E75CC, 0xC},
     {sUnknown_80E75C0, 0xC},
@@ -692,7 +692,7 @@ void sub_8039174(void)
     #else
     u32 r2; // r4 but should be r2
     #endif //NONMATCHING
-    struct SpriteOAM* spr; // r2 but should be r3
+    SpriteOAM* spr; // r2 but should be r3
     u16 r4; // r3 but should be r4
 
     spr = &gRescuePasswordMenu->unk208;
@@ -736,7 +736,7 @@ void sub_8039174(void)
 
 void sub_80391F8(void)
 {
-    struct SpriteOAM *spr;
+    SpriteOAM *spr;
     u32 val;
 
     spr = &gRescuePasswordMenu->unk208;

@@ -6,7 +6,7 @@
 #include "dungeon_leader.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "team_inventory.h"
+
 #include "pokemon.h"
 
 extern u8 gAvailablePokemonNames[];
@@ -22,10 +22,10 @@ extern s32 sub_8052B8C(u32, u8 *, u32);
 extern void sub_80861A8(void);
 extern void PrintFieldMessage(u32, u8 *, u32);
 extern void sub_803E708(u32, u32);
-extern void sub_80869E4(struct Entity *, u32, u32, u32);
-extern void sub_80416E0(struct Position32 *r0, u32, u32);
-extern void SetMessageArgument(u8 *r0, struct Entity *r1, u32);
-extern void sub_80421C0(struct Entity *, u32);
+extern void sub_80869E4(Entity *, u32, u32, u32);
+extern void sub_80416E0(Position32 *r0, u32, u32);
+extern void SetMessageArgument(u8 *r0, Entity *r1, u32);
+extern void sub_80421C0(Entity *, u32);
 extern void sub_80855E4(void *);
 extern void PlaySoundEffect(u32);
 extern void sub_804178C(u32);
@@ -33,10 +33,10 @@ extern void sub_8040A84(void);
 
 void MusicBoxCreation(void);
 
-bool8 HasHeldItem(struct Entity *pokemon, u8 id)
+bool8 HasHeldItem(Entity *pokemon, u8 id)
 {
     // Weird assignment to fix a regswap.
-    struct EntityInfo *pokemonInfo = pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemonInfo = pokemon->info;
     if (!(pokemonInfo->heldItem.flags & ITEM_FLAG_EXISTS))
     {
         return FALSE;
@@ -98,9 +98,9 @@ void MusicBoxCreation(void)
 {
   bool8 musicBoxOnce;
   bool8 createMusicBox;
-  struct Item *pbVar3; // r2
+  Item *pbVar3; // r2
   s32 iVar4;
-  struct Entity *entity;
+  Entity *entity;
 
   s32 indexes[3];
 
@@ -129,8 +129,8 @@ void MusicBoxCreation(void)
     if ((indexes[0] >= 0) && (indexes[1] >= 0) && (indexes[2] >= 0)) {
 
       // NOTE: doesn't match here.. tried to register pin but still not perfect
-      register struct Item *pbVar4 asm("r1");
-      register struct Item *pbVar5 asm("r0");
+      register Item *pbVar4 asm("r1");
+      register Item *pbVar5 asm("r0");
 
       musicBoxOnce = TRUE;
       createMusicBox = TRUE;
@@ -355,12 +355,12 @@ void MusicBoxCreation(void)
 }
 #endif
 
-bool8 sub_8046F00(struct Item *item)
+bool8 sub_8046F00(Item *item)
 {
   bool8 canLearnMove;
   bool8 cannotMove;
   u16 moveID;
-  struct Entity *entity;
+  Entity *entity;
   s32 index;
 
   if (GetItemCategory(item->id) == CATEGORY_TMS_HMS) {
@@ -387,9 +387,9 @@ bool8 sub_8046F00(struct Item *item)
 
 void sub_8046F84(s32 itemFlag)
 {
-  struct Item *item;
-  struct Entity *entity;
-  struct EntityInfo *entityInfo;
+  Item *item;
+  Entity *entity;
+  EntityInfo *entityInfo;
   s32 index;
 
   for(index = 0; index < INVENTORY_SIZE; index++)
@@ -420,9 +420,9 @@ void sub_8046F84(s32 itemFlag)
 
 void sub_804700C(void)
 {
-  struct Item *item;
-  struct Entity *entity;
-  struct EntityInfo *entityInfo;
+  Item *item;
+  Entity *entity;
+  EntityInfo *entityInfo;
   s32 index;
 
   for(index = 0; index < INVENTORY_SIZE; index++)
@@ -449,9 +449,9 @@ void sub_804700C(void)
 
 bool8 sub_8047084(s32 itemFlag)
 {
-  struct Item *item;
-  struct Entity *entity;
-  struct EntityInfo *entityInfo;
+  Item *item;
+  Entity *entity;
+  EntityInfo *entityInfo;
   s32 index;
 
   // NEED THIS ORDERING TO MATCH
@@ -482,7 +482,7 @@ bool8 sub_8047084(s32 itemFlag)
 
 void sub_8047104(void)
 {
-  struct Item *item;
+  Item *item;
   s32 index;
 
   for(index = 0; index < INVENTORY_SIZE; index++)

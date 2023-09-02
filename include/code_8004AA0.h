@@ -33,7 +33,7 @@ struct unkDataFor8004AA4
 };
 
 void nullsub_6(void);
-void sub_8004AA4(struct unkStruct_202EE8C *, struct OpenedFile *, s32);
+void sub_8004AA4(struct unkStruct_202EE8C *, OpenedFile *, s32);
 bool8 sub_8004AF0(bool8, struct unkStruct_202EE8C *, s32, s32, s32, u8 *);
 bool8 sub_8004D14(struct unkStruct_202EE8C *, s32);
 bool8 sub_8004D40(struct unkStruct_202EE8C *, s32);

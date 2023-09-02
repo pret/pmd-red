@@ -4,8 +4,8 @@
 #include "pokemon.h"
 #include "exclusive_pokemon.h"
 
-extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
-extern void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
+extern void SaveDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
+extern void RestoreDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
 void ReadGameOptions(struct unkStruct_8094924 *param_1);
 void ReadPlayTime(struct unkStruct_8094924 *r0);
 void WriteGameOptions(struct unkStruct_8094924 *param_1);

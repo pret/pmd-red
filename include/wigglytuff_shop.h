@@ -16,10 +16,10 @@ struct WigglytuffShop
     s16 chosenSpecies;
     u32 menuAction1;
     u32 menuAction2;
-    struct MenuItem unk1C[8];
+    MenuItem unk1C[8];
     u16 unk5C[0x8];
-    struct MenuStruct unk6C;
-    /* 0xBC */ struct OpenedFile *faceFile;
+    MenuStruct unk6C;
+    /* 0xBC */ OpenedFile *faceFile;
     /* 0xC0 */ u8 *faceData;
     u16 unkC4;
     u16 unkC6;
@@ -27,8 +27,8 @@ struct WigglytuffShop
     u8 unkC9;
     u8 unkCA;
     u8 fillCB;
-    struct OpenedFile **unkCC;
-    struct UnkTextStruct2 unkD0[4];
+    OpenedFile **unkCC;
+    UnkTextStruct2 unkD0[4];
     u32 unk130;
     u32 unk134;
 };

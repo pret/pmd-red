@@ -4,10 +4,10 @@
 #include "constants/colors.h"
 #include "text1.h"
 #include "text2.h"
-#include "item.h"
+#include "items.h"
 #include "memory.h"
 #include "pokemon.h"
-#include "team_inventory.h"
+
 #include "menu_input.h"
 #include "kecleon_bros.h"
 #include "sprite.h"
@@ -22,15 +22,15 @@ struct unkStruct_203B234
     u32 state;
     u32 fallbackState;
     u8 unkC;
-    struct Item unk10;
+    Item unk10;
     struct unkStruct_8090F58 unk14;
-    struct Item unk20;
+    Item unk20;
     u32 unk24;
-    struct MenuStruct unk28;
-    struct MenuStruct unk78;
+    MenuStruct unk28;
+    MenuStruct unk78;
     u32 menuAction;
-    struct MenuItem unkCC[5];
-    struct UnkTextStruct2 unkF4[4];
+    MenuItem unkCC[5];
+    UnkTextStruct2 unkF4[4];
 };
 
 extern struct unkStruct_203B234 *gUnknown_203B234;
@@ -61,16 +61,16 @@ extern u8 *gUnknown_80D4928[];
 
 extern void sub_8099690(u32);
 
-extern struct UnkTextStruct2 gUnknown_80DBA58;
-extern struct UnkTextStruct2 gUnknown_80DBA88;
-extern struct UnkTextStruct2 gUnknown_80DBA70;
+extern UnkTextStruct2 gUnknown_80DBA58;
+extern UnkTextStruct2 gUnknown_80DBA88;
+extern UnkTextStruct2 gUnknown_80DBA70;
 
 extern void sub_801BB5C(void);
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
+extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern void sub_801B748(u32);
 extern void sub_8013F84(void);
-extern s32 sub_80913E0(struct Item *, u32, struct subStruct_203B240 **);
-extern void sub_80140B4(struct UnkTextStruct2 *);
+extern s32 sub_80913E0(Item *, u32, struct subStruct_203B240 **);
+extern void sub_80140B4(UnkTextStruct2 *);
 extern void sub_801B46C(u32);
 extern void sub_801BC64(void);
 extern void sub_801BC94(void);
@@ -92,7 +92,7 @@ void sub_801BB20(void);
 void sub_801BC24(void);
 
 
-u32 sub_801B3C0(struct Item *item)
+u32 sub_801B3C0(Item *item)
 {
   ResetSprites(TRUE);
   gUnknown_203B230 = MemoryAlloc(sizeof(struct unkStruct_203B230),8);

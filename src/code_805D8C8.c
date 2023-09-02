@@ -16,7 +16,7 @@ static void sub_80688B0(void);
 
 void sub_8068768(void)
 {
-    struct Entity *entity;
+    Entity *entity;
     s32 i;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
@@ -33,7 +33,7 @@ void sub_80687AC(void)
     gDungeon->unk37F4 = 10;
 }
 
-struct OpenedFile *sub_80687D0(s16 species)
+OpenedFile *sub_80687D0(s16 species)
 {
     s32 species32 = species;
     return gDungeon->sprites[species32];

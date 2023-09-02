@@ -105,7 +105,7 @@ void sub_804AAD4(void)
     gDungeon->unk104C0 = maxRooms + 1;
 }
 
-void sub_804AC20(struct Position *pos)
+void sub_804AC20(Position *pos)
 {
     s32 y;
     struct Tile *tile2;

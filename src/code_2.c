@@ -2,6 +2,7 @@
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
+#include "code_800C9CC.h"
 #include "code_80118A4.h"
 #include "code_8094F88.h"
 #include "code_8097670.h"
@@ -47,7 +48,6 @@ extern u32 sub_80009D0(u32);
 extern void xxx_draw_string_80144C4(void);
 extern void nullsub_8(u32);
 extern void sub_80060EC(void);
-extern void sub_800CB20(void);
 extern void TransferBGPaletteBuffer(void);
 extern void xxx_call_update_bg_vram(void);
 extern void sub_8009908(void);
@@ -56,7 +56,7 @@ extern void xxx_call_update_bg_sound_input(void);
 extern u32 gUnknown_203B03C;
 extern u16 gUnknown_2026E4E;
 extern s32 gUnknown_2000A80;
-extern struct OpenedFile *gTitlePaletteFile;
+extern OpenedFile *gTitlePaletteFile;
 extern struct GameOptions *gGameOptionsRef;
 
 extern char gPMDBuildVersion[];

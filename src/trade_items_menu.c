@@ -3,9 +3,9 @@
 #include "code_801B3C0.h"
 #include "code_801C620.h"
 #include "constants/communication_error_codes.h"
-#include "item.h"
+#include "items.h"
 #include "main_menu.h"
-#include "team_inventory.h"
+
 #include "trade_items_menu.h"
 #include "memory.h"
 #include "save.h"
@@ -20,19 +20,19 @@ EWRAM_DATA_2 struct TradeItemsMenu *gTradeItemsMenu = {0};
 extern u32 gUnknown_202DE30;
 extern u8 gUnknown_202DE58[];
 
-const struct MenuItem gUnknown_80E60A0[3] = {
+const MenuItem gUnknown_80E60A0[3] = {
     {"Send item", 1},
     {"Receive item", 2},
     {NULL, 0},
 };
 
-const struct MenuItem gUnknown_80E60D4[3] = {
+const MenuItem gUnknown_80E60D4[3] = {
     {"Send item", -1},
     {"Receive item", 2},
     {NULL, 0},
 };
 
-const struct UnkTextStruct2 gUnknown_80E60EC =
+const UnkTextStruct2 gUnknown_80E60EC =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -42,14 +42,14 @@ const struct UnkTextStruct2 gUnknown_80E60EC =
     NULL
 };
 
-const struct MenuItem gUnknown_80E6104[4] = {
+const MenuItem gUnknown_80E6104[4] = {
     {"Confirm", 3},
     {"Info", 4},
     {"Cancel", 7},
     {NULL, 0},
 };
 
-static const struct UnkTextStruct2 unused =
+static const UnkTextStruct2 unused =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -60,13 +60,13 @@ static const struct UnkTextStruct2 unused =
 };
 
 
-const struct MenuItem gUnknown_80E6154[3] = {
+const MenuItem gUnknown_80E6154[3] = {
     {"Yes", 5},
     {"No", 6},
     {NULL, 0},
 };
 
-const struct UnkTextStruct2 gUnknown_80E6174 =
+const UnkTextStruct2 gUnknown_80E6174 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -77,7 +77,7 @@ const struct UnkTextStruct2 gUnknown_80E6174 =
 };
 
 
-const struct MenuItem gUnknown_80E618C[3] = {
+const MenuItem gUnknown_80E618C[3] = {
     {"Yes", 5},
     {"Cancel", 0},
     {NULL, 0},
@@ -605,7 +605,7 @@ void sub_8036B28(void)
             ResetUnusedInputStruct();
             sub_800641C(NULL, TRUE, TRUE);
             {
-            struct UnkTextStruct2_sub local_10 = {3, 2};
+            UnkTextStruct2_sub local_10 = {3, 2};
             sub_801C8C4(0,1,&local_10,9);
             }
         }

@@ -2,7 +2,7 @@
 #include "constants/communication_error_codes.h"
 #include "save.h"
 #include "pokemon.h"
-#include "item.h"
+#include "items.h"
 #include "code_8094F88.h"
 #include "wonder_mail.h"
 #include "memory.h"
@@ -10,7 +10,7 @@
 #include "text1.h"
 #include "text2.h"
 #include "text_util.h"
-#include "team_inventory.h"
+
 #include "code_800D090.h"
 #include "menu_input.h"
 #include "code_80130A8.h"
@@ -50,7 +50,7 @@ extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 #define PROCESS_THANK_YOU_PASSWORD 0x27
 #define THANK_YOU_PASSWORD_WRONG 0x28
 
-const struct Item gUnknown_80DED44 =
+const Item gUnknown_80DED44 =
 {
     1, 0, 0
 };
@@ -59,7 +59,7 @@ extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 
 
-const struct UnkTextStruct2 gUnknown_80DED48 =
+const UnkTextStruct2 gUnknown_80DED48 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -69,7 +69,7 @@ const struct UnkTextStruct2 gUnknown_80DED48 =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80DED60 =
+const UnkTextStruct2 gUnknown_80DED60 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -82,7 +82,7 @@ const struct UnkTextStruct2 gUnknown_80DED60 =
 extern const u8 SendItem_Text[];
 extern const u8 DontSendItem_Text[];
 
-const struct MenuItem gUnknown_80DED78[3] =
+const MenuItem gUnknown_80DED78[3] =
 {
     {"Confirm", 0xB},
     {"Info", 0xC},
@@ -90,7 +90,7 @@ const struct MenuItem gUnknown_80DED78[3] =
 };
 
 // Unused
-const struct UnkTextStruct2 gUnknown_80DEDA0 =
+const UnkTextStruct2 gUnknown_80DEDA0 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -101,7 +101,7 @@ const struct UnkTextStruct2 gUnknown_80DEDA0 =
 };
 
 
-const struct MenuItem gThankYouMailMainMenuItems[4] =
+const MenuItem gThankYouMailMainMenuItems[4] =
 {
     {"Send Thank-You Mail", 0x1},
     {"Get Thank-You Mail", 0x2},
@@ -109,7 +109,7 @@ const struct MenuItem gThankYouMailMainMenuItems[4] =
     {NULL, 0x0},
 };
 
-const struct MenuItem gUnknown_80DEE08[4] =
+const MenuItem gUnknown_80DEE08[4] =
 {
     {"Game Link cable", WONDER_MAIL_GAME_LINK},
     {"Password", WONDER_MAIL_PASSWORD},
@@ -117,21 +117,21 @@ const struct MenuItem gUnknown_80DEE08[4] =
     {NULL, 0x0},
 };
 
-const struct MenuItem gUnknown_80DEE44[3] =
+const MenuItem gUnknown_80DEE44[3] =
 {
     {"Yes", 0x7},
     {"Cancel", 0x0},
     {NULL, 0x0},
 };
 
-const struct MenuItem gUnknown_80DEE60[3] =
+const MenuItem gUnknown_80DEE60[3] =
 {
     {"Yes", 0x7},
     {"No", 0x8},
     {NULL, 0x0},
 };
 
-const struct MenuItem gUnknown_80DEE7C[4] =
+const MenuItem gUnknown_80DEE7C[4] =
 {
     {SendItem_Text, 0x9},
     {DontSendItem_Text, 0xA},
@@ -142,14 +142,14 @@ const struct MenuItem gUnknown_80DEE7C[4] =
 ALIGNED(4) static const u8 DontSendItem_Text[] =  _("Don{APOSTROPHE}t Send Item");
 ALIGNED(4) static const u8 SendItem_Text[] = "Send Item";
 
-const struct MenuItem gUnknown_80DEEBC[3] =
+const MenuItem gUnknown_80DEEBC[3] =
 {
     {"Send w/o Item", 0xA},
     {"Cancel", 0x0},
     {NULL, 0x0},
 };
 
-const struct MenuItem gUnknown_80DEEE4[4] =
+const MenuItem gUnknown_80DEEE4[4] =
 {
     {"Yes", 0x7},
     {"No", 0x8},
@@ -214,7 +214,7 @@ extern void sub_80155F0();
 extern void sub_8031E10();
 extern void sub_802F2C0();
 extern void SetThankYouMailMenuState(u32);
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
+extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern void sub_802F204(struct unkStruct_802F204 *, u32);
 extern void sub_80151C0(u32, u8 *);
 extern void sub_803092C(void);
@@ -225,7 +225,7 @@ extern void sub_80306A8(u32, u32, u32, u32);
 extern s32 sub_8037D64(u32, void *, void *);
 extern s32 sub_80381F4(u32, void *, void *);
 extern u8 sub_800D588(void);
-extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
+extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
 extern void sub_8031D70(u8, u32);
 
 extern void sub_803092C(void);
@@ -237,7 +237,7 @@ extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_203B480 *r0);
 u32 CreateThankYouMailPelipper(void)
 {
   char *monName;
-  struct OpenedFile *faceFile;
+  OpenedFile *faceFile;
   s32 index;
   int counter;
   struct unkStruct_203B480 *mail;
@@ -487,7 +487,7 @@ void DisplayThankYouMailCommsOutcome(void)
   if (sub_80144A4(&auStack20) != 0) {
     return;
   }
-  MemoryFill8((u8 *)&gUnknown_203B2C4->unk41C, 0, sizeof(struct Item));
+  MemoryFill8((u8 *)&gUnknown_203B2C4->unk41C, 0, sizeof(Item));
   gUnknown_203B2C4->unk41C.id = ITEM_NOTHING;
   gUnknown_203B2C4->unk41C.quantity = 1;
   gUnknown_203B2C4->unk41C.flags = 0;
@@ -1251,8 +1251,8 @@ void UpdateThankYouMailText(void)
   u8 buffer1 [80];
   u8 buffer2 [80];
   u8 mailIndex;
-  struct PokemonStruct *pokeStruct;
-  struct PokemonStruct *pokeStruct2;
+  PokemonStruct1 *pokeStruct;
+  PokemonStruct1 *pokeStruct2;
   s32 linkStatus;
   struct unkStruct_203B480 *mail;
 
@@ -1290,7 +1290,7 @@ void UpdateThankYouMailText(void)
         ResetUnusedInputStruct();
         sub_800641C(NULL, TRUE, TRUE);
         {
-        struct UnkTextStruct2_sub local_x = {3, 2};
+        UnkTextStruct2_sub local_x = {3, 2};
         sub_801C8C4(0, 1, &local_x, 9);
         }
         break;

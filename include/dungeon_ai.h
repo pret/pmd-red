@@ -3,8 +3,8 @@
 
 #include "dungeon_entity.h"
 
-u32 sub_8075818(struct Entity *entity);
-void sub_8075900(struct Entity *pokemon, u8 r1);
-void RunMonsterAI(struct Entity *pokemon, u32 unused);
+u32 sub_8075818(Entity *entity);
+void sub_8075900(Entity *pokemon, u8 r1);
+void RunMonsterAI(Entity *pokemon, u32 unused);
 
 #endif

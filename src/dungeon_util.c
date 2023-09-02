@@ -6,14 +6,14 @@
 
 extern u8 gUnknown_202EE70[0x6];
 extern u8 gUnknown_202EE76[0x10];
-u32 EntityGetStatusSprites(struct Entity *entity);
+u32 EntityGetStatusSprites(Entity *entity);
 void UpdateDungeonPokemonSprite(int id, short species, int status, char visible);
 
-void sub_806C51C(struct Entity *entity);
-extern void sub_80462AC(struct Entity * ,u32, u32, u32, u32);
+void sub_806C51C(Entity *entity);
+extern void sub_80462AC(Entity * ,u32, u32, u32, u32);
 extern void sub_807FA9C();
 
-const struct Position gAdjacentTileOffsets[] = {
+const Position gAdjacentTileOffsets[] = {
     {0, 1},
     {1, 1},
     {1, 0},
@@ -24,7 +24,7 @@ const struct Position gAdjacentTileOffsets[] = {
     {-1, 1}
 };
 
-bool8 EntityExists(struct Entity *entity)
+bool8 EntityExists(Entity *entity)
 {
     if (!entity)
     {
@@ -33,42 +33,42 @@ bool8 EntityExists(struct Entity *entity)
     return entity->type != ENTITY_NOTHING;
 }
 
-u32 GetEntityType(struct Entity *entity)
+u32 GetEntityType(Entity *entity)
 {
     return entity->type;
 }
 
-u8 GetEntityRoom(struct Entity *entity)
+u8 GetEntityRoom(Entity *entity)
 {
     return entity->room;
 }
 
-struct EntityInfo* GetTrapData(struct Entity *entity)
+EntityInfo* GetTrapData(Entity *entity)
 {
     return entity->info;
 }
 
-struct Item* GetItemData(struct Entity *entity)
+Item* GetItemData(Entity *entity)
 {
-    return (struct Item *)entity->info;
+    return (Item *)entity->info;
 }
 
-struct EntityInfo* GetTrapData_1(struct Entity *entity)
+EntityInfo* GetTrapData_1(Entity *entity)
 {
     return entity->info;
 }
 
-struct Item* GetItemData_1(struct Entity *entity)
+Item* GetItemData_1(Entity *entity)
 {
-    return (struct Item*)entity->info;
+    return (Item*)entity->info;
 }
 
-struct Tile* GetTileAtEntity(struct Entity *entity)
+Tile *GetTileAtEntity(Entity *entity)
 {
     return GetTile(entity->pos.x, entity->pos.y);
 }
 
-struct Tile* GetTileAtEntitySafe(struct Entity *entity)
+Tile *GetTileAtEntitySafe(Entity *entity)
 {
     return GetTileSafe(entity->pos.x, entity->pos.y);
 }
@@ -119,9 +119,9 @@ void sub_804513C(void)
 
 void sub_804522C(void) {
     s32 index;
-    struct Entity *entity;
-    struct Entity *entity2;
-    struct EntityInfo *info;
+    Entity *entity;
+    Entity *entity2;
+    EntityInfo *info;
     u32 statusSprites;
     bool8 crossEyed;
 
@@ -175,7 +175,7 @@ void sub_804522C(void) {
     }
 }
 
-void sub_804535C(struct Entity *entity, struct Position32 *pos)
+void sub_804535C(Entity *entity, Position32 *pos)
 {
 
   if (pos != NULL) {
@@ -188,13 +188,13 @@ void sub_804535C(struct Entity *entity, struct Position32 *pos)
   }
 }
 
-void sub_8045394(struct Entity *entity, s32 x, s32 y)
+void sub_8045394(Entity *entity, s32 x, s32 y)
 {
     entity->pixelPos.x = x;
     entity->pixelPos.y = y;
 }
 
-void IncreaseEntityPixelPos(struct Entity *entity, s32 x, s32 y)
+void IncreaseEntityPixelPos(Entity *entity, s32 x, s32 y)
 {
     entity->pixelPos.x += x;
     entity->pixelPos.y += y;

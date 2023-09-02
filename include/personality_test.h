@@ -39,7 +39,7 @@ struct PersonalityTestTracker
     /* 0x44 */ s32 NatureTotals[NUM_PERSONALITIES];
     /* 0x78 */ u8 QuestionTracker[NUM_QUIZ_QUESTIONS];
     /* 0xB0 */ u32 playerGender; // 1 = Female, 0 = Male
-    /* 0xB4 */ struct MenuInputStructSub input;
+    /* 0xB4 */ MenuInputStructSub input;
 };
 
 struct PersonalityStruct_203B404
@@ -48,10 +48,10 @@ struct PersonalityStruct_203B404
     /* 0x0 */ s16 StarterID;
     /* 0x2 */ s16 PartnerArray[NUM_PARTNERS];
     u8 unk16;
-    /* 0x18 */ struct MenuInputStruct input;
+    /* 0x18 */ MenuInputStruct input;
     u32 unk4C;
-    /* 0x50 */ struct UnkTextStruct2 *unk50;
-    /* 0x54 */ struct UnkTextStruct2 unk54[4];
+    /* 0x50 */ UnkTextStruct2 *unk50;
+    /* 0x54 */ UnkTextStruct2 unk54[4];
     /* 0xB4 */ u8 unkb4[4];
 };
 

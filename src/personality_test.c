@@ -256,7 +256,7 @@ const u8 gNatureQuestionTable[NUM_QUIZ_QUESTIONS + 1] =
 ALIGNED(4) const u8 gGenderText[] = "Are you a boy or a girl?";
 const char * const gGenderTextPtr = gGenderText;
 
-const struct MenuItem gGenderMenu[] =
+const MenuItem gGenderMenu[] =
 {
     {BoyText, 0},
     {GirlText, 1},
@@ -328,7 +328,7 @@ const char * const gPersonalityTypeDescriptionTable[NUM_PERSONALITIES] =
 
 #include "data/nature_description.h"
 
-const struct UnkTextStruct2 gUnknown_80F4244 =
+const UnkTextStruct2 gUnknown_80F4244 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x05,
@@ -354,7 +354,7 @@ const s16 gPartners[NUM_PARTNERS] =
     MONSTER_MUDKIP
 };
 
-const struct UnkTextStruct2 gUnknown_80F4278 =
+const UnkTextStruct2 gUnknown_80F4278 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -364,7 +364,7 @@ const struct UnkTextStruct2 gUnknown_80F4278 =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80F4290 =
+const UnkTextStruct2 gUnknown_80F4290 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x06,
@@ -374,7 +374,7 @@ const struct UnkTextStruct2 gUnknown_80F4290 =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80F42A8 =
+const UnkTextStruct2 gUnknown_80F42A8 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x05,
@@ -704,7 +704,7 @@ void PromptNewQuestion(void)
 {
   sub_8014248(gPersonalityQuestionPointerTable[gPersonalityTestTracker->currQuestionIndex]->question,
               0, 0,
-              (struct MenuItem *)gPersonalityQuestionPointerTable[gPersonalityTestTracker->currQuestionIndex]->answers,
+              (MenuItem *)gPersonalityQuestionPointerTable[gPersonalityTestTracker->currQuestionIndex]->answers,
               0, 3, 0, 0, 0x101);
 }
 
@@ -718,11 +718,11 @@ void PrintPersonalityTypeDescription(void)
 void PersonalityTest_DisplayStarterSprite(void)
 {
   s32 starterID;
-  struct OpenedFile *faceFile;
+  OpenedFile *faceFile;
   int palleteIndex;
   u8 *r6;
   u32 faceIndex;
-  struct UnkTextStruct2 stackArray[4];
+  UnkTextStruct2 stackArray[4];
 
   starterID = gPersonalityTestTracker->StarterID;
   sub_8006518(stackArray);
@@ -975,7 +975,7 @@ void RedrawPartnerSelectionMenu(void)
 void PersonalityTest_DisplayPartnerSprite(void)
 {
   s32 partnerID;
-  struct OpenedFile *faceFile;
+  OpenedFile *faceFile;
   int palleteIndex;
   u8 *r6;
   u32 faceIndex;

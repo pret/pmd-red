@@ -10,7 +10,7 @@ struct unkStruct_203B494
     /* 0x4 */ s32 numAdventures;
     s32 unk8;
     s32 unkC;
-    /* 0x10 */ struct DungeonLocation dungeonLocation;
+    /* 0x10 */ DungeonLocation dungeonLocation;
     s16 unk14;
     s16 unk16;
     s16 unk18;
@@ -23,7 +23,7 @@ struct unkStruct_203B494
 extern struct unkStruct_203B494 *gUnknown_203B494;
 
 const u8 *GetAdventureLogLine(u8 index);
-struct DungeonLocation *GetDungeonLocationInfo(void);
+DungeonLocation *GetDungeonLocationInfo(void);
 s32 GetNumAdventures(void);
 void ResetNumAdventures(void);
 

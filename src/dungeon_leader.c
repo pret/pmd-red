@@ -4,17 +4,17 @@
 #include "dungeon_global_data.h"
 #include "dungeon_util.h"
 
-extern struct Entity *gLeaderPointer;
+extern Entity *gLeaderPointer;
 
-struct Entity* GetLeader()
+Entity* GetLeader()
 {
-    struct Entity *leader = gLeaderPointer;
+    Entity *leader = gLeaderPointer;
     if (leader == NULL)
     {
         s32 i;
         for (i = 0; i < MAX_TEAM_MEMBERS; i++)
         {
-            struct Entity *currentPokemon = gDungeon->teamPokemon[i];
+            Entity *currentPokemon = gDungeon->teamPokemon[i];
             if (EntityExists(currentPokemon) && currentPokemon->info->isTeamLeader)
             {
                 gLeaderPointer = currentPokemon;
@@ -26,7 +26,7 @@ struct Entity* GetLeader()
     return leader;
 }
 
-struct EntityInfo* GetLeaderInfo(void)
+EntityInfo* GetLeaderInfo(void)
 {
     return GetLeader()->info;
 }

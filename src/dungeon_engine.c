@@ -17,11 +17,11 @@ extern void sub_8044574(void);
 extern void sub_8044820(void);
 extern void sub_8044AB4(void);
 extern u8 UseAttack(u32);
-extern u8 sub_8072CF4(struct Entity *);
-extern void TickStatusHeal(struct Entity *);
+extern u8 sub_8072CF4(Entity *);
+extern void TickStatusHeal(Entity *);
 extern void sub_8086AC0(void);
 extern void sub_8043ED0(u32);
-extern void sub_8071DA4(struct Entity *);
+extern void sub_8071DA4(Entity *);
 extern void TriggerWeatherAbilities(void);
 extern void sub_805D8C8(void);
 extern void sub_805F02C(void);
@@ -92,8 +92,8 @@ void RunFractionalTurn(bool8 param_1)
 
 static bool8 xxx_dungeon_80442D0(bool8 param_1)
 {
-  struct EntityInfo *entityInfo;
-  struct Entity *entity;
+  EntityInfo *entityInfo;
+  Entity *entity;
   s32 movSpeed;
   
   entity = GetLeader();
@@ -172,8 +172,8 @@ static bool8 xxx_dungeon_80442D0(bool8 param_1)
 
 static void sub_8044454(void)
 {
-  struct Entity *entity;
-  struct EntityInfo *entityInfo;
+  Entity *entity;
+  EntityInfo *entityInfo;
   s32 index;
   
   if (gDungeon->unkE) {
@@ -198,10 +198,10 @@ static void sub_8044454(void)
   }
 }
 
-void sub_80444F4(struct Entity *pokemon)
+void sub_80444F4(Entity *pokemon)
 {
-  struct Entity *entity;
-  struct EntityInfo *entityInfo;
+  Entity *entity;
+  EntityInfo *entityInfo;
   s32 index;
   
   if (pokemon == GetLeader() && gDungeon->unkE) {

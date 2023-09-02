@@ -17,30 +17,30 @@ struct Hints
 struct unkStruct_203B268
 {
     // size: 0xA0
-    struct MenuInputStruct input;
+    MenuInputStruct input;
     u32 unk34;
-    struct UnkTextStruct2 *unk38;
-    struct UnkTextStruct2 unk3C[4];
+    UnkTextStruct2 *unk38;
+    UnkTextStruct2 unk3C[4];
     u8 unk9C[4];
 };
 
 struct unkStruct_203B264
 {
     // size: 0x9C
-    struct MenuInputStruct input;
+    MenuInputStruct input;
     u32 unk34;
-    struct UnkTextStruct2 *unk38;
-    struct UnkTextStruct2 unk3C[4];
+    UnkTextStruct2 *unk38;
+    UnkTextStruct2 unk3C[4];
 };
 
 extern struct unkStruct_203B264 *gUnknown_203B264;
 
 extern struct unkStruct_203B268 *gUnknown_203B268;
 
-extern struct UnkTextStruct2 gUnknown_80DC0A0;
-extern struct UnkTextStruct2 gUnknown_80DC0BC;
-extern struct UnkTextStruct2 gUnknown_80DC0E4;
-extern struct UnkTextStruct2 gUnknown_80DC0FC;
+extern UnkTextStruct2 gUnknown_80DC0A0;
+extern UnkTextStruct2 gUnknown_80DC0BC;
+extern UnkTextStruct2 gUnknown_80DC0E4;
+extern UnkTextStruct2 gUnknown_80DC0FC;
 extern struct Hints gGameHints[MAX_HINTS];
 extern u8 gUnknown_80DC0D4[MAX_HINTS];
 

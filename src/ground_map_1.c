@@ -3,41 +3,32 @@
 #include "ground_map_1.h"
 #include "ground_script.h"
 
-extern struct GroundScript_ExecutePP_1 *gUnknown_3001B6C;
+extern GroundScript_ExecutePP_1 *gUnknown_3001B6C;
 
-struct unkStruct_811BAF4
-{
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6;
-    u8 *text;
-};
+extern unkStruct_811BAF4 gUnknown_811BAF4[10];
 
-extern struct unkStruct_811BAF4 gUnknown_811BAF4[10];
-
-extern struct DebugLocation gUnknown_8117698;
-extern struct DebugLocation gUnknown_8117644;
-extern struct DebugLocation gUnknown_81175E0;
+extern DebugLocation gUnknown_8117698;
+extern DebugLocation gUnknown_8117644;
+extern DebugLocation gUnknown_81175E0;
 extern u8 gUnknown_8117594[];
 extern u8 gUnknown_81175EC[];
 extern u8 gUnknown_8117650[];
 
-extern void GroundMap_GetStationScript(struct GroundScript_ExecutePP_3 *, s16, u32, u32);
+extern void GroundMap_GetStationScript(GroundScript_ExecutePP_3 *, s16, u32, u32);
 
-bool8 GroundScript_ExecutePP(struct GroundScript_ExecutePP_1 *param_1, s32 *param_2, struct GroundScript_ExecutePP_3 *param_3, struct DebugLocation *unused);
+bool8 GroundScript_ExecutePP(GroundScript_ExecutePP_1 *param_1, s32 *param_2, GroundScript_ExecutePP_3 *param_3, DebugLocation *unused);
 extern u8 sub_809D678(void *);
-extern void sub_809D710(u8 *, struct GroundScript_ExecutePP_3 *, s32);
+extern void sub_809D710(u8 *, GroundScript_ExecutePP_3 *, s32);
 extern bool8 sub_809D968(void *, s32);
 
-void sub_80A4BE8(struct GroundScript_ExecutePP_3 *script, s16 r1)
+void sub_80A4BE8(GroundScript_ExecutePP_3 *script, s16 r1)
 {
     GroundMap_GetStationScript(script, r1, 0, 0);
 }
 
 void GroundMap_ExecuteEvent(s16 scriptIndex, u32 param_2)
 {
-  struct GroundScript_ExecutePP_3 script;
+  GroundScript_ExecutePP_3 script;
   s32 index_s32;
   u8 iVar2;
 
@@ -54,7 +45,7 @@ void GroundMap_ExecuteEvent(s16 scriptIndex, u32 param_2)
 
 void GroundMap_ExecuteStation(s16 param_1, s16 param_2, s8 param_3, u32 param_4)
 {
-  struct GroundScript_ExecutePP_3 script;
+  GroundScript_ExecutePP_3 script;
   s32 iVar1;
   s32 iVar2;
   s32 iVar3;
@@ -75,7 +66,7 @@ void GroundMap_ExecuteStation(s16 param_1, s16 param_2, s8 param_3, u32 param_4)
 
 void GroundMap_ExecuteEnter(s16 param_1)
 {
-  struct GroundScript_ExecutePP_3 script;
+  GroundScript_ExecutePP_3 script;
   s32 iVar1;
 
   iVar1 = param_1;

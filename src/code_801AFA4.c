@@ -2,12 +2,12 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "gulpin_shop.h"
-#include "item.h"
+#include "items.h"
 #include "memory.h"
 #include "menu.h"
 #include "moves.h"
 #include "pokemon.h"
-#include "team_inventory.h"
+
 #include "text.h"
 
 extern void sub_8099690(u32);
@@ -31,7 +31,7 @@ extern u8 gUnknown_202E218[0x50];
 
 extern bool8 IsHMItem(u8);
 extern void sub_801B178(void);
-extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
+extern void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
 extern u32 sub_801E8C0(void);
 
 extern bool8 CanMonLearnMove(u16 moveID, s16 _species);
@@ -48,9 +48,9 @@ struct unkStruct_203B22C
     /* 0x4C */ s32 monsAbleToLearnMove; // number of party members able to learn move
     /* 0x50 */ s16 unk50[MAX_TEAM_MEMBERS]; // species IDs of each member able to learn move
     /* 0x58 */ s16 chosenPokemon; // species of pokemon that will learn move
-    /* 0x5C */ struct PokemonStruct *pokeStruct; // PokemonStruct of said pokemon
+    /* 0x5C */ PokemonStruct1 *pokeStruct; // PokemonStruct of said pokemon
     u32 unk60;
-    /* 0x64 */ struct MenuItem menuItems[8];
+    /* 0x64 */ MenuItem menuItems[8];
 };
 extern struct unkStruct_203B22C *gUnknown_203B22C;
 
@@ -239,7 +239,7 @@ s32 GetNumMonsAbleToLearnItemMove(void)
     s32 numMons;
     s32 index;
     s32 team [MAX_TEAM_MEMBERS];
-    struct PokemonStruct *preload;
+    PokemonStruct1 *preload;
 
     length = sub_808D580(team);
     gUnknown_203B22C->monsAbleToLearnMove = 0;
@@ -261,7 +261,7 @@ s32 GetNumMonsAbleToLearnItemMove(void)
 bool8 sub_801B374(u8 id)
 {
   u16 moveID;
-  struct PokemonStruct *pokeStruct;
+  PokemonStruct1 *pokeStruct;
   s32 index;
 
   pokeStruct = &gRecruitedPokemonRef->pokemon[0];

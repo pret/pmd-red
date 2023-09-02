@@ -2,155 +2,155 @@
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
 
-extern void sub_804151C(struct Entity *r0, u32 r1, u8 r2);
+extern void sub_804151C(Entity *r0, u32 r1, u8 r2);
 extern void sub_803E708(u32 r0, u32 r1);
-extern void sub_80416A4(struct Position *r0, u32 r1, u32 r2);
-extern void sub_80421C0(struct Entity *r0, u16 r1);
-extern u8 sub_8042768(struct Entity *pokemon);
+extern void sub_80416A4(Position *r0, u32 r1, u32 r2);
+extern void sub_80421C0(Entity *r0, u16 r1);
+extern u8 sub_8042768(Entity *pokemon);
 extern void sub_804178C(u32);
-extern void sub_804151C(struct Entity *pokemon, u32 r1, u8 r2);
+extern void sub_804151C(Entity *pokemon, u32 r1, u8 r2);
 extern void sub_803E46C(u32);
 
-void sub_80428A0(struct Entity *r0)
+void sub_80428A0(Entity *r0)
 {
     sub_804151C(r0, 0x29, 1);
 }
 
-void sub_80428B0(struct Entity *r0)
+void sub_80428B0(Entity *r0)
 {
     sub_804151C(r0, 0x1a9, 0);
 }
 
 
-void sub_80428C4(struct Entity *r0)
+void sub_80428C4(Entity *r0)
 {
     sub_804151C(r0, 0x1a9, 0);
 }
 
 
-void sub_80428D8(struct Entity *r0)
+void sub_80428D8(Entity *r0)
 {
     sub_804151C(r0, 0x1a9, 0);
 }
 
-void sub_80428EC(struct Entity *r0)
+void sub_80428EC(Entity *r0)
 {
     sub_804151C(r0, 0x1a9, 0);
 }
 
-void sub_8042900(struct Entity *r0)
+void sub_8042900(Entity *r0)
 {
     sub_804151C(r0, 0xD4 << 1, 0);
 }
 
-void ShowVisualFlags(struct Entity *r0)
+void ShowVisualFlags(Entity *r0)
 {
     sub_804151C(r0, 0x29, 0);
 }
 
-void sub_8042920(struct Entity *r0)
+void sub_8042920(Entity *r0)
 {
     sub_804151C(r0, 0x48, 0);
 }
 
-void sub_8042930(struct Entity *r0)
+void sub_8042930(Entity *r0)
 {
     sub_804151C(r0, 0xD3 << 1, 1);
 }
 
-void sub_8042940(struct Entity *r0)
+void sub_8042940(Entity *r0)
 {
     sub_804151C(r0, 0xC7 << 1, 0);
 }
 
-void sub_8042950(struct Entity *r0)
+void sub_8042950(Entity *r0)
 {
     sub_804151C(r0, 0xD8 << 1, 1);
     sub_803E708(0xA, 0x42);
 }
 
-void sub_8042968(struct Entity *r0)
+void sub_8042968(Entity *r0)
 {
     sub_804151C(r0, 0xD4 << 1, 0);
 }
 
-void sub_8042978(struct Entity *r0)
+void sub_8042978(Entity *r0)
 {
     sub_804151C(r0, 0x1a9, 0);
 }
 
-void sub_804298C(struct Entity *r0)
+void sub_804298C(Entity *r0)
 {
     sub_804151C(r0, 0x1a9, 0);
 }
 
-void sub_80429A0(struct Entity *r0)
+void sub_80429A0(Entity *r0)
 {
     sub_804151C(r0, 0x199, 0);
 }
 
-void sub_80429B4(struct Entity *r0)
+void sub_80429B4(Entity *r0)
 {
     sub_804151C(r0, 0x1ab, 0);
 }
 
-void sub_80429C8(struct Entity *r0)
+void sub_80429C8(Entity *r0)
 {
     sub_804151C(r0, 0x4, 1);
 }
 
-void sub_80429D8(struct Entity *r0)
+void sub_80429D8(Entity *r0)
 {
     sub_804151C(r0, 0x8F << 1, 1);
 }
 
-void sub_80429E8(struct Entity *r0)
+void sub_80429E8(Entity *r0)
 {
     sub_804151C(r0, 0x11d, 1);
 }
 
-void sub_80429FC(struct Position *r0)
+void sub_80429FC(Position *r0)
 {
     sub_80416A4(r0, 0xCF << 1, 1);
     sub_80421C0(NULL, 0xD4);
 }
 
-void sub_8042A14(struct Position *r0)
+void sub_8042A14(Position *r0)
 {
     sub_80416A4(r0, 0x36, 1);
 }
 
-void sub_8042A24(struct Entity *r0)
+void sub_8042A24(Entity *r0)
 {
     sub_804151C(r0, 0x15, 1);
 }
 
-void sub_8042A34(struct Position *r0)
+void sub_8042A34(Position *r0)
 {
     sub_80416A4(r0, 0x9F << 1, 0);
 }
 
-void sub_8042A44(struct Entity *r0)
+void sub_8042A44(Entity *r0)
 {
     sub_804151C(r0, 0xDA << 1, 1);
 }
 
-void sub_8042A54(struct Position *r0)
+void sub_8042A54(Position *r0)
 {
     sub_80416A4(r0, 0x37, 1);
 }
 
-void sub_8042A64(struct Position *r0)
+void sub_8042A64(Position *r0)
 {
     sub_80416A4(r0, 0x29, 1);
 }
 
-void sub_8042A74(struct Entity *r0)
+void sub_8042A74(Entity *r0)
 {
     sub_804151C(r0, 0x18, 1);
 }
 
-void sub_8042A84(s16 param_1, struct Entity *entity, u32 param_3)
+void sub_8042A84(s16 param_1, Entity *entity, u32 param_3)
 {
   s32 iVar2;
   s32 iVar3;
@@ -179,12 +179,12 @@ void sub_8042A84(s16 param_1, struct Entity *entity, u32 param_3)
   }
 }
 
-void sub_8042B0C(struct Entity *entity)
+void sub_8042B0C(Entity *entity)
 {
     sub_8042A84(0x13e, entity, 5);
 }
 
-void sub_8042B20(struct Entity *entity)
+void sub_8042B20(Entity *entity)
 {
     sub_8042A84(0x1BC, entity, 0xE);
 }

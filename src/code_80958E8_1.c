@@ -3,9 +3,9 @@
 #include "constants/dungeon.h"
 #include "constants/monster.h"
 #include "constants/wonder_mail.h"
-#include "item.h"
+#include "items.h"
 #include "code_80958E8.h"
-#include "team_inventory.h"
+
 #include "random.h"
 #include "pokemon.h"
 
@@ -274,7 +274,7 @@ bool8 IsJobSlotEmpty(u8 index)
 void sub_8096AF8(struct unkStruct_8096AF8 *param_1, u8 slotIndex,u8 dungeon)
 {
   struct WonderMail *jobSlot;
-  struct Item *item;
+  Item *item;
   s32 index;
   
   jobSlot = GetJobSlotInfo(slotIndex);

@@ -5,7 +5,7 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
-#include "team_inventory.h"
+
 #include "text1.h"
 #include "text2.h"
 
@@ -22,9 +22,9 @@ extern u8 *gUnknown_80D4970[];
 extern u8 *gFelicityDeposit;
 extern u8 *gFelicityWithdraw;
 extern u8 *gFelicityDialogue[2][15];
-extern struct UnkTextStruct2 gUnknown_80DB6DC;
-extern struct UnkTextStruct2 gUnknown_80DB6F4;
-extern struct UnkTextStruct2 gUnknown_80DB70C;
+extern UnkTextStruct2 gUnknown_80DB6DC;
+extern UnkTextStruct2 gUnknown_80DB6F4;
+extern UnkTextStruct2 gUnknown_80DB70C;
 extern u8 gFelicitySavings[];
 extern u8 gFelicityMoney[];
 extern u8 gUnknown_80DB738;
@@ -45,7 +45,7 @@ void UpdateFelicityBankState(u32);
 u32 CreateFelicityBank(s32 isAsleep)
 {
   char *monName;
-  struct OpenedFile * faceFile;
+  OpenedFile * faceFile;
   
   ResetUnusedInputStruct();
   sub_800641C(NULL, TRUE, TRUE);

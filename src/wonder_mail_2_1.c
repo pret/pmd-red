@@ -16,7 +16,7 @@ extern struct unkStruct_203B2E8* gUnknown_203B2E8;
 extern struct unkStruct_203B2E8* gUnknown_203B2E0;
 u16 gUnknown_203B2EC;
 
-const struct UnkTextStruct2 gUnknown_80DFCE4 =
+const UnkTextStruct2 gUnknown_80DFCE4 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -26,7 +26,7 @@ const struct UnkTextStruct2 gUnknown_80DFCE4 =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80DFCFC =
+const UnkTextStruct2 gUnknown_80DFCFC =
 {
     0x00, 0x00, 0x00, 0x00,
     0x06,
@@ -39,7 +39,7 @@ const struct UnkTextStruct2 gUnknown_80DFCFC =
 const u8 gUnknown_80DFD14[] = "Job List";
 static const u8 wonder_mail_fill[] = "pksdir0";
 
-const struct UnkTextStruct2 gUnknown_80DFD28 =
+const UnkTextStruct2 gUnknown_80DFD28 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -49,7 +49,7 @@ const struct UnkTextStruct2 gUnknown_80DFD28 =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80DFD40 =
+const UnkTextStruct2 gUnknown_80DFD40 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x04,
@@ -59,7 +59,7 @@ const struct UnkTextStruct2 gUnknown_80DFD40 =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80DFD58 =
+const UnkTextStruct2 gUnknown_80DFD58 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x04,
@@ -73,7 +73,7 @@ const u8 gUnknown_80DFD70[] = "Take Job";
 const u8 gUnknown_80DFD7C[] = "Suspend";
 static const u8 wonder_mail_fill0[] = "pksdir0";
 
-const struct UnkTextStruct2 gUnknown_80DFD8C =
+const UnkTextStruct2 gUnknown_80DFD8C =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -83,7 +83,7 @@ const struct UnkTextStruct2 gUnknown_80DFD8C =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80DFDA4 =
+const UnkTextStruct2 gUnknown_80DFDA4 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x06,
@@ -144,7 +144,7 @@ bool8 HasNoPelipperBoardJobs(void)
   return TRUE;
 }
 
-bool8 sub_802C4C8(int param_1,struct UnkTextStruct2_sub *param_2,u32 param_3)
+bool8 sub_802C4C8(int param_1,UnkTextStruct2_sub *param_2,u32 param_3)
 {
   if (HasNoAcceptedJobs()) {
       return FALSE;

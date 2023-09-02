@@ -11,7 +11,7 @@
 
 static EWRAM_DATA_2 struct AdventureLog *sAdventureLog = {0};
 
-static const struct UnkTextStruct2 sUnknown_80E1FF0 = {
+static const UnkTextStruct2 sUnknown_80E1FF0 = {
    0x00, 0x00, 0x00, 0x00,
    0x03,
    0x00, 0x00,
@@ -19,7 +19,7 @@ static const struct UnkTextStruct2 sUnknown_80E1FF0 = {
    0x00, 0x00,
    NULL
 };
-static const struct UnkTextStruct2 sUnknown_80E2008 = {
+static const UnkTextStruct2 sUnknown_80E2008 = {
     0x00, 0x00, 0x00, 0x00,
     0x06,
     0x02, 0x02,

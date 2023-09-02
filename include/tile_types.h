@@ -9,7 +9,7 @@
 
 extern const u8 gDungeonWaterType[];
 
-bool8 IsTileGround(struct Tile* tile);
+bool8 IsTileGround(Tile *tile);
 bool8 IsWaterTileset();
 
 #endif

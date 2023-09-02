@@ -13,14 +13,14 @@ struct unkStruct_203B360
     // size: 0x1b4
     u32 currMenu;
     u32 unk4; // state
-    struct MenuStruct unk8[4];
-    struct UnkTextStruct2 unk148[4];
-    struct SpriteOAM unk1A8;
+    MenuStruct unk8[4];
+    UnkTextStruct2 unk148[4];
+    SpriteOAM unk1A8;
     u32 unk1B0; // sprite count?
 };
 
 EWRAM_DATA_2 struct unkStruct_203B360 *gUnknown_203B360 = {0};
-const struct UnkTextStruct2 gUnknown_80E6E7C = {
+const UnkTextStruct2 gUnknown_80E6E7C = {
    0x00, 0x00, 0x00, 0x00,
    0x03,
    0x00, 0x00,
@@ -29,7 +29,7 @@ const struct UnkTextStruct2 gUnknown_80E6E7C = {
    NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80E6E94 = {
+const UnkTextStruct2 gUnknown_80E6E94 = {
    0x00, 0x00, 0x00, 0x00,
    0x03,
    0x05, 0x09,
@@ -42,7 +42,7 @@ const u8 CheckAgain_80E6ECC[];
 const u8 StorageEmpty_80E6EE4[];
 const u8 Caution_80E6F04[];
 
-const struct MenuItem gUnknown_80E6EAC[4] = {
+const MenuItem gUnknown_80E6EAC[4] = {
     {Caution_80E6F04, 0x3},
     {StorageEmpty_80E6EE4, 0x3},
     {CheckAgain_80E6ECC, 0x3},
@@ -135,7 +135,7 @@ void sub_8038440(void)
     u32 r1;
     u32 r4;
     u32 r5;
-    struct SpriteOAM *sprite;
+    SpriteOAM *sprite;
 
     r5 = 0;
     sprite = &gUnknown_203B360->unk1A8;

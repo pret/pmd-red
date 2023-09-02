@@ -31,8 +31,8 @@ struct unkStruct_80B8848
 
 u32 xxx_call_draw_char(s32, s32, u32, u32, u32);
 
-void sub_8006518(struct UnkTextStruct2 *);
-void sub_8006554(struct UnkTextStruct1 *, u32 *, u32 *, u16 *, u32, const struct UnkTextStruct2 *, u8, u32, struct UnkTextStruct2_sub *, u8);
+void sub_8006518(UnkTextStruct2 *);
+void sub_8006554(UnkTextStruct1 *, u32 *, u32 *, u16 *, u32, const UnkTextStruct2 *, u8, u32, UnkTextStruct2_sub *, u8);
 void sub_80073B8(s32);
 void sub_80073E0(s32);
 void sub_80078A4(u32, s32, s32, s32, u32);
@@ -45,7 +45,7 @@ void sub_8007E20(u32, u32, u32, u32, u32, u8 *, u32);
 extern struct unkChar *GetCharacter(u32);
 extern void InitGraphics(void);
 extern void sub_800898C(void);
-extern void sub_80089AC(const struct UnkTextStruct2 *, struct UnkTextStruct2_sub *);
+extern void sub_80089AC(const UnkTextStruct2 *, UnkTextStruct2_sub *);
 extern void sub_8008C54(u32);
 extern void sub_8009388(void);
 extern void xxx_call_draw_string(s32 x, u32 y, const u8 *str, u32 , u32);

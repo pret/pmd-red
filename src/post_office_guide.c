@@ -16,7 +16,7 @@ struct PostOfficeHelper
     // size: 0x18
     u8 state;
     s32 currMenuChoice;
-    struct OpenedFile *faceFile;
+    OpenedFile *faceFile;
     u8 *faceData;
     u16 unk10;
     u16 unk12;
@@ -31,13 +31,13 @@ EWRAM_DATA_2 struct PostOfficeHelper *gPostOfficeHelper = {0};
 struct unkStruct_203B330
 {
     // size: 0x78
-    struct MenuInputStructSub input;
+    MenuInputStructSub input;
     u8 unkC;
     u8 dungeonIndex;
     u8 fillE[2];
     u32 unk10;
-    struct UnkTextStruct2 *unk14;
-    struct UnkTextStruct2 unk18[4];
+    UnkTextStruct2 *unk14;
+    UnkTextStruct2 unk18[4];
 };
 EWRAM_DATA_2 struct unkStruct_203B330 *gUnknown_203B330 = {0};
 
@@ -87,7 +87,7 @@ enum PostOfficeMenuActions
     SEND_THANK_YOU_MAIL
 };
 
-const struct MenuItem gPostOfficeHelpStartMenu[] =
+const MenuItem gPostOfficeHelpStartMenu[] =
 {
     {PostOffice_Text, POST_OFFICE},
     {BulletinBoard_Text, BULLETIN_BOARD},
@@ -102,7 +102,7 @@ ALIGNED(4) const char Delivery_Text[] = _("Delivery");
 ALIGNED(4) const char BulletinBoard_Text[] = _("Bulletin Board");
 ALIGNED(4) const char PostOffice_Text[] = _("Post Office");
 
-const struct MenuItem gPostOfficeHelpFriendRescueMenu[] =
+const MenuItem gPostOfficeHelpFriendRescueMenu[] =
 {
     {FriendRescueInfo_Text, FRIEND_RESCUE_INFO},
     {GoRescue_Text, GO_RESCUE},
@@ -117,7 +117,7 @@ ALIGNED(4) const char GoRescue_Text[] = _("{COLOR_1 YELLOW}Go rescue{END_COLOR_T
 ALIGNED(4) const char FriendRescueInfo_Text[] = _("Friend Rescue Info");
 
 
-const struct MenuItem gPostOfficeHelpGoRescueMenu[] =
+const MenuItem gPostOfficeHelpGoRescueMenu[] =
 {
     {"Rescue Procedures", RESCUE_PROCEDURES},
     {"Receive SOS Mail", RECEIVE_SOS_MAIL},
@@ -128,7 +128,7 @@ const struct MenuItem gPostOfficeHelpGoRescueMenu[] =
     {NULL, EXIT}
 };
 
-const struct MenuItem gPostOfficeHelpGetHelpMenu[] =
+const MenuItem gPostOfficeHelpGetHelpMenu[] =
 {
     {"Getting Help", GETTING_HELP},
     {"Send SOS Mail", SEND_SOS_MAIL},
@@ -142,7 +142,7 @@ const struct MenuItem gPostOfficeHelpGetHelpMenu[] =
 
 ALIGNED(4) const u8 wonder_mail_fill[] = _("pksdir0");
 
-const struct UnkTextStruct2 gUnknown_80E1EFC =
+const UnkTextStruct2 gUnknown_80E1EFC =
 {
     0, 0, 0, 0,
     3, 
@@ -154,7 +154,7 @@ const struct UnkTextStruct2 gUnknown_80E1EFC =
 
 const u8 gUnkData_80E1F14[] = {1, 0, 8, 0};
 
-const struct UnkTextStruct2 gUnknown_80E1F18 =
+const UnkTextStruct2 gUnknown_80E1F18 =
 {
     0, 0, 0, 0,
     6,
@@ -205,7 +205,7 @@ extern s32 CountJobsinDungeon(u8);
 u32 CreateHelperPelipperMenu(s16 speciesID)
 {
   char *monName;
-  struct OpenedFile *faceFile;
+  OpenedFile *faceFile;
   int species_32;
 
   species_32 = speciesID;
@@ -286,7 +286,7 @@ void nullsub_39(void)
 
 void UpdateHelperPelipperText(void)
 {
-    struct OpenedFile **faceFile;
+    OpenedFile **faceFile;
     faceFile = NULL;
     if(gPostOfficeHelper->faceFile != NULL)
         faceFile = &gPostOfficeHelper->faceFile;

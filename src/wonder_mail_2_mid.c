@@ -28,10 +28,10 @@ struct unkStruct_203B2D8
 {
     // size: 0xA4
     u8 unk0[4];
-    struct MenuInputStruct input;
+    MenuInputStruct input;
     u32 unk38;
-    struct UnkTextStruct2 *unk3C;
-    struct UnkTextStruct2 unk40[4];
+    UnkTextStruct2 *unk3C;
+    UnkTextStruct2 unk40[4];
     u8 unkA0[4];
 };
 
@@ -41,24 +41,24 @@ struct unkStruct_203B2E0
 {
     // size: 0xA8
     u8 unk0[0x8];
-    struct MenuInputStruct input;
+    MenuInputStruct input;
     s32 unk3C;
-    struct UnkTextStruct2 *unk40;
-    struct UnkTextStruct2 unk44[4];
+    UnkTextStruct2 *unk40;
+    UnkTextStruct2 unk44[4];
     u8 unkA4[4];
 };
 extern struct unkStruct_203B2E0 *gUnknown_203B2E0;
 
-extern struct UnkTextStruct2 gUnknown_80DFCB4;
-extern struct UnkTextStruct2 gUnknown_80DFC9C;
+extern UnkTextStruct2 gUnknown_80DFCB4;
+extern UnkTextStruct2 gUnknown_80DFC9C;
 
 extern u16 gUnknown_203B2E4;
 
 extern struct WonderMail *GetMailboxSlotInfo(u8);
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
+extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern u8 gMailboxText[];
 extern u8 gAvailablePokemonNames[];
-extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
+extern void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
 extern void sub_803B6B0(u32, u32, u32, u32);
 
 void CreateMailMenu(void)
@@ -123,7 +123,7 @@ bool8 HasNoMailinMailbox(void)
 }
 
 
-bool8 sub_802C10C(s32 param_1,struct UnkTextStruct2_sub *param_2,s32 param_3)
+bool8 sub_802C10C(s32 param_1,UnkTextStruct2_sub *param_2,s32 param_3)
 {
   if (HasNoPelipperBoardJobs() != 0) {
       return FALSE;

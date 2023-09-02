@@ -3,7 +3,7 @@
 
 #include "constants/global.h"
 #include "constants/move.h"
-#include "item.h"
+#include "items.h"
 #include "position.h"
 #include "sprite.h"
 
@@ -24,7 +24,7 @@
 #define STAT_STAGE_EVASION 1
 
 // size: 0x18
-struct ActionContainer
+typedef struct ActionContainer
 {
     /* 0x0 */ u16 action;
     /* 0x2 */ u8 direction;
@@ -32,16 +32,16 @@ struct ActionContainer
     // Additional parameter alongside actionIndex. Used for things like indicating which move a Pokémon should use from its moveset.
     /* 0x4 */ u8 actionUseIndex;
     // Position of the Pokémon the last time it threw an item.
-    /* 0x8 */ struct Position lastItemThrowPosition;
+    /* 0x8 */ Position lastItemThrowPosition;
     u8 unkC;
     u8 fillD[3];
     u8 fill10[4];
     // Position of the target that the Pokémon wants throw an item at.
-    /* 0x14 */ struct Position itemTargetPosition;
-};
+    /* 0x14 */ Position itemTargetPosition;
+} ActionContainer;
 
 // size: 0x208
-struct EntityInfo
+typedef struct EntityInfo
 {
     // This has different purposes for Pokémon, items, and traps.
     // Pokemon: MovementFlag
@@ -85,12 +85,12 @@ struct EntityInfo
     /* 0x3E */ u8 hiddenPowerType;
     u8 fill3F;
     /* 0x40 */ u8 joinedAt; // Uses the dungeon index in dungeon.h.
-    /* 0x44 */ struct ActionContainer action;
+    /* 0x44 */ ActionContainer action;
     /* 0x5C */ u8 types[2];
     /* 0x5E */ u8 abilities[2];
-    /* 0x60 */ struct Item heldItem;
+    /* 0x60 */ Item heldItem;
     u8 fill64[0x68 - 0x64];
-    /* 0x68 */ struct Position prevPos[NUM_PREV_POS];
+    /* 0x68 */ Position prevPos[NUM_PREV_POS];
     /* 0x78 */ u8 aiObjective;
     /* 0x79 */ bool8 aiNotNextToTarget;
     /* 0x7A */ bool8 aiTargetingEnemy;
@@ -98,7 +98,7 @@ struct EntityInfo
     /* 0x7C */ u16 aiTargetSpawnGenID;
     /* 0x80 */ struct Entity *aiTarget;
     u8 fill84[0x88 - 0x84];
-    /* 0x88 */ struct Position aiTargetPos;
+    /* 0x88 */ Position aiTargetPos;
     // Bitwise flags corresponding to selected IQ skills.
     /* 0x8C */ u8 IQSkillMenuFlags[4]; // IQ skills selected in the IQ skills menu.
     /* 0x90 */ u8 IQSkillFlags[4];
@@ -191,7 +191,7 @@ struct EntityInfo
     // When non-zero, an AI Pokémon will move in a random direction every turn when it is a room.
     // There is a chance of this flag being set when a wild Pokémon spawns. The chance depends on the dungeon's randomMovementChance.
     /* 0x114 */ u32 moveRandomly;
-    /* 0x118 */ struct Move moves[MAX_MON_MOVES];
+    /* 0x118 */ Move moves[MAX_MON_MOVES];
     /* 0x138 */ u8 struggleMoveFlags;
     /* 0x13C */ u32 belly;
     /* 0x140 */ u32 maxBelly;
@@ -228,17 +228,17 @@ struct EntityInfo
     /* 0x167 */ u8 unk167;
     /* 0x168 */ u8 unk168;
     /* 0x169 */ u8 turnsSinceWarpScarfActivation;
-    /* 0x16C */ struct Position targetPos;
-    /* 0x170 */ struct Position pixelPos;
+    /* 0x16C */ Position targetPos;
+    /* 0x170 */ Position pixelPos;
     u32 unk174;
     u16 unk178;
     /* 0x17A */ u16 mimicMoveIDs[MAX_MON_MOVES]; // All moves that Mimic has copied (not sure on size...)
     // Previous value of targetPosition for movement, 1 and 2 moves ago.
-    /* 0x184 */ struct Position previousTargetMovePosition1;
-    /* 0x188 */ struct Position32 previousTargetMovePosition2;
+    /* 0x184 */ Position previousTargetMovePosition1;
+    /* 0x188 */ Position32 previousTargetMovePosition2;
     /* 0x190 */ u8 lastMoveDirection; // The last direction that the Pokémon moved in.
     // Number of tiles that the Pokémon moved last, multiplied by 0x100.
-    /* 0x194 */ struct Position32 lastMoveIncrement;
+    /* 0x194 */ Position32 lastMoveIncrement;
     /* 0x19C */ u8 walkAnimFramesLeft; // Set when the Pokémon starts moving, and counts down until the Pokémon's walk animation stops.
     u8 fill19D[0x1F4 - 0x19D];
     /* 0x1F4 */ u8 numMoveTiles; // Number of tiles to move in a turn. Can be greater than 1 if the user's movement speed is boosted.
@@ -249,18 +249,18 @@ struct EntityInfo
     /* 0x1FC */ u16 expGainedInTurn; // Used to accumulate experience when multiple enemies are defeated in one turn.
     /* 0x200 */ u32 statusIcons;
     u8 unk204;
-};
+} EntityInfo;
 
 // size: 0x74 | Used for Pokémon, items, and traps.
-struct Entity
+typedef struct Entity
 {
     /* 0x0 */ u32 type;
-    /* 0x4 */ struct Position pos;
-    /* 0x8 */ struct Position prevPos;
+    /* 0x4 */ Position pos;
+    /* 0x8 */ Position prevPos;
     // The center of the entity acccording to pixel-space coordinates, using the same origin as posWorld.
     // X = (posWorld * 24 + 16) * 256, while Y = (posWorld * 24 + 12) * 256.
-    /* 0xC */ struct Position32 pixelPos;
-    /* 0x14 */ struct Position32 prevPixelPos;
+    /* 0xC */ Position32 pixelPos;
+    /* 0x14 */ Position32 prevPixelPos;
     s32 unk1C;
     /* 0x20 */ bool8 isVisible; // Turned off when a Pokémon faints.
     u8 fill21;
@@ -271,8 +271,8 @@ struct Entity
     // The global spawn index counter starts at 10. Each Pokémon that spawns increments the counter and
     // gets assigned the current counter value as its spawn index.
     /* 0x26 */ u16 spawnGenID;
-    /* 0x28*/ struct EntitySpriteInfo spriteInfo;
-    struct OpenedFile *sprite;
+    /* 0x28*/ EntitySpriteInfo spriteInfo;
+    OpenedFile *sprite;
     s16 unk68;
     u8 unk6A;
     u8 unk6B;
@@ -280,8 +280,8 @@ struct Entity
     /* 0x6D */ u8 direction2; // Duplicate of 0x6C?
     u8 unk6E;
     u8 unk6F;
-    /* 0x70 */ struct EntityInfo *info;
-};
+    /* 0x70 */ EntityInfo *info;
+} Entity;
 
 enum EntityType
 {

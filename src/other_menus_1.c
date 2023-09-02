@@ -5,7 +5,7 @@
 #include "pokemon.h"
 #include "code_8094F88.h"
 #include "save.h"
-#include "team_inventory.h"
+
 #include "main_menu.h"
 #include "memory.h"
 

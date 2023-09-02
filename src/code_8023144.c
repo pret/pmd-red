@@ -1,17 +1,17 @@
 #include "global.h"
+#include "code_800D090.h"
+#include "code_8023144.h"
 #include "constants/colors.h"
 #include "constants/input.h"
 #include "constants/iq_skill.h"
 #include "memory.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
-#include "team_inventory.h"
+
 #include "text1.h"
 #include "text2.h"
-#include "item.h"
+#include "items.h"
 #include "menu_input.h"
-#include "code_8023144.h"
-#include "code_800D090.h"
 #include "friend_area.h"
 #include "kecleon_bros.h"
 #include "code_80130A8.h"
@@ -19,32 +19,14 @@
 #include "code_80118A4.h"
 #include "exclusive_pokemon.h"
 
-struct unkStruct_3001B5C
-{
-    // size: 0x3fC
-    u8 unk0;
-    u32 unk4;
-    u32 unk8;
-    s16 unkC[2];
-    u32 unk10;
-    u8 fill14[0x354 - 0x14];
-    u8 unk354;
-    u8 fill355[0x35C - 0x355];
-    struct MenuInputStruct input;
-    u32 unk390;
-    struct UnkTextStruct2 *unk394;
-    struct UnkTextStruct2 unk398[4];
-    u8 unk3F8[4];
-};
-
 IWRAM_DATA struct unkStruct_3001B5C *gUnknown_3001B5C;
 struct unkStruct_203B294 *gUnknown_203B294;
 
 extern u32 gUnknown_203B298;
 extern u16 gUnknown_203B29C;
 extern u16 gUnknown_203B29E;
-extern struct UnkTextStruct2 gUnknown_80DC91C;
-extern struct UnkTextStruct2 gUnknown_80DC904;
+extern UnkTextStruct2 gUnknown_80DC91C;
+extern UnkTextStruct2 gUnknown_80DC904;
 
 void sub_8023758(void);
 void sub_80237E0(void);
@@ -65,7 +47,7 @@ extern void sub_8022924(s32);
 extern u32 sub_801B00C(void);
 extern void sub_801B048(void);
 
-void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 id, bool8 checkBoostFlags, struct Gummi* gummi);
+void GetGummiItemStatBoost(PokemonStruct1* pokemon, u8 id, bool8 checkBoostFlags, Gummi *gummi);
 
 extern void sub_8099690(u32);
 extern void sub_801A928(void);
@@ -278,7 +260,7 @@ void sub_8023120(void)
     }
 }
 
-bool8 sub_8023144(s32 param_1, s32 index, struct UnkTextStruct2_sub *sub, u32 param_4)
+bool8 sub_8023144(s32 param_1, s32 index, UnkTextStruct2_sub *sub, u32 param_4)
 {
   u8 param_1_u8 = param_1;
 
@@ -474,7 +456,7 @@ void sub_80234BC(void)
     s32 index;
     u8 buffer2 [256];
     u8 buffer1 [100];
-    struct unkStruct_8092638 auStack_2c;
+    unkStruct_8092638 auStack_2c;
 
     sub_8008C54(gUnknown_3001B5C->unk390);
     sub_80073B8(gUnknown_3001B5C->unk390);

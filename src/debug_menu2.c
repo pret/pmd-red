@@ -5,13 +5,13 @@
 #include "debug_menu2.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "team_inventory.h"
+
 #include "text1.h"
 #include "text2.h"
 
 EWRAM_DATA_2 static struct unkStruct_203B3F0 *sUnknown_203B3F0 = {0};
 
-static const struct UnkTextStruct2 sUnknown_80E7E34 =
+static const UnkTextStruct2 sUnknown_80E7E34 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -20,7 +20,7 @@ static const struct UnkTextStruct2 sUnknown_80E7E34 =
     0x00, 0x00,
     NULL
 };
-static const struct UnkTextStruct2 sUnknown_80E7E4C =
+static const UnkTextStruct2 sUnknown_80E7E4C =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -29,7 +29,7 @@ static const struct UnkTextStruct2 sUnknown_80E7E4C =
     0x03, 0x00,
     NULL
 };
-static const struct UnkTextStruct2 sUnknown_80E7E64 =
+static const UnkTextStruct2 sUnknown_80E7E64 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -129,7 +129,7 @@ void sub_803A51C(void)
 
 void sub_803A5A0(void)
 {
-    struct Item item;
+    Item item;
 
     switch (sUnknown_203B3F0->state) {
         case 0:

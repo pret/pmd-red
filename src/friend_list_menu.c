@@ -3,11 +3,11 @@
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
-#include "item.h"
+#include "items.h"
 #include "pokemon.h"
 #include "moves.h"
 #include "menu_input.h"
-#include "team_inventory.h"
+
 #include "kecleon_bros.h"
 #include "code_80130A8.h"
 #include "code_801EE10_1.h"
@@ -29,23 +29,23 @@ struct unkStruct_203B2B4
     u8 unkD;
     s16 species;
     u32 itemIndex;
-    struct BulkItem item1;
-    struct BulkItem item2;
-    /* 0x1C */ struct PokemonStruct *pokeStruct;
+    BulkItem item1;
+    BulkItem item2;
+    /* 0x1C */ PokemonStruct1 *pokeStruct;
     u32 moveIndex;  // some sort of move index
     u16 moveID;
     struct Move moves[8];
     u16 moveIDs[4];   // some list of move IDs
     u32 menuAction1;
     s32 menuAction2;
-    struct MenuStruct unk78;
-    struct MenuItem unkC8[8];
+    MenuStruct unk78;
+    MenuItem unkC8[8];
     u16 unk108[8];
-    struct UnkTextStruct2 unk118[4];
+    UnkTextStruct2 unk118[4];
 };
 EWRAM_DATA_2 struct unkStruct_203B2B4 *gUnknown_203B2B4 = {0};
 
-const struct UnkTextStruct2 gUnknown_80DD148 = {
+const UnkTextStruct2 gUnknown_80DD148 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x00, 0x00,
@@ -54,7 +54,7 @@ const struct UnkTextStruct2 gUnknown_80DD148 = {
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80DD160 = {
+const UnkTextStruct2 gUnknown_80DD160 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x13, 0x04,
@@ -63,7 +63,7 @@ const struct UnkTextStruct2 gUnknown_80DD160 = {
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80DD178 = {
+const UnkTextStruct2 gUnknown_80DD178 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x14, 0x04,
@@ -72,7 +72,7 @@ const struct UnkTextStruct2 gUnknown_80DD178 = {
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80DD190 = {
+const UnkTextStruct2 gUnknown_80DD190 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x02, 0x11,
@@ -158,8 +158,8 @@ void sub_8025DAC(void);
 void sub_8025E08(void);
 void sub_8025E24(void);
 void sub_8025E44(void);
-void sub_8025E68(u32 , struct BulkItem *);
-bool8 sub_8025EC4(struct PokemonStruct *);
+void sub_8025E68(u32 , BulkItem *);
+bool8 sub_8025EC4(PokemonStruct1 *);
 
 
 bool8 sub_80252F0(s32 param_1)
@@ -285,7 +285,7 @@ void sub_802544C(void)
 void sub_8025518(void)
 {
   u32 uVar3;
-  struct Item item;
+  Item item;
 
   switch(gUnknown_203B2B4->state)
   {
@@ -371,7 +371,7 @@ void sub_8025518(void)
 void sub_8025728(void)
 {
     int index;
-    struct PokemonStruct *pokeStruct;
+    PokemonStruct1 *pokeStruct;
     s32 loopMax = 0;
 
     pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2B4->species];
@@ -625,7 +625,7 @@ void sub_8025CB4(void)
   u32 uVar2;
   s32 menuAction;
   struct unkStruct_8090F58 a3;
-  struct Item item;
+  Item item;
   
   menuAction = 0;
   sub_801A6E8(FALSE);
@@ -737,9 +737,9 @@ void sub_8025E44(void)
     }
 }
 
-void sub_8025E68(u32 r0, struct BulkItem *heldItem)
+void sub_8025E68(u32 r0, BulkItem *heldItem)
 {
-    struct Item item;
+    Item item;
     struct unkStruct_8090F58 a3;
 
     sub_8008C54(r0);
@@ -754,7 +754,7 @@ void sub_8025E68(u32 r0, struct BulkItem *heldItem)
     sub_80073E0(r0);
 }
 
-bool8 sub_8025EC4(struct PokemonStruct *pokeStruct)
+bool8 sub_8025EC4(PokemonStruct1 *pokeStruct)
 {
     bool32 flag;
     if (pokeStruct->isTeamLeader)

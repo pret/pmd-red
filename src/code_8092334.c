@@ -1,7 +1,7 @@
 #include "global.h"
 #include "code_8092334.h"
 #include "memory.h"
-#include "item.h"
+#include "items.h"
 
 
 s16 sub_8094828(u16 moveID, u8 id)

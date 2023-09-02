@@ -19,8 +19,8 @@ extern void sub_803E46C(u32);
 
 void sub_806CC10(void)
 {
-    struct EntityInfo *entityInfo;
-    struct Entity *entity;
+    EntityInfo *entityInfo;
+    Entity *entity;
     s32 i;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
@@ -41,7 +41,7 @@ void sub_806CC10(void)
 void sub_806CC70(void)
 {
     s32 i;
-    struct Entity *entity;
+    Entity *entity;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         entity = gDungeon->allPokemon[i];
@@ -51,11 +51,11 @@ void sub_806CC70(void)
     }
 }
 
-void sub_806CCB4(struct Entity *entity, u8 a1)
+void sub_806CCB4(Entity *entity, u8 a1)
 {
     s32 sVar1;
     bool8 flag;
-    struct EntityInfo *info;
+    EntityInfo *info;
 
     info = entity->info;
     flag = gDungeon->hallucinating;
@@ -81,7 +81,7 @@ void sub_806CCB4(struct Entity *entity, u8 a1)
 void sub_806CD90(void)
 {
     s32 i;
-    struct Entity *entity;
+    Entity *entity;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         entity = gDungeon->allPokemon[i];
@@ -91,7 +91,7 @@ void sub_806CD90(void)
     }
 }
 
-void sub_806CDD4(struct Entity *entity, u8 a1, u32 a2)
+void sub_806CDD4(Entity *entity, u8 a1, u32 a2)
 {
     if (GetEntityType(entity) == ENTITY_MONSTER) {
         entity->unk6A = a1;
@@ -101,7 +101,7 @@ void sub_806CDD4(struct Entity *entity, u8 a1, u32 a2)
     }
 }
 
-void sub_806CDFC(struct Entity *entity, u8 a1, u32 a2)
+void sub_806CDFC(Entity *entity, u8 a1, u32 a2)
 {
     if (GetEntityType(entity) == ENTITY_MONSTER) {
         if (entity->unk6B == a1 && entity->direction2 == a2)
@@ -110,7 +110,7 @@ void sub_806CDFC(struct Entity *entity, u8 a1, u32 a2)
     }
 }
 
-void sub_806CE34(struct Entity *entity, u32 newDir)
+void sub_806CE34(Entity *entity, u32 newDir)
 {
     if (GetEntityType(entity) == ENTITY_MONSTER) {
         entity->unk6A = sub_806CEBC(entity);
@@ -122,7 +122,7 @@ void sub_806CE34(struct Entity *entity, u32 newDir)
     }
 }
 
-void sub_806CE68(struct Entity *entity, u32 newDir)
+void sub_806CE68(Entity *entity, u32 newDir)
 {
     if (GetEntityType(entity) == ENTITY_MONSTER) {
         entity->unk6A = sub_806CEBC(entity);
@@ -132,7 +132,7 @@ void sub_806CE68(struct Entity *entity, u32 newDir)
     }
 }
 
-void sub_806CE94(struct Entity *entity, u32 newDir)
+void sub_806CE94(Entity *entity, u32 newDir)
 {
     if (GetEntityType(entity) == ENTITY_MONSTER) {
         entity->unk6A = 6;
@@ -142,11 +142,11 @@ void sub_806CE94(struct Entity *entity, u32 newDir)
     }
 }
 
-u8 sub_806CEBC(struct Entity *entity)
+u8 sub_806CEBC(Entity *entity)
 {
     u8 sleep;
-    struct EntityInfo *entityInfo1;
-    struct EntityInfo *entityInfo2;
+    EntityInfo *entityInfo1;
+    EntityInfo *entityInfo2;
 
     // NOTE: copy needed to match
     entityInfo1 = entity->info;
@@ -164,16 +164,16 @@ u8 sub_806CEBC(struct Entity *entity)
     return 7;
 }
 
-void sub_806CEFC(struct Entity *entity, u32 newDir)
+void sub_806CEFC(Entity *entity, u32 newDir)
 {
     entity->info->action.direction = newDir & DIRECTION_MASK;
     sub_806CE68(entity, newDir & DIRECTION_MASK);
 }
 
-void sub_806CF18(struct Entity *entity)
+void sub_806CF18(Entity *entity)
 {
     s32 i;
-    struct EntityInfo *entityInfo;
+    EntityInfo *entityInfo;
 
     if (!EntityExists(entity))
         return;
@@ -187,14 +187,14 @@ void sub_806CF18(struct Entity *entity)
     }
 }
 
-u8 sub_806CF54(struct Entity *entity)
+u8 sub_806CF54(Entity *entity)
 {
     return entity->info->unk204;
 }
 
 void sub_806CF60(void)
 {
-    struct Entity *entity;
+    Entity *entity;
     s32 i;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
@@ -205,12 +205,12 @@ void sub_806CF60(void)
     }
 }
 
-u32 sub_806CF98(struct Entity *entity)
+u32 sub_806CF98(Entity *entity)
 {
     struct Tile *mapTile;
     u32 uVar3;
     u16 terrainType;
-    struct EntityInfo *entityInfo;
+    EntityInfo *entityInfo;
 
     mapTile = GetTileAtEntitySafe(entity);
     terrainType = mapTile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);

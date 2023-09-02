@@ -20,12 +20,12 @@ EWRAM_DATA struct unkStruct_202F3D0 gUnknown_202F3D0;
 
 s8 sub_8002984(s8, u8);
 void sub_803E708(u32, u32);
-void sub_80869E4(struct Entity *entity, u32, u8, s8);
+void sub_80869E4(Entity *entity, u32, u8, s8);
 extern void sub_803E46C(u32);
 extern void sub_803E9D0(void);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern void PlaySoundEffect(u32);
-void SpriteLookAroundEffect(struct Entity *entity);
+void SpriteLookAroundEffect(Entity *entity);
 extern void DisplayDungeonDialogue(u32);
 void sub_8086494();
 
@@ -39,23 +39,23 @@ extern void sub_80855E4(void *);
 extern s32 GetCameraXPos(void);
 extern s32 GetCameraYPos(void);
 extern void sub_803F878(u32, u32);
-extern void sub_8086384(struct Entity *entity);
-extern void IncreaseEntityPixelPos(struct Entity *, u32, u32);
-extern void sub_804535C(struct Entity *, struct Position32 *);
-extern void sub_8086A54(struct Entity *);
-extern void sub_8086A3C(struct Entity *);
+extern void sub_8086384(Entity *entity);
+extern void IncreaseEntityPixelPos(Entity *, u32, u32);
+extern void sub_804535C(Entity *, Position32 *);
+extern void sub_8086A54(Entity *);
+extern void sub_8086A3C(Entity *);
 extern void PlaySoundEffect(u32);
-extern void sub_80861F8(u32, struct Entity *, u32);
+extern void sub_80861F8(u32, Entity *, u32);
 
-void SpriteShockEffect(struct Entity *entity)
+void SpriteShockEffect(Entity *entity)
 {
     PlaySoundEffect(0xE8 << 1);
     sub_80861F8(0x143, entity, 0);
 }
 
-void sub_80862DC(struct Entity *entity)
+void sub_80862DC(Entity *entity)
 {
-    struct Position32 pos;
+    Position32 pos;
     pos.x = entity->pixelPos.x;
     pos.y = entity->pixelPos.y + 0x3800;
 
@@ -64,9 +64,9 @@ void sub_80862DC(struct Entity *entity)
     sub_8086A54(entity);
 }
 
-void sub_8086310(struct Entity *entity)
+void sub_8086310(Entity *entity)
 {
-    struct Position32 pos;
+    Position32 pos;
     pos.x = entity->pixelPos.x;
     pos.y = entity->pixelPos.y + 0x9000;
 
@@ -76,9 +76,9 @@ void sub_8086310(struct Entity *entity)
     entity->isVisible = 0;
 }
 
-void sub_8086348(struct Entity *entity)
+void sub_8086348(Entity *entity)
 {
-    struct Position32 pos;
+    Position32 pos;
     pos.x = entity->pixelPos.x + 0x7800;
     pos.y = entity->pixelPos.y - 0x2000;
 
@@ -87,9 +87,9 @@ void sub_8086348(struct Entity *entity)
     sub_8086A54(entity);
 }
 
-void sub_8086384(struct Entity *entity)
+void sub_8086384(Entity *entity)
 {
-    struct Position32 pos;
+    Position32 pos;
     pos.x = entity->pixelPos.x + 0x7800;
     pos.y = entity->pixelPos.y;
 
@@ -98,47 +98,47 @@ void sub_8086384(struct Entity *entity)
     sub_8086A54(entity);
 }
 
-void sub_80863B8(struct Entity *entity)
+void sub_80863B8(Entity *entity)
 {
     sub_806CDD4(entity, 0, DIRECTION_NORTH);
 }
 
-void sub_80863C8(struct Entity *entity)
+void sub_80863C8(Entity *entity)
 {
     sub_806CDD4(entity, 0, DIRECTION_SOUTH);
 }
 
-void sub_80863D8(struct Entity *entity)
+void sub_80863D8(Entity *entity)
 {
     sub_806CDD4(entity, 0, DIRECTION_WEST);
 }
 
-void sub_80863E8(struct Entity *entity)
+void sub_80863E8(Entity *entity)
 {
     sub_806CDD4(entity, 6, DIRECTION_NORTH);
 }
 
-void sub_80863F8(struct Entity *entity)
+void sub_80863F8(Entity *entity)
 {
     sub_806CE68(entity, DIRECTION_NORTH);
 }
 
-void sub_8086404(struct Entity *entity)
+void sub_8086404(Entity *entity)
 {
     sub_806CE68(entity, DIRECTION_WEST);
 }
 
-void sub_8086410(struct Entity *entity)
+void sub_8086410(Entity *entity)
 {
     IncreaseEntityPixelPos(entity, 0, -0x100);
 }
 
-void sub_8086424(struct Entity *entity)
+void sub_8086424(Entity *entity)
 {
     IncreaseEntityPixelPos(entity, 0, 0x100);
 }
 
-void sub_8086434(struct Entity *entity)
+void sub_8086434(Entity *entity)
 {
     IncreaseEntityPixelPos(entity, -0x100, 0);
 }
@@ -443,13 +443,13 @@ void sub_8086854(void)
     }
 }
 
-void sub_80868F4(struct Entity *entity)
+void sub_80868F4(Entity *entity)
 {
     entity->info->unk15C = 1;
     entity->info->unk15D = 1;
 }
 
-void sub_8086910(struct Entity *entity)
+void sub_8086910(Entity *entity)
 {
     entity->info->unk15C = 0;
     entity->info->unk15D = 0;
@@ -470,7 +470,7 @@ void sub_808692C(void)
     sub_803E708(0x4, 0x46);
 }
 
-void SpriteLookAroundEffect(struct Entity *entity)
+void SpriteLookAroundEffect(Entity *entity)
 {
     s8 r4;
     s8 r3;

@@ -71,7 +71,7 @@ extern void sub_80878F4(u32,u8);
 extern void sub_8088088(u32,u8);
 extern void sub_8088818(u32,u8);
 extern void sub_80893B4(u32,u8);
-extern void sub_8089788(struct Entity *,u32,u8);
+extern void sub_8089788(Entity *,u32,u8);
 extern void sub_8089A00(u32,u8);
 extern void sub_8089CFC(u32,u8);
 extern void sub_8089FF0(u32,u8);
@@ -86,7 +86,7 @@ extern void sub_808BE70(u32,u8,u8);
 extern void sub_808C1A4(u32,u8,u8);
 extern void sub_808C414(u32,u8,u8);
 extern void nullsub_100(u32,u8,u8);
-extern void sub_808C948(struct Entity *,u8);
+extern void sub_808C948(Entity *,u8);
 
 extern void sub_808AFB0(u8);
 extern void sub_808B030(u8);
@@ -541,7 +541,7 @@ void DisplayPreFightDialogue(void)
   sub_8097FF8();
 }
 
-void sub_8084E00(struct Entity *entity, u8 param_2, u8 param_3)
+void sub_8084E00(Entity *entity, u8 param_2, u8 param_3)
 {
   if (param_2 != 0) {
     switch(gDungeon->unk3A0D) {

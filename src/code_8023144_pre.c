@@ -6,10 +6,10 @@
 #include "menu.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
-#include "team_inventory.h"
+
 #include "text1.h"
 #include "input.h"
-#include "item.h"
+#include "items.h"
 #include "menu_input.h"
 #include "code_8023144.h"
 #include "text2.h"
@@ -29,11 +29,11 @@ extern void sub_802293C(void);
 extern void sub_8022A10(void);
 extern void sub_8022D2C(void);
 
-extern struct UnkTextStruct2 gUnknown_80DC5A4;
-extern struct UnkTextStruct2 gUnknown_80DC5D4;
-extern struct UnkTextStruct2 gUnknown_80DC5BC;
+extern UnkTextStruct2 gUnknown_80DC5A4;
+extern UnkTextStruct2 gUnknown_80DC5D4;
+extern UnkTextStruct2 gUnknown_80DC5BC;
 
-bool8 sub_80227B8(struct PokemonStruct *pokeStruct)
+bool8 sub_80227B8(PokemonStruct1 *pokeStruct)
 {
     ResetUnusedInputStruct();
     sub_800641C(NULL, TRUE, TRUE);

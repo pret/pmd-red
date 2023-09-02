@@ -83,8 +83,8 @@ extern struct unkStruct_80E9F8C gUnknown_80E9F8C[10];
 extern struct unkStruct_80E9920 gUnknown_80E9920[10];
 extern u8 *gUnknown_80E8B94[];
 
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
-extern struct PokemonStruct *sub_808D378(void);
+extern PokemonStruct1 *GetPlayerPokemonStruct(void);
+extern PokemonStruct1 *sub_808D378(void);
 
 s32 sub_8016028(void);
 extern void PrintDungeonLocationtoBuffer(u8 *, void *);
@@ -470,7 +470,7 @@ bool8 sub_803C0DC(s16 species)
 
 bool8 sub_803C110(s16 index)
 {
-  struct PokemonStruct *pokeStruct;
+  PokemonStruct1 *pokeStruct;
   s16 *psVar5;
   s16 *psVar6;
   s32 species_s32;

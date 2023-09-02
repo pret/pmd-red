@@ -36,7 +36,7 @@ struct unkStruct_808E9EC
 };
 extern s32 gUnknown_81076C4[6]; // x-coord positioning for shadow sprites
 
-extern struct SpriteOAM gUnknown_202F3E8[3]; // Shadow sprites of some kind
+extern SpriteOAM gUnknown_202F3E8[3]; // Shadow sprites of some kind
 extern s16 gUnknown_810AC60; // 0xC
 extern s16 gUnknown_810AC62; // 0xC
 extern s16 gUnknown_810AC68; // 0x8
@@ -46,25 +46,25 @@ extern s16 gUnknown_810AC66; // 0x8
 // 2, 4, 6, 7, 8, 9, 0xA, 0xD, 0xF, 0x11
 extern s32 gUnknown_810AC90[10];
 
-extern void SaveDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
+extern void SaveDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
 extern void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
-void RestoreDungeonLocation(struct unkStruct_8094924*, struct DungeonLocation*);
+void RestoreDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
 void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
 
 extern void sub_809449C(struct unkStruct_8094924*, void*);
 extern void sub_808F448(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
 extern void sub_809447C(struct unkStruct_8094924*, void*);
 extern void sub_808F428(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
-s16 GetPokemonEvolveConditions(s16 index, struct unkEvolve *r1);
+s16 GetPokemonEvolveConditions(s16 index, unkEvolve *r1);
 
-u32 sub_808F798(struct PokemonStruct *, s16);
+u32 sub_808F798(PokemonStruct1 *, s16);
 
 bool8 sub_808E668(s16 species, s16* a2, s16* a3)
 {
     if (species != MONSTER_DIGLETT && species != MONSTER_DUGTRIO) {
         u8 shadowSize = GetShadowSize(species);
         u32 x, unk6;
-        struct SpriteOAM* spr;
+        SpriteOAM* spr;
 
         x = a2[0] + a3[8];
         unk6 = a2[1] + a3[9];
@@ -103,7 +103,7 @@ void sub_808E6F4(struct unkStruct_808E6F4* a1)
 bool8 HasRecruitedMon(s16 species) {
     s32 species_s32 = species;
     s32 i = 0;
-    struct PokemonStruct *pokemon = gRecruitedPokemonRef->pokemon;
+    PokemonStruct1 *pokemon = gRecruitedPokemonRef->pokemon;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
         if (((u8)pokemon->unk0 & 1)) {
@@ -274,31 +274,31 @@ s32 GetUnownIndex(s16 index)
     return 0;
 }
 
-u32 ExtractSpeciesIndex(struct PokemonStruct *r0)
+u32 ExtractSpeciesIndex(PokemonStruct1 *r0)
 {
     return r0->unk0 & 0x000001ff;
 }
 
-void sub_808E9C4(struct PokemonStruct *r0, s16 r1)
+void sub_808E9C4(PokemonStruct1 *r0, s16 r1)
 {
     s32 r1_s32 = r1; // cast needed to match
     r0->unk0 =  ((0xFE << 8) & r0->unk0) | r1_s32 ;
 }
 
-void sub_808E9D8(struct PokemonStruct *r0, s32 r1, s16 r2)
+void sub_808E9D8(PokemonStruct1 *r0, s32 r1, s16 r2)
 {
     s32 r2_32 = r2; // dumb cast to match
     r0->unk0 =  r2_32 | (r1 << 9) ;
 }
 
-u32 ExtractLevel(struct PokemonStruct *r0)
+u32 ExtractLevel(PokemonStruct1 *r0)
 {
     return (r0->unk0 >> 9);
 }
 
 // Unused
 #ifdef NONMATCHING
-void sub_808E9EC(struct PokemonStruct *r0, struct unkStruct_808E9EC *r1)
+void sub_808E9EC(PokemonStruct1 *r0, struct unkStruct_808E9EC *r1)
 {
     u8 pokeAtt;
     u8 r4;
@@ -353,7 +353,7 @@ void sub_808E9EC(struct PokemonStruct *r0, struct unkStruct_808E9EC *r1)
 }
 #else
 NAKED
-void sub_808E9EC(struct PokemonStruct *r0, struct unkStruct_808E9EC *r1)
+void sub_808E9EC(PokemonStruct1 *r0, struct unkStruct_808E9EC *r1)
 {
 	asm_unified("\tpush {r4-r6,lr}\n"
 	"\tadds r3, r1, 0\n"
@@ -658,7 +658,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
     s16 data_s16;
     s32 count;
     s32 i;
-    struct PokemonStruct *pokemon;
+    PokemonStruct1 *pokemon;
 
     xxx_init_struct_8094924_save_809486C(&backup, a1, a2);
 
@@ -747,7 +747,7 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
     return backup.unk8;
 }
 
-void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokemon)
+void SavePokemonStruct(struct unkStruct_8094924* a1, PokemonStruct1* pokemon)
 {
   SaveIntegerBits(a1, &pokemon->level, 7);
   SaveIntegerBits(a1, &pokemon->speciesNum, 9);
@@ -768,9 +768,9 @@ void SavePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokem
   SaveIntegerBits(a1, pokemon->name, 80);
 }
 
-void RestorePokemonStruct(struct unkStruct_8094924* a1, struct PokemonStruct* pokemon)
+void RestorePokemonStruct(struct unkStruct_8094924* a1, PokemonStruct1* pokemon)
 {
-  memset(pokemon, 0, sizeof(struct PokemonStruct));
+  memset(pokemon, 0, sizeof(PokemonStruct1));
   pokemon->unk0 = 0;
   pokemon->isTeamLeader = 0;
   RestoreIntegerBits(a1, &pokemon->level, 7);
@@ -807,7 +807,7 @@ s32 SavePokemonStruct2(u8* a1, s32 size)
   data_u8_zero = 0;
 
   for (i = 0; i < 4; i++) {
-    struct PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];
+    PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];
     SaveIntegerBits(&backup, &pokemon2->unk0, 2);
 
     SaveIntegerBits(&backup, pokemon2->isTeamLeader ? &data_u8_neg1 : &data_u8_zero, 1);
@@ -845,10 +845,10 @@ s32 RestorePokemonStruct2(u8* a1, s32 size)
 
   xxx_init_struct_8094924_restore_809485C(&backup, a1, size);
   for (i = 0; i < 4; i++) {
-    struct PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];
+    PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];
     u8 unk2;
 
-    memset(pokemon2, 0, sizeof(struct PokemonStruct2));
+    memset(pokemon2, 0, sizeof(PokemonStruct2));
 
     RestoreIntegerBits(&backup, &pokemon2->unk0, 2);
 
@@ -896,26 +896,26 @@ void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924* a1, struct unkPokeSub
   SaveIntegerBits(a1, &unkC->level, 7);
 }
 
-void sub_808F428(struct unkStruct_8094924* a1, struct unkStruct_808E6F4* a2)
+void sub_808F428(unkStruct_8094924* a1, unkStruct_808E6F4* a2)
 {
   RestoreIntegerBits(a1, &a2->unk0, 10);
   RestoreIntegerBits(a1, &a2->unk2, 5);
 }
 
-void sub_808F448(struct unkStruct_8094924* a1, struct unkStruct_808E6F4* a2)
+void sub_808F448(unkStruct_8094924* a1, unkStruct_808E6F4* a2)
 {
   SaveIntegerBits(a1, &a2->unk0, 10);
   SaveIntegerBits(a1, &a2->unk2, 5);
 }
 
-void sub_808F468(struct PokemonStruct *param_1, struct EvolveStatus *evolveStatus, u8 param_3)
+void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, u8 param_3)
 {
     bool8 evolFlag;
     u8 friendArea;
     u8 uVar2;
     s32 numPokemon;
-    struct unkStruct_8092638 local_40; // sp 0x0
-    struct unkEvolve evolveConditions; // r7
+    unkStruct_8092638 local_40; // sp 0x0
+    unkEvolve evolveConditions; // r7
     s32 index, index2;
 #ifndef NONMATCHING
     register s32 defaultReason asm("sl");
@@ -1077,9 +1077,9 @@ void sub_808F468(struct PokemonStruct *param_1, struct EvolveStatus *evolveStatu
     }
 }
 
-u8 sub_808F700(struct PokemonStruct *pokemon)
+u8 sub_808F700(PokemonStruct1 *pokemon)
 {
-    struct EvolveStatus evolveStatus;
+    EvolveStatus evolveStatus;
 
     sub_808F468(pokemon, &evolveStatus, 0);
     if ((evolveStatus.evolutionConditionStatus & EVOLUTION_GOOD)) {
@@ -1093,11 +1093,11 @@ u8 sub_808F700(struct PokemonStruct *pokemon)
     }
 }
 
-u32 sub_808F734(struct PokemonStruct *pokemon, s16 _species)
+u32 sub_808F734(PokemonStruct1 *pokemon, s16 _species)
 {
     u32 uVar1;
     int iVar3;
-    struct PokemonStruct pokeStruct;
+    PokemonStruct1 pokeStruct;
     s32 species = _species;
 
     iVar3 = 0;

@@ -3,10 +3,10 @@
 #include "debug.h"
 #include "ground_script.h"
 
-IWRAM_DATA struct GroundScript_ExecutePP_1 *gUnknown_3001B6C = {0}; // iwram
+IWRAM_DATA GroundScript_ExecutePP_1 *gUnknown_3001B6C = {0};
 IWRAM_DATA u8 *gUnknown_3001B70 = {0};
 
-extern struct DebugLocation gUnknown_8117538[];
+extern DebugLocation gUnknown_8117538[];
 
 extern u8 gUnknown_811736C[];
 
@@ -19,7 +19,7 @@ extern void sub_80A5EBC(void);
 extern void sub_80A2D00(void *);
 extern void sub_80015C0(u32, u32);
 extern void sub_80A5EDC(u32);
-extern void sub_809D754(struct GroundScript_ExecutePP_1 *, struct DebugLocation *);
+extern void sub_809D754(GroundScript_ExecutePP_1 *, DebugLocation *);
 extern void sub_80A2D68(void *);
 extern void nullsub_121(void);
 extern void sub_80A2D88(void *);
@@ -27,7 +27,7 @@ extern void nullsub_122(void);
 
 void sub_80A4A7C(void)
 {
-    gUnknown_3001B6C = MemoryAlloc(0x110, 6);
+    gUnknown_3001B6C = MemoryAlloc(sizeof(GroundScript_ExecutePP_1), 6);
     gUnknown_3001B6C->unkE4 = -1;
     sub_809D600(gUnknown_3001B6C, gUnknown_811736C, 0, -1, -1);
     sub_80A5E8C(0);
@@ -48,25 +48,28 @@ void GroundMap_Reset(void)
     sub_80015C0(0, 0x37);
     sub_80015C0(0, 0x38);
     sub_809D754(gUnknown_3001B6C, gUnknown_8117538);
-    if(gUnknown_3001B70 != NULL)
-    {
+
+    if (gUnknown_3001B70 != NULL) {
         sub_80A2D00(gUnknown_3001B70);
         MemoryFree(gUnknown_3001B70);
         gUnknown_3001B70 = NULL;
     }
+
     sub_80A5EDC(0);
 }
 
 void sub_80A4B38(void)
 {
     nullsub_121();
-    if(gUnknown_3001B70 != NULL)
+
+    if (gUnknown_3001B70 != NULL)
         sub_80A2D68(gUnknown_3001B70);
 }
 
 void sub_80A4B54(void)
 {
-    if(gUnknown_3001B70 != NULL)
+    if (gUnknown_3001B70 != NULL)
         sub_80A2D88(gUnknown_3001B70);
+
     nullsub_122();
 }

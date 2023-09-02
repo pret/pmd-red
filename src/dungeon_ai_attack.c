@@ -39,19 +39,19 @@ extern bool8 gCanAttackInDirection[NUM_DIRECTIONS];
 extern s32 gNumPotentialTargets;
 extern s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS];
 extern u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS];
-extern struct Entity *gPotentialTargets[NUM_DIRECTIONS];
+extern Entity *gPotentialTargets[NUM_DIRECTIONS];
 
-extern void sub_8055A00(struct Entity *, u8, u32, u32, u32);
-extern void sub_806A9B4(struct Entity *, u8);
+extern void sub_8055A00(Entity *, u8, u32, u32, u32);
+extern void sub_806A9B4(Entity *, u8);
 extern bool8 sub_8044B28(void);
-extern void sub_8057588(struct Entity *, u32);
-extern void sub_806A1B0(struct Entity *);
-extern struct Item *sub_8044D90(struct Entity *, s32, u32);
-extern bool8 sub_8044D40(struct ActionContainer *, u32);
+extern void sub_8057588(Entity *, u32);
+extern void sub_806A1B0(Entity *);
+extern Item *sub_8044D90(Entity *, s32, u32);
+extern bool8 sub_8044D40(ActionContainer *, u32);
 
-void DecideAttack(struct Entity *pokemon)
+void DecideAttack(Entity *pokemon)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     s32 i;
     s32 chargeStatus = STATUS_CHARGING;
     struct AIPossibleMove aiPossibleMove[MAX_MON_MOVES + 1];
@@ -337,11 +337,11 @@ void DecideAttack(struct Entity *pokemon)
     }
 }
 
-s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, struct Entity *pokemon, struct Move *move)
+s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, struct Move *move)
 {
     s32 targetingFlags;
     s32 moveWeight = 1;
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     s32 numPotentialTargets = 0;
     s32 i;
     bool8 hasStatusChecker;
@@ -385,7 +385,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, struct Entity *pokemon
                 s16 rangeTargetingFlags = rangeTargetingFlags2 = targetingFlags & 0xF0;
                 struct Tile *adjacentTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[i].x,
                     pokemon->pos.y + gAdjacentTileOffsets[i].y);
-                struct Entity *adjacentPokemon = adjacentTile->monster;
+                Entity *adjacentPokemon = adjacentTile->monster;
                 if (adjacentPokemon != NULL && GetEntityType(adjacentPokemon) == ENTITY_MONSTER)
                 {
                     if (rangeTargetingFlags != TARGETING_FLAG_TARGET_FRONTAL_CONE &&
@@ -406,7 +406,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, struct Entity *pokemon
         s32 i;
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
         {
-            struct Entity *target = gDungeon->allPokemon[i];
+            Entity *target = gDungeon->allPokemon[i];
             if (EntityExists(target) && CanSeeTarget(pokemon, target))
             {
                 numPotentialTargets = TryAddTargetToAITargetList(numPotentialTargets, targetingFlags, pokemon, target, move, hasStatusChecker);
@@ -421,7 +421,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, struct Entity *pokemon
                 pokemon->pos.y + gAdjacentTileOffsets[i].y);
             if (CanAttackInDirection(pokemon, i))
             {
-                struct Entity *targetPokemon = targetTile->monster;
+                Entity *targetPokemon = targetTile->monster;
                 if (targetPokemon != NULL && GetEntityType(targetPokemon) == ENTITY_MONSTER)
                 {
                     s32 prevNumPotentialTargets = numPotentialTargets;
@@ -451,7 +451,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, struct Entity *pokemon
         }
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
         {
-            struct Entity *target = gDungeon->allPokemon[i];
+            Entity *target = gDungeon->allPokemon[i];
             if (EntityExists(target) && pokemon != target)
             {
                 s32 direction = GetDirectionTowardsPosition(&pokemon->pos, &target->pos);
@@ -475,7 +475,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, struct Entity *pokemon
         s32 i;
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
         {
-            struct Entity *target = gDungeon->allPokemon[i];
+            Entity *target = gDungeon->allPokemon[i];
             if (EntityExists(target))
             {
                 numPotentialTargets = TryAddTargetToAITargetList(numPotentialTargets, targetingFlags, pokemon, target, move, hasStatusChecker);
@@ -531,7 +531,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, struct Entity *pokemon
     return moveWeight;
 }
 
-bool8 IsTargetInLineRange(struct Entity *user, struct Entity *target, s32 range)
+bool8 IsTargetInLineRange(Entity *user, Entity *target, s32 range)
 {
     s32 distanceX = user->pos.x - target->pos.x;
     s32 distanceY, distance;
@@ -595,12 +595,12 @@ bool8 IsTargetInLineRange(struct Entity *user, struct Entity *target, s32 range)
     return TRUE;
 }
 
-s32 TryAddTargetToAITargetList(s32 numPotentialTargets, s32 targetingFlags, struct Entity *user, struct Entity *target, struct Move *move, bool32 hasStatusChecker)
+s32 TryAddTargetToAITargetList(s32 numPotentialTargets, s32 targetingFlags, Entity *user, Entity *target, struct Move *move, bool32 hasStatusChecker)
 {
     s32 direction;
     s32 targetingFlags2 = (s16) targetingFlags;
     bool8 hasStatusChecker2 = hasStatusChecker;
-    struct EntityInfo *userData = user->info;
+    EntityInfo *userData = user->info;
     if ((user->pos.x == target->pos.x && user->pos.y == target->pos.y) ||
         (targetingFlags2 & 0xF0) == TARGETING_FLAG_TARGET_ROOM ||
         (targetingFlags2 & 0xF0) == TARGETING_FLAG_TARGET_FLOOR ||
@@ -624,9 +624,9 @@ s32 TryAddTargetToAITargetList(s32 numPotentialTargets, s32 targetingFlags, stru
     return numPotentialTargets;
 }
 
-bool8 IsAITargetEligible(s32 targetingFlags, struct Entity *user, struct Entity *target, struct Move *move, bool32 hasStatusChecker)
+bool8 IsAITargetEligible(s32 targetingFlags, Entity *user, Entity *target, struct Move *move, bool32 hasStatusChecker)
 {
-    struct EntityInfo *targetData;
+    EntityInfo *targetData;
     s32 targetingFlags2 = (s16) targetingFlags;
     bool8 hasStatusChecker2 = hasStatusChecker;
     bool8 hasTarget = FALSE;
@@ -750,17 +750,17 @@ bool8 IsAITargetEligible(s32 targetingFlags, struct Entity *user, struct Entity 
     return hasTarget;
 }
 
-s32 WeightMove(struct Entity *user, s32 targetingFlags, struct Entity *target, u32 moveType)
+s32 WeightMove(Entity *user, s32 targetingFlags, Entity *target, u32 moveType)
 {
 #ifndef NONMATCHING
-    register struct EntityInfo *targetData asm("r4");
+    register EntityInfo *targetData asm("r4");
 #else
-    struct EntityInfo *targetData;
+    EntityInfo *targetData;
 #endif
     s32 targetingFlags2 = (s16) targetingFlags;
     u8 moveType2 = moveType;
     u8 weight = 1;
-    struct EntityInfo *targetData2;
+    EntityInfo *targetData2;
     targetData2 = targetData = target->info;
     if (!targetData->isNotTeamMember || (targetingFlags2 & 0xF) != TARGETING_FLAG_TARGET_OTHER)
     {
@@ -788,9 +788,9 @@ s32 WeightMove(struct Entity *user, s32 targetingFlags, struct Entity *target, u
     return weight;
 }
 
-bool8 TargetRegularAttack(struct Entity *pokemon, u32 *targetDir, bool8 checkPetrified)
+bool8 TargetRegularAttack(Entity *pokemon, u32 *targetDir, bool8 checkPetrified)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     s32 numPotentialTargets = 0;
     s32 direction = pokemonInfo->action.direction;
     s32 faceTurnLimit = pokemonInfo->eyesightStatus == STATUS_BLINKER ? 1 : 8;
@@ -801,7 +801,7 @@ bool8 TargetRegularAttack(struct Entity *pokemon, u32 *targetDir, bool8 checkPet
     bool8 hasStatusChecker = IQSkillIsEnabled(pokemon, IQ_STATUS_CHECKER);
     for (i = 0; i < faceTurnLimit; i++, direction++)
     {
-        struct Entity *target;
+        Entity *target;
         direction &= DIRECTION_MASK;
         target = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x,
             pokemon->pos.y + gAdjacentTileOffsets[direction].y)->monster;
@@ -864,7 +864,7 @@ bool8 TargetRegularAttack(struct Entity *pokemon, u32 *targetDir, bool8 checkPet
 
 }
 
-bool8 IsTargetInRange(struct Entity *pokemon, struct Entity *targetPokemon, s32 direction, s32 maxRange)
+bool8 IsTargetInRange(Entity *pokemon, Entity *targetPokemon, s32 direction, s32 maxRange)
 {
     s32 distanceX = pokemon->pos.x - targetPokemon->pos.x;
     s32 effectiveMaxRange;
@@ -932,9 +932,9 @@ bool8 IsTargetInRange(struct Entity *pokemon, struct Entity *targetPokemon, s32 
     return FALSE;
 }
 
-void sub_807CABC(struct Entity *target)
+void sub_807CABC(Entity *target)
 {
-    struct EntityInfo *entityInfo;
+    EntityInfo *entityInfo;
     s32 counter;
 
     counter = 0;
@@ -960,13 +960,13 @@ void sub_807CABC(struct Entity *target)
 }
 
 #if NONMATCHING // 99.09% https://decomp.me/scratch/rpwXh
-void sub_807CB3C(struct Entity *pokemon)
+void sub_807CB3C(Entity *pokemon)
 {
     bool8 r4;
-    struct Item *item;
-    struct Item IVar5;
-    struct EntityInfo *entityInfo; // r7
-    struct ActionContainer act;
+    Item *item;
+    Item IVar5;
+    EntityInfo *entityInfo; // r7
+    ActionContainer act;
     struct Move move;
     struct AIPossibleMove sp28;
     bool8 r8;
@@ -1059,7 +1059,7 @@ void sub_807CB3C(struct Entity *pokemon)
 }
 #else
 NAKED
-void sub_807CB3C(struct Entity *pokemon)
+void sub_807CB3C(Entity *pokemon)
 {
     asm_unified(
     "push {r4-r7,lr}\n"

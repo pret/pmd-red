@@ -5,7 +5,7 @@
 void nullsub_6(void)
 {}
 
-void sub_8004AA4(struct unkStruct_202EE8C *a0, struct OpenedFile *a1, s32 a2)
+void sub_8004AA4(struct unkStruct_202EE8C *a0, OpenedFile *a1, s32 a2)
 {
     struct unkDataFor8004AA4 **data;
     struct unkDataFor8004AA4 *ptr;

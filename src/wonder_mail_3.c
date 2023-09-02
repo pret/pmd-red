@@ -14,7 +14,7 @@
 #include "code_80130A8.h"
 #include "code_80118A4.h"
 
-const struct UnkTextStruct2 gUnknown_80DFDD4 =
+const UnkTextStruct2 gUnknown_80DFDD4 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -25,7 +25,7 @@ const struct UnkTextStruct2 gUnknown_80DFDD4 =
 };
 
 // Unused
-const struct UnkTextStruct2 gUnknown_80DFDEC =
+const UnkTextStruct2 gUnknown_80DFDEC =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -35,7 +35,7 @@ const struct UnkTextStruct2 gUnknown_80DFDEC =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80DFE04 =
+const UnkTextStruct2 gUnknown_80DFE04 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -44,7 +44,7 @@ const struct UnkTextStruct2 gUnknown_80DFE04 =
     0x03, 0x00,
     NULL
 };
-const struct UnkTextStruct2 gUnknown_80DFE1C =
+const UnkTextStruct2 gUnknown_80DFE1C =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -55,7 +55,7 @@ const struct UnkTextStruct2 gUnknown_80DFE1C =
 };
 
 // Unused
-const struct UnkTextStruct2 gUnknown_80DFE34 =
+const UnkTextStruct2 gUnknown_80DFE34 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -161,8 +161,8 @@ u32 sub_802C598(u8 param_1);
 extern void sub_802C688(void);
 extern u8 GetPelipperBoardSlotIndex(void);
 
-extern struct UnkTextStruct2 gUnknown_80DFD8C;
-extern struct UnkTextStruct2 gUnknown_80DFDA4;
+extern UnkTextStruct2 gUnknown_80DFD8C;
+extern UnkTextStruct2 gUnknown_80DFDA4;
 
 extern struct unkStruct_203B2F0 *gUnknown_203B2F0;
 

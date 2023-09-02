@@ -30,7 +30,7 @@ u32 sub_80063B0(void);
 
 void sub_80097B0(void)
 {
-    struct OpenedFile *fontpalFile;
+    OpenedFile *fontpalFile;
     s32 index;
     u32 *ptr;
 

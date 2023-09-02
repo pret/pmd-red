@@ -6,7 +6,7 @@
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 
-s32 CalculateStatusTurns(struct Entity *target, s16 *turnRange, bool8 factorCurerSkills)
+s32 CalculateStatusTurns(Entity *target, s16 *turnRange, bool8 factorCurerSkills)
 {
   s32 numTurns;
   

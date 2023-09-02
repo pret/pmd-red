@@ -22,11 +22,11 @@ extern u8 gAvailablePokemonNames[];
 extern u32 gUnknown_80FC31C;
 extern u32 gUnknown_80FCEFC;
 extern u32 gUnknown_80FC2FC;
-extern bool8 sub_805744C(struct Entity *, struct Move *, u32);
-extern void SetMessageArgument(char[], struct Entity*, u32);
-extern void sub_80522F4(struct Entity *r1, struct Entity *r2, u32);
+extern bool8 sub_805744C(Entity *, struct Move *, u32);
+extern void SetMessageArgument(char[], Entity*, u32);
+extern void sub_80522F4(Entity *r1, Entity *r2, u32);
 
-bool8 HasSafeguardStatus(struct Entity * pokemon, struct Entity * target, bool8 displayMessage)
+bool8 HasSafeguardStatus(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
   if (target->info->protectionStatus == STATUS_SAFEGUARD) {
     if (displayMessage) {
@@ -38,7 +38,7 @@ bool8 HasSafeguardStatus(struct Entity * pokemon, struct Entity * target, bool8 
   return FALSE;
 }
 
-bool8 sub_8071728(struct Entity * pokemon, struct Entity * target, bool8 displayMessage)
+bool8 sub_8071728(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
   if (target->info->protectionStatus == STATUS_MIST) {
     if (displayMessage) {
@@ -59,9 +59,9 @@ bool8 sub_8071728(struct Entity * pokemon, struct Entity * target, bool8 display
   return FALSE;
 }
 
-bool8 sub_80717A4(struct Entity *pokemon, u16 moveID)
+bool8 sub_80717A4(Entity *pokemon, u16 moveID)
 {
-  struct EntityInfo * entityInfo;
+  EntityInfo * entityInfo;
   s32 index;
 
   entityInfo = pokemon->info;
@@ -90,7 +90,7 @@ bool8 sub_80717A4(struct Entity *pokemon, u16 moveID)
   }
 }
 
-bool8 HasAbility(struct Entity *pokemon, u8 ability)
+bool8 HasAbility(Entity *pokemon, u8 ability)
 {
     if (!EntityExists(pokemon))
     {
@@ -98,7 +98,7 @@ bool8 HasAbility(struct Entity *pokemon, u8 ability)
     }
     else
     {
-        struct EntityInfo *pokemonInfo = pokemon->info;
+        EntityInfo *pokemonInfo = pokemon->info;
         if (pokemonInfo->abilities[0] == ability || pokemonInfo->abilities[1] == ability)
         {
             return TRUE;
@@ -107,9 +107,9 @@ bool8 HasAbility(struct Entity *pokemon, u8 ability)
     }
 }
 
-bool8 MonsterIsType(struct Entity *pokemon, u8 type)
+bool8 MonsterIsType(Entity *pokemon, u8 type)
 {
-    struct EntityInfo *pokemonInfo = pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemonInfo = pokemon->info;
     if (type == TYPE_NONE)
     {
         return FALSE;
@@ -125,9 +125,9 @@ bool8 MonsterIsType(struct Entity *pokemon, u8 type)
     return FALSE;
 }
 
-bool8 CanSeeInvisibleMonsters(struct Entity *pokemon)
+bool8 CanSeeInvisibleMonsters(Entity *pokemon)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     if (pokemonInfo->eyesightStatus != STATUS_EYEDROPS)
     {
         if (!HasHeldItem(pokemon, ITEM_GOGGLE_SPECS))
@@ -139,9 +139,9 @@ bool8 CanSeeInvisibleMonsters(struct Entity *pokemon)
         return TRUE;
 }
 
-bool8 HasTactic(struct Entity *pokemon, u8 tactic)
+bool8 HasTactic(Entity *pokemon, u8 tactic)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     if (pokemonInfo->isTeamLeader)
     {
         bool8 isGoTheOtherWay = tactic == TACTIC_GO_THE_OTHER_WAY;
@@ -150,21 +150,21 @@ bool8 HasTactic(struct Entity *pokemon, u8 tactic)
     return pokemonInfo->tactic == tactic;
 }
 
-bool8 IQSkillIsEnabled(struct Entity *pokemon, u8 IQSkill)
+bool8 IQSkillIsEnabled(Entity *pokemon, u8 IQSkill)
 {
     return IsIQSkillSet(pokemon->info->IQSkillFlags, 1 << IQSkill);
 }
 
-bool8 IQSkillPairIsEnabled(struct Entity *pokemon, u8 IQSkill1, u8 IQSkill2)
+bool8 IQSkillPairIsEnabled(Entity *pokemon, u8 IQSkill1, u8 IQSkill2)
 {
     return IsIQSkillSet(pokemon->info->IQSkillFlags, 1 << IQSkill1 | 1 << IQSkill2);
 }
 
-void LoadIQSkills(struct Entity *pokemon)
+void LoadIQSkills(Entity *pokemon)
 {
   u8 *iVar2;
   s32 IQSkill;
-  struct EntityInfo *pokemonInfo;
+  EntityInfo *pokemonInfo;
 
   pokemonInfo = pokemon->info;
   if (pokemonInfo->isNotTeamMember) {
@@ -193,9 +193,9 @@ void LoadIQSkills(struct Entity *pokemon)
   }
 }
 
-bool8 CanSeeTeammate(struct Entity * pokemon)
+bool8 CanSeeTeammate(Entity * pokemon)
 {
-  struct Entity *teamMember;
+  Entity *teamMember;
   s32 memberIdx;
 
   if (pokemon->info->isNotTeamMember) {
@@ -215,7 +215,7 @@ bool8 CanSeeTeammate(struct Entity * pokemon)
   }
 }
 
-u8 GetMoveTypeForMonster(struct Entity *pokemon, struct Move *pokeMove)
+u8 GetMoveTypeForMonster(Entity *pokemon, struct Move *pokeMove)
 {
     if (pokeMove->id == MOVE_HIDDEN_POWER)
         return pokemon->info->hiddenPowerType;
@@ -223,7 +223,7 @@ u8 GetMoveTypeForMonster(struct Entity *pokemon, struct Move *pokeMove)
         return GetMoveType(pokeMove);
 }
 
-s32 GetMovePower(struct Entity *pokemon, struct Move *pokeMove)
+s32 GetMovePower(Entity *pokemon, struct Move *pokeMove)
 {
     if(pokeMove->id == MOVE_HIDDEN_POWER)
         return (pokemon->info->hiddenPowerBasePower + pokeMove->ginseng);
@@ -231,14 +231,14 @@ s32 GetMovePower(struct Entity *pokemon, struct Move *pokeMove)
         return (GetMoveBasePower(pokeMove) + pokeMove->ginseng);
 }
 
-bool8 ToolboxEnabled(struct EntityInfo *pokemon)
+bool8 ToolboxEnabled(EntityInfo *pokemon)
 {
     if(!IsToolboxEnabled(pokemon->id))
         return FALSE;
     return TRUE;
 }
 
-static inline bool8 sub_8071A8C_sub(struct EntityInfo *pokemonInfo)
+static inline bool8 sub_8071A8C_sub(EntityInfo *pokemonInfo)
 {
     if(pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON ||
         pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
@@ -247,9 +247,9 @@ static inline bool8 sub_8071A8C_sub(struct EntityInfo *pokemonInfo)
         return FALSE;
 }
 
-bool8 sub_8071A8C(struct Entity *pokemon)
+bool8 sub_8071A8C(Entity *pokemon)
 {
-    struct EntityInfo *pokemonInfo;
+    EntityInfo *pokemonInfo;
     if(EntityExists(pokemon))
     {
         pokemonInfo = pokemon->info;
@@ -262,7 +262,7 @@ bool8 sub_8071A8C(struct Entity *pokemon)
     return FALSE;
 }
 
-bool8 SetVisualFlags(struct EntityInfo *entityInfo, u16 newFlag, bool8 param_3)
+bool8 SetVisualFlags(EntityInfo *entityInfo, u16 newFlag, bool8 param_3)
 { 
   if ((entityInfo->visualFlags & newFlag)) {
     entityInfo->previousVisualFlags = newFlag | entityInfo->previousVisualFlags;

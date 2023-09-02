@@ -1,10 +1,10 @@
 #include "menu.h"
 struct unkStruct_203B2F4
 {
-    struct MenuInputStruct input;
+    MenuInputStruct input;
     u32 unk34;
-    struct UnkTextStruct2 *unk38;
-    struct UnkTextStruct2 unk3C[4];
+    UnkTextStruct2 *unk38;
+    UnkTextStruct2 unk3C[4];
     u8 unk9C[4];
 };
 extern struct unkStruct_203B2F4 *gUnknown_203B2F4;
@@ -41,12 +41,12 @@ struct unkStruct_203B2F8
     u32 menuAction1;
     u32 menuAction2;
     u32 menuAction3;
-    struct MenuStruct unk78;
-    struct MenuStruct unkC8;
-    struct MenuItem unk118[8];
-    struct MenuItem unk158[8];
+    MenuStruct unk78;
+    MenuStruct unkC8;
+    MenuItem unk118[8];
+    MenuItem unk158[8];
     u16 unk198[8];
-    struct UnkTextStruct2 unk1A8[4];
+    UnkTextStruct2 unk1A8[4];
     u32 unk1E4;
 };
 extern struct unkStruct_203B2F8 *gUnknown_203B2F8;

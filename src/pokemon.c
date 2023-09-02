@@ -5,23 +5,23 @@
 
 extern struct FileArchive gSystemFileArchive;
 extern const char gUnknown_81075F4;
-EWRAM_DATA struct MonsterDataEntry *gMonsterParameters;
-EWRAM_DATA struct OpenedFile *gMonsterParametersFile;
-EWRAM_DATA struct unkStruct_203B45C gRecruitedPokemon;
+EWRAM_DATA MonsterDataEntry *gMonsterParameters;
+EWRAM_DATA OpenedFile *gMonsterParametersFile;
+EWRAM_DATA unkStruct_203B45C gRecruitedPokemon;
 EWRAM_DATA u16 gLevelCurrentPokeId;
 
-EWRAM_DATA_2 struct unkStruct_203B45C *gRecruitedPokemonRef = {0};
+EWRAM_DATA_2 unkStruct_203B45C *gRecruitedPokemonRef = {0};
 
 
 void LoadMonsterParameters(void)
 {
     gRecruitedPokemonRef = &gRecruitedPokemon;
     gMonsterParametersFile = OpenFileAndGetFileDataPtr(&gUnknown_81075F4, &gSystemFileArchive);
-    gMonsterParameters = (struct MonsterDataEntry *)gMonsterParametersFile->data;
+    gMonsterParameters = (MonsterDataEntry *)gMonsterParametersFile->data;
     gLevelCurrentPokeId = 0;
 }
 
-struct unkStruct_203B45C *GetRecruitedPokemon(void)
+unkStruct_203B45C *GetRecruitedPokemon(void)
 {
     return &gRecruitedPokemon;
 }
@@ -50,8 +50,8 @@ void InitializeRecruitedPokemon(void)
 // https://decomp.me/scratch/wQbZB 
  // void sub_808CE74(s16 _species, bool8 _isLeader, u8* name)  
  // {
- //     struct PokemonStruct pokemon;
- //     struct PokemonStruct *temp;
+ //     PokemonStruct1 pokemon;
+ //     PokemonStruct1 *temp;
  //     u8 name_buffer[20];
  //     u32 friendArea;
  //     s32 i;

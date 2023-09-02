@@ -11,9 +11,9 @@
 #include "number_util.h"
 #include "status_checks_1.h"
 
-u32 EvaluateItem(struct Entity *targetPokemon, struct Item *item, u32 itemTargetFlags)
+u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
 {
-    struct EntityInfo *pokemonInfo = targetPokemon->info;
+    EntityInfo *pokemonInfo = targetPokemon->info;
     s32 itemWeight = 0;
     bool8 targetOther = itemTargetFlags & 1;
     u16 targetAlly = (itemTargetFlags >> 1) & 1;
@@ -443,13 +443,13 @@ u32 EvaluateItem(struct Entity *targetPokemon, struct Item *item, u32 itemTarget
     return itemWeight;
 }
 
-bool8 CanTargetAdjacentPokemon(struct Entity *pokemon)
+bool8 CanTargetAdjacentPokemon(Entity *pokemon)
 {
     s32 direction;
     for (direction = 0; direction < NUM_DIRECTIONS; direction++)
     {
         struct Tile *mapTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x, pokemon->pos.y + gAdjacentTileOffsets[direction].y);
-        struct Entity *adjacentPokemon = mapTile->monster;
+        Entity *adjacentPokemon = mapTile->monster;
         if (adjacentPokemon != NULL && GetEntityType(adjacentPokemon) != ENTITY_NOTHING &&
             CanTarget(pokemon, adjacentPokemon, FALSE, TRUE) == TARGET_CAPABILITY_CAN_TARGET)
         {

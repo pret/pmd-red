@@ -6,7 +6,7 @@
 #include "dungeon_pokemon_attributes.h"
 #include "moves.h"
 
-s16 GetMoveTargetAndRangeForPokemon(struct Entity *pokemon, struct Move *move, bool32 isAI)
+s16 GetMoveTargetAndRangeForPokemon(Entity *pokemon, struct Move *move, bool32 isAI)
 {
     if (move->id == MOVE_CURSE && !isAI && !MonsterIsType(pokemon, TYPE_GHOST))
     {

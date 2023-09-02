@@ -14,7 +14,7 @@ extern u16 gUnknown_2039DCC;
 extern u16 gUnknown_2039DCE;
 extern u8 gUnknown_2039DD0;
 extern u32 gUnknown_2039DD4;
-extern struct OpenedFile *gUnknown_203B4B4;
+extern OpenedFile *gUnknown_203B4B4;
 extern struct unkStruct_3001B7C *gUnknown_3001B7C;
 
 // dungeon_sbin.s
@@ -112,7 +112,7 @@ void GroundSprite_Reset(s16 a0)
 
 void sub_80A6460(void)
 {
-    struct OpenedFile *file;
+    OpenedFile *file;
     s32 i;
     u8 *data;
     u16 something;
@@ -136,7 +136,7 @@ void sub_80A64A4(void)
     u8 *r2;
     u16 r4;
     u32 r5;
-    struct OpenedFile *file;
+    OpenedFile *file;
     struct unkStruct_3001B7C_sub108 *r7;
     s32 i;
     s16 r9;

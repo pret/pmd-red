@@ -9,11 +9,11 @@
 extern const char gUnknown_8108F10[];
 extern const char gUnknown_8108F18[];
 extern const char gUnknown_8108F2C[];
-extern struct DungeonLocation gUnknown_8107828[];
+extern DungeonLocation gUnknown_8107828[];
 extern u8 gDungeonFloorCount[];
 extern u8 gUnknown_81077E8[];
 
-void sub_80901D8(struct DungeonLocation *param_1,struct DungeonLocation *param_2);
+void sub_80901D8(DungeonLocation *param_1,DungeonLocation *param_2);
 
 const u8 *GetDungeonName1(u8 dungeon)
 {
@@ -80,8 +80,8 @@ s16 GetRandomMovementChance(u8 dungeon)
     return gDungeons[dungeon].randomMovementChance;
 }
 
-bool8 sub_809017C(struct DungeonLocation* a1) {
-    struct DungeonLocation location;
+bool8 sub_809017C(DungeonLocation* a1) {
+    DungeonLocation location;
     int i;
     sub_80901D8(&location, a1);
     for (i = 0; i < 999 && gUnknown_8107828[i].id != 63; ++i) {
@@ -93,7 +93,7 @@ bool8 sub_809017C(struct DungeonLocation* a1) {
     return FALSE;
 }
 
-void sub_80901D8(struct DungeonLocation *param_1,struct DungeonLocation *param_2)
+void sub_80901D8(DungeonLocation *param_1,DungeonLocation *param_2)
 { 
   if ((u8)(param_2->id - DUNGEON_NORMAL_MAZE_2) < NUM_DUNGEON_MAZE) {
     param_1->id = DUNGEON_NORMAL_MAZE;
@@ -104,12 +104,12 @@ void sub_80901D8(struct DungeonLocation *param_1,struct DungeonLocation *param_2
   }
 }
 
-void PrintYellowDungeonNametoBuffer(u8 *buffer, struct DungeonLocation *dungeonLocation)
+void PrintYellowDungeonNametoBuffer(u8 *buffer, DungeonLocation *dungeonLocation)
 {
     sprintfStatic(buffer, gUnknown_8108F10, gDungeonNames[dungeonLocation->id].name1); // {COLOR_2 YELLOW_4}%s{END_COLOR_TEXT_2} (normal floor print (no B)
 }
 
-void PrintDungeonLocationtoBuffer(u8 *buffer, struct DungeonLocation *dungeonLocation)
+void PrintDungeonLocationtoBuffer(u8 *buffer, DungeonLocation *dungeonLocation)
 {
     if(gDungeons[dungeonLocation->id].stairDirectionUp){
         sprintfStatic(buffer, gUnknown_8108F18, gDungeonNames[dungeonLocation->id].name1, dungeonLocation->floor); //_F
@@ -120,7 +120,7 @@ void PrintDungeonLocationtoBuffer(u8 *buffer, struct DungeonLocation *dungeonLoc
     }
 }
 
-void CopyDungeonName1toBuffer(u8 *buffer, struct DungeonLocation *dungeonLocation)
+void CopyDungeonName1toBuffer(u8 *buffer, DungeonLocation *dungeonLocation)
 {
     strncpy(buffer, gDungeonNames[dungeonLocation->id].name1, 0x50);
 }
@@ -145,13 +145,13 @@ u8 sub_80902C8(u8 dungeon)
         return gUnknown_81077E8[dungeon];
 }
 
-void SaveDungeonLocation(struct unkStruct_8094924* r0, struct DungeonLocation* r1)
+void SaveDungeonLocation(struct unkStruct_8094924* r0, DungeonLocation* r1)
 {
     SaveIntegerBits(r0, &r1->id, 0x7);
     SaveIntegerBits(r0, &r1->floor, 0x7);
 }
 
-void RestoreDungeonLocation(struct unkStruct_8094924* r0, struct DungeonLocation* r1)
+void RestoreDungeonLocation(struct unkStruct_8094924* r0, DungeonLocation* r1)
 {
     r1->id = 0;
     r1->floor = 0;

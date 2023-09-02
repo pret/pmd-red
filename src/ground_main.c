@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_800C9CC.h"
 #include "play_time.h"
 #include "input.h"
 #include "debug.h"
@@ -50,7 +51,6 @@ extern void sub_809CA20();
 extern void sub_80A6E80();
 extern void sub_8099BE4();
 extern void sub_8099744();
-extern void sub_800CB20();
 extern void nullsub_120();
 extern void sub_80A5E70();
 extern void sub_809B638();

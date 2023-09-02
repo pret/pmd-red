@@ -9,7 +9,7 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 
-bool8 TargetLeader(struct Entity *pokemon)
+bool8 TargetLeader(Entity *pokemon)
 {
     if (pokemon->info->isNotTeamMember)
     {
@@ -18,11 +18,11 @@ bool8 TargetLeader(struct Entity *pokemon)
     return TacticsTargetLeader(pokemon->info->tactic);
 }
 
-struct Entity* GetLeaderIfVisible(struct Entity *pokemon)
+Entity* GetLeaderIfVisible(Entity *pokemon)
 {
     if (!pokemon->info->isNotTeamMember)
     {
-        struct Entity *leader = GetLeader();
+        Entity *leader = GetLeader();
         if (leader &&
             leader->info->waitingStatus != STATUS_DECOY &&
             CanTarget(pokemon, leader, FALSE, FALSE) == TARGET_CAPABILITY_CANNOT_ATTACK &&

@@ -15,17 +15,17 @@
 struct unkStruct_203B324
 {
     // size: 0x78
-    struct MenuInputStructSub unk0;
+    MenuInputStructSub unk0;
     u8 mailIndex;
     u32 unk10;
-    struct UnkTextStruct2 *unk14;
-    struct UnkTextStruct2 unk18[4];
+    UnkTextStruct2 *unk14;
+    UnkTextStruct2 unk18[4];
 };
 extern struct unkStruct_203B324 *gUnknown_203B324;
 extern struct unkStruct_203B480 *gUnknown_203B480;
 
 
-const struct UnkTextStruct2 gUnknown_80E0900 = {
+const UnkTextStruct2 gUnknown_80E0900 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x00, 0x00,
@@ -36,7 +36,7 @@ const struct UnkTextStruct2 gUnknown_80E0900 = {
 
 const u8 gUnknown_80E0918[] = {0x01, 0x00, 0x12, 0x00};
 
-const struct UnkTextStruct2 gUnknown_80E091C = {
+const UnkTextStruct2 gUnknown_80E091C = {
     0x00, 0x00, 0x00, 0x00,
     0x06,
     0x02, 0x02,

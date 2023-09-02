@@ -20,13 +20,13 @@ struct unkStruct_203B494 *sub_8097680(void)
     return &sUnknown_2039778;
 }
 
-void SetDungeonLocationInfo(struct DungeonLocation *r0)
+void SetDungeonLocationInfo(DungeonLocation *r0)
 {
     gUnknown_203B494->dungeonLocation.id = r0->id;
     gUnknown_203B494->dungeonLocation.floor = r0->floor;
 }
 
-struct DungeonLocation *GetDungeonLocationInfo(void)
+DungeonLocation *GetDungeonLocationInfo(void)
 {
     return &gUnknown_203B494->dungeonLocation;
 }

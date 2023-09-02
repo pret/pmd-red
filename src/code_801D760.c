@@ -4,10 +4,10 @@
 #include "constants/input.h"
 #include "file_system.h"
 #include "friend_list_menu.h"
-#include "item.h"
+#include "items.h"
 #include "menu.h"
 #include "pokemon.h"
-#include "team_inventory.h"
+
 #include "memory.h"
 #include "input.h"
 #include "text1.h"
@@ -23,16 +23,16 @@
 struct unkStruct_203B258
 {
     // size: 0xA0
-    struct MenuInputStruct input;
+    MenuInputStruct input;
     u32 unk34;
-    struct UnkTextStruct2 *unk38;
-    struct UnkTextStruct2 unk3C[4];
+    UnkTextStruct2 *unk38;
+    UnkTextStruct2 unk3C[4];
     u8 unk9C[4];
 };
 
 extern struct unkStruct_203B258 *gUnknown_203B258;
-extern struct UnkTextStruct2 gUnknown_80DBF88;
-extern struct UnkTextStruct2 gUnknown_80DBF70;
+extern UnkTextStruct2 gUnknown_80DBF88;
+extern UnkTextStruct2 gUnknown_80DBF70;
 
 struct unkStruct_811BAF4
 {
@@ -111,19 +111,19 @@ struct TeamBadgeData
 
 struct unk_203B250
 {
-    struct PokemonStruct *pokeStruct;
+    PokemonStruct1 *pokeStruct;
     s16 index;
     /* 0x6 */ u8 currFriendAreaLocation; // 0 when not in a friend area
     u8 unk7;
     u8 unk8;
     u8 unk9;
-    struct PokemonStruct *unkC;
+    PokemonStruct1 *unkC;
     u32 state;
     u32 menuAction;
-    struct MenuStruct unk18;
-    struct MenuItem unk68[8];
+    MenuStruct unk18;
+    MenuItem unk68[8];
     u16 unkA8[8];
-    struct UnkTextStruct2 unkB8[4];
+    UnkTextStruct2 unkB8[4];
 };
 
 struct unk_203B250 *gUnknown_203B250;
@@ -133,11 +133,11 @@ extern bool8 sub_8024108(u32);
 extern bool8 sub_8096E2C(void);
 extern u32 sub_801DCC4(void);
 extern u32 sub_8027074(void);
-extern void sub_80227B8(struct PokemonStruct *);
+extern void sub_80227B8(PokemonStruct1 *);
 extern bool8 sub_8024458(s16, u32);
 extern bool8 sub_801BEEC(s16);
 void sub_801D894(void);
-u32 sub_8025EF4(struct PokemonStruct *);
+u32 sub_8025EF4(PokemonStruct1 *);
 
 void sub_801D3A8(void)
 {
@@ -510,7 +510,7 @@ void sub_801D894(void)
 
 void LoadTeamRankBadge(u32 param_1, u32 param_2, u32 param_3)
 {
-  struct OpenedFile *teamBadgeFile;
+  OpenedFile *teamBadgeFile;
   s32 palleteIndex;
   u8 rank;
   u8 *colorArray;

@@ -28,7 +28,7 @@ ALIGNED(4) const u8 gUnknown_80E0750[] =  {0x83, 0xC2};
 ALIGNED(4) const u8 gUnknown_80E0754[] = {0x83, 0xC0};
 static const u8 makuhita_dojo_fill1[] = "pksdir0";
 
-const struct UnkTextStruct2 gUnknown_80E0760 = {
+const UnkTextStruct2 gUnknown_80E0760 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x00, 0x00,
@@ -46,7 +46,7 @@ const u8 gMakuhitaDojoGoTrain[] = "Go Train";
 
 static const u8 makuhita_dojo_fill2[] = "pksdir0";
 
-const struct UnkTextStruct2 gUnknown_80E07EC = {
+const UnkTextStruct2 gUnknown_80E07EC = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x00, 0x00,
@@ -54,7 +54,7 @@ const struct UnkTextStruct2 gUnknown_80E07EC = {
     0x00, 0x00,
     NULL
 };
-const struct UnkTextStruct2 gUnknown_80E0804 = {
+const UnkTextStruct2 gUnknown_80E0804 = {
     0x00, 0x00, 0x00, 0x00,
     0x06,
     0x02, 0x02,
@@ -78,10 +78,10 @@ extern s16 sub_80A2668(u32 r0);
 extern s16 sub_80A26CC(s16 r0);
 extern u8 sub_80A2740(s32 r0);
 
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
+extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern bool8 IsMazeCompleted(s32);
-extern void PrintColoredPokeNameToBuffer(u8 *, struct PokemonStruct *, s32);
-extern void PrintYellowDungeonNametoBuffer(u8 *, struct DungeonLocation *);
+extern void PrintColoredPokeNameToBuffer(u8 *, PokemonStruct1 *, s32);
+extern void PrintYellowDungeonNametoBuffer(u8 *, DungeonLocation *);
 
 void MakuhitaDojo_DrawCourseList(void);
 void MakuhitaDojo_DrawMainMenu(void);
@@ -100,7 +100,7 @@ s32 sub_8030668(void);
 u32 MakuhitaDojo_New(u32 mode)
 {
     char *monName;
-    struct OpenedFile *faceFile;
+    OpenedFile *faceFile;
     u32 initialState;
 
     ResetUnusedInputStruct();
@@ -233,7 +233,7 @@ void sub_802FF1C(void)
 
 void MakuhitaDojo_UpdateDialogue(void)
 {
-    struct DungeonLocation dLoc;
+    DungeonLocation dLoc;
 
     switch (gUnknown_203B318->state) {
         case 0:
@@ -380,7 +380,7 @@ void MakuhitaDojo_GoToFallbackState(void)
         MakuhitaDojo_SetState(gUnknown_203B318->fallbackState);
 }
 
-bool8 sub_80302E8(s32 param_1, struct UnkTextStruct2_sub *param_2, u32 param_3)
+bool8 sub_80302E8(s32 param_1, UnkTextStruct2_sub *param_2, u32 param_3)
 {
     if (MakuhitaDojo_ReturnFalse())
         return FALSE;

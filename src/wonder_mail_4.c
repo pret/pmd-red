@@ -4,7 +4,7 @@
 #include "text2.h"
 #include "input.h"
 #include "memory.h"
-#include "item.h"
+#include "items.h"
 #include "pokemon.h"
 #include "code_8094F88.h"
 #include "constants/wonder_mail.h"
@@ -17,17 +17,17 @@ struct unkStruct_203B320
     // size: 0xC4
     u8 unk0[0x20];
     u32 wonderMailType;
-    struct MenuInputStruct input;
+    MenuInputStruct input;
     u32 unk58;
-    struct UnkTextStruct2 *unk5C;
-    struct UnkTextStruct2 unk60[4];
+    UnkTextStruct2 *unk5C;
+    UnkTextStruct2 unk60[4];
     u8 unkC0[4];
 };
 extern struct unkStruct_203B320 *gUnknown_203B320;
 
 extern struct unkStruct_203B480 *gUnknown_203B480;
 
-const struct UnkTextStruct2 gUnknown_80E083C = {
+const UnkTextStruct2 gUnknown_80E083C = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x00, 0x00,
@@ -36,7 +36,7 @@ const struct UnkTextStruct2 gUnknown_80E083C = {
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80E0854 = {
+const UnkTextStruct2 gUnknown_80E0854 = {
     0x00, 0x00, 0x00, 0x00,
     0x06,
     0x02, 0x02,
@@ -83,7 +83,7 @@ extern void sub_803092C(void);
 
 extern void CreateRescueTitle(struct unkStruct_802C39C *);
 
-u32 sub_80306A8(u32 wonderMailType, u32 r1, struct UnkTextStruct2_sub *r2, u32 r3)
+u32 sub_80306A8(u32 wonderMailType, u32 r1, UnkTextStruct2_sub *r2, u32 r3)
 {
     if (HasNoWonderMailType(wonderMailType))
         return 0;

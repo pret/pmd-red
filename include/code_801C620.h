@@ -3,7 +3,7 @@
 
 #include "text.h"
 
-bool8 sub_801C8C4(s32, s32, struct UnkTextStruct2_sub *, u32);
+bool8 sub_801C8C4(s32, s32, UnkTextStruct2_sub *, u32);
 extern u32 sub_801CA08(bool8);
 u8 sub_801CB24(void);
 void sub_801CB5C(bool8);

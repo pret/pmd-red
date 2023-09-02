@@ -61,7 +61,7 @@ bool8 MoveCausesPaused(struct Move *move)
     return FALSE;
 }
 
-bool8 MoveMatchesChargingStatus(struct Entity *pokemon, struct Move *move)
+bool8 MoveMatchesChargingStatus(Entity *pokemon, struct Move *move)
 {
     if (!EntityExists(pokemon))
     {
@@ -69,7 +69,7 @@ bool8 MoveMatchesChargingStatus(struct Entity *pokemon, struct Move *move)
     }
     else
     {
-        struct EntityInfo *pokemonInfo = pokemon->info;
+        EntityInfo *pokemonInfo = pokemon->info;
         s32 i;
         for (i = 0; i < 100; i++)
         {
@@ -87,7 +87,7 @@ bool8 MoveMatchesChargingStatus(struct Entity *pokemon, struct Move *move)
     }
 }
 
-bool8 IsCharging(struct Entity *pokemon, bool8 checkCharge)
+bool8 IsCharging(Entity *pokemon, bool8 checkCharge)
 {
     if (!EntityExists(pokemon))
     {
@@ -95,7 +95,7 @@ bool8 IsCharging(struct Entity *pokemon, bool8 checkCharge)
     }
     else
     {
-        struct EntityInfo *pokemonInfo = pokemon->info;
+        EntityInfo *pokemonInfo = pokemon->info;
         int i = 0;
         u8 *chargingStatusPointer = &pokemonInfo->chargingStatus;
         u8 *chargingStatusPointer2;

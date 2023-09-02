@@ -1,7 +1,7 @@
 #include "global.h"
 #include "mailbox.h"
 #include "pokemon.h"
-#include "item.h"
+#include "items.h"
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
@@ -9,13 +9,13 @@
 #include "input.h"
 #include "wonder_mail.h"
 #include "menu_input.h"
-#include "team_inventory.h"
+
 #include "pelipper_board.h"
 #include "code_80118A4.h"
 
 EWRAM_DATA_2 struct unkStruct_203B308 *gPelipperBoard = {0};
 
-const struct UnkTextStruct2 gUnknown_80E0330 =
+const UnkTextStruct2 gUnknown_80E0330 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -25,7 +25,7 @@ const struct UnkTextStruct2 gUnknown_80E0330 =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80E0348 =
+const UnkTextStruct2 gUnknown_80E0348 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -35,7 +35,7 @@ const struct UnkTextStruct2 gUnknown_80E0348 =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80E0360 =
+const UnkTextStruct2 gUnknown_80E0360 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x04,
@@ -45,7 +45,7 @@ const struct UnkTextStruct2 gUnknown_80E0360 =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80E0378 =
+const UnkTextStruct2 gUnknown_80E0378 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x04,

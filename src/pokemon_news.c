@@ -14,10 +14,10 @@ struct unkStruct_203B2CC
 {
     // size: 0xD4;
     u8 receivedNewsletters[NUM_POKEMON_NEWS];
-    struct MenuInputStruct input;
+    MenuInputStruct input;
     u32 unk6C;
-    struct UnkTextStruct2 *unk70;
-    struct UnkTextStruct2 unk74[4];
+    UnkTextStruct2 *unk70;
+    UnkTextStruct2 unk74[4];
 };
 extern struct unkStruct_203B2CC *gUnknown_203B2CC;
 
@@ -31,8 +31,8 @@ struct unkStruct_203B2D4
     const u8 *unk10[4];
     u32 unk20;
     u32 unk24;
-    struct UnkTextStruct2 unk28[4];
-    struct MenuInputStructSub unk88;
+    UnkTextStruct2 unk28[4];
+    MenuInputStructSub unk88;
 };
 extern struct unkStruct_203B2D4 *gUnknown_203B2D4;
 
@@ -40,16 +40,16 @@ struct unkStruct_203B2D8
 {
     // size: 0xA4
     u8 unk0[4];
-    struct MenuInputStruct input;
+    MenuInputStruct input;
     u32 unk38;
-    struct UnkTextStruct2 *unk3C;
-    struct UnkTextStruct2 unk40[4];
+    UnkTextStruct2 *unk3C;
+    UnkTextStruct2 unk40[4];
     u8 unkA0[4];
 };
 extern struct unkStruct_203B2D8 *gUnknown_203B2D8;
 extern struct GameOptions *gGameOptionsRef;
 
-const struct UnkTextStruct2 gUnknown_80DFBD0 =
+const UnkTextStruct2 gUnknown_80DFBD0 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -61,7 +61,7 @@ const struct UnkTextStruct2 gUnknown_80DFBD0 =
 
 const u8 gUnknown_80DFBE8[] = { 0x01, 0x00, 0x0C, 0x00 };
 
-const struct UnkTextStruct2 gUnknown_80DFBEC =
+const UnkTextStruct2 gUnknown_80DFBEC =
 {
     0x00, 0x00, 0x00, 0x00,
     0x06,
@@ -74,7 +74,7 @@ const struct UnkTextStruct2 gUnknown_80DFBEC =
 ALIGNED(4) const u8 gUnknown_80DFC04[] = "News List";
 ALIGNED(4) static const char wonder_mail_2_fill1[] = "pksdir0";
 
-const struct UnkTextStruct2 gUnknown_80DFC18 =
+const UnkTextStruct2 gUnknown_80DFC18 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -86,7 +86,7 @@ const struct UnkTextStruct2 gUnknown_80DFC18 =
 
 const u8 gUnkData_80DFC30[] = { 0x01, 0x00, 0x16, 0x00 };
 
-const struct UnkTextStruct2 gUnknown_80DFC34 =
+const UnkTextStruct2 gUnknown_80DFC34 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x06,
@@ -100,7 +100,7 @@ ALIGNED(4) const u8 gUnknown_80DFC4C[] = "She";
 ALIGNED(4) const u8 gUnknown_80DFC50[] = "He";
 ALIGNED(4) static const char wonder_mail_2_fill2[] = "pksdir0";
 
-const struct UnkTextStruct2 gUnknown_80DFC5C =
+const UnkTextStruct2 gUnknown_80DFC5C =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -110,7 +110,7 @@ const struct UnkTextStruct2 gUnknown_80DFC5C =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80DFC74 =
+const UnkTextStruct2 gUnknown_80DFC74 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x06,
@@ -123,7 +123,7 @@ const struct UnkTextStruct2 gUnknown_80DFC74 =
 ALIGNED(4) const u8 gMailboxText[] = "Mailbox";
 ALIGNED(4) static const char wonder_mail_2_fill3[] = "pksdir0";
 
-const struct UnkTextStruct2 gUnknown_80DFC9C =
+const UnkTextStruct2 gUnknown_80DFC9C =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -133,7 +133,7 @@ const struct UnkTextStruct2 gUnknown_80DFC9C =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80DFCB4 =
+const UnkTextStruct2 gUnknown_80DFCB4 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x06,
@@ -169,10 +169,10 @@ extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 extern void sub_802BC7C(void);
 extern void sub_803B6B0(u32, u32, u32, u32);
-extern struct PokemonStruct *sub_808D3BC(void);
-extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
+extern PokemonStruct1 *sub_808D3BC(void);
+extern void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
 
-u32 sub_802B640(u32 r0, struct UnkTextStruct2_sub *r1, u32 r2)
+u32 sub_802B640(u32 r0, UnkTextStruct2_sub *r1, u32 r2)
 {
     if (HasNoPKMNNews())
         return 0;
@@ -521,7 +521,7 @@ void sub_802BCC4(void)
   }
 }
 
-u32 sub_802BD14(s32 param_1, struct UnkTextStruct2_sub *param_2, u32 param_3)
+u32 sub_802BD14(s32 param_1, UnkTextStruct2_sub *param_2, u32 param_3)
 {
     if (HasNoMailinMailbox())
         return 0;

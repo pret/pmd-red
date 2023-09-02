@@ -15,7 +15,7 @@ s32 sub_8091E94(s32 a1, s32 a2, s32 a3); // items.c
 
 bool8 sub_8090820(u16 moveID)
 {
-    struct PokemonStruct *pokeStruct;
+    PokemonStruct1 *pokeStruct;
     struct Move *move;
     s32 moveIndex;
     s32 index;
@@ -72,7 +72,7 @@ void sub_8090888(u8 *param_1, u8 *param_2)
     *param_1 = 0;
 }
 
-u32 sub_80908D8(struct DungeonLocation *dungeon)
+u32 sub_80908D8(DungeonLocation *dungeon)
 {
   if ((dungeon->id < DUNGEON_OUT_ON_RESCUE) && (dungeon->floor < gDungeonFloorCount[dungeon->id])) {
    return gUnknown_8108084[dungeon->id][dungeon->floor];
@@ -82,7 +82,7 @@ u32 sub_80908D8(struct DungeonLocation *dungeon)
   }
 }
 
-u8 sub_8090910(struct DungeonLocation *dungeon, u32 param_2)
+u8 sub_8090910(DungeonLocation *dungeon, u32 param_2)
 {
   u32 rand1;
   u32 rand2;

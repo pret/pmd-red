@@ -3,6 +3,6 @@
 
 #include "dungeon_entity.h"
 
-void SendMessage(struct Entity *pokemon, const char message[]);
+void SendMessage(Entity *pokemon, const char message[]);
 
 #endif

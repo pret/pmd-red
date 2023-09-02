@@ -13,14 +13,14 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "random.h"
-#include "team_inventory.h"
+
 #include "text_util.h"
 #include "text1.h"
 #include "text2.h"
 
 EWRAM_DATA_2 struct unkStruct_203B2B0 *gUnknown_203B2B0 = {0};
-extern struct UnkTextStruct2 gUnknown_80DCA00;
-extern struct UnkTextStruct2 gUnknown_80DC9E8;
+extern UnkTextStruct2 gUnknown_80DCA00;
+extern UnkTextStruct2 gUnknown_80DC9E8;
 extern u8 gPlayerName[];
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DFE8[];
@@ -138,7 +138,7 @@ ALIGNED(4) const u8 gLuminousCaveGiveName[] = _(
 ALIGNED(4) static const u8 fill0[] = "pksdir0";
 ALIGNED(4) static const u8 fill1[] = "pksdir0";
 
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
+extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern void UpdateLuminousCaveState(u32);
 
 extern void sub_8024E9C(void);
@@ -195,7 +195,7 @@ enum
 
 u32 sub_802465C(void)
 {
-  struct OpenedFile *faceFile;
+  OpenedFile *faceFile;
 
   ResetUnusedInputStruct();
   sub_800641C(NULL, TRUE, TRUE);
@@ -850,7 +850,7 @@ bool8 LuminousCave_HasOnly1Member(void)
 {
     s32 memberCount;
     s32 index;
-    struct PokemonStruct *preload;
+    PokemonStruct1 *preload;
 
     preload = &gRecruitedPokemonRef->pokemon[0];
     memberCount = 0;

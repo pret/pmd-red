@@ -17,7 +17,7 @@ struct unkStruct_203B2FC
     struct unkStruct_802F204 unk8;
     u8 jobSlotIndex;
     struct WonderMail *jobInfo;
-    struct OpenedFile *faceFile;
+    OpenedFile *faceFile;
     u8 *faceData;
     u16 unk40;
     u16 unk42;
@@ -25,7 +25,7 @@ struct unkStruct_203B2FC
     u8 unk45;
     u8 unk46;
     u8 fill47[0x48 - 0x47];
-    struct UnkTextStruct2 unk48[4];
+    UnkTextStruct2 unk48[4];
 };
 extern struct unkStruct_203B2FC *gUnknown_203B2FC;
 
@@ -33,11 +33,11 @@ extern struct unkStruct_203B2FC *gUnknown_203B2FC;
 struct unkStruct_203B300
 {
     // size: 0x7C
-    struct MenuInputStructSub unk0;
+    MenuInputStructSub unk0;
     struct unkStruct_802C39C *mail;
     u32 unk10;
-    struct UnkTextStruct2 *unk14;
-    struct UnkTextStruct2 unk18[4];
+    UnkTextStruct2 *unk14;
+    UnkTextStruct2 unk18[4];
     u8 unk78[4];
 };
 
@@ -46,7 +46,7 @@ extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202DE58[];
 
-const struct UnkTextStruct2 gUnknown_80E016C =
+const UnkTextStruct2 gUnknown_80E016C =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -76,7 +76,7 @@ ALIGNED(4) const u8 gWonderMailClientItemDelivered2[] = _(
 
 static const u8 wonder_mail_802DF88_fill[] = "pksdir0";
 
-const struct UnkTextStruct2 gUnknown_80E0248 =
+const UnkTextStruct2 gUnknown_80E0248 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -88,7 +88,7 @@ const struct UnkTextStruct2 gUnknown_80E0248 =
 
 const u8 UnkData_80E0260[] = {0x01, 0x00, 0x12, 0x00};
 
-const struct UnkTextStruct2 gUnknown_80E0264 = 
+const UnkTextStruct2 gUnknown_80E0264 = 
 {
     0x00, 0x00, 0x00, 0x00,
     0x06,

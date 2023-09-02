@@ -19,13 +19,13 @@ extern const u8 gUnknown_80D4828[];
 extern s32 sub_8008ED0(const u8 *);
 extern s16 sub_8009614(u32, u32);
 
-static void sub_8013134(struct MenuInputStruct *, u32, u32);
+static void sub_8013134(MenuInputStruct *, u32, u32);
 static void sub_801332C(s16 *);
-static void sub_8013470(struct MenuInputStruct *);
+static void sub_8013470(MenuInputStruct *);
 
 const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
-u32 sub_8012A64(struct MenuInputStructSub *r0, s32 r1)
+u32 sub_8012A64(MenuInputStructSub *r0, s32 r1)
 {
     if (r0 == NULL)
         return sub_8012AE8();
@@ -45,7 +45,7 @@ u32 sub_8012A64(struct MenuInputStructSub *r0, s32 r1)
     return INPUT_B_BUTTON;
 }
 
-s32 GetKeyPress(struct MenuInputStruct *r0)
+s32 GetKeyPress(MenuInputStruct *r0)
 {
     if (r0 != NULL) {
         if (r0->unk28.a_button != 0)
@@ -180,7 +180,7 @@ void sub_8012C60(u32 x, u32 y, u32 a2, u32 color, u32 a4)
     xxx_call_draw_char(x + add_x, y, uVar2, color, a4);
 }
 
-void sub_8012CAC(struct UnkTextStruct2 *a0, const struct MenuItem *a1)
+void sub_8012CAC(UnkTextStruct2 *a0, const MenuItem *a1)
 {
     s16 length;
     int r5;
@@ -222,7 +222,7 @@ void sub_8012CAC(struct UnkTextStruct2 *a0, const struct MenuItem *a1)
 }
 
 NAKED
-void sub_8012D08(struct UnkTextStruct2 *a0, s32 a1)
+void sub_8012D08(UnkTextStruct2 *a0, s32 a1)
 {
     asm_unified(
 	"\tpush {r4,lr}\n"
@@ -250,7 +250,7 @@ void sub_8012D08(struct UnkTextStruct2 *a0, s32 a1)
 
 // https://decomp.me/scratch/QadfW  (200 - 90% matched)  - Seth
 NAKED
-void sub_8012D34(struct UnkTextStruct2 *a0, s32 a1)
+void sub_8012D34(UnkTextStruct2 *a0, s32 a1)
 {
     asm_unified(
 	"\tpush {r4,lr}\n"
@@ -276,7 +276,7 @@ void sub_8012D34(struct UnkTextStruct2 *a0, s32 a1)
 	"\tbx r0");
 }
 
-void sub_8012D60(struct MenuStruct *param_1, const struct MenuItem *menuItems, u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
+void sub_8012D60(MenuStruct *param_1, const MenuItem *menuItems, u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
 {
     const u8 *textPtr;
     s32 counter;
@@ -323,11 +323,11 @@ void sub_8012D60(struct MenuStruct *param_1, const struct MenuItem *menuItems, u
     param_1->menuAction = -1;
 }
 
-void sub_8012E04(struct MenuStruct *param_1, const struct MenuItem *menuItems, u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
+void sub_8012E04(MenuStruct *param_1, const MenuItem *menuItems, u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
 {
     const u8 *textPtr;
     s32 counter;
-    const struct MenuItem *menuItemPtr;
+    const MenuItem *menuItemPtr;
     s32 iVar1;
     s32 menuIndex;
 
@@ -371,28 +371,28 @@ void sub_8012E04(struct MenuStruct *param_1, const struct MenuItem *menuItems, u
     param_1->menuAction = -1;
 }
 
-void sub_8012EA4(struct MenuStruct *param_1, bool8 r1)
+void sub_8012EA4(MenuStruct *param_1, bool8 r1)
 {
     param_1->unk4C = r1;
     param_1->unk4D = TRUE;
     sub_8012EBC(param_1);
 }
 
-void sub_8012EBC(struct MenuStruct *param_1)
+void sub_8012EBC(MenuStruct *param_1)
 {
     s32 x;
     s32 y;
     u32 color;
     const u8 *textPtr;
-    const struct MenuItem *menuItemsPtr;
+    const MenuItem *menuItemsPtr;
     u16 *_puVar2;
     const u32 *colorArray;
     s32 counter;
     s32 index;
-    struct UnkTextStruct2 textStack[4];
+    UnkTextStruct2 textStack[4];
     u8 buffer[256];
-    struct UnkTextStruct1 *ptr_text;
-    struct UnkTextStruct2 *ptr_text2;
+    UnkTextStruct1 *ptr_text;
+    UnkTextStruct2 *ptr_text2;
 
     if (param_1->unk4D) {
         sub_80073B8(param_1->index);
@@ -446,11 +446,11 @@ void sub_8012EBC(struct MenuStruct *param_1)
     }
 }
 
-bool8 sub_8012FD8(struct MenuStruct *param_1)
+bool8 sub_8012FD8(MenuStruct *param_1)
 {
     u32 prevMenuIndex;
     s32 index;
-    const struct MenuItem *item;
+    const MenuItem *item;
 
     prevMenuIndex = param_1->input.menuIndex;
 
@@ -500,10 +500,10 @@ bool8 sub_8012FD8(struct MenuStruct *param_1)
     return param_1->unk4C;
 }
 
-bool8 sub_80130A8(struct MenuStruct *param_1)
+bool8 sub_80130A8(MenuStruct *param_1)
 {
     s32 index;
-    const struct MenuItem *menuItem;
+    const MenuItem *menuItem;
 
     if (param_1->unk4C) {
         switch (GetKeyPress(&param_1->input))
@@ -530,7 +530,7 @@ bool8 sub_80130A8(struct MenuStruct *param_1)
     return param_1->unk4C;
 }
 
-bool8 sub_8013114(struct MenuStruct *param_1, s32 *menuAction)
+bool8 sub_8013114(MenuStruct *param_1, s32 *menuAction)
 {
     if (param_1->unk4C)
         return TRUE;
@@ -541,9 +541,9 @@ bool8 sub_8013114(struct MenuStruct *param_1, s32 *menuAction)
     return FALSE;
 }
 
-static void sub_8013134(struct MenuInputStruct *param_1, u32 menuItemCounter, u32 index)
+static void sub_8013134(MenuInputStruct *param_1, u32 menuItemCounter, u32 index)
 {
-    struct UnkTextStruct1 *temp;
+    UnkTextStruct1 *temp;
 
     temp = &gUnknown_2027370[index];
     
@@ -566,7 +566,7 @@ static void sub_8013134(struct MenuInputStruct *param_1, u32 menuItemCounter, u3
     sub_801317C(&param_1->unk28);
 }
 
-void sub_801317C(struct MenuInputStructSub *param_1)
+void sub_801317C(MenuInputStructSub *param_1)
 {
     param_1->unk0 = 0;
     param_1->a_button = 0;
@@ -579,15 +579,15 @@ void sub_801317C(struct MenuInputStructSub *param_1)
     ResetUnusedInputStruct();
 }
 
-void AddMenuCursorSprite(struct MenuInputStruct *param_1)
+void AddMenuCursorSprite(MenuInputStruct *param_1)
 {
     AddMenuCursorSprite_(param_1, 0);
 }
 
-void AddMenuCursorSprite_(struct MenuInputStruct *a0, u32 a1)
+void AddMenuCursorSprite_(MenuInputStruct *a0, u32 a1)
 {
-    struct SpriteOAM sp = {};
-    struct SpriteOAM* ptr;
+    SpriteOAM sp = {};
+    SpriteOAM* ptr;
     s32 value;
     s32 r0;
     s32 r1;
@@ -666,15 +666,15 @@ void AddMenuCursorSprite_(struct MenuInputStruct *a0, u32 a1)
     a0->unk24++;
 }
 
-void nullsub_34(struct MenuInputStructSub *a0)
+void nullsub_34(MenuInputStructSub *a0)
 {
 }
 
-// Maybe struct Position
+// Maybe Position
 static void sub_801332C(s16 *a0)
 {
-    struct SpriteOAM sp = {};
-    struct SpriteOAM* ptr;
+    SpriteOAM sp = {};
+    SpriteOAM* ptr;
     #ifdef NONMATCHING
     u32 r0, r1, r2;
     #else
@@ -741,14 +741,14 @@ static void sub_801332C(s16 *a0)
     AddSprite(&sp, 0xFF, NULL, NULL);
 }
 
-static void sub_8013470(struct MenuInputStruct *a0)
+static void sub_8013470(MenuInputStruct *a0)
 {
-    struct SpriteOAM sp = {};
+    SpriteOAM sp = {};
     #if NONMATCHING
-    struct SpriteOAM *ptr;
+    SpriteOAM *ptr;
     u32 r0, r1, r5;
     #else
-    register struct SpriteOAM *ptr asm("r3");
+    register SpriteOAM *ptr asm("r3");
     register u32 r0 asm("r0");
     register u32 r1 asm("r1");
     register u32 r5 asm("r5");
@@ -870,7 +870,7 @@ static void sub_8013470(struct MenuInputStruct *a0)
     }
 }
 
-void sub_8013660(struct MenuInputStruct *param_1)
+void sub_8013660(MenuInputStruct *param_1)
 {
     if (0 < param_1->unk1A) {
         UpdateMenuCursorSpriteCoords(param_1);
@@ -878,10 +878,10 @@ void sub_8013660(struct MenuInputStruct *param_1)
     }
 }
 
-void UpdateMenuCursorSpriteCoords(struct MenuInputStruct *param_1)
+void UpdateMenuCursorSpriteCoords(MenuInputStruct *param_1)
 {
     s32 index;
-    struct UnkTextStruct1 *temp;
+    UnkTextStruct1 *temp;
 
     index = param_1->unk0;
     temp = &gUnknown_2027370[index];
@@ -889,7 +889,7 @@ void UpdateMenuCursorSpriteCoords(struct MenuInputStruct *param_1)
     param_1->unkA = temp->unk2 * 8 + sub_8013800(param_1, param_1->menuIndex);
 }
 
-void MoveMenuCursorDown(struct MenuInputStruct *param_1)
+void MoveMenuCursorDown(MenuInputStruct *param_1)
 { 
     param_1->unk24 = 0;
 
@@ -903,7 +903,7 @@ void MoveMenuCursorDown(struct MenuInputStruct *param_1)
     }
 }
 
-void sub_80136E0(struct MenuInputStruct *param_1, u8 param_2)
+void sub_80136E0(MenuInputStruct *param_1, u8 param_2)
 { 
     param_1->unk24 = 0;
 
@@ -921,7 +921,7 @@ void sub_80136E0(struct MenuInputStruct *param_1, u8 param_2)
     }
 }
 
-void MoveMenuCursorUp(struct MenuInputStruct *param_1)
+void MoveMenuCursorUp(MenuInputStruct *param_1)
 { 
     param_1->unk24 = 0;
 
@@ -935,7 +935,7 @@ void MoveMenuCursorUp(struct MenuInputStruct *param_1)
     }
 }
 
-void sub_8013744(struct MenuInputStruct *param_1, u8 param_2)
+void sub_8013744(MenuInputStruct *param_1, u8 param_2)
 { 
     param_1->unk24 = 0;
 
@@ -953,7 +953,7 @@ void sub_8013744(struct MenuInputStruct *param_1, u8 param_2)
     }
 }
 
-void sub_8013780(struct MenuInputStruct *param_1, s32 param_2)
+void sub_8013780(MenuInputStruct *param_1, s32 param_2)
 {
     if (param_2 < 0)
         param_1->menuIndex = 0;
@@ -965,12 +965,12 @@ void sub_8013780(struct MenuInputStruct *param_1, s32 param_2)
     param_1->unk24 = 0;
 }
 
-s32 sub_80137A8(struct MenuInputStruct *param_1)
+s32 sub_80137A8(MenuInputStruct *param_1)
 {
     return param_1->menuIndex;
 }
 
-void sub_80137B0(struct MenuInputStruct *param_1, s32 param_2)
+void sub_80137B0(MenuInputStruct *param_1, s32 param_2)
 {
     s32 iVar1;
 #ifndef NONMATCHING
@@ -994,12 +994,12 @@ void sub_80137B0(struct MenuInputStruct *param_1, s32 param_2)
     param_1->unk10 = iVar2 / param_1->unk1C;
 }
 
-void sub_80137F8(struct MenuInputStruct *param_1, u32 param_2)
+void sub_80137F8(MenuInputStruct *param_1, u32 param_2)
 {
     param_1->unk10 = param_2 << 8;
 }
 
-s32 sub_8013800(struct MenuInputStruct *param_1, s32 param_2)
+s32 sub_8013800(MenuInputStruct *param_1, s32 param_2)
 {
     s32 iVar1;
     s32 iVar2;
@@ -1012,7 +1012,7 @@ s32 sub_8013800(struct MenuInputStruct *param_1, s32 param_2)
     return iVar2 + (iVar1 >> 8);
 }
 
-void sub_8013818(struct MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4)
+void sub_8013818(MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4)
 {
     param_1->unk0 = param_4;
     param_1->unk22 = param_2;
@@ -1028,7 +1028,7 @@ void sub_8013818(struct MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 
 }
 
 
-void sub_8013848(struct MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4)
+void sub_8013848(MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4)
 {
     param_1->unk0 = param_4;
     param_1->unk22 = param_2;
@@ -1043,7 +1043,7 @@ void sub_8013848(struct MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 
     sub_80137F8(param_1, 24);
 }
 
-void sub_8013878(struct MenuInputStruct *param_1, s32 param_2)
+void sub_8013878(MenuInputStruct *param_1, s32 param_2)
 {
     if (param_2 < 0)
         param_2 = 0;
@@ -1056,7 +1056,7 @@ void sub_8013878(struct MenuInputStruct *param_1, s32 param_2)
     sub_8013984(param_1);
 }
 
-bool8 sub_80138B8(struct MenuInputStruct *param_1, bool8 param_2)
+bool8 sub_80138B8(MenuInputStruct *param_1, bool8 param_2)
 {
     s32 sVar1;
     s32 oldIndex;
@@ -1093,7 +1093,7 @@ bool8 sub_80138B8(struct MenuInputStruct *param_1, bool8 param_2)
     return FALSE;
 }
 
-bool8 sub_8013938(struct MenuInputStruct *param_1)
+bool8 sub_8013938(MenuInputStruct *param_1)
 {
     s32 sVar1;
 
@@ -1118,11 +1118,11 @@ bool8 sub_8013938(struct MenuInputStruct *param_1)
     return FALSE;
 }
 
-void sub_8013984(struct MenuInputStruct *param_1)
+void sub_8013984(MenuInputStruct *param_1)
 {
     s32 iVar2;
     s32 iVar4;
-    struct UnkTextStruct1 *ptr;
+    UnkTextStruct1 *ptr;
 
     iVar4 = param_1->unk0;
     ptr = &gUnknown_2027370[iVar4];
@@ -1161,7 +1161,7 @@ void sub_8013984(struct MenuInputStruct *param_1)
     param_1->unkE = (ptr->unk2 + 1) * 8 - 2;
 }
 
-void sub_8013A54(struct MenuInputStruct *param_1)
+void sub_8013A54(MenuInputStruct *param_1)
 {
     if (param_1->unk1E < param_1->unk20 - 1)
         param_1->unk1E++;
@@ -1171,7 +1171,7 @@ void sub_8013A54(struct MenuInputStruct *param_1)
     sub_8013984(param_1);
 }
 
-void sub_8013A7C(struct MenuInputStruct *param_1)
+void sub_8013A7C(MenuInputStruct *param_1)
 {
     if (param_1->unk1E < 1)
         param_1->unk1E = param_1->unk20 - 1;

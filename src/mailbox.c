@@ -11,7 +11,7 @@
 
 EWRAM_DATA_2 struct unkStruct_203B304 *gUnknown_203B304 = {0};
 
-const struct UnkTextStruct2 gUnknown_80E0284 =
+const UnkTextStruct2 gUnknown_80E0284 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -21,7 +21,7 @@ const struct UnkTextStruct2 gUnknown_80E0284 =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80E029C =
+const UnkTextStruct2 gUnknown_80E029C =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -31,7 +31,7 @@ const struct UnkTextStruct2 gUnknown_80E029C =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80E02B4 =
+const UnkTextStruct2 gUnknown_80E02B4 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x04,
@@ -41,7 +41,7 @@ const struct UnkTextStruct2 gUnknown_80E02B4 =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80E02CC =
+const UnkTextStruct2 gUnknown_80E02CC =
 {
     0x00, 0x00, 0x00, 0x00,
     0x04,

@@ -2,7 +2,7 @@
 #define GUARD_KECLEON_BROS_H
 
 #include "file_system.h"
-#include "item.h"
+#include "items.h"
 #include "menu.h"
 #include "text.h"
 
@@ -16,17 +16,17 @@ struct KecleonBrosWork
     /* 0x10 */ s32 itemSellPrice;
     /* 0x14 */ u32 numInventoryItemToSell;
     /* 0x18 */ s32 inventoryItemSellPrice;
-    /* 0x1C */ struct Item soldItem;
+    /* 0x1C */ Item soldItem;
     /* 0x20 */ u8 itemShopItemIndex;
     /* 0x21 */ u8 wareShopItemIndex;
     /* 0x24 */ u32 soldItemInventoryIndex;
     /* 0x28 */ u32 menuAction1;
     /* 0x2C */ u32 menuAction2;
     /* 0x30 */ u32 menuAction3;
-    /* 0x34 */ struct MenuItem menuItems[8];
+    /* 0x34 */ MenuItem menuItems[8];
     u16 unk74[8];
-    /* 0x84 */ struct MenuStruct menu;
-    /* 0xD4 */ struct OpenedFile *faceFile;
+    /* 0x84 */ MenuStruct menu;
+    /* 0xD4 */ OpenedFile *faceFile;
     /* 0xD8 */ u8 *faceData;
     u16 unkDC;
     u16 unkDE;
@@ -34,17 +34,17 @@ struct KecleonBrosWork
     u8 unkE1;
     u8 unkE2;
     u8 unkE3;
-    struct OpenedFile **unkE4;
-    struct UnkTextStruct2 unkE8[4];
+    OpenedFile **unkE4;
+    UnkTextStruct2 unkE8[4];
 };
 
 // size: 0xA0
 struct unkStruct_203B214
 {
-    /* 0x0 */ struct MenuInputStruct input;
+    /* 0x0 */ MenuInputStruct input;
     u32 unk34;
-    struct UnkTextStruct2 *unk38;
-    struct UnkTextStruct2 unk3C[4];
+    UnkTextStruct2 *unk38;
+    UnkTextStruct2 unk3C[4];
     u8 unk9C[4];
 };
 
@@ -53,10 +53,10 @@ struct unkStruct_203B224
 {
     u32 unk0;
     u32 unk4[INVENTORY_SIZE];
-    /* 0x54 */ struct MenuInputStruct input;
+    /* 0x54 */ MenuInputStruct input;
     u32 unk88;
-    struct UnkTextStruct2 *unk8C;
-    struct UnkTextStruct2 unk90[4];
+    UnkTextStruct2 *unk8C;
+    UnkTextStruct2 unk90[4];
     u8 unkF0[4];
 };
 
@@ -87,7 +87,7 @@ u32 CreateKecleonBros(u32 mode);
 void DeleteKecleonBros(void);
 u32 KecleonBrosCallback(void);
 
-bool32 sub_801A5D8(u32, s32, struct UnkTextStruct2_sub *, u32);
+bool32 sub_801A5D8(u32, s32, UnkTextStruct2_sub *, u32);
 u32 sub_801A6E8(bool8);
 s32 sub_801A8AC(void);
 void sub_801A8D0(u8);

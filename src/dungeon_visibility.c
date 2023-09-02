@@ -6,7 +6,7 @@
 #include "dungeon_range.h"
 #include "dungeon_util.h"
 
-bool8 CanSeeTarget(struct Entity *entity, struct Entity *targetEntity)
+bool8 CanSeeTarget(Entity *entity, Entity *targetEntity)
 {
     if (!EntityExists(entity) || !EntityExists(targetEntity) || !targetEntity->isVisible)
     {
@@ -33,7 +33,7 @@ bool8 CanSeeTarget(struct Entity *entity, struct Entity *targetEntity)
     return IsPositionActuallyInSight(&entity->pos, &targetEntity->pos);
 }
 
-bool8 CanTargetEntity(struct Entity *entity, struct Entity *targetEntity)
+bool8 CanTargetEntity(Entity *entity, Entity *targetEntity)
 {
     if (!EntityExists(entity) || !EntityExists(targetEntity) || !targetEntity->isVisible)
     {
@@ -60,7 +60,7 @@ bool8 CanTargetEntity(struct Entity *entity, struct Entity *targetEntity)
     return IsPositionInSight(&entity->pos, &targetEntity->pos);
 }
 
-bool8 sub_8045A70(struct Entity *entity, struct Entity *targetEntity)
+bool8 sub_8045A70(Entity *entity, Entity *targetEntity)
 {
     if (EntityExists(entity) && EntityExists(targetEntity) && targetEntity->isVisible)
     {
@@ -69,12 +69,12 @@ bool8 sub_8045A70(struct Entity *entity, struct Entity *targetEntity)
    return FALSE;
 }
 
-bool8 sub_8045AAC(struct Entity *entity, struct Position *pos)
+bool8 sub_8045AAC(Entity *entity, Position *pos)
 {
     return IsPositionActuallyInSight(&entity->pos, pos);
 }
 
-bool8 CanTargetPosition(struct Entity *entity, struct Position *pos)
+bool8 CanTargetPosition(Entity *entity, Position *pos)
 {
     return IsPositionInSight(&entity->pos, pos);
 }

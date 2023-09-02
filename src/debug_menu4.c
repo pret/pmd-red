@@ -8,9 +8,9 @@
 #include "text1.h"
 #include "text2.h"
 
-EWRAM_DATA_2 static struct unkStruct_203B3F8 *sUnknown_203B3F8 = {0};
+EWRAM_DATA_2 static unkStruct_203B3F8 *sUnknown_203B3F8 = {0};
 
-static const struct UnkTextStruct2 sUnknown_80E7ED4 =
+static const UnkTextStruct2 sUnknown_80E7ED4 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -19,7 +19,7 @@ static const struct UnkTextStruct2 sUnknown_80E7ED4 =
     0x00, 0x00,
     NULL
 };
-static const struct UnkTextStruct2 sUnknown_80E7EEC =
+static const UnkTextStruct2 sUnknown_80E7EEC =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -28,7 +28,7 @@ static const struct UnkTextStruct2 sUnknown_80E7EEC =
     0x03, 0x00,
     NULL
 };
-static const struct UnkTextStruct2 sUnknown_80E7F04 =
+static const UnkTextStruct2 sUnknown_80E7F04 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -52,16 +52,14 @@ void sub_803AF88(void);
 void sub_803AFE8(void);
 void sub_803B034(void);
 
-// Unused
-u32 sub_803AC24(void)
+UNUSED static bool8 sub_803AC24(void)
 {
-    sUnknown_203B3F8 = MemoryAlloc(sizeof(struct unkStruct_203B3F8), 8);
+    sUnknown_203B3F8 = MemoryAlloc(sizeof(unkStruct_203B3F8), 8);
     sub_803ACD0(0);
-    return 1;
+    return TRUE;
 }
 
-// Unused
-u32 sub_803AC48(void)
+UNUSED static u32 sub_803AC48(void)
 {
     switch (sUnknown_203B3F8->state) {
         case 0:
@@ -88,8 +86,7 @@ u32 sub_803AC48(void)
     return 0;
 }
 
-// Unused
-void sub_803ACB4(void)
+UNUSED static void sub_803ACB4(void)
 {
     if (sUnknown_203B3F8 != NULL) {
         MemoryFree(sUnknown_203B3F8);

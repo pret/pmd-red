@@ -8,7 +8,6 @@
 EWRAM_DATA bool8 gBoughtFriendAreas[NUM_FRIEND_AREAS] = {0};
 EWRAM_DATA_2 bool8 *gFriendAreas = {0};
 
-
 extern bool8 *gFriendAreas;
 
 extern u8 *gFriendAreaDescriptions[];
@@ -18,7 +17,7 @@ extern const char gUnknown_81098AC;
 
 extern void sub_8090FEC(u32, u8 *r1, u32);
 
-const struct FriendAreaSettings gFriendAreaSettings[NUM_FRIEND_AREAS] =
+const FriendAreaSettings gFriendAreaSettings[NUM_FRIEND_AREAS] =
 {
     [NONE] = {
         .num_pokemon = 0,
@@ -352,7 +351,7 @@ void sub_8092404(u8 r0, u16 *r1, bool8 r2, bool8 r3)
     s32 counter;
     bool32 flag;
     s32 r6;
-    struct PokemonStruct *pokemon;
+    PokemonStruct1 *pokemon;
 
     r6 = 0;
     for(counter = 0; counter <= 412; counter++)
@@ -474,7 +473,7 @@ void sub_809249C(u8 friendArea, bool8 clear)
         return;
     for(index = 0; index < NUM_MONSTERS; index++)
     {
-        struct PokemonStruct *pokemon = &gRecruitedPokemonRef->pokemon[index]; 
+        PokemonStruct1 *pokemon = &gRecruitedPokemonRef->pokemon[index]; 
         
         if((u8)(pokemon->unk0) & 1)
         {
@@ -558,9 +557,9 @@ bool8 HasAllFriendAreas(void)
     return TRUE;
 }
 
-void sub_8092638(u8 friendArea, struct unkStruct_8092638 *param_2, bool8 checkLeader, bool8 checkDungeon)
+void sub_8092638(u8 friendArea, unkStruct_8092638 *param_2, bool8 checkLeader, bool8 checkDungeon)
 {
-    struct PokemonStruct *pokeStruct;
+    PokemonStruct1 *pokeStruct;
     s32 counter;
     s32 iVar4;
 

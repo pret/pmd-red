@@ -11,7 +11,7 @@
 #include "pokemon.h"
 #include "random.h"
 #include "save.h"
-#include "team_inventory.h"
+
 
 EWRAM_DATA_2 u32 gUnknown_203B17C = {0};
 EWRAM_DATA_2 char *gUnknown_203B180 = {0};
@@ -25,7 +25,7 @@ struct unk_struct
     u8 gameInternalName[16]; // has "POKE_DUNGEON__05
     u32 checksum;
     u32 unk18;
-    struct DungeonLocation dungeonLocation;
+    DungeonLocation dungeonLocation;
     u32 unk20;
     u32 padding[503];
 };
@@ -43,7 +43,7 @@ struct SavePakWrite
     u32 state;
     s32 unk4;
     u32 saveStatus;
-    struct OpenedFile *faceFile;
+    OpenedFile *faceFile;
     u8 *faceData;
     u16 unk14;
     u16 unk16;
@@ -692,9 +692,9 @@ void FinishReadSavePak(void)
 
 void PrepareSavePakWrite(s16 PokemonID)
 {
-  struct OpenedFile *file;
+  OpenedFile *file;
   s32 id_s32;
-  struct OpenedFile **preload_face;
+  OpenedFile **preload_face;
 
   id_s32 = PokemonID; // had to cast for asr shift
 
@@ -725,7 +725,7 @@ void PrepareSavePakWrite(s16 PokemonID)
 
 bool8 WriteSavePak(void)
 {
-  struct OpenedFile **faceFile;
+  OpenedFile **faceFile;
   u32 local_14;
   u32 other_stack;
 

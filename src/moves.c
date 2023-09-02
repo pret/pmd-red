@@ -9,7 +9,7 @@
 #include "text_util.h"
 #include "text2.h"
 
-static EWRAM_DATA struct OpenedFile *sWazaParametersFile = {0};
+static EWRAM_DATA OpenedFile *sWazaParametersFile = {0};
 static EWRAM_DATA struct MoveDataEntry *sMovesData = {0};
 static EWRAM_DATA struct MoveLearnset *sMoveLearnsets = {0}; // 420 entries, aka (MONSTER_DEOXYS_SPEED + 1), aka (MONSTER_MUNCHLAX)
 

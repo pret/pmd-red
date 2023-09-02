@@ -9,7 +9,7 @@ const s32 gFacingDirMapping[3][3] = {
     {DIRECTION_SOUTHWEST, DIRECTION_SOUTH, DIRECTION_SOUTHEAST}
 };
 
-s32 GetDirectionTowardsPosition(struct Position *originPos, struct Position *targetPos)
+s32 GetDirectionTowardsPosition(Position *originPos, Position *targetPos)
 {
     s32 direction;
     s32 yDiff;
@@ -44,7 +44,7 @@ s32 GetDirectionTowardsPosition(struct Position *originPos, struct Position *tar
     return direction;
 }
 
-s32 GetDistance(struct Position *pos1, struct Position *pos2)
+s32 GetDistance(Position *pos1, Position *pos2)
 {
     s32 distanceX = pos1->x - pos2->x;
     s32 distance;

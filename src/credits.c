@@ -7,7 +7,7 @@
 // size: 0x6C
 struct unkCreditsStruct_203B340
 {
-    struct UnkTextStruct2 unk0[4];
+    UnkTextStruct2 unk0[4];
     s32 unk60; // Unsure if s32/u32/ptr
     s32 unk64;
     /* 0x68 */ s32 creditsCategoryIndex;
@@ -32,8 +32,8 @@ struct CreditsData
 EWRAM_DATA_2 struct unkCreditsStruct_203B340 *gUnknown_203B340 = {0};
 EWRAM_DATA_2 struct unkCreditsStruct_203B344 *gUnknown_203B344 = {0};
 
-extern struct UnkTextStruct2 gUnknown_80E4A10;
-extern struct UnkTextStruct2 gUnknown_80E4A28;
+extern UnkTextStruct2 gUnknown_80E4A10;
+extern UnkTextStruct2 gUnknown_80E4A28;
 extern const u32 gUnknown_80E4A40[];
 extern struct CreditsData* gCreditsTable[27];
 extern u16 gUnknown_80E5990[];

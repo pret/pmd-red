@@ -5,15 +5,15 @@
 #include "text1.h"
 #include "text2.h"
 
-EWRAM_DATA struct UnkTextStruct1 gUnknown_2027370[4];
+EWRAM_DATA UnkTextStruct1 gUnknown_2027370[4];
 EWRAM_DATA u8 *gCharmaps[2];
 EWRAM_DATA s16 gCharacterSpacing;
 EWRAM_DATA u8 gUnknown_20274A5;
 EWRAM_DATA u32 gCurrentCharmap;
 EWRAM_DATA vu32 gUnknown_20274B0;
 EWRAM_DATA u32 gUnknown_20274B4[0xEC0];
-EWRAM_DATA struct OpenedFile *gCharmapFiles[2];
-EWRAM_DATA struct UnkTextStruct2 gUnknown_202AFC0[4];
+EWRAM_DATA OpenedFile *gCharmapFiles[2];
+EWRAM_DATA UnkTextStruct2 gUnknown_202AFC0[4];
 EWRAM_DATA u32 gUnknown_202B020;
 EWRAM_DATA u32 gUnknown_202B024;
 EWRAM_DATA u32 gUnknown_202B028[2];
@@ -25,7 +25,7 @@ EWRAM_DATA u16 gUnknown_202B038[4][32][32];
 extern s16 gUnknown_3000E94[];
 
 // data.s
-extern const struct UnkTextStruct2 gUnknown_80B857C[4];
+extern const UnkTextStruct2 gUnknown_80B857C[4];
 extern const u32 gUnknown_80B87C4[8];
 extern const u32 gUnknown_80B87E4[8];
 extern const u32 gUnknown_80B8804[4];
@@ -35,7 +35,7 @@ extern const char gKanjiB_file_string[];
 // system_sbin.s
 extern const struct FileArchive gSystemFileArchive;
 
-static void sub_8006438(const struct UnkTextStruct2 *, bool8, bool8, struct UnkTextStruct2_sub *);
+static void sub_8006438(const UnkTextStruct2 *, bool8, bool8, UnkTextStruct2_sub *);
 
 void LoadCharmaps(void)
 {
@@ -143,13 +143,13 @@ void sub_80063D8(int a0)
 }
 
 // TODO: Move sub_800641C and sub_8006438 to text2.c ?
-void sub_800641C(struct UnkTextStruct2 *a0, bool8 a1, bool8 a2)
+void sub_800641C(UnkTextStruct2 *a0, bool8 a1, bool8 a2)
 {
-    struct UnkTextStruct2_sub r3 = {0, 0};
+    UnkTextStruct2_sub r3 = {0, 0};
     sub_8006438(a0, a1, a2, &r3);
 }
 
-static void sub_8006438(const struct UnkTextStruct2 *a0, bool8 a1, bool8 a2, struct UnkTextStruct2_sub *a3)
+static void sub_8006438(const UnkTextStruct2 *a0, bool8 a1, bool8 a2, UnkTextStruct2_sub *a3)
 {
     s32 i;
     u32 r9;

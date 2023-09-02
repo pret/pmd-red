@@ -2,7 +2,7 @@
 #include "file_system.h"
 
 EWRAM_DATA u32 gUnknown_202D2A4 = {0};
-EWRAM_DATA struct OpenedFile gFileCache[64] = {0};
+EWRAM_DATA OpenedFile gFileCache[64] = {0};
 EWRAM_DATA u32 *gDecompressBufferPtr = {0};
 EWRAM_DATA u32 *gDecompressBufferStart = {0};
 EWRAM_DATA u32 gDecompressBufferCurrent = {0};
@@ -20,9 +20,9 @@ void DecompressAT_AppendByte(char value);
 void DecompressAT_Finish(void);
 char DecompressAT_GetByte(int index);
 
-u32 DecompressAT(char *result, s32 resultLength, const char *compressedData);
+u32 DecompressAT(u8 *result, s32 resultLength, const u8 *compressedData);
 u32 DecompressATGlobal(u32 *result, s32 resultLength, const char *compressedData);
-u8 *GetSiroPtr(struct OpenedFile *);
+u8 *GetSiroPtr(OpenedFile *);
 void NDS_DecompressRLE(void *);
 
 struct UnkFileStruct
@@ -66,7 +66,7 @@ u32 sub_800A8F8(u32 value)
     return oldValue;
 }
 
-struct OpenedFile *OpenFile(const char *filename, const struct FileArchive *arc)
+OpenedFile *OpenFile(const u8 *filename, const struct FileArchive *arc)
 {
     char buffer[0x12C];
     s32 left, right;
@@ -136,32 +136,32 @@ struct OpenedFile *OpenFile(const char *filename, const struct FileArchive *arc)
     return NULL;
 }
 
-static u8 *_GetFileDataPtr(struct OpenedFile *openedFile)
+static u8 *_GetFileDataPtr(OpenedFile *openedFile)
 {
     openedFile->data = openedFile->file->data;
     return openedFile->data;
 }
 
-u8 *GetFileDataPtr(struct OpenedFile *openedFile, int unused)
+u8 *GetFileDataPtr(OpenedFile *openedFile, int unused)
 {
     _GetFileDataPtr(openedFile);
     return GetSiroPtr(openedFile);
 }
 
-struct OpenedFile *OpenFileAndGetFileDataPtr(const char *filename, const struct FileArchive *arc)
+OpenedFile *OpenFileAndGetFileDataPtr(const u8 *filename, const struct FileArchive *arc)
 {
-    struct OpenedFile *openedFile = OpenFile(filename, arc);
+    OpenedFile *openedFile = OpenFile(filename, arc);
     if (openedFile)
         GetFileDataPtr(openedFile, 0);
     return openedFile;
 }
 
-struct OpenedFile *Call_OpenFileAndGetFileDataPtr(const char *filename, const struct FileArchive *arc)
+OpenedFile *Call_OpenFileAndGetFileDataPtr(const u8 *filename, const struct FileArchive *arc)
 {
     return OpenFileAndGetFileDataPtr(filename, arc);
 }
 
-void CloseFile(struct OpenedFile *openedFile)
+void CloseFile(OpenedFile *openedFile)
 {
     s32 i;
 
@@ -177,7 +177,7 @@ void CloseFile(struct OpenedFile *openedFile)
     }
 }
 
-u8 *GetSiroPtr(struct OpenedFile *openedFile)
+u8 *GetSiroPtr(OpenedFile *openedFile)
 {
     struct SiroArchive *siro = (struct SiroArchive *)openedFile->data;
 
@@ -216,13 +216,13 @@ void nullsub_175(void)
 {
 }
 
-u32 DecompressATFile(char *result, s32 resultLength, struct OpenedFile *file)
+u32 DecompressATFile(u8 *result, s32 resultLength, OpenedFile *file)
 {
     return DecompressAT(result, resultLength, file->data);
 }
 
 // 800AAB4
-u32 DecompressAT(char *result, s32 resultLength, const char *compressedData)
+u32 DecompressAT(u8 *result, s32 resultLength, const u8 *compressedData)
 {
     s32 compressedLength = compressedData[5] + (compressedData[6] << 8);
     s32 bytesWritten = 0;
@@ -378,7 +378,7 @@ u32 DecompressAT(char *result, s32 resultLength, const char *compressedData)
     return bytesWritten;
 }
 
-u32 DecompressATGlobalFile(u32 *result, s32 resultLength, struct OpenedFile *file)
+u32 DecompressATGlobalFile(u32 *result, s32 resultLength, OpenedFile *file)
 {
     return DecompressATGlobal(result, resultLength, file->data);
 }

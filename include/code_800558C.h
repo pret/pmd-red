@@ -20,7 +20,7 @@ void nullsub_10(bool8);
 void nullsub_12(void);
 void nullsub_13(void);
 void nullsub_14(void);
-void sub_8005610(struct OpenedFile *, s32, s32, u8 *);
+void sub_8005610(OpenedFile *, s32, s32, u8 *);
 void sub_8005770(s32, u8 *, s32, u8 *);
 void sub_80057E8(void);
 void sub_8005838(s32 *, u8);

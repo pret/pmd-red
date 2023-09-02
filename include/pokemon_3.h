@@ -3,14 +3,14 @@
 
 #include "pokemon.h"
 
-struct EvolveStatus
+typedef struct EvolveStatus
 {
     u8 evoItem1;
     u8 evoItem2;
     u8 unk6;
     u16 evolutionConditionStatus;
     s16 targetEvolveSpecies;
-};
+} EvolveStatus;
 
 bool8 HasRecruitedMon(s16 species);
 s16 GetBaseSpecies(s16 index);
@@ -26,7 +26,7 @@ void ToggleIQSkill(u8 *param_1, u32 skillIndex);
 void SetIQSkill(u8 *param_1, u32 skillIndex);
 bool8 IsIQSkillSet(u8 *IQSkillFlags, u32 IQSkill);
 void SetDefaultIQSkills(u8 *param_1, bool8 enableSelfCurer);
-void sub_808F468(struct PokemonStruct *param_1, struct EvolveStatus *evolveStatus, u8 param_3);
-u32 sub_808F734(struct PokemonStruct *pokemon, s16 _species);
+void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, u8 param_3);
+u32 sub_808F734(PokemonStruct1 *pokemon, s16 _species);
 
 #endif

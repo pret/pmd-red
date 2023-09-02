@@ -87,13 +87,13 @@ const u8 gDungeonWaterType[] = {
 extern void sub_80498A8(s32, s32);
 extern void sub_80402AC(s32, s32);
 extern void sub_8049BB0(s32, s32);
-void sub_8042A14(struct Position *);
+void sub_8042A14(Position *);
 extern void sub_8049ED4(void);
 
-bool8 sub_804ACE4(struct Position *pos)
+bool8 sub_804ACE4(Position *pos)
 {
   struct Tile *tile;
-  struct Entity *entity;
+  Entity *entity;
   
   tile = GetTile(pos->x,pos->y);
   entity = tile->object;
@@ -103,10 +103,10 @@ bool8 sub_804ACE4(struct Position *pos)
   return FALSE;
 }
 
-struct Entity *sub_804AD0C(struct Position *pos)
+Entity *sub_804AD0C(Position *pos)
 {
   struct Tile *tile;
-  struct Entity *entity;
+  Entity *entity;
   
   tile = GetTile(pos->x,pos->y);
   entity = tile->monster;
@@ -116,11 +116,11 @@ struct Entity *sub_804AD0C(struct Position *pos)
   return NULL;
 }
 
-bool8 sub_804AD34(struct Position *pos)
+bool8 sub_804AD34(Position *pos)
 {
   struct Tile *tile;
   s32 x;
-  struct Entity * entity;
+  Entity * entity;
   s32 y;
   bool8 iVar8;
   s32 index;
@@ -156,7 +156,7 @@ bool8 sub_804AD34(struct Position *pos)
   return iVar8;
 }
 
-bool8 sub_804AE08(struct Position *pos)
+bool8 sub_804AE08(Position *pos)
 {
   struct Tile *tile;
   s32 x;
@@ -183,11 +183,11 @@ bool8 sub_804AE08(struct Position *pos)
   return uVar6;
 }
 
-void sub_804AE84(struct Position *pos)
+void sub_804AE84(Position *pos)
 {
   struct Tile *tile;
   s32 x;
-  struct Entity * entity;
+  Entity * entity;
   s32 index;
   s32 y;
   
@@ -216,7 +216,7 @@ void sub_804AE84(struct Position *pos)
   }
 }
 
-bool8 IsTileGround(struct Tile* tile)
+bool8 IsTileGround(Tile *tile)
 {
     bool8 isGround = FALSE;
     if (IsWaterTileset())

@@ -546,7 +546,7 @@ gUnknown_80B71A0: @ 80B71A0
 
 	.global gUnknown_80B71E4
 gUnknown_80B71E4: @ 80B71E4
-    @ struct unkEventStruct
+    @ [struct unkEventStruct]
     .2byte 105, 1
     .2byte 106, 2
     .2byte 107, 3

@@ -24,11 +24,11 @@ extern u8 gAvailablePokemonNames[];
 extern u8 *gUnknown_80F95EC[];
 extern char *gPtrMoveInterruptedMessage[];
 
-extern void SetMessageArgument(char[], struct Entity*, u32);
+extern void SetMessageArgument(char[], Entity*, u32);
 
-bool8 HasStatusAffectingActions(struct Entity *pokemon)
+bool8 HasStatusAffectingActions(Entity *pokemon)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
     SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
     switch (pokemonInfo->sleep)
@@ -107,14 +107,14 @@ bool8 HasStatusAffectingActions(struct Entity *pokemon)
     return FALSE;
 }
 
-bool8 sub_80701A4(struct Entity *pokemon)
+bool8 sub_80701A4(Entity *pokemon)
 {
   bool8 flag;
   struct Move *move;
   struct Move *move2;
   s32 index;
   s32 index_1;
-  struct EntityInfo * pokemonInfo;
+  EntityInfo * pokemonInfo;
   u8 *r7;
   
   pokemonInfo = pokemon->info;

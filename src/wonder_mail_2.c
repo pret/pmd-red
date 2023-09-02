@@ -20,7 +20,7 @@ struct unkStruct_203B2C8
     // size: 0x140
     /* 0x0 */ u8 currState;
     /* 0x1 */ u8 unk1;
-    /* 0x4 */ struct OpenedFile *faceFile;
+    /* 0x4 */ OpenedFile *faceFile;
     /* 0x8 */ u8 *faceData;
     /* 0xC */ u16 unkC;
     /* 0xE */ u16 unkE;
@@ -51,8 +51,8 @@ extern void sub_802B5FC(void);
 extern void sub_802B624(void);
 
 extern void sub_802F204(struct unkStruct_802F204 *, u32);
-extern void sub_803C37C(struct DungeonLocation *, u32, u8 *);
-extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
+extern void sub_803C37C(DungeonLocation *, u32, u8 *);
+extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
 
 ALIGNED(4) const char gRescueTeamNamePlaceholder[] = "????";
 
@@ -83,7 +83,7 @@ ALIGNED(4) const char wonder_mail_2_fill[] = "pksdir0";
 u32 sub_802B2D4(void)
 {
   s32 iVar1;
-  struct OpenedFile *faceFile;
+  OpenedFile *faceFile;
 
   ResetUnusedInputStruct();
   sub_800641C(NULL, TRUE, TRUE);

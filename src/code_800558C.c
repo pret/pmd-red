@@ -56,7 +56,7 @@ void DoAxFrame_800558C(struct axPokemon *a0, s32 spriteX, s32 spriteY, u32 a3, u
         a0->axdata.flags &= 0xF7FF;
 }
 
-void sub_8005610(struct OpenedFile *a0, s32 a1, s32 a2, u8 *a3)
+void sub_8005610(OpenedFile *a0, s32 a1, s32 a2, u8 *a3)
 {
     sub_800561C((struct unkStructFor800561C *)a0->data, a1, a2, a3);
 }
@@ -74,7 +74,7 @@ static void sub_800561C(struct unkStructFor800561C *a0, s32 a1, s32 a2, u8 *a3)
     }
 }
 
-UNUSED static s32 *sub_8005668(struct OpenedFile *a0, s32 a1)
+UNUSED static s32 *sub_8005668(OpenedFile *a0, s32 a1)
 {
     return sub_8005674((struct unkStructFor800561C *)a0->data, a1);
 }
@@ -153,7 +153,7 @@ void sub_8005700(s16 *a0, struct axPokemon *a1)
     }
 }
 
-UNUSED static void sub_8005764(s32 a0, struct OpenedFile *file, s32 a2, u8 *a3)
+UNUSED static void sub_8005764(s32 a0, OpenedFile *file, s32 a2, u8 *a3)
 {
     sub_8005770(a0, file->data, a2, a3);
 }
@@ -166,7 +166,7 @@ void sub_8005770(s32 param_1, u8 *RGBArray, s32 a1, u8 *a2)
         SetBGPaletteBufferColorRGB((param_1 + 0x10) * 0x10 + i, &RGBArray[i * 4], a1, a2);
 }
 
-// Maybe struct Position
+// Maybe Position
 void nullsub_7(s16 *a0)
 {}
 

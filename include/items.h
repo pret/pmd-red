@@ -5,7 +5,7 @@
 #include "code_8092334.h"
 
 // size: 0x20
-struct ItemDataEntry
+typedef struct ItemDataEntry
 {
     /* 0x0 */ u8 *name;
     /* 0x4 */ u32 buyPrice;
@@ -23,39 +23,50 @@ struct ItemDataEntry
     /* 0x1B */ u8 spawnAmountRange[2];
     /* 0x1D */ u8 palette;
     /* 0x1E */ u8 actionType;
-};
+} ItemDataEntry;
 
 // size: 0x4
-struct Item
+typedef struct Item
 {
     /* 0x0 */ u8 flags;
     /* 0x1 */ u8 quantity;
     /* 0x2 */ u8 id;
-};
+} Item;
 
 // size: 0x4
-struct BulkItem
+typedef struct BulkItem
 {
     /* 0x0 */ u8 id;
     /* 0x1 */ u8 quantity;
-};
+} BulkItem;
 
 // size: 0x4
-struct Gummi
+typedef struct Gummi
 {
     /* 0x0 */ s16 boostAmount;
     /* 0x2 */ u16 flags;
-};
+} Gummi;
 
 // size: 0xC
-struct unkStruct_8090F58
+typedef struct unkStruct_8090F58
 {
     u32 unk0;
     u8 unk4;
     u8 unk5;
     s16 unk6;
     u8 unk8;
-};
+} unkStruct_8090F58;
+
+// size: 0x268
+typedef struct TeamInventory
+{
+    /* 0x0 */ Item teamItems[INVENTORY_SIZE];
+    /* 0x50 */ u16 teamStorage[STORAGE_SIZE];
+    /* 0x230 */ BulkItem kecleonShopItems[MAX_KECLEON_ITEM_SHOP_ITEMS];
+    /* 0x250 */ BulkItem kecleonWareItems[MAX_KECLEON_WARE_SHOP_ITEMS];
+    /* 0x260 */ s32 teamMoney;
+    /* 0x264 */ s32 teamSavings;
+} TeamInventory;
 
 enum ItemFlag
 {
@@ -73,27 +84,22 @@ enum ItemAIFlag
     ITEM_AI_FLAG_TARGET_ENEMY
 };
 
-#define NUMBER_OF_GUMMIS 18
-#define INVENTORY_SIZE 20
-#define STORAGE_SIZE NUMBER_OF_ITEM_IDS
-
-#define MIN_SPAWN_AMOUNT 0
-#define MAX_SPAWN_AMOUNT 1
+extern TeamInventory *gTeamInventoryRef;
 
 void LoadItemParameters(void);
-struct TeamInventory *GetMoneyItemsInfo(void);
+TeamInventory *GetMoneyItemsInfo(void);
 void InitializeMoneyItems(void);
 s32 GetNumberOfFilledInventorySlots(void);
 bool8 IsThrowableItem(u8 id);
-void xxx_init_itemslot_8090A8C(struct Item *param_1,u8 id,u8 param_3);
-void xxx_init_helditem_8090B08(struct BulkItem *param_1,u8 id);
-void HeldItemToSlot(struct Item *param_1, struct BulkItem *param_2);
-void SlotToHeldItem(struct BulkItem *held,struct Item *slot);
+void xxx_init_itemslot_8090A8C(Item *param_1,u8 id,u8 param_3);
+void xxx_init_helditem_8090B08(BulkItem *param_1,u8 id);
+void HeldItemToSlot(Item *param_1, BulkItem *param_2);
+void SlotToHeldItem(BulkItem *held, Item *slot);
 u8 GetItemCategory(u8 index);
-s32 GetStackBuyValue(struct Item *param_1);
-s32 GetStackSellValue(struct Item *param_1);
-s32 GetStackBuyPrice(struct Item *param_1);
-s32 GetStackSellPrice(struct Item *param_1);
+s32 GetStackBuyValue(Item *param_1);
+s32 GetStackSellValue(Item *param_1);
+s32 GetStackBuyPrice(Item *param_1);
+s32 GetStackSellPrice(Item *param_1);
 s32 GetItemBuyPrice(u8 id);
 s32 GetItemSellPrice(u8 id);
 s32 GetItemOrder(u8 id);
@@ -102,35 +108,35 @@ u32 GetItemActionType(u8 id);
 u32 GetSpawnAmountRange(u8 id, u32 r1);
 u8 *GetItemDescription(u8 id);
 bool8 GetItemAIFlag(u8 id, u32 r1);
-void sub_8090DC4(void* param_1,u8 id, struct unkStruct_8090F58* param_3);
-void sub_8090E14(u8* ext_buffer, struct Item* slot, struct unkStruct_8090F58* a3);
-bool8 AddItemToInventory(const struct Item* slot);
+void sub_8090DC4(void *param_1, u8 id, unkStruct_8090F58 *);
+void sub_8090E14(u8 *ext_buffer, Item *slot, unkStruct_8090F58 *);
+bool8 AddItemToInventory(const Item* slot);
 void ConvertMoneyItemToMoney();
 void AddToTeamMoney(s32 amount);
-u32 GetMoneyValue(struct Item* slot);
+u32 GetMoneyValue(Item* slot);
 u16 GetItemMoveID(u8 index);
 bool8 CanSellItem(u32 id);
 bool8 IsGummiItem(u8);
-void sub_8090F58(void*, u8 *, struct Item *, struct unkStruct_8090F58*);
+void sub_8090F58(void *, u8 *, Item *, unkStruct_8090F58 *);
 void ShiftItemsDownFrom(s32 start);
 void ClearItemSlotAt(u32 index);
-void MoveToStorage(struct Item* slot);
+void MoveToStorage(Item *slot);
 s32 CountKecleonShopItems(void);
 void InitKecleonShopItem(u8 index);
-struct BulkItem *GetKecleonShopItem(u8 index);
+BulkItem *GetKecleonShopItem(u8 index);
 void FillKecleonShopGaps(void);
 void SortKecleonShopInventory(void);
 void ChooseKecleonShopInventory(u8 index);
 bool8 AddKecleonShopItem(u8 itemIndex);
 u32 CountKecleonWareItems(void);
 void InitKecleonWareItem(u8 index);
-struct BulkItem* GetKecleonWareItem(u8 index);
+BulkItem* GetKecleonWareItem(u8 index);
 void FillKecleonWareGaps(void);
 void SortKecleonWareInventory(void);
 void ChooseKecleonWareInventory(u8 index);
 bool8 AddKecleonWareItem(u8 itemIndex);
 void FillInventoryGaps();
-bool8 AddHeldItemToInventory(struct BulkItem* slot);
+bool8 AddHeldItemToInventory(BulkItem* slot);
 bool8 IsNotMoneyOrUsedTMItem(u8 id);
 s32 FindItemInInventory(u8 id);
 bool8 IsHMItem(u8 id);
@@ -138,11 +144,11 @@ bool8 IsEdibleItem(u8 id);
 u8 xxx_bit_lut_lookup_8091E50(u8 i0, u8 i1);
 bool8 IsInvalidItemReward(u8 itemID);
 
-void RestoreHeldItem(struct unkStruct_8094924*, struct BulkItem*);
-void SaveHeldItem(struct unkStruct_8094924*, struct BulkItem*);
-void RestoreItemSlot(struct unkStruct_8094924 *a1, struct Item *a2);
-void SaveItemSlot(struct unkStruct_8094924 *a1, struct Item *a2);
-s32 RestoreTeamInventory(u8 *unk0, u32 size);
-s32 SaveTeamInventory(u8 *unk0, u32 size);
+void RestoreHeldItem(unkStruct_8094924 *, BulkItem *);
+void SaveHeldItem(unkStruct_8094924 *, BulkItem *);
+void RestoreItemSlot(unkStruct_8094924 *, Item *);
+void SaveItemSlot(unkStruct_8094924 *, Item *);
+s32 RestoreTeamInventory(u8 *, u32);
+s32 SaveTeamInventory(u8 *, u32);
 
 #endif

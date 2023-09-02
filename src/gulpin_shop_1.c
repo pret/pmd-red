@@ -4,7 +4,7 @@
 #include "pokemon_3.h"
 #include "text1.h"
 #include "text2.h"
-#include "team_inventory.h"
+
 #include "menu_input.h"
 #include "gulpin_shop.h"
 #include "moves.h"
@@ -20,7 +20,7 @@ struct unkStruct_203B27C
     /* 0x4 */ s32 state;
     /* 0x8 */ u32 fallbackState;
     /* 0xC */ s16 speciesNum;
-    /* 0x10 */ struct PokemonStruct *pokeStruct;
+    /* 0x10 */ PokemonStruct1 *pokeStruct;
     /* 0x14 */ bool8 isNextMoveLinked;
     bool8 unk15;
     /* 0x16 */ bool8 isTeamLeader;
@@ -35,19 +35,19 @@ struct unkStruct_203B27C
     /* 0x70 */ u32 menuAction2;
     /* 0x74 */ u32 menuAction3;
     /* 0x78 */ u32 menuAction4;
-    struct MenuItem unk7C[8];
+    MenuItem unk7C[8];
     u16 unkBC[8];
-    struct MenuStruct unkCC;
+    MenuStruct unkCC;
     u8 fill11C[0x16C - 0x11C];
-    /* 0x16C */ struct OpenedFile *faceFile;
+    /* 0x16C */ OpenedFile *faceFile;
     /* 0x170 */ u8 *faceData;
     u16 unk174;
     u16 unk176;
     u8 unk178;
     u8 unk179;
     u8 unk17A;
-    struct OpenedFile **unk17C;
-    struct UnkTextStruct2 unk180[4];
+    OpenedFile **unk17C;
+    UnkTextStruct2 unk180[4];
 };
 
 EWRAM_DATA_2 struct unkStruct_203B27C *gUnknown_203B27C = {0};
@@ -57,11 +57,11 @@ extern u8 gUnknown_202DFE8[];
 extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
-extern struct UnkTextStruct2 gUnknown_80DC31C;
-extern struct UnkTextStruct2 gUnknown_80DC334;
-extern struct UnkTextStruct2 gUnknown_80DC31C;
-extern struct UnkTextStruct2 gUnknown_80DC34C;
-extern struct UnkTextStruct2 gUnknown_80DC37C;
+extern UnkTextStruct2 gUnknown_80DC31C;
+extern UnkTextStruct2 gUnknown_80DC334;
+extern UnkTextStruct2 gUnknown_80DC31C;
+extern UnkTextStruct2 gUnknown_80DC34C;
+extern UnkTextStruct2 gUnknown_80DC37C;
 
 extern const u8 *gGulpinDialogue[2][25];
 extern u8 gUnknown_80DC3D8[];
@@ -99,8 +99,8 @@ void sub_8024458(u32, u32);
 extern void sub_801BEEC(s16);
 extern void sub_801EE10(u32, s16, struct Move *, u32, void *, u32);
 void sub_80208B0(void);
-void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
+void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
+extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern void sub_801FDA8(s32);
 extern void sub_8020A80(void);
 extern void sub_8020B38(void);
@@ -143,7 +143,7 @@ extern void sub_80205D0(void);
 bool8 sub_801FB50(bool32 isAsleep)
 {
   char *name;
-  struct OpenedFile *faceFile;
+  OpenedFile *faceFile;
   
   ResetUnusedInputStruct();
   sub_800641C(NULL, TRUE, TRUE);
@@ -1157,7 +1157,7 @@ void sub_8021154(void)
 bool8 sub_8021178(void)
 {
     s32 count;
-    struct unkStruct_808E218_arg local;
+    unkStruct_808E218_arg local;
 
     count = sub_808E218(&local, gUnknown_203B27C->pokeStruct);
     if(count == 0) return TRUE;

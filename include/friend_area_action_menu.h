@@ -10,9 +10,9 @@ struct unkStruct_203B2BC
     s16 targetPoke;
     u16 unkA;
     u32 id;
-    struct BulkItem itemToGive;
-    struct BulkItem item2;
-    struct PokemonStruct *pokeStruct;
+    BulkItem itemToGive;
+    BulkItem item2;
+    PokemonStruct1 *pokeStruct;
     bool8 isTeamLeader;
     u32 moveIndex;  // some sort of move index
     u16 moveID;
@@ -21,14 +21,14 @@ struct unkStruct_203B2BC
     u32 menuAction1;
     u32 menuAction2;
     u32 menuAction3;
-    struct MenuStruct unk7C;
+    MenuStruct unk7C;
     u8 fill80[0xFD - 0xCC];
     u32 unkFD;
     u8 fill101[0x11C - 0x104];
-    struct MenuItem menuItems[4];
+    MenuItem menuItems[4];
     u8 fill120[0x16C - 0x13C];
     u16 unk16C[10];
-    struct UnkTextStruct2 unk180[4];
+    UnkTextStruct2 unk180[4];
 };
 
 enum FriendAreaActionMenuStates {

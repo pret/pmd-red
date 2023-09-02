@@ -3,7 +3,7 @@
 
 #include "file_system.h"
 #include "text.h"
-#include "item.h"
+#include "items.h"
 #include "menu.h"
 #include "pokemon.h"
 #include "code_8094F88.h"
@@ -45,7 +45,7 @@ struct WonderMail
 struct WonderMailStruct_203B2C0_sub
 {
     /* 0x0 */ struct unkStruct_203B480 mail;
-    /* 0x30 */ struct PokemonStruct pokemon;
+    /* 0x30 */ PokemonStruct1 pokemon;
 };
 
 // size: 0x548
@@ -63,11 +63,11 @@ struct WonderMailStruct_203B2C0
     struct WonderMailStruct_203B2C0_sub unk130;
     u8 fill16A[0x218 - 0x1B8];
     /* 0x218 */ u8 mailIndex;
-    struct MenuStruct unk21C[4];
-    struct UnkTextStruct2 unk35C[4];
-    struct UnkTextStruct2 unk3BC[4];
+    MenuStruct unk21C[4];
+    UnkTextStruct2 unk35C[4];
+    UnkTextStruct2 unk3BC[4];
     /* 0x41C */ u32 unkfill; // ItemSlot?
-    /* 0x420 */ struct OpenedFile *faceFile;
+    /* 0x420 */ OpenedFile *faceFile;
     /* 0x424 */ u8 *faceData;
     u16 unk428;
     u16 unk42A;
@@ -95,11 +95,11 @@ struct WonderMailStruct_203B2C4
     struct unkStruct_203B480 unk1B8;
     struct unkStruct_203B480 unk1E8;
     /* 0x218 */ s8 mailIndex;
-    struct MenuStruct unk21C[4];
-    struct UnkTextStruct2 unk35C[4];
-    struct UnkTextStruct2 unk3BC[4];
-    struct Item unk41C;
-    /* 0x420 */ struct OpenedFile *faceFile;
+    MenuStruct unk21C[4];
+    UnkTextStruct2 unk35C[4];
+    UnkTextStruct2 unk3BC[4];
+    Item unk41C;
+    /* 0x420 */ OpenedFile *faceFile;
     /* 0x424 */ u8 *faceData;
     u16 unk428;
     u16 unk42A;
