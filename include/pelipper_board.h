@@ -6,7 +6,7 @@ struct unkStruct_203B308
     u32 state;
     u32 unk4;
     u8 jobIndex;
-    struct unkStruct_802C39C unkC;
+    unkStruct_802C39C unkC;
     u32 menuAction1;
     u32 menuAction2;
     MenuStruct unk6C;

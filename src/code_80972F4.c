@@ -26,9 +26,9 @@ extern u8 sub_80A270C(s16);
 extern u8 sub_80A2728(s16);
 extern void sub_800199C(u8, u8, u16, s32);
 
-void SaveWonderMail(struct unkStruct_8094924 *a, struct WonderMail *b);
-void RestoreWonderMail(struct unkStruct_8094924 *a, struct WonderMail *b);
-extern s32 sub_8096EB0(struct WonderMail *);
+void SaveWonderMail(struct unkStruct_8094924 *a, WonderMail *b);
+void RestoreWonderMail(struct unkStruct_8094924 *a, WonderMail *b);
+extern s32 sub_8096EB0(WonderMail *);
 extern void SaveDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
 extern void RestoreDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
 extern void sub_80015C0(u8, u8);
@@ -37,7 +37,7 @@ extern void GeneratePelipperJobs(void);
 s16 sub_80A26B8(s16);
 extern void sub_80018D8(u8, u8, u32);
 
-bool8 sub_8096F50(struct WonderMail *mail)
+bool8 sub_8096F50(WonderMail *mail)
 {
     s32 index;
     s32 temp2;
@@ -147,7 +147,7 @@ u32 SaveMailInfo(u8 *r0, u32 size)
     return backup.unk8;
 }
 
-void RestoreWonderMail(struct unkStruct_8094924 *a, struct WonderMail *b)
+void RestoreWonderMail(struct unkStruct_8094924 *a, WonderMail *b)
 {
     RestoreIntegerBits(a, &b->mailType, 4);
     RestoreIntegerBits(a, &b->missionType, 3);
@@ -162,7 +162,7 @@ void RestoreWonderMail(struct unkStruct_8094924 *a, struct WonderMail *b)
     RestoreDungeonLocation(a, &b->unk4.dungeon);
 }
 
-void SaveWonderMail(struct unkStruct_8094924 *a, struct WonderMail *b)
+void SaveWonderMail(struct unkStruct_8094924 *a, WonderMail *b)
 {
     SaveIntegerBits(a, &b->mailType, 4);
     SaveIntegerBits(a, &b->missionType, 3);

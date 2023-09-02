@@ -23,7 +23,7 @@ struct unkStruct_203B334
 };
 
 EWRAM_DATA_2 struct unkStruct_203B334 *gUnknown_203B334 = {0};
-extern struct unkStruct_203B480 *gUnknown_203B480;
+extern unkStruct_203B480 *gUnknown_203B480;
 
 const UnkTextStruct2 gUnknown_80E1FA8 = {
     0, 0, 0, 0,
@@ -48,7 +48,7 @@ const UnkTextStruct2 gUnknown_80E1FC4 = {
 ALIGNED(4) const u8 gUnknown_80E1FDC[] = "Password";
 ALIGNED(4) static const u8 fill0[] = "pksdir0";
 
-extern void sub_803D2C0(u8 *, struct unkStruct_203B480 *);
+extern void sub_803D2C0(u8 *, unkStruct_203B480 *);
 
 void sub_8031E00(void);
 void sub_8031E58(void);
@@ -114,7 +114,7 @@ void DrawSOSPasswordScreen(void)
   u32 color;
   s32 index;
   u8 buffer [PASSWORD_BUFFER_SIZE + 2];
-  struct unkStruct_203B480 *mail;
+  unkStruct_203B480 *mail;
   
   mail = &gUnknown_203B480[gUnknown_203B334->mailIndex];
   sub_80073B8(gUnknown_203B334->unk10);

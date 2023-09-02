@@ -63,7 +63,7 @@ static const u8 mailbox_fill[] = "pksdir0";
 extern u8 *gUnknown_80D4990[];
 extern u8 *gUnknown_80D4970[];
 
-extern bool8 IsMailinJobSlot(struct WonderMail *mail);
+extern bool8 IsMailinJobSlot(WonderMail *mail);
 
 void sub_802E578(void);
 void HandleMailActionMenu(void);
@@ -82,8 +82,8 @@ extern void sub_802BD14(u32, u32, u32);
 extern void sub_802BE94(u32);
 extern void CreateMailMenu(void);
 extern void CreateMailAcceptedStatusBox(u32);
-extern void sub_803B35C(struct WonderMail *, struct unkStruct_802C39C *);
-extern void sub_802DE84(struct unkStruct_802C39C *);
+extern void sub_803B35C(WonderMail *, unkStruct_802C39C *);
+extern void sub_802DE84(unkStruct_802C39C *);
 extern void InitializeJobListMenu(u32);
 extern void sub_802B640(u32, u32, u32);
 extern void sub_802B7D0(u32);
@@ -97,10 +97,10 @@ extern u32 sub_802C898(void);
 extern void sub_802C8F4(void);
 extern u32 sub_802DEE0(void);
 extern void sub_802DF24(void);
-extern struct WonderMail *GetMailboxSlotInfo(u8);
+extern WonderMail *GetMailboxSlotInfo(u8);
 extern u8 HasNoMailinMailbox(void);
 extern u32 sub_802BDEC(u32);
-extern void AcceptJob(struct WonderMail *);
+extern void AcceptJob(WonderMail *);
 extern void sub_8096C80(void);
 extern void sub_8096D24(void);
 extern void ResetMailboxSlot(u8);
@@ -305,7 +305,7 @@ void CreateMailboxMenu(void)
 
 void CreateMailActionMenu(void) {
     s32 index;
-    struct WonderMail *mail;
+    WonderMail *mail;
     s32 loopMax = 0;
     mail = GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex);
     if(mail->mailType == 1)
@@ -390,7 +390,7 @@ void HandleMailboxMenu(void)
 
 void sub_802E578(void)
 {
-    struct WonderMail *mail;
+    WonderMail *mail;
 
     switch(sub_802BDEC(1))
     {
@@ -424,7 +424,7 @@ void sub_802E578(void)
 void HandleMailActionMenu(void)
 {
     s32 menuAction = 0;
-    struct WonderMail *mail;
+    WonderMail *mail;
 
 
     sub_802BDEC(0);

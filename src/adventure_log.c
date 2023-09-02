@@ -9,7 +9,7 @@
 #include "text1.h"
 #include "text2.h"
 
-static EWRAM_DATA_2 struct AdventureLog *sAdventureLog = {0};
+static EWRAM_DATA_2 AdventureLog *sAdventureLog = {0};
 
 static const UnkTextStruct2 sUnknown_80E1FF0 = {
    0x00, 0x00, 0x00, 0x00,
@@ -40,7 +40,7 @@ static void sub_8032084();
 
 bool8 CreateAdventureLogScreen(u32 kind)
 {
-    sAdventureLog = MemoryAlloc(sizeof(struct AdventureLog), 8);
+    sAdventureLog = MemoryAlloc(sizeof(AdventureLog), 8);
     sAdventureLog->unk34 = kind;
     sAdventureLog->unk38 = &sAdventureLog->unk3C[kind];
     sub_8006518(sAdventureLog->unk3C);

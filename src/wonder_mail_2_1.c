@@ -98,9 +98,9 @@ static const u8 wonder_mail_fill1[] = "pksdir0";
 
 extern void sub_802CAA4(void);
 extern u8 IsJobSlotEmpty(u8);
-extern struct WonderMail* GetJobSlotInfo(u8);
-extern void sub_803B35C(struct WonderMail *, struct unkStruct_802C39C *);
-extern void CreateRescueTitle(struct unkStruct_802C39C *);
+extern WonderMail* GetJobSlotInfo(u8);
+extern void sub_803B35C(WonderMail *, unkStruct_802C39C *);
+extern void CreateRescueTitle(unkStruct_802C39C *);
 
 extern void sub_802C6DC(void);
 extern void DrawJobListMenu(void);
@@ -112,7 +112,7 @@ extern void sub_802CD38(void);
 extern void sub_802CDB8(void);
 extern void sub_802C928(void);
 extern void sub_802C9D8(void);
-extern void sub_802DE84(struct unkStruct_802C39C *);
+extern void sub_802DE84(unkStruct_802C39C *);
 extern void sub_802CBAC(void);
 
 s32 CountAcceptedJobs(void);
@@ -297,11 +297,11 @@ void sub_802C6DC(void)
 
 void DrawJobListMenu(void)
 {
-    struct WonderMail *mail;
+    WonderMail *mail;
     int index;
     s32 r4;
     s32 r5;
-    struct unkStruct_802C39C local;
+    unkStruct_802C39C local;
 
     sub_8008C54(gUnknown_203B2E8->unk3C);
     sub_80073B8(gUnknown_203B2E8->unk3C);

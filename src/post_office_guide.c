@@ -184,7 +184,7 @@ extern u8 *GetCurrentMissionText(s16 r0);
 extern u8 *sub_80975DC(u32 r0);
 extern u8 sub_8099360(u8 *);
 extern u8 sub_8099394(volatile u8 *);
-extern struct WonderMail *GetJobSlotInfo(u8);
+extern WonderMail *GetJobSlotInfo(u8);
 extern void sub_803B6B0(u32, u32, u32, u32);
 extern s16 sub_80A2688(u8 r0);
 extern u8 sub_80992E0(s16 *, s16 *);
@@ -586,8 +586,8 @@ void DisplayMissionObjectives(void)
 {
     s32 yCoord;
     s32 jobSlotIdx;
-    struct unkStruct_203B480 *mail;
-    struct WonderMail *jobInfo;
+    unkStruct_203B480 *mail;
+    WonderMail *jobInfo;
     u8 buffer [100];
     volatile u8 local_94;
     u8 buffer1 [100];

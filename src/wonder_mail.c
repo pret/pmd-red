@@ -17,7 +17,7 @@
 #include "cpu.h"
 #include "code_80118A4.h"
 
-extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
+extern WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 
 extern void sub_8011C28(u32);
 
@@ -42,7 +42,7 @@ extern void sub_8030DE4(void);
 extern void sub_803092C(void);
 
 extern u32 sub_80154F0();
-extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_203B480 *r0);
+extern u32 sub_8039068(u32, u8 *r1, unkStruct_203B480 *r0);
 extern void sub_8095274(u32);
 extern void sub_80155F0();
 extern void sub_8024458(s16, u32);
@@ -273,8 +273,8 @@ u32 sub_8027F88(void)
 
   ResetUnusedInputStruct();
   sub_800641C(NULL, TRUE, TRUE);
-  gUnknown_203B2C0 = MemoryAlloc(sizeof(struct WonderMailStruct_203B2C0), 8);
-  MemoryFill8((u8 *)gUnknown_203B2C0, 0, sizeof(struct WonderMailStruct_203B2C0));
+  gUnknown_203B2C0 = MemoryAlloc(sizeof(WonderMailStruct_203B2C0), 8);
+  MemoryFill8((u8 *)gUnknown_203B2C0, 0, sizeof(WonderMailStruct_203B2C0));
   gUnknown_203B2C0->unk53C = 0;
   gUnknown_203B2C0->mailIndex = -1;
   gUnknown_203B2C0->speciesNum = -1;
@@ -601,13 +601,13 @@ void sub_8028348(void)
                 switch(gUnknown_203B2C0->unk40)
                 {
                     case 3:
-                        MemoryFill8((u8 *)&gUnknown_203B2C0->unk48, 0, sizeof(struct unkStruct_203B480));
-                        MemoryFill8((u8 *)&gUnknown_203B2C0->unk78, 0, sizeof(struct unkStruct_203B480));
+                        MemoryFill8((u8 *)&gUnknown_203B2C0->unk48, 0, sizeof(unkStruct_203B480));
+                        MemoryFill8((u8 *)&gUnknown_203B2C0->unk78, 0, sizeof(unkStruct_203B480));
                         gUnknown_203B2C0->linkError = sub_8037D64(gUnknown_203B2C0->unk40, &gUnknown_203B2C0->unk48, &gUnknown_203B2C0->unk78);
                         break;
                     case 4:
-                        MemoryFill8((u8 *)&gUnknown_203B2C0->unkA8, 0, sizeof(struct WonderMailStruct_203B2C0_sub));
-                        MemoryFill8((u8 *)&gUnknown_203B2C0->unk130, 0, sizeof(struct WonderMailStruct_203B2C0_sub));
+                        MemoryFill8((u8 *)&gUnknown_203B2C0->unkA8, 0, sizeof(WonderMailStruct_203B2C0_sub));
+                        MemoryFill8((u8 *)&gUnknown_203B2C0->unk130, 0, sizeof(WonderMailStruct_203B2C0_sub));
                         gUnknown_203B2C0->unkA8.pokemon.speciesNum = 0;
                         gUnknown_203B2C0->unk130.pokemon.speciesNum = 0;
                         gUnknown_203B2C0->unkA8.mail = *GetMailatIndex(gUnknown_203B2C0->mailIndex);
@@ -1152,7 +1152,7 @@ void sub_8028FC0()
 void sub_8028FDC(void)
 {
     s32 menuChoice;
-    struct unkStruct_203B480 *mail;
+    unkStruct_203B480 *mail;
 
     if(sub_80144A4(&menuChoice) != 0)
     {
@@ -1439,10 +1439,10 @@ void sub_80293D8(void)
 void sub_80293F4(void)
 {
     u32 return_var;
-    struct unkStruct_203B480 mail;
+    unkStruct_203B480 mail;
 
     return_var = sub_80154F0();
-    MemoryFill8((u8 *)&mail, 0, sizeof(struct unkStruct_203B480));
+    MemoryFill8((u8 *)&mail, 0, sizeof(unkStruct_203B480));
     switch(return_var)
     {
         case 3:

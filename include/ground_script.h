@@ -51,4 +51,6 @@ typedef struct GroundScript_ExecutePP_1
     u8 fillE8[0x110 - 0xE8];
 } GroundScript_ExecutePP_1;
 
+bool8 GroundScript_ExecutePP(GroundScript_ExecutePP_1 *, s32 *, GroundScript_ExecutePP_3 *, const DebugLocation *);
+
 #endif // GUARD_GROUND_SCRIPT_H

@@ -38,7 +38,7 @@ EWRAM_DATA_2 MenuItem gUnknown_203B378[2] = {0};
 EWRAM_DATA_2 u32 gUnknown_203B388[12] = {0};
 EWRAM_DATA_2 u32 gUnknown_203B3B8[12] = {0};
 
-extern struct unkStruct_203B484 *gUnknown_203B484;
+extern unkStruct_203B484 *gUnknown_203B484;
 
 u8 IsQuickSave(void);
 void DrawLoadScreenText(void);
@@ -265,7 +265,7 @@ void DrawLoadScreenText(void)
   u32 minutes;
   u32 seconds;
   PokemonStruct1 *playerInfo;
-  struct unkStruct_203B484 *temp2;
+  unkStruct_203B484 *temp2;
   u8 *r2;
 
   iVar2 = sub_8011FA8();

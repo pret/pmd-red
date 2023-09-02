@@ -89,16 +89,16 @@ extern PokemonStruct1 *sub_808D378(void);
 s32 sub_8016028(void);
 extern void PrintDungeonLocationtoBuffer(u8 *, void *);
 extern void PrintYellowDungeonNametoBuffer(u8 *, void *);
-extern u8 sub_803C1D0(struct WonderMailSub *, u8);
+extern u8 sub_803C1D0(WonderMailSub *, u8);
 extern u8 *sub_803C1F0(u8);
-void sub_803D414(u8 *, struct WonderMail *);
+void sub_803D414(u8 *, WonderMail *);
 
 void sub_803B6B0(s32 x, s32 y, u8 index, u32 param_4)
 {
     xxx_call_draw_string(x,y,gUnknown_80E8B94[index],param_4,0);
 }
 
-void CreateRescueTitle(struct unkStruct_802C39C *param_1)
+void CreateRescueTitle(unkStruct_802C39C *param_1)
 {
     char buf_1 [200];
     char buf_2 [20];
@@ -197,7 +197,7 @@ void CreateRescueTitle(struct unkStruct_802C39C *param_1)
     xxx_call_draw_string(0xb4,param_1->y,sub_803C1F0(uVar1),param_1->unk0[0],0);
 }
 
-void CreateRescueDescription(struct unkStruct_802C39C *param_1)
+void CreateRescueDescription(unkStruct_802C39C *param_1)
 {
     u8 uVar3;
     int x;

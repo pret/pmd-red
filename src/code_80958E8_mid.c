@@ -7,12 +7,12 @@
 #include "friend_area.h"
 #include "code_80958E8.h"
 
-bool8 sub_8095E38(struct WonderMail *mail, u8 dungeon, u32 floor, u8 param_4);
+bool8 sub_8095E38(WonderMail *mail, u8 dungeon, u32 floor, u8 param_4);
 extern s32 sub_80A29B0(u8 *param_1);
 extern s32 GetDungeonFloorCount(u8);
 extern bool8 sub_809017C(DungeonLocation *);
 
-bool8 GenerateMailJobDungeonInfo(struct WonderMail *mail)
+bool8 GenerateMailJobDungeonInfo(WonderMail *mail)
 {
   s32 counter;
   s32 floor;
@@ -92,7 +92,7 @@ bool8 GenerateMailJobDungeonInfo(struct WonderMail *mail)
   } while( TRUE );
 }
 
-bool8 sub_8095E38(struct WonderMail *mail, u8 dungeon, u32 floor, u8 param_4)
+bool8 sub_8095E38(WonderMail *mail, u8 dungeon, u32 floor, u8 param_4)
 {
     if (mail->mailType != MAIL_TYPE_NONE) {
         if ((mail->missionType == WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT) && (param_4 == 1)) {

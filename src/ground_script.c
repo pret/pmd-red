@@ -82,7 +82,7 @@ bool8 sub_809D770(GroundScript_ExecutePP_1 *param_1, DebugLocation *unused)
     return TRUE;
 }
 
-bool8 GroundScript_ExecutePP(GroundScript_ExecutePP_1 *param_1, s32 *param_2, GroundScript_ExecutePP_3 *param_3, DebugLocation *unused)
+bool8 GroundScript_ExecutePP(GroundScript_ExecutePP_1 *param_1, s32 *param_2, GroundScript_ExecutePP_3 *param_3, const DebugLocation *unused)
 {
     if ((param_3 == NULL) || (param_3->scriptPointer == NULL)) {
         return FALSE;

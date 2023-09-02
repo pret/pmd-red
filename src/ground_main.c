@@ -6,6 +6,7 @@
 #include "code_80A26CC.h"
 #include "event_flag.h"
 #include "code_80118A4.h"
+#include "ground_map_2.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA u32 gUnknown_20398AC = {0};
@@ -52,7 +53,6 @@ extern void sub_80A6E80();
 extern void sub_8099BE4();
 extern void sub_8099744();
 extern void nullsub_120();
-extern void sub_80A5E70();
 extern void sub_809B638();
 extern void nullsub_106();
 extern void sub_80A73EC();

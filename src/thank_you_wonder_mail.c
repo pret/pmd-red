@@ -20,7 +20,7 @@
 #include "cpu.h"
 #include "code_80118A4.h"
 
-extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
+extern WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 
 #define THANK_YOU_MAIL_MAIN_MENU 0
 #define ANYTHING_ELSE_THANK_YOU_MAIN_MENU 1
@@ -215,7 +215,7 @@ extern void sub_8031E10();
 extern void sub_802F2C0();
 extern void SetThankYouMailMenuState(u32);
 extern PokemonStruct1 *GetPlayerPokemonStruct(void);
-extern void sub_802F204(struct unkStruct_802F204 *, u32);
+extern void sub_802F204(unkStruct_802F204 *, u32);
 extern void sub_80151C0(u32, u8 *);
 extern void sub_803092C(void);
 extern s32 sub_8037B28(u32);
@@ -231,7 +231,7 @@ extern void sub_8031D70(u8, u32);
 extern void sub_803092C(void);
 extern void sub_8011C28(u32);
 extern u32 sub_80154F0(void);
-extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_203B480 *r0);
+extern u32 sub_8039068(u32, u8 *r1, unkStruct_203B480 *r0);
 
 
 u32 CreateThankYouMailPelipper(void)
@@ -240,12 +240,12 @@ u32 CreateThankYouMailPelipper(void)
   OpenedFile *faceFile;
   s32 index;
   int counter;
-  struct unkStruct_203B480 *mail;
+  unkStruct_203B480 *mail;
 
   ResetUnusedInputStruct();
   sub_800641C(NULL, TRUE, TRUE);
-  gUnknown_203B2C4 = MemoryAlloc(sizeof(struct WonderMailStruct_203B2C4), 8);
-  MemoryFill8((u8 *)gUnknown_203B2C4, 0, sizeof(struct WonderMailStruct_203B2C4));
+  gUnknown_203B2C4 = MemoryAlloc(sizeof(WonderMailStruct_203B2C4), 8);
+  MemoryFill8((u8 *)gUnknown_203B2C4, 0, sizeof(WonderMailStruct_203B2C4));
 
   CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
   monName = GetMonSpecies(MONSTER_PELIPPER);
@@ -798,12 +798,12 @@ void AdvanceToThankYouPasswordProcessing(void)
 void HandleThankYouMailPasswordMenu(void)
 {
   u8 mailIndex;
-  struct unkStruct_203B480 *mail;
+  unkStruct_203B480 *mail;
   u32 return_var;
-  struct unkStruct_203B480 mail1;
+  unkStruct_203B480 mail1;
 
   return_var = sub_80154F0();
-  MemoryFill8((u8 *)&mail1, 0, sizeof(struct unkStruct_203B480));
+  MemoryFill8((u8 *)&mail1, 0, sizeof(unkStruct_203B480));
   switch(return_var)
   {
     case 3:
@@ -930,7 +930,7 @@ void sub_802A75C(void)
 void HandleConfirmItemtoSendMenu(void)
 {
     s32 menuAction;
-    struct unkStruct_203B480 *mail;
+    unkStruct_203B480 *mail;
     if(sub_80144A4(&menuAction) == 0)
     {
         switch(menuAction)
@@ -1113,7 +1113,7 @@ void sub_802A9FC(void)
 void HandleMailCommunicationMenu(void)
 {
     s32 menuAction;
-    struct unkStruct_203B480 *mail;
+    unkStruct_203B480 *mail;
     if(sub_80144A4(&menuAction) == 0)
     {
         switch(menuAction)
@@ -1254,7 +1254,7 @@ void UpdateThankYouMailText(void)
   PokemonStruct1 *pokeStruct;
   PokemonStruct1 *pokeStruct2;
   s32 linkStatus;
-  struct unkStruct_203B480 *mail;
+  unkStruct_203B480 *mail;
 
   switch(gUnknown_203B2C4->state) {
     case 5:
@@ -1310,13 +1310,13 @@ void UpdateThankYouMailText(void)
             switch(gUnknown_203B2C4->unk40)
             {
                 case 6:
-                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(struct unkStruct_203B480));
+                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(unkStruct_203B480));
                     gUnknown_203B2C4->unk1B8 = *GetMailatIndex(gUnknown_203B2C4->mailIndex);
                     gUnknown_203B2C4->linkError = sub_8037D64(gUnknown_203B2C4->unk40,&gUnknown_203B2C4->unk1B8,&gUnknown_203B2C4->unk1E8);
                     break;
                 case 7:
-                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(struct unkStruct_203B480));
-                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1E8,0, sizeof(struct unkStruct_203B480));
+                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(unkStruct_203B480));
+                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1E8,0, sizeof(unkStruct_203B480));
                     gUnknown_203B2C4->linkError = sub_8037D64(gUnknown_203B2C4->unk40,&gUnknown_203B2C4->unk1B8,&gUnknown_203B2C4->unk1E8);
                     break;
             }

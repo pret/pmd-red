@@ -23,7 +23,7 @@ extern const struct FileArchive gDungeonFileArchive;
 
 extern OpenedFile *gUnknown_202F18C;
 extern OpenedFile *gDungeonPaletteFile;
-extern struct unkStruct_202EE8C gUnknown_202EE8C[32];
+extern unkStruct_202EE8C gUnknown_202EE8C[32];
 extern u8 gWalkableTileToCrossableTerrain[8];
 extern u8 sub_8043CE4(u32);
 

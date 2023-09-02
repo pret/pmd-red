@@ -22,7 +22,7 @@ struct unkStruct_203B324
     UnkTextStruct2 unk18[4];
 };
 extern struct unkStruct_203B324 *gUnknown_203B324;
-extern struct unkStruct_203B480 *gUnknown_203B480;
+extern unkStruct_203B480 *gUnknown_203B480;
 
 
 const UnkTextStruct2 gUnknown_80E0900 = {
@@ -50,7 +50,7 @@ const u8 gUnknown_80E0938[] = "%-4d";
 static const u8 wonder_mail_fill[] = "pksdir0";
 
 extern void sub_8030DD4(void);
-extern void CreateRescueDescription(struct unkStruct_802C39C *);
+extern void CreateRescueDescription(unkStruct_802C39C *);
 
 void sub_8030E2C(void);
 void sub_8030E48(void);
@@ -110,8 +110,8 @@ void sub_8030E2C(void)
 void sub_8030E48(void)
 {
   u16 uVar2;
-  struct unkStruct_203B480 *mail;
-  struct unkStruct_802C39C stack;
+  unkStruct_203B480 *mail;
+  unkStruct_802C39C stack;
   u8 buffer [256];
   
   mail = &gUnknown_203B480[gUnknown_203B324->mailIndex];

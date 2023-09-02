@@ -58,7 +58,7 @@ s32 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
     u8 curChar;
     u8 buffer[128];
     
-    gUnknown_203B340 = (struct unkCreditsStruct_203B340 *)MemoryAlloc(sizeof(struct unkCreditsStruct_203B340), 8);
+    gUnknown_203B340 = MemoryAlloc(sizeof(struct unkCreditsStruct_203B340), 8);
     gUnknown_203B340->unk60 = 0;
     gUnknown_203B340->unk64 = param_2;
     gUnknown_203B340->creditsCategoryIndex = creditsCategoryIndex;

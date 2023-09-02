@@ -76,26 +76,26 @@ extern void sub_802C10C(u32, u32, u32);
 extern void sub_802C28C(u32);
 extern void DrawPelipperBoardJobMenu(void);
 extern void CreatePelipperAcceptedStatusBox(u32);
-extern void sub_803B35C(struct WonderMail *, struct unkStruct_802C39C *);
-extern void sub_802DE84(struct unkStruct_802C39C *);
+extern void sub_803B35C(WonderMail *, unkStruct_802C39C *);
+extern void sub_802DE84(unkStruct_802C39C *);
 extern void InitializeJobListMenu(u32);
 
 extern u32 sub_802C898(void);
 extern void sub_802C8F4(void);
 extern u32 sub_802DEE0(void);
 extern void sub_802DF24(void);
-extern struct WonderMail *GetPelipperBoardSlotInfo(u8);
+extern WonderMail *GetPelipperBoardSlotInfo(u8);
 extern u8 HasNoPelipperBoardJobs(void);
 extern void sub_8096C80(void);
 extern void sub_8096D24(void);
-extern void AcceptJob(struct WonderMail*);
+extern void AcceptJob(WonderMail*);
 extern void ResetPelipperBoardSlot(u8);
 extern void sub_80965F4(void);
 extern void sub_802C2D4(void);
 extern u32 sub_802C1E4(u32);
 extern u8 sub_802C26C(void);
 extern u8 HasNoAcceptedJobs(void);
-extern bool8 IsMailinJobSlot(struct WonderMail *mail);
+extern bool8 IsMailinJobSlot(WonderMail *mail);
 
 extern u8 *gUnknown_80D4990[];
 extern u8 *gUnknown_80D4970[];
@@ -363,7 +363,7 @@ void sub_802ED4C(void)
 
 void sub_802EDBC(void)
 {
-    struct WonderMail *mail;
+    WonderMail *mail;
     s32 menuAction = 0;
 
     sub_802C1E4(0);

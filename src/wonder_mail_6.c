@@ -27,7 +27,7 @@ struct unkStruct_203B328
     u32 wonderMailType;
 };
 extern struct unkStruct_203B328 *gUnknown_203B328;
-extern struct unkStruct_203B480 *gUnknown_203B480;
+extern unkStruct_203B480 *gUnknown_203B480;
 
 const MenuItem gUnknown_80E0948[] = 
 {
@@ -294,7 +294,7 @@ void sub_80313D8(u32 state)
 {
   s32 index;
   s32 local_10;
-  struct unkStruct_203B480 *unused;
+  unkStruct_203B480 *unused;
   
   local_10 = 0;
   sub_8030768(0);

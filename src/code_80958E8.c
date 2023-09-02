@@ -17,7 +17,7 @@ extern bool8 sub_803C0DC(s16);
 extern void ResetMailboxSlot(u8);
 extern void ResetPelipperBoardSlot(u8);
 extern void ResetJobSlot(u8);
-extern bool8 ValidateWonderMail(struct WonderMail *);
+extern bool8 ValidateWonderMail(WonderMail *);
 
 EWRAM_DATA_2 struct unkStruct_203B490 *gUnknown_203B490 = {0};
 EWRAM_DATA struct unkStruct_203B490 gUnknown_2039448 = {0};
@@ -63,7 +63,7 @@ void InitializeMailJobsNews(void)
     }
 }
 
-bool8 IsValidWonderMail(struct WonderMail *WonderMailData)
+bool8 IsValidWonderMail(WonderMail *WonderMailData)
 {
     // Has to equal 5 for Wonder Mail
     // https://web.archive.org/web/20080913124416/http://www.upokecenter.com/games/dungeon/guides/passwords.html
@@ -78,7 +78,7 @@ bool8 IsValidWonderMail(struct WonderMail *WonderMailData)
     }
 }
 
-bool8 ValidateWonderMail(struct WonderMail *data)
+bool8 ValidateWonderMail(WonderMail *data)
 {
 
     if(data->missionType > WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM)

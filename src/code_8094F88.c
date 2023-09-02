@@ -8,16 +8,16 @@
 #include "save.h"
 #include "text_util.h"
 
-EWRAM_DATA_2 struct unkStruct_203B480 *gUnknown_203B480 = {0};
-EWRAM_DATA_2 struct unkStruct_203B484 *gUnknown_203B484 = {0};
+EWRAM_DATA_2 unkStruct_203B480 *gUnknown_203B480 = {0};
+EWRAM_DATA_2 unkStruct_203B484 *gUnknown_203B484 = {0};
 EWRAM_DATA_2 u32 *gUnknown_203B488 = {0};
-EWRAM_DATA_2 struct unkStruct_203B48C *gUnknown_203B48C = {0};
+EWRAM_DATA_2 unkStruct_203B48C *gUnknown_203B48C = {0};
 
-EWRAM_DATA struct unkStruct_203B480 gUnknown_2038C88[0x20] = {0};
-EWRAM_DATA struct unkStruct_203B484 gUnknown_2039288 = {0};
+EWRAM_DATA unkStruct_203B480 gUnknown_2038C88[0x20] = {0};
+EWRAM_DATA unkStruct_203B484 gUnknown_2039288 = {0};
 EWRAM_DATA UNUSED static u32 fill0 = {0}; // 203B484 is size 0x5C and I need to fill a gap of 0x4
 EWRAM_DATA u32 gUnknown_20392E8[0x36] = {0};
-EWRAM_DATA struct unkStruct_203B48C gUnknown_20393C0 = {0};
+EWRAM_DATA unkStruct_203B48C gUnknown_20393C0 = {0};
 
 extern void SaveDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
 extern void RestoreDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
@@ -37,12 +37,12 @@ void sub_80950BC(void)
     gUnknown_203B48C = &gUnknown_20393C0;
 }
 
-struct unkStruct_203B480 *sub_80950F8(void)
+unkStruct_203B480 *sub_80950F8(void)
 {
     return gUnknown_2038C88;
 }
 
-struct unkStruct_203B484 *sub_8095100(void)
+unkStruct_203B484 *sub_8095100(void)
 {
     return &gUnknown_2039288;
 }
@@ -52,7 +52,7 @@ u32 *sub_8095108(void)
     return gUnknown_20392E8;
 }
 
-struct unkStruct_203B48C *sub_8095110(void)
+unkStruct_203B48C *sub_8095110(void)
 {
     return &gUnknown_20393C0;
 }
@@ -61,10 +61,10 @@ struct unkStruct_203B48C *sub_8095110(void)
 void sub_8095118(void)
 {
   s32 index;
-  struct unkStruct_203B480 *unused;
+  unkStruct_203B480 *unused;
   
-  MemoryFill8((u8*)gUnknown_203B480,0, 0x20 * sizeof(struct unkStruct_203B480));
-  MemoryFill8((u8*)gUnknown_203B484,0, sizeof(struct unkStruct_203B484));
+  MemoryFill8((u8*)gUnknown_203B480,0, 0x20 * sizeof(unkStruct_203B480));
+  MemoryFill8((u8*)gUnknown_203B484,0, sizeof(unkStruct_203B484));
   for(index = 0; index < 0x20; index++){
 
     // NOTE: we use a temp variable here to force the match
@@ -101,11 +101,11 @@ s32 FindOpenMailSlot(void)
 }
 
 // Fakematch
-bool8 sub_80951BC(struct unkStruct_203B480 *mail)
+bool8 sub_80951BC(unkStruct_203B480 *mail)
 {
     s32 index;
-    struct unkStruct_203B480 *preload;
-    struct unkStruct_203B480 *preload2;
+    unkStruct_203B480 *preload;
+    unkStruct_203B480 *preload2;
 
     index = FindOpenMailSlot();
 
@@ -122,16 +122,16 @@ bool8 sub_80951BC(struct unkStruct_203B480 *mail)
     }
 }
 
-bool8 sub_80951FC(struct unkStruct_203B480 *param_1)
+bool8 sub_80951FC(unkStruct_203B480 *param_1)
 {
   bool8 bVar1 = gUnknown_203B480[1].mailType != 0;
   gUnknown_203B480[1] = *param_1;
   return bVar1;
 }
 
-struct unkStruct_203B480 * GetMailatIndex(u8 index)
+unkStruct_203B480 * GetMailatIndex(u8 index)
 {
-  struct unkStruct_203B480 *ptr;
+  unkStruct_203B480 *ptr;
 
   ptr = &gUnknown_203B480[index];
   return ptr;
@@ -139,9 +139,9 @@ struct unkStruct_203B480 * GetMailatIndex(u8 index)
 
 void DeleteMailAtIndex(u8 index)
 {
-  struct unkStruct_203B480 *unused;
+  unkStruct_203B480 *unused;
 
-  MemoryFill8((u8*)&gUnknown_203B480[index],0,sizeof(struct unkStruct_203B480));
+  MemoryFill8((u8*)&gUnknown_203B480[index],0,sizeof(unkStruct_203B480));
   unused = &gUnknown_203B480[index];
   gUnknown_203B480[index].mailType = 0;
   unused = &gUnknown_203B480[index];
@@ -186,7 +186,7 @@ void sub_80952C4(void)
 
 bool8 HasMail(u8 mailType, u32 param_2)
 {
-  struct unkStruct_203B480 *ptr;
+  unkStruct_203B480 *ptr;
   s32 index;
   
   for(index = 0, ptr = &gUnknown_203B480[0]; index < 0x20; ptr++, index++)
@@ -198,7 +198,7 @@ bool8 HasMail(u8 mailType, u32 param_2)
 
 s32 CountMailType(u8 mailType)
 {
-  struct unkStruct_203B480 *ptr;
+  unkStruct_203B480 *ptr;
   s32 total = 0;
   s32 index;
   
@@ -211,7 +211,7 @@ s32 CountMailType(u8 mailType)
 
 u32 CountAllMail(void)
 {
-  struct unkStruct_203B480 *ptr;
+  unkStruct_203B480 *ptr;
   u32 total = 0;
   s32 index;
   
@@ -224,7 +224,7 @@ u32 CountAllMail(void)
 
 s32 sub_8095374(void)
 {
-  struct unkStruct_203B480 *ptr;
+  unkStruct_203B480 *ptr;
   s32 retvar = -1;
   s32 index;
   
@@ -238,7 +238,7 @@ s32 sub_8095374(void)
 /* With mailType and (additonal data??), search mail and return exact index */
 s32 GetMailIndex(u8 mailType, u32 param_2)
 {
-  struct unkStruct_203B480 *ptr;
+  unkStruct_203B480 *ptr;
   s32 index;
   
   for(index = 0, ptr = &gUnknown_203B480[0]; index < 0x20; ptr++, index++)
@@ -251,7 +251,7 @@ s32 GetMailIndex(u8 mailType, u32 param_2)
 /* Return the index of the first mail of the requested type */
 s32 GetFirstIndexofMailType(u8 mailType)
 {
-  struct unkStruct_203B480 *ptr;
+  unkStruct_203B480 *ptr;
   s32 index;
   
   for(index = 0, ptr = &gUnknown_203B480[0]; index < 0x20; ptr++, index++)
@@ -273,14 +273,14 @@ s32 sub_8095400(u32 param_1)
   return -1;
 }
 
-void sub_809542C(struct WonderMailSub *param_1)
+void sub_809542C(WonderMailSub *param_1)
 {
   u32 seed;
 
 #ifndef NONMATCHING
-  register struct unkStruct_203B480 *preload asm("r2");
+  register unkStruct_203B480 *preload asm("r2");
 #else
-  struct unkStruct_203B480 *preload;
+  unkStruct_203B480 *preload;
 #endif
 
   u8 buffer [20];
@@ -299,11 +299,11 @@ void sub_809542C(struct WonderMailSub *param_1)
   gUnknown_203B480->rescuesAllowed = GetRescuesAllowed(gUnknown_203B480->unk4.dungeon.id);
 }
 
-void sub_8095494(struct WonderMailSub *param_1, u8 index)
+void sub_8095494(WonderMailSub *param_1, u8 index)
 {
   u32 seed;
   DungeonLocation dungeon;
-  struct unkStruct_203B480 *mail;
+  unkStruct_203B480 *mail;
   
   mail = gUnknown_203B480;
   mail += index;
@@ -407,7 +407,7 @@ u32 sub_8095624(u8 *a, u32 b)
     return backup.unk8;
 }
 
-void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
+void sub_8095774(struct unkStruct_8094924 * a, unkStruct_203B480 *b)
 {
     u8 temp;
 
@@ -428,7 +428,7 @@ void sub_8095774(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
     b->unk2D = temp & 1;
 }
 
-void sub_8095824(struct unkStruct_8094924 * a, struct unkStruct_203B480 *b)
+void sub_8095824(struct unkStruct_8094924 * a, unkStruct_203B480 *b)
 {
     u8 neg1;
     u8 zero;

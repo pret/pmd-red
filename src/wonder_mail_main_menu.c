@@ -13,6 +13,7 @@
 #include "code_801B3C0.h"
 #include "cpu.h"
 #include "code_80118A4.h"
+#include "wonder_mail_3.h"
 
 #define SELECT_WONDER_MAIL_MODE_MAIN_SCREEN 0
 #define SEND_WONDER_MAIL_MAIN_SCREEN 1
@@ -81,17 +82,6 @@ ALIGNED(4) const char Yes_80E7D2C[] = "Yes";
 ALIGNED(4) const char wonder_mail_main_fill1[] = "pksdir0";
 ALIGNED(4) const char wonder_mail_main_fill2[] = "pksdir0";
 
-
-struct unkStruct_803B344
-{
-    // size: 0xB4
-    struct WonderMail mail;
-    u8* unk14;
-    u8* unk18;
-    u8 fill1C[0x3C - 0x1C];
-    u8 unk3C[0x78];
-};
-
 struct unkStruct_203B3E8
 {
     // size: 0x49C
@@ -99,7 +89,7 @@ struct unkStruct_203B3E8
     u8 PasswordEntryBuffer[PASSWORD_BUFFER_SIZE]; // Wonder Mail Buffer...
     union UNK38
     {
-        struct WonderMail decodedMail; // 0x14
+        WonderMail decodedMail; // 0x14
         u8 unk38_u8[0x30]; // idk why it fills to 0x30 instead...
     } UNK38;
     u8 fill68[0x1EC - 0x68];
@@ -107,15 +97,15 @@ struct unkStruct_203B3E8
     u32 unk24C;
     u32 wonderMailStatus;
 
-    struct unkStruct_803B344 unk254;
+    unkStruct_803B344 unk254;
 
-    struct unkStruct_803B344 unk308;
+    unkStruct_803B344 unk308;
     u8 unk3BC;
     u8 fill3BD[0x3C0 - 0x3BD];
 
-    struct unkStruct_803B344 unk3C0;
+    unkStruct_803B344 unk3C0;
 
-    struct WonderMail unk474;
+    WonderMail unk474;
     u8 **unk488;
     u8 *unk48C;
     s32 wonderMailMethod;
@@ -137,10 +127,9 @@ extern s32 sub_8037D64(u32, void *, void *);
 extern s32 sub_80381F4(u32, void *, void *);
 extern void sub_80151C0(u32, u8 *);
 extern void sub_802EF48(void);
-extern void sub_802D098(struct WonderMail *);
 
 
-extern struct unkStruct_803B344 *sub_803B344(u8);
+extern unkStruct_803B344 *sub_803B344(u8);
 
 
 
@@ -151,8 +140,8 @@ extern bool8 GetWonderMailAccepted();
 extern void sub_802D184();
 
 extern s32 sub_80154F0();
-extern bool8 DecodeWonderMailPassword(u8 *, struct WonderMail *);
-extern bool8 IsValidWonderMail(struct WonderMail *WonderMailData);
+extern bool8 DecodeWonderMailPassword(u8 *, WonderMail *);
+extern bool8 IsValidWonderMail(WonderMail *WonderMailData);
 
 void PrintWonderMailMainMenuError(u32);
 void HandleWonderMailMainScreen(void);
@@ -531,7 +520,7 @@ void nullsub_54(void)
 void WonderMailMainMenuCallback(void)
 {
   int linkStatus;
-  struct unkStruct_803B344 *temp;
+  unkStruct_803B344 *temp;
 
   switch(gUnknown_203B3E8->state) {
     case SELECT_WONDER_MAIL_MODE_MAIN_SCREEN:
@@ -560,7 +549,7 @@ void WonderMailMainMenuCallback(void)
             gUnknown_203B3E8->unk488 = NULL;
             gUnknown_203B3E8->unk48C = NULL;
         }
-        sub_802D098(&gUnknown_203B3E8->unk474);
+        sub_802D098((unkSubStruct_203B2F8 *)&gUnknown_203B3E8->unk474);
         break;
     case PREPARE_SAVE:
         if(gUnknown_203B3E8->wonderMailAccepted)

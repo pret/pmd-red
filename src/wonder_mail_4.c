@@ -25,7 +25,7 @@ struct unkStruct_203B320
 };
 extern struct unkStruct_203B320 *gUnknown_203B320;
 
-extern struct unkStruct_203B480 *gUnknown_203B480;
+extern unkStruct_203B480 *gUnknown_203B480;
 
 const UnkTextStruct2 gUnknown_80E083C = {
     0x00, 0x00, 0x00, 0x00,
@@ -81,7 +81,7 @@ extern s32 sub_8030A74(void);
 extern void sub_80308A0(void);
 extern void sub_803092C(void);
 
-extern void CreateRescueTitle(struct unkStruct_802C39C *);
+extern void CreateRescueTitle(unkStruct_802C39C *);
 
 u32 sub_80306A8(u32 wonderMailType, u32 r1, UnkTextStruct2_sub *r2, u32 r3)
 {
@@ -245,11 +245,11 @@ void sub_80308A0(void)
 
 void sub_803092C(void)
 {
-  struct unkStruct_203B480 *mail;
+  unkStruct_203B480 *mail;
   s32 r4;
   s32 r5;
   s32 index;
-  struct unkStruct_802C39C local;
+  unkStruct_802C39C local;
   
   sub_8008C54(gUnknown_203B320->unk58);
   sub_80073B8(gUnknown_203B320->unk58);
@@ -306,7 +306,7 @@ s32 sub_8030A74(void)
     case WONDER_MAIL_TYPE_NONE:
         for (index = 0; index < 0x20; index++)
         {
-            struct unkStruct_203B480 *p = gUnknown_203B480 + index;
+            unkStruct_203B480 *p = gUnknown_203B480 + index;
             if (p->mailType != WONDER_MAIL_TYPE_NONE) {
                 gUnknown_203B320->unk0[count] = index;
                 count++;
@@ -316,7 +316,7 @@ s32 sub_8030A74(void)
     case WONDER_MAIL_TYPE_COMPLETED:
         for (index = 0; index < 0x20; index++)
         {
-            struct unkStruct_203B480 *p = gUnknown_203B480 + index;
+            unkStruct_203B480 *p = gUnknown_203B480 + index;
             if (p->mailType == WONDER_MAIL_TYPE_COMPLETED) {
                 gUnknown_203B320->unk0[count] = index;
                 count++;
@@ -326,7 +326,7 @@ s32 sub_8030A74(void)
     case 1:
         for (index = 0; index < 0x20; index++)
         {
-            struct unkStruct_203B480 *p = gUnknown_203B480 + index;
+            unkStruct_203B480 *p = gUnknown_203B480 + index;
             if (p->mailType == 1) {
                 gUnknown_203B320->unk0[count] = index;
                 count++;
@@ -336,7 +336,7 @@ s32 sub_8030A74(void)
     case 2:
         for (index = 0; index < 0x20; index++)
         {
-            struct unkStruct_203B480 *p = gUnknown_203B480 + index;
+            unkStruct_203B480 *p = gUnknown_203B480 + index;
             if (p->mailType == 2) {
                 gUnknown_203B320->unk0[count] = index;
                 count++;
@@ -346,7 +346,7 @@ s32 sub_8030A74(void)
     case WONDER_MAIL_TYPE_AOK:
         for (index = 0; index < 0x20; index++)
         {
-            struct unkStruct_203B480 *p = gUnknown_203B480 + index;
+            unkStruct_203B480 *p = gUnknown_203B480 + index;
             if (p->mailType == WONDER_MAIL_TYPE_AOK) {
                 gUnknown_203B320->unk0[count] = index;
                 count++;
@@ -356,7 +356,7 @@ s32 sub_8030A74(void)
     case 3:
         for (index = 0; index < 0x20; index++)
         {
-            struct unkStruct_203B480 *p = gUnknown_203B480 + index;
+            unkStruct_203B480 *p = gUnknown_203B480 + index;
             if (p->mailType == 3) {
                 gUnknown_203B320->unk0[count] = index;
                 count++;
@@ -366,7 +366,7 @@ s32 sub_8030A74(void)
     case WONDER_MAIL_TYPE_THANK_YOU:
         for (index = 0; index < 0x20; index++)
         {
-            struct unkStruct_203B480 *p = gUnknown_203B480 + index;
+            unkStruct_203B480 *p = gUnknown_203B480 + index;
             if (p->mailType == WONDER_MAIL_TYPE_THANK_YOU) {
                 gUnknown_203B320->unk0[count] = index;
                 count++;
@@ -377,7 +377,7 @@ s32 sub_8030A74(void)
     case WONDER_MAIL_TYPE_OKD:
         for (index = 0; index < 0x20; index++)
         {
-            struct unkStruct_203B480 *p = gUnknown_203B480 + index;
+            unkStruct_203B480 *p = gUnknown_203B480 + index;
             if (p->mailType == WONDER_MAIL_TYPE_OKD) {
                 gUnknown_203B320->unk0[count] = index;
                 count++;

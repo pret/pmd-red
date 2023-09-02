@@ -127,16 +127,16 @@ extern void sub_802D1B8();
 extern void sub_802D2A8();
 
 
-extern bool8 IsMailinJobSlot(struct WonderMail *);
-extern u8 sub_8096F50(struct WonderMail *);
+extern bool8 IsMailinJobSlot(WonderMail *);
+extern u8 sub_8096F50(WonderMail *);
 extern u8 sub_802DAA8(void);
 extern u8 sub_802DADC(void);
 extern u8 *sub_8096DD8(void);
 extern u8 sub_8096C08(u8 *);
 extern void DrawJobListMenu(void);
-extern struct WonderMail* GetJobSlotInfo(u8);
-extern void sub_803B35C(struct WonderMail *, struct unkStruct_802C39C*);
-extern void sub_802DE84(struct unkStruct_802C39C *);
+extern WonderMail* GetJobSlotInfo(u8);
+extern void sub_803B35C(WonderMail *, unkStruct_802C39C*);
+extern void sub_802DE84(unkStruct_802C39C *);
 extern void sub_802D73C(void);
 extern void sub_802C640(u32);
 extern void sub_802C4C8(u32, u32, u32);
@@ -145,9 +145,9 @@ extern void sub_802D690(void);
 extern void sub_8096C80(void);
 extern void sub_8096D24(void);
 extern u8 *sub_8096DE8(void);
-extern void AcceptJob(struct unkSubStruct_203B2F8 *);
-struct unkStruct_803B344 *sub_803B344(u8);
-extern void CreateRescueTitle(struct unkStruct_802C39C *);
+extern void AcceptJob(unkSubStruct_203B2F8 *);
+unkStruct_803B344 *sub_803B344(u8);
+extern void CreateRescueTitle(unkStruct_802C39C *);
 extern u8 gUnknown_80DFDBC[];
 extern void sub_802CF5C(void);
 extern void sub_802CFD0(void);
@@ -173,12 +173,12 @@ extern u8 *gUnknown_80D4970[];
 extern u8 gUnknown_80DFD70[];
 extern u8 gUnknown_80DFD7C[];
 
-extern bool8 sub_809693C(struct WonderMail *);
+extern bool8 sub_809693C(WonderMail *);
 extern bool8 sub_80A2824(u8);
 
 void sub_802CAA4(void) {
     s32 loopMax;
-    struct WonderMail *mail;
+    WonderMail *mail;
     s32 index;
 
     loopMax = 0;
@@ -266,8 +266,8 @@ void sub_802CC00(void)
 void sub_802CC70(void)
 {
   s32 menuAction;
-  struct WonderMail *mail;
-  struct WonderMail *mail2;
+  WonderMail *mail;
+  WonderMail *mail2;
   
   menuAction = 0;
   sub_802C598(0);
@@ -350,7 +350,7 @@ bool8 sub_802CDD4(u32 r0)
 {
     if(gUnknown_203B2F4 == NULL)
     {
-        gUnknown_203B2F4 = MemoryAlloc(sizeof(struct unkStruct_203B2F4), 8);
+        gUnknown_203B2F4 = MemoryAlloc(sizeof(unkStruct_203B2F4), 8);
     }
     gUnknown_203B2F4->unk34 = r0;
     gUnknown_203B2F4->unk38 = &gUnknown_203B2F4->unk3C[gUnknown_203B2F4->unk34];
@@ -488,8 +488,8 @@ void sub_802CF5C(void)
 
 void sub_802CFD0(void)
 {
-  struct unkStruct_802C39C local;    
-  struct unkStruct_803B344 *iVar1;
+  unkStruct_802C39C local;    
+  unkStruct_803B344 *iVar1;
   s32 r5;
   s32 r4;
   
@@ -514,13 +514,13 @@ void sub_802CFD0(void)
   sub_80073E0(gUnknown_203B2F4->unk34);
 }
 
-u32 sub_802D098(struct unkSubStruct_203B2F8 *mail)
+u32 sub_802D098(unkSubStruct_203B2F8 *mail)
 {
-  gUnknown_203B2F8 = MemoryAlloc(0x208,8);
+  gUnknown_203B2F8 = MemoryAlloc(sizeof(unkStruct_203B2F8),8);
   gUnknown_203B2F8->menuAction1 = 0;
   gUnknown_203B2F8->menuAction2 = 0;
   gUnknown_203B2F8->menuAction3 = 0;
-  gUnknown_203B2F8->mail  = mail;
+  gUnknown_203B2F8->mail = mail;
   gUnknown_203B2F8->wonderMailAccepted = FALSE;
   gUnknown_203B2F8->unk9 = sub_8099328(&gUnknown_203B2F8->dungeonID);
   if (sub_8011C1C() != 2) {
@@ -915,7 +915,7 @@ void sub_802D8CC(void)
 
 void sub_802D940(void)
 {
-  struct WonderMail *mail;
+  WonderMail *mail;
   s32 menuAction;
   
   menuAction = 0;
@@ -1001,7 +1001,7 @@ void AdvancetoFallbackWonderMailRescueState(void)
 
 bool8 sub_802DAA8(void)
 {
-  struct WonderMail *mail;
+  WonderMail *mail;
   
   mail = GetJobSlotInfo(gUnknown_203B2F8->jobSlotIndex);
   if (!gUnknown_203B2F8->unk9) {
@@ -1016,7 +1016,7 @@ bool8 sub_802DAA8(void)
 bool8 sub_802DADC(void)
 {
   u8 mailType;
-  struct WonderMail *mail;
+  WonderMail *mail;
   s32 counter;
   
   if (!gUnknown_203B2F8->unk9) {

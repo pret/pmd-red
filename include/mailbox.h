@@ -13,7 +13,7 @@ struct unkStruct_203B304
     u32 fallbackState;
     u8 mailboxIndex;
     u8 mailIndex;
-    struct unkStruct_802C39C unkC;
+    unkStruct_802C39C unkC;
     u32 menuAction1;
     u32 menuAction2;
     MenuStruct unk6C;

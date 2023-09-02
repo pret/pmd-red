@@ -12,25 +12,16 @@
 #include "code_802C39C.h"
 #include "code_80130A8.h"
 #include "code_80118A4.h"
+#include "wonder_mail_3.h"
 
-struct unkStruct_803B344
-{
-    // size: 0xB4
-    struct WonderMail mail;
-    u8* unk14;
-    u8* unk18;
-    u8 fill1C[0x3C - 0x1C];
-    u8 unk3C[0x78];
-};
-
-extern struct unkStruct_803B344 *sub_803B344(u8);
+extern unkStruct_803B344 *sub_803B344(u8);
 
 struct unkStruct_203B30C
 {
     // size: 0x150
     s32 state;
     u8 unk4;
-    struct unkStruct_802C39C unk8;
+    unkStruct_802C39C unk8;
     MenuStruct unk60;
     MenuItem unkB0[8];
     UnkTextStruct2 unkF0[4];
@@ -45,7 +36,7 @@ struct unkStruct_203B310
     /* 0x8 */ bool8 displayClientDialogueSprite; // true to display the dialogue sprite for the client
     /* 0x9 */ u8 currTeamRank; // team rank
     /* 0xC */ s32 itemRewardIndex;
-    struct unkStruct_802F204 *unk10;
+    unkStruct_802F204 *unk10;
     /* 0x14 */ OpenedFile *faceFile;
     /* 0x18 */ u8 *faceData;
     s16 unk1C;
@@ -108,8 +99,8 @@ extern void sub_802F088();
 extern void sub_801B72C(void);
 extern u32 sub_801B6AC(void);
 extern void sub_802F108(void);
-extern void sub_803B35C(struct WonderMail*, struct unkStruct_802C39C *);
-extern void sub_802DE84(struct unkStruct_802C39C *);
+extern void sub_803B35C(WonderMail*, unkStruct_802C39C *);
+extern void sub_802DE84(unkStruct_802C39C *);
 extern void sub_802CDD4(u32);
 extern void sub_802CED8(u32);
 extern void sub_802CFD0(void);
@@ -329,7 +320,7 @@ void sub_802F004(void)
 
 void sub_802F088(void)
 {
-    struct unkStruct_803B344 *temp;
+    unkStruct_803B344 *temp;
 
     switch(gUnknown_203B30C->state)
     {
@@ -428,7 +419,7 @@ void sub_802F1E8(void)
 
 
 
-u32 sub_802F204(struct unkStruct_802F204 *r0, bool8 displayClientSprite)
+u32 sub_802F204(unkStruct_802F204 *r0, bool8 displayClientSprite)
 {
     struct unkStruct_203B310 *preload;
 

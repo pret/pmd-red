@@ -30,7 +30,7 @@ struct unkStruct_203B2C8
     /* 0x13 */ u8 unk13;
     /* 0x14 */ u8 teamName[4]; // Figure out size of this buffer
     u8 fill18[0x114 - 0x18];
-    struct unkStruct_802F204 unk114;
+    unkStruct_802F204 unk114;
     u32 fill13C;
 };
 
@@ -50,7 +50,7 @@ extern void sub_802B5B8(void);
 extern void sub_802B5FC(void);
 extern void sub_802B624(void);
 
-extern void sub_802F204(struct unkStruct_802F204 *, u32);
+extern void sub_802F204(unkStruct_802F204 *, u32);
 extern void sub_803C37C(DungeonLocation *, u32, u8 *);
 extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
 
@@ -148,7 +148,7 @@ void nullsub_132(void)
 
 void sub_802B3E0(void)
 {
-  struct unkStruct_203B480 *mail;
+  unkStruct_203B480 *mail;
   char *monName;
   char teamNameBuffer[40];
 
@@ -230,7 +230,7 @@ void sub_802B57C(void)
 void sub_802B5B8(void)
 {
   u32 uVar2;
-  struct unkStruct_203B480 *mail;
+  unkStruct_203B480 *mail;
   s32 temp;
 
   if (sub_80144A4(&temp) == 0) {

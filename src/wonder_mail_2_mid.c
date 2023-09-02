@@ -18,11 +18,11 @@ extern void sub_802C328(void);
 extern void DrawPelipperBoardJobMenu(void);
 extern u8 HasNoPelipperBoardJobs(void);
 
-extern struct WonderMail *GetPelipperBoardSlotInfo(u32);
-extern void sub_803B35C(struct WonderMail *, u32 *);
+extern WonderMail *GetPelipperBoardSlotInfo(u32);
+extern void sub_803B35C(WonderMail *, u32 *);
 extern u8 gBulletinBoardText[];
-extern bool8 IsMailinJobSlot(struct WonderMail *);
-extern void CreateRescueTitle(struct unkStruct_802C39C *);
+extern bool8 IsMailinJobSlot(WonderMail *);
+extern void CreateRescueTitle(unkStruct_802C39C *);
 
 struct unkStruct_203B2D8
 {
@@ -54,7 +54,7 @@ extern UnkTextStruct2 gUnknown_80DFC9C;
 
 extern u16 gUnknown_203B2E4;
 
-extern struct WonderMail *GetMailboxSlotInfo(u8);
+extern WonderMail *GetMailboxSlotInfo(u8);
 extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern u8 gMailboxText[];
 extern u8 gAvailablePokemonNames[];
@@ -63,10 +63,10 @@ extern void sub_803B6B0(u32, u32, u32, u32);
 
 void CreateMailMenu(void)
 {
-    struct WonderMail *mail;
+    WonderMail *mail;
     s32 y;
     s32 index;
-    struct unkStruct_802C39C local;
+    unkStruct_802C39C local;
     u8 buffer [128];
 
     sub_8008C54(gUnknown_203B2D8->unk38);
@@ -279,11 +279,11 @@ void sub_802C328(void)
 void DrawPelipperBoardJobMenu(void)
 {
     u32 slotIndex;
-    struct WonderMail *mail;
+    WonderMail *mail;
     s32 iVar4;
     s32 x;
     s32 index;
-    struct unkStruct_802C39C local;
+    unkStruct_802C39C local;
 
     sub_8008C54(gUnknown_203B2E0->unk3C);
     sub_80073B8(gUnknown_203B2E0->unk3C);

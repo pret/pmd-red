@@ -13,9 +13,9 @@ struct subStruct_203B490
 struct unkStruct_203B490
 {
     // size: 0x330?
-    /* 0x0 */ struct WonderMail mailboxSlots[NUM_MAILBOX_SLOTS];
-    /* 0x50 */ struct WonderMail pelipperBoardJobs[MAX_ACCEPTED_JOBS];
-    /* 0xF0 */ struct WonderMail jobSlots[MAX_ACCEPTED_JOBS];
+    /* 0x0 */ WonderMail mailboxSlots[NUM_MAILBOX_SLOTS];
+    /* 0x50 */ WonderMail pelipperBoardJobs[MAX_ACCEPTED_JOBS];
+    /* 0xF0 */ WonderMail jobSlots[MAX_ACCEPTED_JOBS];
     u8 unk190[0x28];
     u8 unk1B8[0x78];
     struct subStruct_203B490 unk230[16];

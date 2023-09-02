@@ -169,7 +169,7 @@ extern UnkTextStruct2 gUnknown_80E2334;
 
 extern MenuItem gUnknown_80E25B4;
 
-EWRAM_DATA_2 struct WonderMailStruct_203B33C *gUnknown_203B33C = {0};
+EWRAM_DATA_2 WonderMailStruct_203B33C *gUnknown_203B33C = {0};
 
 extern u8 sub_8039880(void);
 
@@ -273,7 +273,7 @@ extern u32 sub_80244E4(void);
 extern void sub_802453C(void);
 extern void sub_8024458(s16, u32);
 extern void sub_8035D1C(void);
-extern u32 sub_8039068(u32, u8 *passwordBuffer, struct unkStruct_203B480 *r0);
+extern u32 sub_8039068(u32, u8 *passwordBuffer, unkStruct_203B480 *r0);
 
 extern void sub_803084C(void);
 extern void sub_8031E10(void);
@@ -285,7 +285,7 @@ extern u8 sub_800D588(void);
 extern void sub_80151C0(u32, u8 *);
 extern u32 sub_801D008(void);
 extern u32 sub_8023CE8(void);
-extern void sub_802F204(struct unkStruct_802F204 *, u32);
+extern void sub_802F204(unkStruct_802F204 *, u32);
 extern u32 sub_80306A8(u32 wonderMailType, u32, UnkTextStruct2_sub *, u32);
 extern u32 sub_8030894(void);
 extern void sub_803092C(void);
@@ -296,7 +296,7 @@ extern s32 sub_80381F4(u32, void *, void *);
 
 extern s32 CountMailType(u8 mailType);
 extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
-struct unkStruct_203B480 * GetMailatIndex(u8 index);
+unkStruct_203B480 * GetMailatIndex(u8 index);
 extern s32 GetMailIndex(u8 mailType, u32 param_2);
 extern char * GetMonSpecies(s16 index);
 extern PokemonStruct1 *GetPlayerPokemonStruct(void);
@@ -311,8 +311,8 @@ u32 CreateFriendRescueMenu(void)
 
   ResetUnusedInputStruct();
   sub_800641C(NULL, TRUE, TRUE);
-  gUnknown_203B33C = MemoryAlloc(sizeof(struct WonderMailStruct_203B33C), 8);
-  MemoryFill8((u8 *) gUnknown_203B33C, 0, sizeof(struct WonderMailStruct_203B33C));
+  gUnknown_203B33C = MemoryAlloc(sizeof(WonderMailStruct_203B33C), 8);
+  MemoryFill8((u8 *) gUnknown_203B33C, 0, sizeof(WonderMailStruct_203B33C));
   gUnknown_203B33C->unk530 = 0;
   gUnknown_203B33C->unk218 = -1;
   gUnknown_203B33C->speciesNum = -1;
@@ -699,7 +699,7 @@ void nullsub_40(void)
 void sub_8032828(void)
 {
 
-    struct unkStruct_203B480 *mail;
+    unkStruct_203B480 *mail;
     u32 temp;
     u8 buffer [80];
     PokemonStruct1 *pokeStruct1;
@@ -947,13 +947,13 @@ void sub_8032828(void)
                 #endif //NONMATCHING
                 switch (gUnknown_203B33C->unk40) {
                     case 0x3:
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk48, 0, sizeof(struct unkStruct_203B480));
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk78, 0, sizeof(struct unkStruct_203B480));
+                        MemoryFill8((u8*)&gUnknown_203B33C->unk48, 0, sizeof(unkStruct_203B480));
+                        MemoryFill8((u8*)&gUnknown_203B33C->unk78, 0, sizeof(unkStruct_203B480));
                         gUnknown_203B33C->status = sub_8037D64(gUnknown_203B33C->unk40, &gUnknown_203B33C->unk48, &gUnknown_203B33C->unk78);
                         break;
                     case 0x2:
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk48, 0, sizeof(struct unkStruct_203B480));
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk78, 0, sizeof(struct unkStruct_203B480));
+                        MemoryFill8((u8*)&gUnknown_203B33C->unk48, 0, sizeof(unkStruct_203B480));
+                        MemoryFill8((u8*)&gUnknown_203B33C->unk78, 0, sizeof(unkStruct_203B480));
                         #ifdef NONMATCHING
                         // Regswaps
                         gUnknown_203B33C->unk48 = *GetMailatIndex(gUnknown_203B33C->unk218);
@@ -966,13 +966,13 @@ void sub_8032828(void)
                         gUnknown_203B33C->status = sub_8037D64(gUnknown_203B33C->unk40, &gUnknown_203B33C->unk48, &gUnknown_203B33C->unk78);
                         break;
                     case 0x5:
-                        MemoryFill8((u8*)&gUnknown_203B33C->unkA8, 0, sizeof(struct WonderMailStruct_203B2C0_sub));
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk130, 0, sizeof(struct WonderMailStruct_203B2C0_sub));
+                        MemoryFill8((u8*)&gUnknown_203B33C->unkA8, 0, sizeof(WonderMailStruct_203B2C0_sub));
+                        MemoryFill8((u8*)&gUnknown_203B33C->unk130, 0, sizeof(WonderMailStruct_203B2C0_sub));
                         gUnknown_203B33C->status = sub_8037D64(gUnknown_203B33C->unk40, &gUnknown_203B33C->unkA8, &gUnknown_203B33C->unk130);
                         break;
                     case 0x4:
-                        MemoryFill8((u8*)&gUnknown_203B33C->unkA8, 0, sizeof(struct WonderMailStruct_203B2C0_sub));
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk130, 0, sizeof(struct WonderMailStruct_203B2C0_sub));
+                        MemoryFill8((u8*)&gUnknown_203B33C->unkA8, 0, sizeof(WonderMailStruct_203B2C0_sub));
+                        MemoryFill8((u8*)&gUnknown_203B33C->unk130, 0, sizeof(WonderMailStruct_203B2C0_sub));
                         gUnknown_203B33C->unkA8.pokemon.speciesNum = 0;
                         gUnknown_203B33C->unk130.pokemon.speciesNum = 0;
                         gUnknown_203B33C->unkA8.mail = *GetMailatIndex(gUnknown_203B33C->unk218);
@@ -1643,11 +1643,11 @@ void sub_8033DBC(void)
 {
     u32 return_var;
     u32 mailMode;
-    struct unkStruct_203B480 mail;
-    struct unkStruct_203B480 *mail2;
+    unkStruct_203B480 mail;
+    unkStruct_203B480 *mail2;
 
     return_var = sub_80154F0();
-    MemoryFill8((u8 *)&mail, 0, sizeof(struct unkStruct_203B480));
+    MemoryFill8((u8 *)&mail, 0, sizeof(unkStruct_203B480));
     switch(return_var)
     {
         case 3:
@@ -1697,7 +1697,7 @@ void sub_8033DBC(void)
                         sub_80951FC(&mail);
                         mail2 = GetMailatIndex(GetMailIndex(1, mail.unk10.unk10));
                         mail2->mailType = 7;
-                        MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
+                        MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(unkStruct_203B484));
                         SetFriendRescueMenuState(0x40);
                         break;
                     case 24:
@@ -2539,11 +2539,11 @@ void sub_8034D54(void)
 void sub_8034D74(void)
 {
     u32 return_var;
-    struct unkStruct_203B480 mail;
-    struct unkStruct_203B480 *mail2;
+    unkStruct_203B480 mail;
+    unkStruct_203B480 *mail2;
 
     return_var = sub_80154F0();
-    MemoryFill8((u8 *)&mail, 0, sizeof(struct unkStruct_203B480));
+    MemoryFill8((u8 *)&mail, 0, sizeof(unkStruct_203B480));
     switch(return_var)
     {
         case 3:
@@ -2654,7 +2654,7 @@ void sub_8034F58(void)
 void sub_8034F88(void)
 {
     s32 menuAction;
-    struct unkStruct_203B480 *mail;
+    unkStruct_203B480 *mail;
 
     if(sub_80144A4(&menuAction) == 0)
     {
@@ -2850,7 +2850,7 @@ void sub_80351E0(void)
 void sub_8035210(void)
 {
     s32 menuAction;
-    struct unkStruct_203B480 *mail;
+    unkStruct_203B480 *mail;
 
     if(sub_80144A4(&menuAction) == 0)
     {

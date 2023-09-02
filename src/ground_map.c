@@ -1,29 +1,23 @@
 #include "global.h"
-#include "memory.h"
 #include "debug.h"
+#include "ground_map.h"
+#include "ground_map_2.h"
 #include "ground_script.h"
+#include "memory.h"
 
 IWRAM_DATA GroundScript_ExecutePP_1 *gUnknown_3001B6C = {0};
-IWRAM_DATA u8 *gUnknown_3001B70 = {0};
+IWRAM_DATA unkStruct_3001B70 *gUnknown_3001B70 = {0};
 
-extern DebugLocation gUnknown_8117538[];
+extern const u8 gUnknown_811736C[];
+extern const DebugLocation gUnknown_8117538[];
 
-extern u8 gUnknown_811736C[];
-
-extern void sub_809D600(void *, u8 *, u32, u32, u32);
-extern void GroundMap_Reset(void);
-extern void sub_80A5E8C(u32);
+extern void sub_809D600(void *, const u8 *, u32, u32, u32);
 extern void sub_809D648(void *);
-extern void sub_80A5EBC(void);
-
-extern void sub_80A2D00(void *);
+extern void sub_80A2D00(unkStruct_3001B70 *);
 extern void sub_80015C0(u32, u32);
-extern void sub_80A5EDC(u32);
-extern void sub_809D754(GroundScript_ExecutePP_1 *, DebugLocation *);
-extern void sub_80A2D68(void *);
-extern void nullsub_121(void);
-extern void sub_80A2D88(void *);
-extern void nullsub_122(void);
+extern void sub_809D754(GroundScript_ExecutePP_1 *, const DebugLocation *);
+extern void sub_80A2D68(unkStruct_3001B70 *);
+extern void sub_80A2D88(unkStruct_3001B70 *);
 
 void sub_80A4A7C(void)
 {

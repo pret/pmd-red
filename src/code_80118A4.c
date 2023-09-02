@@ -21,7 +21,7 @@ extern struct GameOptions *gGameOptionsRef;
 struct UnkBgStruct
 {
     u8 padding[0x4c4b];
-    /* 0x4C4C */ struct unkStruct_202EE8C unk4C4C[16];
+    /* 0x4C4C */ unkStruct_202EE8C unk4C4C[16];
     u32 unk4DCC;
     u32 unk4DD0;
     /* 0x4DD4 */ s16 xoffset;
