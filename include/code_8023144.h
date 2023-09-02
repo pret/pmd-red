@@ -9,7 +9,7 @@
 #include "text.h"
 
 // size: 0x1A8
-struct unkStruct_203B294
+typedef struct unkStruct_203B294
 {
     /* 0x0 */ s32 state;
     /* 0x4 */ s32 fallbackState;
@@ -28,10 +28,10 @@ struct unkStruct_203B294
     MenuItem unkF8[0x8];
     u16 unk138[0x8];
     UnkTextStruct2 unk148[4];
-};
+} unkStruct_203B294;
 
 // size: 0x3FC
-struct unkStruct_3001B5C
+typedef struct unkStruct_3001B5C
 {
     u8 unk0;
     u32 unk4;
@@ -46,6 +46,6 @@ struct unkStruct_3001B5C
     UnkTextStruct2 *unk394;
     UnkTextStruct2 unk398[4];
     u8 unk3F8[4];
-};
+} unkStruct_3001B5C;
 
 #endif // GUARD_CODE_8023144_H

@@ -53,7 +53,7 @@ struct unkStruct_203B28C
 };
 EWRAM_DATA_2 struct unkStruct_203B28C *gUnknown_203B28C = {0};
 
-EWRAM_DATA_2 struct WigglytuffShop *gWigglytuffShop = {0};
+EWRAM_DATA_2 WigglytuffShop *gWigglytuffShop = {0};
 extern u8 *gFriendAreas;
 
 extern u8 gUnknown_202E628[];
@@ -589,7 +589,7 @@ bool8 CreateWigglytuffShop(bool32 isAsleep)
 
     ResetUnusedInputStruct();
     sub_800641C(NULL, TRUE, TRUE);
-    gWigglytuffShop = MemoryAlloc(sizeof(struct WigglytuffShop), 8);
+    gWigglytuffShop = MemoryAlloc(sizeof(WigglytuffShop), 8);
     gWigglytuffShop->menuAction1 = 0;
     gWigglytuffShop->menuAction2 = 0;
     gWigglytuffShop->isAsleep = isAsleep;

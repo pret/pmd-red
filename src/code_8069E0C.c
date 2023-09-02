@@ -15,7 +15,7 @@
 #include "game_options.h"
 #include "text_util.h"
 
-extern struct GameOptions *gGameOptionsRef;
+extern GameOptions *gGameOptionsRef;
 
 struct unkStruct_80F520C
 {

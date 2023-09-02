@@ -129,7 +129,7 @@ void ResetSprites(bool8 a0)
     gUnknown_20256A0.unk804 = 0;
 }
 
-void sub_8004E8C(struct unkStruct_2039DB0 *a0)
+void sub_8004E8C(unkStruct_2039DB0 *a0)
 {
     a0->unk0 = 0xFFFF;
     a0->unk2 = -1;
@@ -510,7 +510,7 @@ void sub_8004EA8(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, u16 *spriteMasks)
 
 // a2 and a3 are always called with NULL lol
 #ifdef NONMATCHING // https://decomp.me/scratch/YCfKG
-void AddSprite(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, struct unkStruct_2039DB0 *a3)
+void AddSprite(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, unkStruct_2039DB0 *a3)
 {
     s32 yPos;
     SpriteOAM *spr;
@@ -560,7 +560,7 @@ void AddSprite(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, struct unkStruct_2039DB0
 }
 #else
 NAKED
-void AddSprite(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, struct unkStruct_2039DB0 *a3)
+void AddSprite(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, unkStruct_2039DB0 *a3)
 {
     asm_unified(
     "push {r4-r7,lr}\n"

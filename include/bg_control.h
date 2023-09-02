@@ -10,18 +10,18 @@ enum
     NUM_BGS
 };
 
-struct BGControlStruct
+typedef struct BGControlStruct
 {
     u16 padding;
     u16 unk2;
     s16 hofs;
     s16 vofs;
-};
+} BGControlStruct;
 
-extern struct BGControlStruct gBG0Control;
-extern struct BGControlStruct gBG1Control;
-extern struct BGControlStruct gBG2Control;
-extern struct BGControlStruct gBG3Control;
+extern BGControlStruct gBG0Control;
+extern BGControlStruct gBG1Control;
+extern BGControlStruct gBG2Control;
+extern BGControlStruct gBG3Control;
 extern u16 gBldAlpha;
 extern u16 gBldCnt;
 extern bool8 gUnknown_202D7FE;

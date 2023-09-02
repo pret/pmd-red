@@ -8,14 +8,14 @@
 #include "memory.h"
 #include "sprite.h"
 
-extern struct unkStruct_2039DB0 gUnknown_2039DB0;
-extern struct unkStruct_2039DB0 gUnknown_2039DC0;
+extern unkStruct_2039DB0 gUnknown_2039DB0;
+extern unkStruct_2039DB0 gUnknown_2039DC0;
 extern u16 gUnknown_2039DCC;
 extern u16 gUnknown_2039DCE;
 extern u8 gUnknown_2039DD0;
 extern u32 gUnknown_2039DD4;
 extern OpenedFile *gUnknown_203B4B4;
-extern struct unkStruct_3001B7C *gUnknown_3001B7C;
+extern unkStruct_3001B7C *gUnknown_3001B7C;
 
 // dungeon_sbin.s
 extern const struct FileArchive gDungeonFileArchive;
@@ -41,11 +41,11 @@ extern void sub_80A6460(void);
 void sub_80A62F0(void)
 {
     s32 r0;
-    struct unkStruct_3001B7C_sub0 *sub0;
-    struct unkStruct_3001B7C_sub108 *sub108;
+    unkStruct_3001B7C_sub0 *sub0;
+    unkStruct_3001B7C_sub108 *sub108;
     s32 r6;
 
-    gUnknown_3001B7C = MemoryAlloc(sizeof(struct unkStruct_3001B7C), 6);
+    gUnknown_3001B7C = MemoryAlloc(sizeof(unkStruct_3001B7C), 6);
     gUnknown_203B4B4 = OpenFileAndGetFileDataPtr(gUnknown_81177CC, &gDungeonFileArchive);
 
     sub_800DAC0(1);
@@ -74,8 +74,8 @@ void sub_80A62F0(void)
 void GroundSprite_Reset(s16 a0)
 {
     s32 uVar2;
-    struct unkStruct_2039DB0 *bee;
-    struct unkStruct_2039DB0 *see;
+    unkStruct_2039DB0 *bee;
+    unkStruct_2039DB0 *see;
 
     uVar2 = a0;
 
@@ -137,7 +137,7 @@ void sub_80A64A4(void)
     u16 r4;
     u32 r5;
     OpenedFile *file;
-    struct unkStruct_3001B7C_sub108 *r7;
+    unkStruct_3001B7C_sub108 *r7;
     s32 i;
     s16 r9;
     u16 sl;

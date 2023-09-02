@@ -1,7 +1,7 @@
 #ifndef GUARD_GAME_OPTIONS_H
 #define GUARD_GAME_OPTIONS_H
 
-struct GameOptions
+typedef struct GameOptions
 {
     // TODO: find where Controls/Touch Screen are in this structure in PMD Blue
 
@@ -16,9 +16,9 @@ struct GameOptions
     /* 0xA */ u8 unkA; // maybe Touch Screen?
     /* 0xB */ u8 playerGender;
     /* 0xC */ u8 unkC;
-};
+} GameOptions;
 
-enum DungeonSpeed 
+enum DungeonSpeed
 {
     DUNGEON_SPEED_SLOW,
     DUNGEON_SPEED_FAST,
@@ -29,7 +29,6 @@ enum FarOffPals
     FAROFFPALS_SELF,
     FAROFFPALS_LOCK,
 };
-
 
 // GBA has 3 options while DS has 7
 enum MapOption
@@ -61,9 +60,9 @@ enum windowColor
 };
 
 void LoadGameOptions(void);
-struct GameOptions * GetGameOptions(void);
+GameOptions * GetGameOptions(void);
 void InitializeGameOptions(bool8 initializeGender);
-bool8 GameOptionsNotChange(struct GameOptions *r0);
+bool8 GameOptionsNotChange(GameOptions *r0);
 
 
 #endif

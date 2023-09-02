@@ -6,8 +6,8 @@
 #include "reg_control.h"
 #include "sprite.h"
 
-extern struct unkStruct_202D648 gUnknown_202D608[8];
-extern struct unkStruct_202D648 gUnknown_202D648[8];
+extern unkStruct_202D648 gUnknown_202D608[8];
+extern unkStruct_202D648 gUnknown_202D648[8];
 
 EWRAM_DATA bool8 gUnknown_203B099;
 EWRAM_DATA bool8 gUnknown_203B09A;

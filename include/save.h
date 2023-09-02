@@ -58,7 +58,7 @@ struct UnkStruct_203B184 {
     /* 0x20 */ struct unkStruct_203B494 *unk20;
     /* 0x24 */ struct ExclusivePokemonData *ExclusivePokemon;
     /* 0x28 */ bool8 *BoughtFriendAreas;
-    /* 0x2C */ struct GameOptions *gameOptions;
+    /* 0x2C */ GameOptions *gameOptions;
     /* 0x30 */ struct PlayTimeStruct *playTime;
     u32 unk34;
     u32 unk38;

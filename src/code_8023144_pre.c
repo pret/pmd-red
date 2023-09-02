@@ -14,7 +14,7 @@
 #include "code_8023144.h"
 #include "text2.h"
 
-struct unkStruct_203B294 *gUnknown_203B294;
+unkStruct_203B294 *gUnknown_203B294;
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_80DC5EC[];
 extern u8 HasGummiItem(void);
@@ -37,7 +37,7 @@ bool8 sub_80227B8(PokemonStruct1 *pokeStruct)
 {
     ResetUnusedInputStruct();
     sub_800641C(NULL, TRUE, TRUE);
-    gUnknown_203B294 = MemoryAlloc(sizeof(struct unkStruct_203B294), 8);
+    gUnknown_203B294 = MemoryAlloc(sizeof(unkStruct_203B294), 8);
     gUnknown_203B294->menuAction = 0;
     gUnknown_203B294->pokeStruct = pokeStruct;
     if(pokeStruct != NULL)

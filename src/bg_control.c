@@ -2,10 +2,10 @@
 #include "bg_control.h"
 #include "input.h"
 
-EWRAM_DATA struct BGControlStruct gBG0Control = {0};
-EWRAM_DATA struct BGControlStruct gBG1Control = {0};
-EWRAM_DATA struct BGControlStruct gBG2Control = {0};
-EWRAM_DATA struct BGControlStruct gBG3Control = {0};
+EWRAM_DATA BGControlStruct gBG0Control = {0};
+EWRAM_DATA BGControlStruct gBG1Control = {0};
+EWRAM_DATA BGControlStruct gBG2Control = {0};
+EWRAM_DATA BGControlStruct gBG3Control = {0};
 static EWRAM_DATA u8 sBldAlpha_CoeffA = {0};
 static EWRAM_DATA u8 sBldAlpha_CoeffB = {0};
 EWRAM_DATA u16 gBldAlpha;

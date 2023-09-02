@@ -15,7 +15,7 @@
 #include "sprite.h"
 #include "event_flag.h"
 
-extern struct GameOptions *gGameOptionsRef;
+extern GameOptions *gGameOptionsRef;
 
 // size: 0x4DD8
 struct UnkBgStruct

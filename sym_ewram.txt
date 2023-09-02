@@ -892,10 +892,10 @@ gUnknown_2039DA4: /* 2039DA4 */
 gUnknown_2039DA8: /* 2039DA8 */
 	.space 0x8
 
-gUnknown_2039DB0: /* 2039DB0 [struct unkStruct_2039DB0] */
+gUnknown_2039DB0: /* 2039DB0 [unkStruct_2039DB0] */
 	.space 0x10
 
-gUnknown_2039DC0: /* 2039DC0 [struct unkStruct_2039DB0] */
+gUnknown_2039DC0: /* 2039DC0 [unkStruct_2039DB0] */
 	.space 0xC
 
 gUnknown_2039DCC: /* 2039DCC */

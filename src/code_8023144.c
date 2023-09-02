@@ -19,8 +19,8 @@
 #include "code_80118A4.h"
 #include "exclusive_pokemon.h"
 
-IWRAM_DATA struct unkStruct_3001B5C *gUnknown_3001B5C;
-struct unkStruct_203B294 *gUnknown_203B294;
+IWRAM_DATA unkStruct_3001B5C *gUnknown_3001B5C;
+unkStruct_203B294 *gUnknown_203B294;
 
 extern u32 gUnknown_203B298;
 extern u16 gUnknown_203B29C;
@@ -268,7 +268,7 @@ bool8 sub_8023144(s32 param_1, s32 index, UnkTextStruct2_sub *sub, u32 param_4)
     return 0;
 
   if (gUnknown_3001B5C == NULL)
-    gUnknown_3001B5C = MemoryAlloc(sizeof(struct unkStruct_3001B5C), 8);
+    gUnknown_3001B5C = MemoryAlloc(sizeof(unkStruct_3001B5C), 8);
 
   gUnknown_3001B5C->unk0 = param_1_u8;
   gUnknown_3001B5C->unk4 = gUnknown_203B298;

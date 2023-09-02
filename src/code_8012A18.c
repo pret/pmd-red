@@ -13,7 +13,7 @@ extern void xxx_call_update_bg_vram();
 extern void sub_8009908();
 extern void xxx_call_update_bg_sound_input();
 
-extern struct GameOptions *gGameOptionsRef;
+extern GameOptions *gGameOptionsRef;
 
 void sub_8012A18()
 {

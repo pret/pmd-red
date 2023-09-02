@@ -14,7 +14,7 @@ struct unkStruct_203B25C
     // size: 0x11C
     u32 state;
     u32 chosenHintIndex;
-    struct GameOptions newOptions;
+    GameOptions newOptions;
     u32 menuAction;
     MenuStruct menu;
     MenuItem menuItems[8];
@@ -24,7 +24,7 @@ struct unkStruct_203B25C
 
 struct unkStruct_203B260  
 { 
-    struct GameOptions *optionsMenu;
+    GameOptions *optionsMenu;
     MenuInputStructSub unk4;
     MenuInputStruct input;
     u32 unk44;
@@ -32,7 +32,7 @@ struct unkStruct_203B260
     UnkTextStruct2 unk4C[4];
 };
 struct unkStruct_203B260  *gUnknown_203B260;
-extern struct GameOptions *gGameOptionsRef;
+extern GameOptions *gGameOptionsRef;
 extern struct unkStruct_203B25C *gUnknown_203B25C;
 
 extern const UnkTextStruct2 gUnknown_80DBFB0;
@@ -65,7 +65,7 @@ extern void sub_801E0FC();
 extern void HandleChangeSettingsMenu();
 extern void sub_801DD84();
 extern void sub_801DED0();
-extern bool8 sub_801E198(struct GameOptions *);
+extern bool8 sub_801E198(GameOptions *);
 extern void CreateHintDisplayScreen(u32);
 extern void sub_801E3F0(u32);
 extern void CreateHintSelectionScreen(u32);
@@ -367,7 +367,7 @@ void HandleChangeSettingsMenu(void)
   }
 }
 
-bool8 sub_801E198(struct GameOptions *optionsMenu)
+bool8 sub_801E198(GameOptions *optionsMenu)
 {
   gUnknown_203B260 = MemoryAlloc(sizeof(struct unkStruct_203B260), 8);
   gUnknown_203B260->optionsMenu = optionsMenu;

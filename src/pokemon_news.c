@@ -47,7 +47,7 @@ struct unkStruct_203B2D8
     u8 unkA0[4];
 };
 extern struct unkStruct_203B2D8 *gUnknown_203B2D8;
-extern struct GameOptions *gGameOptionsRef;
+extern GameOptions *gGameOptionsRef;
 
 const UnkTextStruct2 gUnknown_80DFBD0 =
 {

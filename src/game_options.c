@@ -16,8 +16,8 @@ struct unkStruct_8094CB0
 
 extern struct WindowBG gWindowBGColors;
 
-EWRAM_DATA_2 struct GameOptions *gGameOptionsRef = {0};
-EWRAM_DATA struct GameOptions gGameOptions = {0};
+EWRAM_DATA_2 GameOptions *gGameOptionsRef = {0};
+EWRAM_DATA GameOptions gGameOptions = {0};
 extern void SetWindowBGColor(void);
 extern void sub_80099F0(u32);
 
@@ -26,7 +26,7 @@ void LoadGameOptions(void)
     gGameOptionsRef = &gGameOptions;
 }
 
-struct GameOptions * GetGameOptions(void)
+GameOptions * GetGameOptions(void)
 {
     return &gGameOptions;
 }
@@ -49,7 +49,7 @@ void InitializeGameOptions(bool8 initializeGender)
     SetWindowBGColor();
 }
 
-bool8 GameOptionsNotChange(struct GameOptions *r0)
+bool8 GameOptionsNotChange(GameOptions *r0)
 {
     // NOTE: had to nest to match
     if(gGameOptionsRef->windowColor == r0->windowColor)

@@ -53,7 +53,7 @@ extern void RedrawPartnerSelectionMenu(void);
 
 extern u32 sub_80095E4(s16, u32);
 
-extern struct GameOptions *gGameOptionsRef;
+extern GameOptions *gGameOptionsRef;
 
 extern const char gStarterReveal[];
 

@@ -74,13 +74,13 @@ typedef struct Dungeon_ax
     u32 unk10;
 } Dungeon_ax;
 
-void AddSprite(SpriteOAM *, s32, UnkSpriteMem *, struct unkStruct_2039DB0 *);
+void AddSprite(SpriteOAM *, s32, UnkSpriteMem *, unkStruct_2039DB0 *);
 void BlinkSavingIcon(void);
 void CopySpritesToOam(void);
 void InitSprites(void);
 void ResetSprites(bool8);
 void SetSavingIconCoords(Position *);
-void sub_8004E8C(struct unkStruct_2039DB0 *);
+void sub_8004E8C(unkStruct_2039DB0 *);
 void sub_8005180(void);
 void sub_8005304(void);
 void sub_800533C(ax_pose **, UnkSpriteMem **, axdata1 *, u16 *, bool8);
