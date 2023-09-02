@@ -36,4 +36,10 @@ struct unkStruct_203B2B0
     UnkTextStruct2 unk114[4];
 };
 
+void CleanLuminousCave(void);
+bool8 HasEvolutionCompleted(void);
+
+u32 sub_802465C(void);
+u32 sub_80246F0(void);
+
 #endif // GUARD_LUMINOUS_CAVE_H

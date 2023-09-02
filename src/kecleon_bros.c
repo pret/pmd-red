@@ -9,7 +9,6 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
-
 #include "text1.h"
 #include "text2.h"
 

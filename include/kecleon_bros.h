@@ -96,7 +96,8 @@ void sub_801A9E0(void);
 void sub_801AD34(u32);
 bool8 sub_801ADA0(s32);
 void sub_801AE84(void);
-s32 sub_801AED0(s32);
 s32 sub_801AEA8(void);
+s32 sub_801AED0(s32);
+void sub_801AEE4(s32, s32);
 
 #endif // GUARD_KECLEON_BROS_H
