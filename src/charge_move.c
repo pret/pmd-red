@@ -41,7 +41,7 @@ const u32 gMultiTurnChargingStatuses[10] = {
 
 ALIGNED(4) const char chargingStatusFill[] = "pksdir0";
 
-u32 sub_8057070(struct Move *move)
+u32 sub_8057070(Move *move)
 {
     u32 numberOfChainedHits;
     numberOfChainedHits = GetMoveNumberOfChainedHits(move);
@@ -51,7 +51,7 @@ u32 sub_8057070(struct Move *move)
         return numberOfChainedHits;
 }
 
-bool8 MoveCausesPaused(struct Move *move)
+bool8 MoveCausesPaused(Move *move)
 {
     if(move->id == MOVE_FRENZY_PLANT) return TRUE;
     if(move->id == MOVE_HYDRO_CANNON) return TRUE;
@@ -61,7 +61,7 @@ bool8 MoveCausesPaused(struct Move *move)
     return FALSE;
 }
 
-bool8 MoveMatchesChargingStatus(Entity *pokemon, struct Move *move)
+bool8 MoveMatchesChargingStatus(Entity *pokemon, Move *move)
 {
     if (!EntityExists(pokemon))
     {

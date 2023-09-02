@@ -16,7 +16,7 @@ s32 sub_8091E94(s32 a1, s32 a2, s32 a3); // items.c
 bool8 sub_8090820(u16 moveID)
 {
     PokemonStruct1 *pokeStruct;
-    struct Move *move;
+    Move *move;
     s32 moveIndex;
     s32 index;
     s32 one;

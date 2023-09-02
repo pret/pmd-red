@@ -10,8 +10,8 @@
 #include "text2.h"
 
 static EWRAM_DATA OpenedFile *sWazaParametersFile = {0};
-static EWRAM_DATA struct MoveDataEntry *sMovesData = {0};
-static EWRAM_DATA struct MoveLearnset *sMoveLearnsets = {0}; // 420 entries, aka (MONSTER_DEOXYS_SPEED + 1), aka (MONSTER_MUNCHLAX)
+static EWRAM_DATA MoveDataEntry *sMovesData = {0};
+static EWRAM_DATA MoveLearnset *sMoveLearnsets = {0}; // 420 entries, aka (MONSTER_DEOXYS_SPEED + 1), aka (MONSTER_MUNCHLAX)
 
 // ???
 extern u32 gUnknown_202DE30;
@@ -42,28 +42,28 @@ extern const struct FileArchive gSystemFileArchive;
 // code_8097DD0.s
 extern u32 sub_8097DF0(u8 *, struct subStruct_203B240 **);
 
-static void CopyAndResetMove(struct Move *, struct Move *);
-static bool8 sub_80933D8(s32, struct Move *);
-static s32 unk_FindMarkedMoveInLinkedSequences44(struct Move [MAX_MON_MOVES][MAX_MON_MOVES]);
-static s32 unk_FindMarkedMoveInLinkedSequences88(struct Move [8][8]);
-static s32 unk_FindMarkedMoveInLinkedSequences88_v2(struct Move [8][8]);
-static void unk_GetLinkedSequences4(struct Move *, struct Move [MAX_MON_MOVES][MAX_MON_MOVES]);
-static void unk_GetLinkedSequences8(struct Move *, struct Move [8][8]);
-static void unk_GetLinkedSequences8_v2(struct Move *, struct Move [8][8]);
-static void unk_LinkedSequencesToMoves4(struct Move *, struct Move [MAX_MON_MOVES][MAX_MON_MOVES]);
-static void unk_LinkedSequencesToMoves8(struct Move *, struct Move [8][8]);
-static void unk_LinkedSequencesToMoves8_v2(struct Move *, struct Move [8][8]);
-static void unk_MovePrintData(struct Move *, s32);
+static void CopyAndResetMove(Move *, Move *);
+static bool8 sub_80933D8(s32, Move *);
+static s32 unk_FindMarkedMoveInLinkedSequences44(Move [MAX_MON_MOVES][MAX_MON_MOVES]);
+static s32 unk_FindMarkedMoveInLinkedSequences88(Move [8][8]);
+static s32 unk_FindMarkedMoveInLinkedSequences88_v2(Move [8][8]);
+static void unk_GetLinkedSequences4(Move *, Move [MAX_MON_MOVES][MAX_MON_MOVES]);
+static void unk_GetLinkedSequences8(Move *, Move [8][8]);
+static void unk_GetLinkedSequences8_v2(Move *, Move [8][8]);
+static void unk_LinkedSequencesToMoves4(Move *, Move [MAX_MON_MOVES][MAX_MON_MOVES]);
+static void unk_LinkedSequencesToMoves8(Move *, Move [8][8]);
+static void unk_LinkedSequencesToMoves8_v2(Move *, Move [8][8]);
+static void unk_MovePrintData(Move *, s32);
 
 void LoadWazaParameters(void)
 {
     sWazaParametersFile = OpenFileAndGetFileDataPtr(gUnknown_81098D0, &gSystemFileArchive);
 
-    sMovesData = ((struct MoveDataFile *)(sWazaParametersFile->data))->moveData;
-    sMoveLearnsets = ((struct MoveDataFile *)(sWazaParametersFile->data))->moveLearnsets;
+    sMovesData = ((MoveDataFile *)(sWazaParametersFile->data))->moveData;
+    sMoveLearnsets = ((MoveDataFile *)(sWazaParametersFile->data))->moveLearnsets;
 }
 
-u8 sub_809287C(struct Move *move)
+u8 sub_809287C(Move *move)
 {
     if (move->moveFlags & MOVE_FLAG_DISABLED)
         return 50;
@@ -72,14 +72,14 @@ u8 sub_809287C(struct Move *move)
     return 50;
 }
 
-void sub_80928A0(u8 *buffer, struct Move *move, const struct unkStruct_80928C0 *a2)
+void sub_80928A0(u8 *buffer, Move *move, const struct unkStruct_80928C0 *a2)
 {
-    struct Move stack;
+    Move stack;
     CopyAndResetMove(&stack, move);
     sub_80928C0(buffer, &stack, a2);
 }
 
-void sub_80928C0(u8 *buffer, struct Move *move, const struct unkStruct_80928C0 *param_3)
+void sub_80928C0(u8 *buffer, Move *move, const struct unkStruct_80928C0 *param_3)
 {
     u32 uVar2;
     u32 basePP;
@@ -132,7 +132,7 @@ void sub_80928C0(u8 *buffer, struct Move *move, const struct unkStruct_80928C0 *
     }
 }
 
-void InitPokemonMove(struct Move *move, u16 moveID)
+void InitPokemonMove(Move *move, u16 moveID)
 {
     move->moveFlags = MOVE_FLAG_ENABLED_FOR_AI | MOVE_FLAG_EXISTS;
     move->moveFlags2 = 0;
@@ -141,7 +141,7 @@ void InitPokemonMove(struct Move *move, u16 moveID)
     move->ginseng = 0;
 }
 
-void sub_8092AA8(struct Move *move, u16 moveID)
+void sub_8092AA8(Move *move, u16 moveID)
 {
     if (moveID == 0)
         move->moveFlags = 0;
@@ -154,19 +154,19 @@ void sub_8092AA8(struct Move *move, u16 moveID)
     }
 }
 
-void InitZeroedPPPokemonMove(struct Move *move, u16 moveID)
+void InitZeroedPPPokemonMove(Move *move, u16 moveID)
 {
     move->moveFlags = MOVE_FLAG_ENABLED_FOR_AI | MOVE_FLAG_EXISTS;
     move->id = moveID;
     move->PP = 0;
 }
 
-s16 GetMoveTargetAndRange(struct Move *move, bool32 isAI)
+s16 GetMoveTargetAndRange(Move *move, bool32 isAI)
 {
     return sMovesData[move->id].targetingFlags[isAI];
 }
 
-u8 GetMoveType(struct Move *move)
+u8 GetMoveType(Move *move)
 {
     return sMovesData[move->id].type;
 }
@@ -209,59 +209,59 @@ const u8 *GetHMTMMoves(s16 species)
     return sMoveLearnsets[species2].HMTMMoves;
 }
 
-u8 GetMoveAIWeight(struct Move *move)
+u8 GetMoveAIWeight(Move *move)
 {
     return sMovesData[move->id].aiWeight;
 }
 
-u32 GetMoveNumberOfChainedHits(struct Move *move)
+u32 GetMoveNumberOfChainedHits(Move *move)
 {
     return sMovesData[move->id].numberOfChainedHits;
 }
 
-s32 GetMoveBasePower(struct Move *move)
+s32 GetMoveBasePower(Move *move)
 {
     return sMovesData[move->id].basePower;
 }
 
-s32 GetMoveAccuracyOrAIChance(struct Move *move, u32 accuracyType)
+s32 GetMoveAccuracyOrAIChance(Move *move, u32 accuracyType)
 {
     return sMovesData[move->id].accuracy[accuracyType];
 }
 
-u32 GetMoveBasePP(struct Move *move)
+u32 GetMoveBasePP(Move *move)
 {
     return sMovesData[move->id].basePP;
 }
 
-u32 GetMoveMaxUpgradeLevel(struct Move *move)
+u32 GetMoveMaxUpgradeLevel(Move *move)
 {
     return sMovesData[move->id].maxUpgradeLevel;
 }
 
-u32 GetMoveCritChance(struct Move *move)
+u32 GetMoveCritChance(Move *move)
 {
     return sMovesData[move->id].critChance;
 }
 
-bool8 MoveCannotHitFrozen(struct Move *move)
+bool8 MoveCannotHitFrozen(Move *move)
 {
     return sMovesData[move->id].cannotHitFrozen;
 }
 
-bool8 MoveIgnoresTaunted(struct Move *move)
+bool8 MoveIgnoresTaunted(Move *move)
 {
     return sMovesData[move->id].ignoresTaunted;
 }
 
-static u32 GetMoveRangeID(struct Move *move)
+static u32 GetMoveRangeID(Move *move)
 {
     return sMovesData[move->id].rangeID;
 }
 
 void sub_8092C84(u8 *buffer, u16 moveID)
 {
-    struct Move stack;
+    Move stack;
     InitPokemonMove(&stack, moveID);
     sub_80928C0(buffer, &stack, NULL);
 }
@@ -286,7 +286,7 @@ bool8 FailsWhileMuzzled(u16 moveID)
     return sMovesData[moveID].usesMouth;
 }
 
-bool8 IsSoundMove(struct Move *move)
+bool8 IsSoundMove(Move *move)
 {
     if (move->id == MOVE_GROWL) return TRUE;
     if (move->id == MOVE_ROAR) return TRUE;
@@ -303,14 +303,14 @@ bool8 IsSoundMove(struct Move *move)
     return FALSE;
 }
 
-static void sub_8092D54(u8 *buffer, struct Move *move)
+static void sub_8092D54(u8 *buffer, Move *move)
 {
     sprintfStatic(buffer, gUnknown_810992C, gRangeNames[GetMoveRangeID(move)]);
 }
 
 // this function is the same as the two after the next one
 // except this one is for 4, and the other 2 for 8 and 8_v2
-s32 unk_FindMoveEnabledForAIAfter4(struct Move *moves, s32 index)
+s32 unk_FindMoveEnabledForAIAfter4(Move *moves, s32 index)
 {
     s32 i;
 
@@ -332,7 +332,7 @@ s32 unk_FindMoveEnabledForAIAfter4(struct Move *moves, s32 index)
     return 0;
 }
 
-s32 sub_8092DB8(struct Move *moves, s32 index)
+s32 sub_8092DB8(Move *moves, s32 index)
 {
     s32 i, j;
 
@@ -366,7 +366,7 @@ s32 sub_8092DB8(struct Move *moves, s32 index)
     return 0;
 }
 
-s32 unk_FindMoveEnabledForAIAfter8(struct Move *moves, s32 index)
+s32 unk_FindMoveEnabledForAIAfter8(Move *moves, s32 index)
 {
     s32 i;
 
@@ -388,7 +388,7 @@ s32 unk_FindMoveEnabledForAIAfter8(struct Move *moves, s32 index)
     return 0;
 }
 
-s32 unk_FindMoveEnabledForAIAfter8_v2(struct Move *moves, s32 index)
+s32 unk_FindMoveEnabledForAIAfter8_v2(Move *moves, s32 index)
 {
     s32 i;
 
@@ -412,7 +412,7 @@ s32 unk_FindMoveEnabledForAIAfter8_v2(struct Move *moves, s32 index)
 
 // the next 2 functions are the same
 // should be 8 and 8_v2
-s32 unk_FindMoveEnabledForAIBefore8(struct Move *moves, s32 index)
+s32 unk_FindMoveEnabledForAIBefore8(Move *moves, s32 index)
 {
     s32 i, j;
 
@@ -444,7 +444,7 @@ s32 unk_FindMoveEnabledForAIBefore8(struct Move *moves, s32 index)
     return 0;
 }
 
-s32 unk_FindMoveEnabledForAIBefore8_v2(struct Move *moves, s32 index)
+s32 unk_FindMoveEnabledForAIBefore8_v2(Move *moves, s32 index)
 {
     s32 i, j;
 
@@ -476,12 +476,12 @@ s32 unk_FindMoveEnabledForAIBefore8_v2(struct Move *moves, s32 index)
     return 0;
 }
 
-s32 sub_8092F4C(struct Move *moves, s32 index)
+s32 sub_8092F4C(Move *moves, s32 index)
 {
     s32 i;
 
     for (i = index; i > 0; i--) {
-        struct Move* move = &moves[i];
+        Move* move = &moves[i];
         u8 flag;
 
         if (!(move->moveFlags & MOVE_FLAG_EXISTS))
@@ -498,10 +498,10 @@ s32 sub_8092F4C(struct Move *moves, s32 index)
 
 // the next 3 functions are the same, except the first
 // is for 4, then for 8 then for 8_v2
-s32 unk_SetMoveToLastInLinkedSequence4(struct Move *moves, s32 index)
+s32 unk_SetMoveToLastInLinkedSequence4(Move *moves, s32 index)
 {
-    struct Move* move;
-    struct Move linkedSequence[4][4];
+    Move* move;
+    Move linkedSequence[4][4];
     s32 startIndex;
     s32 result;
     s32 i;
@@ -515,7 +515,7 @@ s32 unk_SetMoveToLastInLinkedSequence4(struct Move *moves, s32 index)
     startIndex = unk_FindMarkedMoveInLinkedSequences44(linkedSequence);
     if (startIndex >= 0 && startIndex < 3) {
         for (i = 0; i < 4; i++) {
-            const struct Move temp = linkedSequence[startIndex][i];
+            const Move temp = linkedSequence[startIndex][i];
             linkedSequence[startIndex][i] = linkedSequence[startIndex + 1][i];
             linkedSequence[startIndex + 1][i] = temp;
         }
@@ -533,10 +533,10 @@ s32 unk_SetMoveToLastInLinkedSequence4(struct Move *moves, s32 index)
     return result;
 }
 
-UNUSED static s32 unk_SetMoveToLastInLinkedSequence8(struct Move *moves, s32 index)
+UNUSED static s32 unk_SetMoveToLastInLinkedSequence8(Move *moves, s32 index)
 {
-    struct Move* move;
-    struct Move linkedSequence[8][8];
+    Move* move;
+    Move linkedSequence[8][8];
     s32 startIndex;
     s32 result;
     s32 i;
@@ -550,7 +550,7 @@ UNUSED static s32 unk_SetMoveToLastInLinkedSequence8(struct Move *moves, s32 ind
     startIndex = unk_FindMarkedMoveInLinkedSequences88(linkedSequence);
     if (startIndex >= 0 && startIndex < 7) {
         for (i = 0; i < 8; i++) {
-            const struct Move temp = linkedSequence[startIndex][i];
+            const Move temp = linkedSequence[startIndex][i];
             linkedSequence[startIndex][i] = linkedSequence[startIndex + 1][i];
             linkedSequence[startIndex + 1][i] = temp;
         }
@@ -568,10 +568,10 @@ UNUSED static s32 unk_SetMoveToLastInLinkedSequence8(struct Move *moves, s32 ind
     return result;
 }
 
-s32 unk_SetMoveToLastInLinkedSequence8_v2(struct Move *moves, s32 index)
+s32 unk_SetMoveToLastInLinkedSequence8_v2(Move *moves, s32 index)
 {
-    struct Move* move;
-    struct Move linkedSequence[8][8];
+    Move* move;
+    Move linkedSequence[8][8];
     s32 startIndex;
     s32 result;
     s32 i;
@@ -585,7 +585,7 @@ s32 unk_SetMoveToLastInLinkedSequence8_v2(struct Move *moves, s32 index)
     startIndex = unk_FindMarkedMoveInLinkedSequences88_v2(linkedSequence);
     if (startIndex >= 0 && startIndex < 7) {
         for (i = 0; i < 8; i++) {
-            const struct Move temp = linkedSequence[startIndex][i];
+            const Move temp = linkedSequence[startIndex][i];
             linkedSequence[startIndex][i] = linkedSequence[startIndex + 1][i];
             linkedSequence[startIndex + 1][i] = temp;
         }
@@ -605,10 +605,10 @@ s32 unk_SetMoveToLastInLinkedSequence8_v2(struct Move *moves, s32 index)
 
 // the next 3 functions are the same, but for
 // 4, 8 and 8_v2
-s32 unk_SetMoveToFirstInLinkedSequence4(struct Move *moves, s32 index)
+s32 unk_SetMoveToFirstInLinkedSequence4(Move *moves, s32 index)
 {
-    struct Move* move;
-    struct Move linkedSequence[4][4];
+    Move* move;
+    Move linkedSequence[4][4];
     s32 startIndex, prevIndex;
     s32 result;
     s32 i;
@@ -623,7 +623,7 @@ s32 unk_SetMoveToFirstInLinkedSequence4(struct Move *moves, s32 index)
     prevIndex = startIndex - 1;
     if (prevIndex >= 0 && prevIndex < 3) {
         for (i = 0; i < 4; i++) {
-            const struct Move temp = linkedSequence[startIndex][i];
+            const Move temp = linkedSequence[startIndex][i];
             linkedSequence[startIndex][i] = linkedSequence[prevIndex][i];
             linkedSequence[prevIndex][i] = temp;
         }
@@ -641,10 +641,10 @@ s32 unk_SetMoveToFirstInLinkedSequence4(struct Move *moves, s32 index)
     return result;
 }
 
-UNUSED static s32 unk_SetMoveToFirstInLinkedSequence8(struct Move *moves, s32 index)
+UNUSED static s32 unk_SetMoveToFirstInLinkedSequence8(Move *moves, s32 index)
 {
-    struct Move* move;
-    struct Move linkedSequence[8][8];
+    Move* move;
+    Move linkedSequence[8][8];
     s32 startIndex, prevIndex;
     int result;
     int i;
@@ -659,7 +659,7 @@ UNUSED static s32 unk_SetMoveToFirstInLinkedSequence8(struct Move *moves, s32 in
     prevIndex = startIndex - 1;
     if (prevIndex >= 0 && prevIndex < 7) {
         for (i = 0; i < 8; i++) {
-            const struct Move temp = linkedSequence[startIndex][i];
+            const Move temp = linkedSequence[startIndex][i];
             linkedSequence[startIndex][i] = linkedSequence[prevIndex][i];
             linkedSequence[prevIndex][i] = temp;
         }
@@ -677,10 +677,10 @@ UNUSED static s32 unk_SetMoveToFirstInLinkedSequence8(struct Move *moves, s32 in
     return result;
 }
 
-s32 unk_SetMoveToFirstInLinkedSequence8_v2(struct Move *moves, s32 index)
+s32 unk_SetMoveToFirstInLinkedSequence8_v2(Move *moves, s32 index)
 {
-    struct Move* move;
-    struct Move linkedSequence[8][8];
+    Move* move;
+    Move linkedSequence[8][8];
     s32 startIndex, prevIndex;
     s32 result;
     s32 i;
@@ -695,7 +695,7 @@ s32 unk_SetMoveToFirstInLinkedSequence8_v2(struct Move *moves, s32 index)
     prevIndex = startIndex - 1;
     if (prevIndex >= 0 && prevIndex < 7) {
         for (i = 0; i < 8; i++) {
-            const struct Move temp = linkedSequence[startIndex][i];
+            const Move temp = linkedSequence[startIndex][i];
             linkedSequence[startIndex][i] = linkedSequence[prevIndex][i];
             linkedSequence[prevIndex][i] = temp;
         }
@@ -713,49 +713,49 @@ s32 unk_SetMoveToFirstInLinkedSequence8_v2(struct Move *moves, s32 index)
     return result;
 }
 
-bool8 IsMoveSet(s32 index, struct Move *struct_ptr)
+bool8 IsMoveSet(s32 index, Move *struct_ptr)
 {
     if (struct_ptr[index].moveFlags & MOVE_FLAG_SET)
         return TRUE;
     return FALSE;
 }
 
-bool8 IsMoveEnabled(s32 index, struct Move *struct_ptr)
+bool8 IsMoveEnabled(s32 index, Move *struct_ptr)
 {
     if (struct_ptr[index].moveFlags & MOVE_FLAG_ENABLED_FOR_AI)
         return TRUE;
     return FALSE;
 }
 
-bool8 sub_8093318(s32 param_1, struct Move *src_struct)
+bool8 sub_8093318(s32 param_1, Move *src_struct)
 {
-    struct Move dest_struct[MAX_MON_MOVES * 2];
-    MemoryCopy8((void *)dest_struct, (void *)src_struct, sizeof(struct Move) * MAX_MON_MOVES * 2);
+    Move dest_struct[MAX_MON_MOVES * 2];
+    MemoryCopy8((void *)dest_struct, (void *)src_struct, sizeof(Move) * MAX_MON_MOVES * 2);
     return TryLinkMovesAfter(param_1, dest_struct);
 }
 
-bool8 sub_809333C(s32 param_1, struct Move *src_struct)
+bool8 sub_809333C(s32 param_1, Move *src_struct)
 {
-    struct Move dest_struct[MAX_MON_MOVES * 2];
-    MemoryCopy8((void *)dest_struct, (void *)src_struct, sizeof(struct Move) * MAX_MON_MOVES * 2);
+    Move dest_struct[MAX_MON_MOVES * 2];
+    MemoryCopy8((void *)dest_struct, (void *)src_struct, sizeof(Move) * MAX_MON_MOVES * 2);
     return UnlinkMovesAfter(param_1, dest_struct);
 }
 
-UNUSED static bool8 sub_8093360(s32 param_1, struct Move *src_struct)
+UNUSED static bool8 sub_8093360(s32 param_1, Move *src_struct)
 {
-    struct Move dest_struct[MAX_MON_MOVES * 2];
-    MemoryCopy8((void *)dest_struct, (void *)src_struct, sizeof(struct Move) * MAX_MON_MOVES * 2);
+    Move dest_struct[MAX_MON_MOVES * 2];
+    MemoryCopy8((void *)dest_struct, (void *)src_struct, sizeof(Move) * MAX_MON_MOVES * 2);
     return sub_80933D8(param_1, dest_struct);
 }
 
-UNUSED static bool8 IsMoveNotSet(s32 index, struct Move* struct_ptr)
+UNUSED static bool8 IsMoveNotSet(s32 index, Move* struct_ptr)
 {
     if (struct_ptr[index].moveFlags & MOVE_FLAG_SET)
         return FALSE;
     return TRUE;
 }
 
-bool8 IsAnyMoveLinked(s32 unused, struct Move *moves)
+bool8 IsAnyMoveLinked(s32 unused, Move *moves)
 {
     s32 i;
     s32 counter;
@@ -772,7 +772,7 @@ bool8 IsAnyMoveLinked(s32 unused, struct Move *moves)
     return FALSE;
 }
 
-static bool8 sub_80933D8(s32 param_1, struct Move *src_struct)
+static bool8 sub_80933D8(s32 param_1, Move *src_struct)
 {
     if (TryLinkMovesAfter(param_1, src_struct))
         return TRUE;
@@ -780,10 +780,10 @@ static bool8 sub_80933D8(s32 param_1, struct Move *src_struct)
     return UnlinkMovesAfter(param_1, src_struct);
 }
 
-bool8 TryLinkMovesAfter(s32 index, struct Move *moves)
+bool8 TryLinkMovesAfter(s32 index, Move *moves)
 {
     s32 i;
-    const struct Move *move = &moves[index];
+    const Move *move = &moves[index];
 
     if (DoesMoveCharge(move->id))
         return FALSE;
@@ -805,7 +805,7 @@ bool8 TryLinkMovesAfter(s32 index, struct Move *moves)
     return FALSE;
 }
 
-bool8 UnlinkMovesAfter(s32 index, struct Move *moves)
+bool8 UnlinkMovesAfter(s32 index, Move *moves)
 {
     s32 i;
     bool8 result = FALSE;
@@ -823,9 +823,9 @@ label:
     return result;
 }
 
-bool8 IsNextMoveLinked(s32 index, struct Move *moves)
+bool8 IsNextMoveLinked(s32 index, Move *moves)
 {
-    struct Move *move;
+    Move *move;
 
     if (index + 1 >= MAX_MON_MOVES * 2)
         return FALSE;
@@ -841,9 +841,9 @@ bool8 IsNextMoveLinked(s32 index, struct Move *moves)
     return FALSE;
 }
 
-bool8 ToggleSetMove(s32 index, struct Move *moves)
+bool8 ToggleSetMove(s32 index, Move *moves)
 {
-    struct Move* move;
+    Move* move;
     u8 flags;
     s32 i;
 
@@ -866,26 +866,26 @@ bool8 ToggleSetMove(s32 index, struct Move *moves)
     return TRUE;
 }
 
-void UnSetMove(s32 index, struct Move *moves)
+void UnSetMove(s32 index, Move *moves)
 {
-    struct Move* move = &moves[index];
+    Move* move = &moves[index];
     move->moveFlags &= ~MOVE_FLAG_SET;
     unk_FixLinkedMovesSetEnabled8_v2(moves);
 }
 
-bool8 ToggleMoveEnabled(s32 index, struct Move *moves)
+bool8 ToggleMoveEnabled(s32 index, Move *moves)
 {
-    struct Move* move = &moves[index];
+    Move* move = &moves[index];
     move->moveFlags ^= MOVE_FLAG_ENABLED_FOR_AI;
     unk_FixLinkedMovesSetEnabled8_v2(moves);
     return TRUE;
 }
 
-s32 GetLinkedSequence(s32 index, struct Move *moves, u16 *sequenceMoveIDs)
+s32 GetLinkedSequence(s32 index, Move *moves, u16 *sequenceMoveIDs)
 {
     s32 i;
     s32 linkedSequenceLength;
-    struct Move* move;
+    Move* move;
 
     linkedSequenceLength = 1;
     move = &moves[index];
@@ -906,7 +906,7 @@ s32 GetLinkedSequence(s32 index, struct Move *moves, u16 *sequenceMoveIDs)
     return linkedSequenceLength;
 }
 
-s32 sub_80935B8(struct Move *moves, s32 index)
+s32 sub_80935B8(Move *moves, s32 index)
 {
     s32 i;
     s32 linkSequenceStart;
@@ -921,7 +921,7 @@ s32 sub_80935B8(struct Move *moves, s32 index)
     linkSequenceStart = index;
 
     while (linkSequenceStart >= 0) {
-        struct Move *move = &moves[linkSequenceStart];
+        Move *move = &moves[linkSequenceStart];
 
         if (!((move->moveFlags & MOVE_FLAG_EXISTS) && (move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)))
             break;
@@ -935,7 +935,7 @@ s32 sub_80935B8(struct Move *moves, s32 index)
     #endif
 
     for (i = linkSequenceStart + 1; i < MAX_MON_MOVES; i++) {
-        struct Move *move = &moves[i];
+        Move *move = &moves[i];
 
         if (!((move->moveFlags & MOVE_FLAG_EXISTS) && (move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)))
             break;
@@ -949,7 +949,7 @@ s32 sub_80935B8(struct Move *moves, s32 index)
     v1 = FALSE;
 
     while (--i >= linkSequenceStart) {
-        struct Move* move = &moves[i];
+        Move* move = &moves[i];
 
         if (!(move->moveFlags & MOVE_FLAG_EXISTS))
             break;
@@ -966,7 +966,7 @@ s32 sub_80935B8(struct Move *moves, s32 index)
         return pp;
 
     for (i = linkSequenceStart + 1; i < MAX_MON_MOVES; i++) {
-        struct Move* move = &moves[i];
+        Move* move = &moves[i];
 
         if (!(moves[i].moveFlags & MOVE_FLAG_EXISTS))
             break;
@@ -984,9 +984,9 @@ s32 sub_80935B8(struct Move *moves, s32 index)
     return pp;
 }
 
-void unk_FixLinkedMovesSetEnabled4(struct Move *moves)
+void unk_FixLinkedMovesSetEnabled4(Move *moves)
 {
-    struct Move linkedSequences[4][4];
+    Move linkedSequences[4][4];
 
     // all that doing these in a row seems to do is
     // fix the set/enabled flags by moving them to
@@ -995,23 +995,23 @@ void unk_FixLinkedMovesSetEnabled4(struct Move *moves)
     unk_LinkedSequencesToMoves4(moves, linkedSequences);
 }
 
-void unk_FixLinkedMovesSetEnabled8(struct Move *moves)
+void unk_FixLinkedMovesSetEnabled8(Move *moves)
 {
-    struct Move linkedSequences[8][8];
+    Move linkedSequences[8][8];
 
     unk_GetLinkedSequences8(moves, linkedSequences);
     unk_LinkedSequencesToMoves8(moves, linkedSequences);
 }
 
-void unk_FixLinkedMovesSetEnabled8_v2(struct Move *moves)
+void unk_FixLinkedMovesSetEnabled8_v2(Move *moves)
 {
-    struct Move linkedSequences[8][8];
+    Move linkedSequences[8][8];
 
     unk_GetLinkedSequences8_v2(moves, linkedSequences);
     unk_LinkedSequencesToMoves8_v2(moves, linkedSequences);
 }
 
-static s32 unk_FindMarkedMoveInLinkedSequences44(struct Move moves[MAX_MON_MOVES][MAX_MON_MOVES])
+static s32 unk_FindMarkedMoveInLinkedSequences44(Move moves[MAX_MON_MOVES][MAX_MON_MOVES])
 {
     s32 i, j;
 
@@ -1025,7 +1025,7 @@ static s32 unk_FindMarkedMoveInLinkedSequences44(struct Move moves[MAX_MON_MOVES
     return -1;
 }
 
-static void unk_GetLinkedSequences4(struct Move *moves, struct Move linkedSequences[MAX_MON_MOVES][MAX_MON_MOVES])
+static void unk_GetLinkedSequences4(Move *moves, Move linkedSequences[MAX_MON_MOVES][MAX_MON_MOVES])
 {
     s32 i, j;
     s32 k;
@@ -1049,7 +1049,7 @@ static void unk_GetLinkedSequences4(struct Move *moves, struct Move linkedSequen
     }
 }
 
-static void unk_LinkedSequencesToMoves4(struct Move *moves, struct Move linkedSequences[MAX_MON_MOVES][MAX_MON_MOVES])
+static void unk_LinkedSequencesToMoves4(Move *moves, Move linkedSequences[MAX_MON_MOVES][MAX_MON_MOVES])
 {
     s32 i, j;
     s32 movesCopied;
@@ -1108,7 +1108,7 @@ static void unk_LinkedSequencesToMoves4(struct Move *moves, struct Move linkedSe
 }
 
 // The next two functions are exactly the same
-static s32 unk_FindMarkedMoveInLinkedSequences88(struct Move linkedSequences[8][8])
+static s32 unk_FindMarkedMoveInLinkedSequences88(Move linkedSequences[8][8])
 {
     s32 i, j;
 
@@ -1124,7 +1124,7 @@ static s32 unk_FindMarkedMoveInLinkedSequences88(struct Move linkedSequences[8][
 
 // I expect the intent was to check for a different flag in this one...
 // or the argument is a struct type that does hold the moves as a field
-static s32 unk_FindMarkedMoveInLinkedSequences88_v2(struct Move linkedSequences[8][8])
+static s32 unk_FindMarkedMoveInLinkedSequences88_v2(Move linkedSequences[8][8])
 {
     s32 i, j;
 
@@ -1144,7 +1144,7 @@ static s32 unk_FindMarkedMoveInLinkedSequences88_v2(struct Move linkedSequences[
 
 // it seems to find all the _actually_ separate moves, and split them
 // out into link sequences in the destination linkedSequences
-static void unk_GetLinkedSequences8(struct Move *moves, struct Move linkedSequences[8][8])
+static void unk_GetLinkedSequences8(Move *moves, Move linkedSequences[8][8])
 {
     s32 i, j;
     s32 k;
@@ -1159,7 +1159,7 @@ static void unk_GetLinkedSequences8(struct Move *moves, struct Move linkedSequen
     moveSetIndex = -1;
 
     for (j = 0, k = 0; k < 8; j++, k++) {
-        struct Move* move = &moves[k];
+        Move* move = &moves[k];
 
         if (k == 0 || !(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)) {
             moveSetIndex++;
@@ -1171,7 +1171,7 @@ static void unk_GetLinkedSequences8(struct Move *moves, struct Move linkedSequen
     }
 }
 
-static void unk_GetLinkedSequences8_v2(struct Move *moves, struct Move linkedSequences[8][8])
+static void unk_GetLinkedSequences8_v2(Move *moves, Move linkedSequences[8][8])
 {
     s32 i, j;
     s32 k;
@@ -1185,7 +1185,7 @@ static void unk_GetLinkedSequences8_v2(struct Move *moves, struct Move linkedSeq
     moveSetIndex = -1;
 
     for (j = 0, k = 0; k < 8; j++, k++) {
-        struct Move* move = &moves[k];
+        Move* move = &moves[k];
 
         if (k == 0 || !(move->moveFlags & 2)) {
             moveSetIndex++;
@@ -1200,7 +1200,7 @@ static void unk_GetLinkedSequences8_v2(struct Move *moves, struct Move linkedSeq
 // the next 2 functions are again exactly the same
 // these functions are the same as unk_LinkedSequencesToMoves4 but for [8][8] linkedSequences
 // instead of [4][4] linkedSequences
-static void unk_LinkedSequencesToMoves8(struct Move *moves, struct Move linkedSequences[8][8])
+static void unk_LinkedSequencesToMoves8(Move *moves, Move linkedSequences[8][8])
 {
     int i, j;
     int movesCopied;
@@ -1258,7 +1258,7 @@ static void unk_LinkedSequencesToMoves8(struct Move *moves, struct Move linkedSe
     }
 }
 
-static void unk_LinkedSequencesToMoves8_v2(struct Move *moves, struct Move linkedSequences[8][8])
+static void unk_LinkedSequencesToMoves8_v2(Move *moves, Move linkedSequences[8][8])
 {
     s32 i, j;
     s32 movesCopied;
@@ -1317,16 +1317,16 @@ static void unk_LinkedSequencesToMoves8_v2(struct Move *moves, struct Move linke
 }
 
 // The next two are the same again
-UNUSED static void RemoveLinkSequenceFromMoves8_v2(struct Move *moves, s32 index)
+UNUSED static void RemoveLinkSequenceFromMoves8_v2(Move *moves, s32 index)
 {
     s32 i;
     s32 copiedMoves;
-    struct Move moveSet[8];
+    Move moveSet[8];
 
     moves[index].moveFlags = 0;
 
     for (i = index + 1; i < 8; i++) {
-        struct Move* move = &moves[i];
+        Move* move = &moves[i];
 
         #ifndef NONMATCHING
         asm("");
@@ -1355,17 +1355,17 @@ UNUSED static void RemoveLinkSequenceFromMoves8_v2(struct Move *moves, s32 index
         moves[i] = moveSet[i];
 }
 
-void RemoveLinkSequenceFromMoves8(struct Move *moves, s32 index)
+void RemoveLinkSequenceFromMoves8(Move *moves, s32 index)
 {
     s32 i;
     s32 copiedMoves;
-    struct Move moveSet[8];
+    Move moveSet[8];
 
     // remove link sequence (set flags to 0)
     moves[index].moveFlags = 0;
 
     for (i = index + 1; i < 8; i++) {
-        struct Move* move = &moves[i];
+        Move* move = &moves[i];
 
         #ifndef NONMATCHING
         asm("");
@@ -1399,21 +1399,21 @@ void RemoveLinkSequenceFromMoves8(struct Move *moves, s32 index)
 
 s32 unk_MoveIDPrintMoveDescription(s32 a1, u16 moveID, s32 a3, struct subStruct_203B240 **a4)
 {
-    struct Move move;
+    Move move;
 
     InitPokemonMove(&move, moveID);
     return unk_PrintMoveDescription(a1, &move, a3, a4);
 }
 
-UNUSED static s32 unk_MovePrintMoveDescription(s32 a1, struct Move *move, s32 a3, struct subStruct_203B240 **a4)
+UNUSED static s32 unk_MovePrintMoveDescription(s32 a1, Move *move, s32 a3, struct subStruct_203B240 **a4)
 {
-    struct Move newMove;
+    Move newMove;
 
     CopyAndResetMove(&newMove, move);
     return unk_PrintMoveDescription(a1, &newMove, a3, a4);
 }
 
-s32 unk_PrintMoveDescription(s32 x, struct Move *move, s32 a3, struct subStruct_203B240 **a4)
+s32 unk_PrintMoveDescription(s32 x, Move *move, s32 a3, struct subStruct_203B240 **a4)
 {
     u8 *moveDescription;
     s32 y;
@@ -1437,7 +1437,7 @@ s32 unk_PrintMoveDescription(s32 x, struct Move *move, s32 a3, struct subStruct_
     return sub_8097DF0(buffer, a4);
 }
 
-static void unk_MovePrintData(struct Move *move, s32 y)
+static void unk_MovePrintData(Move *move, s32 y)
 {
     u8 type;
     s32 power;
@@ -1454,7 +1454,7 @@ static void unk_MovePrintData(struct Move *move, s32 y)
     gUnknown_202DE30 = power;
 }
 
-static void CopyAndResetMove(struct Move *dest, struct Move *src)
+static void CopyAndResetMove(Move *dest, Move *src)
 {
     if (src->moveFlags & MOVE_FLAG_EXISTS) {
         dest->moveFlags = src->moveFlags;
@@ -1467,7 +1467,7 @@ static void CopyAndResetMove(struct Move *dest, struct Move *src)
         dest->moveFlags = 0;
 }
 
-void CopyAndResetMoves(struct Move *destMoves, struct Move *srcMoves)
+void CopyAndResetMoves(Move *destMoves, Move *srcMoves)
 {
     s32 i;
 
@@ -1489,7 +1489,7 @@ void CopyAndResetMoves(struct Move *destMoves, struct Move *srcMoves)
     destMoves[MAX_MON_MOVES].moveFlags = 0;
 }
 
-void CopyBareMoveData(struct Move *destMoves, struct Move *srcMoves)
+void CopyBareMoveData(Move *destMoves, Move *srcMoves)
 {
     s32 i;
 
@@ -1500,7 +1500,7 @@ void CopyBareMoveData(struct Move *destMoves, struct Move *srcMoves)
     }
 }
 
-void unk_CopyMoves4To8AndClearFlag2Unk4(struct Move *destMoves, struct Move *srcMoves)
+void unk_CopyMoves4To8AndClearFlag2Unk4(Move *destMoves, Move *srcMoves)
 {
     s32 movesCopied;
 
@@ -1518,7 +1518,7 @@ void unk_CopyMoves4To8AndClearFlag2Unk4(struct Move *destMoves, struct Move *src
         destMoves[movesCopied++].moveFlags = 0;
 }
 
-void unk_CopyMoves4To8(struct Move *destMoves, struct Move *srcMoves)
+void unk_CopyMoves4To8(Move *destMoves, Move *srcMoves)
 {
     s32 movesCopied;
 
@@ -1534,14 +1534,14 @@ void unk_CopyMoves4To8(struct Move *destMoves, struct Move *srcMoves)
         destMoves[movesCopied++].moveFlags = 0;
 }
 
-void sub_8094060(struct Move *srcMoves, struct Move *destMoves)
+void sub_8094060(Move *srcMoves, Move *destMoves)
 {
     s32 i, j;
 
     j = 0;
     for (i = 0; i < 8; i++) {
-        struct Move* srcMove = &srcMoves[i];
-        struct Move* destMove;
+        Move* srcMove = &srcMoves[i];
+        Move* destMove;
 
         if (!(srcMove->moveFlags & MOVE_FLAG_EXISTS))
             continue;
@@ -1558,21 +1558,21 @@ void sub_8094060(struct Move *srcMoves, struct Move *destMoves)
         destMoves[j++].moveFlags = 0;
 }
 
-static void SavePokemonMove(struct unkStruct_8094924 *r0, struct Move *move)
+static void SavePokemonMove(struct unkStruct_8094924 *r0, Move *move)
 {
     SaveIntegerBits(r0, &move->moveFlags, 4);
     SaveIntegerBits(r0, &move->id, 9);
     SaveIntegerBits(r0, &move->PP, 7);
 }
 
-static void RestorePokemonMove(struct unkStruct_8094924 *r0, struct Move *move)
+static void RestorePokemonMove(struct unkStruct_8094924 *r0, Move *move)
 {
     RestoreIntegerBits(r0, &move->moveFlags, 4);
     RestoreIntegerBits(r0, &move->id, 9);
     RestoreIntegerBits(r0, &move->PP, 7);
 }
 
-void SavePokemonMoves(struct unkStruct_8094924 *r0, struct Move *moveSet)
+void SavePokemonMoves(struct unkStruct_8094924 *r0, Move *moveSet)
 {
     s32 i;
 
@@ -1580,7 +1580,7 @@ void SavePokemonMoves(struct unkStruct_8094924 *r0, struct Move *moveSet)
         SavePokemonMove(r0, &moveSet[i]);
 }
 
-void RestorePokemonMoves(struct unkStruct_8094924 *r0, struct Move *moveSet)
+void RestorePokemonMoves(struct unkStruct_8094924 *r0, Move *moveSet)
 {
     s32 i;
 
@@ -1588,7 +1588,7 @@ void RestorePokemonMoves(struct unkStruct_8094924 *r0, struct Move *moveSet)
         RestorePokemonMove(r0, &moveSet[i]);
 }
 
-static void sub_8094148(struct unkStruct_8094924 *r0, struct Move *move)
+static void sub_8094148(struct unkStruct_8094924 *r0, Move *move)
 {
     SaveIntegerBits(r0, &move->moveFlags, 4);
     SaveIntegerBits(r0, &move->moveFlags2, 1);
@@ -1607,9 +1607,9 @@ void sub_8094184(struct unkStruct_8094924 *r0, struct unkStruct_8094184 *r1)
     SaveIntegerBits(r0, &r1->unk20, 8);
 }
 
-static void sub_80941B0(struct unkStruct_8094924 *r0, struct Move *move)
+static void sub_80941B0(struct unkStruct_8094924 *r0, Move *move)
 {
-    memset(move, 0, sizeof(struct Move));
+    memset(move, 0, sizeof(Move));
     RestoreIntegerBits(r0, &move->moveFlags, 4);
     RestoreIntegerBits(r0, &move->moveFlags2, 1);
     RestoreIntegerBits(r0, &move->id, 9);

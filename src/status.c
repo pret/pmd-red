@@ -1194,7 +1194,7 @@ void PerishSongTarget(Entity * pokemon, Entity * target)
 
 void EncoreStatusTarget(Entity *pokemon,Entity *target)
 {
-  struct Move *movePtr;
+  Move *movePtr;
   int index;
   EntityInfo *EntityInfo;
   

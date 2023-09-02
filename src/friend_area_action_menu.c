@@ -5,16 +5,17 @@
 #include "text2.h"
 #include "items.h"
 #include "pokemon.h"
-
 #include "friend_area_action_menu.h"
 #include "menu_input.h"
 #include "kecleon_bros.h"
 #include "sprite.h"
 #include "code_80130A8.h"
+#include "code_801EE10.h"
 #include "code_801EE10_1.h"
 #include "code_801B3C0.h"
 #include "event_flag.h"
 #include "moves.h"
+#include "code_801EE10_mid.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 
@@ -24,9 +25,6 @@ extern u8 *gUnknown_80D4970[];
 
 extern void sub_8024458(s16, u32);
 extern void sub_801BEEC(s16);
-extern void sub_801F808(u16*);
-extern void sub_801F1B0(u32, u32);
-extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
 
 void sub_8027D40(u32, BulkItem *heldItem);
 void sub_8027794(void);
@@ -49,8 +47,6 @@ extern void CreateFriendActionMenu();
 extern void sub_80276A8();
 bool8 sub_8027D9C(PokemonStruct1 *pokeStruct);
 extern u8 sub_8027DCC(PokemonStruct1 *);
-extern u32 sub_801EF38(u8 r0);
-extern void sub_801F214();
 
 extern void SetFriendAreaActionMenuState(u32);
 extern void PlaySound(u32);
@@ -60,10 +56,7 @@ extern void sub_8099690(u32);
 extern void sub_808D31C(PokemonStruct1 *);
 extern PokemonStruct1 *sub_808D3F8(void);
 extern PokemonStruct1 *sub_808D3BC(void);
-extern u32 sub_801F890(void);
-extern void sub_801F8D0(void);
 extern u8 gUnknown_202DE58[];
-extern u32 sub_801F194(void);
 extern u32 sub_801BF48(void);
 extern void sub_801BF98(void);
 extern u32 sub_80244E4(void);
@@ -76,91 +69,7 @@ u32 sub_8027E18(PokemonStruct1 *);
 u8 sub_8027E4C(PokemonStruct1 *r0);
 void sub_8027EB8(void);
 
-const UnkTextStruct2 gUnknown_80DD6EC =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x00, 0x00,
-    0x00, 0x00,
-    0x00, 0x00,
-    NULL
-};
-
-
-const UnkTextStruct2 gUnknown_80DD704 =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x13, 0x04,
-    0x09, 0x03,
-    0x03, 0x00,
-    NULL
-};
-
-const UnkTextStruct2 gUnknown_80DD71C =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x14, 0x04,
-    0x06, 0x03,
-    0x03, 0x00,
-    NULL
-};
-
-const UnkTextStruct2 gUnknown_80DD734 =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x16, 0x04,
-    0x06, 0x03,
-    0x03, 0x00,
-    NULL
-};
-
-const UnkTextStruct2 gUnknown_80DD74C =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x02, 0x11,
-    0x1A, 0x02,
-    0x02, 0x00,
-    NULL
-};
-
-
-ALIGNED(4) const u8 gFriendAreaActionSayFarewellPrompt[] = _(
-         "You have chosen to say farewell\n"
-         "to this Pokémon.{EXTRA_MSG}"
-         "The Pokémon will leave its Friend Area.\n"
-         "It will no longer be available for\n"
-         "adventures. Is that OK?");
-
-ALIGNED(4) const u8 gFriendAreaActionSayFarewellConfirm[] = _(
-         "If you say farewell to this\n"
-         "Pokémon{COMMA} it will be gone forever.{EXTRA_MSG}"
-         "You will never be able to get another one\n"
-         "like it to join your team.\n"
-         "Will you release it anyway?");
-
-ALIGNED(4) const u8 gUnknown_80DD8A0[] = _(
-         "{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
-         "{CENTER_ALIGN}returned to the Toolbox.");
-
-ALIGNED(4) const u8 gUnknown_80DD8D0[] = _(
-         "{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n{CENTER_ALIGN}sent to storage.");
-
-ALIGNED(4) const u8 gFriendActionStandby[] = "Stand By";
-ALIGNED(4) const u8 gFriendActionMakeLeader[] = "Make Leader";
-ALIGNED(4) const u8 gFriendActionJoinTeam[] = "Join Team";
-ALIGNED(4) const u8 gFriendActionSayFarewell[] = "Say Farewell";
-ALIGNED(4) const u8 gFriendActionGive[] = "Give";
-ALIGNED(4) const u8 gFriendActionTake[] = "Take";
-ALIGNED(4) const u8 gFriendActionSummary[] = "Summary";
-ALIGNED(4) const u8 gFriendActionMoves[] = "Moves";
-ALIGNED(4) const u8 gFriendActionCheckIQ[] = "Check IQ";
-
-ALIGNED(4) const u8 gUnknown_80DD958[] = _("Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} ");
-static const u8 filler[] = "pksdir0";
+#include "data/friend_area_action_menu.h"
 
 u32 sub_8027074(void)
 {
@@ -248,20 +157,20 @@ void sub_802719C(void)
     switch(gUnknown_203B2BC->state)
     {
         case 3:
-            gUnknown_203B2BC->unk180[3] = gUnknown_80DD74C;
+            gUnknown_203B2BC->unk180[3] = sUnknown_80DD74C;
             CreateFriendActionMenu();
-            gUnknown_203B2BC->unk180[2] = gUnknown_80DD704;
+            gUnknown_203B2BC->unk180[2] = sUnknown_80DD704;
             sub_8012CAC(&gUnknown_203B2BC->unk180[2], gUnknown_203B2BC->menuItems);
             break;
         case 0xC:
             sub_80276A8();
-            gUnknown_203B2BC->unk180[2] = gUnknown_80DD71C;
+            gUnknown_203B2BC->unk180[2] = sUnknown_80DD71C;
             sub_8012CAC(&gUnknown_203B2BC->unk180[2], gUnknown_203B2BC->menuItems);
             break;
         default:
             for(index = 0; index < 4; index++)
             {
-                gUnknown_203B2BC->unk180[index] = gUnknown_80DD6EC;
+                gUnknown_203B2BC->unk180[index] = sUnknown_80DD6EC;
             }
             break;
     }
@@ -271,75 +180,71 @@ void sub_802719C(void)
 
 void sub_8027274(void)
 {
-  Item slot;
+    Item slot;
 
-  switch(gUnknown_203B2BC->state) {
-    case FRIEND_AREA_ACTION_MENU_INIT:
-    case FRIEND_AREA_ACTION_MENU_EXIT:
-        break;
-    case FRIEND_AREA_ACTION_MENU_MAIN:
-        sub_8023868(1,0,0,7);
-        break;
-    case FRIEND_AREA_ACTION_MENU_MAIN_2:
-        sub_8023B7C(1);
-        break;
-    case 3:
-        sub_8027D40(3,&gUnknown_203B2BC->item2);
-        sub_8023DA4();
-        sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,gUnknown_203B2BC->unk16C,gUnknown_203B2BC->menuAction1,2);
-        break;
-    case FRIEND_AREA_ACTION_MENU_SUMMARY:
-        sub_8024458(gUnknown_203B2BC->targetPoke,2);
-        break;
-    case FRIEND_AREA_ACTION_MENU_CHECK_IQ:
-        sub_801BEEC(gUnknown_203B2BC->targetPoke);
-        break;
-    case 10:
-        sub_801A5D8(1,0,0,10);
-        break;
-    case 0xb:
-        sub_801A8D0(1);
-        break;
-    case 0xc:
-        sub_801A9E0();
-        sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,gUnknown_203B2BC->unk16C,gUnknown_203B2BC->menuAction2,2);
-        break;
-    case 0xd:
-        HeldItemToSlot(&slot, &gUnknown_203B2BC->itemToGive);
-        sub_801B3C0(&slot);
-        break;
-    case 0xe:
-        unk_CopyMoves4To8(gUnknown_203B2BC->moves,gUnknown_203B2BC->pokeStruct->moves);
-        sub_801EE10(3,gUnknown_203B2BC->targetPoke,gUnknown_203B2BC->moves,0,0,0);
-        break;
-    case 0xf:
-        sub_801F1B0(1,0);
-        break;
-    case FRIEND_AREA_ACTION_MENU_SAY_FAREWELL_PROMPT:
-        sub_8027794();
-        sub_8014248(gFriendAreaActionSayFarewellPrompt,0,3,gUnknown_203B2BC->menuItems,0,4,0,0,0x101);
-        break;
-    case FRIEND_AREA_ACTION_MENU_SAY_FAREWELL_CONFIRM:
-        sub_8027794();
-        sub_8014248(gFriendAreaActionSayFarewellConfirm,0,3,gUnknown_203B2BC->menuItems,0,4,0,0,0x101);
-        break;
-    case 0x10:
-        GetLinkedSequence(gUnknown_203B2BC->moveIndex,gUnknown_203B2BC->moves,gUnknown_203B2BC->moveIDs);
-        sub_801F808(gUnknown_203B2BC->moveIDs);
-        break;
-    case 6:
-        gUnknown_203B2BC->fallbackState = FRIEND_AREA_ACTION_MENU_MAIN_2;
-        // The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was
-        // returned to the Toolbox
-        sub_80141B4(gUnknown_80DD8A0,0,0,0x101);
-        break;
-    case 7:
-        gUnknown_203B2BC->fallbackState = FRIEND_AREA_ACTION_MENU_MAIN_2;
-        // The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was
-        // returned to storage
-        sub_80141B4(gUnknown_80DD8D0,0,0,0x101);
-        break;
-  }
+    switch (gUnknown_203B2BC->state) {
+        case FRIEND_AREA_ACTION_MENU_INIT:
+        case FRIEND_AREA_ACTION_MENU_EXIT:
+            break;
+        case FRIEND_AREA_ACTION_MENU_MAIN:
+            sub_8023868(1,0,0,7);
+            break;
+        case FRIEND_AREA_ACTION_MENU_MAIN_2:
+            sub_8023B7C(1);
+            break;
+        case 3:
+            sub_8027D40(3, &gUnknown_203B2BC->item2);
+            sub_8023DA4();
+            sub_8012D60(&gUnknown_203B2BC->unk7C, gUnknown_203B2BC->menuItems, 0, gUnknown_203B2BC->unk16C, gUnknown_203B2BC->menuAction1, 2);
+            break;
+        case FRIEND_AREA_ACTION_MENU_SUMMARY:
+            sub_8024458(gUnknown_203B2BC->targetPoke, 2);
+            break;
+        case FRIEND_AREA_ACTION_MENU_CHECK_IQ:
+            sub_801BEEC(gUnknown_203B2BC->targetPoke);
+            break;
+        case 10:
+            sub_801A5D8(1, 0, 0, 10);
+            break;
+        case 0xb:
+            sub_801A8D0(1);
+            break;
+        case 0xc:
+            sub_801A9E0();
+            sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,gUnknown_203B2BC->unk16C,gUnknown_203B2BC->menuAction2,2);
+            break;
+        case 0xd:
+            HeldItemToSlot(&slot, &gUnknown_203B2BC->itemToGive);
+            sub_801B3C0(&slot);
+            break;
+        case 0xe:
+            unk_CopyMoves4To8(gUnknown_203B2BC->moves,gUnknown_203B2BC->pokeStruct->moves);
+            sub_801EE10(3,gUnknown_203B2BC->targetPoke,gUnknown_203B2BC->moves,0,NULL,0);
+            break;
+        case 0xf:
+            sub_801F1B0(TRUE, FALSE);
+            break;
+        case FRIEND_AREA_ACTION_MENU_SAY_FAREWELL_PROMPT:
+            sub_8027794();
+            sub_8014248(sSayFarewellPrompt,0,3,gUnknown_203B2BC->menuItems,0,4,0,0,0x101);
+            break;
+        case FRIEND_AREA_ACTION_MENU_SAY_FAREWELL_CONFIRM:
+            sub_8027794();
+            sub_8014248(sSayFarewellConfirm,0,3,gUnknown_203B2BC->menuItems,0,4,0,0,0x101);
+            break;
+        case 0x10:
+            GetLinkedSequence(gUnknown_203B2BC->moveIndex,gUnknown_203B2BC->moves,gUnknown_203B2BC->moveIDs);
+            sub_801F808(gUnknown_203B2BC->moveIDs);
+            break;
+        case 6:
+            gUnknown_203B2BC->fallbackState = FRIEND_AREA_ACTION_MENU_MAIN_2;
+            sub_80141B4(sReturnedToToolbox, 0, 0, 0x101);
+            break;
+        case 7:
+            gUnknown_203B2BC->fallbackState = FRIEND_AREA_ACTION_MENU_MAIN_2;
+            sub_80141B4(sSentToStorage, 0, 0, 0x101);
+            break;
+    }
 }
 
 void CreateFriendActionMenu(void)
@@ -354,7 +259,7 @@ void CreateFriendActionMenu(void)
 
   if((pokeStruct->unk0 >> 1) % 2)
   {
-      gUnknown_203B2BC->menuItems[loopMax].text = gFriendActionStandby;
+      gUnknown_203B2BC->menuItems[loopMax].text = sStandBy;
       gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_STANDBY;
       if(!sub_8027D9C(pokeStruct))
       {
@@ -363,21 +268,21 @@ void CreateFriendActionMenu(void)
       loopMax += 1;
       if(sub_80023E4(8) && !pokeStruct->isTeamLeader)
       {
-          gUnknown_203B2BC->menuItems[loopMax].text = gFriendActionMakeLeader;
+          gUnknown_203B2BC->menuItems[loopMax].text = sMakeLeader;
           gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_MAKE_LEADER;
           loopMax += 1;
       }
   }
   else
   {
-      gUnknown_203B2BC->menuItems[loopMax].text = gFriendActionJoinTeam;
+      gUnknown_203B2BC->menuItems[loopMax].text = sJoinTeam;
       gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_JOIN_TEAM;
       if(!sub_808D750(gUnknown_203B2BC->targetPoke))
       {
           gUnknown_203B2BC->unk16C[loopMax] = 1;
       }
       loopMax += 1;
-      gUnknown_203B2BC->menuItems[loopMax].text = gFriendActionSayFarewell;
+      gUnknown_203B2BC->menuItems[loopMax].text = sSayFarewell;
       gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_SAY_FAREWELL;
       if(!sub_8027DCC(pokeStruct))
       {
@@ -387,7 +292,7 @@ void CreateFriendActionMenu(void)
 
   }
 
-  gUnknown_203B2BC->menuItems[loopMax].text = gFriendActionGive;
+  gUnknown_203B2BC->menuItems[loopMax].text = sGive;
   gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_GIVE;
   if(GetNumberOfFilledInventorySlots() == 0)
   {
@@ -395,23 +300,23 @@ void CreateFriendActionMenu(void)
   }
   loopMax += 1;
     
-  gUnknown_203B2BC->menuItems[loopMax].text = gFriendActionTake;
+  gUnknown_203B2BC->menuItems[loopMax].text = sTake;
   gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_TAKE;
   if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE || gUnknown_203B2BC->item2.id == ITEM_NOTHING)
   {
       gUnknown_203B2BC->unk16C[loopMax] = 1;
   }
   loopMax += 1;
-  gUnknown_203B2BC->menuItems[loopMax].text = gFriendActionSummary;
+  gUnknown_203B2BC->menuItems[loopMax].text = sSummary;
   gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_SUMMARY;
   loopMax += 1;
-  gUnknown_203B2BC->menuItems[loopMax].text = gFriendActionMoves;
+  gUnknown_203B2BC->menuItems[loopMax].text = sMoves;
   gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_MOVES;
   loopMax += 1;
-  gUnknown_203B2BC->menuItems[loopMax].text = gFriendActionCheckIQ;
+  gUnknown_203B2BC->menuItems[loopMax].text = sCheckIQ;
   gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_CHECK_IQ;
   loopMax += 1;
-  gUnknown_203B2BC->menuItems[loopMax].text = 0;
+  gUnknown_203B2BC->menuItems[loopMax].text = NULL;
   gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_NONE;
 
   for(index = 0; index < loopMax; index++)
@@ -440,7 +345,7 @@ void sub_80276A8(void)
 
   loopMax = 0;
   MemoryFill16(gUnknown_203B2BC->unk16C,0,sizeof(gUnknown_203B2BC->unk16C));
-  gUnknown_203B2BC->menuItems[loopMax].text = gFriendActionGive;
+  gUnknown_203B2BC->menuItems[loopMax].text = sGive;
   gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_GIVE;
   if (GetNumberOfFilledInventorySlots() == 0) {
     gUnknown_203B2BC->unk16C[loopMax] = 1;
@@ -808,7 +713,7 @@ void sub_8027D40(u32 r0, BulkItem *heldItem)
     a3.unk8 = 1;
     slot.flags = ITEM_FLAG_EXISTS;
     sub_8090E14(gUnknown_202DE58, &slot, &a3);
-    xxx_format_and_draw(4, 3, gUnknown_80DD958, r0, 0);
+    xxx_format_and_draw(4, 3, sItemBuffered, r0, 0);
     sub_80073E0(r0);
 }
 

@@ -16,7 +16,7 @@ void RaiseDefStatTarget(Entity * pokemon,Entity * target, s32 increment);
 void RaiseSpDefStatTarget(Entity * pokemon,Entity * target, s32 increment);
 void LongTossStatusTarget(Entity * pokemon,Entity * target);
 void PierceStatusTarget(Entity * pokemon,Entity * target);
-void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, struct Move *move, u8 *message);
+void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *move, u8 *message);
 void sub_8079764(Entity * pokemon);
 void CounterStatusTarget(Entity * pokemon, Entity * target, u8 newStatus);
 void SafeguardStatusTarget(Entity * pokemon, Entity * target);

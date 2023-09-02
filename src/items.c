@@ -693,7 +693,7 @@ u32 sub_80913E0(Item* slot, u32 a2, struct subStruct_203B240 ** a3)
 
   xxx_format_and_draw(8, 24, GetItemDescription(slot->id), a2, 0);
   if (GetItemCategory(slot->id) == CATEGORY_TMS_HMS) {
-    struct Move *buffer8 = (struct Move*) (buffer88 + 0x50);  // field in struct
+    Move *buffer8 = (Move*) (buffer88 + 0x50);  // field in struct
     u16 move = GetItemMoveID(slot->id);
     u8 moves_data;
     const u8* typestring;

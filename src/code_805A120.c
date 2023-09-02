@@ -95,9 +95,9 @@ extern s16 gUnknown_80F4DE2;
 extern u8 *gUnknown_80FEB90[];
 extern s16 gUnknown_80F501A[];
 
-extern u32 sub_8055864(Entity *pokemon, Entity *target, struct Move *param_3, s32 param_4, s32 param_5);
+extern u32 sub_8055864(Entity *pokemon, Entity *target, Move *param_3, s32 param_4, s32 param_5);
 extern void sub_80943A0(void*, s32);
-extern s16 sub_8057600(struct Move*, u32);
+extern s16 sub_8057600(Move*, u32);
 extern u8 sub_8044B28(void);
 extern u8 sub_803F428(Position *pos);
 extern void IncreaseEntityPixelPos(Entity *, u32, u32);
@@ -114,7 +114,7 @@ extern void SetMessageArgument(u8 *buffer, Entity *r1, u32);
 extern void SetMessageArgument_2(u8 *buffer, EntityInfo *r1, u32);
 void sub_80522F4(Entity *r0, Entity *r1, char r2[]);
 extern void sub_806A6E8(Entity *);
-extern u32 sub_8055640(Entity *, Entity *, struct Move *, u32, u32);
+extern u32 sub_8055640(Entity *, Entity *, Move *, u32, u32);
 extern void sub_807EA30(u32);
 extern void sub_806ABAC(Entity *, Entity *);
 extern u8 sub_807EAA0(u32, u32);
@@ -132,7 +132,7 @@ extern u8 sub_806F4A4(Entity *, u32);
 extern void sub_807DF38(Entity *pokemon, Entity *target, Position *pos, u32, u8 moveType, s16);
 
 
-bool8 sub_8059424(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059424(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
   
@@ -147,7 +147,7 @@ bool8 sub_8059424(Entity *pokemon, Entity *target, struct Move *move, u32 param_
   return flag;
 }
 
-bool8 sub_805946C(Entity * pokemon,Entity * target,struct Move * move,u32 param_4)
+bool8 sub_805946C(Entity * pokemon,Entity * target,Move * move,u32 param_4)
 {
   s32 HP;
   bool8 flag;
@@ -170,7 +170,7 @@ bool8 sub_805946C(Entity * pokemon,Entity * target,struct Move * move,u32 param_
   return flag;
 }
 
-bool8 sub_80594E0(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_80594E0(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     gDungeon->unkE269 = gUnknown_80F4F42;
     if(sub_807EAA0(1, 0) == 0)
@@ -180,13 +180,13 @@ bool8 sub_80594E0(Entity *pokemon, Entity *target, struct Move *move, u32 param_
     return TRUE;
 }
 
-bool8 sub_8059528(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059528(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     LowerAccuracyStageTarget(pokemon, target, gUnknown_8106A4C, TRUE);
     return TRUE;
 }
 
-bool8 sub_8059540(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059540(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
   
@@ -201,13 +201,13 @@ bool8 sub_8059540(Entity *pokemon, Entity *target, struct Move *move, u32 param_
   return flag;
 }
 
-bool8 sub_8059588(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059588(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     RaiseAttackStageTarget(pokemon, target, gUnknown_8106A50, 1);
     return TRUE;
 }
 
-bool8 sub_80595A0(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_80595A0(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
   
@@ -222,7 +222,7 @@ bool8 sub_80595A0(Entity *pokemon, Entity *target, struct Move *move, u32 param_
   return flag;
 }
 
-bool8 sub_80595EC(Entity * pokemon,Entity * target,struct Move * move,u32 param_4)
+bool8 sub_80595EC(Entity * pokemon,Entity * target,Move * move,u32 param_4)
 {
   u8 moveType;
   u8 local_20;
@@ -240,7 +240,7 @@ bool8 sub_80595EC(Entity * pokemon,Entity * target,struct Move * move,u32 param_
   }
 }
 
-bool8 SolarBeamMoveAction(Entity * pokemon,Entity * target,struct Move * move,u32 param_4)
+bool8 SolarBeamMoveAction(Entity * pokemon,Entity * target,Move * move,u32 param_4)
 {
   u8 weather; // weather and flag are reused in same variable
   s32 movePower;
@@ -262,7 +262,7 @@ bool8 SolarBeamMoveAction(Entity * pokemon,Entity * target,struct Move * move,u3
   return weather;
 }
 
-bool8 sub_8059714(Entity * pokemon,Entity * target,struct Move * move,u32 param_4)
+bool8 sub_8059714(Entity * pokemon,Entity * target,Move * move,u32 param_4)
 {
     u8 local_20;
     
@@ -272,7 +272,7 @@ bool8 sub_8059714(Entity * pokemon,Entity * target,struct Move * move,u32 param_
     return local_20;
 }
 
-bool8 FlyMoveAction(Entity * pokemon, Entity * target, struct Move * move, u32 param_4)
+bool8 FlyMoveAction(Entity * pokemon, Entity * target, Move * move, u32 param_4)
 {
   bool8 flag;
   
@@ -288,13 +288,13 @@ bool8 FlyMoveAction(Entity * pokemon, Entity * target, struct Move * move, u32 p
   return flag;
 }
 
-bool8 sub_80597F0(Entity * pokemon,Entity * target,struct Move * move,u32 param_4)
+bool8 sub_80597F0(Entity * pokemon,Entity * target,Move * move,u32 param_4)
 {
     sub_807DF38(pokemon,target,&target->pos,2,GetMoveType(move),sub_8057600(move,param_4));
     return TRUE;
 }
 
-bool8 DiveMoveAction(Entity * pokemon, Entity * target, struct Move * move, u32 param_4)
+bool8 DiveMoveAction(Entity * pokemon, Entity * target, Move * move, u32 param_4)
 {
   bool8 flag;
   
@@ -313,7 +313,7 @@ bool8 DiveMoveAction(Entity * pokemon, Entity * target, struct Move * move, u32 
   return flag;
 }
 
-bool8 sub_80598CC(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_80598CC(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
   
@@ -328,13 +328,13 @@ bool8 sub_80598CC(Entity *pokemon, Entity *target, struct Move *move, u32 param_
   return flag;
 }
 
-bool8 StockpileMoveAction(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 StockpileMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     HandleStockpile(pokemon, target);
     return TRUE;
 }
 
-bool8 sub_8059928(Entity * pokemon,Entity * target,struct Move * move,u32 param_4)
+bool8 sub_8059928(Entity * pokemon,Entity * target,Move * move,u32 param_4)
 {
   bool8 flag;
   s32 iVar2;
@@ -354,7 +354,7 @@ bool8 sub_8059928(Entity * pokemon,Entity * target,struct Move * move,u32 param_
   return flag;
 }
 
-bool8 sub_8059988(Entity * pokemon,Entity * target,struct Move * move,u32 param_4)
+bool8 sub_8059988(Entity * pokemon,Entity * target,Move * move,u32 param_4)
 {
   bool8 flag;
   
@@ -370,7 +370,7 @@ bool8 sub_8059988(Entity * pokemon,Entity * target,struct Move * move,u32 param_
   return flag;
 }
 
-bool8 sub_80599EC(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_80599EC(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     s32 HP;
 
@@ -381,13 +381,13 @@ bool8 sub_80599EC(Entity *pokemon, Entity *target, struct Move *move, u32 param_
     return TRUE;
 }
 
-bool8 sub_8059A18(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059A18(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     RaiseAccuracyStageTarget(pokemon, target, gUnknown_8106A50);
     return TRUE;
 }
 
-bool8 sub_8059A2C(Entity * pokemon,Entity * target,struct Move * move,u32 param_4)
+bool8 sub_8059A2C(Entity * pokemon,Entity * target,Move * move,u32 param_4)
 {
     u8 local_20;
     u32 level;
@@ -399,25 +399,25 @@ bool8 sub_8059A2C(Entity * pokemon,Entity * target,struct Move * move,u32 param_
     return local_20;
 }
 
-bool8 sub_8059AA8(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059AA8(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     ConfuseStatusTarget(pokemon, target, TRUE);
     return TRUE;
 }
 
-bool8 sub_8059AB8(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059AB8(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     TauntStatusTarget(pokemon, target);
     return TRUE;
 }
 
-bool8 sub_8059AC4(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059AC4(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     HealTargetHP(pokemon, target, gUnknown_80F501A[GetApparentWeather(pokemon)], 0, TRUE);
     return TRUE;
 }
 
-bool8 sub_8059AF8(Entity * pokemon,Entity * target,struct Move * move,u32 param_4)
+bool8 sub_8059AF8(Entity * pokemon,Entity * target,Move * move,u32 param_4)
 {
   u8 local_20;
   
@@ -433,21 +433,21 @@ bool8 sub_8059AF8(Entity * pokemon,Entity * target,struct Move * move,u32 param_
   }
 }
 
-bool8 sub_8059B94(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059B94(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     RaiseAttackStageTarget(pokemon, target, gUnknown_8106A4C, 2);
     return TRUE;
 }
 
-bool8 ConversionMoveAction(Entity * pokemon,Entity * target,struct Move * move,u32 param_4)
+bool8 ConversionMoveAction(Entity * pokemon,Entity * target,Move * move,u32 param_4)
 {
   u8 moveType;
-  struct Move *movePtr;
+  Move *movePtr;
   s32 index;
   EntityInfo * info;
   s32 counter;
   s32 newIndex;
-  struct Move *moveStack [MAX_MON_MOVES];
+  Move *moveStack [MAX_MON_MOVES];
   
   counter = 0;
   info = target->info;
@@ -483,13 +483,13 @@ bool8 ConversionMoveAction(Entity * pokemon,Entity * target,struct Move * move,u
   }
 }
 
-bool8 Conversion2MoveAction(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 Conversion2MoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     Conversion2StatusTarget(pokemon, target);
     return TRUE;
 }
 
-bool8 HelpingHandMoveAction(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 HelpingHandMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     bool8 flag;
     flag = FALSE;
@@ -505,19 +505,19 @@ bool8 HelpingHandMoveAction(Entity *pokemon, Entity *target, struct Move *move, 
     return flag;
 }
 
-bool8 sub_8059CD8(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059CD8(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     RaiseDefenseStageTarget(pokemon, target, gUnknown_8106A4C, 2);
     return TRUE;
 }
 
-bool8 sub_8059CF0(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059CF0(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     sub_807D148(pokemon, target, 0, NULL);
     return TRUE;
 }
 
-bool8 sub_8059D00(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059D00(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
   
@@ -532,13 +532,13 @@ bool8 sub_8059D00(Entity *pokemon, Entity *target, struct Move *move, u32 param_
   return flag;
 }
 
-bool8 sub_8059D48(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059D48(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     ParalyzeStatusTarget(pokemon, target, TRUE);
     return TRUE;
 }
 
-bool8 sub_8059D58(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059D58(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
   
@@ -553,25 +553,25 @@ bool8 sub_8059D58(Entity *pokemon, Entity *target, struct Move *move, u32 param_
   return flag;
 }
 
-bool8 sub_8059D98(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059D98(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     ImmobilizedStatusTarget(pokemon, target);
     return TRUE;
 }
 
-bool8 sub_8059DA4(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059DA4(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     PoisonedStatusTarget(pokemon, target, TRUE);
     return TRUE;
 }
 
-bool8 sub_8059DB4(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059DB4(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     BadlyPoisonedStatusTarget(pokemon, target, TRUE);
     return TRUE;
 }
 
-bool8 sub_8059DC4(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059DC4(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
   
@@ -586,7 +586,7 @@ bool8 sub_8059DC4(Entity *pokemon, Entity *target, struct Move *move, u32 param_
   return flag;
 }
 
-bool8 sub_8059E0C(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_8059E0C(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
   
@@ -601,7 +601,7 @@ bool8 sub_8059E0C(Entity *pokemon, Entity *target, struct Move *move, u32 param_
   return flag;
 }
 
-bool8 sub_8059E54(Entity * pokemon,Entity * target,struct Move * move,u32 param_4,u8 param_5)
+bool8 sub_8059E54(Entity * pokemon,Entity * target,Move * move,u32 param_4,u8 param_5)
 {
   u8 moveType;
   u32 movePower;
@@ -630,7 +630,7 @@ bool8 sub_8059E54(Entity * pokemon,Entity * target,struct Move * move,u32 param_
   return flag;
 }
 
-bool8 sub_8059F38(Entity * pokemon,Entity * target,struct Move * move,u32 param_4)
+bool8 sub_8059F38(Entity * pokemon,Entity * target,Move * move,u32 param_4)
 {
   bool8 flag;
   
@@ -651,7 +651,7 @@ bool8 sub_8059F38(Entity * pokemon,Entity * target,struct Move * move,u32 param_
   return flag;
 }
 
-bool8 sub_8059FC8(Entity * pokemon,Entity * target,struct Move * move,u32 param_4,u8 param_5)
+bool8 sub_8059FC8(Entity * pokemon,Entity * target,Move * move,u32 param_4,u8 param_5)
 {
   u8 moveType;
   u32 movePower;
@@ -680,7 +680,7 @@ bool8 sub_8059FC8(Entity * pokemon,Entity * target,struct Move * move,u32 param_
   return flag;
 }
 
-bool8 TriAttackMoveAction(Entity * pokemon, Entity * target, struct Move *move, u32 param_4)
+bool8 TriAttackMoveAction(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
     bool8 flag;
 
@@ -708,7 +708,7 @@ bool8 TriAttackMoveAction(Entity * pokemon, Entity * target, struct Move *move, 
     return flag;
 }
 
-bool8 sub_805A120(Entity * pokemon,Entity * target, struct Move *move, u32 param_4)
+bool8 sub_805A120(Entity * pokemon,Entity * target, Move *move, u32 param_4)
 {
     EntityInfo *r9;
     EntityInfo *r8;
@@ -766,7 +766,7 @@ bool8 sub_805A120(Entity * pokemon,Entity * target, struct Move *move, u32 param
     }
 }
 
-bool8 sub_805A210(Entity * pokemon, Entity * target, struct Move *move, u32 param_4)
+bool8 sub_805A210(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
     bool8 flag;
 
@@ -775,7 +775,7 @@ bool8 sub_805A210(Entity * pokemon, Entity * target, struct Move *move, u32 para
     return flag;
 }
 
-bool8 sub_805A23C(Entity * pokemon, Entity * target, struct Move *move, u32 param_4)
+bool8 sub_805A23C(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
     if(move->id == MOVE_MUD_SPORT)
     {
@@ -789,7 +789,7 @@ bool8 sub_805A23C(Entity * pokemon, Entity * target, struct Move *move, u32 para
 }
 
 
-bool8 sub_805A258(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_805A258(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
   
@@ -804,24 +804,24 @@ bool8 sub_805A258(Entity *pokemon, Entity *target, struct Move *move, u32 param_
   return flag;
 }
 
-bool8 sub_805A2A0(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_805A2A0(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     return sub_805BA50(pokemon, target, move, param_4);
 }
 
-bool8 sub_805A2B0(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_805A2B0(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     RaiseDefenseStageTarget(pokemon, target, gUnknown_8106A50, 2);
     return TRUE;
 }
 
-bool8 sub_805A2C8(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_805A2C8(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     LowerAttackStageTarget(pokemon, target, gUnknown_8106A4C, 1, 1, TRUE);
     return TRUE;
 }
 
-bool8 SurfMoveAction(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 SurfMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
   u32 uVar2;
@@ -839,7 +839,7 @@ bool8 SurfMoveAction(Entity *pokemon, Entity *target, struct Move *move, u32 par
   return flag;
 }
 
-bool8 RolePlayMoveAction(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 RolePlayMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   EntityInfo * entityInfo;
   EntityInfo * targetEntityInfo;
@@ -864,7 +864,7 @@ bool8 RolePlayMoveAction(Entity *pokemon, Entity *target, struct Move *move, u32
   }
 }
 
-bool8 sub_805A394(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_805A394(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   gDungeon->unkE267[1] = gUnknown_80F4F42;
   if (sub_807EAA0(1,0) == 0) {
@@ -873,19 +873,19 @@ bool8 sub_805A394(Entity *pokemon, Entity *target, struct Move *move, u32 param_
   return TRUE;
 }
 
-bool8 sub_805A3DC(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_805A3DC(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     LowerDefenseStageTarget(pokemon, target, gUnknown_8106A4C, 1, 1, TRUE);
     return TRUE;
 }
 
-bool8 WishMoveAction(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 WishMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     WishStatusTarget(pokemon, target);
     return TRUE;
 }
 
-bool8 sub_805A408(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_805A408(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
   
@@ -900,13 +900,13 @@ bool8 sub_805A408(Entity *pokemon, Entity *target, struct Move *move, u32 param_
   return flag;
 }
 
-bool8 sub_805A450(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_805A450(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   sub_80522F4(pokemon,target,*gUnknown_80FC730);
   return FALSE;
 }
 
-bool8 sub_805A464(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_805A464(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool32 flag;
   Item item;
@@ -927,25 +927,25 @@ bool8 sub_805A464(Entity *pokemon, Entity *target, struct Move *move, u32 param_
   return flag;
 }
 
-bool8 sub_805A4C0(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_805A4C0(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   sub_80522F4(pokemon,target,*gUnknown_80FC74C);
   return FALSE;
 }
 
-bool8 sub_805A4D4(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_805A4D4(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     NappingStatusTarget(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4E94, FALSE));
     return TRUE;
 }
 
-bool8 sub_805A4FC(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_805A4FC(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     IngrainedStatusTarget(pokemon, target);
     return TRUE;
 }
 
-bool8 SwallowMoveAction(Entity *pokemon, Entity *target, struct Move *move, u32 param_4) 
+bool8 SwallowMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4) 
 {
   u8 *stockpileStage;
   
@@ -960,13 +960,13 @@ bool8 SwallowMoveAction(Entity *pokemon, Entity *target, struct Move *move, u32 
   return TRUE;
 }
 
-bool8 CurseMoveAction(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 CurseMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     CurseStatusTarget(pokemon, target);
     return TRUE;
 }
 
-bool8 sub_805A568(Entity * pokemon, Entity * target, struct Move *move, u32 param_4)
+bool8 sub_805A568(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
     bool8 flag;
 
@@ -974,7 +974,7 @@ bool8 sub_805A568(Entity * pokemon, Entity * target, struct Move *move, u32 para
     return flag;
 }
 
-bool8 TickleMoveAction(Entity *pokemon, Entity *target, struct Move *move, u32 param_4) 
+bool8 TickleMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4) 
 {
   u32 stat;
   bool32 flag;
@@ -991,7 +991,7 @@ bool8 TickleMoveAction(Entity *pokemon, Entity *target, struct Move *move, u32 p
   return flag;
 }
 
-bool8 sub_805A5E8(Entity *pokemon, Entity *target, struct Move *move, u32 stat, u32 param_5) 
+bool8 sub_805A5E8(Entity *pokemon, Entity *target, Move *move, u32 stat, u32 param_5) 
 {
   EntityInfo *entityInfo;
   bool32 flag;
@@ -1010,7 +1010,7 @@ bool8 sub_805A5E8(Entity *pokemon, Entity *target, struct Move *move, u32 stat, 
   return flag;
 }
 
-bool8 SpitUpMoveAction(Entity *pokemon, Entity *target, struct Move *move, u32 param_4) 
+bool8 SpitUpMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4) 
 {
   u8 *stockpileStage;
   
@@ -1025,7 +1025,7 @@ bool8 SpitUpMoveAction(Entity *pokemon, Entity *target, struct Move *move, u32 p
   return TRUE;
 }
 
-bool8 sub_805A688(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_805A688(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
   
@@ -1040,7 +1040,7 @@ bool8 sub_805A688(Entity *pokemon, Entity *target, struct Move *move, u32 param_
   return flag;
 }
 
-bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     EntityInfo *entityInfo;
     EntityInfo *targetEntityInfo1;
@@ -1114,14 +1114,14 @@ void sub_805A7D4(Entity * pokemon, Entity * target, Item *item, Position *pos)
   sub_804652C(pokemon,&stackEntity,item,1,0);
 }
 
-bool8 sub_805A85C(Entity * pokemon, Entity * target, struct Move *move, u32 param_4)
+bool8 sub_805A85C(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
   int x;
   int y;
   int counter;
   Position *r9;
   Position pos1;
-  struct Move stackMove;
+  Move stackMove;
   Position32 pos2;
   struct Tile *tile;
   Entity *entity;
@@ -1219,13 +1219,13 @@ _0805AA5E:
   return TRUE;
 }
 
-bool8 sub_805AAD0(Entity * pokemon, Entity * target, struct Move *move, u32 param_4)
+bool8 sub_805AAD0(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
     FixedDamageStatusTarget(pokemon, pokemon);
     return TRUE;
 }
 
-bool8 BellyDrumMoveAction(Entity * pokemon,Entity * target, struct Move *move, u32 param_4)
+bool8 BellyDrumMoveAction(Entity * pokemon,Entity * target, Move *move, u32 param_4)
 {
   u32 *belly;
   u32 newBelly;
@@ -1248,13 +1248,13 @@ bool8 BellyDrumMoveAction(Entity * pokemon,Entity * target, struct Move *move, u
   return flag;
 }
 
-bool8 LightScreenMoveAction(Entity * pokemon, Entity * target, struct Move *move, u32 param_4)
+bool8 LightScreenMoveAction(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
     LightScreenStatusTarget(pokemon, target);
     return TRUE;
 }
 
-bool8 SecretPowerMoveAction(Entity * pokemon, Entity * target, struct Move *move, u32 param_4)
+bool8 SecretPowerMoveAction(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
   bool8 flag;
   
@@ -1297,7 +1297,7 @@ bool8 SecretPowerMoveAction(Entity * pokemon, Entity * target, struct Move *move
   return flag;
 }
 
-bool8 sub_805AC90(Entity * pokemon, Entity * target, struct Move *move, u32 param_4)
+bool8 sub_805AC90(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
   bool8 flag;
   
@@ -1311,7 +1311,7 @@ bool8 sub_805AC90(Entity * pokemon, Entity * target, struct Move *move, u32 para
     return flag;
 }
 
-bool8 BulkUpMoveAction(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 BulkUpMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     s32 stat = gUnknown_8106A4C;
     RaiseAttackStageTarget(pokemon, target, stat, 1);
@@ -1319,13 +1319,13 @@ bool8 BulkUpMoveAction(Entity *pokemon, Entity *target, struct Move *move, u32 p
     return TRUE;
 }
 
-bool8 sub_805AD04(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_805AD04(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     PausedStatusTarget(pokemon, target, 1, CalculateStatusTurns(target, &gUnknown_80F4EE0, TRUE), TRUE);
     return TRUE;
 }
 
-bool8 sub_805AD34(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_805AD34(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     LowerAttackStageTarget(pokemon, target, gUnknown_8106A4C, 2, 1, TRUE);
     return TRUE;
@@ -1341,7 +1341,7 @@ static inline bool8 sub_805AD54_sub(Entity *entity)
     }
 }
 
-bool8 sub_805AD54(Entity * pokemon, Entity * target, struct Move *move, u32 param_4)
+bool8 sub_805AD54(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
   s32 numPossibleTargets;
   EntityInfo *info;
@@ -1384,7 +1384,7 @@ bool8 sub_805AD54(Entity * pokemon, Entity * target, struct Move *move, u32 para
   return flag;
 }
 
-bool8 sub_805AE3C(Entity *pokemon, Entity *target, struct Move *move, u32 param_4)
+bool8 sub_805AE3C(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
  
@@ -1393,7 +1393,7 @@ bool8 sub_805AE3C(Entity *pokemon, Entity *target, struct Move *move, u32 param_
   return flag;
 }
 
-bool8 sub_805AE74(Entity * pokemon, Entity * target, struct Move *move, u32 param_4)
+bool8 sub_805AE74(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
     bool8 flag;
 
@@ -1407,7 +1407,7 @@ bool8 sub_805AE74(Entity * pokemon, Entity * target, struct Move *move, u32 para
     return flag;
 }
 
-bool8 sub_805AECC(Entity * pokemon, Entity * target, struct Move *move, u32 param_4)
+bool8 sub_805AECC(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
     bool8 flag;
   
@@ -1422,17 +1422,17 @@ bool8 sub_805AECC(Entity * pokemon, Entity * target, struct Move *move, u32 para
     return flag;
 }
 
-bool8 PresentMoveAction(Entity * pokemon, Entity * target, struct Move *move, u32 param_4)
+bool8 PresentMoveAction(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
   s32 rand1;
   s32 rand2;
   s32 HP;
   bool8 flag;
 #ifndef NONMATCHING    
-  register struct Move *move_r6 asm("r6");
+  register Move *move_r6 asm("r6");
   register u32 param_4_r4 asm("r4");
 #else
-  struct Move *move_r6;
+  Move *move_r6;
   u32 param_4_r4;
 #endif
 

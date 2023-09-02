@@ -18,8 +18,8 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
     bool8 targetOther = itemTargetFlags & 1;
     u16 targetAlly = (itemTargetFlags >> 1) & 1;
     s32 i;
-    struct Move *move;
-    struct Move *move2;
+    Move *move;
+    Move *move2;
     switch (item->id)
     {
         case ITEM_STICK:

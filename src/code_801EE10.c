@@ -11,9 +11,8 @@ extern UnkTextStruct2 gUnknown_80DC274;
 
 u32 sub_8006544(u32 index);
 s32 sub_801F3F8(void);
-void sub_801F280(u32);
 
-u8 sub_801EE10(u32 param_1, s16 species, struct Move *moves, u32 param_4, u8 *text, u32 param_6)
+u8 sub_801EE10(u32 param_1, s16 species, Move *moves, u32 param_4, const u8 *text, u32 param_6)
 {
   s32 iVar5;
   s32 iVar8;

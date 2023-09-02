@@ -58,7 +58,7 @@ static void sub_80944BC(s16 moveID, u8 *buffer)
 {
     u16 moveID_u16;
     s32 moveID_s32 = moveID;
-    struct Move move;
+    Move move;
 
     if (moveID_s32 < 0x1F4) {
         // Needed this cast/variable to match

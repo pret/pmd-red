@@ -116,7 +116,7 @@ static inline u8 sub_8069F9C_sub(Entity *pokemon)
     return gUnknown_80F51E4[weather];
 }
 
-void sub_8069F9C(Entity *pokemon,Entity * target,struct Move *move)
+void sub_8069F9C(Entity *pokemon,Entity * target,Move *move)
 {
   u8 type;
   u8 ability;
@@ -203,7 +203,7 @@ _0806A068:
   }
 }
 
-void sub_806A120(Entity * pokemon, Entity * target, struct Move* move)
+void sub_806A120(Entity * pokemon, Entity * target, Move* move)
 {
   u32 uVar2_u32;
   u8 moveType;

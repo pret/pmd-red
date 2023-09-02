@@ -214,8 +214,7 @@ gUnknown_203B264: /* 203B264 */
 gUnknown_203B268: /* 203B268 */
 	.space 0x4
 
-gGulpinShopWork: /* 203B26C */
-	.space 0x4
+.include "src/gulpin_shop.o"
 
 gUnknown_203B270: /* 203B270 */
 	.space 0x4

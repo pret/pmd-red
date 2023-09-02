@@ -72,7 +72,7 @@ void sub_801F700(void);
 
 s32 sub_801F3F8(void)
 {
-  struct Move *move;
+  Move *move;
   int index;
   s32 counter;
 
@@ -275,10 +275,9 @@ bool8 sub_801F808(u16 *moveIDs)
     return 1;
 }
 
-s32 sub_801F890(void)
+u32 sub_801F890(void)
 {
-    switch(gUnknown_203B278->state)
-    {
+    switch (gUnknown_203B278->state) {
         case 0:
             sub_801FA58();
             break;

@@ -7,14 +7,14 @@
 #include "text.h"
 
 // size: 0x18C
-struct GulpinShopWork
+typedef struct GulpinShopWork
 {
     /* 0x0 */ u32 isAsleep;
     /* 0x4 */ s32 state;
     u32 unk8;
     /* 0xC */ s16 speciesNum; // species of chosen Pokemon
     /* 0xE */ bool8 isNextMoveLinked;
-    /* 0x10 */ struct Move * moves;
+    /* 0x10 */ Move *moves;
     u16 unk14[4];
     u16 unk1C;
     u16 unk1E;
@@ -34,10 +34,12 @@ struct GulpinShopWork
     u8 unk127;
     OpenedFile **unk128;
     UnkTextStruct2 unk12C[4];
-};
+} GulpinShopWork;
 
-u32 CreateGulpinShop(s32 isAsleep, s16 pokeSpecies, struct Move *moves);
+bool8 CreateGulpinShop(s32, s16, Move *);
 void DestroyGulpinShop(void);
 bool8 GulpinIsNextMoveLinked(void);
 
-#endif
+u32 sub_801E8C0(void);
+
+#endif // GUARD_GULPIN_SHOP_H

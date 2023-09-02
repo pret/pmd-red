@@ -3,6 +3,8 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
+#include "code_801EE10.h"
+#include "code_801EE10_mid.h"
 #include "constants/dungeon.h"
 #include "event_flag.h"
 #include "items.h"
@@ -11,13 +13,12 @@
 #include "menu_input.h"
 #include "moves.h"
 #include "pokemon.h"
-
 #include "text_util.h"
 #include "text1.h"
 #include "text2.h"
 
 // size: 0x280
-struct unkStruct_203B2B8
+typedef struct unkStruct_203B2B8
 {
     s32 state;
     s32 fallbackState;
@@ -30,7 +31,7 @@ struct unkStruct_203B2B8
     bool8 isTeamLeader;
     u32 moveIndex;
     /* 0x24 */ u16 moveID;
-    struct Move moves[8];
+    Move moves[8];
     u16 moveIDs[4];   // some list of move IDs
     u32 menuAction1;
     u32 menuAction2;
@@ -42,137 +43,27 @@ struct unkStruct_203B2B8
     MenuItem unk1BC[10];
     u16 unk20C[10];
     UnkTextStruct2 unk220[4];
-};
-EWRAM_DATA_2 struct unkStruct_203B2B8 *gUnknown_203B2B8 = {0};
+} unkStruct_203B2B8;
 
-const UnkTextStruct2 gUnknown_80DD310 = {
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x00, 0x00,
-    0x00, 0x00,
-    0x00, 0x00,
-    NULL
-};
-
-const UnkTextStruct2 gUnknown_80DD328 = {
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x13, 0x03,
-    0x08, 0x03,
-    0x03, 0x00,
-    NULL
-};
-
-const UnkTextStruct2 gUnknown_80DD340 = {
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x14, 0x04,
-    0x06, 0x03,
-    0x03, 0x00,
-    NULL
-};
-
-const UnkTextStruct2 gUnknown_80DD358 = {
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x02, 0x11,
-    0x1A, 0x02,
-    0x02, 0x00,
-    NULL
-};
-
-const UnkTextStruct2 gUnknown_80DD370 = {
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x02, 0x03,
-    0x0F, 0x02,
-    0x02, 0x00,
-    NULL
-};
-
-extern u8 gAvailablePokemonNames[0x58];
-extern u8 gUnknown_202DEA8[0x58];
 extern u8 gUnknown_202DE58[0x58];
+extern u8 gUnknown_202DEA8[0x58];
+extern u8 gAvailablePokemonNames[0x58]; // 202DF98
 
-extern u8 *gUnknown_80D4920[];
-extern u8 *gUnknown_80D4928[];
-extern u8 *gUnknown_80D4970[];
-extern u8 *gUnknown_80D4970[];
+EWRAM_DATA_2 unkStruct_203B2B8 *gUnknown_203B2B8 = {0};
 
-ALIGNED(4) const u8 gUnknown_80DD388[] = _(
-	"You have chosen to say farewell\n"
-	"to this Pokémon.{EXTRA_MSG}"
-	"The Pokémon will leave its Friend Area.\n"
-	"It will no longer be available for\n"
-	"adventures. Is that OK?");
+// data_80D47B8.s
+extern const u8 *gUnknown_80D4920[];
+extern const u8 *gUnknown_80D4928[];
+extern const u8 *gUnknown_80D4970[];
 
-ALIGNED(4) const u8 gUnknown_80DD420[] = _(
-	"If you say farewell to this\n"
-	"Pokémon{COMMA} it will be gone forever.{EXTRA_MSG}"
-	"You will never be able to get another one\n"
-	"like it to join your team.\n"
-	"Will you release it anyway?");
-
-ALIGNED(4) const u8 gUnknown_80DD4C4[] = _(
-	"{CENTER_ALIGN}{ARG_POKEMON_1} joined the\n"
-	"{CENTER_ALIGN}rescue team for adventures!");
-
-ALIGNED(4) const u8 gUnknown_80DD4F4[] = _(
-	"{CENTER_ALIGN}{ARG_POKEMON_1} left the team to remain\n"
-	"{CENTER_ALIGN}on standby in the Friend Area.");
-
-ALIGNED(4) const u8 gBecameLeader[] = _(
-	"{CENTER_ALIGN}{ARG_POKEMON_1} became the leader\n"
-	"{CENTER_ALIGN}of the rescue team.");
-
-ALIGNED(4) const u8 gUnknown_80DD564[] = _(
-	"{CENTER_ALIGN}{ARG_POKEMON_1} left\n"
-	"{CENTER_ALIGN}the Friend Area.\n"
-	"{CENTER_ALIGN}Bye-bye{COMMA} {ARG_POKEMON_1}!");
-
-ALIGNED(4) const u8 gUnknown_80DD594[] = _(
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1} was\n"
-	"{CENTER_ALIGN}handed over. ");
-
-ALIGNED(4) const u8 gUnknown_80DD5B8[] = _(
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1} was\n"
-	"{CENTER_ALIGN}handed over.{EXTRA_MSG}"
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
-	"{CENTER_ALIGN}returned to the Toolbox.");
-
-ALIGNED(4) const u8 gUnknown_80DD60C[] = _(
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
-	"{CENTER_ALIGN}returned to the Toolbox.");
-
-ALIGNED(4) const u8 gUnknown_80DD63C[] = _(
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
-	"{CENTER_ALIGN}sent to storage.");
-
-ALIGNED(4) const u8 gPartyMenuStandBy[] = "Stand By";
-ALIGNED(4) const u8 gPartyMenuMakeLeader[] = "Make Leader";
-ALIGNED(4) const u8 gPartyMenuJoinTeam[] = "Join Team";
-ALIGNED(4) const u8 gPartyMenuGiveGummi[] = "Give Gummi";
-ALIGNED(4) const u8 gPartyMenuGive[] = "Give";
-ALIGNED(4) const u8 gPartyMenuTake[] = "Take";
-ALIGNED(4) const u8 gPartyMenuSayFarewell[] = "Say Farewell";
-ALIGNED(4) const u8 gPartyMenuSummary[] = "Summary";
-ALIGNED(4) const u8 gPartyMenuMoves[] = "Moves";
-ALIGNED(4) const u8 gPartyMenuCheckIQ[] = "Check IQ";
-ALIGNED(4) const u8 gPartyMenuItemPlaceholder[] = _("Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} ");
-ALIGNED(4) const u8 gUnknown_80DD6E0[] = "%s";
-ALIGNED(4) static const u8 fill0[] = "pksdir0";
+#include "data/party_list_menu.h"
 
 extern u32 sub_8026F04(PokemonStruct1 *);
 extern void sub_8026074(s32);
 bool8 CanTakePokemonHeldItem(PokemonStruct1 *r0);
 extern PokemonStruct1 *sub_808D3F8(void);
 extern PokemonStruct1 *sub_808D3BC(void);
-extern void sub_801F214(void);
-extern u32 sub_801F194(void);
-extern u32 sub_801EF38(u32);
 extern s32 sub_8008ED0(u8 *);
-extern u32 sub_801F890(void);
-extern void sub_801F8D0(void);
 extern void nullsub_104(void);
 extern void sub_8099690(u32);
 extern u32 sub_8022860(void);
@@ -193,10 +84,7 @@ void sub_8026DAC(u32 r0, BulkItem *item);
 bool8 sub_801BEEC(s16 species);
 void sub_8026FA4(void);
 void sub_8026878(void);
-extern void sub_801F808(u16*);
 extern void sub_80227B8(PokemonStruct1 *);
-extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
-extern void sub_801F1B0(u32, u32);
 extern void sub_808D31C(PokemonStruct1 *);
 
 void sub_802678C(void);
@@ -219,31 +107,29 @@ void sub_8026D88(void);
 
 u32 sub_8025EF4(PokemonStruct1 *pokeStruct)
 {
-    s32 index;
-    gUnknown_203B2B8 = MemoryAlloc(sizeof(struct unkStruct_203B2B8), 0x8);
+    s32 i;
+
+    gUnknown_203B2B8 = MemoryAlloc(sizeof(unkStruct_203B2B8), 8);
     gUnknown_203B2B8->pokeStruct = pokeStruct;
 
-    for(index = 0; index < NUM_MONSTERS; index++)
-    {
-        if(gUnknown_203B2B8->pokeStruct == &gRecruitedPokemonRef->pokemon[(s16)index])
-        {
-            gUnknown_203B2B8->pokeSpecies = index;
+    for (i = 0; i < NUM_MONSTERS; i++) {
+        if (gUnknown_203B2B8->pokeStruct == &gRecruitedPokemonRef->pokemon[(s16)i]) {
+            gUnknown_203B2B8->pokeSpecies = i;
             break;
         }
     }
-    
+
     gUnknown_203B2B8->menuAction1 = 0;
     gUnknown_203B2B8->menuAction2 = 0;
     gUnknown_203B2B8->menuAction3 = 0;
     gUnknown_203B2B8->unk8 = FALSE;
     sub_8026074(0);
-    return 1;
+    return TRUE;
 }
 
 u32 sub_8025F68(void)
 {
-    switch(gUnknown_203B2B8->state)
-    {
+    switch (gUnknown_203B2B8->state) {
         case 0:
             sub_8026074(1);
             break;
@@ -323,24 +209,24 @@ void sub_802608C(void)
         case 2:
             for(index = 0; index < 4; index++)
             {
-                gUnknown_203B2B8->unk220[index] = gUnknown_80DD310;
+                gUnknown_203B2B8->unk220[index] = sUnknown_80DD310;
             }
-            gUnknown_203B2B8->unk220[0] = gUnknown_80DD358;
-            gUnknown_203B2B8->unk220[3] = gUnknown_80DD370;
+            gUnknown_203B2B8->unk220[0] = sUnknown_80DD358;
+            gUnknown_203B2B8->unk220[3] = sUnknown_80DD370;
             sub_80264CC();
-            gUnknown_203B2B8->unk220[2] = gUnknown_80DD328;
+            gUnknown_203B2B8->unk220[2] = sUnknown_80DD328;
             sub_8012CAC(&gUnknown_203B2B8->unk220[2], gUnknown_203B2B8->unk16C);
             gUnknown_203B2B8->unk220[2].unkC = 9;
             break;
         case 0x14:
             sub_802678C();
-            gUnknown_203B2B8->unk220[2] = gUnknown_80DD340;
+            gUnknown_203B2B8->unk220[2] = sUnknown_80DD340;
             sub_8012CAC(&gUnknown_203B2B8->unk220[2], gUnknown_203B2B8->unk16C);
             break;
         default:
             for(index = 0; index < 4; index++)
             {
-                gUnknown_203B2B8->unk220[index] = gUnknown_80DD310;
+                gUnknown_203B2B8->unk220[index] = sUnknown_80DD310;
             }
             break; 
     }
@@ -392,18 +278,18 @@ void sub_80261D0(void)
             break;
         case 0x16:
             unk_CopyMoves4To8(gUnknown_203B2B8->moves,gUnknown_203B2B8->pokeStruct->moves);
-            sub_801EE10(3,gUnknown_203B2B8->pokeSpecies,gUnknown_203B2B8->moves,0,0,0);
+            sub_801EE10(3,gUnknown_203B2B8->pokeSpecies,gUnknown_203B2B8->moves,0,NULL,0);
             break;
         case 0x17:
-            sub_801F1B0(1,0);
+            sub_801F1B0(TRUE, FALSE);
             break;
         case 0xc:
             sub_8026878();
-            sub_8014248(gUnknown_80DD388,0,3,gUnknown_203B2B8->unk1BC,0,4,0,0,0x101);
+            sub_8014248(sUnknown_80DD388,0,3,gUnknown_203B2B8->unk1BC,0,4,0,0,0x101);
             break;
         case 0xd:
             sub_8026878();
-            sub_8014248(gUnknown_80DD420,0,3,gUnknown_203B2B8->unk1BC,0,4,0,0,0x101);
+            sub_8014248(sUnknown_80DD420,0,3,gUnknown_203B2B8->unk1BC,0,4,0,0,0x101);
             break;
         case 0x18:
             GetLinkedSequence(gUnknown_203B2B8->moveIndex, gUnknown_203B2B8->moves,gUnknown_203B2B8->moveIDs);
@@ -412,22 +298,22 @@ void sub_80261D0(void)
         case 5:
             gUnknown_203B2B8->fallbackState = 0x19;
             PlaySound(0xcf);
-            sub_80141B4(gUnknown_80DD4C4,0,0,0x101);
+            sub_80141B4(sUnknown_80DD4C4,0,0,0x101);
             break;
         case 6:
             gUnknown_203B2B8->fallbackState = 0x19;
             PlaySound(0xcf);
-            sub_80141B4(gUnknown_80DD4F4,0,0,0x101);
+            sub_80141B4(sUnknown_80DD4F4,0,0,0x101);
             break;
         case 7:
             gUnknown_203B2B8->fallbackState = 0x19;
             PlaySound(0xcc);
-            sub_80141B4(gBecameLeader,0,0,0x101);
+            sub_80141B4(sBecameLeader,0,0,0x101);
             break;
         case 8:
             gUnknown_203B2B8->fallbackState = 9;
             PlaySound(0xca);
-            sub_80141B4(gUnknown_80DD564,0,0,0x101);
+            sub_80141B4(sUnknown_80DD564,0,0,0x101);
             break;
         case 9:
             sub_8026FA4();
@@ -436,23 +322,23 @@ void sub_80261D0(void)
             break;
         case 0xf:
             gUnknown_203B2B8->fallbackState = 2;
-            sub_80141B4(gUnknown_80DD594,0,0,0x101);
+            sub_80141B4(sUnknown_80DD594,0,0,0x101);
             break;
         case 0x10:
             gUnknown_203B2B8->fallbackState = 2;
-            sub_80141B4(gUnknown_80DD5B8,0,0,0x101);
+            sub_80141B4(sUnknown_80DD5B8,0,0,0x101);
             break;
         case 0x11:
             gUnknown_203B2B8->fallbackState = 2;
-            sub_80141B4(gUnknown_80DD60C,0,0,0x101);
+            sub_80141B4(sUnknown_80DD60C,0,0,0x101);
             break;
         case 10:
             gUnknown_203B2B8->fallbackState = 0x19;
-            sub_80141B4(gUnknown_80DD60C,0,0,0x101);
+            sub_80141B4(sUnknown_80DD60C,0,0,0x101);
             break;
         case 0xb:
             gUnknown_203B2B8->fallbackState = 0x19;
-            sub_80141B4(gUnknown_80DD63C,0,0,0x101);
+            sub_80141B4(sUnknown_80DD63C,0,0,0x101);
             break;
         case 0:
         case 0x19:
@@ -474,7 +360,7 @@ void sub_80264CC(void) {
 
     if(temp = pokeStruct->unk0 >> 1, one = 1, temp & one)
     {
-        gUnknown_203B2B8->unk16C[loopMax].text = gPartyMenuStandBy;
+        gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuStandBy;
         gUnknown_203B2B8->unk16C[loopMax].menuAction = 7;
         if(!sub_8026E88(pokeStruct))
         {
@@ -484,14 +370,14 @@ void sub_80264CC(void) {
 
         if(sub_80023E4(8) && !pokeStruct->isTeamLeader)
         {
-            gUnknown_203B2B8->unk16C[loopMax].text = gPartyMenuMakeLeader;
+            gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuMakeLeader;
             gUnknown_203B2B8->unk16C[loopMax].menuAction = 8;
             loopMax += 1;
         }
     }
     else
     {
-        gUnknown_203B2B8->unk16C[loopMax].text = gPartyMenuJoinTeam;
+        gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuJoinTeam;
         gUnknown_203B2B8->unk16C[loopMax].menuAction = 6;
         if(!sub_808D750(gUnknown_203B2B8->pokeSpecies))
         {
@@ -500,7 +386,7 @@ void sub_80264CC(void) {
         loopMax += 1;
     }
     
-    gUnknown_203B2B8->unk16C[loopMax].text = gPartyMenuGiveGummi;
+    gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuGiveGummi;
     gUnknown_203B2B8->unk16C[loopMax].menuAction = 10;
     if(!HasGummiItem())
     {
@@ -508,7 +394,7 @@ void sub_80264CC(void) {
     }
     loopMax += 1;
     
-    gUnknown_203B2B8->unk16C[loopMax].text = gPartyMenuGive;
+    gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuGive;
     gUnknown_203B2B8->unk16C[loopMax].menuAction = 0xB;
     if(GetNumberOfFilledInventorySlots() == 0)
     {
@@ -516,7 +402,7 @@ void sub_80264CC(void) {
     }
     loopMax += 1;
     
-    gUnknown_203B2B8->unk16C[loopMax].text = gPartyMenuTake;
+    gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuTake;
     gUnknown_203B2B8->unk16C[loopMax].menuAction = 0xC;
     if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE || gUnknown_203B2B8->item2.id == ITEM_NOTHING)
     {
@@ -526,7 +412,7 @@ void sub_80264CC(void) {
 
     if((temp = pokeStruct->unk0 >> 1, one = 1, temp & one) == 0)
     {
-        gUnknown_203B2B8->unk16C[loopMax].text = gPartyMenuSayFarewell;
+        gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuSayFarewell;
         gUnknown_203B2B8->unk16C[loopMax].menuAction = 9;
         if(!sub_8026EB8(pokeStruct))
         {
@@ -535,13 +421,13 @@ void sub_80264CC(void) {
         loopMax += 1;
     }
     
-    gUnknown_203B2B8->unk16C[loopMax].text = gPartyMenuSummary;
+    gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuSummary;
     gUnknown_203B2B8->unk16C[loopMax].menuAction = 4;
     loopMax += 1;
-    gUnknown_203B2B8->unk16C[loopMax].text = gPartyMenuMoves;
+    gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuMoves;
     gUnknown_203B2B8->unk16C[loopMax].menuAction = 0xD;
     loopMax += 1;
-    gUnknown_203B2B8->unk16C[loopMax].text = gPartyMenuCheckIQ;
+    gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuCheckIQ;
     gUnknown_203B2B8->unk16C[loopMax].menuAction = 5;
     loopMax += 1;
     gUnknown_203B2B8->unk16C[loopMax].text = NULL;
@@ -570,7 +456,7 @@ void sub_802678C(void)
     s32 index;
     s32 loopMax = 0;
     MemoryFill16(gUnknown_203B2B8->unk20C, 0, sizeof(gUnknown_203B2B8->unk20C));
-    gUnknown_203B2B8->unk16C[loopMax].text = gPartyMenuGive;
+    gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuGive;
     gUnknown_203B2B8->unk16C[loopMax].menuAction = 0xB;
     if(GetNumberOfFilledInventorySlots() == 0)
     {
@@ -936,7 +822,7 @@ void sub_8026DAC(u32 r0, BulkItem *item)
     temp.unk8 = 1;
     slot.flags = ITEM_FLAG_EXISTS;
     sub_8090E14(gUnknown_202DE58, &slot, &temp);
-    xxx_format_and_draw(4, 3, gPartyMenuItemPlaceholder, r0, 0);
+    xxx_format_and_draw(4, 3, sPartyMenuItemPlaceholder, r0, 0);
     sub_80073E0(r0);
 }
 
@@ -950,9 +836,9 @@ void sub_8026E08(u32 r0)
     sub_80073B8(r0);
     sub_80922B4(gAvailablePokemonNames, gUnknown_203B2B8->pokeStruct->name, POKEMON_NAME_LENGTH);
     sub_808D930(buffer, gUnknown_203B2B8->pokeStruct->speciesNum);
-    sprintfStatic(buffer1, gUnknown_80DD6E0, gAvailablePokemonNames);
+    sprintfStatic(buffer1, sUnknown_80DD6E0, gAvailablePokemonNames);
     x = sub_8008ED0(buffer1);
-    xxx_call_draw_string(((gUnknown_80DD370.unkC << 3) - x) / 2, 3, buffer1, r0, 0);
+    xxx_call_draw_string(((sUnknown_80DD370.unkC << 3) - x) / 2, 3, buffer1, r0, 0);
     sub_80073E0(r0);
 }
 

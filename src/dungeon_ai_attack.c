@@ -103,7 +103,7 @@ void DecideAttack(Entity *pokemon)
     numUsableMoves = 0;
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        struct Move *move = &pokemonInfo->moves[i];
+        Move *move = &pokemonInfo->moves[i];
         if (pokemonInfo->moves[i].moveFlags & MOVE_FLAG_EXISTS)
         {
             if (pokemonInfo->moves[i].moveFlags & MOVE_FLAG_ENABLED_FOR_AI)
@@ -115,7 +115,7 @@ void DecideAttack(Entity *pokemon)
     }
     if (total == 0)
     {
-        struct Move struggle;
+        Move struggle;
         InitPokemonMove(&struggle, MOVE_STRUGGLE);
         AIConsiderMove(&aiPossibleMove[0], pokemon, &struggle);
         if (aiPossibleMove[0].canBeUsed)
@@ -142,7 +142,7 @@ void DecideAttack(Entity *pokemon)
         // This requires a separate check from the 0-PP check used for unlinked moves.
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            struct Move *move = &pokemonInfo->moves[i];
+            Move *move = &pokemonInfo->moves[i];
             if (!(move->moveFlags & MOVE_FLAG_EXISTS))
             {
                 break;
@@ -181,7 +181,7 @@ void DecideAttack(Entity *pokemon)
     }
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        struct Move *move;
+        Move *move;
         aiPossibleMove[i].canBeUsed = FALSE;
         move = &pokemonInfo->moves[i];
         if (move->moveFlags & MOVE_FLAG_EXISTS &&
@@ -337,7 +337,7 @@ void DecideAttack(Entity *pokemon)
     }
 }
 
-s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, struct Move *move)
+s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move *move)
 {
     s32 targetingFlags;
     s32 moveWeight = 1;
@@ -595,7 +595,7 @@ bool8 IsTargetInLineRange(Entity *user, Entity *target, s32 range)
     return TRUE;
 }
 
-s32 TryAddTargetToAITargetList(s32 numPotentialTargets, s32 targetingFlags, Entity *user, Entity *target, struct Move *move, bool32 hasStatusChecker)
+s32 TryAddTargetToAITargetList(s32 numPotentialTargets, s32 targetingFlags, Entity *user, Entity *target, Move *move, bool32 hasStatusChecker)
 {
     s32 direction;
     s32 targetingFlags2 = (s16) targetingFlags;
@@ -624,7 +624,7 @@ s32 TryAddTargetToAITargetList(s32 numPotentialTargets, s32 targetingFlags, Enti
     return numPotentialTargets;
 }
 
-bool8 IsAITargetEligible(s32 targetingFlags, Entity *user, Entity *target, struct Move *move, bool32 hasStatusChecker)
+bool8 IsAITargetEligible(s32 targetingFlags, Entity *user, Entity *target, Move *move, bool32 hasStatusChecker)
 {
     EntityInfo *targetData;
     s32 targetingFlags2 = (s16) targetingFlags;
@@ -967,7 +967,7 @@ void sub_807CB3C(Entity *pokemon)
     Item IVar5;
     EntityInfo *entityInfo; // r7
     ActionContainer act;
-    struct Move move;
+    Move move;
     struct AIPossibleMove sp28;
     bool8 r8;
 

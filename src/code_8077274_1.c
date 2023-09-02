@@ -464,8 +464,8 @@ void RestorePPTarget(Entity * pokemon,Entity * target, s32 param_3)
 {
   volatile s32 PP;
   volatile s32 basePP;
-  struct Move *movePtr;
-  struct Move *movePtr1;
+  Move *movePtr;
+  Move *movePtr1;
   s32 index;
   bool8 PPChanged;
   EntityInfo *entityInfo;
@@ -668,10 +668,10 @@ void PierceStatusTarget(Entity * pokemon, Entity * target)
     EntityUpdateStatusSprites(target);
 }
 
-void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, struct Move *move, u8 *message)
+void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *move, u8 *message)
 {
   bool8 bVar2;
-  struct Move *movePtr;
+  Move *movePtr;
   s32 index;
   bool8 uVar5;
   s32 iVar7;
@@ -1072,7 +1072,7 @@ void sub_8079F20(Entity * pokemon, Entity * target, u8 param_3, u8 param_4)
 {
   bool8 moveUnsealed; // r9
   s32 moveSpeed;
-  struct Move *move;
+  Move *move;
   EntityInfo *entityInfo; // r7
   bool8 bVar8; // r8
   s32 index;
@@ -1143,7 +1143,7 @@ void sub_8079F20(Entity * pokemon, Entity * target, u8 param_3, u8 param_4)
 
 void sub_807A0CC(Entity * pokemon, Entity * target)
 {
-  struct Move *move;
+  Move *move;
   EntityInfo *entityInfo;
   s32 index;
 

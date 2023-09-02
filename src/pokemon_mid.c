@@ -897,7 +897,7 @@ s32 sub_808E400(s32 _species, s16* _a2, s32 _a3, s32 _a4)
   return count;
 }
 
-void sub_808E490(struct Move* a1, s16 species)
+void sub_808E490(Move* a1, s16 species)
 {
     u16 buffer[0x10]; // of moveIDs
     s32 i;

@@ -12,8 +12,8 @@ bool8 HasTactic(Entity *pokemon, u8 tactic);
 bool8 IQSkillIsEnabled(Entity *pokemon, u8 IQSkill);
 void LoadIQSkills(Entity *pokemon);
 bool8 CanSeeTeammate(Entity * pokemon);
-u8 GetMoveTypeForMonster(Entity *pokemon, struct Move *pokeMove);
-s32 GetMovePower(Entity *pokemon, struct Move *pokeMove);
+u8 GetMoveTypeForMonster(Entity *pokemon, Move *pokeMove);
+s32 GetMovePower(Entity *pokemon, Move *pokeMove);
 bool8 ToolboxEnabled(EntityInfo *pokemon);
 bool8 SetVisualFlags(EntityInfo *entityInfo, u16 newFlag, bool8 param_3);
 

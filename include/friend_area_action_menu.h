@@ -16,7 +16,7 @@ struct unkStruct_203B2BC
     bool8 isTeamLeader;
     u32 moveIndex;  // some sort of move index
     u16 moveID;
-    struct Move moves[8];
+    Move moves[8];
     u16 moveIDs[MAX_MON_MOVES];   // some list of move IDs
     u32 menuAction1;
     u32 menuAction2;

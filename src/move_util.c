@@ -14,7 +14,7 @@
 extern bool8 sub_8044B28(void);
 extern void sub_80429C8(Entity *r0);
 
-typedef bool8 (*MoveCallback)(Entity *pokemon, Entity *target, struct Move *move, s32 param_4);
+typedef bool8 (*MoveCallback)(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 struct NaturePowerMove
 {
     u16 moveID;
@@ -27,21 +27,21 @@ bool8 sub_805755C(Entity* pokemon,u16 param_2);
 
 u32 sub_8057144(Entity * pokemon)
 {
-  struct Move **ppbVar3;
+  Move **ppbVar3;
   s32 entityIndex;
-  struct Move *move1;
-  struct Move *move2;
+  Move *move1;
+  Move *move2;
   s32 index;
   Entity *entity;
   s32 counter;
-  struct Move *moveStack [80];
-  struct Move **local_20;
+  Move *moveStack [80];
+  Move **local_20;
 #ifndef NONMATCHING
   register s32 counter_1 asm("r0");
-  register struct Move** move_1 asm("r1");
+  register Move** move_1 asm("r1");
 #else
   s32 counter_1;
-  struct Move** move_1;
+  Move** move_1;
 #endif
 
   counter = 0;
@@ -83,7 +83,7 @@ u32 sub_8057144(Entity * pokemon)
   }
 }
 
-bool8 sub_80571F0(Entity * pokemon, struct Move *move)
+bool8 sub_80571F0(Entity * pokemon, Move *move)
 {
     u16 moveID;
     s32 tileset;
@@ -168,7 +168,7 @@ bool8 sub_8057308(Entity *pokemon, s32 chance)
 bool8 CanAIUseMove(Entity *pokemon, s32 moveIndex, bool8 hasPPChecker)
 {
     EntityInfo *pokemonInfo = pokemon->info;
-    struct Move *move = &pokemonInfo->moves[moveIndex];
+    Move *move = &pokemonInfo->moves[moveIndex];
     s32 i;
     if (!(move->moveFlags & MOVE_FLAG_EXISTS))
     {
@@ -208,7 +208,7 @@ bool8 CanAIUseMove(Entity *pokemon, s32 moveIndex, bool8 hasPPChecker)
     goto incMoveIndex;
 }
 
-bool8 CanMonsterUseMove(Entity *pokemon, struct Move *move, bool8 hasPPChecker)
+bool8 CanMonsterUseMove(Entity *pokemon, Move *move, bool8 hasPPChecker)
 {
     EntityInfo *pokemonInfo = pokemon->info;
     if (move->id == MOVE_REGULAR_ATTACK)
@@ -247,7 +247,7 @@ bool8 CanMonsterUseMove(Entity *pokemon, struct Move *move, bool8 hasPPChecker)
     return TRUE;
 }
 
-bool8 sub_805744C(Entity * pokemon, struct Move *move, bool8 param_3)
+bool8 sub_805744C(Entity * pokemon, Move *move, bool8 param_3)
 {
   EntityInfo *entityInfo;
   

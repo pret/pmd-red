@@ -22,7 +22,7 @@ extern u8 gAvailablePokemonNames[];
 extern u32 gUnknown_80FC31C;
 extern u32 gUnknown_80FCEFC;
 extern u32 gUnknown_80FC2FC;
-extern bool8 sub_805744C(Entity *, struct Move *, u32);
+extern bool8 sub_805744C(Entity *, Move *, u32);
 extern void SetMessageArgument(char[], Entity*, u32);
 extern void sub_80522F4(Entity *r1, Entity *r2, u32);
 
@@ -72,12 +72,12 @@ bool8 sub_80717A4(Entity *pokemon, u16 moveID)
   {
     // Pin this register to match
 #ifndef NONMATCHING
-    register struct Move *pokeMove asm("r4");
+    register Move *pokeMove asm("r4");
 #else
-    struct Move *pokeMove;
+    Move *pokeMove;
 #endif
 
-    struct Move *pokeMove2; // some reason uses another pointer to same struct
+    Move *pokeMove2; // some reason uses another pointer to same struct
 
     for(index = 0, pokeMove = entityInfo->moves, pokeMove2 = pokeMove; index < MAX_MON_MOVES; pokeMove++, pokeMove2++, index++)
     {
@@ -215,7 +215,7 @@ bool8 CanSeeTeammate(Entity * pokemon)
   }
 }
 
-u8 GetMoveTypeForMonster(Entity *pokemon, struct Move *pokeMove)
+u8 GetMoveTypeForMonster(Entity *pokemon, Move *pokeMove)
 {
     if (pokeMove->id == MOVE_HIDDEN_POWER)
         return pokemon->info->hiddenPowerType;
@@ -223,7 +223,7 @@ u8 GetMoveTypeForMonster(Entity *pokemon, struct Move *pokeMove)
         return GetMoveType(pokeMove);
 }
 
-s32 GetMovePower(Entity *pokemon, struct Move *pokeMove)
+s32 GetMovePower(Entity *pokemon, Move *pokeMove)
 {
     if(pokeMove->id == MOVE_HIDDEN_POWER)
         return (pokemon->info->hiddenPowerBasePower + pokeMove->ginseng);

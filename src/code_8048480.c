@@ -252,11 +252,11 @@ void sub_80485B0(Entity *pokemon, Entity * target)
   s32 moveIndex;
   EntityInfo *entityInfo;
 #ifndef NONMATCHING
-  register struct Move *movePtr1 asm("r4"); // r4
-  register struct Move *movePtr2 asm("r5"); // r5
+  register Move *movePtr1 asm("r4"); // r4
+  register Move *movePtr2 asm("r5"); // r5
 #else
-  struct Move *movePtr1; // r4
-  struct Move *movePtr2; // r5
+  Move *movePtr1; // r4
+  Move *movePtr2; // r5
 #endif
   u8 moveBoost;
   s32 movePowerBoost;

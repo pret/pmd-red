@@ -39,7 +39,7 @@ void sub_807E1A0(Entity *pokemon,Entity *target,u8 param_3,s16 param_4,s32 param
 {
   EntityInfo *targetInfo;
   u8 flag;
-  struct Move move;
+  Move move;
   s32 newHP;
   s32 param_4_s32;
 

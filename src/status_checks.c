@@ -110,8 +110,8 @@ bool8 HasStatusAffectingActions(Entity *pokemon)
 bool8 sub_80701A4(Entity *pokemon)
 {
   bool8 flag;
-  struct Move *move;
-  struct Move *move2;
+  Move *move;
+  Move *move2;
   s32 index;
   s32 index_1;
   EntityInfo * pokemonInfo;

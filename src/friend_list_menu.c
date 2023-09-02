@@ -7,7 +7,7 @@
 #include "pokemon.h"
 #include "moves.h"
 #include "menu_input.h"
-
+#include "code_801EE10.h"
 #include "kecleon_bros.h"
 #include "code_80130A8.h"
 #include "code_801EE10_1.h"
@@ -15,11 +15,12 @@
 #include "code_801B3C0.h"
 #include "code_80118A4.h"
 #include "event_flag.h"
+#include "code_801EE10_mid.h"
 
 // there might be more overlap with unkStruct_203B2BC
 // I was working on the moves and put the data that seemed to correspond to that
 // into a separate struct
-struct unkStruct_203B2B4
+typedef struct unkStruct_203B2B4
 {
     // size: 0x178
     s32 unk0;
@@ -32,95 +33,31 @@ struct unkStruct_203B2B4
     BulkItem item1;
     BulkItem item2;
     /* 0x1C */ PokemonStruct1 *pokeStruct;
-    u32 moveIndex;  // some sort of move index
+    u32 moveIndex; // some sort of move index
     u16 moveID;
-    struct Move moves[8];
-    u16 moveIDs[4];   // some list of move IDs
+    Move moves[8];
+    u16 moveIDs[4]; // some list of move IDs
     u32 menuAction1;
     s32 menuAction2;
     MenuStruct unk78;
     MenuItem unkC8[8];
     u16 unk108[8];
     UnkTextStruct2 unk118[4];
-};
-EWRAM_DATA_2 struct unkStruct_203B2B4 *gUnknown_203B2B4 = {0};
+} unkStruct_203B2B4;
 
-const UnkTextStruct2 gUnknown_80DD148 = {
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x00, 0x00,
-    0x00, 0x00,
-    0x00, 0x00,
-    NULL
-};
-
-const UnkTextStruct2 gUnknown_80DD160 = {
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x13, 0x04,
-    0x08, 0x03,
-    0x03, 0x00,
-    NULL
-};
-
-const UnkTextStruct2 gUnknown_80DD178 = {
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x14, 0x04,
-    0x06, 0x03,
-    0x03, 0x00,
-    NULL
-};
-
-const UnkTextStruct2 gUnknown_80DD190 = {
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x02, 0x11,
-    0x1A, 0x02,
-    0x02, 0x00,
-    NULL
-};
-
-extern u8 gAvailablePokemonNames[];
-extern u8 gUnknown_202DEA8[];
-extern u8 *gUnknown_80D4970[];
 extern u8 gUnknown_202DE58[];
+extern u8 gUnknown_202DEA8[];
+extern u8 gAvailablePokemonNames[];
 
-ALIGNED(4) const u8 gUnknown_80DD1A8[] = "Whom would you like to visit?";
+EWRAM_DATA_2 unkStruct_203B2B4 *gUnknown_203B2B4 = {0};
 
-ALIGNED(4) const u8 gUnknown_80DD1C8[] = _(
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1} was\n"
-	"{CENTER_ALIGN}handed over. ");
+extern u8 *gUnknown_80D4970[];
 
-ALIGNED(4) const u8 gUnknown_80DD1EC[] = _(
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1} was\n"
-	"{CENTER_ALIGN}handed over.{EXTRA_MSG}"
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
-	"{CENTER_ALIGN}returned to the Toolbox.");
-
-ALIGNED(4) const u8 gUnknown_80DD240[] = _(
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
-	"{CENTER_ALIGN}returned to the Toolbox.");
-
-ALIGNED(4) const u8 gUnknown_80DD270[] = _(
-    "{CENTER_ALIGN}{ARG_POKEMON_1} left the team to remain\n"
-    "{CENTER_ALIGN}on standby in the Friend Area.");
-
-ALIGNED(4) const u8 gFriendListGive[] = "Give";
-ALIGNED(4) const u8 gFriendListTake[] = "Take";
-ALIGNED(4) const u8 gFriendListStandBy[] = "Stand By";
-ALIGNED(4) const u8 gFriendListVisit[] = "Visit";
-ALIGNED(4) const u8 gFriendListName[] = "Name";
-ALIGNED(4) const u8 gFriendListSummary[] = "Summary";
-ALIGNED(4) const u8 gFriendListMoves[] = "Moves";
-ALIGNED(4) const u8 gFriendListCheckIQ[] = "Check IQ";
-ALIGNED(4) const u8 gFriendListItem[] = _("Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} ");
-ALIGNED(4) static const u8 fill0[] = "pksdir0";
+#include "data/friend_list_menu.h"
 
 extern s16 sub_80A5728(void);
 extern u8 sub_8002658(s16);
 extern bool8 sub_8024108(u32);
-extern void sub_801F1B0(u32, u32);
 extern void sub_8024458(s16, u32);
 extern void sub_801BEEC(s16);
 extern void nullsub_104(void);
@@ -130,14 +67,7 @@ extern void sub_802453C(void);
 extern u32 sub_801BF48(void);
 extern void sub_801BF98(void);
 
-extern u32 sub_801EF38(u32);
-extern u32 sub_801F194(void);
-extern void sub_801F214(void);
-extern void sub_801EE10(u32, s16, struct Move *, u32, u32, u32);
-extern void sub_801F808(u16 *);
 extern void sub_8099690(u32);
-extern void sub_801F8D0(void);
-extern u32 sub_801F890(void);
 extern void sub_80160D8(void);
 extern u32 sub_8016080(void);
 extern s32 sub_80144A4(s32 *);
@@ -168,7 +98,7 @@ bool8 sub_80252F0(s32 param_1)
     return FALSE;
   }
   else {
-    gUnknown_203B2B4 = MemoryAlloc(sizeof(struct unkStruct_203B2B4),8);
+    gUnknown_203B2B4 = MemoryAlloc(sizeof(unkStruct_203B2B4),8);
     gUnknown_203B2B4->menuAction1 = 0;
     gUnknown_203B2B4->unk0 = param_1;
     gUnknown_203B2B4->unkC = sub_8002658(sub_80A5728());
@@ -251,35 +181,33 @@ void sub_8025434(s32 newState)
 
 void sub_802544C(void)
 {
-  s32 index;
-  
-  sub_8006518(gUnknown_203B2B4->unk118);
+    s32 i;
 
-  switch(gUnknown_203B2B4->state)
-  {
-    case 3:
-        if (gUnknown_203B2B4->unk0 == 0) {
-            gUnknown_203B2B4->unk118[3] = gUnknown_80DD190;
-        }
-        sub_8025728();
-        gUnknown_203B2B4->unk118[2] = gUnknown_80DD160;
-        sub_8012CAC(&gUnknown_203B2B4->unk118[2],gUnknown_203B2B4->unkC8);
-        break;
-    case 0xD:
-        sub_802591C();
-        gUnknown_203B2B4->unk118[2] = gUnknown_80DD178;
-        sub_8012CAC(&gUnknown_203B2B4->unk118[2],gUnknown_203B2B4->unkC8);
-        break;
-    default:
-        for(index = 0; index < 4; index++)
-        {
-            gUnknown_203B2B4->unk118[index] = gUnknown_80DD148;
-        }
-        break;
+    sub_8006518(gUnknown_203B2B4->unk118);
 
-  }
-  ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B2B4->unk118, TRUE, TRUE);
+    switch (gUnknown_203B2B4->state) {
+        case 3:
+            if (gUnknown_203B2B4->unk0 == 0)
+                gUnknown_203B2B4->unk118[3] = sUnknown_80DD190;
+
+            sub_8025728();
+            gUnknown_203B2B4->unk118[2] = sUnknown_80DD160;
+            sub_8012CAC(&gUnknown_203B2B4->unk118[2], gUnknown_203B2B4->unkC8);
+            break;
+        case 13:
+            sub_802591C();
+            gUnknown_203B2B4->unk118[2] = sUnknown_80DD178;
+            sub_8012CAC(&gUnknown_203B2B4->unk118[2], gUnknown_203B2B4->unkC8);
+            break;
+        default:
+            for (i = 0; i < 4; i++)
+                gUnknown_203B2B4->unk118[i] = sUnknown_80DD148;
+            break;
+
+    }
+
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B2B4->unk118, TRUE, TRUE);
 }
 
 void sub_8025518(void)
@@ -291,7 +219,7 @@ void sub_8025518(void)
   {
     case 0:
         gUnknown_203B2B4->fallbackState = 1;
-        sub_80141B4(gUnknown_80DD1A8,0,0,0x301);
+        sub_80141B4(sVisitWhoPrompt,0,0,0x301);
         break;
     case 1:
         uVar3 = 4;
@@ -334,27 +262,27 @@ void sub_8025518(void)
         break;
     case 8:
         gUnknown_203B2B4->fallbackState = 2;
-        sub_80141B4(gUnknown_80DD1C8,0,0,0x101);
+        sub_80141B4(sItemHandedOver,0,0,0x101);
         break;
     case 9:
         gUnknown_203B2B4->fallbackState = 2;
-        sub_80141B4(gUnknown_80DD1EC,0,0,0x101);
+        sub_80141B4(sItemExchanged,0,0,0x101);
         break;
     case 10:
         gUnknown_203B2B4->fallbackState = 2;
-        sub_80141B4(gUnknown_80DD240,0,0,0x101);
+        sub_80141B4(sReturnedToToolbox,0,0,0x101);
         break;
     case 7:
         gUnknown_203B2B4->fallbackState = 1;
         PlaySound(0xcf);
-        sub_80141B4(gUnknown_80DD270,0,0,0x101);
+        sub_80141B4(sLeftOnStandby,0,0,0x101);
         break;
     case 0xf:
         unk_CopyMoves4To8(gUnknown_203B2B4->moves,gUnknown_203B2B4->pokeStruct->moves);
-        sub_801EE10(3,gUnknown_203B2B4->species,gUnknown_203B2B4->moves,0,0,0);
+        sub_801EE10(3,gUnknown_203B2B4->species,gUnknown_203B2B4->moves,0,NULL,0);
         break;
     case 0x10:
-        sub_801F1B0(1,0);
+        sub_801F1B0(TRUE, FALSE);
         break;
     case 0x11:
         GetLinkedSequence(gUnknown_203B2B4->moveIndex,gUnknown_203B2B4->moves, gUnknown_203B2B4->moveIDs);
@@ -377,14 +305,14 @@ void sub_8025728(void)
     pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2B4->species];
     MemoryFill16(gUnknown_203B2B4->unk108,0,sizeof(gUnknown_203B2B4->unk108));
     if (gUnknown_203B2B4->unk0 == 0) {
-        gUnknown_203B2B4->unkC8[loopMax].text = gFriendListGive;
+        gUnknown_203B2B4->unkC8[loopMax].text = sGive;
         gUnknown_203B2B4->unkC8[loopMax].menuAction = 10;
         if (GetNumberOfFilledInventorySlots() == 0) {
             gUnknown_203B2B4->unk108[loopMax] = 1;
         }
         loopMax += 1;
 
-        gUnknown_203B2B4->unkC8[loopMax].text = gFriendListTake;
+        gUnknown_203B2B4->unkC8[loopMax].text = sTake;
         gUnknown_203B2B4->unkC8[loopMax].menuAction = 0xb;
         if ((INVENTORY_SIZE <= GetNumberOfFilledInventorySlots()) || (gUnknown_203B2B4->item2.id == ITEM_NOTHING)) {
             gUnknown_203B2B4->unk108[loopMax] = 1;
@@ -392,13 +320,13 @@ void sub_8025728(void)
         loopMax += 1;
 
         if (sub_8025EC4(pokeStruct)) {
-            gUnknown_203B2B4->unkC8[loopMax].text = gFriendListStandBy;
+            gUnknown_203B2B4->unkC8[loopMax].text = sStandBy;
             gUnknown_203B2B4->unkC8[loopMax].menuAction = 9;
             loopMax += 1;
         }
     }
     else {
-        gUnknown_203B2B4->unkC8[loopMax].text = gFriendListVisit;
+        gUnknown_203B2B4->unkC8[loopMax].text = sVisit;
         gUnknown_203B2B4->unkC8[loopMax].menuAction = 7;
         if (gUnknown_203B2B4->unkC == GetFriendArea(gUnknown_203B2B4->pokeStruct->speciesNum)) {
             gUnknown_203B2B4->unk108[loopMax] = 1;
@@ -407,17 +335,17 @@ void sub_8025728(void)
     }
     if ((pokeStruct->speciesNum == 0x13d) &&
         (IsPokemonRenamed(pokeStruct))) {
-        gUnknown_203B2B4->unkC8[loopMax].text = gFriendListName;
+        gUnknown_203B2B4->unkC8[loopMax].text = sName;
         gUnknown_203B2B4->unkC8[loopMax].menuAction = 8;
         loopMax += 1;
     }
-    gUnknown_203B2B4->unkC8[loopMax].text = gFriendListSummary;
+    gUnknown_203B2B4->unkC8[loopMax].text = sSummary;
     gUnknown_203B2B4->unkC8[loopMax].menuAction = 4;
     loopMax += 1;
-    gUnknown_203B2B4->unkC8[loopMax].text = gFriendListMoves;
+    gUnknown_203B2B4->unkC8[loopMax].text = sMoves;
     gUnknown_203B2B4->unkC8[loopMax].menuAction = 6;
     loopMax += 1;
-    gUnknown_203B2B4->unkC8[loopMax].text = gFriendListCheckIQ;
+    gUnknown_203B2B4->unkC8[loopMax].text = sCheckIQ;
     gUnknown_203B2B4->unkC8[loopMax].menuAction = 5;
     loopMax += 1;
     gUnknown_203B2B4->unkC8[loopMax].text = NULL;
@@ -449,7 +377,7 @@ void sub_802591C(void)
 
   MemoryFill16(gUnknown_203B2B4->unk108,0, sizeof(gUnknown_203B2B4->unk108));
 
-  gUnknown_203B2B4->unkC8[loopMax].text = gFriendListGive;
+  gUnknown_203B2B4->unkC8[loopMax].text = sGive;
   gUnknown_203B2B4->unkC8[loopMax].menuAction = 10;
   if (GetNumberOfFilledInventorySlots() == 0) {
       gUnknown_203B2B4->unk108[loopMax] = 1;
@@ -750,7 +678,7 @@ void sub_8025E68(u32 r0, BulkItem *heldItem)
     a3.unk8 = 1;
     item.flags = ITEM_FLAG_EXISTS;
     sub_8090E14(gUnknown_202DE58, &item, &a3);
-    xxx_format_and_draw(4, 3, gFriendListItem, r0, 0);
+    xxx_format_and_draw(4, 3, sItemBuffered, r0, 0);
     sub_80073E0(r0);
 }
 

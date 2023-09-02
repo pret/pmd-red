@@ -1,54 +1,18 @@
 #include "global.h"
+#include "code_80118A4.h"
+#include "code_80130A8.h"
+#include "code_801EE10.h"
+#include "code_801EE10_1.h"
+#include "code_801EE10_mid.h"
+#include "felicity_bank.h"
+#include "gulpin_shop.h"
+#include "gulpin_shop_1.h"
 #include "memory.h"
-#include "pokemon.h"
+#include "menu_input.h"
+#include "moves.h"
 #include "pokemon_3.h"
 #include "text1.h"
 #include "text2.h"
-
-#include "menu_input.h"
-#include "gulpin_shop.h"
-#include "moves.h"
-#include "felicity_bank.h"
-#include "code_80130A8.h"
-#include "code_801EE10_1.h"
-#include "code_80118A4.h"
-
-// size: 0x1E0
-struct unkStruct_203B27C
-{
-    /* 0x0 */ bool32 isAsleep;
-    /* 0x4 */ s32 state;
-    /* 0x8 */ u32 fallbackState;
-    /* 0xC */ s16 speciesNum;
-    /* 0x10 */ PokemonStruct1 *pokeStruct;
-    /* 0x14 */ bool8 isNextMoveLinked;
-    bool8 unk15;
-    /* 0x16 */ bool8 isTeamLeader;
-    /* 0x18 */ u32 moveIndex;
-    // Group of move ids but not sure purpose just yet...
-    u16 unk1C;
-    u16 unk1E;
-    u16 unk20;
-    /* 0x24 */ struct Move moves[MAX_MON_MOVES * 2];
-    /* 0x64 */ u16 sequenceMoveIDs[MAX_MON_MOVES];
-    /* 0x6C */ u32 menuAction1;
-    /* 0x70 */ u32 menuAction2;
-    /* 0x74 */ u32 menuAction3;
-    /* 0x78 */ u32 menuAction4;
-    MenuItem unk7C[8];
-    u16 unkBC[8];
-    MenuStruct unkCC;
-    u8 fill11C[0x16C - 0x11C];
-    /* 0x16C */ OpenedFile *faceFile;
-    /* 0x170 */ u8 *faceData;
-    u16 unk174;
-    u16 unk176;
-    u8 unk178;
-    u8 unk179;
-    u8 unk17A;
-    OpenedFile **unk17C;
-    UnkTextStruct2 unk180[4];
-};
 
 EWRAM_DATA_2 struct unkStruct_203B27C *gUnknown_203B27C = {0};
 
@@ -63,7 +27,7 @@ extern UnkTextStruct2 gUnknown_80DC31C;
 extern UnkTextStruct2 gUnknown_80DC34C;
 extern UnkTextStruct2 gUnknown_80DC37C;
 
-extern const u8 *gGulpinDialogue[2][25];
+extern const u8 *gGulpinDialogue[2][25]; // 80D8888
 extern u8 gUnknown_80DC3D8[];
 extern u8 gUnknown_80DC3E0[];
 extern u8 gUnknown_80DC3E8[];
@@ -89,15 +53,11 @@ bool8 sub_8021178(void);
 void CreateGulpinShopMenu(void);
 void sub_8020950(void);
 void sub_8020900(void);
-bool8 sub_801F808(u16 *moveIDs);
 void sub_801F700(void);
 bool8 sub_801F428(s16 index, s32 param_2);
 void sub_801F5F0(u8 r0);
-extern void sub_801F1B0(u32, u32);
-extern void sub_801F280(u32);
 void sub_8024458(u32, u32);
 extern void sub_801BEEC(s16);
-extern void sub_801EE10(u32, s16, struct Move *, u32, void *, u32);
 void sub_80208B0(void);
 void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
 extern PokemonStruct1 *GetPlayerPokemonStruct(void);
@@ -128,13 +88,7 @@ extern void sub_801BF98(void);
 extern u32 sub_801F520(u32);
 extern void sub_801F63C(void);
 extern u16 sub_801F5B4(void);
-extern void sub_801F8D0(void);
-extern u32 sub_801F890(void);
-extern u32 sub_801E8C0(void);
-extern u32 sub_801F194(void);
 bool8 sub_801F1A4(void);
-void sub_801F214(void);
-extern u32 sub_801EF38(u32);
 
 extern void CreateGulpinLinkMenu(void);
 extern void sub_802069C(void);
@@ -453,7 +407,7 @@ void sub_801FF28(void)
             sub_801EE10(1,gUnknown_203B27C->speciesNum,gUnknown_203B27C->moves,gUnknown_203B27C->unk15,gUnknown_80DC394,0);
             break;
         case 0x1f:
-            sub_801F1B0(1,gUnknown_203B27C->unk15);
+            sub_801F1B0(TRUE, gUnknown_203B27C->unk15);
             break;
         case 0x20:
             sub_801F280(0);
@@ -877,7 +831,7 @@ void sub_8020CC0(void)
 {
     s32 menuAction;
     s32 index;
-    struct Move *move;
+    Move *move;
     
     menuAction = 0;
     sub_801F520(0);

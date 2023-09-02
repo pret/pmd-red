@@ -102,7 +102,7 @@ const u8 gDungeonCamouflageTypes[76] = {
 };
 
 
-bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, struct Move *move)
+bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
 {
     EntityInfo *pokemonInfo = pokemon->info;
     switch (move->id)
@@ -541,7 +541,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, struct Move *move)
     return TRUE;
 }
 
-bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, struct Move *move)
+bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
 {
     EntityInfo *userData = user->info;
     EntityInfo *targetData = target->info;
@@ -904,7 +904,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, struct Move 
     return TRUE;
 }
 
-bool8 HasDisabledMove(struct Move *moves)
+bool8 HasDisabledMove(Move *moves)
 {
     s32 i;
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -921,7 +921,7 @@ bool8 HasDisabledMove(struct Move *moves)
     return FALSE;
 }
 
-bool8 LastUsedMoveOutOfPP(struct Move *moves)
+bool8 LastUsedMoveOutOfPP(Move *moves)
 {
     s32 i;
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -936,7 +936,7 @@ bool8 LastUsedMoveOutOfPP(struct Move *moves)
     return FALSE;
 }
 
-bool8 HasLastUsedMove(struct Move *moves)
+bool8 HasLastUsedMove(Move *moves)
 {
     s32 i;
     for (i = 0; i < MAX_MON_MOVES; i++)
