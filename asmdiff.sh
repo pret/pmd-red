@@ -1,6 +1,10 @@
 #!/bin/bash
 
-OBJDUMP_BIN="arm-none-eabi-objdump"
+if [[ -d "$DEVKITARM/bin/" ]]; then
+    OBJDUMP_BIN="$DEVKITARM/bin/arm-none-eabi-objdump"
+else
+    OBJDUMP_BIN="arm-none-eabi-objdump"
+fi
 
 OBJDUMP="$OBJDUMP_BIN -D -bbinary -marmv4t -Mforce-thumb"
 
