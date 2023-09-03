@@ -10,6 +10,7 @@
 #include "menu_input.h"
 #include "wonder_mail_2_1.h"
 #include "code_80118A4.h"
+#include "code_80958E8_1.h"
 
 extern struct unkStruct_203B2F0 *gUnknown_203B2F0;
 extern struct unkStruct_203B2E8* gUnknown_203B2E8;
@@ -98,7 +99,6 @@ static const u8 wonder_mail_fill1[] = "pksdir0";
 
 extern void sub_802CAA4(void);
 extern u8 IsJobSlotEmpty(u8);
-extern WonderMail* GetJobSlotInfo(u8);
 extern void sub_803B35C(WonderMail *, unkStruct_802C39C *);
 extern void CreateRescueTitle(unkStruct_802C39C *);
 

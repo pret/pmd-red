@@ -317,6 +317,7 @@ gUnknown_202DE28: /* 202DE28 */
 gUnknown_202DE30: /* 202DE30 */
 	.space 0x28
 
+/* Seems to be a general u8 buffer for text, mostly used with item names. Capacity of 80 chars..? */
 gUnknown_202DE58: /* 202DE58 */
 	.space 0x50
 

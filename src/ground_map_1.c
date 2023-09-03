@@ -1,5 +1,6 @@
 #include "global.h"
 #include "debug.h"
+#include "ground_main.h"
 #include "ground_map_1.h"
 #include "ground_script.h"
 

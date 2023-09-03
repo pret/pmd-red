@@ -104,4 +104,4 @@ ALIGNED(4) static const u8 sPartyMenuMoves[] = "Moves";
 ALIGNED(4) static const u8 sPartyMenuCheckIQ[] = "Check IQ";
 ALIGNED(4) static const u8 sPartyMenuItemPlaceholder[] = _("Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} ");
 ALIGNED(4) static const u8 sUnknown_80DD6E0[] = "%s";
-ALIGNED(4) static const u8 sFill1[] = "pksdir0";
+ALIGNED(4) static const u8 sFill[] = "pksdir0";

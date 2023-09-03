@@ -1,21 +1,23 @@
 #include "global.h"
+#include "code_80972F4.h"
 #include "code_80A26CC.h"
 #include "event_flag.h"
+#include "ground_main.h"
 
-extern u8 sub_80973F4(s16);
-extern u8 sub_8097384(s16);
-s16 sub_80A26B8(s16);
-extern struct unkStruct_80A2608 gUnknown_81168A8[];
-extern u8 sub_8098F88(void);
-extern u32 sub_8001658(u32, u32);
-
-extern s16 gUnknown_8116F9A[];
-extern s16 gUnknown_8116F24[];
+// data_8115F5C.s
+extern const unkStruct_80A2608 gUnknown_81168A8[];
+extern const s16 gUnknown_8116F24[];
+extern const s16 gUnknown_8116F9A[];
 extern const u8 *gUnknown_8117000[];
 
-extern void sub_809AC18(s32, s32);
-extern void sub_809ABB4(s32, s32);
+// code_80972F4.h (read comment)
+extern bool8 sub_8097384(s16);
+extern bool8 sub_80973F4(s16);
+
+// code_8098BDC.s
 extern void sub_809AB4C(s32, s32);
+extern void sub_809ABB4(s32, s32);
+extern void sub_809AC18(s32, s32);
 
 s16 sub_80A8BBC(s16);
 
@@ -62,91 +64,77 @@ void sub_80A2598(s16 r0, s16 r1)
 
 u32 sub_80A25AC(u16 param_1)
 {
-    if (sub_8098F88() != 0) {
+    if (sub_8098F88())
         return param_1;
-    }
-    else
-    {
-        if (param_1 == 0x32) {
-            return 0x32;
-        }
-        else if (!sub_80023E4(0xc)) {
-            return 999;
-        }
-        else if (sub_80023E4(0xd)) {
-            return 0x13;
-        }
-        else if (param_1 != 1) {
-            return param_1;
-        }
-        else
-    {
-            sub_8001658(0,0x28);
-            return 1;
-        }
-    }
+    if (param_1 == 50)
+        return 50;
+    if (!sub_80023E4(12))
+        return 999;
+    if (sub_80023E4(13))
+        return 19;
+    if (param_1 != 1)
+        return param_1;
+    sub_8001658(0, 40);
+    return 1;
 }
 
-struct unkStruct_80A2608 *sub_80A2608(s16 index)
+const unkStruct_80A2608 *sub_80A2608(s16 index)
 {
     return &gUnknown_81168A8[index];
 }
 
-struct unkStruct_80A2608 *sub_80A2620(s16 index)
+const unkStruct_80A2608 *sub_80A2620(s16 index)
 {
     u32 temp;
     temp = sub_80A26B8(index);
     return &gUnknown_81168A8[temp];
 }
 
-s16 sub_80A2644(u32 index)
+UNUSED static s16 sub_80A2644(u32 index)
 {
     return gUnknown_8116F24[index];
 }
 
 s16 sub_80A2654(s16 index)
 {
-    struct unkStruct_80A2608 *temp;
+    const unkStruct_80A2608 *temp;
+
     temp = sub_80A2608(index);
     return temp->unkE;
 }
 
 // This is very ugly
-s32 sub_80A2668(u32 r0)
+s16 sub_80A2668(u32 r0)
 {
     u32 temp;
-    temp = 0xffc90000 + (r0 << 16);
-    if(temp >> 16 < 0x19)
-    {
+    temp = 0xFFC90000 + (r0 << 16);
+    if (temp >> 16 < 0x19)
         return ((s32)temp >> 16);
-    }
-    else
-    {
-        return -1;
-    }
+
+    return -1;
 }
 
-u32 sub_80A2688(u8 r0)
+s16 sub_80A2688(u8 r0)
 {
     u32 uVar1;
 
-    uVar1 = r0 - 0x4B;
+    uVar1 = r0 - 75;
 
     // u8 cast is needed for only this compare
-    if ((u8)uVar1 < 0x17)
+    if ((u8)uVar1 < 23)
         return uVar1;
-    else if(r0 == 0x2F)
-        return 0x17;
-    else if (r0 == 0x30)
-        return 0x18;
-    else
-        return -1;
+    if (r0 == 47)
+        return 23;
+    if (r0 == 48)
+        return 24;
+    return -1;
 }
 
 s16 sub_80A26B8(s16 r0)
 {
     // Useless cast that forces correct ordering
     s32 temp;
+
     temp = r0;
 
     return gUnknown_8116F9A[r0];
@@ -154,27 +142,22 @@ s16 sub_80A26B8(s16 r0)
 
 s16 sub_80A26CC(s16 r0)
 {
-    return (0xDC >> 2) + r0;
+    return 55 + r0;
 }
 
-
-s32 sub_80A26D8(u8 index)
+UNUSED static s16 sub_80A26D8(u8 index)
 {
-    s32 counter;
-    s32 counter2;
-    s32 temp2;
-    struct unkStruct_80A2608 *temp;
-    for(counter = 0; counter <= 0x52; counter++)
-    {
-        temp2 = counter <<  0x10;
-        counter2 = temp2 >> 0x10;
+    s32 i;
+    s16 counter2;
+    const unkStruct_80A2608 *temp;
+
+    for (i = 0; i < 83; i++) {
+        counter2 = i;
         temp = sub_80A2608(counter2);
-        if(temp->unk11 != 0)
-        {
-            if(temp->dungeonIndex == index)
-            {
+
+        if (temp->unk11 != 0) {
+            if (temp->dungeonIndex == index)
                 return counter2;
-            }
         }
     }
     return -1;
@@ -182,7 +165,7 @@ s32 sub_80A26D8(u8 index)
 
 u8 sub_80A270C(s16 index)
 {
-    struct unkStruct_80A2608 *temp;
+    const unkStruct_80A2608 *temp;
     s32 index_s32;
 
     index_s32 = index; // forcing a shift before addressing
@@ -192,22 +175,24 @@ u8 sub_80A270C(s16 index)
 
 u8 sub_80A2728(s16 index)
 {
-    struct unkStruct_80A2608 *temp;
-    s16 temp_number = (0xDC >> 2) + index;
+    const unkStruct_80A2608 *temp;
+
+    s16 temp_number = 55 + index;
     temp = sub_80A2608(temp_number);
     return temp->dungeonIndex;
 }
 
 u8 sub_80A2740(s32 index)
 {
-    struct unkStruct_80A2608 *temp;
+    const unkStruct_80A2608 *temp;
+
     temp = sub_80A2608(index);
     return temp->dungeonIndex;
 }
 
 s16 sub_80A2750(s16 r0)
 {
-    struct unkStruct_80A2608 *temp;
+    const unkStruct_80A2608 *temp;
     s32 temp_32;
     s32 temp_2;
 
@@ -215,25 +200,25 @@ s16 sub_80A2750(s16 r0)
     temp_32 = r0;
     temp_2 = temp_32;
 
-    if(r0 == 0x50)
+    if (r0 == 80)
         return 3;
-    if(r0 == 0x51)
+    if (r0 == 81)
         return 2;
-    if(r0 == 0x52)
+    if (r0 == 82)
         return 4;
-    if((u16)(r0 - 0x28) <= 0xE)
+    if ((u16)(r0 - 40) <= 14)
         return 2;
-    if((u16)(r0 - 0x37) <= 0x18)
+    if ((u16)(r0 - 55) <= 24)
         return 4;
 
     temp = sub_80A2608(temp_2);
-    if(temp->unkE == -1)
+    if (temp->unkE == -1)
         return 1;
-    if(sub_80023E4(5))
+    if (sub_80023E4(5))
         return 1;
-    if(sub_80973F4(temp->unkE) == 0)
+    if (!sub_80973F4(temp->unkE))
         return 1;
-    if(!sub_80023E4(1))
+    if (!sub_80023E4(1))
         return 1;
     return 2;
 }
@@ -242,250 +227,238 @@ bool8 sub_80A27CC(s16 r0)
 {
     s32 temp;
     s32 temp2;
-    struct unkStruct_80A2608 *return_var;
+    const unkStruct_80A2608 *t;
 
     // Same dumbness as above to get a match
     temp2 = r0;
     temp = temp2;
 
-    return_var = sub_80A2620(r0);
-    if(return_var->unk0 == -1)
+    t = sub_80A2620(r0);
+    if (t->unk0 == -1)
         return FALSE;
-    if(sub_80023E4(5))
+    if (sub_80023E4(5))
         return FALSE;
-    if(sub_8097384(r0) != 0)
+    if (sub_8097384(r0))
         return TRUE;
-    if(!sub_80023E4(1))
+    if (!sub_80023E4(1))
         return FALSE;
-    if(sub_80973F4(temp) == 0)
+    if (!sub_80973F4(temp))
         return FALSE;
     return TRUE;
 }
 
 bool8 sub_80A2824(u8 index)
 {
-    s32 counter;
-    struct unkStruct_80A2608 *temp;
+    s32 i;
+    const unkStruct_80A2608 *temp;
 
-    if(sub_80023E4(5))
+    if (sub_80023E4(5))
         return FALSE;
-    if(sub_80023E4(1))
-    {
-        for(counter = 0; counter <= 0x2D; counter++)
-        {
-            temp = sub_80A2620(counter);
-            if(temp->unk11 != 0)
-            {
-                if(temp->dungeonIndex == index)
-                {
-                    if(sub_8097384(counter) != 0)
+
+    if (sub_80023E4(1)) {
+        for (i = 0; i < 46; i++) {
+            temp = sub_80A2620(i);
+
+            if (temp->unk11 != 0) {
+                if (temp->dungeonIndex == index) {
+                    if (sub_8097384(i))
                         return TRUE;
-                    if(sub_80973F4(counter) != 0)
+                    if (sub_80973F4(i))
                         return TRUE;
                 }
             }
         }
     }
-    else
-    {
-        for(counter = 0; counter <= 0x2D; counter++)
-        {
-            temp = sub_80A2620(counter);
-            if(temp->unk11 != 0)
-                if(temp->dungeonIndex == index)
-                    if(sub_8097384(counter) != 0)
+    else {
+        for (i = 0; i < 46; i++) {
+            temp = sub_80A2620(i);
+
+            if (temp->unk11 != 0)
+                if (temp->dungeonIndex == index)
+                    if (sub_8097384(i))
                         return TRUE;
         }
     }
-    return FALSE;
 
+    return FALSE;
 }
 
-bool8 sub_80A28B4(s16 r0)
+UNUSED static bool8 sub_80A28B4(s16 r0)
 {
-    struct unkStruct_80A2608 *temp;
+    const unkStruct_80A2608 *temp;
 
     temp = sub_80A2620(r0);
-    if(temp->unk0 != -1)
-    {
-        if(sub_8097384(r0) == 0 && sub_80973F4(r0) == 0)
+
+    if (temp->unk0 != -1) {
+        if (!sub_8097384(r0) && !sub_80973F4(r0))
             return FALSE;
         else
             return TRUE;
     }
+
     return FALSE;
 }
 
 bool8 sub_80A28F0(u8 index)
 {
     s32 counter;
-    struct unkStruct_80A2608 *temp;
+    const unkStruct_80A2608 *temp;
 
-    for(counter = 0; counter < 0x2E; counter++)
-    {
+    for (counter = 0; counter < 0x2E; counter++) {
         temp = sub_80A2620(counter);
-        if(temp->unk11 != 0)
-        {
-            if(temp->dungeonIndex == index)
-            {
-                if(sub_8097384(counter) != 0)
+
+        if (temp->unk11 != 0) {
+            if (temp->dungeonIndex == index) {
+                if (sub_8097384(counter))
                     return TRUE;
-                if(sub_80973F4(counter) != 0)
+                if (sub_80973F4(counter))
                     return TRUE;
             }
         }
     }
+
     return FALSE;
 }
 
-s32 sub_80A293C(u8 *param_1)
+UNUSED static s32 sub_80A293C(u8 *param_1)
 {
-  u8 *pcVar2;
-  struct unkStruct_80A2608 * iVar3;
-  s32 index;
-  s32 counter;
-  u8 local_68 [0x40];
-  u8 zero;
+    u8 *pcVar2;
+    const unkStruct_80A2608 *iVar3;
+    s32 index;
+    s32 counter;
+    u8 local_68[64];
+    u8 zero;
 
-  counter = 0;
-  zero = 0;
+    counter = 0;
+    zero = 0;
 
-  pcVar2 = &local_68[0x3e];
-  do {
-    *pcVar2 = zero;
-    pcVar2--;
-  } while ((int)pcVar2 >= (int)local_68);
+    pcVar2 = &local_68[62];
+    do {
+        *pcVar2 = zero;
+        pcVar2--;
+    } while ((int)pcVar2 >= (int)local_68);
 
 
-    for(index = 0; index < 0x2E; index++)
-    {
-      iVar3 = sub_80A2620(index);
-      if ((iVar3->unk11 != 0) &&
-         (sub_8097384(index) != 0)) {
-        local_68[iVar3->dungeonIndex] = 1;
-      }
+    for (index = 0; index < 46; index++) {
+        iVar3 = sub_80A2620(index);
+        if (iVar3->unk11 != 0 && sub_8097384(index))
+            local_68[iVar3->dungeonIndex] = 1;
     }
 
-  for(index = 0; index < 0x3F; index++)
-  {
-    if (local_68[index] != 0) {
-      param_1[counter] = index;
-      counter++;
+    for (index = 0; index < 63; index++) {
+        if (local_68[index] != 0) {
+            param_1[counter] = index;
+            counter++;
+        }
     }
-  }
-  return counter;
+
+    return counter;
 }
 
 s32 sub_80A29B0(u8 *param_1)
 {
-  u8 *pcVar2;
-  struct unkStruct_80A2608 * iVar3;
-  s32 index;
-  s32 counter;
-  u8 *local1;
-  u8 *local2;
-  u8 *local3;
-  u8 *local4;
-  u8 local_68 [0x40];
-  u8 zero;
+    u8 *pcVar2;
+    const unkStruct_80A2608 *iVar3;
+    s32 index;
+    s32 counter;
+    u8 *local1;
+    u8 *local2;
+    u8 *local3;
+    u8 *local4;
+    u8 local_68[0x40];
+    u8 zero;
 
-  counter = 0;
-  local1 = &local_68[0x2B];
-  local2 = &local_68[0x2C];
-  local3 = &local_68[0x2D];
-  local4 = &local_68[0x2E];
-  zero = 0;
+    counter = 0;
+    local1 = &local_68[43];
+    local2 = &local_68[44];
+    local3 = &local_68[45];
+    local4 = &local_68[46];
+    zero = 0;
 
-  pcVar2 = &local_68[0x3e];
-  do {
-    *pcVar2 = zero;
-    pcVar2 = pcVar2 + -1;
-  } while ((int)pcVar2 >= (int)local_68);
+    pcVar2 = &local_68[62];
+    do {
+        *pcVar2 = zero;
+        pcVar2 = pcVar2 + -1;
+    } while ((int)pcVar2 >= (int)local_68);
 
 
-  if (sub_80023E4(1)) {
-    for(index = 0; index < 0x2E; index++)
-    {
-      iVar3 = sub_80A2620(index);
-      if ((iVar3->unk11 != 0) &&
-         (sub_80973F4(index) != 0)) {
-        local_68[iVar3->dungeonIndex] = 1;
-      }
+    if (sub_80023E4(1)) {
+        for (index = 0; index < 46; index++) {
+            iVar3 = sub_80A2620(index);
+
+            if (iVar3->unk11 != 0 && sub_80973F4(index))
+                local_68[iVar3->dungeonIndex] = 1;
+        }
     }
-  }
-  *local1 = 0;
-  *local2 = 0;
-  *local3 = 0;
-  *local4 = 0;
 
-  for(index = 0; index < 0x3F; index++)
-  {
-    if (local_68[index] != 0) {
-      param_1[counter] = index;
-      counter++;
+    *local1 = 0;
+    *local2 = 0;
+    *local3 = 0;
+    *local4 = 0;
+
+    for (index = 0; index < 63; index++) {
+        if (local_68[index] != 0) {
+            param_1[counter] = index;
+            counter++;
+        }
     }
-  }
-  return counter;
+
+    return counter;
 }
 
-s32 sub_80A2A5C(u8 *param_1)
+UNUSED static s32 sub_80A2A5C(u8 *param_1)
 {
-  u8 *pcVar2;
-  struct unkStruct_80A2608 *iVar3;
-  s32 index;
-  s32 counter;
-  u8 local_58 [0x40];
-  u8 zero;
+    u8 *pcVar2;
+    const unkStruct_80A2608 *iVar3;
+    s32 index;
+    s32 counter;
+    u8 local_58[0x40];
+    u8 zero;
 
-  counter = 0;
-  zero = 0;
-  
-  pcVar2 = &local_58[0x3E];
-  do {
-    *pcVar2 = zero;
-    pcVar2--;
-  } while ((s32)pcVar2 >= (s32)local_58);
+    counter = 0;
+    zero = 0;
 
-  if (sub_80023E4(1)) {
-    for(index = 0; index < 0x2E; index++)
-    {
-      iVar3 = sub_80A2620(index);
-      if ((iVar3->unk11 != 0) && ((sub_8097384(index) != 0) || (sub_80973F4(index) != 0)))
-      {
-        local_58[iVar3->dungeonIndex] = 1;
-      }
+    pcVar2 = &local_58[62];
+    do {
+        *pcVar2 = zero;
+        pcVar2--;
+    } while ((s32)pcVar2 >= (s32)local_58);
+
+    if (sub_80023E4(1)) {
+        for (index = 0; index < 46; index++) {
+            iVar3 = sub_80A2620(index);
+
+            if (iVar3->unk11 != 0 && (sub_8097384(index) || sub_80973F4(index)))
+                local_58[iVar3->dungeonIndex] = 1;
+        }
     }
-  }
-  else {
-    for(index = 0; index < 0x2E; index++)
-    {
-      iVar3 = sub_80A2620(index);
-      if ((iVar3->unk11 != 0) && (sub_8097384(index) != 0)) 
-      {
-        local_58[iVar3->dungeonIndex] = 1;
-      }
+    else {
+        for (index = 0; index < 46; index++) {
+            iVar3 = sub_80A2620(index);
+
+            if (iVar3->unk11 != 0 && sub_8097384(index))
+                local_58[iVar3->dungeonIndex] = 1;
+        }
     }
-  }
-  for(index = 0; index < 0x3F; index++)
-  {
-    if (local_58[index] != 0) {
-      param_1[counter] = index;
-      counter++;
+
+    for (index = 0; index < 63; index++) {
+        if (local_58[index] != 0) {
+            param_1[counter] = index;
+            counter++;
+        }
     }
-  }
-  return counter;
+
+    return counter;
 }
 
 // Returns Location string for the pause menu
 const u8 *sub_80A2B18(s16 param_1)
 {
     s32 param_1_s32 = param_1;
-    const u8 **preload = gUnknown_8117000;
-    return preload[param_1_s32];
+    return gUnknown_8117000[param_1_s32];
 }
 
-const u8 *sub_80A2B28(u16 r0)
+UNUSED static const u8 *sub_80A2B28(u16 r0)
 {
     return sub_80A2B18(sub_8001658(0, 17));
 }
-

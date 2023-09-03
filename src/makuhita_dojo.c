@@ -2,6 +2,7 @@
 #include "code_800D090.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
+#include "code_80A26CC.h"
 #include "constants/colors.h"
 #include "constants/input.h"
 #include "dungeon.h"
@@ -12,61 +13,19 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E1C8[];
-extern struct unkStruct_203B31C *gUnknown_203B31C;
-extern struct unkStruct_203B318 *gUnknown_203B318;
+extern u8 gUnknown_202E5D8[];
 extern u8 gAvailablePokemonNames[];
 extern u8 gPlayerName[];
+
+extern struct unkStruct_203B31C *gUnknown_203B31C;
+extern struct unkStruct_203B318 *gUnknown_203B318;
 
 extern const u8 *gMakuhitaDialogue[2][10];
 extern u8 *gUnknown_80D4934[];
 extern u8 *gUnknown_80D4970[];
 
-ALIGNED(4) const u8 gUnknown_80E0744[] = "Dungeons";
-ALIGNED(4) const u8 gUnknown_80E0750[] =  {0x83, 0xC2};
-ALIGNED(4) const u8 gUnknown_80E0754[] = {0x83, 0xC0};
-static const u8 makuhita_dojo_fill1[] = "pksdir0";
-
-const UnkTextStruct2 gUnknown_80E0760 = {
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x00, 0x00,
-    0x00, 0x00,
-    0x00, 0x00,
-    NULL
-};
-
-ALIGNED(4) const u8 gMakuhitaDojoBonslyDoll[] = _(
-    "{CENTER_ALIGN}{COLOR_1 YELLOW_5}$n0{END_COLOR_TEXT_1} received the {COLOR_1 GREEN_2}Bonsly Doll{END_COLOR_TEXT_1}!\n"
-    "{CENTER_ALIGN}It has been placed outside your\n"
-    "{CENTER_ALIGN}rescue team base.");
-
-const u8 gMakuhitaDojoGoTrain[] = "Go Train";
-
-static const u8 makuhita_dojo_fill2[] = "pksdir0";
-
-const UnkTextStruct2 gUnknown_80E07EC = {
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x00, 0x00,
-    0x00, 0x00,
-    0x00, 0x00,
-    NULL
-};
-const UnkTextStruct2 gUnknown_80E0804 = {
-    0x00, 0x00, 0x00, 0x00,
-    0x06,
-    0x02, 0x02,
-    0x0E, 0x0E,
-    0x0E, 0x00,
-    NULL
-};
-
-const u8 gMakuhitaDojoHeader[] = "Courses";
-ALIGNED(4) const u8 gUnknown_80E0824[] = _("{STAR_BULLET}");
-ALIGNED(4) const u8 gMakuhitaCoursePlaceholder[] = _("{COLOR_2}%c%s{END_COLOR_TEXT_2}");
-static const u8 makuhita_dojo_fill3[] = "pksdir0";
+#include "data/makuhita_dojo.h"
 
 extern u32 sub_80095E4(s16, u32);
 extern u32 sub_801B60C(u32, u8, u8);
@@ -74,9 +33,6 @@ extern u32 sub_801B6AC(void);
 extern void sub_801B72C(void);
 extern void sub_803053C(void);
 extern bool8 sub_8097504(s16);
-extern s16 sub_80A2668(u32 r0);
-extern s16 sub_80A26CC(s16 r0);
-extern u8 sub_80A2740(s32 r0);
 
 extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern bool8 IsMazeCompleted(s32);
@@ -164,7 +120,7 @@ u32 MakuhitaDojo_New(u32 mode)
     gUnknown_203B318->unk60 = 2;
     gUnknown_203B318->unk62 = 8;
     MakuhitaDojo_SetState(initialState);
-    return 1;
+    return TRUE;
 }
 
 u32 sub_802FE58(void)

@@ -7,7 +7,7 @@
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
-
+#include "code_80A26CC.h"
 #include "rescue_password_menu.h"
 #include "menu_input.h"
 #include "code_8094F88.h"
@@ -25,7 +25,6 @@ extern void sub_809927C(u8);
 extern bool8 HasNoWonderMailType(u32);
 extern u32 sub_8031050();
 extern void sub_80310B4();
-extern bool8 sub_80A2824(u8);
 
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
@@ -53,7 +52,6 @@ extern u8 sub_8024108(u32);
 extern u32 sub_8031DCC();
 extern void sub_8031E10();
 extern void sub_8031E00();
-extern s32 sub_8001658(u32, u32);
 extern void sub_8099690(u32);
 extern void sub_8031E10(void);
 extern void sub_803084C(void);

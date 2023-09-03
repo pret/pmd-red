@@ -63,4 +63,4 @@ ALIGNED(4) static const u8 sSummary[] = "Summary";
 ALIGNED(4) static const u8 sMoves[] = "Moves";
 ALIGNED(4) static const u8 sCheckIQ[] = "Check IQ";
 ALIGNED(4) static const u8 sItemBuffered[] = _("Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} ");
-ALIGNED(4) static const u8 sFill1[] = "pksdir0";
+ALIGNED(4) static const u8 sFill[] = "pksdir0";

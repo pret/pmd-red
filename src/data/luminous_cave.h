@@ -102,4 +102,5 @@ ALIGNED(4) static const u8 sLuminousCaveGiveName[] = _(
 	 "{CENTER_ALIGN}the evolved Pokémon. ");
 
 ALIGNED(4) static const u8 sFill1[] = "pksdir0";
+// TODO: This may be for the file after, which has no data?
 ALIGNED(4) static const u8 sFill2[] = "pksdir0";

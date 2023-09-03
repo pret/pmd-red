@@ -6,9 +6,9 @@
 #include "random.h"
 #include "friend_area.h"
 #include "code_80958E8.h"
+#include "code_80A26CC.h"
 
 bool8 sub_8095E38(WonderMail *mail, u8 dungeon, u32 floor, u8 param_4);
-extern s32 sub_80A29B0(u8 *param_1);
 extern s32 GetDungeonFloorCount(u8);
 extern bool8 sub_809017C(DungeonLocation *);
 

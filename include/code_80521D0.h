@@ -5,4 +5,4 @@
 
 void SendMessage(Entity *pokemon, const char message[]);
 
-#endif
+#endif // GUARD_CODE_80521D0_H

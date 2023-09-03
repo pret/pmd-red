@@ -1,3 +1,6 @@
+#ifndef GUARD_CODE_80958E8_H
+#define GUARD_CODE_80958E8_H
+
 #include "wonder_mail.h"
 #include "constants/mailbox.h"
 
@@ -24,3 +27,5 @@ struct unkStruct_203B490
 };
 
 extern struct unkStruct_203B490 *gUnknown_203B490;
+
+#endif // GUARD_CODE_80958E8_H

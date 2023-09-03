@@ -8,6 +8,7 @@
 #include "text2.h"
 #include "code_80130A8.h"
 #include "code_80118A4.h"
+#include "code_80958E8_1.h"
 
 struct unkStruct_203B2FC
 {
@@ -108,7 +109,6 @@ extern u32 sub_802F298(void);
 extern void sub_802F204(unkStruct_802F204*, u32);
 extern void sub_802DC40(void);
 extern void sub_802DC9C(void);
-WonderMail *GetJobSlotInfo(u8);
 extern void sub_8096AF8(u8 *, u32, u32);
 extern void sub_8096EEC(void);
 extern void sub_803C21C(WonderMail *, unkStruct_802F204*);
@@ -226,7 +226,7 @@ void sub_802DC9C(void)
         speciesText = GetMonSpecies(gUnknown_203B2FC->jobInfo->targetSpecies);
         strcpy(gUnknown_202E1C8 + 0xfffffe20,speciesText);
         UnlockExclusivePokemon(gUnknown_203B2FC->jobInfo->clientSpecies);
-        sub_8090DC4(gUnknown_202DE58,gUnknown_203B2FC->jobInfo->targetItem,0);
+        BufferItemName(gUnknown_202DE58,gUnknown_203B2FC->jobInfo->targetItem,NULL);
         gUnknown_203B2FC->fallbackState = 6;
         switch(gUnknown_203B2FC->jobInfo->missionType) {
             case WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM:

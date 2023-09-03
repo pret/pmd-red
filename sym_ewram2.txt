@@ -344,7 +344,8 @@ gUnknown_203B324: /* 203B324 */
 gUnknown_203B328: /* 203B328 */
 	.space 0x4
 
-.include "src/post_office_guide.o"
+.include "src/post_office_guide1.o"
+.include "src/post_office_guide2.o"
 .include "src/code_8031D70.o"
 .include "src/adventure_log.o"
 .include "src/friend_rescue.o"

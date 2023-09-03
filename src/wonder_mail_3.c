@@ -13,6 +13,8 @@
 #include "wonder_mail_2_1.h"
 #include "code_80130A8.h"
 #include "code_80118A4.h"
+#include "code_80A26CC.h"
+#include "code_80958E8_1.h"
 
 const UnkTextStruct2 gUnknown_80DFDD4 =
 {
@@ -134,7 +136,6 @@ extern u8 sub_802DADC(void);
 extern u8 *sub_8096DD8(void);
 extern u8 sub_8096C08(u8 *);
 extern void DrawJobListMenu(void);
-extern WonderMail* GetJobSlotInfo(u8);
 extern void sub_803B35C(WonderMail *, unkStruct_802C39C*);
 extern void sub_802DE84(unkStruct_802C39C *);
 extern void sub_802D73C(void);
@@ -174,7 +175,6 @@ extern u8 gUnknown_80DFD70[];
 extern u8 gUnknown_80DFD7C[];
 
 extern bool8 sub_809693C(WonderMail *);
-extern bool8 sub_80A2824(u8);
 
 void sub_802CAA4(void) {
     s32 loopMax;

@@ -1,8 +1,89 @@
-ALIGNED(4) const char gWhatdYouWantToKnow[] =
+static const u8 GetHelp_Text[];
+static const u8 GoRescue_Text[];
+static const u8 FriendRescueInfo_Text[];
+static const u8 FriendRescue_80E0A80[];
+static const u8 Delivery_Text[];
+static const u8 BulletinBoard_Text[];
+static const u8 PostOffice_Text[];
+
+enum PostOfficeMenuActions
+{
+    POST_OFFICE,
+    BULLETIN_BOARD,
+    DELIVERY,
+    FRIEND_RESCUE,
+    CANCEL,
+    EXIT,
+    FRIEND_RESCUE_INFO,
+    GO_RESCUE,
+    GET_HELP_MENU,
+    DELETING_MAIL,
+    RESCUE_PROCEDURES,
+    RECEIVE_SOS_MAIL,
+    LEAVE_FOR_RESCUE,
+    SEND_AOK_MAIL,
+    GET_THANK_YOU_MAIL,
+    GETTING_HELP,
+    SEND_SOS_MAIL,
+    RECEIVE_AOK_MAIL,
+    SEND_THANK_YOU_MAIL
+};
+
+static const MenuItem gPostOfficeHelpStartMenu[] =
+{
+    {PostOffice_Text, POST_OFFICE},
+    {BulletinBoard_Text, BULLETIN_BOARD},
+    {Delivery_Text, DELIVERY},
+    {FriendRescue_80E0A80, FRIEND_RESCUE},
+    {"Cancel", CANCEL},
+    {NULL, EXIT}
+};
+
+ALIGNED(4) static const u8 FriendRescue_80E0A80[] = _("{COLOR_1 YELLOW}Friend Rescue{END_COLOR_TEXT_1} ");
+ALIGNED(4) static const u8 Delivery_Text[] = _("Delivery");
+ALIGNED(4) static const u8 BulletinBoard_Text[] = _("Bulletin Board");
+ALIGNED(4) static const u8 PostOffice_Text[] = _("Post Office");
+
+static const MenuItem gPostOfficeHelpFriendRescueMenu[] =
+{
+    {FriendRescueInfo_Text, FRIEND_RESCUE_INFO},
+    {GoRescue_Text, GO_RESCUE},
+    {GetHelp_Text, GET_HELP_MENU},
+    {"Deleting Mail Info", DELETING_MAIL},
+    {"Exit", EXIT},
+    {NULL, EXIT}
+};
+
+ALIGNED(4) static const u8 GetHelp_Text[] = _("{COLOR_1 YELLOW}Get help{END_COLOR_TEXT_1} ");
+ALIGNED(4) static const u8 GoRescue_Text[] = _("{COLOR_1 YELLOW}Go rescue{END_COLOR_TEXT_1} ");
+ALIGNED(4) static const u8 FriendRescueInfo_Text[] = _("Friend Rescue Info");
+
+static const MenuItem gPostOfficeHelpGoRescueMenu[] =
+{
+    {"Rescue Procedures", RESCUE_PROCEDURES},
+    {"Receive SOS Mail", RECEIVE_SOS_MAIL},
+    {"Leave for Rescue", LEAVE_FOR_RESCUE},
+    {"Send A-OK Mail", SEND_AOK_MAIL},
+    {"Get Thank-You Mail", GET_THANK_YOU_MAIL},
+    {"Exit", EXIT},
+    {NULL, EXIT}
+};
+
+static const MenuItem gPostOfficeHelpGetHelpMenu[] =
+{
+    {"Getting Help", GETTING_HELP},
+    {"Send SOS Mail", SEND_SOS_MAIL},
+    {"Receive A-OK Mail", RECEIVE_AOK_MAIL},
+    {"Send Thank-You Mail", SEND_THANK_YOU_MAIL},
+    {"Exit", EXIT},
+    {NULL, EXIT}
+};
+
+ALIGNED(4) static const u8 gWhatdYouWantToKnow[] =
 	_(" So{COMMA} what{APOSTROPHE}d you want to\n"
 	"know?");
 
-ALIGNED(4) const char gGettingHelpExplanation[] =
+ALIGNED(4) static const u8 gGettingHelpExplanation[] =
 	_(" If you need to call for\n"
 	"help{COMMA} first send your friend\n"
 	"an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
@@ -16,7 +97,7 @@ ALIGNED(4) const char gGettingHelpExplanation[] =
 	"friend a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.\n"
 	"That{APOSTROPHE}s if you get revived{COMMA} of course.");
 
-ALIGNED(4) const char gSendSOSMailExplanation[] =
+ALIGNED(4) static const u8 gSendSOSMailExplanation[] =
 	_(" If your team gets defeated\n"
 	"in a dungeon{COMMA} you can send an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}\n"
 	"to a friend willing to help.{EXTRA_MSG}"
@@ -27,7 +108,7 @@ ALIGNED(4) const char gSendSOSMailExplanation[] =
 	"an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}{COMMA} you send it from the\n"
 	"{COLOR_1 LIGHT_BLUE}main menu{END_COLOR_TEXT_1}.");
 
-ALIGNED(4) const char gReceiveAOKMailExplanation[] =
+ALIGNED(4) static const u8 gReceiveAOKMailExplanation[] =
 	_(" If your friend manages to\n"
 	"rescue your team{COMMA} you need to receive\n"
 	"an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} from your friend.{EXTRA_MSG}"
@@ -44,7 +125,7 @@ ALIGNED(4) const char gReceiveAOKMailExplanation[] =
 	"team-saving {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} on the {COLOR_1 LIGHT_BLUE}main menu{END_COLOR_TEXT_1}{COMMA}\n"
 	"all right?");
 
-ALIGNED(4) const char gSendThankYouMailExplanation[] =
+ALIGNED(4) static const u8 gSendThankYouMailExplanation[] =
 	_(" If your team gets rescued{COMMA}\n"
 	"be sure to send your friend\n"
 	"a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
@@ -57,7 +138,7 @@ ALIGNED(4) const char gSendThankYouMailExplanation[] =
 	" You don{APOSTROPHE}t want to ever\n"
 	"forget to express your thanks.");
 
-ALIGNED(4) const char gRescueProceduresExplanation[] =
+ALIGNED(4) static const u8 gRescueProceduresExplanation[] =
 	_(" If you want to go and\n"
 	"rescue your friend{APOSTROPHE}s KO{APOSTROPHE}d team{COMMA}\n"
 	"you need to receive an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
@@ -71,7 +152,7 @@ ALIGNED(4) const char gRescueProceduresExplanation[] =
 	"friend can send back to you\n"
 	"a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.");
 
-ALIGNED(4) const char gReceiveSOSMailExplanation[] =
+ALIGNED(4) static const u8 gReceiveSOSMailExplanation[] =
 	_(" To go off on a rescue{COMMA}\n"
 	"you first need to receive your friend{APOSTROPHE}s\n"
 	"{COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
@@ -79,7 +160,7 @@ ALIGNED(4) const char gReceiveSOSMailExplanation[] =
 	"the {COLOR_1 LIGHT_BLUE}left counter{END_COLOR_TEXT_1} over there{COMMA}\n"
 	"or by selecting it from the {COLOR_1 LIGHT_BLUE}main menu{END_COLOR_TEXT_1}.");
 
-ALIGNED(4) const char gSendAOKMailExplanation[] =
+ALIGNED(4) static const u8 gSendAOKMailExplanation[] =
 	_(" If you succeed in rescuing\n"
 	"that team{COMMA} you send your friend an\n"
 	"{COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
@@ -93,7 +174,7 @@ ALIGNED(4) const char gSendAOKMailExplanation[] =
 	"disappear from its Friend Area{COMMA} so\n"
 	"don{APOSTROPHE}t you worry any.");
 
-ALIGNED(4) const char gLeaveForRescueExplanation[] =
+ALIGNED(4) static const u8 gLeaveForRescueExplanation[] =
 	_(" If you get an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}{COMMA}\n"
 	"you head off on the rescue from\n"
 	"the {COLOR_1 LIGHT_BLUE}left counter{END_COLOR_TEXT_1}.{EXTRA_MSG}"
@@ -104,7 +185,7 @@ ALIGNED(4) const char gLeaveForRescueExplanation[] =
 	"there when you go farther in your\n"
 	"adventure{COMMA} so it won{APOSTROPHE}t do to fret.");
 
-ALIGNED(4) const char gGetThankYouMailExplanation[] =
+ALIGNED(4) static const u8 gGetThankYouMailExplanation[] =
 	_(" If you send your friend\n"
 	"an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}{COMMA} you can look forward\n"
 	"to getting a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} back.{EXTRA_MSG}"
@@ -115,16 +196,16 @@ ALIGNED(4) const char gGetThankYouMailExplanation[] =
 	"You {COLOR_1 RED}must not delete the A-OK Mail{END_COLOR_TEXT_1}\n"
 	"before you get the {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} back.");
 
-ALIGNED(4) const char gImYourGuide[] =
+ALIGNED(4) static const u8 gImYourGuide[] =
 	_(" I{APOSTROPHE}m your guide to what you\n"
 	"can expect at the Pelipper Post Office.\n"
 	"If you have any questions{COMMA} just ask away!");
 
-ALIGNED(4) const char gAnythingElse[] =
+ALIGNED(4) static const u8 gAnythingElse[] =
 	_(" Did you want to ask about\n"
 	"anything else?");
 
-ALIGNED(4) const char gPostOfficeExplanation[] =
+ALIGNED(4) static const u8 gPostOfficeExplanation[] =
 	_(" {COLOR_1 LIGHT_BLUE}The Pelipper Post Office{END_COLOR_TEXT_1}\n"
 	"keeps track of information from\n"
 	"around the world.{EXTRA_MSG}"
@@ -141,14 +222,14 @@ ALIGNED(4) const char gPostOfficeExplanation[] =
 	"for rescues{COMMA} and the {COLOR_1 LIGHT_BLUE}right counter{END_COLOR_TEXT_1}\n"
 	"is for Thank-You Mail.");
 
-ALIGNED(4) const char gBulletinBoardExplanation[] =
+ALIGNED(4) static const u8 gBulletinBoardExplanation[] =
 	_(" The {COLOR_1 LIGHT_BLUE}Bulletin Board{END_COLOR_TEXT_1} outside\n"
 	"here lists rescue requests.{EXTRA_MSG}"
 	" Take on rescue jobs from\n"
 	"the Bulletin Board. Be a hero and handle\n"
 	"the jobs for fellow Pokémon in need!");
 
-ALIGNED(4) const char gDeliveryExplanation[] =
+ALIGNED(4) static const u8 gDeliveryExplanation[] =
 	_(" If your rescue team\n"
 	"becomes famous for doing lots of rescues{COMMA}\n"
 	"expect to get rescue requests directly.{EXTRA_MSG}"
@@ -156,7 +237,7 @@ ALIGNED(4) const char gDeliveryExplanation[] =
 	"will take those jobs straight to your\n"
 	"{COLOR_1 LIGHT_BLUE}Mailbox{END_COLOR_TEXT_1}.");
 
-ALIGNED(4) const char gFriendRescueExplanation[] =
+ALIGNED(4) static const u8 gFriendRescueExplanation[] =
 	_(" Friend Rescue is what we\n"
 	"call rescue missions between friends using\n"
 	"a {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}{COMMA} {COLOR_1 LIGHT_BLUE}passwords{END_COLOR_TEXT_1}{COMMA} etc.{EXTRA_MSG}"
@@ -173,7 +254,7 @@ ALIGNED(4) const char gFriendRescueExplanation[] =
 	"Rescue jobs at the {COLOR_1 LIGHT_BLUE}left counter{END_COLOR_TEXT_1} of\n"
 	"that counter there.");
 
-ALIGNED(4) const char gDeletingMailExplanation[] =
+ALIGNED(4) static const u8 gDeletingMailExplanation[] =
 	_(" Deleting mail just means\n"
 	"getting rid of old mail that you don{APOSTROPHE}t\n"
 	"need anymore.{EXTRA_MSG}"
@@ -185,3 +266,5 @@ ALIGNED(4) const char gDeletingMailExplanation[] =
 	"That{APOSTROPHE}s why you{APOSTROPHE}ll need to delete old mail.{EXTRA_MSG}"
 	" You can look through old\n"
 	"mail at the {COLOR_1 LIGHT_BLUE}left counter{END_COLOR_TEXT_1} over there.");
+
+ALIGNED(4) static const u8 sFill[] = _("pksdir0");

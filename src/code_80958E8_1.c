@@ -5,7 +5,7 @@
 #include "constants/wonder_mail.h"
 #include "items.h"
 #include "code_80958E8.h"
-
+#include "code_80958E8_1.h"
 #include "random.h"
 #include "pokemon.h"
 
@@ -17,7 +17,6 @@ struct unkStruct_8096AF8
 };
 
 extern u8 IsJobSlotEmpty(u8);
-extern WonderMail * GetJobSlotInfo(u8);
 extern bool8 IsValidWonderMail(WonderMail *WonderMailData);
 extern u8 sub_8095E38(WonderMail *, u8, u8, bool8);
 extern void ResetJobSlot(u8);

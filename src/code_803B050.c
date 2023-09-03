@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_803B050.h"
 #include "constants/colors.h"
 #include "constants/wonder_mail.h"
 #include "pokemon.h"
@@ -12,21 +13,6 @@
 #include "code_800D090.h"
 #include "menu_input.h"
 #include "wonder_mail.h"
-
-struct unkStruct_80E9920
-{
-    s16 unkA;
-    s16 unkB;
-    u8 *text;
-};
-
-struct unkStruct_80E9F8C
-{
-    s16 unkA;
-    s16 unkB;
-    u8 *text1;
-    u8 *text2;
-};
 
 extern s16 gUnknown_80E80E0[];
 extern s16 gUnknown_80E8126[];
@@ -79,8 +65,8 @@ extern u8 *gUnknown_80E910C[];
 extern u8 *gUnknown_80E8C98[];
 extern u8 gUnknown_80E886C[];
 extern u8 *gUnknown_80EAE5C[];
-extern struct unkStruct_80E9F8C gUnknown_80E9F8C[10];
-extern struct unkStruct_80E9920 gUnknown_80E9920[10];
+extern unkStruct_80E9F8C gUnknown_80E9F8C[10];
+extern unkStruct_80E9920 gUnknown_80E9920[10];
 extern u8 *gUnknown_80E8B94[];
 
 extern PokemonStruct1 *GetPlayerPokemonStruct(void);
@@ -125,12 +111,12 @@ void CreateRescueTitle(unkStruct_802C39C *param_1)
             xxx_call_draw_string(0x15,param_1->y,buf_1,param_1->unk0[0],0);
             break;
         case 12:
-            sub_8090DC4(gUnknown_202DE58,param_1->targetItem,0);
+            BufferItemName(gUnknown_202DE58,param_1->targetItem,NULL);
             sprintfStatic(buf_1,gUnknown_80E8830,gUnknown_202DE58);
             xxx_call_draw_string(0x15,param_1->y,buf_1,param_1->unk0[0],0);
             break;
         case 11:
-            sub_8090DC4(gUnknown_202DE58,param_1->targetItem,0);
+            BufferItemName(gUnknown_202DE58,param_1->targetItem,NULL);
             sprintfStatic(buf_1,gUnknown_80E8848,gUnknown_202DE58);
             xxx_call_draw_string(0x15,param_1->y,buf_1,param_1->unk0[0],0);
             break;
@@ -231,12 +217,12 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             xxx_call_draw_string(10,y,gMedichamMissionDescription,param_1->unk0[0],0);
             break;
         case 4:
-            sub_8090DC4(gUnknown_202DE58,param_1->targetItem,0);
+            BufferItemName(gUnknown_202DE58,param_1->targetItem,NULL);
             sprintfStatic(buf_1,gUnknown_80E8968,gUnknown_202DE58);
             xxx_call_draw_string(10,y,buf_1,param_1->unk0[0],0);
             break;
         case 5:
-            sub_8090DC4(gUnknown_202DE58,param_1->targetItem,0);
+            BufferItemName(gUnknown_202DE58,param_1->targetItem,NULL);
             sprintfStatic(buf_1,gUnknown_80E89B0,gUnknown_202DE58);
             xxx_call_draw_string(10,y,buf_1,param_1->unk0[0],0);
             break;
@@ -262,7 +248,7 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
         case 16: {
             u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
             u8 bVar3 = param_1->unk8->seed + param_1->unk8->dungeon.floor;
-            sub_8090DC4(gUnknown_202DE58,param_1->targetItem,0);
+            BufferItemName(gUnknown_202DE58,param_1->targetItem,NULL);
             sprintfStatic(buf_1,gUnknown_80EB3F8[(bVar2 % 0x16)],gUnknown_202DE58);
             xxx_call_draw_string(10,y,buf_1,param_1->unk0[0],0);
             y += 0xC;
@@ -343,12 +329,12 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             xxx_call_draw_string(0x44,y,gUnknown_80E8AEC,param_1->unk0[0],0); // Friend Rescue
             break;
         case MISSION_TYPE_DELIVER_ITEM:
-            sub_8090DC4(gUnknown_202DE58,param_1->targetItem,0);
+            BufferItemName(gUnknown_202DE58,param_1->targetItem,NULL);
             sprintfStatic(buf_1,gUnknown_80E8AFC,gUnknown_202DE58); // Deliver #C4%s#R. 
             xxx_call_draw_string(0x44,y,buf_1,param_1->unk0[0],0);
             break;
         case MISSION_TYPE_FIND_ITEM:
-            sub_8090DC4(gUnknown_202DE58,param_1->targetItem,0);
+            BufferItemName(gUnknown_202DE58,param_1->targetItem,NULL);
             sprintfStatic(buf_1,gUnknown_80E8B10,gUnknown_202DE58); // Find #C4%s#R.
             xxx_call_draw_string(0x44,y,buf_1,param_1->unk0[0],0);
             break;
@@ -408,7 +394,7 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             break;
         case 2: // Item
         case 3: // Item + ?
-            sub_8090DC4(gUnknown_202DE58,param_1->rewardItem,0);
+            BufferItemName(gUnknown_202DE58,param_1->rewardItem,NULL);
             sprintfStatic(buf_1,gMissionRewardText[param_1->rewardType],gUnknown_202DE58);
             xxx_call_draw_string(0x44,y,buf_1,param_1->unk0[0],0);
             break;

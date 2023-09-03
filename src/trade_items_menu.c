@@ -622,7 +622,7 @@ void sub_8036B28(void)
         break;
     case TRADE_ITEMS_SEND_ITEM_CONFIRM:
         gUnknown_202DE30 = gTradeItemsMenu->quantityToSend;
-        sub_8090DC4(gUnknown_202DE58,gTradeItemsMenu->itemToSend.id,0);
+        BufferItemName(gUnknown_202DE58,gTradeItemsMenu->itemToSend.id,NULL);
         sub_8014248(gUnknown_80E61E4,0,5, gUnknown_80E6154,0,4,0,0,0x101);
         break;
     case TRADE_ITEMS_RECEIVE_ITEM:
@@ -681,17 +681,17 @@ void sub_8036B28(void)
     case 0xe:
         if (gTradeItemsMenu->unk24C.quantity == 0) {
             gUnknown_202DE30 = gTradeItemsMenu->unk244.quantity;
-            sub_8090DC4(gUnknown_202DE58,gTradeItemsMenu->unk244.itemIdx.id,0);
+            BufferItemName(gUnknown_202DE58,gTradeItemsMenu->unk244.itemIdx.id,NULL);
         }
         else {
             gUnknown_202DE30 = gTradeItemsMenu->unk24C.quantity;
-            sub_8090DC4(gUnknown_202DE58,gTradeItemsMenu->unk24C.itemIdx.id,0);
+            BufferItemName(gUnknown_202DE58,gTradeItemsMenu->unk24C.itemIdx.id,NULL);
         }
         sub_80141B4(gUnknown_80E6314,0,0,0x101);
         break;
     case 0xd:
         gUnknown_202DE30 = gTradeItemsMenu->quantityToSend;
-        sub_8090DC4(gUnknown_202DE58,gTradeItemsMenu->itemToSend.id,0);
+        BufferItemName(gUnknown_202DE58,gTradeItemsMenu->itemToSend.id,NULL);
         sub_80141B4(gUnknown_80E6358,0,0,0x101);
         break;
     case 0xB:

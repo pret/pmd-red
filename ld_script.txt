@@ -130,7 +130,8 @@ SECTIONS {
         src/wonder_mail_4.o(.text);
         src/wonder_mail_5.o(.text);
         src/wonder_mail_6.o(.text);
-        src/post_office_guide.o(.text);
+        src/post_office_guide1.o(.text);
+        src/post_office_guide2.o(.text);
         src/code_8031D70.o(.text);
         src/adventure_log.o(.text);
         src/friend_rescue.o(.text);
@@ -402,7 +403,8 @@ SECTIONS {
         src/wonder_mail_4.o(.rodata);
         src/wonder_mail_5.o(.rodata);
         src/wonder_mail_6.o(.rodata);
-        src/post_office_guide.o(.rodata);
+        src/post_office_guide1.o(.rodata);
+        src/post_office_guide2.o(.rodata);
         src/code_8031D70.o(.rodata);
         src/adventure_log.o(.rodata);
         data/data_80E2068.o(.rodata);

@@ -21,7 +21,7 @@ extern const char gUnknown_81097A4[];
 extern s32 gUnknown_81097B0[];
 extern u8 gUnknown_81097C4[];
 extern u16 gGummiStatBoostLUT[];
-extern u8 gUnknown_202DE58[0x58];
+extern u8 gUnknown_202DE58[];
 extern u32 gUnknown_202DE30;
 extern u8* gPtrTypeText;  // ptr to "Type\0"
 extern u8* gPtrPPD0Text;  // ptr to "PP $d0 \0"
@@ -43,6 +43,9 @@ extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 extern s32 sub_8091E94(s32 a1, s32 a2, s32 a3);
 extern void SortKecleonShopInventory();
 bool8 AddKecleonWareItem(u8);
+
+
+static void sub_8090F58(u8 *, u8 *, Item *, unkStruct_8090F58 *);
 
 void LoadItemParameters(void)
 {
@@ -293,15 +296,18 @@ bool8 GetItemAIFlag(u8 id, u32 r1)
     return gItemParametersData[id].aiFlags[r1];
 }
 
-void sub_8090DC4(void* param_1,u8 id, struct unkStruct_8090F58* param_3)
+// a2 is always NULL
+// This func probably appends the quantity of 1, but I haven't checked
+// If it appends quantity, we can rename the func
+void BufferItemName(u8* dest, u8 id, struct unkStruct_8090F58* a2)
 {
   char acStack104 [80];
   Item unkItem;
 
-  strncpy(acStack104,gItemParametersData[id].name,0x50);
-  xxx_init_itemslot_8090A8C(&unkItem,id,0);
+  strncpy(acStack104, gItemParametersData[id].name, 80);
+  xxx_init_itemslot_8090A8C(&unkItem, id, 0);
   unkItem.quantity = 1;
-  sub_8090F58(param_1,acStack104,&unkItem,param_3);
+  sub_8090F58(dest, acStack104, &unkItem, a2);
 }
 
 extern const u8 gUnknown_8109770[];
@@ -370,7 +376,7 @@ void sub_8090E14(u8* ext_buffer, Item* slot, struct unkStruct_8090F58* a3) {
   return;
 }
 
-void sub_8090F58(void* a1, u8 *a2, Item *slot, struct unkStruct_8090F58* a4) {
+static void sub_8090F58(u8* a1, u8 *a2, Item *slot, struct unkStruct_8090F58* a4) {
   u32 unk0;
   s32 value;
   u8 buffer[40];
@@ -683,17 +689,17 @@ u32 sub_80913E0(Item* slot, u32 a2, struct subStruct_203B240 ** a3)
   u8 buffer88[88];  // some struct
 
   GetItemDescription(slot->id);
-  sub_8090DC4(buffer88, slot->id, 0);
+  BufferItemName(buffer88, slot->id, NULL);
   if (slot->id == ITEM_TM_USED_TM) {
     // empty TM
-    sub_8090DC4(&gUnknown_202DE58, (u8)(slot->quantity + 125), 0);
+    BufferItemName(gUnknown_202DE58, (u8)(slot->quantity + 125), NULL);
   }
   sub_80073B8(a2);
   xxx_format_and_draw(16, 0, buffer88, a2, 0);
 
   xxx_format_and_draw(8, 24, GetItemDescription(slot->id), a2, 0);
   if (GetItemCategory(slot->id) == CATEGORY_TMS_HMS) {
-    Move *buffer8 = (Move*) (buffer88 + 0x50);  // field in struct
+    Move *buffer8 = (Move*) (buffer88 + 80);  // field in struct
     u16 move = GetItemMoveID(slot->id);
     u8 moves_data;
     const u8* typestring;
@@ -720,16 +726,16 @@ bool8 CanSellItem(u32 id)
   id = (u8)id;
   id_ = id;
 
-  if((id != ITEM_NOTHING)
-      && (id != ITEM_POKE)
-      && (id != ITEM_ROCK_PART)
-      && (id != ITEM_ICE_PART)
-      && (id != ITEM_STEEL_PART)
-      && (id != ITEM_MUSIC_BOX)
-      && (GetItemSellPrice(id_))
-      && (GetItemBuyPrice(id_))) {
+  if (id != ITEM_NOTHING
+      && id != ITEM_POKE
+      && id != ITEM_ROCK_PART
+      && id != ITEM_ICE_PART
+      && id != ITEM_STEEL_PART
+      && id != ITEM_MUSIC_BOX
+      && GetItemSellPrice(id_)
+      && GetItemBuyPrice(id_))
           return TRUE;
-    }
+
     return FALSE;
 }
 

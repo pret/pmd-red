@@ -9,6 +9,7 @@
 #include "constants/bg_music.h"
 #include "cpu.h"
 #include "debug.h"
+#include "event_flag.h"
 #include "exclusive_pokemon.h"
 #include "file_system.h"
 #include "friend_area.h"
@@ -36,7 +37,6 @@ extern void sub_800DAAC(void);
 extern void sub_800135C(void);
 extern void xxx_script_related_8001334(u32);
 extern void sub_80015C0(u32, u32);
-extern u32 sub_8001658(u32, u32);
 extern void sub_800A8F8(u32);
 extern void sub_80097B0(void);
 extern void LoadTitleScreen(void);

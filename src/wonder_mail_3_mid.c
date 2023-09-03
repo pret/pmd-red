@@ -84,7 +84,7 @@ enum FriendRewardStates {
     REWARD_EXIT = 9,
 };
 
-extern u8 sub_802FCF0(u32);
+extern bool8 sub_802FCF0(u32);
 extern void sub_802F9C0(void);
 extern void sub_802FA50(void);
 extern s32 sub_802FBF4(void);
@@ -118,6 +118,15 @@ extern s32 sub_808D544(u32);
 extern u32 sub_801B60C(u32, u8, u8);
 void HandleMissionReward(void);
 const u8 *sub_80974A0(s16 index);
+
+extern u8 gUnknown_202E038[];
+extern u8 gUnknown_202E088[];
+extern u8 gUnknown_202E628[];
+extern u8 gUnknown_202DEA8[];
+extern u8 gUnknown_202E5D8[];
+extern u8 gAvailablePokemonNames[];
+extern u32 gUnknown_202DE30;
+extern const u8 *gUnknown_80D4970[];
 
 const UnkTextStruct2 gUnknown_80E03C4 = {
     0x00, 0x00, 0x00, 0x00,
@@ -233,17 +242,10 @@ const UnkTextStruct2 gUnknown_80E072C = {
     NULL
 };
 
-extern u8 gUnknown_202E038[];
-extern u8 gUnknown_202E088[];
-extern u8 gUnknown_202E628[];
-extern u8 gUnknown_202DEA8[];
-extern u8 gUnknown_202E5D8[];
-extern u8 gAvailablePokemonNames[];
-extern u32 gUnknown_202DE30;
-extern const u8 *gUnknown_80D4970[];
-extern u8 gUnknown_80E0744[];
-extern u8 gUnknown_80E0754[];
-extern u8 gUnknown_80E0750[];
+ALIGNED(4) const u8 gUnknown_80E0744[] = "Dungeons";
+ALIGNED(4) const u8 gUnknown_80E0750[] =  {0x83, 0xC2};
+ALIGNED(4) const u8 gUnknown_80E0754[] = {0x83, 0xC0};
+ALIGNED(4) static const u8 sFill1[] = "pksdir0";
 
 u32 sub_802EF48(void)
 {

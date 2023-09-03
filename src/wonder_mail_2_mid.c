@@ -11,6 +11,7 @@
 #include "code_802C39C.h"
 #include "menu_input.h"
 #include "code_80118A4.h"
+#include "code_803B050.h"
 
 bool8 IsMailSlotEmpty(u8);
 extern s32 CountPelipperBoardSlots(void);
@@ -59,7 +60,6 @@ extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern u8 gMailboxText[];
 extern u8 gAvailablePokemonNames[];
 extern void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
-extern void sub_803B6B0(u32, u32, u32, u32);
 
 void CreateMailMenu(void)
 {

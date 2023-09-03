@@ -1,4 +1,5 @@
 #include "global.h"
+#include "event_flag.h"
 #include "input.h"
 #include "memory.h"
 #include "text1.h"
@@ -39,7 +40,6 @@ extern struct CreditsData* gCreditsTable[27];
 extern u16 gUnknown_80E5990[];
 
 extern void sub_80015C0(u32, u32);
-extern s32 sub_8001658(u32, u32);
 extern void sub_8099690(u32);
 extern void sub_8099A5C(u32, u32, u32);
 extern void sub_8099AFC(u32, u32, u32);

@@ -956,7 +956,7 @@ void sub_801CCD8(void)
               gUnknown_203B244->input.unk1E + 1,2,7,gUnknown_203B244->unk4E8);
   for(index = 0; index < gUnknown_203B244->input.unk1A; index++) {
       uVar3 = gUnknown_203B244->itemIDs[(gUnknown_203B244->input.unk1E * gUnknown_203B244->input.unk1C) + index];
-      sub_8090DC4(buffer,uVar3,0);
+      BufferItemName(buffer,uVar3,NULL);
       y = sub_8013800(&gUnknown_203B244->input,index);
       xxx_call_draw_string(8,y,buffer,gUnknown_203B244->unk4E8,0);
       y2 = sub_8013800(&gUnknown_203B244->input,index);

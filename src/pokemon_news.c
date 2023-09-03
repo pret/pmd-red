@@ -9,6 +9,7 @@
 #include "menu_input.h"
 #include "code_80130A8.h"
 #include "code_80118A4.h"
+#include "code_803B050.h"
 
 struct unkStruct_203B2CC
 {
@@ -168,7 +169,6 @@ extern void sub_8013E54(void);
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 extern void sub_802BC7C(void);
-extern void sub_803B6B0(u32, u32, u32, u32);
 extern PokemonStruct1 *sub_808D3BC(void);
 extern void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
 

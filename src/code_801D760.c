@@ -7,7 +7,6 @@
 #include "items.h"
 #include "menu.h"
 #include "pokemon.h"
-
 #include "memory.h"
 #include "input.h"
 #include "text1.h"
@@ -19,6 +18,7 @@
 #include "code_80118A4.h"
 #include "wigglytuff_shop.h"
 #include "event_flag.h"
+#include "ground_main.h"
 
 struct unkStruct_203B258
 {
@@ -34,16 +34,7 @@ extern struct unkStruct_203B258 *gUnknown_203B258;
 extern UnkTextStruct2 gUnknown_80DBF88;
 extern UnkTextStruct2 gUnknown_80DBF70;
 
-struct unkStruct_811BAF4
-{
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6;
-    u8 *text;
-};
-
-extern struct unkStruct_811BAF4 gUnknown_811BAF4[10];
+extern unkStruct_811BAF4 gUnknown_811BAF4[10];
 
 struct unkStruct_81188F0
 {
@@ -670,7 +661,7 @@ void sub_801DB54(void)
 
 void sub_801DBD4(void)
 {
-    struct unkStruct_811BAF4 *temp;
+    unkStruct_811BAF4 *temp;
     struct unkStruct_81188F0 *temp2;
     s32 y;
 #ifndef NONMATCHING

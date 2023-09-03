@@ -1,21 +1,22 @@
 #include "global.h"
 #include "code_800C9CC.h"
-#include "play_time.h"
-#include "input.h"
-#include "debug.h"
-#include "code_80A26CC.h"
-#include "event_flag.h"
 #include "code_80118A4.h"
+#include "code_80A26CC.h"
+#include "debug.h"
+#include "event_flag.h"
+#include "ground_main.h"
 #include "ground_map_2.h"
+#include "input.h"
+#include "play_time.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA u32 gUnknown_20398AC = {0};
 EWRAM_DATA u32 gUnknown_20398B0 = {0};
 EWRAM_DATA u32 gUnknown_20398B4 = {0};
 EWRAM_DATA u8 gUnknown_20398B8 = {0};
-EWRAM_DATA u8 gUnknown_20398B9 = {0};
+EWRAM_DATA bool8 gUnknown_20398B9 = {0};
 EWRAM_DATA u8 gUnknown_20398BA = {0};
-EWRAM_DATA UNUSED static u8 gUnknown_20398BB = {0}; // NOTE: Needed for matching but not used
+EWRAM_DATA UNUSED static u8 gUnknown_20398BB = {0};
 EWRAM_DATA u16 gUnknown_20398BC = {0};
 EWRAM_DATA u16 gUnknown_20398BE = {0};
 EWRAM_DATA u32 gUnknown_20398C0 = {0};
@@ -24,24 +25,9 @@ EWRAM_DATA s16 gUnknown_20398C4 = {0};
 EWRAM_DATA_2 u8 gUnknown_203B49C = {0};
 EWRAM_DATA_2 u8 gUnknown_203B49D = {0};
 
-const char gUnknown_8115F5C[] = "GroundMain ground request %3d %3d";
-const char gUnknown_8115F80[] = "GroundMain recue request %3d %3d";
-const char gUnknown_8115FA4[] = "GroundMain user rescue request %3d";
-const char gUnknown_8115FC8[] = "GroundMain game end request %3d";
-const char gUnknown_8115FE8[] = "GroundMain game cancel request %3d";
-static const char unused_text[] = "pksdir0";
-static const char unused_text1[] = "pksdir0";
+#include "data/ground_main.h"
 
-struct unkStruct_811BAF4
-{
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6;
-    u8 *text;
-};
-
-extern struct unkStruct_811BAF4 gUnknown_811BAF4[10];
+extern unkStruct_811BAF4 gUnknown_811BAF4[10];
 
 extern void sub_809B57C();
 extern void GroundScript_Unlock();
@@ -66,7 +52,6 @@ extern void GroundLives_Action();
 extern void GroundObject_Action();
 extern void GroundEffect_Action();
 
-extern s32 sub_8001658(u8, u8);
 extern s32 sub_8001784(u8, u8, u8);
 extern void sub_809CB8C();
 extern void sub_80015C0(u8, u8);
@@ -76,10 +61,8 @@ extern void sub_8098CC8();
 extern void GeneratePelipperJobs();
 extern void sub_80961B4();
 extern void ClearAllItems_8091FB4();
-extern const char *sub_80A2B18(s16);
 extern void ChooseKecleonShopInventory(u32);
 extern u8 sub_809C730();
-extern s16 sub_80A2750(s16);
 
 void sub_8098BDC(void)
 {
@@ -120,13 +103,12 @@ void sub_8098C58(void)
     sub_809CB8C();
     sub_8001D88();
 
-    if(sub_8001658(0, 0x2A) != 0)
-    {
+    if (sub_8001658(0, 0x2A) != 0) {
         temp = sub_8001658(0, 0x29);
         temp++;
-        if(temp > 0xF){
+        if (temp > 15)
             temp = 0;
-        }
+
         sub_80018D8(0, 0x29, temp);
         sub_80018D8(0, 0x2A, 0);
     }
@@ -191,7 +173,7 @@ bool8 GroundMainGroundRequest(s16 r0, u32 r1, u32 r2)
     temp = r0; // force a asr shift
     if(gUnknown_20398A8 == 0)
     {
-        Log(0, gUnknown_8115F5C, temp, r2);
+        Log(0, sFmtGroundRequest, temp, r2);
         gUnknown_20398A8 = 1;
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = r2;
@@ -242,7 +224,7 @@ bool8 GroundMainRescueRequest(s16 r0, u32 r1)
     s32 r2 = r0, r5 = r2;
     if(gUnknown_20398A8 == 0)
     {
-        Log(0, gUnknown_8115F80, r2, r1);
+        Log(0, sFmtRescueRequest, r2, r1);
         if(gUnknown_203B49D != 0)
         {
             gUnknown_20398A8 = 7;
@@ -268,53 +250,48 @@ bool8 GroundMainRescueRequest(s16 r0, u32 r1)
     return FALSE;
 }
 
-// Unused
-u32 GroundMainUserRescueRequest(u32 r0)
+UNUSED static bool8 GroundMainUserRescueRequest(u32 r0)
 {
-    if(gUnknown_20398A8 == 0)
-    {
-        if(gUnknown_203B49D != 0)
-        {
-            Log(0, gUnknown_8115FA4, r0);
+    if (gUnknown_20398A8 == 0) {
+        if(gUnknown_203B49D != 0) {
+            Log(0, sFmtUserRescueRequest, r0);
             gUnknown_20398A8 = 7;
             gUnknown_20398AC = 1;
             gUnknown_20398B0 = r0;
             sub_809C730();
-            return 1;
+            return TRUE;
         }
     }
-    return 0;
+    return FALSE;
 }
 
-u32 GroundMainGameEndRequest(u32 r0)
+bool32 GroundMainGameEndRequest(u32 r0)
 {
-    if(gUnknown_20398A8 == 0)
-    {
-        Log(0, gUnknown_8115FC8, r0);
+    if (gUnknown_20398A8 == 0) {
+        Log(0, sFmtGameEndRequest, r0);
         gUnknown_20398A8 = 9;
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = r0;
         sub_809C730();
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
-u32 GroundMainGameCancelRequest(u32 r0)
+bool32 GroundMainGameCancelRequest(u32 r0)
 {
-    if(gUnknown_20398A8 == 0)
-    {
-        Log(0, gUnknown_8115FE8, r0);
+    if (gUnknown_20398A8 == 0) {
+        Log(0, sFmtGameCancelRequest, r0);
         gUnknown_20398A8 = 10;
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = r0;
         sub_809C730();
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
-u32 sub_8098F88(void)
+bool8 sub_8098F88(void)
 {
     return gUnknown_20398B9;
 }
@@ -334,13 +311,12 @@ const char  *sub_8098FB4(void)
     return sub_80A2B18(sub_8001658(0, 0x11));
 }
 
-
 s16 sub_8098FCC(u32 unused)
 {
   s32 iVar4;
   s32 iVar5;
   s32 iVar6;
-  struct unkStruct_80A2608 *iVar3;
+  const unkStruct_80A2608 *iVar3;
 
   iVar5 = (s16)sub_8001658(0,0x13);
   iVar6 = iVar5;

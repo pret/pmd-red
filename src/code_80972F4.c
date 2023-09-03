@@ -6,24 +6,16 @@
 #include "dungeon.h"
 #include "exclusive_pokemon.h"
 #include "event_flag.h"
+#include "code_80A26CC.h"
+#include "code_80972F4.h"
 
-struct MissionText
-{
-    u8 *text;
-    u8 unk4;
-    u8 unk5;
-    u8 unk6;
-    u8 unk7;
-};
 extern struct MissionText gStoryMissionText[];
 extern const char gFinalScenarioText[];
 extern const char gMeetNinetalesText[];
 extern const char gAvoidCaptureText[];
 extern const u8 gUnknown_8109CC0[];
 extern const u8 gDummyScenarioText[];
-extern u8 sub_80A270C(s16);
 
-extern u8 sub_80A2728(s16);
 extern void sub_800199C(u8, u8, u16, s32);
 
 void SaveWonderMail(struct unkStruct_8094924 *a, WonderMail *b);
@@ -34,7 +26,6 @@ extern void RestoreDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
 extern void sub_80015C0(u8, u8);
 extern u32 sub_8001784(u32, u32, u16);
 extern void GeneratePelipperJobs(void);
-s16 sub_80A26B8(s16);
 extern void sub_80018D8(u8, u8, u32);
 
 bool8 sub_8096F50(WonderMail *mail)
@@ -45,16 +36,15 @@ bool8 sub_8096F50(WonderMail *mail)
 
     temp2 = sub_8096EB0(mail);
 
-
-    for(index = 0; index < 0x10; index++)
-    {
+    for (index = 0; index < 0x10; index++) {
         temp  = &gUnknown_203B490->unk230[index];
-        if(temp->dungeon.id == mail->unk4.dungeon.id)
-            if(temp->dungeon.floor == mail->unk4.dungeon.floor)
-                if(temp->seed == mail->unk4.seed)
-                    if(temp->unk8 == temp2)
+        if (temp->dungeon.id == mail->unk4.dungeon.id)
+            if (temp->dungeon.floor == mail->unk4.dungeon.floor)
+                if (temp->seed == mail->unk4.seed)
+                    if (temp->unk8 == temp2)
                         return TRUE;
     }
+
     return FALSE;
 }
 
@@ -232,18 +222,18 @@ void sub_809733C(short param_1,u32 param_2)
 
 bool32 sub_8097384(s16 param_1)
 {
-  bool32 iVar1;
-  
-  if (param_1 == 0xd) {
-    iVar1 = FALSE;
-  }
-  else {
-    iVar1 = sub_8001784(0,0x2c,param_1 & 0xffff);
-    if (iVar1 != 0) {
-      iVar1 = TRUE;
+    bool32 val;
+
+    if (param_1 == 13)
+        val = FALSE;
+    else {
+        // May not need the & 0xFFFF if the 3rd param is s16
+        val = sub_8001784(0, 44, param_1 & 0xFFFF);
+        if (val != 0)
+            val = TRUE;
     }
-  }
-  return iVar1;
+
+    return val;
 }
 
 void sub_80973A8(s16 param_1,u32 param_2)
@@ -264,23 +254,20 @@ void sub_80973A8(s16 param_1,u32 param_2)
   }
 }
 
-s32 sub_80973F4(s32 param_1)
+bool32 sub_80973F4(s16 param_1)
 {
-  s32 iVar1;
-  s16 param_1_u16 = param_1;
-  
-  if (param_1_u16 == 0xd) {
-    iVar1 = 0;
-  }
-  else {
-    s32 param_1_s32 = param_1_u16;
-    u16 param_1_temp = param_1_s32;
-    iVar1 = sub_8001784(0,0x2d,param_1_temp);
-    if (iVar1 != 0) {
-      iVar1 = 1;
+    bool32 val;
+
+    if (param_1 == 13)
+        val = FALSE;
+    else {
+        // May not need the & 0xFFFF if the 3rd param is s16
+        val = sub_8001784(0, 45, param_1 & 0xFFFF);
+        if (val != 0)
+            val = TRUE;
     }
-  }
-  return iVar1;
+
+    return val;
 }
 
 void sub_8097418(s16 index,u32 param_2)
@@ -434,7 +421,7 @@ const u8 *sub_80975C4(s16 index)
     return GetDungeonName1(sub_80A2728(index));
 }
 
-const char *sub_80975DC(u32 r0)
+const u8 *sub_80975DC(u32 r0)
 {
     // TODO: slight hack but matches
     r0 <<= 16;
