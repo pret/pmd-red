@@ -21,7 +21,7 @@ typedef struct unkStruct_8092638
 extern bool8 *gFriendAreas;
 
 bool8 *GetBoughtFriendAreas(void);
-u8 *GetFriendAreaDescription(u8);
+const u8 *GetFriendAreaDescription(u8);
 const u8 *GetFriendAreaName(u8);
 s32 GetFriendAreaPrice(u8);
 bool8 GetFriendAreaStatus(u8);

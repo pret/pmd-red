@@ -480,7 +480,7 @@ void sub_8021878(void)
 
 void sub_8021894(void)
 {
-    u8 *string;
+    const u8 *string;
     u32 y;
     u32 x;
     s32 index;

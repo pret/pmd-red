@@ -230,7 +230,7 @@ void sub_8092578(u8 *buffer, u8 index, bool8 printPrice)
         strcpy(buffer, sFriendAreaNames[index]);
 }
 
-u8 *GetFriendAreaDescription(u8 index)
+const u8 *GetFriendAreaDescription(u8 index)
 {
     return sFriendAreaDescriptions[index];
 }
