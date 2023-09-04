@@ -263,8 +263,6 @@ SECTIONS {
         src/rescue_team_info.o(.text);
         src/text_util.o(.text);
         src/friend_area.o(.text);
-        asm/friend_area_1.o(.text);
-        src/friend_area_1.o(.text);
         src/moves.o(.text);
         asm/code_8094148.o(.text);
         src/number_util.o(.text);

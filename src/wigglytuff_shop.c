@@ -562,7 +562,7 @@ void sub_8021A60(void)
     for(index = 0; index < NUM_MONSTERS; index++)
     {
         pokeStruct = &gRecruitedPokemonRef->pokemon[index];
-        if (((*(u8 *)&pokeStruct->unk0 & 1) != 0) &&
+        if (((u8)pokeStruct->unk0 & 1) &&
             (sVar4 = sub_8021B58(pokeStruct->speciesNum), sVar4 != -1)) {
             gUnknown_203B28C->unk30[sVar4] = 2;
         }

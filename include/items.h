@@ -150,4 +150,11 @@ void SaveItemSlot(unkStruct_8094924 *, Item *);
 s32 RestoreTeamInventory(u8 *, u32);
 s32 SaveTeamInventory(u8 *, u32);
 
-#endif
+
+
+
+
+
+s32 sub_8090FEC(s32, u8 *, u8);
+
+#endif // GUARD_ITEMS_H

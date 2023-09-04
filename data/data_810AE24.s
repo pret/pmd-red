@@ -5239,8 +5239,8 @@ gUnknown_81139B8: @ 81139B8
 gUnknown_81139CC: @ 81139CC
         .4byte Item_81139BC
 
-	.global gFriendAreaNames
-gFriendAreaNames: @ 81139D0
+	.global sFriendAreaNames
+sFriendAreaNames: @ 81139D0
 .4byte gNoneText
 .4byte gUnknown_8113E20
 .4byte gUnknown_8113E10
@@ -5533,8 +5533,8 @@ gUnknown_8113E20:
         .string "Bountiful Sea\0"
         .align 2,0
 
-	.global gFriendAreaDescriptions
-gFriendAreaDescriptions: @ 8113E30
+	.global sFriendAreaDescriptions
+sFriendAreaDescriptions: @ 8113E30
 @ replacing .incbin "baserom.gba", 0x113E30, 0x18E8
 .4byte gNoneText
 .4byte gUnknown_81156A8

@@ -1355,7 +1355,7 @@ gUnknown_81097F8: @ 81097F8
         .byte 0x17, 0x00, 0x00, 0x00
         .string "pksdir0\0"
 
-
+@ START rescue_team_info.c
 	.global gRescueRankMaxPoints
 gRescueRankMaxPoints: @ 8109810
         .4byte 50
@@ -1369,7 +1369,8 @@ gRescueRankMaxPoints: @ 8109810
 	.global gTeamNamePlaceholder
 gTeamNamePlaceholder: @ 810982C
         .string "Pokémon\0"
-        .string "pksdir0\0"
+.string "pksdir0\0"
+@ END rescue_team_info.c
 
 	.global gUnknown_810983C
 gUnknown_810983C: @ 810983C
@@ -1418,22 +1419,20 @@ gUnknown_8109888:
 .string "pksdir0\0"
 .string "pksdir0\0"
 
-	.global gUnknown_81098A4
-gUnknown_81098A4: @ 81098A4
-	.string "{COLOR_2}"
-        .byte 0x4
-        .string "%s{END_COLOR_TEXT_2}\0"
+@ START friend_area.c
+        .global sUnknown_81098A4
+sUnknown_81098A4: @ 81098A4
+        .string "{COLOR_2 UNK_COLOR_4}%s{END_COLOR_TEXT_2}\0"
         .align 2,0
 
-	.global gUnknown_81098AC
-gUnknown_81098AC: @ 81098AC
-        .string "%s#=%c{COLOR_1}"
-        .byte 0x4
-        .string "%s{END_COLOR_TEXT_1}\0"
+        .global sUnknown_81098AC
+sUnknown_81098AC: @ 81098AC
+        .string "%s#=%c{COLOR_1 UNK_COLOR_4}%s{END_COLOR_TEXT_1}\0"
         .align 2,0
-        .string "pksdir0"
-        .align 2,0
+.string "pksdir0"
+@ END friend_area.c
 
+        .align 2,0
 	.global gUnknown_81098C4
 gUnknown_81098C4: @ 81098C4
         .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00

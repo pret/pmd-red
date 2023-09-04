@@ -300,6 +300,7 @@ BLUE = 31 @ 1
 RED = 32 @ 2
 BLACK = 33 @ 3
 GREEN = 34 @ 4
+UNK_COLOR_4 = 04
 CYAN = 35 @ 5
 CYAN_2 = 05
 YELLOW = 36 @ 6

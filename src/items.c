@@ -38,7 +38,6 @@ EWRAM_DATA ItemDataEntry *gItemParametersData = {0};
 EWRAM_DATA TeamInventory gTeamInventory = {0};
 EWRAM_DATA_2 TeamInventory *gTeamInventoryRef = {0};
 
-extern s32 sub_8090FEC(s32 a1, u8* a2, u8 a3);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 extern s32 sub_8091E94(s32 a1, s32 a2, s32 a3);
 extern void SortKecleonShopInventory();

@@ -15,8 +15,8 @@ EWRAM_DATA u32 gUnknown_20398B0 = {0};
 EWRAM_DATA u32 gUnknown_20398B4 = {0};
 EWRAM_DATA u8 gUnknown_20398B8 = {0};
 EWRAM_DATA bool8 gUnknown_20398B9 = {0};
-EWRAM_DATA u8 gUnknown_20398BA = {0};
-EWRAM_DATA UNUSED static u8 gUnknown_20398BB = {0};
+EWRAM_DATA bool8 gUnknown_20398BA = {0};
+UNUSED EWRAM_DATA static u8 gUnknown_20398BB = {0};
 EWRAM_DATA u16 gUnknown_20398BC = {0};
 EWRAM_DATA u16 gUnknown_20398BE = {0};
 EWRAM_DATA u32 gUnknown_20398C0 = {0};
@@ -98,30 +98,29 @@ void sub_8098BDC(void)
 void sub_8098C58(void)
 {
     s32 temp;
-    sub_80015C0(0, 0x36);
-    sub_80015C0(0, 0x39);
+    sub_80015C0(0, 54);
+    sub_80015C0(0, 57);
     sub_809CB8C();
     sub_8001D88();
 
-    if (sub_8001658(0, 0x2A) != 0) {
-        temp = sub_8001658(0, 0x29);
+    if (sub_8001658(0, 42) != 0) {
+        temp = sub_8001658(0, 41);
         temp++;
         if (temp > 15)
             temp = 0;
 
-        sub_80018D8(0, 0x29, temp);
-        sub_80018D8(0, 0x2A, 0);
+        sub_80018D8(0, 41, temp);
+        sub_80018D8(0, 42, 0);
     }
 
     // TODO this uses r2 but it should be r3
     // Else this matches so nonmatch for now
 #ifdef NONMATCHING
-    temp = sub_8001784(0, 0x42, 0);
-    if(temp <= 0)
-    {
+    temp = sub_8001784(0, 66, 0);
+    if (temp <= 0)
         temp = 1;
-    }
-    sub_800199C(0, 0x42, 0, temp - 1);
+
+    sub_800199C(0, 66, 0, temp - 1);
 #else
     asm_unified("\tmovs r0, 0\n"
 	"\tmovs r1, 0x42\n"
@@ -296,7 +295,7 @@ bool8 sub_8098F88(void)
     return gUnknown_20398B9;
 }
 
-u32 sub_8098F94(void)
+bool8 sub_8098F94(void)
 {
     return gUnknown_20398BA;
 }
