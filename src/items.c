@@ -2,12 +2,10 @@
 #include "constants/colors.h"
 #include "items.h"
 #include "moves.h"
-
 #include "random.h"
 #include "pokemon.h"
 #include "random.h"
 #include "subStruct_203B240.h"
-
 #include "code_800D090.h"
 #include "text_util.h"
 #include "text2.h"

@@ -1,4 +1,4 @@
-const UnkTextStruct2 sUnknown_80E07EC = {
+static const UnkTextStruct2 sUnknown_80E07EC = {
     0, 0, 0, 0,
     3,
     0, 0,
@@ -7,7 +7,7 @@ const UnkTextStruct2 sUnknown_80E07EC = {
     NULL
 };
 
-const UnkTextStruct2 sUnknown_80E0804 = {
+static const UnkTextStruct2 sUnknown_80E0804 = {
     0, 0, 0, 0,
     6,
     2, 2,

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_8098DBC.h"
 #include "constants/dungeon.h"
 #include "memory.h"
 #include "text1.h"
@@ -67,7 +68,6 @@ extern void sub_802453C(void);
 extern u32 sub_801BF48(void);
 extern void sub_801BF98(void);
 
-extern void sub_8099690(u32);
 extern void sub_80160D8(void);
 extern u32 sub_8016080(void);
 extern s32 sub_80144A4(s32 *);

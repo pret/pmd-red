@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_8098DBC.h"
 #include "personality_test.h"
 #include "constants/emotions.h"
 #include "constants/input.h"
@@ -43,8 +44,6 @@ extern void sub_8001024(u32 *);
 extern s32 sub_8094E4C(void);
 extern void sub_8094D28(s32);
 extern void sub_8001044(u32 *);
-
-extern void sub_8099690(u32);
 
 extern void sub_800836C(u32, u8 *r0, u32);
 extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);

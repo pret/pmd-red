@@ -94,6 +94,7 @@ SECTIONS {
         src/kecleon_bros.o(.text);
         src/code_801AFA4.o(.text);
         src/code_801B3C0.o(.text);
+        src/code_801B60C.o(.text);
         src/code_801C620.o(.text);
         src/code_801D760.o(.text);
         src/options_menu.o(.text);
@@ -383,6 +384,9 @@ SECTIONS {
         src/save.o(.rodata);
         src/menu_input.o(.rodata);
         data/data_80D47B8.o(.rodata);
+        src/code_801B3C0.o(.rodata);
+        src/code_801B60C.o(.rodata);
+        data/data_80DBD98.o(.rodata);
         src/luminous_cave.o(.rodata);
         src/friend_list_menu.o(.rodata);
         src/party_list_menu.o(.rodata);

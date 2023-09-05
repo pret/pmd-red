@@ -247,7 +247,9 @@ void RestorePokemonStruct(unkStruct_8094924 *, PokemonStruct1 *);
 s32 sub_808E218(unkStruct_808E218_arg *, PokemonStruct1 *);
 
 // pokemon.s
+extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern void sub_808CFD0(u8 *, s16, u8 *, u8, u32 *, u16 *);
 extern u32 sub_808D1DC(u8 *);
+extern s32 sub_808D544(u32);
 
 #endif // GUARD_POKEMON_H

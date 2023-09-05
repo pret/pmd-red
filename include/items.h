@@ -3,6 +3,7 @@
 
 #include "constants/item.h"
 #include "code_8092334.h"
+#include "subStruct_203B240.h"
 
 // size: 0x20
 typedef struct ItemDataEntry
@@ -156,5 +157,6 @@ s32 SaveTeamInventory(u8 *, u32);
 
 
 s32 sub_8090FEC(s32, u8 *, u8);
+u32 sub_80913E0(Item *, u32, struct subStruct_203B240 **);
 
 #endif // GUARD_ITEMS_H

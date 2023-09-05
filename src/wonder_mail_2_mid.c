@@ -56,7 +56,6 @@ extern UnkTextStruct2 gUnknown_80DFC9C;
 extern u16 gUnknown_203B2E4;
 
 extern WonderMail *GetMailboxSlotInfo(u8);
-extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern u8 gMailboxText[];
 extern u8 gAvailablePokemonNames[];
 extern void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);

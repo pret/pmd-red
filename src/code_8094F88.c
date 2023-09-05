@@ -24,7 +24,6 @@ extern void RestoreDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
 extern void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924* a1, struct unkPokeSubStruct_C* unkC);
 extern void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
 
-extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern s32 sub_8094E4C(void);
 extern void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
 extern void sub_8094D28(s32);

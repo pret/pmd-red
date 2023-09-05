@@ -10,13 +10,12 @@
 #include "text1.h"
 #include "text2.h"
 #include "text_util.h"
-
+#include "code_801B3C0.h"
 #include "code_800D090.h"
 #include "menu_input.h"
 #include "code_80130A8.h"
 #include "main_menu.h"
 #include "code_801C620.h"
-#include "code_801B3C0.h"
 #include "cpu.h"
 #include "code_80118A4.h"
 
@@ -214,7 +213,6 @@ extern void sub_80155F0();
 extern void sub_8031E10();
 extern void sub_802F2C0();
 extern void SetThankYouMailMenuState(u32);
-extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern void sub_802F204(unkStruct_802F204 *, u32);
 extern void sub_80151C0(u32, u8 *);
 extern void sub_803092C(void);

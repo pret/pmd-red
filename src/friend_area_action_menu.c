@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_8098DBC.h"
 #include "constants/dungeon.h"
 #include "memory.h"
 #include "text1.h"
@@ -51,7 +52,6 @@ extern u8 sub_8027DCC(PokemonStruct1 *);
 extern void SetFriendAreaActionMenuState(u32);
 extern void PlaySound(u32);
 extern void nullsub_104();
-extern void sub_8099690(u32);
 
 extern void sub_808D31C(PokemonStruct1 *);
 extern PokemonStruct1 *sub_808D3F8(void);
@@ -62,7 +62,6 @@ extern void sub_801BF98(void);
 extern u32 sub_80244E4(void);
 extern void sub_802453C(void);
 extern bool8 sub_808D750(s16 index_);
-extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern void sub_808ED00(void);
 
 u32 sub_8027E18(PokemonStruct1 *);

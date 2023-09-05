@@ -14,6 +14,7 @@
 #include "save.h"
 #include "trade_items_menu.h"
 #include "constants/wonder_mail.h"
+#include "code_8098DBC.h"
 
 // NOTE: 0x13 and 0x14
 // Communication Screen?
@@ -44,7 +45,6 @@ EWRAM_DATA_2 u32 gUnknown_203B350 = {0};
 EWRAM_DATA_2 u32 gUnknown_203B354 = {0}; // unused everywhere else except here..
 
 extern void SetWindowBGColor(void);
-extern void sub_8099690(u32);
 extern void sub_8036FDC(s32);
 extern void CreateWonderMailMenu(void);
 extern void CreateSaveMenu(u32);

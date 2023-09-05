@@ -2,13 +2,13 @@
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
 #include "code_801C620.h"
+#include "code_8098DBC.h"
 #include "items.h"
 #include "kangaskhan_storage.h"
 #include "kecleon_bros.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
-
 #include "text1.h"
 #include "text2.h"
 
@@ -38,9 +38,6 @@ extern UnkTextStruct2 gUnknown_80DB818;
 extern const u8 gUnknown_80DB830[]; // "Number?\0"
 
 extern const u8 *gKangaskhanStorageDialogue[2][20];
-
-// code_8098BDC.s
-extern void sub_8099690(u32);
 
 void sub_8016E80(void);
 void sub_8016FF8(void);

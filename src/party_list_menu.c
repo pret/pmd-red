@@ -5,6 +5,7 @@
 #include "code_801B3C0.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
+#include "code_8098DBC.h"
 #include "constants/dungeon.h"
 #include "event_flag.h"
 #include "items.h"
@@ -65,7 +66,6 @@ extern PokemonStruct1 *sub_808D3F8(void);
 extern PokemonStruct1 *sub_808D3BC(void);
 extern s32 sub_8008ED0(u8 *);
 extern void nullsub_104(void);
-extern void sub_8099690(u32);
 extern u32 sub_8022860(void);
 extern void sub_8022908(void);
 extern void sub_801BF98(void);
@@ -74,7 +74,6 @@ extern void sub_802453C(void);
 extern u32 sub_80244E4(void);
 extern bool8 sub_808D750(s16 index_);
 extern void sub_808ED00(void);
-extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 bool8 sub_8026E88(PokemonStruct1 *r0);
 bool8 HasGummiItem();
 bool8 sub_8026EB8(PokemonStruct1 *r0);

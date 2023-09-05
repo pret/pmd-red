@@ -5,6 +5,7 @@
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
 #include "code_8097670.h"
+#include "code_8098DBC.h"
 #include "constants/bg_music.h"
 #include "constants/colors.h"
 #include "constants/evolution_status.h"
@@ -13,6 +14,7 @@
 #include "luminous_cave.h"
 #include "memory.h"
 #include "menu_input.h"
+#include "pokemon.h"
 #include "random.h"
 #include "text_util.h"
 #include "text1.h"
@@ -37,9 +39,6 @@ extern const u8 gUnknown_80DCA2C[];
 
 // code_8098BDC.s
 extern void nullsub_104(void);
-extern void sub_8099690(u32);
-// pokemon.s
-extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 
 static void LuminousCave_AdvancetoFallbackState(void);
 static bool8 LuminousCave_HasOnly1Member(void);

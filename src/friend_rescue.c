@@ -6,7 +6,7 @@
 #include "text2.h"
 #include "text_util.h"
 #include "items.h"
-
+#include "code_801B3C0.h"
 #include "pokemon.h"
 #include "friend_rescue.h"
 #include "memory.h"
@@ -18,12 +18,10 @@
 #include "main_menu.h"
 #include "code_801EE10_1.h"
 #include "code_801C620.h"
-#include "code_801B3C0.h"
 #include "cpu.h"
 #include "code_80118A4.h"
 
 extern void SetFriendRescueMenuState(u32);
-extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern void sub_802F2C0();
 extern u32 sub_802F298();
 
@@ -299,7 +297,6 @@ extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
 unkStruct_203B480 * GetMailatIndex(u8 index);
 extern s32 GetMailIndex(u8 mailType, u32 param_2);
 extern char * GetMonSpecies(s16 index);
-extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern void MemoryFill8(u8 *dest, u8 value, s32 size);
 extern void ResetUnusedInputStruct(void);
 extern void sprintfStatic(char *buffer, const char *text, ...);

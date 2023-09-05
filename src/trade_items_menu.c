@@ -5,7 +5,6 @@
 #include "constants/communication_error_codes.h"
 #include "items.h"
 #include "main_menu.h"
-
 #include "trade_items_menu.h"
 #include "memory.h"
 #include "save.h"

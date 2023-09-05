@@ -52,7 +52,6 @@ extern u8 sub_8024108(u32);
 extern u32 sub_8031DCC();
 extern void sub_8031E10();
 extern void sub_8031E00();
-extern void sub_8099690(u32);
 extern void sub_8031E10(void);
 extern void sub_803084C(void);
 extern void sub_8030DE4();

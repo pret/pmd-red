@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
+#include "code_8098DBC.h"
 #include "constants/colors.h"
 #include "constants/input.h"
 #include "game_options.h"
@@ -78,7 +79,6 @@ extern void DestroyHintDisplayScreen(void);
 extern u32 sub_801E218(void);
 extern void sub_801E2C4(void);
 extern void SetWindowBGColor(void);
-extern void sub_8099690(u32);
 
 enum 
 {

@@ -13,7 +13,7 @@
 #include "code_80130A8.h"
 #include "code_80118A4.h"
 #include "wonder_mail_3.h"
-#include "code_801B3C0.h"
+#include "code_801B60C.h"
 
 extern unkStruct_803B344 *sub_803B344(u8);
 
@@ -109,11 +109,9 @@ extern void sub_802CF14(void);
 extern u32 sub_802DEE0(void);
 extern void sub_802DF24(void);
 extern void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
-extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern void sub_802F6FC(void);
 extern void ProceedToNextRewardSceneState(void);
 extern void sub_802F300(void);
-extern s32 sub_808D544(u32);
 void HandleMissionReward(void);
 const u8 *sub_80974A0(s16 index);
 

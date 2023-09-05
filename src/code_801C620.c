@@ -7,7 +7,6 @@
 #include "memory.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
-
 #include "text1.h"
 #include "text2.h"
 #include "subStruct_203B240.h"
@@ -97,7 +96,6 @@ struct unk_203B250
 extern struct unk_203B250 *gUnknown_203B250;
 extern u32 gUnknown_203B254;
 
-extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern u8 sub_8002658(s16);
 extern s16 sub_80A5728(void);
 extern void sub_801D208(u32);
@@ -133,7 +131,6 @@ extern struct unkStruct_203B244 *gUnknown_203B244;
 extern u32 gUnknown_203B248;
 extern u16 gUnknown_203B24C;
 extern u16 gUnknown_203B24E;
-extern u8 gUnknown_202DE58[0x58];
 extern u8 gAvailablePokemonNames[0x58];
 
 extern u8 gUnknown_80DBE6C[];
@@ -150,9 +147,7 @@ extern u8 *gUnknown_80D4970[];
 
 extern u32 sub_801CE58(void);
 extern void sub_801CC38(void);
-extern void sub_80140B4(UnkTextStruct2 *);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
-extern void sub_8013F84(void);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8013C68(u32 *);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);

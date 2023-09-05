@@ -70,7 +70,6 @@ extern unkStruct_80E9F8C gUnknown_80E9F8C[10];
 extern unkStruct_80E9920 gUnknown_80E9920[10];
 extern u8 *gUnknown_80E8B94[];
 
-extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern PokemonStruct1 *sub_808D378(void);
 
 s32 sub_8016028(void);

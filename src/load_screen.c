@@ -45,7 +45,6 @@ void DrawLoadScreenText(void);
 void sub_80397B4(void);
 
 extern void sub_80920D8(u8 *);
-extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern u8 *sub_8098FB4();
 extern void PrintDungeonLocationtoBuffer(u8 *, DungeonLocation *);
 

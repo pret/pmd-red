@@ -1,7 +1,7 @@
 #include "global.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
-#include "code_801B3C0.h"
+#include "code_801B60C.h"
 #include "code_80A26CC.h"
 #include "constants/colors.h"
 #include "dungeon.h"
@@ -26,9 +26,6 @@ extern const u8 *gUnknown_80D4970[];
 extern const u8 *gMakuhitaDialogue[2][10]; // 80D9FC8
 
 #include "data/makuhita_dojo1.h" // 80E0760
-
-// pokemon.s
-extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 
 static void MakuhitaDojo_DrawMainMenu(void);
 static void MakuhitaDojo_GoToFallbackState(void);

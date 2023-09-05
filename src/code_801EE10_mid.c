@@ -57,14 +57,11 @@ extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_80DC310[];
 extern u8 gUnknown_80DC2DC[];
 
-extern void sub_80140B4(UnkTextStruct2 *);
 extern void sub_801F918(s32);
 extern void sub_801FA58(void);
 extern void sub_801FAD4(void);
 extern void sub_801F930(void);
 extern void sub_801F9A4(void);
-void sub_8013F84(void);
-
 
 u32 sub_801F7E4(void);
 void sub_801F690(void);

@@ -3,6 +3,7 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
+#include "code_8098DBC.h"
 #include "constants/input.h"
 #include "felicity_bank.h"
 #include "kecleon_bros.h"
@@ -54,9 +55,6 @@ extern u8 gUnknown_80DB9B0[];
 extern const u8 *gKecleonShopDialogue[KECLEON_BROS_MODE_COUNT][23];
 extern const u8 gTeamToolboxA[];
 extern const u8 gTeamToolboxB[];
-
-// code_8098BDC.s
-extern void sub_8099690(u32);
 
 void sub_8018D30(void);
 void sub_80194F8(void);
@@ -948,6 +946,17 @@ void sub_8019E04(bool32 param_1)
     }
 }
 
+
+
+
+
+// SPLIT HERE?
+
+
+
+
+
+
 bool32 sub_8019E40(u32 r0)
 {
     if (CountKecleonShopItems() == 0)
@@ -1156,6 +1165,18 @@ void sub_801A0D8(void)
     sub_80073E0(gUnknown_203B214->unk34);
 }
 
+
+
+
+
+// SPLIT HERE?
+
+
+
+
+
+
+
 u32 sub_801A20C(u32 r0)
 {
     if (CountKecleonWareItems() == 0)
@@ -1363,7 +1384,24 @@ void sub_801A4A4(void)
     sub_80073E0(gUnknown_203B21C->unk34);
 }
 
-bool32 sub_801A5D8(u32 param_1, s32 param_2, UnkTextStruct2_sub *param_3, u32 param_4)
+
+
+
+
+
+
+
+
+
+// SPLIT HERE?
+
+
+
+
+
+
+
+bool8 sub_801A5D8(u32 param_1, s32 param_2, UnkTextStruct2_sub *param_3, u32 param_4)
 {
     if (GetNumberOfFilledInventorySlots() == 0)
         return FALSE;

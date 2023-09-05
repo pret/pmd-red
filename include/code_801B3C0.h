@@ -7,10 +7,10 @@
 #include "text.h"
 
 // size: 0x94
-struct unkStruct_203B230
+typedef struct unkStruct_203B230
 {
     s32 state;
-    Item item;
+    /* 0x4 */ Item item;
     s32 unk8;
     s32 unkC;
     struct subStruct_203B240 *unk10[2];
@@ -19,13 +19,10 @@ struct unkStruct_203B230
     u32 unk24;
     UnkTextStruct2 unk28[4];
     MenuInputStructSub unk88;
-};
+} unkStruct_203B230;
 
-u32 sub_801B3C0(Item *);
+bool8 sub_801B3C0(Item *item);
 u32 sub_801B410(void);
 void sub_801B450(void);
-u32 sub_801B60C(u32, u8, u8);
-u32 sub_801B6AC(void);
-void sub_801B72C(void);
 
 #endif // GUARD_CODE_801B3C0_H

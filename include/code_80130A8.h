@@ -3,11 +3,14 @@
 
 #include "file_system.h"
 #include "menu.h"
+#include "text.h"
 
 // code_80130A8.s
 extern void sub_8013AA0(u32 *);
 extern u32 sub_8013BBC(u32 *);
 extern void sub_8013C68(u32 *);
+extern void sub_8013F84(void);
+extern void sub_80140B4(UnkTextStruct2 *);
 extern void sub_80141B4(const u8 *, u32, OpenedFile **, u32);
 extern void sub_8014248(const u8 *, u32, u32, const MenuItem *, void *, u32, u32, OpenedFile **, u32);
 extern s32 sub_80144A4(s32 *);

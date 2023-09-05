@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
+#include "code_8098DBC.h"
 #include "gulpin_shop.h"
 #include "items.h"
 #include "memory.h"
@@ -9,7 +10,6 @@
 #include "pokemon.h"
 #include "text.h"
 
-extern void sub_8099690(u32);
 extern s32 GetNumMonsAbleToLearnItemMove(void);
 extern void sub_801B064(s32);
 
