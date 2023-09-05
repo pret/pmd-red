@@ -329,11 +329,8 @@ gUnknown_203B310: /* 203B310 */
 gUnknown_203B314: /* 203B314 */
 	.space 0x4
 
-gUnknown_203B318: /* 203B318 */
-	.space 0x4
-
-gUnknown_203B31C: /* 203B31C */
-	.space 0x4
+.include "src/makuhita_dojo1.o"
+.include "src/makuhita_dojo2.o"
 
 gUnknown_203B320: /* 203B320 */
 	.space 0x4

@@ -7,7 +7,6 @@
 #include "items.h"
 #include "memory.h"
 #include "pokemon.h"
-
 #include "menu_input.h"
 #include "kecleon_bros.h"
 #include "sprite.h"

@@ -346,7 +346,7 @@ bool8 sub_8097504(s16 mazeIndex)
 #ifndef NONMATCHING
     register s32 mazeIndex_s32_1 asm("r1");
 #else
-    s32 mazeIndex_s32_1;    
+    s32 mazeIndex_s32_1;
 #endif
     s32 uVar3;
 

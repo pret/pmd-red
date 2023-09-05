@@ -13,6 +13,7 @@
 #include "code_800D090.h"
 #include "menu_input.h"
 #include "wonder_mail.h"
+#include "dungeon.h"
 
 extern s16 gUnknown_80E80E0[];
 extern s16 gUnknown_80E8126[];
@@ -74,7 +75,6 @@ extern PokemonStruct1 *sub_808D378(void);
 
 s32 sub_8016028(void);
 extern void PrintDungeonLocationtoBuffer(u8 *, void *);
-extern void PrintYellowDungeonNametoBuffer(u8 *, void *);
 extern u8 sub_803C1D0(WonderMailSub *, u8);
 extern u8 *sub_803C1F0(u8);
 void sub_803D414(u8 *, WonderMail *);
@@ -86,9 +86,9 @@ void sub_803B6B0(s32 x, s32 y, u8 index, u32 param_4)
 
 void CreateRescueTitle(unkStruct_802C39C *param_1)
 {
-    char buf_1 [200];
-    char buf_2 [20];
-    char buf_3 [100];
+    u8 buf_1[200];
+    u8 buf_2[20];
+    u8 buf_3[100];
     u8 *monName;
     u8 uVar1;
 
@@ -107,7 +107,7 @@ void CreateRescueTitle(unkStruct_802C39C *param_1)
             xxx_call_draw_string(0x15,param_1->y,gMedichamMission,param_1->unk0[0],0);
             break;
         case 7:
-            PrintYellowDungeonNametoBuffer(buf_1, param_1->unk8);
+            PrintYellowDungeonNametoBuffer(buf_1, &param_1->unk8->dungeon);
             xxx_call_draw_string(0x15,param_1->y,buf_1,param_1->unk0[0],0);
             break;
         case 12:

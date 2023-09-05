@@ -13,6 +13,7 @@
 #include "code_80130A8.h"
 #include "code_80118A4.h"
 #include "wonder_mail_3.h"
+#include "code_801B3C0.h"
 
 extern unkStruct_803B344 *sub_803B344(u8);
 
@@ -96,8 +97,6 @@ extern void sub_802F184(void);
 extern void sub_802F1E8(void);
 extern void sub_802F004();
 extern void sub_802F088();
-extern void sub_801B72C(void);
-extern u32 sub_801B6AC(void);
 extern void sub_802F108(void);
 extern void sub_803B35C(WonderMail*, unkStruct_802C39C *);
 extern void sub_802DE84(unkStruct_802C39C *);
@@ -115,7 +114,6 @@ extern void sub_802F6FC(void);
 extern void ProceedToNextRewardSceneState(void);
 extern void sub_802F300(void);
 extern s32 sub_808D544(u32);
-extern u32 sub_801B60C(u32, u8, u8);
 void HandleMissionReward(void);
 const u8 *sub_80974A0(s16 index);
 

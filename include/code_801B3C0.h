@@ -24,5 +24,8 @@ struct unkStruct_203B230
 u32 sub_801B3C0(Item *);
 u32 sub_801B410(void);
 void sub_801B450(void);
+u32 sub_801B60C(u32, u8, u8);
+u32 sub_801B6AC(void);
+void sub_801B72C(void);
 
 #endif // GUARD_CODE_801B3C0_H
