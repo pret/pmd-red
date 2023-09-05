@@ -1,5 +1,6 @@
 #include "global.h"
 #include "code_806CD90.h"
+#include "code_80869E4.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
 #include "constants/friend_area.h"
@@ -23,293 +24,292 @@ extern u8 gUnknown_202E038[0x50];
 extern u8 gAvailablePokemonNames[0x58];
 extern u8 gUnknown_202DE58[];
 
-extern s16 gUnknown_80F57CA;
-extern s16 gUnknown_80F57D2;
-extern s16 gUnknown_80F57D0;
-extern s16 gUnknown_80F57CE;
+extern const s16 gUnknown_80F57CA;
+extern const s16 gUnknown_80F57D2;
+extern const s16 gUnknown_80F57D0;
+extern const s16 gUnknown_80F57CE;
 
-extern u32 gUnknown_8103D8C;
-extern u32 gUnknown_8103D98;
-extern u32 gUnknown_8103DD8;
-extern u32 gUnknown_8103E28;
-extern u32 gUnknown_8103BD8;
-extern u32 gUnknown_8103C00;
-extern u32 gUnknown_8103C3C;
-extern u32 gUnknown_8103C74;
-extern u32 gUnknown_8103CC4;
-extern u32 gUnknown_8103D0C;
-extern u32 gUnknown_8103D50;
-extern u32 gRayquazaPostStoryPreFightDialogue_6;
-extern u32 gRayquazaPostStoryPreFightDialogue_1;
-extern u32 gRayquazaPostStoryPreFightDialogue_2;
-extern u32 gRayquazaPostStoryPreFightDialogue_3;
-extern u32 gRayquazaPostStoryPreFightDialogue_4;
-extern u32 gRayquazaPostStoryPreFightDialogue_5;
-extern u32 gRayquazaPreFightDialogue_7;
-extern u32 gRayquazaReFightDialogue_1;
-extern u32 gRayquazaReFightDialogue_2;
-extern u32 gRayquazaReFightDialogue_3;
-extern u32 gRayquazaReFightDialogue_4;
-extern u32 gRayquazaPreFightDialogue_1;
-extern u32 gRayquazaPreFightDialogue_2;
-extern u32 gRayquazaPreFightDialogue_3;
-extern u32 gRayquazaPreFightDialogue_4;
-extern u32 gRayquazaPreFightDialogue_5;
-extern u32 gRayquazaPreFightDialogue_6;
-extern u32 gRayquazaPreFightDialogue_7;
-extern u32 gRayquazaPreFightDialogue_8;
-extern u32 gRayquazaPreFightDialogue_9;
-extern u32 gRayquazaPreFightDialogue_10;
-extern u32 gRayquazaPreFightDialogue_11;
-extern u32 MagmaCavernMidDialogue_5;
-extern u32 MagmaCavernMidDialogue_6;
-extern u32 MagmaCavernMidDialogue_7;
-extern u32 MagmaCavernMidDialogue_8;
-extern u32 MagmaCavernMidDialogue_9;
-extern u32 MagmaCavernMidDialogue_10;
-extern u32 MagmaCavernMidDialogue_11;
-extern u32 MagmaCavernMidDialogue_12;
-extern u32 MagmaCavernMidDialogue_13;
-extern u32 MagmaCavernMidDialogue_14;
-extern u32 MagmaCavernMidDialogue_15;
-extern u32 MagmaCavernMidDialogue_4;
-extern u32 MagmaCavernMidDialogue_3;
-extern u32 MagmaCavernMidDialogue_2;
-extern u32 MagmaCavernMidDialogue_1;
-extern u32 gUnknown_8103488;
-extern u32 gGroudonPostStoryPreFightDialogue_1;
-extern u32 gGroudonPostStoryPreFightDialogue_2;
-extern u32 gGroudonPostStoryPreFightDialogue_3;
-extern u32 gGroudonPostStoryPreFightDialogue_4;
-extern u32 gGroudonReFightDialogue_1;
-extern u32 gGroudonReFightDialogue_2;
-extern u32 gGroudonReFightDialogue_3;
-extern u32 gGroudonReFightDialogue_4;
-extern u32 GroudonPreFightDialogue_1;
-extern u32 GroudonPreFightDialogue_2;
-extern u32 GroudonPreFightDialogue_3;
-extern u32 GroudonPreFightDialogue_4;
-extern u32 GroudonPreFightDialogue_5;
-extern u32 GroudonPreFightDialogue_6;
-extern u32 GroudonPreFightDialogue_7;
-extern u32 GroudonPreFightDialogue_8;
-extern u32 GroudonPreFightDialogue_9;
-extern u32 GroudonPreFightDialogue_10;
-extern u32 GroudonPreFightDialogue_11;
-extern u32 GroudonPreFightDialogue_12;
-extern u32 GroudonPreFightDialogue_13;
-extern u32 GroudonPreFightDialogue_14;
-extern u32 gUnknown_8102B10;
-extern u32 gRegisteelPostFightDialogue_2;
-extern u32 gRegicePostFightDialogue_2;
-extern u32 gRegirockPostFightDialogue_2;
-extern u32 gRegisteelPostFightDialogue_1;
-extern u32 gRegicePostFightDialogue_1;
-extern u32 gRegirockPostFightDialogue_1;
-extern u32 gUnknown_810554C;
-extern u32 gUnknown_8105558;
-extern u32 gUnknown_81055F4;
-extern u32 gRegicePreFightDialogue_1;
-extern u32 gRegirockPreFightDialogue_1;
-extern u32 gSuicuneReFightDialogue_1;
-extern u32 gSuicuneReFightDialogue_2;
-extern u32 gSuicuneReFightDialogue_3;
-extern u32 gRegisteelPreFightDialogue_1;
-extern u32 gJirachiPreFightDialogue_1;
-extern u32 gJirachiPreFightDialogue_2;
-extern u32 gJirachiPreFightDialogue_3;
-extern u32 gJirachiPreFightDialogue_4;
-extern u32 gLatiosReFightDialogue_1;
-extern u32 gLatiosPreFightDialogue_2;
-extern u32 gLatiosPreFightDialogue_3;
-extern u32 gLatiosPreFightDialogue_1;
-extern u32 HoOhReFightDialogue_1;
-extern u32 HoOhReFightDialogue_2;
-extern u32 HoOhReFightDialogue_3;
-extern u32 HoOhReFightDialogue_4;
-extern u32 HoOhReFightDialogue_5;
-extern u32 gHoOhPreFightDialogue_1;
-extern u32 gHoOhPreFightDialogue_2;
-extern u32 gHoOhPreFightDialogue_3;
-extern u32 gHoOhPreFightDialogue_4;
-extern u32 gHoOhPreFightDialogue_5;
-extern u32 gHoOhPreFightDialogue_6;
-extern u32 gSuicunePostStoryPreFightDialogue_4;
-extern u32 gSuicunePostStoryPreFightDialogue_1;
-extern u32 gSuicunePostStoryPreFightDialogue_2;
-extern u32 gSuicunePostStoryPreFightDialogue_3;
-extern u32 gSuicunePreFightDialogue_1;
-extern u32 gSuicunePreFightDialogue_2;
-extern u32 gSuicunePreFightDialogue_3;
-extern u32 gSuicunePreFightDialogue_4;
-extern u32 gSuicunePreFightDialogue_5;
-extern u32 gSuicunePreFightDialogue_6;
-extern u32 gSuicunePreFightDialogue_7;
-extern u32 gRaikouPostStoryPreFightDialogue_3;
-extern u32 gRaikouPostStoryPreFightDialogue_4;
-extern u32 gRaikouPostStoryPreFightDialogue_1;
-extern u32 gRaikouPostStoryPreFightDialogue_2;
-extern u32 gRaikouReFightDialogue_1;
-extern u32 gRaikouReFightDialogue_2;
-extern u32 gRaikouReFightDialogue_3;
-extern u32 gRaikouPreFightDialogue_1;
-extern u32 gRaikouPreFightDialogue_2;
-extern u32 gRaikouPreFightDialogue_3;
-extern u32 gRaikouPreFightDialogue_4;
-extern u32 gRaikouPreFightDialogue_5;
-extern u32 gRaikouPreFightDialogue_6;
-extern u32 gEnteiPostStoryPreFightDialogue_4;
-extern u32 gEnteiPostStoryPreFightDialogue_1;
-extern u32 gEnteiPostStoryPreFightDialogue_2;
-extern u32 gEnteiPostStoryPreFightDialogue_3;
-extern u32 gEnteiReFightDialogue_1;
-extern u32 gEnteiReFightDialogue_2;
-extern u32 gEnteiReFightDialogue_3;
-extern u32 gUnknown_8104FC8;
-extern u32 gEnteiPreFightDialogue_1;
-extern u32 gEnteiPreFightDialogue_2;
-extern u32 gEnteiPreFightDialogue_3;
-extern u32 gMewtwoReFightDialogue_5;
-extern u32 gMewtwoReFightDialogue_4;
-extern u32 gMewtwoReFightDialogue_3;
-extern u32 gMewtwoReFightDialogue_2;
-extern u32 gMewtwoReFightDialogue_1;
-extern u32 gMewtwoPreFightDialogue_5;
-extern u32 gMewtwoPreFightDialogue_1;
-extern u32 gMewtwoPreFightDialogue_2;
-extern u32 gMewtwoPreFightDialogue_3;
-extern u32 gMewtwoPreFightDialogue_4;
-extern u32 gUnknown_8103E34;
-extern u32 gUnknown_8102A9C;
-extern u32 gArticunoPostStoryPreFightDialogue_1;
-extern u32 gArticunoPostStoryPreFightDialogue_2;
-extern u32 gArticunoPostStoryPreFightDialogue_3;
-extern u32 gArticunoPostStoryPreFightDialogue_4;
-extern u32 gArticunoPostStoryPreFightDialogue_5;
-extern u32 gArticunoReFightDialogue_1;
-extern u32 gArticunoReFightDialogue_2;
-extern u32 gArticunoReFightDialogue_3;
-extern u32 gArticunoPreFightDialogue_1;
-extern u32 gArticunoPreFightDialogue_2;
-extern u32 gArticunoPreFightDialogue_3;
-extern u32 gArticunoPreFightDialogue_4;
-extern u32 gArticunoPreFightDialogue_5;
-extern u32 gArticunoPreFightDialogue_6;
-extern u32 gArticunoPreFightDialogue_7;
-extern u32 gArticunoPreFightDialogue_8;
-extern u32 gArticunoPreFightDialogue_9;
-extern u32 gArticunoPreFightDialogue_10;
-extern u32 gArticunoPreFightDialogue_11;
-extern u32 gArticunoPreFightDialogue_12;
-extern u32 gMoltresPostStoryPreFightDialogue_1;
-extern u32 gMoltresPostStoryPreFightDialogue_2;
-extern u32 gMoltresPostStoryPreFightDialogue_3;
-extern u32 gMoltresPostStoryPreFightDialogue_4;
-extern u32 gMoltresPostStoryPreFightDialogue_5;
-extern u32 gUnknown_8100D3C;
-extern u32 gMoltresReFightDialogue_1;
-extern u32 gMoltresReFightDialogue_2;
-extern u32 gMoltresReFightDialogue_3;
-extern u32 gMoltresReFightDialogue_4;
-extern u32 gMoltresReFightDialogue_5;
-extern u32 gMoltresPreFightDialogue_1;
-extern u32 gMoltresPreFightDialogue_2;
-extern u32 gMoltresPreFightDialogue_3;
-extern u32 gMoltresPreFightDialogue_4;
-extern u32 gMoltresPreFightDialogue_5;
-extern u32 gMoltresPreFightDialogue_6;
-extern u32 gMoltresPreFightDialogue_7;
-extern u32 gMoltresPreFightDialogue_8;
-extern u32 gMoltresPreFightDialogue_9;
-extern u32 gMoltresPreFightDialogue_10;
-extern u32 gMoltresPreFightDialogue_11;
-extern u32 gMoltresPreFightDialogue_12;
-extern u32 gZapdosPostStoryPreFightDialogue_1;
-extern u32 gZapdosPostStoryPreFightDialogue_2;
-extern u32 gZapdosPostStoryPreFightDialogue_3;
-extern u32 gZapdosPostStoryPreFightDialogue_4;
-extern u32 gZapdosPostStoryPreFightDialogue_5;
-extern u32 gZapdosPostStoryPreFightDialogue_6;
-extern u32 gUnknown_8105668;
-extern u32 gUnknown_8105674;
-extern u32 gUnknown_81056B8;
-extern u32 gUnknown_81056DC;
-extern u32 gUnknown_810579C;
-extern u32 gUnknown_8105974;
-extern u32 gUnknown_810581C;
+extern const u8 gUnknown_8103D8C[];
+extern const u8 gUnknown_8103D98[];
+extern const u8 gUnknown_8103DD8[];
+extern const u8 gUnknown_8103E28[];
+extern const u8 gUnknown_8103BD8[];
+extern const u8 gUnknown_8103C00[];
+extern const u8 gUnknown_8103C3C[];
+extern const u8 gUnknown_8103C74[];
+extern const u8 gUnknown_8103CC4[];
+extern const u8 gUnknown_8103D0C[];
+extern const u8 gUnknown_8103D50[];
+extern const u8 gRayquazaPostStoryPreFightDialogue_6[];
+extern const u8 gRayquazaPostStoryPreFightDialogue_1[];
+extern const u8 gRayquazaPostStoryPreFightDialogue_2[];
+extern const u8 gRayquazaPostStoryPreFightDialogue_3[];
+extern const u8 gRayquazaPostStoryPreFightDialogue_4[];
+extern const u8 gRayquazaPostStoryPreFightDialogue_5[];
+extern const u8 gRayquazaPreFightDialogue_7[];
+extern const u8 gRayquazaReFightDialogue_1[];
+extern const u8 gRayquazaReFightDialogue_2[];
+extern const u8 gRayquazaReFightDialogue_3[];
+extern const u8 gRayquazaReFightDialogue_4[];
+extern const u8 gRayquazaPreFightDialogue_1[];
+extern const u8 gRayquazaPreFightDialogue_2[];
+extern const u8 gRayquazaPreFightDialogue_3[];
+extern const u8 gRayquazaPreFightDialogue_4[];
+extern const u8 gRayquazaPreFightDialogue_5[];
+extern const u8 gRayquazaPreFightDialogue_6[];
+extern const u8 gRayquazaPreFightDialogue_7[];
+extern const u8 gRayquazaPreFightDialogue_8[];
+extern const u8 gRayquazaPreFightDialogue_9[];
+extern const u8 gRayquazaPreFightDialogue_10[];
+extern const u8 gRayquazaPreFightDialogue_11[];
+extern const u8 MagmaCavernMidDialogue_5[];
+extern const u8 MagmaCavernMidDialogue_6[];
+extern const u8 MagmaCavernMidDialogue_7[];
+extern const u8 MagmaCavernMidDialogue_8[];
+extern const u8 MagmaCavernMidDialogue_9[];
+extern const u8 MagmaCavernMidDialogue_10[];
+extern const u8 MagmaCavernMidDialogue_11[];
+extern const u8 MagmaCavernMidDialogue_12[];
+extern const u8 MagmaCavernMidDialogue_13[];
+extern const u8 MagmaCavernMidDialogue_14[];
+extern const u8 MagmaCavernMidDialogue_15[];
+extern const u8 MagmaCavernMidDialogue_4[];
+extern const u8 MagmaCavernMidDialogue_3[];
+extern const u8 MagmaCavernMidDialogue_2[];
+extern const u8 MagmaCavernMidDialogue_1[];
+extern const u8 gUnknown_8103488[];
+extern const u8 gGroudonPostStoryPreFightDialogue_1[];
+extern const u8 gGroudonPostStoryPreFightDialogue_2[];
+extern const u8 gGroudonPostStoryPreFightDialogue_3[];
+extern const u8 gGroudonPostStoryPreFightDialogue_4[];
+extern const u8 gGroudonReFightDialogue_1[];
+extern const u8 gGroudonReFightDialogue_2[];
+extern const u8 gGroudonReFightDialogue_3[];
+extern const u8 gGroudonReFightDialogue_4[];
+extern const u8 GroudonPreFightDialogue_1[];
+extern const u8 GroudonPreFightDialogue_2[];
+extern const u8 GroudonPreFightDialogue_3[];
+extern const u8 GroudonPreFightDialogue_4[];
+extern const u8 GroudonPreFightDialogue_5[];
+extern const u8 GroudonPreFightDialogue_6[];
+extern const u8 GroudonPreFightDialogue_7[];
+extern const u8 GroudonPreFightDialogue_8[];
+extern const u8 GroudonPreFightDialogue_9[];
+extern const u8 GroudonPreFightDialogue_10[];
+extern const u8 GroudonPreFightDialogue_11[];
+extern const u8 GroudonPreFightDialogue_12[];
+extern const u8 GroudonPreFightDialogue_13[];
+extern const u8 GroudonPreFightDialogue_14[];
+extern const u8 gUnknown_8102B10[];
+extern const u8 gRegisteelPostFightDialogue_2[];
+extern const u8 gRegicePostFightDialogue_2[];
+extern const u8 gRegirockPostFightDialogue_2[];
+extern const u8 gRegisteelPostFightDialogue_1[];
+extern const u8 gRegicePostFightDialogue_1[];
+extern const u8 gRegirockPostFightDialogue_1[];
+extern const u8 gUnknown_810554C[];
+extern const u8 gUnknown_8105558[];
+extern const u8 gUnknown_81055F4[];
+extern const u8 gRegicePreFightDialogue_1[];
+extern const u8 gRegirockPreFightDialogue_1[];
+extern const u8 gSuicuneReFightDialogue_1[];
+extern const u8 gSuicuneReFightDialogue_2[];
+extern const u8 gSuicuneReFightDialogue_3[];
+extern const u8 gRegisteelPreFightDialogue_1[];
+extern const u8 gJirachiPreFightDialogue_1[];
+extern const u8 gJirachiPreFightDialogue_2[];
+extern const u8 gJirachiPreFightDialogue_3[];
+extern const u8 gJirachiPreFightDialogue_4[];
+extern const u8 gLatiosReFightDialogue_1[];
+extern const u8 gLatiosPreFightDialogue_2[];
+extern const u8 gLatiosPreFightDialogue_3[];
+extern const u8 gLatiosPreFightDialogue_1[];
+extern const u8 HoOhReFightDialogue_1[];
+extern const u8 HoOhReFightDialogue_2[];
+extern const u8 HoOhReFightDialogue_3[];
+extern const u8 HoOhReFightDialogue_4[];
+extern const u8 HoOhReFightDialogue_5[];
+extern const u8 gHoOhPreFightDialogue_1[];
+extern const u8 gHoOhPreFightDialogue_2[];
+extern const u8 gHoOhPreFightDialogue_3[];
+extern const u8 gHoOhPreFightDialogue_4[];
+extern const u8 gHoOhPreFightDialogue_5[];
+extern const u8 gHoOhPreFightDialogue_6[];
+extern const u8 gSuicunePostStoryPreFightDialogue_4[];
+extern const u8 gSuicunePostStoryPreFightDialogue_1[];
+extern const u8 gSuicunePostStoryPreFightDialogue_2[];
+extern const u8 gSuicunePostStoryPreFightDialogue_3[];
+extern const u8 gSuicunePreFightDialogue_1[];
+extern const u8 gSuicunePreFightDialogue_2[];
+extern const u8 gSuicunePreFightDialogue_3[];
+extern const u8 gSuicunePreFightDialogue_4[];
+extern const u8 gSuicunePreFightDialogue_5[];
+extern const u8 gSuicunePreFightDialogue_6[];
+extern const u8 gSuicunePreFightDialogue_7[];
+extern const u8 gRaikouPostStoryPreFightDialogue_3[];
+extern const u8 gRaikouPostStoryPreFightDialogue_4[];
+extern const u8 gRaikouPostStoryPreFightDialogue_1[];
+extern const u8 gRaikouPostStoryPreFightDialogue_2[];
+extern const u8 gRaikouReFightDialogue_1[];
+extern const u8 gRaikouReFightDialogue_2[];
+extern const u8 gRaikouReFightDialogue_3[];
+extern const u8 gRaikouPreFightDialogue_1[];
+extern const u8 gRaikouPreFightDialogue_2[];
+extern const u8 gRaikouPreFightDialogue_3[];
+extern const u8 gRaikouPreFightDialogue_4[];
+extern const u8 gRaikouPreFightDialogue_5[];
+extern const u8 gRaikouPreFightDialogue_6[];
+extern const u8 gEnteiPostStoryPreFightDialogue_4[];
+extern const u8 gEnteiPostStoryPreFightDialogue_1[];
+extern const u8 gEnteiPostStoryPreFightDialogue_2[];
+extern const u8 gEnteiPostStoryPreFightDialogue_3[];
+extern const u8 gEnteiReFightDialogue_1[];
+extern const u8 gEnteiReFightDialogue_2[];
+extern const u8 gEnteiReFightDialogue_3[];
+extern const u8 gUnknown_8104FC8[];
+extern const u8 gEnteiPreFightDialogue_1[];
+extern const u8 gEnteiPreFightDialogue_2[];
+extern const u8 gEnteiPreFightDialogue_3[];
+extern const u8 gMewtwoReFightDialogue_5[];
+extern const u8 gMewtwoReFightDialogue_4[];
+extern const u8 gMewtwoReFightDialogue_3[];
+extern const u8 gMewtwoReFightDialogue_2[];
+extern const u8 gMewtwoReFightDialogue_1[];
+extern const u8 gMewtwoPreFightDialogue_5[];
+extern const u8 gMewtwoPreFightDialogue_1[];
+extern const u8 gMewtwoPreFightDialogue_2[];
+extern const u8 gMewtwoPreFightDialogue_3[];
+extern const u8 gMewtwoPreFightDialogue_4[];
+extern const u8 gUnknown_8103E34[];
+extern const u8 gUnknown_8102A9C[];
+extern const u8 gArticunoPostStoryPreFightDialogue_1[];
+extern const u8 gArticunoPostStoryPreFightDialogue_2[];
+extern const u8 gArticunoPostStoryPreFightDialogue_3[];
+extern const u8 gArticunoPostStoryPreFightDialogue_4[];
+extern const u8 gArticunoPostStoryPreFightDialogue_5[];
+extern const u8 gArticunoReFightDialogue_1[];
+extern const u8 gArticunoReFightDialogue_2[];
+extern const u8 gArticunoReFightDialogue_3[];
+extern const u8 gArticunoPreFightDialogue_1[];
+extern const u8 gArticunoPreFightDialogue_2[];
+extern const u8 gArticunoPreFightDialogue_3[];
+extern const u8 gArticunoPreFightDialogue_4[];
+extern const u8 gArticunoPreFightDialogue_5[];
+extern const u8 gArticunoPreFightDialogue_6[];
+extern const u8 gArticunoPreFightDialogue_7[];
+extern const u8 gArticunoPreFightDialogue_8[];
+extern const u8 gArticunoPreFightDialogue_9[];
+extern const u8 gArticunoPreFightDialogue_10[];
+extern const u8 gArticunoPreFightDialogue_11[];
+extern const u8 gArticunoPreFightDialogue_12[];
+extern const u8 gMoltresPostStoryPreFightDialogue_1[];
+extern const u8 gMoltresPostStoryPreFightDialogue_2[];
+extern const u8 gMoltresPostStoryPreFightDialogue_3[];
+extern const u8 gMoltresPostStoryPreFightDialogue_4[];
+extern const u8 gMoltresPostStoryPreFightDialogue_5[];
+extern const u8 gUnknown_8100D3C[];
+extern const u8 gMoltresReFightDialogue_1[];
+extern const u8 gMoltresReFightDialogue_2[];
+extern const u8 gMoltresReFightDialogue_3[];
+extern const u8 gMoltresReFightDialogue_4[];
+extern const u8 gMoltresReFightDialogue_5[];
+extern const u8 gMoltresPreFightDialogue_1[];
+extern const u8 gMoltresPreFightDialogue_2[];
+extern const u8 gMoltresPreFightDialogue_3[];
+extern const u8 gMoltresPreFightDialogue_4[];
+extern const u8 gMoltresPreFightDialogue_5[];
+extern const u8 gMoltresPreFightDialogue_6[];
+extern const u8 gMoltresPreFightDialogue_7[];
+extern const u8 gMoltresPreFightDialogue_8[];
+extern const u8 gMoltresPreFightDialogue_9[];
+extern const u8 gMoltresPreFightDialogue_10[];
+extern const u8 gMoltresPreFightDialogue_11[];
+extern const u8 gMoltresPreFightDialogue_12[];
+extern const u8 gZapdosPostStoryPreFightDialogue_1[];
+extern const u8 gZapdosPostStoryPreFightDialogue_2[];
+extern const u8 gZapdosPostStoryPreFightDialogue_3[];
+extern const u8 gZapdosPostStoryPreFightDialogue_4[];
+extern const u8 gZapdosPostStoryPreFightDialogue_5[];
+extern const u8 gZapdosPostStoryPreFightDialogue_6[];
+extern const u8 gUnknown_8105668[];
+extern const u8 gUnknown_8105674[];
+extern const u8 gUnknown_81056B8[];
+extern const u8 gUnknown_81056DC[];
+extern const u8 gUnknown_810579C[];
+extern const u8 gUnknown_8105974[];
+extern const u8 gUnknown_810581C[];
 
-extern u32 gUnknown_8105BF4;
-extern u32 gUnknown_8105D2C;
-extern u32 gUnknown_8105D80;
-extern u32 gUnknown_8105D9C;
-extern u32 gUnknown_81058E0;
-extern u32 gUnknown_810593C;
-extern u32 gUnknown_8105A08;
-extern u32 gUnknown_8105AD4;
-extern u32 gUnknown_8105B20;
-extern u32 gUnknown_8105B68;
-extern u32 gUnknown_8105BA8;
-extern u8 *gUnknown_8105798[];
-extern u32 gJirachiReFightDialogue_1;
-extern u32 gUnknown_202EDC8;
+extern const u8 gUnknown_8105BF4[];
+extern const u8 gUnknown_8105D2C[];
+extern const u8 gUnknown_8105D80[];
+extern const u8 gUnknown_8105D9C[];
+extern const u8 gUnknown_81058E0[];
+extern const u8 gUnknown_810593C[];
+extern const u8 gUnknown_8105A08[];
+extern const u8 gUnknown_8105AD4[];
+extern const u8 gUnknown_8105B20[];
+extern const u8 gUnknown_8105B68[];
+extern const u8 gUnknown_8105BA8[];
+extern const u8 *gUnknown_8105798[];
+extern const u8 gJirachiReFightDialogue_1[];
 
-extern u32 gKyogrePreFightDialogue_8;
-extern u32 gKyogrePreFightDialogue_1;
-extern u32 gKyogrePreFightDialogue_2;
-extern u32 gKyogrePreFightDialogue_3;
-extern u32 gKyogrePreFightDialogue_4;
-extern u32 gKyogrePreFightDialogue_5;
-extern u32 gKyogrePreFightDialogue_6;
-extern u32 gKyogrePreFightDialogue_7;
-extern u32 gUnknown_810697C;
-extern u64 gUnknown_8107544[];
-extern u32 gMedichamRescueDialogue_1;
-extern u32 gMedichamRescueDialogue_2;
-extern u32 gMedichamRescueDialogue_3;
-extern u32 gMedichamRescueDialogue_4;
-extern u32 gSmeargleRescueDialogue_1;
-extern u32 gSmeargleRescueDialogue_2;
-extern u32 gSmeargleRescueDialogue_3;
-extern u32 gSmeargleRescueDialogue_4;
-extern u32 gUnknown_8106720;
+extern const u8 gKyogrePreFightDialogue_8[];
+extern const u8 gKyogrePreFightDialogue_1[];
+extern const u8 gKyogrePreFightDialogue_2[];
+extern const u8 gKyogrePreFightDialogue_3[];
+extern const u8 gKyogrePreFightDialogue_4[];
+extern const u8 gKyogrePreFightDialogue_5[];
+extern const u8 gKyogrePreFightDialogue_6[];
+extern const u8 gKyogrePreFightDialogue_7[];
+extern const u8 gUnknown_810697C[];
+extern const u64 gUnknown_8107544[];
+extern const u8 gMedichamRescueDialogue_1[];
+extern const u8 gMedichamRescueDialogue_2[];
+extern const u8 gMedichamRescueDialogue_3[];
+extern const u8 gMedichamRescueDialogue_4[];
+extern const u8 gSmeargleRescueDialogue_1[];
+extern const u8 gSmeargleRescueDialogue_2[];
+extern const u8 gSmeargleRescueDialogue_3[];
+extern const u8 gSmeargleRescueDialogue_4[];
+extern const u8 gUnknown_8106720[];
 
-extern u32 gCelebiJoinDialogue_10;
-extern u32 gCelebiJoinDialogue_1;
-extern u32 gCelebiJoinDialogue_2;
-extern u32 gCelebiJoinDialogue_3;
-extern u32 gCelebiJoinDialogue_4;
-extern u32 gCelebiJoinDialogue_5;
-extern u32 gCelebiJoinDialogue_6;
-extern u32 gCelebiJoinDialogue_7;
-extern u32 gCelebiJoinDialogue_8;
-extern u32 gCelebiJoinDialogue_9;
-extern u32 *gPtrPurityForestAllowCelebiToJoinText;
-extern u32 gPurityForestAllowCelebiToJoinPrompt;
-extern u32 *gPtrPurityForestRefuseCelebiConfirmText;
-extern u32 gPurityForestRefuseCelebiConfirmPrompt;
-extern u32 gDeoxysPreFightDialogue_1;
-extern u32 gDeoxysPreFightDialogue_2;
-extern u32 gDeoxysPreFightDialogue_3;
-extern u32 gDeoxysPreFightDialogue_4;
-extern u32 gDeoxysPreFightDialogue_5;
-extern u32 gLugiaPreFightDialogue_8;
-extern u32 gLugiaPreFightDialogue_1;
-extern u32 gLugiaPreFightDialogue_2;
-extern u32 gLugiaPreFightDialogue_3;
-extern u32 gLugiaPreFightDialogue_4;
-extern u32 gLugiaPreFightDialogue_5;
-extern u32 gLugiaPreFightDialogue_6;
-extern u32 gLugiaPreFightDialogue_7;
-extern u32 gZapdosReFightDialogue_1;
-extern u32 gUnknown_81015A0;
-extern u32 gZapdosReFightDialogue_2;
-extern u32 gZapdosReFightDialogue_3;
-extern u32 gZapdosReFightDialogue_4;
+extern const u8 gCelebiJoinDialogue_10[];
+extern const u8 gCelebiJoinDialogue_1[];
+extern const u8 gCelebiJoinDialogue_2[];
+extern const u8 gCelebiJoinDialogue_3[];
+extern const u8 gCelebiJoinDialogue_4[];
+extern const u8 gCelebiJoinDialogue_5[];
+extern const u8 gCelebiJoinDialogue_6[];
+extern const u8 gCelebiJoinDialogue_7[];
+extern const u8 gCelebiJoinDialogue_8[];
+extern const u8 gCelebiJoinDialogue_9[];
+extern const u32 *gPtrPurityForestAllowCelebiToJoinText;
+extern const u32 gPurityForestAllowCelebiToJoinPrompt;
+extern const u32 *gPtrPurityForestRefuseCelebiConfirmText;
+extern const u32 gPurityForestRefuseCelebiConfirmPrompt;
+extern const u8 gDeoxysPreFightDialogue_1[];
+extern const u8 gDeoxysPreFightDialogue_2[];
+extern const u8 gDeoxysPreFightDialogue_3[];
+extern const u8 gDeoxysPreFightDialogue_4[];
+extern const u8 gDeoxysPreFightDialogue_5[];
+extern const u8 gLugiaPreFightDialogue_8[];
+extern const u8 gLugiaPreFightDialogue_1[];
+extern const u8 gLugiaPreFightDialogue_2[];
+extern const u8 gLugiaPreFightDialogue_3[];
+extern const u8 gLugiaPreFightDialogue_4[];
+extern const u8 gLugiaPreFightDialogue_5[];
+extern const u8 gLugiaPreFightDialogue_6[];
+extern const u8 gLugiaPreFightDialogue_7[];
+extern const u8 gZapdosReFightDialogue_1[];
+extern const u8 gUnknown_81015A0[];
+extern const u8 gZapdosReFightDialogue_2[];
+extern const u8 gZapdosReFightDialogue_3[];
+extern const u8 gZapdosReFightDialogue_4[];
 
-extern u32 gUnknown_81058C4;
-extern u32 gUnknown_81058A8;
+extern const u8 gUnknown_81058C4[];
+extern const u8 gUnknown_81058A8[];
 
-extern u8 gUnknown_81074FC[];
+extern const u8 gUnknown_81074FC[];
 
 extern u8 sub_800E9A8(u32);
 extern void sub_800DC14(u32);
@@ -321,14 +321,10 @@ extern void sub_8068FE0(Entity *, u32, u32);
 
 extern void sub_803E708(u32, u32);
 extern void sub_8086448(void);
-extern void sub_8086598(void);
 extern void SpriteLookAroundEffect(Entity *);
-extern void SpriteShockEffect(Entity *);
 extern void PlaySoundEffect(u32);
-extern void sub_80869E4(Entity *, u32, u32, u32);
 extern void IncreaseEntityPixelPos(Entity *, u32, u32);
 extern void sub_8042B0C(Entity *);
-extern void DisplayDungeonDialogue(u32 *);
 extern void sub_803E708(u32, u32);
 extern u8 sub_806FD18(Entity *);
 extern void sub_80861D4(Entity *, u32, s32 direction);
@@ -374,9 +370,8 @@ extern void sub_80855E4(void *);
 extern void sub_8041888(u32);
 extern void sub_80861B8(Entity *, u32, u32);
 extern void sub_803E708(u32, u32);
-extern void DisplayDungeonDialogue(u32 *r0);
+extern void DisplayDungeonDialogue(const u8 *r0);
 
-extern void SpriteShockEffect(Entity *);
 extern u32 sub_80861F8(u32, Entity *, u32);
 
 
@@ -398,22 +393,17 @@ extern void sub_808B1CC(u8);
 extern void sub_80464C8(Entity *, u32 *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern void sub_803E46C(u32);
-extern void sub_80866C4(u32 *);
 extern void sub_808692C();
 
 extern void sub_80868F4();
 extern void sub_8086910();
 extern u32 sub_8085EC8(u32, u32, u32, Position *, u32);
-extern void sub_808680C();
-extern void sub_808682C();
 extern void sub_8086854();
-extern void sub_80867F4();
 extern void sub_8086838(u32, u32, u32);
 extern void sub_80426C8(u32, u32);
 extern void sub_807EAA0(u32, u32);
 
 extern void CreateJirachiWishWarpTile(void);
-extern void sub_8086794();
 
 void EnteiScreenFlash(void);
 void RaikouScreenFlash(void);
@@ -441,14 +431,11 @@ extern u8 sub_8086AE4(u32);
 
 
 extern void sub_8072008(Entity *, Entity *, s16, u32, u32);
-extern void sub_80869E4(Entity *, u32, u32, u32);
 extern void sub_8085374();
 
 extern void sub_8086848(u32 ,u32);
 extern void sub_80856C8(Entity *, s32, s32);
-extern void sub_8086738();
 extern void sub_8086A54(Entity *);
-extern void sub_8086764();
 
 extern void sub_803F878(u32,s32);
 
@@ -462,20 +449,13 @@ void MoltresDropInEffect(Entity * param_1);
 void MoltresScreenFlash1(s32 r0, s32 r1);
 void MoltresScreenFlash2(s32 r0, s32 r1);
 void MoltresScreenFlash3(void);
-void sub_808654C(void);
-
-extern void sub_8086598();
-extern void sub_80865E8();
 
 
-extern void sub_8086500(void);
-extern void sub_8086690(void);
 void MoltresScreenDarken(void);
-extern void sub_808663C(void);
 void ZapdosDropInEffect(Entity *param_1);
 void ZapdosScreenFlash(int param_1);
 
-extern s32 sub_8052C68(u32, u8 *, u32 *, u32);
+extern s32 sub_8052C68(u32, const u8 *, const u8 *, u32);
 extern void sub_80861A8(void);
 extern void sub_8045C28(Item *, u8 , u8 *);
 extern void EnableJirachiWishWarpTile(void);
@@ -492,18 +472,18 @@ void ZapdosReFightDialogue(void)
   ZapdosEntity = GetEntityFromClientType(8);
   sub_8086448();
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gZapdosReFightDialogue_1);
+  DisplayDungeonDialogue(gZapdosReFightDialogue_1);
   sub_803E708(10,0x46);
   PlaySoundEffect(0x1da);
-  DisplayDungeonDialogue(&gUnknown_81015A0);
+  DisplayDungeonDialogue(gUnknown_81015A0);
   sub_803E708(10,0x46);
   ZapdosDropInEffect(ZapdosEntity);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gZapdosReFightDialogue_2);
+  DisplayDungeonDialogue(gZapdosReFightDialogue_2);
   ZapdosScreenFlash(1);
-  DisplayDungeonDialogue(&gZapdosReFightDialogue_3);
+  DisplayDungeonDialogue(gZapdosReFightDialogue_3);
   ZapdosScreenFlash(2);
-  DisplayDungeonDialogue(&gZapdosReFightDialogue_4);
+  DisplayDungeonDialogue(gZapdosReFightDialogue_4);
   SetupBossFightHP(ZapdosEntity,300,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
@@ -517,20 +497,20 @@ void ZapdosPostStoryPreFightDialogue(void)
   ZapdosEntity = GetEntityFromClientType(8);
   sub_8086448();
   if (sub_8086AE4(MONSTER_ZAPDOS)) {
-    sub_80866C4(&gZapdosPostStoryPreFightDialogue_6);
+    sub_80866C4(gZapdosPostStoryPreFightDialogue_6);
   }
   else {
     ZapdosScreenFlash(1);
     PlaySoundEffect(0x1da);
-    DisplayDungeonDialogue(&gZapdosPostStoryPreFightDialogue_1);
+    DisplayDungeonDialogue(gZapdosPostStoryPreFightDialogue_1);
     ZapdosDropInEffect(ZapdosEntity);
-    DisplayDungeonDialogue(&gZapdosPostStoryPreFightDialogue_2);
+    DisplayDungeonDialogue(gZapdosPostStoryPreFightDialogue_2);
     ZapdosScreenFlash(1);
-    DisplayDungeonDialogue(&gZapdosPostStoryPreFightDialogue_3);
+    DisplayDungeonDialogue(gZapdosPostStoryPreFightDialogue_3);
     ZapdosScreenFlash(2);
-    DisplayDungeonDialogue(&gZapdosPostStoryPreFightDialogue_4);
+    DisplayDungeonDialogue(gZapdosPostStoryPreFightDialogue_4);
     ZapdosScreenFlash(2);
-    DisplayDungeonDialogue(&gZapdosPostStoryPreFightDialogue_5);
+    DisplayDungeonDialogue(gZapdosPostStoryPreFightDialogue_5);
     sub_803E708(10,0x46);
     SetupBossFightHP(ZapdosEntity,300,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -653,25 +633,25 @@ void MoltresPreFightDialogue(void)
   MoltresScreenFlash1(0xc,5);
   sub_8086500();
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_1);
+  DisplayDungeonDialogue(gMoltresPreFightDialogue_1);
   sub_803E708(10,0x46);
   sub_80869E4(PartnerEntity,4,1,5);
   sub_803E708(4,0x46);
   SpriteLookAroundEffect(PartnerEntity);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_2);
+  DisplayDungeonDialogue(gMoltresPreFightDialogue_2);
   sub_803E708(10,0x46);
   MoltresScreenFlash1(0xc,5);
   MoltresScreenFlash2(9,5);
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_3);
+  DisplayDungeonDialogue(gMoltresPreFightDialogue_3);
   sub_803E708(10,0x46);
   sub_80869E4(PartnerEntity,4,1,2);
   sub_80869E4(LeaderEntity,4,2,6);
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_4);
+  DisplayDungeonDialogue(gMoltresPreFightDialogue_4);
   sub_803E708(10,0x46);
   sub_80869E4(PartnerEntity,4,2,6);
   sub_8086690();
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_5);
+  DisplayDungeonDialogue(gMoltresPreFightDialogue_5);
   sub_803E708(10,0x46);
   sub_8085930(DIRECTION_NORTHWEST);
   sub_803E708(4,0x46);
@@ -679,32 +659,32 @@ void MoltresPreFightDialogue(void)
   PlaySoundEffect(0x2f2);
   DungeonStopBGM();
   MoltresScreenDarken();
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_6);
+  DisplayDungeonDialogue(gMoltresPreFightDialogue_6);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_7);
+  DisplayDungeonDialogue(gMoltresPreFightDialogue_7);
   sub_803E708(10,0x46);
   PlaySoundEffect(0x1cf);
   sub_80856E0(PartnerEntity, DIRECTION_NORTH);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_8);
+  DisplayDungeonDialogue(gMoltresPreFightDialogue_8);
   sub_803E708(10,0x46);
   MoltresScreenFlash3();
   PlaySoundEffect(0x1da);
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_9);
+  DisplayDungeonDialogue(gMoltresPreFightDialogue_9);
   sub_803E708(10,0x46);
   MoltresScreenFlash1(9,5);
   MoltresScreenFlash2(0xb,5);
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_10);
+  DisplayDungeonDialogue(gMoltresPreFightDialogue_10);
   sub_803E708(10,0x46);
   MoltresScreenFlash1(0xc,5);
   MoltresScreenFlash2(9,5);
   MoltresDropInEffect(MoltresEntity);
   sub_808663C();
   MoltresScreenFlash3();
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_11);
+  DisplayDungeonDialogue(gMoltresPreFightDialogue_11);
   sub_803E708(10,0x46);
   MoltresScreenFlash2(0xb,6);
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_12);
+  DisplayDungeonDialogue(gMoltresPreFightDialogue_12);
   sub_803E708(10,0x46);
   SetupBossFightHP(MoltresEntity,400,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -725,11 +705,11 @@ void MoltresReFightDialogue(void)
   sub_803E708(10,0x46);
   SpriteLookAroundEffect(PartnerEntity);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gMoltresReFightDialogue_1);
+  DisplayDungeonDialogue(gMoltresReFightDialogue_1);
   sub_803E708(10,0x46);
   sub_80869E4(PartnerEntity,4,1,2);
   sub_80869E4(LeaderEntity,4,2,6);
-  DisplayDungeonDialogue(&gMoltresReFightDialogue_2);
+  DisplayDungeonDialogue(gMoltresReFightDialogue_2);
   sub_803E708(10,0x46);
   sub_80869E4(PartnerEntity,4,2,6);
   sub_80869E4(LeaderEntity,4,2,6);
@@ -742,12 +722,12 @@ void MoltresReFightDialogue(void)
   MoltresDropInEffect(MoltresEntity);
   sub_808663C();
   MoltresScreenFlash3();
-  DisplayDungeonDialogue(&gMoltresReFightDialogue_3);
+  DisplayDungeonDialogue(gMoltresReFightDialogue_3);
   sub_803E708(10,0x46);
   MoltresScreenFlash2(0xb,6);
-  DisplayDungeonDialogue(&gMoltresReFightDialogue_4);
+  DisplayDungeonDialogue(gMoltresReFightDialogue_4);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gMoltresReFightDialogue_5);
+  DisplayDungeonDialogue(gMoltresReFightDialogue_5);
   sub_803E708(10,0x46);
   SetupBossFightHP(MoltresEntity,400,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -768,24 +748,24 @@ void MoltresPostStoryPreFightDialogue(void)
     sub_8085930(DIRECTION_NORTH);
     sub_803E708(4,0x46);
     sub_803E708(10,0x46);
-    DisplayDungeonDialogue(&gUnknown_8100D3C);
+    DisplayDungeonDialogue(gUnknown_8100D3C);
     sub_803E708(10,0x46);
     gDungeon->unk2 = 1;
   }
   else {
-    DisplayDungeonDialogue(&gMoltresPostStoryPreFightDialogue_1);
+    DisplayDungeonDialogue(gMoltresPostStoryPreFightDialogue_1);
     sub_8085930(DIRECTION_NORTHWEST);
     sub_803E708(4,0x46);
     sub_8085930(DIRECTION_NORTH);
     MoltresDropInEffect(MoltresEntity);
-    DisplayDungeonDialogue(&gMoltresPostStoryPreFightDialogue_2);
+    DisplayDungeonDialogue(gMoltresPostStoryPreFightDialogue_2);
     MoltresScreenFlash1(0xc,5);
     MoltresScreenFlash2(9,5);
-    DisplayDungeonDialogue(&gMoltresPostStoryPreFightDialogue_3);
+    DisplayDungeonDialogue(gMoltresPostStoryPreFightDialogue_3);
     MoltresScreenFlash3();
-    DisplayDungeonDialogue(&gMoltresPostStoryPreFightDialogue_4);
+    DisplayDungeonDialogue(gMoltresPostStoryPreFightDialogue_4);
     MoltresScreenFlash2(0xb,6);
-    DisplayDungeonDialogue(&gMoltresPostStoryPreFightDialogue_5);
+    DisplayDungeonDialogue(gMoltresPostStoryPreFightDialogue_5);
     sub_803E708(10,0x46);
     SetupBossFightHP(MoltresEntity,400,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -1069,15 +1049,15 @@ void ArticunoPreFightDialogue(void)
   ArticunoEntity = GetEntityFromClientType(0xd);
   sub_8086448();
   SpriteLookAroundEffect(PartnerEntity);
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_1);
+  DisplayDungeonDialogue(gArticunoPreFightDialogue_1);
   sub_803E708(10,0x46);
   sub_8086598();
   DungeonStopBGM();
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_2);
+  DisplayDungeonDialogue(gArticunoPreFightDialogue_2);
   sub_803E708(10,0x46);
   sub_80869E4(PartnerEntity,4,1,2);
   sub_80869E4(LeaderEntity,4,2,6);
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_3);
+  DisplayDungeonDialogue(gArticunoPreFightDialogue_3);
   sub_803E708(10,0x46);
   SetFacingDirection(LeaderEntity, DIRECTION_WEST);
   sub_803E708(4,0x46);
@@ -1093,9 +1073,9 @@ void ArticunoPreFightDialogue(void)
   sub_803E708(4,0x46);
   SetFacingDirection(LeaderEntity, DIRECTION_WEST);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_4);
+  DisplayDungeonDialogue(gArticunoPreFightDialogue_4);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_5);
+  DisplayDungeonDialogue(gArticunoPreFightDialogue_5);
   sub_803E708(10,0x46);
   sub_80869E4(LeaderEntity,4,1,4);
   sub_80869E4(PartnerEntity,4,2,4);
@@ -1103,33 +1083,33 @@ void ArticunoPreFightDialogue(void)
   SpriteLookAroundEffect(PartnerEntity);
   PlaySoundEffect(0x1d5);
   SpriteLookAroundEffect(LeaderEntity);
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_6);
+  DisplayDungeonDialogue(gArticunoPreFightDialogue_6);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_7);
+  DisplayDungeonDialogue(gArticunoPreFightDialogue_7);
   sub_803E708(10,0x46);
   PlaySoundEffect(0); // snow flurry
   gDungeon->unkE265 = WEATHER_SNOW;
   sub_807EAA0(0,1);
   PlaySoundEffect(0x1ee); // flash effect?
   sub_8088574();
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_8);
+  DisplayDungeonDialogue(gArticunoPreFightDialogue_8);
   sub_803E708(10,0x46);
   ArticunoScreenFlash();
   sub_8086738();
   PlaySoundEffect(0x1da);
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_9);
+  DisplayDungeonDialogue(gArticunoPreFightDialogue_9);
   sub_803E708(10,0x46);
   PlaySoundEffect(0x1ea);
   sub_8088484(ArticunoEntity);
   sub_80865E8();
   ArticunoScreenFlash();
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_10);
+  DisplayDungeonDialogue(gArticunoPreFightDialogue_10);
   sub_806CDD4(ArticunoEntity,0xf,DIRECTION_SOUTH);
   ArticunoScreenFlash();
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_11);
+  DisplayDungeonDialogue(gArticunoPreFightDialogue_11);
   sub_806CDD4(ArticunoEntity,0x10,DIRECTION_SOUTH);
   ArticunoScreenFlash();
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_12);
+  DisplayDungeonDialogue(gArticunoPreFightDialogue_12);
   sub_806CDD4(ArticunoEntity,0xf,DIRECTION_SOUTH);
   sub_803E708(0x10,0x46);
   SetupBossFightHP(ArticunoEntity,0x1c2,MUS_BOSS_BATTLE);
@@ -1146,12 +1126,12 @@ void ArticunoReFightDialogue(void)
   gDungeon->unkE265 = WEATHER_SNOW;
   sub_807EAA0(0,1);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gArticunoReFightDialogue_1);
+  DisplayDungeonDialogue(gArticunoReFightDialogue_1);
   sub_806CDD4(ArticunoEntity,0x10,DIRECTION_SOUTH);
   ArticunoScreenFlash();
-  DisplayDungeonDialogue(&gArticunoReFightDialogue_2);
+  DisplayDungeonDialogue(gArticunoReFightDialogue_2);
   ArticunoScreenFlash();
-  DisplayDungeonDialogue(&gArticunoReFightDialogue_3);
+  DisplayDungeonDialogue(gArticunoReFightDialogue_3);
   sub_806CDD4(ArticunoEntity,0xf,DIRECTION_SOUTH);
   sub_803E708(0x28,0x46);
   SetupBossFightHP(ArticunoEntity,0x1c2,MUS_BOSS_BATTLE);
@@ -1167,7 +1147,7 @@ void ArticunoPostStoryPreFightDialogue(void)
   ArticunoEntity = GetEntityFromClientType(0xd);
   sub_8086448();
   if (sub_8086AE4(MONSTER_ARTICUNO)) {
-    sub_80866C4(&gUnknown_8102A9C);
+    sub_80866C4(gUnknown_8102A9C);
   }
   else {
     gDungeon->unkE265 = WEATHER_SNOW;
@@ -1175,19 +1155,19 @@ void ArticunoPostStoryPreFightDialogue(void)
     ArticunoScreenFlash();
     sub_8086738();
     PlaySoundEffect(0x1da);
-    DisplayDungeonDialogue(&gArticunoPostStoryPreFightDialogue_1);
+    DisplayDungeonDialogue(gArticunoPostStoryPreFightDialogue_1);
     sub_803E708(10,0x46);
     sub_8088484(ArticunoEntity);
     ArticunoScreenFlash();
-    DisplayDungeonDialogue(&gArticunoPostStoryPreFightDialogue_2);
+    DisplayDungeonDialogue(gArticunoPostStoryPreFightDialogue_2);
     sub_806CDD4(ArticunoEntity,0xf,DIRECTION_SOUTH);
     ArticunoScreenFlash();
-    DisplayDungeonDialogue(&gArticunoPostStoryPreFightDialogue_3);
+    DisplayDungeonDialogue(gArticunoPostStoryPreFightDialogue_3);
     sub_806CDD4(ArticunoEntity,0x10,DIRECTION_SOUTH);
     ArticunoScreenFlash();
-    DisplayDungeonDialogue(&gArticunoPostStoryPreFightDialogue_4);
+    DisplayDungeonDialogue(gArticunoPostStoryPreFightDialogue_4);
     ArticunoScreenFlash();
-    DisplayDungeonDialogue(&gArticunoPostStoryPreFightDialogue_5);
+    DisplayDungeonDialogue(gArticunoPostStoryPreFightDialogue_5);
     sub_806CDD4(ArticunoEntity,0xf,DIRECTION_SOUTH);
     sub_803E708(0x28,0x46);
     SetupBossFightHP(ArticunoEntity,0x1c2,MUS_BOSS_BATTLE);
@@ -1280,7 +1260,7 @@ void sub_8088618(void)
     // The mountain's summit...
     // But there is no one here
     // It's time to go back
-    sub_80866C4(&gUnknown_8102B10);
+    sub_80866C4(gUnknown_8102B10);
 }
 
 void sub_808862C(void)
@@ -1387,31 +1367,31 @@ void GroudonPreFightDialogue(void)
   AlakazamEntity = GetEntityFromClientType(10);
   GroudonEntity = GetEntityFromClientType(0xe);
   sub_8086448();
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_1);
+  DisplayDungeonDialogue(GroudonPreFightDialogue_1);
   sub_803E708(10,0x46);
   sub_803E708(0x3c,0x46);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_2);
+  DisplayDungeonDialogue(GroudonPreFightDialogue_2);
   sub_803E708(10,0x46);
   sub_8086838(1,1,1);
   sub_808680C();
   sub_803E708(0x3c,0x46);
   sub_808682C();
   sub_803E708(0x1e,0x46);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_3);
+  DisplayDungeonDialogue(GroudonPreFightDialogue_3);
   sub_803E708(10,0x46);
   sub_8086838(1,1,1);
   sub_808680C();
   sub_803E708(0x3c,0x46);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_4);
+  DisplayDungeonDialogue(GroudonPreFightDialogue_4);
   sub_803E708(10,0x46);
   GroudonScreenFlash();
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_5);
+  DisplayDungeonDialogue(GroudonPreFightDialogue_5);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_6);
+  DisplayDungeonDialogue(GroudonPreFightDialogue_6);
   sub_803E708(10,0x46);
   PlaySoundEffect(0x1d5);
   SpriteLookAroundEffect(PartnerEntity);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_7);
+  DisplayDungeonDialogue(GroudonPreFightDialogue_7);
   sub_803E708(10,0x46);
   sub_808682C();
   sub_803E708(0x3c,0x46);
@@ -1419,28 +1399,28 @@ void GroudonPreFightDialogue(void)
   PlaySoundEffect(0x205);
   sub_8086738();
   sub_8068FE0(AlakazamEntity,0x21c,0);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_8);
+  DisplayDungeonDialogue(GroudonPreFightDialogue_8);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_9);
+  DisplayDungeonDialogue(GroudonPreFightDialogue_9);
   sub_803E708(10,0x46);
   sub_8085930(DIRECTION_NORTH);
   sub_8086764();
   sub_803E708(0x28,0x46);
   PlaySoundEffect(0x1d5);
   SpriteLookAroundEffect(PartnerEntity);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_10);
+  DisplayDungeonDialogue(GroudonPreFightDialogue_10);
   sub_803E708(10,0x46);
   sub_8086838(1,1,1);
   sub_808680C();
   sub_803E708(0x3c,0x46);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_11);
+  DisplayDungeonDialogue(GroudonPreFightDialogue_11);
   sub_803E708(10,0x46);
   DungeonStopBGM();
   GroudonScreenFlash2();
   sub_803E708(0x1e,0x46);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_12);
+  DisplayDungeonDialogue(GroudonPreFightDialogue_12);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_13);
+  DisplayDungeonDialogue(GroudonPreFightDialogue_13);
   sub_803E708(10,0x46);
   sub_803E708(0x1e,0x46);
   sub_808682C();
@@ -1448,7 +1428,7 @@ void GroudonPreFightDialogue(void)
   PlaySoundEffect(0x1fa);
   sub_8086738();
   sub_8085930(DIRECTION_NORTH);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_14);
+  DisplayDungeonDialogue(GroudonPreFightDialogue_14);
   sub_803E708(10,0x46);
   sub_8086A54(GroudonEntity);
   sub_8085930(DIRECTION_NORTH);
@@ -1467,20 +1447,20 @@ void GroudonReFightDialogue(void)
   sub_8086838(1,1,1);
   sub_808680C();
   sub_803E708(0x3c,0x46);
-  DisplayDungeonDialogue(&gGroudonReFightDialogue_1);
+  DisplayDungeonDialogue(gGroudonReFightDialogue_1);
   sub_803E708(10,0x46);
   GroudonScreenFlash();
   sub_803E708(0x1e,0x46);
-  DisplayDungeonDialogue(&gGroudonReFightDialogue_2);
+  DisplayDungeonDialogue(gGroudonReFightDialogue_2);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gGroudonReFightDialogue_3);
+  DisplayDungeonDialogue(gGroudonReFightDialogue_3);
   sub_803E708(10,0x46);
   sub_808682C();
   sub_803E708(0x3c,0x46);
   DungeonStopBGM();
   PlaySoundEffect(0x1fa);
   sub_8086738();
-  DisplayDungeonDialogue(&gGroudonReFightDialogue_4);
+  DisplayDungeonDialogue(gGroudonReFightDialogue_4);
   sub_803E708(10,0x46);
   sub_8086A54(GroudonEntity);
   sub_8085930(DIRECTION_NORTH);
@@ -1498,20 +1478,20 @@ void GroudonPostStoryPreFightDialogue(void)
   GroudonEntity = GetEntityFromClientType(0xe);
   sub_8086448();
   if (sub_8086AE4(MONSTER_GROUDON)) {
-      sub_80866C4(&gUnknown_8103488);
+      sub_80866C4(gUnknown_8103488);
   }
   else{
-    DisplayDungeonDialogue(&gGroudonPostStoryPreFightDialogue_1);
+    DisplayDungeonDialogue(gGroudonPostStoryPreFightDialogue_1);
     sub_803E708(10,0x46);
     SceneGroudonMovement(GroudonEntity);
     SceneGroudonMovement(GroudonEntity);
-    DisplayDungeonDialogue(&gGroudonPostStoryPreFightDialogue_2);
+    DisplayDungeonDialogue(gGroudonPostStoryPreFightDialogue_2);
     PlaySoundEffect(0x1f6);
     GroudonScreenFlash();
-    DisplayDungeonDialogue(&gGroudonPostStoryPreFightDialogue_3);
+    DisplayDungeonDialogue(gGroudonPostStoryPreFightDialogue_3);
     PlaySoundEffect(0x1f6);
     GroudonScreenFlash();
-    DisplayDungeonDialogue(&gGroudonPostStoryPreFightDialogue_4);
+    DisplayDungeonDialogue(gGroudonPostStoryPreFightDialogue_4);
     sub_803E708(10,0x46);
     SetupBossFightHP(GroudonEntity,500,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -1669,7 +1649,7 @@ void MagmaCavernMidDialogue(void)
   SpriteLookAroundEffect(PartnerEntity);
   // Let's see..
   // I wonder where we are?
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_1);
+  DisplayDungeonDialogue(MagmaCavernMidDialogue_1);
   sub_803E708(10,0x46);
   sub_80869E4(PartnerEntity,4,1,2);
   sub_80869E4(LeaderEntity,4,2,6);
@@ -1678,7 +1658,7 @@ void MagmaCavernMidDialogue(void)
   //
   // I'm certain we've come quite
   // far already..
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_2);
+  DisplayDungeonDialogue(MagmaCavernMidDialogue_2);
   sub_803E708(10,0x46);
   DungeonStopBGM();
   sub_80855E4(sub_80868F4);
@@ -1687,7 +1667,7 @@ void MagmaCavernMidDialogue(void)
   sub_803E708(0x28,0x46);
   // Waaah!
   // Qu-quake!
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_3);
+  DisplayDungeonDialogue(MagmaCavernMidDialogue_3);
   sub_803E708(0x78,0x46);
   StopSoundEffect(0x1c5);
   sub_808682C();
@@ -1700,7 +1680,7 @@ void MagmaCavernMidDialogue(void)
   //
   // Whew
   // It's over.
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_4);
+  DisplayDungeonDialogue(MagmaCavernMidDialogue_4);
   sub_803E708(10,0x46);
   PlaySoundEffect(0x1d5);
   SpriteLookAroundEffect(PartnerEntity);
@@ -1708,7 +1688,7 @@ void MagmaCavernMidDialogue(void)
   sub_80856E0(PartnerEntity, DIRECTION_NORTH);
   // Hey! {ARG_POKEMON_0}!
   // Over there!
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_5);
+  DisplayDungeonDialogue(MagmaCavernMidDialogue_5);
   iVar3->info->unk15E = 0;
   iVar4->info->unk15E =0;
   local_20.x = (iVar3->pixelPos.x + iVar4->pixelPos.x) / 2;
@@ -1721,29 +1701,29 @@ void MagmaCavernMidDialogue(void)
   //
   // Hey!
   // Snap out of it!
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_6);
+  DisplayDungeonDialogue(MagmaCavernMidDialogue_6);
   sub_803E708(10,0x46);
   // Urrrrgh...
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_7);
+  DisplayDungeonDialogue(MagmaCavernMidDialogue_7);
   sub_803E708(10,0x46);
   sub_80869E4(LeaderEntity,4,2,5);
   // What happened to you?
   //
   // What happened here?
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_8);
+  DisplayDungeonDialogue(MagmaCavernMidDialogue_8);
   sub_803E708(10,0x46);
   // We challenged..
   // {ARG_POKEMON_2}...
   // And wiped out..
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_9);
+  DisplayDungeonDialogue(MagmaCavernMidDialogue_9);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_10);
+  DisplayDungeonDialogue(MagmaCavernMidDialogue_10);
   sub_803E708(10,0x46);
   sub_80869E4(LeaderEntity,4,1,3);
   sub_80869E4(PartnerEntity,4,1,3);
   // Grrgh..
   // We... It crushed us
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_11);
+  DisplayDungeonDialogue(MagmaCavernMidDialogue_11);
   sub_803E708(10,0x46);
   PlaySoundEffect(0x1d5);
   SpriteLookAroundEffect(PartnerEntity);
@@ -1754,20 +1734,20 @@ void MagmaCavernMidDialogue(void)
   // Wait...
   // What about {ARG_POKEMON_3}?
   // Where did {ARG_POKEMON_3} go?
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_12);
+  DisplayDungeonDialogue(MagmaCavernMidDialogue_12);
   sub_803E708(0x1e,0x46);
   // {ARG_POKEMON_3} is...
   // Still battling {ARG_POKEMON_2}...
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_13);
+  DisplayDungeonDialogue(MagmaCavernMidDialogue_13);
   sub_803E708(10,0x46);
   sub_80869E4(PartnerEntity,4,1,2);
   sub_80869E4(LeaderEntity,4,2,6);
   // {ARG_POKEMON_0}!
   // We've got to hurry!
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_14);
+  DisplayDungeonDialogue(MagmaCavernMidDialogue_14);
   sub_8089294();
   // Be careful!
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_15);
+  DisplayDungeonDialogue(MagmaCavernMidDialogue_15);
   sub_803E708(10,0x46);
   gDungeon->unk2 = 1;
 }
@@ -1928,33 +1908,33 @@ void RayquazaPreFightDialogue(void)
   PartnerEntity = GetPartnerEntity();
   RayquazaEntity = GetEntityFromClientType(0xf);
   sub_8086448();
-  DisplayDungeonDialogue(&gRayquazaPreFightDialogue_1);
+  DisplayDungeonDialogue(gRayquazaPreFightDialogue_1);
   RayquazaScreenFlash();
-  DisplayDungeonDialogue(&gRayquazaPreFightDialogue_2);
+  DisplayDungeonDialogue(gRayquazaPreFightDialogue_2);
   sub_80856E0(PartnerEntity, DIRECTION_NORTH);
   SpriteLookAroundEffect(PartnerEntity);
   sub_803E708(10,0x46);
   sub_80869E4(PartnerEntity,4,1,2);
   sub_80869E4(LeaderEntity,4,2,6);
-  DisplayDungeonDialogue(&gRayquazaPreFightDialogue_3);
+  DisplayDungeonDialogue(gRayquazaPreFightDialogue_3);
   sub_80869E4(PartnerEntity,4,2,4);
   sub_80869E4(LeaderEntity,4,1,4);
-  DisplayDungeonDialogue(&gRayquazaPreFightDialogue_4);
+  DisplayDungeonDialogue(gRayquazaPreFightDialogue_4);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gRayquazaPreFightDialogue_5);
+  DisplayDungeonDialogue(gRayquazaPreFightDialogue_5);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gRayquazaPreFightDialogue_6);
+  DisplayDungeonDialogue(gRayquazaPreFightDialogue_6);
   RayquazaScreenFlash();
   PlaySoundEffect(0x1da); // Rayquaza Cry
-  DisplayDungeonDialogue(&gRayquazaPreFightDialogue_7);
+  DisplayDungeonDialogue(gRayquazaPreFightDialogue_7);
   RayquazaDropInEffect(RayquazaEntity);
-  DisplayDungeonDialogue(&gRayquazaPreFightDialogue_8);
+  DisplayDungeonDialogue(gRayquazaPreFightDialogue_8);
   RayquazaScreenFlash();
-  DisplayDungeonDialogue(&gRayquazaPreFightDialogue_9);
+  DisplayDungeonDialogue(gRayquazaPreFightDialogue_9);
   RayquazaScreenFlash();
-  DisplayDungeonDialogue(&gRayquazaPreFightDialogue_10);
+  DisplayDungeonDialogue(gRayquazaPreFightDialogue_10);
   RayquazaScreenFlash();
-  DisplayDungeonDialogue(&gRayquazaPreFightDialogue_11);
+  DisplayDungeonDialogue(gRayquazaPreFightDialogue_11);
   SetupBossFightHP(RayquazaEntity,600,MUS_BATTLE_WITH_RAYQUAZA);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
@@ -1969,16 +1949,16 @@ void RayquazaReFightDialogue(void)
   sub_8086448();
   RayquazaScreenFlash();
   PlaySoundEffect(0x1da); // Rayquaza Cry
-  DisplayDungeonDialogue(&gRayquazaPreFightDialogue_7);
+  DisplayDungeonDialogue(gRayquazaPreFightDialogue_7);
   sub_803E708(10,0x46);
   RayquazaDropInEffect(RayquazaEntity);
-  DisplayDungeonDialogue(&gRayquazaReFightDialogue_1);
+  DisplayDungeonDialogue(gRayquazaReFightDialogue_1);
   RayquazaScreenFlash();
-  DisplayDungeonDialogue(&gRayquazaReFightDialogue_2);
+  DisplayDungeonDialogue(gRayquazaReFightDialogue_2);
   RayquazaScreenFlash();
-  DisplayDungeonDialogue(&gRayquazaReFightDialogue_3);
+  DisplayDungeonDialogue(gRayquazaReFightDialogue_3);
   RayquazaScreenFlash();
-  DisplayDungeonDialogue(&gRayquazaReFightDialogue_4);
+  DisplayDungeonDialogue(gRayquazaReFightDialogue_4);
   SetupBossFightHP(RayquazaEntity,600,MUS_BATTLE_WITH_RAYQUAZA);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
@@ -1992,19 +1972,19 @@ void RayquazaPostStoryPreFightDialogue(void)
   RayquazaEntity = GetEntityFromClientType(0xf);
   sub_8086448();
   if (sub_8086AE4(MONSTER_RAYQUAZA)) {
-    sub_80866C4(&gRayquazaPostStoryPreFightDialogue_6);
+    sub_80866C4(gRayquazaPostStoryPreFightDialogue_6);
   }
   else {
     PlaySoundEffect(0x1da); // Rayquaza Cry
-    DisplayDungeonDialogue(&gRayquazaPostStoryPreFightDialogue_1);
+    DisplayDungeonDialogue(gRayquazaPostStoryPreFightDialogue_1);
     RayquazaDropInEffect(RayquazaEntity);
-    DisplayDungeonDialogue(&gRayquazaPostStoryPreFightDialogue_2);
+    DisplayDungeonDialogue(gRayquazaPostStoryPreFightDialogue_2);
     RayquazaScreenFlash();
-    DisplayDungeonDialogue(&gRayquazaPostStoryPreFightDialogue_3);
+    DisplayDungeonDialogue(gRayquazaPostStoryPreFightDialogue_3);
     RayquazaScreenFlash();
-    DisplayDungeonDialogue(&gRayquazaPostStoryPreFightDialogue_4);
+    DisplayDungeonDialogue(gRayquazaPostStoryPreFightDialogue_4);
     RayquazaScreenFlash();
-    DisplayDungeonDialogue(&gRayquazaPostStoryPreFightDialogue_5);
+    DisplayDungeonDialogue(gRayquazaPostStoryPreFightDialogue_5);
     SetupBossFightHP(RayquazaEntity,600,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
   }
@@ -2118,27 +2098,27 @@ void sub_80897F0(void)
   sub_808563C(SpriteShockEffect);
   sub_803E708(0x20,0x46);
   sub_808692C();
-  DisplayDungeonDialogue(&gUnknown_8103BD8);
+  DisplayDungeonDialogue(gUnknown_8103BD8);
   // We don't like to brag or
   // nothing, but
-  DisplayDungeonDialogue(&gUnknown_8103C00);
+  DisplayDungeonDialogue(gUnknown_8103C00);
   // We get furious real easy
   // You know that?!
-  DisplayDungeonDialogue(&gUnknown_8103C3C);
+  DisplayDungeonDialogue(gUnknown_8103C3C);
   // What really irritates us is
   // when we see some dim witted face
-  DisplayDungeonDialogue(&gUnknown_8103C74);
+  DisplayDungeonDialogue(gUnknown_8103C74);
   // .........
   // Wrooooooar!
   // That vacant expression
-  DisplayDungeonDialogue(&gUnknown_8103CC4);
+  DisplayDungeonDialogue(gUnknown_8103CC4);
   // Gwoooh
   // It's ticking me off!
   // I'm seeing red!
-  DisplayDungeonDialogue(&gUnknown_8103D0C);
+  DisplayDungeonDialogue(gUnknown_8103D0C);
   // Mukkkeeeeeh
   // Get 'em! It's frenzy time!
-  DisplayDungeonDialogue(&gUnknown_8103D50);
+  DisplayDungeonDialogue(gUnknown_8103D50);
   sub_803E708(10,0x46);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
@@ -2155,10 +2135,10 @@ void sub_8089878(void)
   sub_808563C(SpriteShockEffect);
   sub_803E708(0x20,0x46);
   sub_808692C();
-  DisplayDungeonDialogue(&gUnknown_8103D8C);
-  DisplayDungeonDialogue(&gUnknown_8103D98);
-  DisplayDungeonDialogue(&gUnknown_8103DD8);
-  DisplayDungeonDialogue(&gUnknown_8103E28);
+  DisplayDungeonDialogue(gUnknown_8103D8C);
+  DisplayDungeonDialogue(gUnknown_8103D98);
+  DisplayDungeonDialogue(gUnknown_8103DD8);
+  DisplayDungeonDialogue(gUnknown_8103E28);
   sub_803E708(10,0x46);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
 }
@@ -2166,7 +2146,7 @@ void sub_8089878(void)
 void sub_80898E4(void)
 {
     sub_8086448();
-    sub_80866C4(&gUnknown_8103E34);
+    sub_80866C4(gUnknown_8103E34);
 }
 
 void sub_80898F8(Entity *r0)
@@ -2237,20 +2217,20 @@ void MewtwoPreFightDialogue(void)
   LeaderEntity = xxx_call_GetLeader();
   MewtwoEntity = GetEntityFromClientType(0x11);
   sub_8086448();
-  DisplayDungeonDialogue(&gMewtwoPreFightDialogue_1);
+  DisplayDungeonDialogue(gMewtwoPreFightDialogue_1);
   sub_803E708(10,0x46);
   DungeonStartNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE);
   sub_8086794();
   sub_803E708(0x1e,0x46);
   MewtwoDropInEffect(MewtwoEntity);
   sub_803E708(0x3c,0x46);
-  DisplayDungeonDialogue(&gMewtwoPreFightDialogue_2);
-  DisplayDungeonDialogue(&gMewtwoPreFightDialogue_3);
+  DisplayDungeonDialogue(gMewtwoPreFightDialogue_2);
+  DisplayDungeonDialogue(gMewtwoPreFightDialogue_3);
   sub_803E708(10,0x46);
   MewtwoScreenFlash();
-  DisplayDungeonDialogue(&gMewtwoPreFightDialogue_4);
+  DisplayDungeonDialogue(gMewtwoPreFightDialogue_4);
   MewtwoScreenFlash();
-  DisplayDungeonDialogue(&gMewtwoPreFightDialogue_5);
+  DisplayDungeonDialogue(gMewtwoPreFightDialogue_5);
   sub_803E708(10,0x46);
   SetupBossFightHP(MewtwoEntity,900,MUS_BATTLE_WITH_RAYQUAZA);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -2265,19 +2245,19 @@ void MewtwoReFightDialogue(void)
   MewtwoEntity = GetEntityFromClientType(0x11);
   sub_8086448();
   if(HasRecruitedMon(MONSTER_MEWTWO)) {
-    sub_80866C4(&gMewtwoReFightDialogue_5);
+    sub_80866C4(gMewtwoReFightDialogue_5);
   }
   else {
-    DisplayDungeonDialogue(&gMewtwoReFightDialogue_1);
+    DisplayDungeonDialogue(gMewtwoReFightDialogue_1);
     DungeonStartNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE);
     sub_8086794();
     MewtwoDropInEffect(MewtwoEntity);
     sub_803E708(0x3c,0x46);
-    DisplayDungeonDialogue(&gMewtwoReFightDialogue_2);
+    DisplayDungeonDialogue(gMewtwoReFightDialogue_2);
     MewtwoScreenFlash();
-    DisplayDungeonDialogue(&gMewtwoReFightDialogue_3);
+    DisplayDungeonDialogue(gMewtwoReFightDialogue_3);
     MewtwoScreenFlash();
-    DisplayDungeonDialogue(&gMewtwoReFightDialogue_4);
+    DisplayDungeonDialogue(gMewtwoReFightDialogue_4);
     SetupBossFightHP(MewtwoEntity,900,MUS_BATTLE_WITH_RAYQUAZA);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
   }
@@ -2383,11 +2363,11 @@ void EnteiPreFightDialogue(void)
   LeaderEntity = xxx_call_GetLeader();
   EnteiEntity = GetEntityFromClientType(0x12);
   EnteiScreenFlash();
-  DisplayDungeonDialogue(&gEnteiPreFightDialogue_1);
+  DisplayDungeonDialogue(gEnteiPreFightDialogue_1);
   EnteiScreenFlash();
-  DisplayDungeonDialogue(&gEnteiPreFightDialogue_2);
+  DisplayDungeonDialogue(gEnteiPreFightDialogue_2);
   EnteiScreenFlash();
-  DisplayDungeonDialogue(&gEnteiPreFightDialogue_3);
+  DisplayDungeonDialogue(gEnteiPreFightDialogue_3);
   sub_803E708(10,70);
   SetupBossFightHP(EnteiEntity,600,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -2401,11 +2381,11 @@ void EnteiReFightDialogue(void)
   LeaderEntity = xxx_call_GetLeader();
   EnteiEntity = GetEntityFromClientType(0x12);
   EnteiScreenFlash();
-  DisplayDungeonDialogue(&gEnteiReFightDialogue_1);
+  DisplayDungeonDialogue(gEnteiReFightDialogue_1);
   EnteiScreenFlash();
-  DisplayDungeonDialogue(&gEnteiReFightDialogue_2);
+  DisplayDungeonDialogue(gEnteiReFightDialogue_2);
   EnteiScreenFlash();
-  DisplayDungeonDialogue(&gEnteiReFightDialogue_3);
+  DisplayDungeonDialogue(gEnteiReFightDialogue_3);
   sub_803E708(10,70);
   SetupBossFightHP(EnteiEntity,600,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -2419,15 +2399,15 @@ void EnteiPostStoryPreFightDialogue(void)
   LeaderEntity = xxx_call_GetLeader();
   EnteiEntity = GetEntityFromClientType(0x12);
   if (HasRecruitedMon(MONSTER_ENTEI)) {
-    sub_80866C4(&gEnteiPostStoryPreFightDialogue_4);
+    sub_80866C4(gEnteiPostStoryPreFightDialogue_4);
   }
   else {
     EnteiScreenFlash();
-    DisplayDungeonDialogue(&gEnteiPostStoryPreFightDialogue_1);
+    DisplayDungeonDialogue(gEnteiPostStoryPreFightDialogue_1);
     EnteiScreenFlash();
-    DisplayDungeonDialogue(&gEnteiPostStoryPreFightDialogue_2);
+    DisplayDungeonDialogue(gEnteiPostStoryPreFightDialogue_2);
     EnteiScreenFlash();
-    DisplayDungeonDialogue(&gEnteiPostStoryPreFightDialogue_3);
+    DisplayDungeonDialogue(gEnteiPostStoryPreFightDialogue_3);
     sub_803E708(10,70);
     SetupBossFightHP(EnteiEntity,600,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -2527,19 +2507,19 @@ void RaikouPreFightDialogue(void)
 
   LeaderEntity = xxx_call_GetLeader();
   RaikouEntity = GetEntityFromClientType(0x13);
-  DisplayDungeonDialogue(&gRaikouPreFightDialogue_1);
+  DisplayDungeonDialogue(gRaikouPreFightDialogue_1);
   RaikouScreenFlash();
-  DisplayDungeonDialogue(&gRaikouPreFightDialogue_2);
+  DisplayDungeonDialogue(gRaikouPreFightDialogue_2);
   gDungeon->unkE265 = WEATHER_RAIN;
   sub_807EAA0(0,1);
   sub_803E708(10,70);
-  DisplayDungeonDialogue(&gRaikouPreFightDialogue_3);
+  DisplayDungeonDialogue(gRaikouPreFightDialogue_3);
   RaikouScreenFlash();
-  DisplayDungeonDialogue(&gRaikouPreFightDialogue_4);
+  DisplayDungeonDialogue(gRaikouPreFightDialogue_4);
   RaikouScreenFlash();
-  DisplayDungeonDialogue(&gRaikouPreFightDialogue_5);
+  DisplayDungeonDialogue(gRaikouPreFightDialogue_5);
   RaikouScreenFlash();
-  DisplayDungeonDialogue(&gRaikouPreFightDialogue_6);
+  DisplayDungeonDialogue(gRaikouPreFightDialogue_6);
   sub_803E708(10,70);
   SetupBossFightHP(RaikouEntity,0x28a,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -2555,11 +2535,11 @@ void RaikouReFightDialogue(void)
   gDungeon->unkE265 = WEATHER_RAIN;
   sub_807EAA0(0,1);
   RaikouScreenFlash();
-  DisplayDungeonDialogue(&gRaikouReFightDialogue_1);
+  DisplayDungeonDialogue(gRaikouReFightDialogue_1);
   RaikouScreenFlash();
-  DisplayDungeonDialogue(&gRaikouReFightDialogue_2);
+  DisplayDungeonDialogue(gRaikouReFightDialogue_2);
   RaikouScreenFlash();
-  DisplayDungeonDialogue(&gRaikouReFightDialogue_3);
+  DisplayDungeonDialogue(gRaikouReFightDialogue_3);
   sub_803E708(10,70);
   SetupBossFightHP(RaikouEntity,0x28a,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -2573,16 +2553,16 @@ void RaikouPostStoryPreFightDialogue(void)
   LeaderEntity = xxx_call_GetLeader();
   RaikouEntity = GetEntityFromClientType(0x13);
   if (HasRecruitedMon(MONSTER_RAIKOU)) {
-    sub_80866C4(&gRaikouPostStoryPreFightDialogue_4);
+    sub_80866C4(gRaikouPostStoryPreFightDialogue_4);
   }
   else {
     gDungeon->unkE265 = WEATHER_RAIN;
     sub_807EAA0(0,1);
-    DisplayDungeonDialogue(&gRaikouPostStoryPreFightDialogue_1);
+    DisplayDungeonDialogue(gRaikouPostStoryPreFightDialogue_1);
     RaikouScreenFlash();
-    DisplayDungeonDialogue(&gRaikouPostStoryPreFightDialogue_2);
+    DisplayDungeonDialogue(gRaikouPostStoryPreFightDialogue_2);
     RaikouScreenFlash();
-    DisplayDungeonDialogue(&gRaikouPostStoryPreFightDialogue_3);
+    DisplayDungeonDialogue(gRaikouPostStoryPreFightDialogue_3);
     sub_803E708(10,70);
     SetupBossFightHP(RaikouEntity,0x28a,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -2683,21 +2663,21 @@ void SuicunePreFightDialogue(void)
   LeaderEntity = xxx_call_GetLeader();
   SuicuneEntity = GetEntityFromClientType(0x14);
   sub_8086448();
-  DisplayDungeonDialogue(&gSuicunePreFightDialogue_1);
+  DisplayDungeonDialogue(gSuicunePreFightDialogue_1);
   sub_803E708(10,70);
-  DisplayDungeonDialogue(&gSuicunePreFightDialogue_2);
+  DisplayDungeonDialogue(gSuicunePreFightDialogue_2);
   sub_803E708(10,70);
   sub_80426C8(1,2);
   sub_803E708(0x3c,70);
-  DisplayDungeonDialogue(&gSuicunePreFightDialogue_3);
+  DisplayDungeonDialogue(gSuicunePreFightDialogue_3);
   sub_803E708(10,70);
   sub_808A528(SuicuneEntity);
-  DisplayDungeonDialogue(&gSuicunePreFightDialogue_4);
-  DisplayDungeonDialogue(&gSuicunePreFightDialogue_5);
+  DisplayDungeonDialogue(gSuicunePreFightDialogue_4);
+  DisplayDungeonDialogue(gSuicunePreFightDialogue_5);
   SuicuneScreenFlash();
-  DisplayDungeonDialogue(&gSuicunePreFightDialogue_6);
+  DisplayDungeonDialogue(gSuicunePreFightDialogue_6);
   SuicuneScreenFlash();
-  DisplayDungeonDialogue(&gSuicunePreFightDialogue_7);
+  DisplayDungeonDialogue(gSuicunePreFightDialogue_7);
   sub_803E708(10,70);
   SetupBossFightHP(SuicuneEntity,0x28a,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -2710,11 +2690,11 @@ void SuicuneReFightDialogue(void)
 
   LeaderEntity = xxx_call_GetLeader();
   SuicuneEntity = GetEntityFromClientType(0x14);
-  DisplayDungeonDialogue(&gSuicuneReFightDialogue_1);
+  DisplayDungeonDialogue(gSuicuneReFightDialogue_1);
   SuicuneScreenFlash();
-  DisplayDungeonDialogue(&gSuicuneReFightDialogue_2);
+  DisplayDungeonDialogue(gSuicuneReFightDialogue_2);
   SuicuneScreenFlash();
-  DisplayDungeonDialogue(&gSuicuneReFightDialogue_3);
+  DisplayDungeonDialogue(gSuicuneReFightDialogue_3);
   sub_803E708(10,70);
   SetupBossFightHP(SuicuneEntity,0x28a,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -2728,14 +2708,14 @@ void SuicunePostStoryPreFightDialogue(void)
   LeaderEntity = xxx_call_GetLeader();
   SuicuneEntity = GetEntityFromClientType(0x14);
   if (HasRecruitedMon(MONSTER_SUICUNE)) {
-    sub_80866C4(&gSuicunePostStoryPreFightDialogue_4);
+    sub_80866C4(gSuicunePostStoryPreFightDialogue_4);
   }
   else {
-    DisplayDungeonDialogue(&gSuicunePostStoryPreFightDialogue_1);
+    DisplayDungeonDialogue(gSuicunePostStoryPreFightDialogue_1);
     SuicuneScreenFlash();
-    DisplayDungeonDialogue(&gSuicunePostStoryPreFightDialogue_2);
+    DisplayDungeonDialogue(gSuicunePostStoryPreFightDialogue_2);
     SuicuneScreenFlash();
-    DisplayDungeonDialogue(&gSuicunePostStoryPreFightDialogue_3);
+    DisplayDungeonDialogue(gSuicunePostStoryPreFightDialogue_3);
     sub_803E708(10,70);
     SetupBossFightHP(SuicuneEntity,0x28a,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -2856,10 +2836,10 @@ void HoOhPreFightDialogue(void)
   local_14.y = LeaderEntity->pixelPos.y + -0x1000;
   ShiftCameraToPosition(&local_14,0x88);
   sub_803E708(0x40,70);
-  DisplayDungeonDialogue(&gHoOhPreFightDialogue_1);
+  DisplayDungeonDialogue(gHoOhPreFightDialogue_1);
   sub_803E708(10,70);
   HoOhScreenFlash();
-  DisplayDungeonDialogue(&gHoOhPreFightDialogue_2);
+  DisplayDungeonDialogue(gHoOhPreFightDialogue_2);
   sub_803E708(10,70);
   sub_80855E4(sub_80868F4);
   sub_808680C();
@@ -2870,14 +2850,14 @@ void HoOhPreFightDialogue(void)
   sub_808682C();
   sub_80855E4(sub_8086910);
   sub_8085930(DIRECTION_NORTH);
-  DisplayDungeonDialogue(&gHoOhPreFightDialogue_3);
-  DisplayDungeonDialogue(&gHoOhPreFightDialogue_4);
+  DisplayDungeonDialogue(gHoOhPreFightDialogue_3);
+  DisplayDungeonDialogue(gHoOhPreFightDialogue_4);
   sub_803E708(0x1e,70);
   sub_803E708(0x1e,70);
   HoOhScreenFlash();
-  DisplayDungeonDialogue(&gHoOhPreFightDialogue_5);
+  DisplayDungeonDialogue(gHoOhPreFightDialogue_5);
   HoOhScreenFlash();
-  DisplayDungeonDialogue(&gHoOhPreFightDialogue_6);
+  DisplayDungeonDialogue(gHoOhPreFightDialogue_6);
   sub_803E708(10,70);
   SetupBossFightHP(HoOhEntity,800,MUS_BATTLE_WITH_RAYQUAZA);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -2897,10 +2877,10 @@ void HoOhReFightDialogue(void)
   ShiftCameraToPosition(&local_14,0x88);
   sub_803E708(0x40,70);
   if (HasRecruitedMon(MONSTER_HO_OH)) {
-    sub_80866C4(&HoOhReFightDialogue_5);
+    sub_80866C4(HoOhReFightDialogue_5);
   }
   else {
-    DisplayDungeonDialogue(&HoOhReFightDialogue_1);
+    DisplayDungeonDialogue(HoOhReFightDialogue_1);
     HoOhScreenFlash();
     sub_80855E4(sub_80868F4);
     sub_808680C();
@@ -2909,11 +2889,11 @@ void HoOhReFightDialogue(void)
     sub_808682C();
     sub_80855E4(sub_8086910);
     sub_8085930(DIRECTION_NORTH);
-    DisplayDungeonDialogue(&HoOhReFightDialogue_2);
+    DisplayDungeonDialogue(HoOhReFightDialogue_2);
     HoOhScreenFlash();
-    DisplayDungeonDialogue(&HoOhReFightDialogue_3);
+    DisplayDungeonDialogue(HoOhReFightDialogue_3);
     HoOhScreenFlash();
-    DisplayDungeonDialogue(&HoOhReFightDialogue_4);
+    DisplayDungeonDialogue(HoOhReFightDialogue_4);
     sub_803E708(10,70);
     SetupBossFightHP(HoOhEntity,800,MUS_BATTLE_WITH_RAYQUAZA);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -3047,11 +3027,11 @@ void LatiosPreFightDialogue(void)
   SpriteShockEffect(LatiosEntity);
   sub_803E708(0x20,70);
   sub_808692C();
-  DisplayDungeonDialogue(&gLatiosPreFightDialogue_1);
+  DisplayDungeonDialogue(gLatiosPreFightDialogue_1);
   LatiosScreenFlash();
-  DisplayDungeonDialogue(&gLatiosPreFightDialogue_2);
+  DisplayDungeonDialogue(gLatiosPreFightDialogue_2);
   LatiosScreenFlash();
-  DisplayDungeonDialogue(&gLatiosPreFightDialogue_3);
+  DisplayDungeonDialogue(gLatiosPreFightDialogue_3);
   sub_803E708(10,70);
   SetupBossFightHP(LatiosEntity,600,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -3066,11 +3046,11 @@ void LatiosReFightDialogue(void)
   LatiosEntity = GetEntityFromClientType(0x16);
   sub_8086448();
   sub_808692C();
-  DisplayDungeonDialogue(&gLatiosReFightDialogue_1);
+  DisplayDungeonDialogue(gLatiosReFightDialogue_1);
   LatiosScreenFlash();
-  DisplayDungeonDialogue(&gLatiosPreFightDialogue_2);
+  DisplayDungeonDialogue(gLatiosPreFightDialogue_2);
   LatiosScreenFlash();
-  DisplayDungeonDialogue(&gLatiosPreFightDialogue_3);
+  DisplayDungeonDialogue(gLatiosPreFightDialogue_3);
   sub_803E708(10,70);
   SetupBossFightHP(LatiosEntity,600,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -3080,7 +3060,7 @@ void sub_808AC3C(void)
 {
     sub_8086448();
     // There appears to be no one here
-    sub_80866C4(&gUnknown_8104FC8);
+    sub_80866C4(gUnknown_8104FC8);
 }
 
 void LatiosScreenFlash(void)
@@ -3203,7 +3183,7 @@ void sub_808AE54(char param_1,char param_2,u32 *param_3)
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
       // Something fell from Regirock's body
       // Regirock was apparently guarding this item
-      DisplayDungeonDialogue(&gRegirockPostFightDialogue_1);
+      DisplayDungeonDialogue(gRegirockPostFightDialogue_1);
     }
   }
 }
@@ -3226,7 +3206,7 @@ void sub_808AEC8(char param_1,char param_2,u32 *param_3)
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
       // Something fell from Regice's body
       // Regice was apparently guarding this item
-      DisplayDungeonDialogue(&gRegicePostFightDialogue_1);
+      DisplayDungeonDialogue(gRegicePostFightDialogue_1);
     }
   }
 }
@@ -3248,7 +3228,7 @@ void sub_808AF3C(char param_1,char param_2,u32 *param_3)
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
       // Something fell from Registeel's body
       // Registeel was apparently guarding this item
-      DisplayDungeonDialogue(&gRegisteelPostFightDialogue_1);
+      DisplayDungeonDialogue(gRegisteelPostFightDialogue_1);
     }
   }
 }
@@ -3264,7 +3244,7 @@ void sub_808AFB0(char param_1)
     sub_8097FD0(0x1d);
     SetMessageArgument(gAvailablePokemonNames,GetLeader(),0);
     // {ARG_POKEMON_0} obtained the Rock Part that Regirock was guarding
-    DisplayDungeonDialogue(&gRegirockPostFightDialogue_2);
+    DisplayDungeonDialogue(gRegirockPostFightDialogue_2);
     sub_80421C0(0,0xd4);
     sub_803E708(10,70);
     sub_8046D20();
@@ -3282,7 +3262,7 @@ void sub_808B030(char param_1)
     sub_8097FD0(0x1d);
     SetMessageArgument(gAvailablePokemonNames,GetLeader(),0);
     // {ARG_POKEMON_0} obtained the Ice Part that Regice was guarding
-    DisplayDungeonDialogue(&gRegicePostFightDialogue_2);
+    DisplayDungeonDialogue(gRegicePostFightDialogue_2);
     sub_80421C0(0,0xd4);
     sub_803E708(10,70);
     sub_8046D20();
@@ -3300,7 +3280,7 @@ void sub_808B0B0(char param_1)
     sub_8097FD0(0x1d);
     SetMessageArgument(gAvailablePokemonNames, GetLeader(), 0);
     // {ARG_POKEMON_0} obtained the Steel Part that Registeel was guarding
-    DisplayDungeonDialogue(&gRegisteelPostFightDialogue_2);
+    DisplayDungeonDialogue(gRegisteelPostFightDialogue_2);
     sub_80421C0(0,0xd4);
     sub_803E708(10,70);
     sub_8046D20();
@@ -3313,7 +3293,7 @@ void RegirockPreFightDialogue(void)
     sub_8085930(DIRECTION_NORTH);
     // INTRUDER ALERT
     // EXTERMINATE
-    DisplayDungeonDialogue(&gRegirockPreFightDialogue_1);
+    DisplayDungeonDialogue(gRegirockPreFightDialogue_1);
     sub_803E708(10,70);
     sub_808563C(SetupRegirockFightHP);
   }
@@ -3325,7 +3305,7 @@ void RegicePreFightDialogue(void)
     sub_8085930(DIRECTION_NORTH);
     // INTRUDER ALERT
     // EXTERMINATE
-    DisplayDungeonDialogue(&gRegicePreFightDialogue_1);
+    DisplayDungeonDialogue(gRegicePreFightDialogue_1);
     sub_803E708(10,70);
     sub_808563C(SetupRegiceFightHP);
   }
@@ -3337,7 +3317,7 @@ void RegisteelPreFightDialogue(void)
     sub_8085930(DIRECTION_NORTH);
     // INTRUDER ALERT
     // EXTERMINATE
-    DisplayDungeonDialogue(&gRegisteelPreFightDialogue_1);
+    DisplayDungeonDialogue(gRegisteelPreFightDialogue_1);
     sub_803E708(10,70);
     sub_808563C(SetupRegisteelFightHP);
   }
@@ -3557,19 +3537,19 @@ void JirachiPreFightDialogue(void)
   JirachiEntity = GetEntityFromClientType(0x1a);
   sub_8086448();
   sub_803E708(0x40,70);
-  DisplayDungeonDialogue(&gJirachiPreFightDialogue_1);
+  DisplayDungeonDialogue(gJirachiPreFightDialogue_1);
   sub_803E708(10,70);
   SpriteLookAroundEffect(LeaderEntity);
   sub_803E708(10,70);
-  DisplayDungeonDialogue(&gJirachiPreFightDialogue_2);
+  DisplayDungeonDialogue(gJirachiPreFightDialogue_2);
   sub_80861F8(0x37,JirachiEntity,1);
   sub_80855E4(SpriteShockEffect);
   sub_803E708(0x3c,70);
   JirachiDropInEffect(JirachiEntity);
   sub_803E708(0x5a,70);
-  DisplayDungeonDialogue(&gJirachiPreFightDialogue_3);
+  DisplayDungeonDialogue(gJirachiPreFightDialogue_3);
   sub_803E708(10,70);
-  DisplayDungeonDialogue(&gJirachiPreFightDialogue_4);
+  DisplayDungeonDialogue(gJirachiPreFightDialogue_4);
   sub_803E708(10,70);
   SetupBossFightHP(JirachiEntity,0x15e,MUS_BATTLE_WITH_RAYQUAZA);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -3590,15 +3570,15 @@ void sub_808B50C(void)
   DungeonFadeOutBGM(0x1e);
   sub_803E708(0x1e,70);
   // Fwaaaahhhh
-  DisplayDungeonDialogue(&gUnknown_810554C);
+  DisplayDungeonDialogue(gUnknown_810554C);
   DungeonStartNewBGM(MUS_FRIEND_AREA_FOREST);
   // I think I had a dream, and I was fighting in it
   // Did I imagine it?
   // I'm sleepy so I'm going back to sleep.
-  DisplayDungeonDialogue(&gUnknown_8105558);
+  DisplayDungeonDialogue(gUnknown_8105558);
   sub_803E708(10,70);
   JirachiSpinEffect(JirachiEntity);
-  DisplayDungeonDialogue(&gUnknown_81055F4);
+  DisplayDungeonDialogue(gUnknown_81055F4);
   sub_803E708(10,70);
   gDungeon->unk2 = 1;
 }
@@ -3632,20 +3612,20 @@ void JirachiWish(void)
   gDungeon->unk1356C = 1;
   DungeonFadeOutBGM(0x1e);
   sub_803E708(0x1e,0x46);
-  DisplayDungeonDialogue(&gUnknown_8105668);
+  DisplayDungeonDialogue(gUnknown_8105668);
   sub_803E708(10,0x46);
   PlaySoundEffect(0x1a7);
   sub_803E708(0x96,0x46);
   SpriteShockEffect(JirachiEntity);
-  DisplayDungeonDialogue(&gUnknown_8105674);
+  DisplayDungeonDialogue(gUnknown_8105674);
   DungeonStartNewBGM(MUS_FRIEND_AREA_FOREST);
   sub_803E708(10,0x46);
   sub_80856E0(JirachiEntity, DIRECTION_SOUTH);
   PlaySoundEffect(0x16a);
-  DisplayDungeonDialogue(&gUnknown_81056B8);
+  DisplayDungeonDialogue(gUnknown_81056B8);
   sub_803E708(10,0x46);
   SpriteLookAroundEffect(JirachiEntity);
-  DisplayDungeonDialogue(&gUnknown_81056DC);
+  DisplayDungeonDialogue(gUnknown_81056DC);
   sub_803E708(10,0x46);
   while( 1 ) {
     while (1) {
@@ -3655,14 +3635,14 @@ void JirachiWish(void)
 #else
         s32 r0 = 0;
 #endif
-        wishChoice = sub_8052C68(r0,*gUnknown_8105798,&gUnknown_810579C,0x705);
+        wishChoice = sub_8052C68(r0,*gUnknown_8105798,gUnknown_810579C,0x705);
         if (wishChoice >= 1) break;
     }
     sub_803E708(10,0x46);
     if (wishChoice == 1) {
       s32 r8;
       // Lots of Money
-      DisplayDungeonDialogue(&gUnknown_810581C);
+      DisplayDungeonDialogue(gUnknown_810581C);
       sub_803E708(10,0x46);
       JirachiWishGrantDialogue(JirachiEntity);
       
@@ -3685,7 +3665,7 @@ void JirachiWish(void)
     }
     if (wishChoice == 2) {
       // Lots of Items
-      DisplayDungeonDialogue(&gUnknown_8105974);
+      DisplayDungeonDialogue(gUnknown_8105974);
       sub_803E708(10,0x46);
       JirachiWishGrantDialogue(JirachiEntity);
 
@@ -3717,30 +3697,30 @@ void JirachiWish(void)
         if (friendArea == NUM_FRIEND_AREAS)
         {
             // You want a friend area? But you already have many friend areas...
-            DisplayDungeonDialogue(&gUnknown_8105A08);
+            DisplayDungeonDialogue(gUnknown_8105A08);
             sub_803E708(10,0x46);
             continue;
         }
         else
         {
         // You want a friend area? As you wish..
-          DisplayDungeonDialogue(&gUnknown_8105AD4);
+          DisplayDungeonDialogue(gUnknown_8105AD4);
           sub_803E708(10,0x46);
           JirachiWishGrantDialogue(JirachiEntity);
           JirachiEntity->info->unk15D  = 0;
-          DisplayDungeonDialogue(&gUnknown_8105B20);
+          DisplayDungeonDialogue(gUnknown_8105B20);
           UnlockFriendArea(friendArea);
           PlaySoundEffect(0xd4);
           LeaderEntity = GetLeader();
           SetMessageArgument(gAvailablePokemonNames,LeaderEntity,0);
           sub_8092578(gUnknown_202DE58,friendArea,FALSE);
           // Obtained the friend area!
-          DisplayDungeonDialogue(&gUnknown_8105B68);
+          DisplayDungeonDialogue(gUnknown_8105B68);
         }
     }
     if (wishChoice == 4) {
         // More Strength..
-        DisplayDungeonDialogue(&gUnknown_8105BA8);
+        DisplayDungeonDialogue(gUnknown_8105BA8);
         sub_803E708(10,0x46);
         JirachiWishGrantDialogue(JirachiEntity);
     
@@ -3762,32 +3742,32 @@ void JirachiWish(void)
           }
         }
         JirachiEntity->info->unk15D  = 0;
-        DisplayDungeonDialogue(&gUnknown_8105BF4);
+        DisplayDungeonDialogue(gUnknown_8105BF4);
         sub_803E708(10,0x46);
     }
     if (wishChoice == 5) {
         // Something Good...
-        DisplayDungeonDialogue(&gUnknown_8105D2C);
+        DisplayDungeonDialogue(gUnknown_8105D2C);
         sub_803E708(10,0x46);
         JirachiWishGrantDialogue(JirachiEntity);
         JirachiEntity->info->unk15D  = 0;
-        DisplayDungeonDialogue(&gUnknown_8105D80);
+        DisplayDungeonDialogue(gUnknown_8105D80);
         sub_803E708(10,0x46);
         LeaderPos = &GetLeader()->pos;
         direction = GetDirectionTowardsPosition(&JirachiEntity->pos,LeaderPos);
         SetFacingDirection(JirachiEntity,direction);
         sub_803E708(10,0x46);
-        DisplayDungeonDialogue(&gUnknown_8105D9C);
+        DisplayDungeonDialogue(gUnknown_8105D9C);
         sub_803E708(10,0x46);
         gDungeon->unk674 = 1;
     }
     break;
   }
 
-  DisplayDungeonDialogue(&gUnknown_81058E0);
+  DisplayDungeonDialogue(gUnknown_81058E0);
   JirachiSpinEffect(JirachiEntity);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gUnknown_810593C);
+  DisplayDungeonDialogue(gUnknown_810593C);
   sub_803E708(10,0x46);
   EnableJirachiWishWarpTile();
 }
@@ -3797,7 +3777,7 @@ void JirachiReFightDialogue(void)
     if(HasRecruitedMon(MONSTER_JIRACHI))
     {
         sub_8086448();
-        sub_80866C4(&gJirachiReFightDialogue_1);
+        sub_80866C4(gJirachiReFightDialogue_1);
     }
     else
     {
@@ -3907,13 +3887,13 @@ void JirachiWishGrantDialogue(Entity *jirachiEntity)
 
   jirachiEntity->info->unk15D = 1;
   // Nnnnnnnnnn!
-  DisplayDungeonDialogue(&gUnknown_81058A8);
+  DisplayDungeonDialogue(gUnknown_81058A8);
   PlaySoundEffect(0x375);
   sub_80861F8(0x67,jirachiEntity,1);
   PlaySoundEffect(0x2a8);
   uVar2 = sub_80861F8(0x68,jirachiEntity,0);
   // Taaaaaaaah!
-  DisplayDungeonDialogue(&gUnknown_81058C4);
+  DisplayDungeonDialogue(gUnknown_81058C4);
   if (sub_800E9A8(uVar2) != 0) {
     sub_800DC14(uVar2);
   }
@@ -4025,31 +4005,31 @@ void LugiaPreFightDialogue(void)
   LugiaEntity = GetEntityFromClientType(0x1b);
   if (HasRecruitedMon(MONSTER_LUGIA)) {
     sub_8086448();
-    sub_80866C4(&gLugiaPreFightDialogue_8);
+    sub_80866C4(gLugiaPreFightDialogue_8);
   }
   else {
     DungeonStopBGM();
     sub_8086448();
-    DisplayDungeonDialogue(&gLugiaPreFightDialogue_1);
+    DisplayDungeonDialogue(gLugiaPreFightDialogue_1);
     DungeonFadeInNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE,0x3c);
     sub_808C0CC();
-    DisplayDungeonDialogue(&gLugiaPreFightDialogue_2);
+    DisplayDungeonDialogue(gLugiaPreFightDialogue_2);
     LugiaScreenFlash();
-    DisplayDungeonDialogue(&gLugiaPreFightDialogue_3);
+    DisplayDungeonDialogue(gLugiaPreFightDialogue_3);
     sub_803E708(10,0x46);
-    DisplayDungeonDialogue(&gLugiaPreFightDialogue_4);
+    DisplayDungeonDialogue(gLugiaPreFightDialogue_4);
     PlaySoundEffect(0x1f8);
     sub_80861D4(LugiaEntity,0xd,0);
     sub_803E708(0x2b,0x46);
     sub_80861B8(LugiaEntity,0,0);
-    DisplayDungeonDialogue(&gLugiaPreFightDialogue_5);
+    DisplayDungeonDialogue(gLugiaPreFightDialogue_5);
     LugiaScreenFlash();
-    DisplayDungeonDialogue(&gLugiaPreFightDialogue_6);
+    DisplayDungeonDialogue(gLugiaPreFightDialogue_6);
     LugiaScreenFlash2();
     SetDungeonBGColorRGB(0xffffff06,0xffffff06,0xffffff06,1,0);
     DungeonStopBGM();
     sub_80861D4(LugiaEntity,7,0);
-    DisplayDungeonDialogue(&gLugiaPreFightDialogue_7);
+    DisplayDungeonDialogue(gLugiaPreFightDialogue_7);
     LugiaScreenFlash();
     SetupBossFightHP(LugiaEntity,800,MUS_BATTLE_WITH_RAYQUAZA);
     DungeonStartNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE);
@@ -4171,35 +4151,35 @@ void KyogrePreFightDialogue(void)
     DungeonFadeInNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE,0x3c);
     SpriteLookAroundEffect(LeaderEntity);
     sub_803E708(10,0x46);
-    DisplayDungeonDialogue(&gKyogrePreFightDialogue_8);
+    DisplayDungeonDialogue(gKyogrePreFightDialogue_8);
     sub_803E708(10,0x46);
     gDungeon->unk2 = 1;
   }
   else {
-    DisplayDungeonDialogue(&gKyogrePreFightDialogue_1);
+    DisplayDungeonDialogue(gKyogrePreFightDialogue_1);
     sub_803E708(10,0x46);
-    DisplayDungeonDialogue(&gKyogrePreFightDialogue_2);
+    DisplayDungeonDialogue(gKyogrePreFightDialogue_2);
     sub_803E708(10,0x46);
     nullsub_99();
     sub_803E708(10,0x46);
     // Gwwwwwooooooooh
-    DisplayDungeonDialogue(&gKyogrePreFightDialogue_3);
+    DisplayDungeonDialogue(gKyogrePreFightDialogue_3);
     sub_803E708(10,0x46);
     DungeonFadeInNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE,0x3c);
     sub_808C360();
     // My duels against {ARG_POKEMON_3} (Groudon) left us both exhausted
-    DisplayDungeonDialogue(&gKyogrePreFightDialogue_4);
+    DisplayDungeonDialogue(gKyogrePreFightDialogue_4);
     KyogreScreenFlash();
     // I am {ARG_POKEMON_2} (Kyogre)!
     // The lord of the sea!
-    DisplayDungeonDialogue(&gKyogrePreFightDialogue_5);
+    DisplayDungeonDialogue(gKyogrePreFightDialogue_5);
     KyogreScreenFlash();
     // Witness the destructive force of my waves!
-    DisplayDungeonDialogue(&gKyogrePreFightDialogue_6);
+    DisplayDungeonDialogue(gKyogrePreFightDialogue_6);
     KyogreScreenFlash();
     // Marvel at my awesome
     // power!
-    DisplayDungeonDialogue(&gKyogrePreFightDialogue_7);
+    DisplayDungeonDialogue(gKyogrePreFightDialogue_7);
     sub_803E708(10,0x46);
     SetupBossFightHP(KyogreEntity,600,MUS_BOSS_BATTLE);
     DungeonStartNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE);
@@ -4281,17 +4261,17 @@ void DeoxysPreFightDialogue(void)
   if (HasRecruitedMon(MONSTER_DEOXYS_NORMAL)) {
     // There appears to be no one here.
     // It's impossible to go any further
-    sub_80866C4(&gDeoxysPreFightDialogue_5);
+    sub_80866C4(gDeoxysPreFightDialogue_5);
   }
   else {
-    DisplayDungeonDialogue(&gDeoxysPreFightDialogue_1);
+    DisplayDungeonDialogue(gDeoxysPreFightDialogue_1);
     DungeonFadeInNewBGM(MUS_RAYQUAZAS_DOMAIN, 0x3c);
     sub_808C550();
-    DisplayDungeonDialogue(&gDeoxysPreFightDialogue_2);
+    DisplayDungeonDialogue(gDeoxysPreFightDialogue_2);
     DeoxysScreenFlash();
-    DisplayDungeonDialogue(&gDeoxysPreFightDialogue_3);
+    DisplayDungeonDialogue(gDeoxysPreFightDialogue_3);
     DeoxysScreenFlash();
-    DisplayDungeonDialogue(&gDeoxysPreFightDialogue_4);
+    DisplayDungeonDialogue(gDeoxysPreFightDialogue_4);
     sub_803E708(10,0x46);
     sub_808563C(SetupDeoxysFightHP);
     ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
@@ -4387,7 +4367,7 @@ void CelebiJoinDialogue(void)
     SpriteLookAroundEffect(LeaderEntity);
     sub_803E708(10,0x46);
     // .........
-    DisplayDungeonDialogue(&gCelebiJoinDialogue_10);
+    DisplayDungeonDialogue(gCelebiJoinDialogue_10);
   }
   else
   {
@@ -4396,14 +4376,14 @@ void CelebiJoinDialogue(void)
     SpriteShockEffect(LeaderEntity);
     sub_803E708(10,0x46);
     // Oh? There's someone there.
-    DisplayDungeonDialogue(&gCelebiJoinDialogue_1);
+    DisplayDungeonDialogue(gCelebiJoinDialogue_1);
     sub_803E708(10,0x46);
     sub_8086598();
     sub_8086598();
     sub_8086598();
     sub_8086598();
     // The Time-Traveling Pokemon {ARG_POKEMON_2} (Celebi)!
-    DisplayDungeonDialogue(&gCelebiJoinDialogue_2);
+    DisplayDungeonDialogue(gCelebiJoinDialogue_2);
     PlaySoundEffect(0x1c7);
     sub_806CDD4(CelebiEntity,10,DIRECTION_SOUTH);
     sub_803E708(0x14,0x46);
@@ -4411,7 +4391,7 @@ void CelebiJoinDialogue(void)
     sub_803E708(4,0x46);
     PlaySoundEffect(0x1c7);
     sub_806CDD4(CelebiEntity,10,DIRECTION_SOUTH);
-    DisplayDungeonDialogue(&gCelebiJoinDialogue_3);
+    DisplayDungeonDialogue(gCelebiJoinDialogue_3);
     sub_803E708(10,0x46);
     state = 0;
     do {
@@ -4439,11 +4419,11 @@ void CelebiJoinDialogue(void)
                 sub_803E708(0x1a,0x46);
                 PlaySoundEffect(0x1d5);
                 sub_803E708(0x1c,0x46);
-                DisplayDungeonDialogue(&gCelebiJoinDialogue_4);
+                DisplayDungeonDialogue(gCelebiJoinDialogue_4);
                 sub_803E708(10,0x46);
                 sub_806FDF4(LeaderEntity,CelebiEntity,&CelebiEntity);
                 DungeonStartNewBGM(MUS_FRIEND_AREA_HEALING_FOREST);
-                DisplayDungeonDialogue(&gCelebiJoinDialogue_5);
+                DisplayDungeonDialogue(gCelebiJoinDialogue_5);
                 sub_803E708(10,0x46);
                 PlaySoundEffect(0x1c7);
                 sub_80861D4(CelebiEntity,0xd,0);
@@ -4452,7 +4432,7 @@ void CelebiJoinDialogue(void)
                 sub_803E708(0x1a,0x46);
                 PlaySoundEffect(0x1d5);
                 sub_803E708(0x1b,0x46);
-                DisplayDungeonDialogue(&gCelebiJoinDialogue_6);
+                DisplayDungeonDialogue(gCelebiJoinDialogue_6);
                 sub_803E708(10,0x46);
                 state = 2;
             }
@@ -4472,15 +4452,15 @@ void CelebiJoinDialogue(void)
             else
             {
                 sub_803E708(10,0x46);
-                DisplayDungeonDialogue(&gCelebiJoinDialogue_7);
+                DisplayDungeonDialogue(gCelebiJoinDialogue_7);
                 sub_80861F8(0x3e,CelebiEntity,1);
                 sub_803E708(0x18,0x46);
                 sub_80861F8(0x3e,CelebiEntity,1);
                 sub_803E708(0xe,0x46);
-                DisplayDungeonDialogue(&gCelebiJoinDialogue_8);
+                DisplayDungeonDialogue(gCelebiJoinDialogue_8);
                 sub_803E708(10,0x46);
                 sub_808C8E0(CelebiEntity);
-                DisplayDungeonDialogue(&gCelebiJoinDialogue_9);
+                DisplayDungeonDialogue(gCelebiJoinDialogue_9);
                 sub_803E708(10,0x46);
                 state = 2;
             }
@@ -4825,7 +4805,7 @@ void sub_808C998(void)
 {
     // Defeat the opposing team to win
     // Be careful, your opponents are tough
-    DisplayDungeonDialogue(&gUnknown_8106720);
+    DisplayDungeonDialogue(gUnknown_8106720);
     sub_803E708(0xA, 0x46);
 }
 
@@ -4861,12 +4841,12 @@ void MedichamRescueDialogue(void)
     SpriteLookAroundEffect(MedichamEntity);
     sub_803E708(0xA, 0x46);
     // Oh my I can't seem to find a way out...
-    DisplayDungeonDialogue(&gMedichamRescueDialogue_1);
+    DisplayDungeonDialogue(gMedichamRescueDialogue_1);
     sub_803E708(0xA, 0x46);
     sub_80869E4(MedichamEntity, 4, 2, 4);
     sub_803E708(0xA, 0x46);
     // What am I to do...?
-    DisplayDungeonDialogue(&gMedichamRescueDialogue_2);
+    DisplayDungeonDialogue(gMedichamRescueDialogue_2);
     sub_803E708(0xA, 0x46);
     sub_8086448();
     sub_8086598();
@@ -4874,7 +4854,7 @@ void MedichamRescueDialogue(void)
     SpriteShockEffect(MedichamEntity);
     sub_803E708(0x20, 0x46);
     sub_80869E4(MedichamEntity, 4, 2, 0);
-    DisplayDungeonDialogue(&gMedichamRescueDialogue_3);
+    DisplayDungeonDialogue(gMedichamRescueDialogue_3);
     sub_803E708(0xA, 0x46);
     PlaySoundEffect(0x1c7);
     sub_806CDD4(MedichamEntity, 0xA, DIRECTION_SOUTH);
@@ -4888,7 +4868,7 @@ void MedichamRescueDialogue(void)
     // I am so lucky
     //
     // There appears to be no one here
-    DisplayDungeonDialogue(&gMedichamRescueDialogue_4);
+    DisplayDungeonDialogue(gMedichamRescueDialogue_4);
     sub_803E708(0xA, 0x46);
     sub_806CDD4(MedichamEntity, 0, DIRECTION_SOUTH);
     for(counter = 0x17; counter >= 0; counter--)
@@ -4950,14 +4930,14 @@ void SmeargleRescueDialogue(void)
     sub_803E708(0xA, 0x46);
     // Ohhh...
     // I've lost my bearings
-    DisplayDungeonDialogue(&gSmeargleRescueDialogue_1);
+    DisplayDungeonDialogue(gSmeargleRescueDialogue_1);
     sub_803E708(0xA, 0x46);
     sub_80869E4(SmeargleEntity, 4, 2, 4);
     sub_803E708(0xA, 0x46);
     // I can't get out...
     // I'm hungry...
     // I'm in trouble
-    DisplayDungeonDialogue(&gSmeargleRescueDialogue_2);
+    DisplayDungeonDialogue(gSmeargleRescueDialogue_2);
     sub_803E708(0xA, 0x46);
     sub_8086448();
     sub_8086598();
@@ -4966,7 +4946,7 @@ void SmeargleRescueDialogue(void)
     sub_803E708(0x20, 0x46);
     sub_80869E4(SmeargleEntity, 4, 2, 0);
     // Oh! You are?
-    DisplayDungeonDialogue(&gSmeargleRescueDialogue_3);
+    DisplayDungeonDialogue(gSmeargleRescueDialogue_3);
     sub_803E708(0xA, 0x46);
     PlaySoundEffect(0x1c7);
     sub_806CDD4(SmeargleEntity, 0xA, DIRECTION_SOUTH);
@@ -4978,7 +4958,7 @@ void SmeargleRescueDialogue(void)
     sub_803E708(0x14, 0x46);
     // Did you maybe come to rescue me?
     // Am I glad to see you
-    DisplayDungeonDialogue(&gSmeargleRescueDialogue_4);
+    DisplayDungeonDialogue(gSmeargleRescueDialogue_4);
     sub_803E708(0xA, 0x46);
     sub_806CDD4(SmeargleEntity, 0, DIRECTION_SOUTH);
     for(counter = 0x17; counter >= 0; counter--)
@@ -5006,7 +4986,7 @@ void sub_808CD44(void)
     sub_80854D4();
     sub_8085930(DIRECTION_NORTH);
     sub_80855E4(sub_8086A3C);
-    sub_8068FE0(SmeargleEntity, 0x21C, 0);
+    sub_8068FE0(SmeargleEntity, 540, 0);
     sub_8085860(LeaderEntity->pos.x, LeaderEntity->pos.y - 3);
     CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_SMEARGLE);
 }
@@ -5016,10 +4996,10 @@ void sub_808CD9C(u8 r0)
     sub_8086448();
     // There appears to be no one here.
     // It's impossible to go any further
-    sub_80866C4(&gUnknown_810697C);
+    sub_80866C4(gUnknown_810697C);
 }
 
-u64 *sub_808CDB0(u8 r0)
+const u64 *sub_808CDB0(u8 r0)
 {
     return &gUnknown_8107544[r0];
 }

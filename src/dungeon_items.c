@@ -1,12 +1,11 @@
 #include "global.h"
+#include "code_80869E4.h"
 #include "dungeon_items.h"
-
 #include "dungeon_capabilities.h"
 #include "dungeon_global_data.h"
 #include "dungeon_leader.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-
 #include "pokemon.h"
 
 extern u8 gAvailablePokemonNames[];
@@ -22,7 +21,6 @@ extern s32 sub_8052B8C(u32, u8 *, u32);
 extern void sub_80861A8(void);
 extern void PrintFieldMessage(u32, u8 *, u32);
 extern void sub_803E708(u32, u32);
-extern void sub_80869E4(Entity *, u32, u32, u32);
 extern void sub_80416E0(Position32 *r0, u32, u32);
 extern void SetMessageArgument(u8 *r0, Entity *r1, u32);
 extern void sub_80421C0(Entity *, u32);

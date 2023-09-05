@@ -246,7 +246,6 @@ SECTIONS {
         src/dungeon_util_1.o(.text);
         asm/code_8085B0C.o(.text);
         src/code_80869E4.o(.text);
-        asm/code_80869E4.o(.text);
         src/code_8086A3C.o(.text);
         asm/code_8086A3C.o(.text);
         src/code_8057824_1.o(.text);
