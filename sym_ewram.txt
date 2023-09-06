@@ -861,5 +861,4 @@ gUnknown_2039DD4: /* 2039DD4 */
 gUnknown_2039DD8: /* 2039DD8 */
 	.space 0x8
 
-gUnknown_2039DE0: /* 2039DE0 */
-	.space 0x4
+    .include "src/code_80A7714.o"

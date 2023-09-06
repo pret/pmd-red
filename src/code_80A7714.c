@@ -5,10 +5,11 @@ extern void sub_80A68A0(u32);
 extern void sub_80A7094(struct axPokemon *, u32, u32, u32);
 extern void sub_80A7310(struct axPokemon *, u32, u32, u32);
 extern void sub_80A7784();
-extern s16 gUnknown_2039DE0;
 
-extern u32 gUnknown_8117EFC;
-extern u32 *gMapScriptTable[];
+static EWRAM_DATA_2 s16 sUnknown_2039DE0;
+
+extern const u32 gUnknown_8117EFC;
+extern const u32 *gMapScriptTable[]; // 811E2F8
 
 void sub_80A7714(u32 a0)
 {
@@ -23,12 +24,12 @@ void sub_80A7720(struct axPokemon *a0, u32 a1, u32 a2)
 
 void sub_80A7744(void)
 {
-    gUnknown_2039DE0 = -1;
+    sUnknown_2039DE0 = -1;
 }
 
 void sub_80A7754(void)
 {
-    gUnknown_2039DE0 = -1;
+    sUnknown_2039DE0 = -1;
 }
 
 void sub_80A7764(s16 a0)
@@ -38,13 +39,13 @@ void sub_80A7764(s16 a0)
     sub_80A7784();
 
     if (temp != -1)
-        gUnknown_2039DE0 = temp;
+        sUnknown_2039DE0 = temp;
 }
 
 void sub_80A7784(void)
 {
-    if (gUnknown_2039DE0 != -1)
-        gUnknown_2039DE0 = -1;
+    if (sUnknown_2039DE0 != -1)
+        sUnknown_2039DE0 = -1;
 }
 
 bool8 sub_80A77A0(s16 a0)
@@ -53,7 +54,7 @@ bool8 sub_80A77A0(s16 a0)
     s32 temp2;
     temp = a0;
     temp2 = temp;
-    if (gUnknown_2039DE0 != temp) {
+    if (sUnknown_2039DE0 != temp) {
         if (temp < 0)
             sub_80A7784();
         else
