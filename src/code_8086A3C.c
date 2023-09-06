@@ -23,7 +23,6 @@ extern void DisplayDungeonDialogue(const u8 *);
 extern void sub_803E708(u32, u32);
 extern void sub_8086448(void);
 extern void SkarmoryEntry(Entity *);
-extern void SpriteLookAroundEffect(Entity *);
 extern void sub_8086A54(Entity *);
 extern void sub_808563C(void *);
 extern void sub_8087144();

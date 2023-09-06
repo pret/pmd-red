@@ -321,7 +321,6 @@ extern void sub_8068FE0(Entity *, u32, u32);
 
 extern void sub_803E708(u32, u32);
 extern void sub_8086448(void);
-extern void SpriteLookAroundEffect(Entity *);
 extern void PlaySoundEffect(u32);
 extern void IncreaseEntityPixelPos(Entity *, u32, u32);
 extern void sub_8042B0C(Entity *);
@@ -393,13 +392,8 @@ extern void sub_808B1CC(u8);
 extern void sub_80464C8(Entity *, u32 *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern void sub_803E46C(u32);
-extern void sub_808692C();
 
-extern void sub_80868F4();
-extern void sub_8086910();
 extern u32 sub_8085EC8(u32, u32, u32, Position *, u32);
-extern void sub_8086854();
-extern void sub_8086838(u32, u32, u32);
 extern void sub_80426C8(u32, u32);
 extern void sub_807EAA0(u32, u32);
 
@@ -433,7 +427,6 @@ extern u8 sub_8086AE4(u32);
 extern void sub_8072008(Entity *, Entity *, s16, u32, u32);
 extern void sub_8085374();
 
-extern void sub_8086848(u32 ,u32);
 extern void sub_80856C8(Entity *, s32, s32);
 extern void sub_8086A54(Entity *);
 

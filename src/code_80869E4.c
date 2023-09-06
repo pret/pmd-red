@@ -10,6 +10,7 @@
 
 // ???
 extern u32 gUnknown_202EDC8;
+
 EWRAM_DATA struct unkStruct_202F3D0 gUnknown_202F3D0;
 
 // data_8107010.s
@@ -21,7 +22,6 @@ extern void sub_803E46C(u32);
 extern void sub_803E9D0(void);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern void PlaySoundEffect(u32);
-void SpriteLookAroundEffect(Entity *entity);
 extern void DisplayDungeonDialogue(const u8 *);
 
 
@@ -384,18 +384,6 @@ void sub_808682C(void)
     gUnknown_202F3D0.unk0 = 0;
 }
 
-
-
-
-
-
-
-// CONTINUE HEREEEEEEEEEE FOR THE HHHHHHHHHH :)
-
-
-
-
-
 void sub_8086838(u8 entity, u8 r1, u8 r2)
 {
     gUnknown_202F3D0.unk1 = entity;
@@ -489,7 +477,7 @@ void SpriteLookAroundEffect(Entity *entity)
 }
 
 #ifdef NONMATCHING // 100% match, but params for sub_8002A70 are disputed... https://decomp.me/scratch/E3iF1
-void sub_80869E4(struct Entity *a0, s32 a1, u8 a2, s8 a3)
+void sub_80869E4(Entity *a0, s32 a1, u8 a2, s8 a3)
 {
     u32 r4;
     s8 *r5;
@@ -509,7 +497,7 @@ void sub_80869E4(struct Entity *a0, s32 a1, u8 a2, s8 a3)
 }
 #else
 NAKED
-void sub_80869E4(struct Entity *a0, s32 a1, u8 a2, s8 a3)
+void sub_80869E4(Entity *a0, s32 a1, u8 a2, s8 a3)
 {
     asm_unified(
     "push {r4-r7,lr}\n"
