@@ -1,10 +1,10 @@
 
     .include "src/m4a.o"
 
-gUnknown_2000A80: /* 2000A80 */
+gUnknown_2000A80: /* 2000A80 (code_2) */
 	.space 0x8
 
-gUnknown_2000A88: /* 2000A88 */
+gUnknown_2000A88: /* 2000A88 (code / event_flag) */
 	.space 0x400
 
     .include "src/memory.o"
@@ -16,81 +16,47 @@ gMainHeapDescriptor: /* 2000EB0 */
 
 gMainHeapFreeList: /* 2000ED0 */
 	.space 0x300
-
-gMainHeap: /* 20011D0 */
+gMainHeap: /* 20011D0 (memory) */
 	.space 0x24000
 
     .include "src/bg_palette_buffer.o"
     .include "src/input.o"
+    .include "src/sprite.o"
 
+gUnknown_2026E38: /* 2026E38 (cpu / code_800558C) */
+	.space 0x4
 
-gUnknown_2025670: /* 2025670 */
+gUnknown_2026E3C: /* 2026E3C (cpu / code_800558C) */
+	.space 0x4
+
+gUnknown_2026E40: /* 2026E40 (code_800558C) */
+	.space 0x4
+
+gUnknown_2026E44: /* 2026E44 (code_800558C) */
+	.space 0x4
+
+gUnknown_2026E48: /* 2026E48 (code_800558C) */
+	.space 0x4
+
+gUnknown_2026E4C: /* 2026E4C (code_800558C) */
 	.space 0x2
 
-gUnknown_2025672: /* 2025672 */
-	.space 0x10
-
-gUnknown_2025682: /* 2025682 */
-	.space 0x12
-
-gUnknown_2025694: /* 2025694 */
-	.space 0x4
-
-gUnknown_2025698: /* 2025698 */
-	.space 0x8
-
-gUnknown_20256A0: /* 20256A0 */
-	.space 0x808
-
-gUnknown_2025EA8: /* 2025EA8 */
-	.space 0x400
-
-gUnknown_20262A8: /* 20262A8 */
-	.space 0x400
-
-gSpriteCount: /* 20266A8 */
-	.space 0x8
-
-gUnknown_20266B0: /* 20266B0 */
-	.space 0x780
-
-gCharMemCursor: /* 2026E30 */
-	.space 0x8
-
-gUnknown_2026E38: /* 2026E38 */
-	.space 0x4
-
-gUnknown_2026E3C: /* 2026E3C */
-	.space 0x4
-
-gUnknown_2026E40: /* 2026E40 */
-	.space 0x4
-
-gUnknown_2026E44: /* 2026E44 */
-	.space 0x4
-
-gUnknown_2026E48: /* 2026E48 */
-	.space 0x4
-
-gUnknown_2026E4C: /* 2026E4C */
+gUnknown_2026E4E: /* 2026E4E (code_800558C / code_2 / code_800DAC0 / code_8098BDC / code_80428A0 / code_8040094 / code_8098468 / ground_map_1 / code_8041AD0 / ground_map_2) */
 	.space 0x2
 
-gUnknown_2026E4E: /* 2026E4E */
-	.space 0x2
-
-gUnknown_2026E50: /* 2026E50 */
+gUnknown_2026E50: /* 2026E50 (code_800558C) */
 	.space 0x4
 
-gUnknown_2026E54: /* 2026E54 */
+gUnknown_2026E54: /* 2026E54 (code_800558C) */
 	.space 0x4
 
-gUnknown_2026E58: /* 2026E58 */
+gUnknown_2026E58: /* 2026E58 (code_800558C) */
 	.space 0x8
 
-gUnknown_2026E60: /* 2026E60 */
+gUnknown_2026E60: /* 2026E60 (code_800558C) */
 	.space 0x288
 
-gUnknown_20270E8: /* 20270E8 */
+gUnknown_20270E8: /* 20270E8 (code_800558C) */
 	.space 0x288
 
 gUnknown_2027370: /* 2027370 */
