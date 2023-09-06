@@ -21,27 +21,8 @@ gMainHeap: /* 20011D0 */
 	.space 0x24000
 
     .include "src/bg_palette_buffer.o"
+    .include "src/input.o"
 
-gRealInputs: /* 20255F0 */
-	.space 0x10
-
-gUnusedInputsRelated: /* 2025600 */
-	.space 0x2C
-
-gUnusedScrambledInputJunk: /* 202562C */
-	.space 0xC
-
-gBufferedInputs: /* 2025638 */
-	.space 0x10
-
-gCurrentInputs: /* 2025648 */
-	.space 0x10
-
-gLastInputs: /* 2025658 */
-	.space 0x10
-
-gInputTimers: /* 2025668 */
-	.space 0x8
 
 gUnknown_2025670: /* 2025670 */
 	.space 0x2

@@ -2,13 +2,13 @@
 #include "code_800C9CC.h"
 #include "input.h"
 
-EWRAM_DATA Inputs gRealInputs = {0};
-EWRAM_DATA UnusedInputStruct gUnusedInputsRelated = {0};
-EWRAM_DATA u32 gUnusedScrambledInputJunk = {0};
-EWRAM_DATA Inputs gBufferedInputs = {0};
-EWRAM_DATA Inputs gCurrentInputs = {0};
-EWRAM_DATA Inputs gLastInputs = {0};
-EWRAM_DATA InputTimers gInputTimers = {0};
+EWRAM_DATA Inputs gRealInputs = {0}; // 20255F0
+static EWRAM_DATA UnusedInputStruct sUnusedInputsRelated = {0}; // 2025600
+static EWRAM_DATA u32 sUnusedScrambledInputJunk = {0}; // 202562C
+static EWRAM_DATA Inputs sBufferedInputs = {0}; // 2025638
+static EWRAM_DATA Inputs sCurrentInputs = {0}; // 2025648
+static EWRAM_DATA Inputs sPrevInputs = {0}; // 2025658
+static EWRAM_DATA InputTimers sInputTimers = {0}; // 2025668
 
 void InitInput(void)
 {
@@ -17,59 +17,59 @@ void InitInput(void)
     gRealInputs.repeated = 0;
     gRealInputs.shortPress = 0;
 
-    gBufferedInputs.held = 0;
-    gBufferedInputs.pressed = 0;
-    gBufferedInputs.repeated = 0;
-    gBufferedInputs.shortPress = 0;
+    sBufferedInputs.held = 0;
+    sBufferedInputs.pressed = 0;
+    sBufferedInputs.repeated = 0;
+    sBufferedInputs.shortPress = 0;
 
-    gUnusedScrambledInputJunk = 0x4a14c1; // seems like random keyboard mashing (see UpdateInput)
+    sUnusedScrambledInputJunk = 0x4A14C1; // seems like random keyboard mashing (see UpdateInput)
 
-    gUnusedInputsRelated.unk20 = 0;
-    gUnusedInputsRelated.unk0 = 0xFFFF; // probably a mask
-    gUnusedInputsRelated.unk2 = -1;
-    gUnusedInputsRelated.unk4 = -1;
-    gUnusedInputsRelated.unk6 = -1;
-    gUnusedInputsRelated.unk1C = -1;
-    gUnusedInputsRelated.unk1E = -1;
-    gUnusedInputsRelated.unk8 = -1;
-    gUnusedInputsRelated.unkA = -1;
-    gUnusedInputsRelated.unkC = -1;
-    gUnusedInputsRelated.unkE = -1;
-    gUnusedInputsRelated.unk10 = -1;
-    gUnusedInputsRelated.unk12 = -1;
-    gUnusedInputsRelated.unk14 = -1;
-    gUnusedInputsRelated.unk16 = -1;
-    gUnusedInputsRelated.unk28 = 0;
-    gUnusedInputsRelated.unk29 = 0;
+    sUnusedInputsRelated.unk20 = 0;
+    sUnusedInputsRelated.unk0 = 0xFFFF; // probably a mask
+    sUnusedInputsRelated.unk2 = -1;
+    sUnusedInputsRelated.unk4 = -1;
+    sUnusedInputsRelated.unk6 = -1;
+    sUnusedInputsRelated.unk1C = -1;
+    sUnusedInputsRelated.unk1E = -1;
+    sUnusedInputsRelated.unk8 = -1;
+    sUnusedInputsRelated.unkA = -1;
+    sUnusedInputsRelated.unkC = -1;
+    sUnusedInputsRelated.unkE = -1;
+    sUnusedInputsRelated.unk10 = -1;
+    sUnusedInputsRelated.unk12 = -1;
+    sUnusedInputsRelated.unk14 = -1;
+    sUnusedInputsRelated.unk16 = -1;
+    sUnusedInputsRelated.unk28 = 0;
+    sUnusedInputsRelated.unk29 = 0;
 
-    gInputTimers.holdTimerB = 0;
-    gInputTimers.holdTimerR = 0;
+    sInputTimers.holdTimerB = 0;
+    sInputTimers.holdTimerR = 0;
 }
 
 void LoadBufferedInputs(void)
 {
-    gRealInputs = gBufferedInputs;
+    gRealInputs = sBufferedInputs;
 
-    gBufferedInputs.held = 0;
-    gBufferedInputs.pressed = 0;
-    gBufferedInputs.repeated = 0;
-    gBufferedInputs.shortPress = 0;
+    sBufferedInputs.held = 0;
+    sBufferedInputs.pressed = 0;
+    sBufferedInputs.repeated = 0;
+    sBufferedInputs.shortPress = 0;
 
-    gUnusedInputsRelated.unk0 = 0xffff;
-    gUnusedInputsRelated.unk2 = -1;
-    gUnusedInputsRelated.unk4 = -1;
-    gUnusedInputsRelated.unk6 = -1;
-    gUnusedInputsRelated.unk8 = -1;
-    gUnusedInputsRelated.unkA = -1;
-    gUnusedInputsRelated.unkC = -1;
-    gUnusedInputsRelated.unkE = -1;
-    gUnusedInputsRelated.unk10 = -1;
-    gUnusedInputsRelated.unk12 = -1;
-    gUnusedInputsRelated.unk14 = -1;
-    gUnusedInputsRelated.unk16 = -1;
+    sUnusedInputsRelated.unk0 = 0xFFFF;
+    sUnusedInputsRelated.unk2 = -1;
+    sUnusedInputsRelated.unk4 = -1;
+    sUnusedInputsRelated.unk6 = -1;
+    sUnusedInputsRelated.unk8 = -1;
+    sUnusedInputsRelated.unkA = -1;
+    sUnusedInputsRelated.unkC = -1;
+    sUnusedInputsRelated.unkE = -1;
+    sUnusedInputsRelated.unk10 = -1;
+    sUnusedInputsRelated.unk12 = -1;
+    sUnusedInputsRelated.unk14 = -1;
+    sUnusedInputsRelated.unk16 = -1;
 
-    gUnusedInputsRelated.unk28 = 0;
-    gUnusedInputsRelated.unk29 = 0;
+    sUnusedInputsRelated.unk28 = 0;
+    sUnusedInputsRelated.unk29 = 0;
 }
 
 UNUSED static bool8 sub_80048B8(void)
@@ -105,101 +105,101 @@ UNUSED static bool8 sub_80048CC(void)
 void ResetRepeatTimers(void)
 {
     gRealInputs.repeated = 0;
-    gCurrentInputs.repeatTimerDpad = 0;
-    gCurrentInputs.heldDpad = 0;
-    gInputTimers.holdTimerB = 999;
-    gInputTimers.holdTimerR = 999;
+    sCurrentInputs.repeatTimerDpad = 0;
+    sCurrentInputs.heldDpad = 0;
+    sInputTimers.holdTimerB = 999;
+    sInputTimers.holdTimerR = 999;
 }
 
 void UnpressButtons(void)
 {
     gRealInputs.pressed = 0;
-    gBufferedInputs.pressed = 0;
-    gCurrentInputs.pressed = 0;
+    sBufferedInputs.pressed = 0;
+    sCurrentInputs.pressed = 0;
 }
 
 void ResetUnusedInputStruct(void)
 {
-    gUnusedInputsRelated.unk20 = 5;
-    gUnusedInputsRelated.unk24 = 0;
-    gUnusedInputsRelated.unk0 = 0xFFFF;
-    gUnusedInputsRelated.unk2 = -1;
-    gUnusedInputsRelated.unk4 = -1;
-    gUnusedInputsRelated.unk6 = -1;
-    gUnusedInputsRelated.unk8 = -1;
-    gUnusedInputsRelated.unkA = -1;
-    gUnusedInputsRelated.unkC = -1;
-    gUnusedInputsRelated.unkE = -1;
-    gUnusedInputsRelated.unk10 = -1;
-    gUnusedInputsRelated.unk12 = -1;
-    gUnusedInputsRelated.unk14 = -1;
-    gUnusedInputsRelated.unk16 = -1;
+    sUnusedInputsRelated.unk20 = 5;
+    sUnusedInputsRelated.unk24 = 0;
+    sUnusedInputsRelated.unk0 = 0xFFFF;
+    sUnusedInputsRelated.unk2 = -1;
+    sUnusedInputsRelated.unk4 = -1;
+    sUnusedInputsRelated.unk6 = -1;
+    sUnusedInputsRelated.unk8 = -1;
+    sUnusedInputsRelated.unkA = -1;
+    sUnusedInputsRelated.unkC = -1;
+    sUnusedInputsRelated.unkE = -1;
+    sUnusedInputsRelated.unk10 = -1;
+    sUnusedInputsRelated.unk12 = -1;
+    sUnusedInputsRelated.unk14 = -1;
+    sUnusedInputsRelated.unk16 = -1;
 
-    gUnusedInputsRelated.unk28 = 0;
-    gUnusedInputsRelated.unk29 = 0;
+    sUnusedInputsRelated.unk28 = 0;
+    sUnusedInputsRelated.unk29 = 0;
 }
 
 void UpdateInput(void)
 {
-    gLastInputs = gCurrentInputs;
+    sPrevInputs = sCurrentInputs;
 
-    ReadKeyInput(&gCurrentInputs);
+    ReadKeyInput(&sCurrentInputs);
 
-    gCurrentInputs.pressed = (gLastInputs.held ^ gCurrentInputs.held) & gCurrentInputs.held;
+    sCurrentInputs.pressed = (sPrevInputs.held ^ sCurrentInputs.held) & sCurrentInputs.held;
 
-    if (gCurrentInputs.held) {
-        if ((gCurrentInputs.heldDpad & DPAD_ANY) == (gCurrentInputs.held & DPAD_ANY)) {
-            if (gCurrentInputs.repeatTimerDpad < 50)
-                gCurrentInputs.repeatTimerDpad++;
+    if (sCurrentInputs.held) {
+        if ((sCurrentInputs.heldDpad & DPAD_ANY) == (sCurrentInputs.held & DPAD_ANY)) {
+            if (sCurrentInputs.repeatTimerDpad < 50)
+                sCurrentInputs.repeatTimerDpad++;
         }
         else {
-            gCurrentInputs.heldDpad = gCurrentInputs.held & DPAD_ANY;
-            gCurrentInputs.repeatTimerDpad = 1;
+            sCurrentInputs.heldDpad = sCurrentInputs.held & DPAD_ANY;
+            sCurrentInputs.repeatTimerDpad = 1;
         }
     }
     else {
-        gCurrentInputs.repeatTimerDpad = 0;
-        gCurrentInputs.heldDpad = 0;
+        sCurrentInputs.repeatTimerDpad = 0;
+        sCurrentInputs.heldDpad = 0;
     }
 
-    if (gCurrentInputs.repeatTimerDpad == 1) {
-        gCurrentInputs.repeated = (gCurrentInputs.heldDpad & DPAD_ANY) | gCurrentInputs.pressed;
+    if (sCurrentInputs.repeatTimerDpad == 1) {
+        sCurrentInputs.repeated = (sCurrentInputs.heldDpad & DPAD_ANY) | sCurrentInputs.pressed;
     }
-    else if (gCurrentInputs.repeatTimerDpad == 48) {
-        gCurrentInputs.repeatTimerDpad = 43;
-        gCurrentInputs.repeated = (gCurrentInputs.heldDpad & DPAD_ANY) | gCurrentInputs.pressed;
+    else if (sCurrentInputs.repeatTimerDpad == 48) {
+        sCurrentInputs.repeatTimerDpad = 43;
+        sCurrentInputs.repeated = (sCurrentInputs.heldDpad & DPAD_ANY) | sCurrentInputs.pressed;
     }
     else
-        gCurrentInputs.repeated = 0;
+        sCurrentInputs.repeated = 0;
 
-    gCurrentInputs.shortPress = 0;
+    sCurrentInputs.shortPress = 0;
 
-    if (gCurrentInputs.held & B_BUTTON) {
-        if (gInputTimers.holdTimerB < 100)
-            gInputTimers.holdTimerB++;
+    if (sCurrentInputs.held & B_BUTTON) {
+        if (sInputTimers.holdTimerB < 100)
+            sInputTimers.holdTimerB++;
     }
-    else if (1 < gInputTimers.holdTimerB && gInputTimers.holdTimerB < 12) {
-        gCurrentInputs.shortPress = B_BUTTON;
-        gInputTimers.holdTimerB = 0;
-    }
-    else
-        gInputTimers.holdTimerB = 0;
-
-    if (gCurrentInputs.held & R_BUTTON) {
-        if (gInputTimers.holdTimerR < 100)
-            gInputTimers.holdTimerR++;
-    }
-    else if (1 < gInputTimers.holdTimerR && gInputTimers.holdTimerR < 12) {
-        gCurrentInputs.shortPress |= R_BUTTON;
-        gInputTimers.holdTimerR = 0;
+    else if (1 < sInputTimers.holdTimerB && sInputTimers.holdTimerB < 12) {
+        sCurrentInputs.shortPress = B_BUTTON;
+        sInputTimers.holdTimerB = 0;
     }
     else
-        gInputTimers.holdTimerR = 0;
+        sInputTimers.holdTimerB = 0;
 
-    gBufferedInputs.held |= gCurrentInputs.held;
-    gBufferedInputs.pressed |= gCurrentInputs.pressed;
-    gBufferedInputs.repeated |= gCurrentInputs.repeated;
-    gBufferedInputs.shortPress |= gCurrentInputs.shortPress;
+    if (sCurrentInputs.held & R_BUTTON) {
+        if (sInputTimers.holdTimerR < 100)
+            sInputTimers.holdTimerR++;
+    }
+    else if (1 < sInputTimers.holdTimerR && sInputTimers.holdTimerR < 12) {
+        sCurrentInputs.shortPress |= R_BUTTON;
+        sInputTimers.holdTimerR = 0;
+    }
+    else
+        sInputTimers.holdTimerR = 0;
 
-    gUnusedScrambledInputJunk *= gCurrentInputs.held | 0x54a1c41; // very similar to odd constant in InitInput - probably keymashing
+    sBufferedInputs.held |= sCurrentInputs.held;
+    sBufferedInputs.pressed |= sCurrentInputs.pressed;
+    sBufferedInputs.repeated |= sCurrentInputs.repeated;
+    sBufferedInputs.shortPress |= sCurrentInputs.shortPress;
+
+    sUnusedScrambledInputJunk *= sCurrentInputs.held | 0x54A1C41; // very similar to odd constant in InitInput - probably keymashing
 }
