@@ -90,7 +90,7 @@ void CleanAdventureLogScreen(void)
     }
 }
 
-#ifdef NONMATCHING
+#ifdef NONMATCHING // sub_80095E4 memes
 static void sub_8032084(void)
 {
     u32 sVar2;

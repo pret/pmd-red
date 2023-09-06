@@ -109,7 +109,7 @@ bool8 sub_801FB50(bool32 isAsleep)
   CopyYellowMonsterNametoBuffer(gUnknown_202E5D8,MONSTER_GULPIN);
   CopyYellowMonsterNametoBuffer(gUnknown_202E1C8,MONSTER_GULPIN);
   name = GetMonSpecies(MONSTER_GULPIN);
-  strcpy(gUnknown_202E1C8 - 0x50, name);
+  strcpy(gUnknown_202E1C8 - 80, name);
   PrintPokeNameToBuffer(gUnknown_202E1C8 - 0xF0, GetPlayerPokemonStruct());
   if (gUnknown_203B27C->isAsleep == 1) {
     gUnknown_203B27C->unk17C = NULL;

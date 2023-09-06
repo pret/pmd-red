@@ -173,7 +173,7 @@ u8 *sub_8030894()
     return gUnknown_203B320->unk0;
 }
 
-NAKED
+NAKED // sub_80095E4 memes
 void sub_80308A0(void)
 {
     asm_unified(

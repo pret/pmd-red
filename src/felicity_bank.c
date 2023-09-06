@@ -55,7 +55,7 @@ u32 CreateFelicityBank(s32 isAsleep)
   CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PERSIAN);
   CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_PERSIAN);
   monName = GetMonSpecies(MONSTER_PERSIAN);
-  strcpy(gUnknown_202E1C8 - 0x50, monName);
+  strcpy(gUnknown_202E1C8 - 80, monName);
 
   if (gFelicityBankWork->isAsleep == 1)
     gFelicityBankWork->unkA4 = NULL;

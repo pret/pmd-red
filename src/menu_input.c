@@ -221,7 +221,7 @@ void sub_8012CAC(UnkTextStruct2 *a0, const MenuItem *a1)
     sub_8012D08(a0, r7);
 }
 
-NAKED
+NAKED // sub_80095E4 memes
 void sub_8012D08(UnkTextStruct2 *a0, s32 a1)
 {
     asm_unified(

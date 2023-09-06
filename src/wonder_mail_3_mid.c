@@ -796,7 +796,7 @@ void sub_802F974(void)
     }
 }
 
-NAKED
+NAKED // sub_80095E4 memes
 void sub_802F9C0(void)
 {
     asm_unified(

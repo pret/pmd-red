@@ -98,7 +98,7 @@ void sub_8030480(void)
     }
 }
 
-#ifdef NONMATCHING // https://decomp.me/scratch/lM7lE
+#ifdef NONMATCHING // sub_80095E4 memes https://decomp.me/scratch/lM7lE
 static void sub_80304C8(void)
 {
     s16 test;

@@ -835,7 +835,7 @@ void sub_803CECC(void)
     }
 }
 
-#ifdef NONMATCHING
+#ifdef NONMATCHING // sub_80095E4 memes
 void RedrawPartnerSelectionMenu(void)
 {
   s32 sVar1;

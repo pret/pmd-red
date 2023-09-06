@@ -465,7 +465,7 @@ void sub_801C3F8(void)
     }
 }
 
-#ifdef NONMATCHING
+#ifdef NONMATCHING // sub_80095E4 memes
 // https://decomp.me/scratch/NdDP3  (98.06% matching) - Seth
 void sub_801C440(void)
 {
