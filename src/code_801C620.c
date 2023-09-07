@@ -14,9 +14,11 @@
 #include "sprite.h"
 #include "code_80130A8.h"
 
+// TODO: This 1 file was originally 5 files. Split properly
+
+// size: 0x124
 struct unkStruct_203B238
 {
-    // size: 0x124
     u32 state;
     s16 species;
     PokemonStruct1 *pokeStruct;
@@ -75,7 +77,7 @@ struct unkStruct_203B244
     u8 unk550[4];
 };
 
-// size: 118
+// size: 0x118
 struct unk_203B250
 {
     /* 0x0 */ PokemonStruct1 *pokeStruct;

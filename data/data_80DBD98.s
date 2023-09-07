@@ -1,6 +1,6 @@
 	.section .rodata
 
-@ code_801C620
+@ code_801C620 #1
         .align 2,0
 .string "pksdir0\0"
 
@@ -26,8 +26,10 @@ gUnknown_80DBDB0: @ 80DBDB0
 	.global gUnknown_80DBDC8
 gUnknown_80DBDC8: @ 80DBDC8
         .string "Switch\0"
+
+@ code_801C620 #2
         .align 2,0
-        .string "pksdir0\0"
+.string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DBDD8
@@ -64,8 +66,10 @@ gUnknown_80DBE18: @ 80DBE18
 	.global gUnknown_80DBE1C
 gUnknown_80DBE1C: @ 80DBE1C
         .string "{ARG_MOVE_ITEM_0}{ARG_MOVE_ITEM_1}\0"
+
+@ code_801C620 #3
         .align 2,0
-        .string "pksdir0\0"
+.string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DBE2C
@@ -76,7 +80,9 @@ gUnknown_80DBE2C: @ 80DBE2C
 	.global gUnknown_80DBE30
 gUnknown_80DBE30: @ 80DBE30
         .string "{ARG_POKEMON_0}\0"
-        .string "pksdir0\0"
+
+@ code_801C620 #4
+.string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DBE3C
@@ -99,8 +105,10 @@ gUnknown_80DBE54: @ 80DBE54
 
 	.global gUnknown_80DBE6C
 gUnknown_80DBE6C: @ 80DBE6C
+
+@ code_801C620 #5
         .string "Storage\0"
-        .string "pksdir0\0"
+.string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DBE7C
@@ -172,8 +180,10 @@ gUnknown_80DBF4C: @ 80DBF4C
 	.global gTeamRankBadgeFileName
 gTeamRankBadgeFileName: @ 80DBF60
         .string "tmrkpat\0"
+
+@ code_801D760
         .align 2,0
-        .string "pksdir0\0"
+.string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DBF70
@@ -197,8 +207,10 @@ gUnknown_80DBF88: @ 80DBF88
 	.global gUnknown_80DBFA0
 gUnknown_80DBFA0: @ 80DBFA0
         .string "Field\0"
+
+@ options_menu #1
         .align 2,0
-        .string "pksdir0\0"
+.string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DBFB0
@@ -242,8 +254,10 @@ gOthers_GameOptions: @ 80DC000
 	.global gOthers_Hints
 gOthers_Hints: @ 80DC010
         .string "Hints\0"
+
+@ options_menu #2
         .align 2,0
-        .string "pksdir0\0"
+.string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DC020
@@ -268,8 +282,6 @@ gUnknown_80DC03C: @ 80DC03C
         .byte 0x12, 0x00, 0x00, 0x00
 
         .4byte UnkData_80DC038
-
-@ Window Settings
 
 	.global gWindowBGTitle
 gWindowBGTitle: @ 80DC054
@@ -296,8 +308,10 @@ gWindowBGRedString: @ 80DC08C
 	.global gWindowBGGreenString
 gWindowBGGreenString: @ 80DC090
         .string "Green\0"
+
+@ hints_menu #1
         .align 2,0
-        .string "pksdir0\0"
+.string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DC0A0
@@ -326,8 +340,10 @@ gUnknown_80DC0BC: @ 80DC0BC
 	.global gUnknown_80DC0D4
 gUnknown_80DC0D4: @ 80DC0D4
         .string "Hints\0"
+
+@ hints_menu #2
         .align 2,0
-        .string "pksdir0\0"
+.string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80DC0E4
@@ -347,148 +363,3 @@ gUnknown_80DC0FC: @ 80DC0FC
         .byte 0x1a, 0x00, 0x10, 0x00
         .byte 0x10, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-        .string "pksdir0\0"
-        .align 2,0
-
-	.global gUnknown_80DC11C
-gUnknown_80DC11C: @ 80DC11C
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DC134
-gUnknown_80DC134: @ 80DC134
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x16, 0x00, 0x04, 0x00
-        .byte 0x06, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x16, 0x00, 0x0e, 0x00
-        .byte 0x06, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DC164
-gUnknown_80DC164: @ 80DC164
-        .string "Only four moves may be learned!\n"
-        .string "Will a move be forgotten?\0"
-        .align 2,0
-
-	.global gUnknown_80DC1A0
-gUnknown_80DC1A0: @ 80DC1A0
-        .string "{CENTER_ALIGN}Forget the move {COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1} and\n"
-        .string "{CENTER_ALIGN}any moves linked to it{COMMA} and learn the move\n"
-        .string "{CENTER_ALIGN}{COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}?\0"
-        .align 2,0
-
-	.global gUnknown_80DC1FC
-gUnknown_80DC1FC: @ 80DC1FC
-        .string "{CENTER_ALIGN}Forget the move {COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1}\n"
-        .string "{CENTER_ALIGN}and learn {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}?\0"
-        .align 2,0
-
-	.global gUnknown_80DC230
-gUnknown_80DC230: @ 80DC230
-        .string "Forget\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-
-	.global gUnknown_80DC240
-gUnknown_80DC240: @ 80DC240
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-        .global Data_80DC258
-        Data_80DC258:
-        .byte 0x01, 0x00, 0x0f, 0x00
-
-	.global gUnknown_80DC25C
-gUnknown_80DC25C: @ 80DC25C
-        .byte 0x00, 0x00
-        .byte 0x00, 0x00
-        .byte 0x06, 0x00
-        .byte 0x00, 0x00
-        .byte 0x02, 0x00
-        .byte 0x02, 0x00
-        .byte 0x12, 0x00
-        .byte 0x08, 0x00
-        .byte 0x08, 0x00
-        .byte 0x00, 0x00
-
-        .4byte Data_80DC258
-
-	.global gUnknown_80DC274
-gUnknown_80DC274: @ 80DC274
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x02, 0x00, 0x0f, 0x00
-        .byte 0x1a, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DC28C
-gUnknown_80DC28C: @ 80DC28C
-        .string "Moves: {COLOR_1 YELLOW}{ARG_POKEMON_0}{END_COLOR_TEXT_1} \0"
-        .align 2,0
-
-	.global gUnknown_80DC2A0
-gUnknown_80DC2A0: @ 80DC2A0
-        .string "{ARG_MOVE_ITEM_0}\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-
-	.global gUnknown_80DC2AC
-gUnknown_80DC2AC: @ 80DC2AC
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DC2C4
-gUnknown_80DC2C4: @ 80DC2C4
-        .byte 0x00, 0x00
-        .byte 0x00, 0x00
-        .byte 0x06, 0x00
-        .byte 0x00, 0x00
-        .byte 0x02, 0x00
-        .byte 0x02, 0x00
-        .byte 0x0f, 0x00
-        .byte 0x04, 0x00
-        .byte 0x06, 0x00
-        .byte 0x00, 0x00
-        .byte 0x00, 0x00
-        .byte 0x00, 0x00
-
-	.global gUnknown_80DC2DC
-gUnknown_80DC2DC: @ 80DC2DC
-        .string "Moves Page: %d/%d \0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-
-	.global gUnknown_80DC2F8
-gUnknown_80DC2F8: @ 80DC2F8
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DC310
-gUnknown_80DC310: @ 80DC310
-        .string "{ARG_POKEMON_0}\0"

@@ -20,12 +20,8 @@ extern const u8 *gUnknown_80D4920[];
 extern const u8 *gUnknown_80D4928[];
 extern const u8 *gUnknown_80D4970[];
 extern const u8 *gGulpinDialogue[2][25]; // 80D8888
-extern const UnkTextStruct2 gUnknown_80DC11C;
-extern const UnkTextStruct2 gUnknown_80DC134;
-extern const u8 gUnknown_80DC164[];
-extern const u8 gUnknown_80DC1A0[];
-extern const u8 gUnknown_80DC1FC[];
-extern const u8 gUnknown_80DC230[];
+
+#include "data/gulpin_shop.h"
 
 static void SetGulpinShopState(u32);
 
@@ -145,7 +141,7 @@ static void sub_801EA28(void)
 {
     switch (sGulpinShopWork->state) {
         case 0:
-            sub_801EE10(2, sGulpinShopWork->speciesNum, sGulpinShopWork->moves, 0, gUnknown_80DC164, 0);
+            sub_801EE10(2, sGulpinShopWork->speciesNum, sGulpinShopWork->moves, 0, sWillAMoveBeForgotten, 0);
             break;
         case 1:
             sub_801F1B0(TRUE, FALSE);
@@ -167,19 +163,15 @@ static void sub_801EA28(void)
                 case 0:
                 case 1:
                     if (sGulpinShopWork->isNextMoveLinked)
-                        sub_8014248(gGulpinDialogue[sGulpinShopWork->isAsleep][12], 0, 5, &sGulpinShopWork->unk28[0],
-                            &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12); // Forget the move and any moves linked to it and learn?
+                        sub_8014248(gGulpinDialogue[sGulpinShopWork->isAsleep][12], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
                     else
-                        sub_8014248(gGulpinDialogue[sGulpinShopWork->isAsleep][11], 0, 5, &sGulpinShopWork->unk28[0],
-                            &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12); // Forget the move and learn?
+                        sub_8014248(gGulpinDialogue[sGulpinShopWork->isAsleep][11], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
                     break;
                 case 2:
                     if (sGulpinShopWork->isNextMoveLinked)
-                        sub_8014248(gUnknown_80DC1A0, 0, 5, &sGulpinShopWork->unk28[0],
-                            &sGulpinShopWork->unk68, 4, 0, NULL, 32);
+                        sub_8014248(sForgetMoveAndLinkedOnes, 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, NULL, 32);
                     else
-                        sub_8014248(gUnknown_80DC1FC, 0, 5, &sGulpinShopWork->unk28[0],
-                            &sGulpinShopWork->unk68, 4, 0, NULL, 32);
+                        sub_8014248(sForgetMoveOnly, 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, NULL, 32);
                     break;
             }
             break;
@@ -194,14 +186,14 @@ static void sub_801EBC4(void)
     
     MemoryFill16(sGulpinShopWork->unk68, 0, sizeof(sGulpinShopWork->unk68));
     
-    sGulpinShopWork->unk28[which].text = gUnknown_80DC230; // "Forget"
+    sGulpinShopWork->unk28[which].text = sForget;
     sGulpinShopWork->unk28[which].menuAction = 2;
     
     if (!IsAnyMoveLinked(sGulpinShopWork->unk1E, sGulpinShopWork->moves) || (s32)sGulpinShopWork->unk20 >= 4)
         sGulpinShopWork->unk68[0] = 1;
     
     which++;
-    sGulpinShopWork->unk28[which].text = *gUnknown_80D4970; // "Info"
+    sGulpinShopWork->unk28[which].text = *gUnknown_80D4970;
     sGulpinShopWork->unk28[which].menuAction = 3;
     which++;
     sGulpinShopWork->unk28[which].text = NULL;
@@ -229,10 +221,10 @@ static void sub_801EC7C(void)
     which = 0;
     
     MemoryFill16(sGulpinShopWork->unk68, 0, sizeof(sGulpinShopWork->unk68));
-    sGulpinShopWork->unk28[which].text = *gUnknown_80D4920; // "Yes"
+    sGulpinShopWork->unk28[which].text = *gUnknown_80D4920;
     sGulpinShopWork->unk28[which].menuAction = 4;
     which++;
-    sGulpinShopWork->unk28[which].text = *gUnknown_80D4928; // "No"
+    sGulpinShopWork->unk28[which].text = *gUnknown_80D4928;
     sGulpinShopWork->unk28[which].menuAction = 5;
     which++;
     sGulpinShopWork->unk28[which].text = NULL;

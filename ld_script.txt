@@ -410,6 +410,8 @@ SECTIONS {
         src/code_801B3C0.o(.rodata);
         src/code_801B60C.o(.rodata);
         data/data_80DBD98.o(.rodata);
+        src/gulpin_shop.o(.rodata);
+        data/data_80DC240.o(.rodata);
         src/gulpin_shop_801FB50.o(.rodata);
         data/data_80DC464.o(.rodata);
         src/luminous_cave.o(.rodata);
