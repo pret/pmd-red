@@ -4,7 +4,7 @@
 #include "code_801EE10.h"
 #include "code_801EE10_1.h"
 #include "code_801EE10_mid.h"
-#include "code_8098DBC.h"
+#include "code_8098BDC.h"
 #include "constants/dungeon.h"
 #include "event_flag.h"
 #include "friend_area_action_menu.h"

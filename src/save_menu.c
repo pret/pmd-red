@@ -128,7 +128,6 @@ extern void sub_8038440();
 extern void sub_80384D0();
 extern void sub_8038830();
 extern void sub_80388C4(void);
-extern void sub_8014114();
 extern void sub_80140F8(void);
 
 void CreateSaveMenu(s32 currMenu)

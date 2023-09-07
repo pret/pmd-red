@@ -24,6 +24,7 @@
 #include "pokemon.h"
 #include "rescue_team_info.h"
 #include "save.h"
+#include "save_read.h"
 #include "sprite.h"
 #include "text1.h"
 #include "text2.h"

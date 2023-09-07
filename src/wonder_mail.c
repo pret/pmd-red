@@ -1,6 +1,6 @@
 #include "global.h"
 #include "constants/communication_error_codes.h"
-#include "save.h"
+#include "save_write.h"
 #include "pokemon.h"
 #include "items.h"
 #include "wonder_mail.h"
@@ -16,6 +16,7 @@
 #include "code_801EE10_1.h"
 #include "cpu.h"
 #include "code_80118A4.h"
+#include "save.h"
 
 extern WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 

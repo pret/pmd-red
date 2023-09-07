@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants/communication_error_codes.h"
 #include "save.h"
+#include "save_write.h"
 #include "pokemon.h"
 #include "items.h"
 #include "code_8094F88.h"

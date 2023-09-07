@@ -5,7 +5,7 @@
 #include "code_801B3C0.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
-#include "code_8098DBC.h"
+#include "code_8098BDC.h"
 #include "constants/dungeon.h"
 #include "event_flag.h"
 #include "items.h"

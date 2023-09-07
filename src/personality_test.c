@@ -3,7 +3,7 @@
 #include "code_80118A4.h"
 #include "code_8012A18_1.h"
 #include "code_80130A8.h"
-#include "code_8098DBC.h"
+#include "code_8098BDC.h"
 #include "constants/emotions.h"
 #include "constants/input.h"
 #include "constants/type.h"

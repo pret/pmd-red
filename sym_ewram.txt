@@ -747,43 +747,43 @@ gLevelCurrentData: /* 20384F0 (pokemon_mid) */
     .include "src/ground_main.o"
     .space 0x2
 
-gUnknown_20398C8: /* 20398C8 (code_8098DBC) */
+gUnknown_20398C8: /* 20398C8 (code_8098BDC) */
 	.space 0x10
 
-gUnknown_20398D8: /* 20398D8 (code_8098DBC) */
+gUnknown_20398D8: /* 20398D8 (code_8098BDC) */
 	.space 0x78
 
-gUnknown_2039950: /* 2039950 (code_8098468 / code_8098DBC) */
+gUnknown_2039950: /* 2039950 (code_8098468 / code_8098BDC) */
 	.space 0x8
 
-gUnknown_2039958: /* 2039958 (code_8098DBC) */
+gUnknown_2039958: /* 2039958 (code_8098BDC) */
 	.space 0x10
 
-gUnknown_2039968: /* 2039968 (code_8098DBC) */
+gUnknown_2039968: /* 2039968 (code_8098BDC) */
 	.space 0x10
 
-gUnknown_2039978: /* 2039978 (code_8098DBC) */
+gUnknown_2039978: /* 2039978 (code_8098BDC) */
 	.space 0x8
 
-gUnknown_2039980: /* 2039980 (code_8098DBC) */
+gUnknown_2039980: /* 2039980 (code_8098BDC) */
 	.space 0x10
 
-gUnknown_2039990: /* 2039990 (code_8098DBC) */
+gUnknown_2039990: /* 2039990 (code_8098BDC) */
 	.space 0x2
 
-gUnknown_2039992: /* 2039992 (code_8098DBC) */
+gUnknown_2039992: /* 2039992 (code_8098BDC) */
 	.space 0x6
 
-gUnknown_2039998: /* 2039998 (code_8098DBC) */
+gUnknown_2039998: /* 2039998 (code_8098BDC) */
 	.space 0x44
 
-gUnknown_20399DC: /* 20399DC (code_8098DBC) */
+gUnknown_20399DC: /* 20399DC (code_8098BDC) */
 	.space 0x2
 
-gUnknown_20399DE: /* 20399DE (code_8098DBC) */
+gUnknown_20399DE: /* 20399DE (code_8098BDC) */
 	.space 0x2
 
-gUnknown_20399E0: /* 20399E0 (code_8098DBC) */
+gUnknown_20399E0: /* 20399E0 (code_8098BDC) */
 	.space 0x8
 
 gUnknown_20399E8: /* 20399E8 (code_809D148) */

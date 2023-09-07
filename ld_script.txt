@@ -87,6 +87,10 @@ SECTIONS {
         src/code_80118A4.o(.text);
         src/debug.o(.text);
         src/save.o(.text);
+        src/save_read.o(.text);
+        src/save_write.o(.text);
+        src/quick_save_read.o(.text);
+        src/quick_save_write.o(.text);
         src/code_8012A18.o(.text);
         src/menu_input.o(.text);
         asm/code_80130A8.o(.text);
@@ -390,6 +394,10 @@ SECTIONS {
         data/data_80B9BB8.o(.rodata);
         src/debug.o(.rodata);
         src/save.o(.rodata);
+        src/save_read.o(.rodata);
+        src/save_write.o(.rodata);
+        src/quick_save_read.o(.rodata);
+        src/quick_save_write.o(.rodata);
         src/menu_input.o(.rodata);
         data/data_80D47B8.o(.rodata);
         src/kangaskhan_storage1.o(.rodata);

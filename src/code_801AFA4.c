@@ -2,7 +2,7 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801AFA4.h"
-#include "code_8098DBC.h"
+#include "code_8098BDC.h"
 #include "gulpin_shop.h"
 #include "memory.h"
 #include "moves.h"

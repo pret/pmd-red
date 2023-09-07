@@ -10,7 +10,7 @@
 #include "pokemon.h"
 #include "friend_rescue.h"
 #include "memory.h"
-#include "save.h"
+#include "save_write.h"
 #include "rescue_password_menu.h"
 #include "menu_input.h"
 #include "code_8094F88.h"

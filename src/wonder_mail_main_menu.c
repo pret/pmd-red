@@ -1,7 +1,7 @@
 #include "global.h"
 #include "constants/wonder_mail.h"
 #include "constants/communication_error_codes.h"
-#include "save.h"
+#include "save_write.h"
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"

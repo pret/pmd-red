@@ -2,7 +2,7 @@
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
 #include "code_801C620.h"
-#include "code_8098DBC.h"
+#include "code_8098BDC.h"
 #include "kangaskhan_storage1.h"
 #include "kecleon_bros4.h"
 #include "memory.h"

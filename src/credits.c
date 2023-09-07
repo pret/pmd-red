@@ -1,5 +1,5 @@
 #include "global.h"
-#include "code_8098DBC.h"
+#include "code_8098BDC.h"
 #include "event_flag.h"
 #include "input.h"
 #include "memory.h"

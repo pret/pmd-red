@@ -7,7 +7,7 @@
 #include "main_menu.h"
 #include "trade_items_menu.h"
 #include "memory.h"
-#include "save.h"
+#include "save_write.h"
 #include "menu_input.h"
 #include "text1.h"
 #include "text2.h"

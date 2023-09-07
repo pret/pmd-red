@@ -5,7 +5,7 @@
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
 #include "code_8097670.h"
-#include "code_8098DBC.h"
+#include "code_8098BDC.h"
 #include "constants/bg_music.h"
 #include "constants/colors.h"
 #include "constants/evolution_status.h"

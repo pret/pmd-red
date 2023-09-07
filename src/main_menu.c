@@ -14,7 +14,7 @@
 #include "save.h"
 #include "trade_items_menu.h"
 #include "constants/wonder_mail.h"
-#include "code_8098DBC.h"
+#include "code_8098BDC.h"
 
 // NOTE: 0x13 and 0x14
 // Communication Screen?

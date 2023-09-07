@@ -5,7 +5,7 @@
 #include "code_801AFA4.h"
 #include "code_801B3C0.h"
 #include "code_8023144.h"
-#include "code_8098DBC.h"
+#include "code_8098BDC.h"
 #include "constants/colors.h"
 #include "constants/input.h"
 #include "constants/iq_skill.h"
