@@ -7,6 +7,7 @@ errno: /* 203B034 */
 	.space 0x4
 
 ewramClearEnd:
+ewramClearEnd2:
 gTitlePaletteFile: /* 203B038 */
 	.space 0x4
 

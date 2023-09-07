@@ -21,6 +21,7 @@ EWRAM_DATA IntrCallback gIntrCallbacks[6] = {0};
 
 extern u8 ewram_start[];
 extern u8 ewramClearEnd[];
+extern u8 ewramClearEnd2[]; // Force a second storage in the asm
 extern u8 ewram2_end[];
 extern u8 iwram_start[];
 extern u8 iwramClearEnd[];
@@ -31,7 +32,7 @@ extern u8 unk_code_ram_end[];
 EWRAM_DATA_2 u8 gInterruptsEnabled = {0};
 
 // data_8270000.s
-extern const char gUnknown_8270000[];
+extern const u8 gUnknown_8270000[];
 // data_80B9BB8.s
 extern const u8 gUnknown_80B9BF1[];
 extern const IntrCallback gInitialIntrTable[6];
@@ -67,9 +68,9 @@ void AgbMain(void)
     if (ewram2_end - ewramClearEnd > 0)
         CpuCopy32(gUnknown_8270000, ewramClearEnd, ewram2_end - ewramClearEnd);
 
-    if (ewramClearEnd - ewram_start > 0) {
+    if (ewramClearEnd2 - ewram_start > 0) {
         memset(value, 0, 4);
-        CpuSet(&value, ewram_start, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (((ewramClearEnd - ewram_start) / 4) & 0x1FFFFF));
+        CpuSet(&value, ewram_start, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (((ewramClearEnd2 - ewram_start) / 4) & 0x1FFFFF));
     }
 
     if (unk_code_ram_end - unk_code_ram > 0)
