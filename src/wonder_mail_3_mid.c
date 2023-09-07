@@ -5,6 +5,7 @@
 #include "text2.h"
 #include "wonder_mail.h"
 #include "pokemon.h"
+#include "pokemon_mid.h"
 #include "rescue_team_info.h"
 #include "friend_area.h"
 #include "items.h"
@@ -108,7 +109,6 @@ extern u32 sub_802CE5C(u32);
 extern void sub_802CF14(void);
 extern u32 sub_802DEE0(void);
 extern void sub_802DF24(void);
-extern void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
 extern void sub_802F6FC(void);
 extern void ProceedToNextRewardSceneState(void);
 extern void sub_802F300(void);

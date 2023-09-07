@@ -6,8 +6,7 @@
 errno: /* 203B034 */
 	.space 0x4
 
-alt_203B038:
-
+ewramClearEnd:
 gTitlePaletteFile: /* 203B038 */
 	.space 0x4
 
@@ -137,35 +136,13 @@ gUnknown_203B200: /* 203B200 */
 	.space 0x4
 
 .include "src/felicity_bank.o"
-.include "src/kangaskhan_storage.o"
-
-gKecleonBrosWork: /* 203B210 */
-	.space 0x4
-
-gUnknown_203B214: /* 203B214 */
-	.space 0x4
-
-gUnknown_203B218: /* 203B218 */
-	.space 0x4
-
-gUnknown_203B21C: /* 203B21C */
-	.space 0x4
-
-gUnknown_203B220: /* 203B220 */
-	.space 0x4
-
-gUnknown_203B224: /* 203B224 */
-	.space 0x4
-
-gUnknown_203B228: /* 203B228 */
-	.space 0x2
-
-gUnknown_203B22A: /* 203B22A */
-	.space 0x2
-
-gUnknown_203B22C: /* 203B22C */
-	.space 0x4
-
+.include "src/kangaskhan_storage1.o"
+.include "src/kangaskhan_storage2.o"
+.include "src/kecleon_bros1.o"
+.include "src/kecleon_bros2.o"
+.include "src/kecleon_bros3.o"
+.include "src/kecleon_bros4.o"
+.include "src/code_801AFA4.o"
 .include "src/code_801B3C0.o"
 .include "src/code_801B60C.o"
 

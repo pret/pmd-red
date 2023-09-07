@@ -8,13 +8,7 @@ gUnknown_2000A88: /* 2000A88 (code / event_flag) */
 	.space 0x400
 
     .include "src/memory.o"
-
-	.align 4
-
-gMainHeapDescriptor: /* 2000EB0 */
-	.space 0x20
-
-gMainHeapFreeList: /* 2000ED0 */
+gMainHeapFreeList: /* 2000ED0 (memory) */
 	.space 0x300
 gMainHeap: /* 20011D0 (memory) */
 	.space 0x24000
@@ -59,73 +53,73 @@ gUnknown_2026E60: /* 2026E60 (code_800558C) */
 gUnknown_20270E8: /* 20270E8 (code_800558C) */
 	.space 0x288
 
-gUnknown_2027370: /* 2027370 */
+gUnknown_2027370: /* 2027370 (code_80130A8 / code_805D8C8 / code_80521D0 / code_8272724 / text / menu_input / text1 / text2) */
 	.space 0x48
 
-gUnknown_20273B8: /* 20273B8 */
+gUnknown_20273B8: /* 20273B8 (code_80130A8) */
 	.space 0xD8
 
-gCharmaps: /* 2027490 */
+gCharmaps: /* 2027490 (text / text1) */
 	.space 0x8
 
-gCharacterSpacing: /* 2027498 */
+gCharacterSpacing: /* 2027498 (text / text1 / text2) */
 	.space 0x2
 
-gUnknown_202749A: /* 202749A */
+gUnknown_202749A: /* 202749A (text / code_805D8C8) */
 	.space 0xB
 
-gUnknown_20274A5: /* 20274A5 */
+gUnknown_20274A5: /* 20274A5 (text / text1 / code_803D110) */
 	.space 0x1
 
-gUnknown_20274A6: /* 20274A6 */
+gUnknown_20274A6: /* 20274A6 (text) */
 	.space 0x6
 
-gCurrentCharmap: /* 20274AC */
+gCurrentCharmap: /* 20274AC (text / text1 / text2) */
 	.space 0x4
 
-gUnknown_20274B0: /* 20274B0 */
+gUnknown_20274B0: /* 20274B0 (text1) */
 	.space 0x4
 
-gUnknown_20274B4: /* 20274B4 */
+gUnknown_20274B4: /* 20274B4 (text1) */
 	.space 0x3B00
 
-gCharmapFiles: /* 202AFB4 */
+gCharmapFiles: /* 202AFB4 (text1) */
 	.space 0x8
 
-gUnknown_202AFBC: /* 202AFBC */
+gUnknown_202AFBC: /* 202AFBC [UNUSED] */
 	.space 0x4
 
-gUnknown_202AFC0: /* 202AFC0 */
+gUnknown_202AFC0: /* 202AFC0 (text1 / text2) */
 	.space 0x60
 
-gUnknown_202B020: /* 202B020 */
+gUnknown_202B020: /* 202B020 (text / text1) */
 	.space 0x4
 
-gUnknown_202B024: /* 202B024 */
+gUnknown_202B024: /* 202B024 (text / text1) */
 	.space 0x4
 
-gUnknown_202B028: /* 202B028 */
+gUnknown_202B028: /* 202B028 (text1 / text2) */
 	.space 0x8
 
-gUnknown_202B030: /* 202B030 */
+gUnknown_202B030: /* 202B030 (text1 / text2) */
 	.space 0x4
 
-gUnknown_202B034: /* 202B034 */
+gUnknown_202B034: /* 202B034 (text1 / text2) */
 	.space 0x4
 
-gUnknown_202B038: /* 202B038 */
+gUnknown_202B038: /* 202B038 (text1 / text2 / dungeon_map_access_1 / code_8009804 / code_8040094 / code_80521D0 / code_803D110 / code_80A26CC_1 / code_2) */
 	.space 0x800
 
-gUnknown_202B838: /* 202B838 */
+gUnknown_202B838: /* 202B838 [UNUSED] */
 	.space 0x800
 
-gUnknown_202C038: /* 202C038 */
+gUnknown_202C038: /* 202C038 (code_800DAC0 / code_80495E4) */
 	.space 0x800
 
-gUnknown_202C838: /* 202C838 */
+gUnknown_202C838: /* 202C838 (code_800DAC0 / code_80495E4) */
 	.space 0x720
 
-gUnknown_202CF58: /* 202CF58 */
+gUnknown_202CF58: /* 202CF58 (code_80130A8) */
 	.space 0xE0
 
 gUnknown_202D038: /* 202D038 */
@@ -170,10 +164,10 @@ gUnknown_202D2A0: /* 202D2A0 */
     .include "src/file_system.o"
     .include "src/main.o"
 
-gUnknown_202D608: /* 202D608 */
+gUnknown_202D608: /* 202D608 (reg_control / unused_vblank) */
 	.space 0x40
 
-gUnknown_202D648: /* 202D648 */
+gUnknown_202D648: /* 202D648 (reg_control / unused_vblank) */
 	.space 0x40
 
     .include "src/music.o"
@@ -182,204 +176,204 @@ gUnknown_202D648: /* 202D648 */
     .include "src/bg_control.o"
 	.space 0x140
 
-gBldAlpha: /* 202D7FA */
+gBldAlpha: /* 202D7FA (bg_control / cpu) */
 	.space 0x2
 
-gBldCnt: /* 202D7FC */
+gBldCnt: /* 202D7FC (bg_control / cpu / main / reg_control) */
 	.space 0x2
 
-gUnknown_202D7FE: /* 202D7FE */
+gUnknown_202D7FE: /* 202D7FE (bg_control / main / reg_control) */
 	.space 0x2
 
-gUnknown_202D800: /* 202D800 */
+gUnknown_202D800: /* 202D800 (cpu) */
 	.space 0x8
 
-gUnknown_202D808: /* 202D808 */
+gUnknown_202D808: /* 202D808 (code_800D090) */
 	.space 0x108
 
-gUnknown_202D910: /* 202D910 */
+gUnknown_202D910: /* 202D910 (code_800D090) */
 	.space 0x4
 
-gUnknown_202D914: /* 202D914 */
+gUnknown_202D914: /* 202D914 (code_800D090) */
 	.space 0x20C
 
-gUnknown_202DB20: /* 202DB20 */
+gUnknown_202DB20: /* 202DB20 (code_800D090) */
 	.space 0x10
 
-gUnknown_202DB30: /* 202DB30 */
+gUnknown_202DB30: /* 202DB30 (code_800D090) */
 	.space 0x20
 
-gUnknown_202DB50: /* 202DB50 */
+gUnknown_202DB50: /* 202DB50 (code_800D090) */
 	.space 0x8
 
-gUnknown_202DB58: /* 202DB58 */
+gUnknown_202DB58: /* 202DB58 (code_800D090) */
 	.space 0x8
 
-gUnknown_202DB60: /* 202DB60 */
+gUnknown_202DB60: /* 202DB60 (code_800D090) */
 	.space 0x8
 
-gUnknown_202DB68: /* 202DB68 */
+gUnknown_202DB68: /* 202DB68 (code_800D090) */
 	.space 0x4
 
-gUnknown_202DB6C: /* 202DB6C */
+gUnknown_202DB6C: /* 202DB6C (code_800D090) */
 	.space 0x4
 
-gUnknown_202DB70: /* 202DB70 */
+gUnknown_202DB70: /* 202DB70 (code_800D090) */
 	.space 0x4
 
-gUnknown_202DB74: /* 202DB74 */
+gUnknown_202DB74: /* 202DB74 (code_800D090) */
 	.space 0x4
 
-gUnknown_202DB78: /* 202DB78 */
+gUnknown_202DB78: /* 202DB78 (code_800D090) */
 	.space 0x40
 
-gUnknown_202DBB8: /* 202DBB8 */
+gUnknown_202DBB8: /* 202DBB8 (code_800D090 / data_80B9BB8) */
 	.space 0x140
 
-gUnknown_202DCF8: /* 202DCF8 */
+gUnknown_202DCF8: /* 202DCF8 (code_800D090 / arm_func) */
 	.space 0x120
 
-gUnknown_202DE18: /* 202DE18 */
+gUnknown_202DE18: /* 202DE18 (code_800DAC0) */
 	.space 0x1
 
-gUnknown_202DE19: /* 202DE19 */
+gUnknown_202DE19: /* 202DE19 (code_800DAC0) */
 	.space 0x3
 
-gUnknown_202DE1C: /* 202DE1C */
+gUnknown_202DE1C: /* 202DE1C (code_80118A4) */
 	.space 0x4
 
-gUnknown_202DE20: /* 202DE20 */
+gUnknown_202DE20: /* 202DE20 (code_80118A4) */
 	.space 0x2
 
-gUnknown_202DE22: /* 202DE22 */
+gUnknown_202DE22: /* 202DE22 (code_80118A4) */
 	.space 0x2
 
-gUnknown_202DE24: /* 202DE24 */
+gUnknown_202DE24: /* 202DE24 (code_80118A4) */
 	.space 0x4
 
-gUnknown_202DE28: /* 202DE28 */
+gUnknown_202DE28: /* 202DE28 (save) */
 	.space 0x4
 	.align 4
 
 gUnknown_202DE30: /* 202DE30 */
 	.space 0x28
 
-/* Seems to be a general u8 buffer for text, mostly used with item names. Capacity of 80 chars..? */
+/* Seems to be a general u8 buffer for text, mostly used with item names */
 gUnknown_202DE58: /* 202DE58 */
-	.space 0x50
+	.space 80
 
 gUnknown_202DEA8: /* 202DEA8 */
-	.space 0xF0
+	.space 240
 
-gAvailablePokemonNames: /* 202DF98 */
-	.space 0x50
+gAvailablePokemonNames: /* 202DF98 gAvailablePokemonNames[80][] */
+	.space 80
 
-gUnknown_202DFE8: /* 202DFE8 */
-	.space 0x50
+gUnknown_202DFE8: /* 202DFE8 (code_805D8C8 / code_806CD90 / code_806E8B0 / code_8073CF0 / code_80521D0 / code_8057824 / code_8077274_1 / gulpin_shop_1 / status_actions) */
+	.space 80
 
-gUnknown_202E038: /* 202E038  ({ARG_POKEMON_2}) */
-	.space 0x50
+gUnknown_202E038: /* 202E038 (code_8057824_1 / code_8086A3C / code_808417C / wonder_mail_3_mid) ({ARG_POKEMON_2}) */
+	.space 80
 
-gUnknown_202E088: /* 202E088  ({ARG_POKEMON_3})? */
-	.space 0xA0
+gUnknown_202E088: /* 202E088 (code_8057824_1 / code_806E8B0 / code_808417C / wonder_mail_3_mid) [{ARG_POKEMON_3}]? */
+	.space 160
 
-gUnknown_202E128: /* 202E128 */
-	.space 0xA0
+gUnknown_202E128: /* 202E128 (gulpin_shop_1) */
+	.space 160
 
-gUnknown_202E1C8: /* 202E1C8 */
-	.space 0x50
+gUnknown_202E1C8: /* 202E1C8 (code_801AFA4 / felicity_bank / gulpin_shop_1 / kangaskhan_storage / kecleon_bros1 / makuhita_dojo1 / wigglytuff_shop / wonder_mail_802DF88) */
+	.space 80
 
-gUnknown_202E218: /* 202E218 */
-	.space 0xA0
+gUnknown_202E218: /* 202E218 (code_801AFA4) */
+	.space 160
 
-gPlayerName: /* 202E2B8 */
-	.space 0x320
+gPlayerName: /* 202E2B8 (ground_script / code_8098BDC / luminous_cave / makuhita_dojo1) */
+	.space 800
 
-gUnknown_202E5D8: /* 202E5D8 */
-	.space 0x50
+gUnknown_202E5D8: /* 202E5D8 (code_80130A8 / code_8098BDC / code_80521D0 / felicity_bank / friend_rescue / gulpin_shop_1 / kangaskhan_storage / kecleon_bros1 / makuhita_dojo1 / pokemon_news / post_office_guide1 / thank_you_wonder_mail / wigglytuff_shop / wonder_mail_2 / wonder_mail_3_mid / wonder_mail_802DF88 / wonder_mail */
+	.space 80
 
-gUnknown_202E628: /* 202E628 */
+gUnknown_202E628: /* 202E628 (code_80130A8 / code_806E8B0 / ground_script / wigglytuff_shop / wonder_mail_3_mid) */
 	.space 0xB8
 
-gUnknown_202E6E0: /* 202E6E0 */
+gUnknown_202E6E0: /* 202E6E0 (code_80130A8) */
 	.space 0x8
 
-gTeamName: /* 202E6E8 */
-	.space 0x50
+gTeamName: /* 202E6E8 (code_80130A8) */
+	.space 80
 
-gUnknown_202E738: /* 202E738 */
+gUnknown_202E738: /* 202E738 (code_80130A8) */
 	.space 0x4
 
-gUnknown_202E73C: /* 202E73C */
+gUnknown_202E73C: /* 202E73C (code_80130A8) */
 	.space 0x4
 
-gUnknown_202E740: /* 202E740 */
+gUnknown_202E740: /* 202E740 (code_80130A8) */
 	.space 0x4
 
-gUnknown_202E744: /* 202E744 */
+gUnknown_202E744: /* 202E744 (code_80130A8) */
 	.space 0x4
 
-gUnknown_202E748: /* 202E748 */
+gUnknown_202E748: /* 202E748 (code_80130A8) */
 	.space 0x34
 
-gUnknown_202E77C: /* 202E77C */
+gUnknown_202E77C: /* 202E77C (code_80130A8) */
 	.space 0x4
 
-gUnknown_202E780: /* 202E780 */
+gUnknown_202E780: /* 202E780 (code_80130A8) */
 	.space 0x4
 
-gUnknown_202E784: /* 202E784 */
+gUnknown_202E784: /* 202E784 (code_80130A8) */
 	.space 0x4
 
-gUnknown_202E788: /* 202E788 */
+gUnknown_202E788: /* 202E788 (code_80130A8) */
 	.space 0x4
 
-gUnknown_202E78C: /* 202E78C */
+gUnknown_202E78C: /* 202E78C (code_80130A8) */
 	.space 0x4
 
-gUnknown_202E790: /* 202E790 */
+gUnknown_202E790: /* 202E790 (code_80130A8) */
 	.space 0x1
 
-gUnknown_202E791: /* 202E791 */
+gUnknown_202E791: /* 202E791 (code_80130A8) */
 	.space 0x3
 
-gUnknown_202E794: /* 202E794 */
+gUnknown_202E794: /* 202E794 (code_80130A8) */
 	.space 0x4
 
-gUnknown_202E798: /* 202E798  (on screen dialogue text) */
+gUnknown_202E798: /* 202E798 (code_80130A8) [on screen dialogue text] */
 	.space 0x3E8
 
-gUnknown_202EB80: /* 202EB80 */
+gUnknown_202EB80: /* 202EB80 (code_80130A8) */
 	.space 0x40
 
-gUnknown_202EBC0: /* 202EBC0 */
+gUnknown_202EBC0: /* 202EBC0 (code_80130A8) */
 	.space 0x50
 
-gUnknown_202EC10: /* 202EC10 */
+gUnknown_202EC10: /* 202EC10 (code_80130A8) */
 	.space 0x4
 
-gUnknown_202EC14: /* 202EC14 */
+gUnknown_202EC14: /* 202EC14 (code_80130A8) */
 	.space 0x4
 
-gUnknown_202EC18: /* 202EC18 */
+gUnknown_202EC18: /* 202EC18 (code_80130A8) */
 	.space 0x4
 
-gUnknown_202EC1C: /* 202EC1C */
+gUnknown_202EC1C: /* 202EC1C (code_80130A8) */
 	.space 0x4
 
-gUnknown_202EC20: /* 202EC20 */
+gUnknown_202EC20: /* 202EC20 (code_80130A8) */
 	.space 0x8
 
-gUnknown_202EC28: /* 202EC28 */
+gUnknown_202EC28: /* 202EC28 (code_80130A8) */
 	.space 0x10
 
-gUnknown_202EC38: /* 202EC38 */
+gUnknown_202EC38: /* 202EC38 (other_menus) */
 	.space 0x8
 
-gUnknown_202EC40: /* 202EC40 */
+gUnknown_202EC40: /* 202EC40 (other_menus / other_menus_1) */
 	.space 0x8
 
-gUnknown_202EC48: /* 202EC48 */
+gUnknown_202EC48: /* 202EC48 (other_menus_1) */
 	.space 0x4
 
     .include "src/rescue_password_menu.o"
@@ -427,58 +421,58 @@ gUnknown_202EDC8: /* 202EDC8 */
 gUnknown_202EDCC: /* 202EDCC */
 	.space 0x4
 
-gUnknown_202EDD0: /* 202EDD0 */
+gUnknown_202EDD0: /* 202EDD0 (code_803D110 / code_804AFAC / code_8040094) */
 	.space 0x4
 
-gUnknown_202EDD4: /* 202EDD4 */
+gUnknown_202EDD4: /* 202EDD4 (code_803D110) */
 	.space 0x4
 
-gUnknown_202EDD8: /* 202EDD8 */
+gUnknown_202EDD8: /* 202EDD8 (code_803D110) */
 	.space 0x4
 
-gUnknown_202EDDC: /* 202EDDC */
+gUnknown_202EDDC: /* 202EDDC (code_803D110) */
 	.space 0xC
 
-gUnknown_202EDE8: /* 202EDE8 */
+gUnknown_202EDE8: /* 202EDE8 (code_803D110) */
 	.space 0x14
 
-gUnknown_202EDFC: /* 202EDFC */
+gUnknown_202EDFC: /* 202EDFC (code_803D110) */
 	.space 0x4
 
-gUnknown_202EE00: /* 202EE00 */
+gUnknown_202EE00: /* 202EE00 (code_8040094 / code_805D8C8) */
 	.space 0x1
 
-gUnknown_202EE01: /* 202EE01 */
+gUnknown_202EE01: /* 202EE01 (code_8040094 / code_80521D0) */
 	.space 0x1
 
-gUnknown_202EE02: /* 202EE02 */
+gUnknown_202EE02: /* 202EE02 (code_8040094) */
 	.space 0x2
 
-gUnknown_202EE04: /* 202EE04 */
+gUnknown_202EE04: /* 202EE04 (code_8040094) */
 	.space 0x4
 
-gUnknown_202EE08: /* 202EE08 */
+gUnknown_202EE08: /* 202EE08 (code_8040094) */
 	.space 0x4
 
-gUnknown_202EE0C: /* 202EE0C */
+gUnknown_202EE0C: /* 202EE0C (code_805D8C8_1 / code_8069E0C) */
 	.space 0x4
 
 gUnknown_202EE10: /* 202EE10 */
 	.space 0x28
 
-gUnknown_202EE38: /* 202EE38 */
+gUnknown_202EE38: /* 202EE38 (code_805D8C8) */
 	.space 0x1
 
-gUnknown_202EE39: /* 202EE39 */
+gUnknown_202EE39: /* 202EE39 (code_805D8C8) */
 	.space 0x1
 
-gUnknown_202EE3A: /* 202EE3A */
+gUnknown_202EE3A: /* 202EE3A (code_805D8C8) */
 	.space 0xA
 
-gUnknown_202EE44: /* 202EE44 */
+gUnknown_202EE44: /* 202EE44 (code_805D8C8 / code_8044CC8) */
 	.space 0x28
 
-gUnknown_202EE6C: /* 202EE6C */
+gUnknown_202EE6C: /* 202EE6C (code_805D8C8 / code_8044CC8) */
 	.space 0x4
 
 gUnknown_202EE70: /* 202EE70 */
@@ -493,109 +487,109 @@ gDungeonPaletteFile: /* 202EE88 */
 gUnknown_202EE8C: /* 202EE8C */
 	.space 0x300
 
-gUnknown_202F18C: /* 202F18C */
+gUnknown_202F18C: /* 202F18C (dungeon_map_access) */
 	.space 0x4
 
-gUnknown_202F190: /* 202F190 */
+gUnknown_202F190: /* 202F190 (dungeon_map_access) */
 	.space 0x18
 
-gUnknown_202F1A8: /* 202F1A8 */
+gUnknown_202F1A8: /* 202F1A8 (code_804AFAC / code_80428A0) */
 	.space 0x1
 
-gUnknown_202F1A9: /* 202F1A9 */
+gUnknown_202F1A9: /* 202F1A9 (code_804AFAC) */
 	.space 0x1
 
-gUnknown_202F1AA: /* 202F1AA */
+gUnknown_202F1AA: /* 202F1AA (code_804AFAC) */
 	.space 0x1
 
-gUnknown_202F1AB: /* 202F1AB */
+gUnknown_202F1AB: /* 202F1AB (code_804AFAC) */
 	.space 0x1
 
-gUnknown_202F1AC: /* 202F1AC */
+gUnknown_202F1AC: /* 202F1AC (code_804AFAC) */
 	.space 0x1
 
-gUnknown_202F1AD: /* 202F1AD */
+gUnknown_202F1AD: /* 202F1AD (code_804AFAC) */
 	.space 0x1
 
-gUnknown_202F1AE: /* 202F1AE */
+gUnknown_202F1AE: /* 202F1AE (code_804AFAC) */
 	.space 0x2
 
-gUnknown_202F1B0: /* 202F1B0 */
+gUnknown_202F1B0: /* 202F1B0 (code_804AFAC) */
 	.space 0x2
 
-gUnknown_202F1B2: /* 202F1B2 */
+gUnknown_202F1B2: /* 202F1B2 (code_804AFAC) */
 	.space 0x2
 
-gUnknown_202F1B4: /* 202F1B4 */
+gUnknown_202F1B4: /* 202F1B4 (code_804AFAC) */
 	.space 0x4
 
-gUnknown_202F1B8: /* 202F1B8 */
+gUnknown_202F1B8: /* 202F1B8 (code_804AFAC) */
 	.space 0x10
 
-gUnknown_202F1C8: /* 202F1C8 */
+gUnknown_202F1C8: /* 202F1C8 (code_804AFAC) */
 	.space 0x4
 
-gUnknown_202F1CC: /* 202F1CC */
+gUnknown_202F1CC: /* 202F1CC (code_804AFAC) */
 	.space 0x4
 
-gUnknown_202F1D0: /* 202F1D0 */
+gUnknown_202F1D0: /* 202F1D0 (code_804AFAC) */
 	.space 0x4
 
-gUnknown_202F1D4: /* 202F1D4 */
+gUnknown_202F1D4: /* 202F1D4 (code_804AFAC) */
 	.space 0x4
 
-gUnknown_202F1D8: /* 202F1D8 */
+gUnknown_202F1D8: /* 202F1D8 (code_804AFAC) */
 	.space 0x4
 
-gUnknown_202F1DC: /* 202F1DC */
+gUnknown_202F1DC: /* 202F1DC (code_804AFAC) */
 	.space 0x4
 
-gUnknown_202F1E0: /* 202F1E0 */
+gUnknown_202F1E0: /* 202F1E0 (code_804AFAC) */
 	.space 0x1
 
-gUnknown_202F1E1: /* 202F1E1 */
+gUnknown_202F1E1: /* 202F1E1 (code_804AFAC) */
 	.space 0x7
 
-gUnknown_202F1E8: /* 202F1E8 */
+gUnknown_202F1E8: /* 202F1E8 (code_804AFAC / code_80521D0) */
 	.space 0x8
 
-gUnknown_202F1F0: /* 202F1F0 */
+gUnknown_202F1F0: /* 202F1F0 (code_80521D0) */
 	.space 0x8
 
-gUnknown_202F1F8: /* 202F1F8 */
+gUnknown_202F1F8: /* 202F1F8 (code_80521D0) */
 	.space 0x4
 
-gUnknown_202F1FC: /* 202F1FC */
+gUnknown_202F1FC: /* 202F1FC (code_80521D0) */
 	.space 0x4
 
-gUnknown_202F200: /* 202F200 */
+gUnknown_202F200: /* 202F200 (code_80521D0) */
 	.space 0x8
 
-gUnknown_202F208: /* 202F208 */
+gUnknown_202F208: /* 202F208 (code_80521D0 / code_805D8C8) */
 	.space 0x4
 
-gUnknown_202F20C: /* 202F20C */
+gUnknown_202F20C: /* 202F20C (code_80521D0) */
 	.space 0x4
 
-gUnknown_202F210: /* 202F210 */
+gUnknown_202F210: /* 202F210 (code_80521D0 / code_805A120) */
 	.space 0x4
 
-gUnknown_202F214: /* 202F214 */
+gUnknown_202F214: /* 202F214 (code_80521D0 / code_805A120) */
 	.space 0x4
 
-gUnknown_202F218: /* 202F218 */
+gUnknown_202F218: /* 202F218 (code_80521D0 / code_805A120) */
 	.space 0x1
 
-gUnknown_202F219: /* 202F219 */
+gUnknown_202F219: /* 202F219 (code_80521D0 / code_8057824) */
 	.space 0x1
 
-gUnknown_202F21A: /* 202F21A */
+gUnknown_202F21A: /* 202F21A (code_80521D0 / code_8057824) */
 	.space 0x2
 
-gUnknown_202F21C: /* 202F21C */
+gUnknown_202F21C: /* 202F21C (code_80521D0 / code_8057824) */
 	.space 0x4
 
-gUnknown_202F220: /* 202F220 */
+gUnknown_202F220: /* 202F220 (code_80521D0 / code_8057824) */
 	.space 0x1
 
 gUnknown_202F221: /* 202F221 */
@@ -676,81 +670,77 @@ gUnknown_202F30C: /* 202F30C */
 gUnknown_202F310: /* 202F310 */
 	.space 0x4
 
-gWalkableTileToCrossableTerrain: /* 202F314 */
+gWalkableTileToCrossableTerrain: /* 202F314 (dungeon_map_access / dungeon_movement) */
 	.space 0x8
 
-gUnknown_202F31C: /* 202F31C */
+gUnknown_202F31C: /* 202F31C (code_80718D8) */
 	.space 0x8
 
-gUnknown_202F324: /* 202F324 */
+gUnknown_202F324: /* 202F324 (code_80718D8) */
 	.space 0x8
 
-gUnknown_202F32C: /* 202F32C */
+gUnknown_202F32C: /* 202F32C (code_8072CF4 / code_80428A0 / code_8069E0C) */
 	.space 0x1
 
-gUnknown_202F32D: /* 202F32D */
+gUnknown_202F32D: /* 202F32D (code_8072CF4 / code_8073CF0) */
 	.space 0x3
 
-gPotentialItemTargetDirections: /* 202F330 */
+gPotentialItemTargetDirections: /* 202F330 (dungeon_ai_items) */
 	.space 0x20
 
-gTargetAhead: /* 202F350 */
+gTargetAhead: /* 202F350 (dungeon_ai_items) */
 	.space 0x8
 
-gPotentialItemTargetWeights: /* 202F358 */
+gPotentialItemTargetWeights: /* 202F358 (dungeon_ai_items) */
 	.space 0x20
 
-gUnknown_202F378: /* 202F378 */
+gUnknown_202F378: /* 202F378 (code_8073CF0) */
 	.space 0x8
 
-gCanAttackInDirection: /* 202F380 */
+gCanAttackInDirection: /* 202F380 (dungeon_ai_attack) */
 	.space 0x8
 
-gPotentialAttackTargetDirections: /* 202F388 */
+gPotentialAttackTargetDirections: /* 202F388 (dungeon_ai_attack) */
 	.space 0x8
 
-gPotentialAttackTargetWeights: /* 202F390 */
+gPotentialAttackTargetWeights: /* 202F390 (dungeon_ai_attack) */
 	.space 0x20
 
-gPotentialTargets: /* 202F3B0 */
+gPotentialTargets: /* 202F3B0 (dungeon_ai_attack) */
 	.space 0x20
 
-gUnknown_202F3D0: /* 202F3D0 */
+gUnknown_202F3D0: /* 202F3D0 (code_80869E4) */
 	.space 0x8
 
-gUnknown_202F3D8: /* 202F3D8 */
+gUnknown_202F3D8: /* 202F3D8 (code_8085B0C) */
 	.space 0x8
 
-gMonsterParameters: /* 202F3E0 */
+gMonsterParameters: /* 202F3E0 (pokemon / pokemon_mid) */
 	.space 0x4
 
-gMonsterParametersFile: /* 202F3E4 */
+gMonsterParametersFile: /* 202F3E4 (pokemon) */
 	.space 0x4
 
-gUnknown_202F3E8: /* 202F3E8 */
+gUnknown_202F3E8: /* 202F3E8 (pokemon_2 / pokemon_3) */
 	.space 0x18
 
 gRecruitedPokemon: /* 202F400 */
 	.space 0x90E8
 
-gLevelCurrentPokeId: /* 20384E8 */
+gLevelCurrentPokeId: /* 20384E8 (pokemon / pokemon_mid) */
 	.space 0x8
 
-gLevelCurrentData: /* 20384F0 */
+gLevelCurrentData: /* 20384F0 (pokemon_mid) */
 	.space 0x4B0
 
     .include "src/items.o"
-
     .include "src/rescue_team_info.o"
 	.space 0x4
 
     .include "src/friend_area.o"
-    .space 0x2
-
     .include "src/moves.o"
     .include "src/game_options.o"
     .include "src/play_time.o"
-
     .include "src/code_8094F88.o"
     .space 0x4
     .include "src/code_80958E8.o"
@@ -762,103 +752,103 @@ gLevelCurrentData: /* 20384F0 */
     .include "src/ground_main.o"
     .space 0x2
 
-gUnknown_20398C8: /* 20398C8 */
+gUnknown_20398C8: /* 20398C8 (code_8098DBC) */
 	.space 0x10
 
-gUnknown_20398D8: /* 20398D8 */
+gUnknown_20398D8: /* 20398D8 (code_8098DBC) */
 	.space 0x78
 
-gUnknown_2039950: /* 2039950 */
+gUnknown_2039950: /* 2039950 (code_8098468 / code_8098DBC) */
 	.space 0x8
 
-gUnknown_2039958: /* 2039958 */
+gUnknown_2039958: /* 2039958 (code_8098DBC) */
 	.space 0x10
 
-gUnknown_2039968: /* 2039968 */
+gUnknown_2039968: /* 2039968 (code_8098DBC) */
 	.space 0x10
 
-gUnknown_2039978: /* 2039978 */
+gUnknown_2039978: /* 2039978 (code_8098DBC) */
 	.space 0x8
 
-gUnknown_2039980: /* 2039980 */
+gUnknown_2039980: /* 2039980 (code_8098DBC) */
 	.space 0x10
 
-gUnknown_2039990: /* 2039990 */
+gUnknown_2039990: /* 2039990 (code_8098DBC) */
 	.space 0x2
 
-gUnknown_2039992: /* 2039992 */
+gUnknown_2039992: /* 2039992 (code_8098DBC) */
 	.space 0x6
 
-gUnknown_2039998: /* 2039998 */
+gUnknown_2039998: /* 2039998 (code_8098DBC) */
 	.space 0x44
 
-gUnknown_20399DC: /* 20399DC */
+gUnknown_20399DC: /* 20399DC (code_8098DBC) */
 	.space 0x2
 
-gUnknown_20399DE: /* 20399DE */
+gUnknown_20399DE: /* 20399DE (code_8098DBC) */
 	.space 0x2
 
-gUnknown_20399E0: /* 20399E0 */
+gUnknown_20399E0: /* 20399E0 (code_8098DBC) */
 	.space 0x8
 
-gUnknown_20399E8: /* 20399E8 */
+gUnknown_20399E8: /* 20399E8 (code_809D148) */
 	.space 0x14
 
-gUnknown_20399FC: /* 20399FC */
+gUnknown_20399FC: /* 20399FC (code_809D148) */
 	.space 0x34
 
-gUnknown_2039A30: /* 2039A30 */
+gUnknown_2039A30: /* 2039A30 (code_809D148 / ground_script) */
 	.space 0x2
 
-gUnknown_2039A32: /* 2039A32 */
+gUnknown_2039A32: /* 2039A32 (code_809D148 / ground_script) */
 	.space 0x2
 
-gUnknown_2039A34: /* 2039A34 */
+gUnknown_2039A34: /* 2039A34 (code_809D148 / ground_script) */
 	.space 0x2
 
-gUnknown_2039A36: /* 2039A36 */
+gUnknown_2039A36: /* 2039A36 (code_809D148 / ground_script) */
 	.space 0x2
 
-gUnknown_2039A38: /* 2039A38 */
+gUnknown_2039A38: /* 2039A38 (code_809D148 / ground_script) */
 	.space 0x88
 
-gUnknown_2039AC0: /* 2039AC0 */
+gUnknown_2039AC0: /* 2039AC0 (code_809D148 / ground_script) */
 	.space 0x88
 
-gUnknown_2039B48: /* 2039B48 */
+gUnknown_2039B48: /* 2039B48 (code_809D148 / ground_script) */
 	.space 0x208
 
-gUnknown_2039D50: /* 2039D50 */
+gUnknown_2039D50: /* 2039D50 (ground_script) */
 	.space 0x48
 
-gUnknown_2039D98: /* 2039D98 (seems to be storage for strings.. used for both Team Name and Player Name) */
+gUnknown_2039D98: /* 2039D98 (ground_script) (seems to be storage for strings.. used for both Team Name and Player Name) */
 	.space 0xC
 
-gUnknown_2039DA4: /* 2039DA4 */
+gUnknown_2039DA4: /* 2039DA4 (ground_script) */
 	.space 0x4
 
-gUnknown_2039DA8: /* 2039DA8 */
+gUnknown_2039DA8: /* 2039DA8 (ground_script) */
 	.space 0x8
 
-gUnknown_2039DB0: /* 2039DB0 [unkStruct_2039DB0] */
+gUnknown_2039DB0: /* 2039DB0 (ground_sprite) [unkStruct_2039DB0] */
 	.space 0x10
 
-gUnknown_2039DC0: /* 2039DC0 [unkStruct_2039DB0] */
+gUnknown_2039DC0: /* 2039DC0 (ground_sprite) [unkStruct_2039DB0] */
 	.space 0xC
 
-gUnknown_2039DCC: /* 2039DCC */
+gUnknown_2039DCC: /* 2039DCC (ground_sprite) */
 	.space 0x2
 
-gUnknown_2039DCE: /* 2039DCE */
+gUnknown_2039DCE: /* 2039DCE (ground_sprite) */
 	.space 0x2
 
-gUnknown_2039DD0: /* 2039DD0 */
+gUnknown_2039DD0: /* 2039DD0 (ground_sprite) */
 	.space 0x4
 
-gUnknown_2039DD4: /* 2039DD4 */
+gUnknown_2039DD4: /* 2039DD4 (ground_sprite) */
 	.space 0x4
 
-gUnknown_2039DD8: /* 2039DD8 */
+gUnknown_2039DD8: /* 2039DD8 (ground_sprite) */
 	.space 0x8
 
     .include "src/code_80A7714.o"

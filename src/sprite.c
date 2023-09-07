@@ -4,7 +4,13 @@
 #include "sprite.h"
 
 static EWRAM_DATA u16 sOAMSpriteCount; // Written to but never read
+#ifndef NONMATCHING
+UNUSED // TODO: Remove the "UNUSED" attribute after sub_8004EA8 is done
+#endif
 static EWRAM_DATA s16 sUnknown_2025672[8];
+#ifndef NONMATCHING
+UNUSED // TODO: Remove the "UNUSED" attribute after sub_8004EA8 is done
+#endif
 static EWRAM_DATA s16 sUnknown_2025682[9];
 static EWRAM_DATA Position sUnknown_2025694;
 static EWRAM_DATA u32 sUnknown_2025698;

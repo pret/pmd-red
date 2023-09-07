@@ -10,7 +10,7 @@
 #include "constants/colors.h"
 #include "constants/evolution_status.h"
 #include "input.h"
-#include "kecleon_bros.h"
+#include "kecleon_bros4.h"
 #include "luminous_cave.h"
 #include "memory.h"
 #include "menu_input.h"
@@ -21,7 +21,6 @@
 #include "text2.h"
 
 extern u8 gAvailablePokemonNames[]; // 202DF98
-extern u8 gUnknown_202DFE8[];
 extern u8 gPlayerName[]; // 202E2B8
 
 EWRAM_DATA_2 struct unkStruct_203B2B0 *gUnknown_203B2B0 = {0};
@@ -242,34 +241,34 @@ static void UpdateLuminousCaveDialogue(void)
             sub_8014248(sLuminousCaveGiveItem,0,gUnknown_203B2B0->menuAction2,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
             break;
         case 6:
-            sub_801A5D8(2,3,0,10);
+            sub_801A5D8(2,3,NULL,10);
             break;
         case 7:
-            sub_801A8D0(1);
+            sub_801A8D0(TRUE);
             break;
         case LUMINOUS_CAVE_GIVE_ITEM_2:
             sub_8024DBC();
             sub_8014248(sLuminousCaveGiveAnotherItem,0,gUnknown_203B2B0->menuAction2,gUnknown_203B2B0->unk34,gUnknown_203B2B0->unk74,4,0,0,5);
             break;
-        case 0xb:
-            sub_801A5D8(2,3,0,10);
+        case 11:
+            sub_801A5D8(2,3,NULL,10);
             sub_801AEE4(gUnknown_203B2B0->evoItem1_InvIndex,1);
             sub_801A9E0();
             break;
-        case 0xc:
-            sub_801A8D0(1);
+        case 12:
+            sub_801A8D0(TRUE);
             sub_801AEE4(gUnknown_203B2B0->evoItem1_InvIndex,1);
             sub_801A9E0();
             break;
         case 8:
-        case 0xd:
+        case 13:
             sub_801A9E0();
             sub_8024E30();
             sub_8012D60(&gUnknown_203B2B0->unk84,gUnknown_203B2B0->unk34,0,gUnknown_203B2B0->unk74,
                         gUnknown_203B2B0->menuAction3,2);
             break;
         case 9:
-        case 0xe:
+        case 14:
             sub_801B3C0(&gUnknown_203B2B0->chosenItem);
             break;
         case LUMINOUS_CAVE_LACK_WHAT_NEEDED:

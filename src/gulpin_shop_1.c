@@ -11,6 +11,7 @@
 #include "menu_input.h"
 #include "moves.h"
 #include "pokemon_3.h"
+#include "pokemon_mid.h"
 #include "text1.h"
 #include "text2.h"
 
@@ -59,7 +60,6 @@ void sub_801F5F0(u8 r0);
 void sub_8024458(u32, u32);
 extern void sub_801BEEC(s16);
 void sub_80208B0(void);
-void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
 extern void sub_801FDA8(s32);
 extern void sub_8020A80(void);
 extern void sub_8020B38(void);

@@ -2,12 +2,13 @@
 #include "cpu.h"
 #include "memory.h"
 
-extern struct HeapFreeListElement gMainHeapFreeList[32];
-extern u8 gMainHeap[HEAP_SIZE];
-extern struct HeapDescriptor gMainHeapDescriptor;
-
-EWRAM_DATA struct HeapDescriptor *gHeapDescriptorList[8] = {0};
-EWRAM_DATA u32 gHeapCount = {0};
+EWRAM_DATA struct HeapDescriptor *gHeapDescriptorList[8] = {0}; // 2000E88
+EWRAM_DATA u32 gHeapCount = {0}; // 2000EA8
+// space of 4?
+EWRAM_DATA struct HeapDescriptor gMainHeapDescriptor = {0}; // 2000EB0
+// space of 4?
+extern struct HeapFreeListElement gMainHeapFreeList[32]; // 2000ED0
+extern u8 gMainHeap[HEAP_SIZE]; // 20011D0
 
 void InitHeapInternal(void);
 

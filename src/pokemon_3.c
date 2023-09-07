@@ -634,8 +634,6 @@ u32 sub_808ECFC(void)
     return 0;
 }
 
-extern s32 sub_808D580(s32*);
-
 void sub_808ED00() {
     s32 team[4];
     s32 i;

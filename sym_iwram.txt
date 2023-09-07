@@ -17,8 +17,7 @@ gUnknown_3001018: /* 3001018 */
 gUnknown_3001198: /* 3001198 */
 	.space 0x9C0
 
-alt_3001B58:
-
+iwramClearEnd:
 unk_code_ram: /* 3001B58 */
 
 gUnknown_3001B58: /* 3001B58 */

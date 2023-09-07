@@ -251,5 +251,6 @@ extern PokemonStruct1 *GetPlayerPokemonStruct(void);
 extern void sub_808CFD0(u8 *, s16, u8 *, u8, u32 *, u16 *);
 extern u32 sub_808D1DC(u8 *);
 extern s32 sub_808D544(u32);
+extern s32 sub_808D580(s32 *);
 
 #endif // GUARD_POKEMON_H

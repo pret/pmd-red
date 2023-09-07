@@ -1,81 +1,52 @@
 #include "global.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
+#include "code_801AFA4.h"
 #include "code_8098DBC.h"
 #include "gulpin_shop.h"
-#include "items.h"
 #include "memory.h"
-#include "menu.h"
 #include "moves.h"
-#include "pokemon.h"
-#include "text.h"
+#include "pokemon_mid.h"
 
-extern s32 GetNumMonsAbleToLearnItemMove(void);
-extern void sub_801B064(s32);
+extern u8 gAvailablePokemonNames[]; // 202DF98
+extern u8 gUnknown_202E1C8[];
+extern u8 gUnknown_202E218[160];
 
+static EWRAM_DATA_2 unkStruct_203B22C *sUnknown_203B22C = {0};
 
-extern void sub_801B200(void);
-extern void sub_801B2AC(void);
-extern void sub_801B2D8(void);
-extern void nullsub_37();
-extern void sub_801B080();
+#include "data/code_801AFA4.h"
 
-extern const u8 gUnknown_80DB9BC[];
-extern const u8 gUnknown_80DB9E4[];
-extern const u8 gUnknown_80DBA0C[];
+static s32 GetNumMonsAbleToLearnItemMove(void);
+static void nullsub_37(void);
 
-extern u8 gUnknown_202E1C8[0x50];
-extern u8 gAvailablePokemonNames[0x50];
-extern u8 gUnknown_202E218[0x50];
+static void sub_801B064(s32);
+static void sub_801B080(void);
+static void sub_801B178(void);
+static void sub_801B200(void);
+static void sub_801B2AC(void);
+static void sub_801B2D8(void);
 
-extern bool8 IsHMItem(u8);
-extern void sub_801B178(void);
-extern void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
-
-extern bool8 CanMonLearnMove(u16 moveID, s16 _species);
-extern s32 sub_808D580(s32*);
-
-struct unkStruct_203B22C
+bool8 sub_801AFA4(u32 index)
 {
-    // size: 0xa4
-    /* 0x0 */ s32 state;
-    /* 0x4 */ u32 teamItemIndex;
-    /* 0x8 */ u8 id; // item index
-    /* 0xA */ u16 moveID; // item move??
-    /* 0xC */ Move moves[MAX_MON_MOVES * 2];
-    /* 0x4C */ s32 monsAbleToLearnMove; // number of party members able to learn move
-    /* 0x50 */ s16 unk50[MAX_TEAM_MEMBERS]; // species IDs of each member able to learn move
-    /* 0x58 */ s16 chosenPokemon; // species of pokemon that will learn move
-    /* 0x5C */ PokemonStruct1 *pokeStruct; // PokemonStruct of said pokemon
-    u32 unk60;
-    /* 0x64 */ MenuItem menuItems[8];
-};
-extern struct unkStruct_203B22C *gUnknown_203B22C;
-
-u32 sub_801AFA4(u32 index)
-{
-    gUnknown_203B22C = MemoryAlloc(sizeof(struct unkStruct_203B22C), 8);
-    gUnknown_203B22C->teamItemIndex = index;
-    gUnknown_203B22C->id = gTeamInventoryRef->teamItems[index].id;
-    gUnknown_203B22C->moveID = GetItemMoveID(gUnknown_203B22C->id);
-    sub_8092C84(gUnknown_202E1C8, gUnknown_203B22C->moveID);
+    sUnknown_203B22C = MemoryAlloc(sizeof(unkStruct_203B22C), 8);
+    sUnknown_203B22C->teamItemIndex = index;
+    sUnknown_203B22C->id = gTeamInventoryRef->teamItems[index].id;
+    sUnknown_203B22C->moveID = GetItemMoveID(sUnknown_203B22C->id);
+    sub_8092C84(gUnknown_202E1C8, sUnknown_203B22C->moveID);
     sub_8099690(0);
-    if(GetNumMonsAbleToLearnItemMove() == 0)
-    {
+
+    if (GetNumMonsAbleToLearnItemMove() == 0)
         sub_801B064(3);
-    }
-    else
-    {
-        gUnknown_203B22C->unk60 = 4;
+    else {
+        sUnknown_203B22C->unk60 = 4;
         sub_801B064(0);
     }
-    return 1;
+    return TRUE;
 }
 
 u32 sub_801B00C(void)
 {
-    switch(gUnknown_203B22C->state)
-    {
+    switch (sUnknown_203B22C->state) {
         case 4:
             return 3;
         case 0:
@@ -93,53 +64,44 @@ u32 sub_801B00C(void)
 
 void sub_801B048(void)
 {
-    if(gUnknown_203B22C != NULL)
-    {
-        MemoryFree(gUnknown_203B22C);
-        gUnknown_203B22C = NULL;
+    if (sUnknown_203B22C != NULL) {
+        MemoryFree(sUnknown_203B22C);
+        sUnknown_203B22C = NULL;
     }
 }
 
-void sub_801B064(s32 newState)
+static void sub_801B064(s32 newState)
 {
-    gUnknown_203B22C->state = newState;
+    sUnknown_203B22C->state = newState;
     nullsub_37();
     sub_801B080();
 }
 
-void nullsub_37(void)
+static void nullsub_37(void)
 {
 }
 
-void sub_801B080(void)
+static void sub_801B080(void)
 {
-    switch(gUnknown_203B22C->state)
-    {
+    switch (sUnknown_203B22C->state) {
         case 0:
             sub_801B178();
-            // {CENTER_ALIGN}Who will learn the move
-            // {CENTER_ALIGN}{COLOR_1 CYAN}{ARG_POKEMON_7}{END_COLOR_TEXT_1}?
-            sub_8014248(gUnknown_80DB9BC, 0, gUnknown_203B22C->unk60, gUnknown_203B22C->menuItems, 0, 4, 0, 0, 0x20);
+            sub_8014248(sFmtWhoWillLearnTheMove, 0, sUnknown_203B22C->unk60, sUnknown_203B22C->menuItems, 0, 4, 0, NULL, 32);
             break;
         case 1:
-            CreateGulpinShop(2, gUnknown_203B22C->chosenPokemon, gUnknown_203B22C->moves);
+            CreateGulpinShop(2, sUnknown_203B22C->chosenPokemon, sUnknown_203B22C->moves);
             break;
         case 2:
-            sub_8094060(gUnknown_203B22C->moves, gUnknown_203B22C->pokeStruct->moves);
-            if(!IsHMItem(gUnknown_203B22C->id))
-            {
-                gTeamInventoryRef->teamItems[gUnknown_203B22C->teamItemIndex].quantity = gUnknown_203B22C->id - 0x7D;
-                gTeamInventoryRef->teamItems[gUnknown_203B22C->teamItemIndex].id = ITEM_TM_USED_TM;
+            sub_8094060(sUnknown_203B22C->moves, sUnknown_203B22C->pokeStruct->moves);
+            if (!IsHMItem(sUnknown_203B22C->id)) {
+                gTeamInventoryRef->teamItems[sUnknown_203B22C->teamItemIndex].quantity = sUnknown_203B22C->id - 125;
+                gTeamInventoryRef->teamItems[sUnknown_203B22C->teamItemIndex].id = ITEM_TM_USED_TM;
             }
-            PlaySound(0x9C << 1);
-            // {CENTER_ALIGN}CM{ARG_POKEMON_8}{END_COLOR_TEXT_1} learned
-            // {CENTER_ALIGN}the move {COLOR_1 CYAN}{ARG_POKEMON_7}{END_COLOR_TEXT_1}!
-            sub_80141B4(gUnknown_80DB9E4, 0, 0, 0x121);
+            PlaySound(312);
+            sub_80141B4(sFmtLearnedTheMove, 0, 0, 0x121);
             break;
         case 3:
-            // {CENTER_ALIGN}No one in the current team
-            // {CENTER_ALIGN}can learn this move.
-            sub_80141B4(gUnknown_80DBA0C, 0, 0, 0x121);
+            sub_80141B4(sFmtNoOneCanLearnThisMove, 0, 0, 0x121);
             break;
         default:
         case 4:
@@ -147,65 +109,64 @@ void sub_801B080(void)
     }
 }
 
-void sub_801B178(void)
+static void sub_801B178(void)
 {
-    int monIndex;
+    s32 monIndex;
     u8 *bufferPtr;
 
-    for(monIndex = 0; monIndex < gUnknown_203B22C->monsAbleToLearnMove; monIndex++)
-    {
-        bufferPtr = gAvailablePokemonNames + (0x50 * monIndex);
-        PrintPokeNameToBuffer(bufferPtr, &gRecruitedPokemonRef->pokemon[gUnknown_203B22C->unk50[monIndex]]);
-        gUnknown_203B22C->menuItems[monIndex].text = bufferPtr;
-        gUnknown_203B22C->menuItems[monIndex].menuAction = monIndex + 4;
+    for (monIndex = 0; monIndex < sUnknown_203B22C->monsAbleToLearnMove; monIndex++) {
+        bufferPtr = gAvailablePokemonNames + (80 * monIndex);
+        PrintPokeNameToBuffer(bufferPtr, &gRecruitedPokemonRef->pokemon[sUnknown_203B22C->unk50[monIndex]]);
+        sUnknown_203B22C->menuItems[monIndex].text = bufferPtr;
+        sUnknown_203B22C->menuItems[monIndex].menuAction = monIndex + 4;
     }
-    gUnknown_203B22C->menuItems[monIndex].text = NULL;
-    gUnknown_203B22C->menuItems[monIndex].menuAction = 1;
+
+    sUnknown_203B22C->menuItems[monIndex].text = NULL;
+    sUnknown_203B22C->menuItems[monIndex].menuAction = 1;
 }
 
-void sub_801B200(void)
+static void sub_801B200(void)
 {
     s32 temp;
     s32 moveIndex;
     Move *pokeMove;
 
-    if(sub_80144A4(&temp) == 0)
-    {
-        gUnknown_203B22C->unk60 = temp;
-        switch(temp)
-        {
-            case 1:
-                sub_801B064(4);
-                break;
-            default:
-                gUnknown_203B22C->chosenPokemon = gUnknown_203B22C->unk50[temp - 4];
-                gUnknown_203B22C->pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B22C->chosenPokemon];
-                PrintPokeNameToBuffer(gUnknown_202E218, gUnknown_203B22C->pokeStruct);
-                unk_CopyMoves4To8(gUnknown_203B22C->moves, gUnknown_203B22C->pokeStruct->moves);
-                for(moveIndex = 0; moveIndex < MAX_MON_MOVES * 2; moveIndex++)
-                {
-                    pokeMove = &gUnknown_203B22C->moves[moveIndex];
-                    if((pokeMove->moveFlags & MOVE_FLAG_EXISTS) == 0)
-                    {
-                        InitZeroedPPPokemonMove(pokeMove, gUnknown_203B22C->moveID);
-                        break;
-                    }
+    if (sub_80144A4(&temp))
+        return;
+
+    sUnknown_203B22C->unk60 = temp;
+    switch (temp) {
+        case 1:
+            sub_801B064(4);
+            break;
+        default:
+            sUnknown_203B22C->chosenPokemon = sUnknown_203B22C->unk50[temp - 4];
+            sUnknown_203B22C->pokeStruct = &gRecruitedPokemonRef->pokemon[sUnknown_203B22C->chosenPokemon];
+            PrintPokeNameToBuffer(gUnknown_202E218, sUnknown_203B22C->pokeStruct);
+            unk_CopyMoves4To8(sUnknown_203B22C->moves, sUnknown_203B22C->pokeStruct->moves);
+
+            for (moveIndex = 0; moveIndex < MAX_MON_MOVES * 2; moveIndex++) {
+                pokeMove = &sUnknown_203B22C->moves[moveIndex];
+
+                if ((pokeMove->moveFlags & MOVE_FLAG_EXISTS) == 0) {
+                    InitZeroedPPPokemonMove(pokeMove, sUnknown_203B22C->moveID);
+                    break;
                 }
-                if(moveIndex >= MAX_MON_MOVES)
-                    sub_801B064(1);
-                else
-                    sub_801B064(2);
-                break;
-            case 0:
-                break;
-        }
+            }
+
+            if (moveIndex >= MAX_MON_MOVES)
+                sub_801B064(1);
+            else
+                sub_801B064(2);
+            break;
+        case 0:
+            break;
     }
 }
 
-void sub_801B2AC(void)
+static void sub_801B2AC(void)
 {
-    switch(sub_801E8C0())
-    {
+    switch (sub_801E8C0()) {
         case 3:
             DestroyGulpinShop();
             sub_801B064(2);
@@ -220,56 +181,52 @@ void sub_801B2AC(void)
     }
 }
 
-
-void sub_801B2D8(void)
+static void sub_801B2D8(void)
 {
     s32 temp;
 
-    if(sub_80144A4(&temp) == 0)
-    {
+    if (sub_80144A4(&temp) == 0)
         sub_801B064(4);
-    }
 }
 
-s32 GetNumMonsAbleToLearnItemMove(void)
+static s32 GetNumMonsAbleToLearnItemMove(void)
 {
     s32 length;
     s32 numMons;
-    s32 index;
-    s32 team [MAX_TEAM_MEMBERS];
+    s32 i;
+    s32 team[MAX_TEAM_MEMBERS];
     PokemonStruct1 *preload;
 
     length = sub_808D580(team);
-    gUnknown_203B22C->monsAbleToLearnMove = 0;
+    sUnknown_203B22C->monsAbleToLearnMove = 0;
 
-    for(index = 0; index < length; index++)
-    {
-        preload = &gRecruitedPokemonRef->pokemon[team[index]];
-        if (CanMonLearnMove(gUnknown_203B22C->moveID, preload->speciesNum)) {
-            gUnknown_203B22C->unk50[gUnknown_203B22C->monsAbleToLearnMove] = team[index];
-            numMons = gUnknown_203B22C->monsAbleToLearnMove;
-            if (numMons >= MAX_TEAM_MEMBERS) break;
-            gUnknown_203B22C->monsAbleToLearnMove = numMons + 1;
+    for (i = 0; i < length; i++) {
+        preload = &gRecruitedPokemonRef->pokemon[team[i]];
+
+        if (CanMonLearnMove(sUnknown_203B22C->moveID, preload->speciesNum)) {
+            sUnknown_203B22C->unk50[sUnknown_203B22C->monsAbleToLearnMove] = team[i];
+            numMons = sUnknown_203B22C->monsAbleToLearnMove;
+            if (numMons >= MAX_TEAM_MEMBERS)
+                break;
+            sUnknown_203B22C->monsAbleToLearnMove = numMons + 1;
         }
     }
-    return gUnknown_203B22C->monsAbleToLearnMove;
+    return sUnknown_203B22C->monsAbleToLearnMove;
 }
 
-// Unused
-bool8 sub_801B374(u8 id)
+UNUSED static bool8 sub_801B374(u8 id)
 {
-  u16 moveID;
-  PokemonStruct1 *pokeStruct;
-  s32 index;
+    u16 moveID;
+    PokemonStruct1 *pokeStruct;
+    s32 i;
 
-  pokeStruct = &gRecruitedPokemonRef->pokemon[0];
-  moveID = GetItemMoveID(id);
+    pokeStruct = &gRecruitedPokemonRef->pokemon[0];
+    moveID = GetItemMoveID(id);
 
-  for(index = 0; index < NUM_MONSTERS; index++, pokeStruct++)
-  {
-      if((pokeStruct->unk0 >> 1 & 1) != 0)
-        if(CanMonLearnMove(moveID, pokeStruct->speciesNum))
-            return FALSE;
-  }
-  return TRUE;
+    for (i = 0; i < NUM_MONSTERS; i++, pokeStruct++) {
+        if ((pokeStruct->unk0 >> 1) & 1)
+            if (CanMonLearnMove(moveID, pokeStruct->speciesNum))
+                return FALSE;
+    }
+    return TRUE;
 }

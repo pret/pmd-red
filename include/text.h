@@ -33,7 +33,7 @@ typedef struct UnkTextStruct2_sub
 {
     // I haven't found a func that reads these separately yet, but simply making an arr[2] will cause assignments to break.
     // Some funcs only match with this union for some reason even though they don't access the variables separately...
-    // The first func to break is currently sub_801A5D8 in kecleon_bros.c
+    // The first func to break is currently sub_801A5D8 in kecleon_bros4.c
     // The first func I matched that uses the array is sub_8006554 in text2.c (using the separated fields doesn't match or get even close)
     union {
         struct {

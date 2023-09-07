@@ -9,7 +9,7 @@
 #include "constants/dungeon.h"
 #include "event_flag.h"
 #include "items.h"
-#include "kecleon_bros.h"
+#include "kecleon_bros4.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "moves.h"
@@ -33,7 +33,7 @@ typedef struct unkStruct_203B2B8
     u32 moveIndex;
     /* 0x24 */ u16 moveID;
     Move moves[8];
-    u16 moveIDs[4];   // some list of move IDs
+    u16 moveIDs[4]; // some list of move IDs
     u32 menuAction1;
     u32 menuAction2;
     u32 menuAction3; // unused
@@ -262,10 +262,10 @@ void sub_80261D0(void)
             sub_80227B8(gUnknown_203B2B8->pokeStruct);
             break;
         case 0x12:
-            sub_801A5D8(1,0,0,10);
+            sub_801A5D8(1,0,NULL,10);
             break;
         case 0x13:
-            sub_801A8D0(1);
+            sub_801A8D0(TRUE);
             break;
         case 0x14:
             sub_801A9E0();

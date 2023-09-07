@@ -1,22 +1,22 @@
 #include "global.h"
+#include "code_80118A4.h"
+#include "code_8012A18_1.h"
+#include "code_80130A8.h"
+#include "code_801B3C0.h"
+#include "code_801EE10.h"
+#include "code_801EE10_1.h"
+#include "code_801EE10_mid.h"
 #include "code_8098DBC.h"
 #include "constants/dungeon.h"
+#include "event_flag.h"
+#include "items.h"
+#include "kecleon_bros4.h"
 #include "memory.h"
+#include "menu_input.h"
+#include "moves.h"
+#include "pokemon.h"
 #include "text1.h"
 #include "text2.h"
-#include "items.h"
-#include "pokemon.h"
-#include "moves.h"
-#include "menu_input.h"
-#include "code_801EE10.h"
-#include "kecleon_bros.h"
-#include "code_80130A8.h"
-#include "code_801EE10_1.h"
-#include "code_8012A18_1.h"
-#include "code_801B3C0.h"
-#include "code_80118A4.h"
-#include "event_flag.h"
-#include "code_801EE10_mid.h"
 
 // there might be more overlap with unkStruct_203B2BC
 // I was working on the moves and put the data that seemed to correspond to that
@@ -247,10 +247,10 @@ void sub_8025518(void)
         sub_801BEEC(gUnknown_203B2B4->species);
         break;
     case 0xb:
-        sub_801A5D8(1,0,0,10);
+        sub_801A5D8(1, 0, NULL, 10);
         break;
     case 0xc:
-        sub_801A8D0(1);
+        sub_801A8D0(TRUE);
         break;
     case 0xd:
         sub_801A9E0();

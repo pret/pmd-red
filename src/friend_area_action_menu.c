@@ -1,22 +1,22 @@
 #include "global.h"
-#include "code_8098DBC.h"
-#include "constants/dungeon.h"
-#include "memory.h"
-#include "text1.h"
-#include "text2.h"
-#include "items.h"
-#include "pokemon.h"
-#include "friend_area_action_menu.h"
-#include "menu_input.h"
-#include "kecleon_bros.h"
-#include "sprite.h"
 #include "code_80130A8.h"
+#include "code_801B3C0.h"
 #include "code_801EE10.h"
 #include "code_801EE10_1.h"
-#include "code_801B3C0.h"
-#include "event_flag.h"
-#include "moves.h"
 #include "code_801EE10_mid.h"
+#include "code_8098DBC.h"
+#include "constants/dungeon.h"
+#include "event_flag.h"
+#include "friend_area_action_menu.h"
+#include "items.h"
+#include "kecleon_bros4.h"
+#include "memory.h"
+#include "menu_input.h"
+#include "moves.h"
+#include "pokemon.h"
+#include "sprite.h"
+#include "text1.h"
+#include "text2.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 
@@ -203,10 +203,10 @@ void sub_8027274(void)
             sub_801BEEC(gUnknown_203B2BC->targetPoke);
             break;
         case 10:
-            sub_801A5D8(1, 0, 0, 10);
+            sub_801A5D8(1, 0, NULL, 10);
             break;
         case 0xb:
-            sub_801A8D0(1);
+            sub_801A8D0(TRUE);
             break;
         case 0xc:
             sub_801A9E0();

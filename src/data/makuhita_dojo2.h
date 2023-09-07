@@ -16,7 +16,7 @@ static const UnkTextStruct2 sUnknown_80E0804 = {
     NULL
 };
 
-ALIGNED(4) static const u8 sCourses[] = "Courses";
+ALIGNED(4) static const u8 sCourses[] = _("Courses");
 ALIGNED(4) static const u8 sStarBullet[] = _("{STAR_BULLET}");
 ALIGNED(4) static const u8 sFmtColor[] = _("{COLOR_2}%c%s{END_COLOR_TEXT_2}");
-ALIGNED(4) static const u8 sFill[] = "pksdir0";
+ALIGNED(4) static const u8 sFill[] = _("pksdir0");

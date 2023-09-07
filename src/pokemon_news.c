@@ -2,6 +2,7 @@
 #include "global.h"
 #include "pokemon.h"
 #include "pokemon_mail.h"
+#include "pokemon_mid.h"
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
@@ -170,7 +171,6 @@ extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 extern void sub_802BC7C(void);
 extern PokemonStruct1 *sub_808D3BC(void);
-extern void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
 
 u32 sub_802B640(u32 r0, UnkTextStruct2_sub *r1, u32 r2)
 {

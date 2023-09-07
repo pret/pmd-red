@@ -21,7 +21,7 @@ SECTIONS {
         *libc.a:impure.o(.data);
         *libc.a:locale.o(.data);
         *libc.a:mallocr.o(.data);
-        gUnknown_203BC04 = .;
+        ewram2_end = .;
         . = 0x40000;
     }
 
@@ -90,8 +90,12 @@ SECTIONS {
         asm/code_80130A8.o(.text);
         src/code_8012A18_1.o(.text);
         src/felicity_bank.o(.text);
-        src/kangaskhan_storage.o(.text);
-        src/kecleon_bros.o(.text);
+        src/kangaskhan_storage1.o(.text);
+        src/kangaskhan_storage2.o(.text);
+        src/kecleon_bros1.o(.text);
+        src/kecleon_bros2.o(.text);
+        src/kecleon_bros3.o(.text);
+        src/kecleon_bros4.o(.text);
         src/code_801AFA4.o(.text);
         src/code_801B3C0.o(.text);
         src/code_801B60C.o(.text);
@@ -384,6 +388,13 @@ SECTIONS {
         src/save.o(.rodata);
         src/menu_input.o(.rodata);
         data/data_80D47B8.o(.rodata);
+        src/kangaskhan_storage1.o(.rodata);
+        src/kangaskhan_storage2.o(.rodata);
+        src/kecleon_bros1.o(.rodata);
+        src/kecleon_bros2.o(.rodata);
+        src/kecleon_bros3.o(.rodata);
+        src/kecleon_bros4.o(.rodata);
+        src/code_801AFA4.o(.rodata);
         src/code_801B3C0.o(.rodata);
         src/code_801B60C.o(.rodata);
         data/data_80DBD98.o(.rodata);

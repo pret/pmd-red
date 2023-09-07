@@ -1,23 +1,24 @@
 #include "global.h"
 #include "code_800D090.h"
+#include "code_80118A4.h"
+#include "code_80130A8.h"
+#include "code_801AFA4.h"
+#include "code_801B3C0.h"
 #include "code_8023144.h"
+#include "code_8098DBC.h"
 #include "constants/colors.h"
 #include "constants/input.h"
 #include "constants/iq_skill.h"
+#include "exclusive_pokemon.h"
+#include "friend_area.h"
+#include "items.h"
+#include "kecleon_bros4.h"
 #include "memory.h"
+#include "menu_input.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
-#include "code_801B3C0.h"
 #include "text1.h"
 #include "text2.h"
-#include "items.h"
-#include "menu_input.h"
-#include "friend_area.h"
-#include "kecleon_bros.h"
-#include "code_80130A8.h"
-#include "code_80118A4.h"
-#include "exclusive_pokemon.h"
-#include "code_8098DBC.h"
 
 IWRAM_DATA unkStruct_3001B5C *gUnknown_3001B5C;
 unkStruct_203B294 *gUnknown_203B294;
@@ -44,8 +45,6 @@ extern u8 gUnknown_80DC8F8[];
 extern u8 *gUnknown_80D4940[];
 extern u8 *gUnknown_80D4970[];
 extern void sub_8022924(s32);
-extern u32 sub_801B00C(void);
-extern void sub_801B048(void);
 
 void GetGummiItemStatBoost(PokemonStruct1* pokemon, u8 id, bool8 checkBoostFlags, Gummi *gummi);
 
@@ -363,7 +362,7 @@ void sub_80233A0(void)
     }
 }
 
-NAKED
+NAKED // sub_80095E4 memes
 void sub_8023420(void)
 {
     asm_unified(

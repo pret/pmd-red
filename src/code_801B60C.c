@@ -6,7 +6,7 @@
 #include "code_8098DBC.h"
 #include "constants/colors.h"
 #include "items.h"
-#include "kecleon_bros.h"
+#include "kecleon_bros4.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
@@ -243,10 +243,10 @@ store:
             sub_8014248(sFmtConfirmThrowAway, 0, 3, sUnknown_203B234->unkCC, 0, 4, 0, 0, 0);
             break;
         case 8:
-            sub_801A5D8(1, 3, 0, 10);
+            sub_801A5D8(1, 3, NULL, 10);
             break;
         case 9:
-            sub_801A8D0(1);
+            sub_801A8D0(TRUE);
             break;
         case 10:
             sub_801A9E0();

@@ -1,5 +1,6 @@
 	.section .rodata
 
+@ START code_80130A8 #1
 
         .global UnkData_80D47C4
         UnkData_80D47C4:
@@ -13,7 +14,6 @@ gUnknown_80D47C8: @ 80D47C8
         .byte 0x02, 0x00, 0x02, 0x00
         .byte 0x1a, 0x00, 0x0c, 0x00
         .byte 0x0c, 0x00, 0x00, 0x00
-
         .4byte UnkData_80D47C4
 
         .byte 0x00, 0x00, 0x00, 0x00
@@ -48,6 +48,9 @@ gUnknown_80D4830: @ 80D4830
         .byte 0x00, 0xe1, 0xf5, 0x05
         .asciz "pksdir0"
 
+@ END code_80130A8 #1
+
+@ START code_80130A8 #2
 
 	.global gUnknown_80D485C
 gUnknown_80D485C: @ 80D485C
@@ -146,6 +149,10 @@ gUnknown_80D4910: @ 80D4910
         .string "$\0"
         .align 2,0
         .string "pksdir0\0"
+
+@ END code_80130A8 #2
+
+@ START [some global strings]
 
         .global Yes_80D491C
         Yes_80D491C:
@@ -547,8 +554,10 @@ gUnknown_80D53E0:
     .string "This is Felicity Bank.\0"
     .align 2, 0
 
+@ START_EARLY kangaskhan #1
+
 	.global gKangaskhanStorageDialogue
-gKangaskhanStorageDialogue: @ 80D5404 (Kangaskhan Storage Dialogue)
+gKangaskhanStorageDialogue: @ 80D5404
     .4byte gUnknown_80D5E9C
     .4byte gUnknown_80D5E84
     .4byte gUnknown_80D5E60
@@ -860,7 +869,7 @@ gUnknown_80D5E9C:
     .align 2, 0
 
 	.global gKecleonShopDialogue
-gKecleonShopDialogue: @ 80D5EC8 (Kecleon Wares Dialogue)
+gKecleonShopDialogue: @ 80D5EC8
     .4byte gUnknown_80D797C
     .4byte gUnknown_80D7958
     .4byte gUnknown_80D7934
@@ -2766,6 +2775,10 @@ gUnknown_80DAF54:
 
     .string "pksdir0\0"
 
+@ END [some global strings]
+
+@ START code_80130A8 #3
+
 	.global gUnknown_80DAF70
 gUnknown_80DAF70: @ 80DAF70
         .byte 0x00, 0x00, 0x00, 0x00
@@ -2794,6 +2807,11 @@ gUnknown_80DAFA0: @ 80DAFA0
         .byte 0x00, 0x00, 0x00, 0x00
 
     .string "pksdir0\0"
+
+@ END code_80130A8 #3
+
+@ START code_80130A8 #4
+
 	.global gUnknown_80DAFC0
 gUnknown_80DAFC0: @ 80DAFC0
     .2byte 3, 0xD
@@ -3124,6 +3142,11 @@ gUnknown_80DB664: @ 80DB664
         .string "%s\0"
         .align 2,0
         .string "pksdir0\0"
+
+@ END code_80130A8 #4
+
+@ START code_8012A18_1
+
         .align 2,0
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
@@ -3148,6 +3171,10 @@ gUnknown_80DB6BC: @ 80DB6BC
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
+
+@ END code_8012A18_1
+
+@ START felicity_bank
 
 	.global gUnknown_80DB6DC
 gUnknown_80DB6DC: @ 80DB6DC
@@ -3192,272 +3219,4 @@ gUnknown_80DB738: @ 80DB738
         .align 2,0
         .string "pksdir0\0"
 
-	.global gUnknown_80DB748
-gUnknown_80DB748: @ 80DB748
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB760
-gUnknown_80DB760: @ 80DB760
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x14, 0x00, 0x04, 0x00
-        .byte 0x06, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB778
-gUnknown_80DB778: @ 80DB778
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x14, 0x00, 0x09, 0x00
-        .byte 0x06, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB790
-gUnknown_80DB790: @ 80DB790
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x14, 0x00, 0x0e, 0x00
-        .byte 0x06, 0x00, 0x04, 0x00
-        .byte 0x04, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB7A8
-gUnknown_80DB7A8: @ 80DB7A8
-        .string "Number?\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-
-	.global gUnknown_80DB7B8
-gUnknown_80DB7B8: @ 80DB7B8
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB7D0
-gUnknown_80DB7D0: @ 80DB7D0
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x03, 0x00
-        .byte 0x06, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB7E8
-gUnknown_80DB7E8: @ 80DB7E8
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x14, 0x00, 0x04, 0x00
-        .byte 0x06, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB800
-gUnknown_80DB800: @ 80DB800
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x14, 0x00, 0x09, 0x00
-        .byte 0x06, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB818
-gUnknown_80DB818: @ 80DB818
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x14, 0x00, 0x0e, 0x00
-        .byte 0x06, 0x00, 0x04, 0x00
-        .byte 0x04, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB830
-gUnknown_80DB830: @ 80DB830
-        .string "Number?\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-
-	.global gUnknown_80DB840
-gUnknown_80DB840: @ 80DB840
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB858
-gUnknown_80DB858: @ 80DB858
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x14, 0x00, 0x04, 0x00
-        .byte 0x06, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB870
-gUnknown_80DB870: @ 80DB870
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x14, 0x00, 0x09, 0x00
-        .byte 0x06, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB888
-gUnknown_80DB888: @ 80DB888
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x14, 0x00, 0x0e, 0x00
-        .byte 0x06, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB8A0
-gUnknown_80DB8A0: @ 80DB8A0
-        .string "Sell All\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-
-	.global gUnknown_80DB8B4
-gUnknown_80DB8B4: @ 80DB8B4
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB8CC
-gUnknown_80DB8CC: @ 80DB8CC
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x06, 0x00, 0x00, 0x00
-        .byte 0x02, 0x00, 0x02, 0x00
-        .byte 0x10, 0x00, 0x04, 0x00
-        .byte 0x06, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB8E4
-gUnknown_80DB8E4: @ 80DB8E4
-        .string "Goods\0"
-        .align 2,0
-
-	.global gUnknown_80DB8EC
-gUnknown_80DB8EC: @ 80DB8EC
-        .string "{COLOR_1 RED}%s{END_COLOR_TEXT_1}\0"
-        .string "pksdir0\0"
-        .align 2,0
-
-	.global gUnknown_80DB8FC
-gUnknown_80DB8FC: @ 80DB8FC
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB914
-gUnknown_80DB914: @ 80DB914
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x06, 0x00, 0x00, 0x00
-        .byte 0x02, 0x00, 0x02, 0x00
-        .byte 0x10, 0x00, 0x04, 0x00
-        .byte 0x06, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB92C
-gUnknown_80DB92C: @ 80DB92C
-        .string "Goods\0"
-        .align 2,0
-
-	.global gUnknown_80DB934
-gUnknown_80DB934: @ 80DB934
-        .string "{COLOR_1 RED}%s{END_COLOR_TEXT_1}\0"
-        .string "pksdir0\0"
-        .align 2,0
-
-	.global gUnknown_80DB944
-gUnknown_80DB944: @ 80DB944
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-
-	.global gUnknown_80DB95C
-gUnknown_80DB95C: @ 80DB95C
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x06, 0x00, 0x00, 0x00
-        .byte 0x02, 0x00, 0x02, 0x00
-        .byte 0x10, 0x00, 0x11, 0x00
-        .byte 0x13, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-
-	.global gTeamToolboxA
-gTeamToolboxA: @ 80DB974
-        .string "Team Toolbox A\0"
-        .align 2,0
-
-	.global gTeamToolboxB
-gTeamToolboxB: @ 80DB984
-        .string "Team Toolbox B\0"
-        .align 2,0
-
-	.global gUnknown_80DB994
-gUnknown_80DB994: @ 80DB994
-        .string "{COLOR_1}"
-        .byte 0x02
-        .string "{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}\0"
-        .align 2,0
-
-	.global gUnknown_80DB9A0
-gUnknown_80DB9A0: @ 80DB9A0
-        .string "{COLOR_1 RED}%s{END_COLOR_TEXT_1}\0"
-        .align 2,0
-
-	.global gUnknown_80DB9A8
-gUnknown_80DB9A8: @ 80DB9A8
-        .string "Items\0"
-        .align 2,0
-
-	.global gUnknown_80DB9B0
-gUnknown_80DB9B0: @ 80DB9B0
-        .string "/\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-
-	.global gUnknown_80DB9BC
-gUnknown_80DB9BC: @ 80DB9BC
-        .string "{CENTER_ALIGN}Who will learn the move\n"
-        .string "{CENTER_ALIGN}{COLOR_1 CYAN}{ARG_POKEMON_7}{END_COLOR_TEXT_1}?\0"
-        .align 2,0
-
-	.global gUnknown_80DB9E4
-gUnknown_80DB9E4: @ 80DB9E4
-        .string "{CENTER_ALIGN}{COLOR_1 CYAN_3}{ARG_POKEMON_8}{END_COLOR_TEXT_1} learned\n"
-        .string "{CENTER_ALIGN}the move {COLOR_1 CYAN}{ARG_POKEMON_7}{END_COLOR_TEXT_1}!\0"
-        .align 2,0
-
-	.global gUnknown_80DBA0C
-gUnknown_80DBA0C: @ 80DBA0C
-        .string "{CENTER_ALIGN}No one in the current team\n"
-        .string "{CENTER_ALIGN}can learn this move. \0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
+@ END FELICITY BANK
