@@ -1,6 +1,7 @@
 #include "global.h"
-#include "game_options.h"
+#include "code_8009804.h"
 #include "code_8092334.h"
+#include "game_options.h"
 
 struct WindowBG
 {
@@ -19,7 +20,6 @@ extern struct WindowBG gWindowBGColors;
 EWRAM_DATA_2 GameOptions *gGameOptionsRef = {0};
 EWRAM_DATA GameOptions gGameOptions = {0};
 extern void SetWindowBGColor(void);
-extern void sub_80099F0(u32);
 
 void LoadGameOptions(void)
 {

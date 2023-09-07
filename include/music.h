@@ -1,7 +1,7 @@
 #ifndef GUARD_MUSIC_H
 #define GUARD_MUSIC_H
 
-// PMD keeps it's own copy of music players for some reason
+// size: 0x8. PMD keeps its own copy of music players for some reason
 struct PMDMusicPlayer
 {
     u16 unk0;
@@ -9,6 +9,8 @@ struct PMDMusicPlayer
     u16 volume;
     bool8 isNotMaxVolume;
 };
+
+void InitMusic(void);
 
 void StopBGMusicVSync(void);
 void StartBGMusicVSync(void);

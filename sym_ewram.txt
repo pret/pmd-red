@@ -84,10 +84,7 @@ gUnknown_20274B4: /* 20274B4 (text1) */
 	.space 0x3B00
 
 gCharmapFiles: /* 202AFB4 (text1) */
-	.space 0x8
-
-gUnknown_202AFBC: /* 202AFBC [UNUSED] */
-	.space 0x4
+	.space 0xC
 
 gUnknown_202AFC0: /* 202AFC0 (text1 / text2) */
 	.space 0x60
@@ -108,10 +105,7 @@ gUnknown_202B034: /* 202B034 (text1 / text2) */
 	.space 0x4
 
 gUnknown_202B038: /* 202B038 (text1 / text2 / dungeon_map_access_1 / code_8009804 / code_8040094 / code_80521D0 / code_803D110 / code_80A26CC_1 / code_2) */
-	.space 0x800
-
-gUnknown_202B838: /* 202B838 [UNUSED] */
-	.space 0x800
+	.space 0x1000
 
 gUnknown_202C038: /* 202C038 (code_800DAC0 / code_80495E4) */
 	.space 0x800
@@ -122,43 +116,43 @@ gUnknown_202C838: /* 202C838 (code_800DAC0 / code_80495E4) */
 gUnknown_202CF58: /* 202CF58 (code_80130A8) */
 	.space 0xE0
 
-gUnknown_202D038: /* 202D038 */
+gUnknown_202D038: /* 202D038 (code_8009804 / code_803D110 / code_80521D0) */
 	.space 0x4
 
-gUnknown_202D03C: /* 202D03C */
+gUnknown_202D03C: /* 202D03C (code_8040094) */
 	.space 0x1C
 
-gUnknown_202D058: /* 202D058 */
+gUnknown_202D058: /* 202D058 (code_803D110) */
 	.space 0x10
 
-gUnknown_202D068: /* 202D068 */
+gUnknown_202D068: /* 202D068 (code_803D110) */
 	.space 0x4
 
-gUnknown_202D06C: /* 202D06C */
+gUnknown_202D06C: /* 202D06C (code_803D110) */
 	.space 0xC
 
-gUnknown_202D078: /* 202D078 */
+gUnknown_202D078: /* 202D078 (code_8098BDC) */
 	.space 0x20
 
-gUnknown_202D098: /* 202D098 */
+gUnknown_202D098: /* 202D098 (code_8098BDC) */
 	.space 0x120
 
-gUnknown_202D1B8: /* 202D1B8 */
+gUnknown_202D1B8: /* 202D1B8 (code_8098BDC) */
 	.space 0x40
 
-gUnknown_202D1F8: /* 202D1F8 */
+gUnknown_202D1F8: /* 202D1F8 (code_8098BDC) */
 	.space 0x40
 
-gUnknown_202D238: /* 202D238 */
+gUnknown_202D238: /* 202D238 (code_8009804) */
 	.space 0x4
 
-gUnknown_202D23C: /* 202D23C */
+gUnknown_202D23C: /* 202D23C (code_8009804) */
 	.space 0x4
 
-gUnknown_202D240: /* 202D240 */
+gUnknown_202D240: /* 202D240 (code_8009804) */
 	.space 0x60
 
-gUnknown_202D2A0: /* 202D2A0 */
+gUnknown_202D2A0: /* 202D2A0 (code_8009804) */
 	.space 0x4
 
     .include "src/file_system.o"

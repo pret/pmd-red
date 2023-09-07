@@ -2,6 +2,7 @@
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
+#include "code_8009804.h"
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
 #include "code_8094F88.h"
@@ -38,7 +39,6 @@ extern void sub_800135C(void);
 extern void xxx_script_related_8001334(u32);
 extern void sub_80015C0(u32, u32);
 extern void sub_800A8F8(u32);
-extern void sub_80097B0(void);
 extern void LoadTitleScreen(void);
 extern void sub_80095CC(u32, u32);
 extern s32 GetFirstIndexofMailType(u8);
@@ -50,7 +50,6 @@ extern void nullsub_8(u32);
 extern void sub_80060EC(void);
 extern void TransferBGPaletteBuffer(void);
 extern void xxx_call_update_bg_vram(void);
-extern void sub_8009908(void);
 extern void xxx_call_update_bg_sound_input(void);
 
 extern u32 gUnknown_203B03C;

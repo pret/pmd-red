@@ -1,10 +1,10 @@
 #include "global.h"
+#include "code_8009804.h"
 #include "code_800C9CC.h"
 #include "constants/communication_error_codes.h"
 #include "input.h"
 #include "main_menu.h"
 #include "items.h"
-
 #include "menu.h"
 #include "memory.h"
 #include "text1.h"
@@ -449,7 +449,6 @@ extern void sub_8037900(void);
 extern u32 sub_8037798(void);
 extern void TransferBGPaletteBuffer();
 extern void xxx_call_update_bg_vram();
-extern void sub_8009908();
 extern void xxx_call_update_bg_sound_input();
 extern s32 sub_8037D64(u32 mode, void *, void *);
 extern s32 sub_80381F4(u32 mode, void *, void *);

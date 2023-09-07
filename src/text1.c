@@ -5,21 +5,22 @@
 #include "text1.h"
 #include "text2.h"
 
-EWRAM_DATA UnkTextStruct1 gUnknown_2027370[4];
-EWRAM_DATA u8 *gCharmaps[2];
-EWRAM_DATA s16 gCharacterSpacing;
-EWRAM_DATA u8 gUnknown_20274A5;
-EWRAM_DATA u32 gCurrentCharmap;
-EWRAM_DATA vu32 gUnknown_20274B0;
-EWRAM_DATA u32 gUnknown_20274B4[0xEC0];
-EWRAM_DATA OpenedFile *gCharmapFiles[2];
-EWRAM_DATA UnkTextStruct2 gUnknown_202AFC0[4];
-EWRAM_DATA u32 gUnknown_202B020;
-EWRAM_DATA u32 gUnknown_202B024;
-EWRAM_DATA u32 gUnknown_202B028[2];
-EWRAM_DATA u32 gUnknown_202B030; // Some text color info is stored; retrieve via "& 0xF"
-EWRAM_DATA u8 gUnknown_202B034;
-EWRAM_DATA u16 gUnknown_202B038[4][32][32];
+extern UnkTextStruct1 gUnknown_2027370[4];
+extern u8 *gCharmaps[2];
+extern s16 gCharacterSpacing;
+extern u8 gUnknown_20274A5;
+extern u32 gCurrentCharmap;
+extern vu32 gUnknown_20274B0;
+extern u32 gUnknown_20274B4[0xEC0];
+extern OpenedFile *gCharmapFiles[2]; // 202AFB4
+// u32 unused // 202AFBC
+extern UnkTextStruct2 gUnknown_202AFC0[4];
+extern u32 gUnknown_202B020;
+extern u32 gUnknown_202B024;
+extern u32 gUnknown_202B028[2];
+extern u32 gUnknown_202B030; // Some text color info is stored; retrieve via "& 0xF"
+extern u8 gUnknown_202B034;
+extern u16 gUnknown_202B038[4][32][32];
 
 // ?
 extern s16 gUnknown_3000E94[];

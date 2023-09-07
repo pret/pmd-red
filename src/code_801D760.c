@@ -1,4 +1,5 @@
 #include "global.h"
+#include "bg_palette_buffer.h"
 #include "friend_area.h"
 #include "constants/friend_area.h"
 #include "constants/input.h"
@@ -76,7 +77,6 @@ extern const char *sub_8098FB4();
 extern void xxx_format_string(const char *, u8 *, u32 **, u32);
 extern s32 sub_8008ED0(u8 *);
 void LoadTeamRankBadge(u32, u32, u32);
-extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);
 
 extern struct FileArchive gTitleMenuFileArchive;
 extern const char gTeamRankBadgeFileName;

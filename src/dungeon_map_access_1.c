@@ -1,14 +1,14 @@
 #include "global.h"
-#include "dungeon_map_access.h"
-#include "dungeon_global_data.h"
-#include "file_system.h"
-#include "tile_types.h"
-#include "random.h"
+#include "code_8009804.h"
 #include "dungeon_engine.h"
+#include "dungeon_global_data.h"
+#include "dungeon_map_access.h"
+#include "file_system.h"
+#include "random.h"
 #include "text1.h"
+#include "tile_types.h"
 
 extern void sub_80402AC(s32, s32);
-extern void sub_80098F8(u32);
 
 void sub_804AA60(void) {
     s32 i;

@@ -3,12 +3,14 @@
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
 #include "code_800558C.h"
+#include "code_8009804.h"
 #include "cpu.h"
 #include "crt0.h"
 #include "file_system.h"
 #include "flash.h"
 #include "input.h"
 #include "main.h"
+#include "music.h"
 #include "random.h"
 #include "reg_control.h"
 #include "sprite.h"
@@ -37,16 +39,12 @@ extern const u8 gUnknown_8270000[];
 extern const u8 gUnknown_80B9BF1[];
 extern const IntrCallback gInitialIntrTable[6];
 
-// code_8009804.c
-extern void sub_80098A0(void);
 // code_2.c
 extern void GameLoop(void);
 // code_800D090.c
 extern void Hang(void);
 extern void sub_800D6AC(void);
 extern void sub_800D7D0(void);
-// music.c
-extern void InitMusic(void); // music initializer
 
 void InitIntrTable(const IntrCallback *interrupt_table);
 IntrCallback SetInterruptCallback(u32 index, IntrCallback new_callback);

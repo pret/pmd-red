@@ -1,21 +1,22 @@
 #include "global.h"
+#include "bg_palette_buffer.h"
+#include "code_80118A4.h"
+#include "code_8012A18_1.h"
+#include "code_80130A8.h"
 #include "code_8098DBC.h"
-#include "personality_test.h"
 #include "constants/emotions.h"
 #include "constants/input.h"
 #include "constants/type.h"
-#include "random.h"
-#include "pokemon.h"
-#include "save.h"
-#include "memory.h"
 #include "game_options.h"
+#include "memory.h"
+#include "menu_input.h"
+#include "personality_test.h"
+#include "pokemon.h"
+#include "random.h"
+#include "save.h"
 #include "text1.h"
 #include "text2.h"
 #include "text_util.h"
-#include "menu_input.h"
-#include "code_80130A8.h"
-#include "code_8012A18_1.h"
-#include "code_80118A4.h"
 
 enum
 {
@@ -46,7 +47,6 @@ extern void sub_8094D28(s32);
 extern void sub_8001044(u32 *);
 
 extern void sub_800836C(u32, u8 *r0, u32);
-extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);
 
 extern void RedrawPartnerSelectionMenu(void);
 

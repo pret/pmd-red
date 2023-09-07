@@ -1,4 +1,5 @@
 #include "global.h"
+#include "bg_palette_buffer.h"
 #include "code_800D090.h"
 #include "code_8094F88.h"
 #include "code_8097670.h"
@@ -49,8 +50,6 @@ extern u8 *sub_8098FB4();
 extern void PrintDungeonLocationtoBuffer(u8 *, DungeonLocation *);
 
 extern void xxx_format_string(u8 *, u8 *, u8 *, u32);
-
-extern void SetBGPaletteBufferColorArray(s32, s32);
 
 const UnkTextStruct2 gUnknown_80E75F8 = {
    0x00, 0x00, 0x00, 0x00,
@@ -371,15 +370,15 @@ void DrawLoadScreenText(void)
 void sub_80397B4(void)
 {
   OpenedFile *clmkFile;
-  int index;
-  int x;
+  s32 index;
+  s32 x;
   s32 y;
 
   clmkFile = OpenFileAndGetFileDataPtr(gClmkpatFileName,&gTitleMenuFileArchive); // clmkpat
 
   for(index = 0; index < 64; index++)
   {
-    SetBGPaletteBufferColorArray(index + 176,*(int *)((clmkFile->data) + 4) + index * 4);
+    SetBGPaletteBufferColorArray(index + 176, (u8 *)(*(s32 *)((clmkFile->data) + 4) + index * 4));
   }
 
   x = 8;
@@ -398,7 +397,7 @@ void sub_80397B4(void)
 
 bool8 IsQuickSave(void)
 {
-  int iVar1;
+  s32 iVar1;
   bool8 isQuicksave;
 
   iVar1 = sub_8011FA8();

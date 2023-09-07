@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_8009804.h"
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
 #include "code_80A26CC.h"
@@ -43,7 +44,6 @@ extern void sub_809B638();
 extern void nullsub_106();
 extern void sub_80A73EC();
 extern void sub_8099750();
-extern void sub_8009908();
 extern void xxx_call_update_bg_sound_input();
 extern void sub_80A6E68();
 extern void GroundMap_Action();

@@ -1,5 +1,6 @@
 	.section .rodata
 
+@ code_2
 	.string "pksdir0\0"
 
 	.global gUnknown_80B690C
@@ -99,7 +100,77 @@ gLoadScreenBackgroundPaletteFileNames: @ 80B6A28
         .4byte titlen1p_text
         .4byte titlen2p_text
 
-	#include "text/save.inc"
+gSaveTextQuicksaving:: @ 80B6A34
+	.string "{CENTER_ALIGN}Quicksaving your adventure...\n"
+	.string "{CENTER_ALIGN}Please don{APOSTROPHE}t turn off the power.\0"
+	.align 2, 0
+
+gSaveTextYourAdventureHasBeenSaved:: @ 80B6A7C
+	.string "{CENTER_ALIGN}Your adventure has been saved.\0"
+	.align 2, 0
+
+gSaveTextYourAdventureHasBeenSavedLong:: @ 80B6AA0
+	.string "{CENTER_ALIGN}Your adventure has been saved.\n"
+	.string "{CENTER_ALIGN}When you are in a dungeon{COMMA} quicksave\n"
+	.string "{CENTER_ALIGN}your progress before ending the game.\0"
+	.align 2, 0
+
+gSaveTextTheDataCouldNotBeWritten:: @ 80B6B14
+	.string "{CENTER_ALIGN}The data could not be written.\n"
+	.string "{CENTER_ALIGN}Please turn off the power and remove\n"
+	.string "{CENTER_ALIGN}and reinsert the DS Card.\0"
+	.align 2, 0
+
+gSaveTextFailed:: @ 80B6B78
+	.string "{CENTER_ALIGN}Save failed.\0"
+	.align 2, 0
+
+gSaveTextError:: @ 80B6B88
+	.string "{CENTER_ALIGN}Error reading data.\n"
+	.string "{CENTER_ALIGN}Please turn off the power and reinsert\n"
+	.string "{CENTER_ALIGN}the DS Game Card.\0"
+	.align 2, 0
+
+gSaveTextCantResume:: @ 80B6BDC
+	.string "{CENTER_ALIGN}Your data was not properly saved{COMMA}\n"
+	.string "{CENTER_ALIGN}so your game cannot be resumed\n"
+	.string "{CENTER_ALIGN}from your last spot.{EXTRA_MSG}{CENTER_ALIGN}Your last outing is considered a defeat.\n"
+	.string "{CENTER_ALIGN}Before shutting down{COMMA} save in your\n"
+	.string "{CENTER_ALIGN}team base{COMMA} or quicksave in a dungeon.\0"
+	.align 2, 0
+
+gSaveTextMayNotResume:: @ 80B6CB8
+	.string "{CENTER_ALIGN}You may not resume your dungeon\n"
+	.string "{CENTER_ALIGN}adventure using this saved data.\n"
+	.string "{CENTER_ALIGN}Your last outing is considered a defeat.\0"
+	.align 2, 0
+
+@ event_flag.c
+.string "pksdir0\0"
+
+	.align 2, 0
+	.global gUnknown_80B6D30
+gUnknown_80B6D30:
+    .2byte 5, 7, 0, 0, 1, 0; .4byte gUnknown_80B6D88
+    .2byte 5, 7, 2, 0, 1, 0; .4byte gUnknown_80B6D80
+    .2byte 5, 7, 4, 0, 1, 0; .4byte gUnknown_80B6D78
+    .2byte 5, 7, 6, 0, 1, 0; .4byte gUnknown_80B6D70
+
+gUnknown_80B6D70:
+    .string "LOCAL3\0"
+    .align 2, 0
+
+gUnknown_80B6D78:
+    .string "LOCAL2\0"
+    .align 2, 0
+
+gUnknown_80B6D80:
+    .string "LOCAL1\0"
+    .align 2, 0
+
+gUnknown_80B6D88:
+    .string "LOCAL0\0"
+    .align 2, 0
 
 	.global gUnknown_80B6D90
 gUnknown_80B6D90: @ 80B6D90
@@ -656,7 +727,9 @@ gUnknown_80B7378: @ 80B7378
 	.global gUnknown_80B7388
 gUnknown_80B7388: @ 80B7388
         .string "1-1\0"
-        .string "pksdir0\0"
+
+@ code.c
+.string "pksdir0\0"
 
 	.global gUnknown_80B7394
 gUnknown_80B7394: @ 80B7394
@@ -1070,18 +1143,26 @@ gUnknown_80B7DF8:
     .string "VERSION\0"
     .align 2, 0
 
-    .string "pksdir0\0"
-    .string "pksdir0\0"
+@ ???
+.string "pksdir0\0"
+
+@ ???
+.string "pksdir0\0"
     .fill 28, 1, 0
-    .string "pksdir0\0"
+
+@ code_8002774.s
+.string "pksdir0\0"
     .fill 8, 1, 0
 
 	.global gUnknown_80B7E3C
 gUnknown_80B7E3C: @ 80B7E3C
     .4byte 0, 1, 1, 1, 1, 0, 1, -1, 0, -1, -1, -1, -1, 0, -1, 1
 
-    .string "pksdir0\0"
-    .string "pksdir0\0"
+@ ???
+.string "pksdir0\0"
+
+@ memory.s
+.string "pksdir0\0"
 
 gUnknown_80B7E8C:
     .string "../system/memory_locate.c\0"
@@ -1134,14 +1215,30 @@ gUnknown_80B7F88: @ 80B7F88
 gLocalCreateErrorMessage: @ 80B7F94
         .string "Memroy LocalCreate buffer %08x size can't locate\0" @ Spelling error is intentional
         .align 2,0
-        .string "pksdir0\0"
-        .string "pksdir0\0"
-        .string "pksdir0\0"
-        .string "pksdir0\0"
-        .string "pksdir0\0"
-        .string "pksdir0\0"
-        .string "pksdir0\0"
-        .string "pksdir0\0"
+
+@ code_80035F0
+.string "pksdir0\0"
+
+@ other_random
+.string "pksdir0\0"
+
+@ util
+.string "pksdir0\0"
+
+@ bg_palette_buffer
+.string "pksdir0\0"
+
+@ input
+.string "pksdir0\0"
+
+@ code_8004AA0
+.string "pksdir0\0"
+
+@ sprite
+.string "pksdir0\0"
+
+@ code_800558C.c
+.string "pksdir0\0"
 
 	.global gUnknown_80B8008
 gUnknown_80B8008: @ 80B8008
@@ -1800,8 +1897,13 @@ gUnknown_80B83EA: @ 80B83EA
     .2byte 0x0000
 
     .align 2, 0
-    .string "pksdir0\0"
-    .string "pksdir0\0"
+
+@ ???
+.string "pksdir0\0"
+
+@ text2.c
+.string "pksdir0\0"
+
 	.global gUnknown_80B853C
 gUnknown_80B853C: @ 80B853C
     .4byte 0x66666666
@@ -1955,7 +2057,9 @@ gUnknown_80B8868: @ 80B8868
         .byte 0x00, 0x00, 0xf0, 0xff
         .byte 0x00, 0x00, 0x00, 0xff
         .byte 0x00, 0x00, 0x00, 0xf0
-        .string "pksdir0\0"
+
+@ text.s
+.string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80B88B0
@@ -1977,8 +2081,12 @@ gUnknown_80B88C0: @ 80B88C0
 gUnknown_80B88CC: @ 80B88CC
         .string "fontpal\0"
         .align 2,0
-        .string "pksdir0\0"
-        .string "pksdir0\0"
+
+@ ???
+.string "pksdir0\0"
+
+@ code_8009804.s
+.string "pksdir0\0"
 
 	.global gFastMod3Lookup
 gFastMod3Lookup: @ 80B88E4

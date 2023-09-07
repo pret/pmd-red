@@ -29,8 +29,12 @@ static EWRAM_DATA_2 unkStruct_20266B0 *sUnknown_203B074 = {0};
 // code.c
 extern void nullsub_3(s32, s32);
 
-void RegisterSpriteParts_80052BC(UnkSpriteMem *);
-void sub_800545C(EntitySpriteInfo *, Dungeon_ax *, u32, u32, u32, bool8);
+#ifndef NONMATCHING
+UNUSED // TODO: Remove the "UNUSED" attribute after sub_8004EA8 is done
+#endif
+static void RegisterSpriteParts_80052BC(UnkSpriteMem *);
+
+static void sub_800545C(EntitySpriteInfo *, Dungeon_ax *, u32, u32, u32, bool8);
 
 void InitSprites(void)
 {
@@ -152,7 +156,7 @@ void sub_8004E8C(unkStruct_2039DB0 *a0)
 // https://decomp.me/scratch/VYqKb
 // spriteMasks is a u16[6]
 #if NONMATCHING
-void sub_8004EA8(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, u16 *spriteMasks)
+static void sub_8004EA8(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, u16 *spriteMasks)
 {
     // size: 0xC
     struct UnkStackFor8004EA8
@@ -254,7 +258,7 @@ void sub_8004EA8(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, u16 *spriteMasks)
 }
 #else
 NAKED
-void sub_8004EA8(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, u16 *spriteMasks)
+static void sub_8004EA8(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, u16 *spriteMasks)
 {
     asm_unified(
     "push {r4-r7,lr}\n"
@@ -766,10 +770,10 @@ void SetSavingIconCoords(Position *pos)
 
 void BlinkSavingIcon(void)
 {
-    volatile u16 *oam;
+    vu16 *oam;
     u32 uVar1;
 
-    oam = (u16 *)OAM;
+    oam = (vu16 *)OAM;
     uVar1 = sUnknown_2025698++;
 
     if (uVar1 & 16) {
@@ -805,7 +809,7 @@ void BlinkSavingIcon(void)
 
 #ifdef NONMATCHING // https://decomp.me/scratch/taTIU
 extern u32 RegisterSpriteParts_80052BC_end[0] asm("sCharMemCursor");
-void RegisterSpriteParts_80052BC(UnkSpriteMem *a0)
+static void RegisterSpriteParts_80052BC(UnkSpriteMem *a0)
 {
     if (a0->byteCount) {
         unkStruct_20266B0 **r5 = &sUnknown_203B074;
@@ -825,8 +829,9 @@ void RegisterSpriteParts_80052BC(UnkSpriteMem *a0)
     }
 }
 #else
+UNUSED // TODO: Remove the "UNUSED" attribute after sub_8004EA8 is done
 NAKED
-void RegisterSpriteParts_80052BC(UnkSpriteMem *a0)
+static void RegisterSpriteParts_80052BC(UnkSpriteMem *a0)
 {
     asm_unified(
     "push {r4-r6,lr}\n"
@@ -929,7 +934,7 @@ void sub_800543C(EntitySpriteInfo *a0, OpenedFile *a1, u32 a2, u32 a3, u32 sprit
     sub_800545C(a0, (Dungeon_ax *)a1->data, a2, a3, spriteAnimIndex, a5);
 }
 
-void sub_800545C(EntitySpriteInfo *a0, Dungeon_ax *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
+static void sub_800545C(EntitySpriteInfo *a0, Dungeon_ax *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
 {
     a0->unk0 = 0x8000;
     if (a5)
