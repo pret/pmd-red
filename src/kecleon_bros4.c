@@ -14,8 +14,8 @@
 extern u8 gUnknown_202DE58[];
 
 static EWRAM_DATA_2 struct unkStruct_203B224 *gUnknown_203B224 = {0};
-static EWRAM_DATA_2 u16 gUnknown_203B228;
-static EWRAM_DATA_2 u16 gUnknown_203B22A;
+static EWRAM_DATA_2 u16 gUnknown_203B228 = {0};
+static EWRAM_DATA_2 u16 gUnknown_203B22A = {0};
 
 #include "data/kecleon_bros4.h"
 

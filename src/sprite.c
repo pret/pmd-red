@@ -3,25 +3,25 @@
 #include "random.h"
 #include "sprite.h"
 
-static EWRAM_DATA u16 sOAMSpriteCount; // Written to but never read
+static EWRAM_DATA u16 sOAMSpriteCount = {0}; // Written to but never read
 #ifndef NONMATCHING
 UNUSED // TODO: Remove the "UNUSED" attribute after sub_8004EA8 is done
 #endif
-static EWRAM_DATA s16 sUnknown_2025672[8];
+static EWRAM_DATA s16 sUnknown_2025672[8] = {0};
 #ifndef NONMATCHING
 UNUSED // TODO: Remove the "UNUSED" attribute after sub_8004EA8 is done
 #endif
-static EWRAM_DATA s16 sUnknown_2025682[9];
-static EWRAM_DATA Position sUnknown_2025694;
-static EWRAM_DATA u32 sUnknown_2025698;
-static EWRAM_DATA SpriteList sUnknown_20256A0;
-static EWRAM_DATA UnkSpriteLink sUnknown_2025EA8[128];
-static EWRAM_DATA SpriteOAM sUnknown_20262A8[128];
-static EWRAM_DATA s32 sSpriteCount; // 20266A8
-static EWRAM_DATA unkStruct_20266B0 sUnknown_20266B0[160];
-static EWRAM_DATA void *sCharMemCursor; // 2026E30
+static EWRAM_DATA s16 sUnknown_2025682[9] = {0};
+static EWRAM_DATA Position sUnknown_2025694 = {0};
+static EWRAM_DATA u32 sUnknown_2025698 = {0};
+static EWRAM_DATA SpriteList sUnknown_20256A0 = {0};
+static EWRAM_DATA UnkSpriteLink sUnknown_2025EA8[128] = {0};
+static EWRAM_DATA SpriteOAM sUnknown_20262A8[128] = {0};
+static EWRAM_DATA s32 sSpriteCount = {0}; // 20266A8
+static EWRAM_DATA unkStruct_20266B0 sUnknown_20266B0[160] = {0};
+static EWRAM_DATA void *sCharMemCursor = {0}; // 2026E30
 
-extern unkStruct_20266B0 *gUnknown_203B074;
+static EWRAM_DATA_2 unkStruct_20266B0 *sUnknown_203B074 = {0};
 
 // code.c
 extern void nullsub_3(s32, s32);
@@ -46,7 +46,7 @@ void ResetSprites(bool8 a0)
 
     sSpriteCount = 0;
     sCharMemCursor = OBJ_VRAM0;
-    gUnknown_203B074 = &sUnknown_20266B0[0];
+    sUnknown_203B074 = &sUnknown_20266B0[0];
 
     a = &sUnknown_20256A0.sprites[0];
     b = a + 1;
@@ -805,7 +805,7 @@ extern u32 RegisterSpriteParts_80052BC_end[0] asm("sCharMemCursor");
 void RegisterSpriteParts_80052BC(UnkSpriteMem *a0)
 {
     if (a0->byteCount) {
-        unkStruct_20266B0 **r5 = &gUnknown_203B074;
+        unkStruct_20266B0 **r5 = &sUnknown_203B074;
         void *r6 = RegisterSpriteParts_80052BC_end;
         void **r4 = &sCharMemCursor;
         do {
@@ -859,7 +859,7 @@ void RegisterSpriteParts_80052BC(UnkSpriteMem *a0)
     "\tpop {r0}\n"
     "\tbx r0\n"
     "\t.align 2, 0\n"
-"_080052F8: .4byte gUnknown_203B074\n"
+"_080052F8: .4byte sUnknown_203B074\n"
 "_080052FC: .4byte sCharMemCursor\n"
 "_08005300: .4byte sCharMemCursor");
 }
@@ -869,7 +869,7 @@ void sub_8005304(void)
 {
     unkStruct_20266B0 *s;
 
-    for (s = &sUnknown_20266B0[0]; s < gUnknown_203B074; s++) {
+    for (s = &sUnknown_20266B0[0]; s < sUnknown_203B074; s++) {
         if (s->src != NULL)
             CpuCopy(s->dest, s->src, s->byteCount);
         else

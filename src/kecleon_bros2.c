@@ -10,7 +10,7 @@
 #include "text2.h"
 
 static EWRAM_DATA_2 struct unkStruct_203B214 *gUnknown_203B214 = {0};
-static EWRAM_DATA_2 u16 gUnknown_203B218;
+static EWRAM_DATA_2 u16 gUnknown_203B218 = {0};
 
 #include "data/kecleon_bros2.h"
 

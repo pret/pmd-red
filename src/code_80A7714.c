@@ -6,7 +6,7 @@ extern void sub_80A7094(struct axPokemon *, u32, u32, u32);
 extern void sub_80A7310(struct axPokemon *, u32, u32, u32);
 extern void sub_80A7784();
 
-static EWRAM_DATA s16 sUnknown_2039DE0;
+static EWRAM_DATA s16 sUnknown_2039DE0 = {0};
 
 extern const u32 gUnknown_8117EFC;
 extern const u32 *gMapScriptTable[]; // 811E2F8
