@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_803D0D8.h"
 #include "text1.h"
 #include "text2.h"
 #include "menu_input.h"
@@ -56,7 +57,6 @@ extern void sub_80370D4(void);
 extern void CleanWonderMailMenu(void);
 extern void sub_80383A8(void);
 extern void CleanSaveMenu(void);
-extern u8 sub_803D0D8();
 
 void CleanMainMenu(void);
 void DrawMainMenu(void);

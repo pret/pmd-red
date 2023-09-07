@@ -263,7 +263,7 @@ gUnknown_202DEA8: /* 202DEA8 */
 gAvailablePokemonNames: /* 202DF98 gAvailablePokemonNames[80][] */
 	.space 80
 
-gUnknown_202DFE8: /* 202DFE8 (code_805D8C8 / code_806CD90 / code_806E8B0 / code_8073CF0 / code_80521D0 / code_8057824 / code_8077274_1 / gulpin_shop_1 / status_actions) */
+gUnknown_202DFE8: /* 202DFE8 (code_805D8C8 / code_806CD90 / code_806E8B0 / code_8073CF0 / code_80521D0 / code_8057824 / code_8077274_1 / gulpin_shop_801FB50 / status_actions) */
 	.space 80
 
 gUnknown_202E038: /* 202E038 (code_8057824_1 / code_8086A3C / code_808417C / wonder_mail_3_mid) ({ARG_POKEMON_2}) */
@@ -272,10 +272,10 @@ gUnknown_202E038: /* 202E038 (code_8057824_1 / code_8086A3C / code_808417C / won
 gUnknown_202E088: /* 202E088 (code_8057824_1 / code_806E8B0 / code_808417C / wonder_mail_3_mid) [{ARG_POKEMON_3}]? */
 	.space 160
 
-gUnknown_202E128: /* 202E128 (gulpin_shop_1) */
+gUnknown_202E128: /* 202E128 (gulpin_shop_801FB50) */
 	.space 160
 
-gUnknown_202E1C8: /* 202E1C8 (code_801AFA4 / felicity_bank / gulpin_shop_1 / kangaskhan_storage / kecleon_bros1 / makuhita_dojo1 / wigglytuff_shop / wonder_mail_802DF88) */
+gUnknown_202E1C8: /* 202E1C8 (code_801AFA4 / felicity_bank / gulpin_shop_801FB50 / kangaskhan_storage / kecleon_bros1 / makuhita_dojo1 / wigglytuff_shop / wonder_mail_802DF88) */
 	.space 80
 
 gUnknown_202E218: /* 202E218 (code_801AFA4) */
@@ -284,7 +284,7 @@ gUnknown_202E218: /* 202E218 (code_801AFA4) */
 gPlayerName: /* 202E2B8 (ground_script / code_8098BDC / luminous_cave / makuhita_dojo1) */
 	.space 800
 
-gUnknown_202E5D8: /* 202E5D8 (code_80130A8 / code_8098BDC / code_80521D0 / felicity_bank / friend_rescue / gulpin_shop_1 / kangaskhan_storage / kecleon_bros1 / makuhita_dojo1 / pokemon_news / post_office_guide1 / thank_you_wonder_mail / wigglytuff_shop / wonder_mail_2 / wonder_mail_3_mid / wonder_mail_802DF88 / wonder_mail */
+gUnknown_202E5D8: /* 202E5D8 (code_80130A8 / code_8098BDC / code_80521D0 / felicity_bank / friend_rescue / gulpin_shop_801FB50 / kangaskhan_storage / kecleon_bros1 / makuhita_dojo1 / pokemon_news / post_office_guide1 / thank_you_wonder_mail / wigglytuff_shop / wonder_mail_2 / wonder_mail_3_mid / wonder_mail_802DF88 / wonder_mail */
 	.space 80
 
 gUnknown_202E628: /* 202E628 (code_80130A8 / code_806E8B0 / ground_script / wigglytuff_shop / wonder_mail_3_mid) */

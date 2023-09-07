@@ -31,8 +31,9 @@ u8 sub_801EE10(u32, s16, Move *, u32, const u8 *, u32);
 // code_801EE10.s
 extern u32 sub_801EF38(u32);
 extern u32 sub_801F194(void);
+extern bool8 sub_801F1A4(void);
 extern void sub_801F1B0(bool8, bool8);
 extern void sub_801F214(void);
 extern void sub_801F280(u32); // Probably bool
 
-#endif
+#endif // CODE_801EE10_H

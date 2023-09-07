@@ -1,12 +1,13 @@
 #include "global.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
+#include "code_801C620.h"
 #include "code_801EE10.h"
 #include "code_801EE10_1.h"
 #include "code_801EE10_mid.h"
 #include "felicity_bank.h"
 #include "gulpin_shop.h"
-#include "gulpin_shop_1.h"
+#include "gulpin_shop_801FB50.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "moves.h"
@@ -17,121 +18,92 @@
 
 EWRAM_DATA_2 struct unkStruct_203B27C *gUnknown_203B27C = {0};
 
-extern u8 gAvailablePokemonNames[];
+extern u8 gAvailablePokemonNames[]; // 202DF98
 extern u8 gUnknown_202DFE8[];
+extern u8 gUnknown_202E128[];
 extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
-extern UnkTextStruct2 gUnknown_80DC31C;
-extern UnkTextStruct2 gUnknown_80DC334;
-extern UnkTextStruct2 gUnknown_80DC31C;
-extern UnkTextStruct2 gUnknown_80DC34C;
-extern UnkTextStruct2 gUnknown_80DC37C;
-
+extern const u8 *gUnknown_80D4920[];
+extern const u8 *gUnknown_80D4928[];
+extern const u8 *gUnknown_80D4934[];
+extern const u8 *gUnknown_80D4970[];
 extern const u8 *gGulpinDialogue[2][25]; // 80D8888
-extern u8 gUnknown_80DC3D8[];
-extern u8 gUnknown_80DC3E0[];
-extern u8 gUnknown_80DC3E8[];
-extern u8 gUnknown_80DC3F4[];
-extern u8 gUnknown_80DC394[];
-extern u8 gGulpinProceed[];
-extern u8 gGulpinInfo[];
-extern u8 *gUnknown_80D4934[];
-extern u8 *gUnknown_80D4920[];
-extern u8 *gUnknown_80D4928[];
-extern u8 gGulpinForget[];
-extern u8 gGulpinLink[];
-extern u8 gGulpinDelink[];
-extern u8 gGulpinSet[];
-extern u8 gGulpinDeselect[];
-extern u8 *gUnknown_80D4970[];
-extern u8 gUnknown_80DC428[];
-extern u8 gUnknown_80DC438[];
-extern u8 gUnknown_80DC448[];
-extern u8 gUnknown_202E128[];
 
-bool8 sub_8021178(void);
-void CreateGulpinShopMenu(void);
-void sub_8020950(void);
-void sub_8020900(void);
-void sub_801F700(void);
-bool8 sub_801F428(s16 index, s32 param_2);
-void sub_801F5F0(u8 r0);
-void sub_8024458(u32, u32);
-extern void sub_801BEEC(s16);
-void sub_80208B0(void);
-extern void sub_801FDA8(s32);
-extern void sub_8020A80(void);
-extern void sub_8020B38(void);
-extern void sub_8020C2C(void);
-extern void sub_8020C48(void);
-extern void sub_8020C64(void);
-extern void sub_8020CC0(void);
-extern void sub_8020D74(void);
-extern void sub_8020D90(void);
-extern void sub_8020DCC(void);
-extern void sub_8020EB4(void);
-extern void sub_80210C8(void);
-extern void sub_80210E4(void);
-extern void sub_8021154(void);
-extern void sub_80209AC(void);
-extern void sub_8021130(void);
-extern void sub_80209FC(void);
-extern void sub_8020A34(void);
-extern void sub_801FDC0(void);
-extern void sub_801FF28(void);
+#include "data/gulpin_shop_801FB50.h"
+
+// code_801EE10_1.c (return var type)
 extern u32 sub_80244E4(void);
-extern u32 sub_801BF48(void);
-extern void sub_802453C(void);
-extern void sub_801BF98(void);
-extern u32 sub_801F520(u32);
-extern void sub_801F63C(void);
-extern u16 sub_801F5B4(void);
-bool8 sub_801F1A4(void);
 
-extern void CreateGulpinLinkMenu(void);
-extern void sub_802069C(void);
-extern void sub_80205D0(void);
+static void CreateGulpinLinkMenu(void);
+static void CreateGulpinShopMenu(void);
 
-bool8 sub_801FB50(bool32 isAsleep)
+static void sub_801FDA8(s32);
+static void sub_801FDC0(void);
+static void sub_801FF28(void);
+static void sub_80205D0(void);
+static void sub_802069C(void);
+static void sub_80208B0(void);
+static void sub_8020900(void);
+static void sub_8020950(void);
+static void sub_80209AC(void);
+static void sub_80209FC(void);
+static void sub_8020A34(void);
+static void sub_8020A80(void);
+static void sub_8020B38(void);
+static void sub_8020C2C(void);
+static void sub_8020C48(void);
+static void sub_8020C64(void);
+static void sub_8020CC0(void);
+static void sub_8020D74(void);
+static void sub_8020D90(void);
+static void sub_8020DCC(void);
+static void sub_8020EB4(void);
+static void sub_80210C8(void);
+static void sub_80210E4(void);
+static void sub_8021130(void);
+static void sub_8021154(void);
+static bool8 sub_8021178(void);
+
+bool8 sub_801FB50(u32 mode)
 {
-  char *name;
-  OpenedFile *faceFile;
-  
-  ResetUnusedInputStruct();
-  sub_800641C(NULL, TRUE, TRUE);
-  gUnknown_203B27C = MemoryAlloc(sizeof(struct unkStruct_203B27C), 0x8);
-  gUnknown_203B27C->menuAction2 = 0;
-  gUnknown_203B27C->menuAction3 = 0;
-  gUnknown_203B27C->menuAction4 = 0;
-  gUnknown_203B27C->isAsleep = isAsleep;
-  gUnknown_203B27C->unk15 = FALSE;
-  CopyYellowMonsterNametoBuffer(gUnknown_202E5D8,MONSTER_GULPIN);
-  CopyYellowMonsterNametoBuffer(gUnknown_202E1C8,MONSTER_GULPIN);
-  name = GetMonSpecies(MONSTER_GULPIN);
-  strcpy(gUnknown_202E1C8 - 80, name);
-  PrintPokeNameToBuffer(gUnknown_202E1C8 - 0xF0, GetPlayerPokemonStruct());
-  if (gUnknown_203B27C->isAsleep == 1) {
-    gUnknown_203B27C->unk17C = NULL;
-  }
-  else {
-    gUnknown_203B27C->unk17C = &gUnknown_203B27C->faceFile;
-  }
-  faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
-  gUnknown_203B27C->faceFile = faceFile;
-  gUnknown_203B27C->faceData = faceFile->data;
-  gUnknown_203B27C->unk178 = 0;
-  gUnknown_203B27C->unk179 = 0;
-  gUnknown_203B27C->unk17A = 0;
-  gUnknown_203B27C->unk174 = 2;
-  gUnknown_203B27C->unk176 = 8;
-  sub_801FDA8(0);
-  return TRUE;
+    u8 *name;
+    OpenedFile *faceFile;
+
+    ResetUnusedInputStruct();
+    sub_800641C(NULL, TRUE, TRUE);
+    gUnknown_203B27C = MemoryAlloc(sizeof(struct unkStruct_203B27C), 0x8);
+    gUnknown_203B27C->menuAction2 = 0;
+    gUnknown_203B27C->menuAction3 = 0;
+    gUnknown_203B27C->menuAction4 = 0;
+    gUnknown_203B27C->isAsleep = mode;
+    gUnknown_203B27C->unk15 = FALSE;
+    CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_GULPIN);
+    CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_GULPIN);
+    name = GetMonSpecies(MONSTER_GULPIN);
+    strcpy(gUnknown_202E1C8 - 80, name);
+    PrintPokeNameToBuffer(gUnknown_202E1C8 - 0xF0, GetPlayerPokemonStruct());
+
+    if (gUnknown_203B27C->isAsleep == TRUE)
+        gUnknown_203B27C->unk17C = NULL;
+    else
+        gUnknown_203B27C->unk17C = &gUnknown_203B27C->faceFile;
+
+    faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
+    gUnknown_203B27C->faceFile = faceFile;
+    gUnknown_203B27C->faceData = faceFile->data;
+    gUnknown_203B27C->unk178 = 0;
+    gUnknown_203B27C->unk179 = 0;
+    gUnknown_203B27C->unk17A = 0;
+    gUnknown_203B27C->unk174 = 2;
+    gUnknown_203B27C->unk176 = 8;
+    sub_801FDA8(0);
+    return TRUE;
 }
 
 u32 sub_801FC40(void)
 {
-    switch(gUnknown_203B27C->state) {
+    switch (gUnknown_203B27C->state) {
         case 0:
         case 1:
             sub_8021154();
@@ -185,9 +157,8 @@ u32 sub_801FC40(void)
             sub_80210E4();
             break;
         case 0xd:
-            if (gUnknown_203B27C->unk15 == TRUE) {
+            if (gUnknown_203B27C->unk15 == TRUE)
                 gTeamInventoryRef->teamMoney -= 150;
-            }
             return 3;
         default:
             sub_8021130();
@@ -198,28 +169,27 @@ u32 sub_801FC40(void)
 
 void sub_801FD7C(void)
 {
-    if(gUnknown_203B27C)
-    {
+    if (gUnknown_203B27C) {
         CloseFile(gUnknown_203B27C->faceFile);
         MemoryFree(gUnknown_203B27C);
         gUnknown_203B27C = NULL;
     }
 }
 
-void sub_801FDA8(s32 newState)
+static void sub_801FDA8(s32 newState)
 {
     gUnknown_203B27C->state = newState;
     sub_801FDC0();
     sub_801FF28();
 }
 
-void sub_801FDC0(void)
+static void sub_801FDC0(void)
 {
     s32 index;
 
     sub_8006518(gUnknown_203B27C->unk180);
-    switch(gUnknown_203B27C->state)
-    {
+
+    switch (gUnknown_203B27C->state) {
         case 0x2:
             gUnknown_203B27C->unk180[0].unk0 = 0x80;
             gUnknown_203B27C->unk180[1].unk0 = 0x80;
@@ -251,17 +221,16 @@ void sub_801FDC0(void)
             sub_800641C(gUnknown_203B27C->unk180, TRUE, TRUE);
             break;
         default:
-            for(index = 0; index < 4; index++)
-            {
+            for (index = 0; index < 4; index++)
                 gUnknown_203B27C->unk180[index] = gUnknown_80DC31C;
-            }
+
             ResetUnusedInputStruct();
             sub_800641C(gUnknown_203B27C->unk180, TRUE, TRUE);
             break;
     }
 }
 
-void sub_801FF28(void)
+static void sub_801FF28(void)
 {
     s32 index;
 
@@ -353,7 +322,7 @@ void sub_801FF28(void)
             sub_801F428(gUnknown_203B27C->speciesNum,0);
             break;
         case 0x16:
-            sub_801F5F0(1);
+            sub_801F5F0(TRUE);
             break;
         case 0x17:
             sub_801F700();
@@ -443,7 +412,7 @@ void sub_801FF28(void)
     }
 }
 
-void CreateGulpinShopMenu(void)
+static void CreateGulpinShopMenu(void)
 {
     s32 loopMax = 0;
     MemoryFill16(gUnknown_203B27C->unkBC, 0, sizeof(gUnknown_203B27C->unkBC));
@@ -460,17 +429,17 @@ void CreateGulpinShopMenu(void)
     gUnknown_203B27C->unk7C[loopMax].menuAction = 1;
 }
 
-void sub_80205D0(void)
+static void sub_80205D0(void)
 {
     s32 loopMax;
     s32 i;
     loopMax = 0;
-    
+
     MemoryFill16(gUnknown_203B27C->unkBC, 0, sizeof(gUnknown_203B27C->unkBC));
-    
+
     gUnknown_203B27C->unk7C[loopMax].text = gUnknown_80DC3D8;
     gUnknown_203B27C->unk7C[loopMax].menuAction = 4;
-    
+
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gUnknown_80DC3E0;
     gUnknown_203B27C->unk7C[loopMax].menuAction = 0xB;
@@ -499,14 +468,14 @@ void sub_80205D0(void)
     }
 }
 
-void sub_802069C(void)
+static void sub_802069C(void)
 {
     s32 loopMax;
     s32 i;
     loopMax = 0;
-    
+
     MemoryFill16(gUnknown_203B27C->unkBC, 0, sizeof(gUnknown_203B27C->unkBC));
-    
+
     gUnknown_203B27C->unk7C[loopMax].text = gUnknown_80DC3F4;
     gUnknown_203B27C->unk7C[loopMax].menuAction = 0x3;
 
@@ -530,12 +499,12 @@ void sub_802069C(void)
     }
 }
 
-void CreateGulpinLinkMenu(void)
+static void CreateGulpinLinkMenu(void)
 {
     s32 loopMax;
     s32 i;
     loopMax = 0;
-    
+
     MemoryFill16(gUnknown_203B27C->unkBC, 0, sizeof(gUnknown_203B27C->unkBC));
 
     if(gUnknown_203B27C->isTeamLeader)
@@ -596,7 +565,7 @@ void CreateGulpinLinkMenu(void)
     }
 }
 
-void sub_80208B0(void)
+static void sub_80208B0(void)
 {
     s32 loopMax = 0;
     MemoryFill16(gUnknown_203B27C->unkBC, 0, sizeof(gUnknown_203B27C->unkBC));
@@ -610,7 +579,7 @@ void sub_80208B0(void)
     gUnknown_203B27C->unk7C[loopMax].menuAction = 1;
 }
 
-void sub_8020900(void)
+static void sub_8020900(void)
 {
     s32 loopMax = 0;
     MemoryFill16(gUnknown_203B27C->unkBC, 0, sizeof(gUnknown_203B27C->unkBC));
@@ -624,7 +593,7 @@ void sub_8020900(void)
     gUnknown_203B27C->unk7C[loopMax].menuAction = -1;
 }
 
-void sub_8020950(void)
+static void sub_8020950(void)
 {
     s32 loopMax = 0;
     MemoryFill16(gUnknown_203B27C->unkBC, 0, sizeof(gUnknown_203B27C->unkBC));
@@ -642,7 +611,7 @@ void sub_8020950(void)
     gUnknown_203B27C->unk7C[loopMax].menuAction = 1;
 }
 
-void sub_80209AC(void)
+static void sub_80209AC(void)
 {
     s32 menuAction;
     if(sub_80144A4(&menuAction) == 0)
@@ -663,7 +632,7 @@ void sub_80209AC(void)
     }
 }
 
-void sub_80209FC(void)
+static void sub_80209FC(void)
 {
     s32 menuAction;
     if(sub_80144A4(&menuAction) == 0)
@@ -681,7 +650,7 @@ void sub_80209FC(void)
     }
 }
 
-void sub_8020A34(void)
+static void sub_8020A34(void)
 {
     s32 menuAction;
     if(sub_80144A4(&menuAction) == 0)
@@ -704,7 +673,7 @@ void sub_8020A34(void)
     }
 }
 
-void sub_8020A80(void)
+static void sub_8020A80(void)
 {
     switch(sub_8023A94(TRUE))
     {
@@ -732,7 +701,7 @@ void sub_8020A80(void)
     }
 }
 
-void sub_8020B38(void)
+static void sub_8020B38(void)
 {
     s32 menuAction;
 
@@ -777,7 +746,7 @@ void sub_8020B38(void)
     }
 }
 
-void sub_8020C2C(void)
+static void sub_8020C2C(void)
 {
     switch(sub_80244E4())
     {
@@ -792,7 +761,7 @@ void sub_8020C2C(void)
     }
 }
 
-void sub_8020C48(void)
+static void sub_8020C48(void)
 {
     switch(sub_801BF48())
     {
@@ -807,7 +776,7 @@ void sub_8020C48(void)
     }
 }
 
-void sub_8020C64(void)
+static void sub_8020C64(void)
 {
     switch(sub_801F520(1))
     {
@@ -826,12 +795,12 @@ void sub_8020C64(void)
     }
 }
 
-void sub_8020CC0(void)
+static void sub_8020CC0(void)
 {
     s32 menuAction;
     s32 index;
     Move *move;
-    
+
     menuAction = 0;
     sub_801F520(0);
     if (!sub_8012FD8(&gUnknown_203B27C->unkCC)) {
@@ -874,7 +843,7 @@ void sub_8020CC0(void)
     }
 }
 
-void sub_8020D74(void)
+static void sub_8020D74(void)
 {
     switch(sub_801F890())
     {
@@ -889,7 +858,7 @@ void sub_8020D74(void)
     }
 }
 
-void sub_8020D90(void)
+static void sub_8020D90(void)
 {
     switch(sub_801E8C0())
     {
@@ -908,11 +877,11 @@ void sub_8020D90(void)
     }
 }
 
-void sub_8020DCC(void)
+static void sub_8020DCC(void)
 {
   switch(sub_801EF38(1)) {
       case 3:
-        if (sub_801F1A4() != 0) {
+        if (sub_801F1A4()) {
           gUnknown_203B27C->unk15 = TRUE;
         }
         gUnknown_203B27C->moveIndex = sub_801F194();
@@ -921,7 +890,7 @@ void sub_8020DCC(void)
         sub_801FDA8(0x20);
         break;
       case 4:
-        if (sub_801F1A4() != 0) {
+        if (sub_801F1A4()) {
           gUnknown_203B27C->unk15 = TRUE;
         }
         gUnknown_203B27C->moveIndex = sub_801F194();
@@ -930,7 +899,7 @@ void sub_8020DCC(void)
         sub_801FDA8(0x21);
         break;
       case 2:
-        if (sub_801F1A4() != 0) {
+        if (sub_801F1A4()) {
           gUnknown_203B27C->unk15 = TRUE;
         }
         sub_801F214();
@@ -938,7 +907,7 @@ void sub_8020DCC(void)
         sub_801FDA8(0x10);
         break;
       case 1:
-        if (sub_801F1A4() != 0) {
+        if (sub_801F1A4()) {
           gUnknown_203B27C->unk15 = TRUE;
         }
         break;
@@ -947,10 +916,10 @@ void sub_8020DCC(void)
   }
 }
 
-void sub_8020EB4(void)
+static void sub_8020EB4(void)
 {
     s32 menuAction;
-    
+
     menuAction = 0;
     sub_801EF38(0);
     if (!sub_8012FD8(&gUnknown_203B27C->unkCC)) {
@@ -1048,21 +1017,20 @@ void sub_8020EB4(void)
             }
             break;
         case 0xB:
-            sub_801FDA8(0x21);
+            sub_801FDA8(33);
             break;
         case 0xC ... 0xF:
             break;
     }
 }
 
-void sub_80210C8(void)
+static void sub_80210C8(void)
 {
-    switch(sub_801F890())
-    {
+    switch (sub_801F890()) {
         case 2:
         case 3:
             sub_801F8D0();
-            sub_801FDA8(0x1F);
+            sub_801FDA8(31);
             break;
         case 0:
         case 1:
@@ -1070,49 +1038,47 @@ void sub_80210C8(void)
     }
 }
 
-void sub_80210E4(void)
+static void sub_80210E4(void)
 {
     s32 menuAction;
-    if(sub_80144A4(&menuAction) == 0)
-    {
-        switch(menuAction)
-        {
-            case 0x10:
+
+    if (sub_80144A4(&menuAction) == 0) {
+        switch (menuAction) {
+            case 16:
                 RemoveLinkSequenceFromMoves8(gUnknown_203B27C->moves, gUnknown_203B27C->moveIndex);
-                sub_801FDA8(0x23);
+                sub_801FDA8(35);
                 break;
             case 1:
-            case 0x11:
-                sub_801FDA8(0x1F);
+            case 17:
+                sub_801FDA8(31);
                 break;
         }
     }
 }
 
-void sub_8021130(void)
+static void sub_8021130(void)
 {
     s32 temp;
-    if(sub_80144A4(&temp) == 0)
-    {
+
+    if (sub_80144A4(&temp) == 0)
         sub_801FDA8(gUnknown_203B27C->fallbackState);
-    }
 }
 
-void sub_8021154(void)
+static void sub_8021154(void)
 {
     s32 temp;
-    if(sub_80144A4(&temp) == 4)
-    {
+
+    if (sub_80144A4(&temp) == 4)
         sub_801FDA8(gUnknown_203B27C->fallbackState);
-    }
 }
 
-bool8 sub_8021178(void)
+static bool8 sub_8021178(void)
 {
     s32 count;
     unkStruct_808E218_arg local;
 
     count = sub_808E218(&local, gUnknown_203B27C->pokeStruct);
-    if(count == 0) return TRUE;
+    if (count == 0)
+        return TRUE;
     else return FALSE;
 }

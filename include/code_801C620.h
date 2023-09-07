@@ -3,6 +3,9 @@
 
 #include "text.h"
 
+bool8 sub_801BEEC(s16);
+u32 sub_801BF48(void);
+void sub_801BF98(void);
 bool8 sub_801C8C4(s32, s32, UnkTextStruct2_sub *, u32);
 extern u32 sub_801CA08(bool8);
 u8 sub_801CB24(void);

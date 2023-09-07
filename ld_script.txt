@@ -113,7 +113,7 @@ SECTIONS {
         src/code_801EE10.o(.text);
         asm/code_801EE10.o(.text);
         src/code_801EE10_mid.o(.text);
-        src/gulpin_shop_1.o(.text);
+        src/gulpin_shop_801FB50.o(.text);
         src/wigglytuff_shop.o(.text);
         src/code_8023144_pre.o(.text);
         asm/code_8023144.o(.text);
@@ -410,6 +410,8 @@ SECTIONS {
         src/code_801B3C0.o(.rodata);
         src/code_801B60C.o(.rodata);
         data/data_80DBD98.o(.rodata);
+        src/gulpin_shop_801FB50.o(.rodata);
+        data/data_80DC464.o(.rodata);
         src/luminous_cave.o(.rodata);
         src/friend_list_menu.o(.rodata);
         src/party_list_menu.o(.rodata);
@@ -450,6 +452,7 @@ SECTIONS {
         src/pokemon_mail.o(.rodata);
         data/personality_test.o(.rodata);
         src/personality_test.o(.rodata);
+        src/code_803D0D8.o(.rodata);
         data/data_80F4278.o(.rodata);
         src/dungeon_util.o(.rodata);
         data/data_80F4468.o(.rodata);

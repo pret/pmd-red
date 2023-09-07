@@ -3,7 +3,9 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
+#include "code_801C620.h"
 #include "code_801EE10.h"
+#include "code_801EE10_1.h"
 #include "code_801EE10_mid.h"
 #include "code_8098BDC.h"
 #include "constants/dungeon.h"
@@ -68,19 +70,14 @@ extern s32 sub_8008ED0(u8 *);
 extern void nullsub_104(void);
 extern u32 sub_8022860(void);
 extern void sub_8022908(void);
-extern void sub_801BF98(void);
-extern u32 sub_801BF48(void);
-extern void sub_802453C(void);
 extern u32 sub_80244E4(void);
 extern bool8 sub_808D750(s16 index_);
 extern void sub_808ED00(void);
 bool8 sub_8026E88(PokemonStruct1 *r0);
 bool8 HasGummiItem();
 bool8 sub_8026EB8(PokemonStruct1 *r0);
-extern void sub_8024458(s16, u32);
 void sub_8026E08(u32 r0);
 void sub_8026DAC(u32 r0, BulkItem *item);
-bool8 sub_801BEEC(s16 species);
 void sub_8026FA4(void);
 void sub_8026878(void);
 extern void sub_80227B8(PokemonStruct1 *);

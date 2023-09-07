@@ -203,8 +203,7 @@ gUnknown_203B274: /* 203B274 */
 gUnknown_203B278: /* 203B278 */
 	.space 0x4
 
-.include "src/gulpin_shop_1.o"
-
+.include "src/gulpin_shop_801FB50.o"
 .include "src/wigglytuff_shop.o"
 
 gUnknown_203B294: /* 203B294 */
@@ -238,85 +237,85 @@ gUnknown_203B2AC: /* 203B2AC */
 .include "src/friend_list_menu.o"
 .include "src/party_list_menu.o"
 
-gUnknown_203B2BC: /* 203B2BC */
+gUnknown_203B2BC: /* 203B2BC (friend_area_action_menu) */
 	.space 0x4
 
-gUnknown_203B2C0: /* 203B2C0 */
+gUnknown_203B2C0: /* 203B2C0 (wonder_mail) */
 	.space 0x4
 
-gUnknown_203B2C4: /* 203B2C4 */
+gUnknown_203B2C4: /* 203B2C4 (thank_you_wonder_mail) */
 	.space 0x4
 
-gUnknown_203B2C8: /* 203B2C8 */
+gUnknown_203B2C8: /* 203B2C8 (wonder_mail_2) */
 	.space 0x4
 
-gUnknown_203B2CC: /* 203B2CC */
+gUnknown_203B2CC: /* 203B2CC (pokemon_news) */
 	.space 0x4
 
-gUnknown_203B2D0: /* 203B2D0 */
+gUnknown_203B2D0: /* 203B2D0 (pokemon_news) */
 	.space 0x2
 
-gUnknown_203B2D2: /* 203B2D2 */
+gUnknown_203B2D2: /* 203B2D2 (pokemon_news) */
 	.space 0x2
 
-gUnknown_203B2D4: /* 203B2D4 */
+gUnknown_203B2D4: /* 203B2D4 (pokemon_news) */
 	.space 0x4
 
-gUnknown_203B2D8: /* 203B2D8 */
+gUnknown_203B2D8: /* 203B2D8 (pokemon_news / wonder_mail_2_mid) */
 	.space 0x4
 
-gUnknown_203B2DC: /* 203B2DC */
+gUnknown_203B2DC: /* 203B2DC (pokemon_news) */
 	.space 0x4
 
-gUnknown_203B2E0: /* 203B2E0 */
+gUnknown_203B2E0: /* 203B2E0 (wonder_mail_2_1 / wonder_mail_2_mid) */
 	.space 0x4
 
-gUnknown_203B2E4: /* 203B2E4 */
+gUnknown_203B2E4: /* 203B2E4 (wonder_mail_2_mid) */
 	.space 0x4
 
-gUnknown_203B2E8: /* 203B2E8 */
+gUnknown_203B2E8: /* 203B2E8 (wonder_mail_2_1) */
 	.space 0x4
 
-gUnknown_203B2EC: /* 203B2EC */
+gUnknown_203B2EC: /* 203B2EC (wonder_mail_2_1) */
 	.space 0x4
 
-gUnknown_203B2F0: /* 203B2F0 */
+gUnknown_203B2F0: /* 203B2F0 (wonder_mail_2_1 / wonder_mail_3) */
 	.space 0x4
 
-gUnknown_203B2F4: /* 203B2F4 */
+gUnknown_203B2F4: /* 203B2F4 (wonder_mail_4) */
 	.space 0x4
 
-gUnknown_203B2F8: /* 203B2F8 */
+gUnknown_203B2F8: /* 203B2F8 (wonder_mail_3) */
 	.space 0x4
 
-gUnknown_203B2FC: /* 203B2FC */
+gUnknown_203B2FC: /* 203B2FC (wonder_mail_802DF88) */
 	.space 0x4
 
-gUnknown_203B300: /* 203B300 */
+gUnknown_203B300: /* 203B300 (wonder_mail_802DF88) */
 	.space 0x4
 
 .include "src/mailbox.o"
 .include "src/pelipper_board.o"
 
-gUnknown_203B30C: /* 203B30C */
+gUnknown_203B30C: /* 203B30C (wonder_mail_3_mid) */
 	.space 0x4
 
-gUnknown_203B310: /* 203B310 */
+gUnknown_203B310: /* 203B310 (wonder_mail_3_mid) */
 	.space 0x4
 
-gUnknown_203B314: /* 203B314 */
+gUnknown_203B314: /* 203B314 (wonder_mail_3_mid) */
 	.space 0x4
 
 .include "src/makuhita_dojo1.o"
 .include "src/makuhita_dojo2.o"
 
-gUnknown_203B320: /* 203B320 */
+gUnknown_203B320: /* 203B320 (wonder_mail_4) */
 	.space 0x4
 
-gUnknown_203B324: /* 203B324 */
+gUnknown_203B324: /* 203B324 (wonder_mail_5) */
 	.space 0x4
 
-gUnknown_203B328: /* 203B328 */
+gUnknown_203B328: /* 203B328 (wonder_mail_6) */
 	.space 0x4
 
 .include "src/post_office_guide1.o"
@@ -338,13 +337,12 @@ gUnknown_203B328: /* 203B328 */
 .include "src/debug_menu3.o"
 .include "src/debug_menu4.o"
 
-gUnknown_203B3FC: /* 203B3FC */
+gUnknown_203B3FC: /* 203B3FC (code_803B050) */
 	.space 0x4
 
-    .include "src/personality_test.o"
-
-gUnknown_203B408: /* 203B408 */
-	.space 0x4
+.include "src/personality_test.o"
+.include "src/code_803D0D8.o"
+	.space 0x3
 
 gUnknown_203B40C: /* 203B40C */
 	.space 0x1

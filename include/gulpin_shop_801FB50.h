@@ -1,5 +1,5 @@
-#ifndef GUARD_GULPIN_SHOP_1_H
-#define GUARD_GULPIN_SHOP_1_H
+#ifndef GUARD_GULPIN_SHOP_801FB50_H
+#define GUARD_GULPIN_SHOP_801FB50_H
 
 #include "constants/move.h"
 #include "file_system.h"
@@ -44,4 +44,8 @@ struct unkStruct_203B27C
     UnkTextStruct2 unk180[4];
 };
 
-#endif // GUARD_GULPIN_SHOP_1_H
+bool8 sub_801FB50(u32);
+u32 sub_801FC40(void);
+void sub_801FD7C(void);
+
+#endif // GUARD_GULPIN_SHOP_801FB50_H

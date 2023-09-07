@@ -268,8 +268,6 @@ extern void sub_8031E00(void);
 extern u8 sub_8024108(u32);
 extern void sub_802452C(void);
 extern u32 sub_80244E4(void);
-extern void sub_802453C(void);
-extern void sub_8024458(s16, u32);
 extern void sub_8035D1C(void);
 extern u32 sub_8039068(u32, u8 *passwordBuffer, unkStruct_203B480 *r0);
 
@@ -278,7 +276,6 @@ extern void sub_8031E10(void);
 extern void sub_80155F0(void);
 extern void sub_802F2C0(void);
 extern void sub_8030DE4(void);
-extern void sub_802453C(void);
 extern u8 sub_800D588(void);
 extern void sub_80151C0(u32, u8 *);
 extern u32 sub_801D008(void);

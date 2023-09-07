@@ -1,0 +1,8 @@
+#ifndef GUARD_CODE_803D0D8_H
+#define GUARD_CODE_803D0D8_H
+
+u8 sub_803D0D8(void);
+u8 sub_803D0F0(u8);
+u8 sub_803D100(u8);
+
+#endif // GUARD_CODE_803D0D8_H

@@ -384,7 +384,6 @@ const UnkTextStruct2 gUnknown_80F42A8 =
 };
 
 const char gPartnerSelectionHeaderText[] = _("Pokémon");
-const char personality_test_fill[] = "pksdir0";
 
 u8 CreateTestTracker(void)
 {

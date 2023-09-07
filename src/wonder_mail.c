@@ -45,10 +45,8 @@ extern u32 sub_80154F0();
 extern u32 sub_8039068(u32, u8 *r1, unkStruct_203B480 *r0);
 extern void sub_8095274(u32);
 extern void sub_80155F0();
-extern void sub_8024458(s16, u32);
 extern u32 sub_80244E4();
 extern void sub_802452C();
-extern void sub_802453C();
 extern u8 sub_8024108(u32);
 extern u32 sub_8031DCC();
 extern void sub_8031E10();
@@ -121,7 +119,6 @@ extern void sub_803084C(void);
 extern void sub_80155F0(void);
 extern void sub_80310B4(void);
 extern void sub_8030DE4(void);
-extern void sub_802453C(void);
 
 extern const u8 DontSendPokemon_80DDB80[];
 extern const u8 SendPokemon_80DDB98[];

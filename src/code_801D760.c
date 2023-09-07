@@ -1,5 +1,6 @@
 #include "global.h"
 #include "bg_palette_buffer.h"
+#include "code_801EE10_1.h"
 #include "friend_area.h"
 #include "constants/friend_area.h"
 #include "constants/input.h"
@@ -20,6 +21,7 @@
 #include "wigglytuff_shop.h"
 #include "event_flag.h"
 #include "ground_main.h"
+#include "code_801C620.h"
 
 struct unkStruct_203B258
 {
@@ -55,15 +57,12 @@ extern u8 gUnknown_80DBFA0[]; // Field
 extern void sub_801DB54();
 extern void sub_801DBD4();
 
-extern u32 sub_801BF48(void);
-extern void sub_801BF98(void);
 extern void sub_801D208(u8);
 extern u32 sub_801DCE8(void);
 extern void sub_801DD50(void);
 extern u32 sub_8022860();
 extern void sub_8022908();
 extern u32 sub_80244E4(void);
-extern void sub_802453C(void);
 extern u32 sub_8025F68();
 extern u8 sub_802604C();
 extern void sub_8026058();
@@ -125,8 +124,6 @@ extern bool8 sub_8096E2C(void);
 extern u32 sub_801DCC4(void);
 extern u32 sub_8027074(void);
 extern void sub_80227B8(PokemonStruct1 *);
-extern bool8 sub_8024458(s16, u32);
-extern bool8 sub_801BEEC(s16);
 void sub_801D894(void);
 u32 sub_8025EF4(PokemonStruct1 *);
 

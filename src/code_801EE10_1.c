@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_801EE10_1.h"
 #include "constants/input.h"
 #include "code_800D090.h"
 #include "pokemon.h"

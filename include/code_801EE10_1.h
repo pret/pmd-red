@@ -1,6 +1,9 @@
 #ifndef GUARD_CODE_801EE10_1_H
 #define GUARD_CODE_801EE10_1_H
 
+bool8 sub_8024458(s16, s32);
+void sub_802453C(void);
+
 // code_801EE10_1.s
 extern void sub_8023868(u32, u32, u32, u32);
 extern u32 sub_8023A94(bool8);

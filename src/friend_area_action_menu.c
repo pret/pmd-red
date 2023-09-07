@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
+#include "code_801C620.h"
 #include "code_801EE10.h"
 #include "code_801EE10_1.h"
 #include "code_801EE10_mid.h"
@@ -23,9 +24,6 @@ extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 extern u8 *gUnknown_80D4920[];
 extern u8 *gUnknown_80D4928[];
 extern u8 *gUnknown_80D4970[];
-
-extern void sub_8024458(s16, u32);
-extern void sub_801BEEC(s16);
 
 void sub_8027D40(u32, BulkItem *heldItem);
 void sub_8027794(void);
@@ -57,10 +55,7 @@ extern void sub_808D31C(PokemonStruct1 *);
 extern PokemonStruct1 *sub_808D3F8(void);
 extern PokemonStruct1 *sub_808D3BC(void);
 extern u8 gUnknown_202DE58[];
-extern u32 sub_801BF48(void);
-extern void sub_801BF98(void);
 extern u32 sub_80244E4(void);
-extern void sub_802453C(void);
 extern bool8 sub_808D750(s16 index_);
 extern void sub_808ED00(void);
 

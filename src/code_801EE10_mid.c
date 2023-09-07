@@ -65,7 +65,6 @@ extern void sub_801F9A4(void);
 
 u32 sub_801F7E4(void);
 void sub_801F690(void);
-void sub_801F700(void);
 
 s32 sub_801F3F8(void)
 {
@@ -84,8 +83,8 @@ s32 sub_801F3F8(void)
   return counter;
 }
 
-bool8 sub_801F428(s16 index, s32 param_2) {
-
+bool8 sub_801F428(s16 index, s32 param_2)
+{
     s32 index_s32 = index;
     gUnknown_203B274 = MemoryAlloc(sizeof(struct unkStruct_203B274), 0x8);
     gUnknown_203B274->pokeStruct = &gRecruitedPokemonRef->pokemon[index_s32];
@@ -144,7 +143,7 @@ u16 sub_801F5B4(void)
     return gUnknown_203B274->unk4->unk0[gUnknown_203B274->input.unk1E * gUnknown_203B274->input.unk1C + gUnknown_203B274->input.menuIndex];
 }
 
-void sub_801F5F0(u8 r0)
+void sub_801F5F0(bool8 r0)
 {
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B274->unk384, FALSE, FALSE);

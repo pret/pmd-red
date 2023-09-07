@@ -3,6 +3,7 @@
 #include "code_8012A18_1.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
+#include "code_801C620.h"
 #include "code_801EE10.h"
 #include "code_801EE10_1.h"
 #include "code_801EE10_mid.h"
@@ -59,14 +60,9 @@ extern u8 *gUnknown_80D4970[];
 extern s16 sub_80A5728(void);
 extern u8 sub_8002658(s16);
 extern bool8 sub_8024108(u32);
-extern void sub_8024458(s16, u32);
-extern void sub_801BEEC(s16);
 extern void nullsub_104(void);
 extern void sub_808ED00(void);
 extern u32 sub_80244E4(void);
-extern void sub_802453C(void);
-extern u32 sub_801BF48(void);
-extern void sub_801BF98(void);
 
 extern void sub_80160D8(void);
 extern u32 sub_8016080(void);
