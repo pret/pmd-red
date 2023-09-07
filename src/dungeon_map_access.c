@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_8004AA0.h"
 #include "constants/walkable_tile.h"
+#include "decompress.h"
 #include "dungeon_map_access.h"
 #include "dungeon_global_data.h"
 #include "tile_types.h"

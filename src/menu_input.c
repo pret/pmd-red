@@ -23,6 +23,7 @@ static void sub_8013134(MenuInputStruct *, u32, u32);
 static void sub_801332C(s16 *);
 static void sub_8013470(MenuInputStruct *);
 
+ALIGNED(4) static const char fill_save7[] = _("pksdir0");
 const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
 u32 sub_8012A64(MenuInputStructSub *r0, s32 r1)

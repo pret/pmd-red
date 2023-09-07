@@ -31,19 +31,19 @@ typedef struct SiroArchive
 } SiroArchive;
 
 // size: 0x8
-typedef struct UnkFileStruct1
+typedef struct UnkFileStruct
 {
     /* 0x0 */ u32 unk0;
     /* 0x4 */ u32 unk4;
-} UnkFileStruct1;
+} UnkFileStruct;
 
+OpenedFile *Call_OpenFileAndGetFileDataPtr(const u8 *, const FileArchive *);
+void CloseFile(OpenedFile *);
+u8 *GetFileDataPtr(OpenedFile *, s32);
 void InitFileSystem(void);
 OpenedFile *OpenFile(const u8 *, const FileArchive *);
-u8 *GetFileDataPtr(OpenedFile *, s32);
 OpenedFile *OpenFileAndGetFileDataPtr(const u8 *, const FileArchive *);
-OpenedFile *Call_OpenFileAndGetFileDataPtr(const u8 *, const FileArchive *);
-u32 DecompressATFile(u8 *, s32, OpenedFile *);
-void CloseFile(OpenedFile *);
-u32 DecompressATGlobalFile(u32 *, s32, OpenedFile *);
+
+u32 sub_800A8F8(u32);
 
 #endif //GUARD_FILE_SYSTEM_H

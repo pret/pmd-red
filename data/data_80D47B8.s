@@ -1,6 +1,7 @@
 	.section .rodata
 
-@ START code_80130A8 #1
+@ START code_80130A8 #1 (probably part of menu_input)
+    .align 2, 0
 
         .global UnkData_80D47C4
         UnkData_80D47C4:
@@ -8,7 +9,6 @@
 
 	.global gUnknown_80D47C8
 gUnknown_80D47C8: @ 80D47C8
-@ replacing .incbin "baserom.gba", 0x000d47c8, 0x60
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x06, 0x00, 0x00, 0x00
         .byte 0x02, 0x00, 0x02, 0x00
@@ -46,11 +46,11 @@ gUnknown_80D4828: @ 80D4828
 gUnknown_80D4830: @ 80D4830
         .byte 0x01, 0x00, 0x00, 0x00, 0x0a, 0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0xe8, 0x03, 0x00, 0x00, 0x10, 0x27, 0x00, 0x00, 0xa0, 0x86, 0x01, 0x00, 0x40, 0x42, 0x0f, 0x00, 0x80, 0x96, 0x98, 0x00
         .byte 0x00, 0xe1, 0xf5, 0x05
-        .asciz "pksdir0"
 
 @ END code_80130A8 #1
 
 @ START code_80130A8 #2
+.asciz "pksdir0"
 
 	.global gUnknown_80D485C
 gUnknown_80D485C: @ 80D485C
@@ -148,11 +148,11 @@ gUnknown_80D4908: @ 80D4908
 gUnknown_80D4910: @ 80D4910
         .string "$\0"
         .align 2,0
-        .string "pksdir0\0"
 
 @ END code_80130A8 #2
 
 @ START [some global strings]
+.string "pksdir0\0"
 
         .global Yes_80D491C
         Yes_80D491C:
@@ -2773,11 +2773,10 @@ gUnknown_80DAF54:
     .string "Controls in Town 1\0"
     .align 2, 0
 
-    .string "pksdir0\0"
-
 @ END [some global strings]
 
 @ START code_80130A8 #3
+.string "pksdir0\0"
 
 	.global gUnknown_80DAF70
 gUnknown_80DAF70: @ 80DAF70
@@ -2806,11 +2805,11 @@ gUnknown_80DAFA0: @ 80DAFA0
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
-    .string "pksdir0\0"
 
 @ END code_80130A8 #3
 
 @ START code_80130A8 #4
+.string "pksdir0\0"
 
 	.global gUnknown_80DAFC0
 gUnknown_80DAFC0: @ 80DAFC0
@@ -3141,11 +3140,11 @@ gUnknown_80DB65C: @ 80DB65C
 gUnknown_80DB664: @ 80DB664
         .string "%s\0"
         .align 2,0
-        .string "pksdir0\0"
 
 @ END code_80130A8 #4
 
 @ START code_8012A18_1
+.string "pksdir0\0"
 
         .align 2,0
         .byte 0x00, 0x00, 0x00, 0x00
@@ -3169,12 +3168,11 @@ gUnknown_80DB6A4: @ 80DB6A4
 gUnknown_80DB6BC: @ 80DB6BC
         .string "Please enter a name.\0"
         .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-
 @ END code_8012A18_1
 
 @ START felicity_bank
+.string "pksdir0\0"
+        .align 2,0
 
 	.global gUnknown_80DB6DC
 gUnknown_80DB6DC: @ 80DB6DC
@@ -3216,7 +3214,5 @@ gFelicitySavings: @ 80DB72C
 	.global gUnknown_80DB738
 gUnknown_80DB738: @ 80DB738
         .string "Money\0"
-        .align 2,0
-        .string "pksdir0\0"
 
 @ END FELICITY BANK

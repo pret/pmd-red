@@ -1,5 +1,9 @@
 	.section .rodata
 
+@ code_801C620
+        .align 2,0
+.string "pksdir0\0"
+
 	.global gUnknown_80DBD98
 gUnknown_80DBD98: @ 80DBD98
         .byte 0x00, 0x00, 0x00, 0x00

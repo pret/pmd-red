@@ -1,3 +1,5 @@
+ALIGNED(4) static const u8 sFill[] = _("pksdir0");
+
 static const UnkTextStruct2 sUnknown_80DB840 = {
     0, 0, 0, 0,
     3,
@@ -35,4 +37,3 @@ static const UnkTextStruct2 sUnknown_80DB888 = {
 };
 
 ALIGNED(4) static const u8 sSellAll[] = _("Sell All");
-ALIGNED(4) static const u8 sFill[] = _("pksdir0");

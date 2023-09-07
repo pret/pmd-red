@@ -156,6 +156,7 @@ gUnknown_202D2A0: /* 202D2A0 (code_8009804) */
 	.space 0x4
 
     .include "src/file_system.o"
+    .include "src/decompress.o"
     .include "src/main.o"
 
 gUnknown_202D608: /* 202D608 (reg_control / unused_vblank) */

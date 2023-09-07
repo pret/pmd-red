@@ -2,7 +2,7 @@
 #include "code_800D090.h"
 #include "constants/colors.h"
 #include "constants/move_id.h"
-#include "file_system.h"
+#include "decompress.h"
 #include "items.h"
 #include "moves.h"
 #include "pokemon.h"

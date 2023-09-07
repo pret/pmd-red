@@ -50,7 +50,6 @@ ALIGNED(4) static const char debug_fill4[] = "pksdir0";
 ALIGNED(4) static const char debug_fill5[] = "pksdir0";
 ALIGNED(4) static const char debug_fill6[] = "pksdir0";
 ALIGNED(4) static const char debug_fill7[] = "pksdir0";
-ALIGNED(4) static const char debug_fill8[] = "pksdir0";
 
 void NDS_DebugInit(void)
 {

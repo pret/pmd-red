@@ -1,3 +1,5 @@
+ALIGNED(4) static const u8 sFill[] = _("pksdir0");
+
 static const UnkTextStruct2 sUnknown_80DB8B4 = {
     0, 0, 0, 0,
     3,
@@ -18,4 +20,3 @@ static const UnkTextStruct2 sUnknown_80DB8CC = {
 
 ALIGNED(4) static const u8 sGoods[] = _("Goods");
 ALIGNED(4) static const u8 sFmtRed[] = _("{COLOR_1 RED}%s{END_COLOR_TEXT_1}");
-ALIGNED(4) static const u8 sFill[] = _("pksdir0");

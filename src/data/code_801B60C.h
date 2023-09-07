@@ -1,3 +1,5 @@
+ALIGNED(4) static const u8 sFill[] = _("pksdir0");
+
 static const UnkTextStruct2 sUnknown_80DBA58 = {
     0, 0, 0, 0,
     3,
@@ -61,4 +63,3 @@ ALIGNED(4) static const u8 sTrashToolboxItem[] = _("Trash Toolbox Item");
 ALIGNED(4) static const u8 sTrashReceivedItem[] = _("Trash Received Item");
 ALIGNED(4) static const u8 sStorage[] = _("Storage");
 ALIGNED(4) static const u8 sTrash[] = _("Trash");
-ALIGNED(4) static const u8 sFill[] = _("pksdir0");

@@ -79,6 +79,7 @@ EWRAM_DATA_2 struct QuickSaveWrite *gQuickSaveWrite = {0};
 extern s32 gUnknown_202DE28;
 extern u32 *gUnknown_203B488;
 
+ALIGNED(4) static const char debug_fill8[] = "pksdir0";
 ALIGNED(4) const char sGameInternalVersion[] = _("POKE_DUNGEON__05");
 
 ALIGNED(4) static const char fill_save0[] = _("pksdir0");
@@ -86,7 +87,7 @@ ALIGNED(4) static const char fill_save1[] = _("pksdir0");
 ALIGNED(4) static const char fill_save2[] = _("pksdir0");
 ALIGNED(4) static const char fill_save3[] = _("pksdir0");
 
-ALIGNED(4) const char gSaveCorrupted[] = _("{CENTER_ALIGN}The game data is corrupted.\n"
+ALIGNED(4) static const char gSaveCorrupted[] = _("{CENTER_ALIGN}The game data is corrupted.\n"
                                             "{CENTER_ALIGN}Your data will be erased.");
 
 ALIGNED(4) static const char fill_save4[] = _("pksdir0");
@@ -136,7 +137,6 @@ ALIGNED(4) const char gSaveNotWritten2[] = _("{CENTER_ALIGN}The data could not b
                                              "{CENTER_ALIGN}and reinsert the DS Card.");
 
 ALIGNED(4) const char gSaveFailed2[] = _("{CENTER_ALIGN}Save failed.");
-ALIGNED(4) static const char fill_save7[] = _("pksdir0");
 
 
 extern bool8 sub_800DAB0(u16, u8*, s32);
