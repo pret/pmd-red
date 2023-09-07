@@ -1,6 +1,6 @@
 	.section .rodata
 
-@ wigglytuff_shop
+@ wigglytuff_shop1
         .align 2,0
 .string "pksdir0\0"
         .align 2,0
@@ -44,7 +44,7 @@ gUnknown_80DC4AC: @ 80DC4AC
         .string "{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}\0"
         .align 2,0
 
-@ wigglytuff_shop #2
+@ wigglytuff_shop2
 .string "pksdir0\0"
         .align 2,0
 
@@ -91,7 +91,7 @@ gUnknown_80DC524: @ 80DC524
         .string "{COLOR_2 CYAN}%s{END_COLOR_TEXT_2}\0"
         .align 2,0
 
-@ wigglytuff_shop #3
+@ wigglytuff_shop3
 .string "pksdir0\0"
         .align 2,0
 

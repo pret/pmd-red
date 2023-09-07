@@ -23,6 +23,9 @@
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
 
+// TODO: This file was originally 3 files. Split properly
+// 4 files if you count code_8023144.s
+
 struct unkStruct_203B280
 {
     /* 0x0 */ u8 friendAreas[NUM_FRIEND_AREAS];
