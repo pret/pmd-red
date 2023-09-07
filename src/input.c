@@ -4,7 +4,7 @@
 
 EWRAM_DATA Inputs gRealInputs = {0}; // 20255F0
 static EWRAM_DATA UnusedInputStruct sUnusedInputsRelated = {0}; // 2025600
-static EWRAM_DATA u32 sUnusedScrambledInputJunk = {0}; // 202562C
+static EWRAM_DATA u32 sUnusedScrambledInputJunk[3] = {0}; // 202562C
 static EWRAM_DATA Inputs sBufferedInputs = {0}; // 2025638
 static EWRAM_DATA Inputs sCurrentInputs = {0}; // 2025648
 static EWRAM_DATA Inputs sPrevInputs = {0}; // 2025658
@@ -22,7 +22,7 @@ void InitInput(void)
     sBufferedInputs.repeated = 0;
     sBufferedInputs.shortPress = 0;
 
-    sUnusedScrambledInputJunk = 0x4A14C1; // seems like random keyboard mashing (see UpdateInput)
+    sUnusedScrambledInputJunk[0] = 0x4A14C1; // seems like random keyboard mashing (see UpdateInput)
 
     sUnusedInputsRelated.unk20 = 0;
     sUnusedInputsRelated.unk0 = 0xFFFF; // probably a mask
@@ -201,5 +201,5 @@ void UpdateInput(void)
     sBufferedInputs.repeated |= sCurrentInputs.repeated;
     sBufferedInputs.shortPress |= sCurrentInputs.shortPress;
 
-    sUnusedScrambledInputJunk *= sCurrentInputs.held | 0x54A1C41; // very similar to odd constant in InitInput - probably keymashing
+    sUnusedScrambledInputJunk[0] *= sCurrentInputs.held | 0x54A1C41; // very similar to odd constant in InitInput - probably keymashing
 }

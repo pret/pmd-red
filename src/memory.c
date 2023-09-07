@@ -4,10 +4,10 @@
 
 EWRAM_DATA struct HeapDescriptor *gHeapDescriptorList[8] = {0}; // 2000E88
 EWRAM_DATA u32 gHeapCount = {0}; // 2000EA8
-// space of 4?
+UNUSED static EWRAM_DATA u32 sUnused1 = {0}; // 2000EAC
 EWRAM_DATA struct HeapDescriptor gMainHeapDescriptor = {0}; // 2000EB0
-// space of 4?
-extern struct HeapFreeListElement gMainHeapFreeList[32]; // 2000ED0
+UNUSED static EWRAM_DATA u32 sUnused2 = {0}; // 2000ECC
+extern struct HeapFreeListElement gMainHeapFreeList[32]; // 2000ED0 (CAPACITY OR STRUCT SIZE IS WRONG)
 extern u8 gMainHeap[HEAP_SIZE]; // 20011D0
 
 void InitHeapInternal(void);

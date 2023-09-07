@@ -3,7 +3,7 @@
 #include "random.h"
 #include "sprite.h"
 
-static EWRAM_DATA u16 sOAMSpriteCount = {0}; // Written to but never read
+static EWRAM_DATA u16 sOAMSpriteCount = {0}; // 2025670 Written to but never read
 #ifndef NONMATCHING
 UNUSED // TODO: Remove the "UNUSED" attribute after sub_8004EA8 is done
 #endif
@@ -14,12 +14,15 @@ UNUSED // TODO: Remove the "UNUSED" attribute after sub_8004EA8 is done
 static EWRAM_DATA s16 sUnknown_2025682[9] = {0};
 static EWRAM_DATA Position sUnknown_2025694 = {0};
 static EWRAM_DATA u32 sUnknown_2025698 = {0};
+UNUSED static EWRAM_DATA u32 sUnused1 = {0}; // 202569C
 static EWRAM_DATA SpriteList sUnknown_20256A0 = {0};
 static EWRAM_DATA UnkSpriteLink sUnknown_2025EA8[128] = {0};
 static EWRAM_DATA SpriteOAM sUnknown_20262A8[128] = {0};
 static EWRAM_DATA s32 sSpriteCount = {0}; // 20266A8
+UNUSED static EWRAM_DATA u32 sUnused2 = {0}; // 20266AC
 static EWRAM_DATA unkStruct_20266B0 sUnknown_20266B0[160] = {0};
 static EWRAM_DATA void *sCharMemCursor = {0}; // 2026E30
+UNUSED static EWRAM_DATA u32 sUnused3 = {0}; // 2026E34
 
 static EWRAM_DATA_2 unkStruct_20266B0 *sUnknown_203B074 = {0};
 
