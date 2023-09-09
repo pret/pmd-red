@@ -1754,10 +1754,10 @@ gUnknown_80B83EA: @ 80B83EA
 
     .align 2, 0
 
-@ ???
+@ text1.c ?
 .string "pksdir0\0"
 
-@ text2.c
+@ text1.c or text2.c (gKanjiA_file_string is used in text1.c but the rest in text2.c, and we get code changes for merging the files...)
 .string "pksdir0\0"
 
 	.global gUnknown_80B853C

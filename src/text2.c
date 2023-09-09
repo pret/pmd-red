@@ -1277,8 +1277,7 @@ void sub_8007334(s32 a0)
 }
 #endif // NONMATCHING
 
-// Unused
-void nullsub_154(void)
+UNUSED static void nullsub_154(void)
 {
 }
 
@@ -1293,8 +1292,7 @@ void sub_80073B8(s32 a0)
     r1->unk46 = 1;
 }
 
-// Unused
-void nullsub_155(void)
+UNUSED static void nullsub_155(void)
 {
 }
 
@@ -1319,8 +1317,7 @@ void sub_80073E0(s32 a0)
     r1->unk46 = 0;
 }
 
-// Unused
-void nullsub_156(void)
+UNUSED static void nullsub_156(void)
 {
 }
 
@@ -1915,8 +1912,7 @@ void sub_80078A4(u32 a0, s32 x, s32 y, s32 a3, u32 color)
     sub_800792C(a0, x, y + 1, a3, gUnknown_202B030 & 0xF);
 }
 
-// Unused
-void sub_80078E8(u32 a0, s32 x, s32 y, s32 a3, u32 color)
+UNUSED static void sub_80078E8(u32 a0, s32 x, s32 y, s32 a3, u32 color)
 {
     nullsub_129(a0, x, y, a3, color);
     nullsub_129(a0, x, y + 1, a3, gUnknown_202B030 & 0xF);
@@ -1997,8 +1993,7 @@ void sub_8007A78(u32 a0, s32 x, s32 y, s32 a3, u32 color)
     sub_8007AA4(gUnknown_2027370, a0, x, y, a3, color);
 }
 
-// Unused
-void nullsub_157(void)
+UNUSED static void nullsub_157(void)
 {
 }
 
@@ -2053,8 +2048,7 @@ void sub_8007B7C(u32 a0, s32 x, s32 y, s32 a3, u32 color)
     sub_8007BA8(gUnknown_2027370, a0, x, y, a3, color);
 }
 
-// Unused
-void nullsub_158(void)
+UNUSED static void nullsub_158(void)
 {
 }
 
@@ -2299,14 +2293,12 @@ void sub_8007BA8(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
 }
 #endif // NONMATCHING
 
-// Unused
-void sub_8007CD4(u32 a0, s32 a1, s32 a2, s32 a3, s32 a4)
+UNUSED static void sub_8007CD4(u32 a0, s32 a1, s32 a2, s32 a3, s32 a4)
 {
     sub_8007D00(gUnknown_2027370, a0, a1, a2, a3, a4);
 }
 
-// Unused
-void nullsub_159(void)
+UNUSED static void nullsub_159(void)
 {
 }
 
@@ -2477,7 +2469,6 @@ void sub_8007E20(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u8 *a5, u32 a6)
     sub_8007E64(gUnknown_2027370, &gUnknown_202B038[0][0][0], a0, a1, a2, a3, a4, a5, a6);
 }
 
-// Unused
-void nullsub_160(void)
+UNUSED static void nullsub_160(void)
 {
 }
