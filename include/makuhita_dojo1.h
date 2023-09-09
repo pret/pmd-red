@@ -41,7 +41,7 @@ typedef struct MakuhitaDojoWork1
 } MakuhitaDojoWork1;
 
 void MakuhitaDojo_Delete(void);
-bool8 MakuhitaDojo_New(u32);
+bool8 MakuhitaDojo_New(u32 mode);
 
 u32 sub_802FE58(void);
 s16 sub_802FED0(void);

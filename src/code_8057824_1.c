@@ -7,6 +7,7 @@
 #include "constants/weather.h"
 #include "dungeon_global_data.h"
 #include "dungeon_entity.h"
+#include "dungeon_leader.h"
 #include "dungeon_map_access.h"
 #include "dungeon_music.h"
 #include "dungeon_random.h"
@@ -385,7 +386,6 @@ extern u8 sub_80860A8(u32);
 extern void sub_8049ED4();
 extern void sub_8052D44(s16 *, Entity *, Entity *);
 extern void SetMessageArgument(u8 *, Entity *, u32);
-extern Entity *GetLeader();
 extern void sub_80421C0(Entity *, u32);
 extern void sub_8046D20();
 extern void sub_808B1CC(u8);

@@ -11,7 +11,7 @@ typedef struct DebugLocation
     /* 0x8 */ u8 *func;
 } DebugLocation;
 
-void Log(u8, const u8 *, ...);
+void Log(u8 num, const u8 *text, ...);
 void NDS_DebugInit(void);
 void nullsub_25(void);
 void nullsub_26(void);
@@ -23,10 +23,10 @@ void nullsub_31(void);
 void nullsub_32(void);
 void nullsub_137(void);
 void nullsub_199(void);
-void PrintFuncFileLine(u8 *, DebugLocation *, const u8 *);
-void PrintMessageWithFuncFileLine(u8 *, DebugLocation *, const u8 *, ...);
+void PrintFuncFileLine(u8 *buf, DebugLocation *loc, const u8 *prefix);
+void PrintMessageWithFuncFileLine(u8 *buffer, DebugLocation *debug, const u8 *text, ...);
 void sub_8011B08(void);
-void sub_8011B88(const u8 *, ...);
+void sub_8011B88(const u8 *text, ...);
 u32 sub_8011BA4(void);
 u32 sub_8011BA8(void);
 const u8 *sub_8011BAC(void);

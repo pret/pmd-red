@@ -37,12 +37,12 @@ u8 sub_801A20C(u32 r0)
     return TRUE;
 }
 
-u32 sub_801A2A8(u8 r0)
+u32 sub_801A2A8(bool8 r0)
 {
     Item slot;
     BulkItem *item;
 
-    if (r0 == 0) {
+    if (!r0) {
         sub_8013660(&gUnknown_203B21C->input);
         return 0;
     }
@@ -80,7 +80,7 @@ u8 sub_801A37C(void)
     return (gUnknown_203B21C->input.unk1E * gUnknown_203B21C->input.unk1C) + gUnknown_203B21C->input.menuIndex;
 }
 
-void sub_801A398(u8 r0)
+void sub_801A398(bool8 r0)
 {
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B21C->unk3C, FALSE, FALSE);

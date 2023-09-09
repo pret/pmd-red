@@ -100,7 +100,7 @@ void sub_8068838(s16 id, bool32 a1)
     s32 id_s32 = id;
     bool8 param_2 = a1;
 
-    if (param_2 == 0 &&
+    if (!param_2 &&
         (id_s32 == MONSTER_DEOXYS_NORMAL || id_s32 == MONSTER_DEOXYS_ATTACK || id_s32 == MONSTER_DEOXYS_DEFENSE || id_s32 == MONSTER_DEOXYS_SPEED)) {
         sub_80688B0();
     }

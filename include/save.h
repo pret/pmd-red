@@ -98,7 +98,7 @@ u32 WriteSaveSector(s32 *a, u8 *src, s32 size);
 void CalculateChecksum(u8 *out, u32 size);
 bool8 ValidateChecksum(u8 *in, u32 size);
 
-s32 sub_80121D4(s32 *, u8 *, s32);
+s32 sub_80121D4(s32 *a, u8 *src, s32 size);
 u32 sub_80121E0(u32);
 
 #endif // GUARD_SAVE_H

@@ -23,7 +23,7 @@ typedef struct unkStruct_203B234
     UnkTextStruct2 unkF4[4];
 } unkStruct_203B234;
 
-bool8 sub_801B60C(u32, u8, u8);
+bool8 sub_801B60C(u32, u8 id, u8 quantity);
 u32 sub_801B6AC(void);
 void sub_801B72C(void);
 

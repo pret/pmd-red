@@ -3,7 +3,7 @@
 
 #include "dungeon_entity.h"
 
-Entity* GetLeader();
+Entity* GetLeader(void);
 EntityInfo* GetLeaderInfo(void);
 
-#endif
+#endif // GUARD_DUNGEON_LEADER_H

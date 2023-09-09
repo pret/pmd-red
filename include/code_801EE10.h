@@ -26,7 +26,7 @@ typedef struct unkStruct_203B270
     const u8 *text;
 } unkStruct_203B270;
 
-u8 sub_801EE10(u32, s16, Move *, u32, const u8 *, u32);
+u8 sub_801EE10(u32, s16 species, Move *moves, u32, const u8 *text, u32);
 
 // code_801EE10.s
 extern u32 sub_801EF38(u32);

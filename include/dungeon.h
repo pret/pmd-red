@@ -35,14 +35,16 @@ typedef struct DungeonDataEntry
 
 extern DungeonDataEntry gDungeons[];
 extern DungeonName gDungeonNames[];
+
+s32 GetDungeonFloorCount(u8 dungeon);
 const u8 *GetDungeonName1(u8 dungeon);
-u32 sub_80908D8(DungeonLocation *dungeon);
-u8 sub_8090910(DungeonLocation *dungeon, u32 param_2);
-bool8 sub_809095C(u8 dungeon);
 u32 GetMaxItemsAllowed(u8 dungeon);
 s8 GetRescuesAllowed(u8 dungeon);
 bool8 HasCheckpoint(u8 dungeon);
-s32 GetDungeonFloorCount(u8 dungeon);
-void PrintYellowDungeonNametoBuffer(u8 *, DungeonLocation *);
+void PrintYellowDungeonNametoBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 
-#endif //GUARD_DUNGEON_H
+u32 sub_80908D8(DungeonLocation *dungeon);
+u8 sub_8090910(DungeonLocation *dungeon, u32 param_2);
+bool8 sub_809095C(u8 dungeon);
+
+#endif // GUARD_DUNGEON_H

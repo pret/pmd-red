@@ -414,7 +414,7 @@ static void sub_8090F58(u8* a1, u8 *a2, Item *slot, struct unkStruct_8090F58* a4
   }
 }
 
-s32 sub_8090FEC(s32 a1, u8* strbuf, u8 a3)
+s32 sub_8090FEC(s32 a1, u8 *strbuf, u8 a3)
 {
   s32 i, count;
   s32 cond = 0;

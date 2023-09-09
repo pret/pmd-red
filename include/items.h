@@ -109,7 +109,7 @@ u32 GetItemActionType(u8 id);
 u32 GetSpawnAmountRange(u8 id, u32 r1);
 u8 *GetItemDescription(u8 id);
 bool8 GetItemAIFlag(u8 id, u32 r1);
-void BufferItemName(u8 *, u8, unkStruct_8090F58 *);
+void BufferItemName(u8 *, u8 id, unkStruct_8090F58 *);
 void sub_8090E14(u8 *ext_buffer, Item *slot, unkStruct_8090F58 *);
 bool8 AddItemToInventory(const Item* slot);
 void ConvertMoneyItemToMoney();
@@ -148,15 +148,15 @@ void RestoreHeldItem(unkStruct_8094924 *, BulkItem *);
 void SaveHeldItem(unkStruct_8094924 *, BulkItem *);
 void RestoreItemSlot(unkStruct_8094924 *, Item *);
 void SaveItemSlot(unkStruct_8094924 *, Item *);
-s32 RestoreTeamInventory(u8 *, u32);
-s32 SaveTeamInventory(u8 *, u32);
+s32 RestoreTeamInventory(u8 *, u32 size);
+s32 SaveTeamInventory(u8 *, u32 size);
 
 
 
 
 
 
-s32 sub_8090FEC(s32, u8 *, u8);
-u32 sub_80913E0(Item *, u32, struct subStruct_203B240 **);
+s32 sub_8090FEC(s32, u8 *strbuf, u8);
+u32 sub_80913E0(Item *slot, u32, struct subStruct_203B240 **);
 
 #endif // GUARD_ITEMS_H

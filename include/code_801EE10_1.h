@@ -1,7 +1,7 @@
 #ifndef GUARD_CODE_801EE10_1_H
 #define GUARD_CODE_801EE10_1_H
 
-bool8 sub_8024458(s16, s32);
+bool8 sub_8024458(s16 speciesNum, s32);
 void sub_802453C(void);
 
 // code_801EE10_1.s

@@ -82,6 +82,6 @@ enum WonderMailRescueStates
 extern unkStruct_203B2F4 *gUnknown_203B2F4;
 extern unkStruct_203B2F8 *gUnknown_203B2F8;
 
-u32 sub_802D098(unkSubStruct_203B2F8 *);
+u32 sub_802D098(unkSubStruct_203B2F8 *mail);
 
 #endif // GUARD_WONDER_MAIL_3_H

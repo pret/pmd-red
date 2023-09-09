@@ -12,7 +12,7 @@ typedef struct QuickSaveRead
 
 void FinishQuickSaveRead(void);
 bool8 IsQuickSaveValid(void);
-void PrepareQuickSaveRead(u8 *, u32);
+void PrepareQuickSaveRead(u8 *dest, u32 size);
 bool8 ReadQuickSave(void);
 
 #endif // GUARD_QUICK_SAVE_READ_H

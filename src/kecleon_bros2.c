@@ -37,12 +37,12 @@ bool8 sub_8019E40(u32 r0)
     return TRUE;
 }
 
-u32 sub_8019EDC(u8 r0)
+u32 sub_8019EDC(bool8 r0)
 {
     Item slot;
     BulkItem *item;
 
-    if (r0 == 0) {
+    if (!r0) {
         sub_8013660(&gUnknown_203B214->input);
         return 0;
     }

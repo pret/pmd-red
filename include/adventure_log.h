@@ -15,7 +15,7 @@ typedef struct AdventureLog
 } AdventureLog;
 
 void CleanAdventureLogScreen(void);
-bool8 CreateAdventureLogScreen(u32);
+bool8 CreateAdventureLogScreen(u32 kind);
 u32 HandleAdventureLogInput(u8);
 
 #endif // GUARD_ADVENTURE_LOG_H

@@ -1,23 +1,6 @@
 #ifndef GUARD_GAME_OPTIONS_H
 #define GUARD_GAME_OPTIONS_H
 
-typedef struct GameOptions
-{
-    // TODO: find where Controls/Touch Screen are in this structure in PMD Blue
-
-    /* 0x0 */ u8 dungeonSpeed;
-    /* 0x1 */ u8 FarOffPals;
-    /* 0x2 */ bool8 damageTurn;
-    /* 0x3 */ bool8 gridEnable;
-    /* 0x4 */ u8 mapOption;
-    /* 0x5 */ u8 fill5[3];
-    /* 0x8 */ u8 windowColor; 
-    /* 0x9 */ u8 unk9; // maybe Controls?
-    /* 0xA */ u8 unkA; // maybe Touch Screen?
-    /* 0xB */ u8 playerGender;
-    /* 0xC */ u8 unkC;
-} GameOptions;
-
 enum DungeonSpeed
 {
     DUNGEON_SPEED_SLOW,
@@ -59,10 +42,26 @@ enum windowColor
     NUM_WINDOW_COLORS,
 };
 
+typedef struct GameOptions
+{
+    // TODO: find where Controls/Touch Screen are in this structure in PMD Blue
+
+    /* 0x0 */ u8 dungeonSpeed;
+    /* 0x1 */ u8 FarOffPals;
+    /* 0x2 */ bool8 damageTurn;
+    /* 0x3 */ bool8 gridEnable;
+    /* 0x4 */ u8 mapOption;
+    /* 0x5 */ u8 fill5[3];
+    /* 0x8 */ u8 windowColor; 
+    /* 0x9 */ u8 unk9; // maybe Controls?
+    /* 0xA */ u8 unkA; // maybe Touch Screen?
+    /* 0xB */ u8 playerGender;
+    /* 0xC */ u8 unkC;
+} GameOptions;
+
 void LoadGameOptions(void);
 GameOptions * GetGameOptions(void);
 void InitializeGameOptions(bool8 initializeGender);
-bool8 GameOptionsNotChange(GameOptions *r0);
+bool8 GameOptionsNotChange(GameOptions *);
 
-
-#endif
+#endif // GUARD_GAME_OPTIONS_H

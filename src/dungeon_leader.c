@@ -1,12 +1,11 @@
 #include "global.h"
-#include "dungeon_leader.h"
-
 #include "dungeon_global_data.h"
+#include "dungeon_leader.h"
 #include "dungeon_util.h"
 
 extern Entity *gLeaderPointer;
 
-Entity* GetLeader()
+Entity* GetLeader(void)
 {
     Entity *leader = gLeaderPointer;
     if (leader == NULL)

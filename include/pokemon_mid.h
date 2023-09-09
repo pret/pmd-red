@@ -3,7 +3,7 @@
 
 #include "pokemon.h"
 
-void PrintPokeNameToBuffer(u8 *, PokemonStruct1 *);
+void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
 
 bool8 sub_808DA44(s32, u32);
 

@@ -18,7 +18,7 @@ typedef struct PostOfficeWork
 } PostOfficeWork;
 
 void CleanHelperPelipper(void);
-bool8 CreateHelperPelipperMenu(s16);
+bool8 CreateHelperPelipperMenu(s16 speciesID);
 u32 HelperPelipperCallback(void);
 
 #endif // GUARD_POST_OFFICE_GUIDE1_H

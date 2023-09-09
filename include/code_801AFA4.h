@@ -22,7 +22,7 @@ typedef struct unkStruct_203B22C
     /* 0x64 */ MenuItem menuItems[8];
 } unkStruct_203B22C;
 
-bool8 sub_801AFA4(u32);
+bool8 sub_801AFA4(u32 index);
 u32 sub_801B00C(void);
 void sub_801B048(void);
 

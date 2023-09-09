@@ -62,18 +62,18 @@ void sub_8095118(void);
 s32 FindOpenMailSlot(void);
 bool8 sub_80951BC(unkStruct_203B480 *mail);
 bool8 sub_80951FC(unkStruct_203B480 *);
-unkStruct_203B480 * GetMailatIndex(u8);
-void DeleteMailAtIndex(u8);
+unkStruct_203B480 * GetMailatIndex(u8 index);
+void DeleteMailAtIndex(u8 index);
 void sub_8095274(u32);
 bool8 sub_8095298(s32);
 void sub_80952C4(void);
-bool8 HasMail(u8, u32);
-s32 CountMailType(u8);
+bool8 HasMail(u8 mailType, u32);
+s32 CountMailType(u8 mailType);
 u32 CountAllMail(void);
 s32 sub_8095374(void);
-s32 GetMailIndex(u8, u32);
-s32 GetFirstIndexofMailType(u8);
-void sub_8095824(struct unkStruct_8094924 *, unkStruct_203B480 *);
-void sub_8095774(struct unkStruct_8094924 *, unkStruct_203B480 *);
+s32 GetMailIndex(u8 mailType, u32);
+s32 GetFirstIndexofMailType(u8 mailType);
+void sub_8095824(struct unkStruct_8094924 *a, unkStruct_203B480 *b);
+void sub_8095774(struct unkStruct_8094924 *a, unkStruct_203B480 *b);
 
 #endif // GUARD_CODE_8094F88_H

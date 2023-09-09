@@ -158,12 +158,12 @@ UNUSED static void sub_8005764(s32 a0, OpenedFile *file, s32 a2, u8 *a3)
     sub_8005770(a0, file->data, a2, a3);
 }
 
-void sub_8005770(s32 param_1, u8 *RGBArray, s32 a1, u8 *a2)
+void sub_8005770(s32 param_1, u8 *colorArray, s32 a1, u8 *a2)
 {
     s32 i;
 
     for (i = 0; i < 16; i++)
-        SetBGPaletteBufferColorRGB((param_1 + 0x10) * 0x10 + i, &RGBArray[i * 4], a1, a2);
+        SetBGPaletteBufferColorRGB((param_1 + 0x10) * 0x10 + i, &colorArray[i * 4], a1, a2);
 }
 
 // Maybe Position

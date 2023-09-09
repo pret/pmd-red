@@ -15,9 +15,9 @@ typedef struct unkStruct_203B21C
 } unkStruct_203B21C;
 
 u8 sub_801A20C(u32);
-u32 sub_801A2A8(u8);
+u32 sub_801A2A8(bool8);
 u8 sub_801A37C(void);
-void sub_801A398(u8);
+void sub_801A398(bool8);
 void sub_801A3DC(void);
 void sub_801A4A4(void);
 

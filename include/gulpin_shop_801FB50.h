@@ -44,7 +44,7 @@ typedef struct unkStruct_203B27C
     UnkTextStruct2 unk180[4];
 } unkStruct_203B27C;
 
-bool8 sub_801FB50(u32);
+bool8 sub_801FB50(u32 mode);
 u32 sub_801FC40(void);
 void sub_801FD7C(void);
 

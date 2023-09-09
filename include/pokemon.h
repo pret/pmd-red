@@ -203,7 +203,7 @@ void CopyYellowMonsterNametoBuffer(u8 *buffer, s16 index);
 void PrintColoredPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon, s32 colorNum);
 void sub_808D930(u8 *buffer, s32 index);
 void sub_808D9DC(u8 *buffer, PokemonStruct2 *, s32 colorNum);
-void sub_808DA0C(u8 *, PokemonStruct2 *);
+void sub_808DA0C(u8 *buffer, PokemonStruct2 *);
 void PeekPokemonItem(s16 index_, BulkItem* item);
 void GivePokemonItem(s16 index_, BulkItem* item);
 bool8 IsPokemonRenamed(PokemonStruct1* pokemon);
@@ -240,11 +240,11 @@ OpenedFile *OpenPokemonDialogueSpriteFile(s16 index);
 OpenedFile *GetDialogueSpriteDataPtr(s16 index);
 s32 GetUnownIndex(s16 index);
 void sub_808E6F4(unkStruct_808E6F4 *);
-s32 GetEvolutionSequence(PokemonStruct1 *, EvolveStage *);
+s32 GetEvolutionSequence(PokemonStruct1 *pokemon, EvolveStage *);
 void xxx_pokemonstruct_to_pokemon2_808DE50(PokemonStruct2 *, PokemonStruct1 *, s32);
-void SavePokemonStruct(unkStruct_8094924 *, PokemonStruct1 *);
+void SavePokemonStruct(unkStruct_8094924 *, PokemonStruct1 *pokemon);
 void RestorePokemonStruct(unkStruct_8094924 *, PokemonStruct1 *);
-s32 sub_808E218(unkStruct_808E218_arg *, PokemonStruct1 *);
+s32 sub_808E218(unkStruct_808E218_arg *, PokemonStruct1 *pokemon);
 
 // pokemon.s
 extern PokemonStruct1 *GetPlayerPokemonStruct(void);

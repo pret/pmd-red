@@ -317,7 +317,7 @@ static void UpdateKecleonStoreDialogue(void)
             if (sKecleonBrosWork1->isKecleonItemShop)
                 sub_8019FCC(TRUE);
             else
-                sub_801A398(1);
+                sub_801A398(TRUE);
 
             sub_801AD34(0);
             DrawTeamMoneyBox(1);
@@ -685,9 +685,9 @@ static void sub_80199CC(void)
     BulkItem *item;
 
     if (sKecleonBrosWork1->isKecleonItemShop)
-        menuAction = sub_8019EDC(1);
+        menuAction = sub_8019EDC(TRUE);
     else
-        menuAction = sub_801A2A8(1);
+        menuAction = sub_801A2A8(TRUE);
 
     switch (menuAction) {
         case 3:
@@ -771,9 +771,9 @@ static void sub_8019BBC(void)
     menuAction = 0;
 
     if (sKecleonBrosWork1->isKecleonItemShop)
-        sub_8019EDC(0);
+        sub_8019EDC(FALSE);
     else
-        sub_801A2A8(0);
+        sub_801A2A8(FALSE);
 
     if (sub_8012FD8(&sKecleonBrosWork1->menu) == 0 && (sub_8013114(&sKecleonBrosWork1->menu, &menuAction), menuAction != 1))
         sKecleonBrosWork1->menuAction3 = menuAction;

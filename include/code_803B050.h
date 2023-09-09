@@ -18,6 +18,6 @@ typedef struct unkStruct_80E9F8C
     /* 0x8 */ u8 *text2;
 } unkStruct_80E9F8C;
 
-void sub_803B6B0(s32, s32, u8, u32);
+void sub_803B6B0(s32 x, s32 y, u8 index, u32);
 
 #endif // GUARD_CODE_803B050_H
