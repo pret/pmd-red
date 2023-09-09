@@ -713,16 +713,16 @@ s32 unk_SetMoveToFirstInLinkedSequence8_v2(Move *moves, s32 index)
     return result;
 }
 
-bool8 IsMoveSet(s32 index, Move *struct_ptr)
+bool8 IsMoveSet(s32 index, Move *moves)
 {
-    if (struct_ptr[index].moveFlags & MOVE_FLAG_SET)
+    if (moves[index].moveFlags & MOVE_FLAG_SET)
         return TRUE;
     return FALSE;
 }
 
-bool8 IsMoveEnabled(s32 index, Move *struct_ptr)
+bool8 IsMoveEnabled(s32 index, Move *moves)
 {
-    if (struct_ptr[index].moveFlags & MOVE_FLAG_ENABLED_FOR_AI)
+    if (moves[index].moveFlags & MOVE_FLAG_ENABLED_FOR_AI)
         return TRUE;
     return FALSE;
 }
