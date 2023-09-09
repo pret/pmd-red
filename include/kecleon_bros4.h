@@ -6,7 +6,7 @@
 #include "text.h"
 
 // size: 0xF4
-struct unkStruct_203B224
+typedef struct unkStruct_203B224
 {
     u32 unk0;
     u32 unk4[INVENTORY_SIZE];
@@ -15,7 +15,7 @@ struct unkStruct_203B224
     UnkTextStruct2 *unk8C;
     UnkTextStruct2 unk90[4];
     u8 unkF0[4];
-};
+} unkStruct_203B224;
 
 bool8 sub_801A5D8(u32, s32, UnkTextStruct2_sub *, u32);
 u32 sub_801A6E8(bool8);

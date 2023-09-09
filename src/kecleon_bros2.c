@@ -9,7 +9,7 @@
 #include "text1.h"
 #include "text2.h"
 
-static EWRAM_DATA_2 struct unkStruct_203B214 *gUnknown_203B214 = {0};
+static EWRAM_DATA_2 unkStruct_203B214 *gUnknown_203B214 = {0};
 static EWRAM_DATA_2 u16 gUnknown_203B218 = {0};
 
 #include "data/kecleon_bros2.h"
@@ -21,7 +21,7 @@ bool8 sub_8019E40(u32 r0)
     if (CountKecleonShopItems() == 0)
         return FALSE;
 
-    gUnknown_203B214 = MemoryAlloc(sizeof(struct unkStruct_203B214), 8);
+    gUnknown_203B214 = MemoryAlloc(sizeof(unkStruct_203B214), 8);
     gUnknown_203B214->unk34 = r0;
     gUnknown_203B214->unk38 = &gUnknown_203B214->unk3C[gUnknown_203B214->unk34];
     sub_8006518(gUnknown_203B214->unk3C);

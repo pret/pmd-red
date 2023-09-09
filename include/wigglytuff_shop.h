@@ -5,34 +5,6 @@
 #include "menu.h"
 #include "text.h"
 
-// size: 0x138
-typedef struct WigglytuffShop
-{
-    bool32 isAsleep;
-    s32 state;
-    s32 fallbackState;
-    s32 friendAreaPrice;
-    u8 chosenFriendArea;
-    s16 chosenSpecies;
-    u32 menuAction1;
-    u32 menuAction2;
-    MenuItem unk1C[8];
-    u16 unk5C[0x8];
-    MenuStruct unk6C;
-    /* 0xBC */ OpenedFile *faceFile;
-    /* 0xC0 */ u8 *faceData;
-    u16 unkC4;
-    u16 unkC6;
-    u8 unkC8;
-    u8 unkC9;
-    u8 unkCA;
-    u8 fillCB;
-    OpenedFile **unkCC;
-    UnkTextStruct2 unkD0[4];
-    u32 unk130;
-    u32 unk134;
-} WigglytuffShop;
-
 enum WigglytuffStates
 {
     WIGGLYTUFF_INIT = 0,
@@ -66,8 +38,36 @@ enum WigglytuffStates
     WIGGLYTUFF_CHECK_LEGENDARY = 28,
 };
 
-bool8 sub_80211AC(u32, u32);
-bool8 sub_8021774(u8, bool8, s32);
+// size: 0x138
+typedef struct WigglytuffShop
+{
+    bool32 isAsleep;
+    s32 state;
+    s32 fallbackState;
+    s32 friendAreaPrice;
+    u8 chosenFriendArea;
+    s16 chosenSpecies;
+    u32 menuAction1;
+    u32 menuAction2;
+    MenuItem unk1C[8];
+    u16 unk5C[0x8];
+    MenuStruct unk6C;
+    /* 0xBC */ OpenedFile *faceFile;
+    /* 0xC0 */ u8 *faceData;
+    u16 unkC4;
+    u16 unkC6;
+    u8 unkC8;
+    u8 unkC9;
+    u8 unkCA;
+    u8 fillCB;
+    OpenedFile **unkCC;
+    UnkTextStruct2 unkD0[4];
+    u32 unk130;
+    u32 unk134;
+} WigglytuffShop;
+
+bool8 sub_80211AC(u32 mode, u32);
+bool8 sub_8021774(u8 friendArea, bool8, s32);
 u32 sub_8021274(bool8);
 u8 sub_802132C(void);
 void sub_8021354(bool8);

@@ -1,45 +1,6 @@
 #ifndef GUARD_MUSIC_H
 #define GUARD_MUSIC_H
 
-// size: 0x8. PMD keeps its own copy of music players for some reason
-struct PMDMusicPlayer
-{
-    u16 unk0;
-    u16 songIndex;
-    u16 volume;
-    bool8 isNotMaxVolume;
-};
-
-void InitMusic(void);
-
-void StopBGMusicVSync(void);
-void StartBGMusicVSync(void);
-bool8 IsValidSong(u32 songIndex);
-void StartNewBGM(u16 songIndex);
-bool8 IsBGSong(u32 songIndex);
-bool8 IsSoundEffect(u32 songIndex);
-bool8 IsFanfare(u32 songIndex);
-u16 GetMusicPlayerIndex(u16 songIndex);
-bool8 IsMusicPlayerPlaying(u16 songIndex);
-void StartNewBGM(u16 songIndex);
-void FadeInNewBGM(u16 songIndex, u16 speed);
-u16 GetCurrentBGSong(void);
-void QueueBGM(u16 songIndex);
-void StopBGM(void); // stops all BGM, fanfares and SE's
-void FadeOutBGM(u16 speed);
-void PlayFanfareSE(u16 songIndex, u16 volume);
-void StopFanfareSE(u16 songIndex);
-void FadeOutFanfareSE(u16 songIndex, u16 speed);
-bool8 IsFanfareSEPlaying(u16 songIndex);
-void SoundBiasReset(void);
-void SoundBiasSet(void);
-void UpdateSound(void);
-void SoundVSync(void);
-void nullsub_18(void);
-
-void nullsub_19(void);
-void nullsub_20(u16 songIndex);
-
 #define NUM_FANFARES 19
 #define FANFARE_START_INDEX 200
 
@@ -79,5 +40,35 @@ enum Fanfare_Player_State
     FANFARE_PLAYER_STATE_INITIALIZE = 0,
     FANFARE_PLAYER_STATE_PLAYING = 3,
 };
+
+// size: 0x8. PMD keeps its own copy of music players for some reason
+typedef struct PMDMusicPlayer
+{
+    u16 unk0;
+    u16 songIndex;
+    u16 volume;
+    bool8 isNotMaxVolume;
+} PMDMusicPlayer;
+
+void FadeInNewBGM(u16 songIndex, u16 speed);
+void FadeOutBGM(u16 speed);
+void FadeOutFanfareSE(u16 songIndex, u16 speed);
+u16 GetCurrentBGSong(void);
+void InitMusic(void);
+bool8 IsFanfareSEPlaying(u16 songIndex);
+void nullsub_18(void);
+void PlayFanfareSE(u16 songIndex, u16 volume);
+void QueueBGM(u16 songIndex);
+void SoundVSync(void);
+void StartBGMusicVSync(void);
+void StartNewBGM(u16 songIndex);
+void StopBGM(void); // Stops all BGM, fanfares and SE's
+void StopBGMusicVSync(void);
+void StopFanfareSE(u16 songIndex);
+void UpdateSound(void);
+
+// libagbsyscall
+extern void SoundBiasReset(void);
+extern void SoundBiasSet(void);
 
 #endif //GUARD_MUSIC_H

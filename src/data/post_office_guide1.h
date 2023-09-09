@@ -21,8 +21,6 @@ enum PostOfficeMenuActions
     SEND_THANK_YOU_MAIL
 };
 
-//
-
 static const u8 sPostOffice[];
 static const u8 sBulletinBoard[];
 static const u8 sDelivery[];
@@ -44,8 +42,6 @@ ALIGNED(4) static const u8 sFriendRescue[] = _("{COLOR_1 YELLOW}Friend Rescue{EN
 ALIGNED(4) static const u8 sDelivery[] = _("Delivery");
 ALIGNED(4) static const u8 sBulletinBoard[] = _("Bulletin Board");
 ALIGNED(4) static const u8 sPostOffice[] = _("Post Office");
-
-//
 
 static const u8 sFriendRescueInfo[];
 static const u8 sGoRescue[];
@@ -69,8 +65,6 @@ ALIGNED(4) static const u8 sGetHelp[] = _("{COLOR_1 YELLOW}Get help{END_COLOR_TE
 ALIGNED(4) static const u8 sGoRescue[] = _("{COLOR_1 YELLOW}Go rescue{END_COLOR_TEXT_1} ");
 ALIGNED(4) static const u8 sFriendRescueInfo[] = _("Friend Rescue Info");
 
-//
-
 static const MenuItem sPostOfficeHelpGoRescueMenu[] =
 {
     {"Rescue Procedures", RESCUE_PROCEDURES},
@@ -82,8 +76,6 @@ static const MenuItem sPostOfficeHelpGoRescueMenu[] =
     {NULL, EXIT}
 };
 
-//
-
 static const MenuItem sPostOfficeHelpGetHelpMenu[] =
 {
     {"Getting Help", GETTING_HELP},
@@ -93,8 +85,6 @@ static const MenuItem sPostOfficeHelpGetHelpMenu[] =
     {sExit, EXIT}, // Typing "Exit" as a literal will automatically point to the previous one also
     {NULL, EXIT}
 };
-
-//
 
 ALIGNED(4) static const u8 sWhatdYouWantToKnow[] =
     _(" So{COMMA} what{APOSTROPHE}d you want to\n"

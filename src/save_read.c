@@ -4,13 +4,13 @@
 #include "save.h"
 #include "save_read.h"
 
-EWRAM_DATA_2 struct SavePakRead *gSavePakRead = {0};
+EWRAM_DATA_2 SavePakRead *gSavePakRead = {0};
 
 #include "data/save_read.h"
 
 void PrepareSavePakRead(void)
 {
-    gSavePakRead = MemoryAlloc(sizeof(struct SavePakRead), 5);
+    gSavePakRead = MemoryAlloc(sizeof(SavePakRead), 5);
     gSavePakRead->state = 1;
 }
 

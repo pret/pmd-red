@@ -2,11 +2,11 @@
 #define GUARD_SAVE_READ_H
 
 // size: 0x8
-struct SavePakRead
+typedef struct SavePakRead
 {
     /* 0x0 */ u32 state;
     /* 0x4 */ u32 readStatus;
-};
+} SavePakRead;
 
 void PrepareSavePakRead(void);
 bool8 ReadSavePak(void);

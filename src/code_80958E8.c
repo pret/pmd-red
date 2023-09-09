@@ -19,17 +19,18 @@ extern void ResetPelipperBoardSlot(u8);
 extern void ResetJobSlot(u8);
 extern bool8 ValidateWonderMail(WonderMail *);
 
-EWRAM_DATA_2 struct unkStruct_203B490 *gUnknown_203B490 = {0};
-EWRAM_DATA struct unkStruct_203B490 gUnknown_2039448 = {0};
+static EWRAM_DATA unkStruct_203B490 sUnknown_2039448 = {0};
+
+EWRAM_DATA_2 unkStruct_203B490 *gUnknown_203B490 = {0};
 
 void LoadMailInfo(void)
 {
-    gUnknown_203B490 = &gUnknown_2039448;
+    gUnknown_203B490 = &sUnknown_2039448;
 }
 
-struct unkStruct_203B490 *GetMailInfo(void)
+unkStruct_203B490 *GetMailInfo(void)
 {
-    return &gUnknown_2039448;
+    return &sUnknown_2039448;
 }
 
 void InitializeMailJobsNews(void)

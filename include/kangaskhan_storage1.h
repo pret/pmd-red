@@ -54,7 +54,7 @@ struct KangaskhanStorageWork
     UnkTextStruct2 unkEC[4];
 };
 
-bool8 CreateKangaskhanStorage(u32);
+bool8 CreateKangaskhanStorage(u32 mode);
 void DeleteKangaskhanStorage(void);
 u32 KangaskhanStorageCallback(void);
 

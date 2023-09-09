@@ -6,7 +6,7 @@
 #include "text.h"
 
 // size: 0x150
-struct unkStruct_203B20C
+typedef struct unkStruct_203B20C
 {
     /* 0x0 */ u32 state;
     u8 unk4[4];
@@ -30,7 +30,7 @@ struct unkStruct_203B20C
     u32 unkE0;
     u8 fillE4[0xF0 - 0xE4];
     UnkTextStruct2 unkF0[4];
-};
+} unkStruct_203B20C;
 
 bool8 sub_8017E1C(void);
 u32 sub_8017E54(void);

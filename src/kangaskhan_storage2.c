@@ -10,7 +10,7 @@
 #include "text1.h"
 #include "text2.h"
 
-EWRAM_DATA_2 struct unkStruct_203B20C *gUnknown_203B20C = {0};
+EWRAM_DATA_2 unkStruct_203B20C *gUnknown_203B20C = {0};
 
 extern const u8 *gUnknown_80D4934[];
 extern const u8 *gUnknown_80D4958[];
@@ -39,7 +39,7 @@ bool8 sub_8017E1C(void)
 {
     ResetUnusedInputStruct();
     sub_800641C(NULL, TRUE, TRUE);
-    gUnknown_203B20C = MemoryAlloc(sizeof(struct unkStruct_203B20C), 8);
+    gUnknown_203B20C = MemoryAlloc(sizeof(unkStruct_203B20C), 8);
     gUnknown_203B20C->menuAction1 = 0;
     gUnknown_203B20C->menuAction2 = 0;
     gUnknown_203B20C->menuAction3 = 0;

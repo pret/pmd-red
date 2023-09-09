@@ -60,7 +60,7 @@ u32 *sub_8095108(void);
 unkStruct_203B48C *sub_8095110(void);
 void sub_8095118(void);
 s32 FindOpenMailSlot(void);
-bool8 sub_80951BC(unkStruct_203B480 *);
+bool8 sub_80951BC(unkStruct_203B480 *mail);
 bool8 sub_80951FC(unkStruct_203B480 *);
 unkStruct_203B480 * GetMailatIndex(u8);
 void DeleteMailAtIndex(u8);
@@ -76,4 +76,4 @@ s32 GetFirstIndexofMailType(u8);
 void sub_8095824(struct unkStruct_8094924 *, unkStruct_203B480 *);
 void sub_8095774(struct unkStruct_8094924 *, unkStruct_203B480 *);
 
-#endif
+#endif // GUARD_CODE_8094F88_H

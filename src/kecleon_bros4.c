@@ -13,7 +13,7 @@
 
 extern u8 gUnknown_202DE58[];
 
-static EWRAM_DATA_2 struct unkStruct_203B224 *gUnknown_203B224 = {0};
+static EWRAM_DATA_2 unkStruct_203B224 *gUnknown_203B224 = {0};
 static EWRAM_DATA_2 u16 gUnknown_203B228 = {0};
 static EWRAM_DATA_2 u16 gUnknown_203B22A = {0};
 
@@ -30,7 +30,7 @@ bool8 sub_801A5D8(u32 param_1, s32 param_2, UnkTextStruct2_sub *param_3, u32 par
         return FALSE;
 
     if (gUnknown_203B224 == NULL)
-        gUnknown_203B224 = MemoryAlloc(sizeof(struct unkStruct_203B224), 8);
+        gUnknown_203B224 = MemoryAlloc(sizeof(unkStruct_203B224), 8);
 
     gUnknown_203B224->unk0 = param_1;
     FillInventoryGaps();
@@ -425,7 +425,7 @@ static void SortInventoryItems(void)
     }
 }
 
-UNUSED static struct unkStruct_203B224 *sub_801AF98(void)
+UNUSED static unkStruct_203B224 *sub_801AF98(void)
 {
     return gUnknown_203B224;
 }

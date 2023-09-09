@@ -5,14 +5,14 @@
 #include "text.h"
 
 // size: 0xA0
-struct unkStruct_203B21C
+typedef struct unkStruct_203B21C
 {
     /* 0x0 */ MenuInputStruct input;
     u32 unk34;
     UnkTextStruct2 *unk38;
     UnkTextStruct2 unk3C[4];
     u8 unk9C[4];
-};
+} unkStruct_203B21C;
 
 u8 sub_801A20C(u32);
 u32 sub_801A2A8(u8);

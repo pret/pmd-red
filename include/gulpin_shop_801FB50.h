@@ -8,7 +8,7 @@
 #include "text.h"
 
 // size: 0x1E0
-struct unkStruct_203B27C
+typedef struct unkStruct_203B27C
 {
     /* 0x0 */ bool32 isAsleep;
     /* 0x4 */ s32 state;
@@ -42,7 +42,7 @@ struct unkStruct_203B27C
     u8 unk17A;
     OpenedFile **unk17C;
     UnkTextStruct2 unk180[4];
-};
+} unkStruct_203B27C;
 
 bool8 sub_801FB50(u32);
 u32 sub_801FC40(void);

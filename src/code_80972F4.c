@@ -9,7 +9,7 @@
 #include "code_80A26CC.h"
 #include "code_80972F4.h"
 
-extern struct MissionText gStoryMissionText[];
+extern MissionText gStoryMissionText[];
 extern const char gFinalScenarioText[];
 extern const char gMeetNinetalesText[];
 extern const char gAvoidCaptureText[];
@@ -32,7 +32,7 @@ bool8 sub_8096F50(WonderMail *mail)
 {
     s32 index;
     s32 temp2;
-    struct subStruct_203B490 *temp;
+    subStruct_203B490 *temp;
 
     temp2 = sub_8096EB0(mail);
 
@@ -276,7 +276,7 @@ void sub_8097418(s16 index,u32 param_2)
   u8 param_2_u8 = param_2;
   if (index_s32 != 0xd) {
     if ((param_2_u8 != 0) && (sub_800199C(0,0x2c,index_s32,0), index_s32 < 0x1f)) {
-      struct MissionText *mt = &gStoryMissionText[index_s32];
+      MissionText *mt = &gStoryMissionText[index_s32];
       if (mt->unk4 != 0xFF) {
         sub_8097FA8(mt->unk4);
       }
@@ -320,7 +320,7 @@ const u8 *GetCurrentMissionText(s16 index)
 {
     if(index < 0x1F)
     {
-        struct MissionText *mt = &gStoryMissionText[index];
+        MissionText *mt = &gStoryMissionText[index];
         return mt->text;
     }
     else

@@ -36,7 +36,7 @@ typedef struct GulpinShopWork
     UnkTextStruct2 unk12C[4];
 } GulpinShopWork;
 
-bool8 CreateGulpinShop(s32, s16, Move *);
+bool8 CreateGulpinShop(s32 isAsleep, s16 pokeSpecies, Move *moves);
 void DestroyGulpinShop(void);
 bool8 GulpinIsNextMoveLinked(void);
 

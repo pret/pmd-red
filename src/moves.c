@@ -18,7 +18,7 @@ extern u32 gUnknown_202DE30;
 extern u8 gAvailablePokemonNames[]; // 202DF98
 
 // data_8107010.s
-extern const struct unkStruct_80928C0 gUnknown_81098C4;
+extern const unkStruct_80928C0 gUnknown_81098C4;
 extern const u8 gUnknown_81098D0[];
 extern const u8 gUnknown_81098DC[];
 extern const u8 gUnknown_81098E0[];
@@ -72,14 +72,14 @@ u8 sub_809287C(Move *move)
     return 50;
 }
 
-void sub_80928A0(u8 *buffer, Move *move, const struct unkStruct_80928C0 *a2)
+void sub_80928A0(u8 *buffer, Move *move, const unkStruct_80928C0 *a2)
 {
     Move stack;
     CopyAndResetMove(&stack, move);
     sub_80928C0(buffer, &stack, a2);
 }
 
-void sub_80928C0(u8 *buffer, Move *move, const struct unkStruct_80928C0 *param_3)
+void sub_80928C0(u8 *buffer, Move *move, const unkStruct_80928C0 *param_3)
 {
     u32 uVar2;
     u32 basePP;

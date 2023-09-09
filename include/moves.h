@@ -76,8 +76,8 @@ bool8 UnlinkMovesAfter(s32, Move *);
 void UnSetMove(s32, Move *);
 
 u8 sub_809287C(Move *);
-void sub_80928A0(u8 *, Move *, const struct unkStruct_80928C0 *);
-void sub_80928C0(u8 *, Move *, const struct unkStruct_80928C0 *);
+void sub_80928A0(u8 *, Move *, const unkStruct_80928C0 *);
+void sub_80928C0(u8 *, Move *, const unkStruct_80928C0 *);
 void sub_8092AA8(Move *, u16);
 void sub_8092C84(u8 *, u16);
 s32 sub_8092DB8(Move *, s32);

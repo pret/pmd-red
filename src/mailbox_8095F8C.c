@@ -2,7 +2,7 @@
 #include "wonder_mail.h"
 #include "code_80958E8.h"
 
-extern struct unkStruct_203B490 *gUnknown_203B490;
+extern unkStruct_203B490 *gUnknown_203B490;
 
 bool8 IsMailSlotEmpty(u8);
 void ResetMailboxSlot(u8);
