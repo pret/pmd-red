@@ -21,7 +21,7 @@ typedef struct MoveDataFile
     MoveLearnset *moveLearnsets;
 } MoveDataFile;
 
-bool8 CanBeSnatched(u16);
+bool8 CanBeSnatched(u16 moveID);
 void CopyAndResetMoves(Move *, Move *);
 void CopyBareMoveData(Move *, Move *);
 bool8 DoesMoveCharge(u16);
