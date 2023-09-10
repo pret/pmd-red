@@ -68,7 +68,7 @@ extern void sub_800F094();
 void sub_800DAC0(u32 fileSelection)
 {
   s32 index;
-  struct OpenedFile *filePtr;
+  OpenedFile *filePtr;
   struct unkStruct_203B0CC_sub *preload;
   
   if (gUnknown_203B0CC != NULL) {

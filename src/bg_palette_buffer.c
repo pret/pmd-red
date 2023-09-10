@@ -70,7 +70,7 @@ void InitBGPaletteBuffer(void)
 #ifndef NONMATCHING
 NAKED
 #endif
-void SetBGPaletteBufferColorRGB(s32 index, u8 *RGBArray, s32 a1, u8 *a2)
+void SetBGPaletteBufferColorRGB(s32 index, u8 *colorArray, s32 a1, u8 *a2)
 {
 #ifdef NONMATCHING
     if (a1 < 0) {
@@ -81,11 +81,11 @@ void SetBGPaletteBufferColorRGB(s32 index, u8 *RGBArray, s32 a1, u8 *a2)
     }
     gBGPaletteUsed[index / 16] = 1;
     if (!a2) {
-        gBGPaletteBuffer[index] = ((RGBArray[2] * a1 / 256 & 0x1F) << 10) | ((RGBArray[1] * a1 / 256 & 0x1F) << 5) | (RGBArray[0] * a1 / 256 & 0x1F);
+        gBGPaletteBuffer[index] = ((colorArray[2] * a1 / 256 & 0x1F) << 10) | ((colorArray[1] * a1 / 256 & 0x1F) << 5) | (colorArray[0] * a1 / 256 & 0x1F);
     }
     else
     {
-        gBGPaletteBuffer[index] = ((a2[4 * RGBArray[2] + 2] * a1 / 256 & 0x1F) << 10) | ((a2[4 * RGBArray[1] + 1] * a1 / 256 & 0x1F) << 5) | (a2[4 * RGBArray[0]] * a1 / 256 & 0x1F);
+        gBGPaletteBuffer[index] = ((a2[4 * colorArray[2] + 2] * a1 / 256 & 0x1F) << 10) | ((a2[4 * colorArray[1] + 1] * a1 / 256 & 0x1F) << 5) | (a2[4 * colorArray[0]] * a1 / 256 & 0x1F);
     }
 #else
     asm_unified("\tpush {r4-r7,lr}\n"
@@ -211,7 +211,7 @@ void SetBGPaletteBufferColor(s32 index, u16 *color)
     gBGPaletteBuffer[index] = *color;
 }
 
-void nullsub_4(s32 index, u8 *RGBArray, s32 a1, u8 *a2)
+void nullsub_4(s32 index, u8 *colorArray, s32 a1, u8 *a2)
 {
 }
 void nullsub_5(void)

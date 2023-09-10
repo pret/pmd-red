@@ -2,7 +2,7 @@
 #define GUARD_TEXT_H
 
 // size: 0x48
-struct UnkTextStruct1
+typedef struct UnkTextStruct1
 {
     s16 unk0;
     s16 unk2;
@@ -26,14 +26,14 @@ struct UnkTextStruct1
     u8 unk44;
     bool8 unk45;
     u8 unk46;
-};
+} UnkTextStruct1;
 
 // size: 0x4
-struct UnkTextStruct2_sub
+typedef struct UnkTextStruct2_sub
 {
     // I haven't found a func that reads these separately yet, but simply making an arr[2] will cause assignments to break.
     // Some funcs only match with this union for some reason even though they don't access the variables separately...
-    // The first func to break is currently sub_801A5D8 in kecleon_bros.c
+    // The first func to break is currently sub_801A5D8 in kecleon_bros4.c
     // The first func I matched that uses the array is sub_8006554 in text2.c (using the separated fields doesn't match or get even close)
     union {
         struct {
@@ -42,20 +42,20 @@ struct UnkTextStruct2_sub
         } separate;
         s16 arr[2];
     } unk0;
-};
+} UnkTextStruct2_sub;
 
 // size: 0x18
-struct UnkTextStruct2
+typedef struct UnkTextStruct2
 {
     u8 unk0;
     u8 fill1[0x4 - 0x1];
     s32 unk4;
-    struct UnkTextStruct2_sub unk8;
+    UnkTextStruct2_sub unk8;
     s16 unkC;
     s16 unkE;
     s16 unk10;
     s16 unk12;
     const u8 *unk14;
-};
+} UnkTextStruct2;
 
-#endif
+#endif // GUARD_TEXT_H

@@ -4,7 +4,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
 #include "dungeon_random.h"
-#include "item.h"
+#include "items.h"
 #include "map.h"
 
 extern u8 *gUnknown_80FE6F4[];
@@ -12,18 +12,18 @@ extern struct unkStruct_8090F58 gUnknown_80F699C;
 extern struct unkStruct_8090F58 gUnknown_80F69A8;
 extern struct unkStruct_8090F58 gUnknown_80F6990;
 
-extern struct EntityInfo* GetTrapData_1(struct Entity *entity);
-extern void SetMessageArgument_2(u8 *, struct EntityInfo *, u32);
+extern EntityInfo* GetTrapData_1(Entity *entity);
+extern void SetMessageArgument_2(u8 *, EntityInfo *, u32);
 extern void GetTrapName(u8 *, u8);
 extern bool8 IsNotSpecialItem(u8 id);
-void sub_8045BF8(u8 *, struct Item *);
+void sub_8045BF8(u8 *, Item *);
 void sub_8046CE4(void *param_1,u32 param_2);
 extern u32 sub_803D73C(u32);
-void sub_80460F8(struct Position *, struct Item *, u32);
+void sub_80460F8(Position *, Item *, u32);
 
 void sub_8045ACC(void)
 {
-  struct Entity *entity;
+  Entity *entity;
   s32 index;
   s32 pokeCount;
   
@@ -51,9 +51,9 @@ void sub_8045ACC(void)
   }
 }
 
-s32 GetTeamMemberEntityIndex(struct Entity *pokemon)
+s32 GetTeamMemberEntityIndex(Entity *pokemon)
 {
-  struct Entity *entity;
+  Entity *entity;
   s32 index;
 
   for(index = 0; index < MAX_TEAM_MEMBERS; index++)
@@ -65,7 +65,7 @@ s32 GetTeamMemberEntityIndex(struct Entity *pokemon)
   return -1;
 }
 
-void SetMessageArgument(char *buffer, struct Entity *entity, u32 param_3)
+void SetMessageArgument(char *buffer, Entity *entity, u32 param_3)
 {
   switch(GetEntityType(entity))
   {
@@ -84,22 +84,22 @@ void SetMessageArgument(char *buffer, struct Entity *entity, u32 param_3)
   }
 }
 
-void sub_8045BF8(u8 *buffer, struct Item *item)
+void sub_8045BF8(u8 *buffer, Item *item)
 {
     sub_8090E14(buffer, item, &gUnknown_80F699C);
 }
 
-void sub_8045C08(u8 *buffer, struct Item *item)
+void sub_8045C08(u8 *buffer, Item *item)
 {
     sub_8090E14(buffer, item, &gUnknown_80F69A8);
 }
 
-void sub_8045C18(u8 *buffer, struct Item *item)
+void sub_8045C18(u8 *buffer, Item *item)
 {
     sub_8090E14(buffer, item, &gUnknown_80F6990);
 }
 
-void sub_8045C28(struct Item *Item, u8 itemID, u32 param_3)
+void sub_8045C28(Item *Item, u8 itemID, u32 param_3)
 {
   bool8 stickyFlag;
   u32 total;
@@ -143,8 +143,8 @@ void sub_8045CB0(void)
   struct Tile *tile;
   u32 uVar5;
   int xCounter;
-  struct Item item;
-  struct Position pos;
+  Item item;
+  Position pos;
   u32 flag;
   
   x = DungeonRandInt(DUNGEON_MAX_SIZE_X);

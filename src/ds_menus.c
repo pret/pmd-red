@@ -29,5 +29,5 @@ u32 UpdateWirelessCommsMenu(void)
 void CleanWirelessCommsMenu(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(NULL, 1, 1);
+    sub_800641C(NULL, TRUE, TRUE);
 }

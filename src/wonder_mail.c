@@ -1,13 +1,13 @@
 #include "global.h"
 #include "constants/communication_error_codes.h"
-#include "save.h"
+#include "save_write.h"
 #include "pokemon.h"
-#include "item.h"
+#include "items.h"
 #include "wonder_mail.h"
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
-#include "team_inventory.h"
+#include "code_80A26CC.h"
 #include "rescue_password_menu.h"
 #include "menu_input.h"
 #include "code_8094F88.h"
@@ -16,8 +16,9 @@
 #include "code_801EE10_1.h"
 #include "cpu.h"
 #include "code_80118A4.h"
+#include "save.h"
 
-extern struct WonderMailStruct_203B2C0 *gUnknown_203B2C0;
+extern WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 
 extern void sub_8011C28(u32);
 
@@ -25,7 +26,6 @@ extern void sub_809927C(u8);
 extern bool8 HasNoWonderMailType(u32);
 extern u32 sub_8031050();
 extern void sub_80310B4();
-extern bool8 sub_80A2824(u8);
 
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
@@ -42,19 +42,15 @@ extern void sub_8030DE4(void);
 extern void sub_803092C(void);
 
 extern u32 sub_80154F0();
-extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_203B480 *r0);
+extern u32 sub_8039068(u32, u8 *r1, unkStruct_203B480 *r0);
 extern void sub_8095274(u32);
 extern void sub_80155F0();
-extern void sub_8024458(s16, u32);
 extern u32 sub_80244E4();
 extern void sub_802452C();
-extern void sub_802453C();
 extern u8 sub_8024108(u32);
 extern u32 sub_8031DCC();
 extern void sub_8031E10();
 extern void sub_8031E00();
-extern s32 sub_8001658(u32, u32);
-extern void sub_8099690(u32);
 extern void sub_8031E10(void);
 extern void sub_803084C(void);
 extern void sub_8030DE4();
@@ -123,7 +119,6 @@ extern void sub_803084C(void);
 extern void sub_80155F0(void);
 extern void sub_80310B4(void);
 extern void sub_8030DE4(void);
-extern void sub_802453C(void);
 
 extern const u8 DontSendPokemon_80DDB80[];
 extern const u8 SendPokemon_80DDB98[];
@@ -166,7 +161,7 @@ enum FriendRescueStates {
     DEFAULT_FALLBACK_STATE = 0x3D
 };
 
-const struct MenuItem gUnknown_80DD970[] =
+const MenuItem gUnknown_80DD970[] =
 {
     {"Receive SOS Mail", 0x0},
     {"Leave for Rescue", 0x1},
@@ -176,7 +171,7 @@ const struct MenuItem gUnknown_80DD970[] =
     {NULL, 0xA}
 };
 
-const struct MenuItem gUnknown_80DD9EC[] =
+const MenuItem gUnknown_80DD9EC[] =
 {
     {"Delete SOS Mail", 0x5},
     {"Delete A-OK Mail", 0x6},
@@ -185,21 +180,21 @@ const struct MenuItem gUnknown_80DD9EC[] =
     {NULL, 0xA}
 };
 
-const struct MenuItem gUnknown_80DDA48[] =
+const MenuItem gUnknown_80DDA48[] =
 {
     {"Yes", 0x8},
     {"Cancel", 0xA},
     {NULL, 0xA}
 };
 
-const struct MenuItem gUnknown_80DDA64[] =
+const MenuItem gUnknown_80DDA64[] =
 {
     {"Yes", 0x8},
     {"No", 0x9},
     {NULL, 0xA}
 };
 
-const struct MenuItem gUnknown_80DDA80[] =
+const MenuItem gUnknown_80DDA80[] =
 {
     {"Yes", 0x8},
     {"No", 0x9},
@@ -207,7 +202,7 @@ const struct MenuItem gUnknown_80DDA80[] =
     {NULL, 0xA}
 };
 
-const struct MenuItem gUnknown_80DDAA0[] =
+const MenuItem gUnknown_80DDAA0[] =
 {
     {SendWOPokemon, 0x12},
     {"Cancel", 0xA},
@@ -216,7 +211,7 @@ const struct MenuItem gUnknown_80DDAA0[] =
 
 ALIGNED(4) const u8 SendWOPokemon[] = _("Send w/o Pokémon");
 
-const struct UnkTextStruct2 gUnknown_80DDACC =
+const UnkTextStruct2 gUnknown_80DDACC =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -226,7 +221,7 @@ const struct UnkTextStruct2 gUnknown_80DDACC =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80DDAE4 =
+const UnkTextStruct2 gUnknown_80DDAE4 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -236,14 +231,14 @@ const struct UnkTextStruct2 gUnknown_80DDAE4 =
     NULL
 };
 
-const struct MenuItem gUnknown_80DDAFC[] =
+const MenuItem gUnknown_80DDAFC[] =
 {
     {"Confirm", 0xB},
     {"Info", 0xC},
     {NULL, 0xA},
 };
 
-const struct MenuItem gUnknown_80DDB24[] =
+const MenuItem gUnknown_80DDB24[] =
 {
     {"Game Link cable", 0xD},
     {"Password", 0xF},
@@ -251,7 +246,7 @@ const struct MenuItem gUnknown_80DDB24[] =
     {NULL, 0xA},
 };
 
-const struct MenuItem gUnknown_80DDB60[] =
+const MenuItem gUnknown_80DDB60[] =
 {
     {SendPokemon_80DDB98, 0x11},
     {DontSendPokemon_80DDB80, 0x12},
@@ -268,13 +263,13 @@ ALIGNED(4) const u8 SendPokemon_80DDB98[] = _("Send Pokémon");
 u32 sub_8027F88(void)
 {
   char *monName;
-  struct OpenedFile *faceFile;
+  OpenedFile *faceFile;
   s32 counter;
 
   ResetUnusedInputStruct();
-  sub_800641C(0, 1, 1);
-  gUnknown_203B2C0 = MemoryAlloc(sizeof(struct WonderMailStruct_203B2C0), 8);
-  MemoryFill8((u8 *)gUnknown_203B2C0, 0, sizeof(struct WonderMailStruct_203B2C0));
+  sub_800641C(NULL, TRUE, TRUE);
+  gUnknown_203B2C0 = MemoryAlloc(sizeof(WonderMailStruct_203B2C0), 8);
+  MemoryFill8((u8 *)gUnknown_203B2C0, 0, sizeof(WonderMailStruct_203B2C0));
   gUnknown_203B2C0->unk53C = 0;
   gUnknown_203B2C0->mailIndex = -1;
   gUnknown_203B2C0->speciesNum = -1;
@@ -507,7 +502,7 @@ void sub_8028348(void)
         case 0x3B:
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8031D70(gUnknown_203B2C0->mailIndex, 0);
             break;
         case 0x3C:
@@ -542,7 +537,7 @@ void sub_8028348(void)
             if(sub_8023CE8() == 0)
             {
                 ResetUnusedInputStruct();
-                sub_800641C(0, 1, 1);
+                sub_800641C(NULL, TRUE, TRUE);
                 sub_8023868(3, 0, 0, 9);
             }
             break;
@@ -568,7 +563,7 @@ void sub_8028348(void)
             if(sub_8030894() == 0)
             {
                 ResetUnusedInputStruct();
-                sub_800641C(0, 1, 1);
+                sub_800641C(NULL, TRUE, TRUE);
                 sub_80306A8(WONDER_MAIL_TYPE_AOK, 0, 0, 6);
             }
             break;
@@ -601,13 +596,13 @@ void sub_8028348(void)
                 switch(gUnknown_203B2C0->unk40)
                 {
                     case 3:
-                        MemoryFill8((u8 *)&gUnknown_203B2C0->unk48, 0, sizeof(struct unkStruct_203B480));
-                        MemoryFill8((u8 *)&gUnknown_203B2C0->unk78, 0, sizeof(struct unkStruct_203B480));
+                        MemoryFill8((u8 *)&gUnknown_203B2C0->unk48, 0, sizeof(unkStruct_203B480));
+                        MemoryFill8((u8 *)&gUnknown_203B2C0->unk78, 0, sizeof(unkStruct_203B480));
                         gUnknown_203B2C0->linkError = sub_8037D64(gUnknown_203B2C0->unk40, &gUnknown_203B2C0->unk48, &gUnknown_203B2C0->unk78);
                         break;
                     case 4:
-                        MemoryFill8((u8 *)&gUnknown_203B2C0->unkA8, 0, sizeof(struct WonderMailStruct_203B2C0_sub));
-                        MemoryFill8((u8 *)&gUnknown_203B2C0->unk130, 0, sizeof(struct WonderMailStruct_203B2C0_sub));
+                        MemoryFill8((u8 *)&gUnknown_203B2C0->unkA8, 0, sizeof(WonderMailStruct_203B2C0_sub));
+                        MemoryFill8((u8 *)&gUnknown_203B2C0->unk130, 0, sizeof(WonderMailStruct_203B2C0_sub));
                         gUnknown_203B2C0->unkA8.pokemon.speciesNum = 0;
                         gUnknown_203B2C0->unk130.pokemon.speciesNum = 0;
                         gUnknown_203B2C0->unkA8.mail = *GetMailatIndex(gUnknown_203B2C0->mailIndex);
@@ -659,7 +654,7 @@ void sub_8028348(void)
         case 0x27:
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_80151C0(4, gUnknown_203B2C0->passwordBuffer);
             break;
         case 8:
@@ -695,7 +690,7 @@ void sub_8028348(void)
             if(sub_8030894() == 0)
             {
                 ResetUnusedInputStruct();
-                sub_800641C(0, 1, 1);
+                sub_800641C(NULL, TRUE, TRUE);
                 // SOS Mail
                 sub_80306A8(2, 0, 0, 6);
             }
@@ -1152,7 +1147,7 @@ void sub_8028FC0()
 void sub_8028FDC(void)
 {
     s32 menuChoice;
-    struct unkStruct_203B480 *mail;
+    unkStruct_203B480 *mail;
 
     if(sub_80144A4(&menuChoice) != 0)
     {
@@ -1201,7 +1196,7 @@ void sub_8029044(void)
             gUnknown_203B2C0->mailIndex = sub_80307EC();
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B2C0->mailIndex, 0);
             SetFriendRescueCounterState(0x21);
             break;
@@ -1237,7 +1232,7 @@ void sub_80290F0(void)
             gUnknown_203B2C0->fallbackState = DEFAULT_FALLBACK_STATE;
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B2C0->mailIndex, 0);
             SetFriendRescueCounterState(0x21);
             break;
@@ -1260,7 +1255,7 @@ void sub_80291AC(void)
         case 3:
             sub_8030DE4();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B2C0->unk3BC, TRUE, TRUE);
             sub_803092C();
             if(gUnknown_203B2C0->fallbackState == DEFAULT_FALLBACK_STATE)
             {
@@ -1439,10 +1434,10 @@ void sub_80293D8(void)
 void sub_80293F4(void)
 {
     u32 return_var;
-    struct unkStruct_203B480 mail;
+    unkStruct_203B480 mail;
 
     return_var = sub_80154F0();
-    MemoryFill8((u8 *)&mail, 0, sizeof(struct unkStruct_203B480));
+    MemoryFill8((u8 *)&mail, 0, sizeof(unkStruct_203B480));
     switch(return_var)
     {
         case 3:
@@ -1477,7 +1472,7 @@ void sub_80293F4(void)
         case 2:
             sub_80155F0();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B2C0->unk3BC, TRUE, TRUE);
             SetFriendRescueCounterState(FRIEND_RESCUE_MAIN);
             break;
         default:
@@ -1550,7 +1545,7 @@ void sub_80295D8(void)
             gUnknown_203B2C0->mailIndex = sub_80307EC();
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B2C0->mailIndex, 0);
             SetFriendRescueCounterState(0x2C);
             break;
@@ -1586,7 +1581,7 @@ void sub_8029684(void)
             gUnknown_203B2C0->fallbackState = DEFAULT_FALLBACK_STATE;
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B2C0->mailIndex, 0);
             SetFriendRescueCounterState(0x2C);
             break;
@@ -1607,7 +1602,7 @@ void sub_8029740(void)
         case 3:
             sub_8030DE4();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B2C0->unk3BC, TRUE, TRUE);
             sub_803092C();
             if(gUnknown_203B2C0->fallbackState == DEFAULT_FALLBACK_STATE)
             {
@@ -1660,7 +1655,7 @@ void sub_80297D4(void)
             gUnknown_203B2C0->speciesNum = sub_8023B44();
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8024458(gUnknown_203B2C0->speciesNum, 0);
             SetFriendRescueCounterState(0x35);
             break;
@@ -1686,7 +1681,7 @@ void sub_8029884(void)
             gUnknown_203B2C0->fallbackState = DEFAULT_FALLBACK_STATE;
             sub_8006518(gUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8024458(gUnknown_203B2C0->speciesNum, 0);
             SetFriendRescueCounterState(0x35);
             break;
@@ -1716,7 +1711,7 @@ void sub_8029944(void)
         case 3:
             sub_802453C();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B2C0->unk3BC, TRUE, TRUE);
             sub_8023B7C(1);
             if(gUnknown_203B2C0->fallbackState == DEFAULT_FALLBACK_STATE)
             {
@@ -1856,7 +1851,7 @@ void sub_8029AF4(void)
         case 3:
             sub_8031E10();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B2C0->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B2C0->unk3BC, TRUE, TRUE);
             SetFriendRescueCounterState(0x3C);
             break;
         case 1:

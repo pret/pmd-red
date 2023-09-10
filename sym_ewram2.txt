@@ -6,8 +6,8 @@
 errno: /* 203B034 */
 	.space 0x4
 
-alt_203B038:
-
+ewramClearEnd:
+ewramClearEnd2:
 gTitlePaletteFile: /* 203B038 */
 	.space 0x4
 
@@ -21,8 +21,7 @@ gUnknown_203B040: /* 203B040 */
 
     .space 0x2
 
-gUnknown_203B074: /* 203B074 */
-	.space 0x4
+    .include "src/sprite.o"
 
 gUnknown_203B078: /* 203B078 */
 	.space 0x4
@@ -123,6 +122,10 @@ gUnknown_203B0EC: /* 203B0EC */
 	.space 0x2B
 
 .include "src/save.o"
+.include "src/save_read.o"
+.include "src/save_write.o"
+.include "src/quick_save_read.o"
+.include "src/quick_save_write.o"
 
 gUnknown_203B198: /* 203B198 */
 	.space 0x60
@@ -137,40 +140,15 @@ gUnknown_203B200: /* 203B200 */
 	.space 0x4
 
 .include "src/felicity_bank.o"
-.include "src/kangaskhan_storage.o"
-
-gKecleonBrosWork: /* 203B210 */
-	.space 0x4
-
-gUnknown_203B214: /* 203B214 */
-	.space 0x4
-
-gUnknown_203B218: /* 203B218 */
-	.space 0x4
-
-gUnknown_203B21C: /* 203B21C */
-	.space 0x4
-
-gUnknown_203B220: /* 203B220 */
-	.space 0x4
-
-gUnknown_203B224: /* 203B224 */
-	.space 0x4
-
-gUnknown_203B228: /* 203B228 */
-	.space 0x2
-
-gUnknown_203B22A: /* 203B22A */
-	.space 0x2
-
-gUnknown_203B22C: /* 203B22C */
-	.space 0x4
-
-gUnknown_203B230: /* 203B230 */
-	.space 0x4
-
-gUnknown_203B234: /* 203B234 */
-	.space 0x4
+.include "src/kangaskhan_storage1.o"
+.include "src/kangaskhan_storage2.o"
+.include "src/kecleon_bros1.o"
+.include "src/kecleon_bros2.o"
+.include "src/kecleon_bros3.o"
+.include "src/kecleon_bros4.o"
+.include "src/code_801AFA4.o"
+.include "src/code_801B3C0.o"
+.include "src/code_801B60C.o"
 
 gUnknown_203B238: /* 203B238 */
 	.space 0x4
@@ -214,8 +192,7 @@ gUnknown_203B264: /* 203B264 */
 gUnknown_203B268: /* 203B268 */
 	.space 0x4
 
-gGulpinShopWork: /* 203B26C */
-	.space 0x4
+.include "src/gulpin_shop.o"
 
 gUnknown_203B270: /* 203B270 */
 	.space 0x4
@@ -226,8 +203,7 @@ gUnknown_203B274: /* 203B274 */
 gUnknown_203B278: /* 203B278 */
 	.space 0x4
 
-.include "src/gulpin_shop_1.o"
-
+.include "src/gulpin_shop_801FB50.o"
 .include "src/wigglytuff_shop.o"
 
 gUnknown_203B294: /* 203B294 */
@@ -261,91 +237,89 @@ gUnknown_203B2AC: /* 203B2AC */
 .include "src/friend_list_menu.o"
 .include "src/party_list_menu.o"
 
-gUnknown_203B2BC: /* 203B2BC */
+gUnknown_203B2BC: /* 203B2BC (friend_area_action_menu) */
 	.space 0x4
 
-gUnknown_203B2C0: /* 203B2C0 */
+gUnknown_203B2C0: /* 203B2C0 (wonder_mail) */
 	.space 0x4
 
-gUnknown_203B2C4: /* 203B2C4 */
+gUnknown_203B2C4: /* 203B2C4 (thank_you_wonder_mail) */
 	.space 0x4
 
-gUnknown_203B2C8: /* 203B2C8 */
+gUnknown_203B2C8: /* 203B2C8 (wonder_mail_2) */
 	.space 0x4
 
-gUnknown_203B2CC: /* 203B2CC */
+gUnknown_203B2CC: /* 203B2CC (pokemon_news) */
 	.space 0x4
 
-gUnknown_203B2D0: /* 203B2D0 */
+gUnknown_203B2D0: /* 203B2D0 (pokemon_news) */
 	.space 0x2
 
-gUnknown_203B2D2: /* 203B2D2 */
+gUnknown_203B2D2: /* 203B2D2 (pokemon_news) */
 	.space 0x2
 
-gUnknown_203B2D4: /* 203B2D4 */
+gUnknown_203B2D4: /* 203B2D4 (pokemon_news) */
 	.space 0x4
 
-gUnknown_203B2D8: /* 203B2D8 */
+gUnknown_203B2D8: /* 203B2D8 (pokemon_news / wonder_mail_2_mid) */
 	.space 0x4
 
-gUnknown_203B2DC: /* 203B2DC */
+gUnknown_203B2DC: /* 203B2DC (pokemon_news) */
 	.space 0x4
 
-gUnknown_203B2E0: /* 203B2E0 */
+gUnknown_203B2E0: /* 203B2E0 (wonder_mail_2_1 / wonder_mail_2_mid) */
 	.space 0x4
 
-gUnknown_203B2E4: /* 203B2E4 */
+gUnknown_203B2E4: /* 203B2E4 (wonder_mail_2_mid) */
 	.space 0x4
 
-gUnknown_203B2E8: /* 203B2E8 */
+gUnknown_203B2E8: /* 203B2E8 (wonder_mail_2_1) */
 	.space 0x4
 
-gUnknown_203B2EC: /* 203B2EC */
+gUnknown_203B2EC: /* 203B2EC (wonder_mail_2_1) */
 	.space 0x4
 
-gUnknown_203B2F0: /* 203B2F0 */
+gUnknown_203B2F0: /* 203B2F0 (wonder_mail_2_1 / wonder_mail_3) */
 	.space 0x4
 
-gUnknown_203B2F4: /* 203B2F4 */
+gUnknown_203B2F4: /* 203B2F4 (wonder_mail_4) */
 	.space 0x4
 
-gUnknown_203B2F8: /* 203B2F8 */
+gUnknown_203B2F8: /* 203B2F8 (wonder_mail_3) */
 	.space 0x4
 
-gUnknown_203B2FC: /* 203B2FC */
+gUnknown_203B2FC: /* 203B2FC (wonder_mail_802DF88) */
 	.space 0x4
 
-gUnknown_203B300: /* 203B300 */
+gUnknown_203B300: /* 203B300 (wonder_mail_802DF88) */
 	.space 0x4
 
 .include "src/mailbox.o"
 .include "src/pelipper_board.o"
 
-gUnknown_203B30C: /* 203B30C */
+gUnknown_203B30C: /* 203B30C (wonder_mail_3_mid) */
 	.space 0x4
 
-gUnknown_203B310: /* 203B310 */
+gUnknown_203B310: /* 203B310 (wonder_mail_3_mid) */
 	.space 0x4
 
-gUnknown_203B314: /* 203B314 */
+gUnknown_203B314: /* 203B314 (wonder_mail_3_mid) */
 	.space 0x4
 
-gUnknown_203B318: /* 203B318 */
+.include "src/makuhita_dojo1.o"
+.include "src/makuhita_dojo2.o"
+
+gUnknown_203B320: /* 203B320 (wonder_mail_4) */
 	.space 0x4
 
-gUnknown_203B31C: /* 203B31C */
+gUnknown_203B324: /* 203B324 (wonder_mail_5) */
 	.space 0x4
 
-gUnknown_203B320: /* 203B320 */
+gUnknown_203B328: /* 203B328 (wonder_mail_6) */
 	.space 0x4
 
-gUnknown_203B324: /* 203B324 */
-	.space 0x4
-
-gUnknown_203B328: /* 203B328 */
-	.space 0x4
-
-.include "src/post_office_guide.o"
+.include "src/post_office_guide1.o"
+.include "src/post_office_guide2.o"
 .include "src/code_8031D70.o"
 .include "src/adventure_log.o"
 .include "src/friend_rescue.o"
@@ -363,13 +337,12 @@ gUnknown_203B328: /* 203B328 */
 .include "src/debug_menu3.o"
 .include "src/debug_menu4.o"
 
-gUnknown_203B3FC: /* 203B3FC */
+gUnknown_203B3FC: /* 203B3FC (code_803B050) */
 	.space 0x4
 
-    .include "src/personality_test.o"
-
-gUnknown_203B408: /* 203B408 */
-	.space 0x4
+.include "src/personality_test.o"
+.include "src/code_803D0D8.o"
+	.space 0x3
 
 gUnknown_203B40C: /* 203B40C */
 	.space 0x1

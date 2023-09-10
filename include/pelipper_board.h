@@ -6,13 +6,13 @@ struct unkStruct_203B308
     u32 state;
     u32 unk4;
     u8 jobIndex;
-    struct unkStruct_802C39C unkC;
+    unkStruct_802C39C unkC;
     u32 menuAction1;
     u32 menuAction2;
-    struct MenuStruct unk6C;
-    struct MenuItem menuItems[8];
+    MenuStruct unk6C;
+    MenuItem menuItems[8];
     u16 unkFC[8];
-    struct UnkTextStruct2 unk10C[4];
+    UnkTextStruct2 unk10C[4];
 };
 extern struct unkStruct_203B308 *gPelipperBoard;
 

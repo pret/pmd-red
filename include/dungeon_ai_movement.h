@@ -3,11 +3,11 @@
 
 #include "dungeon_entity.h"
 
-void MoveIfPossible(struct Entity *pokemon, bool8 showRunAwayEffect);
-bool8 CanTakeItem(struct Entity *pokemon);
-bool8 ChooseTargetPosition(struct Entity *pokemon);
-void DecideMovement(struct Entity *pokemon, bool8 showRunAwayEffect);
-bool8 AvoidEnemies(struct Entity *pokemon);
-bool8 Wander(struct Entity *pokemon);
+void MoveIfPossible(Entity *pokemon, bool8 showRunAwayEffect);
+bool8 CanTakeItem(Entity *pokemon);
+bool8 ChooseTargetPosition(Entity *pokemon);
+void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect);
+bool8 AvoidEnemies(Entity *pokemon);
+bool8 Wander(Entity *pokemon);
 
 #endif

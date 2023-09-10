@@ -5,7 +5,7 @@
 #include "dungeon_map_access.h"
 #include "map.h"
 
-bool8 IsPositionActuallyInSight(struct Position *pos1, struct Position *pos2)
+bool8 IsPositionActuallyInSight(Position *pos1, Position *pos2)
 {
     u8 pos1Room;
     u8 visibility = gDungeon->visibilityRange;
@@ -47,7 +47,7 @@ bool8 IsPositionActuallyInSight(struct Position *pos1, struct Position *pos2)
     }
 }
 
-bool8 IsPositionInSight(struct Position *pos1, struct Position *pos2)
+bool8 IsPositionInSight(Position *pos1, Position *pos2)
 {
   struct Tile *tile;
   u8 pos1Room;
@@ -97,7 +97,7 @@ returnFalse:
   return TRUE;
 }
 
-void sub_80833E8(struct Position *param_1, s32 *param_2)
+void sub_80833E8(Position *param_1, s32 *param_2)
 {
   struct Tile *tile;
   struct RoomData *mapRoom;
@@ -125,7 +125,7 @@ void sub_80833E8(struct Position *param_1, s32 *param_2)
   }
 }
 
-bool8 IsTargetTwoTilesAway(struct Position *pos1, struct Position *pos2)
+bool8 IsTargetTwoTilesAway(Position *pos1, Position *pos2)
 {
     s32 i;
     struct Tile *tile;

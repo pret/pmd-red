@@ -13,7 +13,7 @@
 
 EWRAM_DATA_2 static struct DebugMenu *sDebugMenu = {0};
 
-static const struct UnkTextStruct2 sUnknown_80E7D40 =
+static const UnkTextStruct2 sUnknown_80E7D40 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -23,7 +23,7 @@ static const struct UnkTextStruct2 sUnknown_80E7D40 =
     NULL
 };
 
-static const struct UnkTextStruct2 sUnknown_80E7D58 =
+static const UnkTextStruct2 sUnknown_80E7D58 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -33,7 +33,7 @@ static const struct UnkTextStruct2 sUnknown_80E7D58 =
     NULL
 };
 
-static const struct MenuItem sDebugMenuItems[8] =
+static const MenuItem sDebugMenuItems[8] =
 {
     {"Dungeons", MENU_DEBUG_MENU_DUNGEONS},
     {"Field", MENU_DEBUG_MENU_FIELD},
@@ -70,14 +70,14 @@ void CreateDebugMenu(void)
         sDebugMenu->unk140[i] = sUnknown_80E7D40;
 
     ResetUnusedInputStruct();
-    sub_800641C(sDebugMenu->unk140, 1, 1);
+    sub_800641C(sDebugMenu->unk140, TRUE, TRUE);
     SetDebugMenuItems();
 }
 
 void DeleteDebugMenu(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(NULL, 1, 1);
+    sub_800641C(NULL, TRUE, TRUE);
     if (sDebugMenu != NULL) {
         MemoryFree(sDebugMenu);
         sDebugMenu = NULL;

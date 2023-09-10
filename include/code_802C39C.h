@@ -1,7 +1,14 @@
-struct unkStruct_802C39C
+#ifndef GUARD_CODE_802C39C_H
+#define GUARD_CODE_802C39C_H
+
+#include "code_8094F88.h"
+#include "wonder_mail.h"
+
+// size: 0x58
+typedef struct unkStruct_802C39C
 {
     /* 0x0 */ u32 unk0[2];
-    /* 0x8 */ struct WonderMailSub *unk8;
+    /* 0x8 */ WonderMailSub *unk8;
     /* 0xC */ u8 *playerName;
     /* 0x10 */ s16 clientSpecies;
     /* 0x12 */ s16 targetSpecies;
@@ -20,5 +27,7 @@ struct unkStruct_802C39C
     /* 0x48 */ u32 y;
     /* 0x4C */ u8 *unk4C;
     u8 *unk50;
-    /* 0x54 */ struct WonderMail *mail;
-};
+    /* 0x54 */ WonderMail *mail;
+} unkStruct_802C39C;
+
+#endif // GUARD_CODE_802C39C_H

@@ -3,12 +3,12 @@
 
 #include "map.h"
 
-struct unkStruct_202F190
+typedef struct unkStruct_202F190
 {
-    struct Tile* unk0[6];
-};
+    Tile *unk0[6];
+} unkStruct_202F190;
 
-struct Tile* GetTile(s32 x, s32 y);
-struct Tile* GetTileSafe(s32 x, s32 y);
+Tile *GetTile(s32 x, s32 y);
+Tile *GetTileSafe(s32 x, s32 y);
 
 #endif

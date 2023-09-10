@@ -17,7 +17,7 @@
 #include "pokemon.h"
 #include "weather.h"
 
-extern void sub_80429B4(struct Entity *r0);
+extern void sub_80429B4(Entity *r0);
 
 extern u8 *gUnknown_80FEE80[];
 extern u8 *gUnknown_80F8974[];
@@ -25,8 +25,9 @@ extern u8 *gUnknown_80F8994[];
 extern u8 *gUnknown_80F8968[];
 extern u8 *gUnknown_80F8988[];
 extern u8 gUnknown_8106FA4[];
+void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index);
 
-s32 sub_8070828(struct Entity *pokemon, bool8 displayMessage)
+s32 sub_8070828(Entity *pokemon, bool8 displayMessage)
 {
     bool8 flag;
 
@@ -54,7 +55,7 @@ s32 sub_8070828(struct Entity *pokemon, bool8 displayMessage)
     }
 }
 
-void SetMessageArgument_2(u8 *buffer, struct EntityInfo *param_2, s32 colorNum)
+void SetMessageArgument_2(u8 *buffer, EntityInfo *param_2, s32 colorNum)
 {
     if (((gDungeon->blinded ||
         gDungeon->hallucinating) ||
@@ -85,7 +86,7 @@ void SetMessageArgument_2(u8 *buffer, struct EntityInfo *param_2, s32 colorNum)
     }
 }
 
-void sub_8070968(u8 *buffer, struct EntityInfo *entityInfo, s32 colorNum)
+void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum)
 {
     if (entityInfo->waitingStatus == STATUS_DECOY) {
         sprintfStatic(buffer, gUnknown_8106FA4, colorNum + 0x30, *gUnknown_80F8974);
@@ -98,7 +99,7 @@ void sub_8070968(u8 *buffer, struct EntityInfo *entityInfo, s32 colorNum)
     }
 }
 
-void sub_80709C8(u8 *buffer, struct EntityInfo *entityInfo)
+void sub_80709C8(u8 *buffer, EntityInfo *entityInfo)
 {
     if (((gDungeon->blinded ||
           gDungeon->hallucinating) ||
@@ -125,9 +126,9 @@ void sub_80709C8(u8 *buffer, struct EntityInfo *entityInfo)
     }
 }
 
-bool8 HasNegativeStatus(struct Entity *pokemon)
+bool8 HasNegativeStatus(Entity *pokemon)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     s32 i;
     if (pokemonInfo->sleep == STATUS_SLEEP ||
         pokemonInfo->sleep == STATUS_NIGHTMARE ||
@@ -149,7 +150,7 @@ bool8 HasNegativeStatus(struct Entity *pokemon)
     }
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        struct Move *moves = pokemonInfo->moves;
+        Move *moves = pokemonInfo->moves;
         if (moves[i].moveFlags & MOVE_FLAG_EXISTS && moves[i].moveFlags2 & MOVE_FLAG_SEALED)
         {
             return TRUE;
@@ -165,7 +166,7 @@ bool8 HasNegativeStatus(struct Entity *pokemon)
     return FALSE;
 }
 
-bool8 IsSleeping(struct Entity *pokemon)
+bool8 IsSleeping(Entity *pokemon)
 {
     if (pokemon->info->sleep != STATUS_SLEEP &&
         pokemon->info->sleep != STATUS_NAPPING &&
@@ -176,10 +177,10 @@ bool8 IsSleeping(struct Entity *pokemon)
     return TRUE;
 }
 
-bool8 HasLowHealth(struct Entity *pokemon)
+bool8 HasLowHealth(Entity *pokemon)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
-    struct EntityInfo *pokemonInfo2 = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo2 = pokemon->info;
     s32 maxHPStat = pokemonInfo->maxHPStat;
     if (maxHPStat < 0)
     {

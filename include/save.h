@@ -6,7 +6,7 @@
 #include "exclusive_pokemon.h"
 #include "rescue_team_info.h"
 #include "pokemon.h"
-#include "item.h"
+#include "items.h"
 #include "code_80958E8.h"
 
 enum
@@ -47,18 +47,18 @@ struct UnkStruct_sub_8011DAC {
 
 
 struct UnkStruct_203B184 {
-    /* 0x0 */ struct TeamInventory *MoneyItems;
-    /* 0x4 */ struct unkStruct_203B45C *recruitedPokemon;
-    /* 0x8 */ struct unkStruct_203B480 *unk8;
-    /* 0xC */ struct unkStruct_203B484 *unkC;
+    /* 0x0 */ TeamInventory *MoneyItems;
+    /* 0x4 */ unkStruct_203B45C *recruitedPokemon;
+    /* 0x8 */ unkStruct_203B480 *unk8;
+    /* 0xC */ unkStruct_203B484 *unkC;
     /* 0x10 */ u32 *unk10;
-    /* 0x14 */ struct unkStruct_203B48C *unk14;
-    /* 0x18 */ struct unkStruct_203B490 *mailInfo;
+    /* 0x14 */ unkStruct_203B48C *unk14;
+    /* 0x18 */ unkStruct_203B490 *mailInfo;
     /* 0x1C */ struct RescueTeamData *RescueTeamInfo;
-    /* 0x20 */ u32 unk20;
+    /* 0x20 */ struct unkStruct_203B494 *unk20;
     /* 0x24 */ struct ExclusivePokemonData *ExclusivePokemon;
     /* 0x28 */ bool8 *BoughtFriendAreas;
-    /* 0x2C */ struct GameOptions *gameOptions;
+    /* 0x2C */ GameOptions *gameOptions;
     /* 0x30 */ struct PlayTimeStruct *playTime;
     u32 unk34;
     u32 unk38;
@@ -86,19 +86,6 @@ bool8 IsSaveCorrupted(void);
 void sub_8012284(void);
 void sub_8012298(void);
 void sub_80122A8(void);
-void PrepareSavePakRead(void);
-bool8 ReadSavePak(void);
-void FinishReadSavePak(void);
-void PrepareSavePakWrite(s16 PokemonID);
-bool8 WriteSavePak(void);
-u32 GetSavePakStatus(void);
-void FinishWriteSavePak(void);
-bool8 ReadQuickSave(void);
-bool8 IsQuickSaveValid(void);
-void FinishQuickSaveRead(void);
-void PrepareQuickSaveWrite(u8 *r0, u32 r1, u8 r2);
-u32 WriteQuickSave(void);
-void FinishQuickSaveWrite(void);
 
 void sub_8012298();
 void sub_80122D0();
@@ -110,5 +97,8 @@ u32 ReadSaveSector(s32 *a, u8 *dest, s32 size);
 u32 WriteSaveSector(s32 *a, u8 *src, s32 size);
 void CalculateChecksum(u8 *out, u32 size);
 bool8 ValidateChecksum(u8 *in, u32 size);
+
+s32 sub_80121D4(s32 *a, u8 *src, s32 size);
+u32 sub_80121E0(u32);
 
 #endif // GUARD_SAVE_H

@@ -6,15 +6,15 @@
 #include "menu.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
-#include "team_inventory.h"
+
 #include "text1.h"
 #include "input.h"
-#include "item.h"
+#include "items.h"
 #include "menu_input.h"
 #include "code_8023144.h"
 #include "text2.h"
 
-struct unkStruct_203B294 *gUnknown_203B294;
+unkStruct_203B294 *gUnknown_203B294;
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_80DC5EC[];
 extern u8 HasGummiItem(void);
@@ -29,15 +29,15 @@ extern void sub_802293C(void);
 extern void sub_8022A10(void);
 extern void sub_8022D2C(void);
 
-extern struct UnkTextStruct2 gUnknown_80DC5A4;
-extern struct UnkTextStruct2 gUnknown_80DC5D4;
-extern struct UnkTextStruct2 gUnknown_80DC5BC;
+extern UnkTextStruct2 gUnknown_80DC5A4;
+extern UnkTextStruct2 gUnknown_80DC5D4;
+extern UnkTextStruct2 gUnknown_80DC5BC;
 
-bool8 sub_80227B8(struct PokemonStruct *pokeStruct)
+bool8 sub_80227B8(PokemonStruct1 *pokeStruct)
 {
     ResetUnusedInputStruct();
-    sub_800641C(NULL, 1, 1);
-    gUnknown_203B294 = MemoryAlloc(sizeof(struct unkStruct_203B294), 8);
+    sub_800641C(NULL, TRUE, TRUE);
+    gUnknown_203B294 = MemoryAlloc(sizeof(unkStruct_203B294), 8);
     gUnknown_203B294->menuAction = 0;
     gUnknown_203B294->pokeStruct = pokeStruct;
     if(pokeStruct != NULL)
@@ -136,6 +136,6 @@ void sub_802293C(void) {
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B294->unk148, 1, 1);
+    sub_800641C(gUnknown_203B294->unk148, TRUE, TRUE);
 
 }

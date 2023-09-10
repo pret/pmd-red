@@ -3,12 +3,14 @@
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
 #include "code_800558C.h"
+#include "code_8009804.h"
 #include "cpu.h"
 #include "crt0.h"
 #include "file_system.h"
 #include "flash.h"
 #include "input.h"
 #include "main.h"
+#include "music.h"
 #include "random.h"
 #include "reg_control.h"
 #include "sprite.h"
@@ -19,34 +21,30 @@ EWRAM_DATA u8 IntrMain_Buffer[0x120] = {0};
 EWRAM_DATA IntrCallback gIntrTable[6] = {0};
 EWRAM_DATA IntrCallback gIntrCallbacks[6] = {0};
 
-extern char ewram_start[];
-extern char alt_203B038[];
-extern char gTitlePaletteFile[];
-extern char gUnknown_203BC04[];
-extern char iwram_start[];
-extern char alt_3001B58[];
-extern char unk_code[];
-extern char unk_code_ram[];
-extern char unk_code_ram_end[];
+extern u8 ewram_start[];
+extern u8 ewramClearEnd[];
+extern u8 ewramClearEnd2[]; // Force a second storage in the asm
+extern u8 ewram2_end[];
+extern u8 iwram_start[];
+extern u8 iwramClearEnd[];
+extern u8 unk_code[];
+extern u8 unk_code_ram[];
+extern u8 unk_code_ram_end[];
 
 EWRAM_DATA_2 u8 gInterruptsEnabled = {0};
 
 // data_8270000.s
-extern const char gUnknown_8270000[];
+extern const u8 gUnknown_8270000[];
 // data_80B9BB8.s
 extern const u8 gUnknown_80B9BF1[];
 extern const IntrCallback gInitialIntrTable[6];
 
-// code_8009804.c
-extern void sub_80098A0(void);
 // code_2.c
 extern void GameLoop(void);
 // code_800D090.c
 extern void Hang(void);
 extern void sub_800D6AC(void);
 extern void sub_800D7D0(void);
-// music.c
-extern void InitMusic(void); // music initializer
 
 void InitIntrTable(const IntrCallback *interrupt_table);
 IntrCallback SetInterruptCallback(u32 index, IntrCallback new_callback);
@@ -65,20 +63,20 @@ void AgbMain(void)
     DmaStop(2);
     DmaStop(3);
 
-    if (gUnknown_203BC04 - gTitlePaletteFile > 0)
-        CpuCopy32(gUnknown_8270000, gTitlePaletteFile, gUnknown_203BC04 - gTitlePaletteFile);
+    if (ewram2_end - ewramClearEnd > 0)
+        CpuCopy32(gUnknown_8270000, ewramClearEnd, ewram2_end - ewramClearEnd);
 
-    if (alt_203B038 - ewram_start > 0) {
+    if (ewramClearEnd2 - ewram_start > 0) {
         memset(value, 0, 4);
-        CpuSet(&value, ewram_start, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (((alt_203B038 - ewram_start) / 4) & 0x1FFFFF));
+        CpuSet(&value, ewram_start, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (((ewramClearEnd2 - ewram_start) / 4) & 0x1FFFFF));
     }
 
     if (unk_code_ram_end - unk_code_ram > 0)
         CpuCopy32(unk_code, unk_code_ram, unk_code_ram_end - unk_code_ram);
 
-    if (alt_3001B58 - iwram_start > 0) {
+    if (iwramClearEnd - iwram_start > 0) {
         memset(value, 0, 4);
-        CpuSet(&value, iwram_start, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (((alt_3001B58 - iwram_start) / 4) & 0x1FFFFF));
+        CpuSet(&value, iwram_start, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (((iwramClearEnd - iwram_start) / 4) & 0x1FFFFF));
     }
 
     REG_WIN0H = 0;

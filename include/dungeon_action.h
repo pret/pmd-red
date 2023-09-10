@@ -3,8 +3,8 @@
 
 #include "dungeon_entity.h"
 
-void ClearMonsterActionFields(struct ActionContainer *actionPointer);
-void SetMonsterActionFields(struct ActionContainer *actionPointer, u16 action);
-void SetActionPassTurnOrWalk(struct ActionContainer *actionPointer, s16 species);
+void ClearMonsterActionFields(ActionContainer *actionPointer);
+void SetMonsterActionFields(ActionContainer *actionPointer, u16 action);
+void SetActionPassTurnOrWalk(ActionContainer *actionPointer, s16 species);
 
 #endif

@@ -13,18 +13,18 @@
 #include "code_801EE10_mid.h"
 #include "code_80118A4.h"
 
-extern struct unkStruct_203B270 *gUnknown_203B270;
+extern unkStruct_203B270 *gUnknown_203B270;
 
 struct unkStruct_203B274
 {
     // size: 0x3e8
-    struct PokemonStruct *pokeStruct;
-    struct unkStruct_808E218_arg *unk4;
-    struct unkStruct_808E218_arg unk8;
-    struct MenuInputStruct input;
+    PokemonStruct1 *pokeStruct;
+    unkStruct_808E218_arg *unk4;
+    unkStruct_808E218_arg unk8;
+    MenuInputStruct input;
     s32 unk37C;
-    struct UnkTextStruct2 *unk380;
-    struct UnkTextStruct2 unk384[4];
+    UnkTextStruct2 *unk380;
+    UnkTextStruct2 unk384[4];
     u8 unk3E4[4];
 };
 extern struct unkStruct_203B274 *gUnknown_203B274;
@@ -39,41 +39,36 @@ struct unkStruct_203B278
     s32 unk10;
     struct subStruct_203B240 *unk14[4];
     u32 unk24;
-    struct MenuInputStruct unk28;
+    MenuInputStruct unk28;
     u32 unk5C;
-    struct UnkTextStruct2 *unk60;
-    struct UnkTextStruct2 unk64[4];
+    UnkTextStruct2 *unk60;
+    UnkTextStruct2 unk64[4];
     u8 unkC4[4];
-    struct MenuInputStructSub unkC8;
+    MenuInputStructSub unkC8;
 };
 
 extern struct unkStruct_203B278 *gUnknown_203B278;
 
-extern struct UnkTextStruct2 gUnknown_80DC2C4;
-extern struct UnkTextStruct2 gUnknown_80DC2AC;
-extern struct UnkTextStruct2 gUnknown_80DC2F8;
+extern UnkTextStruct2 gUnknown_80DC2C4;
+extern UnkTextStruct2 gUnknown_80DC2AC;
+extern UnkTextStruct2 gUnknown_80DC2F8;
 
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_80DC310[];
 extern u8 gUnknown_80DC2DC[];
 
-extern void sub_80140B4(struct UnkTextStruct2 *);
 extern void sub_801F918(s32);
 extern void sub_801FA58(void);
 extern void sub_801FAD4(void);
 extern void sub_801F930(void);
 extern void sub_801F9A4(void);
-int unk_MoveIDPrintMoveDescription(int a1, u16 moveID, int a3, struct subStruct_203B240** a4);
-void sub_8013F84(void);
-
 
 u32 sub_801F7E4(void);
 void sub_801F690(void);
-void sub_801F700(void);
 
 s32 sub_801F3F8(void)
 {
-  struct Move *move;
+  Move *move;
   int index;
   s32 counter;
 
@@ -88,8 +83,8 @@ s32 sub_801F3F8(void)
   return counter;
 }
 
-bool8 sub_801F428(s16 index, s32 param_2) {
-
+bool8 sub_801F428(s16 index, s32 param_2)
+{
     s32 index_s32 = index;
     gUnknown_203B274 = MemoryAlloc(sizeof(struct unkStruct_203B274), 0x8);
     gUnknown_203B274->pokeStruct = &gRecruitedPokemonRef->pokemon[index_s32];
@@ -104,7 +99,7 @@ bool8 sub_801F428(s16 index, s32 param_2) {
     gUnknown_203B274->unk3E4[2] = 0xC;
     gUnknown_203B274->unk3E4[3] = 0;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B274->unk384, 1, 1);
+    sub_800641C(gUnknown_203B274->unk384, TRUE, TRUE);
     sub_8013818(&gUnknown_203B274->input, sub_801F7E4(), 4, param_2);
     sub_801F690();
     sub_801F700();
@@ -148,10 +143,10 @@ u16 sub_801F5B4(void)
     return gUnknown_203B274->unk4->unk0[gUnknown_203B274->input.unk1E * gUnknown_203B274->input.unk1C + gUnknown_203B274->input.menuIndex];
 }
 
-void sub_801F5F0(u8 r0)
+void sub_801F5F0(bool8 r0)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B274->unk384, 0, 0);
+    sub_800641C(gUnknown_203B274->unk384, FALSE, FALSE);
     sub_8013984(&gUnknown_203B274->input);
     sub_801F690();
     sub_801F700();
@@ -165,13 +160,13 @@ void sub_801F63C(void)
     {
         gUnknown_203B274->unk384[gUnknown_203B274->unk37C] = gUnknown_80DC2AC;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B274->unk384, 1, 1);
+        sub_800641C(gUnknown_203B274->unk384, TRUE, TRUE);
         MemoryFree(gUnknown_203B274);
         gUnknown_203B274 = NULL;
     }
 }
 
-NAKED
+NAKED // sub_80095E4 memes
 void sub_801F690(void)
 {
     asm_unified(
@@ -263,7 +258,7 @@ bool8 sub_801F808(u16 *moveIDs)
     gUnknown_203B278->unk60 = gUnknown_203B278->unk64;
     sub_80140B4(gUnknown_203B278->unk64);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B278->unk64,1,1);
+    sub_800641C(gUnknown_203B278->unk64, TRUE, TRUE);
     gUnknown_203B278->moveIDs = moveIDs;
 
     for(index = 4; index > 1; index--)
@@ -276,10 +271,9 @@ bool8 sub_801F808(u16 *moveIDs)
     return 1;
 }
 
-s32 sub_801F890(void)
+u32 sub_801F890(void)
 {
-    switch(gUnknown_203B278->state)
-    {
+    switch (gUnknown_203B278->state) {
         case 0:
             sub_801FA58();
             break;
@@ -301,7 +295,7 @@ void sub_801F8D0(void)
     {
         gUnknown_203B278->unk64[gUnknown_203B278->unk5C] = gUnknown_80DC2F8;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B278->unk64, 1, 1);
+        sub_800641C(gUnknown_203B278->unk64, TRUE, TRUE);
         MemoryFree(gUnknown_203B278);
         gUnknown_203B278 = NULL;
     }
@@ -326,11 +320,11 @@ void sub_801F930(void)
             gUnknown_203B278->unkC4[2] = 0x10;
             gUnknown_203B278->unkC4[3] = 0;
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B278->unk64, 1, 1);
+            sub_800641C(gUnknown_203B278->unk64, TRUE, TRUE);
             break;
         case 1:
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B278->unk64, 1, 1);
+            sub_800641C(gUnknown_203B278->unk64, TRUE, TRUE);
             break;
         default:
             break;

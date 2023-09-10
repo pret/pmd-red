@@ -1,6 +1,6 @@
 #include "global.h"
 #include "memory.h"
-#include "item.h"
+#include "items.h"
 #include "friend_area.h"
 #include "constants/friend_area.h"
 #include "wonder_mail.h"
@@ -11,25 +11,26 @@
 #include "pokemon_3.h"
 #include "code_8094F88.h"
 
-extern bool8 sub_809017C(struct DungeonLocation *);
-extern u8 sub_803C1D0(struct DungeonLocation *, u8);
+extern bool8 sub_809017C(DungeonLocation *);
+extern u8 sub_803C1D0(DungeonLocation *, u8);
 extern bool8 sub_803C0DC(s16);
 extern void ResetMailboxSlot(u8);
 extern void ResetPelipperBoardSlot(u8);
 extern void ResetJobSlot(u8);
-extern bool8 ValidateWonderMail(struct WonderMail *);
+extern bool8 ValidateWonderMail(WonderMail *);
 
-EWRAM_DATA_2 struct unkStruct_203B490 *gUnknown_203B490 = {0};
-EWRAM_DATA struct unkStruct_203B490 gUnknown_2039448 = {0};
+static EWRAM_DATA unkStruct_203B490 sUnknown_2039448 = {0};
+
+EWRAM_DATA_2 unkStruct_203B490 *gUnknown_203B490 = {0};
 
 void LoadMailInfo(void)
 {
-    gUnknown_203B490 = &gUnknown_2039448;
+    gUnknown_203B490 = &sUnknown_2039448;
 }
 
-struct unkStruct_203B490 *GetMailInfo(void)
+unkStruct_203B490 *GetMailInfo(void)
 {
-    return &gUnknown_2039448;
+    return &sUnknown_2039448;
 }
 
 void InitializeMailJobsNews(void)
@@ -63,7 +64,7 @@ void InitializeMailJobsNews(void)
     }
 }
 
-bool8 IsValidWonderMail(struct WonderMail *WonderMailData)
+bool8 IsValidWonderMail(WonderMail *WonderMailData)
 {
     // Has to equal 5 for Wonder Mail
     // https://web.archive.org/web/20080913124416/http://www.upokecenter.com/games/dungeon/guides/passwords.html
@@ -78,7 +79,7 @@ bool8 IsValidWonderMail(struct WonderMail *WonderMailData)
     }
 }
 
-bool8 ValidateWonderMail(struct WonderMail *data)
+bool8 ValidateWonderMail(WonderMail *data)
 {
 
     if(data->missionType > WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM)

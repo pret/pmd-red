@@ -1,13 +1,14 @@
 #include "global.h"
+#include "bg_palette_buffer.h"
+#include "code_801EE10_1.h"
 #include "friend_area.h"
 #include "constants/friend_area.h"
 #include "constants/input.h"
 #include "file_system.h"
 #include "friend_list_menu.h"
-#include "item.h"
+#include "items.h"
 #include "menu.h"
 #include "pokemon.h"
-#include "team_inventory.h"
 #include "memory.h"
 #include "input.h"
 #include "text1.h"
@@ -19,31 +20,24 @@
 #include "code_80118A4.h"
 #include "wigglytuff_shop.h"
 #include "event_flag.h"
+#include "ground_main.h"
+#include "code_801C620.h"
 
 struct unkStruct_203B258
 {
     // size: 0xA0
-    struct MenuInputStruct input;
+    MenuInputStruct input;
     u32 unk34;
-    struct UnkTextStruct2 *unk38;
-    struct UnkTextStruct2 unk3C[4];
+    UnkTextStruct2 *unk38;
+    UnkTextStruct2 unk3C[4];
     u8 unk9C[4];
 };
 
 extern struct unkStruct_203B258 *gUnknown_203B258;
-extern struct UnkTextStruct2 gUnknown_80DBF88;
-extern struct UnkTextStruct2 gUnknown_80DBF70;
+extern UnkTextStruct2 gUnknown_80DBF88;
+extern UnkTextStruct2 gUnknown_80DBF70;
 
-struct unkStruct_811BAF4
-{
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6;
-    u8 *text;
-};
-
-extern struct unkStruct_811BAF4 gUnknown_811BAF4[10];
+extern unkStruct_811BAF4 gUnknown_811BAF4[10];
 
 struct unkStruct_81188F0
 {
@@ -63,15 +57,12 @@ extern u8 gUnknown_80DBFA0[]; // Field
 extern void sub_801DB54();
 extern void sub_801DBD4();
 
-extern u32 sub_801BF48(void);
-extern void sub_801BF98(void);
 extern void sub_801D208(u8);
 extern u32 sub_801DCE8(void);
 extern void sub_801DD50(void);
 extern u32 sub_8022860();
 extern void sub_8022908();
 extern u32 sub_80244E4(void);
-extern void sub_802453C(void);
 extern u32 sub_8025F68();
 extern u8 sub_802604C();
 extern void sub_8026058();
@@ -85,7 +76,6 @@ extern const char *sub_8098FB4();
 extern void xxx_format_string(const char *, u8 *, u32 **, u32);
 extern s32 sub_8008ED0(u8 *);
 void LoadTeamRankBadge(u32, u32, u32);
-extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);
 
 extern struct FileArchive gTitleMenuFileArchive;
 extern const char gTeamRankBadgeFileName;
@@ -111,19 +101,19 @@ struct TeamBadgeData
 
 struct unk_203B250
 {
-    struct PokemonStruct *pokeStruct;
+    PokemonStruct1 *pokeStruct;
     s16 index;
     /* 0x6 */ u8 currFriendAreaLocation; // 0 when not in a friend area
     u8 unk7;
     u8 unk8;
     u8 unk9;
-    struct PokemonStruct *unkC;
+    PokemonStruct1 *unkC;
     u32 state;
     u32 menuAction;
-    struct MenuStruct unk18;
-    struct MenuItem unk68[8];
+    MenuStruct unk18;
+    MenuItem unk68[8];
     u16 unkA8[8];
-    struct UnkTextStruct2 unkB8[4];
+    UnkTextStruct2 unkB8[4];
 };
 
 struct unk_203B250 *gUnknown_203B250;
@@ -133,11 +123,9 @@ extern bool8 sub_8024108(u32);
 extern bool8 sub_8096E2C(void);
 extern u32 sub_801DCC4(void);
 extern u32 sub_8027074(void);
-extern void sub_80227B8(struct PokemonStruct *);
-extern bool8 sub_8024458(s16, u32);
-extern bool8 sub_801BEEC(s16);
+extern void sub_80227B8(PokemonStruct1 *);
 void sub_801D894(void);
-u32 sub_8025EF4(struct PokemonStruct *);
+u32 sub_8025EF4(PokemonStruct1 *);
 
 void sub_801D3A8(void)
 {
@@ -510,7 +498,7 @@ void sub_801D894(void)
 
 void LoadTeamRankBadge(u32 param_1, u32 param_2, u32 param_3)
 {
-  struct OpenedFile *teamBadgeFile;
+  OpenedFile *teamBadgeFile;
   s32 palleteIndex;
   u8 rank;
   u8 *colorArray;
@@ -538,7 +526,7 @@ u32 sub_801D9E4(void)
   gUnknown_203B258->unk3C[gUnknown_203B258->unk34] = gUnknown_80DBF88;
   gUnknown_203B258->unk38->unk14 = gUnknown_203B258->unk9C;
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B258->unk3C,1,1);
+  sub_800641C(gUnknown_203B258->unk3C, TRUE, TRUE);
   sub_8013818(&gUnknown_203B258->input,0xe5,10,gUnknown_203B258->unk34);
   sub_801DB54();
   sub_801DBD4();
@@ -597,13 +585,13 @@ void sub_801DB0C(void)
     {
         gUnknown_203B258->unk3C[gUnknown_203B258->unk34] = gUnknown_80DBF70;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B258->unk3C, 1, 1);
+        sub_800641C(gUnknown_203B258->unk3C, TRUE, TRUE);
         MemoryFree(gUnknown_203B258);
         gUnknown_203B258 = NULL;
     }
 }
 
-NAKED
+NAKED // sub_80095E4 memes
 void sub_801DB54(void)
 {
     asm_unified(
@@ -670,7 +658,7 @@ void sub_801DB54(void)
 
 void sub_801DBD4(void)
 {
-    struct unkStruct_811BAF4 *temp;
+    unkStruct_811BAF4 *temp;
     struct unkStruct_81188F0 *temp2;
     s32 y;
 #ifndef NONMATCHING

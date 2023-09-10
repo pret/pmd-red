@@ -3,24 +3,38 @@
 #include "random.h"
 #include "sprite.h"
 
-extern u16 gUnknown_2025670; // Number of sprites in OAM?
-extern s16 gUnknown_2025672[8];
-extern s16 gUnknown_2025682[9];
-extern struct Position gUnknown_2025694;
-extern u32 gUnknown_2025698;
-extern struct SpriteList gUnknown_20256A0;
-extern struct UnkSpriteLink gUnknown_2025EA8[128];
-extern struct SpriteOAM gUnknown_20262A8[128];
-extern s32 gSpriteCount; /* 20266A8 */
-extern struct unkStruct_20266B0 gUnknown_20266B0[160];
-extern void *gCharMemCursor; /* 2026E30 */
-extern struct unkStruct_20266B0 *gUnknown_203B074;
+static EWRAM_DATA u16 sOAMSpriteCount = {0}; // 2025670 Written to but never read
+#ifndef NONMATCHING
+UNUSED // TODO: Remove the "UNUSED" attribute after sub_8004EA8 is done
+#endif
+static EWRAM_DATA s16 sUnknown_2025672[8] = {0};
+#ifndef NONMATCHING
+UNUSED // TODO: Remove the "UNUSED" attribute after sub_8004EA8 is done
+#endif
+static EWRAM_DATA s16 sUnknown_2025682[9] = {0};
+static EWRAM_DATA Position sUnknown_2025694 = {0};
+static EWRAM_DATA u32 sUnknown_2025698 = {0};
+UNUSED static EWRAM_DATA u32 sUnused1 = {0}; // 202569C
+static EWRAM_DATA SpriteList sUnknown_20256A0 = {0};
+static EWRAM_DATA UnkSpriteLink sUnknown_2025EA8[128] = {0};
+static EWRAM_DATA SpriteOAM sUnknown_20262A8[128] = {0};
+static EWRAM_DATA s32 sSpriteCount = {0}; // 20266A8
+UNUSED static EWRAM_DATA u32 sUnused2 = {0}; // 20266AC
+static EWRAM_DATA unkStruct_20266B0 sUnknown_20266B0[160] = {0};
+static EWRAM_DATA void *sCharMemCursor = {0}; // 2026E30
+UNUSED static EWRAM_DATA u32 sUnused3 = {0}; // 2026E34
+
+static EWRAM_DATA_2 unkStruct_20266B0 *sUnknown_203B074 = {0};
 
 // code.c
 extern void nullsub_3(s32, s32);
 
-void RegisterSpriteParts_80052BC(struct UnkSpriteMem *);
-void sub_800545C(struct EntitySpriteInfo *, struct Dungeon_ax *, u32, u32, u32, bool8);
+#ifndef NONMATCHING
+UNUSED // TODO: Remove the "UNUSED" attribute after sub_8004EA8 is done
+#endif
+static void RegisterSpriteParts_80052BC(UnkSpriteMem *);
+
+static void sub_800545C(EntitySpriteInfo *, Dungeon_ax *, u32, u32, u32, bool8);
 
 void InitSprites(void)
 {
@@ -31,17 +45,17 @@ void InitSprites(void)
 void ResetSprites(bool8 a0)
 {
     s32 i;
-    struct UnkSpriteLink *a;
-    struct UnkSpriteLink *b;
-    struct SpriteOAM *c;
-    struct SpriteOAM *d;
-    struct UnkSpriteLink *e;
+    UnkSpriteLink *a;
+    UnkSpriteLink *b;
+    SpriteOAM *c;
+    SpriteOAM *d;
+    UnkSpriteLink *e;
 
-    gSpriteCount = 0;
-    gCharMemCursor = OBJ_VRAM0;
-    gUnknown_203B074 = &gUnknown_20266B0[0];
+    sSpriteCount = 0;
+    sCharMemCursor = OBJ_VRAM0;
+    sUnknown_203B074 = &sUnknown_20266B0[0];
 
-    a = &gUnknown_20256A0.sprites[0];
+    a = &sUnknown_20256A0.sprites[0];
     b = a + 1;
 
     // 16 loops, very smart
@@ -115,8 +129,8 @@ void ResetSprites(bool8 a0)
 
     if (a0) {
         e = NULL;
-        d = &gUnknown_20262A8[0];
-        a = &gUnknown_2025EA8[0];
+        d = &sUnknown_20262A8[0];
+        a = &sUnknown_2025EA8[0];
         for (i = 0; i < 128; i++) {
             a->unk0 = e;
             a->unk4 = d;
@@ -125,11 +139,11 @@ void ResetSprites(bool8 a0)
         }
     }
 
-    gUnknown_20256A0.unk800 = 0;
-    gUnknown_20256A0.unk804 = 0;
+    sUnknown_20256A0.unk800 = 0;
+    sUnknown_20256A0.unk804 = 0;
 }
 
-void sub_8004E8C(struct unkStruct_2039DB0 *a0)
+void sub_8004E8C(unkStruct_2039DB0 *a0)
 {
     a0->unk0 = 0xFFFF;
     a0->unk2 = -1;
@@ -142,7 +156,7 @@ void sub_8004E8C(struct unkStruct_2039DB0 *a0)
 // https://decomp.me/scratch/VYqKb
 // spriteMasks is a u16[6]
 #if NONMATCHING
-void sub_8004EA8(struct ax_pose *a0, struct axdata1 *a1, struct UnkSpriteMem *a2, u16 *spriteMasks)
+static void sub_8004EA8(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, u16 *spriteMasks)
 {
     // size: 0xC
     struct UnkStackFor8004EA8
@@ -155,7 +169,7 @@ void sub_8004EA8(struct ax_pose *a0, struct axdata1 *a1, struct UnkSpriteMem *a2
         u16 flags3;
         u16 unkA;
     } sp;
-    struct SpriteOAM *sprite;
+    SpriteOAM *sprite;
     u32 uVar9;
     s32 r7;
 
@@ -167,7 +181,7 @@ void sub_8004EA8(struct ax_pose *a0, struct axdata1 *a1, struct UnkSpriteMem *a2
     if (a2 != NULL)
         RegisterSpriteParts_80052BC(a2);
 
-    if (gSpriteCount >= 128)
+    if (sSpriteCount >= 128)
         return;
 
     sp.unk0 = a0->sprite;
@@ -176,7 +190,7 @@ void sub_8004EA8(struct ax_pose *a0, struct axdata1 *a1, struct UnkSpriteMem *a2
     sp.flags2 = a0->flags2 & ~(0x200 | 0x400 | 0x800);
     sp.flags3 = a0->flags3;
     sp.unkA = ((a0->flags2 & (0x200 | 0x400 | 0x800)) >> 9) | ((a0->flags1 & (0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20 | 0x40 | 0x80 | 0x100 | 0x200)) << 4);
-    sprite = gUnknown_20262A8 + gSpriteCount;
+    sprite = sUnknown_20262A8 + sSpriteCount;
     r7 = a1->unk16 + sp.unk3;
 
     if (r7 < 0)
@@ -197,8 +211,8 @@ void sub_8004EA8(struct ax_pose *a0, struct axdata1 *a1, struct UnkSpriteMem *a2
         sprite->unk6 = sp.unkA;
     }
 
-    if (sp.unk2 != 0 && gUnknown_2025672[sp.unk2] != 0) {
-        tileNum = gUnknown_2025672[sp.unk2] & 0x3FF;
+    if (sp.unk2 != 0 && sUnknown_2025672[sp.unk2] != 0) {
+        tileNum = sUnknown_2025672[sp.unk2] & 0x3FF;
     }
     else {
         tileNum = (sprite->attrib3 & 0x3FF) + a1->vramTileOrMaybeAnimTimer;
@@ -236,15 +250,15 @@ void sub_8004EA8(struct ax_pose *a0, struct axdata1 *a1, struct UnkSpriteMem *a2
         sprite->attrib3 = ((a1->paletteNum & 0xF) << 12) | (sprite->attrib3 & earlyMask);
 
     if (sp.unk2 != 0)
-        sprite->attrib3 = ((gUnknown_2025682[sp.unk2] & 0xF) << 12) | (sprite->attrib3 & earlyMask);
+        sprite->attrib3 = ((sUnknown_2025682[sp.unk2] & 0xF) << 12) | (sprite->attrib3 & earlyMask);
 
-    gUnknown_2025EA8[gSpriteCount].unk0 = gUnknown_20256A0.sprites[r7].unk0;
-    gUnknown_20256A0.sprites[r7].unk0 = gUnknown_2025EA8 + gSpriteCount;
-    gSpriteCount++;
+    sUnknown_2025EA8[sSpriteCount].unk0 = sUnknown_20256A0.sprites[r7].unk0;
+    sUnknown_20256A0.sprites[r7].unk0 = sUnknown_2025EA8 + sSpriteCount;
+    sSpriteCount++;
 }
 #else
 NAKED
-void sub_8004EA8(struct ax_pose *a0, struct axdata1 *a1, struct UnkSpriteMem *a2, u16 *spriteMasks)
+static void sub_8004EA8(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, u16 *spriteMasks)
 {
     asm_unified(
     "push {r4-r7,lr}\n"
@@ -327,11 +341,11 @@ void sub_8004EA8(struct ax_pose *a0, struct axdata1 *a1, struct UnkSpriteMem *a2
     "\tstrh r0, [r1, 0x2]\n"
     "\tb _08004F86\n"
     "\t.align 2, 0\n"
-"_08004F40: .4byte gSpriteCount\n"
+"_08004F40: .4byte sSpriteCount\n"
 "_08004F44: .4byte 0x0000fcff\n"
 "_08004F48: .4byte 0x0000f1ff\n"
 "_08004F4C: .4byte 0x000003ff\n"
-"_08004F50: .4byte gUnknown_20262A8\n"
+"_08004F50: .4byte sUnknown_20262A8\n"
 "_08004F54:\n"
     "\tadd r4, sp, 0x4\n"
     "\tldrh r1, [r4]\n"
@@ -377,7 +391,7 @@ void sub_8004EA8(struct ax_pose *a0, struct axdata1 *a1, struct UnkSpriteMem *a2
     "\tands r1, r0\n"
     "\tb _08004FC0\n"
     "\t.align 2, 0\n"
-"_08004FA8: .4byte gUnknown_2025672\n"
+"_08004FA8: .4byte sUnknown_2025672\n"
 "_08004FAC: .4byte 0x000003ff\n"
 "_08004FB0:\n"
     "\tldrh r1, [r3, 0x4]\n"
@@ -502,25 +516,25 @@ void sub_8004EA8(struct ax_pose *a0, struct axdata1 *a1, struct UnkSpriteMem *a2
 "_08005098: .4byte 0xffffff00\n"
 "_0800509C: .4byte 0x00000fff\n"
 "_080050A0: .4byte 0xfffffe00\n"
-"_080050A4: .4byte gUnknown_2025682\n"
-"_080050A8: .4byte gUnknown_2025EA8\n"
-"_080050AC: .4byte gUnknown_20256A0");
+"_080050A4: .4byte sUnknown_2025682\n"
+"_080050A8: .4byte sUnknown_2025EA8\n"
+"_080050AC: .4byte sUnknown_20256A0");
 }
 #endif // NONMATCHING
 
 // a2 and a3 are always called with NULL lol
 #ifdef NONMATCHING // https://decomp.me/scratch/YCfKG
-void AddSprite(struct SpriteOAM *a0, s32 a1, struct UnkSpriteMem *a2, struct unkStruct_2039DB0 *a3)
+void AddSprite(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, unkStruct_2039DB0 *a3)
 {
     s32 yPos;
-    struct SpriteOAM *spr;
-    struct UnkSpriteLink *a;
-    struct UnkSpriteLink *b;
+    SpriteOAM *spr;
+    UnkSpriteLink *a;
+    UnkSpriteLink *b;
 
-    if (gSpriteCount >= 128)
+    if (sSpriteCount >= 128)
         return;
 
-    spr = &gUnknown_20262A8[gSpriteCount];
+    spr = &sUnknown_20262A8[sSpriteCount];
 
     if (a1 < 0)
         a1 = 0;
@@ -549,18 +563,18 @@ void AddSprite(struct SpriteOAM *a0, s32 a1, struct UnkSpriteMem *a2, struct unk
     if (a2 != NULL)
         RegisterSpriteParts_80052BC(a2);
 
-    a = &gUnknown_2025EA8[0];
-    a += gSpriteCount;
-    b = &gUnknown_20256A0.sprites[0];
+    a = &sUnknown_2025EA8[0];
+    a += sSpriteCount;
+    b = &sUnknown_20256A0.sprites[0];
     b += a1;
     a->unk0 = b->unk0;
     b->unk0 = a;
 
-    gSpriteCount++;
+    sSpriteCount++;
 }
 #else
 NAKED
-void AddSprite(struct SpriteOAM *a0, s32 a1, struct UnkSpriteMem *a2, struct unkStruct_2039DB0 *a3)
+void AddSprite(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, unkStruct_2039DB0 *a3)
 {
     asm_unified(
     "push {r4-r7,lr}\n"
@@ -599,8 +613,8 @@ void AddSprite(struct SpriteOAM *a0, s32 a1, struct UnkSpriteMem *a2, struct unk
     "\tstrh r0, [r2, 0x2]\n"
     "\tb _08005128\n"
     "\t.align 2, 0\n"
-"_080050F4: .4byte gSpriteCount\n"
-"_080050F8: .4byte gUnknown_20262A8\n"
+"_080050F4: .4byte sSpriteCount\n"
+"_080050F8: .4byte sUnknown_20262A8\n"
 "_080050FC:\n"
     "\tldrh r1, [r6]\n"
     "\tldrh r0, [r4]\n"
@@ -663,18 +677,18 @@ void AddSprite(struct SpriteOAM *a0, s32 a1, struct UnkSpriteMem *a2, struct unk
     "\tpop {r0}\n"
     "\tbx r0\n"
     "\t.align 2, 0\n"
-"_08005174: .4byte gUnknown_2025EA8\n"
-"_08005178: .4byte gSpriteCount\n"
-"_0800517C: .4byte gUnknown_20256A0");
+"_08005174: .4byte sUnknown_2025EA8\n"
+"_08005178: .4byte sSpriteCount\n"
+"_0800517C: .4byte sUnknown_20256A0");
 }
 #endif
 
 void sub_8005180(void)
 {
-    struct UnkSpriteLink *r1;
-    struct UnkSpriteLink *r2;
+    UnkSpriteLink *r1;
+    UnkSpriteLink *r2;
 
-    r2 = &gUnknown_20256A0.sprites[0];
+    r2 = &sUnknown_20256A0.sprites[0];
     r1 = r2;
 
     if (r2 != NULL) {
@@ -693,12 +707,12 @@ void sub_8005180(void)
 
 void CopySpritesToOam(void)
 {
-    struct UnkSpriteLink *sLink;
-    struct SpriteOAM *spr;
+    UnkSpriteLink *sLink;
+    SpriteOAM *spr;
     vu16 *oam;
     s32 count;
 
-    sLink = &gUnknown_20256A0.sprites[0];
+    sLink = &sUnknown_20256A0.sprites[0];
     oam = (vu16 *)(OAM + OAM_SIZE); // End of OAM. Work backwards
     count = 0;
 
@@ -738,29 +752,29 @@ void CopySpritesToOam(void)
         *oam = DISPLAY_HEIGHT;
     }
 
-    gUnknown_2025670 = count;
+    sOAMSpriteCount = count;
 }
 
-void SetSavingIconCoords(struct Position *pos)
+void SetSavingIconCoords(Position *pos)
 {
     if (pos == NULL) {
-        gUnknown_2025694.x = 0;
-        gUnknown_2025694.y = DISPLAY_HEIGHT;
+        sUnknown_2025694.x = 0;
+        sUnknown_2025694.y = DISPLAY_HEIGHT;
     }
     else {
-        gUnknown_2025694.x = pos->x;
-        gUnknown_2025694.y = pos->y;
-        gUnknown_2025698 = 0;
+        sUnknown_2025694.x = pos->x;
+        sUnknown_2025694.y = pos->y;
+        sUnknown_2025698 = 0;
     }
 }
 
 void BlinkSavingIcon(void)
 {
-    volatile u16 *oam;
+    vu16 *oam;
     u32 uVar1;
 
-    oam = (u16 *)OAM;
-    uVar1 = gUnknown_2025698++;
+    oam = (vu16 *)OAM;
+    uVar1 = sUnknown_2025698++;
 
     if (uVar1 & 16) {
         // Set y to 160
@@ -777,13 +791,13 @@ void BlinkSavingIcon(void)
         *oam = 0;
     }
     else {
-        // Set y to gUnknown_2025694.y
+        // Set y to sUnknown_2025694.y
         // Set affineMode/objMode/mosaic/bpp/shape to 0
-        *oam++ = gUnknown_2025694.y;
-        // Set x to gUnknown_2025694.x
+        *oam++ = sUnknown_2025694.y;
+        // Set x to sUnknown_2025694.x
         // Set matrixNum to 0
         // Set size to 1
-        *oam++ = gUnknown_2025694.x + 0x4000;
+        *oam++ = sUnknown_2025694.x + 0x4000;
         // Set tileNum to 0x3FC
         // Set priority to 0
         // Set paletteNum to 15
@@ -794,15 +808,15 @@ void BlinkSavingIcon(void)
 }
 
 #ifdef NONMATCHING // https://decomp.me/scratch/taTIU
-extern u32 RegisterSpriteParts_80052BC_end[0] asm("gCharMemCursor");
-void RegisterSpriteParts_80052BC(struct UnkSpriteMem *a0)
+extern u32 RegisterSpriteParts_80052BC_end[0] asm("sCharMemCursor");
+static void RegisterSpriteParts_80052BC(UnkSpriteMem *a0)
 {
     if (a0->byteCount) {
-        struct unkStruct_20266B0 **r5 = &gUnknown_203B074;
+        unkStruct_20266B0 **r5 = &sUnknown_203B074;
         void *r6 = RegisterSpriteParts_80052BC_end;
-        void **r4 = &gCharMemCursor;
+        void **r4 = &sCharMemCursor;
         do {
-            struct unkStruct_20266B0 *r2 = *r5;
+            unkStruct_20266B0 *r2 = *r5;
             if ((uintptr_t)r2 >= (uintptr_t)r6)
                 return;
             r2->byteCount = a0->byteCount;
@@ -815,8 +829,9 @@ void RegisterSpriteParts_80052BC(struct UnkSpriteMem *a0)
     }
 }
 #else
+UNUSED // TODO: Remove the "UNUSED" attribute after sub_8004EA8 is done
 NAKED
-void RegisterSpriteParts_80052BC(struct UnkSpriteMem *a0)
+static void RegisterSpriteParts_80052BC(UnkSpriteMem *a0)
 {
     asm_unified(
     "push {r4-r6,lr}\n"
@@ -852,17 +867,17 @@ void RegisterSpriteParts_80052BC(struct UnkSpriteMem *a0)
     "\tpop {r0}\n"
     "\tbx r0\n"
     "\t.align 2, 0\n"
-"_080052F8: .4byte gUnknown_203B074\n"
-"_080052FC: .4byte gCharMemCursor\n"
-"_08005300: .4byte gCharMemCursor");
+"_080052F8: .4byte sUnknown_203B074\n"
+"_080052FC: .4byte sCharMemCursor\n"
+"_08005300: .4byte sCharMemCursor");
 }
 #endif // NONMATCHING
 
 void sub_8005304(void)
 {
-    struct unkStruct_20266B0 *s;
+    unkStruct_20266B0 *s;
 
-    for (s = &gUnknown_20266B0[0]; s < gUnknown_203B074; s++) {
+    for (s = &sUnknown_20266B0[0]; s < sUnknown_203B074; s++) {
         if (s->src != NULL)
             CpuCopy(s->dest, s->src, s->byteCount);
         else
@@ -871,13 +886,13 @@ void sub_8005304(void)
 }
 
 // spriteMasks is a u16[6]
-void sub_800533C(struct ax_pose **a0, struct UnkSpriteMem **a1, struct axdata1 *a2, u16 *spriteMasks, bool8 a4)
+void sub_800533C(ax_pose **a0, UnkSpriteMem **a1, axdata1 *a2, u16 *spriteMasks, bool8 a4)
 {
-    struct UnkSpriteMem *mem;
-    struct ax_pose *r4;
+    UnkSpriteMem *mem;
+    ax_pose *r4;
 
     r4 = a0[a2->poseId];
-    gCharMemCursor = OBJ_VRAM0 + (a2->vramTileOrMaybeAnimTimer * 0x20);
+    sCharMemCursor = OBJ_VRAM0 + (a2->vramTileOrMaybeAnimTimer * 0x20);
     for (mem = NULL; (u16)r4->sprite != 0xFFFF || r4->unk2 != 0xFFFF; r4++, mem = NULL) {
         if (a4 != 0 && r4->sprite > -1)
             mem = a1[r4->sprite];
@@ -886,12 +901,12 @@ void sub_800533C(struct ax_pose **a0, struct UnkSpriteMem **a1, struct axdata1 *
     }
 }
 
-void sub_80053AC(struct EntitySpriteInfo *a0, struct OpenedFile *a1, u32 a2, u32 a3, u32 a4, u32 spriteAnimIndex, bool8 a6)
+void sub_80053AC(EntitySpriteInfo *a0, OpenedFile *a1, u32 a2, u32 a3, u32 a4, u32 spriteAnimIndex, bool8 a6)
 {
-    sub_80053D0(a0, (struct Dungeon_ax *)a1->data, a2, a3, a4, spriteAnimIndex, a6);
+    sub_80053D0(a0, (Dungeon_ax *)a1->data, a2, a3, a4, spriteAnimIndex, a6);
 }
 
-void sub_80053D0(struct EntitySpriteInfo *a0, struct Dungeon_ax *a1, u32 a2, u32 direction, u32 a4, u32 spriteAnimIndex, bool8 a6)
+void sub_80053D0(EntitySpriteInfo *a0, Dungeon_ax *a1, u32 a2, u32 direction, u32 a4, u32 spriteAnimIndex, bool8 a6)
 {
     a0->unk0 = 0x8000;
     if (a6)
@@ -914,12 +929,12 @@ void sub_80053D0(struct EntitySpriteInfo *a0, struct Dungeon_ax *a1, u32 a2, u32
     a0->unk30 = a1->unk10;
 }
 
-void sub_800543C(struct EntitySpriteInfo *a0, struct OpenedFile *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
+void sub_800543C(EntitySpriteInfo *a0, OpenedFile *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
 {
-    sub_800545C(a0, (struct Dungeon_ax *)a1->data, a2, a3, spriteAnimIndex, a5);
+    sub_800545C(a0, (Dungeon_ax *)a1->data, a2, a3, spriteAnimIndex, a5);
 }
 
-void sub_800545C(struct EntitySpriteInfo *a0, struct Dungeon_ax *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
+static void sub_800545C(EntitySpriteInfo *a0, Dungeon_ax *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
 {
     a0->unk0 = 0x8000;
     if (a5)
@@ -941,10 +956,10 @@ void sub_800545C(struct EntitySpriteInfo *a0, struct Dungeon_ax *a1, u32 a2, u32
     a0->unk30 = 0;
 }
 
-#if NONMATCHING // https://decomp.me/scratch/n4Umb
+#if NONMATCHING // 99.95% https://decomp.me/scratch/n4Umb
 void sub_80054BC(struct axPokemon *a0)
 {
-    struct ax_anim *aData;
+    ax_anim *aData;
     s16 flag;
 
     if (a0->axdata.flags & 0x2000)

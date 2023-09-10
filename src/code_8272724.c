@@ -1,8 +1,8 @@
 #include "global.h"
 #include "text1.h"
 
-extern void sub_8272774(struct UnkTextStruct1 *r0, u32 r1);
-extern void sub_8272884(struct UnkTextStruct1 *r0, u32 r1);
+extern void sub_8272774(UnkTextStruct1 *r0, u32 r1);
+extern void sub_8272884(UnkTextStruct1 *r0, u32 r1);
 
 void sub_8272760(u32 r0)
 {

@@ -1,16 +1,17 @@
 #include "global.h"
 #include "code_8004AA0.h"
 #include "constants/walkable_tile.h"
+#include "decompress.h"
 #include "dungeon_map_access.h"
 #include "dungeon_global_data.h"
 #include "tile_types.h"
 #include "random.h"
 #include "dungeon_engine.h"
 
-extern struct unkStruct_202F190 gUnknown_202F190;
-extern struct unkStruct_202F190 *gUnknown_203B430;
-extern struct unkStruct_202F190 gUnknown_80F69D4;
-extern struct unkStruct_202F190 gUnknown_80F69EC;
+extern unkStruct_202F190 gUnknown_202F190;
+extern unkStruct_202F190 *gUnknown_203B430;
+extern unkStruct_202F190 gUnknown_80F69D4;
+extern unkStruct_202F190 gUnknown_80F69EC;
 
 extern u8 gUnknown_8108EC0[];
 extern u8 gUnknown_80F6A04[];
@@ -21,31 +22,30 @@ extern u8 gUnknown_80F6A34[];
 extern u8 gUnknown_80F6A40[];
 extern const struct FileArchive gDungeonFileArchive;
 
-extern struct OpenedFile *gUnknown_202F18C;
-extern struct OpenedFile *gDungeonPaletteFile;
-extern struct unkStruct_202EE8C gUnknown_202EE8C[32];
+extern OpenedFile *gUnknown_202F18C;
+extern OpenedFile *gDungeonPaletteFile;
+extern unkStruct_202EE8C gUnknown_202EE8C[32];
 extern u8 gWalkableTileToCrossableTerrain[8];
-extern const u8 gDungeonWaterType[];
 extern u8 sub_8043CE4(u32);
 
 extern int sprintf(char *, const char *, ...);
 void sub_8049BB0(s32, s32);
 void sub_80498A8(s32, s32);
 
-struct Tile* GetTile(s32 x, s32 y)
+Tile *GetTile(s32 x, s32 y)
 {
     if (x >= 0 && y >= 0 && x < DUNGEON_MAX_SIZE_X && y < DUNGEON_MAX_SIZE_Y)
     {
         return gDungeon->tilePointers[y][x];
     }
-    return (struct Tile*) gUnknown_203B430->unk0;
+    return (Tile *) gUnknown_203B430->unk0;
 }
 
-struct Tile* GetTileSafe(s32 x, s32 y)
+Tile *GetTileSafe(s32 x, s32 y)
 {
     if (x < 0 || y < 0 || x >= DUNGEON_MAX_SIZE_X || y >= DUNGEON_MAX_SIZE_Y)
     {
-        struct Tile* tile = (struct Tile*) gUnknown_202F190.unk0;
+        Tile *tile = (Tile *) gUnknown_202F190.unk0;
         gUnknown_202F190 = *gUnknown_203B430;
         return tile;
     }
@@ -71,8 +71,8 @@ void sub_80495E4(void)
 
 void LoadDungeonTilesetAssets(void)
 {
-  struct OpenedFile *file;
-  struct OpenedFile *file_1;
+  OpenedFile *file;
+  OpenedFile *file_1;
   u8 fileName [12];
   
   sprintf(fileName,gUnknown_80F6A04,gUnknown_8108EC0[gDungeon->tileset]); // b%02dfon

@@ -360,7 +360,7 @@ _080844A4:
 	adds r1, r6
 	ldrb r1, [r1]
 	movs r2, 0
-	bl sub_8090DC4
+	bl BufferItemName
 	movs r3, 0
 	ldr r0, _0808450C
 	adds r6, r0, 0

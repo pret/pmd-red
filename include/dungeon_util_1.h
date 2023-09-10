@@ -3,20 +3,20 @@
 
 #include "dungeon_entity.h"
 
-struct Entity *xxx_call_GetLeader(void);
-struct Entity *GetPartnerEntity(void);
+Entity *xxx_call_GetLeader(void);
+Entity *GetPartnerEntity(void);
 void sub_80854D4(void);
-struct Entity *GetEntityFromClientType(u8 entityType);
-void sub_80856C8(struct Entity * pokemon, s32 x, s32 y);
-void sub_80856E0(struct Entity * pokemon, s32 direction);
+Entity *GetEntityFromClientType(u8 entityType);
+void sub_80856C8(Entity * pokemon, s32 x, s32 y);
+void sub_80856E0(Entity * pokemon, s32 direction);
 void sub_8085764(void);
 void sub_8085860(s32 x, s32 y);
 void sub_8085890(s32 x, s32 y);
-void ShiftCameraToPosition(struct Position32 *posStruct, s32 cameraSteps);
-void SetFacingDirection(struct Entity *pokemon, s32 direction);
+void ShiftCameraToPosition(Position32 *posStruct, s32 cameraSteps);
+void SetFacingDirection(Entity *pokemon, s32 direction);
 void sub_8085930(s32 direction);
 void sub_80859F0(s32 direction);
-bool8 IsMovingClient(struct Entity *entity);
-void sub_8085B0C(struct Entity *pokemon);
+bool8 IsMovingClient(Entity *entity);
+void sub_8085B0C(Entity *pokemon);
 
 #endif

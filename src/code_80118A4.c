@@ -3,6 +3,8 @@
 #include "global.h"
 #include "code_8004AA0.h"
 #include "code_800558C.h"
+#include "code_8009804.h"
+#include "code_800C9CC.h"
 #include "code_80118A4.h"
 #include "music.h"
 #include "constants/bg_music.h"
@@ -14,13 +16,13 @@
 #include "sprite.h"
 #include "event_flag.h"
 
-extern struct GameOptions *gGameOptionsRef;
+extern GameOptions *gGameOptionsRef;
 
 // size: 0x4DD8
 struct UnkBgStruct
 {
     u8 padding[0x4c4b];
-    /* 0x4C4C */ struct unkStruct_202EE8C unk4C4C[16];
+    /* 0x4C4C */ unkStruct_202EE8C unk4C4C[16];
     u32 unk4DCC;
     u32 unk4DD0;
     /* 0x4DD4 */ s16 xoffset;
@@ -36,12 +38,9 @@ EWRAM_DATA s16 gUnknown_202DE22;
 EWRAM_DATA s16 gUnknown_202DE24;
 
 void nullsub_8(u32);
-void sub_8005838(u32, u32);
 extern void TransferBGPaletteBuffer(void);
 extern void xxx_call_update_bg_vram(void);
-extern void sub_8009908(void);
 extern void xxx_call_update_bg_sound_input(void);
-extern void sub_800CB20(void);
 extern bool8 sub_80111C4();
 extern void sub_8010F28();
 
@@ -51,7 +50,7 @@ void sub_801169C(void)
     SetBG3RegOffsets(gUnknown_203B0E4->xoffset, gUnknown_203B0E4->yoffset);
     sub_8010F28();
     sub_8004AF0(sub_80111C4(), gUnknown_203B0E4->unk4C4C, 0xB0, 16, gUnknown_203B0E4->unk4DCC, NULL);
-    sub_8005838(0, 0);
+    sub_8005838(NULL, 0);
     nullsub_8(gGameOptionsRef->unkA);
     sub_8005180();
     sub_80060EC();

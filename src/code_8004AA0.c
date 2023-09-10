@@ -5,13 +5,13 @@
 void nullsub_6(void)
 {}
 
-void sub_8004AA4(struct unkStruct_202EE8C *a0, struct OpenedFile *a1, s32 a2)
+void sub_8004AA4(unkStruct_202EE8C *a0, OpenedFile *a1, s32 a2)
 {
-    struct unkDataFor8004AA4 **data;
-    struct unkDataFor8004AA4 *ptr;
+    unkDataFor8004AA4 **data;
+    unkDataFor8004AA4 *ptr;
     s32 i;
 
-    data = (struct unkDataFor8004AA4 **)a1->data;
+    data = (unkDataFor8004AA4 **)a1->data;
     for (i = 0; i < a2; i++) {
         ptr = *data++;
 
@@ -31,7 +31,7 @@ void sub_8004AA4(struct unkStruct_202EE8C *a0, struct OpenedFile *a1, s32 a2)
     }
 }
 
-bool8 sub_8004AF0(bool8 a0, struct unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, u8 *a5)
+bool8 sub_8004AF0(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, u8 *a5)
 {
     bool8 bVar3;
     bool8 ret;
@@ -63,7 +63,7 @@ bool8 sub_8004AF0(bool8 a0, struct unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4
     return ret;
 }
 
-UNUSED static bool8 sub_8004B78(bool8 a0, struct unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, u8 *a5)
+UNUSED static bool8 sub_8004B78(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, u8 *a5)
 {
     bool8 bVar3;
     bool8 ret;
@@ -95,7 +95,7 @@ UNUSED static bool8 sub_8004B78(bool8 a0, struct unkStruct_202EE8C *a1, s32 a2, 
     return ret;
 }
 
-bool8 sub_8004C00(struct unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 a3, u8 *a4, s16 *a5)
+bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 a3, u8 *a4, s16 *a5)
 {
     bool8 ret;
     s32 i;
@@ -159,7 +159,7 @@ bool8 sub_8004C00(struct unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 a3, u8 *a4, 
     return ret;
 }
 
-UNUSED static void sub_8004CFC(struct unkStruct_202EE8C *a0, s32 a1)
+UNUSED static void sub_8004CFC(unkStruct_202EE8C *a0, s32 a1)
 {
     s32 i;
 
@@ -168,7 +168,7 @@ UNUSED static void sub_8004CFC(struct unkStruct_202EE8C *a0, s32 a1)
     }
 }
 
-bool8 sub_8004D14(struct unkStruct_202EE8C *a0, s32 a1)
+bool8 sub_8004D14(unkStruct_202EE8C *a0, s32 a1)
 {
     s32 i;
 
@@ -180,7 +180,7 @@ bool8 sub_8004D14(struct unkStruct_202EE8C *a0, s32 a1)
     return FALSE;
 }
 
-bool8 sub_8004D40(struct unkStruct_202EE8C *a0, s32 a1)
+bool8 sub_8004D40(unkStruct_202EE8C *a0, s32 a1)
 {
     s32 i;
 

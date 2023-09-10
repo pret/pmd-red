@@ -1,14 +1,14 @@
 #include "global.h"
 #include "reg_control.h"
 
-extern struct unkStruct_202D648 gUnknown_202D608[8];
-extern struct unkStruct_202D648 gUnknown_202D648[8];
+extern unkStruct_202D648 gUnknown_202D608[8];
+extern unkStruct_202D648 gUnknown_202D648[8];
 
 // Unused?
 s32 sub_800B720(s16 a0, IntrCallback a1)
 {
     s32 r2;
-    struct unkStruct_202D648 *r3;
+    unkStruct_202D648 *r3;
     s32 r4;
     bool8 sp4;
     s32 spC;
@@ -70,7 +70,7 @@ s32 sub_800B720(s16 a0, IntrCallback a1)
 void sub_800B850(s16 a0)
 {
     s32 r2;
-    struct unkStruct_202D648 *r4;
+    unkStruct_202D648 *r4;
     bool8 r5;
     s32 r6;
 

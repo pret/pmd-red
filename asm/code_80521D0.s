@@ -7280,7 +7280,7 @@ _080561E0:
 	lsls r1, r2, 24
 	lsrs r1, 24
 	movs r2, 0
-	bl sub_8090DC4
+	bl BufferItemName
 	adds r0, r5, 0
 	mov r1, r8
 	bl SendMessage
@@ -7650,7 +7650,7 @@ _080564E4:
 	lsls r1, r2, 24
 	lsrs r1, 24
 	movs r2, 0
-	bl sub_8090DC4
+	bl BufferItemName
 _080564F2:
 	mov r0, r8
 	ldrh r1, [r0, 0x2]

@@ -17,7 +17,7 @@ enum TerrainType
     TERRAIN_TYPE_SHOP = 1 << 5,
     TERRAIN_TYPE_IN_MONSTER_HOUSE = 1 << 6,
     TERRAIN_TYPE_UNK_8 = 1 << 8,
-    TERRAIN_TYPE_STAIRS = 1 << 9
+    TERRAIN_TYPE_STAIRS = 1 << 9,
 };
 
 enum CrossableTerrain
@@ -30,7 +30,7 @@ enum CrossableTerrain
 };
 
 // size: 0x18
-struct Tile
+typedef struct Tile
 {
     // Uses the TerrainType bit flags.
     /* 0x0 */ u16 terrainType;
@@ -43,12 +43,12 @@ struct Tile
     // Different sets of flags are used for Pokémon that can cross special terrain, corresponding to the CrossableTerrain enum.
     /* 0xA */ u8 walkableNeighborFlags[NUM_CROSSABLE_TERRAIN];
     u8 fillE[0x10 - 0xE];
-    /* 0x10 */ struct Entity *monster; // Pokémon on the tile.
-    /* 0x14 */ struct Entity *object; // Item or trap on the tile.
-};
+    /* 0x10 */ Entity *monster; // Pokémon on the tile.
+    /* 0x14 */ Entity *object; // Item or trap on the tile.
+} Tile;
 
 // size: 0x1C
-struct RoomData
+typedef struct RoomData
 {
     u8 unk0;
     u8 unk1;
@@ -63,6 +63,6 @@ struct RoomData
     u32 unk10; // bottom right y
     u32 unk14; // top left x
     u32 unk18; // top left y
-};
+} RoomData;
 
-#endif
+#endif // GUARD_MAP_H

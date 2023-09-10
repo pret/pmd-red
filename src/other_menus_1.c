@@ -5,7 +5,7 @@
 #include "pokemon.h"
 #include "code_8094F88.h"
 #include "save.h"
-#include "team_inventory.h"
+
 #include "main_menu.h"
 #include "memory.h"
 
@@ -69,11 +69,11 @@ void sub_8037C44(s32 mode, void *data)
         case 3:
         case 6:
         case 7:
-            sub_800D59C(data, sizeof(struct unkStruct_203B480));
+            sub_800D59C(data, sizeof(unkStruct_203B480));
             break;
         case 4:
         case 5:
-            sub_800D59C(data, sizeof(struct WonderMailStruct_203B2C0_sub));
+            sub_800D59C(data, sizeof(WonderMailStruct_203B2C0_sub));
             break;
         case 9:
         case 10:
@@ -95,13 +95,13 @@ void sub_8037CC4(s32 mode, void *param_2, void *param_3)
         case 3:
         case 6:
         case 7:
-            sub_800D670(0, param_2, sizeof(struct unkStruct_203B480));
-            sub_800D670(1, param_3, sizeof(struct unkStruct_203B480));
+            sub_800D670(0, param_2, sizeof(unkStruct_203B480));
+            sub_800D670(1, param_3, sizeof(unkStruct_203B480));
             break;
         case 4:
         case 5:
-            sub_800D670(0, param_2, sizeof(struct WonderMailStruct_203B2C0_sub));
-            sub_800D670(1, param_3, sizeof(struct WonderMailStruct_203B2C0_sub));
+            sub_800D670(0, param_2, sizeof(WonderMailStruct_203B2C0_sub));
+            sub_800D670(1, param_3, sizeof(WonderMailStruct_203B2C0_sub));
             break;
         case 9:
         case 10:
@@ -196,7 +196,7 @@ void sub_8037E38(struct unkStruct_8035D94 *param_1,struct unkStruct_8035D94 *par
     }
 }
 
-void sub_8037E90(struct unkStruct_203B480 *param_1, struct unkStruct_203B480 *param_2)
+void sub_8037E90(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
 {
     if(sub_800D588() == 0)
     {
@@ -210,9 +210,9 @@ void sub_8037E90(struct unkStruct_203B480 *param_1, struct unkStruct_203B480 *pa
 void nullsub_53(void *param_1, void *param_2)
 {}
 
-void sub_8037EBC(struct WonderMailStruct_203B2C0_sub  *param_1, struct WonderMailStruct_203B2C0_sub *param_2) {
-    struct unkStruct_203B480 *mail;
-    struct WonderMailStruct_203B2C0_sub *puVar2;
+void sub_8037EBC(WonderMailStruct_203B2C0_sub  *param_1, WonderMailStruct_203B2C0_sub *param_2) {
+    unkStruct_203B480 *mail;
+    WonderMailStruct_203B2C0_sub *puVar2;
     
     if(sub_800D588() == 0)
     {
@@ -237,14 +237,14 @@ void sub_8037EBC(struct WonderMailStruct_203B2C0_sub  *param_1, struct WonderMai
     }
     else
     {
-        MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
+        MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(unkStruct_203B484));
         gUnknown_203B484->unk4.speciesNum = MONSTER_NONE;
     }
 }
 
-void sub_8037F4C(struct unkStruct_203B480 *param_1, struct unkStruct_203B480 *param_2)
+void sub_8037F4C(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
 {
-    struct unkStruct_203B480 *mail;
+    unkStruct_203B480 *mail;
     struct MainMenu *mainMenu;
     
     if(sub_800D588() == 0)
@@ -316,7 +316,7 @@ s32 sub_8038014(struct unkStruct_8035D94 *param_1,struct unkStruct_8035D94 *para
     return linkStatus;
 }
 
-s32 sub_8038078(struct unkStruct_203B480 *param_1,struct unkStruct_203B480 *param_2)
+s32 sub_8038078(unkStruct_203B480 *param_1,unkStruct_203B480 *param_2)
 {
     u32 uVar2;
     u32 uVar3;
@@ -339,10 +339,10 @@ s32 sub_8038078(struct unkStruct_203B480 *param_1,struct unkStruct_203B480 *para
     }
 }
 
-s32 sub_80380C4(struct unkStruct_203B480 *param_1,struct unkStruct_203B480 *param_2)
+s32 sub_80380C4(unkStruct_203B480 *param_1,unkStruct_203B480 *param_2)
 {
     u32 uVar2;
-    struct unkStruct_203B480 *mail;
+    unkStruct_203B480 *mail;
 
     if (sub_800D588() == 0) {
         mail = param_1;
@@ -369,7 +369,7 @@ s32 sub_80380C4(struct unkStruct_203B480 *param_1,struct unkStruct_203B480 *para
     }
 }
 
-s32 sub_803812C(struct unkStruct_203B480 *param_1, struct unkStruct_203B480 *param_2)
+s32 sub_803812C(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
 {
     if (sub_800D588() == 0) {
         param_2 = param_1;

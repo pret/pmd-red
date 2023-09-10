@@ -24,22 +24,22 @@ extern u8 gUnknown_810AC68; // 0x8
 extern u8 gUnknown_810AC64; // 0x8
 extern u8 gUnknown_810AC66; // 0x8
 
-extern void sub_80709C8(u8 *buffer, struct EntityInfo *entityInfo);
+extern void sub_80709C8(u8 *buffer, EntityInfo *entityInfo);
 
 // Dungeon Music Player adds in this flag to tell
 // the system to fade in rather than immediately playing
 #define DUNGEON_MUSIC_FADE_IN 0x8000
 
-void sub_8083AB0(s16 param_0, struct Entity * target, struct Entity * entity)
+void sub_8083AB0(s16 param_0, Entity * target, Entity * entity)
 {
   u8 *defPtr;
   u8 *attackPtr;
   u8 *spDefPtr;
-  struct EntityInfo * entityInfo;
-  struct EntityInfo * targetEntityInfo;
+  EntityInfo * entityInfo;
+  EntityInfo * targetEntityInfo;
   u8 *spAttPtr;
   u8 buffer [0x14];
-  struct unkDungeonGlobal_unk1CE98_sub *temp;
+  unkDungeonGlobal_unk1CE98_sub *temp;
   u8 *id;
   s32 param_0_s32 = param_0;
 
@@ -101,7 +101,7 @@ void sub_8083AB0(s16 param_0, struct Entity * target, struct Entity * entity)
 
 bool8 sub_8083C24(void)
 {
-  struct unkDungeonGlobal_unk1CE98_sub *temp;
+  unkDungeonGlobal_unk1CE98_sub *temp;
 
   temp = &gDungeon->unk1CE98;
 
@@ -115,7 +115,7 @@ bool8 sub_8083C24(void)
 
 bool8 sub_8083C50(void)
 {
-  struct unkDungeonGlobal_unk1CE98_sub *temp;
+  unkDungeonGlobal_unk1CE98_sub *temp;
 
   temp = &gDungeon->unk1CE98;
 
@@ -129,7 +129,7 @@ bool8 sub_8083C50(void)
 
 bool8 sub_8083C88(u8 param_1)
 {
-  struct unkDungeonGlobal_unk1CE98_sub *temp;
+  unkDungeonGlobal_unk1CE98_sub *temp;
 
   temp = &gDungeon->unk1CE98;
 
@@ -265,7 +265,7 @@ u16 DungeonGetCurrentBGSong(void)
 
 void StopDungeonBGM(void)
 {
-  struct DungeonMusicPlayer *temp = &gDungeon->musPlayer;
+  DungeonMusicPlayer *temp = &gDungeon->musPlayer;
   temp->state = 0;
   temp->fadeOutSpeed = 0;
   temp->songIndex = STOP_BGM;
@@ -283,7 +283,7 @@ void UpdateDungeonMusic(void)
   u16 *bossSongIndex;
 #endif
   s32 newSongIndex;
-  struct DungeonMusicPlayer *musPlayer;
+  DungeonMusicPlayer *musPlayer;
   
   musPlayer = &gDungeon->musPlayer;
 

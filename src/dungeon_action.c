@@ -1,6 +1,5 @@
 #include "global.h"
 #include "dungeon_action.h"
-
 #include "constants/ability.h"
 #include "constants/dungeon_action.h"
 #include "dungeon_ai.h"
@@ -11,19 +10,19 @@
 #include "dungeon_util.h"
 #include "dungeon_pokemon_attributes.h"
 #include "pokemon.h"
-#include "item.h"
+#include "items.h"
 
 extern u8 *gUnknown_80F91EC[];
 extern u8 *gUnknown_80F7C50[];
 extern u8 gUnknown_80F697C[];
 extern s16 gSpeedTurns[2][0x19];
 
-struct ItemText
+typedef struct ItemText
 {
     u8 *desc;
     u8 *useText;
-};
-extern const struct ItemText gActions[];
+} ItemText;
+extern const ItemText gActions[];
 
 extern void sub_8071B48(void);
 extern void sub_8043ED0(u32);
@@ -36,18 +35,18 @@ extern void UseAttack(u32);
 
 extern void sub_8071B48(void);
 extern void TriggerWeatherAbilities(void);
-extern void sub_8074094(struct Entity *);
-extern void sub_8071DA4(struct Entity *);
-extern u8 sub_8072CF4(struct Entity *);
-extern void TickStatusHeal(struct Entity *);
+extern void sub_8074094(Entity *);
+extern void sub_8071DA4(Entity *);
+extern u8 sub_8072CF4(Entity *);
+extern void TickStatusHeal(Entity *);
 
 void sub_8044820(void)
 {
   s32 movSpeed;
-  struct EntityInfo *entityInfo;
-  struct EntityInfo *entityInfo2;
-  struct Entity * entity;
-  struct Entity * entity2;
+  EntityInfo *entityInfo;
+  EntityInfo *entityInfo2;
+  Entity * entity;
+  Entity * entity2;
   s32 index;
   
   for (index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++) {
@@ -103,9 +102,9 @@ void sub_8044820(void)
 
 void TrySpawnMonsterAndActivatePlusMinus(void)
 {
-  struct EntityInfo * entityInfo;
-  struct EntityInfo * entityInfo2;
-  struct Entity *entity;
+  EntityInfo * entityInfo;
+  EntityInfo * entityInfo2;
+  Entity *entity;
   u32 isNotEnemy;
   s32 index;
   
@@ -222,7 +221,7 @@ u8 *sub_8044BA8(u16 param_1, u8 id)
 
 void sub_8044C10(u8 param_1)
 {
-    struct EntityInfo * entityInfo = GetLeaderInfo();
+    EntityInfo * entityInfo = GetLeaderInfo();
 
     entityInfo->action.action = ACTION_NOTHING;
 
@@ -237,7 +236,7 @@ void sub_8044C10(u8 param_1)
 
 void sub_8044C50(u16 action)
 {
-    struct EntityInfo * entityInfo = GetLeaderInfo();
+    EntityInfo * entityInfo = GetLeaderInfo();
 
     entityInfo->action.action = action;
     entityInfo->action.actionUseIndex = 0;
@@ -246,21 +245,21 @@ void sub_8044C50(u16 action)
     entityInfo->action.itemTargetPosition.y = -1;
 }
 
-void ClearMonsterActionFields(struct ActionContainer *actionPointer)
+void ClearMonsterActionFields(ActionContainer *actionPointer)
 {
     actionPointer->action = ACTION_NOTHING;
     actionPointer->actionUseIndex = 0;
     actionPointer->unkC = 0;
 }
 
-void SetMonsterActionFields(struct ActionContainer *actionPointer, u16 action)
+void SetMonsterActionFields(ActionContainer *actionPointer, u16 action)
 {
     actionPointer->action = action;
     actionPointer->actionUseIndex = 0;
     actionPointer->unkC = 0;
 }
 
-void SetActionPassTurnOrWalk(struct ActionContainer *actionPointer, s16 species)
+void SetActionPassTurnOrWalk(ActionContainer *actionPointer, s16 species)
 {
     if (CanMove(species))
     {

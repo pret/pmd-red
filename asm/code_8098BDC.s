@@ -6376,7 +6376,7 @@ _0809C2CA:
 	ldr r0, _0809C308
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8090DC4
+	bl BufferItemName
 	adds r0, r5, 0
 	bl ShiftItemsDownFrom
 	ldr r0, [r6]

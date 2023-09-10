@@ -1,20 +1,22 @@
 #include "global.h"
-#include "personality_test.h"
+#include "bg_palette_buffer.h"
+#include "code_80118A4.h"
+#include "code_8012A18_1.h"
+#include "code_80130A8.h"
+#include "code_8098BDC.h"
 #include "constants/emotions.h"
 #include "constants/input.h"
 #include "constants/type.h"
-#include "random.h"
-#include "pokemon.h"
-#include "save.h"
-#include "memory.h"
 #include "game_options.h"
+#include "memory.h"
+#include "menu_input.h"
+#include "personality_test.h"
+#include "pokemon.h"
+#include "random.h"
+#include "save.h"
 #include "text1.h"
 #include "text2.h"
 #include "text_util.h"
-#include "menu_input.h"
-#include "code_80130A8.h"
-#include "code_8012A18_1.h"
-#include "code_80118A4.h"
 
 enum
 {
@@ -44,16 +46,13 @@ extern s32 sub_8094E4C(void);
 extern void sub_8094D28(s32);
 extern void sub_8001044(u32 *);
 
-extern void sub_8099690(u32);
-
 extern void sub_800836C(u32, u8 *r0, u32);
-extern void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray);
 
 extern void RedrawPartnerSelectionMenu(void);
 
 extern u32 sub_80095E4(s16, u32);
 
-extern struct GameOptions *gGameOptionsRef;
+extern GameOptions *gGameOptionsRef;
 
 extern const char gStarterReveal[];
 
@@ -256,7 +255,7 @@ const u8 gNatureQuestionTable[NUM_QUIZ_QUESTIONS + 1] =
 ALIGNED(4) const u8 gGenderText[] = "Are you a boy or a girl?";
 const char * const gGenderTextPtr = gGenderText;
 
-const struct MenuItem gGenderMenu[] =
+const MenuItem gGenderMenu[] =
 {
     {BoyText, 0},
     {GirlText, 1},
@@ -328,7 +327,7 @@ const char * const gPersonalityTypeDescriptionTable[NUM_PERSONALITIES] =
 
 #include "data/nature_description.h"
 
-const struct UnkTextStruct2 gUnknown_80F4244 =
+const UnkTextStruct2 gUnknown_80F4244 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x05,
@@ -354,7 +353,7 @@ const s16 gPartners[NUM_PARTNERS] =
     MONSTER_MUDKIP
 };
 
-const struct UnkTextStruct2 gUnknown_80F4278 =
+const UnkTextStruct2 gUnknown_80F4278 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -364,7 +363,7 @@ const struct UnkTextStruct2 gUnknown_80F4278 =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80F4290 =
+const UnkTextStruct2 gUnknown_80F4290 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x06,
@@ -374,7 +373,7 @@ const struct UnkTextStruct2 gUnknown_80F4290 =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80F42A8 =
+const UnkTextStruct2 gUnknown_80F42A8 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x05,
@@ -385,7 +384,6 @@ const struct UnkTextStruct2 gUnknown_80F42A8 =
 };
 
 const char gPartnerSelectionHeaderText[] = _("Pokémon");
-const char personality_test_fill[] = "pksdir0";
 
 u8 CreateTestTracker(void)
 {
@@ -704,7 +702,7 @@ void PromptNewQuestion(void)
 {
   sub_8014248(gPersonalityQuestionPointerTable[gPersonalityTestTracker->currQuestionIndex]->question,
               0, 0,
-              (struct MenuItem *)gPersonalityQuestionPointerTable[gPersonalityTestTracker->currQuestionIndex]->answers,
+              (MenuItem *)gPersonalityQuestionPointerTable[gPersonalityTestTracker->currQuestionIndex]->answers,
               0, 3, 0, 0, 0x101);
 }
 
@@ -718,17 +716,17 @@ void PrintPersonalityTypeDescription(void)
 void PersonalityTest_DisplayStarterSprite(void)
 {
   s32 starterID;
-  struct OpenedFile *faceFile;
+  OpenedFile *faceFile;
   int palleteIndex;
   u8 *r6;
   u32 faceIndex;
-  struct UnkTextStruct2 stackArray[4];
+  UnkTextStruct2 stackArray[4];
 
   starterID = gPersonalityTestTracker->StarterID;
   sub_8006518(stackArray);
   stackArray[1] = gUnknown_80F4244;
   ResetUnusedInputStruct();
-  sub_800641C(stackArray, 1, 0);
+  sub_800641C(stackArray, TRUE, FALSE);
   sub_8008C54(1);
   sub_80073B8(1);
   faceFile = GetDialogueSpriteDataPtr(starterID);
@@ -764,7 +762,7 @@ void CreatePartnerSelectionMenu(s16 starterID)
     gUnknown_203B404->unkb4[2] = 6;
     gUnknown_203B404->unkb4[3] = 0;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B404->unk54, 1, 1);
+    sub_800641C(gUnknown_203B404->unk54, TRUE, TRUE);
     sub_8013818(&gUnknown_203B404->input, GetValidPartners(), 0xA, gUnknown_203B404->unk4C);
     RedrawPartnerSelectionMenu();
     PersonalityTest_DisplayPartnerSprite();
@@ -812,7 +810,7 @@ void sub_803CE6C()
 {
   gUnknown_203B404->unk54[gUnknown_203B404->unk4C] = gUnknown_80F4278;
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B404->unk54, 1, 1);
+  sub_800641C(gUnknown_203B404->unk54, TRUE, TRUE);
   sub_803CECC(); // Free 203B404
 }
 
@@ -836,7 +834,7 @@ void sub_803CECC(void)
     }
 }
 
-#ifdef NONMATCHING
+#ifdef NONMATCHING // sub_80095E4 memes
 void RedrawPartnerSelectionMenu(void)
 {
   s32 sVar1;
@@ -856,7 +854,7 @@ void RedrawPartnerSelectionMenu(void)
 
   // Everything after this matches
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B404->unk54,1,1);
+  sub_800641C(gUnknown_203B404->unk54, TRUE, TRUE);
   sub_8008C54(gUnknown_203B404->unk4C);
   sub_80073B8(gUnknown_203B404->unk4C);
   xxx_call_draw_string(0xc, 0, gPartnerSelectionHeaderText, gUnknown_203B404->unk4C, 0);
@@ -975,7 +973,7 @@ void RedrawPartnerSelectionMenu(void)
 void PersonalityTest_DisplayPartnerSprite(void)
 {
   s32 partnerID;
-  struct OpenedFile *faceFile;
+  OpenedFile *faceFile;
   int palleteIndex;
   u8 *r6;
   u32 faceIndex;

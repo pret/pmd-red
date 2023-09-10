@@ -4,14 +4,14 @@
 #include "dungeon_global_data.h"
 
 // size: 0x8
-struct DungeonName
+typedef struct DungeonName
 {
     const u8 *name1;
     const u8 *name2;
-};
+} DungeonName;
 
 // size: 0x10
-struct DungeonDataEntry
+typedef struct DungeonDataEntry
 {
     /* 0x0 */ bool8 stairDirectionUp;
     // If enabled, enemies will evolve when a team member is KOed (and doesn't revive) if their evolution spawns on the floor.
@@ -31,17 +31,20 @@ struct DungeonDataEntry
     // The chance that a wild Pokémon's moveRandomly flag will be set when spawning,
     // causing them to move randomly inside a room instead of exploring rooms.
     /* 0xE */ s16 randomMovementChance;
-};
+} DungeonDataEntry;
 
-extern struct DungeonDataEntry gDungeons[];
-extern struct DungeonName gDungeonNames[];
+extern DungeonDataEntry gDungeons[];
+extern DungeonName gDungeonNames[];
+
+s32 GetDungeonFloorCount(u8 dungeon);
 const u8 *GetDungeonName1(u8 dungeon);
-u32 sub_80908D8(struct DungeonLocation *dungeon);
-u8 sub_8090910(struct DungeonLocation *dungeon, u32 param_2);
-bool8 sub_809095C(u8 dungeon);
 u32 GetMaxItemsAllowed(u8 dungeon);
 s8 GetRescuesAllowed(u8 dungeon);
 bool8 HasCheckpoint(u8 dungeon);
-s32 GetDungeonFloorCount(u8 dungeon);
+void PrintYellowDungeonNametoBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 
-#endif //GUARD_DUNGEON_H
+u32 sub_80908D8(DungeonLocation *dungeon);
+u8 sub_8090910(DungeonLocation *dungeon, u32 param_2);
+bool8 sub_809095C(u8 dungeon);
+
+#endif // GUARD_DUNGEON_H

@@ -15,17 +15,17 @@
 struct unkStruct_203B324
 {
     // size: 0x78
-    struct MenuInputStructSub unk0;
+    MenuInputStructSub unk0;
     u8 mailIndex;
     u32 unk10;
-    struct UnkTextStruct2 *unk14;
-    struct UnkTextStruct2 unk18[4];
+    UnkTextStruct2 *unk14;
+    UnkTextStruct2 unk18[4];
 };
 extern struct unkStruct_203B324 *gUnknown_203B324;
-extern struct unkStruct_203B480 *gUnknown_203B480;
+extern unkStruct_203B480 *gUnknown_203B480;
 
 
-const struct UnkTextStruct2 gUnknown_80E0900 = {
+const UnkTextStruct2 gUnknown_80E0900 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x00, 0x00,
@@ -36,7 +36,7 @@ const struct UnkTextStruct2 gUnknown_80E0900 = {
 
 const u8 gUnknown_80E0918[] = {0x01, 0x00, 0x12, 0x00};
 
-const struct UnkTextStruct2 gUnknown_80E091C = {
+const UnkTextStruct2 gUnknown_80E091C = {
     0x00, 0x00, 0x00, 0x00,
     0x06,
     0x02, 0x02,
@@ -50,7 +50,7 @@ const u8 gUnknown_80E0938[] = "%-4d";
 static const u8 wonder_mail_fill[] = "pksdir0";
 
 extern void sub_8030DD4(void);
-extern void CreateRescueDescription(struct unkStruct_802C39C *);
+extern void CreateRescueDescription(unkStruct_802C39C *);
 
 void sub_8030E2C(void);
 void sub_8030E48(void);
@@ -95,7 +95,7 @@ void sub_8030DE4(void)
   {
       gUnknown_203B324->unk18[gUnknown_203B324->unk10] = gUnknown_80E0900;
       ResetUnusedInputStruct();
-      sub_800641C(gUnknown_203B324->unk18, 1, 1);
+      sub_800641C(gUnknown_203B324->unk18, TRUE, TRUE);
       MemoryFree(gUnknown_203B324);
       gUnknown_203B324 = NULL;
   }
@@ -104,14 +104,14 @@ void sub_8030DE4(void)
 void sub_8030E2C(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B324->unk18, 1, 1);
+    sub_800641C(gUnknown_203B324->unk18, TRUE, TRUE);
 }
 
 void sub_8030E48(void)
 {
   u16 uVar2;
-  struct unkStruct_203B480 *mail;
-  struct unkStruct_802C39C stack;
+  unkStruct_203B480 *mail;
+  unkStruct_802C39C stack;
   u8 buffer [256];
   
   mail = &gUnknown_203B480[gUnknown_203B324->mailIndex];

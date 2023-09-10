@@ -11,6 +11,8 @@
 #include "code_802C39C.h"
 #include "menu_input.h"
 #include "code_80118A4.h"
+#include "code_803B050.h"
+#include "pokemon_mid.h"
 
 bool8 IsMailSlotEmpty(u8);
 extern s32 CountPelipperBoardSlots(void);
@@ -18,20 +20,20 @@ extern void sub_802C328(void);
 extern void DrawPelipperBoardJobMenu(void);
 extern u8 HasNoPelipperBoardJobs(void);
 
-extern struct WonderMail *GetPelipperBoardSlotInfo(u32);
-extern void sub_803B35C(struct WonderMail *, u32 *);
+extern WonderMail *GetPelipperBoardSlotInfo(u32);
+extern void sub_803B35C(WonderMail *, u32 *);
 extern u8 gBulletinBoardText[];
-extern bool8 IsMailinJobSlot(struct WonderMail *);
-extern void CreateRescueTitle(struct unkStruct_802C39C *);
+extern bool8 IsMailinJobSlot(WonderMail *);
+extern void CreateRescueTitle(unkStruct_802C39C *);
 
 struct unkStruct_203B2D8
 {
     // size: 0xA4
     u8 unk0[4];
-    struct MenuInputStruct input;
+    MenuInputStruct input;
     u32 unk38;
-    struct UnkTextStruct2 *unk3C;
-    struct UnkTextStruct2 unk40[4];
+    UnkTextStruct2 *unk3C;
+    UnkTextStruct2 unk40[4];
     u8 unkA0[4];
 };
 
@@ -41,32 +43,29 @@ struct unkStruct_203B2E0
 {
     // size: 0xA8
     u8 unk0[0x8];
-    struct MenuInputStruct input;
+    MenuInputStruct input;
     s32 unk3C;
-    struct UnkTextStruct2 *unk40;
-    struct UnkTextStruct2 unk44[4];
+    UnkTextStruct2 *unk40;
+    UnkTextStruct2 unk44[4];
     u8 unkA4[4];
 };
 extern struct unkStruct_203B2E0 *gUnknown_203B2E0;
 
-extern struct UnkTextStruct2 gUnknown_80DFCB4;
-extern struct UnkTextStruct2 gUnknown_80DFC9C;
+extern UnkTextStruct2 gUnknown_80DFCB4;
+extern UnkTextStruct2 gUnknown_80DFC9C;
 
 extern u16 gUnknown_203B2E4;
 
-extern struct WonderMail *GetMailboxSlotInfo(u8);
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
+extern WonderMail *GetMailboxSlotInfo(u8);
 extern u8 gMailboxText[];
 extern u8 gAvailablePokemonNames[];
-extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
-extern void sub_803B6B0(u32, u32, u32, u32);
 
 void CreateMailMenu(void)
 {
-    struct WonderMail *mail;
+    WonderMail *mail;
     s32 y;
     s32 index;
-    struct unkStruct_802C39C local;
+    unkStruct_802C39C local;
     u8 buffer [128];
 
     sub_8008C54(gUnknown_203B2D8->unk38);
@@ -123,7 +122,7 @@ bool8 HasNoMailinMailbox(void)
 }
 
 
-bool8 sub_802C10C(s32 param_1,struct UnkTextStruct2_sub *param_2,s32 param_3)
+bool8 sub_802C10C(s32 param_1,UnkTextStruct2_sub *param_2,s32 param_3)
 {
   if (HasNoPelipperBoardJobs() != 0) {
       return FALSE;
@@ -145,7 +144,7 @@ bool8 sub_802C10C(s32 param_1,struct UnkTextStruct2_sub *param_2,s32 param_3)
 
     sub_8012D34(gUnknown_203B2E0->unk40,param_3);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2E0->unk44,1,1);
+    sub_800641C(gUnknown_203B2E0->unk44, TRUE, TRUE);
     sub_8013848(&gUnknown_203B2E0->input,CountPelipperBoardSlots(),param_3,param_1);
     gUnknown_203B2E0->input.menuIndex = gUnknown_203B2E4;
     sub_8013984(&gUnknown_203B2E0->input);
@@ -194,7 +193,7 @@ u8 sub_802C26C(void)
 void sub_802C28C(u8 r0)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2E0->unk44, 0, 0);
+    sub_800641C(gUnknown_203B2E0->unk44, FALSE, FALSE);
     gUnknown_203B2E0->input.unk22 = CountPelipperBoardSlots();
     sub_8013984(&gUnknown_203B2E0->input);
     sub_802C328();
@@ -210,7 +209,7 @@ void sub_802C2D4(void)
         gUnknown_203B2E4 = gUnknown_203B2E0->input.menuIndex;
         gUnknown_203B2E0->unk44[gUnknown_203B2E0->unk3C] = gUnknown_80DFC9C;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B2E0->unk44, 1, 1);
+        sub_800641C(gUnknown_203B2E0->unk44, TRUE, TRUE);
         MemoryFree(gUnknown_203B2E0);
         gUnknown_203B2E0 = NULL;
     }
@@ -279,11 +278,11 @@ void sub_802C328(void)
 void DrawPelipperBoardJobMenu(void)
 {
     u32 slotIndex;
-    struct WonderMail *mail;
+    WonderMail *mail;
     s32 iVar4;
     s32 x;
     s32 index;
-    struct unkStruct_802C39C local;
+    unkStruct_802C39C local;
 
     sub_8008C54(gUnknown_203B2E0->unk3C);
     sub_80073B8(gUnknown_203B2E0->unk3C);

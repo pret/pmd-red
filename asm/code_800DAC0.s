@@ -2923,7 +2923,7 @@ sub_800F204:
 	thumb_func_end sub_800F204
 
 	thumb_func_start GetDungeonPokemonSprite
-    @ struct DungeonPokemonSprite *GetDungeonPokemonSprite(int id)
+    @ DungeonPokemonSprite *GetDungeonPokemonSprite(int id)
 GetDungeonPokemonSprite:
 	push {r4,lr}
 	adds r4, r0, 0
@@ -2958,7 +2958,7 @@ _0800F240:
 	thumb_func_end GetDungeonPokemonSprite
 
 	thumb_func_start NewDungeonPokemonSprite
-    @ struct DungeonPokemonSprite *NewDungeonPokemonSprite(void)
+    @ DungeonPokemonSprite *NewDungeonPokemonSprite(void)
 NewDungeonPokemonSprite:
 	push {lr}
 	movs r2, 0
@@ -3137,7 +3137,7 @@ _0800F35C:
 	thumb_func_end sub_800F2EC
 
 	thumb_func_start DrawStatusSprite
-    @ void DrawStatusSprite(?, int status, struct Position *pos, struct Position *pos_offset, struct Position *pos_screen, ?)
+    @ void DrawStatusSprite(?, int status, Position *pos, Position *pos_offset, Position *pos_screen, ?)
 DrawStatusSprite:
 	push {r4-r7,lr}
 	mov r7, r8
@@ -3807,7 +3807,7 @@ _0800F8CC: .4byte gDungeonPokemonSprites
 	thumb_func_end sub_800F7D0
 
 	thumb_func_start AddPokemonDungeonSprite
-    @ void AddPokemonDungeonSprite(int id, short species, struct Position *pos, ?)
+    @ void AddPokemonDungeonSprite(int id, short species, Position *pos, ?)
 AddPokemonDungeonSprite:
 	push {r4-r7,lr}
 	mov r7, r8

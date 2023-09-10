@@ -4,14 +4,14 @@
 #include "file_system.h"
 
 // size: 0x8
-struct UnkSpriteMem
+typedef struct UnkSpriteMem
 {
     /* 0x0 */ void *src;
     /* 0x4 */ s32 byteCount;
-};
+} UnkSpriteMem;
 
 // size: 0x20
-struct axdata1
+typedef struct axdata1
 {
     /* 0x0 */ s16 xPos;
     /* 0x2 */ s16 yPos;
@@ -27,20 +27,20 @@ struct axdata1
     /* 0x1A */ s16 lastPoseId;
     u8 fill1C[0x1E - 0x1C];
     u8 paletteNum;
-};
+} axdata1;
 
 // size: 0xA
-struct __attribute__ ((packed, aligned(2))) ax_pose
+typedef struct __attribute__((packed, aligned(2))) ax_pose
 {
     /* 0x0 */ s16 sprite;
     u16 unk2; // Always 0 in red (except for end markers which are 0xFFFF)
     /* 0x4 */ u16 flags1;
     /* 0x6 */ u16 flags2;
     /* 0x8 */ u16 flags3;
-};
+} ax_pose;
 
 // size: 0xC
-struct ax_anim
+typedef struct ax_anim
 {
     /* 0x0 */ u8 frames;
     /* 0x1 */ u8 unkFlags;
@@ -49,38 +49,38 @@ struct ax_anim
     /* 0x6 */ s16 yOffset;
     /* 0x8 */ s16 xShadow;
     /* 0xA */ s16 yShadow;
-};
+} ax_anim;
 
 // size: 0x3C
-struct axdata
+typedef struct axdata
 {
     /* 0x0 */ u16 flags; // 0x8000 - animating, 0x2000 finished? 0x1000 continue
     /* 0x2 */ s16 animFrames; // frames left in the current animation frame
     /* 0x4 */ s16 animWaitFrames; // frames to not update the animation for
     /* 0x6 */ s16 totalFrames; // max 30000
-    /* 0x8 */ struct axdata1 sub1;
-    /* 0x28 */ struct ax_anim *nextAnimData; // next animation data (if flags&0x1000)
-    /* 0x2C */ struct ax_anim *activeAnimData; // current animation data
+    /* 0x8 */ axdata1 sub1;
+    /* 0x28 */ ax_anim *nextAnimData; // next animation data (if flags&0x1000)
+    /* 0x2C */ ax_anim *activeAnimData; // current animation data
     /* 0x30 */ void *paletteData; // ?
-    /* 0x34 */ struct ax_pose **poseData;
-    /* 0x38 */ struct UnkSpriteMem **spriteData;
-};
+    /* 0x34 */ ax_pose **poseData;
+    /* 0x38 */ UnkSpriteMem **spriteData;
+} axdata;
 
 // size: 0x14
-struct axmain
+typedef struct axmain
 {
-    /* 0x0 */ struct ax_pose **poses;
-    /* 0x4 */ struct ax_anim ****animations;
+    /* 0x0 */ ax_pose **poses;
+    /* 0x4 */ ax_anim ****animations;
     /* 0x8 */ u32 animCount;
     /* 0xC */ void *spriteData; // ?
     /* 0x10 */ void *palettes; // ?
-};
+} axmain;
 
 // size: ?
 struct axPokemon
 {
-    /* 0x0 */ struct axdata axdata;
-    /* 0x3C */ struct OpenedFile *spriteFile;
+    /* 0x0 */ axdata axdata;
+    /* 0x3C */ OpenedFile *spriteFile;
     u16 unk40_maybeAnimTimer;
     u8 unk42_animId1;
     u8 unk43_animId2;
@@ -90,7 +90,7 @@ struct axPokemon
     u8 unk47;
     u8 unk48;
     u8 fill49[0x4C - 0x49];
-    /* 0x4C */ struct axmain *axmain;
+    /* 0x4C */ axmain *axmain;
     u8 flags_0x50;
     u8 fill51;
     s16 unk52;

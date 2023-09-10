@@ -14,7 +14,7 @@ struct unkStruct_203B200
     u32 unk4;
     u8 *pokeName;
     s32 state;
-    /* 0x10 */ struct MenuItem menus[3];
+    /* 0x10 */ MenuItem menus[3];
     u8 fill[0x50 - 0x28];
 };
 extern struct unkStruct_203B200 *gUnknown_203B200;
@@ -79,7 +79,7 @@ s32 sub_8016028(void)
 u32 sub_801602C(u32 r0, u8 *name)
 {
     ResetUnusedInputStruct();
-    sub_800641C(0, 1, 1);
+    sub_800641C(NULL, TRUE, TRUE);
     gUnknown_203B200 = MemoryAlloc(sizeof(struct unkStruct_203B200), 8);
     gUnknown_203B200->unk0 = r0;
     gUnknown_203B200->pokeName = name;

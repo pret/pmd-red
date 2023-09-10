@@ -3,11 +3,10 @@
 #include "code_801C620.h"
 #include "constants/item.h"
 #include "constants/iq_skill.h"
-#include "item.h"
+#include "items.h"
 #include "memory.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
-#include "team_inventory.h"
 #include "text1.h"
 #include "text2.h"
 #include "subStruct_203B240.h"
@@ -15,33 +14,35 @@
 #include "sprite.h"
 #include "code_80130A8.h"
 
+// TODO: This 1 file was originally 5 files. Split properly
+
+// size: 0x124
 struct unkStruct_203B238
 {
-    // size: 0x124
     u32 state;
     s16 species;
-    struct PokemonStruct *pokeStruct;
+    PokemonStruct1 *pokeStruct;
     u8 iqSkills[NUM_IQ_SKILLS];
     u32 unk24;
     u8 iqSkillIndex;
     u32 numIQSkills;
     s32 menuAction;
-    struct MenuItem unk34[8];
-    struct MenuStruct unk74;
-    struct UnkTextStruct2 unkC4[4];
+    MenuItem unk34[8];
+    MenuStruct unk74;
+    UnkTextStruct2 unkC4[4];
 };
 
 // size: 0xC4
 struct unkStruct_203B23C
 {
     /* 0x0 */ s16 species;
-    /* 0x4 */ struct PokemonStruct *pokeStruct;
+    /* 0x4 */ PokemonStruct1 *pokeStruct;
     /* 0x8 */ u8 iqSkills[NUM_IQ_SKILLS];
     /* 0x20 */ s32 numIQSkills;
-    /* 0x24 */ struct MenuInputStruct input;
+    /* 0x24 */ MenuInputStruct input;
     u32 unk58;
-    struct UnkTextStruct2 *unk5C;
-    struct UnkTextStruct2 unk60[4];
+    UnkTextStruct2 *unk5C;
+    UnkTextStruct2 unk60[4];
     u8 unkC0;
     u8 unkC1;
     u8 unkC2;
@@ -59,8 +60,8 @@ struct unkStruct_203B240
     u8 fill14[0x20 - 0x18];
     u32 unk20;
     u32 unk24;
-    struct UnkTextStruct2 unk28[4];
-    struct MenuInputStructSub unk88;
+    UnkTextStruct2 unk28[4];
+    MenuInputStructSub unk88;
 };
 
 // size: 0x554
@@ -69,35 +70,34 @@ struct unkStruct_203B244
     u32 unk0;
     /* 0x4 */ u8 itemIDs[NUMBER_OF_ITEM_IDS];
     u32 unkF4[NUMBER_OF_ITEM_IDS];
-    /* 0x4B4 */ struct MenuInputStruct input;
+    /* 0x4B4 */ MenuInputStruct input;
     u32 unk4E8;
-    struct UnkTextStruct2 * unk4EC;
-    struct UnkTextStruct2 unk4F0[4];
+    UnkTextStruct2 * unk4EC;
+    UnkTextStruct2 unk4F0[4];
     u8 unk550[4];
 };
 
-// size: 118
+// size: 0x118
 struct unk_203B250
 {
-    /* 0x0 */ struct PokemonStruct *pokeStruct;
+    /* 0x0 */ PokemonStruct1 *pokeStruct;
     /* 0x4 */ s16 index;
     /* 0x6 */ u8 currFriendAreaLocation; // 0 when not in a friend area
     u8 unk7;
     u8 unk8;
     u8 unk9;
-    struct PokemonStruct *unkC;
+    PokemonStruct1 *unkC;
     /* 0x10 */ u32 state;
     /* 0x14 */ u32 menuAction;
-    struct MenuStruct unk18;
-    struct MenuItem unk68[8];
+    MenuStruct unk18;
+    MenuItem unk68[8];
     u16 unkA8[8];
-    struct UnkTextStruct2 unkB8[4];
+    UnkTextStruct2 unkB8[4];
 };
 
 extern struct unk_203B250 *gUnknown_203B250;
 extern u32 gUnknown_203B254;
 
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern u8 sub_8002658(s16);
 extern s16 sub_80A5728(void);
 extern void sub_801D208(u32);
@@ -113,17 +113,17 @@ extern void sub_801D840(void);
 extern void sub_801D85C(void);
 extern void sub_801D878(void);
 s16 sub_80A7AE8(s32);
-extern struct PokemonStruct *sub_808D3F8(void);
+extern PokemonStruct1 *sub_808D3F8(void);
 
-extern const struct UnkTextStruct2 gUnknown_80DBE54;
-extern const struct UnkTextStruct2 gUnknown_80DBDD8;
-extern const struct UnkTextStruct2 gUnknown_80DBDF0;
-extern const struct UnkTextStruct2 gUnknown_80DBDB0;
-extern const struct UnkTextStruct2 gUnknown_80DBD98;
-extern const struct UnkTextStruct2 gUnknown_80DBE3C;
-extern const struct UnkTextStruct2 gUnknown_80DBE7C;
-extern const struct UnkTextStruct2 gUnknown_80DBE98;
-extern const struct UnkTextStruct2 gUnknown_80DBEB0[4];
+extern const UnkTextStruct2 gUnknown_80DBE54;
+extern const UnkTextStruct2 gUnknown_80DBDD8;
+extern const UnkTextStruct2 gUnknown_80DBDF0;
+extern const UnkTextStruct2 gUnknown_80DBDB0;
+extern const UnkTextStruct2 gUnknown_80DBD98;
+extern const UnkTextStruct2 gUnknown_80DBE3C;
+extern const UnkTextStruct2 gUnknown_80DBE7C;
+extern const UnkTextStruct2 gUnknown_80DBE98;
+extern const UnkTextStruct2 gUnknown_80DBEB0[4];
 
 extern struct unkStruct_203B238 *gUnknown_203B238;
 extern struct unkStruct_203B23C *gUnknown_203B23C;
@@ -133,7 +133,6 @@ extern struct unkStruct_203B244 *gUnknown_203B244;
 extern u32 gUnknown_203B248;
 extern u16 gUnknown_203B24C;
 extern u16 gUnknown_203B24E;
-extern u8 gUnknown_202DE58[0x58];
 extern u8 gAvailablePokemonNames[0x58];
 
 extern u8 gUnknown_80DBE6C[];
@@ -150,9 +149,7 @@ extern u8 *gUnknown_80D4970[];
 
 extern u32 sub_801CE58(void);
 extern void sub_801CC38(void);
-extern void sub_80140B4(struct UnkTextStruct2 *);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
-extern void sub_8013F84(void);
 extern void PlayMenuSoundEffect(u32);
 extern void sub_8013C68(u32 *);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
@@ -259,7 +256,7 @@ void sub_801BFCC(void)
 
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B238->unkC4, 1, 1);
+    sub_800641C(gUnknown_203B238->unkC4, TRUE, TRUE);
 }
 
 void sub_801C03C(void)
@@ -403,7 +400,7 @@ bool8 sub_801C244(s16 species, u32 index, u32 param_3)
     gUnknown_203B23C->unk5C->unk14 = &gUnknown_203B23C->unkC0;
     sub_8012D08(gUnknown_203B23C->unk5C,param_3);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B23C->unk60,1,1);
+    sub_800641C(gUnknown_203B23C->unk60, TRUE, TRUE);
     sub_8013818(&gUnknown_203B23C->input,gUnknown_203B23C->numIQSkills,param_3,index);
     sub_801C440();
     sub_801C4C8();
@@ -449,7 +446,7 @@ s32 sub_801C390(void)
 void sub_801C3B0(u8 r0)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B23C->unk60, 0, 0);
+    sub_800641C(gUnknown_203B23C->unk60, FALSE, FALSE);
     gUnknown_203B23C->input.unk22 = gUnknown_203B23C->numIQSkills;
     sub_8013984(&gUnknown_203B23C->input);
     sub_801C440();
@@ -464,13 +461,13 @@ void sub_801C3F8(void)
     {
         gUnknown_203B23C->unk60[gUnknown_203B23C->unk58] = gUnknown_80DBDD8;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B23C->unk60, 1, 1);
+        sub_800641C(gUnknown_203B23C->unk60, TRUE, TRUE);
         MemoryFree(gUnknown_203B23C);
         gUnknown_203B23C = NULL;
     }
 }
 
-#ifdef NONMATCHING
+#ifdef NONMATCHING // sub_80095E4 memes
 // https://decomp.me/scratch/NdDP3  (98.06% matching) - Seth
 void sub_801C440(void)
 {
@@ -481,12 +478,12 @@ void sub_801C440(void)
   gUnknown_203B23C->unkC2 = 0xA;
   gUnknown_203B23C->unkC3 = 0;
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B23C->unk60, 1, 1);
+  sub_800641C(gUnknown_203B23C->unk60, TRUE, TRUE);
   sVar2 = sub_80095E4(gUnknown_203B23C->unk24.unk1A, 0xc) + 2;
   gUnknown_203B23C->unk60[gUnknown_203B23C->unk58].unkE = sVar2;
   gUnknown_203B23C->unk60[gUnknown_203B23C->unk58].unk10 = sVar2;
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B23C->unk60, 1, 1);
+  sub_800641C(gUnknown_203B23C->unk60, TRUE, TRUE);
 }
 #else
 NAKED
@@ -598,7 +595,7 @@ bool8 HasNoAvailIQSkills(s16 species)
 {
     s32 species_s32;
     u8 iqSkillBuffer[NUM_IQ_SKILLS];
-    struct PokemonStruct *pokeStruct;
+    PokemonStruct1 *pokeStruct;
 
     species_s32 = species;
 
@@ -618,7 +615,7 @@ u32 sub_801C620(u8 iqSkill)
   gUnknown_203B240->unk24 = 0;
   sub_80140B4(gUnknown_203B240->unk28);
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B240->unk28,1,1);
+  sub_800641C(gUnknown_203B240->unk28, TRUE, TRUE);
   sub_801C6D0(0);
   return 1;
 }
@@ -745,7 +742,7 @@ void sub_801C848(void)
   }
 }
 
-bool8 sub_801C8C4(s32 param_1, s32 param_2, struct UnkTextStruct2_sub *param_3, u32 param_4)
+bool8 sub_801C8C4(s32 param_1, s32 param_2, UnkTextStruct2_sub *param_3, u32 param_4)
 {
   if (sub_801CF14(param_1)) {
       return FALSE;
@@ -768,7 +765,7 @@ bool8 sub_801C8C4(s32 param_1, s32 param_2, struct UnkTextStruct2_sub *param_3, 
 
     sub_8012D08(gUnknown_203B244->unk4EC, param_4);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B244->unk4F0,1,1);
+    sub_800641C(gUnknown_203B244->unk4F0, TRUE, TRUE);
     sub_8013818(&gUnknown_203B244->input, sub_801CE58(), param_4, param_2);
     if (gUnknown_203B248 == gUnknown_203B244->unk0) {
       gUnknown_203B244->input.menuIndex = gUnknown_203B24C;
@@ -838,7 +835,7 @@ u8 sub_801CB24(void) {
 
 void sub_801CB5C(bool8 r0) {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B244->unk4F0, 0, 0);
+    sub_800641C(gUnknown_203B244->unk4F0, FALSE, FALSE);
     gUnknown_203B244->input.unk22 = sub_801CE58();
     sub_8013984(&gUnknown_203B244->input);
     sub_801CC38();
@@ -857,7 +854,7 @@ void sub_801CBB8(void) {
         gUnknown_203B24E = gUnknown_203B244->input.unk1E;
         gUnknown_203B244->unk4F0[gUnknown_203B244->unk4E8] = gUnknown_80DBE3C;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B244->unk4F0, 1, 1);
+        sub_800641C(gUnknown_203B244->unk4F0, TRUE, TRUE);
         MemoryFree(gUnknown_203B244);
         gUnknown_203B244 = NULL;
     }
@@ -956,7 +953,7 @@ void sub_801CCD8(void)
               gUnknown_203B244->input.unk1E + 1,2,7,gUnknown_203B244->unk4E8);
   for(index = 0; index < gUnknown_203B244->input.unk1A; index++) {
       uVar3 = gUnknown_203B244->itemIDs[(gUnknown_203B244->input.unk1E * gUnknown_203B244->input.unk1C) + index];
-      sub_8090DC4(buffer,uVar3,0);
+      BufferItemName(buffer,uVar3,NULL);
       y = sub_8013800(&gUnknown_203B244->input,index);
       xxx_call_draw_string(8,y,buffer,gUnknown_203B244->unk4E8,0);
       y2 = sub_8013800(&gUnknown_203B244->input,index);
@@ -1072,14 +1069,14 @@ struct unkStruct_203B244 *sub_801D008(void)
     return gUnknown_203B244;
 }
 
-bool8 sub_801D014(struct PokemonStruct *param_1)
+bool8 sub_801D014(PokemonStruct1 *param_1)
 {
     s32 index;
-    struct PokemonStruct *pokemon;
+    PokemonStruct1 *pokemon;
     struct unk_203B250 *preload;
 
     ResetUnusedInputStruct();
-    sub_800641C(0,1,1);
+    sub_800641C(NULL, TRUE, TRUE);
     gUnknown_203B250 = MemoryAlloc(sizeof(struct unk_203B250), 8);
     gUnknown_203B250->menuAction = gUnknown_203B254;
     gUnknown_203B250->pokeStruct = param_1;
@@ -1157,7 +1154,7 @@ u32 sub_801D0DC(void)
 
 u32 sub_801D178(void)
 {
-    struct PokemonStruct *pokeStruct;
+    PokemonStruct1 *pokeStruct;
 
     if (gUnknown_203B250->unk9 != 0)
     {
@@ -1264,5 +1261,5 @@ void sub_801D220(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B250->unkB8, 1, 1);
+    sub_800641C(gUnknown_203B250->unkB8, TRUE, TRUE);
 }

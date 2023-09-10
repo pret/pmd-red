@@ -5,7 +5,7 @@
 #include "dungeon_util.h"
 #include "map.h"
 
-bool8 CanLayTrap(struct Position *pos)
+bool8 CanLayTrap(Position *pos)
 {
     struct Tile *tile = GetTileSafe(pos->x, pos->y);
     if (tile->terrainType & TERRAIN_TYPE_STAIRS ||

@@ -7,7 +7,6 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "input.h"
-#include "team_inventory.h"
 #include "text1.h"
 #include "text2.h"
 #include "memory.h"
@@ -23,14 +22,19 @@
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
 
+// TODO: This file was originally 3 files. Split properly
+// 4 files if you count code_8023144.s
+
+// split1
+
 struct unkStruct_203B280
 {
     /* 0x0 */ u8 friendAreas[NUM_FRIEND_AREAS];
     /* 0x3C */ u32 mode;
-    struct MenuInputStruct unk40;
+    MenuInputStruct unk40;
     s32 unk74;
-    struct UnkTextStruct2 *unk78;
-    struct UnkTextStruct2 unk7C[4];
+    UnkTextStruct2 *unk78;
+    UnkTextStruct2 unk7C[4];
     u8 unkDC[4];
 };
 EWRAM_DATA_2 struct unkStruct_203B280 *gUnknown_203B280 = {0};
@@ -38,52 +42,62 @@ EWRAM_DATA_2 u32 gUnknown_203B284 = {0};
 EWRAM_DATA_2 u16 gUnknown_203B288 = {0};
 EWRAM_DATA_2 u16 gUnknown_203B28A = {0};
 
+// split2
+
 struct unkStruct_203B28C
 {
-    struct MenuInputStructSub unk0;
+    MenuInputStructSub unk0;
     /* 0xC */ u8 friendArea;
     bool8 unkD;
     s16 unkE[0x10];
     u32 unk30[0x10];
     /* 0x70 */ s32 numPokemoninFriendArea;
     s32 unk74;
-    struct UnkTextStruct2 *unk78;
-    struct UnkTextStruct2 unk7C[4];
+    UnkTextStruct2 *unk78;
+    UnkTextStruct2 unk7C[4];
     u8 unkDC[4];
 };
 EWRAM_DATA_2 struct unkStruct_203B28C *gUnknown_203B28C = {0};
 
-EWRAM_DATA_2 struct WigglytuffShop *gWigglytuffShop = {0};
+// split3
+
+EWRAM_DATA_2 WigglytuffShop *gWigglytuffShop = {0};
+
+// other stuff
+
 extern u8 *gFriendAreas;
-
-extern u8 gUnknown_202E628[];
 extern u32 gUnknown_202DE30[2];
-extern u8 gUnknown_202E5D8[];
+extern u8 gAvailablePokemonNames[]; // 202DF98
 extern u8 gUnknown_202E1C8[];
-extern u8 gAvailablePokemonNames[];
+extern u8 gUnknown_202E5D8[];
+extern u8 gUnknown_202E628[];
 
-extern const u8 *gWigglytuffDialogue[2][20];
-extern const u8 *gWigglytuffCheck[];
 extern const u8 *gUnknown_80D4920[];
 extern const u8 *gUnknown_80D4928[];
 extern const u8 *gUnknown_80D4934[];
 extern const u8 *gUnknown_80D4970[];
 extern const u8 *gUnknown_80D4978[];
-extern struct UnkTextStruct2 gUnknown_80DC464;
-extern struct UnkTextStruct2 gUnknown_80DC47C;
-extern struct UnkTextStruct2 gUnknown_80DC4BC;
-extern struct UnkTextStruct2 gUnknown_80DC4D8;
-extern struct UnkTextStruct2 gUnknown_80DC534;
-extern struct UnkTextStruct2 gUnknown_80DC54C;
-extern struct UnkTextStruct2 gUnknown_80DC564;
+extern const u8 *gWigglytuffCheck[]; // 80D499C
+extern const u8 *gUnknown_80D49BC[];
 
-extern u8 *gUnknown_80D49BC[];
-extern u8 gUnknown_80DC4A4[];
-extern u8 gUnknown_80DC494[];
-extern u8 gUnknown_80DC4AC[];
-extern u8 gUnknown_80DC4F0[];
-extern u8 gUnknown_80DC518[];
-extern u8 gUnknown_80DC524[];
+extern const u8 *gWigglytuffDialogue[2][20]; // 80D79A4
+
+// split1
+extern const UnkTextStruct2 gUnknown_80DC464;
+extern const UnkTextStruct2 gUnknown_80DC47C;
+extern const u8 gUnknown_80DC494[];
+extern const u8 gUnknown_80DC4A4[];
+extern const u8 gUnknown_80DC4AC[];
+// split2
+extern const UnkTextStruct2 gUnknown_80DC4BC;
+extern const UnkTextStruct2 gUnknown_80DC4D8;
+extern const u8 gUnknown_80DC4F0[];
+extern const u8 gUnknown_80DC518[];
+extern const u8 gUnknown_80DC524[];
+// split3
+extern const UnkTextStruct2 gUnknown_80DC534;
+extern const UnkTextStruct2 gUnknown_80DC54C;
+extern const UnkTextStruct2 gUnknown_80DC564;
 
 u8 sub_8021700(u32);
 void sub_8092578(u8 *buffer, u8 index, u8 r2);
@@ -92,7 +106,7 @@ extern void sub_803AA34();
 extern u8 sub_803ABC8(void);
 extern u8 sub_802132C(void);
 extern void sub_8022380(void);
-bool8 sub_8023144(s32 param_1, s32 index, struct UnkTextStruct2_sub *sub, u32 param_4);
+bool8 sub_8023144(s32 param_1, s32 index, UnkTextStruct2_sub *sub, u32 param_4);
 void sub_8023354(u8 param_1);
 extern void CreateWigglytuffConfirmFriendAreaMenu(void);
 extern u8 sub_8099B94(void);
@@ -129,33 +143,33 @@ s32 sub_8021B58(s16 species);
 
 extern void PlayMenuSoundEffect(u32);
 
+// split1
+
 bool8 sub_80211AC(u32 mode, u32 param_2)
 {
-    if(sub_8021700(mode))
-    {
+    if (sub_8021700(mode))
         return FALSE;
+
+    gUnknown_203B280 = MemoryAlloc(sizeof(struct unkStruct_203B280), 8);
+    gUnknown_203B280->mode = mode;
+    gUnknown_203B280->unk74 = param_2;
+    gUnknown_203B280->unk78 = &gUnknown_203B280->unk7C[gUnknown_203B280->unk74];
+    sub_8006518(gUnknown_203B280->unk7C);
+    gUnknown_203B280->unk7C[gUnknown_203B280->unk74] = gUnknown_80DC47C;
+    gUnknown_203B280->unk78->unk14 = gUnknown_203B280->unkDC;
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B280->unk7C, TRUE, TRUE);
+    sub_8013818(&gUnknown_203B280->unk40, sub_8021664(), 10, param_2);
+
+    if (gUnknown_203B284 == gUnknown_203B280->mode) {
+        gUnknown_203B280->unk40.menuIndex = gUnknown_203B288;
+        gUnknown_203B280->unk40.unk1E = gUnknown_203B28A;
+        sub_8013984(&gUnknown_203B280->unk40);
     }
-    else {
-        gUnknown_203B280 = MemoryAlloc(sizeof(struct unkStruct_203B280), 8);
-        gUnknown_203B280->mode = mode;
-        gUnknown_203B280->unk74 = param_2;
-        gUnknown_203B280->unk78 = &gUnknown_203B280->unk7C[gUnknown_203B280->unk74];
-        sub_8006518(gUnknown_203B280->unk7C);
-        gUnknown_203B280->unk7C[gUnknown_203B280->unk74] = gUnknown_80DC47C;
-        gUnknown_203B280->unk78->unk14 = gUnknown_203B280->unkDC;
-        ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B280->unk7C, 1, 1);
-        sub_8013818(&gUnknown_203B280->unk40, sub_8021664(), 10, param_2);
-        if(gUnknown_203B284 == gUnknown_203B280->mode)
-        {
-            gUnknown_203B280->unk40.menuIndex = gUnknown_203B288;
-            gUnknown_203B280->unk40.unk1E = gUnknown_203B28A;
-            sub_8013984(&gUnknown_203B280->unk40);
-        }
-        sub_8021410();
-        sub_8021494();
-        return TRUE;
-    }
+
+    sub_8021410();
+    sub_8021494();
+    return TRUE;
 }
 
 u32 sub_8021274(bool8 param_1)
@@ -164,20 +178,16 @@ u32 sub_8021274(bool8 param_1)
         sub_8013660(&gUnknown_203B280->unk40);
         return 0;
     }
-    switch(GetKeyPress(&gUnknown_203B280->unk40))
-    {
+
+    switch (GetKeyPress(&gUnknown_203B280->unk40)) {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
         case INPUT_A_BUTTON:
-            if ((gUnknown_203B280->mode == 2)  && (GetFriendAreaPrice(sub_802132C()) > gTeamInventoryRef->teamMoney)) 
-            {
+            if (gUnknown_203B280->mode == 2 && GetFriendAreaPrice(sub_802132C()) > gTeamInventoryRef->teamMoney)
                 PlayMenuSoundEffect(2);
-            }
             else
-            {
                 PlayMenuSoundEffect(0);
-            }
             return 3;
         case INPUT_START_BUTTON:
             PlayMenuSoundEffect(4);
@@ -188,9 +198,7 @@ u32 sub_8021274(bool8 param_1)
                 sub_8021494();
                 return 1;
             }
-            else {
-                return 0;
-            }
+            return 0;
     }
 }
 
@@ -199,35 +207,33 @@ u8 sub_802132C(void)
     return gUnknown_203B280->friendAreas[gUnknown_203B280->unk40.unk1E * gUnknown_203B280->unk40.unk1C + gUnknown_203B280->unk40.menuIndex];
 }
 
-void sub_8021354(bool8 param_1)
+void sub_8021354(bool8 a0)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B280->unk7C,0,0);
+    sub_800641C(gUnknown_203B280->unk7C, FALSE, FALSE);
     gUnknown_203B280->unk40.unk22 = sub_8021664();
     sub_8013984(&gUnknown_203B280->unk40);
     sub_8021410();
     sub_8021494();
-    if (param_1) {
+    if (a0)
         AddMenuCursorSprite(&gUnknown_203B280->unk40);
-    }
 }
 
 void sub_80213A0(void)
 {
-    if(gUnknown_203B280)
-    {
+    if (gUnknown_203B280) {
         gUnknown_203B284 = gUnknown_203B280->mode;
         gUnknown_203B288 = gUnknown_203B280->unk40.menuIndex;
         gUnknown_203B28A = gUnknown_203B280->unk40.unk1E;
         gUnknown_203B280->unk7C[gUnknown_203B280->unk74] = gUnknown_80DC464;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B280->unk7C, 1, 1);
+        sub_800641C(gUnknown_203B280->unk7C, TRUE, TRUE);
         MemoryFree(gUnknown_203B280);
         gUnknown_203B280 = NULL;
     }
 }
 
-NAKED
+NAKED // sub_80095E4 memes
 void sub_8021410(void)
 {
     asm_unified(
@@ -291,24 +297,23 @@ void sub_8021410(void)
 	"\tbx r0\n"
 	"\t.align 2, 0\n"
 "_08021490: .4byte gUnknown_203B280");
-
 }
 
 void sub_8021494(void)
 {
     u8 friendAreaIndex;
     s32 index;
-    u8 buffer1 [80];
-    u8 buffer2 [80];
+    u8 buffer1[80];
+    u8 buffer2[80];
 
     sub_8008C54(gUnknown_203B280->unk74);
     sub_80073B8(gUnknown_203B280->unk74);
     xxx_call_draw_string(10,0,gUnknown_80DC494,gUnknown_203B280->unk74,0); // Friend Areas
     sub_8012BC4(gUnknown_203B280->unkDC[2] * 8 + 4,0,(gUnknown_203B280->unk40).unk1E + 1,1,7,gUnknown_203B280->unk74);
 
-    for(index = 0; index < (gUnknown_203B280->unk40).unk1A; index++)
-    {
+    for (index = 0; index < (gUnknown_203B280->unk40).unk1A; index++) {
         friendAreaIndex = gUnknown_203B280->friendAreas[(gUnknown_203B280->unk40).unk1E * (gUnknown_203B280->unk40).unk1C + index];
+
         if (gUnknown_203B280->mode == 2) {
             sub_8092578(buffer1,friendAreaIndex,TRUE);
 
@@ -386,7 +391,6 @@ s32 sub_8021664(void)
     return counter;
 }
 
-
 u8 sub_8021700(u32 mode)
 {
     s32 index;
@@ -423,6 +427,8 @@ u8 sub_8021700(u32 mode)
     }
     return TRUE;
 }
+
+// split2
 
 bool8 sub_8021774(u8 friendArea, bool8 param_2, s32 param_3)
 {
@@ -466,7 +472,7 @@ void sub_8021830(void)
     {
         gUnknown_203B28C->unk7C[gUnknown_203B28C->unk74] = gUnknown_80DC4BC;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B28C->unk7C, 1, 1);
+        sub_800641C(gUnknown_203B28C->unk7C, TRUE, TRUE);
         MemoryFree(gUnknown_203B28C);
         gUnknown_203B28C = NULL;
     }
@@ -475,12 +481,12 @@ void sub_8021830(void)
 void sub_8021878(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B28C->unk7C, 1, 1);
+    sub_800641C(gUnknown_203B28C->unk7C, TRUE, TRUE);
 }
 
 void sub_8021894(void)
 {
-    u8 *string;
+    const u8 *string;
     u32 y;
     u32 x;
     s32 index;
@@ -535,7 +541,7 @@ void sub_8021A60(void)
     s32 sVar4;
     s32 iVar6;
     s32 index;
-    struct PokemonStruct *pokeStruct;
+    PokemonStruct1 *pokeStruct;
 
     gUnknown_203B28C->numPokemoninFriendArea = 0;
     for(index = 0; index < 0x10; index++)
@@ -562,7 +568,7 @@ void sub_8021A60(void)
     for(index = 0; index < NUM_MONSTERS; index++)
     {
         pokeStruct = &gRecruitedPokemonRef->pokemon[index];
-        if (((*(u8 *)&pokeStruct->unk0 & 1) != 0) &&
+        if (((u8)pokeStruct->unk0 & 1) &&
             (sVar4 = sub_8021B58(pokeStruct->speciesNum), sVar4 != -1)) {
             gUnknown_203B28C->unk30[sVar4] = 2;
         }
@@ -582,14 +588,16 @@ s32 sub_8021B58(s16 species)
   return -1;
 }
 
+// split3
+
 bool8 CreateWigglytuffShop(bool32 isAsleep)
 {
-    char *string;
-    struct OpenedFile *file;
+    u8 *string;
+    OpenedFile *file;
 
     ResetUnusedInputStruct();
-    sub_800641C(0, 1, 1);
-    gWigglytuffShop = MemoryAlloc(sizeof(struct WigglytuffShop), 8);
+    sub_800641C(NULL, TRUE, TRUE);
+    gWigglytuffShop = MemoryAlloc(sizeof(WigglytuffShop), 8);
     gWigglytuffShop->menuAction1 = 0;
     gWigglytuffShop->menuAction2 = 0;
     gWigglytuffShop->isAsleep = isAsleep;
@@ -697,13 +705,13 @@ void sub_8021D5C(void)
     
     }
     ResetUnusedInputStruct();
-    sub_800641C(gWigglytuffShop->unkD0, 1, 1);
+    sub_800641C(gWigglytuffShop->unkD0, TRUE, TRUE);
 }
 
 void UpdateWigglytuffDialogue(void)
 {
     char *string;
-    struct unkStruct_8092638 uStack_14;
+    unkStruct_8092638 uStack_14;
 
     switch(gWigglytuffShop->state) 
     {

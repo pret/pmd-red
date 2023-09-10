@@ -1,31 +1,36 @@
 #include "global.h"
 #include "bg_control.h"
+#include "bg_palette_buffer.h"
+#include "code_800558C.h"
+#include "code_8009804.h"
+#include "code_800C9CC.h"
+#include "code_80118A4.h"
+#include "code_8094F88.h"
+#include "code_8097670.h"
 #include "constants/bg_music.h"
+#include "cpu.h"
 #include "debug.h"
+#include "event_flag.h"
+#include "exclusive_pokemon.h"
 #include "file_system.h"
 #include "friend_area.h"
+#include "game_options.h"
 #include "input.h"
-#include "memory.h"
 #include "main_menu.h"
+#include "memory.h"
 #include "moves.h"
 #include "music.h"
 #include "play_time.h"
-#include "save.h"
-#include "game_options.h"
-#include "text1.h"
-#include "text2.h"
-#include "exclusive_pokemon.h"
 #include "pokemon.h"
 #include "rescue_team_info.h"
-#include "cpu.h"
-#include "code_8094F88.h"
+#include "save.h"
+#include "save_read.h"
 #include "sprite.h"
-#include "code_80118A4.h"
-#include "bg_palette_buffer.h"
+#include "text1.h"
+#include "text2.h"
 
 extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);
-extern void sub_8097670(void);
 extern void LoadGameOptions(void);
 extern void SetWindowBGColor(void);
 extern void LoadItemParameters(void);
@@ -34,9 +39,6 @@ extern void sub_800DAAC(void);
 extern void sub_800135C(void);
 extern void xxx_script_related_8001334(u32);
 extern void sub_80015C0(u32, u32);
-extern u32 sub_8001658(u32, u32);
-extern void sub_800A8F8(u32);
-extern void sub_80097B0(void);
 extern void LoadTitleScreen(void);
 extern void sub_80095CC(u32, u32);
 extern s32 GetFirstIndexofMailType(u8);
@@ -44,20 +46,17 @@ extern void nullsub_33(void);
 extern u32 sub_80009D0(u32);
 
 extern void xxx_draw_string_80144C4(void);
-extern void sub_8005838(u32, u32);
 extern void nullsub_8(u32);
 extern void sub_80060EC(void);
-extern void sub_800CB20(void);
 extern void TransferBGPaletteBuffer(void);
 extern void xxx_call_update_bg_vram(void);
-extern void sub_8009908(void);
 extern void xxx_call_update_bg_sound_input(void);
 
 extern u32 gUnknown_203B03C;
 extern u16 gUnknown_2026E4E;
 extern s32 gUnknown_2000A80;
-extern struct OpenedFile *gTitlePaletteFile;
-extern struct GameOptions *gGameOptionsRef;
+extern OpenedFile *gTitlePaletteFile;
+extern GameOptions *gGameOptionsRef;
 
 extern char gPMDBuildVersion[];
 
@@ -110,7 +109,7 @@ void GameLoop(void)
         xxx_update_some_bg_tiles(0);
         sub_80097B0();
         sub_800CDA8(2);
-        sub_800641C(0, 1, 1);
+        sub_800641C(NULL, TRUE, TRUE);
         gUnknown_2026E4E = 0x1000;
         LoadTitleScreen();
         SetBG2RegOffsets(0, 0);
@@ -192,7 +191,7 @@ void GameLoop(void)
 void xxx_update_stuff(u32 r0)
 {
     xxx_draw_string_80144C4();
-    sub_8005838(0, 0);
+    sub_8005838(NULL, 0);
     nullsub_8(gGameOptionsRef->unkA);
     sub_8005180();
     sub_80060EC();

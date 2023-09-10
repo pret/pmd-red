@@ -20,7 +20,7 @@
 #include "map.h"
 #include "tile_types.h"
 
-extern void ShowVisualFlags(struct Entity *r0);
+extern void ShowVisualFlags(Entity *r0);
 
 const u8 gDirectionBitMasks_2[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 const u8 gDirectionBitMasks_3[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
@@ -62,7 +62,7 @@ const u8 gTargetingData[3][2][2][2] = {
     }
 };
 
-bool8 sub_8070F3C(struct Entity * pokemon, struct Position *pos, s32 direction)
+bool8 sub_8070F3C(Entity * pokemon, Position *pos, s32 direction)
 {
   u8 terrain;
   struct Tile *tile;
@@ -107,7 +107,7 @@ bool8 sub_8070F3C(struct Entity * pokemon, struct Position *pos, s32 direction)
   return FALSE;
 }
 
-bool8 sub_8070F14(struct Entity * pokemon, s32 direction)
+bool8 sub_8070F14(Entity * pokemon, s32 direction)
 {
   struct Tile *tile;
   
@@ -125,7 +125,7 @@ bool8 sub_8070F14(struct Entity * pokemon, s32 direction)
   return FALSE;
 }
 
-bool8 sub_8070F80(struct Entity * pokemon, s32 direction)
+bool8 sub_8070F80(Entity * pokemon, s32 direction)
 {
   u8 terrain;
   struct Tile *tile;
@@ -170,7 +170,7 @@ bool8 sub_8070F80(struct Entity * pokemon, s32 direction)
   return FALSE;
 }
 
-bool8 sub_8071058(struct Entity * pokemon, s32 direction)
+bool8 sub_8071058(Entity * pokemon, s32 direction)
 {
   u8 terrain;
   struct Tile *tile;
@@ -215,7 +215,7 @@ bool8 sub_8071058(struct Entity * pokemon, s32 direction)
   return FALSE;
 }
 
-bool8 CanAttackInDirection(struct Entity *pokemon, s32 direction)
+bool8 CanAttackInDirection(Entity *pokemon, s32 direction)
 {
     u8 crossableTerrain = GetCrossableTerrain(pokemon->info->id);
     struct Tile *tile;
@@ -262,7 +262,7 @@ bool8 CanAttackInDirection(struct Entity *pokemon, s32 direction)
     return FALSE;
 }
 
-bool8 CanAIMonsterMoveInDirection(struct Entity *pokemon, s32 direction, bool8 *pokemonInFront)
+bool8 CanAIMonsterMoveInDirection(Entity *pokemon, s32 direction, bool8 *pokemonInFront)
 {
     u8 crossableTerrain = GetCrossableTerrain(pokemon->info->id);
     struct Tile *frontTile, *currentTile;
@@ -332,7 +332,7 @@ bool8 CanAIMonsterMoveInDirection(struct Entity *pokemon, s32 direction, bool8 *
     return FALSE;
 }
 
-bool8 IsAtJunction(struct Entity *pokemon)
+bool8 IsAtJunction(Entity *pokemon)
 {
     u32 crossableTerrain = GetCrossableTerrain(pokemon->info->id);
     if (!IsCurrentFixedRoomBossFight())
@@ -352,7 +352,7 @@ bool8 IsAtJunction(struct Entity *pokemon)
     }
     if (crossableTerrain == CROSSABLE_TERRAIN_WALL)
     {
-        struct EntityInfo *pokemonInfo = pokemon->info;
+        EntityInfo *pokemonInfo = pokemon->info;
         pokemonInfo->mobileTurnTimer += DungeonRandInt(100);
         if (pokemonInfo->mobileTurnTimer < 200)
         {
@@ -392,7 +392,7 @@ bool8 IsAtJunction(struct Entity *pokemon)
     return TRUE;
 }
 
-bool8 ShouldAvoidFirstHit(struct Entity *pokemon, bool8 forceAvoid)
+bool8 ShouldAvoidFirstHit(Entity *pokemon, bool8 forceAvoid)
 {
     if (!HasTactic(pokemon, TACTIC_AVOID_THE_FIRST_HIT))
         return FALSE;
@@ -401,7 +401,7 @@ bool8 ShouldAvoidFirstHit(struct Entity *pokemon, bool8 forceAvoid)
     return TRUE;
 }
 
-bool8 ShouldMonsterRunAway(struct Entity *pokemon)
+bool8 ShouldMonsterRunAway(Entity *pokemon)
 {
     if (!EntityExists(pokemon))
     {
@@ -409,7 +409,7 @@ bool8 ShouldMonsterRunAway(struct Entity *pokemon)
     }
     else
     {
-        struct EntityInfo *pokemonInfo = pokemon->info;
+        EntityInfo *pokemonInfo = pokemon->info;
         if (pokemonInfo->terrifiedTurns != 0)
         {
             return TRUE;
@@ -435,7 +435,7 @@ bool8 ShouldMonsterRunAway(struct Entity *pokemon)
     }
 }
 
-bool8 ShouldMonsterRunAwayAndShowEffect(struct Entity *pokemon, bool8 showRunAwayEffect)
+bool8 ShouldMonsterRunAwayAndShowEffect(Entity *pokemon, bool8 showRunAwayEffect)
 {
     if (ShouldMonsterRunAway(pokemon))
     {
@@ -445,11 +445,11 @@ bool8 ShouldMonsterRunAwayAndShowEffect(struct Entity *pokemon, bool8 showRunAwa
     return FALSE;
 }
 
-void CheckRunAwayVisualFlag(struct Entity *pokemon, bool8 showRunAwayEffect)
+void CheckRunAwayVisualFlag(Entity *pokemon, bool8 showRunAwayEffect)
 {
   bool8 cVar1;
-  struct EntityInfo *iVar2;
-  struct EntityInfo *iVar3;
+  EntityInfo *iVar2;
+  EntityInfo *iVar3;
   iVar2 = pokemon->info;
   iVar3 = iVar2;
 
@@ -460,10 +460,10 @@ void CheckRunAwayVisualFlag(struct Entity *pokemon, bool8 showRunAwayEffect)
   }
 }
 
-u8 CanTarget(struct Entity *pokemon, struct Entity *targetPokemon, bool8 ignoreInvisible, bool8 checkPetrified)
+u8 CanTarget(Entity *pokemon, Entity *targetPokemon, bool8 ignoreInvisible, bool8 checkPetrified)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
-    struct EntityInfo *targetData = targetPokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *targetData = targetPokemon->info;
     u8 targetingDecoy;
     u8 pokemonTargetingDecoy;
     bool8 pokemonIsEnemy;
@@ -526,7 +526,7 @@ u8 CanTarget(struct Entity *pokemon, struct Entity *targetPokemon, bool8 ignoreI
     return gTargetingData[targetingDecoy][pokemonIsEnemy][targetIsEnemy][targetIsDecoy];
 }
 
-static inline bool8 JoinLocationCannotUseItems_1(struct EntityInfo *pokemonInfo)
+static inline bool8 JoinLocationCannotUseItems_1(EntityInfo *pokemonInfo)
 {
     if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
     {
@@ -539,11 +539,11 @@ static inline bool8 JoinLocationCannotUseItems_1(struct EntityInfo *pokemonInfo)
     return FALSE;
 }
 
-u8 sub_807167C(struct Entity * pokemon, struct Entity * target)
+u8 sub_807167C(Entity * pokemon, Entity * target)
 {
   bool8 cannotUseItems;
-  struct EntityInfo * targetEntityInfo;
-  struct EntityInfo * pokemonEntityData;
+  EntityInfo * targetEntityInfo;
+  EntityInfo * pokemonEntityData;
 
   pokemonEntityData = pokemon->info;
   targetEntityInfo = target->info;

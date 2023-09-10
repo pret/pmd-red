@@ -5,37 +5,38 @@
 #include "text1.h"
 #include "text2.h"
 
-EWRAM_DATA struct UnkTextStruct1 gUnknown_2027370[4];
-EWRAM_DATA u8 *gCharmaps[2];
-EWRAM_DATA s16 gCharacterSpacing;
-EWRAM_DATA u8 gUnknown_20274A5;
-EWRAM_DATA u32 gCurrentCharmap;
-EWRAM_DATA vu32 gUnknown_20274B0;
-EWRAM_DATA u32 gUnknown_20274B4[0xEC0];
-EWRAM_DATA struct OpenedFile *gCharmapFiles[2];
-EWRAM_DATA struct UnkTextStruct2 gUnknown_202AFC0[4];
-EWRAM_DATA u32 gUnknown_202B020;
-EWRAM_DATA u32 gUnknown_202B024;
-EWRAM_DATA u32 gUnknown_202B028[2];
-EWRAM_DATA u32 gUnknown_202B030; // Some text color info is stored; retrieve via "& 0xF"
-EWRAM_DATA u8 gUnknown_202B034;
-EWRAM_DATA u16 gUnknown_202B038[4][32][32];
+extern UnkTextStruct1 gUnknown_2027370[4];
+extern u8 *gCharmaps[2];
+extern s16 gCharacterSpacing;
+extern u8 gUnknown_20274A5;
+extern u32 gCurrentCharmap;
+extern vu32 gUnknown_20274B0;
+extern u32 gUnknown_20274B4[0xEC0];
+extern OpenedFile *gCharmapFiles[2]; // 202AFB4
+// u32 unused // 202AFBC
+extern UnkTextStruct2 gUnknown_202AFC0[4];
+extern u32 gUnknown_202B020;
+extern u32 gUnknown_202B024;
+extern u32 gUnknown_202B028[2];
+extern u32 gUnknown_202B030; // Some text color info is stored; retrieve via "& 0xF"
+extern u8 gUnknown_202B034;
+extern u16 gUnknown_202B038[4][32][32];
 
 // ?
 extern s16 gUnknown_3000E94[];
 
 // data.s
-extern const struct UnkTextStruct2 gUnknown_80B857C[4];
+extern const UnkTextStruct2 gUnknown_80B857C[4];
+extern const u8 gKanjiA_file_string[]; // 80B87B4
+extern const u8 gKanjiB_file_string[]; // 80B87BC
 extern const u32 gUnknown_80B87C4[8];
 extern const u32 gUnknown_80B87E4[8];
 extern const u32 gUnknown_80B8804[4];
 extern const u32 gUnknown_80B8814[];
-extern const char gKanjiA_file_string[];
-extern const char gKanjiB_file_string[];
 // system_sbin.s
 extern const struct FileArchive gSystemFileArchive;
 
-static void sub_8006438(const struct UnkTextStruct2 *, u8, u8, struct UnkTextStruct2_sub *);
+static void sub_8006438(const UnkTextStruct2 *, bool8, bool8, UnkTextStruct2_sub *);
 
 void LoadCharmaps(void)
 {
@@ -81,7 +82,7 @@ void LoadCharmaps(void)
 u32 xxx_update_some_bg_tiles(u32 a0)
 {
     u32 r5 = gUnknown_20274B0;
-    u32 *r4 = (u32 *)(VRAM + 0x4f40);
+    u32 *r4 = (u32 *)(VRAM + 0x4F40);
     const u32 *r2;
     gUnknown_20274B0 = a0;
 
@@ -131,24 +132,25 @@ void sub_80063D8(int a0)
         retval = 0x88888888;
     }
     else {
-        retval = (a0 & 0xf) | ((a0 & 0xf) << 4);
-        retval |= ((a0 & 0xf) << 8);
-        retval |= ((a0 & 0xf) << 12);
-        retval |= ((a0 & 0xf) << 16);
-        retval |= ((a0 & 0xf) << 20);
-        retval |= ((a0 & 0xf) << 24);
-        retval |= ((a0 & 0xf) << 28);
+        retval = (a0 & 0xF) | ((a0 & 0xF) << 4); // Must be one line for matching
+        retval |= ((a0 & 0xF) << 8);
+        retval |= ((a0 & 0xF) << 12);
+        retval |= ((a0 & 0xF) << 16);
+        retval |= ((a0 & 0xF) << 20);
+        retval |= ((a0 & 0xF) << 24);
+        retval |= ((a0 & 0xF) << 28);
     }
     gUnknown_202B030 = retval;
 }
 
-void sub_800641C(struct UnkTextStruct2 *a0, u8 a1, u8 a2)
+// TODO: Move sub_800641C and sub_8006438 to text2.c ? data.s shows text1 and text2 are merged somehow but not fully
+void sub_800641C(UnkTextStruct2 *a0, bool8 a1, bool8 a2)
 {
-    struct UnkTextStruct2_sub r3 = {0, 0};
+    UnkTextStruct2_sub r3 = {0, 0};
     sub_8006438(a0, a1, a2, &r3);
 }
 
-static void sub_8006438(const struct UnkTextStruct2 *a0, u8 a1, u8 a2, struct UnkTextStruct2_sub *a3)
+static void sub_8006438(const UnkTextStruct2 *a0, bool8 a1, bool8 a2, UnkTextStruct2_sub *a3)
 {
     s32 i;
     u32 r9;

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "constants/friend_area.h"
 #include "constants/item.h"
-#include "item.h"
+#include "items.h"
 #include "event_flag.h"
 #include "debug.h"
 #include "memory.h"
@@ -9,7 +9,7 @@
 #include "rescue_team_info.h"
 #include "other_random.h"
 #include "friend_area.h"
-#include "team_inventory.h"
+#include "code_80972F4.h"
 #include "code_8097670.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
@@ -36,25 +36,27 @@ extern u8 gUnknown_80B7144[];
 extern u8 *gUnknown_80B714C[];
 extern u8 *gUnknown_80B71A0[];
 extern u8 gUnknown_80B72CC[];
-extern struct DebugLocation gUnknown_80B7318;
+extern DebugLocation gUnknown_80B7318;
 extern u8 gUnknown_80B7324[];
-extern struct DebugLocation gUnknown_80B7350;
+extern DebugLocation gUnknown_80B7350;
 extern u8 gUnknown_80B735C[];
 extern u8 gUnknown_80B7378[];
 extern u8 gUnknown_80B7388[];
 
-void FatalError(struct DebugLocation *, const char *, ...) __attribute__((noreturn));
-extern u8 sub_80973F4(u32);
+void FatalError(DebugLocation *, const char *, ...) __attribute__((noreturn));
 extern bool8 HasCompletedAllMazes(void);
 extern void sub_8097418(u32, u32);
 extern void sub_800160C(struct UnkEventStruct *r0, u32 r1, u32 r2);
 extern u8 sub_8002658(s16);
-extern u32 sub_8001658(u32, s32);
 extern void sub_80018D8(u32, u32, u32);
 extern void sub_809733C(u32, u32);
 extern void sub_80973A8(u32, u32);
 extern void sub_800199C(u32, s32, u32, s32);
 extern s32 sub_8001784(u32, s32, u16);
+
+
+// code_80972F4.h (read comment)
+extern bool8 sub_80973F4(s16);
 
 u8 *sub_8001A74(s16 param_1)
 {

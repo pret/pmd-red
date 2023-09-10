@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_803B050.h"
 #include "constants/colors.h"
 #include "constants/wonder_mail.h"
 #include "pokemon.h"
@@ -12,21 +13,7 @@
 #include "code_800D090.h"
 #include "menu_input.h"
 #include "wonder_mail.h"
-
-struct unkStruct_80E9920
-{
-    s16 unkA;
-    s16 unkB;
-    u8 *text;
-};
-
-struct unkStruct_80E9F8C
-{
-    s16 unkA;
-    s16 unkB;
-    u8 *text1;
-    u8 *text2;
-};
+#include "dungeon.h"
 
 extern s16 gUnknown_80E80E0[];
 extern s16 gUnknown_80E8126[];
@@ -79,30 +66,28 @@ extern u8 *gUnknown_80E910C[];
 extern u8 *gUnknown_80E8C98[];
 extern u8 gUnknown_80E886C[];
 extern u8 *gUnknown_80EAE5C[];
-extern struct unkStruct_80E9F8C gUnknown_80E9F8C[10];
-extern struct unkStruct_80E9920 gUnknown_80E9920[10];
+extern unkStruct_80E9F8C gUnknown_80E9F8C[10];
+extern unkStruct_80E9920 gUnknown_80E9920[10];
 extern u8 *gUnknown_80E8B94[];
 
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
-extern struct PokemonStruct *sub_808D378(void);
+extern PokemonStruct1 *sub_808D378(void);
 
 s32 sub_8016028(void);
 extern void PrintDungeonLocationtoBuffer(u8 *, void *);
-extern void PrintYellowDungeonNametoBuffer(u8 *, void *);
-extern u8 sub_803C1D0(struct WonderMailSub *, u8);
+extern u8 sub_803C1D0(WonderMailSub *, u8);
 extern u8 *sub_803C1F0(u8);
-void sub_803D414(u8 *, struct WonderMail *);
+void sub_803D414(u8 *, WonderMail *);
 
 void sub_803B6B0(s32 x, s32 y, u8 index, u32 param_4)
 {
     xxx_call_draw_string(x,y,gUnknown_80E8B94[index],param_4,0);
 }
 
-void CreateRescueTitle(struct unkStruct_802C39C *param_1)
+void CreateRescueTitle(unkStruct_802C39C *param_1)
 {
-    char buf_1 [200];
-    char buf_2 [20];
-    char buf_3 [100];
+    u8 buf_1[200];
+    u8 buf_2[20];
+    u8 buf_3[100];
     u8 *monName;
     u8 uVar1;
 
@@ -121,16 +106,16 @@ void CreateRescueTitle(struct unkStruct_802C39C *param_1)
             xxx_call_draw_string(0x15,param_1->y,gMedichamMission,param_1->unk0[0],0);
             break;
         case 7:
-            PrintYellowDungeonNametoBuffer(buf_1, param_1->unk8);
+            PrintYellowDungeonNametoBuffer(buf_1, &param_1->unk8->dungeon);
             xxx_call_draw_string(0x15,param_1->y,buf_1,param_1->unk0[0],0);
             break;
         case 12:
-            sub_8090DC4(gUnknown_202DE58,param_1->targetItem,0);
+            BufferItemName(gUnknown_202DE58,param_1->targetItem,NULL);
             sprintfStatic(buf_1,gUnknown_80E8830,gUnknown_202DE58);
             xxx_call_draw_string(0x15,param_1->y,buf_1,param_1->unk0[0],0);
             break;
         case 11:
-            sub_8090DC4(gUnknown_202DE58,param_1->targetItem,0);
+            BufferItemName(gUnknown_202DE58,param_1->targetItem,NULL);
             sprintfStatic(buf_1,gUnknown_80E8848,gUnknown_202DE58);
             xxx_call_draw_string(0x15,param_1->y,buf_1,param_1->unk0[0],0);
             break;
@@ -197,7 +182,7 @@ void CreateRescueTitle(struct unkStruct_802C39C *param_1)
     xxx_call_draw_string(0xb4,param_1->y,sub_803C1F0(uVar1),param_1->unk0[0],0);
 }
 
-void CreateRescueDescription(struct unkStruct_802C39C *param_1)
+void CreateRescueDescription(unkStruct_802C39C *param_1)
 {
     u8 uVar3;
     int x;
@@ -231,12 +216,12 @@ void CreateRescueDescription(struct unkStruct_802C39C *param_1)
             xxx_call_draw_string(10,y,gMedichamMissionDescription,param_1->unk0[0],0);
             break;
         case 4:
-            sub_8090DC4(gUnknown_202DE58,param_1->targetItem,0);
+            BufferItemName(gUnknown_202DE58,param_1->targetItem,NULL);
             sprintfStatic(buf_1,gUnknown_80E8968,gUnknown_202DE58);
             xxx_call_draw_string(10,y,buf_1,param_1->unk0[0],0);
             break;
         case 5:
-            sub_8090DC4(gUnknown_202DE58,param_1->targetItem,0);
+            BufferItemName(gUnknown_202DE58,param_1->targetItem,NULL);
             sprintfStatic(buf_1,gUnknown_80E89B0,gUnknown_202DE58);
             xxx_call_draw_string(10,y,buf_1,param_1->unk0[0],0);
             break;
@@ -262,7 +247,7 @@ void CreateRescueDescription(struct unkStruct_802C39C *param_1)
         case 16: {
             u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
             u8 bVar3 = param_1->unk8->seed + param_1->unk8->dungeon.floor;
-            sub_8090DC4(gUnknown_202DE58,param_1->targetItem,0);
+            BufferItemName(gUnknown_202DE58,param_1->targetItem,NULL);
             sprintfStatic(buf_1,gUnknown_80EB3F8[(bVar2 % 0x16)],gUnknown_202DE58);
             xxx_call_draw_string(10,y,buf_1,param_1->unk0[0],0);
             y += 0xC;
@@ -343,12 +328,12 @@ void CreateRescueDescription(struct unkStruct_802C39C *param_1)
             xxx_call_draw_string(0x44,y,gUnknown_80E8AEC,param_1->unk0[0],0); // Friend Rescue
             break;
         case MISSION_TYPE_DELIVER_ITEM:
-            sub_8090DC4(gUnknown_202DE58,param_1->targetItem,0);
+            BufferItemName(gUnknown_202DE58,param_1->targetItem,NULL);
             sprintfStatic(buf_1,gUnknown_80E8AFC,gUnknown_202DE58); // Deliver #C4%s#R. 
             xxx_call_draw_string(0x44,y,buf_1,param_1->unk0[0],0);
             break;
         case MISSION_TYPE_FIND_ITEM:
-            sub_8090DC4(gUnknown_202DE58,param_1->targetItem,0);
+            BufferItemName(gUnknown_202DE58,param_1->targetItem,NULL);
             sprintfStatic(buf_1,gUnknown_80E8B10,gUnknown_202DE58); // Find #C4%s#R.
             xxx_call_draw_string(0x44,y,buf_1,param_1->unk0[0],0);
             break;
@@ -408,7 +393,7 @@ void CreateRescueDescription(struct unkStruct_802C39C *param_1)
             break;
         case 2: // Item
         case 3: // Item + ?
-            sub_8090DC4(gUnknown_202DE58,param_1->rewardItem,0);
+            BufferItemName(gUnknown_202DE58,param_1->rewardItem,NULL);
             sprintfStatic(buf_1,gMissionRewardText[param_1->rewardType],gUnknown_202DE58);
             xxx_call_draw_string(0x44,y,buf_1,param_1->unk0[0],0);
             break;
@@ -470,7 +455,7 @@ bool8 sub_803C0DC(s16 species)
 
 bool8 sub_803C110(s16 index)
 {
-  struct PokemonStruct *pokeStruct;
+  PokemonStruct1 *pokeStruct;
   s16 *psVar5;
   s16 *psVar6;
   s32 species_s32;

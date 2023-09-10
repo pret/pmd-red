@@ -4,6 +4,6 @@
 #include "constants/move.h"
 #include "dungeon_entity.h"
 
-s16 GetMoveTargetAndRangeForPokemon(struct Entity *pokemon, struct Move *move, bool32 isAI);
+s16 GetMoveTargetAndRangeForPokemon(Entity *pokemon, Move *move, bool32 isAI);
 
 #endif

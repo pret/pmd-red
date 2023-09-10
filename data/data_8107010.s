@@ -1,7 +1,10 @@
         .section .rodata
 
         .string "pksdir0\0"
+
         .string "pksdir0\0"
+
+@ START code_80718D8
 
 	.global gUnknown_8107010
 gUnknown_8107010: @ 8107010
@@ -9,47 +12,77 @@ gUnknown_8107010: @ 8107010
 
 	.global gUnknown_8107018
 gUnknown_8107018: @ 8107018
-@ replacing .incbin "baserom.gba", 0x107018, 0x160
 .4byte gUnknown_810702C
 .4byte gUnknown_8107028
 .4byte gUnknown_8107024
+
 .global gUnknown_8107024
 gUnknown_8107024:
 .byte 0x0a, 0x00, 0x00, 0x00
+
 .global gUnknown_8107028
 gUnknown_8107028:
 .byte 0x23, 0x57, 0x0a, 0x00
+
 .global gUnknown_810702C
 gUnknown_810702C:
 .byte 0x00, 0x00, 0x00, 0x00
 .string "pksdir0\0"
+
+@ END code_80718D8
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
+@ START code_807CD9C
+
 .global gUnknown_81070E8
 gUnknown_81070E8:
 .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00
 .byte 0x01, 0x00, 0xff, 0xff, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00
 .byte 0xff, 0xff, 0x01, 0x00, 0x63, 0x00, 0x63, 0x00
+
 .global gUnknown_8107110
 gUnknown_8107110:
 .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00
@@ -62,36 +95,52 @@ gUnknown_8107110:
 
 	.global gUnknown_8107178
 gUnknown_8107178: @ 8107178
-@ replacing .incbin "baserom.gba", 0x107178, 0x5C
 .4byte gUnknown_81070E8
 .4byte gUnknown_81070E8
 .4byte gUnknown_8107110
 .string "pksdir0\0"
+
+@ END code_807CD9C
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
 
 	.global gUnknown_81071D4
 gUnknown_81071D4: @ 81071D4
-@ replacing .incbin "baserom.gba", 0x1071D4, 0xC
 .byte 0x82, 0xe2, 0x82, 0xe6, 0x82, 0xa2, 0x97, 0x6c, 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_81071E0
 gUnknown_81071E0: @ 81071E0
-@ replacing .incbin "baserom.gba", 0x1071E0, 0x44
 .byte 0x82, 0xdd, 0x82, 0xb3, 0x82, 0xab, 0x97, 0x6c, 0x00, 0x00, 0x00, 0x00
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
+@ START code_808417C #1
+
 .byte 0x70, 0x6b, 0x73, 0x64
 .byte 0x69, 0x72, 0x30, 0x00
 
@@ -101,9 +150,10 @@ gUnknown_8107224: @ 8107224
 .byte 0x3f, 0x3f, 0x3f, 0x3f, 0x3f, 0x3f, 0x00, 0x00
 .string "pksdir0\0"
 
+@ END code_808417C #1
+
 	.global gUnknown_8107234
 gUnknown_8107234: @ 8107234
-@ replacing .incbin "baserom.gba", 0x107234, 0xE0
 .byte 0x01, 0x01, 0x00, 0x02, 0x01, 0x03, 0x00, 0x00, 0x02, 0x04, 0x02, 0x05, 0x03, 0x06, 0x00, 0x00
 .byte 0x03, 0x07, 0x04, 0x08, 0x05, 0x09, 0x00, 0x00, 0x04, 0x0a, 0x06, 0x0b, 0x07, 0x0c, 0x00, 0x00
 .byte 0x05, 0x0d, 0x08, 0x0e, 0x09, 0x0f, 0x00, 0x00, 0x06, 0x10, 0x0a, 0x11, 0x0a, 0x11, 0x00, 0x00
@@ -121,7 +171,6 @@ gUnknown_8107234: @ 8107234
 
 	.global gUnknown_8107314
 gUnknown_8107314: @ 8107314
-@ replacing .incbin "baserom.gba", 0x107314, 0x44
 .byte 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0x01, 0x00, 0x00, 0x00, 0xfe, 0xff, 0xff, 0xff
 .byte 0x02, 0x00, 0x00, 0x00, 0xfd, 0xff, 0xff, 0xff, 0x03, 0x00, 0x00, 0x00, 0xfc, 0xff, 0xff, 0xff
 .byte 0x04, 0x00, 0x00, 0x00, 0xfc, 0xff, 0xff, 0xff, 0x04, 0x00, 0x00, 0x00, 0xfc, 0xff, 0xff, 0xff
@@ -130,20 +179,18 @@ gUnknown_8107314: @ 8107314
 
 	.global gUnknown_8107358
 gUnknown_8107358: @ 8107358
-@ replacing .incbin "baserom.gba", 0x107358, 0x1C
 .byte 0x04, 0x03, 0x02, 0x03, 0x04, 0x05, 0x06, 0x05, 0x04, 0x03, 0x02, 0x03, 0x04, 0x05, 0x06, 0x05
 .byte 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x05, 0x06, 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_8107374
 gUnknown_8107374: @ 8107374
-@ replacing .incbin "baserom.gba", 0x107374, 0xC
 .byte 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
 	.global gUnknown_8107380
 gUnknown_8107380: @ 8107380
-@ replacing .incbin "baserom.gba", 0x107380, 0x1C
 .byte 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 .string "pksdir0\0"
+
 .string "pksdir0\0"
 
 	.global gUnknown_810739C
@@ -1327,20 +1374,17 @@ gUnknown_81097C4: @ 81097C4
 
 	.global gUnknown_81097C5
 gUnknown_81097C5: @ 81097C5
-        @ replacing .incbin "baserom.gba", 0x001097c5, 0x1b
         .byte 0x9f, 0x83, 0xa0, 0x83, 0xa1, 0x83, 0xa2, 0x83, 0xa3, 0x83, 0xa4, 0x83, 0xa5, 0x83, 0xa6, 0x83, 0xa7, 0x83, 0xa8, 0x00, 0x00, 0x00, 0x00, 0xc4, 0x97, 0x10, 0x08
 
 	.global gGummiStatBoostLUT
 gGummiStatBoostLUT: @ 81097E0
-        @ replacing .incbin "baserom.gba", 0x001097e0, 0x8
-        .2byte 0x0001
-        .2byte 0x0002
-        .2byte 0x0004
-        .2byte 0x0008
+        .2byte 1
+        .2byte 2
+        .2byte 4
+        .2byte 8
 
 	.global gUnknown_81097E8
 gUnknown_81097E8: @ 81097E8
-        @ replacing .incbin "baserom.gba", 0x001097e8, 0x10
         .byte 0x10, 0x00, 0x00, 0x00
         .byte 0x12, 0x00, 0x00, 0x00
         .byte 0x14, 0x00, 0x00, 0x00
@@ -1348,14 +1392,13 @@ gUnknown_81097E8: @ 81097E8
 
 	.global gUnknown_81097F8
 gUnknown_81097F8: @ 81097F8
-        @ replacing .incbin "baserom.gba", 0x001097f8, 0x18
         .byte 0x11, 0x00, 0x00, 0x00
         .byte 0x13, 0x00, 0x00, 0x00
         .byte 0x15, 0x00, 0x00, 0x00
         .byte 0x17, 0x00, 0x00, 0x00
-        .string "pksdir0\0"
+.string "pksdir0\0"
 
-
+@ START rescue_team_info.c
 	.global gRescueRankMaxPoints
 gRescueRankMaxPoints: @ 8109810
         .4byte 50
@@ -1369,11 +1412,11 @@ gRescueRankMaxPoints: @ 8109810
 	.global gTeamNamePlaceholder
 gTeamNamePlaceholder: @ 810982C
         .string "Pokémon\0"
-        .string "pksdir0\0"
+.string "pksdir0\0"
+@ END rescue_team_info.c
 
 	.global gUnknown_810983C
 gUnknown_810983C: @ 810983C
-@ replacing .incbin "baserom.gba", 0x10983C, 0x68
 .4byte gUnknown_8109888
 .4byte gUnknown_8109884
 .4byte gUnknown_8109880
@@ -1415,25 +1458,27 @@ gUnknown_8109884:
 gUnknown_8109888:
 .byte 0x82, 0x4f, 0x00, 0x00
 .string "pksdir0\0"
+
 .string "pksdir0\0"
+
 .string "pksdir0\0"
 
-	.global gUnknown_81098A4
-gUnknown_81098A4: @ 81098A4
-	.string "{COLOR_2}"
-        .byte 0x4
-        .string "%s{END_COLOR_TEXT_2}\0"
+@ START friend_area.c
+
+        .global sUnknown_81098A4
+sUnknown_81098A4: @ 81098A4
+        .string "{COLOR_2 UNK_COLOR_4}%s{END_COLOR_TEXT_2}\0"
         .align 2,0
 
-	.global gUnknown_81098AC
-gUnknown_81098AC: @ 81098AC
-        .string "%s#=%c{COLOR_1}"
-        .byte 0x4
-        .string "%s{END_COLOR_TEXT_1}\0"
+        .global sUnknown_81098AC
+sUnknown_81098AC: @ 81098AC
+        .string "%s#=%c{COLOR_1 UNK_COLOR_4}%s{END_COLOR_TEXT_1}\0"
         .align 2,0
-        .string "pksdir0"
-        .align 2,0
+.string "pksdir0"
 
+@ END friend_area.c
+
+        .align 2,0
 	.global gUnknown_81098C4
 gUnknown_81098C4: @ 81098C4
         .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00

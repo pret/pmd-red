@@ -2,7 +2,7 @@
 #define GUARD_INPUT_H
 
 // size: 0x10
-struct Inputs
+typedef struct Inputs
 {
     /* 0x0 */ u16 held;
     /* 0x2 */ u16 pressed;
@@ -10,21 +10,19 @@ struct Inputs
     /* 0x6 */ u16 shortPress;
     /* 0x8 */ u16 heldDpad;
     /* 0xC */ s32 repeatTimerDpad;
-};
-
-extern struct Inputs gRealInputs;
+} Inputs;
 
 // size: 0x8
-struct InputTimers
+typedef struct InputTimers
 {
     /* 0x0 */ s16 holdTimerB;
     /* 0x2 */ s16 holdTimerR;
     u16 unk4;
     u16 unk6;
-};
+} InputTimers;
 
 // size: 0x2C
-struct UnusedInputStruct
+typedef struct UnusedInputStruct
 {
     u16 unk0;
     u16 unk2;
@@ -47,10 +45,10 @@ struct UnusedInputStruct
     u16 unk26;
     u8 unk28;
     u8 unk29;
-};
+} UnusedInputStruct;
 
 // size: 0xC
-struct MenuInputStructSub
+typedef struct MenuInputStructSub
 {
     u8 unk0;
     /* 0x1 */ u8 a_button;
@@ -60,20 +58,20 @@ struct MenuInputStructSub
     u8 fill5[3];
     u16 unk8;
     s16 unkA;
-};
+} MenuInputStructSub;
 
 // size: 0x34
-struct MenuInputStruct
+typedef struct MenuInputStruct
 {
     s32 unk0;
     u16 unk4;
     s16 unk6;
-    s16 unk8; // Maybe struct Position
+    s16 unk8; // Maybe Position
     s16 unkA;
-    s16 unkC; // Maybe struct Position
+    s16 unkC; // Maybe Position
     s16 unkE;
     u32 unk10;
-    s16 unk14; // Maybe struct Position
+    s16 unk14; // Maybe Position
     s16 unk16;
     /* 0x18 */ s16 menuIndex;
     s16 unk1A;
@@ -83,21 +81,19 @@ struct MenuInputStruct
     s16 unk22;
     u16 unk24;
     u16 unk26;
-    struct MenuInputStructSub unk28;
-};
+    MenuInputStructSub unk28;
+} MenuInputStruct;
 
+extern Inputs gRealInputs;
 
 void InitInput(void);
 void LoadBufferedInputs(void);
-u8 sub_80048B8(void);
-u8 sub_80048BC(void);
-u8 sub_80048C0(void);
-u8 sub_80048C4(void);
-u8 sub_80048C8(void);
-u8 sub_80048CC(void);
 void ResetRepeatTimers(void);
-void UnpressButtons(void);
 void ResetUnusedInputStruct(void);
+void UnpressButtons(void);
 void UpdateInput(void);
+
+bool8 sub_80048BC(void);
+bool8 sub_80048C8(void);
 
 #endif // GUARD_INPUT_H

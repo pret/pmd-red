@@ -1,8 +1,9 @@
 #include "global.h"
 #include "constants/communication_error_codes.h"
 #include "save.h"
+#include "save_write.h"
 #include "pokemon.h"
-#include "item.h"
+#include "items.h"
 #include "code_8094F88.h"
 #include "wonder_mail.h"
 #include "memory.h"
@@ -10,17 +11,16 @@
 #include "text1.h"
 #include "text2.h"
 #include "text_util.h"
-#include "team_inventory.h"
+#include "code_801B3C0.h"
 #include "code_800D090.h"
 #include "menu_input.h"
 #include "code_80130A8.h"
 #include "main_menu.h"
 #include "code_801C620.h"
-#include "code_801B3C0.h"
 #include "cpu.h"
 #include "code_80118A4.h"
 
-extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
+extern WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 
 #define THANK_YOU_MAIL_MAIN_MENU 0
 #define ANYTHING_ELSE_THANK_YOU_MAIN_MENU 1
@@ -50,7 +50,7 @@ extern struct WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 #define PROCESS_THANK_YOU_PASSWORD 0x27
 #define THANK_YOU_PASSWORD_WRONG 0x28
 
-const struct Item gUnknown_80DED44 =
+const Item gUnknown_80DED44 =
 {
     1, 0, 0
 };
@@ -59,7 +59,7 @@ extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 
 
-const struct UnkTextStruct2 gUnknown_80DED48 =
+const UnkTextStruct2 gUnknown_80DED48 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -69,7 +69,7 @@ const struct UnkTextStruct2 gUnknown_80DED48 =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80DED60 =
+const UnkTextStruct2 gUnknown_80DED60 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -82,7 +82,7 @@ const struct UnkTextStruct2 gUnknown_80DED60 =
 extern const u8 SendItem_Text[];
 extern const u8 DontSendItem_Text[];
 
-const struct MenuItem gUnknown_80DED78[3] =
+const MenuItem gUnknown_80DED78[3] =
 {
     {"Confirm", 0xB},
     {"Info", 0xC},
@@ -90,7 +90,7 @@ const struct MenuItem gUnknown_80DED78[3] =
 };
 
 // Unused
-const struct UnkTextStruct2 gUnknown_80DEDA0 =
+const UnkTextStruct2 gUnknown_80DEDA0 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -101,7 +101,7 @@ const struct UnkTextStruct2 gUnknown_80DEDA0 =
 };
 
 
-const struct MenuItem gThankYouMailMainMenuItems[4] =
+const MenuItem gThankYouMailMainMenuItems[4] =
 {
     {"Send Thank-You Mail", 0x1},
     {"Get Thank-You Mail", 0x2},
@@ -109,7 +109,7 @@ const struct MenuItem gThankYouMailMainMenuItems[4] =
     {NULL, 0x0},
 };
 
-const struct MenuItem gUnknown_80DEE08[4] =
+const MenuItem gUnknown_80DEE08[4] =
 {
     {"Game Link cable", WONDER_MAIL_GAME_LINK},
     {"Password", WONDER_MAIL_PASSWORD},
@@ -117,21 +117,21 @@ const struct MenuItem gUnknown_80DEE08[4] =
     {NULL, 0x0},
 };
 
-const struct MenuItem gUnknown_80DEE44[3] =
+const MenuItem gUnknown_80DEE44[3] =
 {
     {"Yes", 0x7},
     {"Cancel", 0x0},
     {NULL, 0x0},
 };
 
-const struct MenuItem gUnknown_80DEE60[3] =
+const MenuItem gUnknown_80DEE60[3] =
 {
     {"Yes", 0x7},
     {"No", 0x8},
     {NULL, 0x0},
 };
 
-const struct MenuItem gUnknown_80DEE7C[4] =
+const MenuItem gUnknown_80DEE7C[4] =
 {
     {SendItem_Text, 0x9},
     {DontSendItem_Text, 0xA},
@@ -142,14 +142,14 @@ const struct MenuItem gUnknown_80DEE7C[4] =
 ALIGNED(4) static const u8 DontSendItem_Text[] =  _("Don{APOSTROPHE}t Send Item");
 ALIGNED(4) static const u8 SendItem_Text[] = "Send Item";
 
-const struct MenuItem gUnknown_80DEEBC[3] =
+const MenuItem gUnknown_80DEEBC[3] =
 {
     {"Send w/o Item", 0xA},
     {"Cancel", 0x0},
     {NULL, 0x0},
 };
 
-const struct MenuItem gUnknown_80DEEE4[4] =
+const MenuItem gUnknown_80DEEE4[4] =
 {
     {"Yes", 0x7},
     {"No", 0x8},
@@ -214,8 +214,7 @@ extern void sub_80155F0();
 extern void sub_8031E10();
 extern void sub_802F2C0();
 extern void SetThankYouMailMenuState(u32);
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
-extern void sub_802F204(struct unkStruct_802F204 *, u32);
+extern void sub_802F204(unkStruct_802F204 *, u32);
 extern void sub_80151C0(u32, u8 *);
 extern void sub_803092C(void);
 extern s32 sub_8037B28(u32);
@@ -225,27 +224,27 @@ extern void sub_80306A8(u32, u32, u32, u32);
 extern s32 sub_8037D64(u32, void *, void *);
 extern s32 sub_80381F4(u32, void *, void *);
 extern u8 sub_800D588(void);
-extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
+extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
 extern void sub_8031D70(u8, u32);
 
 extern void sub_803092C(void);
 extern void sub_8011C28(u32);
 extern u32 sub_80154F0(void);
-extern u32 sub_8039068(u32, u8 *r1, struct unkStruct_203B480 *r0);
+extern u32 sub_8039068(u32, u8 *r1, unkStruct_203B480 *r0);
 
 
 u32 CreateThankYouMailPelipper(void)
 {
   char *monName;
-  struct OpenedFile *faceFile;
+  OpenedFile *faceFile;
   s32 index;
   int counter;
-  struct unkStruct_203B480 *mail;
+  unkStruct_203B480 *mail;
 
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
-  gUnknown_203B2C4 = MemoryAlloc(sizeof(struct WonderMailStruct_203B2C4), 8);
-  MemoryFill8((u8 *)gUnknown_203B2C4, 0, sizeof(struct WonderMailStruct_203B2C4));
+  sub_800641C(NULL, TRUE, TRUE);
+  gUnknown_203B2C4 = MemoryAlloc(sizeof(WonderMailStruct_203B2C4), 8);
+  MemoryFill8((u8 *)gUnknown_203B2C4, 0, sizeof(WonderMailStruct_203B2C4));
 
   CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
   monName = GetMonSpecies(MONSTER_PELIPPER);
@@ -487,7 +486,7 @@ void DisplayThankYouMailCommsOutcome(void)
   if (sub_80144A4(&auStack20) != 0) {
     return;
   }
-  MemoryFill8((u8 *)&gUnknown_203B2C4->unk41C, 0, sizeof(struct Item));
+  MemoryFill8((u8 *)&gUnknown_203B2C4->unk41C, 0, sizeof(Item));
   gUnknown_203B2C4->unk41C.id = ITEM_NOTHING;
   gUnknown_203B2C4->unk41C.quantity = 1;
   gUnknown_203B2C4->unk41C.flags = 0;
@@ -531,7 +530,7 @@ void sub_802A050(void)
         case 2:
             sub_8031E10();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B2C4->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B2C4->unk3BC, TRUE, TRUE);
             SetThankYouMailMenuState(0x1B);
             break;
         case 1:
@@ -579,7 +578,7 @@ void sub_802A0C8(void)
         gUnknown_203B2C4->mailIndex = sub_80307EC();
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_8030D40(gUnknown_203B2C4->mailIndex,0);
         SetThankYouMailMenuState(0x12);
         break;
@@ -615,7 +614,7 @@ void sub_802A174(void)
         gUnknown_203B2C4->fallbackState = 0x2b;
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_8030D40(gUnknown_203B2C4->mailIndex,0);
         SetThankYouMailMenuState(0x12);
         break;
@@ -637,7 +636,7 @@ void sub_802A230(void)
       case 3:
         sub_8030DE4();
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B2C4->unk3BC, 1, 1);
+        sub_800641C(gUnknown_203B2C4->unk3BC, TRUE, TRUE);
         sub_803092C();
         if (gUnknown_203B2C4->fallbackState == 0x2b) {
             sub_8035CF4(gUnknown_203B2C4->unk21C, 3, TRUE);
@@ -674,7 +673,7 @@ void sub_802A28C(void)
         gUnknown_203B2C4->unk41C.id = sub_801CB24();
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_801B3C0(&gUnknown_203B2C4->unk41C);
         SetThankYouMailMenuState(SHOW_ITEM_TO_SEND_INFO);
         break;
@@ -689,7 +688,7 @@ void sub_802A33C(void)
      case 3:
         sub_801B450();
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B2C4->unk3BC,1,1);
+        sub_800641C(gUnknown_203B2C4->unk3BC, TRUE, TRUE);
         sub_801CB5C(TRUE);
         if (gUnknown_203B2C4->fallbackState == 0x2b) {
             sub_8035CF4(gUnknown_203B2C4->unk21C,3,TRUE);
@@ -725,7 +724,7 @@ void sub_802A39C(void)
             gUnknown_203B2C4->fallbackState = 0x2b;
             sub_8006518(gUnknown_203B2C4->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0,1,1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_801B3C0(&gUnknown_203B2C4->unk41C);
             SetThankYouMailMenuState(SHOW_ITEM_TO_SEND_INFO);
             break;
@@ -798,12 +797,12 @@ void AdvanceToThankYouPasswordProcessing(void)
 void HandleThankYouMailPasswordMenu(void)
 {
   u8 mailIndex;
-  struct unkStruct_203B480 *mail;
+  unkStruct_203B480 *mail;
   u32 return_var;
-  struct unkStruct_203B480 mail1;
+  unkStruct_203B480 mail1;
 
   return_var = sub_80154F0();
-  MemoryFill8((u8 *)&mail1, 0, sizeof(struct unkStruct_203B480));
+  MemoryFill8((u8 *)&mail1, 0, sizeof(unkStruct_203B480));
   switch(return_var)
   {
     case 3:
@@ -838,7 +837,7 @@ void HandleThankYouMailPasswordMenu(void)
   case 2:
     sub_80155F0();
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2C4->unk3BC, 1, 1);
+    sub_800641C(gUnknown_203B2C4->unk3BC, TRUE, TRUE);
     SetThankYouMailMenuState(ANYTHING_ELSE_THANK_YOU_MAIN_MENU);
     break;
   }
@@ -930,7 +929,7 @@ void sub_802A75C(void)
 void HandleConfirmItemtoSendMenu(void)
 {
     s32 menuAction;
-    struct unkStruct_203B480 *mail;
+    unkStruct_203B480 *mail;
     if(sub_80144A4(&menuAction) == 0)
     {
         switch(menuAction)
@@ -1113,7 +1112,7 @@ void sub_802A9FC(void)
 void HandleMailCommunicationMenu(void)
 {
     s32 menuAction;
-    struct unkStruct_203B480 *mail;
+    unkStruct_203B480 *mail;
     if(sub_80144A4(&menuAction) == 0)
     {
         switch(menuAction)
@@ -1251,10 +1250,10 @@ void UpdateThankYouMailText(void)
   u8 buffer1 [80];
   u8 buffer2 [80];
   u8 mailIndex;
-  struct PokemonStruct *pokeStruct;
-  struct PokemonStruct *pokeStruct2;
+  PokemonStruct1 *pokeStruct;
+  PokemonStruct1 *pokeStruct2;
   s32 linkStatus;
-  struct unkStruct_203B480 *mail;
+  unkStruct_203B480 *mail;
 
   switch(gUnknown_203B2C4->state) {
     case 5:
@@ -1275,7 +1274,7 @@ void UpdateThankYouMailText(void)
         if (sub_8030894() != 0)
             break;
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_80306A8(WONDER_MAIL_TYPE_THANK_YOU,0,0,6);
         break;
     case 0x11:
@@ -1288,9 +1287,9 @@ void UpdateThankYouMailText(void)
         if (sub_801D008() != 0)
             break;
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         {
-        struct UnkTextStruct2_sub local_x = {3, 2};
+        UnkTextStruct2_sub local_x = {3, 2};
         sub_801C8C4(0, 1, &local_x, 9);
         }
         break;
@@ -1310,13 +1309,13 @@ void UpdateThankYouMailText(void)
             switch(gUnknown_203B2C4->unk40)
             {
                 case 6:
-                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(struct unkStruct_203B480));
+                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(unkStruct_203B480));
                     gUnknown_203B2C4->unk1B8 = *GetMailatIndex(gUnknown_203B2C4->mailIndex);
                     gUnknown_203B2C4->linkError = sub_8037D64(gUnknown_203B2C4->unk40,&gUnknown_203B2C4->unk1B8,&gUnknown_203B2C4->unk1E8);
                     break;
                 case 7:
-                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(struct unkStruct_203B480));
-                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1E8,0, sizeof(struct unkStruct_203B480));
+                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1B8,0, sizeof(unkStruct_203B480));
+                    MemoryFill8((u8 *)&gUnknown_203B2C4->unk1E8,0, sizeof(unkStruct_203B480));
                     gUnknown_203B2C4->linkError = sub_8037D64(gUnknown_203B2C4->unk40,&gUnknown_203B2C4->unk1B8,&gUnknown_203B2C4->unk1E8);
                     break;
             }
@@ -1344,13 +1343,13 @@ void UpdateThankYouMailText(void)
     case PROCESS_THANK_YOU_PASSWORD:
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_80151C0(4,gUnknown_203B2C4->passwordBuffer);
         break;
     case 0x1a:
         sub_8006518(gUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_8031D70(gUnknown_203B2C4->mailIndex,0);
         break;
     case 0x1b:

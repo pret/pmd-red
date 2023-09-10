@@ -11,21 +11,21 @@
 #include "moves.h"
 #include "move_util.h"
 
-extern u8 UseAttack(struct Entity *);
+extern u8 UseAttack(Entity *);
 extern void sub_805E804(void);
-void sub_806A2BC(struct Entity *pokemon, u8 param_2);
+void sub_806A2BC(Entity *pokemon, u8 param_2);
 extern u8 sub_8044B28(void);
 extern void sub_80426C8(u32, u32);
-extern void sub_8068FE0(struct Entity *, u32, struct Entity *r2);
-extern void nullsub_93(struct Position *);
-extern void sub_80522F4(struct Entity *, struct Entity *, u8 *);
-extern void SetMessageArgument(char[], struct Entity*, u32);
-extern void sub_806F370(struct Entity *r0, struct Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-extern void sub_80694C0(struct Entity *, s32, s32, u32);
-extern void sub_804535C(struct Entity *, u32);
-extern void sub_804AC20(struct Position *);
+extern void sub_8068FE0(Entity *, u32, Entity *r2);
+extern void nullsub_93(Position *);
+extern void sub_80522F4(Entity *, Entity *, u8 *);
+extern void SetMessageArgument(char[], Entity*, u32);
+extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
+extern void sub_80694C0(Entity *, s32, s32, u32);
+extern void sub_804535C(Entity *, u32);
+extern void sub_804AC20(Position *);
 extern void sub_807EC28(bool8);
-extern void sub_806A5B8(struct Entity *);
+extern void sub_806A5B8(Entity *);
 
 extern u32 gUnknown_80F5FAC[];
 extern u8 *gUnknown_80F9C4C[];
@@ -35,11 +35,11 @@ extern u8 *gUnknown_80F9CBC[];
 extern u8 gAvailablePokemonNames[];
 extern u8 *gUnknown_80FCAC0[];
 
-void sub_807E1A0(struct Entity *pokemon,struct Entity *target,u8 param_3,s16 param_4,s32 param_5)
+void sub_807E1A0(Entity *pokemon,Entity *target,u8 param_3,s16 param_4,s32 param_5)
 {
-  struct EntityInfo *targetInfo;
+  EntityInfo *targetInfo;
   u8 flag;
-  struct Move move;
+  Move move;
   s32 newHP;
   s32 param_4_s32;
 
@@ -70,10 +70,10 @@ void sub_807E1A0(struct Entity *pokemon,struct Entity *target,u8 param_3,s16 par
   }
 }
 
-void sub_807E254(struct Entity *pokemon,struct Entity *target)
+void sub_807E254(Entity *pokemon,Entity *target)
 {
-  struct Position pokemonPos;
-  struct Position targetPos;
+  Position pokemonPos;
+  Position targetPos;
   
 
   if (HasAbility(pokemon, ABILITY_SUCTION_CUPS)) {
@@ -121,7 +121,7 @@ void sub_807E254(struct Entity *pokemon,struct Entity *target)
 void sub_807E378(void)
 {
   u16 uVar2;
-  struct Entity *leader;
+  Entity *leader;
   
   leader = GetLeader();
   if (EntityExists(leader)) {

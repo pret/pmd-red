@@ -5,12 +5,12 @@
 #include "text1.h"
 #include "text2.h"
 #include "text_util.h"
-#include "item.h"
-#include "team_inventory.h"
+#include "items.h"
+#include "code_801B3C0.h"
 #include "pokemon.h"
 #include "friend_rescue.h"
 #include "memory.h"
-#include "save.h"
+#include "save_write.h"
 #include "rescue_password_menu.h"
 #include "menu_input.h"
 #include "code_8094F88.h"
@@ -18,18 +18,16 @@
 #include "main_menu.h"
 #include "code_801EE10_1.h"
 #include "code_801C620.h"
-#include "code_801B3C0.h"
 #include "cpu.h"
 #include "code_80118A4.h"
 
 extern void SetFriendRescueMenuState(u32);
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void sub_802F2C0();
 extern u32 sub_802F298();
 
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
-extern struct TeamInventory *gTeamInventoryRef;
+extern TeamInventory *gTeamInventoryRef;
 
 extern u8 gUnknown_80E44A4[];
 extern u8 gUnknown_80E4500[];
@@ -137,39 +135,39 @@ extern u8 gUnknown_80E499C[];
 extern u8 gUnknown_80E460C[];
 extern u8 gUnknown_80E31FC[];
 
-extern struct MenuItem gUnknown_80E20B8;
-extern struct MenuItem gUnknown_80E2108;
-extern struct MenuItem gUnknown_80E20E0;
-extern struct MenuItem gUnknown_80E2068;
-extern struct MenuItem gUnknown_80E24F8;
-extern struct MenuItem gUnknown_80E2554;
-extern struct MenuItem gUnknown_80E22F0;
-extern struct MenuItem gUnknown_80E236C;
-extern struct MenuItem gUnknown_80E2440;
-extern struct MenuItem gUnknown_80E2470;
-extern struct MenuItem gUnknown_80E24B0;
-extern struct MenuItem gUnknown_80E2130;
-extern struct MenuItem gUnknown_80E2190;
-extern struct MenuItem gUnknown_80E21B8;
-extern struct MenuItem gUnknown_80E2268;
-extern struct MenuItem gUnknown_80E2218;
-extern struct MenuItem gUnknown_80E2240;
-extern struct MenuItem gUnknown_80E2290;
-extern struct MenuItem gUnknown_80E22D0;
-extern struct MenuItem gUnknown_80E234C;
-extern struct MenuItem gUnknown_80E24D8;
-extern struct MenuItem gUnknown_80E2458;
-extern struct MenuItem gUnknown_80E2408;
-extern struct MenuItem gUnknown_80E23A8;
-extern struct MenuItem gUnknown_80E22B4;
+extern MenuItem gUnknown_80E20B8;
+extern MenuItem gUnknown_80E2108;
+extern MenuItem gUnknown_80E20E0;
+extern MenuItem gUnknown_80E2068;
+extern MenuItem gUnknown_80E24F8;
+extern MenuItem gUnknown_80E2554;
+extern MenuItem gUnknown_80E22F0;
+extern MenuItem gUnknown_80E236C;
+extern MenuItem gUnknown_80E2440;
+extern MenuItem gUnknown_80E2470;
+extern MenuItem gUnknown_80E24B0;
+extern MenuItem gUnknown_80E2130;
+extern MenuItem gUnknown_80E2190;
+extern MenuItem gUnknown_80E21B8;
+extern MenuItem gUnknown_80E2268;
+extern MenuItem gUnknown_80E2218;
+extern MenuItem gUnknown_80E2240;
+extern MenuItem gUnknown_80E2290;
+extern MenuItem gUnknown_80E22D0;
+extern MenuItem gUnknown_80E234C;
+extern MenuItem gUnknown_80E24D8;
+extern MenuItem gUnknown_80E2458;
+extern MenuItem gUnknown_80E2408;
+extern MenuItem gUnknown_80E23A8;
+extern MenuItem gUnknown_80E22B4;
 
-extern struct UnkTextStruct2 gUnknown_80E231C;
-extern struct UnkTextStruct2 gUnknown_80E23F0;
-extern struct UnkTextStruct2 gUnknown_80E2334;
+extern UnkTextStruct2 gUnknown_80E231C;
+extern UnkTextStruct2 gUnknown_80E23F0;
+extern UnkTextStruct2 gUnknown_80E2334;
 
-extern struct MenuItem gUnknown_80E25B4;
+extern MenuItem gUnknown_80E25B4;
 
-EWRAM_DATA_2 struct WonderMailStruct_203B33C *gUnknown_203B33C = {0};
+EWRAM_DATA_2 WonderMailStruct_203B33C *gUnknown_203B33C = {0};
 
 extern u8 sub_8039880(void);
 
@@ -270,23 +268,20 @@ extern void sub_8031E00(void);
 extern u8 sub_8024108(u32);
 extern void sub_802452C(void);
 extern u32 sub_80244E4(void);
-extern void sub_802453C(void);
-extern void sub_8024458(s16, u32);
 extern void sub_8035D1C(void);
-extern u32 sub_8039068(u32, u8 *passwordBuffer, struct unkStruct_203B480 *r0);
+extern u32 sub_8039068(u32, u8 *passwordBuffer, unkStruct_203B480 *r0);
 
 extern void sub_803084C(void);
 extern void sub_8031E10(void);
 extern void sub_80155F0(void);
 extern void sub_802F2C0(void);
 extern void sub_8030DE4(void);
-extern void sub_802453C(void);
 extern u8 sub_800D588(void);
 extern void sub_80151C0(u32, u8 *);
 extern u32 sub_801D008(void);
 extern u32 sub_8023CE8(void);
-extern void sub_802F204(struct unkStruct_802F204 *, u32);
-extern u32 sub_80306A8(u32 wonderMailType, u32, struct UnkTextStruct2_sub *, u32);
+extern void sub_802F204(unkStruct_802F204 *, u32);
+extern u32 sub_80306A8(u32 wonderMailType, u32, UnkTextStruct2_sub *, u32);
 extern u32 sub_8030894(void);
 extern void sub_803092C(void);
 extern bool8 sub_8031D70(u32 mailIndex, s32);
@@ -295,11 +290,10 @@ extern s32 sub_8037D64(u32, void *, void *);
 extern s32 sub_80381F4(u32, void *, void *);
 
 extern s32 CountMailType(u8 mailType);
-extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
-struct unkStruct_203B480 * GetMailatIndex(u8 index);
+extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
+unkStruct_203B480 * GetMailatIndex(u8 index);
 extern s32 GetMailIndex(u8 mailType, u32 param_2);
 extern char * GetMonSpecies(s16 index);
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void MemoryFill8(u8 *dest, u8 value, s32 size);
 extern void ResetUnusedInputStruct(void);
 extern void sprintfStatic(char *buffer, const char *text, ...);
@@ -310,9 +304,9 @@ u32 CreateFriendRescueMenu(void)
   int counter;
 
   ResetUnusedInputStruct();
-  sub_800641C(0, 1, 1);
-  gUnknown_203B33C = MemoryAlloc(sizeof(struct WonderMailStruct_203B33C), 8);
-  MemoryFill8((u8 *) gUnknown_203B33C, 0, sizeof(struct WonderMailStruct_203B33C));
+  sub_800641C(NULL, TRUE, TRUE);
+  gUnknown_203B33C = MemoryAlloc(sizeof(WonderMailStruct_203B33C), 8);
+  MemoryFill8((u8 *) gUnknown_203B33C, 0, sizeof(WonderMailStruct_203B33C));
   gUnknown_203B33C->unk530 = 0;
   gUnknown_203B33C->unk218 = -1;
   gUnknown_203B33C->speciesNum = -1;
@@ -699,11 +693,11 @@ void nullsub_40(void)
 void sub_8032828(void)
 {
 
-    struct unkStruct_203B480 *mail;
+    unkStruct_203B480 *mail;
     u32 temp;
     u8 buffer [80];
-    struct PokemonStruct *pokeStruct1;
-    struct PokemonStruct *pokeStruct2;
+    PokemonStruct1 *pokeStruct1;
+    PokemonStruct1 *pokeStruct2;
     char *monName;
     
     switch (gUnknown_203B33C->state) {
@@ -815,7 +809,7 @@ void sub_8032828(void)
         case 0x32:
             if (sub_8030894() == 0) {
                 ResetUnusedInputStruct();
-                sub_800641C(NULL, 1, 1);
+                sub_800641C(NULL, TRUE, TRUE);
                 sub_80306A8(1, 0, NULL, 6);
             }
             break;
@@ -839,7 +833,7 @@ void sub_8032828(void)
         case 0x3A:
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8031D70(gUnknown_203B33C->unk218, 0);
             break;
         case 0x3B:
@@ -891,7 +885,7 @@ void sub_8032828(void)
             if (sub_8023CE8() != 0)
                 sub_8023C60();
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8023868(3, 0, 0, 9);
             break;
         case 0x27:
@@ -912,7 +906,7 @@ void sub_8032828(void)
         case 0x1D:
             if (sub_8030894() == 0) {
                 ResetUnusedInputStruct();
-                sub_800641C(0, 1, 1);
+                sub_800641C(NULL, TRUE, TRUE);
                 sub_80306A8(4, 0, NULL, 6);
             }
             break;
@@ -947,13 +941,13 @@ void sub_8032828(void)
                 #endif //NONMATCHING
                 switch (gUnknown_203B33C->unk40) {
                     case 0x3:
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk48, 0, sizeof(struct unkStruct_203B480));
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk78, 0, sizeof(struct unkStruct_203B480));
+                        MemoryFill8((u8*)&gUnknown_203B33C->unk48, 0, sizeof(unkStruct_203B480));
+                        MemoryFill8((u8*)&gUnknown_203B33C->unk78, 0, sizeof(unkStruct_203B480));
                         gUnknown_203B33C->status = sub_8037D64(gUnknown_203B33C->unk40, &gUnknown_203B33C->unk48, &gUnknown_203B33C->unk78);
                         break;
                     case 0x2:
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk48, 0, sizeof(struct unkStruct_203B480));
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk78, 0, sizeof(struct unkStruct_203B480));
+                        MemoryFill8((u8*)&gUnknown_203B33C->unk48, 0, sizeof(unkStruct_203B480));
+                        MemoryFill8((u8*)&gUnknown_203B33C->unk78, 0, sizeof(unkStruct_203B480));
                         #ifdef NONMATCHING
                         // Regswaps
                         gUnknown_203B33C->unk48 = *GetMailatIndex(gUnknown_203B33C->unk218);
@@ -966,13 +960,13 @@ void sub_8032828(void)
                         gUnknown_203B33C->status = sub_8037D64(gUnknown_203B33C->unk40, &gUnknown_203B33C->unk48, &gUnknown_203B33C->unk78);
                         break;
                     case 0x5:
-                        MemoryFill8((u8*)&gUnknown_203B33C->unkA8, 0, sizeof(struct WonderMailStruct_203B2C0_sub));
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk130, 0, sizeof(struct WonderMailStruct_203B2C0_sub));
+                        MemoryFill8((u8*)&gUnknown_203B33C->unkA8, 0, sizeof(WonderMailStruct_203B2C0_sub));
+                        MemoryFill8((u8*)&gUnknown_203B33C->unk130, 0, sizeof(WonderMailStruct_203B2C0_sub));
                         gUnknown_203B33C->status = sub_8037D64(gUnknown_203B33C->unk40, &gUnknown_203B33C->unkA8, &gUnknown_203B33C->unk130);
                         break;
                     case 0x4:
-                        MemoryFill8((u8*)&gUnknown_203B33C->unkA8, 0, sizeof(struct WonderMailStruct_203B2C0_sub));
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk130, 0, sizeof(struct WonderMailStruct_203B2C0_sub));
+                        MemoryFill8((u8*)&gUnknown_203B33C->unkA8, 0, sizeof(WonderMailStruct_203B2C0_sub));
+                        MemoryFill8((u8*)&gUnknown_203B33C->unk130, 0, sizeof(WonderMailStruct_203B2C0_sub));
                         gUnknown_203B33C->unkA8.pokemon.speciesNum = 0;
                         gUnknown_203B33C->unk130.pokemon.speciesNum = 0;
                         gUnknown_203B33C->unkA8.mail = *GetMailatIndex(gUnknown_203B33C->unk218);
@@ -980,7 +974,7 @@ void sub_8032828(void)
                             pokeStruct1 = &gUnknown_203B33C->unkA8.pokemon;
                             pokeStruct2 = gRecruitedPokemonRef->pokemon;
                             pokeStruct2 += gUnknown_203B33C->speciesNum;
-                            memcpy(pokeStruct1, pokeStruct2, sizeof(struct PokemonStruct));
+                            memcpy(pokeStruct1, pokeStruct2, sizeof(PokemonStruct1));
                         }
                         gUnknown_203B33C->status = sub_8037D64(gUnknown_203B33C->unk40, &gUnknown_203B33C->unkA8, &gUnknown_203B33C->unk130);
                         break;
@@ -1019,7 +1013,7 @@ void sub_8032828(void)
             if (sub_8030894() != 0)
                 break;
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_80306A8(1, 0, NULL, 6);
             break;
         case 0x15:            
@@ -1048,7 +1042,7 @@ void sub_8032828(void)
         case 0x1A:
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_80151C0(4, gUnknown_203B33C->passwordBuffer);
             break;
         case 0x5A:
@@ -1066,9 +1060,9 @@ void sub_8032828(void)
         case 0x5F:
             if (sub_801D008() == 0) {
                 ResetUnusedInputStruct();
-                sub_800641C(0,1,1);
+                sub_800641C(NULL, TRUE, TRUE);
                 {
-                struct UnkTextStruct2_sub local_x = {3, 2};
+                UnkTextStruct2_sub local_x = {3, 2};
                 sub_801C8C4(0, 1, &local_x, 9);
                 }
             }
@@ -1113,7 +1107,7 @@ void sub_8032828(void)
         case 0x73:
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_80151C0(4, gUnknown_203B33C->passwordBuffer);
             break;
         case 0x66:
@@ -1123,7 +1117,7 @@ void sub_8032828(void)
         case 0x2E:
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8031D70(gUnknown_203B33C->unk218, 0);
             break;
         case 0x68:
@@ -1229,7 +1223,7 @@ void sub_8032828(void)
         case 0x5C:
             if (sub_8030894() == 0) {
                 ResetUnusedInputStruct();
-                sub_800641C(0, 1, 1);
+                sub_800641C(NULL, TRUE, TRUE);
                 sub_80306A8(5, 0, 0, 6);
             }
             break;
@@ -1643,11 +1637,11 @@ void sub_8033DBC(void)
 {
     u32 return_var;
     u32 mailMode;
-    struct unkStruct_203B480 mail;
-    struct unkStruct_203B480 *mail2;
+    unkStruct_203B480 mail;
+    unkStruct_203B480 *mail2;
 
     return_var = sub_80154F0();
-    MemoryFill8((u8 *)&mail, 0, sizeof(struct unkStruct_203B480));
+    MemoryFill8((u8 *)&mail, 0, sizeof(unkStruct_203B480));
     switch(return_var)
     {
         case 3:
@@ -1697,7 +1691,7 @@ void sub_8033DBC(void)
                         sub_80951FC(&mail);
                         mail2 = GetMailatIndex(GetMailIndex(1, mail.unk10.unk10));
                         mail2->mailType = 7;
-                        MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(struct unkStruct_203B484));
+                        MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(unkStruct_203B484));
                         SetFriendRescueMenuState(0x40);
                         break;
                     case 24:
@@ -1709,7 +1703,7 @@ void sub_8033DBC(void)
         case 2:
             sub_80155F0();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             SetFriendRescueMenuState(FRIEND_RESCUE_MENU_MAIN);
             break;
         default:
@@ -1781,7 +1775,7 @@ void sub_8033FE4(void)
             gUnknown_203B33C->unk218 = sub_80307EC();
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
             SetFriendRescueMenuState(0x1F);
             break;
@@ -1806,7 +1800,7 @@ void sub_8034074(void)
             gUnknown_203B33C->fallbackState = FRIEND_RESCUE_MENU_DEFAULT_FALLBACK;
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
             SetFriendRescueMenuState(0x1F);
             break;
@@ -1827,7 +1821,7 @@ void sub_8034130(void)
         case 3:
             sub_8030DE4();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             sub_803092C();
             if(gUnknown_203B33C->fallbackState == FRIEND_RESCUE_MENU_DEFAULT_FALLBACK)
             {
@@ -1864,7 +1858,7 @@ void sub_803418C(void)
             gUnknown_203B33C->speciesNum = sub_8023B44();
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8024458(gUnknown_203B33C->speciesNum, 0);
             SetFriendRescueMenuState(0x28);
             break;
@@ -1889,7 +1883,7 @@ void sub_8034254(void)
             gUnknown_203B33C->fallbackState = FRIEND_RESCUE_MENU_DEFAULT_FALLBACK;
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8024458(gUnknown_203B33C->speciesNum, 0);
             SetFriendRescueMenuState(0x28);
             break;
@@ -1913,7 +1907,7 @@ void sub_8034310(void)
         case 3:
             sub_802453C();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             sub_8023B7C(1);
             if(gUnknown_203B33C->fallbackState == FRIEND_RESCUE_MENU_DEFAULT_FALLBACK)
             {
@@ -2031,7 +2025,7 @@ void sub_80344C0(void)
         case 3:
             sub_8031E10();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             SetFriendRescueMenuState(0x2F);
             break;
         case 1:
@@ -2059,7 +2053,7 @@ void sub_8034500(void)
             gUnknown_203B33C->unk218 = sub_80307EC();
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
             SetFriendRescueMenuState(0x34);
             break;
@@ -2084,7 +2078,7 @@ void sub_8034590(void)
             gUnknown_203B33C->fallbackState = FRIEND_RESCUE_MENU_DEFAULT_FALLBACK;
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
             SetFriendRescueMenuState(0x34);
             break;
@@ -2105,7 +2099,7 @@ void sub_803464C(void)
         case 3:
             sub_8030DE4();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             sub_803092C();
             if(gUnknown_203B33C->fallbackState == FRIEND_RESCUE_MENU_DEFAULT_FALLBACK)
             {
@@ -2178,7 +2172,7 @@ void sub_803473C(void)
         case 3:
             sub_8031E10();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             SetFriendRescueMenuState(0x3B);
             break;
         case 1:
@@ -2262,7 +2256,7 @@ void sub_8034848(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        MemoryFill8((u8 *)&gUnknown_203B33C->item, 0 , sizeof(struct Item));
+        MemoryFill8((u8 *)&gUnknown_203B33C->item, 0 , sizeof(Item));
         gUnknown_203B33C->item.id = ITEM_NOTHING;
         gUnknown_203B33C->item.quantity = 1;
         gUnknown_203B33C->item.flags = 0;
@@ -2292,7 +2286,7 @@ void sub_80348C4(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        MemoryFill8((u8 *)&gUnknown_203B33C->item, 0 , sizeof(struct Item));
+        MemoryFill8((u8 *)&gUnknown_203B33C->item, 0 , sizeof(Item));
         gUnknown_203B33C->item.id = ITEM_NOTHING;
         gUnknown_203B33C->item.quantity = 1;
         gUnknown_203B33C->item.flags = 0;
@@ -2337,7 +2331,7 @@ void sub_8034970(void)
         case 3:
             sub_8031E10();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             SetFriendRescueMenuState(0x68);
             break;
         case 1:
@@ -2383,7 +2377,7 @@ void sub_80349E0(void)
             gUnknown_203B33C->unk218 = sub_80307EC();
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
             SetFriendRescueMenuState(0x5E);
             break;
@@ -2408,7 +2402,7 @@ void sub_8034A70(void)
             gUnknown_203B33C->fallbackState = FRIEND_RESCUE_MENU_DEFAULT_FALLBACK;
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
             SetFriendRescueMenuState(0x5E);
             break;
@@ -2429,7 +2423,7 @@ void sub_8034B2C(void)
         case 3:
             sub_8030DE4();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             sub_803092C();
             if(gUnknown_203B33C->fallbackState == FRIEND_RESCUE_MENU_DEFAULT_FALLBACK)
             {
@@ -2464,7 +2458,7 @@ void sub_8034B88(void)
             gUnknown_203B33C->item.id = sub_801CB24();
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_801B3C0(&gUnknown_203B33C->item);
             SetFriendRescueMenuState(0x61);
             break;
@@ -2479,7 +2473,7 @@ void sub_8034C38(void)
         case 3:
             sub_801B450();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             sub_801CB5C(TRUE);
             if(gUnknown_203B33C->fallbackState == FRIEND_RESCUE_MENU_DEFAULT_FALLBACK)
             {
@@ -2513,7 +2507,7 @@ void sub_8034C98(void)
             gUnknown_203B33C->fallbackState = FRIEND_RESCUE_MENU_DEFAULT_FALLBACK;
             sub_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(0, 1, 1);
+            sub_800641C(NULL, TRUE, TRUE);
             sub_801B3C0(&gUnknown_203B33C->item);
             SetFriendRescueMenuState(0x61);
             break;
@@ -2539,11 +2533,11 @@ void sub_8034D54(void)
 void sub_8034D74(void)
 {
     u32 return_var;
-    struct unkStruct_203B480 mail;
-    struct unkStruct_203B480 *mail2;
+    unkStruct_203B480 mail;
+    unkStruct_203B480 *mail2;
 
     return_var = sub_80154F0();
-    MemoryFill8((u8 *)&mail, 0, sizeof(struct unkStruct_203B480));
+    MemoryFill8((u8 *)&mail, 0, sizeof(unkStruct_203B480));
     switch(return_var)
     {
         case 3:
@@ -2577,7 +2571,7 @@ void sub_8034D74(void)
         case 2:
             sub_80155F0();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, 1, 1);
+            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             SetFriendRescueMenuState(FRIEND_RESCUE_MENU_MAIN);
             break;
         default:
@@ -2654,7 +2648,7 @@ void sub_8034F58(void)
 void sub_8034F88(void)
 {
     s32 menuAction;
-    struct unkStruct_203B480 *mail;
+    unkStruct_203B480 *mail;
 
     if(sub_80144A4(&menuAction) == 0)
     {
@@ -2850,7 +2844,7 @@ void sub_80351E0(void)
 void sub_8035210(void)
 {
     s32 menuAction;
-    struct unkStruct_203B480 *mail;
+    unkStruct_203B480 *mail;
 
     if(sub_80144A4(&menuAction) == 0)
     {

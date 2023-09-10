@@ -37,19 +37,19 @@ extern char gAvailablePokemonNames[];
 extern char *gPtrCouldntBeUsedMessage;
 extern char *gPtrItsaMonsterHouseMessage;
 
-extern void SetMessageArgument(char[], struct Entity*, u32);
+extern void SetMessageArgument(char[], Entity*, u32);
 extern u8 sub_8044B28(void);
-extern void sub_807AB38(struct Entity *, u32);
+extern void sub_807AB38(Entity *, u32);
 extern void sub_8041888(u32);
 extern u8 sub_803F428(s16 *);
 extern void sub_803E708(u32, u32);
 
-u32 sub_8075818(struct Entity *entity)
+u32 sub_8075818(Entity *entity)
 {
     struct Tile *tile;
-    struct EntityInfo *entityInfo;
-    struct Entity *subEntity;
-    struct Item *item;
+    EntityInfo *entityInfo;
+    Entity *subEntity;
+    Item *item;
     u8 *trapData; // TODO: turn into struct when more research is done..
     u8 r1;
 
@@ -133,7 +133,7 @@ error:
     return 0;
 }
 
-void sub_8075900(struct Entity *pokemon, u8 r1)
+void sub_8075900(Entity *pokemon, u8 r1)
 {
     if(EntityExists(pokemon))
     {
@@ -159,9 +159,9 @@ void sub_8075900(struct Entity *pokemon, u8 r1)
     }
 }
 
-void RunMonsterAI(struct Entity *pokemon, u32 unused)
+void RunMonsterAI(Entity *pokemon, u32 unused)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     if (pokemonInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)
     {
         if (pokemonInfo->immobilizeStatus == STATUS_PETRIFIED)
@@ -194,7 +194,7 @@ void RunMonsterAI(struct Entity *pokemon, u32 unused)
                 if (gDungeon->decoyActive)
                 {
                     s32 i;
-                    struct Entity *target;
+                    Entity *target;
                     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
                     {
                         target = gDungeon->allPokemon[i];

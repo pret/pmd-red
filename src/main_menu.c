@@ -1,8 +1,9 @@
 #include "global.h"
+#include "code_803D0D8.h"
 #include "text1.h"
 #include "text2.h"
 #include "menu_input.h"
-#include "adventure_log.h"
+#include "adventure_log_menu.h"
 #include "debug_menu1.h"
 #include "ds_menus.h"
 #include "pokemon.h"
@@ -14,6 +15,7 @@
 #include "save.h"
 #include "trade_items_menu.h"
 #include "constants/wonder_mail.h"
+#include "code_8098BDC.h"
 
 // NOTE: 0x13 and 0x14
 // Communication Screen?
@@ -33,8 +35,8 @@ struct unkStruct_203B34C
 {
     // size: 0x1A8
     u32 unk0;
-    struct MenuStruct unk4[4];
-    struct UnkTextStruct2 unk144[4];
+    MenuStruct unk4[4];
+    UnkTextStruct2 unk144[4];
     /* 0x1A4 */ u32 currMenuChoice;
 };
 
@@ -44,7 +46,6 @@ EWRAM_DATA_2 u32 gUnknown_203B350 = {0};
 EWRAM_DATA_2 u32 gUnknown_203B354 = {0}; // unused everywhere else except here..
 
 extern void SetWindowBGColor(void);
-extern void sub_8099690(u32);
 extern void sub_8036FDC(s32);
 extern void CreateWonderMailMenu(void);
 extern void CreateSaveMenu(u32);
@@ -56,7 +57,6 @@ extern void sub_80370D4(void);
 extern void CleanWonderMailMenu(void);
 extern void sub_80383A8(void);
 extern void CleanSaveMenu(void);
-extern u8 sub_803D0D8();
 
 void CleanMainMenu(void);
 void DrawMainMenu(void);
@@ -87,7 +87,7 @@ static const u8 sUnknown_80E6008[];
 static const u8 sUnknown_80E6048[];
 static const u8 sUnknown_80E6070[];
 
-const struct UnkTextStruct2 gUnknown_80E59A8 = {
+const UnkTextStruct2 gUnknown_80E59A8 = {
    0x00, 0x00, 0x00, 0x00,
    0x03,
    0x00, 0x00,
@@ -98,7 +98,7 @@ const struct UnkTextStruct2 gUnknown_80E59A8 = {
 
 static const char main_menu_fill[] = "pksdir0";
 
-const struct UnkTextStruct2 gUnknown_80E59C8 = {
+const UnkTextStruct2 gUnknown_80E59C8 = {
    0x00, 0x00, 0x00, 0x00,
    0x03,
    0x00, 0x00,
@@ -107,7 +107,7 @@ const struct UnkTextStruct2 gUnknown_80E59C8 = {
    NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80E59E0 = {
+const UnkTextStruct2 gUnknown_80E59E0 = {
    0x00, 0x00, 0x00, 0x00,
    0x03,
    0x02, 0x02,
@@ -116,14 +116,14 @@ const struct UnkTextStruct2 gUnknown_80E59E0 = {
    NULL
 };
 
-const struct MenuItem gUnknown_80E59F8[] =
+const MenuItem gUnknown_80E59F8[] =
 {
     {"New Game", MENU_NEW_GAME},
     {"Adventure Log", MENU_ADVENTURE_LOG},
     {NULL, 0xffdd},
 };
 
-const struct UnkTextStruct2 gUnknown_80E5A29 = {
+const UnkTextStruct2 gUnknown_80E5A29 = {
    0x00, 0x00, 0x00, 0x00,
    0x03,
    0x02, 0x02,
@@ -132,13 +132,13 @@ const struct UnkTextStruct2 gUnknown_80E5A29 = {
    NULL
 };
 
-const struct MenuItem gUnknown_80E5A44[] =
+const MenuItem gUnknown_80E5A44[] =
 {
     {"Wonder Mail", MENU_WONDER_MAIL},
     {NULL, 0xffdd},
 };
 
-const struct UnkTextStruct2 gUnknown_80E5A60 = {
+const UnkTextStruct2 gUnknown_80E5A60 = {
    0x00, 0x00, 0x00, 0x00,
    0x03, 
    0x02, 0x02,
@@ -147,7 +147,7 @@ const struct UnkTextStruct2 gUnknown_80E5A60 = {
    NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80E5A78 = {
+const UnkTextStruct2 gUnknown_80E5A78 = {
    0x00, 0x00, 0x00, 0x00,
    0x03,
    0x02, 0x02,
@@ -156,7 +156,7 @@ const struct UnkTextStruct2 gUnknown_80E5A78 = {
    NULL
 };
 
-const struct MenuItem gUnknown_80E5A90[] = 
+const MenuItem gUnknown_80E5A90[] = 
 {
     {"Continue", MENU_CONTINUE},
     {"Delete Save Data", MENU_DELETE_SAVE_PROMPT},
@@ -166,7 +166,7 @@ const struct MenuItem gUnknown_80E5A90[] =
     {NULL, 0xffdd},
 };
 
-const struct MenuItem gUnknown_80E5AFC[] =
+const MenuItem gUnknown_80E5AFC[] =
 {
     {"Continue", MENU_CONTINUE},
     {"Delete Save Data", MENU_DELETE_SAVE_PROMPT},
@@ -177,7 +177,7 @@ const struct MenuItem gUnknown_80E5AFC[] =
     {NULL, 0xffdd},
 };
 
-const struct UnkTextStruct2 gUnknown_80E5B34 = {
+const UnkTextStruct2 gUnknown_80E5B34 = {
    0x00, 0x00, 0x00, 0x00,
    0x03,
    0x02, 0x02,
@@ -186,7 +186,7 @@ const struct UnkTextStruct2 gUnknown_80E5B34 = {
    NULL
 };
 
-const struct MenuItem gUnknown_80E5B4C[] =
+const MenuItem gUnknown_80E5B4C[] =
 {
     {"Awaiting Rescue", MENU_AWAITING_RESCUE},
     {"Delete Save Data", MENU_DELETE_SAVE_PROMPT},
@@ -196,7 +196,7 @@ const struct MenuItem gUnknown_80E5B4C[] =
     {NULL, 0xffdd},
 };
 
-const struct MenuItem gUnknown_80E5B8C[] = 
+const MenuItem gUnknown_80E5B8C[] = 
 {
     {"Awaiting Rescue", MENU_AWAITING_RESCUE},
     {"Delete Save Data", MENU_DELETE_SAVE_PROMPT},
@@ -207,7 +207,7 @@ const struct MenuItem gUnknown_80E5B8C[] =
     {NULL, 0xffdd},
 };
 
-const struct UnkTextStruct2 gUnknown_80E5BC4 = {
+const UnkTextStruct2 gUnknown_80E5BC4 = {
    0x00, 0x00, 0x00, 0x00,
    0x03,
    0x02, 0x02,
@@ -216,7 +216,7 @@ const struct UnkTextStruct2 gUnknown_80E5BC4 = {
    NULL
 };
 
-const struct MenuItem gUnknown_80E5BDC[] =
+const MenuItem gUnknown_80E5BDC[] =
 {
     {"Revive Team", MENU_CONTINUE},
     {"Delete Save Data", MENU_DELETE_SAVE_PROMPT},
@@ -226,7 +226,7 @@ const struct MenuItem gUnknown_80E5BDC[] =
     {NULL, 0xffdd},
 };
 
-const struct MenuItem gUnknown_80E5C18[] =
+const MenuItem gUnknown_80E5C18[] =
 {
     {"Revive Team", MENU_CONTINUE},
     {"Delete Save Data", MENU_DELETE_SAVE_PROMPT},
@@ -237,7 +237,7 @@ const struct MenuItem gUnknown_80E5C18[] =
     {NULL, 0xffdd},
 };
 
-const struct UnkTextStruct2 gUnknown_80E5C50 = { 
+const UnkTextStruct2 gUnknown_80E5C50 = { 
    0x00, 0x00, 0x00, 0x00,
    0x03,
    0x02, 0x02,
@@ -246,21 +246,21 @@ const struct UnkTextStruct2 gUnknown_80E5C50 = {
    NULL
 };
 
-const struct MenuItem gUnknown_80E5C68[] = 
+const MenuItem gUnknown_80E5C68[] = 
 {
     {"Send Items", MENU_SEND_ITEMS},
     {"Receive Items", MENU_RECEIVE_ITEMS},
     {NULL, 0xffdd},
 };
 
-const struct MenuItem gUnknown_80E5C9C[] = 
+const MenuItem gUnknown_80E5C9C[] = 
 {
     {"Send Items", -1},
     {"Receive Items", MENU_RECEIVE_ITEMS},
     {NULL, 0xffdd},
 };
 
-const struct UnkTextStruct2 gUnknown_80E5CB4 = {
+const UnkTextStruct2 gUnknown_80E5CB4 = {
    0x00, 0x00, 0x00, 0x00,
    0x03,
    0x02, 0x0F,
@@ -269,7 +269,7 @@ const struct UnkTextStruct2 gUnknown_80E5CB4 = {
    NULL
 };
 
-const struct MenuItem gUnknown_80E5CCC[] = 
+const MenuItem gUnknown_80E5CCC[] = 
 {
     {sUnknown_80E5CE8, 0xffde},
     {sUnknown_80E5CE4, 0xffde},
@@ -279,7 +279,7 @@ const struct MenuItem gUnknown_80E5CCC[] =
 static const u8 sUnknown_80E5CE4[] = "  ";
 static const u8 sUnknown_80E5CE8[] = "Start an entirely new adventure.";
 
-const struct MenuItem gUnknown_80E5D0C[] = 
+const MenuItem gUnknown_80E5D0C[] = 
 {
     {sUnknown_80E5D24, 0xffde},
     {sUnknown_80E5CE4, 0xffde},
@@ -288,7 +288,7 @@ const struct MenuItem gUnknown_80E5D0C[] =
 
 static const u8 sUnknown_80E5D24[] = "Check your career as an adventurer.";
 
-const struct MenuItem gUnknown_80E5D48[] = 
+const MenuItem gUnknown_80E5D48[] = 
 {
     {sUnknown_80E5D88, 0xffde},
     {sUnknown_80E5D60, 0xffde},
@@ -298,7 +298,7 @@ const struct MenuItem gUnknown_80E5D48[] =
 static const u8 sUnknown_80E5D60[] = _("It won{APOSTROPHE}t be in the release version.");
 static const u8 sUnknown_80E5D88[] = "This is the Debug Mode.";
 
-const struct MenuItem gUnknown_80E5DA0[] = 
+const MenuItem gUnknown_80E5DA0[] = 
 {
     {sUnknown_80E5DCC, 0xffde},
     {sUnknown_80E5DB8, 0xffde},
@@ -308,7 +308,7 @@ const struct MenuItem gUnknown_80E5DA0[] =
 static const u8 sUnknown_80E5DB8[] = "you last saved.  ";
 static const u8 sUnknown_80E5DCC[] = "Resume your adventure from where";
 
-const struct MenuItem gUnknown_80E5DF0[] = {
+const MenuItem gUnknown_80E5DF0[] = {
     {sUnknown_80E5E34, 0xFFDE},
     {sUnknown_80E5E08, 0xFFDE},
     {0, 0xFFDD}
@@ -317,7 +317,7 @@ const struct MenuItem gUnknown_80E5DF0[] = {
 static const u8 sUnknown_80E5E08[] = _("#C2Beware#R! This will delete it forever!");
 static const u8 sUnknown_80E5E34[] = "This will delete your saved game data.";
 
-const struct MenuItem gUnknown_80E5E5C[] = {
+const MenuItem gUnknown_80E5E5C[] = {
     {sUnknown_80E5EA0, 0xFFDE},
     {sUnknown_80E5E74, 0xFFDE},
     {0, 0xFFDD}
@@ -326,7 +326,7 @@ const struct MenuItem gUnknown_80E5E5C[] = {
 ALIGNED(4) static const u8 sUnknown_80E5E74[] = _("passwords{COMMA} friends may rescue each other.");
 static const u8 sUnknown_80E5EA0[] = "Using a Game Link cable or";
 
-const struct MenuItem gUnknown_80E5EBC[] = {
+const MenuItem gUnknown_80E5EBC[] = {
     {sUnknown_80E5EF8, 0xFFDE},
     {sUnknown_80E5ED4, 0xFFDE},
     {0, 0xFFDD}
@@ -335,7 +335,7 @@ const struct MenuItem gUnknown_80E5EBC[] = {
 static const u8 sUnknown_80E5ED4[] = "trade stored items with a friend.";
 ALIGNED(4) static const u8 sUnknown_80E5EF8[] = _("Using a Game Link cable{COMMA} you can");
 
-const struct MenuItem gUnknown_80E5F1C[] = {
+const MenuItem gUnknown_80E5F1C[] = {
     {sUnknown_80E5F58, 0xFFDE},
     {sUnknown_80E5F34, 0xFFDE},
     {0, 0xFFDD}
@@ -344,7 +344,7 @@ const struct MenuItem gUnknown_80E5F1C[] = {
 static const u8 sUnknown_80E5F34[] = "You can give up waiting for rescue.";
 static const u8 sUnknown_80E5F58[] = "You are awaiting rescue by a friend.";
 
-const struct MenuItem gUnknown_80E5F80[] = {
+const MenuItem gUnknown_80E5F80[] = {
     {sUnknown_80E5FB0, 0xFFDE},
     {sUnknown_80E5F98, 0xFFDE},
     {0, 0xFFDD}
@@ -353,7 +353,7 @@ const struct MenuItem gUnknown_80E5F80[] = {
 static const u8 sUnknown_80E5F98[] = "receive Wonder Mail.";
 ALIGNED(4) static const u8 sUnknown_80E5FB0[] = _("Using passwords{COMMA} you can");
 
-const struct MenuItem gUnknown_80E5FCC[] = {
+const MenuItem gUnknown_80E5FCC[] = {
     {sUnknown_80E6008, 0xFFDE},
     {sUnknown_80E5FE4, 0xFFDE},
     {NULL, 0xFFDD}
@@ -362,7 +362,7 @@ const struct MenuItem gUnknown_80E5FCC[] = {
 static const u8 sUnknown_80E5FE4[] = "receive teams from your friends.";
 ALIGNED(4) static const u8 sUnknown_80E6008[] = _("Using the Dual Slot function{COMMA} you can");
 
-const struct MenuItem gUnknown_80E6030[] = {
+const MenuItem gUnknown_80E6030[] = {
     {sUnknown_80E6070, 0xFFDE},
     {sUnknown_80E6048, 0xFFDE},
     {NULL, 0xFFDD}
@@ -620,12 +620,12 @@ void sub_8035C1C(void)
     gMainMenu->sub.unk2D = 0;
 }
 
-void SetMenuItems(struct MenuStruct *param_1, struct UnkTextStruct2 *unkData, s32 index,
-        const struct UnkTextStruct2 *param_4, const struct MenuItem *menuItems, u8 param_6, u32 menuAction, u32 unused_8)
+void SetMenuItems(MenuStruct *param_1, UnkTextStruct2 *unkData, s32 index,
+        const UnkTextStruct2 *param_4, const MenuItem *menuItems, u8 param_6, u32 menuAction, u32 unused_8)
 {
   unkData[index] = *param_4;
   ResetUnusedInputStruct();
-  sub_800641C(unkData,1,1);
+  sub_800641C(unkData, TRUE, TRUE);
   if (param_6 != 0) {
        sub_8012D60(&param_1[index],menuItems,0,0,menuAction,index);
   }
@@ -635,15 +635,15 @@ void SetMenuItems(struct MenuStruct *param_1, struct UnkTextStruct2 *unkData, s3
   param_1[index].unk4C = TRUE;
 }
 
-void sub_8035CC0(struct UnkTextStruct2 *dataArray, u32 index)
+void sub_8035CC0(UnkTextStruct2 *dataArray, u32 index)
 {
     sub_8006518(dataArray);
     dataArray[index] = gUnknown_80E59A8;
     ResetUnusedInputStruct();
-    sub_800641C(dataArray, 1, 1);
+    sub_800641C(dataArray, TRUE, TRUE);
 }
 
-void sub_8035CF4(struct MenuStruct * Menu, u32 index, bool8 r2)
+void sub_8035CF4(MenuStruct * Menu, u32 index, bool8 r2)
  {
     Menu[index].unk4C = r2;
     Menu[index].unk4D = 1;
@@ -769,7 +769,7 @@ void DrawMainMenu(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B34C->unk144, 1, 1);
+    sub_800641C(gUnknown_203B34C->unk144, TRUE, TRUE);
     SetMainMenuItems();
     gUnknown_203B34C->currMenuChoice = -1;
 
@@ -785,7 +785,7 @@ void DrawMainMenu(void)
 void CleanMainMenu(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(NULL, 1, 1);
+    sub_800641C(NULL, TRUE, TRUE);
     if(gUnknown_203B34C != NULL)
     {
         MemoryFree(gUnknown_203B34C);
@@ -875,7 +875,7 @@ u32 UpdateMainMenu(void)
 bool8 SetMainMenuText(void)
 {
   u32 menuChoice;
-  const struct MenuItem *preload;
+  const MenuItem *preload;
 
  // Have to load the pointer before the index
   preload = gUnknown_203B34C->unk4[0].menuItems;

@@ -15,7 +15,7 @@
 #include "game_options.h"
 #include "text_util.h"
 
-extern struct GameOptions *gGameOptionsRef;
+extern GameOptions *gGameOptionsRef;
 
 struct unkStruct_80F520C
 {
@@ -33,24 +33,24 @@ extern u8 *gUnknown_80FCC7C[];
 extern u8 *gUnknown_80FCCAC[];
 extern u8 *gUnknown_80FDCC8[];
 
-extern void SetMessageArgument(char[], struct Entity*, u32);
-void sub_80522F4(struct Entity *r0, struct Entity *r1, const char r2[]);
-extern void sub_8042900(struct Entity *r0);
-extern void sub_8042968(struct Entity *r0);
-extern void sub_806ABAC(struct Entity *, struct Entity *);
-void sub_8041BBC(struct Entity *r0);
-extern u8 sub_8045888(struct Entity *);
-extern void sub_806A2BC(struct Entity *, u8);
+extern void SetMessageArgument(char[], Entity*, u32);
+void sub_80522F4(Entity *r0, Entity *r1, const char r2[]);
+extern void sub_8042900(Entity *r0);
+extern void sub_8042968(Entity *r0);
+extern void sub_806ABAC(Entity *, Entity *);
+void sub_8041BBC(Entity *r0);
+extern u8 sub_8045888(Entity *);
+extern void sub_806A2BC(Entity *, u8);
 extern void sub_804178C(u32);
-extern void sub_803F508(struct Entity *);
-extern void sub_804AC20(struct Position *);
+extern void sub_803F508(Entity *);
+extern void sub_804AC20(Position *);
 extern void sub_803E46C(u32);
 extern void sub_803E708(u32 r0, u32 r1);
 
-void sub_8069E0C(struct Entity *pokemon)
+void sub_8069E0C(Entity *pokemon)
 {
   s32 index;
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
 
   entityInfo = pokemon->info;
   if (HasAbility(pokemon, ABILITY_FORECAST)) {
@@ -68,7 +68,7 @@ void sub_8069E0C(struct Entity *pokemon)
 
 void TriggerWeatherAbilities(void)
 {
-  struct Entity *entity;
+  Entity *entity;
   s32 index;
 
   if (gDungeon->unkC != 0) {
@@ -96,7 +96,7 @@ void TriggerWeatherAbilities(void)
   }
 }
 
-s32 sub_8069F54(struct Entity *pokemon, s16 param_2)
+s32 sub_8069F54(Entity *pokemon, s16 param_2)
 {
   if ((((param_2 * 0x10000) + 0xfe880000U) >> 0x10) < 4) {
     if (HasAbility(pokemon, ABILITY_FORECAST)) {
@@ -109,14 +109,14 @@ s32 sub_8069F54(struct Entity *pokemon, s16 param_2)
   return param_2;
 }
 
-static inline u8 sub_8069F9C_sub(struct Entity *pokemon)
+static inline u8 sub_8069F9C_sub(Entity *pokemon)
 {
     u32 weather;
     weather = GetApparentWeather(pokemon);
     return gUnknown_80F51E4[weather];
 }
 
-void sub_8069F9C(struct Entity *pokemon,struct Entity * target,struct Move *move)
+void sub_8069F9C(Entity *pokemon,Entity * target,Move *move)
 {
   u8 type;
   u8 ability;
@@ -128,9 +128,9 @@ void sub_8069F9C(struct Entity *pokemon,struct Entity * target,struct Move *move
 #endif
   int randomIndex;
   int abilityIndex;
-  struct EntityInfo *iVar6; // r7
-  struct EntityInfo *iVar7; // r2
-  struct EntityInfo *iVar8;
+  EntityInfo *iVar6; // r7
+  EntityInfo *iVar7; // r2
+  EntityInfo *iVar8;
   u8 local_20 [4];
 
   if (!EntityExists(pokemon)) {
@@ -203,12 +203,12 @@ _0806A068:
   }
 }
 
-void sub_806A120(struct Entity * pokemon, struct Entity * target, struct Move* move)
+void sub_806A120(Entity * pokemon, Entity * target, Move* move)
 {
   u32 uVar2_u32;
   u8 moveType;
   const char *typeString;
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
 
   if ((((EntityExists(pokemon)) && (EntityExists(target))) && (pokemon != target))
      && (entityInfo = target->info, entityInfo->protectionStatus == STATUS_CONVERSION2)) {
@@ -226,17 +226,17 @@ void sub_806A120(struct Entity * pokemon, struct Entity * target, struct Move* m
   }
 }
 
-void sub_806A1B0(struct Entity *pokemon)
+void sub_806A1B0(Entity *pokemon)
 { 
   if ((EntityExists(pokemon)) && (HasAbility(pokemon, ABILITY_TRUANT))) {
     PausedStatusTarget(pokemon,pokemon,0,1,0);
   }
 }
 
-void sub_806A1E8(struct Entity *pokemon)
+void sub_806A1E8(Entity *pokemon)
 {
   bool8 bVar3;
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   bVar3 = FALSE;
   if (EntityExists(pokemon)) {
@@ -253,10 +253,10 @@ void sub_806A1E8(struct Entity *pokemon)
   }
 }
 
-void sub_806A240(struct Entity *pokemon, struct Entity *target)
+void sub_806A240(Entity *pokemon, Entity *target)
 {
   bool8 isNotTeamMember;
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   isNotTeamMember = FALSE;
   if (EntityExists(pokemon)){
@@ -278,7 +278,7 @@ void sub_806A240(struct Entity *pokemon, struct Entity *target)
   }
 }
 
-void sub_806A2BC(struct Entity *pokemon, u8 param_2)
+void sub_806A2BC(Entity *pokemon, u8 param_2)
 {
   if ((EntityExists(pokemon)) && (GetEntityType(pokemon) == ENTITY_MONSTER) && (gDungeon->cameraTarget != pokemon)) {
     if (param_2 != '\0') {

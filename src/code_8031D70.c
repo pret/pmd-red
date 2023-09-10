@@ -15,17 +15,17 @@ struct unkStruct_203B334
 {
     // size: 0x7C
     u32 mailIndex;
-    struct MenuInputStructSub unk4;
+    MenuInputStructSub unk4;
     u32 unk10;
-    struct UnkTextStruct2 *unk14;
-    struct UnkTextStruct2 unk18[4];
+    UnkTextStruct2 *unk14;
+    UnkTextStruct2 unk18[4];
     u8 unk78[4];
 };
 
 EWRAM_DATA_2 struct unkStruct_203B334 *gUnknown_203B334 = {0};
-extern struct unkStruct_203B480 *gUnknown_203B480;
+extern unkStruct_203B480 *gUnknown_203B480;
 
-const struct UnkTextStruct2 gUnknown_80E1FA8 = {
+const UnkTextStruct2 gUnknown_80E1FA8 = {
     0, 0, 0, 0,
     3, 
     0x0, 0x0,
@@ -36,7 +36,7 @@ const struct UnkTextStruct2 gUnknown_80E1FA8 = {
 
 const u8 gUnkData_80E1FC0[4] = {0x01, 0x00, 0x0A, 0x00};
 
-const struct UnkTextStruct2 gUnknown_80E1FC4 = {
+const UnkTextStruct2 gUnknown_80E1FC4 = {
     0, 0, 0, 0,
     6, 
     0x2, 0x2,
@@ -48,7 +48,7 @@ const struct UnkTextStruct2 gUnknown_80E1FC4 = {
 ALIGNED(4) const u8 gUnknown_80E1FDC[] = "Password";
 ALIGNED(4) static const u8 fill0[] = "pksdir0";
 
-extern void sub_803D2C0(u8 *, struct unkStruct_203B480 *);
+extern void sub_803D2C0(u8 *, unkStruct_203B480 *);
 
 void sub_8031E00(void);
 void sub_8031E58(void);
@@ -94,7 +94,7 @@ void sub_8031E10(void)
     {
         gUnknown_203B334->unk18[gUnknown_203B334->unk10]  = gUnknown_80E1FA8;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B334->unk18, 1, 1);
+        sub_800641C(gUnknown_203B334->unk18, TRUE, TRUE);
         MemoryFree(gUnknown_203B334);
         gUnknown_203B334 = NULL;
     }
@@ -103,7 +103,7 @@ void sub_8031E10(void)
 void sub_8031E58(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B334->unk18, 1, 1);
+    sub_800641C(gUnknown_203B334->unk18, TRUE, TRUE);
 }
 
 void DrawSOSPasswordScreen(void)
@@ -114,7 +114,7 @@ void DrawSOSPasswordScreen(void)
   u32 color;
   s32 index;
   u8 buffer [PASSWORD_BUFFER_SIZE + 2];
-  struct unkStruct_203B480 *mail;
+  unkStruct_203B480 *mail;
   
   mail = &gUnknown_203B480[gUnknown_203B334->mailIndex];
   sub_80073B8(gUnknown_203B334->unk10);

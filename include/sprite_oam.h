@@ -2,7 +2,7 @@
 #define GUARD_SPRITE_OAM_H
 
 // size: 0x8. Similar to struct OamData but unk6 is not copied to OAM
-struct SpriteOAM
+typedef struct SpriteOAM
 {
     // y:8  affineMode1:1  affineMode2:1  objMode:2  mosaic:1  bpp:1  shape:2
     /* 0x0 */ u16 attrib1;
@@ -12,7 +12,7 @@ struct SpriteOAM
     /* 0x4 */ u16 attrib3;
     // unk6_0:1  unk6_1:1  unk6_2:2?  unk6_4:12
     u16 unk6;
-};
+} SpriteOAM;
 
 // The SpriteOAM struct is handled with macros most likely.
 // Most funcs that deal with it look the same and do some weird bit manipulations one by one on the attributes.

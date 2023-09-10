@@ -3,6 +3,6 @@
 
 #include "dungeon_entity.h"
 
-void SendMessage(struct Entity *pokemon, const char message[]);
+void SendMessage(Entity *pokemon, const char message[]);
 
-#endif
+#endif // GUARD_CODE_80521D0_H

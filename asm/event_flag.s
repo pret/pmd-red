@@ -279,6 +279,7 @@ _0800177A:
 	bx r1
 	thumb_func_end sub_8001658
 
+@ https://decomp.me/scratch/xF3HH
 	thumb_func_start sub_8001784
 sub_8001784:
 	push {r4,r5,lr}

@@ -3,7 +3,7 @@
 
 #include "position.h"
 
-s32 GetDirectionTowardsPosition(struct Position *originPos, struct Position *targetPos);
-s32 GetDistance(struct Position *pos1, struct Position *pos2);
+s32 GetDirectionTowardsPosition(Position *originPos, Position *targetPos);
+s32 GetDistance(Position *pos1, Position *pos2);
 
 #endif

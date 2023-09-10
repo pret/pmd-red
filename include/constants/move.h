@@ -34,7 +34,8 @@ enum AccuracyType
     NUM_ACCURACY_TYPES
 };
 
-struct MoveDataEntry
+// size: 0x24
+typedef struct MoveDataEntry
 {
     /* 0x0 */ u8 *name;
     /* 0x4 */ s16 basePower;
@@ -57,16 +58,17 @@ struct MoveDataEntry
     /* 0x19 */ u8 rangeID;
     /* 0x1C */ u8 *description;
     /* 0x20 */ u8 *useText; // The text displayed when this move is used.
-};
+} MoveDataEntry;
 
-struct Move
+// size: 0x8
+typedef struct Move
 {
     u8 moveFlags;
     u8 moveFlags2;
     u16 id;
     u8 PP;
     u8 ginseng; // How much the move is boosted by Ginsengs.
-};
+} Move;
 
 enum TargetingFlag
 {
@@ -94,4 +96,4 @@ enum TargetingFlag
     TARGETING_FLAG_EXPOSE = 0x600,
 };
 
-#endif
+#endif // GUARD_CONSTANTS_MOVE_H

@@ -50,7 +50,6 @@ ALIGNED(4) static const char debug_fill4[] = "pksdir0";
 ALIGNED(4) static const char debug_fill5[] = "pksdir0";
 ALIGNED(4) static const char debug_fill6[] = "pksdir0";
 ALIGNED(4) static const char debug_fill7[] = "pksdir0";
-ALIGNED(4) static const char debug_fill8[] = "pksdir0";
 
 void NDS_DebugInit(void)
 {
@@ -72,25 +71,20 @@ void nullsub_26(void)
 {
 }
 
-// Unused
-void PrintFuncFileLineOrNotEntry(char * buf, struct DebugLocation *debug)
+UNUSED static void PrintFuncFileLineOrNotEntry(u8 *buf, DebugLocation *debug)
 {
-    if(debug != NULL)
-    {
+    if (debug != NULL)
         sprintf(buf, gFuncFileLineString, debug->func, debug->file, debug->line);
-    }
     else
-    {
         sprintf(buf, gNotEntryText);
-    }
 }
 
-void PrintFuncFileLine(char *buf, struct DebugLocation *loc, const char* prefix)
+void PrintFuncFileLine(u8 *buf, DebugLocation *loc, const u8* prefix)
 {
     sprintf(buf, gFuncFileLineStringWPrefix, prefix, loc->func, loc->file, loc->line);
 }
 
-void PrintMessageWithFuncFileLine(u8 *buffer, struct DebugLocation *debug, const char *text, ...)
+void PrintMessageWithFuncFileLine(u8 *buffer, DebugLocation *debug, const u8 *text, ...)
 {
     va_list vArgv;
     u32 length;
@@ -141,7 +135,7 @@ void nullsub_137(void)
 
 }
 
-static void FatalErrorPrintFuncFileLine(const char *prefix, struct DebugLocation *debug)
+static void FatalErrorPrintFuncFileLine(const char *prefix, DebugLocation *debug)
 {
     char buf[0x100];
     if(prefix != NULL){
@@ -163,7 +157,7 @@ static void FatalErrorFormatMessage(const char *text, ...)
 }
 
 
-void sub_8011B88(const char *text, ...)
+void sub_8011B88(const u8 *text, ...)
 {
     char bufPrint[0x100];
     va_list vArgv;
@@ -199,7 +193,7 @@ void UnusedHang(void)
     Hang();
 }
 
-void Log(u8 num, const char *text, ...)
+void Log(u8 num, const u8 *text, ...)
 {
     va_list vArgv;
     va_start(vArgv, text);
@@ -235,7 +229,7 @@ static void FatalErrorHang()
     Hang();
 }
 
-void FatalError(struct DebugLocation *debug, const char *text, ...) 
+void FatalError(DebugLocation *debug, const char *text, ...) 
 {
     char buf[0x100];
     va_list vArgv;

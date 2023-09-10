@@ -1,23 +1,24 @@
 #include "global.h"
+#include "code_80521D0.h"
+#include "code_805D8C8.h"
+#include "code_806CD90.h"
+#include "code_8077274_1.h"
+#include "code_808417C.h"
 #include "constants/ability.h"
 #include "constants/item.h"
 #include "constants/status.h"
 #include "constants/type.h"
 #include "dungeon_entity.h"
 #include "dungeon_global_data.h"
+#include "dungeon_items.h"
 #include "dungeon_movement.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
-#include "dungeon_items.h"
 #include "dungeon_util.h"
-#include "code_80521D0.h"
-#include "code_8077274_1.h"
-#include "code_808417C.h"
 #include "moves.h"
 #include "move_effects_target.h"
 #include "pokemon.h"
 #include "status_checks_1.h"
-#include "code_805D8C8.h"
 
 extern u8 gAvailablePokemonNames[0x58];
 extern u8 gUnknown_202DFE8[0x58];
@@ -166,59 +167,55 @@ extern u8 *gUnknown_80FBF84[];
 extern void sub_8049ED4();
 extern void sub_8040A84();
 extern void sub_803E46C(u32);
-extern u8 sub_806CEBC(struct Entity *);
-extern void sub_806CCB4(struct Entity *, u8);
-extern void SetMessageArgument(u8 *buffer, struct Entity *r1, u32);
-extern void sub_80522F4(struct Entity *pokemon, struct Entity *r1, const char[]);
-extern void EntityUpdateStatusSprites(struct Entity *);
-extern void sub_8042A74(struct Entity *r0);
+extern void SetMessageArgument(u8 *buffer, Entity *r1, u32);
+extern void sub_80522F4(Entity *pokemon, Entity *r1, const char[]);
+extern void EntityUpdateStatusSprites(Entity *);
+extern void sub_8042A74(Entity *r0);
 extern void sub_807EC28(bool8);
-extern s32 sub_8069F54(struct Entity *param_1, s16 param_2);
-extern struct OpenedFile *sub_80687D0(s16);
-extern void sub_806A898(struct Entity *, u32, u32);
-extern void HealTargetHP(struct Entity *pokemon, struct Entity *r1, s16, s16, u32);
-extern void sub_806CE68(struct Entity *, s32);
-extern void sub_806F324(struct Entity *, s16, u32, u32);
-extern void sub_806BFC0(struct EntityInfo *, u32);
-extern void sub_80420C8(struct Entity *r0);
-extern void nullsub_68(struct Entity *);
-extern void nullsub_67(struct Entity *);
-extern void nullsub_66(struct Entity *);
-extern void nullsub_65(struct Entity *);
-extern void nullsub_64(struct Entity *);
-extern void nullsub_63(struct Entity *);
-extern void nullsub_62(struct Entity *);
-extern void nullsub_61(struct Entity *);
-extern void nullsub_60(struct Entity *);
-extern void nullsub_59(struct Entity *);
-extern void nullsub_58(struct Entity *);
-extern void nullsub_57(struct Entity *);
-extern void sub_8041B34(struct Entity *);
-void sub_8041BD0(struct Entity *r0, u8 r1);
-void sub_8041EB4(struct Entity *);
-void sub_8041EA4(struct Entity *);
-extern void sub_8041E84(struct Entity *);
-extern void sub_8041E94(struct Entity *);
-extern void sub_8041E74(struct Entity *);
-extern void sub_8041E60(struct Entity *);
-extern void sub_8041E4C(struct Entity *);
-extern void sub_8041E3C(struct Entity *);
+extern s32 sub_8069F54(Entity *param_1, s16 param_2);
+extern void sub_806A898(Entity *, u32, u32);
+extern void HealTargetHP(Entity *pokemon, Entity *r1, s16, s16, u32);
+extern void sub_806F324(Entity *, s16, u32, u32);
+extern void sub_806BFC0(EntityInfo *, u32);
+extern void sub_80420C8(Entity *r0);
+extern void nullsub_68(Entity *);
+extern void nullsub_67(Entity *);
+extern void nullsub_66(Entity *);
+extern void nullsub_65(Entity *);
+extern void nullsub_64(Entity *);
+extern void nullsub_63(Entity *);
+extern void nullsub_62(Entity *);
+extern void nullsub_61(Entity *);
+extern void nullsub_60(Entity *);
+extern void nullsub_59(Entity *);
+extern void nullsub_58(Entity *);
+extern void nullsub_57(Entity *);
+extern void sub_8041B34(Entity *);
+void sub_8041BD0(Entity *r0, u8 r1);
+void sub_8041EB4(Entity *);
+void sub_8041EA4(Entity *);
+extern void sub_8041E84(Entity *);
+extern void sub_8041E94(Entity *);
+extern void sub_8041E74(Entity *);
+extern void sub_8041E60(Entity *);
+extern void sub_8041E4C(Entity *);
+extern void sub_8041E3C(Entity *);
 extern void sub_803F580(u32);
-extern void sub_8041E1C(struct Entity *);
-extern void nullsub_89(struct Entity *);
-extern void nullsub_88(struct Entity *);
-extern void nullsub_87(struct Entity *);
-extern void nullsub_86(struct Entity *);
-extern void sub_8041E0C(struct Entity *);
-extern void sub_8041DD8(struct Entity *r0, s32 r1); // NOTE: is s16 in another file
+extern void sub_8041E1C(Entity *);
+extern void nullsub_89(Entity *);
+extern void nullsub_88(Entity *);
+extern void nullsub_87(Entity *);
+extern void nullsub_86(Entity *);
+extern void sub_8041E0C(Entity *);
+extern void sub_8041DD8(Entity *r0, s32 r1); // NOTE: is s16 in another file
 extern s32 sub_803D870(void *, u32);
-extern void sub_806CF98(struct Entity *);
 extern bool8 sub_806AA0C(s32, u32);
-u32 ExtractSpeciesIndex(struct PokemonStruct **r0); // TODO: look more into this and fix it.
+u32 ExtractSpeciesIndex(PokemonStruct1 **r0); // TODO: look more into this and fix it.
+void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index);
 
-void MuzzleTarget(struct Entity *pokemon, struct Entity *target)
+void MuzzleTarget(Entity *pokemon, Entity *target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon, target, TRUE))) {
     entityInfo = target->info;
@@ -237,16 +234,16 @@ void MuzzleTarget(struct Entity *pokemon, struct Entity *target)
   }
 }
 
-void TransformStatusTarget(struct Entity * pokemon, struct Entity * target)
+void TransformStatusTarget(Entity * pokemon, Entity * target)
 {
     s16 species;
     s32 iVar5;
     s32 apparentID;
     s16 apparentID_s16;
     s32 index;
-    struct EntityInfo *entityInfo;
-    struct OpenedFile *iVar9;
-    struct PokemonStruct *auStack544[128];
+    EntityInfo *entityInfo;
+    OpenedFile *iVar9;
+    PokemonStruct1 *auStack544[128];
 
     if (!EntityExists(target))
         return;
@@ -294,10 +291,10 @@ void TransformStatusTarget(struct Entity * pokemon, struct Entity * target)
     }
 }
 
-void MobileStatusTarget(struct Entity * pokemon, struct Entity * target)
+void MobileStatusTarget(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo *entityInfo_1;
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo_1;
+  EntityInfo *entityInfo;
   
  
   if (EntityExists(target)) {
@@ -321,9 +318,9 @@ void MobileStatusTarget(struct Entity * pokemon, struct Entity * target)
   }
 }
 
-void ExposeStatusTarget(struct Entity * pokemon, struct Entity * target, s16 param_3)
+void ExposeStatusTarget(Entity * pokemon, Entity * target, s16 param_3)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   s32 param_3_s16;
   s32 param_3_s16_2;
   bool32 flag;
@@ -367,9 +364,9 @@ void ExposeStatusTarget(struct Entity * pokemon, struct Entity * target, s16 par
   }
 }
 
-void IdentityItemHolders(struct Entity *pokemon, struct Entity *target)
+void IdentityItemHolders(Entity *pokemon, Entity *target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon, target, TRUE))) {
     entityInfo = target->info;
@@ -386,9 +383,9 @@ void IdentityItemHolders(struct Entity *pokemon, struct Entity *target)
   }
 }
 
-void BlindTarget(struct Entity *pokemon, struct Entity *target)
+void BlindTarget(Entity *pokemon, Entity *target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon, target, TRUE))) {
     entityInfo = target->info;
@@ -410,9 +407,9 @@ void BlindTarget(struct Entity *pokemon, struct Entity *target)
   }
 }
 
-void CrossEyeVisionTarget(struct Entity *pokemon, struct Entity *target)
+void CrossEyeVisionTarget(Entity *pokemon, Entity *target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
 
   if (EntityExists(target)) {
@@ -438,9 +435,9 @@ void CrossEyeVisionTarget(struct Entity *pokemon, struct Entity *target)
   }
 }
 
-void RestoreVisionTarget(struct Entity *pokemon, struct Entity *target)
+void RestoreVisionTarget(Entity *pokemon, Entity *target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
 
   if (EntityExists(target)) {
@@ -463,15 +460,15 @@ void RestoreVisionTarget(struct Entity *pokemon, struct Entity *target)
   }
 }
 
-void RestorePPTarget(struct Entity * pokemon,struct Entity * target, s32 param_3)
+void RestorePPTarget(Entity * pokemon,Entity * target, s32 param_3)
 {
   volatile s32 PP;
   volatile s32 basePP;
-  struct Move *movePtr;
-  struct Move *movePtr1;
+  Move *movePtr;
+  Move *movePtr1;
   s32 index;
   bool8 PPChanged;
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   PPChanged = FALSE;
   if (EntityExists(target)) {
@@ -505,13 +502,13 @@ void RestorePPTarget(struct Entity * pokemon,struct Entity * target, s32 param_3
   }
 }
 
-void RaiseAtkStatTarget(struct Entity * pokemon, struct Entity *target, s32 increment)
+void RaiseAtkStatTarget(Entity * pokemon, Entity *target, s32 increment)
 {
   u32 oldStat;
   u32 oldStat1;
   s32 newStat;
-  struct EntityInfo *entityInfo;
-  struct EntityInfo *entityInfo1;
+  EntityInfo *entityInfo;
+  EntityInfo *entityInfo1;
 
   if (EntityExists(target)) {
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -538,13 +535,13 @@ void RaiseAtkStatTarget(struct Entity * pokemon, struct Entity *target, s32 incr
   }
 }
 
-void RaiseSpAtkStatTarget(struct Entity * pokemon, struct Entity *target, s32 increment)
+void RaiseSpAtkStatTarget(Entity * pokemon, Entity *target, s32 increment)
 {
   u32 oldStat;
   u32 oldStat1;
   s32 newStat;
-  struct EntityInfo *entityInfo;
-  struct EntityInfo *entityInfo1;
+  EntityInfo *entityInfo;
+  EntityInfo *entityInfo1;
 
   if (EntityExists(target)) {
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -571,13 +568,13 @@ void RaiseSpAtkStatTarget(struct Entity * pokemon, struct Entity *target, s32 in
   }
 }
 
-void RaiseDefStatTarget(struct Entity * pokemon, struct Entity *target, s32 increment)
+void RaiseDefStatTarget(Entity * pokemon, Entity *target, s32 increment)
 {
   u32 oldStat;
   u32 oldStat1;
   s32 newStat;
-  struct EntityInfo *entityInfo;
-  struct EntityInfo *entityInfo1;
+  EntityInfo *entityInfo;
+  EntityInfo *entityInfo1;
 
   if (EntityExists(target)) {
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -604,13 +601,13 @@ void RaiseDefStatTarget(struct Entity * pokemon, struct Entity *target, s32 incr
   }
 }
 
-void RaiseSpDefStatTarget(struct Entity * pokemon, struct Entity *target, s32 increment)
+void RaiseSpDefStatTarget(Entity * pokemon, Entity *target, s32 increment)
 {
   u32 oldStat;
   u32 oldStat1;
   s32 newStat;
-  struct EntityInfo *entityInfo;
-  struct EntityInfo *entityInfo1;
+  EntityInfo *entityInfo;
+  EntityInfo *entityInfo1;
 
   if (EntityExists(target)) {
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -637,9 +634,9 @@ void RaiseSpDefStatTarget(struct Entity * pokemon, struct Entity *target, s32 in
   }
 }
 
-void LongTossStatusTarget(struct Entity * pokemon, struct Entity * target)
+void LongTossStatusTarget(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
     entityInfo = target->info;
     SetMessageArgument(gUnknown_202DFE8,target,0);
@@ -654,9 +651,9 @@ void LongTossStatusTarget(struct Entity * pokemon, struct Entity * target)
     EntityUpdateStatusSprites(target);
 }
 
-void PierceStatusTarget(struct Entity * pokemon, struct Entity * target)
+void PierceStatusTarget(Entity * pokemon, Entity * target)
 {
-    struct EntityInfo *entityInfo;
+    EntityInfo *entityInfo;
   
     entityInfo = target->info;
     SetMessageArgument(gUnknown_202DFE8,target,0);
@@ -671,15 +668,15 @@ void PierceStatusTarget(struct Entity * pokemon, struct Entity * target)
     EntityUpdateStatusSprites(target);
 }
 
-void SetChargeStatusTarget(struct Entity *pokemon, struct Entity *target, u8 newStatus, struct Move *move, u8 *message)
+void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *move, u8 *message)
 {
   bool8 bVar2;
-  struct Move *movePtr;
+  Move *movePtr;
   s32 index;
   bool8 uVar5;
   s32 iVar7;
   s32 iVar8;
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -737,9 +734,9 @@ void SetChargeStatusTarget(struct Entity *pokemon, struct Entity *target, u8 new
   }
 }
 
-void sub_8079764(struct Entity * pokemon)
+void sub_8079764(Entity * pokemon)
 {
-    struct EntityInfo *entityInfo;
+    EntityInfo *entityInfo;
 
     if (EntityExists(pokemon)) {
         entityInfo = pokemon->info;
@@ -752,9 +749,9 @@ void sub_8079764(struct Entity * pokemon)
     }
 }
 
-void CounterStatusTarget(struct Entity * pokemon, struct Entity * target, u8 newStatus)
+void CounterStatusTarget(Entity * pokemon, Entity * target, u8 newStatus)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -774,9 +771,9 @@ void CounterStatusTarget(struct Entity * pokemon, struct Entity * target, u8 new
   }
 }
 
-void SafeguardStatusTarget(struct Entity * pokemon, struct Entity * target)
+void SafeguardStatusTarget(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -794,9 +791,9 @@ void SafeguardStatusTarget(struct Entity * pokemon, struct Entity * target)
   }
 }
 
-void MistStatusTarget(struct Entity * pokemon, struct Entity * target)
+void MistStatusTarget(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -814,9 +811,9 @@ void MistStatusTarget(struct Entity * pokemon, struct Entity * target)
   }
 }
 
-void WishStatusTarget(struct Entity * pokemon, struct Entity * target)
+void WishStatusTarget(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -834,9 +831,9 @@ void WishStatusTarget(struct Entity * pokemon, struct Entity * target)
   }
 }
 
-void MagicCoatStatusTarget(struct Entity * pokemon, struct Entity * target)
+void MagicCoatStatusTarget(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -854,9 +851,9 @@ void MagicCoatStatusTarget(struct Entity * pokemon, struct Entity * target)
   }
 }
 
-void LightScreenStatusTarget(struct Entity * pokemon, struct Entity * target)
+void LightScreenStatusTarget(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -874,9 +871,9 @@ void LightScreenStatusTarget(struct Entity * pokemon, struct Entity * target)
   }
 }
 
-void ReflectStatusTarget(struct Entity * pokemon, struct Entity * target)
+void ReflectStatusTarget(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -894,9 +891,9 @@ void ReflectStatusTarget(struct Entity * pokemon, struct Entity * target)
   }
 }
 
-void ProtectStatusTarget(struct Entity * pokemon, struct Entity * target)
+void ProtectStatusTarget(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (EntityExists(target)) {
     nullsub_63(target);
@@ -915,9 +912,9 @@ void ProtectStatusTarget(struct Entity * pokemon, struct Entity * target)
   }
 }
 
-void MirrorCoatStatusTarget(struct Entity * pokemon, struct Entity * target)
+void MirrorCoatStatusTarget(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -935,9 +932,9 @@ void MirrorCoatStatusTarget(struct Entity * pokemon, struct Entity * target)
   }
 }
 
-void EndureStatusTarget(struct Entity * pokemon, struct Entity * target)
+void EndureStatusTarget(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -955,9 +952,9 @@ void EndureStatusTarget(struct Entity * pokemon, struct Entity * target)
   }
 }
 
-void MirrorMoveStatusTarget(struct Entity * pokemon, struct Entity * target)
+void MirrorMoveStatusTarget(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -975,9 +972,9 @@ void MirrorMoveStatusTarget(struct Entity * pokemon, struct Entity * target)
   }
 }
 
-void Conversion2StatusTarget(struct Entity * pokemon, struct Entity * target)
+void Conversion2StatusTarget(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -1001,9 +998,9 @@ void Conversion2StatusTarget(struct Entity * pokemon, struct Entity * target)
   }
 }
 
-void VitalThrowStatusTarget(struct Entity * pokemon, struct Entity * target)
+void VitalThrowStatusTarget(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -1021,10 +1018,10 @@ void VitalThrowStatusTarget(struct Entity * pokemon, struct Entity * target)
   }
 }
 
-void sub_8079E34(struct Entity * pokemon, struct Entity * target, bool8 param_3)
+void sub_8079E34(Entity * pokemon, Entity * target, bool8 param_3)
 {
   bool8 statChanged;
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   s32 index;
   
   statChanged = FALSE;
@@ -1071,12 +1068,12 @@ void sub_8079E34(struct Entity * pokemon, struct Entity * target, bool8 param_3)
   }
 }
 
-void sub_8079F20(struct Entity * pokemon, struct Entity * target, u8 param_3, u8 param_4)
+void sub_8079F20(Entity * pokemon, Entity * target, u8 param_3, u8 param_4)
 {
   bool8 moveUnsealed; // r9
   s32 moveSpeed;
-  struct Move *move;
-  struct EntityInfo *entityInfo; // r7
+  Move *move;
+  EntityInfo *entityInfo; // r7
   bool8 bVar8; // r8
   s32 index;
   
@@ -1144,10 +1141,10 @@ void sub_8079F20(struct Entity * pokemon, struct Entity * target, u8 param_3, u8
   }
 }
 
-void sub_807A0CC(struct Entity * pokemon, struct Entity * target)
+void sub_807A0CC(Entity * pokemon, Entity * target)
 {
-  struct Move *move;
-  struct EntityInfo *entityInfo;
+  Move *move;
+  EntityInfo *entityInfo;
   s32 index;
 
   if (EntityExists(target)) {
@@ -1167,9 +1164,9 @@ void sub_807A0CC(struct Entity * pokemon, struct Entity * target)
   };
 }
 
-void SendSleepEndMessage(struct Entity * pokemon, struct Entity * target, bool8 param_3, bool8 param_4)
+void SendSleepEndMessage(Entity * pokemon, Entity * target, bool8 param_3, bool8 param_4)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   bool8 isAsleep;
   
   isAsleep = FALSE;
@@ -1219,9 +1216,9 @@ void SendSleepEndMessage(struct Entity * pokemon, struct Entity * target, bool8 
   }
 }
 
-void SendNonVolatileEndMessage(struct Entity * pokemon, struct Entity * target)
+void SendNonVolatileEndMessage(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (!EntityExists(target)) {
     return;
@@ -1248,10 +1245,10 @@ void SendNonVolatileEndMessage(struct Entity * pokemon, struct Entity * target)
   EntityUpdateStatusSprites(target);
 }
 
-void SendImmobilizeEndMessage(struct Entity * pokemon, struct Entity *target)
+void SendImmobilizeEndMessage(Entity * pokemon, Entity *target)
 {
   bool8 isFrozen;
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   isFrozen = FALSE;
   if (!EntityExists(target)) {
@@ -1290,9 +1287,9 @@ void SendImmobilizeEndMessage(struct Entity * pokemon, struct Entity *target)
   }
 }
 
-void SendVolatileEndMessage(struct Entity * pokemon, struct Entity *target)
+void SendVolatileEndMessage(Entity * pokemon, Entity *target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (!EntityExists(target)) {
     return;
@@ -1330,9 +1327,9 @@ void SendVolatileEndMessage(struct Entity * pokemon, struct Entity *target)
   CalcSpeedStage(target);
 }
 
-void SendProtectionEndMessage(struct Entity * pokemon, struct Entity *target)
+void SendProtectionEndMessage(Entity * pokemon, Entity *target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (!EntityExists(target)) {
     return;
@@ -1388,10 +1385,10 @@ void SendProtectionEndMessage(struct Entity * pokemon, struct Entity *target)
   EntityUpdateStatusSprites(target);
 }
 
-void SendWaitingEndMessage(struct Entity * pokemon, struct Entity * target, u8 waitingStatus)
+void SendWaitingEndMessage(Entity * pokemon, Entity * target, u8 waitingStatus)
 {
   u32 uVar3;
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -1428,9 +1425,9 @@ void SendWaitingEndMessage(struct Entity * pokemon, struct Entity * target, u8 w
   }
 }
 
-void SendLinkedEndMessage(struct Entity * pokemon, struct Entity * target)
+void SendLinkedEndMessage(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -1452,9 +1449,9 @@ void SendLinkedEndMessage(struct Entity * pokemon, struct Entity * target)
   }
 }
 
-void SendMoveEndMessage(struct Entity * pokemon, struct Entity * target)
+void SendMoveEndMessage(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo * entityInfo;
+  EntityInfo * entityInfo;
   
   if (!EntityExists(target)) {
     return;
@@ -1482,10 +1479,10 @@ void SendMoveEndMessage(struct Entity * pokemon, struct Entity * target)
   EntityUpdateStatusSprites(target);
 }
 
-void SendTransformEndMessage(struct Entity * pokemon, struct Entity *target)
+void SendTransformEndMessage(Entity * pokemon, Entity *target)
 {
   bool8 isInvisible;
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   u32 uVar3;
   
   isInvisible = FALSE;
@@ -1520,9 +1517,9 @@ void SendTransformEndMessage(struct Entity * pokemon, struct Entity *target)
   }
 }
 
-void SendEyesightEndMessage(struct Entity * pokemon,struct Entity * target)
+void SendEyesightEndMessage(Entity * pokemon,Entity * target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (!EntityExists(target)) {
     return;
@@ -1552,9 +1549,9 @@ void SendEyesightEndMessage(struct Entity * pokemon,struct Entity * target)
   }
 }
 
-void SendMuzzledEndMessage(struct Entity * pokemon, struct Entity * target)
+void SendMuzzledEndMessage(Entity * pokemon, Entity * target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (!EntityExists(target)) {
     return;
@@ -1575,10 +1572,10 @@ void SendMuzzledEndMessage(struct Entity * pokemon, struct Entity * target)
 
 // TODO: this involves a union for sleep/sleepTurns that I don't want to deal with right now
 /*
-    bool32 sub_807A96C(struct Entity * pokemon, struct Entity * target)
+    bool32 sub_807A96C(Entity * pokemon, Entity * target)
     {
-      struct EntityInfo *entityInfo;
-      struct EntityInfo *entityInfo_1;
+      EntityInfo *entityInfo;
+      EntityInfo *entityInfo_1;
       register bool32 bVar3 asm("r2");
       
       entityInfo = target->info;
@@ -1597,7 +1594,7 @@ void SendMuzzledEndMessage(struct Entity * pokemon, struct Entity * target)
     } 
 */
 NAKED
-void sub_807A96C(struct Entity *pokemon, struct Entity *target)
+void sub_807A96C(Entity *pokemon, Entity *target)
 {
     asm_unified(
 	"\tpush {r4-r6,lr}\n"
@@ -1635,9 +1632,9 @@ void sub_807A96C(struct Entity *pokemon, struct Entity *target)
 "_0807A9AC: .4byte 0x00007f01");
 }
 
-void WakeUpPokemon(struct Entity * pokemon)
+void WakeUpPokemon(Entity * pokemon)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   entityInfo = pokemon->info;
   entityInfo->sleep = STATUS_NONE;
@@ -1646,9 +1643,9 @@ void WakeUpPokemon(struct Entity * pokemon)
   EntityUpdateStatusSprites(pokemon);
 }
 
-void SendThawedMessage(struct Entity *pokemon, struct Entity *target)
+void SendThawedMessage(Entity *pokemon, Entity *target)
 {
-  struct EntityInfo *entityInfo;
+  EntityInfo *entityInfo;
   
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -1671,9 +1668,9 @@ void sub_807AA30(void)
   s32 xDiff;
   s32 wildIndex;
   s32 yDiff;
-  struct Entity *teamEntity;
-  struct Entity *wildEntity;
-  struct EntityInfo *entityInfo;
+  Entity *teamEntity;
+  Entity *wildEntity;
+  EntityInfo *entityInfo;
   s32 teamIndex;
   
   for(wildIndex = 0; wildIndex < DUNGEON_MAX_WILD_POKEMON; wildIndex++)

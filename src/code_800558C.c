@@ -21,7 +21,7 @@ extern s16 gUnknown_20270E8[];
 extern s16 *gUnknown_203B078;
 
 // data.s
-extern const u16 gUnknown_80B8008[17];
+extern const s16 gUnknown_80B8008[17];
 extern const s16 gUnknown_80B802A[16 * 10];
 extern const s16 gUnknown_80B816A[16 * 10];
 extern const s16 gUnknown_80B82AA[16 * 10];
@@ -56,7 +56,7 @@ void DoAxFrame_800558C(struct axPokemon *a0, s32 spriteX, s32 spriteY, u32 a3, u
         a0->axdata.flags &= 0xF7FF;
 }
 
-void sub_8005610(struct OpenedFile *a0, s32 a1, s32 a2, u8 *a3)
+void sub_8005610(OpenedFile *a0, s32 a1, s32 a2, u8 *a3)
 {
     sub_800561C((struct unkStructFor800561C *)a0->data, a1, a2, a3);
 }
@@ -74,7 +74,7 @@ static void sub_800561C(struct unkStructFor800561C *a0, s32 a1, s32 a2, u8 *a3)
     }
 }
 
-UNUSED static s32 *sub_8005668(struct OpenedFile *a0, s32 a1)
+UNUSED static s32 *sub_8005668(OpenedFile *a0, s32 a1)
 {
     return sub_8005674((struct unkStructFor800561C *)a0->data, a1);
 }
@@ -153,20 +153,20 @@ void sub_8005700(s16 *a0, struct axPokemon *a1)
     }
 }
 
-UNUSED static void sub_8005764(s32 a0, struct OpenedFile *file, s32 a2, u8 *a3)
+UNUSED static void sub_8005764(s32 a0, OpenedFile *file, s32 a2, u8 *a3)
 {
     sub_8005770(a0, file->data, a2, a3);
 }
 
-void sub_8005770(s32 param_1, u8 *RGBArray, s32 a1, u8 *a2)
+void sub_8005770(s32 param_1, u8 *colorArray, s32 a1, u8 *a2)
 {
     s32 i;
 
     for (i = 0; i < 16; i++)
-        SetBGPaletteBufferColorRGB((param_1 + 0x10) * 0x10 + i, &RGBArray[i * 4], a1, a2);
+        SetBGPaletteBufferColorRGB((param_1 + 0x10) * 0x10 + i, &colorArray[i * 4], a1, a2);
 }
 
-// Maybe struct Position
+// Maybe Position
 void nullsub_7(s16 *a0)
 {}
 
@@ -237,19 +237,14 @@ void sub_80057E8(void)
     gUnknown_203B078 = NULL;
 }
 
-#ifdef NONMATCHING // Not enough dopamine reward for this one. 86.61% https://decomp.me/scratch/Hj8Tn
-void sub_8005838(s32 *a0, u8 a1)
+#ifdef NONMATCHING // 98.13% https://decomp.me/scratch/sflGg
+void sub_8005838(s32 *a0, u8 kind)
 {
-    u8 kind;
     s16 *r1;
     s16 *r2;
     s16 *r3;
     s32 i;
-s32 *case5r4;
-s32 *iStack00000004;
-s32 *iStack00000008;
 
-    kind = a1;
     if (!gUnknown_2026E4C)
         kind = 0;
 
@@ -415,30 +410,31 @@ s32 *iStack00000008;
             else {
                 s32 iVar5;
                 s32 r4;
-                s32 ip;
-                for (i = 0, ip = 256, r1 = &gUnknown_80B8008[-a0[1]]; i < 160; r1++, i++) {
+                for (i = 0; i < 160; i++) {
                     if (a0[1] > i) {
                         *r3++ = *r2++;
-                        *r3++ = ip;
+                        *r3++ = 256;
                     }
                     else {
                         if (a0[3] <= i) {
                             *r3++ = *r2++;
-                            *r3++ = ip;
+                            *r3++ = 256;
                         }
                         else {
                             if (i - a0[1] < 16) {
-                                iVar5 = a0[2] - *r1;
-                                r4 = a0[0] + *r1;
+                                iVar5 = gUnknown_80B8008[i - a0[1]];
+                                r4 = a0[0] + gUnknown_80B8008[i - a0[1]];
+                                iVar5 -= a0[2];
                             }
                             else {
                                 if (a0[3] - i < 16) {
-                                    iVar5 = a0[2] - gUnknown_80B8008[r4];
+                                    iVar5 = gUnknown_80B8008[r4];
                                     r4 = a0[0] + gUnknown_80B8008[r4];
+                                    iVar5 -= a0[2];
                                 }
                                 else {
-                                    iVar5 = a0[2];
                                     r4 = a0[0];
+                                    iVar5 = a0[2];
                                 }
                             }
 
@@ -497,10 +493,6 @@ s32 *iStack00000008;
             }
             break;
         case 5:
-            case5r4 = &gUnknown_2026E40;
-            iStack00000004 = &gUnknown_2026E44;
-            iStack00000008 = &gUnknown_2026E48;
-            r1 = gUnknown_80B82AA;
             for (i = 0; i < 15; i++) {
                 *r3++ = *r2++;
                 *r3++ = 256;
@@ -536,63 +528,45 @@ s32 *iStack00000008;
                 *r3++ = 256;
             }
             { 
-s32 spC;
-s32 r8;
-s32 iVar3;
-s32 sp14;
-s32 iVar5;
-s32 uVar7; // r2
-s32 sp10;
-s32 iVar10;
-s32 iVar11; // r4
-s32 iVar12; // r9
-s32 iVar13;
-s32 temp1;
-                temp1 = gUnknown_2026E48;
-                if (temp1 < 0)
-                    temp1 = gUnknown_2026E48 + 0xFF;
-                spC = 0x400 / ((temp1 >> 8) + 1);
+                s32 r8;
+                s32 iVar3;
+                s32 sp14;
+                s32 iVar5;
+                s32 uVar7; // r2
+                s32 sp10;
+                s32 iVar10;
+                s32 iVar11; // r4
 
-                iVar11 = *iStack00000004;
-                if (iVar11 < 0)
-                    iVar11 = *iStack00000004 + 0xFF;
-                iVar11 >>= 8;
+                s32 tmp1;
+                s32 tmp2;
+                s32 val1;
+                s32 val2;
+                s32 val3;
+                s32 spC;
 
-                sp10 = 0;
-                iVar12 = iVar11 * 4 + 2;
-                iVar10 = iVar11;
-                iVar13 = iVar11 * 4 + 2;
-                do {
-                    temp1 = sub_8009C7C(sp10);
-                    temp1 = *iStack00000008 * temp1;
-                    if (temp1 < 0)
-                        temp1 += 0xFF;
+                s32 j;
+                s32 k;
 
-                    sp14 = *iStack00000004 + (temp1 >> 8);
-                    if (sp14 < 0)
-                        sp14 += 0xFF;
-                    sp14 >>= 8;
+                val1 = gUnknown_2026E40;
+                val2 = gUnknown_2026E44;
+                val3 = gUnknown_2026E48;
+                
+                spC = 0x400 / (val3 / 256 + 1);
+                iVar11 = val2 / 256;
 
-                    r8 = *iStack00000004 - (temp1 >> 8);
-                    if (r8 < 0)
-                        r8 += 0xFF;
-                    r8 >>= 8;
+                j = iVar11;
+                k = iVar11;
+                for (sp10 = 0; sp10 < 0x400; sp10 += spC) {
+                    tmp1 = val3 * sub_8009C7C(sp10) / 256;
 
-                    if (iVar10 < sp14 || iVar11 > r8) {
-                        temp1 = sub_8009D04(sp10);
-                        temp1 = *iStack00000008 * temp1;
-                        if (temp1 < 0)
-                            temp1 += 0xFF;
+                    sp14 = (val2 + tmp1) / 256;
+                    r8 = (val2 - tmp1) / 256;
 
-                        iVar5 = *case5r4 - (temp1 >> 8);
-                        if (iVar5 < 0)
-                            iVar5 += 0xFF;
-                        iVar5 = iVar5 >> 8;
+                    if (j < sp14 || k > r8) {
+                        tmp2 = val3 * sub_8009D04(sp10) / 256;
 
-                        iVar3 = *case5r4 + (temp1 >> 8);
-                        if (iVar3 < 0)
-                            iVar3 += 0xFF;
-                        iVar3 >>= 8;
+                        iVar5 = (val1 - tmp2) / 256;
+                        iVar3 = (val1 + tmp2) / 256;
 
                         if (iVar5 < 0)
                             iVar5 = 0;
@@ -603,45 +577,42 @@ s32 temp1;
                         if (iVar3 > 240 - 1)
                             iVar3 = 160 - 1;
 
-                        if (iVar3 > iVar5)
-                            uVar7 = (iVar3 << 8) | iVar5;
-                        else
+                        if (iVar5 > iVar3)
                             uVar7 = (iVar5 << 8) | iVar3;
+                        else
+                            uVar7 = (iVar3 << 8) | iVar5;
 
-                        while (iVar10 < sp14) {
-                            if (iVar10 >= 0) { // Cannot merge ifs for matching
-                                if (iVar10 < 160) {
+                        while (j < sp14) {
+                            if (j >= 0) { // Cannot merge ifs for matching
+                                if (j < 160) {
                                     if (gUnknown_2026E54 == 0)
-                                        gUnknown_2026E60[iVar13] = uVar7;
+                                        gUnknown_2026E60[iVar11 * 2 + j * 2] = uVar7;
                                     else
-                                        gUnknown_20270E8[iVar13] = uVar7;
+                                        gUnknown_20270E8[iVar11 * 2 + j * 2] = uVar7;
                                 }
                             }
-                            iVar13 += 2;
-                            iVar10++;
+                            j++;
                         }
 
-                        while (iVar11 > r8) {
-                            if (iVar11 >= 0) { // Cannot merge ifs for matching
-                                if (iVar11 < 160) {
+                        while (k > r8) {
+                            if (k >= 0) { // Cannot merge ifs for matching
+                                if (k < 160) {
                                     if (gUnknown_2026E54 == 0)
-                                        gUnknown_2026E60[iVar12] = uVar7;
+                                        gUnknown_2026E60[iVar11 * 2 + k * 2] = uVar7;
                                     else
-                                        gUnknown_20270E8[iVar12] = uVar7;
+                                        gUnknown_20270E8[iVar11 * 2 + k * 2] = uVar7;
                                 }
                             }
-                            iVar12 -= 2;
-                            iVar11--;
+                            k--;
                         }
                     }
-                    sp10 += spC;
-                } while (sp10 < 0x400);
+                }
             }
             break;
     }
 }
 #else
-NAKED void sub_8005838(s32 *a0, u8 a1)
+NAKED void sub_8005838(s32 *a0, u8 kind)
 {
     asm_unified(
     "push {r4-r7,lr}\n"

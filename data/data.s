@@ -1,105 +1,32 @@
 	.section .rodata
 
-	.string "pksdir0\0"
+	.align 2, 0
+@ event_flag.c
+.string "pksdir0\0"
 
-	.global gUnknown_80B690C
-gUnknown_80B690C: @ 80B690C
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x19, 0x00, 0x00, 0x00
-        .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0x34, 0x00, 0x00, 0x00
-        .byte 0x02, 0x00, 0x00, 0x00
-        .byte 0x85, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x45, 0x01, 0x00, 0x00
-        .byte 0x04, 0x00, 0x00, 0x00
-        .byte 0x07, 0x00, 0x00, 0x00
-        .byte 0x05, 0x00, 0x00, 0x00
-        .byte 0x9e, 0x00, 0x00, 0x00
-        .byte 0x06, 0x00, 0x00, 0x00
-        .byte 0x1b, 0x01, 0x00, 0x00
-        .byte 0x07, 0x00, 0x00, 0x00
-        .byte 0x36, 0x00, 0x00, 0x00
-        .byte 0x08, 0x00, 0x00, 0x00
-        .byte 0x04, 0x00, 0x00, 0x00
-        .byte 0x09, 0x00, 0x00, 0x00
-        .byte 0x18, 0x01, 0x00, 0x00
-        .byte 0x0a, 0x00, 0x00, 0x00
-        .byte 0x9b, 0x00, 0x00, 0x00
-        .byte 0x0b, 0x00, 0x00, 0x00
-        .byte 0x68, 0x00, 0x00, 0x00
-        .byte 0x0c, 0x00, 0x00, 0x00
-        .byte 0x42, 0x00, 0x00, 0x00
-        .byte 0x0d, 0x00, 0x00, 0x00
-        .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0x0e, 0x00, 0x00, 0x00
-        .byte 0x98, 0x00, 0x00, 0x00
-        .byte 0x0f, 0x00, 0x00, 0x00
-        .byte 0x15, 0x01, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
+	.align 2, 0
+	.global gUnknown_80B6D30
+gUnknown_80B6D30:
+    .2byte 5, 7, 0, 0, 1, 0; .4byte gUnknown_80B6D88
+    .2byte 5, 7, 2, 0, 1, 0; .4byte gUnknown_80B6D80
+    .2byte 5, 7, 4, 0, 1, 0; .4byte gUnknown_80B6D78
+    .2byte 5, 7, 6, 0, 1, 0; .4byte gUnknown_80B6D70
 
-	.global gUnknown_80B6994
-gUnknown_80B6994: @ 80B6994
-        .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0x07, 0x00, 0x00, 0x00
-        .byte 0x01, 0x00, 0x00, 0x00
-        .byte 0x9e, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x18, 0x01, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x98, 0x00, 0x00, 0x00
-        .byte 0x02, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
+gUnknown_80B6D70:
+    .string "LOCAL3\0"
+    .align 2, 0
 
-	.global gPMDBuildVersion
-gPMDBuildVersion: @ 80B69BC
-        .string "PKDi ver 1.0 [Apr 28 2006] 16:37:54\0"
-        .align 2,0
+gUnknown_80B6D78:
+    .string "LOCAL2\0"
+    .align 2, 0
 
-        .global titlen0_text
-        titlen0_text:
-        .string "titlen0\0"
-        .align 2,0
+gUnknown_80B6D80:
+    .string "LOCAL1\0"
+    .align 2, 0
 
-        .global titlen1_text
-        titlen1_text:
-        .string "titlen1\0"
-        .align 2,0
-
-        .global titlen2_text
-        titlen2_text:
-        .string "titlen2\0"
-        .align 2,0
-
-	.global gLoadScreenBackgroundFileNames
-gLoadScreenBackgroundFileNames: @ 80B69F8
-        .4byte titlen0_text
-        .4byte titlen1_text
-        .4byte titlen2_text
-
-        .global titlen0p_text
-        titlen0p_text:
-        .string "titlen0p\0"
-        .align 2,0
-
-        .global titlen1p_text
-        titlen1p_text:
-        .string "titlen1p\0"
-        .align 2,0
-
-        .global titlen2p_text
-        titlen2p_text:
-        .string "titlen2p\0"
-        .align 2,0
-
-	.global gLoadScreenBackgroundPaletteFileNames
-gLoadScreenBackgroundPaletteFileNames: @ 80B6A28
-        .4byte titlen0p_text
-        .4byte titlen1p_text
-        .4byte titlen2p_text
-
-	#include "text/save.inc"
+gUnknown_80B6D88:
+    .string "LOCAL0\0"
+    .align 2, 0
 
 	.global gUnknown_80B6D90
 gUnknown_80B6D90: @ 80B6D90
@@ -546,7 +473,7 @@ gUnknown_80B71A0: @ 80B71A0
 
 	.global gUnknown_80B71E4
 gUnknown_80B71E4: @ 80B71E4
-    @ struct unkEventStruct
+    @ [struct unkEventStruct]
     .2byte 105, 1
     .2byte 106, 2
     .2byte 107, 3
@@ -656,7 +583,9 @@ gUnknown_80B7378: @ 80B7378
 	.global gUnknown_80B7388
 gUnknown_80B7388: @ 80B7388
         .string "1-1\0"
-        .string "pksdir0\0"
+
+@ code.c
+.string "pksdir0\0"
 
 	.global gUnknown_80B7394
 gUnknown_80B7394: @ 80B7394
@@ -1070,18 +999,26 @@ gUnknown_80B7DF8:
     .string "VERSION\0"
     .align 2, 0
 
-    .string "pksdir0\0"
-    .string "pksdir0\0"
+@ ???
+.string "pksdir0\0"
+
+@ ???
+.string "pksdir0\0"
     .fill 28, 1, 0
-    .string "pksdir0\0"
+
+@ code_8002774.s
+.string "pksdir0\0"
     .fill 8, 1, 0
 
 	.global gUnknown_80B7E3C
 gUnknown_80B7E3C: @ 80B7E3C
     .4byte 0, 1, 1, 1, 1, 0, 1, -1, 0, -1, -1, -1, -1, 0, -1, 1
 
-    .string "pksdir0\0"
-    .string "pksdir0\0"
+@ ???
+.string "pksdir0\0"
+
+@ memory.s
+.string "pksdir0\0"
 
 gUnknown_80B7E8C:
     .string "../system/memory_locate.c\0"
@@ -1134,14 +1071,30 @@ gUnknown_80B7F88: @ 80B7F88
 gLocalCreateErrorMessage: @ 80B7F94
         .string "Memroy LocalCreate buffer %08x size can't locate\0" @ Spelling error is intentional
         .align 2,0
-        .string "pksdir0\0"
-        .string "pksdir0\0"
-        .string "pksdir0\0"
-        .string "pksdir0\0"
-        .string "pksdir0\0"
-        .string "pksdir0\0"
-        .string "pksdir0\0"
-        .string "pksdir0\0"
+
+@ code_80035F0
+.string "pksdir0\0"
+
+@ other_random
+.string "pksdir0\0"
+
+@ util
+.string "pksdir0\0"
+
+@ bg_palette_buffer
+.string "pksdir0\0"
+
+@ input
+.string "pksdir0\0"
+
+@ code_8004AA0
+.string "pksdir0\0"
+
+@ sprite
+.string "pksdir0\0"
+
+@ code_800558C.c
+.string "pksdir0\0"
 
 	.global gUnknown_80B8008
 gUnknown_80B8008: @ 80B8008
@@ -1800,8 +1753,13 @@ gUnknown_80B83EA: @ 80B83EA
     .2byte 0x0000
 
     .align 2, 0
-    .string "pksdir0\0"
-    .string "pksdir0\0"
+
+@ text1.c ?
+.string "pksdir0\0"
+
+@ text1.c or text2.c (gKanjiA_file_string is used in text1.c but the rest in text2.c, and we get code changes for merging the files...)
+.string "pksdir0\0"
+
 	.global gUnknown_80B853C
 gUnknown_80B853C: @ 80B853C
     .4byte 0x66666666
@@ -1955,7 +1913,9 @@ gUnknown_80B8868: @ 80B8868
         .byte 0x00, 0x00, 0xf0, 0xff
         .byte 0x00, 0x00, 0x00, 0xff
         .byte 0x00, 0x00, 0x00, 0xf0
-        .string "pksdir0\0"
+
+@ text.s
+.string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80B88B0
@@ -1977,8 +1937,12 @@ gUnknown_80B88C0: @ 80B88C0
 gUnknown_80B88CC: @ 80B88CC
         .string "fontpal\0"
         .align 2,0
-        .string "pksdir0\0"
-        .string "pksdir0\0"
+
+@ code_8009804.s
+.string "pksdir0\0"
+
+@ file_system
+.string "pksdir0\0"
 
 	.global gFastMod3Lookup
 gFastMod3Lookup: @ 80B88E4
@@ -2162,306 +2126,4 @@ gUnknown_80B92E4: @ 80B92E4
     .4byte 30, 30, 30, 30, 31, 31, 31, 31
     .4byte 31, 31, 31, 31, 31, 31, 31, 31
 
-	.global gUnknown_80B96E4
-gUnknown_80B96E4: @ 80B96E4
-@ It's an array..
-    .4byte 0
-    .4byte 0
-    .4byte 45426
-    .4byte 71998
-    .4byte 90852
-    .4byte 105476
-    .4byte 117424
-    .4byte 127527
-    .4byte 136278
-    .4byte 143997
-    .4byte 150902
-    .4byte 157148
-    .4byte 162850
-    .4byte 168096
-    .4byte 172953
-    .4byte 177474
-    .4byte 181704
-    .4byte 185677
-    .4byte 189423
-    .4byte 192966
-    .4byte 196328
-    .4byte 199525
-    .4byte 202574
-    .4byte 205487
-    .4byte 208276
-    .4byte 210952
-    .4byte 213522
-    .4byte 215995
-    .4byte 218379
-    .4byte 220679
-    .4byte 222900
-    .4byte 225049
-    .4byte 227130
-    .4byte 229147
-    .4byte 231103
-    .4byte 233003
-    .4byte 234849
-    .4byte 236645
-    .4byte 238392
-    .4byte 240095
-    .4byte 241754
-    .4byte 243372
-    .4byte 244951
-    .4byte 246494
-    .4byte 248000
-    .4byte 249473
-    .4byte 250913
-    .4byte 252323
-    .4byte 253703
-    .4byte 255054
-    .4byte 256378
-    .4byte 257676
-    .4byte 258948
-    .4byte 260197
-    .4byte 261422
-    .4byte 262624
-    .4byte 263805
-    .4byte 264965
-    .4byte 266105
-    .4byte 267225
-    .4byte 268326
-    .4byte 269410
-    .4byte 270475
-    .4byte 271524
-    .4byte 272556
-    .4byte 273572
-    .4byte 274573
-    .4byte 275558
-    .4byte 276529
-    .4byte 277486
-    .4byte 278429
-    .4byte 279358
-    .4byte 280275
-    .4byte 281179
-    .4byte 282071
-    .4byte 282950
-    .4byte 283818
-    .4byte 284675
-    .4byte 285521
-    .4byte 286356
-    .4byte 287180
-    .4byte 287994
-    .4byte 288798
-    .4byte 289593
-    .4byte 290378
-    .4byte 291153
-    .4byte 291920
-    .4byte 292677
-    .4byte 293426
-    .4byte 294167
-    .4byte 294899
-    .4byte 295623
-    .4byte 296339
-    .4byte 297048
-    .4byte 297749
-    .4byte 298442
-    .4byte 299129
-    .4byte 299808
-    .4byte 300480
-    .4byte 301145
-    .4byte 301804
-    .4byte 302456
-    .4byte 303102
-    .4byte 303741
-    .4byte 304374
-    .4byte 305001
-    .4byte 305623
-    .4byte 306238
-    .4byte 306848
-    .4byte 307452
-    .4byte 308050
-    .4byte 308643
-    .4byte 309231
-    .4byte 309814
-    .4byte 310391
-    .4byte 310963
-    .4byte 311531
-    .4byte 312093
-    .4byte 312651
-    .4byte 313204
-    .4byte 313753
-    .4byte 314296
-    .4byte 314836
-    .4byte 315371
-    .4byte 315901
-    .4byte 316428
-    .4byte 316950
-    .4byte 317468
-    .4byte 317982
-    .4byte 318492
-    .4byte 318998
-    .4byte 319500
-    .4byte 319999
-    .4byte 320493
-    .4byte 320984
-    .4byte 321472
-    .4byte 321955
-    .4byte 322435
-    .4byte 322912
-    .4byte 323385
-    .4byte 323855
-    .4byte 324321
-    .4byte 324785
-    .4byte 325244
-    .4byte 325701
-    .4byte 326155
-    .4byte 326605
-    .4byte 327052
-    .4byte 327497
-    .4byte 327938
-    .4byte 328376
-    .4byte 328812
-    .4byte 329245
-    .4byte 329674
-    .4byte 330101
-    .4byte 330525
-    .4byte 330947
-    .4byte 331366
-    .4byte 331782
-    .4byte 332195
-    .4byte 332606
-    .4byte 333014
-    .4byte 333420
-    .4byte 333824
-    .4byte 334224
-    .4byte 334623
-    .4byte 335019
-    .4byte 335412
-    .4byte 335804
-    .4byte 336193
-    .4byte 336579
-    .4byte 336964
-    .4byte 337346
-    .4byte 337726
-    .4byte 338103
-    .4byte 338479
-    .4byte 338852
-    .4byte 339224
-    .4byte 339593
-    .4byte 339960
-    .4byte 340325
-    .4byte 340688
-    .4byte 341049
-    .4byte 341408
-    .4byte 341766
-    .4byte 342121
-    .4byte 342474
-    .4byte 342825
-    .4byte 343175
-    .4byte 343523
-    .4byte 343868
-    .4byte 344212
-    .4byte 344555
-    .4byte 344895
-    .4byte 345234
-    .4byte 345571
-    .4byte 345906
-    .4byte 346240
-    .4byte 346571
-    .4byte 346902
-    .4byte 347230
-    .4byte 347557
-    .4byte 347882
-    .4byte 348206
-    .4byte 348528
-    .4byte 348848
-    .4byte 349167
-    .4byte 349485
-    .4byte 349800
-    .4byte 350115
-    .4byte 350428
-    .4byte 350739
-    .4byte 351049
-    .4byte 351357
-    .4byte 351664
-    .4byte 351970
-    .4byte 352274
-    .4byte 352576
-    .4byte 352878
-    .4byte 353178
-    .4byte 353476
-    .4byte 353773
-    .4byte 354069
-    .4byte 354364
-    .4byte 354657
-    .4byte 354949
-    .4byte 355240
-    .4byte 355529
-    .4byte 355817
-    .4byte 356104
-    .4byte 356389
-    .4byte 356674
-    .4byte 356957
-    .4byte 357239
-    .4byte 357519
-    .4byte 357799
-    .4byte 358077
-    .4byte 358354
-    .4byte 358630
-    .4byte 358905
-    .4byte 359179
-    .4byte 359451
-    .4byte 359723
-    .4byte 359993
-    .4byte 360262
-    .4byte 360530
-    .4byte 360797
-    .4byte 361063
-    .4byte 361328
-    .4byte 361591
-    .4byte 361854
-    .4byte 362116
-    .4byte 362376
-    .4byte 362636
-    .4byte 362894
-    .4byte 363152
-    .4byte 363408
-    .4byte 363664
-    .4byte 363918
-    .4byte 364172
-    .4byte 364424
-    .4byte 364676
-    .4byte 364927
-    .4byte 365176
-    .4byte 365425
-    .4byte 365673
-    .4byte 365920
-    .4byte 366165
-    .4byte 366410
-    .4byte 366655
-    .4byte 366898
-    .4byte 367140
-    .4byte 367381
-    .4byte 367622
-    .4byte 367861
-    .4byte 368100
-    .4byte 368338
-    .4byte 368575
-    .4byte 368811
-    .4byte 369047
-    .4byte 369281
-    .4byte 369515
-    .4byte 369748
-    .4byte 369980
-    .4byte 370211
-    .4byte 370441
-    .4byte 370671
-    .4byte 370899
-    .4byte 371127
-    .4byte 371354
-    .4byte 371581
-    .4byte 371806
-    .4byte 372031
-    .4byte 372255
-    .4byte 372479
-    .4byte 372701
-    .4byte 372923
-    .4byte 373144
-    .4byte 373364
-    .4byte 373584
+@ END file_system

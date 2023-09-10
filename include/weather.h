@@ -3,6 +3,6 @@
 
 #include "dungeon_entity.h"
 
-u8 GetApparentWeather(struct Entity *pokemon);
+u8 GetApparentWeather(Entity *pokemon);
 
 #endif

@@ -14,32 +14,30 @@
 #define DUNGEON_MAX_WILD_POKEMON 16
 #define DUNGEON_MAX_POKEMON MAX_TEAM_MEMBERS + DUNGEON_MAX_WILD_POKEMON
 
-extern struct Dungeon *gDungeon;
-
 // size: 0x4
-struct DungeonLocation
+typedef struct DungeonLocation
 {
     /* 0x0 */ u8 id;
     /* 0x1 */ u8 floor;
-};
+} DungeonLocation;
 
 // size: 0x4
-struct Dungeon_sub
+typedef struct Dungeon_sub
 {
     u8 unk0;
     u8 unk1;
     u8 unk2;
-};
+} Dungeon_sub;
 
 // size: 0x30
-struct unkDungeonGlobal_unk1CE98_sub
+typedef struct unkDungeonGlobal_unk1CE98_sub
 {
     /* 0x0 */ u8 buffer1[10];
     /* 0xA */ u8 buffer2[10];
     /* 0x14 */ s16 moveID;
     /* 0x16 */ u8 fill16[0x2];
-    /* 0x18 */ struct DungeonLocation dungeonLocation;
-    /* 0x1C */ struct Item heldItem;
+    /* 0x18 */ DungeonLocation dungeonLocation;
+    /* 0x1C */ Item heldItem;
     /* 0x20 */ u32 exp;
     /* 0x24 */ s16 maxHPStat;
     /* 0x26 */ u8 atk;
@@ -52,10 +50,10 @@ struct unkDungeonGlobal_unk1CE98_sub
     /* 0x2D */ u8 defBoost;
     /* 0x2E */ u8 spDefBoost;
     u8 unk2F; // speedBoost?
-};
+} unkDungeonGlobal_unk1CE98_sub;
 
 // size: 0x10
-struct DungeonMusicPlayer
+typedef struct DungeonMusicPlayer
 {
     /* 0x0 */ u32 state;
     /* 0x4 */ u32 fadeOutSpeed;
@@ -63,10 +61,10 @@ struct DungeonMusicPlayer
     /* 0xA */ u16 songIndex;
     /* 0xC */ u16 pastSongIndex;
     /* 0xE */ u16 queuedSongIndex;
-};
+} DungeonMusicPlayer;
 
 // size: 0x1CEDC
-struct Dungeon
+typedef struct Dungeon
 {
     u8 unk0;
     u8 unk1;
@@ -85,16 +83,16 @@ struct Dungeon
     u8 unk11;
     s16 unk12;
     u8 fill14[0xB8 - 0x14];
-    struct Entity *unkB8;
-    struct Entity *unkBC;
+    Entity *unkB8;
+    Entity *unkBC;
     u8 fillC0[0x16D - 0xC0];
     u8 unk16D;
     u8 fill16E[0x179 - 0x16E];
     /* 0x179 */ bool8 pokemonExposed; // True if a Pokémon on the floor has the Exposed status.
     u8 fill17A[0x17C - 0x17A];
-    struct Dungeon_sub unk17C[0x100];
+    Dungeon_sub unk17C[0x100];
     /* 0x57C */ u8 fill57C[0x644 - 0x57c];
-    /* 0x644 */ struct DungeonLocation dungeonLocation;
+    /* 0x644 */ DungeonLocation dungeonLocation;
     u8 fill646[0x654 - 0x648];
     u8 unk654;
     u8 fill655[0x65C - 0x655];
@@ -126,7 +124,7 @@ struct Dungeon
     u8 fill68B[0x699 - 0x68B];
     u8 unk699;   
     u8 fill69A[0x69C - 0x69A];
-    /* 0x69C */ struct EntityInfo unk69C[4];
+    /* 0x69C */ EntityInfo unk69C[4];
     u8 fillEBC[0x363C - 0xEBC]; 
     /* 0x363C */ u8 expYieldRankings[NUM_MONSTERS];
     u8 fill37D9[0x37F0 - 0x37D9];
@@ -147,9 +145,9 @@ struct Dungeon
     /* 0x3A10 */ u16 unk3A10;
     u8 fill3A10[0x3A14 - 0x3A12];
     /* 0x3A14 */ s16 bossBattleIndex;
-    /* 0x3A18 */ struct Tile tiles[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
+    /* 0x3A18 */ Tile tiles[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     u8 fillE218[0xE220 - 0xE218];
-    struct Position unkE220[4];
+    Position unkE220[4];
     u8 unkE230[0xE23C - 0xE230];
     s16 unkE23C; // x coord of some kind
     s16 unkE23E; // y coord of some kind
@@ -168,13 +166,13 @@ struct Dungeon
     /* 0xE278 */ u8 waterSportTurns;
     /* 0xE279 */ bool8 nullifyWeather; // Air Lock and Cloud Nine toggle this to disable weather effects
     u8 fillE27A[0xE8C0 - 0xE27A];
-    /* 0xE8C0 */ struct Tile* tilePointers[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
+    /* 0xE8C0 */ Tile *tilePointers[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     u8 unk104C0;
-    /* 0x104C4 */ struct RoomData roomData[MAX_ROOM_COUNT];
+    /* 0x104C4 */ RoomData roomData[MAX_ROOM_COUNT];
     u8 fill10764[0x10844 - 0x10764];
     /* 0x10844 */ s16 naturalJunctionListCounts[MAX_ROOM_COUNT];
     u8 fill10874[0x10884 - 0x10874];
-    /* 0x10884 */ struct Position naturalJunctionList[MAX_ROOM_COUNT][32]; // Arrays of room exits for each room.
+    /* 0x10884 */ Position naturalJunctionList[MAX_ROOM_COUNT][32]; // Arrays of room exits for each room.
     u8 fill11444[0x11884 - 0x11484];
     u8 unk11884[0x1194];
     u8 fill12A18[0x12C24 - 0x12A18];
@@ -189,28 +187,28 @@ struct Dungeon
     /* 0x13578 */ u8 unk13578;
     /* 0x13579 */ u8 unk13579;
     u8 fill1357A[0x1357C - 0x1357A];
-    /* 0x1357C */ struct Entity *teamPokemon[MAX_TEAM_MEMBERS];
-    /* 0x1358C */ struct Entity *wildPokemon[DUNGEON_MAX_WILD_POKEMON];
-    /* 0x135CC */ struct Entity *allPokemon[DUNGEON_MAX_POKEMON]; // Contains both team and wild Pokémon
-    /* 0x1361C */ struct Entity *clientPokemon[0x40];
-    /* 0x1371C */ struct Entity *unk1371C[0x40];
-    /* 0x1381C */ struct Entity teamPokemonEntities[MAX_TEAM_MEMBERS];
-    /* 0x139EC */ struct Entity wildPokemonEntities[DUNGEON_MAX_WILD_POKEMON];
-    /* 0x1412C */ struct Entity clientPokemonEntities[0x40];
-    /* 0x15E2C */ struct Entity unk15E2C[0x40];
-    /* 0x17B2C */ struct Entity *lightningRodPokemon;
-    /* 0x17B30 */ struct Entity *snatchPokemon;
+    /* 0x1357C */ Entity *teamPokemon[MAX_TEAM_MEMBERS];
+    /* 0x1358C */ Entity *wildPokemon[DUNGEON_MAX_WILD_POKEMON];
+    /* 0x135CC */ Entity *allPokemon[DUNGEON_MAX_POKEMON]; // Contains both team and wild Pokémon
+    /* 0x1361C */ Entity *clientPokemon[0x40];
+    /* 0x1371C */ Entity *unk1371C[0x40];
+    /* 0x1381C */ Entity teamPokemonEntities[MAX_TEAM_MEMBERS];
+    /* 0x139EC */ Entity wildPokemonEntities[DUNGEON_MAX_WILD_POKEMON];
+    /* 0x1412C */ Entity clientPokemonEntities[0x40];
+    /* 0x15E2C */ Entity unk15E2C[0x40];
+    /* 0x17B2C */ Entity *lightningRodPokemon;
+    /* 0x17B30 */ Entity *snatchPokemon;
     /* 0x17B34 */ u8 fillunk1734[0x17B38 - 0x17B34];
     /* 0x17B38 */ u32 unk17B38;
     /* 0x17B3C */ u32 unk17B3C;
     u8 fill17B40[0x17B44 - 0x17B40];
-    /* 0x17B44 */ struct OpenedFile *sprites[MONSTER_MAX + 1];
-    /* 0x181E4 */ struct OpenedFile *paletFile;
-    /* 0x181E8 */ struct Position cameraPos;
-    /* 0x181EC */ struct Position cameraPosMirror;
-    /* 0x181F0 */ struct Position cameraPixelPos;
-    /* 0x181F4 */ struct Position cameraPixelPosMirror;
-    /* 0x181F8 */ struct Entity *cameraTarget;
+    /* 0x17B44 */ OpenedFile *sprites[MONSTER_MAX + 1];
+    /* 0x181E4 */ OpenedFile *paletFile;
+    /* 0x181E8 */ Position cameraPos;
+    /* 0x181EC */ Position cameraPosMirror;
+    /* 0x181F0 */ Position cameraPixelPos;
+    /* 0x181F4 */ Position cameraPixelPosMirror;
+    /* 0x181F8 */ Entity *cameraTarget;
     u32 unk181FC;
     u32 unk18200;
     u32 unk18204;
@@ -231,9 +229,11 @@ struct Dungeon
     u8 fill1C57F[0x1C58B - 0x1C57F];
     u8 unk1C58B;
     u8 fill1C58C[0x1CE98 - 0x1C58C];
-    struct unkDungeonGlobal_unk1CE98_sub unk1CE98; // TODO: not sure how large this is
+    unkDungeonGlobal_unk1CE98_sub unk1CE98; // TODO: not sure how large this is
     u32 unk1CEC8;
-    /* 0x1CECC */ struct DungeonMusicPlayer musPlayer;
-};
+    /* 0x1CECC */ DungeonMusicPlayer musPlayer;
+} Dungeon;
+
+extern Dungeon *gDungeon;
 
 #endif

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
+#include "code_8098BDC.h"
 #include "constants/colors.h"
 #include "constants/input.h"
 #include "game_options.h"
@@ -14,31 +15,31 @@ struct unkStruct_203B25C
     // size: 0x11C
     u32 state;
     u32 chosenHintIndex;
-    struct GameOptions newOptions;
+    GameOptions newOptions;
     u32 menuAction;
-    struct MenuStruct menu;
-    struct MenuItem menuItems[8];
+    MenuStruct menu;
+    MenuItem menuItems[8];
     u16 unkAC[8];
-    struct UnkTextStruct2 unkBC[4];
+    UnkTextStruct2 unkBC[4];
 };
 
 struct unkStruct_203B260  
 { 
-    struct GameOptions *optionsMenu;
-    struct MenuInputStructSub unk4;
-    struct MenuInputStruct input;
+    GameOptions *optionsMenu;
+    MenuInputStructSub unk4;
+    MenuInputStruct input;
     u32 unk44;
-    struct UnkTextStruct2 * unk48;
-    struct UnkTextStruct2 unk4C[4];
+    UnkTextStruct2 * unk48;
+    UnkTextStruct2 unk4C[4];
 };
 struct unkStruct_203B260  *gUnknown_203B260;
-extern struct GameOptions *gGameOptionsRef;
+extern GameOptions *gGameOptionsRef;
 extern struct unkStruct_203B25C *gUnknown_203B25C;
 
-extern const struct UnkTextStruct2 gUnknown_80DBFB0;
-extern const struct UnkTextStruct2 gUnknown_80DBFCC;
-extern const struct UnkTextStruct2 gUnknown_80DC020;
-extern const struct UnkTextStruct2 gUnknown_80DC03C;
+extern const UnkTextStruct2 gUnknown_80DBFB0;
+extern const UnkTextStruct2 gUnknown_80DBFCC;
+extern const UnkTextStruct2 gUnknown_80DC020;
+extern const UnkTextStruct2 gUnknown_80DC03C;
 
 extern u8 gWindowBGTitle[];
 extern u8 gUnknown_80DC064[];
@@ -65,7 +66,7 @@ extern void sub_801E0FC();
 extern void HandleChangeSettingsMenu();
 extern void sub_801DD84();
 extern void sub_801DED0();
-extern bool8 sub_801E198(struct GameOptions *);
+extern bool8 sub_801E198(GameOptions *);
 extern void CreateHintDisplayScreen(u32);
 extern void sub_801E3F0(u32);
 extern void CreateHintSelectionScreen(u32);
@@ -78,7 +79,6 @@ extern void DestroyHintDisplayScreen(void);
 extern u32 sub_801E218(void);
 extern void sub_801E2C4(void);
 extern void SetWindowBGColor(void);
-extern void sub_8099690(u32);
 
 enum 
 {
@@ -194,7 +194,7 @@ void sub_801DD84(void)
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B25C->unkBC, 1, 1);
+    sub_800641C(gUnknown_203B25C->unkBC, TRUE, TRUE);
 }
 
 void sub_801DED0(void)
@@ -367,7 +367,7 @@ void HandleChangeSettingsMenu(void)
   }
 }
 
-bool8 sub_801E198(struct GameOptions *optionsMenu)
+bool8 sub_801E198(GameOptions *optionsMenu)
 {
   gUnknown_203B260 = MemoryAlloc(sizeof(struct unkStruct_203B260), 8);
   gUnknown_203B260->optionsMenu = optionsMenu;
@@ -378,7 +378,7 @@ bool8 sub_801E198(struct GameOptions *optionsMenu)
   gUnknown_203B260->unk4C[gUnknown_203B260->unk44] = gUnknown_80DC03C;
   sub_8012D08(gUnknown_203B260->unk48,1);
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B260->unk4C,1,1);
+  sub_800641C(gUnknown_203B260->unk4C, TRUE, TRUE);
   sub_8013818(&gUnknown_203B260->input,1,1,gUnknown_203B260->unk44);
   nullsub_38();
   CreateOptionsMenu();
@@ -443,7 +443,7 @@ void sub_801E2C4(void)
     {
         gUnknown_203B260->unk4C[gUnknown_203B260->unk44] = gUnknown_80DC020;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B260->unk4C, 1, 1);
+        sub_800641C(gUnknown_203B260->unk4C, TRUE, TRUE);
         MemoryFree(gUnknown_203B260);
         gUnknown_203B260 = NULL;
     }

@@ -13,12 +13,12 @@
 
 u32 gTypeEffectivenessMultipliers[] = {0, 1, 2, 4};
 
-s32 WeightWeakTypePicker(struct Entity *user, struct Entity *target, u8 moveType)
+s32 WeightWeakTypePicker(Entity *user, Entity *target, u8 moveType)
 {
     s32 weight = 1;
     bool8 checkExposed = FALSE;
-    struct EntityInfo *userData;
-    struct EntityInfo *targetData;
+    EntityInfo *userData;
+    EntityInfo *targetData;
     u8 *targetTypes;
     u8 *targetType;
     u32 moveTypeOffset;

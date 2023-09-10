@@ -2,7 +2,7 @@
 #include "wonder_mail.h"
 #include "code_80958E8.h"
 
-extern struct unkStruct_203B490 *gUnknown_203B490;
+extern unkStruct_203B490 *gUnknown_203B490;
 
 bool8 IsMailSlotEmpty(u8);
 void ResetMailboxSlot(u8);
@@ -22,7 +22,7 @@ s32 CountFilledMailboxSlots(void)
 }
 
 // Unused
-bool8 sub_8095FB0(struct WonderMail *mail)
+bool8 sub_8095FB0(WonderMail *mail)
 {
     s32 index;
 
@@ -37,7 +37,7 @@ bool8 sub_8095FB0(struct WonderMail *mail)
     return TRUE;
 }
 
-struct WonderMail *GetMailboxSlotInfo(u8 index)
+WonderMail *GetMailboxSlotInfo(u8 index)
 {
     return &gUnknown_203B490->mailboxSlots[index];
 }

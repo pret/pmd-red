@@ -1,25 +1,27 @@
 #include "global.h"
+#include "code_800D090.h"
+#include "code_80130A8.h"
+#include "code_8094F88.h"
+#include "code_8097670.h"
 #include "constants/item.h"
 #include "constants/wonder_mail.h"
+#include "event_flag.h"
+#include "game_options.h"
+#include "memory.h"
+#include "menu_input.h"
 #include "pokemon.h"
 #include "pokemon_mail.h"
-#include "memory.h"
-#include "text1.h"
 #include "save.h"
-#include "game_options.h"
+#include "save_write.h"
+#include "text1.h"
 #include "wonder_mail.h"
-#include "code_800D090.h"
-#include "code_8094F88.h"
-#include "menu_input.h"
-#include "code_80130A8.h"
-#include "event_flag.h"
 
 struct unkStruct_203B2C8
 {
     // size: 0x140
     /* 0x0 */ u8 currState;
     /* 0x1 */ u8 unk1;
-    /* 0x4 */ struct OpenedFile *faceFile;
+    /* 0x4 */ OpenedFile *faceFile;
     /* 0x8 */ u8 *faceData;
     /* 0xC */ u16 unkC;
     /* 0xE */ u16 unkE;
@@ -29,14 +31,13 @@ struct unkStruct_203B2C8
     /* 0x13 */ u8 unk13;
     /* 0x14 */ u8 teamName[4]; // Figure out size of this buffer
     u8 fill18[0x114 - 0x18];
-    struct unkStruct_802F204 unk114;
+    unkStruct_802F204 unk114;
     u32 fill13C;
 };
 
 extern struct unkStruct_203B2C8 *gUnknown_203B2C8;
 
 extern void sub_80920D8(u8 *buffer);
-extern void sub_8097790(void);
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 extern u32 sub_802F298(void);
@@ -50,9 +51,9 @@ extern void sub_802B5B8(void);
 extern void sub_802B5FC(void);
 extern void sub_802B624(void);
 
-extern void sub_802F204(struct unkStruct_802F204 *, u32);
-extern void sub_803C37C(struct DungeonLocation *, u32, u8 *);
-extern u32 GetDungeonTeamRankPts(struct DungeonLocation *, u32);
+extern void sub_802F204(unkStruct_802F204 *, u32);
+extern void sub_803C37C(DungeonLocation *, u32, u8 *);
+extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
 
 ALIGNED(4) const char gRescueTeamNamePlaceholder[] = "????";
 
@@ -83,10 +84,10 @@ ALIGNED(4) const char wonder_mail_2_fill[] = "pksdir0";
 u32 sub_802B2D4(void)
 {
   s32 iVar1;
-  struct OpenedFile *faceFile;
+  OpenedFile *faceFile;
 
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
+  sub_800641C(NULL, TRUE, TRUE);
   gUnknown_203B2C8 = MemoryAlloc(sizeof(struct unkStruct_203B2C8),8);
   MemoryFill8((u8 *)gUnknown_203B2C8,0,sizeof(struct unkStruct_203B2C8));
   gUnknown_203B2C8->unk1 = -1;
@@ -148,7 +149,7 @@ void nullsub_132(void)
 
 void sub_802B3E0(void)
 {
-  struct unkStruct_203B480 *mail;
+  unkStruct_203B480 *mail;
   char *monName;
   char teamNameBuffer[40];
 
@@ -230,7 +231,7 @@ void sub_802B57C(void)
 void sub_802B5B8(void)
 {
   u32 uVar2;
-  struct unkStruct_203B480 *mail;
+  unkStruct_203B480 *mail;
   s32 temp;
 
   if (sub_80144A4(&temp) == 0) {

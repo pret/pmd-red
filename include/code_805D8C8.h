@@ -1,13 +1,13 @@
 #ifndef GUARD_CODE_805D8C8_H
 #define GUARD_CODE_805D8C8_H
 
-#include "sprite.h"
+#include "file_system.h"
 
-extern struct OpenedFile *sub_80687D0(s16);
-/*struct OpenedFile *sub_80687D0(s16 species)
-{
-    s32 species32 = species;
-    return gDungeon->sprites[species32];
-}*/
+void CloseAllSpriteFiles(void);
+
+void sub_8068768(void);
+void sub_80687AC(void);
+OpenedFile *sub_80687D0(s16 species);
+void sub_8068838(s16 id, bool32);
 
 #endif // GUARD_CODE_805D8C8_H

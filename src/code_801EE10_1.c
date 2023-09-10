@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_801EE10_1.h"
 #include "constants/input.h"
 #include "code_800D090.h"
 #include "pokemon.h"
@@ -13,7 +14,7 @@
 
 struct unkStruct_203B2AC
 {
-    struct MenuInputStruct input;
+    MenuInputStruct input;
     u32 unk34[3];
     u8 unk40[0x48 - 0x40];
     s16 speciesNum;
@@ -22,8 +23,8 @@ struct unkStruct_203B2AC
     u32 unkB0;
     u8 fillB4[0xE0 - 0xB4];
     u32 unkE0;
-    struct UnkTextStruct2 *unkE4;
-    struct UnkTextStruct2 unkE8[4];
+    UnkTextStruct2 *unkE4;
+    UnkTextStruct2 unkE8[4];
     u8 unk148[4];
 };
 extern struct unkStruct_203B2AC *gUnknown_203B2AC;
@@ -47,10 +48,10 @@ struct unkStruct_3001B60
 
 extern struct unkStruct_3001B60 *gUnknown_3001B60;
 
-extern struct UnkTextStruct2 gUnknown_80DC9B0;
-extern struct UnkTextStruct2 gUnknown_80DC9C8;
+extern UnkTextStruct2 gUnknown_80DC9B0;
+extern UnkTextStruct2 gUnknown_80DC9C8;
 
-extern void sub_808FF20(u32 *, struct PokemonStruct *, bool8);
+extern void sub_808FF20(u32 *, PokemonStruct1 *, bool8);
 extern void CreatePokemonInfoTabScreen(u32, s16, u32 *, u32 *, u32);
 extern void sub_802452C(void);
 bool8 ComparePokemonNames(s16 a1, s16 a2);
@@ -65,7 +66,7 @@ void SortbyInternalNo(s32 param_1, s32 param_2);
 void SortbyAlphabetNo(s32 param_1,s32 param_2);
 void SortbyName(s32 param_1,s32 param_2);
 
-bool8 sub_8024184(struct PokemonStruct *pokemon, u8 area)
+bool8 sub_8024184(PokemonStruct1 *pokemon, u8 area)
 {
     if(area == GetFriendArea(pokemon->speciesNum))
         return TRUE;
@@ -208,11 +209,11 @@ void SortbyName(s32 param_1,s32 param_2)
   }
 }
 
-struct PokemonStruct *sub_80243E8(void)
+PokemonStruct1 *sub_80243E8(void)
 {
     u8 buffer [40];
     u8 nameBuffer [20];
-    struct PokemonStruct *pokeStruct =  &gRecruitedPokemonRef->pokemon[gUnknown_3001B60->unk1A[gUnknown_3001B60->unk376 * gUnknown_3001B60->unk374 + gUnknown_3001B60->unk370]];
+    PokemonStruct1 *pokeStruct =  &gRecruitedPokemonRef->pokemon[gUnknown_3001B60->unk1A[gUnknown_3001B60->unk376 * gUnknown_3001B60->unk374 + gUnknown_3001B60->unk370]];
 
     sub_80922B4(nameBuffer, pokeStruct->name, POKEMON_NAME_LENGTH);
     sprintfStatic(buffer, gUnknown_80DC9A4,nameBuffer); // %s
@@ -269,7 +270,7 @@ void sub_802453C(void)
     {
         gUnknown_203B2AC->unkE8[gUnknown_203B2AC->unkE0] = gUnknown_80DC9B0;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B2AC->unkE8, 1, 1);
+        sub_800641C(gUnknown_203B2AC->unkE8, TRUE, TRUE);
         MemoryFree(gUnknown_203B2AC);
         gUnknown_203B2AC = NULL;
     }
@@ -281,7 +282,7 @@ void sub_8024588(void)
    gUnknown_203B2AC->unk148[1] = gUnknown_203B2AC->input.unk1E;
    gUnknown_203B2AC->unk148[3] = 0;
    ResetUnusedInputStruct();
-   sub_800641C(gUnknown_203B2AC->unkE8,1,1);
+   sub_800641C(gUnknown_203B2AC->unkE8, TRUE, TRUE);
 }
 
 void sub_80245D0(void)
@@ -294,7 +295,7 @@ void sub_80245D0(void)
 
 void sub_8024604(void)
 {
-  struct PokemonStruct *pokeStruct;
+  PokemonStruct1 *pokeStruct;
   u32 *iVar3;
   
   gUnknown_203B2AC->unk34[0] = 2;

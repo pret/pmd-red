@@ -5,14 +5,14 @@
 #include "dungeon_entity.h"
 #include "position.h"
 
-extern const struct Position gAdjacentTileOffsets[NUM_DIRECTIONS];
+extern const Position gAdjacentTileOffsets[NUM_DIRECTIONS];
 
-bool8 EntityExists(struct Entity *pokemon);
-u32 GetEntityType(struct Entity *entity);
-u8 GetEntityRoom(struct Entity *entity);
-struct EntityInfo *GetTrapData(struct Entity *entity);
-struct Item *GetItemData(struct Entity *entity);
-struct Tile *GetTileAtEntitySafe(struct Entity *entity);
-struct Item *GetItemData_1(struct Entity *entity);
+bool8 EntityExists(Entity *pokemon);
+u32 GetEntityType(Entity *entity);
+u8 GetEntityRoom(Entity *entity);
+EntityInfo *GetTrapData(Entity *entity);
+Item *GetItemData(Entity *entity);
+struct Tile *GetTileAtEntitySafe(Entity *entity);
+Item *GetItemData_1(Entity *entity);
 
 #endif

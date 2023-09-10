@@ -5,35 +5,28 @@
 #include "text2.h"
 #include "wonder_mail.h"
 #include "pokemon.h"
+#include "pokemon_mid.h"
 #include "rescue_team_info.h"
 #include "friend_area.h"
-#include "item.h"
+#include "items.h"
 #include "menu_input.h"
 #include "code_802C39C.h"
 #include "code_80130A8.h"
 #include "code_80118A4.h"
+#include "wonder_mail_3.h"
+#include "code_801B60C.h"
 
-struct unkStruct_803B344
-{
-    // size: 0xB4
-    struct WonderMail mail;
-    u8* unk14;
-    u8* unk18;
-    u8 fill1C[0x3C - 0x1C];
-    u8 unk3C[0x78];
-};
-
-extern struct unkStruct_803B344 *sub_803B344(u8);
+extern unkStruct_803B344 *sub_803B344(u8);
 
 struct unkStruct_203B30C
 {
     // size: 0x150
     s32 state;
     u8 unk4;
-    struct unkStruct_802C39C unk8;
-    struct MenuStruct unk60;
-    struct MenuItem unkB0[8];
-    struct UnkTextStruct2 unkF0[4];
+    unkStruct_802C39C unk8;
+    MenuStruct unk60;
+    MenuItem unkB0[8];
+    UnkTextStruct2 unkF0[4];
 };
 extern struct unkStruct_203B30C *gUnknown_203B30C;
 
@@ -45,15 +38,15 @@ struct unkStruct_203B310
     /* 0x8 */ bool8 displayClientDialogueSprite; // true to display the dialogue sprite for the client
     /* 0x9 */ u8 currTeamRank; // team rank
     /* 0xC */ s32 itemRewardIndex;
-    struct unkStruct_802F204 *unk10;
-    /* 0x14 */ struct OpenedFile *faceFile;
+    unkStruct_802F204 *unk10;
+    /* 0x14 */ OpenedFile *faceFile;
     /* 0x18 */ u8 *faceData;
     s16 unk1C;
     s16 unk1E;
     u8 unk20;
     u8 unk21;
     u8 unk22;
-    struct UnkTextStruct2 unk24[4];
+    UnkTextStruct2 unk24[4];
 };
 extern struct unkStruct_203B310 *gUnknown_203B310;
 
@@ -70,10 +63,10 @@ struct unkStruct_203B314
     u8 unkB9;
     u8 unkBA;
     u8 unkBB;
-    struct MenuInputStruct input;
+    MenuInputStruct input;
     u32 unkF0;
-    struct UnkTextStruct2 *unkF4;
-    struct UnkTextStruct2 unkF8[4];
+    UnkTextStruct2 *unkF4;
+    UnkTextStruct2 unkF8[4];
     u8 unk158[4];
 };
 
@@ -93,7 +86,7 @@ enum FriendRewardStates {
     REWARD_EXIT = 9,
 };
 
-extern u8 sub_802FCF0(u32);
+extern bool8 sub_802FCF0(u32);
 extern void sub_802F9C0(void);
 extern void sub_802FA50(void);
 extern s32 sub_802FBF4(void);
@@ -105,11 +98,9 @@ extern void sub_802F184(void);
 extern void sub_802F1E8(void);
 extern void sub_802F004();
 extern void sub_802F088();
-extern void sub_801B72C(void);
-extern u32 sub_801B6AC(void);
 extern void sub_802F108(void);
-extern void sub_803B35C(struct WonderMail*, struct unkStruct_802C39C *);
-extern void sub_802DE84(struct unkStruct_802C39C *);
+extern void sub_803B35C(WonderMail*, unkStruct_802C39C *);
+extern void sub_802DE84(unkStruct_802C39C *);
 extern void sub_802CDD4(u32);
 extern void sub_802CED8(u32);
 extern void sub_802CFD0(void);
@@ -118,17 +109,22 @@ extern u32 sub_802CE5C(u32);
 extern void sub_802CF14(void);
 extern u32 sub_802DEE0(void);
 extern void sub_802DF24(void);
-extern void PrintPokeNameToBuffer(u8 *buffer, struct PokemonStruct *pokemon);
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern void sub_802F6FC(void);
 extern void ProceedToNextRewardSceneState(void);
 extern void sub_802F300(void);
-extern s32 sub_808D544(u32);
-extern u32 sub_801B60C(u32, u8, u8);
 void HandleMissionReward(void);
 const u8 *sub_80974A0(s16 index);
 
-const struct UnkTextStruct2 gUnknown_80E03C4 = {
+extern u8 gUnknown_202E038[];
+extern u8 gUnknown_202E088[];
+extern u8 gUnknown_202E628[];
+extern u8 gUnknown_202DEA8[];
+extern u8 gUnknown_202E5D8[];
+extern u8 gAvailablePokemonNames[];
+extern u32 gUnknown_202DE30;
+extern const u8 *gUnknown_80D4970[];
+
+const UnkTextStruct2 gUnknown_80E03C4 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x00, 0x00,
@@ -136,7 +132,7 @@ const struct UnkTextStruct2 gUnknown_80E03C4 = {
     0x00, 0x00,
     NULL
 };
-const struct UnkTextStruct2 gUnknown_80E03DC = {
+const UnkTextStruct2 gUnknown_80E03DC = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x03, 0x03,
@@ -144,7 +140,7 @@ const struct UnkTextStruct2 gUnknown_80E03DC = {
     0x03, 0x00,
     NULL
 };
-const struct UnkTextStruct2 gUnknown_80E03F4 = {
+const UnkTextStruct2 gUnknown_80E03F4 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x15, 0x06,
@@ -155,7 +151,7 @@ const struct UnkTextStruct2 gUnknown_80E03F4 = {
 
 const u8 gUnknown_80E040C[] = "Send";
 static const u8 wonder_mail_fill[] = "pksdir0";
-const struct UnkTextStruct2 gUnknown_80E041C = {
+const UnkTextStruct2 gUnknown_80E041C = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x00, 0x00,
@@ -216,7 +212,7 @@ ALIGNED(4) const u8 gUnknown_80E06A8[] = _(
 
 static const u8 wonder_mail_fill2[] = "pksdir0";
 
-const struct UnkTextStruct2 gUnknown_80E06FC = {
+const UnkTextStruct2 gUnknown_80E06FC = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x00, 0x00,
@@ -225,7 +221,7 @@ const struct UnkTextStruct2 gUnknown_80E06FC = {
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80E0714 = {
+const UnkTextStruct2 gUnknown_80E0714 = {
     0x00, 0x00, 0x00, 0x00,
     0x06,
     0x02, 0x02,
@@ -233,7 +229,7 @@ const struct UnkTextStruct2 gUnknown_80E0714 = {
     0x0E, 0x00,
     NULL
 };
-const struct UnkTextStruct2 gUnknown_80E072C = {
+const UnkTextStruct2 gUnknown_80E072C = {
     0x00, 0x00, 0x00, 0x00,
     0x06,
     0x02, 0x02,
@@ -242,17 +238,10 @@ const struct UnkTextStruct2 gUnknown_80E072C = {
     NULL
 };
 
-extern u8 gUnknown_202E038[];
-extern u8 gUnknown_202E088[];
-extern u8 gUnknown_202E628[];
-extern u8 gUnknown_202DEA8[];
-extern u8 gUnknown_202E5D8[];
-extern u8 gAvailablePokemonNames[];
-extern u32 gUnknown_202DE30;
-extern const u8 *gUnknown_80D4970[];
-extern u8 gUnknown_80E0744[];
-extern u8 gUnknown_80E0754[];
-extern u8 gUnknown_80E0750[];
+ALIGNED(4) const u8 gUnknown_80E0744[] = "Dungeons";
+ALIGNED(4) const u8 gUnknown_80E0750[] =  {0x83, 0xC2};
+ALIGNED(4) const u8 gUnknown_80E0754[] = {0x83, 0xC0};
+ALIGNED(4) static const u8 sFill1[] = "pksdir0";
 
 u32 sub_802EF48(void)
 {
@@ -324,12 +313,12 @@ void sub_802F004(void)
             }
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B30C->unkF0, 1, 1);
+    sub_800641C(gUnknown_203B30C->unkF0, TRUE, TRUE);
 }
 
 void sub_802F088(void)
 {
-    struct unkStruct_803B344 *temp;
+    unkStruct_803B344 *temp;
 
     switch(gUnknown_203B30C->state)
     {
@@ -428,12 +417,12 @@ void sub_802F1E8(void)
 
 
 
-u32 sub_802F204(struct unkStruct_802F204 *r0, bool8 displayClientSprite)
+u32 sub_802F204(unkStruct_802F204 *r0, bool8 displayClientSprite)
 {
     struct unkStruct_203B310 *preload;
 
     ResetUnusedInputStruct();
-    sub_800641C(0, 1, 1);
+    sub_800641C(NULL, TRUE, TRUE);
     gUnknown_203B310 = MemoryAlloc(sizeof(struct unkStruct_203B310), 8);
     gUnknown_203B310->unk10 = r0;
     gUnknown_203B310->itemRewardIndex = 0;
@@ -507,7 +496,7 @@ void sub_802F300(void)
                 gUnknown_203B310->unk24[index] = gUnknown_80E041C;
             }
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B310->unk24, 1, 1);
+            sub_800641C(gUnknown_203B310->unk24, TRUE, TRUE);
         default:
             break;
     }
@@ -519,7 +508,7 @@ void HandleMissionReward(void)
   const u8 *rankString;
   u8 itemID;
   struct unkStruct_8090F58 local_20;
-  struct Item item;
+  Item item;
   
   switch(gUnknown_203B310->state) {
     case PREP_MONEY_REWARD:
@@ -696,7 +685,7 @@ void ProceedToNextRewardSceneState(void)
     }
 }
 
-u32 sub_802F73C(u32 r0, struct UnkTextStruct2_sub *r1, u32 r2, u8 r3)
+u32 sub_802F73C(u32 r0, UnkTextStruct2_sub *r1, u32 r2, u8 r3)
 {
     if (sub_802FCF0(r0))
         return 0;
@@ -721,7 +710,7 @@ u32 sub_802F73C(u32 r0, struct UnkTextStruct2_sub *r1, u32 r2, u8 r3)
 
     sub_8012D08(gUnknown_203B314->unkF4, r2);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B314->unkF8, 1, 1);
+    sub_800641C(gUnknown_203B314->unkF8, TRUE, TRUE);
     sub_8013818(&gUnknown_203B314->input, sub_802FBF4(), r2, r0);
     sub_802F9C0();
     sub_802FA50();
@@ -801,13 +790,13 @@ void sub_802F974(void)
     {
         gUnknown_203B314->unkF8[gUnknown_203B314->unkF0] = gUnknown_80E06FC;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B314->unkF8, 1, 1);
+        sub_800641C(gUnknown_203B314->unkF8, TRUE, TRUE);
         MemoryFree(gUnknown_203B314);
         gUnknown_203B314 = NULL;
     }
 }
 
-NAKED
+NAKED // sub_80095E4 memes
 void sub_802F9C0(void)
 {
     asm_unified(

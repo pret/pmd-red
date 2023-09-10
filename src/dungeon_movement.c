@@ -66,12 +66,12 @@ u8 sub_807034C(s16 id, struct Tile *tile)
     return TRUE;
 }
 
-u8 sub_80703A0(struct Entity *pokemon, struct Position *pos)
+u8 sub_80703A0(Entity *pokemon, Position *pos)
 {
     u8 crossableTerrain;
     struct Tile *tile;
     u16 tileFlags;
-    struct EntityInfo *entityInfo;
+    EntityInfo *entityInfo;
 
     entityInfo = pokemon->info;
     tile = GetTile(pos->x,pos->y);
@@ -104,10 +104,10 @@ u8 sub_80703A0(struct Entity *pokemon, struct Position *pos)
     return TRUE;
 }
 
-bool8 CanCrossWalls(struct Entity *pokemon)
+bool8 CanCrossWalls(Entity *pokemon)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
-    struct EntityInfo *pokemonInfo2 = pokemonInfo;
+    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo2 = pokemonInfo;
     if (pokemonInfo2->transformStatus == STATUS_MOBILE)
     {
         return TRUE;
@@ -123,12 +123,12 @@ bool8 CanCrossWalls(struct Entity *pokemon)
     return FALSE;
 }
 
-bool8 sub_807049C(struct Entity *pokemon, struct Position *pos)
+bool8 sub_807049C(Entity *pokemon, Position *pos)
 {
     s32 crossableTerrain;
     struct Tile *tile;
     u16 tileFlags;
-    struct EntityInfo *entityInfo;
+    EntityInfo *entityInfo;
 
     entityInfo = pokemon->info;
     tile = GetTile(pos->x, pos->y);
@@ -163,12 +163,12 @@ bool8 sub_807049C(struct Entity *pokemon, struct Position *pos)
     return TRUE;
 }
 
-bool8 sub_8070564(struct Entity *pokemon, struct Position *pos)
+bool8 sub_8070564(Entity *pokemon, Position *pos)
 {
     u8 crossableTerrain;
     struct Tile *tile;
     u16 tileFlags;
-    struct EntityInfo *entityInfo;
+    EntityInfo *entityInfo;
 #ifndef NONMATCHING
     register s32 tileFlags_0 asm("r0");
     register s32 crossableTerrain2 asm("r3");
@@ -207,12 +207,12 @@ bool8 sub_8070564(struct Entity *pokemon, struct Position *pos)
     return TRUE;
 }
 
-bool8 sub_80705F0(struct Entity *pokemon, struct Position *pos)
+bool8 sub_80705F0(Entity *pokemon, Position *pos)
 {
     s32 crossableTerrain;
     struct Tile *tile;
     u16 tileFlags;
-    struct EntityInfo *entityInfo;
+    EntityInfo *entityInfo;
 
     entityInfo = pokemon->info;
     tile = GetTile(pos->x, pos->y);
@@ -245,12 +245,12 @@ bool8 sub_80705F0(struct Entity *pokemon, struct Position *pos)
     return TRUE;
 }
 
-bool8 sub_80706A4(struct Entity *pokemon, struct Position *pos)
+bool8 sub_80706A4(Entity *pokemon, Position *pos)
 {
     s32 crossableTerrain;
     struct Tile *tile;
     u16 tileFlags;
-    struct EntityInfo *entityInfo;
+    EntityInfo *entityInfo;
 
     entityInfo = pokemon->info;
     tile = GetTile(pos->x, pos->y);
@@ -285,11 +285,11 @@ bool8 sub_80706A4(struct Entity *pokemon, struct Position *pos)
     return TRUE;
 }
 
-s32 CalcSpeedStage(struct Entity *pokemon)
+s32 CalcSpeedStage(Entity *pokemon)
 {
   s32 index;
   s32 speed;
-  struct EntityInfo * entityInfo;
+  EntityInfo * entityInfo;
   
   entityInfo = pokemon->info;
   speed = 0;

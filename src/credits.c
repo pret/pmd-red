@@ -1,4 +1,6 @@
 #include "global.h"
+#include "code_8098BDC.h"
+#include "event_flag.h"
 #include "input.h"
 #include "memory.h"
 #include "text1.h"
@@ -7,7 +9,7 @@
 // size: 0x6C
 struct unkCreditsStruct_203B340
 {
-    struct UnkTextStruct2 unk0[4];
+    UnkTextStruct2 unk0[4];
     s32 unk60; // Unsure if s32/u32/ptr
     s32 unk64;
     /* 0x68 */ s32 creditsCategoryIndex;
@@ -32,15 +34,13 @@ struct CreditsData
 EWRAM_DATA_2 struct unkCreditsStruct_203B340 *gUnknown_203B340 = {0};
 EWRAM_DATA_2 struct unkCreditsStruct_203B344 *gUnknown_203B344 = {0};
 
-extern struct UnkTextStruct2 gUnknown_80E4A10;
-extern struct UnkTextStruct2 gUnknown_80E4A28;
+extern UnkTextStruct2 gUnknown_80E4A10;
+extern UnkTextStruct2 gUnknown_80E4A28;
 extern const u32 gUnknown_80E4A40[];
 extern struct CreditsData* gCreditsTable[27];
 extern u16 gUnknown_80E5990[];
 
 extern void sub_80015C0(u32, u32);
-extern s32 sub_8001658(u32, u32);
-extern void sub_8099690(u32);
 extern void sub_8099A5C(u32, u32, u32);
 extern void sub_8099AFC(u32, u32, u32);
 extern u8 sub_8099B94();
@@ -58,7 +58,7 @@ s32 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
     u8 curChar;
     u8 buffer[128];
     
-    gUnknown_203B340 = (struct unkCreditsStruct_203B340 *)MemoryAlloc(sizeof(struct unkCreditsStruct_203B340), 8);
+    gUnknown_203B340 = MemoryAlloc(sizeof(struct unkCreditsStruct_203B340), 8);
     gUnknown_203B340->unk60 = 0;
     gUnknown_203B340->unk64 = param_2;
     gUnknown_203B340->creditsCategoryIndex = creditsCategoryIndex;
@@ -68,7 +68,7 @@ s32 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
     gUnknown_203B340->unk0[0] = gUnknown_80E4A28;
 
     ResetUnusedInputStruct();
-    sub_800641C(&gUnknown_203B340->unk0[0], 1, 1);
+    sub_800641C(&gUnknown_203B340->unk0[0], TRUE, TRUE);
     sub_8099690(2);
     sub_80073B8(0);
 
@@ -151,7 +151,7 @@ s32 sub_8035574(void)
         case 3:
             if (sub_8099B94() == 0) {
                 ResetUnusedInputStruct();
-                sub_800641C(NULL, 1, 1);
+                sub_800641C(NULL, TRUE, TRUE);
                 gUnknown_203B340->unk60 = 4;
             }
             break;

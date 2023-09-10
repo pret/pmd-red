@@ -3,7 +3,7 @@
 
 #include "dungeon_entity.h"
 
-bool8 TargetLeader(struct Entity *pokemon);
-struct Entity* GetLeaderIfVisible(struct Entity *pokemon);
+bool8 TargetLeader(Entity *pokemon);
+Entity* GetLeaderIfVisible(Entity *pokemon);
 
 #endif

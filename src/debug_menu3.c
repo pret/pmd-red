@@ -10,9 +10,9 @@
 #include "text1.h"
 #include "text2.h"
 
-EWRAM_DATA_2 static struct unkStruct_203B3F4 *sUnknown_203B3F4 = {0};
+EWRAM_DATA_2 static unkStruct_203B3F4 *sUnknown_203B3F4 = {0};
 
-static const struct UnkTextStruct2 sUnknown_80E7E8C =
+static const UnkTextStruct2 sUnknown_80E7E8C =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -21,7 +21,7 @@ static const struct UnkTextStruct2 sUnknown_80E7E8C =
     0x00, 0x00,
     NULL
 };
-static const struct UnkTextStruct2 sUnknown_80E7EA4 =
+static const UnkTextStruct2 sUnknown_80E7EA4 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -51,8 +51,8 @@ bool8 sub_803ABC8(void);
 u32 sub_803A888(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(0, 1, 1);
-    sUnknown_203B3F4 = MemoryAlloc(sizeof(struct unkStruct_203B3F4), 8);
+    sub_800641C(NULL, TRUE, TRUE);
+    sUnknown_203B3F4 = MemoryAlloc(sizeof(unkStruct_203B3F4), 8);
     sub_803A924(0);
     return 1;
 }
@@ -107,7 +107,7 @@ void sub_803A93C(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B3F4->unk9C, 1, 1);
+    sub_800641C(sUnknown_203B3F4->unk9C, TRUE, TRUE);
 }
 
 void sub_803A9AC(void)
@@ -232,7 +232,7 @@ void sub_803ABAC(void)
 
 bool8 sub_803ABC8(void)
 {
-    struct PokemonStruct *mon;
+    PokemonStruct1 *mon;
     s32 i;
     s32 mask;
     

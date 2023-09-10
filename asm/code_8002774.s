@@ -417,6 +417,9 @@ _08002A68:
 	bx r1
 	thumb_func_end sub_8002984
 
+@ https://decomp.me/scratch/HXC9z
+@ https://decomp.me/scratch/BWmWQ
+@ https://decomp.me/scratch/QfX03
 	thumb_func_start sub_8002A70
 sub_8002A70:
 	push {r4,lr}
@@ -491,6 +494,8 @@ _08002AFC:
 	bx r1
 	thumb_func_end sub_8002A70
 
+@ https://decomp.me/scratch/oCt37
+@ https://decomp.me/scratch/ZTHtV [Probably the correct one]
 	thumb_func_start sub_8002B04
 sub_8002B04:
 	push {lr}

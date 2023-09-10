@@ -15,7 +15,7 @@
 #include "status.h"
 #include "status_actions.h"
 #include "status_checks_1.h"
-#include "team_inventory.h"
+
 #include "text_util.h"
 #include "tile_types.h"
 #include "trap.h"
@@ -102,9 +102,9 @@ const u8 gDungeonCamouflageTypes[76] = {
 };
 
 
-bool8 CanUseOnSelfWithStatusChecker(struct Entity *pokemon, struct Move *move)
+bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
 {
-    struct EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->info;
     switch (move->id)
     {
         case MOVE_HAIL:
@@ -367,7 +367,7 @@ bool8 CanUseOnSelfWithStatusChecker(struct Entity *pokemon, struct Move *move)
         }
         case MOVE_TRAP_BUSTER:
         {
-            struct Entity *object = GetTileAtEntitySafe(pokemon)->object;
+            Entity *object = GetTileAtEntitySafe(pokemon)->object;
             if (object == NULL || GetEntityType(object) != ENTITY_TRAP)
             {
                 return FALSE;
@@ -494,7 +494,7 @@ bool8 CanUseOnSelfWithStatusChecker(struct Entity *pokemon, struct Move *move)
                 s32 i;
                 for (i = 0; i < DUNGEON_MAX_WILD_POKEMON; i++)
                 {
-                    struct Entity *target = gDungeon->wildPokemon[i];
+                    Entity *target = gDungeon->wildPokemon[i];
                     if (EntityExists(target) && target != pokemon && CanSeeTarget(pokemon, target))
                     {
                         if (target->info->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE)
@@ -518,7 +518,7 @@ bool8 CanUseOnSelfWithStatusChecker(struct Entity *pokemon, struct Move *move)
                 s32 i;
                 for (i = 0; i < MAX_TEAM_MEMBERS; i++)
                 {
-                    struct Entity *target = gDungeon->teamPokemon[i];
+                    Entity *target = gDungeon->teamPokemon[i];
                     if (EntityExists(target) && target != pokemon && CanSeeTarget(pokemon, target))
                     {
                         if (target->info->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE)
@@ -541,10 +541,10 @@ bool8 CanUseOnSelfWithStatusChecker(struct Entity *pokemon, struct Move *move)
     return TRUE;
 }
 
-bool8 CanUseOnTargetWithStatusChecker(struct Entity *user, struct Entity *target, struct Move *move)
+bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
 {
-    struct EntityInfo *userData = user->info;
-    struct EntityInfo *targetData = target->info;
+    EntityInfo *userData = user->info;
+    EntityInfo *targetData = target->info;
     s32 i;
     if (targetData->immobilizeStatus == STATUS_FROZEN && MoveCannotHitFrozen(move))
     {
@@ -904,7 +904,7 @@ bool8 CanUseOnTargetWithStatusChecker(struct Entity *user, struct Entity *target
     return TRUE;
 }
 
-bool8 HasDisabledMove(struct Move *moves)
+bool8 HasDisabledMove(Move *moves)
 {
     s32 i;
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -921,7 +921,7 @@ bool8 HasDisabledMove(struct Move *moves)
     return FALSE;
 }
 
-bool8 LastUsedMoveOutOfPP(struct Move *moves)
+bool8 LastUsedMoveOutOfPP(Move *moves)
 {
     s32 i;
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -936,7 +936,7 @@ bool8 LastUsedMoveOutOfPP(struct Move *moves)
     return FALSE;
 }
 
-bool8 HasLastUsedMove(struct Move *moves)
+bool8 HasLastUsedMove(Move *moves)
 {
     s32 i;
     for (i = 0; i < MAX_MON_MOVES; i++)

@@ -3364,6 +3364,7 @@ nullsub_174:
 	bx lr
 	thumb_func_end nullsub_174
 
+@ https://decomp.me/scratch/A63Io
 	thumb_func_start sub_80095E4
 sub_80095E4:
 	push {lr}

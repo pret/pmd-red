@@ -1,20 +1,22 @@
 #include "global.h"
-#include "constants/wonder_mail.h"
-#include "input.h"
-#include "main_menu.h"
-#include "play_time.h"
-#include "file_system.h"
-#include "memory.h"
-#include "menu.h"
-#include "text1.h"
-#include "text2.h"
-#include "text_util.h"
-#include "pokemon.h"
-#include "save.h"
+#include "bg_palette_buffer.h"
 #include "code_800D090.h"
 #include "code_8094F88.h"
-#include "menu_input.h"
+#include "code_8097670.h"
+#include "constants/wonder_mail.h"
 #include "event_flag.h"
+#include "file_system.h"
+#include "input.h"
+#include "main_menu.h"
+#include "memory.h"
+#include "menu.h"
+#include "menu_input.h"
+#include "play_time.h"
+#include "pokemon.h"
+#include "save.h"
+#include "text_util.h"
+#include "text1.h"
+#include "text2.h"
 
 extern const struct FileArchive gTitleMenuFileArchive;
 
@@ -22,8 +24,8 @@ struct LoadScreen
 {
     // size: 0x27c
     u32 currMenu;
-    struct MenuStruct unk4[4];
-    struct UnkTextStruct2 unk144[4];
+    MenuStruct unk4[4];
+    UnkTextStruct2 unk144[4];
     /* 0x1A4 */ u8 formattedTeamName[0x24];
     /* 0x1C8 */ u8 formattedPlayerName[0x24];
     /* 0x1EC */ u8 formattedLocation[0x24];
@@ -33,29 +35,23 @@ struct LoadScreen
 };
 
 EWRAM_DATA_2 struct LoadScreen *gLoadScreen = {0};
-EWRAM_DATA_2 struct MenuItem gUnknown_203B378[2] = {0};
+EWRAM_DATA_2 MenuItem gUnknown_203B378[2] = {0};
 EWRAM_DATA_2 u32 gUnknown_203B388[12] = {0};
 EWRAM_DATA_2 u32 gUnknown_203B3B8[12] = {0};
 
-extern struct unkStruct_203B484 *gUnknown_203B484;
+extern unkStruct_203B484 *gUnknown_203B484;
 
 u8 IsQuickSave(void);
 void DrawLoadScreenText(void);
 void sub_80397B4(void);
 
 extern void sub_80920D8(u8 *);
-extern struct PokemonStruct *GetPlayerPokemonStruct(void);
 extern u8 *sub_8098FB4();
-extern u8 *GetDungeonLocationInfo(void);
-extern u32 GetNumAdventures(void);
-extern void PrintDungeonLocationtoBuffer(u8 *, u8 *);
-extern u32 sub_8001658(u32, u32);
+extern void PrintDungeonLocationtoBuffer(u8 *, DungeonLocation *);
 
 extern void xxx_format_string(u8 *, u8 *, u8 *, u32);
 
-extern void SetBGPaletteBufferColorArray(s32, s32);
-
-const struct UnkTextStruct2 gUnknown_80E75F8 = {
+const UnkTextStruct2 gUnknown_80E75F8 = {
    0x00, 0x00, 0x00, 0x00,
    0x03,
    0x00, 0x00,
@@ -64,7 +60,7 @@ const struct UnkTextStruct2 gUnknown_80E75F8 = {
    NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80E7610 = {
+const UnkTextStruct2 gUnknown_80E7610 = {
    0x00, 0x00, 0x00, 0x00,
    0x03,
    0x02, 0x02,
@@ -75,7 +71,7 @@ const struct UnkTextStruct2 gUnknown_80E7610 = {
 
 const u8 gUnkData_80E7628[] = {0x20, 0x00, 0x00, 0x00};
 
-const struct UnkTextStruct2 gUnknown_80E762C = {
+const UnkTextStruct2 gUnknown_80E762C = {
    0x00, 0x00, 0x00, 0x00,
    0x03,
    0x02, 0x0F,
@@ -84,42 +80,42 @@ const struct UnkTextStruct2 gUnknown_80E762C = {
    NULL
 };
 
-const struct MenuItem gResumeQuicksaveMenuItems[3] =
+const MenuItem gResumeQuicksaveMenuItems[3] =
 {
     {"Resuming from quicksave.", 5},
     {"Is that OK?", 5},
     {NULL, 3},
 };
 
-const struct MenuItem gResumeAdventureMenuItems[3] =
+const MenuItem gResumeAdventureMenuItems[3] =
 {
     {"Resuming saved adventure.", 5},
     {"Is that OK?", 5},
     {NULL, 3},
 };
 
-const struct MenuItem gQuitWaitingRescueMenuItems[3] =
+const MenuItem gQuitWaitingRescueMenuItems[3] =
 {
     {"Quit awaiting rescue?", 5},
     {"Is that OK?", 5},
     {NULL, 3},
 };
 
-const struct MenuItem gDeleteSavePromptMenuItems[3] =
+const MenuItem gDeleteSavePromptMenuItems[3] =
 {
     {"Your saved data will be", 5},
     {"deleted. Is that OK?", 5},
     {NULL, 3},
 };
 
-const struct MenuItem gDeleteSaveConfirmMenuItems[3] =
+const MenuItem gDeleteSaveConfirmMenuItems[3] =
 {
     {"Are you sure you want to", 5},
     {"delete all of your saved data?", 5},
     {NULL, 3},
 };
 
-const struct UnkTextStruct2 gUnknown_80E7784 =
+const UnkTextStruct2 gUnknown_80E7784 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -129,7 +125,7 @@ const struct UnkTextStruct2 gUnknown_80E7784 =
     NULL
 };
 
-const struct MenuItem gLoadScreenYesNoMenu[3] =
+const MenuItem gLoadScreenYesNoMenu[3] =
 {
     {"Yes", 1},
     {"No", 2},
@@ -167,7 +163,7 @@ void CreateLoadScreen(u32 currMenu)
     gLoadScreen->unk144[index] = gUnknown_80E75F8;
   }
   ResetUnusedInputStruct();
-  sub_800641C(gLoadScreen->unk144,1,1);
+  sub_800641C(gLoadScreen->unk144, TRUE, TRUE);
   SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,0,&gUnknown_80E7610,gUnknown_203B378,0,6,0);
   switch(gLoadScreen->currMenu){
     case MENU_CONTINUE:
@@ -196,7 +192,7 @@ void CreateLoadScreen(u32 currMenu)
 void CleanLoadScreen(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(NULL, 1, 1);
+    sub_800641C(NULL, TRUE, TRUE);
     if(gLoadScreen != NULL)
     {
         MemoryFree(gLoadScreen);
@@ -265,8 +261,8 @@ void DrawLoadScreenText(void)
   u32 hours;
   u32 minutes;
   u32 seconds;
-  struct PokemonStruct *playerInfo;
-  struct unkStruct_203B484 *temp2;
+  PokemonStruct1 *playerInfo;
+  unkStruct_203B484 *temp2;
   u8 *r2;
 
   iVar2 = sub_8011FA8();
@@ -373,16 +369,16 @@ void DrawLoadScreenText(void)
 // TODO clean up but it matches so yea
 void sub_80397B4(void)
 {
-  struct OpenedFile *clmkFile;
-  int index;
-  int x;
+  OpenedFile *clmkFile;
+  s32 index;
+  s32 x;
   s32 y;
 
   clmkFile = OpenFileAndGetFileDataPtr(gClmkpatFileName,&gTitleMenuFileArchive); // clmkpat
 
   for(index = 0; index < 64; index++)
   {
-    SetBGPaletteBufferColorArray(index + 176,*(int *)((clmkFile->data) + 4) + index * 4);
+    SetBGPaletteBufferColorArray(index + 176, (u8 *)(*(s32 *)((clmkFile->data) + 4) + index * 4));
   }
 
   x = 8;
@@ -401,7 +397,7 @@ void sub_80397B4(void)
 
 bool8 IsQuickSave(void)
 {
-  int iVar1;
+  s32 iVar1;
   bool8 isQuicksave;
 
   iVar1 = sub_8011FA8();

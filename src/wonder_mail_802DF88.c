@@ -8,16 +8,17 @@
 #include "text2.h"
 #include "code_80130A8.h"
 #include "code_80118A4.h"
+#include "code_80958E8_1.h"
 
 struct unkStruct_203B2FC
 {
     // size: 0xA8
     /* 0x0 */ u32 state;
     /* 0x4 */ u32 fallbackState;
-    struct unkStruct_802F204 unk8;
+    unkStruct_802F204 unk8;
     u8 jobSlotIndex;
-    struct WonderMail *jobInfo;
-    struct OpenedFile *faceFile;
+    WonderMail *jobInfo;
+    OpenedFile *faceFile;
     u8 *faceData;
     u16 unk40;
     u16 unk42;
@@ -25,7 +26,7 @@ struct unkStruct_203B2FC
     u8 unk45;
     u8 unk46;
     u8 fill47[0x48 - 0x47];
-    struct UnkTextStruct2 unk48[4];
+    UnkTextStruct2 unk48[4];
 };
 extern struct unkStruct_203B2FC *gUnknown_203B2FC;
 
@@ -33,11 +34,11 @@ extern struct unkStruct_203B2FC *gUnknown_203B2FC;
 struct unkStruct_203B300
 {
     // size: 0x7C
-    struct MenuInputStructSub unk0;
-    struct unkStruct_802C39C *mail;
+    MenuInputStructSub unk0;
+    unkStruct_802C39C *mail;
     u32 unk10;
-    struct UnkTextStruct2 *unk14;
-    struct UnkTextStruct2 unk18[4];
+    UnkTextStruct2 *unk14;
+    UnkTextStruct2 unk18[4];
     u8 unk78[4];
 };
 
@@ -46,7 +47,7 @@ extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202DE58[];
 
-const struct UnkTextStruct2 gUnknown_80E016C =
+const UnkTextStruct2 gUnknown_80E016C =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -76,7 +77,7 @@ ALIGNED(4) const u8 gWonderMailClientItemDelivered2[] = _(
 
 static const u8 wonder_mail_802DF88_fill[] = "pksdir0";
 
-const struct UnkTextStruct2 gUnknown_80E0248 =
+const UnkTextStruct2 gUnknown_80E0248 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -88,7 +89,7 @@ const struct UnkTextStruct2 gUnknown_80E0248 =
 
 const u8 UnkData_80E0260[] = {0x01, 0x00, 0x12, 0x00};
 
-const struct UnkTextStruct2 gUnknown_80E0264 = 
+const UnkTextStruct2 gUnknown_80E0264 = 
 {
     0x00, 0x00, 0x00, 0x00,
     0x06,
@@ -100,18 +101,17 @@ const struct UnkTextStruct2 gUnknown_80E0264 =
 
 static const u8 wonder_mail_802DF88_fill1[] = "pksdir0";
 
-extern void CreateRescueDescription(struct unkStruct_802C39C *);
+extern void CreateRescueDescription(unkStruct_802C39C *);
 extern void sub_802DC28(u32);
 extern void sub_802F2C0(void);
 extern void sub_802DC28(u32);
 extern u32 sub_802F298(void);
-extern void sub_802F204(struct unkStruct_802F204*, u32);
+extern void sub_802F204(unkStruct_802F204*, u32);
 extern void sub_802DC40(void);
 extern void sub_802DC9C(void);
-struct WonderMail *GetJobSlotInfo(u8);
 extern void sub_8096AF8(u8 *, u32, u32);
 extern void sub_8096EEC(void);
-extern void sub_803C21C(struct WonderMail *, struct unkStruct_802F204*);
+extern void sub_803C21C(WonderMail *, unkStruct_802F204*);
 extern u32 sub_802C598(s32);
 extern void sub_802C688(void);
 extern void sub_8096C80(void);
@@ -137,7 +137,7 @@ bool8 sub_802DB28(u8 jobSlotIndex, u8 dungeon)
   }
   else {
     ResetUnusedInputStruct();
-    sub_800641C(0,1,1);
+    sub_800641C(NULL, TRUE, TRUE);
     gUnknown_203B2FC = MemoryAlloc(sizeof(struct unkStruct_203B2FC),8);
     gUnknown_203B2FC->jobSlotIndex = jobSlotIndex;
     gUnknown_203B2FC->jobInfo = GetJobSlotInfo(jobSlotIndex);
@@ -209,7 +209,7 @@ void sub_802DC40(void)
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2FC->unk48, 1, 1);
+    sub_800641C(gUnknown_203B2FC->unk48, TRUE, TRUE);
 }
 
 void sub_802DC9C(void)
@@ -226,7 +226,7 @@ void sub_802DC9C(void)
         speciesText = GetMonSpecies(gUnknown_203B2FC->jobInfo->targetSpecies);
         strcpy(gUnknown_202E1C8 + 0xfffffe20,speciesText);
         UnlockExclusivePokemon(gUnknown_203B2FC->jobInfo->clientSpecies);
-        sub_8090DC4(gUnknown_202DE58,gUnknown_203B2FC->jobInfo->targetItem,0);
+        BufferItemName(gUnknown_202DE58,gUnknown_203B2FC->jobInfo->targetItem,NULL);
         gUnknown_203B2FC->fallbackState = 6;
         switch(gUnknown_203B2FC->jobInfo->missionType) {
             case WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM:
@@ -302,7 +302,7 @@ void sub_802DE60(void)
     }
 }
 
-u32 sub_802DE84(struct unkStruct_802C39C *mail)
+u32 sub_802DE84(unkStruct_802C39C *mail)
 {
     gUnknown_203B300 = MemoryAlloc(sizeof(struct unkStruct_203B300), 8);
     gUnknown_203B300->mail = mail;
@@ -342,7 +342,7 @@ void sub_802DF24(void)
     {
         gUnknown_203B300->unk18[gUnknown_203B300->unk10] = gUnknown_80E0248;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B300->unk18, 1, 1);
+        sub_800641C(gUnknown_203B300->unk18, TRUE, TRUE);
         MemoryFree(gUnknown_203B300);
         gUnknown_203B300 = NULL;
     }
@@ -351,7 +351,7 @@ void sub_802DF24(void)
 void sub_802DF6C(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B300->unk18, 1, 1);
+    sub_800641C(gUnknown_203B300->unk18, TRUE, TRUE);
 }
 
 void sub_802DF88(void)

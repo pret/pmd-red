@@ -12,15 +12,15 @@ struct unkStruct_203B360
     // size: 0x1b4
     u32 currMenu;
     u32 unk4;
-    struct MenuStruct unk8[4];
-    struct UnkTextStruct2 unk148[4];
-    struct SpriteOAM unk1A8;
+    MenuStruct unk8[4];
+    UnkTextStruct2 unk148[4];
+    SpriteOAM unk1A8;
     u32 unk1B0; // Sprite count?
 };
 
 EWRAM_DATA_2 struct unkStruct_203B360 *gUnknown_203B364 = {0};
 
-const struct UnkTextStruct2 gUnknown_80E6F20 =
+const UnkTextStruct2 gUnknown_80E6F20 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -30,7 +30,7 @@ const struct UnkTextStruct2 gUnknown_80E6F20 =
     NULL
 };
 
-const struct UnkTextStruct2 gUnknown_80E6F38 =
+const UnkTextStruct2 gUnknown_80E6F38 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -44,7 +44,7 @@ const u8 sUnknown_80E6F70[];
 const u8 sUnknown_80E6F90[];
 const u8 sUnknown_80E6FAC[];
 
-const struct MenuItem gSavingAdventureMenuItems[] = {
+const MenuItem gSavingAdventureMenuItems[] = {
     {sUnknown_80E6FAC, 4},
     {sUnknown_80E6F90, 4},
     {sUnknown_80E6F70, 4},
@@ -58,7 +58,7 @@ extern const u8 sUnknown_80E6FDC[];
 extern const u8 sUnknown_80E7008[];
 extern const u8 sUnknown_80E6FF0[];
 
-const struct MenuItem gAdventureSavedMenuItems[] = {
+const MenuItem gAdventureSavedMenuItems[] = {
     {sUnknown_80E7008, 4},
     {sUnknown_80E6FF0, 4},
     {sUnknown_80E6FDC, 4},
@@ -72,7 +72,7 @@ extern const u8 sUnknown_80E7078[];
 extern const u8 sUnknown_80E7050[];
 extern const u8 sUnknown_80E703C[];
 
-const struct MenuItem gAdventureCouldNotBeSavedMenuItems[] = {
+const MenuItem gAdventureCouldNotBeSavedMenuItems[] = {
     {sUnknown_80E7078, 4},
     {sUnknown_80E7050, 4},
     {sUnknown_80E703C, 4},
@@ -85,7 +85,7 @@ ALIGNED(4) const u8 sUnknown_80E7078[] = _("{CENTER_ALIGN}{COLOR_1 RED}Save fail
 
 extern const u8 DeletingAdventure_80E70B0[];
 
-const struct MenuItem gDeletingYourAdventureMenuItems[] = {
+const MenuItem gDeletingYourAdventureMenuItems[] = {
     {sUnknown_80E6FAC, 4},
     {DeletingAdventure_80E70B0, 4},
     {sUnknown_80E6F70, 4},
@@ -96,7 +96,7 @@ ALIGNED(4) const u8 DeletingAdventure_80E70B0[] = _("{CENTER_ALIGN}Deleting your
 extern const u8 Data_80E70EC[];
 extern const u8 AdventureDeleted_80E70F0[];
 
-const struct MenuItem gDeletedSaveMenuItems[] = {
+const MenuItem gDeletedSaveMenuItems[] = {
     {sUnknown_80E7008, 4},
     {AdventureDeleted_80E70F0, 4},
     {Data_80E70EC, 4},
@@ -109,7 +109,7 @@ ALIGNED(4) const u8 AdventureDeleted_80E70F0[] = _("{CENTER_ALIGN}Your adventure
 extern const u8 sUnknown_80E7134[];
 extern const u8 sUnknown_80E715C[];
 
-const struct MenuItem gAdventureCouldNotBeDeletedMenuItems[] = {
+const MenuItem gAdventureCouldNotBeDeletedMenuItems[] = {
     {sUnknown_80E715C, 4},
     {sUnknown_80E7134, 4},
     {sUnknown_80E703C, 4},
@@ -128,7 +128,6 @@ extern void sub_8038440();
 extern void sub_80384D0();
 extern void sub_8038830();
 extern void sub_80388C4(void);
-extern void sub_8014114();
 extern void sub_80140F8(void);
 
 void CreateSaveMenu(s32 currMenu)
@@ -143,7 +142,7 @@ void CreateSaveMenu(s32 currMenu)
     gUnknown_203B364->unk148[index] = gUnknown_80E6F20;
   } 
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B364->unk148,1,1);
+  sub_800641C(gUnknown_203B364->unk148, TRUE, TRUE);
 
   if (currMenu == MENU_DELETE_SAVE) {
       // Beware, Deleting your Adventure
@@ -164,7 +163,7 @@ void CreateSaveMenu(s32 currMenu)
 void CleanSaveMenu(void)
 {
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
+  sub_800641C(NULL, TRUE, TRUE);
   if (gUnknown_203B364 != NULL) {
     MemoryFree(gUnknown_203B364);
     gUnknown_203B364 = NULL;
@@ -286,7 +285,7 @@ void sub_8038830(void)
     u32 r1;
     u32 r4;
     u32 r5;
-    struct SpriteOAM *sprite;
+    SpriteOAM *sprite;
 
     r5 = 0;
     sprite = &gUnknown_203B364->unk1A8;

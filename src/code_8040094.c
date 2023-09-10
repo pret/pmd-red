@@ -1,5 +1,6 @@
 #include "global.h"
 #include "code_800558C.h"
+#include "code_800C9CC.h"
 #include "code_80118A4.h"
 #include "code_80521D0.h"
 #include "dungeon_entity.h"
@@ -7,17 +8,16 @@
 #include "dungeon_map_access.h"
 #include "dungeon_music.h"
 #include "file_system.h"
+#include "input.h"
 #include "play_time.h"
 
 extern s32 gUnknown_80F6568[];
 extern u8 gUnknown_202EE01;
 extern const char gUnknown_80F6604; // "zmappat"
 extern struct FileArchive gDungeonFileArchive;
-extern struct OpenedFile *gUnknown_202EE04;
+extern OpenedFile *gUnknown_202EE04;
 
 extern void sub_803F7BC(void);
-extern void sub_800CB20(void);
-extern void LoadBufferedInputs(void);
 extern void xxx_call_update_bg_sound_input(void);
 
 extern void sub_803F580(u32);
@@ -27,7 +27,7 @@ extern void sub_8040A84();
 extern const char *gUnknown_80FD040; // It became brighter on the floor
 
 // Luminous Orb???
-void HandleLuminousOrbAction(struct Entity *pokemon)
+void HandleLuminousOrbAction(Entity *pokemon)
 {
   struct Tile *mapTile;
   int XCoord;

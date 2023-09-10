@@ -9,12 +9,12 @@ extern u8 *gUnknown_80FEE04[];
 extern u8 *gUnknown_80FEE2C[];
 extern u8 *gUnknown_80FEE54[];
 
-void sub_8042940(struct Entity *r0);
-void sub_80428B0(struct Entity *r0);
-void sub_80428C4(struct Entity *r0);
-void sub_80522F4(struct Entity *r0, struct Entity *r1, const char r2[]);
+void sub_8042940(Entity *r0);
+void sub_80428B0(Entity *r0);
+void sub_80428C4(Entity *r0);
+void sub_80522F4(Entity *r0, Entity *r1, const char r2[]);
 
-void sub_806E8B0(struct Entity * pokemon, struct Entity * target, u8 param_3, s32 *param_4, s32 *param_5, s32 param_6)
+void sub_806E8B0(Entity * pokemon, Entity * target, u8 param_3, s32 *param_4, s32 *param_5, s32 param_6)
 {
   bool8 hasNegStatus_pokemon;
   bool8 visFlags_pokemon_1;
@@ -23,8 +23,8 @@ void sub_806E8B0(struct Entity * pokemon, struct Entity * target, u8 param_3, s3
   bool8 visFlags_target;
   s32 iVar3;
   bool32 isNotEnemy;
-  struct EntityInfo * entityInfo;
-  struct EntityInfo * entityInfo_1;
+  EntityInfo * entityInfo;
+  EntityInfo * entityInfo_1;
   s32 r7;
   s32 r8;
   s32 r10;

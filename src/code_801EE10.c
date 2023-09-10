@@ -5,15 +5,14 @@
 #include "code_801EE10.h"
 #include "menu_input.h"
 
-extern struct unkStruct_203B270 *gUnknown_203B270;
-extern struct UnkTextStruct2 gUnknown_80DC25C;
-extern struct UnkTextStruct2 gUnknown_80DC274;
+extern unkStruct_203B270 *gUnknown_203B270;
+extern UnkTextStruct2 gUnknown_80DC25C;
+extern UnkTextStruct2 gUnknown_80DC274;
 
 u32 sub_8006544(u32 index);
 s32 sub_801F3F8(void);
-void sub_801F280(u32);
 
-u8 sub_801EE10(u32 param_1, s16 species, struct Move *moves, u32 param_4, u8 *text, u32 param_6)
+u8 sub_801EE10(u32 param_1, s16 species, Move *moves, u32 param_4, const u8 *text, u32 param_6)
 {
   s32 iVar5;
   s32 iVar8;
@@ -23,7 +22,7 @@ u8 sub_801EE10(u32 param_1, s16 species, struct Move *moves, u32 param_4, u8 *te
     
   species_s32 = species;
   param_4_u8 = param_4;
-  gUnknown_203B270 = MemoryAlloc(sizeof(struct unkStruct_203B270), 8);
+  gUnknown_203B270 = MemoryAlloc(sizeof(unkStruct_203B270), 8);
   gUnknown_203B270->unk4 = param_4_u8;
   gUnknown_203B270->unk5 = 1;
   gUnknown_203B270->unk6 = 1;
@@ -59,7 +58,7 @@ u8 sub_801EE10(u32 param_1, s16 species, struct Move *moves, u32 param_4, u8 *te
   }
   sub_8012D08(&gUnknown_203B270->unk58[gUnknown_203B270->unk50],iVar8);
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B270->unk58,1,1);
+  sub_800641C(gUnknown_203B270->unk58, TRUE, TRUE);
   sub_8013818(&gUnknown_203B270->input,iVar5,iVar5,param_6);
   sub_8013780(&gUnknown_203B270->input,0);
   sub_801F280(1);

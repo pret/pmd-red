@@ -1,13 +1,11 @@
 #include "global.h"
 #include "constants/colors.h"
-#include "item.h"
+#include "items.h"
 #include "moves.h"
-#include "team_inventory.h"
 #include "random.h"
 #include "pokemon.h"
 #include "random.h"
 #include "subStruct_203B240.h"
-#include "team_inventory.h"
 #include "code_800D090.h"
 #include "text_util.h"
 #include "text2.h"
@@ -21,7 +19,7 @@ extern const char gUnknown_81097A4[];
 extern s32 gUnknown_81097B0[];
 extern u8 gUnknown_81097C4[];
 extern u16 gGummiStatBoostLUT[];
-extern u8 gUnknown_202DE58[0x58];
+extern u8 gUnknown_202DE58[];
 extern u32 gUnknown_202DE30;
 extern u8* gPtrTypeText;  // ptr to "Type\0"
 extern u8* gPtrPPD0Text;  // ptr to "PP $d0 \0"
@@ -33,25 +31,27 @@ extern u8 gUnknown_8108F64[0x3f][32];  // some sort of bit lookup table
 extern s16 gTypeGummiIQBoost[0x12][NUMBER_OF_GUMMIS];
 extern u8 gInvalidItemIDs[0x10];
 
-EWRAM_DATA struct OpenedFile *gItemParametersFile = {0};
-EWRAM_DATA struct ItemDataEntry *gItemParametersData = {0};
-EWRAM_DATA struct TeamInventory gTeamInventory = {0};
-EWRAM_DATA_2 struct TeamInventory *gTeamInventoryRef = {0};
+EWRAM_DATA OpenedFile *gItemParametersFile = {0};
+EWRAM_DATA ItemDataEntry *gItemParametersData = {0};
+EWRAM_DATA TeamInventory gTeamInventory = {0};
+EWRAM_DATA_2 TeamInventory *gTeamInventoryRef = {0};
 
-extern s32 sub_8090FEC(s32 a1, u8* a2, u8 a3);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 extern s32 sub_8091E94(s32 a1, s32 a2, s32 a3);
 extern void SortKecleonShopInventory();
 bool8 AddKecleonWareItem(u8);
 
+
+static void sub_8090F58(u8 *, u8 *, Item *, unkStruct_8090F58 *);
+
 void LoadItemParameters(void)
 {
   gTeamInventoryRef = &gTeamInventory;
   gItemParametersFile = OpenFileAndGetFileDataPtr(gItemParaFileName,&gSystemFileArchive);
-  gItemParametersData = (struct ItemDataEntry *) gItemParametersFile->data;
+  gItemParametersData = (ItemDataEntry *) gItemParametersFile->data;
 }
 
-struct TeamInventory *GetMoneyItemsInfo(void)
+TeamInventory *GetMoneyItemsInfo(void)
 {
     return &gTeamInventory;
 }
@@ -101,7 +101,7 @@ bool8 IsThrowableItem(u8 id)
     return TRUE;
 }
 
-void xxx_init_itemslot_8090A8C(struct Item *slot, u8 id, u8 param_3)
+void xxx_init_itemslot_8090A8C(Item *slot, u8 id, u8 param_3)
 {
   u32 uVar3;
   u32 uVar4;
@@ -130,7 +130,7 @@ void xxx_init_itemslot_8090A8C(struct Item *slot, u8 id, u8 param_3)
   }
 }
 
-void xxx_init_helditem_8090B08(struct BulkItem *held, u8 id)
+void xxx_init_helditem_8090B08(BulkItem *held, u8 id)
 {
   u32 uVar2;
   u32 uVar3;
@@ -153,7 +153,7 @@ void xxx_init_helditem_8090B08(struct BulkItem *held, u8 id)
   }
 }
 
-void HeldItemToSlot(struct Item *slot, struct BulkItem *held)
+void HeldItemToSlot(Item *slot, BulkItem *held)
 {
     u8 is_throwable;
 
@@ -177,7 +177,7 @@ void HeldItemToSlot(struct Item *slot, struct BulkItem *held)
     }
 }
 
-void SlotToHeldItem(struct BulkItem *held,struct Item *slot)
+void SlotToHeldItem(BulkItem *held,Item *slot)
 {
   if ((slot->flags & ITEM_FLAG_EXISTS) != 0) {
     held->id = slot->id;
@@ -193,7 +193,7 @@ u8 GetItemCategory(u8 index)
     return gItemParametersData[index].category;
 }
 
-s32 GetStackBuyValue(struct Item *param_1)
+s32 GetStackBuyValue(Item *param_1)
 {
   if (param_1->id == ITEM_POKE) {
     return GetMoneyValue(param_1);
@@ -208,7 +208,7 @@ s32 GetStackBuyValue(struct Item *param_1)
   }
 }
 
-s32 GetStackSellValue(struct Item *param_1)
+s32 GetStackSellValue(Item *param_1)
 {
   if (param_1->id == ITEM_POKE) {
     return GetMoneyValue(param_1);
@@ -223,7 +223,7 @@ s32 GetStackSellValue(struct Item *param_1)
   }
 }
 
-s32 GetStackBuyPrice(struct Item *param_1)
+s32 GetStackBuyPrice(Item *param_1)
 {
   if (!CanSellItem(param_1->id)) {
     return 0;
@@ -238,7 +238,7 @@ s32 GetStackBuyPrice(struct Item *param_1)
   }
 }
 
-s32 GetStackSellPrice(struct Item *param_1)
+s32 GetStackSellPrice(Item *param_1)
 {
   if (!CanSellItem(param_1->id)) {
     return 0;
@@ -293,15 +293,18 @@ bool8 GetItemAIFlag(u8 id, u32 r1)
     return gItemParametersData[id].aiFlags[r1];
 }
 
-void sub_8090DC4(void* param_1,u8 id, struct unkStruct_8090F58* param_3)
+// a2 is always NULL
+// This func probably appends the quantity of 1, but I haven't checked
+// If it appends quantity, we can rename the func
+void BufferItemName(u8* dest, u8 id, struct unkStruct_8090F58* a2)
 {
   char acStack104 [80];
-  struct Item unkItem;
+  Item unkItem;
 
-  strncpy(acStack104,gItemParametersData[id].name,0x50);
-  xxx_init_itemslot_8090A8C(&unkItem,id,0);
+  strncpy(acStack104, gItemParametersData[id].name, 80);
+  xxx_init_itemslot_8090A8C(&unkItem, id, 0);
   unkItem.quantity = 1;
-  sub_8090F58(param_1,acStack104,&unkItem,param_3);
+  sub_8090F58(dest, acStack104, &unkItem, a2);
 }
 
 extern const u8 gUnknown_8109770[];
@@ -310,7 +313,7 @@ extern const u8 gUnknown_810977C[];
 extern const u8 gUnknown_8109784[];
 extern const u8 gUnknown_810978C[];
 
-void sub_8090E14(u8* ext_buffer, struct Item* slot, struct unkStruct_8090F58* a3) {
+void sub_8090E14(u8* ext_buffer, Item* slot, struct unkStruct_8090F58* a3) {
   s32 unk8 = 0;
   u8 buffer[80];
 
@@ -370,7 +373,7 @@ void sub_8090E14(u8* ext_buffer, struct Item* slot, struct unkStruct_8090F58* a3
   return;
 }
 
-void sub_8090F58(void* a1, u8 *a2, struct Item *slot, struct unkStruct_8090F58* a4) {
+static void sub_8090F58(u8* a1, u8 *a2, Item *slot, struct unkStruct_8090F58* a4) {
   u32 unk0;
   s32 value;
   u8 buffer[40];
@@ -411,7 +414,7 @@ void sub_8090F58(void* a1, u8 *a2, struct Item *slot, struct unkStruct_8090F58* 
   }
 }
 
-s32 sub_8090FEC(s32 a1, u8* strbuf, u8 a3)
+s32 sub_8090FEC(s32 a1, u8 *strbuf, u8 a3)
 {
   s32 i, count;
   s32 cond = 0;
@@ -482,14 +485,14 @@ void FillInventoryGaps()
 
   // clear out the rest of the slots
   for (; last_filled < INVENTORY_SIZE; last_filled++) {
-      struct Item *slot;
+      Item *slot;
 #ifdef NONMATCHING
       slot = &gTeamInventoryRef->teamItems[last_filled];
 #else
       size_t offs = last_filled << 2;
       size_t _slot = offs;
       _slot += (size_t)gTeamInventoryRef->teamItems;
-      slot = (struct Item*)_slot; // &gTeamInventoryRef->teamItems[end];
+      slot = (Item*)_slot; // &gTeamInventoryRef->teamItems[end];
 #endif
       slot->id = ITEM_NOTHING;
       slot->quantity = 0;
@@ -523,7 +526,7 @@ s32 GetItemCountInInventory(u8 _id)
   // have to do hacky stuff to fix initialization order of r6 and r2
   u32 id = _id;
   s32 count = 0;
-  struct Item *slot = gTeamInventoryRef->teamItems;
+  Item *slot = gTeamInventoryRef->teamItems;
   s32 one = 1;
   s32 i = 19;
 
@@ -545,9 +548,9 @@ s32 GetItemPossessionCount(u8 id)
   s32 item_count = GetItemCountInInventory(id);
   s32 i = 0;
 
-  struct unkStruct_203B45C *_gRecruitedPokemonRef = gRecruitedPokemonRef;
+  unkStruct_203B45C *_gRecruitedPokemonRef = gRecruitedPokemonRef;
   for (i = 0; i < NUM_MONSTERS; i++) {
-     struct PokemonStruct* pokemon = &_gRecruitedPokemonRef->pokemon[i];
+     PokemonStruct1* pokemon = &_gRecruitedPokemonRef->pokemon[i];
     if ((1 & pokemon->unk0)
           && ((pokemon->unk0 >> 1) % 2)
           && (pokemon->heldItem.id != ITEM_NOTHING)
@@ -576,26 +579,26 @@ void ClearItemSlotAt(u32 index)
 
 bool8 sub_809124C(u8 id, u8 param_3)
 {
-  struct Item temp;
+  Item temp;
   xxx_init_itemslot_8090A8C(&temp, id, param_3);
   return AddItemToInventory(&temp);
 }
 
-bool8 AddHeldItemToInventory(struct BulkItem* slot)
+bool8 AddHeldItemToInventory(BulkItem* slot)
 {
-  struct Item temp;
+  Item temp;
 
   HeldItemToSlot(&temp, slot);
   return AddItemToInventory(&temp);
 }
 
-bool8 AddItemToInventory(const struct Item* slot)
+bool8 AddItemToInventory(const Item* slot)
 {
   s32 i;
 
   // try to add item to inventory, return 1 if failed
   for (i = 0; i < INVENTORY_SIZE; i++) {
-    UNUSED struct Item* current = &gTeamInventoryRef->teamItems[i];
+    UNUSED Item* current = &gTeamInventoryRef->teamItems[i];
     if (!(i[gTeamInventoryRef->teamItems].flags & ITEM_FLAG_EXISTS)) {
       gTeamInventoryRef->teamItems[i] = *slot;
       return FALSE;
@@ -609,10 +612,10 @@ void ConvertMoneyItemToMoney()
   s32 i = 0;
 
   do {
-    UNUSED struct TeamInventory * _gTeamInventoryRef = gTeamInventoryRef;
-    UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[i]);
+    UNUSED TeamInventory * _gTeamInventoryRef = gTeamInventoryRef;
+    UNUSED size_t offs = offsetof(TeamInventory, teamItems[i]);
 
-    struct Item* current_slot = &gTeamInventoryRef->teamItems[i];
+    Item* current_slot = &gTeamInventoryRef->teamItems[i];
     if ((current_slot->flags & ITEM_FLAG_EXISTS) && (current_slot->id == ITEM_POKE)) {
       u32 result;
 
@@ -628,7 +631,7 @@ void ConvertMoneyItemToMoney()
   i = 0;
   do {
     s32 lowest_index = -1;
-    UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[i]);
+    UNUSED size_t offs = offsetof(TeamInventory, teamItems[i]);
 
     bool8 item_occupied = i[gTeamInventoryRef->teamItems].flags & ITEM_FLAG_EXISTS;
     s32 next = i + 1;
@@ -639,7 +642,7 @@ void ConvertMoneyItemToMoney()
 
       // find next lowest
       for (j = next; j < INVENTORY_SIZE; j++) {
-        UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[j]);
+        UNUSED size_t offs = offsetof(TeamInventory, teamItems[j]);
         if ((j[gTeamInventoryRef->teamItems].flags & ITEM_FLAG_EXISTS) && (lowest_order > GetItemOrder(gTeamInventoryRef->teamItems[j].id))) {
           lowest_index = j;
           lowest_order = GetItemOrder(gTeamInventoryRef->teamItems[j].id);
@@ -648,7 +651,7 @@ void ConvertMoneyItemToMoney()
 
       if (lowest_index >= 0) {
         // swap the slots
-        struct Item current = gTeamInventoryRef->teamItems[i];
+        Item current = gTeamInventoryRef->teamItems[i];
         gTeamInventoryRef->teamItems[i] = gTeamInventoryRef->teamItems[lowest_index];
         gTeamInventoryRef->teamItems[lowest_index] = current;
       }
@@ -678,22 +681,22 @@ u16 GetItemMoveID(u8 index)
   return gItemParametersData[index].moveID;
 }
 
-u32 sub_80913E0(struct Item* slot, u32 a2, struct subStruct_203B240 ** a3)
+u32 sub_80913E0(Item* slot, u32 a2, struct subStruct_203B240 ** a3)
 {
   u8 buffer88[88];  // some struct
 
   GetItemDescription(slot->id);
-  sub_8090DC4(buffer88, slot->id, 0);
+  BufferItemName(buffer88, slot->id, NULL);
   if (slot->id == ITEM_TM_USED_TM) {
     // empty TM
-    sub_8090DC4(&gUnknown_202DE58, (u8)(slot->quantity + 125), 0);
+    BufferItemName(gUnknown_202DE58, (u8)(slot->quantity + 125), NULL);
   }
   sub_80073B8(a2);
   xxx_format_and_draw(16, 0, buffer88, a2, 0);
 
   xxx_format_and_draw(8, 24, GetItemDescription(slot->id), a2, 0);
   if (GetItemCategory(slot->id) == CATEGORY_TMS_HMS) {
-    struct Move *buffer8 = (struct Move*) (buffer88 + 0x50);  // field in struct
+    Move *buffer8 = (Move*) (buffer88 + 80);  // field in struct
     u16 move = GetItemMoveID(slot->id);
     u8 moves_data;
     const u8* typestring;
@@ -720,16 +723,16 @@ bool8 CanSellItem(u32 id)
   id = (u8)id;
   id_ = id;
 
-  if((id != ITEM_NOTHING)
-      && (id != ITEM_POKE)
-      && (id != ITEM_ROCK_PART)
-      && (id != ITEM_ICE_PART)
-      && (id != ITEM_STEEL_PART)
-      && (id != ITEM_MUSIC_BOX)
-      && (GetItemSellPrice(id_))
-      && (GetItemBuyPrice(id_))) {
+  if (id != ITEM_NOTHING
+      && id != ITEM_POKE
+      && id != ITEM_ROCK_PART
+      && id != ITEM_ICE_PART
+      && id != ITEM_STEEL_PART
+      && id != ITEM_MUSIC_BOX
+      && GetItemSellPrice(id_)
+      && GetItemBuyPrice(id_))
           return TRUE;
-    }
+
     return FALSE;
 }
 
@@ -807,18 +810,18 @@ bool8 IsHMItem(u8 id)
   return FALSE;
 }
 
-u32 GetMoneyValue(struct Item* slot)
+u32 GetMoneyValue(Item* slot)
 {
   return gUnknown_810A3F0[slot->quantity];
 }
 
-u32 GetMoneyValueHeld(struct BulkItem* slot)
+u32 GetMoneyValueHeld(BulkItem* slot)
 {
   // potentially different slot type (used for held item)
   return gUnknown_810A3F0[slot->quantity];
 }
 
-void GetGummiItemStatBoost(struct PokemonStruct* pokemon, u8 id, bool8 checkBoostFlags, struct Gummi* gummi)
+void GetGummiItemStatBoost(PokemonStruct1* pokemon, u8 id, bool8 checkBoostFlags, Gummi *gummi)
 {
   // item stat buff?
   s8 result;
@@ -927,7 +930,7 @@ bool8 HasGummiItem()
 {
   s32 i;
   for (i = 0; i < INVENTORY_SIZE; i++) {
-    UNUSED size_t offs = offsetof(struct TeamInventory, teamItems[i]);
+    UNUSED size_t offs = offsetof(TeamInventory, teamItems[i]);
     if ((i[gTeamInventoryRef->teamItems].flags & ITEM_FLAG_EXISTS) && IsGummiItem(i[gTeamInventoryRef->teamItems].id)) {
       return TRUE;
     }
@@ -935,7 +938,7 @@ bool8 HasGummiItem()
   return FALSE;
 }
 
-void MoveToStorage(struct Item* slot)
+void MoveToStorage(Item* slot)
 {
   if (IsThrowableItem(slot->id)) {
     gTeamInventoryRef->teamStorage[slot->id] += slot->quantity;
@@ -963,14 +966,14 @@ s32 CountKecleonShopItems(void)
 
 void InitKecleonShopItem(u8 index)
 {
-  struct BulkItem* shopItem;
+  BulkItem* shopItem;
 
   shopItem = &gTeamInventoryRef->kecleonShopItems[index];
   shopItem->id = ITEM_NOTHING;
   shopItem->quantity = 0;
 }
 
-struct BulkItem* GetKecleonShopItem(u8 i)
+BulkItem* GetKecleonShopItem(u8 i)
 {
   return &gTeamInventoryRef->kecleonShopItems[i];
 }
@@ -1016,7 +1019,7 @@ void SortKecleonShopInventory(void) {
       s32 order_i = GetItemOrder(gTeamInventoryRef->kecleonShopItems[i].id);
       s32 order_j = GetItemOrder(gTeamInventoryRef->kecleonShopItems[j].id);
       if (order_i > order_j || (order_i == order_j && gTeamInventoryRef->kecleonShopItems[i].quantity < gTeamInventoryRef->kecleonShopItems[j].quantity)) {
-        struct BulkItem str_i = gTeamInventoryRef->kecleonShopItems[i];
+        BulkItem str_i = gTeamInventoryRef->kecleonShopItems[i];
         gTeamInventoryRef->kecleonShopItems[i] = gTeamInventoryRef->kecleonShopItems[j];
         gTeamInventoryRef->kecleonShopItems[j] = str_i;
       }
@@ -1042,7 +1045,7 @@ void ChooseKecleonShopInventory(u8 index) {
 }
 
 bool8 AddKecleonShopItem(u8 itemIndex) {
-  struct BulkItem held;
+  BulkItem held;
   s32 i;
 
   xxx_init_helditem_8090B08(&held, itemIndex);  // initialize
@@ -1067,12 +1070,12 @@ u32 CountKecleonWareItems(void) {
 }
 
 void InitKecleonWareItem(u8 index) {
-  struct BulkItem* wareItem = &gTeamInventoryRef->kecleonWareItems[index];
+  BulkItem* wareItem = &gTeamInventoryRef->kecleonWareItems[index];
   wareItem->id = ITEM_NOTHING;
   wareItem->quantity = 0;
 }
 
-struct BulkItem* GetKecleonWareItem(u8 index) {
+BulkItem* GetKecleonWareItem(u8 index) {
     return &gTeamInventoryRef->kecleonWareItems[index];
 }
 
@@ -1115,7 +1118,7 @@ void SortKecleonWareInventory(void) {
       s32 order_i = GetItemOrder(gTeamInventoryRef->kecleonWareItems[i].id);
       s32 order_j = GetItemOrder(gTeamInventoryRef->kecleonWareItems[j].id);
       if (order_i > order_j || (order_i == order_j && gTeamInventoryRef->kecleonWareItems[i].quantity < gTeamInventoryRef->kecleonWareItems[j].quantity)) {
-        struct BulkItem str_i = gTeamInventoryRef->kecleonWareItems[i];
+        BulkItem str_i = gTeamInventoryRef->kecleonWareItems[i];
         gTeamInventoryRef->kecleonWareItems[i] = gTeamInventoryRef->kecleonWareItems[j];
         gTeamInventoryRef->kecleonWareItems[j] = str_i;
       }
@@ -1140,7 +1143,7 @@ void ChooseKecleonWareInventory(u8 index) {
 }
 
 bool8 AddKecleonWareItem(u8 itemIndex) {
-  struct BulkItem held;
+  BulkItem held;
   s32 i;
 
   xxx_init_helditem_8090B08(&held, itemIndex);  // initialize
@@ -1201,26 +1204,26 @@ s32 RestoreTeamInventory(u8 *unk0, u32 size)
   return unk.unk8;
 }
 
-void RestoreHeldItem(struct unkStruct_8094924 *a1, struct BulkItem *item)
+void RestoreHeldItem(struct unkStruct_8094924 *a1, BulkItem *item)
 {
   RestoreIntegerBits(a1, &item->id, 8);
   RestoreIntegerBits(a1, &item->quantity, 7);
 }
 
-void SaveHeldItem(struct unkStruct_8094924 *a1, struct BulkItem *item)
+void SaveHeldItem(struct unkStruct_8094924 *a1, BulkItem *item)
 {
   SaveIntegerBits(a1, &item->id, 8);
   SaveIntegerBits(a1, &item->quantity, 7);
 }
 
-void RestoreItemSlot(struct unkStruct_8094924 *a1, struct Item *slot)
+void RestoreItemSlot(struct unkStruct_8094924 *a1, Item *slot)
 {
   RestoreIntegerBits(a1, &slot->flags, 8);
   RestoreIntegerBits(a1, &slot->quantity, 7);
   RestoreIntegerBits(a1, &slot->id, 8);
 }
 
-void SaveItemSlot(struct unkStruct_8094924 *a1, struct Item *slot)
+void SaveItemSlot(struct unkStruct_8094924 *a1, Item *slot)
 {
   SaveIntegerBits(a1, &slot->flags, 8);
   SaveIntegerBits(a1, &slot->quantity, 7);
@@ -1463,7 +1466,7 @@ void ClearAllItems_8091FB4() {
   s32 i;
 
   for (i = 0; i < INVENTORY_SIZE; i++) {
-    struct Item* slot = &gTeamInventoryRef->teamItems[i];
+    Item* slot = &gTeamInventoryRef->teamItems[i];
     if (slot->flags & ITEM_FLAG_EXISTS) {
       slot->flags &= 0xf7;
       if (slot->id == ITEM_POKE) {
@@ -1476,14 +1479,14 @@ void ClearAllItems_8091FB4() {
   }
   FillInventoryGaps();
   for (i = 0; i < NUM_MONSTERS; i++) {
-    struct PokemonStruct* pokemon;
+    PokemonStruct1* pokemon;
 #ifdef NONMATCHING
     pokemon = &i[gRecruitedPokemonRef->pokemon];
 #else
-    register size_t offset asm("r1") = offsetof(struct unkStruct_203B45C, pokemon[i]);
-    struct PokemonStruct* p = gRecruitedPokemonRef->pokemon;
+    register size_t offset asm("r1") = offsetof(unkStruct_203B45C, pokemon[i]);
+    PokemonStruct1* p = gRecruitedPokemonRef->pokemon;
     size_t addr = offset + (size_t)p;
-    pokemon = (struct PokemonStruct*)addr;
+    pokemon = (PokemonStruct1*)addr;
 #endif
 
     if ((u8)pokemon->unk0 & 1) {

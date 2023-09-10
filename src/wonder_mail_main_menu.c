@@ -1,7 +1,7 @@
 #include "global.h"
 #include "constants/wonder_mail.h"
 #include "constants/communication_error_codes.h"
-#include "save.h"
+#include "save_write.h"
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
@@ -13,6 +13,7 @@
 #include "code_801B3C0.h"
 #include "cpu.h"
 #include "code_80118A4.h"
+#include "wonder_mail_3.h"
 
 #define SELECT_WONDER_MAIL_MODE_MAIN_SCREEN 0
 #define SEND_WONDER_MAIL_MAIN_SCREEN 1
@@ -34,14 +35,14 @@
 extern const char Cancel_80E7D24[];
 extern const char Yes_80E7D2C[];
 
-const struct MenuItem gSelectWonderMailModeMainMenuItems[3] =
+const MenuItem gSelectWonderMailModeMainMenuItems[3] =
 {
     {"Send", WONDER_MAIL_MODE_SEND},
     {"Receive", WONDER_MAIL_MODE_RECEIVE},
     {NULL, 0}
 };
 
-const struct MenuItem gSendWonderMailMainMenuItems[4] =
+const MenuItem gSendWonderMailMainMenuItems[4] =
 {
     {"Game Link cable", WONDER_MAIL_GAME_LINK},
     {"Password", -1},
@@ -50,7 +51,7 @@ const struct MenuItem gSendWonderMailMainMenuItems[4] =
 
 };
 
-const struct MenuItem gReceiveWonderMailMainMenuItems[4] =
+const MenuItem gReceiveWonderMailMainMenuItems[4] =
 {
     {"Game Link cable", WONDER_MAIL_GAME_LINK},
     {"Password", WONDER_MAIL_PASSWORD},
@@ -58,7 +59,7 @@ const struct MenuItem gReceiveWonderMailMainMenuItems[4] =
     {NULL, 0}
 };
 
-const struct MenuItem gUnknown_80E78F8[3] =
+const MenuItem gUnknown_80E78F8[3] =
 {
     {"Yes", 6},
     {"Cancel", 0},
@@ -68,7 +69,7 @@ const struct MenuItem gUnknown_80E78F8[3] =
 
 #include "data/wonder_mail_main_menu.h"
 
-const struct MenuItem WonderMailMainUnused[3] =
+const MenuItem WonderMailMainUnused[3] =
 {
     {Yes_80E7D2C, 1},
     {Cancel_80E7D24, 0},
@@ -81,17 +82,6 @@ ALIGNED(4) const char Yes_80E7D2C[] = "Yes";
 ALIGNED(4) const char wonder_mail_main_fill1[] = "pksdir0";
 ALIGNED(4) const char wonder_mail_main_fill2[] = "pksdir0";
 
-
-struct unkStruct_803B344
-{
-    // size: 0xB4
-    struct WonderMail mail;
-    u8* unk14;
-    u8* unk18;
-    u8 fill1C[0x3C - 0x1C];
-    u8 unk3C[0x78];
-};
-
 struct unkStruct_203B3E8
 {
     // size: 0x49C
@@ -99,23 +89,23 @@ struct unkStruct_203B3E8
     u8 PasswordEntryBuffer[PASSWORD_BUFFER_SIZE]; // Wonder Mail Buffer...
     union UNK38
     {
-        struct WonderMail decodedMail; // 0x14
+        WonderMail decodedMail; // 0x14
         u8 unk38_u8[0x30]; // idk why it fills to 0x30 instead...
     } UNK38;
     u8 fill68[0x1EC - 0x68];
-    struct UnkTextStruct2 unk1EC[4];
+    UnkTextStruct2 unk1EC[4];
     u32 unk24C;
     u32 wonderMailStatus;
 
-    struct unkStruct_803B344 unk254;
+    unkStruct_803B344 unk254;
 
-    struct unkStruct_803B344 unk308;
+    unkStruct_803B344 unk308;
     u8 unk3BC;
     u8 fill3BD[0x3C0 - 0x3BD];
 
-    struct unkStruct_803B344 unk3C0;
+    unkStruct_803B344 unk3C0;
 
-    struct WonderMail unk474;
+    WonderMail unk474;
     u8 **unk488;
     u8 *unk48C;
     s32 wonderMailMethod;
@@ -137,10 +127,9 @@ extern s32 sub_8037D64(u32, void *, void *);
 extern s32 sub_80381F4(u32, void *, void *);
 extern void sub_80151C0(u32, u8 *);
 extern void sub_802EF48(void);
-extern void sub_802D098(struct WonderMail *);
 
 
-extern struct unkStruct_803B344 *sub_803B344(u8);
+extern unkStruct_803B344 *sub_803B344(u8);
 
 
 
@@ -151,8 +140,8 @@ extern bool8 GetWonderMailAccepted();
 extern void sub_802D184();
 
 extern s32 sub_80154F0();
-extern bool8 DecodeWonderMailPassword(u8 *, struct WonderMail *);
-extern bool8 IsValidWonderMail(struct WonderMail *WonderMailData);
+extern bool8 DecodeWonderMailPassword(u8 *, WonderMail *);
+extern bool8 IsValidWonderMail(WonderMail *WonderMailData);
 
 void PrintWonderMailMainMenuError(u32);
 void HandleWonderMailMainScreen(void);
@@ -181,7 +170,7 @@ bool8 CreateWonderMailMenu(void)
   s32 index;
 
   ResetUnusedInputStruct();
-  sub_800641C(0,1,1);
+  sub_800641C(NULL, TRUE, TRUE);
 
   gUnknown_203B3E8 = MemoryAlloc(sizeof(struct unkStruct_203B3E8), 8);
   MemoryFill8((u8 *)gUnknown_203B3E8, 0, sizeof(struct unkStruct_203B3E8));
@@ -417,7 +406,7 @@ void HandlePasswordEntryScreen(void)
     case 3:
       sub_80155F0();
       ResetUnusedInputStruct();
-      sub_800641C(gUnknown_203B3E8->unk1EC,1,1);
+      sub_800641C(gUnknown_203B3E8->unk1EC, TRUE, TRUE);
       if ( !DecodeWonderMailPassword(gUnknown_203B3E8->PasswordEntryBuffer, &gUnknown_203B3E8->UNK38.decodedMail) || !IsValidWonderMail(&gUnknown_203B3E8->UNK38.decodedMail) )
       {
         // Invalid password
@@ -435,7 +424,7 @@ void HandlePasswordEntryScreen(void)
     case 2:
         sub_80155F0();
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B3E8->unk1EC,1,1);
+        sub_800641C(gUnknown_203B3E8->unk1EC, TRUE, TRUE);
         SetWonderMailMainMenuState(EXIT_TO_MAIN_MENU);
         break;
   }
@@ -531,7 +520,7 @@ void nullsub_54(void)
 void WonderMailMainMenuCallback(void)
 {
   int linkStatus;
-  struct unkStruct_803B344 *temp;
+  unkStruct_803B344 *temp;
 
   switch(gUnknown_203B3E8->state) {
     case SELECT_WONDER_MAIL_MODE_MAIN_SCREEN:
@@ -542,7 +531,7 @@ void WonderMailMainMenuCallback(void)
         break;
     case 3:
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_802EF48();
         break;
     case RECEIVE_WONDER_MAIL_MAIN_SCREEN:
@@ -560,7 +549,7 @@ void WonderMailMainMenuCallback(void)
             gUnknown_203B3E8->unk488 = NULL;
             gUnknown_203B3E8->unk48C = NULL;
         }
-        sub_802D098(&gUnknown_203B3E8->unk474);
+        sub_802D098((unkSubStruct_203B2F8 *)&gUnknown_203B3E8->unk474);
         break;
     case PREPARE_SAVE:
         if(gUnknown_203B3E8->wonderMailAccepted)
@@ -646,7 +635,7 @@ void WonderMailMainMenuCallback(void)
     case PASSWORD_ENTRY_SCREEN:
         sub_8006518(gUnknown_203B3E8->unk1EC);
         ResetUnusedInputStruct();
-        sub_800641C(0,1,1);
+        sub_800641C(NULL, TRUE, TRUE);
         sub_80151C0(5,gUnknown_203B3E8->PasswordEntryBuffer);
         break;
     case PASSWORD_INVALID:

@@ -3,9 +3,9 @@
 #include "constants/dungeon.h"
 #include "constants/monster.h"
 #include "constants/wonder_mail.h"
-#include "item.h"
+#include "items.h"
 #include "code_80958E8.h"
-#include "team_inventory.h"
+#include "code_80958E8_1.h"
 #include "random.h"
 #include "pokemon.h"
 
@@ -17,24 +17,23 @@ struct unkStruct_8096AF8
 };
 
 extern u8 IsJobSlotEmpty(u8);
-extern struct WonderMail * GetJobSlotInfo(u8);
-extern bool8 IsValidWonderMail(struct WonderMail *WonderMailData);
-extern u8 sub_8095E38(struct WonderMail *, u8, u8, bool8);
+extern bool8 IsValidWonderMail(WonderMail *WonderMailData);
+extern u8 sub_8095E38(WonderMail *, u8, u8, bool8);
 extern void ResetJobSlot(u8);
 extern void sub_8096C80(void);
 extern void sub_8096D24(void);
 extern void sub_80965F4();
 extern void SortPelipperJobs();
-extern struct WonderMail *GetPelipperBoardSlotInfo(u8);
+extern WonderMail *GetPelipperBoardSlotInfo(u8);
 u8 sub_8097318(s16 param_1);
-extern bool8 GenerateMailJobInfo(struct WonderMail *);
+extern bool8 GenerateMailJobInfo(WonderMail *);
 
 void SortPelipperJobs(void)
 {
     s32 index1;
     s32 index2;
 
-    struct WonderMail mail;
+    WonderMail mail;
 
     for(index1 = 0; index1 < MAX_ACCEPTED_JOBS - 1; index1++)
     {
@@ -57,7 +56,7 @@ void SortPelipperJobs(void)
 void GeneratePelipperJobs(void)
 {
   s32 range;
-  struct WonderMail *mail;
+  WonderMail *mail;
   s32 index;
   
   range = RandRange(4,8);
@@ -126,9 +125,9 @@ void GeneratePelipperJobs(void)
   SortPelipperJobs();
 }
 
-bool8 IsMailinJobSlot(struct WonderMail *mail)
+bool8 IsMailinJobSlot(WonderMail *mail)
 {
-  struct WonderMail *jobSlot;
+  WonderMail *jobSlot;
   s32 index;
   
   for(index = 0, jobSlot = &gUnknown_203B490->jobSlots[0]; index < MAX_ACCEPTED_JOBS; jobSlot++, index++)
@@ -150,7 +149,7 @@ bool8 IsMailinJobSlot(struct WonderMail *mail)
   return FALSE;
 }
 
-bool8 sub_809693C(struct WonderMail *mail)
+bool8 sub_809693C(WonderMail *mail)
 {
   u8 dungeonIndex;
   u8 floor;
@@ -196,7 +195,7 @@ s32 GetNumAcceptedJobs(void)
 
 s32 CountJobsinDungeon(u8 dungeon)
 {
-  struct WonderMail *mail;
+  WonderMail *mail;
   s32 index;
   s32 count;
   
@@ -214,7 +213,7 @@ s32 CountJobsinDungeon(u8 dungeon)
 
 bool8 sub_8096A08(u8 dungeon, u8 *param_2)
 {
-  struct WonderMail *mail;
+  WonderMail *mail;
   s32 index;
   u32 local_14;
   s32 temp;
@@ -243,7 +242,7 @@ bool8 sub_8096A08(u8 dungeon, u8 *param_2)
   return FALSE;
 }
 
-bool8 AcceptJob(struct WonderMail *mail)
+bool8 AcceptJob(WonderMail *mail)
 {
   s32 index;
 
@@ -258,7 +257,7 @@ bool8 AcceptJob(struct WonderMail *mail)
   return TRUE;
 }
 
-struct WonderMail *GetJobSlotInfo(u8 index)
+WonderMail *GetJobSlotInfo(u8 index)
 {
     return &gUnknown_203B490->jobSlots[index];
 }
@@ -273,8 +272,8 @@ bool8 IsJobSlotEmpty(u8 index)
 
 void sub_8096AF8(struct unkStruct_8096AF8 *param_1, u8 slotIndex,u8 dungeon)
 {
-  struct WonderMail *jobSlot;
-  struct Item *item;
+  WonderMail *jobSlot;
+  Item *item;
   s32 index;
   
   jobSlot = GetJobSlotInfo(slotIndex);
@@ -314,7 +313,7 @@ void sub_8096AF8(struct unkStruct_8096AF8 *param_1, u8 slotIndex,u8 dungeon)
 // Unused
 s16 sub_8096B98(u8 dungeon)
 {
-  struct WonderMail *mail;
+  WonderMail *mail;
   s32 index;
   
   for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
@@ -331,7 +330,7 @@ s16 sub_8096B98(u8 dungeon)
 void sub_8096BD0(void)
 {
   s32 index;
-  struct WonderMail *mail;
+  WonderMail *mail;
 
   for(mail = &gUnknown_203B490->jobSlots[0], index = 0; index < MAX_ACCEPTED_JOBS; mail++, index++)
   {
@@ -351,7 +350,7 @@ void sub_8096BD0(void)
 bool8 sub_8096C08(u8 *jobIndex)
 {
   s32 index;
-  struct WonderMail *mail;
+  WonderMail *mail;
 
   for(mail = &gUnknown_203B490->jobSlots[0], index = 0; index < MAX_ACCEPTED_JOBS; mail++, index++)
   {
