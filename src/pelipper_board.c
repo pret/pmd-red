@@ -97,8 +97,8 @@ extern u8 sub_802C26C(void);
 extern u8 HasNoAcceptedJobs(void);
 extern bool8 IsMailinJobSlot(WonderMail *mail);
 
-extern u8 *gUnknown_80D4990[];
-extern u8 *gUnknown_80D4970[];
+extern u8 *gCommonAccept[];
+extern u8 *gCommonInfo[];
 
 void SetPelipperBoardState(u32);
 
@@ -279,7 +279,7 @@ void sub_802EC10(void) {
 
     s32 index;
     s32 loopMax = 0; 
-    gPelipperBoard->menuItems[loopMax].text = *gUnknown_80D4990;
+    gPelipperBoard->menuItems[loopMax].text = *gCommonAccept;
     gPelipperBoard->menuItems[loopMax].menuAction = 4;
 
     if((IsMailinJobSlot(GetPelipperBoardSlotInfo(gPelipperBoard->jobIndex))) || (GetNumAcceptedJobs() >= MAX_ACCEPTED_JOBS))
@@ -288,7 +288,7 @@ void sub_802EC10(void) {
     }
 
     loopMax += 1;
-    gPelipperBoard->menuItems[loopMax].text = *gUnknown_80D4970;
+    gPelipperBoard->menuItems[loopMax].text = *gCommonInfo;
     gPelipperBoard->menuItems[loopMax].menuAction = 5;
     loopMax += 1;
     gPelipperBoard->menuItems[loopMax].text = NULL;

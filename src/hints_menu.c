@@ -41,7 +41,7 @@ extern UnkTextStruct2 gUnknown_80DC0A0;
 extern UnkTextStruct2 gUnknown_80DC0BC;
 extern UnkTextStruct2 gUnknown_80DC0E4;
 extern UnkTextStruct2 gUnknown_80DC0FC;
-extern struct Hints gGameHints[MAX_HINTS];
+extern struct Hints gCommonHints[MAX_HINTS];
 extern u8 gUnknown_80DC0D4[MAX_HINTS];
 
 extern void sub_801E714(void);
@@ -181,7 +181,7 @@ void DrawHintSelectionMenu(void)
     for(hintIndex = 0; hintIndex < MAX_HINTS; hintIndex++)
     {
         y = sub_8013800(&gUnknown_203B264->input, hintIndex);
-        xxx_call_draw_string(10, y, gGameHints[hintIndex].heading, gUnknown_203B264->unk34, 0);
+        xxx_call_draw_string(10, y, gCommonHints[hintIndex].heading, gUnknown_203B264->unk34, 0);
     }
     sub_80073E0(gUnknown_203B264->unk34);
 }
@@ -254,7 +254,7 @@ void sub_801E76C(void)
 void DisplayChosenHint(void)
 {
     sub_80073B8(gUnknown_203B268->unk34);
-    xxx_call_draw_string((gUnknown_203B268->input.unk1E << 3) + 0x10, 0, gGameHints[gUnknown_203B268->input.unk1E].heading, gUnknown_203B268->unk34, 0);
-    xxx_call_draw_string(0xA, 0x14, gGameHints[gUnknown_203B268->input.unk1E].body, gUnknown_203B268->unk34, 0);
+    xxx_call_draw_string((gUnknown_203B268->input.unk1E << 3) + 0x10, 0, gCommonHints[gUnknown_203B268->input.unk1E].heading, gUnknown_203B268->unk34, 0);
+    xxx_call_draw_string(0xA, 0x14, gCommonHints[gUnknown_203B268->input.unk1E].body, gUnknown_203B268->unk34, 0);
     sub_80073E0(gUnknown_203B268->unk34);
 }

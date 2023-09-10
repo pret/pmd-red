@@ -54,10 +54,10 @@ extern u8 gAvailablePokemonNames[0x58]; // 202DF98
 
 EWRAM_DATA_2 unkStruct_203B2B8 *gUnknown_203B2B8 = {0};
 
-// data_80D47B8.s
-extern const u8 *gUnknown_80D4920[];
-extern const u8 *gUnknown_80D4928[];
-extern const u8 *gUnknown_80D4970[];
+// common_strings.s
+extern const u8 *gCommonYes[];
+extern const u8 *gCommonNo[];
+extern const u8 *gCommonInfo[];
 
 #include "data/party_list_menu.h"
 
@@ -459,7 +459,7 @@ void sub_802678C(void)
         gUnknown_203B2B8->unk20C[0] = 1;
     }
     loopMax += 1;
-    gUnknown_203B2B8->unk16C[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B2B8->unk16C[loopMax].text = *gCommonInfo;
     gUnknown_203B2B8->unk16C[loopMax].menuAction = 4;
     loopMax += 1;
     gUnknown_203B2B8->unk16C[loopMax].text = NULL;
@@ -485,10 +485,10 @@ void sub_802678C(void)
 
 void sub_8026878(void) {
     s32 loopMax = 0;
-    gUnknown_203B2B8->unk1BC[loopMax].text = *gUnknown_80D4920;
+    gUnknown_203B2B8->unk1BC[loopMax].text = *gCommonYes;
     gUnknown_203B2B8->unk1BC[loopMax].menuAction = 2;
     loopMax += 1;
-    gUnknown_203B2B8->unk1BC[loopMax].text = *gUnknown_80D4928;
+    gUnknown_203B2B8->unk1BC[loopMax].text = *gCommonNo;
     gUnknown_203B2B8->unk1BC[loopMax].menuAction = 3;
     loopMax += 1;
     gUnknown_203B2B8->unk1BC[loopMax].text = NULL;

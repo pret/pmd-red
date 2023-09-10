@@ -35,8 +35,8 @@ ALIGNED(4) static const u8 sClose[] = "CLOSE";
 ALIGNED(4) static const u8 sOpen[] = "OPEN";
 ALIGNED(4) static const u8 sFill[] = "pksdir0";
 
-// data_80D47B8.s
-extern const u8 *gUnknown_80D4970[];
+// common_strings.s
+extern const u8 *gCommonInfo[];
 
 void sub_803A924(u32);
 void sub_803A93C(void);
@@ -156,7 +156,7 @@ void sub_803AA34(void)
     }
 
     index++;
-    sUnknown_203B3F4->menuItems[index].text = *gUnknown_80D4970;
+    sUnknown_203B3F4->menuItems[index].text = *gCommonInfo;
     sUnknown_203B3F4->menuItems[index].menuAction = 4;
 
     index++;

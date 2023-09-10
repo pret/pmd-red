@@ -19,11 +19,10 @@ extern u8 gUnknown_202E5D8[];
 
 static EWRAM_DATA_2 MakuhitaDojoWork1 *sMakuhitaDojoWork1 = {0};
 
-// data_80D47B8.s
-extern const u8 *gUnknown_80D4934[];
-extern const u8 *gUnknown_80D4970[];
-// data_80D47B8.s
-extern const u8 *gMakuhitaDialogue[2][10]; // 80D9FC8
+// common_strings.s
+extern const u8 *gCommonCancel[];
+extern const u8 *gCommonInfo[];
+extern const u8 *gCommonMakuhita[2][10]; // 80D9FC8
 
 #include "data/makuhita_dojo1.h" // 80E0760
 
@@ -179,18 +178,18 @@ static void MakuhitaDojo_UpdateDialogue(void)
     switch (sMakuhitaDojoWork1->state) {
         case 0:
             MakuhitaDojo_DrawMainMenu();
-            sub_8014248(gMakuhitaDialogue[sMakuhitaDojoWork1->isAsleep][0], 0, sMakuhitaDojoWork1->menuAction, sMakuhitaDojoWork1->unk18, NULL, 4, 0, sMakuhitaDojoWork1->unk68, 12);
+            sub_8014248(gCommonMakuhita[sMakuhitaDojoWork1->isAsleep][0], 0, sMakuhitaDojoWork1->menuAction, sMakuhitaDojoWork1->unk18, NULL, 4, 0, sMakuhitaDojoWork1->unk68, 12);
             break;
         case 1:
-            sub_8014248(gMakuhitaDialogue[sMakuhitaDojoWork1->isAsleep][1], 0, sMakuhitaDojoWork1->menuAction, sMakuhitaDojoWork1->unk18, NULL, 4, 0, sMakuhitaDojoWork1->unk68, 12);
+            sub_8014248(gCommonMakuhita[sMakuhitaDojoWork1->isAsleep][1], 0, sMakuhitaDojoWork1->menuAction, sMakuhitaDojoWork1->unk18, NULL, 4, 0, sMakuhitaDojoWork1->unk68, 12);
             break;
         case 2:
             sMakuhitaDojoWork1->fallbackState = 13;
-            sub_80141B4(gMakuhitaDialogue[sMakuhitaDojoWork1->isAsleep][2], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            sub_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->isAsleep][2], 0, sMakuhitaDojoWork1->unk68, 0x10D);
             break;
         case 3:
             sMakuhitaDojoWork1->fallbackState = 4;
-            sub_80141B4(gMakuhitaDialogue[sMakuhitaDojoWork1->isAsleep][3], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            sub_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->isAsleep][3], 0, sMakuhitaDojoWork1->unk68, 0x10D);
             break;
         case 4:
             sub_80302E8(3, NULL, 10);
@@ -200,19 +199,19 @@ static void MakuhitaDojo_UpdateDialogue(void)
             dLoc.id = sub_80A2740(sMakuhitaDojoWork1->unk10);
             dLoc.floor = 1;
             PrintYellowDungeonNametoBuffer(gAvailablePokemonNames, &dLoc);
-            sub_80141B4(gMakuhitaDialogue[sMakuhitaDojoWork1->isAsleep][4], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            sub_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->isAsleep][4], 0, sMakuhitaDojoWork1->unk68, 0x10D);
             break;
         case 7:
             sMakuhitaDojoWork1->fallbackState = 13;
-            sub_80141B4(gMakuhitaDialogue[sMakuhitaDojoWork1->isAsleep][6], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            sub_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->isAsleep][6], 0, sMakuhitaDojoWork1->unk68, 0x10D);
             break;
         case 6:
             sMakuhitaDojoWork1->fallbackState = 13;
-            sub_80141B4(gMakuhitaDialogue[sMakuhitaDojoWork1->isAsleep][5], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            sub_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->isAsleep][5], 0, sMakuhitaDojoWork1->unk68, 0x10D);
             break;
         case 8:
             sMakuhitaDojoWork1->fallbackState = 9;
-            sub_80141B4(gMakuhitaDialogue[sMakuhitaDojoWork1->isAsleep][7], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            sub_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->isAsleep][7], 0, sMakuhitaDojoWork1->unk68, 0x10D);
             break;
         case 9:
             PrintColoredPokeNameToBuffer(gPlayerName, GetPlayerPokemonStruct(), COLOR_YELLOW);
@@ -222,14 +221,14 @@ static void MakuhitaDojo_UpdateDialogue(void)
             break;
         case 10:
             sMakuhitaDojoWork1->fallbackState = 13;
-            sub_80141B4(gMakuhitaDialogue[sMakuhitaDojoWork1->isAsleep][8], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            sub_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->isAsleep][8], 0, sMakuhitaDojoWork1->unk68, 0x10D);
             break;
         case 11:
             sub_801B60C(1, ITEM_GINSENG, 1);
             break;
         case 12:
             sMakuhitaDojoWork1->fallbackState = 1;
-            sub_80141B4(gMakuhitaDialogue[sMakuhitaDojoWork1->isAsleep][9], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            sub_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->isAsleep][9], 0, sMakuhitaDojoWork1->unk68, 0x10D);
             break;
         case 13:
             return;
@@ -251,10 +250,10 @@ static void MakuhitaDojo_DrawMainMenu(void)
     }
 
     loopMax += 1;
-    sMakuhitaDojoWork1->unk18[loopMax].text = *gUnknown_80D4970;
+    sMakuhitaDojoWork1->unk18[loopMax].text = *gCommonInfo;
     sMakuhitaDojoWork1->unk18[loopMax].menuAction = 3;
     loopMax += 1;
-    sMakuhitaDojoWork1->unk18[loopMax].text = *gUnknown_80D4934;
+    sMakuhitaDojoWork1->unk18[loopMax].text = *gCommonCancel;
     sMakuhitaDojoWork1->unk18[loopMax].menuAction = 1;
     loopMax += 1;
     sMakuhitaDojoWork1->unk18[loopMax].text = NULL;

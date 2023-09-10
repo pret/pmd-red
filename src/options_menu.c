@@ -51,8 +51,8 @@ extern const char gOthers_MenuOption[];
 extern const char gUnknown_80DBFEC[];
 extern const char gOthers_GameOptions[];
 extern const char gOthers_Hints[];
-extern const char *gUnknown_80D4920[];
-extern const char *gUnknown_80D4928[];
+extern const char *gCommonYes[];
+extern const char *gCommonNo[];
 
 extern s32 sub_8008ED0(u8 *);
 extern void CreateOthersMenu(void);
@@ -248,14 +248,14 @@ void CreateOthersMenu(void)
 void CreateChangeSettingsConfirmMenu(void)
 {
   s32 loopMax;
-  
+
   MemoryFill16(gUnknown_203B25C->unkAC,0,sizeof(gUnknown_203B25C->unkAC));
   loopMax = 0;
 
-  gUnknown_203B25C->menuItems[loopMax].text = *gUnknown_80D4920; // Yes
+  gUnknown_203B25C->menuItems[loopMax].text = *gCommonYes;
   gUnknown_203B25C->menuItems[loopMax].menuAction = MENU_OPTION_YES;
   loopMax += 1;
-  gUnknown_203B25C->menuItems[loopMax].text = *gUnknown_80D4928; // No
+  gUnknown_203B25C->menuItems[loopMax].text = *gCommonNo;
   gUnknown_203B25C->menuItems[loopMax].menuAction = MENU_OPTION_NO;
   loopMax += 1;
   gUnknown_203B25C->menuItems[loopMax].text = NULL;

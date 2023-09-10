@@ -41,8 +41,8 @@ static const UnkTextStruct2 sUnknown_80E7E64 =
 ALIGNED(4) static const u8 sNumberPrompt[] = "Number?";
 ALIGNED(4) static const u8 sFill[] = "pksdir0";
 
-// data_80D47B8.s
-extern const u8 *gUnknown_80D4970[];
+// common_strings.s
+extern const u8 *gCommonInfo[];
 
 void sub_803A504(u32);
 void sub_803A51C(void);
@@ -187,7 +187,7 @@ void sub_803A6F0(void)
     }
 
     loopMax += 1;
-    sUnknown_203B3F0->menuItems[loopMax].text = *gUnknown_80D4970;
+    sUnknown_203B3F0->menuItems[loopMax].text = *gCommonInfo;
     sUnknown_203B3F0->menuItems[loopMax].menuAction = 3;
 
     loopMax += 1;

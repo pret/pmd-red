@@ -53,7 +53,7 @@ extern u8 gAvailablePokemonNames[];
 
 EWRAM_DATA_2 unkStruct_203B2B4 *gUnknown_203B2B4 = {0};
 
-extern u8 *gUnknown_80D4970[];
+extern u8 *gCommonInfo[];
 
 #include "data/friend_list_menu.h"
 
@@ -379,7 +379,7 @@ void sub_802591C(void)
       gUnknown_203B2B4->unk108[loopMax] = 1;
   }
   loopMax += 1;
-  gUnknown_203B2B4->unkC8[loopMax].text = *gUnknown_80D4970;
+  gUnknown_203B2B4->unkC8[loopMax].text = *gCommonInfo;
   gUnknown_203B2B4->unkC8[loopMax].menuAction = 4;
   loopMax += 1;
   gUnknown_203B2B4->unkC8[loopMax].text = NULL;

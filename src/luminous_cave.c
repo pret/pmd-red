@@ -25,9 +25,11 @@ extern u8 gPlayerName[]; // 202E2B8
 
 EWRAM_DATA_2 struct unkStruct_203B2B0 *gUnknown_203B2B0 = {0};
 
-// data_80D47B8.s
-extern const u8 *gUnknown_80D4934[];
-extern const u8 *gUnknown_80D4970[];
+// common_strings.s
+extern const u8 *gCommonCancel[];
+extern const u8 *gCommonInfo[];
+
+
 extern const UnkTextStruct2 gUnknown_80DC9E8;
 extern const UnkTextStruct2 gUnknown_80DCA00;
 extern const u8 gUnknown_80DCA18[];
@@ -390,11 +392,11 @@ static void sub_8024CFC(void)
     gUnknown_203B2B0->unk34[loopMax].menuAction = 3;
 
     loopMax += 1;
-    gUnknown_203B2B0->unk34[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B2B0->unk34[loopMax].text = *gCommonInfo;
     gUnknown_203B2B0->unk34[loopMax].menuAction = 2;
 
     loopMax += 1;
-    gUnknown_203B2B0->unk34[loopMax].text = *gUnknown_80D4934;
+    gUnknown_203B2B0->unk34[loopMax].text = *gCommonCancel;
     gUnknown_203B2B0->unk34[loopMax].menuAction = 1;
 
     loopMax += 1;
@@ -415,7 +417,7 @@ static void sub_8024D48(void)
     gUnknown_203B2B0->unk34[loopMax].text = gUnknown_80DCA2C;
     gUnknown_203B2B0->unk34[loopMax].menuAction = 5;
     loopMax += 1;
-    gUnknown_203B2B0->unk34[loopMax].text = *gUnknown_80D4934;
+    gUnknown_203B2B0->unk34[loopMax].text = *gCommonCancel;
     gUnknown_203B2B0->unk34[loopMax].menuAction = 1;
     loopMax += 1;
     gUnknown_203B2B0->unk34[loopMax].text = NULL;
@@ -444,7 +446,7 @@ static void sub_8024DBC(void)
     gUnknown_203B2B0->unk34[loopMax].text = gUnknown_80DCA2C;
     gUnknown_203B2B0->unk34[loopMax].menuAction = 5;
     loopMax += 1;
-    gUnknown_203B2B0->unk34[loopMax].text = *gUnknown_80D4934;
+    gUnknown_203B2B0->unk34[loopMax].text = *gCommonCancel;
     gUnknown_203B2B0->unk34[loopMax].menuAction = 1;
     loopMax += 1;
     gUnknown_203B2B0->unk34[loopMax].text = NULL;
@@ -472,7 +474,7 @@ static void sub_8024E30(void)
     gUnknown_203B2B0->unk34[loopMax].text = gUnknown_80DCA2C;
     gUnknown_203B2B0->unk34[loopMax].menuAction = 5;
     loopMax += 1;
-    gUnknown_203B2B0->unk34[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B2B0->unk34[loopMax].text = *gCommonInfo;
     gUnknown_203B2B0->unk34[loopMax].menuAction = 2;
     loopMax += 1;
     gUnknown_203B2B0->unk34[loopMax].text = NULL;

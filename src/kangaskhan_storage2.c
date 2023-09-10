@@ -12,10 +12,10 @@
 
 EWRAM_DATA_2 unkStruct_203B20C *gUnknown_203B20C = {0};
 
-extern const u8 *gUnknown_80D4934[];
-extern const u8 *gUnknown_80D4958[];
-extern const u8 *gUnknown_80D4964[];
-extern const u8 *gUnknown_80D4970[];
+extern const u8 *gCommonCancel[];
+extern const u8 *gCommonStore[];
+extern const u8 *gCommonTake[];
+extern const u8 *gCommonInfo[];
 
 #include "data/kangaskhan_storage2.h" // 80DB7B8
 
@@ -225,21 +225,21 @@ static void sub_80182E4(void)
 
     loopMax = 0;
     MemoryFill16(gUnknown_203B20C->unk60, 0, sizeof(gUnknown_203B20C->unk60));
-    gUnknown_203B20C->unk20[0].text = *gUnknown_80D4958;
+    gUnknown_203B20C->unk20[0].text = *gCommonStore;
     gUnknown_203B20C->unk20[0].menuAction = 2;
 
     if (GetNumberOfFilledInventorySlots() == 0 || sub_801CF50(0))
         gUnknown_203B20C->unk60[0] = 1;
 
     loopMax += 1;
-    gUnknown_203B20C->unk20[loopMax].text = *gUnknown_80D4964;
+    gUnknown_203B20C->unk20[loopMax].text = *gCommonTake;
     gUnknown_203B20C->unk20[loopMax].menuAction = 3;
 
     if (sub_801CF14(1) || INVENTORY_SIZE <=  GetNumberOfFilledInventorySlots())
         gUnknown_203B20C->unk60[loopMax] = 1;
 
     loopMax += 1;
-    gUnknown_203B20C->unk20[loopMax].text = *gUnknown_80D4934;
+    gUnknown_203B20C->unk20[loopMax].text = *gCommonCancel;
     gUnknown_203B20C->unk20[loopMax].menuAction = 1;
 
     loopMax += 1;
@@ -268,13 +268,13 @@ static void sub_801841C(void)
 
     loopMax = 0;
     MemoryFill16(gUnknown_203B20C->unk60,0,sizeof(gUnknown_203B20C->unk60));
-    gUnknown_203B20C->unk20[0].text = *gUnknown_80D4958;
+    gUnknown_203B20C->unk20[0].text = *gCommonStore;
     gUnknown_203B20C->unk20[0].menuAction = 2;
     if (!sub_801ADA0(gUnknown_203B20C->itemIndex))
         gUnknown_203B20C->unk60[0] = 1;
 
     loopMax += 1;
-    gUnknown_203B20C->unk20[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B20C->unk20[loopMax].text = *gCommonInfo;
     gUnknown_203B20C->unk20[loopMax].menuAction = 4;
 
     loopMax += 1;
@@ -303,14 +303,14 @@ static void sub_80184D4(void)
 
     loopMax = 0;
     MemoryFill16(gUnknown_203B20C->unk60, 0, sizeof(gUnknown_203B20C->unk60));
-    gUnknown_203B20C->unk20[0].text = *gUnknown_80D4964;
+    gUnknown_203B20C->unk20[0].text = *gCommonTake;
     gUnknown_203B20C->unk20[0].menuAction = 3;
 
     if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
         gUnknown_203B20C->unk60[0] = 1;
 
     loopMax += 1;
-    gUnknown_203B20C->unk20[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B20C->unk20[loopMax].text = *gCommonInfo;
     gUnknown_203B20C->unk20[loopMax].menuAction = 4;
 
     loopMax += 1;

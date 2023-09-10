@@ -18,8 +18,8 @@ struct unkStruct_203B200
     u8 fill[0x50 - 0x28];
 };
 extern struct unkStruct_203B200 *gUnknown_203B200;
-extern const char *gUnknown_80D4920;
-extern const char *gUnknown_80D4928;
+extern const u8 *gCommonYes[];
+extern const u8 *gCommonNo[];
 
 extern const char gUnknown_80DB6A4;
 extern const char gUnknown_80DB6BC;
@@ -180,9 +180,9 @@ void sub_8016110(void)
 
 void CreateConfirmNameMenu(void)
 {
-  gUnknown_203B200->menus[0].text = gUnknown_80D4920; // Yes
+  gUnknown_203B200->menus[0].text = *gCommonYes;
   gUnknown_203B200->menus[0].menuAction = MENU_ACTION_YES;
-  gUnknown_203B200->menus[1].text = gUnknown_80D4928; // No
+  gUnknown_203B200->menus[1].text = *gCommonNo;
   gUnknown_203B200->menus[1].menuAction = MENU_ACTION_NO;
   gUnknown_203B200->menus[2].text = NULL;
   gUnknown_203B200->menus[2].menuAction = MENU_ACTION_DEFAULT;

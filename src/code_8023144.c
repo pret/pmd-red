@@ -42,8 +42,8 @@ extern u8 gUnknown_80DC5EC[];
 extern u8 gUnknown_202DE58[];
 extern u8 gUnknown_80DC8F0[];
 extern u8 gUnknown_80DC8F8[];
-extern u8 *gUnknown_80D4940[];
-extern u8 *gUnknown_80D4970[];
+extern u8 *gCommonTrash[];
+extern u8 *gCommonInfo[];
 extern void sub_8022924(s32);
 
 void GetGummiItemStatBoost(PokemonStruct1* pokemon, u8 id, bool8 checkBoostFlags, Gummi *gummi);
@@ -71,11 +71,11 @@ void sub_8022D2C(void) {
             gUnknown_203B294->unkF8[loopMax].menuAction = 6;
             loopMax += 1;
         }
-        gUnknown_203B294->unkF8[loopMax].text = *gUnknown_80D4940;
+        gUnknown_203B294->unkF8[loopMax].text = *gCommonTrash;
         gUnknown_203B294->unkF8[loopMax].menuAction = 4;
         loopMax += 1;
     }
-    gUnknown_203B294->unkF8[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B294->unkF8[loopMax].text = *gCommonInfo;
     gUnknown_203B294->unkF8[loopMax].menuAction = 7;
     loopMax += 1;
     gUnknown_203B294->unkF8[loopMax].text = NULL;

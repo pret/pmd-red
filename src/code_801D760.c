@@ -88,10 +88,10 @@ extern u8 gMenuItems[];
 extern u8 gMenuJobList[];
 extern u8 gMenuTeam[];
 extern u8 gMenuOthers[];
-extern u8 *gUnknown_80D49B4[];
+extern u8 *gCommonExit[];
 extern u8 gUnknown_80DBF34[];
-extern u8 *gUnknown_80D49A8[];
-extern u8 *gUnknown_80D4970[];
+extern u8 *gCommonFriend[];
+extern u8 *gCommonInfo[];
 
 struct TeamBadgeData
 {
@@ -211,7 +211,7 @@ void sub_801D4C0(void)
     else {
         strcpy(gAvailablePokemonNames,gUnknown_80DBF34);
         if (sub_8096E2C()) {
-            gUnknown_203B250->unk68[loopMax].text = *gUnknown_80D49A8;
+            gUnknown_203B250->unk68[loopMax].text = *gCommonFriend;
             gUnknown_203B250->unk68[loopMax].menuAction = 5;
             if (sub_8024108(4)) {
                 gUnknown_203B250->unkA8[loopMax] = 1;
@@ -225,10 +225,10 @@ void sub_801D4C0(void)
             loopMax++;
         }
 
-        gUnknown_203B250->unk68[loopMax].text = *gUnknown_80D4970;
+        gUnknown_203B250->unk68[loopMax].text = *gCommonInfo;
         gUnknown_203B250->unk68[loopMax].menuAction = 8;
         loopMax++;
-        gUnknown_203B250->unk68[loopMax].text = *gUnknown_80D49B4;
+        gUnknown_203B250->unk68[loopMax].text = *gCommonExit;
         gUnknown_203B250->unk68[loopMax].menuAction = 10;
         loopMax++;
     }

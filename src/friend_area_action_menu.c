@@ -21,9 +21,9 @@
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
 
-extern u8 *gUnknown_80D4920[];
-extern u8 *gUnknown_80D4928[];
-extern u8 *gUnknown_80D4970[];
+extern u8 *gCommonYes[];
+extern u8 *gCommonNo[];
+extern u8 *gCommonInfo[];
 
 void sub_8027D40(u32, BulkItem *heldItem);
 void sub_8027794(void);
@@ -345,7 +345,7 @@ void sub_80276A8(void)
     gUnknown_203B2BC->unk16C[loopMax] = 1;
   }
   loopMax += 1;
-  gUnknown_203B2BC->menuItems[loopMax].text = *gUnknown_80D4970;
+  gUnknown_203B2BC->menuItems[loopMax].text = *gCommonInfo;
   gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_INFO;
   loopMax += 1;
   gUnknown_203B2BC->menuItems[loopMax].text = 0;
@@ -375,10 +375,10 @@ void sub_8027794(void)
   s32 loopMax = 0;
   
   MemoryFill16(gUnknown_203B2BC->unk16C,0,sizeof(gUnknown_203B2BC->unk16C));
-  gUnknown_203B2BC->menuItems[loopMax].text = *gUnknown_80D4920;
+  gUnknown_203B2BC->menuItems[loopMax].text = *gCommonYes;
   gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_YES;
   loopMax += 1;
-  gUnknown_203B2BC->menuItems[loopMax].text = *gUnknown_80D4928;
+  gUnknown_203B2BC->menuItems[loopMax].text = *gCommonNo;
   gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_NO;
   loopMax += 1;
   gUnknown_203B2BC->menuItems[loopMax].text = NULL;

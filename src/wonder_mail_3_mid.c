@@ -122,7 +122,7 @@ extern u8 gUnknown_202DEA8[];
 extern u8 gUnknown_202E5D8[];
 extern u8 gAvailablePokemonNames[];
 extern u32 gUnknown_202DE30;
-extern const u8 *gUnknown_80D4970[];
+extern const u8 *gCommonInfo[];
 
 const UnkTextStruct2 gUnknown_80E03C4 = {
     0x00, 0x00, 0x00, 0x00,
@@ -349,7 +349,7 @@ void sub_802F108(void)
     gUnknown_203B30C->unkB0[loopMax].text = gUnknown_80E040C;
     gUnknown_203B30C->unkB0[loopMax].menuAction = 2;
     loopMax += 1;
-    gUnknown_203B30C->unkB0[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B30C->unkB0[loopMax].text = *gCommonInfo;
     gUnknown_203B30C->unkB0[loopMax].menuAction = 3;
     loopMax += 1;
     gUnknown_203B30C->unkB0[loopMax].text = NULL;

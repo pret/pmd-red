@@ -15,13 +15,13 @@ extern u32 gUnknown_202DE30;
 extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
-extern u8 *gUnknown_80D4934[];
-extern u8 *gUnknown_80D4958[];
-extern u8 *gUnknown_80D4964[];
-extern u8 *gUnknown_80D4970[];
-extern u8 *gFelicityDeposit;
-extern u8 *gFelicityWithdraw;
-extern u8 *gFelicityDialogue[2][15];
+extern u8 *gCommonCancel[];
+extern u8 *gCommonStore[];
+extern u8 *gCommonTake[];
+extern u8 *gCommonInfo[];
+extern u8 *gCommonDepositPrompt;
+extern u8 *gCommonWithdrawPrompt;
+extern u8 *gCommonFelicity[2][15];
 extern UnkTextStruct2 gUnknown_80DB6DC;
 extern UnkTextStruct2 gUnknown_80DB6F4;
 extern UnkTextStruct2 gUnknown_80DB70C;
@@ -161,49 +161,49 @@ void UpdateFelicityBankDialogue(void)
     switch (gFelicityBankWork->currState) {
         case 0x0:
             gFelicityBankWork->fallbackState = 1;
-            sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][0], 0, gFelicityBankWork->unkA4, 0x10D);
+            sub_80141B4(gCommonFelicity[gFelicityBankWork->isAsleep][0], 0, gFelicityBankWork->unkA4, 0x10D);
             break;
         case 0x1:
             CreateFelicityBankShopMenu();
             gFelicityBankWork->fallbackState = 2;
             if (gTeamInventoryRef->teamSavings == 0)
-                sub_8014248(gFelicityDialogue[gFelicityBankWork->isAsleep][1], 0, gFelicityBankWork->menuAction,
+                sub_8014248(gCommonFelicity[gFelicityBankWork->isAsleep][1], 0, gFelicityBankWork->menuAction,
                     gFelicityBankWork->unk14, gFelicityBankWork->unk54, 4, 0, gFelicityBankWork->unkA4, 0xC);
             else {
                 gUnknown_202DE30 = gTeamInventoryRef->teamSavings;
-                sub_8014248(gFelicityDialogue[gFelicityBankWork->isAsleep][2], 0, gFelicityBankWork->menuAction,
+                sub_8014248(gCommonFelicity[gFelicityBankWork->isAsleep][2], 0, gFelicityBankWork->menuAction,
                     gFelicityBankWork->unk14, gFelicityBankWork->unk54, 4, 0, gFelicityBankWork->unkA4, 0xC);
             }
             break;
         case 0x3:
             gFelicityBankWork->fallbackState = 1;
-            sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][14], 0, gFelicityBankWork->unkA4, 0x10D);
+            sub_80141B4(gCommonFelicity[gFelicityBankWork->isAsleep][14], 0, gFelicityBankWork->unkA4, 0x10D);
             break;
         case 0x4:
             gFelicityBankWork->fallbackState = 6;
             if (gTeamInventoryRef->teamSavings == 0)
-                sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][4], 0, gFelicityBankWork->unkA4, 0x10D);
+                sub_80141B4(gCommonFelicity[gFelicityBankWork->isAsleep][4], 0, gFelicityBankWork->unkA4, 0x10D);
             else {
                 gUnknown_202DE30 = gTeamInventoryRef->teamSavings;
-                sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][5], 0, gFelicityBankWork->unkA4, 0x10D);
+                sub_80141B4(gCommonFelicity[gFelicityBankWork->isAsleep][5], 0, gFelicityBankWork->unkA4, 0x10D);
             }
             break;
         case 0x5:
             gFelicityBankWork->fallbackState = 1;
-            sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][3], 0, gFelicityBankWork->unkA4, 0x10D);
+            sub_80141B4(gCommonFelicity[gFelicityBankWork->isAsleep][3], 0, gFelicityBankWork->unkA4, 0x10D);
             break;
         case 0x7:
             if (gTeamInventoryRef->teamMoney == 0) {
                 gFelicityBankWork->fallbackState = 1;
-                sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][7], 0, gFelicityBankWork->unkA4, 0x10D);
+                sub_80141B4(gCommonFelicity[gFelicityBankWork->isAsleep][7], 0, gFelicityBankWork->unkA4, 0x10D);
             }
             else if (gTeamInventoryRef->teamSavings >= MAX_TEAM_SAVINGS) {
                 gFelicityBankWork->fallbackState = 1;
-                sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][8], 0, gFelicityBankWork->unkA4, 0x10D);
+                sub_80141B4(gCommonFelicity[gFelicityBankWork->isAsleep][8], 0, gFelicityBankWork->unkA4, 0x10D);
             }
             else {
                 gFelicityBankWork->fallbackState = 8;
-                sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][6], 0, gFelicityBankWork->unkA4, 0x10D);
+                sub_80141B4(gCommonFelicity[gFelicityBankWork->isAsleep][6], 0, gFelicityBankWork->unkA4, 0x10D);
             }
             break;
         case 0x8:
@@ -224,21 +224,21 @@ void UpdateFelicityBankDialogue(void)
         case 0x9:
             gFelicityBankWork->fallbackState = 1;
             gUnknown_202DE30 = gFelicityBankWork->chosenAmount;
-            sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][9], 0, gFelicityBankWork->unkA4, 0x10D);
+            sub_80141B4(gCommonFelicity[gFelicityBankWork->isAsleep][9], 0, gFelicityBankWork->unkA4, 0x10D);
             break;
         case 0xA:
             if (gTeamInventoryRef->teamMoney >= MAX_TEAM_MONEY) {
                 gFelicityBankWork->fallbackState = 1;
-                sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][12], 0, gFelicityBankWork->unkA4, 0x10D);
+                sub_80141B4(gCommonFelicity[gFelicityBankWork->isAsleep][12], 0, gFelicityBankWork->unkA4, 0x10D);
             }
             else if (gTeamInventoryRef->teamSavings == 0) {
                 gFelicityBankWork->fallbackState = 1;
-                sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][11], 0, gFelicityBankWork->unkA4, 0x10D);
+                sub_80141B4(gCommonFelicity[gFelicityBankWork->isAsleep][11], 0, gFelicityBankWork->unkA4, 0x10D);
             }
             else {
                 gFelicityBankWork->fallbackState = 11;
                 gUnknown_202DE30 = gTeamInventoryRef->teamSavings;
-                sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][10], 0, gFelicityBankWork->unkA4, 0x10D);
+                sub_80141B4(gCommonFelicity[gFelicityBankWork->isAsleep][10], 0, gFelicityBankWork->unkA4, 0x10D);
             }
             break;
         case 0xB:
@@ -262,7 +262,7 @@ void UpdateFelicityBankDialogue(void)
         case 0xC:
             gFelicityBankWork->fallbackState = 1;
             gUnknown_202DE30 = gFelicityBankWork->chosenAmount;
-            sub_80141B4(gFelicityDialogue[gFelicityBankWork->isAsleep][13], 0, gFelicityBankWork->unkA4, 0x10D);
+            sub_80141B4(gCommonFelicity[gFelicityBankWork->isAsleep][13], 0, gFelicityBankWork->unkA4, 0x10D);
             break;
     }
 }
@@ -275,16 +275,16 @@ void CreateFelicityBankShopMenu(void)
     
     MemoryFill16(gFelicityBankWork->unk54, 0, sizeof(gFelicityBankWork->unk54));
 
-    gFelicityBankWork->unk14[loopMax].text = *gUnknown_80D4958; // Store
+    gFelicityBankWork->unk14[loopMax].text = *gCommonStore;
     gFelicityBankWork->unk14[loopMax].menuAction = 2;
     loopMax++;
-    gFelicityBankWork->unk14[loopMax].text = *gUnknown_80D4964; // Take
+    gFelicityBankWork->unk14[loopMax].text = *gCommonTake;
     gFelicityBankWork->unk14[loopMax].menuAction = 3;
     loopMax++;
-    gFelicityBankWork->unk14[loopMax].text = *gUnknown_80D4970; // Info
+    gFelicityBankWork->unk14[loopMax].text = *gCommonInfo;
     gFelicityBankWork->unk14[loopMax].menuAction = 4;
     loopMax++;
-    gFelicityBankWork->unk14[loopMax].text = *gUnknown_80D4934; // Cancel
+    gFelicityBankWork->unk14[loopMax].text = *gCommonCancel;
     gFelicityBankWork->unk14[loopMax].menuAction = 1;
     loopMax++;
     gFelicityBankWork->unk14[loopMax].text = NULL;
@@ -389,9 +389,9 @@ void sub_8016B48(u8 action)
   sub_8008C54(gFelicityBankWork->unk78);
   sub_80073B8(gFelicityBankWork->unk78);
   if (action != FELICITY_BANK_ACTION_WITHDRAW)
-     xxx_call_draw_string(12, 0, gFelicityDeposit, gFelicityBankWork->unk78, 0);
+     xxx_call_draw_string(12, 0, gCommonDepositPrompt, gFelicityBankWork->unk78, 0);
   else
-     xxx_call_draw_string(12, 0, gFelicityWithdraw, gFelicityBankWork->unk78, 0);
+     xxx_call_draw_string(12, 0, gCommonWithdrawPrompt, gFelicityBankWork->unk78, 0);
   sub_8013C68(&gFelicityBankWork->unk64);
   sub_80073E0(gFelicityBankWork->unk78);
 }

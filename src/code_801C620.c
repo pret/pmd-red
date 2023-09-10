@@ -145,7 +145,7 @@ extern u8 gUnknown_80DBE1C[];
 extern char gUnknown_80DBE2C[]; // {ARG_MOVE_ITEM_0}
 extern char gUnknown_80DBE30[]; // {ARG_POKEMON_0}
 extern u8 gUnknown_80DBDC8[];
-extern u8 *gUnknown_80D4970[];
+extern u8 *gCommonInfo[];
 
 extern u32 sub_801CE58(void);
 extern void sub_801CC38(void);
@@ -294,7 +294,7 @@ void sub_801C0C8(void)
   gUnknown_203B238->unk34[0].text = gUnknown_80DBDC8;
   puVar1->unk34[0].menuAction = 2;
   menuAction = 1;
-  puVar1->unk34[1].text = *gUnknown_80D4970;
+  puVar1->unk34[1].text = *gCommonInfo;
   puVar1->unk34[1].menuAction = 3;
     
   max = 2;

@@ -60,8 +60,8 @@ const u8 gMailAccepted[] = "Accepted";
 const u8 gUnknown_80E0324[] = "/";
 static const u8 mailbox_fill[] = "pksdir0";
 
-extern u8 *gUnknown_80D4990[];
-extern u8 *gUnknown_80D4970[];
+extern u8 *gCommonAccept[];
+extern u8 *gCommonInfo[];
 
 extern bool8 IsMailinJobSlot(WonderMail *mail);
 
@@ -319,7 +319,7 @@ void CreateMailActionMenu(void) {
     }
     else
     {
-        gUnknown_203B304->menuItems[loopMax].text = *gUnknown_80D4990; // Accept
+        gUnknown_203B304->menuItems[loopMax].text = *gCommonAccept;
         gUnknown_203B304->menuItems[loopMax].menuAction = 5;
 
         if(IsMailinJobSlot(mail) || GetNumAcceptedJobs() >= MAX_ACCEPTED_JOBS)
@@ -328,7 +328,7 @@ void CreateMailActionMenu(void) {
         }
         loopMax += 1;
 
-        gUnknown_203B304->menuItems[loopMax].text = *gUnknown_80D4970; // Info
+        gUnknown_203B304->menuItems[loopMax].text = *gCommonInfo;
         gUnknown_203B304->menuItems[loopMax].menuAction = 8;
         loopMax += 1;
     }
