@@ -5,6 +5,29 @@
 #include "items.h"
 #include "menu.h"
 
+// 11 was another saving too?
+enum TradeItemsScreens
+{
+    TRADE_ITEMS_MAIN_MENU,
+    TRADE_ITEMS_SEND_ITEM,
+    TRADE_ITEMS_SEND_ITEM_SELECTION,
+    TRADE_ITEMS_SEND_ITEM_POPUP_MENU,
+    TRADE_ITEMS_SEND_ITEM_NUMBER,
+    TRADE_ITEMS_ITEM_INFO,
+    TRADE_ITEMS_SEND_ITEM_CONFIRM,
+    TRADE_ITEMS_RECEIVE_ITEM,
+    TRADE_ITEMS_IN_COMMUNICATION = 9,
+    TRADE_ITEMS_PREPARE_TRADE_SAVING = 15,
+    TRADE_ITEMS_PRE_EXIT = 17,
+    TRADE_ITEMS_EXIT = 18,
+};
+
+enum TradeItemsModes
+{
+    TRADE_ITEMS_SEND_ITEM_MODE,
+    TRADE_ITEMS_RECEIVE_ITEM_MODE
+};
+
 struct TradeSubStruct
 {
     union ItemIdx {
@@ -14,10 +37,9 @@ struct TradeSubStruct
     u32 quantity; // number of items?
 };
 
-
+// size: 0x3A0
 struct TradeItemsMenu
 {
-    // size: 0x3A0
     u32 currMenu;
     u32 fallbackState;
     u32 itemMode;
@@ -53,4 +75,4 @@ s32 UpdateTradeItemsMenu(void);
 s32 CreateTradeItemsMenu(void);
 void CleanTradeItemsMenu(void);
 
-#endif
+#endif // GUARD_TRADE_ITEMS_MENU_H

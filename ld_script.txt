@@ -150,9 +150,10 @@ SECTIONS {
         src/credits.o(.text);
         src/main_menu.o(.text);
         src/trade_items_menu.o(.text);
-        src/other_menus.o(.text);
-        asm/other_menus.o(.text);
-        src/other_menus_1.o(.text);
+        src/other_menus1.o(.text);
+        asm/other_menus1.o(.text);
+        asm/other_menus2.o(.text);
+        src/other_menus2.o(.text);
         src/adventure_log_menu.o(.text);
         src/unk_menu_203B360.o(.text);
         src/save_menu.o(.text);
@@ -440,7 +441,8 @@ SECTIONS {
         data/data_80E2068.o(.rodata);
         src/main_menu.o(.rodata);
         src/trade_items_menu.o(.rodata);
-        src/other_menus.o(.rodata);
+        src/other_menus1.o(.rodata);
+        src/other_menus2.o(.rodata);
         src/unk_menu_203B360.o(.rodata);
         src/save_menu.o(.rodata);
         src/rescue_password_menu.o(.rodata);

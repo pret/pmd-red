@@ -362,13 +362,13 @@ gUnknown_202EC20: /* 202EC20 (code_80130A8) */
 gUnknown_202EC28: /* 202EC28 (code_80130A8) */
 	.space 0x10
 
-gUnknown_202EC38: /* 202EC38 (other_menus) */
+gUnknown_202EC38: /* 202EC38 (other_menus2) */
 	.space 0x8
 
-gUnknown_202EC40: /* 202EC40 (other_menus / other_menus_1) */
+gUnknown_202EC40: /* 202EC40 (other_menus2) */
 	.space 0x8
 
-gUnknown_202EC48: /* 202EC48 (other_menus_1) */
+gUnknown_202EC48: /* 202EC48 (other_menus2) */
 	.space 0x4
 
     .include "src/rescue_password_menu.o"

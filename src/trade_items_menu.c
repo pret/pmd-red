@@ -1,88 +1,25 @@
 #include "global.h"
+#include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
 #include "code_801C620.h"
 #include "constants/communication_error_codes.h"
+#include "cpu.h"
 #include "items.h"
 #include "main_menu.h"
-#include "trade_items_menu.h"
 #include "memory.h"
-#include "save_write.h"
 #include "menu_input.h"
+#include "save_write.h"
 #include "text1.h"
 #include "text2.h"
-#include "cpu.h"
-#include "code_80118A4.h"
-
-EWRAM_DATA_2 struct TradeItemsMenu *gTradeItemsMenu = {0};
+#include "trade_items_menu.h"
 
 extern u32 gUnknown_202DE30;
 extern u8 gUnknown_202DE58[];
 
-const MenuItem gUnknown_80E60A0[3] = {
-    {"Send item", 1},
-    {"Receive item", 2},
-    {NULL, 0},
-};
+static EWRAM_DATA_2 struct TradeItemsMenu *sTradeItemsMenu = {0};
 
-const MenuItem gUnknown_80E60D4[3] = {
-    {"Send item", -1},
-    {"Receive item", 2},
-    {NULL, 0},
-};
-
-const UnkTextStruct2 gUnknown_80E60EC =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x15, 0x04,
-    0x06, 0x05,
-    0x05, 0x00,
-    NULL
-};
-
-const MenuItem gUnknown_80E6104[4] = {
-    {"Confirm", 3},
-    {"Info", 4},
-    {"Cancel", 7},
-    {NULL, 0},
-};
-
-static const UnkTextStruct2 unused =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x16, 0x09,
-    0x05, 0x03,
-    0x03, 0x00,
-    NULL
-};
-
-
-const MenuItem gUnknown_80E6154[3] = {
-    {"Yes", 5},
-    {"No", 6},
-    {NULL, 0},
-};
-
-const UnkTextStruct2 gUnknown_80E6174 =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x15, 0x0D,
-    0x06, 0x04,
-    0x04, 0x00,
-    NULL
-};
-
-
-const MenuItem gUnknown_80E618C[3] = {
-    {"Yes", 5},
-    {"Cancel", 0},
-    {NULL, 0},
-};
-
-#include "data/trade_items.h"
+#include "data/trade_items_menu.h"
 
 extern void sub_8035C1C();
 
@@ -115,48 +52,22 @@ void sub_8036A7C();
 void sub_8036A54();
 void WriteandExitTradeItemsMenu();
 
-// 11 was another saving too?
-enum TradeItemsScreens
-{
-    TRADE_ITEMS_MAIN_MENU,
-    TRADE_ITEMS_SEND_ITEM,
-    TRADE_ITEMS_SEND_ITEM_SELECTION,
-    TRADE_ITEMS_SEND_ITEM_POPUP_MENU,
-    TRADE_ITEMS_SEND_ITEM_NUMBER,
-    TRADE_ITEMS_ITEM_INFO,
-    TRADE_ITEMS_SEND_ITEM_CONFIRM,
-    TRADE_ITEMS_RECEIVE_ITEM,
-    TRADE_ITEMS_IN_COMMUNICATION = 9,
-    TRADE_ITEMS_PREPARE_TRADE_SAVING = 15,
-    TRADE_ITEMS_PRE_EXIT = 17,
-    TRADE_ITEMS_EXIT = 18,
-};
-
-enum TradeItemsModes
-{
-    TRADE_ITEMS_SEND_ITEM_MODE,
-    TRADE_ITEMS_RECEIVE_ITEM_MODE
-};
-
-
 s32 CreateTradeItemsMenu(void)
 {
-
   ResetUnusedInputStruct();
   sub_800641C(NULL, TRUE, TRUE);
-  gTradeItemsMenu = MemoryAlloc(sizeof(struct TradeItemsMenu), 8);
-  MemoryFill8((u8 *)gTradeItemsMenu, 0, sizeof(struct TradeItemsMenu));
+  sTradeItemsMenu = MemoryAlloc(sizeof(struct TradeItemsMenu), 8);
+  MemoryFill8((u8 *)sTradeItemsMenu, 0, sizeof(struct TradeItemsMenu));
   sub_8035C1C();
   sub_8035DA0();
-  gTradeItemsMenu->fallbackState = 0x13;
+  sTradeItemsMenu->fallbackState = 0x13;
   SetTradeItemMenu(TRADE_ITEMS_MAIN_MENU);
   return 1;
 }
 
 s32 UpdateTradeItemsMenu(void)
 {
-
-  switch(gTradeItemsMenu->currMenu) {
+  switch(sTradeItemsMenu->currMenu) {
       case TRADE_ITEMS_MAIN_MENU:
         TradeItem_MainMenu();
         break;
@@ -226,14 +137,14 @@ void TradeItem_MainMenu(void)
       {
         case 1:
             // Send Item
-            gTradeItemsMenu->itemMode = TRADE_ITEMS_SEND_ITEM_MODE;
-            gTradeItemsMenu->unk10 = 1;
+            sTradeItemsMenu->itemMode = TRADE_ITEMS_SEND_ITEM_MODE;
+            sTradeItemsMenu->unk10 = 1;
             SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM);
             break;
         case 2:
             // Receive Item
-            gTradeItemsMenu->itemMode = TRADE_ITEMS_RECEIVE_ITEM_MODE;
-            gTradeItemsMenu->unk10 = 2;
+            sTradeItemsMenu->itemMode = TRADE_ITEMS_RECEIVE_ITEM_MODE;
+            sTradeItemsMenu->unk10 = 2;
             SetTradeItemMenu(TRADE_ITEMS_RECEIVE_ITEM);
             break;
         case 0:
@@ -254,9 +165,9 @@ void sub_8036590(void)
 
 void sub_80365AC(void)
 {
-  gTradeItemsMenu->itemToSend.id = ITEM_NOTHING;
-  gTradeItemsMenu->itemToSend.quantity = 1;
-  gTradeItemsMenu->itemToSend.flags = 0;
+  sTradeItemsMenu->itemToSend.id = ITEM_NOTHING;
+  sTradeItemsMenu->itemToSend.quantity = 1;
+  sTradeItemsMenu->itemToSend.flags = 0;
   switch(sub_801CA08(TRUE)){
     case 2:
         // Cancel
@@ -265,18 +176,18 @@ void sub_80365AC(void)
         break;
     case 3:
         // Pop up menu with Confirm, Info, Cancel
-        gTradeItemsMenu->itemToSend.id = sub_801CB24();
-        gTradeItemsMenu->itemToSend.quantity = 1;
+        sTradeItemsMenu->itemToSend.id = sub_801CB24();
+        sTradeItemsMenu->itemToSend.quantity = 1;
         SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_POPUP_MENU);
         break;
     case 4:
-        gTradeItemsMenu->fallbackState = TRADE_ITEMS_SEND_ITEM_SELECTION;
-        gTradeItemsMenu->itemToSend.id = sub_801CB24();
-        gTradeItemsMenu->itemToSend.quantity = 1;
-        sub_8006518(gTradeItemsMenu->unk1E4);
+        sTradeItemsMenu->fallbackState = TRADE_ITEMS_SEND_ITEM_SELECTION;
+        sTradeItemsMenu->itemToSend.id = sub_801CB24();
+        sTradeItemsMenu->itemToSend.quantity = 1;
+        sub_8006518(sTradeItemsMenu->unk1E4);
         ResetUnusedInputStruct();
         sub_800641C(NULL, TRUE, TRUE);
-        sub_801B3C0(&gTradeItemsMenu->itemToSend);
+        sub_801B3C0(&sTradeItemsMenu->itemToSend);
         SetTradeItemMenu(TRADE_ITEMS_ITEM_INFO);
         break;
   }
@@ -288,25 +199,25 @@ void sub_8036674(void)
 
   menuAction = -1;
   sub_801CA08(FALSE);
-  if (sub_8012FD8(&gTradeItemsMenu->unk44[3]) == '\0') {
-    sub_8013114(&gTradeItemsMenu->unk44[3], &menuAction);
+  if (sub_8012FD8(&sTradeItemsMenu->unk44[3]) == '\0') {
+    sub_8013114(&sTradeItemsMenu->unk44[3], &menuAction);
   }
   switch(menuAction){
     case 3: // confirm
         SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_NUMBER);
         break;
     case 4: // Info
-        gTradeItemsMenu->fallbackState = 0x13;
-        sub_8006518(gTradeItemsMenu->unk1E4);
+        sTradeItemsMenu->fallbackState = 0x13;
+        sub_8006518(sTradeItemsMenu->unk1E4);
         ResetUnusedInputStruct();
         sub_800641C(NULL, TRUE, TRUE);
-        sub_801B3C0(&gTradeItemsMenu->itemToSend);
+        sub_801B3C0(&sTradeItemsMenu->itemToSend);
         SetTradeItemMenu(TRADE_ITEMS_ITEM_INFO);
         break;
     case 7:
     case 0:
         // Cancel
-        sub_8035CC0(gTradeItemsMenu->unk184, 3);
+        sub_8035CC0(sTradeItemsMenu->unk184, 3);
         sub_801CCD8();
         SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_SELECTION);
         break;
@@ -321,14 +232,14 @@ void sub_8036728(void)
       case 3:
         sub_801B450();
         ResetUnusedInputStruct();
-        sub_800641C(gTradeItemsMenu->unk1E4, TRUE, TRUE);
+        sub_800641C(sTradeItemsMenu->unk1E4, TRUE, TRUE);
         sub_801CB5C(TRUE);
-        if (gTradeItemsMenu->fallbackState == 0x13) {
-            sub_8035CF4(gTradeItemsMenu->unk44, 3, TRUE);
+        if (sTradeItemsMenu->fallbackState == 0x13) {
+            sub_8035CF4(sTradeItemsMenu->unk44, 3, TRUE);
             SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_POPUP_MENU);
         }
         else {
-            SetTradeItemMenu(gTradeItemsMenu->fallbackState);
+            SetTradeItemMenu(sTradeItemsMenu->fallbackState);
         }
     default:
     case 1:
@@ -338,27 +249,27 @@ void sub_8036728(void)
 
 void sub_8036788(void)
 {
-  sub_8012FD8(&gTradeItemsMenu->unk44[3]);
+  sub_8012FD8(&sTradeItemsMenu->unk44[3]);
   sub_801CA08(FALSE);
-  switch(sub_8013BBC(&gTradeItemsMenu->quantityToSend)){
+  switch(sub_8013BBC(&sTradeItemsMenu->quantityToSend)){
     case 1:
         // When you change the #
         sub_801CCD8();
-        sub_8035CF4(gTradeItemsMenu->unk44, 3, FALSE);
+        sub_8035CF4(sTradeItemsMenu->unk44, 3, FALSE);
         sub_8036F30();
         break;
     case 2:
         // If you back out of the # selection
-        sub_8035CC0(gTradeItemsMenu->unk184, 2);
+        sub_8035CC0(sTradeItemsMenu->unk184, 2);
         sub_801CCD8();
-        sub_8035CF4(gTradeItemsMenu->unk44, 3, TRUE);
+        sub_8035CF4(sTradeItemsMenu->unk44, 3, TRUE);
         SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_POPUP_MENU);
         break;
     case 3:
         // Confirm # of item
-        gTradeItemsMenu->itemToSend.quantity = gTradeItemsMenu->quantityToSend;
-        gTradeItemsMenu->sentItem.itemIdx.id = gTradeItemsMenu->itemToSend.id;
-        gTradeItemsMenu->sentItem.quantity = gTradeItemsMenu->quantityToSend;
+        sTradeItemsMenu->itemToSend.quantity = sTradeItemsMenu->quantityToSend;
+        sTradeItemsMenu->sentItem.itemIdx.id = sTradeItemsMenu->itemToSend.id;
+        sTradeItemsMenu->sentItem.quantity = sTradeItemsMenu->quantityToSend;
         sub_801CBB8();
         SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_CONFIRM);
         break;
@@ -378,9 +289,9 @@ void TradeItem_SendItemConfirm(void)
         case 5:
             sub_801CBB8();
             // Used temp var to get correct statements
-            load = gTeamInventoryRef->teamStorage[gTradeItemsMenu->itemToSend.id];
-            load -= gTradeItemsMenu->quantityToSend;
-            gTeamInventoryRef->teamStorage[gTradeItemsMenu->itemToSend.id] = load;
+            load = gTeamInventoryRef->teamStorage[sTradeItemsMenu->itemToSend.id];
+            load -= sTradeItemsMenu->quantityToSend;
+            gTeamInventoryRef->teamStorage[sTradeItemsMenu->itemToSend.id] = load;
             SetTradeItemMenu(TRADE_ITEMS_PREPARE_TRADE_SAVING);
             PrepareSavePakWrite(MONSTER_NONE);
             break;
@@ -420,7 +331,7 @@ void sub_80368D4(void)
             break;
         case 7:
         case 0:
-            if ((gTradeItemsMenu->sentItem.itemIdx.id != ITEM_NOTHING) && (gTradeItemsMenu->sentItem.quantity != 0))
+            if ((sTradeItemsMenu->sentItem.itemIdx.id != ITEM_NOTHING) && (sTradeItemsMenu->sentItem.quantity != 0))
             {
                 TradeItem_AddItem();
                 SetTradeItemMenu(TRADE_ITEMS_PRE_EXIT);
@@ -445,8 +356,8 @@ void sub_8036950(void)
   s32 iVar1;
 
   if (sub_80144A4(&iVar1) == 0) {
-    if (gTradeItemsMenu->linkStatus == COMMS_GOOD) {
-      switch(gTradeItemsMenu->itemMode){
+    if (sTradeItemsMenu->linkStatus == COMMS_GOOD) {
+      switch(sTradeItemsMenu->itemMode){
         case TRADE_ITEMS_SEND_ITEM_MODE:
           SetTradeItemMenu(0xd);
           break;
@@ -457,14 +368,14 @@ void sub_8036950(void)
           break;
       }
     }
-    else if (((gTradeItemsMenu->itemMode == TRADE_ITEMS_SEND_ITEM_MODE) && (gTradeItemsMenu->sentItem.itemIdx.id != ITEM_NOTHING)) && (gTradeItemsMenu->sentItem.quantity != 0)) {
+    else if (((sTradeItemsMenu->itemMode == TRADE_ITEMS_SEND_ITEM_MODE) && (sTradeItemsMenu->sentItem.itemIdx.id != ITEM_NOTHING)) && (sTradeItemsMenu->sentItem.quantity != 0)) {
           // Link Failure
         TradeItem_AddItem(); // Add back the item
         SetTradeItemMenu(0xb);
         PrepareSavePakWrite(MONSTER_NONE);
       }
     else {
-        PrintTradeItemsLinkError(gTradeItemsMenu->linkStatus);
+        PrintTradeItemsLinkError(sTradeItemsMenu->linkStatus);
         SetTradeItemMenu(0xc);
     }
   }
@@ -474,9 +385,9 @@ void TradeItem_AddItem(void)
 {
     // Use temp var to get correct statements
     u16 load;
-    load = gTeamInventoryRef->teamStorage[gTradeItemsMenu->sentItem.itemIdx.id];
-    load += gTradeItemsMenu->sentItem.quantity;
-    gTeamInventoryRef->teamStorage[gTradeItemsMenu->sentItem.itemIdx.id] = load;
+    load = gTeamInventoryRef->teamStorage[sTradeItemsMenu->sentItem.itemIdx.id];
+    load += sTradeItemsMenu->sentItem.quantity;
+    gTeamInventoryRef->teamStorage[sTradeItemsMenu->sentItem.itemIdx.id] = load;
 }
 
 void sub_80369FC(void)
@@ -542,7 +453,7 @@ void sub_8036AA4(void)
         if(!WriteSavePak())
         {
             FinishWriteSavePak();
-            PrintTradeItemsLinkError(gTradeItemsMenu->linkStatus);
+            PrintTradeItemsLinkError(sTradeItemsMenu->linkStatus);
             SetTradeItemMenu(0xC);
         }
     }
@@ -563,10 +474,10 @@ void WriteandExitTradeItemsMenu(void)
 
 void CleanTradeItemsMenu(void)
 {
-    if(gTradeItemsMenu != NULL)
+    if(sTradeItemsMenu != NULL)
     {
-        MemoryFree(gTradeItemsMenu);
-        gTradeItemsMenu = NULL;
+        MemoryFree(sTradeItemsMenu);
+        sTradeItemsMenu = NULL;
         sub_801CBB8();
     }
 }
@@ -587,17 +498,17 @@ void sub_8036B28(void)
   s32 r2;
   s32 r3;
 
-  switch(gTradeItemsMenu->currMenu) {
+  switch(sTradeItemsMenu->currMenu) {
     case TRADE_ITEMS_MAIN_MENU:
         if (sub_801CF14(0)) {
-            sub_8014248(gUnknown_80E61A4,0,1,gUnknown_80E60D4,0,4,0,0,0x101);
+            sub_8014248(sUnknown_80E61A4,0,1,sUnknown_80E60D4,0,4,0,0,0x101);
         }
         else {
-            sub_8014248(gUnknown_80E61A4,0,1,gUnknown_80E60A0,0,4,0,0,0x101);
+            sub_8014248(sUnknown_80E61A4,0,1,sUnknown_80E60A0,0,4,0,0,0x101);
         }
         break;
     case TRADE_ITEMS_SEND_ITEM:
-        sub_80141B4(gUnknown_80E61C0,0,0,0x101);
+        sub_80141B4(sUnknown_80E61C0,0,0,0x101);
         break;
     case TRADE_ITEMS_SEND_ITEM_SELECTION:
         if (sub_801D008() == 0) {
@@ -610,32 +521,32 @@ void sub_8036B28(void)
         }
         break;
     case TRADE_ITEMS_SEND_ITEM_POPUP_MENU:
-        sub_8006518(gTradeItemsMenu->unk184);
-        SetMenuItems(gTradeItemsMenu->unk44,gTradeItemsMenu->unk184,3,&gUnknown_80E60EC,
-                    gUnknown_80E6104,1,0,0);
+        sub_8006518(sTradeItemsMenu->unk184);
+        SetMenuItems(sTradeItemsMenu->unk44,sTradeItemsMenu->unk184,3,&sUnknown_80E60EC,
+                    sUnknown_80E6104,1,0,0);
         sub_801CCD8();
-        sub_8035CF4(gTradeItemsMenu->unk44,3,TRUE);
+        sub_8035CF4(sTradeItemsMenu->unk44,3,TRUE);
         break;
     case TRADE_ITEMS_SEND_ITEM_NUMBER:
         sub_8036F74();
         break;
     case TRADE_ITEMS_SEND_ITEM_CONFIRM:
-        gUnknown_202DE30 = gTradeItemsMenu->quantityToSend;
-        BufferItemName(gUnknown_202DE58,gTradeItemsMenu->itemToSend.id,NULL);
-        sub_8014248(gUnknown_80E61E4,0,5, gUnknown_80E6154,0,4,0,0,0x101);
+        gUnknown_202DE30 = sTradeItemsMenu->quantityToSend;
+        BufferItemName(gUnknown_202DE58,sTradeItemsMenu->itemToSend.id,NULL);
+        sub_8014248(sUnknown_80E61E4,0,5, sUnknown_80E6154,0,4,0,0,0x101);
         break;
     case TRADE_ITEMS_RECEIVE_ITEM:
-        sub_8014248(gUnknown_80E6214,0,5,gUnknown_80E618C,0,4,0,0,0x101);
+        sub_8014248(sUnknown_80E6214,0,5,sUnknown_80E618C,0,4,0,0,0x101);
         break;
     case 8:
-        sub_8014248(gUnknown_80E6268,0,5,gUnknown_80E618C,0,4,0,0,0x101);
+        sub_8014248(sUnknown_80E6268,0,5,sUnknown_80E618C,0,4,0,0,0x101);
         break;
     case TRADE_ITEMS_IN_COMMUNICATION:
         nullsub_23(FALSE);
-        sub_80141B4(gUnknown_80E62C4,0,0,0);
+        sub_80141B4(sUnknown_80E62C4,0,0,0);
         break;
     case 10:
-        gTradeItemsMenu->linkStatus = COMMS_GOOD;
+        sTradeItemsMenu->linkStatus = COMMS_GOOD;
 
 #ifndef NONMATCHING
         asm("mov\t%0, #0":"=r"(r2));
@@ -645,53 +556,53 @@ void sub_8036B28(void)
         r3 = 0;
 #endif
 
-        temp4 = &gTradeItemsMenu->unk244;
+        temp4 = &sTradeItemsMenu->unk244;
         temp4->itemIdx.id_u32 = r2;
         temp4->quantity = r3;
 
-        temp3 = &gTradeItemsMenu->unk24C;
+        temp3 = &sTradeItemsMenu->unk24C;
         temp3->itemIdx.id_u32 = r2;
         temp3->quantity = r3;
 
         sub_8011830();
-        linkStatus = sub_8037B28(gTradeItemsMenu->itemMode);
-        gTradeItemsMenu->linkStatus = linkStatus;
+        linkStatus = sub_8037B28(sTradeItemsMenu->itemMode);
+        sTradeItemsMenu->linkStatus = linkStatus;
         if(linkStatus == COMMS_GOOD){
-            switch(gTradeItemsMenu->itemMode){
+            switch(sTradeItemsMenu->itemMode){
                 // Fallthrough needed on each case
                 case TRADE_ITEMS_SEND_ITEM_MODE:
-                    temp = &gTradeItemsMenu->unk244;
-                    temp2 = &gTradeItemsMenu->sentItem;
+                    temp = &sTradeItemsMenu->unk244;
+                    temp2 = &sTradeItemsMenu->sentItem;
                     load_2 = temp2->quantity;
                     temp->itemIdx.id_u32 = temp2->itemIdx.id_u32;
                     temp->quantity = load_2;
                 case TRADE_ITEMS_RECEIVE_ITEM_MODE:
-                    gTradeItemsMenu->linkStatus = sub_8037D64(gTradeItemsMenu->itemMode,&gTradeItemsMenu->unk244,&gTradeItemsMenu->unk24C);
+                    sTradeItemsMenu->linkStatus = sub_8037D64(sTradeItemsMenu->itemMode,&sTradeItemsMenu->unk244,&sTradeItemsMenu->unk24C);
                 default:
                     break;
             }
         }
         // Needed this check for code generation
-        if(gTradeItemsMenu->linkStatus == COMMS_GOOD && gTradeItemsMenu->itemMode <= 1){
-            gTradeItemsMenu->linkStatus = sub_80381F4(gTradeItemsMenu->itemMode,&gTradeItemsMenu->unk244,&gTradeItemsMenu->unk24C);
+        if(sTradeItemsMenu->linkStatus == COMMS_GOOD && sTradeItemsMenu->itemMode <= 1){
+            sTradeItemsMenu->linkStatus = sub_80381F4(sTradeItemsMenu->itemMode,&sTradeItemsMenu->unk244,&sTradeItemsMenu->unk24C);
         }
         xxx_call_start_bg_music();
         break;
     case 0xe:
-        if (gTradeItemsMenu->unk24C.quantity == 0) {
-            gUnknown_202DE30 = gTradeItemsMenu->unk244.quantity;
-            BufferItemName(gUnknown_202DE58,gTradeItemsMenu->unk244.itemIdx.id,NULL);
+        if (sTradeItemsMenu->unk24C.quantity == 0) {
+            gUnknown_202DE30 = sTradeItemsMenu->unk244.quantity;
+            BufferItemName(gUnknown_202DE58,sTradeItemsMenu->unk244.itemIdx.id,NULL);
         }
         else {
-            gUnknown_202DE30 = gTradeItemsMenu->unk24C.quantity;
-            BufferItemName(gUnknown_202DE58,gTradeItemsMenu->unk24C.itemIdx.id,NULL);
+            gUnknown_202DE30 = sTradeItemsMenu->unk24C.quantity;
+            BufferItemName(gUnknown_202DE58,sTradeItemsMenu->unk24C.itemIdx.id,NULL);
         }
-        sub_80141B4(gUnknown_80E6314,0,0,0x101);
+        sub_80141B4(sUnknown_80E6314,0,0,0x101);
         break;
     case 0xd:
-        gUnknown_202DE30 = gTradeItemsMenu->quantityToSend;
-        BufferItemName(gUnknown_202DE58,gTradeItemsMenu->itemToSend.id,NULL);
-        sub_80141B4(gUnknown_80E6358,0,0,0x101);
+        gUnknown_202DE30 = sTradeItemsMenu->quantityToSend;
+        BufferItemName(gUnknown_202DE58,sTradeItemsMenu->itemToSend.id,NULL);
+        sub_80141B4(sUnknown_80E6358,0,0,0x101);
         break;
     case 0xB:
     case 0xC:
@@ -710,73 +621,73 @@ void PrintTradeItemsLinkError(u32 errorNum)
     case COMMS_GOOD:
         break;
     case 1:
-        sub_80141B4(gTradeItemsCommunicationError, 0, 0, 0x101);
+        sub_80141B4(sTradeItemsCommunicationError, 0, 0, 0x101);
         break;
     case COMMS_INCORRECT_NUM_SYSTEMS:
-        sub_80141B4(gUnknown_80E639C, 0, 0, 0x101);
+        sub_80141B4(sUnknown_80E639C, 0, 0, 0x101);
         break;
     case COMMS_NO_RESPONSE:
-        sub_80141B4(gUnknown_80E63F8, 0, 0, 0x101);
+        sub_80141B4(sUnknown_80E63F8, 0, 0, 0x101);
         break;
     case COMMS_DIFFERENT_MODES:
-        sub_80141B4(gUnknown_80E6448, 0, 0, 0x101);
+        sub_80141B4(sUnknown_80E6448, 0, 0, 0x101);
         break;
     case 5:
-        sub_80141B4(gTradeItemsCommunicationError, 0, 0, 0x101);
+        sub_80141B4(sTradeItemsCommunicationError, 0, 0, 0x101);
         break;
     case 0xe:
-        sub_80141B4(gTradeItemsCommunicationError, 0, 0, 0x101);
+        sub_80141B4(sTradeItemsCommunicationError, 0, 0, 0x101);
         break;
     case COMMS_NOT_READY:
-        sub_80141B4(gUnknown_80E64AC, 0, 0, 0x101);
+        sub_80141B4(sUnknown_80E64AC, 0, 0, 0x101);
         break;
     default:
-        sub_80141B4(gTradeItemsCommunicationError, 0, 0, 0x101);
+        sub_80141B4(sTradeItemsCommunicationError, 0, 0, 0x101);
         break;
   }
 }
 
 void sub_8036ECC(u32 index, u32 r1)
 {
-  gTradeItemsMenu->unk24 = 3;
-  gTradeItemsMenu->unk18 = 1;
-  gTradeItemsMenu->unk1C = 1;
-  gTradeItemsMenu->unk20 = r1;
-  gTradeItemsMenu->unk30 = 0x2c;
-  gTradeItemsMenu->unk34 = 0x12;
-  gTradeItemsMenu->unk28 = index;
-  gTradeItemsMenu->unk2C = &gTradeItemsMenu->unk184[index];
-  sub_8013AA0(&gTradeItemsMenu->quantityToSend);
-  gTradeItemsMenu->unk184[index] = gUnknown_80E6174;
+  sTradeItemsMenu->unk24 = 3;
+  sTradeItemsMenu->unk18 = 1;
+  sTradeItemsMenu->unk1C = 1;
+  sTradeItemsMenu->unk20 = r1;
+  sTradeItemsMenu->unk30 = 0x2c;
+  sTradeItemsMenu->unk34 = 0x12;
+  sTradeItemsMenu->unk28 = index;
+  sTradeItemsMenu->unk2C = &sTradeItemsMenu->unk184[index];
+  sub_8013AA0(&sTradeItemsMenu->quantityToSend);
+  sTradeItemsMenu->unk184[index] = sUnknown_80E6174;
   ResetUnusedInputStruct();
-  sub_800641C(gTradeItemsMenu->unk184, TRUE, TRUE);
+  sub_800641C(sTradeItemsMenu->unk184, TRUE, TRUE);
 }
 
 void sub_8036F30(void)
 {
   u32 uVar1;
 
-  uVar1 = gTradeItemsMenu->unk28;
+  uVar1 = sTradeItemsMenu->unk28;
   sub_8008C54(uVar1);
   sub_80073B8(uVar1);
   // Draw "How many?"
-  xxx_call_draw_string(2, 0, gTradeItemsHowManyText, uVar1, 0);
-  sub_8013C68(&gTradeItemsMenu->quantityToSend);
+  xxx_call_draw_string(2, 0, sHowMany, uVar1, 0);
+  sub_8013C68(&sTradeItemsMenu->quantityToSend);
   sub_80073E0(uVar1);
 }
 
 void sub_8036F74(void)
 {
-  sub_8006518(gTradeItemsMenu->unk184);
-  sub_8036ECC(2, gTeamInventoryRef->teamStorage[gTradeItemsMenu->itemToSend.id]);
+  sub_8006518(sTradeItemsMenu->unk184);
+  sub_8036ECC(2, gTeamInventoryRef->teamStorage[sTradeItemsMenu->itemToSend.id]);
   sub_801CCD8();
-  sub_8035CF4(gTradeItemsMenu->unk44, 3, FALSE);
+  sub_8035CF4(sTradeItemsMenu->unk44, 3, FALSE);
   sub_8036F30();
 }
 
 void SetTradeItemMenu(u32 newMenu)
 {
-    gTradeItemsMenu->currMenu = newMenu;
+    sTradeItemsMenu->currMenu = newMenu;
     nullsub_52();
     sub_8036B28();
 }

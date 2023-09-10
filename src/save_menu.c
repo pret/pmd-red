@@ -173,7 +173,7 @@ void CleanSaveMenu(void)
 s32 UpdateSaveMenu(void)
 {
   int saveStatus;
-  struct MainMenu *mainMenu;
+  MainMenu *mainMenu;
   u32 menu;
   u32 uStack_18;
   u32 action;

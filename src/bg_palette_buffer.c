@@ -5,8 +5,8 @@
 #define BG_PALETTE_BUFFER_SIZE 512
 #define BG_PALETTE_BUFFER_CHUNK_SIZE 16
 
-EWRAM_DATA bool8 gBGPaletteUsed[BG_PALETTE_BUFFER_SIZE / BG_PALETTE_BUFFER_CHUNK_SIZE] = {0};
-EWRAM_DATA u16 gBGPaletteBuffer[BG_PALETTE_BUFFER_SIZE] = {0};
+static EWRAM_DATA bool8 sBGPaletteUsed[BG_PALETTE_BUFFER_SIZE / BG_PALETTE_BUFFER_CHUNK_SIZE] = {0};
+static EWRAM_DATA u16 sBGPaletteBuffer[BG_PALETTE_BUFFER_SIZE] = {0};
 
 #ifndef NONMATCHING
 NAKED
@@ -21,7 +21,7 @@ void InitBGPaletteBuffer(void)
 
     u8* p;
 
-    ptr = gBGPaletteBuffer;
+    ptr = sBGPaletteBuffer;
 
     i = 0x80;
     i <<= 2;
@@ -33,16 +33,16 @@ void InitBGPaletteBuffer(void)
 
     paletteUsed = TRUE;
 
-    p = gBGPaletteUsed;
+    p = sBGPaletteUsed;
     p += 31;
 
     do
         *p-- = paletteUsed;
-    while ((s32) p >= (s32) &gBGPaletteUsed);
+    while ((s32) p >= (s32) &sBGPaletteUsed);
 #else
     asm_unified("\tpush {lr}\n"
         "\tmovs r2, 0\n"
-        "\tldr r1, =gBGPaletteBuffer\n"
+        "\tldr r1, =sBGPaletteBuffer\n"
         "\tmovs r0, 0x80\n"
         "\tlsls r0, 2\n"
         "_0800463E:\n"
@@ -51,7 +51,7 @@ void InitBGPaletteBuffer(void)
         "\tsubs r0, 0x1\n"
         "\tcmp r0, 0\n"
         "\tbne _0800463E\n"
-        "\tldr r1, =gBGPaletteUsed\n"
+        "\tldr r1, =sBGPaletteUsed\n"
         "\tmovs r2, 0x1\n"
         "\tadds r0, r1, 0\n"
         "\tadds r0, 0x1F\n"
@@ -67,26 +67,24 @@ void InitBGPaletteBuffer(void)
 #endif
 }
 
-#ifndef NONMATCHING
+#ifndef NONMATCHING // 99.48% (r3/r4 regswap) https://decomp.me/scratch/7Yc8i
 NAKED
 #endif
 void SetBGPaletteBufferColorRGB(s32 index, u8 *colorArray, s32 a1, u8 *a2)
 {
 #ifdef NONMATCHING
-    if (a1 < 0) {
+    if (a1 < 0)
         a1 = 0;
-    }
-    if (a1 > 31) {
+    if (a1 > 31)
         a1 = 31;
-    }
-    gBGPaletteUsed[index / 16] = 1;
-    if (!a2) {
-        gBGPaletteBuffer[index] = ((colorArray[2] * a1 / 256 & 0x1F) << 10) | ((colorArray[1] * a1 / 256 & 0x1F) << 5) | (colorArray[0] * a1 / 256 & 0x1F);
-    }
+
+    sBGPaletteUsed[index / 16] = 1;
+
+    if (a2 == NULL)
+        sBGPaletteBuffer[index] = ((colorArray[2] * a1 / 256 & 0x1F) << 10) | ((colorArray[1] * a1 / 256 & 0x1F) << 5) | (colorArray[0] * a1 / 256 & 0x1F);
     else
-    {
-        gBGPaletteBuffer[index] = ((a2[4 * colorArray[2] + 2] * a1 / 256 & 0x1F) << 10) | ((a2[4 * colorArray[1] + 1] * a1 / 256 & 0x1F) << 5) | (a2[4 * colorArray[0]] * a1 / 256 & 0x1F);
-    }
+        sBGPaletteBuffer[index] = ((a2[4 * colorArray[2] + 2] * a1 / 256 & 0x1F) << 10) | ((a2[4 * colorArray[1] + 1] * a1 / 256 & 0x1F) << 5) | (a2[4 * colorArray[0]] * a1 / 256 & 0x1F);
+
 #else
     asm_unified("\tpush {r4-r7,lr}\n"
         "\tadds r4, r0, 0\n"
@@ -99,7 +97,7 @@ void SetBGPaletteBufferColorRGB(s32 index, u8 *colorArray, s32 a1, u8 *a2)
         "\tble _08004676\n"
         "\tmovs r2, 0x1F\n"
         "_08004676:\n"
-        "\tldr r1, =gBGPaletteUsed\n"
+        "\tldr r1, =sBGPaletteUsed\n"
         "\tadds r0, r4, 0\n"
         "\tcmp r4, 0\n"
         "\tbge _08004680\n"
@@ -111,7 +109,7 @@ void SetBGPaletteBufferColorRGB(s32 index, u8 *colorArray, s32 a1, u8 *a2)
         "\tstrb r1, [r0]\n"
         "\tcmp r3, 0\n"
         "\tbne _080046D4\n"
-        "\tldr r0, =gBGPaletteBuffer\n"
+        "\tldr r0, =sBGPaletteBuffer\n"
         "\tlsls r1, r4, 1\n"
         "\tadds r6, r1, r0\n"
         "\tldrb r0, [r5, 0x2]\n"
@@ -148,7 +146,7 @@ void SetBGPaletteBufferColorRGB(s32 index, u8 *colorArray, s32 a1, u8 *a2)
         "\t.align 2, 0\n"
         "\t.pool\n"
         "_080046D4:\n"
-        "\tldr r1, =gBGPaletteBuffer\n"
+        "\tldr r1, =sBGPaletteBuffer\n"
         "\tlsls r0, r4, 1\n"
         "\tadds r7, r0, r1\n"
         "\tldrb r0, [r5, 0x2]\n"
@@ -201,23 +199,25 @@ void SetBGPaletteBufferColorRGB(s32 index, u8 *colorArray, s32 a1, u8 *a2)
 
 void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray)
 {
-    gBGPaletteUsed[index / BG_PALETTE_BUFFER_CHUNK_SIZE] = TRUE;
-    gBGPaletteBuffer[index] = (colorArray[2] >> 3) << 10 | (colorArray[1] >> 3) << 5 | colorArray[0] >> 3;
+    sBGPaletteUsed[index / BG_PALETTE_BUFFER_CHUNK_SIZE] = TRUE;
+    sBGPaletteBuffer[index] = (colorArray[2] >> 3) << 10 | (colorArray[1] >> 3) << 5 | colorArray[0] >> 3;
 }
 
 void SetBGPaletteBufferColor(s32 index, u16 *color)
 {
-    gBGPaletteUsed[index / BG_PALETTE_BUFFER_CHUNK_SIZE] = TRUE;
-    gBGPaletteBuffer[index] = *color;
+    sBGPaletteUsed[index / BG_PALETTE_BUFFER_CHUNK_SIZE] = TRUE;
+    sBGPaletteBuffer[index] = *color;
 }
 
 void nullsub_4(s32 index, u8 *colorArray, s32 a1, u8 *a2)
 {
 }
+
 void nullsub_5(void)
 {
 }
-void nullsub_143(void)
+
+UNUSED static void nullsub_143(void)
 {
 }
 
@@ -232,14 +232,14 @@ void TransferBGPaletteBuffer(void)
     dest = (u16 *)PLTT;
     do
     {
-        if (gBGPaletteUsed[i])
+        if (sBGPaletteUsed[i])
         {
-            gBGPaletteUsed[i] = 0;
-            CpuCopy(dest, &gBGPaletteBuffer[paletteBufferIndex], sizeof(u16) * 16);
+            sBGPaletteUsed[i] = 0;
+            CpuCopy(dest, &sBGPaletteBuffer[paletteBufferIndex], sizeof(u16) * 16);
         }
         ++i;
         dest += 16;
         paletteBufferIndex += 16;
     }
-    while ( paletteBufferIndex < BG_PALETTE_BUFFER_SIZE );
+    while (paletteBufferIndex < BG_PALETTE_BUFFER_SIZE);
 }

@@ -1,17 +1,22 @@
 #include "global.h"
+#include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
 #include "constants/dungeon.h"
 #include "dungeon_global_data.h"
-#include "pokemon.h"
-#include "code_8094F88.h"
-#include "save.h"
-
 #include "main_menu.h"
 #include "memory.h"
+#include "pokemon.h"
+#include "save.h"
 
+// rescue_password_menu.c
 extern s32 gCommsTimeout; // Counts to 100 and then errors if other player hasn't connected
-extern s32 gUnknown_202EC48;
+
 extern u32 gUnknown_202EC40[2];
+extern s32 gUnknown_202EC48;
+
+extern struct UnkStruct_203B184 *gUnknown_203B184;
+
+#include "data/other_menus2.h"
 
 extern void sub_800D494(void);
 extern s32 sub_800D33C(void);
@@ -22,7 +27,6 @@ extern void sub_800D59C(s32 *, u32);
 extern void sub_800D570(void);
 extern void sub_800D510(void);
 extern u8 sub_800D588(void);
-extern struct UnkStruct_203B184 *gUnknown_203B184;
 extern void sub_800D670(u32, s32 *, u32);
 extern void sub_800D68C(u32);
 
@@ -63,7 +67,7 @@ void sub_8037C44(s32 mode, void *data)
     switch(mode) {
         case 0:
         case 1:
-            sub_800D59C(data, sizeof(struct unkStruct_8035D94));
+            sub_800D59C(data, sizeof(unkStruct_8035D94));
             break;
         case 2:
         case 3:
@@ -88,8 +92,8 @@ void sub_8037CC4(s32 mode, void *param_2, void *param_3)
     {
         case 0:
         case 1:
-            sub_800D670(0, param_2, sizeof(struct unkStruct_8035D94));
-            sub_800D670(1, param_3, sizeof(struct unkStruct_8035D94));
+            sub_800D670(0, param_2, sizeof(unkStruct_8035D94));
+            sub_800D670(1, param_3, sizeof(unkStruct_8035D94));
             break;
         case 2:
         case 3:
@@ -105,8 +109,8 @@ void sub_8037CC4(s32 mode, void *param_2, void *param_3)
             break;
         case 9:
         case 10:
-            sub_800D670(0, param_2, 0xb4);
-            sub_800D670(1, param_3, 0xb4);
+            sub_800D670(0, param_2, 180);
+            sub_800D670(1, param_3, 180);
             break;
     }
 }
@@ -175,10 +179,10 @@ s32 sub_8037DF0(void)
     return linkStatus;
 }
 
-void sub_8037E38(struct unkStruct_8035D94 *param_1,struct unkStruct_8035D94 *param_2)
+void sub_8037E38(unkStruct_8035D94 *param_1,unkStruct_8035D94 *param_2)
 {
-    struct unkStruct_8035D94 *r3;
-    struct unkStruct_8035D94 *r4;
+    unkStruct_8035D94 *r3;
+    unkStruct_8035D94 *r4;
     u32 load;
 
     r4 = sub_800D588() == 0 ? param_2 : param_1;
@@ -208,7 +212,8 @@ void sub_8037E90(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
 }
 
 void nullsub_53(void *param_1, void *param_2)
-{}
+{
+}
 
 void sub_8037EBC(WonderMailStruct_203B2C0_sub  *param_1, WonderMailStruct_203B2C0_sub *param_2) {
     unkStruct_203B480 *mail;
@@ -245,7 +250,7 @@ void sub_8037EBC(WonderMailStruct_203B2C0_sub  *param_1, WonderMailStruct_203B2C
 void sub_8037F4C(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
 {
     unkStruct_203B480 *mail;
-    struct MainMenu *mainMenu;
+    MainMenu *mainMenu;
     
     if(sub_800D588() == 0)
     {
@@ -284,12 +289,12 @@ void sub_8037F9C(u32 mode, void *param_2, void *param_3)
     }
 }
 
-s32 sub_8038014(struct unkStruct_8035D94 *param_1,struct unkStruct_8035D94 *param_2)
+s32 sub_8038014(unkStruct_8035D94 *param_1,unkStruct_8035D94 *param_2)
 {
     s32 linkStatus;
     s32 r2;
-    struct unkStruct_8035D94 *r3;
-    struct unkStruct_8035D94 *r4;
+    unkStruct_8035D94 *r3;
+    unkStruct_8035D94 *r4;
 
     r4 = sub_800D588() == 0 ? param_2 : param_1;
     r3 = sub_800D588() == 0 ? param_1 : param_2;

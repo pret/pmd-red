@@ -37,47 +37,47 @@ enum MainMenuScreens
 };
 
 // size: 0x8
-struct unkStruct_8035D94
+typedef struct unkStruct_8035D94
 {
     union {
         u8 itemIndex_u8;
         u32 itemIndex_u32;
     } itemIndex;
     s32 numItems;
-};
+} unkStruct_8035D94;
 
 // size: 0x4
-struct MainMenuSub
+typedef struct MainMenuSub
 {
     u8 unk2C;
     u8 unk2D;
     u8 unk2E;
-};
+} MainMenuSub;
 
 // size: 0x40
-struct MainMenu
+typedef struct MainMenu
 {
     /* 0x0 */ s32 currMenu;
     /* 0x4 */ s32 nextMenu;
     /* 0x8 */ s32 lastMenu;
     u8 padding[0x20];
-    /* 0x2C */ struct MainMenuSub sub;
-    struct unkStruct_8035D94 unk30;
+    /* 0x2C */ MainMenuSub sub;
+    unkStruct_8035D94 unk30;
     s16 unk38;
     u8 unk3A;
     u8 unk3B;
     s32 unk3C;
-};
+} MainMenu;
 
 void CleanUpMenu(void);
 void DeleteMainMenu(void);
-struct MainMenu *GetMainMenu(void);
+MainMenu *GetMainMenu(void);
 void InitMainMenu(void);
 void SetMenuItems(MenuStruct *, UnkTextStruct2 *, s32, const UnkTextStruct2 *, const MenuItem *, u8, u32, u32);
 void SetUpMenu(void);
 void sub_8035CC0(UnkTextStruct2 *, u32);
 void sub_8035CF4(MenuStruct*, u32, bool8);
-struct unkStruct_8035D94 *sub_8035D94(void);
+unkStruct_8035D94 *sub_8035D94(void);
 void sub_8035DA0(void);
 bool8 sub_80363E0(void);
 s32 UpdateMenu(void);

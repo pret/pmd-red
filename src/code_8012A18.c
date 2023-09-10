@@ -1,4 +1,5 @@
 #include "global.h"
+#include "bg_palette_buffer.h"
 #include "code_800558C.h"
 #include "code_8009804.h"
 #include "code_800C9CC.h"
@@ -9,7 +10,6 @@
 
 extern void xxx_draw_string_80144C4();
 extern void nullsub_8(u8);
-extern void TransferBGPaletteBuffer();
 extern void xxx_call_update_bg_vram();
 extern void xxx_call_update_bg_sound_input();
 

@@ -1,6 +1,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include "global.h"
+#include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
 #include "code_800558C.h"
 #include "code_8009804.h"
@@ -38,7 +39,6 @@ EWRAM_DATA s16 gUnknown_202DE22;
 EWRAM_DATA s16 gUnknown_202DE24;
 
 void nullsub_8(u32);
-extern void TransferBGPaletteBuffer(void);
 extern void xxx_call_update_bg_vram(void);
 extern void xxx_call_update_bg_sound_input(void);
 extern bool8 sub_80111C4();

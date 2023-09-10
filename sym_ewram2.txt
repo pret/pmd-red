@@ -326,7 +326,7 @@ gUnknown_203B328: /* 203B328 (wonder_mail_6) */
 .include "src/credits.o"
 .include "src/main_menu.o"
 .include "src/trade_items_menu.o"
-.include "src/other_menus.o"
+.include "src/other_menus1.o"
 .include "src/unk_menu_203B360.o"
 .include "src/save_menu.o"
 .include "src/rescue_password_menu.o"

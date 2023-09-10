@@ -48,7 +48,6 @@ extern u32 sub_80009D0(u32);
 extern void xxx_draw_string_80144C4(void);
 extern void nullsub_8(u32);
 extern void sub_80060EC(void);
-extern void TransferBGPaletteBuffer(void);
 extern void xxx_call_update_bg_vram(void);
 extern void xxx_call_update_bg_sound_input(void);
 

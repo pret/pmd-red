@@ -40,7 +40,7 @@ struct unkStruct_203B34C
     /* 0x1A4 */ u32 currMenuChoice;
 };
 
-EWRAM_DATA_2 struct MainMenu *gMainMenu = {0};
+EWRAM_DATA_2 MainMenu *gMainMenu = {0};
 EWRAM_DATA_2 struct unkStruct_203B34C *gUnknown_203B34C = {0};
 EWRAM_DATA_2 u32 gUnknown_203B350 = {0};
 EWRAM_DATA_2 u32 gUnknown_203B354 = {0}; // unused everywhere else except here..
@@ -370,14 +370,13 @@ const MenuItem gUnknown_80E6030[] = {
 
 static const u8 sUnknown_80E6048[] = "go on an adventure to unknown worlds.";
 ALIGNED(4) static const u8 sUnknown_80E6070[] = _("Using wireless communication{COMMA} you can");
-static const u8 sMainMenu_fill0[] = "pksdir0";
 
 
 void InitMainMenu(void)
 {
   if (gMainMenu == NULL) {
-    gMainMenu = MemoryAlloc(sizeof(struct MainMenu),8);
-    MemoryFill8((u8 *)gMainMenu, 0, sizeof(struct MainMenu));
+    gMainMenu = MemoryAlloc(sizeof(MainMenu),8);
+    MemoryFill8((u8 *)gMainMenu, 0, sizeof(MainMenu));
   }
   gMainMenu->currMenu = MENU_NO_SCREEN_CHANGE;
   gMainMenu->nextMenu = MENU_MAIN_SCREEN;
@@ -602,13 +601,13 @@ void CleanUpMenu(void)
 }
 
 // Unused
-void sub_8035C00(struct MainMenuSub *param)
+void sub_8035C00(MainMenuSub *param)
 {
     gMainMenu->sub = *param;
 }
 
 // Unused
-struct MainMenuSub *sub_8035C10(void)
+MainMenuSub *sub_8035C10(void)
 {
    return &gMainMenu->sub;
 }
@@ -667,7 +666,7 @@ s16 sub_8035D3C(void)
     return gMainMenu->unk38;
 }
 
-struct MainMenu *GetMainMenu(void)
+MainMenu *GetMainMenu(void)
 {
     return gMainMenu;
 }
@@ -690,7 +689,7 @@ s32 sub_8035D74(void)
 }
 
 // Unused
-void sub_8035D80(struct unkStruct_8035D94 *item)
+void sub_8035D80(unkStruct_8035D94 *item)
 {
 
 #ifndef NONMATCHING
@@ -700,7 +699,7 @@ void sub_8035D80(struct unkStruct_8035D94 *item)
 #endif
 
     u32 itemIndex;
-    struct MainMenu *preload;
+    MainMenu *preload;
 
     preload = gMainMenu;
     numItem = item->numItems;
@@ -709,7 +708,7 @@ void sub_8035D80(struct unkStruct_8035D94 *item)
     preload->unk30.numItems = numItem;
 }
 
-struct unkStruct_8035D94 *sub_8035D94(void)
+unkStruct_8035D94 *sub_8035D94(void)
 {
     return &gMainMenu->unk30;
 }

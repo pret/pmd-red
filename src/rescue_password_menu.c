@@ -347,7 +347,7 @@ s32 UpdateRescuePasswordMenu(void)
   unkStruct_203B480 *mailPtr1;
   unkStruct_203B480 *mailPtr2;
   u32 iVar7;
-  struct MainMenu *mainMenuPtr;
+  MainMenu *mainMenuPtr;
   s32 nextMenu;
   unkStruct_203B480 mail;
   u32 menuAction;
