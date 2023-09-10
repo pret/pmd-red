@@ -5,6 +5,8 @@
 #include "dungeon_global_data.h"
 #include "main_menu.h"
 #include "memory.h"
+#include "other_menus1.h"
+#include "other_menus2.h"
 #include "pokemon.h"
 #include "save.h"
 
@@ -22,7 +24,6 @@ extern void sub_800D494(void);
 extern s32 sub_800D33C(void);
 extern void sub_800D520(void);
 extern u8 sub_800D600(void);
-extern void sub_80373C4(void);
 extern void sub_800D59C(s32 *, u32);
 extern void sub_800D570(void);
 extern void sub_800D510(void);
@@ -30,11 +31,11 @@ extern u8 sub_800D588(void);
 extern void sub_800D670(u32, s32 *, u32);
 extern void sub_800D68C(u32);
 
-u32 sub_8037C10(u8 param_1)
+u32 sub_8037C10(bool8 a0)
 {
     u32 ret;
 
-    if (param_1 != 0)
+    if (a0)
     {
         if (sub_800D588())
         {
@@ -56,7 +57,7 @@ u32 sub_8037C10(u8 param_1)
     return ret;
 }
 
-void sub_8037C44(s32 mode, void *data)
+static void sub_8037C44(s32 mode, void *data)
 {
     s32 index;
 
@@ -86,7 +87,7 @@ void sub_8037C44(s32 mode, void *data)
     }
 }
 
-void sub_8037CC4(s32 mode, void *param_2, void *param_3)
+static void sub_8037CC4(s32 mode, void *param_2, void *param_3)
 {
     switch(mode)
     {
@@ -116,7 +117,7 @@ void sub_8037CC4(s32 mode, void *param_2, void *param_3)
 }
 
 // TODO: same as sub_80381F4
-s32 sub_8037D64(u32 mode, void * param_2, void * param_3)
+s32 sub_8037D64(u32 mode, void *param_2, void *param_3)
 {
     u32 iVar2;
     s32 linkStatus;
@@ -161,7 +162,7 @@ _end:
     return linkStatus;
 }
 
-s32 sub_8037DF0(void)
+static s32 sub_8037DF0(void)
 {
     s32 linkStatus;
     s32 iStack_10;
@@ -179,7 +180,7 @@ s32 sub_8037DF0(void)
     return linkStatus;
 }
 
-void sub_8037E38(unkStruct_8035D94 *param_1,unkStruct_8035D94 *param_2)
+static void sub_8037E38(unkStruct_8035D94 *param_1,unkStruct_8035D94 *param_2)
 {
     unkStruct_8035D94 *r3;
     unkStruct_8035D94 *r4;
@@ -200,7 +201,7 @@ void sub_8037E38(unkStruct_8035D94 *param_1,unkStruct_8035D94 *param_2)
     }
 }
 
-void sub_8037E90(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
+static void sub_8037E90(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
 {
     if(sub_800D588() == 0)
     {
@@ -211,11 +212,12 @@ void sub_8037E90(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
     sub_8095274(param_2->unk10.unk10);
 }
 
-void nullsub_53(void *param_1, void *param_2)
+static void nullsub_53(void *param_1, void *param_2)
 {
 }
 
-void sub_8037EBC(WonderMailStruct_203B2C0_sub  *param_1, WonderMailStruct_203B2C0_sub *param_2) {
+static void sub_8037EBC(WonderMailStruct_203B2C0_sub  *param_1, WonderMailStruct_203B2C0_sub *param_2)
+{
     unkStruct_203B480 *mail;
     WonderMailStruct_203B2C0_sub *puVar2;
     
@@ -247,7 +249,7 @@ void sub_8037EBC(WonderMailStruct_203B2C0_sub  *param_1, WonderMailStruct_203B2C
     }
 }
 
-void sub_8037F4C(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
+static void sub_8037F4C(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
 {
     unkStruct_203B480 *mail;
     MainMenu *mainMenu;
@@ -266,7 +268,7 @@ void sub_8037F4C(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
     }
 }
 
-void sub_8037F9C(u32 mode, void *param_2, void *param_3)
+static void sub_8037F9C(u32 mode, void *param_2, void *param_3)
 {
     switch(mode)
     {
@@ -289,7 +291,7 @@ void sub_8037F9C(u32 mode, void *param_2, void *param_3)
     }
 }
 
-s32 sub_8038014(unkStruct_8035D94 *param_1,unkStruct_8035D94 *param_2)
+static s32 sub_8038014(unkStruct_8035D94 *param_1,unkStruct_8035D94 *param_2)
 {
     s32 linkStatus;
     s32 r2;
@@ -321,7 +323,7 @@ s32 sub_8038014(unkStruct_8035D94 *param_1,unkStruct_8035D94 *param_2)
     return linkStatus;
 }
 
-s32 sub_8038078(unkStruct_203B480 *param_1,unkStruct_203B480 *param_2)
+static s32 sub_8038078(unkStruct_203B480 *param_1,unkStruct_203B480 *param_2)
 {
     u32 uVar2;
     u32 uVar3;
@@ -344,7 +346,7 @@ s32 sub_8038078(unkStruct_203B480 *param_1,unkStruct_203B480 *param_2)
     }
 }
 
-s32 sub_80380C4(unkStruct_203B480 *param_1,unkStruct_203B480 *param_2)
+static s32 sub_80380C4(unkStruct_203B480 *param_1,unkStruct_203B480 *param_2)
 {
     u32 uVar2;
     unkStruct_203B480 *mail;
@@ -374,7 +376,7 @@ s32 sub_80380C4(unkStruct_203B480 *param_1,unkStruct_203B480 *param_2)
     }
 }
 
-s32 sub_803812C(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
+static s32 sub_803812C(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
 {
     if (sub_800D588() == 0) {
         param_2 = param_1;
@@ -387,12 +389,12 @@ s32 sub_803812C(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
     }
 }
 
-s32 sub_8038158(void *param_1, void *param_2)
+static s32 sub_8038158(void *param_1, void *param_2)
 {
     return COMMS_GOOD;
 }
 
-s32 sub_803815C(u32 mode, void *param_2, void *param_3)
+static s32 sub_803815C(u32 mode, void *param_2, void *param_3)
 {
     s32 linkStatus;
 
@@ -418,18 +420,18 @@ s32 sub_803815C(u32 mode, void *param_2, void *param_3)
     return linkStatus;
 }
 
-void sub_80381DC(u32 mode, void * param_2, void * param_3)
+UNUSED static void sub_80381DC(u32 mode, void * param_2, void * param_3)
 {
     sub_8037F9C(mode, param_2, param_3);
 }
 
-s32 sub_80381E8(u32 mode, void * param_2, void * param_3)
+UNUSED static s32 sub_80381E8(u32 mode, void * param_2, void * param_3)
 {
     return sub_803815C(mode, param_2, param_3);
 }
 
 // TODO: clean this up
-s32 sub_80381F4(u32 mode, void * param_2, void * param_3)
+s32 sub_80381F4(u32 mode, void *param_2, void *param_3)
 {
     u32 iVar2;
     s32 linkStatus;

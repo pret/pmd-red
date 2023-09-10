@@ -4,6 +4,15 @@
 #include "menu.h"
 #include "text.h"
 
+struct unkStruct_203B34C
+{
+    // size: 0x1A8
+    u32 unk0;
+    MenuStruct unk4[4];
+    UnkTextStruct2 unk144[4];
+    /* 0x1A4 */ u32 currMenuChoice;
+};
+
 u32 sub_8012A64(MenuInputStructSub *r0, s32 r1);
 s32 GetKeyPress(MenuInputStruct *r0);
 s32 sub_8012AE8(void);

@@ -1,21 +1,22 @@
 #include "global.h"
-#include "code_803D0D8.h"
-#include "text1.h"
-#include "text2.h"
-#include "menu_input.h"
 #include "adventure_log_menu.h"
+#include "code_803D0D8.h"
+#include "code_8098BDC.h"
+#include "constants/wonder_mail.h"
 #include "debug_menu1.h"
 #include "ds_menus.h"
-#include "pokemon.h"
 #include "friend_rescue.h"
 #include "load_screen.h"
 #include "main_menu.h"
 #include "memory.h"
+#include "menu_input.h"
+#include "other_menus1.h"
+#include "pokemon.h"
 #include "rescue_password_menu.h"
 #include "save.h"
+#include "text1.h"
+#include "text2.h"
 #include "trade_items_menu.h"
-#include "constants/wonder_mail.h"
-#include "code_8098BDC.h"
 
 // NOTE: 0x13 and 0x14
 // Communication Screen?
@@ -30,30 +31,18 @@
 // NOTE: 0x2E
 // Deletes the Save
 
-
-struct unkStruct_203B34C
-{
-    // size: 0x1A8
-    u32 unk0;
-    MenuStruct unk4[4];
-    UnkTextStruct2 unk144[4];
-    /* 0x1A4 */ u32 currMenuChoice;
-};
-
 EWRAM_DATA_2 MainMenu *gMainMenu = {0};
 EWRAM_DATA_2 struct unkStruct_203B34C *gUnknown_203B34C = {0};
 EWRAM_DATA_2 u32 gUnknown_203B350 = {0};
 EWRAM_DATA_2 u32 gUnknown_203B354 = {0}; // unused everywhere else except here..
 
 extern void SetWindowBGColor(void);
-extern void sub_8036FDC(s32);
 extern void CreateWonderMailMenu(void);
 extern void CreateSaveMenu(u32);
 extern u32 UpdateMainMenu(void);
 extern s32 UpdateWonderMailMenu(void);
 extern s32 sub_80383D4(void);
 extern s32 UpdateSaveMenu(void);
-extern void sub_80370D4(void);
 extern void CleanWonderMailMenu(void);
 extern void sub_80383A8(void);
 extern void CleanSaveMenu(void);

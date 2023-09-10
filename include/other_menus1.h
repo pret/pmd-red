@@ -32,4 +32,8 @@ typedef struct unkStruct_203B35C
     u8 unk450[180];
 } unkStruct_203B35C;
 
+void sub_8036FDC(s32);
+void sub_80370D4(void);
+void sub_80373C4(void);
+
 #endif // GUARD_OTHER_MENUS1_H

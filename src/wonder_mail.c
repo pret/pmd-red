@@ -1,22 +1,23 @@
 #include "global.h"
+#include "code_80118A4.h"
+#include "code_801EE10_1.h"
+#include "code_80130A8.h"
+#include "code_8094F88.h"
+#include "code_80A26CC.h"
 #include "constants/communication_error_codes.h"
-#include "save_write.h"
-#include "pokemon.h"
+#include "cpu.h"
 #include "items.h"
-#include "wonder_mail.h"
+#include "main_menu.h"
 #include "memory.h"
+#include "menu_input.h"
+#include "other_menus2.h"
+#include "pokemon.h"
+#include "rescue_password_menu.h"
+#include "save.h"
+#include "save_write.h"
 #include "text1.h"
 #include "text2.h"
-#include "code_80A26CC.h"
-#include "rescue_password_menu.h"
-#include "menu_input.h"
-#include "code_8094F88.h"
-#include "code_80130A8.h"
-#include "main_menu.h"
-#include "code_801EE10_1.h"
-#include "cpu.h"
-#include "code_80118A4.h"
-#include "save.h"
+#include "wonder_mail.h"
 
 extern WonderMailStruct_203B2C0 *gUnknown_203B2C0;
 
@@ -54,8 +55,6 @@ extern void sub_8031E00();
 extern void sub_8031E10(void);
 extern void sub_803084C(void);
 extern void sub_8030DE4();
-extern s32 sub_8037D64(u32, void *, void *);
-extern s32 sub_80381F4(u32, void *, void *);
 extern void sub_80306A8(u32, u32, u32, u32);
 extern s32 sub_8037B28(u32);
 extern void sub_8031D70(u8, u32);

@@ -1,24 +1,25 @@
 #include "global.h"
+#include "code_800D090.h"
+#include "code_80118A4.h"
+#include "code_80130A8.h"
+#include "code_801B3C0.h"
+#include "code_801C620.h"
+#include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
+#include "cpu.h"
+#include "items.h"
+#include "main_menu.h"
+#include "memory.h"
+#include "menu_input.h"
+#include "other_menus2.h"
+#include "pokemon.h"
+#include "rescue_password_menu.h"
 #include "save.h"
 #include "save_write.h"
-#include "pokemon.h"
-#include "items.h"
-#include "code_8094F88.h"
-#include "wonder_mail.h"
-#include "memory.h"
-#include "rescue_password_menu.h"
+#include "text_util.h"
 #include "text1.h"
 #include "text2.h"
-#include "text_util.h"
-#include "code_801B3C0.h"
-#include "code_800D090.h"
-#include "menu_input.h"
-#include "code_80130A8.h"
-#include "main_menu.h"
-#include "code_801C620.h"
-#include "cpu.h"
-#include "code_80118A4.h"
+#include "wonder_mail.h"
 
 extern WonderMailStruct_203B2C4 *gUnknown_203B2C4;
 
@@ -221,8 +222,6 @@ extern s32 sub_8037B28(u32);
 extern u32 sub_8030894(void);
 extern u32 sub_801D008(void);
 extern void sub_80306A8(u32, u32, u32, u32);
-extern s32 sub_8037D64(u32, void *, void *);
-extern s32 sub_80381F4(u32, void *, void *);
 extern u8 sub_800D588(void);
 extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
 extern void sub_8031D70(u8, u32);

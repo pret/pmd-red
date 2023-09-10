@@ -1,18 +1,19 @@
 #include "global.h"
-#include "constants/wonder_mail.h"
+#include "code_80118A4.h"
+#include "code_80130A8.h"
+#include "code_801B3C0.h"
+#include "code_801C620.h"
+#include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
-#include "save_write.h"
+#include "constants/wonder_mail.h"
+#include "cpu.h"
+#include "input.h"
 #include "memory.h"
+#include "other_menus2.h"
+#include "save_write.h"
 #include "text1.h"
 #include "text2.h"
-#include "input.h"
 #include "wonder_mail.h"
-#include "code_8094F88.h"
-#include "code_80130A8.h"
-#include "code_801C620.h"
-#include "code_801B3C0.h"
-#include "cpu.h"
-#include "code_80118A4.h"
 #include "wonder_mail_3.h"
 
 #define SELECT_WONDER_MAIL_MODE_MAIN_SCREEN 0
@@ -123,8 +124,6 @@ extern void sub_80155F0(void);
 extern void sub_8031E10(void);
 
 extern u8 sub_800D588(void);
-extern s32 sub_8037D64(u32, void *, void *);
-extern s32 sub_80381F4(u32, void *, void *);
 extern void sub_80151C0(u32, u8 *);
 extern void sub_802EF48(void);
 

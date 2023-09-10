@@ -9,6 +9,7 @@
 #include "main_menu.h"
 #include "memory.h"
 #include "menu_input.h"
+#include "other_menus2.h"
 #include "save_write.h"
 #include "text1.h"
 #include "text2.h"
@@ -25,8 +26,6 @@ extern void sub_8035C1C();
 
 extern u32 sub_801D008();
 extern s32 sub_8037B28(u32);
-extern s32 sub_80381F4(u32, void *, void *);
-extern s32 sub_8037D64(u32, void *, void *);
 
 void sub_8036F74(void);
 void sub_8036F30();
@@ -501,14 +500,14 @@ void sub_8036B28(void)
   switch(sTradeItemsMenu->currMenu) {
     case TRADE_ITEMS_MAIN_MENU:
         if (sub_801CF14(0)) {
-            sub_8014248(sUnknown_80E61A4,0,1,sUnknown_80E60D4,0,4,0,0,0x101);
+            sub_8014248(sWhatDoPrompt,0,1,sUnknown_80E60D4,0,4,0,0,0x101);
         }
         else {
-            sub_8014248(sUnknown_80E61A4,0,1,sUnknown_80E60A0,0,4,0,0,0x101);
+            sub_8014248(sWhatDoPrompt,0,1,sUnknown_80E60A0,0,4,0,0,0x101);
         }
         break;
     case TRADE_ITEMS_SEND_ITEM:
-        sub_80141B4(sUnknown_80E61C0,0,0,0x101);
+        sub_80141B4(sPleaseChooseItem,0,0,0x101);
         break;
     case TRADE_ITEMS_SEND_ITEM_SELECTION:
         if (sub_801D008() == 0) {
@@ -533,17 +532,17 @@ void sub_8036B28(void)
     case TRADE_ITEMS_SEND_ITEM_CONFIRM:
         gUnknown_202DE30 = sTradeItemsMenu->quantityToSend;
         BufferItemName(gUnknown_202DE58,sTradeItemsMenu->itemToSend.id,NULL);
-        sub_8014248(sUnknown_80E61E4,0,5, sUnknown_80E6154,0,4,0,0,0x101);
+        sub_8014248(sFmtWillBeSentPrompt,0,5, sUnknown_80E6154,0,4,0,0,0x101);
         break;
     case TRADE_ITEMS_RECEIVE_ITEM:
-        sub_8014248(sUnknown_80E6214,0,5,sUnknown_80E618C,0,4,0,0,0x101);
+        sub_8014248(sFriendWillSendAnItem,0,5,sUnknown_80E618C,0,4,0,0,0x101);
         break;
     case 8:
-        sub_8014248(sUnknown_80E6268,0,5,sUnknown_80E618C,0,4,0,0,0x101);
+        sub_8014248(sPreparingToSendItem,0,5,sUnknown_80E618C,0,4,0,0,0x101);
         break;
     case TRADE_ITEMS_IN_COMMUNICATION:
         nullsub_23(FALSE);
-        sub_80141B4(sUnknown_80E62C4,0,0,0);
+        sub_80141B4(sInCommunication,0,0,0);
         break;
     case 10:
         sTradeItemsMenu->linkStatus = COMMS_GOOD;
@@ -597,12 +596,12 @@ void sub_8036B28(void)
             gUnknown_202DE30 = sTradeItemsMenu->unk24C.quantity;
             BufferItemName(gUnknown_202DE58,sTradeItemsMenu->unk24C.itemIdx.id,NULL);
         }
-        sub_80141B4(sUnknown_80E6314,0,0,0x101);
+        sub_80141B4(sFmtYouReceived,0,0,0x101);
         break;
     case 0xd:
         gUnknown_202DE30 = sTradeItemsMenu->quantityToSend;
         BufferItemName(gUnknown_202DE58,sTradeItemsMenu->itemToSend.id,NULL);
-        sub_80141B4(sUnknown_80E6358,0,0,0x101);
+        sub_80141B4(sFmtYouSent,0,0,0x101);
         break;
     case 0xB:
     case 0xC:
@@ -621,28 +620,28 @@ void PrintTradeItemsLinkError(u32 errorNum)
     case COMMS_GOOD:
         break;
     case 1:
-        sub_80141B4(sTradeItemsCommunicationError, 0, 0, 0x101);
+        sub_80141B4(sCommunicationError, 0, 0, 0x101);
         break;
     case COMMS_INCORRECT_NUM_SYSTEMS:
-        sub_80141B4(sUnknown_80E639C, 0, 0, 0x101);
+        sub_80141B4(sInvalidGBACount, 0, 0, 0x101);
         break;
     case COMMS_NO_RESPONSE:
-        sub_80141B4(sUnknown_80E63F8, 0, 0, 0x101);
+        sub_80141B4(sNoResponseSoRedo, 0, 0, 0x101);
         break;
     case COMMS_DIFFERENT_MODES:
-        sub_80141B4(sUnknown_80E6448, 0, 0, 0x101);
+        sub_80141B4(sUnequalModes, 0, 0, 0x101);
         break;
     case 5:
-        sub_80141B4(sTradeItemsCommunicationError, 0, 0, 0x101);
+        sub_80141B4(sCommunicationError, 0, 0, 0x101);
         break;
     case 0xe:
-        sub_80141B4(sTradeItemsCommunicationError, 0, 0, 0x101);
+        sub_80141B4(sCommunicationError, 0, 0, 0x101);
         break;
     case COMMS_NOT_READY:
-        sub_80141B4(sUnknown_80E64AC, 0, 0, 0x101);
+        sub_80141B4(sNoResponseCheckSenderReceiver, 0, 0, 0x101);
         break;
     default:
-        sub_80141B4(sTradeItemsCommunicationError, 0, 0, 0x101);
+        sub_80141B4(sCommunicationError, 0, 0, 0x101);
         break;
   }
 }

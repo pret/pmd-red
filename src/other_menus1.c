@@ -11,6 +11,7 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "other_menus1.h"
+#include "other_menus2.h"
 #include "sprite.h"
 #include "text1.h"
 
@@ -19,23 +20,20 @@ EWRAM_DATA_2 unkStruct_203B35C *sUnknown_203B35C = {0};
 
 #include "data/other_menus1.h"
 
-extern void sub_8037400(void);
-extern void sub_80376CC();
-
-extern u32 sub_8037C10(u32);
-extern void sub_8037748(void);
-extern void sub_80371B8(void);
 extern void sub_8037900(void);
-extern u32 sub_8037798(void);
 extern void xxx_call_update_bg_vram();
 extern void xxx_call_update_bg_sound_input();
-extern s32 sub_8037D64(u32 mode, void *, void *);
-extern s32 sub_80381F4(u32 mode, void *, void *);
 extern void sub_8037810(void);
 extern s32 sub_8037B28(u32);
 s32 sub_8035D3C(void);
 extern s32 sub_8035D74(void);
 extern void xxx_draw_string_80144C4(void);
+
+static void sub_80371B8(void);
+static void sub_8037400(void);
+static void sub_80376CC(void);
+static void sub_8037748(void);
+static u32 sub_8037798(void);
 
 void sub_8036FDC(s32 param_1)
 {
@@ -104,7 +102,7 @@ UNUSED static u32 sub_80370F0(void)
             sub_80371B8();
             break;
         case 2:
-            if (sUnknown_203B35C->unk0 < 2 && sUnknown_203B35C->linkStatus == COMMS_GOOD && !sub_8037C10(0))
+            if (sUnknown_203B35C->unk0 < 2 && sUnknown_203B35C->linkStatus == COMMS_GOOD && !sub_8037C10(FALSE))
                 return 41; // TODO: what screen is this?
 
             if (!sub_80130A8(&sUnknown_203B35C->unk1C[0]))
@@ -122,7 +120,7 @@ UNUSED static u32 sub_80370F0(void)
     return nextMenu;
 }
 
-void sub_80371B8(void)
+static void sub_80371B8(void)
 {
     unkStruct_8035D94 *item;
     const MenuItem *MenuItems;
@@ -133,7 +131,7 @@ void sub_80371B8(void)
     sub_8037400();
 
     if (sUnknown_203B35C->unk0 < 2 && sUnknown_203B35C->linkStatus == COMMS_GOOD) {
-        if (sub_8037C10(0)) {
+        if (sub_8037C10(FALSE)) {
             sub_80376CC();
             sub_8035CC0(sUnknown_203B35C->unk15C, 0);
             // Success!
@@ -230,7 +228,7 @@ UNUSED static unkStruct_203B35C *sub_80373F4(void)
     return sUnknown_203B35C;
 }
 
-void sub_8037400(void)
+static void sub_8037400(void)
 {
     u8 mailIndex;
     void *r5;
@@ -349,7 +347,7 @@ void sub_8037400(void)
     xxx_call_start_bg_music();
 }
 
-void sub_80376CC(void)
+static void sub_80376CC(void)
 {
 #ifdef NONMATCHING
     u32 r0;
@@ -405,7 +403,7 @@ void sub_80376CC(void)
     sUnknown_203B35C->unkC.unk6 = r2;
 }
 
-void sub_8037748(void)
+static void sub_8037748(void)
 {
     u16 temp2;
 
@@ -423,7 +421,7 @@ void sub_8037748(void)
     sUnknown_203B35C->unk14++;
 }
 
-u32 sub_8037798(void)
+static u32 sub_8037798(void)
 {
     u32 nextMenu = MENU_NO_SCREEN_CHANGE;
     switch (sUnknown_203B35C->unk0) {
