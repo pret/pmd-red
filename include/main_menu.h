@@ -75,11 +75,14 @@ MainMenu *GetMainMenu(void);
 void InitMainMenu(void);
 void SetMenuItems(MenuStruct *, UnkTextStruct2 *, s32, const UnkTextStruct2 *, const MenuItem *, u8, u32, u32);
 void SetUpMenu(void);
+s32 UpdateMenu(void);
+
 void sub_8035CC0(UnkTextStruct2 *, u32);
 void sub_8035CF4(MenuStruct*, u32, bool8);
+s16 sub_8035D3C(void);
+s32 sub_8035D74(void);
 unkStruct_8035D94 *sub_8035D94(void);
 void sub_8035DA0(void);
 bool8 sub_80363E0(void);
-s32 UpdateMenu(void);
 
 #endif // GUARD_MAIN_MENU_H

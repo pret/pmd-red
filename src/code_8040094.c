@@ -18,7 +18,6 @@ extern struct FileArchive gDungeonFileArchive;
 extern OpenedFile *gUnknown_202EE04;
 
 extern void sub_803F7BC(void);
-extern void xxx_call_update_bg_sound_input(void);
 
 extern void sub_803F580(u32);
 extern void sub_8049ED4();

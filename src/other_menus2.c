@@ -20,14 +20,15 @@ extern struct UnkStruct_203B184 *gUnknown_203B184;
 
 #include "data/other_menus2.h"
 
-extern void sub_800D494(void);
+// code_800D090.s
 extern s32 sub_800D33C(void);
-extern void sub_800D520(void);
-extern u8 sub_800D600(void);
-extern void sub_800D59C(s32 *, u32);
-extern void sub_800D570(void);
+extern void sub_800D494(void);
 extern void sub_800D510(void);
+extern void sub_800D520(void);
+extern void sub_800D570(void);
 extern u8 sub_800D588(void);
+extern void sub_800D59C(s32 *, u32);
+extern u8 sub_800D600(void);
 extern void sub_800D670(u32, s32 *, u32);
 extern void sub_800D68C(u32);
 

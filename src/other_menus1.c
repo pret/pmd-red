@@ -4,6 +4,7 @@
 #include "code_8009804.h"
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
+#include "code_80130A8.h"
 #include "constants/communication_error_codes.h"
 #include "dungeon_global_data.h"
 #include "input.h"
@@ -20,14 +21,13 @@ EWRAM_DATA_2 unkStruct_203B35C *sUnknown_203B35C = {0};
 
 #include "data/other_menus1.h"
 
-extern void sub_8037900(void);
-extern void xxx_call_update_bg_vram();
-extern void xxx_call_update_bg_sound_input();
+// other_menus1.s
 extern void sub_8037810(void);
+extern void sub_8037900(void);
+// text.s
+extern void xxx_call_update_bg_vram();
+// other_menus2.s
 extern s32 sub_8037B28(u32);
-s32 sub_8035D3C(void);
-extern s32 sub_8035D74(void);
-extern void xxx_draw_string_80144C4(void);
 
 static void sub_80371B8(void);
 static void sub_8037400(void);

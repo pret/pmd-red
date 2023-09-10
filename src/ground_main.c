@@ -44,7 +44,6 @@ extern void sub_809B638();
 extern void nullsub_106();
 extern void sub_80A73EC();
 extern void sub_8099750();
-extern void xxx_call_update_bg_sound_input();
 extern void sub_80A6E68();
 extern void GroundMap_Action();
 extern void nullsub_124();
