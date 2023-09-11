@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
+#include "common_strings.h"
 #include "felicity_bank.h"
 #include "memory.h"
 #include "menu_input.h"
@@ -13,14 +14,6 @@ static EWRAM_DATA_2 FelicityBankWork *sFelicityBankWork = {0};
 extern u32 gUnknown_202DE30;
 extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
-
-extern const u8 *gCommonCancel[];
-extern const u8 *gCommonStore[];
-extern const u8 *gCommonTake[];
-extern const u8 *gCommonInfo[];
-extern const u8 *gCommonDepositPrompt;
-extern const u8 *gCommonWithdrawPrompt;
-extern const u8 *gCommonFelicity[2][15];
 
 #include "data/felicity_bank.h"
 
@@ -390,9 +383,9 @@ static void sub_8016B48(u8 action)
     sub_80073B8(sFelicityBankWork->unk78);
 
     if (action != FELICITY_BANK_ACTION_WITHDRAW)
-        xxx_call_draw_string(12, 0, gCommonDepositPrompt, sFelicityBankWork->unk78, 0);
+        xxx_call_draw_string(12, 0, *gCommonDepositPrompt, sFelicityBankWork->unk78, 0);
     else
-        xxx_call_draw_string(12, 0, gCommonWithdrawPrompt, sFelicityBankWork->unk78, 0);
+        xxx_call_draw_string(12, 0, *gCommonWithdrawPrompt, sFelicityBankWork->unk78, 0);
 
     sub_8013C68(&sFelicityBankWork->unk64);
     sub_80073E0(sFelicityBankWork->unk78);

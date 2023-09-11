@@ -1,5 +1,6 @@
 #include "constants/mailbox.h"
 #include "global.h"
+#include "common_strings.h"
 #include "constants/dungeon.h"
 #include "constants/input.h"
 #include "memory.h"
@@ -167,10 +168,6 @@ extern UnkTextStruct2 gUnknown_80DFDA4;
 
 extern struct unkStruct_203B2F0 *gUnknown_203B2F0;
 
-extern u8 *gCommonYes[];
-extern u8 *gCommonNo[];
-extern u8 *gCommonDelete[];
-extern u8 *gCommonInfo[];
 extern u8 gUnknown_80DFD70[];
 extern u8 gUnknown_80DFD7C[];
 

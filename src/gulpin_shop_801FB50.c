@@ -5,6 +5,7 @@
 #include "code_801EE10.h"
 #include "code_801EE10_1.h"
 #include "code_801EE10_mid.h"
+#include "common_strings.h"
 #include "felicity_bank.h"
 #include "gulpin_shop.h"
 #include "gulpin_shop_801FB50.h"
@@ -23,12 +24,6 @@ extern u8 gUnknown_202DFE8[];
 extern u8 gUnknown_202E128[];
 extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
-
-extern const u8 *gCommonYes[];
-extern const u8 *gCommonNo[];
-extern const u8 *gCommonCancel[];
-extern const u8 *gCommonInfo[];
-extern const u8 *gCommonGulpin[2][25]; // 80D8888
 
 #include "data/gulpin_shop_801FB50.h"
 

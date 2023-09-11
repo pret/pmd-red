@@ -15,6 +15,7 @@
 #include "code_80118A4.h"
 #include "wonder_mail_3.h"
 #include "code_801B60C.h"
+#include "common_strings.h"
 
 extern unkStruct_803B344 *sub_803B344(u8);
 
@@ -122,7 +123,6 @@ extern u8 gUnknown_202DEA8[];
 extern u8 gUnknown_202E5D8[];
 extern u8 gAvailablePokemonNames[];
 extern u32 gUnknown_202DE30;
-extern const u8 *gCommonInfo[];
 
 const UnkTextStruct2 gUnknown_80E03C4 = {
     0x00, 0x00, 0x00, 0x00,

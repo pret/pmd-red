@@ -3,6 +3,7 @@
 #include "code_80130A8.h"
 #include "code_801B60C.h"
 #include "code_80A26CC.h"
+#include "common_strings.h"
 #include "constants/colors.h"
 #include "dungeon.h"
 #include "makuhita_dojo1.h"
@@ -19,12 +20,7 @@ extern u8 gUnknown_202E5D8[];
 
 static EWRAM_DATA_2 MakuhitaDojoWork1 *sMakuhitaDojoWork1 = {0};
 
-// common_strings.s
-extern const u8 *gCommonCancel[];
-extern const u8 *gCommonInfo[];
-extern const u8 *gCommonMakuhita[2][10]; // 80D9FC8
-
-#include "data/makuhita_dojo1.h" // 80E0760
+#include "data/makuhita_dojo1.h"
 
 static void MakuhitaDojo_DrawMainMenu(void);
 static void MakuhitaDojo_GoToFallbackState(void);

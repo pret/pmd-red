@@ -1,18 +1,11 @@
 #include "global.h"
 #include "code_80118A4.h"
+#include "common_strings.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "text1.h"
 #include "text2.h"
 #include "input.h"
-
-#define MAX_HINTS 5
-
-struct Hints
-{
-    u8 *heading;
-    u8 *body;
-};
 
 struct unkStruct_203B268
 {
@@ -41,7 +34,6 @@ extern UnkTextStruct2 gUnknown_80DC0A0;
 extern UnkTextStruct2 gUnknown_80DC0BC;
 extern UnkTextStruct2 gUnknown_80DC0E4;
 extern UnkTextStruct2 gUnknown_80DC0FC;
-extern struct Hints gCommonHints[MAX_HINTS];
 extern u8 gUnknown_80DC0D4[MAX_HINTS];
 
 extern void sub_801E714(void);

@@ -22,6 +22,7 @@
 #include "event_flag.h"
 #include "ground_main.h"
 #include "code_801C620.h"
+#include "common_strings.h"
 
 struct unkStruct_203B258
 {
@@ -88,10 +89,7 @@ extern u8 gMenuItems[];
 extern u8 gMenuJobList[];
 extern u8 gMenuTeam[];
 extern u8 gMenuOthers[];
-extern u8 *gCommonExit[];
 extern u8 gUnknown_80DBF34[];
-extern u8 *gCommonFriend[];
-extern u8 *gCommonInfo[];
 
 struct TeamBadgeData
 {

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_80118A4.h"
 #include "code_801C620.h"
+#include "common_strings.h"
 #include "constants/item.h"
 #include "constants/iq_skill.h"
 #include "items.h"
@@ -145,7 +146,6 @@ extern u8 gUnknown_80DBE1C[];
 extern char gUnknown_80DBE2C[]; // {ARG_MOVE_ITEM_0}
 extern char gUnknown_80DBE30[]; // {ARG_POKEMON_0}
 extern u8 gUnknown_80DBDC8[];
-extern u8 *gCommonInfo[];
 
 extern u32 sub_801CE58(void);
 extern void sub_801CC38(void);

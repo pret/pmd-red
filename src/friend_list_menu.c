@@ -8,6 +8,7 @@
 #include "code_801EE10_1.h"
 #include "code_801EE10_mid.h"
 #include "code_8098BDC.h"
+#include "common_strings.h"
 #include "constants/dungeon.h"
 #include "event_flag.h"
 #include "items.h"
@@ -52,8 +53,6 @@ extern u8 gUnknown_202DEA8[];
 extern u8 gAvailablePokemonNames[];
 
 EWRAM_DATA_2 unkStruct_203B2B4 *gUnknown_203B2B4 = {0};
-
-extern u8 *gCommonInfo[];
 
 #include "data/friend_list_menu.h"
 

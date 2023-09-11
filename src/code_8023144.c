@@ -6,6 +6,7 @@
 #include "code_801B3C0.h"
 #include "code_8023144.h"
 #include "code_8098BDC.h"
+#include "common_strings.h"
 #include "constants/colors.h"
 #include "constants/input.h"
 #include "constants/iq_skill.h"
@@ -42,8 +43,6 @@ extern u8 gUnknown_80DC5EC[];
 extern u8 gUnknown_202DE58[];
 extern u8 gUnknown_80DC8F0[];
 extern u8 gUnknown_80DC8F8[];
-extern u8 *gCommonTrash[];
-extern u8 *gCommonInfo[];
 extern void sub_8022924(s32);
 
 void GetGummiItemStatBoost(PokemonStruct1* pokemon, u8 id, bool8 checkBoostFlags, Gummi *gummi);

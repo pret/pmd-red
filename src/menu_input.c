@@ -12,7 +12,7 @@
 #include "text2.h"
 #include "util.h"
 
-// common_strings.s
+// data_80D47B8.s
 extern const u8 gUnknown_80D4828[];
 
 // text.s

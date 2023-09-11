@@ -2,6 +2,7 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_8098BDC.h"
+#include "common_strings.h"
 #include "constants/colors.h"
 #include "constants/input.h"
 #include "game_options.h"
@@ -51,8 +52,6 @@ extern const char gOthers_MenuOption[];
 extern const char gUnknown_80DBFEC[];
 extern const char gOthers_GameOptions[];
 extern const char gOthers_Hints[];
-extern const char *gCommonYes[];
-extern const char *gCommonNo[];
 
 extern s32 sub_8008ED0(u8 *);
 extern void CreateOthersMenu(void);

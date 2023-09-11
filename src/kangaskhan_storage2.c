@@ -3,6 +3,7 @@
 #include "code_801B3C0.h"
 #include "code_801C620.h"
 #include "code_8098BDC.h"
+#include "common_strings.h"
 #include "kangaskhan_storage2.h"
 #include "kecleon_bros4.h"
 #include "memory.h"
@@ -10,14 +11,9 @@
 #include "text1.h"
 #include "text2.h"
 
-EWRAM_DATA_2 unkStruct_203B20C *gUnknown_203B20C = {0};
+static EWRAM_DATA_2 unkStruct_203B20C *sUnknown_203B20C = {0};
 
-extern const u8 *gCommonCancel[];
-extern const u8 *gCommonStore[];
-extern const u8 *gCommonTake[];
-extern const u8 *gCommonInfo[];
-
-#include "data/kangaskhan_storage2.h" // 80DB7B8
+#include "data/kangaskhan_storage2.h"
 
 static void sub_8017F10(u32);
 static void sub_8017F28(void);
@@ -39,17 +35,17 @@ bool8 sub_8017E1C(void)
 {
     ResetUnusedInputStruct();
     sub_800641C(NULL, TRUE, TRUE);
-    gUnknown_203B20C = MemoryAlloc(sizeof(unkStruct_203B20C), 8);
-    gUnknown_203B20C->menuAction1 = 0;
-    gUnknown_203B20C->menuAction2 = 0;
-    gUnknown_203B20C->menuAction3 = 0;
+    sUnknown_203B20C = MemoryAlloc(sizeof(unkStruct_203B20C), 8);
+    sUnknown_203B20C->menuAction1 = 0;
+    sUnknown_203B20C->menuAction2 = 0;
+    sUnknown_203B20C->menuAction3 = 0;
     sub_8017F10(0);
     return TRUE;
 }
 
 u32 sub_8017E54(void)
 {
-    switch (gUnknown_203B20C->state) {
+    switch (sUnknown_203B20C->state) {
         case 0:
             sub_8017F10(1);
             break;
@@ -87,15 +83,15 @@ u32 sub_8017E54(void)
 
 void sub_8017EF4(void)
 {
-    if (gUnknown_203B20C != NULL) {
-        MemoryFree(gUnknown_203B20C);
-        gUnknown_203B20C = NULL;
+    if (sUnknown_203B20C != NULL) {
+        MemoryFree(sUnknown_203B20C);
+        sUnknown_203B20C = NULL;
     }
 }
 
 static void sub_8017F10(u32 newState)
 {
-    gUnknown_203B20C->state = newState;
+    sUnknown_203B20C->state = newState;
     sub_8017F28();
     sub_8018100();
 }
@@ -104,53 +100,53 @@ static void sub_8017F28(void)
 {
     s32 index;
 
-    sub_8006518(gUnknown_203B20C->unkF0);
+    sub_8006518(sUnknown_203B20C->unkF0);
 
-    switch (gUnknown_203B20C->state) {
+    switch (sUnknown_203B20C->state) {
         case 1:
-            gUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
-            gUnknown_203B20C->unkF0[1] = sUnknown_80DB7B8;
-            gUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0[1] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
             sub_80182E4();
-            gUnknown_203B20C->unkF0[2] = sUnknown_80DB7D0;
-            sub_8012CAC(&gUnknown_203B20C->unkF0[2], gUnknown_203B20C->unk20);
+            sUnknown_203B20C->unkF0[2] = sUnknown_80DB7D0;
+            sub_8012CAC(&sUnknown_203B20C->unkF0[2], sUnknown_203B20C->unk20);
             break;
         case 4:
         case 5:
-            gUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
-            gUnknown_203B20C->unkF0[1] = sUnknown_80DB7B8;
-            gUnknown_203B20C->unkF0[2] = sUnknown_80DB7B8;
-            gUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0[1] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0[2] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
             break;
         case 10:
         case 11:
-            gUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
-            gUnknown_203B20C->unkF0[1] = sUnknown_80DB7B8;
-            gUnknown_203B20C->unkF0[2] = sUnknown_80DB7B8;
-            gUnknown_203B20C->unkF0[0] = sUnknown_80DB800;
+            sUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0[1] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0[2] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0[0] = sUnknown_80DB800;
             break;
         case 12:
-            gUnknown_203B20C->unkF0[1] = sUnknown_80DB818;
+            sUnknown_203B20C->unkF0[1] = sUnknown_80DB818;
             break;
         case 6:
         case 13:
-            gUnknown_203B20C->unkF0[2] = sUnknown_80DB7E8;
+            sUnknown_203B20C->unkF0[2] = sUnknown_80DB7E8;
             break;
         default:
         case 0:
             for (index = 0; index < 4; index++)
-                gUnknown_203B20C->unkF0[index] = sUnknown_80DB7B8;
+                sUnknown_203B20C->unkF0[index] = sUnknown_80DB7B8;
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B20C->unkF0, TRUE, TRUE);
+    sub_800641C(sUnknown_203B20C->unkF0, TRUE, TRUE);
 }
 
 static void sub_8018100(void)
 {
-    switch (gUnknown_203B20C->state) {
+    switch (sUnknown_203B20C->state) {
         case 1:
-            sub_8012D60(&gUnknown_203B20C->unk70, gUnknown_203B20C->unk20, 0, gUnknown_203B20C->unk60, gUnknown_203B20C->menuAction1, 2);
+            sub_8012D60(&sUnknown_203B20C->unk70, sUnknown_203B20C->unk20, 0, sUnknown_203B20C->unk60, sUnknown_203B20C->menuAction1, 2);
             break;
         case 4:
             sub_801A5D8(3, 3, NULL, 10);
@@ -161,10 +157,10 @@ static void sub_8018100(void)
         case 6:
             sub_801A9E0();
             sub_801841C();
-            sub_8012D60(&gUnknown_203B20C->unk70, gUnknown_203B20C->unk20, 0, gUnknown_203B20C->unk60, gUnknown_203B20C->menuAction2, 2);
+            sub_8012D60(&sUnknown_203B20C->unk70, sUnknown_203B20C->unk20, 0, sUnknown_203B20C->unk60, sUnknown_203B20C->menuAction2, 2);
             break;
         case 7:
-            sub_801B3C0(&gUnknown_203B20C->item);
+            sub_801B3C0(&sUnknown_203B20C->item);
             break;
         case 10:
             sub_801C8C4(1, 3, 0, 10);
@@ -175,30 +171,30 @@ static void sub_8018100(void)
             sub_801AD34(0);
             break;
         case 12:
-            gUnknown_203B20C->unkD0 = 2;
-            gUnknown_203B20C->unkC8 = 1;
+            sUnknown_203B20C->unkD0 = 2;
+            sUnknown_203B20C->unkC8 = 1;
 
-            if (gTeamInventoryRef->teamStorage[gUnknown_203B20C->item.id] > 99)
-                gUnknown_203B20C->unkCC = 99;
+            if (gTeamInventoryRef->teamStorage[sUnknown_203B20C->item.id] > 99)
+                sUnknown_203B20C->unkCC = 99;
             else
-                gUnknown_203B20C->unkCC = gTeamInventoryRef->teamStorage[gUnknown_203B20C->item.id];
+                sUnknown_203B20C->unkCC = gTeamInventoryRef->teamStorage[sUnknown_203B20C->item.id];
 
-            gUnknown_203B20C->unkC4 = gUnknown_203B20C->unkCC;
-            gUnknown_203B20C->unkD4 = 1;
-            gUnknown_203B20C->unkD8 = &gUnknown_203B20C->unkF0[1];
-            gUnknown_203B20C->unkDC = 40;
-            gUnknown_203B20C->unkE0 = 18;
-            sub_8013AA0(&gUnknown_203B20C->unkC0);
+            sUnknown_203B20C->unkC4 = sUnknown_203B20C->unkCC;
+            sUnknown_203B20C->unkD4 = 1;
+            sUnknown_203B20C->unkD8 = &sUnknown_203B20C->unkF0[1];
+            sUnknown_203B20C->unkDC = 40;
+            sUnknown_203B20C->unkE0 = 18;
+            sub_8013AA0(&sUnknown_203B20C->unkC0);
             sub_8018280();
             break;
         case 13:
             sub_801CCD8();
             sub_801AD34(0);
             sub_80184D4();
-            sub_8012D60(&gUnknown_203B20C->unk70, gUnknown_203B20C->unk20, 0, gUnknown_203B20C->unk60, gUnknown_203B20C->menuAction3, 2);
+            sub_8012D60(&sUnknown_203B20C->unk70, sUnknown_203B20C->unk20, 0, sUnknown_203B20C->unk60, sUnknown_203B20C->menuAction3, 2);
             break;
         case 14:
-            sub_801B3C0(&gUnknown_203B20C->item);
+            sub_801B3C0(&sUnknown_203B20C->item);
             break;
         case 0:
         default:
@@ -208,14 +204,14 @@ static void sub_8018100(void)
 
 static void sub_8018280(void)
 {
-    sub_8008C54(gUnknown_203B20C->unkD4);
-    sub_80073B8(gUnknown_203B20C->unkD4);
-    xxx_call_draw_string(4, 0, sNumber, gUnknown_203B20C->unkD4, 0);
-    sub_8013C68(&gUnknown_203B20C->unkC0);
-    sub_80073E0(gUnknown_203B20C->unkD4);
+    sub_8008C54(sUnknown_203B20C->unkD4);
+    sub_80073B8(sUnknown_203B20C->unkD4);
+    xxx_call_draw_string(4, 0, sNumber, sUnknown_203B20C->unkD4, 0);
+    sub_8013C68(&sUnknown_203B20C->unkC0);
+    sub_80073E0(sUnknown_203B20C->unkD4);
     sub_801CCD8();
     sub_801AD34(0);
-    sub_8012EA4(&gUnknown_203B20C->unk70, 0);
+    sub_8012EA4(&sUnknown_203B20C->unk70, 0);
 }
 
 static void sub_80182E4(void)
@@ -224,38 +220,38 @@ static void sub_80182E4(void)
     s32 loopMax;
 
     loopMax = 0;
-    MemoryFill16(gUnknown_203B20C->unk60, 0, sizeof(gUnknown_203B20C->unk60));
-    gUnknown_203B20C->unk20[0].text = *gCommonStore;
-    gUnknown_203B20C->unk20[0].menuAction = 2;
+    MemoryFill16(sUnknown_203B20C->unk60, 0, sizeof(sUnknown_203B20C->unk60));
+    sUnknown_203B20C->unk20[0].text = *gCommonStore;
+    sUnknown_203B20C->unk20[0].menuAction = 2;
 
     if (GetNumberOfFilledInventorySlots() == 0 || sub_801CF50(0))
-        gUnknown_203B20C->unk60[0] = 1;
+        sUnknown_203B20C->unk60[0] = 1;
 
     loopMax += 1;
-    gUnknown_203B20C->unk20[loopMax].text = *gCommonTake;
-    gUnknown_203B20C->unk20[loopMax].menuAction = 3;
+    sUnknown_203B20C->unk20[loopMax].text = *gCommonTake;
+    sUnknown_203B20C->unk20[loopMax].menuAction = 3;
 
     if (sub_801CF14(1) || INVENTORY_SIZE <=  GetNumberOfFilledInventorySlots())
-        gUnknown_203B20C->unk60[loopMax] = 1;
+        sUnknown_203B20C->unk60[loopMax] = 1;
 
     loopMax += 1;
-    gUnknown_203B20C->unk20[loopMax].text = *gCommonCancel;
-    gUnknown_203B20C->unk20[loopMax].menuAction = 1;
+    sUnknown_203B20C->unk20[loopMax].text = *gCommonCancel;
+    sUnknown_203B20C->unk20[loopMax].menuAction = 1;
 
     loopMax += 1;
-    gUnknown_203B20C->unk20[loopMax].text = NULL;
-    gUnknown_203B20C->unk20[loopMax].menuAction = 1;
+    sUnknown_203B20C->unk20[loopMax].text = NULL;
+    sUnknown_203B20C->unk20[loopMax].menuAction = 1;
 
     for (index = 0; index < loopMax; index++) {
-        if (gUnknown_203B20C->unk60[index] == 0) {
-            if (gUnknown_203B20C->unk20[index].menuAction == gUnknown_203B20C->menuAction1)
+        if (sUnknown_203B20C->unk60[index] == 0) {
+            if (sUnknown_203B20C->unk20[index].menuAction == sUnknown_203B20C->menuAction1)
                 return;
         }
     }
 
     for (index = 0; index < loopMax; index++) {
-        if (gUnknown_203B20C->unk60[index] == 0) {
-            gUnknown_203B20C->menuAction1 = gUnknown_203B20C->unk20[index].menuAction;
+        if (sUnknown_203B20C->unk60[index] == 0) {
+            sUnknown_203B20C->menuAction1 = sUnknown_203B20C->unk20[index].menuAction;
             break;
         }
     }
@@ -267,30 +263,30 @@ static void sub_801841C(void)
     s32 loopMax;
 
     loopMax = 0;
-    MemoryFill16(gUnknown_203B20C->unk60,0,sizeof(gUnknown_203B20C->unk60));
-    gUnknown_203B20C->unk20[0].text = *gCommonStore;
-    gUnknown_203B20C->unk20[0].menuAction = 2;
-    if (!sub_801ADA0(gUnknown_203B20C->itemIndex))
-        gUnknown_203B20C->unk60[0] = 1;
+    MemoryFill16(sUnknown_203B20C->unk60,0,sizeof(sUnknown_203B20C->unk60));
+    sUnknown_203B20C->unk20[0].text = *gCommonStore;
+    sUnknown_203B20C->unk20[0].menuAction = 2;
+    if (!sub_801ADA0(sUnknown_203B20C->itemIndex))
+        sUnknown_203B20C->unk60[0] = 1;
 
     loopMax += 1;
-    gUnknown_203B20C->unk20[loopMax].text = *gCommonInfo;
-    gUnknown_203B20C->unk20[loopMax].menuAction = 4;
+    sUnknown_203B20C->unk20[loopMax].text = *gCommonInfo;
+    sUnknown_203B20C->unk20[loopMax].menuAction = 4;
 
     loopMax += 1;
-    gUnknown_203B20C->unk20[loopMax].text = NULL;
-    gUnknown_203B20C->unk20[loopMax].menuAction = 1;
+    sUnknown_203B20C->unk20[loopMax].text = NULL;
+    sUnknown_203B20C->unk20[loopMax].menuAction = 1;
 
     for (index = 0; index < loopMax; index++) {
-        if (gUnknown_203B20C->unk60[index] == 0) {
-            if (gUnknown_203B20C->unk20[index].menuAction == gUnknown_203B20C->menuAction2)
+        if (sUnknown_203B20C->unk60[index] == 0) {
+            if (sUnknown_203B20C->unk20[index].menuAction == sUnknown_203B20C->menuAction2)
                 return;
         }
     }
 
     for (index = 0; index < loopMax; index++) {
-        if (gUnknown_203B20C->unk60[index] == 0) {
-            gUnknown_203B20C->menuAction2 = gUnknown_203B20C->unk20[index].menuAction;
+        if (sUnknown_203B20C->unk60[index] == 0) {
+            sUnknown_203B20C->menuAction2 = sUnknown_203B20C->unk20[index].menuAction;
             break;
         }
     }
@@ -302,31 +298,31 @@ static void sub_80184D4(void)
     s32 loopMax;
 
     loopMax = 0;
-    MemoryFill16(gUnknown_203B20C->unk60, 0, sizeof(gUnknown_203B20C->unk60));
-    gUnknown_203B20C->unk20[0].text = *gCommonTake;
-    gUnknown_203B20C->unk20[0].menuAction = 3;
+    MemoryFill16(sUnknown_203B20C->unk60, 0, sizeof(sUnknown_203B20C->unk60));
+    sUnknown_203B20C->unk20[0].text = *gCommonTake;
+    sUnknown_203B20C->unk20[0].menuAction = 3;
 
     if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
-        gUnknown_203B20C->unk60[0] = 1;
+        sUnknown_203B20C->unk60[0] = 1;
 
     loopMax += 1;
-    gUnknown_203B20C->unk20[loopMax].text = *gCommonInfo;
-    gUnknown_203B20C->unk20[loopMax].menuAction = 4;
+    sUnknown_203B20C->unk20[loopMax].text = *gCommonInfo;
+    sUnknown_203B20C->unk20[loopMax].menuAction = 4;
 
     loopMax += 1;
-    gUnknown_203B20C->unk20[loopMax].text = NULL;
-    gUnknown_203B20C->unk20[loopMax].menuAction = 1;
+    sUnknown_203B20C->unk20[loopMax].text = NULL;
+    sUnknown_203B20C->unk20[loopMax].menuAction = 1;
 
     for (index = 0; index < loopMax; index++) {
-        if (gUnknown_203B20C->unk60[index] == 0) {
-            if (gUnknown_203B20C->unk20[index].menuAction == gUnknown_203B20C->menuAction3)
+        if (sUnknown_203B20C->unk60[index] == 0) {
+            if (sUnknown_203B20C->unk20[index].menuAction == sUnknown_203B20C->menuAction3)
                 return;
         }
     }
 
     for (index = 0; index < loopMax; index++) {
-        if (gUnknown_203B20C->unk60[index] == 0) {
-            gUnknown_203B20C->menuAction3 = gUnknown_203B20C->unk20[index].menuAction;
+        if (sUnknown_203B20C->unk60[index] == 0) {
+            sUnknown_203B20C->menuAction3 = sUnknown_203B20C->unk20[index].menuAction;
             break;
         }
     }
@@ -337,10 +333,10 @@ static void sub_8018588(void)
     s32 menuAction;
     menuAction = 0;
 
-    if (sub_8012FD8(&gUnknown_203B20C->unk70) == 0) {
-        sub_8013114(&gUnknown_203B20C->unk70, &menuAction);
+    if (sub_8012FD8(&sUnknown_203B20C->unk70) == 0) {
+        sub_8013114(&sUnknown_203B20C->unk70, &menuAction);
         if (menuAction != 1)
-            gUnknown_203B20C->menuAction1 = menuAction;
+            sUnknown_203B20C->menuAction1 = menuAction;
     }
 
     switch (menuAction) {
@@ -348,11 +344,11 @@ static void sub_8018588(void)
             if (GetNumberOfFilledInventorySlots() != 0 && !sub_801CF50(0))
                 sub_8017F10(4);
             else
-                sub_8012EA4(&gUnknown_203B20C->unk70, 1);
+                sub_8012EA4(&sUnknown_203B20C->unk70, 1);
             break;
         case 3:
             if (sub_801CF14(1))
-                sub_8012EA4(&gUnknown_203B20C->unk70, 1);
+                sub_8012EA4(&sUnknown_203B20C->unk70, 1);
             else
                 sub_8017F10(10);
             break;
@@ -388,14 +384,14 @@ static void sub_8018620(void)
                     sub_8017F10(5);
             }
             else {
-                gUnknown_203B20C->itemIndex = sub_801A8AC();
-                gUnknown_203B20C->item = gTeamInventoryRef->teamItems[gUnknown_203B20C->itemIndex];
+                sUnknown_203B20C->itemIndex = sub_801A8AC();
+                sUnknown_203B20C->item = gTeamInventoryRef->teamItems[sUnknown_203B20C->itemIndex];
                 sub_8017F10(6);
             }
             break;
         case 4:
-            gUnknown_203B20C->itemIndex = sub_801A8AC();
-            gUnknown_203B20C->item = gTeamInventoryRef->teamItems[gUnknown_203B20C->itemIndex];
+            sUnknown_203B20C->itemIndex = sub_801A8AC();
+            sUnknown_203B20C->item = gTeamInventoryRef->teamItems[sUnknown_203B20C->itemIndex];
             sub_8017F10(7);
             break;
         case 2:
@@ -442,16 +438,16 @@ static void sub_80186F8(void)
                 }
             }
             else {
-                gUnknown_203B20C->id = sub_801CB24();
-                xxx_init_itemslot_8090A8C(&gUnknown_203B20C->item, gUnknown_203B20C->id, 0);
-                gUnknown_203B20C->item.quantity = 1;
+                sUnknown_203B20C->id = sub_801CB24();
+                xxx_init_itemslot_8090A8C(&sUnknown_203B20C->item, sUnknown_203B20C->id, 0);
+                sUnknown_203B20C->item.quantity = 1;
                 sub_8017F10(13);
             }
             break;
         case 4:
-            gUnknown_203B20C->id = sub_801CB24();
-            xxx_init_itemslot_8090A8C(&gUnknown_203B20C->item, gUnknown_203B20C->id, 0);
-            gUnknown_203B20C->item.quantity = 1;
+            sUnknown_203B20C->id = sub_801CB24();
+            xxx_init_itemslot_8090A8C(&sUnknown_203B20C->item, sUnknown_203B20C->id, 0);
+            sUnknown_203B20C->item.quantity = 1;
             sub_8017F10(14);
             break;
         case 2:
@@ -469,14 +465,14 @@ static void sub_8018854(void)
     BulkItem item;
 
     sub_801CA08(FALSE);
-    sub_8012FD8(&gUnknown_203B20C->unk70);
+    sub_8012FD8(&sUnknown_203B20C->unk70);
 
-    switch (sub_8013BBC(&gUnknown_203B20C->unkC0)) {
+    switch (sub_8013BBC(&sUnknown_203B20C->unkC0)) {
         case 3:
-            gUnknown_203B20C->item.quantity = gUnknown_203B20C->unkC0;
-            gTeamInventoryRef->teamStorage[gUnknown_203B20C->item.id] -= gUnknown_203B20C->item.quantity;
-            item.id = gUnknown_203B20C->item.id;
-            item.quantity = gUnknown_203B20C->item.quantity;
+            sUnknown_203B20C->item.quantity = sUnknown_203B20C->unkC0;
+            gTeamInventoryRef->teamStorage[sUnknown_203B20C->item.id] -= sUnknown_203B20C->item.quantity;
+            item.id = sUnknown_203B20C->item.id;
+            item.quantity = sUnknown_203B20C->item.quantity;
             AddHeldItemToInventory(&item);
 
             if (!sub_801CF14(1)) {
@@ -509,22 +505,22 @@ static void sub_8018904(void)
     menuAction = 0;
 
     sub_801A6E8(FALSE);
-    if (sub_8012FD8(&gUnknown_203B20C->unk70) == 0) {
-        sub_8013114(&gUnknown_203B20C->unk70, &menuAction);
+    if (sub_8012FD8(&sUnknown_203B20C->unk70) == 0) {
+        sub_8013114(&sUnknown_203B20C->unk70, &menuAction);
         if (menuAction != 1)
-            gUnknown_203B20C->menuAction2 = menuAction;
+            sUnknown_203B20C->menuAction2 = menuAction;
     }
 
     switch (menuAction) {
         case 2:
-            if (IsNotMoneyOrUsedTMItem(gUnknown_203B20C->item.id)) {
-                if (!sub_801ADA0(gUnknown_203B20C->itemIndex)) {
+            if (IsNotMoneyOrUsedTMItem(sUnknown_203B20C->item.id)) {
+                if (!sub_801ADA0(sUnknown_203B20C->itemIndex)) {
                 error:
-                    sub_8012EA4(&gUnknown_203B20C->unk70, 1);
+                    sub_8012EA4(&sUnknown_203B20C->unk70, 1);
                 }
                 else {
-                    MoveToStorage(&gUnknown_203B20C->item);
-                    ShiftItemsDownFrom(gUnknown_203B20C->itemIndex);
+                    MoveToStorage(&sUnknown_203B20C->item);
+                    ShiftItemsDownFrom(sUnknown_203B20C->itemIndex);
                     FillInventoryGaps();
 
                     if (GetNumberOfFilledInventorySlots() == 0) {
@@ -556,22 +552,22 @@ static void sub_80189C8(void)
     menuAction = 0;
 
     sub_801CA08(FALSE);
-    if (sub_8012FD8(&gUnknown_203B20C->unk70) == 0) {
-        sub_8013114(&gUnknown_203B20C->unk70, &menuAction);
+    if (sub_8012FD8(&sUnknown_203B20C->unk70) == 0) {
+        sub_8013114(&sUnknown_203B20C->unk70, &menuAction);
         if (menuAction != 1)
-            gUnknown_203B20C->menuAction3 = menuAction;
+            sUnknown_203B20C->menuAction3 = menuAction;
     }
 
     switch (menuAction) {
         case 3:
             if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
-                sub_8012EA4(&gUnknown_203B20C->unk70, 1);
-            else if (IsThrowableItem(gUnknown_203B20C->item.id))
+                sub_8012EA4(&sUnknown_203B20C->unk70, 1);
+            else if (IsThrowableItem(sUnknown_203B20C->item.id))
                 sub_8017F10(12);
             else {
-                gTeamInventoryRef->teamStorage[gUnknown_203B20C->item.id] -= gUnknown_203B20C->item.quantity;
-                item.id = gUnknown_203B20C->item.id;
-                item.quantity = gUnknown_203B20C->item.quantity;
+                gTeamInventoryRef->teamStorage[sUnknown_203B20C->item.id] -= sUnknown_203B20C->item.quantity;
+                item.id = sUnknown_203B20C->item.id;
+                item.quantity = sUnknown_203B20C->item.quantity;
                 AddHeldItemToInventory(&item);
 
                 if (!sub_801CF14(1)) {

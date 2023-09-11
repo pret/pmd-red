@@ -2,6 +2,7 @@
 #include "code_801EE10_mid.h"
 #include "code_8021774.h"
 #include "code_8021774_pre.h"
+#include "common_strings.h"
 #include "debug_menu3.h"
 #include "friend_area.h"
 #include "memory.h"
@@ -34,9 +35,6 @@ static const UnkTextStruct2 sUnknown_80E7EA4 =
 ALIGNED(4) static const u8 sClose[] = "CLOSE";
 ALIGNED(4) static const u8 sOpen[] = "OPEN";
 ALIGNED(4) static const u8 sFill[] = "pksdir0";
-
-// common_strings.s
-extern const u8 *gCommonInfo[];
 
 void sub_803A924(u32);
 void sub_803A93C(void);

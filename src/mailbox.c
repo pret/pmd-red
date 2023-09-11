@@ -1,4 +1,5 @@
 #include "global.h"
+#include "common_strings.h"
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
@@ -59,9 +60,6 @@ const u8 gMailActionRead[] = "Read";
 const u8 gMailAccepted[] = "Accepted";
 const u8 gUnknown_80E0324[] = "/";
 static const u8 mailbox_fill[] = "pksdir0";
-
-extern u8 *gCommonAccept[];
-extern u8 *gCommonInfo[];
 
 extern bool8 IsMailinJobSlot(WonderMail *mail);
 

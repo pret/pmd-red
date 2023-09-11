@@ -3,6 +3,7 @@
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
 #include "code_80130A8.h"
+#include "common_strings.h"
 #include "gulpin_shop.h"
 #include "pokemon.h"
 #include "memory.h"
@@ -13,13 +14,7 @@
 
 extern u8 gAvailablePokemonNames[]; // 202DF98
 
-EWRAM_DATA_2 GulpinShopWork *sGulpinShopWork = {0};
-
-// common_strings.s
-extern const u8 *gCommonYes[];
-extern const u8 *gCommonNo[];
-extern const u8 *gCommonInfo[];
-extern const u8 *gCommonGulpin[2][25]; // 80D8888
+static EWRAM_DATA_2 GulpinShopWork *sGulpinShopWork = {0};
 
 #include "data/gulpin_shop.h"
 

@@ -3,6 +3,7 @@
 #include "code_801B3C0.h"
 #include "code_801C620.h"
 #include "code_8098BDC.h"
+#include "common_strings.h"
 #include "kangaskhan_storage1.h"
 #include "kecleon_bros4.h"
 #include "memory.h"
@@ -16,14 +17,6 @@ extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
 EWRAM_DATA_2 struct KangaskhanStorageWork *gKangaskhanStorageWork = {0};
-
-extern const u8 *gCommonYes[];
-extern const u8 *gCommonNo[];
-extern const u8 *gCommonCancel[];
-extern const u8 *gCommonStore[];
-extern const u8 *gCommonTake[];
-extern const u8 *gCommonInfo[];
-extern const u8 *gCommonKangaskhanStorage[2][20]; // 80D5404
 
 #include "data/kangaskhan_storage1.h" // 80DB748
 

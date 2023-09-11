@@ -3,6 +3,7 @@
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
 #include "code_8098BDC.h"
+#include "common_strings.h"
 #include "felicity_bank.h"
 #include "items.h"
 #include "kecleon_bros1.h"
@@ -21,14 +22,6 @@ extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
 static EWRAM_DATA_2 KecleonBrosWork1 *sKecleonBrosWork1 = {0};
-
-extern const u8 *gCommonYes[];
-extern const u8 *gCommonNo[];
-extern const u8 *gCommonCancel[];
-extern const u8 *gCommonInfo[];
-extern const u8 *gCommonBuy[];
-extern const u8 *gCommonSell[];
-extern const u8 *gCommonKecleonBros[KECLEON_BROS_MODE_COUNT][23]; // 80D5EC8
 
 #include "data/kecleon_bros1.h"
 

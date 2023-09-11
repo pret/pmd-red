@@ -6,6 +6,7 @@
 #include "code_801EE10_1.h"
 #include "code_801EE10_mid.h"
 #include "code_8098BDC.h"
+#include "common_strings.h"
 #include "constants/dungeon.h"
 #include "event_flag.h"
 #include "friend_area_action_menu.h"
@@ -20,10 +21,6 @@
 #include "text2.h"
 
 extern struct unkStruct_203B2BC *gUnknown_203B2BC;
-
-extern u8 *gCommonYes[];
-extern u8 *gCommonNo[];
-extern u8 *gCommonInfo[];
 
 void sub_8027D40(u32, BulkItem *heldItem);
 void sub_8027794(void);

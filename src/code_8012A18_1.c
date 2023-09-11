@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_8012A18_1.h"
 #include "code_80130A8.h"
+#include "common_strings.h"
 #include "memory.h"
 #include "input.h"
 #include "text1.h"
@@ -18,8 +19,6 @@ struct unkStruct_203B200
     u8 fill[0x50 - 0x28];
 };
 extern struct unkStruct_203B200 *gUnknown_203B200;
-extern const u8 *gCommonYes[];
-extern const u8 *gCommonNo[];
 
 extern const char gUnknown_80DB6A4;
 extern const char gUnknown_80DB6BC;

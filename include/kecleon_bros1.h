@@ -6,15 +6,6 @@
 #include "menu.h"
 #include "text.h"
 
-enum KecleonBrosMode
-{
-    KECLEON_BROS_MODE_ITEMS_AWAKE,
-    KECLEON_BROS_MODE_ITEMS_ASLEEP,
-    KECLEON_BROS_MODE_WARES_AWAKE,
-    KECLEON_BROS_MODE_WARES_ASLEEP,
-    KECLEON_BROS_MODE_COUNT
-};
-
 enum KecleonStoreStates
 {
     KECLEON_STORE_INIT = 0,

@@ -4,6 +4,7 @@
 #include "code_801B3C0.h"
 #include "code_801B60C.h"
 #include "code_8098BDC.h"
+#include "common_strings.h"
 #include "constants/colors.h"
 #include "items.h"
 #include "kecleon_bros4.h"
@@ -18,10 +19,6 @@ extern u8 gUnknown_202DEA8[];
 extern u8 gAvailablePokemonNames[]; // 202DF98
 
 static EWRAM_DATA_2 unkStruct_203B234 *sUnknown_203B234 = {0};
-
-extern const u8 *gCommonYes[];
-extern const u8 *gCommonNo[];
-extern const u8 *gCommonInfo[];
 
 #include "data/code_801B60C.h" // 80DBA58
 

@@ -2,6 +2,7 @@
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
 #include "code_801C620.h"
+#include "common_strings.h"
 #include "debug_menu2.h"
 #include "memory.h"
 #include "menu_input.h"
@@ -40,9 +41,6 @@ static const UnkTextStruct2 sUnknown_80E7E64 =
 
 ALIGNED(4) static const u8 sNumberPrompt[] = "Number?";
 ALIGNED(4) static const u8 sFill[] = "pksdir0";
-
-// common_strings.s
-extern const u8 *gCommonInfo[];
 
 void sub_803A504(u32);
 void sub_803A51C(void);

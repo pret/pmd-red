@@ -9,7 +9,7 @@
 #include "input.h"
 #include "wonder_mail.h"
 #include "menu_input.h"
-
+#include "common_strings.h"
 #include "pelipper_board.h"
 #include "code_80118A4.h"
 
@@ -96,9 +96,6 @@ extern u32 sub_802C1E4(u32);
 extern u8 sub_802C26C(void);
 extern u8 HasNoAcceptedJobs(void);
 extern bool8 IsMailinJobSlot(WonderMail *mail);
-
-extern u8 *gCommonAccept[];
-extern u8 *gCommonInfo[];
 
 void SetPelipperBoardState(u32);
 
