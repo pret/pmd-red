@@ -162,15 +162,15 @@ const UnkTextStruct2 gUnknown_80E041C = {
 
 ALIGNED(4) const u8 gUnknown_80E0434[] = _(
         " Here{APOSTROPHE}s your reward!\n"
-        "{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}!");
+        "{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}!");
 
 ALIGNED(4) const u8 gUnknown_80E045C[] = _(
         "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1} received\n"
-        "{CENTER_ALIGN}{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.");
+        "{CENTER_ALIGN}{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.");
 
 ALIGNED(4) const u8 gUnknown_80E0484[] = _(
         "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s team received\n"
-        "{CENTER_ALIGN}{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.");
+        "{CENTER_ALIGN}{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.");
 
 ALIGNED(4) const u8 gUnknown_80E04B4[]= _(
         " As your reward{COMMA} you can\n"
@@ -202,7 +202,7 @@ ALIGNED(4) const u8 gUnknown_80E0640[] = _(
 
 ALIGNED(4) const u8 gUnknown_80E0670[] = _(
         "{CENTER_ALIGN}Rescue Team {COLOR_1 LIGHT_BLUE}$t{END_COLOR_TEXT_1}\n"
-        "{CENTER_ALIGN}gained {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} rescue points.");
+        "{CENTER_ALIGN}gained {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} rescue points.");
 
 ALIGNED(4) const u8 gUnknown_80E06A8[] = _(
         "{CENTER_ALIGN}Congratulations!{EXTRA_MSG}"

@@ -250,6 +250,8 @@ gUnknown_202DE28: /* 202DE28 (save) */
 	.space 0x4
 	.align 4
 
+/* gUnknown_202DE30[0] seems to be the s32 value to insert in place of "$d0" (ARG_VALUE_0) in strings */
+/* gUnknown_202DE30[1] is used for "$d1" (ARG_VALUE_1). "$d2" is not in any strings so it may not exist */
 gUnknown_202DE30: /* 202DE30 */
 	.space 0x28
 

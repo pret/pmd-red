@@ -9671,7 +9671,7 @@ gUnknown_8100208: @ 8100208
 
 	.global gMagnitudeMessage
 gMagnitudeMessage: @ 810020C
-	.string "It{APOSTROPHE}s Magnitude $d0!\0"
+	.string "It{APOSTROPHE}s Magnitude {ARG_VALUE_0}!\0"
 	.align 2, 0
 
 	.global gPtrMagnitudeMessage
@@ -9707,7 +9707,7 @@ gPtrSelfHealPreventedHungerMessage: @ 8100298
 
 	.global gUnknown_810029C
 gUnknown_810029C: @ 810029C
-	.string "Rescue challenges left: $d0\0"
+	.string "Rescue challenges left: {ARG_VALUE_0}\0"
 	.align 2, 0
 
 	.global gUnknown_81002B8

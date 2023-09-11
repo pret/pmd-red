@@ -11,7 +11,7 @@
 // size: 0x108
 typedef struct FelicityBankWork
 {
-    /* 0x0 */ u32 isAsleep;
+    /* 0x0 */ u32 mode; // Corresponds to the enum: FelicityBankMode
     /* 0x4 */ s32 currState;
     /* 0x8 */ u32 fallbackState;
     /* 0xC */ u32 chosenAmount;

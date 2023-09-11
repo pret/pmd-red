@@ -688,7 +688,7 @@ void HealTargetHP(Entity *pokemon, Entity *target, s32 param_3, s32 param_4, boo
             if (sub_8045888(target) != 0) {
                 r8 = maxHPStat;
             }
-            sub_80522F4(pokemon,target,*gUnknown_80FB240); // m0$'s max HP rose by $d1
+            sub_80522F4(pokemon,target,*gUnknown_80FB240); // m0$'s max HP rose by {ARG_VALUE_1}
         }
         if (HP != 0) {
             if (sub_8045888(target) != 0) {
@@ -699,7 +699,7 @@ void HealTargetHP(Entity *pokemon, Entity *target, s32 param_3, s32 param_4, boo
                     sub_80522F4(pokemon,target,*gUnknown_80FB1E0); // $m0 was fully healed
                 }
                 else {
-                    sub_80522F4(pokemon,target,*gUnknown_80FB1C4); // $m0 recovered $d0 HP
+                    sub_80522F4(pokemon,target,*gUnknown_80FB1C4); // $m0 recovered {ARG_VALUE_0} HP
                 }
             }
         }

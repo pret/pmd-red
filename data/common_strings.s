@@ -2,254 +2,6 @@
 
         .align 2,0
 
-	.global gCommonFelicity
-gCommonFelicity: @ 80D49E0 (Felicity Bank Dialogue)
-    .4byte gUnknown_80D53E0
-    .4byte gUnknown_80D53C8
-    .4byte gUnknown_80D538C
-    .4byte gUnknown_80D5380
-    .4byte gUnknown_80D5364
-    .4byte gUnknown_80D5364
-    .4byte gUnknown_80D5340
-    .4byte gUnknown_80D52F8
-    .4byte gUnknown_80D527C
-    .4byte gUnknown_80D5244
-    .4byte gUnknown_80D5224
-    .4byte gUnknown_80D51DC
-    .4byte gUnknown_80D5184
-    .4byte gUnknown_80D5158
-    .4byte gUnknown_80D4FC8
-    .4byte gUnknown_80D4F94
-    .4byte gUnknown_80D4F74
-    .4byte gUnknown_80D4F24
-    .4byte gUnknown_80D4F08
-    .4byte gUnknown_80D4EDC
-    .4byte gUnknown_80D4EB0
-    .4byte gUnknown_80D4E84
-    .4byte gUnknown_80D4E28
-    .4byte gUnknown_80D4D8C
-    .4byte gUnknown_80D4D44
-    .4byte gUnknown_80D4D20
-    .4byte gUnknown_80D4CC0
-    .4byte gUnknown_80D4C50
-    .4byte gUnknown_80D4C14
-    .4byte gUnknown_80D4A58
-
-    .global gUnknown_80D4A58
-gUnknown_80D4A58:
-    .string " Sssnore...\n"
-    .string "Ah{COMMA} you wish to know how the bank\n"
-    .string "operates... Very well...{EXTRA_MSG}"
-    .string " Zzz...\n"
-    .string "If you{APOSTROPHE}re defeated in a dungeon{COMMA}\n"
-    .string "you{APOSTROPHE}ll lose all your money. Did you know?{EXTRA_MSG}"
-    .string " Purr...\n"
-    .string "But{COMMA} you{APOSTROPHE}ve nothing to fear if you leave\n"
-    .string "your money with Felicity Bank...{EXTRA_MSG}"
-    .string " Meow... Even if you\n"
-    .string "return defeated from a dungeon{COMMA} your\n"
-    .string "money will be safe with me...{EXTRA_MSG}"
-    .string " Sssnore...\n"
-    .string "I assure you{COMMA} my bank will keep your\n"
-    .string "money safe...{EXTRA_MSG}"
-    .string " Zzz...\n"
-    .string "Simple{COMMA} isn{APOSTROPHE}t it...?\0"
-    .align 2, 0
-
-    .global gUnknown_80D4C14
-gUnknown_80D4C14:
-    .string " {POKE}... Purr...\n"
-    .string "Very well{COMMA} {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
-    .string "Here you are.\0"
-    .align 2, 0
-
-    .global gUnknown_80D4C50
-gUnknown_80D4C50:
-    .string " Fnarf? Hunh...?{EXTRA_MSG}"
-    .string " Purr... I so do apologize{COMMA}\n"
-    .string "but you couldn{APOSTROPHE}t possibly carry any more\n"
-    .string "money with you...\0"
-    .align 2, 0
-
-    .global gUnknown_80D4CC0
-gUnknown_80D4CC0:
-    .string " Fnarf? Meow...?{EXTRA_MSG}"
-    .string " Purr...\n"
-    .string "I so hate to disappoint{COMMA} but you have no\n"
-    .string "money saved with me...\0"
-    .align 2, 0
-
-    .global gUnknown_80D4D20
-gUnknown_80D4D20:
-    .string " Zzz...\n"
-    .string "How much will you withdraw?\0"
-    .align 2, 0
-
-    .global gUnknown_80D4D44
-gUnknown_80D4D44:
-    .string " Zzz...\n"
-    .string "{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}... Very well...{WAIT_PRESS}\n"
-    .string "I will guard it jealously...\0"
-    .align 2, 0
-
-    .global gUnknown_80D4D8C
-gUnknown_80D4D8C:
-    .string " Fnarf? Purr...\n"
-    .string "Meow! All this money...{WAIT_PRESS}\n"
-    .string "Our safe is about to burst...{EXTRA_MSG}"
-    .string " Purr...\n"
-    .string "I am so sorry to say{COMMA} but I can{APOSTROPHE}t accept\n"
-    .string "any more of your money...\0"
-    .align 2, 0
-
-    .global gUnknown_80D4E28
-gUnknown_80D4E28:
-    .string " Sssnore... Hmm?{EXTRA_MSG}"
-    .string " Zzz...\n"
-    .string "I{APOSTROPHE}m so sorry to say{COMMA} but you appear not\n"
-    .string "to have any money...\0"
-    .align 2, 0
-
-    .global gUnknown_80D4E84
-gUnknown_80D4E84:
-    .string " Purr...\n"
-    .string "How much do you wish to deposit?\0"
-    .align 2, 0
-
-    .global gUnknown_80D4EB0
-gUnknown_80D4EB0:
-    .string " Zzz... Meow...\n"
-    .string "I await your next visit...\0"
-    .align 2, 0
-
-    .global gUnknown_80D4EDC
-gUnknown_80D4EDC:
-    .string " Zzz... Purr...\n"
-    .string "I await your next visit...\0"
-    .align 2, 0
-
-    .global gUnknown_80D4F08
-gUnknown_80D4F08:
-    .string " Sssnore...\n"
-    .string "Very well...\0"
-    .align 2, 0
-
-    .global gUnknown_80D4F24
-gUnknown_80D4F24:
-    .string " Sssnore... Purr...\n"
-    .string "Your account contains {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}...\n"
-    .string "How may I serve you?\0"
-    .align 2, 0
-
-    .global gUnknown_80D4F74
-gUnknown_80D4F74:
-    .string " Zzz...\n"
-    .string "How may I serve you?\0"
-    .align 2, 0
-
-    .global gUnknown_80D4F94
-gUnknown_80D4F94:
-    .string " Ssssnore... Welcome...\n"
-    .string "This is Felicity Bank...\0"
-    .align 2, 0
-
-    .global gUnknown_80D4FC8
-gUnknown_80D4FC8:
-    .string " Ah{COMMA} you wish to know how\n"
-    .string "the bank operates. Very well.{EXTRA_MSG}"
-    .string " If you are defeated\n"
-    .string "in a dungeon{COMMA} you{APOSTROPHE}ll lose all your money.\n"
-    .string "Did you know that?{EXTRA_MSG}"
-    .string " But you can avoid that!{WAIT_PRESS}\n"
-    .string "You{APOSTROPHE}ve nothing to fear if you leave your\n"
-    .string "money with Felicity Bank.{EXTRA_MSG}"
-    .string " Even if you return\n"
-    .string "defeated from a dungeon{COMMA} your money will\n"
-    .string "be safe with me!{EXTRA_MSG}"
-    .string " I assure you{COMMA} my bank\n"
-    .string "will keep your money safe.{EXTRA_MSG}"
-    .string " Simple{COMMA} isn{APOSTROPHE}t it?\0"
-    .align 2, 0
-
-    .global gUnknown_80D5158
-gUnknown_80D5158:
-    .string " Very well{COMMA} {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
-    .string "Here you are.\0"
-    .align 2, 0
-
-    .global gUnknown_80D5184
-gUnknown_80D5184:
-    .string " Oh?{WAIT_PRESS} I do so apologize{COMMA}\n"
-    .string "but you couldn{APOSTROPHE}t possibly carry any more\n"
-    .string "money with you.\0"
-    .align 2, 0
-
-    .global gUnknown_80D51DC
-gUnknown_80D51DC:
-    .string " Oh?{WAIT_PRESS} I so hate to disappoint{COMMA}\n"
-    .string "but you have no money saved with me.\0"
-    .align 2, 0
-
-    .global gUnknown_80D5224
-gUnknown_80D5224:
-    .string " How much will you\n"
-    .string "withdraw?\0"
-    .align 2, 0
-
-    .global gUnknown_80D5244
-gUnknown_80D5244:
-    .string " {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}. Very well.{WAIT_PRESS}\n"
-    .string "I will guard it jealously.\0"
-    .align 2, 0
-
-    .global gUnknown_80D527C
-gUnknown_80D527C:
-    .string " Meow! All this money!{WAIT_PRESS}\n"
-    .string "Our safe is about to burst!{EXTRA_MSG}"
-    .string " I am so sorry to say{COMMA} but\n"
-    .string "I can{APOSTROPHE}t accept any more of your money!\0"
-    .align 2, 0
-
-    .global gUnknown_80D52F8
-gUnknown_80D52F8:
-    .string " Oh?{WAIT_PRESS} I{APOSTROPHE}m so sorry to say{COMMA}\n"
-    .string "but you appear not to have any money.\0"
-    .align 2, 0
-
-    .global gUnknown_80D5340
-gUnknown_80D5340:
-    .string " How much do you wish to\n"
-    .string "deposit?\0"
-    .align 2, 0
-
-    .global gUnknown_80D5364
-gUnknown_80D5364:
-    .string " I await your next visit.\0"
-    .align 2, 0
-
-    .global gUnknown_80D5380
-gUnknown_80D5380:
-    .string " Very well.\0"
-    .align 2, 0
-
-    .global gUnknown_80D538C
-gUnknown_80D538C:
-    .string " Your account contains\n"
-    .string "{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
-    .string "How may I serve you?\0"
-    .align 2, 0
-
-    .global gUnknown_80D53C8
-gUnknown_80D53C8:
-    .string " How may I serve you?\0"
-    .align 2, 0
-
-    .global gUnknown_80D53E0
-gUnknown_80D53E0:
-    .string " Welcome.\n"
-    .string "This is Felicity Bank.\0"
-    .align 2, 0
-
 	.global gCommonKangaskhanStorage
 gCommonKangaskhanStorage: @ 80D5404
     .4byte gUnknown_80D5E9C
@@ -749,14 +501,14 @@ gUnknown_80D6364:
 gUnknown_80D6394:
     .string " Zzz... Reep{COMMA} what...?\n"
     .string "For all that I can buy{COMMA} I will pay\n"
-    .string "{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}... OK?\0"
+    .string "{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}... OK?\0"
     .align 2, 0
 
     .global gUnknown_80D63E8
 gUnknown_80D63E8:
     .string " Zzzzzz... Zzzzzz...?\n"
     .string "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}?\n"
-    .string "Is {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE} OK?\0"
+    .string "Is {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE} OK?\0"
     .align 2, 0
 
     .global gUnknown_80D6420
@@ -780,7 +532,7 @@ gUnknown_80D6478:
     .global gUnknown_80D6494
 gUnknown_80D6494:
     .string " Zzzzzz...\n"
-    .string "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} is {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}...\n"
+    .string "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} is {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}...\n"
     .string "OK?\0"
     .align 2, 0
 
@@ -922,14 +674,14 @@ gUnknown_80D6B18:
     .global gUnknown_80D6B50
 gUnknown_80D6B50:
     .string " For all that I can buy{COMMA} I can\n"
-    .string "offer you {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
+    .string "offer you {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that acceptable?\0"
     .align 2, 0
 
     .global gUnknown_80D6BA0
 gUnknown_80D6BA0:
     .string " {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}{COMMA} you say?\n"
-    .string "For that{COMMA} I can offer {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
+    .string "For that{COMMA} I can offer {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that acceptable?\0"
     .align 2, 0
 
@@ -948,7 +700,7 @@ gUnknown_80D6C1C:
     .global gUnknown_80D6C48
 gUnknown_80D6C48:
     .string " {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}{COMMA} you say?\n"
-    .string "That will be {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
+    .string "That will be {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that acceptable?\0"
     .align 2, 0
 
@@ -1070,7 +822,7 @@ gUnknown_80D7090:
     .global gUnknown_80D70B4
 gUnknown_80D70B4:
     .string " Zzzzzz... Zzzzzz...?\n"
-    .string "I can pay you {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}\n"
+    .string "I can pay you {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}\n"
     .string "for everything I can buy... OK?\0"
     .align 2, 0
 
@@ -1078,7 +830,7 @@ gUnknown_80D70B4:
 gUnknown_80D7108:
     .string " Zzzzzz... Zzzzzz...?\n"
     .string "Selling that {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}...?\n"
-    .string "How about {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}?\0"
+    .string "How about {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}?\0"
     .align 2, 0
 
     .global gUnknown_80D7154
@@ -1103,7 +855,7 @@ gUnknown_80D71B0:
 gUnknown_80D71CC:
     .string " Zzz... Meep meep...\n"
     .string "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}...?\n"
-    .string "{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}{COMMA} OK?\0"
+    .string "{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}{COMMA} OK?\0"
     .align 2, 0
 
     .global gUnknown_80D7204
@@ -1234,14 +986,14 @@ gUnknown_80D7740:
     .global gUnknown_80D776C
 gUnknown_80D776C:
     .string " For everything I can buy{COMMA}\n"
-    .string "I can offer {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
+    .string "I can offer {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that acceptable to you?\0"
     .align 2, 0
 
     .global gUnknown_80D77C0
 gUnknown_80D77C0:
     .string " {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}?\n"
-    .string "I can offer you {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
+    .string "I can offer you {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Will you sell it for that price?\0"
     .align 2, 0
 
@@ -1266,7 +1018,7 @@ gUnknown_80D785C:
     .global gUnknown_80D788C
 gUnknown_80D788C:
     .string " {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}?\n"
-    .string "That will be {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
+    .string "That will be {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that to your liking?\0"
     .align 2, 0
 
@@ -1466,7 +1218,7 @@ gUnknown_80D7F7C:
     .global gUnknown_80D8000
 gUnknown_80D8000:
     .string " Kwoo? {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}?\n"
-    .string "That{APOSTROPHE}s {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}...\n"
+    .string "That{APOSTROPHE}s {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}...\n"
     .string "OK?\0"
     .align 2, 0
 
@@ -1617,7 +1369,7 @@ gUnknown_80D86E4:
     .global gUnknown_80D8738
 gUnknown_80D8738:
     .string " {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}?\n"
-    .string "That will be {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.\n"
+    .string "That will be {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
     .string "Is that OK?\0"
     .align 2, 0
 

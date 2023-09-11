@@ -22,7 +22,7 @@ extern u16 gGummiStatBoostLUT[];
 extern u8 gUnknown_202DE58[];
 extern u32 gUnknown_202DE30;
 extern u8* gPtrTypeText;  // ptr to "Type\0"
-extern u8* gPtrPPD0Text;  // ptr to "PP $d0 \0"
+extern u8* gPtrPPD0Text;  // ptr to "PP {ARG_VALUE_0} \0"
 extern u32 gUnknown_810A3F0[100];
 extern u32 gUnknown_81097E8[4];  // some sort of lookup table (16, 18, 20, 22)
 extern u32 gUnknown_81097F8[4];  // some sort of lookup table (17, 19, 21, 23)

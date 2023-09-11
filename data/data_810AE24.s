@@ -250,32 +250,32 @@ AllFriendAreas_810B2A4:
 
 .global NumFloorsExplored_810B2C4
 NumFloorsExplored_810B2C4:
-.string "$d0 floors were explored.\0"
+.string "{ARG_VALUE_0} floors were explored.\0"
 .align 2,0
 
 .global NumThievingAttempts_810B2E0
 NumThievingAttempts_810B2E0:
-.string "$d0 thieving attempts succeeded.\0"
+.string "{ARG_VALUE_0} thieving attempts succeeded.\0"
 .align 2,0
 
 .global NumPokemonJoined_810B304
 NumPokemonJoined_810B304:
-.string "$d0 Pokémon joined the team.\0"
+.string "{ARG_VALUE_0} Pokémon joined the team.\0"
 .align 2,0
 
 .global NumPokemonEvolved_810B324
 NumPokemonEvolved_810B324:
-.string "$d0 Pokémon evolved.\0"
+.string "{ARG_VALUE_0} Pokémon evolved.\0"
 .align 2,0
 
 .global NumFriendRescues_810B33C
 NumFriendRescues_810B33C:
-.string "$d0 Friend Rescues were successful.\0"
+.string "{ARG_VALUE_0} Friend Rescues were successful.\0"
 .align 2,0
 
 .global NumMoves_810B360
 NumMoves_810B360:
-.string "$d0 moves were learned.\0"
+.string "{ARG_VALUE_0} moves were learned.\0"
 .align 2,0
 
 .global SpottedMunchlax_810B378
@@ -2461,7 +2461,7 @@ gIQSkill810DD68_Ptr: @ 810DD68
 
         .global Level_810DD6C
         Level_810DD6C:
-        .string "Level: #>82.$d0 \0"
+        .string "Level: #>82.{ARG_VALUE_0} \0"
         .align 2,0
 
 	.global gLevel810DD6C_Ptr
@@ -2470,7 +2470,7 @@ gLevel810DD6C_Ptr: @ 810DD80
 
         .global ExpPts_810DD84
         ExpPts_810DD84:
-        .string "Exp. Pts.: #>82.$d1 \0"
+        .string "Exp. Pts.: #>82.{ARG_VALUE_1} \0"
         .align 2,0
 
 	.global gExpPts810DD9C_Ptr
@@ -2479,7 +2479,7 @@ gExpPts810DD9C_Ptr: @ 810DD9C
 
         .global ToNextLevel_810DDA0
         ToNextLevel_810DDA0:
-        .string "To next level:#>82.$d0\0"
+        .string "To next level:#>82.{ARG_VALUE_0}\0"
         .align 2,0
 
 	.global gUnknown_810DDB8
@@ -5129,7 +5129,7 @@ gUnknown_8113870: @ 8113870
 
         .global Level_8113874
         Level_8113874:
-        .string "Level #>42.$d1#>64.Exp. Pts. $d0 \0"
+        .string "Level #>42.{ARG_VALUE_1}#>64.Exp. Pts. {ARG_VALUE_0} \0"
         .align 2,0
 
 	.global gUnknown_8113898
@@ -5138,7 +5138,7 @@ gUnknown_8113898: @ 8113898
 
         .global Level_811389C
         Level_811389C:
-        .string "Level #>35.$d1#>64.Exp. Pts.$d0 \0"
+        .string "Level #>35.{ARG_VALUE_1}#>64.Exp. Pts.{ARG_VALUE_0} \0"
         .align 2,0
 
 	.global gUnknown_81138C0
@@ -5147,7 +5147,7 @@ gUnknown_81138C0: @ 81138C0
 
         .global HP_81138C4
         HP_81138C4:
-        .string "HP#>42.$d0 \0"
+        .string "HP#>42.{ARG_VALUE_0} \0"
         .align 2,0
 
 	.global gUnknown_81138D0
@@ -5156,7 +5156,7 @@ gUnknown_81138D0: @ 81138D0
 
         .global Attack_81138D4
         Attack_81138D4:
-        .string "Attack#>42.$d0 \0"
+        .string "Attack#>42.{ARG_VALUE_0} \0"
         .align 2,0
 
 	.global gUnknown_81138E4
@@ -5165,7 +5165,7 @@ gUnknown_81138E4: @ 81138E4
 
         .global Defense_81138E8
         Defense_81138E8:
-        .string "#>80.Defense#>128.$d1 \0"
+        .string "#>80.Defense#>128.{ARG_VALUE_1} \0"
         .align 2,0
 
 	.global gUnknown_8113900
@@ -5174,7 +5174,7 @@ gUnknown_8113900: @ 8113900
 
         .global SpAtk_8113904
         SpAtk_8113904:
-        .string "Sp. Atk.#>42.$d0 \0"
+        .string "Sp. Atk.#>42.{ARG_VALUE_0} \0"
         .align 2,0
 
 	.global gUnknown_8113918
@@ -5183,7 +5183,7 @@ gUnknown_8113918: @ 8113918
 
         .global SpDef_811391C
         SpDef_811391C:
-        .string "#>80.Sp. Def.#>128.$d1 \0"
+        .string "#>80.Sp. Def.#>128.{ARG_VALUE_1} \0"
         .align 2,0
 
 	.global gUnknown_8113934
@@ -5192,7 +5192,7 @@ gUnknown_8113934: @ 8113934
 
         .global Attack_8113938
         Attack_8113938:
-        .string "Attack#>42.{COLOR_2 RED}$d0{END_COLOR_TEXT_2}  \0"
+        .string "Attack#>42.{COLOR_2 RED}{ARG_VALUE_0}{END_COLOR_TEXT_2}  \0"
         .align 2,0
 
 	.global gUnknown_8113950
@@ -5201,7 +5201,7 @@ gUnknown_8113950: @ 8113950
 
         .global Defense_8113954
         Defense_8113954:
-        .string "#>80.Defense#>128.{COLOR_2 RED}$d1{END_COLOR_TEXT_2}  \0"
+        .string "#>80.Defense#>128.{COLOR_2 RED}{ARG_VALUE_1}{END_COLOR_TEXT_2}  \0"
         .align 2,0
 
 	.global gUnknown_8113974
@@ -5210,7 +5210,7 @@ gUnknown_8113974: @ 8113974
 
         .global SpAtk_8113978
         SpAtk_8113978:
-        .string "Sp. Atk.#>42.{COLOR_2 RED}$d0{END_COLOR_TEXT_2}  \0"
+        .string "Sp. Atk.#>42.{COLOR_2 RED}{ARG_VALUE_0}{END_COLOR_TEXT_2}  \0"
         .align 2,0
 
 	.global gUnknown_8113990
@@ -5219,7 +5219,7 @@ gUnknown_8113990: @ 8113990
 
         .global SpDef_8113994
         SpDef_8113994:
-        .string "#>80.Sp. Def.#>128.{COLOR_2 RED}$d1{END_COLOR_TEXT_2}  \0"
+        .string "#>80.Sp. Def.#>128.{COLOR_2 RED}{ARG_VALUE_1}{END_COLOR_TEXT_2}  \0"
         .align 2,0
 
 	.global gUnknown_81139B4
@@ -6276,7 +6276,7 @@ gUnknown_8115960:
 
         .global PPD0Text
 PPD0Text:
-        .string "PP $d0 \0"
+        .string "PP {ARG_VALUE_0} \0"
 
 	.global gPtrPPD0Text
 gPtrPPD0Text: @ 8115970
@@ -6305,9 +6305,9 @@ gUnknown_8115A2C: @ 8115A2C
 
         .global ItemLimitText_8105A30
         ItemLimitText_8105A30:
-        .string "Only $d0 items may be brought into\n"
+        .string "Only {ARG_VALUE_0} items may be brought into\n"
         .string "this dungeon.\n"
-        .string "Please put away $d1 item(s).\0"
+        .string "Please put away {ARG_VALUE_1} item(s).\0"
         .align 2,0
 
 	.global gUnknown_8115A80
@@ -6316,9 +6316,9 @@ gUnknown_8115A80: @ 8115A80
 
         .global ItemLimitAlsoText_8105A84
         ItemLimitAlsoText_8105A84:
-        .string "Also{COMMA} only $d0 items may be brought\n"
+        .string "Also{COMMA} only {ARG_VALUE_0} items may be brought\n"
         .string "into this dungeon.\n"
-        .string "Please put away $d1 item(s).\0"
+        .string "Please put away {ARG_VALUE_1} item(s).\0"
         .align 2,0
 
 	.global gUnknown_8115ADC

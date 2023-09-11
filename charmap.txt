@@ -1,3 +1,5 @@
+'\0' = 00
+'\n' = 0A
 ' ' = 20
 '!' = 21
 '"' = 22
@@ -250,9 +252,6 @@ SELECT_BUTTON = 87 72 87 73
 START_BUTTON = 87 53 87 71
 DPAD = 87 52
 
-'\0' = 00
-'\n' = 0A
-
 @ Character codes escaped with a '~'.
 APOSTROPHE = 7E 32 37 @ ~27
 COMMA = 7E 32 63 @ ~2c
@@ -260,6 +259,11 @@ QUOTE_START = 7E 39 33 @ ~93
 QUOTE_END = 7E 39 34 @ ~94
 
 @ Placeholders for message arguments to swap out for names within strings.
+ARG_FRIEND_AREA = 24 68 @ $h
+ARG_MOVE_ITEM_0 = 24 69 30 @ $i0
+ARG_MOVE_ITEM_1 = 24 69 31 @ $i1
+ARG_VALUE_0 = 24 64 30 @ $d0
+ARG_VALUE_1 = 24 64 31 @ $d1
 ARG_POKEMON_0 = 24 6D 30 @ $m0
 ARG_POKEMON_1 = 24 6D 31 @ $m1
 ARG_POKEMON_2 = 24 6D 32 @ $m2
@@ -269,9 +273,6 @@ ARG_POKEMON_5 = 24 6D 35 @ $m5
 ARG_POKEMON_6 = 24 6D 36 @ $m6
 ARG_POKEMON_7 = 24 6D 37 @ $m7
 ARG_POKEMON_8 = 24 6D 38 @ $m8
-ARG_MOVE_ITEM_0 = 24 69 30 @ $i0
-ARG_MOVE_ITEM_1 = 24 69 31 @ $i1
-ARG_FRIEND_AREA = 24 68 @ $h
 
 @ TEXT MACROS
 @
