@@ -46,35 +46,35 @@ bool8 MakuhitaDojo_New(u32 mode)
     sMakuhitaDojoWork1->mode = mode;
 
     switch (mode) {
-        case MAKUHITA_DOJO_MODE_UNK0_AWAKE:
+        case MAKUHITA_DOJO_INIT_MODE_UNK0_AWAKE:
             initialState = 0;
             sMakuhitaDojoWork1->isAsleep = FALSE;
             break;
-        case MAKUHITA_DOJO_MODE_UNK1_AWAKE:
+        case MAKUHITA_DOJO_INIT_MODE_UNK1_AWAKE:
             initialState = 7;
             sMakuhitaDojoWork1->isAsleep = FALSE;
             break;
-        case MAKUHITA_DOJO_MODE_UNK2_AWAKE:
+        case MAKUHITA_DOJO_INIT_MODE_UNK2_AWAKE:
             initialState = 6;
             sMakuhitaDojoWork1->isAsleep = FALSE;
             break;
-        case MAKUHITA_DOJO_MODE_UNK3_AWAKE:
+        case MAKUHITA_DOJO_INIT_MODE_UNK3_AWAKE:
             initialState = 8;
             sMakuhitaDojoWork1->isAsleep = FALSE;
             break;
-        case MAKUHITA_DOJO_MODE_UNK4_ASLEEP:
+        case MAKUHITA_DOJO_INIT_MODE_UNK4_ASLEEP:
             initialState = 0;
             sMakuhitaDojoWork1->isAsleep = TRUE;
             break;
-        case MAKUHITA_DOJO_MODE_UNK5_ASLEEP:
+        case MAKUHITA_DOJO_INIT_MODE_UNK5_ASLEEP:
             initialState = 7;
             sMakuhitaDojoWork1->isAsleep = TRUE;
             break;
-        case MAKUHITA_DOJO_MODE_UNK6_ASLEEP:
+        case MAKUHITA_DOJO_INIT_MODE_UNK6_ASLEEP:
             initialState = 6;
             sMakuhitaDojoWork1->isAsleep = TRUE;
             break;
-        case MAKUHITA_DOJO_MODE_UNK7_ASLEEP:
+        case MAKUHITA_DOJO_INIT_MODE_UNK7_ASLEEP:
         default:
             initialState = 8;
             sMakuhitaDojoWork1->isAsleep = TRUE;

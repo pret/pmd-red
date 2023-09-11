@@ -1,20 +1,20 @@
 ALIGNED(4) static const u8 sFill[] = _("pksdir0");
 
 static const UnkTextStruct2 sUnknown_80E653C = {
-   0, 0, 0, 0,
-   3,
-   0, 0,
-   0, 0,
-   0, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    0, 0,
+    0, 0,
+    0, 0,
+    NULL
 };
 const UnkTextStruct2 sUnknown_80E6554 = { // TODO: MAKE STATIC WHEN other_menus1.s IS DED
-   0, 0, 0, 0,
-   3,
-   3, 8,
-   24, 5,
-   5, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    3, 8,
+    24, 5,
+    5, 0,
+    NULL
 };
 
 static const u8 sUnknown_80E65C4[];
@@ -25,7 +25,6 @@ const MenuItem sUnknown_80E656C[4] = { // TODO: MAKE STATIC WHEN other_menus1.s 
     {sUnknown_80E65AC, 5},
     {sUnknown_80E658C, 5},
     {NULL, 3},
-
 };
 ALIGNED(4) static const u8 sUnknown_80E658C[] = _("{CENTER_ALIGN}Don{APOSTROPHE}t turn the power off!");
 ALIGNED(4) static const u8 sUnknown_80E65AC[] = _("{CENTER_ALIGN}Item transmitting!");
@@ -37,7 +36,6 @@ const MenuItem sUnknown_80E65D8[4] = { // TODO: MAKE STATIC WHEN other_menus1.s 
     {sUnknown_80E65F8, 5},
     {sUnknown_80E658C, 5},
     {NULL, 3},
-
 };
 ALIGNED(4) static const u8 sUnknown_80E65F8[] = _("{CENTER_ALIGN}Thank-You Mail in transmission!");
 
@@ -47,7 +45,6 @@ const MenuItem sUnknown_80E661C[4] = { // TODO: MAKE STATIC WHEN other_menus1.s 
     {sUnknown_80E663C, 5},
     {sUnknown_80E658C, 5},
     {NULL, 3},
-
 };
 ALIGNED(4) static const u8 sUnknown_80E663C[] = _("{CENTER_ALIGN}A-OK Mail in transmission!");
 
@@ -64,17 +61,16 @@ const MenuItem sUnknown_80E667C[4] = { // TODO: MAKE STATIC WHEN other_menus1.s 
     {sUnknown_80E669C, 5},
     {sUnknown_80E658C, 5},
     {NULL, 3},
-
 };
 ALIGNED(4) static const u8 sUnknown_80E669C[] = _("{CENTER_ALIGN}Wonder Mail in transmission!");
 
 static const UnkTextStruct2 sUnknown_80E66BC = {
-   0, 0, 0, 0,
-   3,
-   3, 8,
-   24, 5,
-   5, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    3, 8,
+    24, 5,
+    5, 0,
+    NULL
 };
 
 static const u8 sUnknown_80E6734[];
@@ -91,12 +87,12 @@ ALIGNED(4) static const u8 sUnknown_80E6710[] = _("{CENTER_ALIGN}Your adventure 
 ALIGNED(4) static const u8 sUnknown_80E6734[] = _("{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE}Success!{END_COLOR_TEXT_1} ");
 
 static const UnkTextStruct2 sUnknown_80E6748 = {
-   0, 0, 0, 0,
-   3,
-   3, 8,
-   24, 5,
-   5, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    3, 8,
+    24, 5,
+    5, 0,
+    NULL
 };
 
 static const u8 sUnknown_80E6780[];
@@ -113,12 +109,12 @@ ALIGNED(4) static const u8 sUnknown_80E6794[] = _("{CENTER_ALIGN}Check the Game 
 ALIGNED(4) static const u8 sUnknown_80E67B4[] = _("{CENTER_ALIGN}#C2Communication error!{END_COLOR_TEXT_1} ");
 
 static const UnkTextStruct2 sUnknown_80E67D4 = {
-   0, 0, 0, 0,
-   3,
-   3, 8,
-   24, 5,
-   5, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    3, 8,
+    24, 5,
+    5, 0,
+    NULL
 };
 
 static const u8 sUnknown_80E680C[];
@@ -131,12 +127,12 @@ static const MenuItem sUnknown_80E67EC[4] = {
 ALIGNED(4) static const u8 sUnknown_80E680C[] = _("{CENTER_ALIGN}Check your communication mode and");
 
 static const UnkTextStruct2 sUnknown_80E6830 = {
-   0, 0, 0, 0,
-   3,
-   3, 8,
-   24, 5,
-   5, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    3, 8,
+    24, 5,
+    5, 0,
+    NULL
 };
 
 static const u8 sUnknown_80E6888[];
@@ -151,12 +147,12 @@ ALIGNED(4) static const u8 sUnknown_80E6868[] = _("{CENTER_ALIGN}Please inform t
 ALIGNED(4) static const u8 sUnknown_80E6888[] = _("{CENTER_ALIGN}Check sum error.");
 
 static const UnkTextStruct2 sUnknown_80E689C = {
-   0, 0, 0, 0,
-   3,
-   3, 8,
-   24, 5,
-   5, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    3, 8,
+    24, 5,
+    5, 0,
+    NULL
 };
 
 static const u8 sUnknown_80E6928[];
@@ -173,12 +169,12 @@ ALIGNED(4) static const u8 sUnknown_80E68FC[] = _("{CENTER_ALIGN}An item could n
 ALIGNED(4) static const u8 sUnknown_80E6928[] = _("{CENTER_ALIGN}#C2Error!{END_COLOR_TEXT_1} ");
 
 static const UnkTextStruct2 sUnknown_80E6938 = {
-   0, 0, 0, 0,
-   3,
-   3, 8,
-   24, 5,
-   5, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    3, 8,
+    24, 5,
+    5, 0,
+    NULL
 };
 
 static const u8 sUnknown_80E6988[];
@@ -193,12 +189,12 @@ ALIGNED(4) static const u8 sUnknown_80E6970[] = _("{CENTER_ALIGN}Please check ag
 ALIGNED(4) static const u8 sUnknown_80E6988[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} can{APOSTROPHE}t be used.");
 
 static const UnkTextStruct2 sUnknown_80E69B0 = {
-   0, 0, 0, 0,
-   3,
-   3, 8,
-   24, 5,
-   5, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    3, 8,
+    24, 5,
+    5, 0,
+    NULL
 };
 
 static const u8 sUnknown_80E69E8[];
@@ -211,12 +207,12 @@ static const MenuItem sUnknown_80E69C8[4] = {
 ALIGNED(4) static const u8 sUnknown_80E69E8[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} can{APOSTROPHE}t be used.");
 
 static const UnkTextStruct2 sUnknown_80E6A10 = {
-   0, 0, 0, 0,
-   3,
-   3, 8,
-   24, 5,
-   5, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    3, 8,
+    24, 5,
+    5, 0,
+    NULL
 };
 
 static const u8 sUnknown_80E6A48[];
@@ -229,12 +225,12 @@ static const MenuItem sUnknown_80E6A28[4] = {
 ALIGNED(4) static const u8 sUnknown_80E6A48[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} can{APOSTROPHE}t be used.");
 
 static const UnkTextStruct2 sUnknown_80E6A74 = {
-   0, 0, 0, 0,
-   3,
-   3, 8,
-   24, 5,
-   5, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    3, 8,
+    24, 5,
+    5, 0,
+    NULL
 };
 
 static const u8 sUnknown_80E6AC8[];
@@ -249,12 +245,12 @@ ALIGNED(4) static const u8 sUnknown_80E6AAC[] = _("{CENTER_ALIGN}It can{APOSTROP
 ALIGNED(4) static const u8 sUnknown_80E6AC8[] = _("{CENTER_ALIGN}There is no space for new mail.");
 
 UNUSED static const UnkTextStruct2 sUnknown_80E6AEC = {
-   0, 0, 0, 0,
-   3,
-   3, 8,
-   24, 5,
-   5, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    3, 8,
+    24, 5,
+    5, 0,
+    NULL
 };
 
 static const u8 sUnknown_80E6B4C[];
@@ -269,12 +265,12 @@ ALIGNED(4) static const u8 sUnknown_80E6B24[] = _("{CENTER_ALIGN}You need to go 
 ALIGNED(4) static const u8 sUnknown_80E6B4C[] = _("{CENTER_ALIGN}You may not go to that {COLOR_1 LIGHT_BLUE}dungeon{END_COLOR_TEXT_1} yet.");
 
 static const UnkTextStruct2 sUnknown_80E6B78 = {
-   0, 0, 0, 0,
-   3,
-   3, 8,
-   24, 5,
-   5, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    3, 8,
+    24, 5,
+    5, 0,
+    NULL
 };
 
 static const u8 sUnknown_80E6BC4[];
@@ -289,12 +285,12 @@ ALIGNED(4) static const u8 sUnknown_80E6BB0[] = _("{CENTER_ALIGN}Please try agai
 ALIGNED(4) static const u8 sUnknown_80E6BC4[] = _("{CENTER_ALIGN}There was a problem on your friend{APOSTROPHE}s end.");
 
 static const UnkTextStruct2 sUnknown_80E6BF4 = {
-   0, 0, 0, 0,
-   3,
-   3, 8,
-   24, 5,
-   5, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    3, 8,
+    24, 5,
+    5, 0,
+    NULL
 };
 
 static const u8 sUnknown_80E6C2C[];
@@ -307,12 +303,12 @@ static const MenuItem sUnknown_80E6C0C[4] = {
 ALIGNED(4) static const u8 sUnknown_80E6C2C[] = _("{CENTER_ALIGN}Your friend is not responding.");
 
 static const UnkTextStruct2 sUnknown_80E6C50 = {
-   0, 0, 0, 0,
-   3,
-   3, 8,
-   24, 5,
-   5, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    3, 8,
+    24, 5,
+    5, 0,
+    NULL
 };
 
 static const u8 sUnknown_80E6CA8[];
@@ -327,12 +323,12 @@ ALIGNED(4) static const u8 sUnknown_80E6C88[] = _("{CENTER_ALIGN}went through su
 ALIGNED(4) static const u8 sUnknown_80E6CA8[] = _("{CENTER_ALIGN}The item exchange with your friend");
 
 static const UnkTextStruct2 sUnknown_80E6CD0 = {
-   0, 0, 0, 0,
-   3,
-   3, 8,
-   24, 5,
-   5, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    3, 8,
+    24, 5,
+    5, 0,
+    NULL
 };
 
 static const u8 sUnknown_80E6D2C[];
@@ -347,12 +343,12 @@ ALIGNED(4) static const u8 sUnknown_80E6D08[] = _("{CENTER_ALIGN}you and your fr
 ALIGNED(4) static const u8 sUnknown_80E6D2C[] = _("{CENTER_ALIGN}Please communicate only after both");
 
 static const UnkTextStruct2 sUnknown_80E6D54 = {
-   0, 0, 0, 0,
-   3,
-   3, 8,
-   24, 5,
-   5, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    3, 8,
+    24, 5,
+    5, 0,
+    NULL
 };
 
 static const u8 sUnknown_80E6DB0[];
@@ -367,12 +363,12 @@ ALIGNED(4) static const u8 sUnknown_80E6D8C[] = _("{CENTER_ALIGN}connected. Plea
 ALIGNED(4) static const u8 sUnknown_80E6DB0[] = _("{CENTER_ALIGN}An incorrect number of GBA systems are");
 
 static const UnkTextStruct2 sUnknown_80E6DDC = {
-   0, 0, 0, 0,
-   3,
-   3, 8,
-   24, 5,
-   5, 0,
-   NULL
+    0, 0, 0, 0,
+    3,
+    3, 8,
+    24, 5,
+    5, 0,
+    NULL
 };
 
 static const u8 sUnknown_80E6E30[];

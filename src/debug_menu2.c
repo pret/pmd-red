@@ -9,7 +9,7 @@
 #include "text1.h"
 #include "text2.h"
 
-EWRAM_DATA_2 static struct unkStruct_203B3F0 *sUnknown_203B3F0 = {0};
+static EWRAM_DATA_2 struct unkStruct_203B3F0 *sUnknown_203B3F0 = {0};
 
 static const UnkTextStruct2 sUnknown_80E7E34 =
 {

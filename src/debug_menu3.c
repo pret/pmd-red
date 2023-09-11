@@ -11,7 +11,7 @@
 #include "text1.h"
 #include "text2.h"
 
-EWRAM_DATA_2 static unkStruct_203B3F4 *sUnknown_203B3F4 = {0};
+static EWRAM_DATA_2 unkStruct_203B3F4 *sUnknown_203B3F4 = {0};
 
 static const UnkTextStruct2 sUnknown_80E7E8C =
 {
