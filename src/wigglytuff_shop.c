@@ -101,7 +101,6 @@ extern const UnkTextStruct2 gUnknown_80DC564;
 
 u8 sub_8021700(u32);
 void sub_8092578(u8 *buffer, u8 index, u8 r2);
-extern void DrawTeamMoneyBox(u32);
 extern void sub_803AA34();
 extern u8 sub_803ABC8(void);
 extern u8 sub_802132C(void);

@@ -403,6 +403,7 @@ SECTIONS {
         data/data_80D47B8.o(.rodata);
         data/common_strings.o(.rodata);
         data/data_80DAF70.o(.rodata);
+        src/felicity_bank.o(.rodata);
         src/kangaskhan_storage1.o(.rodata);
         src/kangaskhan_storage2.o(.rodata);
         src/kecleon_bros1.o(.rodata);

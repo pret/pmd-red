@@ -2,11 +2,14 @@
 #define GUARD_FELICITY_BANK_H
 
 #include "file_system.h"
-#include "text.h"
 #include "menu.h"
+#include "text.h"
+
+#define FELICITY_BANK_ACTION_WITHDRAW 0
+#define FELICITY_BANK_ACTION_DEPOSIT 1
 
 // size: 0x108
-struct FelicityBankWork
+typedef struct FelicityBankWork
 {
     /* 0x0 */ u32 isAsleep;
     /* 0x4 */ s32 currState;
@@ -35,13 +38,11 @@ struct FelicityBankWork
     u8 unkA3;
     OpenedFile **unkA4;
     UnkTextStruct2 unkA8[4];
-};
+} FelicityBankWork;
 
-extern struct FelicityBankWork *gFelicityBankWork;
+bool8 CreateFelicityBank(s32 mode);
+void DestroyFelicityBank(void);
+void DrawTeamMoneyBox(u32);
+u32 FelicityBankCallback(void);
 
-#define FELICITY_BANK_ACTION_WITHDRAW 0
-#define FELICITY_BANK_ACTION_DEPOSIT 1
-
-void DrawTeamMoneyBox(u32 param_1);
-
-#endif
+#endif // GUARD_FELICITY_BANK_H
