@@ -685,46 +685,48 @@ u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, unkStruct_203B480 *param_3)
 void sub_8039174(void)
 {
     struct SpriteOAM* spr;
-    s32 temp;
-    s32 test1;
-    s32 test2;
-    s32 test3;
-    s32 test4;
     s16 earlyF;
 
     spr = &gRescuePasswordMenu->unk208;
 
-    spr->atrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
-    spr->atrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
-    spr->atrib1 &= ~SPRITEOAM_MASK_OBJMODE;
-    spr->atrib1 &= ~SPRITEOAM_MASK_MOSAIC;
-    spr->atrib1 &= ~SPRITEOAM_MASK_BPP;
+    spr->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
+    spr->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+    spr->attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
+    spr->attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
+    spr->attrib1 &= ~SPRITEOAM_MASK_BPP;
 
-    test1 = 1 << SPRITEOAM_SHIFT_SHAPE;
-    spr->atrib1 &= ~SPRITEOAM_MASK_SHAPE;
-    spr->atrib1 |= test1;
-    while(0);
+    {
+        s32 temp = 1 << SPRITEOAM_SHIFT_SHAPE;
+        spr->attrib1 &= ~SPRITEOAM_MASK_SHAPE;
+        spr->attrib1 |= temp;
+    } while(0);
 
-    test2 = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
-    spr->atrib3 &= ~SPRITEOAM_MASK_TILENUM;
-    spr->atrib3 |= test2;
-    while(0);
+    {
+        s32 temp = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
+        spr->attrib3 &= ~SPRITEOAM_MASK_TILENUM;
+        spr->attrib3 |= temp;
+    } while(0);
 
-    spr->atrib3 &= ~SPRITEOAM_MASK_PRIORITY;
+    spr->attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
 
-    earlyF = (s16)~SPRITEOAM_MASK_UNK6_B;
+    earlyF = (s16)~SPRITEOAM_MASK_UNK6_4;
 
-    test3 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
-    spr->atrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-    spr->atrib3 |= test3;
-    while(0);
+    {
+        s32 temp = 15 << SPRITEOAM_SHIFT_PALETTENUM;
+        spr->attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
+        spr->attrib3 |= temp;
+    } while(0);
 
-    test4 = 0;
-    spr->atrib2 = test4;
+    {
+        s32 temp = 0;
+        spr->attrib2 = temp;
+    } while(0);
 
-    temp = 192 << SPRITEOAM_SHIFT_UNK6_B;
-    spr->unk6 &= earlyF;
-    spr->unk6 |= temp;
+    {
+        s32 temp = 192 << SPRITEOAM_SHIFT_UNK6_4;
+        spr->unk6 &= earlyF;
+        spr->unk6 |= temp;
+    } while(0);
 }
 
 void sub_80391F8(void)
