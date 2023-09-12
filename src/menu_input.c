@@ -1245,3 +1245,45 @@ void sub_8013AA0(unkStructFor8013AA0 *a0)
     while (sp[a0->unk24] == 0 && a0->unk24 != 0)
         a0->unk24--;
 }
+
+u32 sub_8013BBC(unkStructFor8013AA0 *a0)
+{
+    a0->unk26++;
+
+    sub_8013D10(a0);
+
+    if (a0->unk26 & 8) {
+        {
+            s32 temp = 16 << SPRITEOAM_SHIFT_MATRIXNUM;
+            a0->unk28.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
+            a0->unk28.attrib2 |= temp;
+        }
+        AddSprite(&a0->unk28, 0x100, NULL, NULL);
+    
+        a0->unk28.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
+        {
+            u32 temp = a0->unk28.unk6;
+            s32 max = SPRITEOAM_MAX_UNK6_4;
+            temp >>= SPRITEOAM_SHIFT_UNK6_4;
+            temp += 16;
+            temp &= max;
+            temp <<= SPRITEOAM_SHIFT_UNK6_4;
+            a0->unk28.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
+            a0->unk28.unk6 |= temp;
+        }
+        AddSprite(&a0->unk28, 0x100, NULL, NULL);
+    }
+
+    if (sub_8013DD0(a0))
+        return 1;
+
+    switch (sub_8012AE8()) {
+        case 2:
+            PlayMenuSoundEffect(1);
+            return 2;
+        case 1:
+            PlayMenuSoundEffect(0);
+            return 3;
+    }
+    return 0;
+}

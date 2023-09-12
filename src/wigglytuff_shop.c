@@ -22,6 +22,7 @@
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
 #include "common_strings.h"
+#include "code_80118A4.h"
 
 // TODO: This file was originally 3 files. Split properly
 // 4 files if you count code_8023144.s
@@ -130,8 +131,6 @@ void sub_8021A60(void);
 s32 sub_8021664(void);
 void sub_8021410(void);
 s32 sub_8021B58(s16 species);
-
-extern void PlayMenuSoundEffect(u32);
 
 // split1
 

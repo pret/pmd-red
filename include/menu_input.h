@@ -53,5 +53,6 @@ void AddMenuCursorSprite_(MenuInputStruct *, u32);
 void nullsub_34(MenuInputStructSub *);
 
 void sub_8013AA0(unkStructFor8013AA0 *);
+u32 sub_8013BBC(unkStructFor8013AA0 *);
 
 #endif // GUARD_MENU_INPUT_H
