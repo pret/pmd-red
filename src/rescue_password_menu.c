@@ -684,52 +684,47 @@ u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, unkStruct_203B480 *param_3)
 
 void sub_8039174(void)
 {
-    u16 temp;
-    #ifndef NONMATCHING
-    register u32 r2 asm("r2");
-    #else
-    u32 r2; // r4 but should be r2
-    #endif //NONMATCHING
-    SpriteOAM* spr; // r2 but should be r3
-    u16 r4; // r3 but should be r4
+    struct SpriteOAM* spr;
+    s32 temp;
+    s32 test1;
+    s32 test2;
+    s32 test3;
+    s32 test4;
+    s16 earlyF;
 
     spr = &gRescuePasswordMenu->unk208;
 
-    spr->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
+    spr->atrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
+    spr->atrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+    spr->atrib1 &= ~SPRITEOAM_MASK_OBJMODE;
+    spr->atrib1 &= ~SPRITEOAM_MASK_MOSAIC;
+    spr->atrib1 &= ~SPRITEOAM_MASK_BPP;
 
-    spr->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+    test1 = 1 << SPRITEOAM_SHIFT_SHAPE;
+    spr->atrib1 &= ~SPRITEOAM_MASK_SHAPE;
+    spr->atrib1 |= test1;
+    while(0);
 
-    spr->attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
+    test2 = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
+    spr->atrib3 &= ~SPRITEOAM_MASK_TILENUM;
+    spr->atrib3 |= test2;
+    while(0);
 
-    spr->attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
+    spr->atrib3 &= ~SPRITEOAM_MASK_PRIORITY;
 
-    spr->attrib1 &= ~SPRITEOAM_MASK_BPP;
+    earlyF = (s16)~SPRITEOAM_MASK_UNK6_B;
 
-    r2 = 1 << SPRITEOAM_SHIFT_SHAPE;
-    spr->attrib1 &= ~SPRITEOAM_MASK_SHAPE;
-    spr->attrib1 |= r2;
+    test3 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
+    spr->atrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
+    spr->atrib3 |= test3;
+    while(0);
 
-    r2 = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
-    spr->attrib3 &= ~SPRITEOAM_MASK_TILENUM;
-    spr->attrib3 |= r2;
+    test4 = 0;
+    spr->atrib2 = test4;
 
-    spr->attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
-
-    r2 = (u16)~SPRITEOAM_MASK_UNK6_4;
-
-    r4 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
-    spr->attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-    spr->attrib3 |= r4;
-
-    #ifndef NONMATCHING
-    while (0) ;
-    #endif //NONMATCHING
-    spr->attrib2 = 0; // Without the while(0), this 0 is loaded super early and also into r3
-
-    temp = 192 << SPRITEOAM_SHIFT_UNK6_4;
-    r2 &= spr->unk6;
-    r2 |= temp;
-    spr->unk6 = r2;
+    temp = 192 << SPRITEOAM_SHIFT_UNK6_B;
+    spr->unk6 &= earlyF;
+    spr->unk6 |= temp;
 }
 
 void sub_80391F8(void)
