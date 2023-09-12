@@ -2,318 +2,6 @@
 
         .align 2,0
 
-	.global gCommonKangaskhanStorage
-gCommonKangaskhanStorage: @ 80D5404
-    .4byte gUnknown_80D5E9C
-    .4byte gUnknown_80D5E84
-    .4byte gUnknown_80D5E60
-    .4byte gUnknown_80D5E10
-    .4byte gUnknown_80D5DE8
-    .4byte gUnknown_80D5DBC
-    .4byte gUnknown_80D5D8C
-    .4byte gUnknown_80D5D58
-    .4byte gUnknown_80D5D0C
-    .4byte gUnknown_80D5CE4
-    .4byte gUnknown_80D5CAC
-    .4byte gUnknown_80D5C74
-    .4byte gUnknown_80D5C44
-    .4byte gUnknown_80D5C1C
-    .4byte gUnknown_80D5BDC
-    .4byte gUnknown_80D5BAC
-    .4byte gUnknown_80D5B5C
-    .4byte gUnknown_80D5B24
-    .4byte gUnknown_80D5AF0
-    .4byte gUnknown_80D5984
-    .4byte gUnknown_80D5954
-    .4byte gUnknown_80D5934
-    .4byte gUnknown_80D5900
-    .4byte gUnknown_80D58B0
-    .4byte gUnknown_80D5884
-    .4byte gUnknown_80D5844
-    .4byte gUnknown_80D57F4
-    .4byte gUnknown_80D57C4
-    .4byte gUnknown_80D5774
-    .4byte gUnknown_80D574C
-    .4byte gUnknown_80D5710
-    .4byte gUnknown_80D56CC
-    .4byte gUnknown_80D56AC
-    .4byte gUnknown_80D5670
-    .4byte gUnknown_80D5630
-    .4byte gUnknown_80D55F4
-    .4byte gUnknown_80D55C0
-    .4byte gUnknown_80D5590
-    .4byte gUnknown_80D555C
-    .4byte gUnknown_80D54A4
-
-    .global gUnknown_80D54A4
-gUnknown_80D54A4:
-    .string " Zzz... Snork!\n"
-    .string "I can store items that you\n"
-    .string "found in dungeons...{EXTRA_MSG}"
-    .string " Snarfle...\n"
-    .string "Things in storage don{APOSTROPHE}t get lost...{EXTRA_MSG}"
-    .string " Zzz... Zzz...\n"
-    .string "That{APOSTROPHE}s why...\n"
-    .string "Keep important items in storage...\0"
-    .align 2, 0
-
-    .global gUnknown_80D555C
-gUnknown_80D555C:
-    .string " Zzz... Zzz... No...\n"
-    .string "The storage space is full...\0"
-    .align 2, 0
-
-    .global gUnknown_80D5590
-gUnknown_80D5590:
-    .string " Zzz... No...\n"
-    .string "Can{APOSTROPHE}t store any more of that...\0"
-    .align 2, 0
-
-    .global gUnknown_80D55C0
-gUnknown_80D55C0:
-    .string " Zzz... Zzz...\n"
-    .string "That {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}...\n"
-    .string "Can{APOSTROPHE}t store it...\0"
-    .align 2, 0
-
-    .global gUnknown_80D55F4
-gUnknown_80D55F4:
-    .string " Snarfle? Hunh...?{WAIT_PRESS}\n"
-    .string "Zzz... Your storage space... Empty...\0"
-    .align 2, 0
-
-    .global gUnknown_80D5630
-gUnknown_80D5630:
-    .string " Snarfle? Hunh...?{WAIT_PRESS}\n"
-    .string "Zzz...\n"
-    .string "You don{APOSTROPHE}t have enough space...\0"
-    .align 2, 0
-
-    .global gUnknown_80D5670
-gUnknown_80D5670:
-    .string " Snarfle? Hunh...?{WAIT_PRESS}\n"
-    .string "Zzz...\n"
-    .string "You don{APOSTROPHE}t have anything...?\0"
-    .align 2, 0
-
-    .global gUnknown_80D56AC
-gUnknown_80D56AC:
-    .string " Zzz... Snork!\n"
-    .string "There you go...\0"
-    .align 2, 0
-
-    .global gUnknown_80D56CC
-gUnknown_80D56CC:
-    .string " Zzz... Zzz... Hunh...?\n"
-    .string "You want those things from storage...\n"
-    .string "OK?\0"
-    .align 2, 0
-
-    .global gUnknown_80D5710
-gUnknown_80D5710:
-    .string " Hunh...? Taking...?\n"
-    .string "Oh... You want your {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}...\n"
-    .string "OK?\0"
-    .align 2, 0
-
-    .global gUnknown_80D574C
-gUnknown_80D574C:
-    .string " Snork! Zzz...\n"
-    .string "Taking anything else?\0"
-    .align 2, 0
-
-    .global gUnknown_80D5774
-gUnknown_80D5774:
-    .string " What...? Take out...?\n"
-    .string "Uh-huh... Choose more than one using\n"
-    .string "{L_BUTTON} or {R_BUTTON}... Zzz...\0"
-    .align 2, 0
-
-    .global gUnknown_80D57C4
-gUnknown_80D57C4:
-    .string " Zzz... Zzz...\n"
-    .string "Yup{COMMA} I did... Stored away...\0"
-    .align 2, 0
-
-    .global gUnknown_80D57F4
-gUnknown_80D57F4:
-    .string " Hunh{COMMA} wha--? Storage...?\n"
-    .string "I{APOSTROPHE}ll put away the things you chose...\n"
-    .string "That OK?\0"
-    .align 2, 0
-
-    .global gUnknown_80D5844
-gUnknown_80D5844:
-    .string " Zzz... Store something?\n"
-    .string "Gonna put {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} in storage...\n"
-    .string "OK?\0"
-    .align 2, 0
-
-    .global gUnknown_80D5884
-gUnknown_80D5884:
-    .string " Do you... Snork...\n"
-    .string "Store anything else?\0"
-    .align 2, 0
-
-    .global gUnknown_80D58B0
-gUnknown_80D58B0:
-    .string " Hunh{COMMA} wha--? Store what...?\n"
-    .string "You can choose more than one using\n"
-    .string "{L_BUTTON} or {R_BUTTON}...\0"
-    .align 2, 0
-
-    .global gUnknown_80D5900
-gUnknown_80D5900:
-    .string " Snuffle... Mutter...\n"
-    .string "Thank you...\n"
-    .string "Come again...\0"
-    .align 2, 0
-
-    .global gUnknown_80D5934
-gUnknown_80D5934:
-    .string " Zzz... Snork...\n"
-    .string "Anything else?\0"
-    .align 2, 0
-
-    .global gUnknown_80D5954
-gUnknown_80D5954:
-    .string " Zzz... Zzz...\n"
-    .string "Hello{COMMA} there...\n"
-    .string "{ARG_POKEMON_6} Storage...\0"
-    .align 2, 0
-
-    .global gUnknown_80D5984
-gUnknown_80D5984:
-    .string " I can store items that you\n"
-    .string "found in dungeons{COMMA} or that you\n"
-    .string "bought from shops.{EXTRA_MSG}"
-    .string " If you faint in\n"
-    .string "a dungeon{COMMA} your items will be lost...{WAIT_PRESS}\n"
-    .string "But what{APOSTROPHE}s in storage will be safe.{EXTRA_MSG}"
-    .string " I keep guard over the\n"
-    .string "storage space{COMMA} so anything you leave\n"
-    .string "with me won{APOSTROPHE}t ever disappear!{EXTRA_MSG}"
-    .string " If you have any items that\n"
-    .string "you can{APOSTROPHE}t bear to lose{COMMA} be sure to leave\n"
-    .string "them with me!\0"
-    .align 2, 0
-
-    .global gUnknown_80D5AF0
-gUnknown_80D5AF0:
-    .string " Sorry{COMMA} dear.\n"
-    .string "I{APOSTROPHE}ve run out of storage space.\0"
-    .align 2, 0
-
-    .global gUnknown_80D5B24
-gUnknown_80D5B24:
-    .string " Sorry{COMMA} dear.\n"
-    .string "I can{APOSTROPHE}t take any more of that item.\0"
-    .align 2, 0
-
-    .global gUnknown_80D5B5C
-gUnknown_80D5B5C:
-    .string " Oh{COMMA} dear{COMMA} sorry.{WAIT_PRESS}\n"
-    .string "That {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} is an item you\n"
-    .string "can{APOSTROPHE}t put in storage.\0"
-    .align 2, 0
-
-    .global gUnknown_80D5BAC
-gUnknown_80D5BAC:
-    .string " Oh?\n"
-    .string "You don{APOSTROPHE}t have anything stored{COMMA} dear.\0"
-    .align 2, 0
-
-    .global gUnknown_80D5BDC
-gUnknown_80D5BDC:
-    .string " Oh? You don{APOSTROPHE}t have the room\n"
-    .string "to carry any more items{COMMA} dear.\0"
-    .align 2, 0
-
-    .global gUnknown_80D5C1C
-gUnknown_80D5C1C:
-    .string " Oh?\n"
-    .string "You don{APOSTROPHE}t seem to have anything?\0"
-    .align 2, 0
-
-    .global gUnknown_80D5C44
-gUnknown_80D5C44:
-    .string " There you go!\n"
-    .string "Just like you asked{COMMA} sweetie!\0"
-    .align 2, 0
-
-    .global gUnknown_80D5C74
-gUnknown_80D5C74:
-    .string " I{APOSTROPHE}ll take the items you\n"
-    .string "chose out of storage. OK?\0"
-    .align 2, 0
-
-    .global gUnknown_80D5CAC
-gUnknown_80D5CAC:
-    .string " Fine{COMMA} I{APOSTROPHE}ll take your\n"
-    .string "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} out of storage. OK?\0"
-    .align 2, 0
-
-    .global gUnknown_80D5CE4
-gUnknown_80D5CE4:
-    .string " Would you like to take\n"
-    .string "anything else?\0"
-    .align 2, 0
-
-    .global gUnknown_80D5D0C
-gUnknown_80D5D0C:
-    .string " What will you take out?\n"
-    .string "You can choose more than one item using\n"
-    .string "{L_BUTTON} or {R_BUTTON}.\0"
-    .align 2, 0
-
-    .global gUnknown_80D5D58
-gUnknown_80D5D58:
-    .string " OK{COMMA} stored away!\n"
-    .string "You can count on me{COMMA} honey.\0"
-    .align 2, 0
-
-    .global gUnknown_80D5D8C
-gUnknown_80D5D8C:
-    .string " I{APOSTROPHE}ll put the items you chose\n"
-    .string "in storage. OK?\0"
-    .align 2, 0
-
-    .global gUnknown_80D5DBC
-gUnknown_80D5DBC:
-    .string " I{APOSTROPHE}ll put your\n"
-    .string "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} in storage. OK?\0"
-    .align 2, 0
-
-    .global gUnknown_80D5DE8
-gUnknown_80D5DE8:
-    .string " Do you want to store\n"
-    .string "anything else?\0"
-    .align 2, 0
-
-    .global gUnknown_80D5E10
-gUnknown_80D5E10:
-    .string " What do you want to store?\n"
-    .string "You can choose more than one item using\n"
-    .string "{L_BUTTON} or {R_BUTTON}.\0"
-    .align 2, 0
-
-    .global gUnknown_80D5E60
-gUnknown_80D5E60:
-    .string " Thank you{COMMA} sweetie.\n"
-    .string "Come again!\0"
-    .align 2, 0
-
-    .global gUnknown_80D5E84
-gUnknown_80D5E84:
-    .string " Anything else{COMMA} dear?\0"
-    .align 2, 0
-
-    .global gUnknown_80D5E9C
-gUnknown_80D5E9C:
-    .string " Hello{COMMA} there!\n"
-    .string "Welcome to {ARG_POKEMON_6} Storage.\0"
-    .align 2, 0
-
 	.global gCommonKecleonBros
 gCommonKecleonBros: @ 80D5EC8
     .4byte gUnknown_80D797C
@@ -1052,6 +740,20 @@ gUnknown_80D797C:
     .string "Welcome to the {ARG_POKEMON_6} Shop〜♪ \0"
     .align 2, 0
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	.global gCommonWigglytuff
 gCommonWigglytuff: @ 80D79A4 (Friend Area Shop)
     .4byte gUnknown_80D883C
@@ -1404,6 +1106,18 @@ gUnknown_80D883C:
     .string "Welcome to the {ARG_POKEMON_6} Club--\n"
     .string "a circle of friends! \0"
     .align 2, 0
+
+
+
+
+
+
+
+
+
+
+
+
 
 	.global gCommonGulpin
 gCommonGulpin: @ 80D8888 (Gulpin Link Shop)
@@ -1909,6 +1623,20 @@ gUnknown_80D9F74:
     .string "Link moves all you like for just 150 {POKE}!\0"
     .align 2, 0
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	.global gCommonMakuhita
 gCommonMakuhita: @ 80D9FC8 (Makuhita Dojo)
     .4byte gUnknown_80DAA44
@@ -2127,6 +1855,20 @@ gUnknown_80DAA44:
     .string "Through rigorous training{COMMA} one begets\n"
     .string "true power.\0"
     .align 2, 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	.global gCommonHints
 gCommonHints: @ 80DAA98 (Help Menu?)

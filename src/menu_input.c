@@ -599,7 +599,7 @@ void AddMenuCursorSprite_(MenuInputStruct *a0, u32 a1)
         UpdateMenuCursorSpriteCoords(a0);
 
         if (!(a0->unk24 & 8)) {
-            #ifdef NONMATCHING
+            #ifdef NONMATCHING // SpriteOAM memes https://decomp.me/scratch/T9aXl TODO: Match like sub_8039174 with multiple vars and while(0)
             u32 tmp, tmp2;
             #else
             register u32 tmp asm("r0"), tmp2 asm("r1");
@@ -676,7 +676,7 @@ static void sub_801332C(s16 *a0)
 {
     SpriteOAM sp = {};
     SpriteOAM* ptr;
-    #ifdef NONMATCHING
+    #ifdef NONMATCHING // SpriteOAM memes https://decomp.me/scratch/zeLxS TODO: Match like sub_8039174 with multiple vars and while(0)
     u32 r0, r1, r2;
     #else
     register u32 r0 asm("r0");
@@ -745,7 +745,7 @@ static void sub_801332C(s16 *a0)
 static void sub_8013470(MenuInputStruct *a0)
 {
     SpriteOAM sp = {};
-    #if NONMATCHING
+    #if NONMATCHING // SpriteOAM memes https://decomp.me/scratch/70Ieb TODO: Match like sub_8039174 with multiple vars and while(0)
     SpriteOAM *ptr;
     u32 r0, r1, r5;
     #else
@@ -1180,4 +1180,68 @@ void sub_8013A7C(MenuInputStruct *param_1)
         param_1->unk1E--;
 
     sub_8013984(param_1);
+}
+
+void sub_8013AA0(unkStructFor8013AA0 *a0)
+{
+    s32 r1;
+    s32 test;
+    s32 r3;
+    s32 r4;
+    s32 test2;
+    s16 earlyF;
+    s32 sp[10];
+
+    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
+    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
+    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
+    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_BPP;
+
+    r1 = 1 << SPRITEOAM_SHIFT_SHAPE;
+    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
+    a0->unk28.attrib1 |= r1;
+
+    test = 16 << SPRITEOAM_SHIFT_MATRIXNUM;
+    a0->unk28.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
+    a0->unk28.attrib2 |= test;
+
+    a0->unk28.attrib2 &= ~SPRITEOAM_MASK_SIZE;
+
+    r3 = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
+    a0->unk28.attrib3 &= ~SPRITEOAM_MASK_TILENUM;
+    a0->unk28.attrib3 |= r3;
+
+    a0->unk28.attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
+
+    earlyF = (s16)~SPRITEOAM_MASK_UNK6_4;
+
+    r4 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
+    a0->unk28.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
+    a0->unk28.attrib3 |= r4;
+
+    a0->unk28.attrib2 &= ~SPRITEOAM_MASK_X;
+    a0->unk28.attrib2 |= DISPLAY_WIDTH;
+
+    test2 = DISPLAY_WIDTH << SPRITEOAM_SHIFT_UNK6_4;
+    a0->unk28.unk6 &= earlyF;
+    a0->unk28.unk6 |= test2;
+
+    a0->unk26 = 0;
+
+    ConvertToDecimal(sp, a0->unkC, a0->unk10);
+
+    a0->unk25 = a0->unk10;
+
+    while (sp[a0->unk25 - 1] == 0 && a0->unk25 > 1)
+        a0->unk25--;
+
+    a0->unk0 = a0->unk4;
+
+    ConvertToDecimal(sp, a0->unk4, a0->unk10);
+
+    a0->unk24 = a0->unk25 - 1;
+
+    while (sp[a0->unk24] == 0 && a0->unk24 != 0)
+        a0->unk24--;
 }

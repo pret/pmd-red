@@ -9,7 +9,7 @@ enum FelicityBankMode
 };
 enum FelicityBankDialogue
 {
-    FEL_DLG_WELCOME_TO_FELICITY,
+    FEL_DLG_WELCOME,
     FEL_DLG_HOW_MAY_I_SERVE__NO_MONEY,
     FEL_DLG_HOW_MAY_I_SERVE__HAS_MONEY,
     FEL_DLG_VERY_WELL,

@@ -54,13 +54,13 @@ bool8 CreateKangaskhanStorage(u32 mode)
     gKangaskhanStorageWork->menuAction1 = 0;
     gKangaskhanStorageWork->menuAction2 = 0;
     gKangaskhanStorageWork->menuAction3 = 0;
-    gKangaskhanStorageWork->isAsleep = mode;
+    gKangaskhanStorageWork->mode = mode;
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KANGASKHAN);
     CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KANGASKHAN);
     monName = GetMonSpecies(MONSTER_KANGASKHAN);
     strcpy(gUnknown_202E1C8 - 0x50, monName);
 
-    if (gKangaskhanStorageWork->isAsleep == TRUE)
+    if (gKangaskhanStorageWork->mode == KANG_MODE_ASLEEP)
         gKangaskhanStorageWork->unkE8 = NULL;
     else
         gKangaskhanStorageWork->unkE8 = &gKangaskhanStorageWork->faceFile;
@@ -68,7 +68,7 @@ bool8 CreateKangaskhanStorage(u32 mode)
     faceFile = GetDialogueSpriteDataPtr(MONSTER_KANGASKHAN);
     gKangaskhanStorageWork->faceFile = faceFile;
     gKangaskhanStorageWork->faceData = faceFile->data;
-    gKangaskhanStorageWork->unkE4 = 0;
+    gKangaskhanStorageWork->unkE4 = FALSE;
     gKangaskhanStorageWork->unkE5 = 0;
     gKangaskhanStorageWork->unkE6 = 0;
     gKangaskhanStorageWork->unkE0 = 2;
@@ -187,66 +187,66 @@ static void sub_8016FF8(void)
     switch (gKangaskhanStorageWork->currState) {
         case KANGASKHAN_STORAGE_INIT:
             sub_80175FC();
-            gKangaskhanStorageWork->unkE4 = 1;
-            sub_8014248(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][0], 0, gKangaskhanStorageWork->menuAction1, gKangaskhanStorageWork->unk24,
+            gKangaskhanStorageWork->unkE4 = TRUE;
+            sub_8014248(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_WELCOME], 0, gKangaskhanStorageWork->menuAction1, gKangaskhanStorageWork->unk24,
                                     gKangaskhanStorageWork->unk4C, 4, 0, gKangaskhanStorageWork->unkE8, 12);
             break;
         case KANGASKHAN_STORAGE_MAIN_MENU:
             sub_80175FC();
-            gKangaskhanStorageWork->unkE4 = 0;
-            sub_8014248(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][1], 0, gKangaskhanStorageWork->menuAction1, gKangaskhanStorageWork->unk24,
+            gKangaskhanStorageWork->unkE4 = FALSE;
+            sub_8014248(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_ANYTHING_ELSE], 0, gKangaskhanStorageWork->menuAction1, gKangaskhanStorageWork->unk24,
                                     gKangaskhanStorageWork->unk4C, 4, 0, gKangaskhanStorageWork->unkE8, 12);
             break;
         case 2:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
-            gKangaskhanStorageWork->unkE4 = 0;
-            sub_80141B4(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][19], 0, gKangaskhanStorageWork->unkE8, 0x10D);
+            gKangaskhanStorageWork->unkE4 = FALSE;
+            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_HOW_IT_WORKS], 0, gKangaskhanStorageWork->unkE8, 0x10D);
             break;
         case 3:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_EXIT;
-            gKangaskhanStorageWork->unkE4 = 1;
-            sub_80141B4(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][2], 0, gKangaskhanStorageWork->unkE8, 0x30D);
+            gKangaskhanStorageWork->unkE4 = TRUE;
+            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_BYE], 0, gKangaskhanStorageWork->unkE8, 0x30D);
             break;
         case KANGASKHAN_STORAGE_NO_INV_ITEMS:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
-            gKangaskhanStorageWork->unkE4 = 0;
-            sub_80141B4(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][13], 0, gKangaskhanStorageWork->unkE8, 0x10D);
+            gKangaskhanStorageWork->unkE4 = FALSE;
+            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_YOU_HAVE_NOTHING], 0, gKangaskhanStorageWork->unkE8, 0x10D);
             break;
         case KANGASKHAN_STORAGE_TOO_MANY_ITEMS:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
-            gKangaskhanStorageWork->unkE4 = 0;
-            sub_80141B4(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][14], 0, gKangaskhanStorageWork->unkE8, 0x10D);
+            gKangaskhanStorageWork->unkE4 = FALSE;
+            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_YOU_ARE_FULL], 0, gKangaskhanStorageWork->unkE8, 0x10D);
             break;
         case 7:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
-            gKangaskhanStorageWork->unkE4 = 0;
-            sub_80141B4(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][15], 0, gKangaskhanStorageWork->unkE8, 0x10D);
+            gKangaskhanStorageWork->unkE4 = FALSE;
+            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORAGE_HAS_NOTHING], 0, gKangaskhanStorageWork->unkE8, 0x10D);
             break;
         case 8:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
-            gKangaskhanStorageWork->unkE4 = 0;
-            sub_80141B4(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][18], 0, gKangaskhanStorageWork->unkE8, 0x10D);
+            gKangaskhanStorageWork->unkE4 = FALSE;
+            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORAGE_FULL], 0, gKangaskhanStorageWork->unkE8, 0x10D);
             break;
         case KANGASKHAN_STORAGE_IS_MONEY_USED_TM:
             sub_8090E14(gUnknown_202DE58, &gKangaskhanStorageWork->storedItem, 0);
             gKangaskhanStorageWork->fallbackState = 14;
-            gKangaskhanStorageWork->unkE4 = 0;
-            sub_80141B4(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][16], 0, gKangaskhanStorageWork->unkE8, 0x30D);
+            gKangaskhanStorageWork->unkE4 = FALSE;
+            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT__INVALID_ITEM], 0, gKangaskhanStorageWork->unkE8, 0x30D);
             break;
         case 10:
             gKangaskhanStorageWork->fallbackState = 14;
-            gKangaskhanStorageWork->unkE4 = 0;
-            sub_80141B4(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][17], 0, gKangaskhanStorageWork->unkE8, 0x30D);
+            gKangaskhanStorageWork->unkE4 = FALSE;
+            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT__TOO_MANY_OF_ITEM], 0, gKangaskhanStorageWork->unkE8, 0x30D);
             break;
-        case 0xb:
+        case 11:
             gKangaskhanStorageWork->fallbackState = 13;
-            gKangaskhanStorageWork->unkE4 = 0;
-            sub_80141B4(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][3], 0, gKangaskhanStorageWork->unkE8, 0x30D);
+            gKangaskhanStorageWork->unkE4 = FALSE;
+            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORE_WHAT], 0, gKangaskhanStorageWork->unkE8, 0x30D);
             break;
         case 12:
             gKangaskhanStorageWork->fallbackState = 14;
-            gKangaskhanStorageWork->unkE4 = 0;
-            sub_80141B4(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][4], 0, gKangaskhanStorageWork->unkE8, 0x30D);
+            gKangaskhanStorageWork->unkE4 = FALSE;
+            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORE_MORE], 0, gKangaskhanStorageWork->unkE8, 0x30D);
             break;
         case 13:
             sub_801A5D8(3, 3, NULL, 10);
@@ -262,14 +262,14 @@ static void sub_8016FF8(void)
         case 17:
             sub_80177F8();
             sub_8090E14(gUnknown_202DE58, &gKangaskhanStorageWork->storedItem, 0);
-            gKangaskhanStorageWork->unkE4 = 0;
-            sub_8014248(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][5], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
+            gKangaskhanStorageWork->unkE4 = FALSE;
+            sub_8014248(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT_ONE_PROMPT], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
                                     gKangaskhanStorageWork->unkE8, 12);
             break;
         case 18:
             sub_80177F8();
-            gKangaskhanStorageWork->unkE4 = 0;
-            sub_8014248(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][6], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
+            gKangaskhanStorageWork->unkE4 = FALSE;
+            sub_8014248(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT_MANY_PROMPT], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
                                     gKangaskhanStorageWork->unkE8, 12);
             break;
         case 19:
@@ -280,18 +280,18 @@ static void sub_8016FF8(void)
             else
                 gKangaskhanStorageWork->fallbackState = 12;
 
-            gKangaskhanStorageWork->unkE4 = 1;
-            sub_80141B4(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][7], 0, gKangaskhanStorageWork->unkE8, 0x10D);
+            gKangaskhanStorageWork->unkE4 = TRUE;
+            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT_CONFIRMATION], 0, gKangaskhanStorageWork->unkE8, 0x10D);
             break;
         case 20:
             gKangaskhanStorageWork->fallbackState = 22;
-            gKangaskhanStorageWork->unkE4 = 0;
-            sub_80141B4(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][8], 0, gKangaskhanStorageWork->unkE8, 0x30D);
+            gKangaskhanStorageWork->unkE4 = FALSE;
+            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_TAKE_WHAT], 0, gKangaskhanStorageWork->unkE8, 0x30D);
             break;
         case 21:
             gKangaskhanStorageWork->fallbackState = 23;
-            gKangaskhanStorageWork->unkE4 = 0;
-            sub_80141B4(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][9], 0, gKangaskhanStorageWork->unkE8, 0x30D);
+            gKangaskhanStorageWork->unkE4 = FALSE;
+            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_TAKE_MORE], 0, gKangaskhanStorageWork->unkE8, 0x30D);
             break;
         case 22:
             sub_801C8C4(1, 3, 0, 10);
@@ -302,19 +302,19 @@ static void sub_8016FF8(void)
             sub_801AD34(0);
             break;
         case 24:
-            gKangaskhanStorageWork->unkB8 = 2;
-            gKangaskhanStorageWork->unkB0 = 1;
+            gKangaskhanStorageWork->unkA8.unk10 = 2;
+            gKangaskhanStorageWork->unkA8.unk8 = 1;
 
             if (gTeamInventoryRef->teamStorage[gKangaskhanStorageWork->storedItem.id] >= 100)
-                gKangaskhanStorageWork->unkB4 = 99;
+                gKangaskhanStorageWork->unkA8.unkC = 99;
             else
-                gKangaskhanStorageWork->unkB4 = gTeamInventoryRef->teamStorage [gKangaskhanStorageWork->storedItem.id];
+                gKangaskhanStorageWork->unkA8.unkC = gTeamInventoryRef->teamStorage[gKangaskhanStorageWork->storedItem.id];
 
-            gKangaskhanStorageWork->unkAC = gKangaskhanStorageWork->unkB4;
-            gKangaskhanStorageWork->unkBC = 1;
-            gKangaskhanStorageWork->unkC0 = &gKangaskhanStorageWork->unkEC[1];
-            gKangaskhanStorageWork->unkC4 = 40;
-            gKangaskhanStorageWork->unkC8 = 18;
+            gKangaskhanStorageWork->unkA8.unk4 = gKangaskhanStorageWork->unkA8.unkC;
+            gKangaskhanStorageWork->unkA8.unk14 = 1;
+            gKangaskhanStorageWork->unkA8.unk18 = &gKangaskhanStorageWork->unkEC[1];
+            gKangaskhanStorageWork->unkA8.unk1C = 40;
+            gKangaskhanStorageWork->unkA8.unk20 = 18;
             sub_8013AA0(&gKangaskhanStorageWork->unkA8);
             sub_8017598();
             break;
@@ -331,14 +331,14 @@ static void sub_8016FF8(void)
         case 27:
             sub_80177F8();
             sub_8090E14(gUnknown_202DE58, &gKangaskhanStorageWork->storedItem, 0);
-            gKangaskhanStorageWork->unkE4 = 0;
-            sub_8014248(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][10], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
+            gKangaskhanStorageWork->unkE4 = FALSE;
+            sub_8014248(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_WITHDRAW_ONE_PROMPT], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
                                     gKangaskhanStorageWork->unkE8, 12);
             break;
         case 28:
             sub_80177F8();
-            gKangaskhanStorageWork->unkE4 = 0;
-            sub_8014248(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][11], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
+            gKangaskhanStorageWork->unkE4 = FALSE;
+            sub_8014248(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_WITHDRAW_MANY_PROMPT], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
                                     gKangaskhanStorageWork->unkE8, 12);
             break;
         case 29:
@@ -349,19 +349,19 @@ static void sub_8016FF8(void)
             else
                 gKangaskhanStorageWork->fallbackState = 21;
 
-            gKangaskhanStorageWork->unkE4 = 1;
-            sub_80141B4(gCommonKangaskhanStorage[gKangaskhanStorageWork->isAsleep][12], 0, gKangaskhanStorageWork->unkE8, 0x10D);
+            gKangaskhanStorageWork->unkE4 = TRUE;
+            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_WITHDRAW_CONFIRMATION], 0, gKangaskhanStorageWork->unkE8, 0x10D);
             break;
     }
 }
 
 static void sub_8017598(void)
 {
-    sub_8008C54(gKangaskhanStorageWork->unkBC);
-    sub_80073B8(gKangaskhanStorageWork->unkBC);
-    xxx_call_draw_string(4, 0, sNumber, gKangaskhanStorageWork->unkBC, 0);
+    sub_8008C54(gKangaskhanStorageWork->unkA8.unk14);
+    sub_80073B8(gKangaskhanStorageWork->unkA8.unk14);
+    xxx_call_draw_string(4, 0, sNumber, gKangaskhanStorageWork->unkA8.unk14, 0);
     sub_8013C68(&gKangaskhanStorageWork->unkA8);
-    sub_80073E0(gKangaskhanStorageWork->unkBC);
+    sub_80073E0(gKangaskhanStorageWork->unkA8.unk14);
     sub_801CCD8();
     sub_801AD34(0);
     sub_8012EA4(&gKangaskhanStorageWork->unk58, 0);
@@ -418,11 +418,11 @@ static void sub_80176B8(void)
     gKangaskhanStorageWork->unk24[loopMax].text = *gCommonStore;
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 2;
 
-    loopMax += 1;
+    loopMax++;
     gKangaskhanStorageWork->unk24[loopMax].text = *gCommonInfo;
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 6;
 
-    loopMax += 1;
+    loopMax++;
     gKangaskhanStorageWork->unk24[loopMax].text = NULL;
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 1;
 
@@ -451,11 +451,11 @@ static void sub_8017758(void)
     gKangaskhanStorageWork->unk24[loopMax].text = *gCommonTake;
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 3;
 
-    loopMax += 1;
+    loopMax++;
     gKangaskhanStorageWork->unk24[loopMax].text = *gCommonInfo;
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 6;
 
-    loopMax += 1;
+    loopMax++;
     gKangaskhanStorageWork->unk24[loopMax].text = NULL;
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 1;
 
@@ -482,11 +482,11 @@ static void sub_80177F8(void)
     gKangaskhanStorageWork->unk24[loopMax].text = *gCommonYes;
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 4;
 
-    loopMax += 1;
+    loopMax++;
     gKangaskhanStorageWork->unk24[loopMax].text = *gCommonNo;
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 5;
 
-    loopMax += 1;
+    loopMax++;
     gKangaskhanStorageWork->unk24[loopMax].text = NULL;
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 1;
 }
@@ -495,7 +495,7 @@ static void sub_8017828(void)
 {
     s32 menuAction;
 
-    if (sub_80144A4(&menuAction) != 0)
+    if (sub_80144A4(&menuAction))
         return;
 
     if (menuAction != 1)
@@ -531,7 +531,7 @@ static void sub_80178D0(void)
 {
     s32 menuAction;
 
-    if (sub_80144A4(&menuAction) != 0)
+    if (sub_80144A4(&menuAction))
         return;
 
     switch (menuAction) {
@@ -553,7 +553,7 @@ static void sub_8017928(void)
     s32 menuAction;
     BulkItem item;
 
-    if (sub_80144A4(&menuAction) != 0)
+    if (sub_80144A4(&menuAction))
         return;
 
     switch (menuAction) {
@@ -576,13 +576,13 @@ static void sub_80179A8(void)
     s32 index;
     s32 menuAction;
 
-    if (sub_80144A4(&menuAction) != 0)
+    if (sub_80144A4(&menuAction))
         return;
 
     switch (menuAction) {
         case 4:
             for (index = 0; index < INVENTORY_SIZE; index++) {
-                if (sub_801AED0(index) != 0) {
+                if (sub_801AED0(index)) {
                     MoveToStorage(&gTeamInventoryRef->teamItems[index]);
                     gTeamInventoryRef->teamItems[index].id = 0;
                     gTeamInventoryRef->teamItems[index].flags = 0;
@@ -606,13 +606,13 @@ static void sub_8017A1C(void)
     s32 menuAction;
     BulkItem item;
 
-    if (sub_80144A4(&menuAction) != 0)
+    if (sub_80144A4(&menuAction))
         return;
 
     switch (menuAction) {
         case 4:
             for (itemID = 0; itemID < NUMBER_OF_ITEM_IDS; itemID++) {
-                if (sub_801CFE0(itemID) != 0) {
+                if (sub_801CFE0(itemID)) {
                     item.id = itemID;
                     if (IsThrowableItem(item.id)) {
                         if (gTeamInventoryRef->teamStorage[item.id] > 99)
@@ -642,7 +642,7 @@ static void sub_8017AF8(void)
 {
     switch (sub_801A6E8(TRUE)) {
         case 3:
-            if (sub_801AEA8() != 0) {
+            if (sub_801AEA8()) {
                 sub_8099690(0);
                 UpdateKangaskhanStorageState(18);
             }
@@ -668,7 +668,7 @@ static void sub_8017B88(void)
 {
     switch (sub_801CA08(TRUE)) {
         case 3:
-            if (sub_801CFB8() != 0)
+            if (sub_801CFB8())
                 UpdateKangaskhanStorageState(28);
             else {
                 gKangaskhanStorageWork->id = sub_801CB24();
@@ -703,7 +703,7 @@ static void sub_8017C28(void)
             sub_8017598();
             break;
         case 3:
-            gKangaskhanStorageWork->storedItem.quantity = gKangaskhanStorageWork->unkA8;
+            gKangaskhanStorageWork->storedItem.quantity = gKangaskhanStorageWork->unkA8.unk0;
             UpdateKangaskhanStorageState(27);
             break;
         case 2:
@@ -813,6 +813,6 @@ static void AdvanceToKangaskhanStorageFallbackState(void)
 {
     s32 temp;
 
-    if (sub_80144A4(&temp) == 0)
+    if (!sub_80144A4(&temp))
         UpdateKangaskhanStorageState(gKangaskhanStorageWork->fallbackState);
 }

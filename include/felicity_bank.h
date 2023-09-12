@@ -18,16 +18,7 @@ typedef struct FelicityBankWork
     /* 0x10 */ u32 menuAction;
     MenuItem unk14[8];
     u16 unk54[8];
-    u32 unk64;
-    s32 unk68;
-    s32 unk6C;
-    /* 0x70 */ s32 maximumDepositWithdraw;
-    s32 unk74;
-    u32 unk78;
-    UnkTextStruct2 *unk7C;
-    s32 unk80;
-    s32 unk84;
-    u8 fill88[0x94 - 0x88];
+    unkStructFor8013AA0 unk64;
     /* 0x94 */ OpenedFile *faceFile;
     /* 0x98 */ u8 *faceData;
     u16 unk9C;

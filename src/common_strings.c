@@ -59,3 +59,4 @@ ALIGNED(4) const u8* const gCommonWithdrawPrompt[] = { sWithdrawPrompt0 };
 // TODO: Move remaining strings/arrays from common_strings.s
 
 #include "data/common_strings_felicity_bank.h"
+#include "data/common_strings_kangaskhan_storage.h"

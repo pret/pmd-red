@@ -14,16 +14,7 @@ typedef struct unkStruct_203B3F8
     /* 0x8 */ PokemonStruct1 *pokemon;
     /* 0xC */ u32 menuAction;
     MenuStruct unk10;
-    u32 unk60;
-    u32 unk64;
-    u32 unk68;
-    u32 unk6C;
-    u32 unk70;
-    u32 unk74;
-    UnkTextStruct2 *unk78;
-    u32 unk7C;
-    u32 unk80;
-    u8 fill84[0x90 - 0x84];
+    unkStructFor8013AA0 unk60;
     MenuItem unk90[8];
     u16 unkD0[8];
     UnkTextStruct2 unkE0[4];

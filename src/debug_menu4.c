@@ -140,14 +140,14 @@ void sub_803AD88(void)
             sub_8012D60(&sUnknown_203B3F8->unk10, sUnknown_203B3F8->unk90, 0, sUnknown_203B3F8->unkD0, sUnknown_203B3F8->menuAction, 2);
             break;
         case 5:
-            sUnknown_203B3F8->unk70 = 3;
-            sUnknown_203B3F8->unk68 = 1;
-            sUnknown_203B3F8->unk6C = 100;
-            sUnknown_203B3F8->unk64 = sUnknown_203B3F8->pokemon->level;
-            sUnknown_203B3F8->unk74 = 3;
-            sUnknown_203B3F8->unk78 = &sUnknown_203B3F8->unkE0[3];
-            sUnknown_203B3F8->unk7C = 44;
-            sUnknown_203B3F8->unk80 = 18;
+            sUnknown_203B3F8->unk60.unk10 = 3;
+            sUnknown_203B3F8->unk60.unk8 = 1;
+            sUnknown_203B3F8->unk60.unkC = 100;
+            sUnknown_203B3F8->unk60.unk4 = sUnknown_203B3F8->pokemon->level;
+            sUnknown_203B3F8->unk60.unk14 = 3;
+            sUnknown_203B3F8->unk60.unk18 = &sUnknown_203B3F8->unkE0[3];
+            sUnknown_203B3F8->unk60.unk1C = 44;
+            sUnknown_203B3F8->unk60.unk20 = 18;
             sub_8013AA0(&sUnknown_203B3F8->unk60);
             sub_803AE58();
             break;
@@ -164,11 +164,11 @@ void sub_803AD88(void)
 
 void sub_803AE58(void)
 {
-    sub_8008C54(sUnknown_203B3F8->unk74);
-    sub_80073B8(sUnknown_203B3F8->unk74);
-    xxx_call_draw_string(4, 0, sNumberPrompt, sUnknown_203B3F8->unk74, 0);
+    sub_8008C54(sUnknown_203B3F8->unk60.unk14);
+    sub_80073B8(sUnknown_203B3F8->unk60.unk14);
+    xxx_call_draw_string(4, 0, sNumberPrompt, sUnknown_203B3F8->unk60.unk14, 0);
     sub_8013C68(&sUnknown_203B3F8->unk60);
-    sub_80073E0(sUnknown_203B3F8->unk74);
+    sub_80073E0(sUnknown_203B3F8->unk60.unk14);
     sub_8023DA4();
     sub_8012EA4(&sUnknown_203B3F8->unk10, 0);
 }
@@ -253,7 +253,7 @@ void sub_803AFE8(void)
         default:
             break;
         case 3:
-            sUnknown_203B3F8->pokemon->level = sUnknown_203B3F8->unk60;
+            sUnknown_203B3F8->pokemon->level = sUnknown_203B3F8->unk60.unk0;
             // Fallthrough is needed to match
         case 2:
             sub_803ACD0(2);

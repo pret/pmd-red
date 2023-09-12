@@ -151,7 +151,6 @@ extern u32 sub_801CE58(void);
 extern void sub_801CC38(void);
 extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 extern void PlayMenuSoundEffect(u32);
-extern void sub_8013C68(u32 *);
 extern void xxx_format_and_draw(u32, u32, const u8 *, u32, u32);
 extern u32 sub_80095E4(s16, u32);
 extern void sub_801C440(void);

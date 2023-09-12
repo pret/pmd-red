@@ -125,7 +125,7 @@ u32 sub_80383D4(void)
 
 void sub_8038440(void)
 {
-#ifdef NONMATCHING
+#ifdef NONMATCHING // SpriteOAM memes. TODO: Match like sub_8039174 with multiple vars and while(0)
     u32 r0;
     u32 r2;
 #else

@@ -34,7 +34,7 @@ static const u8 sUnknown_80D53E0[];
 ALIGNED(4) const u8* const gCommonFelicity[FEL_MODE_COUNT][FEL_DLG_MAX] =
 {
     [FEL_MODE_AWAKE] = {
-        [FEL_DLG_WELCOME_TO_FELICITY] = sUnknown_80D53E0,
+        [FEL_DLG_WELCOME] = sUnknown_80D53E0,
         [FEL_DLG_HOW_MAY_I_SERVE__NO_MONEY] = sUnknown_80D53C8,
         [FEL_DLG_HOW_MAY_I_SERVE__HAS_MONEY] = sUnknown_80D538C,
         [FEL_DLG_VERY_WELL] = sUnknown_80D5380,
@@ -51,7 +51,7 @@ ALIGNED(4) const u8* const gCommonFelicity[FEL_MODE_COUNT][FEL_DLG_MAX] =
         [FEL_DLG_HOW_IT_WORKS] = sUnknown_80D4FC8
     },
     [FEL_MODE_ASLEEP] = {
-        [FEL_DLG_WELCOME_TO_FELICITY] = sUnknown_80D4F94,
+        [FEL_DLG_WELCOME] = sUnknown_80D4F94,
         [FEL_DLG_HOW_MAY_I_SERVE__NO_MONEY] = sUnknown_80D4F74,
         [FEL_DLG_HOW_MAY_I_SERVE__HAS_MONEY] = sUnknown_80D4F24,
         [FEL_DLG_VERY_WELL] = sUnknown_80D4F08,

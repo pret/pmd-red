@@ -45,16 +45,7 @@ struct TradeItemsMenu
     u32 itemMode;
     u32 linkStatus;
     u32 unk10;
-    u32 quantityToSend; // item #
-    u32 unk18;
-    u32 unk1C;
-    u32 unk20;
-    u32 unk24;
-    u32 unk28;
-    UnkTextStruct2 *unk2C;
-    u32 unk30;
-    u32 unk34;
-    u8 fill38[0x44 - 0x38];
+    unkStructFor8013AA0 unk14;
     MenuStruct unk44[4];
     UnkTextStruct2 unk184[4];
     UnkTextStruct2 unk1E4[4];

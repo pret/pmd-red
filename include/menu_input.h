@@ -4,9 +4,9 @@
 #include "menu.h"
 #include "text.h"
 
+// size: 0x1A8
 struct unkStruct_203B34C
 {
-    // size: 0x1A8
     u32 unk0;
     MenuStruct unk4[4];
     UnkTextStruct2 unk144[4];
@@ -51,5 +51,7 @@ void sub_8013A54(MenuInputStruct *param_1);
 void sub_8013A7C(MenuInputStruct *param_1);
 void AddMenuCursorSprite_(MenuInputStruct *, u32);
 void nullsub_34(MenuInputStructSub *);
+
+void sub_8013AA0(unkStructFor8013AA0 *);
 
 #endif // GUARD_MENU_INPUT_H

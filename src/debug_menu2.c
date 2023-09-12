@@ -141,14 +141,14 @@ void sub_803A5A0(void)
             sub_8012D60(&sUnknown_203B3F0->unk4C, sUnknown_203B3F0->menuItems, 0, 0, sUnknown_203B3F0->menuAction, 2);
             break;
         case 3:
-            sUnknown_203B3F0->unkAC = 3;
-            sUnknown_203B3F0->unkA4 = 0;
-            sUnknown_203B3F0->unkA8 = 999;
-            sUnknown_203B3F0->unkA0 = gTeamInventoryRef->teamStorage[sUnknown_203B3F0->id];
-            sUnknown_203B3F0->unkB0 = 1;
-            sUnknown_203B3F0->unkB4 = &sUnknown_203B3F0->unkD8[1];
-            sUnknown_203B3F0->unkB8 = 44;
-            sUnknown_203B3F0->unkBC = 18;
+            sUnknown_203B3F0->unk9C.unk10 = 3;
+            sUnknown_203B3F0->unk9C.unk8 = 0;
+            sUnknown_203B3F0->unk9C.unkC = 999;
+            sUnknown_203B3F0->unk9C.unk4 = gTeamInventoryRef->teamStorage[sUnknown_203B3F0->id];
+            sUnknown_203B3F0->unk9C.unk14 = 1;
+            sUnknown_203B3F0->unk9C.unk18 = &sUnknown_203B3F0->unkD8[1];
+            sUnknown_203B3F0->unk9C.unk1C = 44;
+            sUnknown_203B3F0->unk9C.unk20 = 18;
             sub_8013AA0(&sUnknown_203B3F0->unk9C);
             sub_803A690();
             break;
@@ -163,11 +163,11 @@ void sub_803A5A0(void)
 
 void sub_803A690(void)
 {
-    sub_8008C54(sUnknown_203B3F0->unkB0);
-    sub_80073B8(sUnknown_203B3F0->unkB0);
-    xxx_call_draw_string(4, 0, sNumberPrompt, sUnknown_203B3F0->unkB0, 0);
+    sub_8008C54(sUnknown_203B3F0->unk9C.unk14);
+    sub_80073B8(sUnknown_203B3F0->unk9C.unk14);
+    xxx_call_draw_string(4, 0, sNumberPrompt, sUnknown_203B3F0->unk9C.unk14, 0);
     sub_8013C68(&sUnknown_203B3F0->unk9C);
-    sub_80073E0(sUnknown_203B3F0->unkB0);
+    sub_80073E0(sUnknown_203B3F0->unk9C.unk14);
     sub_801CCD8();
     sub_8012EA4(&sUnknown_203B3F0->unk4C, 0);
 }
@@ -245,7 +245,7 @@ void sub_803A810(void)
 
     switch (sub_8013BBC(&sUnknown_203B3F0->unk9C)) {
         case 3:
-            gTeamInventoryRef->teamStorage[sUnknown_203B3F0->id] = sUnknown_203B3F0->unk9C;
+            gTeamInventoryRef->teamStorage[sUnknown_203B3F0->id] = sUnknown_203B3F0->unk9C.unk0;
             // Fallthrough needed to match
         case 2:
             sub_803A504(1);

@@ -171,19 +171,19 @@ static void sub_8018100(void)
             sub_801AD34(0);
             break;
         case 12:
-            sUnknown_203B20C->unkD0 = 2;
-            sUnknown_203B20C->unkC8 = 1;
+            sUnknown_203B20C->unkC0.unk10 = 2;
+            sUnknown_203B20C->unkC0.unk8 = 1;
 
             if (gTeamInventoryRef->teamStorage[sUnknown_203B20C->item.id] > 99)
-                sUnknown_203B20C->unkCC = 99;
+                sUnknown_203B20C->unkC0.unkC = 99;
             else
-                sUnknown_203B20C->unkCC = gTeamInventoryRef->teamStorage[sUnknown_203B20C->item.id];
+                sUnknown_203B20C->unkC0.unkC = gTeamInventoryRef->teamStorage[sUnknown_203B20C->item.id];
 
-            sUnknown_203B20C->unkC4 = sUnknown_203B20C->unkCC;
-            sUnknown_203B20C->unkD4 = 1;
-            sUnknown_203B20C->unkD8 = &sUnknown_203B20C->unkF0[1];
-            sUnknown_203B20C->unkDC = 40;
-            sUnknown_203B20C->unkE0 = 18;
+            sUnknown_203B20C->unkC0.unk4 = sUnknown_203B20C->unkC0.unkC;
+            sUnknown_203B20C->unkC0.unk14 = 1;
+            sUnknown_203B20C->unkC0.unk18 = &sUnknown_203B20C->unkF0[1];
+            sUnknown_203B20C->unkC0.unk1C = 40;
+            sUnknown_203B20C->unkC0.unk20 = 18;
             sub_8013AA0(&sUnknown_203B20C->unkC0);
             sub_8018280();
             break;
@@ -204,11 +204,11 @@ static void sub_8018100(void)
 
 static void sub_8018280(void)
 {
-    sub_8008C54(sUnknown_203B20C->unkD4);
-    sub_80073B8(sUnknown_203B20C->unkD4);
-    xxx_call_draw_string(4, 0, sNumber, sUnknown_203B20C->unkD4, 0);
+    sub_8008C54(sUnknown_203B20C->unkC0.unk14);
+    sub_80073B8(sUnknown_203B20C->unkC0.unk14);
+    xxx_call_draw_string(4, 0, sNumber, sUnknown_203B20C->unkC0.unk14, 0);
     sub_8013C68(&sUnknown_203B20C->unkC0);
-    sub_80073E0(sUnknown_203B20C->unkD4);
+    sub_80073E0(sUnknown_203B20C->unkC0.unk14);
     sub_801CCD8();
     sub_801AD34(0);
     sub_8012EA4(&sUnknown_203B20C->unk70, 0);
@@ -469,7 +469,7 @@ static void sub_8018854(void)
 
     switch (sub_8013BBC(&sUnknown_203B20C->unkC0)) {
         case 3:
-            sUnknown_203B20C->item.quantity = sUnknown_203B20C->unkC0;
+            sUnknown_203B20C->item.quantity = sUnknown_203B20C->unkC0.unk0;
             gTeamInventoryRef->teamStorage[sUnknown_203B20C->item.id] -= sUnknown_203B20C->item.quantity;
             item.id = sUnknown_203B20C->item.id;
             item.quantity = sUnknown_203B20C->item.quantity;

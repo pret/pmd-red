@@ -6,9 +6,8 @@
 #include "text.h"
 
 // code_80130A8.s
-extern void sub_8013AA0(u32 *);
-extern u32 sub_8013BBC(u32 *);
-extern void sub_8013C68(u32 *);
+extern u32 sub_8013BBC(unkStructFor8013AA0 *);
+extern void sub_8013C68(unkStructFor8013AA0 *);
 extern void sub_8013F84(void);
 extern void sub_80140B4(UnkTextStruct2 *);
 extern void sub_80140DC(void);

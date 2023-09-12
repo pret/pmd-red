@@ -2,13 +2,8 @@
 #define GUARD_COMMON_STRINGS_H
 
 #include "constants/common_strings_felicity_bank.h"
+#include "constants/common_strings_kangaskhan_storage.h"
 
-enum KangaskhanStorageMode
-{
-    KANGASKHAN_STORAGE_MODE_AWAKE,
-    KANGASKHAN_STORAGE_MODE_ASLEEP,
-    KANGASKHAN_STORAGE_MODE_COUNT
-};
 enum KecleonBrosMode
 {
     KECLEON_BROS_MODE_ITEMS_AWAKE,
@@ -64,7 +59,7 @@ extern const u8* const gCommonDepositPrompt[];
 extern const u8* const gCommonWithdrawPrompt[];
 
 extern const u8* const gCommonFelicity[FEL_MODE_COUNT][FEL_DLG_MAX];
-extern const u8* const gCommonKangaskhanStorage[KANGASKHAN_STORAGE_MODE_COUNT][20]; // 80D5404
+extern const u8* const gCommonKangStorage[KANG_MODE_COUNT][KANG_DLG_MAX];
 extern const u8* const gCommonKecleonBros[KECLEON_BROS_MODE_COUNT][23]; // 80D5EC8
 extern const u8* const gCommonWigglytuff[WIGGLYTUFF_SHOP_MODE_COUNT][20]; // 80D79A4
 extern const u8* const gCommonGulpin[GULPIN_SHOP_MODE_COUNT][25]; // 80D8888

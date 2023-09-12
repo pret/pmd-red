@@ -275,7 +275,7 @@ s32 UpdateSaveMenu(void)
 
 void sub_8038830(void)
 {
-#ifdef NONMATCHING
+#ifdef NONMATCHING // SpriteOAM memes. TODO: Match like sub_8039174 with multiple vars and while(0)
     u32 r0;
     u32 r2;
 #else

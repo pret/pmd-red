@@ -149,7 +149,7 @@ static void UpdateFelicityBankDialogue(void)
     switch (sFelicityBankWork->currState) {
         case 0:
             sFelicityBankWork->fallbackState = 1;
-            sub_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WELCOME_TO_FELICITY], 0, sFelicityBankWork->unkA4, 0x10D);
+            sub_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WELCOME], 0, sFelicityBankWork->unkA4, 0x10D);
             break;
         case 1:
             CreateFelicityBankShopMenu();
@@ -195,16 +195,16 @@ static void UpdateFelicityBankDialogue(void)
             }
             break;
         case 8:
-            sFelicityBankWork->maximumDepositWithdraw = MAX_TEAM_SAVINGS - gTeamInventoryRef->teamSavings;
-            if (sFelicityBankWork->maximumDepositWithdraw > gTeamInventoryRef->teamMoney)
-                sFelicityBankWork->maximumDepositWithdraw = gTeamInventoryRef->teamMoney;
-            sFelicityBankWork->unk68 = sFelicityBankWork->maximumDepositWithdraw;
-            sFelicityBankWork->unk6C = 1;
-            sFelicityBankWork->unk74 = 5;
-            sFelicityBankWork->unk78 = 2;
-            sFelicityBankWork->unk7C = &sFelicityBankWork->unkA8[2];
-            sFelicityBankWork->unk80 = 0x50;
-            sFelicityBankWork->unk84 = 0x12;
+            sFelicityBankWork->unk64.unkC = MAX_TEAM_SAVINGS - gTeamInventoryRef->teamSavings;
+            if (sFelicityBankWork->unk64.unkC > gTeamInventoryRef->teamMoney)
+                sFelicityBankWork->unk64.unkC = gTeamInventoryRef->teamMoney;
+            sFelicityBankWork->unk64.unk4 = sFelicityBankWork->unk64.unkC;
+            sFelicityBankWork->unk64.unk8 = 1;
+            sFelicityBankWork->unk64.unk10 = 5;
+            sFelicityBankWork->unk64.unk14 = 2;
+            sFelicityBankWork->unk64.unk18 = &sFelicityBankWork->unkA8[2];
+            sFelicityBankWork->unk64.unk1C = 0x50;
+            sFelicityBankWork->unk64.unk20 = 0x12;
             sub_8013AA0(&sFelicityBankWork->unk64);
             sub_8016B48(FELICITY_BANK_ACTION_DEPOSIT);
             CreateFelicityMoneySavingsHeader(3);
@@ -230,16 +230,16 @@ static void UpdateFelicityBankDialogue(void)
             }
             break;
         case 11:
-            sFelicityBankWork->maximumDepositWithdraw = MAX_TEAM_MONEY - gTeamInventoryRef->teamMoney;
-            if (sFelicityBankWork->maximumDepositWithdraw > gTeamInventoryRef->teamSavings)
-                sFelicityBankWork->maximumDepositWithdraw = gTeamInventoryRef->teamSavings;
-            sFelicityBankWork->unk68 = sFelicityBankWork->maximumDepositWithdraw;
-            sFelicityBankWork->unk6C = 1;
-            sFelicityBankWork->unk74 = 5;
-            sFelicityBankWork->unk78 = 2;
-            sFelicityBankWork->unk7C = &sFelicityBankWork->unkA8[2];
-            sFelicityBankWork->unk80 = 0x50;
-            sFelicityBankWork->unk84 = 0x12;
+            sFelicityBankWork->unk64.unkC = MAX_TEAM_MONEY - gTeamInventoryRef->teamMoney;
+            if (sFelicityBankWork->unk64.unkC > gTeamInventoryRef->teamSavings)
+                sFelicityBankWork->unk64.unkC = gTeamInventoryRef->teamSavings;
+            sFelicityBankWork->unk64.unk4 = sFelicityBankWork->unk64.unkC;
+            sFelicityBankWork->unk64.unk8 = 1;
+            sFelicityBankWork->unk64.unk10 = 5;
+            sFelicityBankWork->unk64.unk14 = 2;
+            sFelicityBankWork->unk64.unk18 = &sFelicityBankWork->unkA8[2];
+            sFelicityBankWork->unk64.unk1C = 0x50;
+            sFelicityBankWork->unk64.unk20 = 0x12;
             sub_8013AA0(&sFelicityBankWork->unk64);
             sub_8016B48(FELICITY_BANK_ACTION_WITHDRAW);
             CreateFelicityMoneySavingsHeader(3);
@@ -326,7 +326,7 @@ static void Felicity_DepositMoney(void)
             sub_8016B48(FELICITY_BANK_ACTION_DEPOSIT);
             break;
         case 3:
-            sFelicityBankWork->chosenAmount = sFelicityBankWork->unk64;
+            sFelicityBankWork->chosenAmount = sFelicityBankWork->unk64.unk0;
             gTeamInventoryRef->teamSavings += sFelicityBankWork->chosenAmount;
             gTeamInventoryRef->teamMoney -= sFelicityBankWork->chosenAmount;
             PlaySound(332);
@@ -347,7 +347,7 @@ static void Felicity_WithdrawMoney(void)
             sub_8016B48(FELICITY_BANK_ACTION_WITHDRAW);
             break;
         case 3:
-            sFelicityBankWork->chosenAmount = sFelicityBankWork->unk64;
+            sFelicityBankWork->chosenAmount = sFelicityBankWork->unk64.unk0;
             gTeamInventoryRef->teamMoney += sFelicityBankWork->chosenAmount;
             gTeamInventoryRef->teamSavings -= sFelicityBankWork->chosenAmount;
             PlaySound(332);
@@ -379,16 +379,16 @@ static void sub_8016B24(void)
 
 static void sub_8016B48(u8 action)
 {
-    sub_8008C54(sFelicityBankWork->unk78);
-    sub_80073B8(sFelicityBankWork->unk78);
+    sub_8008C54(sFelicityBankWork->unk64.unk14);
+    sub_80073B8(sFelicityBankWork->unk64.unk14);
 
     if (action != FELICITY_BANK_ACTION_WITHDRAW)
-        xxx_call_draw_string(12, 0, *gCommonDepositPrompt, sFelicityBankWork->unk78, 0);
+        xxx_call_draw_string(12, 0, *gCommonDepositPrompt, sFelicityBankWork->unk64.unk14, 0);
     else
-        xxx_call_draw_string(12, 0, *gCommonWithdrawPrompt, sFelicityBankWork->unk78, 0);
+        xxx_call_draw_string(12, 0, *gCommonWithdrawPrompt, sFelicityBankWork->unk64.unk14, 0);
 
     sub_8013C68(&sFelicityBankWork->unk64);
-    sub_80073E0(sFelicityBankWork->unk78);
+    sub_80073E0(sFelicityBankWork->unk64.unk14);
 }
 
 static void CreateFelicityMoneySavingsHeader(u32 param_1)

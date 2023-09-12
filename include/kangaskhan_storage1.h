@@ -8,18 +8,20 @@
 
 enum KangaskhanStorageStates
 {
-    KANGASKHAN_STORAGE_INIT = 0,
-    KANGASKHAN_STORAGE_MAIN_MENU = 1,
+    KANGASKHAN_STORAGE_INIT,
+    KANGASKHAN_STORAGE_MAIN_MENU,
+    //
     KANGASKHAN_STORAGE_EXIT = 4,
-    KANGASKHAN_STORAGE_NO_INV_ITEMS = 5,
-    KANGASKHAN_STORAGE_TOO_MANY_ITEMS = 6,
+    KANGASKHAN_STORAGE_NO_INV_ITEMS,
+    KANGASKHAN_STORAGE_TOO_MANY_ITEMS,
+    //
     KANGASKHAN_STORAGE_IS_MONEY_USED_TM = 9,
 };
 
 // size: 0x14C
 struct KangaskhanStorageWork
 {
-    /* 0x0 */ bool32 isAsleep;
+    /* 0x0 */ u32 mode; // Corresponds to the enum: KangaskhanStorageMode
     /* 0x4 */ u32 currState;
     /* 0x8 */ u32 fallbackState;
     /* 0xC */ Item storedItem;
@@ -31,25 +33,14 @@ struct KangaskhanStorageWork
     MenuItem unk24[5];
     u16 unk4C[5];
     MenuStruct unk58;
-    u32 unkA8;
-    u32 unkAC;
-    u32 unkB0;
-    u32 unkB4;
-    u32 unkB8;
-    u32 unkBC;
-    UnkTextStruct2 *unkC0;
-    u32 unkC4;
-    u32 unkC8;
-    u8 unkCC[0xD4 - 0xCC];
-    u32 unkD4;
+    unkStructFor8013AA0 unkA8;
     /* 0xD8 */ OpenedFile *faceFile;
-    /* 0xDC */ u8 *faceData;
-    u16 unkE0;
-    u16 unkE2;
-    u8 unkE4;
-    u8 unkE5;
-    u8 unkE6;
-    u8 unkE7;
+    /* 0xDC */ u8 *faceData; // Written to but never read
+    u16 unkE0; // Written to but never read
+    u16 unkE2; // Written to but never read
+    bool8 unkE4;
+    u8 unkE5; // Written to but never read
+    u8 unkE6; // Written to but never read
     OpenedFile **unkE8;
     UnkTextStruct2 unkEC[4];
 };
