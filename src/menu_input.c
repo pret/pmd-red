@@ -1310,3 +1310,43 @@ void sub_8013C68(unkStructFor8013AA0 *a0)
     for (i = 0; i < a0->unk10; i++)
         sub_800792C(a0->unk14, a0->unk1C - ((i + 1) * 12) - 1, a0->unk20 + 10, 11, 5);
 }
+
+void sub_8013D10(unkStructFor8013AA0 *a0)
+{
+    u8 uVar4;
+    UnkTextStruct1 *ptr;
+
+    ptr = &gUnknown_2027370[a0->unk14];
+    uVar4 = a0->unk24;
+
+    switch (sub_8012AE8()) {
+        case 9:
+            uVar4 = a0->unk24 < a0->unk25 - 1 ? a0->unk24 + 1 : 0;
+            break;
+        case 10:
+            uVar4 = a0->unk24 == 0 ? a0->unk25 - 1 : a0->unk24 - 1;
+            break;
+    }
+
+    if (uVar4 != a0->unk24) {
+        a0->unk24 = uVar4;
+        PlayMenuSoundEffect(3);
+        a0->unk26 = 8;
+    }
+
+    {
+        s32 temp = (a0->unk1C - ((a0->unk24 + 1) * 12) + (ptr->unk0 * 8)) - 3;
+        temp &= SPRITEOAM_MAX_X;
+        temp <<= SPRITEOAM_SHIFT_X;
+        a0->unk28.attrib2 &= ~SPRITEOAM_MASK_X;
+        a0->unk28.attrib2 |= temp;
+    } while (0);
+
+    {
+        s32 temp = a0->unk20 + (ptr->unk2 * 8) - 7;
+        temp &= SPRITEOAM_MAX_UNK6_4;
+        temp <<= SPRITEOAM_SHIFT_UNK6_4;
+        a0->unk28.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
+        a0->unk28.unk6 |= temp;
+    } while (0);
+}
