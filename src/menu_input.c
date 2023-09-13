@@ -14,6 +14,7 @@
 
 // data_80D47B8.s
 extern const u8 gUnknown_80D4828[];
+extern const s32 gUnknown_80D4830[9];
 
 // text.s
 extern s32 sub_8008ED0(const u8 *);
@@ -22,6 +23,7 @@ extern s16 sub_8009614(u32, u32);
 static void sub_8013134(MenuInputStruct *, u32, u32);
 static void sub_801332C(s16 *);
 static void sub_8013470(MenuInputStruct *);
+static bool8 sub_8013DD0(unkStructFor8013AA0 *);
 
 ALIGNED(4) static const char fill_save7[] = _("pksdir0");
 const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
@@ -1349,4 +1351,42 @@ void sub_8013D10(unkStructFor8013AA0 *a0)
         a0->unk28.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
         a0->unk28.unk6 |= temp;
     } while (0);
+}
+
+static bool8 sub_8013DD0(unkStructFor8013AA0 *a0)
+{
+    s32 iVar2;
+
+    switch (sub_8012AE8()) {
+        case 7:
+            if (a0->unk0 == a0->unkC) {
+                PlayMenuSoundEffect(2);
+                return FALSE;
+            }
+
+            iVar2 = a0->unk0 + gUnknown_80D4830[a0->unk24];
+            PlayMenuSoundEffect(3);
+
+            if (iVar2 > a0->unkC)
+                a0->unk0 = a0->unkC;
+            else
+                a0->unk0 = iVar2;
+            return TRUE;
+        case 8:
+            if (a0->unk0 == a0->unk8) {
+                PlayMenuSoundEffect(2);
+                return FALSE;
+            }
+
+            iVar2 = a0->unk0 - gUnknown_80D4830[a0->unk24];
+            PlayMenuSoundEffect(3);
+
+            if (iVar2 < a0->unk8)
+                a0->unk0 = a0->unk8;
+            else
+                a0->unk0 = iVar2;
+            return TRUE;
+        default:
+            return FALSE;
+    }
 }
