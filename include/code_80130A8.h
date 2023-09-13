@@ -6,7 +6,6 @@
 #include "text.h"
 
 // code_80130A8.s
-extern void sub_8013C68(unkStructFor8013AA0 *);
 extern void sub_8013D10(unkStructFor8013AA0 *);
 extern bool8 sub_8013DD0(unkStructFor8013AA0 *);
 extern void sub_8013F84(void);

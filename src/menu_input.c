@@ -1028,7 +1028,6 @@ void sub_8013818(MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4
     sub_80137F8(param_1, 12);
 }
 
-
 void sub_8013848(MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4)
 {
     param_1->unk0 = param_4;
@@ -1286,4 +1285,28 @@ u32 sub_8013BBC(unkStructFor8013AA0 *a0)
             return 3;
     }
     return 0;
+}
+
+void sub_8013C68(unkStructFor8013AA0 *a0)
+{
+    u8 ch;
+    s32 i;
+    s32 sp[10];
+
+    ConvertToDecimal(sp, a0->unk0, a0->unk10);
+
+    for (i = a0->unk10 - 1; i > 0 && sp[i] == 0; i--)
+        sp[i] = 0xFF;
+
+    for (i = 0; i < a0->unk25; i++) {
+        if (sp[i] == 0xFF)
+            ch = '*';
+        else
+            ch = '0' + sp[i];
+
+        sub_8012C60(a0->unk1C - ((i + 1) * 12), a0->unk20, ch, 7, a0->unk14);
+    }
+
+    for (i = 0; i < a0->unk10; i++)
+        sub_800792C(a0->unk14, a0->unk1C - ((i + 1) * 12) - 1, a0->unk20 + 10, 11, 5);
 }
