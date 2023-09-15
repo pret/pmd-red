@@ -33,6 +33,7 @@ void sub_8002758(s32 r0);
 u8 sub_800276C(void);
 
 // event_flag.s
+extern void sub_80015C0(u32, u32);
 extern u32 sub_8001658(u32, u32);
 
 #endif // GUARD_EVENT_FLAG_H

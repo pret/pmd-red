@@ -53,7 +53,6 @@ extern void GroundEffect_Action();
 
 extern s32 sub_8001784(u8, u8, u8);
 extern void sub_809CB8C();
-extern void sub_80015C0(u8, u8);
 extern void sub_80018D8(u8, u8, u32);
 extern void sub_800199C(u8, u8, u8, s32);
 extern void sub_8098CC8();

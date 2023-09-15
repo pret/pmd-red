@@ -36,6 +36,15 @@ enum MainMenuScreens
     MENU_NO_SCREEN_CHANGE = 65500
 };
 
+// size: 0x1A8
+typedef struct unkStruct_203B34C
+{
+    u32 unk0;
+    MenuStruct unk4[4];
+    UnkTextStruct2 unk144[4];
+    /* 0x1A4 */ u32 currMenuChoice;
+} unkStruct_203B34C;
+
 // size: 0x8
 typedef struct unkStruct_8035D94
 {

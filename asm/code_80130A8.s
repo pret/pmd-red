@@ -324,6 +324,11 @@ _080140BC:
 _080140D8: .4byte gUnknown_80D47C8
 	thumb_func_end sub_80140B4
 
+
+@ May be the start of a new file, since menu_input data has been used already
+
+
+
 	thumb_func_start sub_80140DC
 sub_80140DC:
 	push {lr}

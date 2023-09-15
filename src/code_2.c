@@ -39,7 +39,6 @@ extern void LoadMailInfo(void);
 extern void sub_800DAAC(void);
 extern void sub_800135C(void);
 extern void xxx_script_related_8001334(u32);
-extern void sub_80015C0(u32, u32);
 extern void LoadTitleScreen(void);
 extern void sub_80095CC(u32, u32);
 extern s32 GetFirstIndexofMailType(u8);

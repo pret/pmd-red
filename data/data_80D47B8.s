@@ -1,6 +1,6 @@
 	.section .rodata
 
-@ START code_80130A8 #1 (probably part of menu_input because the "pksdir0" is in there)
+@ START menu_input
     .align 2, 0
 
         .global UnkData_80D47C4
@@ -54,9 +54,9 @@ gUnknown_80D4830: @ 80D4830
         .4byte 10000000
         .4byte 100000000
 
-@ END code_80130A8 #1
+@ END menu_input
 
-@ START code_80130A8 #2
+@ START code_80130A8
 .asciz "pksdir0"
 
 	.global gUnknown_80D485C
@@ -155,4 +155,4 @@ gUnknown_80D4908: @ 80D4908
 gUnknown_80D4910: @ 80D4910
         .string "$\0"
 
-@ END code_80130A8 #2
+@ END code_80130A8

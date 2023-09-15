@@ -50,7 +50,6 @@ struct unkStruct_80B7394
 };
 
 extern struct unkStruct_80B7394 gUnknown_80B7394[];
-extern void sub_80015C0(u32, u32);
 extern void sub_800199C(u32, s32, u32, s32);
 extern void sub_80018D8(u32, u32, u32);
 extern void sub_80972F4(void);

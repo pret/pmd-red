@@ -23,7 +23,6 @@ void RestoreWonderMail(struct unkStruct_8094924 *a, WonderMail *b);
 extern s32 sub_8096EB0(WonderMail *);
 extern void SaveDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
 extern void RestoreDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
-extern void sub_80015C0(u8, u8);
 extern u32 sub_8001784(u32, u32, u16);
 extern void GeneratePelipperJobs(void);
 extern void sub_80018D8(u8, u8, u32);

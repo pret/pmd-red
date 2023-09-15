@@ -1,28 +1,25 @@
 #include "global.h"
-#include "constants/friend_area.h"
-#include "pokemon.h"
-#include "constants/input.h"
-#include "file_system.h"
-#include "menu.h"
-#include "pokemon.h"
-#include "pokemon_3.h"
-#include "input.h"
-#include "text1.h"
-#include "text2.h"
-#include "memory.h"
-#include "menu_input.h"
-#include "friend_area.h"
-#include "wigglytuff_shop.h"
-#include "felicity_bank.h"
+#include "code_800D090.h"
+#include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801EE10_mid.h"
 #include "code_8021774.h"
-#include "code_80118A4.h"
-#include "code_800D090.h"
+#include "code_8098BDC.h"
+#include "common_strings.h"
+#include "constants/friend_area.h"
+#include "constants/input.h"
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
-#include "common_strings.h"
-#include "code_80118A4.h"
+#include "felicity_bank.h"
+#include "file_system.h"
+#include "friend_area.h"
+#include "menu_input.h"
+#include "memory.h"
+#include "pokemon.h"
+#include "pokemon_3.h"
+#include "text1.h"
+#include "text2.h"
+#include "wigglytuff_shop.h"
 
 // TODO: This file was originally 3 files. Split properly
 // 4 files if you count code_8023144.s
@@ -100,9 +97,6 @@ extern void sub_8022380(void);
 bool8 sub_8023144(s32 param_1, s32 index, UnkTextStruct2_sub *sub, u32 param_4);
 void sub_8023354(u8 param_1);
 extern void CreateWigglytuffConfirmFriendAreaMenu(void);
-extern u8 sub_8099B94(void);
-extern void sub_8099AFC(u32, u32, u32);
-extern void sub_8099A5C(u32, u32, u32);
 
 extern u32 sub_8023278(u32);
 void sub_80233A0(void);
