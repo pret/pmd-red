@@ -9,7 +9,6 @@ static const UnkTextStruct2 sUnknown_80E7D40 =
     0, 0,
     NULL
 };
-
 static const UnkTextStruct2 sUnknown_80E7D58 =
 {
     0, 0, 0, 0,

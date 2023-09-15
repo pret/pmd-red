@@ -9,62 +9,30 @@
 #include "text1.h"
 #include "text2.h"
 
-static EWRAM_DATA_2 struct unkStruct_203B3F0 *sUnknown_203B3F0 = {0};
+static EWRAM_DATA_2 unkStruct_203B3F0 *sUnknown_203B3F0 = {0};
 
-ALIGNED(4) static const u8 sFill[] = _("pksdir0");
+#include "data/debug_menu2.h"
 
-static const UnkTextStruct2 sUnknown_80E7E34 =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x00, 0x00,
-    0x00, 0x00,
-    0x00, 0x00,
-    NULL
-};
-static const UnkTextStruct2 sUnknown_80E7E4C =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x14, 0x04,
-    0x06, 0x03,
-    0x03, 0x00,
-    NULL
-};
-static const UnkTextStruct2 sUnknown_80E7E64 =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x14, 0x0e,
-    0x06, 0x04,
-    0x04, 0x00,
-    NULL
-};
+static void sub_803A504(u32 newState);
+static void sub_803A51C(void);
+static void sub_803A5A0(void);
+static void sub_803A690(void);
+static void sub_803A6F0(void);
+static void sub_803A740(void);
+static void sub_803A7B0(void);
+static void sub_803A810(void);
+static void sub_803A86C(void);
 
-ALIGNED(4) static const u8 sNumberPrompt[] = "Number?";
-
-void sub_803A504(u32);
-void sub_803A51C(void);
-void sub_803A5A0(void);
-void sub_803A690(void);
-void sub_803A6F0(void);
-void sub_803A740(void);
-void sub_803A7B0(void);
-void sub_803A810(void);
-void sub_803A86C(void);
-
-// Unused
-u32 sub_803A45C(void)
+UNUSED static bool8 sub_803A45C(void)
 {
     ResetUnusedInputStruct();
     sub_800641C(NULL, TRUE, TRUE);
-    sUnknown_203B3F0 = MemoryAlloc(sizeof(struct unkStruct_203B3F0), 8);
+    sUnknown_203B3F0 = MemoryAlloc(sizeof(unkStruct_203B3F0), 8);
     sub_803A504(0);
-    return 1;
+    return TRUE;
 }
 
-// Unused
-u32 sub_803A48C(void)
+UNUSED static u32 sub_803A48C(void)
 {
     switch (sUnknown_203B3F0->state) {
         case 0:
@@ -86,8 +54,7 @@ u32 sub_803A48C(void)
     return 0;
 }
 
-// Unused
-void sub_803A4E8(void)
+UNUSED static void sub_803A4E8(void)
 {
     if (sUnknown_203B3F0 != NULL) {
         MemoryFree(sUnknown_203B3F0);
@@ -95,14 +62,14 @@ void sub_803A4E8(void)
     }
 }
 
-void sub_803A504(u32 newState)
+static void sub_803A504(u32 newState)
 {
     sUnknown_203B3F0->state = newState;
     sub_803A51C();
     sub_803A5A0();
 }
 
-void sub_803A51C(void)
+static void sub_803A51C(void)
 {
     s32 i;
 
@@ -125,7 +92,7 @@ void sub_803A51C(void)
     sub_800641C(sUnknown_203B3F0->unkD8, TRUE, TRUE);
 }
 
-void sub_803A5A0(void)
+static void sub_803A5A0(void)
 {
     Item item;
 
@@ -162,7 +129,7 @@ void sub_803A5A0(void)
     }
 }
 
-void sub_803A690(void)
+static void sub_803A690(void)
 {
     sub_8008C54(sUnknown_203B3F0->unk9C.unk14);
     sub_80073B8(sUnknown_203B3F0->unk9C.unk14);
@@ -173,7 +140,7 @@ void sub_803A690(void)
     sub_8012EA4(&sUnknown_203B3F0->unk4C, 0);
 }
 
-void sub_803A6F0(void)
+static void sub_803A6F0(void)
 {
     s32 loopMax = 0;
 
@@ -185,16 +152,16 @@ void sub_803A6F0(void)
         sUnknown_203B3F0->menuAction = 3;
     }
 
-    loopMax += 1;
+    loopMax++;
     sUnknown_203B3F0->menuItems[loopMax].text = *gCommonInfo;
     sUnknown_203B3F0->menuItems[loopMax].menuAction = 3;
 
-    loopMax += 1;
+    loopMax++;
     sUnknown_203B3F0->menuItems[loopMax].text = NULL;
     sUnknown_203B3F0->menuItems[loopMax].menuAction = 1;
 }
 
-void sub_803A740(void)
+static void sub_803A740(void)
 {
     switch (sub_801CA08(TRUE)) {
         case 0:
@@ -215,7 +182,7 @@ void sub_803A740(void)
     }
 }
 
-void sub_803A7B0(void)
+static void sub_803A7B0(void)
 {
     s32 menuAction;
 
@@ -239,7 +206,7 @@ void sub_803A7B0(void)
     }
 }
 
-void sub_803A810(void)
+static void sub_803A810(void)
 {
     sub_801CA08(FALSE);
     sub_8012FD8(&sUnknown_203B3F0->unk4C);
@@ -257,7 +224,7 @@ void sub_803A810(void)
     }
 }
 
-void sub_803A86C(void)
+static void sub_803A86C(void)
 {
     switch (sub_801B410()) {
         case 1:

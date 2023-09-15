@@ -10,48 +10,17 @@
 
 static EWRAM_DATA_2 unkStruct_203B3F8 *sUnknown_203B3F8 = {0};
 
-ALIGNED(4) static const u8 sFill[] = _("pksdir0");
+#include "data/debug_menu4.h"
 
-static const UnkTextStruct2 sUnknown_80E7ED4 =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x00, 0x00,
-    0x00, 0x00,
-    0x00, 0x00,
-    NULL
-};
-static const UnkTextStruct2 sUnknown_80E7EEC =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x13, 0x04,
-    0x09, 0x03,
-    0x03, 0x00,
-    NULL
-};
-static const UnkTextStruct2 sUnknown_80E7F04 =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x13, 0x0e,
-    0x06, 0x04,
-    0x04, 0x00,
-    NULL
-};
-ALIGNED(4) static const u8 sNumberPrompt[] = "Number?";
-ALIGNED(4) static const u8 sLevel[] = "LEVEL";
-ALIGNED(4) static const u8 sName[] = "Name";
-
-void sub_803ACD0(u32);
-void sub_803ACE8(void);
-void sub_803AD88(void);
-void sub_803AE58(void);
-void sub_803AEB0(void);
-void sub_803AF38(void);
-void sub_803AF88(void);
-void sub_803AFE8(void);
-void sub_803B034(void);
+static void sub_803ACD0(u32 newState);
+static void sub_803ACE8(void);
+static void sub_803AD88(void);
+static void sub_803AE58(void);
+static void sub_803AEB0(void);
+static void sub_803AF38(void);
+static void sub_803AF88(void);
+static void sub_803AFE8(void);
+static void sub_803B034(void);
 
 UNUSED static bool8 sub_803AC24(void)
 {
@@ -95,14 +64,14 @@ UNUSED static void sub_803ACB4(void)
     }
 }
 
-void sub_803ACD0(u32 newState)
+static void sub_803ACD0(u32 newState)
 {
     sUnknown_203B3F8->state = newState;
     sub_803ACE8();
     sub_803AD88();
 }
 
-void sub_803ACE8(void)
+static void sub_803ACE8(void)
 {
     s32 i;
 
@@ -127,7 +96,7 @@ void sub_803ACE8(void)
     sub_800641C(sUnknown_203B3F8->unkE0, TRUE, TRUE);
 }
 
-void sub_803AD88(void)
+static void sub_803AD88(void)
 {
     switch (sUnknown_203B3F8->state) {
         case 1:
@@ -163,7 +132,7 @@ void sub_803AD88(void)
     }
 }
 
-void sub_803AE58(void)
+static void sub_803AE58(void)
 {
     sub_8008C54(sUnknown_203B3F8->unk60.unk14);
     sub_80073B8(sUnknown_203B3F8->unk60.unk14);
@@ -174,7 +143,7 @@ void sub_803AE58(void)
     sub_8012EA4(&sUnknown_203B3F8->unk10, 0);
 }
 
-void sub_803AEB0(void)
+static void sub_803AEB0(void)
 {
     s32 i;
     s32 loopMax;
@@ -201,7 +170,7 @@ void sub_803AEB0(void)
     }
 }
 
-void sub_803AF38(void)
+static void sub_803AF38(void)
 {
     switch (sub_8023A94(TRUE)) {
         case 3:
@@ -219,7 +188,7 @@ void sub_803AF38(void)
     }
 }
 
-void sub_803AF88(void)
+static void sub_803AF88(void)
 {
     s32 menuAction;
 
@@ -245,7 +214,7 @@ void sub_803AF88(void)
     }
 }
 
-void sub_803AFE8(void)
+static void sub_803AFE8(void)
 {
     sub_8023A94(FALSE);
     sub_8012FD8(&sUnknown_203B3F8->unk10);
@@ -265,7 +234,7 @@ void sub_803AFE8(void)
     }
 }
 
-void sub_803B034(void)
+static void sub_803B034(void)
 {
     switch (sub_8016080()) {
         case 2:

@@ -5,7 +5,7 @@
 #include "text.h"
 
 // size: 0x138
-struct unkStruct_203B3F0
+typedef struct unkStruct_203B3F0
 {
     /* 0x0 */ u32 state;
     /* 0x4 */ u8 id;
@@ -15,6 +15,6 @@ struct unkStruct_203B3F0
     unkStructFor8013AA0 unk9C;
     u8 fillCC[0xD8 - 0xCC];
     UnkTextStruct2 unkD8[4];
-};
+} unkStruct_203B3F0;
 
 #endif // GUARD_DEBUG_MENU2_H
