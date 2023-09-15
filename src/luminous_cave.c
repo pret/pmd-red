@@ -726,7 +726,7 @@ static void sub_8025254(void)
         sLuminousCaveWork->evolveStatus.evoItem2 = gTeamInventoryRef->teamItems[sLuminousCaveWork->evoItem2_InvIndex].id;
     }
 
-    sLuminousCaveWork->evolveStatus.unk6 = RandInt(0xFF);
+    sLuminousCaveWork->evolveStatus.wurmpleVal = RandInt(0xFF);
     sub_808F468(sLuminousCaveWork->pokeStruct, &sLuminousCaveWork->evolveStatus, 1);
 }
 

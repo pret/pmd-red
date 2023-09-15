@@ -8,7 +8,7 @@ typedef struct EvolveStatus
 {
     /* 0x0 */ u8 evoItem1;
     /* 0x1 */ u8 evoItem2;
-    /* 0x2 */ u8 unk6;
+    /* 0x2 */ u8 wurmpleVal;
     /* 0x4 */ u16 evolutionConditionStatus;
     /* 0x6 */ s16 targetEvolveSpecies;
 } EvolveStatus;

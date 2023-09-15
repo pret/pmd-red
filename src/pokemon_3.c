@@ -1048,12 +1048,12 @@ void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, u8 param_3
                     continue;
                 }
             }
-            else if (evolveConditions.evolutionRequirements.additionalRequirement == 0xb) {
-                if ((evolveStatus->unk6 & 1) == 0) goto _0808F6CA;
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 11) {
+                if (!(evolveStatus->wurmpleVal & 1)) goto _0808F6CA;
                 else  continue;
             }
-            else if (evolveConditions.evolutionRequirements.additionalRequirement == 0xc) {
-                if ((evolveStatus->unk6 & 1)) goto _0808F6CA;
+            else if (evolveConditions.evolutionRequirements.additionalRequirement == 12) {
+                if ((evolveStatus->wurmpleVal & 1)) goto _0808F6CA;
                 else  continue;
             }
             else if (evolveConditions.evolutionRequirements.additionalRequirement == 10) {
