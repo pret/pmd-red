@@ -3,13 +3,14 @@
 
 #include "pokemon.h"
 
+// size: 0x8
 typedef struct EvolveStatus
 {
-    u8 evoItem1;
-    u8 evoItem2;
-    u8 unk6;
-    u16 evolutionConditionStatus;
-    s16 targetEvolveSpecies;
+    /* 0x0 */ u8 evoItem1;
+    /* 0x1 */ u8 evoItem2;
+    /* 0x2 */ u8 unk6;
+    /* 0x4 */ u16 evolutionConditionStatus;
+    /* 0x6 */ s16 targetEvolveSpecies;
 } EvolveStatus;
 
 bool8 HasRecruitedMon(s16 species);
@@ -29,4 +30,4 @@ void SetDefaultIQSkills(u8 *param_1, bool8 enableSelfCurer);
 void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, u8 param_3);
 u32 sub_808F734(PokemonStruct1 *pokemon, s16 _species);
 
-#endif
+#endif // GUARD_POKEMON_3_H

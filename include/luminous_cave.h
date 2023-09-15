@@ -7,21 +7,21 @@
 #include "pokemon_3.h"
 #include "text.h"
 
-struct unkStruct_203B2B0
+// size: 0x174
+typedef struct LuminousCaveWork
 {
-    // size: 0x174
-    bool8 evolutionComplete;
-    EvolveStatus evolveStatus;
-    PokemonStruct1 *pokeStruct;
+    /* 0x0 */ bool8 evolutionComplete;
+    /* 0x4 */ EvolveStatus evolveStatus;
+    /* 0xC */ PokemonStruct1 *pokeStruct;
     /* 0x10 */ bool8 pokeRenamed;
     /* 0x14 */ u32 evoItem1_InvIndex; // inventory index of item
     /* 0x18 */ u32 evoItem2_InvIndex; // inventory index of item
-    Item chosenItem;
-    u32 state;
-    u32 fallbackState;
-    u32 menuAction1;
-    u32 menuAction2;
-    u32 menuAction3;
+    /* 0x1C */ Item chosenItem;
+    /* 0x20 */ u32 state;
+    /* 0x24 */ u32 fallbackState;
+    /* 0x28 */ u32 menuAction1;
+    /* 0x2C */ u32 menuAction2;
+    /* 0x30 */ u32 menuAction3;
     MenuItem unk34[8];
     u16 unk74[0x8];
     MenuStruct unk84;
@@ -34,7 +34,7 @@ struct unkStruct_203B2B0
     u8 unk111;
     u8 unk112;
     UnkTextStruct2 unk114[4];
-};
+} LuminousCaveWork;
 
 void CleanLuminousCave(void);
 bool8 HasEvolutionCompleted(void);

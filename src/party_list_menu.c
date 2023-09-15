@@ -63,7 +63,6 @@ bool8 CanTakePokemonHeldItem(PokemonStruct1 *r0);
 extern PokemonStruct1 *sub_808D3F8(void);
 extern PokemonStruct1 *sub_808D3BC(void);
 extern s32 sub_8008ED0(u8 *);
-extern void nullsub_104(void);
 extern u32 sub_8022860(void);
 extern void sub_8022908(void);
 extern u32 sub_80244E4(void);

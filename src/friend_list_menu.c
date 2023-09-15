@@ -59,7 +59,6 @@ EWRAM_DATA_2 unkStruct_203B2B4 *gUnknown_203B2B4 = {0};
 extern s16 sub_80A5728(void);
 extern u8 sub_8002658(s16);
 extern bool8 sub_8024108(u32);
-extern void nullsub_104(void);
 extern void sub_808ED00(void);
 extern u32 sub_80244E4(void);
 
