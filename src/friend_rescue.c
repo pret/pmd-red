@@ -888,7 +888,7 @@ void sub_8032828(void)
             break;
         case 0x27:
             sub_8006518(gUnknown_203B33C->unk35C);
-            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E2334, &gUnknown_80E234C, TRUE, 0, 0);
+            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E2334, &gUnknown_80E234C, TRUE, 0, FALSE);
             sub_8023DA4();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;
@@ -1051,7 +1051,7 @@ void sub_8032828(void)
             break;
         case 0x5D:
             sub_8006518(gUnknown_203B33C->unk35C);
-            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, &gUnknown_80E2408, TRUE, 0, 0);
+            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, &gUnknown_80E2408, TRUE, 0, FALSE);
             sub_803092C();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;
@@ -1067,7 +1067,7 @@ void sub_8032828(void)
             break;
         case 0x60:
             sub_8006518(gUnknown_203B33C->unk35C);
-            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E23F0, &gUnknown_80E2408, TRUE, 0, 0);
+            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E23F0, &gUnknown_80E2408, TRUE, 0, FALSE);
             sub_801CCD8();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;
@@ -1230,7 +1230,7 @@ void sub_8032828(void)
         case 0x1E:
         case 0x33:
             sub_8006518(gUnknown_203B33C->unk35C);
-            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, &gUnknown_80E234C, TRUE, 0, 0);
+            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, &gUnknown_80E234C, TRUE, 0, FALSE);
             sub_803092C();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;

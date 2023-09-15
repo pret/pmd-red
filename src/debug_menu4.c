@@ -8,7 +8,9 @@
 #include "text1.h"
 #include "text2.h"
 
-EWRAM_DATA_2 static unkStruct_203B3F8 *sUnknown_203B3F8 = {0};
+static EWRAM_DATA_2 unkStruct_203B3F8 *sUnknown_203B3F8 = {0};
+
+ALIGNED(4) static const u8 sFill[] = _("pksdir0");
 
 static const UnkTextStruct2 sUnknown_80E7ED4 =
 {
@@ -40,7 +42,6 @@ static const UnkTextStruct2 sUnknown_80E7F04 =
 ALIGNED(4) static const u8 sNumberPrompt[] = "Number?";
 ALIGNED(4) static const u8 sLevel[] = "LEVEL";
 ALIGNED(4) static const u8 sName[] = "Name";
-static const u8 sFill[] = "pksdir0";
 
 void sub_803ACD0(u32);
 void sub_803ACE8(void);

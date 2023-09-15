@@ -41,7 +41,7 @@ void CleanUpMenu(void);
 void DeleteMainMenu(void);
 MainMenu1Work *GetMainMenu(void);
 void InitMainMenu(void);
-void SetMenuItems(MenuStruct *, UnkTextStruct2 *, s32 index, const UnkTextStruct2 *, const MenuItem *menuItems, bool8, u32 menuAction, u32 unused);
+void SetMenuItems(MenuStruct *, UnkTextStruct2 *, s32 index, const UnkTextStruct2 *, const MenuItem *menuItems, bool8, u32 menuAction, bool8 unused);
 void SetUpMenu(void);
 s32 UpdateMenu(void);
 

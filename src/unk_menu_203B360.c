@@ -75,7 +75,7 @@ void sub_80382E4(s32 currMenu)
       // The storage space is empty!
       // Please check again.
     SetMenuItems(sUnknown_203B360->unk8,sUnknown_203B360->unk148,0,&gUnknown_80E6E94,gUnknown_80E6EAC,
-                 FALSE,4,0);
+                 FALSE,4,FALSE);
   }
   sub_8035CF4(sUnknown_203B360->unk8,0,TRUE);
   sUnknown_203B360->currMenu = currMenu;

@@ -13,6 +13,8 @@
 
 static EWRAM_DATA_2 unkStruct_203B3F4 *sUnknown_203B3F4 = {0};
 
+ALIGNED(4) static const u8 sFill[] = _("pksdir0");
+
 static const UnkTextStruct2 sUnknown_80E7E8C =
 {
     0x00, 0x00, 0x00, 0x00,
@@ -34,7 +36,6 @@ static const UnkTextStruct2 sUnknown_80E7EA4 =
 
 ALIGNED(4) static const u8 sClose[] = "CLOSE";
 ALIGNED(4) static const u8 sOpen[] = "OPEN";
-ALIGNED(4) static const u8 sFill[] = "pksdir0";
 
 void sub_803A924(u32);
 void sub_803A93C(void);

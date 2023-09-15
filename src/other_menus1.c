@@ -64,7 +64,7 @@ void sub_8036FDC(s32 param_1)
 
     ResetUnusedInputStruct();
     sub_800641C(sUnknown_203B35C->unk15C, TRUE, TRUE);
-    SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6CD0, sUnknown_80E6CE8, FALSE, 6, 0);
+    SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6CD0, sUnknown_80E6CE8, FALSE, 6, FALSE);
     sub_8035CF4(sUnknown_203B35C->unk1C, 0, TRUE);
     sub_80376CC();
 }
@@ -138,7 +138,7 @@ static void sub_80371B8(void)
             // Success!
             // The item exchange with your friend
             // went through successfully
-            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6C50, sUnknown_80E6C68, FALSE, 6, 0);
+            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6C50, sUnknown_80E6C68, FALSE, 6, FALSE);
             sub_8035CF4(sUnknown_203B35C->unk1C, 0, TRUE);
         }
     }
@@ -200,7 +200,7 @@ static void sub_80371B8(void)
                 break;
         }
 
-        SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, puVar5, MenuItems, FALSE, 6, 0);
+        SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, puVar5, MenuItems, FALSE, 6, FALSE);
         sub_8035CF4(sUnknown_203B35C->unk1C, 0, TRUE);
 
         if (sUnknown_203B35C->linkStatus != COMMS_GOOD && sUnknown_203B35C->unk0 == 0) {

@@ -520,7 +520,7 @@ void sub_8036B28(void)
     case TRADE_ITEMS_SEND_ITEM_POPUP_MENU:
         sub_8006518(sTradeItemsMenu->unk184);
         SetMenuItems(sTradeItemsMenu->unk44,sTradeItemsMenu->unk184,3,&sUnknown_80E60EC,
-                    sUnknown_80E6104,TRUE,0,0);
+                    sUnknown_80E6104,TRUE,0,FALSE);
         sub_801CCD8();
         sub_8035CF4(sTradeItemsMenu->unk44,3,TRUE);
         break;

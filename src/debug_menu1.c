@@ -12,51 +12,27 @@
 #include "text_util.h"
 #include "text1.h"
 
-EWRAM_DATA_2 static struct DebugMenu *sDebugMenu = {0};
-
-static const UnkTextStruct2 sUnknown_80E7D40 =
+enum DebugMenuOptions
 {
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x00, 0x00,
-    0x00, 0x00,
-    0x00, 0x00,
-    NULL
+    MENU_DEBUG_MENU_DUNGEONS,
+    MENU_DEBUG_MENU_FIELD,
+    MENU_DEBUG_MENU_FIELD_MAP,
+    MENU_DEBUG_MENU_FIELD_SCRIPT,
+    MENU_DEBUG_MENU_DEBUG_MENU,
+    MENU_DEBUG_MENU_UNKNOWN_1,
+    MENU_DEBUG_MENU_STORAGE,
+    //
+    MENU_DEBUG_MENU_H_OPEN = 9,
 };
 
-static const UnkTextStruct2 sUnknown_80E7D58 =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x02, 0x02,
-    0x09, 0x0b,
-    0x0b, 0x00,
-    NULL
-};
+static EWRAM_DATA_2 struct DebugMenu *sDebugMenu = {0};
 
-static const MenuItem sDebugMenuItems[8] =
-{
-    {"Dungeons", MENU_DEBUG_MENU_DUNGEONS},
-    {"Field", MENU_DEBUG_MENU_FIELD},
-    {"Field Map", MENU_DEBUG_MENU_FIELD_MAP},
-    {"Field Script", MENU_DEBUG_MENU_FIELD_SCRIPT},
-    {"Debug Menu", MENU_DEBUG_MENU_DEBUG_MENU},
-    {"Storage", MENU_DEBUG_MENU_STORAGE},
-    {"h-open", MENU_DEBUG_MENU_H_OPEN},
-    {NULL, 10},
-};
+#include "data/debug_menu1.h"
 
-ALIGNED(4) static const u8 sDebugMenuFill1[] = "pksdir0";
-ALIGNED(4) static const u8 sDebugMenuFill2[] = "pksdir0";
-ALIGNED(4) static const u8 sDebugMenuFill3[] = "pksdir0";
-ALIGNED(4) static const u8 sDebugMenuFill4[] = "pksdir0";
-ALIGNED(4) static const u8 sDebugMenuFill5[] = "pksdir0";
-ALIGNED(4) static const u8 sDebugMenuFill6[] = "pksdir0";
-ALIGNED(4) static const u8 sDebugMenuFill7[] = "pksdir0";
+static void SetDebugMenuItems(void);
 
-void SetDebugMenuItems(void);
-void sub_803A3A0(void);
-void sub_803A3BC(void);
+static void sub_803A3A0(void);
+static void sub_803A3BC(void);
 
 void CreateDebugMenu(void)
 {
@@ -137,23 +113,23 @@ u32 UpdateDebugMenu(void)
     return nextMenu;
 }
 
-void SetDebugMenuItems(void)
+static void SetDebugMenuItems(void)
 {
-    SetMenuItems(sDebugMenu->unk0, sDebugMenu->unk140, 0, &sUnknown_80E7D58, sDebugMenuItems, TRUE, 13, 0);
+    SetMenuItems(sDebugMenu->unk0, sDebugMenu->unk140, 0, &sUnknown_80E7D58, sDebugMenuItems, TRUE, 13, FALSE);
     sub_8035CF4(sDebugMenu->unk0, 0, 1);
 }
 
-void sub_803A3A0(void)
+static void sub_803A3A0(void)
 {
     sub_8035CC0(sDebugMenu->unk140, 0);
 }
 
-void sub_803A3BC(void)
+static void sub_803A3BC(void)
 {
     s32 speciesIndex;
-    u8 sp_0x8 [88];
+    u8 sp_0x8[88];
     u16 r7 [4]; // r7
-    u8 buffer [20]; // r6
+    u8 buffer[20]; // r6
     u32 sp_0x7C;
     s32 sp_0x80;
 
@@ -176,7 +152,7 @@ void sub_803A3BC(void)
         r9 = 0;
         sp_0x7C = 0x1006;
         index++;
-        speciesIndex = index * 0x10000 >> 0x10; // dumb way to force s16
+        speciesIndex = index * 0x10000 >> 0x10; // TODO: dumb way to force s16. Temp var may fix the regswap
         memset(r7, 0, 8);
         r7[0] = 0x27;
         CopyMonsterNametoBuffer(buffer, speciesIndex);

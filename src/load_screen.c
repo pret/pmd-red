@@ -165,25 +165,25 @@ void CreateLoadScreen(u32 currMenu)
   }
   ResetUnusedInputStruct();
   sub_800641C(gLoadScreen->unk144, TRUE, TRUE);
-  SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,0,&gUnknown_80E7610,gUnknown_203B378,FALSE,6,0);
+  SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,0,&gUnknown_80E7610,gUnknown_203B378,FALSE,6,FALSE);
   switch(gLoadScreen->currMenu){
     case MENU_CONTINUE:
         if (IsQuickSave())
-            SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeQuicksaveMenuItems,FALSE,6,0);
+            SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeQuicksaveMenuItems,FALSE,6,FALSE);
         else
-            SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeAdventureMenuItems,FALSE,6,0);
+            SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeAdventureMenuItems,FALSE,6,FALSE);
         break;
     case MENU_AWAITING_RESCUE:
-        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gQuitWaitingRescueMenuItems,FALSE,6,0);
+        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gQuitWaitingRescueMenuItems,FALSE,6,FALSE);
         break;
     case MENU_DELETE_SAVE_PROMPT:
-        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gDeleteSavePromptMenuItems,FALSE,6,0);
+        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gDeleteSavePromptMenuItems,FALSE,6,FALSE);
         break;
     case MENU_DELETE_SAVE_CONFIRM:
-        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C, gDeleteSaveConfirmMenuItems,FALSE,6,0);
+        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C, gDeleteSaveConfirmMenuItems,FALSE,6,FALSE);
         break;
   }
-  SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,2,&gUnknown_80E7784,gLoadScreenYesNoMenu,TRUE,2,0);
+  SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,2,&gUnknown_80E7784,gLoadScreenYesNoMenu,TRUE,2,FALSE);
   sub_8035CF4(gLoadScreen->unk4,0,0);
   sub_8035CF4(gLoadScreen->unk4,1,0);
   sub_8035CF4(gLoadScreen->unk4,2,1);

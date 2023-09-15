@@ -138,12 +138,12 @@ void CreateSaveMenu(s32 currMenu)
   if (currMenu == MENU_DELETE_SAVE) {
       // Beware, Deleting your Adventure
     SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,gDeletingYourAdventureMenuItems,
-                 FALSE,6,0);
+                 FALSE,6,FALSE);
   }
   else {
       // Saving your Adventure
     SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,gSavingAdventureMenuItems,
-                 FALSE,6,0);
+                 FALSE,6,FALSE);
   }
   sub_8035CF4(sUnknown_203B364->unk8,0,TRUE);
   sUnknown_203B364->unk4 = 0;
@@ -190,11 +190,11 @@ s32 UpdateSaveMenu(void)
                 sub_8035CC0(sUnknown_203B364->unk148,0);
                 if (sUnknown_203B364->currMenu == MENU_DELETE_SAVE) {
                     SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
-                                gDeletedSaveMenuItems,FALSE,6,0);
+                                gDeletedSaveMenuItems,FALSE,6,FALSE);
                 }
                 else {
                     SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
-                                gAdventureSavedMenuItems,FALSE,6,0);
+                                gAdventureSavedMenuItems,FALSE,6,FALSE);
                 }
                 if (sUnknown_203B364->currMenu == 0x2d) {
                     sUnknown_203B364->unk4 = 1;
@@ -211,11 +211,11 @@ s32 UpdateSaveMenu(void)
                 sub_8035CC0(sUnknown_203B364->unk148,0);
                 if (sUnknown_203B364->currMenu == MENU_DELETE_SAVE) {
                     SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
-                                    gAdventureCouldNotBeDeletedMenuItems,FALSE,6,0);
+                                    gAdventureCouldNotBeDeletedMenuItems,FALSE,6,FALSE);
                 }
                 else {
                     SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
-                                    gAdventureCouldNotBeSavedMenuItems,FALSE,6,0);
+                                    gAdventureCouldNotBeSavedMenuItems,FALSE,6,FALSE);
                 }
                 sub_8035CF4(sUnknown_203B364->unk8,0,TRUE);
                 sUnknown_203B364->unk4 = 1;

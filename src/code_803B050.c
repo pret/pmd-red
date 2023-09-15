@@ -15,6 +15,8 @@
 #include "wonder_mail.h"
 #include "dungeon.h"
 
+// This file was originally 7 files. Check data_80E7D40.s
+
 extern s16 gUnknown_80E80E0[];
 extern s16 gUnknown_80E8126[];
 extern u8 gUnknown_80E888C[]; 

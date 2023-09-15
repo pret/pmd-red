@@ -82,7 +82,6 @@ ALIGNED(4) const char Cancel_80E7D24[] = "Cancel";
 ALIGNED(4) const char Yes_80E7D2C[] = "Yes";
 
 ALIGNED(4) const char wonder_mail_main_fill1[] = "pksdir0";
-ALIGNED(4) const char wonder_mail_main_fill2[] = "pksdir0";
 
 struct unkStruct_203B3E8
 {

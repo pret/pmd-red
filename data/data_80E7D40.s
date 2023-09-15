@@ -1,6 +1,9 @@
         .section .rodata
 
-	.global gUnknown_80E7F3C
+@ code_803B050 #1
+        .align 2,0
+        .string "pksdir0\0"
+    .global gUnknown_80E7F3C
 gUnknown_80E7F3C: @ 80E7F3C
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
@@ -9,7 +12,7 @@ gUnknown_80E7F3C: @ 80E7F3C
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
-	.global gUnknown_80E7F54
+    .global gUnknown_80E7F54
 gUnknown_80E7F54: @ 80E7F54
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x06, 0x00, 0x00, 0x00
@@ -18,19 +21,27 @@ gUnknown_80E7F54: @ 80E7F54
         .byte 0x11, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
-	.global gUnknown_80E7F6C
+    .global gUnknown_80E7F6C
 gUnknown_80E7F6C: @ 80E7F6C
         .string "Script\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
 
+@ code_803B050 #2
+        .align 2,0
+        .string "pksdir0\0"
+
+@ code_803B050 #3
+        .align 2,0
+        .string "pksdir0\0"
+
+@ code_803B050 #4
+        .align 2,0
+        .string "pksdir0\0"
+
+@ code_803B050 #5
+        .align 2,0
+        .string "pksdir0\0"
+
+        .align 2,0
 	.global gUnknown_80E7F94
 gUnknown_80E7F94: @ 80E7F94
 .macro st_80E7F94 a, b, c, e, f, g, h, i, j, k, m, n
@@ -75,7 +86,7 @@ sUnknown_80E8088: @ 80E8088
     .string "SHOW　TITLE00\0"
     .align 2, 0
 
-sUnknown_80E8098: @ 80E8098
+@ code_803B050 #6 (code_803C1D0)
     .string "pksdir0\0"
     .align 2, 0
 
@@ -1174,12 +1185,13 @@ gRewardText: @ 80E8B74
 gUnknown_80E8B7C: @ 80E8B7C
         .string "Wonder Mail:\0"
         .align 2,0
+
+@ code_803B050 #7
         .string "pksdir0\0"
         .align 2,0
 
 	.global gUnknown_80E8B94
 gUnknown_80E8B94: @ 80E8B94
-@ replacing .incbin "baserom.gba", 0x000e8b94, 0x38
         .4byte UnkData_80E8BC8
         .4byte UnkData_80E8BC4
         .4byte UnkData_80E8BC0
