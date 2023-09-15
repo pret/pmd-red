@@ -1,24 +1,15 @@
 #include "global.h"
-#include "main_menu.h"
-#include "memory.h"
-#include "text1.h"
-#include "save.h"
-#include "menu_input.h"
-#include "sprite.h"
 #include "code_80130A8.h"
+#include "constants/main_menu.h"
+#include "main_menu1.h"
+#include "memory.h"
+#include "menu_input.h"
+#include "save.h"
+#include "save_menu.h"
+#include "sprite.h"
+#include "text1.h"
 
-struct unkStruct_203B360
-{
-    // size: 0x1b4
-    u32 currMenu;
-    u32 unk4;
-    MenuStruct unk8[4];
-    UnkTextStruct2 unk148[4];
-    SpriteOAM unk1A8;
-    u32 unk1B0; // Sprite count?
-};
-
-EWRAM_DATA_2 struct unkStruct_203B360 *gUnknown_203B364 = {0};
+static EWRAM_DATA_2 SaveMenuWork *sUnknown_203B364 = {0};
 
 const UnkTextStruct2 gUnknown_80E6F20 =
 {
@@ -134,29 +125,29 @@ void CreateSaveMenu(s32 currMenu)
 {
   s32 index;
   
-  if (gUnknown_203B364 == NULL) {
-    gUnknown_203B364 = MemoryAlloc(sizeof(struct unkStruct_203B360),8);
-    MemoryFill8((u8 *)gUnknown_203B364,0,sizeof(struct unkStruct_203B360));
+  if (sUnknown_203B364 == NULL) {
+    sUnknown_203B364 = MemoryAlloc(sizeof(SaveMenuWork),8);
+    MemoryFill8((u8 *)sUnknown_203B364,0,sizeof(SaveMenuWork));
   }
   for(index = 0; index < 4; index++){
-    gUnknown_203B364->unk148[index] = gUnknown_80E6F20;
+    sUnknown_203B364->unk148[index] = gUnknown_80E6F20;
   } 
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B364->unk148, TRUE, TRUE);
+  sub_800641C(sUnknown_203B364->unk148, TRUE, TRUE);
 
   if (currMenu == MENU_DELETE_SAVE) {
       // Beware, Deleting your Adventure
-    SetMenuItems(gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,gDeletingYourAdventureMenuItems,
-                 0,6,0);
+    SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,gDeletingYourAdventureMenuItems,
+                 FALSE,6,0);
   }
   else {
       // Saving your Adventure
-    SetMenuItems(gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,gSavingAdventureMenuItems,
-                 0,6,0);
+    SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,gSavingAdventureMenuItems,
+                 FALSE,6,0);
   }
-  sub_8035CF4(gUnknown_203B364->unk8,0,TRUE);
-  gUnknown_203B364->unk4 = 0;
-  gUnknown_203B364->currMenu = currMenu;
+  sub_8035CF4(sUnknown_203B364->unk8,0,TRUE);
+  sUnknown_203B364->unk4 = 0;
+  sUnknown_203B364->currMenu = currMenu;
   sub_8038830();
 }
 
@@ -164,31 +155,31 @@ void CleanSaveMenu(void)
 {
   ResetUnusedInputStruct();
   sub_800641C(NULL, TRUE, TRUE);
-  if (gUnknown_203B364 != NULL) {
-    MemoryFree(gUnknown_203B364);
-    gUnknown_203B364 = NULL;
+  if (sUnknown_203B364 != NULL) {
+    MemoryFree(sUnknown_203B364);
+    sUnknown_203B364 = NULL;
   }
 }
 
 s32 UpdateSaveMenu(void)
 {
-  int saveStatus;
-  MainMenu *mainMenu;
+  s32 saveStatus;
+  MainMenu1Work *mainMenu;
   u32 menu;
   u32 uStack_18;
   u32 action;
-  
+
   menu = MENU_NO_SCREEN_CHANGE;
   action = 3;
 
-  switch(gUnknown_203B364->unk4)
+  switch(sUnknown_203B364->unk4)
   {
       default:
       case 2:  
         menu = MENU_NO_SCREEN_CHANGE;
         break;
       case 0:
-        sub_8012FD8(&gUnknown_203B364->unk8[0]);
+        sub_8012FD8(&sUnknown_203B364->unk8[0]);
         uStack_18 = 0;
         sub_80140F8();
         saveStatus = WriteSavetoPak(&uStack_18,sub_8011C1C());
@@ -196,76 +187,76 @@ s32 UpdateSaveMenu(void)
         switch(saveStatus)
         {
             case SAVE_COMPLETED:
-                sub_8035CC0(gUnknown_203B364->unk148,0);
-                if (gUnknown_203B364->currMenu == MENU_DELETE_SAVE) {
-                    SetMenuItems(gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,
-                                gDeletedSaveMenuItems,0,6,0);
+                sub_8035CC0(sUnknown_203B364->unk148,0);
+                if (sUnknown_203B364->currMenu == MENU_DELETE_SAVE) {
+                    SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
+                                gDeletedSaveMenuItems,FALSE,6,0);
                 }
                 else {
-                    SetMenuItems(gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,
-                                gAdventureSavedMenuItems,0,6,0);
+                    SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
+                                gAdventureSavedMenuItems,FALSE,6,0);
                 }
-                if (gUnknown_203B364->currMenu == 0x2d) {
-                    gUnknown_203B364->unk4 = 1;
+                if (sUnknown_203B364->currMenu == 0x2d) {
+                    sUnknown_203B364->unk4 = 1;
                     return MENU_COMMUNICATION_1;
                 }
-                sub_8035CF4(gUnknown_203B364->unk8,0,TRUE);
-                gUnknown_203B364->unk4 = 1;
+                sub_8035CF4(sUnknown_203B364->unk8,0,TRUE);
+                sUnknown_203B364->unk4 = 1;
                 break;
             case SAVE_NOT_WRTTEN:
                 sub_80141B4(gUnknown_80E7178,0,0,0);
-                gUnknown_203B364->unk4 = 5;
+                sUnknown_203B364->unk4 = 5;
                 break;
             default:
-                sub_8035CC0(gUnknown_203B364->unk148,0);
-                if (gUnknown_203B364->currMenu == MENU_DELETE_SAVE) {
-                    SetMenuItems(gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,
-                                    gAdventureCouldNotBeDeletedMenuItems,0,6,0);
+                sub_8035CC0(sUnknown_203B364->unk148,0);
+                if (sUnknown_203B364->currMenu == MENU_DELETE_SAVE) {
+                    SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
+                                    gAdventureCouldNotBeDeletedMenuItems,FALSE,6,0);
                 }
                 else {
-                    SetMenuItems(gUnknown_203B364->unk8,gUnknown_203B364->unk148,0,&gUnknown_80E6F38,
-                                    gAdventureCouldNotBeSavedMenuItems,0,6,0);
+                    SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
+                                    gAdventureCouldNotBeSavedMenuItems,FALSE,6,0);
                 }
-                sub_8035CF4(gUnknown_203B364->unk8,0,TRUE);
-                gUnknown_203B364->unk4 = 1;
+                sub_8035CF4(sUnknown_203B364->unk8,0,TRUE);
+                sUnknown_203B364->unk4 = 1;
                 break;
         }
         menu = MENU_NO_SCREEN_CHANGE;
         break;
       case 1:
-        if (sub_80130A8(&gUnknown_203B364->unk8[0]) == '\0') {
-            sub_8013114(&gUnknown_203B364->unk8[0],&action);
+        if (sub_80130A8(&sUnknown_203B364->unk8[0]) == '\0') {
+            sub_8013114(&sUnknown_203B364->unk8[0],&action);
         }
         switch(action)
         {
             case 2:
             case 4:
-                if ((gUnknown_203B364->currMenu == 0x29) || (gUnknown_203B364->currMenu == MENU_DELETE_SAVE)) {
-                    gUnknown_203B364->unk4 = 1;
+                if ((sUnknown_203B364->currMenu == 0x29) || (sUnknown_203B364->currMenu == MENU_DELETE_SAVE)) {
+                    sUnknown_203B364->unk4 = 1;
                     menu = MENU_MAIN_SCREEN;
                 }
-                else if (gUnknown_203B364->currMenu == 0x2d) {
-                    gUnknown_203B364->unk4 = 1;
+                else if (sUnknown_203B364->currMenu == 0x2d) {
+                    sUnknown_203B364->unk4 = 1;
                     menu = MENU_COMMUNICATION_1;
                 }
-                else if (gUnknown_203B364->currMenu == 0x2c) {
-                    gUnknown_203B364->unk4 = 1;
+                else if (sUnknown_203B364->currMenu == 0x2c) {
+                    sUnknown_203B364->unk4 = 1;
                     menu = 0x1f;
                 }
                 else {
                     mainMenu = GetMainMenu();
                     if (mainMenu->unk3A != 0) {
-                        gUnknown_203B364->unk4 = 1;
+                        sUnknown_203B364->unk4 = 1;
                         menu = 0x35;
                     }
                     else {
-                        gUnknown_203B364->unk4 = 1;
-                        menu = gUnknown_203B364->currMenu == 0x2b ? MENU_WONDER_MAIL : MENU_FRIEND_RESCUE;
+                        sUnknown_203B364->unk4 = 1;
+                        menu = sUnknown_203B364->currMenu == 0x2b ? MENU_WONDER_MAIL : MENU_FRIEND_RESCUE;
                     }
                 }
                 break;
             case 3:
-                gUnknown_203B364->unk4 = 1;
+                sUnknown_203B364->unk4 = 1;
                 break;
         }
         sub_80388C4();
@@ -288,7 +279,7 @@ void sub_8038830(void)
     SpriteOAM *sprite;
 
     r5 = 0;
-    sprite = &gUnknown_203B364->unk1A8;
+    sprite = &sUnknown_203B364->unk1A8;
 
     r1 = sprite->attrib1;
     r0 = (u16)~SPRITEOAM_MASK_AFFINEMODE1;
@@ -329,14 +320,14 @@ void sub_8038830(void)
     r2 |= r1;
     sprite->unk6 = r2;
 
-    gUnknown_203B364->unk1B0 = r5;
+    sUnknown_203B364->unk1B0 = r5;
     ResetSprites(FALSE);
 }
 
 void sub_80388C4(void)
 {
-    if (gUnknown_203B364->unk1B0 & 8)
-        AddSprite(&gUnknown_203B364->unk1A8, 0x100, NULL, NULL);
+    if (sUnknown_203B364->unk1B0 & 8)
+        AddSprite(&sUnknown_203B364->unk1A8, 0x100, NULL, NULL);
 
-    gUnknown_203B364->unk1B0++;
+    sUnknown_203B364->unk1B0++;
 }

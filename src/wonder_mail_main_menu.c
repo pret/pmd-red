@@ -15,6 +15,7 @@
 #include "text2.h"
 #include "wonder_mail.h"
 #include "wonder_mail_3.h"
+#include "wonder_mail_main_menu.h"
 
 #define SELECT_WONDER_MAIL_MODE_MAIN_SCREEN 0
 #define SEND_WONDER_MAIL_MAIN_SCREEN 1
@@ -186,7 +187,7 @@ bool8 CreateWonderMailMenu(void)
   return 1;
 }
 
-u8 UpdateWonderMailMenu(void)
+u32 UpdateWonderMailMenu(void)
 {
   switch(gUnknown_203B3E8->state) {
     case RECEIVE_WONDER_MAIL_MAIN_SCREEN:

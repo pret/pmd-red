@@ -59,9 +59,10 @@ typedef struct GameOptions
     /* 0xC */ u8 unkC;
 } GameOptions;
 
-void LoadGameOptions(void);
-GameOptions * GetGameOptions(void);
-void InitializeGameOptions(bool8 initializeGender);
+GameOptions *GetGameOptions(void);
 bool8 GameOptionsNotChange(GameOptions *);
+void InitializeGameOptions(bool8 initializeGender);
+void LoadGameOptions(void);
+void SetWindowBGColor(void);
 
 #endif // GUARD_GAME_OPTIONS_H

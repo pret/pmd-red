@@ -6,7 +6,7 @@
 #include "constants/communication_error_codes.h"
 #include "cpu.h"
 #include "items.h"
-#include "main_menu.h"
+#include "main_menu1.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "other_menus2.h"
@@ -21,8 +21,6 @@ extern u8 gUnknown_202DE58[];
 static EWRAM_DATA_2 struct TradeItemsMenu *sTradeItemsMenu = {0};
 
 #include "data/trade_items_menu.h"
-
-extern void sub_8035C1C();
 
 extern u32 sub_801D008();
 extern s32 sub_8037B28(u32);
@@ -522,7 +520,7 @@ void sub_8036B28(void)
     case TRADE_ITEMS_SEND_ITEM_POPUP_MENU:
         sub_8006518(sTradeItemsMenu->unk184);
         SetMenuItems(sTradeItemsMenu->unk44,sTradeItemsMenu->unk184,3,&sUnknown_80E60EC,
-                    sUnknown_80E6104,1,0,0);
+                    sUnknown_80E6104,TRUE,0,0);
         sub_801CCD8();
         sub_8035CF4(sTradeItemsMenu->unk44,3,TRUE);
         break;

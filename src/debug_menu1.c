@@ -1,9 +1,10 @@
 #include "global.h"
 #include "code_8097670.h"
 #include "constants/friend_area.h"
+#include "constants/main_menu.h"
 #include "debug_menu1.h"
 #include "friend_area.h"
-#include "main_menu.h"
+#include "main_menu1.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
@@ -138,7 +139,7 @@ u32 UpdateDebugMenu(void)
 
 void SetDebugMenuItems(void)
 {
-    SetMenuItems(sDebugMenu->unk0, sDebugMenu->unk140, 0, &sUnknown_80E7D58, sDebugMenuItems, 1, 13, 0);
+    SetMenuItems(sDebugMenu->unk0, sDebugMenu->unk140, 0, &sUnknown_80E7D58, sDebugMenuItems, TRUE, 13, 0);
     sub_8035CF4(sDebugMenu->unk0, 0, 1);
 }
 

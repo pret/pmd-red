@@ -19,7 +19,6 @@ extern struct WindowBG gWindowBGColors;
 
 EWRAM_DATA_2 GameOptions *gGameOptionsRef = {0};
 EWRAM_DATA GameOptions gGameOptions = {0};
-extern void SetWindowBGColor(void);
 
 void LoadGameOptions(void)
 {

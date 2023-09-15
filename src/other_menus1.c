@@ -6,6 +6,7 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "constants/communication_error_codes.h"
+#include "constants/main_menu.h"
 #include "dungeon_global_data.h"
 #include "input.h"
 #include "items.h"
@@ -63,7 +64,7 @@ void sub_8036FDC(s32 param_1)
 
     ResetUnusedInputStruct();
     sub_800641C(sUnknown_203B35C->unk15C, TRUE, TRUE);
-    SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6CD0, sUnknown_80E6CE8, 0, 6, 0);
+    SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6CD0, sUnknown_80E6CE8, FALSE, 6, 0);
     sub_8035CF4(sUnknown_203B35C->unk1C, 0, TRUE);
     sub_80376CC();
 }
@@ -137,7 +138,7 @@ static void sub_80371B8(void)
             // Success!
             // The item exchange with your friend
             // went through successfully
-            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6C50, sUnknown_80E6C68, 0, 6, 0);
+            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6C50, sUnknown_80E6C68, FALSE, 6, 0);
             sub_8035CF4(sUnknown_203B35C->unk1C, 0, TRUE);
         }
     }
@@ -199,7 +200,7 @@ static void sub_80371B8(void)
                 break;
         }
 
-        SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, puVar5, MenuItems, 0, 6, 0);
+        SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, puVar5, MenuItems, FALSE, 6, 0);
         sub_8035CF4(sUnknown_203B35C->unk1C, 0, TRUE);
 
         if (sUnknown_203B35C->linkStatus != COMMS_GOOD && sUnknown_203B35C->unk0 == 0) {
@@ -295,8 +296,7 @@ static void sub_8037400(void)
             case 4:
                 mailIndex = sub_8035D74();
                 sUnknown_203B35C->unk28C = *GetMailatIndex(mailIndex);
-                // TODO: int16 memes?
-                if (sub_8035D3C() << 0x10 != 0xffff0000) {
+                if ((u16)sub_8035D3C() != 0xFFFF) {
                     species = sub_8035D3C();
                     sUnknown_203B35C->unk2BC = gRecruitedPokemonRef->pokemon[(s16)species];
                 }

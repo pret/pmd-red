@@ -1,25 +1,25 @@
 #include "global.h"
-#include "input.h"
-#include "main_menu.h"
+#include "constants/main_menu.h"
+#include "main_menu1.h"
 #include "memory.h"
-#include "menu.h"
-#include "text1.h"
 #include "menu_input.h"
 #include "sprite.h"
+#include "text1.h"
+#include "unk_menu_203B360.h"
 
-// Similar to RescuePasswordMenu
-struct unkStruct_203B360
+// Size: 0x1B4. Similar to SaveMenuWork
+typedef struct unkStruct_203B360
 {
-    // size: 0x1b4
-    u32 currMenu;
+    /* 0x0 */ u32 currMenu;
     u32 unk4; // state
     MenuStruct unk8[4];
     UnkTextStruct2 unk148[4];
     SpriteOAM unk1A8;
     u32 unk1B0; // sprite count?
-};
+} unkStruct_203B360;
 
-EWRAM_DATA_2 struct unkStruct_203B360 *gUnknown_203B360 = {0};
+static EWRAM_DATA_2 unkStruct_203B360 *sUnknown_203B360 = {0};
+
 const UnkTextStruct2 gUnknown_80E6E7C = {
    0x00, 0x00, 0x00, 0x00,
    0x03,
@@ -61,25 +61,25 @@ void sub_80382E4(s32 currMenu)
 {
   s32 index;
   
-  if (gUnknown_203B360 == NULL) {
-    gUnknown_203B360 = MemoryAlloc(sizeof(struct unkStruct_203B360), 8);
-    MemoryFill8((u8 *)gUnknown_203B360, 0, sizeof(struct unkStruct_203B360));
+  if (sUnknown_203B360 == NULL) {
+    sUnknown_203B360 = MemoryAlloc(sizeof(unkStruct_203B360), 8);
+    MemoryFill8((u8 *)sUnknown_203B360, 0, sizeof(unkStruct_203B360));
   }
   for(index = 0; index < 4; index++){
-    gUnknown_203B360->unk148[index] = gUnknown_80E6E7C;
+    sUnknown_203B360->unk148[index] = gUnknown_80E6E7C;
   } 
   ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B360->unk148, TRUE, TRUE);
+  sub_800641C(sUnknown_203B360->unk148, TRUE, TRUE);
   if (currMenu == 0x25) {
       // Caution!
       // The storage space is empty!
       // Please check again.
-    SetMenuItems(gUnknown_203B360->unk8,gUnknown_203B360->unk148,0,&gUnknown_80E6E94,gUnknown_80E6EAC,
-                 0,4,0);
+    SetMenuItems(sUnknown_203B360->unk8,sUnknown_203B360->unk148,0,&gUnknown_80E6E94,gUnknown_80E6EAC,
+                 FALSE,4,0);
   }
-  sub_8035CF4(gUnknown_203B360->unk8,0,TRUE);
-  gUnknown_203B360->currMenu = currMenu;
-  gUnknown_203B360->unk4 = 0;
+  sub_8035CF4(sUnknown_203B360->unk8,0,TRUE);
+  sUnknown_203B360->currMenu = currMenu;
+  sUnknown_203B360->unk4 = 0;
   sub_8038440();
 }
 
@@ -87,9 +87,9 @@ void sub_80383A8(void)
 {
   ResetUnusedInputStruct();
   sub_800641C(NULL, TRUE, TRUE);
-  if (gUnknown_203B360 != 0) {
-    MemoryFree(gUnknown_203B360);
-    gUnknown_203B360 = 0;
+  if (sUnknown_203B360 != 0) {
+    MemoryFree(sUnknown_203B360);
+    sUnknown_203B360 = 0;
   }
 }
 
@@ -101,19 +101,19 @@ u32 sub_80383D4(void)
   menuAction = 2;
   nextMenu = MENU_NO_SCREEN_CHANGE;
 
-  if (gUnknown_203B360->unk4 == 0){
-    if (sub_80130A8(&gUnknown_203B360->unk8[0]) == '\0') {
-        sub_8013114(&gUnknown_203B360->unk8[0], &menuAction);
+  if (sUnknown_203B360->unk4 == 0){
+    if (sub_80130A8(&sUnknown_203B360->unk8[0]) == '\0') {
+        sub_8013114(&sUnknown_203B360->unk8[0], &menuAction);
     }
     switch(menuAction)
     {
         case 3:
         case 1:
-            gUnknown_203B360->unk4  = 0;
+            sUnknown_203B360->unk4  = 0;
             nextMenu = MENU_MAIN_SCREEN;
             break;
         case 2:
-            gUnknown_203B360->unk4  = 0;
+            sUnknown_203B360->unk4  = 0;
         default:
             break;
     }
@@ -138,7 +138,7 @@ void sub_8038440(void)
     SpriteOAM *sprite;
 
     r5 = 0;
-    sprite = &gUnknown_203B360->unk1A8;
+    sprite = &sUnknown_203B360->unk1A8;
 
     r1 = sprite->attrib1;
     r0 = (u16)~SPRITEOAM_MASK_AFFINEMODE1;
@@ -181,15 +181,15 @@ void sub_8038440(void)
     r2 |= r1;
     sprite->unk6 = r2;
 
-    gUnknown_203B360->unk1B0 = r5;
+    sUnknown_203B360->unk1B0 = r5;
 }
 
 
 void sub_80384D0(void)
 {
-  if ((gUnknown_203B360->unk1B0 & 8) != 0) {
-    AddSprite(&gUnknown_203B360->unk1A8, 0x100, NULL, NULL);
+  if ((sUnknown_203B360->unk1B0 & 8) != 0) {
+    AddSprite(&sUnknown_203B360->unk1A8, 0x100, NULL, NULL);
   }
-  gUnknown_203B360->unk1B0++;
+  sUnknown_203B360->unk1B0++;
 }
 

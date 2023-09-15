@@ -77,7 +77,6 @@ extern u32 HandleHintDisplayScreenInput(void);
 extern void DestroyHintDisplayScreen(void);
 extern u32 sub_801E218(void);
 extern void sub_801E2C4(void);
-extern void SetWindowBGColor(void);
 
 enum 
 {

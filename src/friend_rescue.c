@@ -11,7 +11,7 @@
 #include "cpu.h"
 #include "friend_rescue.h"
 #include "items.h"
-#include "main_menu.h"
+#include "main_menu1.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "other_menus2.h"
@@ -269,7 +269,6 @@ extern void sub_8031E00(void);
 extern u8 sub_8024108(u32);
 extern void sub_802452C(void);
 extern u32 sub_80244E4(void);
-extern void sub_8035D1C(void);
 extern u32 sub_8039068(u32, u8 *passwordBuffer, unkStruct_203B480 *r0);
 
 extern void sub_803084C(void);
@@ -889,7 +888,7 @@ void sub_8032828(void)
             break;
         case 0x27:
             sub_8006518(gUnknown_203B33C->unk35C);
-            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E2334, &gUnknown_80E234C, 1, 0, 0);
+            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E2334, &gUnknown_80E234C, TRUE, 0, 0);
             sub_8023DA4();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;
@@ -1052,7 +1051,7 @@ void sub_8032828(void)
             break;
         case 0x5D:
             sub_8006518(gUnknown_203B33C->unk35C);
-            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, &gUnknown_80E2408, 1, 0, 0);
+            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, &gUnknown_80E2408, TRUE, 0, 0);
             sub_803092C();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;
@@ -1068,7 +1067,7 @@ void sub_8032828(void)
             break;
         case 0x60:
             sub_8006518(gUnknown_203B33C->unk35C);
-            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E23F0, &gUnknown_80E2408, 1, 0, 0);
+            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E23F0, &gUnknown_80E2408, TRUE, 0, 0);
             sub_801CCD8();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;
@@ -1231,7 +1230,7 @@ void sub_8032828(void)
         case 0x1E:
         case 0x33:
             sub_8006518(gUnknown_203B33C->unk35C);
-            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, &gUnknown_80E234C, 1, 0, 0);
+            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, &gUnknown_80E234C, TRUE, 0, 0);
             sub_803092C();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;

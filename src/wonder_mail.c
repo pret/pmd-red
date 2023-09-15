@@ -7,7 +7,7 @@
 #include "constants/communication_error_codes.h"
 #include "cpu.h"
 #include "items.h"
-#include "main_menu.h"
+#include "main_menu1.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "other_menus2.h"
@@ -542,7 +542,7 @@ void sub_8028348(void)
             break;
         case 0x34:
             sub_8006518(gUnknown_203B2C0->unk35C);
-            SetMenuItems(gUnknown_203B2C0->unk21C, gUnknown_203B2C0->unk35C, 3, &gUnknown_80DDAE4, gUnknown_80DDAFC, 1, 0, 0);
+            SetMenuItems(gUnknown_203B2C0->unk21C, gUnknown_203B2C0->unk35C, 3, &gUnknown_80DDAE4, gUnknown_80DDAFC, TRUE, 0, 0);
             sub_8023DA4();
             sub_8035CF4(gUnknown_203B2C0->unk21C, 3, TRUE);
             break;
@@ -697,7 +697,7 @@ void sub_8028348(void)
         case 0x20:
         case 0x2B:
             sub_8006518(gUnknown_203B2C0->unk35C);
-            SetMenuItems(gUnknown_203B2C0->unk21C, gUnknown_203B2C0->unk35C, 3, &gUnknown_80DDACC, gUnknown_80DDAFC, 1, 0, 0);
+            SetMenuItems(gUnknown_203B2C0->unk21C, gUnknown_203B2C0->unk35C, 3, &gUnknown_80DDACC, gUnknown_80DDAFC, TRUE, 0, 0);
             sub_803092C();
             sub_8035CF4(gUnknown_203B2C0->unk21C, 3, TRUE);
             break;

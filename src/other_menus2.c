@@ -3,7 +3,7 @@
 #include "constants/communication_error_codes.h"
 #include "constants/dungeon.h"
 #include "dungeon_global_data.h"
-#include "main_menu.h"
+#include "main_menu1.h"
 #include "memory.h"
 #include "other_menus1.h"
 #include "other_menus2.h"
@@ -253,8 +253,8 @@ static void sub_8037EBC(WonderMailStruct_203B2C0_sub  *param_1, WonderMailStruct
 static void sub_8037F4C(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
 {
     unkStruct_203B480 *mail;
-    MainMenu *mainMenu;
-    
+    MainMenu1Work *mainMenu;
+
     if(sub_800D588() == 0)
     {
         param_2 = param_1;

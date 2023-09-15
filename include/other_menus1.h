@@ -2,7 +2,7 @@
 #define GUARD_OTHER_MENUS1_H
 
 #include "code_8094F88.h"
-#include "main_menu.h"
+#include "main_menu1.h"
 #include "menu.h"
 #include "pokemon.h"
 #include "sprite_oam.h"

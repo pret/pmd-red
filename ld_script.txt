@@ -149,7 +149,8 @@ SECTIONS {
         src/friend_rescue.o(.text);
         src/credits1.o(.text);
         src/credits2.o(.text);
-        src/main_menu.o(.text);
+        src/main_menu1.o(.text);
+        src/main_menu2.o(.text);
         src/trade_items_menu.o(.text);
         src/other_menus1.o(.text);
         asm/other_menus1.o(.text);
@@ -446,7 +447,8 @@ SECTIONS {
         data/friend_rescue.o(.rodata);
         data/credits1.o(.rodata);
         src/credits2.o(.rodata);
-        src/main_menu.o(.rodata);
+        src/main_menu1.o(.rodata);
+        src/main_menu2.o(.rodata);
         src/trade_items_menu.o(.rodata);
         src/other_menus1.o(.rodata);
         src/other_menus2.o(.rodata);

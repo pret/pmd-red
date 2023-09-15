@@ -9,6 +9,7 @@
 #include "code_8094F88.h"
 #include "code_8097670.h"
 #include "constants/bg_music.h"
+#include "constants/main_menu.h"
 #include "cpu.h"
 #include "debug.h"
 #include "event_flag.h"
@@ -17,7 +18,8 @@
 #include "friend_area.h"
 #include "game_options.h"
 #include "input.h"
-#include "main_menu.h"
+#include "main_menu1.h"
+#include "main_menu2.h"
 #include "memory.h"
 #include "moves.h"
 #include "music.h"
@@ -33,7 +35,6 @@
 extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);
 extern void LoadGameOptions(void);
-extern void SetWindowBGColor(void);
 extern void LoadItemParameters(void);
 extern void LoadMailInfo(void);
 extern void sub_800DAAC(void);
