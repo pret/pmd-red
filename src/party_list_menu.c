@@ -3,10 +3,11 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
-#include "code_801C620.h"
+#include "code_801BEEC.h"
 #include "code_801EE10.h"
 #include "code_801EE10_1.h"
 #include "code_801EE10_mid.h"
+#include "code_8023144.h"
 #include "code_8098BDC.h"
 #include "common_strings.h"
 #include "constants/dungeon.h"
@@ -16,56 +17,25 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "moves.h"
+#include "party_list_menu.h"
 #include "pokemon.h"
 #include "text_util.h"
 #include "text1.h"
 #include "text2.h"
 
-// size: 0x280
-typedef struct unkStruct_203B2B8
-{
-    s32 state;
-    s32 fallbackState;
-    bool8 unk8;
-    /* 0xA */ s16 pokeSpecies;
-    u32 id;
-    /* 0x10 */ BulkItem item1;
-    /* 0x14 */ BulkItem item2;
-    PokemonStruct1 *pokeStruct;
-    bool8 isTeamLeader;
-    u32 moveIndex;
-    /* 0x24 */ u16 moveID;
-    Move moves[8];
-    u16 moveIDs[4]; // some list of move IDs
-    u32 menuAction1;
-    u32 menuAction2;
-    u32 menuAction3; // unused
-    MenuStruct unk7C;
-    MenuStruct unkCC;
-    MenuStruct unk11C; // unused
-    MenuItem unk16C[10];
-    MenuItem unk1BC[10];
-    u16 unk20C[10];
-    UnkTextStruct2 unk220[4];
-} unkStruct_203B2B8;
+// TODO: Clean this
 
-extern u8 gUnknown_202DE58[0x58];
-extern u8 gUnknown_202DEA8[0x58];
-extern u8 gAvailablePokemonNames[0x58]; // 202DF98
+extern u8 gUnknown_202DE58[];
+extern u8 gUnknown_202DEA8[];
+extern u8 gAvailablePokemonNames[]; // 202DF98
 
 static EWRAM_DATA_2 unkStruct_203B2B8 *sUnknown_203B2B8 = {0};
 
 #include "data/party_list_menu.h"
 
 extern u32 sub_8026F04(PokemonStruct1 *);
-extern void sub_8026074(s32);
 bool8 CanTakePokemonHeldItem(PokemonStruct1 *r0);
-extern PokemonStruct1 *sub_808D3F8(void);
 extern PokemonStruct1 *sub_808D3BC(void);
-extern s32 sub_8008ED0(u8 *);
-extern u32 sub_8022860(void);
-extern void sub_8022908(void);
-extern u32 sub_80244E4(void);
 extern bool8 sub_808D750(s16 index_);
 extern void sub_808ED00(void);
 bool8 sub_8026E88(PokemonStruct1 *r0);
@@ -75,12 +45,10 @@ void sub_8026E08(u32 r0);
 void sub_8026DAC(u32 r0, BulkItem *item);
 void sub_8026FA4(void);
 void sub_8026878(void);
-extern void sub_80227B8(PokemonStruct1 *);
 extern void sub_808D31C(PokemonStruct1 *);
 
 void sub_802678C(void);
 void sub_80264CC(void);
-void sub_802608C(void);
 void sub_80261D0(void);
 
 void sub_80268CC(void);
@@ -96,7 +64,10 @@ void sub_8026D0C(void);
 void sub_8026D6C(void);
 void sub_8026D88(void);
 
-u32 sub_8025EF4(PokemonStruct1 *pokeStruct)
+static void sub_8026074(s32 newState);
+static void sub_802608C(void);
+
+bool8 sub_8025EF4(PokemonStruct1 *pokeStruct)
 {
     s32 i;
 
@@ -176,21 +147,20 @@ bool8 sub_802604C(void)
 
 void sub_8026058(void)
 {
-    if(sUnknown_203B2B8)
-    {
+    if (sUnknown_203B2B8) {
         MemoryFree(sUnknown_203B2B8);
         sUnknown_203B2B8 = NULL;
     }
 }
 
-void sub_8026074(s32 newState)
+static void sub_8026074(s32 newState)
 {
     sUnknown_203B2B8->state = newState;
     sub_802608C();
     sub_80261D0();
 }
 
-void sub_802608C(void)
+static void sub_802608C(void)
 {
     s32 index;
     sub_8006518(sUnknown_203B2B8->unk220);

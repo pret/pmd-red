@@ -1,12 +1,14 @@
 #include "global.h"
 #include "bg_palette_buffer.h"
 #include "code_800D090.h"
+#include "code_80130A8.h"
 #include "code_8094F88.h"
 #include "code_8097670.h"
 #include "constants/main_menu.h"
 #include "constants/wonder_mail.h"
 #include "event_flag.h"
 #include "file_system.h"
+#include "ground_main.h"
 #include "input.h"
 #include "main_menu1.h"
 #include "memory.h"
@@ -47,10 +49,7 @@ void DrawLoadScreenText(void);
 void sub_80397B4(void);
 
 extern void sub_80920D8(u8 *);
-extern u8 *sub_8098FB4();
 extern void PrintDungeonLocationtoBuffer(u8 *, DungeonLocation *);
-
-extern void xxx_format_string(u8 *, u8 *, u8 *, u32);
 
 const UnkTextStruct2 gUnknown_80E75F8 = {
    0x00, 0x00, 0x00, 0x00,

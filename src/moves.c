@@ -2,6 +2,7 @@
 #include "code_800D090.h"
 #include "code_80130A8.h"
 #include "code_8092334.h"
+#include "code_8097DD0.h"
 #include "constants/colors.h"
 #include "constants/monster.h"
 #include "memory.h"
@@ -38,9 +39,6 @@ extern const u8* gUnknown_810CF00; // "Range#=@.$m0 "
 
 // system_sbin.s
 extern const struct FileArchive gSystemFileArchive;
-
-// code_8097DD0.s
-extern u32 sub_8097DF0(u8 *, struct subStruct_203B240 **);
 
 static void CopyAndResetMove(Move *, Move *);
 static bool8 sub_80933D8(s32, Move *);

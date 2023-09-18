@@ -3,7 +3,6 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801EE10_mid.h"
-#include "code_8021774.h"
 #include "code_8098BDC.h"
 #include "common_strings.h"
 #include "constants/friend_area.h"

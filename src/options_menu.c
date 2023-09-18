@@ -8,6 +8,7 @@
 #include "game_options.h"
 #include "memory.h"
 #include "menu_input.h"
+#include "options_menu.h"
 #include "text1.h"
 #include "text2.h"
 
@@ -24,7 +25,7 @@ struct unkStruct_203B25C
     UnkTextStruct2 unkBC[4];
 };
 
-struct unkStruct_203B260  
+struct unkStruct_203B260
 { 
     GameOptions *optionsMenu;
     MenuInputStructSub unk4;
@@ -42,18 +43,17 @@ extern const UnkTextStruct2 gUnknown_80DBFCC;
 extern const UnkTextStruct2 gUnknown_80DC020;
 extern const UnkTextStruct2 gUnknown_80DC03C;
 
-extern u8 gWindowBGTitle[];
-extern u8 gUnknown_80DC064[];
-extern u8 gWindowBGGreenString[];
-extern u8 gWindowBGRedString[];
-extern u8 gWindowBGBlueString[];
+extern const u8 gWindowBGTitle[];
+extern const u8 gUnknown_80DC064[];
+extern const u8 gWindowBGGreenString[];
+extern const u8 gWindowBGRedString[];
+extern const u8 gWindowBGBlueString[];
 
 extern const char gOthers_MenuOption[];
 extern const char gUnknown_80DBFEC[];
 extern const char gOthers_GameOptions[];
 extern const char gOthers_Hints[];
 
-extern s32 sub_8008ED0(u8 *);
 extern void CreateOthersMenu(void);
 void CreateOptionsMenu(void);
 void nullsub_38(void);
@@ -98,11 +98,11 @@ enum OptionsMenuStates {
     OPTIONS_MENU_CONFIRM_NEW_OPTIONS,
 };
 
-u32 sub_801DCC4(void)
+bool8 sub_801DCC4(void)
 {
     gUnknown_203B25C = MemoryAlloc(sizeof(struct unkStruct_203B25C), 8);
     SetOptionsMenuState(OPTIONS_MENU_INIT);
-    return 1;
+    return TRUE;
 }
 
 u32 sub_801DCE8(void)
@@ -364,6 +364,13 @@ void HandleChangeSettingsMenu(void)
     }
   }
 }
+
+
+
+
+// THIS IS A NEW FILE
+
+
 
 bool8 sub_801E198(GameOptions *optionsMenu)
 {

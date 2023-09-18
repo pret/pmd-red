@@ -47,6 +47,7 @@ extern void InitGraphics(void);
 extern void sub_800898C(void);
 extern void sub_80089AC(const UnkTextStruct2 *, UnkTextStruct2_sub *);
 extern void sub_8008C54(u32);
+extern s32 sub_8008ED0(const u8 *);
 extern void sub_8009388(void);
 extern void xxx_call_draw_string(s32 x, u32 y, const u8 *str, u32 , u32);
 

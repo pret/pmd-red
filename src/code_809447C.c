@@ -19,28 +19,25 @@ extern u8 gUnknown_202DE58[];
 extern u8 gAvailablePokemonNames[];
 extern s32 gUnknown_202DE30[2];
 
-extern u8 *gUnknown_811383C[];
-extern u8 *gUnknown_8113850[];
-extern u8 *gUnknown_8113868[];
-extern u8 *gUnknown_8113898[];
-extern u8 *gUnknown_81138C0[];
-extern u8 *gUnknown_81138D0[];
-extern u8 *gUnknown_81138E4[];
-extern u8 *gUnknown_8113950[];
-extern u8 *gUnknown_8113900[];
-extern u8 *gUnknown_8113974[];
-extern u8 *gUnknown_8113918[];
-extern u8 *gUnknown_8113990[];
-extern u8 *gUnknown_8113934[];
-extern u8 *gUnknown_81139B4[];
-extern u8 *gUnknown_81139B8[];
-extern u8 *gUnknown_81139CC[];
-extern u8 *gUnknown_8113870[];
+extern const u8 *gUnknown_811383C[];
+extern const u8 *gUnknown_8113850[];
+extern const u8 *gUnknown_8113868[];
+extern const u8 *gUnknown_8113898[];
+extern const u8 *gUnknown_81138C0[];
+extern const u8 *gUnknown_81138D0[];
+extern const u8 *gUnknown_81138E4[];
+extern const u8 *gUnknown_8113950[];
+extern const u8 *gUnknown_8113900[];
+extern const u8 *gUnknown_8113974[];
+extern const u8 *gUnknown_8113918[];
+extern const u8 *gUnknown_8113990[];
+extern const u8 *gUnknown_8113934[];
+extern const u8 *gUnknown_81139B4[];
+extern const u8 *gUnknown_81139B8[];
+extern const u8 *gUnknown_81139CC[];
+extern const u8 *gUnknown_8113870[];
 
 extern struct unkStruct_8113080 gUnknown_8113080[];
-
-extern void xxx_format_string(const char *, u8 *, void *, u32);
-extern s32 sub_8008ED0(u8 *);
 
 void sub_809447C(struct unkStruct_8094924 *r0, u8 *r1)
 {
@@ -100,11 +97,11 @@ void sub_8094558(u32 param_1,u8 *param_2,unkDungeonGlobal_unk1CE98_sub *param_3)
     sub_80922B4(gAvailablePokemonNames + 0x50, param_3->buffer2, POKEMON_NAME_LENGTH);
     if (sub_8094528(param_3->moveID) != 0) {
         // $m1 was defeated by
-        xxx_format_string(*gUnknown_8113868,buffer,(u32 **)&buffer + 50,0); // TODO: fix this hack
+        xxx_format_string(*gUnknown_8113868,buffer,(u8*)((u32 **)&buffer + 50),0); // TODO: fix this hack
     }
     else {
         // $m1
-        xxx_format_string(*gUnknown_8113870,buffer,(u32 **)&buffer + 50,0); // TODO: fix this hack
+        xxx_format_string(*gUnknown_8113870,buffer,(u8*)((u32 **)&buffer + 50),0); // TODO: fix this hack
     }
     iVar2 = sub_8008ED0(buffer);
     xxx_format_and_draw(((0xb0 - iVar2) / 2),y,buffer,param_1,0);

@@ -1,7 +1,5 @@
 #include "global.h"
 #include "code_801EE10_mid.h"
-#include "code_8021774.h"
-#include "code_8021774_pre.h"
 #include "common_strings.h"
 #include "debug_menu3.h"
 #include "friend_area.h"
@@ -10,6 +8,7 @@
 #include "pokemon.h"
 #include "text1.h"
 #include "text2.h"
+#include "wigglytuff_shop.h"
 
 static EWRAM_DATA_2 unkStruct_203B3F4 *sUnknown_203B3F4 = {0};
 

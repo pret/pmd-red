@@ -237,7 +237,7 @@ bool8 sub_8024458(s16 speciesNum, s32 param_2)
   return TRUE;
 }
 
-u8 sub_80244E4(void)
+u32 sub_80244E4(void)
 { 
   switch(GetKeyPress(&gUnknown_203B2AC->input))
   {

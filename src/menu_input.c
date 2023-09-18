@@ -17,7 +17,6 @@ extern const u8 gUnknown_80D4828[];
 extern const s32 gUnknown_80D4830[9];
 
 // text.s
-extern s32 sub_8008ED0(const u8 *);
 extern s16 sub_8009614(u32, u32);
 
 static void sub_8013134(MenuInputStruct *, u32, u32);

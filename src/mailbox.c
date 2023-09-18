@@ -9,6 +9,7 @@
 #include "wonder_mail.h"
 #include "menu_input.h"
 #include "code_80118A4.h"
+#include "wonder_mail_2_1.h"
 
 EWRAM_DATA_2 struct unkStruct_203B304 *gUnknown_203B304 = {0};
 
@@ -82,7 +83,6 @@ extern void CreateMailMenu(void);
 extern void CreateMailAcceptedStatusBox(u32);
 extern void sub_803B35C(WonderMail *, unkStruct_802C39C *);
 extern void sub_802DE84(unkStruct_802C39C *);
-extern void InitializeJobListMenu(u32);
 extern void sub_802B640(u32, u32, u32);
 extern void sub_802B7D0(u32);
 extern void sub_802B9FC(u8);
@@ -91,8 +91,6 @@ extern void sub_802BACC(void);
 extern u8 GetPokemonNewsIndex(void);
 extern void sub_802B81C(void);
 extern u32 sub_802B720(u32);
-extern u32 sub_802C898(void);
-extern void sub_802C8F4(void);
 extern u32 sub_802DEE0(void);
 extern void sub_802DF24(void);
 extern WonderMail *GetMailboxSlotInfo(u8);
@@ -106,7 +104,6 @@ extern void ReceivePKMNNews(u8);
 extern void sub_8096078(void);
 extern void sub_802BEDC(void);
 extern u8 sub_802BE74(void);
-extern u8 HasNoAcceptedJobs(void);
 extern u8 HasNoPelipperBoardJobs(void);
 extern u8 HasNoPKMNNews(void);
 

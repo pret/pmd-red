@@ -1,11 +1,11 @@
 #include "global.h"
+#include "code_8097DD0.h"
 #include "constants/colors.h"
 #include "items.h"
 #include "moves.h"
 #include "random.h"
 #include "pokemon.h"
 #include "random.h"
-#include "subStruct_203B240.h"
 #include "code_800D090.h"
 #include "text_util.h"
 #include "text2.h"
@@ -36,7 +36,6 @@ EWRAM_DATA ItemDataEntry *gItemParametersData = {0};
 EWRAM_DATA TeamInventory gTeamInventory = {0};
 EWRAM_DATA_2 TeamInventory *gTeamInventoryRef = {0};
 
-extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 extern s32 sub_8091E94(s32 a1, s32 a2, s32 a3);
 extern void SortKecleonShopInventory();
 bool8 AddKecleonWareItem(u8);

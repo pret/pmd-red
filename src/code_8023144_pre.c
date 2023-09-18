@@ -6,7 +6,6 @@
 #include "menu.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
-
 #include "text1.h"
 #include "input.h"
 #include "items.h"

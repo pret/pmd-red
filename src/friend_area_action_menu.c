@@ -1,7 +1,7 @@
 #include "global.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
-#include "code_801C620.h"
+#include "code_801BEEC.h"
 #include "code_801EE10.h"
 #include "code_801EE10_1.h"
 #include "code_801EE10_mid.h"
@@ -48,10 +48,8 @@ extern void SetFriendAreaActionMenuState(u32);
 extern void PlaySound(u32);
 
 extern void sub_808D31C(PokemonStruct1 *);
-extern PokemonStruct1 *sub_808D3F8(void);
 extern PokemonStruct1 *sub_808D3BC(void);
 extern u8 gUnknown_202DE58[];
-extern u32 sub_80244E4(void);
 extern bool8 sub_808D750(s16 index_);
 extern void sub_808ED00(void);
 

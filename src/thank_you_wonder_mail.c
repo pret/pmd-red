@@ -3,7 +3,7 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
-#include "code_801C620.h"
+#include "code_801C8C4.h"
 #include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
 #include "cpu.h"
@@ -220,7 +220,6 @@ extern void sub_80151C0(u32, u8 *);
 extern void sub_803092C(void);
 extern s32 sub_8037B28(u32);
 extern u32 sub_8030894(void);
-extern u32 sub_801D008(void);
 extern void sub_80306A8(u32, u32, u32, u32);
 extern u8 sub_800D588(void);
 extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
@@ -1283,7 +1282,7 @@ void UpdateThankYouMailText(void)
         sub_8035CF4(gUnknown_203B2C4->unk21C,3,TRUE);
         break;
     case 0x13:
-        if (sub_801D008() != 0)
+        if (sub_801D008() != NULL)
             break;
         ResetUnusedInputStruct();
         sub_800641C(NULL, TRUE, TRUE);

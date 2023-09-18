@@ -75,6 +75,8 @@ s32 sub_8016028(void)
     return 60;
 }
 
+///////////// THIS IS ITS OWN FILE
+
 u32 sub_801602C(u32 r0, u8 *name)
 {
     ResetUnusedInputStruct();

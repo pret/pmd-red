@@ -1,7 +1,7 @@
 #include "global.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
-#include "code_801C620.h"
+#include "code_801BEEC.h"
 #include "code_801EE10.h"
 #include "code_801EE10_1.h"
 #include "code_801EE10_mid.h"
@@ -26,9 +26,6 @@ extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
 #include "data/gulpin_shop_801FB50.h"
-
-// code_801EE10_1.c (return var type)
-extern u32 sub_80244E4(void);
 
 static void CreateGulpinLinkMenu(void);
 static void CreateGulpinShopMenu(void);

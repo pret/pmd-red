@@ -2,7 +2,7 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
-#include "code_801C620.h"
+#include "code_801C8C4.h"
 #include "constants/communication_error_codes.h"
 #include "cpu.h"
 #include "items.h"
@@ -22,7 +22,6 @@ static EWRAM_DATA_2 struct TradeItemsMenu *sTradeItemsMenu = {0};
 
 #include "data/trade_items_menu.h"
 
-extern u32 sub_801D008();
 extern s32 sub_8037B28(u32);
 
 void sub_8036F74(void);
@@ -508,7 +507,7 @@ void sub_8036B28(void)
         sub_80141B4(sPleaseChooseItem,0,0,0x101);
         break;
     case TRADE_ITEMS_SEND_ITEM_SELECTION:
-        if (sub_801D008() == 0) {
+        if (sub_801D008() == NULL) {
             ResetUnusedInputStruct();
             sub_800641C(NULL, TRUE, TRUE);
             {

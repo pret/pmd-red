@@ -303,7 +303,7 @@ s16 sub_8098FA0(void)
     return sub_8001658(0, 0x11);
 }
 
-const char  *sub_8098FB4(void)
+const char *sub_8098FB4(void)
 {
     return sub_80A2B18(sub_8001658(0, 0x11));
 }

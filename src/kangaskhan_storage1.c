@@ -1,7 +1,7 @@
 #include "global.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
-#include "code_801C620.h"
+#include "code_801C8C4.h"
 #include "code_8098BDC.h"
 #include "common_strings.h"
 #include "kangaskhan_storage1.h"

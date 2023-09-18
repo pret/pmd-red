@@ -1,5 +1,6 @@
 #include "global.h"
 #include "code_800D090.h"
+#include "code_8097DD0.h"
 #include "constants/colors.h"
 #include "constants/move_id.h"
 #include "decompress.h"
@@ -8,7 +9,6 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "pokemon_mid.h"
-#include "subStruct_203B240.h"
 #include "text_util.h"
 
 extern MonsterDataEntry *gMonsterParameters;
@@ -36,7 +36,6 @@ extern u32 ReturnIntFromChar(u8 r0);
 extern void sub_80943A0(void*, s32);
 extern void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1*, PokemonStruct2*);
 extern const u8 *DecompressMoveID(const u8 *a1, u16 *a2);
-extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 
 extern u8 GetBodySize(s16 index);
 

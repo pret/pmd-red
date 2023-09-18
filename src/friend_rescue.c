@@ -3,7 +3,7 @@
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
 #include "code_801EE10_1.h"
-#include "code_801C620.h"
+#include "code_801C8C4.h"
 #include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
 #include "constants/monster.h"
@@ -266,9 +266,7 @@ extern u8 sub_80307EC(void);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E10(void);
 extern void sub_8031E00(void);
-extern u8 sub_8024108(u32);
 extern void sub_802452C(void);
-extern u32 sub_80244E4(void);
 extern u32 sub_8039068(u32, u8 *passwordBuffer, unkStruct_203B480 *r0);
 
 extern void sub_803084C(void);
@@ -278,7 +276,6 @@ extern void sub_802F2C0(void);
 extern void sub_8030DE4(void);
 extern u8 sub_800D588(void);
 extern void sub_80151C0(u32, u8 *);
-extern u32 sub_801D008(void);
 extern u32 sub_8023CE8(void);
 extern void sub_802F204(unkStruct_802F204 *, u32);
 extern u32 sub_80306A8(u32 wonderMailType, u32, UnkTextStruct2_sub *, u32);
@@ -1056,7 +1053,7 @@ void sub_8032828(void)
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;
         case 0x5F:
-            if (sub_801D008() == 0) {
+            if (sub_801D008() == NULL) {
                 ResetUnusedInputStruct();
                 sub_800641C(NULL, TRUE, TRUE);
                 {

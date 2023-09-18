@@ -2,7 +2,7 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
-#include "code_801C620.h"
+#include "code_801C8C4.h"
 #include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
 #include "constants/wonder_mail.h"

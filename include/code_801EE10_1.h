@@ -2,6 +2,7 @@
 #define GUARD_CODE_801EE10_1_H
 
 bool8 sub_8024458(s16 speciesNum, s32);
+u32 sub_80244E4(void);
 void sub_802453C(void);
 
 // code_801EE10_1.s
@@ -11,5 +12,6 @@ extern s16 sub_8023B44(void);
 extern void sub_8023B7C(u32);
 extern void sub_8023C60(void);
 extern void sub_8023DA4(void);
+extern bool8 sub_8024108(u32);
 
 #endif // GUARD_CODE_801EE10_1_H

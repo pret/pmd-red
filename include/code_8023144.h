@@ -48,4 +48,8 @@ typedef struct unkStruct_3001B5C
     u8 unk3F8[4];
 } unkStruct_3001B5C;
 
+bool8 sub_80227B8(PokemonStruct1 *pokeStruct);
+u32 sub_8022860(void);
+void sub_8022908(void);
+
 #endif // GUARD_CODE_8023144_H

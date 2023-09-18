@@ -116,7 +116,6 @@ extern void sub_802DE84(unkStruct_802C39C *);
 extern void sub_802CBAC(void);
 
 s32 CountAcceptedJobs(void);
-bool8 HasNoAcceptedJobs(void);
 
 s32 CountPelipperBoardSlots(void)
 {

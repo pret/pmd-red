@@ -158,7 +158,6 @@ extern void sub_802DF24(void);
 extern void SetJobListState(u32);
 extern u32 sub_802DEE0(void);
 extern void ResetJobSlot(u8);
-extern u8 HasNoAcceptedJobs(void);
 u32 sub_802C598(u8 param_1);
 extern void sub_802C688(void);
 extern u8 GetPelipperBoardSlotIndex(void);

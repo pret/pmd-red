@@ -178,6 +178,13 @@ void DrawHintSelectionMenu(void)
     sub_80073E0(gUnknown_203B264->unk34);
 }
 
+
+
+// THIS IS A NEW FILE
+
+
+
+
 u32 CreateHintDisplayScreen(u32 index)
 {
     gUnknown_203B268 = MemoryAlloc(sizeof(struct unkStruct_203B268), 8);

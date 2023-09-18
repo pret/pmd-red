@@ -1,7 +1,7 @@
 	.align 2
 
-    .include "src/m4a.o"
-    .include "src/agb_flash.o"
+.include "src/m4a.o"
+.include "src/agb_flash.o"
 
 errno: /* 203B034 */
 	.space 0x4
@@ -17,36 +17,35 @@ gUnknown_203B03C: /* 203B03C */
 gUnknown_203B040: /* 203B040 */
 	.space 0x30
 
-    .include "src/other_random.o"
-
+.include "src/other_random.o"
     .space 0x2
 
-    .include "src/sprite.o"
+.include "src/sprite.o"
 
-gUnknown_203B078: /* 203B078 */
+gUnknown_203B078: /* 203B078 (sub_80057E8 - sub_8006438) */
 	.space 0x4
 
-    .include "src/random.o"
+.include "src/random.o"
 
-gUnknown_203B080: /* 203B080 */
+gUnknown_203B080: /* 203B080 (sub_8053540 - sub_806806C) */
 	.space 0x4
 
-gUnknown_203B084: /* 203B084 */
+gUnknown_203B084: /* 203B084 (sub_8053430 - sub_806806C) */
 	.space 0x4
 
-gUnknown_203B088: /* 203B088 */
+gUnknown_203B088: /* 203B088 (xxx_draw_string_80144C4) */
 	.space 0x4
 
-gUnknown_203B08C: /* 203B08C */
+gUnknown_203B08C: /* 203B08C (xxx_draw_string_80524F0) */
 	.space 0x4
 
-gUnknown_203B090: /* 203B090 */
+gUnknown_203B090: /* 203B090 (InitGraphics) */
 	.space 0x4
 
-    .include "src/file_system.o"
-    .include "src/main.o"
+.include "src/file_system.o"
+.include "src/main.o"
 
-gUnknown_203B099: /* 203B099 */
+gUnknown_203B099: /* 203B099 (VBlankIntr - xxx_update_bg_sound_input) */
 	.space 0x1
 
 gUnknown_203B09A: /* 203B09A */
@@ -82,43 +81,43 @@ gUnknown_203B0B0: /* 203B0B0 */
 gUnknown_203B0B2: /* 203B0B2 */
 	.space 0x2
 
-    .include "src/flash.o"
+.include "src/flash.o"
     .space 0x3
 
-gUnknown_203B0B8: /* 203B0B8 */
+gUnknown_203B0B8: /* 203B0B8 (sub_800CB20 - sub_800CB50) */
 	.space 0x4
 
-gRawKeyInput: /* 203B0BC */
+gRawKeyInput: /* 203B0BC (sub_800CB20 - ReadKeyInput) */
 	.space 0x2
 
-gUnknown_203B0BE: /* 203B0BE */
+gUnknown_203B0BE: /* 203B0BE (sub_800CDA8) */
 	.space 0xE
 
-gUnknown_203B0CC: /* 203B0CC */
+gUnknown_203B0CC: /* 203B0CC (sub_800DE8C - sub_800DC14) */
 	.space 0x4
 
-gUnknown_203B0D0: /* 203B0D0 */
+gUnknown_203B0D0: /* 203B0D0 (sub_800ED38 - sub_800EF64) */
 	.space 0x4
 
-gUnknown_203B0D4: /* 203B0D4 */
+gUnknown_203B0D4: /* 203B0D4 (sub_800F034 - sub_800F19C) */
 	.space 0x4
 
-gDungeonPokemonSprites: /* 203B0D8 */
+gDungeonPokemonSprites: /* 203B0D8 (GetDungeonPokemonSprite - sub_800F958) */
 	.space 0x4
 
-gUnknown_203B0DC: /* 203B0DC */
+gUnknown_203B0DC: /* 203B0DC (DrawStatusSprite) */
 	.space 0x8
 
-gUnknown_203B0E4: /* 203B0E4 */
+gUnknown_203B0E4: /* 203B0E4 (sub_800F990 - sub_801169C) */
 	.space 0x4
 
-gUnknown_203B0E8: /* 203B0E8 */
+gUnknown_203B0E8: /* 203B0E8 (sub_8010268 - sub_8010B74) */
 	.space 0x4
 
-gUnknown_203B0EC: /* 203B0EC */
+gUnknown_203B0EC: /* 203B0EC (sub_8010C58) */
 	.space 0x60
 
-    .include "src/debug.o"
+.include "src/debug.o"
 	.space 0x2B
 
 .include "src/save.o"
@@ -127,16 +126,16 @@ gUnknown_203B0EC: /* 203B0EC */
 .include "src/quick_save_read.o"
 .include "src/quick_save_write.o"
 
-gUnknown_203B198: /* 203B198 */
+gUnknown_203B198: /* 203B198 (sub_8014248 - sub_8014A88) */
 	.space 0x60
 
-gUnknown_203B1F8: /* 203B1F8 */
+gUnknown_203B1F8: /* 203B1F8 (sub_8015080 - sub_80151A4) */
 	.space 0x4
 
-gUnknown_203B1FC: /* 203B1FC */
+gUnknown_203B1FC: /* 203B1FC (sub_80151C0 - sub_8015F84) */
 	.space 0x4
 
-gUnknown_203B200: /* 203B200 */
+gUnknown_203B200: /* 203B200 (sub_801602C - IsNameEmpty) */
 	.space 0x4
 
 .include "src/felicity_bank.o"
@@ -149,47 +148,23 @@ gUnknown_203B200: /* 203B200 */
 .include "src/code_801AFA4.o"
 .include "src/code_801B3C0.o"
 .include "src/code_801B60C.o"
+.include "src/code_801BEEC.o"
+.include "src/code_801C244.o"
+.include "src/code_801C620.o"
+.include "src/code_801C8C4.o"
+.include "src/code_801D014.o"
+.include "src/code_801D9E4.o"
 
-gUnknown_203B238: /* 203B238 */
+gUnknown_203B25C: /* 203B25C (sub_801DCC4 - HandleChangeSettingsMenu) */
 	.space 0x4
 
-gUnknown_203B23C: /* 203B23C */
+gUnknown_203B260: /* 203B260 (sub_801E198 - CreateOptionsMenu) */
 	.space 0x4
 
-gUnknown_203B240: /* 203B240 */
+gUnknown_203B264: /* 203B264 (sub_801E3F0 - DrawHintSelectionMenu) */
 	.space 0x4
 
-gUnknown_203B244: /* 203B244 */
-	.space 0x4
-
-gUnknown_203B248: /* 203B248 */
-	.space 0x4
-
-gUnknown_203B24C: /* 203B24C */
-	.space 0x2
-
-gUnknown_203B24E: /* 203B24E */
-	.space 0x2
-
-gUnknown_203B250: /* 203B250 */
-	.space 0x4
-
-gUnknown_203B254: /* 203B254 */
-	.space 0x4
-
-gUnknown_203B258: /* 203B258 */
-	.space 0x4
-
-gUnknown_203B25C: /* 203B25C */
-	.space 0x4
-
-gUnknown_203B260: /* 203B260 */
-	.space 0x4
-
-gUnknown_203B264: /* 203B264 */
-	.space 0x4
-
-gUnknown_203B268: /* 203B268 */
+gUnknown_203B268: /* 203B268 (CreateHintDisplayScreen - DisplayChosenHint) */
 	.space 0x4
 
 .include "src/gulpin_shop.o"
