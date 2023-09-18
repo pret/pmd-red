@@ -98,14 +98,14 @@ s32 sub_8035574(void)
 
     switch (sCredits1Work->unk60) {
         case 0:
-            if (sub_8099B94() == 0) {
+            if (!sub_8099B94()) {
                 sCredits1Work->unk60 = 1;
                 p = gUnknown_80E4A40;
                 sub_8099A5C(9, 30, p[0]); // Probably same/similar macro from the above func - Kermalis
             }
             break;
         case 1:
-            if (sub_8099B94() == 0)
+            if (!sub_8099B94())
                 sCredits1Work->unk60 = 2;
             break;
         case 2:
@@ -117,7 +117,7 @@ s32 sub_8035574(void)
             sCredits1Work->unk64--;
             break;
         case 3:
-            if (sub_8099B94() == 0) {
+            if (!sub_8099B94()) {
                 ResetUnusedInputStruct();
                 sub_800641C(NULL, TRUE, TRUE);
                 sCredits1Work->unk60 = 4;

@@ -521,6 +521,17 @@ void sub_802BCC4(void)
   }
 }
 
+
+
+
+
+// THIS IS A NEW FILE:
+
+
+
+
+
+
 u32 sub_802BD14(s32 param_1, UnkTextStruct2_sub *param_2, u32 param_3)
 {
     if (HasNoMailinMailbox())

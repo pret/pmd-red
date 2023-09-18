@@ -179,40 +179,42 @@ gUnknown_203B278: /* 203B278 */
 	.space 0x4
 
 .include "src/gulpin_shop_801FB50.o"
-.include "src/wigglytuff_shop.o"
+.include "src/wigglytuff_shop1.o"
+.include "src/wigglytuff_shop2.o"
+.include "src/wigglytuff_shop3.o"
 
-gUnknown_203B294: /* 203B294 */
+gUnknown_203B294: /* 203B294 (sub_80227B8 - sub_8023120) */
 	.space 0x4
 
-gUnknown_203B298: /* 203B298 */
+gUnknown_203B298: /* 203B298 (sub_8023144 - sub_80233A0) */
 	.space 0x4
 
-gUnknown_203B29C: /* 203B29C */
+gUnknown_203B29C: /* 203B29C (sub_8023144 - sub_80233A0) */
 	.space 0x2
 
-gUnknown_203B29E: /* 203B29E */
+gUnknown_203B29E: /* 203B29E (sub_8023144 - sub_80233A0) */
 	.space 0x2
 
-gUnknown_203B2A0: /* 203B2A0 */
+gUnknown_203B2A0: /* 203B2A0 (sub_8023868 - sub_8023C60) */
 	.space 0x4
 
-gUnknown_203B2A4: /* 203B2A4 */
+gUnknown_203B2A4: /* 203B2A4 (sub_8023868 - sub_8023C60) */
 	.space 0x4
 
-gUnknown_203B2A8: /* 203B2A8 */
+gUnknown_203B2A8: /* 203B2A8 (sub_8023868 - sub_8023C60) */
 	.space 0x2
 
-gUnknown_203B2AA: /* 203B2AA */
+gUnknown_203B2AA: /* 203B2AA (sub_8023868 - sub_8023C60) */
 	.space 0x2
 
-gUnknown_203B2AC: /* 203B2AC */
+gUnknown_203B2AC: /* 203B2AC (sub_8024458 - sub_8024604) */
 	.space 0x4
 
 .include "src/luminous_cave.o"
 .include "src/friend_list_menu.o"
 .include "src/party_list_menu.o"
 
-gUnknown_203B2BC: /* 203B2BC (friend_area_action_menu) */
+gUnknown_203B2BC: /* 203B2BC (sub_8027074 - sub_8027EB8) */
 	.space 0x4
 
 gUnknown_203B2C0: /* 203B2C0 (wonder_mail) */
@@ -236,7 +238,7 @@ gUnknown_203B2D2: /* 203B2D2 (pokemon_news) */
 gUnknown_203B2D4: /* 203B2D4 (pokemon_news) */
 	.space 0x4
 
-gUnknown_203B2D8: /* 203B2D8 (pokemon_news / wonder_mail_2_mid) */
+gUnknown_203B2D8: /* 203B2D8 (sub_802BD14 - CountEmptyMailSlots) */
 	.space 0x4
 
 gUnknown_203B2DC: /* 203B2DC (pokemon_news) */

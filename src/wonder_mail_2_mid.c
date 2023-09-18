@@ -122,6 +122,13 @@ bool8 HasNoMailinMailbox(void)
 }
 
 
+
+
+// THIS IS A NEW FILE:
+
+
+
+
 bool8 sub_802C10C(s32 param_1,UnkTextStruct2_sub *param_2,s32 param_3)
 {
   if (HasNoPelipperBoardJobs() != 0) {

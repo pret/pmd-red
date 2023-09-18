@@ -52,4 +52,10 @@ bool8 sub_80227B8(PokemonStruct1 *pokeStruct);
 u32 sub_8022860(void);
 void sub_8022908(void);
 
+bool8 sub_8023144(s32, s32 index, UnkTextStruct2_sub *sub, u32);
+u32 sub_8023278(u8);
+s16 sub_802331C(void);
+void sub_8023354(bool8 cursorSprite);
+void sub_80233A0(void);
+
 #endif // GUARD_CODE_8023144_H

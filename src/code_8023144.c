@@ -39,6 +39,11 @@ extern void sub_80234BC(void);
 extern u32 sub_80236A4(void);
 
 
+extern u8 gUnknown_80DC934[];
+
+extern void sub_8008C54(u32);
+extern u8 gUnknown_80DC93C[];
+
 extern u8 gUnknown_80DC5EC[];
 extern u8 gUnknown_202DE58[];
 extern u8 gUnknown_80DC8F0[];
@@ -257,6 +262,15 @@ void sub_8023120(void)
     }
 }
 
+
+
+// THIS IS A NEW FILE:
+
+
+
+
+
+
 bool8 sub_8023144(s32 param_1, s32 index, UnkTextStruct2_sub *sub, u32 param_4)
 {
   u8 param_1_u8 = param_1;
@@ -292,8 +306,7 @@ bool8 sub_8023144(s32 param_1, s32 index, UnkTextStruct2_sub *sub, u32 param_4)
   return 1;
 }
 
-
-u8 sub_8023278(u8 param_1)
+u32 sub_8023278(u8 param_1)
 {
     s32 iVar3;
     u32 temp;
@@ -334,18 +347,17 @@ s16 sub_802331C(void)
     return gUnknown_3001B5C->unkC[gUnknown_3001B5C->input.unk1E * gUnknown_3001B5C->input.unk1C + gUnknown_3001B5C->input.menuIndex];
 }
 
-void sub_8023354(u8 param_1)
+void sub_8023354(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_3001B5C->unk398, FALSE, FALSE);
     sub_8013984(&gUnknown_3001B5C->input);
     sub_8023420();
     sub_80234BC();
-    if (param_1 != 0) {
-        AddMenuCursorSprite(&gUnknown_3001B5C->input);
-    }
-}
 
+    if (cursorSprite)
+        AddMenuCursorSprite(&gUnknown_3001B5C->input);
+}
 
 void sub_80233A0(void)
 {
@@ -436,11 +448,6 @@ void sub_8023420(void)
 "_080234B4: .4byte 0x00000376\n"
 "_080234B8: .4byte 0x000003a6");
 }
-
-extern u8 gUnknown_80DC934[];
-
-extern void sub_8008C54(u32);
-extern u8 gUnknown_80DC93C[];
 
 void sub_80234BC(void)
 {

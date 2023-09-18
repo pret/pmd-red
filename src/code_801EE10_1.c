@@ -220,6 +220,16 @@ PokemonStruct1 *sub_80243E8(void)
     return pokeStruct;
 }
 
+
+
+
+
+// THIS IS A NEW FILE:
+
+
+
+
+
 bool8 sub_8024458(s16 speciesNum, s32 param_2)
 {
   s32 speciesNum_s32 = speciesNum;

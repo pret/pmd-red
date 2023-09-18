@@ -486,6 +486,7 @@ u8 *sub_80023C4(u32 param_1)
   }
 }
 
+// 6 checks for post game being reached
 bool8 sub_80023E4(u32 param_1)
 {
   switch(param_1) {

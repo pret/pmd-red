@@ -8,7 +8,8 @@
 #include "pokemon.h"
 #include "text1.h"
 #include "text2.h"
-#include "wigglytuff_shop.h"
+#include "wigglytuff_shop1.h"
+#include "wigglytuff_shop2.h"
 
 static EWRAM_DATA_2 unkStruct_203B3F4 *sUnknown_203B3F4 = {0};
 

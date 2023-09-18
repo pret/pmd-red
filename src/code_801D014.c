@@ -23,7 +23,7 @@
 #include "rescue_team_info.h"
 #include "text1.h"
 #include "text2.h"
-#include "wigglytuff_shop.h"
+#include "wigglytuff_shop2.h"
 #include "wonder_mail_2_1.h"
 
 extern u8 gAvailablePokemonNames[]; // 202DF98
