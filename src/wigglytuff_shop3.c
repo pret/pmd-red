@@ -141,16 +141,16 @@ static void sub_8021D5C(void)
     switch (sWigglytuffShop3Work->state) {
         case WIGGLYTUFF_UNK9:
         case WIGGLYTUFF_UNKA:
-            sWigglytuffShop3Work->unkD0[0] = gUnknown_80DC534;
-            sWigglytuffShop3Work->unkD0[2] = gUnknown_80DC534;
-            sWigglytuffShop3Work->unkD0[1] = gUnknown_80DC564;
+            sWigglytuffShop3Work->unkD0[0] = sUnknown_80DC534;
+            sWigglytuffShop3Work->unkD0[2] = sUnknown_80DC534;
+            sWigglytuffShop3Work->unkD0[1] = sUnknown_80DC564;
             break;
         case WIGGLYTUFF_UNKB:
-            sWigglytuffShop3Work->unkD0[2] = gUnknown_80DC54C;
+            sWigglytuffShop3Work->unkD0[2] = sUnknown_80DC54C;
             break;
         default:
             for (i = 0; i < 4; i++)
-                sWigglytuffShop3Work->unkD0[i] = gUnknown_80DC534;
+                sWigglytuffShop3Work->unkD0[i] = sUnknown_80DC534;
             break;
     }
 

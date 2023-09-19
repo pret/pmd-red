@@ -207,7 +207,8 @@ bool8 IsPokemonRenamed(PokemonStruct1* pokemon) {
     return TRUE;
 }
 
-bool8 ComparePokemonNames(s16 a1, s16 a2) {
+bool8 ComparePokemonNames(s16 a1, s16 a2)
+{
     s32 index1 = a1;
     s32 index2 = a2;
     u8* name1 = gRecruitedPokemonRef->pokemon[index1].name;

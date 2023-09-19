@@ -3,6 +3,7 @@
 
 #include "pokemon.h"
 
+bool8 ComparePokemonNames(s16, s16);
 void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
 
 bool8 sub_808DA44(s32, u32);

@@ -125,7 +125,9 @@ SECTIONS {
         asm/code_8023144.o(.text);
         src/code_8023144.o(.text);
         asm/code_801EE10_1.o(.text);
-        src/code_801EE10_1.o(.text);
+        asm/code_8023868.o(.text);
+        src/code_8023868.o(.text);
+        src/code_8024458.o(.text);
         src/luminous_cave.o(.text);
         src/friend_list_menu.o(.text);
         src/party_list_menu.o(.text);
@@ -436,6 +438,8 @@ SECTIONS {
         src/wigglytuff_shop2.o(.rodata);
         src/wigglytuff_shop3.o(.rodata);
         data/data_80DC464.o(.rodata);
+        src/code_8023868.o(.rodata);
+        src/code_8024458.o(.rodata);
         src/luminous_cave.o(.rodata);
         src/friend_list_menu.o(.rodata);
         src/party_list_menu.o(.rodata);

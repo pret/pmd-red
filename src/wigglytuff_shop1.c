@@ -31,7 +31,7 @@ bool8 sub_80211AC(u32 mode, u32 a1)
     sWigglytuffShop1Work->unk74 = a1;
     sWigglytuffShop1Work->unk78 = &sWigglytuffShop1Work->unk7C[sWigglytuffShop1Work->unk74];
     sub_8006518(sWigglytuffShop1Work->unk7C);
-    sWigglytuffShop1Work->unk7C[sWigglytuffShop1Work->unk74] = gUnknown_80DC47C;
+    sWigglytuffShop1Work->unk7C[sWigglytuffShop1Work->unk74] = sUnknown_80DC47C;
     sWigglytuffShop1Work->unk78->unk14 = sWigglytuffShop1Work->unkDC;
     ResetUnusedInputStruct();
     sub_800641C(sWigglytuffShop1Work->unk7C, TRUE, TRUE);
@@ -102,7 +102,7 @@ void sub_80213A0(void)
         sUnknown_203B284 = sWigglytuffShop1Work->mode;
         sUnknown_203B288 = sWigglytuffShop1Work->unk40.menuIndex;
         sUnknown_203B28A = sWigglytuffShop1Work->unk40.unk1E;
-        sWigglytuffShop1Work->unk7C[sWigglytuffShop1Work->unk74] = gUnknown_80DC464;
+        sWigglytuffShop1Work->unk7C[sWigglytuffShop1Work->unk74] = sUnknown_80DC464;
         ResetUnusedInputStruct();
         sub_800641C(sWigglytuffShop1Work->unk7C, TRUE, TRUE);
         MemoryFree(sWigglytuffShop1Work);
@@ -185,7 +185,7 @@ void sub_8021494(void)
 
     sub_8008C54(sWigglytuffShop1Work->unk74);
     sub_80073B8(sWigglytuffShop1Work->unk74);
-    xxx_call_draw_string(10, 0, gUnknown_80DC494, sWigglytuffShop1Work->unk74, 0);
+    xxx_call_draw_string(10, 0, sFriendAreas, sWigglytuffShop1Work->unk74, 0);
 
     sub_8012BC4((sWigglytuffShop1Work->unkDC[2] * 8) + 4, 0, sWigglytuffShop1Work->unk40.unk1E + 1, 1, 7, sWigglytuffShop1Work->unk74);
 
@@ -198,7 +198,7 @@ void sub_8021494(void)
             if (GetFriendAreaPrice(friendAreaIndex) <= gTeamInventoryRef->teamMoney)
                 xxx_call_draw_string(8,sub_8013800(&sWigglytuffShop1Work->unk40, i), buffer1, sWigglytuffShop1Work->unk74, 0);
             else {
-                sprintfStatic(buffer2, gUnknown_80DC4A4, buffer1);
+                sprintfStatic(buffer2, sFmtRedString, buffer1);
                 xxx_call_draw_string(8, sub_8013800(&sWigglytuffShop1Work->unk40, i), buffer2, sWigglytuffShop1Work->unk74, 0);
             }
         }
@@ -206,7 +206,7 @@ void sub_8021494(void)
             if (gFriendAreas[friendAreaIndex] == TRUE)
                 xxx_call_draw_string(8, sub_8013800(&sWigglytuffShop1Work->unk40, i), GetFriendAreaName(friendAreaIndex), sWigglytuffShop1Work->unk74, 0);
             else {
-                sprintfStatic(buffer2, gUnknown_80DC4AC, GetFriendAreaName(friendAreaIndex));
+                sprintfStatic(buffer2, sFmtGreenString, GetFriendAreaName(friendAreaIndex));
                 xxx_call_draw_string(8, sub_8013800(&sWigglytuffShop1Work->unk40, i), buffer2, sWigglytuffShop1Work->unk74, 0);
             }
         }

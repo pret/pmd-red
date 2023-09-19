@@ -2,8 +2,9 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
-#include "code_801EE10_1.h"
 #include "code_801C8C4.h"
+#include "code_8023868.h"
+#include "code_8024458.h"
 #include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
 #include "constants/monster.h"
@@ -266,7 +267,6 @@ extern u8 sub_80307EC(void);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E10(void);
 extern void sub_8031E00(void);
-extern void sub_802452C(void);
 extern u32 sub_8039068(u32, u8 *passwordBuffer, unkStruct_203B480 *r0);
 
 extern void sub_803084C(void);

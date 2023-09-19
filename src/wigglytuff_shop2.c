@@ -32,7 +32,7 @@ bool8 sub_8021774(u8 friendArea, bool8 a1, s32 a2)
     sWigglytuffShop2Work->unk74 = a2;
     sWigglytuffShop2Work->unk78 = &sWigglytuffShop2Work->unk7C[a2];
     sub_8006518(sWigglytuffShop2Work->unk7C);
-    sWigglytuffShop2Work->unk7C[sWigglytuffShop2Work->unk74] = gUnknown_80DC4D8;
+    sWigglytuffShop2Work->unk7C[sWigglytuffShop2Work->unk74] = sUnknown_80DC4D8;
     sub_8021820();
     return TRUE;
 }
@@ -60,7 +60,7 @@ static void sub_8021820(void)
 void sub_8021830(void)
 {
     if (sWigglytuffShop2Work) {
-        sWigglytuffShop2Work->unk7C[sWigglytuffShop2Work->unk74] = gUnknown_80DC4BC;
+        sWigglytuffShop2Work->unk7C[sWigglytuffShop2Work->unk74] = sUnknown_80DC4BC;
         ResetUnusedInputStruct();
         sub_800641C(sWigglytuffShop2Work->unk7C, TRUE, TRUE);
         MemoryFree(sWigglytuffShop2Work);
@@ -91,9 +91,9 @@ static void sub_8021894(void)
     xxx_call_draw_string(10, 20, string, sWigglytuffShop2Work->unk74, 0);
 
     if (sWigglytuffShop2Work->unkD != 0)
-        xxx_call_draw_string(32, 60, gUnknown_80DC4F0, sWigglytuffShop2Work->unk74, 0);
+        xxx_call_draw_string(32, 60, sUnknown_80DC4F0, sWigglytuffShop2Work->unk74, 0);
     else
-        xxx_call_draw_string(32, 60, gUnknown_80DC518, sWigglytuffShop2Work->unk74, 0);
+        xxx_call_draw_string(32, 60, sInhabitants, sWigglytuffShop2Work->unk74, 0);
 
     sub_800792C(sWigglytuffShop2Work->unk74, 4, 64, 20, 4);
 
@@ -119,7 +119,7 @@ static void sub_8021894(void)
                 xxx_call_draw_string(x, y, buffer2, sWigglytuffShop2Work->unk74, 0);
                 break;
             case 2:
-                sprintfStatic(buffer1, gUnknown_80DC524, buffer2);
+                sprintfStatic(buffer1, sFmtCyanString, buffer2);
                 xxx_call_draw_string(x, y, buffer1, sWigglytuffShop2Work->unk74, 0);
                 break;
         }

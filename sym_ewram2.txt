@@ -207,9 +207,7 @@ gUnknown_203B2A8: /* 203B2A8 (sub_8023868 - sub_8023C60) */
 gUnknown_203B2AA: /* 203B2AA (sub_8023868 - sub_8023C60) */
 	.space 0x2
 
-gUnknown_203B2AC: /* 203B2AC (sub_8024458 - sub_8024604) */
-	.space 0x4
-
+.include "src/code_8024458.o"
 .include "src/luminous_cave.o"
 .include "src/friend_list_menu.o"
 .include "src/party_list_menu.o"

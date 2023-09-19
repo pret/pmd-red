@@ -1,7 +1,8 @@
 #include "global.h"
 #include "code_80118A4.h"
-#include "code_801EE10_1.h"
 #include "code_80130A8.h"
+#include "code_8023868.h"
+#include "code_8024458.h"
 #include "code_8094F88.h"
 #include "code_80A26CC.h"
 #include "constants/communication_error_codes.h"
@@ -46,7 +47,6 @@ extern u32 sub_80154F0();
 extern u32 sub_8039068(u32, u8 *r1, unkStruct_203B480 *r0);
 extern void sub_8095274(u32);
 extern void sub_80155F0();
-extern void sub_802452C();
 extern u32 sub_8031DCC();
 extern void sub_8031E10();
 extern void sub_8031E00();

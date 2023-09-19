@@ -30,4 +30,8 @@ void SetDefaultIQSkills(u8 *param_1, bool8 enableSelfCurer);
 void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, u8 param_3);
 u32 sub_808F734(PokemonStruct1 *pokemon, s16 _species);
 
+// pokemon_3.s
+extern void CreatePokemonInfoTabScreen(u32, s16, u32 *, u32 *, u32);
+extern void sub_808FF20(u32 *, PokemonStruct1 *, bool8);
+
 #endif // GUARD_POKEMON_3_H
