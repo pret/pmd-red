@@ -370,6 +370,15 @@ bool8 HasNoPKMNNews(void)
     return TRUE;
 }
 
+
+
+
+
+
+
+
+// THIS IS A NEW FILE
+
 u32 sub_802B9FC(u8 mailIndex)
 {
     gUnknown_203B2D4 = MemoryAlloc(sizeof(struct unkStruct_203B2D4), 8);
