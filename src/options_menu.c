@@ -6,6 +6,8 @@
 #include "constants/colors.h"
 #include "constants/input.h"
 #include "game_options.h"
+#include "hints_menu1.h"
+#include "hints_menu2.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "options_menu.h"
@@ -66,15 +68,7 @@ extern void HandleChangeSettingsMenu();
 extern void sub_801DD84();
 extern void sub_801DED0();
 extern bool8 sub_801E198(GameOptions *);
-extern void CreateHintDisplayScreen(u32);
-extern void sub_801E3F0(u32);
-extern void CreateHintSelectionScreen(u32);
 extern void CreateChangeSettingsConfirmMenu(void);
-extern u32 sub_801E474(u32);
-extern u32 GetChosenHintIndex(void);
-extern void sub_801E54C(void);
-extern u32 HandleHintDisplayScreenInput(void);
-extern void DestroyHintDisplayScreen(void);
 extern u32 sub_801E218(void);
 extern void sub_801E2C4(void);
 
@@ -285,8 +279,7 @@ void HandleOthersMenu(void)
 
 void sub_801E088(void)
 {
-
-  switch(sub_801E474(1)) 
+  switch(sub_801E474(TRUE))
   {
     case 3:
     case 4:

@@ -113,7 +113,8 @@ SECTIONS {
         src/code_801D014.o(.text);
         src/code_801D9E4.o(.text);
         src/options_menu.o(.text);
-        src/hints_menu.o(.text);
+        src/hints_menu1.o(.text);
+        src/hints_menu2.o(.text);
         src/gulpin_shop.o(.text);
         src/code_801EE10.o(.text);
         asm/code_801EE10.o(.text);
@@ -431,6 +432,8 @@ SECTIONS {
         src/code_801D014.o(.rodata);
         src/code_801D9E4.o(.rodata);
         data/data_80DBD98.o(.rodata);
+        src/hints_menu1.o(.rodata);
+        src/hints_menu2.o(.rodata);
         src/gulpin_shop.o(.rodata);
         data/data_80DC240.o(.rodata);
         src/gulpin_shop_801FB50.o(.rodata);

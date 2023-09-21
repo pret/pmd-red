@@ -159,12 +159,8 @@ gUnknown_203B25C: /* 203B25C (sub_801DCC4 - HandleChangeSettingsMenu) */
 gUnknown_203B260: /* 203B260 (sub_801E198 - CreateOptionsMenu) */
 	.space 0x4
 
-gUnknown_203B264: /* 203B264 (sub_801E3F0 - DrawHintSelectionMenu) */
-	.space 0x4
-
-gUnknown_203B268: /* 203B268 (CreateHintDisplayScreen - DisplayChosenHint) */
-	.space 0x4
-
+.include "src/hints_menu1.o"
+.include "src/hints_menu2.o"
 .include "src/gulpin_shop.o"
 
 gUnknown_203B270: /* 203B270 */
