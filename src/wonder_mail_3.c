@@ -342,6 +342,15 @@ void sub_802CDB8(void)
     }
 }
 
+
+
+
+// THIS IS A NEW FILE:
+
+
+
+
+
 bool8 sub_802CDD4(u32 r0)
 {
     if(gUnknown_203B2F4 == NULL)
@@ -509,6 +518,16 @@ void sub_802CFD0(void)
   }
   sub_80073E0(gUnknown_203B2F4->unk34);
 }
+
+
+
+
+
+
+// THIS IS A NEW FILE:
+
+
+
 
 u32 sub_802D098(unkSubStruct_203B2F8 *mail)
 {

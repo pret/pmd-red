@@ -83,6 +83,10 @@ s32 sub_801F3F8(void)
   return counter;
 }
 
+
+
+// THIS IS A NEW FILE
+
 bool8 sub_801F428(s16 index, s32 param_2)
 {
     s32 index_s32 = index;
@@ -247,6 +251,15 @@ u32 sub_801F7E4(void)
     sub_808E218(gUnknown_203B274->unk4, gUnknown_203B274->pokeStruct);
     return gUnknown_203B274->unk4->count;
 }
+
+
+
+
+
+// THIS IS A NEW FILE
+
+
+
 
 bool8 sub_801F808(u16 *moveIDs)
 {

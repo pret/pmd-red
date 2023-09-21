@@ -8,12 +8,10 @@ errno: /* 203B034 */
 
 ewramClearEnd:
 ewramClearEnd2:
-gTitlePaletteFile: /* 203B038 */
+gTitlePaletteFile: /* 203B038 (GameLoop) */
 	.space 0x4
-
 gUnknown_203B03C: /* 203B03C */
 	.space 0x4
-
 gUnknown_203B040: /* 203B040 */
 	.space 0x30
 
@@ -45,39 +43,29 @@ gUnknown_203B090: /* 203B090 (InitGraphics) */
 .include "src/file_system.o"
 .include "src/main.o"
 
+/* reg_control */
 gUnknown_203B099: /* 203B099 (VBlankIntr - xxx_update_bg_sound_input) */
 	.space 0x1
-
-gUnknown_203B09A: /* 203B09A */
+gUnknown_203B09A: /* 203B09A (sub_800BA5C - xxx_update_bg_sound_input) */
 	.space 0x1
-
 gUnknown_203B09B: /* 203B09B */
 	.space 0x1
-
 gUnknown_203B09C: /* 203B09C */
 	.space 0x4
-
 gUnknown_203B0A0: /* 203B0A0 */
 	.space 0x4
-
 gUnknown_203B0A4: /* 203B0A4 */
 	.space 0x4
-
 gUnknown_203B0A8: /* 203B0A8 */
 	.space 0x2
-
 gUnknown_203B0AA: /* 203B0AA */
 	.space 0x2
-
 gUnknown_203B0AC: /* 203B0AC */
 	.space 0x2
-
 gUnknown_203B0AE: /* 203B0AE */
 	.space 0x2
-
 gUnknown_203B0B0: /* 203B0B0 */
 	.space 0x2
-
 gUnknown_203B0B2: /* 203B0B2 */
 	.space 0x2
 
@@ -152,24 +140,19 @@ gUnknown_203B1FC: /* 203B1FC (sub_80151C0 - sub_8015F84) */
 .include "src/code_801C8C4.o"
 .include "src/code_801D014.o"
 .include "src/code_801D9E4.o"
-
-gUnknown_203B25C: /* 203B25C (sub_801DCC4 - HandleChangeSettingsMenu) */
-	.space 0x4
-
-gUnknown_203B260: /* 203B260 (sub_801E198 - CreateOptionsMenu) */
-	.space 0x4
-
+.include "src/options_menu1.o"
+.include "src/options_menu2.o"
 .include "src/hints_menu1.o"
 .include "src/hints_menu2.o"
 .include "src/gulpin_shop.o"
 
-gUnknown_203B270: /* 203B270 */
+gUnknown_203B270: /* 203B270 (sub_801EE10 - sub_801F3F8) */
 	.space 0x4
 
-gUnknown_203B274: /* 203B274 */
+gUnknown_203B274: /* 203B274 (sub_801F428 - sub_801F7E4) */
 	.space 0x4
 
-gUnknown_203B278: /* 203B278 */
+gUnknown_203B278: /* 203B278 (sub_801F808 - sub_801FAD4) */
 	.space 0x4
 
 .include "src/gulpin_shop_801FB50.o"
@@ -199,82 +182,82 @@ gUnknown_203B2AA: /* 203B2AA (sub_8023868 - sub_8023C60) */
 gUnknown_203B2BC: /* 203B2BC (sub_8027074 - sub_8027EB8) */
 	.space 0x4
 
-gUnknown_203B2C0: /* 203B2C0 (wonder_mail) */
+gUnknown_203B2C0: /* 203B2C0 (sub_8027F88 - sub_8029AF4) */
 	.space 0x4
 
-gUnknown_203B2C4: /* 203B2C4 (thank_you_wonder_mail) */
+gUnknown_203B2C4: /* 203B2C4 (CreateThankYouMailPelipper - SetThankYouMailMenuState) */
 	.space 0x4
 
-gUnknown_203B2C8: /* 203B2C8 (wonder_mail_2) */
+gUnknown_203B2C8: /* 203B2C8 (sub_802B2D4 - sub_802B5B8) */
 	.space 0x4
 
-gUnknown_203B2CC: /* 203B2CC (pokemon_news) */
+gUnknown_203B2CC: /* 203B2CC (sub_802B640 - GetNumPKMNNews) */
 	.space 0x4
 
-gUnknown_203B2D0: /* 203B2D0 (pokemon_news) */
+gUnknown_203B2D0: /* 203B2D0 (sub_802B640 - sub_802B81C) */
 	.space 0x2
 
-gUnknown_203B2D2: /* 203B2D2 (pokemon_news) */
+gUnknown_203B2D2: /* 203B2D2 (sub_802B640 - sub_802B81C) */
 	.space 0x2
 
-gUnknown_203B2D4: /* 203B2D4 (pokemon_news) */
+gUnknown_203B2D4: /* 203B2D4 (sub_802B9FC - sub_802BCC4) */
 	.space 0x4
 
 gUnknown_203B2D8: /* 203B2D8 (sub_802BD14 - CountEmptyMailSlots) */
 	.space 0x4
 
-gUnknown_203B2DC: /* 203B2DC (pokemon_news) */
+gUnknown_203B2DC: /* 203B2DC (sub_802BD14 - sub_802BEDC) */
 	.space 0x4
 
-gUnknown_203B2E0: /* 203B2E0 (wonder_mail_2_1 / wonder_mail_2_mid) */
+gUnknown_203B2E0: /* 203B2E0 (sub_802C10C - CountPelipperBoardSlots) */
 	.space 0x4
 
-gUnknown_203B2E4: /* 203B2E4 (wonder_mail_2_mid) */
+gUnknown_203B2E4: /* 203B2E4 (sub_802C10C - sub_802C2D4) */
 	.space 0x4
 
-gUnknown_203B2E8: /* 203B2E8 (wonder_mail_2_1) */
+gUnknown_203B2E8: /* 203B2E8 (sub_802C4C8 - CountAcceptedJobs) */
 	.space 0x4
 
-gUnknown_203B2EC: /* 203B2EC (wonder_mail_2_1) */
+gUnknown_203B2EC: /* 203B2EC (sub_802C4C8 - sub_802C688) */
 	.space 0x4
 
-gUnknown_203B2F0: /* 203B2F0 (wonder_mail_2_1 / wonder_mail_3) */
+gUnknown_203B2F0: /* 203B2F0 (InitializeJobListMenu - sub_802CD38) */
 	.space 0x4
 
-gUnknown_203B2F4: /* 203B2F4 (wonder_mail_4) */
+gUnknown_203B2F4: /* 203B2F4 (sub_802CDD4 - sub_802CFD0) */
 	.space 0x4
 
-gUnknown_203B2F8: /* 203B2F8 (wonder_mail_3) */
+gUnknown_203B2F8: /* 203B2F8 (sub_802D098 - sub_802DADC) */
 	.space 0x4
 
-gUnknown_203B2FC: /* 203B2FC (wonder_mail_802DF88) */
+gUnknown_203B2FC: /* 203B2FC (sub_802DB28 - sub_802DE60) */
 	.space 0x4
 
-gUnknown_203B300: /* 203B300 (wonder_mail_802DF88) */
+gUnknown_203B300: /* 203B300 (sub_802DE84 - sub_802DF88) */
 	.space 0x4
 
 .include "src/mailbox.o"
 .include "src/pelipper_board.o"
 
-gUnknown_203B30C: /* 203B30C (wonder_mail_3_mid) */
+gUnknown_203B30C: /* 203B30C (sub_802EF48 - sub_802F184) */
 	.space 0x4
 
-gUnknown_203B310: /* 203B310 (wonder_mail_3_mid) */
+gUnknown_203B310: /* 203B310 (sub_802F204 - ProceedToNextRewardSceneState) */
 	.space 0x4
 
-gUnknown_203B314: /* 203B314 (wonder_mail_3_mid) */
+gUnknown_203B314: /* 203B314 (sub_802F73C - sub_802FA50) */
 	.space 0x4
 
 .include "src/makuhita_dojo1.o"
 .include "src/makuhita_dojo2.o"
 
-gUnknown_203B320: /* 203B320 (wonder_mail_4) */
+gUnknown_203B320: /* 203B320 (sub_80306A8 - sub_8030A74) */
 	.space 0x4
 
-gUnknown_203B324: /* 203B324 (wonder_mail_5) */
+gUnknown_203B324: /* 203B324 (sub_8030D40 - sub_8030E48) */
 	.space 0x4
 
-gUnknown_203B328: /* 203B328 (wonder_mail_6) */
+gUnknown_203B328: /* 203B328 (sub_8030F58 - sub_80313D8) */
 	.space 0x4
 
 .include "src/post_office_guide1.o"
@@ -298,56 +281,56 @@ gUnknown_203B328: /* 203B328 (wonder_mail_6) */
 .include "src/debug_menu3.o"
 .include "src/debug_menu4.o"
 
-gUnknown_203B3FC: /* 203B3FC (code_803B050) */
+gUnknown_203B3FC: /* 203B3FC (sub_803B050 - sub_803B284) */
 	.space 0x4
 
 .include "src/personality_test.o"
 .include "src/code_803D0D8.o"
 	.space 0x3
 
-gUnknown_203B40C: /* 203B40C */
+gUnknown_203B40C: /* 203B40C (sub_803E46C - PrintFieldMessage) */
 	.space 0x1
 
-gUnknown_203B40D: /* 203B40D */
+gUnknown_203B40D: /* 203B40D (sub_803E250 - sub_807E698) */
 	.space 0x3
 
-gUnknown_203B410: /* 203B410 */
+gUnknown_203B410: /* 203B410 (sub_8040150 - sub_8082280) */
 	.space 0x4
 
-gUnknown_203B414: /* 203B414 */
+gUnknown_203B414: /* 203B414 (sub_8042B34 - sub_8042D7C) */
 	.space 0x4
 
 gDungeon: /* 203B418 */
 	.space 0x4
 
-gUnknown_203B41C: /* 203B41C */
+gUnknown_203B41C: /* 203B41C (xxx_dungeon_8042F6C) */
 	.space 0x4
 
-gUnknown_203B420: /* 203B420 */
+gUnknown_203B420: /* 203B420 (sub_80462AC) */
 	.space 0x8
 
-gUnknown_203B428: /* 203B428 */
+gUnknown_203B428: /* 203B428 (sub_80462AC) */
 	.space 0x8
 
-gUnknown_203B430: /* 203B430 */
+gUnknown_203B430: /* 203B430 (GetTile - sub_8049840) */
 	.space 0x4
 
-gUnknown_203B434: /* 203B434 */
+gUnknown_203B434: /* 203B434 (sub_80521D0 - sub_8072CF4) */
 	.space 0x4
 
-gUnknown_203B438: /* 203B438 */
+gUnknown_203B438: /* 203B438 (sub_8055FA0 - sub_8056F80) */
 	.space 0x4
 
-gUnknown_203B43C: /* 203B43C */
+gUnknown_203B43C: /* 203B43C (sub_8065FB4) */
 	.space 0x4
 
-gNumPotentialTargets: /* 203B440 */
+gNumPotentialTargets: /* 203B440 (DecideUseItem - TargetThrownItem) */
 	.space 0x4
 
-gUnknown_203B444: /* 203B444 */
+gUnknown_203B444: /* 203B444 (sub_807DF38) */
 	.space 0xC
 
-gLeaderPointer: /* 203B450 */
+gLeaderPointer: /* 203B450 (xxx_dungeon_8042F6C - sub_8082280) */
 	.space 0x4
 
     .include "src/dungeon_random.o"
@@ -358,10 +341,10 @@ gLeaderPointer: /* 203B450 */
     .include "src/friend_area.o"
     .include "src/game_options.o"
 
-gUnknown_203B470: /* 203B470 */
+gUnknown_203B470: /* 203B470 (sub_8094D28 - sub_8094E4C) */
 	.space 0x4
 
-gUnknown_203B474: /* 203B474 */
+gUnknown_203B474: /* 203B474 (sub_8094E4C) */
 	.space 0x8
 
     .include "src/play_time.o"
@@ -372,16 +355,16 @@ gUnknown_203B474: /* 203B474 */
     .include "src/ground_main.o"
 	.space 0x2
 
-gUnknown_203B4A0: /* 203B4A0 */
+gUnknown_203B4A0: /* 203B4A0 (sub_809CCDC) */
 	.space 0xC
 
-gUnknown_203B4AC: /* 203B4AC */
+gUnknown_203B4AC: /* 203B4AC (ExecuteScriptCommand) */
 	.space 0x4
 
-gUnknown_203B4B0: /* 203B4B0 */
+gUnknown_203B4B0: /* 203B4B0 (sub_809D490 - HandleAction) */
 	.space 0x4
 
-gUnknown_203B4B4: /* 203B4B4 */
+gUnknown_203B4B4: /* 203B4B4 (sub_80A62F0 - sub_80A658C) */
 	.space 0x4
 
 .include "src/ground_link.o"

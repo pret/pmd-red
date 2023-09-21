@@ -143,6 +143,16 @@ bool8 HasNoPelipperBoardJobs(void)
   return TRUE;
 }
 
+
+
+
+
+// THIS IS A NEW FILE:
+
+
+
+
+
 bool8 sub_802C4C8(int param_1,UnkTextStruct2_sub *param_2,u32 param_3)
 {
   if (HasNoAcceptedJobs()) {
@@ -348,6 +358,15 @@ bool8 HasNoAcceptedJobs(void)
     }
     return TRUE;
 }
+
+
+
+
+// THIS IS A NEW FILE:
+
+
+
+
 
 bool8 InitializeJobListMenu(u32 r0)
 {

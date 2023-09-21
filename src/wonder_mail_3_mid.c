@@ -416,6 +416,10 @@ void sub_802F1E8(void)
 }
 
 
+// THIS IS A NEW FILE:
+
+
+
 
 u32 sub_802F204(unkStruct_802F204 *r0, bool8 displayClientSprite)
 {
@@ -684,6 +688,12 @@ void ProceedToNextRewardSceneState(void)
         SetRewardSceneState(gUnknown_203B310->nextState);
     }
 }
+
+
+
+// THIS IS A NEW FILE:
+
+
 
 u32 sub_802F73C(u32 r0, UnkTextStruct2_sub *r1, u32 r2, u8 r3)
 {

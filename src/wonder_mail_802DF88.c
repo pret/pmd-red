@@ -302,6 +302,12 @@ void sub_802DE60(void)
     }
 }
 
+
+
+// THIS IS A NEW FILE:
+
+
+
 u32 sub_802DE84(unkStruct_802C39C *mail)
 {
     gUnknown_203B300 = MemoryAlloc(sizeof(struct unkStruct_203B300), 8);
