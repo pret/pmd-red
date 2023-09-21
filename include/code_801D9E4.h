@@ -2,7 +2,7 @@
 #define GUARD_CODE_801D9E4_H
 
 #include "menu.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0xA0
 struct unkStruct_203B258

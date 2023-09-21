@@ -7,7 +7,7 @@
 #include "items.h"
 #include "menu.h"
 #include "pokemon.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0x28
 typedef struct unkStruct_802F204

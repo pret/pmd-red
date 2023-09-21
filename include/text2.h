@@ -1,7 +1,7 @@
 #ifndef GUARD_TEXT2_H
 #define GUARD_TEXT2_H
 
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0x10
 struct unkShiftData

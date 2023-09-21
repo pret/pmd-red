@@ -6,7 +6,7 @@
 #include "code_801BEEC.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
-#include "code_8023144.h"
+#include "code_80227B8.h"
 #include "code_8024458.h"
 #include "code_8098BDC.h"
 #include "common_strings.h"
@@ -39,7 +39,6 @@ extern PokemonStruct1 *sub_808D3BC(void);
 extern bool8 sub_808D750(s16 index_);
 extern void sub_808ED00(void);
 bool8 sub_8026E88(PokemonStruct1 *r0);
-bool8 HasGummiItem();
 bool8 sub_8026EB8(PokemonStruct1 *r0);
 void sub_8026E08(u32 r0);
 void sub_8026DAC(u32 r0, BulkItem *item);

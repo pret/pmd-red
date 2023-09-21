@@ -3,7 +3,7 @@
 
 #include "file_system.h"
 #include "menu.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 #define FELICITY_BANK_ACTION_WITHDRAW 0
 #define FELICITY_BANK_ACTION_DEPOSIT 1

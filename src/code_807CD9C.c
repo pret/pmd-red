@@ -2,7 +2,7 @@
 
 #include "constants/ability.h"
 #include "constants/type.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_leader.h"
 #include "dungeon_util.h"
 #include "code_80521D0.h"

@@ -1,6 +1,6 @@
 #include "global.h"
-#include "dungeon_entity.h"
-#include "dungeon_global_data.h"
+#include "structs/dungeon_entity.h"
+#include "structs/str_dungeon.h"
 
 extern void sub_804151C(Entity *r0, u32 r1, u8 r2);
 extern void sub_803E708(u32 r0, u32 r1);

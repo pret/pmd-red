@@ -3,7 +3,7 @@
 
 #include "constants/friend_area.h"
 #include "menu.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 typedef struct WigglytuffShop1Work
 {

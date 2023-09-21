@@ -925,7 +925,7 @@ bool8 IsGummiItem(u8 id)
   return TRUE;
 }
 
-bool8 HasGummiItem()
+bool8 HasGummiItem(void)
 {
   s32 i;
   for (i = 0; i < INVENTORY_SIZE; i++) {

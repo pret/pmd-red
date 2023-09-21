@@ -8,7 +8,7 @@
 #include "dungeon_util.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 
 
 extern bool8 sub_8044B28(void);

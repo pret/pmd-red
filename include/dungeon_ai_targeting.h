@@ -1,7 +1,7 @@
 #ifndef GUARD_DUNGEON_AI_TARGETING_H
 #define GUARD_DUNGEON_AI_TARGETING_H
 
-#include "dungeon_entity.h"
+#include "structs/dungeon_entity.h"
 
 bool8 CanAttackInDirection(Entity *pokemon, s32 direction);
 bool8 CanAIMonsterMoveInDirection(Entity *pokemon, s32 direction, bool8 *pokemonInFront);

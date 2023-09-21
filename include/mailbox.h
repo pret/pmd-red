@@ -2,7 +2,7 @@
 #define GUARD_MAILBOX_H 
 
 #include "menu.h"
-#include "text.h"
+#include "structs/str_text.h"
 #include "constants/mailbox.h"
 #include "code_802C39C.h"
 

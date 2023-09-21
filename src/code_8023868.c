@@ -3,7 +3,7 @@
 #include "code_8023868.h"
 #include "pokemon.h"
 #include "pokemon_mid.h"
-#include "text.h"
+#include "structs/str_text.h"
 #include "text_util.h"
 
 //static // MAKE STATIC WHEN code_8023868.s IS DONE

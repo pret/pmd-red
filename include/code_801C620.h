@@ -2,8 +2,8 @@
 #define GUARD_CODE_801C620_H
 
 #include "menu.h"
-#include "subStruct_203B240.h"
-#include "text.h"
+#include "structs/subStruct_203B240.h"
+#include "structs/str_text.h"
 
 // size: 0x94
 struct unkStruct_203B240

@@ -5,7 +5,7 @@
 #include "file_system.h"
 #include "menu.h"
 #include "pokemon.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0x1E0
 typedef struct unkStruct_203B27C

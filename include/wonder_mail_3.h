@@ -4,7 +4,7 @@
 #include "code_802C39C.h"
 #include "input.h"
 #include "menu.h"
-#include "text.h"
+#include "structs/str_text.h"
 #include "wonder_mail.h"
 
 // size: 0xB4

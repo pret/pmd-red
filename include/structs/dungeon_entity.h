@@ -2,10 +2,10 @@
 #define GUARD_DUNGEON_ENTITY_H
 
 #include "constants/global.h"
-#include "constants/move.h"
-#include "items.h"
-#include "position.h"
+#include "structs/str_position.h"
 #include "sprite.h"
+#include "structs/str_items.h"
+#include "structs/str_moves.h"
 
 #define MAX_STAT_STAGE 20
 #define STAT_MULTIPLIER_THRESHOLD 63

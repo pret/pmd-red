@@ -3,7 +3,7 @@
 
 #include "file_system.h"
 #include "menu.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 enum MakuhitaDojoInitMode
 {

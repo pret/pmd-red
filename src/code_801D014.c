@@ -4,7 +4,7 @@
 #include "code_80130A8.h"
 #include "code_801BEEC.h"
 #include "code_801D014.h"
-#include "code_8023144.h"
+#include "code_80227B8.h"
 #include "code_8023868.h"
 #include "code_8024458.h"
 #include "code_8096AF8.h"

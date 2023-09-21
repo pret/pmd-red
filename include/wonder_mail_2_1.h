@@ -5,7 +5,7 @@
 #include "constants/mailbox.h"
 #include "input.h"
 #include "menu.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0xA8
 struct unkStruct_203B2E8

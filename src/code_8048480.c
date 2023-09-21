@@ -5,9 +5,9 @@
 #include "constants/status.h"
 #include "constants/type.h"
 #include "dungeon_action.h"
-#include "dungeon_entity.h"
+#include "structs/dungeon_entity.h"
 #include "dungeon_util.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "move_effects_target.h"
 #include "dungeon_capabilities.h"
 #include "dungeon_pokemon_attributes.h"
@@ -17,7 +17,7 @@
 #include "code_8077274_1.h"
 #include "code_80521D0.h"
 #include "pokemon.h"
-#include "position.h"
+#include "structs/str_position.h"
 #include "status.h"
 
 extern u8 gAvailablePokemonNames[];

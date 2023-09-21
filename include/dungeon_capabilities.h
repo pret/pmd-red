@@ -1,7 +1,7 @@
 #ifndef GUARD_DUNGEON_CAPABILITIES_H
 #define GUARD_DUNGEON_CAPABILITIES_H
 
-#include "dungeon_entity.h"
+#include "structs/dungeon_entity.h"
 
 bool8 CannotMove(Entity *pokemon, bool8 checkBlinker);
 bool8 sub_8070BC0(Entity* entity);

@@ -7,14 +7,14 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_ai_movement.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
 #include "dungeon_items.h"
 #include "code_808417C.h"
 #include "code_8077274_1.h"
 #include "dungeon_movement.h"
-#include "map.h"
+#include "structs/map.h"
 
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DE58[];

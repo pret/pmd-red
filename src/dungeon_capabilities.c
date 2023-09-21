@@ -13,7 +13,7 @@
 #include "dungeon_movement.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
-#include "map.h"
+#include "structs/map.h"
 
 const u8 gDirectionBitMasks_1[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 

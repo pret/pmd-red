@@ -23,9 +23,9 @@ enum
     READ_SAVE_CHECKSUM_ERROR
 };
 
-
-struct UnkStruct_sub_8011DAC {
-    // size: 0x57D4
+// size: 0x57D4
+struct UnkStruct_sub_8011DAC
+{
     u8 fill000[0x4];
     u8 unk004[0x400];
     u8 gameInternalName[0x10]; // has "POKE_DUNGEON__05"
@@ -45,8 +45,9 @@ struct UnkStruct_sub_8011DAC {
     u8 unk448[0x538C];
 };
 
-
-struct UnkStruct_203B184 {
+// size: 0x5C
+struct UnkStruct_203B184
+{
     /* 0x0 */ TeamInventory *MoneyItems;
     /* 0x4 */ unkStruct_203B45C *recruitedPokemon;
     /* 0x8 */ unkStruct_203B480 *unk8;

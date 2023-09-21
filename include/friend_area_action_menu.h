@@ -5,7 +5,7 @@
 #include "items.h"
 #include "menu.h"
 #include "pokemon.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 enum FriendAreaActionMenuStates
 {

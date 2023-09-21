@@ -1,7 +1,7 @@
 #ifndef GUARD_DUNGEON_H
 #define GUARD_DUNGEON_H
 
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 
 // size: 0x8
 typedef struct DungeonName

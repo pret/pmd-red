@@ -3,7 +3,7 @@
 
 #include "axdata.h"
 #include "ground_sprite.h"
-#include "position.h"
+#include "structs/str_position.h"
 #include "sprite_oam.h"
 
 // size: 0x8

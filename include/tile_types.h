@@ -1,7 +1,7 @@
 #ifndef GUARD_TILE_TYPES_H
 #define GUARD_TILE_TYPES_H
 
-#include "map.h"
+#include "structs/map.h"
 
 #define DUNGEON_WATER_TYPE_NONE 0
 #define DUNGEON_WATER_TYPE_LAVA 1

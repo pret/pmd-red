@@ -2,7 +2,7 @@
 #include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
 #include "constants/dungeon.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "main_menu1.h"
 #include "memory.h"
 #include "other_menus1.h"

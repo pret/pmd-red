@@ -2,7 +2,7 @@
 #define GUARD_DEBUG_MENU2_H
 
 #include "menu.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0x138
 typedef struct unkStruct_203B3F0

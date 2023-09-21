@@ -3,7 +3,7 @@
 
 #include "constants/item.h"
 #include "menu.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0x554
 struct unkStruct_203B244

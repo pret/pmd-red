@@ -1,5 +1,5 @@
 #include "global.h"
-#include "map.h"
+#include "structs/map.h"
 #include "dungeon_movement.h"
 
 #include "constants/item.h"
@@ -9,7 +9,7 @@
 #include "constants/weather.h"
 #include "dungeon_engine.h"
 #include "dungeon_items.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"

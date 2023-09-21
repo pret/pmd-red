@@ -1,7 +1,7 @@
 #ifndef GUARD_DUNGEON_VISIBILITY_H
 #define GUARD_DUNGEON_VISIBILITY_H
 
-#include "dungeon_entity.h"
+#include "structs/dungeon_entity.h"
 
 bool8 CanSeeTarget(Entity *entity, Entity *targetEntity);
 bool8 CanTargetEntity(Entity *entity, Entity *targetEntity);

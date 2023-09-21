@@ -3,7 +3,7 @@
 
 #include "input.h"
 #include "sprite_oam.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0x8
 typedef struct MenuItem

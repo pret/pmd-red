@@ -922,7 +922,7 @@ void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, u8 param_3
 #endif
 
     evolveStatus->evolutionConditionStatus = 0;
-    for(index = MONSTER_BULBASAUR; index <= MONSTER_MAX; index++)
+    for(index = MONSTER_BULBASAUR; index < MONSTER_MAX; index++)
     {
         if ((s16)index == MONSTER_ALAKAZAM) {
             GetPokemonEvolveConditions(MONSTER_ALAKAZAM, &evolveConditions);
@@ -933,11 +933,11 @@ void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, u8 param_3
         if(((evolveConditions.preEvolution.evolveType != EVOLVE_TYPE_NONE) && (param_1->speciesNum == evolveConditions.preEvolution.evolveFrom)))
             break;
     };
-    if (index == MONSTER_MAX + 1) {
+    if (index == MONSTER_MAX) {
         evolveStatus->evolutionConditionStatus = EVOLUTION_NO_MORE;
     }
     else {
-        for(index = MONSTER_BULBASAUR, defaultReason = EVOLUTION_LACK_ITEM; index <= MONSTER_MAX; index++)
+        for(index = MONSTER_BULBASAUR, defaultReason = EVOLUTION_LACK_ITEM; index < MONSTER_MAX; index++)
         {
             evolFlag = FALSE;
             index2 = (s16)index;

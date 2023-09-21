@@ -7,7 +7,7 @@
 #include "code_80130A8.h"
 #include "constants/communication_error_codes.h"
 #include "constants/main_menu.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "input.h"
 #include "items.h"
 #include "memory.h"

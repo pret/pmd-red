@@ -1,5 +1,5 @@
-#ifndef GUARD_TEXT_H
-#define GUARD_TEXT_H
+#ifndef GUARD_STR_TEXT_H
+#define GUARD_STR_TEXT_H
 
 // size: 0x48
 typedef struct UnkTextStruct1
@@ -58,4 +58,4 @@ typedef struct UnkTextStruct2
     const u8 *unk14;
 } UnkTextStruct2;
 
-#endif // GUARD_TEXT_H
+#endif // GUARD_STR_TEXT_H

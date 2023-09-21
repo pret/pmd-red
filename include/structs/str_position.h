@@ -1,5 +1,5 @@
-#ifndef GUARD_POSITION_H
-#define GUARD_POSITION_H
+#ifndef GUARD_STR_POSITION_H
+#define GUARD_STR_POSITION_H
 
 // size: 0x4
 typedef struct Position
@@ -15,4 +15,4 @@ typedef struct Position32
     /* 0x4 */ s32 y;
 } Position32;
 
-#endif // GUARD_POSITION_H
+#endif // GUARD_STR_POSITION_H

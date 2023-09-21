@@ -1,7 +1,7 @@
 #ifndef GUARD_CODE_80869E4_H
 #define GUARD_CODE_80869E4_H
 
-#include "dungeon_entity.h"
+#include "structs/dungeon_entity.h"
 
 // size: 0x8
 typedef struct unkStruct_202F3D0

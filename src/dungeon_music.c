@@ -3,7 +3,7 @@
 #include "constants/bg_music.h"
 #include "dungeon.h"
 #include "music.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
 #include "text_util.h"

@@ -182,18 +182,8 @@ gUnknown_203B278: /* 203B278 */
 .include "src/wigglytuff_shop1.o"
 .include "src/wigglytuff_shop2.o"
 .include "src/wigglytuff_shop3.o"
-
-gUnknown_203B294: /* 203B294 (sub_80227B8 - sub_8023120) */
-	.space 0x4
-
-gUnknown_203B298: /* 203B298 (sub_8023144 - sub_80233A0) */
-	.space 0x4
-
-gUnknown_203B29C: /* 203B29C (sub_8023144 - sub_80233A0) */
-	.space 0x2
-
-gUnknown_203B29E: /* 203B29E (sub_8023144 - sub_80233A0) */
-	.space 0x2
+.include "src/code_80227B8.o"
+.include "src/code_8023144.o"
 
 gUnknown_203B2A0: /* 203B2A0 (sub_8023868 - sub_8023C60) */
 	.space 0x4

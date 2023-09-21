@@ -7,7 +7,7 @@
 #include "moves.h"
 #include "code_801EE10.h"
 #include "menu_input.h"
-#include "subStruct_203B240.h"
+#include "structs/subStruct_203B240.h"
 #include "sprite.h"
 #include "code_80130A8.h"
 #include "code_801EE10_mid.h"
@@ -333,9 +333,9 @@ void sub_801F930(void)
 
 void sub_801F9A4(void)
 {
-    char **name;
-    switch(gUnknown_203B278->state)
-    {
+    u8 **name;
+
+    switch (gUnknown_203B278->state) {
         case 0:
             sub_8008C54(gUnknown_203B278->unk5C);
             gUnknown_203B278->unk8 = gUnknown_203B278->moveIDs[gUnknown_203B278->unk28.unk1E];

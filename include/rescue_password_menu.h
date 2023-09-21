@@ -3,7 +3,7 @@
 
 #include "menu.h"
 #include "sprite.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // Similar to unkStruct_203B360
 struct RescuePasswordMenu

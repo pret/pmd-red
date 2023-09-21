@@ -266,7 +266,7 @@ static void UpdateWigglytuffDialogue(void)
             sub_8023144(0, 3, 0, 10);
             break;
         case WIGGLYTUFF_UNK17:
-            sub_8023354(1);
+            sub_8023354(TRUE);
             break;
         case DISPLAY_POKEMON_FRIEND_AREA_INFO:
             sub_8092638(sWigglytuffShop3Work->chosenFriendArea, &uStack_14, FALSE, FALSE);
@@ -528,7 +528,7 @@ static void sub_8022668(void)
 
 static void sub_8022684(void)
 {
-    switch (sub_8023278(1)) {
+    switch (sub_8023278(TRUE)) {
         case 3:
             sWigglytuffShop3Work->chosenSpecies = sub_802331C();
             sWigglytuffShop3Work->chosenFriendArea = GetFriendArea(sWigglytuffShop3Work->chosenSpecies);

@@ -5,7 +5,7 @@
 #include "constants/move.h"
 #include "constants/move_id.h"
 #include "pokemon.h"
-#include "subStruct_203B240.h"
+#include "structs/subStruct_203B240.h"
 
 // size: 0x8
 typedef struct MoveLearnset

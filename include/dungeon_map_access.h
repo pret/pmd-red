@@ -1,7 +1,7 @@
 #ifndef GUARD_DUNGEON_MAP_ACCESS_H
 #define GUARD_DUNGEON_MAP_ACCESS_H
 
-#include "map.h"
+#include "structs/map.h"
 
 typedef struct unkStruct_202F190
 {

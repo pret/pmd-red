@@ -4,7 +4,7 @@
 #include "constants/iq_skill.h"
 #include "menu.h"
 #include "pokemon.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0xC4
 struct unkStruct_203B23C

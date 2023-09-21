@@ -2,7 +2,7 @@
 #include "code_806CD90.h"
 #include "code_80869E4.h"
 #include "constants/direction.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_util_1.h"
 #include "random.h"
 

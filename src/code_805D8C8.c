@@ -1,6 +1,6 @@
 #include "global.h"
 #include "code_805D8C8.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_util.h"
 
 // monster_sbin.s
@@ -129,7 +129,7 @@ void CloseAllSpriteFiles(void)
 {
     s32 i;
 
-    for (i = 0; i <= MONSTER_MAX; i++) {
+    for (i = 0; i < MONSTER_MAX; i++) {
         if (gDungeon->sprites[i] != NULL) {
             CloseFile(gDungeon->sprites[i]);
             gDungeon->sprites[i] = NULL;

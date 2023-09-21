@@ -1,7 +1,7 @@
 #ifndef GUARD_DUNGEON_AI_ATTACK_H
 #define GUARD_DUNGEON_AI_ATTACK_H
 
-#include "dungeon_entity.h"
+#include "structs/dungeon_entity.h"
 
 #define RANGED_ATTACK_RANGE 10
 

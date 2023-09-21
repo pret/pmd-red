@@ -3,7 +3,7 @@
 
 #include "file_system.h"
 #include "menu.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // code_80130A8.s
 extern void sub_8013F84(void);

@@ -2,7 +2,7 @@
 #define GUARD_POST_OFFICE_GUIDE2_H
 
 #include "input.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0x78
 typedef struct unkStruct_203B330

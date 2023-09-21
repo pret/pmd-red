@@ -2,7 +2,7 @@
 #define GUARD_STATUS_ACTIONS_H
 
 #include "constants/move.h"
-#include "dungeon_entity.h"
+#include "structs/dungeon_entity.h"
 
 bool8 sub_805B668(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 bool8 sub_805B734(Entity *pokemon, Entity *target);

@@ -3,7 +3,7 @@
 #include "code_806CD90.h"
 #include "constants/direction.h"
 #include "constants/status.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_util.h"
 #include "pokemon.h"
 #include "pokemon_mid.h"

@@ -3,8 +3,8 @@
 
 #include "input.h"
 #include "items.h"
-#include "subStruct_203B240.h"
-#include "text.h"
+#include "structs/subStruct_203B240.h"
+#include "structs/str_text.h"
 
 // size: 0x94
 typedef struct unkStruct_203B230

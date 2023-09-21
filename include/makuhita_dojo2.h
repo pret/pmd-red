@@ -3,7 +3,7 @@
 
 #include "constants/dungeon.h"
 #include "input.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0xD0
 typedef struct MakuhitaDojoWork2

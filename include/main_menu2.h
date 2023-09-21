@@ -2,7 +2,7 @@
 #define GUARD_MAIN_MENU2_H
 
 #include "menu.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0x1A8
 typedef struct MainMenu2Work

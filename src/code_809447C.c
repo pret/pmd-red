@@ -3,7 +3,7 @@
 #include "code_8092334.h"
 #include "code_809447C.h"
 #include "dungeon.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "items.h"
 #include "moves.h"
 #include "text_util.h"

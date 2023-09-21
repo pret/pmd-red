@@ -3,7 +3,7 @@
 #include "constants/walkable_tile.h"
 #include "decompress.h"
 #include "dungeon_map_access.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "tile_types.h"
 #include "random.h"
 #include "dungeon_engine.h"

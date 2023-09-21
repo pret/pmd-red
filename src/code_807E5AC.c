@@ -1,5 +1,5 @@
 #include "global.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 
 void sub_807FC3C(Position *pos, u32 param_2, u32 param_3)
 {

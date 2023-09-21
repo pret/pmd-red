@@ -2,7 +2,7 @@
 #define GUARD_DEBUG_MENU1_H
 
 #include "menu.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0x1A4
 struct DebugMenu

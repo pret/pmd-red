@@ -2,7 +2,7 @@
 #define GUARD_MAIN_MENU1_H
 
 #include "menu.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0x8
 typedef struct unkStruct_8035D94

@@ -1,7 +1,7 @@
 #ifndef GUARD_CREDITS1_H
 #define GUARD_CREDITS1_H
 
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0x6C
 typedef struct Credits1Work

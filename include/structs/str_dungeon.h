@@ -1,12 +1,12 @@
-#ifndef GUARD_DUNGEON_DATA_H
-#define GUARD_DUNGEON_DATA_H
+#ifndef GUARD_STR_DUNGEON_H
+#define GUARD_STR_DUNGEON_H
 
 #include "global.h"
 #include "constants/monster.h"
-#include "dungeon_entity.h"
+#include "structs/dungeon_entity.h"
 #include "file_system.h"
-#include "map.h"
-#include "position.h"
+#include "structs/map.h"
+#include "structs/str_position.h"
 #include "sprite.h"
 
 #define DUNGEON_MAX_SIZE_X 56
@@ -202,7 +202,7 @@ typedef struct Dungeon
     /* 0x17B38 */ u32 unk17B38;
     /* 0x17B3C */ u32 unk17B3C;
     u8 fill17B40[0x17B44 - 0x17B40];
-    /* 0x17B44 */ OpenedFile *sprites[MONSTER_MAX + 1];
+    /* 0x17B44 */ OpenedFile *sprites[MONSTER_MAX];
     /* 0x181E4 */ OpenedFile *paletFile;
     /* 0x181E8 */ Position cameraPos;
     /* 0x181EC */ Position cameraPosMirror;
@@ -236,4 +236,4 @@ typedef struct Dungeon
 
 extern Dungeon *gDungeon;
 
-#endif
+#endif // GUARD_STR_DUNGEON_H

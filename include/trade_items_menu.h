@@ -1,7 +1,7 @@
 #ifndef GUARD_TRADE_ITEMS_MENU_H
 #define GUARD_TRADE_ITEMS_MENU_H
 
-#include "text.h"
+#include "structs/str_text.h"
 #include "items.h"
 #include "menu.h"
 

@@ -142,7 +142,7 @@ static void sub_8021A60(void)
         sWigglytuffShop2Work->unk30[index] = 0;
     }
 
-    for (index = 0; index <= MONSTER_MAX; index++) {
+    for (index = 0; index < MONSTER_MAX; index++) {
         s32 index2 = (s16)index;
 
         if (sWigglytuffShop2Work->friendArea == GetFriendArea(index2) && index2 == GetBaseSpeciesNoUnown(index2)) {
@@ -152,7 +152,7 @@ static void sub_8021A60(void)
         }
     }
 
-    for (index = 0; index <= MONSTER_MAX; index++) {
+    for (index = 0; index < MONSTER_MAX; index++) {
         if (!sub_8098134(index))
             continue;
 

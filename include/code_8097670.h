@@ -1,7 +1,7 @@
 #ifndef GUARD_CODE_8097670_H
 #define GUARD_CODE_8097670_H
 
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 
 // size: 0xC4
 struct unkStruct_203B494

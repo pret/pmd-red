@@ -1,7 +1,7 @@
 #ifndef GUARD_DUNGEON_UTIL_1_H
 #define GUARD_DUNGEON_UTIL_1_H
 
-#include "dungeon_entity.h"
+#include "structs/dungeon_entity.h"
 
 Entity *xxx_call_GetLeader(void);
 Entity *GetPartnerEntity(void);

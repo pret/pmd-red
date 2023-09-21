@@ -2,7 +2,7 @@
 #define GUARD_MENU_INPUT_H
 
 #include "menu.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 u32 sub_8012A64(MenuInputStructSub *r0, s32 r1);
 s32 GetKeyPress(MenuInputStruct *r0);

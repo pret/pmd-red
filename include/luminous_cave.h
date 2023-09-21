@@ -5,7 +5,7 @@
 #include "items.h"
 #include "menu.h"
 #include "pokemon_3.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0x174
 typedef struct LuminousCaveWork

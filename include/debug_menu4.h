@@ -3,7 +3,7 @@
 
 #include "pokemon.h"
 #include "menu.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0x140
 typedef struct unkStruct_203B3F8

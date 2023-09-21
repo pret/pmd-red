@@ -12,14 +12,11 @@
 #define INPUT_DPAD_DOWN 8
 #define INPUT_DPAD_LEFT 9
 #define INPUT_DPAD_RIGHT 10
-
-// When R button is pressed in combination with other keys
+// When R button is pressed in combination with other keys:
 #define INPUT_R_A_BUTTONS 11
 #define INPUT_R_DPAD_UP_BUTTONS 12
 #define INPUT_R_DPAD_DOWN_BUTTONS 13
 #define INPUT_R_DPAD_LEFT_BUTTONS 14
 #define INPUT_R_DPAD_RIGHT_BUTTONS 15
 
-
 #endif // GUARD_CONSTANTS_INPUT_H
-
