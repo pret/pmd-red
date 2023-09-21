@@ -1,6 +1,6 @@
 #include "global.h"
-#include "code_8012A18_1.h"
 #include "code_80130A8.h"
+#include "code_801602C.h"
 #include "code_8023868.h"
 #include "debug_menu4.h"
 #include "memory.h"

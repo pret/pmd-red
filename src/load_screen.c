@@ -12,7 +12,7 @@
 #include "input.h"
 #include "main_menu1.h"
 #include "memory.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "menu_input.h"
 #include "play_time.h"
 #include "pokemon.h"

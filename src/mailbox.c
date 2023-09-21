@@ -3,7 +3,7 @@
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "input.h"
 #include "mailbox.h"
 #include "wonder_mail.h"

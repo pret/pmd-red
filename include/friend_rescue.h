@@ -5,7 +5,7 @@
 #include "items.h"
 #include "pokemon.h"
 #include "wonder_mail.h"
-#include "menu.h"
+#include "structs/menu.h"
 
 // size: 0x568
 typedef struct WonderMailStruct_203B33C

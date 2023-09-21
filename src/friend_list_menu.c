@@ -1,7 +1,7 @@
 #include "global.h"
 #include "code_80118A4.h"
-#include "code_8012A18_1.h"
 #include "code_80130A8.h"
+#include "code_801602C.h"
 #include "code_801B3C0.h"
 #include "code_801BEEC.h"
 #include "code_801EE10.h"
@@ -61,8 +61,6 @@ EWRAM_DATA_2 unkStruct_203B2B4 *gUnknown_203B2B4 = {0};
 extern u8 sub_8002658(s16);
 extern void sub_808ED00(void);
 
-extern void sub_80160D8(void);
-extern u32 sub_8016080(void);
 extern s32 sub_80144A4(s32 *);
 
 void sub_8025434(s32);

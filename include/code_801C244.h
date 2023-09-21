@@ -2,7 +2,7 @@
 #define GUARD_CODE_801C244_H
 
 #include "constants/iq_skill.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "pokemon.h"
 #include "structs/str_text.h"
 

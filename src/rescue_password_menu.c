@@ -243,11 +243,8 @@ ALIGNED(4) const u8 sUnknown_80E75CC[] = _("{CENTER_ALIGN}There is no space for 
 
 static const u8 fill0[] = "pksdir0";
 
-extern void sub_80151C0(u32, u8 *);
 extern void sub_8031D70(u32, u32);
-extern void sub_80155F0(void);
 extern void sub_8031E10(void);
-extern u32 sub_80154F0(void);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E00(void);
 

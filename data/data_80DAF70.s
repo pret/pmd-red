@@ -30,8 +30,6 @@ gUnknown_80DAFA0: @ 80DAFA0
         .byte 0x06, 0x00, 0x03, 0x00
         .byte 0x03, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
-
-
 @ END code_80130A8 #3
 
 @ START code_80130A8 #4
@@ -368,30 +366,3 @@ gUnknown_80DB664: @ 80DB664
         .align 2,0
 
 @ END code_80130A8 #4
-
-@ START code_8012A18_1
-.string "pksdir0\0"
-
-        .align 2,0
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_80DB688
-gUnknown_80DB688: @ 80DB688
-        .string "Is the name {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1} OK?\0"
-        .align 2,0
-
-	.global gUnknown_80DB6A4
-gUnknown_80DB6A4: @ 80DB6A4
-        .string "This name is too long.\0"
-        .align 2,0
-
-	.global gUnknown_80DB6BC
-gUnknown_80DB6BC: @ 80DB6BC
-        .string "Please enter a name.\0"
-        .align 2,0
-@ END code_8012A18_1

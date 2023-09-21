@@ -43,10 +43,8 @@ extern u32 sub_8030DA0(void);
 extern void sub_8030DE4(void);
 extern void sub_803092C(void);
 
-extern u32 sub_80154F0();
 extern u32 sub_8039068(u32, u8 *r1, unkStruct_203B480 *r0);
 extern void sub_8095274(u32);
-extern void sub_80155F0();
 extern u32 sub_8031DCC();
 extern void sub_8031E10();
 extern void sub_8031E00();
@@ -56,7 +54,6 @@ extern void sub_8030DE4();
 extern void sub_80306A8(u32, u32, u32, u32);
 extern s32 sub_8037B28(u32);
 extern void sub_8031D70(u8, u32);
-extern void sub_80151C0(u32, u8 *);
 extern u32 sub_8023CE8(void);
 extern u32 sub_8030894(void);
 extern void sub_8030F58(u32);
@@ -113,7 +110,6 @@ extern void sub_8028CFC(void);
 extern void sub_8028D4C(void);
 extern void sub_8031E10(void);
 extern void sub_803084C(void);
-extern void sub_80155F0(void);
 extern void sub_80310B4(void);
 extern void sub_8030DE4(void);
 

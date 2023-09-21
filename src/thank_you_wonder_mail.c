@@ -211,12 +211,10 @@ extern void sub_802A828();
 extern void sub_802A850();
 extern void sub_8030DE4();
 extern void sub_803084C();
-extern void sub_80155F0();
 extern void sub_8031E10();
 extern void sub_802F2C0();
 extern void SetThankYouMailMenuState(u32);
 extern void sub_802F204(unkStruct_802F204 *, u32);
-extern void sub_80151C0(u32, u8 *);
 extern void sub_803092C(void);
 extern s32 sub_8037B28(u32);
 extern u32 sub_8030894(void);
@@ -227,7 +225,6 @@ extern void sub_8031D70(u8, u32);
 
 extern void sub_803092C(void);
 extern void sub_8011C28(u32);
-extern u32 sub_80154F0(void);
 extern u32 sub_8039068(u32, u8 *r1, unkStruct_203B480 *r0);
 
 

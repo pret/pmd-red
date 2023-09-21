@@ -2,7 +2,7 @@
 #define GUARD_CODE_801C8C4_H
 
 #include "constants/item.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // size: 0x554

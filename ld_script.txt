@@ -95,6 +95,7 @@ SECTIONS {
         src/menu_input.o(.text);
         asm/code_80130A8.o(.text);
         src/code_8012A18_1.o(.text);
+        src/code_801602C.o(.text);
         src/felicity_bank.o(.text);
         src/kangaskhan_storage1.o(.text);
         src/kangaskhan_storage2.o(.text);
@@ -412,6 +413,7 @@ SECTIONS {
         src/common_strings.o(.rodata);
         data/common_strings.o(.rodata);
         data/data_80DAF70.o(.rodata);
+        src/code_801602C.o(.rodata);
         src/felicity_bank.o(.rodata);
         src/kangaskhan_storage1.o(.rodata);
         src/kangaskhan_storage2.o(.rodata);

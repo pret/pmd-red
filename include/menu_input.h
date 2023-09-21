@@ -1,7 +1,7 @@
 #ifndef GUARD_MENU_INPUT_H
 #define GUARD_MENU_INPUT_H
 
-#include "menu.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 u32 sub_8012A64(MenuInputStructSub *r0, s32 r1);

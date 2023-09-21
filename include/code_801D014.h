@@ -1,7 +1,7 @@
 #ifndef GUARD_CODE_801D014_H
 #define GUARD_CODE_801D014_H
 
-#include "menu.h"
+#include "structs/menu.h"
 #include "pokemon.h"
 #include "structs/str_text.h"
 

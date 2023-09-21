@@ -120,11 +120,9 @@ extern u32 sub_8011C1C(void);
 extern void SetWonderMailMainMenuState(u8);
 extern void sub_8030DE4(void);
 extern void sub_803084C(void);
-extern void sub_80155F0(void);
 extern void sub_8031E10(void);
 
 extern u8 sub_800D588(void);
-extern void sub_80151C0(u32, u8 *);
 extern void sub_802EF48(void);
 
 
@@ -138,7 +136,6 @@ extern u32 sub_802D0E0();
 extern bool8 GetWonderMailAccepted();
 extern void sub_802D184();
 
-extern s32 sub_80154F0();
 extern bool8 DecodeWonderMailPassword(u8 *, WonderMail *);
 extern bool8 IsValidWonderMail(WonderMail *WonderMailData);
 

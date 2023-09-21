@@ -3,7 +3,7 @@
 
 #include "file_system.h"
 #include "items.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "pokemon_3.h"
 #include "structs/str_text.h"
 

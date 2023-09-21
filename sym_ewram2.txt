@@ -135,9 +135,7 @@ gUnknown_203B1F8: /* 203B1F8 (sub_8015080 - sub_80151A4) */
 gUnknown_203B1FC: /* 203B1FC (sub_80151C0 - sub_8015F84) */
 	.space 0x4
 
-gUnknown_203B200: /* 203B200 (sub_801602C - IsNameEmpty) */
-	.space 0x4
-
+.include "src/code_801602C.o"
 .include "src/felicity_bank.o"
 .include "src/kangaskhan_storage1.o"
 .include "src/kangaskhan_storage2.o"

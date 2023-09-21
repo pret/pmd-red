@@ -254,8 +254,6 @@ extern void sub_8035210(void);
 extern void sub_8035430(void);
 extern void sub_8034848(void);
 
-extern u32 sub_80154F0();
-extern void sub_80155F0();
 extern u32 sub_8030DA0(void);
 extern void sub_8030DE4(void);
 extern void sub_803092C(void);
@@ -271,11 +269,9 @@ extern u32 sub_8039068(u32, u8 *passwordBuffer, unkStruct_203B480 *r0);
 
 extern void sub_803084C(void);
 extern void sub_8031E10(void);
-extern void sub_80155F0(void);
 extern void sub_802F2C0(void);
 extern void sub_8030DE4(void);
 extern u8 sub_800D588(void);
-extern void sub_80151C0(u32, u8 *);
 extern u32 sub_8023CE8(void);
 extern void sub_802F204(unkStruct_802F204 *, u32);
 extern u32 sub_80306A8(u32 wonderMailType, u32, UnkTextStruct2_sub *, u32);

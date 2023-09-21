@@ -1,7 +1,7 @@
 #ifndef GUARD_CODE_801C620_H
 #define GUARD_CODE_801C620_H
 
-#include "menu.h"
+#include "structs/menu.h"
 #include "structs/subStruct_203B240.h"
 #include "structs/str_text.h"
 

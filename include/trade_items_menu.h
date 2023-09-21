@@ -3,7 +3,7 @@
 
 #include "structs/str_text.h"
 #include "items.h"
-#include "menu.h"
+#include "structs/menu.h"
 
 // 11 was another saving too?
 enum TradeItemsScreens

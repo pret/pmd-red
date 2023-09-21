@@ -2,7 +2,7 @@
 #define GUARD_WIGGLYTUFF_SHOP3_H
 
 #include "file_system.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 enum WigglytuffStates

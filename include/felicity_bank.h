@@ -2,7 +2,7 @@
 #define GUARD_FELICITY_BANK_H
 
 #include "file_system.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 #define FELICITY_BANK_ACTION_WITHDRAW 0

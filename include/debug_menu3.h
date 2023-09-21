@@ -1,7 +1,7 @@
 #ifndef GUARD_DEBUG_MENU3_H
 #define GUARD_DEBUG_MENU3_H
 
-#include "menu.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // size: 0xFC

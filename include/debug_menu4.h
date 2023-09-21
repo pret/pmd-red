@@ -2,7 +2,7 @@
 #define GUARD_DEBUG_MENU4_H
 
 #include "pokemon.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // size: 0x140

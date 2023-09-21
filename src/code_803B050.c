@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_8012A18_1.h"
 #include "code_803B050.h"
 #include "constants/colors.h"
 #include "constants/wonder_mail.h"
@@ -74,7 +75,6 @@ extern u8 *gUnknown_80E8B94[];
 
 extern PokemonStruct1 *sub_808D378(void);
 
-s32 sub_8016028(void);
 extern void PrintDungeonLocationtoBuffer(u8 *, void *);
 extern u8 sub_803C1D0(WonderMailSub *, u8);
 extern u8 *sub_803C1F0(u8);

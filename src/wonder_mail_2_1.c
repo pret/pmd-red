@@ -5,7 +5,7 @@
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "code_802C39C.h"
 #include "menu_input.h"
 #include "wonder_mail_2_1.h"

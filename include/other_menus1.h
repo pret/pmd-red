@@ -3,7 +3,7 @@
 
 #include "code_8094F88.h"
 #include "main_menu1.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "pokemon.h"
 #include "sprite_oam.h"
 #include "structs/str_text.h"

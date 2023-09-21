@@ -3,7 +3,7 @@
 
 #include "constants/move.h"
 #include "items.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "pokemon.h"
 #include "structs/str_text.h"
 

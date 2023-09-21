@@ -4,7 +4,7 @@
 #include "code_802C39C.h"
 #include "constants/mailbox.h"
 #include "input.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // size: 0xA8

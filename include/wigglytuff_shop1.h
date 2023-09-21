@@ -2,7 +2,7 @@
 #define GUARD_WIGGLYTUFF_SHOP1_H
 
 #include "constants/friend_area.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 typedef struct WigglytuffShop1Work

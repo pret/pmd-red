@@ -1,7 +1,7 @@
 #ifndef GUARD_MAIN_MENU2_H
 #define GUARD_MAIN_MENU2_H
 
-#include "menu.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // size: 0x1A8

@@ -1,7 +1,7 @@
 #ifndef GUARD_RESCUE_PASSWORD_MENU_H
 #define GUARD_RESCUE_PASSWORD_MENU_H
 
-#include "menu.h"
+#include "structs/menu.h"
 #include "sprite.h"
 #include "structs/str_text.h"
 
