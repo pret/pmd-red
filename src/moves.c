@@ -35,7 +35,7 @@ extern const u8 gUnknown_8109930[];
 // data_810AE24.s
 extern const u8* gPtrTypeText;  // "Type"
 extern const u8 *gRangeNames[];
-extern const u8* gUnknown_810CF00; // "Range#=@.$m0 "
+extern const u8* gUnknown_810CF00;
 
 // system_sbin.s
 extern const struct FileArchive gSystemFileArchive;

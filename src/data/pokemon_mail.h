@@ -943,8 +943,8 @@ ALIGNED(4) const u8 gMail_WondersHeadline[] = _(
 
 
 ALIGNED(4) const u8 gMail_PollText[] = _(
-    "{COLOR_1 YELLOW}First#=2Gravelerock{END_COLOR_TEXT_1}\n"
-    "{COLOR_1 YELLOW}Second#=2Oran Berry{END_COLOR_TEXT_1}\n"
+    "{COLOR_1 YELLOW}First{UNK_MACRO_3D M3D_50}Gravelerock{END_COLOR_TEXT_1}\n"
+    "{COLOR_1 YELLOW}Second{UNK_MACRO_3D M3D_50}Oran Berry{END_COLOR_TEXT_1}\n"
     "In a nationwide survey involving rescue\n"
     "teams{COMMA} the most popular item was found to\n"
     "be {COLOR_1 GREEN}Gravelerocks{END_COLOR_TEXT_1}. According to Sudowoodo\n"

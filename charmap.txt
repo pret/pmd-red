@@ -278,12 +278,12 @@ ARG_POKEMON_8 = 24 6D 38 @ $m8
 @ TEXT MACROS
 @
 @ "#" is a text macro for different things
-@ case is insensitive but need different
-@ definitions to match
+@ case is insensitive but need different definitions to match
 
+CENTER_ALIGN = 23 2B @ #+
+UNK_MACRO_3D = 23 3D @ #= (Probably used to manually position text at an x coordinate)
 EXTRA_MSG  = 23 50   @ #P
 WAIT_PRESS = 23 57   @ #W
-CENTER_ALIGN = 23 2B @ #+
 NEW_LINE = 23 6E     @ #n
 
 
@@ -322,3 +322,11 @@ GREEN_2 = 49 @ I
 CYAN_3 = 4D @ M
 YELLOW_5 = 4E @ N
 RED_2 = 57 @ W
+
+@ FOR UNK_MACRO_3D
+M3D_50 = 32 @ 2
+M3D_64 = 40 2E @ @.
+M3D_80 = 50 2E @ P.
+M3D_120 = 78 2E @ x.
+M3D_136 = 88 2E @ ˆ.
+M3D_160 = A0 2E @ \u00A0.

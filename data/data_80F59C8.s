@@ -8376,9 +8376,7 @@ gUnknown_80FE748: @ 80FE748
 
         .global OptionsSpeed
         OptionsSpeed:
-        .string "Speed#=P.Slow#="
-        .byte 0x88
-        .string ".Fast\0"
+        .string "Speed{UNK_MACRO_3D M3D_80}Slow{UNK_MACRO_3D M3D_136}Fast\0"
         .align 2,0
 
 	.global gUnknown_80FE764
@@ -8387,10 +8385,7 @@ gUnknown_80FE764: @ 80FE764
 
         .global OptionsFarOffPals
         OptionsFarOffPals:
-        .string "Far-off pals#="
-        .string "P.Self#="
-        .byte 0x88
-        .string ".Look\0"
+        .string "Far-off pals{UNK_MACRO_3D M3D_80}Self{UNK_MACRO_3D M3D_136}Look\0"
         .align 2,0
 
 	.global gUnknown_80FE788
@@ -8399,10 +8394,7 @@ gUnknown_80FE788: @ 80FE788
 
         .global OptionsDamageTurn
         OptionsDamageTurn:
-        .string "Damage turn#=P."
-        .string "No#="
-        .byte 0x88
-        .string ".Yes\0"
+        .string "Damage turn{UNK_MACRO_3D M3D_80}No{UNK_MACRO_3D M3D_136}Yes\0"
         .align 2,0
 
 	.global gUnknown_80FE7A8
@@ -8411,10 +8403,7 @@ gUnknown_80FE7A8: @ 80FE7A8
 
         .global OptionsGrid
         OptionsGrid:
-        .string "Grids#=P."
-        .string "Off#="
-        .byte 0x88
-        .string ".On\0"
+        .string "Grids{UNK_MACRO_3D M3D_80}Off{UNK_MACRO_3D M3D_136}On\0"
         .align 2,0
 
 	.global gUnknown_80FE7C0
@@ -8423,11 +8412,7 @@ gUnknown_80FE7C0: @ 80FE7C0
 
         .global OptionsMap
         OptionsMap:
-        .string "Map#=P."
-        .string "Off#=x."
-        .string "Clear#="
-        .byte 0xa0
-        .string ".Shade\0"
+        .string "Map{UNK_MACRO_3D M3D_80}Off{UNK_MACRO_3D M3D_120}Clear{UNK_MACRO_3D M3D_160}Shade\0"
         .align 2,0
 
 	.global gUnknown_80FE7E4
@@ -8438,11 +8423,7 @@ gUnknown_80FE7E4: @ 80FE7E4
 
         .global OptionsWindowColor
         OptionsWindowColor:
-        .string "Windows#=P."
-        .string "Blue#=x."
-        .string "Red#="
-        .byte 0xa0
-        .string ".Green\0"
+        .string "Windows{UNK_MACRO_3D M3D_80}Blue{UNK_MACRO_3D M3D_120}Red{UNK_MACRO_3D M3D_160}Green\0"
         .align 2,0
 
 	.global gOptionsWindowColorPtr

@@ -25,7 +25,6 @@ gUnknown_80DBFCC: @ 80DBFCC
         .byte 0x02, 0x00, 0x02, 0x00
         .byte 0x0A, 0x00, 0x06, 0x00
         .byte 0x06, 0x00, 0x00, 0x00
-
         .4byte UnkData_80DBFC8
 
 	.global gOthers_MenuOption
@@ -62,9 +61,8 @@ gUnknown_80DC020: @ 80DC020
         .byte 0x00, 0x00, 0x00, 0x00
 
         .global UnkData_80DC038
-        UnkData_80DC038:
+UnkData_80DC038:
         .byte 0x01, 0x00, 0x0a, 0x00
-
 	.global gUnknown_80DC03C
 gUnknown_80DC03C: @ 80DC03C
         .byte 0x00, 0x00, 0x00, 0x00
@@ -72,7 +70,6 @@ gUnknown_80DC03C: @ 80DC03C
         .byte 0x02, 0x00, 0x02, 0x00
         .byte 0x18, 0x00, 0x10, 0x00
         .byte 0x12, 0x00, 0x00, 0x00
-
         .4byte UnkData_80DC038
 
 	.global gWindowBGTitle
@@ -82,9 +79,7 @@ gWindowBGTitle: @ 80DC054
 
 	.global gUnknown_80DC064
 gUnknown_80DC064: @ 80DC064
-        .string "Windows#=P.Blue#=x.Red#="
-        .byte 0xA0
-        .string ".Green\0"
+        .string "Windows{UNK_MACRO_3D M3D_80}Blue{UNK_MACRO_3D M3D_120}Red{UNK_MACRO_3D M3D_160}Green\0"
         .align 2,0
 
 	.global gWindowBGBlueString

@@ -1557,7 +1557,7 @@ MoveRangeThreeTilesDiagonally:
 
 .global RangeText
 RangeText:
-.string "Range#=@.{ARG_POKEMON_0} \0"
+.string "Range{UNK_MACRO_3D M3D_64}{ARG_POKEMON_0} \0"
 .align 2,0
 
 	.global gUnknown_810CF00
