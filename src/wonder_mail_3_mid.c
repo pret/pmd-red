@@ -117,7 +117,6 @@ void HandleMissionReward(void);
 const u8 *sub_80974A0(s16 index);
 
 extern u8 gUnknown_202E038[];
-extern u8 gUnknown_202E088[];
 extern u8 gUnknown_202E628[];
 extern u8 gUnknown_202DEA8[];
 extern u8 gUnknown_202E5D8[];
