@@ -196,7 +196,8 @@ gUnknown_202DE28: /* 202DE28 (sub_8011C34 - sub_8011C40) */
 	.align 4
 
 /* gUnknown_202DE30[0] seems to be the s32 value to insert in place of "$d0" (ARG_VALUE_0) in strings */
-/* gUnknown_202DE30[1] is used for "$d1" (ARG_VALUE_1). "$d2" is not in any strings so it may not exist */
+/* gUnknown_202DE30[1] through gUnknown_202DE30[4] are for "$d1" (ARG_VALUE_1) through "$d4" (ARG_VALUE_4) */
+/* No known occurences after those (in pmd red) */
 gUnknown_202DE30: /* 202DE30 [used everywhere tbh] */
 	.space 0x28
 /* Seems to be a general u8 buffer for text, mostly used with item names */
