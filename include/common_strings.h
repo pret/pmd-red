@@ -3,15 +3,8 @@
 
 #include "constants/common_strings_felicity_bank.h"
 #include "constants/common_strings_kangaskhan_storage.h"
+#include "constants/common_strings_kecleon_bros.h"
 
-enum KecleonBrosMode
-{
-    KECLEON_BROS_MODE_ITEMS_AWAKE,
-    KECLEON_BROS_MODE_ITEMS_ASLEEP,
-    KECLEON_BROS_MODE_WARES_AWAKE,
-    KECLEON_BROS_MODE_WARES_ASLEEP,
-    KECLEON_BROS_MODE_COUNT
-};
 enum WigglytuffShopMode
 {
     WIGGLYTUFF_SHOP_MODE_AWAKE,
@@ -60,7 +53,7 @@ extern const u8* const gCommonWithdrawPrompt[];
 
 extern const u8* const gCommonFelicity[FEL_MODE_COUNT][FEL_DLG_MAX];
 extern const u8* const gCommonKangStorage[KANG_MODE_COUNT][KANG_DLG_MAX];
-extern const u8* const gCommonKecleonBros[KECLEON_BROS_MODE_COUNT][23]; // 80D5EC8
+extern const u8* const gCommonKecleonBros[KECLEON_BROS_MODE_COUNT][KECLEON_DLG_MAX];
 extern const u8* const gCommonWigglytuff[WIGGLYTUFF_SHOP_MODE_COUNT][20]; // 80D79A4
 extern const u8* const gCommonGulpin[GULPIN_SHOP_MODE_COUNT][25]; // 80D8888
 extern const u8* const gCommonMakuhita[MAKUHITA_DOJO_MODE_COUNT][10]; // 80D9FC8

@@ -11331,7 +11331,8 @@ gArticunoPostStoryPreFightDialogue_2: @ 81029B4
 	.global gUnknown_81029C0
         gUnknown_81029C0:
         .string " Your arrival in this frozen\n"
-        .string "forest means only one thing...{EXTRA_MSG} You mean to challenge me!\0"
+        .string "forest means only one thing...{EXTRA_MSG}"
+        .string " You mean to challenge me!\0"
 
 	.global gArticunoPostStoryPreFightDialogue_3
 gArticunoPostStoryPreFightDialogue_3: @ 8102A18
@@ -11976,7 +11977,8 @@ gRayquazaPreFightDialogue_4: @ 81035D4
 	.global gUnknown_81035E0
         gUnknown_81035E0:
         .string " Indeed I am.{WAIT_PRESS}\n"
-        .string "The sky is my domain.{EXTRA_MSG} Depart at once!\0"
+        .string "The sky is my domain.{EXTRA_MSG}"
+        .string " Depart at once!\0"
         .align 2,0
 
 	.global gRayquazaPreFightDialogue_5

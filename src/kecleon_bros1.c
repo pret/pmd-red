@@ -216,86 +216,86 @@ static void UpdateKecleonStoreDialogue(void)
             sub_8019DAC();
             sub_80194F8();
             sub_8019E04(FALSE);
-            sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][0], 0, sKecleonBrosWork1->menuAction1,
+            sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_00], 0, sKecleonBrosWork1->menuAction1,
                 sKecleonBrosWork1->menuItems, sKecleonBrosWork1->unk74, 4, 0, sKecleonBrosWork1->unkE4, 12);
             break;
         case 1:
             sub_8019DAC();
             sub_80194F8();
             sub_8019E04(FALSE);
-            sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][1], 0, sKecleonBrosWork1->menuAction1,
+            sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_01], 0, sKecleonBrosWork1->menuAction1,
                 sKecleonBrosWork1->menuItems, sKecleonBrosWork1->unk74, 4, 0, sKecleonBrosWork1->unkE4, 12);
             break;
         case 2:
             sKecleonBrosWork1->fallbackState = 1;
             sub_8019E04(FALSE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][22], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_22], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 3:         
             sKecleonBrosWork1->fallbackState = 4;
             sub_8019E04(FALSE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][2], 0, sKecleonBrosWork1->unkE4, 0x30D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_02], 0, sKecleonBrosWork1->unkE4, 0x30D);
             break;
         case 5:
             sKecleonBrosWork1->fallbackState = 1;
             sub_8019E04(FALSE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][12], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_12], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 6:
             sKecleonBrosWork1->fallbackState = 16;
             sub_8019E04(TRUE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][13], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_13], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 7:
             sKecleonBrosWork1->fallbackState = 1;
             sub_8019E04(TRUE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][14], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_14], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 8:
             sKecleonBrosWork1->fallbackState = 1;
             sub_8019E04(TRUE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][15], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_15], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 9:
             sKecleonBrosWork1->fallbackState = 1;
             sub_8019E04(TRUE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][16], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_16], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 10:
             sKecleonBrosWork1->fallbackState = 1;
             sub_8019E04(TRUE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][17], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_17], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 11:
             sKecleonBrosWork1->fallbackState = 1;
             sub_8019E04(FALSE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][18], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_18], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 12:
             sKecleonBrosWork1->fallbackState = 16;
             sub_8019E04(TRUE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][19], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_19], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 13:
             sub_8090E14(gUnknown_202DE58, &sKecleonBrosWork1->soldItem, NULL);
             sKecleonBrosWork1->fallbackState = 24;
             sub_8019E04(TRUE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][20], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_20], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 14:
             sKecleonBrosWork1->fallbackState = 24;
             sub_8019E04(TRUE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][21], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_21], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 15:
             sKecleonBrosWork1->fallbackState = 18;
             sub_8019E04(FALSE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][3], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_03], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 16:
             sKecleonBrosWork1->fallbackState = 19;
             sub_8019E04(FALSE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][4], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_04], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 18:
             if (sKecleonBrosWork1->isKecleonItemShop)
@@ -331,7 +331,7 @@ static void UpdateKecleonStoreDialogue(void)
             sub_8090E14(gUnknown_202DE58, &sKecleonBrosWork1->soldItem, 0);
             gUnknown_202DE30 = sKecleonBrosWork1->itemSellPrice;
             sub_8019E04(FALSE);
-            sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][5], 0, 5,sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->unkE4, 12);
+            sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_05], 0, 5,sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->unkE4, 12);
             break;
         case 17:
             if (CountKecleonItems() == 0) {
@@ -353,17 +353,17 @@ static void UpdateKecleonStoreDialogue(void)
                     sKecleonBrosWork1->fallbackState = 16;
             }
             sub_8019E04(FALSE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][6], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_06], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 23:
             sKecleonBrosWork1->fallbackState = 26;
             sub_8019E04(FALSE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][7], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_07], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 24:
             sKecleonBrosWork1->fallbackState = 27;
             sub_8019E04(FALSE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][8], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_08], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 26:
             sub_801A5D8(4, 3, NULL, 10);
@@ -384,7 +384,7 @@ static void UpdateKecleonStoreDialogue(void)
             sub_8090E14(gUnknown_202DE58, &sKecleonBrosWork1->soldItem, NULL);
             gUnknown_202DE30 = sKecleonBrosWork1->itemSellPrice;
             sub_8019E04(FALSE);
-            sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][9], 0, 5, sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->unkE4, 12);
+            sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_09], 0, 5, sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->unkE4, 12);
             break;
         case 21:
         case 29:
@@ -399,18 +399,18 @@ static void UpdateKecleonStoreDialogue(void)
                 sKecleonBrosWork1->fallbackState = 24;
 
             sub_8019E04(FALSE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][11], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_11], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 31:
             sub_8019700();
             gUnknown_202DE30 = sKecleonBrosWork1->inventoryItemSellPrice;
             sub_8019E04(FALSE);
-            sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][10], 0, 5, sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->unkE4, 12);
+            sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_10], 0, 5, sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->unkE4, 12);
             break;
         case 32:
             sKecleonBrosWork1->fallbackState = 1;
             sub_8019E04(FALSE);
-            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][11], 0, sKecleonBrosWork1->unkE4, 0x10D);
+            sub_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_11], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
     }
 }
@@ -423,26 +423,26 @@ static void sub_80194F8(void)
     MemoryFill16(sKecleonBrosWork1->unk74, 0, sizeof(sKecleonBrosWork1->unk74));
 
     loopMax = 0;
-    sKecleonBrosWork1->menuItems[loopMax].text = *gCommonBuy;
+    sKecleonBrosWork1->menuItems[loopMax].text = gCommonBuy[0];
     sKecleonBrosWork1->menuItems[loopMax].menuAction = 2;
 
-    loopMax += 1;
-    sKecleonBrosWork1->menuItems[loopMax].text = *gCommonSell;
+    loopMax++;
+    sKecleonBrosWork1->menuItems[loopMax].text = gCommonSell[0];
     sKecleonBrosWork1->menuItems[loopMax].menuAction = 3;
 
-    loopMax += 1;
+    loopMax++;
     sKecleonBrosWork1->menuItems[loopMax].text = sSellAll;
     sKecleonBrosWork1->menuItems[loopMax].menuAction = 4;
 
-    loopMax += 1;
-    sKecleonBrosWork1->menuItems[loopMax].text = *gCommonInfo;
+    loopMax++;
+    sKecleonBrosWork1->menuItems[loopMax].text = gCommonInfo[0];
     sKecleonBrosWork1->menuItems[loopMax].menuAction = 7;
 
-    loopMax += 1;
-    sKecleonBrosWork1->menuItems[loopMax].text = *gCommonCancel;
+    loopMax++;
+    sKecleonBrosWork1->menuItems[loopMax].text = gCommonCancel[0];
     sKecleonBrosWork1->menuItems[loopMax].menuAction = 1;
 
-    loopMax += 1;
+    loopMax++;
     sKecleonBrosWork1->menuItems[loopMax].text = NULL;
     sKecleonBrosWork1->menuItems[loopMax].menuAction = 1;
 
@@ -469,14 +469,14 @@ static void sub_80195C0(void)
     MemoryFill16(sKecleonBrosWork1->unk74, 0, sizeof(sKecleonBrosWork1->unk74));
 
     loopMax = 0;
-    sKecleonBrosWork1->menuItems[loopMax].text = *gCommonBuy;
+    sKecleonBrosWork1->menuItems[loopMax].text = gCommonBuy[0];
     sKecleonBrosWork1->menuItems[loopMax].menuAction = 2;
 
-    loopMax += 1;
-    sKecleonBrosWork1->menuItems[loopMax].text = *gCommonInfo;
+    loopMax++;
+    sKecleonBrosWork1->menuItems[loopMax].text = gCommonInfo[0];
     sKecleonBrosWork1->menuItems[loopMax].menuAction = 7;
 
-    loopMax += 1;
+    loopMax++;
     sKecleonBrosWork1->menuItems[loopMax].text = NULL;
     sKecleonBrosWork1->menuItems[loopMax].menuAction = 1;
 
@@ -503,14 +503,14 @@ static void sub_8019660(void)
     MemoryFill16(sKecleonBrosWork1->unk74, 0, sizeof(sKecleonBrosWork1->unk74));
 
     loopMax = 0;
-    sKecleonBrosWork1->menuItems[loopMax].text = *gCommonSell;
+    sKecleonBrosWork1->menuItems[loopMax].text = gCommonSell[0];
     sKecleonBrosWork1->menuItems[loopMax].menuAction = 3;
 
-    loopMax += 1;
-    sKecleonBrosWork1->menuItems[loopMax].text = *gCommonInfo;
+    loopMax++;
+    sKecleonBrosWork1->menuItems[loopMax].text = gCommonInfo[0];
     sKecleonBrosWork1->menuItems[loopMax].menuAction = 7;
 
-    loopMax += 1;
+    loopMax++;
     sKecleonBrosWork1->menuItems[loopMax].text = NULL;
     sKecleonBrosWork1->menuItems[loopMax].menuAction = 1;
 
@@ -532,14 +532,14 @@ static void sub_8019660(void)
 static void sub_8019700(void)
 {
     s32 loopMax = 0;
-    sKecleonBrosWork1->menuItems[loopMax].text = *gCommonYes;
+    sKecleonBrosWork1->menuItems[loopMax].text = gCommonYes[0];
     sKecleonBrosWork1->menuItems[loopMax].menuAction = 5;
 
-    loopMax += 1;
-    sKecleonBrosWork1->menuItems[loopMax].text = *gCommonNo;
+    loopMax++;
+    sKecleonBrosWork1->menuItems[loopMax].text = gCommonNo[0];
     sKecleonBrosWork1->menuItems[loopMax].menuAction = 6;
 
-    loopMax += 1;
+    loopMax++;
     sKecleonBrosWork1->menuItems[loopMax].text = NULL;
     sKecleonBrosWork1->menuItems[loopMax].menuAction = 1;
 }

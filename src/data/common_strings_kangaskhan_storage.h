@@ -90,8 +90,10 @@ ALIGNED(4) const u8* const gCommonKangStorage[KANG_MODE_COUNT][KANG_DLG_MAX] =
 ALIGNED(4) static const u8 sUnknown_80D54A4[] = _(
     " Zzz... Snork!\n"
     "I can store items that you\n"
-    "found in dungeons...{EXTRA_MSG} Snarfle...\n"
-    "Things in storage don{APOSTROPHE}t get lost...{EXTRA_MSG} Zzz... Zzz...\n"
+    "found in dungeons...{EXTRA_MSG}"
+    " Snarfle...\n"
+    "Things in storage don{APOSTROPHE}t get lost...{EXTRA_MSG}"
+    " Zzz... Zzz...\n"
     "That{APOSTROPHE}s why...\n"
     "Keep important items in storage...");
 
@@ -185,11 +187,14 @@ ALIGNED(4) static const u8 sUnknown_80D5954[] = _(
 ALIGNED(4) static const u8 sUnknown_80D5984[] = _(
     " I can store items that you\n"
     "found in dungeons{COMMA} or that you\n"
-    "bought from shops.{EXTRA_MSG} If you faint in\n"
+    "bought from shops.{EXTRA_MSG}"
+    " If you faint in\n"
     "a dungeon{COMMA} your items will be lost...{WAIT_PRESS}\n"
-    "But what{APOSTROPHE}s in storage will be safe.{EXTRA_MSG} I keep guard over the\n"
+    "But what{APOSTROPHE}s in storage will be safe.{EXTRA_MSG}"
+    " I keep guard over the\n"
     "storage space{COMMA} so anything you leave\n"
-    "with me won{APOSTROPHE}t ever disappear!{EXTRA_MSG} If you have any items that\n"
+    "with me won{APOSTROPHE}t ever disappear!{EXTRA_MSG}"
+    " If you have any items that\n"
     "you can{APOSTROPHE}t bear to lose{COMMA} be sure to leave\n"
     "them with me!");
 
