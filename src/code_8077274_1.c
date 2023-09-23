@@ -25,7 +25,7 @@ extern u8 gUnknown_202DFE8[0x58];
 extern u8 *gUnknown_80FA8BC[];
 extern u8 *gUnknown_80FA824[];
 extern u8 *gUnknown_80FA81C[];
-extern u8 *gUnknown_80FABF8[];
+extern u8 *gPtrMonNoLongerPetrifiedMessage[];
 extern u8 *gUnknown_80FA820[];
 extern u8 *gUnknown_80FA800[];
 extern u8 *gUnknown_80FAC38[];
@@ -33,7 +33,7 @@ extern u8 *gUnknown_80FA97C[];
 extern u8 *gUnknown_80FA9DC[];
 extern u8 *gUnknown_80FAAAC[];
 extern u8 *gUnknown_80FAB90[];
-extern u8 *gUnknown_80FAC18[];
+extern u8 *gPtrMonNoLongerCringingMessage[];
 extern u8 *gUnknown_80FA638[];
 extern u8 *gUnknown_80FA69C[];
 extern u8 *gUnknown_80FA658[];
@@ -42,10 +42,10 @@ extern u8 *gUnknown_80FA6BC[];
 extern u8 *gUnknown_80FA6D4[];
 extern u8 *gUnknown_80FA9C0[];
 extern u8 *gUnknown_80FAA68[];
-extern u8 *gUnknown_80FAAC8[];
-extern u8 *gUnknown_80FAAE8[];
-extern u8 *gUnknown_80FAB08[];
-extern u8 *gUnknown_80FAB28[];
+extern u8 *gPtrMonStoppedEnduringMessage[];
+extern u8 *gPtrMonMirrorMoveFadedMessage[];
+extern u8 *gPtrMonConversion2FailedMessage[];
+extern u8 *gPtrMonGaveUpVitalThrowMessage[];
 extern u8 *gUnknown_80FAB40[];
 extern u8 *gUnknown_80FA7BC[];
 extern u8 *gUnknown_80FA9A0[];
@@ -160,9 +160,9 @@ extern u8 *gUnknown_80FBEE4[];
 extern s16 gUnknown_80F4F04[];
 extern u8 *gUnknown_80FBF50[];
 extern u8 *gUnknown_80FBF28[];
-extern s16 gUnknown_80F4F1C[]; 
-extern u8 *gUnknown_80FBF68[]; 
-extern u8 *gUnknown_80FBF84[]; 
+extern s16 gUnknown_80F4F1C[];
+extern u8 *gUnknown_80FBF68[];
+extern u8 *gUnknown_80FBF84[];
 
 extern void sub_8049ED4();
 extern void sub_8040A84();
@@ -216,7 +216,7 @@ void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index);
 void MuzzleTarget(Entity *pokemon, Entity *target)
 {
   EntityInfo *entityInfo;
-  
+
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon, target, TRUE))) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -295,8 +295,8 @@ void MobileStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo_1;
   EntityInfo *entityInfo;
-  
- 
+
+
   if (EntityExists(target)) {
     entityInfo_1 = target->info;
     entityInfo = entityInfo_1;
@@ -330,7 +330,7 @@ void ExposeStatusTarget(Entity * pokemon, Entity * target, s16 param_3)
   param_3_s16_2 = param_3_s16;
   flag = FALSE;
   flag2 = FALSE;
-  
+
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -367,7 +367,7 @@ void ExposeStatusTarget(Entity * pokemon, Entity * target, s16 param_3)
 void IdentityItemHolders(Entity *pokemon, Entity *target)
 {
   EntityInfo *entityInfo;
-  
+
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon, target, TRUE))) {
     entityInfo = target->info;
     if (!gDungeon->itemHoldersIdentified) {
@@ -386,7 +386,7 @@ void IdentityItemHolders(Entity *pokemon, Entity *target)
 void BlindTarget(Entity *pokemon, Entity *target)
 {
   EntityInfo *entityInfo;
-  
+
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon, target, TRUE))) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -410,7 +410,7 @@ void BlindTarget(Entity *pokemon, Entity *target)
 void CrossEyeVisionTarget(Entity *pokemon, Entity *target)
 {
   EntityInfo *entityInfo;
-  
+
 
   if (EntityExists(target)) {
     if(!HasSafeguardStatus(pokemon, target, TRUE))
@@ -438,7 +438,7 @@ void CrossEyeVisionTarget(Entity *pokemon, Entity *target)
 void RestoreVisionTarget(Entity *pokemon, Entity *target)
 {
   EntityInfo *entityInfo;
-  
+
 
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -469,7 +469,7 @@ void RestorePPTarget(Entity * pokemon,Entity * target, s32 param_3)
   s32 index;
   bool8 PPChanged;
   EntityInfo *entityInfo;
-  
+
   PPChanged = FALSE;
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -637,7 +637,7 @@ void RaiseSpDefStatTarget(Entity * pokemon, Entity *target, s32 increment)
 void LongTossStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
     entityInfo = target->info;
     SetMessageArgument(gUnknown_202DFE8,target,0);
     if (entityInfo->itemStatus != STATUS_LONG_TOSS) {
@@ -654,7 +654,7 @@ void LongTossStatusTarget(Entity * pokemon, Entity * target)
 void PierceStatusTarget(Entity * pokemon, Entity * target)
 {
     EntityInfo *entityInfo;
-  
+
     entityInfo = target->info;
     SetMessageArgument(gUnknown_202DFE8,target,0);
     if (entityInfo->itemStatus != STATUS_PIERCE) {
@@ -677,7 +677,7 @@ void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *
   s32 iVar7;
   s32 iVar8;
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -752,7 +752,7 @@ void sub_8079764(Entity * pokemon)
 void CounterStatusTarget(Entity * pokemon, Entity * target, u8 newStatus)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -774,7 +774,7 @@ void CounterStatusTarget(Entity * pokemon, Entity * target, u8 newStatus)
 void SafeguardStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -794,7 +794,7 @@ void SafeguardStatusTarget(Entity * pokemon, Entity * target)
 void MistStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -814,7 +814,7 @@ void MistStatusTarget(Entity * pokemon, Entity * target)
 void WishStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -834,7 +834,7 @@ void WishStatusTarget(Entity * pokemon, Entity * target)
 void MagicCoatStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -854,7 +854,7 @@ void MagicCoatStatusTarget(Entity * pokemon, Entity * target)
 void LightScreenStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -874,7 +874,7 @@ void LightScreenStatusTarget(Entity * pokemon, Entity * target)
 void ReflectStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -894,7 +894,7 @@ void ReflectStatusTarget(Entity * pokemon, Entity * target)
 void ProtectStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     nullsub_63(target);
     entityInfo = target->info;
@@ -915,7 +915,7 @@ void ProtectStatusTarget(Entity * pokemon, Entity * target)
 void MirrorCoatStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -935,7 +935,7 @@ void MirrorCoatStatusTarget(Entity * pokemon, Entity * target)
 void EndureStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -955,7 +955,7 @@ void EndureStatusTarget(Entity * pokemon, Entity * target)
 void MirrorMoveStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -975,7 +975,7 @@ void MirrorMoveStatusTarget(Entity * pokemon, Entity * target)
 void Conversion2StatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
 
@@ -1001,7 +1001,7 @@ void Conversion2StatusTarget(Entity * pokemon, Entity * target)
 void VitalThrowStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -1023,7 +1023,7 @@ void sub_8079E34(Entity * pokemon, Entity * target, bool8 param_3)
   bool8 statChanged;
   EntityInfo *entityInfo;
   s32 index;
-  
+
   statChanged = FALSE;
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -1076,7 +1076,7 @@ void sub_8079F20(Entity * pokemon, Entity * target, u8 param_3, u8 param_4)
   EntityInfo *entityInfo; // r7
   bool8 bVar8; // r8
   s32 index;
-  
+
   bVar8 = FALSE;
   moveUnsealed = FALSE;
   if (EntityExists(target)) {
@@ -1168,7 +1168,7 @@ void SendSleepEndMessage(Entity * pokemon, Entity * target, bool8 param_3, bool8
 {
   EntityInfo *entityInfo;
   bool8 isAsleep;
-  
+
   isAsleep = FALSE;
   if (!EntityExists(target)) {
     return;
@@ -1219,7 +1219,7 @@ void SendSleepEndMessage(Entity * pokemon, Entity * target, bool8 param_3, bool8
 void SendNonVolatileEndMessage(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -1249,7 +1249,7 @@ void SendImmobilizeEndMessage(Entity * pokemon, Entity *target)
 {
   bool8 isFrozen;
   EntityInfo *entityInfo;
-  
+
   isFrozen = FALSE;
   if (!EntityExists(target)) {
     return;
@@ -1277,7 +1277,7 @@ void SendImmobilizeEndMessage(Entity * pokemon, Entity *target)
         sub_8076CB4(entityInfo->unk9C);
         break;
     case STATUS_PETRIFIED:
-        sub_80522F4(pokemon,target,*gUnknown_80FABF8);
+        sub_80522F4(pokemon,target, *gPtrMonNoLongerPetrifiedMessage);
         break;
   }
   entityInfo->immobilizeStatus = STATUS_NONE;
@@ -1290,7 +1290,7 @@ void SendImmobilizeEndMessage(Entity * pokemon, Entity *target)
 void SendVolatileEndMessage(Entity * pokemon, Entity *target)
 {
   EntityInfo *entityInfo;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -1319,7 +1319,7 @@ void SendVolatileEndMessage(Entity * pokemon, Entity *target)
         sub_80522F4(pokemon,target,*gUnknown_80FAAAC);
         break;
     case STATUS_CRINGE:
-        sub_80522F4(pokemon,target,*gUnknown_80FAC18);
+        sub_80522F4(pokemon,target, *gPtrMonNoLongerCringingMessage);
         break;
   }
   entityInfo->volatileStatus = STATUS_NONE;
@@ -1330,7 +1330,7 @@ void SendVolatileEndMessage(Entity * pokemon, Entity *target)
 void SendProtectionEndMessage(Entity * pokemon, Entity *target)
 {
   EntityInfo *entityInfo;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -1366,16 +1366,16 @@ void SendProtectionEndMessage(Entity * pokemon, Entity *target)
         SendMessage(target,*gUnknown_80FAA68);
         break;
     case STATUS_ENDURING:
-        SendMessage(target,*gUnknown_80FAAC8);
+        SendMessage(target, *gPtrMonStoppedEnduringMessage);
         break;
     case STATUS_MIRROR_MOVE:
-        SendMessage(target,*gUnknown_80FAAE8);
+        SendMessage(target,*gPtrMonMirrorMoveFadedMessage);
         break;
     case STATUS_CONVERSION2:
-        SendMessage(target,*gUnknown_80FAB08);
+        SendMessage(target, *gPtrMonConversion2FailedMessage);
         break;
     case STATUS_VITAL_THROW:
-        SendMessage(target,*gUnknown_80FAB28);
+        SendMessage(target, *gPtrMonGaveUpVitalThrowMessage);
         break;
     case STATUS_MIST:
         SendMessage(target,*gUnknown_80FAB40);
@@ -1389,7 +1389,7 @@ void SendWaitingEndMessage(Entity * pokemon, Entity * target, u8 waitingStatus)
 {
   u32 uVar3;
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -1428,7 +1428,7 @@ void SendWaitingEndMessage(Entity * pokemon, Entity * target, u8 waitingStatus)
 void SendLinkedEndMessage(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -1452,7 +1452,7 @@ void SendLinkedEndMessage(Entity * pokemon, Entity * target)
 void SendMoveEndMessage(Entity * pokemon, Entity * target)
 {
   EntityInfo * entityInfo;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -1484,7 +1484,7 @@ void SendTransformEndMessage(Entity * pokemon, Entity *target)
   bool8 isInvisible;
   EntityInfo *entityInfo;
   u32 uVar3;
-  
+
   isInvisible = FALSE;
   if (!EntityExists(target)) {
     return;
@@ -1520,7 +1520,7 @@ void SendTransformEndMessage(Entity * pokemon, Entity *target)
 void SendEyesightEndMessage(Entity * pokemon,Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -1552,7 +1552,7 @@ void SendEyesightEndMessage(Entity * pokemon,Entity * target)
 void SendMuzzledEndMessage(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -1577,7 +1577,7 @@ void SendMuzzledEndMessage(Entity * pokemon, Entity * target)
       EntityInfo *entityInfo;
       EntityInfo *entityInfo_1;
       register bool32 bVar3 asm("r2");
-      
+
       entityInfo = target->info;
       entityInfo_1 = entityInfo;
       bVar3 = FALSE;
@@ -1591,7 +1591,7 @@ void SendMuzzledEndMessage(Entity * pokemon, Entity * target)
         bVar3 = TRUE;
       }
       return bVar3;
-    } 
+    }
 */
 NAKED
 void sub_807A96C(Entity *pokemon, Entity *target)
@@ -1635,7 +1635,7 @@ void sub_807A96C(Entity *pokemon, Entity *target)
 void WakeUpPokemon(Entity * pokemon)
 {
   EntityInfo *entityInfo;
-  
+
   entityInfo = pokemon->info;
   entityInfo->sleep = STATUS_NONE;
   entityInfo->sleepTurns = 0;
@@ -1646,7 +1646,7 @@ void WakeUpPokemon(Entity * pokemon)
 void SendThawedMessage(Entity *pokemon, Entity *target)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     if (entityInfo->immobilizeStatus == STATUS_FROZEN) {
@@ -1672,11 +1672,11 @@ void sub_807AA30(void)
   Entity *wildEntity;
   EntityInfo *entityInfo;
   s32 teamIndex;
-  
+
   for(wildIndex = 0; wildIndex < DUNGEON_MAX_WILD_POKEMON; wildIndex++)
   {
     wildEntity = gDungeon->wildPokemon[wildIndex];
-    if (EntityExists(wildEntity) && 
+    if (EntityExists(wildEntity) &&
         (entityInfo = wildEntity->info, entityInfo->sleep == STATUS_SLEEP) &&
         (entityInfo->sleepTurns == 0x7F)) {
       adjacentCheck = FALSE;
