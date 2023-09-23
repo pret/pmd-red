@@ -11,6 +11,7 @@
 #include "code_80130A8.h"
 #include "code_80118A4.h"
 #include "code_803B050.h"
+#include "game_options.h"
 
 struct unkStruct_203B2CC
 {
@@ -49,7 +50,6 @@ struct unkStruct_203B2D8
     u8 unkA0[4];
 };
 extern struct unkStruct_203B2D8 *gUnknown_203B2D8;
-extern GameOptions *gGameOptionsRef;
 
 const UnkTextStruct2 gUnknown_80DFBD0 =
 {

@@ -16,7 +16,7 @@ enum FarOffPals
 // GBA has 3 options while DS has 7
 enum MapOption
 {
-    MAP_OPTION_OFF = 0,
+    MAP_OPTION_OFF,
     MAP_OPTION_CLEAR,
     MAP_OPTION_SHADE,
     NUM_GBA_MAP_OPTIONS,
@@ -24,7 +24,7 @@ enum MapOption
 
 enum DSMapOption
 {
-    TOP_TEAM_DATA_NO_BOTTOM = 0,
+    TOP_TEAM_DATA_NO_BOTTOM,
     TOP_TEAM_DATA_CLEAR_MAP_BOTTOM,
     TOP_TEAM_DATA_SHADED_MAP_BOTTOM,
     TOP_MESSAGE_LOG_NO_BOTTOM,
@@ -36,12 +36,13 @@ enum DSMapOption
 
 enum windowColor
 {
-    WINDOW_COLOR_BLUE = 0,
+    WINDOW_COLOR_BLUE,
     WINDOW_COLOR_RED,
     WINDOW_COLOR_GREEN,
     NUM_WINDOW_COLORS,
 };
 
+// size: 0x10
 typedef struct GameOptions
 {
     // TODO: find where Controls/Touch Screen are in this structure in PMD Blue
@@ -52,12 +53,14 @@ typedef struct GameOptions
     /* 0x3 */ bool8 gridEnable;
     /* 0x4 */ u8 mapOption;
     /* 0x5 */ u8 fill5[3];
-    /* 0x8 */ u8 windowColor; 
+    /* 0x8 */ u8 windowColor;
     /* 0x9 */ u8 unk9; // maybe Controls?
     /* 0xA */ u8 unkA; // maybe Touch Screen?
     /* 0xB */ u8 playerGender;
     /* 0xC */ u8 unkC;
 } GameOptions;
+
+extern GameOptions *gGameOptionsRef;
 
 GameOptions *GetGameOptions(void);
 bool8 GameOptionsNotChange(GameOptions *);

@@ -19,7 +19,7 @@
 #include "ground_map_1.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "options_menu.h"
+#include "options_menu1.h"
 #include "party_list_menu.h"
 #include "rescue_team_info.h"
 #include "text1.h"

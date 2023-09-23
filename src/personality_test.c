@@ -52,8 +52,6 @@ extern void RedrawPartnerSelectionMenu(void);
 
 extern u32 sub_80095E4(s16, u32);
 
-extern GameOptions *gGameOptionsRef;
-
 extern const char gStarterReveal[];
 
 extern u8 gAvailablePokemonNames[0x50];
