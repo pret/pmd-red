@@ -29,7 +29,7 @@ static void sub_801ED28(void);
 static void sub_801EDA4(void);
 static void sub_801EDC0(void);
 
-bool8 CreateGulpinShop(s32 isAsleep, s16 pokeSpecies, Move *moves)
+bool8 CreateGulpinShop(u32 mode, s16 pokeSpecies, Move *moves)
 {
     OpenedFile *faceFile;
     s32 species_32;
@@ -37,12 +37,12 @@ bool8 CreateGulpinShop(s32 isAsleep, s16 pokeSpecies, Move *moves)
     species_32 = pokeSpecies; // dumb cast needed to get lsr/asr combo
 
     sGulpinShopWork = MemoryAlloc(sizeof(GulpinShopWork), 8);
-    sGulpinShopWork->isAsleep = isAsleep;
+    sGulpinShopWork->mode = mode;
     sGulpinShopWork->speciesNum = species_32;
     sGulpinShopWork->moves = moves;
     sGulpinShopWork->unk1C = moves[4].id; // 5th move..?
 
-    if (isAsleep == 0)
+    if (mode == GULPIN_SHOP_MODE_AWAKE)
         sGulpinShopWork->unk128 = &sGulpinShopWork->faceFile;
     else
         sGulpinShopWork->unk128 = NULL;
@@ -154,15 +154,15 @@ static void sub_801EA28(void)
             sub_8092C84(gAvailablePokemonNames, sGulpinShopWork->unk1C);
             sub_8092C84(&gAvailablePokemonNames[0x50], sGulpinShopWork->unk1E);
 
-            switch (sGulpinShopWork->isAsleep) {
-                case 0:
-                case 1:
+            switch (sGulpinShopWork->mode) {
+                case GULPIN_SHOP_MODE_AWAKE:
+                case GULPIN_SHOP_MODE_ASLEEP:
                     if (sGulpinShopWork->isNextMoveLinked)
-                        sub_8014248(gCommonGulpin[sGulpinShopWork->isAsleep][GULPIN_DLG_12], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
+                        sub_8014248(gCommonGulpin[sGulpinShopWork->mode][GULPIN_DLG_12], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
                     else
-                        sub_8014248(gCommonGulpin[sGulpinShopWork->isAsleep][GULPIN_DLG_11], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
+                        sub_8014248(gCommonGulpin[sGulpinShopWork->mode][GULPIN_DLG_11], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
                     break;
-                case 2:
+                case GULPIN_SHOP_MODE_UNK2:
                     if (sGulpinShopWork->isNextMoveLinked)
                         sub_8014248(sForgetMoveAndLinkedOnes, 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, NULL, 32);
                     else

@@ -21,7 +21,7 @@ enum MakuhitaDojoInitMode
 typedef struct MakuhitaDojoWork1
 {
     /* 0x0 */ u32 mode; // Corresponds to the enum: MakuhitaDojoInitMode
-    /* 0x4 */ bool32 isAsleep;
+    /* 0x4 */ u32 dlgMode; // Corresponds to the enum: MakuhitaDojoMode
     /* 0x8 */ s32 state;
     /* 0xC */ s32 fallbackState;
     s16 unk10;

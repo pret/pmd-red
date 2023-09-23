@@ -49,7 +49,7 @@ static const u8 sUnknown_80D9EF4[];
 static const u8 sUnknown_80D9F24[];
 static const u8 sUnknown_80D9F74[];
 
-ALIGNED(4) const u8* const gCommonGulpin[GULPIN_SHOP_MODE_COUNT][GULPIN_DLG_MAX] =
+ALIGNED(4) const u8* const gCommonGulpin[GULPIN_SHOP_MODE_DIALOGUE_COUNT][GULPIN_DLG_MAX] =
 {
     [GULPIN_SHOP_MODE_AWAKE] = {
         [GULPIN_DLG_00] = sUnknown_80D9F74,

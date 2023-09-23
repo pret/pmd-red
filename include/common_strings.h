@@ -6,13 +6,7 @@
 #include "constants/common_strings_kecleon_bros.h"
 #include "constants/common_strings_wigglytuff_shop.h"
 #include "constants/common_strings_gulpin_shop.h"
-
-enum MakuhitaDojoMode
-{
-    MAKUHITA_DOJO_MODE_AWAKE,
-    MAKUHITA_DOJO_MODE_ASLEEP,
-    MAKUHITA_DOJO_MODE_COUNT
-};
+#include "constants/common_strings_makuhita_dojo.h"
 
 #define MAX_HINTS 5
 
@@ -45,8 +39,8 @@ extern const u8* const gCommonFelicity[FEL_MODE_COUNT][FEL_DLG_MAX];
 extern const u8* const gCommonKangStorage[KANG_MODE_COUNT][KANG_DLG_MAX];
 extern const u8* const gCommonKecleonBros[KECLEON_BROS_MODE_COUNT][KECLEON_DLG_MAX];
 extern const u8* const gCommonWigglytuff[WIGGLYTUFF_SHOP_MODE_COUNT][WIGGLY_DLG_MAX];
-extern const u8* const gCommonGulpin[GULPIN_SHOP_MODE_COUNT][GULPIN_DLG_MAX];
-extern const u8* const gCommonMakuhita[MAKUHITA_DOJO_MODE_COUNT][10]; // 80D9FC8
+extern const u8* const gCommonGulpin[GULPIN_SHOP_MODE_DIALOGUE_COUNT][GULPIN_DLG_MAX];
+extern const u8* const gCommonMakuhita[MAKUHITA_DOJO_MODE_COUNT][MAKUHITA_DLG_MAX];
 extern const Hints gCommonHints[MAX_HINTS]; // 80DAA98
 
 #endif // GUARD_COMMON_STRINGS_H

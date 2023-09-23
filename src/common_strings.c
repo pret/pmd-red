@@ -63,3 +63,4 @@ ALIGNED(4) const u8* const gCommonWithdrawPrompt[] = { sWithdrawPrompt0 };
 #include "data/common_strings_kecleon_bros.h"
 #include "data/common_strings_wigglytuff_shop.h"
 #include "data/common_strings_gulpin_shop.h"
+#include "data/common_strings_makuhita_dojo.h"
