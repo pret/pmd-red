@@ -7,15 +7,7 @@
 #include "constants/common_strings_wigglytuff_shop.h"
 #include "constants/common_strings_gulpin_shop.h"
 #include "constants/common_strings_makuhita_dojo.h"
-
-#define MAX_HINTS 5
-
-// size: 0x8
-typedef struct Hints
-{
-    const u8 *heading;
-    const u8 *body;
-} Hints;
+#include "constants/common_strings_hints.h"
 
 extern const u8* const gCommonYes[];
 extern const u8* const gCommonNo[];
@@ -41,6 +33,6 @@ extern const u8* const gCommonKecleonBros[KECLEON_BROS_MODE_COUNT][KECLEON_DLG_M
 extern const u8* const gCommonWigglytuff[WIGGLYTUFF_SHOP_MODE_COUNT][WIGGLY_DLG_MAX];
 extern const u8* const gCommonGulpin[GULPIN_SHOP_MODE_DIALOGUE_COUNT][GULPIN_DLG_MAX];
 extern const u8* const gCommonMakuhita[MAKUHITA_DOJO_MODE_COUNT][MAKUHITA_DLG_MAX];
-extern const Hints gCommonHints[MAX_HINTS]; // 80DAA98
+extern const Hints gCommonHints[NUM_HINTS];
 
 #endif // GUARD_COMMON_STRINGS_H

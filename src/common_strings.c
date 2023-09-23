@@ -56,11 +56,10 @@ ALIGNED(4) const u8* const gCommonDepositPrompt[] = { sDepositPrompt0 };
 ALIGNED(4) static const u8 sWithdrawPrompt0[] = _("Withdraw?");
 ALIGNED(4) const u8* const gCommonWithdrawPrompt[] = { sWithdrawPrompt0 };
 
-// TODO: Move remaining strings/arrays from common_strings.s
-
 #include "data/common_strings_felicity_bank.h"
 #include "data/common_strings_kangaskhan_storage.h"
 #include "data/common_strings_kecleon_bros.h"
 #include "data/common_strings_wigglytuff_shop.h"
 #include "data/common_strings_gulpin_shop.h"
 #include "data/common_strings_makuhita_dojo.h"
+#include "data/common_strings_hints.h"
