@@ -5,13 +5,8 @@
 #include "constants/common_strings_kangaskhan_storage.h"
 #include "constants/common_strings_kecleon_bros.h"
 #include "constants/common_strings_wigglytuff_shop.h"
+#include "constants/common_strings_gulpin_shop.h"
 
-enum GulpinShopMode
-{
-    GULPIN_SHOP_MODE_AWAKE,
-    GULPIN_SHOP_MODE_ASLEEP,
-    GULPIN_SHOP_MODE_COUNT
-};
 enum MakuhitaDojoMode
 {
     MAKUHITA_DOJO_MODE_AWAKE,
@@ -50,7 +45,7 @@ extern const u8* const gCommonFelicity[FEL_MODE_COUNT][FEL_DLG_MAX];
 extern const u8* const gCommonKangStorage[KANG_MODE_COUNT][KANG_DLG_MAX];
 extern const u8* const gCommonKecleonBros[KECLEON_BROS_MODE_COUNT][KECLEON_DLG_MAX];
 extern const u8* const gCommonWigglytuff[WIGGLYTUFF_SHOP_MODE_COUNT][WIGGLY_DLG_MAX];
-extern const u8* const gCommonGulpin[GULPIN_SHOP_MODE_COUNT][25]; // 80D8888
+extern const u8* const gCommonGulpin[GULPIN_SHOP_MODE_COUNT][GULPIN_DLG_MAX];
 extern const u8* const gCommonMakuhita[MAKUHITA_DOJO_MODE_COUNT][10]; // 80D9FC8
 extern const Hints gCommonHints[MAX_HINTS]; // 80DAA98
 

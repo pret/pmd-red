@@ -340,7 +340,7 @@ void sub_80276A8(void)
     gUnknown_203B2BC->unk16C[loopMax] = 1;
   }
   loopMax += 1;
-  gUnknown_203B2BC->menuItems[loopMax].text = *gCommonInfo;
+  gUnknown_203B2BC->menuItems[loopMax].text = gCommonInfo[0];
   gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_INFO;
   loopMax += 1;
   gUnknown_203B2BC->menuItems[loopMax].text = 0;
@@ -370,10 +370,10 @@ void sub_8027794(void)
   s32 loopMax = 0;
   
   MemoryFill16(gUnknown_203B2BC->unk16C,0,sizeof(gUnknown_203B2BC->unk16C));
-  gUnknown_203B2BC->menuItems[loopMax].text = *gCommonYes;
+  gUnknown_203B2BC->menuItems[loopMax].text = gCommonYes[0];
   gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_YES;
   loopMax += 1;
-  gUnknown_203B2BC->menuItems[loopMax].text = *gCommonNo;
+  gUnknown_203B2BC->menuItems[loopMax].text = gCommonNo[0];
   gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_NO;
   loopMax += 1;
   gUnknown_203B2BC->menuItems[loopMax].text = NULL;

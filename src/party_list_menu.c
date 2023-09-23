@@ -423,7 +423,7 @@ void sub_802678C(void)
         sUnknown_203B2B8->unk20C[0] = 1;
     }
     loopMax += 1;
-    sUnknown_203B2B8->unk16C[loopMax].text = *gCommonInfo;
+    sUnknown_203B2B8->unk16C[loopMax].text = gCommonInfo[0];
     sUnknown_203B2B8->unk16C[loopMax].menuAction = 4;
     loopMax += 1;
     sUnknown_203B2B8->unk16C[loopMax].text = NULL;
@@ -449,10 +449,10 @@ void sub_802678C(void)
 
 void sub_8026878(void) {
     s32 loopMax = 0;
-    sUnknown_203B2B8->unk1BC[loopMax].text = *gCommonYes;
+    sUnknown_203B2B8->unk1BC[loopMax].text = gCommonYes[0];
     sUnknown_203B2B8->unk1BC[loopMax].menuAction = 2;
     loopMax += 1;
-    sUnknown_203B2B8->unk1BC[loopMax].text = *gCommonNo;
+    sUnknown_203B2B8->unk1BC[loopMax].text = gCommonNo[0];
     sUnknown_203B2B8->unk1BC[loopMax].menuAction = 3;
     loopMax += 1;
     sUnknown_203B2B8->unk1BC[loopMax].text = NULL;

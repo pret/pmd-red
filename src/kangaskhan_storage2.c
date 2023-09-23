@@ -221,21 +221,21 @@ static void sub_80182E4(void)
 
     loopMax = 0;
     MemoryFill16(sUnknown_203B20C->unk60, 0, sizeof(sUnknown_203B20C->unk60));
-    sUnknown_203B20C->unk20[0].text = *gCommonStore;
+    sUnknown_203B20C->unk20[0].text = gCommonStore[0];
     sUnknown_203B20C->unk20[0].menuAction = 2;
 
     if (GetNumberOfFilledInventorySlots() == 0 || sub_801CF50(0))
         sUnknown_203B20C->unk60[0] = 1;
 
     loopMax += 1;
-    sUnknown_203B20C->unk20[loopMax].text = *gCommonTake;
+    sUnknown_203B20C->unk20[loopMax].text = gCommonTake[0];
     sUnknown_203B20C->unk20[loopMax].menuAction = 3;
 
     if (sub_801CF14(1) || INVENTORY_SIZE <=  GetNumberOfFilledInventorySlots())
         sUnknown_203B20C->unk60[loopMax] = 1;
 
     loopMax += 1;
-    sUnknown_203B20C->unk20[loopMax].text = *gCommonCancel;
+    sUnknown_203B20C->unk20[loopMax].text = gCommonCancel[0];
     sUnknown_203B20C->unk20[loopMax].menuAction = 1;
 
     loopMax += 1;
@@ -264,13 +264,13 @@ static void sub_801841C(void)
 
     loopMax = 0;
     MemoryFill16(sUnknown_203B20C->unk60,0,sizeof(sUnknown_203B20C->unk60));
-    sUnknown_203B20C->unk20[0].text = *gCommonStore;
+    sUnknown_203B20C->unk20[0].text = gCommonStore[0];
     sUnknown_203B20C->unk20[0].menuAction = 2;
     if (!sub_801ADA0(sUnknown_203B20C->itemIndex))
         sUnknown_203B20C->unk60[0] = 1;
 
     loopMax += 1;
-    sUnknown_203B20C->unk20[loopMax].text = *gCommonInfo;
+    sUnknown_203B20C->unk20[loopMax].text = gCommonInfo[0];
     sUnknown_203B20C->unk20[loopMax].menuAction = 4;
 
     loopMax += 1;
@@ -299,14 +299,14 @@ static void sub_80184D4(void)
 
     loopMax = 0;
     MemoryFill16(sUnknown_203B20C->unk60, 0, sizeof(sUnknown_203B20C->unk60));
-    sUnknown_203B20C->unk20[0].text = *gCommonTake;
+    sUnknown_203B20C->unk20[0].text = gCommonTake[0];
     sUnknown_203B20C->unk20[0].menuAction = 3;
 
     if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
         sUnknown_203B20C->unk60[0] = 1;
 
     loopMax += 1;
-    sUnknown_203B20C->unk20[loopMax].text = *gCommonInfo;
+    sUnknown_203B20C->unk20[loopMax].text = gCommonInfo[0];
     sUnknown_203B20C->unk20[loopMax].menuAction = 4;
 
     loopMax += 1;

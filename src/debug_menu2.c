@@ -153,7 +153,7 @@ static void sub_803A6F0(void)
     }
 
     loopMax++;
-    sUnknown_203B3F0->menuItems[loopMax].text = *gCommonInfo;
+    sUnknown_203B3F0->menuItems[loopMax].text = gCommonInfo[0];
     sUnknown_203B3F0->menuItems[loopMax].menuAction = 3;
 
     loopMax++;

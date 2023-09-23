@@ -348,7 +348,7 @@ void sub_802F108(void)
     gUnknown_203B30C->unkB0[loopMax].text = gUnknown_80E040C;
     gUnknown_203B30C->unkB0[loopMax].menuAction = 2;
     loopMax += 1;
-    gUnknown_203B30C->unkB0[loopMax].text = *gCommonInfo;
+    gUnknown_203B30C->unkB0[loopMax].text = gCommonInfo[0];
     gUnknown_203B30C->unkB0[loopMax].menuAction = 3;
     loopMax += 1;
     gUnknown_203B30C->unkB0[loopMax].text = NULL;

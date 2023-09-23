@@ -374,7 +374,7 @@ void sub_802591C(void)
       gUnknown_203B2B4->unk108[loopMax] = 1;
   }
   loopMax += 1;
-  gUnknown_203B2B4->unkC8[loopMax].text = *gCommonInfo;
+  gUnknown_203B2B4->unkC8[loopMax].text = gCommonInfo[0];
   gUnknown_203B2B4->unkC8[loopMax].menuAction = 4;
   loopMax += 1;
   gUnknown_203B2B4->unkC8[loopMax].text = NULL;

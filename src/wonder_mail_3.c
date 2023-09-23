@@ -202,10 +202,10 @@ void sub_802CAA4(void) {
                 break;
         }
     }
-    gUnknown_203B2F0->unk10C[loopMax].text = *gCommonDelete;
+    gUnknown_203B2F0->unk10C[loopMax].text = gCommonDelete[0];
     gUnknown_203B2F0->unk10C[loopMax].menuAction = 4;
     loopMax += 1;
-    gUnknown_203B2F0->unk10C[loopMax].text = *gCommonInfo;
+    gUnknown_203B2F0->unk10C[loopMax].text = gCommonInfo[0];
     gUnknown_203B2F0->unk10C[loopMax].menuAction = 7;
     loopMax += 1;
     gUnknown_203B2F0->unk10C[loopMax].text = NULL;
@@ -227,10 +227,10 @@ void sub_802CBAC(void)
     s32 loopMax;
     loopMax = 0;
 
-    gUnknown_203B2F0->unk14C[loopMax].text = *gCommonYes;
+    gUnknown_203B2F0->unk14C[loopMax].text = gCommonYes[0];
     gUnknown_203B2F0->unk14C[loopMax].menuAction = 5;
     loopMax += 1;
-    gUnknown_203B2F0->unk14C[loopMax].text = *gCommonNo;
+    gUnknown_203B2F0->unk14C[loopMax].text = gCommonNo[0];
     gUnknown_203B2F0->unk14C[loopMax].menuAction = 6;
     loopMax += 1;
     gUnknown_203B2F0->unk14C[loopMax].text = NULL;
@@ -758,10 +758,10 @@ void sub_802D5A4(void) {
 
     loopMax = 0;
     MemoryFill16(gUnknown_203B2F8->unk198, 0, sizeof(gUnknown_203B2F8->unk198));
-    gUnknown_203B2F8->unk118[loopMax].text = *gCommonDelete;
+    gUnknown_203B2F8->unk118[loopMax].text = gCommonDelete[0];
     gUnknown_203B2F8->unk118[loopMax].menuAction = 2;
     loopMax += 1;
-    gUnknown_203B2F8->unk118[loopMax].text = *gCommonInfo;
+    gUnknown_203B2F8->unk118[loopMax].text = gCommonInfo[0];
     gUnknown_203B2F8->unk118[loopMax].menuAction = 5;
     loopMax += 1;
     gUnknown_203B2F8->unk118[loopMax].text = NULL;
@@ -779,10 +779,10 @@ void sub_802D5A4(void) {
 
 void sub_802D63C(void) {
     s32 loopMax = 0;
-    gUnknown_203B2F8->unk158[loopMax].text = *gCommonYes;
+    gUnknown_203B2F8->unk158[loopMax].text = gCommonYes[0];
     gUnknown_203B2F8->unk158[loopMax].menuAction = 3;
     loopMax += 1;
-    gUnknown_203B2F8->unk158[loopMax].text = *gCommonNo;
+    gUnknown_203B2F8->unk158[loopMax].text = gCommonNo[0];
     gUnknown_203B2F8->unk158[loopMax].menuAction = 4;
     loopMax += 1;
     gUnknown_203B2F8->unk158[loopMax].text = NULL;
@@ -794,10 +794,10 @@ void sub_802D690(void) {
     s32 index;
 
     loopMax = 0;
-    gUnknown_203B2F8->unk158[loopMax].text = *gCommonYes;
+    gUnknown_203B2F8->unk158[loopMax].text = gCommonYes[0];
     gUnknown_203B2F8->unk158[loopMax].menuAction = 3;
     loopMax += 1;
-    gUnknown_203B2F8->unk158[loopMax].text = *gCommonNo;
+    gUnknown_203B2F8->unk158[loopMax].text = gCommonNo[0];
     gUnknown_203B2F8->unk158[loopMax].menuAction = 4;
     loopMax += 1;
     gUnknown_203B2F8->unk158[loopMax].text = gUnknown_80E014C;
@@ -822,10 +822,10 @@ void sub_802D73C(void) {
     s32 index;
 
     loopMax = 0;
-    gUnknown_203B2F8->unk158[loopMax].text = *gCommonYes;
+    gUnknown_203B2F8->unk158[loopMax].text = gCommonYes[0];
     gUnknown_203B2F8->unk158[loopMax].menuAction = 3;
     loopMax += 1;
-    gUnknown_203B2F8->unk158[loopMax].text = *gCommonNo;
+    gUnknown_203B2F8->unk158[loopMax].text = gCommonNo[0];
     gUnknown_203B2F8->unk158[loopMax].menuAction = 4;
     loopMax += 1;
     gUnknown_203B2F8->unk158[loopMax].text = gUnknown_80E014C;

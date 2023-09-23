@@ -374,19 +374,19 @@ static void sub_80175FC(void)
 
     MemoryFill16(gKangaskhanStorageWork->unk4C,0, sizeof(gKangaskhanStorageWork->unk4C));
     loopMax = 0;
-    gKangaskhanStorageWork->unk24[loopMax].text = *gCommonStore;
+    gKangaskhanStorageWork->unk24[loopMax].text = gCommonStore[0];
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 2;
 
     loopMax += 1;
-    gKangaskhanStorageWork->unk24[loopMax].text = *gCommonTake;
+    gKangaskhanStorageWork->unk24[loopMax].text = gCommonTake[0];
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 3;
 
     loopMax += 1;
-    gKangaskhanStorageWork->unk24[loopMax].text = *gCommonInfo;
+    gKangaskhanStorageWork->unk24[loopMax].text = gCommonInfo[0];
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 6;
 
     loopMax += 1;
-    gKangaskhanStorageWork->unk24[loopMax].text = *gCommonCancel;
+    gKangaskhanStorageWork->unk24[loopMax].text = gCommonCancel[0];
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 1;
 
     loopMax += 1;
@@ -415,11 +415,11 @@ static void sub_80176B8(void)
 
     MemoryFill16(gKangaskhanStorageWork->unk4C, 0, sizeof(gKangaskhanStorageWork->unk4C));
     loopMax = 0;
-    gKangaskhanStorageWork->unk24[loopMax].text = *gCommonStore;
+    gKangaskhanStorageWork->unk24[loopMax].text = gCommonStore[0];
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 2;
 
     loopMax++;
-    gKangaskhanStorageWork->unk24[loopMax].text = *gCommonInfo;
+    gKangaskhanStorageWork->unk24[loopMax].text = gCommonInfo[0];
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 6;
 
     loopMax++;
@@ -448,11 +448,11 @@ static void sub_8017758(void)
 
     MemoryFill16(gKangaskhanStorageWork->unk4C, 0, sizeof(gKangaskhanStorageWork->unk4C));
     loopMax = 0;
-    gKangaskhanStorageWork->unk24[loopMax].text = *gCommonTake;
+    gKangaskhanStorageWork->unk24[loopMax].text = gCommonTake[0];
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 3;
 
     loopMax++;
-    gKangaskhanStorageWork->unk24[loopMax].text = *gCommonInfo;
+    gKangaskhanStorageWork->unk24[loopMax].text = gCommonInfo[0];
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 6;
 
     loopMax++;
@@ -479,11 +479,11 @@ static void sub_80177F8(void)
     s32 loopMax;
 
     loopMax = 0;
-    gKangaskhanStorageWork->unk24[loopMax].text = *gCommonYes;
+    gKangaskhanStorageWork->unk24[loopMax].text = gCommonYes[0];
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 4;
 
     loopMax++;
-    gKangaskhanStorageWork->unk24[loopMax].text = *gCommonNo;
+    gKangaskhanStorageWork->unk24[loopMax].text = gCommonNo[0];
     gKangaskhanStorageWork->unk24[loopMax].menuAction = 5;
 
     loopMax++;

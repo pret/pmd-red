@@ -246,10 +246,10 @@ static void MakuhitaDojo_DrawMainMenu(void)
     }
 
     loopMax += 1;
-    sMakuhitaDojoWork1->unk18[loopMax].text = *gCommonInfo;
+    sMakuhitaDojoWork1->unk18[loopMax].text = gCommonInfo[0];
     sMakuhitaDojoWork1->unk18[loopMax].menuAction = 3;
     loopMax += 1;
-    sMakuhitaDojoWork1->unk18[loopMax].text = *gCommonCancel;
+    sMakuhitaDojoWork1->unk18[loopMax].text = gCommonCancel[0];
     sMakuhitaDojoWork1->unk18[loopMax].menuAction = 1;
     loopMax += 1;
     sMakuhitaDojoWork1->unk18[loopMax].text = NULL;

@@ -158,9 +158,9 @@ static void sub_801EA28(void)
                 case 0:
                 case 1:
                     if (sGulpinShopWork->isNextMoveLinked)
-                        sub_8014248(gCommonGulpin[sGulpinShopWork->isAsleep][12], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
+                        sub_8014248(gCommonGulpin[sGulpinShopWork->isAsleep][GULPIN_DLG_12], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
                     else
-                        sub_8014248(gCommonGulpin[sGulpinShopWork->isAsleep][11], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
+                        sub_8014248(gCommonGulpin[sGulpinShopWork->isAsleep][GULPIN_DLG_11], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
                     break;
                 case 2:
                     if (sGulpinShopWork->isNextMoveLinked)
@@ -188,7 +188,7 @@ static void sub_801EBC4(void)
         sGulpinShopWork->unk68[0] = 1;
     
     which++;
-    sGulpinShopWork->unk28[which].text = *gCommonInfo;
+    sGulpinShopWork->unk28[which].text = gCommonInfo[0];
     sGulpinShopWork->unk28[which].menuAction = 3;
     which++;
     sGulpinShopWork->unk28[which].text = NULL;
@@ -216,10 +216,10 @@ static void sub_801EC7C(void)
     which = 0;
     
     MemoryFill16(sGulpinShopWork->unk68, 0, sizeof(sGulpinShopWork->unk68));
-    sGulpinShopWork->unk28[which].text = *gCommonYes;
+    sGulpinShopWork->unk28[which].text = gCommonYes[0];
     sGulpinShopWork->unk28[which].menuAction = 4;
     which++;
-    sGulpinShopWork->unk28[which].text = *gCommonNo;
+    sGulpinShopWork->unk28[which].text = gCommonNo[0];
     sGulpinShopWork->unk28[which].menuAction = 5;
     which++;
     sGulpinShopWork->unk28[which].text = NULL;

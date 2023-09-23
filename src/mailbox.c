@@ -314,7 +314,7 @@ void CreateMailActionMenu(void) {
     }
     else
     {
-        gUnknown_203B304->menuItems[loopMax].text = *gCommonAccept;
+        gUnknown_203B304->menuItems[loopMax].text = gCommonAccept[0];
         gUnknown_203B304->menuItems[loopMax].menuAction = 5;
 
         if(IsMailinJobSlot(mail) || GetNumAcceptedJobs() >= MAX_ACCEPTED_JOBS)
@@ -323,7 +323,7 @@ void CreateMailActionMenu(void) {
         }
         loopMax += 1;
 
-        gUnknown_203B304->menuItems[loopMax].text = *gCommonInfo;
+        gUnknown_203B304->menuItems[loopMax].text = gCommonInfo[0];
         gUnknown_203B304->menuItems[loopMax].menuAction = 8;
         loopMax += 1;
     }

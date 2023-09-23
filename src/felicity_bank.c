@@ -264,19 +264,19 @@ static void CreateFelicityBankShopMenu(void)
 
     MemoryFill16(sFelicityBankWork->unk54, 0, sizeof(sFelicityBankWork->unk54));
 
-    sFelicityBankWork->unk14[loopMax].text = *gCommonStore;
+    sFelicityBankWork->unk14[loopMax].text = gCommonStore[0];
     sFelicityBankWork->unk14[loopMax].menuAction = 2;
 
     loopMax++;
-    sFelicityBankWork->unk14[loopMax].text = *gCommonTake;
+    sFelicityBankWork->unk14[loopMax].text = gCommonTake[0];
     sFelicityBankWork->unk14[loopMax].menuAction = 3;
 
     loopMax++;
-    sFelicityBankWork->unk14[loopMax].text = *gCommonInfo;
+    sFelicityBankWork->unk14[loopMax].text = gCommonInfo[0];
     sFelicityBankWork->unk14[loopMax].menuAction = 4;
 
     loopMax++;
-    sFelicityBankWork->unk14[loopMax].text = *gCommonCancel;
+    sFelicityBankWork->unk14[loopMax].text = gCommonCancel[0];
     sFelicityBankWork->unk14[loopMax].menuAction = 1;
 
     loopMax++;
@@ -383,9 +383,9 @@ static void sub_8016B48(u8 action)
     sub_80073B8(sFelicityBankWork->unk64.unk14);
 
     if (action != FELICITY_BANK_ACTION_WITHDRAW)
-        xxx_call_draw_string(12, 0, *gCommonDepositPrompt, sFelicityBankWork->unk64.unk14, 0);
+        xxx_call_draw_string(12, 0, gCommonDepositPrompt[0], sFelicityBankWork->unk64.unk14, 0);
     else
-        xxx_call_draw_string(12, 0, *gCommonWithdrawPrompt, sFelicityBankWork->unk64.unk14, 0);
+        xxx_call_draw_string(12, 0, gCommonWithdrawPrompt[0], sFelicityBankWork->unk64.unk14, 0);
 
     sub_8013C68(&sFelicityBankWork->unk64);
     sub_80073E0(sFelicityBankWork->unk64.unk14);

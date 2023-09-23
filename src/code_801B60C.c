@@ -308,7 +308,7 @@ static void sub_801BB5C(void)
     sUnknown_203B234->unkCC[loopMax].menuAction = 7;
 
     loopMax++;
-    sUnknown_203B234->unkCC[loopMax].text = *gCommonInfo;
+    sUnknown_203B234->unkCC[loopMax].text = gCommonInfo[0];
     sUnknown_203B234->unkCC[loopMax].menuAction = 8;
 
     loopMax++;
@@ -334,11 +334,11 @@ static void sub_801BC24(void)
     s32 loopMax;
 
     loopMax = 0;
-    sUnknown_203B234->unkCC[loopMax].text = *gCommonYes;
+    sUnknown_203B234->unkCC[loopMax].text = gCommonYes[0];
     sUnknown_203B234->unkCC[loopMax].menuAction = 2;
 
     loopMax++;
-    sUnknown_203B234->unkCC[loopMax].text = *gCommonNo;
+    sUnknown_203B234->unkCC[loopMax].text = gCommonNo[0];
     sUnknown_203B234->unkCC[loopMax].menuAction = 3;
 
     loopMax++;
