@@ -1,4 +1,6 @@
 #include "global.h"
+#include "code_802DE84.h"
+#include "code_802F204.h"
 #include "constants/input.h"
 #include "memory.h"
 #include "text1.h"
@@ -101,15 +103,12 @@ extern void sub_802F004();
 extern void sub_802F088();
 extern void sub_802F108(void);
 extern void sub_803B35C(WonderMail*, unkStruct_802C39C *);
-extern void sub_802DE84(unkStruct_802C39C *);
 extern void sub_802CDD4(u32);
 extern void sub_802CED8(u32);
 extern void sub_802CFD0(void);
 extern u8 sub_802CEBC(void);
 extern u32 sub_802CE5C(u32);
 extern void sub_802CF14(void);
-extern u32 sub_802DEE0(void);
-extern void sub_802DF24(void);
 extern void sub_802F6FC(void);
 extern void ProceedToNextRewardSceneState(void);
 extern void sub_802F300(void);

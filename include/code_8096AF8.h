@@ -3,5 +3,6 @@
 
 // code_8096AF8.s
 extern bool8 sub_8096E2C(void);
+extern void sub_8096EEC(void);
 
 #endif // GUARD_CODE_8096AF8_H

@@ -10,7 +10,6 @@ static const UnkTextStruct2 sUnknown_80DBE7C = {
 };
 
 static const u8 sUnknown_80DBE94[] = {1, 0, 7, 0};
-
 static const UnkTextStruct2 sUnknown_80DBE98 = {
     0, 0, 0, 0,
     6,

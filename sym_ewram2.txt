@@ -230,12 +230,8 @@ gUnknown_203B2F4: /* 203B2F4 (sub_802CDD4 - sub_802CFD0) */
 gUnknown_203B2F8: /* 203B2F8 (sub_802D098 - sub_802DADC) */
 	.space 0x4
 
-gUnknown_203B2FC: /* 203B2FC (sub_802DB28 - sub_802DE60) */
-	.space 0x4
-
-gUnknown_203B300: /* 203B300 (sub_802DE84 - sub_802DF88) */
-	.space 0x4
-
+.include "src/code_802DB28.o"
+.include "src/code_802DE84.o"
 .include "src/mailbox.o"
 .include "src/pelipper_board.o"
 

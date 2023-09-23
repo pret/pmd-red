@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_800D090.h"
 #include "code_80130A8.h"
+#include "code_802F204.h"
 #include "code_8094F88.h"
 #include "code_8097670.h"
 #include "constants/item.h"
@@ -40,8 +41,6 @@ extern struct unkStruct_203B2C8 *gUnknown_203B2C8;
 extern void sub_80920D8(u8 *buffer);
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
-extern u32 sub_802F298(void);
-extern void sub_802F2C0(void);
 extern u8 sub_8099394(u8 *);
 extern void sub_802B548(u32);
 
@@ -51,7 +50,6 @@ extern void sub_802B5B8(void);
 extern void sub_802B5FC(void);
 extern void sub_802B624(void);
 
-extern void sub_802F204(unkStruct_802F204 *, u32);
 extern void sub_803C37C(DungeonLocation *, u32, u8 *);
 extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
 

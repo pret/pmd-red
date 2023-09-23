@@ -1,5 +1,6 @@
-#include "constants/mailbox.h"
 #include "global.h"
+#include "constants/mailbox.h"
+#include "code_802DE84.h"
 #include "common_strings.h"
 #include "constants/dungeon.h"
 #include "constants/input.h"
@@ -110,7 +111,6 @@ ALIGNED(4) const u8 gUnknown_80E0108[] = _(
 
 ALIGNED(4) const u8 gUnknown_80E014C[] = "New Mail";
 ALIGNED(4) const u8 gUnknown_80E0158[] = "Old Mail";
-static const u8 wonder_mail_3_fill[] = "pksdir0";
 
 extern void sub_802D63C(void);
 extern void sub_802D5A4(void);
@@ -138,7 +138,6 @@ extern u8 *sub_8096DD8(void);
 extern u8 sub_8096C08(u8 *);
 extern void DrawJobListMenu(void);
 extern void sub_803B35C(WonderMail *, unkStruct_802C39C*);
-extern void sub_802DE84(unkStruct_802C39C *);
 extern void sub_802D73C(void);
 extern void sub_802C640(u32);
 extern void sub_802C4C8(u32, u32, u32);
@@ -154,9 +153,7 @@ extern u8 gUnknown_80DFDBC[];
 extern void sub_802CF5C(void);
 extern void sub_802CFD0(void);
 
-extern void sub_802DF24(void);
 extern void SetJobListState(u32);
-extern u32 sub_802DEE0(void);
 extern void ResetJobSlot(u8);
 u32 sub_802C598(u8 param_1);
 extern void sub_802C688(void);

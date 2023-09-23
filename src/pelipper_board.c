@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_802DE84.h"
 #include "mailbox.h"
 #include "pokemon.h"
 #include "items.h"
@@ -78,10 +79,7 @@ extern void sub_802C28C(u32);
 extern void DrawPelipperBoardJobMenu(void);
 extern void CreatePelipperAcceptedStatusBox(u32);
 extern void sub_803B35C(WonderMail *, unkStruct_802C39C *);
-extern void sub_802DE84(unkStruct_802C39C *);
 
-extern u32 sub_802DEE0(void);
-extern void sub_802DF24(void);
 extern WonderMail *GetPelipperBoardSlotInfo(u8);
 extern u8 HasNoPelipperBoardJobs(void);
 extern void sub_8096C80(void);

@@ -4,6 +4,7 @@
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
+#include "code_802F204.h"
 #include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
 #include "cpu.h"
@@ -164,7 +165,6 @@ const MenuItem gUnknown_80DEEE4[4] =
 extern void sub_8030810(u32);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E00(void);
-extern u32 sub_802F298();
 extern u32 sub_8030768(u32);
 extern s8 sub_80307EC(void);
 extern void sub_8030D40(u8, u32);
@@ -212,9 +212,7 @@ extern void sub_802A850();
 extern void sub_8030DE4();
 extern void sub_803084C();
 extern void sub_8031E10();
-extern void sub_802F2C0();
 extern void SetThankYouMailMenuState(u32);
-extern void sub_802F204(unkStruct_802F204 *, u32);
 extern void sub_803092C(void);
 extern s32 sub_8037B28(u32);
 extern u32 sub_8030894(void);

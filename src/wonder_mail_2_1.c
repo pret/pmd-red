@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_802DE84.h"
 #include "constants/input.h"
 #include "constants/mailbox.h"
 #include "input.h"
@@ -112,7 +113,6 @@ extern void sub_802CD38(void);
 extern void sub_802CDB8(void);
 extern void sub_802C928(void);
 extern void sub_802C9D8(void);
-extern void sub_802DE84(unkStruct_802C39C *);
 extern void sub_802CBAC(void);
 
 s32 CountAcceptedJobs(void);

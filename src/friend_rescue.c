@@ -5,6 +5,7 @@
 #include "code_801C8C4.h"
 #include "code_8023868.h"
 #include "code_8024458.h"
+#include "code_802F204.h"
 #include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
 #include "constants/monster.h"
@@ -24,8 +25,6 @@
 #include "text2.h"
 
 extern void SetFriendRescueMenuState(u32);
-extern void sub_802F2C0();
-extern u32 sub_802F298();
 
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
@@ -269,11 +268,9 @@ extern u32 sub_8039068(u32, u8 *passwordBuffer, unkStruct_203B480 *r0);
 
 extern void sub_803084C(void);
 extern void sub_8031E10(void);
-extern void sub_802F2C0(void);
 extern void sub_8030DE4(void);
 extern u8 sub_800D588(void);
 extern u32 sub_8023CE8(void);
-extern void sub_802F204(unkStruct_802F204 *, u32);
 extern u32 sub_80306A8(u32 wonderMailType, u32, UnkTextStruct2_sub *, u32);
 extern u32 sub_8030894(void);
 extern void sub_803092C(void);

@@ -140,7 +140,8 @@ SECTIONS {
         src/wonder_mail_2_mid.o(.text);
         src/wonder_mail_2_1.o(.text);
         src/wonder_mail_3.o(.text);
-        src/wonder_mail_802DF88.o(.text);
+        src/code_802DB28.o(.text);
+        src/code_802DE84.o(.text);
         src/mailbox.o(.text);
         src/pelipper_board.o(.text);
         src/wonder_mail_3_mid.o(.text);
@@ -455,7 +456,8 @@ SECTIONS {
         src/pokemon_news.o(.rodata);
         src/wonder_mail_2_1.o(.rodata);
         src/wonder_mail_3.o(.rodata);
-        src/wonder_mail_802DF88.o(.rodata);
+        src/code_802DB28.o(.rodata);
+        src/code_802DE84.o(.rodata);
         src/mailbox.o(.rodata);
         src/pelipper_board.o(.rodata);
         src/wonder_mail_3_mid.o(.rodata);

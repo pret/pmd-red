@@ -8,7 +8,6 @@
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
 #include "code_8094F88.h"
-#include "code_802C39C.h"
 #include "text_util.h"
 #include "text2.h"
 #include "code_800D090.h"
