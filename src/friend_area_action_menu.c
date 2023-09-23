@@ -49,7 +49,6 @@ extern void SetFriendAreaActionMenuState(u32);
 extern void PlaySound(u32);
 
 extern void sub_808D31C(PokemonStruct1 *);
-extern PokemonStruct1 *sub_808D3BC(void);
 extern u8 gUnknown_202DE58[];
 extern bool8 sub_808D750(s16 index_);
 extern void sub_808ED00(void);

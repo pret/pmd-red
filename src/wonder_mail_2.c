@@ -77,8 +77,6 @@ ALIGNED(4) const char gUnknown_80DFB14[] = _(
 	" Please give me a shout if\n"
 	"you would like to send {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.");
 
-ALIGNED(4) const char wonder_mail_2_fill[] = "pksdir0";
-
 u32 sub_802B2D4(void)
 {
   s32 iVar1;

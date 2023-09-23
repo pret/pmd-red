@@ -35,7 +35,6 @@ static EWRAM_DATA_2 unkStruct_203B2B8 *sUnknown_203B2B8 = {0};
 
 extern u32 sub_8026F04(PokemonStruct1 *);
 bool8 CanTakePokemonHeldItem(PokemonStruct1 *r0);
-extern PokemonStruct1 *sub_808D3BC(void);
 extern bool8 sub_808D750(s16 index_);
 extern void sub_808ED00(void);
 bool8 sub_8026E88(PokemonStruct1 *r0);

@@ -17,7 +17,6 @@ extern void sub_8096C80(void);
 extern void sub_8096D24(void);
 extern void sub_80965F4();
 extern void SortPelipperJobs();
-extern WonderMail *GetPelipperBoardSlotInfo(u8);
 u8 sub_8097318(s16 param_1);
 extern bool8 GenerateMailJobInfo(WonderMail *);
 

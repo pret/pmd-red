@@ -18,6 +18,7 @@
 #include "wonder_mail_3.h"
 #include "code_801B60C.h"
 #include "common_strings.h"
+#include "code_803B050.h"
 
 extern unkStruct_803B344 *sub_803B344(u8);
 
@@ -102,7 +103,6 @@ extern void sub_802F1E8(void);
 extern void sub_802F004();
 extern void sub_802F088();
 extern void sub_802F108(void);
-extern void sub_803B35C(WonderMail*, unkStruct_802C39C *);
 extern void sub_802CDD4(u32);
 extern void sub_802CED8(u32);
 extern void sub_802CFD0(void);

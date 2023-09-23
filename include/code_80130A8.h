@@ -6,6 +6,7 @@
 #include "structs/str_text.h"
 
 // code_80130A8.s
+extern void sub_8013E54(void);
 extern void sub_8013F84(void);
 extern void sub_80140B4(UnkTextStruct2 *);
 extern void sub_80140DC(void);

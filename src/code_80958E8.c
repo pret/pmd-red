@@ -10,11 +10,11 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "code_8094F88.h"
+#include "mailbox_8095F8C.h"
 
 extern bool8 sub_809017C(DungeonLocation *);
 extern u8 sub_803C1D0(DungeonLocation *, u8);
 extern bool8 sub_803C0DC(s16);
-extern void ResetMailboxSlot(u8);
 extern void ResetPelipperBoardSlot(u8);
 extern void ResetJobSlot(u8);
 extern bool8 ValidateWonderMail(WonderMail *);

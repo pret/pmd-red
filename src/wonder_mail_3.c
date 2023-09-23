@@ -17,6 +17,7 @@
 #include "code_80118A4.h"
 #include "code_80A26CC.h"
 #include "code_80958E8_1.h"
+#include "code_803B050.h"
 
 const UnkTextStruct2 gUnknown_80DFDD4 =
 {
@@ -130,14 +131,12 @@ extern void sub_802D1B8();
 extern void sub_802D2A8();
 
 
-extern bool8 IsMailinJobSlot(WonderMail *);
 extern u8 sub_8096F50(WonderMail *);
 extern u8 sub_802DAA8(void);
 extern u8 sub_802DADC(void);
 extern u8 *sub_8096DD8(void);
 extern u8 sub_8096C08(u8 *);
 extern void DrawJobListMenu(void);
-extern void sub_803B35C(WonderMail *, unkStruct_802C39C*);
 extern void sub_802D73C(void);
 extern void sub_802C640(u32);
 extern void sub_802C4C8(u32, u32, u32);
@@ -148,7 +147,6 @@ extern void sub_8096D24(void);
 extern u8 *sub_8096DE8(void);
 extern void AcceptJob(unkSubStruct_203B2F8 *);
 unkStruct_803B344 *sub_803B344(u8);
-extern void CreateRescueTitle(unkStruct_802C39C *);
 extern u8 gUnknown_80DFDBC[];
 extern void sub_802CF5C(void);
 extern void sub_802CFD0(void);

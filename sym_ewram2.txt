@@ -191,29 +191,11 @@ gUnknown_203B2C4: /* 203B2C4 (CreateThankYouMailPelipper - SetThankYouMailMenuSt
 gUnknown_203B2C8: /* 203B2C8 (sub_802B2D4 - sub_802B5B8) */
 	.space 0x4
 
-gUnknown_203B2CC: /* 203B2CC (sub_802B640 - GetNumPKMNNews) */
-	.space 0x4
-
-gUnknown_203B2D0: /* 203B2D0 (sub_802B640 - sub_802B81C) */
+.include "src/pokemon_news1.o"
+.include "src/pokemon_news2.o"
+.include "src/pokemon_news3.o"
+.include "src/wonder_mail_802C10C.o"
 	.space 0x2
-
-gUnknown_203B2D2: /* 203B2D2 (sub_802B640 - sub_802B81C) */
-	.space 0x2
-
-gUnknown_203B2D4: /* 203B2D4 (sub_802B9FC - sub_802BCC4) */
-	.space 0x4
-
-gUnknown_203B2D8: /* 203B2D8 (sub_802BD14 - CountEmptyMailSlots) */
-	.space 0x4
-
-gUnknown_203B2DC: /* 203B2DC (sub_802BD14 - sub_802BEDC) */
-	.space 0x4
-
-gUnknown_203B2E0: /* 203B2E0 (sub_802C10C - CountPelipperBoardSlots) */
-	.space 0x4
-
-gUnknown_203B2E4: /* 203B2E4 (sub_802C10C - sub_802C2D4) */
-	.space 0x4
 
 gUnknown_203B2E8: /* 203B2E8 (sub_802C4C8 - CountAcceptedJobs) */
 	.space 0x4

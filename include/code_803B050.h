@@ -21,7 +21,11 @@ typedef struct unkStruct_80E9F8C
 } unkStruct_80E9F8C;
 
 void CreateRescueDescription(unkStruct_802C39C *);
+void CreateRescueTitle(unkStruct_802C39C *);
 
 void sub_803B6B0(s32 x, s32 y, u8 index, u32);
+
+// code_803B050.s
+extern void sub_803B35C(WonderMail *, unkStruct_802C39C *);
 
 #endif // GUARD_CODE_803B050_H

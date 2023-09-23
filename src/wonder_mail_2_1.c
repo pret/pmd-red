@@ -12,11 +12,13 @@
 #include "wonder_mail_2_1.h"
 #include "code_80118A4.h"
 #include "code_80958E8_1.h"
+#include "code_803B050.h"
 
 extern struct unkStruct_203B2F0 *gUnknown_203B2F0;
 extern struct unkStruct_203B2E8* gUnknown_203B2E8;
-extern struct unkStruct_203B2E8* gUnknown_203B2E0;
-u16 gUnknown_203B2EC;
+extern u16 gUnknown_203B2EC;
+
+ALIGNED(4) static const char wonder_mail_2_fill4[] = "pksdir0";
 
 const UnkTextStruct2 gUnknown_80DFCE4 =
 {
@@ -100,12 +102,9 @@ static const u8 wonder_mail_fill1[] = "pksdir0";
 
 extern void sub_802CAA4(void);
 extern u8 IsJobSlotEmpty(u8);
-extern void sub_803B35C(WonderMail *, unkStruct_802C39C *);
-extern void CreateRescueTitle(unkStruct_802C39C *);
 
 extern void sub_802C6DC(void);
 extern void DrawJobListMenu(void);
-extern bool8 IsPelipperBoardSlotEmpty(u8);
 extern void SetJobListState(u32);
 extern void sub_802CC00(void);
 extern void sub_802CC70(void);
@@ -116,38 +115,6 @@ extern void sub_802C9D8(void);
 extern void sub_802CBAC(void);
 
 s32 CountAcceptedJobs(void);
-
-s32 CountPelipperBoardSlots(void)
-{
-  s32 index;
-  s32 counter = 0;
-  for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
-  {
-      if(!IsPelipperBoardSlotEmpty(index))
-      {
-          gUnknown_203B2E0->pelipperBoardSlots[counter] = index;
-          counter++;
-      }
-  }
-  return counter;
-}
-
-bool8 HasNoPelipperBoardJobs(void)
-{
-  s32 index;
-  for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
-  {
-      if(!IsPelipperBoardSlotEmpty(index))
-        return FALSE;
-  }
-  return TRUE;
-}
-
-
-
-
-
-// THIS IS A NEW FILE:
 
 
 
