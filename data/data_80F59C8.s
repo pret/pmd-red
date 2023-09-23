@@ -12045,7 +12045,8 @@ GroudonPreFightDialogue_9: @ 8102FC4
 
 .global gUnknown_8102FD0
 gUnknown_8102FD0: @ 8102FD0
-.string " A-$m3!\0"
+ @ The "A-" only makes sense when ARG_POKEMON_3 is "Alakazam" (which it is when this is used). Kinda funny.
+.string " A-{ARG_POKEMON_3}!\0"
 
 .global GroudonPreFightDialogue_10
 GroudonPreFightDialogue_10: @ 8102FD8
