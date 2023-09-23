@@ -178,36 +178,21 @@ gUnknown_203B2AA: /* 203B2AA (sub_8023868 - sub_8023C60) */
 .include "src/luminous_cave.o"
 .include "src/friend_list_menu.o"
 .include "src/party_list_menu.o"
-
-gUnknown_203B2BC: /* 203B2BC (sub_8027074 - sub_8027EB8) */
-	.space 0x4
-
-gUnknown_203B2C0: /* 203B2C0 (sub_8027F88 - sub_8029AF4) */
-	.space 0x4
-
-gUnknown_203B2C4: /* 203B2C4 (CreateThankYouMailPelipper - SetThankYouMailMenuState) */
-	.space 0x4
-
-gUnknown_203B2C8: /* 203B2C8 (sub_802B2D4 - sub_802B5B8) */
-	.space 0x4
-
+.include "src/friend_area_action_menu.o"
+.include "src/wonder_mail.o"
+.include "src/thank_you_wonder_mail.o"
+.include "src/wonder_mail_2.o"
 .include "src/pokemon_news1.o"
 .include "src/pokemon_news2.o"
 .include "src/pokemon_news3.o"
 .include "src/wonder_mail_802C10C.o"
+.include "src/wonder_mail_2_1.o"
 	.space 0x2
-
-gUnknown_203B2E8: /* 203B2E8 (sub_802C4C8 - CountAcceptedJobs) */
-	.space 0x4
-
-gUnknown_203B2EC: /* 203B2EC (sub_802C4C8 - sub_802C688) */
-	.space 0x4
 
 gUnknown_203B2F0: /* 203B2F0 (InitializeJobListMenu - sub_802CD38) */
 	.space 0x4
 
-gUnknown_203B2F4: /* 203B2F4 (sub_802CDD4 - sub_802CFD0) */
-	.space 0x4
+.include "src/wonder_mail_3.o"
 
 gUnknown_203B2F8: /* 203B2F8 (sub_802D098 - sub_802DADC) */
 	.space 0x4
@@ -216,9 +201,7 @@ gUnknown_203B2F8: /* 203B2F8 (sub_802D098 - sub_802DADC) */
 .include "src/code_802DE84.o"
 .include "src/mailbox.o"
 .include "src/pelipper_board.o"
-
-gUnknown_203B30C: /* 203B30C (sub_802EF48 - sub_802F184) */
-	.space 0x4
+.include "src/wonder_mail_3_mid.o"
 
 gUnknown_203B310: /* 203B310 (sub_802F204 - ProceedToNextRewardSceneState) */
 	.space 0x4
@@ -228,16 +211,9 @@ gUnknown_203B314: /* 203B314 (sub_802F73C - sub_802FA50) */
 
 .include "src/makuhita_dojo1.o"
 .include "src/makuhita_dojo2.o"
-
-gUnknown_203B320: /* 203B320 (sub_80306A8 - sub_8030A74) */
-	.space 0x4
-
-gUnknown_203B324: /* 203B324 (sub_8030D40 - sub_8030E48) */
-	.space 0x4
-
-gUnknown_203B328: /* 203B328 (sub_8030F58 - sub_80313D8) */
-	.space 0x4
-
+.include "src/wonder_mail_4.o"
+.include "src/wonder_mail_5.o"
+.include "src/wonder_mail_6.o"
 .include "src/post_office_guide1.o"
 .include "src/post_office_guide2.o"
 .include "src/code_8031D70.o"

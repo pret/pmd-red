@@ -32,7 +32,7 @@ struct unkStruct_203B30C
     MenuItem unkB0[8];
     UnkTextStruct2 unkF0[4];
 };
-extern struct unkStruct_203B30C *gUnknown_203B30C;
+static EWRAM_DATA_2 struct unkStruct_203B30C *gUnknown_203B30C = {0};
 
 struct unkStruct_203B310
 {

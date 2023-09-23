@@ -26,7 +26,8 @@ struct unkStruct_203B328
     /* 0x116 */ u8 unk116;
     u32 wonderMailType;
 };
-extern struct unkStruct_203B328 *gUnknown_203B328;
+static EWRAM_DATA_2 struct unkStruct_203B328 *gUnknown_203B328 = {0};
+
 extern unkStruct_203B480 *gUnknown_203B480;
 
 const MenuItem gUnknown_80E0948[] = 

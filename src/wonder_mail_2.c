@@ -36,7 +36,7 @@ struct unkStruct_203B2C8
     u32 fill13C;
 };
 
-extern struct unkStruct_203B2C8 *gUnknown_203B2C8;
+static EWRAM_DATA_2 struct unkStruct_203B2C8 *sUnknown_203B2C8 = {0};
 
 extern void sub_80920D8(u8 *buffer);
 extern char gUnknown_202E5D8[0x50];
@@ -84,19 +84,19 @@ u32 sub_802B2D4(void)
 
   ResetUnusedInputStruct();
   sub_800641C(NULL, TRUE, TRUE);
-  gUnknown_203B2C8 = MemoryAlloc(sizeof(struct unkStruct_203B2C8),8);
-  MemoryFill8((u8 *)gUnknown_203B2C8,0,sizeof(struct unkStruct_203B2C8));
-  gUnknown_203B2C8->unk1 = -1;
+  sUnknown_203B2C8 = MemoryAlloc(sizeof(struct unkStruct_203B2C8),8);
+  MemoryFill8((u8 *)sUnknown_203B2C8,0,sizeof(struct unkStruct_203B2C8));
+  sUnknown_203B2C8->unk1 = -1;
   CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
-  gUnknown_203B2C8->faceFile = faceFile;
-  gUnknown_203B2C8->faceData  = faceFile->data;
-  gUnknown_203B2C8->unk10 = 0;
-  gUnknown_203B2C8->unk11 = 0;
-  gUnknown_203B2C8->unk12 = 0;
-  gUnknown_203B2C8->unkC = 2;
-  gUnknown_203B2C8->unkE = 8;
-  if (sub_8099394(&gUnknown_203B2C8->unk1) == 1) {
+  sUnknown_203B2C8->faceFile = faceFile;
+  sUnknown_203B2C8->faceData  = faceFile->data;
+  sUnknown_203B2C8->unk10 = 0;
+  sUnknown_203B2C8->unk11 = 0;
+  sUnknown_203B2C8->unk12 = 0;
+  sUnknown_203B2C8->unkC = 2;
+  sUnknown_203B2C8->unkE = 8;
+  if (sub_8099394(&sUnknown_203B2C8->unk1) == 1) {
     sub_802B548(0);
     iVar1  = 1;
   }
@@ -107,7 +107,7 @@ u32 sub_802B2D4(void)
 
 u32 sub_802B358(void)
 {
-  switch(gUnknown_203B2C8->currState) {
+  switch(sUnknown_203B2C8->currState) {
     case 0:
         sub_802B560();
         break;
@@ -131,11 +131,11 @@ u32 sub_802B358(void)
 
 void sub_802B3B8(void)
 {
-    if(gUnknown_203B2C8 != NULL)
+    if(sUnknown_203B2C8 != NULL)
     {
-        CloseFile(gUnknown_203B2C8->faceFile);
-        MemoryFree(gUnknown_203B2C8);
-        gUnknown_203B2C8 = NULL;
+        CloseFile(sUnknown_203B2C8->faceFile);
+        MemoryFree(sUnknown_203B2C8);
+        sUnknown_203B2C8 = NULL;
     }
 }
 
@@ -149,7 +149,7 @@ void sub_802B3E0(void)
   char *monName;
   char teamNameBuffer[40];
 
-  switch(gUnknown_203B2C8->currState) {
+  switch(sUnknown_203B2C8->currState) {
       case 0:
         if (sub_80023E4(0)) {
             // Copy Team Name to buffer
@@ -160,35 +160,35 @@ void sub_802B3E0(void)
             strcpy(teamNameBuffer,gRescueTeamNamePlaceholder);
         }
         // Print and expand placeholders?
-        sprintfStatic(gUnknown_203B2C8->teamName,gUnknown_80DF9F8,teamNameBuffer);
+        sprintfStatic(sUnknown_203B2C8->teamName,gUnknown_80DF9F8,teamNameBuffer);
         // Display to screen with Pelipper face
-        sub_80141B4(gUnknown_203B2C8->teamName, 0, &gUnknown_203B2C8->faceFile, 0x10d);
+        sub_80141B4(sUnknown_203B2C8->teamName, 0, &sUnknown_203B2C8->faceFile, 0x10d);
         break;
       case 1:
         monName = GetMonSpecies(MONSTER_PELIPPER);
-        strcpy(gUnknown_203B2C8->unk114.clientName, monName);
-        gUnknown_203B2C8->unk114.clientSpecies = MONSTER_PELIPPER;
-        gUnknown_203B2C8->unk114.unk16 = 2;
-        gUnknown_203B2C8->unk114.moneyReward = 0;
+        strcpy(sUnknown_203B2C8->unk114.clientName, monName);
+        sUnknown_203B2C8->unk114.clientSpecies = MONSTER_PELIPPER;
+        sUnknown_203B2C8->unk114.unk16 = 2;
+        sUnknown_203B2C8->unk114.moneyReward = 0;
         sub_8097790();
-        mail = GetMailatIndex(gUnknown_203B2C8->unk1);
-        sub_803C37C(&mail->unk4.dungeon, 0, gUnknown_203B2C8->unk114.itemRewards);
-        gUnknown_203B2C8->unk114.teamRankPtsReward = GetDungeonTeamRankPts(&mail->unk4.dungeon, 0);
-        gUnknown_203B2C8->unk114.itemRewards[1] = ITEM_NOTHING;
-        gUnknown_203B2C8->unk114.itemRewards[2] = ITEM_NOTHING;
-        gUnknown_203B2C8->unk114.quantity = 10;
-        gUnknown_203B2C8->unk114.friendAreaReward = 0;
-        sub_802F204(&gUnknown_203B2C8->unk114, 0);
+        mail = GetMailatIndex(sUnknown_203B2C8->unk1);
+        sub_803C37C(&mail->unk4.dungeon, 0, sUnknown_203B2C8->unk114.itemRewards);
+        sUnknown_203B2C8->unk114.teamRankPtsReward = GetDungeonTeamRankPts(&mail->unk4.dungeon, 0);
+        sUnknown_203B2C8->unk114.itemRewards[1] = ITEM_NOTHING;
+        sUnknown_203B2C8->unk114.itemRewards[2] = ITEM_NOTHING;
+        sUnknown_203B2C8->unk114.quantity = 10;
+        sUnknown_203B2C8->unk114.friendAreaReward = 0;
+        sub_802F204(&sUnknown_203B2C8->unk114, 0);
         break;
       case 2:
         // I hope you will keep on rescuing your friends
         // I must save your adventure
-        sub_80141B4(gUnknown_80DFAA8, 0, &gUnknown_203B2C8->faceFile, 0x10d);
+        sub_80141B4(gUnknown_80DFAA8, 0, &sUnknown_203B2C8->faceFile, 0x10d);
         break;
       case 4:
         // Oh yes, that's right. Please don't forget to send an A-OK Mail
         // to the friend you just rescued
-        sub_80141B4(gUnknown_80DFB14, 0, &gUnknown_203B2C8->faceFile, 0x10d);
+        sub_80141B4(gUnknown_80DFB14, 0, &sUnknown_203B2C8->faceFile, 0x10d);
       case 3:
       case 5:
         break;
@@ -197,7 +197,7 @@ void sub_802B3E0(void)
 
 void sub_802B548(u32 newState)
 {
-    gUnknown_203B2C8->currState = newState;
+    sUnknown_203B2C8->currState = newState;
     nullsub_132();
     sub_802B3E0();
 }
@@ -232,7 +232,7 @@ void sub_802B5B8(void)
 
   if (sub_80144A4(&temp) == 0) {
     uVar2 = sub_8011C34();
-    mail = GetMailatIndex(gUnknown_203B2C8->unk1);
+    mail = GetMailatIndex(sUnknown_203B2C8->unk1);
     mail->mailType = WONDER_MAIL_TYPE_AOK;
     mail->unk28 = uVar2;
     sub_802B548(3);

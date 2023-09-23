@@ -14,9 +14,10 @@
 #include "code_80958E8_1.h"
 #include "code_803B050.h"
 
+static EWRAM_DATA_2 struct unkStruct_203B2E8* gUnknown_203B2E8 = {0};
+static EWRAM_DATA_2 u16 gUnknown_203B2EC = {0};
+
 extern struct unkStruct_203B2F0 *gUnknown_203B2F0;
-extern struct unkStruct_203B2E8* gUnknown_203B2E8;
-extern u16 gUnknown_203B2EC;
 
 ALIGNED(4) static const char wonder_mail_2_fill4[] = "pksdir0";
 

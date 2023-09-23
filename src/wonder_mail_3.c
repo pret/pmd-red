@@ -19,6 +19,10 @@
 #include "code_80958E8_1.h"
 #include "code_803B050.h"
 
+static EWRAM_DATA_2 unkStruct_203B2F4 *sUnknown_203B2F4 = {0};
+
+extern unkStruct_203B2F8 *gUnknown_203B2F8;
+
 const UnkTextStruct2 gUnknown_80DFDD4 =
 {
     0x00, 0x00, 0x00, 0x00,
@@ -348,19 +352,19 @@ void sub_802CDB8(void)
 
 bool8 sub_802CDD4(u32 r0)
 {
-    if(gUnknown_203B2F4 == NULL)
+    if(sUnknown_203B2F4 == NULL)
     {
-        gUnknown_203B2F4 = MemoryAlloc(sizeof(unkStruct_203B2F4), 8);
+        sUnknown_203B2F4 = MemoryAlloc(sizeof(unkStruct_203B2F4), 8);
     }
-    gUnknown_203B2F4->unk34 = r0;
-    gUnknown_203B2F4->unk38 = &gUnknown_203B2F4->unk3C[gUnknown_203B2F4->unk34];
-    sub_8006518(gUnknown_203B2F4->unk3C);
-    gUnknown_203B2F4->unk3C[gUnknown_203B2F4->unk34] = gUnknown_80DFDA4;
-    gUnknown_203B2F4->unk38->unk14 = gUnknown_203B2F4->unk9C;
-    sub_8012D34(gUnknown_203B2F4->unk38, 4);
+    sUnknown_203B2F4->unk34 = r0;
+    sUnknown_203B2F4->unk38 = &sUnknown_203B2F4->unk3C[sUnknown_203B2F4->unk34];
+    sub_8006518(sUnknown_203B2F4->unk3C);
+    sUnknown_203B2F4->unk3C[sUnknown_203B2F4->unk34] = gUnknown_80DFDA4;
+    sUnknown_203B2F4->unk38->unk14 = sUnknown_203B2F4->unk9C;
+    sub_8012D34(sUnknown_203B2F4->unk38, 4);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2F4->unk3C, TRUE, TRUE);
-    sub_8013848(&gUnknown_203B2F4->input, 5, 4, r0);
+    sub_800641C(sUnknown_203B2F4->unk3C, TRUE, TRUE);
+    sub_8013848(&sUnknown_203B2F4->input, 5, 4, r0);
     sub_802CF5C();
     sub_802CFD0();
     return TRUE;
@@ -370,12 +374,12 @@ u32 sub_802CE5C(u8 r0)
 {
     if(r0 == 0)
     {
-        sub_8013660(&gUnknown_203B2F4->input);
+        sub_8013660(&sUnknown_203B2F4->input);
         return 0;
     }
     else
     {
-        switch(GetKeyPress(&gUnknown_203B2F4->input))
+        switch(GetKeyPress(&sUnknown_203B2F4->input))
         {
             case INPUT_B_BUTTON:
                 PlayMenuSoundEffect(1);
@@ -383,7 +387,7 @@ u32 sub_802CE5C(u8 r0)
             case INPUT_A_BUTTON:
                 return 3;
             default:
-                if(sub_80138B8(&gUnknown_203B2F4->input, 1) != 0)
+                if(sub_80138B8(&sUnknown_203B2F4->input, 1) != 0)
                 {
                     sub_802CF5C();
                     sub_802CFD0();
@@ -399,29 +403,29 @@ u32 sub_802CE5C(u8 r0)
 
 u8 sub_802CEBC(void)
 {
-    return (gUnknown_203B2F4->input.unk1E * gUnknown_203B2F4->input.unk1C) + gUnknown_203B2F4->input.menuIndex;
+    return (sUnknown_203B2F4->input.unk1E * sUnknown_203B2F4->input.unk1C) + sUnknown_203B2F4->input.menuIndex;
 }
 
 void sub_802CED8(u8 r0)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2F4->unk3C, FALSE, FALSE);
-    sub_8013984(&gUnknown_203B2F4->input);
+    sub_800641C(sUnknown_203B2F4->unk3C, FALSE, FALSE);
+    sub_8013984(&sUnknown_203B2F4->input);
     sub_802CF5C();
     sub_802CFD0();
     if(r0)
-        AddMenuCursorSprite(&gUnknown_203B2F4->input);
+        AddMenuCursorSprite(&sUnknown_203B2F4->input);
 }
 
 void sub_802CF14(void)
 {
-    if(gUnknown_203B2F4)
+    if(sUnknown_203B2F4)
     {
-        gUnknown_203B2F4->unk3C[gUnknown_203B2F4->unk34] = gUnknown_80DFD8C;
+        sUnknown_203B2F4->unk3C[sUnknown_203B2F4->unk34] = gUnknown_80DFD8C;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B2F4->unk3C, TRUE, TRUE);
-        MemoryFree(gUnknown_203B2F4);
-        gUnknown_203B2F4 = NULL;
+        sub_800641C(sUnknown_203B2F4->unk3C, TRUE, TRUE);
+        MemoryFree(sUnknown_203B2F4);
+        sUnknown_203B2F4 = NULL;
     }
 }
 
@@ -482,7 +486,7 @@ void sub_802CF5C(void)
 	"\tpop {r0}\n"
 	"\tbx r0\n"
 	"\t.align 2, 0\n"
-"_0802CFCC: .4byte gUnknown_203B2F4");
+"_0802CFCC: .4byte sUnknown_203B2F4");
 }
 
 
@@ -493,25 +497,25 @@ void sub_802CFD0(void)
   s32 r5;
   s32 r4;
   
-  sub_8008C54(gUnknown_203B2F4->unk34);
-  sub_80073B8(gUnknown_203B2F4->unk34);
-  r5 = r4 = gUnknown_203B2F4->input.unk1E * 8 + 10;
-  xxx_call_draw_string(r5,0,gUnknown_80DFDBC,gUnknown_203B2F4->unk34,0); // RESCUE EVENT
+  sub_8008C54(sUnknown_203B2F4->unk34);
+  sub_80073B8(sUnknown_203B2F4->unk34);
+  r5 = r4 = sUnknown_203B2F4->input.unk1E * 8 + 10;
+  xxx_call_draw_string(r5,0,gUnknown_80DFDBC,sUnknown_203B2F4->unk34,0); // RESCUE EVENT
   r4 -= 6;
-  r5 = r4 + (gUnknown_203B2F4->unk9C[2] * 8);
-  sub_8012BC4(r5,0,gUnknown_203B2F4->input.unk1E + 1,2,7,gUnknown_203B2F4->unk34);
+  r5 = r4 + (sUnknown_203B2F4->unk9C[2] * 8);
+  sub_8012BC4(r5,0,sUnknown_203B2F4->input.unk1E + 1,2,7,sUnknown_203B2F4->unk34);
 
-  for(r5 = 0; r5 < gUnknown_203B2F4->input.unk1A; r5++)
+  for(r5 = 0; r5 < sUnknown_203B2F4->input.unk1A; r5++)
   {
-        iVar1 = sub_803B344(gUnknown_203B2F4->input.unk1E * gUnknown_203B2F4->input.unk1C + r5);
-        local.unk0[0] = gUnknown_203B2F4->unk34;
-        local.y = sub_8013800(&gUnknown_203B2F4->input, r5);
+        iVar1 = sub_803B344(sUnknown_203B2F4->input.unk1E * sUnknown_203B2F4->input.unk1C + r5);
+        local.unk0[0] = sUnknown_203B2F4->unk34;
+        local.y = sub_8013800(&sUnknown_203B2F4->input, r5);
         sub_803B35C(&iVar1->mail,&local);
         local.unk43 = 1;
         local.unk4C = iVar1->unk14;
         CreateRescueTitle(&local);
   }
-  sub_80073E0(gUnknown_203B2F4->unk34);
+  sub_80073E0(sUnknown_203B2F4->unk34);
 }
 
 
