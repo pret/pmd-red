@@ -57,7 +57,7 @@ _08009CA8:
 	ands r1, r2
 	b _08009CBE
 	.align 2, 0
-_08009CB0: .4byte gUnknown_80B8AE4
+_08009CB0: .4byte gFastSinLookup
 _08009CB4: .4byte 0x000003ff
 _08009CB8:
 	ldr r0, _08009CC8
@@ -70,7 +70,7 @@ _08009CBE:
 	ldrsh r0, [r1, r2]
 	b _08009CFE
 	.align 2, 0
-_08009CC8: .4byte gUnknown_80B8AE4
+_08009CC8: .4byte gFastSinLookup
 _08009CCC: .4byte 0x000003ff
 _08009CD0:
 	ldr r0, _08009CD8
@@ -78,7 +78,7 @@ _08009CD0:
 	ands r1, r2
 	b _08009CE6
 	.align 2, 0
-_08009CD8: .4byte gUnknown_80B8AE4
+_08009CD8: .4byte gFastSinLookup
 _08009CDC: .4byte 0x000003ff
 _08009CE0:
 	ldr r0, _08009CF4
@@ -92,7 +92,7 @@ _08009CE6:
 	negs r0, r0
 	b _08009CFE
 	.align 2, 0
-_08009CF4: .4byte gUnknown_80B8AE4
+_08009CF4: .4byte gFastSinLookup
 _08009CF8: .4byte 0x000003ff
 _08009CFC:
 	movs r0, 0
@@ -132,7 +132,7 @@ _08009D30:
 	bics r1, r2
 	b _08009D72
 	.align 2, 0
-_08009D38: .4byte gUnknown_80B8AE4
+_08009D38: .4byte gFastSinLookup
 _08009D3C: .4byte 0x000003ff
 _08009D40:
 	ldr r0, _08009D48
@@ -140,7 +140,7 @@ _08009D40:
 	ands r1, r2
 	b _08009D56
 	.align 2, 0
-_08009D48: .4byte gUnknown_80B8AE4
+_08009D48: .4byte gFastSinLookup
 _08009D4C: .4byte 0x000003ff
 _08009D50:
 	ldr r0, _08009D64
@@ -154,7 +154,7 @@ _08009D56:
 	negs r0, r0
 	b _08009D86
 	.align 2, 0
-_08009D64: .4byte gUnknown_80B8AE4
+_08009D64: .4byte gFastSinLookup
 _08009D68: .4byte 0x000003ff
 _08009D6C:
 	ldr r0, _08009D7C
@@ -167,7 +167,7 @@ _08009D72:
 	ldrsh r0, [r1, r2]
 	b _08009D86
 	.align 2, 0
-_08009D7C: .4byte gUnknown_80B8AE4
+_08009D7C: .4byte gFastSinLookup
 _08009D80: .4byte 0x000003ff
 _08009D84:
 	movs r0, 0
@@ -685,7 +685,7 @@ _0800A0E2:
 	ldr r0, [r1]
 	b _0800A252
 	.align 2, 0
-_0800A0EC: .4byte gUnknown_80B92E4
+_0800A0EC: .4byte gFastUnknownFn1Lookup
 _0800A0F0:
 	adds r1, r2, 0
 	cmp r2, 0
@@ -714,7 +714,7 @@ _0800A112:
 	movs r0, 0x40
 	b _0800A250
 	.align 2, 0
-_0800A120: .4byte gUnknown_80B92E4
+_0800A120: .4byte gFastUnknownFn1Lookup
 _0800A124:
 	negs r3, r3
 	cmp r2, r3
@@ -741,7 +741,7 @@ _0800A146:
 	movs r0, 0x80
 	b _0800A250
 	.align 2, 0
-_0800A154: .4byte gUnknown_80B92E4
+_0800A154: .4byte gFastUnknownFn1Lookup
 _0800A158:
 	adds r1, r2, 0
 	cmp r2, 0
@@ -770,7 +770,7 @@ _0800A17A:
 	adds r0, 0x40
 	b _0800A252
 	.align 2, 0
-_0800A188: .4byte gUnknown_80B92E4
+_0800A188: .4byte gFastUnknownFn1Lookup
 _0800A18C:
 	negs r2, r2
 	cmp r3, 0
@@ -795,7 +795,7 @@ _0800A1AA:
 	lsls r0, 1
 	b _0800A250
 	.align 2, 0
-_0800A1B8: .4byte gUnknown_80B92E4
+_0800A1B8: .4byte gFastUnknownFn1Lookup
 _0800A1BC:
 	adds r1, r2, 0
 	cmp r2, 0
@@ -824,7 +824,7 @@ _0800A1DE:
 	adds r0, 0xC0
 	b _0800A252
 	.align 2, 0
-_0800A1EC: .4byte gUnknown_80B92E4
+_0800A1EC: .4byte gFastUnknownFn1Lookup
 _0800A1F0:
 	negs r3, r3
 	cmp r2, r3
@@ -851,7 +851,7 @@ _0800A212:
 	adds r0, 0x80
 	b _0800A252
 	.align 2, 0
-_0800A220: .4byte gUnknown_80B92E4
+_0800A220: .4byte gFastUnknownFn1Lookup
 _0800A224:
 	adds r0, r2, 0
 	cmp r0, 0
@@ -886,7 +886,7 @@ _0800A254:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0800A258: .4byte gUnknown_80B92E4
+_0800A258: .4byte gFastUnknownFn1Lookup
 	thumb_func_end sub_800A0B0
 
 	thumb_func_start sub_800A25C
