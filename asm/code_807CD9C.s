@@ -408,7 +408,7 @@ _0807D0DE:
 	ldr r0, [sp, 0x10]
 	str r4, [r0, 0x4]
 	mov r0, r8
-	bl sub_8009C7C
+	bl sin_abs_4096
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -1406,7 +1406,7 @@ _0807D8B0:
 	adds r0, r4, 0
 	bl IncreaseEntityPixelPos
 	mov r0, r10
-	bl sub_8009C7C
+	bl sin_abs_4096
 	add r2, sp, 0x20
 	adds r2, r5
 	lsls r1, r0, 1

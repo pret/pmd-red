@@ -2173,7 +2173,7 @@ _0807F794:
 	cmp r0, 0
 	beq _0807F7E6
 	ldr r0, [sp, 0x100]
-	bl sub_8009C7C
+	bl sin_abs_4096
 	lsls r0, 5
 	mov r3, r8
 	str r0, [r3, 0x1C]

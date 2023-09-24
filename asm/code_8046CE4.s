@@ -755,7 +755,7 @@ _08047726:
 	adds r0, 0xFF
 _08047732:
 	asrs r0, 8
-	bl sub_8009C7C
+	bl sin_abs_4096
 	ldr r2, [sp, 0x30]
 	adds r1, r0, 0
 	muls r1, r2

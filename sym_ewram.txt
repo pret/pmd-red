@@ -155,6 +155,7 @@ gUnknown_202D240: /* 202D240 (code_8009804) */
 gUnknown_202D2A0: /* 202D2A0 (code_8009804) */
 	.space 0x4
 
+	.include "src/math.o"
     .include "src/file_system.o"
     .include "src/decompress.o"
     .include "src/main.o"

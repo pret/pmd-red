@@ -28,8 +28,8 @@ extern const s16 gUnknown_80B82AA[16 * 10];
 extern const s16 gUnknown_80B83EA[16 * 10];
 
 // code_8009804.s
-extern s32 sub_8009C7C(s32);
-extern s32 sub_8009D04(s32);
+extern s32 sin_abs_4096(s32);
+extern s32 cos_4096(s32);
 
 static void sub_800561C(struct unkStructFor800561C *, s32, s32, u8 *);
 s32 *sub_8005674(struct unkStructFor800561C *, s32);
@@ -527,7 +527,7 @@ void sub_8005838(s32 *a0, u8 kind)
                 *r3++ = *r2++;
                 *r3++ = 256;
             }
-            { 
+            {
                 s32 r8;
                 s32 iVar3;
                 s32 sp14;
@@ -550,20 +550,20 @@ void sub_8005838(s32 *a0, u8 kind)
                 val1 = gUnknown_2026E40;
                 val2 = gUnknown_2026E44;
                 val3 = gUnknown_2026E48;
-                
+
                 spC = 0x400 / (val3 / 256 + 1);
                 iVar11 = val2 / 256;
 
                 j = iVar11;
                 k = iVar11;
                 for (sp10 = 0; sp10 < 0x400; sp10 += spC) {
-                    tmp1 = val3 * sub_8009C7C(sp10) / 256;
+                    tmp1 = val3 * sin_abs_4096(sp10) / 256;
 
                     sp14 = (val2 + tmp1) / 256;
                     r8 = (val2 - tmp1) / 256;
 
                     if (j < sp14 || k > r8) {
-                        tmp2 = val3 * sub_8009D04(sp10) / 256;
+                        tmp2 = val3 * cos_4096(sp10) / 256;
 
                         iVar5 = (val1 - tmp2) / 256;
                         iVar3 = (val1 + tmp2) / 256;
@@ -1558,7 +1558,7 @@ NAKED void sub_8005838(s32 *a0, u8 kind)
 "_08005F62:\n"
     "\tadds r0, r3, 0\n"
     "\tstr r3, [sp, 0x10]\n"
-    "\tbl sub_8009C7C\n"
+    "\tbl sin_abs_4096\n"
     "\tldr r1, [sp, 0x8]\n"
     "\tmuls r0, r1\n"
     "\tldr r3, [sp, 0x10]\n"
@@ -1594,7 +1594,7 @@ NAKED void sub_8005838(s32 *a0, u8 kind)
 "_08005FA4:\n"
     "\tadds r0, r3, 0\n"
     "\tstr r3, [sp, 0x10]\n"
-    "\tbl sub_8009D04\n"
+    "\tbl cos_4096\n"
     "\tldr r2, [sp, 0x8]\n"
     "\tmuls r0, r2\n"
     "\tldr r3, [sp, 0x10]\n"

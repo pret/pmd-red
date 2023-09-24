@@ -5299,7 +5299,7 @@ _080551F2:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl EncoreMoveAction 
+	bl EncoreMoveAction
 	b _080554BA
 _08055200:
 	adds r0, r7, 0
@@ -8219,7 +8219,7 @@ _0805694A:
 	adds r0, 0xFF
 _0805695E:
 	asrs r0, 8
-	bl sub_8009C7C
+	bl sin_abs_4096
 	ldr r2, [sp, 0x38]
 	adds r3, r0, 0
 	muls r3, r2
