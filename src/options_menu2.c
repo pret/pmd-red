@@ -70,8 +70,8 @@ u32 sub_801E218(void)
             break;
     }
 
-    // == 1 is needed for matching
-    if (sub_80138B8(&sUnknown_203B260->input, 1) != 0 || flag == TRUE) {
+    // == TRUE is needed for matching
+    if (sub_80138B8(&sUnknown_203B260->input, 1) || flag == TRUE) {
         nullsub_38();
         CreateOptionsMenu();
         return 1;

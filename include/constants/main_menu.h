@@ -4,9 +4,9 @@
 enum MainMenuScreens
 {
     MENU_MAIN_SCREEN = 1,
-    //
+    // 2
     MENU_NEW_GAME = 3,
-    //
+    // 4 - 5
     MENU_AWAITING_RESCUE = 6,
     MENU_CONTINUE, // used by Revive Team/Continue
     MENU_DELETE_SAVE_PROMPT,
@@ -25,7 +25,7 @@ enum MainMenuScreens
     // NOTE: 27 - 34 used by Rescue Password Menu
     MENU_DISPLAY_RESCUE_PASSWORD = 33,
     MENU_RESCUE_PASSWORD_ENTRY,
-    //
+    // 35 - 45
     MENU_DELETE_SAVE = 46,
     MENU_DEBUG_DUNGEON,
     MENU_DEBUG_FIELD,
@@ -33,7 +33,6 @@ enum MainMenuScreens
     MENU_DEBUG_FIELD_SCRIPT,
     MENU_DEBUG_DEBUG_MENU,
     MENU_DEBUG_UNKNOWN_1,
-    //
     MENU_NO_SCREEN_CHANGE = 65500 // (s16)-36
 };
 
