@@ -61,22 +61,17 @@ typedef struct unkStruct_203B2F8
 enum WonderMailRescueStates
 {
     INITIAL_WONDER_MAIL_CHECK = 0,
-    // 1 is ??
+    // 1
     WONDER_MAIL_EXIT = 2,
-    DUPLICATE_WONDER_MAIL = 3,
-    DUPLICATE_WONDER_MAIL_1 = 4,
-    // 5 is ??
-    // 6 is ??
-    // 7 is ??
+    DUPLICATE_WONDER_MAIL,
+    DUPLICATE_WONDER_MAIL_1,
+    // 5 - 7
     RECEIVE_WONDER_MAIL = 8,
-    // 9 is ??
+    // 9
     JOB_LIST_FULL = 10,
-    DRAW_JOB_LIST = 11,
-    DRAW_JOB_LIST_1 = 12,
-    // 13 is ??
-    // 14 is ??
-    // 15 is ??
-    // 16 is ??
+    DRAW_JOB_LIST,
+    DRAW_JOB_LIST_1,
+    // 13 - 16
 };
 
 u32 sub_802D098(unkSubStruct_203B2F8 *mail);

@@ -312,20 +312,22 @@ enum ShopkeeperMode
 
 enum AIObjective
 {
+    // 0
     AI_CHASE_TARGET = 1,
-    AI_CHASE_REMEMBERED_TARGET = 2,
-    AI_ROAM = 3,
-    AI_LEAVE_ROOM = 4,
-    AI_RUN_AWAY = 5,
-    AI_STAND_STILL = 6,
-    AI_TAKE_ITEM = 7
+    AI_CHASE_REMEMBERED_TARGET,
+    AI_ROAM,
+    AI_LEAVE_ROOM,
+    AI_RUN_AWAY,
+    AI_STAND_STILL,
+    AI_TAKE_ITEM
 };
 
 enum ClientType
 {
-    CLIENT_TYPE_NONE = 0,
-    CLIENT_TYPE_CLIENT = 1, // Used for mission clients that need rescuing.
+    CLIENT_TYPE_NONE,
+    CLIENT_TYPE_CLIENT, // Used for mission clients that need rescuing.
     CLIENT_TYPE_PARTNER,
+    // 3
     CLIENT_TYPE_DONT_MOVE = 4 // Used for Diglett in the Skarmory boss fight.
 };
 

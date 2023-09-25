@@ -68,6 +68,7 @@ typedef struct TeamInventory
 } TeamInventory;
 
 // TODO: These should be in constants/
+// Not doing it now since we cannot include enums in the constants file due to being used by the data_item and data_monster assemblers
 
 enum ItemFlag
 {

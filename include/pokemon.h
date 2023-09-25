@@ -9,7 +9,8 @@
 #define OFFENSE_NRM 0
 #define OFFENSE_SP 1
 
-enum PokemonUnk0Flags {
+enum PokemonUnk0Flags
+{
     FLAG_ON_TEAM = 2,
 };
 

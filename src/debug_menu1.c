@@ -21,7 +21,7 @@ enum DebugMenuOptions
     MENU_DEBUG_MENU_DEBUG_MENU,
     MENU_DEBUG_MENU_UNKNOWN_1,
     MENU_DEBUG_MENU_STORAGE,
-    //
+    // 7 - 8
     MENU_DEBUG_MENU_H_OPEN = 9,
 };
 

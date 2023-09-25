@@ -77,17 +77,18 @@ struct unkStruct_203B314
 extern struct unkStruct_203B314 *gUnknown_203B314;
 
 
-enum FriendRewardStates {
-    PREP_MONEY_REWARD = 0,
-    MONEY_REWARD = 1,
-    PREP_FRIEND_AREA_REWARD = 2,
-    UNLOCK_FRIEND_AREA = 3,
-    PREP_ITEM_REWARD = 4,
-    GIVE_ITEM_REWARD = 5,
-    NEXT_ITEM = 6,
-    TEAM_PNTS_REWARD = 7,
-    NEW_TEAM_RANK = 8,
-    REWARD_EXIT = 9,
+enum FriendRewardStates
+{
+    PREP_MONEY_REWARD,
+    MONEY_REWARD,
+    PREP_FRIEND_AREA_REWARD,
+    UNLOCK_FRIEND_AREA,
+    PREP_ITEM_REWARD,
+    GIVE_ITEM_REWARD,
+    NEXT_ITEM,
+    TEAM_PNTS_REWARD,
+    NEW_TEAM_RANK,
+    REWARD_EXIT,
 };
 
 extern bool8 sub_802FCF0(u32);
