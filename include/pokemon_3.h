@@ -8,6 +8,8 @@ typedef struct EvolveStatus
 {
     /* 0x0 */ u8 evoItem1;
     /* 0x1 */ u8 evoItem2;
+    // This value is set to a random number in the range [0, 254].
+    // Even values produce Silcoon while odd values produce Cascoon.
     /* 0x2 */ u8 wurmpleVal;
     /* 0x4 */ u16 evolutionConditionStatus;
     /* 0x6 */ s16 targetEvolveSpecies;
