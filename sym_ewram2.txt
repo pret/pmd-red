@@ -43,7 +43,6 @@ gUnknown_203B08C: /* 203B08C */
 gUnknown_203B090: /* 203B090 */
 	.space 0x4
 
-	.include "src/math.o"
     .include "src/file_system.o"
     .include "src/main.o"
 
