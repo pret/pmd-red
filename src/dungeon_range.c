@@ -1,9 +1,9 @@
 #include "global.h"
 #include "dungeon_range.h"
 
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
-#include "map.h"
+#include "structs/map.h"
 
 bool8 IsPositionActuallyInSight(Position *pos1, Position *pos2)
 {

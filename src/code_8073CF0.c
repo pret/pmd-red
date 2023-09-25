@@ -1,5 +1,5 @@
 #include "global.h"
-#include "dungeon_entity.h"
+#include "structs/dungeon_entity.h"
 
 extern void sub_8067110(Entity *);
 extern void sub_80671A0(Entity *);

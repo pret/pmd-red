@@ -1,21 +1,25 @@
 #include "global.h"
+#include "code_802DE84.h"
 #include "constants/input.h"
 #include "constants/mailbox.h"
 #include "input.h"
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "code_802C39C.h"
 #include "menu_input.h"
 #include "wonder_mail_2_1.h"
 #include "code_80118A4.h"
 #include "code_80958E8_1.h"
+#include "code_803B050.h"
+
+static EWRAM_DATA_2 struct unkStruct_203B2E8* gUnknown_203B2E8 = {0};
+static EWRAM_DATA_2 u16 gUnknown_203B2EC = {0};
 
 extern struct unkStruct_203B2F0 *gUnknown_203B2F0;
-extern struct unkStruct_203B2E8* gUnknown_203B2E8;
-extern struct unkStruct_203B2E8* gUnknown_203B2E0;
-u16 gUnknown_203B2EC;
+
+ALIGNED(4) static const char wonder_mail_2_fill4[] = "pksdir0";
 
 const UnkTextStruct2 gUnknown_80DFCE4 =
 {
@@ -99,12 +103,9 @@ static const u8 wonder_mail_fill1[] = "pksdir0";
 
 extern void sub_802CAA4(void);
 extern u8 IsJobSlotEmpty(u8);
-extern void sub_803B35C(WonderMail *, unkStruct_802C39C *);
-extern void CreateRescueTitle(unkStruct_802C39C *);
 
 extern void sub_802C6DC(void);
 extern void DrawJobListMenu(void);
-extern bool8 IsPelipperBoardSlotEmpty(u8);
 extern void SetJobListState(u32);
 extern void sub_802CC00(void);
 extern void sub_802CC70(void);
@@ -112,37 +113,13 @@ extern void sub_802CD38(void);
 extern void sub_802CDB8(void);
 extern void sub_802C928(void);
 extern void sub_802C9D8(void);
-extern void sub_802DE84(unkStruct_802C39C *);
 extern void sub_802CBAC(void);
 
 s32 CountAcceptedJobs(void);
-bool8 HasNoAcceptedJobs(void);
 
-s32 CountPelipperBoardSlots(void)
-{
-  s32 index;
-  s32 counter = 0;
-  for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
-  {
-      if(!IsPelipperBoardSlotEmpty(index))
-      {
-          gUnknown_203B2E0->pelipperBoardSlots[counter] = index;
-          counter++;
-      }
-  }
-  return counter;
-}
 
-bool8 HasNoPelipperBoardJobs(void)
-{
-  s32 index;
-  for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
-  {
-      if(!IsPelipperBoardSlotEmpty(index))
-        return FALSE;
-  }
-  return TRUE;
-}
+
+
 
 bool8 sub_802C4C8(int param_1,UnkTextStruct2_sub *param_2,u32 param_3)
 {
@@ -349,6 +326,15 @@ bool8 HasNoAcceptedJobs(void)
     }
     return TRUE;
 }
+
+
+
+
+// THIS IS A NEW FILE:
+
+
+
+
 
 bool8 InitializeJobListMenu(u32 r0)
 {

@@ -1,4 +1,6 @@
 #include "global.h"
+#include "code_802DE84.h"
+#include "code_802F204.h"
 #include "constants/input.h"
 #include "memory.h"
 #include "text1.h"
@@ -15,6 +17,8 @@
 #include "code_80118A4.h"
 #include "wonder_mail_3.h"
 #include "code_801B60C.h"
+#include "common_strings.h"
+#include "code_803B050.h"
 
 extern unkStruct_803B344 *sub_803B344(u8);
 
@@ -28,7 +32,7 @@ struct unkStruct_203B30C
     MenuItem unkB0[8];
     UnkTextStruct2 unkF0[4];
 };
-extern struct unkStruct_203B30C *gUnknown_203B30C;
+static EWRAM_DATA_2 struct unkStruct_203B30C *gUnknown_203B30C = {0};
 
 struct unkStruct_203B310
 {
@@ -73,17 +77,18 @@ struct unkStruct_203B314
 extern struct unkStruct_203B314 *gUnknown_203B314;
 
 
-enum FriendRewardStates {
-    PREP_MONEY_REWARD = 0,
-    MONEY_REWARD = 1,
-    PREP_FRIEND_AREA_REWARD = 2,
-    UNLOCK_FRIEND_AREA = 3,
-    PREP_ITEM_REWARD = 4,
-    GIVE_ITEM_REWARD = 5,
-    NEXT_ITEM = 6,
-    TEAM_PNTS_REWARD = 7,
-    NEW_TEAM_RANK = 8,
-    REWARD_EXIT = 9,
+enum FriendRewardStates
+{
+    PREP_MONEY_REWARD,
+    MONEY_REWARD,
+    PREP_FRIEND_AREA_REWARD,
+    UNLOCK_FRIEND_AREA,
+    PREP_ITEM_REWARD,
+    GIVE_ITEM_REWARD,
+    NEXT_ITEM,
+    TEAM_PNTS_REWARD,
+    NEW_TEAM_RANK,
+    REWARD_EXIT,
 };
 
 extern bool8 sub_802FCF0(u32);
@@ -99,16 +104,12 @@ extern void sub_802F1E8(void);
 extern void sub_802F004();
 extern void sub_802F088();
 extern void sub_802F108(void);
-extern void sub_803B35C(WonderMail*, unkStruct_802C39C *);
-extern void sub_802DE84(unkStruct_802C39C *);
 extern void sub_802CDD4(u32);
 extern void sub_802CED8(u32);
 extern void sub_802CFD0(void);
 extern u8 sub_802CEBC(void);
 extern u32 sub_802CE5C(u32);
 extern void sub_802CF14(void);
-extern u32 sub_802DEE0(void);
-extern void sub_802DF24(void);
 extern void sub_802F6FC(void);
 extern void ProceedToNextRewardSceneState(void);
 extern void sub_802F300(void);
@@ -116,13 +117,11 @@ void HandleMissionReward(void);
 const u8 *sub_80974A0(s16 index);
 
 extern u8 gUnknown_202E038[];
-extern u8 gUnknown_202E088[];
 extern u8 gUnknown_202E628[];
 extern u8 gUnknown_202DEA8[];
 extern u8 gUnknown_202E5D8[];
 extern u8 gAvailablePokemonNames[];
 extern u32 gUnknown_202DE30;
-extern const u8 *gUnknown_80D4970[];
 
 const UnkTextStruct2 gUnknown_80E03C4 = {
     0x00, 0x00, 0x00, 0x00,
@@ -162,15 +161,15 @@ const UnkTextStruct2 gUnknown_80E041C = {
 
 ALIGNED(4) const u8 gUnknown_80E0434[] = _(
         " Here{APOSTROPHE}s your reward!\n"
-        "{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}!");
+        "{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}!");
 
 ALIGNED(4) const u8 gUnknown_80E045C[] = _(
         "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1} received\n"
-        "{CENTER_ALIGN}{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.");
+        "{CENTER_ALIGN}{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.");
 
 ALIGNED(4) const u8 gUnknown_80E0484[] = _(
         "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s team received\n"
-        "{CENTER_ALIGN}{COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} {POKE}.");
+        "{CENTER_ALIGN}{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.");
 
 ALIGNED(4) const u8 gUnknown_80E04B4[]= _(
         " As your reward{COMMA} you can\n"
@@ -202,7 +201,7 @@ ALIGNED(4) const u8 gUnknown_80E0640[] = _(
 
 ALIGNED(4) const u8 gUnknown_80E0670[] = _(
         "{CENTER_ALIGN}Rescue Team {COLOR_1 LIGHT_BLUE}$t{END_COLOR_TEXT_1}\n"
-        "{CENTER_ALIGN}gained {COLOR_1 CYAN}$d0{END_COLOR_TEXT_1} rescue points.");
+        "{CENTER_ALIGN}gained {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} rescue points.");
 
 ALIGNED(4) const u8 gUnknown_80E06A8[] = _(
         "{CENTER_ALIGN}Congratulations!{EXTRA_MSG}"
@@ -349,7 +348,7 @@ void sub_802F108(void)
     gUnknown_203B30C->unkB0[loopMax].text = gUnknown_80E040C;
     gUnknown_203B30C->unkB0[loopMax].menuAction = 2;
     loopMax += 1;
-    gUnknown_203B30C->unkB0[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B30C->unkB0[loopMax].text = gCommonInfo[0];
     gUnknown_203B30C->unkB0[loopMax].menuAction = 3;
     loopMax += 1;
     gUnknown_203B30C->unkB0[loopMax].text = NULL;
@@ -414,6 +413,10 @@ void sub_802F1E8(void)
             break;
     }
 }
+
+
+// THIS IS A NEW FILE:
+
 
 
 
@@ -684,6 +687,12 @@ void ProceedToNextRewardSceneState(void)
         SetRewardSceneState(gUnknown_203B310->nextState);
     }
 }
+
+
+
+// THIS IS A NEW FILE:
+
+
 
 u32 sub_802F73C(u32 r0, UnkTextStruct2_sub *r1, u32 r2, u8 r3)
 {

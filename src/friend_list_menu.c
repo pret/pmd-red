@@ -1,15 +1,18 @@
 #include "global.h"
 #include "code_80118A4.h"
-#include "code_8012A18_1.h"
 #include "code_80130A8.h"
+#include "code_801602C.h"
 #include "code_801B3C0.h"
-#include "code_801C620.h"
+#include "code_801BEEC.h"
 #include "code_801EE10.h"
-#include "code_801EE10_1.h"
 #include "code_801EE10_mid.h"
+#include "code_8023868.h"
+#include "code_8024458.h"
 #include "code_8098BDC.h"
+#include "common_strings.h"
 #include "constants/dungeon.h"
 #include "event_flag.h"
+#include "ground_map_1.h"
 #include "items.h"
 #include "kecleon_bros4.h"
 #include "memory.h"
@@ -53,19 +56,11 @@ extern u8 gAvailablePokemonNames[];
 
 EWRAM_DATA_2 unkStruct_203B2B4 *gUnknown_203B2B4 = {0};
 
-extern u8 *gUnknown_80D4970[];
-
 #include "data/friend_list_menu.h"
 
-extern s16 sub_80A5728(void);
 extern u8 sub_8002658(s16);
-extern bool8 sub_8024108(u32);
-extern void nullsub_104(void);
 extern void sub_808ED00(void);
-extern u32 sub_80244E4(void);
 
-extern void sub_80160D8(void);
-extern u32 sub_8016080(void);
 extern s32 sub_80144A4(s32 *);
 
 void sub_8025434(s32);
@@ -379,7 +374,7 @@ void sub_802591C(void)
       gUnknown_203B2B4->unk108[loopMax] = 1;
   }
   loopMax += 1;
-  gUnknown_203B2B4->unkC8[loopMax].text = *gUnknown_80D4970;
+  gUnknown_203B2B4->unkC8[loopMax].text = gCommonInfo[0];
   gUnknown_203B2B4->unkC8[loopMax].menuAction = 4;
   loopMax += 1;
   gUnknown_203B2B4->unkC8[loopMax].text = NULL;

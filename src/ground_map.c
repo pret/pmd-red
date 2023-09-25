@@ -1,5 +1,6 @@
 #include "global.h"
 #include "debug.h"
+#include "event_flag.h"
 #include "ground_map.h"
 #include "ground_map_2.h"
 #include "ground_script.h"
@@ -14,7 +15,6 @@ extern const DebugLocation gUnknown_8117538[];
 extern void sub_809D600(void *, const u8 *, u32, u32, u32);
 extern void sub_809D648(void *);
 extern void sub_80A2D00(unkStruct_3001B70 *);
-extern void sub_80015C0(u32, u32);
 extern void sub_809D754(GroundScript_ExecutePP_1 *, const DebugLocation *);
 extern void sub_80A2D68(unkStruct_3001B70 *);
 extern void sub_80A2D88(unkStruct_3001B70 *);

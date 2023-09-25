@@ -3,7 +3,7 @@
 
 #include "constants/item.h"
 #include "input.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0xF4
 typedef struct unkStruct_203B224

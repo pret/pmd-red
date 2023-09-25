@@ -250,7 +250,7 @@ void WriteExclusivePokemon(struct unkStruct_8094924 *r0)
 
 
     SaveIntegerBits(r0, gUnknown_203B498, 1);
-    for(index = 0; index < 424; index++)
+    for(index = 0; index < MONSTER_MAX; index++)
     {   
         stack_0 = sub_8098134(index);
         SaveIntegerBits(r0, &stack_0, 1);
@@ -285,7 +285,7 @@ void ReadExclusivePokemon(struct unkStruct_8094924 *r0)
 
     memset(gUnknown_203B498, 0, sizeof(struct ExclusivePokemonData));
     RestoreIntegerBits(r0, gUnknown_203B498, 1);
-    for(index = 0; index < 424; index++)
+    for(index = 0; index < MONSTER_MAX; index++)
     {
         RestoreIntegerBits(r0, &stack_0, 1);
         if(stack_0)

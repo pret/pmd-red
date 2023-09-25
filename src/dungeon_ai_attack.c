@@ -15,7 +15,7 @@
 #include "dungeon_ai_targeting.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_capabilities.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
@@ -36,7 +36,6 @@
 const s16 gRegularAttackWeights[] = {100, 20, 30, 40, 50};
 
 extern bool8 gCanAttackInDirection[NUM_DIRECTIONS];
-extern s32 gNumPotentialTargets;
 extern s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS];
 extern u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS];
 extern Entity *gPotentialTargets[NUM_DIRECTIONS];

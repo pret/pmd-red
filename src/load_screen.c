@@ -1,15 +1,18 @@
 #include "global.h"
 #include "bg_palette_buffer.h"
 #include "code_800D090.h"
+#include "code_80130A8.h"
 #include "code_8094F88.h"
 #include "code_8097670.h"
+#include "constants/main_menu.h"
 #include "constants/wonder_mail.h"
 #include "event_flag.h"
 #include "file_system.h"
+#include "ground_main.h"
 #include "input.h"
-#include "main_menu.h"
+#include "main_menu1.h"
 #include "memory.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "menu_input.h"
 #include "play_time.h"
 #include "pokemon.h"
@@ -46,10 +49,7 @@ void DrawLoadScreenText(void);
 void sub_80397B4(void);
 
 extern void sub_80920D8(u8 *);
-extern u8 *sub_8098FB4();
 extern void PrintDungeonLocationtoBuffer(u8 *, DungeonLocation *);
-
-extern void xxx_format_string(u8 *, u8 *, u8 *, u32);
 
 const UnkTextStruct2 gUnknown_80E75F8 = {
    0x00, 0x00, 0x00, 0x00,
@@ -164,25 +164,25 @@ void CreateLoadScreen(u32 currMenu)
   }
   ResetUnusedInputStruct();
   sub_800641C(gLoadScreen->unk144, TRUE, TRUE);
-  SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,0,&gUnknown_80E7610,gUnknown_203B378,0,6,0);
+  SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,0,&gUnknown_80E7610,gUnknown_203B378,FALSE,6,FALSE);
   switch(gLoadScreen->currMenu){
     case MENU_CONTINUE:
         if (IsQuickSave())
-            SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeQuicksaveMenuItems,0,6,0);
+            SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeQuicksaveMenuItems,FALSE,6,FALSE);
         else
-            SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeAdventureMenuItems,0,6,0);
+            SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeAdventureMenuItems,FALSE,6,FALSE);
         break;
     case MENU_AWAITING_RESCUE:
-        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gQuitWaitingRescueMenuItems,0,6,0);
+        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gQuitWaitingRescueMenuItems,FALSE,6,FALSE);
         break;
     case MENU_DELETE_SAVE_PROMPT:
-        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gDeleteSavePromptMenuItems,0,6,0);
+        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gDeleteSavePromptMenuItems,FALSE,6,FALSE);
         break;
     case MENU_DELETE_SAVE_CONFIRM:
-        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C, gDeleteSaveConfirmMenuItems,0,6,0);
+        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C, gDeleteSaveConfirmMenuItems,FALSE,6,FALSE);
         break;
   }
-  SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,2,&gUnknown_80E7784,gLoadScreenYesNoMenu,1,2,0);
+  SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,2,&gUnknown_80E7784,gLoadScreenYesNoMenu,TRUE,2,FALSE);
   sub_8035CF4(gLoadScreen->unk4,0,0);
   sub_8035CF4(gLoadScreen->unk4,1,0);
   sub_8035CF4(gLoadScreen->unk4,2,1);

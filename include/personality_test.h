@@ -3,7 +3,7 @@
 
 #include "constants/personality_test.h"
 #include "input.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // Definitely wrong but need to figure out better structure later
 struct FaceData

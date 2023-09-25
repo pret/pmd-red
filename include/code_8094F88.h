@@ -2,7 +2,7 @@
 #define GUARD_CODE_8094F88_H
 
 #include "code_8092334.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "items.h"
 #include "pokemon.h"
 

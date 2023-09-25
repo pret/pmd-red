@@ -1,56 +1,26 @@
 #include "global.h"
-#include "code_8012A18_1.h"
 #include "code_80130A8.h"
-#include "code_801EE10_1.h"
+#include "code_801602C.h"
+#include "code_8023868.h"
 #include "debug_menu4.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "text1.h"
 #include "text2.h"
 
-EWRAM_DATA_2 static unkStruct_203B3F8 *sUnknown_203B3F8 = {0};
+static EWRAM_DATA_2 unkStruct_203B3F8 *sUnknown_203B3F8 = {0};
 
-static const UnkTextStruct2 sUnknown_80E7ED4 =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x00, 0x00,
-    0x00, 0x00,
-    0x00, 0x00,
-    NULL
-};
-static const UnkTextStruct2 sUnknown_80E7EEC =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x13, 0x04,
-    0x09, 0x03,
-    0x03, 0x00,
-    NULL
-};
-static const UnkTextStruct2 sUnknown_80E7F04 =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x13, 0x0e,
-    0x06, 0x04,
-    0x04, 0x00,
-    NULL
-};
-ALIGNED(4) static const u8 sNumberPrompt[] = "Number?";
-ALIGNED(4) static const u8 sLevel[] = "LEVEL";
-ALIGNED(4) static const u8 sName[] = "Name";
-static const u8 sFill[] = "pksdir0";
+#include "data/debug_menu4.h"
 
-void sub_803ACD0(u32);
-void sub_803ACE8(void);
-void sub_803AD88(void);
-void sub_803AE58(void);
-void sub_803AEB0(void);
-void sub_803AF38(void);
-void sub_803AF88(void);
-void sub_803AFE8(void);
-void sub_803B034(void);
+static void sub_803ACD0(u32 newState);
+static void sub_803ACE8(void);
+static void sub_803AD88(void);
+static void sub_803AE58(void);
+static void sub_803AEB0(void);
+static void sub_803AF38(void);
+static void sub_803AF88(void);
+static void sub_803AFE8(void);
+static void sub_803B034(void);
 
 UNUSED static bool8 sub_803AC24(void)
 {
@@ -94,14 +64,14 @@ UNUSED static void sub_803ACB4(void)
     }
 }
 
-void sub_803ACD0(u32 newState)
+static void sub_803ACD0(u32 newState)
 {
     sUnknown_203B3F8->state = newState;
     sub_803ACE8();
     sub_803AD88();
 }
 
-void sub_803ACE8(void)
+static void sub_803ACE8(void)
 {
     s32 i;
 
@@ -126,7 +96,7 @@ void sub_803ACE8(void)
     sub_800641C(sUnknown_203B3F8->unkE0, TRUE, TRUE);
 }
 
-void sub_803AD88(void)
+static void sub_803AD88(void)
 {
     switch (sUnknown_203B3F8->state) {
         case 1:
@@ -140,14 +110,14 @@ void sub_803AD88(void)
             sub_8012D60(&sUnknown_203B3F8->unk10, sUnknown_203B3F8->unk90, 0, sUnknown_203B3F8->unkD0, sUnknown_203B3F8->menuAction, 2);
             break;
         case 5:
-            sUnknown_203B3F8->unk70 = 3;
-            sUnknown_203B3F8->unk68 = 1;
-            sUnknown_203B3F8->unk6C = 100;
-            sUnknown_203B3F8->unk64 = sUnknown_203B3F8->pokemon->level;
-            sUnknown_203B3F8->unk74 = 3;
-            sUnknown_203B3F8->unk78 = &sUnknown_203B3F8->unkE0[3];
-            sUnknown_203B3F8->unk7C = 44;
-            sUnknown_203B3F8->unk80 = 18;
+            sUnknown_203B3F8->unk60.unk10 = 3;
+            sUnknown_203B3F8->unk60.unk8 = 1;
+            sUnknown_203B3F8->unk60.unkC = 100;
+            sUnknown_203B3F8->unk60.unk4 = sUnknown_203B3F8->pokemon->level;
+            sUnknown_203B3F8->unk60.unk14 = 3;
+            sUnknown_203B3F8->unk60.unk18 = &sUnknown_203B3F8->unkE0[3];
+            sUnknown_203B3F8->unk60.unk1C = 44;
+            sUnknown_203B3F8->unk60.unk20 = 18;
             sub_8013AA0(&sUnknown_203B3F8->unk60);
             sub_803AE58();
             break;
@@ -162,18 +132,18 @@ void sub_803AD88(void)
     }
 }
 
-void sub_803AE58(void)
+static void sub_803AE58(void)
 {
-    sub_8008C54(sUnknown_203B3F8->unk74);
-    sub_80073B8(sUnknown_203B3F8->unk74);
-    xxx_call_draw_string(4, 0, sNumberPrompt, sUnknown_203B3F8->unk74, 0);
+    sub_8008C54(sUnknown_203B3F8->unk60.unk14);
+    sub_80073B8(sUnknown_203B3F8->unk60.unk14);
+    xxx_call_draw_string(4, 0, sNumberPrompt, sUnknown_203B3F8->unk60.unk14, 0);
     sub_8013C68(&sUnknown_203B3F8->unk60);
-    sub_80073E0(sUnknown_203B3F8->unk74);
+    sub_80073E0(sUnknown_203B3F8->unk60.unk14);
     sub_8023DA4();
     sub_8012EA4(&sUnknown_203B3F8->unk10, 0);
 }
 
-void sub_803AEB0(void)
+static void sub_803AEB0(void)
 {
     s32 i;
     s32 loopMax;
@@ -200,7 +170,7 @@ void sub_803AEB0(void)
     }
 }
 
-void sub_803AF38(void)
+static void sub_803AF38(void)
 {
     switch (sub_8023A94(TRUE)) {
         case 3:
@@ -218,7 +188,7 @@ void sub_803AF38(void)
     }
 }
 
-void sub_803AF88(void)
+static void sub_803AF88(void)
 {
     s32 menuAction;
 
@@ -244,7 +214,7 @@ void sub_803AF88(void)
     }
 }
 
-void sub_803AFE8(void)
+static void sub_803AFE8(void)
 {
     sub_8023A94(FALSE);
     sub_8012FD8(&sUnknown_203B3F8->unk10);
@@ -253,7 +223,7 @@ void sub_803AFE8(void)
         default:
             break;
         case 3:
-            sUnknown_203B3F8->pokemon->level = sUnknown_203B3F8->unk60;
+            sUnknown_203B3F8->pokemon->level = sUnknown_203B3F8->unk60.unk0;
             // Fallthrough is needed to match
         case 2:
             sub_803ACD0(2);
@@ -264,7 +234,7 @@ void sub_803AFE8(void)
     }
 }
 
-void sub_803B034(void)
+static void sub_803B034(void)
 {
     switch (sub_8016080()) {
         case 2:

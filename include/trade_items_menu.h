@@ -1,9 +1,35 @@
 #ifndef GUARD_TRADE_ITEMS_MENU_H
 #define GUARD_TRADE_ITEMS_MENU_H
 
-#include "text.h"
+#include "structs/str_text.h"
 #include "items.h"
-#include "menu.h"
+#include "structs/menu.h"
+
+// 11 was another saving too?
+enum TradeItemsScreens
+{
+    TRADE_ITEMS_MAIN_MENU,
+    TRADE_ITEMS_SEND_ITEM,
+    TRADE_ITEMS_SEND_ITEM_SELECTION,
+    TRADE_ITEMS_SEND_ITEM_POPUP_MENU,
+    TRADE_ITEMS_SEND_ITEM_NUMBER,
+    TRADE_ITEMS_ITEM_INFO,
+    TRADE_ITEMS_SEND_ITEM_CONFIRM,
+    TRADE_ITEMS_RECEIVE_ITEM,
+    // 8
+    TRADE_ITEMS_IN_COMMUNICATION = 9,
+    // 10 - 14
+    TRADE_ITEMS_PREPARE_TRADE_SAVING = 15,
+    // 16
+    TRADE_ITEMS_PRE_EXIT = 17,
+    TRADE_ITEMS_EXIT,
+};
+
+enum TradeItemsModes
+{
+    TRADE_ITEMS_SEND_ITEM_MODE,
+    TRADE_ITEMS_RECEIVE_ITEM_MODE
+};
 
 struct TradeSubStruct
 {
@@ -14,25 +40,15 @@ struct TradeSubStruct
     u32 quantity; // number of items?
 };
 
-
+// size: 0x3A0
 struct TradeItemsMenu
 {
-    // size: 0x3A0
     u32 currMenu;
     u32 fallbackState;
     u32 itemMode;
     u32 linkStatus;
     u32 unk10;
-    u32 quantityToSend; // item #
-    u32 unk18;
-    u32 unk1C;
-    u32 unk20;
-    u32 unk24;
-    u32 unk28;
-    UnkTextStruct2 *unk2C;
-    u32 unk30;
-    u32 unk34;
-    u8 fill38[0x44 - 0x38];
+    unkStructFor8013AA0 unk14;
     MenuStruct unk44[4];
     UnkTextStruct2 unk184[4];
     UnkTextStruct2 unk1E4[4];
@@ -53,4 +69,4 @@ s32 UpdateTradeItemsMenu(void);
 s32 CreateTradeItemsMenu(void);
 void CleanTradeItemsMenu(void);
 
-#endif
+#endif // GUARD_TRADE_ITEMS_MENU_H

@@ -11,6 +11,7 @@
 #include "code_802C39C.h"
 #include "menu_input.h"
 #include "code_80118A4.h"
+#include "code_803B050.h"
 
 struct unkStruct_203B320
 {
@@ -23,7 +24,7 @@ struct unkStruct_203B320
     UnkTextStruct2 unk60[4];
     u8 unkC0[4];
 };
-extern struct unkStruct_203B320 *gUnknown_203B320;
+static EWRAM_DATA_2 struct unkStruct_203B320 *gUnknown_203B320 = {0};
 
 extern unkStruct_203B480 *gUnknown_203B480;
 
@@ -80,8 +81,6 @@ extern bool8 HasNoWonderMailType(u32);
 extern s32 sub_8030A74(void);
 extern void sub_80308A0(void);
 extern void sub_803092C(void);
-
-extern void CreateRescueTitle(unkStruct_802C39C *);
 
 u32 sub_80306A8(u32 wonderMailType, u32 r1, UnkTextStruct2_sub *r2, u32 r3)
 {

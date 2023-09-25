@@ -2,7 +2,7 @@
 #include "code_80869E4.h"
 #include "dungeon_items.h"
 #include "dungeon_capabilities.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_leader.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"

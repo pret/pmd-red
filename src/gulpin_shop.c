@@ -3,6 +3,7 @@
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
 #include "code_80130A8.h"
+#include "common_strings.h"
 #include "gulpin_shop.h"
 #include "pokemon.h"
 #include "memory.h"
@@ -13,13 +14,7 @@
 
 extern u8 gAvailablePokemonNames[]; // 202DF98
 
-EWRAM_DATA_2 GulpinShopWork *sGulpinShopWork = {0};
-
-// data_80D47B8.s
-extern const u8 *gUnknown_80D4920[];
-extern const u8 *gUnknown_80D4928[];
-extern const u8 *gUnknown_80D4970[];
-extern const u8 *gGulpinDialogue[2][25]; // 80D8888
+static EWRAM_DATA_2 GulpinShopWork *sGulpinShopWork = {0};
 
 #include "data/gulpin_shop.h"
 
@@ -34,7 +29,7 @@ static void sub_801ED28(void);
 static void sub_801EDA4(void);
 static void sub_801EDC0(void);
 
-bool8 CreateGulpinShop(s32 isAsleep, s16 pokeSpecies, Move *moves)
+bool8 CreateGulpinShop(u32 mode, s16 pokeSpecies, Move *moves)
 {
     OpenedFile *faceFile;
     s32 species_32;
@@ -42,12 +37,12 @@ bool8 CreateGulpinShop(s32 isAsleep, s16 pokeSpecies, Move *moves)
     species_32 = pokeSpecies; // dumb cast needed to get lsr/asr combo
 
     sGulpinShopWork = MemoryAlloc(sizeof(GulpinShopWork), 8);
-    sGulpinShopWork->isAsleep = isAsleep;
+    sGulpinShopWork->mode = mode;
     sGulpinShopWork->speciesNum = species_32;
     sGulpinShopWork->moves = moves;
     sGulpinShopWork->unk1C = moves[4].id; // 5th move..?
 
-    if (isAsleep == 0)
+    if (mode == GULPIN_SHOP_MODE_AWAKE)
         sGulpinShopWork->unk128 = &sGulpinShopWork->faceFile;
     else
         sGulpinShopWork->unk128 = NULL;
@@ -159,15 +154,15 @@ static void sub_801EA28(void)
             sub_8092C84(gAvailablePokemonNames, sGulpinShopWork->unk1C);
             sub_8092C84(&gAvailablePokemonNames[0x50], sGulpinShopWork->unk1E);
 
-            switch (sGulpinShopWork->isAsleep) {
-                case 0:
-                case 1:
+            switch (sGulpinShopWork->mode) {
+                case GULPIN_SHOP_MODE_AWAKE:
+                case GULPIN_SHOP_MODE_ASLEEP:
                     if (sGulpinShopWork->isNextMoveLinked)
-                        sub_8014248(gGulpinDialogue[sGulpinShopWork->isAsleep][12], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
+                        sub_8014248(gCommonGulpin[sGulpinShopWork->mode][GULPIN_DLG_12], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
                     else
-                        sub_8014248(gGulpinDialogue[sGulpinShopWork->isAsleep][11], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
+                        sub_8014248(gCommonGulpin[sGulpinShopWork->mode][GULPIN_DLG_11], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
                     break;
-                case 2:
+                case GULPIN_SHOP_MODE_UNK2:
                     if (sGulpinShopWork->isNextMoveLinked)
                         sub_8014248(sForgetMoveAndLinkedOnes, 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, NULL, 32);
                     else
@@ -193,7 +188,7 @@ static void sub_801EBC4(void)
         sGulpinShopWork->unk68[0] = 1;
     
     which++;
-    sGulpinShopWork->unk28[which].text = *gUnknown_80D4970;
+    sGulpinShopWork->unk28[which].text = gCommonInfo[0];
     sGulpinShopWork->unk28[which].menuAction = 3;
     which++;
     sGulpinShopWork->unk28[which].text = NULL;
@@ -221,10 +216,10 @@ static void sub_801EC7C(void)
     which = 0;
     
     MemoryFill16(sGulpinShopWork->unk68, 0, sizeof(sGulpinShopWork->unk68));
-    sGulpinShopWork->unk28[which].text = *gUnknown_80D4920;
+    sGulpinShopWork->unk28[which].text = gCommonYes[0];
     sGulpinShopWork->unk28[which].menuAction = 4;
     which++;
-    sGulpinShopWork->unk28[which].text = *gUnknown_80D4928;
+    sGulpinShopWork->unk28[which].text = gCommonNo[0];
     sGulpinShopWork->unk28[which].menuAction = 5;
     which++;
     sGulpinShopWork->unk28[which].text = NULL;

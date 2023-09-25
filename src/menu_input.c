@@ -14,14 +14,15 @@
 
 // data_80D47B8.s
 extern const u8 gUnknown_80D4828[];
+extern const s32 gUnknown_80D4830[9];
 
 // text.s
-extern s32 sub_8008ED0(const u8 *);
 extern s16 sub_8009614(u32, u32);
 
 static void sub_8013134(MenuInputStruct *, u32, u32);
 static void sub_801332C(s16 *);
 static void sub_8013470(MenuInputStruct *);
+static bool8 sub_8013DD0(unkStructFor8013AA0 *);
 
 ALIGNED(4) static const char fill_save7[] = _("pksdir0");
 const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
@@ -599,7 +600,7 @@ void AddMenuCursorSprite_(MenuInputStruct *a0, u32 a1)
         UpdateMenuCursorSpriteCoords(a0);
 
         if (!(a0->unk24 & 8)) {
-            #ifdef NONMATCHING
+            #ifdef NONMATCHING // SpriteOAM memes https://decomp.me/scratch/T9aXl TODO: Match like sub_8039174 with multiple vars and while(0)
             u32 tmp, tmp2;
             #else
             register u32 tmp asm("r0"), tmp2 asm("r1");
@@ -676,7 +677,7 @@ static void sub_801332C(s16 *a0)
 {
     SpriteOAM sp = {};
     SpriteOAM* ptr;
-    #ifdef NONMATCHING
+    #ifdef NONMATCHING // SpriteOAM memes https://decomp.me/scratch/zeLxS TODO: Match like sub_8039174 with multiple vars and while(0)
     u32 r0, r1, r2;
     #else
     register u32 r0 asm("r0");
@@ -745,7 +746,7 @@ static void sub_801332C(s16 *a0)
 static void sub_8013470(MenuInputStruct *a0)
 {
     SpriteOAM sp = {};
-    #if NONMATCHING
+    #if NONMATCHING // SpriteOAM memes https://decomp.me/scratch/70Ieb TODO: Match like sub_8039174 with multiple vars and while(0)
     SpriteOAM *ptr;
     u32 r0, r1, r5;
     #else
@@ -1028,7 +1029,6 @@ void sub_8013818(MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4
     sub_80137F8(param_1, 12);
 }
 
-
 void sub_8013848(MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4)
 {
     param_1->unk0 = param_4;
@@ -1180,4 +1180,212 @@ void sub_8013A7C(MenuInputStruct *param_1)
         param_1->unk1E--;
 
     sub_8013984(param_1);
+}
+
+void sub_8013AA0(unkStructFor8013AA0 *a0)
+{
+    s32 r1;
+    s32 test;
+    s32 r3;
+    s32 r4;
+    s32 test2;
+    s16 earlyF;
+    s32 sp[10];
+
+    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
+    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
+    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
+    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_BPP;
+
+    r1 = 1 << SPRITEOAM_SHIFT_SHAPE;
+    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
+    a0->unk28.attrib1 |= r1;
+
+    test = 16 << SPRITEOAM_SHIFT_MATRIXNUM;
+    a0->unk28.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
+    a0->unk28.attrib2 |= test;
+
+    a0->unk28.attrib2 &= ~SPRITEOAM_MASK_SIZE;
+
+    r3 = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
+    a0->unk28.attrib3 &= ~SPRITEOAM_MASK_TILENUM;
+    a0->unk28.attrib3 |= r3;
+
+    a0->unk28.attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
+
+    earlyF = (s16)~SPRITEOAM_MASK_UNK6_4;
+
+    r4 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
+    a0->unk28.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
+    a0->unk28.attrib3 |= r4;
+
+    a0->unk28.attrib2 &= ~SPRITEOAM_MASK_X;
+    a0->unk28.attrib2 |= DISPLAY_WIDTH;
+
+    test2 = DISPLAY_WIDTH << SPRITEOAM_SHIFT_UNK6_4;
+    a0->unk28.unk6 &= earlyF;
+    a0->unk28.unk6 |= test2;
+
+    a0->unk26 = 0;
+
+    ConvertToDecimal(sp, a0->unkC, a0->unk10);
+
+    a0->unk25 = a0->unk10;
+
+    while (sp[a0->unk25 - 1] == 0 && a0->unk25 > 1)
+        a0->unk25--;
+
+    a0->unk0 = a0->unk4;
+
+    ConvertToDecimal(sp, a0->unk4, a0->unk10);
+
+    a0->unk24 = a0->unk25 - 1;
+
+    while (sp[a0->unk24] == 0 && a0->unk24 != 0)
+        a0->unk24--;
+}
+
+u32 sub_8013BBC(unkStructFor8013AA0 *a0)
+{
+    a0->unk26++;
+
+    sub_8013D10(a0);
+
+    if (a0->unk26 & 8) {
+        {
+            s32 temp = 16 << SPRITEOAM_SHIFT_MATRIXNUM;
+            a0->unk28.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
+            a0->unk28.attrib2 |= temp;
+        }
+        AddSprite(&a0->unk28, 0x100, NULL, NULL);
+    
+        a0->unk28.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
+        {
+            u32 temp = a0->unk28.unk6;
+            s32 max = SPRITEOAM_MAX_UNK6_4;
+            temp >>= SPRITEOAM_SHIFT_UNK6_4;
+            temp += 16;
+            temp &= max;
+            temp <<= SPRITEOAM_SHIFT_UNK6_4;
+            a0->unk28.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
+            a0->unk28.unk6 |= temp;
+        }
+        AddSprite(&a0->unk28, 0x100, NULL, NULL);
+    }
+
+    if (sub_8013DD0(a0))
+        return 1;
+
+    switch (sub_8012AE8()) {
+        case 2:
+            PlayMenuSoundEffect(1);
+            return 2;
+        case 1:
+            PlayMenuSoundEffect(0);
+            return 3;
+    }
+    return 0;
+}
+
+void sub_8013C68(unkStructFor8013AA0 *a0)
+{
+    u8 ch;
+    s32 i;
+    s32 sp[10];
+
+    ConvertToDecimal(sp, a0->unk0, a0->unk10);
+
+    for (i = a0->unk10 - 1; i > 0 && sp[i] == 0; i--)
+        sp[i] = 0xFF;
+
+    for (i = 0; i < a0->unk25; i++) {
+        if (sp[i] == 0xFF)
+            ch = '*';
+        else
+            ch = '0' + sp[i];
+
+        sub_8012C60(a0->unk1C - ((i + 1) * 12), a0->unk20, ch, 7, a0->unk14);
+    }
+
+    for (i = 0; i < a0->unk10; i++)
+        sub_800792C(a0->unk14, a0->unk1C - ((i + 1) * 12) - 1, a0->unk20 + 10, 11, 5);
+}
+
+void sub_8013D10(unkStructFor8013AA0 *a0)
+{
+    u8 uVar4;
+    UnkTextStruct1 *ptr;
+
+    ptr = &gUnknown_2027370[a0->unk14];
+    uVar4 = a0->unk24;
+
+    switch (sub_8012AE8()) {
+        case 9:
+            uVar4 = a0->unk24 < a0->unk25 - 1 ? a0->unk24 + 1 : 0;
+            break;
+        case 10:
+            uVar4 = a0->unk24 == 0 ? a0->unk25 - 1 : a0->unk24 - 1;
+            break;
+    }
+
+    if (uVar4 != a0->unk24) {
+        a0->unk24 = uVar4;
+        PlayMenuSoundEffect(3);
+        a0->unk26 = 8;
+    }
+
+    {
+        s32 temp = (a0->unk1C - ((a0->unk24 + 1) * 12) + (ptr->unk0 * 8)) - 3;
+        temp &= SPRITEOAM_MAX_X;
+        temp <<= SPRITEOAM_SHIFT_X;
+        a0->unk28.attrib2 &= ~SPRITEOAM_MASK_X;
+        a0->unk28.attrib2 |= temp;
+    } while (0);
+
+    {
+        s32 temp = a0->unk20 + (ptr->unk2 * 8) - 7;
+        temp &= SPRITEOAM_MAX_UNK6_4;
+        temp <<= SPRITEOAM_SHIFT_UNK6_4;
+        a0->unk28.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
+        a0->unk28.unk6 |= temp;
+    } while (0);
+}
+
+static bool8 sub_8013DD0(unkStructFor8013AA0 *a0)
+{
+    s32 iVar2;
+
+    switch (sub_8012AE8()) {
+        case 7:
+            if (a0->unk0 == a0->unkC) {
+                PlayMenuSoundEffect(2);
+                return FALSE;
+            }
+
+            iVar2 = a0->unk0 + gUnknown_80D4830[a0->unk24];
+            PlayMenuSoundEffect(3);
+
+            if (iVar2 > a0->unkC)
+                a0->unk0 = a0->unkC;
+            else
+                a0->unk0 = iVar2;
+            return TRUE;
+        case 8:
+            if (a0->unk0 == a0->unk8) {
+                PlayMenuSoundEffect(2);
+                return FALSE;
+            }
+
+            iVar2 = a0->unk0 - gUnknown_80D4830[a0->unk24];
+            PlayMenuSoundEffect(3);
+
+            if (iVar2 < a0->unk8)
+                a0->unk0 = a0->unk8;
+            else
+                a0->unk0 = iVar2;
+            return TRUE;
+        default:
+            return FALSE;
+    }
 }

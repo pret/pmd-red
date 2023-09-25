@@ -2,7 +2,7 @@
 #include "dungeon_util.h"
 
 #include "dungeon_map_access.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 
 extern u8 gUnknown_202EE70[0x6];
 extern u8 gUnknown_202EE76[0x10];

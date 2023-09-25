@@ -3,13 +3,13 @@
 
 struct PokemonMail
 {
-    const char *headline;
-    const char *text;
+    const u8 *headline;
+    const u8 *text;
 };
 
 #define NUM_POKEMON_MAIL 56
 
-const char *GetPokemonMailHeadline(u8 index);
-const char *GetPokemonMailText(u8 index);
+const u8 *GetPokemonMailHeadline(u8 index);
+const u8 *GetPokemonMailText(u8 index);
 
 #endif // POKEMON_MAIL_H

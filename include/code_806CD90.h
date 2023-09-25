@@ -1,7 +1,7 @@
 #ifndef GUARD_CODE_806CD90_H
 #define GUARD_CODE_806CD90_H
 
-#include "dungeon_entity.h"
+#include "structs/dungeon_entity.h"
 
 void sub_806CC10(void);
 void sub_806CC70(void);

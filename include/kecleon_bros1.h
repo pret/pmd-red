@@ -3,29 +3,23 @@
 
 #include "file_system.h"
 #include "items.h"
-#include "menu.h"
-#include "text.h"
-
-enum KecleonBrosMode
-{
-    KECLEON_BROS_MODE_ITEMS_AWAKE,
-    KECLEON_BROS_MODE_ITEMS_ASLEEP,
-    KECLEON_BROS_MODE_WARES_AWAKE,
-    KECLEON_BROS_MODE_WARES_ASLEEP,
-    KECLEON_BROS_MODE_COUNT
-};
+#include "structs/menu.h"
+#include "structs/str_text.h"
 
 enum KecleonStoreStates
 {
     KECLEON_STORE_INIT = 0,
-    KECLEON_STORE_MAIN_MENU = 1,
+    KECLEON_STORE_MAIN_MENU,
+    // 2 - 3
     KECLEON_STORE_EXIT = 4,
-    KECLEON_STORE_NO_STORE_ITEMS = 5,
-    KECLEON_STORE_NO_MONEY = 6,
+    KECLEON_STORE_NO_STORE_ITEMS,
+    KECLEON_STORE_NO_MONEY,
+    // 7 - 8
     KECLEON_STORE_NO_ITEMS_TO_SELL = 9,
-    KECLEON_STORE_TOO_MANY_ITEMS = 10,
+    KECLEON_STORE_TOO_MANY_ITEMS,
+    // 11
     KECLEON_STORE_NOT_ENOUGH_MONEY = 12,
-    KECLEON_STORE_CANT_SELL_ITEM = 13,
+    KECLEON_STORE_CANT_SELL_ITEM,
 };
 
 // size: 0x148

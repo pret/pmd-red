@@ -2,7 +2,7 @@
 #define GUARD_ADVENTURE_LOG_H
 
 #include "input.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0xA0
 typedef struct AdventureLog

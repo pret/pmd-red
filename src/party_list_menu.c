@@ -3,11 +3,13 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
-#include "code_801C620.h"
+#include "code_801BEEC.h"
 #include "code_801EE10.h"
-#include "code_801EE10_1.h"
 #include "code_801EE10_mid.h"
+#include "code_80227B8.h"
+#include "code_8024458.h"
 #include "code_8098BDC.h"
+#include "common_strings.h"
 #include "constants/dungeon.h"
 #include "event_flag.h"
 #include "items.h"
@@ -15,77 +17,36 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "moves.h"
+#include "party_list_menu.h"
 #include "pokemon.h"
 #include "text_util.h"
 #include "text1.h"
 #include "text2.h"
 
-// size: 0x280
-typedef struct unkStruct_203B2B8
-{
-    s32 state;
-    s32 fallbackState;
-    bool8 unk8;
-    /* 0xA */ s16 pokeSpecies;
-    u32 id;
-    /* 0x10 */ BulkItem item1;
-    /* 0x14 */ BulkItem item2;
-    PokemonStruct1 *pokeStruct;
-    bool8 isTeamLeader;
-    u32 moveIndex;
-    /* 0x24 */ u16 moveID;
-    Move moves[8];
-    u16 moveIDs[4]; // some list of move IDs
-    u32 menuAction1;
-    u32 menuAction2;
-    u32 menuAction3; // unused
-    MenuStruct unk7C;
-    MenuStruct unkCC;
-    MenuStruct unk11C; // unused
-    MenuItem unk16C[10];
-    MenuItem unk1BC[10];
-    u16 unk20C[10];
-    UnkTextStruct2 unk220[4];
-} unkStruct_203B2B8;
+// TODO: Clean this
 
-extern u8 gUnknown_202DE58[0x58];
-extern u8 gUnknown_202DEA8[0x58];
-extern u8 gAvailablePokemonNames[0x58]; // 202DF98
+extern u8 gUnknown_202DE58[];
+extern u8 gUnknown_202DEA8[];
+extern u8 gAvailablePokemonNames[]; // 202DF98
 
-EWRAM_DATA_2 unkStruct_203B2B8 *gUnknown_203B2B8 = {0};
-
-// data_80D47B8.s
-extern const u8 *gUnknown_80D4920[];
-extern const u8 *gUnknown_80D4928[];
-extern const u8 *gUnknown_80D4970[];
+static EWRAM_DATA_2 unkStruct_203B2B8 *sUnknown_203B2B8 = {0};
 
 #include "data/party_list_menu.h"
 
 extern u32 sub_8026F04(PokemonStruct1 *);
-extern void sub_8026074(s32);
 bool8 CanTakePokemonHeldItem(PokemonStruct1 *r0);
-extern PokemonStruct1 *sub_808D3F8(void);
-extern PokemonStruct1 *sub_808D3BC(void);
-extern s32 sub_8008ED0(u8 *);
-extern void nullsub_104(void);
-extern u32 sub_8022860(void);
-extern void sub_8022908(void);
-extern u32 sub_80244E4(void);
 extern bool8 sub_808D750(s16 index_);
 extern void sub_808ED00(void);
 bool8 sub_8026E88(PokemonStruct1 *r0);
-bool8 HasGummiItem();
 bool8 sub_8026EB8(PokemonStruct1 *r0);
 void sub_8026E08(u32 r0);
 void sub_8026DAC(u32 r0, BulkItem *item);
 void sub_8026FA4(void);
 void sub_8026878(void);
-extern void sub_80227B8(PokemonStruct1 *);
 extern void sub_808D31C(PokemonStruct1 *);
 
 void sub_802678C(void);
 void sub_80264CC(void);
-void sub_802608C(void);
 void sub_80261D0(void);
 
 void sub_80268CC(void);
@@ -101,31 +62,34 @@ void sub_8026D0C(void);
 void sub_8026D6C(void);
 void sub_8026D88(void);
 
-u32 sub_8025EF4(PokemonStruct1 *pokeStruct)
+static void sub_8026074(s32 newState);
+static void sub_802608C(void);
+
+bool8 sub_8025EF4(PokemonStruct1 *pokeStruct)
 {
     s32 i;
 
-    gUnknown_203B2B8 = MemoryAlloc(sizeof(unkStruct_203B2B8), 8);
-    gUnknown_203B2B8->pokeStruct = pokeStruct;
+    sUnknown_203B2B8 = MemoryAlloc(sizeof(unkStruct_203B2B8), 8);
+    sUnknown_203B2B8->pokeStruct = pokeStruct;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
-        if (gUnknown_203B2B8->pokeStruct == &gRecruitedPokemonRef->pokemon[(s16)i]) {
-            gUnknown_203B2B8->pokeSpecies = i;
+        if (sUnknown_203B2B8->pokeStruct == &gRecruitedPokemonRef->pokemon[(s16)i]) {
+            sUnknown_203B2B8->pokeSpecies = i;
             break;
         }
     }
 
-    gUnknown_203B2B8->menuAction1 = 0;
-    gUnknown_203B2B8->menuAction2 = 0;
-    gUnknown_203B2B8->menuAction3 = 0;
-    gUnknown_203B2B8->unk8 = FALSE;
+    sUnknown_203B2B8->menuAction1 = 0;
+    sUnknown_203B2B8->menuAction2 = 0;
+    sUnknown_203B2B8->menuAction3 = 0;
+    sUnknown_203B2B8->unk8 = FALSE;
     sub_8026074(0);
     return TRUE;
 }
 
 u32 sub_8025F68(void)
 {
-    switch (gUnknown_203B2B8->state) {
+    switch (sUnknown_203B2B8->state) {
         case 0:
             sub_8026074(1);
             break;
@@ -176,87 +140,86 @@ u32 sub_8025F68(void)
 
 bool8 sub_802604C(void)
 {
-    return gUnknown_203B2B8->unk8;
+    return sUnknown_203B2B8->unk8;
 }
 
 void sub_8026058(void)
 {
-    if(gUnknown_203B2B8)
-    {
-        MemoryFree(gUnknown_203B2B8);
-        gUnknown_203B2B8 = NULL;
+    if (sUnknown_203B2B8) {
+        MemoryFree(sUnknown_203B2B8);
+        sUnknown_203B2B8 = NULL;
     }
 }
 
-void sub_8026074(s32 newState)
+static void sub_8026074(s32 newState)
 {
-    gUnknown_203B2B8->state = newState;
+    sUnknown_203B2B8->state = newState;
     sub_802608C();
     sub_80261D0();
 }
 
-void sub_802608C(void)
+static void sub_802608C(void)
 {
     s32 index;
-    sub_8006518(gUnknown_203B2B8->unk220);
-    switch(gUnknown_203B2B8->state)
+    sub_8006518(sUnknown_203B2B8->unk220);
+    switch(sUnknown_203B2B8->state)
     {
         case 1:
         case 2:
             for(index = 0; index < 4; index++)
             {
-                gUnknown_203B2B8->unk220[index] = sUnknown_80DD310;
+                sUnknown_203B2B8->unk220[index] = sUnknown_80DD310;
             }
-            gUnknown_203B2B8->unk220[0] = sUnknown_80DD358;
-            gUnknown_203B2B8->unk220[3] = sUnknown_80DD370;
+            sUnknown_203B2B8->unk220[0] = sUnknown_80DD358;
+            sUnknown_203B2B8->unk220[3] = sUnknown_80DD370;
             sub_80264CC();
-            gUnknown_203B2B8->unk220[2] = sUnknown_80DD328;
-            sub_8012CAC(&gUnknown_203B2B8->unk220[2], gUnknown_203B2B8->unk16C);
-            gUnknown_203B2B8->unk220[2].unkC = 9;
+            sUnknown_203B2B8->unk220[2] = sUnknown_80DD328;
+            sub_8012CAC(&sUnknown_203B2B8->unk220[2], sUnknown_203B2B8->unk16C);
+            sUnknown_203B2B8->unk220[2].unkC = 9;
             break;
         case 0x14:
             sub_802678C();
-            gUnknown_203B2B8->unk220[2] = sUnknown_80DD340;
-            sub_8012CAC(&gUnknown_203B2B8->unk220[2], gUnknown_203B2B8->unk16C);
+            sUnknown_203B2B8->unk220[2] = sUnknown_80DD340;
+            sub_8012CAC(&sUnknown_203B2B8->unk220[2], sUnknown_203B2B8->unk16C);
             break;
         default:
             for(index = 0; index < 4; index++)
             {
-                gUnknown_203B2B8->unk220[index] = sUnknown_80DD310;
+                sUnknown_203B2B8->unk220[index] = sUnknown_80DD310;
             }
             break; 
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2B8->unk220, TRUE, TRUE);
+    sub_800641C(sUnknown_203B2B8->unk220, TRUE, TRUE);
 }
 
 void sub_80261D0(void)
 {
     Item item;
 
-    switch(gUnknown_203B2B8->state) {
+    switch(sUnknown_203B2B8->state) {
         case 1:
             sub_8026E08(3);
-            sub_8026DAC(0,&gUnknown_203B2B8->item2);
-            PrintColoredPokeNameToBuffer(gAvailablePokemonNames,gUnknown_203B2B8->pokeStruct,7);
-            PrintColoredPokeNameToBuffer(gAvailablePokemonNames + 0x50,gUnknown_203B2B8->pokeStruct,6);
-            sub_8012D60(&gUnknown_203B2B8->unk7C,gUnknown_203B2B8->unk16C,0,gUnknown_203B2B8->unk20C,gUnknown_203B2B8->menuAction1,2);
+            sub_8026DAC(0,&sUnknown_203B2B8->item2);
+            PrintColoredPokeNameToBuffer(gAvailablePokemonNames,sUnknown_203B2B8->pokeStruct,7);
+            PrintColoredPokeNameToBuffer(gAvailablePokemonNames + 0x50,sUnknown_203B2B8->pokeStruct,6);
+            sub_8012D60(&sUnknown_203B2B8->unk7C,sUnknown_203B2B8->unk16C,0,sUnknown_203B2B8->unk20C,sUnknown_203B2B8->menuAction1,2);
             break;
         case 2:
             sub_8026E08(3);
-            sub_8026DAC(0,&gUnknown_203B2B8->item2);
-            PrintColoredPokeNameToBuffer(gAvailablePokemonNames,gUnknown_203B2B8->pokeStruct,7);
-            PrintColoredPokeNameToBuffer(gAvailablePokemonNames + 0x50,gUnknown_203B2B8->pokeStruct,6);
-            sub_8012EA4(&gUnknown_203B2B8->unk7C,1);
+            sub_8026DAC(0,&sUnknown_203B2B8->item2);
+            PrintColoredPokeNameToBuffer(gAvailablePokemonNames,sUnknown_203B2B8->pokeStruct,7);
+            PrintColoredPokeNameToBuffer(gAvailablePokemonNames + 0x50,sUnknown_203B2B8->pokeStruct,6);
+            sub_8012EA4(&sUnknown_203B2B8->unk7C,1);
             break;
         case 3:
-            sub_8024458(gUnknown_203B2B8->pokeSpecies,2);
+            sub_8024458(sUnknown_203B2B8->pokeSpecies,2);
             break;
         case 4:
-            sub_801BEEC(gUnknown_203B2B8->pokeSpecies);
+            sub_801BEEC(sUnknown_203B2B8->pokeSpecies);
             break;
         case 0xe:
-            sub_80227B8(gUnknown_203B2B8->pokeStruct);
+            sub_80227B8(sUnknown_203B2B8->pokeStruct);
             break;
         case 0x12:
             sub_801A5D8(1,0,NULL,10);
@@ -266,74 +229,74 @@ void sub_80261D0(void)
             break;
         case 0x14:
             sub_801A9E0();
-            sub_8012D60(&gUnknown_203B2B8->unkCC,gUnknown_203B2B8->unk16C,0,gUnknown_203B2B8->unk20C,gUnknown_203B2B8->menuAction2,2);
+            sub_8012D60(&sUnknown_203B2B8->unkCC,sUnknown_203B2B8->unk16C,0,sUnknown_203B2B8->unk20C,sUnknown_203B2B8->menuAction2,2);
             break;
         case 0x15:
-            HeldItemToSlot(&item,&gUnknown_203B2B8->item1);
+            HeldItemToSlot(&item,&sUnknown_203B2B8->item1);
             sub_801B3C0(&item);
             break;
         case 0x16:
-            unk_CopyMoves4To8(gUnknown_203B2B8->moves,gUnknown_203B2B8->pokeStruct->moves);
-            sub_801EE10(3,gUnknown_203B2B8->pokeSpecies,gUnknown_203B2B8->moves,0,NULL,0);
+            unk_CopyMoves4To8(sUnknown_203B2B8->moves,sUnknown_203B2B8->pokeStruct->moves);
+            sub_801EE10(3,sUnknown_203B2B8->pokeSpecies,sUnknown_203B2B8->moves,0,NULL,0);
             break;
         case 0x17:
             sub_801F1B0(TRUE, FALSE);
             break;
         case 0xc:
             sub_8026878();
-            sub_8014248(sUnknown_80DD388,0,3,gUnknown_203B2B8->unk1BC,0,4,0,0,0x101);
+            sub_8014248(sUnknown_80DD388,0,3,sUnknown_203B2B8->unk1BC,0,4,0,0,0x101);
             break;
         case 0xd:
             sub_8026878();
-            sub_8014248(sUnknown_80DD420,0,3,gUnknown_203B2B8->unk1BC,0,4,0,0,0x101);
+            sub_8014248(sUnknown_80DD420,0,3,sUnknown_203B2B8->unk1BC,0,4,0,0,0x101);
             break;
         case 0x18:
-            GetLinkedSequence(gUnknown_203B2B8->moveIndex, gUnknown_203B2B8->moves,gUnknown_203B2B8->moveIDs);
-            sub_801F808(gUnknown_203B2B8->moveIDs);
+            GetLinkedSequence(sUnknown_203B2B8->moveIndex, sUnknown_203B2B8->moves,sUnknown_203B2B8->moveIDs);
+            sub_801F808(sUnknown_203B2B8->moveIDs);
             break;
         case 5:
-            gUnknown_203B2B8->fallbackState = 0x19;
+            sUnknown_203B2B8->fallbackState = 0x19;
             PlaySound(0xcf);
             sub_80141B4(sUnknown_80DD4C4,0,0,0x101);
             break;
         case 6:
-            gUnknown_203B2B8->fallbackState = 0x19;
+            sUnknown_203B2B8->fallbackState = 0x19;
             PlaySound(0xcf);
             sub_80141B4(sUnknown_80DD4F4,0,0,0x101);
             break;
         case 7:
-            gUnknown_203B2B8->fallbackState = 0x19;
+            sUnknown_203B2B8->fallbackState = 0x19;
             PlaySound(0xcc);
             sub_80141B4(sBecameLeader,0,0,0x101);
             break;
         case 8:
-            gUnknown_203B2B8->fallbackState = 9;
+            sUnknown_203B2B8->fallbackState = 9;
             PlaySound(0xca);
             sub_80141B4(sUnknown_80DD564,0,0,0x101);
             break;
         case 9:
             sub_8026FA4();
-            sub_808D31C(gUnknown_203B2B8->pokeStruct);
-            gUnknown_203B2B8->unk8 = TRUE;
+            sub_808D31C(sUnknown_203B2B8->pokeStruct);
+            sUnknown_203B2B8->unk8 = TRUE;
             break;
         case 0xf:
-            gUnknown_203B2B8->fallbackState = 2;
+            sUnknown_203B2B8->fallbackState = 2;
             sub_80141B4(sUnknown_80DD594,0,0,0x101);
             break;
         case 0x10:
-            gUnknown_203B2B8->fallbackState = 2;
+            sUnknown_203B2B8->fallbackState = 2;
             sub_80141B4(sUnknown_80DD5B8,0,0,0x101);
             break;
         case 0x11:
-            gUnknown_203B2B8->fallbackState = 2;
+            sUnknown_203B2B8->fallbackState = 2;
             sub_80141B4(sUnknown_80DD60C,0,0,0x101);
             break;
         case 10:
-            gUnknown_203B2B8->fallbackState = 0x19;
+            sUnknown_203B2B8->fallbackState = 0x19;
             sub_80141B4(sUnknown_80DD60C,0,0,0x101);
             break;
         case 0xb:
-            gUnknown_203B2B8->fallbackState = 0x19;
+            sUnknown_203B2B8->fallbackState = 0x19;
             sub_80141B4(sUnknown_80DD63C,0,0,0x101);
             break;
         case 0:
@@ -348,100 +311,100 @@ void sub_80264CC(void) {
     s32 one;
     u16 temp;
     s32 loopMax = 0;
-    pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2B8->pokeSpecies];
-    MemoryFill16(gUnknown_203B2B8->unk20C, 0, sizeof(gUnknown_203B2B8->unk20C));
-    gUnknown_203B2B8->isTeamLeader = gUnknown_203B2B8->pokeStruct->isTeamLeader;
+    pokeStruct = &gRecruitedPokemonRef->pokemon[sUnknown_203B2B8->pokeSpecies];
+    MemoryFill16(sUnknown_203B2B8->unk20C, 0, sizeof(sUnknown_203B2B8->unk20C));
+    sUnknown_203B2B8->isTeamLeader = sUnknown_203B2B8->pokeStruct->isTeamLeader;
 
-    PeekPokemonItem(gUnknown_203B2B8->pokeSpecies, &gUnknown_203B2B8->item2);
+    PeekPokemonItem(sUnknown_203B2B8->pokeSpecies, &sUnknown_203B2B8->item2);
 
     if(temp = pokeStruct->unk0 >> 1, one = 1, temp & one)
     {
-        gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuStandBy;
-        gUnknown_203B2B8->unk16C[loopMax].menuAction = 7;
+        sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuStandBy;
+        sUnknown_203B2B8->unk16C[loopMax].menuAction = 7;
         if(!sub_8026E88(pokeStruct))
         {
-            gUnknown_203B2B8->unk20C[loopMax] = 1;
+            sUnknown_203B2B8->unk20C[loopMax] = 1;
         }
         loopMax += 1;
 
         if(sub_80023E4(8) && !pokeStruct->isTeamLeader)
         {
-            gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuMakeLeader;
-            gUnknown_203B2B8->unk16C[loopMax].menuAction = 8;
+            sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuMakeLeader;
+            sUnknown_203B2B8->unk16C[loopMax].menuAction = 8;
             loopMax += 1;
         }
     }
     else
     {
-        gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuJoinTeam;
-        gUnknown_203B2B8->unk16C[loopMax].menuAction = 6;
-        if(!sub_808D750(gUnknown_203B2B8->pokeSpecies))
+        sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuJoinTeam;
+        sUnknown_203B2B8->unk16C[loopMax].menuAction = 6;
+        if(!sub_808D750(sUnknown_203B2B8->pokeSpecies))
         {
-            gUnknown_203B2B8->unk20C[loopMax] = 1;
+            sUnknown_203B2B8->unk20C[loopMax] = 1;
         }
         loopMax += 1;
     }
     
-    gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuGiveGummi;
-    gUnknown_203B2B8->unk16C[loopMax].menuAction = 10;
+    sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuGiveGummi;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = 10;
     if(!HasGummiItem())
     {
-        gUnknown_203B2B8->unk20C[loopMax] = 1;
+        sUnknown_203B2B8->unk20C[loopMax] = 1;
     }
     loopMax += 1;
     
-    gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuGive;
-    gUnknown_203B2B8->unk16C[loopMax].menuAction = 0xB;
+    sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuGive;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = 0xB;
     if(GetNumberOfFilledInventorySlots() == 0)
     {
-        gUnknown_203B2B8->unk20C[loopMax] = 1; 
+        sUnknown_203B2B8->unk20C[loopMax] = 1; 
     }
     loopMax += 1;
     
-    gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuTake;
-    gUnknown_203B2B8->unk16C[loopMax].menuAction = 0xC;
-    if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE || gUnknown_203B2B8->item2.id == ITEM_NOTHING)
+    sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuTake;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = 0xC;
+    if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE || sUnknown_203B2B8->item2.id == ITEM_NOTHING)
     {
-        gUnknown_203B2B8->unk20C[loopMax] = 1; 
+        sUnknown_203B2B8->unk20C[loopMax] = 1; 
     }
     loopMax += 1;
 
     if((temp = pokeStruct->unk0 >> 1, one = 1, temp & one) == 0)
     {
-        gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuSayFarewell;
-        gUnknown_203B2B8->unk16C[loopMax].menuAction = 9;
+        sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuSayFarewell;
+        sUnknown_203B2B8->unk16C[loopMax].menuAction = 9;
         if(!sub_8026EB8(pokeStruct))
         {
-            gUnknown_203B2B8->unk20C[loopMax] = 1; 
+            sUnknown_203B2B8->unk20C[loopMax] = 1; 
         }
         loopMax += 1;
     }
     
-    gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuSummary;
-    gUnknown_203B2B8->unk16C[loopMax].menuAction = 4;
+    sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuSummary;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = 4;
     loopMax += 1;
-    gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuMoves;
-    gUnknown_203B2B8->unk16C[loopMax].menuAction = 0xD;
+    sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuMoves;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = 0xD;
     loopMax += 1;
-    gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuCheckIQ;
-    gUnknown_203B2B8->unk16C[loopMax].menuAction = 5;
+    sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuCheckIQ;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = 5;
     loopMax += 1;
-    gUnknown_203B2B8->unk16C[loopMax].text = NULL;
-    gUnknown_203B2B8->unk16C[loopMax].menuAction = 1;
+    sUnknown_203B2B8->unk16C[loopMax].text = NULL;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = 1;
 
     for(index = 0; index < loopMax; index++)
     {
-        if(gUnknown_203B2B8->unk20C[index] == 0)
+        if(sUnknown_203B2B8->unk20C[index] == 0)
         {
-            if(gUnknown_203B2B8->unk16C[index].menuAction == gUnknown_203B2B8->menuAction1)
+            if(sUnknown_203B2B8->unk16C[index].menuAction == sUnknown_203B2B8->menuAction1)
                 return;
         }
     }
     for(index = 0; index < loopMax; index++)
     {
-        if(gUnknown_203B2B8->unk20C[index] == 0)
+        if(sUnknown_203B2B8->unk20C[index] == 0)
         {
-            gUnknown_203B2B8->menuAction1 = gUnknown_203B2B8->unk16C[index].menuAction;
+            sUnknown_203B2B8->menuAction1 = sUnknown_203B2B8->unk16C[index].menuAction;
             break;
         }
     }
@@ -451,33 +414,33 @@ void sub_802678C(void)
 {
     s32 index;
     s32 loopMax = 0;
-    MemoryFill16(gUnknown_203B2B8->unk20C, 0, sizeof(gUnknown_203B2B8->unk20C));
-    gUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuGive;
-    gUnknown_203B2B8->unk16C[loopMax].menuAction = 0xB;
+    MemoryFill16(sUnknown_203B2B8->unk20C, 0, sizeof(sUnknown_203B2B8->unk20C));
+    sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuGive;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = 0xB;
     if(GetNumberOfFilledInventorySlots() == 0)
     {
-        gUnknown_203B2B8->unk20C[0] = 1;
+        sUnknown_203B2B8->unk20C[0] = 1;
     }
     loopMax += 1;
-    gUnknown_203B2B8->unk16C[loopMax].text = *gUnknown_80D4970;
-    gUnknown_203B2B8->unk16C[loopMax].menuAction = 4;
+    sUnknown_203B2B8->unk16C[loopMax].text = gCommonInfo[0];
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = 4;
     loopMax += 1;
-    gUnknown_203B2B8->unk16C[loopMax].text = NULL;
-    gUnknown_203B2B8->unk16C[loopMax].menuAction = 1;
+    sUnknown_203B2B8->unk16C[loopMax].text = NULL;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = 1;
 
     for(index = 0; index < loopMax; index++)
     {
-        if(gUnknown_203B2B8->unk20C[index] == 0)
+        if(sUnknown_203B2B8->unk20C[index] == 0)
         {
-            if(gUnknown_203B2B8->unk16C[index].menuAction == gUnknown_203B2B8->menuAction2)
+            if(sUnknown_203B2B8->unk16C[index].menuAction == sUnknown_203B2B8->menuAction2)
                 return;
         }
     }
     for(index = 0; index < loopMax; index++)
     {
-        if(gUnknown_203B2B8->unk20C[index] == 0)
+        if(sUnknown_203B2B8->unk20C[index] == 0)
         {
-            gUnknown_203B2B8->menuAction2 = gUnknown_203B2B8->unk16C[index].menuAction;
+            sUnknown_203B2B8->menuAction2 = sUnknown_203B2B8->unk16C[index].menuAction;
             break;
         }
     }
@@ -485,14 +448,14 @@ void sub_802678C(void)
 
 void sub_8026878(void) {
     s32 loopMax = 0;
-    gUnknown_203B2B8->unk1BC[loopMax].text = *gUnknown_80D4920;
-    gUnknown_203B2B8->unk1BC[loopMax].menuAction = 2;
+    sUnknown_203B2B8->unk1BC[loopMax].text = gCommonYes[0];
+    sUnknown_203B2B8->unk1BC[loopMax].menuAction = 2;
     loopMax += 1;
-    gUnknown_203B2B8->unk1BC[loopMax].text = *gUnknown_80D4928;
-    gUnknown_203B2B8->unk1BC[loopMax].menuAction = 3;
+    sUnknown_203B2B8->unk1BC[loopMax].text = gCommonNo[0];
+    sUnknown_203B2B8->unk1BC[loopMax].menuAction = 3;
     loopMax += 1;
-    gUnknown_203B2B8->unk1BC[loopMax].text = NULL;
-    gUnknown_203B2B8->unk1BC[loopMax].menuAction = 1;
+    sUnknown_203B2B8->unk1BC[loopMax].text = NULL;
+    sUnknown_203B2B8->unk1BC[loopMax].menuAction = 1;
 }
 
 void sub_80268CC(void)
@@ -503,17 +466,17 @@ void sub_80268CC(void)
   s32 choice;
   
   choice = 0;
-  if ((sub_8012FD8(&gUnknown_203B2B8->unk7C) == 0) && (sub_8013114(&gUnknown_203B2B8->unk7C,&choice), choice != 1)) {
-    gUnknown_203B2B8->menuAction1 = choice;
+  if ((sub_8012FD8(&sUnknown_203B2B8->unk7C) == 0) && (sub_8013114(&sUnknown_203B2B8->unk7C,&choice), choice != 1)) {
+    sUnknown_203B2B8->menuAction1 = choice;
   }
   switch(choice) {
     case 6:
-        if (sub_808D750(gUnknown_203B2B8->pokeSpecies)) {
+        if (sub_808D750(sUnknown_203B2B8->pokeSpecies)) {
 
 #ifdef NONMATCHING
-            pokeStruct = &gUnknown_203B2B8->pokeSpecies[gRecruitedPokemonRef->pokemon];
+            pokeStruct = &sUnknown_203B2B8->pokeSpecies[gRecruitedPokemonRef->pokemon];
 #else
-            register size_t offset asm("r1") = offsetof(unkStruct_203B45C, pokemon[gUnknown_203B2B8->pokeSpecies]);
+            register size_t offset asm("r1") = offsetof(unkStruct_203B45C, pokemon[sUnknown_203B2B8->pokeSpecies]);
             PokemonStruct1* p = gRecruitedPokemonRef->pokemon;
             size_t addr = offset + (size_t)p;
             pokeStruct = (PokemonStruct1*)addr;
@@ -526,13 +489,13 @@ void sub_80268CC(void)
         sub_8026074(5);
         break;
     case 7:
-        gUnknown_203B2B8->pokeStruct->unk0 &= ~(FLAG_ON_TEAM);
+        sUnknown_203B2B8->pokeStruct->unk0 &= ~(FLAG_ON_TEAM);
         nullsub_104();
         sub_808ED00();
         sub_8026074(6);
         break;
     case 8:
-        pokeStruct2 = &gRecruitedPokemonRef->pokemon[gUnknown_203B2B8->pokeSpecies];
+        pokeStruct2 = &gRecruitedPokemonRef->pokemon[sUnknown_203B2B8->pokeSpecies];
         playerPokemon = GetPlayerPokemonStruct();
 
         if (!pokeStruct2->isTeamLeader) {
@@ -557,13 +520,13 @@ void sub_80268CC(void)
         break;
     case 0xc:
         PlaySound(0x14d);
-        if (gUnknown_203B2B8->item2.id != ITEM_NOTHING) {
-            AddHeldItemToInventory(&gUnknown_203B2B8->item2);
+        if (sUnknown_203B2B8->item2.id != ITEM_NOTHING) {
+            AddHeldItemToInventory(&sUnknown_203B2B8->item2);
         }
         FillInventoryGaps();
-        gUnknown_203B2B8->item2.id = ITEM_NOTHING;
-        gUnknown_203B2B8->item2.quantity = 0;
-        GivePokemonItem(gUnknown_203B2B8->pokeSpecies,&gUnknown_203B2B8->item2);
+        sUnknown_203B2B8->item2.id = ITEM_NOTHING;
+        sUnknown_203B2B8->item2.quantity = 0;
+        GivePokemonItem(sUnknown_203B2B8->pokeSpecies,&sUnknown_203B2B8->item2);
         nullsub_104();
         sub_8026074(0x11);
         break;
@@ -612,7 +575,7 @@ void sub_8026A94(void)
 
 
 static inline bool8 sub_8026AB0_sub(void) {
-    if (gUnknown_203B2B8->pokeStruct->dungeonLocation.id == DUNGEON_HOWLING_FOREST_2 || gUnknown_203B2B8->pokeStruct->dungeonLocation.id == DUNGEON_POKEMON_SQUARE)
+    if (sUnknown_203B2B8->pokeStruct->dungeonLocation.id == DUNGEON_HOWLING_FOREST_2 || sUnknown_203B2B8->pokeStruct->dungeonLocation.id == DUNGEON_POKEMON_SQUARE)
         return TRUE;
     else
         return FALSE;
@@ -679,15 +642,15 @@ void sub_8026B64(void)
     switch(sub_801A6E8(TRUE))
     {
         case 3:
-            gUnknown_203B2B8->id = sub_801A8AC();
-            gUnknown_203B2B8->item1.id = gTeamInventoryRef->teamItems[gUnknown_203B2B8->id].id;
-            gUnknown_203B2B8->item1.quantity = gTeamInventoryRef->teamItems[gUnknown_203B2B8->id].quantity;
+            sUnknown_203B2B8->id = sub_801A8AC();
+            sUnknown_203B2B8->item1.id = gTeamInventoryRef->teamItems[sUnknown_203B2B8->id].id;
+            sUnknown_203B2B8->item1.quantity = gTeamInventoryRef->teamItems[sUnknown_203B2B8->id].quantity;
             sub_8026074(0x14);
             break;
         case 4:
-            gUnknown_203B2B8->id = sub_801A8AC();
-            gUnknown_203B2B8->item1.id = gTeamInventoryRef->teamItems[gUnknown_203B2B8->id].id;
-            gUnknown_203B2B8->item1.quantity = gTeamInventoryRef->teamItems[gUnknown_203B2B8->id].quantity;
+            sUnknown_203B2B8->id = sub_801A8AC();
+            sUnknown_203B2B8->item1.id = gTeamInventoryRef->teamItems[sUnknown_203B2B8->id].id;
+            sUnknown_203B2B8->item1.quantity = gTeamInventoryRef->teamItems[sUnknown_203B2B8->id].quantity;
             sub_8099690(0);
             sub_8026074(0x15);
             break;
@@ -710,27 +673,27 @@ void sub_8026C14(void)
 
   menuAction = 0;
   sub_801A6E8(FALSE);
-  if ((sub_8012FD8(&gUnknown_203B2B8->unkCC) == '\0') && (sub_8013114(&gUnknown_203B2B8->unkCC,&menuAction), menuAction != 1)) {
-    gUnknown_203B2B8->menuAction2 = menuAction;
+  if ((sub_8012FD8(&sUnknown_203B2B8->unkCC) == '\0') && (sub_8013114(&sUnknown_203B2B8->unkCC,&menuAction), menuAction != 1)) {
+    sUnknown_203B2B8->menuAction2 = menuAction;
   }
   switch(menuAction)
   {
       case 0xb:
         nextState = 0xF;
         PlaySound(0x14d);
-        ShiftItemsDownFrom(gUnknown_203B2B8->id);
+        ShiftItemsDownFrom(sUnknown_203B2B8->id);
         FillInventoryGaps();
-        if (gUnknown_203B2B8->item2.id != ITEM_NOTHING) {
-          AddHeldItemToInventory(&gUnknown_203B2B8->item2);
+        if (sUnknown_203B2B8->item2.id != ITEM_NOTHING) {
+          AddHeldItemToInventory(&sUnknown_203B2B8->item2);
           nextState = 0x10;
         }
-        HeldItemToSlot(&slot,&gUnknown_203B2B8->item1);
+        HeldItemToSlot(&slot,&sUnknown_203B2B8->item1);
         temp.unk0 = 0;
         temp.unk4 = 0;
         temp.unk8 = 1;
         slot.flags = ITEM_FLAG_EXISTS;
         sub_8090E14(gUnknown_202DEA8,&slot,&temp);
-        GivePokemonItem(gUnknown_203B2B8->pokeSpecies,&gUnknown_203B2B8->item1);
+        GivePokemonItem(sUnknown_203B2B8->pokeSpecies,&sUnknown_203B2B8->item1);
         sub_801A928();
         nullsub_104();
         sub_8026074(nextState);
@@ -770,8 +733,8 @@ void sub_8026D0C(void)
             break;
         case 3:
         case 4:
-            gUnknown_203B2B8->moveIndex = sub_801F194();
-            gUnknown_203B2B8->moveID = gUnknown_203B2B8->moves[gUnknown_203B2B8->moveIndex].id;
+            sUnknown_203B2B8->moveIndex = sub_801F194();
+            sUnknown_203B2B8->moveID = sUnknown_203B2B8->moves[sUnknown_203B2B8->moveIndex].id;
             sub_8026074(0x18);
             break;
         case 2:
@@ -801,7 +764,7 @@ void sub_8026D88(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        sub_8026074(gUnknown_203B2B8->fallbackState);
+        sub_8026074(sUnknown_203B2B8->fallbackState);
     }
 }
 
@@ -830,8 +793,8 @@ void sub_8026E08(u32 r0)
 
     sub_8008C54(r0);
     sub_80073B8(r0);
-    sub_80922B4(gAvailablePokemonNames, gUnknown_203B2B8->pokeStruct->name, POKEMON_NAME_LENGTH);
-    sub_808D930(buffer, gUnknown_203B2B8->pokeStruct->speciesNum);
+    sub_80922B4(gAvailablePokemonNames, sUnknown_203B2B8->pokeStruct->name, POKEMON_NAME_LENGTH);
+    sub_808D930(buffer, sUnknown_203B2B8->pokeStruct->speciesNum);
     sprintfStatic(buffer1, sUnknown_80DD6E0, gAvailablePokemonNames);
     x = sub_8008ED0(buffer1);
     xxx_call_draw_string(((sUnknown_80DD370.unkC << 3) - x) / 2, 3, buffer1, r0, 0);
@@ -909,31 +872,31 @@ bool8 CanTakePokemonHeldItem(PokemonStruct1 *r0)
 
 void sub_8026FA4(void)
 {
-    switch(sub_8026F04(gUnknown_203B2B8->pokeStruct))
+    switch(sub_8026F04(sUnknown_203B2B8->pokeStruct))
     {
         case 1:
             PlaySound(0x14d);
-            AddHeldItemToInventory(&gUnknown_203B2B8->item2);
+            AddHeldItemToInventory(&sUnknown_203B2B8->item2);
             FillInventoryGaps();
-            gUnknown_203B2B8->item2.id = ITEM_NOTHING;
-            gUnknown_203B2B8->item2.quantity = 0;
-            GivePokemonItem(gUnknown_203B2B8->pokeSpecies, &gUnknown_203B2B8->item2);
+            sUnknown_203B2B8->item2.id = ITEM_NOTHING;
+            sUnknown_203B2B8->item2.quantity = 0;
+            GivePokemonItem(sUnknown_203B2B8->pokeSpecies, &sUnknown_203B2B8->item2);
             sub_8026074(0xA);
             break;
         case 2:
             PlaySound(0x14d);
-            if(IsThrowableItem(gUnknown_203B2B8->item2.id))
+            if(IsThrowableItem(sUnknown_203B2B8->item2.id))
             {
-                gTeamInventoryRef->teamStorage[gUnknown_203B2B8->item2.id] += gUnknown_203B2B8->item2.quantity;
+                gTeamInventoryRef->teamStorage[sUnknown_203B2B8->item2.id] += sUnknown_203B2B8->item2.quantity;
             }
             else
             {
-                gTeamInventoryRef->teamStorage[gUnknown_203B2B8->item2.id] += 1;
+                gTeamInventoryRef->teamStorage[sUnknown_203B2B8->item2.id] += 1;
             }
 
-            gUnknown_203B2B8->item2.id = ITEM_NOTHING;
-            gUnknown_203B2B8->item2.quantity = 0;
-            GivePokemonItem(gUnknown_203B2B8->pokeSpecies, &gUnknown_203B2B8->item2);
+            sUnknown_203B2B8->item2.id = ITEM_NOTHING;
+            sUnknown_203B2B8->item2.quantity = 0;
+            GivePokemonItem(sUnknown_203B2B8->pokeSpecies, &sUnknown_203B2B8->item2);
             sub_8026074(0xB);
             break;
         case 0:

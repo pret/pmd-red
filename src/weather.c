@@ -4,7 +4,7 @@
 #include "constants/item.h"
 #include "constants/move_id.h"
 #include "constants/weather.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_items.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"

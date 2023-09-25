@@ -290,7 +290,7 @@ gUnknown_8106E5C: @ 8106E5C
 	.global gUnknown_8106E6C
 gUnknown_8106E6C: @ 8106E6C
         .string "Say bye to\n"
-        .string "$d0 more\0"
+        .string "{ARG_VALUE_0} more\0"
         .align 2,0
 
 	.global gUnknown_8106E80

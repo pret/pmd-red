@@ -1,7 +1,7 @@
 #include "global.h"
 #include "tile_types.h"
 #include "code_806CD90.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
 

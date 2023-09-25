@@ -4,6 +4,7 @@
 #include "code_801B3C0.h"
 #include "code_801B60C.h"
 #include "code_8098BDC.h"
+#include "common_strings.h"
 #include "constants/colors.h"
 #include "items.h"
 #include "kecleon_bros4.h"
@@ -18,10 +19,6 @@ extern u8 gUnknown_202DEA8[];
 extern u8 gAvailablePokemonNames[]; // 202DF98
 
 static EWRAM_DATA_2 unkStruct_203B234 *sUnknown_203B234 = {0};
-
-extern const u8 *gUnknown_80D4920[];
-extern const u8 *gUnknown_80D4928[];
-extern const u8 *gUnknown_80D4970[];
 
 #include "data/code_801B60C.h" // 80DBA58
 
@@ -311,7 +308,7 @@ static void sub_801BB5C(void)
     sUnknown_203B234->unkCC[loopMax].menuAction = 7;
 
     loopMax++;
-    sUnknown_203B234->unkCC[loopMax].text = *gUnknown_80D4970;
+    sUnknown_203B234->unkCC[loopMax].text = gCommonInfo[0];
     sUnknown_203B234->unkCC[loopMax].menuAction = 8;
 
     loopMax++;
@@ -337,11 +334,11 @@ static void sub_801BC24(void)
     s32 loopMax;
 
     loopMax = 0;
-    sUnknown_203B234->unkCC[loopMax].text = *gUnknown_80D4920;
+    sUnknown_203B234->unkCC[loopMax].text = gCommonYes[0];
     sUnknown_203B234->unkCC[loopMax].menuAction = 2;
 
     loopMax++;
-    sUnknown_203B234->unkCC[loopMax].text = *gUnknown_80D4928;
+    sUnknown_203B234->unkCC[loopMax].text = gCommonNo[0];
     sUnknown_203B234->unkCC[loopMax].menuAction = 3;
 
     loopMax++;

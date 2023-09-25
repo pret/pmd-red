@@ -3,13 +3,13 @@
 
 #include "constants/move.h"
 #include "file_system.h"
-#include "menu.h"
-#include "text.h"
+#include "structs/menu.h"
+#include "structs/str_text.h"
 
 // size: 0x18C
 typedef struct GulpinShopWork
 {
-    /* 0x0 */ u32 isAsleep;
+    /* 0x0 */ u32 mode; // Corresponds to the enum: GulpinShopMode
     /* 0x4 */ s32 state;
     u32 unk8;
     /* 0xC */ s16 speciesNum; // species of chosen Pokemon
@@ -36,7 +36,7 @@ typedef struct GulpinShopWork
     UnkTextStruct2 unk12C[4];
 } GulpinShopWork;
 
-bool8 CreateGulpinShop(s32 isAsleep, s16 pokeSpecies, Move *moves);
+bool8 CreateGulpinShop(u32 mode, s16 pokeSpecies, Move *moves);
 void DestroyGulpinShop(void);
 bool8 GulpinIsNextMoveLinked(void);
 

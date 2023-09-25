@@ -1,11 +1,8 @@
 #include "global.h"
-#include "wonder_mail.h"
 #include "code_80958E8.h"
+#include "mailbox_8095F8C.h"
 
 extern unkStruct_203B490 *gUnknown_203B490;
-
-bool8 IsMailSlotEmpty(u8);
-void ResetMailboxSlot(u8);
 
 s32 CountFilledMailboxSlots(void)
 {
@@ -21,8 +18,7 @@ s32 CountFilledMailboxSlots(void)
     return counter;
 }
 
-// Unused
-bool8 sub_8095FB0(WonderMail *mail)
+UNUSED static bool8 sub_8095FB0(WonderMail *mail)
 {
     s32 index;
 

@@ -1,7 +1,7 @@
 #ifndef GUARD_DUNGEON_POKEMON_SPRITES_H
 #define GUARD_DUNGEON_POKEMON_SPRITES_H
 
-#include "position.h"
+#include "structs/str_position.h"
 
 // size: 0x8
 typedef struct DungeonPokemonStatusSprite

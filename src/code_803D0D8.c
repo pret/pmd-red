@@ -10,9 +10,9 @@ u8 sub_803D0D8()
     return sUnknown_203B408;
 }
 
-UNUSED static void sub_803D0E4(u8 r0)
+UNUSED static void sub_803D0E4(u8 a0)
 {
-    sUnknown_203B408 = r0;
+    sUnknown_203B408 = a0;
 }
 
 u8 sub_803D0F0(u8 r0)

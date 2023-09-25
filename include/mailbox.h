@@ -1,8 +1,8 @@
 #ifndef GUARD_MAILBOX_H
 #define GUARD_MAILBOX_H 
 
-#include "menu.h"
-#include "text.h"
+#include "structs/menu.h"
+#include "structs/str_text.h"
 #include "constants/mailbox.h"
 #include "code_802C39C.h"
 
@@ -25,19 +25,20 @@ struct unkStruct_203B304
 extern void SetMailboxState(u32);
 extern s32 GetNumAcceptedJobs(void);
 
-enum MailBoxStates {
+enum MailBoxStates
+{
     INITIALIZE_MAILBOX,
     MAIN_MAILBOX_MENU,
-    // 2 is ???
+    // 2
     MAILBOX_EXIT = 3,
-    MAIL_MENU = 4,
-    MAIL_MENU_1 = 5,
-    MAIL_ACTION_MENU = 6,
-    MAIL_INFO = 7,
-    JOB_LIST_MENU = 8,
-    PKMN_NEWS_MENU = 0x9,
-    PKMN_NEWS_MENU_1 = 0xA,
-    DISPLAY_SEL_PKMN_NEWS = 0xB,
+    MAIL_MENU,
+    MAIL_MENU_1,
+    MAIL_ACTION_MENU,
+    MAIL_INFO,
+    JOB_LIST_MENU,
+    PKMN_NEWS_MENU,
+    PKMN_NEWS_MENU_1,
+    DISPLAY_SEL_PKMN_NEWS,
 };
 
 #endif // GUARD_MAILBOX_H

@@ -9,13 +9,6 @@
 #include "random.h"
 #include "pokemon.h"
 
-struct unkStruct_8096AF8
-{
-    bool8 unk0;
-    u16 clientSpecies;
-    u16 targetSpecies;
-};
-
 extern u8 IsJobSlotEmpty(u8);
 extern bool8 IsValidWonderMail(WonderMail *WonderMailData);
 extern u8 sub_8095E38(WonderMail *, u8, u8, bool8);
@@ -24,7 +17,6 @@ extern void sub_8096C80(void);
 extern void sub_8096D24(void);
 extern void sub_80965F4();
 extern void SortPelipperJobs();
-extern WonderMail *GetPelipperBoardSlotInfo(u8);
 u8 sub_8097318(s16 param_1);
 extern bool8 GenerateMailJobInfo(WonderMail *);
 

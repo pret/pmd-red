@@ -3,7 +3,7 @@
 
 #include "global.h"
 #include "constants/move.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "pokemon.h"
 
 // size: 0xA4

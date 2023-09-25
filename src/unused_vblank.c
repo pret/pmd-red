@@ -2,7 +2,6 @@
 #include "reg_control.h"
 
 extern unkStruct_202D648 gUnknown_202D608[8];
-extern unkStruct_202D648 gUnknown_202D648[8];
 
 // Unused?
 s32 sub_800B720(s16 a0, IntrCallback a1)

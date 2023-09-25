@@ -4,8 +4,8 @@
 #include "constants/status.h"
 #include "constants/type.h"
 #include "constants/weather.h"
-#include "dungeon_entity.h"
-#include "dungeon_global_data.h"
+#include "structs/dungeon_entity.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
@@ -14,8 +14,6 @@
 #include "weather.h"
 #include "game_options.h"
 #include "text_util.h"
-
-extern GameOptions *gGameOptionsRef;
 
 struct unkStruct_80F520C
 {

@@ -12,5 +12,6 @@ typedef struct unkStruct_811BAF4
 } unkStruct_811BAF4;
 
 bool8 sub_8098F88(void);
+const char *sub_8098FB4(void);
 
 #endif // GUARD_GROUND_MAIN_H

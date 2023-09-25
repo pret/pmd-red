@@ -1,8 +1,8 @@
 #ifndef GUARD_MENU_INPUT_H
 #define GUARD_MENU_INPUT_H
 
-#include "menu.h"
-#include "text.h"
+#include "structs/menu.h"
+#include "structs/str_text.h"
 
 u32 sub_8012A64(MenuInputStructSub *r0, s32 r1);
 s32 GetKeyPress(MenuInputStruct *r0);
@@ -42,5 +42,10 @@ void sub_8013A54(MenuInputStruct *param_1);
 void sub_8013A7C(MenuInputStruct *param_1);
 void AddMenuCursorSprite_(MenuInputStruct *, u32);
 void nullsub_34(MenuInputStructSub *);
+
+void sub_8013AA0(unkStructFor8013AA0 *);
+u32 sub_8013BBC(unkStructFor8013AA0 *);
+void sub_8013C68(unkStructFor8013AA0 *);
+void sub_8013D10(unkStructFor8013AA0 *);
 
 #endif // GUARD_MENU_INPUT_H

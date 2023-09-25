@@ -7,14 +7,14 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_ai_movement.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
 #include "dungeon_items.h"
 #include "code_808417C.h"
 #include "code_8077274_1.h"
 #include "dungeon_movement.h"
-#include "map.h"
+#include "structs/map.h"
 
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DE58[];
@@ -688,7 +688,7 @@ void HealTargetHP(Entity *pokemon, Entity *target, s32 param_3, s32 param_4, boo
             if (sub_8045888(target) != 0) {
                 r8 = maxHPStat;
             }
-            sub_80522F4(pokemon,target,*gUnknown_80FB240); // m0$'s max HP rose by $d1
+            sub_80522F4(pokemon,target,*gUnknown_80FB240); // m0$'s max HP rose by {ARG_VALUE_1}
         }
         if (HP != 0) {
             if (sub_8045888(target) != 0) {
@@ -699,7 +699,7 @@ void HealTargetHP(Entity *pokemon, Entity *target, s32 param_3, s32 param_4, boo
                     sub_80522F4(pokemon,target,*gUnknown_80FB1E0); // $m0 was fully healed
                 }
                 else {
-                    sub_80522F4(pokemon,target,*gUnknown_80FB1C4); // $m0 recovered $d0 HP
+                    sub_80522F4(pokemon,target,*gUnknown_80FB1C4); // $m0 recovered {ARG_VALUE_0} HP
                 }
             }
         }

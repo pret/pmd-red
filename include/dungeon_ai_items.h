@@ -1,8 +1,8 @@
 #ifndef GUARD_DUNGEON_AI_ITEMS_H
 #define GUARD_DUNGEON_AI_ITEMS_H
 
-#include "dungeon_entity.h"
-#include "position.h"
+#include "structs/dungeon_entity.h"
+#include "structs/str_position.h"
 
 void DecideUseItem(Entity *pokemon);
 void FindStraightThrowableTargets(Entity *pokemon, s32 thrownAIFlag, Item *item, bool8 ignoreRollChance);

@@ -30,14 +30,16 @@ enum MusicPlayerIndex
 // TODO: continue to doc the rest of BG/Fanfare Player States
 enum BG_Player_State
 {
-    BG_PLAYER_STATE_INITIALIZE = 0,
-    BG_PLAYER_STATE_PLAYING = 1,
+    BG_PLAYER_STATE_INITIALIZE,
+    BG_PLAYER_STATE_PLAYING,
+    // 2 - 3
     BG_PLAYER_STATE_STOPPED = 4,
 };
 
 enum Fanfare_Player_State
 {
-    FANFARE_PLAYER_STATE_INITIALIZE = 0,
+    FANFARE_PLAYER_STATE_INITIALIZE,
+    // 1 - 2
     FANFARE_PLAYER_STATE_PLAYING = 3,
 };
 

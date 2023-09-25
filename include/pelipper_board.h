@@ -17,11 +17,13 @@ struct unkStruct_203B308
 extern struct unkStruct_203B308 *gPelipperBoard;
 
 
-enum PelipperBoardStates {
+enum PelipperBoardStates
+{
     INITIALIZE_PELIPPER_BOARD,
     MAIN_PELIPPER_BOARD_MENU,
-    // 2 is ???
+    // 2
     PELIPPER_BOARD_EXIT = 3,
+    // 4 - 6
     PELIPPER_JOB_INFO = 7,
     PELIPPER_JOB_LIST_MENU,
 };

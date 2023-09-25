@@ -1,6 +1,6 @@
 static const FriendAreaSettings sFriendAreaSettings[NUM_FRIEND_AREAS] = // 810AA90
 {
-    [NONE] = {
+    [FRIEND_AREA_NONE] = {
         .num_pokemon = 0,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 0,

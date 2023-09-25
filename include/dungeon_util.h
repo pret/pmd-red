@@ -2,8 +2,8 @@
 #define GUARD_DUNGEON_UTIL_H
 
 #include "constants/direction.h"
-#include "dungeon_entity.h"
-#include "position.h"
+#include "structs/dungeon_entity.h"
+#include "structs/str_position.h"
 
 extern const Position gAdjacentTileOffsets[NUM_DIRECTIONS];
 

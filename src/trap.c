@@ -3,7 +3,7 @@
 
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
-#include "map.h"
+#include "structs/map.h"
 
 bool8 CanLayTrap(Position *pos)
 {

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_music.h"
 #include "exclusive_pokemon.h"
 

@@ -1,18 +1,19 @@
 #include "global.h"
-#include "memory.h"
+#include "code_80130A8.h"
+#include "code_8094F88.h"
+#include "constants/main_menu.h"
+#include "dungeon.h"
 #include "input.h"
 #include "items.h"
-#include "menu.h"
+#include "main_menu1.h"
+#include "memory.h"
+#include "menu_input.h"
 #include "pokemon.h"
+#include "rescue_password_menu.h"
 #include "save.h"
 #include "text1.h"
 #include "text2.h"
-#include "main_menu.h"
-#include "rescue_password_menu.h"
-#include "code_8094F88.h"
 #include "wonder_mail.h"
-#include "menu_input.h"
-#include "dungeon.h"
 
 #define RESCUE_PASSWORD_SIZE 0x36
 
@@ -242,15 +243,10 @@ ALIGNED(4) const u8 sUnknown_80E75CC[] = _("{CENTER_ALIGN}There is no space for 
 
 static const u8 fill0[] = "pksdir0";
 
-extern s32 sub_8035D74(void);
-extern void sub_80151C0(u32, u8 *);
 extern void sub_8031D70(u32, u32);
-extern void sub_80155F0(void);
 extern void sub_8031E10(void);
-extern u32 sub_80154F0(void);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E00(void);
-extern void xxx_draw_string_80144C4(void);
 
 void DisplayRescuePasswordError(u32 error);
 void sub_8039174(void);
@@ -347,7 +343,7 @@ s32 UpdateRescuePasswordMenu(void)
   unkStruct_203B480 *mailPtr1;
   unkStruct_203B480 *mailPtr2;
   u32 iVar7;
-  struct MainMenu *mainMenuPtr;
+  MainMenu1Work *mainMenuPtr;
   s32 nextMenu;
   unkStruct_203B480 mail;
   u32 menuAction;
@@ -556,31 +552,31 @@ void DisplayRescuePasswordError(u32 passwordError)
   sub_80155F0();
   switch(passwordError) {
     case PASSWORD_ENTRY_INCORRECT_PASSWORD:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E71FC,gUnknown_80E7214,0,0xd,0);
+        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E71FC,gUnknown_80E7214,FALSE,13,FALSE);
         break;
     case PASSWORD_ENTRY_NOT_SOS_MAIL:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E72EC,gUnknown_80E7304,0,0xd,0);
+        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E72EC,gUnknown_80E7304,FALSE,13,FALSE);
         break;
     case PASSWORD_ENTRY_DUPLICATE_SOS_MAIL:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7344,gUnknown_80E735C,0,0xd,0);
+        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7344,gUnknown_80E735C,FALSE,13,FALSE);
         break;
     case PASSWORD_ENTRY_NO_SPACE:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7588,gUnknown_80E75A0,0,0xd,0);
+        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7588,gUnknown_80E75A0,FALSE,13,FALSE);
         break;
     case PASSWORD_ENTRY_NOT_AOK_MAIL:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E73AC,gUnknown_80E73C4,0,0xd,0);
+        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E73AC,gUnknown_80E73C4,FALSE,13,FALSE);
         break;
     case PASSWORD_ENTRY_DUPLICATE_AOK_MAIL:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7408,gUnknown_80E7420,0,0xd,0);
+        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7408,gUnknown_80E7420,FALSE,13,FALSE);
         break;
     case PASSWORD_ENTRY_NOT_THANK_YOU_MAIL:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7468,gUnknown_80E7480,0,0xd,0);
+        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7468,gUnknown_80E7480,FALSE,13,FALSE);
         break;
     case PASSWORD_ENTRY_DUPLICATE_THANK_YOU_MAIL:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E74C8,gUnknown_80E74E0,0,0xd,0);
+        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E74C8,gUnknown_80E74E0,FALSE,13,FALSE);
         break;
     case PASSWORD_ENTRY_NOT_WONDER_MAIL:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E752C,gUnknown_80E7544,0,0xd,0);
+        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E752C,gUnknown_80E7544,FALSE,13,FALSE);
         break;
     default:
         break;
@@ -594,7 +590,7 @@ void DisplayPasswordAcceptScreen(void)
   ResetUnusedInputStruct();
   sub_800641C(NULL, TRUE, TRUE);
   sub_80155F0();
-  SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7278,gUnknown_80E7290,0,0xd,0);
+  SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7278,gUnknown_80E7290,FALSE,13,FALSE);
   sub_8035CF4(gRescuePasswordMenu->unk8,0,TRUE);
 }
 
@@ -636,7 +632,7 @@ u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, unkStruct_203B480 *param_3)
 {
   if ( (!sub_803D204(passwordBuffer, param_3)) || (WONDER_MAIL_TYPE_OKD < param_3->mailType) ||
        (param_3->unk4.dungeon.floor >= GetDungeonFloorCount(param_3->unk4.dungeon.id)) ||
-       (param_3->clientSpecies == MONSTER_NONE) || (MONSTER_MAX < param_3->clientSpecies) ||
+       (param_3->clientSpecies == MONSTER_NONE) || (MONSTER_MAX - 1 < param_3->clientSpecies) ||
        (IsInvalidItemReward(param_3->item.id))) {
         return PASSWORD_ENTRY_INCORRECT_PASSWORD;
   }
@@ -686,52 +682,49 @@ u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, unkStruct_203B480 *param_3)
 
 void sub_8039174(void)
 {
-    u16 temp;
-    #ifndef NONMATCHING
-    register u32 r2 asm("r2");
-    #else
-    u32 r2; // r4 but should be r2
-    #endif //NONMATCHING
-    SpriteOAM* spr; // r2 but should be r3
-    u16 r4; // r3 but should be r4
+    struct SpriteOAM* spr;
+    s16 earlyF;
 
     spr = &gRescuePasswordMenu->unk208;
 
     spr->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
-
     spr->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
-
     spr->attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
-
     spr->attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
-
     spr->attrib1 &= ~SPRITEOAM_MASK_BPP;
 
-    r2 = 1 << SPRITEOAM_SHIFT_SHAPE;
-    spr->attrib1 &= ~SPRITEOAM_MASK_SHAPE;
-    spr->attrib1 |= r2;
+    {
+        s32 temp = 1 << SPRITEOAM_SHIFT_SHAPE;
+        spr->attrib1 &= ~SPRITEOAM_MASK_SHAPE;
+        spr->attrib1 |= temp;
+    } while(0);
 
-    r2 = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
-    spr->attrib3 &= ~SPRITEOAM_MASK_TILENUM;
-    spr->attrib3 |= r2;
+    {
+        s32 temp = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
+        spr->attrib3 &= ~SPRITEOAM_MASK_TILENUM;
+        spr->attrib3 |= temp;
+    } while(0);
 
     spr->attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
 
-    r2 = (u16)~SPRITEOAM_MASK_UNK6_4;
+    earlyF = (s16)~SPRITEOAM_MASK_UNK6_4;
 
-    r4 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
-    spr->attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-    spr->attrib3 |= r4;
+    {
+        s32 temp = 15 << SPRITEOAM_SHIFT_PALETTENUM;
+        spr->attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
+        spr->attrib3 |= temp;
+    } while(0);
 
-    #ifndef NONMATCHING
-    while (0) ;
-    #endif //NONMATCHING
-    spr->attrib2 = 0; // Without the while(0), this 0 is loaded super early and also into r3
+    {
+        s32 temp = 0;
+        spr->attrib2 = temp;
+    } while(0);
 
-    temp = 192 << SPRITEOAM_SHIFT_UNK6_4;
-    r2 &= spr->unk6;
-    r2 |= temp;
-    spr->unk6 = r2;
+    {
+        s32 temp = 192 << SPRITEOAM_SHIFT_UNK6_4;
+        spr->unk6 &= earlyF;
+        spr->unk6 |= temp;
+    } while(0);
 }
 
 void sub_80391F8(void)

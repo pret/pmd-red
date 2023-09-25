@@ -1,8 +1,8 @@
 #include "global.h"
 #include "bg_palette_buffer.h"
 #include "code_80118A4.h"
-#include "code_8012A18_1.h"
 #include "code_80130A8.h"
+#include "code_801602C.h"
 #include "code_8098BDC.h"
 #include "constants/emotions.h"
 #include "constants/input.h"
@@ -51,8 +51,6 @@ extern void sub_800836C(u32, u8 *r0, u32);
 extern void RedrawPartnerSelectionMenu(void);
 
 extern u32 sub_80095E4(s16, u32);
-
-extern GameOptions *gGameOptionsRef;
 
 extern const char gStarterReveal[];
 
@@ -682,7 +680,7 @@ void NicknamePartner(void)
 
 void PrintEndIntroText(void)
 {
-  if (sub_8016080() != 0) {
+  if (sub_8016080()) {
     sub_80160D8();
     sub_80141B4(gEndIntroText, 0, 0, 0x301);
     gPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_TEST_END;

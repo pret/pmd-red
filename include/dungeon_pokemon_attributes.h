@@ -1,7 +1,7 @@
 #ifndef GUARD_DUNGEON_POKEMON_ATTRIBUTES_H
 #define GUARD_DUNGEON_POKEMON_ATTRIBUTES_H
 
-#include "dungeon_entity.h"
+#include "structs/dungeon_entity.h"
 
 bool8 HasSafeguardStatus(Entity * param_1, Entity * param_2, bool8 displayMessage);
 bool8 sub_80717A4(Entity *pokemon, u16 moveID);

@@ -1,6 +1,6 @@
 #include "global.h"
 #include "constants/ability.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_pokemon_attributes.h"
 #include "status_checks_1.h"
 #include "text_util.h"

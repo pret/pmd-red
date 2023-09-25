@@ -1,7 +1,7 @@
 #ifndef GUARD_DUNGEON_MOVEMENT
 #define GUARD_DUNGEON_MOVEMENT
 
-#include "dungeon_entity.h"
+#include "structs/dungeon_entity.h"
 
 u8 GetCrossableTerrain(s16 species);
 u8 sub_807034C(s16 id, struct Tile *tile);

@@ -1,15 +1,26 @@
 #include "global.h"
+#include "code_802DE84.h"
+#include "common_strings.h"
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "input.h"
 #include "mailbox.h"
 #include "wonder_mail.h"
 #include "menu_input.h"
 #include "code_80118A4.h"
+#include "wonder_mail_2_1.h"
+#include "pokemon_news1.h"
+#include "pokemon_news2.h"
+#include "pokemon_news3.h"
+#include "mailbox_8095F8C.h"
+#include "code_803B050.h"
+#include "code_80958E8_1.h"
 
 EWRAM_DATA_2 struct unkStruct_203B304 *gUnknown_203B304 = {0};
+
+static const u8 wonder_mail_802DF88_fill1[] = "pksdir0";
 
 const UnkTextStruct2 gUnknown_80E0284 =
 {
@@ -60,11 +71,6 @@ const u8 gMailAccepted[] = "Accepted";
 const u8 gUnknown_80E0324[] = "/";
 static const u8 mailbox_fill[] = "pksdir0";
 
-extern u8 *gUnknown_80D4990[];
-extern u8 *gUnknown_80D4970[];
-
-extern bool8 IsMailinJobSlot(WonderMail *mail);
-
 void sub_802E578(void);
 void HandleMailActionMenu(void);
 void HandleMailboxMenu(void);
@@ -78,39 +84,12 @@ void sub_802E7D0(void);
 extern void sub_802E088(u32);
 extern void CreateMailboxMenu(void);
 extern void CreateMailActionMenu(void);
-extern void sub_802BD14(u32, u32, u32);
-extern void sub_802BE94(u32);
-extern void CreateMailMenu(void);
 extern void CreateMailAcceptedStatusBox(u32);
-extern void sub_803B35C(WonderMail *, unkStruct_802C39C *);
-extern void sub_802DE84(unkStruct_802C39C *);
-extern void InitializeJobListMenu(u32);
-extern void sub_802B640(u32, u32, u32);
-extern void sub_802B7D0(u32);
-extern void sub_802B9FC(u8);
-extern u32 sub_802BA8C(void);
-extern void sub_802BACC(void);
-extern u8 GetPokemonNewsIndex(void);
-extern void sub_802B81C(void);
-extern u32 sub_802B720(u32);
-extern u32 sub_802C898(void);
-extern void sub_802C8F4(void);
-extern u32 sub_802DEE0(void);
-extern void sub_802DF24(void);
-extern WonderMail *GetMailboxSlotInfo(u8);
-extern u8 HasNoMailinMailbox(void);
-extern u32 sub_802BDEC(u32);
 extern void AcceptJob(WonderMail *);
 extern void sub_8096C80(void);
 extern void sub_8096D24(void);
-extern void ResetMailboxSlot(u8);
 extern void ReceivePKMNNews(u8);
 extern void sub_8096078(void);
-extern void sub_802BEDC(void);
-extern u8 sub_802BE74(void);
-extern u8 HasNoAcceptedJobs(void);
-extern u8 HasNoPelipperBoardJobs(void);
-extern u8 HasNoPKMNNews(void);
 
 u32 sub_802DFB0(void)
 {
@@ -218,10 +197,10 @@ void sub_802E1AC(void)
             sub_8012D60(&gUnknown_203B304->unk6C, gUnknown_203B304->menuItems, 0, gUnknown_203B304->unkFC, gUnknown_203B304->menuAction1, 2);
             break;
         case MAIL_MENU:
-            sub_802BD14(0, 0, 4);
+            sub_802BD14(0, NULL, 4);
             break;
         case MAIL_MENU_1:
-            sub_802BE94(1);
+            sub_802BE94(TRUE);
             break;
         case MAIL_ACTION_MENU:
             CreateMailMenu();
@@ -238,10 +217,10 @@ void sub_802E1AC(void)
             InitializeJobListMenu(0);
             break;
         case PKMN_NEWS_MENU:
-            sub_802B640(0, 0, 8);
+            sub_802B640(0, NULL, 8);
             break;
         case PKMN_NEWS_MENU_1:
-            sub_802B7D0(1);
+            sub_802B7D0(TRUE);
             break;
         case DISPLAY_SEL_PKMN_NEWS:
             sub_802B9FC(gUnknown_203B304->mailIndex);
@@ -319,7 +298,7 @@ void CreateMailActionMenu(void) {
     }
     else
     {
-        gUnknown_203B304->menuItems[loopMax].text = *gUnknown_80D4990; // Accept
+        gUnknown_203B304->menuItems[loopMax].text = gCommonAccept[0];
         gUnknown_203B304->menuItems[loopMax].menuAction = 5;
 
         if(IsMailinJobSlot(mail) || GetNumAcceptedJobs() >= MAX_ACCEPTED_JOBS)
@@ -328,7 +307,7 @@ void CreateMailActionMenu(void) {
         }
         loopMax += 1;
 
-        gUnknown_203B304->menuItems[loopMax].text = *gUnknown_80D4970; // Info
+        gUnknown_203B304->menuItems[loopMax].text = gCommonInfo[0];
         gUnknown_203B304->menuItems[loopMax].menuAction = 8;
         loopMax += 1;
     }
@@ -392,7 +371,7 @@ void sub_802E578(void)
 {
     WonderMail *mail;
 
-    switch(sub_802BDEC(1))
+    switch(sub_802BDEC(TRUE))
     {
 
         case 3:
@@ -427,7 +406,7 @@ void HandleMailActionMenu(void)
     WonderMail *mail;
 
 
-    sub_802BDEC(0);
+    sub_802BDEC(FALSE);
     if(!sub_8012FD8(&gUnknown_203B304->unk6C))
     {
         sub_8013114(&gUnknown_203B304->unk6C, &menuAction);
@@ -522,7 +501,7 @@ void sub_802E758(void)
 
 void sub_802E774(void)
 {
-    switch(sub_802B720(1))
+    switch(sub_802B720(TRUE))
     {
         case 0:
         case 1:

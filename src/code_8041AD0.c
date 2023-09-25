@@ -3,8 +3,8 @@
 #include "constants/direction.h"
 #include "constants/status.h"
 #include "constants/type.h"
-#include "dungeon_entity.h"
-#include "dungeon_global_data.h"
+#include "structs/dungeon_entity.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
 #include "items.h"
@@ -208,18 +208,18 @@ void EntityUpdateStatusSprites(Entity *entity)
 
 void sub_8041AD0(Entity *pokemon)
 {
-    sub_804151C(pokemon, 0xA2 << 1, 1);
+    sub_804151C(pokemon, 324, 1);
 }
 
 void sub_8041AE0(Entity *pokemon)
 {
-    sub_804151C(pokemon, 0x143, 1);
+    sub_804151C(pokemon, 323, 1);
 }
 
 void sub_8041AF4(Entity *pokemon)
 {
-    sub_804151C(pokemon, 0x25, 1);
-    sub_80421C0(pokemon, 0x197);
+    sub_804151C(pokemon, 37, 1);
+    sub_80421C0(pokemon, 407);
 }
 
 void nullsub_57(void)
@@ -228,7 +228,7 @@ void nullsub_57(void)
 
 void sub_8041B18(Entity *pokemon)
 {
-    sub_804151C(pokemon, 0x141, 1);
+    sub_804151C(pokemon, 321, 1);
 }
 
 void nullsub_58(void)
@@ -259,7 +259,7 @@ void nullsub_61(void)
 
 void sub_8041B5C(Entity *pokemon)
 {
-    sub_804151C(pokemon, 0x171, 1);
+    sub_804151C(pokemon, 369, 1);
 }
 
 void nullsub_62(Entity *pokemon)
@@ -268,7 +268,7 @@ void nullsub_62(Entity *pokemon)
 
 void sub_8041B74(Entity *pokemon)
 {
-    sub_804151C(pokemon, 0x171, 0);
+    sub_804151C(pokemon, 369, 0);
 }
 
 void nullsub_63(void)
@@ -281,7 +281,7 @@ void nullsub_64(void)
 
 void sub_8041B90(Entity *pokemon)
 {
-    sub_804151C(pokemon, 0xD6 << 1, 0);
+    sub_804151C(pokemon, 428, 0);
 }
 
 void nullsub_65(void)
@@ -303,7 +303,7 @@ void nullsub_67(void)
 
 void sub_8041BBC(Entity *pokemon)
 {
-    sub_804151C(pokemon, 0xD4 << 1, 1);
+    sub_804151C(pokemon, 424, 1);
 }
 
 void nullsub_68(void)
@@ -316,12 +316,12 @@ void sub_8041BD0(Entity *pokemon, u8 r1)
     {
         return;
     }
-    sub_80421C0(pokemon, 0x1a5);
+    sub_80421C0(pokemon, 421);
 }
 
 void sub_8041BE8(Entity *pokemon)
 {
-    sub_80421C0(pokemon, 0xCB << 1);
+    sub_80421C0(pokemon, 406);
 }
 
 void sub_8041BF8(Entity *pokemon)
@@ -331,12 +331,12 @@ void sub_8041BF8(Entity *pokemon)
 
 void sub_8041C08(Entity *pokemon)
 {
-    sub_804151C(pokemon, 0x1a7, 1);
+    sub_804151C(pokemon, 423, 1);
 }
 
 void sub_8041C1C(Entity *pokemon)
 {
-    sub_804151C(pokemon, 0x1a7, 1);
+    sub_804151C(pokemon, 423, 1);
 }
 
 void nullsub_69(void)

@@ -1,29 +1,30 @@
 #include "global.h"
+#include "code_80118A4.h"
+#include "code_80130A8.h"
+#include "code_801B3C0.h"
+#include "code_801C8C4.h"
+#include "code_8023868.h"
+#include "code_8024458.h"
+#include "code_802F204.h"
+#include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
 #include "constants/monster.h"
 #include "constants/wonder_mail.h"
-#include "text1.h"
-#include "text2.h"
-#include "text_util.h"
-#include "items.h"
-#include "code_801B3C0.h"
-#include "pokemon.h"
+#include "cpu.h"
 #include "friend_rescue.h"
+#include "items.h"
+#include "main_menu1.h"
 #include "memory.h"
+#include "menu_input.h"
+#include "other_menus2.h"
+#include "pokemon.h"
 #include "save_write.h"
 #include "rescue_password_menu.h"
-#include "menu_input.h"
-#include "code_8094F88.h"
-#include "code_80130A8.h"
-#include "main_menu.h"
-#include "code_801EE10_1.h"
-#include "code_801C620.h"
-#include "cpu.h"
-#include "code_80118A4.h"
+#include "text_util.h"
+#include "text1.h"
+#include "text2.h"
 
 extern void SetFriendRescueMenuState(u32);
-extern void sub_802F2C0();
-extern u32 sub_802F298();
 
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
@@ -252,8 +253,6 @@ extern void sub_8035210(void);
 extern void sub_8035430(void);
 extern void sub_8034848(void);
 
-extern u32 sub_80154F0();
-extern void sub_80155F0();
 extern u32 sub_8030DA0(void);
 extern void sub_8030DE4(void);
 extern void sub_803092C(void);
@@ -265,29 +264,18 @@ extern u8 sub_80307EC(void);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E10(void);
 extern void sub_8031E00(void);
-extern u8 sub_8024108(u32);
-extern void sub_802452C(void);
-extern u32 sub_80244E4(void);
-extern void sub_8035D1C(void);
 extern u32 sub_8039068(u32, u8 *passwordBuffer, unkStruct_203B480 *r0);
 
 extern void sub_803084C(void);
 extern void sub_8031E10(void);
-extern void sub_80155F0(void);
-extern void sub_802F2C0(void);
 extern void sub_8030DE4(void);
 extern u8 sub_800D588(void);
-extern void sub_80151C0(u32, u8 *);
-extern u32 sub_801D008(void);
 extern u32 sub_8023CE8(void);
-extern void sub_802F204(unkStruct_802F204 *, u32);
 extern u32 sub_80306A8(u32 wonderMailType, u32, UnkTextStruct2_sub *, u32);
 extern u32 sub_8030894(void);
 extern void sub_803092C(void);
 extern bool8 sub_8031D70(u32 mailIndex, s32);
 extern s32 sub_8037B28(u32);
-extern s32 sub_8037D64(u32, void *, void *);
-extern s32 sub_80381F4(u32, void *, void *);
 
 extern s32 CountMailType(u8 mailType);
 extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
@@ -890,7 +878,7 @@ void sub_8032828(void)
             break;
         case 0x27:
             sub_8006518(gUnknown_203B33C->unk35C);
-            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E2334, &gUnknown_80E234C, 1, 0, 0);
+            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E2334, &gUnknown_80E234C, TRUE, 0, FALSE);
             sub_8023DA4();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;
@@ -1053,12 +1041,12 @@ void sub_8032828(void)
             break;
         case 0x5D:
             sub_8006518(gUnknown_203B33C->unk35C);
-            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, &gUnknown_80E2408, 1, 0, 0);
+            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, &gUnknown_80E2408, TRUE, 0, FALSE);
             sub_803092C();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;
         case 0x5F:
-            if (sub_801D008() == 0) {
+            if (sub_801D008() == NULL) {
                 ResetUnusedInputStruct();
                 sub_800641C(NULL, TRUE, TRUE);
                 {
@@ -1069,7 +1057,7 @@ void sub_8032828(void)
             break;
         case 0x60:
             sub_8006518(gUnknown_203B33C->unk35C);
-            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E23F0, &gUnknown_80E2408, 1, 0, 0);
+            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E23F0, &gUnknown_80E2408, TRUE, 0, FALSE);
             sub_801CCD8();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;
@@ -1232,7 +1220,7 @@ void sub_8032828(void)
         case 0x1E:
         case 0x33:
             sub_8006518(gUnknown_203B33C->unk35C);
-            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, &gUnknown_80E234C, 1, 0, 0);
+            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, &gUnknown_80E234C, TRUE, 0, FALSE);
             sub_803092C();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;

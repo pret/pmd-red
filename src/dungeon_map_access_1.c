@@ -1,7 +1,7 @@
 #include "global.h"
 #include "code_8009804.h"
 #include "dungeon_engine.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
 #include "file_system.h"
 #include "random.h"

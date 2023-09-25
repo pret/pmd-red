@@ -1,7 +1,7 @@
 #ifndef GUARD_TEXT1_H
 #define GUARD_TEXT1_H
 
-#include "text.h"
+#include "structs/str_text.h"
 
 extern UnkTextStruct1 gUnknown_2027370[4];
 extern UnkTextStruct2 gUnknown_202AFC0[4];

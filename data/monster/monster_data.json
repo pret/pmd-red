@@ -8,7 +8,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "NONE",
+        "friendArea": "FRIEND_AREA_NONE",
         "abilities": [
             "ABILITY_OVERGROW"
         ],
@@ -19959,7 +19959,7 @@
         "types": [
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "NONE",
+        "friendArea": "FRIEND_AREA_NONE",
         "abilities": [
             "ABILITY_PRESSURE"
         ],
@@ -20002,7 +20002,7 @@
         "types": [
             "TYPE_STEEL"
         ],
-        "friendArea": "NONE",
+        "friendArea": "FRIEND_AREA_NONE",
         "abilities": [
             "ABILITY_PRESSURE"
         ],
@@ -20045,7 +20045,7 @@
         "types": [
             "TYPE_WATER"
         ],
-        "friendArea": "NONE",
+        "friendArea": "FRIEND_AREA_NONE",
         "abilities": [
             "ABILITY_DRIZZLE"
         ],

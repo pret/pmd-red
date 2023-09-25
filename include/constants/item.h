@@ -1,6 +1,8 @@
 #ifndef GUARD_CONSTANTS_ITEM_H
 #define GUARD_CONSTANTS_ITEM_H
 
+// Cannot include enums in this file since it's used by the data_item and data_monster assemblers
+
 #define MAX_KECLEON_ITEM_SHOP_ITEMS 8
 #define MAX_KECLEON_WARE_SHOP_ITEMS 4
 

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "code_800D090.h"
+#include "code_8097DD0.h"
 #include "constants/colors.h"
 #include "constants/move_id.h"
 #include "decompress.h"
@@ -8,7 +9,6 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "pokemon_mid.h"
-#include "subStruct_203B240.h"
 #include "text_util.h"
 
 extern MonsterDataEntry *gMonsterParameters;
@@ -36,7 +36,6 @@ extern u32 ReturnIntFromChar(u8 r0);
 extern void sub_80943A0(void*, s32);
 extern void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1*, PokemonStruct2*);
 extern const u8 *DecompressMoveID(const u8 *a1, u16 *a2);
-extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 
 extern u8 GetBodySize(s16 index);
 
@@ -208,7 +207,8 @@ bool8 IsPokemonRenamed(PokemonStruct1* pokemon) {
     return TRUE;
 }
 
-bool8 ComparePokemonNames(s16 a1, s16 a2) {
+bool8 ComparePokemonNames(s16 a1, s16 a2)
+{
     s32 index1 = a1;
     s32 index2 = a2;
     u8* name1 = gRecruitedPokemonRef->pokemon[index1].name;
@@ -880,7 +880,7 @@ s32 sub_808E400(s32 _species, s16* _a2, s32 _a3, s32 _a4)
   register s16* a2 asm("r6");
   i = 1;
   a2 = _a2;
-  for (i = 1; i <= MONSTER_MAX; i++) {
+  for (i = 1; i < MONSTER_MAX; i++) {
     register s32 current asm("r8") = (s16)i;
     if (species != GetPokemonEvolveFrom(i)) {
       continue;

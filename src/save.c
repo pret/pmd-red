@@ -15,7 +15,6 @@
 EWRAM_DATA_2 u32 gUnknown_203B17C = {0};
 EWRAM_DATA_2 char *gUnknown_203B180 = {0};
 EWRAM_DATA_2 struct UnkStruct_203B184 *gUnknown_203B184 = {0};
-extern GameOptions *gGameOptionsRef;
 
 // size: 0x800
 struct unk_struct

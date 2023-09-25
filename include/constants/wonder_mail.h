@@ -16,36 +16,44 @@ enum RewardType
     END_REWARDS
 };
 
-enum WonderMailMode {
+enum WonderMailMode
+{
     WONDER_MAIL_MODE_SEND = 1,
-    WONDER_MAIL_MODE_RECEIVE = 2,
+    WONDER_MAIL_MODE_RECEIVE,
 };
 
-enum WonderMailMethod {
+enum WonderMailMethod
+{
+    // 0 - 2
     WONDER_MAIL_GAME_LINK = 3,
-    WONDER_MAIL_PASSWORD = 5, 
+    // 4
+    WONDER_MAIL_PASSWORD = 5,
 };
 
-enum WonderMailTypes {
+enum WonderMailTypes
+{
     WONDER_MAIL_TYPE_NONE = 0,
-    WONDER_MAIL_TYPE_SOS = 1,
+    WONDER_MAIL_TYPE_SOS,
     //WONDER_MAIL_TYPE_SOS = 2, // SOS MAIL is 1 and 2?
+    // 2 - 3
     WONDER_MAIL_TYPE_AOK = 4,
     WONDER_MAIL_TYPE_THANK_YOU = 5,
     WONDER_MAIL_TYPE_WONDER = 5,
-    WONDER_MAIL_TYPE_COMPLETED = 6,
-    WONDER_MAIL_TYPE_OKD = 7,
+    WONDER_MAIL_TYPE_COMPLETED,
+    WONDER_MAIL_TYPE_OKD,
 };
 
 // Used in CreateRescueTitle and CreateRescueDescription
-enum MailStatuses {
+enum MailStatuses
+{
     MAIL_STATUS_SUSPENDED,
     MAIL_STATUS_TAKE_JOB,
     MAIL_STATUS_DONE
 };
 
 // Used in CreateRescueTitle and CreateRescueDescription
-enum MissionTypes {
+enum MissionTypes
+{
     MISSION_TYPE_FRIEND_RESCUE,
     MISSION_TYPE_FIND_ITEM,
     MISSION_TYPE_DELIVER_ITEM,
@@ -57,11 +65,12 @@ enum MissionTypes {
 
 enum WonderMailMissionTypes
 {
-    WONDER_MAIL_MISSION_TYPE_RESCUE_CLIENT = 0,
-    WONDER_MAIL_MISSION_TYPE_RESCUE_TARGET = 1,
-    WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT = 2,
-    WONDER_MAIL_MISSION_TYPE_FIND_ITEM = 3,
-    WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM = 4,
+    WONDER_MAIL_MISSION_TYPE_RESCUE_CLIENT,
+    WONDER_MAIL_MISSION_TYPE_RESCUE_TARGET,
+    WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT,
+    WONDER_MAIL_MISSION_TYPE_FIND_ITEM,
+    WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM,
+    // 5
     WONDER_MAIL_MISSION_TYPE_UNK6 = 6,
 };
 

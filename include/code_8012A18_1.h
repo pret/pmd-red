@@ -1,8 +1,7 @@
-#ifndef GUARD_CODE_8012A18_H
-#define GUARD_CODE_8012A18_H
+#ifndef GUARD_CODE_8012A18_1_H
+#define GUARD_CODE_8012A18_1_H
 
-u32 sub_801602C(u32, u8 *);
-u32 sub_8016080(void);
-void sub_80160D8(void);
+s32 sub_8015FEC(u8 *buffer, s32 size);
+s32 sub_8016028(void);
 
-#endif // GUARD_CODE_8012A18_H
+#endif // GUARD_CODE_8012A18_1_H

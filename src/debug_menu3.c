@@ -1,7 +1,6 @@
 #include "global.h"
 #include "code_801EE10_mid.h"
-#include "code_8021774.h"
-#include "code_8021774_pre.h"
+#include "common_strings.h"
 #include "debug_menu3.h"
 #include "friend_area.h"
 #include "memory.h"
@@ -9,56 +8,32 @@
 #include "pokemon.h"
 #include "text1.h"
 #include "text2.h"
+#include "wigglytuff_shop1.h"
+#include "wigglytuff_shop2.h"
 
-EWRAM_DATA_2 static unkStruct_203B3F4 *sUnknown_203B3F4 = {0};
+static EWRAM_DATA_2 unkStruct_203B3F4 *sUnknown_203B3F4 = {0};
 
-static const UnkTextStruct2 sUnknown_80E7E8C =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x00, 0x00,
-    0x00, 0x00,
-    0x00, 0x00,
-    NULL
-};
-static const UnkTextStruct2 sUnknown_80E7EA4 =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x15, 0x04,
-    0x06, 0x03,
-    0x03, 0x00,
-    NULL
-};
+#include "data/debug_menu3.h"
 
-ALIGNED(4) static const u8 sClose[] = "CLOSE";
-ALIGNED(4) static const u8 sOpen[] = "OPEN";
-ALIGNED(4) static const u8 sFill[] = "pksdir0";
+static void sub_803A924(u32 newState);
+static void sub_803A93C(void);
+static void sub_803A9AC(void);
+static void sub_803AA34(void);
+static void sub_803AAC4(void);
+static void sub_803AB34(void);
+static void sub_803ABAC(void);
+static bool8 sub_803ABC8(void);
 
-// data_80D47B8.s
-extern const u8 *gUnknown_80D4970[];
-
-void sub_803A924(u32);
-void sub_803A93C(void);
-void sub_803A9AC(void);
-void sub_803AA34(void);
-void sub_803AAC4(void);
-void sub_803AB34(void);
-void sub_803ABAC(void);
-bool8 sub_803ABC8(void);
-
-// Unused
-u32 sub_803A888(void)
+UNUSED static bool8 sub_803A888(void)
 {
     ResetUnusedInputStruct();
     sub_800641C(NULL, TRUE, TRUE);
     sUnknown_203B3F4 = MemoryAlloc(sizeof(unkStruct_203B3F4), 8);
     sub_803A924(0);
-    return 1;
+    return TRUE;
 }
 
-// Unused
-u32 sub_803A8B8(void)
+UNUSED static u32 sub_803A8B8(void)
 {
     switch (sUnknown_203B3F4->state) {
         case 0:
@@ -77,8 +52,7 @@ u32 sub_803A8B8(void)
     return 0;
 }
 
-// Unused
-void sub_803A908(void)
+UNUSED static void sub_803A908(void)
 {
     if (sUnknown_203B3F4 != NULL) {
         MemoryFree(sUnknown_203B3F4);
@@ -86,14 +60,14 @@ void sub_803A908(void)
     }
 }
 
-void sub_803A924(u32 newState)
+static void sub_803A924(u32 newState)
 {
     sUnknown_203B3F4->state = newState;
     sub_803A93C();
     sub_803A9AC();
 }
 
-void sub_803A93C(void)
+static void sub_803A93C(void)
 {
     s32 i;
 
@@ -110,7 +84,7 @@ void sub_803A93C(void)
     sub_800641C(sUnknown_203B3F4->unk9C, TRUE, TRUE);
 }
 
-void sub_803A9AC(void)
+static void sub_803A9AC(void)
 {
     switch (sUnknown_203B3F4->state) {
         case 0:
@@ -132,17 +106,16 @@ void sub_803A9AC(void)
     }
 }
 
-void sub_803AA34(void)
+static void sub_803AA34(void)
 {
     s32 index;
-    u8 *FriendAreas;
+    u8 *friendAreas;
 
     index = 0;
 
-    // So dumb that it matches...
-    FriendAreas = gFriendAreas;
+    friendAreas = gFriendAreas;
 
-    if (FriendAreas[sUnknown_203B3F4->friendArea]) {
+    if (friendAreas[sUnknown_203B3F4->friendArea]) {
         sUnknown_203B3F4->menuItems[0].text = sClose;
 
         if (sub_803ABC8())
@@ -156,7 +129,7 @@ void sub_803AA34(void)
     }
 
     index++;
-    sUnknown_203B3F4->menuItems[index].text = *gUnknown_80D4970;
+    sUnknown_203B3F4->menuItems[index].text = gCommonInfo[0];
     sUnknown_203B3F4->menuItems[index].menuAction = 4;
 
     index++;
@@ -166,7 +139,7 @@ void sub_803AA34(void)
     sUnknown_203B3F4->menuAction = sUnknown_203B3F4->menuItems[0].menuAction;
 }
 
-void sub_803AAC4(void)
+static void sub_803AAC4(void)
 {
     switch (sub_8021274(TRUE)) {
         case 0:
@@ -187,7 +160,7 @@ void sub_803AAC4(void)
    }
 }
 
-void sub_803AB34(void)
+static void sub_803AB34(void)
 {
     s32 menuAction;
 
@@ -216,7 +189,7 @@ void sub_803AB34(void)
     }
 }
 
-void sub_803ABAC(void)
+static void sub_803ABAC(void)
 {
     switch (sub_80217EC()) {
         case 2:
@@ -230,7 +203,7 @@ void sub_803ABAC(void)
     }
 }
 
-bool8 sub_803ABC8(void)
+static bool8 sub_803ABC8(void)
 {
     PokemonStruct1 *mon;
     s32 i;

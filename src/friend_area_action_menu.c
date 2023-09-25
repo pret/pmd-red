@@ -1,11 +1,13 @@
 #include "global.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
-#include "code_801C620.h"
+#include "code_801BEEC.h"
 #include "code_801EE10.h"
-#include "code_801EE10_1.h"
 #include "code_801EE10_mid.h"
+#include "code_8023868.h"
+#include "code_8024458.h"
 #include "code_8098BDC.h"
+#include "common_strings.h"
 #include "constants/dungeon.h"
 #include "event_flag.h"
 #include "friend_area_action_menu.h"
@@ -19,11 +21,7 @@
 #include "text1.h"
 #include "text2.h"
 
-extern struct unkStruct_203B2BC *gUnknown_203B2BC;
-
-extern u8 *gUnknown_80D4920[];
-extern u8 *gUnknown_80D4928[];
-extern u8 *gUnknown_80D4970[];
+static EWRAM_DATA_2 struct unkStruct_203B2BC *sUnknown_203B2BC = {0};
 
 void sub_8027D40(u32, BulkItem *heldItem);
 void sub_8027794(void);
@@ -49,13 +47,9 @@ extern u8 sub_8027DCC(PokemonStruct1 *);
 
 extern void SetFriendAreaActionMenuState(u32);
 extern void PlaySound(u32);
-extern void nullsub_104();
 
 extern void sub_808D31C(PokemonStruct1 *);
-extern PokemonStruct1 *sub_808D3F8(void);
-extern PokemonStruct1 *sub_808D3BC(void);
 extern u8 gUnknown_202DE58[];
-extern u32 sub_80244E4(void);
 extern bool8 sub_808D750(s16 index_);
 extern void sub_808ED00(void);
 
@@ -68,17 +62,17 @@ void sub_8027EB8(void);
 u32 sub_8027074(void)
 {
     ResetSprites(FALSE);
-    gUnknown_203B2BC = MemoryAlloc(sizeof(struct unkStruct_203B2BC), 8);
-    gUnknown_203B2BC->menuAction1 = 0;
-    gUnknown_203B2BC->menuAction2 = 0;
-    gUnknown_203B2BC->menuAction3 = 0;
+    sUnknown_203B2BC = MemoryAlloc(sizeof(struct unkStruct_203B2BC), 8);
+    sUnknown_203B2BC->menuAction1 = 0;
+    sUnknown_203B2BC->menuAction2 = 0;
+    sUnknown_203B2BC->menuAction3 = 0;
     SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_INIT);
     return 1;
 }
 
 u32 sub_80270A4(void)
 {
-  switch(gUnknown_203B2BC->state) {
+  switch(sUnknown_203B2BC->state) {
       case FRIEND_AREA_ACTION_MENU_INIT:
         SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_MAIN);
         break;
@@ -129,16 +123,16 @@ u32 sub_80270A4(void)
 
 void sub_8027168(void)
 {
-    if(gUnknown_203B2BC != NULL)
+    if(sUnknown_203B2BC != NULL)
     {
-        MemoryFree(gUnknown_203B2BC);
-        gUnknown_203B2BC = NULL;
+        MemoryFree(sUnknown_203B2BC);
+        sUnknown_203B2BC = NULL;
     }
 }
 
 void SetFriendAreaActionMenuState(u32 newState)
 {
-    gUnknown_203B2BC->state = newState;
+    sUnknown_203B2BC->state = newState;
     sub_802719C();
     sub_8027274();
 }
@@ -147,36 +141,36 @@ void sub_802719C(void)
 {
     s32 index;
 
-    sub_8006518(gUnknown_203B2BC->unk180);
-    switch(gUnknown_203B2BC->state)
+    sub_8006518(sUnknown_203B2BC->unk180);
+    switch(sUnknown_203B2BC->state)
     {
         case 3:
-            gUnknown_203B2BC->unk180[3] = sUnknown_80DD74C;
+            sUnknown_203B2BC->unk180[3] = sUnknown_80DD74C;
             CreateFriendActionMenu();
-            gUnknown_203B2BC->unk180[2] = sUnknown_80DD704;
-            sub_8012CAC(&gUnknown_203B2BC->unk180[2], gUnknown_203B2BC->menuItems);
+            sUnknown_203B2BC->unk180[2] = sUnknown_80DD704;
+            sub_8012CAC(&sUnknown_203B2BC->unk180[2], sUnknown_203B2BC->menuItems);
             break;
         case 0xC:
             sub_80276A8();
-            gUnknown_203B2BC->unk180[2] = sUnknown_80DD71C;
-            sub_8012CAC(&gUnknown_203B2BC->unk180[2], gUnknown_203B2BC->menuItems);
+            sUnknown_203B2BC->unk180[2] = sUnknown_80DD71C;
+            sub_8012CAC(&sUnknown_203B2BC->unk180[2], sUnknown_203B2BC->menuItems);
             break;
         default:
             for(index = 0; index < 4; index++)
             {
-                gUnknown_203B2BC->unk180[index] = sUnknown_80DD6EC;
+                sUnknown_203B2BC->unk180[index] = sUnknown_80DD6EC;
             }
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2BC->unk180, TRUE, TRUE);
+    sub_800641C(sUnknown_203B2BC->unk180, TRUE, TRUE);
 }
 
 void sub_8027274(void)
 {
     Item slot;
 
-    switch (gUnknown_203B2BC->state) {
+    switch (sUnknown_203B2BC->state) {
         case FRIEND_AREA_ACTION_MENU_INIT:
         case FRIEND_AREA_ACTION_MENU_EXIT:
             break;
@@ -187,15 +181,15 @@ void sub_8027274(void)
             sub_8023B7C(1);
             break;
         case 3:
-            sub_8027D40(3, &gUnknown_203B2BC->item2);
+            sub_8027D40(3, &sUnknown_203B2BC->item2);
             sub_8023DA4();
-            sub_8012D60(&gUnknown_203B2BC->unk7C, gUnknown_203B2BC->menuItems, 0, gUnknown_203B2BC->unk16C, gUnknown_203B2BC->menuAction1, 2);
+            sub_8012D60(&sUnknown_203B2BC->unk7C, sUnknown_203B2BC->menuItems, 0, sUnknown_203B2BC->unk16C, sUnknown_203B2BC->menuAction1, 2);
             break;
         case FRIEND_AREA_ACTION_MENU_SUMMARY:
-            sub_8024458(gUnknown_203B2BC->targetPoke, 2);
+            sub_8024458(sUnknown_203B2BC->targetPoke, 2);
             break;
         case FRIEND_AREA_ACTION_MENU_CHECK_IQ:
-            sub_801BEEC(gUnknown_203B2BC->targetPoke);
+            sub_801BEEC(sUnknown_203B2BC->targetPoke);
             break;
         case 10:
             sub_801A5D8(1, 0, NULL, 10);
@@ -205,37 +199,37 @@ void sub_8027274(void)
             break;
         case 0xc:
             sub_801A9E0();
-            sub_8012D60(&gUnknown_203B2BC->unk7C,gUnknown_203B2BC->menuItems,0,gUnknown_203B2BC->unk16C,gUnknown_203B2BC->menuAction2,2);
+            sub_8012D60(&sUnknown_203B2BC->unk7C,sUnknown_203B2BC->menuItems,0,sUnknown_203B2BC->unk16C,sUnknown_203B2BC->menuAction2,2);
             break;
         case 0xd:
-            HeldItemToSlot(&slot, &gUnknown_203B2BC->itemToGive);
+            HeldItemToSlot(&slot, &sUnknown_203B2BC->itemToGive);
             sub_801B3C0(&slot);
             break;
         case 0xe:
-            unk_CopyMoves4To8(gUnknown_203B2BC->moves,gUnknown_203B2BC->pokeStruct->moves);
-            sub_801EE10(3,gUnknown_203B2BC->targetPoke,gUnknown_203B2BC->moves,0,NULL,0);
+            unk_CopyMoves4To8(sUnknown_203B2BC->moves,sUnknown_203B2BC->pokeStruct->moves);
+            sub_801EE10(3,sUnknown_203B2BC->targetPoke,sUnknown_203B2BC->moves,0,NULL,0);
             break;
         case 0xf:
             sub_801F1B0(TRUE, FALSE);
             break;
         case FRIEND_AREA_ACTION_MENU_SAY_FAREWELL_PROMPT:
             sub_8027794();
-            sub_8014248(sSayFarewellPrompt,0,3,gUnknown_203B2BC->menuItems,0,4,0,0,0x101);
+            sub_8014248(sSayFarewellPrompt,0,3,sUnknown_203B2BC->menuItems,0,4,0,0,0x101);
             break;
         case FRIEND_AREA_ACTION_MENU_SAY_FAREWELL_CONFIRM:
             sub_8027794();
-            sub_8014248(sSayFarewellConfirm,0,3,gUnknown_203B2BC->menuItems,0,4,0,0,0x101);
+            sub_8014248(sSayFarewellConfirm,0,3,sUnknown_203B2BC->menuItems,0,4,0,0,0x101);
             break;
         case 0x10:
-            GetLinkedSequence(gUnknown_203B2BC->moveIndex,gUnknown_203B2BC->moves,gUnknown_203B2BC->moveIDs);
-            sub_801F808(gUnknown_203B2BC->moveIDs);
+            GetLinkedSequence(sUnknown_203B2BC->moveIndex,sUnknown_203B2BC->moves,sUnknown_203B2BC->moveIDs);
+            sub_801F808(sUnknown_203B2BC->moveIDs);
             break;
         case 6:
-            gUnknown_203B2BC->fallbackState = FRIEND_AREA_ACTION_MENU_MAIN_2;
+            sUnknown_203B2BC->fallbackState = FRIEND_AREA_ACTION_MENU_MAIN_2;
             sub_80141B4(sReturnedToToolbox, 0, 0, 0x101);
             break;
         case 7:
-            gUnknown_203B2BC->fallbackState = FRIEND_AREA_ACTION_MENU_MAIN_2;
+            sUnknown_203B2BC->fallbackState = FRIEND_AREA_ACTION_MENU_MAIN_2;
             sub_80141B4(sSentToStorage, 0, 0, 0x101);
             break;
     }
@@ -248,85 +242,85 @@ void CreateFriendActionMenu(void)
   PokemonStruct1 *pokeStruct;
 
   loopMax = 0;
-  pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
-  MemoryFill16(gUnknown_203B2BC->unk16C,0,sizeof(gUnknown_203B2BC->unk16C));
+  pokeStruct = &gRecruitedPokemonRef->pokemon[sUnknown_203B2BC->targetPoke];
+  MemoryFill16(sUnknown_203B2BC->unk16C,0,sizeof(sUnknown_203B2BC->unk16C));
 
   if((pokeStruct->unk0 >> 1) % 2)
   {
-      gUnknown_203B2BC->menuItems[loopMax].text = sStandBy;
-      gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_STANDBY;
+      sUnknown_203B2BC->menuItems[loopMax].text = sStandBy;
+      sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_STANDBY;
       if(!sub_8027D9C(pokeStruct))
       {
-          gUnknown_203B2BC->unk16C[loopMax] = 1;
+          sUnknown_203B2BC->unk16C[loopMax] = 1;
       }
       loopMax += 1;
       if(sub_80023E4(8) && !pokeStruct->isTeamLeader)
       {
-          gUnknown_203B2BC->menuItems[loopMax].text = sMakeLeader;
-          gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_MAKE_LEADER;
+          sUnknown_203B2BC->menuItems[loopMax].text = sMakeLeader;
+          sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_MAKE_LEADER;
           loopMax += 1;
       }
   }
   else
   {
-      gUnknown_203B2BC->menuItems[loopMax].text = sJoinTeam;
-      gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_JOIN_TEAM;
-      if(!sub_808D750(gUnknown_203B2BC->targetPoke))
+      sUnknown_203B2BC->menuItems[loopMax].text = sJoinTeam;
+      sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_JOIN_TEAM;
+      if(!sub_808D750(sUnknown_203B2BC->targetPoke))
       {
-          gUnknown_203B2BC->unk16C[loopMax] = 1;
+          sUnknown_203B2BC->unk16C[loopMax] = 1;
       }
       loopMax += 1;
-      gUnknown_203B2BC->menuItems[loopMax].text = sSayFarewell;
-      gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_SAY_FAREWELL;
+      sUnknown_203B2BC->menuItems[loopMax].text = sSayFarewell;
+      sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_SAY_FAREWELL;
       if(!sub_8027DCC(pokeStruct))
       {
-          gUnknown_203B2BC->unk16C[loopMax] = 1;
+          sUnknown_203B2BC->unk16C[loopMax] = 1;
       }
       loopMax += 1;
 
   }
 
-  gUnknown_203B2BC->menuItems[loopMax].text = sGive;
-  gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_GIVE;
+  sUnknown_203B2BC->menuItems[loopMax].text = sGive;
+  sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_GIVE;
   if(GetNumberOfFilledInventorySlots() == 0)
   {
-      gUnknown_203B2BC->unk16C[loopMax] = 1;
+      sUnknown_203B2BC->unk16C[loopMax] = 1;
   }
   loopMax += 1;
     
-  gUnknown_203B2BC->menuItems[loopMax].text = sTake;
-  gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_TAKE;
-  if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE || gUnknown_203B2BC->item2.id == ITEM_NOTHING)
+  sUnknown_203B2BC->menuItems[loopMax].text = sTake;
+  sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_TAKE;
+  if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE || sUnknown_203B2BC->item2.id == ITEM_NOTHING)
   {
-      gUnknown_203B2BC->unk16C[loopMax] = 1;
+      sUnknown_203B2BC->unk16C[loopMax] = 1;
   }
   loopMax += 1;
-  gUnknown_203B2BC->menuItems[loopMax].text = sSummary;
-  gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_SUMMARY;
+  sUnknown_203B2BC->menuItems[loopMax].text = sSummary;
+  sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_SUMMARY;
   loopMax += 1;
-  gUnknown_203B2BC->menuItems[loopMax].text = sMoves;
-  gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_MOVES;
+  sUnknown_203B2BC->menuItems[loopMax].text = sMoves;
+  sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_MOVES;
   loopMax += 1;
-  gUnknown_203B2BC->menuItems[loopMax].text = sCheckIQ;
-  gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_CHECK_IQ;
+  sUnknown_203B2BC->menuItems[loopMax].text = sCheckIQ;
+  sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_CHECK_IQ;
   loopMax += 1;
-  gUnknown_203B2BC->menuItems[loopMax].text = NULL;
-  gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_NONE;
+  sUnknown_203B2BC->menuItems[loopMax].text = NULL;
+  sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_NONE;
 
   for(index = 0; index < loopMax; index++)
   {
-      if(gUnknown_203B2BC->unk16C[index] == 0)
+      if(sUnknown_203B2BC->unk16C[index] == 0)
       {
-          if(gUnknown_203B2BC->menuItems[index].menuAction == gUnknown_203B2BC->menuAction1)
+          if(sUnknown_203B2BC->menuItems[index].menuAction == sUnknown_203B2BC->menuAction1)
               return;
       }
   }
     
   for(index = 0; index < loopMax; index++)
   {
-      if(gUnknown_203B2BC->unk16C[index] == 0)
+      if(sUnknown_203B2BC->unk16C[index] == 0)
       {
-             gUnknown_203B2BC->menuAction1 = gUnknown_203B2BC->menuItems[index].menuAction;
+             sUnknown_203B2BC->menuAction1 = sUnknown_203B2BC->menuItems[index].menuAction;
              break;
       }
   }
@@ -338,33 +332,33 @@ void sub_80276A8(void)
   s32 loopMax;
 
   loopMax = 0;
-  MemoryFill16(gUnknown_203B2BC->unk16C,0,sizeof(gUnknown_203B2BC->unk16C));
-  gUnknown_203B2BC->menuItems[loopMax].text = sGive;
-  gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_GIVE;
+  MemoryFill16(sUnknown_203B2BC->unk16C,0,sizeof(sUnknown_203B2BC->unk16C));
+  sUnknown_203B2BC->menuItems[loopMax].text = sGive;
+  sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_GIVE;
   if (GetNumberOfFilledInventorySlots() == 0) {
-    gUnknown_203B2BC->unk16C[loopMax] = 1;
+    sUnknown_203B2BC->unk16C[loopMax] = 1;
   }
   loopMax += 1;
-  gUnknown_203B2BC->menuItems[loopMax].text = *gUnknown_80D4970;
-  gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_INFO;
+  sUnknown_203B2BC->menuItems[loopMax].text = gCommonInfo[0];
+  sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_INFO;
   loopMax += 1;
-  gUnknown_203B2BC->menuItems[loopMax].text = 0;
-  gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_NONE;
+  sUnknown_203B2BC->menuItems[loopMax].text = 0;
+  sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_NONE;
 
   for(index = 0; index < loopMax; index++)
   {
-      if(gUnknown_203B2BC->unk16C[index] == 0)
+      if(sUnknown_203B2BC->unk16C[index] == 0)
       {
-          if(gUnknown_203B2BC->menuItems[index].menuAction == gUnknown_203B2BC->menuAction2)
+          if(sUnknown_203B2BC->menuItems[index].menuAction == sUnknown_203B2BC->menuAction2)
               return;
       }
   }
     
   for(index = 0; index < loopMax; index++)
   {
-      if(gUnknown_203B2BC->unk16C[index] == 0)
+      if(sUnknown_203B2BC->unk16C[index] == 0)
       {
-             gUnknown_203B2BC->menuAction2 = gUnknown_203B2BC->menuItems[index].menuAction;
+             sUnknown_203B2BC->menuAction2 = sUnknown_203B2BC->menuItems[index].menuAction;
              break;
       }
   }
@@ -374,15 +368,15 @@ void sub_8027794(void)
 {
   s32 loopMax = 0;
   
-  MemoryFill16(gUnknown_203B2BC->unk16C,0,sizeof(gUnknown_203B2BC->unk16C));
-  gUnknown_203B2BC->menuItems[loopMax].text = *gUnknown_80D4920;
-  gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_YES;
+  MemoryFill16(sUnknown_203B2BC->unk16C,0,sizeof(sUnknown_203B2BC->unk16C));
+  sUnknown_203B2BC->menuItems[loopMax].text = gCommonYes[0];
+  sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_YES;
   loopMax += 1;
-  gUnknown_203B2BC->menuItems[loopMax].text = *gUnknown_80D4928;
-  gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_NO;
+  sUnknown_203B2BC->menuItems[loopMax].text = gCommonNo[0];
+  sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_NO;
   loopMax += 1;
-  gUnknown_203B2BC->menuItems[loopMax].text = NULL;
-  gUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_NONE;
+  sUnknown_203B2BC->menuItems[loopMax].text = NULL;
+  sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_NONE;
 }
 
 void sub_80277FC(void)
@@ -394,19 +388,19 @@ void sub_80277FC(void)
       case 1:
         break;
       case 3:
-        gUnknown_203B2BC->targetPoke = sub_8023B44();
-        pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
-        gUnknown_203B2BC->pokeStruct = pokeStruct;
-        gUnknown_203B2BC->isTeamLeader = pokeStruct->isTeamLeader;
-        PeekPokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->item2);
+        sUnknown_203B2BC->targetPoke = sub_8023B44();
+        pokeStruct = &gRecruitedPokemonRef->pokemon[sUnknown_203B2BC->targetPoke];
+        sUnknown_203B2BC->pokeStruct = pokeStruct;
+        sUnknown_203B2BC->isTeamLeader = pokeStruct->isTeamLeader;
+        PeekPokemonItem(sUnknown_203B2BC->targetPoke,&sUnknown_203B2BC->item2);
         SetFriendAreaActionMenuState(3);
         break;
       case 4:
-        gUnknown_203B2BC->targetPoke = sub_8023B44();
-        pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
-        gUnknown_203B2BC->pokeStruct = pokeStruct;
-        gUnknown_203B2BC->isTeamLeader = pokeStruct->isTeamLeader;
-        PeekPokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->item2);
+        sUnknown_203B2BC->targetPoke = sub_8023B44();
+        pokeStruct = &gRecruitedPokemonRef->pokemon[sUnknown_203B2BC->targetPoke];
+        sUnknown_203B2BC->pokeStruct = pokeStruct;
+        sUnknown_203B2BC->isTeamLeader = pokeStruct->isTeamLeader;
+        PeekPokemonItem(sUnknown_203B2BC->targetPoke,&sUnknown_203B2BC->item2);
         SetFriendAreaActionMenuState(4);
         break;
       case 2:
@@ -425,16 +419,16 @@ void sub_80278B4(void)
 
   menuAction = 0;
   sub_8023A94(FALSE);
-  if ((sub_8012FD8(&gUnknown_203B2BC->unk7C) == 0) && (sub_8013114(&gUnknown_203B2BC->unk7C,&menuAction), menuAction != FRIEND_AREA_ACTION_MENU_ACTION_NONE)) {
-    gUnknown_203B2BC->menuAction1 = menuAction;
+  if ((sub_8012FD8(&sUnknown_203B2BC->unk7C) == 0) && (sub_8013114(&sUnknown_203B2BC->unk7C,&menuAction), menuAction != FRIEND_AREA_ACTION_MENU_ACTION_NONE)) {
+    sUnknown_203B2BC->menuAction1 = menuAction;
   }
   switch(menuAction) {
       case FRIEND_AREA_ACTION_MENU_ACTION_JOIN_TEAM:
-        if (sub_808D750(gUnknown_203B2BC->targetPoke)) {
+        if (sub_808D750(sUnknown_203B2BC->targetPoke)) {
 #ifdef NONMATCHING
-            pokeStruct1 = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
+            pokeStruct1 = &gRecruitedPokemonRef->pokemon[sUnknown_203B2BC->targetPoke];
 #else
-        register size_t offset asm("r1") = offsetof(unkStruct_203B45C, pokemon[gUnknown_203B2BC->targetPoke]);
+        register size_t offset asm("r1") = offsetof(unkStruct_203B45C, pokemon[sUnknown_203B2BC->targetPoke]);
         PokemonStruct1* p = gRecruitedPokemonRef->pokemon;
         size_t addr = offset + (size_t)p;
         pokeStruct1 = (PokemonStruct1*)addr;
@@ -446,13 +440,13 @@ void sub_80278B4(void)
         SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_MAIN_2);
         break;
       case FRIEND_AREA_ACTION_MENU_ACTION_STANDBY:
-        gUnknown_203B2BC->pokeStruct->unk0 &= ~(FLAG_ON_TEAM);
+        sUnknown_203B2BC->pokeStruct->unk0 &= ~(FLAG_ON_TEAM);
         nullsub_104();
         sub_808ED00();
         SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_MAIN_2);
         break;
       case FRIEND_AREA_ACTION_MENU_ACTION_MAKE_LEADER:
-        pokeStruct2 = &gRecruitedPokemonRef->pokemon[gUnknown_203B2BC->targetPoke];
+        pokeStruct2 = &gRecruitedPokemonRef->pokemon[sUnknown_203B2BC->targetPoke];
         playerStruct = GetPlayerPokemonStruct();
         if (!pokeStruct2->isTeamLeader) {
           playerStruct->isTeamLeader = FALSE;
@@ -473,13 +467,13 @@ void sub_80278B4(void)
         break;
       case FRIEND_AREA_ACTION_MENU_ACTION_TAKE:
         PlaySound(0x14d);
-        if (gUnknown_203B2BC->item2.id != ITEM_NOTHING) {
-          AddHeldItemToInventory(&gUnknown_203B2BC->item2);
+        if (sUnknown_203B2BC->item2.id != ITEM_NOTHING) {
+          AddHeldItemToInventory(&sUnknown_203B2BC->item2);
         }
         FillInventoryGaps();
-        gUnknown_203B2BC->item2.id = ITEM_NOTHING;
-        gUnknown_203B2BC->item2.quantity = 0;
-        GivePokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->item2);
+        sUnknown_203B2BC->item2.id = ITEM_NOTHING;
+        sUnknown_203B2BC->item2.quantity = 0;
+        GivePokemonItem(sUnknown_203B2BC->targetPoke,&sUnknown_203B2BC->item2);
         nullsub_104();
         SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_MAIN_2);
         break;
@@ -526,7 +520,7 @@ void sub_8027A5C(void)
 }
 
 static inline bool8 sub_8027A78_sub(void) {
-    if (gUnknown_203B2BC->pokeStruct->dungeonLocation.id == DUNGEON_HOWLING_FOREST_2 || gUnknown_203B2BC->pokeStruct->dungeonLocation.id == DUNGEON_POKEMON_SQUARE)
+    if (sUnknown_203B2BC->pokeStruct->dungeonLocation.id == DUNGEON_HOWLING_FOREST_2 || sUnknown_203B2BC->pokeStruct->dungeonLocation.id == DUNGEON_POKEMON_SQUARE)
         return TRUE;
     else
         return FALSE;
@@ -549,7 +543,7 @@ void sub_8027A78(void)
                 else
                 {
                     sub_8027EB8();
-                    sub_808D31C(gUnknown_203B2BC->pokeStruct);
+                    sub_808D31C(sUnknown_203B2BC->pokeStruct);
                 }
                 break;
         }
@@ -569,7 +563,7 @@ void sub_8027AE4(void)
             break;
         case FRIEND_AREA_ACTION_MENU_ACTION_YES:
             sub_8027EB8();
-            sub_808D31C(gUnknown_203B2BC->pokeStruct);
+            sub_808D31C(sUnknown_203B2BC->pokeStruct);
             break;
     }
   }
@@ -580,15 +574,15 @@ void sub_8027B28(void)
   switch(sub_801A6E8(TRUE))
   {
     case 3:
-        gUnknown_203B2BC->id = sub_801A8AC();
-        gUnknown_203B2BC->itemToGive.id = gTeamInventoryRef->teamItems[gUnknown_203B2BC->id].id;
-        gUnknown_203B2BC->itemToGive.quantity = gTeamInventoryRef->teamItems[gUnknown_203B2BC->id].quantity;
+        sUnknown_203B2BC->id = sub_801A8AC();
+        sUnknown_203B2BC->itemToGive.id = gTeamInventoryRef->teamItems[sUnknown_203B2BC->id].id;
+        sUnknown_203B2BC->itemToGive.quantity = gTeamInventoryRef->teamItems[sUnknown_203B2BC->id].quantity;
         SetFriendAreaActionMenuState(0xc);
         break;
     case 4:
-        gUnknown_203B2BC->id = sub_801A8AC();
-        gUnknown_203B2BC->itemToGive.id = gTeamInventoryRef->teamItems[gUnknown_203B2BC->id].id;
-        gUnknown_203B2BC->itemToGive.quantity = gTeamInventoryRef->teamItems[gUnknown_203B2BC->id].quantity;
+        sUnknown_203B2BC->id = sub_801A8AC();
+        sUnknown_203B2BC->itemToGive.id = gTeamInventoryRef->teamItems[sUnknown_203B2BC->id].id;
+        sUnknown_203B2BC->itemToGive.quantity = gTeamInventoryRef->teamItems[sUnknown_203B2BC->id].quantity;
         sub_8099690(0);
         SetFriendAreaActionMenuState(0xd);
         break;
@@ -608,19 +602,19 @@ void sub_8027BD8(void)
 
   menuAction = 0;
   sub_801A6E8(FALSE);
-  if ((sub_8012FD8(&gUnknown_203B2BC->unk7C) == 0) && (sub_8013114(&gUnknown_203B2BC->unk7C,&menuAction), menuAction != FRIEND_AREA_ACTION_MENU_ACTION_NONE)) {
-    gUnknown_203B2BC->menuAction2 = menuAction;
+  if ((sub_8012FD8(&sUnknown_203B2BC->unk7C) == 0) && (sub_8013114(&sUnknown_203B2BC->unk7C,&menuAction), menuAction != FRIEND_AREA_ACTION_MENU_ACTION_NONE)) {
+    sUnknown_203B2BC->menuAction2 = menuAction;
   }
   switch(menuAction)
   {
     case FRIEND_AREA_ACTION_MENU_ACTION_GIVE:
         PlaySound(0x14d);
-        ShiftItemsDownFrom(gUnknown_203B2BC->id);
+        ShiftItemsDownFrom(sUnknown_203B2BC->id);
         FillInventoryGaps();
-        if (gUnknown_203B2BC->item2.id != ITEM_NOTHING) {
-            AddHeldItemToInventory(&gUnknown_203B2BC->item2);
+        if (sUnknown_203B2BC->item2.id != ITEM_NOTHING) {
+            AddHeldItemToInventory(&sUnknown_203B2BC->item2);
         }
-        GivePokemonItem(gUnknown_203B2BC->targetPoke,&gUnknown_203B2BC->itemToGive);
+        GivePokemonItem(sUnknown_203B2BC->targetPoke,&sUnknown_203B2BC->itemToGive);
         sub_801A928();
         nullsub_104();
         SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_MAIN_2);
@@ -655,8 +649,8 @@ void sub_8027CA0(void)
     {
         case 3:
         case 4:
-            gUnknown_203B2BC->moveIndex = sub_801F194();
-            gUnknown_203B2BC->moveID = gUnknown_203B2BC->moves[gUnknown_203B2BC->moveIndex].id;
+            sUnknown_203B2BC->moveIndex = sub_801F194();
+            sUnknown_203B2BC->moveID = sUnknown_203B2BC->moves[sUnknown_203B2BC->moveIndex].id;
             SetFriendAreaActionMenuState(0x10);
             break;
         case 2:
@@ -689,7 +683,7 @@ void FriendAreaActionMenu_GotoFallbackState(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        SetFriendAreaActionMenuState(gUnknown_203B2BC->fallbackState);
+        SetFriendAreaActionMenuState(sUnknown_203B2BC->fallbackState);
     }
 }
 
@@ -788,26 +782,26 @@ bool8 sub_8027E4C(PokemonStruct1 *pokeStruct)
 
 void sub_8027EB8(void)
 {
-    switch(sub_8027E18(gUnknown_203B2BC->pokeStruct))
+    switch(sub_8027E18(sUnknown_203B2BC->pokeStruct))
     {
         case 1:
             PlaySound(0x14d);
-            AddHeldItemToInventory(&gUnknown_203B2BC->item2);
+            AddHeldItemToInventory(&sUnknown_203B2BC->item2);
             FillInventoryGaps();
-            gUnknown_203B2BC->item2.id = ITEM_NOTHING;
-            gUnknown_203B2BC->item2.quantity = 0;
-            GivePokemonItem(gUnknown_203B2BC->targetPoke, &gUnknown_203B2BC->item2);
+            sUnknown_203B2BC->item2.id = ITEM_NOTHING;
+            sUnknown_203B2BC->item2.quantity = 0;
+            GivePokemonItem(sUnknown_203B2BC->targetPoke, &sUnknown_203B2BC->item2);
             SetFriendAreaActionMenuState(6);
             break;
         case 2:
             PlaySound(0x14d);
-            if(IsThrowableItem(gUnknown_203B2BC->item2.id))
-                gTeamInventoryRef->teamStorage[gUnknown_203B2BC->item2.id] += gUnknown_203B2BC->item2.quantity;
+            if(IsThrowableItem(sUnknown_203B2BC->item2.id))
+                gTeamInventoryRef->teamStorage[sUnknown_203B2BC->item2.id] += sUnknown_203B2BC->item2.quantity;
             else
-                gTeamInventoryRef->teamStorage[gUnknown_203B2BC->item2.id] += 1;
-            gUnknown_203B2BC->item2.id = ITEM_NOTHING;
-            gUnknown_203B2BC->item2.quantity = 0;
-            GivePokemonItem(gUnknown_203B2BC->targetPoke, &gUnknown_203B2BC->item2);
+                gTeamInventoryRef->teamStorage[sUnknown_203B2BC->item2.id] += 1;
+            sUnknown_203B2BC->item2.id = ITEM_NOTHING;
+            sUnknown_203B2BC->item2.quantity = 0;
+            GivePokemonItem(sUnknown_203B2BC->targetPoke, &sUnknown_203B2BC->item2);
             SetFriendAreaActionMenuState(7);
             break;
         case 0:

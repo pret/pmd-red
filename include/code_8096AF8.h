@@ -1,0 +1,9 @@
+#ifndef GUARD_CODE_8096AF8_H
+#define GUARD_CODE_8096AF8_H
+
+// code_8096AF8.s
+extern u8 CheckPKMNNewsSlot(u8);
+extern bool8 sub_8096E2C(void);
+extern void sub_8096EEC(void);
+
+#endif // GUARD_CODE_8096AF8_H

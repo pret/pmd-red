@@ -26,11 +26,8 @@ gUnknown_3001B58: /* 3001B58 */
 gUnknown_3001B5A: /* 3001B5A */
 	.space 0x2
 
-gUnknown_3001B5C: /* 3001B5C */
-	.space 0x4
-
-gUnknown_3001B60: /* 3001B60 */
-	.space 0x4
+.include "src/code_8023144.o"
+.include "src/code_8023868.o"
 
 gUnknown_3001B64: /* 3001B64 */
 	.space 0x4

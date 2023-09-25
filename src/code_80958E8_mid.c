@@ -147,7 +147,7 @@ u8 sub_8095E78(void)
     return friendAreaStack[RandInt(counter)];
   }
   else {
-    return NONE;
+    return FRIEND_AREA_NONE;
   }
 }
 

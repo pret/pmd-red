@@ -196,8 +196,7 @@ void sub_80A658C(void)
     gUnknown_3001B7C = NULL;
 }
 
-// Unused
-u16 sub_80A65D8(u16 *a0)
+UNUSED static u16 sub_80A65D8(u16 *a0)
 {
     return a0[40];
 }

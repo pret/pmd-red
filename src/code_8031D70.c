@@ -5,7 +5,7 @@
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "pokemon.h"
 #include "code_8094F88.h"
 #include "menu_input.h"

@@ -1,11 +1,11 @@
 #include "global.h"
+#include "code_8097DD0.h"
 #include "constants/colors.h"
 #include "items.h"
 #include "moves.h"
 #include "random.h"
 #include "pokemon.h"
 #include "random.h"
-#include "subStruct_203B240.h"
 #include "code_800D090.h"
 #include "text_util.h"
 #include "text2.h"
@@ -22,7 +22,7 @@ extern u16 gGummiStatBoostLUT[];
 extern u8 gUnknown_202DE58[];
 extern u32 gUnknown_202DE30;
 extern u8* gPtrTypeText;  // ptr to "Type\0"
-extern u8* gPtrPPD0Text;  // ptr to "PP $d0 \0"
+extern u8* gPtrPPD0Text;  // ptr to "PP {ARG_VALUE_0} \0"
 extern u32 gUnknown_810A3F0[100];
 extern u32 gUnknown_81097E8[4];  // some sort of lookup table (16, 18, 20, 22)
 extern u32 gUnknown_81097F8[4];  // some sort of lookup table (17, 19, 21, 23)
@@ -36,7 +36,6 @@ EWRAM_DATA ItemDataEntry *gItemParametersData = {0};
 EWRAM_DATA TeamInventory gTeamInventory = {0};
 EWRAM_DATA_2 TeamInventory *gTeamInventoryRef = {0};
 
-extern u32 sub_8097DF0(char *, struct subStruct_203B240 **);
 extern s32 sub_8091E94(s32 a1, s32 a2, s32 a3);
 extern void SortKecleonShopInventory();
 bool8 AddKecleonWareItem(u8);
@@ -926,7 +925,7 @@ bool8 IsGummiItem(u8 id)
   return TRUE;
 }
 
-bool8 HasGummiItem()
+bool8 HasGummiItem(void)
 {
   s32 i;
   for (i = 0; i < INVENTORY_SIZE; i++) {

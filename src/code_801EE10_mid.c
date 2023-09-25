@@ -7,7 +7,7 @@
 #include "moves.h"
 #include "code_801EE10.h"
 #include "menu_input.h"
-#include "subStruct_203B240.h"
+#include "structs/subStruct_203B240.h"
 #include "sprite.h"
 #include "code_80130A8.h"
 #include "code_801EE10_mid.h"
@@ -82,6 +82,10 @@ s32 sub_801F3F8(void)
   }
   return counter;
 }
+
+
+
+// THIS IS A NEW FILE
 
 bool8 sub_801F428(s16 index, s32 param_2)
 {
@@ -248,6 +252,15 @@ u32 sub_801F7E4(void)
     return gUnknown_203B274->unk4->count;
 }
 
+
+
+
+
+// THIS IS A NEW FILE
+
+
+
+
 bool8 sub_801F808(u16 *moveIDs)
 {
     s32 index;
@@ -333,9 +346,9 @@ void sub_801F930(void)
 
 void sub_801F9A4(void)
 {
-    char **name;
-    switch(gUnknown_203B278->state)
-    {
+    u8 **name;
+
+    switch (gUnknown_203B278->state) {
         case 0:
             sub_8008C54(gUnknown_203B278->unk5C);
             gUnknown_203B278->unk8 = gUnknown_203B278->moveIDs[gUnknown_203B278->unk28.unk1E];

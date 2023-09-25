@@ -1,8 +1,8 @@
 #ifndef GUARD_DEBUG_MENU3_H
 #define GUARD_DEBUG_MENU3_H
 
-#include "menu.h"
-#include "text.h"
+#include "structs/menu.h"
+#include "structs/str_text.h"
 
 // size: 0xFC
 typedef struct unkStruct_203B3F4

@@ -1,11 +1,11 @@
 #include "global.h"
 #include "constants/item.h"
-#include "dungeon_global_data.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
 #include "dungeon_random.h"
 #include "items.h"
-#include "map.h"
+#include "structs/map.h"
 
 extern u8 *gUnknown_80FE6F4[];
 extern struct unkStruct_8090F58 gUnknown_80F699C;

@@ -5,9 +5,11 @@
 #include "code_8009804.h"
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
+#include "code_80130A8.h"
 #include "code_8094F88.h"
 #include "code_8097670.h"
 #include "constants/bg_music.h"
+#include "constants/main_menu.h"
 #include "cpu.h"
 #include "debug.h"
 #include "event_flag.h"
@@ -16,7 +18,8 @@
 #include "friend_area.h"
 #include "game_options.h"
 #include "input.h"
-#include "main_menu.h"
+#include "main_menu1.h"
+#include "main_menu2.h"
 #include "memory.h"
 #include "moves.h"
 #include "music.h"
@@ -32,31 +35,25 @@
 extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);
 extern void LoadGameOptions(void);
-extern void SetWindowBGColor(void);
 extern void LoadItemParameters(void);
 extern void LoadMailInfo(void);
 extern void sub_800DAAC(void);
 extern void sub_800135C(void);
 extern void xxx_script_related_8001334(u32);
-extern void sub_80015C0(u32, u32);
 extern void LoadTitleScreen(void);
 extern void sub_80095CC(u32, u32);
 extern s32 GetFirstIndexofMailType(u8);
 extern void nullsub_33(void);
 extern u32 sub_80009D0(u32);
 
-extern void xxx_draw_string_80144C4(void);
 extern void nullsub_8(u32);
 extern void sub_80060EC(void);
-extern void TransferBGPaletteBuffer(void);
 extern void xxx_call_update_bg_vram(void);
-extern void xxx_call_update_bg_sound_input(void);
 
 extern u32 gUnknown_203B03C;
 extern u16 gUnknown_2026E4E;
 extern s32 gUnknown_2000A80;
 extern OpenedFile *gTitlePaletteFile;
-extern GameOptions *gGameOptionsRef;
 
 extern char gPMDBuildVersion[];
 

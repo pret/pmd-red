@@ -1,19 +1,21 @@
 #include "global.h"
-#include "constants/wonder_mail.h"
+#include "code_80118A4.h"
+#include "code_80130A8.h"
+#include "code_801B3C0.h"
+#include "code_801C8C4.h"
+#include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
-#include "save_write.h"
+#include "constants/wonder_mail.h"
+#include "cpu.h"
+#include "input.h"
 #include "memory.h"
+#include "other_menus2.h"
+#include "save_write.h"
 #include "text1.h"
 #include "text2.h"
-#include "input.h"
 #include "wonder_mail.h"
-#include "code_8094F88.h"
-#include "code_80130A8.h"
-#include "code_801C620.h"
-#include "code_801B3C0.h"
-#include "cpu.h"
-#include "code_80118A4.h"
 #include "wonder_mail_3.h"
+#include "wonder_mail_main_menu.h"
 
 #define SELECT_WONDER_MAIL_MODE_MAIN_SCREEN 0
 #define SEND_WONDER_MAIL_MAIN_SCREEN 1
@@ -80,7 +82,6 @@ ALIGNED(4) const char Cancel_80E7D24[] = "Cancel";
 ALIGNED(4) const char Yes_80E7D2C[] = "Yes";
 
 ALIGNED(4) const char wonder_mail_main_fill1[] = "pksdir0";
-ALIGNED(4) const char wonder_mail_main_fill2[] = "pksdir0";
 
 struct unkStruct_203B3E8
 {
@@ -119,13 +120,9 @@ extern u32 sub_8011C1C(void);
 extern void SetWonderMailMainMenuState(u8);
 extern void sub_8030DE4(void);
 extern void sub_803084C(void);
-extern void sub_80155F0(void);
 extern void sub_8031E10(void);
 
 extern u8 sub_800D588(void);
-extern s32 sub_8037D64(u32, void *, void *);
-extern s32 sub_80381F4(u32, void *, void *);
-extern void sub_80151C0(u32, u8 *);
 extern void sub_802EF48(void);
 
 
@@ -139,7 +136,6 @@ extern u32 sub_802D0E0();
 extern bool8 GetWonderMailAccepted();
 extern void sub_802D184();
 
-extern s32 sub_80154F0();
 extern bool8 DecodeWonderMailPassword(u8 *, WonderMail *);
 extern bool8 IsValidWonderMail(WonderMail *WonderMailData);
 
@@ -187,7 +183,7 @@ bool8 CreateWonderMailMenu(void)
   return 1;
 }
 
-u8 UpdateWonderMailMenu(void)
+u32 UpdateWonderMailMenu(void)
 {
   switch(gUnknown_203B3E8->state) {
     case RECEIVE_WONDER_MAIL_MAIN_SCREEN:

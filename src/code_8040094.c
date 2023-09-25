@@ -3,8 +3,8 @@
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
 #include "code_80521D0.h"
-#include "dungeon_entity.h"
-#include "dungeon_global_data.h"
+#include "structs/dungeon_entity.h"
+#include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
 #include "dungeon_music.h"
 #include "file_system.h"
@@ -18,7 +18,6 @@ extern struct FileArchive gDungeonFileArchive;
 extern OpenedFile *gUnknown_202EE04;
 
 extern void sub_803F7BC(void);
-extern void xxx_call_update_bg_sound_input(void);
 
 extern void sub_803F580(u32);
 extern void sub_8049ED4();

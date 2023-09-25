@@ -3,14 +3,14 @@
 
 #include "constants/move.h"
 #include "file_system.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "pokemon.h"
-#include "text.h"
+#include "structs/str_text.h"
 
 // size: 0x1E0
 typedef struct unkStruct_203B27C
 {
-    /* 0x0 */ bool32 isAsleep;
+    /* 0x0 */ u32 mode; // Corresponds to the enum: GulpinShopMode
     /* 0x4 */ s32 state;
     /* 0x8 */ u32 fallbackState;
     /* 0xC */ s16 speciesNum;

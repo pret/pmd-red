@@ -2,8 +2,8 @@
 #define GUARD_CODE_801B60C_H
 
 #include "items.h"
-#include "menu.h"
-#include "text.h"
+#include "structs/menu.h"
+#include "structs/str_text.h"
 
 // size: 0x154
 typedef struct unkStruct_203B234

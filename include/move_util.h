@@ -1,7 +1,7 @@
 #ifndef GUARD_MOVE_UTIL_H
 #define GUARD_MOVE_UTIL_H
 
-#include "dungeon_entity.h"
+#include "structs/dungeon_entity.h"
 
 u32 sub_8057144(Entity * pokemon);
 bool8 sub_80571F0(Entity * pokemon, Move *move);

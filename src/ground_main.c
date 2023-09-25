@@ -44,7 +44,6 @@ extern void sub_809B638();
 extern void nullsub_106();
 extern void sub_80A73EC();
 extern void sub_8099750();
-extern void xxx_call_update_bg_sound_input();
 extern void sub_80A6E68();
 extern void GroundMap_Action();
 extern void nullsub_124();
@@ -54,7 +53,6 @@ extern void GroundEffect_Action();
 
 extern s32 sub_8001784(u8, u8, u8);
 extern void sub_809CB8C();
-extern void sub_80015C0(u8, u8);
 extern void sub_80018D8(u8, u8, u32);
 extern void sub_800199C(u8, u8, u8, s32);
 extern void sub_8098CC8();
@@ -305,7 +303,7 @@ s16 sub_8098FA0(void)
     return sub_8001658(0, 0x11);
 }
 
-const char  *sub_8098FB4(void)
+const char *sub_8098FB4(void)
 {
     return sub_80A2B18(sub_8001658(0, 0x11));
 }

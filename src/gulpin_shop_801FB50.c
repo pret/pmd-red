@@ -1,10 +1,12 @@
 #include "global.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
-#include "code_801C620.h"
+#include "code_801BEEC.h"
 #include "code_801EE10.h"
-#include "code_801EE10_1.h"
 #include "code_801EE10_mid.h"
+#include "code_8023868.h"
+#include "code_8024458.h"
+#include "common_strings.h"
 #include "felicity_bank.h"
 #include "gulpin_shop.h"
 #include "gulpin_shop_801FB50.h"
@@ -24,16 +26,7 @@ extern u8 gUnknown_202E128[];
 extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
-extern const u8 *gUnknown_80D4920[];
-extern const u8 *gUnknown_80D4928[];
-extern const u8 *gUnknown_80D4934[];
-extern const u8 *gUnknown_80D4970[];
-extern const u8 *gGulpinDialogue[2][25]; // 80D8888
-
 #include "data/gulpin_shop_801FB50.h"
-
-// code_801EE10_1.c (return var type)
-extern u32 sub_80244E4(void);
 
 static void CreateGulpinLinkMenu(void);
 static void CreateGulpinShopMenu(void);
@@ -76,7 +69,7 @@ bool8 sub_801FB50(u32 mode)
     gUnknown_203B27C->menuAction2 = 0;
     gUnknown_203B27C->menuAction3 = 0;
     gUnknown_203B27C->menuAction4 = 0;
-    gUnknown_203B27C->isAsleep = mode;
+    gUnknown_203B27C->mode = mode;
     gUnknown_203B27C->unk15 = FALSE;
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_GULPIN);
     CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_GULPIN);
@@ -84,7 +77,7 @@ bool8 sub_801FB50(u32 mode)
     strcpy(gUnknown_202E1C8 - 80, name);
     PrintPokeNameToBuffer(gUnknown_202E1C8 - 0xF0, GetPlayerPokemonStruct());
 
-    if (gUnknown_203B27C->isAsleep == TRUE)
+    if (gUnknown_203B27C->mode == GULPIN_SHOP_MODE_ASLEEP)
         gUnknown_203B27C->unk17C = NULL;
     else
         gUnknown_203B27C->unk17C = &gUnknown_203B27C->faceFile;
@@ -240,63 +233,63 @@ static void sub_801FF28(void)
             gUnknown_203B27C->menuAction1 = 2;
             CreateGulpinShopMenu();
             gUnknown_203B27C->fallbackState = 2;
-            sub_8014248(gGulpinDialogue[gUnknown_203B27C->isAsleep][0],0,gUnknown_203B27C->menuAction1,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,gUnknown_203B27C->unk17C,0xc);
+            sub_8014248(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_00],0,gUnknown_203B27C->menuAction1,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,gUnknown_203B27C->unk17C,0xc);
             break;
         case 1:
             CreateGulpinShopMenu();
             gUnknown_203B27C->fallbackState = 2;
-            sub_8014248(gGulpinDialogue[gUnknown_203B27C->isAsleep][1],0,gUnknown_203B27C->menuAction1,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,gUnknown_203B27C->unk17C,0xc);
+            sub_8014248(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_01],0,gUnknown_203B27C->menuAction1,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,gUnknown_203B27C->unk17C,0xc);
             break;
         case 2:
             DrawTeamMoneyBox(3);
             break;
         case 3:
             gUnknown_203B27C->fallbackState = 0x1f;
-            sub_80141B4(gGulpinDialogue[gUnknown_203B27C->isAsleep][2],0,gUnknown_203B27C->unk17C,0x10d);
+            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_02],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 4:
             gUnknown_203B27C->fallbackState = 0x1f;
-            sub_80141B4(gGulpinDialogue[gUnknown_203B27C->isAsleep][3],0,gUnknown_203B27C->unk17C,0x10d);
+            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_03],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 5:
             gUnknown_203B27C->fallbackState = 0x1f;
-            sub_80141B4(gGulpinDialogue[gUnknown_203B27C->isAsleep][4],0,gUnknown_203B27C->unk17C,0x10d);
+            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_04],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 6:
             gUnknown_203B27C->fallbackState = 0x1f;
-            sub_80141B4(gGulpinDialogue[gUnknown_203B27C->isAsleep][5],0,gUnknown_203B27C->unk17C,0x10d);
+            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_05],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 7:
             sub_8020900();
-            sub_8014248(gGulpinDialogue[gUnknown_203B27C->isAsleep][6],0,0x10,
+            sub_8014248(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_06],0,0x10,
                         gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,
                         gUnknown_203B27C->unk17C,0xc);
             break;
         case 8:
             sub_8020950();
-            sub_8014248(gGulpinDialogue[gUnknown_203B27C->isAsleep][21],0,0xd,
+            sub_8014248(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_21],0,0xd,
                         gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,
                         gUnknown_203B27C->unk17C,0xc);
             break;
         case 9:
             gUnknown_203B27C->fallbackState = 1;
-            sub_80141B4(gGulpinDialogue[gUnknown_203B27C->isAsleep][22],0,gUnknown_203B27C->unk17C,0x10d);
+            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_22],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 10:
             gUnknown_203B27C->fallbackState = 1;
-            sub_80141B4(gGulpinDialogue[gUnknown_203B27C->isAsleep][23],0,gUnknown_203B27C->unk17C,0x10d);
+            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_23],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 0xb:
             gUnknown_203B27C->fallbackState = 1;
-            sub_80141B4(gGulpinDialogue[gUnknown_203B27C->isAsleep][24],0,gUnknown_203B27C->unk17C,0x10d);
+            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_24],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 0xc:
             gUnknown_203B27C->fallbackState = 0xd;
-            sub_80141B4(gGulpinDialogue[gUnknown_203B27C->isAsleep][7],0,gUnknown_203B27C->unk17C,0x10d);
+            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_07],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 0xe:
             gUnknown_203B27C->fallbackState = 0xf;
-            sub_80141B4(gGulpinDialogue[gUnknown_203B27C->isAsleep][8],0,gUnknown_203B27C->unk17C,0x10d);
+            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_08],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 0xf:
             sub_8023868(2,0,0,10);
@@ -316,7 +309,7 @@ static void sub_801FF28(void)
             break;
         case 0x14:
             gUnknown_203B27C->fallbackState = 0x15;
-            sub_80141B4(gGulpinDialogue[gUnknown_203B27C->isAsleep][9],0,gUnknown_203B27C->unk17C,0x10d);
+            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_09],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 0x15:
             sub_801F428(gUnknown_203B27C->speciesNum,0);
@@ -340,21 +333,21 @@ static void sub_801FF28(void)
             sub_8094060(gUnknown_203B27C->moves,gUnknown_203B27C->pokeStruct->moves);
             gUnknown_203B27C->fallbackState = 0x10;
             sub_8092C84(gAvailablePokemonNames,gUnknown_203B27C->unk1E);
-            sub_80141B4(gGulpinDialogue[gUnknown_203B27C->isAsleep][10],0,gUnknown_203B27C->unk17C,0x10d);
+            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_10],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 0x1a:
             sub_8094060(gUnknown_203B27C->moves,gUnknown_203B27C->pokeStruct->moves);
             gUnknown_203B27C->fallbackState = 0x10;
             if (gUnknown_203B27C->isNextMoveLinked) {
-                sub_80141B4(gGulpinDialogue[gUnknown_203B27C->isAsleep][14],0,gUnknown_203B27C->unk17C,0x10d);
+                sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_14],0,gUnknown_203B27C->unk17C,0x10d);
             }
             else
         {
-                sub_80141B4(gGulpinDialogue[gUnknown_203B27C->isAsleep][13],0,gUnknown_203B27C->unk17C,0x10d);
+                sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_13],0,gUnknown_203B27C->unk17C,0x10d);
             }
             break;
         case 0x1d:
-            if (gUnknown_203B27C->isAsleep == FALSE) {
+            if (gUnknown_203B27C->mode == GULPIN_SHOP_MODE_AWAKE) {
                 CreateGulpinShop(FALSE,gUnknown_203B27C->speciesNum,gUnknown_203B27C->moves);
             }
             else {
@@ -363,11 +356,11 @@ static void sub_801FF28(void)
             break;
         case 0x1b:
             gUnknown_203B27C->fallbackState = 0x10;
-            sub_80141B4(gGulpinDialogue[gUnknown_203B27C->isAsleep][15],0,gUnknown_203B27C->unk17C,0x10d);
+            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_15],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 0x1c:
             gUnknown_203B27C->fallbackState = 0x10;
-            sub_80141B4(gGulpinDialogue[gUnknown_203B27C->isAsleep][16],0,gUnknown_203B27C->unk17C,0x10d);
+            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_16],0,gUnknown_203B27C->unk17C,0x10d);
             break;
 
         case 0x1e:
@@ -389,11 +382,11 @@ static void sub_801FF28(void)
             sub_80208B0();
             sub_8092C84(gUnknown_202DFE8,gUnknown_203B27C->unk20);
             if (gUnknown_203B27C->isNextMoveLinked) {
-                sub_8014248(gGulpinDialogue[gUnknown_203B27C->isAsleep][18],0,0x11,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,
+                sub_8014248(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_18],0,0x11,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,
                             gUnknown_203B27C->unk17C,0xc);
             }
             else {
-                sub_8014248(gGulpinDialogue[gUnknown_203B27C->isAsleep][17],0,0x11,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,
+                sub_8014248(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_17],0,0x11,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,
                             gUnknown_203B27C->unk17C,0xc);
             }
             break;
@@ -402,11 +395,11 @@ static void sub_801FF28(void)
             sub_8092C84(gUnknown_202DFE8,gUnknown_203B27C->unk20);
             if (gUnknown_203B27C->isNextMoveLinked) 
             {
-                sub_80141B4(gGulpinDialogue[gUnknown_203B27C->isAsleep][20],0,gUnknown_203B27C->unk17C,0x10d);
+                sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_20],0,gUnknown_203B27C->unk17C,0x10d);
             }
             else
         {
-                sub_80141B4(gGulpinDialogue[gUnknown_203B27C->isAsleep][19],0,gUnknown_203B27C->unk17C,0x10d);
+                sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_19],0,gUnknown_203B27C->unk17C,0x10d);
             }
             break;
     }
@@ -422,7 +415,7 @@ static void CreateGulpinShopMenu(void)
     gUnknown_203B27C->unk7C[loopMax].text = gGulpinInfo;
     gUnknown_203B27C->unk7C[loopMax].menuAction = 0xb;
     loopMax++;
-    gUnknown_203B27C->unk7C[loopMax].text = *gUnknown_80D4934;
+    gUnknown_203B27C->unk7C[loopMax].text = gCommonCancel[0];
     gUnknown_203B27C->unk7C[loopMax].menuAction = 1;
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = 0x0;
@@ -477,11 +470,11 @@ static void sub_802069C(void)
     MemoryFill16(gUnknown_203B27C->unkBC, 0, sizeof(gUnknown_203B27C->unkBC));
 
     gUnknown_203B27C->unk7C[loopMax].text = gUnknown_80DC3F4;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 0x3;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = 3;
 
     loopMax++;
-    gUnknown_203B27C->unk7C[loopMax].text = *gUnknown_80D4970;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 0xB;
+    gUnknown_203B27C->unk7C[loopMax].text = gCommonInfo[0];
+    gUnknown_203B27C->unk7C[loopMax].menuAction = 11;
 
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = NULL;
@@ -535,19 +528,19 @@ static void CreateGulpinLinkMenu(void)
     
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gGulpinLink;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 0x8;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = 8;
     
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gGulpinDelink;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 0x9;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = 9;
     
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gGulpinForget;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 0xA;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = 10;
 
     loopMax++;
-    gUnknown_203B27C->unk7C[loopMax].text = *gUnknown_80D4970;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 0xB;
+    gUnknown_203B27C->unk7C[loopMax].text = gCommonInfo[0];
+    gUnknown_203B27C->unk7C[loopMax].menuAction = 11;
 
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = NULL;
@@ -569,10 +562,10 @@ static void sub_80208B0(void)
 {
     s32 loopMax = 0;
     MemoryFill16(gUnknown_203B27C->unkBC, 0, sizeof(gUnknown_203B27C->unkBC));
-    gUnknown_203B27C->unk7C[loopMax].text = *gUnknown_80D4920;
+    gUnknown_203B27C->unk7C[loopMax].text = gCommonYes[0];
     gUnknown_203B27C->unk7C[loopMax].menuAction = 0x10;
     loopMax++;
-    gUnknown_203B27C->unk7C[loopMax].text = *gUnknown_80D4928;
+    gUnknown_203B27C->unk7C[loopMax].text = gCommonNo[0];
     gUnknown_203B27C->unk7C[loopMax].menuAction = 0x11;
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = NULL;
@@ -583,10 +576,10 @@ static void sub_8020900(void)
 {
     s32 loopMax = 0;
     MemoryFill16(gUnknown_203B27C->unkBC, 0, sizeof(gUnknown_203B27C->unkBC));
-    gUnknown_203B27C->unk7C[loopMax].text = *gUnknown_80D4920;
+    gUnknown_203B27C->unk7C[loopMax].text = gCommonYes[0];
     gUnknown_203B27C->unk7C[loopMax].menuAction = 0x10;
     loopMax++;
-    gUnknown_203B27C->unk7C[loopMax].text = *gUnknown_80D4928;
+    gUnknown_203B27C->unk7C[loopMax].text = gCommonNo[0];
     gUnknown_203B27C->unk7C[loopMax].menuAction = 0x11;
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = NULL;

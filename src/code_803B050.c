@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_8012A18_1.h"
 #include "code_803B050.h"
 #include "constants/colors.h"
 #include "constants/wonder_mail.h"
@@ -7,13 +8,14 @@
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
 #include "code_8094F88.h"
-#include "code_802C39C.h"
 #include "text_util.h"
 #include "text2.h"
 #include "code_800D090.h"
 #include "menu_input.h"
 #include "wonder_mail.h"
 #include "dungeon.h"
+
+// This file was originally 7 files. Check data_80E7D40.s
 
 extern s16 gUnknown_80E80E0[];
 extern s16 gUnknown_80E8126[];
@@ -72,7 +74,6 @@ extern u8 *gUnknown_80E8B94[];
 
 extern PokemonStruct1 *sub_808D378(void);
 
-s32 sub_8016028(void);
 extern void PrintDungeonLocationtoBuffer(u8 *, void *);
 extern u8 sub_803C1D0(WonderMailSub *, u8);
 extern u8 *sub_803C1F0(u8);

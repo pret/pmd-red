@@ -1,5 +1,7 @@
-#include "constants/mailbox.h"
 #include "global.h"
+#include "constants/mailbox.h"
+#include "code_802DE84.h"
+#include "common_strings.h"
 #include "constants/dungeon.h"
 #include "constants/input.h"
 #include "memory.h"
@@ -15,6 +17,11 @@
 #include "code_80118A4.h"
 #include "code_80A26CC.h"
 #include "code_80958E8_1.h"
+#include "code_803B050.h"
+
+static EWRAM_DATA_2 unkStruct_203B2F4 *sUnknown_203B2F4 = {0};
+
+extern unkStruct_203B2F8 *gUnknown_203B2F8;
 
 const UnkTextStruct2 gUnknown_80DFDD4 =
 {
@@ -109,7 +116,6 @@ ALIGNED(4) const u8 gUnknown_80E0108[] = _(
 
 ALIGNED(4) const u8 gUnknown_80E014C[] = "New Mail";
 ALIGNED(4) const u8 gUnknown_80E0158[] = "Old Mail";
-static const u8 wonder_mail_3_fill[] = "pksdir0";
 
 extern void sub_802D63C(void);
 extern void sub_802D5A4(void);
@@ -129,15 +135,12 @@ extern void sub_802D1B8();
 extern void sub_802D2A8();
 
 
-extern bool8 IsMailinJobSlot(WonderMail *);
 extern u8 sub_8096F50(WonderMail *);
 extern u8 sub_802DAA8(void);
 extern u8 sub_802DADC(void);
 extern u8 *sub_8096DD8(void);
 extern u8 sub_8096C08(u8 *);
 extern void DrawJobListMenu(void);
-extern void sub_803B35C(WonderMail *, unkStruct_802C39C*);
-extern void sub_802DE84(unkStruct_802C39C *);
 extern void sub_802D73C(void);
 extern void sub_802C640(u32);
 extern void sub_802C4C8(u32, u32, u32);
@@ -148,16 +151,12 @@ extern void sub_8096D24(void);
 extern u8 *sub_8096DE8(void);
 extern void AcceptJob(unkSubStruct_203B2F8 *);
 unkStruct_803B344 *sub_803B344(u8);
-extern void CreateRescueTitle(unkStruct_802C39C *);
 extern u8 gUnknown_80DFDBC[];
 extern void sub_802CF5C(void);
 extern void sub_802CFD0(void);
 
-extern void sub_802DF24(void);
 extern void SetJobListState(u32);
-extern u32 sub_802DEE0(void);
 extern void ResetJobSlot(u8);
-extern u8 HasNoAcceptedJobs(void);
 u32 sub_802C598(u8 param_1);
 extern void sub_802C688(void);
 extern u8 GetPelipperBoardSlotIndex(void);
@@ -167,10 +166,6 @@ extern UnkTextStruct2 gUnknown_80DFDA4;
 
 extern struct unkStruct_203B2F0 *gUnknown_203B2F0;
 
-extern u8 *gUnknown_80D4920[];
-extern u8 *gUnknown_80D4928[];
-extern u8 *gUnknown_80D494C[];
-extern u8 *gUnknown_80D4970[];
 extern u8 gUnknown_80DFD70[];
 extern u8 gUnknown_80DFD7C[];
 
@@ -206,10 +201,10 @@ void sub_802CAA4(void) {
                 break;
         }
     }
-    gUnknown_203B2F0->unk10C[loopMax].text = *gUnknown_80D494C;
+    gUnknown_203B2F0->unk10C[loopMax].text = gCommonDelete[0];
     gUnknown_203B2F0->unk10C[loopMax].menuAction = 4;
     loopMax += 1;
-    gUnknown_203B2F0->unk10C[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B2F0->unk10C[loopMax].text = gCommonInfo[0];
     gUnknown_203B2F0->unk10C[loopMax].menuAction = 7;
     loopMax += 1;
     gUnknown_203B2F0->unk10C[loopMax].text = NULL;
@@ -231,10 +226,10 @@ void sub_802CBAC(void)
     s32 loopMax;
     loopMax = 0;
 
-    gUnknown_203B2F0->unk14C[loopMax].text = *gUnknown_80D4920;
+    gUnknown_203B2F0->unk14C[loopMax].text = gCommonYes[0];
     gUnknown_203B2F0->unk14C[loopMax].menuAction = 5;
     loopMax += 1;
-    gUnknown_203B2F0->unk14C[loopMax].text = *gUnknown_80D4928;
+    gUnknown_203B2F0->unk14C[loopMax].text = gCommonNo[0];
     gUnknown_203B2F0->unk14C[loopMax].menuAction = 6;
     loopMax += 1;
     gUnknown_203B2F0->unk14C[loopMax].text = NULL;
@@ -346,21 +341,30 @@ void sub_802CDB8(void)
     }
 }
 
+
+
+
+// THIS IS A NEW FILE:
+
+
+
+
+
 bool8 sub_802CDD4(u32 r0)
 {
-    if(gUnknown_203B2F4 == NULL)
+    if(sUnknown_203B2F4 == NULL)
     {
-        gUnknown_203B2F4 = MemoryAlloc(sizeof(unkStruct_203B2F4), 8);
+        sUnknown_203B2F4 = MemoryAlloc(sizeof(unkStruct_203B2F4), 8);
     }
-    gUnknown_203B2F4->unk34 = r0;
-    gUnknown_203B2F4->unk38 = &gUnknown_203B2F4->unk3C[gUnknown_203B2F4->unk34];
-    sub_8006518(gUnknown_203B2F4->unk3C);
-    gUnknown_203B2F4->unk3C[gUnknown_203B2F4->unk34] = gUnknown_80DFDA4;
-    gUnknown_203B2F4->unk38->unk14 = gUnknown_203B2F4->unk9C;
-    sub_8012D34(gUnknown_203B2F4->unk38, 4);
+    sUnknown_203B2F4->unk34 = r0;
+    sUnknown_203B2F4->unk38 = &sUnknown_203B2F4->unk3C[sUnknown_203B2F4->unk34];
+    sub_8006518(sUnknown_203B2F4->unk3C);
+    sUnknown_203B2F4->unk3C[sUnknown_203B2F4->unk34] = gUnknown_80DFDA4;
+    sUnknown_203B2F4->unk38->unk14 = sUnknown_203B2F4->unk9C;
+    sub_8012D34(sUnknown_203B2F4->unk38, 4);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2F4->unk3C, TRUE, TRUE);
-    sub_8013848(&gUnknown_203B2F4->input, 5, 4, r0);
+    sub_800641C(sUnknown_203B2F4->unk3C, TRUE, TRUE);
+    sub_8013848(&sUnknown_203B2F4->input, 5, 4, r0);
     sub_802CF5C();
     sub_802CFD0();
     return TRUE;
@@ -370,12 +374,12 @@ u32 sub_802CE5C(u8 r0)
 {
     if(r0 == 0)
     {
-        sub_8013660(&gUnknown_203B2F4->input);
+        sub_8013660(&sUnknown_203B2F4->input);
         return 0;
     }
     else
     {
-        switch(GetKeyPress(&gUnknown_203B2F4->input))
+        switch(GetKeyPress(&sUnknown_203B2F4->input))
         {
             case INPUT_B_BUTTON:
                 PlayMenuSoundEffect(1);
@@ -383,7 +387,7 @@ u32 sub_802CE5C(u8 r0)
             case INPUT_A_BUTTON:
                 return 3;
             default:
-                if(sub_80138B8(&gUnknown_203B2F4->input, 1) != 0)
+                if(sub_80138B8(&sUnknown_203B2F4->input, 1) != 0)
                 {
                     sub_802CF5C();
                     sub_802CFD0();
@@ -399,29 +403,29 @@ u32 sub_802CE5C(u8 r0)
 
 u8 sub_802CEBC(void)
 {
-    return (gUnknown_203B2F4->input.unk1E * gUnknown_203B2F4->input.unk1C) + gUnknown_203B2F4->input.menuIndex;
+    return (sUnknown_203B2F4->input.unk1E * sUnknown_203B2F4->input.unk1C) + sUnknown_203B2F4->input.menuIndex;
 }
 
 void sub_802CED8(u8 r0)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2F4->unk3C, FALSE, FALSE);
-    sub_8013984(&gUnknown_203B2F4->input);
+    sub_800641C(sUnknown_203B2F4->unk3C, FALSE, FALSE);
+    sub_8013984(&sUnknown_203B2F4->input);
     sub_802CF5C();
     sub_802CFD0();
     if(r0)
-        AddMenuCursorSprite(&gUnknown_203B2F4->input);
+        AddMenuCursorSprite(&sUnknown_203B2F4->input);
 }
 
 void sub_802CF14(void)
 {
-    if(gUnknown_203B2F4)
+    if(sUnknown_203B2F4)
     {
-        gUnknown_203B2F4->unk3C[gUnknown_203B2F4->unk34] = gUnknown_80DFD8C;
+        sUnknown_203B2F4->unk3C[sUnknown_203B2F4->unk34] = gUnknown_80DFD8C;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B2F4->unk3C, TRUE, TRUE);
-        MemoryFree(gUnknown_203B2F4);
-        gUnknown_203B2F4 = NULL;
+        sub_800641C(sUnknown_203B2F4->unk3C, TRUE, TRUE);
+        MemoryFree(sUnknown_203B2F4);
+        sUnknown_203B2F4 = NULL;
     }
 }
 
@@ -482,7 +486,7 @@ void sub_802CF5C(void)
 	"\tpop {r0}\n"
 	"\tbx r0\n"
 	"\t.align 2, 0\n"
-"_0802CFCC: .4byte gUnknown_203B2F4");
+"_0802CFCC: .4byte sUnknown_203B2F4");
 }
 
 
@@ -493,26 +497,36 @@ void sub_802CFD0(void)
   s32 r5;
   s32 r4;
   
-  sub_8008C54(gUnknown_203B2F4->unk34);
-  sub_80073B8(gUnknown_203B2F4->unk34);
-  r5 = r4 = gUnknown_203B2F4->input.unk1E * 8 + 10;
-  xxx_call_draw_string(r5,0,gUnknown_80DFDBC,gUnknown_203B2F4->unk34,0); // RESCUE EVENT
+  sub_8008C54(sUnknown_203B2F4->unk34);
+  sub_80073B8(sUnknown_203B2F4->unk34);
+  r5 = r4 = sUnknown_203B2F4->input.unk1E * 8 + 10;
+  xxx_call_draw_string(r5,0,gUnknown_80DFDBC,sUnknown_203B2F4->unk34,0); // RESCUE EVENT
   r4 -= 6;
-  r5 = r4 + (gUnknown_203B2F4->unk9C[2] * 8);
-  sub_8012BC4(r5,0,gUnknown_203B2F4->input.unk1E + 1,2,7,gUnknown_203B2F4->unk34);
+  r5 = r4 + (sUnknown_203B2F4->unk9C[2] * 8);
+  sub_8012BC4(r5,0,sUnknown_203B2F4->input.unk1E + 1,2,7,sUnknown_203B2F4->unk34);
 
-  for(r5 = 0; r5 < gUnknown_203B2F4->input.unk1A; r5++)
+  for(r5 = 0; r5 < sUnknown_203B2F4->input.unk1A; r5++)
   {
-        iVar1 = sub_803B344(gUnknown_203B2F4->input.unk1E * gUnknown_203B2F4->input.unk1C + r5);
-        local.unk0[0] = gUnknown_203B2F4->unk34;
-        local.y = sub_8013800(&gUnknown_203B2F4->input, r5);
+        iVar1 = sub_803B344(sUnknown_203B2F4->input.unk1E * sUnknown_203B2F4->input.unk1C + r5);
+        local.unk0[0] = sUnknown_203B2F4->unk34;
+        local.y = sub_8013800(&sUnknown_203B2F4->input, r5);
         sub_803B35C(&iVar1->mail,&local);
         local.unk43 = 1;
         local.unk4C = iVar1->unk14;
         CreateRescueTitle(&local);
   }
-  sub_80073E0(gUnknown_203B2F4->unk34);
+  sub_80073E0(sUnknown_203B2F4->unk34);
 }
+
+
+
+
+
+
+// THIS IS A NEW FILE:
+
+
+
 
 u32 sub_802D098(unkSubStruct_203B2F8 *mail)
 {
@@ -743,10 +757,10 @@ void sub_802D5A4(void) {
 
     loopMax = 0;
     MemoryFill16(gUnknown_203B2F8->unk198, 0, sizeof(gUnknown_203B2F8->unk198));
-    gUnknown_203B2F8->unk118[loopMax].text = *gUnknown_80D494C;
+    gUnknown_203B2F8->unk118[loopMax].text = gCommonDelete[0];
     gUnknown_203B2F8->unk118[loopMax].menuAction = 2;
     loopMax += 1;
-    gUnknown_203B2F8->unk118[loopMax].text = *gUnknown_80D4970;
+    gUnknown_203B2F8->unk118[loopMax].text = gCommonInfo[0];
     gUnknown_203B2F8->unk118[loopMax].menuAction = 5;
     loopMax += 1;
     gUnknown_203B2F8->unk118[loopMax].text = NULL;
@@ -764,10 +778,10 @@ void sub_802D5A4(void) {
 
 void sub_802D63C(void) {
     s32 loopMax = 0;
-    gUnknown_203B2F8->unk158[loopMax].text = *gUnknown_80D4920;
+    gUnknown_203B2F8->unk158[loopMax].text = gCommonYes[0];
     gUnknown_203B2F8->unk158[loopMax].menuAction = 3;
     loopMax += 1;
-    gUnknown_203B2F8->unk158[loopMax].text = *gUnknown_80D4928;
+    gUnknown_203B2F8->unk158[loopMax].text = gCommonNo[0];
     gUnknown_203B2F8->unk158[loopMax].menuAction = 4;
     loopMax += 1;
     gUnknown_203B2F8->unk158[loopMax].text = NULL;
@@ -779,10 +793,10 @@ void sub_802D690(void) {
     s32 index;
 
     loopMax = 0;
-    gUnknown_203B2F8->unk158[loopMax].text = *gUnknown_80D4920;
+    gUnknown_203B2F8->unk158[loopMax].text = gCommonYes[0];
     gUnknown_203B2F8->unk158[loopMax].menuAction = 3;
     loopMax += 1;
-    gUnknown_203B2F8->unk158[loopMax].text = *gUnknown_80D4928;
+    gUnknown_203B2F8->unk158[loopMax].text = gCommonNo[0];
     gUnknown_203B2F8->unk158[loopMax].menuAction = 4;
     loopMax += 1;
     gUnknown_203B2F8->unk158[loopMax].text = gUnknown_80E014C;
@@ -807,10 +821,10 @@ void sub_802D73C(void) {
     s32 index;
 
     loopMax = 0;
-    gUnknown_203B2F8->unk158[loopMax].text = *gUnknown_80D4920;
+    gUnknown_203B2F8->unk158[loopMax].text = gCommonYes[0];
     gUnknown_203B2F8->unk158[loopMax].menuAction = 3;
     loopMax += 1;
-    gUnknown_203B2F8->unk158[loopMax].text = *gUnknown_80D4928;
+    gUnknown_203B2F8->unk158[loopMax].text = gCommonNo[0];
     gUnknown_203B2F8->unk158[loopMax].menuAction = 4;
     loopMax += 1;
     gUnknown_203B2F8->unk158[loopMax].text = gUnknown_80E014C;

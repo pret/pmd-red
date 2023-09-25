@@ -1,7 +1,7 @@
 #include "global.h"
 #include "code_80130A8.h"
 #include "memory.h"
-#include "menu.h"
+#include "structs/menu.h"
 #include "pokemon.h"
 #include "post_office_guide1.h"
 #include "text1.h"
