@@ -1,7 +1,5 @@
 ALIGNED(4) static const u8 sFill[] = _("pksdir0");
 
-// TODO: Add "$n0" to charmap
-
 static const UnkTextStruct2 sUnknown_80DC9E8 = {
     0, 0, 0, 0,
     3,
@@ -81,8 +79,8 @@ ALIGNED(4) static const u8 sLetUsBegin[] = _(
     "{CENTER_ALIGN}Let us begin.");
 
 ALIGNED(4) static const u8 sFmtChangedAppearance[] = _(
-    "{CENTER_ALIGN}...{WAIT_PRESS}$n0 is undergoing changes...{EXTRA_MSG}"
-    "{CENTER_ALIGN}$n0{APOSTROPHE}s appearance changed...{EXTRA_MSG}");
+    "{CENTER_ALIGN}...{WAIT_PRESS}{ARG_NICKNAME_0} is undergoing changes...{EXTRA_MSG}"
+    "{CENTER_ALIGN}{ARG_NICKNAME_0}{APOSTROPHE}s appearance changed...{EXTRA_MSG}");
 
 ALIGNED(4) static const u8 sFmtEvolved[] = _(
     "{CENTER_ALIGN}It evolved from {COLOR_1 GREEN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}\n"

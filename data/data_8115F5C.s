@@ -316,13 +316,13 @@ gUnknown_81163E4: @ 81163E4
 
 	.global gUnknown_81163F0
 gUnknown_81163F0: @ 81163F0
-        .string "{CENTER_ALIGN}However{COMMA} $n0{APOSTROPHE}s team\n"
+        .string "{CENTER_ALIGN}However{COMMA} {ARG_NICKNAME_0}{APOSTROPHE}s team\n"
         .string "{CENTER_ALIGN}had too much money already...\0"
         .align 2,0
 
 	.global gUnknown_811642C
 gUnknown_811642C: @ 811642C
-        .string "{CENTER_ALIGN}However{COMMA} $n0{APOSTROPHE}s team\n"
+        .string "{CENTER_ALIGN}However{COMMA} {ARG_NICKNAME_0}{APOSTROPHE}s team\n"
         .string "{CENTER_ALIGN}had too many items already...\0"
         .align 2,0
         .string "pksdir0\0"
