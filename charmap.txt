@@ -252,6 +252,7 @@ R_BUTTON = 84 86
 SELECT_BUTTON = 87 72 87 73
 START_BUTTON = 87 53 87 71
 DPAD = 87 52
+NDS_Y_BUTTON = 83 c7
 
 @ Character codes escaped with a '~'.
 APOSTROPHE = 7E 32 37 @ ~27
@@ -322,6 +323,7 @@ YELLOW_4 = 44 @ D
 GENDER_COLOR = 45 @ E
 WHITE_5 = 46 @ F
 LIGHT_BLUE = 47 @ G (TODO CHECK THIS)
+UNK_COLOR_5 = 48 @ H (Seems to be for Friend Areas)
 GREEN_2 = 49 @ I
 CYAN_3 = 4D @ M
 YELLOW_5 = 4E @ N
