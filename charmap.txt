@@ -239,12 +239,18 @@
 'カ' = 83 4A
 'ナ' = 83 69
 
-POKE = 83 BF 83 C4
 
+RIGHT_ARROW = 81 A8
+LEFT_ARROW = 81 A9
+UP_ARROW = 81 AA
+
+POKE = 83 BF 83 C4 @ This is actually two characters which can render separately; may need to be split eventually.
 UNK_ICON_40 = 87 40
 STAR_BULLET = 87 42
+SPEECH_BUBBLE = 87 45
 TM = 87 4E
 ORB = 87 4F
+
 A_BUTTON = 87 50
 B_BUTTON = 87 51
 L_BUTTON = 87 74
@@ -255,20 +261,21 @@ DPAD = 87 52
 NDS_Y_BUTTON = 83 c7
 
 @ Character codes escaped with a '~'.
+DOUBLE_QUOTE = 7E 32 32 @ ~22 - double quote (") is a best guess until we find it in strings that are actually rendered
 APOSTROPHE = 7E 32 37 @ ~27
 COMMA = 7E 32 63 @ ~2c
 QUOTE_START = 7E 39 33 @ ~93
 QUOTE_END = 7E 39 34 @ ~94
 
 @ Placeholders for message arguments to swap out for names within strings.
-ARG_FRIEND_AREA = 24 68 @ $h
-ARG_MOVE_ITEM_0 = 24 69 30 @ $i0
-ARG_MOVE_ITEM_1 = 24 69 31 @ $i1
 ARG_VALUE_0 = 24 64 30 @ $d0
 ARG_VALUE_1 = 24 64 31 @ $d1
 ARG_VALUE_2 = 24 64 32 @ $d2
 ARG_VALUE_3 = 24 64 33 @ $d3
 ARG_VALUE_4 = 24 64 34 @ $d4
+ARG_FRIEND_AREA = 24 68 @ $h
+ARG_MOVE_ITEM_0 = 24 69 30 @ $i0
+ARG_MOVE_ITEM_1 = 24 69 31 @ $i1
 ARG_POKEMON_0 = 24 6D 30 @ $m0
 ARG_POKEMON_1 = 24 6D 31 @ $m1
 ARG_POKEMON_2 = 24 6D 32 @ $m2
@@ -279,6 +286,16 @@ ARG_POKEMON_6 = 24 6D 36 @ $m6
 ARG_POKEMON_7 = 24 6D 37 @ $m7
 ARG_POKEMON_8 = 24 6D 38 @ $m8
 ARG_NICKNAME_0 = 24 6E 30 @ $n0
+ARG_NICKNAME_1 = 24 6E 31 @ $n1
+ARG_NICKNAME_2 = 24 6E 32 @ $n2
+ARG_NICKNAME_3 = 24 6E 33 @ $n3
+ARG_NICKNAME_4 = 24 6E 34 @ $n4
+ARG_NICKNAME_5 = 24 6E 35 @ $n5
+ARG_NICKNAME_6 = 24 6E 36 @ $n6
+ARG_NICKNAME_7 = 24 6E 37 @ $n7
+ARG_NICKNAME_8 = 24 6E 38 @ $n8
+ARG_NICKNAME_9 = 24 6E 39 @ $n9
+ARG_TEAM_NAME = 24 74 @ $t
 
 @ TEXT MACROS
 @
