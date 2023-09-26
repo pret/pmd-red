@@ -1,6 +1,5 @@
 #include "constants/status.h"
 .section .rodata
-
 #.incbin "baserom.gba", 0xF59C4, 0x4
 
 .global gUnknown_80F59C8
@@ -1350,7 +1349,7 @@ gUseText: @ 80F7C38
 gUseDescription: @ 80F7C3C
 
 .global gUnknown_80F7C3C
-gUnknown_80F7C3C:
+gUnknown_80F7C3C: @ 80F7C3C
 .string "{ARG_POKEMON_0} used\n"
 .string "the {ARG_MOVE_ITEM_0}.\0"
 .align 2,0
@@ -1537,7 +1536,7 @@ gMenuGiveUpText: @ 80F7EA0
 gMenuQuicksaveText: @ 80F7EA8
 
 .global gUnknown_80F7EA8
-gUnknown_80F7EA8:
+gUnknown_80F7EA8: @ 80F7EA8
 .string "Quicksave\0"
 .align 2,0
 
@@ -1595,7 +1594,7 @@ gMenuTacticsText: @ 80F7EFC
 gMenuMovesText: @ 80F7F04
 
 .global gUnknown_80F7F04
-gUnknown_80F7F04:
+gUnknown_80F7F04: @ 80F7F04
 .string "Moves\0"
 .align 2,0
 
@@ -1613,7 +1612,7 @@ gMenuStruggleText: @ 80F7F14
 gMenuEmpty: @ 80F7F20
 
 .global gUnknown_80F7F20
-gUnknown_80F7F20:
+gUnknown_80F7F20: @ 80F7F20
 .byte 0x00
 .align 2,0
 
@@ -1716,7 +1715,7 @@ gRescueSpotText: @ 80F7F7C
 gWarpZoneText: @ 80F8030
 
 .global gUnknown_80F811C
-gUnknown_80F811C:
+gUnknown_80F811C: @ 80F811C
 .string "Warp Zone\0"
 .align 2,0
 
@@ -1724,7 +1723,7 @@ gUnknown_80F811C:
 gDungeonStairsText: @ 80F809C
 
 .global gUnknown_80F8128
-gUnknown_80F8128:
+gUnknown_80F8128: @ 80F8128
 .string "Stairs\0"
 .align 2,0
 
@@ -1881,7 +1880,6 @@ MudTrapDescription: @ 80F887C
 .string "{COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}{COMMA} {COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2}{COMMA} or\n"
 .string "{COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2} by one level.\0"
 .align 2, 0
-
 @ This trap is unused in the game.
 
 .global TripTrapDescription
@@ -1900,7 +1898,7 @@ gUnknown_80F8968: @ 80F8968
 .4byte gUnknown_80F895C
 
 .global gUnknown_80F896C
-gUnknown_80F896C:
+gUnknown_80F896C: @ 80F896C
 .string "Decoy\0"
 .align 2,0
 
@@ -1910,9 +1908,9 @@ gUnknown_80F8974: @ 80F8974
 .4byte gUnknown_80F896C
 
 .global gUnknown_80F8978
-gUnknown_80F8978:
-.byte 0x23, 0x63, 0x36, 0x50, 0x6f, 0x6b, 0xe9, 0x6d, 0x6f, 0x6e, 0x23, 0x72
-.byte 0x00, 0x00, 0x00, 0x00
+gUnknown_80F8978: @ 80F8978
+.string "{COLOR_2 YELLOW}Pokémon{END_COLOR_TEXT_2}\0"
+.align 2, 0
 
 .global gUnknown_80F8988
 gUnknown_80F8988: @ 80F8988
@@ -1920,15 +1918,16 @@ gUnknown_80F8988: @ 80F8988
 .4byte gUnknown_80F8978
 
 .global gUnknown_80F898C
-gUnknown_80F898C:
-.byte 0x50, 0x6f, 0x6b, 0xe9, 0x6d, 0x6f, 0x6e, 0x00
+gUnknown_80F898C: @ 80F898C
+.string "Pokémon\0"
+.align 2, 0
 
 .global gUnknown_80F8994
 gUnknown_80F8994: @ 80F8994
 .4byte gUnknown_80F898C
 
 .global PartnerFainted_80F8998
-PartnerFainted_80F8998:
+PartnerFainted_80F8998: @ 80F8998
 .string "Your partner {ARG_POKEMON_0} fainted!\0"
 .align 2,0
 
@@ -1937,7 +1936,7 @@ gUnknown_80F89B4: @ 80F89B4
 .4byte PartnerFainted_80F8998
 
 .global ClientFainted_80F89B8
-ClientFainted_80F89B8:
+ClientFainted_80F89B8: @ 80F89B8
 .string "Your client {ARG_POKEMON_0} fainted!\0"
 .align 2,0
 
@@ -1950,10 +1949,10 @@ gUnknown_80F89D8: @ 80F89D8
 .4byte ClientFainted_80F89B8
 
 .global NothingHappened_80F89DC
-NothingHappened_80F89DC:
+NothingHappened_80F89DC: @ 80F89DC
 
 .global gUnknown_80F89DC
-gUnknown_80F89DC:
+gUnknown_80F89DC: @ 80F89DC
 .string "But nothing happened!\0"
 .align 2,0
 
@@ -1962,7 +1961,7 @@ gUnknown_80F89F4: @ 80F89F4
 .4byte NothingHappened_80F89DC
 
 .global BlownAway_80F89F8
-BlownAway_80F89F8:
+BlownAway_80F89F8: @ 80F89F8
 .string "{ARG_POKEMON_0} was blown away!\0"
 .align 2,0
 
@@ -1971,7 +1970,7 @@ gUnknown_80F8A0C: @ 80F8A0C
 .4byte BlownAway_80F89F8
 
 .global NoToggleSetMove_80F8A10
-NoToggleSetMove_80F8A10:
+NoToggleSetMove_80F8A10: @ 80F8A10
 .string "No move has been set.\0"
 .align 2,0
 
@@ -1980,7 +1979,7 @@ gUnknown_80F8A28: @ 80F8A28
 .4byte NoToggleSetMove_80F8A10
 
 .global ToggleSetMoveCantUse_80F8A2C
-ToggleSetMoveCantUse_80F8A2C:
+ToggleSetMoveCantUse_80F8A2C: @ 80F8A2C
 .string "The set move can{APOSTROPHE}t be used.\0"
 .align 2,0
 
@@ -1989,7 +1988,7 @@ gUnknown_80F8A4C: @ 80F8A4C
 .4byte ToggleSetMoveCantUse_80F8A2C
 
 .global BeingConstricted_80F8A50
-BeingConstricted_80F8A50:
+BeingConstricted_80F8A50: @ 80F8A50
 .string "You{APOSTROPHE}re being constricted!\0"
 .align 2,0
 
@@ -1998,7 +1997,7 @@ gUnknown_80F8A6C: @ 80F8A6C
 .4byte BeingConstricted_80F8A50
 
 .global CantMove_80F8A70
-CantMove_80F8A70:
+CantMove_80F8A70: @ 80F8A70
 .string "You can{APOSTROPHE}t move!\0"
 .align 2,0
 
@@ -2007,7 +2006,7 @@ gUnknown_80F8A84: @ 80F8A84
 .4byte CantMove_80F8A70
 
 .global gUnknown_80F8A88
-gUnknown_80F8A88:
+gUnknown_80F8A88: @ 80F8A88
 .string "You can{APOSTROPHE}t move while you{APOSTROPHE}re rooted!\0"
 .align 2,0
 
@@ -2016,7 +2015,7 @@ gUnknown_80F8AB0: @ 80F8AB0
 .4byte gUnknown_80F8A88
 
 .global gUnknown_80F8AB4
-gUnknown_80F8AB4:
+gUnknown_80F8AB4: @ 80F8AB4
 .string "You can{APOSTROPHE}t move while wrapping a foe!\0"
 .align 2,0
 
@@ -2025,7 +2024,7 @@ gUnknown_80F8ADC: @ 80F8ADC
 .4byte gUnknown_80F8AB4
 
 .global gUnknown_80F8AE0
-gUnknown_80F8AE0:
+gUnknown_80F8AE0: @ 80F8AE0
 .string "The foe has you wrapped! You can{APOSTROPHE}t move!\0"
 .align 2,0
 
@@ -2034,7 +2033,7 @@ gUnknown_80F8B0C: @ 80F8B0C
 .4byte gUnknown_80F8AE0
 
 .global gUnknown_80F8B10
-gUnknown_80F8B10:
+gUnknown_80F8B10: @ 80F8B10
 .string "There are no items.\0"
 
 .global gUnknown_80F8B24
@@ -2042,7 +2041,7 @@ gUnknown_80F8B24: @ 80F8B24
 .4byte gUnknown_80F8B10
 
 .global gUnknown_80F8B28
-gUnknown_80F8B28:
+gUnknown_80F8B28: @ 80F8B28
 .string "The move {ARG_MOVE_ITEM_0} was set.\0"
 .align 2,0
 
@@ -2051,7 +2050,7 @@ gUnknown_80F8B40: @ 80F8B40
 .4byte gUnknown_80F8B28
 
 .global gUnknown_80F8B44
-gUnknown_80F8B44:
+gUnknown_80F8B44: @ 80F8B44
 .string "The move {ARG_MOVE_ITEM_0} was deselected.\0"
 .align 2,0
 
@@ -2061,7 +2060,7 @@ gUnknown_80F8B64: @ 80F8B64
 .4byte gMenuEmpty
 
 .global gUnknown_80F8B6C
-gUnknown_80F8B6C:
+gUnknown_80F8B6C: @ 80F8B6C
 .string "The move {ARG_MOVE_ITEM_0} was delinked.\0"
 .align 2,0
 
@@ -2070,7 +2069,7 @@ gUnknown_80F8B88: @ 80F8B88
 .4byte gUnknown_80F8B6C
 
 .global gUnknown_80F8B8C
-gUnknown_80F8B8C:
+gUnknown_80F8B8C: @ 80F8B8C
 .string "The linked moves were left unchanged.\0"
 .align 2,0
 
@@ -2079,7 +2078,7 @@ gUnknown_80F8BB4: @ 80F8BB4
 .4byte gUnknown_80F8B8C
 
 .global gUnknown_80F8BB8
-gUnknown_80F8BB8:
+gUnknown_80F8BB8: @ 80F8BB8
 .string "It{APOSTROPHE}s all sticky and doesn{APOSTROPHE}t work!\0"
 .align 2,0
 
@@ -2093,7 +2092,6 @@ gUnknown_80F8BE4: @ 80F8BE4
 .string "The {ARG_MOVE_ITEM_1} is all sticky!\n"
 .string "It doesn{APOSTROPHE}t work!\0"
 .align 2, 0
-
 .4byte gUnknown_80F8BE4
 
 .global gUnknown_80F8C14
@@ -2213,7 +2211,6 @@ gUnknown_80F8DB8: @ 80F8DB8
 .string "{ARG_POKEMON_1} used the {ARG_MOVE_ITEM_0}\n"
 .string "it was holding!\0"
 .align 2, 0
-
 .4byte gUnknown_80F8DB8
 
 .global gUnknown_80F8DE0
@@ -2494,7 +2491,7 @@ gUnknown_80F9158: @ 80F9158
 
 .global gUnknown_80F915C
 gUnknown_80F915C: @ 80F915C
-.string "$-Belly:#>147.{ARG_VALUE_0}/{ARG_VALUE_1}\0"
+.string "$-Belly:{UNK_MACRO_3E M3E_147}{ARG_VALUE_0}/{ARG_VALUE_1}\0"
 .align 2, 0
 
 .global gUnknown_80F9174
@@ -2504,7 +2501,7 @@ gUnknown_80F9174: @ 80F9174
 
 .global gUnknown_80F9178
 gUnknown_80F9178: @ 80F9178
-.string "Money:#>147.{ARG_VALUE_0} {POKE}\0"
+.string "Money:{UNK_MACRO_3E M3E_147}{ARG_VALUE_0} {POKE}\0"
 .align 2, 0
 
 .global gUnknown_80F9190
@@ -2514,7 +2511,7 @@ gUnknown_80F9190: @ 80F9190
 
 .global gUnknown_80F9194
 gUnknown_80F9194: @ 80F9194
-.string "Weather:#>159.{ARG_POKEMON_0}\0"
+.string "Weather:{UNK_MACRO_3E M3E_159}{ARG_POKEMON_0}\0"
 .align 2, 0
 
 .global gUnknown_80F91A8
@@ -2524,7 +2521,7 @@ gUnknown_80F91A8: @ 80F91A8
 
 .global gUnknown_80F91AC
 gUnknown_80F91AC: @ 80F91AC
-.string "Play:#>147.{ARG_VALUE_0}:$V12:$V22\0"
+.string "Play:{UNK_MACRO_3E M3E_147}{ARG_VALUE_0}:$V12:$V22\0"
 .align 2, 0
 
 .global gUnknown_80F91C8
@@ -2534,7 +2531,7 @@ gUnknown_80F91C8: @ 80F91C8
 
 .global gUnknown_80F91CC
 gUnknown_80F91CC: @ 80F91CC
-.string "{ARG_POKEMON_0}#>66.$v03/$v13\0"
+.string "{ARG_POKEMON_0}{UNK_MACRO_3E M3E_66}$v03/$v13\0"
 .align 2, 0
 
 .global gUnknown_80F91E0
@@ -3064,7 +3061,6 @@ gUnknown_80F9764: @ 80F9764
 .4byte gUnknown_80F9860
 .string "\0"
 .align 2, 0
-
 .4byte gUnknown_80F9834
 .4byte gUnknown_80F9834
 .4byte gUnknown_80F9A3C
@@ -3505,7 +3501,6 @@ gUnknown_80F9E80: @ 80F9E80
 gUnknown_80F9E84: @ 80F9E84
 .string "{ARG_POKEMON_0}{APOSTROPHE}s level remained unchanged.\0"
 .align 2, 0
-
 .4byte gUnknown_80F9E84
 
 .global gUnknown_80F9EAC
@@ -6400,14 +6395,12 @@ gUnknown_80FC454: @ 80FC454
 gUnknown_80FC458: @ 80FC458
 .string "{ARG_POKEMON_0}{APOSTROPHE}s Attack was weakened.\0"
 .align 2, 0
-
 .4byte gUnknown_80FC458
 
 .global gUnknown_80FC47C
 gUnknown_80FC47C: @ 80FC47C
 .string "{ARG_POKEMON_0}{APOSTROPHE}s Attack didn{APOSTROPHE}t go down.\0"
 .align 2, 0
-
 .4byte gUnknown_80FC47C
 
 .global gUnknown_80FC4A4
@@ -6415,7 +6408,6 @@ gUnknown_80FC4A4: @ 80FC4A4
 .string "{ARG_POKEMON_0}{APOSTROPHE}s Special Attack was\n"
 .string "weakened.\0"
 .align 2, 0
-
 .4byte gUnknown_80FC4A4
 
 .global gUnknown_80FC4D0
@@ -6423,7 +6415,6 @@ gUnknown_80FC4D0: @ 80FC4D0
 .string "{ARG_POKEMON_0}{APOSTROPHE}s Special Attack didn{APOSTROPHE}t go\n"
 .string "down.\0"
 .align 2, 0
-
 .4byte gUnknown_80FC4D0
 
 .global gUnknown_80FC500
@@ -6758,7 +6749,6 @@ gUnknown_80FC924: @ 80FC924
 .string "The target is a Ground type!\n"
 .string "Mud-Slap didn{APOSTROPHE}t work!\0"
 .align 2, 0
-
 .4byte gUnknown_80FC924
 
 .global gUnknown_80FC960
@@ -7284,7 +7274,6 @@ gUnknown_80FD0B8: @ 80FD0B8
 gUnknown_80FD0BC: @ 80FD0BC
 .string "The stairs were located!\0"
 .align 2, 0
-
 .4byte gUnknown_80FD0BC
 .4byte gUnknown_80F7F20
 .4byte gUnknown_80F7F20
@@ -8537,7 +8526,6 @@ gUnknown_80FE3EC: @ 80FE3EC
 .string "{ARG_POKEMON_0} learned the move\n"
 .string "{ARG_MOVE_ITEM_0}.\0"
 .align 2, 0
-
 .4byte gUnknown_80FE3EC
 
 .global gUnknown_80FE40C
@@ -8751,14 +8739,13 @@ gUnknown_80FE70C: @ 80FE70C
 .4byte gUnknown_80F8128
 
 .global gUnknown_80FE710
-gUnknown_80FE710:
+gUnknown_80FE710: @ 80FE710
 .string "Rescue Point\0"
 .align 2,0
 
 .global gUnknown_80FE720
 gUnknown_80FE720: @ 80FE720
 .4byte gUnknown_80FE710
-
 @ In Dungeon Game Options Menu
 
 .global gUnknown_80FE724
@@ -8778,7 +8765,7 @@ gOptionsDungeonTextPtr: @ 80FE730
 OptionsOthersText:
 
 .global gUnknown_80FE734
-gUnknown_80FE734:
+gUnknown_80FE734: @ 80FE734
 .string "Others\0"
 .align 2,0
 
@@ -8794,7 +8781,6 @@ OptionsDefaultText:
 .global gUnknown_80FE748
 gUnknown_80FE748: @ 80FE748
 .4byte OptionsDefaultText
-
 @ Dungeon Game Options Menu
 
 .global OptionsSpeed
@@ -8841,7 +8827,6 @@ OptionsMap:
 .global gUnknown_80FE7E4
 gUnknown_80FE7E4: @ 80FE7E4
 .4byte OptionsMap
-
 @ Field Others Menu
 
 .global OptionsWindowColor
@@ -8852,15 +8837,12 @@ OptionsWindowColor:
 .global gOptionsWindowColorPtr
 gOptionsWindowColorPtr: @ 80FE808
 .4byte OptionsWindowColor
-
 .4byte TopScreenMapData
 .4byte TopScreenMapData
 .4byte TopScreenMapData
-
 .4byte TopScreenMessageLog
 .4byte TopScreenMessageLog
 .4byte TopScreenMessageLog
-
 .4byte TopScreenMapAndTeam
 
 .global TopScreenMapAndTeam
@@ -8877,7 +8859,6 @@ TopScreenMessageLog:
 TopScreenMapData:
 .string "Top screen: Team data\0"
 .align 2,0
-
 .4byte BottomScreenNoMap
 .4byte BottomScreenClearMap
 .4byte BottomScreenShadedMap
@@ -8905,7 +8886,7 @@ BottomScreenNoMap:
 GameOptionsText:
 
 .global gUnknown_80FE8E0
-gUnknown_80FE8E0:
+gUnknown_80FE8E0: @ 80FE8E0
 .string "Game Options\0"
 .align 2,0
 
@@ -8949,7 +8930,7 @@ gFieldItemMenuGroundTextPtr: @ 80FE92C
 .4byte FieldItemMenuGroundText
 
 .global ItemText_80FE930
-ItemText_80FE930:
+ItemText_80FE930: @ 80FE930
 .string "{ARG_POKEMON_0}{APOSTROPHE}s item\0"
 .align 2,0
 
@@ -8975,7 +8956,7 @@ gUnknown_80FE954: @ 80FE954
 .4byte gMenuTacticsText
 
 .global ItemText_80FE958
-ItemText_80FE958:
+ItemText_80FE958: @ 80FE958
 .string "{ARG_MOVE_ITEM_0}\0"
 .align 2,0
 
@@ -8992,7 +8973,7 @@ gUnknown_80FE964: @ 80FE964
 .4byte ItemText_80FE958
 
 .global PokeMove_80FE968
-PokeMove_80FE968:
+PokeMove_80FE968: @ 80FE968
 .string "{ARG_POKEMON_0}{APOSTROPHE}s moves\0"
 .align 2,0
 
@@ -9344,7 +9325,6 @@ gUnknown_80FED30: @ 80FED30
 gUnknown_80FED34: @ 80FED34
 .string "{ARG_POKEMON_0} disappeared in the blast!\0"
 .align 2, 0
-
 .4byte gUnknown_80FED34
 
 .global gUnknown_80FED58
@@ -9565,13 +9545,11 @@ gUnknown_80FF020: @ 80FF020
 .4byte gUnknown_80FF028
 
 .global gUnknown_80FF028
-gUnknown_80FF028:
-.byte 0x48, 0x65, 0x61, 0x64, 0x20, 0x66, 0x6f, 0x72
-.byte 0x20, 0x74, 0x68, 0x65, 0x20, 0x64, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e
-.byte 0x20, 0x77, 0x68, 0x69, 0x6c, 0x65, 0x20, 0x61, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x69, 0x6e, 0x67
-.byte 0x0a, 0x66, 0x6f, 0x65, 0x73, 0x20, 0x77, 0x69, 0x74, 0x68, 0x20, 0x87, 0x50, 0x2e, 0x0a, 0x54
-.byte 0x72, 0x79, 0x20, 0x6e, 0x6f, 0x74, 0x20, 0x74, 0x6f, 0x20, 0x6c, 0x65, 0x74, 0x20, 0x61, 0x20
-.byte 0x70, 0x61, 0x72, 0x74, 0x6e, 0x65, 0x72, 0x20, 0x66, 0x61, 0x69, 0x6e, 0x74, 0x21, 0x00, 0x00
+gUnknown_80FF028: @ 80FF028
+.string "Head for the destination while attacking\n"
+.string "foes with {A_BUTTON}.\n"
+.string "Try not to let a partner faint!\0"
+.align 2, 0
 
 .global gUnknown_80FF080
 gUnknown_80FF080: @ 80FF080
@@ -9580,13 +9558,11 @@ gUnknown_80FF080: @ 80FF080
 .4byte gUnknown_80FF088
 
 .global gUnknown_80FF088
-gUnknown_80FF088:
-.byte 0x46, 0x6f, 0x65, 0x73, 0x20, 0x77, 0x6f, 0x6e
-.byte 0x7e, 0x32, 0x37, 0x74, 0x20, 0x6d, 0x6f, 0x76, 0x65, 0x20, 0x75, 0x6e, 0x74, 0x69, 0x6c, 0x20
-.byte 0x79, 0x6f, 0x75, 0x20, 0x64, 0x6f, 0x2e, 0x0a, 0x4f, 0x70, 0x65, 0x6e, 0x20, 0x74, 0x68, 0x65
-.byte 0x20, 0x6d, 0x65, 0x6e, 0x75, 0x20, 0x77, 0x69, 0x74, 0x68, 0x20, 0x87, 0x51, 0x20, 0x61, 0x6e
-.byte 0x64, 0x0a, 0x74, 0x68, 0x69, 0x6e, 0x6b, 0x20, 0x62, 0x65, 0x66, 0x6f, 0x72, 0x65, 0x20, 0x79
-.byte 0x6f, 0x75, 0x20, 0x61, 0x63, 0x74, 0x21, 0x00
+gUnknown_80FF088: @ 80FF088
+.string "Foes won{APOSTROPHE}t move until you do.\n"
+.string "Open the menu with {B_BUTTON} and\n"
+.string "think before you act!\0"
+.align 2, 0
 
 .global gUnknown_80FF0D8
 gUnknown_80FF0D8: @ 80FF0D8
@@ -9595,14 +9571,11 @@ gUnknown_80FF0D8: @ 80FF0D8
 .4byte gUnknown_80FF0E0
 
 .global gUnknown_80FF0E0
-gUnknown_80FF0E0:
-.byte 0x59, 0x6f, 0x75, 0x72, 0x20, 0x74, 0x65, 0x61
-.byte 0x6d, 0x20, 0x72, 0x65, 0x67, 0x61, 0x69, 0x6e, 0x73, 0x20, 0x48, 0x50, 0x20, 0x61, 0x73, 0x20
-.byte 0x69, 0x74, 0x20, 0x6d, 0x6f, 0x76, 0x65, 0x73, 0x2e, 0x0a, 0x48, 0x6f, 0x6c, 0x64, 0x20, 0x87
-.byte 0x51, 0x20, 0x74, 0x68, 0x65, 0x6e, 0x20, 0x70, 0x72, 0x65, 0x73, 0x73, 0x20, 0x87, 0x50, 0x20
-.byte 0x74, 0x6f, 0x20, 0x72, 0x65, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x0a, 0x48, 0x50, 0x20, 0x71, 0x75
-.byte 0x69, 0x63, 0x6b, 0x6c, 0x79, 0x20, 0x6f, 0x6e, 0x20, 0x74, 0x68, 0x65, 0x20, 0x73, 0x70, 0x6f
-.byte 0x74, 0x2e, 0x00, 0x00
+gUnknown_80FF0E0: @ 80FF0E0
+.string "Your team regains HP as it moves.\n"
+.string "Hold {B_BUTTON} then press {A_BUTTON} to recover\n"
+.string "HP quickly on the spot.\0"
+.align 2, 0
 
 .global gUnknown_80FF13C
 gUnknown_80FF13C: @ 80FF13C
@@ -9611,15 +9584,11 @@ gUnknown_80FF13C: @ 80FF13C
 .4byte gUnknown_80FF144
 
 .global gUnknown_80FF144
-gUnknown_80FF144:
-.byte 0x44, 0x65, 0x66, 0x65, 0x61, 0x74, 0x20, 0x66
-.byte 0x6f, 0x65, 0x73, 0x20, 0x75, 0x73, 0x69, 0x6e, 0x67, 0x20, 0x6d, 0x6f, 0x76, 0x65, 0x73, 0x20
-.byte 0x69, 0x6e, 0x73, 0x74, 0x65, 0x61, 0x64, 0x20, 0x6f, 0x66, 0x0a, 0x87, 0x50, 0x20, 0x61, 0x74
-.byte 0x74, 0x61, 0x63, 0x6b, 0x73, 0x20, 0x66, 0x6f, 0x72, 0x20, 0x6d, 0x6f, 0x72, 0x65, 0x20, 0x45
-.byte 0x78, 0x70, 0x2e, 0x20, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x2e, 0x0a, 0x43, 0x68, 0x6f, 0x6f
-.byte 0x73, 0x65, 0x20, 0x61, 0x6e, 0x64, 0x20, 0x73, 0x65, 0x74, 0x20, 0x74, 0x68, 0x65, 0x20, 0x6d
-.byte 0x6f, 0x76, 0x65, 0x20, 0x79, 0x6f, 0x75, 0x20, 0x77, 0x61, 0x6e, 0x74, 0x20, 0x74, 0x6f, 0x20
-.byte 0x75, 0x73, 0x65, 0x2e, 0x00, 0x00, 0x00, 0x00
+gUnknown_80FF144: @ 80FF144
+.string "Defeat foes using moves instead of\n"
+.string "{A_BUTTON} attacks for more Exp. Points.\n"
+.string "Choose and set the move you want to use.\0"
+.align 2, 0
 
 .global gUnknown_80FF1B4
 gUnknown_80FF1B4: @ 80FF1B4
@@ -9628,15 +9597,11 @@ gUnknown_80FF1B4: @ 80FF1B4
 .4byte gUnknown_80FF1BC
 
 .global gUnknown_80FF1BC
-gUnknown_80FF1BC:
-.byte 0x43, 0x68, 0x6f, 0x6f, 0x73, 0x65, 0x20, 0x61
-.byte 0x20, 0x70, 0x61, 0x72, 0x74, 0x6e, 0x65, 0x72, 0x20, 0x77, 0x69, 0x74, 0x68, 0x20, 0x74, 0x68
-.byte 0x65, 0x20, 0x54, 0x65, 0x61, 0x6d, 0x20, 0x63, 0x6f, 0x6d, 0x6d, 0x61, 0x6e, 0x64, 0x0a, 0x61
-.byte 0x6e, 0x64, 0x20, 0x73, 0x65, 0x74, 0x20, 0x69, 0x74, 0x73, 0x20, 0x74, 0x61, 0x63, 0x74, 0x69
-.byte 0x63, 0x73, 0x20, 0x61, 0x6e, 0x64, 0x20, 0x49, 0x51, 0x20, 0x73, 0x6b, 0x69, 0x6c, 0x6c, 0x73
-.byte 0x2e, 0x0a, 0x43, 0x6f, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x77, 0x69
-.byte 0x74, 0x68, 0x20, 0x70, 0x61, 0x72, 0x74, 0x6e, 0x65, 0x72, 0x73, 0x20, 0x69, 0x73, 0x20, 0x74
-.byte 0x68, 0x65, 0x20, 0x6b, 0x65, 0x79, 0x21, 0x00
+gUnknown_80FF1BC: @ 80FF1BC
+.string "Choose a partner with the Team command\n"
+.string "and set its tactics and IQ skills.\n"
+.string "Cooperation with partners is the key!\0"
+.align 2, 0
 
 .global gUnknown_80FF22C
 gUnknown_80FF22C: @ 80FF22C
@@ -9645,14 +9610,11 @@ gUnknown_80FF22C: @ 80FF22C
 .4byte gUnknown_80FF234
 
 .global gUnknown_80FF234
-gUnknown_80FF234:
-.byte 0x48, 0x6f, 0x6c, 0x64, 0x20, 0x87, 0x51, 0x20
-.byte 0x74, 0x68, 0x65, 0x6e, 0x20, 0x70, 0x72, 0x65, 0x73, 0x73, 0x20, 0x87, 0x52, 0x20, 0x74, 0x6f
-.byte 0x20, 0x73, 0x70, 0x65, 0x65, 0x64, 0x20, 0x75, 0x70, 0x0a, 0x6d, 0x6f, 0x76, 0x65, 0x6d, 0x65
-.byte 0x6e, 0x74, 0x2e, 0x20, 0x48, 0x6f, 0x6c, 0x64, 0x20, 0x84, 0x86, 0x20, 0x74, 0x68, 0x65, 0x6e
-.byte 0x20, 0x70, 0x72, 0x65, 0x73, 0x73, 0x20, 0x87, 0x52, 0x0a, 0x74, 0x6f, 0x20, 0x6d, 0x6f, 0x76
-.byte 0x65, 0x20, 0x6f, 0x6e, 0x6c, 0x79, 0x20, 0x64, 0x69, 0x61, 0x67, 0x6f, 0x6e, 0x61, 0x6c, 0x6c
-.byte 0x79, 0x2e, 0x00, 0x00
+gUnknown_80FF234: @ 80FF234
+.string "Hold {B_BUTTON} then press {DPAD} to speed up\n"
+.string "movement. Hold {R_BUTTON} then press {DPAD}\n"
+.string "to move only diagonally.\0"
+.align 2, 0
 
 .global gUnknown_80FF290
 gUnknown_80FF290: @ 80FF290
@@ -9661,15 +9623,11 @@ gUnknown_80FF290: @ 80FF290
 .4byte gUnknown_80FF298
 
 .global gUnknown_80FF298
-gUnknown_80FF298:
-.byte 0x45, 0x61, 0x74, 0x20, 0x61, 0x6e, 0x20, 0x41
-.byte 0x70, 0x70, 0x6c, 0x65, 0x20, 0x6f, 0x72, 0x20, 0x47, 0x75, 0x6d, 0x6d, 0x69, 0x20, 0x77, 0x68
-.byte 0x65, 0x6e, 0x20, 0x79, 0x6f, 0x75, 0x72, 0x20, 0x42, 0x65, 0x6c, 0x6c, 0x79, 0x0a, 0x67, 0x6f
-.byte 0x65, 0x73, 0x20, 0x64, 0x6f, 0x77, 0x6e, 0x2e, 0x20, 0x42, 0x65, 0x69, 0x6e, 0x67, 0x20, 0x66
-.byte 0x61, 0x6d, 0x69, 0x73, 0x68, 0x65, 0x64, 0x20, 0x63, 0x61, 0x6e, 0x20, 0x63, 0x61, 0x75, 0x73
-.byte 0x65, 0x0a, 0x66, 0x61, 0x69, 0x6e, 0x74, 0x69, 0x6e, 0x67, 0x7e, 0x32, 0x63, 0x20, 0x73, 0x6f
-.byte 0x20, 0x63, 0x68, 0x65, 0x63, 0x6b, 0x20, 0x79, 0x6f, 0x75, 0x72, 0x20, 0x42, 0x65, 0x6c, 0x6c
-.byte 0x79, 0x20, 0x69, 0x6e, 0x20, 0x74, 0x68, 0x65, 0x20, 0x6d, 0x65, 0x6e, 0x75, 0x2e, 0x00, 0x00
+gUnknown_80FF298: @ 80FF298
+.string "Eat an Apple or Gummi when your Belly\n"
+.string "goes down. Being famished can cause\n"
+.string "fainting{COMMA} so check your Belly in the menu.\0"
+.align 2, 0
 
 .global gUnknown_80FF310
 gUnknown_80FF310: @ 80FF310
@@ -9678,16 +9636,11 @@ gUnknown_80FF310: @ 80FF310
 .4byte gUnknown_80FF318
 
 .global gUnknown_80FF318
-gUnknown_80FF318:
-.byte 0x45, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x20, 0x61
-.byte 0x6e, 0x20, 0x41, 0x70, 0x70, 0x6c, 0x65, 0x20, 0x6f, 0x72, 0x20, 0x47, 0x75, 0x6d, 0x6d, 0x69
-.byte 0x20, 0x66, 0x69, 0x6c, 0x6c, 0x73, 0x20, 0x79, 0x6f, 0x75, 0x72, 0x20, 0x42, 0x65, 0x6c, 0x6c
-.byte 0x79, 0x2e, 0x0a, 0x43, 0x68, 0x6f, 0x6f, 0x73, 0x65, 0x20, 0x74, 0x68, 0x65, 0x6d, 0x20, 0x75
-.byte 0x6e, 0x64, 0x65, 0x72, 0x20, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x20, 0x69, 0x6e, 0x20, 0x74, 0x68
-.byte 0x65, 0x20, 0x6d, 0x65, 0x6e, 0x75, 0x0a, 0x61, 0x6e, 0x64, 0x20, 0x65, 0x61, 0x74, 0x20, 0x6f
-.byte 0x6e, 0x65, 0x20, 0x62, 0x65, 0x66, 0x6f, 0x72, 0x65, 0x20, 0x79, 0x6f, 0x75, 0x72, 0x20, 0x42
-.byte 0x65, 0x6c, 0x6c, 0x79, 0x20, 0x67, 0x65, 0x74, 0x73, 0x20, 0x65, 0x6d, 0x70, 0x74, 0x79, 0x2e
-.byte 0x00, 0x00, 0x00, 0x00
+gUnknown_80FF318: @ 80FF318
+.string "Eating an Apple or Gummi fills your Belly.\n"
+.string "Choose them under Items in the menu\n"
+.string "and eat one before your Belly gets empty.\0"
+.align 2, 0
 
 .global gUnknown_80FF394
 gUnknown_80FF394: @ 80FF394
@@ -9696,13 +9649,11 @@ gUnknown_80FF394: @ 80FF394
 .4byte gUnknown_80FF39C
 
 .global gUnknown_80FF39C
-gUnknown_80FF39C:
-.byte 0x41, 0x6e, 0x20, 0x4f, 0x72, 0x61, 0x6e, 0x20
-.byte 0x42, 0x65, 0x72, 0x72, 0x79, 0x20, 0x72, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x73, 0x20, 0x48
-.byte 0x50, 0x2e, 0x0a, 0x4f, 0x70, 0x65, 0x6e, 0x20, 0x74, 0x68, 0x65, 0x20, 0x6d, 0x65, 0x6e, 0x75
-.byte 0x20, 0x77, 0x69, 0x74, 0x68, 0x20, 0x87, 0x51, 0x20, 0x61, 0x6e, 0x64, 0x0a, 0x73, 0x65, 0x6c
-.byte 0x65, 0x63, 0x74, 0x20, 0x69, 0x74, 0x20, 0x75, 0x6e, 0x64, 0x65, 0x72, 0x20, 0x49, 0x74, 0x65
-.byte 0x6d, 0x73, 0x2e, 0x00
+gUnknown_80FF39C: @ 80FF39C
+.string "An Oran Berry restores HP.\n"
+.string "Open the menu with {B_BUTTON} and\n"
+.string "select it under Items.\0"
+.align 2, 0
 
 .global gUnknown_80FF3E8
 gUnknown_80FF3E8: @ 80FF3E8
@@ -9711,13 +9662,11 @@ gUnknown_80FF3E8: @ 80FF3E8
 .4byte gUnknown_80FF3F0
 
 .global gUnknown_80FF3F0
-gUnknown_80FF3F0:
-.byte 0x41, 0x20, 0x43, 0x68, 0x65, 0x72, 0x69, 0x20
-.byte 0x42, 0x65, 0x72, 0x72, 0x79, 0x20, 0x68, 0x65, 0x61, 0x6c, 0x73, 0x20, 0x70, 0x61, 0x72, 0x61
-.byte 0x6c, 0x79, 0x73, 0x69, 0x73, 0x2e, 0x0a, 0x4f, 0x70, 0x65, 0x6e, 0x20, 0x74, 0x68, 0x65, 0x20
-.byte 0x6d, 0x65, 0x6e, 0x75, 0x20, 0x77, 0x69, 0x74, 0x68, 0x20, 0x87, 0x51, 0x20, 0x61, 0x6e, 0x64
-.byte 0x0a, 0x73, 0x65, 0x6c, 0x65, 0x63, 0x74, 0x20, 0x69, 0x74, 0x20, 0x75, 0x6e, 0x64, 0x65, 0x72
-.byte 0x20, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x2e, 0x00
+gUnknown_80FF3F0: @ 80FF3F0
+.string "A Cheri Berry heals paralysis.\n"
+.string "Open the menu with {B_BUTTON} and\n"
+.string "select it under Items.\0"
+.align 2, 0
 
 .global gUnknown_80FF440
 gUnknown_80FF440: @ 80FF440
@@ -9726,13 +9675,11 @@ gUnknown_80FF440: @ 80FF440
 .4byte gUnknown_80FF448
 
 .global gUnknown_80FF448
-gUnknown_80FF448:
-.byte 0x41, 0x20, 0x42, 0x6c, 0x61, 0x73, 0x74, 0x20
-.byte 0x53, 0x65, 0x65, 0x64, 0x20, 0x66, 0x6c, 0x61, 0x6d, 0x65, 0x73, 0x20, 0x74, 0x68, 0x65, 0x20
-.byte 0x66, 0x6f, 0x65, 0x20, 0x79, 0x6f, 0x75, 0x0a, 0x61, 0x72, 0x65, 0x20, 0x66, 0x61, 0x63, 0x69
-.byte 0x6e, 0x67, 0x2e, 0x0a, 0x54, 0x75, 0x72, 0x6e, 0x20, 0x74, 0x6f, 0x20, 0x66, 0x61, 0x63, 0x65
-.byte 0x20, 0x74, 0x68, 0x65, 0x20, 0x66, 0x6f, 0x65, 0x7e, 0x32, 0x63, 0x20, 0x74, 0x68, 0x65, 0x6e
-.byte 0x20, 0x75, 0x73, 0x65, 0x20, 0x74, 0x68, 0x65, 0x20, 0x69, 0x74, 0x65, 0x6d, 0x2e, 0x00, 0x00
+gUnknown_80FF448: @ 80FF448
+.string "A Blast Seed flames the foe you\n"
+.string "are facing.\n"
+.string "Turn to face the foe{COMMA} then use the item.\0"
+.align 2, 0
 
 .global gUnknown_80FF4A0
 gUnknown_80FF4A0: @ 80FF4A0
@@ -9741,15 +9688,11 @@ gUnknown_80FF4A0: @ 80FF4A0
 .4byte gUnknown_80FF4A8
 
 .global gUnknown_80FF4A8
-gUnknown_80FF4A8:
-.byte 0x47, 0x72, 0x61, 0x76, 0x65, 0x6c, 0x65, 0x72
-.byte 0x6f, 0x63, 0x6b, 0x73, 0x20, 0x63, 0x61, 0x6e, 0x20, 0x62, 0x65, 0x20, 0x6c, 0x6f, 0x62, 0x62
-.byte 0x65, 0x64, 0x20, 0x61, 0x74, 0x20, 0x64, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x20, 0x66, 0x6f
-.byte 0x65, 0x73, 0x2e, 0x0a, 0x53, 0x65, 0x74, 0x20, 0x74, 0x68, 0x65, 0x6d, 0x20, 0x66, 0x6f, 0x72
-.byte 0x20, 0x75, 0x73, 0x65, 0x20, 0x75, 0x6e, 0x64, 0x65, 0x72, 0x20, 0x49, 0x74, 0x65, 0x6d, 0x73
-.byte 0x2e, 0x0a, 0x48, 0x6f, 0x6c, 0x64, 0x20, 0x87, 0x74, 0x20, 0x74, 0x68, 0x65, 0x6e, 0x20, 0x70
-.byte 0x72, 0x65, 0x73, 0x73, 0x20, 0x84, 0x86, 0x20, 0x74, 0x6f, 0x20, 0x74, 0x68, 0x72, 0x6f, 0x77
-.byte 0x20, 0x74, 0x68, 0x65, 0x6d, 0x2e, 0x00, 0x00
+gUnknown_80FF4A8: @ 80FF4A8
+.string "Gravelerocks can be lobbed at distant foes.\n"
+.string "Set them for use under Items.\n"
+.string "Hold {L_BUTTON} then press {R_BUTTON} to throw them.\0"
+.align 2, 0
 
 .global gUnknown_80FF518
 gUnknown_80FF518: @ 80FF518
@@ -9758,14 +9701,11 @@ gUnknown_80FF518: @ 80FF518
 .4byte gUnknown_80FF520
 
 .global gUnknown_80FF520
-gUnknown_80FF520:
-.byte 0x41, 0x20, 0x50, 0x65, 0x63, 0x68, 0x61, 0x20
-.byte 0x42, 0x65, 0x72, 0x72, 0x79, 0x20, 0x68, 0x65, 0x61, 0x6c, 0x73, 0x20, 0x61, 0x6e, 0x79, 0x20
-.byte 0x6b, 0x69, 0x6e, 0x64, 0x20, 0x6f, 0x66, 0x20, 0x70, 0x6f, 0x69, 0x73, 0x6f, 0x6e, 0x69, 0x6e
-.byte 0x67, 0x2e, 0x0a, 0x4f, 0x70, 0x65, 0x6e, 0x20, 0x74, 0x68, 0x65, 0x20, 0x6d, 0x65, 0x6e, 0x75
-.byte 0x20, 0x77, 0x69, 0x74, 0x68, 0x20, 0x87, 0x51, 0x20, 0x61, 0x6e, 0x64, 0x0a, 0x73, 0x65, 0x6c
-.byte 0x65, 0x63, 0x74, 0x20, 0x69, 0x74, 0x20, 0x75, 0x6e, 0x64, 0x65, 0x72, 0x20, 0x49, 0x74, 0x65
-.byte 0x6d, 0x73, 0x2e, 0x00
+gUnknown_80FF520: @ 80FF520
+.string "A Pecha Berry heals any kind of poisoning.\n"
+.string "Open the menu with {B_BUTTON} and\n"
+.string "select it under Items.\0"
+.align 2, 0
 
 .global gUnknown_80FF57C
 gUnknown_80FF57C: @ 80FF57C
@@ -9774,14 +9714,11 @@ gUnknown_80FF57C: @ 80FF57C
 .4byte gUnknown_80FF584
 
 .global gUnknown_80FF584
-gUnknown_80FF584:
-.byte 0x54, 0x68, 0x72, 0x6f, 0x77, 0x20, 0x61, 0x20
-.byte 0x53, 0x6c, 0x65, 0x65, 0x70, 0x20, 0x53, 0x65, 0x65, 0x64, 0x20, 0x61, 0x74, 0x20, 0x61, 0x20
-.byte 0x66, 0x6f, 0x65, 0x20, 0x74, 0x6f, 0x20, 0x70, 0x75, 0x74, 0x20, 0x69, 0x74, 0x0a, 0x74, 0x6f
-.byte 0x20, 0x73, 0x6c, 0x65, 0x65, 0x70, 0x20, 0x66, 0x6f, 0x72, 0x20, 0x61, 0x20, 0x6c, 0x69, 0x74
-.byte 0x74, 0x6c, 0x65, 0x20, 0x77, 0x68, 0x69, 0x6c, 0x65, 0x2e, 0x0a, 0x45, 0x61, 0x74, 0x69, 0x6e
-.byte 0x67, 0x20, 0x69, 0x74, 0x20, 0x77, 0x69, 0x6c, 0x6c, 0x20, 0x70, 0x75, 0x74, 0x20, 0x79, 0x6f
-.byte 0x75, 0x20, 0x74, 0x6f, 0x20, 0x73, 0x6c, 0x65, 0x65, 0x70, 0x21, 0x00
+gUnknown_80FF584: @ 80FF584
+.string "Throw a Sleep Seed at a foe to put it\n"
+.string "to sleep for a little while.\n"
+.string "Eating it will put you to sleep!\0"
+.align 2, 0
 
 .global gUnknown_80FF5E8
 gUnknown_80FF5E8: @ 80FF5E8
@@ -9790,20 +9727,17 @@ gUnknown_80FF5E8: @ 80FF5E8
 .4byte gUnknown_80FF5F0
 
 .global gUnknown_80FF5F0
-gUnknown_80FF5F0:
-.byte 0x83, 0xbf, 0x83, 0xc4, 0x20, 0x69, 0x73, 0x20
-.byte 0x74, 0x68, 0x65, 0x20, 0x6d, 0x6f, 0x6e, 0x65, 0x79, 0x20, 0x69, 0x6e, 0x20, 0x74, 0x68, 0x69
-.byte 0x73, 0x20, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x2e, 0x0a, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74
-.byte 0x20, 0x61, 0x6e, 0x64, 0x20, 0x73, 0x61, 0x76, 0x65, 0x20, 0x69, 0x74, 0x20, 0x74, 0x6f, 0x20
-.byte 0x62, 0x75, 0x79, 0x20, 0x75, 0x73, 0x65, 0x66, 0x75, 0x6c, 0x0a, 0x69, 0x74, 0x65, 0x6d, 0x73
-.byte 0x2e, 0x00, 0x00, 0x00
+gUnknown_80FF5F0: @ 80FF5F0
+.string "{POKE} is the money in this world.\n"
+.string "Collect and save it to buy useful\n"
+.string "items.\0"
+.align 2, 0
 
 .global gUnknown_80FF63C
-gUnknown_80FF63C:
-.byte 0x59, 0x6f, 0x75, 0x7e, 0x32, 0x37, 0x72, 0x65, 0x20, 0x61, 0x20, 0x74
-.byte 0x68, 0x69, 0x65, 0x66, 0x21, 0x0a, 0x59, 0x6f, 0x75, 0x7e, 0x32, 0x37, 0x72, 0x65, 0x20, 0x6e
-.byte 0x6f, 0x74, 0x20, 0x72, 0x65, 0x63, 0x6f, 0x67, 0x6e, 0x69, 0x7a, 0x65, 0x64, 0x20, 0x61, 0x73
-.byte 0x20, 0x61, 0x20, 0x72, 0x65, 0x73, 0x63, 0x75, 0x65, 0x72, 0x21, 0x00
+gUnknown_80FF63C: @ 80FF63C
+.string "You{APOSTROPHE}re a thief!\n"
+.string "You{APOSTROPHE}re not recognized as a rescuer!\0"
+.align 2, 0
 
 .global gUnknown_80FF674
 gUnknown_80FF674: @ 80FF674
@@ -9816,10 +9750,9 @@ gUnknown_80FF678: @ 80FF678
 .4byte gUnknown_80FB568
 
 .global gUnknown_80FF67C
-gUnknown_80FF67C:
-.byte 0x59, 0x6f, 0x75, 0x7e, 0x32, 0x37, 0x76, 0x65, 0x20, 0x72, 0x65, 0x61
-.byte 0x63, 0x68, 0x65, 0x64, 0x20, 0x61, 0x20, 0x64, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x61, 0x74, 0x69
-.byte 0x6f, 0x6e, 0x20, 0x66, 0x6c, 0x6f, 0x6f, 0x72, 0x21, 0x00, 0x00, 0x00
+gUnknown_80FF67C: @ 80FF67C
+.string "You{APOSTROPHE}ve reached a destination floor!\0"
+.align 2, 0
 
 .global gUnknown_80FF6A4
 gUnknown_80FF6A4: @ 80FF6A4
@@ -9827,13 +9760,10 @@ gUnknown_80FF6A4: @ 80FF6A4
 .4byte gUnknown_80FF67C
 
 .global gUnknown_80FF6A8
-gUnknown_80FF6A8:
-.byte 0x59, 0x6f, 0x75, 0x7e, 0x32, 0x37, 0x76, 0x65, 0x20, 0x72, 0x65, 0x61
-.byte 0x63, 0x68, 0x65, 0x64, 0x20, 0x61, 0x20, 0x64, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x61, 0x74, 0x69
-.byte 0x6f, 0x6e, 0x20, 0x66, 0x6c, 0x6f, 0x6f, 0x72, 0x21, 0x0a, 0x42, 0x75, 0x74, 0x20, 0x74, 0x68
-.byte 0x65, 0x20, 0x50, 0x6f, 0x6b, 0xe9, 0x6d, 0x6f, 0x6e, 0x20, 0x79, 0x6f, 0x75, 0x20, 0x73, 0x65
-.byte 0x65, 0x6b, 0x20, 0x69, 0x73, 0x6e, 0x7e, 0x32, 0x37, 0x74, 0x20, 0x68, 0x65, 0x72, 0x65, 0x2e
-.byte 0x2e, 0x2e, 0x00, 0x00
+gUnknown_80FF6A8: @ 80FF6A8
+.string "You{APOSTROPHE}ve reached a destination floor!\n"
+.string "But the Pokémon you seek isn{APOSTROPHE}t here...\0"
+.align 2, 0
 
 .global gUnknown_80FF6F8
 gUnknown_80FF6F8: @ 80FF6F8
@@ -9841,11 +9771,10 @@ gUnknown_80FF6F8: @ 80FF6F8
 .4byte gUnknown_80FF6A8
 
 .global gUnknown_80FF6FC
-gUnknown_80FF6FC:
-.byte 0x24, 0x69, 0x30, 0x20, 0x77, 0x61, 0x73, 0x20, 0x61, 0x64, 0x64, 0x65
-.byte 0x64, 0x20, 0x74, 0x6f, 0x0a, 0x24, 0x6d, 0x30, 0x7e, 0x32, 0x37, 0x73, 0x20, 0x6c, 0x69, 0x73
-.byte 0x74, 0x20, 0x6f, 0x66, 0x20, 0x75, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x20, 0x74, 0x61, 0x63, 0x74
-.byte 0x69, 0x63, 0x73, 0x2e, 0x00, 0x00, 0x00, 0x00
+gUnknown_80FF6FC: @ 80FF6FC
+.string "{ARG_MOVE_ITEM_0} was added to\n"
+.string "{ARG_POKEMON_0}{APOSTROPHE}s list of usable tactics.\0"
+.align 2, 0
 
 .global gUnknown_80FF730
 gUnknown_80FF730: @ 80FF730
@@ -9853,11 +9782,10 @@ gUnknown_80FF730: @ 80FF730
 .4byte gUnknown_80FF6FC
 
 .global gUnknown_80FF734
-gUnknown_80FF734:
-.byte 0x49, 0x74, 0x65, 0x6d, 0x73, 0x20, 0x63, 0x61, 0x6e, 0x7e, 0x32, 0x37
-.byte 0x74, 0x20, 0x62, 0x65, 0x20, 0x74, 0x68, 0x72, 0x6f, 0x77, 0x6e, 0x20, 0x77, 0x68, 0x65, 0x6e
-.byte 0x20, 0x61, 0x20, 0x50, 0x6f, 0x6b, 0xe9, 0x6d, 0x6f, 0x6e, 0x7e, 0x32, 0x37, 0x73, 0x0a, 0x74
-.byte 0x65, 0x72, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64, 0x21, 0x00, 0x00, 0x00
+gUnknown_80FF734: @ 80FF734
+.string "Items can{APOSTROPHE}t be thrown when a Pokémon{APOSTROPHE}s\n"
+.string "terrified!\0"
+.align 2, 0
 
 .global gUnknown_80FF76C
 gUnknown_80FF76C: @ 80FF76C
@@ -10360,10 +10288,8 @@ gProtectSavedItMessage: @ 8100744
 .global gPtrProtectSavedItMessage
 gPtrProtectSavedItMessage: @ 810075C
 .4byte gProtectSavedItMessage
-
 .string "pksdir0\0"
 .align 2, 0
-
 @ Start of Boss Fight Dialogues?
 
 .global gSkarmoryPreFightDialogue_1
@@ -10431,14 +10357,16 @@ gSkarmoryPreFightDialogue_5: @ 8100880
 .global gUnknown_8100898
 gUnknown_8100898: @ 8100898
 .string " We{APOSTROPHE}re here to rescue\n"
-.string "{ARG_POKEMON_2}!{EXTRA_MSG} {ARG_POKEMON_3}!\n"
+.string "{ARG_POKEMON_2}!{EXTRA_MSG}"
+.string " {ARG_POKEMON_3}!\n"
 .string "Don{APOSTROPHE}t do this! Release {ARG_POKEMON_2}!\0"
 .align 2, 0
 
 .global gUnknown_81008DC
 gUnknown_81008DC: @ 81008DC
 .string " We came to rescue\n"
-.string "{ARG_POKEMON_2}!{EXTRA_MSG} Hey{COMMA} {ARG_POKEMON_3}!\n"
+.string "{ARG_POKEMON_2}!{EXTRA_MSG}"
+.string " Hey{COMMA} {ARG_POKEMON_3}!\n"
 .string "Quit doing this{COMMA} and release {ARG_POKEMON_2}!\0"
 .align 2, 0
 
@@ -10470,16 +10398,20 @@ gSkarmoryPreFightDialogue_7: @ 8100A04
 
 .global gUnknown_8100A1C
 gUnknown_8100A1C: @ 8100A1C
-.string " That{APOSTROPHE}s not true.{EXTRA_MSG}Well{COMMA} it{APOSTROPHE}s true there have\n"
-.string "been many earthquakes lately{COMMA} but...{EXTRA_MSG} It would take more than\n"
+.string " That{APOSTROPHE}s not true.{EXTRA_MSG}"
+.string "Well{COMMA} it{APOSTROPHE}s true there have\n"
+.string "been many earthquakes lately{COMMA} but...{EXTRA_MSG}"
+.string " It would take more than\n"
 .string "{ARG_POKEMON_2}{APOSTROPHE}s family going wild under\n"
 .string "the ground to cause earthquakes.\0"
 .align 2, 0
 
 .global gUnknown_8100AD4
 gUnknown_8100AD4: @ 8100AD4
-.string " Whoa{COMMA} that{APOSTROPHE}s not true.{EXTRA_MSG} Sure there{APOSTROPHE}ve been quakes\n"
-.string "galore lately...{EXTRA_MSG} But it would take more than\n"
+.string " Whoa{COMMA} that{APOSTROPHE}s not true.{EXTRA_MSG}"
+.string " Sure there{APOSTROPHE}ve been quakes\n"
+.string "galore lately...{EXTRA_MSG}"
+.string " But it would take more than\n"
 .string "{ARG_POKEMON_2}{APOSTROPHE}s family running wild under\n"
 .string "the ground to set off a quake.\0"
 .align 2, 0
@@ -10492,7 +10424,8 @@ gSkarmoryPreFightDialogue_8: @ 8100B80
 
 .global gUnknown_8100B8C
 gUnknown_8100B8C: @ 8100B8C
-.string " You be quiet!{EXTRA_MSG}We{APOSTROPHE}ll fight if you keep that up!\0"
+.string " You be quiet!{EXTRA_MSG}"
+.string "We{APOSTROPHE}ll fight if you keep that up!\0"
 .align 2, 0
 
 .global gSkarmoryPreFightDialogue_9
@@ -10508,17 +10441,18 @@ gSkarmoryPreFightDialogue_9: @ 8100BC0
 gUnknown_8100BD8: @ 8100BD8
 .string " It{APOSTROPHE}s no good.\n"
 .string "{ARG_POKEMON_3} is too agitated to listen to\n"
-.string "reason.{EXTRA_MSG} We{APOSTROPHE}ll have to fight it out!\0"
+.string "reason.{EXTRA_MSG}"
+.string " We{APOSTROPHE}ll have to fight it out!\0"
 .align 2, 0
 
 .global gUnknown_8100C34
 gUnknown_8100C34: @ 8100C34
 .string " It{APOSTROPHE}s useless.\n"
 .string "{ARG_POKEMON_3} is too steamed to talk\n"
-.string "reasonably.{EXTRA_MSG} We{APOSTROPHE}re going to have to\n"
+.string "reasonably.{EXTRA_MSG}"
+.string " We{APOSTROPHE}re going to have to\n"
 .string "fight!\0"
 .align 2, 0
-
 @ Skarmory Re-Fight?
 
 .global gSkarmoryReFightDialogue_1
@@ -10553,7 +10487,8 @@ gSkarmoryReFightDialogue_3: @ 8100CDC
 
 .global gUnknown_8100CE8
 gUnknown_8100CE8: @ 8100CE8
-.string " I absolutely refuse!{EXTRA_MSG} If you want to complain so\n"
+.string " I absolutely refuse!{EXTRA_MSG}"
+.string " If you want to complain so\n"
 .string "much{COMMA} I{APOSTROPHE}ll give you a fight!\0"
 .align 2, 0
 
@@ -10565,7 +10500,8 @@ gUnknown_8100D3C: @ 8100D3C
 
 .global gUnknown_8100D48
 gUnknown_8100D48: @ 8100D48
-.string "{CENTER_ALIGN}There appears to be no one here.{EXTRA_MSG}{CENTER_ALIGN}It{APOSTROPHE}s impossible to go any farther.{WAIT_PRESS}\n"
+.string "{CENTER_ALIGN}There appears to be no one here.{EXTRA_MSG}"
+.string "{CENTER_ALIGN}It{APOSTROPHE}s impossible to go any farther.{WAIT_PRESS}\n"
 .string "{CENTER_ALIGN}It{APOSTROPHE}s time to go back.\0"
 .align 2, 0
 
@@ -10581,14 +10517,16 @@ gTeamMeaniesPreFightDialogue_1: @ 8100DB0
 .global gUnknown_8100DC8
 gUnknown_8100DC8: @ 8100DC8
 .string " Wow{COMMA} we came quite a ways\n"
-.string "into this forest.{EXTRA_MSG} I wonder if {ARG_POKEMON_2} is\n"
+.string "into this forest.{EXTRA_MSG}"
+.string " I wonder if {ARG_POKEMON_2} is\n"
 .string "ahead...\0"
 .align 2, 0
 
 .global gUnknown_8100E18
 gUnknown_8100E18: @ 8100E18
 .string " We{APOSTROPHE}ve come pretty far\n"
-.string "into this forest.{EXTRA_MSG} I wonder if {ARG_POKEMON_2} is\n"
+.string "into this forest.{EXTRA_MSG}"
+.string " I wonder if {ARG_POKEMON_2} is\n"
 .string "ahead...\0"
 .align 2, 0
 
@@ -10613,7 +10551,8 @@ gTeamMeaniesPreFightDialogue_3: @ 8100E88
 gUnknown_8100E94: @ 8100E94
 .string " Keke!\n"
 .string "You know who{APOSTROPHE}s going to get to\n"
-.string "{ARG_POKEMON_2} first? We are!{EXTRA_MSG} So{COMMA} for you to go ahead...{WAIT_PRESS}\n"
+.string "{ARG_POKEMON_2} first? We are!{EXTRA_MSG}"
+.string " So{COMMA} for you to go ahead...{WAIT_PRESS}\n"
 .string "Well{COMMA} we can{APOSTROPHE}t let that happen.\0"
 .align 2, 0
 
@@ -10630,19 +10569,22 @@ gTeamMeaniesPreFightDialogue_4: @ 8100F14
 
 .global gUnknown_8100F38
 gUnknown_8100F38: @ 8100F38
-.string " Wh-what?!{EXTRA_MSG} Now{COMMA} hold on{COMMA} {ARG_POKEMON_3}!{WAIT_PRESS}\n"
+.string " Wh-what?!{EXTRA_MSG}"
+.string " Now{COMMA} hold on{COMMA} {ARG_POKEMON_3}!{WAIT_PRESS}\n"
 .string "Why do you always interfere with us?\0"
 .align 2, 0
 
 .global gUnknown_8100F84
 gUnknown_8100F84: @ 8100F84
-.string " Wh-what!{EXTRA_MSG} Hey{COMMA} {ARG_POKEMON_3}!{WAIT_PRESS}\n"
+.string " Wh-what!{EXTRA_MSG}"
+.string " Hey{COMMA} {ARG_POKEMON_3}!{WAIT_PRESS}\n"
 .string "Why do you always mess with us?\0"
 .align 2, 0
 
 .global gUnknown_8100FC0
 gUnknown_8100FC0: @ 8100FC0
-.string " Wh-what...?{EXTRA_MSG} Hey{COMMA} {ARG_POKEMON_3}!{WAIT_PRESS}\n"
+.string " Wh-what...?{EXTRA_MSG}"
+.string " Hey{COMMA} {ARG_POKEMON_3}!{WAIT_PRESS}\n"
 .string "Why do you always try to mess with us?\0"
 .align 2, 0
 
@@ -10667,7 +10609,8 @@ gTeamMeaniesPreFightDialogue_6: @ 8101050
 .global gUnknown_810105C
 gUnknown_810105C: @ 810105C
 .string " {ARG_POKEMON_4}{APOSTROPHE}s mama will\n"
-.string "give us a generous reward...{EXTRA_MSG} And {ARG_POKEMON_4} will join\n"
+.string "give us a generous reward...{EXTRA_MSG}"
+.string " And {ARG_POKEMON_4} will join\n"
 .string "us too...{WAIT_PRESS}\n"
 .string "That brings us closer to our goal.\0"
 .align 2, 0
@@ -10681,8 +10624,10 @@ gTeamMeaniesPreFightDialogue_7: @ 81010D0
 .global gUnknown_81010DC
 gUnknown_81010DC: @ 81010DC
 .string " Keke!\n"
-.string "And for that{COMMA} your lot is in the way!{EXTRA_MSG} So sorry to say{COMMA} but your\n"
-.string "party{APOSTROPHE}s over right here and now!{EXTRA_MSG} Say good-bye{COMMA} {ARG_POKEMON_1}!\0"
+.string "And for that{COMMA} your lot is in the way!{EXTRA_MSG}"
+.string " So sorry to say{COMMA} but your\n"
+.string "party{APOSTROPHE}s over right here and now!{EXTRA_MSG}"
+.string " Say good-bye{COMMA} {ARG_POKEMON_1}!\0"
 .align 2, 0
 
 .global gTeamMeaniesReFightDialogue_1
@@ -10697,14 +10642,16 @@ gTeamMeaniesReFightDialogue_1: @ 8101164
 .global gUnknown_810117C
 gUnknown_810117C: @ 810117C
 .string " This is where the {COLOR_1 CYAN}Meanies{END_COLOR_TEXT_1}\n"
-.string "showed up last time.{EXTRA_MSG} I wonder if {ARG_POKEMON_3}{APOSTROPHE}s\n"
+.string "showed up last time.{EXTRA_MSG}"
+.string " I wonder if {ARG_POKEMON_3}{APOSTROPHE}s\n"
 .string "bunch already found {ARG_POKEMON_2}...\0"
 .align 2, 0
 
 .global gUnknown_81011E4
 gUnknown_81011E4: @ 81011E4
 .string " Last time{COMMA} this is where\n"
-.string "{ARG_POKEMON_3}{APOSTROPHE}s gang appeared.{EXTRA_MSG} Did they find {ARG_POKEMON_2}\n"
+.string "{ARG_POKEMON_3}{APOSTROPHE}s gang appeared.{EXTRA_MSG}"
+.string " Did they find {ARG_POKEMON_2}\n"
 .string "already{COMMA} I wonder?\0"
 .align 2, 0
 
@@ -10721,19 +10668,22 @@ gTeamMeaniesReFightDialogue_2: @ 8101240
 
 .global gUnknown_8101264
 gUnknown_8101264: @ 8101264
-.string " Huh? It{APOSTROPHE}s {ARG_POKEMON_3}!{EXTRA_MSG} Why is {ARG_POKEMON_3}{APOSTROPHE}s gang\n"
+.string " Huh? It{APOSTROPHE}s {ARG_POKEMON_3}!{EXTRA_MSG}"
+.string " Why is {ARG_POKEMON_3}{APOSTROPHE}s gang\n"
 .string "following us?\0"
 .align 2, 0
 
 .global gUnknown_810129C
 gUnknown_810129C: @ 810129C
-.string " Huh? It{APOSTROPHE}s {ARG_POKEMON_3}!{EXTRA_MSG} Why is the {ARG_POKEMON_3}\n"
+.string " Huh? It{APOSTROPHE}s {ARG_POKEMON_3}!{EXTRA_MSG}"
+.string " Why is the {ARG_POKEMON_3}\n"
 .string "gang following us?\0"
 .align 2, 0
 
 .global gUnknown_81012D4
 gUnknown_81012D4: @ 81012D4
-.string " Hah? It{APOSTROPHE}s {ARG_POKEMON_3}!{EXTRA_MSG} Why is {ARG_POKEMON_3}{APOSTROPHE}s\n"
+.string " Hah? It{APOSTROPHE}s {ARG_POKEMON_3}!{EXTRA_MSG}"
+.string " Why is {ARG_POKEMON_3}{APOSTROPHE}s\n"
 .string "crew coming after us?\0"
 .align 2, 0
 
@@ -10745,8 +10695,10 @@ gTeamMeaniesReFightDialogue_3: @ 8101310
 
 .global gUnknown_810131C
 gUnknown_810131C: @ 810131C
-.string " Y-you be quiet!{EXTRA_MSG} Right after we beat you last\n"
-.string "time...{EXTRA_MSG} We got careless and wiped\n"
+.string " Y-you be quiet!{EXTRA_MSG}"
+.string " Right after we beat you last\n"
+.string "time...{EXTRA_MSG}"
+.string " We got careless and wiped\n"
 .string "out too!\0"
 .align 2, 0
 
@@ -10759,7 +10711,9 @@ gTeamMeaniesReFightDialogue_4: @ 810137C
 .global gUnknown_8101388
 gUnknown_8101388: @ 8101388
 .string " Don{APOSTROPHE}t you laugh at me!{WAIT_PRESS}\n"
-.string "What makes you so high-and-mighty?{EXTRA_MSG} Whatever happens{COMMA} we{APOSTROPHE}re\nnot going to lose to you amateurs!\0"
+.string "What makes you so high-and-mighty?{EXTRA_MSG}"
+.string " Whatever happens{COMMA} we{APOSTROPHE}re\n"
+.string "not going to lose to you amateurs!\0"
 .align 2, 0
 
 .global gTeamMeaniesReFightDialogue_5
@@ -10783,7 +10737,8 @@ gUnknown_8101440: @ 8101440
 .global gUnknown_810144C
 gUnknown_810144C: @ 810144C
 .string "{CENTER_ALIGN}It{APOSTROPHE}s impossible to go any farther...{WAIT_PRESS}\n"
-.string "{CENTER_ALIGN}But there is nothing here.{EXTRA_MSG}{CENTER_ALIGN}It{APOSTROPHE}s time to go back.\0"
+.string "{CENTER_ALIGN}But there is nothing here.{EXTRA_MSG}"
+.string "{CENTER_ALIGN}It{APOSTROPHE}s time to go back.\0"
 .align 2, 0
 
 .global gUnknown_81014B0
@@ -10817,7 +10772,8 @@ gUnknown_8101504: @ 8101504
 .global gUnknown_810151C
 gUnknown_810151C: @ 810151C
 .string " Hey! {ARG_POKEMON_3}!\n"
-.string "Where are you?!{EXTRA_MSG} We came to rescue\n"
+.string "Where are you?!{EXTRA_MSG}"
+.string " We came to rescue\n"
 .string "{ARG_POKEMON_2}!\n"
 .string "Come out!\0"
 .align 2, 0
@@ -10825,7 +10781,8 @@ gUnknown_810151C: @ 810151C
 .global gUnknown_810155C
 gUnknown_810155C: @ 810155C
 .string " Hey! {ARG_POKEMON_3}!\n"
-.string "Where are you?!{EXTRA_MSG} We came to rescue\n"
+.string "Where are you?!{EXTRA_MSG}"
+.string " We came to rescue\n"
 .string "{ARG_POKEMON_2}!\n"
 .string "Show yourself!\0"
 .align 2, 0
@@ -10891,21 +10848,24 @@ gUnknown_810165C: @ 810165C
 .global gUnknown_8101680
 gUnknown_8101680: @ 8101680
 .string " Hey{COMMA} {ARG_POKEMON_3}!\n"
-.string "We demand you release {ARG_POKEMON_2}!{EXTRA_MSG} We{APOSTROPHE}re a Pokémon rescue\n"
+.string "We demand you release {ARG_POKEMON_2}!{EXTRA_MSG}"
+.string " We{APOSTROPHE}re a Pokémon rescue\n"
 .string "team!\0"
 .align 2, 0
 
 .global gUnknown_81016CC
 gUnknown_81016CC: @ 81016CC
 .string " Hey{COMMA} {ARG_POKEMON_3}!\n"
-.string "Release {ARG_POKEMON_2}!{EXTRA_MSG} We{APOSTROPHE}re a Pokémon rescue\n"
+.string "Release {ARG_POKEMON_2}!{EXTRA_MSG}"
+.string " We{APOSTROPHE}re a Pokémon rescue\n"
 .string "team!\0"
 .align 2, 0
 
 .global gUnknown_8101708
 gUnknown_8101708: @ 8101708
 .string " Hey{COMMA} {ARG_POKEMON_3}!\n"
-.string "Let {ARG_POKEMON_2} go!{EXTRA_MSG} A Pokémon rescue team!\n"
+.string "Let {ARG_POKEMON_2} go!{EXTRA_MSG}"
+.string " A Pokémon rescue team!\n"
 .string "That{APOSTROPHE}s what we are!\0"
 .align 2, 0
 
@@ -10958,19 +10918,22 @@ gZapdosReFightDialogue_1: @ 81017E4
 .global gUnknown_8101808
 gUnknown_8101808: @ 8101808
 .string " Hey{COMMA} {ARG_POKEMON_3}!\n"
-.string "We{APOSTROPHE}re here again!{EXTRA_MSG} Show yourself!\0"
+.string "We{APOSTROPHE}re here again!{EXTRA_MSG}"
+.string " Show yourself!\0"
 .align 2, 0
 
 .global gUnknown_810183C
 gUnknown_810183C: @ 810183C
 .string " Hey{COMMA} {ARG_POKEMON_3}!\n"
-.string "We{APOSTROPHE}re back!{EXTRA_MSG} Come out!\0"
+.string "We{APOSTROPHE}re back!{EXTRA_MSG}"
+.string " Come out!\0"
 .align 2, 0
 
 .global gUnknown_8101864
 gUnknown_8101864: @ 8101864
 .string " Hey{COMMA} {ARG_POKEMON_3}!\n"
-.string "Guess who{APOSTROPHE}s back?!{EXTRA_MSG} Show yourself!\0"
+.string "Guess who{APOSTROPHE}s back?!{EXTRA_MSG}"
+.string " Show yourself!\0"
 .align 2, 0
 
 .global gZapdosReFightDialogue_2
@@ -11076,7 +11039,8 @@ gZapdosPostStoryPreFightDialogue_6: @ 8101A38
 .global gUnknown_8101A44
 gUnknown_8101A44: @ 8101A44
 .string "{CENTER_ALIGN}The mountain{APOSTROPHE}s summit...{WAIT_PRESS}\n"
-.string "{CENTER_ALIGN}But there is no one here.{EXTRA_MSG}{CENTER_ALIGN}It{APOSTROPHE}s time to go back.\0"
+.string "{CENTER_ALIGN}But there is no one here.{EXTRA_MSG}"
+.string "{CENTER_ALIGN}It{APOSTROPHE}s time to go back.\0"
 .align 2, 0
 
 .global gMoltresPreFightDialogue_1
@@ -11104,7 +11068,8 @@ gMoltresPreFightDialogue_2: @ 8101AD4
 gUnknown_8101AEC: @ 8101AEC
 .string " Wow. This is incredible.{WAIT_PRESS}\n"
 .string "I know it{APOSTROPHE}s a volcano{COMMA} but the lava flow\n"
-.string "is much higher than normal.{EXTRA_MSG} This might also have a link\n"
+.string "is much higher than normal.{EXTRA_MSG}"
+.string " This might also have a link\n"
 .string "to the natural calamities...\0"
 .align 2, 0
 
@@ -11112,7 +11077,8 @@ gUnknown_8101AEC: @ 8101AEC
 gUnknown_8101B8C: @ 8101B8C
 .string " This is one incredible place.{WAIT_PRESS}\n"
 .string "I know this is a volcano{COMMA} but the amount\n"
-.string "of lava is way more than usual.{EXTRA_MSG} This might also be a part of\n"
+.string "of lava is way more than usual.{EXTRA_MSG}"
+.string " This might also be a part of\n"
 .string "the natural disasters...\0"
 .align 2, 0
 
@@ -11149,13 +11115,15 @@ gMoltresPreFightDialogue_4: @ 8101CBC
 .global gUnknown_8101CD4
 gUnknown_8101CD4: @ 8101CD4
 .string " I don{APOSTROPHE}t want to spend any\n"
-.string "time in a place this dangerous.{EXTRA_MSG} Let{APOSTROPHE}s get through this quick.\0"
+.string "time in a place this dangerous.{EXTRA_MSG}"
+.string " Let{APOSTROPHE}s get through this quick.\0"
 .align 2, 0
 
 .global gUnknown_8101D34
 gUnknown_8101D34: @ 8101D34
 .string " I don{APOSTROPHE}t want to be in a place\n"
-.string "this wickedly bad.{EXTRA_MSG} Let{APOSTROPHE}s get through here quick.\0"
+.string "this wickedly bad.{EXTRA_MSG}"
+.string " Let{APOSTROPHE}s get through here quick.\0"
 .align 2, 0
 
 .global gMoltresPreFightDialogue_5
@@ -11166,8 +11134,8 @@ gMoltresPreFightDialogue_5: @ 8101D8C
 
 .global gUnknown_8101D98
 gUnknown_8101D98: @ 8101D98
-.byte 0x20, 0x48, 0x61, 0x6c
-.byte 0x74, 0x21, 0x00, 0x00
+.string " Halt!\0"
+.align 2, 0
 
 .global gMoltresPreFightDialogue_6
 gMoltresPreFightDialogue_6: @ 8101DA0
@@ -11180,12 +11148,14 @@ gMoltresPreFightDialogue_6: @ 8101DA0
 
 .global gUnknown_8101DB8
 gUnknown_8101DB8: @ 8101DB8
-.string " Huh{COMMA} what?!{EXTRA_MSG} It suddenly turned dark!\0"
+.string " Huh{COMMA} what?!{EXTRA_MSG}"
+.string " It suddenly turned dark!\0"
 .align 2, 0
 
 .global gUnknown_8101DE4
 gUnknown_8101DE4: @ 8101DE4
-.string " Wh-what the...?!{EXTRA_MSG} Why did it turn dark like\n"
+.string " Wh-what the...?!{EXTRA_MSG}"
+.string " Why did it turn dark like\n"
 .string "that?!\0"
 .align 2, 0
 
@@ -11197,7 +11167,9 @@ gMoltresPreFightDialogue_7: @ 8101E1C
 
 .global gUnknown_8101E28
 gUnknown_8101E28: @ 8101E28
-.string " I can hear the mountain{APOSTROPHE}s screams...{EXTRA_MSG} It is shrieking in pain...{EXTRA_MSG} Someone is causing Mt. Blaze to\n"
+.string " I can hear the mountain{APOSTROPHE}s screams...{EXTRA_MSG}"
+.string " It is shrieking in pain...{EXTRA_MSG}"
+.string " Someone is causing Mt. Blaze to\n"
 .string "writhe in agony!\n"
 .string "Is it you?!\0"
 .align 2, 0
@@ -11217,8 +11189,10 @@ gMoltresPreFightDialogue_8: @ 8101EAC
 gUnknown_8101ED0: @ 8101ED0
 .string " Huh?!{WAIT_PRESS}\n"
 .string "That{APOSTROPHE}s wrong!\n"
-.string "We{APOSTROPHE}re innocent!{EXTRA_MSG} We were just passing\n"
-.string "through!{EXTRA_MSG} Who are you{COMMA} anyway?{WAIT_PRESS}\n"
+.string "We{APOSTROPHE}re innocent!{EXTRA_MSG}"
+.string " We were just passing\n"
+.string "through!{EXTRA_MSG}"
+.string " Who are you{COMMA} anyway?{WAIT_PRESS}\n"
 .string "Show yourself!\0"
 .align 2, 0
 
@@ -11226,8 +11200,10 @@ gUnknown_8101ED0: @ 8101ED0
 gUnknown_8101F48: @ 8101F48
 .string " Huh?!{WAIT_PRESS}\n"
 .string "You{APOSTROPHE}ve got it wrong!\n"
-.string "It{APOSTROPHE}s not us!{EXTRA_MSG} We just happened to be\n"
-.string "passing through here!{EXTRA_MSG} Who are you{COMMA} anyway?{WAIT_PRESS}\n"
+.string "It{APOSTROPHE}s not us!{EXTRA_MSG}"
+.string " We just happened to be\n"
+.string "passing through here!{EXTRA_MSG}"
+.string " Who are you{COMMA} anyway?{WAIT_PRESS}\n"
 .string "Show yourself!\n"
 .string " \0"
 .align 2, 0
@@ -11236,8 +11212,10 @@ gUnknown_8101F48: @ 8101F48
 gUnknown_8101FD4: @ 8101FD4
 .string " Hah?!{WAIT_PRESS}\n"
 .string "We don{APOSTROPHE}t know what you mean!\n"
-.string "We{APOSTROPHE}re not doing anything!{EXTRA_MSG} We just happened to be\n"
-.string "traveling through here!{EXTRA_MSG} Who are you{COMMA} anyway?{WAIT_PRESS}\n"
+.string "We{APOSTROPHE}re not doing anything!{EXTRA_MSG}"
+.string " We just happened to be\n"
+.string "traveling through here!{EXTRA_MSG}"
+.string " Who are you{COMMA} anyway?{WAIT_PRESS}\n"
 .string "Come out!\0"
 .align 2, 0
 
@@ -11330,7 +11308,8 @@ gMoltresReFightDialogue_3: @ 8102200
 
 .global gUnknown_810220C
 gUnknown_810220C: @ 810220C
-.string " You again!{EXTRA_MSG} There is no forgiving \n"
+.string " You again!{EXTRA_MSG}"
+.string " There is no forgiving \n"
 .string "those who torment the mountain!\0"
 .align 2, 0
 
@@ -11384,7 +11363,9 @@ gMoltresPostStoryPreFightDialogue_1: @ 810232C
 
 .global gUnknown_8102338
 gUnknown_8102338: @ 8102338
-.string " Halt!{EXTRA_MSG} This is Mt. Blaze!{EXTRA_MSG} For you to venture to its\n"
+.string " Halt!{EXTRA_MSG}"
+.string " This is Mt. Blaze!{EXTRA_MSG}"
+.string " For you to venture to its\n"
 .string "peak{COMMA} there can be but one reason!\0"
 .align 2, 0
 
@@ -11431,7 +11412,7 @@ gMoltresPostStoryPreFightDialogue_5: @ 8102454
 .4byte gUnknown_8102460
 
 .global gUnknown_8102460
-gUnknown_8102460:
+gUnknown_8102460: @ 8102460
 .string " Show me!\0"
 .align 2, 0
 
@@ -11452,7 +11433,8 @@ gArticunoPreFightDialogue_1: @ 8102478
 .global gUnknown_8102490
 gUnknown_8102490: @ 8102490
 .string " We sure have traveled far\n"
-.string "into this forest.{EXTRA_MSG} I think we{APOSTROPHE}ll be out if we\n"
+.string "into this forest.{EXTRA_MSG}"
+.string " I think we{APOSTROPHE}ll be out if we\n"
 .string "can get through this part.{WAIT_PRESS}\n"
 .string "It shouldn{APOSTROPHE}t be far. Let{APOSTROPHE}s keep going.\0"
 .align 2, 0
@@ -11460,7 +11442,8 @@ gUnknown_8102490: @ 8102490
 .global gUnknown_8102524
 gUnknown_8102524: @ 8102524
 .string " We{APOSTROPHE}ve come pretty far into\n"
-.string "the forest.{EXTRA_MSG} I think we{APOSTROPHE}ll be out if we\n"
+.string "the forest.{EXTRA_MSG}"
+.string " I think we{APOSTROPHE}ll be out if we\n"
 .string "can get through this part.{WAIT_PRESS}\n"
 .string "It shouldn{APOSTROPHE}t be long. Hang in there.\0"
 .align 2, 0
@@ -11499,13 +11482,15 @@ gArticunoPreFightDialogue_4: @ 8102610
 
 .global gUnknown_8102628
 gUnknown_8102628: @ 8102628
-.string " ...I didn{APOSTROPHE}t think so...{EXTRA_MSG} I thought I heard a voice...{WAIT_PRESS}\n"
+.string " ...I didn{APOSTROPHE}t think so...{EXTRA_MSG}"
+.string " I thought I heard a voice...{WAIT_PRESS}\n"
 .string "I must have imagined it.\0"
 .align 2, 0
 
 .global gUnknown_8102680
 gUnknown_8102680: @ 8102680
-.string " ...I didn{APOSTROPHE}t think so.{EXTRA_MSG} A voice...?{WAIT_PRESS}\n"
+.string " ...I didn{APOSTROPHE}t think so.{EXTRA_MSG}"
+.string " A voice...?{WAIT_PRESS}\n"
 .string "I must{APOSTROPHE}ve imagined it.\0"
 .align 2, 0
 
@@ -11517,7 +11502,9 @@ gArticunoPreFightDialogue_5: @ 81026C4
 
 .global gUnknown_81026D0
 gUnknown_81026D0: @ 81026D0
-.string " ..................{EXTRA_MSG} ...Turn back.{EXTRA_MSG}You may not pass...\0"
+.string " ..................{EXTRA_MSG}"
+.string " ...Turn back.{EXTRA_MSG}"
+.string "You may not pass...\0"
 .align 2, 0
 
 .global gArticunoPreFightDialogue_6
@@ -11539,7 +11526,10 @@ gArticunoPreFightDialogue_7: @ 810272C
 
 .global gUnknown_8102738
 gUnknown_8102738: @ 8102738
-.string " You are forbidden to pass...{EXTRA_MSG} ...If you persist in trying to pass...{EXTRA_MSG} Then{COMMA} so be it...{EXTRA_MSG} But only after you have defeated me!\0"
+.string " You are forbidden to pass...{EXTRA_MSG}"
+.string " ...If you persist in trying to pass...{EXTRA_MSG}"
+.string " Then{COMMA} so be it...{EXTRA_MSG}"
+.string " But only after you have defeated me!\0"
 .align 2, 0
 
 .global gArticunoPreFightDialogue_8
@@ -11550,7 +11540,8 @@ gArticunoPreFightDialogue_8: @ 81027BC
 
 .global gUnknown_81027C8
 gUnknown_81027C8: @ 81027C8
-.string " Ow! It{APOSTROPHE}s too bright!{EXTRA_MSG} The ice around us is\n"
+.string " Ow! It{APOSTROPHE}s too bright!{EXTRA_MSG}"
+.string " The ice around us is\n"
 .string "reflecting this light!\0"
 .align 2, 0
 
@@ -11600,7 +11591,8 @@ gArticunoPreFightDialogue_12: @ 81028B8
 
 .global gUnknown_81028C4
 gUnknown_81028C4: @ 81028C4
-.string " Let us begin!\0\0"
+.string " Let us begin!\0"
+.align 2, 0
 
 .global gArticunoReFightDialogue_1
 gArticunoReFightDialogue_1: @ 81028D4
@@ -11658,7 +11650,7 @@ gArticunoPostStoryPreFightDialogue_2: @ 81029B4
 .4byte gUnknown_81029C0
 
 .global gUnknown_81029C0
-gUnknown_81029C0:
+gUnknown_81029C0: @ 81029C0
 .string " Your arrival in this frozen\n"
 .string "forest means only one thing...{EXTRA_MSG}"
 .string " You mean to challenge me!\0"
@@ -11702,7 +11694,8 @@ gUnknown_8102A9C: @ 8102A9C
 .global gUnknown_8102AA8
 gUnknown_8102AA8: @ 8102AA8
 .string "{CENTER_ALIGN}This is the deepest part of the forest...{WAIT_PRESS}\n"
-.string "{CENTER_ALIGN}But there is no one here.{EXTRA_MSG}{CENTER_ALIGN}It{APOSTROPHE}s time to go back.\0"
+.string "{CENTER_ALIGN}But there is no one here.{EXTRA_MSG}"
+.string "{CENTER_ALIGN}It{APOSTROPHE}s time to go back.\0"
 .align 2, 0
 
 .global gUnknown_8102B10
@@ -12045,7 +12038,7 @@ GroudonPreFightDialogue_9: @ 8102FC4
 
 .global gUnknown_8102FD0
 gUnknown_8102FD0: @ 8102FD0
- @ The "A-" only makes sense when ARG_POKEMON_3 is "Alakazam" (which it is when this is used). Kinda funny.
+@ The "A-" only makes sense when ARG_POKEMON_3 is "Alakazam" (which it is when this is used). Kinda funny.
 .string " A-{ARG_POKEMON_3}!\0"
 
 .global GroudonPreFightDialogue_10
@@ -12059,13 +12052,15 @@ GroudonPreFightDialogue_10: @ 8102FD8
 
 .global gUnknown_8102FF0
 gUnknown_8102FF0: @ 8102FF0
-.string " {ARG_POKEMON_3} is gone!{EXTRA_MSG} Maybe...{WAIT_PRESS}\n"
+.string " {ARG_POKEMON_3} is gone!{EXTRA_MSG}"
+.string " Maybe...{WAIT_PRESS}\n"
 .string "Was he defeated?!\0"
 .align 2, 0
 
 .global gUnknown_8103020
 gUnknown_8103020: @ 8103020
-.string " {ARG_POKEMON_3}{APOSTROPHE}s gone!{EXTRA_MSG} Was he maybe...{WAIT_PRESS}\n"
+.string " {ARG_POKEMON_3}{APOSTROPHE}s gone!{EXTRA_MSG}"
+.string " Was he maybe...{WAIT_PRESS}\n"
 .string "knocked out?!\0"
 .align 2, 0
 
@@ -12155,14 +12150,16 @@ gGroudonReFightDialogue_1: @ 8103188
 .global gUnknown_81031A0
 gUnknown_81031A0: @ 81031A0
 .string " Here it comes!\n"
-.string "{ARG_POKEMON_0}!{EXTRA_MSG} Let{APOSTROPHE}s make sure we subdue\n"
+.string "{ARG_POKEMON_0}!{EXTRA_MSG}"
+.string " Let{APOSTROPHE}s make sure we subdue\n"
 .string "{ARG_POKEMON_2} this time!\0"
 .align 2, 0
 
 .global gUnknown_81031E4
 gUnknown_81031E4: @ 81031E4
 .string " Here it comes!\n"
-.string "{ARG_POKEMON_0}!{EXTRA_MSG} We{APOSTROPHE}ve got to settle\n"
+.string "{ARG_POKEMON_0}!{EXTRA_MSG}"
+.string " We{APOSTROPHE}ve got to settle\n"
 .string "{ARG_POKEMON_2} down this time!\0"
 .align 2, 0
 
@@ -12179,19 +12176,22 @@ gGroudonReFightDialogue_2: @ 8103228
 
 .global gUnknown_810324C
 gUnknown_810324C: @ 810324C
-.string " Don{APOSTROPHE}t be intimidated!{EXTRA_MSG} We have to fight it with\n"
+.string " Don{APOSTROPHE}t be intimidated!{EXTRA_MSG}"
+.string " We have to fight it with\n"
 .string "all our courage!\0"
 .align 2, 0
 
 .global gUnknown_8103294
 gUnknown_8103294: @ 8103294
-.string " Don{APOSTROPHE}t be intimidated!{EXTRA_MSG} We need to be brave to\n"
+.string " Don{APOSTROPHE}t be intimidated!{EXTRA_MSG}"
+.string " We need to be brave to\n"
 .string "face this thing!\0"
 .align 2, 0
 
 .global gUnknown_81032D8
 gUnknown_81032D8: @ 81032D8
-.string " Don{APOSTROPHE}t get psyched out!{EXTRA_MSG} Be brave and keep slugging!\0"
+.string " Don{APOSTROPHE}t get psyched out!{EXTRA_MSG}"
+.string " Be brave and keep slugging!\0"
 .align 2, 0
 
 .global gGroudonReFightDialogue_3
@@ -12242,7 +12242,8 @@ gGroudonPostStoryPreFightDialogue_2: @ 81033AC
 .global gUnknown_81033B8
 gUnknown_81033B8: @ 81033B8
 .string " Why have you returned?!{WAIT_PRESS}\n"
-.string "How dare you disturb me in my sleep?!{EXTRA_MSG} I let rage run wild before...{WAIT_PRESS}\n"
+.string "How dare you disturb me in my sleep?!{EXTRA_MSG}"
+.string " I let rage run wild before...{WAIT_PRESS}\n"
 .string "But I won{APOSTROPHE}t allow that again!\0"
 .align 2, 0
 
@@ -12332,7 +12333,7 @@ gRayquazaPreFightDialogue_4: @ 81035D4
 .4byte gUnknown_81035E0
 
 .global gUnknown_81035E0
-gUnknown_81035E0:
+gUnknown_81035E0: @ 81035E0
 .string " Indeed I am.{WAIT_PRESS}\n"
 .string "The sky is my domain.{EXTRA_MSG}"
 .string " Depart at once!\0"
@@ -12347,7 +12348,9 @@ gRayquazaPreFightDialogue_5: @ 8103618
 .global gUnknown_8103624
 gUnknown_8103624: @ 8103624
 .string " But...\n"
-.string "We don{APOSTROPHE}t have the time to argue.{EXTRA_MSG} We came here because we\nneed your help...\0"
+.string "We don{APOSTROPHE}t have the time to argue.{EXTRA_MSG}"
+.string " We came here because we\n"
+.string "need your help...\0"
 .align 2, 0
 
 .global gRayquazaPreFightDialogue_6
@@ -12383,8 +12386,10 @@ gRayquazaPreFightDialogue_8: @ 81036C8
 .global gUnknown_81036D4
 gUnknown_81036D4: @ 81036D4
 .string " I am a being of the sky{COMMA}\n"
-.string "and you are but denizens of the ground.{EXTRA_MSG} To each{COMMA} there is a world\n"
-.string "destined as their own!{EXTRA_MSG} For hundreds of millions of\n"
+.string "and you are but denizens of the ground.{EXTRA_MSG}"
+.string " To each{COMMA} there is a world\n"
+.string "destined as their own!{EXTRA_MSG}"
+.string " For hundreds of millions of\n"
 .string "years{COMMA} never once have I descended to\n"
 .string "the ground!\0"
 .align 2, 0
@@ -12489,11 +12494,16 @@ gRayquazaPostStoryPreFightDialogue_2: @ 8103938
 .global gUnknown_8103944
 gUnknown_8103944: @ 8103944
 .string " So it is you who dares to\n"
-.string "trespass upon my airspace!{EXTRA_MSG} You scaled the Sky Tower...{EXTRA_MSG} Now{COMMA} you wish to challenge\n"
-.string "me to a battle?!{EXTRA_MSG} ............{WAIT_PRESS}\n"
+.string "trespass upon my airspace!{EXTRA_MSG}"
+.string " You scaled the Sky Tower...{EXTRA_MSG}"
+.string " Now{COMMA} you wish to challenge\n"
+.string "me to a battle?!{EXTRA_MSG}"
+.string " ............{WAIT_PRESS}\n"
 .string "In destroying the falling star{COMMA} I sustained\n"
-.string "injuries upon my body and my pride...{EXTRA_MSG} To better protect my\n"
-.string "domain{COMMA} I have made myself stronger.{EXTRA_MSG} And so that I may draw\n"
+.string "injuries upon my body and my pride...{EXTRA_MSG}"
+.string " To better protect my\n"
+.string "domain{COMMA} I have made myself stronger.{EXTRA_MSG}"
+.string " And so that I may draw\n"
 .string "out my newly gained power...\0"
 .align 2, 0
 
@@ -12541,7 +12551,8 @@ gRayquazaPostStoryPreFightDialogue_6: @ 8103B58
 .global gUnknown_8103B64
 gUnknown_8103B64: @ 8103B64
 .string "{CENTER_ALIGN}This appears to be\n"
-.string "{CENTER_ALIGN}the top of the Sky Tower...{EXTRA_MSG}{CENTER_ALIGN}It{APOSTROPHE}s impossible to go farther.{WAIT_PRESS}\n"
+.string "{CENTER_ALIGN}the top of the Sky Tower...{EXTRA_MSG}"
+.string "{CENTER_ALIGN}It{APOSTROPHE}s impossible to go farther.{WAIT_PRESS}\n"
 .string "{CENTER_ALIGN}It{APOSTROPHE}s time to go back.\0"
 .align 2, 0
 
@@ -12564,7 +12575,8 @@ gUnknown_8103C00: @ 8103C00
 
 .global gUnknown_8103C0C
 gUnknown_8103C0C: @ 8103C0C
-.string " We don{APOSTROPHE}t like to brag or\nnothing{COMMA} but...\0"
+.string " We don{APOSTROPHE}t like to brag or\n"
+.string "nothing{COMMA} but...\0"
 .align 2, 0
 
 .global gUnknown_8103C3C
@@ -12691,7 +12703,8 @@ gMewtwoPreFightDialogue_1: @ 8103EA4
 .global gUnknown_8103EB0
 gUnknown_8103EB0: @ 8103EB0
 .string " ............{WAIT_PRESS}\n"
-.string "Was it you...?{EXTRA_MSG} ...Who...disturbed...me...in my...\n"
+.string "Was it you...?{EXTRA_MSG}"
+.string " ...Who...disturbed...me...in my...\n"
 .string "sleep...?{WAIT_PRESS}\n"
 .string "Was it you?\0"
 .align 2, 0
@@ -12718,7 +12731,8 @@ gMewtwoPreFightDialogue_3: @ 8103F4C
 gUnknown_8103F58: @ 8103F58
 .string " I...{WAIT_PRESS}\n"
 .string "have secluded myself here in suspended\n"
-.string "animation.{EXTRA_MSG} Would you like to know\n"
+.string "animation.{EXTRA_MSG}"
+.string " Would you like to know\n"
 .string "why?{WAIT_PRESS}\n"
 .string "It{APOSTROPHE}s quite simple...\0"
 .align 2, 0
@@ -12764,7 +12778,8 @@ gMewtwoReFightDialogue_2: @ 8104050
 gUnknown_810405C: @ 810405C
 .string " I...{WAIT_PRESS}\n"
 .string "have secluded myself here in suspended\n"
-.string "animation...{EXTRA_MSG} Lying in wait...{WAIT_PRESS}\n"
+.string "animation...{EXTRA_MSG}"
+.string " Lying in wait...{WAIT_PRESS}\n"
 .string "For someone like you to come.\0"
 .align 2, 0
 
@@ -12807,7 +12822,8 @@ gEnteiPreFightDialogue_1: @ 8104150
 
 .global gUnknown_810415C
 gUnknown_810415C: @ 810415C
-.string " What compelled you to come?{EXTRA_MSG} The likes of you have no business\n"
+.string " What compelled you to come?{EXTRA_MSG}"
+.string " The likes of you have no business\n"
 .string "being here!\0"
 .align 2, 0
 
@@ -12845,7 +12861,8 @@ gEnteiReFightDialogue_1: @ 8104240
 .global gUnknown_810424C
 gUnknown_810424C: @ 810424C
 .string " Did I not say to never\n"
-.string "return?{EXTRA_MSG} This is the {COLOR_1 YELLOW_4}Fiery Field{END_COLOR_TEXT_1}!{WAIT_PRESS}\n"
+.string "return?{EXTRA_MSG}"
+.string " This is the {COLOR_1 YELLOW_4}Fiery Field{END_COLOR_TEXT_1}!{WAIT_PRESS}\n"
 .string "It is no place for your kind!\0"
 .align 2, 0
 
@@ -12877,7 +12894,8 @@ gEnteiPostStoryPreFightDialogue_1: @ 8104310
 .global gUnknown_810431C
 gUnknown_810431C: @ 810431C
 .string " This is the {COLOR_1 YELLOW_4}Fiery Field{END_COLOR_TEXT_1}!{WAIT_PRESS}\n"
-.string "It is no place for your kind!{EXTRA_MSG} I am {ARG_POKEMON_2}!{WAIT_PRESS}\n"
+.string "It is no place for your kind!{EXTRA_MSG}"
+.string " I am {ARG_POKEMON_2}!{WAIT_PRESS}\n"
 .string "I live surrounded by the fiery lava of\n"
 .string "volcanoes!\0"
 .align 2, 0
@@ -12912,7 +12930,8 @@ gEnteiPostStoryPreFightDialogue_4: @ 81043DC
 
 .global gUnknown_81043E8
 gUnknown_81043E8: @ 81043E8
-.string "{CENTER_ALIGN}The lord of this area isn{APOSTROPHE}t here.{EXTRA_MSG}{CENTER_ALIGN}It{APOSTROPHE}s impossible to go farther.{WAIT_PRESS}\n"
+.string "{CENTER_ALIGN}The lord of this area isn{APOSTROPHE}t here.{EXTRA_MSG}"
+.string "{CENTER_ALIGN}It{APOSTROPHE}s impossible to go farther.{WAIT_PRESS}\n"
 .string "{CENTER_ALIGN}It{APOSTROPHE}s time to go back.\0"
 .align 2, 0
 
@@ -12925,8 +12944,10 @@ gRaikouPreFightDialogue_1: @ 8104450
 .global gUnknown_810445C
 gUnknown_810445C: @ 810445C
 .string " Why...{WAIT_PRESS}\n"
-.string "Why have you come...?{EXTRA_MSG} This is {COLOR_1 YELLOW_4}Lightning Field{END_COLOR_TEXT_1}.{WAIT_PRESS}\n"
-.string "It is my...{WAIT_PRESS}domain!\0"
+.string "Why have you come...?{EXTRA_MSG}"
+.string " This is {COLOR_1 YELLOW_4}Lightning Field{END_COLOR_TEXT_1}.{WAIT_PRESS}\n"
+.string "It is my...{WAIT_PRESS}"
+.string "domain!\0"
 .align 2, 0
 
 .global gRaikouPreFightDialogue_2
@@ -12938,7 +12959,8 @@ gRaikouPreFightDialogue_2: @ 81044B4
 .global gUnknown_81044C0
 gUnknown_81044C0: @ 81044C0
 .string " I am {ARG_POKEMON_2}!{WAIT_PRESS}\n"
-.string "One who races with lightning!{EXTRA_MSG} A body like roiling rain\n"
+.string "One who races with lightning!{EXTRA_MSG}"
+.string " A body like roiling rain\n"
 .string "clouds!\0"
 .align 2, 0
 
@@ -12998,7 +13020,8 @@ gRaikouReFightDialogue_1: @ 81045F8
 .global gUnknown_8104604
 gUnknown_8104604: @ 8104604
 .string " Snicker... You again.{WAIT_PRESS}\n"
-.string "You don{APOSTROPHE}t give up easily.{EXTRA_MSG} If you so wish to taste\n"
+.string "You don{APOSTROPHE}t give up easily.{EXTRA_MSG}"
+.string " If you so wish to taste\n"
 .string "defeat again{COMMA} I shall oblige!\0"
 .align 2, 0
 
@@ -13033,7 +13056,8 @@ gRaikouPostStoryPreFightDialogue_1: @ 81046CC
 .global gUnknown_81046D8
 gUnknown_81046D8: @ 81046D8
 .string " This is {COLOR_1 YELLOW_4}Lightning Field{END_COLOR_TEXT_1}!{WAIT_PRESS}\n"
-.string "My domain!{EXTRA_MSG} All those who enter...{WAIT_PRESS}\n"
+.string "My domain!{EXTRA_MSG}"
+.string " All those who enter...{WAIT_PRESS}\n"
 .string "I show no mercy{COMMA} no matter what!\0"
 .align 2, 0
 
@@ -13086,7 +13110,8 @@ gSuicunePreFightDialogue_3: @ 81047B0
 .global gUnknown_81047BC
 gUnknown_81047BC: @ 81047BC
 .string " Clear and bracing air...{WAIT_PRESS}\n"
-.string "Crystalline{COMMA} pure water...{EXTRA_MSG} To stand guard over this beautiful and\n"
+.string "Crystalline{COMMA} pure water...{EXTRA_MSG}"
+.string " To stand guard over this beautiful and\n"
 .string "untainted land...{WAIT_PRESS}\n"
 .string "That is why I am here.\0"
 .align 2, 0
@@ -13146,7 +13171,9 @@ gSuicuneReFightDialogue_1: @ 8104930
 
 .global gUnknown_810493C
 gUnknown_810493C: @ 810493C
-.string " This is no place for you!{EXTRA_MSG} Leave immediately!{EXTRA_MSG} If you refuse...\0"
+.string " This is no place for you!{EXTRA_MSG}"
+.string " Leave immediately!{EXTRA_MSG}"
+.string " If you refuse...\0"
 .align 2, 0
 
 .global gSuicuneReFightDialogue_2
@@ -13180,10 +13207,13 @@ gSuicunePostStoryPreFightDialogue_1: @ 81049D4
 
 .global gUnknown_81049E0
 gUnknown_81049E0: @ 81049E0
-.string " You mean to challenge me?{EXTRA_MSG} I find little satisfaction in\n"
+.string " You mean to challenge me?{EXTRA_MSG}"
+.string " I find little satisfaction in\n"
 .string "fighting...{WAIT_PRESS}\n"
-.string "However!{EXTRA_MSG} If you refuse my\n"
-.string "demands that you leave...{EXTRA_MSG} I will accept your challenge.\0"
+.string "However!{EXTRA_MSG}"
+.string " If you refuse my\n"
+.string "demands that you leave...{EXTRA_MSG}"
+.string " I will accept your challenge.\0"
 .align 2, 0
 
 .global gSuicunePostStoryPreFightDialogue_2
@@ -13223,11 +13253,17 @@ gHoOhPreFightDialogue_1: @ 8104AD4
 
 .global gUnknown_8104AE0
 gUnknown_8104AE0: @ 8104AE0
-.string " Excellent!{EXTRA_MSG} You have done well to come this far.{EXTRA_MSG} You have overcome countless\n"
-.string "challenges...{EXTRA_MSG} Fought through many dangerous\n"
-.string "situations...{EXTRA_MSG} and finally ascended to the very peak\n"
-.string "of {COLOR_1 YELLOW_4}Mt. Faraway{END_COLOR_TEXT_1}!{EXTRA_MSG} Truly{COMMA} only the chosen have reached\n"
-.string "the summit.{EXTRA_MSG} However!\0"
+.string " Excellent!{EXTRA_MSG}"
+.string " You have done well to come this far.{EXTRA_MSG}"
+.string " You have overcome countless\n"
+.string "challenges...{EXTRA_MSG}"
+.string " Fought through many dangerous\n"
+.string "situations...{EXTRA_MSG}"
+.string " and finally ascended to the very peak\n"
+.string "of {COLOR_1 YELLOW_4}Mt. Faraway{END_COLOR_TEXT_1}!{EXTRA_MSG}"
+.string " Truly{COMMA} only the chosen have reached\n"
+.string "the summit.{EXTRA_MSG}"
+.string " However!\0"
 .align 2, 0
 
 .global gHoOhPreFightDialogue_2
@@ -13291,7 +13327,9 @@ HoOhReFightDialogue_1: @ 8104CEC
 
 .global gUnknown_8104CF8
 gUnknown_8104CF8: @ 8104CF8
-.string " Very good!{EXTRA_MSG} You have done well to come this far.{EXTRA_MSG} Truly{COMMA} only the chosen have reached\n"
+.string " Very good!{EXTRA_MSG}"
+.string " You have done well to come this far.{EXTRA_MSG}"
+.string " Truly{COMMA} only the chosen have reached\n"
 .string "the summit.\0"
 .align 2, 0
 
@@ -13305,7 +13343,8 @@ HoOhReFightDialogue_2: @ 8104D60
 gUnknown_8104D6C: @ 8104D6C
 .string " Your very arrival is\n"
 .string "evidence of a truly powerful warrior!{WAIT_PRESS}\n"
-.string "And...{EXTRA_MSG} It is also your right to\n"
+.string "And...{EXTRA_MSG}"
+.string " It is also your right to\n"
 .string "challenge me!\0"
 .align 2, 0
 
@@ -13349,8 +13388,12 @@ gLatiosPreFightDialogue_1: @ 8104E60
 .global gUnknown_8104E6C
 gUnknown_8104E6C: @ 8104E6C
 .string " Oh!{WAIT_PRESS}\n"
-.string "Who are you?!{EXTRA_MSG} ............{WAIT_PRESS}\n"
-.string "I see. You{APOSTROPHE}re trying to get your TMs back.{EXTRA_MSG} But!{EXTRA_MSG} Nobody can stop me!{EXTRA_MSG} I{APOSTROPHE}m the Eon Pokémon {ARG_POKEMON_2}!\0"
+.string "Who are you?!{EXTRA_MSG}"
+.string " ............{WAIT_PRESS}\n"
+.string "I see. You{APOSTROPHE}re trying to get your TMs back.{EXTRA_MSG}"
+.string " But!{EXTRA_MSG}"
+.string " Nobody can stop me!{EXTRA_MSG}"
+.string " I{APOSTROPHE}m the Eon Pokémon {ARG_POKEMON_2}!\0"
 .align 2, 0
 
 .global gLatiosPreFightDialogue_2
@@ -13385,8 +13428,11 @@ gLatiosReFightDialogue_1: @ 8104F64
 
 .global gUnknown_8104F70
 gUnknown_8104F70: @ 8104F70
-.string " You{APOSTROPHE}re back?{EXTRA_MSG} But!{EXTRA_MSG} It doesn{APOSTROPHE}t matter how often\n"
-.string "you come!{WAIT_PRESS}\nNobody can stop me!\0"
+.string " You{APOSTROPHE}re back?{EXTRA_MSG}"
+.string " But!{EXTRA_MSG}"
+.string " It doesn{APOSTROPHE}t matter how often\n"
+.string "you come!{WAIT_PRESS}\n"
+.string "Nobody can stop me!\0"
 .align 2, 0
 
 .global gUnknown_8104FC8
@@ -13403,7 +13449,10 @@ gRegirockPreFightDialogue_1: @ 8104FD4
 
 .global gUnknown_8104FE0
 gUnknown_8104FE0: @ 8104FE0
-.string "{CENTER_ALIGN}INTRUDER ALERT!{EXTRA_MSG}{CENTER_ALIGN}EXTERMINATE!{EXTRA_MSG}{CENTER_ALIGN}INTRUDER ALERT!{EXTRA_MSG}{CENTER_ALIGN}EXTERMINATE!\0"
+.string "{CENTER_ALIGN}INTRUDER ALERT!{EXTRA_MSG}"
+.string "{CENTER_ALIGN}EXTERMINATE!{EXTRA_MSG}"
+.string "{CENTER_ALIGN}INTRUDER ALERT!{EXTRA_MSG}"
+.string "{CENTER_ALIGN}EXTERMINATE!\0"
 .align 2, 0
 
 .global gRegicePreFightDialogue_1
@@ -13427,7 +13476,8 @@ gRegirockPostFightDialogue_1: @ 8105040
 .global gUnknown_810504C
 gUnknown_810504C: @ 810504C
 .string "{CENTER_ALIGN}Something fell from\n"
-.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}Regirock{END_COLOR_TEXT_1}{APOSTROPHE}s body.{EXTRA_MSG}{CENTER_ALIGN}{COLOR_1 CYAN_3}Regirock{END_COLOR_TEXT_1} was apparently\n"
+.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}Regirock{END_COLOR_TEXT_1}{APOSTROPHE}s body.{EXTRA_MSG}"
+.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}Regirock{END_COLOR_TEXT_1} was apparently\n"
 .string "{CENTER_ALIGN}guarding this item.\0"
 .align 2, 0
 
@@ -13440,7 +13490,8 @@ gRegirockPostFightDialogue_2: @ 81050B4
 .global gUnknown_81050C0
 gUnknown_81050C0: @ 81050C0
 .string "{CENTER_ALIGN}{ARG_POKEMON_0} obtained\n"
-.string "{CENTER_ALIGN}the {COLOR_1 GREEN_2}Rock Part{END_COLOR_TEXT_1}...{EXTRA_MSG}{CENTER_ALIGN}that {COLOR_1 CYAN_3}Regirock{END_COLOR_TEXT_1} was guarding!\0"
+.string "{CENTER_ALIGN}the {COLOR_1 GREEN_2}Rock Part{END_COLOR_TEXT_1}...{EXTRA_MSG}"
+.string "{CENTER_ALIGN}that {COLOR_1 CYAN_3}Regirock{END_COLOR_TEXT_1} was guarding!\0"
 .align 2, 0
 
 .global gRegicePostFightDialogue_1
@@ -13452,7 +13503,8 @@ gRegicePostFightDialogue_1: @ 810510C
 .global gUnknown_8105118
 gUnknown_8105118: @ 8105118
 .string "{CENTER_ALIGN}Something fell from\n"
-.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}Regice{END_COLOR_TEXT_1}{APOSTROPHE}s body.{EXTRA_MSG}{CENTER_ALIGN}{COLOR_1 CYAN_3}Regice{END_COLOR_TEXT_1} was apparently\n"
+.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}Regice{END_COLOR_TEXT_1}{APOSTROPHE}s body.{EXTRA_MSG}"
+.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}Regice{END_COLOR_TEXT_1} was apparently\n"
 .string "{CENTER_ALIGN}guarding this item.\0"
 .align 2, 0
 
@@ -13465,7 +13517,8 @@ gRegicePostFightDialogue_2: @ 810517C
 .global gUnknown_8105188
 gUnknown_8105188: @ 8105188
 .string "{CENTER_ALIGN}{ARG_POKEMON_0} obtained\n"
-.string "{CENTER_ALIGN}the {COLOR_1 GREEN_2}Ice Part{END_COLOR_TEXT_1}...{EXTRA_MSG}{CENTER_ALIGN}that {COLOR_1 CYAN_3}Regice{END_COLOR_TEXT_1} was guarding!\0"
+.string "{CENTER_ALIGN}the {COLOR_1 GREEN_2}Ice Part{END_COLOR_TEXT_1}...{EXTRA_MSG}"
+.string "{CENTER_ALIGN}that {COLOR_1 CYAN_3}Regice{END_COLOR_TEXT_1} was guarding!\0"
 .align 2, 0
 
 .global gRegisteelPostFightDialogue_1
@@ -13477,7 +13530,8 @@ gRegisteelPostFightDialogue_1: @ 81051D0
 .global gUnknown_81051DC
 gUnknown_81051DC: @ 81051DC
 .string "{CENTER_ALIGN}Something fell from\n"
-.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}Registeel{END_COLOR_TEXT_1}{APOSTROPHE}s body.{EXTRA_MSG}{CENTER_ALIGN}{COLOR_1 CYAN_3}Registeel{END_COLOR_TEXT_1} was apparently\n"
+.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}Registeel{END_COLOR_TEXT_1}{APOSTROPHE}s body.{EXTRA_MSG}"
+.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}Registeel{END_COLOR_TEXT_1} was apparently\n"
 .string "{CENTER_ALIGN}guarding this item.\0"
 .align 2, 0
 
@@ -13490,13 +13544,16 @@ gRegisteelPostFightDialogue_2: @ 8105244
 .global gUnknown_8105250
 gUnknown_8105250: @ 8105250
 .string "{CENTER_ALIGN}{ARG_POKEMON_0} obtained\n"
-.string "{CENTER_ALIGN}the {COLOR_1 GREEN_2}Steel Part{END_COLOR_TEXT_1}...{EXTRA_MSG}{CENTER_ALIGN}that {COLOR_1 CYAN_3}Registeel{END_COLOR_TEXT_1} was guarding!\0"
+.string "{CENTER_ALIGN}the {COLOR_1 GREEN_2}Steel Part{END_COLOR_TEXT_1}...{EXTRA_MSG}"
+.string "{CENTER_ALIGN}that {COLOR_1 CYAN_3}Registeel{END_COLOR_TEXT_1} was guarding!\0"
 .align 2, 0
 
 .global gUnknown_81052A0
 gUnknown_81052A0: @ 81052A0
-.string "{CENTER_ALIGN}That means...{EXTRA_MSG}{CENTER_ALIGN}By finding the {COLOR_1 GREEN_2}Rock Part{END_COLOR_TEXT_1}{COMMA}\n"
-.string "{CENTER_ALIGN}{COLOR_1 GREEN_2}Ice Part{END_COLOR_TEXT_1}{COMMA} and {COLOR_1 GREEN_2}Steel Part{END_COLOR_TEXT_1}...{EXTRA_MSG}{CENTER_ALIGN}All three parts are yours!\0"
+.string "{CENTER_ALIGN}That means...{EXTRA_MSG}"
+.string "{CENTER_ALIGN}By finding the {COLOR_1 GREEN_2}Rock Part{END_COLOR_TEXT_1}{COMMA}\n"
+.string "{CENTER_ALIGN}{COLOR_1 GREEN_2}Ice Part{END_COLOR_TEXT_1}{COMMA} and {COLOR_1 GREEN_2}Steel Part{END_COLOR_TEXT_1}...{EXTRA_MSG}"
+.string "{CENTER_ALIGN}All three parts are yours!\0"
 .align 2, 0
 
 .global gUnknown_810531C
@@ -13518,7 +13575,8 @@ gUnknown_8105360: @ 8105360
 .global gUnknown_8105364
 gUnknown_8105364: @ 8105364
 .string "{CENTER_ALIGN}The three parts\n"
-.string "{CENTER_ALIGN}fit together...{EXTRA_MSG}{CENTER_ALIGN}and became a {COLOR_1 GREEN_2}Music Box{END_COLOR_TEXT_1}!\0"
+.string "{CENTER_ALIGN}fit together...{EXTRA_MSG}"
+.string "{CENTER_ALIGN}and became a {COLOR_1 GREEN_2}Music Box{END_COLOR_TEXT_1}!\0"
 .align 2, 0
 
 .global gUnknown_81053A8
@@ -13529,7 +13587,8 @@ gUnknown_81053A8: @ 81053A8
 .global gUnknown_81053AC
 gUnknown_81053AC: @ 81053AC
 .string "{CENTER_ALIGN}{ARG_POKEMON_0} obtained\n"
-.string "{CENTER_ALIGN}the {COLOR_1 GREEN_2}Music Box{END_COLOR_TEXT_1}!{EXTRA_MSG}{CENTER_ALIGN}The {COLOR_1 GREEN_2}Music Box{END_COLOR_TEXT_1} only needs\n"
+.string "{CENTER_ALIGN}the {COLOR_1 GREEN_2}Music Box{END_COLOR_TEXT_1}!{EXTRA_MSG}"
+.string "{CENTER_ALIGN}The {COLOR_1 GREEN_2}Music Box{END_COLOR_TEXT_1} only needs\n"
 .string "{CENTER_ALIGN}to be in the Toolbox for it to\n"
 .string "{CENTER_ALIGN}attract a special something!\0"
 .align 2, 0
@@ -13547,7 +13606,9 @@ gJirachiPreFightDialogue_1: @ 8105438
 
 .global gUnknown_8105444
 gUnknown_8105444: @ 8105444
-.string " ........................{EXTRA_MSG} ......Fwaaaaaaaahhh......{EXTRA_MSG} I{APOSTROPHE}m still sleepy...\n"
+.string " ........................{EXTRA_MSG}"
+.string " ......Fwaaaaaaaahhh......{EXTRA_MSG}"
+.string " I{APOSTROPHE}m still sleepy...\n"
 .string "Fnyumnyum...\0"
 .align 2, 0
 
@@ -13559,7 +13620,8 @@ gJirachiPreFightDialogue_2: @ 81054A0
 
 .global gUnknown_81054AC
 gUnknown_81054AC: @ 81054AC
-.string " ...Who is it?{EXTRA_MSG} Who is that over there?\n"
+.string " ...Who is it?{EXTRA_MSG}"
+.string " Who is that over there?\n"
 .string "Fnyumnyum...\0"
 .align 2, 0
 
@@ -13603,7 +13665,8 @@ gUnknown_8105558: @ 8105558
 gUnknown_8105564: @ 8105564
 .string " ...I think I had a dream{COMMA}\n"
 .string "and I was fighting in it...{WAIT_PRESS}\n"
-.string "Did I imagine it?{EXTRA_MSG} ...I{APOSTROPHE}m sleepy{COMMA} so I{APOSTROPHE}m going\n"
+.string "Did I imagine it?{EXTRA_MSG}"
+.string " ...I{APOSTROPHE}m sleepy{COMMA} so I{APOSTROPHE}m going\n"
 .string "back to sleep...\n"
 .string "Good night...\0"
 .align 2, 0
@@ -13617,7 +13680,8 @@ gUnknown_81055F4: @ 81055F4
 .global gUnknown_8105600
 gUnknown_8105600: @ 8105600
 .string "{CENTER_ALIGN}{COLOR_1 CYAN_3}{ARG_POKEMON_2}{END_COLOR_TEXT_1} fell\n"
-.string "{CENTER_ALIGN}back into a deep sleep...{EXTRA_MSG}{CENTER_ALIGN}Apparently{COMMA} {COLOR_1 CYAN_3}{ARG_POKEMON_2}{END_COLOR_TEXT_1}\n"
+.string "{CENTER_ALIGN}back into a deep sleep...{EXTRA_MSG}"
+.string "{CENTER_ALIGN}Apparently{COMMA} {COLOR_1 CYAN_3}{ARG_POKEMON_2}{END_COLOR_TEXT_1}\n"
 .string "{CENTER_ALIGN}was fighting in its sleep...\0"
 .align 2, 0
 
@@ -13636,7 +13700,8 @@ gUnknown_8105674: @ 8105674
 .global gUnknown_8105680
 gUnknown_8105680: @ 8105680
 .string " ...Oh{COMMA} oh?!\n"
-.string "I hear singing...{EXTRA_MSG} A song of purity...\0"
+.string "I hear singing...{EXTRA_MSG}"
+.string " A song of purity...\0"
 .align 2, 0
 
 .global gUnknown_81056B8
@@ -13660,10 +13725,14 @@ gUnknown_81056DC: @ 81056DC
 .global gUnknown_81056E8
 gUnknown_81056E8: @ 81056E8
 .string " I don{APOSTROPHE}t know why{COMMA} but I{APOSTROPHE}m\n"
-.string "wide awake!{EXTRA_MSG} I{APOSTROPHE}m {ARG_POKEMON_2}.{EXTRA_MSG} When I awaken{COMMA} I grant\n"
+.string "wide awake!{EXTRA_MSG}"
+.string " I{APOSTROPHE}m {ARG_POKEMON_2}.{EXTRA_MSG}"
+.string " When I awaken{COMMA} I grant\n"
 .string "a wish.\n"
-.string "I have to.{EXTRA_MSG} Er-hem...{WAIT_PRESS}\n"
-.string "Then...{WAIT_PRESS} I ask you this.\0"
+.string "I have to.{EXTRA_MSG}"
+.string " Er-hem...{WAIT_PRESS}\n"
+.string "Then...{WAIT_PRESS}"
+.string " I ask you this.\0"
 .align 2, 0
 
 .global gUnknown_8105778
@@ -13724,9 +13793,11 @@ gUnknown_810581C: @ 810581C
 
 .global gUnknown_8105828
 gUnknown_8105828: @ 8105828
-.string " You want lots of money?{EXTRA_MSG} As you wish.{WAIT_PRESS}\n"
+.string " You want lots of money?{EXTRA_MSG}"
+.string " As you wish.{WAIT_PRESS}\n"
 .string "I{APOSTROPHE}ll gather all the money in the dungeon and\n"
-.string "bring it here.{EXTRA_MSG} Now...{WAIT_PRESS}\n"
+.string "bring it here.{EXTRA_MSG}"
+.string " Now...{WAIT_PRESS}\n"
 .string "Here goes!\0"
 .align 2, 0
 
@@ -13760,7 +13831,8 @@ gUnknown_81058E0: @ 81058E0
 
 .global gUnknown_81058EC
 gUnknown_81058EC: @ 81058EC
-.string " ...Fwaaaaaaaahhh...{EXTRA_MSG} Using that power...\n"
+.string " ...Fwaaaaaaaahhh...{EXTRA_MSG}"
+.string " Using that power...\n"
 .string "Made me sleepy...{WAIT_PRESS}\n"
 .string "Good night...\0"
 .align 2, 0
@@ -13785,9 +13857,11 @@ gUnknown_8105974: @ 8105974
 
 .global gUnknown_8105980
 gUnknown_8105980: @ 8105980
-.string " You want lots of items?{EXTRA_MSG} As you wish.{WAIT_PRESS}\n"
+.string " You want lots of items?{EXTRA_MSG}"
+.string " As you wish.{WAIT_PRESS}\n"
 .string "I{APOSTROPHE}ll gather all the good items in the dungeon\n"
-.string "and bring them here.{EXTRA_MSG} Now...{WAIT_PRESS}\n"
+.string "and bring them here.{EXTRA_MSG}"
+.string " Now...{WAIT_PRESS}\n"
 .string "Here goes!\0"
 .align 2, 0
 
@@ -13799,11 +13873,15 @@ gUnknown_8105A08: @ 8105A08
 
 .global gUnknown_8105A14
 gUnknown_8105A14: @ 8105A14
-.string " You want a Friend Area?{EXTRA_MSG} ...But...{WAIT_PRESS}\n"
+.string " You want a Friend Area?{EXTRA_MSG}"
+.string " ...But...{WAIT_PRESS}\n"
 .string "Don{APOSTROPHE}t you already have many Friend\n"
-.string "Areas?{EXTRA_MSG} I can{APOSTROPHE}t grant you that wish{COMMA}\n"
-.string "so can you choose another one?{EXTRA_MSG} Er-hem...{WAIT_PRESS}\n"
-.string "Then...{WAIT_PRESS} I ask you again.\0"
+.string "Areas?{EXTRA_MSG}"
+.string " I can{APOSTROPHE}t grant you that wish{COMMA}\n"
+.string "so can you choose another one?{EXTRA_MSG}"
+.string " Er-hem...{WAIT_PRESS}\n"
+.string "Then...{WAIT_PRESS}"
+.string " I ask you again.\0"
 .align 2, 0
 
 .global gUnknown_8105AD4
@@ -13814,7 +13892,9 @@ gUnknown_8105AD4: @ 8105AD4
 
 .global gUnknown_8105AE0
 gUnknown_8105AE0: @ 8105AE0
-.string " You want a Friend Area?{EXTRA_MSG} As you wish.{WAIT_PRESS}\nNow...{WAIT_PRESS}\n"
+.string " You want a Friend Area?{EXTRA_MSG}"
+.string " As you wish.{WAIT_PRESS}\n"
+.string "Now...{WAIT_PRESS}\n"
 .string "Here goes!\0"
 .align 2, 0
 
@@ -13851,7 +13931,9 @@ gUnknown_8105BA8: @ 8105BA8
 
 .global gUnknown_8105BB4
 gUnknown_8105BB4: @ 8105BB4
-.string " You want to be stronger?{EXTRA_MSG} As you wish.{WAIT_PRESS}\nNow...{WAIT_PRESS}\n"
+.string " You want to be stronger?{EXTRA_MSG}"
+.string " As you wish.{WAIT_PRESS}\n"
+.string "Now...{WAIT_PRESS}\n"
 .string "Here goes!\0"
 .align 2, 0
 
@@ -13865,10 +13947,13 @@ gUnknown_8105BF4: @ 8105BF4
 gUnknown_8105C00: @ 8105C00
 .string " I gathered up items from\n"
 .string "all over the dungeon that may make you \n"
-.string "stronger.{EXTRA_MSG} But don{APOSTROPHE}t use them now.{WAIT_PRESS}\n"
+.string "stronger.{EXTRA_MSG}"
+.string " But don{APOSTROPHE}t use them now.{WAIT_PRESS}\n"
 .string "When you leave the {COLOR_1 YELLOW_4}Wish Cave{END_COLOR_TEXT_1}{COMMA} your\n"
-.string "powers go back to their original state.{EXTRA_MSG} So{COMMA} you should only use\n"
-.string "those items after you take them back.{EXTRA_MSG} I hope you keep working to\n"
+.string "powers go back to their original state.{EXTRA_MSG}"
+.string " So{COMMA} you should only use\n"
+.string "those items after you take them back.{EXTRA_MSG}"
+.string " I hope you keep working to\n"
 .string "become stronger!\0"
 .align 2, 0
 
@@ -13881,7 +13966,8 @@ gUnknown_8105D2C: @ 8105D2C
 .global gUnknown_8105D38
 gUnknown_8105D38: @ 8105D38
 .string " Something good?{WAIT_PRESS}\n"
-.string "That{APOSTROPHE}s not very easy...{EXTRA_MSG} But I{APOSTROPHE}ll do my best!\0"
+.string "That{APOSTROPHE}s not very easy...{EXTRA_MSG}"
+.string " But I{APOSTROPHE}ll do my best!\0"
 .align 2, 0
 
 .global gUnknown_8105D80
@@ -13905,7 +13991,9 @@ gUnknown_8105D9C: @ 8105D9C
 gUnknown_8105DA8: @ 8105DA8
 .string " If you can get home safely{COMMA}\n"
 .string "I think there will be something good\n"
-.string "waiting for you.{WAIT_PRESS} Maybe.{WAIT_PRESS} Definitely.\0"
+.string "waiting for you.{WAIT_PRESS}"
+.string " Maybe.{WAIT_PRESS}"
+.string " Definitely.\0"
 .align 2, 0
 
 .global gJirachiReFightDialogue_1
@@ -13916,10 +14004,10 @@ gJirachiReFightDialogue_1: @ 8105E14
 
 .global gUnknown_8105E20
 gUnknown_8105E20: @ 8105E20
-.string "{CENTER_ALIGN}The master of this area isn{APOSTROPHE}t here.{EXTRA_MSG}{CENTER_ALIGN}It{APOSTROPHE}s impossible to go farther.{WAIT_PRESS}\n"
+.string "{CENTER_ALIGN}The master of this area isn{APOSTROPHE}t here.{EXTRA_MSG}"
+.string "{CENTER_ALIGN}It{APOSTROPHE}s impossible to go farther.{WAIT_PRESS}\n"
 .string "{CENTER_ALIGN}It{APOSTROPHE}s time to go back.\0"
 .align 2, 0
-
 @ Lugia Fight Dialogue
 
 .global gLugiaPreFightDialogue_1
@@ -13931,7 +14019,9 @@ gLugiaPreFightDialogue_1: @ 8105E88
 .global gUnknown_8105E94
 gUnknown_8105E94: @ 8105E94
 .string " Why...{WAIT_PRESS}\n"
-.string "Why have you come here...?{EXTRA_MSG} This is...{WAIT_PRESS}the {COLOR_1 YELLOW_4}Silver Trench{END_COLOR_TEXT_1}.{WAIT_PRESS}\n"
+.string "Why have you come here...?{EXTRA_MSG}"
+.string " This is...{WAIT_PRESS}"
+.string "the {COLOR_1 YELLOW_4}Silver Trench{END_COLOR_TEXT_1}.{WAIT_PRESS}\n"
 .string "This is my territory!\0"
 .align 2, 0
 
@@ -14005,7 +14095,8 @@ gLugiaPreFightDialogue_7: @ 8106024
 gUnknown_8106030: @ 8106030
 .string "{CENTER_ALIGN}With your life at stake...{WAIT_PRESS}\n"
 .string "{CENTER_ALIGN}Bring it on!{WAIT_PRESS}\n"
-.string "{CENTER_ALIGN} {WAIT_PRESS}  \0"
+.string "{CENTER_ALIGN} {WAIT_PRESS}"
+.string "  \0"
 .align 2, 0
 
 .global gLugiaPreFightDialogue_8
@@ -14013,7 +14104,6 @@ gLugiaPreFightDialogue_8: @ 8106068
 @ replacing .incbin "baserom.gba", 0x106068, 0xC
 .byte 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 .4byte gUnknown_81043E8
-
 @ Kyogre Fight Dialogue
 
 .global gKyogrePreFightDialogue_1
@@ -14037,7 +14127,8 @@ gKyogrePreFightDialogue_2: @ 81060BC
 .global gUnknown_81060C8
 gUnknown_81060C8: @ 81060C8
 .string " ...My power...{WAIT_PRESS}\n"
-.string "is bursting...{EXTRA_MSG} My infinite...{WAIT_PRESS}\n"
+.string "is bursting...{EXTRA_MSG}"
+.string " My infinite...{WAIT_PRESS}\n"
 .string "power!\0"
 .align 2, 0
 
@@ -14063,8 +14154,10 @@ gKyogrePreFightDialogue_4: @ 8106140
 gUnknown_810614C: @ 810614C
 .string " My duels against {ARG_POKEMON_3} left\n"
 .string "us both exhausted...{WAIT_PRESS}\n"
-.string "I took to a long and deep sleep...{EXTRA_MSG} All the time{COMMA} I waited.\n"
-.string "Waited for my power to recover.{EXTRA_MSG} And now!{WAIT_PRESS}\n"
+.string "I took to a long and deep sleep...{EXTRA_MSG}"
+.string " All the time{COMMA} I waited.\n"
+.string "Waited for my power to recover.{EXTRA_MSG}"
+.string " And now!{WAIT_PRESS}\n"
 .string "I am on the verge of regaining my power!\0"
 .align 2, 0
 
@@ -14118,7 +14211,8 @@ gDeoxysPreFightDialogue_1: @ 81062B4
 
 .global gUnknown_81062C0
 gUnknown_81062C0: @ 81062C0
-.string " ............{EXTRA_MSG} Where...{WAIT_PRESS}\n"
+.string " ............{EXTRA_MSG}"
+.string " Where...{WAIT_PRESS}\n"
 .string "Where am I?\0"
 .align 2, 0
 
@@ -14131,7 +14225,9 @@ gDeoxysPreFightDialogue_2: @ 81062E8
 .global gUnknown_81062F4
 gUnknown_81062F4: @ 81062F4
 .string " There was a sudden explosion...{WAIT_PRESS}\n"
-.string "And I awakened to this...{EXTRA_MSG} What is this place?{EXTRA_MSG} I am {ARG_POKEMON_2}.{WAIT_PRESS}\n"
+.string "And I awakened to this...{EXTRA_MSG}"
+.string " What is this place?{EXTRA_MSG}"
+.string " I am {ARG_POKEMON_2}.{WAIT_PRESS}\n"
 .string "I came from space.\0"
 .align 2, 0
 
@@ -14163,7 +14259,6 @@ gDeoxysPreFightDialogue_5: @ 81063C4
 .byte 0x04, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte gUnknown_8103E40
-
 @ Dialogue for Purity Forest
 
 .global gCelebiJoinDialogue_1
@@ -14431,8 +14526,10 @@ gMedichamRescueDialogue_3: @ 81067E0
 .global gUnknown_81067EC
 gUnknown_81067EC: @ 81067EC
 .string " Oh!\n"
-.string "You?!{EXTRA_MSG} ............{WAIT_PRESS}\n"
-.string "Perhaps...{EXTRA_MSG} You have come to rescue\n"
+.string "You?!{EXTRA_MSG}"
+.string " ............{WAIT_PRESS}\n"
+.string "Perhaps...{EXTRA_MSG}"
+.string " You have come to rescue\n"
 .string "me?\0"
 .align 2, 0
 

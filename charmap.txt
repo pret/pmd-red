@@ -304,6 +304,7 @@ ARG_TEAM_NAME = 24 74 @ $t
 
 CENTER_ALIGN = 23 2B @ #+
 UNK_MACRO_3D = 23 3D @ #= (Probably used to manually position text at an x coordinate)
+UNK_MACRO_3E = 23 3E @ #> (Seems to be an alignment operator)
 EXTRA_MSG  = 23 50   @ #P
 WAIT_PRESS = 23 57   @ #W
 NEW_LINE = 23 6E     @ #n
@@ -346,10 +347,29 @@ CYAN_3 = 4D @ M
 YELLOW_5 = 4E @ N
 RED_2 = 57 @ W
 
+
 @ FOR UNK_MACRO_3D
-M3D_50 = 32 @ 2
+UNK_MACRO_3D_50 = 23 3D 32 @ #2 (Unlike the other ones, this one is used without the '.')
 M3D_64 = 40 2E @ @.
 M3D_80 = 50 2E @ P.
 M3D_120 = 78 2E @ x.
 M3D_136 = 88 2E @ ˆ.
 M3D_160 = A0 2E @ \u00A0.
+
+@ FOR UNK_MACRO_3E
+M3E_22 = 32 32 2E @ 22.
+M3E_35 = 33 35 2E @ 35.
+M3E_42 = 34 32 2E @ 42.
+M3E_44 = 34 34 2E @ 42.
+M3E_46 = 34 36 2E @ 46.
+M3E_52 = 35 32 2E @ 52.
+M3E_54 = 35 34 2E @ 54.
+M3E_64 = 36 34 2E @ 64.
+M3E_66 = 36 36 2E @ 66.
+M3E_80 = 38 30 2E @ 80.
+M3E_82 = 38 32 2E @ 82.
+M3E_92 = 39 32 2E @ 92.
+M3E_118 = 31 31 38 2E @ 112.
+M3E_128 = 31 32 38 2E @ 128.
+M3E_147 = 31 34 37 2E @ 147.
+M3E_159 = 31 35 39 2E @ 150.
