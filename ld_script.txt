@@ -68,6 +68,7 @@ SECTIONS {
         asm/text.o(.text);
         src/code_8009804.o(.text);
         asm/code_8009804.o(.text);
+        src/math.o(.text);
         asm/file_system.o(.text);
         src/file_system.o(.text);
         src/decompress.o(.text);
@@ -404,6 +405,7 @@ SECTIONS {
     {
         data/data_code_2.o(.rodata);
         data/data.o(.rodata);
+        src/math.o(.rodata);
         src/file_system.o(.rodata);
         src/decompress.o(.rodata);
         data/data_80B9BB8.o(.rodata);

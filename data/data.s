@@ -1960,8 +1960,9 @@ x = 0
 x = x + 1
 .endr
 
-	.global gUnknown_80B8AE4
-gUnknown_80B8AE4: @ 80B8AE4
+@ gFastSinLookup[i] = floor(256 * sin(iπ / 2048))
+	.global gFastSinLookup
+gFastSinLookup: @ 80B8AE4
     .2byte 0, 0, 0, 1, 1, 1, 2, 2
     .2byte 3, 3, 3, 4, 4, 5, 5, 5
     .2byte 6, 6, 7, 7, 7, 8, 8, 9
@@ -2091,8 +2092,9 @@ gUnknown_80B8AE4: @ 80B8AE4
     .2byte 255, 255, 255, 255, 255, 255, 255, 255
     .2byte 255, 255, 255, 255, 255, 255, 255, 255
 
-	.global gUnknown_80B92E4
-gUnknown_80B92E4: @ 80B92E4
+@ Need to figure out what function this actually is.
+    .global gFastUnknownFn1Lookup
+gFastUnknownFn1Lookup: @ 80B92E4
     .4byte 0, 0, 0, 0, 0, 0, 0, 1
     .4byte 1, 1, 1, 1, 1, 2, 2, 2
     .4byte 2, 2, 2, 3, 3, 3, 3, 3

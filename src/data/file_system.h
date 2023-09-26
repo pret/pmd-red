@@ -2,8 +2,8 @@
 
 // gFastMod3Lookup
 // gFastDiv3Lookup
-// gUnknown_80B8AE4
-// gUnknown_80B92E4
+// gFastSinLookup
+// gFastUnknownFn1Lookup
 
 static const u32 gUnknown_80B96E4[300] = {
     0, 0, 45426, 71998,
