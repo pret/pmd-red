@@ -177,7 +177,7 @@ static void sub_8004EA8(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, u16 *spriteM
     s32 y;
     s32 tileNum;
     s32 earlyMask;
-    
+
     if (a2 != NULL)
         RegisterSpriteParts_80052BC(a2);
 
@@ -956,18 +956,19 @@ static void sub_800545C(EntitySpriteInfo *a0, Dungeon_ax *a1, u32 a2, u32 a3, u3
     a0->unk30 = 0;
 }
 
-#if NONMATCHING // 99.95% https://decomp.me/scratch/n4Umb
+static inline s16 check_flag_for_80054BC(u16 flags) {
+    if (flags & 0x2000)
+        return 0;
+    else
+        return flags >> 15;
+}
+
+
 void sub_80054BC(struct axPokemon *a0)
 {
     ax_anim *aData;
-    s16 flag;
 
-    if (a0->axdata.flags & 0x2000)
-        flag = 0;
-    else
-        flag = a0->axdata.flags >> 15;
-
-    if (flag == 0)
+    if (!check_flag_for_80054BC(a0->axdata.flags))
         return;
 
     if (a0->axdata.sub1.poseId >= 0) {
@@ -997,7 +998,7 @@ void sub_80054BC(struct axPokemon *a0)
     }
 
     a0->axdata.flags |= 0x800;
-    
+
     aData = a0->axdata.activeAnimData;
     a0->axdata.animFrames = aData->frames;
     a0->axdata.sub1.poseId = aData->poseId;
@@ -1009,120 +1010,3 @@ void sub_80054BC(struct axPokemon *a0)
     a0->axdata.sub1.unk10 |= aData->unkFlags;
     a0->axdata.activeAnimData = aData + 1;
 }
-#else
-NAKED
-void sub_80054BC(struct axPokemon *a0)
-{
-    asm_unified(
-    "push {r4,lr}\n"
-    "\tadds r4, r0, 0\n"
-    "\tldrh r1, [r4]\n"
-    "\tmovs r0, 0x80\n"
-    "\tlsls r0, 6\n"
-    "\tands r0, r1\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _080054D0\n"
-    "\tmovs r0, 0\n"
-    "\tb _080054D2\n"
-"_080054D0:\n"
-    "\tlsrs r0, r1, 15\n"
-"_080054D2:\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _08005586\n"
-    "\tmovs r1, 0x20\n"
-    "\tldrsh r0, [r4, r1]\n"
-    "\tldrh r3, [r4]\n"
-    "\tcmp r0, 0\n"
-    "\tblt _08005524\n"
-    "\tmovs r0, 0x80\n"
-    "\tlsls r0, 7\n"
-    "\tands r0, r3\n"
-    "\tcmp r0, 0\n"
-    "\tbne _08005586\n"
-    "\tldrh r2, [r4, 0x6]\n"
-    "\tmovs r0, 0x6\n"
-    "\tldrsh r1, [r4, r0]\n"
-    "\tldr r0, _0800550C\n"
-    "\tcmp r1, r0\n"
-    "\tbgt _080054FA\n"
-    "\tadds r0, r2, 0x1\n"
-    "\tstrh r0, [r4, 0x6]\n"
-"_080054FA:\n"
-    "\tldrh r1, [r4, 0x4]\n"
-    "\tmovs r2, 0x4\n"
-    "\tldrsh r0, [r4, r2]\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _08005510\n"
-    "\tsubs r0, r1, 0x1\n"
-    "\tstrh r0, [r4, 0x4]\n"
-    "\tb _08005586\n"
-    "\t.align 2, 0\n"
-"_0800550C: .4byte 0x0000752f\n"
-"_08005510:\n"
-    "\tldrh r1, [r4, 0x2]\n"
-    "\tmovs r2, 0x2\n"
-    "\tldrsh r0, [r4, r2]\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _08005524\n"
-    "\tsubs r0, r1, 0x1\n"
-    "\tstrh r0, [r4, 0x2]\n"
-    "\tlsls r0, 16\n"
-    "\tcmp r0, 0\n"
-    "\tbgt _08005586\n"
-"_08005524:\n"
-    "\tldr r0, [r4, 0x2C]\n"
-    "\tldrb r0, [r0]\n"
-    "\tcmp r0, 0\n"
-    "\tbne _08005550\n"
-    "\tmovs r0, 0x80\n"
-    "\tlsls r0, 5\n"
-    "\tands r0, r3\n"
-    "\tcmp r0, 0\n"
-    "\tbne _08005542\n"
-    "\tmovs r1, 0x80\n"
-    "\tlsls r1, 6\n"
-    "\tadds r0, r1, 0\n"
-    "\torrs r0, r3\n"
-    "\tstrh r0, [r4]\n"
-    "\tb _08005586\n"
-"_08005542:\n"
-    "\tldr r0, [r4, 0x28]\n"
-    "\tstr r0, [r4, 0x2C]\n"
-    "\tbl Rand32Bit\n"
-    "\tmovs r1, 0x1\n"
-    "\tands r0, r1\n"
-    "\tstrh r0, [r4, 0x4]\n"
-"_08005550:\n"
-    "\tldrh r1, [r4]\n"
-    "\tmovs r2, 0x80\n"
-    "\tlsls r2, 4\n"
-    "\tadds r0, r2, 0\n"
-    "\torrs r0, r1\n"
-    "\tstrh r0, [r4]\n"
-    "\tldr r1, [r4, 0x2C]\n"
-    "\tldrb r0, [r1]\n"
-    "\tstrh r0, [r4, 0x2]\n"
-    "\tldrh r0, [r1, 0x2]\n"
-    "\tstrh r0, [r4, 0x20]\n"
-    "\tldrh r0, [r1, 0x4]\n"
-    "\tstrh r0, [r4, 0xC]\n"
-    "\tldrh r0, [r1, 0x6]\n"
-    "\tstrh r0, [r4, 0xE]\n"
-    "\tldrh r0, [r1, 0x8]\n"
-    "\tstrh r0, [r4, 0x10]\n"
-    "\tldrh r0, [r1, 0xA]\n"
-    "\tstrh r0, [r4, 0x12]\n"
-    "\tldrb r0, [r1, 0x1]\n"
-    "\tstr r0, [r4, 0x14]\n"
-    "\tldrb r2, [r1, 0x1]\n"
-    "\tldr r0, [r4, 0x18]\n"
-    "\torrs r0, r2\n"
-    "\tstr r0, [r4, 0x18]\n"
-    "\tadds r1, 0xC\n"
-    "\tstr r1, [r4, 0x2C]\n"
-"_08005586:\n"
-    "\tpop {r4}\n"
-    "\tpop {r0}\n"
-    "\tbx r0");
-}
-#endif // NONMATCHING
