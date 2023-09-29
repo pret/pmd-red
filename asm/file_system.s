@@ -5,179 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8009D8C
-sub_8009D8C:
-	push {lr}
-	cmp r0, r2
-	bcc _08009D9A
-	cmp r0, r2
-	bhi _08009D9E
-	cmp r1, r3
-	bcs _08009D9E
-_08009D9A:
-	movs r0, 0x1
-	b _08009DA0
-_08009D9E:
-	movs r0, 0
-_08009DA0:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8009D8C
-
-	thumb_func_start sub_8009DA4
-sub_8009DA4:
-	push {r4,r5,lr}
-	lsrs r2, r0, 31
-	adds r5, r2, 0
-	lsrs r3, r1, 31
-	adds r4, r3, 0
-	cmp r0, 0
-	beq _08009DB6
-	cmp r1, 0
-	bne _08009DBA
-_08009DB6:
-	movs r0, 0
-	b _08009DD0
-_08009DBA:
-	cmp r2, 0
-	beq _08009DC0
-	negs r0, r0
-_08009DC0:
-	cmp r3, 0
-	beq _08009DC6
-	negs r1, r1
-_08009DC6:
-	bl sub_8009E14
-	cmp r5, r4
-	beq _08009DD0
-	negs r0, r0
-_08009DD0:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8009DA4
-
-	thumb_func_start sub_8009DD8
-sub_8009DD8:
-	push {r4,r5,lr}
-	lsrs r2, r0, 31
-	adds r5, r2, 0
-	lsrs r3, r1, 31
-	adds r4, r3, 0
-	cmp r1, 0
-	bne _08009DF0
-	ldr r0, _08009DEC
-	b _08009E0E
-	.align 2, 0
-_08009DEC: .4byte 0x7fffffff
-_08009DF0:
-	cmp r0, 0
-	bne _08009DF8
-	movs r0, 0
-	b _08009E0E
-_08009DF8:
-	cmp r2, 0
-	beq _08009DFE
-	negs r0, r0
-_08009DFE:
-	cmp r3, 0
-	beq _08009E04
-	negs r1, r1
-_08009E04:
-	bl sub_8009EA0
-	cmp r5, r4
-	beq _08009E0E
-	negs r0, r0
-_08009E0E:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8009DD8
-
-	thumb_func_start sub_8009E14
-sub_8009E14:
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	cmp r0, 0
-	beq _08009E24
-	cmp r1, 0
-	bne _08009E28
-_08009E24:
-	movs r0, 0
-	b _08009E94
-_08009E28:
-	movs r5, 0
-	adds r3, r0, 0
-	mov r12, r5
-	movs r6, 0
-	movs r4, 0
-	movs r0, 0x80
-	lsls r0, 24
-	mov r8, r0
-	movs r7, 0x3F
-	mov r9, r7
-_08009E3C:
-	adds r2, r4, 0
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _08009E50
-	adds r4, r3
-	adds r6, r5
-	cmp r2, r4
-	bls _08009E50
-	adds r6, 0x1
-_08009E50:
-	lsrs r1, 1
-	movs r2, 0x1
-	mov r0, r12
-	ands r0, r2
-	cmp r0, 0
-	beq _08009E60
-	mov r0, r8
-	orrs r1, r0
-_08009E60:
-	mov r7, r12
-	lsrs r7, 1
-	mov r12, r7
-	lsls r5, 1
-	adds r0, r3, 0
-	mov r7, r8
-	ands r0, r7
-	cmp r0, 0
-	beq _08009E74
-	orrs r5, r2
-_08009E74:
-	lsls r3, 1
-	movs r0, 0x1
-	negs r0, r0
-	add r9, r0
-	mov r7, r9
-	cmp r7, 0
-	bge _08009E3C
-	lsrs r1, r4, 7
-	ands r1, r2
-	lsrs r4, 8
-	lsls r0, r6, 24
-	orrs r4, r0
-	cmp r1, 0
-	beq _08009E92
-	adds r4, 0x1
-_08009E92:
-	adds r0, r4, 0
-_08009E94:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8009E14
-
-	thumb_func_start sub_8009EA0
-sub_8009EA0:
+	thumb_func_start u24_8_div
+u24_8_div:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -246,7 +75,7 @@ _08009F10:
 	adds r1, r4, 0
 	movs r2, 0
 	mov r3, r10
-	bl sub_8009D8C
+	bl u32_pair_less_than
 	lsls r0, 24
 	cmp r0, 0
 	bne _08009F3A
@@ -287,7 +116,7 @@ _08009F58:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8009EA0
+	thumb_func_end u24_8_div
 
 	thumb_func_start sub_8009F68
 sub_8009F68:
@@ -310,12 +139,12 @@ _08009F7E:
 	beq _08009F90
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_8009DA4
+	bl s24_8_mul
 	adds r7, r0, 0
 _08009F90:
 	adds r0, r5, 0
 	adds r1, r5, 0
-	bl sub_8009DA4
+	bl s24_8_mul
 	adds r5, r0, 0
 	asrs r4, 1
 	cmp r4, 0
@@ -326,7 +155,7 @@ _08009FA0:
 	movs r0, 0x80
 	lsls r0, 1
 	adds r1, r7, 0
-	bl sub_8009DD8
+	bl s24_8_div
 	b _08009FB2
 _08009FB0:
 	adds r0, r7, 0
@@ -361,25 +190,25 @@ _08009FD4:
 _08009FDA:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_8009DD8
+	bl s24_8_div
 	adds r4, r0, 0
 	adds r1, r4, 0
-	bl sub_8009DA4
+	bl s24_8_mul
 	adds r4, r0, 0
 	movs r0, 0x80
 	lsls r0, 3
 	adds r1, r4, r0
 	adds r0, r4, 0
-	bl sub_8009DD8
+	bl s24_8_div
 	adds r4, r0, 0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8009DA4
+	bl s24_8_mul
 	lsls r0, 1
 	adds r5, r0
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_8009DA4
+	bl s24_8_mul
 	adds r6, r0, 0
 	subs r7, 0x1
 	cmp r7, 0
@@ -718,6 +547,7 @@ _0800A254:
 _0800A258: .4byte gFastUnknownFn1Lookup
 	thumb_func_end sub_800A0B0
 
+// invert signed lex pair
 	thumb_func_start sub_800A25C
 sub_800A25C:
 	push {lr}
@@ -738,6 +568,7 @@ _0800A276:
 	bx r0
 	thumb_func_end sub_800A25C
 
+// absolute value of signed lex pair
 	thumb_func_start sub_800A27C
 sub_800A27C:
 	push {lr}
@@ -842,7 +673,7 @@ _0800A314:
 	ldr r3, [r2, 0x4]
 	adds r0, r4, 0
 	adds r2, r5, 0
-	bl sub_8009D8C
+	bl u32_pair_less_than
 	lsls r0, 24
 	lsrs r0, 24
 	b _0800A346
@@ -857,7 +688,7 @@ _0800A32E:
 	ldr r3, [r2, 0x4]
 	adds r0, r4, 0
 	adds r2, r5, 0
-	bl sub_8009D8C
+	bl u32_pair_less_than
 	movs r1, 0
 	lsls r0, 24
 	cmp r0, 0
@@ -1287,7 +1118,7 @@ _0800A656:
 	adds r1, r4, 0
 	ldr r2, [sp, 0x4]
 	ldr r3, [sp, 0x8]
-	bl sub_8009D8C
+	bl u32_pair_less_than
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800A680
