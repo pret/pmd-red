@@ -186,7 +186,7 @@ _0806EC24:
 	lsls r1, r4, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8009DA4
+	bl s24_8_mul
 	adds r2, r0, 0
 	ldr r0, [sp, 0x80]
 	lsls r4, r0, 2
@@ -195,7 +195,7 @@ _0806EC24:
 	adds r0, r4
 	ldr r1, [r0]
 	adds r0, r2, 0
-	bl sub_8009DA4
+	bl s24_8_mul
 	adds r2, r0, 0
 	str r5, [sp, 0x88]
 	cmp r2, 0
@@ -272,14 +272,14 @@ _0806ECCC:
 	lsls r1, r3, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8009DA4
+	bl s24_8_mul
 	adds r2, r0, 0
 	ldr r0, [sp, 0x7C]
 	adds r0, 0x34
 	adds r0, r4
 	ldr r1, [r0]
 	adds r0, r2, 0
-	bl sub_8009DA4
+	bl s24_8_mul
 	cmp r0, 0
 	bge _0806ED0E
 	adds r0, 0xFF

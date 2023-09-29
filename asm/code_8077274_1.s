@@ -316,7 +316,7 @@ _0807AD84:
 	bgt _0807AD96
 	ldr r0, [r4, 0x1C]
 	movs r1, 0xAA
-	bl sub_8009DA4
+	bl s24_8_mul
 	str r0, [r4, 0x1C]
 	cmp r0, 0xFF
 	bgt _0807AD7C

@@ -15,6 +15,7 @@
 #include "code_8077274_1.h"
 #include "dungeon_movement.h"
 #include "structs/map.h"
+#include "math.h"
 
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DE58[];
@@ -158,7 +159,6 @@ extern bool8 sub_8071728(Entity * param_1, Entity * param_2, u8 param_3);
 extern void sub_8041FB4(Entity *r0, u32 r1);
 extern void sub_8041FD8(Entity *r0, u32 r1);
 extern void sub_80522F4(Entity *r1, Entity *r2, u8 *);
-extern s32 sub_8009DA4(s32, s32);
 extern void sub_804201C(Entity *r0, u32 r1);
 extern void sub_8041FFC(Entity *r0, u32 r1);
 extern void SetMessageArgument(char[], Entity*, u32);
@@ -216,7 +216,7 @@ void ChangeAttackMultiplierTarget(Entity *pokemon, Entity *target, u32 statStage
 {
   EntityInfo *entityInfo;
   s32 oldMulti;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -230,7 +230,7 @@ void ChangeAttackMultiplierTarget(Entity *pokemon, Entity *target, u32 statStage
   if ((param_4 < 0x100) && sub_8071728(pokemon,target,displayMessage)) {
     return;
   }
-  
+
   if ((HasHeldItem(target,ITEM_TWIST_BAND)) && (param_4 < 0x100)) {
     SetMessageArgument(gAvailablePokemonNames,target,0);
     sub_80522F4(pokemon,target,*gUnknown_80FD550);
@@ -256,7 +256,7 @@ void ChangeAttackMultiplierTarget(Entity *pokemon, Entity *target, u32 statStage
     sub_8041FB4(target,statStage);
   }
 
-  entityInfo->offensiveMultipliers[statStage] = sub_8009DA4(entityInfo->offensiveMultipliers[statStage],param_4);
+  entityInfo->offensiveMultipliers[statStage] = s24_8_mul(entityInfo->offensiveMultipliers[statStage],param_4);
 
   if (entityInfo->offensiveMultipliers[statStage] < 2) {
     entityInfo->offensiveMultipliers[statStage] = 2;
@@ -281,7 +281,7 @@ void ChangeDefenseMultiplierTarget(Entity *pokemon, Entity *target, u32 statStag
 {
   EntityInfo *entityInfo;
   s32 oldMulti;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -307,7 +307,7 @@ void ChangeDefenseMultiplierTarget(Entity *pokemon, Entity *target, u32 statStag
     sub_8041FFC(target,statStage);
   }
 
-  entityInfo->defensiveMultipliers[statStage] = sub_8009DA4(entityInfo->defensiveMultipliers[statStage],param_4);
+  entityInfo->defensiveMultipliers[statStage] = s24_8_mul(entityInfo->defensiveMultipliers[statStage],param_4);
 
   if (entityInfo->defensiveMultipliers[statStage] < 2) {
     entityInfo->defensiveMultipliers[statStage] = 2;
@@ -392,7 +392,7 @@ void LowerAccuracyStageTarget(Entity * pokemon, Entity * target, s32 statStage, 
 void CringeStatusTarget(Entity * pokemon,Entity * target, bool8 displayMessage)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     if (!HasSafeguardStatus(pokemon, target, displayMessage)) {
       if (HasAbility(target, ABILITY_INNER_FOCUS)){
@@ -428,7 +428,7 @@ void ParalyzeStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
   int index;
   bool8 bVar6;
   bool8 bVar7;
-  
+
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,displayMessage))) {
     if (HasAbility(target, ABILITY_LIMBER)) {
       SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -484,7 +484,7 @@ void RaiseMovementSpeedTarget(Entity * pokemon, Entity * target, s32 turns, bool
   s32 index;
   s32 movSpeed_1;
   EntityInfo *entityInfo;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -506,7 +506,7 @@ void RaiseMovementSpeedTarget(Entity * pokemon, Entity * target, s32 turns, bool
             entityInfo->speedUpCounters[index]  = turns;
             break;
         }
-    } 
+    }
     movSpeed_1 = CalcSpeedStage(target);
     if (movSpeed == movSpeed_1) {
         sub_80522F4(pokemon,target,*gUnknown_80FC298);
@@ -529,7 +529,7 @@ void LowerMovementSpeedTarget(Entity * pokemon, Entity * target, s32 levels, boo
   s32 index;
   s32 movSpeed_1;
   EntityInfo *entityInfo;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -571,7 +571,7 @@ void LowerMovementSpeedTarget(Entity * pokemon, Entity * target, s32 levels, boo
 void ConfuseStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
   EntityInfo *entityInfo;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -611,7 +611,7 @@ void ConfuseStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage
 void CowerStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
   EntityInfo *entityInfo;
-  
+
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,displayMessage))) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -676,7 +676,7 @@ void HealTargetHP(Entity *pokemon, Entity *target, s32 param_3, s32 param_4, boo
         if (displayMessage_u8)
             sub_80522F4(pokemon,target,*gUnknown_80FB204); // $m0's HP remained unchanged
     }
-    else if ((param_4 == 0) && (HP == 0)) 
+    else if ((param_4 == 0) && (HP == 0))
     {
         if (displayMessage_u8)
             sub_80522F4(pokemon,target,*gUnknown_80FB21C); // $m0 has full HP
@@ -858,7 +858,7 @@ void DestinyBondStatusTarget(Entity * pokemon, Entity * target)
   s32 index;
   u8 *linkedStatus;
   s32 zero;
-  
+
   if (((EntityExists(target)) && (GetEntityType(pokemon) == ENTITY_MONSTER)) &&
      (GetEntityType(target) == ENTITY_MONSTER)) {
         entityInfo = pokemon->info;
@@ -896,7 +896,7 @@ void DestinyBondStatusTarget(Entity * pokemon, Entity * target)
 void SureShotStatusTarget(Entity *pokemon, Entity * target, s32 turns)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -916,7 +916,7 @@ void SureShotStatusTarget(Entity *pokemon, Entity * target, s32 turns)
 void WhifferStatusTarget(Entity *pokemon, Entity * target, s32 turns)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target) && !HasSafeguardStatus(pokemon, target, TRUE)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -936,7 +936,7 @@ void WhifferStatusTarget(Entity *pokemon, Entity * target, s32 turns)
 void FixedDamageStatusTarget(Entity *pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -956,7 +956,7 @@ void FixedDamageStatusTarget(Entity *pokemon, Entity * target)
 void FocusEnergyStatusTarget(Entity *pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -981,7 +981,7 @@ void sub_80783C4(Entity * pokemon, Entity * target, u8 param_3)
   Entity * entity2;
   ActionContainer action;
   s32 index;
-  
+
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon, target, TRUE))) {
     targetEntityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -1038,7 +1038,7 @@ void CurseStatusTarget(Entity *pokemon, Entity * target)
   s32 HP;
   EntityInfo * pokemonEntityData;
   EntityInfo * targetEntityInfo;
-  
+
 
   if ((EntityExists(pokemon) ) && (EntityExists(target))) {
     pokemonEntityData = pokemon->info;
@@ -1078,7 +1078,7 @@ void SnatchStatusTarget(Entity * pokemon, Entity * target)
   s32 index;
   EntityInfo * targetEntityInfo;
   EntityInfo * targetEntityInfo2;
-  
+
   if (EntityExists(target)) {
     SendWaitingEndMessage(pokemon,target,STATUS_SNATCH);
 
@@ -1110,7 +1110,7 @@ void SnatchStatusTarget(Entity * pokemon, Entity * target)
 void TauntStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -1130,7 +1130,7 @@ void TauntStatusTarget(Entity * pokemon, Entity * target)
 void HandleStockpile(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if ((EntityExists(target))) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -1152,7 +1152,7 @@ void InvisibleStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo * targetEntityInfo;
   EntityInfo * targetEntityInfo_1;
-  
+
   if (EntityExists(target)) {
     targetEntityInfo = target->info;
     targetEntityInfo_1 = targetEntityInfo;
@@ -1176,7 +1176,7 @@ void InvisibleStatusTarget(Entity * pokemon, Entity * target)
 void PerishSongTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo * entityInfo;
-  
+
   if (EntityExists(target) && !HasSafeguardStatus(pokemon, target, TRUE)) {
     nullsub_82(target);
     entityInfo = target->info;
@@ -1197,7 +1197,7 @@ void EncoreStatusTarget(Entity *pokemon,Entity *target)
   Move *movePtr;
   int index;
   EntityInfo *EntityInfo;
-  
+
   EntityInfo = target->info;
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
     for(index = 0; index < MAX_MON_MOVES; index++)
