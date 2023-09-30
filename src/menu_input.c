@@ -5,6 +5,7 @@
 #include "code_80130A8.h"
 #include "constants/colors.h"
 #include "constants/input.h"
+#include "input.h"
 #include "menu_input.h"
 #include "sprite.h"
 #include "text_util.h"

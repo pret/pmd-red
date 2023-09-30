@@ -8,6 +8,7 @@
 #include "constants/input.h"
 #include "constants/type.h"
 #include "game_options.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "personality_test.h"

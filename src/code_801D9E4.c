@@ -3,6 +3,7 @@
 #include "code_801D9E4.h"
 #include "constants/input.h"
 #include "ground_main.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "text1.h"

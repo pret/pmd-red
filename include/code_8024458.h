@@ -1,7 +1,7 @@
 #ifndef GUARD_CODE_8024458_H
 #define GUARD_CODE_8024458_H
 
-#include "input.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 struct unkStruct_203B2AC

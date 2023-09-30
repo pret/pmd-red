@@ -1,7 +1,7 @@
 #ifndef GUARD_POKEMON_NEWS3_H
 #define GUARD_POKEMON_NEWS3_H
 
-#include "input.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // size: 0xA4

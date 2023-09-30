@@ -1,8 +1,8 @@
 #ifndef GUARD_CODE_801B3C0_H
 #define GUARD_CODE_801B3C0_H
 
-#include "input.h"
 #include "items.h"
+#include "structs/menu.h"
 #include "structs/subStruct_203B240.h"
 #include "structs/str_text.h"
 

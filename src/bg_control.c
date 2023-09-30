@@ -1,6 +1,5 @@
 #include "global.h"
 #include "bg_control.h"
-#include "input.h"
 
 EWRAM_DATA BGControlStruct gBG0Control = {0};
 EWRAM_DATA BGControlStruct gBG1Control = {0};

@@ -4,6 +4,7 @@
 #include "code_801C244.h"
 #include "code_801C620.h"
 #include "common_strings.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon_3.h"

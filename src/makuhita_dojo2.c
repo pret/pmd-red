@@ -6,6 +6,7 @@
 #include "constants/colors.h"
 #include "constants/input.h"
 #include "dungeon.h"
+#include "input.h"
 #include "makuhita_dojo2.h"
 #include "memory.h"
 #include "menu_input.h"

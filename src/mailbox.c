@@ -7,16 +7,17 @@
 #include "structs/menu.h"
 #include "input.h"
 #include "mailbox.h"
-#include "wonder_mail.h"
 #include "menu_input.h"
 #include "code_80118A4.h"
-#include "wonder_mail_2_1.h"
 #include "pokemon_news1.h"
 #include "pokemon_news2.h"
 #include "pokemon_news3.h"
 #include "mailbox_8095F8C.h"
 #include "code_803B050.h"
 #include "code_80958E8_1.h"
+#include "wonder_mail_802C4C8.h"
+#include "wonder_mail_802C860.h"
+#include "code_8096AF8.h"
 
 EWRAM_DATA_2 struct unkStruct_203B304 *gUnknown_203B304 = {0};
 
@@ -85,9 +86,6 @@ extern void sub_802E088(u32);
 extern void CreateMailboxMenu(void);
 extern void CreateMailActionMenu(void);
 extern void CreateMailAcceptedStatusBox(u32);
-extern void AcceptJob(WonderMail *);
-extern void sub_8096C80(void);
-extern void sub_8096D24(void);
 extern void ReceivePKMNNews(u8);
 extern void sub_8096078(void);
 

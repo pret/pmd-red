@@ -1,5 +1,6 @@
 #include "global.h"
 #include "code_80130A8.h"
+#include "input.h"
 #include "memory.h"
 #include "structs/menu.h"
 #include "pokemon.h"

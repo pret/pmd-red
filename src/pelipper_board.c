@@ -8,15 +8,16 @@
 #include "text2.h"
 #include "structs/menu.h"
 #include "input.h"
-#include "wonder_mail.h"
 #include "menu_input.h"
 #include "common_strings.h"
 #include "pelipper_board.h"
 #include "code_80118A4.h"
-#include "wonder_mail_2_1.h"
 #include "wonder_mail_802C10C.h"
 #include "code_80958E8_1.h"
 #include "code_803B050.h"
+#include "wonder_mail_802C4C8.h"
+#include "wonder_mail_802C860.h"
+#include "code_8096AF8.h"
 
 EWRAM_DATA_2 struct unkStruct_203B308 *gPelipperBoard = {0};
 
@@ -79,9 +80,6 @@ extern void sub_802EC10(void);
 
 extern void CreatePelipperAcceptedStatusBox(u32);
 
-extern void sub_8096C80(void);
-extern void sub_8096D24(void);
-extern void AcceptJob(WonderMail*);
 extern void ResetPelipperBoardSlot(u8);
 extern void sub_80965F4(void);
 

@@ -2,6 +2,7 @@
 #include "code_803D0D8.h"
 #include "constants/main_menu.h"
 #include "constants/wonder_mail.h"
+#include "input.h"
 #include "main_menu1.h"
 #include "main_menu2.h"
 #include "memory.h"

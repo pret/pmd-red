@@ -186,17 +186,10 @@ gUnknown_203B2AA: /* 203B2AA (sub_8023868 - sub_8023C60) */
 .include "src/pokemon_news2.o"
 .include "src/pokemon_news3.o"
 .include "src/wonder_mail_802C10C.o"
-.include "src/wonder_mail_2_1.o"
-	.space 0x2
-
-gUnknown_203B2F0: /* 203B2F0 (InitializeJobListMenu - sub_802CD38) */
-	.space 0x4
-
-.include "src/wonder_mail_3.o"
-
-gUnknown_203B2F8: /* 203B2F8 (sub_802D098 - sub_802DADC) */
-	.space 0x4
-
+.include "src/wonder_mail_802C4C8.o"
+.include "src/wonder_mail_802C860.o"
+.include "src/wonder_mail_802CDD4.o"
+.include "src/wonder_mail_802D098.o"
 .include "src/code_802DB28.o"
 .include "src/code_802DE84.o"
 .include "src/mailbox.o"

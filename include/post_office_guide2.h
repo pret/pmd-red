@@ -1,7 +1,7 @@
 #ifndef GUARD_POST_OFFICE_GUIDE2_H
 #define GUARD_POST_OFFICE_GUIDE2_H
 
-#include "input.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // size: 0x78

@@ -1,7 +1,7 @@
 #ifndef GUARD_HINTS_MENU1_H
 #define GUARD_HINTS_MENU1_H
 
-#include "input.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // size: 0x9C

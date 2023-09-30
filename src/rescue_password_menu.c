@@ -13,7 +13,6 @@
 #include "save.h"
 #include "text1.h"
 #include "text2.h"
-#include "wonder_mail.h"
 
 #define RESCUE_PASSWORD_SIZE 0x36
 

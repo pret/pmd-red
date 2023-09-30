@@ -8,7 +8,6 @@
 #include "dungeon_map_access.h"
 #include "dungeon_music.h"
 #include "file_system.h"
-#include "input.h"
 #include "play_time.h"
 
 extern s32 gUnknown_80F6568[];

@@ -7,6 +7,7 @@
 #include "event_flag.h"
 #include "felicity_bank.h"
 #include "friend_area.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"

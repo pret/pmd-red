@@ -17,6 +17,7 @@
 #include "ground_lives.h"
 #include "ground_main.h"
 #include "ground_map_1.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "options_menu1.h"
@@ -25,7 +26,8 @@
 #include "text1.h"
 #include "text2.h"
 #include "wigglytuff_shop2.h"
-#include "wonder_mail_2_1.h"
+#include "wonder_mail_802C4C8.h"
+#include "wonder_mail_802C860.h"
 
 extern u8 gAvailablePokemonNames[]; // 202DF98
 

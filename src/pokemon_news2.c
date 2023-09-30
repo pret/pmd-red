@@ -2,6 +2,7 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "game_options.h"
+#include "input.h"
 #include "pokemon_mail.h"
 #include "pokemon_mid.h"
 #include "pokemon_news2.h"

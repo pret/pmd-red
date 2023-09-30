@@ -2,6 +2,7 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
+#include "input.h"
 #include "items.h"
 #include "memory.h"
 #include "menu_input.h"

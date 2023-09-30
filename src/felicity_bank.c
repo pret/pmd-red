@@ -3,6 +3,7 @@
 #include "code_80130A8.h"
 #include "common_strings.h"
 #include "felicity_bank.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"

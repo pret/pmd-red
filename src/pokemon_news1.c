@@ -4,6 +4,7 @@
 #include "code_803B050.h"
 #include "code_8096AF8.h"
 #include "constants/input.h"
+#include "input.h"
 #include "pokemon_mail.h"
 #include "pokemon_news1.h"
 #include "pokemon_news2.h"

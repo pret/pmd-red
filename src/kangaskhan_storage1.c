@@ -4,6 +4,7 @@
 #include "code_801C8C4.h"
 #include "code_8098BDC.h"
 #include "common_strings.h"
+#include "input.h"
 #include "kangaskhan_storage1.h"
 #include "kecleon_bros4.h"
 #include "memory.h"

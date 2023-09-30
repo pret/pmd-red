@@ -2,13 +2,13 @@
 #include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
 #include "constants/dungeon.h"
-#include "structs/str_dungeon.h"
 #include "main_menu1.h"
 #include "memory.h"
 #include "other_menus1.h"
 #include "other_menus2.h"
 #include "pokemon.h"
 #include "save.h"
+#include "structs/str_dungeon.h"
 
 // rescue_password_menu.c
 extern s32 gCommsTimeout; // Counts to 100 and then errors if other player hasn't connected

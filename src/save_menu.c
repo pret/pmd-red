@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_80130A8.h"
 #include "constants/main_menu.h"
+#include "input.h"
 #include "main_menu1.h"
 #include "memory.h"
 #include "menu_input.h"

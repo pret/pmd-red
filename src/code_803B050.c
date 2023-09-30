@@ -12,7 +12,6 @@
 #include "text2.h"
 #include "code_800D090.h"
 #include "menu_input.h"
-#include "wonder_mail.h"
 #include "dungeon.h"
 
 // This file was originally 7 files. Check data_80E7D40.s

@@ -3,6 +3,7 @@
 #include "code_801602C.h"
 #include "code_8023868.h"
 #include "debug_menu4.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "text1.h"

@@ -5,6 +5,7 @@
 #include "code_8098BDC.h"
 #include "common_strings.h"
 #include "felicity_bank.h"
+#include "input.h"
 #include "items.h"
 #include "kecleon_bros1.h"
 #include "kecleon_bros2.h"

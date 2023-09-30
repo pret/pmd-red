@@ -4,6 +4,7 @@
 #include "code_801C8C4.h"
 #include "common_strings.h"
 #include "debug_menu2.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "text1.h"

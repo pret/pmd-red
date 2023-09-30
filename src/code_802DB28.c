@@ -6,8 +6,10 @@
 #include "code_80958E8_1.h"
 #include "code_8096AF8.h"
 #include "exclusive_pokemon.h"
+#include "input.h"
 #include "items.h"
 #include "memory.h"
+#include "pokemon.h"
 #include "text1.h"
 #include "text2.h"
 
