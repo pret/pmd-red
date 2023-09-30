@@ -21,7 +21,7 @@ u32 UpdateAdventureLogMenu(void)
     u32 nextMenu;
     nextMenu = MENU_NO_SCREEN_CHANGE;
 
-    switch (HandleAdventureLogInput(1)) {
+    switch (HandleAdventureLogInput(TRUE)) {
         case 0:
         case 1:
             break;

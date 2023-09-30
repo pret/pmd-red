@@ -266,6 +266,7 @@ APOSTROPHE = 7E 32 37 @ ~27
 COMMA = 7E 32 63 @ ~2c
 QUOTE_START = 7E 39 33 @ ~93
 QUOTE_END = 7E 39 34 @ ~94
+UNK_95 = 7E 39 35 @ ~95 - Seems to be a special (?) symbol
 
 @ Placeholders for message arguments to swap out for names within strings.
 ARG_VALUE_0 = 24 64 30 @ $d0
