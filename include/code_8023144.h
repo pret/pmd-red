@@ -1,7 +1,7 @@
 #ifndef GUARD_CODE_8023144_H
 #define GUARD_CODE_8023144_H
 
-#include "input.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // size: 0x3FC

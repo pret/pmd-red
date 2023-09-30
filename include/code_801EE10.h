@@ -2,9 +2,8 @@
 #define CODE_801EE10_H
 
 #include "constants/move.h"
-
-#include "input.h"
 #include "pokemon.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // size 0xBC

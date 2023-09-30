@@ -45,7 +45,6 @@ extern u8 gUnknown_80B7388[];
 
 void FatalError(DebugLocation *, const char *, ...) __attribute__((noreturn));
 extern bool8 HasCompletedAllMazes(void);
-extern void sub_8097418(u32, u32);
 extern void sub_800160C(struct UnkEventStruct *r0, u32 r1, u32 r2);
 extern u8 sub_8002658(s16);
 extern void sub_80018D8(u32, u32, u32);

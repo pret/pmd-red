@@ -4,6 +4,7 @@
 #include "constants/input.h"
 #include "event_flag.h"
 #include "friend_area.h"
+#include "input.h"
 #include "items.h"
 #include "memory.h"
 #include "menu_input.h"

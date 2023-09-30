@@ -3,6 +3,7 @@
 #include "code_80130A8.h"
 #include "code_801602C.h"
 #include "common_strings.h"
+#include "input.h"
 #include "memory.h"
 #include "text_util.h"
 #include "text1.h"

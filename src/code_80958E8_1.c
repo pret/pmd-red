@@ -8,13 +8,10 @@
 #include "code_80958E8_1.h"
 #include "random.h"
 #include "pokemon.h"
+#include "code_8096AF8.h"
 
-extern u8 IsJobSlotEmpty(u8);
 extern bool8 IsValidWonderMail(WonderMail *WonderMailData);
 extern u8 sub_8095E38(WonderMail *, u8, u8, bool8);
-extern void ResetJobSlot(u8);
-extern void sub_8096C80(void);
-extern void sub_8096D24(void);
 extern void sub_80965F4();
 extern void SortPelipperJobs();
 u8 sub_8097318(s16 param_1);

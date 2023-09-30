@@ -5,34 +5,7 @@
 #include "structs/str_dungeon.h"
 #include "items.h"
 #include "pokemon.h"
-
-// size: 0x8
-typedef struct WonderMailSub
-{
-    /* 0x0 */ DungeonLocation dungeon;
-    /* 0x4 */ u32 seed;
-} WonderMailSub;
-
-// size: 0x30
-typedef struct unkStruct_203B480
-{
-    /* 0x0 */ u8 mailType;
-    /* 0x1 */ u8 missionType;
-    WonderMailSub unk4;
-    /* 0xC */ s16 clientSpecies;
-    /* 0xE */ s16 targetSpecies;
-    union unk10_temp
-    {
-        u32 unk10;
-        u16 unk10_u16;
-    } unk10;
-    /* 0x14 */ u8 playerName[0x20 - 0x14];
-    Item item;
-    u32 unk24;
-    u32 unk28;
-    /* 0x2C */ s8 rescuesAllowed;
-    u8 unk2D;
-} unkStruct_203B480;
+#include "structs/str_wonder_mail.h"
 
 // size: 0x5C
 typedef struct unkStruct_203B484

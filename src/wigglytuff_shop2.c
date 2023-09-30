@@ -4,6 +4,7 @@
 #include "common_strings.h"
 #include "exclusive_pokemon.h"
 #include "friend_area.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"

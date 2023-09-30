@@ -2,7 +2,7 @@
 #define GUARD_POKEMON_NEWS1_H
 
 #include "constants/wonder_mail.h"
-#include "input.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // size: 0xD4;

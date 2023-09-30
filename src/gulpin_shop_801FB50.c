@@ -10,6 +10,7 @@
 #include "felicity_bank.h"
 #include "gulpin_shop.h"
 #include "gulpin_shop_801FB50.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "moves.h"

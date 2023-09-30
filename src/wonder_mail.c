@@ -7,6 +7,7 @@
 #include "code_80A26CC.h"
 #include "constants/communication_error_codes.h"
 #include "cpu.h"
+#include "input.h"
 #include "items.h"
 #include "main_menu1.h"
 #include "memory.h"
@@ -267,6 +268,8 @@ ALIGNED(4) const u8 SendPokemon_80DDB98[] = _("Send Pokémon");
 
 #include "data/wonder_mail_1.h"
 
+
+void SetFriendRescueCounterState(u32 r0);
 
 u32 sub_8027F88(void)
 {

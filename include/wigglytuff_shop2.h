@@ -1,7 +1,7 @@
 #ifndef GUARD_WIGGLYTUFF_SHOP2_H
 #define GUARD_WIGGLYTUFF_SHOP2_H
 
-#include "input.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 typedef struct WigglytuffShop2Work

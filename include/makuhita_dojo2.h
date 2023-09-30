@@ -2,7 +2,7 @@
 #define GUARD_MAKUHITA_DOJO2_H
 
 #include "constants/dungeon.h"
-#include "input.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // size: 0xD0

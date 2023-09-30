@@ -11,6 +11,7 @@
 #include "constants/dungeon.h"
 #include "event_flag.h"
 #include "friend_area_action_menu.h"
+#include "input.h"
 #include "items.h"
 #include "kecleon_bros4.h"
 #include "memory.h"

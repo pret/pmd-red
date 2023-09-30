@@ -4,6 +4,7 @@
 #include "code_80130A8.h"
 #include "code_8098BDC.h"
 #include "constants/input.h"
+#include "input.h"
 #include "items.h"
 #include "kecleon_bros4.h"
 #include "memory.h"

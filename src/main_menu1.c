@@ -7,6 +7,7 @@
 #include "ds_menus.h"
 #include "friend_rescue.h"
 #include "game_options.h"
+#include "input.h"
 #include "load_screen.h"
 #include "main_menu1.h"
 #include "main_menu2.h"

@@ -1,7 +1,7 @@
 #ifndef GUARD_CODE_803B050_H
 #define GUARD_CODE_803B050_H
 
-#include "code_802C39C.h"
+#include "structs/str_802C39C.h"
 
 // size: 0x8
 typedef struct unkStruct_80E9920
@@ -26,6 +26,7 @@ void CreateRescueTitle(unkStruct_802C39C *);
 void sub_803B6B0(s32 x, s32 y, u8 index, u32);
 
 // code_803B050.s
+extern unkStruct_803B344 *sub_803B344(u8);
 extern void sub_803B35C(WonderMail *, unkStruct_802C39C *);
 
 #endif // GUARD_CODE_803B050_H

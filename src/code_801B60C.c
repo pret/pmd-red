@@ -6,6 +6,7 @@
 #include "code_8098BDC.h"
 #include "common_strings.h"
 #include "constants/colors.h"
+#include "input.h"
 #include "items.h"
 #include "kecleon_bros4.h"
 #include "memory.h"

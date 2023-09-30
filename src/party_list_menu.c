@@ -12,6 +12,7 @@
 #include "common_strings.h"
 #include "constants/dungeon.h"
 #include "event_flag.h"
+#include "input.h"
 #include "items.h"
 #include "kecleon_bros4.h"
 #include "memory.h"

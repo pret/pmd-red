@@ -1,7 +1,7 @@
 #ifndef GUARD_ADVENTURE_LOG_H
 #define GUARD_ADVENTURE_LOG_H
 
-#include "input.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // size: 0xA0

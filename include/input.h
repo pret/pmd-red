@@ -47,43 +47,6 @@ typedef struct UnusedInputStruct
     u8 unk29;
 } UnusedInputStruct;
 
-// size: 0xC
-typedef struct MenuInputStructSub
-{
-    u8 unk0;
-    /* 0x1 */ u8 a_button;
-    /* 0x2 */ u8 b_button;
-    /* 0x3 */ u8 dpad_right;
-    /* 0x4 */ u8 dpad_left;
-    u8 fill5[3];
-    u16 unk8;
-    s16 unkA;
-} MenuInputStructSub;
-
-// size: 0x34
-typedef struct MenuInputStruct
-{
-    s32 unk0;
-    u16 unk4;
-    s16 unk6;
-    s16 unk8; // Maybe Position
-    s16 unkA;
-    s16 unkC; // Maybe Position
-    s16 unkE;
-    u32 unk10;
-    s16 unk14; // Maybe Position
-    s16 unk16;
-    /* 0x18 */ s16 menuIndex;
-    s16 unk1A;
-    s16 unk1C;
-    s16 unk1E;
-    s16 unk20;
-    s16 unk22;
-    u16 unk24;
-    u16 unk26;
-    MenuInputStructSub unk28;
-} MenuInputStruct;
-
 extern Inputs gRealInputs;
 
 void InitInput(void);

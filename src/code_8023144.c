@@ -6,6 +6,7 @@
 #include "constants/input.h"
 #include "exclusive_pokemon.h"
 #include "friend_area.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon_3.h"

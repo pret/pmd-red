@@ -8,6 +8,7 @@
 #include "constants/wonder_mail.h"
 #include "event_flag.h"
 #include "game_options.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
@@ -15,7 +16,6 @@
 #include "save.h"
 #include "save_write.h"
 #include "text1.h"
-#include "wonder_mail.h"
 
 struct unkStruct_203B2C8
 {

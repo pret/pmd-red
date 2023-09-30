@@ -4,6 +4,7 @@
 #include "common_strings.h"
 #include "hints_menu1.h"
 #include "hints_menu2.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "options_menu1.h"

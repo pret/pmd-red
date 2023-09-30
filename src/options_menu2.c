@@ -2,6 +2,7 @@
 #include "code_80118A4.h"
 #include "constants/colors.h"
 #include "constants/input.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "options_menu2.h"

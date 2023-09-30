@@ -3,6 +3,7 @@
 #include "code_8024458.h"
 #include "constants/input.h"
 #include "event_flag.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"

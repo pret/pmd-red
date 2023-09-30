@@ -3,6 +3,7 @@
 #include "code_803B050.h"
 #include "code_80958E8_1.h"
 #include "constants/input.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "text1.h"

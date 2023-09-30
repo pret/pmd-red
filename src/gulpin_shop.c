@@ -5,6 +5,7 @@
 #include "code_80130A8.h"
 #include "common_strings.h"
 #include "gulpin_shop.h"
+#include "input.h"
 #include "pokemon.h"
 #include "memory.h"
 #include "menu_input.h"

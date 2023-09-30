@@ -1,4 +1,5 @@
 #include "global.h"
+#include "input.h"
 #include "text1.h"
 #include "text2.h"
 #include "memory.h"

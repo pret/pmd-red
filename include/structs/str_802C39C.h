@@ -1,8 +1,7 @@
-#ifndef GUARD_CODE_802C39C_H
-#define GUARD_CODE_802C39C_H
+#ifndef GUARD_CODE_STR_802C39C_H
+#define GUARD_CODE_STR_802C39C_H
 
-#include "code_8094F88.h"
-#include "wonder_mail.h"
+#include "structs/str_wonder_mail.h"
 
 // size: 0x58
 typedef struct unkStruct_802C39C
@@ -30,4 +29,4 @@ typedef struct unkStruct_802C39C
     /* 0x54 */ WonderMail *mail;
 } unkStruct_802C39C;
 
-#endif // GUARD_CODE_802C39C_H
+#endif // GUARD_CODE_STR_802C39C_H

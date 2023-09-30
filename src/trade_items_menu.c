@@ -5,6 +5,7 @@
 #include "code_801C8C4.h"
 #include "constants/communication_error_codes.h"
 #include "cpu.h"
+#include "input.h"
 #include "items.h"
 #include "main_menu1.h"
 #include "memory.h"

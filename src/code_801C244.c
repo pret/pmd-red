@@ -2,6 +2,7 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801C244.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon_3.h"

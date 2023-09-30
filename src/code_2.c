@@ -17,7 +17,6 @@
 #include "file_system.h"
 #include "friend_area.h"
 #include "game_options.h"
-#include "input.h"
 #include "main_menu1.h"
 #include "main_menu2.h"
 #include "memory.h"

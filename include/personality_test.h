@@ -2,7 +2,7 @@
 #define GUARD_PERSONALITY_TEST_H
 
 #include "constants/personality_test.h"
-#include "input.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // Definitely wrong but need to figure out better structure later

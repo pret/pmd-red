@@ -4,7 +4,7 @@
 #include "structs/menu.h"
 #include "structs/str_text.h"
 #include "constants/mailbox.h"
-#include "code_802C39C.h"
+#include "structs/str_802C39C.h"
 
 struct unkStruct_203B304
 {
@@ -23,7 +23,6 @@ struct unkStruct_203B304
 };
 
 extern void SetMailboxState(u32);
-extern s32 GetNumAcceptedJobs(void);
 
 enum MailBoxStates
 {

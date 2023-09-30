@@ -2,8 +2,8 @@
 #define GUARD_CODE_802DB28_H
 
 #include "file_system.h"
-#include "wonder_mail.h"
 #include "structs/str_text.h"
+#include "structs/str_wonder_mail.h"
 
 // size: 0xA8
 struct unkStruct_203B2FC

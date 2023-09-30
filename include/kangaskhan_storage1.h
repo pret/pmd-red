@@ -2,8 +2,8 @@
 #define GUARD_KANGASKHAN_STORAGE1_H
 
 #include "file_system.h"
-#include "items.h"
 #include "structs/menu.h"
+#include "structs/str_items.h"
 #include "structs/str_text.h"
 
 enum KangaskhanStorageStates
