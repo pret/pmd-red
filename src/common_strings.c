@@ -1,7 +1,6 @@
 #include "global.h"
+#include "globaldata.h"
 #include "common_strings.h"
-
-ALIGNED(4) static const u8 sFill[] = _("pksdir0");
 
 // Probably had many entries per ptr because of languages, but USA release is english-only. Check other roms
 

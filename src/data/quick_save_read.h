@@ -1,5 +1,3 @@
-ALIGNED(4) static const u8 sFill[] = _("pksdir0");
-
 ALIGNED(4) static const u8 sSaveFailedExplanation[] = _(
     "{CENTER_ALIGN}Your data was not properly saved{COMMA}\n"
     "{CENTER_ALIGN}so your game cannot be resumed\n"

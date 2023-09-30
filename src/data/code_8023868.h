@@ -1,5 +1,3 @@
-ALIGNED(4) static const u8 sFill[] = _("pksdir0");
-
 //static // MAKE STATIC WHEN code_8023868.s IS DONE
 const UnkTextStruct2 sUnknown_80DC950 = {
     0, 0, 0, 0,

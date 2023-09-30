@@ -1,5 +1,3 @@
-ALIGNED(4) static const u8 sFill[] = _("pksdir0");
-
 ALIGNED(4) static const u8 sSavingAdventure[] = _(
     "{CENTER_ALIGN}Saving your adventure...\n"
     "{CENTER_ALIGN}Please don{APOSTROPHE}t turn off the power.");

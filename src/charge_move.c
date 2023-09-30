@@ -39,8 +39,6 @@ const u32 gMultiTurnChargingStatuses[10] = {
     STATUS_NONE
 };
 
-ALIGNED(4) const char chargingStatusFill[] = "pksdir0";
-
 u32 sub_8057070(Move *move)
 {
     u32 numberOfChainedHits;

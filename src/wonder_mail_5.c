@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/wonder_mail.h"
 #include "memory.h"
 #include "text1.h"
@@ -48,7 +49,6 @@ const UnkTextStruct2 gUnknown_80E091C = {
 
 const u8 gUnknown_80E0934[] = "ID:";
 const u8 gUnknown_80E0938[] = "%-4d";
-static const u8 wonder_mail_fill[] = "pksdir0";
 
 extern void sub_8030DD4(void);
 extern void CreateRescueDescription(unkStruct_802C39C *);

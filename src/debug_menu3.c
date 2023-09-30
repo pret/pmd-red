@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_801EE10_mid.h"
 #include "common_strings.h"
 #include "debug_menu3.h"

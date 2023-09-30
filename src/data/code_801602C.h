@@ -1,5 +1,3 @@
-ALIGNED(4) static const u8 sFill[] = _("pksdir0");
-
 enum
 {
     MENU_ACTION_DEFAULT = 1,

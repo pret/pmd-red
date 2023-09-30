@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_800D090.h"
 #include "code_8023868.h"
 #include "pokemon.h"

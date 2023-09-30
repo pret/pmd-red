@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "input.h"
 #include "memory.h"
 #include "text1.h"
@@ -77,7 +78,6 @@ ALIGNED(4) const u8 gUnknown_80E09D8[] = _(
 ALIGNED(4) const u8 gUnknown_80E0A0C[] = _(
         " ...Uh{COMMA} no?\n"
         "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.");
-const u8 wonder_mail_6_fill[] = "pksdir0";
 
 extern void sub_80306A8(s32, u32, u32, u32);
 extern void sub_8031300(void);

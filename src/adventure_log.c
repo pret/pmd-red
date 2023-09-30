@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "adventure_log.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"

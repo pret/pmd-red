@@ -336,7 +336,14 @@ const UnkTextStruct2 gUnknown_80F4244 =
     NULL
 };
 
-const char filler[] = "pksdir0"; // CHUNSOFT inserted for aligning data
+
+
+
+// FILE 2:
+
+
+
+const char filler[] = "pksdir0";
 
 const s16 gPartners[NUM_PARTNERS] =
 {
@@ -812,6 +819,18 @@ void sub_803CE6C()
   sub_800641C(gUnknown_203B404->unk54, TRUE, TRUE);
   sub_803CECC(); // Free 203B404
 }
+
+
+
+
+
+
+
+// THIS IS A NEW FILE:
+
+
+
+
 
 void sub_803CEAC(void)
 {

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_802DE84.h"
 #include "mailbox.h"
 #include "pokemon.h"
@@ -65,7 +66,6 @@ const u8 gPelipperBoard_BulletinBoard[] = "Bulletin Board";
 const u8 gPelipperBoard_JobList[] = "Job List";
 const u8 gPelipperBoard_Accepted[] = "Accepted";
 const u8 gPelipperStatusSlash[] = "/";
-static const u8 sPelipperfill[] = "pksdir0";
 
 extern void sub_802ECB4(void);
 extern void nullsub_134(void);

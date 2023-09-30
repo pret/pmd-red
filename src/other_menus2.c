@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
 #include "constants/dungeon.h"

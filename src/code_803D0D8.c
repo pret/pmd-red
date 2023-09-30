@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_803D0D8.h"
 
 static EWRAM_DATA_2 u8 sUnknown_203B408 = {0};

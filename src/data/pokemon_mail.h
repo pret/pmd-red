@@ -1174,5 +1174,3 @@ ALIGNED(4) const u8 gMail_WelcomeText[] = _(
     "   - Pokémon Rescue Organization -");
 
 ALIGNED(4) const u8 gMail_WelcomeHeadline[] = "#1 Welcome to a Rescue Team!";
-
-static const u8 pokemon_mail_fill[] = "pksdir0";
