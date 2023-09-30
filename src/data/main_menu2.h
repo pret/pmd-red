@@ -1,5 +1,3 @@
-static const u8 sFill[] = "pksdir0";
-
 static const UnkTextStruct2 sUnknown_80E59C8 = {
     0, 0, 0, 0,
     3,

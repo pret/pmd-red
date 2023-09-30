@@ -500,6 +500,7 @@ SECTIONS {
         src/debug_menu4.o(.rodata);
         data/data_80E7D40.o(.rodata);
         src/pokemon_mail.o(.rodata);
+        src/code_803C1B4.o(.rodata);
         data/personality_test.o(.rodata);
         src/personality_test.o(.rodata);
         src/code_803D0D8.o(.rodata);

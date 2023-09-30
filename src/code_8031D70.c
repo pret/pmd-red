@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/wonder_mail.h"
 #include "constants/colors.h"
 #include "input.h"

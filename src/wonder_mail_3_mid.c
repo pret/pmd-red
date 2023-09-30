@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_802DE84.h"
 #include "code_802F204.h"
 #include "constants/input.h"
@@ -232,7 +233,6 @@ const UnkTextStruct2 gUnknown_80E072C = {
 ALIGNED(4) const u8 gUnknown_80E0744[] = "Dungeons";
 ALIGNED(4) const u8 gUnknown_80E0750[] =  {0x83, 0xC2};
 ALIGNED(4) const u8 gUnknown_80E0754[] = {0x83, 0xC0};
-ALIGNED(4) static const u8 sFill1[] = "pksdir0";
 
 u32 sub_802EF48(void)
 {

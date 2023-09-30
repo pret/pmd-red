@@ -173,5 +173,3 @@ ALIGNED(4) const u8 gUnknown_80DF96C[] = _(
 ALIGNED(4) const u8 gUnknown_80DF9A4[]= _(
 	" How would you like to\n"
 	"receive your friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?");
-
-ALIGNED(4) const u8 thank_you_fill[] = "pksdir0";

@@ -1,5 +1,6 @@
-#include "constants/input.h"
 #include "global.h"
+#include "globaldata.h"
+#include "constants/input.h"
 #include "text1.h"
 #include "text2.h"
 #include "memory.h"
@@ -75,7 +76,6 @@ ALIGNED(4) const u8 ToDoList[] = "To-Do List";
 ALIGNED(4) const u8 SOSMail[] = "SOS Mail";
 ALIGNED(4) const u8 RequestList[] = "Request List";
 ALIGNED(4) const u8 SOSList[] = "SOS List";
-static const u8 wonder_mail_fill[] = "pksdir0";
 
 extern bool8 HasNoWonderMailType(u32);
 extern s32 sub_8030A74(void);

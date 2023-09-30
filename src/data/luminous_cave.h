@@ -1,5 +1,3 @@
-ALIGNED(4) static const u8 sFill[] = _("pksdir0");
-
 static const UnkTextStruct2 sUnknown_80DC9E8 = {
     0, 0, 0, 0,
     3,
@@ -130,6 +128,5 @@ ALIGNED(4) static const u8 sMustGiveName[] = _(
     "{CENTER_ALIGN}Ye must give a name to\n"
     "{CENTER_ALIGN}the evolved Pokémon. ");
 
-// TODO: These are for 2 files after, which have no data
+// TODO: This for a file after which had no data
 ALIGNED(4) static const u8 sFill1[] = _("pksdir0");
-ALIGNED(4) static const u8 sFill2[] = _("pksdir0");

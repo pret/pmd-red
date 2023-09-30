@@ -1,5 +1,3 @@
-ALIGNED(4) static const u8 sFill[] = _("pksdir0");
-
 static const MenuItem sUnknown_80DC584[3] =
 {
     {"Yes", 2},

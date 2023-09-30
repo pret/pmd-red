@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_80130A8.h"
 #include "code_802DE84.h"
 #include "code_803B050.h"

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_80130A8.h"
 #include "code_8094F88.h"
 #include "constants/main_menu.h"
@@ -239,8 +240,6 @@ const MenuItem gUnknown_80E75A0[4] = {
 };
 ALIGNED(4) const u8 sUnknown_80E75C0[] = _("{CENTER_ALIGN}new mail.");
 ALIGNED(4) const u8 sUnknown_80E75CC[] = _("{CENTER_ALIGN}There is no space for receiving");
-
-static const u8 fill0[] = "pksdir0";
 
 extern void sub_8031D70(u32, u32);
 extern void sub_8031E10(void);

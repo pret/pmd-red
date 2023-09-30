@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "credits2.h"
 #include "event_flag.h"
 #include "input.h"

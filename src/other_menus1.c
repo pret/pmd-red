@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
 #include "code_8009804.h"

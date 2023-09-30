@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_802DE84.h"
 #include "common_strings.h"
 #include "memory.h"
@@ -20,8 +21,6 @@
 #include "code_8096AF8.h"
 
 EWRAM_DATA_2 struct unkStruct_203B304 *gUnknown_203B304 = {0};
-
-static const u8 wonder_mail_802DF88_fill1[] = "pksdir0";
 
 const UnkTextStruct2 gUnknown_80E0284 =
 {
@@ -70,7 +69,6 @@ const u8 gMailActionStore[] = "Store";
 const u8 gMailActionRead[] = "Read";
 const u8 gMailAccepted[] = "Accepted";
 const u8 gUnknown_80E0324[] = "/";
-static const u8 mailbox_fill[] = "pksdir0";
 
 void sub_802E578(void);
 void HandleMailActionMenu(void);

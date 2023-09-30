@@ -28,4 +28,3 @@ ALIGNED(4) static const u8 sFmtBring[] = _("  Bring {COLOR_1 GREEN}%s{END_COLOR_
 ALIGNED(4) static const u8 sFmtFind[] = _("  Find {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}");
 ALIGNED(4) static const u8 sFmtEscort[] = _("  Escort to {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}");
 ALIGNED(4) static const u8 sRedQuestionMarks[] = _("{COLOR_1 RED_2}???{END_COLOR_TEXT_1}");
-ALIGNED(4) static const u8 sFill[] = "pksdir0";

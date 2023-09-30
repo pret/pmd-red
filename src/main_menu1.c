@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "adventure_log_menu.h"
 #include "code_8098BDC.h"
 #include "constants/item.h"
