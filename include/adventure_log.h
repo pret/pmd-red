@@ -7,7 +7,7 @@
 // size: 0xA0
 typedef struct AdventureLog
 {
-    MenuInputStruct input;
+    /* 0x0 */ MenuInputStruct input;
     u32 unk34;
     UnkTextStruct2 *unk38;
     UnkTextStruct2 unk3C[4];
@@ -16,6 +16,6 @@ typedef struct AdventureLog
 
 void CleanAdventureLogScreen(void);
 bool8 CreateAdventureLogScreen(u32 kind);
-u32 HandleAdventureLogInput(u8);
+u32 HandleAdventureLogInput(bool8);
 
 #endif // GUARD_ADVENTURE_LOG_H

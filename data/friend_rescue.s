@@ -1,6 +1,7 @@
 	.section .rodata
 
-@ friend_rescue.c
+        .align 2,0
+        .string "pksdir0\0"
 
         .global gUnknown_80E2068
 gUnknown_80E2068: @ 80E2068
