@@ -116,171 +116,333 @@ gUnknown_8116190: @ 8116190
 
 .global gUnknown_81161A8
 gUnknown_81161A8: @ 81161A8
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte sub_809C39C
 .4byte sub_801D0DC
+=======
+        .4byte 1
+        .4byte 0
+        .4byte sub_809C39C
+        .4byte sub_801D0DC
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_81161B8
 gUnknown_81161B8: @ 81161B8
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte sub_809C3D8
 .4byte sub_801D0DC
+=======
+        .4byte 1
+        .4byte 0
+        .4byte sub_809C3D8
+        .4byte sub_801D0DC
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_81161C8
 gUnknown_81161C8: @ 81161C8
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte DeleteKangaskhanStorage
 .4byte KangaskhanStorageCallback
+=======
+        .4byte 1
+        .4byte 0
+        .4byte DeleteKangaskhanStorage
+        .4byte KangaskhanStorageCallback
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_81161D8
 gUnknown_81161D8: @ 81161D8
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .4byte sub_8017E1C
 .4byte sub_8017EF4
 .4byte sub_8017E54
+=======
+        .4byte 1
+        .4byte sub_8017E1C
+        .4byte sub_8017EF4
+        .4byte sub_8017E54
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_81161E8
 gUnknown_81161E8: @ 81161E8
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte DestroyFelicityBank
 .4byte FelicityBankCallback
+=======
+        .4byte 1
+        .4byte 0
+        .4byte DestroyFelicityBank
+        .4byte FelicityBankCallback
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_81161F8
 gUnknown_81161F8: @ 81161F8
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte DeleteKecleonBros
 .4byte KecleonBrosCallback
+=======
+        .4byte 1
+        .4byte 0
+        .4byte DeleteKecleonBros
+        .4byte KecleonBrosCallback
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_8116208
 gUnknown_8116208: @ 8116208
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte sub_801FD7C
 .4byte sub_801FC40
+=======
+        .4byte 1
+        .4byte 0
+        .4byte sub_801FD7C
+        .4byte sub_801FC40
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_8116218
 gUnknown_8116218: @ 8116218
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte sub_8021D1C
 .4byte sub_8021C5C
+=======
+        .4byte 1
+        .4byte 0
+        .4byte sub_8021D1C
+        .4byte sub_8021C5C
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_8116228
 gUnknown_8116228: @ 8116228
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .4byte sub_8027F88
 .4byte sub_809C504
 .4byte sub_8028078
+=======
+        .4byte 1
+        .4byte sub_8027F88
+        .4byte sub_809C504
+        .4byte sub_8028078
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_8116238
 gUnknown_8116238: @ 8116238
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .4byte sub_802B2D4
 .4byte sub_802B3B8
 .4byte sub_802B358
+=======
+        .4byte 1
+        .4byte sub_802B2D4
+        .4byte sub_802B3B8
+        .4byte sub_802B358
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_8116248
 gUnknown_8116248: @ 8116248
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .4byte CreateThankYouMailPelipper
 .4byte CleanThankYouMailPelipper
 .4byte ThankYouMailPelipperCallback
+=======
+        .4byte 1
+        .4byte CreateThankYouMailPelipper
+        .4byte CleanThankYouMailPelipper
+        .4byte ThankYouMailPelipperCallback
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_8116258
 gUnknown_8116258: @ 8116258
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte CleanHelperPelipper
 .4byte HelperPelipperCallback
+=======
+        .4byte 1
+        .4byte 0
+        .4byte CleanHelperPelipper
+        .4byte HelperPelipperCallback
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_8116268
 gUnknown_8116268: @ 8116268
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .4byte sub_802E864
 .4byte sub_809C550
 .4byte sub_802E890
+=======
+        .4byte 1
+        .4byte sub_802E864
+        .4byte sub_809C550
+        .4byte sub_802E890
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_8116278
 gUnknown_8116278: @ 8116278
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .4byte sub_802DFB0
 .4byte sub_802E06C
 .4byte sub_802DFD8
+=======
+        .4byte 1
+        .4byte sub_802DFB0
+        .4byte sub_802E06C
+        .4byte sub_802DFD8
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_8116288
 gUnknown_8116288: @ 8116288
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte sub_802DC00
 .4byte sub_802DBD4
+=======
+        .4byte 1
+        .4byte 0
+        .4byte sub_802DC00
+        .4byte sub_802DBD4
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_8116298
 gUnknown_8116298: @ 8116298
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte MakuhitaDojo_Delete
 .4byte sub_802FE58
+=======
+        .4byte 1
+        .4byte 0
+        .4byte MakuhitaDojo_Delete
+        .4byte sub_802FE58
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_81162A8
 gUnknown_81162A8: @ 81162A8
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte MakuhitaDojo_Delete
 .4byte sub_802FE58
+=======
+        .4byte 1
+        .4byte 0
+        .4byte MakuhitaDojo_Delete
+        .4byte sub_802FE58
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_81162B8
 gUnknown_81162B8: @ 81162B8
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte MakuhitaDojo_Delete
 .4byte sub_802FE58
+=======
+        .4byte 1
+        .4byte 0
+        .4byte MakuhitaDojo_Delete
+        .4byte sub_802FE58
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_81162C8
 gUnknown_81162C8: @ 81162C8
+<<<<<<< HEAD
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte CreateTestTracker
 .4byte sub_809C464
 .4byte HandleTestTrackerState
+=======
+        .4byte 0
+        .4byte CreateTestTracker
+        .4byte sub_809C464
+        .4byte HandleTestTrackerState
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_81162D8
 gUnknown_81162D8: @ 81162D8
+<<<<<<< HEAD
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte sub_8035678
 .4byte sub_809C478
 .4byte sub_80356A0
+=======
+        .4byte 0
+        .4byte sub_8035678
+        .4byte sub_809C478
+        .4byte sub_80356A0
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_81162E8
 gUnknown_81162E8: @ 81162E8
+<<<<<<< HEAD
 .byte 0x00, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte sub_809C4B0
 .4byte sub_803B120
+=======
+        .4byte 0
+        .4byte 0
+        .4byte sub_809C4B0
+        .4byte sub_803B120
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_81162F8
 gUnknown_81162F8: @ 81162F8
+<<<<<<< HEAD
 .byte 0x01, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte sub_809C414
 .4byte sub_8025354
+=======
+        .4byte 1
+        .4byte 0
+        .4byte sub_809C414
+        .4byte sub_8025354
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_8116308
 gUnknown_8116308: @ 8116308
+<<<<<<< HEAD
 .byte 0x00, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte sub_809CD48
+=======
+        .4byte 0
+        .4byte 0
+        .4byte 0
+        .4byte sub_809CD48
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_8116318
 gUnknown_8116318: @ 8116318
-@ replacing .incbin "baserom.gba", 0x116318, 0xA4
-.byte 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-.4byte sub_801B72C
-.4byte sub_801B6AC
+        .4byte 1
+        .4byte 0
+        .4byte sub_801B72C
+        .4byte sub_801B6AC
+
 .byte 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00, 0x70, 0x6b, 0x73, 0x64
 .byte 0x69, 0x72, 0x30, 0x00
 
@@ -305,9 +467,16 @@ gUnknown_8116390: @ 8116390
 .global gUnknown_81163BC
 gUnknown_81163BC: @ 81163BC
 @ replacing .incbin "baserom.gba", 0x1163BC, 0x28
-.byte 0x37, 0x00, 0x00, 0x00, 0x42, 0x00, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x00, 0x69, 0x00, 0xf4, 0x01
-.byte 0x3a, 0x00, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x00, 0x69, 0x00, 0xf4, 0x01, 0x14, 0x00, 0x00, 0x00
-.byte 0x3f, 0x00, 0x00, 0x00, 0x69, 0x00, 0x10, 0x27
+.byte 0x37, 0x00, 0x00, 0x00
+.byte 0x42, 0x00, 0x00, 0x00
+.byte 0x3f, 0x00, 0x00, 0x00
+.byte 0x69, 0x00, 0xf4, 0x01
+.byte 0x3a, 0x00, 0x00, 0x00
+.byte 0x3f, 0x00, 0x00, 0x00
+.byte 0x69, 0x00, 0xf4, 0x01
+.byte 0x14, 0x00, 0x00, 0x00
+.byte 0x3f, 0x00, 0x00, 0x00
+.byte 0x69, 0x00, 0x10, 0x27
 
 .global gUnknown_81163E4
 gUnknown_81163E4: @ 81163E4
@@ -322,6 +491,7 @@ gUnknown_81163F0: @ 81163F0
 
 .global gUnknown_811642C
 gUnknown_811642C: @ 811642C
+<<<<<<< HEAD
 .string "{CENTER_ALIGN}However{COMMA} {ARG_NICKNAME_0}{APOSTROPHE}s team\n"
 .string "{CENTER_ALIGN}had too many items already...\0"
 .align 2,0
@@ -329,13 +499,32 @@ gUnknown_811642C: @ 811642C
 .align 2,0
 .string "pksdir0\0"
 .align 2,0
+=======
+        .string "{CENTER_ALIGN}However{COMMA} {ARG_NICKNAME_0}{APOSTROPHE}s team\n"
+        .string "{CENTER_ALIGN}had too many items already...\0"
+
+        .align 2,0
+        .string "pksdir0\0"
+
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_8116478
 gUnknown_8116478: @ 8116478
+<<<<<<< HEAD
 .byte 0x00, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .string "pksdir0\0"
 .align 2,0
+=======
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+
+        .string "pksdir0\0"
+        .align 2,0
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_8116488
 gUnknown_8116488: @ 8116488
@@ -565,7 +754,21 @@ SearchScriptLabelText:
 .string "pksdir0\0"
 .align 2,0
 
+<<<<<<< HEAD
 .global gUnknown_81168A8
+=======
+        .4byte GroundScriptFile_Text
+        .byte 0xbe, 0x16, 0x00, 0x00
+        .4byte SearchScriptLabelText
+
+        .string "Script label search error %d\0"
+
+        .align 2,0
+        .string "pksdir0\0"
+        .align 2,0
+
+	.global gUnknown_81168A8
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 gUnknown_81168A8: @ 81168A8
 @ replacing .incbin "baserom.gba", 0x1168A8, 0x67C
 .byte 0xb2, 0x00, 0xb2, 0x00, 0xb2, 0x00, 0xff, 0xff, 0xff, 0xff, 0x67, 0x01, 0x00, 0x00, 0x00, 0x00
@@ -1127,11 +1330,20 @@ GroundMap_Action_Text: @ Action
 
 .global gUnknown_8117770
 gUnknown_8117770: @ 8117770
+<<<<<<< HEAD
 .4byte GroundMap_FileText
 .byte 0x7f, 0x05, 0x00, 0x00
 .4byte GroundMap_Action_Text
 .string "pksdir0\0"
 .align 2,0
+=======
+        .4byte GroundMap_FileText
+        .byte 0x7f, 0x05, 0x00, 0x00
+        .4byte GroundMap_Action_Text
+
+        .string "pksdir0\0"
+        .align 2,0
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_8117784
 gUnknown_8117784: @ 8117784
@@ -1144,9 +1356,16 @@ gGroundWeatherSelect: @ 811779C
 
 .global gUnknown_81177BC
 gUnknown_81177BC: @ 81177BC
+<<<<<<< HEAD
 .byte 0x00, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 .string "pksdir0\0"
+=======
+        .byte 0x00, 0x00, 0x00, 0x00
+        .byte 0x00, 0x00, 0x00, 0x00
+
+        .string "pksdir0\0"
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 
 .global gUnknown_81177CC
 gUnknown_81177CC: @ 81177CC
@@ -2229,10 +2448,19 @@ GroundLink_SelectText: @ SelectText
 
 .global gUnknown_8118798
 gUnknown_8118798: @ 8118798
+<<<<<<< HEAD
 .4byte GroundLink_FileText
 .byte 0x4D, 0x00, 0x00, 0x00
 .4byte GroundLink_SelectText
 .string "pksdir0\0"
+=======
+        .4byte GroundLink_FileText
+        .byte 0x4D, 0x00, 0x00, 0x00
+        .4byte GroundLink_SelectText
+
+        .string "pksdir0\0"
+
+>>>>>>> 1d73365a (Update data_8115F5C.s)
 @ Ground Event
 
 .global GroundEventFile_Text
