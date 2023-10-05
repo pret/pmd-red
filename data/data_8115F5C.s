@@ -103,9 +103,7 @@ gUnknown_811617C: @ 811617C
 
 	.global gUnknown_8116180
 gUnknown_8116180: @ 8116180
-        .string "{COLOR_1 YELLOW_5}"
-        .byte 0x87, 0x45
-        .string "{END_COLOR_TEXT_1}\0"
+        .string "{COLOR_1 YELLOW_5}{SPEECH_BUBBLE}{END_COLOR_TEXT_1}\0"
 
 	.global gUnknown_8116188
 gUnknown_8116188: @ 8116188

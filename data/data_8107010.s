@@ -1212,16 +1212,12 @@ gUnknown_8108F10: @ 8108F10
 
 	.global gUnknown_8108F18
 gUnknown_8108F18: @ 8108F18
-        .string "{COLOR_2 YELLOW_4}%s{END_COLOR_TEXT_2}"
-        .byte 0x81, 0x40
-        .string "{COLOR_2 CYAN}%d{END_COLOR_TEXT_2}F\0"
+        .string "{COLOR_2 YELLOW_4}%s{END_COLOR_TEXT_2}　{COLOR_2 CYAN}%d{END_COLOR_TEXT_2}F\0"
         .align 2,0
 
 	.global gUnknown_8108F2C
 gUnknown_8108F2C: @ 8108F2C
-        .string "{COLOR_2 YELLOW_4}%s{END_COLOR_TEXT_2}"
-        .byte 0x81, 0x40
-        .string "B{COLOR_2 CYAN}%d{END_COLOR_TEXT_2}F\0"
+        .string "{COLOR_2 YELLOW_4}%s{END_COLOR_TEXT_2}　B{COLOR_2 CYAN}%d{END_COLOR_TEXT_2}F\0"
         .align 2,0
 
 	.global gUnknown_8108F40
