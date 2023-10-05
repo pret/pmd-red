@@ -1077,9 +1077,7 @@ gSmeargleMissionDescription: @ 80E88C8
 	.global gMedichamMissionDescription
 gMedichamMissionDescription: @ 80E8920
         .string "This is {COLOR_1 YELLOW}Medicham{END_COLOR_TEXT_1}. Rescue me{COMMA} please!\n"
-        .string "The reward is a secret"
-        .byte 0x81, 0x60
-        .string "♪ "
+        .string "The reward is a secret〜♪ "
         .align 2,0
 
 	.global gUnknown_80E8968
