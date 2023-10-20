@@ -1789,11 +1789,7 @@ ALIGNED(4) static const u8 sWondersText[] = _(
 
 ALIGNED(4) static const u8 sWondersHeadline[] = _("#16 Seven Wonders of Pokémon");
 
-ALIGNED(4) const u8 gMail_WondersHeadline[] = _(
-    "#16 Seven Wonders of Pokémon");
-
-
-ALIGNED(4) const u8 gMail_PollText[] = _(
+ALIGNED(4) static const u8 sPollText[] = _(
     // {UNK_MACRO_3D_50} expands to "#=2". The intent may have been "#=2.",
     // which is how all other instances of UNK_MACRO_3D are used.
     "{COLOR_1 YELLOW}First{UNK_MACRO_3D_50}Gravelerock{END_COLOR_TEXT_1}\n"
