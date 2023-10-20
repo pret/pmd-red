@@ -164,4 +164,10 @@ typedef struct LevelData
     u16 fillA;
 } LevelData;
 
+// Definitely wrong but need to figure out better structure later
+struct FaceData
+{
+    u8 *unk0[5];
+};
+
 #endif // GUARD_STR_POKEMON_H

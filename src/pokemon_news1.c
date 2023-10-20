@@ -2,7 +2,6 @@
 #include "globaldata.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
-#include "code_803B050.h"
 #include "code_8096AF8.h"
 #include "constants/input.h"
 #include "input.h"

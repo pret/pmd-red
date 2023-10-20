@@ -231,7 +231,8 @@ gUnknown_203B314: /* 203B314 (sub_802F73C - sub_802FA50) */
 gUnknown_203B3FC: /* 203B3FC (sub_803B050 - sub_803B284) */
 	.space 0x4
 
-.include "src/personality_test.o"
+.include "src/personality_test1.o"
+.include "src/personality_test2.o"
 .include "src/code_803D0D8.o"
 	.space 0x3
 
