@@ -1,7 +1,8 @@
 #ifndef GUARD_CONSTANTS_PERSONALITY_TEST_H
 #define GUARD_CONSTANTS_PERSONALITY_TEST_H
 
-enum NaturePersonalities {
+enum NaturePersonalities
+{
     HARDY,
     DOCILE,
     BRAVE,
@@ -25,4 +26,4 @@ enum NaturePersonalities {
 
 #define BRAVE_2B_TRIGGER 99
 
-#endif
+#endif // GUARD_CONSTANTS_PERSONALITY_TEST_H

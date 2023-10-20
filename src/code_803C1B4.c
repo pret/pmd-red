@@ -1,5 +1,4 @@
 #include "global.h"
-#include "globaldata.h"
 #include "dungeon.h"
 
 u32 sub_803C1B4(DungeonLocation *dungeon, u8 r1)

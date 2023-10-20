@@ -7,6 +7,7 @@
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
+#include "pokemon_mail.h"
 #include "structs/str_802C39C.h"
 #include "structs/str_wonder_mail.h"
 #include "text1.h"

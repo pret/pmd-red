@@ -2,10 +2,10 @@
 #include "globaldata.h"
 #include "code_80118A4.h"
 #include "code_802DE84.h"
-#include "code_803B050.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
+#include "pokemon_mail.h"
 #include "text1.h"
 #include "text2.h"
 

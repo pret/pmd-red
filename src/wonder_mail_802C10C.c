@@ -7,6 +7,7 @@
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
+#include "pokemon_mail.h"
 #include "text1.h"
 #include "text2.h"
 #include "wonder_mail_802C10C.h"

@@ -7,6 +7,7 @@
 #include "code_8097670.h"
 #include "constants/main_menu.h"
 #include "constants/wonder_mail.h"
+#include "dungeon.h"
 #include "event_flag.h"
 #include "file_system.h"
 #include "ground_main.h"
@@ -50,7 +51,6 @@ void DrawLoadScreenText(void);
 void sub_80397B4(void);
 
 extern void sub_80920D8(u8 *);
-extern void PrintDungeonLocationtoBuffer(u8 *, DungeonLocation *);
 
 const UnkTextStruct2 gUnknown_80E75F8 = {
    0x00, 0x00, 0x00, 0x00,
