@@ -1,7 +1,6 @@
 #include "global.h"
 #include "constants/dungeon.h"
 #include "pokemon.h"
-#include "wonder_mail.h"
 #include "code_80958E8.h"
 #include "dungeon.h"
 #include "exclusive_pokemon.h"
@@ -269,12 +268,12 @@ bool32 sub_80973F4(s16 param_1)
     return val;
 }
 
-void sub_8097418(s16 index,u32 param_2)
+void sub_8097418(s16 index,bool32 param_2)
 {
   int index_s32 = index;
-  u8 param_2_u8 = param_2;
+  bool8 param_2_u8 = param_2;
   if (index_s32 != 0xd) {
-    if ((param_2_u8 != 0) && (sub_800199C(0,0x2c,index_s32,0), index_s32 < 0x1f)) {
+    if ((param_2_u8) && (sub_800199C(0,0x2c,index_s32,0), index_s32 < 0x1f)) {
       MissionText *mt = &gStoryMissionText[index_s32];
       if (mt->unk4 != 0xFF) {
         sub_8097FA8(mt->unk4);

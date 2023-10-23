@@ -1,10 +1,12 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_800558C.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "constants/colors.h"
 #include "constants/input.h"
+#include "input.h"
 #include "menu_input.h"
 #include "sprite.h"
 #include "text_util.h"
@@ -24,7 +26,6 @@ static void sub_801332C(s16 *);
 static void sub_8013470(MenuInputStruct *);
 static bool8 sub_8013DD0(unkStructFor8013AA0 *);
 
-ALIGNED(4) static const char fill_save7[] = _("pksdir0");
 const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
 u32 sub_8012A64(MenuInputStructSub *r0, s32 r1)

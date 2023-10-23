@@ -4,8 +4,8 @@
 #include "code_8094F88.h"
 #include "items.h"
 #include "pokemon.h"
-#include "wonder_mail.h"
 #include "structs/menu.h"
+#include "structs/str_wonder_mail.h"
 
 // size: 0x568
 typedef struct WonderMailStruct_203B33C

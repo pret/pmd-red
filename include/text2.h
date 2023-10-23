@@ -44,6 +44,7 @@ void sub_8007E20(u32, u32, u32, u32, u32, u8 *, u32);
 // text.s
 extern struct unkChar *GetCharacter(u32);
 extern void InitGraphics(void);
+extern void sub_800836C(u32, u8 *, u32);
 extern void sub_800898C(void);
 extern void sub_80089AC(const UnkTextStruct2 *, UnkTextStruct2_sub *);
 extern void sub_8008C54(u32);

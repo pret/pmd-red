@@ -1,20 +1,21 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
-#include "code_803B050.h"
 #include "code_8094F88.h"
 #include "code_80958E8_1.h"
 #include "code_80972F4.h"
 #include "code_80A26CC.h"
 #include "constants/mailbox.h"
 #include "constants/wonder_mail.h"
+#include "input.h"
 #include "items.h"
 #include "memory.h"
 #include "menu_input.h"
+#include "pokemon_mail.h"
 #include "post_office_guide2.h"
 #include "text1.h"
 #include "text2.h"
-#include "wonder_mail.h"
 
 extern u8 gUnknown_202DE58[];
 

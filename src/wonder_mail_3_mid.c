@@ -1,26 +1,25 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_802DE84.h"
 #include "code_802F204.h"
 #include "constants/input.h"
 #include "memory.h"
 #include "text1.h"
 #include "text2.h"
-#include "wonder_mail.h"
 #include "pokemon.h"
 #include "pokemon_mid.h"
 #include "rescue_team_info.h"
 #include "friend_area.h"
 #include "items.h"
 #include "menu_input.h"
-#include "code_802C39C.h"
+#include "structs/str_802C39C.h"
 #include "code_80130A8.h"
 #include "code_80118A4.h"
-#include "wonder_mail_3.h"
 #include "code_801B60C.h"
 #include "common_strings.h"
 #include "code_803B050.h"
-
-extern unkStruct_803B344 *sub_803B344(u8);
+#include "wonder_mail_802CDD4.h"
+#include "input.h"
 
 struct unkStruct_203B30C
 {
@@ -104,12 +103,6 @@ extern void sub_802F1E8(void);
 extern void sub_802F004();
 extern void sub_802F088();
 extern void sub_802F108(void);
-extern void sub_802CDD4(u32);
-extern void sub_802CED8(u32);
-extern void sub_802CFD0(void);
-extern u8 sub_802CEBC(void);
-extern u32 sub_802CE5C(u32);
-extern void sub_802CF14(void);
 extern void sub_802F6FC(void);
 extern void ProceedToNextRewardSceneState(void);
 extern void sub_802F300(void);
@@ -240,7 +233,6 @@ const UnkTextStruct2 gUnknown_80E072C = {
 ALIGNED(4) const u8 gUnknown_80E0744[] = "Dungeons";
 ALIGNED(4) const u8 gUnknown_80E0750[] =  {0x83, 0xC2};
 ALIGNED(4) const u8 gUnknown_80E0754[] = {0x83, 0xC0};
-ALIGNED(4) static const u8 sFill1[] = "pksdir0";
 
 u32 sub_802EF48(void)
 {
@@ -325,7 +317,7 @@ void sub_802F088(void)
             sub_802CDD4(0);
             break;
         case 1:
-            sub_802CED8(1);
+            sub_802CED8(TRUE);
             break;
         case 2:
             sub_802CFD0();
@@ -357,7 +349,7 @@ void sub_802F108(void)
 
 void sub_802F148(void)
 {
-    switch(sub_802CE5C(1))
+    switch(sub_802CE5C(TRUE))
     {
         case 0:
         case 1:
@@ -378,7 +370,7 @@ void sub_802F184(void)
     s32 menuAction;
 
     menuAction = 0;
-    sub_802CE5C(0);
+    sub_802CE5C(FALSE);
 
     if (sub_8012FD8(&gUnknown_203B30C->unk60) == 0) {
         sub_8013114(&gUnknown_203B30C->unk60, &menuAction);

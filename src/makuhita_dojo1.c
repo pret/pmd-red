@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801B60C.h"
@@ -6,6 +7,7 @@
 #include "common_strings.h"
 #include "constants/colors.h"
 #include "dungeon.h"
+#include "input.h"
 #include "makuhita_dojo1.h"
 #include "makuhita_dojo2.h"
 #include "memory.h"

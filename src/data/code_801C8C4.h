@@ -1,5 +1,3 @@
-ALIGNED(4) static const u8 sFill[] = _("pksdir0");
-
 static const UnkTextStruct2 sUnknown_80DBE3C = {
     0, 0, 0, 0,
     3,
@@ -8,6 +6,7 @@ static const UnkTextStruct2 sUnknown_80DBE3C = {
     0, 0,
     NULL
 };
+
 static const UnkTextStruct2 sUnknown_80DBE54 = {
     0, 0, 0, 0,
     6,

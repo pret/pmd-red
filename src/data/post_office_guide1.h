@@ -273,5 +273,3 @@ ALIGNED(4) static const u8 sDeletingMailExplanation[] =
     "That{APOSTROPHE}s why you{APOSTROPHE}ll need to delete old mail.{EXTRA_MSG}"
     " You can look through old\n"
     "mail at the {COLOR_1 LIGHT_BLUE}left counter{END_COLOR_TEXT_1} over there.");
-
-ALIGNED(4) static const u8 sFill[] = _("pksdir0");

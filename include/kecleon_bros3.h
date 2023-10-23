@@ -1,7 +1,7 @@
 #ifndef GUARD_KECLEON_BROS3_H
 #define GUARD_KECLEON_BROS3_H
 
-#include "input.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // size: 0xA0

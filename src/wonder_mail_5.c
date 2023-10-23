@@ -1,16 +1,18 @@
 #include "global.h"
+#include "globaldata.h"
+#include "code_800D090.h"
+#include "code_80118A4.h"
+#include "code_8094F88.h"
 #include "constants/wonder_mail.h"
+#include "dungeon.h"
+#include "input.h"
 #include "memory.h"
+#include "menu_input.h"
+#include "pokemon.h"
+#include "pokemon_mail.h"
+#include "structs/str_802C39C.h"
 #include "text1.h"
 #include "text2.h"
-#include "input.h"
-#include "dungeon.h"
-#include "pokemon.h"
-#include "code_8094F88.h"
-#include "code_800D090.h"
-#include "code_802C39C.h"
-#include "menu_input.h"
-#include "code_80118A4.h"
 
 struct unkStruct_203B324
 {
@@ -21,6 +23,7 @@ struct unkStruct_203B324
     UnkTextStruct2 *unk14;
     UnkTextStruct2 unk18[4];
 };
+
 static EWRAM_DATA_2 struct unkStruct_203B324 *gUnknown_203B324 = {0};
 
 extern unkStruct_203B480 *gUnknown_203B480;
@@ -48,10 +51,8 @@ const UnkTextStruct2 gUnknown_80E091C = {
 
 const u8 gUnknown_80E0934[] = "ID:";
 const u8 gUnknown_80E0938[] = "%-4d";
-static const u8 wonder_mail_fill[] = "pksdir0";
 
 extern void sub_8030DD4(void);
-extern void CreateRescueDescription(unkStruct_802C39C *);
 
 void sub_8030E2C(void);
 void sub_8030E48(void);

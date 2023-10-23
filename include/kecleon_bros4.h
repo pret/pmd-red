@@ -2,7 +2,7 @@
 #define GUARD_KECLEON_BROS4_H
 
 #include "constants/item.h"
-#include "input.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // size: 0xF4

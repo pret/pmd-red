@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "bg_palette_buffer.h"
 #include "code_800D090.h"
 #include "code_80130A8.h"
@@ -6,6 +7,7 @@
 #include "code_8097670.h"
 #include "constants/main_menu.h"
 #include "constants/wonder_mail.h"
+#include "dungeon.h"
 #include "event_flag.h"
 #include "file_system.h"
 #include "ground_main.h"
@@ -49,7 +51,6 @@ void DrawLoadScreenText(void);
 void sub_80397B4(void);
 
 extern void sub_80920D8(u8 *);
-extern void PrintDungeonLocationtoBuffer(u8 *, DungeonLocation *);
 
 const UnkTextStruct2 gUnknown_80E75F8 = {
    0x00, 0x00, 0x00, 0x00,
@@ -148,7 +149,6 @@ ALIGNED(4) const char gNumAdventurePlaceholder[] = "%d";
 ALIGNED(4) const char gHelperInfoPlaceholder[] = "%s (%s)";
 ALIGNED(4) const char gNoHelperText[] = "-----";
 ALIGNED(4) const char gClmkpatFileName[] = "clmkpat"; // clmkpat
-ALIGNED(4) const char load_screen_fill[] = "pksdir0";
 
 void CreateLoadScreen(u32 currMenu)
 {
@@ -410,4 +410,9 @@ bool8 IsQuickSave(void)
   else if (sub_8011C1C() == 2 && iVar1 == 0xf1207)
     isQuicksave = TRUE;
   return isQuicksave;
+}
+
+bool8 sub_8039880(void)
+{
+  return (CountMailType(WONDER_MAIL_TYPE_SOS) != 0 || CountMailType(WONDER_MAIL_TYPE_OKD) != 0 || sub_8011C1C() == 2);
 }

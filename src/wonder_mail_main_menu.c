@@ -1,7 +1,9 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
+#include "code_803B050.h"
 #include "code_801C8C4.h"
 #include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
@@ -10,11 +12,11 @@
 #include "input.h"
 #include "memory.h"
 #include "other_menus2.h"
+#include "save.h"
 #include "save_write.h"
 #include "text1.h"
 #include "text2.h"
-#include "wonder_mail.h"
-#include "wonder_mail_3.h"
+#include "wonder_mail_802D098.h"
 #include "wonder_mail_main_menu.h"
 
 #define SELECT_WONDER_MAIL_MODE_MAIN_SCREEN 0
@@ -34,60 +36,11 @@
 #define PASSWORD_INVALID 19
 #define PASSWORD_ENTRY_SCREEN 18
 
-extern const char Cancel_80E7D24[];
-extern const char Yes_80E7D2C[];
-
-const MenuItem gSelectWonderMailModeMainMenuItems[3] =
-{
-    {"Send", WONDER_MAIL_MODE_SEND},
-    {"Receive", WONDER_MAIL_MODE_RECEIVE},
-    {NULL, 0}
-};
-
-const MenuItem gSendWonderMailMainMenuItems[4] =
-{
-    {"Game Link cable", WONDER_MAIL_GAME_LINK},
-    {"Password", -1},
-    {"Cancel", 8},
-    {NULL, 0}
-
-};
-
-const MenuItem gReceiveWonderMailMainMenuItems[4] =
-{
-    {"Game Link cable", WONDER_MAIL_GAME_LINK},
-    {"Password", WONDER_MAIL_PASSWORD},
-    {"Cancel", 8},
-    {NULL, 0}
-};
-
-const MenuItem gUnknown_80E78F8[3] =
-{
-    {"Yes", 6},
-    {"Cancel", 0},
-    {NULL, 0}
-};
-
-
-#include "data/wonder_mail_main_menu.h"
-
-const MenuItem WonderMailMainUnused[3] =
-{
-    {Yes_80E7D2C, 1},
-    {Cancel_80E7D24, 0},
-    {NULL, 0},
-};
-
-ALIGNED(4) const char Cancel_80E7D24[] = "Cancel";
-ALIGNED(4) const char Yes_80E7D2C[] = "Yes";
-
-ALIGNED(4) const char wonder_mail_main_fill1[] = "pksdir0";
-
+// size: 0x49C
 struct unkStruct_203B3E8
 {
-    // size: 0x49C
-    u8 state; // state variable?
-    u8 PasswordEntryBuffer[PASSWORD_BUFFER_SIZE]; // Wonder Mail Buffer...
+    /* 0x0 */ u8 state;
+    /* 0x1 */ u8 PasswordEntryBuffer[PASSWORD_BUFFER_SIZE]; // Wonder Mail Buffer...
     union UNK38
     {
         WonderMail decodedMail; // 0x14
@@ -96,27 +49,24 @@ struct unkStruct_203B3E8
     u8 fill68[0x1EC - 0x68];
     UnkTextStruct2 unk1EC[4];
     u32 unk24C;
-    u32 wonderMailStatus;
-
+    /* 0x250 */ u32 wonderMailStatus;
     unkStruct_803B344 unk254;
-
     unkStruct_803B344 unk308;
     u8 unk3BC;
     u8 fill3BD[0x3C0 - 0x3BD];
-
     unkStruct_803B344 unk3C0;
-
     WonderMail unk474;
     u8 **unk488;
     u8 *unk48C;
-    s32 wonderMailMethod;
-    u32 wonderMailMode;
-    bool8 wonderMailAccepted;
+    /* 0x490 */ s32 wonderMailMethod;
+    /* 0x494 */ u32 wonderMailMode;
+    /* 0x498 */ bool8 wonderMailAccepted;
 };
 
 EWRAM_DATA_2 struct unkStruct_203B3E8 *gUnknown_203B3E8 = {0};
 
-extern u32 sub_8011C1C(void);
+#include "data/wonder_mail_main_menu.h"
+
 extern void SetWonderMailMainMenuState(u8);
 extern void sub_8030DE4(void);
 extern void sub_803084C(void);
@@ -125,16 +75,7 @@ extern void sub_8031E10(void);
 extern u8 sub_800D588(void);
 extern void sub_802EF48(void);
 
-
-extern unkStruct_803B344 *sub_803B344(u8);
-
-
-
 extern s32 sub_8037B28(u32);
-
-extern u32 sub_802D0E0();
-extern bool8 GetWonderMailAccepted();
-extern void sub_802D184();
 
 extern bool8 DecodeWonderMailPassword(u8 *, WonderMail *);
 extern bool8 IsValidWonderMail(WonderMail *WonderMailData);
@@ -154,12 +95,6 @@ void ReturnToReceiveWonderMailMainScreen(void);
 void AdvanceToPasswordEntryScreen(void);
 void HandlePasswordEntryScreen(void);
 void HandleInvalidPasswordMenu(void);
-
-
-bool8 sub_8039880(void)
-{
-  return (CountMailType(WONDER_MAIL_TYPE_SOS) != 0 || CountMailType(WONDER_MAIL_TYPE_OKD) != 0 || sub_8011C1C() == 2);
-}
 
 bool8 CreateWonderMailMenu(void)
 {

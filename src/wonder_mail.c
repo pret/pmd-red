@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_8023868.h"
@@ -7,6 +8,7 @@
 #include "code_80A26CC.h"
 #include "constants/communication_error_codes.h"
 #include "cpu.h"
+#include "input.h"
 #include "items.h"
 #include "main_menu1.h"
 #include "memory.h"
@@ -169,104 +171,10 @@ enum FriendRescueStates
     DEFAULT_FALLBACK_STATE = 61
 };
 
-const MenuItem gUnknown_80DD970[] =
-{
-    {"Receive SOS Mail", 0x0},
-    {"Leave for Rescue", 0x1},
-    {"Send A-OK Mail", 0x2},
-    {"Delete Mail", 0x3},
-    {"Cancel", 0xA},
-    {NULL, 0xA}
-};
-
-const MenuItem gUnknown_80DD9EC[] =
-{
-    {"Delete SOS Mail", 0x5},
-    {"Delete A-OK Mail", 0x6},
-    {"Delete All Mail", 0x7},
-    {"Cancel", 0xA},
-    {NULL, 0xA}
-};
-
-const MenuItem gUnknown_80DDA48[] =
-{
-    {"Yes", 0x8},
-    {"Cancel", 0xA},
-    {NULL, 0xA}
-};
-
-const MenuItem gUnknown_80DDA64[] =
-{
-    {"Yes", 0x8},
-    {"No", 0x9},
-    {NULL, 0xA}
-};
-
-const MenuItem gUnknown_80DDA80[] =
-{
-    {"Yes", 0x8},
-    {"No", 0x9},
-    {"Cancel", 0xA},
-    {NULL, 0xA}
-};
-
-const MenuItem gUnknown_80DDAA0[] =
-{
-    {SendWOPokemon, 0x12},
-    {"Cancel", 0xA},
-    {NULL, 0xA},
-};
-
-ALIGNED(4) const u8 SendWOPokemon[] = _("Send w/o Pokémon");
-
-const UnkTextStruct2 gUnknown_80DDACC =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x16, 0x07,
-    0x06, 0x04,
-    0x04, 0x00,
-    NULL
-};
-
-const UnkTextStruct2 gUnknown_80DDAE4 =
-{
-    0x00, 0x00, 0x00, 0x00,
-    0x03,
-    0x16, 0x06,
-    0x06, 0x04,
-    0x04, 0x00,
-    NULL
-};
-
-const MenuItem gUnknown_80DDAFC[] =
-{
-    {"Confirm", 0xB},
-    {"Info", 0xC},
-    {NULL, 0xA},
-};
-
-const MenuItem gUnknown_80DDB24[] =
-{
-    {"Game Link cable", 0xD},
-    {"Password", 0xF},
-    {"Cancel", 0xA},
-    {NULL, 0xA},
-};
-
-const MenuItem gUnknown_80DDB60[] =
-{
-    {SendPokemon_80DDB98, 0x11},
-    {DontSendPokemon_80DDB80, 0x12},
-    {"Cancel", 0xA},
-    {NULL, 0xA},
-};
-
-ALIGNED(4) const u8 DontSendPokemon_80DDB80[] = _("Don{APOSTROPHE}t Send Pokémon");
-ALIGNED(4) const u8 SendPokemon_80DDB98[] = _("Send Pokémon");
-
 #include "data/wonder_mail_1.h"
 
+
+void SetFriendRescueCounterState(u32 r0);
 
 u32 sub_8027F88(void)
 {

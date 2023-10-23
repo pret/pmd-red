@@ -1,6 +1,8 @@
 #ifndef GUARD_CODE_80972F4_H
 #define GUARD_CODE_80972F4_H
 
+#include "structs/str_wonder_mail.h"
+
 // size: 0x8
 typedef struct MissionText
 {
@@ -15,6 +17,8 @@ const u8 *GetCurrentMissionText(s16 index);
 // TODO: this should probably be bool8 but can't get a match just yet
 bool32 IsMazeCompleted(s16 mazeIndex);
 
+bool8 sub_8096F50(WonderMail *mail);
+void sub_8097418(s16 index, bool32);
 bool8 sub_8097504(s16 mazeIndex);
 const u8 *sub_80975DC(u32);
 

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801BEEC.h"
@@ -10,6 +11,7 @@
 #include "felicity_bank.h"
 #include "gulpin_shop.h"
 #include "gulpin_shop_801FB50.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "moves.h"

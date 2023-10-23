@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "decompress.h"
 
 #define MAGIC_SIR0 0x30524953

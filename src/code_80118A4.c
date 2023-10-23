@@ -11,7 +11,6 @@
 #include "constants/bg_music.h"
 #include "play_time.h"
 #include "bg_control.h"
-#include "input.h"
 #include "config.h"
 #include "game_options.h"
 #include "sprite.h"

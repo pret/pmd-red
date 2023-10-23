@@ -1,8 +1,8 @@
 #ifndef GUARD_CODE_802DE84_H
 #define GUARD_CODE_802DE84_H
 
-#include "code_802C39C.h"
-#include "input.h"
+#include "structs/str_802C39C.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // size: 0x7C

@@ -6,7 +6,6 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "game_options.h"
-#include "input.h"
 #include "sprite.h"
 
 extern void nullsub_8(u8);

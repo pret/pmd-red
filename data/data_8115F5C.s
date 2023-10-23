@@ -100,9 +100,7 @@ gUnknown_811617C: @ 811617C
 
 .global gUnknown_8116180
 gUnknown_8116180: @ 8116180
-.string "{COLOR_1 YELLOW_5}"
-.byte 0x87, 0x45
-.string "{END_COLOR_TEXT_1}\0"
+.string "{COLOR_1 YELLOW_5}{SPEECH_BUBBLE}{END_COLOR_TEXT_1}\0"
 
 .global gUnknown_8116188
 gUnknown_8116188: @ 8116188
@@ -116,171 +114,172 @@ gUnknown_8116190: @ 8116190
 
 .global gUnknown_81161A8
 gUnknown_81161A8: @ 81161A8
-.byte 0x01, 0x00, 0x00, 0x00
-.byte 0x00, 0x00, 0x00, 0x00
+.4byte 1
+.4byte 0
 .4byte sub_809C39C
 .4byte sub_801D0DC
 
 .global gUnknown_81161B8
 gUnknown_81161B8: @ 81161B8
-.byte 0x01, 0x00, 0x00, 0x00
-.byte 0x00, 0x00, 0x00, 0x00
+.4byte 1
+.4byte 0
 .4byte sub_809C3D8
 .4byte sub_801D0DC
 
 .global gUnknown_81161C8
 gUnknown_81161C8: @ 81161C8
-.byte 0x01, 0x00, 0x00, 0x00
-.byte 0x00, 0x00, 0x00, 0x00
+.4byte 1
+.4byte 0
 .4byte DeleteKangaskhanStorage
 .4byte KangaskhanStorageCallback
 
 .global gUnknown_81161D8
 gUnknown_81161D8: @ 81161D8
-.byte 0x01, 0x00, 0x00, 0x00
+.4byte 1
 .4byte sub_8017E1C
 .4byte sub_8017EF4
 .4byte sub_8017E54
 
 .global gUnknown_81161E8
 gUnknown_81161E8: @ 81161E8
-.byte 0x01, 0x00, 0x00, 0x00
-.byte 0x00, 0x00, 0x00, 0x00
+.4byte 1
+.4byte 0
 .4byte DestroyFelicityBank
 .4byte FelicityBankCallback
 
 .global gUnknown_81161F8
 gUnknown_81161F8: @ 81161F8
-.byte 0x01, 0x00, 0x00, 0x00
-.byte 0x00, 0x00, 0x00, 0x00
+.4byte 1
+.4byte 0
 .4byte DeleteKecleonBros
 .4byte KecleonBrosCallback
 
 .global gUnknown_8116208
 gUnknown_8116208: @ 8116208
-.byte 0x01, 0x00, 0x00, 0x00
-.byte 0x00, 0x00, 0x00, 0x00
+.4byte 1
+.4byte 0
 .4byte sub_801FD7C
 .4byte sub_801FC40
 
 .global gUnknown_8116218
 gUnknown_8116218: @ 8116218
-.byte 0x01, 0x00, 0x00, 0x00
-.byte 0x00, 0x00, 0x00, 0x00
+.4byte 1
+.4byte 0
 .4byte sub_8021D1C
 .4byte sub_8021C5C
 
 .global gUnknown_8116228
 gUnknown_8116228: @ 8116228
-.byte 0x01, 0x00, 0x00, 0x00
+.4byte 1
 .4byte sub_8027F88
 .4byte sub_809C504
 .4byte sub_8028078
 
 .global gUnknown_8116238
 gUnknown_8116238: @ 8116238
-.byte 0x01, 0x00, 0x00, 0x00
+.4byte 1
 .4byte sub_802B2D4
 .4byte sub_802B3B8
 .4byte sub_802B358
 
 .global gUnknown_8116248
 gUnknown_8116248: @ 8116248
-.byte 0x01, 0x00, 0x00, 0x00
+.4byte 1
 .4byte CreateThankYouMailPelipper
 .4byte CleanThankYouMailPelipper
 .4byte ThankYouMailPelipperCallback
 
 .global gUnknown_8116258
 gUnknown_8116258: @ 8116258
-.byte 0x01, 0x00, 0x00, 0x00
-.byte 0x00, 0x00, 0x00, 0x00
+.4byte 1
+.4byte 0
 .4byte CleanHelperPelipper
 .4byte HelperPelipperCallback
 
 .global gUnknown_8116268
 gUnknown_8116268: @ 8116268
-.byte 0x01, 0x00, 0x00, 0x00
+.4byte 1
 .4byte sub_802E864
 .4byte sub_809C550
 .4byte sub_802E890
 
 .global gUnknown_8116278
 gUnknown_8116278: @ 8116278
-.byte 0x01, 0x00, 0x00, 0x00
+.4byte 1
 .4byte sub_802DFB0
 .4byte sub_802E06C
 .4byte sub_802DFD8
 
 .global gUnknown_8116288
 gUnknown_8116288: @ 8116288
-.byte 0x01, 0x00, 0x00, 0x00
-.byte 0x00, 0x00, 0x00, 0x00
+.4byte 1
+.4byte 0
 .4byte sub_802DC00
 .4byte sub_802DBD4
 
 .global gUnknown_8116298
 gUnknown_8116298: @ 8116298
-.byte 0x01, 0x00, 0x00, 0x00
-.byte 0x00, 0x00, 0x00, 0x00
+.4byte 1
+.4byte 0
 .4byte MakuhitaDojo_Delete
 .4byte sub_802FE58
 
 .global gUnknown_81162A8
 gUnknown_81162A8: @ 81162A8
-.byte 0x01, 0x00, 0x00, 0x00
-.byte 0x00, 0x00, 0x00, 0x00
+.4byte 1
+.4byte 0
 .4byte MakuhitaDojo_Delete
 .4byte sub_802FE58
 
 .global gUnknown_81162B8
 gUnknown_81162B8: @ 81162B8
-.byte 0x01, 0x00, 0x00, 0x00
-.byte 0x00, 0x00, 0x00, 0x00
-.4byte MakuhitaDojo_Delete
-.4byte sub_802FE58
+        .4byte 1
+        .4byte 0
+        .4byte MakuhitaDojo_Delete
+        .4byte sub_802FE58
 
 .global gUnknown_81162C8
 gUnknown_81162C8: @ 81162C8
-.byte 0x00, 0x00, 0x00, 0x00
-.4byte CreateTestTracker
-.4byte sub_809C464
-.4byte HandleTestTrackerState
+        .4byte 0
+        .4byte CreateTestTracker
+        .4byte sub_809C464
+        .4byte HandleTestTrackerState
 
 .global gUnknown_81162D8
 gUnknown_81162D8: @ 81162D8
-.byte 0x00, 0x00, 0x00, 0x00
-.4byte sub_8035678
-.4byte sub_809C478
-.4byte sub_80356A0
+        .4byte 0
+        .4byte sub_8035678
+        .4byte sub_809C478
+        .4byte sub_80356A0
 
 .global gUnknown_81162E8
 gUnknown_81162E8: @ 81162E8
-.byte 0x00, 0x00, 0x00, 0x00
-.byte 0x00, 0x00, 0x00, 0x00
-.4byte sub_809C4B0
-.4byte sub_803B120
+        .4byte 0
+        .4byte 0
+        .4byte sub_809C4B0
+        .4byte sub_803B120
 
 .global gUnknown_81162F8
 gUnknown_81162F8: @ 81162F8
-.byte 0x01, 0x00, 0x00, 0x00
-.byte 0x00, 0x00, 0x00, 0x00
-.4byte sub_809C414
-.4byte sub_8025354
+        .4byte 1
+        .4byte 0
+        .4byte sub_809C414
+        .4byte sub_8025354
 
 .global gUnknown_8116308
 gUnknown_8116308: @ 8116308
-.byte 0x00, 0x00, 0x00, 0x00
-.byte 0x00, 0x00, 0x00, 0x00
-.byte 0x00, 0x00, 0x00, 0x00
-.4byte sub_809CD48
+        .4byte 0
+        .4byte 0
+        .4byte 0
+        .4byte sub_809CD48
 
 .global gUnknown_8116318
 gUnknown_8116318: @ 8116318
-@ replacing .incbin "baserom.gba", 0x116318, 0xA4
-.byte 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-.4byte sub_801B72C
-.4byte sub_801B6AC
+        .4byte 1
+        .4byte 0
+        .4byte sub_801B72C
+        .4byte sub_801B6AC
+
 .byte 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00, 0x70, 0x6b, 0x73, 0x64
 .byte 0x69, 0x72, 0x30, 0x00
 
@@ -305,9 +304,16 @@ gUnknown_8116390: @ 8116390
 .global gUnknown_81163BC
 gUnknown_81163BC: @ 81163BC
 @ replacing .incbin "baserom.gba", 0x1163BC, 0x28
-.byte 0x37, 0x00, 0x00, 0x00, 0x42, 0x00, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x00, 0x69, 0x00, 0xf4, 0x01
-.byte 0x3a, 0x00, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x00, 0x69, 0x00, 0xf4, 0x01, 0x14, 0x00, 0x00, 0x00
-.byte 0x3f, 0x00, 0x00, 0x00, 0x69, 0x00, 0x10, 0x27
+.byte 0x37, 0x00, 0x00, 0x00
+.byte 0x42, 0x00, 0x00, 0x00
+.byte 0x3f, 0x00, 0x00, 0x00
+.byte 0x69, 0x00, 0xf4, 0x01
+.byte 0x3a, 0x00, 0x00, 0x00
+.byte 0x3f, 0x00, 0x00, 0x00
+.byte 0x69, 0x00, 0xf4, 0x01
+.byte 0x14, 0x00, 0x00, 0x00
+.byte 0x3f, 0x00, 0x00, 0x00
+.byte 0x69, 0x00, 0x10, 0x27
 
 .global gUnknown_81163E4
 gUnknown_81163E4: @ 81163E4

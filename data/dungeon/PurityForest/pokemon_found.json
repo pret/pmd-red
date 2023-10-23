@@ -2299,7 +2299,7 @@
                     "probability": 800
                 },
                 {
-                    "species": "MONSTER_ILLIMISE",
+                    "species": "MONSTER_ILLUMISE",
                     "level": 20,
                     "probability": 1200
                 },
@@ -2349,7 +2349,7 @@
                     "probability": 2105
                 },
                 {
-                    "species": "MONSTER_ILLIMISE",
+                    "species": "MONSTER_ILLUMISE",
                     "level": 20,
                     "probability": 1579
                 },
@@ -2404,7 +2404,7 @@
                     "probability": 1333
                 },
                 {
-                    "species": "MONSTER_ILLIMISE",
+                    "species": "MONSTER_ILLUMISE",
                     "level": 20,
                     "probability": 1000
                 },
@@ -2459,7 +2459,7 @@
                     "probability": 1380
                 },
                 {
-                    "species": "MONSTER_ILLIMISE",
+                    "species": "MONSTER_ILLUMISE",
                     "level": 20,
                     "probability": 1034
                 },

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_8094D28.h"
 #include "code_8094F88.h"
 #include "constants/wonder_mail.h"
 #include "dungeon.h"
@@ -24,9 +25,6 @@ extern void SaveDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
 extern void RestoreDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
 extern void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924* a1, struct unkPokeSubStruct_C* unkC);
 extern void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
-
-extern s32 sub_8094E4C(void);
-extern void sub_8094D28(s32);
 
 void sub_80950BC(void)
 {

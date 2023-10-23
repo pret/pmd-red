@@ -239,26 +239,33 @@
 'カ' = 83 4A
 'ナ' = 83 69
 
-
+UNK_ICON_81_69 = 81 69
+UNK_ICON_81_6A = 81 6A
 RIGHT_ARROW = 81 A8
 LEFT_ARROW = 81 A9
 UP_ARROW = 81 AA
 
 POKE = 83 BF 83 C4 @ This is actually two characters which can render separately; may need to be split eventually.
+UNK_ICON_83_C0 = 83 C0
+UNK_ICON_83_C1 = 83 C1
+UNK_ICON_83_C2 = 83 C2
+UNK_ICON_83_C3 = 83 C3
+NDS_Y_BUTTON = 83 C7
+
+R_BUTTON = 84 86
+UNK_ICON_84_87 = 84 87
+
 UNK_ICON_40 = 87 40
 STAR_BULLET = 87 42
 SPEECH_BUBBLE = 87 45
 TM = 87 4E
 ORB = 87 4F
-
 A_BUTTON = 87 50
 B_BUTTON = 87 51
-L_BUTTON = 87 74
-R_BUTTON = 84 86
-SELECT_BUTTON = 87 72 87 73
-START_BUTTON = 87 53 87 71
 DPAD = 87 52
-NDS_Y_BUTTON = 83 c7
+START_BUTTON = 87 53 87 71
+SELECT_BUTTON = 87 72 87 73
+L_BUTTON = 87 74
 
 @ Character codes escaped with a '~'.
 DOUBLE_QUOTE = 7E 32 32 @ ~22 - double quote (") is a best guess until we find it in strings that are actually rendered
@@ -266,6 +273,7 @@ APOSTROPHE = 7E 32 37 @ ~27
 COMMA = 7E 32 63 @ ~2c
 QUOTE_START = 7E 39 33 @ ~93
 QUOTE_END = 7E 39 34 @ ~94
+UNK_95 = 7E 39 35 @ ~95 - Seems to be a special (?) symbol
 
 @ Placeholders for message arguments to swap out for names within strings.
 ARG_VALUE_0 = 24 64 30 @ $d0

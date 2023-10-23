@@ -7,7 +7,6 @@
 #include "event_flag.h"
 #include "ground_main.h"
 #include "ground_map_2.h"
-#include "input.h"
 #include "play_time.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};

@@ -7,6 +7,7 @@
 #include "rescue_team_info.h"
 #include "pokemon.h"
 #include "items.h"
+#include "code_8094F88.h"
 #include "code_80958E8.h"
 
 enum

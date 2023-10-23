@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/wonder_mail.h"
 #include "constants/colors.h"
 #include "input.h"
@@ -46,7 +47,6 @@ const UnkTextStruct2 gUnknown_80E1FC4 = {
 };
 
 ALIGNED(4) const u8 gUnknown_80E1FDC[] = "Password";
-ALIGNED(4) static const u8 fill0[] = "pksdir0";
 
 extern void sub_803D2C0(u8 *, unkStruct_203B480 *);
 

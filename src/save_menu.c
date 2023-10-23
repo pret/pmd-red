@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_80130A8.h"
 #include "constants/main_menu.h"
+#include "input.h"
 #include "main_menu1.h"
 #include "memory.h"
 #include "menu_input.h"
@@ -112,8 +113,6 @@ ALIGNED(4) const u8 sUnknown_80E715C[] = _("{CENTER_ALIGN}{COLOR_1 RED}Deletion 
 ALIGNED(4) const u8 gUnknown_80E7178[] = _("{CENTER_ALIGN}The data could not be written.\n"
                                            "{CENTER_ALIGN}Please turn off the power and remove\n"
                                            "{CENTER_ALIGN}and reinsert the DS Card.");
-
-ALIGNED(4) static const u8 save_menu_fill0[] = "pksdir0";
 
 extern void sub_8038440();
 extern void sub_80384D0();

@@ -42,6 +42,7 @@ u32 GetMaxItemsAllowed(u8 dungeon);
 s8 GetRescuesAllowed(u8 dungeon);
 bool8 HasCheckpoint(u8 dungeon);
 void PrintYellowDungeonNametoBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
+void PrintDungeonLocationtoBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 
 u32 sub_80908D8(DungeonLocation *dungeon);
 u8 sub_8090910(DungeonLocation *dungeon, u32 param_2);

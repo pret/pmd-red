@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
 #include "code_8023144.h"
@@ -6,6 +7,7 @@
 #include "constants/input.h"
 #include "exclusive_pokemon.h"
 #include "friend_area.h"
+#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon_3.h"

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
@@ -8,6 +9,7 @@
 #include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
 #include "cpu.h"
+#include "input.h"
 #include "items.h"
 #include "main_menu1.h"
 #include "memory.h"
@@ -20,7 +22,7 @@
 #include "text_util.h"
 #include "text1.h"
 #include "text2.h"
-#include "wonder_mail.h"
+#include "thank_you_wonder_mail.h"
 
 static EWRAM_DATA_2 WonderMailStruct_203B2C4 *sUnknown_203B2C4 = {0};
 

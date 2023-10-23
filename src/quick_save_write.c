@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_80130A8.h"
 #include "memory.h"
 #include "quick_save_write.h"
@@ -17,9 +18,9 @@ void PrepareQuickSaveWrite(u8 *r0, u32 r1, u8 r2)
     sQuickSaveWrite->state = 0;
 
     if (sQuickSaveWrite->unkC != 0)
-        sub_80141B4(gUnknown_80D45AC, 0, 0, 0x20);
+        sub_80141B4(sUnknown_80D45AC, 0, 0, 0x20);
     else
-        sub_80141B4(gUnknown_80D45AC, 0, 0, 0x20);
+        sub_80141B4(sUnknown_80D45AC, 0, 0, 0x20);
 }
 
 u32 WriteQuickSave(void)
@@ -48,19 +49,19 @@ u32 WriteQuickSave(void)
                     sub_80121E0(987655);
 
                     if (sQuickSaveWrite->unkC != 0)
-                        sub_80141B4(gUnknown_80D45F4, 0, 0, 0x301);
+                        sub_80141B4(sUnknown_80D45F4, 0, 0, 0x301);
                     else
-                        sub_80141B4(gUnknown_80D4668, 0, 0, 0x301);
+                        sub_80141B4(sUnknown_80D4668, 0, 0, 0x301);
 
                     sQuickSaveWrite->state = 3;
                     break;
                 case SAVE_NOT_WRTTEN:
-                    sub_80141B4(gSaveNotWritten2, 0, 0, 0);
+                    sub_80141B4(sSaveNotWritten, 0, 0, 0);
                     sQuickSaveWrite->state = 4;
                     break;
                 default:
                     sub_80121E0(987657);
-                    sub_80141B4(gSaveFailed2, 0, 0, 0x301);
+                    sub_80141B4(sSaveFailed, 0, 0, 0x301);
                     sQuickSaveWrite->state = 3;
                     break;
             }

@@ -1,6 +1,5 @@
 #include "global.h"
 #include "code_800C9CC.h"
-#include "input.h"
 #include "random.h"
 #include "reg_control.h"
 

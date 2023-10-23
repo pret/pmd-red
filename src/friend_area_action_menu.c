@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
 #include "code_801BEEC.h"
@@ -11,6 +12,7 @@
 #include "constants/dungeon.h"
 #include "event_flag.h"
 #include "friend_area_action_menu.h"
+#include "input.h"
 #include "items.h"
 #include "kecleon_bros4.h"
 #include "memory.h"

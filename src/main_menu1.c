@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "adventure_log_menu.h"
 #include "code_8098BDC.h"
 #include "constants/item.h"
@@ -7,6 +8,7 @@
 #include "ds_menus.h"
 #include "friend_rescue.h"
 #include "game_options.h"
+#include "input.h"
 #include "load_screen.h"
 #include "main_menu1.h"
 #include "main_menu2.h"

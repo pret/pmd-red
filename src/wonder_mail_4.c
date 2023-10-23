@@ -1,17 +1,18 @@
-#include "constants/input.h"
 #include "global.h"
+#include "globaldata.h"
+#include "code_80118A4.h"
+#include "code_8094F88.h"
+#include "constants/input.h"
+#include "constants/wonder_mail.h"
+#include "input.h"
+#include "items.h"
+#include "memory.h"
+#include "menu_input.h"
+#include "pokemon.h"
+#include "pokemon_mail.h"
+#include "structs/str_802C39C.h"
 #include "text1.h"
 #include "text2.h"
-#include "input.h"
-#include "memory.h"
-#include "items.h"
-#include "pokemon.h"
-#include "code_8094F88.h"
-#include "constants/wonder_mail.h"
-#include "code_802C39C.h"
-#include "menu_input.h"
-#include "code_80118A4.h"
-#include "code_803B050.h"
 
 struct unkStruct_203B320
 {
@@ -75,7 +76,6 @@ ALIGNED(4) const u8 ToDoList[] = "To-Do List";
 ALIGNED(4) const u8 SOSMail[] = "SOS Mail";
 ALIGNED(4) const u8 RequestList[] = "Request List";
 ALIGNED(4) const u8 SOSList[] = "SOS List";
-static const u8 wonder_mail_fill[] = "pksdir0";
 
 extern bool8 HasNoWonderMailType(u32);
 extern s32 sub_8030A74(void);

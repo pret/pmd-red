@@ -4,6 +4,7 @@
 #include "constants/main_menu.h"
 #include "debug_menu1.h"
 #include "friend_area.h"
+#include "input.h"
 #include "main_menu1.h"
 #include "memory.h"
 #include "menu_input.h"

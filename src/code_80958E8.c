@@ -1,22 +1,21 @@
 #include "global.h"
-#include "memory.h"
-#include "items.h"
-#include "friend_area.h"
+#include "code_803C1D0.h"
+#include "code_8094F88.h"
+#include "code_80958E8.h"
+#include "code_80958E8_1.h"
 #include "constants/friend_area.h"
-#include "wonder_mail.h"
 #include "constants/wonder_mail.h"
 #include "dungeon.h"
-#include "code_80958E8.h"
+#include "friend_area.h"
+#include "items.h"
+#include "mailbox_8095F8C.h"
+#include "memory.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
-#include "code_8094F88.h"
-#include "mailbox_8095F8C.h"
+#include "pokemon_mail.h"
 
 extern bool8 sub_809017C(DungeonLocation *);
-extern u8 sub_803C1D0(DungeonLocation *, u8);
-extern bool8 sub_803C0DC(s16);
 extern void ResetPelipperBoardSlot(u8);
-extern void ResetJobSlot(u8);
 extern bool8 ValidateWonderMail(WonderMail *);
 
 static EWRAM_DATA unkStruct_203B490 sUnknown_2039448 = {0};

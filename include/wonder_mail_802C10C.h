@@ -2,7 +2,7 @@
 #define GUARD_WONDER_MAIL_802C10C_H
 
 #include "constants/mailbox.h"
-#include "input.h"
+#include "structs/menu.h"
 #include "structs/str_text.h"
 
 // size: 0xA8
