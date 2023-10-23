@@ -200,7 +200,7 @@ s32 CountJobsinDungeon(u8 dungeon)
   return count;
 }
 
-bool8 sub_8096A08(u8 dungeon, u8 *param_2)
+bool8 sub_8096A08(u8 dungeon, PokemonStruct1 *pokemon)
 {
   WonderMail *mail;
   s32 index;
@@ -224,7 +224,7 @@ bool8 sub_8096A08(u8 dungeon, u8 *param_2)
                 temp = 0x100;
                 local_14 |= temp;
 
-                sub_808CFD0(param_2,mail->clientSpecies,NULL,0,&local_14,NULL);
+                sub_808CFD0(pokemon,mail->clientSpecies,NULL,0,(DungeonLocation *) &local_14,NULL);
                 return TRUE;
             }
   }

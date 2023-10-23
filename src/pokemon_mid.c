@@ -404,14 +404,16 @@ s16 GetPokemonEvolveFrom(s16 index)
     return gMonsterParameters[index].preEvolution.evolveFrom;
 }
 
-u16 GetBaseOffensiveStat(s16 index, u32 r1)
+u16 GetBaseOffensiveStat(s32 index, u32 r1)
 {
-    return gMonsterParameters[index].baseAtkSpAtk[r1];
+    s16 index_s16 = index;
+    return gMonsterParameters[index_s16].baseAtkSpAtk[r1];
 }
 
-u16 GetBaseDefensiveStat(s16 index, u32 r1)
+u16 GetBaseDefensiveStat(s32 index, u32 r1)
 {
-    return gMonsterParameters[index].baseDefSpDef[r1];
+    s16 index_s16 = index;
+    return gMonsterParameters[index_s16].baseDefSpDef[r1];
 }
 
 u8 GetPokemonType(s32 index, u32 typeIndex)

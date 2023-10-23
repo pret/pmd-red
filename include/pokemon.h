@@ -66,8 +66,8 @@ u16 GetBaseHP(s16 index);
 bool8 IsToolboxEnabled(s16 index);
 u8 GetUnk12(s16 index);
 s16 GetPokemonEvolveFrom(s16 index);
-u16 GetBaseOffensiveStat(s16 index, u32 r1);
-u16 GetBaseDefensiveStat(s16 index, u32 r1);
+u16 GetBaseOffensiveStat(s32 index, u32 r1);
+u16 GetBaseDefensiveStat(s32 index, u32 r1);
 u8 GetPokemonType(s32 index, u32 typeIndex);
 u8 GetPokemonAbility(s16 index, u32 abilityIndex);
 s16 GetDexInternalNo(s32 index, u32 r1);
@@ -87,11 +87,12 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(PokemonStruct2 *, PokemonStruct1 *, s
 void SavePokemonStruct(unkStruct_8094924 *, PokemonStruct1 *pokemon);
 void RestorePokemonStruct(unkStruct_8094924 *, PokemonStruct1 *);
 s32 sub_808E218(unkStruct_808E218_arg *, PokemonStruct1 *pokemon);
+void sub_808CFD0(PokemonStruct1 *pokemon, s16 _species, u8* name, u32 _itemID, DungeonLocation *location, u16 *moveID);
+void sub_808D0D8(PokemonStruct1 *pokemon);
 
 // pokemon.s
 extern PokemonStruct1 *GetPlayerPokemonStruct(void);
-extern void sub_808CFD0(u8 *, s16, u8 *, u8, u32 *, u16 *);
-extern u32 sub_808D1DC(u8 *);
+extern u32 sub_808D1DC(PokemonStruct1*);
 extern PokemonStruct1 *sub_808D378(void);
 extern PokemonStruct1 *sub_808D3BC(void);
 extern PokemonStruct1 *sub_808D3F8(void);
