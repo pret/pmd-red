@@ -2,6 +2,7 @@
 #include "code_800D090.h"
 #include "code_8097DD0.h"
 #include "constants/colors.h"
+#include "constants/dungeon.h"
 #include "constants/move_id.h"
 #include "decompress.h"
 #include "items.h"
@@ -51,6 +52,100 @@ extern MonsterDataEntry *gMonsterParameters;
 extern struct FileArchive gMonsterFileArchive;
 extern const char gUnknown_8107684[];
 
+static inline bool8 sub_808D654_sub(PokemonStruct1 *ptr)
+{
+    return ptr->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER;
+}
+
+s32 sub_808D654(s32 *ptr) {
+    s32 index;
+    s32 count;
+    PokemonStruct1 *pokeStruct;
+    s32 *ptr2;
+
+    pokeStruct = gRecruitedPokemonRef->pokemon;
+    count = 0;
+    for(index = 0, ptr2 = ptr; index < NUM_MONSTERS; index++, pokeStruct++)
+    {
+        if(((pokeStruct->unk0 >> 1) & 1) && (!pokeStruct->isTeamLeader) && !sub_808D654_sub(pokeStruct)){
+            if(ptr != 0) *ptr2 = index;
+            ptr2++;
+            count++;
+        }
+    }
+    return count;
+}
+
+// 80 (97.58 % matching) - Seth
+// https://decomp.me/scratch/B8Ont 
+#ifdef NONMATCHING
+s32 sub_808D6A4(s32 *param_1)
+{
+  PokemonStruct1 *pokeStruct;
+  int index;
+  s32 counter;
+  s32 *piVar1;
+
+  pokeStruct = gRecruitedPokemonRef->pokemon;
+  counter = 0;
+
+  for(index = 0, piVar1 = param_1; index < 0x19d; index++)
+  {
+    pokeStruct = &gRecruitedPokemonRef->pokemon[index];
+    if (((pokeStruct->unk0 >> 1 & 1) != 0) && (!pokeStruct->isTeamLeader)) {
+      if (param_1 != 0x0) {
+        *piVar1 = index;
+      }
+      piVar1++;
+      counter++;
+    }
+  }
+  return counter;
+}
+#else
+NAKED
+s32 sub_808D6A4(s32 *param_1)
+{
+    asm_unified(
+	"\tpush {r4-r6,lr}\n"
+	"\tadds r5, r0, 0\n"
+	"\tldr r0, _0808D6E4\n"
+	"\tldr r2, [r0]\n"
+	"\tmovs r6, 0\n"
+	"\tmovs r4, 0\n"
+	"\tadds r3, r5, 0\n"
+"_0808D6B2:\n"
+	"\tldrh r0, [r2]\n"
+	"\tlsrs r0, 1\n"
+	"\tmovs r1, 0x1\n"
+	"\tands r0, r1\n"
+	"\tcmp r0, 0\n"
+	"\tbeq _0808D6CE\n"
+	"\tldrb r0, [r2, 0x2]\n"
+	"\tcmp r0, 0\n"
+	"\tbne _0808D6CE\n"
+	"\tcmp r5, 0\n"
+	"\tbeq _0808D6CA\n"
+	"\tstr r4, [r3]\n"
+"_0808D6CA:\n"
+	"\tadds r3, 0x4\n"
+	"\tadds r6, 0x1\n"
+"_0808D6CE:\n"
+	"\tadds r4, 0x1\n"
+	"\tadds r2, 0x58\n"
+	"\tmovs r0, 0xCE\n"
+	"\tlsls r0, 1\n"
+	"\tcmp r4, r0\n"
+	"\tble _0808D6B2\n"
+	"\tadds r0, r6, 0\n"
+	"\tpop {r4-r6}\n"
+	"\tpop {r1}\n"
+	"\tbx r1\n"
+	"\t.align 2, 0\n"
+"_0808D6E4: .4byte gRecruitedPokemonRef");
+}
+
+#endif
 
 bool8 sub_808D6E8()
 {

@@ -43,6 +43,80 @@ extern void sub_807AB38(Entity *, u32);
 extern void sub_8041888(u32);
 extern u8 sub_803F428(s16 *);
 extern void sub_803E708(u32, u32);
+void sub_804AE84(Position *pos);
+extern void sub_8049ED4();
+extern void sub_8073D14(Entity *);
+extern void sub_807FE9C(Entity *, Position *, u32, u32);
+
+void nullsub_97(Entity *entity)
+{}
+
+void sub_8075708(Entity *entity)
+{
+    bool8 bVar1;
+    bool8 bVar2;
+    Tile *tile;
+    u8 *trapData;
+    Entity *trap;
+    EntityInfo *info;
+
+    info = entity->info;
+    if (!EntityExists(entity)) {
+        return;
+    }
+    tile = GetTileAtEntitySafe(entity);
+    if (((IQSkillIsEnabled(entity, IQ_SUPER_MOBILE)) && (info->transformStatus != STATUS_MOBILE)) &&
+        (!HasHeldItem(entity, ITEM_MOBILE_SCARF))) {
+        sub_804AE84(&entity->pos);
+    }
+    trap = tile->object;
+    if (trap == NULL) {
+        return;
+    }
+
+    switch(GetEntityType(trap)) {
+        case ENTITY_TRAP:
+            trapData = (u8 *)GetTrapData(trap);
+            bVar1 = FALSE;
+            bVar2 = FALSE;
+            if ((IQSkillIsEnabled(entity, IQ_TRAP_SEER)) && (!trap->isVisible)) {
+                trap->isVisible = TRUE;
+                sub_8049ED4();
+                bVar2 = TRUE;
+            }
+
+            if (trapData[1] == 0) {
+                if (!trap->isVisible) goto _080757EC;
+                if (info->isNotTeamMember) goto _080757EC;
+            }
+            else {
+                if (trapData[1] == 1) {
+                    if (!info->isNotTeamMember) goto _080757EC;
+                    goto _ret;
+                }
+                if ((trapData[1] == 2) && (!info->isNotTeamMember)) {
+                    bVar1 = TRUE;
+                }
+            _080757EC:
+                if (!bVar1) {
+                    return;
+                }
+            }
+        _ret:
+            if (!bVar2) {
+                sub_807FE9C(entity, &entity->pos, 0, 1);
+            }
+            break;
+        case ENTITY_ITEM:
+            sub_8073D14(entity);
+            break;
+        case ENTITY_NOTHING:
+        case ENTITY_MONSTER:
+        case ENTITY_UNK_4:
+        case ENTITY_UNK_5:
+            break;
+    }
+}
 
 u32 sub_8075818(Entity *entity)
 {

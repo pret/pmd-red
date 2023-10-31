@@ -18,7 +18,6 @@
 extern bool8 IsValidWonderMail(WonderMail *WonderMailData);
 extern u8 sub_8095E38(WonderMail *, u8, u8, bool8);
 extern void sub_80965F4();
-extern void SortPelipperJobs();
 u8 sub_8097318(s16 param_1);
 extern bool8 GenerateMailJobInfo(WonderMail *);
 
@@ -26,13 +25,10 @@ bool8 sub_803C1D0(DungeonLocation *, u8);
 u8 sub_8095F28(u8);
 void sub_803C37C(DungeonLocation *, u8, u8 *);
 bool8 sub_8096E80(u32);
-u8 sub_8096E2C(void);
 u8 sub_8095E78(void);
 
 void sub_8096078(void);
 s32 CountFilledMailboxSlots(void);
-void ResetJobSlot(u8);
-bool8 IsJobSlotEmpty(u8);
 bool8 sub_80963B4(void);
 
 static void SortMailboxSlots(void)
@@ -62,11 +58,9 @@ static void SortMailboxSlots(void)
 
 void sub_80961B4(void)
 {
-  
   if (sub_8096E2C() != 0) {
     gUnknown_203B490->unk328 = TRUE;
   }
-  return;
 }
 
 bool8 sub_80961D8(void)
@@ -103,7 +97,7 @@ bool8 sub_80961D8(void)
             if(!sub_8096E80(0x32)) floor = 0x32;
 
     }
-    if(GetRescueTeamRank() == 6)
+    if(GetRescueTeamRank() == LUCARIO_RANK)
     {
         if(!gUnknown_203B490->PKMNNewsReceived[0x36])
             if(!sub_8096E80(0x36)) floor = 0x36;
