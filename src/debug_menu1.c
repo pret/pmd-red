@@ -2,6 +2,7 @@
 #include "code_8097670.h"
 #include "constants/friend_area.h"
 #include "constants/main_menu.h"
+#include "constants/move_id.h"
 #include "debug_menu1.h"
 #include "friend_area.h"
 #include "input.h"
@@ -128,10 +129,10 @@ static void sub_803A3A0(void)
 static void sub_803A3BC(void)
 {
     s32 speciesIndex;
-    u8 sp_0x8[88];
-    u16 r7 [4]; // r7
+    PokemonStruct1 pokemon;
+    u16 moves [MAX_MON_MOVES]; // r7
     u8 buffer[20]; // r6
-    u32 sp_0x7C;
+    u32 loc;
     s32 sp_0x80;
 
     #ifndef NONMATCHING
@@ -151,16 +152,16 @@ static void sub_803A3BC(void)
     index = 0;
     do {
         r9 = 0;
-        sp_0x7C = 0x1006;
+        loc = 0x1006;
         index++;
         speciesIndex = index * 0x10000 >> 0x10; // TODO: dumb way to force s16. Temp var may fix the regswap
-        memset(r7, 0, 8);
-        r7[0] = 0x27;
+        memset(moves, 0, sizeof(moves));
+        moves[0] = MOVE_DOUBLESLAP;
         CopyMonsterNametoBuffer(buffer, speciesIndex);
         CopyStringtoBuffer(buffer, buffer);
         buffer[0] = 0x40;
-        sub_808CFD0(sp_0x8, speciesIndex, buffer, 0x43, &sp_0x7C, r7);
-        sub_808D1DC(sp_0x8);
+        sub_808CFD0(&pokemon, speciesIndex, buffer, ITEM_CHERI_BERRY, (DungeonLocation *)&loc, moves);
+        sub_808D1DC(&pokemon);
     } while (index < 300);
 
     sp_0x80 = r9;

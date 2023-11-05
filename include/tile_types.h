@@ -9,6 +9,7 @@
 
 extern const u8 gDungeonWaterType[];
 
+void sub_804AE84(Position *pos);
 bool8 IsTileGround(Tile *tile);
 bool8 IsWaterTileset();
 

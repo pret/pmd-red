@@ -16,7 +16,6 @@
 
 extern bool8 sub_809017C(DungeonLocation *);
 extern void ResetPelipperBoardSlot(u8);
-extern bool8 ValidateWonderMail(WonderMail *);
 
 static EWRAM_DATA unkStruct_203B490 sUnknown_2039448 = {0};
 

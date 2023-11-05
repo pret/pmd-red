@@ -56,8 +56,6 @@ extern u32 sub_8097D60(u8 *, u32);
 extern u32 sub_8097D98(void* a, s32 b);
 extern void sub_800135C(void);
 extern void sub_80958E4(u32 *a, u32 b);
-extern unkStruct_203B490 *GetMailInfo(void);
-extern void InitializeMailJobsNews(void);
 extern void sub_80972F4(void);
 extern void sub_80974E8(void);
 
