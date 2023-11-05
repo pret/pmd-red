@@ -27,4 +27,10 @@ typedef struct unkStruct_203B490
 
 extern unkStruct_203B490 *gUnknown_203B490;
 
+void LoadMailInfo(void);
+unkStruct_203B490 *GetMailInfo(void);
+void InitializeMailJobsNews(void);
+bool8 IsValidWonderMail(WonderMail *WonderMailData);
+bool8 ValidateWonderMail(WonderMail *data);
+
 #endif // GUARD_CODE_80958E8_H

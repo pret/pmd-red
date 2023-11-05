@@ -33,15 +33,11 @@
 
 extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);
-extern void LoadGameOptions(void);
-extern void LoadItemParameters(void);
-extern void LoadMailInfo(void);
 extern void sub_800DAAC(void);
 extern void sub_800135C(void);
 extern void xxx_script_related_8001334(u32);
 extern void LoadTitleScreen(void);
 extern void sub_80095CC(u32, u32);
-extern s32 GetFirstIndexofMailType(u8);
 extern void nullsub_33(void);
 extern u32 sub_80009D0(u32);
 

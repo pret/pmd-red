@@ -14,8 +14,6 @@
 #include "event_flag.h"
 #include "rescue_team_info.h"
 
-
-extern bool8 IsValidWonderMail(WonderMail *WonderMailData);
 extern u8 sub_8095E38(WonderMail *, u8, u8, bool8);
 extern void sub_80965F4();
 u8 sub_8097318(s16 param_1);
@@ -28,7 +26,6 @@ bool8 sub_8096E80(u32);
 u8 sub_8095E78(void);
 
 void sub_8096078(void);
-s32 CountFilledMailboxSlots(void);
 bool8 sub_80963B4(void);
 
 static void SortMailboxSlots(void)
@@ -116,7 +113,7 @@ bool8 sub_80961D8(void)
 _slot:
     slot = GetMailboxSlotInfo(num);
     slot->mailType = 1;
-    slot->unk4.dungeon.id = 0x62;
+    slot->unk4.dungeon.id = NUM_DUNGEONS;
     slot->unk4.dungeon.floor = floor;
     goto _flag;
 _0809638E:
@@ -172,7 +169,7 @@ bool8 sub_80963B4(void)
         {
             slot = GetMailboxSlotInfo(num);
             slot->mailType = 1;
-            slot->unk4.dungeon.id = 0x62;
+            slot->unk4.dungeon.id = NUM_DUNGEONS;
             slot->unk4.dungeon.floor = floor;
             flag = TRUE;
         }
@@ -198,7 +195,7 @@ void sub_80963FC(void)
     slot->mailType = 5;
     slot->missionType = 0;
     slot->unk2 = 0;
-    slot->unk4.dungeon.id = 2;
+    slot->unk4.dungeon.id = DUNGEON_MT_STEEL;
     slot->unk4.dungeon.floor = 3;
     slot->unk4.seed = 0x00ffffff & Rand32Bit();
     slot->clientSpecies = MONSTER_PIDGEY;
@@ -224,7 +221,7 @@ void sub_8096488(void)
     }
     mail = GetMailboxSlotInfo(0);
     mail->mailType = 1;
-    mail->unk4.dungeon.id = 98;
+    mail->unk4.dungeon.id = NUM_DUNGEONS;
     mail->unk4.dungeon.floor = 0;
 }
 
