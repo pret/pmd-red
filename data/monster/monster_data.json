@@ -1,7 +1,7 @@
 [
     {
         "name": "MonsterNameNone",
-        "category": "MonsterCategoryNone",
+        "category": "MonsterCategoryEruption",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -44,7 +44,7 @@
     },
     {
         "name": "MonsterNameBulbasaur",
-        "category": "MonsterCategoryBulbasaur",
+        "category": "MonsterCategorySeed",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -89,7 +89,7 @@
     },
     {
         "name": "MonsterNameIvysaur",
-        "category": "MonsterCategoryBulbasaur",
+        "category": "MonsterCategorySeed",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -140,7 +140,7 @@
     },
     {
         "name": "MonsterNameVenusaur",
-        "category": "MonsterCategoryBulbasaur",
+        "category": "MonsterCategorySeed",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -191,7 +191,7 @@
     },
     {
         "name": "MonsterNameCharmander",
-        "category": "MonsterCategoryCharmander",
+        "category": "MonsterCategoryLizard",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -236,7 +236,7 @@
     },
     {
         "name": "MonsterNameCharmeleon",
-        "category": "MonsterCategoryCharmeleon",
+        "category": "MonsterCategoryFlame",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -287,7 +287,7 @@
     },
     {
         "name": "MonsterNameCharizard",
-        "category": "MonsterCategoryCharmeleon",
+        "category": "MonsterCategoryFlame",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -340,7 +340,7 @@
     },
     {
         "name": "MonsterNameSquirtle",
-        "category": "MonsterCategorySquirtle",
+        "category": "MonsterCategoryTinyTurtle",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -385,7 +385,7 @@
     },
     {
         "name": "MonsterNameWartortle",
-        "category": "MonsterCategoryWartortle",
+        "category": "MonsterCategoryTurtle",
         "overworldPalette": 9,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -436,7 +436,7 @@
     },
     {
         "name": "MonsterNameBlastoise",
-        "category": "MonsterCategoryBlastoise",
+        "category": "MonsterCategoryShellfish",
         "overworldPalette": 9,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -488,7 +488,7 @@
     },
     {
         "name": "MonsterNameCaterpie",
-        "category": "MonsterCategoryCaterpie",
+        "category": "MonsterCategoryWorm",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -532,7 +532,7 @@
     },
     {
         "name": "MonsterNameMetapod",
-        "category": "MonsterCategoryMetapod",
+        "category": "MonsterCategoryCocoon",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -583,7 +583,7 @@
     },
     {
         "name": "MonsterNameButterfree",
-        "category": "MonsterCategoryButterfree",
+        "category": "MonsterCategoryButterfly",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -636,7 +636,7 @@
     },
     {
         "name": "MonsterNameWeedle",
-        "category": "MonsterCategoryWeedle",
+        "category": "MonsterCategoryHairyBug",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -680,7 +680,7 @@
     },
     {
         "name": "MonsterNameKakuna",
-        "category": "MonsterCategoryMetapod",
+        "category": "MonsterCategoryCocoon",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -731,7 +731,7 @@
     },
     {
         "name": "MonsterNameBeedrill",
-        "category": "MonsterCategoryBeedrill",
+        "category": "MonsterCategoryPoisonBee",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -783,7 +783,7 @@
     },
     {
         "name": "MonsterNamePidgey",
-        "category": "MonsterCategoryPidgey",
+        "category": "MonsterCategoryTinyBird",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -827,7 +827,7 @@
     },
     {
         "name": "MonsterNamePidgeotto",
-        "category": "MonsterCategoryPidgeotto",
+        "category": "MonsterCategoryBird",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -878,7 +878,7 @@
     },
     {
         "name": "MonsterNamePidgeot",
-        "category": "MonsterCategoryPidgeotto",
+        "category": "MonsterCategoryBird",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -929,7 +929,7 @@
     },
     {
         "name": "MonsterNameRattata",
-        "category": "MonsterCategoryRattata",
+        "category": "MonsterCategoryMouse",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -973,7 +973,7 @@
     },
     {
         "name": "MonsterNameRaticate",
-        "category": "MonsterCategoryRattata",
+        "category": "MonsterCategoryMouse",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1024,7 +1024,7 @@
     },
     {
         "name": "MonsterNameSpearow",
-        "category": "MonsterCategoryPidgey",
+        "category": "MonsterCategoryTinyBird",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1068,7 +1068,7 @@
     },
     {
         "name": "MonsterNameFearow",
-        "category": "MonsterCategoryFearow",
+        "category": "MonsterCategoryBeak",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1119,7 +1119,7 @@
     },
     {
         "name": "MonsterNameEkans",
-        "category": "MonsterCategoryEkans",
+        "category": "MonsterCategorySnake",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1164,7 +1164,7 @@
     },
     {
         "name": "MonsterNameArbok",
-        "category": "MonsterCategoryArbok",
+        "category": "MonsterCategoryCobra",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1215,7 +1215,7 @@
     },
     {
         "name": "MonsterNamePikachu",
-        "category": "MonsterCategoryRattata",
+        "category": "MonsterCategoryMouse",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1266,7 +1266,7 @@
     },
     {
         "name": "MonsterNameRaichu",
-        "category": "MonsterCategoryRattata",
+        "category": "MonsterCategoryMouse",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1316,7 +1316,7 @@
     },
     {
         "name": "MonsterNameSandshrew",
-        "category": "MonsterCategoryRattata",
+        "category": "MonsterCategoryMouse",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1359,7 +1359,7 @@
     },
     {
         "name": "MonsterNameSandslash",
-        "category": "MonsterCategoryRattata",
+        "category": "MonsterCategoryMouse",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1409,7 +1409,7 @@
     },
     {
         "name": "MonsterNameNidoran_F",
-        "category": "MonsterCategoryNidoran_F",
+        "category": "MonsterCategoryPoisonPin",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1452,7 +1452,7 @@
     },
     {
         "name": "MonsterNameNidorina",
-        "category": "MonsterCategoryNidoran_F",
+        "category": "MonsterCategoryPoisonPin",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1502,7 +1502,7 @@
     },
     {
         "name": "MonsterNameNidoqueen",
-        "category": "MonsterCategoryNidoqueen",
+        "category": "MonsterCategoryDrill",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1553,7 +1553,7 @@
     },
     {
         "name": "MonsterNameNidoran_M",
-        "category": "MonsterCategoryNidoran_F",
+        "category": "MonsterCategoryPoisonPin",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1596,7 +1596,7 @@
     },
     {
         "name": "MonsterNameNidorino",
-        "category": "MonsterCategoryNidoran_F",
+        "category": "MonsterCategoryPoisonPin",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1646,7 +1646,7 @@
     },
     {
         "name": "MonsterNameNidoking",
-        "category": "MonsterCategoryNidoqueen",
+        "category": "MonsterCategoryDrill",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1697,7 +1697,7 @@
     },
     {
         "name": "MonsterNameClefairy",
-        "category": "MonsterCategoryClefairy",
+        "category": "MonsterCategoryFairy",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1747,7 +1747,7 @@
     },
     {
         "name": "MonsterNameClefable",
-        "category": "MonsterCategoryClefairy",
+        "category": "MonsterCategoryFairy",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1797,7 +1797,7 @@
     },
     {
         "name": "MonsterNameVulpix",
-        "category": "MonsterCategoryVulpix",
+        "category": "MonsterCategoryFox",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1841,7 +1841,7 @@
     },
     {
         "name": "MonsterNameNinetales",
-        "category": "MonsterCategoryVulpix",
+        "category": "MonsterCategoryFox",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1893,7 +1893,7 @@
     },
     {
         "name": "MonsterNameJigglypuff",
-        "category": "MonsterCategoryJigglypuff",
+        "category": "MonsterCategoryBalloon",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1943,7 +1943,7 @@
     },
     {
         "name": "MonsterNameWigglytuff",
-        "category": "MonsterCategoryJigglypuff",
+        "category": "MonsterCategoryBalloon",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -1994,7 +1994,7 @@
     },
     {
         "name": "MonsterNameZubat",
-        "category": "MonsterCategoryZubat",
+        "category": "MonsterCategoryBat",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2039,7 +2039,7 @@
     },
     {
         "name": "MonsterNameGolbat",
-        "category": "MonsterCategoryZubat",
+        "category": "MonsterCategoryBat",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2091,7 +2091,7 @@
     },
     {
         "name": "MonsterNameOddish",
-        "category": "MonsterCategoryOddish",
+        "category": "MonsterCategoryWeed",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2135,7 +2135,7 @@
     },
     {
         "name": "MonsterNameGloom",
-        "category": "MonsterCategoryOddish",
+        "category": "MonsterCategoryWeed",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2186,7 +2186,7 @@
     },
     {
         "name": "MonsterNameVileplume",
-        "category": "MonsterCategoryVileplume",
+        "category": "MonsterCategoryFlower",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2237,7 +2237,7 @@
     },
     {
         "name": "MonsterNameParas",
-        "category": "MonsterCategoryParas",
+        "category": "MonsterCategoryMushroom",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2281,7 +2281,7 @@
     },
     {
         "name": "MonsterNameParasect",
-        "category": "MonsterCategoryParas",
+        "category": "MonsterCategoryMushroom",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2332,7 +2332,7 @@
     },
     {
         "name": "MonsterNameVenonat",
-        "category": "MonsterCategoryVenonat",
+        "category": "MonsterCategoryInsect",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2376,7 +2376,7 @@
     },
     {
         "name": "MonsterNameVenomoth",
-        "category": "MonsterCategoryVenomoth",
+        "category": "MonsterCategoryPoisonMoth",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2428,7 +2428,7 @@
     },
     {
         "name": "MonsterNameDiglett",
-        "category": "MonsterCategoryDiglett",
+        "category": "MonsterCategoryMole",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2473,7 +2473,7 @@
     },
     {
         "name": "MonsterNameDugtrio",
-        "category": "MonsterCategoryDiglett",
+        "category": "MonsterCategoryMole",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2525,7 +2525,7 @@
     },
     {
         "name": "MonsterNameMeowth",
-        "category": "MonsterCategoryMeowth",
+        "category": "MonsterCategoryScratchCat",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2569,7 +2569,7 @@
     },
     {
         "name": "MonsterNamePersian",
-        "category": "MonsterCategoryPersian",
+        "category": "MonsterCategoryClassyCat",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2620,7 +2620,7 @@
     },
     {
         "name": "MonsterNamePsyduck",
-        "category": "MonsterCategoryPsyduck",
+        "category": "MonsterCategoryDuck",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2666,7 +2666,7 @@
     },
     {
         "name": "MonsterNameGolduck",
-        "category": "MonsterCategoryPsyduck",
+        "category": "MonsterCategoryDuck",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2718,7 +2718,7 @@
     },
     {
         "name": "MonsterNameMankey",
-        "category": "MonsterCategoryMankey",
+        "category": "MonsterCategoryPigMonkey",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2762,7 +2762,7 @@
     },
     {
         "name": "MonsterNamePrimeape",
-        "category": "MonsterCategoryMankey",
+        "category": "MonsterCategoryPigMonkey",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2812,7 +2812,7 @@
     },
     {
         "name": "MonsterNameGrowlithe",
-        "category": "MonsterCategoryGrowlithe",
+        "category": "MonsterCategoryPuppy",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2857,7 +2857,7 @@
     },
     {
         "name": "MonsterNameArcanine",
-        "category": "MonsterCategoryArcanine",
+        "category": "MonsterCategoryLegendary",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2909,7 +2909,7 @@
     },
     {
         "name": "MonsterNamePoliwag",
-        "category": "MonsterCategoryPoliwag",
+        "category": "MonsterCategoryTadpole",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -2954,7 +2954,7 @@
     },
     {
         "name": "MonsterNamePoliwhirl",
-        "category": "MonsterCategoryPoliwag",
+        "category": "MonsterCategoryTadpole",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3006,7 +3006,7 @@
     },
     {
         "name": "MonsterNamePoliwrath",
-        "category": "MonsterCategoryPoliwag",
+        "category": "MonsterCategoryTadpole",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3059,7 +3059,7 @@
     },
     {
         "name": "MonsterNameAbra",
-        "category": "MonsterCategoryAbra",
+        "category": "MonsterCategoryPsi",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3104,7 +3104,7 @@
     },
     {
         "name": "MonsterNameKadabra",
-        "category": "MonsterCategoryAbra",
+        "category": "MonsterCategoryPsi",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3155,7 +3155,7 @@
     },
     {
         "name": "MonsterNameAlakazam",
-        "category": "MonsterCategoryAbra",
+        "category": "MonsterCategoryPsi",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3208,7 +3208,7 @@
     },
     {
         "name": "MonsterNameMachop",
-        "category": "MonsterCategoryMachop",
+        "category": "MonsterCategorySuperpower",
         "overworldPalette": 12,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3252,7 +3252,7 @@
     },
     {
         "name": "MonsterNameMachoke",
-        "category": "MonsterCategoryMachop",
+        "category": "MonsterCategorySuperpower",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3302,7 +3302,7 @@
     },
     {
         "name": "MonsterNameMachamp",
-        "category": "MonsterCategoryMachop",
+        "category": "MonsterCategorySuperpower",
         "overworldPalette": 12,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3353,7 +3353,7 @@
     },
     {
         "name": "MonsterNameBellsprout",
-        "category": "MonsterCategoryVileplume",
+        "category": "MonsterCategoryFlower",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3398,7 +3398,7 @@
     },
     {
         "name": "MonsterNameWeepinbell",
-        "category": "MonsterCategoryWeepinbell",
+        "category": "MonsterCategoryFlycatcher",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3449,7 +3449,7 @@
     },
     {
         "name": "MonsterNameVictreebel",
-        "category": "MonsterCategoryWeepinbell",
+        "category": "MonsterCategoryFlycatcher",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3500,7 +3500,7 @@
     },
     {
         "name": "MonsterNameTentacool",
-        "category": "MonsterCategoryTentacool",
+        "category": "MonsterCategoryJellyfish",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3546,7 +3546,7 @@
     },
     {
         "name": "MonsterNameTentacruel",
-        "category": "MonsterCategoryTentacool",
+        "category": "MonsterCategoryJellyfish",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3599,7 +3599,7 @@
     },
     {
         "name": "MonsterNameGeodude",
-        "category": "MonsterCategoryGeodude",
+        "category": "MonsterCategoryRock",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3644,7 +3644,7 @@
     },
     {
         "name": "MonsterNameGraveler",
-        "category": "MonsterCategoryGeodude",
+        "category": "MonsterCategoryRock",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3696,7 +3696,7 @@
     },
     {
         "name": "MonsterNameGolem",
-        "category": "MonsterCategoryGolem",
+        "category": "MonsterCategoryMegaton",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3750,7 +3750,7 @@
     },
     {
         "name": "MonsterNamePonyta",
-        "category": "MonsterCategoryPonyta",
+        "category": "MonsterCategoryFireHorse",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3795,7 +3795,7 @@
     },
     {
         "name": "MonsterNameRapidash",
-        "category": "MonsterCategoryPonyta",
+        "category": "MonsterCategoryFireHorse",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3847,7 +3847,7 @@
     },
     {
         "name": "MonsterNameSlowpoke",
-        "category": "MonsterCategorySlowpoke",
+        "category": "MonsterCategoryDopey",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3893,7 +3893,7 @@
     },
     {
         "name": "MonsterNameSlowbro",
-        "category": "MonsterCategorySlowbro",
+        "category": "MonsterCategoryHermitCrab",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3946,7 +3946,7 @@
     },
     {
         "name": "MonsterNameMagnemite",
-        "category": "MonsterCategoryMagnemite",
+        "category": "MonsterCategoryMagnet",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -3993,7 +3993,7 @@
     },
     {
         "name": "MonsterNameMagneton",
-        "category": "MonsterCategoryMagnemite",
+        "category": "MonsterCategoryMagnet",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4046,7 +4046,7 @@
     },
     {
         "name": "MonsterNameFarfetch",
-        "category": "MonsterCategoryFarfetch",
+        "category": "MonsterCategoryWildDuck",
         "overworldPalette": 8,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4091,7 +4091,7 @@
     },
     {
         "name": "MonsterNameDoduo",
-        "category": "MonsterCategoryDoduo",
+        "category": "MonsterCategoryTwinBird",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4136,7 +4136,7 @@
     },
     {
         "name": "MonsterNameDodrio",
-        "category": "MonsterCategoryDodrio",
+        "category": "MonsterCategoryTripleBird",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4188,7 +4188,7 @@
     },
     {
         "name": "MonsterNameSeel",
-        "category": "MonsterCategorySeel",
+        "category": "MonsterCategorySeaLion",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4232,7 +4232,7 @@
     },
     {
         "name": "MonsterNameDewgong",
-        "category": "MonsterCategorySeel",
+        "category": "MonsterCategorySeaLion",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4284,7 +4284,7 @@
     },
     {
         "name": "MonsterNameGrimer",
-        "category": "MonsterCategoryGrimer",
+        "category": "MonsterCategorySludge",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4328,7 +4328,7 @@
     },
     {
         "name": "MonsterNameMuk",
-        "category": "MonsterCategoryGrimer",
+        "category": "MonsterCategorySludge",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4379,7 +4379,7 @@
     },
     {
         "name": "MonsterNameShellder",
-        "category": "MonsterCategoryShellder",
+        "category": "MonsterCategoryBivalve",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4423,7 +4423,7 @@
     },
     {
         "name": "MonsterNameCloyster",
-        "category": "MonsterCategoryShellder",
+        "category": "MonsterCategoryBivalve",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4475,7 +4475,7 @@
     },
     {
         "name": "MonsterNameGastly",
-        "category": "MonsterCategoryGastly",
+        "category": "MonsterCategoryGas",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4520,7 +4520,7 @@
     },
     {
         "name": "MonsterNameHaunter",
-        "category": "MonsterCategoryGastly",
+        "category": "MonsterCategoryGas",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4572,7 +4572,7 @@
     },
     {
         "name": "MonsterNameGengar",
-        "category": "MonsterCategoryGengar",
+        "category": "MonsterCategoryShadow",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4626,7 +4626,7 @@
     },
     {
         "name": "MonsterNameOnix",
-        "category": "MonsterCategoryOnix",
+        "category": "MonsterCategoryRockSnake",
         "overworldPalette": 5,
         "bodySize": 4,
         "movementSpeed": 1,
@@ -4671,7 +4671,7 @@
     },
     {
         "name": "MonsterNameDrowzee",
-        "category": "MonsterCategoryDrowzee",
+        "category": "MonsterCategoryHypnosis",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4714,7 +4714,7 @@
     },
     {
         "name": "MonsterNameHypno",
-        "category": "MonsterCategoryDrowzee",
+        "category": "MonsterCategoryHypnosis",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4764,7 +4764,7 @@
     },
     {
         "name": "MonsterNameKrabby",
-        "category": "MonsterCategoryKrabby",
+        "category": "MonsterCategoryRiverCrab",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4809,7 +4809,7 @@
     },
     {
         "name": "MonsterNameKingler",
-        "category": "MonsterCategoryKingler",
+        "category": "MonsterCategoryPincer",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4861,7 +4861,7 @@
     },
     {
         "name": "MonsterNameVoltorb",
-        "category": "MonsterCategoryVoltorb",
+        "category": "MonsterCategoryBall",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4905,7 +4905,7 @@
     },
     {
         "name": "MonsterNameElectrode",
-        "category": "MonsterCategoryVoltorb",
+        "category": "MonsterCategoryBall",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -4956,7 +4956,7 @@
     },
     {
         "name": "MonsterNameExeggcute",
-        "category": "MonsterCategoryExeggcute",
+        "category": "MonsterCategoryEgg",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5000,7 +5000,7 @@
     },
     {
         "name": "MonsterNameExeggutor",
-        "category": "MonsterCategoryExeggutor",
+        "category": "MonsterCategoryCoconut",
         "overworldPalette": 8,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5051,7 +5051,7 @@
     },
     {
         "name": "MonsterNameCubone",
-        "category": "MonsterCategoryCubone",
+        "category": "MonsterCategoryLonely",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5096,7 +5096,7 @@
     },
     {
         "name": "MonsterNameMarowak",
-        "category": "MonsterCategoryMarowak",
+        "category": "MonsterCategoryBoneKeeper",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5147,7 +5147,7 @@
     },
     {
         "name": "MonsterNameHitmonlee",
-        "category": "MonsterCategoryHitmonlee",
+        "category": "MonsterCategoryKicking",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5198,7 +5198,7 @@
     },
     {
         "name": "MonsterNameHitmonchan",
-        "category": "MonsterCategoryHitmonchan",
+        "category": "MonsterCategoryPunching",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5249,7 +5249,7 @@
     },
     {
         "name": "MonsterNameLickitung",
-        "category": "MonsterCategoryLickitung",
+        "category": "MonsterCategoryLicking",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5293,7 +5293,7 @@
     },
     {
         "name": "MonsterNameKoffing",
-        "category": "MonsterCategoryKoffing",
+        "category": "MonsterCategoryPoisonGas",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5337,7 +5337,7 @@
     },
     {
         "name": "MonsterNameWeezing",
-        "category": "MonsterCategoryKoffing",
+        "category": "MonsterCategoryPoisonGas",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5388,7 +5388,7 @@
     },
     {
         "name": "MonsterNameRhyhorn",
-        "category": "MonsterCategoryRhyhorn",
+        "category": "MonsterCategorySpikes",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5433,7 +5433,7 @@
     },
     {
         "name": "MonsterNameRhydon",
-        "category": "MonsterCategoryNidoqueen",
+        "category": "MonsterCategoryDrill",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5485,7 +5485,7 @@
     },
     {
         "name": "MonsterNameChansey",
-        "category": "MonsterCategoryExeggcute",
+        "category": "MonsterCategoryEgg",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5529,7 +5529,7 @@
     },
     {
         "name": "MonsterNameTangela",
-        "category": "MonsterCategoryTangela",
+        "category": "MonsterCategoryVine",
         "overworldPalette": 11,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5572,7 +5572,7 @@
     },
     {
         "name": "MonsterNameKangaskhan",
-        "category": "MonsterCategoryKangaskhan",
+        "category": "MonsterCategoryParent",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5616,7 +5616,7 @@
     },
     {
         "name": "MonsterNameHorsea",
-        "category": "MonsterCategoryHorsea",
+        "category": "MonsterCategoryDragon",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5660,7 +5660,7 @@
     },
     {
         "name": "MonsterNameSeadra",
-        "category": "MonsterCategoryHorsea",
+        "category": "MonsterCategoryDragon",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5711,7 +5711,7 @@
     },
     {
         "name": "MonsterNameGoldeen",
-        "category": "MonsterCategoryGoldeen",
+        "category": "MonsterCategoryGoldfish",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5756,7 +5756,7 @@
     },
     {
         "name": "MonsterNameSeaking",
-        "category": "MonsterCategoryGoldeen",
+        "category": "MonsterCategoryGoldfish",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5808,7 +5808,7 @@
     },
     {
         "name": "MonsterNameStaryu",
-        "category": "MonsterCategoryStaryu",
+        "category": "MonsterCategoryStarShape",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5853,7 +5853,7 @@
     },
     {
         "name": "MonsterNameStarmie",
-        "category": "MonsterCategoryStarmie",
+        "category": "MonsterCategoryMysterious",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5906,7 +5906,7 @@
     },
     {
         "name": "MonsterNameMrMime",
-        "category": "MonsterCategoryMrMime",
+        "category": "MonsterCategoryBarrier",
         "overworldPalette": 11,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5949,7 +5949,7 @@
     },
     {
         "name": "MonsterNameScyther",
-        "category": "MonsterCategoryScyther",
+        "category": "MonsterCategoryMantis",
         "overworldPalette": 8,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -5993,7 +5993,7 @@
     },
     {
         "name": "MonsterNameJynx",
-        "category": "MonsterCategoryJynx",
+        "category": "MonsterCategoryHumanShape",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6044,7 +6044,7 @@
     },
     {
         "name": "MonsterNameElectabuzz",
-        "category": "MonsterCategoryElectabuzz",
+        "category": "MonsterCategoryElectric",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6094,7 +6094,7 @@
     },
     {
         "name": "MonsterNameMagmar",
-        "category": "MonsterCategoryMagmar",
+        "category": "MonsterCategorySpitfire",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6145,7 +6145,7 @@
     },
     {
         "name": "MonsterNamePinsir",
-        "category": "MonsterCategoryPinsir",
+        "category": "MonsterCategoryStagBeetle",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6188,7 +6188,7 @@
     },
     {
         "name": "MonsterNameTauros",
-        "category": "MonsterCategoryTauros",
+        "category": "MonsterCategoryWildBull",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6231,7 +6231,7 @@
     },
     {
         "name": "MonsterNameMagikarp",
-        "category": "MonsterCategoryMagikarp",
+        "category": "MonsterCategoryFish",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6275,7 +6275,7 @@
     },
     {
         "name": "MonsterNameGyarados",
-        "category": "MonsterCategoryGyarados",
+        "category": "MonsterCategoryAtrocious",
         "overworldPalette": 5,
         "bodySize": 4,
         "movementSpeed": 1,
@@ -6327,7 +6327,7 @@
     },
     {
         "name": "MonsterNameLapras",
-        "category": "MonsterCategoryLapras",
+        "category": "MonsterCategoryTransport",
         "overworldPalette": 5,
         "bodySize": 4,
         "movementSpeed": 1,
@@ -6373,7 +6373,7 @@
     },
     {
         "name": "MonsterNameDitto",
-        "category": "MonsterCategoryDitto",
+        "category": "MonsterCategoryTransform",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6416,7 +6416,7 @@
     },
     {
         "name": "MonsterNameEevee",
-        "category": "MonsterCategoryEevee",
+        "category": "MonsterCategoryEvolution",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6460,7 +6460,7 @@
     },
     {
         "name": "MonsterNameVaporeon",
-        "category": "MonsterCategoryVaporeon",
+        "category": "MonsterCategoryBubbleJet",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6511,7 +6511,7 @@
     },
     {
         "name": "MonsterNameJolteon",
-        "category": "MonsterCategoryJolteon",
+        "category": "MonsterCategoryLightning",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6561,7 +6561,7 @@
     },
     {
         "name": "MonsterNameFlareon",
-        "category": "MonsterCategoryCharmeleon",
+        "category": "MonsterCategoryFlame",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6612,7 +6612,7 @@
     },
     {
         "name": "MonsterNamePorygon",
-        "category": "MonsterCategoryPorygon",
+        "category": "MonsterCategoryVirtual",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6656,7 +6656,7 @@
     },
     {
         "name": "MonsterNameOmanyte",
-        "category": "MonsterCategoryOmanyte",
+        "category": "MonsterCategorySpiral",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6702,7 +6702,7 @@
     },
     {
         "name": "MonsterNameOmastar",
-        "category": "MonsterCategoryOmanyte",
+        "category": "MonsterCategorySpiral",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6755,7 +6755,7 @@
     },
     {
         "name": "MonsterNameKabuto",
-        "category": "MonsterCategoryBlastoise",
+        "category": "MonsterCategoryShellfish",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6801,7 +6801,7 @@
     },
     {
         "name": "MonsterNameKabutops",
-        "category": "MonsterCategoryBlastoise",
+        "category": "MonsterCategoryShellfish",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6854,7 +6854,7 @@
     },
     {
         "name": "MonsterNameAerodactyl",
-        "category": "MonsterCategoryAerodactyl",
+        "category": "MonsterCategoryFossil",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6900,7 +6900,7 @@
     },
     {
         "name": "MonsterNameSnorlax",
-        "category": "MonsterCategorySnorlax",
+        "category": "MonsterCategorySleeping",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -6951,7 +6951,7 @@
     },
     {
         "name": "MonsterNameArticuno",
-        "category": "MonsterCategoryArticuno",
+        "category": "MonsterCategoryFreeze",
         "overworldPalette": 5,
         "bodySize": 4,
         "movementSpeed": 1,
@@ -6998,7 +6998,7 @@
     },
     {
         "name": "MonsterNameZapdos",
-        "category": "MonsterCategoryElectabuzz",
+        "category": "MonsterCategoryElectric",
         "overworldPalette": 4,
         "bodySize": 4,
         "movementSpeed": 1,
@@ -7045,7 +7045,7 @@
     },
     {
         "name": "MonsterNameMoltres",
-        "category": "MonsterCategoryCharmeleon",
+        "category": "MonsterCategoryFlame",
         "overworldPalette": 0,
         "bodySize": 4,
         "movementSpeed": 1,
@@ -7092,7 +7092,7 @@
     },
     {
         "name": "MonsterNameDratini",
-        "category": "MonsterCategoryHorsea",
+        "category": "MonsterCategoryDragon",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -7136,7 +7136,7 @@
     },
     {
         "name": "MonsterNameDragonair",
-        "category": "MonsterCategoryHorsea",
+        "category": "MonsterCategoryDragon",
         "overworldPalette": 9,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -7187,7 +7187,7 @@
     },
     {
         "name": "MonsterNameDragonite",
-        "category": "MonsterCategoryHorsea",
+        "category": "MonsterCategoryDragon",
         "overworldPalette": 8,
         "bodySize": 4,
         "movementSpeed": 1,
@@ -7239,7 +7239,7 @@
     },
     {
         "name": "MonsterNameMewtwo",
-        "category": "MonsterCategoryMewtwo",
+        "category": "MonsterCategoryNewSpeciestwo",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -7283,7 +7283,7 @@
     },
     {
         "name": "MonsterNameMew",
-        "category": "MonsterCategoryMew",
+        "category": "MonsterCategoryNewSpecies",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -7327,7 +7327,7 @@
     },
     {
         "name": "MonsterNameChikorita",
-        "category": "MonsterCategoryChikorita",
+        "category": "MonsterCategoryLeaf",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -7371,7 +7371,7 @@
     },
     {
         "name": "MonsterNameBayleef",
-        "category": "MonsterCategoryChikorita",
+        "category": "MonsterCategoryLeaf",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -7421,7 +7421,7 @@
     },
     {
         "name": "MonsterNameMeganium",
-        "category": "MonsterCategoryMeganium",
+        "category": "MonsterCategoryHerb",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -7471,7 +7471,7 @@
     },
     {
         "name": "MonsterNameCyndaquil",
-        "category": "MonsterCategoryCyndaquil",
+        "category": "MonsterCategoryFireMouse",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -7516,7 +7516,7 @@
     },
     {
         "name": "MonsterNameQuilava",
-        "category": "MonsterCategoryQuilava",
+        "category": "MonsterCategoryVolcano",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -7567,7 +7567,7 @@
     },
     {
         "name": "MonsterNameTyphlosion",
-        "category": "MonsterCategoryQuilava",
+        "category": "MonsterCategoryVolcano",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -7618,7 +7618,7 @@
     },
     {
         "name": "MonsterNameTotodile",
-        "category": "MonsterCategoryTotodile",
+        "category": "MonsterCategoryBigJaw",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -7663,7 +7663,7 @@
     },
     {
         "name": "MonsterNameCroconaw",
-        "category": "MonsterCategoryTotodile",
+        "category": "MonsterCategoryBigJaw",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -7714,7 +7714,7 @@
     },
     {
         "name": "MonsterNameFeraligatr",
-        "category": "MonsterCategoryTotodile",
+        "category": "MonsterCategoryBigJaw",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -7765,7 +7765,7 @@
     },
     {
         "name": "MonsterNameSentret",
-        "category": "MonsterCategorySentret",
+        "category": "MonsterCategoryScout",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -7809,7 +7809,7 @@
     },
     {
         "name": "MonsterNameFurret",
-        "category": "MonsterCategoryFurret",
+        "category": "MonsterCategoryLongBody",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -7860,7 +7860,7 @@
     },
     {
         "name": "MonsterNameHoothoot",
-        "category": "MonsterCategoryHoothoot",
+        "category": "MonsterCategoryOwl",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -7905,7 +7905,7 @@
     },
     {
         "name": "MonsterNameNoctowl",
-        "category": "MonsterCategoryHoothoot",
+        "category": "MonsterCategoryOwl",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -7957,7 +7957,7 @@
     },
     {
         "name": "MonsterNameLedyba",
-        "category": "MonsterCategoryLedyba",
+        "category": "MonsterCategoryFiveStar",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8003,7 +8003,7 @@
     },
     {
         "name": "MonsterNameLedian",
-        "category": "MonsterCategoryLedyba",
+        "category": "MonsterCategoryFiveStar",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8056,7 +8056,7 @@
     },
     {
         "name": "MonsterNameSpinarak",
-        "category": "MonsterCategorySpinarak",
+        "category": "MonsterCategoryStringSpit",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8101,7 +8101,7 @@
     },
     {
         "name": "MonsterNameAriados",
-        "category": "MonsterCategoryAriados",
+        "category": "MonsterCategoryLongLeg",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8153,7 +8153,7 @@
     },
     {
         "name": "MonsterNameCrobat",
-        "category": "MonsterCategoryZubat",
+        "category": "MonsterCategoryBat",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8205,7 +8205,7 @@
     },
     {
         "name": "MonsterNameChinchou",
-        "category": "MonsterCategoryChinchou",
+        "category": "MonsterCategoryAngler",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8251,7 +8251,7 @@
     },
     {
         "name": "MonsterNameLanturn",
-        "category": "MonsterCategoryLanturn",
+        "category": "MonsterCategoryLight",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8304,7 +8304,7 @@
     },
     {
         "name": "MonsterNamePichu",
-        "category": "MonsterCategoryPichu",
+        "category": "MonsterCategoryTinyMouse",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8347,7 +8347,7 @@
     },
     {
         "name": "MonsterNameCleffa",
-        "category": "MonsterCategoryStaryu",
+        "category": "MonsterCategoryStarShape",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8390,7 +8390,7 @@
     },
     {
         "name": "MonsterNameIgglybuff",
-        "category": "MonsterCategoryJigglypuff",
+        "category": "MonsterCategoryBalloon",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8433,7 +8433,7 @@
     },
     {
         "name": "MonsterNameTogepi",
-        "category": "MonsterCategoryTogepi",
+        "category": "MonsterCategorySpikeBall",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8477,7 +8477,7 @@
     },
     {
         "name": "MonsterNameTogetic",
-        "category": "MonsterCategoryTogetic",
+        "category": "MonsterCategoryHappiness",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8529,7 +8529,7 @@
     },
     {
         "name": "MonsterNameNatu",
-        "category": "MonsterCategoryPidgey",
+        "category": "MonsterCategoryTinyBird",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8574,7 +8574,7 @@
     },
     {
         "name": "MonsterNameXatu",
-        "category": "MonsterCategoryXatu",
+        "category": "MonsterCategoryMystic",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8627,7 +8627,7 @@
     },
     {
         "name": "MonsterNameMareep",
-        "category": "MonsterCategoryMareep",
+        "category": "MonsterCategoryWool",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8670,7 +8670,7 @@
     },
     {
         "name": "MonsterNameFlaaffy",
-        "category": "MonsterCategoryMareep",
+        "category": "MonsterCategoryWool",
         "overworldPalette": 11,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8720,7 +8720,7 @@
     },
     {
         "name": "MonsterNameAmpharos",
-        "category": "MonsterCategoryLanturn",
+        "category": "MonsterCategoryLight",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8770,7 +8770,7 @@
     },
     {
         "name": "MonsterNameBellossom",
-        "category": "MonsterCategoryVileplume",
+        "category": "MonsterCategoryFlower",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8820,7 +8820,7 @@
     },
     {
         "name": "MonsterNameMarill",
-        "category": "MonsterCategoryMarill",
+        "category": "MonsterCategoryAquaMouse",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8872,7 +8872,7 @@
     },
     {
         "name": "MonsterNameAzumarill",
-        "category": "MonsterCategoryAzumarill",
+        "category": "MonsterCategoryAquaRabbit",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8924,7 +8924,7 @@
     },
     {
         "name": "MonsterNameSudowoodo",
-        "category": "MonsterCategorySudowoodo",
+        "category": "MonsterCategoryImitation",
         "overworldPalette": 8,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -8968,7 +8968,7 @@
     },
     {
         "name": "MonsterNamePolitoed",
-        "category": "MonsterCategoryPolitoed",
+        "category": "MonsterCategoryFrog",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9021,7 +9021,7 @@
     },
     {
         "name": "MonsterNameHoppip",
-        "category": "MonsterCategoryHoppip",
+        "category": "MonsterCategoryCottonweed",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9065,7 +9065,7 @@
     },
     {
         "name": "MonsterNameSkiploom",
-        "category": "MonsterCategoryHoppip",
+        "category": "MonsterCategoryCottonweed",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9116,7 +9116,7 @@
     },
     {
         "name": "MonsterNameJumpluff",
-        "category": "MonsterCategoryHoppip",
+        "category": "MonsterCategoryCottonweed",
         "overworldPalette": 12,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9168,7 +9168,7 @@
     },
     {
         "name": "MonsterNameAipom",
-        "category": "MonsterCategoryAipom",
+        "category": "MonsterCategoryLongTail",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9212,7 +9212,7 @@
     },
     {
         "name": "MonsterNameSunkern",
-        "category": "MonsterCategoryBulbasaur",
+        "category": "MonsterCategorySeed",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9255,7 +9255,7 @@
     },
     {
         "name": "MonsterNameSunflora",
-        "category": "MonsterCategorySunflora",
+        "category": "MonsterCategorySun",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9305,7 +9305,7 @@
     },
     {
         "name": "MonsterNameYanma",
-        "category": "MonsterCategoryYanma",
+        "category": "MonsterCategoryClearWing",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9351,7 +9351,7 @@
     },
     {
         "name": "MonsterNameWooper",
-        "category": "MonsterCategoryWooper",
+        "category": "MonsterCategoryWaterFish",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9397,7 +9397,7 @@
     },
     {
         "name": "MonsterNameQuagsire",
-        "category": "MonsterCategoryWooper",
+        "category": "MonsterCategoryWaterFish",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9450,7 +9450,7 @@
     },
     {
         "name": "MonsterNameEspeon",
-        "category": "MonsterCategorySunflora",
+        "category": "MonsterCategorySun",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9501,7 +9501,7 @@
     },
     {
         "name": "MonsterNameUmbreon",
-        "category": "MonsterCategoryUmbreon",
+        "category": "MonsterCategoryMoonlight",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9552,7 +9552,7 @@
     },
     {
         "name": "MonsterNameMurkrow",
-        "category": "MonsterCategoryMurkrow",
+        "category": "MonsterCategoryDarkness",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9596,7 +9596,7 @@
     },
     {
         "name": "MonsterNameSlowking",
-        "category": "MonsterCategorySlowking",
+        "category": "MonsterCategoryRoyal",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9650,7 +9650,7 @@
     },
     {
         "name": "MonsterNameMisdreavus",
-        "category": "MonsterCategoryMisdreavus",
+        "category": "MonsterCategoryScreech",
         "overworldPalette": 11,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9694,7 +9694,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9738,7 +9738,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9782,7 +9782,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9826,7 +9826,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9870,7 +9870,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9914,7 +9914,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -9958,7 +9958,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10002,7 +10002,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10046,7 +10046,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10090,7 +10090,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10134,7 +10134,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10178,7 +10178,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10222,7 +10222,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10266,7 +10266,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10310,7 +10310,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10354,7 +10354,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10398,7 +10398,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10442,7 +10442,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10486,7 +10486,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10530,7 +10530,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10574,7 +10574,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10618,7 +10618,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10662,7 +10662,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10706,7 +10706,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10750,7 +10750,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10794,7 +10794,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10838,7 +10838,7 @@
     },
     {
         "name": "MonsterNameWobbuffet",
-        "category": "MonsterCategoryWobbuffet",
+        "category": "MonsterCategoryPatient",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10889,7 +10889,7 @@
     },
     {
         "name": "MonsterNameGirafarig",
-        "category": "MonsterCategoryGirafarig",
+        "category": "MonsterCategoryLongNeck",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10934,7 +10934,7 @@
     },
     {
         "name": "MonsterNamePineco",
-        "category": "MonsterCategoryPineco",
+        "category": "MonsterCategoryBagworm",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -10977,7 +10977,7 @@
     },
     {
         "name": "MonsterNameForretress",
-        "category": "MonsterCategoryPineco",
+        "category": "MonsterCategoryBagworm",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11028,7 +11028,7 @@
     },
     {
         "name": "MonsterNameDunsparce",
-        "category": "MonsterCategoryDunsparce",
+        "category": "MonsterCategoryLandSnake",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11072,7 +11072,7 @@
     },
     {
         "name": "MonsterNameGligar",
-        "category": "MonsterCategoryGligar",
+        "category": "MonsterCategoryFlyscorpion",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11118,7 +11118,7 @@
     },
     {
         "name": "MonsterNameSteelix",
-        "category": "MonsterCategorySteelix",
+        "category": "MonsterCategoryIronSnake",
         "overworldPalette": 5,
         "bodySize": 4,
         "movementSpeed": 1,
@@ -11171,7 +11171,7 @@
     },
     {
         "name": "MonsterNameSnubbull",
-        "category": "MonsterCategoryClefairy",
+        "category": "MonsterCategoryFairy",
         "overworldPalette": 11,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11216,7 +11216,7 @@
     },
     {
         "name": "MonsterNameGranbull",
-        "category": "MonsterCategoryClefairy",
+        "category": "MonsterCategoryFairy",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11267,7 +11267,7 @@
     },
     {
         "name": "MonsterNameQwilfish",
-        "category": "MonsterCategoryJigglypuff",
+        "category": "MonsterCategoryBalloon",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11313,7 +11313,7 @@
     },
     {
         "name": "MonsterNameScizor",
-        "category": "MonsterCategoryKingler",
+        "category": "MonsterCategoryPincer",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11365,7 +11365,7 @@
     },
     {
         "name": "MonsterNameShuckle",
-        "category": "MonsterCategoryShuckle",
+        "category": "MonsterCategoryMold",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11409,7 +11409,7 @@
     },
     {
         "name": "MonsterNameHeracross",
-        "category": "MonsterCategoryHeracross",
+        "category": "MonsterCategorySingleHorn",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11454,7 +11454,7 @@
     },
     {
         "name": "MonsterNameSneasel",
-        "category": "MonsterCategorySneasel",
+        "category": "MonsterCategorySharpClaw",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11499,7 +11499,7 @@
     },
     {
         "name": "MonsterNameTeddiursa",
-        "category": "MonsterCategoryTeddiursa",
+        "category": "MonsterCategoryLittleBear",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11542,7 +11542,7 @@
     },
     {
         "name": "MonsterNameUrsaring",
-        "category": "MonsterCategoryUrsaring",
+        "category": "MonsterCategoryHibernator",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11592,7 +11592,7 @@
     },
     {
         "name": "MonsterNameSlugma",
-        "category": "MonsterCategorySlugma",
+        "category": "MonsterCategoryLava",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11637,7 +11637,7 @@
     },
     {
         "name": "MonsterNameMagcargo",
-        "category": "MonsterCategorySlugma",
+        "category": "MonsterCategoryLava",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11690,7 +11690,7 @@
     },
     {
         "name": "MonsterNameSwinub",
-        "category": "MonsterCategorySwinub",
+        "category": "MonsterCategoryPig",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11734,7 +11734,7 @@
     },
     {
         "name": "MonsterNamePiloswine",
-        "category": "MonsterCategoryPiloswine",
+        "category": "MonsterCategorySwine",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11785,7 +11785,7 @@
     },
     {
         "name": "MonsterNameCorsola",
-        "category": "MonsterCategoryCorsola",
+        "category": "MonsterCategoryCoral",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11831,7 +11831,7 @@
     },
     {
         "name": "MonsterNameRemoraid",
-        "category": "MonsterCategoryRemoraid",
+        "category": "MonsterCategoryJet",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11875,7 +11875,7 @@
     },
     {
         "name": "MonsterNameOctillery",
-        "category": "MonsterCategoryRemoraid",
+        "category": "MonsterCategoryJet",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11927,7 +11927,7 @@
     },
     {
         "name": "MonsterNameDelibird",
-        "category": "MonsterCategoryDelibird",
+        "category": "MonsterCategoryDelivery",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -11972,7 +11972,7 @@
     },
     {
         "name": "MonsterNameMantine",
-        "category": "MonsterCategoryMantine",
+        "category": "MonsterCategoryKite",
         "overworldPalette": 7,
         "bodySize": 2,
         "movementSpeed": 1,
@@ -12018,7 +12018,7 @@
     },
     {
         "name": "MonsterNameSkarmory",
-        "category": "MonsterCategorySkarmory",
+        "category": "MonsterCategoryArmorBird",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12064,7 +12064,7 @@
     },
     {
         "name": "MonsterNameHoundour",
-        "category": "MonsterCategoryHoundour",
+        "category": "MonsterCategoryDark",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12110,7 +12110,7 @@
     },
     {
         "name": "MonsterNameHoundoom",
-        "category": "MonsterCategoryHoundour",
+        "category": "MonsterCategoryDark",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12163,7 +12163,7 @@
     },
     {
         "name": "MonsterNameKingdra",
-        "category": "MonsterCategoryHorsea",
+        "category": "MonsterCategoryDragon",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12216,7 +12216,7 @@
     },
     {
         "name": "MonsterNamePhanpy",
-        "category": "MonsterCategoryPhanpy",
+        "category": "MonsterCategoryLongNose",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12259,7 +12259,7 @@
     },
     {
         "name": "MonsterNameDonphan",
-        "category": "MonsterCategoryDonphan",
+        "category": "MonsterCategoryArmor",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12309,7 +12309,7 @@
     },
     {
         "name": "MonsterNamePorygon2",
-        "category": "MonsterCategoryPorygon",
+        "category": "MonsterCategoryVirtual",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12361,7 +12361,7 @@
     },
     {
         "name": "MonsterNameStantler",
-        "category": "MonsterCategoryStantler",
+        "category": "MonsterCategoryBigHorn",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12404,7 +12404,7 @@
     },
     {
         "name": "MonsterNameSmeargle",
-        "category": "MonsterCategorySmeargle",
+        "category": "MonsterCategoryPainter",
         "overworldPalette": 8,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12448,7 +12448,7 @@
     },
     {
         "name": "MonsterNameTyrogue",
-        "category": "MonsterCategoryTyrogue",
+        "category": "MonsterCategoryScuffle",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12491,7 +12491,7 @@
     },
     {
         "name": "MonsterNameHitmontop",
-        "category": "MonsterCategoryHitmontop",
+        "category": "MonsterCategoryHandstand",
         "overworldPalette": 9,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12542,7 +12542,7 @@
     },
     {
         "name": "MonsterNameSmoochum",
-        "category": "MonsterCategorySmoochum",
+        "category": "MonsterCategoryKiss",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12586,7 +12586,7 @@
     },
     {
         "name": "MonsterNameElekid",
-        "category": "MonsterCategoryElectabuzz",
+        "category": "MonsterCategoryElectric",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12629,7 +12629,7 @@
     },
     {
         "name": "MonsterNameMagby",
-        "category": "MonsterCategoryMagby",
+        "category": "MonsterCategoryLiveCoal",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12673,7 +12673,7 @@
     },
     {
         "name": "MonsterNameMiltank",
-        "category": "MonsterCategoryMiltank",
+        "category": "MonsterCategoryMilkCow",
         "overworldPalette": 11,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12716,7 +12716,7 @@
     },
     {
         "name": "MonsterNameBlissey",
-        "category": "MonsterCategoryTogetic",
+        "category": "MonsterCategoryHappiness",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12767,7 +12767,7 @@
     },
     {
         "name": "MonsterNameRaikou",
-        "category": "MonsterCategoryRaikou",
+        "category": "MonsterCategoryThunder",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12811,7 +12811,7 @@
     },
     {
         "name": "MonsterNameEntei",
-        "category": "MonsterCategoryQuilava",
+        "category": "MonsterCategoryVolcano",
         "overworldPalette": 12,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12856,7 +12856,7 @@
     },
     {
         "name": "MonsterNameSuicune",
-        "category": "MonsterCategorySuicune",
+        "category": "MonsterCategoryAurora",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12901,7 +12901,7 @@
     },
     {
         "name": "MonsterNameLarvitar",
-        "category": "MonsterCategoryLarvitar",
+        "category": "MonsterCategoryRockSkin",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12945,7 +12945,7 @@
     },
     {
         "name": "MonsterNamePupitar",
-        "category": "MonsterCategoryPupitar",
+        "category": "MonsterCategoryHardShell",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -12996,7 +12996,7 @@
     },
     {
         "name": "MonsterNameTyranitar",
-        "category": "MonsterCategoryDonphan",
+        "category": "MonsterCategoryArmor",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13048,7 +13048,7 @@
     },
     {
         "name": "MonsterNameLugia",
-        "category": "MonsterCategoryLugia",
+        "category": "MonsterCategoryDiving",
         "overworldPalette": 9,
         "bodySize": 4,
         "movementSpeed": 1,
@@ -13095,7 +13095,7 @@
     },
     {
         "name": "MonsterNameHoOh",
-        "category": "MonsterCategoryHoOh",
+        "category": "MonsterCategoryRainbow",
         "overworldPalette": 3,
         "bodySize": 4,
         "movementSpeed": 1,
@@ -13141,7 +13141,7 @@
     },
     {
         "name": "MonsterNameCelebi",
-        "category": "MonsterCategoryCelebi",
+        "category": "MonsterCategoryTimeTravel",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13187,7 +13187,7 @@
     },
     {
         "name": "MonsterNameTreecko",
-        "category": "MonsterCategoryTreecko",
+        "category": "MonsterCategoryWoodGecko",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13231,7 +13231,7 @@
     },
     {
         "name": "MonsterNameGrovyle",
-        "category": "MonsterCategoryTreecko",
+        "category": "MonsterCategoryWoodGecko",
         "overworldPalette": 12,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13281,7 +13281,7 @@
     },
     {
         "name": "MonsterNameSceptile",
-        "category": "MonsterCategorySceptile",
+        "category": "MonsterCategoryForest",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13331,7 +13331,7 @@
     },
     {
         "name": "MonsterNameTorchic",
-        "category": "MonsterCategoryTorchic",
+        "category": "MonsterCategoryChick",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13376,7 +13376,7 @@
     },
     {
         "name": "MonsterNameCombusken",
-        "category": "MonsterCategoryCombusken",
+        "category": "MonsterCategoryYoungFowl",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13428,7 +13428,7 @@
     },
     {
         "name": "MonsterNameBlaziken",
-        "category": "MonsterCategoryBlaziken",
+        "category": "MonsterCategoryBlaze",
         "overworldPalette": 12,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13480,7 +13480,7 @@
     },
     {
         "name": "MonsterNameMudkip",
-        "category": "MonsterCategoryMudkip",
+        "category": "MonsterCategoryMudFish",
         "overworldPalette": 9,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13525,7 +13525,7 @@
     },
     {
         "name": "MonsterNameMarshtomp",
-        "category": "MonsterCategoryMudkip",
+        "category": "MonsterCategoryMudFish",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13577,7 +13577,7 @@
     },
     {
         "name": "MonsterNameSwampert",
-        "category": "MonsterCategoryMudkip",
+        "category": "MonsterCategoryMudFish",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13629,7 +13629,7 @@
     },
     {
         "name": "MonsterNamePoochyena",
-        "category": "MonsterCategoryPoochyena",
+        "category": "MonsterCategoryBite",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13672,7 +13672,7 @@
     },
     {
         "name": "MonsterNameMightyena",
-        "category": "MonsterCategoryPoochyena",
+        "category": "MonsterCategoryBite",
         "overworldPalette": 11,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13722,7 +13722,7 @@
     },
     {
         "name": "MonsterNameZigzagoon",
-        "category": "MonsterCategoryZigzagoon",
+        "category": "MonsterCategoryTinyraccoon",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13765,7 +13765,7 @@
     },
     {
         "name": "MonsterNameLinoone",
-        "category": "MonsterCategoryLinoone",
+        "category": "MonsterCategoryRushing",
         "overworldPalette": 9,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13815,7 +13815,7 @@
     },
     {
         "name": "MonsterNameWurmple",
-        "category": "MonsterCategoryCaterpie",
+        "category": "MonsterCategoryWorm",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13858,7 +13858,7 @@
     },
     {
         "name": "MonsterNameSilcoon",
-        "category": "MonsterCategoryMetapod",
+        "category": "MonsterCategoryCocoon",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13909,7 +13909,7 @@
     },
     {
         "name": "MonsterNameBeautifly",
-        "category": "MonsterCategoryButterfree",
+        "category": "MonsterCategoryButterfly",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -13961,7 +13961,7 @@
     },
     {
         "name": "MonsterNameCascoon",
-        "category": "MonsterCategoryMetapod",
+        "category": "MonsterCategoryCocoon",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14012,7 +14012,7 @@
     },
     {
         "name": "MonsterNameDustox",
-        "category": "MonsterCategoryVenomoth",
+        "category": "MonsterCategoryPoisonMoth",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14064,7 +14064,7 @@
     },
     {
         "name": "MonsterNameLotad",
-        "category": "MonsterCategoryLotad",
+        "category": "MonsterCategoryWaterWeed",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14110,7 +14110,7 @@
     },
     {
         "name": "MonsterNameLombre",
-        "category": "MonsterCategoryLombre",
+        "category": "MonsterCategoryJolly",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14164,7 +14164,7 @@
     },
     {
         "name": "MonsterNameLudicolo",
-        "category": "MonsterCategoryLudicolo",
+        "category": "MonsterCategoryCarefree",
         "overworldPalette": 8,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14217,7 +14217,7 @@
     },
     {
         "name": "MonsterNameSeedot",
-        "category": "MonsterCategorySeedot",
+        "category": "MonsterCategoryAcorn",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14261,7 +14261,7 @@
     },
     {
         "name": "MonsterNameNuzleaf",
-        "category": "MonsterCategoryNuzleaf",
+        "category": "MonsterCategoryWily",
         "overworldPalette": 8,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14313,7 +14313,7 @@
     },
     {
         "name": "MonsterNameShiftry",
-        "category": "MonsterCategoryShiftry",
+        "category": "MonsterCategoryWicked",
         "overworldPalette": 8,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14366,7 +14366,7 @@
     },
     {
         "name": "MonsterNameTaillow",
-        "category": "MonsterCategoryTaillow",
+        "category": "MonsterCategoryTinyswallow",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14410,7 +14410,7 @@
     },
     {
         "name": "MonsterNameSwellow",
-        "category": "MonsterCategorySwellow",
+        "category": "MonsterCategorySwallow",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14461,7 +14461,7 @@
     },
     {
         "name": "MonsterNameWingull",
-        "category": "MonsterCategoryWingull",
+        "category": "MonsterCategorySeagull",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14506,7 +14506,7 @@
     },
     {
         "name": "MonsterNamePelipper",
-        "category": "MonsterCategoryPelipper",
+        "category": "MonsterCategoryWaterBird",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14559,7 +14559,7 @@
     },
     {
         "name": "MonsterNameRalts",
-        "category": "MonsterCategoryRalts",
+        "category": "MonsterCategoryFeeling",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14603,7 +14603,7 @@
     },
     {
         "name": "MonsterNameKirlia",
-        "category": "MonsterCategoryKirlia",
+        "category": "MonsterCategoryEmotion",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14654,7 +14654,7 @@
     },
     {
         "name": "MonsterNameGardevoir",
-        "category": "MonsterCategoryGardevoir",
+        "category": "MonsterCategoryEmbrace",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14706,7 +14706,7 @@
     },
     {
         "name": "MonsterNameSurskit",
-        "category": "MonsterCategorySurskit",
+        "category": "MonsterCategoryPondSkater",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14751,7 +14751,7 @@
     },
     {
         "name": "MonsterNameMasquerain",
-        "category": "MonsterCategoryMasquerain",
+        "category": "MonsterCategoryEyeball",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14803,7 +14803,7 @@
     },
     {
         "name": "MonsterNameShroomish",
-        "category": "MonsterCategoryParas",
+        "category": "MonsterCategoryMushroom",
         "overworldPalette": 8,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14846,7 +14846,7 @@
     },
     {
         "name": "MonsterNameBreloom",
-        "category": "MonsterCategoryParas",
+        "category": "MonsterCategoryMushroom",
         "overworldPalette": 8,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14897,7 +14897,7 @@
     },
     {
         "name": "MonsterNameSlakoth",
-        "category": "MonsterCategorySlakoth",
+        "category": "MonsterCategorySlacker",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14940,7 +14940,7 @@
     },
     {
         "name": "MonsterNameVigoroth",
-        "category": "MonsterCategoryVigoroth",
+        "category": "MonsterCategoryWildMonkey",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -14990,7 +14990,7 @@
     },
     {
         "name": "MonsterNameSlaking",
-        "category": "MonsterCategorySlaking",
+        "category": "MonsterCategoryLazy",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15040,7 +15040,7 @@
     },
     {
         "name": "MonsterNameNincada",
-        "category": "MonsterCategoryNincada",
+        "category": "MonsterCategoryTrainee",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15084,7 +15084,7 @@
     },
     {
         "name": "MonsterNameNinjask",
-        "category": "MonsterCategoryNinjask",
+        "category": "MonsterCategoryNinja",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15136,7 +15136,7 @@
     },
     {
         "name": "MonsterNameShedinja",
-        "category": "MonsterCategoryShedinja",
+        "category": "MonsterCategoryShed",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15188,7 +15188,7 @@
     },
     {
         "name": "MonsterNameWhismur",
-        "category": "MonsterCategoryWhismur",
+        "category": "MonsterCategoryWhisper",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15231,7 +15231,7 @@
     },
     {
         "name": "MonsterNameLoudred",
-        "category": "MonsterCategoryLoudred",
+        "category": "MonsterCategoryBigVoice",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15281,7 +15281,7 @@
     },
     {
         "name": "MonsterNameExploud",
-        "category": "MonsterCategoryExploud",
+        "category": "MonsterCategoryLoudNoise",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15331,7 +15331,7 @@
     },
     {
         "name": "MonsterNameMakuhita",
-        "category": "MonsterCategoryMakuhita",
+        "category": "MonsterCategoryGuts",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15376,7 +15376,7 @@
     },
     {
         "name": "MonsterNameHariyama",
-        "category": "MonsterCategoryHariyama",
+        "category": "MonsterCategoryArmThrust",
         "overworldPalette": 9,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15427,7 +15427,7 @@
     },
     {
         "name": "MonsterNameAzurill",
-        "category": "MonsterCategoryAzurill",
+        "category": "MonsterCategoryPolkaDot",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15472,7 +15472,7 @@
     },
     {
         "name": "MonsterNameNosepass",
-        "category": "MonsterCategoryNosepass",
+        "category": "MonsterCategoryCompass",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15516,7 +15516,7 @@
     },
     {
         "name": "MonsterNameSkitty",
-        "category": "MonsterCategorySkitty",
+        "category": "MonsterCategoryKitten",
         "overworldPalette": 11,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15560,7 +15560,7 @@
     },
     {
         "name": "MonsterNameDelcatty",
-        "category": "MonsterCategoryDelcatty",
+        "category": "MonsterCategoryPrim",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15610,7 +15610,7 @@
     },
     {
         "name": "MonsterNameSableye",
-        "category": "MonsterCategoryMurkrow",
+        "category": "MonsterCategoryDarkness",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15654,7 +15654,7 @@
     },
     {
         "name": "MonsterNameMawile",
-        "category": "MonsterCategoryMawile",
+        "category": "MonsterCategoryDeceiver",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15698,7 +15698,7 @@
     },
     {
         "name": "MonsterNameAron",
-        "category": "MonsterCategoryAron",
+        "category": "MonsterCategoryIronArmor",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15743,7 +15743,7 @@
     },
     {
         "name": "MonsterNameLairon",
-        "category": "MonsterCategoryAron",
+        "category": "MonsterCategoryIronArmor",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15795,7 +15795,7 @@
     },
     {
         "name": "MonsterNameAggron",
-        "category": "MonsterCategoryAron",
+        "category": "MonsterCategoryIronArmor",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15847,7 +15847,7 @@
     },
     {
         "name": "MonsterNameMeditite",
-        "category": "MonsterCategoryMeditite",
+        "category": "MonsterCategoryMeditate",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15892,7 +15892,7 @@
     },
     {
         "name": "MonsterNameMedicham",
-        "category": "MonsterCategoryMeditite",
+        "category": "MonsterCategoryMeditate",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15944,7 +15944,7 @@
     },
     {
         "name": "MonsterNameElectrike",
-        "category": "MonsterCategoryJolteon",
+        "category": "MonsterCategoryLightning",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -15988,7 +15988,7 @@
     },
     {
         "name": "MonsterNameManectric",
-        "category": "MonsterCategoryManectric",
+        "category": "MonsterCategoryDischarge",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16039,7 +16039,7 @@
     },
     {
         "name": "MonsterNamePlusle",
-        "category": "MonsterCategoryPlusle",
+        "category": "MonsterCategoryCheering",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16082,7 +16082,7 @@
     },
     {
         "name": "MonsterNameMinun",
-        "category": "MonsterCategoryPlusle",
+        "category": "MonsterCategoryCheering",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16125,7 +16125,7 @@
     },
     {
         "name": "MonsterNameVolbeat",
-        "category": "MonsterCategoryVolbeat",
+        "category": "MonsterCategoryFirefly",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16169,7 +16169,7 @@
     },
     {
         "name": "MonsterNameIllumise",
-        "category": "MonsterCategoryVolbeat",
+        "category": "MonsterCategoryFirefly",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16212,7 +16212,7 @@
     },
     {
         "name": "MonsterNameRoselia",
-        "category": "MonsterCategoryRoselia",
+        "category": "MonsterCategoryThorn",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16257,7 +16257,7 @@
     },
     {
         "name": "MonsterNameGulpin",
-        "category": "MonsterCategoryGulpin",
+        "category": "MonsterCategoryStomach",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16302,7 +16302,7 @@
     },
     {
         "name": "MonsterNameSwalot",
-        "category": "MonsterCategorySwalot",
+        "category": "MonsterCategoryPoisonBag",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16353,7 +16353,7 @@
     },
     {
         "name": "MonsterNameCarvanha",
-        "category": "MonsterCategoryCarvanha",
+        "category": "MonsterCategorySavage",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16398,7 +16398,7 @@
     },
     {
         "name": "MonsterNameSharpedo",
-        "category": "MonsterCategorySharpedo",
+        "category": "MonsterCategoryBrutal",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16450,7 +16450,7 @@
     },
     {
         "name": "MonsterNameWailmer",
-        "category": "MonsterCategoryWailmer",
+        "category": "MonsterCategoryBallWhale",
         "overworldPalette": 9,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16495,7 +16495,7 @@
     },
     {
         "name": "MonsterNameWailord",
-        "category": "MonsterCategoryWailord",
+        "category": "MonsterCategoryFloatWhale",
         "overworldPalette": 5,
         "bodySize": 4,
         "movementSpeed": 1,
@@ -16547,7 +16547,7 @@
     },
     {
         "name": "MonsterNameNumel",
-        "category": "MonsterCategoryNumel",
+        "category": "MonsterCategoryNumb",
         "overworldPalette": 8,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16592,7 +16592,7 @@
     },
     {
         "name": "MonsterNameCamerupt",
-        "category": "MonsterCategoryNone",
+        "category": "MonsterCategoryEruption",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16644,7 +16644,7 @@
     },
     {
         "name": "MonsterNameTorkoal",
-        "category": "MonsterCategoryTorkoal",
+        "category": "MonsterCategoryCoal",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16688,7 +16688,7 @@
     },
     {
         "name": "MonsterNameSpoink",
-        "category": "MonsterCategorySpoink",
+        "category": "MonsterCategoryBounce",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16732,7 +16732,7 @@
     },
     {
         "name": "MonsterNameGrumpig",
-        "category": "MonsterCategoryGrumpig",
+        "category": "MonsterCategoryManipulate",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16783,7 +16783,7 @@
     },
     {
         "name": "MonsterNameSpinda",
-        "category": "MonsterCategorySpinda",
+        "category": "MonsterCategorySpotPanda",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16827,7 +16827,7 @@
     },
     {
         "name": "MonsterNameTrapinch",
-        "category": "MonsterCategoryTrapinch",
+        "category": "MonsterCategoryAntPit",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16871,7 +16871,7 @@
     },
     {
         "name": "MonsterNameVibrava",
-        "category": "MonsterCategoryVibrava",
+        "category": "MonsterCategoryVibration",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16923,7 +16923,7 @@
     },
     {
         "name": "MonsterNameFlygon",
-        "category": "MonsterCategoryXatu",
+        "category": "MonsterCategoryMystic",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -16975,7 +16975,7 @@
     },
     {
         "name": "MonsterNameCacnea",
-        "category": "MonsterCategoryCacnea",
+        "category": "MonsterCategoryCactus",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17018,7 +17018,7 @@
     },
     {
         "name": "MonsterNameCacturne",
-        "category": "MonsterCategoryCacturne",
+        "category": "MonsterCategoryScarecrow",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17069,7 +17069,7 @@
     },
     {
         "name": "MonsterNameSwablu",
-        "category": "MonsterCategorySwablu",
+        "category": "MonsterCategoryCottonBird",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17114,7 +17114,7 @@
     },
     {
         "name": "MonsterNameAltaria",
-        "category": "MonsterCategoryAltaria",
+        "category": "MonsterCategoryHumming",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17165,7 +17165,7 @@
     },
     {
         "name": "MonsterNameZangoose",
-        "category": "MonsterCategoryZangoose",
+        "category": "MonsterCategoryCatFerret",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17208,7 +17208,7 @@
     },
     {
         "name": "MonsterNameSeviper",
-        "category": "MonsterCategorySeviper",
+        "category": "MonsterCategoryFangSnake",
         "overworldPalette": 2,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17251,7 +17251,7 @@
     },
     {
         "name": "MonsterNameLunatone",
-        "category": "MonsterCategoryLunatone",
+        "category": "MonsterCategoryMeteorite",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17296,7 +17296,7 @@
     },
     {
         "name": "MonsterNameSolrock",
-        "category": "MonsterCategoryLunatone",
+        "category": "MonsterCategoryMeteorite",
         "overworldPalette": 4,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17341,7 +17341,7 @@
     },
     {
         "name": "MonsterNameBarboach",
-        "category": "MonsterCategoryBarboach",
+        "category": "MonsterCategoryWhiskers",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17386,7 +17386,7 @@
     },
     {
         "name": "MonsterNameWhiscash",
-        "category": "MonsterCategoryBarboach",
+        "category": "MonsterCategoryWhiskers",
         "overworldPalette": 9,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17439,7 +17439,7 @@
     },
     {
         "name": "MonsterNameCorphish",
-        "category": "MonsterCategoryCorphish",
+        "category": "MonsterCategoryRuffian",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17484,7 +17484,7 @@
     },
     {
         "name": "MonsterNameCrawdaunt",
-        "category": "MonsterCategoryCrawdaunt",
+        "category": "MonsterCategoryRogue",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17537,7 +17537,7 @@
     },
     {
         "name": "MonsterNameBaltoy",
-        "category": "MonsterCategoryBaltoy",
+        "category": "MonsterCategoryClayDoll",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17582,7 +17582,7 @@
     },
     {
         "name": "MonsterNameClaydol",
-        "category": "MonsterCategoryBaltoy",
+        "category": "MonsterCategoryClayDoll",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17634,7 +17634,7 @@
     },
     {
         "name": "MonsterNameLileep",
-        "category": "MonsterCategoryLileep",
+        "category": "MonsterCategorySeaLily",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17678,7 +17678,7 @@
     },
     {
         "name": "MonsterNameCradily",
-        "category": "MonsterCategoryCradily",
+        "category": "MonsterCategoryBarnacle",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17729,7 +17729,7 @@
     },
     {
         "name": "MonsterNameAnorith",
-        "category": "MonsterCategoryAnorith",
+        "category": "MonsterCategoryOldShrimp",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17773,7 +17773,7 @@
     },
     {
         "name": "MonsterNameArmaldo",
-        "category": "MonsterCategoryArmaldo",
+        "category": "MonsterCategoryPlate",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17824,7 +17824,7 @@
     },
     {
         "name": "MonsterNameFeebas",
-        "category": "MonsterCategoryMagikarp",
+        "category": "MonsterCategoryFish",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17868,7 +17868,7 @@
     },
     {
         "name": "MonsterNameMilotic",
-        "category": "MonsterCategoryMilotic",
+        "category": "MonsterCategoryTender",
         "overworldPalette": 0,
         "bodySize": 4,
         "movementSpeed": 1,
@@ -17920,7 +17920,7 @@
     },
     {
         "name": "MonsterNameCastform",
-        "category": "MonsterCategoryCastform",
+        "category": "MonsterCategoryWeather",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -17963,7 +17963,7 @@
     },
     {
         "name": "MonsterNameCastform",
-        "category": "MonsterCategoryCastform",
+        "category": "MonsterCategoryWeather",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18006,7 +18006,7 @@
     },
     {
         "name": "MonsterNameCastform",
-        "category": "MonsterCategoryCastform",
+        "category": "MonsterCategoryWeather",
         "overworldPalette": 0,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18049,7 +18049,7 @@
     },
     {
         "name": "MonsterNameCastform",
-        "category": "MonsterCategoryCastform",
+        "category": "MonsterCategoryWeather",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18092,7 +18092,7 @@
     },
     {
         "name": "MonsterNameKecleon",
-        "category": "MonsterCategoryKecleon",
+        "category": "MonsterCategoryColorSwap",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18136,7 +18136,7 @@
     },
     {
         "name": "MonsterNameShuppet",
-        "category": "MonsterCategoryShuppet",
+        "category": "MonsterCategoryPuppet",
         "overworldPalette": 9,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18180,7 +18180,7 @@
     },
     {
         "name": "MonsterNameBanette",
-        "category": "MonsterCategoryBanette",
+        "category": "MonsterCategoryMarionette",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18231,7 +18231,7 @@
     },
     {
         "name": "MonsterNameDuskull",
-        "category": "MonsterCategoryDuskull",
+        "category": "MonsterCategoryRequiem",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18275,7 +18275,7 @@
     },
     {
         "name": "MonsterNameDusclops",
-        "category": "MonsterCategoryDusclops",
+        "category": "MonsterCategoryBeckon",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18325,7 +18325,7 @@
     },
     {
         "name": "MonsterNameTropius",
-        "category": "MonsterCategoryTropius",
+        "category": "MonsterCategoryFruit",
         "overworldPalette": 8,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18369,7 +18369,7 @@
     },
     {
         "name": "MonsterNameChimecho",
-        "category": "MonsterCategoryChimecho",
+        "category": "MonsterCategoryWindChime",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18413,7 +18413,7 @@
     },
     {
         "name": "MonsterNameAbsol",
-        "category": "MonsterCategoryAbsol",
+        "category": "MonsterCategoryDisaster",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18458,7 +18458,7 @@
     },
     {
         "name": "MonsterNameWynaut",
-        "category": "MonsterCategoryWynaut",
+        "category": "MonsterCategoryBright",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18502,7 +18502,7 @@
     },
     {
         "name": "MonsterNameSnorunt",
-        "category": "MonsterCategorySnorunt",
+        "category": "MonsterCategorySnowHat",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18545,7 +18545,7 @@
     },
     {
         "name": "MonsterNameGlalie",
-        "category": "MonsterCategoryGlalie",
+        "category": "MonsterCategoryFace",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18595,7 +18595,7 @@
     },
     {
         "name": "MonsterNameSpheal",
-        "category": "MonsterCategorySpheal",
+        "category": "MonsterCategoryClap",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18640,7 +18640,7 @@
     },
     {
         "name": "MonsterNameSealeo",
-        "category": "MonsterCategorySealeo",
+        "category": "MonsterCategoryBallRoll",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18692,7 +18692,7 @@
     },
     {
         "name": "MonsterNameWalrein",
-        "category": "MonsterCategoryWalrein",
+        "category": "MonsterCategoryIceBreak",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18744,7 +18744,7 @@
     },
     {
         "name": "MonsterNameClamperl",
-        "category": "MonsterCategoryShellder",
+        "category": "MonsterCategoryBivalve",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18788,7 +18788,7 @@
     },
     {
         "name": "MonsterNameHuntail",
-        "category": "MonsterCategoryHuntail",
+        "category": "MonsterCategoryDeepSea",
         "overworldPalette": 1,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18840,7 +18840,7 @@
     },
     {
         "name": "MonsterNameGorebyss",
-        "category": "MonsterCategoryGorebyss",
+        "category": "MonsterCategorySouthSea",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18892,7 +18892,7 @@
     },
     {
         "name": "MonsterNameRelicanth",
-        "category": "MonsterCategoryRelicanth",
+        "category": "MonsterCategoryLongevity",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18938,7 +18938,7 @@
     },
     {
         "name": "MonsterNameLuvdisc",
-        "category": "MonsterCategoryLuvdisc",
+        "category": "MonsterCategoryRendezvous",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -18982,7 +18982,7 @@
     },
     {
         "name": "MonsterNameBagon",
-        "category": "MonsterCategoryBagon",
+        "category": "MonsterCategoryRockHead",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -19025,7 +19025,7 @@
     },
     {
         "name": "MonsterNameShelgon",
-        "category": "MonsterCategoryShelgon",
+        "category": "MonsterCategoryEndurance",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -19075,7 +19075,7 @@
     },
     {
         "name": "MonsterNameSalamence",
-        "category": "MonsterCategoryHorsea",
+        "category": "MonsterCategoryDragon",
         "overworldPalette": 5,
         "bodySize": 2,
         "movementSpeed": 1,
@@ -19126,7 +19126,7 @@
     },
     {
         "name": "MonsterNameBeldum",
-        "category": "MonsterCategoryBeldum",
+        "category": "MonsterCategoryIronBall",
         "overworldPalette": 11,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -19171,7 +19171,7 @@
     },
     {
         "name": "MonsterNameMetang",
-        "category": "MonsterCategoryMetang",
+        "category": "MonsterCategoryIronClaw",
         "overworldPalette": 11,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -19223,7 +19223,7 @@
     },
     {
         "name": "MonsterNameMetagross",
-        "category": "MonsterCategoryMetagross",
+        "category": "MonsterCategoryIronLeg",
         "overworldPalette": 11,
         "bodySize": 2,
         "movementSpeed": 1,
@@ -19274,7 +19274,7 @@
     },
     {
         "name": "MonsterNameRegirock",
-        "category": "MonsterCategoryRegirock",
+        "category": "MonsterCategoryRockPeak",
         "overworldPalette": 6,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -19317,7 +19317,7 @@
     },
     {
         "name": "MonsterNameRegice",
-        "category": "MonsterCategoryRegice",
+        "category": "MonsterCategoryIceberg",
         "overworldPalette": 9,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -19360,7 +19360,7 @@
     },
     {
         "name": "MonsterNameRegisteel",
-        "category": "MonsterCategoryRegisteel",
+        "category": "MonsterCategoryIron",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -19403,7 +19403,7 @@
     },
     {
         "name": "MonsterNameLatias",
-        "category": "MonsterCategoryLatias",
+        "category": "MonsterCategoryEon",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -19450,7 +19450,7 @@
     },
     {
         "name": "MonsterNameLatios",
-        "category": "MonsterCategoryLatias",
+        "category": "MonsterCategoryEon",
         "overworldPalette": 5,
         "bodySize": 2,
         "movementSpeed": 1,
@@ -19497,7 +19497,7 @@
     },
     {
         "name": "MonsterNameKyogre",
-        "category": "MonsterCategoryKyogre",
+        "category": "MonsterCategorySeaBasin",
         "overworldPalette": 5,
         "bodySize": 4,
         "movementSpeed": 1,
@@ -19543,7 +19543,7 @@
     },
     {
         "name": "MonsterNameGroudon",
-        "category": "MonsterCategoryGroudon",
+        "category": "MonsterCategoryContinent",
         "overworldPalette": 5,
         "bodySize": 4,
         "movementSpeed": 1,
@@ -19589,7 +19589,7 @@
     },
     {
         "name": "MonsterNameRayquaza",
-        "category": "MonsterCategoryRayquaza",
+        "category": "MonsterCategorySkyHigh",
         "overworldPalette": 3,
         "bodySize": 4,
         "movementSpeed": 1,
@@ -19636,7 +19636,7 @@
     },
     {
         "name": "MonsterNameJirachi",
-        "category": "MonsterCategoryJirachi",
+        "category": "MonsterCategoryWish",
         "overworldPalette": 10,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -19682,7 +19682,7 @@
     },
     {
         "name": "MonsterNameDeoxys",
-        "category": "MonsterCategoryDeoxys",
+        "category": "MonsterCategoryDNA",
         "overworldPalette": 9,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -19728,7 +19728,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -19772,7 +19772,7 @@
     },
     {
         "name": "MonsterNameUnown",
-        "category": "MonsterCategoryUnown",
+        "category": "MonsterCategorySymbol",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -19816,7 +19816,7 @@
     },
     {
         "name": "MonsterNameDeoxys",
-        "category": "MonsterCategoryDeoxys",
+        "category": "MonsterCategoryDNA",
         "overworldPalette": 9,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -19861,7 +19861,7 @@
     },
     {
         "name": "MonsterNameDeoxys",
-        "category": "MonsterCategoryDeoxys",
+        "category": "MonsterCategoryDNA",
         "overworldPalette": 9,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -19906,7 +19906,7 @@
     },
     {
         "name": "MonsterNameDeoxys",
-        "category": "MonsterCategoryDeoxys",
+        "category": "MonsterCategoryDNA",
         "overworldPalette": 9,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -19951,7 +19951,7 @@
     },
     {
         "name": "MonsterNameMunchlax",
-        "category": "MonsterCategoryLoudred",
+        "category": "MonsterCategoryBigVoice",
         "overworldPalette": 12,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -19995,7 +19995,7 @@
     },
     {
         "name": "MonsterNameDecoy",
-        "category": "MonsterCategorySlakoth",
+        "category": "MonsterCategorySlacker",
         "overworldPalette": 3,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -20038,7 +20038,7 @@
     },
     {
         "name": "MonsterNameStatue",
-        "category": "MonsterCategoryTorkoal",
+        "category": "MonsterCategoryCoal",
         "overworldPalette": 5,
         "bodySize": 1,
         "movementSpeed": 1,
@@ -20081,7 +20081,7 @@
     },
     {
         "name": "MonsterNameRayquaza",
-        "category": "MonsterCategoryRayquaza",
+        "category": "MonsterCategorySkyHigh",
         "overworldPalette": 3,
         "bodySize": 4,
         "movementSpeed": 1,

@@ -13,8 +13,8 @@ MonsterNameMunchlax:
 .string "Munchlax\0"
 .align 2,0
 
-.global MonsterCategoryDeoxys
-MonsterCategoryDeoxys:
+.global MonsterCategoryDNA
+MonsterCategoryDNA:
 .string "DNA\0"
 .align 2,0
 
@@ -23,8 +23,8 @@ MonsterNameDeoxys:
 .string "Deoxys\0"
 .align 2,0
 
-.global MonsterCategoryJirachi
-MonsterCategoryJirachi:
+.global MonsterCategoryWish
+MonsterCategoryWish:
 .string "Wish\0"
 .align 2,0
 
@@ -33,8 +33,8 @@ MonsterNameJirachi:
 .string "Jirachi\0"
 .align 2,0
 
-.global MonsterCategoryRayquaza
-MonsterCategoryRayquaza:
+.global MonsterCategorySkyHigh
+MonsterCategorySkyHigh:
 .string "Sky High\0"
 .align 2,0
 
@@ -43,8 +43,8 @@ MonsterNameRayquaza:
 .string "Rayquaza\0"
 .align 2,0
 
-.global MonsterCategoryGroudon
-MonsterCategoryGroudon:
+.global MonsterCategoryContinent
+MonsterCategoryContinent:
 .string "Continent\0"
 .align 2,0
 
@@ -53,8 +53,8 @@ MonsterNameGroudon:
 .string "Groudon\0"
 .align 2,0
 
-.global MonsterCategoryKyogre
-MonsterCategoryKyogre:
+.global MonsterCategorySeaBasin
+MonsterCategorySeaBasin:
 .string "Sea Basin\0"
 .align 2,0
 
@@ -68,8 +68,8 @@ MonsterNameLatios:
 .string "Latios\0"
 .align 2,0
 
-.global MonsterCategoryLatias
-MonsterCategoryLatias:
+.global MonsterCategoryEon
+MonsterCategoryEon:
 .string "Eon\0"
 .align 2,0
 
@@ -78,8 +78,8 @@ MonsterNameLatias:
 .string "Latias\0"
 .align 2,0
 
-.global MonsterCategoryRegisteel
-MonsterCategoryRegisteel:
+.global MonsterCategoryIron
+MonsterCategoryIron:
 .string "Iron\0"
 .align 2,0
 
@@ -88,8 +88,8 @@ MonsterNameRegisteel:
 .string "Registeel\0"
 .align 2,0
 
-.global MonsterCategoryRegice
-MonsterCategoryRegice:
+.global MonsterCategoryIceberg
+MonsterCategoryIceberg:
 .string "Iceberg\0"
 .align 2,0
 
@@ -98,8 +98,8 @@ MonsterNameRegice:
 .string "Regice\0"
 .align 2,0
 
-.global MonsterCategoryRegirock
-MonsterCategoryRegirock:
+.global MonsterCategoryRockPeak
+MonsterCategoryRockPeak:
 .string "Rock Peak\0"
 .align 2,0
 
@@ -108,8 +108,8 @@ MonsterNameRegirock:
 .string "Regirock\0"
 .align 2,0
 
-.global MonsterCategoryMetagross
-MonsterCategoryMetagross:
+.global MonsterCategoryIronLeg
+MonsterCategoryIronLeg:
 .string "Iron Leg\0"
 .align 2,0
 
@@ -118,8 +118,8 @@ MonsterNameMetagross:
 .string "Metagross\0"
 .align 2,0
 
-.global MonsterCategoryMetang
-MonsterCategoryMetang:
+.global MonsterCategoryIronClaw
+MonsterCategoryIronClaw:
 .string "Iron Claw\0"
 .align 2,0
 
@@ -128,8 +128,8 @@ MonsterNameMetang:
 .string "Metang\0"
 .align 2,0
 
-.global MonsterCategoryBeldum
-MonsterCategoryBeldum:
+.global MonsterCategoryIronBall
+MonsterCategoryIronBall:
 .string "Iron Ball\0"
 .align 2,0
 
@@ -143,8 +143,8 @@ MonsterNameSalamence:
 .string "Salamence\0"
 .align 2,0
 
-.global MonsterCategoryShelgon
-MonsterCategoryShelgon:
+.global MonsterCategoryEndurance
+MonsterCategoryEndurance:
 .string "Endurance\0"
 .align 2,0
 
@@ -153,8 +153,8 @@ MonsterNameShelgon:
 .string "Shelgon\0"
 .align 2,0
 
-.global MonsterCategoryBagon
-MonsterCategoryBagon:
+.global MonsterCategoryRockHead
+MonsterCategoryRockHead:
 .string "Rock Head\0"
 .align 2,0
 
@@ -163,8 +163,8 @@ MonsterNameBagon:
 .string "Bagon\0"
 .align 2,0
 
-.global MonsterCategoryLuvdisc
-MonsterCategoryLuvdisc:
+.global MonsterCategoryRendezvous
+MonsterCategoryRendezvous:
 .string "Rendezvous\0"
 .align 2,0
 
@@ -173,8 +173,8 @@ MonsterNameLuvdisc:
 .string "Luvdisc\0"
 .align 2,0
 
-.global MonsterCategoryRelicanth
-MonsterCategoryRelicanth:
+.global MonsterCategoryLongevity
+MonsterCategoryLongevity:
 .string "Longevity\0"
 .align 2,0
 
@@ -183,8 +183,8 @@ MonsterNameRelicanth:
 .string "Relicanth\0"
 .align 2,0
 
-.global MonsterCategoryGorebyss
-MonsterCategoryGorebyss:
+.global MonsterCategorySouthSea
+MonsterCategorySouthSea:
 .string "South Sea\0"
 .align 2,0
 
@@ -193,8 +193,8 @@ MonsterNameGorebyss:
 .string "Gorebyss\0"
 .align 2,0
 
-.global MonsterCategoryHuntail
-MonsterCategoryHuntail:
+.global MonsterCategoryDeepSea
+MonsterCategoryDeepSea:
 .string "Deep Sea\0"
 .align 2,0
 
@@ -208,8 +208,8 @@ MonsterNameClamperl:
 .string "Clamperl\0"
 .align 2,0
 
-.global MonsterCategoryWalrein
-MonsterCategoryWalrein:
+.global MonsterCategoryIceBreak
+MonsterCategoryIceBreak:
 .string "Ice Break\0"
 .align 2,0
 
@@ -218,8 +218,8 @@ MonsterNameWalrein:
 .string "Walrein\0"
 .align 2,0
 
-.global MonsterCategorySealeo
-MonsterCategorySealeo:
+.global MonsterCategoryBallRoll
+MonsterCategoryBallRoll:
 .string "Ball Roll\0"
 .align 2,0
 
@@ -228,8 +228,8 @@ MonsterNameSealeo:
 .string "Sealeo\0"
 .align 2,0
 
-.global MonsterCategorySpheal
-MonsterCategorySpheal:
+.global MonsterCategoryClap
+MonsterCategoryClap:
 .string "Clap\0"
 .align 2,0
 
@@ -238,8 +238,8 @@ MonsterNameSpheal:
 .string "Spheal\0"
 .align 2,0
 
-.global MonsterCategoryGlalie
-MonsterCategoryGlalie:
+.global MonsterCategoryFace
+MonsterCategoryFace:
 .string "Face\0"
 .align 2,0
 
@@ -248,8 +248,8 @@ MonsterNameGlalie:
 .string "Glalie\0"
 .align 2,0
 
-.global MonsterCategorySnorunt
-MonsterCategorySnorunt:
+.global MonsterCategorySnowHat
+MonsterCategorySnowHat:
 .string "Snow Hat\0"
 .align 2,0
 
@@ -258,8 +258,8 @@ MonsterNameSnorunt:
 .string "Snorunt\0"
 .align 2,0
 
-.global MonsterCategoryWynaut
-MonsterCategoryWynaut:
+.global MonsterCategoryBright
+MonsterCategoryBright:
 .string "Bright\0"
 .align 2,0
 
@@ -268,8 +268,8 @@ MonsterNameWynaut:
 .string "Wynaut\0"
 .align 2,0
 
-.global MonsterCategoryAbsol
-MonsterCategoryAbsol:
+.global MonsterCategoryDisaster
+MonsterCategoryDisaster:
 .string "Disaster\0"
 .align 2,0
 
@@ -278,8 +278,8 @@ MonsterNameAbsol:
 .string "Absol\0"
 .align 2,0
 
-.global MonsterCategoryChimecho
-MonsterCategoryChimecho:
+.global MonsterCategoryWindChime
+MonsterCategoryWindChime:
 .string "Wind Chime\0"
 .align 2,0
 
@@ -288,8 +288,8 @@ MonsterNameChimecho:
 .string "Chimecho\0"
 .align 2,0
 
-.global MonsterCategoryTropius
-MonsterCategoryTropius:
+.global MonsterCategoryFruit
+MonsterCategoryFruit:
 .string "Fruit\0"
 .align 2,0
 
@@ -298,8 +298,8 @@ MonsterNameTropius:
 .string "Tropius\0"
 .align 2,0
 
-.global MonsterCategoryDusclops
-MonsterCategoryDusclops:
+.global MonsterCategoryBeckon
+MonsterCategoryBeckon:
 .string "Beckon\0"
 .align 2,0
 
@@ -308,8 +308,8 @@ MonsterNameDusclops:
 .string "Dusclops\0"
 .align 2,0
 
-.global MonsterCategoryDuskull
-MonsterCategoryDuskull:
+.global MonsterCategoryRequiem
+MonsterCategoryRequiem:
 .string "Requiem\0"
 .align 2,0
 
@@ -318,8 +318,8 @@ MonsterNameDuskull:
 .string "Duskull\0"
 .align 2,0
 
-.global MonsterCategoryBanette
-MonsterCategoryBanette:
+.global MonsterCategoryMarionette
+MonsterCategoryMarionette:
 .string "Marionette\0"
 .align 2,0
 
@@ -328,8 +328,8 @@ MonsterNameBanette:
 .string "Banette\0"
 .align 2,0
 
-.global MonsterCategoryShuppet
-MonsterCategoryShuppet:
+.global MonsterCategoryPuppet
+MonsterCategoryPuppet:
 .string "Puppet\0"
 .align 2,0
 
@@ -338,8 +338,8 @@ MonsterNameShuppet:
 .string "Shuppet\0"
 .align 2,0
 
-.global MonsterCategoryKecleon
-MonsterCategoryKecleon:
+.global MonsterCategoryColorSwap
+MonsterCategoryColorSwap:
 .string "Color Swap\0"
 .align 2,0
 
@@ -348,8 +348,8 @@ MonsterNameKecleon:
 .string "Kecleon\0"
 .align 2,0
 
-.global MonsterCategoryCastform
-MonsterCategoryCastform:
+.global MonsterCategoryWeather
+MonsterCategoryWeather:
 .string "Weather\0"
 .align 2,0
 
@@ -358,8 +358,8 @@ MonsterNameCastform:
 .string "Castform\0"
 .align 2,0
 
-.global MonsterCategoryMilotic
-MonsterCategoryMilotic:
+.global MonsterCategoryTender
+MonsterCategoryTender:
 .string "Tender\0"
 .align 2,0
 
@@ -373,8 +373,8 @@ MonsterNameFeebas:
 .string "Feebas\0"
 .align 2,0
 
-.global MonsterCategoryArmaldo
-MonsterCategoryArmaldo:
+.global MonsterCategoryPlate
+MonsterCategoryPlate:
 .string "Plate\0"
 .align 2,0
 
@@ -383,8 +383,8 @@ MonsterNameArmaldo:
 .string "Armaldo\0"
 .align 2,0
 
-.global MonsterCategoryAnorith
-MonsterCategoryAnorith:
+.global MonsterCategoryOldShrimp
+MonsterCategoryOldShrimp:
 .string "Old Shrimp\0"
 .align 2,0
 
@@ -393,8 +393,8 @@ MonsterNameAnorith:
 .string "Anorith\0"
 .align 2,0
 
-.global MonsterCategoryCradily
-MonsterCategoryCradily:
+.global MonsterCategoryBarnacle
+MonsterCategoryBarnacle:
 .string "Barnacle\0"
 .align 2,0
 
@@ -403,8 +403,8 @@ MonsterNameCradily:
 .string "Cradily\0"
 .align 2,0
 
-.global MonsterCategoryLileep
-MonsterCategoryLileep:
+.global MonsterCategorySeaLily
+MonsterCategorySeaLily:
 .string "Sea Lily\0"
 .align 2,0
 
@@ -418,8 +418,8 @@ MonsterNameClaydol:
 .string "Claydol\0"
 .align 2,0
 
-.global MonsterCategoryBaltoy
-MonsterCategoryBaltoy:
+.global MonsterCategoryClayDoll
+MonsterCategoryClayDoll:
 .string "Clay Doll\0"
 .align 2,0
 
@@ -428,8 +428,8 @@ MonsterNameBaltoy:
 .string "Baltoy\0"
 .align 2,0
 
-.global MonsterCategoryCrawdaunt
-MonsterCategoryCrawdaunt:
+.global MonsterCategoryRogue
+MonsterCategoryRogue:
 .string "Rogue\0"
 .align 2,0
 
@@ -438,8 +438,8 @@ MonsterNameCrawdaunt:
 .string "Crawdaunt\0"
 .align 2,0
 
-.global MonsterCategoryCorphish
-MonsterCategoryCorphish:
+.global MonsterCategoryRuffian
+MonsterCategoryRuffian:
 .string "Ruffian\0"
 .align 2,0
 
@@ -453,8 +453,8 @@ MonsterNameWhiscash:
 .string "Whiscash\0"
 .align 2,0
 
-.global MonsterCategoryBarboach
-MonsterCategoryBarboach:
+.global MonsterCategoryWhiskers
+MonsterCategoryWhiskers:
 .string "Whiskers\0"
 .align 2,0
 
@@ -468,8 +468,8 @@ MonsterNameSolrock:
 .string "Solrock\0"
 .align 2,0
 
-.global MonsterCategoryLunatone
-MonsterCategoryLunatone:
+.global MonsterCategoryMeteorite
+MonsterCategoryMeteorite:
 .string "Meteorite\0"
 .align 2,0
 
@@ -478,8 +478,8 @@ MonsterNameLunatone:
 .string "Lunatone\0"
 .align 2,0
 
-.global MonsterCategorySeviper
-MonsterCategorySeviper:
+.global MonsterCategoryFangSnake
+MonsterCategoryFangSnake:
 .string "Fang Snake\0"
 .align 2,0
 
@@ -488,8 +488,8 @@ MonsterNameSeviper:
 .string "Seviper\0"
 .align 2,0
 
-.global MonsterCategoryZangoose
-MonsterCategoryZangoose:
+.global MonsterCategoryCatFerret
+MonsterCategoryCatFerret:
 .string "Cat Ferret\0"
 .align 2,0
 
@@ -498,8 +498,8 @@ MonsterNameZangoose:
 .string "Zangoose\0"
 .align 2,0
 
-.global MonsterCategoryAltaria
-MonsterCategoryAltaria:
+.global MonsterCategoryHumming
+MonsterCategoryHumming:
 .string "Humming\0"
 .align 2,0
 
@@ -508,8 +508,8 @@ MonsterNameAltaria:
 .string "Altaria\0"
 .align 2,0
 
-.global MonsterCategorySwablu
-MonsterCategorySwablu:
+.global MonsterCategoryCottonBird
+MonsterCategoryCottonBird:
 .string "Cotton Bird\0"
 .align 2,0
 
@@ -518,8 +518,8 @@ MonsterNameSwablu:
 .string "Swablu\0"
 .align 2,0
 
-.global MonsterCategoryCacturne
-MonsterCategoryCacturne:
+.global MonsterCategoryScarecrow
+MonsterCategoryScarecrow:
 .string "Scarecrow\0"
 .align 2,0
 
@@ -528,8 +528,8 @@ MonsterNameCacturne:
 .string "Cacturne\0"
 .align 2,0
 
-.global MonsterCategoryCacnea
-MonsterCategoryCacnea:
+.global MonsterCategoryCactus
+MonsterCategoryCactus:
 .string "Cactus\0"
 .align 2,0
 
@@ -543,8 +543,8 @@ MonsterNameFlygon:
 .string "Flygon\0"
 .align 2,0
 
-.global MonsterCategoryVibrava
-MonsterCategoryVibrava:
+.global MonsterCategoryVibration
+MonsterCategoryVibration:
 .string "Vibration\0"
 .align 2,0
 
@@ -553,8 +553,8 @@ MonsterNameVibrava:
 .string "Vibrava\0"
 .align 2,0
 
-.global MonsterCategoryTrapinch
-MonsterCategoryTrapinch:
+.global MonsterCategoryAntPit
+MonsterCategoryAntPit:
 .string "Ant Pit\0"
 .align 2,0
 
@@ -563,8 +563,8 @@ MonsterNameTrapinch:
 .string "Trapinch\0"
 .align 2,0
 
-.global MonsterCategorySpinda
-MonsterCategorySpinda:
+.global MonsterCategorySpotPanda
+MonsterCategorySpotPanda:
 .string "Spot Panda\0"
 .align 2,0
 
@@ -573,8 +573,8 @@ MonsterNameSpinda:
 .string "Spinda\0"
 .align 2,0
 
-.global MonsterCategoryGrumpig
-MonsterCategoryGrumpig:
+.global MonsterCategoryManipulate
+MonsterCategoryManipulate:
 .string "Manipulate\0"
 .align 2,0
 
@@ -583,8 +583,8 @@ MonsterNameGrumpig:
 .string "Grumpig\0"
 .align 2,0
 
-.global MonsterCategorySpoink
-MonsterCategorySpoink:
+.global MonsterCategoryBounce
+MonsterCategoryBounce:
 .string "Bounce\0"
 .align 2,0
 
@@ -593,8 +593,8 @@ MonsterNameSpoink:
 .string "Spoink\0"
 .align 2,0
 
-.global MonsterCategoryTorkoal
-MonsterCategoryTorkoal:
+.global MonsterCategoryCoal
+MonsterCategoryCoal:
 .string "Coal\0"
 .align 2,0
 
@@ -608,8 +608,8 @@ MonsterNameCamerupt:
 .string "Camerupt\0"
 .align 2,0
 
-.global MonsterCategoryNumel
-MonsterCategoryNumel:
+.global MonsterCategoryNumb
+MonsterCategoryNumb:
 .string "Numb\0"
 .align 2,0
 
@@ -618,8 +618,8 @@ MonsterNameNumel:
 .string "Numel\0"
 .align 2,0
 
-.global MonsterCategoryWailord
-MonsterCategoryWailord:
+.global MonsterCategoryFloatWhale
+MonsterCategoryFloatWhale:
 .string "Float Whale\0"
 .align 2,0
 
@@ -628,8 +628,8 @@ MonsterNameWailord:
 .string "Wailord\0"
 .align 2,0
 
-.global MonsterCategoryWailmer
-MonsterCategoryWailmer:
+.global MonsterCategoryBallWhale
+MonsterCategoryBallWhale:
 .string "Ball Whale\0"
 .align 2,0
 
@@ -638,8 +638,8 @@ MonsterNameWailmer:
 .string "Wailmer\0"
 .align 2,0
 
-.global MonsterCategorySharpedo
-MonsterCategorySharpedo:
+.global MonsterCategoryBrutal
+MonsterCategoryBrutal:
 .string "Brutal\0"
 .align 2,0
 
@@ -648,8 +648,8 @@ MonsterNameSharpedo:
 .string "Sharpedo\0"
 .align 2,0
 
-.global MonsterCategoryCarvanha
-MonsterCategoryCarvanha:
+.global MonsterCategorySavage
+MonsterCategorySavage:
 .string "Savage\0"
 .align 2,0
 
@@ -658,8 +658,8 @@ MonsterNameCarvanha:
 .string "Carvanha\0"
 .align 2,0
 
-.global MonsterCategorySwalot
-MonsterCategorySwalot:
+.global MonsterCategoryPoisonBag
+MonsterCategoryPoisonBag:
 .string "Poison Bag\0"
 .align 2,0
 
@@ -668,8 +668,8 @@ MonsterNameSwalot:
 .string "Swalot\0"
 .align 2,0
 
-.global MonsterCategoryGulpin
-MonsterCategoryGulpin:
+.global MonsterCategoryStomach
+MonsterCategoryStomach:
 .string "Stomach\0"
 .align 2,0
 
@@ -678,8 +678,8 @@ MonsterNameGulpin:
 .string "Gulpin\0"
 .align 2,0
 
-.global MonsterCategoryRoselia
-MonsterCategoryRoselia:
+.global MonsterCategoryThorn
+MonsterCategoryThorn:
 .string "Thorn\0"
 .align 2,0
 
@@ -693,8 +693,8 @@ MonsterNameIllumise:
 .string "Illumise\0"
 .align 2,0
 
-.global MonsterCategoryVolbeat
-MonsterCategoryVolbeat:
+.global MonsterCategoryFirefly
+MonsterCategoryFirefly:
 .string "Firefly\0"
 .align 2,0
 
@@ -708,8 +708,8 @@ MonsterNameMinun:
 .string "Minun\0"
 .align 2,0
 
-.global MonsterCategoryPlusle
-MonsterCategoryPlusle:
+.global MonsterCategoryCheering
+MonsterCategoryCheering:
 .string "Cheering\0"
 .align 2,0
 
@@ -718,8 +718,8 @@ MonsterNamePlusle:
 .string "Plusle\0"
 .align 2,0
 
-.global MonsterCategoryManectric
-MonsterCategoryManectric:
+.global MonsterCategoryDischarge
+MonsterCategoryDischarge:
 .string "Discharge\0"
 .align 2,0
 
@@ -738,8 +738,8 @@ MonsterNameMedicham:
 .string "Medicham\0"
 .align 2,0
 
-.global MonsterCategoryMeditite
-MonsterCategoryMeditite:
+.global MonsterCategoryMeditate
+MonsterCategoryMeditate:
 .string "Meditate\0"
 .align 2,0
 
@@ -758,8 +758,8 @@ MonsterNameLairon:
 .string "Lairon\0"
 .align 2,0
 
-.global MonsterCategoryAron
-MonsterCategoryAron:
+.global MonsterCategoryIronArmor
+MonsterCategoryIronArmor:
 .string "Iron Armor\0"
 .align 2,0
 
@@ -768,8 +768,8 @@ MonsterNameAron:
 .string "Aron\0"
 .align 2,0
 
-.global MonsterCategoryMawile
-MonsterCategoryMawile:
+.global MonsterCategoryDeceiver
+MonsterCategoryDeceiver:
 .string "Deceiver\0"
 .align 2,0
 
@@ -783,8 +783,8 @@ MonsterNameSableye:
 .string "Sableye\0"
 .align 2,0
 
-.global MonsterCategoryDelcatty
-MonsterCategoryDelcatty:
+.global MonsterCategoryPrim
+MonsterCategoryPrim:
 .string "Prim\0"
 .align 2,0
 
@@ -793,8 +793,8 @@ MonsterNameDelcatty:
 .string "Delcatty\0"
 .align 2,0
 
-.global MonsterCategorySkitty
-MonsterCategorySkitty:
+.global MonsterCategoryKitten
+MonsterCategoryKitten:
 .string "Kitten\0"
 .align 2,0
 
@@ -803,8 +803,8 @@ MonsterNameSkitty:
 .string "Skitty\0"
 .align 2,0
 
-.global MonsterCategoryNosepass
-MonsterCategoryNosepass:
+.global MonsterCategoryCompass
+MonsterCategoryCompass:
 .string "Compass\0"
 .align 2,0
 
@@ -813,8 +813,8 @@ MonsterNameNosepass:
 .string "Nosepass\0"
 .align 2,0
 
-.global MonsterCategoryAzurill
-MonsterCategoryAzurill:
+.global MonsterCategoryPolkaDot
+MonsterCategoryPolkaDot:
 .string "Polka Dot\0"
 .align 2,0
 
@@ -823,8 +823,8 @@ MonsterNameAzurill:
 .string "Azurill\0"
 .align 2,0
 
-.global MonsterCategoryHariyama
-MonsterCategoryHariyama:
+.global MonsterCategoryArmThrust
+MonsterCategoryArmThrust:
 .string "Arm Thrust\0"
 .align 2,0
 
@@ -833,8 +833,8 @@ MonsterNameHariyama:
 .string "Hariyama\0"
 .align 2,0
 
-.global MonsterCategoryMakuhita
-MonsterCategoryMakuhita:
+.global MonsterCategoryGuts
+MonsterCategoryGuts:
 .string "Guts\0"
 .align 2,0
 
@@ -843,8 +843,8 @@ MonsterNameMakuhita:
 .string "Makuhita\0"
 .align 2,0
 
-.global MonsterCategoryExploud
-MonsterCategoryExploud:
+.global MonsterCategoryLoudNoise
+MonsterCategoryLoudNoise:
 .string "Loud Noise\0"
 .align 2,0
 
@@ -853,8 +853,8 @@ MonsterNameExploud:
 .string "Exploud\0"
 .align 2,0
 
-.global MonsterCategoryLoudred
-MonsterCategoryLoudred:
+.global MonsterCategoryBigVoice
+MonsterCategoryBigVoice:
 .string "Big Voice\0"
 .align 2,0
 
@@ -863,8 +863,8 @@ MonsterNameLoudred:
 .string "Loudred\0"
 .align 2,0
 
-.global MonsterCategoryWhismur
-MonsterCategoryWhismur:
+.global MonsterCategoryWhisper
+MonsterCategoryWhisper:
 .string "Whisper\0"
 .align 2,0
 
@@ -873,8 +873,8 @@ MonsterNameWhismur:
 .string "Whismur\0"
 .align 2,0
 
-.global MonsterCategoryShedinja
-MonsterCategoryShedinja:
+.global MonsterCategoryShed
+MonsterCategoryShed:
 .string "Shed\0"
 .align 2,0
 
@@ -883,8 +883,8 @@ MonsterNameShedinja:
 .string "Shedinja\0"
 .align 2,0
 
-.global MonsterCategoryNinjask
-MonsterCategoryNinjask:
+.global MonsterCategoryNinja
+MonsterCategoryNinja:
 .string "Ninja\0"
 .align 2,0
 
@@ -893,8 +893,8 @@ MonsterNameNinjask:
 .string "Ninjask\0"
 .align 2,0
 
-.global MonsterCategoryNincada
-MonsterCategoryNincada:
+.global MonsterCategoryTrainee
+MonsterCategoryTrainee:
 .string "Trainee\0"
 .align 2,0
 
@@ -903,8 +903,8 @@ MonsterNameNincada:
 .string "Nincada\0"
 .align 2,0
 
-.global MonsterCategorySlaking
-MonsterCategorySlaking:
+.global MonsterCategoryLazy
+MonsterCategoryLazy:
 .string "Lazy\0"
 .align 2,0
 
@@ -913,8 +913,8 @@ MonsterNameSlaking:
 .string "Slaking\0"
 .align 2,0
 
-.global MonsterCategoryVigoroth
-MonsterCategoryVigoroth:
+.global MonsterCategoryWildMonkey
+MonsterCategoryWildMonkey:
 .string "Wild Monkey\0"
 .align 2,0
 
@@ -923,8 +923,8 @@ MonsterNameVigoroth:
 .string "Vigoroth\0"
 .align 2,0
 
-.global MonsterCategorySlakoth
-MonsterCategorySlakoth:
+.global MonsterCategorySlacker
+MonsterCategorySlacker:
 .string "Slacker\0"
 .align 2,0
 
@@ -943,8 +943,8 @@ MonsterNameShroomish:
 .string "Shroomish\0"
 .align 2,0
 
-.global MonsterCategoryMasquerain
-MonsterCategoryMasquerain:
+.global MonsterCategoryEyeball
+MonsterCategoryEyeball:
 .string "Eyeball\0"
 .align 2,0
 
@@ -953,8 +953,8 @@ MonsterNameMasquerain:
 .string "Masquerain\0"
 .align 2,0
 
-.global MonsterCategorySurskit
-MonsterCategorySurskit:
+.global MonsterCategoryPondSkater
+MonsterCategoryPondSkater:
 .string "Pond Skater\0"
 .align 2,0
 
@@ -963,8 +963,8 @@ MonsterNameSurskit:
 .string "Surskit\0"
 .align 2,0
 
-.global MonsterCategoryGardevoir
-MonsterCategoryGardevoir:
+.global MonsterCategoryEmbrace
+MonsterCategoryEmbrace:
 .string "Embrace\0"
 .align 2,0
 
@@ -973,8 +973,8 @@ MonsterNameGardevoir:
 .string "Gardevoir\0"
 .align 2,0
 
-.global MonsterCategoryKirlia
-MonsterCategoryKirlia:
+.global MonsterCategoryEmotion
+MonsterCategoryEmotion:
 .string "Emotion\0"
 .align 2,0
 
@@ -983,8 +983,8 @@ MonsterNameKirlia:
 .string "Kirlia\0"
 .align 2,0
 
-.global MonsterCategoryRalts
-MonsterCategoryRalts:
+.global MonsterCategoryFeeling
+MonsterCategoryFeeling:
 .string "Feeling\0"
 .align 2,0
 
@@ -993,8 +993,8 @@ MonsterNameRalts:
 .string "Ralts\0"
 .align 2,0
 
-.global MonsterCategoryPelipper
-MonsterCategoryPelipper:
+.global MonsterCategoryWaterBird
+MonsterCategoryWaterBird:
 .string "Water Bird\0"
 .align 2,0
 
@@ -1003,8 +1003,8 @@ MonsterNamePelipper:
 .string "Pelipper\0"
 .align 2,0
 
-.global MonsterCategoryWingull
-MonsterCategoryWingull:
+.global MonsterCategorySeagull
+MonsterCategorySeagull:
 .string "Seagull\0"
 .align 2,0
 
@@ -1013,8 +1013,8 @@ MonsterNameWingull:
 .string "Wingull\0"
 .align 2,0
 
-.global MonsterCategorySwellow
-MonsterCategorySwellow:
+.global MonsterCategorySwallow
+MonsterCategorySwallow:
 .string "Swallow\0"
 .align 2,0
 
@@ -1023,8 +1023,8 @@ MonsterNameSwellow:
 .string "Swellow\0"
 .align 2,0
 
-.global MonsterCategoryTaillow
-MonsterCategoryTaillow:
+.global MonsterCategoryTinyswallow
+MonsterCategoryTinyswallow:
 .string "Tinyswallow\0"
 .align 2,0
 
@@ -1033,8 +1033,8 @@ MonsterNameTaillow:
 .string "Taillow\0"
 .align 2,0
 
-.global MonsterCategoryShiftry
-MonsterCategoryShiftry:
+.global MonsterCategoryWicked
+MonsterCategoryWicked:
 .string "Wicked\0"
 .align 2,0
 
@@ -1043,8 +1043,8 @@ MonsterNameShiftry:
 .string "Shiftry\0"
 .align 2,0
 
-.global MonsterCategoryNuzleaf
-MonsterCategoryNuzleaf:
+.global MonsterCategoryWily
+MonsterCategoryWily:
 .string "Wily\0"
 .align 2,0
 
@@ -1053,8 +1053,8 @@ MonsterNameNuzleaf:
 .string "Nuzleaf\0"
 .align 2,0
 
-.global MonsterCategorySeedot
-MonsterCategorySeedot:
+.global MonsterCategoryAcorn
+MonsterCategoryAcorn:
 .string "Acorn\0"
 .align 2,0
 
@@ -1063,8 +1063,8 @@ MonsterNameSeedot:
 .string "Seedot\0"
 .align 2,0
 
-.global MonsterCategoryLudicolo
-MonsterCategoryLudicolo:
+.global MonsterCategoryCarefree
+MonsterCategoryCarefree:
 .string "Carefree\0"
 .align 2,0
 
@@ -1073,8 +1073,8 @@ MonsterNameLudicolo:
 .string "Ludicolo\0"
 .align 2,0
 
-.global MonsterCategoryLombre
-MonsterCategoryLombre:
+.global MonsterCategoryJolly
+MonsterCategoryJolly:
 .string "Jolly\0"
 .align 2,0
 
@@ -1083,8 +1083,8 @@ MonsterNameLombre:
 .string "Lombre\0"
 .align 2,0
 
-.global MonsterCategoryLotad
-MonsterCategoryLotad:
+.global MonsterCategoryWaterWeed
+MonsterCategoryWaterWeed:
 .string "Water Weed\0"
 .align 2,0
 
@@ -1118,8 +1118,8 @@ MonsterNameWurmple:
 .string "Wurmple\0"
 .align 2,0
 
-.global MonsterCategoryLinoone
-MonsterCategoryLinoone:
+.global MonsterCategoryRushing
+MonsterCategoryRushing:
 .string "Rushing\0"
 .align 2,0
 
@@ -1128,8 +1128,8 @@ MonsterNameLinoone:
 .string "Linoone\0"
 .align 2,0
 
-.global MonsterCategoryZigzagoon
-MonsterCategoryZigzagoon:
+.global MonsterCategoryTinyraccoon
+MonsterCategoryTinyraccoon:
 .string "Tinyraccoon\0"
 .align 2,0
 
@@ -1143,8 +1143,8 @@ MonsterNameMightyena:
 .string "Mightyena\0"
 .align 2,0
 
-.global MonsterCategoryPoochyena
-MonsterCategoryPoochyena:
+.global MonsterCategoryBite
+MonsterCategoryBite:
 .string "Bite\0"
 .align 2,0
 
@@ -1163,8 +1163,8 @@ MonsterNameMarshtomp:
 .string "Marshtomp\0"
 .align 2,0
 
-.global MonsterCategoryMudkip
-MonsterCategoryMudkip:
+.global MonsterCategoryMudFish
+MonsterCategoryMudFish:
 .string "Mud Fish\0"
 .align 2,0
 
@@ -1173,8 +1173,8 @@ MonsterNameMudkip:
 .string "Mudkip\0"
 .align 2,0
 
-.global MonsterCategoryBlaziken
-MonsterCategoryBlaziken:
+.global MonsterCategoryBlaze
+MonsterCategoryBlaze:
 .string "Blaze\0"
 .align 2,0
 
@@ -1183,8 +1183,8 @@ MonsterNameBlaziken:
 .string "Blaziken\0"
 .align 2,0
 
-.global MonsterCategoryCombusken
-MonsterCategoryCombusken:
+.global MonsterCategoryYoungFowl
+MonsterCategoryYoungFowl:
 .string "Young Fowl\0"
 .align 2,0
 
@@ -1193,8 +1193,8 @@ MonsterNameCombusken:
 .string "Combusken\0"
 .align 2,0
 
-.global MonsterCategoryTorchic
-MonsterCategoryTorchic:
+.global MonsterCategoryChick
+MonsterCategoryChick:
 .string "Chick\0"
 .align 2,0
 
@@ -1203,8 +1203,8 @@ MonsterNameTorchic:
 .string "Torchic\0"
 .align 2,0
 
-.global MonsterCategorySceptile
-MonsterCategorySceptile:
+.global MonsterCategoryForest
+MonsterCategoryForest:
 .string "Forest\0"
 .align 2,0
 
@@ -1218,8 +1218,8 @@ MonsterNameGrovyle:
 .string "Grovyle\0"
 .align 2,0
 
-.global MonsterCategoryTreecko
-MonsterCategoryTreecko:
+.global MonsterCategoryWoodGecko
+MonsterCategoryWoodGecko:
 .string "Wood Gecko\0"
 .align 2,0
 
@@ -1228,8 +1228,8 @@ MonsterNameTreecko:
 .string "Treecko\0"
 .align 2,0
 
-.global MonsterCategoryCelebi
-MonsterCategoryCelebi:
+.global MonsterCategoryTimeTravel
+MonsterCategoryTimeTravel:
 .string "Time Travel\0"
 .align 2,0
 
@@ -1238,8 +1238,8 @@ MonsterNameCelebi:
 .string "Celebi\0"
 .align 2,0
 
-.global MonsterCategoryHoOh
-MonsterCategoryHoOh:
+.global MonsterCategoryRainbow
+MonsterCategoryRainbow:
 .string "Rainbow\0"
 .align 2,0
 
@@ -1248,8 +1248,8 @@ MonsterNameHoOh:
 .string "Ho-Oh\0"
 .align 2,0
 
-.global MonsterCategoryLugia
-MonsterCategoryLugia:
+.global MonsterCategoryDiving
+MonsterCategoryDiving:
 .string "Diving\0"
 .align 2,0
 
@@ -1263,8 +1263,8 @@ MonsterNameTyranitar:
 .string "Tyranitar\0"
 .align 2,0
 
-.global MonsterCategoryPupitar
-MonsterCategoryPupitar:
+.global MonsterCategoryHardShell
+MonsterCategoryHardShell:
 .string "Hard Shell\0"
 .align 2,0
 
@@ -1273,8 +1273,8 @@ MonsterNamePupitar:
 .string "Pupitar\0"
 .align 2,0
 
-.global MonsterCategoryLarvitar
-MonsterCategoryLarvitar:
+.global MonsterCategoryRockSkin
+MonsterCategoryRockSkin:
 .string "Rock Skin\0"
 .align 2,0
 
@@ -1283,8 +1283,8 @@ MonsterNameLarvitar:
 .string "Larvitar\0"
 .align 2,0
 
-.global MonsterCategorySuicune
-MonsterCategorySuicune:
+.global MonsterCategoryAurora
+MonsterCategoryAurora:
 .string "Aurora\0"
 .align 2,0
 
@@ -1298,8 +1298,8 @@ MonsterNameEntei:
 .string "Entei\0"
 .align 2,0
 
-.global MonsterCategoryRaikou
-MonsterCategoryRaikou:
+.global MonsterCategoryThunder
+MonsterCategoryThunder:
 .string "Thunder\0"
 .align 2,0
 
@@ -1313,8 +1313,8 @@ MonsterNameBlissey:
 .string "Blissey\0"
 .align 2,0
 
-.global MonsterCategoryMiltank
-MonsterCategoryMiltank:
+.global MonsterCategoryMilkCow
+MonsterCategoryMilkCow:
 .string "Milk Cow\0"
 .align 2,0
 
@@ -1323,8 +1323,8 @@ MonsterNameMiltank:
 .string "Miltank\0"
 .align 2,0
 
-.global MonsterCategoryMagby
-MonsterCategoryMagby:
+.global MonsterCategoryLiveCoal
+MonsterCategoryLiveCoal:
 .string "Live Coal\0"
 .align 2,0
 
@@ -1338,8 +1338,8 @@ MonsterNameElekid:
 .string "Elekid\0"
 .align 2,0
 
-.global MonsterCategorySmoochum
-MonsterCategorySmoochum:
+.global MonsterCategoryKiss
+MonsterCategoryKiss:
 .string "Kiss\0"
 .align 2,0
 
@@ -1348,8 +1348,8 @@ MonsterNameSmoochum:
 .string "Smoochum\0"
 .align 2,0
 
-.global MonsterCategoryHitmontop
-MonsterCategoryHitmontop:
+.global MonsterCategoryHandstand
+MonsterCategoryHandstand:
 .string "Handstand\0"
 .align 2,0
 
@@ -1358,8 +1358,8 @@ MonsterNameHitmontop:
 .string "Hitmontop\0"
 .align 2,0
 
-.global MonsterCategoryTyrogue
-MonsterCategoryTyrogue:
+.global MonsterCategoryScuffle
+MonsterCategoryScuffle:
 .string "Scuffle\0"
 .align 2,0
 
@@ -1368,8 +1368,8 @@ MonsterNameTyrogue:
 .string "Tyrogue\0"
 .align 2,0
 
-.global MonsterCategorySmeargle
-MonsterCategorySmeargle:
+.global MonsterCategoryPainter
+MonsterCategoryPainter:
 .string "Painter\0"
 .align 2,0
 
@@ -1378,8 +1378,8 @@ MonsterNameSmeargle:
 .string "Smeargle\0"
 .align 2,0
 
-.global MonsterCategoryStantler
-MonsterCategoryStantler:
+.global MonsterCategoryBigHorn
+MonsterCategoryBigHorn:
 .string "Big Horn\0"
 .align 2,0
 
@@ -1393,8 +1393,8 @@ MonsterNamePorygon2:
 .string "Porygon2\0"
 .align 2,0
 
-.global MonsterCategoryDonphan
-MonsterCategoryDonphan:
+.global MonsterCategoryArmor
+MonsterCategoryArmor:
 .string "Armor\0"
 .align 2,0
 
@@ -1403,8 +1403,8 @@ MonsterNameDonphan:
 .string "Donphan\0"
 .align 2,0
 
-.global MonsterCategoryPhanpy
-MonsterCategoryPhanpy:
+.global MonsterCategoryLongNose
+MonsterCategoryLongNose:
 .string "Long Nose\0"
 .align 2,0
 
@@ -1423,8 +1423,8 @@ MonsterNameHoundoom:
 .string "Houndoom\0"
 .align 2,0
 
-.global MonsterCategoryHoundour
-MonsterCategoryHoundour:
+.global MonsterCategoryDark
+MonsterCategoryDark:
 .string "Dark\0"
 .align 2,0
 
@@ -1433,8 +1433,8 @@ MonsterNameHoundour:
 .string "Houndour\0"
 .align 2,0
 
-.global MonsterCategorySkarmory
-MonsterCategorySkarmory:
+.global MonsterCategoryArmorBird
+MonsterCategoryArmorBird:
 .string "Armor Bird\0"
 .align 2,0
 
@@ -1443,8 +1443,8 @@ MonsterNameSkarmory:
 .string "Skarmory\0"
 .align 2,0
 
-.global MonsterCategoryMantine
-MonsterCategoryMantine:
+.global MonsterCategoryKite
+MonsterCategoryKite:
 .string "Kite\0"
 .align 2,0
 
@@ -1453,8 +1453,8 @@ MonsterNameMantine:
 .string "Mantine\0"
 .align 2,0
 
-.global MonsterCategoryDelibird
-MonsterCategoryDelibird:
+.global MonsterCategoryDelivery
+MonsterCategoryDelivery:
 .string "Delivery\0"
 .align 2,0
 
@@ -1468,8 +1468,8 @@ MonsterNameOctillery:
 .string "Octillery\0"
 .align 2,0
 
-.global MonsterCategoryRemoraid
-MonsterCategoryRemoraid:
+.global MonsterCategoryJet
+MonsterCategoryJet:
 .string "Jet\0"
 .align 2,0
 
@@ -1478,8 +1478,8 @@ MonsterNameRemoraid:
 .string "Remoraid\0"
 .align 2,0
 
-.global MonsterCategoryCorsola
-MonsterCategoryCorsola:
+.global MonsterCategoryCoral
+MonsterCategoryCoral:
 .string "Coral\0"
 .align 2,0
 
@@ -1488,8 +1488,8 @@ MonsterNameCorsola:
 .string "Corsola\0"
 .align 2,0
 
-.global MonsterCategoryPiloswine
-MonsterCategoryPiloswine:
+.global MonsterCategorySwine
+MonsterCategorySwine:
 .string "Swine\0"
 .align 2,0
 
@@ -1498,8 +1498,8 @@ MonsterNamePiloswine:
 .string "Piloswine\0"
 .align 2,0
 
-.global MonsterCategorySwinub
-MonsterCategorySwinub:
+.global MonsterCategoryPig
+MonsterCategoryPig:
 .string "Pig\0"
 .align 2,0
 
@@ -1513,8 +1513,8 @@ MonsterNameMagcargo:
 .string "Magcargo\0"
 .align 2,0
 
-.global MonsterCategorySlugma
-MonsterCategorySlugma:
+.global MonsterCategoryLava
+MonsterCategoryLava:
 .string "Lava\0"
 .align 2,0
 
@@ -1523,8 +1523,8 @@ MonsterNameSlugma:
 .string "Slugma\0"
 .align 2,0
 
-.global MonsterCategoryUrsaring
-MonsterCategoryUrsaring:
+.global MonsterCategoryHibernator
+MonsterCategoryHibernator:
 .string "Hibernator\0"
 .align 2,0
 
@@ -1533,8 +1533,8 @@ MonsterNameUrsaring:
 .string "Ursaring\0"
 .align 2,0
 
-.global MonsterCategoryTeddiursa
-MonsterCategoryTeddiursa:
+.global MonsterCategoryLittleBear
+MonsterCategoryLittleBear:
 .string "Little Bear\0"
 .align 2,0
 
@@ -1543,8 +1543,8 @@ MonsterNameTeddiursa:
 .string "Teddiursa\0"
 .align 2,0
 
-.global MonsterCategorySneasel
-MonsterCategorySneasel:
+.global MonsterCategorySharpClaw
+MonsterCategorySharpClaw:
 .string "Sharp Claw\0"
 .align 2,0
 
@@ -1553,8 +1553,8 @@ MonsterNameSneasel:
 .string "Sneasel\0"
 .align 2,0
 
-.global MonsterCategoryHeracross
-MonsterCategoryHeracross:
+.global MonsterCategorySingleHorn
+MonsterCategorySingleHorn:
 .string "Single Horn\0"
 .align 2,0
 
@@ -1563,8 +1563,8 @@ MonsterNameHeracross:
 .string "Heracross\0"
 .align 2,0
 
-.global MonsterCategoryShuckle
-MonsterCategoryShuckle:
+.global MonsterCategoryMold
+MonsterCategoryMold:
 .string "Mold\0"
 .align 2,0
 
@@ -1593,8 +1593,8 @@ MonsterNameSnubbull:
 .string "Snubbull\0"
 .align 2,0
 
-.global MonsterCategorySteelix
-MonsterCategorySteelix:
+.global MonsterCategoryIronSnake
+MonsterCategoryIronSnake:
 .string "Iron Snake\0"
 .align 2,0
 
@@ -1603,8 +1603,8 @@ MonsterNameSteelix:
 .string "Steelix\0"
 .align 2,0
 
-.global MonsterCategoryGligar
-MonsterCategoryGligar:
+.global MonsterCategoryFlyscorpion
+MonsterCategoryFlyscorpion:
 .string "Flyscorpion\0"
 .align 2,0
 
@@ -1613,8 +1613,8 @@ MonsterNameGligar:
 .string "Gligar\0"
 .align 2,0
 
-.global MonsterCategoryDunsparce
-MonsterCategoryDunsparce:
+.global MonsterCategoryLandSnake
+MonsterCategoryLandSnake:
 .string "Land Snake\0"
 .align 2,0
 
@@ -1628,8 +1628,8 @@ MonsterNameForretress:
 .string "Forretress\0"
 .align 2,0
 
-.global MonsterCategoryPineco
-MonsterCategoryPineco:
+.global MonsterCategoryBagworm
+MonsterCategoryBagworm:
 .string "Bagworm\0"
 .align 2,0
 
@@ -1638,8 +1638,8 @@ MonsterNamePineco:
 .string "Pineco\0"
 .align 2,0
 
-.global MonsterCategoryGirafarig
-MonsterCategoryGirafarig:
+.global MonsterCategoryLongNeck
+MonsterCategoryLongNeck:
 .string "Long Neck\0"
 .align 2,0
 
@@ -1648,8 +1648,8 @@ MonsterNameGirafarig:
 .string "Girafarig\0"
 .align 2,0
 
-.global MonsterCategoryWobbuffet
-MonsterCategoryWobbuffet:
+.global MonsterCategoryPatient
+MonsterCategoryPatient:
 .string "Patient\0"
 .align 2,0
 
@@ -1658,8 +1658,8 @@ MonsterNameWobbuffet:
 .string "Wobbuffet\0"
 .align 2,0
 
-.global MonsterCategoryUnown
-MonsterCategoryUnown:
+.global MonsterCategorySymbol
+MonsterCategorySymbol:
 .string "Symbol\0"
 .align 2,0
 
@@ -1668,8 +1668,8 @@ MonsterNameUnown:
 .string "Unown\0"
 .align 2,0
 
-.global MonsterCategoryMisdreavus
-MonsterCategoryMisdreavus:
+.global MonsterCategoryScreech
+MonsterCategoryScreech:
 .string "Screech\0"
 .align 2,0
 
@@ -1678,8 +1678,8 @@ MonsterNameMisdreavus:
 .string "Misdreavus\0"
 .align 2,0
 
-.global MonsterCategorySlowking
-MonsterCategorySlowking:
+.global MonsterCategoryRoyal
+MonsterCategoryRoyal:
 .string "Royal\0"
 .align 2,0
 
@@ -1688,8 +1688,8 @@ MonsterNameSlowking:
 .string "Slowking\0"
 .align 2,0
 
-.global MonsterCategoryMurkrow
-MonsterCategoryMurkrow:
+.global MonsterCategoryDarkness
+MonsterCategoryDarkness:
 .string "Darkness\0"
 .align 2,0
 
@@ -1698,8 +1698,8 @@ MonsterNameMurkrow:
 .string "Murkrow\0"
 .align 2,0
 
-.global MonsterCategoryUmbreon
-MonsterCategoryUmbreon:
+.global MonsterCategoryMoonlight
+MonsterCategoryMoonlight:
 .string "Moonlight\0"
 .align 2,0
 
@@ -1718,8 +1718,8 @@ MonsterNameQuagsire:
 .string "Quagsire\0"
 .align 2,0
 
-.global MonsterCategoryWooper
-MonsterCategoryWooper:
+.global MonsterCategoryWaterFish
+MonsterCategoryWaterFish:
 .string "Water Fish\0"
 .align 2,0
 
@@ -1728,8 +1728,8 @@ MonsterNameWooper:
 .string "Wooper\0"
 .align 2,0
 
-.global MonsterCategoryYanma
-MonsterCategoryYanma:
+.global MonsterCategoryClearWing
+MonsterCategoryClearWing:
 .string "Clear Wing\0"
 .align 2,0
 
@@ -1738,8 +1738,8 @@ MonsterNameYanma:
 .string "Yanma\0"
 .align 2,0
 
-.global MonsterCategorySunflora
-MonsterCategorySunflora:
+.global MonsterCategorySun
+MonsterCategorySun:
 .string "Sun\0"
 .align 2,0
 
@@ -1753,8 +1753,8 @@ MonsterNameSunkern:
 .string "Sunkern\0"
 .align 2,0
 
-.global MonsterCategoryAipom
-MonsterCategoryAipom:
+.global MonsterCategoryLongTail
+MonsterCategoryLongTail:
 .string "Long Tail\0"
 .align 2,0
 
@@ -1773,8 +1773,8 @@ MonsterNameSkiploom:
 .string "Skiploom\0"
 .align 2,0
 
-.global MonsterCategoryHoppip
-MonsterCategoryHoppip:
+.global MonsterCategoryCottonweed
+MonsterCategoryCottonweed:
 .string "Cottonweed\0"
 .align 2,0
 
@@ -1783,8 +1783,8 @@ MonsterNameHoppip:
 .string "Hoppip\0"
 .align 2,0
 
-.global MonsterCategoryPolitoed
-MonsterCategoryPolitoed:
+.global MonsterCategoryFrog
+MonsterCategoryFrog:
 .string "Frog\0"
 .align 2,0
 
@@ -1793,8 +1793,8 @@ MonsterNamePolitoed:
 .string "Politoed\0"
 .align 2,0
 
-.global MonsterCategorySudowoodo
-MonsterCategorySudowoodo:
+.global MonsterCategoryImitation
+MonsterCategoryImitation:
 .string "Imitation\0"
 .align 2,0
 
@@ -1803,8 +1803,8 @@ MonsterNameSudowoodo:
 .string "Sudowoodo\0"
 .align 2,0
 
-.global MonsterCategoryAzumarill
-MonsterCategoryAzumarill:
+.global MonsterCategoryAquaRabbit
+MonsterCategoryAquaRabbit:
 .string "Aqua Rabbit\0"
 .align 2,0
 
@@ -1813,8 +1813,8 @@ MonsterNameAzumarill:
 .string "Azumarill\0"
 .align 2,0
 
-.global MonsterCategoryMarill
-MonsterCategoryMarill:
+.global MonsterCategoryAquaMouse
+MonsterCategoryAquaMouse:
 .string "Aqua Mouse\0"
 .align 2,0
 
@@ -1838,8 +1838,8 @@ MonsterNameFlaaffy:
 .string "Flaaffy\0"
 .align 2,0
 
-.global MonsterCategoryMareep
-MonsterCategoryMareep:
+.global MonsterCategoryWool
+MonsterCategoryWool:
 .string "Wool\0"
 .align 2,0
 
@@ -1848,8 +1848,8 @@ MonsterNameMareep:
 .string "Mareep\0"
 .align 2,0
 
-.global MonsterCategoryXatu
-MonsterCategoryXatu:
+.global MonsterCategoryMystic
+MonsterCategoryMystic:
 .string "Mystic\0"
 .align 2,0
 
@@ -1863,8 +1863,8 @@ MonsterNameNatu:
 .string "Natu\0"
 .align 2,0
 
-.global MonsterCategoryTogetic
-MonsterCategoryTogetic:
+.global MonsterCategoryHappiness
+MonsterCategoryHappiness:
 .string "Happiness\0"
 .align 2,0
 
@@ -1873,8 +1873,8 @@ MonsterNameTogetic:
 .string "Togetic\0"
 .align 2,0
 
-.global MonsterCategoryTogepi
-MonsterCategoryTogepi:
+.global MonsterCategorySpikeBall
+MonsterCategorySpikeBall:
 .string "Spike Ball\0"
 .align 2,0
 
@@ -1893,8 +1893,8 @@ MonsterNameCleffa:
 .string "Cleffa\0"
 .align 2,0
 
-.global MonsterCategoryPichu
-MonsterCategoryPichu:
+.global MonsterCategoryTinyMouse
+MonsterCategoryTinyMouse:
 .string "Tiny Mouse\0"
 .align 2,0
 
@@ -1903,8 +1903,8 @@ MonsterNamePichu:
 .string "Pichu\0"
 .align 2,0
 
-.global MonsterCategoryLanturn
-MonsterCategoryLanturn:
+.global MonsterCategoryLight
+MonsterCategoryLight:
 .string "Light\0"
 .align 2,0
 
@@ -1913,8 +1913,8 @@ MonsterNameLanturn:
 .string "Lanturn\0"
 .align 2,0
 
-.global MonsterCategoryChinchou
-MonsterCategoryChinchou:
+.global MonsterCategoryAngler
+MonsterCategoryAngler:
 .string "Angler\0"
 .align 2,0
 
@@ -1928,8 +1928,8 @@ MonsterNameCrobat:
 .string "Crobat\0"
 .align 2,0
 
-.global MonsterCategoryAriados
-MonsterCategoryAriados:
+.global MonsterCategoryLongLeg
+MonsterCategoryLongLeg:
 .string "Long Leg\0"
 .align 2,0
 
@@ -1938,8 +1938,8 @@ MonsterNameAriados:
 .string "Ariados\0"
 .align 2,0
 
-.global MonsterCategorySpinarak
-MonsterCategorySpinarak:
+.global MonsterCategoryStringSpit
+MonsterCategoryStringSpit:
 .string "String Spit\0"
 .align 2,0
 
@@ -1953,8 +1953,8 @@ MonsterNameLedian:
 .string "Ledian\0"
 .align 2,0
 
-.global MonsterCategoryLedyba
-MonsterCategoryLedyba:
+.global MonsterCategoryFiveStar
+MonsterCategoryFiveStar:
 .string "Five Star\0"
 .align 2,0
 
@@ -1968,8 +1968,8 @@ MonsterNameNoctowl:
 .string "Noctowl\0"
 .align 2,0
 
-.global MonsterCategoryHoothoot
-MonsterCategoryHoothoot:
+.global MonsterCategoryOwl
+MonsterCategoryOwl:
 .string "Owl\0"
 .align 2,0
 
@@ -1978,8 +1978,8 @@ MonsterNameHoothoot:
 .string "Hoothoot\0"
 .align 2,0
 
-.global MonsterCategoryFurret
-MonsterCategoryFurret:
+.global MonsterCategoryLongBody
+MonsterCategoryLongBody:
 .string "Long Body\0"
 .align 2,0
 
@@ -1988,8 +1988,8 @@ MonsterNameFurret:
 .string "Furret\0"
 .align 2,0
 
-.global MonsterCategorySentret
-MonsterCategorySentret:
+.global MonsterCategoryScout
+MonsterCategoryScout:
 .string "Scout\0"
 .align 2,0
 
@@ -2008,8 +2008,8 @@ MonsterNameCroconaw:
 .string "Croconaw\0"
 .align 2,0
 
-.global MonsterCategoryTotodile
-MonsterCategoryTotodile:
+.global MonsterCategoryBigJaw
+MonsterCategoryBigJaw:
 .string "Big Jaw\0"
 .align 2,0
 
@@ -2023,8 +2023,8 @@ MonsterNameTyphlosion:
 .string "Typhlosion\0"
 .align 2,0
 
-.global MonsterCategoryQuilava
-MonsterCategoryQuilava:
+.global MonsterCategoryVolcano
+MonsterCategoryVolcano:
 .string "Volcano\0"
 .align 2,0
 
@@ -2033,8 +2033,8 @@ MonsterNameQuilava:
 .string "Quilava\0"
 .align 2,0
 
-.global MonsterCategoryCyndaquil
-MonsterCategoryCyndaquil:
+.global MonsterCategoryFireMouse
+MonsterCategoryFireMouse:
 .string "Fire Mouse\0"
 .align 2,0
 
@@ -2043,8 +2043,8 @@ MonsterNameCyndaquil:
 .string "Cyndaquil\0"
 .align 2,0
 
-.global MonsterCategoryMeganium
-MonsterCategoryMeganium:
+.global MonsterCategoryHerb
+MonsterCategoryHerb:
 .string "Herb\0"
 .align 2,0
 
@@ -2058,8 +2058,8 @@ MonsterNameBayleef:
 .string "Bayleef\0"
 .align 2,0
 
-.global MonsterCategoryChikorita
-MonsterCategoryChikorita:
+.global MonsterCategoryLeaf
+MonsterCategoryLeaf:
 .string "Leaf\0"
 .align 2,0
 
@@ -2068,8 +2068,8 @@ MonsterNameChikorita:
 .string "Chikorita\0"
 .align 2,0
 
-.global MonsterCategoryMew
-MonsterCategoryMew:
+.global MonsterCategoryNewSpecies
+MonsterCategoryNewSpecies:
 .string "New Species\0"
 .align 2,0
 
@@ -2078,8 +2078,8 @@ MonsterNameMew:
 .string "Mew\0"
 .align 2,0
 
-.global MonsterCategoryMewtwo
-MonsterCategoryMewtwo:
+.global MonsterCategoryNewSpeciestwo
+MonsterCategoryNewSpeciestwo:
 .string "Genetic\0"
 .align 2,0
 
@@ -2113,8 +2113,8 @@ MonsterNameZapdos:
 .string "Zapdos\0"
 .align 2,0
 
-.global MonsterCategoryArticuno
-MonsterCategoryArticuno:
+.global MonsterCategoryFreeze
+MonsterCategoryFreeze:
 .string "Freeze\0"
 .align 2,0
 
@@ -2123,8 +2123,8 @@ MonsterNameArticuno:
 .string "Articuno\0"
 .align 2,0
 
-.global MonsterCategorySnorlax
-MonsterCategorySnorlax:
+.global MonsterCategorySleeping
+MonsterCategorySleeping:
 .string "Sleeping\0"
 .align 2,0
 
@@ -2133,8 +2133,8 @@ MonsterNameSnorlax:
 .string "Snorlax\0"
 .align 2,0
 
-.global MonsterCategoryAerodactyl
-MonsterCategoryAerodactyl:
+.global MonsterCategoryFossil
+MonsterCategoryFossil:
 .string "Fossil\0"
 .align 2,0
 
@@ -2158,8 +2158,8 @@ MonsterNameOmastar:
 .string "Omastar\0"
 .align 2,0
 
-.global MonsterCategoryOmanyte
-MonsterCategoryOmanyte:
+.global MonsterCategorySpiral
+MonsterCategorySpiral:
 .string "Spiral\0"
 .align 2,0
 
@@ -2168,8 +2168,8 @@ MonsterNameOmanyte:
 .string "Omanyte\0"
 .align 2,0
 
-.global MonsterCategoryPorygon
-MonsterCategoryPorygon:
+.global MonsterCategoryVirtual
+MonsterCategoryVirtual:
 .string "Virtual\0"
 .align 2,0
 
@@ -2183,8 +2183,8 @@ MonsterNameFlareon:
 .string "Flareon\0"
 .align 2,0
 
-.global MonsterCategoryJolteon
-MonsterCategoryJolteon:
+.global MonsterCategoryLightning
+MonsterCategoryLightning:
 .string "Lightning\0"
 .align 2,0
 
@@ -2193,8 +2193,8 @@ MonsterNameJolteon:
 .string "Jolteon\0"
 .align 2,0
 
-.global MonsterCategoryVaporeon
-MonsterCategoryVaporeon:
+.global MonsterCategoryBubbleJet
+MonsterCategoryBubbleJet:
 .string "Bubble Jet\0"
 .align 2,0
 
@@ -2203,8 +2203,8 @@ MonsterNameVaporeon:
 .string "Vaporeon\0"
 .align 2,0
 
-.global MonsterCategoryEevee
-MonsterCategoryEevee:
+.global MonsterCategoryEvolution
+MonsterCategoryEvolution:
 .string "Evolution\0"
 .align 2,0
 
@@ -2213,8 +2213,8 @@ MonsterNameEevee:
 .string "Eevee\0"
 .align 2,0
 
-.global MonsterCategoryDitto
-MonsterCategoryDitto:
+.global MonsterCategoryTransform
+MonsterCategoryTransform:
 .string "Transform\0"
 .align 2,0
 
@@ -2223,8 +2223,8 @@ MonsterNameDitto:
 .string "Ditto\0"
 .align 2,0
 
-.global MonsterCategoryLapras
-MonsterCategoryLapras:
+.global MonsterCategoryTransport
+MonsterCategoryTransport:
 .string "Transport\0"
 .align 2,0
 
@@ -2233,8 +2233,8 @@ MonsterNameLapras:
 .string "Lapras\0"
 .align 2,0
 
-.global MonsterCategoryGyarados
-MonsterCategoryGyarados:
+.global MonsterCategoryAtrocious
+MonsterCategoryAtrocious:
 .string "Atrocious\0"
 .align 2,0
 
@@ -2243,8 +2243,8 @@ MonsterNameGyarados:
 .string "Gyarados\0"
 .align 2,0
 
-.global MonsterCategoryMagikarp
-MonsterCategoryMagikarp:
+.global MonsterCategoryFish
+MonsterCategoryFish:
 .string "Fish\0"
 .align 2,0
 
@@ -2253,8 +2253,8 @@ MonsterNameMagikarp:
 .string "Magikarp\0"
 .align 2,0
 
-.global MonsterCategoryTauros
-MonsterCategoryTauros:
+.global MonsterCategoryWildBull
+MonsterCategoryWildBull:
 .string "Wild Bull\0"
 .align 2,0
 
@@ -2263,8 +2263,8 @@ MonsterNameTauros:
 .string "Tauros\0"
 .align 2,0
 
-.global MonsterCategoryPinsir
-MonsterCategoryPinsir:
+.global MonsterCategoryStagBeetle
+MonsterCategoryStagBeetle:
 .string "Stag Beetle\0"
 .align 2,0
 
@@ -2273,8 +2273,8 @@ MonsterNamePinsir:
 .string "Pinsir\0"
 .align 2,0
 
-.global MonsterCategoryMagmar
-MonsterCategoryMagmar:
+.global MonsterCategorySpitfire
+MonsterCategorySpitfire:
 .string "Spitfire\0"
 .align 2,0
 
@@ -2283,8 +2283,8 @@ MonsterNameMagmar:
 .string "Magmar\0"
 .align 2,0
 
-.global MonsterCategoryElectabuzz
-MonsterCategoryElectabuzz:
+.global MonsterCategoryElectric
+MonsterCategoryElectric:
 .string "Electric\0"
 .align 2,0
 
@@ -2293,8 +2293,8 @@ MonsterNameElectabuzz:
 .string "Electabuzz\0"
 .align 2,0
 
-.global MonsterCategoryJynx
-MonsterCategoryJynx:
+.global MonsterCategoryHumanShape
+MonsterCategoryHumanShape:
 .string "Human Shape\0"
 .align 2,0
 
@@ -2303,8 +2303,8 @@ MonsterNameJynx:
 .string "Jynx\0"
 .align 2,0
 
-.global MonsterCategoryScyther
-MonsterCategoryScyther:
+.global MonsterCategoryMantis
+MonsterCategoryMantis:
 .string "Mantis\0"
 .align 2,0
 
@@ -2313,8 +2313,8 @@ MonsterNameScyther:
 .string "Scyther\0"
 .align 2,0
 
-.global MonsterCategoryMrMime
-MonsterCategoryMrMime:
+.global MonsterCategoryBarrier
+MonsterCategoryBarrier:
 .string "Barrier\0"
 .align 2,0
 
@@ -2323,8 +2323,8 @@ MonsterNameMrMime:
 .string "Mr. Mime\0"
 .align 2,0
 
-.global MonsterCategoryStarmie
-MonsterCategoryStarmie:
+.global MonsterCategoryMysterious
+MonsterCategoryMysterious:
 .string "Mysterious\0"
 .align 2,0
 
@@ -2333,8 +2333,8 @@ MonsterNameStarmie:
 .string "Starmie\0"
 .align 2,0
 
-.global MonsterCategoryStaryu
-MonsterCategoryStaryu:
+.global MonsterCategoryStarShape
+MonsterCategoryStarShape:
 .string "Star Shape\0"
 .align 2,0
 
@@ -2348,8 +2348,8 @@ MonsterNameSeaking:
 .string "Seaking\0"
 .align 2,0
 
-.global MonsterCategoryGoldeen
-MonsterCategoryGoldeen:
+.global MonsterCategoryGoldfish
+MonsterCategoryGoldfish:
 .string "Goldfish\0"
 .align 2,0
 
@@ -2363,8 +2363,8 @@ MonsterNameSeadra:
 .string "Seadra\0"
 .align 2,0
 
-.global MonsterCategoryHorsea
-MonsterCategoryHorsea:
+.global MonsterCategoryDragon
+MonsterCategoryDragon:
 .string "Dragon\0"
 .align 2,0
 
@@ -2373,8 +2373,8 @@ MonsterNameHorsea:
 .string "Horsea\0"
 .align 2,0
 
-.global MonsterCategoryKangaskhan
-MonsterCategoryKangaskhan:
+.global MonsterCategoryParent
+MonsterCategoryParent:
 .string "Parent\0"
 .align 2,0
 
@@ -2383,8 +2383,8 @@ MonsterNameKangaskhan:
 .string "Kangaskhan\0"
 .align 2,0
 
-.global MonsterCategoryTangela
-MonsterCategoryTangela:
+.global MonsterCategoryVine
+MonsterCategoryVine:
 .string "Vine\0"
 .align 2,0
 
@@ -2403,8 +2403,8 @@ MonsterNameRhydon:
 .string "Rhydon\0"
 .align 2,0
 
-.global MonsterCategoryRhyhorn
-MonsterCategoryRhyhorn:
+.global MonsterCategorySpikes
+MonsterCategorySpikes:
 .string "Spikes\0"
 .align 2,0
 
@@ -2418,8 +2418,8 @@ MonsterNameWeezing:
 .string "Weezing\0"
 .align 2,0
 
-.global MonsterCategoryKoffing
-MonsterCategoryKoffing:
+.global MonsterCategoryPoisonGas
+MonsterCategoryPoisonGas:
 .string "Poison Gas\0"
 .align 2,0
 
@@ -2428,8 +2428,8 @@ MonsterNameKoffing:
 .string "Koffing\0"
 .align 2,0
 
-.global MonsterCategoryLickitung
-MonsterCategoryLickitung:
+.global MonsterCategoryLicking
+MonsterCategoryLicking:
 .string "Licking\0"
 .align 2,0
 
@@ -2438,8 +2438,8 @@ MonsterNameLickitung:
 .string "Lickitung\0"
 .align 2,0
 
-.global MonsterCategoryHitmonchan
-MonsterCategoryHitmonchan:
+.global MonsterCategoryPunching
+MonsterCategoryPunching:
 .string "Punching\0"
 .align 2,0
 
@@ -2448,8 +2448,8 @@ MonsterNameHitmonchan:
 .string "Hitmonchan\0"
 .align 2,0
 
-.global MonsterCategoryHitmonlee
-MonsterCategoryHitmonlee:
+.global MonsterCategoryKicking
+MonsterCategoryKicking:
 .string "Kicking\0"
 .align 2,0
 
@@ -2458,8 +2458,8 @@ MonsterNameHitmonlee:
 .string "Hitmonlee\0"
 .align 2,0
 
-.global MonsterCategoryMarowak
-MonsterCategoryMarowak:
+.global MonsterCategoryBoneKeeper
+MonsterCategoryBoneKeeper:
 .string "Bone Keeper\0"
 .align 2,0
 
@@ -2468,8 +2468,8 @@ MonsterNameMarowak:
 .string "Marowak\0"
 .align 2,0
 
-.global MonsterCategoryCubone
-MonsterCategoryCubone:
+.global MonsterCategoryLonely
+MonsterCategoryLonely:
 .string "Lonely\0"
 .align 2,0
 
@@ -2478,8 +2478,8 @@ MonsterNameCubone:
 .string "Cubone\0"
 .align 2,0
 
-.global MonsterCategoryExeggutor
-MonsterCategoryExeggutor:
+.global MonsterCategoryCoconut
+MonsterCategoryCoconut:
 .string "Coconut\0"
 .align 2,0
 
@@ -2488,8 +2488,8 @@ MonsterNameExeggutor:
 .string "Exeggutor\0"
 .align 2,0
 
-.global MonsterCategoryExeggcute
-MonsterCategoryExeggcute:
+.global MonsterCategoryEgg
+MonsterCategoryEgg:
 .string "Egg\0"
 .align 2,0
 
@@ -2503,8 +2503,8 @@ MonsterNameElectrode:
 .string "Electrode\0"
 .align 2,0
 
-.global MonsterCategoryVoltorb
-MonsterCategoryVoltorb:
+.global MonsterCategoryBall
+MonsterCategoryBall:
 .string "Ball\0"
 .align 2,0
 
@@ -2513,8 +2513,8 @@ MonsterNameVoltorb:
 .string "Voltorb\0"
 .align 2,0
 
-.global MonsterCategoryKingler
-MonsterCategoryKingler:
+.global MonsterCategoryPincer
+MonsterCategoryPincer:
 .string "Pincer\0"
 .align 2,0
 
@@ -2523,8 +2523,8 @@ MonsterNameKingler:
 .string "Kingler\0"
 .align 2,0
 
-.global MonsterCategoryKrabby
-MonsterCategoryKrabby:
+.global MonsterCategoryRiverCrab
+MonsterCategoryRiverCrab:
 .string "River Crab\0"
 .align 2,0
 
@@ -2538,8 +2538,8 @@ MonsterNameHypno:
 .string "Hypno\0"
 .align 2,0
 
-.global MonsterCategoryDrowzee
-MonsterCategoryDrowzee:
+.global MonsterCategoryHypnosis
+MonsterCategoryHypnosis:
 .string "Hypnosis\0"
 .align 2,0
 
@@ -2548,8 +2548,8 @@ MonsterNameDrowzee:
 .string "Drowzee\0"
 .align 2,0
 
-.global MonsterCategoryOnix
-MonsterCategoryOnix:
+.global MonsterCategoryRockSnake
+MonsterCategoryRockSnake:
 .string "Rock Snake\0"
 .align 2,0
 
@@ -2558,8 +2558,8 @@ MonsterNameOnix:
 .string "Onix\0"
 .align 2,0
 
-.global MonsterCategoryGengar
-MonsterCategoryGengar:
+.global MonsterCategoryShadow
+MonsterCategoryShadow:
 .string "Shadow\0"
 .align 2,0
 
@@ -2573,8 +2573,8 @@ MonsterNameHaunter:
 .string "Haunter\0"
 .align 2,0
 
-.global MonsterCategoryGastly
-MonsterCategoryGastly:
+.global MonsterCategoryGas
+MonsterCategoryGas:
 .string "Gas\0"
 .align 2,0
 
@@ -2588,8 +2588,8 @@ MonsterNameCloyster:
 .string "Cloyster\0"
 .align 2,0
 
-.global MonsterCategoryShellder
-MonsterCategoryShellder:
+.global MonsterCategoryBivalve
+MonsterCategoryBivalve:
 .string "Bivalve\0"
 .align 2,0
 
@@ -2603,8 +2603,8 @@ MonsterNameMuk:
 .string "Muk\0"
 .align 2,0
 
-.global MonsterCategoryGrimer
-MonsterCategoryGrimer:
+.global MonsterCategorySludge
+MonsterCategorySludge:
 .string "Sludge\0"
 .align 2,0
 
@@ -2618,8 +2618,8 @@ MonsterNameDewgong:
 .string "Dewgong\0"
 .align 2,0
 
-.global MonsterCategorySeel
-MonsterCategorySeel:
+.global MonsterCategorySeaLion
+MonsterCategorySeaLion:
 .string "Sea Lion\0"
 .align 2,0
 
@@ -2628,8 +2628,8 @@ MonsterNameSeel:
 .string "Seel\0"
 .align 2,0
 
-.global MonsterCategoryDodrio
-MonsterCategoryDodrio:
+.global MonsterCategoryTripleBird
+MonsterCategoryTripleBird:
 .string "Triple Bird\0"
 .align 2,0
 
@@ -2638,8 +2638,8 @@ MonsterNameDodrio:
 .string "Dodrio\0"
 .align 2,0
 
-.global MonsterCategoryDoduo
-MonsterCategoryDoduo:
+.global MonsterCategoryTwinBird
+MonsterCategoryTwinBird:
 .string "Twin Bird\0"
 .align 2,0
 
@@ -2648,8 +2648,8 @@ MonsterNameDoduo:
 .string "Doduo\0"
 .align 2,0
 
-.global MonsterCategoryFarfetch
-MonsterCategoryFarfetch:
+.global MonsterCategoryWildDuck
+MonsterCategoryWildDuck:
 .string "Wild Duck\0"
 .align 2,0
 
@@ -2663,8 +2663,8 @@ MonsterNameMagneton:
 .string "Magneton\0"
 .align 2,0
 
-.global MonsterCategoryMagnemite
-MonsterCategoryMagnemite:
+.global MonsterCategoryMagnet
+MonsterCategoryMagnet:
 .string "Magnet\0"
 .align 2,0
 
@@ -2673,8 +2673,8 @@ MonsterNameMagnemite:
 .string "Magnemite\0"
 .align 2,0
 
-.global MonsterCategorySlowbro
-MonsterCategorySlowbro:
+.global MonsterCategoryHermitCrab
+MonsterCategoryHermitCrab:
 .string "Hermit Crab\0"
 .align 2,0
 
@@ -2683,8 +2683,8 @@ MonsterNameSlowbro:
 .string "Slowbro\0"
 .align 2,0
 
-.global MonsterCategorySlowpoke
-MonsterCategorySlowpoke:
+.global MonsterCategoryDopey
+MonsterCategoryDopey:
 .string "Dopey\0"
 .align 2,0
 
@@ -2698,8 +2698,8 @@ MonsterNameRapidash:
 .string "Rapidash\0"
 .align 2,0
 
-.global MonsterCategoryPonyta
-MonsterCategoryPonyta:
+.global MonsterCategoryFireHorse
+MonsterCategoryFireHorse:
 .string "Fire Horse\0"
 .align 2,0
 
@@ -2708,8 +2708,8 @@ MonsterNamePonyta:
 .string "Ponyta\0"
 .align 2,0
 
-.global MonsterCategoryGolem
-MonsterCategoryGolem:
+.global MonsterCategoryMegaton
+MonsterCategoryMegaton:
 .string "Megaton\0"
 .align 2,0
 
@@ -2723,8 +2723,8 @@ MonsterNameGraveler:
 .string "Graveler\0"
 .align 2,0
 
-.global MonsterCategoryGeodude
-MonsterCategoryGeodude:
+.global MonsterCategoryRock
+MonsterCategoryRock:
 .string "Rock\0"
 .align 2,0
 
@@ -2738,8 +2738,8 @@ MonsterNameTentacruel:
 .string "Tentacruel\0"
 .align 2,0
 
-.global MonsterCategoryTentacool
-MonsterCategoryTentacool:
+.global MonsterCategoryJellyfish
+MonsterCategoryJellyfish:
 .string "Jellyfish\0"
 .align 2,0
 
@@ -2753,8 +2753,8 @@ MonsterNameVictreebel:
 .string "Victreebel\0"
 .align 2,0
 
-.global MonsterCategoryWeepinbell
-MonsterCategoryWeepinbell:
+.global MonsterCategoryFlycatcher
+MonsterCategoryFlycatcher:
 .string "Flycatcher\0"
 .align 2,0
 
@@ -2778,8 +2778,8 @@ MonsterNameMachoke:
 .string "Machoke\0"
 .align 2,0
 
-.global MonsterCategoryMachop
-MonsterCategoryMachop:
+.global MonsterCategorySuperpower
+MonsterCategorySuperpower:
 .string "Superpower\0"
 .align 2,0
 
@@ -2798,8 +2798,8 @@ MonsterNameKadabra:
 .string "Kadabra\0"
 .align 2,0
 
-.global MonsterCategoryAbra
-MonsterCategoryAbra:
+.global MonsterCategoryPsi
+MonsterCategoryPsi:
 .string "Psi\0"
 .align 2,0
 
@@ -2818,8 +2818,8 @@ MonsterNamePoliwhirl:
 .string "Poliwhirl\0"
 .align 2,0
 
-.global MonsterCategoryPoliwag
-MonsterCategoryPoliwag:
+.global MonsterCategoryTadpole
+MonsterCategoryTadpole:
 .string "Tadpole\0"
 .align 2,0
 
@@ -2828,8 +2828,8 @@ MonsterNamePoliwag:
 .string "Poliwag\0"
 .align 2,0
 
-.global MonsterCategoryArcanine
-MonsterCategoryArcanine:
+.global MonsterCategoryLegendary
+MonsterCategoryLegendary:
 .string "Legendary\0"
 .align 2,0
 
@@ -2838,8 +2838,8 @@ MonsterNameArcanine:
 .string "Arcanine\0"
 .align 2,0
 
-.global MonsterCategoryGrowlithe
-MonsterCategoryGrowlithe:
+.global MonsterCategoryPuppy
+MonsterCategoryPuppy:
 .string "Puppy\0"
 .align 2,0
 
@@ -2853,8 +2853,8 @@ MonsterNamePrimeape:
 .string "Primeape\0"
 .align 2,0
 
-.global MonsterCategoryMankey
-MonsterCategoryMankey:
+.global MonsterCategoryPigMonkey
+MonsterCategoryPigMonkey:
 .string "Pig Monkey\0"
 .align 2,0
 
@@ -2868,8 +2868,8 @@ MonsterNameGolduck:
 .string "Golduck\0"
 .align 2,0
 
-.global MonsterCategoryPsyduck
-MonsterCategoryPsyduck:
+.global MonsterCategoryDuck
+MonsterCategoryDuck:
 .string "Duck\0"
 .align 2,0
 
@@ -2878,8 +2878,8 @@ MonsterNamePsyduck:
 .string "Psyduck\0"
 .align 2,0
 
-.global MonsterCategoryPersian
-MonsterCategoryPersian:
+.global MonsterCategoryClassyCat
+MonsterCategoryClassyCat:
 .string "Classy Cat\0"
 .align 2,0
 
@@ -2888,8 +2888,8 @@ MonsterNamePersian:
 .string "Persian\0"
 .align 2,0
 
-.global MonsterCategoryMeowth
-MonsterCategoryMeowth:
+.global MonsterCategoryScratchCat
+MonsterCategoryScratchCat:
 .string "Scratch Cat\0"
 .align 2,0
 
@@ -2903,8 +2903,8 @@ MonsterNameDugtrio:
 .string "Dugtrio\0"
 .align 2,0
 
-.global MonsterCategoryDiglett
-MonsterCategoryDiglett:
+.global MonsterCategoryMole
+MonsterCategoryMole:
 .string "Mole\0"
 .align 2,0
 
@@ -2913,8 +2913,8 @@ MonsterNameDiglett:
 .string "Diglett\0"
 .align 2,0
 
-.global MonsterCategoryVenomoth
-MonsterCategoryVenomoth:
+.global MonsterCategoryPoisonMoth
+MonsterCategoryPoisonMoth:
 .string "Poison Moth\0"
 .align 2,0
 
@@ -2923,8 +2923,8 @@ MonsterNameVenomoth:
 .string "Venomoth\0"
 .align 2,0
 
-.global MonsterCategoryVenonat
-MonsterCategoryVenonat:
+.global MonsterCategoryInsect
+MonsterCategoryInsect:
 .string "Insect\0"
 .align 2,0
 
@@ -2938,8 +2938,8 @@ MonsterNameParasect:
 .string "Parasect\0"
 .align 2,0
 
-.global MonsterCategoryParas
-MonsterCategoryParas:
+.global MonsterCategoryMushroom
+MonsterCategoryMushroom:
 .string "Mushroom\0"
 .align 2,0
 
@@ -2948,8 +2948,8 @@ MonsterNameParas:
 .string "Paras\0"
 .align 2,0
 
-.global MonsterCategoryVileplume
-MonsterCategoryVileplume:
+.global MonsterCategoryFlower
+MonsterCategoryFlower:
 .string "Flower\0"
 .align 2,0
 
@@ -2963,8 +2963,8 @@ MonsterNameGloom:
 .string "Gloom\0"
 .align 2,0
 
-.global MonsterCategoryOddish
-MonsterCategoryOddish:
+.global MonsterCategoryWeed
+MonsterCategoryWeed:
 .string "Weed\0"
 .align 2,0
 
@@ -2978,8 +2978,8 @@ MonsterNameGolbat:
 .string "Golbat\0"
 .align 2,0
 
-.global MonsterCategoryZubat
-MonsterCategoryZubat:
+.global MonsterCategoryBat
+MonsterCategoryBat:
 .string "Bat\0"
 .align 2,0
 
@@ -2993,8 +2993,8 @@ MonsterNameWigglytuff:
 .string "Wigglytuff\0"
 .align 2,0
 
-.global MonsterCategoryJigglypuff
-MonsterCategoryJigglypuff:
+.global MonsterCategoryBalloon
+MonsterCategoryBalloon:
 .string "Balloon\0"
 .align 2,0
 
@@ -3008,8 +3008,8 @@ MonsterNameNinetales:
 .string "Ninetales\0"
 .align 2,0
 
-.global MonsterCategoryVulpix
-MonsterCategoryVulpix:
+.global MonsterCategoryFox
+MonsterCategoryFox:
 .string "Fox\0"
 .align 2,0
 
@@ -3023,8 +3023,8 @@ MonsterNameClefable:
 .string "Clefable\0"
 .align 2,0
 
-.global MonsterCategoryClefairy
-MonsterCategoryClefairy:
+.global MonsterCategoryFairy
+MonsterCategoryFairy:
 .string "Fairy\0"
 .align 2,0
 
@@ -3048,8 +3048,8 @@ MonsterNameNidoran_M:
 .string "Nidoran♂\0"
 .align 2,0
 
-.global MonsterCategoryNidoqueen
-MonsterCategoryNidoqueen:
+.global MonsterCategoryDrill
+MonsterCategoryDrill:
 .string "Drill\0"
 .align 2,0
 
@@ -3063,8 +3063,8 @@ MonsterNameNidorina:
 .string "Nidorina\0"
 .align 2,0
 
-.global MonsterCategoryNidoran_F
-MonsterCategoryNidoran_F:
+.global MonsterCategoryPoisonPin
+MonsterCategoryPoisonPin:
 .string "Poison Pin\0"
 .align 2,0
 
@@ -3093,8 +3093,8 @@ MonsterNamePikachu:
 .string "Pikachu\0"
 .align 2,0
 
-.global MonsterCategoryArbok
-MonsterCategoryArbok:
+.global MonsterCategoryCobra
+MonsterCategoryCobra:
 .string "Cobra\0"
 .align 2,0
 
@@ -3103,8 +3103,8 @@ MonsterNameArbok:
 .string "Arbok\0"
 .align 2,0
 
-.global MonsterCategoryEkans
-MonsterCategoryEkans:
+.global MonsterCategorySnake
+MonsterCategorySnake:
 .string "Snake\0"
 .align 2,0
 
@@ -3113,8 +3113,8 @@ MonsterNameEkans:
 .string "Ekans\0"
 .align 2,0
 
-.global MonsterCategoryFearow
-MonsterCategoryFearow:
+.global MonsterCategoryBeak
+MonsterCategoryBeak:
 .string "Beak\0"
 .align 2,0
 
@@ -3133,8 +3133,8 @@ MonsterNameRaticate:
 .string "Raticate\0"
 .align 2,0
 
-.global MonsterCategoryRattata
-MonsterCategoryRattata:
+.global MonsterCategoryMouse
+MonsterCategoryMouse:
 .string "Mouse\0"
 .align 2,0
 
@@ -3148,8 +3148,8 @@ MonsterNamePidgeot:
 .string "Pidgeot\0"
 .align 2,0
 
-.global MonsterCategoryPidgeotto
-MonsterCategoryPidgeotto:
+.global MonsterCategoryBird
+MonsterCategoryBird:
 .string "Bird\0"
 .align 2,0
 
@@ -3158,8 +3158,8 @@ MonsterNamePidgeotto:
 .string "Pidgeotto\0"
 .align 2,0
 
-.global MonsterCategoryPidgey
-MonsterCategoryPidgey:
+.global MonsterCategoryTinyBird
+MonsterCategoryTinyBird:
 .string "Tiny Bird\0"
 .align 2,0
 
@@ -3168,8 +3168,8 @@ MonsterNamePidgey:
 .string "Pidgey\0"
 .align 2,0
 
-.global MonsterCategoryBeedrill
-MonsterCategoryBeedrill:
+.global MonsterCategoryPoisonBee
+MonsterCategoryPoisonBee:
 .string "Poison Bee\0"
 .align 2,0
 
@@ -3183,8 +3183,8 @@ MonsterNameKakuna:
 .string "Kakuna\0"
 .align 2,0
 
-.global MonsterCategoryWeedle
-MonsterCategoryWeedle:
+.global MonsterCategoryHairyBug
+MonsterCategoryHairyBug:
 .string "Hairy Bug\0"
 .align 2,0
 
@@ -3193,8 +3193,8 @@ MonsterNameWeedle:
 .string "Weedle\0"
 .align 2,0
 
-.global MonsterCategoryButterfree
-MonsterCategoryButterfree:
+.global MonsterCategoryButterfly
+MonsterCategoryButterfly:
 .string "Butterfly\0"
 .align 2,0
 
@@ -3203,8 +3203,8 @@ MonsterNameButterfree:
 .string "Butterfree\0"
 .align 2,0
 
-.global MonsterCategoryMetapod
-MonsterCategoryMetapod:
+.global MonsterCategoryCocoon
+MonsterCategoryCocoon:
 .string "Cocoon\0"
 .align 2,0
 
@@ -3213,8 +3213,8 @@ MonsterNameMetapod:
 .string "Metapod\0"
 .align 2,0
 
-.global MonsterCategoryCaterpie
-MonsterCategoryCaterpie:
+.global MonsterCategoryWorm
+MonsterCategoryWorm:
 .string "Worm\0"
 .align 2,0
 
@@ -3223,8 +3223,8 @@ MonsterNameCaterpie:
 .string "Caterpie\0"
 .align 2,0
 
-.global MonsterCategoryBlastoise
-MonsterCategoryBlastoise:
+.global MonsterCategoryShellfish
+MonsterCategoryShellfish:
 .string "Shellfish\0"
 .align 2,0
 
@@ -3233,8 +3233,8 @@ MonsterNameBlastoise:
 .string "Blastoise\0"
 .align 2,0
 
-.global MonsterCategoryWartortle
-MonsterCategoryWartortle:
+.global MonsterCategoryTurtle
+MonsterCategoryTurtle:
 .string "Turtle\0"
 .align 2,0
 
@@ -3243,8 +3243,8 @@ MonsterNameWartortle:
 .string "Wartortle\0"
 .align 2,0
 
-.global MonsterCategorySquirtle
-MonsterCategorySquirtle:
+.global MonsterCategoryTinyTurtle
+MonsterCategoryTinyTurtle:
 .string "Tiny Turtle\0"
 .align 2,0
 
@@ -3258,8 +3258,8 @@ MonsterNameCharizard:
 .string "Charizard\0"
 .align 2,0
 
-.global MonsterCategoryCharmeleon
-MonsterCategoryCharmeleon:
+.global MonsterCategoryFlame
+MonsterCategoryFlame:
 .string "Flame\0"
 .align 2,0
 
@@ -3268,8 +3268,8 @@ MonsterNameCharmeleon:
 .string "Charmeleon\0"
 .align 2,0
 
-.global MonsterCategoryCharmander
-MonsterCategoryCharmander:
+.global MonsterCategoryLizard
+MonsterCategoryLizard:
 .string "Lizard\0"
 .align 2,0
 
@@ -3288,8 +3288,8 @@ MonsterNameIvysaur:
 .string "Ivysaur\0"
 .align 2,0
 
-.global MonsterCategoryBulbasaur
-MonsterCategoryBulbasaur:
+.global MonsterCategorySeed
+MonsterCategorySeed:
 .string "Seed\0"
 .align 2,0
 
@@ -3298,8 +3298,8 @@ MonsterNameBulbasaur:
 .string "Bulbasaur\0"
 .align 2,0
 
-.global MonsterCategoryNone
-MonsterCategoryNone:
+.global MonsterCategoryEruption
+MonsterCategoryEruption:
 .string "Eruption\0"
 .align 2,0
 
