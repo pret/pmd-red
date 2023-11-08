@@ -515,7 +515,7 @@
         "useText": "MoveUseTextUse"
     },
     {
-        "name": "MonsterCategoryMisdreavus",
+        "name": "MonsterCategoryScreech",
         "basePower": 2,
         "type": "TYPE_NORMAL",
         "targetingFlags": "0b0000000010000000",
@@ -1210,7 +1210,7 @@
         "useText": "MoveUseTextUse"
     },
     {
-        "name": "MonsterCategoryPoochyena",
+        "name": "MonsterCategoryBite",
         "basePower": 7,
         "type": "TYPE_DARK",
         "targetingFlags": "0b0000000000000000",
@@ -1231,7 +1231,7 @@
         "useText": "MoveUseTextUse"
     },
     {
-        "name": "MonsterCategoryRaikou",
+        "name": "MonsterCategoryThunder",
         "basePower": 24,
         "type": "TYPE_ELECTRIC",
         "targetingFlags": "0b0000000000000000",
@@ -2151,7 +2151,7 @@
         "useText": "MoveUseTextUse"
     },
     {
-        "name": "MonsterCategoryDrowzee",
+        "name": "MonsterCategoryHypnosis",
         "basePower": 2,
         "type": "TYPE_PSYCHIC",
         "targetingFlags": "0b0000000010000000",
@@ -3362,7 +3362,7 @@
         "useText": "MoveUseTextUse"
     },
     {
-        "name": "MonsterCategoryUmbreon",
+        "name": "MonsterCategoryMoonlight",
         "basePower": 2,
         "type": "TYPE_NORMAL",
         "targetingFlags": "0b0000001001100001",
@@ -3401,7 +3401,7 @@
         "useText": "MoveUseTextUse"
     },
     {
-        "name": "MonsterCategoryHariyama",
+        "name": "MonsterCategoryArmThrust",
         "basePower": 2,
         "type": "TYPE_FIGHTING",
         "targetingFlags": "0b0000000000000000",
@@ -3808,7 +3808,7 @@
         "useText": "MoveUseTextUse"
     },
     {
-        "name": "MonsterCategoryKoffing",
+        "name": "MonsterCategoryPoisonGas",
         "basePower": 2,
         "type": "TYPE_POISON",
         "targetingFlags": "0b0000000000000000",
@@ -3984,7 +3984,7 @@
         "useText": "MoveUseTextUse"
     },
     {
-        "name": "MonsterCategorySpoink",
+        "name": "MonsterCategoryBounce",
         "basePower": 16,
         "type": "TYPE_FLYING",
         "targetingFlags": "0b0000000001110100",
@@ -4372,7 +4372,7 @@
         "useText": "MoveUseTextUse"
     },
     {
-        "name": "MonsterCategoryJirachi",
+        "name": "MonsterCategoryWish",
         "basePower": 2,
         "type": "TYPE_NORMAL",
         "targetingFlags": "0b0000000001110011",
@@ -4586,7 +4586,7 @@
         "useText": "MoveUseTextUse"
     },
     {
-        "name": "MonsterCategorySwellow",
+        "name": "MonsterCategorySwallow",
         "basePower": 2,
         "type": "TYPE_NORMAL",
         "targetingFlags": "0b0000001001110011",
@@ -4725,7 +4725,7 @@
         "useText": "MoveUseTextUse"
     },
     {
-        "name": "MonsterCategoryMachop",
+        "name": "MonsterCategorySuperpower",
         "basePower": 24,
         "type": "TYPE_FIGHTING",
         "targetingFlags": "0b0000000000000000",
@@ -5016,7 +5016,7 @@
         "useText": "MoveUseTextUse"
     },
     {
-        "name": "MonsterCategoryMrMime",
+        "name": "MonsterCategoryBarrier",
         "basePower": 2,
         "type": "TYPE_PSYCHIC",
         "targetingFlags": "0b0000000001110011",
@@ -5404,7 +5404,7 @@
         "useText": "MoveUseTextUse"
     },
     {
-        "name": "MonsterCategoryNone",
+        "name": "MonsterCategoryEruption",
         "basePower": 30,
         "type": "TYPE_FIRE",
         "targetingFlags": "0b0000000010000000",
@@ -5424,7 +5424,7 @@
         "useText": "MoveUseTextUse"
     },
     {
-        "name": "MonsterCategoryGrimer",
+        "name": "MonsterCategorySludge",
         "basePower": 12,
         "type": "TYPE_POISON",
         "targetingFlags": "0b0000000010000000",
@@ -5483,7 +5483,7 @@
         "useText": "MoveUseTextUse"
     },
     {
-        "name": "MonsterCategoryDitto",
+        "name": "MonsterCategoryTransform",
         "basePower": 2,
         "type": "TYPE_NORMAL",
         "targetingFlags": "0b0000000001110011",
@@ -5735,7 +5735,7 @@
         "useText": "MoveUseTextUse"
     },
     {
-        "name": "MonsterCategoryRhyhorn",
+        "name": "MonsterCategorySpikes",
         "basePower": 2,
         "type": "TYPE_GROUND",
         "targetingFlags": "0b0000000001110011",
@@ -6467,7 +6467,7 @@
         "useText": "MoveUseTextUse"
     },
     {
-        "name": "MonsterCategoryMeditite",
+        "name": "MonsterCategoryMeditate",
         "basePower": 2,
         "type": "TYPE_PSYCHIC",
         "targetingFlags": "0b0000000001110011",
