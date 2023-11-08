@@ -2078,8 +2078,8 @@ MonsterNameMew:
 .string "Mew\0"
 .align 2,0
 
-.global MonsterCategoryNewSpeciestwo
-MonsterCategoryNewSpeciestwo:
+.global MonsterCategoryGenetic
+MonsterCategoryGenetic:
 .string "Genetic\0"
 .align 2,0
 

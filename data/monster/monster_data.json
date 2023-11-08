@@ -7239,7 +7239,7 @@
     },
     {
         "name": "MonsterNameMewtwo",
-        "category": "MonsterCategoryNewSpeciestwo",
+        "category": "MonsterCategoryGenetic",
         "overworldPalette": 7,
         "bodySize": 1,
         "movementSpeed": 1,
