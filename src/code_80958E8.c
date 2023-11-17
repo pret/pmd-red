@@ -58,7 +58,7 @@ void InitializeMailJobsNews(void)
         gUnknown_203B490->unk230[index].dungeon.id = 99;
         gUnknown_203B490->unk230[index].dungeon.floor = 1;
         gUnknown_203B490->unk230[index].seed = 0;
-        gUnknown_203B490->unk230[index].unk8 = 0;
+        gUnknown_203B490->unk230[index].checksum = 0;
     }
 }
 

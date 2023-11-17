@@ -1009,10 +1009,8 @@ s32 sub_8013800(MenuInputStruct *param_1, s32 param_2)
 
     iVar2 = param_1->unk6;
     iVar1 = param_2 * param_1->unk10;
-    if (iVar1 < 0)
-        iVar1 = iVar1 + 0xff;
 
-    return iVar2 + (iVar1 >> 8);
+    return iVar2 + (iVar1 / 256);
 }
 
 void sub_8013818(MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4)
@@ -1279,10 +1277,10 @@ u32 sub_8013BBC(unkStructFor8013AA0 *a0)
         return 1;
 
     switch (sub_8012AE8()) {
-        case 2:
+        case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
-        case 1:
+        case INPUT_A_BUTTON:
             PlayMenuSoundEffect(0);
             return 3;
     }
@@ -1322,10 +1320,10 @@ void sub_8013D10(unkStructFor8013AA0 *a0)
     uVar4 = a0->unk24;
 
     switch (sub_8012AE8()) {
-        case 9:
+        case INPUT_DPAD_LEFT:
             uVar4 = a0->unk24 < a0->unk25 - 1 ? a0->unk24 + 1 : 0;
             break;
-        case 10:
+        case INPUT_DPAD_RIGHT:
             uVar4 = a0->unk24 == 0 ? a0->unk25 - 1 : a0->unk24 - 1;
             break;
     }
@@ -1358,7 +1356,7 @@ static bool8 sub_8013DD0(unkStructFor8013AA0 *a0)
     s32 iVar2;
 
     switch (sub_8012AE8()) {
-        case 7:
+        case INPUT_DPAD_UP:
             if (a0->unk0 == a0->unkC) {
                 PlayMenuSoundEffect(2);
                 return FALSE;
@@ -1372,7 +1370,7 @@ static bool8 sub_8013DD0(unkStructFor8013AA0 *a0)
             else
                 a0->unk0 = iVar2;
             return TRUE;
-        case 8:
+        case INPUT_DPAD_DOWN:
             if (a0->unk0 == a0->unk8) {
                 PlayMenuSoundEffect(2);
                 return FALSE;

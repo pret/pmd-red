@@ -9,7 +9,7 @@ typedef struct subStruct_203B490
 {
     /* 0x0 */ DungeonLocation dungeon;
     /* 0x4 */ u32 seed;
-    u32 unk8;
+    /* 0x8 */ s32 checksum; // really dumb checksum that just adds all the fields of WonderMail struct
 } subStruct_203B490;
 
 // size: 0x32C?
@@ -21,7 +21,7 @@ typedef struct unkStruct_203B490
     u8 unk190[40];
     u8 unk1B8[120];
     subStruct_203B490 unk230[16];
-    /* 0x2F0 */ u8 PKMNNewsReceived[NUM_POKEMON_NEWS];
+    /* 0x2F0 */ bool8 PKMNNewsReceived[NUM_POKEMON_NEWS];
     bool8 unk328;
 } unkStruct_203B490;
 

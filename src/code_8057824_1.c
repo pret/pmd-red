@@ -3818,17 +3818,11 @@ void sub_808BB3C(Position *param_1)
   Position local_8;
   
   iVar1 = param_1->x * 0x1800 + 0xc00;
-  if (iVar1 < 0) {
-    iVar1 += 0xff;
-  }
-  local_8.x = iVar1 >> 8;
+  local_8.x = iVar1 / 256;
 
   iVar1 = param_1->y * 0x1800 + 0x1000;
-  if (iVar1 < 0) {
-    iVar1 += 0xff;
-  }
 
-  local_8.y = iVar1 >> 8;
+  local_8.y = iVar1 / 256;
   sub_8085EC8(100,0,0,&local_8,0);
 }
 

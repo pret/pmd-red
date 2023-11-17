@@ -84,7 +84,6 @@ extern void sub_802E088(u32);
 extern void CreateMailboxMenu(void);
 extern void CreateMailActionMenu(void);
 extern void CreateMailAcceptedStatusBox(u32);
-extern void ReceivePKMNNews(u8);
 extern void sub_8096078(void);
 
 u32 sub_802DFB0(void)
@@ -420,7 +419,7 @@ void HandleMailActionMenu(void)
             PlaySound(0x133);
             AcceptJob(GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex));
             sub_8096C80();
-            sub_8096D24();
+            SortJobSlots();
             ResetMailboxSlot(gUnknown_203B304->mailboxIndex);
             sub_8096078();
             if(HasNoMailinMailbox())
