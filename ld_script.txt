@@ -242,6 +242,7 @@ SECTIONS {
         src/dungeon_capabilities.o(.text);
         src/dungeon_ai_targeting.o(.text);
         src/dungeon_pokemon_attributes.o(.text);
+        src/code_80718D8.o(.text);
         asm/code_80718D8.o(.text);
         src/dungeon_ai_leader.o(.text);
         asm/code_8072CF4.o(.text);

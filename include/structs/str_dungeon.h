@@ -99,7 +99,8 @@ typedef struct Dungeon
     u8 unk65C;
     u8 fill65D[0x660 - 0x65D];
     /* 0x660 */ s16 fractionalTurn; // Handles turn order when Pokémon have different movement speeds.
-    u8 fill662[0x666 - 0x662];
+    s16 unk662;
+    s16 unk664;
     /* 0x666 */ s16 windTurns; // Turns remaining before getting swept out of the dungeon.
     /* 0x668 */ u16 unk668;
     u16 bossSongIndex;
@@ -139,7 +140,8 @@ typedef struct Dungeon
     /* 0x3904 */ s16 unk3904;
     u8 fill3906[0x3A08 - 0x3906];
     /* 0x3A08 */ u8 unk3A08;
-    u8 fill3A09[0x3A0D - 0x3A09];
+    u8 fill3A09[0x3A0C - 0x3A09];
+    u8 unk3A0C;
     /* 0x3A0D */ u8 unk3A0D;
     /* 0x3A0E */ s16 tileset;
     /* 0x3A10 */ u16 unk3A10;
@@ -198,10 +200,10 @@ typedef struct Dungeon
     /* 0x15E2C */ Entity unk15E2C[0x40];
     /* 0x17B2C */ Entity *lightningRodPokemon;
     /* 0x17B30 */ Entity *snatchPokemon;
-    /* 0x17B34 */ u8 fillunk1734[0x17B38 - 0x17B34];
+    /* 0x17B34 */ Entity *unk17B34;
     /* 0x17B38 */ u32 unk17B38;
     /* 0x17B3C */ u32 unk17B3C;
-    u8 fill17B40[0x17B44 - 0x17B40];
+    /* 0x17B3C */ u32 unk17B40;
     /* 0x17B44 */ OpenedFile *sprites[MONSTER_MAX];
     /* 0x181E4 */ OpenedFile *paletFile;
     /* 0x181E8 */ Position cameraPos;
