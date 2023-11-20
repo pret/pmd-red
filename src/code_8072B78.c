@@ -4,7 +4,11 @@
 #include "structs/str_pokemon.h"
 #include "dungeon_map_access.h"
 #include "dungeon_movement.h"
+#include "dungeon_random.h"
 #include "code_805D8C8.h"
+#include "code_806CD90.h"
+#include "moves.h"
+#include "pokemon_mid.h"
 
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DFE8[];
@@ -25,14 +29,69 @@ struct unkStruct_806B7F8
 extern void sub_806B7F8(struct unkStruct_806B7F8 *, u32);
 extern void sub_806BFC0(EntityInfo *, u32);
 void sub_8069E0C(Entity *pokemon);
-extern void sub_806CCB4(Entity *, u8);
 void sub_80522F4(Entity *r0, Entity *r1, const char r2[]);
-void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index);
 extern void SetMessageArgument_2(u8 *, EntityInfo *, u32);
-void GetPokemonLevelData(LevelData* a1, s16 _id, s32 level);
 void sub_8042A44(Entity *r0);
 void sub_8083D78(void);
 extern bool8 sub_803D930(u32);
+
+void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index);
+
+void sub_8072AC8(s16 *param_1, s16 species, s32 param_3)
+{
+  const u8 *levelUpMoves;
+  s32 arrIndex;
+  s32 counter;
+  u16 moveIDs [2];
+  s32 species_s32;
+  s32 index;
+
+  species_s32 = species;
+  
+  for(index = 0; index < MAX_MON_MOVES; index++) {
+    param_1[index] = MOVE_NOTHING;
+  }
+
+  counter = 0;
+  levelUpMoves = GetLevelUpMoves(species_s32);
+
+  while( 1 ) {
+    if (*levelUpMoves == 0) {
+      return;
+    }
+    levelUpMoves = DecompressMoveID(levelUpMoves,moveIDs);
+    if (*levelUpMoves++ > param_3) break;
+    if (counter == MAX_MON_MOVES) {
+      arrIndex = DungeonRandInt(MAX_MON_MOVES);
+      counter = MAX_MON_MOVES;
+    }
+    else {
+      arrIndex = counter;
+      counter++;
+    }
+    param_1[arrIndex] = moveIDs[0];
+  }
+}
+
+void sub_8072B24(Entity *entity, Move *moves)
+{
+    int index;
+    int count;
+
+    count = 0;
+    for(index = 0; index < 8; index++)
+    {
+        if (moves[index].moveFlags & MOVE_FLAG_EXISTS) {
+            moves[index].moveFlags &= 0xfd;
+            count++;
+        }
+    }
+    index = DungeonRandInt(count);
+    for (; index < 7; index++) {
+        moves[index] = moves[index + 1];
+    }
+    moves[7].moveFlags = 0;
+}
 
 static inline void fu(EntityInfo *entityInfo, s16 id)
 {

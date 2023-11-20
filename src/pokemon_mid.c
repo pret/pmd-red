@@ -36,7 +36,6 @@ extern int sprintf(char *, const char *, ...);
 extern u32 ReturnIntFromChar(u8 r0);
 extern void sub_80943A0(void*, s32);
 extern void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1*, PokemonStruct2*);
-extern const u8 *DecompressMoveID(const u8 *a1, u16 *a2);
 
 extern u8 GetBodySize(s16 index);
 
@@ -966,13 +965,13 @@ s32 GetEvolutionSequence(PokemonStruct1* pokemon, struct EvolveStage* a2)
 #endif
 }
 
-s32 sub_808E400(s32 _species, s16* _a2, s32 _a3, s32 _a4)
+s32 sub_808E400(s32 _species, s16* _a2, bool32 bodySizeCheck, bool32 shedinjaCheck)
 {
   // this is horrible
   s32 i;
   register s32 species asm("r9") = (s16)_species;
-  s32 a3 = (u8)_a3;
-  s32 a4 = (u8)_a4;
+  bool32 bodySizeCheck_bool32 = (bool8)bodySizeCheck;
+  bool32 shedinjaCheck_bool32 = (bool8)shedinjaCheck;
   s32 count = 0;
   register s16* a2 asm("r6");
   i = 1;
@@ -982,10 +981,10 @@ s32 sub_808E400(s32 _species, s16* _a2, s32 _a3, s32 _a4)
     if (species != GetPokemonEvolveFrom(i)) {
       continue;
     }
-    if (!a3 && (GetBodySize(species) != GetBodySize(i))) {
+    if (!bodySizeCheck_bool32 && (GetBodySize(species) != GetBodySize(i))) {
       continue;
     }
-    if (!a4 && ((s16)i == MONSTER_SHEDINJA)) {
+    if (!shedinjaCheck_bool32 && ((s16)i == MONSTER_SHEDINJA)) {
       continue;
     }
     *a2++ = current;

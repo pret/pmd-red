@@ -1024,7 +1024,7 @@ _0807D580:
 	adds r2, 0x4
 	lsls r2, 8
 	mov r0, r8
-	bl sub_8045394
+	bl SetEntityPixelPos
 	movs r2, 0
 	movs r1, 0
 	strh r1, [r7, 0x22]

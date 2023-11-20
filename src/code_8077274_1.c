@@ -242,7 +242,7 @@ void TransformStatusTarget(Entity * pokemon, Entity * target)
     s16 apparentID_s16;
     s32 index;
     EntityInfo *entityInfo;
-    OpenedFile *iVar9;
+    OpenedFile *sprite;
     PokemonStruct1 *auStack544[128];
 
     if (!EntityExists(target))
@@ -259,7 +259,7 @@ void TransformStatusTarget(Entity * pokemon, Entity * target)
         if (iVar5 == 0)
             sub_80522F4(pokemon, target, *gUnknown_80FBEE4);
         else {
-            iVar9 = NULL;
+            sprite = NULL;
 
             for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
                 species = ExtractSpeciesIndex(&auStack544[DungeonRandInt(iVar5) * 2]);
@@ -267,17 +267,17 @@ void TransformStatusTarget(Entity * pokemon, Entity * target)
                 apparentID = apparentID_s16;
 
                 if (apparentID != entityInfo->apparentID && sub_806AA0C(apparentID, 1)) {
-                    iVar9 = sub_80687D0(apparentID);
-                    if (iVar9 != NULL)
+                    sprite = sub_80687D0(apparentID);
+                    if (sprite != NULL)
                         break;
                 }
             }
 
-            if (index == DUNGEON_MAX_POKEMON || iVar9 == NULL)
+            if (index == DUNGEON_MAX_POKEMON || sprite == NULL)
                 sub_80522F4(pokemon, target, *gUnknown_80FBEE4);
             else {
                 entityInfo->apparentID = apparentID;
-                target->sprite = iVar9;
+                target->sprite = sprite;
                 entityInfo->transformStatus = STATUS_TRANSFORMED;
                 entityInfo->transformStatusTurns = CalculateStatusTurns(target, gUnknown_80F4EFC, TRUE) + 1;
                 sub_806CF98(target);
@@ -1570,27 +1570,26 @@ void SendMuzzledEndMessage(Entity * pokemon, Entity * target)
   EntityUpdateStatusSprites(target);
 }
 
-// TODO: this involves a union for sleep/sleepTurns that I don't want to deal with right now
 /*
-    bool32 sub_807A96C(Entity * pokemon, Entity * target)
+ * https://decomp.me/scratch/kEFOw (97.58 % matching, Seth)
+
+    bool8 sub_807A96C(Entity * pokemon, Entity * target)
     {
       EntityInfo *entityInfo;
-      EntityInfo *entityInfo_1;
-      register bool32 bVar3 asm("r2");
+      bool8 flag;
 
       entityInfo = target->info;
-      entityInfo_1 = entityInfo;
-      bVar3 = FALSE;
+      flag = FALSE;
       if (entityInfo->immobilizeStatus == 6) {
         SendImmobilizeEndMessage(pokemon, target);
-        bVar3 = TRUE;
+        flag = TRUE;
       }
-      TODO: this is where the union is needed..
-      if ((entityInfo_1 + 0xa8) == 0x7f01) {
+
+      if (entityInfo->sleep == 1 && entityInfo->sleepTurns == 0x7f) {
         SendSleepEndMessage(pokemon,target,0,1);
-        bVar3 = TRUE;
+        flag = TRUE;
       }
-      return bVar3;
+      return flag;
     }
 */
 NAKED

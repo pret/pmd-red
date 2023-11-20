@@ -944,7 +944,7 @@ sub_80464C8:
 	adds r2, 0x4
 	lsls r2, 8
 	add r0, sp, 0x4
-	bl sub_8045394
+	bl SetEntityPixelPos
 	add r0, sp, 0x4
 	strh r4, [r0, 0x26]
 	str r4, [sp]
@@ -1340,7 +1340,7 @@ _08046822:
 	mov r0, r8
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_8045394
+	bl SetEntityPixelPos
 	movs r0, 0
 	mov r1, r8
 	str r0, [r1, 0x1C]
@@ -1646,7 +1646,7 @@ _08046A20:
 	lsls r5, 3
 	add r5, sp
 	str r3, [r5]
-	bl sub_8045394
+	bl SetEntityPixelPos
 	mov r0, r8
 	strh r0, [r4, 0x26]
 	ldr r4, _08046B30
