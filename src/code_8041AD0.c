@@ -71,7 +71,16 @@ extern u8 sub_800E9A8(u32);
 extern u32 sub_800E890(unkStruct_80416E0 *);
 
 u32 sub_8041764(unkStruct_80416E0 *param_1, u8 param_2);
+s32 sub_80416E0(Position32 *pos, u32 param_2, u8 param_3);
 
+s32 sub_80416A4(Position *pos_1, u32 param_2, u8 param_3)
+{
+  Position32 pos;
+  
+  pos.x = pos_1->x * 0x1800 + 0xc00;
+  pos.y = pos_1->y * 0x1800 + 0x1000;
+  return sub_80416E0(&pos, param_2, param_3);
+}
 
 s32 sub_80416E0(Position32 *pos, u32 param_2, u8 param_3)
 {

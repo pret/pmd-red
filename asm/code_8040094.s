@@ -2771,36 +2771,4 @@ _08041692:
 	bx r1
 	thumb_func_end sub_8041550
 
-	thumb_func_start sub_80416A4
-sub_80416A4:
-	push {r4,lr}
-	sub sp, 0x8
-	lsls r2, 24
-	lsrs r2, 24
-	movs r3, 0
-	ldrsh r4, [r0, r3]
-	lsls r3, r4, 1
-	adds r3, r4
-	lsls r3, 11
-	movs r4, 0xC0
-	lsls r4, 4
-	adds r3, r4
-	str r3, [sp]
-	movs r4, 0x2
-	ldrsh r3, [r0, r4]
-	lsls r0, r3, 1
-	adds r0, r3
-	lsls r0, 11
-	movs r3, 0x80
-	lsls r3, 5
-	adds r0, r3
-	str r0, [sp, 0x4]
-	mov r0, sp
-	bl sub_80416E0
-	add sp, 0x8
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80416A4
-
         .align 2,0
