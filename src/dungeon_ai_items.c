@@ -40,7 +40,7 @@ extern u32 gPotentialItemTargetDirections[NUM_DIRECTIONS];
 extern bool8 gTargetAhead[NUM_DIRECTIONS];
 extern TeamInventory *gTeamInventoryRef;
 
-void sub_807360C(Entity *pokemon)
+void sub_807360C(void)
 {
     s32 index;
     Entity *entity;

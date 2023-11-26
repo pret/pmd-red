@@ -49,7 +49,7 @@ void sub_8071B48(void)
   entityPtr = NULL;
   dungeon = gDungeon;
   if ((dungeon->unk664 != 0) &&
-     ((dungeon->dungeonLocation.id != DUNGEON_METEOR_CAVE || (dungeon->fill37FD[0] == 0)))) {
+     ((dungeon->dungeonLocation.id != DUNGEON_METEOR_CAVE || (dungeon->fill37FD == 0)))) {
     dungeon->unk662++;
     if (dungeon->unk66E == 0) {
       if ( dungeon->unk662 < gUnknown_80F4DAA) {
