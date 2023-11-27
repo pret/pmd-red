@@ -201,6 +201,7 @@ SECTIONS {
         src/dungeon_engine.o(.text);
         asm/code_8044210.o(.text);
         src/dungeon_action.o(.text);
+        src/code_8044CC8.o(.text);
         asm/code_8044CC8.o(.text);
         src/dungeon_util.o(.text);
         asm/code_80450F8.o(.text);
@@ -226,6 +227,8 @@ SECTIONS {
         src/status_actions.o(.text);
         src/move_checks.o(.text);
         asm/code_805D8C8.o(.text);
+        src/code_8066D04.o(.text);
+        asm/code_8066D04.o(.text);
         src/code_805D8C8.o(.text);
         asm/code_805D8C8_1.o(.text);
         src/targeting.o(.text);

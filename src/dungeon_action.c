@@ -3,6 +3,7 @@
 #include "constants/ability.h"
 #include "constants/dungeon_action.h"
 #include "dungeon_ai.h"
+#include "dungeon_ai_leader.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_leader.h"
@@ -37,7 +38,6 @@ extern void sub_8071B48(void);
 extern void TriggerWeatherAbilities(void);
 extern void sub_8074094(Entity *);
 extern void sub_8071DA4(Entity *);
-extern u8 sub_8072CF4(Entity *);
 extern void TickStatusHeal(Entity *);
 
 void sub_8044820(void)
@@ -227,8 +227,8 @@ void sub_8044C10(u8 param_1)
 
     if(param_1)
     {
-        entityInfo->action.actionUseIndex = 0;
-        entityInfo->action.unkC = 0;
+        entityInfo->action.unk4[0].actionUseIndex = 0;
+        entityInfo->action.unk4[1].actionUseIndex = 0;
         entityInfo->action.itemTargetPosition.x = -1;
         entityInfo->action.itemTargetPosition.y = -1;
     }
@@ -239,8 +239,9 @@ void sub_8044C50(u16 action)
     EntityInfo * entityInfo = GetLeaderInfo();
 
     entityInfo->action.action = action;
-    entityInfo->action.actionUseIndex = 0;
-    entityInfo->action.unkC = 0;
+    entityInfo->action.unk4[0].actionUseIndex = 0;
+    entityInfo->action.unk4[1].actionUseIndex = 0;
+
     entityInfo->action.itemTargetPosition.x = -1;
     entityInfo->action.itemTargetPosition.y = -1;
 }
@@ -248,15 +249,15 @@ void sub_8044C50(u16 action)
 void ClearMonsterActionFields(ActionContainer *actionPointer)
 {
     actionPointer->action = ACTION_NOTHING;
-    actionPointer->actionUseIndex = 0;
-    actionPointer->unkC = 0;
+    actionPointer->unk4[0].actionUseIndex = 0;
+    actionPointer->unk4[1].actionUseIndex = 0;
 }
 
 void SetMonsterActionFields(ActionContainer *actionPointer, u16 action)
 {
     actionPointer->action = action;
-    actionPointer->actionUseIndex = 0;
-    actionPointer->unkC = 0;
+    actionPointer->unk4[0].actionUseIndex = 0;
+    actionPointer->unk4[1].actionUseIndex = 0;
 }
 
 void SetActionPassTurnOrWalk(ActionContainer *actionPointer, s16 species)
@@ -269,6 +270,6 @@ void SetActionPassTurnOrWalk(ActionContainer *actionPointer, s16 species)
     {
         actionPointer->action = ACTION_PASS_TURN;
     }
-    actionPointer->actionUseIndex = 0;
-    actionPointer->unkC = 0;
+    actionPointer->unk4[0].actionUseIndex = 0;
+    actionPointer->unk4[1].actionUseIndex = 0;
 }

@@ -44,6 +44,7 @@ enum Action
     ACTION_UNSET_ITEM = 0x3D,
     ACTION_PICK_UP_AI = 0x3F,
     ACTION_THROW_ARC_PLAYER = 0x41, // Throwing Gravelerocks and Geo Pebbles.
+    NUM_DUNGEON_ACTIONS
 };
 
 #endif

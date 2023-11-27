@@ -92,7 +92,7 @@ void DecideAttack(Entity *pokemon)
                         }
                     }
                 }
-                pokemonInfo->action.actionUseIndex = chosenMoveIndex;
+                pokemonInfo->action.unk4[0].actionUseIndex = chosenMoveIndex;
                 TargetTileInFront(pokemon);
                 return;
             }
@@ -316,7 +316,7 @@ void DecideAttack(Entity *pokemon)
                             }
                         }
                         pokemonInfo->action.direction = aiPossibleMove[i].direction & DIRECTION_MASK;
-                        pokemonInfo->action.actionUseIndex = chosenMoveIndex;
+                        pokemonInfo->action.unk4[0].actionUseIndex = chosenMoveIndex;
                         TargetTileInFront(pokemon);
                     }
                     else
@@ -941,7 +941,7 @@ void sub_807CABC(Entity *target)
         if (counter >= sub_8070828(target, TRUE))
             break;
         entityInfo = target->info;
-        sub_8055A00(target, entityInfo->action.actionUseIndex, 1, 0, 0);
+        sub_8055A00(target, entityInfo->action.unk4[0].actionUseIndex, 1, 0, 0);
         if (!EntityExists(target))
             break;
         if (sub_8044B28())
@@ -953,7 +953,7 @@ void sub_807CABC(Entity *target)
 
     sub_8057588(target, 1);
     if (EntityExists(target))
-        sub_806A9B4(target, target->info->action.actionUseIndex);
+        sub_806A9B4(target, target->info->action.unk4[0].actionUseIndex);
 
     sub_806A1B0(target);
 }

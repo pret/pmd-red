@@ -4,6 +4,7 @@
 #include "constants/dungeon.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_ai.h"
+#include "dungeon_ai_leader.h"
 #include "dungeon_leader.h"
 #include "dungeon_movement.h"
 #include "dungeon_util.h"
@@ -17,7 +18,6 @@ extern void sub_8044574(void);
 extern void sub_8044820(void);
 extern void sub_8044AB4(void);
 extern u8 UseAttack(u32);
-extern u8 sub_8072CF4(Entity *);
 extern void TickStatusHeal(Entity *);
 extern void sub_8086AC0(void);
 extern void sub_8043ED0(u32);

@@ -2,9 +2,13 @@
 #include "dungeon_ai_leader.h"
 
 #include "constants/dungeon.h"
+#include "constants/item.h"
+#include "constants/iq_skill.h"
+#include "constants/move_id.h"
 #include "constants/status.h"
 #include "constants/targeting.h"
 #include "constants/dungeon_action.h"
+#include "code_80521D0.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_items.h"
 #include "dungeon_leader.h"
@@ -18,31 +22,6 @@
 #include "pokemon_3.h"
 #include "code_8077274_1.h"
 
-bool8 TargetLeader(Entity *pokemon)
-{
-    if (pokemon->info->isNotTeamMember)
-    {
-        return FALSE;
-    }
-    return TacticsTargetLeader(pokemon->info->tactic);
-}
-
-Entity* GetLeaderIfVisible(Entity *pokemon)
-{
-    if (!pokemon->info->isNotTeamMember)
-    {
-        Entity *leader = GetLeader();
-        if (leader &&
-            leader->info->waitingStatus != STATUS_DECOY &&
-            CanTarget(pokemon, leader, FALSE, FALSE) == TARGET_CAPABILITY_CANNOT_ATTACK &&
-            CanTargetEntity(pokemon, leader))
-        {
-            return leader;
-        }
-    }
-    return NULL;
-}
-
 extern u8 gUnknown_202F221;
 extern u8 gUnknown_202F32D;
 extern u8 gUnknown_202F222;
@@ -51,18 +30,14 @@ extern u8 *gUnknown_80FA5B4[];
 extern u8 gAvailablePokemonNames[];
 extern u8 *gUnknown_80FE478[];
 extern u8 *gUnknown_80FD2CC[];
-extern u8 gUnknown_80F58F4[0x42][2];
+extern u8 gUnknown_80F58F4[NUM_DUNGEON_ACTIONS][2];
 extern u8 gUnknown_203B434;
 extern u8 *gUnknown_80FE6D4[];
 
-bool8 IsNotAttacking(Entity *, s32);
-void sub_805EFB4(Entity *, u8);
 void sub_8075BA4(Entity *param_1, u8 param_2);
 void sub_804178C(u8 param_1);
 void nullsub_95(Entity *);
 bool8 IsNotAttacking(Entity *, s32);
-void sub_8052740(u32);
-bool8 sub_804AE08(Position *pos);
 extern void sub_80671A0(Entity *);
 extern void sub_8067110(Entity *);
 void sub_807CABC(Entity *target);
@@ -99,7 +74,6 @@ void sub_806A1E8(Entity *pokemon);
 extern void sub_803E46C(u32);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 bool8 sub_804AE08(Position *pos);
-void SendMessage(Entity *pokemon, const char message[]);
 void sub_8073D08(Entity *pokemon);
 void sub_8073CFC(Entity *pokemon);
 void sub_8073CF0(Entity *pokemon);
@@ -109,6 +83,31 @@ extern void sub_8074094(Entity *);
 extern void sub_8071DA4(Entity *);
 extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, Position *r3);
 u32 sub_8075818(Entity *entity);
+
+bool8 TargetLeader(Entity *pokemon)
+{
+    if (pokemon->info->isNotTeamMember)
+    {
+        return FALSE;
+    }
+    return TacticsTargetLeader(pokemon->info->tactic);
+}
+
+Entity* GetLeaderIfVisible(Entity *pokemon)
+{
+    if (!pokemon->info->isNotTeamMember)
+    {
+        Entity *leader = GetLeader();
+        if (leader &&
+            leader->info->waitingStatus != STATUS_DECOY &&
+            CanTarget(pokemon, leader, FALSE, FALSE) == TARGET_CAPABILITY_CANNOT_ATTACK &&
+            CanTargetEntity(pokemon, leader))
+        {
+            return leader;
+        }
+    }
+    return NULL;
+}
 
 bool8 sub_8072CF4(Entity *entity)
 {
@@ -124,7 +123,7 @@ bool8 sub_8072CF4(Entity *entity)
     sub_804178C(1);
     gUnknown_203B434 = 1;
     info = entity->info;
-    info->useHeldItem = 0;
+    info->useHeldItem = FALSE;
     info->fillF3 = 0;
     gDungeon->unkB8 = entity;
     if ((gUnknown_80F58F4)[(info->action).action][0] != 0) {
@@ -167,41 +166,41 @@ bool8 sub_8072CF4(Entity *entity)
     if (((ACTION_PASS_TURN < info->action.action) && (info->action.action != 4)) && (info->action.action != ACTION_WALK)) {
         info->attacking = TRUE;
     }
-    bVar14 = 0;
+    bVar14 = FALSE;
     info->unk14A = 0;
     gUnknown_202F221 = 0;
     gUnknown_202F222 = 0;
     switch(info->action.action) {
         case ACTION_WALK:
-            if(info->immobilizeStatus == 2)
+            if(info->immobilizeStatus == STATUS_SHADOW_HOLD)
             {
                 goto _282;  
             }
-            else if(info->immobilizeStatus == 7)
+            else if(info->immobilizeStatus == STATUS_CONSTRICTION)
             {
                 goto _282;  
             }
-            else if(info->immobilizeStatus == 5)
+            else if(info->immobilizeStatus == STATUS_INGRAIN)
             {
                 goto _282;  
             }
-            else if(info->immobilizeStatus == 3)
+            else if(info->immobilizeStatus == STATUS_WRAP)
             {
                 goto _282;  
             }
-            else if(info->immobilizeStatus == 4)
+            else if(info->immobilizeStatus == STATUS_WRAPPED)
             {
             _282:
                 info->action.action = ACTION_NOTHING;
                 info->waiting = TRUE;
             }
             else {
-                bVar5 = 0;
+                bVar5 = FALSE;
                 pos1.x = (entity->pos).x + gAdjacentTileOffsets[(info->action).direction].x;
                 pos1.y = (entity->pos).y + gAdjacentTileOffsets[(info->action).direction].y;
                 if (((info->flags & 0x8000) == 0) &&
                     (!CanMoveInDirection(entity,(info->action).direction))) {
-                    bVar5 = 1;
+                    bVar5 = TRUE;
                 }
                 if (bVar5) {
                     info->action.action = ACTION_NOTHING;
@@ -212,13 +211,13 @@ bool8 sub_8072CF4(Entity *entity)
                 {
                     PStack_24.x = entity->pos.x;
                     PStack_24.y = entity->pos.y;
-                    sub_80694C0(entity,pos1.x,pos1.y,'\0');
+                    sub_80694C0(entity,pos1.x,pos1.y,0);
                     sub_8074FB0(entity,(info->action).direction,&PStack_24);
-                    if (((IQSkillIsEnabled(entity, 0xd)) && (info->transformStatus != 3)) &&
-                        (!HasHeldItem(entity,9))) {
+                    if (((IQSkillIsEnabled(entity, IQ_SUPER_MOBILE)) && (info->transformStatus != STATUS_MOBILE)) &&
+                        (!HasHeldItem(entity,ITEM_MOBILE_SCARF))) {
                         sub_804AE08(&entity->pos);
                     }
-                    bVar14 = 1;
+                    bVar14 = TRUE;
                     break;
                 }
             }
@@ -267,7 +266,7 @@ bool8 sub_8072CF4(Entity *entity)
             sub_806684C(entity,1);
             break;
         case 0x3b:
-            gDungeon->unkBC = gDungeon->teamPokemon[(info->action).actionUseIndex];
+            gDungeon->unkBC = gDungeon->teamPokemon[(info->action).unk4[0].actionUseIndex];
             break;
         case ACTION_PLACE_ITEM:
             sub_8066D04(entity);
@@ -296,10 +295,10 @@ bool8 sub_8072CF4(Entity *entity)
             sub_8067884(entity);
             break;
         case ACTION_STRUGGLE:
-            sub_8067904(entity,0x160); // MOVE_STRUGGLE
+            sub_8067904(entity, MOVE_STRUGGLE);
             break;    
         case ACTION_REGULAR_ATTACK:
-            sub_8067904(entity,0x163); // MOVE_REGULAR_ATTACK
+            sub_8067904(entity, MOVE_REGULAR_ATTACK);
             break;
         case 0x25:
             sub_807FE9C(entity,&entity->pos,0,0);
@@ -331,15 +330,15 @@ bool8 sub_8072CF4(Entity *entity)
         if (EntityExists(entity)) {
             sub_8085140();
             if (info->unk14B != 0) {
-                bVar4 = 0;
+                bVar4 = FALSE;
                 info->unk14B = 0;
 
                 for(index = 0; index < MAX_MON_MOVES; index++)
                 {
                     move = &info->moves[index];
-                    if (((info->moves[index].moveFlags & MOVE_FLAG_EXISTS)) && ((move->moveFlags & 0x10) != 0)) {
+                    if ((info->moves[index].moveFlags & MOVE_FLAG_EXISTS) && (move->moveFlags & MOVE_FLAG_LAST_USED)) {
                         move->PP = 0;
-                        bVar4 = 1;
+                        bVar4 = TRUE;
                     }
                 }
                 if (bVar4) {

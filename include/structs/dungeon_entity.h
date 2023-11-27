@@ -23,6 +23,12 @@
 #define STAT_STAGE_ACCURACY 0
 #define STAT_STAGE_EVASION 1
 
+typedef struct unkStruct_8044CC8
+{
+    u8 actionUseIndex;
+    Position lastItemThrowPosition;
+} unkStruct_8044CC8;
+
 // size: 0x18
 typedef struct ActionContainer
 {
@@ -30,12 +36,7 @@ typedef struct ActionContainer
     /* 0x2 */ u8 direction;
     u8 fill3;
     // Additional parameter alongside actionIndex. Used for things like indicating which move a Pokémon should use from its moveset.
-    /* 0x4 */ u8 actionUseIndex;
-    // Position of the Pokémon the last time it threw an item.
-    /* 0x8 */ Position lastItemThrowPosition;
-    u8 unkC;
-    u8 fillD[3];
-    u8 fill10[4];
+    /* 0x4 */ unkStruct_8044CC8 unk4[2];
     // Position of the target that the Pokémon wants throw an item at.
     /* 0x14 */ Position itemTargetPosition;
 } ActionContainer;
