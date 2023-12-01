@@ -6,6 +6,7 @@ enum Action
     ACTION_NOTHING = 0x0,
     ACTION_PASS_TURN = 0x1,
     ACTION_WALK = 0x2,
+    ACTION_UNK5 = 0x5,
     // Switching between Pokémon in the moves menu.
     ACTION_NEXT = 0x6,
     ACTION_PREVIOUS = 0x7,

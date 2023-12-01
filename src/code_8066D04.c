@@ -12,18 +12,21 @@ extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DFE8[];
 
 extern u8 *gUnknown_80F8BE0[];
+extern u8 *gUnknown_80F8C40[];
+extern u8 *gUnknown_80F8C44[];
+extern u8 *gUnknown_80F8C7C[];
+extern u8 *gUnknown_80F8CA8[];
+extern u8 *gUnknown_80F8CE4[];
+extern u8 *gUnknown_80F8CE8[];
+extern u8 *gUnknown_80F8D04[];
+extern u8 *gUnknown_80F8D20[];
+extern u8 *gUnknown_80F8D44[];
 extern u8 *gUnknown_80F8D60[];
 extern u8 *gUnknown_80F8D7C[];
 extern u8 *gUnknown_80F8DB4[];
 extern u8 *gUnknown_80F8DE0[];
 extern u8 *gUnknown_80F8E04[];
 extern u8 *gUnknown_80F8E28[];
-extern u8 *gUnknown_80F8D44[];
-extern u8 *gUnknown_80F8C40[];
-extern u8 *gUnknown_80F8CA8[];
-extern u8 *gUnknown_80F8C44[];
-extern u8 *gUnknown_80F8C7C[];
-extern u8 *gUnknown_80F8D20[];
 
 extern void SetMessageArgument(u8 *, Entity *, u32);
 extern Item *sub_8044D90(Entity *, s32, u32);
@@ -35,10 +38,6 @@ extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, Position *r3);
 extern void sub_806A6E8(Entity *);
 extern void sub_8044DF0(Entity *, u32, u32);
 extern void sub_8045DB4(Position *, u32);
-
-extern u8 *gUnknown_80F8CE8[];
-extern u8 *gUnknown_80F8CE4[];
-extern u8 *gUnknown_80F8D04[];
 
 void sub_8066744(Entity *entity)
 {
