@@ -55,8 +55,8 @@ void sub_806675C(Entity *param_1, bool8 param_2)
   for(index = 0; index < INVENTORY_SIZE; index++)
   {
     itemPtr = &gTeamInventoryRef->teamItems[index];
-    if (((itemPtr->flags & ITEM_FLAG_EXISTS) != 0) && ((itemPtr->flags & ITEM_FLAG_SET) != 0)) {
-      if ((itemPtr->flags & ITEM_FLAG_STICKY) != 0) {
+    if (((itemPtr->flags & ITEM_FLAG_EXISTS)) && ((itemPtr->flags & ITEM_FLAG_SET))) {
+      if ((itemPtr->flags & ITEM_FLAG_STICKY)) {
         sub_8045BF8(gUnknown_202DE58,itemPtr);
         SendMessage(param_1,*gUnknown_80F8C7C);
         return;
@@ -71,7 +71,7 @@ void sub_806675C(Entity *param_1, bool8 param_2)
         SendMessage(param_1,*gUnknown_80F8D04);
     }
     else {
-      if (GetItemCategory(item->id) == 0) {
+      if (GetItemCategory(item->id) == CATEGORY_THROWN_LINE) {
         SendMessage(param_1,*gUnknown_80F8CE4);
       }
       else
@@ -141,8 +141,8 @@ void sub_80668D0(Entity *param_1)
   else
   {
     SetMessageArgument(gUnknown_202DFE8,entity,0);
-    if (((info2->heldItem).flags & ITEM_FLAG_EXISTS) != 0) {
-     if (((info2->heldItem).flags & ITEM_FLAG_STICKY) != 0) {
+    if (((info2->heldItem).flags & ITEM_FLAG_EXISTS)) {
+     if (((info2->heldItem).flags & ITEM_FLAG_STICKY)) {
         sub_8045BF8(gUnknown_202DEA8,&info2->heldItem);
         SendMessage(param_1,*gUnknown_80F8C40);
         return;
@@ -184,7 +184,7 @@ void sub_80668D0(Entity *param_1)
       sub_807D148(param_1,entity,0,0);
     }
     if (!info2->isTeamLeader) {
-      info2->flags = info2->flags | 0x4000;
+      info2->flags = info2->flags | MOVEMENT_FLAG_UNK_14;
     }
     sub_807AB38(param_1,gDungeon->unk3A08);
   }
@@ -229,7 +229,7 @@ void sub_8066AC0(Entity *param_1)
         sub_807D148(param_1,entity,0,0);
       }
       if (!info2->isTeamLeader) {
-        info2->flags = info2->flags | 0x4000;
+        info2->flags = info2->flags | MOVEMENT_FLAG_UNK_14;
       }
       sub_807AB38(param_1,gDungeon->unk3A08);
     }
@@ -275,7 +275,7 @@ void sub_8066BD4(Entity *param_1)
       sub_807D148(param_1,entity,0,0);
     }
     if (!info2->isTeamLeader) {
-      info2->flags = info2->flags | 0x4000;
+      info2->flags = info2->flags | MOVEMENT_FLAG_UNK_14;
     }
     sub_807AB38(param_1,gDungeon->unk3A08);
   }
@@ -312,9 +312,9 @@ void sub_8066D04(Entity *param_1)
     }
     else {
         tile = GetTile(entity->pos.x, entity->pos.y);
-        if ((tile->terrainType & 0x200) == 0)
+        if (!(tile->terrainType & TERRAIN_TYPE_STAIRS))
         {
-            if(((tile->terrainType & 3) == 1) &&
+            if(((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL) &&
                 (tile->object == NULL)) {
                 item->flags &= ~(ITEM_FLAG_SET);
                 sub_8045BF8(gUnknown_202DE58,item);

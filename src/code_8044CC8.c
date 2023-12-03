@@ -233,7 +233,7 @@ void sub_8044FF0(u16 param_1)
     }
 }
 
-bool8 IsNotAttacking(Entity *param_1, u8 param_2)
+bool8 IsNotAttacking(Entity *param_1, bool8 param_2)
 {
     EntityInfo *info;
     u16 *action;

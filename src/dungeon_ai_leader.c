@@ -23,21 +23,22 @@
 #include "code_8077274_1.h"
 
 extern u8 gUnknown_202F221;
-extern u8 gUnknown_202F32D;
 extern u8 gUnknown_202F222;
 extern u8 gUnknown_202F32C;
-extern u8 *gUnknown_80FA5B4[];
+extern u8 gUnknown_202F32D;
+extern u8 gUnknown_203B434;
 extern u8 gAvailablePokemonNames[];
+
+extern u8 *gUnknown_80FA5B4[];
 extern u8 *gUnknown_80FE478[];
 extern u8 *gUnknown_80FD2CC[];
 extern u8 gUnknown_80F58F4[NUM_DUNGEON_ACTIONS][2];
-extern u8 gUnknown_203B434;
 extern u8 *gUnknown_80FE6D4[];
 
 void sub_8075BA4(Entity *param_1, u8 param_2);
 void sub_804178C(u8 param_1);
 void nullsub_95(Entity *);
-bool8 IsNotAttacking(Entity *, s32);
+bool8 IsNotAttacking(Entity *, bool8);
 extern void sub_80671A0(Entity *);
 extern void sub_8067110(Entity *);
 void sub_807CABC(Entity *target);
@@ -64,8 +65,8 @@ void sub_80668D0(Entity *);
 void sub_8066AC0(Entity *);
 void sub_8066CF0(Entity *);
 void sub_8066FA4(Entity *);
-void sub_806675C(Entity *,u32);
-void sub_806684C(Entity *,u32);
+void sub_806675C(Entity *,bool8);
+void sub_806684C(Entity *,bool8);
 void sub_807FE9C(Entity *,Position *,u32,u32);
 extern u8 sub_8044B28(void);
 extern u8 UseAttack(Entity *);
@@ -126,7 +127,7 @@ bool8 sub_8072CF4(Entity *entity)
     info->useHeldItem = FALSE;
     info->fillF3 = 0;
     gDungeon->unkB8 = entity;
-    if ((gUnknown_80F58F4)[(info->action).action][0] != 0) {
+    if (gUnknown_80F58F4[(info->action).action][0] != 0) {
         if (info->isTeamLeader) {
             sub_805EFB4(entity,gUnknown_80F58F4[(info->action).action][1]);
         }
@@ -134,7 +135,7 @@ bool8 sub_8072CF4(Entity *entity)
             sub_8075BA4(entity,gUnknown_80F58F4[(info->action).action][1]);
         }
     }
-    if ((CannotAttack(entity,0)) && (IsCharging(entity,1))) {
+    if ((CannotAttack(entity, FALSE)) && (IsCharging(entity, TRUE))) {
         sub_8079764(entity);
     }
 
@@ -142,10 +143,10 @@ bool8 sub_8072CF4(Entity *entity)
     {
         move = &info->moves[index];
         if ((move->moveFlags & MOVE_FLAG_EXISTS)) {
-            move->moveFlags2 &= 0xfb;
+            move->moveFlags2 &= ~(MOVE_FLAG2_UNK4);
         }
     }
-    if (!IsNotAttacking(entity,0)) {
+    if (!IsNotAttacking(entity, FALSE)) {
         if (UseAttack(entity)) {
             if (sub_8044B28()) {
                 return FALSE;
@@ -198,7 +199,7 @@ bool8 sub_8072CF4(Entity *entity)
                 bVar5 = FALSE;
                 pos1.x = (entity->pos).x + gAdjacentTileOffsets[(info->action).direction].x;
                 pos1.y = (entity->pos).y + gAdjacentTileOffsets[(info->action).direction].y;
-                if (((info->flags & 0x8000) == 0) &&
+                if ((!(info->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)) &&
                     (!CanMoveInDirection(entity,(info->action).direction))) {
                     bVar5 = TRUE;
                 }
@@ -225,7 +226,7 @@ bool8 sub_8072CF4(Entity *entity)
         case ACTION_USE_MOVE_AI:
             sub_807CABC(entity);
             break;
-        case 0x26: // ACTION_STAIRS??
+        case ACTION_STAIRS:
             if ((gDungeon->dungeonLocation.id == DUNGEON_METEOR_CAVE) && (!gDungeon->deoxysDefeat)) {
                 SendMessage(entity,*gUnknown_80FA5B4); // It's impossible to go down the stairs now!
             }
@@ -256,14 +257,14 @@ bool8 sub_8072CF4(Entity *entity)
         case 0x3e:
             sub_8066BD4(entity); // ITEM_SWITCH_TOOLBOX (When you switch item in Toolbox)
             break;
-        case 0x38:
-            sub_8066CF0(entity); // ACTION_USE_HELD_ITEM
+        case ACTION_USE_ITEM:
+            sub_8066CF0(entity);
             break;
         case ACTION_SET_ITEM:
-            sub_806675C(entity,1);
+            sub_806675C(entity, TRUE);
             break;
         case ACTION_UNSET_ITEM:
-            sub_806684C(entity,1);
+            sub_806684C(entity, TRUE);
             break;
         case 0x3b:
             gDungeon->unkBC = gDungeon->teamPokemon[(info->action).unk4[0].actionUseIndex];

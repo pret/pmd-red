@@ -31,6 +31,7 @@ enum Action
     ACTION_UNK21 = 0x21,
     ACTION_EAT_AI = 0x23,
     ACTION_THROW_ITEM_AI = 0x24,
+    ACTION_STAIRS = 0x26,
     ACTION_THROW_STRAIGHT_PLAYER = 0x27,
     ACTION_USE_LINK_BOX = 0x2C,
     ACTION_GIVE_UP = 0x2E,
@@ -40,6 +41,7 @@ enum Action
     ACTION_UNSET_MOVE = 0x33,
     ACTION_GIVE_ITEM = 0x36,
     ACTION_TAKE_ITEM = 0x37,
+    ACTION_USE_ITEM = 0x38,
     ACTION_SECOND_THOUGHTS = 0x39, // Happens with invalid actions, like attempting to eat a non-consumable item.
     ACTION_SET_ITEM = 0x3C,
     ACTION_UNSET_ITEM = 0x3D,
