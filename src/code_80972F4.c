@@ -132,90 +132,17 @@ s32 CalculateMailChecksum(WonderMail *mail)
     return sum;
 }
 
-// 100 (97.92% matching - Seth)
-// https://decomp.me/scratch/gl6SB 
-#ifdef NONMATCHING
 void sub_8096EEC(WonderMail *mail)
 {
-    register WonderMail *temp1 asm("ip");
     s32 index;
-
-    temp1 = mail;
 
     for(index = 15; index > 0; index--)
     {
          gUnknown_203B490->unk230[index] =  gUnknown_203B490->unk230[index - 1];
     }
-    {
-        register DungeonLocation temp;
-        register subStruct_203B490 *org;
-        register s32 seed;
-        
-        org = &gUnknown_203B490->unk230[0];
-        temp = temp1->unk4.dungeon;
-        seed = temp1->unk4.seed;
-        org->dungeon = temp;
-        org->seed = seed;
-    }
-    gUnknown_203B490->unk230[0].checksum = CalculateMailChecksum(temp1);
+    gUnknown_203B490->unk230[0].sub = mail->unk4;
+    gUnknown_203B490->unk230[0].checksum = CalculateMailChecksum(mail);
 }
-#else
-NAKED
-void sub_8096EEC(WonderMail *mail)
-{
-	asm_unified(
-    "\tpush {r4-r7,lr}\n"
-	"\tmov r7, r8\n"
-	"\tpush {r7}\n"
-	"\tmov r12, r0\n"
-	"\tmovs r3, 0xF\n"
-	"\tldr r5, _08096F4C\n"
-	"\tmov r8, r5\n"
-	"\tmovs r4, 0x8C\n"
-	"\tlsls r4, 2\n"
-"_08096EFE:\n"
-	"\tmov r0, r8\n"
-	"\tldr r2, [r0]\n"
-	"\tlsls r1, r3, 1\n"
-	"\tadds r1, r3\n"
-	"\tlsls r1, 2\n"
-	"\tadds r1, r2, r1\n"
-	"\tsubs r3, 0x1\n"
-	"\tlsls r0, r3, 1\n"
-	"\tadds r0, r3\n"
-	"\tlsls r0, 2\n"
-	"\tadds r2, r0\n"
-	"\tadds r1, r4\n"
-	"\tadds r2, r4\n"
-	"\tldm r2!, {r0,r6,r7}\n"
-	"\tstm r1!, {r0,r6,r7}\n"
-	"\tcmp r3, 0\n"
-	"\tbgt _08096EFE\n"
-	"\tldr r2, [r5]\n"
-	"\tmovs r3, 0x8C\n"
-	"\tlsls r3, 2\n"
-	"\tadds r2, r3\n"
-	"\tmov r6, r12\n"
-	"\tldr r0, [r6, 0x4]\n"
-	"\tldr r1, [r6, 0x8]\n"
-	"\tstr r0, [r2]\n"
-	"\tstr r1, [r2, 0x4]\n"
-	"\tmov r0, r12\n"
-	"\tbl CalculateMailChecksum\n"
-	"\tldr r1, [r5]\n"
-	"\tmovs r7, 0x8E\n"
-	"\tlsls r7, 2\n"
-	"\tadds r1, r7\n"
-	"\tstr r0, [r1]\n"
-	"\tpop {r3}\n"
-	"\tmov r8, r3\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_08096F4C: .4byte gUnknown_203B490");
-}
-#endif
 
 bool8 sub_8096F50(WonderMail *mail)
 {
@@ -227,9 +154,9 @@ bool8 sub_8096F50(WonderMail *mail)
 
     for (index = 0; index < 0x10; index++) {
         temp  = &gUnknown_203B490->unk230[index];
-        if (temp->dungeon.id == mail->unk4.dungeon.id)
-            if (temp->dungeon.floor == mail->unk4.dungeon.floor)
-                if (temp->seed == mail->unk4.seed)
+        if (temp->sub.dungeon.id == mail->unk4.dungeon.id)
+            if (temp->sub.dungeon.floor == mail->unk4.dungeon.floor)
+                if (temp->sub.seed == mail->unk4.seed)
                     if (temp->checksum == checksum)
                         return TRUE;
     }
@@ -275,8 +202,8 @@ u32 RestoreMailInfo(u8 *r0, u32 size)
     for(index = 0; index < 0x10; index++)
     {
         RestoreIntegerBits(&backup, &gUnknown_203B490->unk230[index].checksum, 0x20);
-        RestoreIntegerBits(&backup, &gUnknown_203B490->unk230[index].seed, 0x18);
-        RestoreDungeonLocation(&backup, &gUnknown_203B490->unk230[index].dungeon);
+        RestoreIntegerBits(&backup, &gUnknown_203B490->unk230[index].sub.seed, 0x18);
+        RestoreDungeonLocation(&backup, &gUnknown_203B490->unk230[index].sub.dungeon);
     }
     nullsub_102(&backup);
     return backup.unk8;
@@ -319,8 +246,8 @@ u32 SaveMailInfo(u8 *r0, u32 size)
     for(index = 0; index < 0x10; index++)
     {
         SaveIntegerBits(&backup, &gUnknown_203B490->unk230[index].checksum, 0x20);
-        SaveIntegerBits(&backup, &gUnknown_203B490->unk230[index].seed, 0x18);
-        SaveDungeonLocation(&backup, &gUnknown_203B490->unk230[index].dungeon);
+        SaveIntegerBits(&backup, &gUnknown_203B490->unk230[index].sub.seed, 0x18);
+        SaveDungeonLocation(&backup, &gUnknown_203B490->unk230[index].sub.dungeon);
     }
     nullsub_102(&backup);
     return backup.unk8;
