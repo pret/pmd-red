@@ -19,8 +19,8 @@ extern void sub_803F878(s32, s32);
 extern void sub_803E46C(u32);
 extern void sub_803E708(u32, u32);
 
-extern void sub_8068FE0(Entity *, u32, u8 *);
-extern void sub_80457DC(u8 *);
+extern void sub_8068FE0(Entity *, u32, Entity*);
+extern void sub_80457DC(Entity *);
 extern void sub_80861D4(Entity *, u32, s32 direction);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 
@@ -199,14 +199,14 @@ void sub_8085764(void)
 {
     Entity *entity;
     s32 index;
-    u8 auStack128 [116];
+    Entity stackEntity;
 
-    sub_80457DC(auStack128);
+    sub_80457DC(&stackEntity);
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
         entity = gDungeon->wildPokemon[index];
         if ((EntityExists(entity)) && (entity->info->clientType == CLIENT_TYPE_PARTNER)) {
-            sub_8068FE0(entity,0x207,auStack128);
+            sub_8068FE0(entity,0x207,&stackEntity);
         }
     }
 }

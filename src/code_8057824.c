@@ -1362,16 +1362,10 @@ bool8 sub_8058C00(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 bool8 sub_8058C48(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   s32 rand;
-  s32 iVar2;
   bool8 flag;
   
   rand = DungeonRandRange(128, 384); // 0x80 - 0x180
-  iVar2 = rand * pokemon->info->level;
-
-  if (iVar2 < 0) {
-    iVar2 = iVar2 + 0xFF;
-  }
-  rand = iVar2 >> 8;
+  rand = (rand * pokemon->info->level) / 256;
   if (rand < 0) {
     rand = 1;
   }

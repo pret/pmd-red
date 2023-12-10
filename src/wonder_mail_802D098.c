@@ -209,7 +209,7 @@ static void sub_802D2A8(void)
             sUnknown_203B2F8->wonderMailAccepted = TRUE;
             AcceptJob(&sUnknown_203B2F8->mail->wonderMail);
             sub_8096C80();
-            sub_8096D24();
+            SortJobSlots();
 
             if (sUnknown_203B2F8->mail->wonderMail.unk2 == 4) {
                 MemoryCopy8(sub_8096DD8(), sUnknown_203B2F8->mail->unk14, 40);

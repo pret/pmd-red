@@ -5,5 +5,6 @@
 
 bool8 TargetLeader(Entity *pokemon);
 Entity* GetLeaderIfVisible(Entity *pokemon);
+bool8 sub_8072CF4(Entity *entity);
 
 #endif

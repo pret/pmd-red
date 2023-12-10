@@ -88,7 +88,7 @@ sub_8047190:
 	adds r2, r0
 	lsls r2, 11
 	adds r0, r7, 0
-	bl sub_8045394
+	bl SetEntityPixelPos
 	strh r4, [r7, 0x26]
 	str r4, [sp, 0x224]
 	mov r0, r9
@@ -625,7 +625,7 @@ sub_80475C4:
 	adds r2, 0x4
 	lsls r2, 8
 	ldr r0, [sp, 0x1C]
-	bl sub_8045394
+	bl SetEntityPixelPos
 	ldr r3, [sp, 0x1C]
 	strh r4, [r3, 0x26]
 	movs r0, 0x1
@@ -788,7 +788,7 @@ _08047762:
 	str r1, [sp, 0x3C]
 	ldr r0, [sp, 0x1C]
 	adds r1, r3, 0
-	bl sub_8045394
+	bl SetEntityPixelPos
 	bl IsWaterTileset
 	lsls r0, 24
 	movs r2, 0

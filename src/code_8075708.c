@@ -5,16 +5,50 @@
 #include "constants/item.h"
 #include "constants/status.h"
 #include "constants/type.h"
+#include "code_806CD90.h"
+#include "dungeon_capabilities.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
+#include "structs/str_dungeon.h"
 #include "tile_types.h"
+#include "position_util.h"
 
 extern void sub_8049ED4(void);
 extern void sub_8073D14(Entity *);
 extern void sub_807FE9C(Entity *, Position *, u32, u32);
+
+void sub_8075680(void)
+{
+    u32 direction;
+    Position *targetPos;
+    Entity *entity;
+    EntityInfo *info;
+    int index;
+
+    for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
+    {
+        entity = gDungeon->allPokemon[index];
+        if ((EntityExists(entity)) && (info = entity->info, !info->isTeamLeader)) {
+            targetPos = &(info->targetPos);
+
+            if (targetPos->x == 0 && targetPos->y == 0)
+                continue;
+
+            if (targetPos->x == entity->pos.x && targetPos->y == entity->pos.y)
+                continue;
+
+            if (CannotMove(entity, TRUE))
+                continue;
+
+            direction = GetDirectionTowardsPosition(&entity->pos, targetPos);
+            info->action.direction = direction & DIRECTION_MASK;
+            sub_806CDD4(entity, sub_806CEBC(entity), direction);
+        }
+    }
+}
 
 void nullsub_97(Entity *entity)
 {}

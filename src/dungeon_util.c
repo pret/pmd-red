@@ -188,7 +188,7 @@ void sub_804535C(Entity *entity, Position32 *pos)
   }
 }
 
-void sub_8045394(Entity *entity, s32 x, s32 y)
+void SetEntityPixelPos(Entity *entity, s32 x, s32 y)
 {
     entity->pixelPos.x = x;
     entity->pixelPos.y = y;

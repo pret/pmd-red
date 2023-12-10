@@ -120,7 +120,7 @@ extern void sub_806ABAC(Entity *, Entity *);
 extern u8 sub_807EAA0(u32, u32);
 extern void sub_8045C28(Item *, u8 , u8);
 extern void sub_805A7D4(Entity *, Entity *, Item *, Position *);
-extern void sub_8045394(Entity *, s32, s32);
+extern void SetEntityPixelPos(Entity *, s32, s32);
 extern void sub_804652C(Entity *, Entity *, Item *, u32, Position *);
 extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern u8 *gUnknown_80FEB60[];
@@ -1107,7 +1107,7 @@ void sub_805A7D4(Entity * pokemon, Entity * target, Item *item, Position *pos)
   stackEntity.info = (EntityInfo*) item;
   stackEntity.pos.x = target->pos.x + pos->x;
   stackEntity.pos.y = target->pos.y + pos->y;
-  sub_8045394(&stackEntity,(target->pos.x * 0x18 + 4) * 0x100,
+  SetEntityPixelPos(&stackEntity,(target->pos.x * 0x18 + 4) * 0x100,
               (target->pos.y * 0x18 + 4) * 0x100);
   stackEntity.spawnGenID = 0;
   SetMessageArgument(gUnknown_202DE58,&stackEntity,0);

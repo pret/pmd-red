@@ -43,7 +43,7 @@ bool8 sub_802DB28(u8 jobSlotIndex, u8 dungeon)
     sUnknown_203B2FC = MemoryAlloc(sizeof(struct unkStruct_203B2FC), 8);
     sUnknown_203B2FC->jobSlotIndex = jobSlotIndex;
     sUnknown_203B2FC->jobInfo = GetJobSlotInfo(jobSlotIndex);
-    sub_8096EEC();
+    sub_8096EEC(sUnknown_203B2FC->jobInfo);
     sub_803C21C(sUnknown_203B2FC->jobInfo, &sUnknown_203B2FC->unk8);
 
     sUnknown_203B2FC->faceFile = GetDialogueSpriteDataPtr(sUnknown_203B2FC->jobInfo->clientSpecies);

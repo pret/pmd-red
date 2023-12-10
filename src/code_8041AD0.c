@@ -16,6 +16,20 @@ struct unkStruct_80420E8
     u32 unk8;
 };
 
+typedef struct unkStruct_80416E0
+{
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    u16 x;
+    u16 y;
+    u16 unk10;
+    u16 unk12;
+    s32 unk14;
+    u32 unk18;
+} unkStruct_80416E0;
+
+
 extern u32 gStatusSpriteMasks_SleepStatus[];
 extern u32 gStatusSpriteMasks_NonVolatileStatus[];
 extern u32 gStatusSpriteMasks_ImmobilizeStatus[];
@@ -33,17 +47,14 @@ extern u32 gStatusSpriteMasks_MuzzledStatus[];
 
 extern void sub_803ED30(u8, Entity *pokemon, u8, u8);
 extern void sub_804151C(Entity *pokemon, u32 r1, u8 r2);
-extern void sub_80416E0(Entity *pokemon, u32, u32);
 extern u8 sub_8042768(Entity *pokemon);
 extern u32 sub_806F62C(u32);
 extern void PlaySoundEffect(u32);
 extern u8 sub_803F428(Position *pos);
 extern void sub_8041550(Entity *pokemon, u32, u32, u32, u32, u32);
 
-
 void sub_80421C0(Entity *pokemon, u16 r1);
 void EntityUpdateStatusSprites(Entity *entity);
-
 
 extern s32 gUnknown_202EDC8;
 extern u8 gUnknown_203B40D;
@@ -55,12 +66,56 @@ extern void sub_803EA10(void);
 extern void sub_8042E98(void);
 extern void sub_803E46C(u32);
 extern void sub_800EE5C(u32);
-extern u32 sub_800E890(u32 *);
 extern void sub_800EF64(void);
+extern u8 sub_800E9A8(u32);
+extern u32 sub_800E890(unkStruct_80416E0 *);
 
-u32 sub_8041764(u32 *param_1, u8 param_2)
+u32 sub_8041764(unkStruct_80416E0 *param_1, u8 param_2);
+s32 sub_80416E0(Position32 *pos, u32 param_2, u8 param_3);
+
+s32 sub_80416A4(Position *pos_1, u32 param_2, u8 param_3)
 {
-    sub_800EE5C(*param_1);
+  Position32 pos;
+  
+  pos.x = pos_1->x * 0x1800 + 0xc00;
+  pos.y = pos_1->y * 0x1800 + 0x1000;
+  return sub_80416E0(&pos, param_2, param_3);
+}
+
+s32 sub_80416E0(Position32 *pos, u32 param_2, u8 param_3)
+{
+  int counter;
+  s32 ret;
+  unkStruct_80416E0 auStack_10;
+  unkStruct_2039DB0 auStack_18; // Size: 0xC
+
+  auStack_10.unk0 = param_2;
+  auStack_10.unk4 = 0;
+  auStack_10.unk8 = -1;
+
+  auStack_10.x = pos->x / 256;
+  auStack_10.y = pos->y / 256;
+    
+  auStack_10.unk14 = -1;
+  auStack_10.unk10 = 0;
+  auStack_10.unk12 = 0;
+  auStack_10.unk18 = 0xffff;
+  sub_8004E8C(&auStack_18);
+  ret = sub_8041764(&auStack_10,0);
+  if (param_3 != 0) {
+    counter = 0;
+    while ((counter < 100 && (sub_800E9A8(ret) != 0))) {
+      sub_803E46C(0x42);
+      counter++;
+    }
+    ret = -1;
+  }
+  return ret;
+}
+
+u32 sub_8041764(unkStruct_80416E0 *param_1, u8 param_2)
+{
+    sub_800EE5C(param_1->unk0);
     sub_800EF64();
     if(param_2)
         sub_803E46C(0x42);
@@ -817,9 +872,9 @@ void sub_804218C(Entity *pokemon, Entity *target)
     sub_804151C(target, 0x2A, 1);
 }
 
-void sub_804219C(Entity *pokemon)
+void sub_804219C(Position32 *pos)
 {
-    sub_80416E0(pokemon, 0x90, 1);
+    sub_80416E0(pos, 0x90, 1);
 }
 
 void sub_80421AC(Entity *pokemon, Entity * target)

@@ -40,7 +40,7 @@ extern u32 gPotentialItemTargetDirections[NUM_DIRECTIONS];
 extern bool8 gTargetAhead[NUM_DIRECTIONS];
 extern TeamInventory *gTeamInventoryRef;
 
-void sub_807360C(Entity *pokemon)
+void sub_807360C(void)
 {
     s32 index;
     Entity *entity;
@@ -94,9 +94,9 @@ void DecideUseItem(Entity *pokemon)
                     if (DungeonRandOutcome(gPotentialItemTargetWeights[targetIndex]))
                     {
                         SetMonsterActionFields(&pokemonInfo->action, ACTION_THROW_ITEM_AI);
-                        pokemonInfo->action.actionUseIndex = selectedToolboxIndex;
-                        pokemonInfo->action.lastItemThrowPosition.x = pokemon->pos.x;
-                        pokemonInfo->action.lastItemThrowPosition.y = pokemon->pos.y;
+                        pokemonInfo->action.unk4[0].actionUseIndex = selectedToolboxIndex;
+                        pokemonInfo->action.unk4[0].lastItemThrowPosition.x = pokemon->pos.x;
+                        pokemonInfo->action.unk4[0].lastItemThrowPosition.y = pokemon->pos.y;
                         pokemonInfo->action.direction = gPotentialItemTargetDirections[targetIndex] & DIRECTION_MASK;
                         break;
                     }
@@ -118,9 +118,9 @@ void DecideUseItem(Entity *pokemon)
                 {
                     u32 chosenTargetIndex = DungeonRandInt(gNumPotentialTargets);
                     SetMonsterActionFields(&pokemonInfo->action, ACTION_THROW_ITEM_AI);
-                    pokemonInfo->action.actionUseIndex = selectedToolboxIndex;
-                    pokemonInfo->action.lastItemThrowPosition.x = pokemon->pos.x;
-                    pokemonInfo->action.lastItemThrowPosition.y = pokemon->pos.y;
+                    pokemonInfo->action.unk4[0].actionUseIndex = selectedToolboxIndex;
+                    pokemonInfo->action.unk4[0].lastItemThrowPosition.x = pokemon->pos.x;
+                    pokemonInfo->action.unk4[0].lastItemThrowPosition.y = pokemon->pos.y;
                     pokemonInfo->action.direction = GetDirectionTowardsPosition(&pokemon->pos, &potentialTargetPositions[chosenTargetIndex]) & DIRECTION_MASK;
                     pokemonInfo->action.itemTargetPosition = potentialTargetPositions[chosenTargetIndex];
                 }
@@ -131,9 +131,9 @@ void DecideUseItem(Entity *pokemon)
                 if (itemTypeCompare < CATEGORY_HELD_ITEMS - 2)
                 {
                     SetMonsterActionFields(&pokemonInfo->action, ACTION_EAT_AI);
-                    pokemonInfo->action.actionUseIndex = selectedToolboxIndex;
-                    pokemonInfo->action.lastItemThrowPosition.x = pokemon->pos.x;
-                    pokemonInfo->action.lastItemThrowPosition.y = pokemon->pos.y;
+                    pokemonInfo->action.unk4[0].actionUseIndex = selectedToolboxIndex;
+                    pokemonInfo->action.unk4[0].lastItemThrowPosition.x = pokemon->pos.x;
+                    pokemonInfo->action.unk4[0].lastItemThrowPosition.y = pokemon->pos.y;
                 }
                 else
                 {
@@ -203,9 +203,9 @@ void DecideUseItem(Entity *pokemon)
                                 {
                                     SetMonsterActionFields(&pokemonInfo->action, ACTION_EAT_AI);
                                 }
-                                pokemonInfo->action.actionUseIndex = selectedToolboxIndex;
-                                pokemonInfo->action.lastItemThrowPosition.x = pokemon->pos.x;
-                                pokemonInfo->action.lastItemThrowPosition.y = pokemon->pos.y;
+                                pokemonInfo->action.unk4[0].actionUseIndex = selectedToolboxIndex;
+                                pokemonInfo->action.unk4[0].lastItemThrowPosition.x = pokemon->pos.x;
+                                pokemonInfo->action.unk4[0].lastItemThrowPosition.y = pokemon->pos.y;
                                 return;
                             }
                         }
@@ -237,9 +237,9 @@ void DecideUseItem(Entity *pokemon)
                             {
                                 u32 chosenTargetIndex = DungeonRandInt(gNumPotentialTargets);
                                 SetMonsterActionFields(&pokemonInfo->action, ACTION_THROW_ITEM_AI);
-                                pokemonInfo->action.actionUseIndex = selectedToolboxIndex;
-                                pokemonInfo->action.lastItemThrowPosition.x = pokemon->pos.x;
-                                pokemonInfo->action.lastItemThrowPosition.y = pokemon->pos.y;
+                                pokemonInfo->action.unk4[0].actionUseIndex = selectedToolboxIndex;
+                                pokemonInfo->action.unk4[0].lastItemThrowPosition.x = pokemon->pos.x;
+                                pokemonInfo->action.unk4[0].lastItemThrowPosition.y = pokemon->pos.y;
                                 pokemonInfo->action.direction = GetDirectionTowardsPosition(&pokemon->pos, &potentialTargetPositions[chosenTargetIndex]) & DIRECTION_MASK;
                                 pokemonInfo->action.itemTargetPosition = potentialTargetPositions[chosenTargetIndex];
                                 return;
@@ -254,9 +254,9 @@ void DecideUseItem(Entity *pokemon)
                                 if (DungeonRandOutcome(potentialTargetWeights[targetIndex]))
                                 {
                                     SetMonsterActionFields(&pokemonInfo->action, ACTION_THROW_ITEM_AI);
-                                    pokemonInfo->action.actionUseIndex = selectedToolboxIndex;
-                                    pokemonInfo->action.lastItemThrowPosition.x = pokemon->pos.x;
-                                    pokemonInfo->action.lastItemThrowPosition.y = pokemon->pos.y;
+                                    pokemonInfo->action.unk4[0].actionUseIndex = selectedToolboxIndex;
+                                    pokemonInfo->action.unk4[0].lastItemThrowPosition.x = pokemon->pos.x;
+                                    pokemonInfo->action.unk4[0].lastItemThrowPosition.y = pokemon->pos.y;
                                     pokemonInfo->action.direction = gPotentialItemTargetDirections[targetIndex] & DIRECTION_MASK;
                                     return;
                                 }

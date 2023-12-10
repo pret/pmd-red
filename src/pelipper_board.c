@@ -387,7 +387,7 @@ void sub_802EDBC(void)
                 default:
                     AcceptJob(mail);
                     sub_8096C80();
-                    sub_8096D24();
+                    SortJobSlots();
                     if(HasNoPelipperBoardJobs())
                     {
                         sub_802C2D4();

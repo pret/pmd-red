@@ -22,7 +22,7 @@ extern bool8 GenerateMailJobInfo(WonderMail *);
 bool8 sub_803C1D0(DungeonLocation *, u8);
 u8 sub_8095F28(u8);
 void sub_803C37C(DungeonLocation *, u8, u8 *);
-bool8 sub_8096E80(u32);
+bool8 sub_8096E80(u8);
 u8 sub_8095E78(void);
 
 void sub_8096078(void);
@@ -227,7 +227,7 @@ void sub_8096488(void)
 
 bool8 sub_80964B4(void)
 {
-    if ((gUnknown_203B490->PKMNNewsReceived[0x35] == 0) && (sub_8096E80(0x35) == 0)) {
+    if ((!gUnknown_203B490->PKMNNewsReceived[0x35]) && (sub_8096E80(0x35) == 0)) {
         return FALSE;
     }
     else {
@@ -237,7 +237,7 @@ bool8 sub_80964B4(void)
 
 bool8 sub_80964E4(void)
 {
-    if ((gUnknown_203B490->PKMNNewsReceived[0x36] == 0) && (sub_8096E80(0x36) == 0)) {
+    if ((!gUnknown_203B490->PKMNNewsReceived[0x36]) && (sub_8096E80(0x36) == 0)) {
         return FALSE;
     }
     else {
@@ -706,7 +706,7 @@ void sub_8096BD0(void)
     }
   }
   sub_8096C80();
-  sub_8096D24();
+  SortJobSlots();
 }
 
 bool8 sub_8096C08(u8 *jobIndex)
