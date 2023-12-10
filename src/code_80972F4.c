@@ -87,7 +87,7 @@ u8 sub_8096E2C(void)
 
     for(index = floor; index < 0x32; index++)
     {
-        if(gUnknown_203B490->PKMNNewsReceived[index] == FALSE) return index;
+        if(!gUnknown_203B490->PKMNNewsReceived[index]) return index;
     }
     return 0x38;
 }

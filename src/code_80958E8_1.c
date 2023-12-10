@@ -227,7 +227,7 @@ void sub_8096488(void)
 
 bool8 sub_80964B4(void)
 {
-    if ((gUnknown_203B490->PKMNNewsReceived[0x35] == FALSE) && (sub_8096E80(0x35) == 0)) {
+    if ((!gUnknown_203B490->PKMNNewsReceived[0x35]) && (sub_8096E80(0x35) == 0)) {
         return FALSE;
     }
     else {
@@ -237,7 +237,7 @@ bool8 sub_80964B4(void)
 
 bool8 sub_80964E4(void)
 {
-    if ((gUnknown_203B490->PKMNNewsReceived[0x36] == FALSE) && (sub_8096E80(0x36) == 0)) {
+    if ((!gUnknown_203B490->PKMNNewsReceived[0x36]) && (sub_8096E80(0x36) == 0)) {
         return FALSE;
     }
     else {

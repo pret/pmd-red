@@ -135,7 +135,7 @@ typedef struct Dungeon
     /* 0x37FA */ bool8 minusIsActive[2]; // Index 0: Enemy , Index 1: Team 
     /* 0x37FC */ bool8 decoyActive;
     u8 fill37FD;
-    /* 0x37FE */ u8 deoxysDefeat; // Flag set for deoxys in Meteor Cave
+    /* 0x37FE */ bool8 deoxysDefeat; // Flag set for deoxys in Meteor Cave
     u8 fill37FF;
     s16 unk3800;
     u8 fill3802[0x3904 - 0x3802];

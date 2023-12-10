@@ -294,7 +294,11 @@ void sub_8066D04(Entity *param_1)
     Item *item;
     Tile *tile;
     EntityInfo *info;
+#ifndef NONMATCHING
     register Entity *entity asm("r4");
+#else
+    Entity *entity;
+#endif
 
     entity = param_1;
 
