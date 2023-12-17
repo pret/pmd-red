@@ -80,8 +80,7 @@ void sub_80141B4(const u8 *text, u32 param_2, OpenedFile **file, u16 param_4)
     sub_8014248(text, param_2, -1, NULL, NULL, 3, 0, file, param_4);
 }
 
-// https://decomp.me/scratch/w4sX4
-// void sub_80141E0(const u8 *text, OpenedFile **file, u16 param_4)
-// {
-//     sub_8014248(text, 0, -1, gUnknown_80D485C, NULL, 3, 0, file, param_4);
-// }
+void sub_80141E0(const u8 *text, OpenedFile **file, u16 param_3)
+{
+    sub_8014248(text, 0, -1, gUnknown_80D485C, NULL, 3, 0, file, param_3 | 0x300);
+}
