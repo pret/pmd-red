@@ -5,35 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80141E0
-sub_80141E0:
-	push {r4-r6,lr}
-	sub sp, 0x14
-	lsls r6, r2, 16
-	movs r2, 0x1
-	negs r2, r2
-	ldr r3, _08014210
-	movs r5, 0
-	str r5, [sp]
-	movs r4, 0x3
-	str r4, [sp, 0x4]
-	str r5, [sp, 0x8]
-	str r1, [sp, 0xC]
-	movs r1, 0xC0
-	lsls r1, 18
-	orrs r1, r6
-	lsrs r1, 16
-	str r1, [sp, 0x10]
-	movs r1, 0
-	bl sub_8014248
-	add sp, 0x14
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08014210: .4byte gUnknown_80D485C
-	thumb_func_end sub_80141E0
-
 	thumb_func_start sub_8014214
 sub_8014214:
 	push {r4-r6,lr}
