@@ -11,6 +11,7 @@ extern s32 gUnknown_202E73C;
 extern s32 gUnknown_202E740;
 
 extern MenuItem gUnknown_80D485C[];
+extern MenuItem gUnknown_80D4880[];
 
 void sub_80140DC(void)
 {
@@ -84,3 +85,9 @@ void sub_80141E0(const u8 *text, OpenedFile **file, u16 param_3)
 {
     sub_8014248(text, 0, -1, gUnknown_80D485C, NULL, 3, 0, file, param_3 | 0x300);
 }
+
+void sub_8014214(const u8 *text, OpenedFile **file, u16 param_3)
+{
+    sub_8014248(text, 0, -1, gUnknown_80D4880, NULL, 3, 0, file, param_3 | 0x300);
+}
+

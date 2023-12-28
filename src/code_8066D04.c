@@ -39,13 +39,13 @@ extern void sub_806A6E8(Entity *);
 extern void sub_8044DF0(Entity *, u32, u32);
 extern void sub_8045DB4(Position *, u32);
 
-void sub_8066744(Entity *entity)
+void HandlePickUpPlayerAction(Entity *entity)
 {
   entity->info->action.unk4[0].actionUseIndex = 1;
   sub_8045DB4(&entity->pos,0);
 }
 
-void sub_806675C(Entity *param_1, bool8 param_2)
+void HandleSetItemAction(Entity *param_1, bool8 param_2)
 {
   Item *item;
   Item *itemPtr;
@@ -88,7 +88,7 @@ void sub_806675C(Entity *param_1, bool8 param_2)
 }
 
 
-void sub_806684C(Entity *entity,bool8 enableMessage)
+void HandleUnsetItemAction(Entity *entity,bool8 enableMessage)
 {
   Item *item;
   int index;
@@ -113,7 +113,7 @@ void sub_806684C(Entity *entity,bool8 enableMessage)
 }
 
 
-void sub_80668D0(Entity *param_1)
+void HandleGiveItemAction(Entity *param_1)
 {
   Entity *entity;
   Item *item;
@@ -191,7 +191,7 @@ void sub_80668D0(Entity *param_1)
 }
 
 
-void sub_8066AC0(Entity *param_1)
+void HandleTakeItemAction(Entity *param_1)
 {
   Entity *entity;
   EntityInfo *info;
@@ -281,7 +281,7 @@ void sub_8066BD4(Entity *param_1)
   }
 }
 
-void sub_8066CF0(Entity *param_1)
+void HandleUseItemAction(Entity *param_1)
 {
   Entity *entity;
   
@@ -289,7 +289,7 @@ void sub_8066CF0(Entity *param_1)
   entity->info->useHeldItem = TRUE;
 }
 
-void sub_8066D04(Entity *param_1)
+void HandlePlaceItemAction(Entity *param_1)
 {
     Item *item;
     Tile *tile;
