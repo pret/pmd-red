@@ -42,7 +42,7 @@ typedef struct Tile
     // Bitwise flags for whether Pokémon can move to an adjacent tile. Bits correspond to directions in direction.h.
     // Different sets of flags are used for Pokémon that can cross special terrain, corresponding to the CrossableTerrain enum.
     /* 0xA */ u8 walkableNeighborFlags[NUM_CROSSABLE_TERRAIN];
-    u8 fillE[0x10 - 0xE];
+    u8 unkE;
     /* 0x10 */ Entity *monster; // Pokémon on the tile.
     /* 0x14 */ Entity *object; // Item or trap on the tile.
 } Tile;

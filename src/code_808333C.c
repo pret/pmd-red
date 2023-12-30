@@ -34,7 +34,7 @@ bool8 sub_8083568(s32 inX, s32 inY, u8 index) {
         tmp &= SPRITEOAM_MASK_X;
 
         x = sp->attrib2;
-        tmp2 = (0xFE << 8);
+        tmp2 = (0xFE00);
         tmp2 &= x;
         tmp2 |= tmp;
         sp->attrib2 = tmp2;

@@ -13,6 +13,20 @@ extern s32 gUnknown_202E740;
 extern MenuItem gUnknown_80D485C[];
 extern MenuItem gUnknown_80D4880[];
 
+extern UnkTextStruct2 gUnknown_80D47C8[4];
+
+void sub_80140B4(UnkTextStruct2 *a0)
+{
+    s32 i;
+
+    for(i = 0; i < 4; i++)
+    {
+        a0[i] = gUnknown_80D47C8[i];
+    }
+}
+
+// End of menu_input.c
+
 void sub_80140DC(void)
 {
     Position pos;
