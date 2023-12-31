@@ -1,6 +1,6 @@
 #include "global.h"
 #include "dungeon_map_access.h"
-#include "structs/map.h"
+#include "dungeon_random.h"
 #include "structs/str_dungeon.h"
 
 void sub_804FBE8(void)
@@ -138,7 +138,7 @@ void sub_804FD30(void)
         gDungeon->unk1371C[x]->type = 0;
     }
 }
-    #else
+#else
 NAKED
 void sub_804FD30(void)
 {
@@ -373,5 +373,21 @@ void sub_804FD30(void)
 "_0804FEC4: .4byte 0x0000e27c\n"
 "_0804FEC8: .4byte 0x00003904\n"
 "_0804FECC: .4byte 0x0001371c\n");
-    #endif
+}
+#endif
+
+void sub_804FED0(s32 *param_1, s32 param_2)
+{
+    int idx1;
+    int idx2;
+    s32 temp;
+    int counter;
+
+    for (counter = 0; counter < param_2 << 1; counter++) {
+        idx1 = DungeonRandInt(param_2);
+        idx2 = DungeonRandInt(param_2);
+        temp = param_1[idx1];
+        param_1[idx1] = param_1[idx2];
+        param_1[idx2] = temp;
+    }
 }

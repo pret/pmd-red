@@ -5,37 +5,6 @@
 
   	.text
 
-	thumb_func_start sub_804FED0
-sub_804FED0:
-	push {r4-r7,lr}
-	adds r7, r0, 0
-	adds r5, r1, 0
-	movs r6, 0
-	b _0804FEFA
-_0804FEDA:
-	adds r0, r5, 0
-	bl DungeonRandInt
-	adds r4, r0, 0
-	adds r0, r5, 0
-	bl DungeonRandInt
-	lsls r4, 2
-	adds r4, r7
-	ldr r2, [r4]
-	lsls r0, 2
-	adds r0, r7
-	ldr r1, [r0]
-	str r1, [r4]
-	str r2, [r0]
-	adds r6, 0x1
-_0804FEFA:
-	lsls r0, r5, 1
-	cmp r6, r0
-	blt _0804FEDA
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_804FED0
-
 	thumb_func_start sub_804FF08
 sub_804FF08:
 	push {r4-r7,lr}
