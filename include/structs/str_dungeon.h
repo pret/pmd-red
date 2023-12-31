@@ -150,7 +150,9 @@ typedef struct Dungeon
     u8 fill3A10[0x3A14 - 0x3A12];
     /* 0x3A14 */ s16 bossBattleIndex;
     /* 0x3A18 */ Tile tiles[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
-    u8 fillE218[0xE220 - 0xE218];
+    u8 fillE218[0xE21C - 0xE218];
+    u16 unkE21C;
+    u16 unkE21E;
     Position unkE220[4];
     u8 unkE230[0xE23C - 0xE230];
     s16 unkE23C; // x coord of some kind
@@ -169,7 +171,9 @@ typedef struct Dungeon
     /* 0xE277 */ u8 mudSportTurns;
     /* 0xE278 */ u8 waterSportTurns;
     /* 0xE279 */ bool8 nullifyWeather; // Air Lock and Cloud Nine toggle this to disable weather effects
-    u8 fillE27A[0xE8C0 - 0xE27A];
+    u8 fillE27A[0xE27C - 0xE27A];
+    /* 0xE27C */ Tile unkE27C[8][8];
+    /* 0xE87C */ u8 fillE87C[68];
     /* 0xE8C0 */ Tile *tilePointers[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     u8 unk104C0;
     /* 0x104C4 */ RoomData roomData[MAX_ROOM_COUNT];
