@@ -177,11 +177,8 @@ typedef struct Dungeon
     /* 0xE8C0 */ Tile *tilePointers[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     u8 unk104C0;
     /* 0x104C4 */ RoomData roomData[MAX_ROOM_COUNT];
-    u8 fill10764[0x10844 - 0x10764];
     /* 0x10844 */ s16 naturalJunctionListCounts[MAX_ROOM_COUNT];
-    u8 fill10874[0x10884 - 0x10874];
-    /* 0x10884 */ Position naturalJunctionList[MAX_ROOM_COUNT][32]; // Arrays of room exits for each room.
-    u8 fill11444[0x11884 - 0x11484];
+    /* 0x10884 */ Position naturalJunctionList[MAX_ROOM_COUNT][MAX_ROOM_COUNT]; // Arrays of room exits for each room.
     u8 unk11884[0x1194];
     u8 fill12A18[0x12C24 - 0x12A18];
     u8 unk12C24[0x930];

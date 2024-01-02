@@ -4,7 +4,7 @@
 #include "structs/dungeon_entity.h"
 #include "structs/str_position.h"
 
-#define MAX_ROOM_COUNT 24 // Empirical max, not sure if the code supports any more.
+#define MAX_ROOM_COUNT 32 // Empirical max, not sure if the code supports any more.
 #define CORRIDOR_ROOM 0xFF
 
 enum TerrainType
