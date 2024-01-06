@@ -58,7 +58,7 @@ void sub_8075708(Entity *entity)
     bool8 bVar1;
     bool8 bVar2;
     Tile *tile;
-    u8 *trapData;
+    Trap *trapData;
     Entity *trap;
     EntityInfo *info;
 
@@ -78,7 +78,7 @@ void sub_8075708(Entity *entity)
 
     switch(GetEntityType(trap)) {
         case ENTITY_TRAP:
-            trapData = (u8 *)GetTrapData(trap);
+            trapData = GetTrapData(trap);
             bVar1 = FALSE;
             bVar2 = FALSE;
             if ((IQSkillIsEnabled(entity, IQ_TRAP_SEER)) && (!trap->isVisible)) {
@@ -87,16 +87,16 @@ void sub_8075708(Entity *entity)
                 bVar2 = TRUE;
             }
 
-            if (trapData[1] == 0) {
+            if (trapData->unk1 == 0) {
                 if (!trap->isVisible) goto _080757EC;
                 if (info->isNotTeamMember) goto _080757EC;
             }
             else {
-                if (trapData[1] == 1) {
+                if (trapData->unk1 == 1) {
                     if (!info->isNotTeamMember) goto _080757EC;
                     goto _ret;
                 }
-                if ((trapData[1] == 2) && (!info->isNotTeamMember)) {
+                if ((trapData->unk1 == 2) && (!info->isNotTeamMember)) {
                     bVar1 = TRUE;
                 }
             _080757EC:
@@ -126,7 +126,7 @@ u32 sub_8075818(Entity *entity)
     EntityInfo *entityInfo;
     Entity *subEntity;
     Item *item;
-    u8 *trapData; // TODO: turn into struct when more research is done..
+    Trap *trapData; // TODO: turn into struct when more research is done..
     u8 r1;
 
     entityInfo = entity->info;
@@ -147,23 +147,23 @@ u32 sub_8075818(Entity *entity)
                 case ENTITY_UNK_5:
                     break;
                 case ENTITY_TRAP:
-                    trapData = (u8*) GetTrapData(subEntity);
+                    trapData = GetTrapData(subEntity);
                     r1 = 0;
-                    if(trapData[1] == 0)
+                    if(trapData->unk1 == 0)
                     {
                         if(!subEntity->isVisible || entityInfo->isNotTeamMember)
                             goto flag_check;
                         else
                             goto error;
                     }
-                    else if(trapData[1] == 1)
+                    else if(trapData->unk1 == 1)
                     {
                         if(!entityInfo->isNotTeamMember)
                             goto flag_check;
                         else
                             goto error;
                     }
-                    else if(trapData[1] == 2)
+                    else if(trapData->unk1 == 2)
                     {
                         if(!entityInfo->isNotTeamMember)
                             r1 = 1;

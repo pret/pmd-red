@@ -1015,7 +1015,7 @@ bool8 TrapbustOrbAction(Entity * pokemon,Entity * target)
 {
     struct Tile *tile;
     Entity *object;
-    u8 *trapData;
+    Trap *trapData;
     s32 bottomRightCornerX, bottomRightCornerY;
     s32 xCoord, yCoord;
     struct RoomData *room;
@@ -1047,7 +1047,7 @@ bool8 TrapbustOrbAction(Entity * pokemon,Entity * target)
             for (yCoord = bottomRightCornerY; yCoord <= topLeftCornerY; yCoord++) {
                 object = GetTileSafe(xCoord, yCoord)->object;
                 if (((object != 0) && (GetEntityType(object) == ENTITY_TRAP)) &&
-                    (trapData = (u8*)GetTrapData(object), trapData[0] != 0x11)) {
+                    (trapData = GetTrapData(object), trapData->id != TRAP_WONDER_TILE)) {
                     sp = yCoord << 0x10 | (u16)xCoord;
                     sub_807FE04(&sp, 0);
                     foundTrap = TRUE;

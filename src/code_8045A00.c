@@ -12,7 +12,6 @@ extern struct unkStruct_8090F58 gUnknown_80F699C;
 extern struct unkStruct_8090F58 gUnknown_80F69A8;
 extern struct unkStruct_8090F58 gUnknown_80F6990;
 
-extern EntityInfo* GetTrapData_1(Entity *entity);
 extern void SetMessageArgument_2(u8 *, EntityInfo *, u32);
 extern void GetTrapName(u8 *, u8);
 extern bool8 IsNotSpecialItem(u8 id);
@@ -76,7 +75,7 @@ void SetMessageArgument(char *buffer, Entity *entity, u32 param_3)
         sub_8045BF8(buffer, GetItemData_1(entity));
         break;
     case ENTITY_TRAP:
-        GetTrapName(buffer, *((u8 *)GetTrapData_1(entity)));
+        GetTrapName(buffer, GetTrapData_1(entity)->id);
         break;
     default:
         strcpy(buffer, *gUnknown_80FE6F4);
