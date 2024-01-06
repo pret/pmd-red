@@ -86,7 +86,6 @@ extern void SqueezedStatusTarget(Entity *, Entity *, s32, bool32);
 extern void sub_806F324(Entity *, s32, u32, u32);
 extern bool8 sub_805755C(Entity* pokemon,u16 moveID);
 extern void sub_80783C4(Entity *, Entity *, u32);
-extern bool8 sub_807FCD4(Position *, u32, u8);
 extern void sub_807CD9C(Entity *, Entity *, u8 direction);
 
 
@@ -309,7 +308,7 @@ bool8 sub_805B214(Entity * pokemon,Entity * target,Move *move, s32 param_4)
     return TRUE;
 }
 
-bool8 TrapperOrbAction(Entity * pokemon, Entity * target)
+bool8 SpikesMoveAction(Entity * pokemon, Entity * target)
 {
     bool8 trapLaid;
     u8 uVar2;
@@ -322,7 +321,7 @@ bool8 TrapperOrbAction(Entity * pokemon, Entity * target)
     if (isNotTeamMember) {
         uVar2 = 2;
     }
-    if (sub_807FCD4(&pokemon->pos,0x13,uVar2) != 0) {
+    if (LayTrap(&pokemon->pos,TRAP_SPIKE_TRAP,uVar2) != 0) {
         trapLaid = TRUE;
     }
     else
@@ -1214,11 +1213,11 @@ bool8 FillInOrbAction(Entity *pokemon,Entity *target)
     }
 }
 
-bool8 sub_805C3DC(Entity *pokemon, Entity *target)
+bool8 TrapperOrbAction(Entity *pokemon, Entity *target)
 {
     u32 var;
     var = (target->info->isNotTeamMember ? 2 : 1);
-    sub_807FC3C(&target->pos, 0x14, var);
+    sub_807FC3C(&target->pos, NUM_TRAPS, var);
     return TRUE;
 }
 

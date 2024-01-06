@@ -187,9 +187,8 @@ typedef struct Dungeon
     u8 fill1356D[0x13570 - 0x1356D];
     /* 0x13570 */ u8 unk13570;
     u8 fill13571[0x13574 - 0x13571];
-    /* 0x13574 */ u16 unk13574;
-    /* 0x13576 */ u16 unk13576;
-    /* 0x13578 */ u8 unk13578;
+    /* 0x13574 */ Position trapPos;
+    /* 0x13578 */ u8 trapID;
     /* 0x13579 */ u8 unk13579;
     u8 fill1357A[0x1357C - 0x1357A];
     /* 0x1357C */ Entity *teamPokemon[MAX_TEAM_MEMBERS];
