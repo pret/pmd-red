@@ -119,7 +119,9 @@ typedef struct Dungeon
     u8 unk678;
     u8 unk679;
     u8 unk67A;
-    u8 unk67B[0x688 - 0x67B];
+    u8 unk67B[0x684 - 0x67B];
+    s16 unk684;
+    s16 unk686;
     s16 unk688;
     /* 0x68A */ u8 unk68A;
     u8 fill68B[0x699 - 0x68B];

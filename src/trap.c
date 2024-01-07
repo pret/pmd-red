@@ -9,6 +9,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
 #include "structs/map.h"
+#include "move_effects_target.h"
 
 extern u8 gAvailablePokemonNames[];
 
@@ -22,6 +23,8 @@ extern u8 *gUnknown_80FD7F8[];
 
 extern s16 gUnknown_80F4F84;
 extern s16 gUnknown_80F4F86;
+extern u32 gUnknown_8106A4C;
+extern u32 gUnknown_8106A50;
 
 
 void HandleTripTrap(Entity *pokemon,Entity *target);
@@ -159,7 +162,7 @@ bool8 sub_807FE04(Position *pos, char param_2)
     }
 }
 
-bool8 sub_807FE44(Position *pos,char param_2)
+bool8 sub_807FE44(Position *pos, char param_2)
 {
     Tile *tile;
 
@@ -181,7 +184,7 @@ void GetTrapName(u8 *buffer, u8 trapIndex)
     strcpy(buffer, gTrapNames[trapIndex]);
 }
 
-void sub_807FE9C(Entity *pokemon,Position *pos,int param_3,char param_4)
+void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4)
 {
     Tile *tile;
     bool8 flag1;
@@ -324,5 +327,31 @@ void sub_807FE9C(Entity *pokemon,Position *pos,int param_3,char param_4)
     }
     if (flag1) {
         sub_807FE04(pos,1);
+    }
+}
+
+void HandleMudTrap(Entity *pokemon, Entity *target)
+{
+    int rand;
+#ifdef NONMATCHING
+    int rand1;
+#else
+    register int rand1 asm("r1");
+#endif
+
+    if (target != NULL) {
+        rand1 = rand = DungeonRandInt(100);
+        if (rand <= 0x18) {
+            LowerAttackStageTarget(pokemon,target,gUnknown_8106A4C,1,1,1);
+        }
+        else if (0x32 > rand) {
+            LowerAttackStageTarget(pokemon,target,gUnknown_8106A50,1,1,1);
+        }
+        else if (rand1 < 0x4b) {
+            LowerDefenseStageTarget(pokemon,target,gUnknown_8106A4C,1,1,1);
+        }
+        else {
+            LowerDefenseStageTarget(pokemon,target,gUnknown_8106A50,1,1,1);
+        }
     }
 }
