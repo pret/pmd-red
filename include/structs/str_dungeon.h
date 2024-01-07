@@ -220,7 +220,10 @@ typedef struct Dungeon
     /* 0x18209 */ u8 visibilityRange; // Dungeon light level.
     /* 0x1820A */ bool8 blinded; // Blacks out the screen when the player has the Blinker status.
     u8 unk1820B;
-    u32 unk1820C;
+    u8 unk1820C;
+    u8 unk1820D;
+    u8 unk1820E;
+    u8 unk1820F;
     /* 0x18210 */ bool8 hallucinating; // Displays Substitute and flower sprites when the player has the Cross-Eyed status.
     u8 fill18211[0x18217 - 0x18211];
     u8 unk18217;

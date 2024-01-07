@@ -5,468 +5,8 @@
 
   	.text
 
-	thumb_func_start sub_807FE04
-sub_807FE04:
-	push {r4,r5,lr}
-	adds r2, r0, 0
-	lsls r1, 24
-	lsrs r5, r1, 24
-	movs r1, 0
-	ldrsh r0, [r2, r1]
-	movs r3, 0x2
-	ldrsh r1, [r2, r3]
-	bl GetTileSafe
-	adds r4, r0, 0
-	ldr r0, [r4, 0x14]
-	cmp r0, 0
-	beq _0807FE3C
-	bl GetEntityType
-	cmp r0, 0x2
-	bne _0807FE3C
-	ldr r1, [r4, 0x14]
-	movs r0, 0
-	str r0, [r1]
-	str r0, [r4, 0x14]
-	cmp r5, 0
-	beq _0807FE38
-	bl sub_8049ED4
-_0807FE38:
-	movs r0, 0x1
-	b _0807FE3E
-_0807FE3C:
-	movs r0, 0
-_0807FE3E:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_807FE04
-
-	thumb_func_start sub_807FE44
-sub_807FE44:
-	push {r4,r5,lr}
-	adds r2, r0, 0
-	lsls r1, 24
-	lsrs r5, r1, 24
-	movs r1, 0
-	ldrsh r0, [r2, r1]
-	movs r3, 0x2
-	ldrsh r1, [r2, r3]
-	bl GetTile
-	adds r4, r0, 0
-	ldr r0, [r4, 0x14]
-	cmp r0, 0
-	beq _0807FE7C
-	bl GetEntityType
-	cmp r0, 0x2
-	bne _0807FE7C
-	ldr r0, [r4, 0x14]
-	adds r0, 0x20
-	movs r1, 0x1
-	strb r1, [r0]
-	cmp r5, 0
-	beq _0807FE78
-	bl sub_8049ED4
-_0807FE78:
-	movs r0, 0x1
-	b _0807FE7E
-_0807FE7C:
-	movs r0, 0
-_0807FE7E:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_807FE44
-
-	thumb_func_start GetTrapName
-GetTrapName:
-	push {lr}
-	lsls r1, 24
-	ldr r2, _0807FE98
-	lsrs r1, 22
-	adds r1, r2
-	ldr r1, [r1]
-	bl strcpy
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0807FE98: .4byte gTrapNames
-	thumb_func_end GetTrapName
-
-	thumb_func_start sub_807FE9C
-sub_807FE9C:
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x10
-	adds r5, r0, 0
-	mov r9, r1
-	str r2, [sp]
-	lsls r3, 24
-	lsrs r6, r3, 24
-	movs r2, 0
-	ldrsh r0, [r1, r2]
-	movs r3, 0x2
-	ldrsh r1, [r1, r3]
-	bl GetTileSafe
-	str r0, [sp, 0x4]
-	ldr r0, [r0, 0x14]
-	mov r10, r0
-	movs r1, 0
-	str r1, [sp, 0x8]
-	cmp r0, 0
-	bne _0807FECE
-	b _080801B4
-_0807FECE:
-	bl GetEntityType
-	cmp r0, 0x2
-	beq _0807FED8
-	b _080801B4
-_0807FED8:
-	mov r0, r10
-	bl GetTrapData
-	mov r8, r0
-	ldr r0, _0807FF58
-	mov r2, r8
-	ldrb r1, [r2]
-	bl GetTrapName
-	ldr r3, [sp, 0x4]
-	ldr r4, [r3, 0x10]
-	cmp r4, 0
-	beq _0807FEFE
-	adds r0, r4, 0
-	bl GetEntityType
-	cmp r0, 0x1
-	beq _0807FEFE
-	movs r4, 0
-_0807FEFE:
-	mov r1, r10
-	adds r1, 0x20
-	ldrb r0, [r1]
-	str r0, [sp, 0xC]
-	movs r0, 0x1
-	strb r0, [r1]
-	cmp r4, 0
-	beq _0807FF96
-	adds r0, r4, 0
-	bl sub_806A1E8
-	cmp r6, 0
-	beq _0807FF96
-	mov r1, r8
-	ldrb r0, [r1]
-	cmp r0, 0x11
-	beq _0807FF96
-	movs r0, 0x64
-	bl DungeonRandInt
-	adds r7, r0, 0
-	movs r6, 0
-	adds r0, r4, 0
-	movs r1, 0x1C
-	bl HasHeldItem
-	lsls r0, 24
-	cmp r0, 0
-	beq _0807FF3C
-	ldr r0, _0807FF5C
-	ldr r6, [r0]
-_0807FF3C:
-	ldr r2, [sp, 0xC]
-	cmp r2, 0x1
-	beq _0807FF50
-	ldr r0, _0807FF60
-	ldr r0, [r0]
-	ldr r3, _0807FF64
-	adds r0, r3
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0807FF68
-_0807FF50:
-	cmp r7, 0
-	bge _0807FF70
-	b _0807FF6C
-	.align 2, 0
-_0807FF58: .4byte gAvailablePokemonNames
-_0807FF5C: .4byte gUnknown_80FDB5C
-_0807FF60: .4byte gDungeon
-_0807FF64: .4byte 0x0001820f
-_0807FF68:
-	cmp r7, 0xE
-	bgt _0807FF70
-_0807FF6C:
-	ldr r0, _0807FFD8
-	ldr r6, [r0]
-_0807FF70:
-	cmp r6, 0
-	beq _0807FF96
-	mov r0, r9
-	bl sub_803F428
-	lsls r0, 24
-	cmp r0, 0
-	beq _0807FF84
-	bl sub_8049ED4
-_0807FF84:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	adds r2, r6, 0
-	bl sub_80522F4
-	ldr r0, [sp]
-	cmp r0, 0
-	bne _0807FF96
-	b _080801B4
-_0807FF96:
-	mov r0, r9
-	bl sub_803F428
-	lsls r0, 24
-	cmp r0, 0
-	beq _0807FFFA
-	movs r1, 0xAE
-	lsls r1, 1
-	movs r0, 0
-	bl sub_80421C0
-	bl sub_8049ED4
-	mov r1, r8
-	ldrb r2, [r1]
-	adds r0, r5, 0
-	mov r1, r9
-	bl sub_804225C
-	ldr r0, _0807FFDC
-	ldr r0, [r0]
-	ldr r2, _0807FFE0
-	adds r0, r2
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0807FFE8
-	ldr r0, _0807FFE4
-	ldr r1, [r0]
-	adds r0, r5, 0
-	bl SendMessage
-	b _0807FFFA
-	.align 2, 0
-_0807FFD8: .4byte gUnknown_80FDB7C
-_0807FFDC: .4byte gDungeon
-_0807FFE0: .4byte 0x0001820a
-_0807FFE4: .4byte gUnknown_80FD7F4
-_0807FFE8:
-	ldr r0, _08080010
-	mov r3, r8
-	ldrb r1, [r3]
-	lsls r1, 2
-	adds r1, r0
-	ldr r1, [r1]
-	adds r0, r5, 0
-	bl SendMessage
-_0807FFFA:
-	cmp r4, 0
-	beq _08080020
-	mov r1, r8
-	ldrb r0, [r1, 0x1]
-	cmp r0, 0x2
-	bne _08080014
-	adds r0, r4, 0
-	movs r1, 0x1
-	bl sub_806F480
-	b _08080020
-	.align 2, 0
-_08080010: .4byte gUnknown_80FD7F8
-_08080014:
-	cmp r0, 0x1
-	bne _08080020
-	adds r0, r4, 0
-	movs r1, 0
-	bl sub_806F480
-_08080020:
-	mov r2, r8
-	ldrb r0, [r2]
-	cmp r0, 0x1B
-	bls _0808002A
-	b _08080194
-_0808002A:
-	lsls r0, 2
-	ldr r1, _08080034
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_08080034: .4byte _08080038
-	.align 2, 0
-_08080038:
-	.4byte _080800A8
-	.4byte _080800B2
-	.4byte _080800BC
-	.4byte _080800C6
-	.4byte _080800D0
-	.4byte _080800DA
-	.4byte _080800E6
-	.4byte _080800F0
-	.4byte _080800FA
-	.4byte _08080104
-	.4byte _0808010E
-	.4byte _08080118
-	.4byte _08080122
-	.4byte _0808012C
-	.4byte _08080136
-	.4byte _08080140
-	.4byte _0808014A
-	.4byte _08080168
-	.4byte _08080172
-	.4byte _08080180
-	.4byte _08080194
-	.4byte _08080194
-	.4byte _08080194
-	.4byte _08080194
-	.4byte _08080194
-	.4byte _08080194
-	.4byte _08080194
-	.4byte _080800DA
-_080800A8:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_8080A5C
-	b _08080194
-_080800B2:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_80801CC
-	b _08080194
-_080800BC:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_808024C
-	b _08080194
-_080800C6:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_8080418
-	b _08080194
-_080800D0:
-	adds r0, r5, 0
-	mov r1, r9
-	bl sub_8080620
-	b _0808017A
-_080800DA:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	ldr r2, [sp, 0x4]
-	bl sub_8080504
-	b _08080194
-_080800E6:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_8080374
-	b _08080194
-_080800F0:
-	mov r0, r10
-	adds r1, r4, 0
-	bl sub_8080884
-	b _08080194
-_080800FA:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_8080364
-	b _08080194
-_08080104:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_8080388
-	b _08080194
-_0808010E:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_80803B4
-	b _08080194
-_08080118:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_80807C0
-	b _08080194
-_08080122:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_80803C8
-	b _08080194
-_0808012C:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_80803D8
-	b _08080194
-_08080136:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_80803F8
-	b _08080194
-_08080140:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_8080700
-	b _08080194
-_0808014A:
-	cmp r4, 0
-	beq _08080194
-	ldr r0, _08080160
-	movs r2, 0
-	ldrsh r1, [r0, r2]
-	ldr r3, _08080164
-	adds r0, r4, 0
-	movs r2, 0xF
-	bl sub_806F324
-	b _08080194
-	.align 2, 0
-_08080160: .4byte gUnknown_80F4F86
-_08080164: .4byte 0x00000213
-_08080168:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_80807B4
-	b _08080194
-_08080172:
-	adds r0, r5, 0
-	mov r1, r9
-	bl sub_80808A4
-_0808017A:
-	movs r3, 0x1
-	str r3, [sp, 0x8]
-	b _08080194
-_08080180:
-	cmp r4, 0
-	beq _08080194
-	ldr r0, _080801C4
-	movs r2, 0
-	ldrsh r1, [r0, r2]
-	ldr r3, _080801C8
-	adds r0, r4, 0
-	movs r2, 0xA
-	bl sub_806F324
-_08080194:
-	adds r0, r4, 0
-	bl EntityExists
-	lsls r0, 24
-	cmp r0, 0
-	beq _080801A6
-	adds r0, r4, 0
-	bl sub_8071DA4
-_080801A6:
-	ldr r3, [sp, 0x8]
-	cmp r3, 0
-	beq _080801B4
-	mov r0, r9
-	movs r1, 0x1
-	bl sub_807FE04
-_080801B4:
-	add sp, 0x10
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080801C4: .4byte gUnknown_80F4F84
-_080801C8: .4byte 0x00000206
-	thumb_func_end sub_807FE9C
-
-	thumb_func_start sub_80801CC
-sub_80801CC:
+	thumb_func_start HandleMudTrap
+HandleMudTrap:
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
@@ -530,10 +70,10 @@ _08080240:
 	bx r0
 	.align 2, 0
 _08080248: .4byte gUnknown_8106A50
-	thumb_func_end sub_80801CC
+	thumb_func_end HandleMudTrap
 
-	thumb_func_start sub_808024C
-sub_808024C:
+	thumb_func_start HandleStickyTrap
+HandleStickyTrap:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -670,10 +210,10 @@ _0808034A:
 	.align 2, 0
 _0808035C: .4byte gUnknown_202DE58
 _08080360: .4byte gUnknown_80FDC18
-	thumb_func_end sub_808024C
+	thumb_func_end HandleStickyTrap
 
-	thumb_func_start sub_8080364
-sub_8080364:
+	thumb_func_start HandleSpinTrap
+HandleSpinTrap:
 	push {lr}
 	cmp r1, 0
 	beq _08080370
@@ -682,10 +222,10 @@ sub_8080364:
 _08080370:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8080364
+	thumb_func_end HandleSpinTrap
 
-	thumb_func_start sub_8080374
-sub_8080374:
+	thumb_func_start HandleWarpTrap
+HandleWarpTrap:
 	push {lr}
 	cmp r1, 0
 	beq _08080382
@@ -695,10 +235,10 @@ sub_8080374:
 _08080382:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8080374
+	thumb_func_end HandleWarpTrap
 
-	thumb_func_start sub_8080388
-sub_8080388:
+	thumb_func_start HandleSlumberTrap
+HandleSlumberTrap:
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -719,10 +259,10 @@ _080803A8:
 	bx r0
 	.align 2, 0
 _080803B0: .4byte gUnknown_80F4E74
-	thumb_func_end sub_8080388
+	thumb_func_end HandleSlumberTrap
 
-	thumb_func_start sub_80803B4
-sub_80803B4:
+	thumb_func_start HandleSlowTrap
+HandleSlowTrap:
 	push {lr}
 	cmp r1, 0
 	beq _080803C2
@@ -732,10 +272,10 @@ sub_80803B4:
 _080803C2:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80803B4
+	thumb_func_end HandleSlowTrap
 
-	thumb_func_start sub_80803C8
-sub_80803C8:
+	thumb_func_start HandlePoisonTrap
+HandlePoisonTrap:
 	push {lr}
 	cmp r1, 0
 	beq _080803D4
@@ -744,10 +284,10 @@ sub_80803C8:
 _080803D4:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80803C8
+	thumb_func_end HandlePoisonTrap
 
-	thumb_func_start sub_80803D8
-sub_80803D8:
+	thumb_func_start HandleSelfdestructTrap
+HandleSelfdestructTrap:
 	push {lr}
 	sub sp, 0x8
 	adds r2, r1, 0x4
@@ -762,10 +302,10 @@ sub_80803D8:
 	bx r0
 	.align 2, 0
 _080803F4: .4byte 0x00000212
-	thumb_func_end sub_80803D8
+	thumb_func_end HandleSelfdestructTrap
 
-	thumb_func_start sub_80803F8
-sub_80803F8:
+	thumb_func_start HandleExplosionTrap
+HandleExplosionTrap:
 	push {lr}
 	sub sp, 0x8
 	adds r2, r1, 0x4
@@ -780,10 +320,10 @@ sub_80803F8:
 	bx r0
 	.align 2, 0
 _08080414: .4byte 0x00000212
-	thumb_func_end sub_80803F8
+	thumb_func_end HandleExplosionTrap
 
-	thumb_func_start sub_8080418
-sub_8080418:
+	thumb_func_start HandleGrimyTrap
+HandleGrimyTrap:
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -905,7 +445,7 @@ _080804F0:
 	bx r0
 	.align 2, 0
 _08080500: .4byte gUnknown_80FD7AC
-	thumb_func_end sub_8080418
+	thumb_func_end HandleGrimyTrap
 
 	thumb_func_start sub_8080504
 sub_8080504:
@@ -1040,8 +580,8 @@ _08080618: .4byte gUnknown_80F970C
 _0808061C: .4byte 0x00000215
 	thumb_func_end sub_8080504
 
-	thumb_func_start sub_8080620
-sub_8080620:
+	thumb_func_start HandleSummonTrap
+HandleSummonTrap:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1148,10 +688,10 @@ _080806EA:
 	bx r0
 	.align 2, 0
 _080806FC: .4byte gUnknown_80FED00
-	thumb_func_end sub_8080620
+	thumb_func_end HandleSummonTrap
 
-	thumb_func_start sub_8080700
-sub_8080700:
+	thumb_func_start HandlePPZeroTrap
+HandlePPZeroTrap:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1240,19 +780,19 @@ _080807A4:
 	bx r0
 	.align 2, 0
 _080807B0: .4byte gUnknown_80FDAA0
-	thumb_func_end sub_8080700
+	thumb_func_end HandlePPZeroTrap
 
-	thumb_func_start sub_80807B4
-sub_80807B4:
+	thumb_func_start HandleWonderTile
+HandleWonderTile:
 	push {lr}
 	movs r2, 0
 	bl sub_8079E34
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80807B4
+	thumb_func_end HandleWonderTile
 
-	thumb_func_start sub_80807C0
-sub_80807C0:
+	thumb_func_start HandleSealTrap
+HandleSealTrap:
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1349,10 +889,10 @@ _08080870:
 	bx r0
 	.align 2, 0
 _08080880: .4byte gUnknown_80FDB2C
-	thumb_func_end sub_80807C0
+	thumb_func_end HandleSealTrap
 
-	thumb_func_start sub_8080884
-sub_8080884:
+	thumb_func_start HandleWhirlwindTrap
+HandleWhirlwindTrap:
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -1368,10 +908,10 @@ _0808089E:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8080884
+	thumb_func_end HandleWhirlwindTrap
 
-	thumb_func_start sub_80808A4
-sub_80808A4:
+	thumb_func_start HandlePokemonTrap
+HandlePokemonTrap:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1591,10 +1131,10 @@ _08080A46:
 	bx r0
 	.align 2, 0
 _08080A58: .4byte gUnknown_80FDAE4
-	thumb_func_end sub_80808A4
+	thumb_func_end HandlePokemonTrap
 
-	thumb_func_start sub_8080A5C
-sub_8080A5C:
+	thumb_func_start HandleTripTrap
+HandleTripTrap:
 	push {r4-r7,lr}
 	sub sp, 0xC
 	adds r7, r0, 0
@@ -1670,7 +1210,7 @@ _08080AEC:
 _08080AF4: .4byte gAdjacentTileOffsets
 _08080AF8: .4byte 0xffff0000
 _08080AFC: .4byte 0x0000ffff
-	thumb_func_end sub_8080A5C
+	thumb_func_end HandleTripTrap
 
 	thumb_func_start sub_8080B00
 sub_8080B00:

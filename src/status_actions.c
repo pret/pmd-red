@@ -50,7 +50,7 @@ extern void sub_8049BB0(s32, s32);
 extern s16 sub_8057600(Move*, u32);
 extern u32 sub_8055864(Entity *pokemon, Entity *target, Move *param_3, s32 param_4, s32 param_5);
 extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, Position *r3);
-extern void sub_807FE04(u32 *, u32);
+extern void sub_807FE04(Position *, u32);
 extern void sub_807DB74(Entity *);
 extern void SetMessageArgument(char[], Entity*, u32);
 extern void HandleLuminousOrbAction(Entity *pokemon);
@@ -972,7 +972,7 @@ bool8 LuminousOrbAction(Entity * pokemon, Entity * target)
     return TRUE;
 }
 
-bool8 sub_805BEAC(Entity * pokemon, Entity * target)
+bool8 PetrifyOrbAction(Entity * pokemon, Entity * target)
 {
     PetrifiedStatusTarget(pokemon, target);
     return TRUE;
@@ -1019,7 +1019,7 @@ bool8 TrapbustOrbAction(Entity * pokemon,Entity * target)
     s32 xCoord, yCoord;
     struct RoomData *room;
     s32 topLeftCornerX, topLeftCornerY;
-    u32 sp;
+    Position pos;
     bool8 foundTrap = FALSE;
     tile = GetTileAtEntitySafe(target);
     if (IsBossFight()) {
@@ -1047,8 +1047,9 @@ bool8 TrapbustOrbAction(Entity * pokemon,Entity * target)
                 object = GetTileSafe(xCoord, yCoord)->object;
                 if (((object != 0) && (GetEntityType(object) == ENTITY_TRAP)) &&
                     (trapData = GetTrapData(object), trapData->id != TRAP_WONDER_TILE)) {
-                    sp = yCoord << 0x10 | (u16)xCoord;
-                    sub_807FE04(&sp, 0);
+                    pos.y = yCoord;
+                    pos.x = xCoord;
+                    sub_807FE04(&pos, 0);
                     foundTrap = TRUE;
                 }
             }
@@ -1096,7 +1097,7 @@ bool8 sub_805C080(Entity * pokemon, Entity *target)
     return foundTarget;
 }
 
-bool8 sub_805C128(Entity * pokemon, Entity * target)
+bool8 InvisifyOrbAction(Entity * pokemon, Entity * target)
 {
     InvisibleStatusTarget(pokemon, pokemon);
     return TRUE;

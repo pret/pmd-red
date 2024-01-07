@@ -5094,7 +5094,7 @@ _08055058:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805BEAC
+	bl PetrifyOrbAction 
 	b _080554BA
 _08055066:
 	adds r0, r7, 0
@@ -5264,7 +5264,7 @@ _080551AC:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805C128
+	bl InvisifyOrbAction 
 	b _080554BA
 _080551BA:
 	adds r0, r7, 0

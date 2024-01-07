@@ -6,6 +6,7 @@
 #include "dungeon_random.h"
 #include "items.h"
 #include "structs/map.h"
+#include "trap.h"
 
 extern u8 *gUnknown_80FE6F4[];
 extern struct unkStruct_8090F58 gUnknown_80F699C;
@@ -13,7 +14,6 @@ extern struct unkStruct_8090F58 gUnknown_80F69A8;
 extern struct unkStruct_8090F58 gUnknown_80F6990;
 
 extern void SetMessageArgument_2(u8 *, EntityInfo *, u32);
-extern void GetTrapName(u8 *, u8);
 extern bool8 IsNotSpecialItem(u8 id);
 void sub_8045BF8(u8 *, Item *);
 void sub_8046CE4(void *param_1,u32 param_2);
