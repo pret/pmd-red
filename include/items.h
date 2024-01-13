@@ -59,6 +59,7 @@ bool8 AddKecleonWareItem(u8 itemIndex);
 void FillInventoryGaps();
 bool8 AddHeldItemToInventory(BulkItem* slot);
 bool8 IsNotMoneyOrUsedTMItem(u8 id);
+bool8 IsNotSpecialItem(u8 id);
 s32 FindItemInInventory(u8 id);
 bool8 IsHMItem(u8 id);
 bool8 IsEdibleItem(u8 id);
