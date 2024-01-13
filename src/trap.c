@@ -8,6 +8,7 @@
 #include "items.h"
 #include "code_808417C.h"
 
+#include "dungeon_engine.h"
 #include "dungeon_items.h"
 #include "dungeon_random.h"
 #include "dungeon_map_access.h"
@@ -29,19 +30,35 @@ extern s16 gUnknown_80F4E74[];
 extern u8 *gUnknown_80FDC18[];
 extern u8 *gUnknown_80FDC40[];
 extern u8 *gUnknown_80FDC7C[];
+extern u8 *gUnknown_80FD7AC[];
+extern u8 *gUnknown_80FD788[];
+extern u8 *gUnknown_80FD7D4[];
+extern u8 *gUnknown_80F970C[];
+extern u8 *gUnknown_80F9728[];
+extern u8 *gUnknown_80FED0C[];
 
+extern s16 gUnknown_80F4E0E;
 extern s16 gUnknown_80F4F84;
 extern s16 gUnknown_80F4F86;
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
+extern s16 gUnknown_80F4F8A;
 
+bool8 sub_8045888(Entity *);
+void sub_8080B00(Tile *, u32);
+void sub_803E708(u32, u32);
+u8 sub_8043D10(void);
+void SetMessageArgument(u8 *, Entity *, u32);
+void sub_8068FE0(Entity *, u32, Entity *);
+void sub_805239C(Entity *, u8 *);
+void sub_8045C28(Item *, u8 , u8);
 void sub_8045BF8(u8 *, Item *);
 void HandleTripTrap(Entity *pokemon,Entity *target);
 void HandleMudTrap(Entity *pokemon,Entity *target);
 void HandleStickyTrap(Entity *pokemon,Entity *target);
 void HandleGrimyTrap(Entity *pokemon,Entity *target);
 void HandleSummonTrap(Entity *pokemon,Position *pos);
-void sub_8080504(Entity *pokemon,Entity *target,Tile *tile);
+void HandlePitfallTrap(Entity *pokemon,Entity *target,Tile *tile);
 void HandleWarpTrap(Entity *pokemon,Entity *target);
 void HandleWhirlwindTrap(Entity *entity,Entity *target);
 void HandleSpinTrap(Entity *pokemon,Entity *target);
@@ -284,7 +301,7 @@ void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4)
             break;
         case TRAP_PITFALL_TRAP:
         case 0x1B: // ???
-            sub_8080504(pokemon,target,tile);
+            HandlePitfallTrap(pokemon,target,tile);
             break;
         case TRAP_WARP_TRAP:
             HandleWarpTrap(pokemon,target);
@@ -366,6 +383,8 @@ void HandleMudTrap(Entity *pokemon, Entity *target)
         }
     }
 }
+
+// https://decomp.me/scratch/Yq32k (Seth)
 
 #ifdef NONMATCHING
 void HandleStickyTrap(Entity *pokemon,Entity *target)
@@ -594,13 +613,109 @@ void HandlePoisonTrap(Entity *pokemon, Entity *target)
         PoisonedStatusTarget(pokemon, target, TRUE);
 }
 
-void HandleSelfdestructTrap(Entity *pokemon,Entity *target)
+void HandleSelfdestructTrap(Entity *pokemon, Entity *target)
 {
-  sub_807DF38(pokemon, target, &target->pos, 1, TYPE_NONE, 0x212);
+    sub_807DF38(pokemon, target, &target->pos, 1, TYPE_NONE, 0x212);
 }
 
-void HandleExplosionTrap(Entity *pokemon,Entity *target)
+void HandleExplosionTrap(Entity *pokemon, Entity *target)
 {
-  sub_807DF38(pokemon, target, &target->pos, 2, TYPE_NONE, 0x212);
+    sub_807DF38(pokemon, target, &target->pos, 2, TYPE_NONE, 0x212);
 }
 
+void HandleGrimyTrap(Entity *pokemon, Entity *target)
+{
+    Item *item;
+    Item *heldItem;
+    int counter;
+    int index;
+    EntityInfo *info;
+    int badFoodCount;
+    Item *itemStack [22];
+
+    badFoodCount = 0;
+    if (target != NULL) {
+        info = target->info;
+        counter = 0;
+        if (info->isTeamLeader) {
+            for(index = 0; index < INVENTORY_SIZE; index++)
+            {
+                item = &gTeamInventoryRef->teamItems[index];
+                if ((item->flags & ITEM_FLAG_EXISTS)) {
+                    itemStack[counter] = item;
+                    counter++;
+                }
+            }
+        }
+        heldItem = &info->heldItem;
+        if ((heldItem->flags & ITEM_FLAG_EXISTS)) {
+            itemStack[counter] = heldItem;
+            counter++;
+        }
+        for (index = 0; index < counter; index++) {
+            if (((GetItemCategory(itemStack[index]->id) == CATEGORY_FOOD_GUMMIES) && (itemStack[index]->id != ITEM_GRIMY_FOOD)) &&
+                (DungeonRandInt(100) < gUnknown_80F4E0E)) {
+                badFoodCount++;
+                sub_8045C28(itemStack[index], ITEM_GRIMY_FOOD, 2);
+            }
+        }
+        if (badFoodCount == 1) {
+            sub_80522F4(pokemon,target,*gUnknown_80FD788); // A food item went bad.
+        }
+        else if (badFoodCount == 0) {
+            sub_80522F4(pokemon,target,*gUnknown_80FD7D4); // Nothing particularly bad happened.
+        }
+        else
+        {
+            sub_80522F4(pokemon,target,*gUnknown_80FD7AC); // Several food items went bad
+        }
+    }
+}
+
+void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
+{
+    bool8 flag;
+    EntityInfo *info;
+
+    flag = FALSE;
+    if (target != NULL) {
+        if (IsBossFight()) {
+            SendMessage(pokemon,*gUnknown_80FED0C); // But nothing happened...
+        }
+        else
+        {
+            info = target->info;
+            if (sub_8045888(target)) {
+                sub_8080B00(tile, 0x1B);
+                flag = TRUE;
+                sub_80421C0(target,0x193);
+                sub_803E708(0x1e,0x48);
+            }
+            if (info->isTeamLeader) {
+                if (sub_8043D10() != 2) {
+                    info->unk15C = 1;
+                    info->unk15E = 1;
+                    sub_803E708(0x28,0x4b);
+                    sub_806F324(target,gUnknown_80F4F8A,0x11,0x215);
+                    gDungeon->unk2 = 2;
+                    return;
+                }
+                SendMessage(pokemon,*gUnknown_80F9728);
+            }
+            else
+            {
+                SetMessageArgument(gAvailablePokemonNames,target,0);
+                if (info->isNotTeamMember) {
+                    sub_80522F4(pokemon,target,*gUnknown_80F970C); // $m0 fell into the pitfall!
+                }
+                else {
+                    sub_805239C(pokemon,*gUnknown_80F970C); // $m0 fell into the pitfall!
+                }
+                sub_8068FE0(target,0x215,pokemon);
+            }
+            if (flag) {
+                sub_8080B00(tile, 5);
+            }
+        }
+    }
+}
