@@ -421,11 +421,10 @@ void sub_809CB8C(void) {
     sub_80015C0(0, 0x3D);
 }
 
-bool8 sub_809CBA4(u8 param_1)
+bool8 sub_809CBA4(u8 item)
 {
-  
-  if(FindItemInInventory(param_1) >= 0)
-        return 1;
-  else
-        return 0;
+    if(FindItemInInventory(item) >= 0)
+        return TRUE;
+    else
+        return FALSE;
 }
