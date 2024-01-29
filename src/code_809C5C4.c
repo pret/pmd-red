@@ -1,7 +1,9 @@
 #include "global.h"
+#include "items.h"
 #include "memory.h"
 #include "game_options.h"
 #include "ground_main.h"
+#include "code_80A26CC.h"
 
 struct unkStruct_3001B68  
 { 
@@ -13,8 +15,8 @@ struct unkStruct_3001B68
      u8  unkD;
      u8  unkE;     
      u32 unk10;   
-     u16 unk14;   
-     u16 unk16;   
+     s16 unk14;   
+     s16 unk16;   
      u8  unk18;
      u8  unk19;   
      u32 unk1C;   
@@ -22,6 +24,17 @@ struct unkStruct_3001B68
 };
 
 extern struct unkStruct_3001B68 *gUnknown_3001B68;
+
+
+struct unkStruct_20399E0
+{ 
+     u32 unk0;
+     s32 unk4;     
+     u32 unk8;     
+};
+
+extern struct unkStruct_20399E0 *gUnknown_20399E0;
+
 
 void sub_809C63C();
 u8 sub_809C740(void);
@@ -35,6 +48,11 @@ void nullsub_113();
 void nullsub_114();
 void nullsub_115();
 void nullsub_116();
+
+// Event_flag.h
+u8 sub_8002658(s16);
+s16 sub_8001658(u32, u32);
+extern void sub_80015C0(u32, u32);
 
 void sub_809C5C4(void)
 {
@@ -149,4 +167,265 @@ void nullsub_104(void)
 void sub_809C760(void)
 {
     gUnknown_3001B68->unkE = 1;
+}
+
+void sub_809C770(s16 param_1, s16 param_2)
+{
+    u8 uVar2;
+    u8 uVar3;
+    s32 iVar5;
+    u32 uVar6;
+
+    s32 param_1_s32;
+    s32 param_2_s32;
+
+    param_1_s32 = param_1;
+    param_2_s32 = param_2;
+
+    if (gUnknown_3001B68->unkE != 0) {
+        gUnknown_3001B68->unkE = 0;
+        return;
+    }
+    if (gUnknown_3001B68->unk8 == 0) {
+        sub_809C6EC();
+    }
+    uVar2 = gUnknown_3001B68->unk18;
+    uVar3 = gUnknown_3001B68->unk19;
+    switch(param_2_s32) {
+        case 9:
+            uVar2 = sub_8002658(param_1_s32);
+            if (uVar2 == 0) {
+                return;
+            }
+            uVar6 = 1;
+            break;
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 10:
+        case 0xb:
+            uVar6 = 1;
+            uVar2 = 0;
+            break;
+        case 0x23:
+            switch((s16)(param_1_s32)) {
+                case 0xA4:
+                case 0xA5:
+                case 0xA8:
+                case 0xA9:
+                case 0xAA:
+                case 0xAE:
+                case 0xAF:
+                case 0xB0:
+                case 0xB1:
+                    uVar6 = 0;
+                    break;
+                default:
+                    return;
+            }
+            break;
+        case 0x24:
+        case 0x25:
+        case 0x26:
+            uVar6 = 0;
+            break;
+        default:
+            switch((s16)(param_2_s32 - 0xc)) {
+                case 1:
+                    iVar5 = 0;
+                    break;
+                case 6:
+                case 7:
+                    iVar5 = 7;
+                    break;
+                case 8:
+                case 9:
+                    iVar5 = 9;
+                    break;
+                case 10:
+                    iVar5 = 10;
+                    break;
+                case 0xc:
+                case 0xd:
+                    iVar5 = 0xb;
+                    break;
+                case 0xe:
+                case 0xf:
+                    iVar5 = 0xd;
+                    break;
+                case 0x10:
+                case 0x11:
+                    iVar5 = 0xf;
+                    break;
+                case 0x12:
+                case 0x13:
+                    iVar5 = 0x11;
+                    break;
+                case 0x14:
+                case 0x15:
+                    iVar5 = 0x13;
+                    break;
+                case 0x16:
+                    iVar5 = 0x20;
+                    break;
+                case 0:
+                default:
+                    iVar5 = sub_8001658(0,0x13);
+                    break;
+
+            }
+            if (iVar5 == -1) {
+                return;
+            }
+            uVar3 = sub_80A2740(iVar5);
+            uVar6 = 2;
+            break;
+    }
+    if (gUnknown_3001B68->unk10 != uVar6) {
+        gUnknown_3001B68->unk0 = 2;
+        gUnknown_3001B68->unkC = 1;
+        gUnknown_3001B68->unk20 = 1;
+    }
+    else
+    {
+        if (uVar6 == 1) {
+            if ((uVar2 != gUnknown_3001B68->unk18) ||
+                (gUnknown_3001B68->unk14 != param_1_s32)) {
+                gUnknown_3001B68->unkC = 1;
+                gUnknown_3001B68->unk20 = 1;
+            }
+            else {
+                if ((uVar2 == 0) && (gUnknown_3001B68->unk16 != param_2_s32)) {
+                    gUnknown_3001B68->unkC = 1;
+                }
+            }
+        }
+        else if ((uVar6 == 2) &&
+            ((uVar3 != gUnknown_3001B68->unk19 || (gUnknown_3001B68->unk16 != param_2_s32))))
+        {
+            gUnknown_3001B68->unkC = 1;
+            gUnknown_3001B68->unk20 = 1;
+        }
+    }
+    if (gUnknown_3001B68->unkC != 0) {
+        gUnknown_3001B68->unk10 = uVar6;
+        gUnknown_3001B68->unk14 = param_1_s32;
+        gUnknown_3001B68->unk16 = param_2_s32;
+        gUnknown_3001B68->unk18 = uVar2;
+        gUnknown_3001B68->unk19 = uVar3;
+        if (gUnknown_3001B68->unk8 != 4) {
+            gUnknown_3001B68->unkC = 0;
+            gUnknown_3001B68->unk20 = 0;
+        }
+    }
+}
+
+void nullsub_105(void) {}
+
+void sub_809CA20(void)
+{
+    u16 *puVar1;
+
+    if (gUnknown_3001B68->unk0 != 0) {
+        gUnknown_3001B68->unk0 = 0;
+        gUnknown_3001B68->unk4 = 0x1f;
+        gUnknown_3001B68->unkC = 1;
+    }
+    if (gUnknown_3001B68->unkC != 0) {
+        puVar1 = &gUnknown_3001B68->unk8;
+        gUnknown_3001B68->unkA = *puVar1;
+        if ((*puVar1 == 4) && (gUnknown_3001B68->unk10 == 0)) {
+            gUnknown_3001B68->unkA = 2;
+            gUnknown_3001B68->unk1C = 0;
+            gUnknown_3001B68->unk20 = 0;
+        }
+        switch(gUnknown_3001B68->unkA) {
+            case 3:
+                nullsub_111();
+                nullsub_113();
+                nullsub_112();
+                gUnknown_3001B68->unkD = 1;
+                break;
+            case 4:
+                nullsub_114();
+                nullsub_115();
+                nullsub_116();
+                break;
+            case 2:
+                nullsub_109();
+                nullsub_110();
+                break;
+            case 5:
+                nullsub_107();
+                nullsub_108();
+                break;
+            case 0:
+            case 1:
+                nullsub_107();
+                nullsub_108();
+                break;
+        }
+        gUnknown_3001B68->unkC = 0;
+
+    }
+    else {
+        switch(gUnknown_3001B68->unkA) {
+            case 3:
+                nullsub_113();
+                break;
+            case 4:
+                nullsub_116();
+            case 0:
+            case 1:
+            case 2:
+            case 5:
+                break;
+        }
+    }
+}
+
+
+void nullsub_106(void) {}
+void nullsub_107(void) {}
+void nullsub_108(void) {}
+void nullsub_109(void) {}
+void nullsub_110(void) {}
+void nullsub_111(void) {}
+void nullsub_112(void) {}
+void nullsub_113(void) {}
+void nullsub_114(void) {}
+void nullsub_115(void) {}
+void nullsub_116(void) {}
+
+void sub_809CB50(void)
+{
+    gUnknown_20399E0 = MemoryAlloc(sizeof(struct unkStruct_20399E0), 6);
+    gUnknown_20399E0->unk4 = -1;
+    gUnknown_20399E0->unk8 = 0;
+}
+
+void sub_809CB74(void) {
+    MemoryFree(gUnknown_20399E0);
+    gUnknown_20399E0 = NULL;
+}
+
+
+void sub_809CB8C(void) {
+    sub_80015C0(0, 0x3B);
+    sub_80015C0(0, 0x3D);
+}
+
+bool8 sub_809CBA4(u8 param_1)
+{
+  
+  if(FindItemInInventory(param_1) >= 0)
+        return 1;
+  else
+        return 0;
 }
