@@ -931,7 +931,7 @@ bool8 IsTargetInRange(Entity *pokemon, Entity *targetPokemon, s32 direction, s32
     return FALSE;
 }
 
-void sub_807CABC(Entity *target)
+void HandleUseMoveAIAction(Entity *target)
 {
     EntityInfo *entityInfo;
     s32 counter;
@@ -959,7 +959,7 @@ void sub_807CABC(Entity *target)
 }
 
 #if NONMATCHING // 99.09% https://decomp.me/scratch/rpwXh
-void sub_807CB3C(Entity *pokemon)
+void HandleUseOrbAction(Entity *pokemon)
 {
     bool8 r4;
     Item *item;
@@ -1058,7 +1058,7 @@ void sub_807CB3C(Entity *pokemon)
 }
 #else
 NAKED
-void sub_807CB3C(Entity *pokemon)
+void HandleUseOrbAction(Entity *pokemon)
 {
     asm_unified(
     "push {r4-r7,lr}\n"

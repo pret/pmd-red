@@ -299,29 +299,4 @@ _080140AC: .4byte 0x00003fff
 _080140B0: .4byte 0x00000fff
 	thumb_func_end sub_8013F84
 
-	thumb_func_start sub_80140B4
-sub_80140B4:
-	push {r4-r7,lr}
-	ldr r4, _080140D8
-	adds r2, r0, 0
-	movs r3, 0x3
-_080140BC:
-	adds r1, r2, 0
-	adds r0, r4, 0
-	ldm r0!, {r5-r7}
-	stm r1!, {r5-r7}
-	ldm r0!, {r5-r7}
-	stm r1!, {r5-r7}
-	adds r4, 0x18
-	adds r2, 0x18
-	subs r3, 0x1
-	cmp r3, 0
-	bge _080140BC
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080140D8: .4byte gUnknown_80D47C8
-	thumb_func_end sub_80140B4
-
     .align 2,0

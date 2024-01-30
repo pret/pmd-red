@@ -50,7 +50,7 @@ extern void sub_8049BB0(s32, s32);
 extern s16 sub_8057600(Move*, u32);
 extern u32 sub_8055864(Entity *pokemon, Entity *target, Move *param_3, s32 param_4, s32 param_5);
 extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, Position *r3);
-extern void sub_807FE04(u32 *, u32);
+extern void sub_807FE04(Position *, u32);
 extern void sub_807DB74(Entity *);
 extern void SetMessageArgument(char[], Entity*, u32);
 extern void HandleLuminousOrbAction(Entity *pokemon);
@@ -86,7 +86,6 @@ extern void SqueezedStatusTarget(Entity *, Entity *, s32, bool32);
 extern void sub_806F324(Entity *, s32, u32, u32);
 extern bool8 sub_805755C(Entity* pokemon,u16 moveID);
 extern void sub_80783C4(Entity *, Entity *, u32);
-extern bool8 sub_807FCD4(Position *, u32, u8);
 extern void sub_807CD9C(Entity *, Entity *, u8 direction);
 
 
@@ -309,7 +308,7 @@ bool8 sub_805B214(Entity * pokemon,Entity * target,Move *move, s32 param_4)
     return TRUE;
 }
 
-bool8 TrapperOrbAction(Entity * pokemon, Entity * target)
+bool8 SpikesMoveAction(Entity * pokemon, Entity * target)
 {
     bool8 trapLaid;
     u8 uVar2;
@@ -322,7 +321,7 @@ bool8 TrapperOrbAction(Entity * pokemon, Entity * target)
     if (isNotTeamMember) {
         uVar2 = 2;
     }
-    if (sub_807FCD4(&pokemon->pos,0x13,uVar2) != 0) {
+    if (LayTrap(&pokemon->pos,TRAP_SPIKE_TRAP,uVar2) != 0) {
         trapLaid = TRUE;
     }
     else
@@ -973,7 +972,7 @@ bool8 LuminousOrbAction(Entity * pokemon, Entity * target)
     return TRUE;
 }
 
-bool8 sub_805BEAC(Entity * pokemon, Entity * target)
+bool8 PetrifyOrbAction(Entity * pokemon, Entity * target)
 {
     PetrifiedStatusTarget(pokemon, target);
     return TRUE;
@@ -1015,12 +1014,12 @@ bool8 TrapbustOrbAction(Entity * pokemon,Entity * target)
 {
     struct Tile *tile;
     Entity *object;
-    u8 *trapData;
+    Trap *trapData;
     s32 bottomRightCornerX, bottomRightCornerY;
     s32 xCoord, yCoord;
     struct RoomData *room;
     s32 topLeftCornerX, topLeftCornerY;
-    u32 sp;
+    Position pos;
     bool8 foundTrap = FALSE;
     tile = GetTileAtEntitySafe(target);
     if (IsBossFight()) {
@@ -1047,9 +1046,10 @@ bool8 TrapbustOrbAction(Entity * pokemon,Entity * target)
             for (yCoord = bottomRightCornerY; yCoord <= topLeftCornerY; yCoord++) {
                 object = GetTileSafe(xCoord, yCoord)->object;
                 if (((object != 0) && (GetEntityType(object) == ENTITY_TRAP)) &&
-                    (trapData = (u8*)GetTrapData(object), trapData[0] != 0x11)) {
-                    sp = yCoord << 0x10 | (u16)xCoord;
-                    sub_807FE04(&sp, 0);
+                    (trapData = GetTrapData(object), trapData->id != TRAP_WONDER_TILE)) {
+                    pos.y = yCoord;
+                    pos.x = xCoord;
+                    sub_807FE04(&pos, 0);
                     foundTrap = TRUE;
                 }
             }
@@ -1097,7 +1097,7 @@ bool8 sub_805C080(Entity * pokemon, Entity *target)
     return foundTarget;
 }
 
-bool8 sub_805C128(Entity * pokemon, Entity * target)
+bool8 InvisifyOrbAction(Entity * pokemon, Entity * target)
 {
     InvisibleStatusTarget(pokemon, pokemon);
     return TRUE;
@@ -1214,11 +1214,11 @@ bool8 FillInOrbAction(Entity *pokemon,Entity *target)
     }
 }
 
-bool8 sub_805C3DC(Entity *pokemon, Entity *target)
+bool8 TrapperOrbAction(Entity *pokemon, Entity *target)
 {
     u32 var;
     var = (target->info->isNotTeamMember ? 2 : 1);
-    sub_807FC3C(&target->pos, 0x14, var);
+    sub_807FC3C(&target->pos, NUM_TRAPS, var);
     return TRUE;
 }
 

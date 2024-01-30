@@ -50,7 +50,7 @@ void sub_804AAD4(void)
     s32 maxRooms;
     s32 index;
 
-    for(index = 0; index < 0x20; index++)
+    for(index = 0; index < MAX_ROOM_COUNT; index++)
     {
         gDungeon->roomData[index].unk0 = 0;
         gDungeon->roomData[index].unk1 = 0;
@@ -90,7 +90,7 @@ void sub_804AAD4(void)
     }
 
 
-    for(index = 0; index < 0x20; index++)
+    for(index = 0; index < MAX_ROOM_COUNT; index++)
     {
         room2 = &gDungeon->roomData[index];
         if(room2 ->unk0 != 0)

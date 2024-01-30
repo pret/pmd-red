@@ -217,6 +217,8 @@ SECTIONS {
         src/dungeon_map_access_1.o(.text);
         src/tile_types.o(.text);
         asm/code_804AFAC.o(.text);
+        src/code_804AFAC.o(.text);
+        asm/code_804FD30.o(.text);
         src/code_80521D0.o(.text);
         asm/code_80521D0.o(.text);
         src/charge_move.o(.text);
@@ -272,7 +274,7 @@ SECTIONS {
         asm/code_807FCD4.o(.text);
         src/code_8083288.o(.text);
         src/dungeon_range.o(.text);
-        asm/code_808333C.o(.text);
+        src/code_808333C.o(.text);
         src/dungeon_leader.o(.text);
         asm/code_8083654.o(.text);
         src/dungeon_music.o(.text);
@@ -327,6 +329,10 @@ SECTIONS {
         asm/code_8098468.o(.text);
         src/ground_main.o(.text);
         asm/code_8098BDC.o(.text);
+        src/code_809A560.o(.text);
+        asm/code_809A560.o(.text);
+        src/code_809C5C4.o(.text);
+        asm/code_809C5C4.o(.text);
         src/code_809D148.o(.text);
         asm/code_809D148.o(.text);
         src/ground_script.o(.text);

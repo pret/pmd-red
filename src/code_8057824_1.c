@@ -456,6 +456,9 @@ extern void sub_808BB3C(Position *);
 extern void sub_8046860(Entity *, Position *, Item *, u32);
 extern u32 sub_803D73C(u32);
 
+extern void sub_80460F8(Position *, Item *, u8);
+extern void sub_807FE04(Position *, u8);
+
 void ZapdosReFightDialogue(void)
 {
   Entity *LeaderEntity;
@@ -3169,7 +3172,7 @@ void sub_808AE54(char param_1,char param_2,u32 *param_3)
   LeaderEntity = xxx_call_GetLeader();
   sub_8052D44(IDStack,LeaderEntity,0);
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x2E) && (param_1 == 0x17)) {
-    sub_808B1CC(0);
+    sub_808B1CC(ITEM_NOTHING);
     if (sub_8098100(0x1d) == 0) {
       xxx_init_itemslot_8090A8C(&item,ITEM_ROCK_PART,0);
       sub_80464C8(GetLeader(),param_3,&item);
@@ -3192,7 +3195,7 @@ void sub_808AEC8(char param_1,char param_2,u32 *param_3)
   LeaderEntity = xxx_call_GetLeader();
   sub_8052D44(IDStack,LeaderEntity,0);
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x2F) && (param_1 == 0x18)) {
-    sub_808B1CC(0);
+    sub_808B1CC(ITEM_NOTHING);
     if (sub_8098100(0x1d) == 0) {
       xxx_init_itemslot_8090A8C(&item,ITEM_ICE_PART,0);
       sub_80464C8(GetLeader(),param_3,&item);
@@ -3214,7 +3217,7 @@ void sub_808AF3C(char param_1,char param_2,u32 *param_3)
   LeaderEntity = xxx_call_GetLeader();
   sub_8052D44(IDStack,LeaderEntity,0);
   if ((sub_8098100(0x22) == 0) && (param_2 == 0x30) && (param_1 == 0x19)) {
-    sub_808B1CC(0);
+    sub_808B1CC(ITEM_NOTHING);
     if (sub_8098100(0x1d) == 0) {
       xxx_init_itemslot_8090A8C(&item,ITEM_STEEL_PART,0);
       sub_80464C8(GetLeader(),param_3, &item);
@@ -3316,117 +3319,36 @@ void RegisteelPreFightDialogue(void)
   }
 }
 
-NAKED
-void sub_808B1CC(u8 r0)
+void sub_808B1CC(u8 itemID)
 {
-    asm_unified(
-	"\tpush {r4-r7,lr}\n"
-	"\tsub sp, 0x8\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r6, r0, 24\n"
-	"\tldr r7, _0808B21C\n"
-	"\tldr r2, [r7]\n"
-	"\tldr r1, _0808B220\n"
-	"\tadds r0, r2, r1\n"
-	"\tldrh r0, [r0]\n"
-	"\tldr r5, _0808B224\n"
-	"\tldr r1, [sp]\n"
-	"\tands r1, r5\n"
-	"\torrs r1, r0\n"
-	"\tstr r1, [sp]\n"
-	"\tldr r3, _0808B228\n"
-	"\tadds r2, r3\n"
-	"\tldrh r0, [r2]\n"
-	"\tlsls r0, 16\n"
-	"\tldr r4, _0808B22C\n"
-	"\tadds r2, r4, 0\n"
-	"\tands r2, r1\n"
-	"\torrs r2, r0\n"
-	"\tstr r2, [sp]\n"
-	"\tmov r0, sp\n"
-	"\tmovs r1, 0\n"
-	"\tldrsh r0, [r0, r1]\n"
-	"\tcmp r0, 0\n"
-	"\tblt _0808B208\n"
-	"\tcmp r2, 0\n"
-	"\tbge _0808B244\n"
-"_0808B208:\n"
-	"\tbl GetLeader\n"
-	"\tadds r2, r0, 0\n"
-	"\tcmp r2, 0\n"
-	"\tbne _0808B230\n"
-	"\tldr r1, [r7]\n"
-	"\tmovs r0, 0x1\n"
-	"\tstrb r0, [r1, 0x2]\n"
-	"\tb _0808B2A8\n"
-	"\t.align 2, 0\n"
-"_0808B21C: .4byte gDungeon\n"
-"_0808B220: .4byte 0x00000684\n"
-"_0808B224: .4byte 0xffff0000\n"
-"_0808B228: .4byte 0x00000686\n"
-"_0808B22C: .4byte 0x0000ffff\n"
-"_0808B230:\n"
-	"\tldrh r0, [r2, 0x4]\n"
-	"\tldr r1, [sp]\n"
-	"\tands r1, r5\n"
-	"\torrs r1, r0\n"
-	"\tstr r1, [sp]\n"
-	"\tldrh r0, [r2, 0x6]\n"
-	"\tlsls r0, 16\n"
-	"\tands r1, r4\n"
-	"\torrs r1, r0\n"
-	"\tstr r1, [sp]\n"
-"_0808B244:\n"
-	"\tmov r5, sp\n"
-	"\tmov r0, sp\n"
-	"\tmovs r1, 0\n"
-	"\tbl sub_807FE04\n"
-	"\tmov r0, sp\n"
-	"\tmovs r2, 0\n"
-	"\tldrsh r0, [r0, r2]\n"
-	"\tmovs r3, 0x2\n"
-	"\tldrsh r1, [r5, r3]\n"
-	"\tbl GetTileSafe\n"
-	"\tldrh r2, [r0]\n"
-	"\tmovs r3, 0x80\n"
-	"\tlsls r3, 2\n"
-	"\tadds r1, r3, 0\n"
-	"\torrs r1, r2\n"
-	"\tstrh r1, [r0]\n"
-	"\tcmp r6, 0\n"
-	"\tbeq _0808B2A0\n"
-	"\tadds r0, r6, 0\n"
-	"\tbl sub_80860A8\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0808B2A0\n"
-	"\tmovs r0, 0x7A\n"
-	"\tbl sub_80860A8\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0808B2A0\n"
-	"\tadd r4, sp, 0x4\n"
-	"\tadds r0, r4, 0\n"
-	"\tadds r1, r6, 0\n"
-	"\tmovs r2, 0\n"
-	"\tbl xxx_init_itemslot_8090A8C\n"
-	"\tldrh r0, [r5, 0x2]\n"
-	"\tsubs r0, 0x1\n"
-	"\tstrh r0, [r5, 0x2]\n"
-	"\tmov r0, sp\n"
-	"\tadds r1, r4, 0\n"
-	"\tmovs r2, 0x1\n"
-	"\tbl sub_80460F8\n"
-"_0808B2A0:\n"
-	"\tbl sub_8049ED4\n"
-	"\tbl sub_8040A84\n"
-"_0808B2A8:\n"
-	"\tadd sp, 0x8\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0");
-}
+    Entity *entity;
+    Tile *tile;
+    Position pos;
+    Item item;
 
+    pos.x = gDungeon->unk684;
+    pos.y = gDungeon->unk686;
+    if ((pos.x < 0) || (pos.y  < 0)) {
+        entity = GetLeader();
+        if (entity == NULL) {
+            gDungeon->unk2 = 1;
+            return;
+        }
+        pos.x = entity->pos.x;
+        pos.y = entity->pos.y;    
+    }
+    sub_807FE04(&pos, 0);
+    tile = GetTileSafe(pos.x, pos.y);
+    tile->terrainType = tile->terrainType | TERRAIN_TYPE_STAIRS;
+    if (((itemID != ITEM_NOTHING) && (sub_80860A8(itemID) == 0)) &&
+        (sub_80860A8(ITEM_MUSIC_BOX) == 0)) {
+        xxx_init_itemslot_8090A8C(&item,itemID,0);
+        pos.y--;
+        sub_80460F8(&pos,&item,1);
+    }
+    sub_8049ED4();
+    sub_8040A84();
+}
 
 void SetupRegiFacingDirection(Entity *regiEntity)
 {

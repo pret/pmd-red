@@ -28,7 +28,7 @@ bool8 RadarOrbAction(Entity *pokemon, Entity *target);
 bool8 TransferOrbAction(Entity *pokemon,Entity *target);
 bool8 sub_805BE90(Entity *pokemon, Entity *target);
 bool8 LuminousOrbAction(Entity *pokemon,Entity *target);
-bool8 sub_805BEAC(Entity *pokemon, Entity *target);
+bool8 PetrifyOrbAction(Entity *pokemon, Entity *target);
 bool8 sub_805BEB8(Entity *pokemon, Entity *target);
 bool8 sub_805BEC8(Entity *pokemon, Entity *target);
 bool8 EscapeOrbAction(Entity *pokemon,Entity *target);

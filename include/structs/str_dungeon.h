@@ -119,7 +119,9 @@ typedef struct Dungeon
     u8 unk678;
     u8 unk679;
     u8 unk67A;
-    u8 unk67B[0x688 - 0x67B];
+    u8 unk67B[0x684 - 0x67B];
+    s16 unk684;
+    s16 unk686;
     s16 unk688;
     /* 0x68A */ u8 unk68A;
     u8 fill68B[0x699 - 0x68B];
@@ -150,7 +152,9 @@ typedef struct Dungeon
     u8 fill3A10[0x3A14 - 0x3A12];
     /* 0x3A14 */ s16 bossBattleIndex;
     /* 0x3A18 */ Tile tiles[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
-    u8 fillE218[0xE220 - 0xE218];
+    u8 fillE218[0xE21C - 0xE218];
+    u16 unkE21C;
+    u16 unkE21E;
     Position unkE220[4];
     u8 unkE230[0xE23C - 0xE230];
     s16 unkE23C; // x coord of some kind
@@ -169,15 +173,14 @@ typedef struct Dungeon
     /* 0xE277 */ u8 mudSportTurns;
     /* 0xE278 */ u8 waterSportTurns;
     /* 0xE279 */ bool8 nullifyWeather; // Air Lock and Cloud Nine toggle this to disable weather effects
-    u8 fillE27A[0xE8C0 - 0xE27A];
+    u8 fillE27A[0xE27C - 0xE27A];
+    /* 0xE27C */ Tile unkE27C[8][8];
+    /* 0xE87C */ u8 fillE87C[68];
     /* 0xE8C0 */ Tile *tilePointers[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     u8 unk104C0;
     /* 0x104C4 */ RoomData roomData[MAX_ROOM_COUNT];
-    u8 fill10764[0x10844 - 0x10764];
     /* 0x10844 */ s16 naturalJunctionListCounts[MAX_ROOM_COUNT];
-    u8 fill10874[0x10884 - 0x10874];
-    /* 0x10884 */ Position naturalJunctionList[MAX_ROOM_COUNT][32]; // Arrays of room exits for each room.
-    u8 fill11444[0x11884 - 0x11484];
+    /* 0x10884 */ Position naturalJunctionList[MAX_ROOM_COUNT][MAX_ROOM_COUNT]; // Arrays of room exits for each room.
     u8 unk11884[0x1194];
     u8 fill12A18[0x12C24 - 0x12A18];
     u8 unk12C24[0x930];
@@ -186,9 +189,8 @@ typedef struct Dungeon
     u8 fill1356D[0x13570 - 0x1356D];
     /* 0x13570 */ u8 unk13570;
     u8 fill13571[0x13574 - 0x13571];
-    /* 0x13574 */ u16 unk13574;
-    /* 0x13576 */ u16 unk13576;
-    /* 0x13578 */ u8 unk13578;
+    /* 0x13574 */ Position trapPos;
+    /* 0x13578 */ u8 trapID;
     /* 0x13579 */ u8 unk13579;
     u8 fill1357A[0x1357C - 0x1357A];
     /* 0x1357C */ Entity *teamPokemon[MAX_TEAM_MEMBERS];
@@ -220,7 +222,10 @@ typedef struct Dungeon
     /* 0x18209 */ u8 visibilityRange; // Dungeon light level.
     /* 0x1820A */ bool8 blinded; // Blacks out the screen when the player has the Blinker status.
     u8 unk1820B;
-    u32 unk1820C;
+    u8 unk1820C;
+    u8 unk1820D;
+    u8 unk1820E;
+    u8 unk1820F;
     /* 0x18210 */ bool8 hallucinating; // Displays Substitute and flower sprites when the player has the Cross-Eyed status.
     u8 fill18211[0x18217 - 0x18211];
     u8 unk18217;

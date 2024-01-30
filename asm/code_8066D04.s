@@ -851,8 +851,8 @@ _08067508: .4byte gDungeon
 _0806750C: .4byte 0x00003a08
 	thumb_func_end sub_80671A0
 
-	thumb_func_start sub_8067510
-sub_8067510:
+	thumb_func_start HandleTalkFieldAction
+HandleTalkFieldAction:
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_806773C
@@ -864,7 +864,7 @@ sub_8067510:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8067510
+	thumb_func_end HandleTalkFieldAction
 
 	thumb_func_start sub_806752C
 sub_806752C:
@@ -1289,8 +1289,8 @@ _0806787C: .4byte gAvailablePokemonNames
 _08067880: .4byte 0x0000021d
 	thumb_func_end sub_8067794
 
-	thumb_func_start sub_8067884
-sub_8067884:
+	thumb_func_start HandleUseMovePlayerAction
+HandleUseMovePlayerAction:
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -1351,7 +1351,7 @@ _080678F6:
 	bx r0
 	.align 2, 0
 _08067900: .4byte 0x00000159
-	thumb_func_end sub_8067884
+	thumb_func_end HandleUseMovePlayerAction
 
 	thumb_func_start sub_8067904
 sub_8067904:

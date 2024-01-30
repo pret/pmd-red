@@ -1135,7 +1135,7 @@ _0805E1BA:
 	bne _0805E1E0
 _0805E1C6:
 	mov r0, r10
-	bl sub_8067510
+	bl HandleTalkFieldAction
 	bl sub_8044B28
 	lsls r0, 24
 	cmp r0, 0
@@ -3208,12 +3208,12 @@ _0805F20C: .4byte 0x00000137
 _0805F210:
 	bl GetLeader
 	movs r1, 0x1
-	bl sub_806675C
+	bl HandleSetItemAction
 	b _0805F226
 _0805F21C:
 	bl GetLeader
 	movs r1, 0x1
-	bl sub_806684C
+	bl HandleUnsetItemAction
 _0805F226:
 	movs r0, 0x1
 	bl sub_8044C10

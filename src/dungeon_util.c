@@ -3,6 +3,7 @@
 
 #include "dungeon_map_access.h"
 #include "structs/str_dungeon.h"
+#include "structs/str_traps.h"
 
 extern u8 gUnknown_202EE70[0x6];
 extern u8 gUnknown_202EE76[0x10];
@@ -43,9 +44,9 @@ u8 GetEntityRoom(Entity *entity)
     return entity->room;
 }
 
-EntityInfo* GetTrapData(Entity *entity)
+Trap* GetTrapData(Entity *entity)
 {
-    return entity->info;
+    return (Trap *)entity->info;
 }
 
 Item* GetItemData(Entity *entity)
@@ -53,9 +54,9 @@ Item* GetItemData(Entity *entity)
     return (Item *)entity->info;
 }
 
-EntityInfo* GetTrapData_1(Entity *entity)
+Trap* GetTrapData_1(Entity *entity)
 {
-    return entity->info;
+    return (Trap *)entity->info;
 }
 
 Item* GetItemData_1(Entity *entity)

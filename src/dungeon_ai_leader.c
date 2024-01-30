@@ -41,7 +41,7 @@ void nullsub_95(Entity *);
 bool8 IsNotAttacking(Entity *, bool8);
 extern void sub_80671A0(Entity *);
 extern void sub_8067110(Entity *);
-void sub_807CABC(Entity *target);
+void HandleUseMoveAIAction(Entity *target);
 void sub_8041888(u8 param_1);
 void sub_8085140(void);
 void sub_807360C(void);
@@ -49,24 +49,24 @@ void sub_805EFB4(Entity *, u8);
 void sub_8074FB0(Entity *, u8, Position *);
 extern void SetMessageArgument(u8 *buffer, Entity *r1, u32);
 
-void sub_8066D04(Entity *);
-void sub_8066744(Entity *);
+void HandlePlaceItemAction(Entity *);
+void HandlePickUpPlayerAction(Entity *);
 void sub_8066E14(Entity * );
 void sub_807348C(void);
 void sub_80732F0(void);
 void sub_807FD84(Entity *);
 void sub_8066BD4(Entity*);
-void sub_8067510(Entity *);
-void sub_8067884(Entity *);
+void HandleTalkFieldAction(Entity *);
+void HandleUseMovePlayerAction(Entity *);
 void sub_804267C(void);
-void sub_807CB3C(Entity *);
+void HandleUseOrbAction(Entity *);
 void sub_8067904(Entity *, u32);
-void sub_80668D0(Entity *);
-void sub_8066AC0(Entity *);
-void sub_8066CF0(Entity *);
+void HandleGiveItemAction(Entity *);
+void HandleTakeItemAction(Entity *);
+void HandleUseItemAction(Entity *);
 void sub_8066FA4(Entity *);
-void sub_806675C(Entity *,bool8);
-void sub_806684C(Entity *,bool8);
+void HandleSetItemAction(Entity *,bool8);
+void HandleUnsetItemAction(Entity *,bool8);
 void sub_807FE9C(Entity *,Position *,u32,u32);
 extern u8 sub_8044B28(void);
 extern u8 UseAttack(Entity *);
@@ -75,9 +75,9 @@ void sub_806A1E8(Entity *pokemon);
 extern void sub_803E46C(u32);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 bool8 sub_804AE08(Position *pos);
-void sub_8073D08(Entity *pokemon);
-void sub_8073CFC(Entity *pokemon);
-void sub_8073CF0(Entity *pokemon);
+void HandlePickUpAIAction(Entity *pokemon);
+void HandleThrowItemAIAction(Entity *pokemon);
+void HandleEatAIAction(Entity *pokemon);
 bool8 sub_8044B84(void);
 void sub_8046D20(void);
 extern void sub_8074094(Entity *);
@@ -118,7 +118,7 @@ bool8 sub_8072CF4(Entity *entity)
     s32 index;
     EntityInfo *info;
     bool8 bVar14;
-    Position PStack_24;
+    Position pos;
     Position pos1;
 
     sub_804178C(1);
@@ -210,10 +210,10 @@ bool8 sub_8072CF4(Entity *entity)
                 }
                 else
                 {
-                    PStack_24.x = entity->pos.x;
-                    PStack_24.y = entity->pos.y;
+                    pos.x = entity->pos.x;
+                    pos.y = entity->pos.y;
                     sub_80694C0(entity,pos1.x,pos1.y,0);
-                    sub_8074FB0(entity,(info->action).direction,&PStack_24);
+                    sub_8074FB0(entity,(info->action).direction,&pos);
                     if (((IQSkillIsEnabled(entity, IQ_SUPER_MOBILE)) && (info->transformStatus != STATUS_MOBILE)) &&
                         (!HasHeldItem(entity,ITEM_MOBILE_SCARF))) {
                         sub_804AE08(&entity->pos);
@@ -224,7 +224,7 @@ bool8 sub_8072CF4(Entity *entity)
             }
             break;
         case ACTION_USE_MOVE_AI:
-            sub_807CABC(entity);
+            HandleUseMoveAIAction(entity);
             break;
         case ACTION_STAIRS:
             if ((gDungeon->dungeonLocation.id == DUNGEON_METEOR_CAVE) && (!gDungeon->deoxysDefeat)) {
@@ -243,34 +243,34 @@ bool8 sub_8072CF4(Entity *entity)
             sub_8067110(entity);
             break;
         case ACTION_USE_ORB:
-            sub_807CB3C(entity);
+            HandleUseOrbAction(entity);
             break;
         case ACTION_PICK_UP_PLAYER:
-            sub_8066744(entity);
+            HandlePickUpPlayerAction(entity);
             break;
         case ACTION_GIVE_ITEM:
-            sub_80668D0(entity);
+            HandleGiveItemAction(entity);
             break;
         case ACTION_TAKE_ITEM:
-            sub_8066AC0(entity);
+            HandleTakeItemAction(entity);
             break;
         case 0x3e:
             sub_8066BD4(entity); // ITEM_SWITCH_TOOLBOX (When you switch item in Toolbox)
             break;
         case ACTION_USE_ITEM:
-            sub_8066CF0(entity);
+            HandleUseItemAction(entity);
             break;
         case ACTION_SET_ITEM:
-            sub_806675C(entity, TRUE);
+            HandleSetItemAction(entity, TRUE);
             break;
         case ACTION_UNSET_ITEM:
-            sub_806684C(entity, TRUE);
+            HandleUnsetItemAction(entity, TRUE);
             break;
         case 0x3b:
             gDungeon->unkBC = gDungeon->teamPokemon[(info->action).unk4[0].actionUseIndex];
             break;
         case ACTION_PLACE_ITEM:
-            sub_8066D04(entity);
+            HandlePlaceItemAction(entity);
             break;
         case 10: // Switch with Item on Ground
             sub_8066E14(entity);
@@ -290,10 +290,10 @@ bool8 sub_8072CF4(Entity *entity)
             SendMessage(entity,*gUnknown_80FE6D4);
             break;
         case ACTION_TALK_FIELD:
-            sub_8067510(entity);
+            HandleTalkFieldAction(entity);
             break;
         case ACTION_USE_MOVE_PLAYER:
-            sub_8067884(entity);
+            HandleUseMovePlayerAction(entity);
             break;
         case ACTION_STRUGGLE:
             sub_8067904(entity, MOVE_STRUGGLE);
@@ -305,13 +305,13 @@ bool8 sub_8072CF4(Entity *entity)
             sub_807FE9C(entity,&entity->pos,0,0);
             break;
         case ACTION_PICK_UP_AI:
-            sub_8073D08(entity);
+            HandlePickUpAIAction(entity);
             break;
         case ACTION_EAT_AI:
-            sub_8073CF0(entity);
+            HandleEatAIAction(entity);
             break;
         case ACTION_THROW_ITEM_AI:
-            sub_8073CFC(entity);
+            HandleThrowItemAIAction(entity);
             break;  
         case ACTION_SECOND_THOUGHTS:
             SetMessageArgument(gAvailablePokemonNames,entity,0);

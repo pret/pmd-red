@@ -3,19 +3,14 @@
 #include "constants/bg_music.h"
 #include "dungeon.h"
 #include "music.h"
+#include "structs/menu.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
 #include "text_util.h"
 
 
-struct unkStruct_202EE10
-{
-    u8 fill0[0x1A];
-    s16 unk1A;
-};
-
-extern struct unkStruct_202EE10 gUnknown_202EE10;
+extern MenuInputStruct gUnknown_202EE10;
 
 extern u8 *gUnknown_80FE6F4[];
 extern u8 gUnknown_810AC60; // 0xC
