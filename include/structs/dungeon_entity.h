@@ -245,7 +245,7 @@ typedef struct EntityInfo
     /* 0x1F4 */ u8 numMoveTiles; // Number of tiles to move in a turn. Can be greater than 1 if the user's movement speed is boosted.
     u8 fill1F5;
     /* 0x1F6 */ bool8 notMoving;
-    u8 fill1F7[0x1FA - 0x1F7];
+    /* 0x1F8 */ s16 unk1F8;
     /* 0x1FA */ s16 mobileTurnTimer; // When a Pokémon can pass through walls in a hallway, this counts up to 200 before the Pokémon turns in a random direction.
     /* 0x1FC */ u32 expGainedInTurn; // Used to accumulate experience when multiple enemies are defeated in one turn.
     /* 0x200 */ u32 statusIcons;

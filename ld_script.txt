@@ -272,6 +272,8 @@ SECTIONS {
         src/code_807E5AC.o(.text);
         src/trap.o(.text);
         asm/code_807FCD4.o(.text);
+        src/trap_1.o(.text);
+        asm/code_8080CF0.o(.text);
         src/code_8083288.o(.text);
         src/dungeon_range.o(.text);
         src/code_808333C.o(.text);

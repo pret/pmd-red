@@ -13,6 +13,8 @@
 #define DUNGEON_MAX_SIZE_Y 32
 #define DUNGEON_MAX_WILD_POKEMON 16
 #define DUNGEON_MAX_POKEMON MAX_TEAM_MEMBERS + DUNGEON_MAX_WILD_POKEMON
+#define DUNGEON_MAX_TRAPS 64
+#define DUNGEON_MAX_ITEMS 64
 
 // size: 0x4
 typedef struct DungeonLocation
@@ -196,12 +198,12 @@ typedef struct Dungeon
     /* 0x1357C */ Entity *teamPokemon[MAX_TEAM_MEMBERS];
     /* 0x1358C */ Entity *wildPokemon[DUNGEON_MAX_WILD_POKEMON];
     /* 0x135CC */ Entity *allPokemon[DUNGEON_MAX_POKEMON]; // Contains both team and wild Pokémon
-    /* 0x1361C */ Entity *clientPokemon[0x40];
-    /* 0x1371C */ Entity *unk1371C[0x40];
+    /* 0x1361C */ Entity *items[DUNGEON_MAX_ITEMS];
+    /* 0x1371C */ Entity *traps[DUNGEON_MAX_TRAPS];
     /* 0x1381C */ Entity teamPokemonEntities[MAX_TEAM_MEMBERS];
     /* 0x139EC */ Entity wildPokemonEntities[DUNGEON_MAX_WILD_POKEMON];
-    /* 0x1412C */ Entity clientPokemonEntities[0x40];
-    /* 0x15E2C */ Entity unk15E2C[0x40];
+    /* 0x1412C */ Entity itemEntities[DUNGEON_MAX_ITEMS];
+    /* 0x15E2C */ Entity trapEntites[DUNGEON_MAX_TRAPS];
     /* 0x17B2C */ Entity *lightningRodPokemon;
     /* 0x17B30 */ Entity *snatchPokemon;
     /* 0x17B34 */ Entity *unk17B34;

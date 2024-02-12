@@ -35,6 +35,8 @@ extern u8 *gUnknown_80FD788[];
 extern u8 *gUnknown_80FD7D4[];
 extern u8 *gUnknown_80F970C[];
 extern u8 *gUnknown_80F9728[];
+extern u8 *gUnknown_80FED00[];
+extern u8 *gUnknown_80FED04[];
 extern u8 *gUnknown_80FED0C[];
 
 extern s16 gUnknown_80F4E0E;
@@ -44,8 +46,24 @@ extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
 extern s16 gUnknown_80F4F8A;
 
+struct unkStruct_806B7F8
+{
+    s16 species;
+    u8 unk2;
+    u32 unk4;
+    u16 level;
+    u8 fillA[2];
+    struct Position pos;
+    u8 unk10;
+};
+extern u32 sub_806B7F8(struct unkStruct_806B7F8 *, u32);
+
+s16 sub_803D970(u32);
+u8 sub_806AA0C(s32, s32);
+void sub_80421EC(Position *, u32);
+
 bool8 sub_8045888(Entity *);
-void sub_8080B00(Tile *, u32);
+void SetTrap(Tile *, u32);
 void sub_803E708(u32, u32);
 u8 sub_8043D10(void);
 void SetMessageArgument(u8 *, Entity *, u32);
@@ -686,7 +704,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
         {
             info = target->info;
             if (sub_8045888(target)) {
-                sub_8080B00(tile, 0x1B);
+                SetTrap(tile, 0x1B);
                 flag = TRUE;
                 sub_80421C0(target,0x193);
                 sub_803E708(0x1e,0x48);
@@ -714,8 +732,174 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
                 sub_8068FE0(target,0x215,pokemon);
             }
             if (flag) {
-                sub_8080B00(tile, 5);
+                SetTrap(tile, TRAP_PITFALL_TRAP);
             }
         }
     }
 }
+
+#ifdef NONMATCHING
+void HandleSummonTrap(Entity *pokemon,Position *pos)
+{
+  int r6;
+  s32 r4;
+  u32 direction;
+  int pokemonSummonCount;
+  s16 species;
+  struct unkStruct_806B7F8 stack;
+
+
+  r6 = DungeonRandInt(3);
+  r4 = r6 + 2;
+  direction = DungeonRandInt(NUM_DIRECTIONS);
+  if (IsBossFight()) {
+      goto _ret;
+  }
+  else
+  {
+    pokemonSummonCount = 0;
+    if (pokemonSummonCount < r4) {
+        do {
+            species = sub_803D970(0);
+            direction &= DIRECTION_MASK;
+            stack.species = species;
+            if (sub_806AA0C(stack.species,0) != 0) {
+              stack.level = 0;
+              stack.unk2 = 0;
+              stack.pos.x = pos->x + gAdjacentTileOffsets[direction].x;
+              stack.pos.y = pos->y + gAdjacentTileOffsets[direction].y;
+              stack.unk4 = 0;
+              stack.unk10 = 0;
+              if (sub_806B7F8(&stack,1) != 0) {
+                pokemonSummonCount++;
+              }
+            }
+            direction++;
+            r6--;
+      } while (r6 != 0); 
+    }
+    sub_80421EC(pos,0x194);
+    if (pokemonSummonCount == 0) {
+_ret:
+        SendMessage(pokemon,*gUnknown_80FED04);
+    }
+    else
+    {
+        SendMessage(pokemon,*gUnknown_80FED00);
+    }
+  }
+}
+#else
+NAKED
+void HandleSummonTrap(Entity *pokemon,Position *pos)
+{
+    asm_unified(
+	"\tpush {r4-r7,lr}\n"
+	"\tmov r7, r10\n"
+	"\tmov r6, r9\n"
+	"\tmov r5, r8\n"
+	"\tpush {r5-r7}\n"
+	"\tsub sp, 0x18\n"
+	"\tstr r0, [sp, 0x14]\n"
+	"\tadds r7, r1, 0\n"
+	"\tmovs r0, 0x3\n"
+	"\tbl DungeonRandInt\n"
+	"\tadds r6, r0, 0\n"
+	"\tadds r4, r6, 0x2\n"
+	"\tmovs r0, 0x8\n"
+	"\tbl DungeonRandInt\n"
+	"\tadds r5, r0, 0\n"
+	"\tbl IsBossFight\n"
+	"\tlsls r0, 24\n"
+	"\tcmp r0, 0\n"
+	"\tbne _080806CA\n"
+	"\tmovs r0, 0\n"
+	"\tmov r8, r0\n"
+	"\tcmp r8, r4\n"
+	"\tbge _080806BA\n"
+	"\tmov r4, sp\n"
+	"\tmovs r1, 0\n"
+	"\tmov r10, r1\n"
+	"\tmovs r2, 0\n"
+	"\tmov r9, r2\n"
+	"\tadds r6, 0x2\n"
+"_08080660:\n"
+	"\tmovs r0, 0\n"
+	"\tbl sub_803D970\n"
+	"\tmovs r1, 0x7\n"
+	"\tands r5, r1\n"
+	"\tstrh r0, [r4]\n"
+	"\tmovs r1, 0\n"
+	"\tldrsh r0, [r4, r1]\n"
+	"\tmovs r1, 0\n"
+	"\tbl sub_806AA0C\n"
+	"\tlsls r0, 24\n"
+	"\tcmp r0, 0\n"
+	"\tbeq _080806B2\n"
+	"\tmov r2, r9\n"
+	"\tstrh r2, [r4, 0x8]\n"
+	"\tmov r0, r10\n"
+	"\tstrb r0, [r4, 0x2]\n"
+	"\tldr r0, _080806D8\n"
+	"\tlsls r1, r5, 2\n"
+	"\tadds r1, r0\n"
+	"\tldrh r0, [r1]\n"
+	"\tldrh r2, [r7]\n"
+	"\tadds r0, r2\n"
+	"\tstrh r0, [r4, 0xC]\n"
+	"\tldrh r0, [r1, 0x2]\n"
+	"\tldrh r1, [r7, 0x2]\n"
+	"\tadds r0, r1\n"
+	"\tstrh r0, [r4, 0xE]\n"
+	"\tmov r2, r9\n"
+	"\tstr r2, [sp, 0x4]\n"
+	"\tmov r0, r10\n"
+	"\tstrb r0, [r4, 0x10]\n"
+	"\tmov r0, sp\n"
+	"\tmovs r1, 0x1\n"
+	"\tbl sub_806B7F8\n"
+	"\tcmp r0, 0\n"
+	"\tbeq _080806B2\n"
+	"\tmovs r1, 0x1\n"
+	"\tadd r8, r1\n"
+"_080806B2:\n"
+	"\tadds r5, 0x1\n"
+	"\tsubs r6, 0x1\n"
+	"\tcmp r6, 0\n"
+	"\tbne _08080660\n"
+"_080806BA:\n"
+	"\tmovs r1, 0xCA\n"
+	"\tlsls r1, 1\n"
+	"\tadds r0, r7, 0\n"
+	"\tbl sub_80421EC\n"
+	"\tmov r2, r8\n"
+	"\tcmp r2, 0\n"
+	"\tbne _080806E0\n"
+"_080806CA:\n"
+	"\tldr r0, _080806DC\n"
+	"\tldr r1, [r0]\n"
+	"\tldr r0, [sp, 0x14]\n"
+	"\tbl SendMessage\n"
+	"\tb _080806EA\n"
+	"\t.align 2, 0\n"
+"_080806D8: .4byte gAdjacentTileOffsets\n"
+"_080806DC: .4byte gUnknown_80FED04\n"
+"_080806E0:\n"
+	"\tldr r0, _080806FC\n"
+	"\tldr r1, [r0]\n"
+	"\tldr r0, [sp, 0x14]\n"
+	"\tbl SendMessage\n"
+"_080806EA:\n"
+	"\tadd sp, 0x18\n"
+	"\tpop {r3-r5}\n"
+	"\tmov r8, r3\n"
+	"\tmov r9, r4\n"
+	"\tmov r10, r5\n"
+	"\tpop {r4-r7}\n"
+	"\tpop {r0}\n"
+	"\tbx r0\n"
+	"\t.align 2, 0\n"
+"_080806FC: .4byte gUnknown_80FED00");
+}
+#endif
+

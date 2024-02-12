@@ -105,16 +105,16 @@ void sub_804513C(void)
       gDungeon->allPokemon[index] = NULL;
   }
     
-  for (index = 0; index < 0x40; index++)
+  for (index = 0; index < DUNGEON_MAX_ITEMS; index++)
   {
-      gDungeon->clientPokemon[index] = &gDungeon->clientPokemonEntities[index];
-      gDungeon->clientPokemon[index]->type = ENTITY_NOTHING;
+      gDungeon->items[index] = &gDungeon->itemEntities[index];
+      gDungeon->items[index]->type = ENTITY_NOTHING;
   }
     
-  for(index = 0; index < 0x40; index++)
+  for(index = 0; index < DUNGEON_MAX_TRAPS; index++)
   {
-      gDungeon->unk1371C[index] = &gDungeon->unk15E2C[index];
-      gDungeon->unk1371C[index]->type = ENTITY_NOTHING;
+      gDungeon->traps[index] = &gDungeon->trapEntites[index];
+      gDungeon->traps[index]->type = ENTITY_NOTHING;
   }
 }
 
@@ -168,7 +168,7 @@ void sub_804522C(void) {
   
         for(index = 0; index < gDungeon->unk3904; index++)
         {
-            sub_80462AC(gDungeon->clientPokemon[index], crossEyed, 1, 0xFF, 0);
+            sub_80462AC(gDungeon->items[index], crossEyed, 1, 0xFF, 0);
         }
  
         if(crossEyed)
