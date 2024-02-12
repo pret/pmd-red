@@ -6,6 +6,7 @@
 #include "status.h"
 #include "code_80521D0.h"
 #include "items.h"
+#include "moves.h"
 #include "code_808417C.h"
 
 #include "dungeon_engine.h"
@@ -38,6 +39,8 @@ extern u8 *gUnknown_80F9728[];
 extern u8 *gUnknown_80FED00[];
 extern u8 *gUnknown_80FED04[];
 extern u8 *gUnknown_80FED0C[];
+extern u8 *gUnknown_80FDAA0[];
+extern u8 *gUnknown_80FDA80[];
 
 extern s16 gUnknown_80F4E0E;
 extern s16 gUnknown_80F4F84;
@@ -57,6 +60,8 @@ struct unkStruct_806B7F8
     u8 unk10;
 };
 extern u32 sub_806B7F8(struct unkStruct_806B7F8 *, u32);
+
+void sub_806A9B4(Entity *, u32);
 
 s16 sub_803D970(u32);
 u8 sub_806AA0C(s32, s32);
@@ -738,7 +743,6 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
     }
 }
 
-#ifdef NONMATCHING
 void HandleSummonTrap(Entity *pokemon,Position *pos)
 {
   int r6;
@@ -747,6 +751,7 @@ void HandleSummonTrap(Entity *pokemon,Position *pos)
   int pokemonSummonCount;
   s16 species;
   struct unkStruct_806B7F8 stack;
+    s32 i;
 
 
   r6 = DungeonRandInt(3);
@@ -759,7 +764,8 @@ void HandleSummonTrap(Entity *pokemon,Position *pos)
   {
     pokemonSummonCount = 0;
     if (pokemonSummonCount < r4) {
-        do {
+        for (i = 0; i < r6 + 2; i++)
+        {
             species = sub_803D970(0);
             direction &= DIRECTION_MASK;
             stack.species = species;
@@ -775,8 +781,7 @@ void HandleSummonTrap(Entity *pokemon,Position *pos)
               }
             }
             direction++;
-            r6--;
-      } while (r6 != 0); 
+        }
     }
     sub_80421EC(pos,0x194);
     if (pokemonSummonCount == 0) {
@@ -789,117 +794,41 @@ _ret:
     }
   }
 }
-#else
-NAKED
-void HandleSummonTrap(Entity *pokemon,Position *pos)
-{
-    asm_unified(
-	"\tpush {r4-r7,lr}\n"
-	"\tmov r7, r10\n"
-	"\tmov r6, r9\n"
-	"\tmov r5, r8\n"
-	"\tpush {r5-r7}\n"
-	"\tsub sp, 0x18\n"
-	"\tstr r0, [sp, 0x14]\n"
-	"\tadds r7, r1, 0\n"
-	"\tmovs r0, 0x3\n"
-	"\tbl DungeonRandInt\n"
-	"\tadds r6, r0, 0\n"
-	"\tadds r4, r6, 0x2\n"
-	"\tmovs r0, 0x8\n"
-	"\tbl DungeonRandInt\n"
-	"\tadds r5, r0, 0\n"
-	"\tbl IsBossFight\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbne _080806CA\n"
-	"\tmovs r0, 0\n"
-	"\tmov r8, r0\n"
-	"\tcmp r8, r4\n"
-	"\tbge _080806BA\n"
-	"\tmov r4, sp\n"
-	"\tmovs r1, 0\n"
-	"\tmov r10, r1\n"
-	"\tmovs r2, 0\n"
-	"\tmov r9, r2\n"
-	"\tadds r6, 0x2\n"
-"_08080660:\n"
-	"\tmovs r0, 0\n"
-	"\tbl sub_803D970\n"
-	"\tmovs r1, 0x7\n"
-	"\tands r5, r1\n"
-	"\tstrh r0, [r4]\n"
-	"\tmovs r1, 0\n"
-	"\tldrsh r0, [r4, r1]\n"
-	"\tmovs r1, 0\n"
-	"\tbl sub_806AA0C\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _080806B2\n"
-	"\tmov r2, r9\n"
-	"\tstrh r2, [r4, 0x8]\n"
-	"\tmov r0, r10\n"
-	"\tstrb r0, [r4, 0x2]\n"
-	"\tldr r0, _080806D8\n"
-	"\tlsls r1, r5, 2\n"
-	"\tadds r1, r0\n"
-	"\tldrh r0, [r1]\n"
-	"\tldrh r2, [r7]\n"
-	"\tadds r0, r2\n"
-	"\tstrh r0, [r4, 0xC]\n"
-	"\tldrh r0, [r1, 0x2]\n"
-	"\tldrh r1, [r7, 0x2]\n"
-	"\tadds r0, r1\n"
-	"\tstrh r0, [r4, 0xE]\n"
-	"\tmov r2, r9\n"
-	"\tstr r2, [sp, 0x4]\n"
-	"\tmov r0, r10\n"
-	"\tstrb r0, [r4, 0x10]\n"
-	"\tmov r0, sp\n"
-	"\tmovs r1, 0x1\n"
-	"\tbl sub_806B7F8\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _080806B2\n"
-	"\tmovs r1, 0x1\n"
-	"\tadd r8, r1\n"
-"_080806B2:\n"
-	"\tadds r5, 0x1\n"
-	"\tsubs r6, 0x1\n"
-	"\tcmp r6, 0\n"
-	"\tbne _08080660\n"
-"_080806BA:\n"
-	"\tmovs r1, 0xCA\n"
-	"\tlsls r1, 1\n"
-	"\tadds r0, r7, 0\n"
-	"\tbl sub_80421EC\n"
-	"\tmov r2, r8\n"
-	"\tcmp r2, 0\n"
-	"\tbne _080806E0\n"
-"_080806CA:\n"
-	"\tldr r0, _080806DC\n"
-	"\tldr r1, [r0]\n"
-	"\tldr r0, [sp, 0x14]\n"
-	"\tbl SendMessage\n"
-	"\tb _080806EA\n"
-	"\t.align 2, 0\n"
-"_080806D8: .4byte gAdjacentTileOffsets\n"
-"_080806DC: .4byte gUnknown_80FED04\n"
-"_080806E0:\n"
-	"\tldr r0, _080806FC\n"
-	"\tldr r1, [r0]\n"
-	"\tldr r0, [sp, 0x14]\n"
-	"\tbl SendMessage\n"
-"_080806EA:\n"
-	"\tadd sp, 0x18\n"
-	"\tpop {r3-r5}\n"
-	"\tmov r8, r3\n"
-	"\tmov r9, r4\n"
-	"\tmov r10, r5\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_080806FC: .4byte gUnknown_80FED00");
-}
-#endif
 
+void HandlePPZeroTrap(Entity *param_1,Entity *param_2)
+{
+  Move *move;
+  s32 moveIndex;
+  s32 i;
+  s32 counter;
+  EntityInfo *info;
+  Move *moveStack [MAX_MON_MOVES];
+  s32 indexStack [MAX_MON_MOVES];
+  bool8 flag = FALSE;
+  
+
+  if (param_2 != NULL) {
+    info = param_2->info;
+    counter = 0;
+    for(i = 0;  i < MAX_MON_MOVES; move++, i++)
+    {
+      move = &info->moves[i];
+      if (((move->moveFlags & MOVE_FLAG_EXISTS) != 0) && (move->PP != 0)) {
+        moveStack[counter] = move;
+        indexStack[counter] = i;
+        counter++;
+      }
+    }
+    if (counter != 0) {
+      moveIndex = DungeonRandInt(counter);
+      moveStack[moveIndex]->PP = 0;
+      sub_80928C0(gUnknown_202DE58,moveStack[moveIndex],0);
+      sub_806A9B4(param_2, indexStack[moveIndex]);
+      flag = TRUE;
+    }
+    if(flag)
+        sub_80522F4(param_1,param_2,*gUnknown_80FDA80);
+    else
+        sub_80522F4(param_1,param_2,*gUnknown_80FDAA0);
+  }
+}
