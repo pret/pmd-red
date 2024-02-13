@@ -5,15 +5,6 @@
 
   	.text
 
-	thumb_func_start HandleWonderTile
-HandleWonderTile:
-	push {lr}
-	movs r2, 0
-	bl sub_8079E34
-	pop {r0}
-	bx r0
-	thumb_func_end HandleWonderTile
-
 	thumb_func_start HandleSealTrap
 HandleSealTrap:
 	push {r4-r7,lr}

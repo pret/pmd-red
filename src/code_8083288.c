@@ -1,4 +1,5 @@
 #include "global.h"
+#include "structs/str_position.h"
 
 extern void sub_8082FE0(u32, void *, u32);
 extern void sub_8082FA8(void *, void *, u32);
@@ -76,10 +77,10 @@ void sub_80830B4(u32 *param_1, u8 param_2)
     sub_8082FA8(param_1,&local_8,1);
 }
 
-void sub_80830D8(u32 *param_1, u16 *param_2)
+void SavePosition(u32 *param_1, Position *param_2)
 {
-    sub_8082FA8(param_1, &param_2[0], 1);
-    sub_8082FA8(param_1, &param_2[1], 1);
+    sub_8082FA8(param_1, &param_2->x, 1);
+    sub_8082FA8(param_1, &param_2->y, 1);
 }
 
 void sub_80830F8(u32 *param_1, u32 *param_2)
@@ -96,9 +97,9 @@ void sub_808312C(u32 *param_1, u16 *param_2)
     sub_8082FA8(param_1, &param_2[1], 1);
 }
 
-void sub_808314C(u32 *param_1, u32 *param_2, u32 param_3)
+void SaveSpeedCounters(u32 *param_1, u32 *speedCounters, u32 numCounters)
 {
-    sub_8082FA8(param_1, param_2, param_3);
+    sub_8082FA8(param_1, speedCounters, numCounters);
 }
 
 u16 sub_8083158(u32 param_1)

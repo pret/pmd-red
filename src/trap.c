@@ -63,6 +63,7 @@ extern u32 sub_806B7F8(struct unkStruct_806B7F8 *, u32);
 
 void sub_806A9B4(Entity *, u32);
 
+void sub_8079E34(Entity *param_1, Entity *param_2, u32);
 s16 sub_803D970(u32);
 u8 sub_806AA0C(s32, s32);
 void sub_80421EC(Position *, u32);
@@ -745,17 +746,15 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
 
 void HandleSummonTrap(Entity *pokemon,Position *pos)
 {
-  int r6;
   s32 r4;
   u32 direction;
   int pokemonSummonCount;
   s16 species;
   struct unkStruct_806B7F8 stack;
-    s32 i;
+  s32 i;
 
 
-  r6 = DungeonRandInt(3);
-  r4 = r6 + 2;
+  r4 = DungeonRandInt(3) + 2;
   direction = DungeonRandInt(NUM_DIRECTIONS);
   if (IsBossFight()) {
       goto _ret;
@@ -764,7 +763,7 @@ void HandleSummonTrap(Entity *pokemon,Position *pos)
   {
     pokemonSummonCount = 0;
     if (pokemonSummonCount < r4) {
-        for (i = 0; i < r6 + 2; i++)
+        for (i = 0; i < r4; i++)
         {
             species = sub_803D970(0);
             direction &= DIRECTION_MASK;
@@ -831,4 +830,9 @@ void HandlePPZeroTrap(Entity *param_1,Entity *param_2)
     else
         sub_80522F4(param_1,param_2,*gUnknown_80FDAA0);
   }
+}
+
+void HandleWonderTile(Entity *param_1, Entity *param_2)
+{
+    sub_8079E34(param_1, param_2, 0);
 }

@@ -120,19 +120,19 @@ _08081526:
 	ldr r0, _08081638
 	adds r1, r0
 	adds r0, r7, 0
-	bl sub_80830D8
+	bl SavePosition
 	ldr r1, [r4]
 	ldr r2, _0808163C
 	adds r1, r2
 	adds r0, r7, 0
-	bl sub_80830D8
+	bl SavePosition
 	ldr r6, _08081640
 	movs r5, 0x7
 _08081560:
 	ldr r1, [r4]
 	adds r1, r6
 	adds r0, r7, 0
-	bl sub_80830D8
+	bl SavePosition
 	adds r6, 0x4
 	subs r5, 0x1
 	cmp r5, 0
@@ -577,7 +577,7 @@ sub_80818E4:
 	adds r4, 0x10
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_80830D8
+	bl SavePosition
 	pop {r4,r5}
 	pop {r0}
 	bx r0

@@ -17,7 +17,6 @@ void sub_80830B4(void *, u8);
 void sub_8083030(void *, u16);
 void sub_8080E0C(unkStruct_8094924 *, Entity *);
 void sub_808300C(void *, u8 *);
-
 void sub_8081788(void *, Item *);
 void sub_8080B90(unkStruct_8094924 *param_1);
 void SaveItemData(unkStruct_8094924 *param_1);
@@ -29,7 +28,40 @@ void sub_8080CF0(unkStruct_8094924 *param_1);
 void nullsub_98(unkStruct_8094924 *param_1);
 void sub_8082F9C(unkStruct_8094924 *param_1, u32, u32);
 void sub_8049ED4(void);
-
+void sub_8083060(void *, u32);
+void sub_80817F4(void *, u32);
+void sub_80830A0(void *, u32);
+void sub_808180C(void *, u32);
+void sub_8083048(void *, u32);
+void sub_80818C8(void *, bool8 *);
+void sub_80817C8(void *, void *);
+void sub_8081B34(void *, void *);
+void sub_8081B08(void *, Move *);
+void sub_8081824(void *, u32);
+void sub_80817B0(void *, u32);
+void SavePosition(void*, Position *);
+void sub_80818E4(void *, u8 *);
+void sub_8081B54(void *, u8 *);
+void sub_808186C(void *, s32);
+void sub_8081854(void *, s32);
+void sub_808183C(void *, s32);
+void sub_8081AB8(void *, bool8 *);
+void sub_8081A9C(void *, u8*);
+void sub_8081A80(void *, u8*);
+void sub_8081A74(void *, u8*);
+void sub_8081A58(void *, u8*);
+void sub_8081A24(void *, u8*);
+void sub_8081994(void *, u8*);
+void sub_8081968(void *, u8*);
+void sub_808193C(void *, u8*);
+void sub_8081920(void *, u8*);
+void sub_8081880(void *, u8);
+void sub_8081898(void *, s16 *);
+void sub_80819B0(void *, u8 *);
+void sub_80819D4(void *, u8 *);
+void sub_80819F0(void *, u8 *);
+void SaveSpeedCounters(void *, u8 *, u32);
+void sub_80818B8(void *, u32);
 void sub_803E708(u32, u32);
 void sub_80421C0(Entity *, u32);
 void sub_804687C(Entity *, Position *, Position *, Item *, u32);
@@ -188,46 +220,11 @@ void sub_8080CF0(unkStruct_8094924 *param_1)
     }
 }
 
-void sub_8083060(void *, u32);
-void sub_80817F4(void *, u32);
-void sub_80830A0(void *, u32);
-void sub_808180C(void *, u32);
-void sub_8083048(void *, u32);
-void sub_80818C8(void *, bool8 *);
-void sub_80817C8(void *, void *);
-void sub_8081B34(void *, void *);
-void sub_8081B08(void *, Move *);
-void sub_8081824(void *, u32);
-void sub_80817B0(void *, u32);
-void sub_80830D8(void*, Position *);
-void sub_80818E4(void *, u8 *);
-void sub_8081B54(void *, u8 *);
-void sub_808186C(void *, s32);
-void sub_8081854(void *, s32);
-void sub_808183C(void *, s32);
-void sub_8081AB8(void *, bool8 *);
-void sub_8081A9C(void *, u8*);
-void sub_8081A80(void *, u8*);
-void sub_8081A74(void *, u8*);
-void sub_8081A58(void *, u8*);
-void sub_8081A24(void *, u8*);
-void sub_8081994(void *, u8*);
-void sub_8081968(void *, u8*);
-void sub_808193C(void *, u8*);
-void sub_8081920(void *, u8*);
-void sub_8081880(void *, u8);
-void sub_8081898(void *, s16 *);
-void sub_80819B0(void *, u8 *);
-void sub_80819D4(void *, u8 *);
-void sub_80819F0(void *, u8 *);
-void sub_808314C(void *, u8 *, u32);
-void sub_80818B8(void *, u32);
-
 void sub_8080E0C(unkStruct_8094924 *param_1,Entity *param_2)
 {
     Position *pos;
     EntityInfo *info;
-    int iVar4;
+    int counter;
     EntityInfo info2;
     u32 uStack_ac;
     u32 uStack_a8;
@@ -364,9 +361,9 @@ void sub_8080E0C(unkStruct_8094924 *param_1,Entity *param_2)
     puStack_90 = &info->clientType;
 
     pos = info->prevPos;
-    for(iVar4 = 0; iVar4 < 4; iVar4++)
+    for(counter = 0; counter < NUM_PREV_POS; counter++)
     {
-        sub_80830D8(param_1,pos);
+        SavePosition(param_1,pos);
         pos++;
     }
 
@@ -407,8 +404,8 @@ void sub_8080E0C(unkStruct_8094924 *param_1,Entity *param_2)
     sub_808183C(param_1,*puStack_24);
     sub_8081854(param_1,info->targetingDecoy);
     sub_808186C(param_1,info->speedStage);
-    sub_808314C(param_1,info->speedUpCounters,5);
-    sub_808314C(param_1,info->speedDownCounters,5);
+    SaveSpeedCounters(param_1,info->speedUpCounters,NUM_SPEED_COUNTERS);
+    SaveSpeedCounters(param_1,info->speedDownCounters,NUM_SPEED_COUNTERS);
     sub_8083060(param_1,info->stockpileStage);
     sub_8083060(param_1,info->fill113);
     sub_8083060(param_1,(u8)info->moveRandomly);
@@ -437,7 +434,7 @@ void sub_8080E0C(unkStruct_8094924 *param_1,Entity *param_2)
     sub_8083060(param_1,info->unk167);
     sub_8083060(param_1,info->unk168);
     sub_8083060(param_1,info->turnsSinceWarpScarfActivation);
-    sub_80830D8(param_1,&(info->targetPos));
+    SavePosition(param_1,&(info->targetPos));
     sub_80830A0(param_1,info->unk174);
     sub_8083030(param_1,info->unk178);
     sub_8083048(param_1,info->unk1F8);
