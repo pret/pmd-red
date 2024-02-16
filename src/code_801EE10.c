@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/input.h"
 #include "input.h"
 #include "items.h"
 #include "text1.h"
@@ -19,201 +20,189 @@ s32 sub_801F3F8(void);
 
 u8 sub_801EE10(u32 param_1, s16 species, Move *moves, u32 param_4, const u8 *text, u32 param_6)
 {
-  s32 iVar5;
-  s32 iVar8;
-  s32 species_s32;
-  u8 param_4_u8;
-  s32 four;
-    
-  species_s32 = species;
-  param_4_u8 = param_4;
-  gUnknown_203B270 = MemoryAlloc(sizeof(unkStruct_203B270), 8);
-  gUnknown_203B270->unk4 = param_4_u8;
-  gUnknown_203B270->unk5 = 1;
-  gUnknown_203B270->unk6 = 1;
-  gUnknown_203B270->unk7 = 1;
-  gUnknown_203B270->unk0 = param_1;
-  switch(param_1)
-  {
-      case 2:
-      case 3:
-        gUnknown_203B270->unk5 = 0;
-        gUnknown_203B270->unk6 = 0;
-        gUnknown_203B270->unk7 = 0;
-        break;
-      case 0:
-      case 1:
-          break;
-  }
-  gUnknown_203B270->pokeStruct = &gRecruitedPokemonRef->pokemon[species_s32];
-  gUnknown_203B270->isTeamLeader = gUnknown_203B270->pokeStruct->isTeamLeader;
-  gUnknown_203B270->moves = moves;
-  gUnknown_203B270->text = text;
-  iVar8 = iVar5 = sub_801F3F8();
-  four = 4;
-  if (iVar8 < four) {
-    iVar8 = 4;
-  }
-  sub_8006518(gUnknown_203B270->unk58);
-  gUnknown_203B270->unk50 = param_6;
-  gUnknown_203B270->unk58[param_6] = gUnknown_80DC25C;
-  if (gUnknown_203B270->text != NULL) {
-    gUnknown_203B270->unk54 = sub_8006544(param_6);
-    gUnknown_203B270->unk58[gUnknown_203B270->unk54] = gUnknown_80DC274;
-  }
-  sub_8012D08(&gUnknown_203B270->unk58[gUnknown_203B270->unk50],iVar8);
-  ResetUnusedInputStruct();
-  sub_800641C(gUnknown_203B270->unk58, TRUE, TRUE);
-  sub_8013818(&gUnknown_203B270->input,iVar5,iVar5,param_6);
-  sub_8013780(&gUnknown_203B270->input,0);
-  sub_801F280(1);
-  return 1;
+    s32 iVar5;
+    s32 iVar8;
+    s32 species_s32;
+    u8 param_4_u8;
+    s32 four;
+
+    species_s32 = species;
+    param_4_u8 = param_4;
+    gUnknown_203B270 = MemoryAlloc(sizeof(unkStruct_203B270), 8);
+    gUnknown_203B270->unk4 = param_4_u8;
+    gUnknown_203B270->unk5 = 1;
+    gUnknown_203B270->unk6 = 1;
+    gUnknown_203B270->unk7 = 1;
+    gUnknown_203B270->unk0 = param_1;
+    switch(param_1)
+    {
+        case 2:
+        case 3:
+            gUnknown_203B270->unk5 = 0;
+            gUnknown_203B270->unk6 = 0;
+            gUnknown_203B270->unk7 = 0;
+            break;
+        case 0:
+        case 1:
+            break;
+    }
+    gUnknown_203B270->pokeStruct = &gRecruitedPokemonRef->pokemon[species_s32];
+    gUnknown_203B270->isTeamLeader = gUnknown_203B270->pokeStruct->isTeamLeader;
+    gUnknown_203B270->moves = moves;
+    gUnknown_203B270->text = text;
+    iVar8 = iVar5 = sub_801F3F8();
+    four = 4;
+    if (iVar8 < four) {
+        iVar8 = 4;
+    }
+    sub_8006518(gUnknown_203B270->unk58);
+    gUnknown_203B270->unk50 = param_6;
+    gUnknown_203B270->unk58[param_6] = gUnknown_80DC25C;
+    if (gUnknown_203B270->text != NULL) {
+        gUnknown_203B270->unk54 = sub_8006544(param_6);
+        gUnknown_203B270->unk58[gUnknown_203B270->unk54] = gUnknown_80DC274;
+    }
+    sub_8012D08(&gUnknown_203B270->unk58[gUnknown_203B270->unk50],iVar8);
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B270->unk58, TRUE, TRUE);
+    sub_8013818(&gUnknown_203B270->input,iVar5,iVar5,param_6);
+    sub_8013780(&gUnknown_203B270->input,0);
+    sub_801F280(1);
+    return 1;
 }
 
 u32 sub_801EF38(char param_1)
 {
-  bool8 bVar2;
-  s32 index;
-  s32 index2;
-  s32 moveIndex;
-  s32 newIndex;
-  struct Move *move;
-  
-  bVar2 = 0;
-  if (param_1 == 0) {
-    sub_8013660(&gUnknown_203B270->input);
-    return 0;
-  }
-  switch(GetKeyPress(&gUnknown_203B270->input)) {
-      // B_BUTTON
-      case 2:
-        PlayMenuSoundEffect(1);
-        return 2;
-      // A_BUTTON
-      case 1:
-        PlayMenuSoundEffect(0);
-        return 3;
-      // START_BUTTON
-      case 4:
-        PlayMenuSoundEffect(4);
-        return 4;
-      // DPAD_DOWN
-      case 8:
-        index = gUnknown_203B270->input.menuIndex;
-        sub_8013780(&gUnknown_203B270->input, unk_FindMoveEnabledForAIAfter8_v2(gUnknown_203B270->moves, index));
-        if (index != gUnknown_203B270->input.menuIndex) {
-          PlayMenuSoundEffect(3);
-        }
-        break;
-      // DPAD_UP
-      case 7:
-        index = gUnknown_203B270->input.menuIndex;
-        sub_8013780(&gUnknown_203B270->input,unk_FindMoveEnabledForAIBefore8_v2(gUnknown_203B270->moves,index));
-        if (index != gUnknown_203B270->input.menuIndex) {
-          PlayMenuSoundEffect(3);
-        }
-        break;
-      // R_PAD_DOWN_BUTTONS
-      case 0xd:
-        if (gUnknown_203B270->unk5 == 0) break;
-          moveIndex = gUnknown_203B270->input.menuIndex;
-          newIndex = gUnknown_203B270->input.menuIndex = unk_SetMoveToLastInLinkedSequence8_v2(gUnknown_203B270->moves, moveIndex);
-          if (moveIndex != newIndex) {
-              PlayMenuSoundEffect(3);
-          }
-          else {
-              goto _134;
-          }
-          sub_801F280(1);
-          return 1;
-      // R_PAD_UP_BUTTONS
-      case 0xc:
-        if (gUnknown_203B270->unk5 == 0) break;
-        moveIndex = gUnknown_203B270->input.menuIndex;
-        newIndex = gUnknown_203B270->input.menuIndex = unk_SetMoveToFirstInLinkedSequence8_v2(gUnknown_203B270->moves,moveIndex);
-        if (moveIndex != newIndex) {
-          PlayMenuSoundEffect(3);
-        }
-        else {
+    bool8 flag;
+    s32 index;
+    s32 index2;
+    s32 moveIndex;
+    s32 newIndex;
+    struct Move *move;
+
+    flag = FALSE;
+    if (param_1 == 0) {
+        sub_8013660(&gUnknown_203B270->input);
+        return 0;
+    }
+    switch(GetKeyPress(&gUnknown_203B270->input)) {
+        case INPUT_B_BUTTON:
+            PlayMenuSoundEffect(1);
+            return 2;
+        case INPUT_A_BUTTON:
+            PlayMenuSoundEffect(0);
+            return 3;
+        case INPUT_START_BUTTON:
+            PlayMenuSoundEffect(4);
+            return 4;
+        case INPUT_DPAD_DOWN:
+            index = gUnknown_203B270->input.menuIndex;
+            sub_8013780(&gUnknown_203B270->input, unk_FindMoveEnabledForAIAfter8_v2(gUnknown_203B270->moves, index));
+            if (index != gUnknown_203B270->input.menuIndex) {
+                PlayMenuSoundEffect(3);
+            }
+            break;
+        case INPUT_DPAD_UP:
+            index = gUnknown_203B270->input.menuIndex;
+            sub_8013780(&gUnknown_203B270->input,unk_FindMoveEnabledForAIBefore8_v2(gUnknown_203B270->moves,index));
+            if (index != gUnknown_203B270->input.menuIndex) {
+                PlayMenuSoundEffect(3);
+            }
+            break;
+        case INPUT_R_DPAD_DOWN_BUTTONS:
+            if (gUnknown_203B270->unk5 == 0) break;
+            moveIndex = gUnknown_203B270->input.menuIndex;
+            newIndex = gUnknown_203B270->input.menuIndex = unk_SetMoveToLastInLinkedSequence8_v2(gUnknown_203B270->moves, moveIndex);
+            if (moveIndex != newIndex) {
+                PlayMenuSoundEffect(3);
+            }
+            else {
+                goto _134;
+            }
+            sub_801F280(1);
+            return 1;
+        case INPUT_R_DPAD_UP_BUTTONS:
+            if (gUnknown_203B270->unk5 == 0) break;
+            moveIndex = gUnknown_203B270->input.menuIndex;
+            newIndex = gUnknown_203B270->input.menuIndex = unk_SetMoveToFirstInLinkedSequence8_v2(gUnknown_203B270->moves,moveIndex);
+            if (moveIndex != newIndex) {
+                PlayMenuSoundEffect(3);
+            }
+            else {
 _134:
-          PlayMenuSoundEffect(2);
+                    PlayMenuSoundEffect(2);
+            }
+            sub_801F280(1);
+            return 1;
+        case INPUT_R_A_BUTTONS:
+            if (gUnknown_203B270->unk6 != 0) {
+                if ((gTeamInventoryRef->teamMoney > 0x95) && (sub_8093318(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves)))
+                {
+                    TryLinkMovesAfter(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves);
+                    PlayMenuSoundEffect(6);
+                    flag = TRUE;
+                    if (!gUnknown_203B270->unk4) {
+                        gUnknown_203B270->unk4 = TRUE;
+                        PlaySound(0x14c);
+                    }
+                    break;
+                }
+                else if (UnlinkMovesAfter(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves)) {
+                    PlayMenuSoundEffect(6);
+                    goto _ret;
+                }
+                else {
+                    PlayMenuSoundEffect(2);
+                    break;
+                }
+            }
+            break;
+        case INPUT_SELECT_BUTTON:
+            if (gUnknown_203B270->unk7 != 0) {
+                if (gUnknown_203B270->isTeamLeader) {
+                    if (!ToggleSetMove(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves)) {
+                        PlayMenuSoundEffect(2);
+                        break;
+                    }
+                    else {
+                        PlayMenuSoundEffect(6);
+                        goto _ret;
+                    }
+                }
+                else if (ToggleMoveEnabled(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves)) {
+                    PlayMenuSoundEffect(6);
+                    goto _ret;
+                }
+                else {
+                    PlayMenuSoundEffect(2);
+                    break;
+                }
+            }
+            break;
+    }
+    if (!flag) {
+        for(index2 = 0; index2 < 8; index2++)
+        {
+            move =  &gUnknown_203B270->moves[index2];
+            if ((move->moveFlags & MOVE_FLAG_EXISTS)) {
+                if ((move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)) {
+                    gUnknown_203B270->fill14[index2] = 1;
+                }
+                else {
+                    gUnknown_203B270->fill14[index2] = 0;
+                }
+            }
         }
+        AddMenuCursorSprite_(&gUnknown_203B270->input, gUnknown_203B270->fill14);
+    }
+    if (flag) {
+    _ret:
         sub_801F280(1);
         return 1;
-      // R_A_BUTTONS
-      case 0xb:
-        if (gUnknown_203B270->unk6 != 0) {
-          if ((gTeamInventoryRef->teamMoney > 0x95) && (sub_8093318(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves) != 0))
-            {
-                TryLinkMovesAfter(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves);
-                PlayMenuSoundEffect(6);
-                bVar2 = 1;
-                if (gUnknown_203B270->unk4 == 0) {
-                    gUnknown_203B270->unk4 = 1;
-                    PlaySound(0x14c);
-                }
-                break;
-            }
-          else if (UnlinkMovesAfter(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves) != 0) {
-                PlayMenuSoundEffect(6);
-                goto _ret;
-            }
-          else {
-                PlayMenuSoundEffect(2);
-                break;
-            }
-        }
-        break;
-      // SELECT_BUTTON
-      case 3:
-        if (gUnknown_203B270->unk7 != 0) {
-          if (gUnknown_203B270->isTeamLeader) {
-            if (ToggleSetMove(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves) == 0) {
-                PlayMenuSoundEffect(2);
-                break;
-            }
-            else {
-                PlayMenuSoundEffect(6);
-                goto _ret;
-            }
-          }
-          else 
-          {
-            if (ToggleMoveEnabled(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves) != 0) {
-                PlayMenuSoundEffect(6);
-                goto _ret;
-            }
-            else {
-                PlayMenuSoundEffect(2);
-                break;
-            }
-          }
-        }
-        break;
-  }
-  if (!bVar2) {
-    for(index2 = 0; index2 < 8; index2++)
-    {
-      move =  &gUnknown_203B270->moves[index2];
-      if ((move->moveFlags & 1)) {
-        if ((move->moveFlags & 2)) {
-          gUnknown_203B270->fill14[index2] = 1;
-        }
-        else {
-          gUnknown_203B270->fill14[index2] = 0;
-        }
-      }
-    }
-    AddMenuCursorSprite_(&gUnknown_203B270->input, gUnknown_203B270->fill14);
-  }
-    if (bVar2) {
-_ret:
-      sub_801F280(1);
-      return 1;
     }
     else
-    {
-      return 0;
+{
+        return 0;
     }
 }
 
@@ -222,7 +211,7 @@ s32 sub_801F194 (void)
     return gUnknown_203B270->input.menuIndex;
 }
 
-u8 sub_801F1A4(void)
+bool8 sub_801F1A4(void)
 {
     return gUnknown_203B270->unk4;
 }
