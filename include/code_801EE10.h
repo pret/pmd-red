@@ -10,7 +10,7 @@
 typedef struct unkStruct_203B270
 {
     u32 unk0;
-    u8 unk4;
+    bool8 unk4;
     u8 unk5;
     u8 unk6;
     u8 unk7;
@@ -18,7 +18,7 @@ typedef struct unkStruct_203B270
     /* 0xC */ u8 isTeamLeader;
     /* 0x10 */ Move *moves;
     u8 fill14[0x1C - 0x14];
-    MenuInputStruct input;
+    /* 0x1C */ MenuInputStruct input;
     u32 unk50;
     u32 unk54;
     UnkTextStruct2 unk58[4];
@@ -26,13 +26,13 @@ typedef struct unkStruct_203B270
 } unkStruct_203B270;
 
 u8 sub_801EE10(u32, s16 species, Move *moves, u32, const u8 *text, u32);
+u32 sub_801EF38(char);
+s32 sub_801F194(void);
+bool8 sub_801F1A4(void);
+void sub_801F1B0(bool8, bool8);
+void sub_801F214(void);
 
 // code_801EE10.s
-extern u32 sub_801EF38(u32);
-extern u32 sub_801F194(void);
-extern bool8 sub_801F1A4(void);
-extern void sub_801F1B0(bool8, bool8);
-extern void sub_801F214(void);
 extern void sub_801F280(u32); // Probably bool
 
 #endif // CODE_801EE10_H

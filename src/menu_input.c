@@ -587,7 +587,7 @@ void AddMenuCursorSprite(MenuInputStruct *param_1)
     AddMenuCursorSprite_(param_1, 0);
 }
 
-void AddMenuCursorSprite_(MenuInputStruct *a0, u32 a1)
+void AddMenuCursorSprite_(MenuInputStruct *a0, u8 *a1)
 {
     SpriteOAM sp = {};
     SpriteOAM* ptr;

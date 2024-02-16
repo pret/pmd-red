@@ -1,14 +1,18 @@
 #include "global.h"
 #include "input.h"
+#include "items.h"
 #include "text1.h"
 #include "text2.h"
 #include "memory.h"
+#include "moves.h"
 #include "code_801EE10.h"
+#include "code_80118A4.h"
 #include "menu_input.h"
 
 extern unkStruct_203B270 *gUnknown_203B270;
 extern UnkTextStruct2 gUnknown_80DC25C;
 extern UnkTextStruct2 gUnknown_80DC274;
+extern UnkTextStruct2 gUnknown_80DC240;
 
 u32 sub_8006544(u32 index);
 s32 sub_801F3F8(void);
@@ -64,4 +68,191 @@ u8 sub_801EE10(u32 param_1, s16 species, Move *moves, u32 param_4, const u8 *tex
   sub_8013780(&gUnknown_203B270->input,0);
   sub_801F280(1);
   return 1;
+}
+
+u32 sub_801EF38(char param_1)
+{
+  bool8 bVar2;
+  s32 index;
+  s32 index2;
+  s32 moveIndex;
+  s32 newIndex;
+  struct Move *move;
+  
+  bVar2 = 0;
+  if (param_1 == 0) {
+    sub_8013660(&gUnknown_203B270->input);
+    return 0;
+  }
+  switch(GetKeyPress(&gUnknown_203B270->input)) {
+      // B_BUTTON
+      case 2:
+        PlayMenuSoundEffect(1);
+        return 2;
+      // A_BUTTON
+      case 1:
+        PlayMenuSoundEffect(0);
+        return 3;
+      // START_BUTTON
+      case 4:
+        PlayMenuSoundEffect(4);
+        return 4;
+      // DPAD_DOWN
+      case 8:
+        index = gUnknown_203B270->input.menuIndex;
+        sub_8013780(&gUnknown_203B270->input, unk_FindMoveEnabledForAIAfter8_v2(gUnknown_203B270->moves, index));
+        if (index != gUnknown_203B270->input.menuIndex) {
+          PlayMenuSoundEffect(3);
+        }
+        break;
+      // DPAD_UP
+      case 7:
+        index = gUnknown_203B270->input.menuIndex;
+        sub_8013780(&gUnknown_203B270->input,unk_FindMoveEnabledForAIBefore8_v2(gUnknown_203B270->moves,index));
+        if (index != gUnknown_203B270->input.menuIndex) {
+          PlayMenuSoundEffect(3);
+        }
+        break;
+      // R_PAD_DOWN_BUTTONS
+      case 0xd:
+        if (gUnknown_203B270->unk5 == 0) break;
+          moveIndex = gUnknown_203B270->input.menuIndex;
+          newIndex = gUnknown_203B270->input.menuIndex = unk_SetMoveToLastInLinkedSequence8_v2(gUnknown_203B270->moves, moveIndex);
+          if (moveIndex != newIndex) {
+              PlayMenuSoundEffect(3);
+          }
+          else {
+              goto _134;
+          }
+          sub_801F280(1);
+          return 1;
+      // R_PAD_UP_BUTTONS
+      case 0xc:
+        if (gUnknown_203B270->unk5 == 0) break;
+        moveIndex = gUnknown_203B270->input.menuIndex;
+        newIndex = gUnknown_203B270->input.menuIndex = unk_SetMoveToFirstInLinkedSequence8_v2(gUnknown_203B270->moves,moveIndex);
+        if (moveIndex != newIndex) {
+          PlayMenuSoundEffect(3);
+        }
+        else {
+_134:
+          PlayMenuSoundEffect(2);
+        }
+        sub_801F280(1);
+        return 1;
+      // R_A_BUTTONS
+      case 0xb:
+        if (gUnknown_203B270->unk6 != 0) {
+          if ((gTeamInventoryRef->teamMoney > 0x95) && (sub_8093318(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves) != 0))
+            {
+                TryLinkMovesAfter(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves);
+                PlayMenuSoundEffect(6);
+                bVar2 = 1;
+                if (gUnknown_203B270->unk4 == 0) {
+                    gUnknown_203B270->unk4 = 1;
+                    PlaySound(0x14c);
+                }
+                break;
+            }
+          else if (UnlinkMovesAfter(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves) != 0) {
+                PlayMenuSoundEffect(6);
+                goto _ret;
+            }
+          else {
+                PlayMenuSoundEffect(2);
+                break;
+            }
+        }
+        break;
+      // SELECT_BUTTON
+      case 3:
+        if (gUnknown_203B270->unk7 != 0) {
+          if (gUnknown_203B270->isTeamLeader) {
+            if (ToggleSetMove(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves) == 0) {
+                PlayMenuSoundEffect(2);
+                break;
+            }
+            else {
+                PlayMenuSoundEffect(6);
+                goto _ret;
+            }
+          }
+          else 
+          {
+            if (ToggleMoveEnabled(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves) != 0) {
+                PlayMenuSoundEffect(6);
+                goto _ret;
+            }
+            else {
+                PlayMenuSoundEffect(2);
+                break;
+            }
+          }
+        }
+        break;
+  }
+  if (!bVar2) {
+    for(index2 = 0; index2 < 8; index2++)
+    {
+      move =  &gUnknown_203B270->moves[index2];
+      if ((move->moveFlags & 1)) {
+        if ((move->moveFlags & 2)) {
+          gUnknown_203B270->fill14[index2] = 1;
+        }
+        else {
+          gUnknown_203B270->fill14[index2] = 0;
+        }
+      }
+    }
+    AddMenuCursorSprite_(&gUnknown_203B270->input, gUnknown_203B270->fill14);
+  }
+    if (bVar2) {
+_ret:
+      sub_801F280(1);
+      return 1;
+    }
+    else
+    {
+      return 0;
+    }
+}
+
+s32 sub_801F194 (void)
+{
+    return gUnknown_203B270->input.menuIndex;
+}
+
+u8 sub_801F1A4(void)
+{
+    return gUnknown_203B270->unk4;
+}
+
+void sub_801F1B0(bool8 param_1, bool8 param_2)
+{
+    if(!gUnknown_203B270->unk4)
+        gUnknown_203B270->unk4 = param_2;
+    ResetUnusedInputStruct();
+    sub_800641C(gUnknown_203B270->unk58, TRUE, TRUE);
+    gUnknown_203B270->input.unk22 = sub_801F3F8();
+    sub_8013984(&gUnknown_203B270->input);
+    gUnknown_203B270->input.menuIndex = sub_8092F4C(gUnknown_203B270->moves, gUnknown_203B270->input.menuIndex);
+    sub_801F280(1);
+    if(param_1)
+        AddMenuCursorSprite(&gUnknown_203B270->input);
+}
+
+void sub_801F214(void)
+{
+    if(gUnknown_203B270)
+    {
+        gUnknown_203B270->unk58[gUnknown_203B270->unk50] = gUnknown_80DC240;
+        if(gUnknown_203B270->text)
+        {
+            gUnknown_203B270->unk58[gUnknown_203B270->unk54] = gUnknown_80DC240;
+        }
+        ResetUnusedInputStruct();
+        sub_800641C(gUnknown_203B270->unk58, TRUE, TRUE);
+        MemoryFree(gUnknown_203B270);
+        gUnknown_203B270 = NULL;
+    }
 }
