@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/input.h"
 #include "input.h"
 #include "items.h"
@@ -11,9 +12,38 @@
 #include "menu_input.h"
 
 extern unkStruct_203B270 *gUnknown_203B270;
-extern UnkTextStruct2 gUnknown_80DC25C;
-extern UnkTextStruct2 gUnknown_80DC274;
-extern UnkTextStruct2 gUnknown_80DC240;
+
+const UnkTextStruct2 gUnknown_80DC240 = {
+    0x00, 0x00, 0x00, 0x00,
+    0x03,
+    0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
+};
+
+const u8 gUnkData_80DC258[4] = {0x01, 0x00, 0x0F, 0x00};
+
+const UnkTextStruct2 gUnknown_80DC25C = {
+    0, 0, 0, 0,
+    6, 
+    0x2, 0x2,
+    0x12, 0x8,
+    0x8, 0,
+    gUnkData_80DC258
+};
+
+const UnkTextStruct2 gUnknown_80DC274 = {
+    0, 0, 0, 0,
+    3, 
+    0x2, 0xF,
+    0x1A, 0x3,
+    0x3, 0,
+    NULL,
+};
+
+ALIGNED(4) const u8 gUnknown_80DC28C[] = _("Moves: {COLOR_1 YELLOW}{ARG_POKEMON_0}{END_COLOR_TEXT_1} ");
+ALIGNED(4) const u8 gUnknown_80DC2A0[] = _("{ARG_MOVE_ITEM_0}");
 
 u32 sub_8006544(u32 index);
 s32 sub_801F3F8(void);

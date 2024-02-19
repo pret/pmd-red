@@ -123,6 +123,8 @@ SECTIONS {
         src/code_801EE10.o(.text);
         asm/code_801EE10.o(.text);
         src/code_801EE10_mid.o(.text);
+        src/code_801F428.o(.text);
+        src/code_801F808.o(.text);
         src/gulpin_shop_801FB50.o(.text);
         src/wigglytuff_shop1.o(.text);
         src/wigglytuff_shop2.o(.text);
@@ -460,7 +462,9 @@ SECTIONS {
         src/hints_menu1.o(.rodata);
         src/hints_menu2.o(.rodata);
         src/gulpin_shop.o(.rodata);
-        data/data_80DC240.o(.rodata);
+        src/code_801EE10.o(.rodata);
+        src/code_801F428.o(.rodata);
+        src/code_801F808.o(.rodata);
         src/gulpin_shop_801FB50.o(.rodata);
         src/wigglytuff_shop1.o(.rodata);
         src/wigglytuff_shop2.o(.rodata);
