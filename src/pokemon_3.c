@@ -18,9 +18,6 @@ extern u8 *gIQSkillDescriptions[];
 extern u8 *gTacticsDescriptions[];
 extern u8 *gTactics[];
 extern bool8 gTacticsTargetLeader[];
-
-extern s16 gReqTacticLvls[];
-extern s32 gReqIQSkillPts[];
 extern u32 gIQSkillGroups[];
 
 struct unkStruct_808E9EC
@@ -45,6 +42,8 @@ extern s16 gUnknown_810AC66; // 0x8
 
 // 2, 4, 6, 7, 8, 9, 0xA, 0xD, 0xF, 0x11
 extern s32 gUnknown_810AC90[10];
+
+#include "data/pokemon_3.h"
 
 extern void SaveDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
 extern void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
