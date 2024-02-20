@@ -547,6 +547,8 @@ SECTIONS {
         src/dungeon_capabilities.o(.rodata);
         src/dungeon_ai_targeting.o(.rodata);
         data/data_8107010.o(.rodata);
+        src/items.o(.rodata);
+        src/code_8048480.o(.rodata);
         src/friend_area.o(.rodata);
         data/data_810AC60.o(.rodata);
         src/tile_types.o(.rodata);

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_8097DD0.h"
 #include "constants/colors.h"
+#include "constants/type.h"
 #include "items.h"
 #include "moves.h"
 #include "random.h"
@@ -23,12 +24,10 @@ extern u8 gUnknown_202DE58[];
 extern u32 gUnknown_202DE30;
 extern u8* gPtrTypeText;  // ptr to "Type\0"
 extern u8* gPtrPPD0Text;  // ptr to "PP {ARG_VALUE_0} \0"
-extern u32 gUnknown_810A3F0[100];
 extern u32 gUnknown_81097E8[4];  // some sort of lookup table (16, 18, 20, 22)
 extern u32 gUnknown_81097F8[4];  // some sort of lookup table (17, 19, 21, 23)
 extern const char *gUnknown_810AF50[];
 extern u8 gUnknown_8108F64[0x3f][32];  // some sort of bit lookup table
-extern s16 gTypeGummiIQBoost[0x12][NUMBER_OF_GUMMIS];
 extern u8 gInvalidItemIDs[0x10];
 
 EWRAM_DATA OpenedFile *gItemParametersFile = {0};
@@ -40,6 +39,7 @@ extern s32 sub_8091E94(s32 a1, s32 a2, s32 a3);
 extern void SortKecleonShopInventory();
 bool8 AddKecleonWareItem(u8);
 
+#include "data/items.h"
 
 static void sub_8090F58(u8 *, u8 *, Item *, unkStruct_8090F58 *);
 

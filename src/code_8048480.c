@@ -24,7 +24,6 @@ extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DE58[];
 
 extern s16 gTypeGummiIQBoost[NUM_TYPES][NUMBER_OF_GUMMIS];
-extern s16 gUnknown_810A808[NUM_TYPES][NUMBER_OF_GUMMIS];
 
 extern u8 *gUnknown_80F89F4[];
 extern u8 *gUnknown_80FB580[];
@@ -65,6 +64,8 @@ extern u8 *gUnknown_80FE3E8[];
 extern u8 *gUnknown_80FECA0[];
 extern u8 *gUnknown_80FE3E8[];
 extern u8 *gUnknown_80F9BD8[];
+
+#include "data/code_8048480.h"
 
 extern void sub_80421C0(Entity *r0, u16 r1);
 extern void sub_8078B5C(Entity *, Entity *, u32, u32, u32);
