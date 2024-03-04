@@ -34,6 +34,8 @@ extern u8 gUnknown_202DE58[];
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DFE8[];
 
+extern u8 *gUnknown_80FE3BC[];
+extern u8 *gUnknown_80FE38C[];
 extern u8 *gUnknown_80FC888[];
 extern u8 *gUnknown_80FC8C0[];
 extern s16 gUnknown_80F4DEA;
@@ -1718,3 +1720,176 @@ bool8 SkillSwapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param
   }
   return flag;
 }
+
+// https://decomp.me/scratch/Ul8x5 
+#ifdef NONMATCHING
+bool32 SketchMoveAction(struct Entity *pokemon, struct Entity *target, struct Move *move)
+{
+  u16 moveID;
+  struct EntityInfo *targetInfo;
+  struct EntityInfo *pokeInfo;
+  int moveIndex;
+  register bool32 flag asm("sl");
+  struct Move *move1;
+  s32 other_flag = 0;
+    
+  flag = 0;
+  pokeInfo = pokemon->info;
+  targetInfo = target->info;
+  moveID = 0;
+
+  for(moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+  {
+      move1 = &targetInfo->moves[moveIndex];
+      if ((((move1->moveFlags & MOVE_FLAG_EXISTS))) && ((targetInfo->moves[moveIndex].moveFlags & 0x10))) {
+            moveID = targetInfo->moves[moveIndex].id;
+            goto _moveIDcheck;
+      }    
+  }
+
+  if(other_flag == 0)
+  {
+      sub_80522F4(pokemon, target, *gUnknown_80FE3BC);
+      return 0;
+  }
+
+_moveIDcheck:
+  if (moveID == 0) {
+      sub_80522F4(pokemon, target, *gUnknown_80FE3BC);
+  }
+  else {
+      InitPokemonMove(move, moveID);
+      sub_80928C0(gUnknown_202DE58, move, 0);
+      move->moveFlags2 |= MOVE_FLAG2_UNK4;  
+      move->moveFlags2 |= MOVE_FLAG_REPLACE;
+      sub_80522F4(pokemon, target, *gUnknown_80FE38C);
+      if (pokeInfo->unkFB == 0) {
+        pokeInfo->unkFB = 1;
+      }
+      flag = 1;
+    }
+    return flag;
+}
+
+#else
+NAKED
+bool32 SketchMoveAction(struct Entity *pokemon, struct Entity *target, struct Move *move)
+{
+    asm_unified(
+	"\tpush {r4-r7,lr}\n"
+	"\tmov r7, r10\n"
+	"\tmov r6, r9\n"
+	"\tmov r5, r8\n"
+	"\tpush {r5-r7}\n"
+	"\tsub sp, 0x4\n"
+	"\tadds r6, r0, 0\n"
+	"\tadds r7, r1, 0\n"
+	"\tadds r5, r2, 0\n"
+	"\tmovs r0, 0\n"
+	"\tmov r10, r0\n"
+	"\tldr r1, [r6, 0x70]\n"
+	"\tstr r1, [sp]\n"
+	"\tldr r0, [r7, 0x70]\n"
+	"\tmovs r2, 0\n"
+	"\tmov r12, r2\n"
+	"\tmovs r4, 0\n"
+	"\tmovs r1, 0x8C\n"
+	"\tlsls r1, 1\n"
+	"\tadds r3, r0, r1\n"
+	"\tadds r1, r0, 0\n"
+	"\tmovs r2, 0x1\n"
+	"\tmov r9, r2\n"
+	"\tmovs r0, 0x10\n"
+	"\tmov r8, r0\n"
+"_08059372:\n"
+	"\tldrb r2, [r3]\n"
+	"\tmov r0, r9\n"
+	"\tands r0, r2\n"
+	"\tcmp r0, 0\n"
+	"\tbeq _08059384\n"
+	"\tmov r0, r8\n"
+	"\tands r0, r2\n"
+	"\tcmp r0, 0\n"
+	"\tbne _080593A8\n"
+"_08059384:\n"
+	"\tadds r3, 0x8\n"
+	"\tadds r1, 0x8\n"
+	"\tadds r4, 0x1\n"
+	"\tcmp r4, 0x3\n"
+	"\tble _08059372\n"
+	"\tmovs r0, 0\n"
+	"\tcmp r0, 0\n"
+	"\tbne _080593B2\n"
+	"\tldr r0, _080593A4\n"
+	"\tldr r2, [r0]\n"
+	"\tadds r0, r6, 0\n"
+	"\tadds r1, r7, 0\n"
+	"\tbl sub_80522F4\n"
+	"\tmovs r0, 0\n"
+	"\tb _0805940A\n"
+	"\t.align 2, 0\n"
+"_080593A4: .4byte gUnknown_80FE3BC\n"
+"_080593A8:\n"
+	"\tmovs r2, 0x8D\n"
+	"\tlsls r2, 1\n"
+	"\tadds r0, r1, r2\n"
+	"\tldrh r0, [r0]\n"
+	"\tmov r12, r0\n"
+"_080593B2:\n"
+	"\tmov r0, r12\n"
+	"\tcmp r0, 0\n"
+	"\tbne _080593CC\n"
+	"\tldr r0, _080593C8\n"
+	"\tldr r2, [r0]\n"
+	"\tadds r0, r6, 0\n"
+	"\tadds r1, r7, 0\n"
+	"\tbl sub_80522F4\n"
+	"\tb _08059408\n"
+	"\t.align 2, 0\n"
+"_080593C8: .4byte gUnknown_80FE3BC\n"
+"_080593CC:\n"
+	"\tadds r0, r5, 0\n"
+	"\tmov r1, r12\n"
+	"\tbl InitPokemonMove\n"
+	"\tldr r0, _0805941C\n"
+	"\tadds r1, r5, 0\n"
+	"\tmovs r2, 0\n"
+	"\tbl sub_80928C0\n"
+	"\tldrb r1, [r5, 0x1]\n"
+	"\tmovs r0, 0x4\n"
+	"\torrs r0, r1\n"
+	"\tmovs r1, 0x20\n"
+	"\torrs r0, r1\n"
+	"\tstrb r0, [r5, 0x1]\n"
+	"\tldr r0, _08059420\n"
+	"\tldr r2, [r0]\n"
+	"\tadds r0, r6, 0\n"
+	"\tadds r1, r7, 0\n"
+	"\tbl sub_80522F4\n"
+	"\tldr r1, [sp]\n"
+	"\tadds r1, 0xFB\n"
+	"\tldrb r0, [r1]\n"
+	"\tcmp r0, 0\n"
+	"\tbne _08059404\n"
+	"\tmovs r0, 0x1\n"
+	"\tstrb r0, [r1]\n"
+"_08059404:\n"
+	"\tmovs r1, 0x1\n"
+	"\tmov r10, r1\n"
+"_08059408:\n"
+	"\tmov r0, r10\n"
+"_0805940A:\n"
+	"\tadd sp, 0x4\n"
+	"\tpop {r3-r5}\n"
+	"\tmov r8, r3\n"
+	"\tmov r9, r4\n"
+	"\tmov r10, r5\n"
+	"\tpop {r4-r7}\n"
+	"\tpop {r1}\n"
+	"\tbx r1\n"
+	"\t.align 2, 0\n"
+"_0805941C: .4byte gUnknown_202DE58\n"
+"_08059420: .4byte gUnknown_80FE38C\n"
+    );
+}
+#endif

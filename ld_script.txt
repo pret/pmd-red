@@ -226,7 +226,6 @@ SECTIONS {
         src/charge_move.o(.text);
         src/move_util.o(.text);
         src/code_8057824.o(.text);
-        asm/code_8057824.o(.text);
         src/code_805A120.o(.text);
         src/status_actions.o(.text);
         src/move_checks.o(.text);
