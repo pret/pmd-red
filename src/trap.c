@@ -6,6 +6,7 @@
 #include "status.h"
 #include "code_80521D0.h"
 #include "items.h"
+#include "moves.h"
 #include "code_808417C.h"
 
 #include "dungeon_engine.h"
@@ -35,7 +36,11 @@ extern u8 *gUnknown_80FD788[];
 extern u8 *gUnknown_80FD7D4[];
 extern u8 *gUnknown_80F970C[];
 extern u8 *gUnknown_80F9728[];
+extern u8 *gUnknown_80FED00[];
+extern u8 *gUnknown_80FED04[];
 extern u8 *gUnknown_80FED0C[];
+extern u8 *gUnknown_80FDAA0[];
+extern u8 *gUnknown_80FDA80[];
 
 extern s16 gUnknown_80F4E0E;
 extern s16 gUnknown_80F4F84;
@@ -44,8 +49,27 @@ extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
 extern s16 gUnknown_80F4F8A;
 
+struct unkStruct_806B7F8
+{
+    s16 species;
+    u8 unk2;
+    u32 unk4;
+    u16 level;
+    u8 fillA[2];
+    struct Position pos;
+    u8 unk10;
+};
+extern u32 sub_806B7F8(struct unkStruct_806B7F8 *, u32);
+
+void sub_806A9B4(Entity *, u32);
+
+void sub_8079E34(Entity *param_1, Entity *param_2, u32);
+s16 sub_803D970(u32);
+u8 sub_806AA0C(s32, s32);
+void sub_80421EC(Position *, u32);
+
 bool8 sub_8045888(Entity *);
-void sub_8080B00(Tile *, u32);
+void SetTrap(Tile *, u32);
 void sub_803E708(u32, u32);
 u8 sub_8043D10(void);
 void SetMessageArgument(u8 *, Entity *, u32);
@@ -686,7 +710,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
         {
             info = target->info;
             if (sub_8045888(target)) {
-                sub_8080B00(tile, 0x1B);
+                SetTrap(tile, 0x1B);
                 flag = TRUE;
                 sub_80421C0(target,0x193);
                 sub_803E708(0x1e,0x48);
@@ -714,8 +738,101 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
                 sub_8068FE0(target,0x215,pokemon);
             }
             if (flag) {
-                sub_8080B00(tile, 5);
+                SetTrap(tile, TRAP_PITFALL_TRAP);
             }
         }
     }
+}
+
+void HandleSummonTrap(Entity *pokemon,Position *pos)
+{
+  s32 r4;
+  u32 direction;
+  int pokemonSummonCount;
+  s16 species;
+  struct unkStruct_806B7F8 stack;
+  s32 i;
+
+
+  r4 = DungeonRandInt(3) + 2;
+  direction = DungeonRandInt(NUM_DIRECTIONS);
+  if (IsBossFight()) {
+      goto _ret;
+  }
+  else
+  {
+    pokemonSummonCount = 0;
+    if (pokemonSummonCount < r4) {
+        for (i = 0; i < r4; i++)
+        {
+            species = sub_803D970(0);
+            direction &= DIRECTION_MASK;
+            stack.species = species;
+            if (sub_806AA0C(stack.species,0) != 0) {
+              stack.level = 0;
+              stack.unk2 = 0;
+              stack.pos.x = pos->x + gAdjacentTileOffsets[direction].x;
+              stack.pos.y = pos->y + gAdjacentTileOffsets[direction].y;
+              stack.unk4 = 0;
+              stack.unk10 = 0;
+              if (sub_806B7F8(&stack,1) != 0) {
+                pokemonSummonCount++;
+              }
+            }
+            direction++;
+        }
+    }
+    sub_80421EC(pos,0x194);
+    if (pokemonSummonCount == 0) {
+_ret:
+        SendMessage(pokemon,*gUnknown_80FED04);
+    }
+    else
+    {
+        SendMessage(pokemon,*gUnknown_80FED00);
+    }
+  }
+}
+
+void HandlePPZeroTrap(Entity *param_1,Entity *param_2)
+{
+  Move *move;
+  s32 moveIndex;
+  s32 i;
+  s32 counter;
+  EntityInfo *info;
+  Move *moveStack [MAX_MON_MOVES];
+  s32 indexStack [MAX_MON_MOVES];
+  bool8 flag = FALSE;
+  
+
+  if (param_2 != NULL) {
+    info = param_2->info;
+    counter = 0;
+    for(i = 0;  i < MAX_MON_MOVES; move++, i++)
+    {
+      move = &info->moves[i];
+      if (((move->moveFlags & MOVE_FLAG_EXISTS) != 0) && (move->PP != 0)) {
+        moveStack[counter] = move;
+        indexStack[counter] = i;
+        counter++;
+      }
+    }
+    if (counter != 0) {
+      moveIndex = DungeonRandInt(counter);
+      moveStack[moveIndex]->PP = 0;
+      sub_80928C0(gUnknown_202DE58,moveStack[moveIndex],0);
+      sub_806A9B4(param_2, indexStack[moveIndex]);
+      flag = TRUE;
+    }
+    if(flag)
+        sub_80522F4(param_1,param_2,*gUnknown_80FDA80);
+    else
+        sub_80522F4(param_1,param_2,*gUnknown_80FDAA0);
+  }
+}
+
+void HandleWonderTile(Entity *param_1, Entity *param_2)
+{
+    sub_8079E34(param_1, param_2, 0);
 }

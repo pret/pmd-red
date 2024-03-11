@@ -40,7 +40,7 @@ bool8 sub_8013938(MenuInputStruct *param_1);
 void sub_8013984(MenuInputStruct * param_1);
 void sub_8013A54(MenuInputStruct *param_1);
 void sub_8013A7C(MenuInputStruct *param_1);
-void AddMenuCursorSprite_(MenuInputStruct *, u32);
+void AddMenuCursorSprite_(MenuInputStruct *, u8 *);
 void nullsub_34(MenuInputStructSub *);
 
 void sub_8013AA0(unkStructFor8013AA0 *);

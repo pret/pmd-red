@@ -15,7 +15,7 @@ struct unkStruct_3001B64_sub
     u32 unk8;
     u32 unkC;
     u32 unk10;
-    /* 0x14 */ u32 faceData;
+    /* 0x14 */ u8 *faceData;
     u32 fill18;
     u8 unk1C;
     u8 fill1D[0x20 - 0x1D];
@@ -237,29 +237,32 @@ void sub_809A7EC(void)
     }
 }
 
-// https://decomp.me/scratch/4MpWc (96.23% matching - Seth)
-// void sub_809A83C(s16 index)
-// {
-//     struct unkStruct_3001B64_sub *temp;
-//
-//     temp = &gUnknown_3001B64->unk43C[index];
-//
-//     temp->unk0 = -1;
-//     temp->speciesID = MONSTER_NONE;
-//     temp->unk4 = 0;
-//     temp->unk5 = 0;
-//     temp->unk6 = -1;
-//     temp->unk7 = 0;
-//     temp->unk8 = 0;
-//     temp->unkC = 0;
-//     temp->unk10 = 0;
-//     temp->faceData = NULL;
-//     temp->unk1C = 0;
-//     strcpy(gAvailablePokemonNames + (index * 0x50), gInvalidityText);
-//     strcpy(gPlayerName + (index * 0x50), gInvalidityText);
-//     if(temp->faceFile)
-//     {
-//         CloseFile(temp->faceFile);
-//         temp->faceFile = NULL;
-//     }
-// }
+static inline struct unkStruct_3001B64_sub *sub_809A83C_inline(s16 p, struct unkStruct_3001B64 **thing) {
+    return &thing[0]->unk43C[p];
+}
+
+void sub_809A83C(s16 param_1)
+{
+    struct unkStruct_3001B64_sub *temp;
+
+    temp = sub_809A83C_inline(param_1, &gUnknown_3001B64);
+
+    temp->unk0 = -1;
+    temp->speciesID = 0;
+    temp->unk4 = 0;
+    temp->unk5 = 0;
+    temp->unk6 = -1;
+    temp->unk7 = 0;
+    temp->unk8 = 0;
+    temp->unkC = 0;
+    temp->unk10 = 0;
+    temp->faceData = NULL;
+    temp->unk1C = 0;
+    strcpy(gAvailablePokemonNames + (param_1 * 0x50), gInvalidityText);
+    strcpy(gPlayerName + (param_1 * 0x50), gInvalidityText);
+    if(temp->faceFile)
+    {
+        CloseFile(temp->faceFile);
+        temp->faceFile = NULL;
+    }
+}

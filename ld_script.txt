@@ -123,6 +123,8 @@ SECTIONS {
         src/code_801EE10.o(.text);
         asm/code_801EE10.o(.text);
         src/code_801EE10_mid.o(.text);
+        src/code_801F428.o(.text);
+        src/code_801F808.o(.text);
         src/gulpin_shop_801FB50.o(.text);
         src/wigglytuff_shop1.o(.text);
         src/wigglytuff_shop2.o(.text);
@@ -223,9 +225,7 @@ SECTIONS {
         asm/code_80521D0.o(.text);
         src/charge_move.o(.text);
         src/move_util.o(.text);
-        src/code_8057824.o(.text);
-        asm/code_8057824.o(.text);
-        src/code_805A120.o(.text);
+        src/move_actions.o(.text);
         src/status_actions.o(.text);
         src/move_checks.o(.text);
         asm/code_805D8C8.o(.text);
@@ -272,6 +272,8 @@ SECTIONS {
         src/code_807E5AC.o(.text);
         src/trap.o(.text);
         asm/code_807FCD4.o(.text);
+        src/trap_1.o(.text);
+        asm/code_8080CF0.o(.text);
         src/code_8083288.o(.text);
         src/dungeon_range.o(.text);
         src/code_808333C.o(.text);
@@ -458,7 +460,9 @@ SECTIONS {
         src/hints_menu1.o(.rodata);
         src/hints_menu2.o(.rodata);
         src/gulpin_shop.o(.rodata);
-        data/data_80DC240.o(.rodata);
+        src/code_801EE10.o(.rodata);
+        src/code_801F428.o(.rodata);
+        src/code_801F808.o(.rodata);
         src/gulpin_shop_801FB50.o(.rodata);
         src/wigglytuff_shop1.o(.rodata);
         src/wigglytuff_shop2.o(.rodata);
@@ -541,6 +545,9 @@ SECTIONS {
         src/dungeon_capabilities.o(.rodata);
         src/dungeon_ai_targeting.o(.rodata);
         data/data_8107010.o(.rodata);
+        src/pokemon_3.o(.rodata);
+        src/items.o(.rodata);
+        src/code_8048480.o(.rodata);
         src/friend_area.o(.rodata);
         data/data_810AC60.o(.rodata);
         src/tile_types.o(.rodata);

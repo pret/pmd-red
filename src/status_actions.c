@@ -20,8 +20,9 @@
 #include "dungeon_visibility.h"
 #include "structs/map.h"
 #include "moves.h"
+#include "move_util.h"
 #include "number_util.h"
-//#include "pokemon.h" // NOTE: overriding some of the funcs below... when fixed, uncomment this
+#include "pokemon.h"
 #include "status.h"
 #include "status_checks_1.h"
 
@@ -31,7 +32,6 @@
 #include "weather.h"
 
 extern void sub_807F43C(Entity *, Entity *);
-extern void MobileStatusTarget(Entity *, Entity *);
 extern void sub_807DC68(Entity *, Entity *);
 extern void sub_8078A58(Entity *, Entity *, s16, u32);
 extern u32 sub_803D73C(u32);
@@ -59,16 +59,12 @@ extern void sub_807DA14(Entity *, Entity *, s32);
 extern s16 sub_803D970(u32);
 extern u8 sub_806AA0C(s32, u32);
 extern void sub_806BB6C(Entity *, s32);
-extern void sub_8075C58(Entity *, Entity *, s32, s32);
 extern void sub_807E254(Entity *, Entity *, u32);
-extern bool8 sub_805727C(Entity * pokemon, Entity * target, s32 chance);
 extern u32 sub_8055640(Entity *, Entity *, Move *, u32, u32);
 extern void sub_806A6E8(Entity *);
 extern void sub_807D3CC(Entity *, Entity *);
 extern u8 sub_8069D18(Position *);
 extern u8 sub_804AD34(Position *);
-extern u8 sub_8057308(Entity *, u32);
-
 
 // TODO include dungeon_ai.h when SqueezedStatusTarget is figured out
 extern void LowerDefenseStageTarget(Entity *, Entity *, s32, s32, u8, bool8);
@@ -80,8 +76,9 @@ extern void LowerAttackStageTarget(Entity *, Entity *, s32, s32, u8, bool8);
 extern void PetrifiedStatusTarget(Entity *, Entity *);
 extern void WrapTarget(Entity *, Entity *);
 
-// TODO having matching issues when this isn't s32.. 
+// TODO having matching issues when this isn't s32..  (move_effects_target.h)
 extern void SqueezedStatusTarget(Entity *, Entity *, s32, bool32);
+extern void sub_8075C58(Entity *, Entity *, s32, s32);
 
 extern void sub_806F324(Entity *, s32, u32, u32);
 extern bool8 sub_805755C(Entity* pokemon,u16 moveID);

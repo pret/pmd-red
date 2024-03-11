@@ -5,65 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_809A83C
-sub_809A83C:
-	push {r4-r7,lr}
-	lsls r0, 16
-	asrs r0, 16
-	ldr r2, _0809A8A0
-	lsls r1, r0, 3
-	adds r1, r0
-	lsls r1, 2
-	ldr r3, _0809A8A4
-	adds r1, r3
-	ldr r2, [r2]
-	adds r6, r2, r1
-	ldr r1, _0809A8A8
-	strh r1, [r6]
-	movs r2, 0
-	movs r7, 0
-	strh r7, [r6, 0x2]
-	strb r2, [r6, 0x4]
-	strb r2, [r6, 0x5]
-	movs r1, 0xFF
-	strb r1, [r6, 0x6]
-	strb r2, [r6, 0x7]
-	str r7, [r6, 0x8]
-	str r7, [r6, 0xC]
-	str r7, [r6, 0x10]
-	str r7, [r6, 0x14]
-	strb r2, [r6, 0x1C]
-	lsls r4, r0, 2
-	adds r4, r0
-	lsls r4, 4
-	ldr r0, _0809A8AC
-	adds r0, r4, r0
-	ldr r5, _0809A8B0
-	adds r1, r5, 0
-	bl strcpy
-	ldr r0, _0809A8B4
-	adds r4, r0
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl strcpy
-	ldr r0, [r6, 0x20]
-	cmp r0, 0
-	beq _0809A89A
-	bl CloseFile
-	str r7, [r6, 0x20]
-_0809A89A:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0809A8A0: .4byte gUnknown_3001B64
-_0809A8A4: .4byte 0x0000043c
-_0809A8A8: .4byte 0x0000ffff
-_0809A8AC: .4byte gAvailablePokemonNames
-_0809A8B0: .4byte gInvalidityText
-_0809A8B4: .4byte gPlayerName
-	thumb_func_end sub_809A83C
-
 	thumb_func_start sub_809A8B8
 sub_809A8B8:
 	push {r4-r7,lr}
