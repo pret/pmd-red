@@ -6,7 +6,7 @@
 #include "random.h"
 #include "code_8092334.h"
 
-extern u8 gUnknown_810A350[];
+extern u8 gInvalidDungeonIDs[];
 extern u8 gDungeonFloorCount[];
 extern u8 *gUnknown_8108084[];
 
@@ -97,7 +97,7 @@ u8 sub_8090910(DungeonLocation *dungeon, u32 param_2)
   }
 }
 
-bool8 sub_809095C(u8 dungeon)
+bool8 IsNotValidDungeon(u8 dungeon)
 {
   s32 counter;
   
@@ -107,10 +107,10 @@ bool8 sub_809095C(u8 dungeon)
   else
   {
     counter = 0;
-    if (gUnknown_810A350[0] != DUNGEON_OUT_ON_RESCUE) {
-      for(; gUnknown_810A350[counter] != DUNGEON_OUT_ON_RESCUE; counter++)
+    if (gInvalidDungeonIDs[0] != DUNGEON_OUT_ON_RESCUE) {
+      for(; gInvalidDungeonIDs[counter] != DUNGEON_OUT_ON_RESCUE; counter++)
       {
-        if (gUnknown_810A350[counter] == dungeon) return TRUE;
+        if (gInvalidDungeonIDs[counter] == dungeon) return TRUE;
       }
     }
     return FALSE;

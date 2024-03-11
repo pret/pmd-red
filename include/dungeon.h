@@ -47,6 +47,6 @@ void PrintDungeonLocationtoBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 
 u32 sub_80908D8(DungeonLocation *dungeon);
 u8 sub_8090910(DungeonLocation *dungeon, u32 param_2);
-bool8 sub_809095C(u8 dungeon);
+bool8 IsNotValidDungeon(u8 dungeon);
 
 #endif // GUARD_DUNGEON_H

@@ -2,6 +2,7 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "random.h"
+#include "constants/dungeon.h"
 #include "constants/evolve_type.h"
 #include "constants/evolution_status.h"
 #include "constants/iq_skill.h"
@@ -17,7 +18,6 @@ extern u8 *gIQSkillNames[];
 extern u8 *gIQSkillDescriptions[];
 extern u8 *gTacticsDescriptions[];
 extern u8 *gTactics[];
-extern bool8 gTacticsTargetLeader[];
 extern u32 gIQSkillGroups[];
 
 struct unkStruct_808E9EC

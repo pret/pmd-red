@@ -90,7 +90,7 @@ bool8 ValidateWonderMail(WonderMail *data)
         if(data->unk2 > 9)
             return FALSE;
 
-        if(sub_809095C(data->unk4.dungeon.id))
+        if(IsNotValidDungeon(data->unk4.dungeon.id))
             return FALSE;
         if(data->unk4.dungeon.floor >= GetDungeonFloorCount(data->unk4.dungeon.id))
             return FALSE;
