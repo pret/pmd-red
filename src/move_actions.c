@@ -21,7 +21,6 @@
 #include "structs/map.h"
 #include "moves.h"
 #include "move_effects_target.h"
-// #include "move_util.h"
 #include "pokemon.h"
 #include "status.h"
 #include "status_actions.h"

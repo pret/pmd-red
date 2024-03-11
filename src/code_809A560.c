@@ -237,7 +237,7 @@ void sub_809A7EC(void)
     }
 }
 
-static inline struct unkStruct_3001B64_sub *LOL(s16 p, struct unkStruct_3001B64 **thing) {
+static inline struct unkStruct_3001B64_sub *sub_809A83C_inline(s16 p, struct unkStruct_3001B64 **thing) {
     return &thing[0]->unk43C[p];
 }
 
@@ -245,7 +245,7 @@ void sub_809A83C(s16 param_1)
 {
     struct unkStruct_3001B64_sub *temp;
 
-    temp = LOL(param_1, &gUnknown_3001B64);
+    temp = sub_809A83C_inline(param_1, &gUnknown_3001B64);
 
     temp->unk0 = -1;
     temp->speciesID = 0;
