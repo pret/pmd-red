@@ -8,12 +8,10 @@
 #include "code_80A26CC.h"
 #include "code_80972F4.h"
 
-extern MissionText gStoryMissionText[];
-extern const char gFinalScenarioText[];
-extern const char gMeetNinetalesText[];
-extern const char gAvoidCaptureText[];
-extern const u8 gUnknown_8109CC0[];
-extern const u8 gDummyScenarioText[];
+#include "data/story_missions.h"
+
+ALIGNED(4) const u8 gDummyScenarioText[] = _("{COLOR_1 YELLOW_3}Scenario try dummy{END_COLOR_TEXT_1}");
+ALIGNED(4) const u8 gBlankMission[] = _("{COLOR_1 RED_2}???{END_COLOR_TEXT_1}");
 
 extern void sub_800199C(u8, u8, u16, s32);
 extern void SaveDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
@@ -392,7 +390,7 @@ void sub_8097418(s16 index,bool32 param_2)
   bool8 param_2_u8 = param_2;
   if (index_s32 != 0xd) {
     if ((param_2_u8) && (sub_800199C(0,0x2c,index_s32,0), index_s32 < 0x1f)) {
-      MissionText *mt = &gStoryMissionText[index_s32];
+      const MissionText *mt = &gStoryMissionText[index_s32];
       if (mt->unk4 != 0xFF) {
         sub_8097FA8(mt->unk4);
       }
@@ -436,12 +434,12 @@ const u8 *GetCurrentMissionText(s16 index)
 {
     if(index < 0x1F)
     {
-        MissionText *mt = &gStoryMissionText[index];
+        const MissionText *mt = &gStoryMissionText[index];
         return mt->text;
     }
     else
     {
-        return gUnknown_8109CC0;
+        return gBlankMission;
     }
 }
 
@@ -453,123 +451,4 @@ void sub_80974E8(void)
 
 void nullsub_208(void)
 {
-}
-
-bool8 sub_8097504(s16 mazeIndex)
-{
-    s32 mazeIndex_s32;
-
-#ifndef NONMATCHING
-    register s32 mazeIndex_s32_1 asm("r1");
-#else
-    s32 mazeIndex_s32_1;
-#endif
-    s32 uVar3;
-
-    mazeIndex_s32 = mazeIndex;
-    mazeIndex_s32_1 = mazeIndex_s32;
-
-    if(mazeIndex_s32 < 17)
-    {
-        switch(mazeIndex_s32) {
-            case 2:
-            case 10:
-            case 11:
-            case 12:
-                uVar3 = 14;
-                break;
-            case 0:
-            case 1:
-            case 5:
-            case 7:
-            case 9:
-            case 14:
-                uVar3 = 15;
-                break;
-            case 3:
-            case 4:
-            case 6:
-            case 8:
-                return TRUE;
-            case 13:
-                uVar3 = 6;
-                break;
-            default:
-                return TRUE;
-        }
-    }
-    else
-    {
-        if (mazeIndex_s32_1 > 22)  return FALSE;
-        if (mazeIndex_s32_1 == 22) return FALSE;
-        if (mazeIndex_s32_1 == 21) return FALSE;
-        uVar3 = 6;
-    }
-
-    if (!sub_80023E4(uVar3)) {
-        return FALSE;
-    }
-    else {
-        return TRUE;
-    }
-}
-
-// TODO: this should probably be bool8 but can't get a match just yet
-bool32 IsMazeCompleted(s16 mazeIndex)
-{
-    bool32 mazeCompletion;
-
-    mazeCompletion = sub_8001784(0, 0x2e, mazeIndex);
-    if (mazeCompletion) {
-        mazeCompletion = TRUE;
-    }
-    return mazeCompletion;
-}
-
-void sub_80975A8(s16 param_1,u8 param_2)
-{ 
-    u16 param_1_u16 = param_1;
-    sub_800199C(0,0x2e,param_1_u16,param_2);
-}
-
-const u8 *sub_80975C4(s16 index)
-{
-    return GetDungeonName1(sub_80A2728(index));
-}
-
-const u8 *sub_80975DC(u32 r0)
-{
-    // TODO: slight hack but matches
-    r0 <<= 16;
-    if((0xffe90000 + r0) >> 16 < 2)
-        if(sub_8001D08(0x3, 0xE, -1))
-            return gMeetNinetalesText;
-        else
-            return gAvoidCaptureText;
-    else
-        return gFinalScenarioText;
-}
-
-bool8 HasCompletedAllMazes(void)
-{
-    s32 index;
-    for(index = 0; index < NUM_BASIC_DUNGEON_MAZE; index++)
-    {
-        if(!(bool8)IsMazeCompleted(index))
-            return FALSE;
-    }
-    return TRUE;
-}
-
-bool8 sub_8097640(void)
-{
-    if(sub_8001784(0, 0x2E, 0x1F) == 0 && HasCompletedAllMazes())
-    {
-        sub_800199C(0, 0x2E, 0x1F, 1);
-        return TRUE;
-    }
-    else
-    {
-        return FALSE;
-    }
 }

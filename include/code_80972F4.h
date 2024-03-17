@@ -6,7 +6,7 @@
 // size: 0x8
 typedef struct MissionText
 {
-    /* 0x0 */ u8 *text;
+    /* 0x0 */ const u8 *text;
     u8 unk4;
     u8 unk5;
     u8 unk6;
