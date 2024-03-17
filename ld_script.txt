@@ -436,6 +436,7 @@ SECTIONS {
         src/quick_save_read.o(.rodata);
         src/quick_save_write.o(.rodata);
         src/menu_input.o(.rodata);
+        src/code_80140DC.o(.rodata);
         data/data_80D47B8.o(.rodata);
         src/common_strings.o(.rodata);
         data/data_80DAF70.o(.rodata);
