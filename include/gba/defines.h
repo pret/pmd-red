@@ -57,6 +57,7 @@
 
 #define TOTAL_OBJ_TILE_COUNT 1024
 
+#define RGB_U32(r, g, b) ((r) | ((g) << 8) | ((b) << 16)) // 32 bit RGB color
 #define RGB(r, g, b) ((r) | ((g) << 5) | ((b) << 10))
 
 #define RGB_BLACK RGB(0, 0, 0)

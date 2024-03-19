@@ -1,13 +1,8 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_8009804.h"
 #include "code_8092334.h"
 #include "game_options.h"
-
-struct WindowBG
-{
-    // size: 0x10
-    u32 hexBG[4];
-};
 
 struct unkStruct_8094CB0
 {
@@ -15,7 +10,18 @@ struct unkStruct_8094CB0
     s16 unk2;
 };
 
-extern struct WindowBG gWindowBGColors;
+struct WindowBG
+{
+    // size: 0x10
+    u32 hexBG[4];
+};
+
+const struct WindowBG gWindowBGColors = {
+    RGB_U32(0x20, 0x48, 0x68), // Blue 
+    RGB_U32(0x80, 0x38, 0x20), // Red 
+    RGB_U32(0x28, 0x80, 0x48), // Green
+    RGB_U32(0x28, 0x80, 0x48) // Green
+};
 
 EWRAM_DATA_2 GameOptions *gGameOptionsRef = {0};
 EWRAM_DATA GameOptions gGameOptions = {0};
