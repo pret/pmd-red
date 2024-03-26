@@ -1,10 +1,5 @@
 // ALIGNED(4) static const u8 sFill[] = _("pksdir0");
 
-// gFastMod3Lookup
-// gFastDiv3Lookup
-// gFastSinLookup
-// gFastUnknownFn1Lookup
-
 static const u32 gUnknown_80B96E4[300] = {
     0, 0, 45426, 71998,
     90852, 105476, 117424, 127527,

@@ -2,8 +2,10 @@
 #include "math.h"
 
 extern u8 gFastMod3Lookup[];
-extern s16 gFastSinLookup[];
 extern u24_8 u24_8_div(u24_8 x, u24_8 y); // decomp in progress: https://decomp.me/scratch/pMyGD
+
+
+#include "data/math.h"
 
 u32 fast_mod_3(s32 x) {
     if (x < 0x100) {
