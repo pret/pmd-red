@@ -1,9 +1,8 @@
 #include "global.h"
+#include "globaldata.h"
 #include "math.h"
 
-extern u8 gFastMod3Lookup[];
 extern u24_8 u24_8_div(u24_8 x, u24_8 y); // decomp in progress: https://decomp.me/scratch/pMyGD
-
 
 #include "data/math.h"
 

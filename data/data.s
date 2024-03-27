@@ -1941,23 +1941,3 @@ gUnknown_80B88CC: @ 80B88CC
 @ code_8009804.s
 .string "pksdir0\0"
 
-@ math 
-.string "pksdir0\0"
-
-	.global gFastMod3Lookup
-gFastMod3Lookup: @ 80B88E4
-x = 0
-.rept 0x100
-    .byte x % 3
-x = x + 1
-.endr
-
-    .global gFastDiv3Lookup
-gFastDiv3Lookup: @ 80B89E4
-x = 0
-.rept 0x100
-    .byte x / 3
-x = x + 1
-.endr
-
-@ END math
