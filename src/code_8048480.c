@@ -6,6 +6,7 @@
 #include "constants/type.h"
 #include "dungeon_action.h"
 #include "structs/dungeon_entity.h"
+#include "dungeon_items.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
 #include "structs/str_dungeon.h"
@@ -35,10 +36,11 @@ extern s16 gUnknown_80F4FBA;
 extern s16 gUnknown_80F4FBC;
 extern s16 gUnknown_80F4FBE;
 extern s16 gUnknown_80F4F46; // 0xC
-extern s16 gUnknown_80F4FAA; // 0x1E
-extern s16 gUnknown_80F4FA8; // 0xF
+extern s16 gUnknown_80F4FA2;
 extern s16 gUnknown_80F4FA4; // 0x14 
 extern s16 gUnknown_80F4FA6; // 0x2D
+extern s16 gUnknown_80F4FA8; // 0xF
+extern s16 gUnknown_80F4FAA; // 0x1E
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
 extern s16 gUnknown_80F4FAC;
@@ -164,6 +166,36 @@ extern void sub_80464C8(Entity *, Position *, Item *);
 extern void sub_806A6E8(Entity *);
 extern void sub_8042390(Entity *, Item *);
 
+bool8 sub_8047930(Entity *pokemon, Entity *target)
+{
+  bool8 flag;
+  
+  if (((target->info->shopkeeper == TRUE) ||
+      (target->info->clientType == 4)) || (target->info->clientType == CLIENT_TYPE_CLIENT)) {
+    return FALSE;
+  }
+  else {
+    if(DungeonRandInt(100) < gUnknown_80F4FA2)
+        flag = TRUE;
+    else
+        flag = FALSE;
+    if (GetEntityType(pokemon) == ENTITY_MONSTER) {
+      if (HasHeldItem(pokemon, ITEM_WHIFF_SPECS)) {
+          flag = FALSE;
+      }
+      else {
+        if (HasHeldItem(pokemon, ITEM_LOCKON_SPECS)) {
+          flag = TRUE;
+        }
+      }
+    }
+    if ((GetEntityType(target) == ENTITY_MONSTER) && (HasHeldItem(target, ITEM_DODGE_SCARF))) {
+      flag = FALSE;
+    }
+  }
+  return flag;
+}
+
 void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity *target, Item *item)
 {
   EntityInfo *info;
@@ -197,7 +229,7 @@ void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity
         PlaySoundEffect(0x14d);
         sub_8045BF8(gUnknown_202DE58,item);
         SetMessageArgument(gAvailablePokemonNames,target,0);
-        sub_80522F4(pokemon,target,*gUnknown_80FDBB8);
+        sub_80522F4(pokemon,target,*gUnknown_80FDBB8); // $m0 caught the $i0
         info->heldItem = *item;
         sub_806A6E8(target);
         return;
@@ -447,11 +479,13 @@ _080482B4:
 
 UNUSED void nullsub_205(void) { }
 
-void SleepSeedItemAction(Entity *pokemon, Entity *target) {
+void SleepSeedItemAction(Entity *pokemon, Entity *target) 
+{
     sub_8075C58(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4E74, TRUE), TRUE);
 }
 
-void sub_80482FC(Entity *pokemon, Entity *target, u32 pp, u8 param_4) {
+void sub_80482FC(Entity *pokemon, Entity *target, u32 pp, u8 param_4)
+{
     Move move;
 
     InitPokemonMove(&move, MOVE_PROJECTILE);
