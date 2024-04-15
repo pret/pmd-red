@@ -476,8 +476,8 @@ GetWeatherName:
 _0807EA2C: .4byte gWeatherNames
 	thumb_func_end GetWeatherName
 
-	thumb_func_start sub_807EA30
-sub_807EA30:
+	thumb_func_start MudWaterSportEffect
+MudWaterSportEffect:
 	push {lr}
 	lsls r0, 24
 	cmp r0, 0
@@ -523,7 +523,7 @@ _0807EA90: .4byte gUnknown_80F4EAC
 _0807EA94: .4byte gDungeon
 _0807EA98: .4byte 0x0000e278
 _0807EA9C: .4byte gUnknown_80FADB0
-	thumb_func_end sub_807EA30
+	thumb_func_end MudWaterSportEffect
 
 	thumb_func_start sub_807EAA0
 sub_807EAA0:

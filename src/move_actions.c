@@ -203,7 +203,7 @@ extern void sub_804652C(Entity *, Entity *, Item *, u32, Position *);
 extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_8045C28(Item *, u8 , u8);
 extern void sub_805A7D4(Entity *, Entity *, Item *, Position *);
-extern void sub_807EA30(u32);
+extern void MudWaterSportEffect(u32);
 extern void sub_807D148(Entity *pokemon, Entity *target, u32 r2, Position *r3);
 extern void SetMessageArgument_2(u8 *buffer, EntityInfo *r1, u32);
 extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
@@ -926,7 +926,7 @@ bool8 GrudgeMoveAction(Entity *pokemon, Entity * target, Move *move, s32 param_4
   return hasGrudge;
 }
 
-bool8 sub_805815C(Entity *pokemon, Entity *target, Move *move, s32 param_4)
+bool8 CounterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
     CounterStatusTarget(pokemon, target, STATUS_COUNTER);
     return TRUE;
@@ -1138,13 +1138,13 @@ bool8 sub_8058580(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   return flag;
 }
 
-bool8 sub_80585CC(Entity *pokemon, Entity *target, Move *move, u32 param_4)
+bool8 BrickBreakMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
   
   flag = FALSE;
   if ((target->info->protectionStatus == STATUS_REFLECT) || (target->info->protectionStatus == STATUS_LIGHT_SCREEN)) {
-    sub_80522F4(pokemon,target,*gUnknown_80FD104);
+    sub_80522F4(pokemon,target,*gUnknown_80FD104); // The barrier was shattered
     SendProtectionEndMessage(pokemon,target);
     flag = TRUE;
   }
@@ -2616,7 +2616,7 @@ bool8 sub_805A120(Entity * pokemon,Entity * target, Move *move, u32 param_4)
 
         if (flag)
         {
-                sub_80522F4(pokemon,target,*gUnknown_80FC7AC);   
+                sub_80522F4(pokemon,target,*gUnknown_80FC7AC); // The item trade failed
                 return FALSE;
         }
         else
@@ -2629,7 +2629,7 @@ bool8 sub_805A120(Entity * pokemon,Entity * target, Move *move, u32 param_4)
             if (r7->unkFB == 0) {
                 r7->unkFB = 1;
             }
-            sub_80522F4(pokemon,target,*gUnknown_80FC790);
+            sub_80522F4(pokemon,target,*gUnknown_80FC790); // Traded items
             return TRUE;
         }
     }
@@ -2644,15 +2644,15 @@ bool8 sub_805A210(Entity * pokemon, Entity * target, Move *move, u32 param_4)
     return flag;
 }
 
-bool8 sub_805A23C(Entity * pokemon, Entity * target, Move *move, u32 param_4)
+bool8 MudWaterSportMoveAction(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
     if(move->id == MOVE_MUD_SPORT)
     {
-        sub_807EA30(0);
+        MudWaterSportEffect(0);
     }
     else
     {
-        sub_807EA30(1);
+        MudWaterSportEffect(1);
     }
     return TRUE;
 }

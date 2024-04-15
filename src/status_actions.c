@@ -299,7 +299,7 @@ bool8 PerishSongMoveAction(Entity * pokemon,Entity * target,Move *move, s32 para
     return TRUE;
 }
 
-bool8 sub_805B214(Entity * pokemon,Entity * target,Move *move, s32 param_4)
+bool8 WrapMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
 { 
     WrapTarget(pokemon, target);
     return TRUE;
@@ -572,7 +572,7 @@ bool8 sub_805B668(Entity * pokemon, Entity * target, Move *move, s32 param_4)
   return flag;
 }
 
-bool8 sub_805B734(Entity * pokemon, Entity * target, Move *move, s32 param_4)
+bool8 SnatchMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
     SnatchStatusTarget(pokemon, target);
     return TRUE;
@@ -786,7 +786,7 @@ bool8 sub_805BA50(Entity * pokemon, Entity * target, Move *move, s32 param_4)
     return flag;
 }
 
-bool8 sub_805BB64(Entity * pokemon, Entity * target, Move *move, s32 param_4)
+bool8 ReboundOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
     CounterStatusTarget(pokemon, target, STATUS_MINI_COUNTER);
     return TRUE;

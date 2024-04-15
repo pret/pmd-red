@@ -4497,7 +4497,7 @@ _08054B88:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B214
+	bl WrapMoveAction
 	bl _080554BA
 _08054B98:
 	adds r0, r7, 0
@@ -4644,7 +4644,7 @@ _08054CD4:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805815C
+	bl CounterMoveAction
 	b _080554BA
 _08054CE2:
 	adds r0, r7, 0
@@ -4751,7 +4751,7 @@ _08054DAA:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805A23C
+	bl MudWaterSportMoveAction
 	b _080554BA
 _08054DB8:
 	adds r0, r7, 0
@@ -4989,7 +4989,7 @@ _08054F86:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_80585CC
+	bl BrickBreakMoveAction
 	b _080554BA
 _08054F94:
 	adds r0, r7, 0
@@ -5446,7 +5446,7 @@ _08055318:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805BB64
+	bl ReboundOrbAction
 	b _080554BA
 _08055326:
 	adds r0, r7, 0
@@ -5551,7 +5551,7 @@ _080553EA:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805B734
+	bl SnatchMoveAction
 	b _080554BA
 _080553F8:
 	adds r0, r7, 0

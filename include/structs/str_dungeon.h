@@ -126,7 +126,11 @@ typedef struct Dungeon
     s16 unk686;
     s16 unk688;
     /* 0x68A */ u8 unk68A;
-    u8 fill68B[0x699 - 0x68B];
+    u8 fill68B;
+    s32 unk68C;
+    s32 unk690;
+    s32 unk694;
+    u8 fill698;
     u8 unk699;   
     u8 fill69A[0x69C - 0x69A];
     /* 0x69C */ EntityInfo unk69C[4];
