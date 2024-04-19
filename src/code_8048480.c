@@ -545,7 +545,7 @@ void EyedropSeedItemAction(Entity *pokemon, Entity *target)
 
 void CheriBerryItemAction(Entity *pokemon, Entity *target)
 {
-    if(target->info->nonVolatileStatus == STATUS_PARALYSIS)
+    if(target->info->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS)
         SendNonVolatileEndMessage(pokemon, target);
     else
         // Pointer to "But nothing happened!"
@@ -554,7 +554,7 @@ void CheriBerryItemAction(Entity *pokemon, Entity *target)
 
 void PechaBerryItemAction(Entity *pokemon, Entity *target)
 {
-    if((u8)(target->info->nonVolatileStatus - 2) <= 1)
+    if((u8)(target->info->nonVolatile.nonVolatileStatus - 2) <= 1)
         SendNonVolatileEndMessage(pokemon, target);
     else
         // Pointer to "But nothing happened!"
@@ -599,7 +599,7 @@ void DoomSeedItemAction(Entity *pokemon, Entity *target)
 
 void RawstBerryItemAction(Entity *pokemon, Entity *target)
 {
-    if(target->info->nonVolatileStatus == STATUS_BURN)
+    if(target->info->nonVolatile.nonVolatileStatus == STATUS_BURN)
         SendNonVolatileEndMessage(pokemon, target);
     else
     {
@@ -708,7 +708,7 @@ void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
     else {
         uVar1 = gUnknown_80F4FA4;
     }
-    if (entityInfo_1->immobilizeStatus == STATUS_FROZEN) {
+    if (entityInfo_1->immobilize.immobilizeStatus == STATUS_FROZEN) {
       SendImmobilizeEndMessage(pokemon, target);
     }
     sub_806F370(pokemon, target, uVar1, 1, auStack28, 0, 0x216, 0, 0, 0);
@@ -731,7 +731,7 @@ void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
       else {
         uVar1 = gUnknown_80F4FA6;
       }
-      if (entityInfo->immobilizeStatus == STATUS_FROZEN) {
+      if (entityInfo->immobilize.immobilizeStatus == STATUS_FROZEN) {
         SendImmobilizeEndMessage(pokemon, entity);
       }
       sub_806F370(pokemon, entity, uVar1, 1, auStack28, 0, 0x216, 0, 0, 0);

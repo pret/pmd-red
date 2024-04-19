@@ -75,7 +75,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
     EntityInfo *pokemonInfo = pokemon->info;
     if (pokemonInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)
     {
-        if (pokemonInfo->immobilizeStatus == STATUS_PETRIFIED)
+        if (pokemonInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED)
         {
             SendImmobilizeEndMessage(pokemon, pokemon);
         }

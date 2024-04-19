@@ -505,11 +505,11 @@ void BurnedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, bool8 dis
         else
         {
             isNotBurned = TRUE;
-            if (entityInfo->nonVolatileStatus != STATUS_BURN) {
-                entityInfo->nonVolatileStatus = STATUS_BURN;
-                entityInfo->nonVolatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E30,TRUE) + 1;
-                entityInfo->nonVolatileStatusDamageCountdown = 0;
-                entityInfo->fillAF = 0;
+            if (entityInfo->nonVolatile.nonVolatileStatus != STATUS_BURN) {
+                entityInfo->nonVolatile.nonVolatileStatus = STATUS_BURN;
+                entityInfo->nonVolatile.nonVolatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E30,TRUE) + 1;
+                entityInfo->nonVolatile.nonVolatileStatusDamageCountdown = 0;
+                entityInfo->nonVolatile.unk4 = 0;
                 isNotBurned = FALSE;
                 if (param_3 != 0) {
                     sub_8041C34(target);
@@ -591,14 +591,14 @@ void PoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
         {
             isNotPoisoned = TRUE;
 
-            if(entityInfo->nonVolatileStatus != STATUS_BADLY_POISONED)
+            if(entityInfo->nonVolatile.nonVolatileStatus != STATUS_BADLY_POISONED)
             {
-                if(entityInfo->nonVolatileStatus != STATUS_POISONED)
+                if(entityInfo->nonVolatile.nonVolatileStatus != STATUS_POISONED)
                 {
-                    entityInfo->nonVolatileStatus = STATUS_POISONED;
-                    entityInfo->nonVolatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E34,TRUE) + 1;
-                    entityInfo->nonVolatileStatusDamageCountdown = 0;
-                    entityInfo->fillAF = 0;
+                    entityInfo->nonVolatile.nonVolatileStatus = STATUS_POISONED;
+                    entityInfo->nonVolatile.nonVolatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E34,TRUE) + 1;
+                    entityInfo->nonVolatile.nonVolatileStatusDamageCountdown = 0;
+                    entityInfo->nonVolatile.unk4 = 0;
                     isNotPoisoned = FALSE;
                     sub_8041C6C(target);
                     sub_80522F4(pokemon,target,*gUnknown_80FB598);
@@ -680,12 +680,12 @@ void BadlyPoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayM
         {
             isNotBadlyPoisoned = TRUE;
 
-            if(entityInfo->nonVolatileStatus != STATUS_BADLY_POISONED)
+            if(entityInfo->nonVolatile.nonVolatileStatus != STATUS_BADLY_POISONED)
             {
-                    entityInfo->nonVolatileStatus = STATUS_BADLY_POISONED;
-                    entityInfo->nonVolatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E38,TRUE) + 1;
-                    entityInfo->nonVolatileStatusDamageCountdown = 0;
-                    entityInfo->fillAF = 0;
+                    entityInfo->nonVolatile.nonVolatileStatus = STATUS_BADLY_POISONED;
+                    entityInfo->nonVolatile.nonVolatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E38,TRUE) + 1;
+                    entityInfo->nonVolatile.nonVolatileStatusDamageCountdown = 0;
+                    entityInfo->nonVolatile.unk4 = 0;
                     isNotBadlyPoisoned = FALSE;
                     sub_8041C7C(target);
                     sub_80522F4(pokemon,target,*gUnknown_80FB5B4);
@@ -738,7 +738,7 @@ void FrozenStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
   SetMessageArgument(gAvailablePokemonNames, target, 0);
   entityInfo = target->info;
 
-  if ((entityInfo->immobilizeStatus != STATUS_FROZEN) && !HasSafeguardStatus(pokemon,target,displayMessage)) {
+  if ((entityInfo->immobilize.immobilizeStatus != STATUS_FROZEN) && !HasSafeguardStatus(pokemon,target,displayMessage)) {
     if (HasAbility(target, ABILITY_MAGMA_ARMOR)) {
       if (displayMessage)
         sub_80522F4(pokemon,target,*gUnknown_80FCDE0);
@@ -759,13 +759,13 @@ void FrozenStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
            }
         else
         {
-            if ((u8)(entityInfo->immobilizeStatus - 3) <=  1) {
+            if ((u8)(entityInfo->immobilize.immobilizeStatus - 3) <=  1) {
                 sub_8076CB4(entityInfo->unk9C);
             }
             sub_8041F08(target);
-            entityInfo->immobilizeStatus = STATUS_FROZEN;
-            entityInfo->immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E2C,TRUE) + 1;
-            entityInfo->immobilizeStatusDamageCountdown = 0;
+            entityInfo->immobilize.immobilizeStatus = STATUS_FROZEN;
+            entityInfo->immobilize.immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E2C,TRUE) + 1;
+            entityInfo->immobilize.immobilizeStatusDamageCountdown = 0;
             sub_80522F4(pokemon,target,*gUnknown_80FB610);
             EntityUpdateStatusSprites(target);
         }
@@ -782,19 +782,19 @@ void SqueezedStatusTarget(Entity * pokemon, Entity * target, s16 param_3, bool32
   
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,displayMessage_u8))) {
     entityInfo = target->info;
-    if ((u8)(entityInfo->immobilizeStatus - 3U) < 2) {
+    if ((u8)(entityInfo->immobilize.immobilizeStatus - 3U) < 2) {
       sub_8076CB4(entityInfo->unk9C);
     }
-    else if (entityInfo->immobilizeStatus == STATUS_INGRAIN) {
+    else if (entityInfo->immobilize.immobilizeStatus == STATUS_INGRAIN) {
       SetMessageArgument(gAvailablePokemonNames,target,0);
       sub_80522F4(pokemon,target,*gUnknown_80FA844);
     }
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (entityInfo->immobilizeStatus != STATUS_CONSTRICTION) {
-      entityInfo->immobilizeStatus = STATUS_CONSTRICTION;
-      entityInfo->immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E58,TRUE) + 1;
-      entityInfo->immobilizeStatusDamageCountdown = 0;
-      entityInfo->unkB4 = param_3_s32;
+    if (entityInfo->immobilize.immobilizeStatus != STATUS_CONSTRICTION) {
+      entityInfo->immobilize.immobilizeStatus = STATUS_CONSTRICTION;
+      entityInfo->immobilize.immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E58,TRUE) + 1;
+      entityInfo->immobilize.immobilizeStatusDamageCountdown = 0;
+      entityInfo->immobilize.unk4 = param_3_s32;
       nullsub_71(target);
       sub_80522F4(pokemon,target,*gUnknown_80FB628);
       sub_806CE94(target,8);
@@ -812,18 +812,18 @@ void ImmobilizedStatusTarget(Entity * pokemon, Entity * target)
   
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
     entityInfo = target->info;
-    if ((u8)(entityInfo->immobilizeStatus - 3U) < 2) {
+    if ((u8)(entityInfo->immobilize.immobilizeStatus - 3U) < 2) {
       sub_8076CB4(entityInfo->unk9C);
     }
-    else if (entityInfo->immobilizeStatus == STATUS_INGRAIN) {
+    else if (entityInfo->immobilize.immobilizeStatus == STATUS_INGRAIN) {
       SetMessageArgument(gAvailablePokemonNames,target,0);
       sub_80522F4(pokemon,target,*gUnknown_80FA844);
     }
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (entityInfo->immobilizeStatus != STATUS_SHADOW_HOLD) {
-      entityInfo->immobilizeStatus = STATUS_SHADOW_HOLD;
-      entityInfo->immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E54,TRUE) + 1;
-      entityInfo->immobilizeStatusDamageCountdown = 0;
+    if (entityInfo->immobilize.immobilizeStatus != STATUS_SHADOW_HOLD) {
+      entityInfo->immobilize.immobilizeStatus = STATUS_SHADOW_HOLD;
+      entityInfo->immobilize.immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E54,TRUE) + 1;
+      entityInfo->immobilize.immobilizeStatusDamageCountdown = 0;
       nullsub_70(target);
       sub_80522F4(pokemon,target,*gUnknown_80FB668);
       sub_806CE94(target,8);
@@ -843,14 +843,14 @@ void IngrainedStatusTarget(Entity * pokemon, Entity * target)
   if (EntityExists(target)) {
     entityInfo = target->info;
     entityInfo2 = entityInfo;
-    if ((u8)(entityInfo->immobilizeStatus - 3U) < 2) {
+    if ((u8)(entityInfo->immobilize.immobilizeStatus - 3U) < 2) {
       sub_8076CB4(entityInfo->unk9C);
     }
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (entityInfo2->immobilizeStatus != STATUS_INGRAIN) {
-      entityInfo2->immobilizeStatus = STATUS_INGRAIN;
-      entityInfo2->immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E60,TRUE) + 1;
-      entityInfo2->immobilizeStatusDamageCountdown = 0;
+    if (entityInfo2->immobilize.immobilizeStatus != STATUS_INGRAIN) {
+      entityInfo2->immobilize.immobilizeStatus = STATUS_INGRAIN;
+      entityInfo2->immobilize.immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E60,TRUE) + 1;
+      entityInfo2->immobilize.immobilizeStatusDamageCountdown = 0;
       nullsub_90(target);
       sub_80522F4(pokemon,target,*gUnknown_80FB6A4);
     }
@@ -877,16 +877,16 @@ void WrapTarget(Entity * pokemon, Entity * target)
   }
   pokemonEntityData = pokemon->info;
   targetEntityInfo = target->info;
-  if ((u8)(pokemonEntityData->immobilizeStatus - 3U) > 1) {
-    if ((targetEntityInfo->immobilizeStatus != STATUS_WRAP))
+  if ((u8)(pokemonEntityData->immobilize.immobilizeStatus - 3U) > 1) {
+    if ((targetEntityInfo->immobilize.immobilizeStatus != STATUS_WRAP))
     {
-        if(targetEntityInfo->immobilizeStatus != STATUS_WRAPPED) {
-            pokemonEntityData->immobilizeStatus = STATUS_WRAP;
-            pokemonEntityData->immobilizeStatusTurns = 0x7f;
-            pokemonEntityData->immobilizeStatusDamageCountdown = 0;
-            targetEntityInfo->immobilizeStatus = STATUS_WRAPPED;
-            targetEntityInfo->immobilizeStatusTurns = CalculateStatusTurns(target, gUnknown_80F4E5C, TRUE) + 1;
-            targetEntityInfo->immobilizeStatusDamageCountdown = 0;
+        if(targetEntityInfo->immobilize.immobilizeStatus != STATUS_WRAPPED) {
+            pokemonEntityData->immobilize.immobilizeStatus = STATUS_WRAP;
+            pokemonEntityData->immobilize.immobilizeStatusTurns = 0x7f;
+            pokemonEntityData->immobilize.immobilizeStatusDamageCountdown = 0;
+            targetEntityInfo->immobilize.immobilizeStatus = STATUS_WRAPPED;
+            targetEntityInfo->immobilize.immobilizeStatusTurns = CalculateStatusTurns(target, gUnknown_80F4E5C, TRUE) + 1;
+            targetEntityInfo->immobilize.immobilizeStatusDamageCountdown = 0;
             iVar5 = &pokemonEntityData->unk9C;
             piVar3 = &gDungeon->unk37F4;
             *iVar5 = *piVar3;
@@ -900,19 +900,19 @@ void WrapTarget(Entity * pokemon, Entity * target)
         }
     }
   }
-  if (pokemonEntityData->immobilizeStatus == STATUS_WRAP) {
+  if (pokemonEntityData->immobilize.immobilizeStatus == STATUS_WRAP) {
     SetMessageArgument(gAvailablePokemonNames,pokemon,0);
     sub_80522F4(pokemon,target,*gUnknown_80FB6FC);
   }
-  if (targetEntityInfo->immobilizeStatus == STATUS_WRAP) {
+  if (targetEntityInfo->immobilize.immobilizeStatus == STATUS_WRAP) {
     SetMessageArgument(gAvailablePokemonNames,target,0);
     sub_80522F4(pokemon,target,*gUnknown_80FB6FC);
   }
-  if (pokemonEntityData->immobilizeStatus == STATUS_WRAPPED) {
+  if (pokemonEntityData->immobilize.immobilizeStatus == STATUS_WRAPPED) {
     SetMessageArgument(gAvailablePokemonNames,pokemon,0);
     sub_80522F4(pokemon,target,*gUnknown_80FB718);
   }
-  if (targetEntityInfo->immobilizeStatus == STATUS_WRAPPED) {
+  if (targetEntityInfo->immobilize.immobilizeStatus == STATUS_WRAPPED) {
     SetMessageArgument(gAvailablePokemonNames,target,0);
     sub_80522F4(pokemon,target,*gUnknown_80FB718);
   }
@@ -932,8 +932,8 @@ void sub_8076CB4(s32 param_1)
     if (EntityExists(entity)) {
       entityInfo = entity->info;
       if (entityInfo->unk9C == param_1) {
-        if ((u8)(entityInfo->immobilizeStatus - 3U) < 2) {
-          entityInfo->immobilizeStatus = STATUS_NONE;
+        if ((u8)(entityInfo->immobilize.immobilizeStatus - 3U) < 2) {
+          entityInfo->immobilize.immobilizeStatus = STATUS_NONE;
         }
         entityInfo->unk9C = 0;
       }
@@ -952,19 +952,19 @@ void PetrifiedStatusTarget(Entity * pokemon, Entity * target)
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
     sub_8041C08(target);
     targetEntityInfo = target->info;
-    if ((u8)(targetEntityInfo->immobilizeStatus - 3U) < 2) {
+    if ((u8)(targetEntityInfo->immobilize.immobilizeStatus - 3U) < 2) {
       sub_8076CB4(targetEntityInfo->unk9C);
     }
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (targetEntityInfo->immobilizeStatus != STATUS_PETRIFIED) {
-      targetEntityInfo->immobilizeStatus = STATUS_PETRIFIED;
+    if (targetEntityInfo->immobilize.immobilizeStatus != STATUS_PETRIFIED) {
+      targetEntityInfo->immobilize.immobilizeStatus = STATUS_PETRIFIED;
       if (targetEntityInfo->isTeamLeader) {
-        targetEntityInfo->immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4EBC,TRUE) + 1;
+        targetEntityInfo->immobilize.immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4EBC,TRUE) + 1;
       }
       else {
-        targetEntityInfo->immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4EC0,TRUE) + 1;
+        targetEntityInfo->immobilize.immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4EC0,TRUE) + 1;
       }
-      targetEntityInfo->immobilizeStatusDamageCountdown = 0;
+      targetEntityInfo->immobilize.immobilizeStatusDamageCountdown = 0;
       sub_80522F4(pokemon,target,*gUnknown_80FB7BC);
 
     }

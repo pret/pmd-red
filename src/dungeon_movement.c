@@ -304,7 +304,7 @@ s32 CalcSpeedStage(Entity *pokemon)
     }
   }
 
-  if (entityInfo->nonVolatileStatus == STATUS_PARALYSIS) {
+  if (entityInfo->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS) {
     speed--;
   }
 

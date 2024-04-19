@@ -1225,7 +1225,7 @@ void SendNonVolatileEndMessage(Entity * pokemon, Entity * target)
   }
   entityInfo = target->info;
   SetMessageArgument(gAvailablePokemonNames,target,0);
-  switch(entityInfo->nonVolatileStatus) {
+  switch(entityInfo->nonVolatile.nonVolatileStatus) {
     case STATUS_NONE:
     case 5:
         break;
@@ -1241,7 +1241,7 @@ void SendNonVolatileEndMessage(Entity * pokemon, Entity * target)
         break;
 
   }
-  entityInfo->nonVolatileStatus = STATUS_NONE;
+  entityInfo->nonVolatile.nonVolatileStatus = STATUS_NONE;
   EntityUpdateStatusSprites(target);
 }
 
@@ -1256,7 +1256,7 @@ void SendImmobilizeEndMessage(Entity * pokemon, Entity *target)
   }
   entityInfo = target->info;
   SetMessageArgument(gAvailablePokemonNames,target,0);
-  switch(entityInfo->immobilizeStatus) {
+  switch(entityInfo->immobilize.immobilizeStatus) {
     case STATUS_NONE:
     case 8:
         break;
@@ -1280,7 +1280,7 @@ void SendImmobilizeEndMessage(Entity * pokemon, Entity *target)
         sub_80522F4(pokemon,target, *gPtrMonNoLongerPetrifiedMessage);
         break;
   }
-  entityInfo->immobilizeStatus = STATUS_NONE;
+  entityInfo->immobilize.immobilizeStatus = STATUS_NONE;
   EntityUpdateStatusSprites(target);
   if (isFrozen) {
     sub_8042A74(target);
@@ -1580,7 +1580,7 @@ void SendMuzzledEndMessage(Entity * pokemon, Entity * target)
 
       entityInfo = target->info;
       flag = FALSE;
-      if (entityInfo->immobilizeStatus == 6) {
+      if (entityInfo->immobilize.immobilizeStatus == 6) {
         SendImmobilizeEndMessage(pokemon, target);
         flag = TRUE;
       }
@@ -1648,10 +1648,10 @@ void SendThawedMessage(Entity *pokemon, Entity *target)
 
   if (EntityExists(target)) {
     entityInfo = target->info;
-    if (entityInfo->immobilizeStatus == STATUS_FROZEN) {
-      entityInfo->immobilizeStatus = STATUS_NONE;
-      entityInfo->immobilizeStatusTurns = 0;
-      entityInfo->immobilizeStatusDamageCountdown = 0;
+    if (entityInfo->immobilize.immobilizeStatus == STATUS_FROZEN) {
+      entityInfo->immobilize.immobilizeStatus = STATUS_NONE;
+      entityInfo->immobilize.immobilizeStatusTurns = 0;
+      entityInfo->immobilize.immobilizeStatusDamageCountdown = 0;
       SetMessageArgument(gAvailablePokemonNames,target,0);
       sub_80522F4(pokemon,target,*gUnknown_80FA8BC); // $m0 thawed out!
       EntityUpdateStatusSprites(target);

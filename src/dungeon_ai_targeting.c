@@ -479,7 +479,7 @@ u8 CanTarget(Entity *pokemon, Entity *targetPokemon, bool8 ignoreInvisible, bool
         targetData->clientType == CLIENT_TYPE_DONT_MOVE ||
         pokemonInfo->clientType == CLIENT_TYPE_CLIENT ||
         targetData->clientType == CLIENT_TYPE_CLIENT ||
-        (checkPetrified && !pokemonInfo->isNotTeamMember && targetData->immobilizeStatus == STATUS_PETRIFIED) ||
+        (checkPetrified && !pokemonInfo->isNotTeamMember && targetData->immobilize.immobilizeStatus == STATUS_PETRIFIED) ||
         (!ignoreInvisible && targetData->transformStatus == STATUS_INVISIBLE && !CanSeeInvisibleMonsters(pokemon)))
     {
         return TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET;

@@ -173,23 +173,23 @@ bool8 sub_8072CF4(Entity *entity)
     gUnknown_202F222 = 0;
     switch(info->action.action) {
         case ACTION_WALK:
-            if(info->immobilizeStatus == STATUS_SHADOW_HOLD)
+            if(info->immobilize.immobilizeStatus == STATUS_SHADOW_HOLD)
             {
                 goto _282;  
             }
-            else if(info->immobilizeStatus == STATUS_CONSTRICTION)
+            else if(info->immobilize.immobilizeStatus == STATUS_CONSTRICTION)
             {
                 goto _282;  
             }
-            else if(info->immobilizeStatus == STATUS_INGRAIN)
+            else if(info->immobilize.immobilizeStatus == STATUS_INGRAIN)
             {
                 goto _282;  
             }
-            else if(info->immobilizeStatus == STATUS_WRAP)
+            else if(info->immobilize.immobilizeStatus == STATUS_WRAP)
             {
                 goto _282;  
             }
-            else if(info->immobilizeStatus == STATUS_WRAPPED)
+            else if(info->immobilize.immobilizeStatus == STATUS_WRAPPED)
             {
             _282:
                 info->action.action = ACTION_NOTHING;

@@ -441,11 +441,11 @@ void ParalyzeStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
       bVar6 = TRUE;
       entityInfo = target->info;
       SetMessageArgument(gAvailablePokemonNames,target,0);
-      if (entityInfo->nonVolatileStatus != STATUS_PARALYSIS) {
-        entityInfo->nonVolatileStatus = STATUS_PARALYSIS;
-        entityInfo->nonVolatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E50,TRUE) + 1;
-        entityInfo->nonVolatileStatusDamageCountdown = 0;
-        entityInfo->fillAF = 0;
+      if (entityInfo->nonVolatile.nonVolatileStatus != STATUS_PARALYSIS) {
+        entityInfo->nonVolatile.nonVolatileStatus = STATUS_PARALYSIS;
+        entityInfo->nonVolatile.nonVolatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E50,TRUE) + 1;
+        entityInfo->nonVolatile.nonVolatileStatusDamageCountdown = 0;
+        entityInfo->nonVolatile.unk4 = 0;
         bVar6 = FALSE;
         sub_80522F4(pokemon,target,*gUnknown_80FB2AC);
         sub_8041C1C(target);

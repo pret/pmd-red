@@ -808,7 +808,7 @@ bool8 TargetRegularAttack(Entity *pokemon, u32 *targetDir, bool8 checkPetrified)
             GetEntityType(target) == ENTITY_MONSTER &&
             CanAttackInDirection(pokemon, direction) &&
             CanTarget(pokemon, target, FALSE, checkPetrified) == TARGET_CAPABILITY_CAN_TARGET &&
-            (!hasStatusChecker || target->info->immobilizeStatus != STATUS_FROZEN))
+            (!hasStatusChecker || target->info->immobilize.immobilizeStatus != STATUS_FROZEN))
         {
             potentialAttackTargetDirections[numPotentialTargets] = direction;
             potentialAttackTargetWeights[numPotentialTargets] = WeightMove(pokemon, TARGETING_FLAG_TARGET_OTHER, target, TYPE_NONE);

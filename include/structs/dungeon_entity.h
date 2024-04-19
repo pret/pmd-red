@@ -67,12 +67,29 @@ typedef struct AITarget
 
 } AITarget;
 
-
 typedef struct Sleep 
 {
     /* 0x0 */ u8 sleep;
     /* 0x1 */ u8 sleepTurns;
 } Sleep;
+
+typedef struct NonVolatile
+{
+    /* 0x0 */ u8 nonVolatileStatus;
+    /* 0x1 */ u8 nonVolatileStatusTurns;
+    /* 0x2 */ u8 nonVolatileStatusDamageCountdown;
+    /* 0x3 */ u8 unk4; 
+} NonVolatile;
+
+typedef struct Immobilize
+{
+    /* 0x0 */ u8 immobilizeStatus;
+    u8 fill1[0x4 - 0x1];
+    /* 0x4 */ s32 unk4;
+    /* 0x8 */ u8 immobilizeStatusTurns;
+    /* 0x9 */ u8 immobilizeStatusDamageCountdown;
+    u8 fillA[0xC - 0xA];
+} Immobilize;
 
 
 // size: 0x208
@@ -138,16 +155,8 @@ typedef struct EntityInfo
     // Statuses are split into groups based on which ones can't overlap.
     // See status.h for which statuses are in each group.
     /* 0xA8 */ Sleep sleep;
-    /* 0xAC */ u8 nonVolatileStatus;
-    /* 0xAD */ u8 nonVolatileStatusTurns;
-    /* 0xAE */ u8 nonVolatileStatusDamageCountdown;
-    u8 fillAF;
-    /* 0xB0 */ u8 immobilizeStatus;
-    u8 fillB1[0xB4 - 0xB1];
-    /* 0xB4 */ s32 unkB4;
-    /* 0xB8 */ u8 immobilizeStatusTurns;
-    /* 0xB9 */ u8 immobilizeStatusDamageCountdown;
-    u8 fillBA[0xBC - 0xBA];
+    /* 0xAC */ NonVolatile nonVolatile;
+    /* 0xB0 */ Immobilize immobilize;
     /* 0xBC */ u8 volatileStatus;
     /* 0xBD */ u8 volatileStatusTurns;
     u8 fillBE[0xC0 - 0xBE];

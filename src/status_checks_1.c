@@ -133,8 +133,8 @@ bool8 HasNegativeStatus(Entity *pokemon)
     if (pokemonInfo->sleep.sleep == STATUS_SLEEP ||
         pokemonInfo->sleep.sleep == STATUS_NIGHTMARE ||
         pokemonInfo->sleep.sleep == STATUS_YAWNING ||
-        pokemonInfo->nonVolatileStatus != STATUS_NONE ||
-        (pokemonInfo->immobilizeStatus != STATUS_INGRAIN && pokemonInfo->immobilizeStatus != STATUS_NONE) ||
+        pokemonInfo->nonVolatile.nonVolatileStatus != STATUS_NONE ||
+        (pokemonInfo->immobilize.immobilizeStatus != STATUS_INGRAIN && pokemonInfo->immobilize.immobilizeStatus != STATUS_NONE) ||
         pokemonInfo->volatileStatus != STATUS_NONE ||
         pokemonInfo->waitingStatus == STATUS_CURSED ||
         pokemonInfo->waitingStatus == STATUS_DECOY ||

@@ -27,7 +27,7 @@ bool8 CannotMove(Entity *pokemon, bool8 checkBlinker)
         || pokemonInfo->sleep.sleep == STATUS_NIGHTMARE
         || pokemonInfo->volatileStatus == STATUS_PAUSED
         || pokemonInfo->volatileStatus == STATUS_INFATUATED
-        || pokemonInfo->immobilizeStatus == STATUS_PETRIFIED)
+        || pokemonInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED)
         return TRUE;
 
     if (pokemonInfo->terrifiedTurns != 0)
@@ -45,8 +45,8 @@ bool8 sub_8070BC0(Entity* entity)
         || entityInfo->sleep.sleep == STATUS_NIGHTMARE
         || ShouldMonsterRunAway(entity)
         || entityInfo->muzzled == TRUE
-        || entityInfo->immobilizeStatus == STATUS_PETRIFIED
-        || entityInfo->immobilizeStatus == STATUS_FROZEN)
+        || entityInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED
+        || entityInfo->immobilize.immobilizeStatus == STATUS_FROZEN)
         return FALSE;
 
     if (entityInfo->volatileStatus == STATUS_CONFUSED)
@@ -58,9 +58,9 @@ bool8 sub_8070BC0(Entity* entity)
         return FALSE;
     if (entityInfo->volatileStatus == STATUS_CRINGE)
         return FALSE;
-    if (entityInfo->immobilizeStatus == STATUS_WRAP)
+    if (entityInfo->immobilize.immobilizeStatus == STATUS_WRAP)
         return FALSE;
-    if (entityInfo->immobilizeStatus == STATUS_WRAPPED
+    if (entityInfo->immobilize.immobilizeStatus == STATUS_WRAPPED
         || entityInfo->eyesightStatus == STATUS_CROSS_EYED)
         return FALSE;
     if (entityInfo->waitingStatus == STATUS_DECOY)
@@ -106,8 +106,8 @@ bool8 HasStatusThatPreventsActing(Entity *pokemon)
 
     if ((pokemonInfo->sleep.sleep != STATUS_SLEEPLESS
         && pokemonInfo->sleep.sleep != STATUS_NONE)
-        || pokemonInfo->immobilizeStatus == STATUS_FROZEN
-        || pokemonInfo->immobilizeStatus == STATUS_PETRIFIED)
+        || pokemonInfo->immobilize.immobilizeStatus == STATUS_FROZEN
+        || pokemonInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED)
         return TRUE;
 
     if (pokemonInfo->chargingStatus == STATUS_BIDE)
@@ -124,14 +124,14 @@ bool8 CannotAttack(Entity *pokemon, bool8 skipSleep)
       pokemonInfo->sleep.sleep == STATUS_SLEEPLESS ||
       pokemonInfo->sleep.sleep == STATUS_YAWNING ||
       pokemonInfo->sleep.sleep == STATUS_NONE) &&
-      pokemonInfo->immobilizeStatus != STATUS_FROZEN &&
-      pokemonInfo->immobilizeStatus != STATUS_WRAP &&
-      pokemonInfo->immobilizeStatus != STATUS_WRAPPED &&
-      pokemonInfo->immobilizeStatus != STATUS_PETRIFIED &&
+      pokemonInfo->immobilize.immobilizeStatus != STATUS_FROZEN &&
+      pokemonInfo->immobilize.immobilizeStatus != STATUS_WRAP &&
+      pokemonInfo->immobilize.immobilizeStatus != STATUS_WRAPPED &&
+      pokemonInfo->immobilize.immobilizeStatus != STATUS_PETRIFIED &&
       pokemonInfo->volatileStatus != STATUS_CRINGE &&
       pokemonInfo->volatileStatus != STATUS_PAUSED &&
       pokemonInfo->volatileStatus != STATUS_INFATUATED &&
-      pokemonInfo->nonVolatileStatus != STATUS_PARALYSIS &&
+      pokemonInfo->nonVolatile.nonVolatileStatus != STATUS_PARALYSIS &&
       !ShouldMonsterRunAway(pokemon))
       return FALSE;
 

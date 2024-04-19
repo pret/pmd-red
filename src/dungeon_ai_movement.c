@@ -178,7 +178,7 @@ bool8 ChooseTargetPosition(Entity *pokemon)
                         continue;
                     }
                 }
-                else if (!pokemonInfo->isNotTeamMember && target->info->immobilizeStatus == STATUS_PETRIFIED)
+                else if (!pokemonInfo->isNotTeamMember && target->info->immobilize.immobilizeStatus == STATUS_PETRIFIED)
                 {
                     continue;
                 }

@@ -1117,7 +1117,7 @@ bool8 sub_8058548(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   u32 r5;
 
   r5 = 0x80 << 1;
-  if((pokemon->info->nonVolatileStatus) != STATUS_NONE)
+  if((pokemon->info->nonVolatile.nonVolatileStatus) != STATUS_NONE)
     r5 = gUnknown_80F4F6C;
   flag =  sub_8055640(pokemon,target,move,r5,param_4) ? TRUE : FALSE;
   return flag;
@@ -1259,7 +1259,7 @@ bool8 sub_80587E8(Entity * pokemon, Entity * target, Move * move, u32 param_4)
 {
   bool8 flag;
   
-  if (target->info->nonVolatileStatus == STATUS_PARALYSIS) {
+  if (target->info->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS) {
     flag = sub_8055640(pokemon,target,move,0x80 << 2,param_4) ? TRUE : FALSE;
     SendNonVolatileEndMessage(pokemon, target);
   }

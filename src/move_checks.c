@@ -223,7 +223,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_INGRAIN:
-            if (pokemonInfo->immobilizeStatus == STATUS_INGRAIN || pokemonInfo->maxHPStat / 2 < pokemonInfo->HP)
+            if (pokemonInfo->immobilize.immobilizeStatus == STATUS_INGRAIN || pokemonInfo->maxHPStat / 2 < pokemonInfo->HP)
             {
                 return FALSE;
             }
@@ -546,7 +546,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
     EntityInfo *userData = user->info;
     EntityInfo *targetData = target->info;
     s32 i;
-    if (targetData->immobilizeStatus == STATUS_FROZEN && MoveCannotHitFrozen(move))
+    if (targetData->immobilize.immobilizeStatus == STATUS_FROZEN && MoveCannotHitFrozen(move))
     {
         return FALSE;
     }
@@ -659,7 +659,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_WILL_O_WISP:
-            if (targetData->nonVolatileStatus == STATUS_BURN)
+            if (targetData->nonVolatile.nonVolatileStatus == STATUS_BURN)
             {
                 return FALSE;
             }
@@ -682,7 +682,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
         case MOVE_GLARE:
         case MOVE_STUN_SPORE:
         case MOVE_THUNDER_WAVE:
-            if (targetData->nonVolatileStatus == STATUS_PARALYSIS)
+            if (targetData->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS)
             {
                 return FALSE;
             }
@@ -716,7 +716,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
         case MOVE_BLOCK:
         case MOVE_MEAN_LOOK:
         case MOVE_SPIDER_WEB:
-            if (targetData->immobilizeStatus == STATUS_SHADOW_HOLD)
+            if (targetData->immobilize.immobilizeStatus == STATUS_SHADOW_HOLD)
             {
                 return FALSE;
             }
@@ -862,28 +862,28 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_WRAP:
-            if (targetData->immobilizeStatus == STATUS_WRAP)
+            if (targetData->immobilize.immobilizeStatus == STATUS_WRAP)
             {
                 return FALSE;
             }
-            if (targetData->immobilizeStatus == STATUS_WRAPPED)
+            if (targetData->immobilize.immobilizeStatus == STATUS_WRAPPED)
             {
                 return FALSE;
             }
             break;
         case MOVE_TOXIC:
-            if (targetData->nonVolatileStatus == STATUS_BADLY_POISONED)
+            if (targetData->nonVolatile.nonVolatileStatus == STATUS_BADLY_POISONED)
             {
                 return FALSE;
             }
             break;
         case MOVE_POISON_GAS:
         case MOVE_POISONPOWDER:
-            if (targetData->nonVolatileStatus == STATUS_POISONED)
+            if (targetData->nonVolatile.nonVolatileStatus == STATUS_POISONED)
             {
                 return FALSE;
             }
-            if (targetData->nonVolatileStatus == STATUS_BADLY_POISONED)
+            if (targetData->nonVolatile.nonVolatileStatus == STATUS_BADLY_POISONED)
             {
                 return FALSE;
             }

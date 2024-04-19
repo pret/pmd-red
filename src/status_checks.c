@@ -38,7 +38,7 @@ bool8 HasStatusAffectingActions(Entity *pokemon)
         case STATUS_NAPPING:
             return TRUE;
     }
-    switch (pokemonInfo->immobilizeStatus)
+    switch (pokemonInfo->immobilize.immobilizeStatus)
     {
         case STATUS_FROZEN:
             SendMessage(pokemon, *gPtrFrozenMessage);
@@ -130,7 +130,7 @@ bool8 sub_80701A4(Entity *pokemon)
           return TRUE;
   }
 
-  switch(pokemonInfo->immobilizeStatus)
+  switch(pokemonInfo->immobilize.immobilizeStatus)
   {
     case STATUS_FROZEN:
         SendMessage(pokemon,*gPtrFrozenMessage);
