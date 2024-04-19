@@ -204,13 +204,13 @@ void EntityUpdateStatusSprites(Entity *entity)
 
     if (entityInfo->id == 0xb9) {
       // NOTE: clean this up sometime
-      temp = entityInfo->sleepTurns; 
+      temp = entityInfo->sleep.sleepTurns; 
       flag = 0x7f;
       temp ^= flag;
       flag = (temp) != 0;
     }
     if (flag) {
-      spriteStatus = gStatusSpriteMasks_SleepStatus[entityInfo->sleep];
+      spriteStatus = gStatusSpriteMasks_SleepStatus[entityInfo->sleep.sleep];
     }
     spriteStatus = spriteStatus | 
             gStatusSpriteMasks_NonVolatileStatus[entityInfo->nonVolatileStatus] |

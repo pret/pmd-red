@@ -3202,7 +3202,7 @@ bool8 sub_805AD34(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 
 static inline bool8 sub_805AD54_sub(Entity *entity)
 {
-    if ((entity->info->joinedAt == 0x4A) || (entity->info->joinedAt == 0x47)) {
+    if ((entity->info->joinedAt.joinedAt == 0x4A) || (entity->info->joinedAt.joinedAt == 0x47)) {
         return TRUE;
     }
     else {

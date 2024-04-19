@@ -150,22 +150,25 @@ typedef struct Dungeon
     /* 0x3904 */ s16 unk3904;
     u8 fill3906[0x3A08 - 0x3906];
     /* 0x3A08 */ u8 unk3A08;
-    u8 fill3A09[0x3A0C - 0x3A09];
+    /* 0x3A09 */ u8 unk3A09;
+    /* 0x3A0A */ u8 unk3A0A;
+    /* 0x3A0B */ u8 unk3A0B;
     u8 unk3A0C;
     /* 0x3A0D */ u8 unk3A0D;
     /* 0x3A0E */ s16 tileset;
-    /* 0x3A10 */ u16 unk3A10;
-    u8 fill3A10[0x3A14 - 0x3A12];
+    /* 0x3A10 */ s16 unk3A10;
+    /* 0x3A12 */ s16 unk3A12;
     /* 0x3A14 */ s16 bossBattleIndex;
+    /* 0x3A16 */ s16 unk3A16;
     /* 0x3A18 */ Tile tiles[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
-    u8 fillE218[0xE21C - 0xE218];
-    u16 unkE21C;
-    u16 unkE21E;
-    Position unkE220[4];
-    u8 unkE230[0xE23C - 0xE230];
-    s16 unkE23C; // x coord of some kind
-    s16 unkE23E; // y coord of some kind
-    u8 fillE240[0xE264 - 0xE240];
+    Position unkE218;
+    Position unkE21C;
+    Position unkE220[8];
+    u32 unkE240;
+    u8 fillE244[0xE250 - 0xE244];
+    u32 unkE250;
+    u8 fillE254[0xE260 - 0xE254];
+    u32 unkE260;
     /* 0xE264 */ u8 weather; // Uses the weather constants in weather.h.
     u8 unkE265; // Uses the weather constants in weather.h
     /* 0xE266 */ u8 weatherDamageCounter; // Timer for applying sandstorm/hail damage periodically.
@@ -181,7 +184,8 @@ typedef struct Dungeon
     /* 0xE279 */ bool8 nullifyWeather; // Air Lock and Cloud Nine toggle this to disable weather effects
     u8 fillE27A[0xE27C - 0xE27A];
     /* 0xE27C */ Tile unkE27C[8][8];
-    /* 0xE87C */ u8 fillE87C[68];
+    /* 0xE87C */ u8 unkE87C[8][8];
+    u32 fillE8BC;
     /* 0xE8C0 */ Tile *tilePointers[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     u8 unk104C0;
     /* 0x104C4 */ RoomData roomData[MAX_ROOM_COUNT];
@@ -233,7 +237,10 @@ typedef struct Dungeon
     u8 unk1820E;
     u8 unk1820F;
     /* 0x18210 */ bool8 hallucinating; // Displays Substitute and flower sprites when the player has the Cross-Eyed status.
-    u8 fill18211[0x18217 - 0x18211];
+    u8 unk18211;
+    u8 unk18212;
+    u8 unk18213;
+    u8 fill18214[3];
     u8 unk18217;
     u8 fill18218[0x1821A - 0x18218];
     u8 unk1821A;

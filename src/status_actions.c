@@ -83,7 +83,7 @@ extern void sub_8075C58(Entity *, Entity *, s32, s32);
 extern void sub_806F324(Entity *, s32, u32, u32);
 extern bool8 sub_805755C(Entity* pokemon,u16 moveID);
 extern void sub_80783C4(Entity *, Entity *, u32);
-extern void sub_807CD9C(Entity *, Entity *, u8 direction);
+extern void sub_807CD9C(Entity *, Entity *, u32 direction);
 
 
 // NOTE: Override pokemon.c types for these two funcs

@@ -528,11 +528,11 @@ u8 CanTarget(Entity *pokemon, Entity *targetPokemon, bool8 ignoreInvisible, bool
 
 static inline bool8 JoinLocationCannotUseItems_1(EntityInfo *pokemonInfo)
 {
-    if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
     {
         return TRUE;
     }
-    if (pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
     {
         return TRUE;
     }

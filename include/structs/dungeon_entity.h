@@ -41,6 +41,40 @@ typedef struct ActionContainer
     /* 0x14 */ Position itemTargetPosition;
 } ActionContainer;
 
+typedef struct HiddenPower
+{
+    /* 0x0 */ s16 hiddenPowerBasePower;
+    /* 0x2 */ u8 hiddenPowerType;
+} HiddenPower;
+
+typedef struct JoinedAt
+{
+    /* 0x0 */ u8 joinedAt;
+    /* 0x1 */ u8 unk1;
+} JoinedAt;
+
+
+typedef struct AITarget
+{
+    /* 0x0 */ u8 aiObjective;
+    /* 0x1 */ bool8 aiNotNextToTarget;
+    /* 0x2 */ bool8 aiTargetingEnemy;
+    /* 0x3 */ bool8 aiTurningAround;
+    /* 0x4 */ u16 aiTargetSpawnGenID;
+    /* 0x8 */ struct Entity *aiTarget;
+    /* 0xC */ u8 fillC[4];
+    /* 0x10 */ Position aiTargetPos;
+
+} AITarget;
+
+
+typedef struct Sleep 
+{
+    /* 0x0 */ u8 sleep;
+    /* 0x1 */ u8 sleepTurns;
+} Sleep;
+
+
 // size: 0x208
 typedef struct EntityInfo
 {
@@ -82,24 +116,15 @@ typedef struct EntityInfo
     /* 0x2C */ s32 offensiveMultipliers[2];
     // Index 0 is Defense. Index 1 is Special Defense.
     /* 0x34 */ s32 defensiveMultipliers[2];
-    /* 0x3C */ s16 hiddenPowerBasePower;
-    /* 0x3E */ u8 hiddenPowerType;
-    u8 fill3F;
-    /* 0x40 */ u8 joinedAt; // Uses the dungeon index in dungeon.h.
+    /* 0x3C */ HiddenPower hiddenPower;
+    /* 0x40 */ JoinedAt joinedAt; // Uses the dungeon index in dungeon.h.
     /* 0x44 */ ActionContainer action;
     /* 0x5C */ u8 types[2];
     /* 0x5E */ u8 abilities[2];
     /* 0x60 */ Item heldItem;
     u8 fill64[0x68 - 0x64];
     /* 0x68 */ Position prevPos[NUM_PREV_POS];
-    /* 0x78 */ u8 aiObjective;
-    /* 0x79 */ bool8 aiNotNextToTarget;
-    /* 0x7A */ bool8 aiTargetingEnemy;
-    /* 0x7B */ bool8 aiTurningAround;
-    /* 0x7C */ u16 aiTargetSpawnGenID;
-    /* 0x80 */ struct Entity *aiTarget;
-    u8 fill84[0x88 - 0x84];
-    /* 0x88 */ Position aiTargetPos;
+    /* 0x78 */ AITarget aiTarget;
     // Bitwise flags corresponding to selected IQ skills.
     /* 0x8C */ u8 IQSkillMenuFlags[4]; // IQ skills selected in the IQ skills menu.
     /* 0x90 */ u8 IQSkillFlags[4];
@@ -112,9 +137,7 @@ typedef struct EntityInfo
     u8 fillA5[0xA8 - 0xA5];
     // Statuses are split into groups based on which ones can't overlap.
     // See status.h for which statuses are in each group.
-    /* 0xA8 */ u8 sleep;
-    /* 0xA9 */ u8 sleepTurns;
-    u8 fillAA[0xAC - 0xAA];
+    /* 0xA8 */ Sleep sleep;
     /* 0xAC */ u8 nonVolatileStatus;
     /* 0xAD */ u8 nonVolatileStatusTurns;
     /* 0xAE */ u8 nonVolatileStatusDamageCountdown;

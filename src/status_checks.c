@@ -31,7 +31,7 @@ bool8 HasStatusAffectingActions(Entity *pokemon)
     EntityInfo *pokemonInfo = pokemon->info;
     SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
     SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
-    switch (pokemonInfo->sleep)
+    switch (pokemonInfo->sleep.sleep)
     {
         case STATUS_NIGHTMARE:
         case STATUS_SLEEP:
@@ -121,7 +121,7 @@ bool8 sub_80701A4(Entity *pokemon)
   flag = FALSE;
   SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
   SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
-  switch(pokemonInfo->sleep)
+  switch(pokemonInfo->sleep.sleep)
   {
       case STATUS_SLEEP:
       case STATUS_NIGHTMARE:

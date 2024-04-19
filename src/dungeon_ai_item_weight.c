@@ -316,9 +316,9 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             itemWeight = 40;
             break;
         case ITEM_SLEEP_SEED:
-            if (pokemonInfo->sleep != STATUS_SLEEP &&
-                pokemonInfo->sleep != STATUS_NAPPING &&
-                pokemonInfo->sleep != STATUS_NIGHTMARE)
+            if (pokemonInfo->sleep.sleep != STATUS_SLEEP &&
+                pokemonInfo->sleep.sleep != STATUS_NAPPING &&
+                pokemonInfo->sleep.sleep != STATUS_NIGHTMARE)
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
                 {
@@ -335,7 +335,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             }
             break;
         case ITEM_CHESTO_BERRY:
-            if (pokemonInfo->sleep != STATUS_SLEEPLESS)
+            if (pokemonInfo->sleep.sleep != STATUS_SLEEPLESS)
             {
                 itemWeight = 5;
             }

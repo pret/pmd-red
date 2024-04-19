@@ -746,10 +746,10 @@ void sub_80487CC(Entity *pokemon, Entity * target, u32 param_3, u32 param_4)
 
 static inline bool8 JoinLocationCannotUseItems_1(EntityInfo *pokemonInfo)
 {
-    if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
         return TRUE;
 
-    if (pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
         return TRUE;
 
     return FALSE;
@@ -830,11 +830,11 @@ void nullsub_94(Entity *pokemon, Entity *target, u8 r2)
 
 static inline bool8 JoinLocationCannotUseItems_2(EntityInfo *pokemonInfo)
 {
-    if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
     {
         return TRUE;
     }
-    if (pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
     {
         return TRUE;
     }
@@ -895,11 +895,11 @@ bool8 sub_8048950(Entity *param_1,Item *item)
 
 static inline bool8 JoinLocationCannotUseItems_3(EntityInfo *pokemonInfo)
 {
-    if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
     {
         return TRUE;
     }
-    if (pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
     {
         return TRUE;
     }
@@ -972,11 +972,11 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
 
 static inline bool8 JoinLocationCannotUseItems_4(EntityInfo *pokemonInfo)
 {
-    if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
     {
         return TRUE;
     }
-    if (pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
     {
         return TRUE;
     }

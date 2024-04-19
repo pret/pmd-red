@@ -1017,9 +1017,9 @@ void sub_80783C4(Entity * pokemon, Entity * target, u8 param_3)
         entity2 = gDungeon->allPokemon[index];
         if (EntityExists(entity2)) {
           entityInfo = entity2->info;
-          entityInfo->aiObjective = AI_STAND_STILL;
-          entityInfo->aiTarget = NULL;
-          entityInfo->aiTargetSpawnGenID = 0;
+          entityInfo->aiTarget.aiObjective = AI_STAND_STILL;
+          entityInfo->aiTarget.aiTarget = NULL;
+          entityInfo->aiTarget.aiTargetSpawnGenID = 0;
           if (!entityInfo->isTeamLeader) {
             action = entityInfo->action;
             MoveIfPossible(entity2, TRUE);

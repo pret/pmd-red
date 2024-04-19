@@ -38,7 +38,7 @@ Entity *GetPartnerEntity(void)
     for(counter = 0; counter < MAX_TEAM_MEMBERS; counter++)
     {
         entity = gDungeon->teamPokemon[counter];
-        if(EntityExists(entity) && entity->info->joinedAt == DUNGEON_JOIN_LOCATION_PARTNER)
+        if(EntityExists(entity) && entity->info->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER)
         {
             return entity;
         }
@@ -85,7 +85,7 @@ void sub_80854D4(void)
     for(index = 0; index < MAX_TEAM_MEMBERS; index++)
     {
         entity3 = stack1[index];
-        if(entity3 != NULL && entity3->info->joinedAt == DUNGEON_JOIN_LOCATION_PARTNER)
+        if(entity3 != NULL && entity3->info->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER)
         {
             stack1[index] = NULL;
             stack2[counter] = entity3;
@@ -126,7 +126,7 @@ void sub_80855E4(DungeonCallback func)
     {
         entity = gDungeon->teamPokemon[index];
         if (EntityExists(entity)) {
-            if (entity->info->joinedAt == DUNGEON_JOIN_LOCATION_PARTNER) {
+            if (entity->info->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER) {
                 flag = TRUE;
             }
             func(entity);
@@ -145,7 +145,7 @@ void sub_808563C(DungeonCallback func)
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
         entity = gDungeon->wildPokemon[index];
-        if ((EntityExists(entity)) && (entity->info->joinedAt != 0x41)) {
+        if ((EntityExists(entity)) && (entity->info->joinedAt.joinedAt != 0x41)) {
             func(entity);
         }
     }

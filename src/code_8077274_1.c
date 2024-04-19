@@ -1175,7 +1175,7 @@ void SendSleepEndMessage(Entity * pokemon, Entity * target, bool8 param_3, bool8
   }
   entityInfo = target->info;
   SetMessageArgument(gAvailablePokemonNames,target,0);
-  switch(entityInfo->sleep) {
+  switch(entityInfo->sleep.sleep) {
         case STATUS_NONE:
         case 6:
             break;
@@ -1197,19 +1197,19 @@ void SendSleepEndMessage(Entity * pokemon, Entity * target, bool8 param_3, bool8
             isAsleep = TRUE;
             sub_80522F4(pokemon,target,*gUnknown_80FA710);
             HealTargetHP(pokemon,target,gUnknown_80F4F7A, 0, FALSE);
-            entityInfo->sleep = 0;
+            entityInfo->sleep.sleep = 0;
             sub_8079F20(pokemon,target,1,1);
             break;
         case STATUS_YAWNING:
             if (param_3) {
-                entityInfo->sleep = STATUS_NONE;
+                entityInfo->sleep.sleep = STATUS_NONE;
                 sub_8075C58(pokemon,target,CalculateStatusTurns(target, gUnknown_80F4F2C, TRUE) + 1, TRUE);
                 return;
             }
             sub_80522F4(pokemon,target,*gUnknown_80FA734);
             break;
   }
-  entityInfo->sleep = STATUS_NONE;
+  entityInfo->sleep.sleep = STATUS_NONE;
   EntityUpdateStatusSprites(target);
   if (isAsleep) {
     sub_806CE68(target,8);
@@ -1585,7 +1585,7 @@ void SendMuzzledEndMessage(Entity * pokemon, Entity * target)
         flag = TRUE;
       }
 
-      if (entityInfo->sleep == 1 && entityInfo->sleepTurns == 0x7f) {
+      if (entityInfo->sleep.sleep == 1 && entityInfo->sleep.sleepTurns == 0x7f) {
         SendSleepEndMessage(pokemon,target,0,1);
         flag = TRUE;
       }
@@ -1636,8 +1636,8 @@ void WakeUpPokemon(Entity * pokemon)
   EntityInfo *entityInfo;
 
   entityInfo = pokemon->info;
-  entityInfo->sleep = STATUS_NONE;
-  entityInfo->sleepTurns = 0;
+  entityInfo->sleep.sleep = STATUS_NONE;
+  entityInfo->sleep.sleepTurns = 0;
   sub_806A898(pokemon, 1, 1);
   EntityUpdateStatusSprites(pokemon);
 }
@@ -1676,8 +1676,8 @@ void sub_807AA30(void)
   {
     wildEntity = gDungeon->wildPokemon[wildIndex];
     if (EntityExists(wildEntity) &&
-        (entityInfo = wildEntity->info, entityInfo->sleep == STATUS_SLEEP) &&
-        (entityInfo->sleepTurns == 0x7F)) {
+        (entityInfo = wildEntity->info, entityInfo->sleep.sleep == STATUS_SLEEP) &&
+        (entityInfo->sleep.sleepTurns == 0x7F)) {
       adjacentCheck = FALSE;
       forceWakeup = FALSE;
       room = GetEntityRoom(wildEntity);

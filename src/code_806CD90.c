@@ -151,10 +151,10 @@ u8 sub_806CEBC(Entity *entity)
     // NOTE: copy needed to match
     entityInfo1 = entity->info;
     entityInfo2 = entity->info;
-    sleep = entityInfo1->sleep;
+    sleep = entityInfo1->sleep.sleep;
 
     if (sleep == STATUS_SLEEP || sleep == STATUS_NAPPING || sleep == STATUS_NIGHTMARE) {
-        if (entityInfo2->apparentID != MONSTER_SUDOWOODO || entityInfo2->sleepTurns != 0x7F)
+        if (entityInfo2->apparentID != MONSTER_SUDOWOODO || entityInfo2->sleep.sleepTurns != 0x7F)
             return 5;
         else
             return 7;

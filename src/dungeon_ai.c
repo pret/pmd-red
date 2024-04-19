@@ -178,7 +178,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                                 {
                                     return;
                                 }
-                                pokemonInfo->aiNotNextToTarget = FALSE;
+                                pokemonInfo->aiTarget.aiNotNextToTarget = FALSE;
                                 pokemonInfo->aiNextToTarget = FALSE;
                                 pokemonInfo->waiting = FALSE;
                             }

@@ -564,7 +564,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_YAWN:
-            if (targetData->sleep == STATUS_YAWNING)
+            if (targetData->sleep.sleep == STATUS_YAWNING)
             {
                 return FALSE;
             }
@@ -574,7 +574,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_NIGHTMARE:
-            if (targetData->sleep == STATUS_NIGHTMARE)
+            if (targetData->sleep.sleep == STATUS_NIGHTMARE)
             {
                 return FALSE;
             }
@@ -741,7 +741,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             break;
         }
         case MOVE_UPROAR:
-            if (targetData->sleep == STATUS_SLEEPLESS)
+            if (targetData->sleep.sleep == STATUS_SLEEPLESS)
             {
                 return FALSE;
             }

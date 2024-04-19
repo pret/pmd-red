@@ -178,18 +178,18 @@ u8 sub_8075BF4(Entity * pokemon, s32 sleepTurns)
   {
     entityInfo = pokemon->info;
 
-    if(entityInfo->sleep != STATUS_NIGHTMARE && entityInfo->sleep != STATUS_SLEEP)
+    if(entityInfo->sleep.sleep != STATUS_NIGHTMARE && entityInfo->sleep.sleep != STATUS_SLEEP)
     {
-        entityInfo->sleep = STATUS_SLEEP;
+        entityInfo->sleep.sleep = STATUS_SLEEP;
         if ((sleepTurns != 0x7f) && HasAbility(pokemon, ABILITY_EARLY_BIRD) &&
             (sleepTurns = sleepTurns / 2, sleepTurns < 1)) {
             sleepTurns = 1;
         }
-        entityInfo->sleepTurns = sleepTurns;
+        entityInfo->sleep.sleepTurns = sleepTurns;
     }
-    else if(entityInfo->sleep == STATUS_SLEEP)
+    else if(entityInfo->sleep.sleep == STATUS_SLEEP)
         uVar4 = 1;
-    else if(entityInfo->sleep == STATUS_NIGHTMARE)
+    else if(entityInfo->sleep.sleep == STATUS_NIGHTMARE)
         uVar4 = 2;
     EntityUpdateStatusSprites(pokemon);
   }
@@ -203,7 +203,7 @@ void sub_8075C58(Entity * pokemon, Entity * target, s32 turns, u8 displayMessage
 
 
   if (!CannotSleep(pokemon,target,1,displayMessage)) {
-    sleep = target->info->sleep;
+    sleep = target->info->sleep.sleep;
     if (sleep == STATUS_SLEEPLESS) {
       if (displayMessage)
         sub_80522F4(pokemon,target,*gUnknown_80FB380);
@@ -269,19 +269,19 @@ void NightmareStatusTarget(Entity * pokemon, Entity * target, s32 turns)
   hasNightmare = FALSE;
   if (!CannotSleep(pokemon, target, 1, TRUE)) {
     entityInfo = target->info;
-    if (entityInfo->sleep != STATUS_SLEEPLESS) {
+    if (entityInfo->sleep.sleep != STATUS_SLEEPLESS) {
       sub_8041EC8(target);
-      if (entityInfo->sleep != STATUS_NIGHTMARE) {
-        entityInfo->sleepTurns = turns;
-        if ((HasAbility(target, ABILITY_EARLY_BIRD)) && (entityInfo->sleepTurns >>= 1, entityInfo->sleepTurns == 0)) {
-          entityInfo->sleepTurns = 1;
+      if (entityInfo->sleep.sleep != STATUS_NIGHTMARE) {
+        entityInfo->sleep.sleepTurns = turns;
+        if ((HasAbility(target, ABILITY_EARLY_BIRD)) && (entityInfo->sleep.sleepTurns >>= 1, entityInfo->sleep.sleepTurns == 0)) {
+          entityInfo->sleep.sleepTurns = 1;
         }
       }
       else
       {
         hasNightmare = TRUE;
       }
-      entityInfo->sleep = STATUS_NIGHTMARE;
+      entityInfo->sleep.sleep = STATUS_NIGHTMARE;
       sub_806CE68(target,8);
       if (hasNightmare) {
           sub_80522F4(pokemon,target,*gUnknown_80FB3CC);
@@ -306,19 +306,19 @@ void NappingStatusTarget(Entity * pokemon, Entity * target, s32 turns)
   isSleeping = FALSE;
   if (!CannotSleep(pokemon, target, 0, TRUE)) {
     entityInfo = target->info;
-    if (entityInfo->sleep != STATUS_SLEEPLESS) {
+    if (entityInfo->sleep.sleep != STATUS_SLEEPLESS) {
       sub_8041ED8(target);
-      if (entityInfo->sleep == STATUS_NONE || entityInfo->sleep == STATUS_YAWNING) {
-        entityInfo->sleepTurns = turns;
-        if ((HasAbility(target, ABILITY_EARLY_BIRD)) && (entityInfo->sleepTurns >>= 1, entityInfo->sleepTurns == 0)) {
-          entityInfo->sleepTurns = 1;
+      if (entityInfo->sleep.sleep == STATUS_NONE || entityInfo->sleep.sleep == STATUS_YAWNING) {
+        entityInfo->sleep.sleepTurns = turns;
+        if ((HasAbility(target, ABILITY_EARLY_BIRD)) && (entityInfo->sleep.sleepTurns >>= 1, entityInfo->sleep.sleepTurns == 0)) {
+          entityInfo->sleep.sleepTurns = 1;
         }
       }
       else
       {
         isSleeping = TRUE;
       }
-      entityInfo->sleep = STATUS_NAPPING;
+      entityInfo->sleep.sleep = STATUS_NAPPING;
       sub_806CE68(target, 8);
       if (isSleeping) {
           sub_80522F4(pokemon,target,*gUnknown_80FB360);
@@ -343,21 +343,21 @@ void YawnedStatusTarget(Entity * pokemon, Entity * target, s32 turns)
     return;
   }
   entityInfo = target->info;
-  if (entityInfo->sleep == STATUS_NONE) {
-    entityInfo->sleep = STATUS_YAWNING;
-    entityInfo->sleepTurns = turns;
+  if (entityInfo->sleep.sleep == STATUS_NONE) {
+    entityInfo->sleep.sleep = STATUS_YAWNING;
+    entityInfo->sleep.sleepTurns = turns;
     nullsub_91(target);
     sub_806CE68(target, 8);
     sub_80522F4(pokemon,target,*gUnknown_80FB3E0);
   }
-  else if (((entityInfo->sleep == STATUS_SLEEP) || (entityInfo->sleep == STATUS_NIGHTMARE)) || (entityInfo->sleep == STATUS_NAPPING)) {
+  else if (((entityInfo->sleep.sleep == STATUS_SLEEP) || (entityInfo->sleep.sleep == STATUS_NIGHTMARE)) || (entityInfo->sleep.sleep == STATUS_NAPPING)) {
     sub_80522F4(pokemon,target,*gUnknown_80FB418);
   }
-  else if (entityInfo->sleep == STATUS_SLEEPLESS) {
+  else if (entityInfo->sleep.sleep == STATUS_SLEEPLESS) {
     sub_80522F4(pokemon,target,*gUnknown_80FB3F8);
   }
   else {
-    if (entityInfo->sleep == STATUS_YAWNING)
+    if (entityInfo->sleep.sleep == STATUS_YAWNING)
         sub_80522F4(pokemon,target,*gUnknown_80FB414);
     else
         sub_80522F4(pokemon,target,*gUnknown_80FB3E0);
@@ -376,15 +376,15 @@ void SleeplessStatusTarget(Entity * pokemon, Entity * target)
   }
 
   entityInfo = target->info;
-  if ((entityInfo->sleep == STATUS_SLEEP) || (entityInfo->sleep == STATUS_NAPPING) || (entityInfo->sleep == STATUS_NIGHTMARE)) {
+  if ((entityInfo->sleep.sleep == STATUS_SLEEP) || (entityInfo->sleep.sleep == STATUS_NAPPING) || (entityInfo->sleep.sleep == STATUS_NIGHTMARE)) {
     isAsleep = TRUE;
   }
   SetMessageArgument(gAvailablePokemonNames, target, 0);
 
-  if (entityInfo->sleep != STATUS_SLEEPLESS)
+  if (entityInfo->sleep.sleep != STATUS_SLEEPLESS)
   {
-    entityInfo->sleep = STATUS_SLEEPLESS;
-    entityInfo->sleepTurns = CalculateStatusTurns(target, gUnknown_80F4E7C, FALSE) + 1;
+    entityInfo->sleep.sleep = STATUS_SLEEPLESS;
+    entityInfo->sleep.sleepTurns = CalculateStatusTurns(target, gUnknown_80F4E7C, FALSE) + 1;
     entityInfo->unk165 = 0xFF;
     entityInfo->unk164 = 0xFF;
     sub_8041EE8(target);
@@ -977,11 +977,11 @@ void PetrifiedStatusTarget(Entity * pokemon, Entity * target)
         entity = gDungeon->teamPokemon[index];
         if (EntityExists(entity)) {
           entityInfo = entity->info;
-          if ((entityInfo->aiObjective == AI_CHASE_TARGET) && (entityInfo->aiTarget == target)) {
-            entityInfo->aiObjective = AI_STAND_STILL;
-            entityInfo->aiTarget = NULL;
-            entityInfo->aiTargetSpawnGenID = 0;
-            entityInfo->aiTargetingEnemy = FALSE;
+          if ((entityInfo->aiTarget.aiObjective == AI_CHASE_TARGET) && (entityInfo->aiTarget.aiTarget == target)) {
+            entityInfo->aiTarget.aiObjective = AI_STAND_STILL;
+            entityInfo->aiTarget.aiTarget = NULL;
+            entityInfo->aiTarget.aiTargetSpawnGenID = 0;
+            entityInfo->aiTarget.aiTargetingEnemy = FALSE;
           }
         }
       }

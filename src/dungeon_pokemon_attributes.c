@@ -65,7 +65,7 @@ bool8 sub_80717A4(Entity *pokemon, u16 moveID)
   s32 index;
 
   entityInfo = pokemon->info;
-  if ((entityInfo->sleep != STATUS_SLEEP) && (entityInfo->sleep != STATUS_NAPPING) && (entityInfo->sleep != STATUS_NIGHTMARE)) {
+  if ((entityInfo->sleep.sleep != STATUS_SLEEP) && (entityInfo->sleep.sleep != STATUS_NAPPING) && (entityInfo->sleep.sleep != STATUS_NIGHTMARE)) {
       return FALSE;
   }
   else
@@ -218,7 +218,7 @@ bool8 CanSeeTeammate(Entity * pokemon)
 u8 GetMoveTypeForMonster(Entity *pokemon, Move *pokeMove)
 {
     if (pokeMove->id == MOVE_HIDDEN_POWER)
-        return pokemon->info->hiddenPowerType;
+        return pokemon->info->hiddenPower.hiddenPowerType;
     else
         return GetMoveType(pokeMove);
 }
@@ -226,7 +226,7 @@ u8 GetMoveTypeForMonster(Entity *pokemon, Move *pokeMove)
 s32 GetMovePower(Entity *pokemon, Move *pokeMove)
 {
     if(pokeMove->id == MOVE_HIDDEN_POWER)
-        return (pokemon->info->hiddenPowerBasePower + pokeMove->ginseng);
+        return (pokemon->info->hiddenPower.hiddenPowerBasePower + pokeMove->ginseng);
     else
         return (GetMoveBasePower(pokeMove) + pokeMove->ginseng);
 }
@@ -240,8 +240,8 @@ bool8 ToolboxEnabled(EntityInfo *pokemon)
 
 static inline bool8 sub_8071A8C_sub(EntityInfo *pokemonInfo)
 {
-    if(pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON ||
-        pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
+    if(pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON ||
+        pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
         return TRUE;
     else
         return FALSE;

@@ -72,7 +72,7 @@ void SetMessageArgument_2(u8 *buffer, EntityInfo *param_2, s32 colorNum)
         else
         {
             if (param_2->isNotTeamMember) {
-                if ((param_2->joinedAt == 0x4A) || (param_2->clientType == CLIENT_TYPE_CLIENT)) {
+                if ((param_2->joinedAt.joinedAt == 0x4A) || (param_2->clientType == CLIENT_TYPE_CLIENT)) {
                     CopyYellowMonsterNametoBuffer(buffer, param_2->apparentID);
                 }
                 else
@@ -130,9 +130,9 @@ bool8 HasNegativeStatus(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = pokemon->info;
     s32 i;
-    if (pokemonInfo->sleep == STATUS_SLEEP ||
-        pokemonInfo->sleep == STATUS_NIGHTMARE ||
-        pokemonInfo->sleep == STATUS_YAWNING ||
+    if (pokemonInfo->sleep.sleep == STATUS_SLEEP ||
+        pokemonInfo->sleep.sleep == STATUS_NIGHTMARE ||
+        pokemonInfo->sleep.sleep == STATUS_YAWNING ||
         pokemonInfo->nonVolatileStatus != STATUS_NONE ||
         (pokemonInfo->immobilizeStatus != STATUS_INGRAIN && pokemonInfo->immobilizeStatus != STATUS_NONE) ||
         pokemonInfo->volatileStatus != STATUS_NONE ||
@@ -168,9 +168,9 @@ bool8 HasNegativeStatus(Entity *pokemon)
 
 bool8 IsSleeping(Entity *pokemon)
 {
-    if (pokemon->info->sleep != STATUS_SLEEP &&
-        pokemon->info->sleep != STATUS_NAPPING &&
-        pokemon->info->sleep != STATUS_NIGHTMARE)
+    if (pokemon->info->sleep.sleep != STATUS_SLEEP &&
+        pokemon->info->sleep.sleep != STATUS_NAPPING &&
+        pokemon->info->sleep.sleep != STATUS_NIGHTMARE)
     {
         return FALSE;
     }

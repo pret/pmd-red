@@ -46,9 +46,9 @@ const s32 gFaceDirectionIncrements[] = {0, 1, -1, 2, -2, 3, -3, 4, 0, -1, 1, -2,
 void MoveIfPossible(Entity *pokemon, bool8 showRunAwayEffect)
 {
     EntityInfo *pokemonInfo = pokemon->info;
-    pokemonInfo->aiNotNextToTarget = FALSE;
-    pokemonInfo->aiTargetingEnemy = FALSE;
-    pokemonInfo->aiTurningAround = FALSE;
+    pokemonInfo->aiTarget.aiNotNextToTarget = FALSE;
+    pokemonInfo->aiTarget.aiTargetingEnemy = FALSE;
+    pokemonInfo->aiTarget.aiTurningAround = FALSE;
     if (HasTactic(pokemon, TACTIC_BE_PATIENT))
     {
         u32 maxHPStat = pokemonInfo->maxHPStat;
@@ -229,11 +229,11 @@ bool8 ChooseTargetPosition(Entity *pokemon)
         }
         if (targetIndex > -1)
         {
-            pokemonInfo->aiObjective = AI_CHASE_TARGET;
-            pokemonInfo->aiTargetPos = possibleTargets[targetIndex]->pos;
-            pokemonInfo->aiTarget = possibleTargets[targetIndex];
-            pokemonInfo->aiTargetSpawnGenID = pokemonInfo->aiTarget->spawnGenID;
-            pokemonInfo->aiTargetingEnemy = TRUE;
+            pokemonInfo->aiTarget.aiObjective = AI_CHASE_TARGET;
+            pokemonInfo->aiTarget.aiTargetPos = possibleTargets[targetIndex]->pos;
+            pokemonInfo->aiTarget.aiTarget = possibleTargets[targetIndex];
+            pokemonInfo->aiTarget.aiTargetSpawnGenID = pokemonInfo->aiTarget.aiTarget->spawnGenID;
+            pokemonInfo->aiTarget.aiTargetingEnemy = TRUE;
             pokemonInfo->moveRandomly = FALSE;
             if (HasTactic(pokemon, TACTIC_KEEP_YOUR_DISTANCE) && !CanSeeTeammate(pokemon))
             {
@@ -251,7 +251,7 @@ bool8 ChooseTargetPosition(Entity *pokemon)
                     }
                     if (distanceY < 2)
                     {
-                        pokemonInfo->aiTurningAround = TRUE;
+                        pokemonInfo->aiTarget.aiTurningAround = TRUE;
                     }
                 }
             }
@@ -267,10 +267,10 @@ bool8 ChooseTargetPosition(Entity *pokemon)
                 Entity *leader = GetLeaderIfVisible(pokemon);
                 if (EntityExists(leader))
                 {
-                    pokemonInfo->aiObjective = AI_CHASE_TARGET;
-                    pokemonInfo->aiTargetPos = leader->pos;
-                    pokemonInfo->aiTarget = leader;
-                    pokemonInfo->aiTargetSpawnGenID = leader->spawnGenID;
+                    pokemonInfo->aiTarget.aiObjective = AI_CHASE_TARGET;
+                    pokemonInfo->aiTarget.aiTargetPos = leader->pos;
+                    pokemonInfo->aiTarget.aiTarget = leader;
+                    pokemonInfo->aiTarget.aiTargetSpawnGenID = leader->spawnGenID;
                     pokemonInfo->moveRandomly = FALSE;
                     return TRUE;
                 }
@@ -313,31 +313,31 @@ bool8 ChooseTargetPosition(Entity *pokemon)
                 Entity *object = GetTileSafe(x, y)->object;
                 if (object && GetEntityType(object) == ENTITY_ITEM)
                 {
-                    pokemonInfo->aiObjective = AI_TAKE_ITEM;
-                    pokemonInfo->aiTargetPos.x = x;
-                    pokemonInfo->aiTargetPos.y = y;
-                    pokemonInfo->aiTarget = NULL;
-                    pokemonInfo->aiTargetSpawnGenID = 0;
+                    pokemonInfo->aiTarget.aiObjective = AI_TAKE_ITEM;
+                    pokemonInfo->aiTarget.aiTargetPos.x = x;
+                    pokemonInfo->aiTarget.aiTargetPos.y = y;
+                    pokemonInfo->aiTarget.aiTarget = NULL;
+                    pokemonInfo->aiTarget.aiTargetSpawnGenID = 0;
                     pokemonInfo->moveRandomly = FALSE;
                     return TRUE;
                 }
             }
         }
     }
-    if ((u8) (pokemonInfo->aiObjective - 1) <= 1)
+    if ((u8) (pokemonInfo->aiTarget.aiObjective - 1) <= 1)
     {
-        if (pokemonInfo->aiTarget)
+        if (pokemonInfo->aiTarget.aiTarget)
         {
-            if (pokemonInfo->aiTarget->spawnGenID == pokemonInfo->aiTargetSpawnGenID)
+            if (pokemonInfo->aiTarget.aiTarget->spawnGenID == pokemonInfo->aiTarget.aiTargetSpawnGenID)
             {
-                EntityInfo *targetData = pokemonInfo->aiTarget->info;
+                EntityInfo *targetData = pokemonInfo->aiTarget.aiTarget->info;
                 s32 i;
                 for (i = 0; i < NUM_PREV_POS; i++)
                 {
                     if (CanTargetPosition(pokemon, &targetData->prevPos[i]))
                     {
-                        pokemonInfo->aiObjective = AI_CHASE_REMEMBERED_TARGET;
-                        pokemonInfo->aiTargetPos = targetData->prevPos[i];
+                        pokemonInfo->aiTarget.aiObjective = AI_CHASE_REMEMBERED_TARGET;
+                        pokemonInfo->aiTarget.aiTargetPos = targetData->prevPos[i];
                         pokemonInfo->moveRandomly = FALSE;
                         return TRUE;
                     }
@@ -345,9 +345,9 @@ bool8 ChooseTargetPosition(Entity *pokemon)
             }
             else
             {
-                pokemonInfo->aiObjective = AI_STAND_STILL;
-                pokemonInfo->aiTarget = NULL;
-                pokemonInfo->aiTargetSpawnGenID = 0;
+                pokemonInfo->aiTarget.aiObjective = AI_STAND_STILL;
+                pokemonInfo->aiTarget.aiTarget = NULL;
+                pokemonInfo->aiTarget.aiTargetSpawnGenID = 0;
             }
         }
     }
@@ -363,20 +363,20 @@ void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect)
     s32 i;
     struct CanMoveInDirectionInfo canMoveInDirectionInfo[6];
     bool8 pokemonInFront;
-    pokemonInfo->targetPos = pokemonInfo->aiTargetPos;
-    if (pokemon->pos.x == pokemonInfo->aiTargetPos.x &&
-        pokemon->pos.y == pokemonInfo->aiTargetPos.y)
+    pokemonInfo->targetPos = pokemonInfo->aiTarget.aiTargetPos;
+    if (pokemon->pos.x == pokemonInfo->aiTarget.aiTargetPos.x &&
+        pokemon->pos.y == pokemonInfo->aiTarget.aiTargetPos.y)
     {
         SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
         return;
     }
-    direction = GetDirectionTowardsPosition(&pokemon->pos, &pokemonInfo->aiTargetPos);
-    if (ShouldAvoidFirstHit(pokemon, pokemonInfo->aiTargetingEnemy))
+    direction = GetDirectionTowardsPosition(&pokemon->pos, &pokemonInfo->aiTarget.aiTargetPos);
+    if (ShouldAvoidFirstHit(pokemon, pokemonInfo->aiTarget.aiTargetingEnemy))
     {
-        if (pokemonInfo->aiObjective == AI_CHASE_TARGET &&
-            IsTargetTwoTilesAway(&pokemon->pos, &pokemonInfo->aiTargetPos))
+        if (pokemonInfo->aiTarget.aiObjective == AI_CHASE_TARGET &&
+            IsTargetTwoTilesAway(&pokemon->pos, &pokemonInfo->aiTarget.aiTargetPos))
         {
-            s32 distance = GetDistance(&pokemon->pos, &pokemonInfo->aiTargetPos);
+            s32 distance = GetDistance(&pokemon->pos, &pokemonInfo->aiTarget.aiTargetPos);
             if (distance == 2)
             {
                 SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
@@ -389,7 +389,7 @@ void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect)
             }
         }
     }
-    else if (pokemonInfo->aiTurningAround)
+    else if (pokemonInfo->aiTarget.aiTurningAround)
     {
         direction += 4;
         direction &= DIRECTION_MASK;
@@ -404,31 +404,31 @@ void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect)
     {
         if (!pokemonInfo->isNotTeamMember && !pokemonInfo->recalculateFollow)
         {
-            pokemonInfo->aiNotNextToTarget = TRUE;
+            pokemonInfo->aiTarget.aiNotNextToTarget = TRUE;
             pokemonInfo->aiNextToTarget = TRUE;
             SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
             pokemonInfo->waiting = TRUE;
             return;
         }
-        if (pokemon->pos.x + gAdjacentTileOffsets[direction].x == pokemonInfo->aiTargetPos.x &&
-            pokemon->pos.y + gAdjacentTileOffsets[direction].y == pokemonInfo->aiTargetPos.y)
+        if (pokemon->pos.x + gAdjacentTileOffsets[direction].x == pokemonInfo->aiTarget.aiTargetPos.x &&
+            pokemon->pos.y + gAdjacentTileOffsets[direction].y == pokemonInfo->aiTarget.aiTargetPos.y)
         {
             SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
             pokemonInfo->waiting = TRUE;
             return;
         }
-        pokemonInfo->aiNotNextToTarget = TRUE;
+        pokemonInfo->aiTarget.aiNotNextToTarget = TRUE;
     }
     canMoveInDirectionInfo[TURN_LEFT_45].tryTurn = canMoveInDirectionInfo[TURN_RIGHT_45].tryTurn = canMoveInDirectionInfo[TURN_LEFT_90].tryTurn = canMoveInDirectionInfo[TURN_RIGHT_90].tryTurn = canMoveInDirectionInfo[TURN_LEFT_135].tryTurn = TRUE;
     if (!pokemonInfo->isNotTeamMember && (direction & 1) != 0)
     {
-        s32 targetDistanceX = pokemon->pos.x - pokemonInfo->aiTargetPos.x;
+        s32 targetDistanceX = pokemon->pos.x - pokemonInfo->aiTarget.aiTargetPos.x;
         s32 targetDistanceY;
         if (targetDistanceX < 0)
         {
             targetDistanceX = -targetDistanceX;
         }
-        targetDistanceY = pokemon->pos.y - pokemonInfo->aiTargetPos.y;
+        targetDistanceY = pokemon->pos.y - pokemonInfo->aiTarget.aiTargetPos.y;
         if (targetDistanceY < 0)
         {
             targetDistanceY = -targetDistanceY;
@@ -460,7 +460,7 @@ void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect)
         }
     }
     turnLimit = TURN_LEFT_90;
-    if (ShouldMonsterRunAwayAndShowEffect(pokemon, showRunAwayEffect) || pokemonInfo->aiTurningAround)
+    if (ShouldMonsterRunAwayAndShowEffect(pokemon, showRunAwayEffect) || pokemonInfo->aiTarget.aiTurningAround)
     {
         turnLimit = TURN_LEFT_135;
     }
@@ -484,17 +484,17 @@ void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect)
         }
         if (canMoveInDirectionInfo[i].pokemonInFront)
         {
-            pokemonInfo->aiNotNextToTarget = TRUE;
+            pokemonInfo->aiTarget.aiNotNextToTarget = TRUE;
         }
     }
     SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
     pokemonInfo->waiting = TRUE;
     if (pokemonInfo->isTeamLeader)
     {
-        pokemonInfo->aiNotNextToTarget = FALSE;
+        pokemonInfo->aiTarget.aiNotNextToTarget = FALSE;
         pokemonInfo->aiNextToTarget = FALSE;
     }
-    else if (pokemonInfo->aiNotNextToTarget)
+    else if (pokemonInfo->aiTarget.aiNotNextToTarget)
     {
         pokemonInfo->aiNextToTarget = TRUE;
     }
@@ -544,7 +544,7 @@ bool8 AvoidEnemies(Entity *pokemon)
                 closestTargetDistance = distance;
                 closestTarget = target;
                 closestTargetRoom = GetEntityRoom(target);
-                pokemonInfo->aiTargetPos = closestTarget->pos;
+                pokemonInfo->aiTarget.aiTargetPos = closestTarget->pos;
                 pokemonInfo->targetPos = closestTarget->pos;
             }
         }
@@ -575,15 +575,15 @@ bool8 AvoidEnemies(Entity *pokemon)
                 if (targetDir == NUM_DIRECTIONS)
                 {
                     targetDir = DungeonRandInt(NUM_DIRECTIONS);
-                    pokemonInfo->aiObjective = AI_STAND_STILL;
-                    pokemonInfo->aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[targetDir].x;
-                    pokemonInfo->aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[targetDir].y;
+                    pokemonInfo->aiTarget.aiObjective = AI_STAND_STILL;
+                    pokemonInfo->aiTarget.aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[targetDir].x;
+                    pokemonInfo->aiTarget.aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[targetDir].y;
                     return TRUE;
                 }
                 else
                 {
-                    pokemonInfo->aiObjective = AI_RUN_AWAY;
-                    pokemonInfo->aiTargetPos = aiTargetPos;
+                    pokemonInfo->aiTarget.aiObjective = AI_RUN_AWAY;
+                    pokemonInfo->aiTarget.aiTargetPos = aiTargetPos;
                     return TRUE;
                 }
             }
@@ -681,16 +681,16 @@ bool8 AvoidEnemies(Entity *pokemon)
                 }
                 if (furthestTargetToExitDistance >= 0)
                 {
-                    pokemonInfo->aiObjective = AI_RUN_AWAY;
-                    pokemonInfo->aiTargetPos.x = naturalJunctionList[furthestTargetExitIndex].x;
-                    pokemonInfo->aiTargetPos.y = naturalJunctionList[furthestTargetExitIndex].y;
+                    pokemonInfo->aiTarget.aiObjective = AI_RUN_AWAY;
+                    pokemonInfo->aiTarget.aiTargetPos.x = naturalJunctionList[furthestTargetExitIndex].x;
+                    pokemonInfo->aiTarget.aiTargetPos.y = naturalJunctionList[furthestTargetExitIndex].y;
                     return TRUE;
                 }
             }
         }
-        pokemonInfo->aiObjective = AI_RUN_AWAY;
-        pokemonInfo->aiTargetPos.x = pokemon->pos.x - (closestTarget->pos.x - pokemon->pos.x);
-        pokemonInfo->aiTargetPos.y = pokemon->pos.y - (closestTarget->pos.y - pokemon->pos.y);
+        pokemonInfo->aiTarget.aiObjective = AI_RUN_AWAY;
+        pokemonInfo->aiTarget.aiTargetPos.x = pokemon->pos.x - (closestTarget->pos.x - pokemon->pos.x);
+        pokemonInfo->aiTarget.aiTargetPos.y = pokemon->pos.y - (closestTarget->pos.y - pokemon->pos.y);
         return TRUE;
     }
     else
@@ -1108,8 +1108,8 @@ void sub_807BB78(Entity *pokemon)
     EntityInfo *entityInfo;
 
     entityInfo = pokemon->info;
-    entityInfo->aiObjective = 0;
-    entityInfo->aiTargetPos = pokemon->pos;
-    entityInfo->aiTarget = 0;
-    entityInfo->aiTargetSpawnGenID = 0;
+    entityInfo->aiTarget.aiObjective = 0;
+    entityInfo->aiTarget.aiTargetPos = pokemon->pos;
+    entityInfo->aiTarget.aiTarget = 0;
+    entityInfo->aiTarget.aiTargetSpawnGenID = 0;
 }

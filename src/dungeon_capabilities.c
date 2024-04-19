@@ -22,9 +22,9 @@ bool8 CannotMove(Entity *pokemon, bool8 checkBlinker)
     EntityInfo *pokemonInfo = pokemon->info;
 
     if ((checkBlinker && pokemonInfo->eyesightStatus == STATUS_BLINKER)
-        || pokemonInfo->sleep == STATUS_SLEEP
-        || pokemonInfo->sleep == STATUS_NAPPING
-        || pokemonInfo->sleep == STATUS_NIGHTMARE
+        || pokemonInfo->sleep.sleep == STATUS_SLEEP
+        || pokemonInfo->sleep.sleep == STATUS_NAPPING
+        || pokemonInfo->sleep.sleep == STATUS_NIGHTMARE
         || pokemonInfo->volatileStatus == STATUS_PAUSED
         || pokemonInfo->volatileStatus == STATUS_INFATUATED
         || pokemonInfo->immobilizeStatus == STATUS_PETRIFIED)
@@ -41,8 +41,8 @@ bool8 sub_8070BC0(Entity* entity)
     EntityInfo *entityInfo = entity->info;
 
     if (IsCharging(entity, FALSE)
-        || entityInfo->sleep == STATUS_YAWNING
-        || entityInfo->sleep == STATUS_NIGHTMARE
+        || entityInfo->sleep.sleep == STATUS_YAWNING
+        || entityInfo->sleep.sleep == STATUS_NIGHTMARE
         || ShouldMonsterRunAway(entity)
         || entityInfo->muzzled == TRUE
         || entityInfo->immobilizeStatus == STATUS_PETRIFIED
@@ -51,10 +51,10 @@ bool8 sub_8070BC0(Entity* entity)
 
     if (entityInfo->volatileStatus == STATUS_CONFUSED)
         return FALSE;
-    if (entityInfo->sleep == STATUS_SLEEP)
+    if (entityInfo->sleep.sleep == STATUS_SLEEP)
         return FALSE;
     if (entityInfo->transformStatus == STATUS_INVISIBLE
-        || entityInfo->sleep == STATUS_NAPPING)
+        || entityInfo->sleep.sleep == STATUS_NAPPING)
         return FALSE;
     if (entityInfo->volatileStatus == STATUS_CRINGE)
         return FALSE;
@@ -76,9 +76,9 @@ bool8 sub_8070BC0(Entity* entity)
 
 static inline bool8 JoinLocationCannotUseItems(EntityInfo *pokemonInfo)
 {
-    if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
         return TRUE;
-    if (pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
         return TRUE;
     return FALSE;
 }
@@ -104,8 +104,8 @@ bool8 HasStatusThatPreventsActing(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = pokemon->info;
 
-    if ((pokemonInfo->sleep != STATUS_SLEEPLESS
-        && pokemonInfo->sleep != STATUS_NONE)
+    if ((pokemonInfo->sleep.sleep != STATUS_SLEEPLESS
+        && pokemonInfo->sleep.sleep != STATUS_NONE)
         || pokemonInfo->immobilizeStatus == STATUS_FROZEN
         || pokemonInfo->immobilizeStatus == STATUS_PETRIFIED)
         return TRUE;
@@ -121,9 +121,9 @@ bool8 CannotAttack(Entity *pokemon, bool8 skipSleep)
   EntityInfo *pokemonInfo = pokemon->info;
 
   if ((skipSleep ||
-      pokemonInfo->sleep == STATUS_SLEEPLESS ||
-      pokemonInfo->sleep == STATUS_YAWNING ||
-      pokemonInfo->sleep == STATUS_NONE) &&
+      pokemonInfo->sleep.sleep == STATUS_SLEEPLESS ||
+      pokemonInfo->sleep.sleep == STATUS_YAWNING ||
+      pokemonInfo->sleep.sleep == STATUS_NONE) &&
       pokemonInfo->immobilizeStatus != STATUS_FROZEN &&
       pokemonInfo->immobilizeStatus != STATUS_WRAP &&
       pokemonInfo->immobilizeStatus != STATUS_WRAPPED &&
