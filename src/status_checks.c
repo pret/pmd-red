@@ -52,7 +52,7 @@ bool8 HasStatusAffectingActions(Entity *pokemon)
         case STATUS_PETRIFIED:
             return TRUE;
     }
-    switch (pokemonInfo->volatileStatus)
+    switch (pokemonInfo->Volatile.volatileStatus)
     {
         case STATUS_PAUSED:
             SendMessage(pokemon, *gPtrPausedMessage);
@@ -61,7 +61,7 @@ bool8 HasStatusAffectingActions(Entity *pokemon)
             SendMessage(pokemon, *gPtrInfatuatedMessage);
             return TRUE;
     }
-    if (pokemonInfo->chargingStatus == STATUS_BIDE)
+    if (pokemonInfo->charging.chargingStatus == STATUS_BIDE)
     {
         SendMessage(pokemon, *gPtrBideMessage);
         return TRUE;
@@ -145,7 +145,7 @@ bool8 sub_80701A4(Entity *pokemon)
         return TRUE;
   }
 
-  switch(pokemonInfo->volatileStatus) {
+  switch(pokemonInfo->Volatile.volatileStatus) {
     case STATUS_CONFUSED:
         flag = TRUE;
         goto _0807026C;
@@ -160,11 +160,11 @@ bool8 sub_80701A4(Entity *pokemon)
     case STATUS_CRINGE:
     case 8:
     _0807026C:
-        if (pokemonInfo->chargingStatus == STATUS_BIDE) {
+        if (pokemonInfo->charging.chargingStatus == STATUS_BIDE) {
              SendMessage(pokemon,*gPtrBideMessage);
              return TRUE;
         }
-        else if (((pokemonInfo->chargingStatus != STATUS_NONE) && (pokemonInfo->chargingStatus != STATUS_CHARGING)) && (pokemonInfo->chargingStatus != STATUS_ENRAGED)) {
+        else if (((pokemonInfo->charging.chargingStatus != STATUS_NONE) && (pokemonInfo->charging.chargingStatus != STATUS_CHARGING)) && (pokemonInfo->charging.chargingStatus != STATUS_ENRAGED)) {
             if (flag) {
                 SendMessage(pokemon,*gPtrMoveInterruptedMessage);
             }
@@ -172,7 +172,7 @@ bool8 sub_80701A4(Entity *pokemon)
                 for(index = 0, move = pokemonInfo->moves; index < MAX_MON_MOVES; move++, index++) {
                     if ((move->moveFlags & MOVE_FLAG_EXISTS) &&
                     (MoveMatchesChargingStatus(pokemon,move)) &&
-                    (pokemonInfo->chargingStatusMoveIndex == index)) {
+                    (pokemonInfo->charging.chargingStatusMoveIndex == index)) {
                         SetMonsterActionFields(&pokemonInfo->action, ACTION_USE_MOVE_PLAYER);
                         index_1 = index;
                         r7 = &pokemonInfo->action.unk4[1].actionUseIndex;

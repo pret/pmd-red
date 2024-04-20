@@ -25,8 +25,8 @@ bool8 CannotMove(Entity *pokemon, bool8 checkBlinker)
         || pokemonInfo->sleep.sleep == STATUS_SLEEP
         || pokemonInfo->sleep.sleep == STATUS_NAPPING
         || pokemonInfo->sleep.sleep == STATUS_NIGHTMARE
-        || pokemonInfo->volatileStatus == STATUS_PAUSED
-        || pokemonInfo->volatileStatus == STATUS_INFATUATED
+        || pokemonInfo->Volatile.volatileStatus == STATUS_PAUSED
+        || pokemonInfo->Volatile.volatileStatus == STATUS_INFATUATED
         || pokemonInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED)
         return TRUE;
 
@@ -49,14 +49,14 @@ bool8 sub_8070BC0(Entity* entity)
         || entityInfo->immobilize.immobilizeStatus == STATUS_FROZEN)
         return FALSE;
 
-    if (entityInfo->volatileStatus == STATUS_CONFUSED)
+    if (entityInfo->Volatile.volatileStatus == STATUS_CONFUSED)
         return FALSE;
     if (entityInfo->sleep.sleep == STATUS_SLEEP)
         return FALSE;
     if (entityInfo->transformStatus == STATUS_INVISIBLE
         || entityInfo->sleep.sleep == STATUS_NAPPING)
         return FALSE;
-    if (entityInfo->volatileStatus == STATUS_CRINGE)
+    if (entityInfo->Volatile.volatileStatus == STATUS_CRINGE)
         return FALSE;
     if (entityInfo->immobilize.immobilizeStatus == STATUS_WRAP)
         return FALSE;
@@ -67,8 +67,8 @@ bool8 sub_8070BC0(Entity* entity)
         return FALSE;
     if (entityInfo->eyesightStatus == STATUS_BLINKER)
         return FALSE;
-    if (entityInfo->volatileStatus != STATUS_INFATUATED
-        && entityInfo->volatileStatus != STATUS_PAUSED)
+    if (entityInfo->Volatile.volatileStatus != STATUS_INFATUATED
+        && entityInfo->Volatile.volatileStatus != STATUS_PAUSED)
         return TRUE;
         
     return FALSE;
@@ -110,7 +110,7 @@ bool8 HasStatusThatPreventsActing(Entity *pokemon)
         || pokemonInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED)
         return TRUE;
 
-    if (pokemonInfo->chargingStatus == STATUS_BIDE)
+    if (pokemonInfo->charging.chargingStatus == STATUS_BIDE)
         return TRUE;
 
     return FALSE;
@@ -128,9 +128,9 @@ bool8 CannotAttack(Entity *pokemon, bool8 skipSleep)
       pokemonInfo->immobilize.immobilizeStatus != STATUS_WRAP &&
       pokemonInfo->immobilize.immobilizeStatus != STATUS_WRAPPED &&
       pokemonInfo->immobilize.immobilizeStatus != STATUS_PETRIFIED &&
-      pokemonInfo->volatileStatus != STATUS_CRINGE &&
-      pokemonInfo->volatileStatus != STATUS_PAUSED &&
-      pokemonInfo->volatileStatus != STATUS_INFATUATED &&
+      pokemonInfo->Volatile.volatileStatus != STATUS_CRINGE &&
+      pokemonInfo->Volatile.volatileStatus != STATUS_PAUSED &&
+      pokemonInfo->Volatile.volatileStatus != STATUS_INFATUATED &&
       pokemonInfo->nonVolatile.nonVolatileStatus != STATUS_PARALYSIS &&
       !ShouldMonsterRunAway(pokemon))
       return FALSE;

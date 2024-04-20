@@ -46,7 +46,7 @@ void sub_80817B0(unkStruct_8094924 *param_1, u32 param_2);
 void SavePosition(void*, Position *);
 void sub_80818E4(unkStruct_8094924 *param_1, AITarget* param_2);
 void sub_8081B54(void *, u8 *);
-void sub_808186C(unkStruct_8094924 *param_1, s32 param_2);
+void SaveSpeedStage(unkStruct_8094924 *param_1, s32 param_2);
 void sub_8081854(unkStruct_8094924 *param_1, s32 param_2);
 void sub_808183C(unkStruct_8094924 *param_1, s32 param_2);
 void sub_8081AB8(void *, bool8 *);
@@ -55,17 +55,17 @@ void sub_8081A80(void *, u8*);
 void sub_8081A74(void *, u8*);
 void sub_8081A58(void *, u8*);
 void sub_8081A24(void *, u8*);
-void sub_8081994(void *, u8*);
-void sub_8081968(unkStruct_8094924 *param_1, Immobilize *param_2);
-void sub_808193C(unkStruct_8094924 *param_1, NonVolatile *param_2);
+void SaveVolatile(unkStruct_8094924 *param_1, Volatile *param_2);
+void SaveImmobilize(unkStruct_8094924 *param_1, Immobilize *param_2);
+void SaveNonVolatile(unkStruct_8094924 *param_1, NonVolatile *param_2);
 void SaveEntitySleep(unkStruct_8094924 *param_1, Sleep* param_2);
-void sub_8081880(unkStruct_8094924 *param_1, u8 param_2);
+void SaveTactic(unkStruct_8094924 *param_1, u8 param_2);
 void SaveHiddenPower(unkStruct_8094924 *param_1, HiddenPower *param_2);
-void sub_80819B0(void *, u8 *);
-void sub_80819D4(void *, u8 *);
+void SaveCharging(unkStruct_8094924 *param_1, Charging *param_2);
+void SaveProtection(unkStruct_8094924 *param_1, Protection *param_2);
 void sub_80819F0(void *, u8 *);
 void SaveSpeedCounters(void *, u8 *, u32);
-void sub_80818B8(unkStruct_8094924 *param_1, u8 param_2);
+void SaveClientType(unkStruct_8094924 *param_1, u8 param_2);
 void sub_803E708(u32, u32);
 void sub_80421C0(Entity *, u32);
 void sub_804687C(Entity *, Position *, Position *, Item *, u32);
@@ -244,9 +244,9 @@ void sub_8080E0C(unkStruct_8094924 *param_1,Entity *param_2)
     Sleep *puStack_8c;
     NonVolatile *puStack_88;
     Immobilize *puStack_84;
-    u8 *puStack_80;
-    u8 *puStack_7c;
-    u8 *puStack_78;
+    Volatile *puStack_80;
+    Charging *puStack_7c;
+    Protection *puStack_78;
     u8 *puStack_74;
     u8 *puStack_70;
     u8 *puStack_6c;
@@ -338,9 +338,9 @@ void sub_8080E0C(unkStruct_8094924 *param_1,Entity *param_2)
     puStack_8c = &info->sleep;
     puStack_88 = &info->nonVolatile;
     puStack_84 = &info->immobilize;
-    puStack_80 = &info->volatileStatus;
-    puStack_7c = &info->chargingStatus;
-    puStack_78 = &info->protectionStatus;
+    puStack_80 = &info->Volatile;
+    puStack_7c = &info->charging;
+    puStack_78 = &info->protection;
     puStack_74 = &info->waitingStatus;
     puStack_70 = &info->linkedStatus;
     puStack_6c = &info->moveStatus;
@@ -374,17 +374,17 @@ void sub_8080E0C(unkStruct_8094924 *param_1,Entity *param_2)
     sub_80818E4(param_1,temp3);
     sub_8081B54(param_1,temp2);
     sub_8081B54(param_1,temp1);
-    sub_8081880(param_1,*puStack_a0);
+    SaveTactic(param_1,*puStack_a0);
     SaveHiddenPower(param_1,psStack_a4);
     sub_8083078(param_1,*puStack_9c);
     sub_8083078(param_1,*puStack_98);
     sub_8083078(param_1,*puStack_94);
     SaveEntitySleep(param_1,puStack_8c);
-    sub_808193C(param_1,puStack_88);
-    sub_8081968(param_1,puStack_84);
-    sub_8081994(param_1,puStack_80);
-    sub_80819B0(param_1,puStack_7c);
-    sub_80819D4(param_1,puStack_78);
+    SaveNonVolatile(param_1,puStack_88);
+    SaveImmobilize(param_1,puStack_84);
+    SaveVolatile(param_1,puStack_80);
+    SaveCharging(param_1,puStack_7c);
+    SaveProtection(param_1,puStack_78);
     sub_80819F0(param_1,puStack_74);
     sub_8081A24(param_1,puStack_70);
     sub_8081A58(param_1,puStack_6c);
@@ -407,7 +407,7 @@ void sub_8080E0C(unkStruct_8094924 *param_1,Entity *param_2)
     sub_8083060(param_1,*puStack_28);
     sub_808183C(param_1,*puStack_24);
     sub_8081854(param_1,info->targetingDecoy);
-    sub_808186C(param_1,info->speedStage);
+    SaveSpeedStage(param_1,info->speedStage);
     SaveSpeedCounters(param_1,info->speedUpCounters,NUM_SPEED_COUNTERS);
     SaveSpeedCounters(param_1,info->speedDownCounters,NUM_SPEED_COUNTERS);
     sub_8083060(param_1,info->stockpileStage);
@@ -444,7 +444,7 @@ void sub_8080E0C(unkStruct_8094924 *param_1,Entity *param_2)
     sub_8083048(param_1,info->unk1F8);
     sub_8083048(param_1,info->mobileTurnTimer);
     sub_8083078(param_1,info->expGainedInTurn);
-    sub_80818B8(param_1,*puStack_90);
+    SaveClientType(param_1,*puStack_90);
 }
 
 void sub_8081454(unkStruct_8094924 *param_1)
@@ -580,12 +580,12 @@ void sub_8081854(unkStruct_8094924 *param_1, s32 param_2)
     sub_8082FA8(param_1, &stack, 1);
 }
 
-void sub_808186C(unkStruct_8094924 *param_1, s32 param_2)
+void SaveSpeedStage(unkStruct_8094924 *param_1, s32 param_2)
 {
     sub_8082FA8(param_1, &param_2, 4);
 }
 
-void sub_8081880(unkStruct_8094924 *param_1, u8 param_2)
+void SaveTactic(unkStruct_8094924 *param_1, u8 param_2)
 {
     sub_8082FA8(param_1, &param_2, 1);
 }
@@ -596,7 +596,7 @@ void SaveHiddenPower(unkStruct_8094924 *param_1, HiddenPower *param_2)
     sub_808180C(param_1, param_2->hiddenPowerType);
 }
 
-void sub_80818B8(unkStruct_8094924 *param_1, u8 param_2)
+void SaveClientType(unkStruct_8094924 *param_1, u8 param_2)
 {
     sub_8083060(param_1, param_2);
 }
@@ -623,7 +623,7 @@ void SaveEntitySleep(unkStruct_8094924 *param_1, Sleep* param_2)
     sub_8083060(param_1, param_2->sleepTurns);
 }
 
-void sub_808193C(unkStruct_8094924 *param_1, NonVolatile *param_2)
+void SaveNonVolatile(unkStruct_8094924 *param_1, NonVolatile *param_2)
 {
     sub_8082FA8(param_1, &param_2->nonVolatileStatus, 1);
     sub_8083060(param_1, param_2->nonVolatileStatusTurns);
@@ -631,7 +631,7 @@ void sub_808193C(unkStruct_8094924 *param_1, NonVolatile *param_2)
     sub_8083060(param_1, param_2->unk4);
 }
 
-void sub_8081968(unkStruct_8094924 *param_1, Immobilize *param_2)
+void SaveImmobilize(unkStruct_8094924 *param_1, Immobilize *param_2)
 {
     sub_8082FA8(param_1, &param_2->immobilizeStatus, 1);
     sub_8083060(param_1, param_2->immobilizeStatusTurns);
@@ -639,4 +639,22 @@ void sub_8081968(unkStruct_8094924 *param_1, Immobilize *param_2)
     sub_8083078(param_1, param_2->unk4);
 }
 
+void SaveVolatile(unkStruct_8094924 *param_1, Volatile *param_2)
+{
+    sub_8082FA8(param_1, &param_2->volatileStatus, 1);
+    sub_8083060(param_1, param_2->volatileStatusTurns);
+}
+
+void SaveCharging(unkStruct_8094924 *param_1, Charging *param_2)
+{
+    sub_8082FA8(param_1, &param_2->chargingStatus, 1);
+    sub_8083060(param_1, param_2->chargingStatusTurns);
+    sub_8083060(param_1, param_2->chargingStatusMoveIndex);
+}
+
+void SaveProtection(unkStruct_8094924 *param_1, Protection *param_2)
+{
+    sub_8082FA8(param_1, &param_2->protectionStatus, 1);
+    sub_8083060(param_1, param_2->protectionStatusTurns);
+}
 

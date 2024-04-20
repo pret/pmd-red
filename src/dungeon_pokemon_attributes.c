@@ -28,7 +28,7 @@ extern void sub_80522F4(Entity *r1, Entity *r2, u32);
 
 bool8 HasSafeguardStatus(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
-  if (target->info->protectionStatus == STATUS_SAFEGUARD) {
+  if (target->info->protection.protectionStatus == STATUS_SAFEGUARD) {
     if (displayMessage) {
       SetMessageArgument(gAvailablePokemonNames,target,0);
       sub_80522F4(pokemon,target,gUnknown_80FC2FC);
@@ -40,7 +40,7 @@ bool8 HasSafeguardStatus(Entity * pokemon, Entity * target, bool8 displayMessage
 
 bool8 sub_8071728(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
-  if (target->info->protectionStatus == STATUS_MIST) {
+  if (target->info->protection.protectionStatus == STATUS_MIST) {
     if (displayMessage) {
       SetMessageArgument(gAvailablePokemonNames, target, 0);
       sub_80522F4(pokemon, target, gUnknown_80FC31C);

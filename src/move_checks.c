@@ -114,20 +114,20 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_RAGE:
-            if (pokemonInfo->chargingStatus == STATUS_ENRAGED)
+            if (pokemonInfo->charging.chargingStatus == STATUS_ENRAGED)
             {
                 return FALSE;
             }
             break;
         case MOVE_COUNTER:
         case MOVE_PURSUIT:
-            if (pokemonInfo->protectionStatus == STATUS_COUNTER)
+            if (pokemonInfo->protection.protectionStatus == STATUS_COUNTER)
             {
                 return FALSE;
             }
             break;
         case MOVE_MIRROR_MOVE:
-            if (pokemonInfo->protectionStatus == STATUS_MIRROR_MOVE)
+            if (pokemonInfo->protection.protectionStatus == STATUS_MIRROR_MOVE)
             {
                 return FALSE;
             }
@@ -159,7 +159,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             break;
         case MOVE_BIDE:
         case MOVE_REVENGE:
-            if (pokemonInfo->chargingStatus == STATUS_BIDE)
+            if (pokemonInfo->charging.chargingStatus == STATUS_BIDE)
             {
                 return FALSE;
             }
@@ -193,25 +193,25 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_ENDURE:
-            if (pokemonInfo->protectionStatus == STATUS_ENDURING)
+            if (pokemonInfo->protection.protectionStatus == STATUS_ENDURING)
             {
                 return FALSE;
             }
             break;
         case MOVE_CHARGE:
-            if (pokemonInfo->chargingStatus == STATUS_CHARGING)
+            if (pokemonInfo->charging.chargingStatus == STATUS_CHARGING)
             {
                 return FALSE;
             }
             break;
         case MOVE_MIST:
-            if (pokemonInfo->protectionStatus == STATUS_MIST)
+            if (pokemonInfo->protection.protectionStatus == STATUS_MIST)
             {
                 return FALSE;
             }
             break;
         case MOVE_LIGHT_SCREEN:
-            if (pokemonInfo->protectionStatus == STATUS_LIGHT_SCREEN)
+            if (pokemonInfo->protection.protectionStatus == STATUS_LIGHT_SCREEN)
             {
                 return FALSE;
             }
@@ -272,13 +272,13 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_MIRROR_COAT:
-            if (pokemonInfo->protectionStatus == STATUS_MIRROR_COAT)
+            if (pokemonInfo->protection.protectionStatus == STATUS_MIRROR_COAT)
             {
                 return FALSE;
             }
             break;
         case MOVE_REFLECT:
-            if (pokemonInfo->protectionStatus == STATUS_REFLECT)
+            if (pokemonInfo->protection.protectionStatus == STATUS_REFLECT)
             {
                 return FALSE;
             }
@@ -290,14 +290,14 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_MAGIC_COAT:
-            if (pokemonInfo->protectionStatus == STATUS_MAGIC_COAT)
+            if (pokemonInfo->protection.protectionStatus == STATUS_MAGIC_COAT)
             {
                 return FALSE;
             }
             break;
         case MOVE_DETECT:
         case MOVE_PROTECT:
-            if (pokemonInfo->protectionStatus == STATUS_PROTECT)
+            if (pokemonInfo->protection.protectionStatus == STATUS_PROTECT)
             {
                 return FALSE;
             }
@@ -321,7 +321,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_SAFEGUARD:
-            if (pokemonInfo->protectionStatus == STATUS_SAFEGUARD)
+            if (pokemonInfo->protection.protectionStatus == STATUS_SAFEGUARD)
             {
                 return FALSE;
             }
@@ -432,7 +432,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_WISH:
-            if (pokemonInfo->isNotTeamMember || pokemonInfo->protectionStatus == STATUS_WISH)
+            if (pokemonInfo->isNotTeamMember || pokemonInfo->protection.protectionStatus == STATUS_WISH)
             {
                 return FALSE;
             }
@@ -483,7 +483,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_CONVERSION_2:
-            if (pokemonInfo->protectionStatus == STATUS_CONVERSION2)
+            if (pokemonInfo->protection.protectionStatus == STATUS_CONVERSION2)
             {
                 return FALSE;
             }
@@ -592,7 +592,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_ENCORE:
-            if (targetData->volatileStatus == STATUS_ENCORE)
+            if (targetData->Volatile.volatileStatus == STATUS_ENCORE)
             {
                 return FALSE;
             }
@@ -774,7 +774,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_TAUNT:
-            if (targetData->volatileStatus == STATUS_TAUNTED)
+            if (targetData->Volatile.volatileStatus == STATUS_TAUNTED)
             {
                 return FALSE;
             }
@@ -825,7 +825,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             break;
         case MOVE_IMPRISON:
         case MOVE_OBSERVER:
-            if (targetData->volatileStatus == STATUS_PAUSED)
+            if (targetData->Volatile.volatileStatus == STATUS_PAUSED)
             {
                 return FALSE;
             }
@@ -856,7 +856,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_ATTRACT:
-            if (targetData->volatileStatus == STATUS_INFATUATED)
+            if (targetData->Volatile.volatileStatus == STATUS_INFATUATED)
             {
                 return FALSE;
             }
@@ -895,7 +895,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
         case MOVE_SWEET_KISS:
         case MOVE_TEETER_DANCE:
         case MOVE_TOTTER:
-            if (targetData->volatileStatus == STATUS_CONFUSED)
+            if (targetData->Volatile.volatileStatus == STATUS_CONFUSED)
             {
                 return FALSE;
             }

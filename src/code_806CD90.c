@@ -159,7 +159,7 @@ u8 sub_806CEBC(Entity *entity)
         else
             return 7;
     }
-    if (entityInfo2->chargingStatus == STATUS_BIDE)
+    if (entityInfo2->charging.chargingStatus == STATUS_BIDE)
         return 11;
     return 7;
 }

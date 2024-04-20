@@ -53,7 +53,6 @@ typedef struct JoinedAt
     /* 0x1 */ u8 unk1;
 } JoinedAt;
 
-
 typedef struct AITarget
 {
     /* 0x0 */ u8 aiObjective;
@@ -84,13 +83,29 @@ typedef struct NonVolatile
 typedef struct Immobilize
 {
     /* 0x0 */ u8 immobilizeStatus;
-    u8 fill1[0x4 - 0x1];
     /* 0x4 */ s32 unk4;
     /* 0x8 */ u8 immobilizeStatusTurns;
     /* 0x9 */ u8 immobilizeStatusDamageCountdown;
-    u8 fillA[0xC - 0xA];
 } Immobilize;
 
+typedef struct Volatile
+{
+    /* 0x0 */ u8 volatileStatus;
+    /* 0x1 */ u8 volatileStatusTurns;
+} Volatile;
+
+typedef struct Charging
+{
+    /* 0x0 */ u8 chargingStatus;
+    /* 0x1 */ u8 chargingStatusTurns;
+    /* 0x2 */ u8 chargingStatusMoveIndex; // The position of the move in the Pokémon's moveset that triggered the status.
+} Charging;
+
+typedef struct Protection
+{
+    /* 0x0 */ u8 protectionStatus;
+    /* 0x1 */ u8 protectionStatusTurns;
+} Protection;
 
 // size: 0x208
 typedef struct EntityInfo
@@ -157,19 +172,12 @@ typedef struct EntityInfo
     /* 0xA8 */ Sleep sleep;
     /* 0xAC */ NonVolatile nonVolatile;
     /* 0xB0 */ Immobilize immobilize;
-    /* 0xBC */ u8 volatileStatus;
-    /* 0xBD */ u8 volatileStatusTurns;
-    u8 fillBE[0xC0 - 0xBE];
-    /* 0xC0 */ u8 chargingStatus;
-    /* 0xC1 */ u8 chargingStatusTurns;
-    /* 0xC2 */ u8 chargingStatusMoveIndex; // The position of the move in the Pokémon's moveset that triggered the status.
-    u8 fillC3;
-    /* 0xC4 */ u8 protectionStatus;
-    /* 0xC5 */ u8 protectionStatusTurns;
-    u8 fillC6[0xC8 - 0xC6];
+    /* 0xBC */ Volatile Volatile;
+    /* 0xC0 */ Charging charging;
+    /* 0xC4 */ Protection protection;
     /* 0xC8 */ u8 waitingStatus;
     /* 0xC9 */ bool8 enemyDecoy; // True if the Pokémon is a decoy and a wild Pokémon (i.e., not an allied Pokémon).
-    u8 fillCA;
+    u8 unkCA;
     /* 0xCB */ u8 waitingStatusTurns;
     /* 0xCC */ u8 curseDamageCountdown;
     u8 fillCD[0xD0 - 0xCD];

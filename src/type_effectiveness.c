@@ -162,7 +162,7 @@ s32 WeightWeakTypePicker(Entity *user, Entity *target, u8 moveType)
     {
         return 2;
     }
-    if (moveType == TYPE_ELECTRIC && userData->chargingStatus == STATUS_CHARGING)
+    if (moveType == TYPE_ELECTRIC && userData->charging.chargingStatus == STATUS_CHARGING)
     {
         weight *= 2;
     }

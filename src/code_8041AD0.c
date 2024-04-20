@@ -215,9 +215,9 @@ void EntityUpdateStatusSprites(Entity *entity)
     spriteStatus = spriteStatus | 
             gStatusSpriteMasks_NonVolatileStatus[entityInfo->nonVolatile.nonVolatileStatus] |
             gStatusSpriteMasks_ImmobilizeStatus[entityInfo->immobilize.immobilizeStatus] |
-            gStatusSpriteMasks_VolatileStatus[entityInfo->volatileStatus] |
-            gStatusSpriteMasks_ChargingStatus[entityInfo->chargingStatus] |
-            gStatusSpriteMasks_ProtectionStatus[entityInfo->protectionStatus] |
+            gStatusSpriteMasks_VolatileStatus[entityInfo->Volatile.volatileStatus] |
+            gStatusSpriteMasks_ChargingStatus[entityInfo->charging.chargingStatus] |
+            gStatusSpriteMasks_ProtectionStatus[entityInfo->protection.protectionStatus] |
             gStatusSpriteMasks_WaitingStatus[entityInfo->waitingStatus] |
             gStatusSpriteMasks_LinkedStatus[entityInfo->linkedStatus] |
             gStatusSpriteMasks_MoveStatus[entityInfo->moveStatus] |

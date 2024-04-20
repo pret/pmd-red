@@ -403,10 +403,10 @@ void CringeStatusTarget(Entity * pokemon,Entity * target, bool8 displayMessage)
       else {
         entityInfo = target->info;
         SetMessageArgument(gAvailablePokemonNames,target,0);
-        if(entityInfo->volatileStatus != STATUS_CRINGE)
+        if(entityInfo->Volatile.volatileStatus != STATUS_CRINGE)
         {
-            entityInfo->volatileStatus = STATUS_CRINGE;
-            entityInfo->volatileStatusTurns = CalculateStatusTurns(target, gUnknown_80F4E3C, TRUE) +  1;
+            entityInfo->Volatile.volatileStatus = STATUS_CRINGE;
+            entityInfo->Volatile.volatileStatusTurns = CalculateStatusTurns(target, gUnknown_80F4E3C, TRUE) +  1;
             sub_80420A0(target);
             sub_80522F4(pokemon,target,*gUnknown_80FB2E0);
         }
@@ -595,9 +595,9 @@ void ConfuseStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage
     {
       sub_8041BE8(target);
       entityInfo = target->info;
-      if (entityInfo->volatileStatus != STATUS_CONFUSED) {
-        entityInfo->volatileStatus = STATUS_CONFUSED;
-        entityInfo->volatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E4C,TRUE) + 1;
+      if (entityInfo->Volatile.volatileStatus != STATUS_CONFUSED) {
+        entityInfo->Volatile.volatileStatus = STATUS_CONFUSED;
+        entityInfo->Volatile.volatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E4C,TRUE) + 1;
         sub_80522F4(pokemon,target,*gUnknown_80FB25C);
       }
       else {
@@ -615,9 +615,9 @@ void CowerStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,displayMessage))) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (entityInfo->volatileStatus != STATUS_COWERING) {
-      entityInfo->volatileStatus = STATUS_COWERING;
-      entityInfo->volatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4ECC,TRUE) + 1;
+    if (entityInfo->Volatile.volatileStatus != STATUS_COWERING) {
+      entityInfo->Volatile.volatileStatus = STATUS_COWERING;
+      entityInfo->Volatile.volatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4ECC,TRUE) + 1;
       sub_8041BF8(target);
       sub_80522F4(pokemon,target,*gUnknown_80FB940);
     }
@@ -1005,7 +1005,7 @@ void sub_80783C4(Entity * pokemon, Entity * target, u8 param_3)
       }
       targetEntityInfo->waitingStatus = STATUS_DECOY;
       targetEntityInfo->enemyDecoy = pokemon->info->isNotTeamMember;
-      targetEntityInfo->fillCA = param_3;
+      targetEntityInfo->unkCA = param_3;
       targetEntityInfo->waitingStatusTurns = CalculateStatusTurns(target,gUnknown_80F4ED0,TRUE) + 1;
       targetEntityInfo->curseDamageCountdown = 0;
       sub_806CCB4(target,sub_806CEBC(target));
@@ -1114,9 +1114,9 @@ void TauntStatusTarget(Entity * pokemon, Entity * target)
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (entityInfo->volatileStatus != STATUS_TAUNTED) {
-      entityInfo->volatileStatus = STATUS_TAUNTED;
-      entityInfo->volatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4ED8,TRUE) + 1;
+    if (entityInfo->Volatile.volatileStatus != STATUS_TAUNTED) {
+      entityInfo->Volatile.volatileStatus = STATUS_TAUNTED;
+      entityInfo->Volatile.volatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4ED8,TRUE) + 1;
       nullsub_73(target);
       sub_80522F4(pokemon,target,*gUnknown_80FB9F0);
     }
@@ -1211,9 +1211,9 @@ void EncoreStatusTarget(Entity *pokemon,Entity *target)
     }
     else {
       SetMessageArgument(gAvailablePokemonNames,target,0);
-      if (EntityInfo->volatileStatus != STATUS_ENCORE) {
-        EntityInfo->volatileStatus = STATUS_ENCORE;
-        EntityInfo->volatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4EF4,TRUE) + 1;
+      if (EntityInfo->Volatile.volatileStatus != STATUS_ENCORE) {
+        EntityInfo->Volatile.volatileStatus = STATUS_ENCORE;
+        EntityInfo->Volatile.volatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4EF4,TRUE) + 1;
         nullsub_83(target);
         sub_80522F4(pokemon,target,*gUnknown_80FBB94);
       }

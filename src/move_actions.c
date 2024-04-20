@@ -595,8 +595,8 @@ bool8 TormentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4
   }
   if (isTormented)
   {
-    if(entityInfo->chargingStatus == STATUS_BIDE) {
-        entityInfo->chargingStatus = STATUS_NONE;
+    if(entityInfo->charging.chargingStatus == STATUS_BIDE) {
+        entityInfo->charging.chargingStatus = STATUS_NONE;
     }
   }
   else
@@ -680,7 +680,7 @@ bool8 WhirlpoolMoveAction(Entity * pokemon, Entity * target, Move * move, u32 pa
   u8 chargeStatus;
 
   flag = FALSE;
-  chargeStatus = target->info->chargingStatus;
+  chargeStatus = target->info->charging.chargingStatus;
   uVar3 = 0x100;
   if (chargeStatus == STATUS_DIVING) {
     uVar3 = 0x200;
@@ -984,7 +984,7 @@ bool8 sub_8058270(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   u32 r3;
 
   r3 = 1;
-  if((u8)(target->info->chargingStatus - 7) <= 1)
+  if((u8)(target->info->charging.chargingStatus - 7) <= 1)
     r3 = 2;
   flag =  sub_8055640(pokemon,target,move,r3 << 8,param_4) ? TRUE : FALSE;
   return flag;
@@ -1143,7 +1143,7 @@ bool8 BrickBreakMoveAction(Entity *pokemon, Entity *target, Move *move, u32 para
   bool8 flag;
   
   flag = FALSE;
-  if ((target->info->protectionStatus == STATUS_REFLECT) || (target->info->protectionStatus == STATUS_LIGHT_SCREEN)) {
+  if ((target->info->protection.protectionStatus == STATUS_REFLECT) || (target->info->protection.protectionStatus == STATUS_LIGHT_SCREEN)) {
     sub_80522F4(pokemon,target,*gUnknown_80FD104); // The barrier was shattered
     SendProtectionEndMessage(pokemon,target);
     flag = TRUE;
@@ -1627,7 +1627,7 @@ bool32 sub_8058F04(Entity *pokemon, Entity *target, Move *move, s32 param_4)
   iVar3 = 1;
   gDungeon->unk18200 = 0xc;
   gDungeon->unk18204 = 0;
-  if (entityInfo->chargingStatus == STATUS_DIGGING) {
+  if (entityInfo->charging.chargingStatus == STATUS_DIGGING) {
     iVar3 = 2;
   }
   flag = sub_8055640(pokemon,target,move,iVar3 << 8,param_4);
@@ -2210,7 +2210,7 @@ bool8 sub_8059928(Entity * pokemon,Entity * target,Move * move,u32 param_4)
   
   iVar2 = 1;
   flag = FALSE;
-  if ((u8)(target->info->chargingStatus - 7) <= 1){
+  if ((u8)(target->info->charging.chargingStatus - 7) <= 1){
       iVar2 = 2;
   }
   if (sub_8055640(pokemon,target,move,iVar2 << 8,param_4) != 0)
@@ -2696,7 +2696,7 @@ bool8 SurfMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   u32 uVar2;
   
   flag = FALSE;
-  if (target->info->chargingStatus == STATUS_DIVING) {
+  if (target->info->charging.chargingStatus == STATUS_DIVING) {
       uVar2 = 0x200;
   }
   else

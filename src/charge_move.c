@@ -76,7 +76,7 @@ bool8 MoveMatchesChargingStatus(Entity *pokemon, Move *move)
                 return FALSE;
             }
             if (move->id == gMultiTurnChargeMoves[i].moveID &&
-                pokemonInfo->chargingStatus == gMultiTurnChargeMoves[i].chargingStatus)
+                pokemonInfo->charging.chargingStatus == gMultiTurnChargeMoves[i].chargingStatus)
             {
                 return TRUE;
             }
@@ -95,7 +95,7 @@ bool8 IsCharging(Entity *pokemon, bool8 checkCharge)
     {
         EntityInfo *pokemonInfo = pokemon->info;
         int i = 0;
-        u8 *chargingStatusPointer = &pokemonInfo->chargingStatus;
+        u8 *chargingStatusPointer = &pokemonInfo->charging.chargingStatus;
         u8 *chargingStatusPointer2;
         u8 chargeStatus = STATUS_CHARGING;
         for (; i < 100; i++)
@@ -107,7 +107,7 @@ bool8 IsCharging(Entity *pokemon, bool8 checkCharge)
                 return FALSE;
             }
             chargingStatus = *chargingStatusPointer;
-            chargingStatusPointer2 = &pokemonInfo->chargingStatus;
+            chargingStatusPointer2 = &pokemonInfo->charging.chargingStatus;
             if (chargingStatus == currentStatus)
             {
                 return TRUE;
