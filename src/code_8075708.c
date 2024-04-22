@@ -67,7 +67,7 @@ void sub_8075708(Entity *entity)
         return;
     }
     tile = GetTileAtEntitySafe(entity);
-    if (((IQSkillIsEnabled(entity, IQ_SUPER_MOBILE)) && (info->transformStatus != STATUS_MOBILE)) &&
+    if (((IQSkillIsEnabled(entity, IQ_SUPER_MOBILE)) && (info->transformStatus.transformStatus != STATUS_MOBILE)) &&
         (!HasHeldItem(entity, ITEM_MOBILE_SCARF))) {
         sub_804AE84(&entity->pos);
     }

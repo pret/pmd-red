@@ -218,13 +218,13 @@ void EntityUpdateStatusSprites(Entity *entity)
             gStatusSpriteMasks_VolatileStatus[entityInfo->Volatile.volatileStatus] |
             gStatusSpriteMasks_ChargingStatus[entityInfo->charging.chargingStatus] |
             gStatusSpriteMasks_ProtectionStatus[entityInfo->protection.protectionStatus] |
-            gStatusSpriteMasks_WaitingStatus[entityInfo->waitingStatus] |
-            gStatusSpriteMasks_LinkedStatus[entityInfo->linkedStatus] |
-            gStatusSpriteMasks_MoveStatus[entityInfo->moveStatus] |
-            gStatusSpriteMasks_ItemStatus[entityInfo->itemStatus] |
-            gStatusSpriteMasks_TransformStatus[entityInfo->transformStatus] |
-            gStatusSpriteMasks_EyesightStatus[entityInfo->eyesightStatus] |
-            gStatusSpriteMasks_MuzzledStatus[entityInfo->muzzled];
+            gStatusSpriteMasks_WaitingStatus[entityInfo->waitingStruct.waitingStatus] |
+            gStatusSpriteMasks_LinkedStatus[entityInfo->linked.linkedStatus] |
+            gStatusSpriteMasks_MoveStatus[entityInfo->moveStatus.moveStatus] |
+            gStatusSpriteMasks_ItemStatus[entityInfo->itemStatus.itemStatus] |
+            gStatusSpriteMasks_TransformStatus[entityInfo->transformStatus.transformStatus] |
+            gStatusSpriteMasks_EyesightStatus[entityInfo->eyesightStatus.eyesightStatus] |
+            gStatusSpriteMasks_MuzzledStatus[entityInfo->muzzled.muzzled];
 
     if (entityInfo->grudge) {
       spriteStatus = spriteStatus | STATUS_SPRITE_GRUDGE;

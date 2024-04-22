@@ -1103,7 +1103,7 @@ bool8 sub_8048D50(Entity * pokemon, Item *item)
   }
   else
   {
-    if ((entityInfo->muzzled == TRUE) && (IsEdibleItem(item->id))) {
+    if ((entityInfo->muzzled.muzzled == TRUE) && (IsEdibleItem(item->id))) {
         SetMessageArgument(gAvailablePokemonNames,pokemon,0);
         SendMessage(pokemon,*gUnknown_80FDCA4);
         return FALSE;

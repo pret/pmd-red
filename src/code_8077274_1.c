@@ -220,9 +220,9 @@ void MuzzleTarget(Entity *pokemon, Entity *target)
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon, target, TRUE))) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (entityInfo->muzzled != TRUE) {
-        entityInfo->muzzled = TRUE;
-        entityInfo->muzzledTurns = CalculateStatusTurns(target,gUnknown_80F4F1C, TRUE) + 1;
+    if (entityInfo->muzzled.muzzled != TRUE) {
+        entityInfo->muzzled.muzzled = TRUE;
+        entityInfo->muzzled.muzzledTurns = CalculateStatusTurns(target,gUnknown_80F4F1C, TRUE) + 1;
         nullsub_86(target);
         sub_80522F4(pokemon, target, *gUnknown_80FBF68);
     }
@@ -250,7 +250,7 @@ void TransformStatusTarget(Entity * pokemon, Entity * target)
 
     entityInfo = target->info;
 
-    if (entityInfo->transformStatus == STATUS_TRANSFORMED)
+    if (entityInfo->transformStatus.transformStatus == STATUS_TRANSFORMED)
         sub_80522F4(pokemon, target, *gUnknown_80FBF04);
     else {
         SetMessageArgument(gAvailablePokemonNames, target, 0);
@@ -278,8 +278,8 @@ void TransformStatusTarget(Entity * pokemon, Entity * target)
             else {
                 entityInfo->apparentID = apparentID;
                 target->sprite = sprite;
-                entityInfo->transformStatus = STATUS_TRANSFORMED;
-                entityInfo->transformStatusTurns = CalculateStatusTurns(target, gUnknown_80F4EFC, TRUE) + 1;
+                entityInfo->transformStatus.transformStatus = STATUS_TRANSFORMED;
+                entityInfo->transformStatus.transformStatusTurns = CalculateStatusTurns(target, gUnknown_80F4EFC, TRUE) + 1;
                 sub_806CF98(target);
                 nullsub_87(target);
                 sub_806CCB4(target, sub_806CEBC(target));
@@ -301,13 +301,13 @@ void MobileStatusTarget(Entity * pokemon, Entity * target)
     entityInfo_1 = target->info;
     entityInfo = entityInfo_1;
 
-    if (entityInfo->transformStatus == STATUS_TRANSFORMED) {
+    if (entityInfo->transformStatus.transformStatus == STATUS_TRANSFORMED) {
         SendTransformEndMessage(pokemon,target);
     }
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (entityInfo->transformStatus != STATUS_MOBILE) {
-        entityInfo->transformStatus = STATUS_MOBILE;
-        entityInfo->transformStatusTurns = CalculateStatusTurns(target,gUnknown_80F4F04, FALSE) + 1;
+    if (entityInfo->transformStatus.transformStatus != STATUS_MOBILE) {
+        entityInfo->transformStatus.transformStatus = STATUS_MOBILE;
+        entityInfo->transformStatus.transformStatusTurns = CalculateStatusTurns(target,gUnknown_80F4F04, FALSE) + 1;
         nullsub_88(target);
         sub_80522F4(pokemon,target,*gUnknown_80FBF28);
     }
@@ -390,9 +390,9 @@ void BlindTarget(Entity *pokemon, Entity *target)
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon, target, TRUE))) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (entityInfo->eyesightStatus != STATUS_BLINKER) {
-        entityInfo->eyesightStatus = STATUS_BLINKER;
-        entityInfo->eyesightStatusTurns = CalculateStatusTurns(target,gUnknown_80F4F08, TRUE) + 1;
+    if (entityInfo->eyesightStatus.eyesightStatus != STATUS_BLINKER) {
+        entityInfo->eyesightStatus.eyesightStatus = STATUS_BLINKER;
+        entityInfo->eyesightStatus.eyesightStatusTurns = CalculateStatusTurns(target,gUnknown_80F4F08, TRUE) + 1;
         sub_8041E0C(target);
         sub_80522F4(pokemon,target,*gUnknown_80FB7F4);
         sub_803E46C(0x31);
@@ -417,11 +417,11 @@ void CrossEyeVisionTarget(Entity *pokemon, Entity *target)
     {
         entityInfo = target->info;
         SetMessageArgument(gAvailablePokemonNames,target,0);
-        if (entityInfo->eyesightStatus != STATUS_CROSS_EYED) {
+        if (entityInfo->eyesightStatus.eyesightStatus != STATUS_CROSS_EYED) {
             sub_8041E1C(target);
             sub_80522F4(pokemon,target,*gUnknown_80FB834);
-            entityInfo->eyesightStatus = STATUS_CROSS_EYED;
-            entityInfo->eyesightStatusTurns = CalculateStatusTurns(target,gUnknown_80F4F0C, TRUE) + 1;
+            entityInfo->eyesightStatus.eyesightStatus = STATUS_CROSS_EYED;
+            entityInfo->eyesightStatus.eyesightStatusTurns = CalculateStatusTurns(target,gUnknown_80F4F0C, TRUE) + 1;
             sub_803F580(0x1);
             sub_8049ED4();
             sub_8040A84();
@@ -443,9 +443,9 @@ void RestoreVisionTarget(Entity *pokemon, Entity *target)
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (entityInfo->eyesightStatus != STATUS_EYEDROPS) {
-        entityInfo->eyesightStatus = STATUS_EYEDROPS;
-        entityInfo->eyesightStatusTurns = CalculateStatusTurns(target,gUnknown_80F4F10, FALSE) + 1;
+    if (entityInfo->eyesightStatus.eyesightStatus != STATUS_EYEDROPS) {
+        entityInfo->eyesightStatus.eyesightStatus = STATUS_EYEDROPS;
+        entityInfo->eyesightStatus.eyesightStatusTurns = CalculateStatusTurns(target,gUnknown_80F4F10, FALSE) + 1;
         sub_8041E3C(target);
         sub_80522F4(pokemon,target,*gUnknown_80FB880);
         sub_803E46C(0x31);
@@ -640,8 +640,8 @@ void LongTossStatusTarget(Entity * pokemon, Entity * target)
 
     entityInfo = target->info;
     SetMessageArgument(gUnknown_202DFE8,target,0);
-    if (entityInfo->itemStatus != STATUS_LONG_TOSS) {
-      entityInfo->itemStatus = STATUS_LONG_TOSS;
+    if (entityInfo->itemStatus.itemStatus != STATUS_LONG_TOSS) {
+      entityInfo->itemStatus.itemStatus = STATUS_LONG_TOSS;
       sub_8041EA4(target);
       sub_80522F4(pokemon,target,*gUnknown_80FD20C);
     }
@@ -657,8 +657,8 @@ void PierceStatusTarget(Entity * pokemon, Entity * target)
 
     entityInfo = target->info;
     SetMessageArgument(gUnknown_202DFE8,target,0);
-    if (entityInfo->itemStatus != STATUS_PIERCE) {
-      entityInfo->itemStatus = STATUS_PIERCE;
+    if (entityInfo->itemStatus.itemStatus != STATUS_PIERCE) {
+      entityInfo->itemStatus.itemStatus = STATUS_PIERCE;
       sub_8041EB4(target);
       sub_80522F4(pokemon,target,*gUnknown_80FD254);
     }
@@ -1393,7 +1393,7 @@ void SendWaitingEndMessage(Entity * pokemon, Entity * target, u8 waitingStatus)
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    switch(entityInfo->waitingStatus) {
+    switch(entityInfo->waitingStruct.waitingStatus) {
         case STATUS_NONE:
         case 4:
             break;
@@ -1410,7 +1410,7 @@ void SendWaitingEndMessage(Entity * pokemon, Entity * target, u8 waitingStatus)
             gDungeon->unk17B3C = 0;
             break;
         case STATUS_DECOY:
-            entityInfo->waitingStatus = STATUS_NONE;
+            entityInfo->waitingStruct.waitingStatus = STATUS_NONE;
             uVar3 = sub_806CEBC(target);
             sub_806CCB4(target,uVar3);
             gDungeon->decoyActive = FALSE;
@@ -1420,7 +1420,7 @@ void SendWaitingEndMessage(Entity * pokemon, Entity * target, u8 waitingStatus)
             }
             break;
     }
-    entityInfo->waitingStatus = STATUS_NONE;
+    entityInfo->waitingStruct.waitingStatus = STATUS_NONE;
     EntityUpdateStatusSprites(target);
   }
 }
@@ -1432,7 +1432,7 @@ void SendLinkedEndMessage(Entity * pokemon, Entity * target)
   if (EntityExists(target)) {
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    switch(entityInfo->linkedStatus)
+    switch(entityInfo->linked.linkedStatus)
     {
         case STATUS_NONE:
             break;
@@ -1443,8 +1443,8 @@ void SendLinkedEndMessage(Entity * pokemon, Entity * target)
             SendMessage(target,*gUnknown_80FAA8C);
             break;
     }
-    entityInfo->linkedStatus = STATUS_NONE;
-    entityInfo->unkD8 = 0xff;
+    entityInfo->linked.linkedStatus = STATUS_NONE;
+    entityInfo->linked.unkD8 = 0xff;
     EntityUpdateStatusSprites(target);
   }
 }
@@ -1458,7 +1458,7 @@ void SendMoveEndMessage(Entity * pokemon, Entity * target)
   }
   entityInfo = target->info;
   SetMessageArgument(gAvailablePokemonNames,target,0);
-  switch(entityInfo->moveStatus) {
+  switch(entityInfo->moveStatus.moveStatus) {
         case STATUS_NONE:
         case 5:
             break;
@@ -1475,7 +1475,7 @@ void SendMoveEndMessage(Entity * pokemon, Entity * target)
             SendMessage(target,*gUnknown_80FA95C);
             break;
   }
-  entityInfo->moveStatus = STATUS_NONE;
+  entityInfo->moveStatus.moveStatus = STATUS_NONE;
   EntityUpdateStatusSprites(target);
 }
 
@@ -1491,7 +1491,7 @@ void SendTransformEndMessage(Entity * pokemon, Entity *target)
   }
   entityInfo = target->info;
   SetMessageArgument(gAvailablePokemonNames,target,0);
-  switch(entityInfo->transformStatus) {
+  switch(entityInfo->transformStatus.transformStatus) {
         case STATUS_NONE:
         case 4:
             break;
@@ -1510,7 +1510,7 @@ void SendTransformEndMessage(Entity * pokemon, Entity *target)
             SendMessage(target,*gUnknown_80FAB6C);
             break;
   }
-  entityInfo->transformStatus = STATUS_NONE;
+  entityInfo->transformStatus.transformStatus = STATUS_NONE;
   EntityUpdateStatusSprites(target);
   if (isInvisible) {
     sub_807EC28(TRUE);
@@ -1526,7 +1526,7 @@ void SendEyesightEndMessage(Entity * pokemon,Entity * target)
   }
   entityInfo = target->info;
   SetMessageArgument(gAvailablePokemonNames,target,0);
-  switch(entityInfo->eyesightStatus) {
+  switch(entityInfo->eyesightStatus.eyesightStatus) {
         case STATUS_NONE:
         case 4:
             break;
@@ -1540,7 +1540,7 @@ void SendEyesightEndMessage(Entity * pokemon,Entity * target)
             SendMessage(target,*gUnknown_80FAA48);
             break;
   }
-  entityInfo->eyesightStatus = STATUS_NONE;
+  entityInfo->eyesightStatus.eyesightStatus = STATUS_NONE;
   EntityUpdateStatusSprites(target);
   if (entityInfo->isTeamLeader) {
     sub_803E46C(0x31);
@@ -1558,7 +1558,7 @@ void SendMuzzledEndMessage(Entity * pokemon, Entity * target)
   }
   entityInfo = target->info;
   SetMessageArgument(gAvailablePokemonNames,target,0);
-  switch(entityInfo->muzzled) {
+  switch(entityInfo->muzzled.muzzled) {
     case FALSE:
     case 2:
         break;
@@ -1566,7 +1566,7 @@ void SendMuzzledEndMessage(Entity * pokemon, Entity * target)
         SendMessage(target,*gUnknown_80FABC0);
         break;
   }
-  entityInfo->muzzled = FALSE;
+  entityInfo->muzzled.muzzled = FALSE;
   EntityUpdateStatusSprites(target);
 }
 

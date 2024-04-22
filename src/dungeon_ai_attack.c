@@ -363,7 +363,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
         rangeTargetingFlags == TARGETING_FLAG_TARGET_FRONTAL_CONE ||
         rangeTargetingFlags == TARGETING_FLAG_TARGET_AROUND)
     {
-        if (pokemonInfo->eyesightStatus == STATUS_BLINKER)
+        if (pokemonInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER)
         {
             u8 direction = pokemonInfo->action.direction;
             i = direction; // Fixes a regswap.
@@ -792,7 +792,7 @@ bool8 TargetRegularAttack(Entity *pokemon, u32 *targetDir, bool8 checkPetrified)
     EntityInfo *pokemonInfo = pokemon->info;
     s32 numPotentialTargets = 0;
     s32 direction = pokemonInfo->action.direction;
-    s32 faceTurnLimit = pokemonInfo->eyesightStatus == STATUS_BLINKER ? 1 : 8;
+    s32 faceTurnLimit = pokemonInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER ? 1 : 8;
     s32 i;
     s32 potentialAttackTargetDirections[NUM_DIRECTIONS];
     s32 potentialAttackTargetWeights[NUM_DIRECTIONS];

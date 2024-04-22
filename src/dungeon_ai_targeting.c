@@ -74,7 +74,7 @@ bool8 sub_8070F3C(Entity * pokemon, Position *pos, s32 direction)
      (((tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))))) {
     if (!IsCurrentFixedRoomBossFight())
     {
-        if (pokemon->info->transformStatus == STATUS_MOBILE ||
+        if (pokemon->info->transformStatus.transformStatus == STATUS_MOBILE ||
             HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
         {
             terrain = CROSSABLE_TERRAIN_WALL;
@@ -137,7 +137,7 @@ bool8 sub_8070F80(Entity * pokemon, s32 direction)
      (((tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))))) {
     if (!IsCurrentFixedRoomBossFight())
     {
-        if (pokemon->info->transformStatus == STATUS_MOBILE ||
+        if (pokemon->info->transformStatus.transformStatus == STATUS_MOBILE ||
             HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
         {
             terrain = CROSSABLE_TERRAIN_WALL;
@@ -183,7 +183,7 @@ bool8 sub_8071058(Entity * pokemon, s32 direction)
       (!tile->monster->info->isNotTeamMember)))) {
     if (!IsCurrentFixedRoomBossFight())
     {
-        if (pokemon->info->transformStatus == STATUS_MOBILE ||
+        if (pokemon->info->transformStatus.transformStatus == STATUS_MOBILE ||
             HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
         {
             terrain = CROSSABLE_TERRAIN_WALL;
@@ -230,7 +230,7 @@ bool8 CanAttackInDirection(Entity *pokemon, s32 direction)
     {
         if (!IsCurrentFixedRoomBossFight())
         {
-            if (pokemon->info->transformStatus == STATUS_MOBILE ||
+            if (pokemon->info->transformStatus.transformStatus == STATUS_MOBILE ||
                 HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
             {
                 crossableTerrain = CROSSABLE_TERRAIN_WALL;
@@ -282,7 +282,7 @@ bool8 CanAIMonsterMoveInDirection(Entity *pokemon, s32 direction, bool8 *pokemon
     if (frontTile->object != NULL &&
         IQSkillIsEnabled(pokemon, IQ_TRAP_AVOIDER) &&
         GetEntityType(frontTile->object) == ENTITY_TRAP &&
-        (frontTile->object->isVisible || pokemon->info->eyesightStatus == STATUS_EYEDROPS))
+        (frontTile->object->isVisible || pokemon->info->eyesightStatus.eyesightStatus == STATUS_EYEDROPS))
     {
         return FALSE;
     }
@@ -294,7 +294,7 @@ bool8 CanAIMonsterMoveInDirection(Entity *pokemon, s32 direction, bool8 *pokemon
     }
     if (!IsCurrentFixedRoomBossFight())
     {
-        if (pokemon->info->transformStatus == STATUS_MOBILE ||
+        if (pokemon->info->transformStatus.transformStatus == STATUS_MOBILE ||
             HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
         {
             crossableTerrain = CROSSABLE_TERRAIN_WALL;
@@ -337,7 +337,7 @@ bool8 IsAtJunction(Entity *pokemon)
     u32 crossableTerrain = GetCrossableTerrain(pokemon->info->id);
     if (!IsCurrentFixedRoomBossFight())
     {
-        if (pokemon->info->transformStatus == STATUS_MOBILE || HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
+        if (pokemon->info->transformStatus.transformStatus == STATUS_MOBILE || HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
         {
             crossableTerrain = CROSSABLE_TERRAIN_WALL;
         }
@@ -480,7 +480,7 @@ u8 CanTarget(Entity *pokemon, Entity *targetPokemon, bool8 ignoreInvisible, bool
         pokemonInfo->clientType == CLIENT_TYPE_CLIENT ||
         targetData->clientType == CLIENT_TYPE_CLIENT ||
         (checkPetrified && !pokemonInfo->isNotTeamMember && targetData->immobilize.immobilizeStatus == STATUS_PETRIFIED) ||
-        (!ignoreInvisible && targetData->transformStatus == STATUS_INVISIBLE && !CanSeeInvisibleMonsters(pokemon)))
+        (!ignoreInvisible && targetData->transformStatus.transformStatus == STATUS_INVISIBLE && !CanSeeInvisibleMonsters(pokemon)))
     {
         return TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET;
     }
@@ -519,7 +519,7 @@ u8 CanTarget(Entity *pokemon, Entity *targetPokemon, bool8 ignoreInvisible, bool
         targetIsEnemy = targetData->isNotTeamMember ? TRUE : FALSE;
     }
     targetIsDecoy = FALSE;
-    if (targetData->waitingStatus == STATUS_DECOY)
+    if (targetData->waitingStruct.waitingStatus == STATUS_DECOY)
     {
         targetIsDecoy = TRUE;
     }

@@ -66,7 +66,7 @@ bool8 HasStatusAffectingActions(Entity *pokemon)
         SendMessage(pokemon, *gPtrBideMessage);
         return TRUE;
     }
-    if (pokemonInfo->waitingStatus == STATUS_DECOY)
+    if (pokemonInfo->waitingStruct.waitingStatus == STATUS_DECOY)
     {
         SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
         pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
@@ -78,7 +78,7 @@ bool8 HasStatusAffectingActions(Entity *pokemon)
     {
         return TRUE;
     }
-    if (pokemonInfo->eyesightStatus == STATUS_BLINKER)
+    if (pokemonInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER)
     {
         if (!CanMoveInDirection(pokemon, pokemonInfo->action.direction))
         {
@@ -98,7 +98,7 @@ bool8 HasStatusAffectingActions(Entity *pokemon)
         DecideAttack(pokemon);
         return TRUE;
     }
-    if (pokemonInfo->eyesightStatus == STATUS_CROSS_EYED)
+    if (pokemonInfo->eyesightStatus.eyesightStatus == STATUS_CROSS_EYED)
     {
         SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
         pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);

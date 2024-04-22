@@ -181,7 +181,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
         }
         case MOVE_LOCK_ON:
         case MOVE_MIND_READER:
-            if (pokemonInfo->moveStatus == STATUS_SURE_SHOT)
+            if (pokemonInfo->moveStatus.moveStatus == STATUS_SURE_SHOT)
             {
                 return FALSE;
             }
@@ -242,7 +242,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             break;
         case MOVE_DOOM_DESIRE:
         case MOVE_FUTURE_SIGHT:
-            if (pokemonInfo->moveStatus == STATUS_SET_DAMAGE)
+            if (pokemonInfo->moveStatus.moveStatus == STATUS_SET_DAMAGE)
             {
                 return FALSE;
             }
@@ -266,7 +266,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_DESTINY_BOND:
-            if (pokemonInfo->linkedStatus == STATUS_DESTINY_BOND)
+            if (pokemonInfo->linked.linkedStatus == STATUS_DESTINY_BOND)
             {
                 return FALSE;
             }
@@ -327,13 +327,13 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_INVISIFY:
-            if (pokemonInfo->transformStatus == STATUS_INVISIBLE)
+            if (pokemonInfo->transformStatus.transformStatus == STATUS_INVISIBLE)
             {
                 return FALSE;
             }
             break;
         case MOVE_FOCUS_ENERGY:
-            if (pokemonInfo->moveStatus == STATUS_FOCUS_ENERGY)
+            if (pokemonInfo->moveStatus.moveStatus == STATUS_FOCUS_ENERGY)
             {
                 return FALSE;
             }
@@ -438,7 +438,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_TRANSFORM:
-            if (pokemonInfo->transformStatus == STATUS_TRANSFORMED)
+            if (pokemonInfo->transformStatus.transformStatus == STATUS_TRANSFORMED)
             {
                 return FALSE;
             }
@@ -461,7 +461,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_SNATCH:
-            if (pokemonInfo->waitingStatus == STATUS_SNATCH)
+            if (pokemonInfo->waitingStruct.waitingStatus == STATUS_SNATCH)
             {
                 return FALSE;
             }
@@ -646,7 +646,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_SMOKESCREEN:
-            if (targetData->moveStatus == STATUS_WHIFFER)
+            if (targetData->moveStatus.moveStatus == STATUS_WHIFFER)
             {
                 return FALSE;
             }
@@ -809,7 +809,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
         case MOVE_CURSE:
             if (MonsterIsType(user, TYPE_GHOST))
             {
-                if (targetData->waitingStatus == STATUS_CURSED)
+                if (targetData->waitingStruct.waitingStatus == STATUS_CURSED)
                 {
                     return FALSE;
                 }
@@ -837,7 +837,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_LEECH_SEED:
-            if (targetData->linkedStatus == STATUS_LEECH_SEED)
+            if (targetData->linked.linkedStatus == STATUS_LEECH_SEED)
             {
                 return FALSE;
             }

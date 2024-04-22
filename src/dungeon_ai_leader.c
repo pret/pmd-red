@@ -100,7 +100,7 @@ Entity* GetLeaderIfVisible(Entity *pokemon)
     {
         Entity *leader = GetLeader();
         if (leader &&
-            leader->info->waitingStatus != STATUS_DECOY &&
+            leader->info->waitingStruct.waitingStatus != STATUS_DECOY &&
             CanTarget(pokemon, leader, FALSE, FALSE) == TARGET_CAPABILITY_CANNOT_ATTACK &&
             CanTargetEntity(pokemon, leader))
         {
@@ -214,7 +214,7 @@ bool8 sub_8072CF4(Entity *entity)
                     pos.y = entity->pos.y;
                     sub_80694C0(entity,pos1.x,pos1.y,0);
                     sub_8074FB0(entity,(info->action).direction,&pos);
-                    if (((IQSkillIsEnabled(entity, IQ_SUPER_MOBILE)) && (info->transformStatus != STATUS_MOBILE)) &&
+                    if (((IQSkillIsEnabled(entity, IQ_SUPER_MOBILE)) && (info->transformStatus.transformStatus != STATUS_MOBILE)) &&
                         (!HasHeldItem(entity,ITEM_MOBILE_SCARF))) {
                         sub_804AE08(&entity->pos);
                     }

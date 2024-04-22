@@ -202,7 +202,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             }
             break;
         case ITEM_ALLURE_SEED:
-            if (pokemonInfo->eyesightStatus != STATUS_CROSS_EYED)
+            if (pokemonInfo->eyesightStatus.eyesightStatus != STATUS_CROSS_EYED)
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
                 {
@@ -265,7 +265,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             }
             break;
         case ITEM_BLINKER_SEED:
-            if (pokemonInfo->eyesightStatus != STATUS_BLINKER)
+            if (pokemonInfo->eyesightStatus.eyesightStatus != STATUS_BLINKER)
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
                 {

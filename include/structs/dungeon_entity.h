@@ -107,6 +107,55 @@ typedef struct Protection
     /* 0x1 */ u8 protectionStatusTurns;
 } Protection;
 
+typedef struct Waiting 
+{
+    /* 0xC8 */ u8 waitingStatus;
+    /* 0xC9 */ bool8 enemyDecoy; // True if the Pokémon is a decoy and a wild Pokémon (i.e., not an allied Pokémon).
+    u8 unkCA;
+    /* 0xCB */ u8 waitingStatusTurns;
+    /* 0xCC */ u8 curseDamageCountdown;
+} Waiting;
+
+typedef struct Linked 
+{
+    /* 0xD0 */ u8 linkedStatus;
+    /* 0xD4 */ u32 unkD4;
+    /* 0xD8 */ u8 unkD8;
+    /* 0xD9 */ u8 linkedStatusTurns;
+    /* 0xDA */ u8 linkedStatusDamageCountdown;
+} Linked;
+
+
+typedef struct MoveStatus 
+{
+    /* 0xDC */ u8 moveStatus;
+    /* 0xDD */ u8 moveStatusTurns;
+} MoveStatus;
+
+typedef struct ItemStatus
+{
+    /* 0xE0 */ u8 itemStatus;
+} ItemStatus;
+
+typedef struct TransformStatus
+{
+    /* 0xE4 */ u8 transformStatus;
+    /* 0xE5 */ u8 transformStatusTurns;
+} TransformStatus;
+
+typedef struct EyesightStatus 
+{
+    /* 0xE8 */ u8 eyesightStatus;
+    /* 0xE9 */ u8 eyesightStatusTurns;
+} EyesightStatus;
+
+typedef struct Muzzled 
+{
+    /* 0xEC */ bool8 muzzled;
+    /* 0xED */ u8 muzzledTurns;
+} Muzzled;
+
+
 // size: 0x208
 typedef struct EntityInfo
 {
@@ -175,34 +224,13 @@ typedef struct EntityInfo
     /* 0xBC */ Volatile Volatile;
     /* 0xC0 */ Charging charging;
     /* 0xC4 */ Protection protection;
-    /* 0xC8 */ u8 waitingStatus;
-    /* 0xC9 */ bool8 enemyDecoy; // True if the Pokémon is a decoy and a wild Pokémon (i.e., not an allied Pokémon).
-    u8 unkCA;
-    /* 0xCB */ u8 waitingStatusTurns;
-    /* 0xCC */ u8 curseDamageCountdown;
-    u8 fillCD[0xD0 - 0xCD];
-    /* 0xD0 */ u8 linkedStatus;
-    u8 fillD1[0xD4 - 0xD1];
-    /* 0xD4 */ u32 unkD4;
-    /* 0xD8 */ u8 unkD8;
-    /* 0xD9 */ u8 linkedStatusTurns;
-    /* 0xDA */ u8 linkedStatusDamageCountdown;
-    u8 fillDB;
-    /* 0xDC */ u8 moveStatus;
-    /* 0xDD */ u8 moveStatusTurns;
-    u8 fillDE[0xE0 - 0xDE];
-    /* 0xE0 */ u8 itemStatus;
-    u8 fillE1[0xE4 - 0xE1];
-    /* 0xE4 */ u8 transformStatus;
-    /* 0xE5 */ u8 transformStatusTurns;
-    u8 fillE6[0xE8 - 0xE6];
-    /* 0xE8 */ u8 eyesightStatus;
-    /* 0xE9 */ u8 eyesightStatusTurns;
-    /* 0xEA */ u8 unkEA;
-    u8 fillEB;
-    /* 0xEC */ bool8 muzzled;
-    /* 0xED */ u8 muzzledTurns;
-    u8 fillEE[0xF0 - 0xEE];
+    /* 0xC8 */ Waiting waitingStruct;
+    /* 0xD0 */ Linked linked;
+    /* 0xDC */ MoveStatus moveStatus;
+    /* 0xE0 */ ItemStatus itemStatus;
+    /* 0xE4 */ TransformStatus transformStatus;
+    /* 0xE8 */ EyesightStatus eyesightStatus;
+    /* 0xEC */ Muzzled muzzled;
     /* 0xF0 */ bool8 powerEars;
     /* 0xF1 */ bool8 scanning;
     /* 0xF2 */ bool8 stairSpotter;

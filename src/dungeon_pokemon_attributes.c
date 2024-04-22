@@ -128,7 +128,7 @@ bool8 MonsterIsType(Entity *pokemon, u8 type)
 bool8 CanSeeInvisibleMonsters(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = pokemon->info;
-    if (pokemonInfo->eyesightStatus != STATUS_EYEDROPS)
+    if (pokemonInfo->eyesightStatus.eyesightStatus != STATUS_EYEDROPS)
     {
         if (!HasHeldItem(pokemon, ITEM_GOGGLE_SPECS))
             return FALSE;

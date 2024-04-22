@@ -21,7 +21,7 @@ bool8 CannotMove(Entity *pokemon, bool8 checkBlinker)
 {
     EntityInfo *pokemonInfo = pokemon->info;
 
-    if ((checkBlinker && pokemonInfo->eyesightStatus == STATUS_BLINKER)
+    if ((checkBlinker && pokemonInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER)
         || pokemonInfo->sleep.sleep == STATUS_SLEEP
         || pokemonInfo->sleep.sleep == STATUS_NAPPING
         || pokemonInfo->sleep.sleep == STATUS_NIGHTMARE
@@ -44,7 +44,7 @@ bool8 sub_8070BC0(Entity* entity)
         || entityInfo->sleep.sleep == STATUS_YAWNING
         || entityInfo->sleep.sleep == STATUS_NIGHTMARE
         || ShouldMonsterRunAway(entity)
-        || entityInfo->muzzled == TRUE
+        || entityInfo->muzzled.muzzled == TRUE
         || entityInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED
         || entityInfo->immobilize.immobilizeStatus == STATUS_FROZEN)
         return FALSE;
@@ -53,7 +53,7 @@ bool8 sub_8070BC0(Entity* entity)
         return FALSE;
     if (entityInfo->sleep.sleep == STATUS_SLEEP)
         return FALSE;
-    if (entityInfo->transformStatus == STATUS_INVISIBLE
+    if (entityInfo->transformStatus.transformStatus == STATUS_INVISIBLE
         || entityInfo->sleep.sleep == STATUS_NAPPING)
         return FALSE;
     if (entityInfo->Volatile.volatileStatus == STATUS_CRINGE)
@@ -61,11 +61,11 @@ bool8 sub_8070BC0(Entity* entity)
     if (entityInfo->immobilize.immobilizeStatus == STATUS_WRAP)
         return FALSE;
     if (entityInfo->immobilize.immobilizeStatus == STATUS_WRAPPED
-        || entityInfo->eyesightStatus == STATUS_CROSS_EYED)
+        || entityInfo->eyesightStatus.eyesightStatus == STATUS_CROSS_EYED)
         return FALSE;
-    if (entityInfo->waitingStatus == STATUS_DECOY)
+    if (entityInfo->waitingStruct.waitingStatus == STATUS_DECOY)
         return FALSE;
-    if (entityInfo->eyesightStatus == STATUS_BLINKER)
+    if (entityInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER)
         return FALSE;
     if (entityInfo->Volatile.volatileStatus != STATUS_INFATUATED
         && entityInfo->Volatile.volatileStatus != STATUS_PAUSED)
@@ -149,7 +149,7 @@ bool8 CanMoveInDirection(Entity *pokemon, u32 direction)
 
     if (!IsCurrentFixedRoomBossFight())
     {
-        if (pokemon->info->transformStatus == STATUS_MOBILE || HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
+        if (pokemon->info->transformStatus.transformStatus == STATUS_MOBILE || HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
             crossableTerrain = CROSSABLE_TERRAIN_WALL;
         else if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
             crossableTerrain = CROSSABLE_TERRAIN_CREVICE;

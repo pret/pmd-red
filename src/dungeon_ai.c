@@ -110,10 +110,10 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                     {
                         target = gDungeon->allPokemon[i];
                         if (EntityExists(target) &&
-                            target->info->waitingStatus == STATUS_DECOY &&
+                            target->info->waitingStruct.waitingStatus == STATUS_DECOY &&
                             CanSeeTarget(pokemon, target))
                         {
-                            bool8 enemyDecoy = target->info->enemyDecoy;
+                            bool8 enemyDecoy = target->info->waitingStruct.enemyDecoy;
                             u8 targetingDecoy = TARGETING_DECOY_TEAM;
                             if (enemyDecoy)
                             {
