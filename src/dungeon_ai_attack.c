@@ -67,7 +67,7 @@ void DecideAttack(Entity *pokemon)
     if (CannotAttack(pokemon, FALSE) ||
         ShouldMonsterRunAwayAndShowEffect(pokemon, TRUE) ||
         HasTactic(pokemon, TACTIC_KEEP_YOUR_DISTANCE) ||
-        (pokemonInfo->Volatile.volatileStatus == STATUS_CONFUSED && DungeonRandOutcome(gConfusedAttackChance)))
+        (pokemonInfo->volatileStatus.volatileStatus == STATUS_CONFUSED && DungeonRandOutcome(gConfusedAttackChance)))
     {
         return;
     }
@@ -353,7 +353,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
     targetingFlags = GetMoveTargetAndRangeForPokemon(pokemon, move, TRUE);
     hasStatusChecker = IQSkillIsEnabled(pokemon, IQ_STATUS_CHECKER);
     aiPossibleMove->canBeUsed = FALSE;
-    if ((pokemonInfo->Volatile.volatileStatus == STATUS_TAUNTED && !MoveIgnoresTaunted(move)) ||
+    if ((pokemonInfo->volatileStatus.volatileStatus == STATUS_TAUNTED && !MoveIgnoresTaunted(move)) ||
         (hasStatusChecker && !CanUseOnSelfWithStatusChecker(pokemon, move)))
     {
         return 1;

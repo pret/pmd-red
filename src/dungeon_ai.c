@@ -144,7 +144,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                             {
                                 return;
                             }
-                            if (pokemonInfo->Volatile.volatileStatus == STATUS_CONFUSED)
+                            if (pokemonInfo->volatileStatus.volatileStatus == STATUS_CONFUSED)
                             {
                                 SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
                             }
@@ -159,7 +159,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                         }
                         else
                         {
-                            if (pokemonInfo->Volatile.volatileStatus == STATUS_CONFUSED)
+                            if (pokemonInfo->volatileStatus.volatileStatus == STATUS_CONFUSED)
                             {
                                 SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
                             }

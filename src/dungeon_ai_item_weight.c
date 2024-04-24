@@ -233,7 +233,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             }
             break;
         case ITEM_TOTTER_SEED:
-            if (pokemonInfo->Volatile.volatileStatus != STATUS_CONFUSED)
+            if (pokemonInfo->volatileStatus.volatileStatus != STATUS_CONFUSED)
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
                 {

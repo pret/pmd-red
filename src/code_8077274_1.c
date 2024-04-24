@@ -1296,7 +1296,7 @@ void SendVolatileEndMessage(Entity * pokemon, Entity *target)
   }
   entityInfo = target->info;
   SetMessageArgument(gAvailablePokemonNames,target,0);
-  switch(entityInfo->Volatile.volatileStatus) {
+  switch(entityInfo->volatileStatus.volatileStatus) {
     case STATUS_NONE:
     case 8:
         break;
@@ -1322,7 +1322,7 @@ void SendVolatileEndMessage(Entity * pokemon, Entity *target)
         sub_80522F4(pokemon,target, *gPtrMonNoLongerCringingMessage);
         break;
   }
-  entityInfo->Volatile.volatileStatus = STATUS_NONE;
+  entityInfo->volatileStatus.volatileStatus = STATUS_NONE;
   EntityUpdateStatusSprites(target);
   CalcSpeedStage(target);
 }

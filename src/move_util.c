@@ -225,11 +225,11 @@ bool8 CanMonsterUseMove(Entity *pokemon, Move *move, bool8 hasPPChecker)
         {
             return FALSE;
         }
-        if (pokemonInfo->Volatile.volatileStatus == STATUS_TAUNTED && !MoveIgnoresTaunted(move))
+        if (pokemonInfo->volatileStatus.volatileStatus == STATUS_TAUNTED && !MoveIgnoresTaunted(move))
         {
             return FALSE;
         }
-        if (pokemonInfo->Volatile.volatileStatus == STATUS_ENCORE)
+        if (pokemonInfo->volatileStatus.volatileStatus == STATUS_ENCORE)
         {
             if (move->id == MOVE_STRUGGLE)
             {
@@ -257,8 +257,8 @@ bool8 sub_805744C(Entity * pokemon, Move *move, bool8 param_3)
         return FALSE;
     }
     if (param_3 != 0) {
-      if ((entityInfo->Volatile.volatileStatus == STATUS_TAUNTED) && (!MoveIgnoresTaunted(move))) return FALSE;
-      if (entityInfo->Volatile.volatileStatus == STATUS_ENCORE) {
+      if ((entityInfo->volatileStatus.volatileStatus == STATUS_TAUNTED) && (!MoveIgnoresTaunted(move))) return FALSE;
+      if (entityInfo->volatileStatus.volatileStatus == STATUS_ENCORE) {
         if (move->id == MOVE_STRUGGLE) {
           if((entityInfo->struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0) return FALSE;
         }

@@ -3816,7 +3816,6 @@ void CreateJirachiWishWarpTile(void)
   struct Tile *tile;
 
   tile = GetTileSafe(gDungeon->unkE220[7].x, gDungeon->unkE220[7].y);
-  //tile = GetTileSafe(gDungeon->unkE23C, gDungeon->unkE23E);
   tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
   tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
   tile->terrainType &= ~TERRAIN_TYPE_STAIRS;
@@ -3831,7 +3830,6 @@ void EnableJirachiWishWarpTile(void)
   struct Tile *tile;
 
   tile = GetTileSafe(gDungeon->unkE220[7].x, gDungeon->unkE220[7].y);
-  //tile = GetTileSafe(gDungeon->unkE23C, gDungeon->unkE23E);
   tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
   tile->terrainType |= TERRAIN_TYPE_NORMAL;
   tile->terrainType &= ~TERRAIN_TYPE_IMPASSABLE_WALL;

@@ -338,7 +338,7 @@ void sub_8080E0C(unkStruct_8094924 *param_1,Entity *param_2)
     puStack_8c = &info->sleep;
     puStack_88 = &info->nonVolatile;
     puStack_84 = &info->immobilize;
-    puStack_80 = &info->Volatile;
+    puStack_80 = &info->volatileStatus;
     puStack_7c = &info->charging;
     puStack_78 = &info->protection;
     puStack_74 = &info->waitingStruct;

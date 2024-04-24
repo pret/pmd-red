@@ -52,7 +52,7 @@ bool8 HasStatusAffectingActions(Entity *pokemon)
         case STATUS_PETRIFIED:
             return TRUE;
     }
-    switch (pokemonInfo->Volatile.volatileStatus)
+    switch (pokemonInfo->volatileStatus.volatileStatus)
     {
         case STATUS_PAUSED:
             SendMessage(pokemon, *gPtrPausedMessage);
@@ -145,7 +145,7 @@ bool8 sub_80701A4(Entity *pokemon)
         return TRUE;
   }
 
-  switch(pokemonInfo->Volatile.volatileStatus) {
+  switch(pokemonInfo->volatileStatus.volatileStatus) {
     case STATUS_CONFUSED:
         flag = TRUE;
         goto _0807026C;

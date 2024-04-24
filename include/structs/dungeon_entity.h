@@ -221,7 +221,7 @@ typedef struct EntityInfo
     /* 0xA8 */ Sleep sleep;
     /* 0xAC */ NonVolatile nonVolatile;
     /* 0xB0 */ Immobilize immobilize;
-    /* 0xBC */ Volatile Volatile;
+    /* 0xBC */ Volatile volatileStatus;
     /* 0xC0 */ Charging charging;
     /* 0xC4 */ Protection protection;
     /* 0xC8 */ Waiting waitingStruct;

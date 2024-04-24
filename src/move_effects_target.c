@@ -155,11 +155,11 @@ void sub_8075BA4(Entity *param_1, u8 param_2)
 {
   EntityInfo * entityInfo = param_1->info;
 
-  if ((param_2 != 0) && (entityInfo->Volatile.volatileStatus == STATUS_COWERING)) {
+  if ((param_2 != 0) && (entityInfo->volatileStatus.volatileStatus == STATUS_COWERING)) {
       entityInfo->action.direction = (entityInfo->action.direction + 4) & DIRECTION_MASK;
       TargetTileInFront(param_1);
   }
-  else if (entityInfo->Volatile.volatileStatus == STATUS_CONFUSED) {
+  else if (entityInfo->volatileStatus.volatileStatus == STATUS_CONFUSED) {
       entityInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
       TargetTileInFront(param_1);
   }
@@ -412,9 +412,9 @@ void PausedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, s32 turns
     return;
   }
   SetMessageArgument_2(gAvailablePokemonNames,entityInfo,0);
-  if (entityInfo->Volatile.volatileStatus != STATUS_PAUSED) {
-    entityInfo->Volatile.volatileStatus = STATUS_PAUSED;
-    entityInfo->Volatile.volatileStatusTurns = turns + 1;
+  if (entityInfo->volatileStatus.volatileStatus != STATUS_PAUSED) {
+    entityInfo->volatileStatus.volatileStatus = STATUS_PAUSED;
+    entityInfo->volatileStatus.volatileStatusTurns = turns + 1;
     nullsub_72(target);
     if (turns == 1) {
         sub_80522F4(pokemon,target,*gUnknown_80FB480);
@@ -452,9 +452,9 @@ void InfatuateStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessa
       else
       {
         SetMessageArgument_2(gAvailablePokemonNames,entityInfo,0);
-        if (entityInfo->Volatile.volatileStatus != STATUS_INFATUATED) {
-          entityInfo->Volatile.volatileStatus = STATUS_INFATUATED;
-          entityInfo->Volatile.volatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4F00,TRUE) + 1;
+        if (entityInfo->volatileStatus.volatileStatus != STATUS_INFATUATED) {
+          entityInfo->volatileStatus.volatileStatus = STATUS_INFATUATED;
+          entityInfo->volatileStatus.volatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4F00,TRUE) + 1;
           sub_8041EF8(target);
           sub_80522F4(pokemon,target,*gUnknown_80FB50C);
         }

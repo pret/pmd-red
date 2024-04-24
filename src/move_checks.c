@@ -592,7 +592,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_ENCORE:
-            if (targetData->Volatile.volatileStatus == STATUS_ENCORE)
+            if (targetData->volatileStatus.volatileStatus == STATUS_ENCORE)
             {
                 return FALSE;
             }
@@ -774,7 +774,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_TAUNT:
-            if (targetData->Volatile.volatileStatus == STATUS_TAUNTED)
+            if (targetData->volatileStatus.volatileStatus == STATUS_TAUNTED)
             {
                 return FALSE;
             }
@@ -825,7 +825,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             break;
         case MOVE_IMPRISON:
         case MOVE_OBSERVER:
-            if (targetData->Volatile.volatileStatus == STATUS_PAUSED)
+            if (targetData->volatileStatus.volatileStatus == STATUS_PAUSED)
             {
                 return FALSE;
             }
@@ -856,7 +856,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_ATTRACT:
-            if (targetData->Volatile.volatileStatus == STATUS_INFATUATED)
+            if (targetData->volatileStatus.volatileStatus == STATUS_INFATUATED)
             {
                 return FALSE;
             }
@@ -895,7 +895,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
         case MOVE_SWEET_KISS:
         case MOVE_TEETER_DANCE:
         case MOVE_TOTTER:
-            if (targetData->Volatile.volatileStatus == STATUS_CONFUSED)
+            if (targetData->volatileStatus.volatileStatus == STATUS_CONFUSED)
             {
                 return FALSE;
             }

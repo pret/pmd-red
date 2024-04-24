@@ -135,7 +135,7 @@ bool8 HasNegativeStatus(Entity *pokemon)
         pokemonInfo->sleep.sleep == STATUS_YAWNING ||
         pokemonInfo->nonVolatile.nonVolatileStatus != STATUS_NONE ||
         (pokemonInfo->immobilize.immobilizeStatus != STATUS_INGRAIN && pokemonInfo->immobilize.immobilizeStatus != STATUS_NONE) ||
-        pokemonInfo->Volatile.volatileStatus != STATUS_NONE ||
+        pokemonInfo->volatileStatus.volatileStatus != STATUS_NONE ||
         pokemonInfo->waitingStruct.waitingStatus == STATUS_CURSED ||
         pokemonInfo->waitingStruct.waitingStatus == STATUS_DECOY ||
         pokemonInfo->linked.linkedStatus == STATUS_LEECH_SEED ||
