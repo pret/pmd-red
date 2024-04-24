@@ -67,17 +67,17 @@ void DecideAttack(Entity *pokemon)
     if (CannotAttack(pokemon, FALSE) ||
         ShouldMonsterRunAwayAndShowEffect(pokemon, TRUE) ||
         HasTactic(pokemon, TACTIC_KEEP_YOUR_DISTANCE) ||
-        (pokemonInfo->volatileStatus == STATUS_CONFUSED && DungeonRandOutcome(gConfusedAttackChance)))
+        (pokemonInfo->volatileStatus.volatileStatus == STATUS_CONFUSED && DungeonRandOutcome(gConfusedAttackChance)))
     {
         return;
     }
-    if (pokemonInfo->chargingStatus != STATUS_NONE)
+    if (pokemonInfo->charging.chargingStatus != STATUS_NONE)
     {
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (pokemonInfo->moves[i].moveFlags & MOVE_FLAG_EXISTS &&
                 MoveMatchesChargingStatus(pokemon, &pokemonInfo->moves[i]) &&
-                pokemonInfo->chargingStatusMoveIndex == i)
+                pokemonInfo->charging.chargingStatusMoveIndex == i)
             {
                 s32 chosenMoveIndex;
                 SetMonsterActionFields(&pokemonInfo->action, ACTION_USE_MOVE_AI);
@@ -189,7 +189,7 @@ void DecideAttack(Entity *pokemon)
             move->moveFlags & MOVE_FLAG_ENABLED_FOR_AI)
         {
             aiPossibleMove[i].canBeUsed = TRUE;
-            if (pokemonInfo->chargingStatus == chargeStatus)
+            if (pokemonInfo->charging.chargingStatus == chargeStatus)
             {
                 if (move->id == MOVE_CHARGE)
                 {
@@ -218,10 +218,10 @@ void DecideAttack(Entity *pokemon)
         }
     }
     aiPossibleMove[REGULAR_ATTACK_INDEX].weight = 0;
-    if (!IQSkillIsEnabled(pokemon, IQ_EXCLUSIVE_MOVE_USER) && pokemonInfo->chargingStatus != chargeStatus)
+    if (!IQSkillIsEnabled(pokemon, IQ_EXCLUSIVE_MOVE_USER) && pokemonInfo->charging.chargingStatus != chargeStatus)
     {
         aiPossibleMove[REGULAR_ATTACK_INDEX].canBeUsed = TRUE;
-        if (pokemonInfo->chargingStatus == chargeStatus)
+        if (pokemonInfo->charging.chargingStatus == chargeStatus)
         {
             // Never reached? Charge already skips the regular attack in the outer block.
             aiPossibleMove[REGULAR_ATTACK_INDEX].weight = 1;
@@ -353,7 +353,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
     targetingFlags = GetMoveTargetAndRangeForPokemon(pokemon, move, TRUE);
     hasStatusChecker = IQSkillIsEnabled(pokemon, IQ_STATUS_CHECKER);
     aiPossibleMove->canBeUsed = FALSE;
-    if ((pokemonInfo->volatileStatus == STATUS_TAUNTED && !MoveIgnoresTaunted(move)) ||
+    if ((pokemonInfo->volatileStatus.volatileStatus == STATUS_TAUNTED && !MoveIgnoresTaunted(move)) ||
         (hasStatusChecker && !CanUseOnSelfWithStatusChecker(pokemon, move)))
     {
         return 1;
@@ -363,7 +363,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
         rangeTargetingFlags == TARGETING_FLAG_TARGET_FRONTAL_CONE ||
         rangeTargetingFlags == TARGETING_FLAG_TARGET_AROUND)
     {
-        if (pokemonInfo->eyesightStatus == STATUS_BLINKER)
+        if (pokemonInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER)
         {
             u8 direction = pokemonInfo->action.direction;
             i = direction; // Fixes a regswap.
@@ -792,7 +792,7 @@ bool8 TargetRegularAttack(Entity *pokemon, u32 *targetDir, bool8 checkPetrified)
     EntityInfo *pokemonInfo = pokemon->info;
     s32 numPotentialTargets = 0;
     s32 direction = pokemonInfo->action.direction;
-    s32 faceTurnLimit = pokemonInfo->eyesightStatus == STATUS_BLINKER ? 1 : 8;
+    s32 faceTurnLimit = pokemonInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER ? 1 : 8;
     s32 i;
     s32 potentialAttackTargetDirections[NUM_DIRECTIONS];
     s32 potentialAttackTargetWeights[NUM_DIRECTIONS];
@@ -808,7 +808,7 @@ bool8 TargetRegularAttack(Entity *pokemon, u32 *targetDir, bool8 checkPetrified)
             GetEntityType(target) == ENTITY_MONSTER &&
             CanAttackInDirection(pokemon, direction) &&
             CanTarget(pokemon, target, FALSE, checkPetrified) == TARGET_CAPABILITY_CAN_TARGET &&
-            (!hasStatusChecker || target->info->immobilizeStatus != STATUS_FROZEN))
+            (!hasStatusChecker || target->info->immobilize.immobilizeStatus != STATUS_FROZEN))
         {
             potentialAttackTargetDirections[numPotentialTargets] = direction;
             potentialAttackTargetWeights[numPotentialTargets] = WeightMove(pokemon, TARGETING_FLAG_TARGET_OTHER, target, TYPE_NONE);

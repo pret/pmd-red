@@ -1,18 +1,19 @@
 #include "constants/input.h"
 #include "global.h"
+#include "globaldata.h"
 #include "menu_input.h"
 #include "sprite.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 
-extern s32 gUnknown_202E744;
 extern s32 gUnknown_202E738;
 extern s32 gUnknown_202E73C;
 extern s32 gUnknown_202E740;
+extern s32 gUnknown_202E744;
 
-extern MenuItem gUnknown_80D485C[];
-extern MenuItem gUnknown_80D4880[];
+#include "data/code_80140DC.h"
 
+// TODO: move to menu_input
 extern UnkTextStruct2 gUnknown_80D47C8[4];
 
 void sub_80140B4(UnkTextStruct2 *a0)

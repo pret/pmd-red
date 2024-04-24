@@ -14,9 +14,53 @@
 #include "text2.h"
 #include "util.h"
 
-// data_80D47B8.s
-extern const u8 gUnknown_80D4828[];
-extern const s32 gUnknown_80D4830[9];
+const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
+
+const u8 UnkData_80D47C4[] = {0x01, 0x00, 0x10, 0x00};
+
+const UnkTextStruct2 gUnknown_80D47C8[4] = {
+        0x00, 0x00, 0x00, 0x00,
+        0x06, 
+        0x02, 0x02,
+        0x1a, 0x0c,
+        0x0c, 0x00,
+        UnkData_80D47C4,
+
+        0x00, 0x00, 0x00, 0x00,
+        0x03, 
+        0x00, 0x00,
+        0x00, 0x00,
+        0x00, 0x00,
+        NULL,
+
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x00, 0x00,
+        0x00, 0x00,
+        0x00, 0x00,
+        NULL,
+
+        0x00, 0x00, 0x00, 0x00,
+        0x03,
+        0x00, 0x00,
+        0x00, 0x00,
+        0x00, 0x00,
+        NULL,
+};
+
+ALIGNED(4) const u8 gUnknown_80D4828[] = _("{COLOR_1}%c%s");
+
+const s32 gUnknown_80D4830[9] = {
+        1,
+        10,
+        100,
+        1000,
+        10000,
+        100000,
+        1000000,
+        10000000,
+        100000000
+};
 
 // text.s
 extern s16 sub_8009614(u32, u32);
@@ -26,7 +70,6 @@ static void sub_801332C(s16 *);
 static void sub_8013470(MenuInputStruct *);
 static bool8 sub_8013DD0(unkStructFor8013AA0 *);
 
-const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
 u32 sub_8012A64(MenuInputStructSub *r0, s32 r1)
 {

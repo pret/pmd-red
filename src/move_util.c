@@ -99,10 +99,10 @@ bool8 sub_80571F0(Entity * pokemon, Move *move)
             return TRUE;
     }
     else if (entityInfo->unkFF == 2) {
-        if (entityInfo->chargingStatus == STATUS_DIVING) {
+        if (entityInfo->charging.chargingStatus == STATUS_DIVING) {
             if (move->id == MOVE_WHIRLPOOL || move->id == MOVE_SURF) return FALSE;
         }
-        else if (entityInfo->chargingStatus == STATUS_DIGGING) {
+        else if (entityInfo->charging.chargingStatus == STATUS_DIGGING) {
             moveID = move->id;
             if (moveID == MOVE_EARTHQUAKE || moveID == MOVE_MAGNITUDE) return FALSE;
             if (moveID == MOVE_NATURE_POWER) {
@@ -225,11 +225,11 @@ bool8 CanMonsterUseMove(Entity *pokemon, Move *move, bool8 hasPPChecker)
         {
             return FALSE;
         }
-        if (pokemonInfo->volatileStatus == STATUS_TAUNTED && !MoveIgnoresTaunted(move))
+        if (pokemonInfo->volatileStatus.volatileStatus == STATUS_TAUNTED && !MoveIgnoresTaunted(move))
         {
             return FALSE;
         }
-        if (pokemonInfo->volatileStatus == STATUS_ENCORE)
+        if (pokemonInfo->volatileStatus.volatileStatus == STATUS_ENCORE)
         {
             if (move->id == MOVE_STRUGGLE)
             {
@@ -257,8 +257,8 @@ bool8 sub_805744C(Entity * pokemon, Move *move, bool8 param_3)
         return FALSE;
     }
     if (param_3 != 0) {
-      if ((entityInfo->volatileStatus == STATUS_TAUNTED) && (!MoveIgnoresTaunted(move))) return FALSE;
-      if (entityInfo->volatileStatus == STATUS_ENCORE) {
+      if ((entityInfo->volatileStatus.volatileStatus == STATUS_TAUNTED) && (!MoveIgnoresTaunted(move))) return FALSE;
+      if (entityInfo->volatileStatus.volatileStatus == STATUS_ENCORE) {
         if (move->id == MOVE_STRUGGLE) {
           if((entityInfo->struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0) return FALSE;
         }

@@ -204,27 +204,27 @@ void EntityUpdateStatusSprites(Entity *entity)
 
     if (entityInfo->id == 0xb9) {
       // NOTE: clean this up sometime
-      temp = entityInfo->sleepTurns; 
+      temp = entityInfo->sleep.sleepTurns; 
       flag = 0x7f;
       temp ^= flag;
       flag = (temp) != 0;
     }
     if (flag) {
-      spriteStatus = gStatusSpriteMasks_SleepStatus[entityInfo->sleep];
+      spriteStatus = gStatusSpriteMasks_SleepStatus[entityInfo->sleep.sleep];
     }
     spriteStatus = spriteStatus | 
-            gStatusSpriteMasks_NonVolatileStatus[entityInfo->nonVolatileStatus] |
-            gStatusSpriteMasks_ImmobilizeStatus[entityInfo->immobilizeStatus] |
-            gStatusSpriteMasks_VolatileStatus[entityInfo->volatileStatus] |
-            gStatusSpriteMasks_ChargingStatus[entityInfo->chargingStatus] |
-            gStatusSpriteMasks_ProtectionStatus[entityInfo->protectionStatus] |
-            gStatusSpriteMasks_WaitingStatus[entityInfo->waitingStatus] |
-            gStatusSpriteMasks_LinkedStatus[entityInfo->linkedStatus] |
-            gStatusSpriteMasks_MoveStatus[entityInfo->moveStatus] |
-            gStatusSpriteMasks_ItemStatus[entityInfo->itemStatus] |
-            gStatusSpriteMasks_TransformStatus[entityInfo->transformStatus] |
-            gStatusSpriteMasks_EyesightStatus[entityInfo->eyesightStatus] |
-            gStatusSpriteMasks_MuzzledStatus[entityInfo->muzzled];
+            gStatusSpriteMasks_NonVolatileStatus[entityInfo->nonVolatile.nonVolatileStatus] |
+            gStatusSpriteMasks_ImmobilizeStatus[entityInfo->immobilize.immobilizeStatus] |
+            gStatusSpriteMasks_VolatileStatus[entityInfo->volatileStatus.volatileStatus] |
+            gStatusSpriteMasks_ChargingStatus[entityInfo->charging.chargingStatus] |
+            gStatusSpriteMasks_ProtectionStatus[entityInfo->protection.protectionStatus] |
+            gStatusSpriteMasks_WaitingStatus[entityInfo->waitingStruct.waitingStatus] |
+            gStatusSpriteMasks_LinkedStatus[entityInfo->linked.linkedStatus] |
+            gStatusSpriteMasks_MoveStatus[entityInfo->moveStatus.moveStatus] |
+            gStatusSpriteMasks_ItemStatus[entityInfo->itemStatus.itemStatus] |
+            gStatusSpriteMasks_TransformStatus[entityInfo->transformStatus.transformStatus] |
+            gStatusSpriteMasks_EyesightStatus[entityInfo->eyesightStatus.eyesightStatus] |
+            gStatusSpriteMasks_MuzzledStatus[entityInfo->muzzled.muzzled];
 
     if (entityInfo->grudge) {
       spriteStatus = spriteStatus | STATUS_SPRITE_GRUDGE;

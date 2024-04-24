@@ -77,7 +77,7 @@ u8 sub_80703A0(Entity *pokemon, Position *pos)
     tile = GetTile(pos->x,pos->y);
     if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
         (DUNGEON_MAX_SIZE_Y > pos->y) && (tile->monster == NULL) && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) {
-        if ((IsCurrentFixedRoomBossFight()) || ((entityInfo->transformStatus != STATUS_MOBILE && (!HasHeldItem(pokemon, ITEM_MOBILE_SCARF))))) {
+        if ((IsCurrentFixedRoomBossFight()) || ((entityInfo->transformStatus.transformStatus != STATUS_MOBILE && (!HasHeldItem(pokemon, ITEM_MOBILE_SCARF))))) {
             crossableTerrain = GetCrossableTerrain(entityInfo->id);
             tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
             if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
@@ -108,7 +108,7 @@ bool8 CanCrossWalls(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = pokemon->info;
     EntityInfo *pokemonInfo2 = pokemonInfo;
-    if (pokemonInfo2->transformStatus == STATUS_MOBILE)
+    if (pokemonInfo2->transformStatus.transformStatus == STATUS_MOBILE)
     {
         return TRUE;
     }
@@ -135,7 +135,7 @@ bool8 sub_807049C(Entity *pokemon, Position *pos)
     if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
         (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) &&
         (tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))) {
-        if (IsCurrentFixedRoomBossFight() || (entityInfo->transformStatus != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
+        if (IsCurrentFixedRoomBossFight() || (entityInfo->transformStatus.transformStatus != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
             crossableTerrain = GetCrossableTerrain(entityInfo->id);
             tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
             if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
@@ -219,7 +219,7 @@ bool8 sub_80705F0(Entity *pokemon, Position *pos)
     if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
         (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) &&
         ((tile->monster == NULL) || ((GetEntityType(tile->monster) == ENTITY_MONSTER)))) {
-        if (IsCurrentFixedRoomBossFight() || (entityInfo->transformStatus != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
+        if (IsCurrentFixedRoomBossFight() || (entityInfo->transformStatus.transformStatus != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
             crossableTerrain = GetCrossableTerrain(entityInfo->id);
             tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
             if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
@@ -257,7 +257,7 @@ bool8 sub_80706A4(Entity *pokemon, Position *pos)
     if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
         (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) &&
         ((tile->monster == NULL) || ((GetEntityType(tile->monster) == ENTITY_MONSTER) && (tile->monster->info == entityInfo)))) {
-        if (IsCurrentFixedRoomBossFight() || (entityInfo->transformStatus != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
+        if (IsCurrentFixedRoomBossFight() || (entityInfo->transformStatus.transformStatus != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
             crossableTerrain = GetCrossableTerrain(entityInfo->id);
             tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
             if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
@@ -304,7 +304,7 @@ s32 CalcSpeedStage(Entity *pokemon)
     }
   }
 
-  if (entityInfo->nonVolatileStatus == STATUS_PARALYSIS) {
+  if (entityInfo->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS) {
     speed--;
   }
 

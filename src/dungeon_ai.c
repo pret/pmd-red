@@ -75,7 +75,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
     EntityInfo *pokemonInfo = pokemon->info;
     if (pokemonInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)
     {
-        if (pokemonInfo->immobilizeStatus == STATUS_PETRIFIED)
+        if (pokemonInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED)
         {
             SendImmobilizeEndMessage(pokemon, pokemon);
         }
@@ -110,10 +110,10 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                     {
                         target = gDungeon->allPokemon[i];
                         if (EntityExists(target) &&
-                            target->info->waitingStatus == STATUS_DECOY &&
+                            target->info->waitingStruct.waitingStatus == STATUS_DECOY &&
                             CanSeeTarget(pokemon, target))
                         {
-                            bool8 enemyDecoy = target->info->enemyDecoy;
+                            bool8 enemyDecoy = target->info->waitingStruct.enemyDecoy;
                             u8 targetingDecoy = TARGETING_DECOY_TEAM;
                             if (enemyDecoy)
                             {
@@ -144,7 +144,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                             {
                                 return;
                             }
-                            if (pokemonInfo->volatileStatus == STATUS_CONFUSED)
+                            if (pokemonInfo->volatileStatus.volatileStatus == STATUS_CONFUSED)
                             {
                                 SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
                             }
@@ -159,7 +159,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                         }
                         else
                         {
-                            if (pokemonInfo->volatileStatus == STATUS_CONFUSED)
+                            if (pokemonInfo->volatileStatus.volatileStatus == STATUS_CONFUSED)
                             {
                                 SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
                             }
@@ -178,7 +178,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                                 {
                                     return;
                                 }
-                                pokemonInfo->aiNotNextToTarget = FALSE;
+                                pokemonInfo->aiTarget.aiNotNextToTarget = FALSE;
                                 pokemonInfo->aiNextToTarget = FALSE;
                                 pokemonInfo->waiting = FALSE;
                             }

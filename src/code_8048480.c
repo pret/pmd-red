@@ -6,6 +6,8 @@
 #include "constants/type.h"
 #include "dungeon_action.h"
 #include "structs/dungeon_entity.h"
+#include "dungeon_items.h"
+#include "dungeon_music.h"
 #include "dungeon_util.h"
 #include "structs/str_dungeon.h"
 #include "move_effects_target.h"
@@ -16,6 +18,7 @@
 #include "moves.h"
 #include "code_8077274_1.h"
 #include "code_80521D0.h"
+#include "code_808417C.h"
 #include "pokemon.h"
 #include "structs/str_position.h"
 #include "status.h"
@@ -33,14 +36,29 @@ extern s16 gUnknown_80F4FBA;
 extern s16 gUnknown_80F4FBC;
 extern s16 gUnknown_80F4FBE;
 extern s16 gUnknown_80F4F46; // 0xC
-extern s16 gUnknown_80F4FAA; // 0x1E
-extern s16 gUnknown_80F4FA8; // 0xF
+extern s16 gUnknown_80F4FA2;
 extern s16 gUnknown_80F4FA4; // 0x14 
 extern s16 gUnknown_80F4FA6; // 0x2D
+extern s16 gUnknown_80F4FA8; // 0xF
+extern s16 gUnknown_80F4FAA; // 0x1E
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
 extern s16 gUnknown_80F4FAC;
+extern s16 gUnknown_80F503A;
+extern s16 gUnknown_80F503C;
+extern s16 gUnknown_80F503E;
+extern s16 gUnknown_80F5040;
+extern s16 gUnknown_80F5042;
+extern s16 gUnknown_80F5044;
+extern s16 gUnknown_80F5046;
+extern s16 gUnknown_80F5048;
+extern s16 gUnknown_80F4FAE;
+extern s16 gUnknown_80F4FAC;
+extern s16 gUnknown_80F4E74[];
 
+extern u8 *gUnknown_80FDBB8[];
+extern u8 *gUnknown_80FE458[];
+extern u8 *gUnknown_80FE3E8[];
 extern u8 *gUnknown_80FEAE8[];
 extern u8 *gUnknown_80FDBA0[];
 extern u8 *gUnknown_80FE434[];
@@ -84,8 +102,8 @@ extern void sub_803EAF0(u32, u32);
 extern void sub_8044C10(bool8);
 Entity *DrawFieldGiveItemMenu(u32, u32);
 extern void PrintFieldMessage(u32, u8 *, u32);
-extern void sub_8044E24(u32, u32, u32);
-extern void sub_804245C(u32, Item *);
+extern void sub_8044E24(Entity *, u32, u32);
+extern void sub_804245C(Entity *, Item *);
 extern u8 sub_8072938(Entity *, u16);
 extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, Position *r3);
 extern void sub_8072008(Entity *pokemon, Entity *r1, u32 r2, u8 r3, u32);
@@ -99,115 +117,489 @@ Entity *sub_80696FC(Entity *);
 extern void sub_80943A0(void*, s32);
 extern void sub_803E708(u32 r0, u32 r1);
 extern void sub_806A7E8(EntityInfo *, s32);
+extern u32 sub_8055640(struct Entity *, struct Entity *, struct Move *, u32, u32);
 
+void StunSeedItemAction(Entity *, Entity *);
+void MaxElixirAction(Entity *, Entity *);
+void ProteinItemAction(Entity *, Entity *);
+void CalciumItemAction(Entity *, Entity *);
+void IronItemAction(Entity *, Entity *);
+void ZincItemAction(Entity *, Entity *);
+void sub_80487CC(Entity *, Entity *, u32, u32);
+void GrimyFoodItemAction(Entity *, Entity *);
+void HandleGummiItemAction(Entity *, Entity *, u8);
+void IcePartItemAction(Entity *, Entity *, u8);
+void SteelPartItemAction(Entity *, Entity *, u8);
+void RockPartItemAction(Entity *, Entity *, u8);
+void MusicBoxItemAction(Entity *, Entity *, u8);
+void nullsub_94(Entity *, Entity *, u8);
+void KeyItemAction(Entity *, Entity *, u8);
+void sub_8078B5C(Entity *, Entity *, u32, u32, u32);
+void sub_8048340(Entity *, Entity *, u32);
+void HealSeedItemAction(Entity *, Entity *, u8);
+void WishStoneItemAction(Entity *, Entity *, u8);
+void OranBerryItemAction(Entity *, Entity *);
+void ChestoBerryItemAction(Entity *, Entity *);
+void JoySeedItemAction(Entity *, Entity *);
+void GinsengItemAction(Entity *, Entity *);
+void BlastSeedItemAction(Entity *, Entity *, u8);
+void SitrusBerryItemAction(Entity *, Entity *);
+void WarpSeedItemAction(Entity *, Entity *);
+void PlainSeedItemAction(Entity *, Entity *);
+void SleepSeedItemAction(Entity *, Entity *);
+void TotterSeedItemAction(Entity *, Entity *);
+void CheriBerryItemAction(Entity *, Entity *);
+void PechaBerryItemAction(Entity *, Entity *);
+void QuickSeedItemAction(Entity *, Entity *);
+void HungerSeedItemAction(Entity *, Entity *);
+void RawstBerryItemAction(Entity *, Entity *);
+void LifeSeedItemAction(Entity *, Entity *);
+void AllureSeedItemAction(Entity *, Entity *);
+void EyedropSeedItemAction(Entity *, Entity *);
+void BlinkerSeedItemAction(Entity *, Entity *);
+void DoomSeedItemAction(Entity *, Entity *);
+void sub_80482FC(Entity *, Entity *, u32, u8);
+
+extern void sub_8071DA4(Entity *);
+extern void SetShopkeeperAggression(Entity *, Entity *);
+extern void sub_80464C8(Entity *, Position *, Item *);
+extern void sub_806A6E8(Entity *);
+extern void sub_8042390(Entity *, Item *);
+
+bool8 sub_8047930(Entity *pokemon, Entity *target)
+{
+  bool8 flag;
+  
+  if (((target->info->shopkeeper == TRUE) ||
+      (target->info->clientType == 4)) || (target->info->clientType == CLIENT_TYPE_CLIENT)) {
+    return FALSE;
+  }
+  else {
+    if(DungeonRandInt(100) < gUnknown_80F4FA2)
+        flag = TRUE;
+    else
+        flag = FALSE;
+    if (GetEntityType(pokemon) == ENTITY_MONSTER) {
+      if (HasHeldItem(pokemon, ITEM_WHIFF_SPECS)) {
+          flag = FALSE;
+      }
+      else {
+        if (HasHeldItem(pokemon, ITEM_LOCKON_SPECS)) {
+          flag = TRUE;
+        }
+      }
+    }
+    if ((GetEntityType(target) == ENTITY_MONSTER) && (HasHeldItem(target, ITEM_DODGE_SCARF))) {
+      flag = FALSE;
+    }
+  }
+  return flag;
+}
+
+void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity *target, Item *item)
+{
+  EntityInfo *info;
+  u32 flag;
+  u8 uStack_24;
+  u8 uStack_23;
+  u8 auStack_22;
+  
+  if (param_1 != '\0') {
+    if (param_2 == '\0') {
+      flag = FALSE;
+      info = target->info;
+      if (info->isNotTeamMember) {
+        if ((GetItemCategory(item->id) != CATEGORY_THROWN_LINE) && (GetItemCategory(item->id) != CATEGORY_BERRIES_SEEDS_VITAMINS)) {
+          flag = GetItemCategory(item->id) == CATEGORY_THROWN_ARC ? FALSE : TRUE;
+        }
+      }
+      else {
+        if (GetItemCategory(item->id) != CATEGORY_BERRIES_SEEDS_VITAMINS) {
+          flag = IQSkillIsEnabled(target, IQ_ITEM_CATCHER);
+        }
+      }
+      if (CannotUseItems(target)) {
+        flag = FALSE;
+      }
+      if (flag && ((info->heldItem.flags & ITEM_FLAG_EXISTS) == 0)) {
+        if (info->shopkeeper == TRUE) {
+          sub_80464C8(pokemon,&target->pos,item);
+          return;
+        }
+        PlaySoundEffect(0x14d);
+        sub_8045BF8(gUnknown_202DE58,item);
+        SetMessageArgument(gAvailablePokemonNames,target,0);
+        sub_80522F4(pokemon,target,*gUnknown_80FDBB8); // $m0 caught the $i0
+        info->heldItem = *item;
+        sub_806A6E8(target);
+        return;
+      }
+    }
+    if (param_1 != '\0') {
+      sub_8042390(target,item);
+      SetShopkeeperAggression(pokemon,target);
+    }
+  }
+  if ((item->flags & ITEM_FLAG_STICKY)) {
+    sub_8045BF8(gUnknown_202DE58,item);
+    sub_80522F4(pokemon,target,*gUnknown_80FE3E8);
+    if (param_1 != '\0') {
+      sub_806F370(pokemon,target,gUnknown_80F4FAE,1,&uStack_24,0,0x217,0,0,0);
+      sub_8071DA4(pokemon);
+      return;
+    }
+    else goto _jump;
+  }
+  else {
+    if (param_1 == 0) 
+_jump:
+        sub_804245C(target,item);
+  }
+  if (GetItemCategory(item->id) == CATEGORY_BERRIES_SEEDS_VITAMINS) {
+    sub_8078B5C(pokemon,target,5,0,0);
+  }
+  if ((GetItemCategory(item->id) == CATEGORY_TMS_HMS) || (GetItemCategory(item->id) == CATEGORY_LINK_BOX)) {
+    if (param_1 != '\0') {
+        sub_806F370(pokemon,target,gUnknown_80F4FAC,1,&uStack_23,0,0x217,0,0,0);
+        goto _080482B4;
+    }
+    else
+    {
+        sub_80522F4(pokemon,target,*gUnknown_80FE458);
+        goto _080482B4;
+    }
+  }
+  switch(item->id) {
+      case ITEM_STICK:
+        sub_80482FC(pokemon,target,gUnknown_80F503A,1);
+        break;
+      case ITEM_IRON_THORN:
+        sub_80482FC(pokemon,target,gUnknown_80F503C,2);
+        break;
+      case ITEM_SILVER_SPIKE:
+        sub_80482FC(pokemon,target,gUnknown_80F503E,3);
+        break;
+      case ITEM_GOLD_FANG:
+        sub_80482FC(pokemon,target,gUnknown_80F5040,4);
+        break;
+      case ITEM_CACNEA_SPIKE:
+        sub_80482FC(pokemon,target,gUnknown_80F5042,5);
+        break;
+      case ITEM_CORSOLA_TWIG:
+        sub_80482FC(pokemon,target,gUnknown_80F5044,6);
+        break;
+      case ITEM_GEO_PEBBLE:
+        sub_8048340(pokemon,target,gUnknown_80F5048);
+        break;
+      case ITEM_GRAVELEROCK:
+        sub_8048340(pokemon,target,gUnknown_80F5046);
+        break;
+      case ITEM_HEAL_SEED:
+        HealSeedItemAction(pokemon,target,param_3);
+        break;
+      case ITEM_ORAN_BERRY:
+        OranBerryItemAction(pokemon,target);
+        break;
+      case ITEM_SITRUS_BERRY:
+        SitrusBerryItemAction(pokemon,target);
+        break;
+      case ITEM_LIFE_SEED:
+        LifeSeedItemAction(pokemon,target);
+        break;
+      case ITEM_BLINKER_SEED:
+        BlinkerSeedItemAction(pokemon,target);
+        break;
+      case ITEM_ALLURE_SEED:
+        AllureSeedItemAction(pokemon,target);
+        break;
+      case ITEM_QUICK_SEED:
+        QuickSeedItemAction(pokemon,target);
+        break;
+      case ITEM_EYEDROP_SEED:
+        EyedropSeedItemAction(pokemon,target);
+        break;
+      case ITEM_TOTTER_SEED:
+        TotterSeedItemAction(pokemon,target);
+        break;
+      case ITEM_CHERI_BERRY:
+        CheriBerryItemAction(pokemon,target);
+        break;
+      case ITEM_PECHA_BERRY:
+        PechaBerryItemAction(pokemon,target);
+        break;
+      case ITEM_WARP_SEED:
+        WarpSeedItemAction(pokemon,target);
+        break;      
+      case ITEM_SLEEP_SEED:
+        SleepSeedItemAction(pokemon,target);
+        break;
+      case ITEM_CHESTO_BERRY:
+        ChestoBerryItemAction(pokemon,target);
+        break;
+      case ITEM_JOY_SEED:
+        JoySeedItemAction(pokemon,target);
+        break;
+      case ITEM_DOOM_SEED:
+        DoomSeedItemAction(pokemon,target);
+        break;   
+       case ITEM_STUN_SEED:
+        StunSeedItemAction(pokemon,target);
+        break;      
+      case ITEM_PLAIN_SEED:
+        PlainSeedItemAction(pokemon,target);
+        break;
+      case ITEM_RAWST_BERRY:
+        RawstBerryItemAction(pokemon,target);
+        break;
+      case ITEM_HUNGER_SEED:
+        HungerSeedItemAction(pokemon,target);
+        break;
+      case ITEM_GINSENG:
+        GinsengItemAction(pokemon,target);
+        break;
+      case ITEM_BLAST_SEED:
+        BlastSeedItemAction(pokemon,target,param_1);
+        break;
+      case ITEM_MAX_ELIXIR:
+        MaxElixirAction(pokemon,target);
+        break;
+      case ITEM_PROTEIN:
+        ProteinItemAction(pokemon,target);
+        break;
+      case ITEM_CALCIUM:
+        CalciumItemAction(pokemon,target);
+        break;
+      case ITEM_IRON:
+        IronItemAction(pokemon,target);
+        break;
+      case ITEM_ZINC:
+        ZincItemAction(pokemon,target);
+        break;
+      case 0xe9:
+        nullsub_94(pokemon,target,param_1);
+        break;
+      case ITEM_BIG_APPLE:
+        sub_80487CC(pokemon,target,100,10);
+        break;
+      case ITEM_HUGE_APPLE:
+        sub_80487CC(pokemon,target,999,10);
+        break;
+      case ITEM_GRIMY_FOOD:
+        GrimyFoodItemAction(pokemon,target);
+        break;
+      case ITEM_WHITE_GUMMI:
+        HandleGummiItemAction(pokemon,target,1);
+        break;
+      case ITEM_RED_GUMMI:
+        HandleGummiItemAction(pokemon,target,2);
+        break;
+      case ITEM_BLUE_GUMMI:
+        HandleGummiItemAction(pokemon,target,3);
+        break;
+      case ITEM_GRASS_GUMMI:
+        HandleGummiItemAction(pokemon,target,4);
+        break;
+      case ITEM_YELLOW_GUMMI:
+        HandleGummiItemAction(pokemon,target,5);
+        break;
+      case ITEM_CLEAR_GUMMI:
+        HandleGummiItemAction(pokemon,target,6);
+        break;
+      case ITEM_ORANGE_GUMMI:
+        HandleGummiItemAction(pokemon,target,7);
+        break;
+      case ITEM_PINK_GUMMI:
+        HandleGummiItemAction(pokemon,target,8);
+        break;
+      case ITEM_BROWN_GUMMI:
+        HandleGummiItemAction(pokemon,target,9);
+        break;
+      case ITEM_SKY_GUMMI:
+        HandleGummiItemAction(pokemon,target,10);
+        break;
+      case ITEM_GOLD_GUMMI:
+        HandleGummiItemAction(pokemon,target,0xb);
+        break;
+      case ITEM_GREEN_GUMMI:
+        HandleGummiItemAction(pokemon,target,0xc);
+        break;
+      case ITEM_GRAY_GUMMI:
+        HandleGummiItemAction(pokemon,target,0xd);
+        break;
+      case ITEM_PURPLE_GUMMI:
+        HandleGummiItemAction(pokemon,target,0xe);
+        break;
+      case ITEM_ROYAL_GUMMI:
+        HandleGummiItemAction(pokemon,target,0xf);
+        break;
+      case ITEM_BLACK_GUMMI:
+        HandleGummiItemAction(pokemon,target,0x10);
+        break;
+      case ITEM_SILVER_GUMMI:
+        HandleGummiItemAction(pokemon,target,0x11);
+        break;
+      case ITEM_APPLE:
+      case ITEM_BANANA:
+        sub_80487CC(pokemon,target,0x32,5);
+        break;
+      case ITEM_CHESTNUT:
+        sub_80487CC(pokemon,target,10,0);
+        break;
+      case ITEM_KEY:
+        KeyItemAction(pokemon,target,param_1);
+        break;
+      case ITEM_ICE_PART:
+        IcePartItemAction(pokemon,target,param_1);
+        break;
+      case ITEM_ROCK_PART:
+        RockPartItemAction(pokemon,target,param_1);
+        break;
+      case ITEM_STEEL_PART:
+        SteelPartItemAction(pokemon,target,param_1);
+        break;  
+      case ITEM_WISH_STONE:
+        WishStoneItemAction(pokemon,target,param_1);
+        break;
+      case ITEM_MUSIC_BOX:
+        MusicBoxItemAction(pokemon,target,param_1);
+        break;
+      default:
+        if (param_1 != '\0') {
+            sub_806F370(pokemon,target,gUnknown_80F4FAC,1,&auStack_22,0,0x217,0,0,0);
+        }
+        else 
+        {
+            sub_80522F4(pokemon,target,*gUnknown_80FE458);
+        }
+        break;
+  }
+_080482B4:
+  sub_8071DA4(pokemon);
+}
+
+UNUSED void nullsub_205(void) { }
+
+void SleepSeedItemAction(Entity *pokemon, Entity *target) 
+{
+    sub_8075C58(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4E74, TRUE), TRUE);
+}
+
+void sub_80482FC(Entity *pokemon, Entity *target, u32 pp, u8 param_4)
+{
+    Move move;
+
+    InitPokemonMove(&move, MOVE_PROJECTILE);
+    move.PP = pp;
+    sub_8055640(pokemon, target, &move, 0x100, param_4);
+}
 
 void sub_8048340(Entity *pokemon, Entity *target, u32 r2)
 {
     sub_806F370(pokemon, target, r2, 1, 0, 0, 528, 0, 0, 0);
 }
 
-void sub_8048364(Entity *pokemon, Entity *target, u8 r2)
+void HealSeedItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
     sub_8079F20(pokemon, target, 1, r2);
 }
 
-void sub_8048374(Entity *pokemon, Entity *target)
+void OranBerryItemAction(Entity *pokemon, Entity *target)
 {
     HealTargetHP(pokemon, target, gUnknown_80F4FB6, gUnknown_80F4FB8, TRUE);
 }
 
-void sub_804839C(Entity *pokemon, Entity *target)
+void SitrusBerryItemAction(Entity *pokemon, Entity *target)
 {
     HealTargetHP(pokemon, target, gUnknown_80F4FBA, gUnknown_80F4FBC, TRUE);
 }
 
-void sub_80483C4(Entity *pokemon, Entity *target)
+void MaxElixirAction(Entity *pokemon, Entity *target)
 {
     RestorePPTarget(pokemon, target, 999);
 }
 
-void sub_80483D4(Entity *pokemon, Entity *target)
+void LifeSeedItemAction(Entity *pokemon, Entity *target)
 {
     HealTargetHP(pokemon, target, 0, gUnknown_80F4FBE, TRUE);
 }
 
-void sub_80483F4(Entity *pokemon, Entity *target)
+void BlinkerSeedItemAction(Entity *pokemon, Entity *target)
 {
     BlindTarget(pokemon, target);
 }
 
-void XEyeSeedAction(Entity *pokemon, Entity *target)
+void AllureSeedItemAction(Entity *pokemon, Entity *target)
 {
     CrossEyeVisionTarget(pokemon, target);
 }
 
-void sub_804840C(Entity *pokemon, Entity *target)
+void QuickSeedItemAction(Entity *pokemon, Entity *target)
 {
     RaiseMovementSpeedTarget(pokemon, target, 0, TRUE);
 }
 
-void sub_804841C(Entity *pokemon, Entity *target)
+void EyedropSeedItemAction(Entity *pokemon, Entity *target)
 {
     RestoreVisionTarget(pokemon, target);
 }
 
-void sub_8048428(Entity *pokemon, Entity *target)
+void CheriBerryItemAction(Entity *pokemon, Entity *target)
 {
-    if(target->info->nonVolatileStatus == STATUS_PARALYSIS)
+    if(target->info->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS)
         SendNonVolatileEndMessage(pokemon, target);
     else
         // Pointer to "But nothing happened!"
         sub_80522F4(pokemon, target, *gUnknown_80F89F4);
 }
 
-void sub_8048450(Entity *pokemon, Entity *target)
+void PechaBerryItemAction(Entity *pokemon, Entity *target)
 {
-    if((u8)(target->info->nonVolatileStatus - 2) <= 1)
+    if((u8)(target->info->nonVolatile.nonVolatileStatus - 2) <= 1)
         SendNonVolatileEndMessage(pokemon, target);
     else
         // Pointer to "But nothing happened!"
         sub_80522F4(pokemon, target, *gUnknown_80F89F4);
 }
 
-void sub_8048480(Entity *pokemon, Entity *target)
+void WarpSeedItemAction(Entity *pokemon, Entity *target)
 {
     sub_807D148(pokemon, target, 0, NULL);
 }
 
-void sub_8048490(Entity *pokemon, Entity *target)
+void ChestoBerryItemAction(Entity *pokemon, Entity *target)
 {
     SleeplessStatusTarget(pokemon, target);
 }
 
-void sub_804849C(Entity *pokemon, Entity *target)
+void TotterSeedItemAction(Entity *pokemon, Entity *target)
 {
     ConfuseStatusTarget(pokemon, target, TRUE);
 }
 
-void sub_80484A8(Entity *pokemon, Entity *target)
+void JoySeedItemAction(Entity *pokemon, Entity *target)
 {
     sub_8072008(pokemon, target, 1, 1, 1);
 }
 
-void sub_80484BC(Entity *pokemon, Entity *target)
+void StunSeedItemAction(Entity *pokemon, Entity *target)
 {
     PetrifiedStatusTarget(pokemon, target);
 }
 
-void sub_80484C8(Entity *pokemon, Entity *target)
+void PlainSeedItemAction(Entity *pokemon, Entity *target)
 {
     // Pointer to "But nothing happened!"
     sub_80522F4(pokemon, target, *gUnknown_80F89F4);
 }
 
-void sub_80484DC(Entity *pokemon, Entity *target)
+void DoomSeedItemAction(Entity *pokemon, Entity *target)
 {
     LevelDownTarget(pokemon, target, 1);
 }
 
-void sub_80484E8(Entity *pokemon, Entity *target)
+void RawstBerryItemAction(Entity *pokemon, Entity *target)
 {
-    if(target->info->nonVolatileStatus == STATUS_BURN)
+    if(target->info->nonVolatile.nonVolatileStatus == STATUS_BURN)
         SendNonVolatileEndMessage(pokemon, target);
     else
     {
@@ -217,7 +609,7 @@ void sub_80484E8(Entity *pokemon, Entity *target)
     }
 }
 
-void sub_8048524(Entity *pokemon, Entity * target)
+void HungerSeedItemAction(Entity *pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
   EntityInfo *entityInfo_1;
@@ -247,7 +639,7 @@ void sub_8048524(Entity *pokemon, Entity * target)
   }
 }
 
-void sub_80485B0(Entity *pokemon, Entity * target)
+void GinsengItemAction(Entity *pokemon, Entity * target)
 {
   bool8 isMoveBoosted;
   s32 moveIndex;
@@ -298,7 +690,7 @@ void sub_80485B0(Entity *pokemon, Entity * target)
      sub_80522F4(pokemon,target,*gUnknown_80FE40C);
 }
 
-void sub_804869C(Entity *pokemon, Entity * target, u8 param_3)
+void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
 {
   s32 uVar1;
   EntityInfo *entityInfo;
@@ -316,7 +708,7 @@ void sub_804869C(Entity *pokemon, Entity * target, u8 param_3)
     else {
         uVar1 = gUnknown_80F4FA4;
     }
-    if (entityInfo_1->immobilizeStatus == STATUS_FROZEN) {
+    if (entityInfo_1->immobilize.immobilizeStatus == STATUS_FROZEN) {
       SendImmobilizeEndMessage(pokemon, target);
     }
     sub_806F370(pokemon, target, uVar1, 1, auStack28, 0, 0x216, 0, 0, 0);
@@ -339,7 +731,7 @@ void sub_804869C(Entity *pokemon, Entity * target, u8 param_3)
       else {
         uVar1 = gUnknown_80F4FA6;
       }
-      if (entityInfo->immobilizeStatus == STATUS_FROZEN) {
+      if (entityInfo->immobilize.immobilizeStatus == STATUS_FROZEN) {
         SendImmobilizeEndMessage(pokemon, entity);
       }
       sub_806F370(pokemon, entity, uVar1, 1, auStack28, 0, 0x216, 0, 0, 0);
@@ -354,16 +746,16 @@ void sub_80487CC(Entity *pokemon, Entity * target, u32 param_3, u32 param_4)
 
 static inline bool8 JoinLocationCannotUseItems_1(EntityInfo *pokemonInfo)
 {
-    if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
         return TRUE;
 
-    if (pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
         return TRUE;
 
     return FALSE;
 }
 
-void sub_80487E0(Entity *pokemon, Entity *target, u8 gummiIndex)
+void HandleGummiItemAction(Entity *pokemon, Entity *target, u8 gummiIndex)
 {
   s32 iVar3;
   EntityInfo *targetInfo;
@@ -413,43 +805,43 @@ void sub_80487E0(Entity *pokemon, Entity *target, u8 gummiIndex)
   }
 }
 
-void sub_804891C(Entity *pokemon, Entity *target)
+void ProteinItemAction(Entity *pokemon, Entity *target)
 {
     RaiseAtkStatTarget(pokemon, target, 3);
 }
 
-void sub_8048928(Entity *pokemon, Entity *target)
+void CalciumItemAction(Entity *pokemon, Entity *target)
 {
     RaiseSpAtkStatTarget(pokemon, target, 3);
 }
 
-void sub_8048934(Entity *pokemon, Entity *target)
+void IronItemAction(Entity *pokemon, Entity *target)
 {
     RaiseDefStatTarget(pokemon, target, 3);
 }
 
-void sub_8048940(Entity *pokemon, Entity *target)
+void ZincItemAction(Entity *pokemon, Entity *target)
 {
     RaiseSpDefStatTarget(pokemon, target, 3);
 }
 
-void nullsub_94(void)
+void nullsub_94(Entity *pokemon, Entity *target, u8 r2)
 {}
 
 static inline bool8 JoinLocationCannotUseItems_2(EntityInfo *pokemonInfo)
 {
-    if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
     {
         return TRUE;
     }
-    if (pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
     {
         return TRUE;
     }
     return FALSE;
 }
 
-bool8 sub_8048950(u32 param_1,Item *item)
+bool8 sub_8048950(Entity *param_1,Item *item)
 {
     u8 flag;
     u16 moveID;
@@ -503,18 +895,18 @@ bool8 sub_8048950(u32 param_1,Item *item)
 
 static inline bool8 JoinLocationCannotUseItems_3(EntityInfo *pokemonInfo)
 {
-    if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
     {
         return TRUE;
     }
-    if (pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
     {
         return TRUE;
     }
     return FALSE;
 }
 
-bool8 sub_8048A68(u32 param_1,Item *item)
+bool8 sub_8048A68(Entity *param_1,Item *item)
 {
   u8 flag;
   Entity *entity2;
@@ -580,11 +972,11 @@ bool8 sub_8048A68(u32 param_1,Item *item)
 
 static inline bool8 JoinLocationCannotUseItems_4(EntityInfo *pokemonInfo)
 {
-    if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
     {
         return TRUE;
     }
-    if (pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
     {
         return TRUE;
     }
@@ -711,7 +1103,7 @@ bool8 sub_8048D50(Entity * pokemon, Item *item)
   }
   else
   {
-    if ((entityInfo->muzzled == TRUE) && (IsEdibleItem(item->id))) {
+    if ((entityInfo->muzzled.muzzled == TRUE) && (IsEdibleItem(item->id))) {
         SetMessageArgument(gAvailablePokemonNames,pokemon,0);
         SendMessage(pokemon,*gUnknown_80FDCA4);
         return FALSE;
@@ -720,7 +1112,7 @@ bool8 sub_8048D50(Entity * pokemon, Item *item)
   return TRUE;
 }
 
-void sub_8048DB8(Entity *pokemon, Entity *target, u8 r2)
+void KeyItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
     u8 temp;
     if(r2 != 0)
@@ -729,7 +1121,7 @@ void sub_8048DB8(Entity *pokemon, Entity *target, u8 r2)
         sub_8051E7C(pokemon);
 }
 
-void sub_8048E04(Entity *pokemon, Entity * target)
+void GrimyFoodItemAction(Entity *pokemon, Entity * target)
 {
     sub_8078B5C(pokemon, target, 0x1E, 0, 1);
     switch(DungeonRandInt(5))
@@ -753,27 +1145,27 @@ void sub_8048E04(Entity *pokemon, Entity * target)
     } 
 }
 
-void sub_8048EB0(Entity *pokemon)
+void IcePartItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
     SendMessage(pokemon, *gPtrIcePartCrumbledMessage);
 }
 
-void sub_8048EC4(Entity *pokemon)
+void RockPartItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
     SendMessage(pokemon, *gPtrRockPartCrumbledMessage);
 }
 
-void sub_8048ED8(Entity *pokemon)
+void SteelPartItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
     SendMessage(pokemon, *gPtrSteelPartCrumbledMessage);
 }
 
-void sub_8048EEC(Entity *pokemon)
+void WishStoneItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
     SendMessage(pokemon, *gPtrWishStoneCrumbledMessage);
 }
 
-void sub_8048F00(Entity *pokemon)
+void MusicBoxItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
     sub_80421C0(pokemon, 0xD6);
     SendMessage(pokemon, *gPtrMusicBoxPlayedCrumbledMessage);

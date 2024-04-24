@@ -209,7 +209,7 @@ void sub_806A120(Entity * pokemon, Entity * target, Move* move)
   EntityInfo *entityInfo;
 
   if ((((EntityExists(pokemon)) && (EntityExists(target))) && (pokemon != target))
-     && (entityInfo = target->info, entityInfo->protectionStatus == STATUS_CONVERSION2)) {
+     && (entityInfo = target->info, entityInfo->protection.protectionStatus == STATUS_CONVERSION2)) {
     moveType = GetMoveTypeForMonster(pokemon, move);
     uVar2_u32 = sub_8092364(moveType);
     if (uVar2_u32 != TYPE_NONE) {

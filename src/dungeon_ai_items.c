@@ -364,7 +364,7 @@ void TargetThrownItem(Entity *pokemon, Entity *targetPokemon, Item *item, s32 ta
     distanceX = distanceX < 0 ? -distanceX : distanceX;
     distanceY = pokemon->pos.y - targetPokemon->pos.y;
     distanceY = distanceY < 0 ? -distanceY : distanceY;
-    if (pokemon->info->itemStatus == STATUS_NONE)
+    if (pokemon->info->itemStatus.itemStatus == STATUS_NONE)
     {
         s32 distance = distanceY < distanceX ? distanceX : distanceY;
         if (distance > RANGED_ATTACK_RANGE)

@@ -69,7 +69,7 @@ SECTIONS {
         src/code_8009804.o(.text);
         asm/code_8009804.o(.text);
         src/math.o(.text);
-        asm/file_system.o(.text);
+        asm/math.o(.text);
         src/file_system.o(.text);
         src/decompress.o(.text);
         src/main.o(.text);
@@ -322,6 +322,7 @@ SECTIONS {
         src/code_80958E8_1.o(.text);
         asm/code_8096AF8.o(.text);
         src/code_80972F4.o(.text);
+        src/code_8097504.o(.text);
         src/code_8097670.o(.text);
         asm/code_8097670.o(.text);
         src/code_8097DD0.o(.text);
@@ -435,6 +436,7 @@ SECTIONS {
         src/quick_save_read.o(.rodata);
         src/quick_save_write.o(.rodata);
         src/menu_input.o(.rodata);
+        src/code_80140DC.o(.rodata);
         data/data_80D47B8.o(.rodata);
         src/common_strings.o(.rodata);
         data/data_80DAF70.o(.rodata);
@@ -545,6 +547,11 @@ SECTIONS {
         src/dungeon_capabilities.o(.rodata);
         src/dungeon_ai_targeting.o(.rodata);
         data/data_8107010.o(.rodata);
+        src/game_options.o(.rodata);
+        data/data_8109964.o(.rodata);
+        src/code_80972F4.o(.rodata);
+        src/code_8097504.o(.rodata);
+        data/data_8109D10.o(.rodata);
         src/pokemon_3.o(.rodata);
         src/items.o(.rodata);
         src/code_8048480.o(.rodata);

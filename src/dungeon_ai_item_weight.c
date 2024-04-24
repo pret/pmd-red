@@ -202,7 +202,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             }
             break;
         case ITEM_ALLURE_SEED:
-            if (pokemonInfo->eyesightStatus != STATUS_CROSS_EYED)
+            if (pokemonInfo->eyesightStatus.eyesightStatus != STATUS_CROSS_EYED)
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
                 {
@@ -219,7 +219,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             }
             break;
         case ITEM_CHERI_BERRY:
-            if (pokemonInfo->nonVolatileStatus != STATUS_PARALYSIS)
+            if (pokemonInfo->nonVolatile.nonVolatileStatus != STATUS_PARALYSIS)
             {
                 return 0;
             }
@@ -233,7 +233,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             }
             break;
         case ITEM_TOTTER_SEED:
-            if (pokemonInfo->volatileStatus != STATUS_CONFUSED)
+            if (pokemonInfo->volatileStatus.volatileStatus != STATUS_CONFUSED)
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
                 {
@@ -250,8 +250,8 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             }
             break;
         case ITEM_PECHA_BERRY:
-            if (pokemonInfo->nonVolatileStatus != STATUS_POISONED &&
-                pokemonInfo->nonVolatileStatus != STATUS_BADLY_POISONED)
+            if (pokemonInfo->nonVolatile.nonVolatileStatus != STATUS_POISONED &&
+                pokemonInfo->nonVolatile.nonVolatileStatus != STATUS_BADLY_POISONED)
             {
                 return 0;
             }
@@ -265,7 +265,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             }
             break;
         case ITEM_BLINKER_SEED:
-            if (pokemonInfo->eyesightStatus != STATUS_BLINKER)
+            if (pokemonInfo->eyesightStatus.eyesightStatus != STATUS_BLINKER)
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
                 {
@@ -316,9 +316,9 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             itemWeight = 40;
             break;
         case ITEM_SLEEP_SEED:
-            if (pokemonInfo->sleep != STATUS_SLEEP &&
-                pokemonInfo->sleep != STATUS_NAPPING &&
-                pokemonInfo->sleep != STATUS_NIGHTMARE)
+            if (pokemonInfo->sleep.sleep != STATUS_SLEEP &&
+                pokemonInfo->sleep.sleep != STATUS_NAPPING &&
+                pokemonInfo->sleep.sleep != STATUS_NIGHTMARE)
             {
                 if (CanTargetAdjacentPokemon(targetPokemon))
                 {
@@ -335,7 +335,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             }
             break;
         case ITEM_CHESTO_BERRY:
-            if (pokemonInfo->sleep != STATUS_SLEEPLESS)
+            if (pokemonInfo->sleep.sleep != STATUS_SLEEPLESS)
             {
                 itemWeight = 5;
             }
@@ -358,7 +358,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             itemWeight = 80;
             break;
         case ITEM_RAWST_BERRY:
-            if (pokemonInfo->nonVolatileStatus == STATUS_BURN)
+            if (pokemonInfo->nonVolatile.nonVolatileStatus == STATUS_BURN)
             {
                 return 50;
             }
@@ -388,7 +388,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             }
             break;
         case ITEM_STUN_SEED:
-            if (pokemonInfo->immobilizeStatus == STATUS_PETRIFIED)
+            if (pokemonInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED)
             {
                 return 0;
             }

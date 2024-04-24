@@ -41,6 +41,121 @@ typedef struct ActionContainer
     /* 0x14 */ Position itemTargetPosition;
 } ActionContainer;
 
+typedef struct HiddenPower
+{
+    /* 0x0 */ s16 hiddenPowerBasePower;
+    /* 0x2 */ u8 hiddenPowerType;
+} HiddenPower;
+
+typedef struct JoinedAt
+{
+    /* 0x0 */ u8 joinedAt;
+    /* 0x1 */ u8 unk1;
+} JoinedAt;
+
+typedef struct AITarget
+{
+    /* 0x0 */ u8 aiObjective;
+    /* 0x1 */ bool8 aiNotNextToTarget;
+    /* 0x2 */ bool8 aiTargetingEnemy;
+    /* 0x3 */ bool8 aiTurningAround;
+    /* 0x4 */ u16 aiTargetSpawnGenID;
+    /* 0x8 */ struct Entity *aiTarget;
+    /* 0xC */ u8 fillC[4];
+    /* 0x10 */ Position aiTargetPos;
+
+} AITarget;
+
+typedef struct Sleep 
+{
+    /* 0x0 */ u8 sleep;
+    /* 0x1 */ u8 sleepTurns;
+} Sleep;
+
+typedef struct NonVolatile
+{
+    /* 0x0 */ u8 nonVolatileStatus;
+    /* 0x1 */ u8 nonVolatileStatusTurns;
+    /* 0x2 */ u8 nonVolatileStatusDamageCountdown;
+    /* 0x3 */ u8 unk4; 
+} NonVolatile;
+
+typedef struct Immobilize
+{
+    /* 0x0 */ u8 immobilizeStatus;
+    /* 0x4 */ s32 unk4;
+    /* 0x8 */ u8 immobilizeStatusTurns;
+    /* 0x9 */ u8 immobilizeStatusDamageCountdown;
+} Immobilize;
+
+typedef struct Volatile
+{
+    /* 0x0 */ u8 volatileStatus;
+    /* 0x1 */ u8 volatileStatusTurns;
+} Volatile;
+
+typedef struct Charging
+{
+    /* 0x0 */ u8 chargingStatus;
+    /* 0x1 */ u8 chargingStatusTurns;
+    /* 0x2 */ u8 chargingStatusMoveIndex; // The position of the move in the Pokémon's moveset that triggered the status.
+} Charging;
+
+typedef struct Protection
+{
+    /* 0x0 */ u8 protectionStatus;
+    /* 0x1 */ u8 protectionStatusTurns;
+} Protection;
+
+typedef struct Waiting 
+{
+    /* 0xC8 */ u8 waitingStatus;
+    /* 0xC9 */ bool8 enemyDecoy; // True if the Pokémon is a decoy and a wild Pokémon (i.e., not an allied Pokémon).
+    u8 unkCA;
+    /* 0xCB */ u8 waitingStatusTurns;
+    /* 0xCC */ u8 curseDamageCountdown;
+} Waiting;
+
+typedef struct Linked 
+{
+    /* 0xD0 */ u8 linkedStatus;
+    /* 0xD4 */ u32 unkD4;
+    /* 0xD8 */ u8 unkD8;
+    /* 0xD9 */ u8 linkedStatusTurns;
+    /* 0xDA */ u8 linkedStatusDamageCountdown;
+} Linked;
+
+
+typedef struct MoveStatus 
+{
+    /* 0xDC */ u8 moveStatus;
+    /* 0xDD */ u8 moveStatusTurns;
+} MoveStatus;
+
+typedef struct ItemStatus
+{
+    /* 0xE0 */ u8 itemStatus;
+} ItemStatus;
+
+typedef struct TransformStatus
+{
+    /* 0xE4 */ u8 transformStatus;
+    /* 0xE5 */ u8 transformStatusTurns;
+} TransformStatus;
+
+typedef struct EyesightStatus 
+{
+    /* 0xE8 */ u8 eyesightStatus;
+    /* 0xE9 */ u8 eyesightStatusTurns;
+} EyesightStatus;
+
+typedef struct Muzzled 
+{
+    /* 0xEC */ bool8 muzzled;
+    /* 0xED */ u8 muzzledTurns;
+} Muzzled;
+
+
 // size: 0x208
 typedef struct EntityInfo
 {
@@ -82,24 +197,15 @@ typedef struct EntityInfo
     /* 0x2C */ s32 offensiveMultipliers[2];
     // Index 0 is Defense. Index 1 is Special Defense.
     /* 0x34 */ s32 defensiveMultipliers[2];
-    /* 0x3C */ s16 hiddenPowerBasePower;
-    /* 0x3E */ u8 hiddenPowerType;
-    u8 fill3F;
-    /* 0x40 */ u8 joinedAt; // Uses the dungeon index in dungeon.h.
+    /* 0x3C */ HiddenPower hiddenPower;
+    /* 0x40 */ JoinedAt joinedAt; // Uses the dungeon index in dungeon.h.
     /* 0x44 */ ActionContainer action;
     /* 0x5C */ u8 types[2];
     /* 0x5E */ u8 abilities[2];
     /* 0x60 */ Item heldItem;
     u8 fill64[0x68 - 0x64];
     /* 0x68 */ Position prevPos[NUM_PREV_POS];
-    /* 0x78 */ u8 aiObjective;
-    /* 0x79 */ bool8 aiNotNextToTarget;
-    /* 0x7A */ bool8 aiTargetingEnemy;
-    /* 0x7B */ bool8 aiTurningAround;
-    /* 0x7C */ u16 aiTargetSpawnGenID;
-    /* 0x80 */ struct Entity *aiTarget;
-    u8 fill84[0x88 - 0x84];
-    /* 0x88 */ Position aiTargetPos;
+    /* 0x78 */ AITarget aiTarget;
     // Bitwise flags corresponding to selected IQ skills.
     /* 0x8C */ u8 IQSkillMenuFlags[4]; // IQ skills selected in the IQ skills menu.
     /* 0x90 */ u8 IQSkillFlags[4];
@@ -112,57 +218,19 @@ typedef struct EntityInfo
     u8 fillA5[0xA8 - 0xA5];
     // Statuses are split into groups based on which ones can't overlap.
     // See status.h for which statuses are in each group.
-    /* 0xA8 */ u8 sleep;
-    /* 0xA9 */ u8 sleepTurns;
-    u8 fillAA[0xAC - 0xAA];
-    /* 0xAC */ u8 nonVolatileStatus;
-    /* 0xAD */ u8 nonVolatileStatusTurns;
-    /* 0xAE */ u8 nonVolatileStatusDamageCountdown;
-    u8 fillAF;
-    /* 0xB0 */ u8 immobilizeStatus;
-    u8 fillB1[0xB4 - 0xB1];
-    /* 0xB4 */ s32 unkB4;
-    /* 0xB8 */ u8 immobilizeStatusTurns;
-    /* 0xB9 */ u8 immobilizeStatusDamageCountdown;
-    u8 fillBA[0xBC - 0xBA];
-    /* 0xBC */ u8 volatileStatus;
-    /* 0xBD */ u8 volatileStatusTurns;
-    u8 fillBE[0xC0 - 0xBE];
-    /* 0xC0 */ u8 chargingStatus;
-    /* 0xC1 */ u8 chargingStatusTurns;
-    /* 0xC2 */ u8 chargingStatusMoveIndex; // The position of the move in the Pokémon's moveset that triggered the status.
-    u8 fillC3;
-    /* 0xC4 */ u8 protectionStatus;
-    /* 0xC5 */ u8 protectionStatusTurns;
-    u8 fillC6[0xC8 - 0xC6];
-    /* 0xC8 */ u8 waitingStatus;
-    /* 0xC9 */ bool8 enemyDecoy; // True if the Pokémon is a decoy and a wild Pokémon (i.e., not an allied Pokémon).
-    u8 fillCA;
-    /* 0xCB */ u8 waitingStatusTurns;
-    /* 0xCC */ u8 curseDamageCountdown;
-    u8 fillCD[0xD0 - 0xCD];
-    /* 0xD0 */ u8 linkedStatus;
-    u8 fillD1[0xD4 - 0xD1];
-    /* 0xD4 */ u32 unkD4;
-    /* 0xD8 */ u8 unkD8;
-    /* 0xD9 */ u8 linkedStatusTurns;
-    /* 0xDA */ u8 linkedStatusDamageCountdown;
-    u8 fillDB;
-    /* 0xDC */ u8 moveStatus;
-    /* 0xDD */ u8 moveStatusTurns;
-    u8 fillDE[0xE0 - 0xDE];
-    /* 0xE0 */ u8 itemStatus;
-    u8 fillE1[0xE4 - 0xE1];
-    /* 0xE4 */ u8 transformStatus;
-    /* 0xE5 */ u8 transformStatusTurns;
-    u8 fillE6[0xE8 - 0xE6];
-    /* 0xE8 */ u8 eyesightStatus;
-    /* 0xE9 */ u8 eyesightStatusTurns;
-    /* 0xEA */ u8 unkEA;
-    u8 fillEB;
-    /* 0xEC */ bool8 muzzled;
-    /* 0xED */ u8 muzzledTurns;
-    u8 fillEE[0xF0 - 0xEE];
+    /* 0xA8 */ Sleep sleep;
+    /* 0xAC */ NonVolatile nonVolatile;
+    /* 0xB0 */ Immobilize immobilize;
+    /* 0xBC */ Volatile volatileStatus;
+    /* 0xC0 */ Charging charging;
+    /* 0xC4 */ Protection protection;
+    /* 0xC8 */ Waiting waitingStruct;
+    /* 0xD0 */ Linked linked;
+    /* 0xDC */ MoveStatus moveStatus;
+    /* 0xE0 */ ItemStatus itemStatus;
+    /* 0xE4 */ TransformStatus transformStatus;
+    /* 0xE8 */ EyesightStatus eyesightStatus;
+    /* 0xEC */ Muzzled muzzled;
     /* 0xF0 */ bool8 powerEars;
     /* 0xF1 */ bool8 scanning;
     /* 0xF2 */ bool8 stairSpotter;

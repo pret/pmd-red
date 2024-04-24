@@ -70,7 +70,7 @@ void sub_806CCB4(Entity *entity, u8 a1)
     entity->unk6F = 0;
     sVar1 = entity->unk68;
 
-    if (info->waitingStatus != STATUS_DECOY && !flag)
+    if (info->waitingStruct.waitingStatus != STATUS_DECOY && !flag)
         sub_80053AC(&entity->spriteInfo, entity->sprite, entity->unk6A, entity->direction, sVar1, Rand32Bit() & 3, FALSE);
     else
         sub_80053AC(&entity->spriteInfo, sub_80687D0(MONSTER_DECOY), entity->unk6A, entity->direction, sVar1, Rand32Bit() & 3, FALSE);
@@ -151,15 +151,15 @@ u8 sub_806CEBC(Entity *entity)
     // NOTE: copy needed to match
     entityInfo1 = entity->info;
     entityInfo2 = entity->info;
-    sleep = entityInfo1->sleep;
+    sleep = entityInfo1->sleep.sleep;
 
     if (sleep == STATUS_SLEEP || sleep == STATUS_NAPPING || sleep == STATUS_NIGHTMARE) {
-        if (entityInfo2->apparentID != MONSTER_SUDOWOODO || entityInfo2->sleepTurns != 0x7F)
+        if (entityInfo2->apparentID != MONSTER_SUDOWOODO || entityInfo2->sleep.sleepTurns != 0x7F)
             return 5;
         else
             return 7;
     }
-    if (entityInfo2->chargingStatus == STATUS_BIDE)
+    if (entityInfo2->charging.chargingStatus == STATUS_BIDE)
         return 11;
     return 7;
 }

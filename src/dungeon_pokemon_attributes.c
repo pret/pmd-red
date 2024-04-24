@@ -28,7 +28,7 @@ extern void sub_80522F4(Entity *r1, Entity *r2, u32);
 
 bool8 HasSafeguardStatus(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
-  if (target->info->protectionStatus == STATUS_SAFEGUARD) {
+  if (target->info->protection.protectionStatus == STATUS_SAFEGUARD) {
     if (displayMessage) {
       SetMessageArgument(gAvailablePokemonNames,target,0);
       sub_80522F4(pokemon,target,gUnknown_80FC2FC);
@@ -40,7 +40,7 @@ bool8 HasSafeguardStatus(Entity * pokemon, Entity * target, bool8 displayMessage
 
 bool8 sub_8071728(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
-  if (target->info->protectionStatus == STATUS_MIST) {
+  if (target->info->protection.protectionStatus == STATUS_MIST) {
     if (displayMessage) {
       SetMessageArgument(gAvailablePokemonNames, target, 0);
       sub_80522F4(pokemon, target, gUnknown_80FC31C);
@@ -65,7 +65,7 @@ bool8 sub_80717A4(Entity *pokemon, u16 moveID)
   s32 index;
 
   entityInfo = pokemon->info;
-  if ((entityInfo->sleep != STATUS_SLEEP) && (entityInfo->sleep != STATUS_NAPPING) && (entityInfo->sleep != STATUS_NIGHTMARE)) {
+  if ((entityInfo->sleep.sleep != STATUS_SLEEP) && (entityInfo->sleep.sleep != STATUS_NAPPING) && (entityInfo->sleep.sleep != STATUS_NIGHTMARE)) {
       return FALSE;
   }
   else
@@ -128,7 +128,7 @@ bool8 MonsterIsType(Entity *pokemon, u8 type)
 bool8 CanSeeInvisibleMonsters(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = pokemon->info;
-    if (pokemonInfo->eyesightStatus != STATUS_EYEDROPS)
+    if (pokemonInfo->eyesightStatus.eyesightStatus != STATUS_EYEDROPS)
     {
         if (!HasHeldItem(pokemon, ITEM_GOGGLE_SPECS))
             return FALSE;
@@ -218,7 +218,7 @@ bool8 CanSeeTeammate(Entity * pokemon)
 u8 GetMoveTypeForMonster(Entity *pokemon, Move *pokeMove)
 {
     if (pokeMove->id == MOVE_HIDDEN_POWER)
-        return pokemon->info->hiddenPowerType;
+        return pokemon->info->hiddenPower.hiddenPowerType;
     else
         return GetMoveType(pokeMove);
 }
@@ -226,7 +226,7 @@ u8 GetMoveTypeForMonster(Entity *pokemon, Move *pokeMove)
 s32 GetMovePower(Entity *pokemon, Move *pokeMove)
 {
     if(pokeMove->id == MOVE_HIDDEN_POWER)
-        return (pokemon->info->hiddenPowerBasePower + pokeMove->ginseng);
+        return (pokemon->info->hiddenPower.hiddenPowerBasePower + pokeMove->ginseng);
     else
         return (GetMoveBasePower(pokeMove) + pokeMove->ginseng);
 }
@@ -240,8 +240,8 @@ bool8 ToolboxEnabled(EntityInfo *pokemon)
 
 static inline bool8 sub_8071A8C_sub(EntityInfo *pokemonInfo)
 {
-    if(pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON ||
-        pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
+    if(pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON ||
+        pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
         return TRUE;
     else
         return FALSE;

@@ -203,7 +203,7 @@ extern void sub_804652C(Entity *, Entity *, Item *, u32, Position *);
 extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_8045C28(Item *, u8 , u8);
 extern void sub_805A7D4(Entity *, Entity *, Item *, Position *);
-extern void sub_807EA30(u32);
+extern void MudWaterSportEffect(u32);
 extern void sub_807D148(Entity *pokemon, Entity *target, u32 r2, Position *r3);
 extern void SetMessageArgument_2(u8 *buffer, EntityInfo *r1, u32);
 extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
@@ -380,31 +380,31 @@ bool8 sub_805768C(Entity *pokemon, Entity *target, Move *move, s32 param_4)
     return flag;
 }
 
-bool8 YawnMoveAction(Entity * pokemon, Entity *target)
+bool8 YawnMoveAction(Entity * pokemon, Entity *target, Move *move, s32 param_4)
 {
     YawnedStatusTarget(pokemon, target, CalculateStatusTurns(target,gUnknown_80F4F28,TRUE) + 1);
     return TRUE;
 }
 
-bool8 sub_80576F8(Entity * pokemon, Entity *target)
+bool8 sub_80576F8(Entity * pokemon, Entity *target, Move *move, s32 param_4)
 {
     sub_8075C58(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4E74, TRUE), TRUE);
     return TRUE;
 }
 
-bool8 NightmareMoveAction(Entity * pokemon, Entity *target)
+bool8 NightmareMoveAction(Entity * pokemon, Entity *target, Move *move, s32 param_4)
 {
     NightmareStatusTarget(pokemon, target, CalculateStatusTurns(target,gUnknown_80F4E78,TRUE));
     return TRUE;
 }
 
-bool8 sub_8057748(Entity * pokemon,Entity * target)
+bool8 sub_8057748(Entity * pokemon,Entity * target, Move *move, s32 param_4)
 {
     HealTargetHP(pokemon, target, gUnknown_80F502A[GetApparentWeather(pokemon)], 0, TRUE);
     return TRUE;
 }
 
-bool8 VitalThrowMoveAction(Entity * pokemon, Entity * target)
+bool8 VitalThrowMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
     VitalThrowStatusTarget(pokemon, target);
     return TRUE;
@@ -433,19 +433,19 @@ bool8 DigMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
     return flag;
 }
 
-bool32 sub_8057824(Entity *pokemon, Entity *target)
+bool32 sub_8057824(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
   LowerAccuracyStageTarget(pokemon,target,gUnknown_8106A50,TRUE);
   return TRUE;
 }
 
-bool32 sub_805783C(Entity *pokemon, Entity *target)
+bool32 sub_805783C(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
   ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A4C,0x80,TRUE);
   return TRUE;
 }
 
-bool32 sub_805785C(Entity *pokemon, Entity *target)
+bool32 sub_805785C(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
   gDungeon->unkE26B = gUnknown_80F4F42;
   if (sub_807EAA0(1,0) == 0) {
@@ -455,7 +455,7 @@ bool32 sub_805785C(Entity *pokemon, Entity *target)
   return TRUE;
 }
 
-bool32 sub_80578A4(Entity *pokemon, Entity *target)
+bool32 sub_80578A4(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
   gDungeon->weatherTurns = gUnknown_80F4F42;
   if (sub_807EAA0(1,0) == 0) {
@@ -465,7 +465,7 @@ bool32 sub_80578A4(Entity *pokemon, Entity *target)
   return TRUE;
 }
 
-bool32 sub_80578EC(Entity *pokemon, Entity *target)
+bool32 sub_80578EC(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
     sub_8079F20(pokemon, target, 1, 0);
     return TRUE;
@@ -485,13 +485,13 @@ bool32 sub_80578FC(Entity *pokemon, Entity *target, Move * move, u32 param_4)
   return flag;
 }
 
-bool32 EncoreMoveAction(Entity *pokemon, Entity *target)
+bool32 EncoreMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
     EncoreStatusTarget(pokemon, target);
     return TRUE;
 }
 
-bool32 RageMoveAction(Entity *pokemon, Entity *target, Move *move)
+bool32 RageMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
   // {ARG_POKEMON_0} is enraged
   SetChargeStatusTarget(pokemon,target,STATUS_ENRAGED,move,gUnknown_80FAC88);
@@ -517,7 +517,7 @@ bool32 sub_8057974(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   return local_24;
 }
 
-bool8 PainSplitMoveAction(Entity *pokemon, Entity *target)
+bool8 PainSplitMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
   s32 newHP;
   EntityInfo *iVar2;
@@ -550,7 +550,7 @@ bool8 PainSplitMoveAction(Entity *pokemon, Entity *target)
   return TRUE;
 }
 
-bool8 TormentMoveAction(Entity *pokemon, Entity *target)
+bool8 TormentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
   Move *movePtr;
   s32 iVar4;
@@ -595,8 +595,8 @@ bool8 TormentMoveAction(Entity *pokemon, Entity *target)
   }
   if (isTormented)
   {
-    if(entityInfo->chargingStatus == STATUS_BIDE) {
-        entityInfo->chargingStatus = STATUS_NONE;
+    if(entityInfo->charging.chargingStatus == STATUS_BIDE) {
+        entityInfo->charging.chargingStatus = STATUS_NONE;
     }
   }
   else
@@ -607,13 +607,13 @@ bool8 TormentMoveAction(Entity *pokemon, Entity *target)
   return isTormented;
 }
 
-bool8 sub_8057BB4(Entity *pokemon, Entity *target)
+bool8 sub_8057BB4(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
     LowerMovementSpeedTarget(pokemon, target, 1, TRUE);
     return TRUE;
 }
 
-bool8 sub_8057BC4(Entity *pokemon, Entity *target)
+bool8 sub_8057BC4(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
     ConfuseStatusTarget(pokemon, target, TRUE);
     RaiseAttackStageTarget(pokemon, target, gUnknown_8106A4C, 2);
@@ -639,7 +639,7 @@ bool8 SnoreMoveAction(Entity *pokemon, Entity *target, Move * move, u32 param_4)
   return flag;
 }
 
-bool8 sub_8057C68(Entity *pokemon, Entity *target)
+bool8 sub_8057C68(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
     ChangeDefenseMultiplierTarget(pokemon, target, gUnknown_8106A4C, 0x40, 1);
     return TRUE;
@@ -680,7 +680,7 @@ bool8 WhirlpoolMoveAction(Entity * pokemon, Entity * target, Move * move, u32 pa
   u8 chargeStatus;
 
   flag = FALSE;
-  chargeStatus = target->info->chargingStatus;
+  chargeStatus = target->info->charging.chargingStatus;
   uVar3 = 0x100;
   if (chargeStatus == STATUS_DIVING) {
     uVar3 = 0x200;
@@ -694,13 +694,13 @@ bool8 WhirlpoolMoveAction(Entity * pokemon, Entity * target, Move * move, u32 pa
   return flag;
 }
 
-bool8 sub_8057D7C(Entity * pokemon, Entity * target)
+bool8 sub_8057D7C(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
   LowerDefenseStageTarget(pokemon, target, gUnknown_8106A50, 2, 1, TRUE);
   return TRUE;
 }
 
-NAKED bool8 sub_8057D9C(Entity * pokemon, Entity * target)
+NAKED bool8 sub_8057D9C(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
         asm_unified(
 	"\tpush {r4-r7,lr}\n"
@@ -769,19 +769,19 @@ NAKED bool8 sub_8057D9C(Entity * pokemon, Entity * target)
 "_08057E18: .4byte gUnknown_80FD370");
 }
 
-bool8 FocusEnergyMoveAction(Entity * pokemon, Entity * target)
+bool8 FocusEnergyMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
     FocusEnergyStatusTarget(pokemon, target);
     return TRUE;
 }
 
-bool8 SmokescreenMoveAction(Entity *pokemon, Entity *target)
+bool8 SmokescreenMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
     WhifferStatusTarget(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4EDC, TRUE));
     return TRUE;
 }
 
-bool8 sub_8057E50(Entity *pokemon, Entity *target)
+bool8 sub_8057E50(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
     SendThawedMessage(pokemon, target);
     MirrorMoveStatusTarget(pokemon, target);
@@ -820,7 +820,7 @@ bool8 sub_8057ED0(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   return flag;
 }
 
-bool8 sub_8057F24(Entity *pokemon, Entity *target)
+bool8 sub_8057F24(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
   EntityInfo *entityInfo;
   
@@ -847,14 +847,14 @@ bool8 sub_8057F7C(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   return flag;
 }
 
-bool8 sub_8057FCC(Entity *pokemon, Entity *target)
+bool8 sub_8057FCC(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
     ConfuseStatusTarget(pokemon, target, TRUE);
     RaiseAttackStageTarget(pokemon, target, gUnknown_8106A50, 1);
     return TRUE;
 }
 
-bool8 sub_8057FF4(Entity *pokemon, Entity *target)
+bool8 sub_8057FF4(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
   u8 flashFireStatus;
   
@@ -907,7 +907,7 @@ _080580B0:
   return local_24;
 }
 
-bool8 GrudgeMoveAction(Entity *pokemon, Entity * target)
+bool8 GrudgeMoveAction(Entity *pokemon, Entity * target, Move *move, s32 param_4)
 {
   EntityInfo *entityInfo;
   bool8 hasGrudge;
@@ -926,7 +926,7 @@ bool8 GrudgeMoveAction(Entity *pokemon, Entity * target)
   return hasGrudge;
 }
 
-bool8 sub_805815C(Entity *pokemon, Entity *target)
+bool8 CounterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
     CounterStatusTarget(pokemon, target, STATUS_COUNTER);
     return TRUE;
@@ -984,7 +984,7 @@ bool8 sub_8058270(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   u32 r3;
 
   r3 = 1;
-  if((u8)(target->info->chargingStatus - 7) <= 1)
+  if((u8)(target->info->charging.chargingStatus - 7) <= 1)
     r3 = 2;
   flag =  sub_8055640(pokemon,target,move,r3 << 8,param_4) ? TRUE : FALSE;
   return flag;
@@ -1117,7 +1117,7 @@ bool8 sub_8058548(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   u32 r5;
 
   r5 = 0x80 << 1;
-  if((pokemon->info->nonVolatileStatus) != STATUS_NONE)
+  if((pokemon->info->nonVolatile.nonVolatileStatus) != STATUS_NONE)
     r5 = gUnknown_80F4F6C;
   flag =  sub_8055640(pokemon,target,move,r5,param_4) ? TRUE : FALSE;
   return flag;
@@ -1138,13 +1138,13 @@ bool8 sub_8058580(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   return flag;
 }
 
-bool8 sub_80585CC(Entity *pokemon, Entity *target, Move *move, u32 param_4)
+bool8 BrickBreakMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
   
   flag = FALSE;
-  if ((target->info->protectionStatus == STATUS_REFLECT) || (target->info->protectionStatus == STATUS_LIGHT_SCREEN)) {
-    sub_80522F4(pokemon,target,*gUnknown_80FD104);
+  if ((target->info->protection.protectionStatus == STATUS_REFLECT) || (target->info->protection.protectionStatus == STATUS_LIGHT_SCREEN)) {
+    sub_80522F4(pokemon,target,*gUnknown_80FD104); // The barrier was shattered
     SendProtectionEndMessage(pokemon,target);
     flag = TRUE;
   }
@@ -1259,7 +1259,7 @@ bool8 sub_80587E8(Entity * pokemon, Entity * target, Move * move, u32 param_4)
 {
   bool8 flag;
   
-  if (target->info->nonVolatileStatus == STATUS_PARALYSIS) {
+  if (target->info->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS) {
     flag = sub_8055640(pokemon,target,move,0x80 << 2,param_4) ? TRUE : FALSE;
     SendNonVolatileEndMessage(pokemon, target);
   }
@@ -1627,7 +1627,7 @@ bool32 sub_8058F04(Entity *pokemon, Entity *target, Move *move, s32 param_4)
   iVar3 = 1;
   gDungeon->unk18200 = 0xc;
   gDungeon->unk18204 = 0;
-  if (entityInfo->chargingStatus == STATUS_DIGGING) {
+  if (entityInfo->charging.chargingStatus == STATUS_DIGGING) {
     iVar3 = 2;
   }
   flag = sub_8055640(pokemon,target,move,iVar3 << 8,param_4);
@@ -1829,7 +1829,7 @@ bool8 SkillSwapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param
 
 // https://decomp.me/scratch/Ul8x5 
 #ifdef NONMATCHING
-bool32 SketchMoveAction(struct Entity *pokemon, struct Entity *target, struct Move *move)
+bool32 SketchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
   u16 moveID;
   struct EntityInfo *targetInfo;
@@ -1879,7 +1879,7 @@ _moveIDcheck:
 
 #else
 NAKED
-bool32 SketchMoveAction(struct Entity *pokemon, struct Entity *target, struct Move *move)
+bool32 SketchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
     asm_unified(
 	"\tpush {r4-r7,lr}\n"
@@ -2210,7 +2210,7 @@ bool8 sub_8059928(Entity * pokemon,Entity * target,Move * move,u32 param_4)
   
   iVar2 = 1;
   flag = FALSE;
-  if ((u8)(target->info->chargingStatus - 7) <= 1){
+  if ((u8)(target->info->charging.chargingStatus - 7) <= 1){
       iVar2 = 2;
   }
   if (sub_8055640(pokemon,target,move,iVar2 << 8,param_4) != 0)
@@ -2616,7 +2616,7 @@ bool8 sub_805A120(Entity * pokemon,Entity * target, Move *move, u32 param_4)
 
         if (flag)
         {
-                sub_80522F4(pokemon,target,*gUnknown_80FC7AC);   
+                sub_80522F4(pokemon,target,*gUnknown_80FC7AC); // The item trade failed
                 return FALSE;
         }
         else
@@ -2629,7 +2629,7 @@ bool8 sub_805A120(Entity * pokemon,Entity * target, Move *move, u32 param_4)
             if (r7->unkFB == 0) {
                 r7->unkFB = 1;
             }
-            sub_80522F4(pokemon,target,*gUnknown_80FC790);
+            sub_80522F4(pokemon,target,*gUnknown_80FC790); // Traded items
             return TRUE;
         }
     }
@@ -2644,15 +2644,15 @@ bool8 sub_805A210(Entity * pokemon, Entity * target, Move *move, u32 param_4)
     return flag;
 }
 
-bool8 sub_805A23C(Entity * pokemon, Entity * target, Move *move, u32 param_4)
+bool8 MudWaterSportMoveAction(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
     if(move->id == MOVE_MUD_SPORT)
     {
-        sub_807EA30(0);
+        MudWaterSportEffect(0);
     }
     else
     {
-        sub_807EA30(1);
+        MudWaterSportEffect(1);
     }
     return TRUE;
 }
@@ -2696,7 +2696,7 @@ bool8 SurfMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   u32 uVar2;
   
   flag = FALSE;
-  if (target->info->chargingStatus == STATUS_DIVING) {
+  if (target->info->charging.chargingStatus == STATUS_DIVING) {
       uVar2 = 0x200;
   }
   else
@@ -3202,7 +3202,7 @@ bool8 sub_805AD34(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 
 static inline bool8 sub_805AD54_sub(Entity *entity)
 {
-    if ((entity->info->joinedAt == 0x4A) || (entity->info->joinedAt == 0x47)) {
+    if ((entity->info->joinedAt.joinedAt == 0x4A) || (entity->info->joinedAt.joinedAt == 0x47)) {
         return TRUE;
     }
     else {

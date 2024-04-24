@@ -21,13 +21,13 @@ bool8 CannotMove(Entity *pokemon, bool8 checkBlinker)
 {
     EntityInfo *pokemonInfo = pokemon->info;
 
-    if ((checkBlinker && pokemonInfo->eyesightStatus == STATUS_BLINKER)
-        || pokemonInfo->sleep == STATUS_SLEEP
-        || pokemonInfo->sleep == STATUS_NAPPING
-        || pokemonInfo->sleep == STATUS_NIGHTMARE
-        || pokemonInfo->volatileStatus == STATUS_PAUSED
-        || pokemonInfo->volatileStatus == STATUS_INFATUATED
-        || pokemonInfo->immobilizeStatus == STATUS_PETRIFIED)
+    if ((checkBlinker && pokemonInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER)
+        || pokemonInfo->sleep.sleep == STATUS_SLEEP
+        || pokemonInfo->sleep.sleep == STATUS_NAPPING
+        || pokemonInfo->sleep.sleep == STATUS_NIGHTMARE
+        || pokemonInfo->volatileStatus.volatileStatus == STATUS_PAUSED
+        || pokemonInfo->volatileStatus.volatileStatus == STATUS_INFATUATED
+        || pokemonInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED)
         return TRUE;
 
     if (pokemonInfo->terrifiedTurns != 0)
@@ -41,34 +41,34 @@ bool8 sub_8070BC0(Entity* entity)
     EntityInfo *entityInfo = entity->info;
 
     if (IsCharging(entity, FALSE)
-        || entityInfo->sleep == STATUS_YAWNING
-        || entityInfo->sleep == STATUS_NIGHTMARE
+        || entityInfo->sleep.sleep == STATUS_YAWNING
+        || entityInfo->sleep.sleep == STATUS_NIGHTMARE
         || ShouldMonsterRunAway(entity)
-        || entityInfo->muzzled == TRUE
-        || entityInfo->immobilizeStatus == STATUS_PETRIFIED
-        || entityInfo->immobilizeStatus == STATUS_FROZEN)
+        || entityInfo->muzzled.muzzled == TRUE
+        || entityInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED
+        || entityInfo->immobilize.immobilizeStatus == STATUS_FROZEN)
         return FALSE;
 
-    if (entityInfo->volatileStatus == STATUS_CONFUSED)
+    if (entityInfo->volatileStatus.volatileStatus == STATUS_CONFUSED)
         return FALSE;
-    if (entityInfo->sleep == STATUS_SLEEP)
+    if (entityInfo->sleep.sleep == STATUS_SLEEP)
         return FALSE;
-    if (entityInfo->transformStatus == STATUS_INVISIBLE
-        || entityInfo->sleep == STATUS_NAPPING)
+    if (entityInfo->transformStatus.transformStatus == STATUS_INVISIBLE
+        || entityInfo->sleep.sleep == STATUS_NAPPING)
         return FALSE;
-    if (entityInfo->volatileStatus == STATUS_CRINGE)
+    if (entityInfo->volatileStatus.volatileStatus == STATUS_CRINGE)
         return FALSE;
-    if (entityInfo->immobilizeStatus == STATUS_WRAP)
+    if (entityInfo->immobilize.immobilizeStatus == STATUS_WRAP)
         return FALSE;
-    if (entityInfo->immobilizeStatus == STATUS_WRAPPED
-        || entityInfo->eyesightStatus == STATUS_CROSS_EYED)
+    if (entityInfo->immobilize.immobilizeStatus == STATUS_WRAPPED
+        || entityInfo->eyesightStatus.eyesightStatus == STATUS_CROSS_EYED)
         return FALSE;
-    if (entityInfo->waitingStatus == STATUS_DECOY)
+    if (entityInfo->waitingStruct.waitingStatus == STATUS_DECOY)
         return FALSE;
-    if (entityInfo->eyesightStatus == STATUS_BLINKER)
+    if (entityInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER)
         return FALSE;
-    if (entityInfo->volatileStatus != STATUS_INFATUATED
-        && entityInfo->volatileStatus != STATUS_PAUSED)
+    if (entityInfo->volatileStatus.volatileStatus != STATUS_INFATUATED
+        && entityInfo->volatileStatus.volatileStatus != STATUS_PAUSED)
         return TRUE;
         
     return FALSE;
@@ -76,9 +76,9 @@ bool8 sub_8070BC0(Entity* entity)
 
 static inline bool8 JoinLocationCannotUseItems(EntityInfo *pokemonInfo)
 {
-    if (pokemonInfo->joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
         return TRUE;
-    if (pokemonInfo->joinedAt == DUNGEON_RESCUE_TEAM_BASE)
+    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
         return TRUE;
     return FALSE;
 }
@@ -104,13 +104,13 @@ bool8 HasStatusThatPreventsActing(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = pokemon->info;
 
-    if ((pokemonInfo->sleep != STATUS_SLEEPLESS
-        && pokemonInfo->sleep != STATUS_NONE)
-        || pokemonInfo->immobilizeStatus == STATUS_FROZEN
-        || pokemonInfo->immobilizeStatus == STATUS_PETRIFIED)
+    if ((pokemonInfo->sleep.sleep != STATUS_SLEEPLESS
+        && pokemonInfo->sleep.sleep != STATUS_NONE)
+        || pokemonInfo->immobilize.immobilizeStatus == STATUS_FROZEN
+        || pokemonInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED)
         return TRUE;
 
-    if (pokemonInfo->chargingStatus == STATUS_BIDE)
+    if (pokemonInfo->charging.chargingStatus == STATUS_BIDE)
         return TRUE;
 
     return FALSE;
@@ -121,17 +121,17 @@ bool8 CannotAttack(Entity *pokemon, bool8 skipSleep)
   EntityInfo *pokemonInfo = pokemon->info;
 
   if ((skipSleep ||
-      pokemonInfo->sleep == STATUS_SLEEPLESS ||
-      pokemonInfo->sleep == STATUS_YAWNING ||
-      pokemonInfo->sleep == STATUS_NONE) &&
-      pokemonInfo->immobilizeStatus != STATUS_FROZEN &&
-      pokemonInfo->immobilizeStatus != STATUS_WRAP &&
-      pokemonInfo->immobilizeStatus != STATUS_WRAPPED &&
-      pokemonInfo->immobilizeStatus != STATUS_PETRIFIED &&
-      pokemonInfo->volatileStatus != STATUS_CRINGE &&
-      pokemonInfo->volatileStatus != STATUS_PAUSED &&
-      pokemonInfo->volatileStatus != STATUS_INFATUATED &&
-      pokemonInfo->nonVolatileStatus != STATUS_PARALYSIS &&
+      pokemonInfo->sleep.sleep == STATUS_SLEEPLESS ||
+      pokemonInfo->sleep.sleep == STATUS_YAWNING ||
+      pokemonInfo->sleep.sleep == STATUS_NONE) &&
+      pokemonInfo->immobilize.immobilizeStatus != STATUS_FROZEN &&
+      pokemonInfo->immobilize.immobilizeStatus != STATUS_WRAP &&
+      pokemonInfo->immobilize.immobilizeStatus != STATUS_WRAPPED &&
+      pokemonInfo->immobilize.immobilizeStatus != STATUS_PETRIFIED &&
+      pokemonInfo->volatileStatus.volatileStatus != STATUS_CRINGE &&
+      pokemonInfo->volatileStatus.volatileStatus != STATUS_PAUSED &&
+      pokemonInfo->volatileStatus.volatileStatus != STATUS_INFATUATED &&
+      pokemonInfo->nonVolatile.nonVolatileStatus != STATUS_PARALYSIS &&
       !ShouldMonsterRunAway(pokemon))
       return FALSE;
 
@@ -149,7 +149,7 @@ bool8 CanMoveInDirection(Entity *pokemon, u32 direction)
 
     if (!IsCurrentFixedRoomBossFight())
     {
-        if (pokemon->info->transformStatus == STATUS_MOBILE || HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
+        if (pokemon->info->transformStatus.transformStatus == STATUS_MOBILE || HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
             crossableTerrain = CROSSABLE_TERRAIN_WALL;
         else if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
             crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
