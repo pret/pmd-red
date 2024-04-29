@@ -251,10 +251,11 @@ $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_ewram2.ld
 
 $(ELF): $(LD_SCRIPT) $(ALL_OBJECTS) $(LIBC) libagbsyscall tools
 	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) -o ../../$@ $(LIB)
+	$(GBAFIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
 $(ROM): %.gba: $(ELF)
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0xA000000 $< $@
-	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
+	$(GBAFIX) $@ -p --silent
 
 ifeq (,$(filter clean,$(MAKECMDGOALS)))
 -include $(ALL_OBJECTS:.o=.d)
