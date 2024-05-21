@@ -110,6 +110,15 @@ Entity *sub_8045684(u8, Position *, u8);
 extern void sub_807D148(Entity *pokemon, Entity *target, u32 r2, Position *r3);
 extern void sub_807DF38(Entity *pokemon, Entity *target, Position *pos, u32, u8 moveType, s16);
 
+void sub_807FC3C(Position *pos, u32 trapID, u32 param_3)
+{
+  gDungeon->trapPos.x = pos->x;
+  gDungeon->trapPos.y = pos->y;
+  gDungeon->trapID = trapID;
+  gDungeon->unk13579 = param_3;
+  gDungeon->unk13570 = 1;
+}
+
 bool8 CanLayTrap(Position *pos)
 {
     struct Tile *tile = GetTileSafe(pos->x, pos->y);
