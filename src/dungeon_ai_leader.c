@@ -79,7 +79,6 @@ void HandlePickUpAIAction(Entity *pokemon);
 void HandleThrowItemAIAction(Entity *pokemon);
 void HandleEatAIAction(Entity *pokemon);
 bool8 sub_8044B84(void);
-void sub_8046D20(void);
 extern void sub_8074094(Entity *);
 extern void sub_8071DA4(Entity *);
 extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, Position *r3);

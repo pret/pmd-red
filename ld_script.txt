@@ -221,7 +221,7 @@ SECTIONS {
         src/code_8048480.o(.text);
         src/dungeon_ai_item_weight.o(.text);
         src/dungeon_map_access.o(.text);
-        asm/code_80495E4.o(.text);
+        asm/dungeon_map_access.o(.text);
         src/dungeon_map_access_1.o(.text);
         src/tile_types.o(.text);
         asm/code_804AFAC.o(.text);

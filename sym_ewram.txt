@@ -122,12 +122,7 @@ gUnknown_202D2A0: /* 202D2A0 (sub_8009A1C - sub_8009BE4) */
     .include "src/file_system.o"
     .include "src/decompress.o"
     .include "src/main.o"
-
-gUnknown_202D608: /* 202D608 (sub_800B720 - VBlankIntr) */
-	.space 0x40
-gUnknown_202D648: /* 202D648 (VBlankIntr - VCountIntr) */
-	.space 0x40
-
+    .include "src/reg_control.o"
     .include "src/music.o"
     .space 0x3
 
@@ -182,17 +177,10 @@ gUnknown_202DE18: /* 202DE18 (sub_800F990 - sub_8010014) */
 gUnknown_202DE19: /* 202DE19 (sub_800F990 - sub_8010014) */
 	.space 0x3
 
-gUnknown_202DE1C: /* 202DE1C (sub_801180C - sub_8011A2C) */
-	.space 0x4
-gUnknown_202DE20: /* 202DE20 (sub_801180C - PlayMenuSoundEffect) */
-	.space 0x2
-gUnknown_202DE22: /* 202DE22 (sub_801180C - sub_8011A04) */
-	.space 0x2
-gUnknown_202DE24: /* 202DE24 (sub_801180C - sub_8011860) */
-	.space 0x4
+    .include "src/code_80118A4.o"
+    .space 0x2
 
-gUnknown_202DE28: /* 202DE28 (sub_8011C34 - sub_8011C40) */
-	.space 0x4
+    .include "src/save.o"
 	.align 4
 
 /* gUnknown_202DE30[0] seems to be the s32 value to insert in place of "$d0" (ARG_VALUE_0) in strings */
@@ -516,14 +504,7 @@ gUnknown_202F32D: /* 202F32D (sub_8072CF4 - UseAttack) */
 gUnknown_202F378: /* 202F378 (sub_8074FB0 - UseAttack) */
 	.space 0x8
 
-gCanAttackInDirection: /* 202F380 (AIConsiderMove - TryAddTargetToAITargetList) */
-	.space 0x8
-gPotentialAttackTargetDirections: /* 202F388 (AIConsiderMove - TryAddTargetToAITargetList) */
-	.space 0x8
-gPotentialAttackTargetWeights: /* 202F390 (AIConsiderMove - TryAddTargetToAITargetList) */
-	.space 0x20
-gPotentialTargets: /* 202F3B0 (AIConsiderMove - TryAddTargetToAITargetList) */
-	.space 0x20
+    .include "src/dungeon_ai_attack.o"
 
 gUnknown_202F3D0: /* 202F3D0 (sub_80867F4 - sub_8086854) */
 	.space 0x8

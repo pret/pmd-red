@@ -32,10 +32,11 @@ extern struct UnkBgStruct *gUnknown_203B0E4;
 
 
 extern const u16 gUnknown_80D4144[8];
-EWRAM_DATA u32 gUnknown_202DE1C;
-EWRAM_DATA s16 gUnknown_202DE20;
-EWRAM_DATA s16 gUnknown_202DE22;
-EWRAM_DATA s16 gUnknown_202DE24;
+
+EWRAM_DATA u32 gUnknown_202DE1C = {0};
+EWRAM_DATA s16 gUnknown_202DE20 = {0};
+EWRAM_DATA s16 gUnknown_202DE22 = {0};
+EWRAM_DATA s16 gUnknown_202DE24 = {0};
 
 void nullsub_8(u32);
 extern void xxx_call_update_bg_vram(void);

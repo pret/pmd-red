@@ -3,6 +3,7 @@
 #include "code_80869E4.h"
 #include "constants/direction.h"
 #include "structs/str_dungeon.h"
+#include "dungeon_util.h"
 #include "dungeon_util_1.h"
 #include "random.h"
 
@@ -27,12 +28,9 @@ extern void DisplayDungeonDialogue(const u8 *);
 
 extern void sub_8085EB0(void);
 extern void sub_803E748(void);
-extern void sub_80855E4(void *);
 extern s32 GetCameraXPos(void);
 extern s32 GetCameraYPos(void);
 extern void sub_803F878(u32, u32);
-extern void IncreaseEntityPixelPos(Entity *, u32, u32);
-extern void sub_804535C(Entity *, Position32 *);
 extern void sub_8086A54(Entity *);
 extern void sub_8086A3C(Entity *);
 extern void PlaySoundEffect(u32);

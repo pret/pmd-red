@@ -5,6 +5,7 @@
 #include "constants/status.h"
 #include "constants/type.h"
 #include "constants/weather.h"
+#include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
@@ -41,7 +42,6 @@ extern bool8 sub_8045888(Entity *);
 extern void sub_806A2BC(Entity *, u8);
 extern void sub_804178C(u32);
 extern void sub_803F508(Entity *);
-extern void sub_804AC20(Position *);
 extern void sub_803E46C(u32);
 extern void sub_803E708(u32 r0, u32 r1);
 

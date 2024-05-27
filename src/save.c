@@ -12,6 +12,8 @@
 #include "random.h"
 #include "save.h"
 
+EWRAM_DATA s32 gUnknown_202DE28 = {0};
+
 EWRAM_DATA_2 u32 gUnknown_203B17C = {0};
 EWRAM_DATA_2 char *gUnknown_203B180 = {0};
 EWRAM_DATA_2 struct UnkStruct_203B184 *gUnknown_203B184 = {0};
@@ -28,17 +30,12 @@ struct unk_struct
     u32 padding[503];
 };
 
-
-extern s32 gUnknown_202DE28;
-extern u32 *gUnknown_203B488;
-
 ALIGNED(4) static const char debug_fill8[] = "pksdir0";
 ALIGNED(4) const char sGameInternalVersion[] = _("POKE_DUNGEON__05");
 
 ALIGNED(4) static const char fill_save0[] = _("pksdir0");
 ALIGNED(4) static const char fill_save1[] = _("pksdir0");
 ALIGNED(4) static const char fill_save2[] = _("pksdir0");
-
 
 extern bool8 sub_800DAB0(u16, u8*, s32);
 extern bool8 sub_800DAB4(u16, u8*, s32);

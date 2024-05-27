@@ -187,19 +187,15 @@ extern u8 gUnknown_202F218;
 extern u32 gUnknown_202F21C;
 extern bool8 gUnknown_202F220;
 
-extern void sub_804535C(Entity *, u32);
-extern void sub_804AC20(Position *);
 extern void sub_806A5B8(Entity *entity);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 void sub_8075900(Entity *pokemon, u8 r1);
 extern void sub_80943A0(void*, s32);
 extern u8 sub_8044B28(void);
 extern u8 sub_803F428(Position *pos);
-extern void IncreaseEntityPixelPos(Entity *, u32, u32);
 extern void sub_803E46C(u32);
 extern void sub_807EC28(bool8);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-extern void SetEntityPixelPos(Entity *, s32, s32);
 extern void sub_804652C(Entity *, Entity *, Item *, u32, Position *);
 extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_8045C28(Item *, u8 , u8);
@@ -3070,7 +3066,7 @@ _0805AA5E:
 #else
       Position *pos;
 #endif
-      sub_804535C(target, 0);
+      sub_804535C(target, NULL);
       pos = r9;
       if (sub_80706A4(target, pos)) {
         sub_807D148(pokemon,target,0,0);

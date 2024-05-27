@@ -17,14 +17,12 @@
 extern u8 sub_8044B28(void);
 extern u8 gUnknown_202E038[];
 extern void sub_8085374();
-extern void sub_80855E4(void *);
 extern void sub_8068FE0(Entity *, u32, u32);
 extern void DisplayDungeonDialogue(const u8 *);
 extern void sub_803E708(u32, u32);
 extern void sub_8086448(void);
 extern void SkarmoryEntry(Entity *);
 extern void sub_8086A54(Entity *);
-extern void sub_808563C(void *);
 extern void sub_8087144();
 extern void sub_8072008(Entity *pokemon, Entity *r1, u32 r2, u8 r3, u32);
 extern bool8 sub_8085B80(u8 *);
