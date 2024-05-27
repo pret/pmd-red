@@ -13,5 +13,6 @@ typedef struct unkStruct_811BAF4
 
 bool8 sub_8098F88(void);
 const char *sub_8098FB4(void);
+bool8 GroundMainGroundRequest(s16 r0, u32 r1, s32 r2);
 
 #endif // GUARD_GROUND_MAIN_H

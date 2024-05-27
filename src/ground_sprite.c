@@ -8,6 +8,8 @@
 #include "memory.h"
 #include "sprite.h"
 
+IWRAM_DATA unkStruct_3001B7C *gUnknown_3001B7C = {0};
+
 extern unkStruct_2039DB0 gUnknown_2039DB0;
 extern unkStruct_2039DB0 gUnknown_2039DC0;
 extern u16 gUnknown_2039DCC;
@@ -15,7 +17,6 @@ extern u16 gUnknown_2039DCE;
 extern u8 gUnknown_2039DD0;
 extern u32 gUnknown_2039DD4;
 extern OpenedFile *gUnknown_203B4B4;
-extern unkStruct_3001B7C *gUnknown_3001B7C;
 
 // dungeon_sbin.s
 extern const struct FileArchive gDungeonFileArchive;

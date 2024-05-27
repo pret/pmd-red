@@ -18,8 +18,8 @@
 #include "pokemon_3.h"
 #include "pokemon.h"
 #include "position_util.h"
-#include "structs/dungeon_entity.h"
-#include "structs/str_dungeon.h"
+#include "exclusive_pokemon.h"
+#include "trap.h"
 
 extern u32 gUnknown_202EDC8;
 extern u8 gUnknown_202E038[0x50];
@@ -457,7 +457,6 @@ extern void sub_8046860(Entity *, Position *, Item *, u32);
 extern u32 sub_803D73C(u32);
 
 extern void sub_80460F8(Position *, Item *, u8);
-extern void sub_807FE04(Position *, u8);
 
 void ZapdosReFightDialogue(void)
 {

@@ -1,4 +1,6 @@
 #include "global.h"
+#include "structs/dungeon_entity.h"
+#include "structs/map.h"
 #include "trap.h"
 #include "code_806CD90.h"
 #include "code_8092334.h"
@@ -10,7 +12,7 @@
 extern u8 gUnknown_81071E0[];
 extern u8 gUnknown_81071D4[];
 
-extern void sub_8082FA8(void *, void *, u32);
+extern void sub_8082FA8(unkStruct_8094924 *, void *, s32);
 
 void sub_8081B60(void *, Tile *);
 void sub_80830F8(void * , u32*);
@@ -70,27 +72,27 @@ void sub_803E708(u32, u32);
 void sub_80421C0(Entity *, u32);
 void sub_804687C(Entity *, Position *, Position *, Item *, u32);
 
-void HandleTripTrap(Entity *param_1, Entity *param_2)
+void HandleTripTrap(Entity *pokemon, Entity *target)
 {
     u32 direction;
     EntityInfo *info;
     Position pos;
     Item item;
 
-    if (param_2 != NULL) {
-        sub_806CDD4(param_2, 6, NUM_DIRECTIONS);
+    if (target != NULL) {
+        sub_806CDD4(target, 6, NUM_DIRECTIONS);
         sub_803E708(0x10, 0x55);
-        sub_806CE68(param_2, NUM_DIRECTIONS);
-        info = param_2->info;
+        sub_806CE68(target, NUM_DIRECTIONS);
+        info = target->info;
         if ((info->heldItem).flags & ITEM_FLAG_EXISTS) {
             item =  (info->heldItem);
             (info->heldItem).flags = 0;
             FillInventoryGaps();
-            sub_80421C0(param_2, 400);
+            sub_80421C0(target, 400);
             direction = (info->action).direction & DIRECTION_MASK;
-            pos.x = (param_2->pos).x + gAdjacentTileOffsets[direction].x;
-            pos.y =  (param_2->pos).y + gAdjacentTileOffsets[direction].y;
-            sub_804687C(param_1, &param_2->pos, &pos, &item, 1);
+            pos.x = (target->pos).x + gAdjacentTileOffsets[direction].x;
+            pos.y =  (target->pos).y + gAdjacentTileOffsets[direction].y;
+            sub_804687C(pokemon, &target->pos, &pos, &item, 1);
         }
     }
 }

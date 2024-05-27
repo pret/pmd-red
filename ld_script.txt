@@ -316,6 +316,7 @@ SECTIONS {
         src/code_809447C.o(.text);
         src/code_8092334.o(.text);
         src/game_options.o(.text);
+        src/code_8094D28.o(.text);
         asm/code_8094D28.o(.text);
         src/play_time.o(.text);
         src/code_8094F88.o(.text);
@@ -340,6 +341,7 @@ SECTIONS {
         asm/code_8098BDC.o(.text);
         src/code_809A560.o(.text);
         asm/code_809A560.o(.text);
+        src/code_809A560_1.o(.text);
         src/code_809C5C4.o(.text);
         asm/code_809C5C4.o(.text);
         src/code_809D148.o(.text);

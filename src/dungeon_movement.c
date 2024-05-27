@@ -16,7 +16,7 @@
 #include "pokemon.h"
 #include "weather.h"
 
-extern u8 gWalkableTileToCrossableTerrain[8];
+EWRAM_DATA u8 gWalkableTileToCrossableTerrain[8] = {0};
 
 u8 GetCrossableTerrain(s16 species)
 {

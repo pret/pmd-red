@@ -214,7 +214,6 @@ extern u8 sub_806F4A4(Entity *, u32);
 extern void sub_807DF38(Entity *pokemon, Entity *target, Position *pos, u32, u8 moveType, s16);
 extern void nullsub_92(Entity *);
 extern u32 sub_8055864(Entity *pokemon, Entity *target, Move *param_3, s32 param_4, s32 param_5);
-void sub_8079E34(Entity * pokemon, Entity * target, bool8 param_3);
 extern u8 sub_807EAA0(u32, u32);
 extern void sub_80522F4(Entity *r1, Entity *r2, const char[]);
 extern s32 sub_80556BC(Entity *, Entity *, u8, Move *, u32, u32);

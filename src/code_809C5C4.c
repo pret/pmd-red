@@ -23,7 +23,7 @@ struct unkStruct_3001B68
      u8  unk20;   
 };
 
-extern struct unkStruct_3001B68 *gUnknown_3001B68;
+IWRAM_DATA struct unkStruct_3001B68 *gUnknown_3001B68 = {0};
 
 
 struct unkStruct_20399E0

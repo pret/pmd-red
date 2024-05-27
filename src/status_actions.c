@@ -51,7 +51,6 @@ extern void sub_8049BB0(s32, s32);
 extern s16 sub_8057600(Move*, u32);
 extern u32 sub_8055864(Entity *pokemon, Entity *target, Move *param_3, s32 param_4, s32 param_5);
 extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, Position *r3);
-extern void sub_807FE04(Position *, u32);
 extern void sub_807DB74(Entity *);
 extern void HandleLuminousOrbAction(Entity *pokemon);
 extern void sub_807D510(Entity *, Entity *);

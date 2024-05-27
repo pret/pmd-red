@@ -141,8 +141,8 @@ gBldCnt: /* 202D7FC (AgbMain - VBlank_CB) */
 gUnknown_202D7FE: /* 202D7FE (AgbMain - sub_800CD64) */
 	.space 0x2
 
-gUnknown_202D800: /* 202D800 (sub_800CDA8 - sub_800CDC8) */
-	.space 0x8
+    .include "src/cpu.o"
+	.space 0x4
 
 gUnknown_202D808: /* 202D808 (sub_800D2EC - sub_800D59C) */
 	.space 0x108
@@ -362,14 +362,7 @@ gUnknown_202EE70: /* 202EE70 (sub_804513C - sub_80828E0) */
 gUnknown_202EE76: /* 202EE76 (sub_804513C - sub_8082A08) */
 	.space 0x12
 
-gDungeonPaletteFile: /* 202EE88 (sub_803E874 - SetDungeonBGColorRGB) */
-	.space 0x4
-gUnknown_202EE8C: /* 202EE8C (sub_803E490 - SetDungeonBGColorRGB) */
-	.space 0x300
-gUnknown_202F18C: /* 202F18C (LoadDungeonTilesetAssets - sub_8049820) */
-	.space 0x4
-gUnknown_202F190: /* 202F190 (GetTileSafe) */
-	.space 0x18
+    .include "src/dungeon_map_access.o"
 
 gUnknown_202F1A8: /* 202F1A8 (sub_8043CE4 - sub_8051A74) */
 	.space 0x1
@@ -506,8 +499,7 @@ gUnknown_202F30C: /* 202F30C (sub_8067A80 - sub_8067A80) */
 gUnknown_202F310: /* 202F310 (sub_8067A80 - sub_8068310) */
 	.space 0x4
 
-gWalkableTileToCrossableTerrain: /* 202F314 (LoadDungeonTilesetAssets - GetCrossableTerrain) */
-	.space 0x8
+    .include "src/dungeon_movement.o"
 
 gUnknown_202F31C: /* 202F31C (sub_80723D0 - sub_80725A4) */
 	.space 0x8
@@ -519,12 +511,7 @@ gUnknown_202F32C: /* 202F32C (xxx_dungeon_8042F6C - sub_8072CF4) */
 gUnknown_202F32D: /* 202F32D (sub_8072CF4 - UseAttack) */
 	.space 0x3
 
-gPotentialItemTargetDirections: /* 202F330 (DecideUseItem - TargetThrownItem) */
-	.space 0x20
-gTargetAhead: /* 202F350 (FindStraightThrowableTargets - TargetThrownItem) */
-	.space 0x8
-gPotentialItemTargetWeights: /* 202F358 (DecideUseItem - TargetThrownItem) */
-	.space 0x20
+    .include "src/dungeon_ai_items.o"
 
 gUnknown_202F378: /* 202F378 (sub_8074FB0 - UseAttack) */
 	.space 0x8

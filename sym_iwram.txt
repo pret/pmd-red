@@ -14,8 +14,7 @@ gUnknown_3000E94: /* 3000E94 */
 gUnknown_3001018: /* 3001018 */
 	.space 0x180
 
-gUnknown_3001198: /* 3001198 */
-	.space 0x9C0
+.include "src/code_8094D28.o"
 
 iwramClearEnd:
 unk_code_ram: /* 3001B58 */
@@ -28,18 +27,11 @@ gUnknown_3001B5A: /* 3001B5A */
 
 .include "src/code_8023144.o"
 .include "src/code_8023868.o"
-
-gUnknown_3001B64: /* 3001B64 */
-	.space 0x4
-
-gUnknown_3001B68: /* 3001B68 */
-	.space 0x4
-
+.include "src/code_809A560.o"
+.include "src/code_809C5C4.o"
 .include "src/ground_map.o"
 .include "src/ground_map_2.o"
-
-gUnknown_3001B7C: /* 3001B7C */
-	.space 0x4
+.include "src/ground_sprite.o"
 
 gUnknown_3001B80: /* 3001B80 */
 	.space 0x4

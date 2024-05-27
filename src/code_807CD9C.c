@@ -20,7 +20,7 @@ extern void sub_80426C8(u32, u32);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
 extern void nullsub_93(Position *);
 extern void sub_80522F4(Entity *, Entity *, u8 *);
-extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
+extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 extern void sub_804535C(Entity *, u32);
 extern void sub_804AC20(Position *);
@@ -35,7 +35,7 @@ extern u8 *gUnknown_80F9CBC[];
 extern u8 gAvailablePokemonNames[];
 extern u8 *gUnknown_80FCAC0[];
 
-void sub_807E1A0(Entity *pokemon,Entity *target,u8 param_3,s16 param_4,s32 param_5)
+void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s16 param_4,s32 param_5)
 {
   EntityInfo *targetInfo;
   u8 flag;
@@ -65,7 +65,7 @@ void sub_807E1A0(Entity *pokemon,Entity *target,u8 param_3,s16 param_4,s32 param
            newHP /= 2;
         }
       }
-      sub_806F370(pokemon,target,newHP,0,&flag,param_3,param_4_s32,0,0,0);
+      sub_806F370(pokemon,target,newHP,0,&flag,moveType,param_4_s32,0,0,0);
     }
   }
 }
