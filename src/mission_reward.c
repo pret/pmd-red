@@ -32,6 +32,7 @@ struct unkStruct_203B310
     u8 unk22;
     UnkTextStruct2 unk24[4];
 };
+
 EWRAM_DATA_2 struct unkStruct_203B310 *gUnknown_203B310 = {0};
 
 extern u8 gUnknown_202E038[];
