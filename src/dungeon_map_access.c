@@ -20,7 +20,6 @@ extern u8 gUnknown_80F6A40[];
 extern u8 gUnknown_8108EC0[];
 extern const struct FileArchive gDungeonFileArchive;
 
-// ewram
 EWRAM_DATA OpenedFile *gDungeonPaletteFile = {0};
 EWRAM_DATA unkStruct_202EE8C gUnknown_202EE8C[32] = {0};
 EWRAM_DATA OpenedFile *gUnknown_202F18C = {0};
