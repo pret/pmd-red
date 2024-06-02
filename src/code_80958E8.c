@@ -29,7 +29,6 @@ bool8 GenerateMailJobDungeonInfo(WonderMail *mail);
 bool8 GenerateMailJobInfo(WonderMail *);
 bool8 sub_8096E80(u8);
 u8 sub_8095E78(void);
-void ShiftMailboxSlotsDown(void);
 bool8 sub_80963B4(void);
 void SaveWonderMail(struct unkStruct_8094924 *a, WonderMail *b);
 void RestoreWonderMail(struct unkStruct_8094924 *a, WonderMail *b);
@@ -37,6 +36,11 @@ s32 CalculateMailChecksum(WonderMail *mail);
 
 extern void SaveDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
 extern void RestoreDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
+extern void sub_803C4F0(WonderMail *);
+extern void sub_803C3E0(WonderMail *);
+extern void sub_803C45C(WonderMail *);
+extern void sub_803C610(WonderMail *);
+extern void sub_803C580(WonderMail *);
 
 extern u8 gUnknown_8109984[];
 
@@ -1691,4 +1695,3 @@ void SaveWonderMail(struct unkStruct_8094924 *a, WonderMail *b)
     SaveIntegerBits(a, &b->unk4.seed, 0x18);
     SaveDungeonLocation(a, &b->unk4.dungeon);
 }
-
