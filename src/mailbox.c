@@ -13,7 +13,7 @@
 #include "pokemon_news1.h"
 #include "pokemon_news2.h"
 #include "pokemon_news3.h"
-#include "mailbox_8095F8C.h"
+#include "code_80958E8.h"
 #include "code_803B050.h"
 #include "code_80958E8_1.h"
 #include "wonder_mail_802C4C8.h"

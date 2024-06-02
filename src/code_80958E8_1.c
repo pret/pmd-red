@@ -10,7 +10,6 @@
 #include "random.h"
 #include "pokemon.h"
 #include "code_8096AF8.h"
-#include "mailbox_8095F8C.h"
 #include "event_flag.h"
 #include "rescue_team_info.h"
 

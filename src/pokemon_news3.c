@@ -7,7 +7,7 @@
 #include "constants/input.h"
 #include "constants/mailbox.h"
 #include "input.h"
-#include "mailbox_8095F8C.h"
+#include "code_80958E8.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon_mail.h"

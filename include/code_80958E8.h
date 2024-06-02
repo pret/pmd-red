@@ -31,5 +31,9 @@ unkStruct_203B490 *GetMailInfo(void);
 void InitializeMailJobsNews(void);
 bool8 IsValidWonderMail(WonderMail *WonderMailData);
 bool8 ValidateWonderMail(WonderMail *data);
+s32 CountFilledMailboxSlots(void);
+WonderMail *GetMailboxSlotInfo(u8 index);
+bool8 IsMailSlotEmpty(u8 index);
+void ResetMailboxSlot(u8 index);
 
 #endif // GUARD_CODE_80958E8_H
