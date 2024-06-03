@@ -323,7 +323,6 @@ SECTIONS {
         src/play_time.o(.text);
         src/code_8094F88.o(.text);
         src/code_80958E8.o(.text);
-        src/code_80958E8_1.o(.text);
         src/code_80972F4.o(.text);
         src/code_8097504.o(.text);
         src/code_8097670.o(.text);

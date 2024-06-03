@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "code_80118A4.h"
 #include "code_803B050.h"
-#include "code_80958E8_1.h"
+#include "code_80958E8.h"
 #include "constants/input.h"
 #include "input.h"
 #include "memory.h"

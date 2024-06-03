@@ -15,10 +15,9 @@
 #include "pokemon_news3.h"
 #include "code_80958E8.h"
 #include "code_803B050.h"
-#include "code_80958E8_1.h"
+#include "code_80958E8.h"
 #include "wonder_mail_802C4C8.h"
 #include "wonder_mail_802C860.h"
-#include "code_8096AF8.h"
 
 EWRAM_DATA_2 struct unkStruct_203B304 *gUnknown_203B304 = {0};
 
