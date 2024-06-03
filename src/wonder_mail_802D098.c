@@ -207,12 +207,12 @@ static void sub_802D2A8(void)
         case RECEIVE_WONDER_MAIL:
             sUnknown_203B2F8->wonderMailAccepted = TRUE;
             AcceptJob(&sUnknown_203B2F8->mail->wonderMail);
-            sub_8096C80();
+            ShiftJobSlotsDown();
             SortJobSlots();
 
             if (sUnknown_203B2F8->mail->wonderMail.unk2 == 4) {
-                MemoryCopy8(sub_8096DD8(), sUnknown_203B2F8->mail->unk14, 40);
-                MemoryCopy8(sub_8096DE8(), sUnknown_203B2F8->mail->unk18, 120);
+                MemoryCopy8(sub_8096DD8(), sUnknown_203B2F8->mail->unk14, sizeof(gUnknown_203B490->unk190));
+                MemoryCopy8(sub_8096DE8(), sUnknown_203B2F8->mail->unk18, sizeof(gUnknown_203B490->unk1B8));
             }
 
             switch (sUnknown_203B2F8->mail->wonderMail.unk4.dungeon.id) {
@@ -417,7 +417,7 @@ static void sub_802D82C(void)
     switch (menuAction) {
         case 3: // Yes
             ResetJobSlot(sUnknown_203B2F8->jobSlotIndex);
-            sub_8096C80();
+            ShiftJobSlotsDown();
             sub_802D1A0(RECEIVE_WONDER_MAIL);
             break;
         case 6: // New Mail
@@ -514,7 +514,7 @@ static void sub_802D9F0(void)
         case 3: // Yes
             sub_802C688();
             ResetJobSlot(sUnknown_203B2F8->jobSlotIndex);
-            sub_8096C80();
+            ShiftJobSlotsDown();
             sub_802D1A0(RECEIVE_WONDER_MAIL);
             break;
     }

@@ -283,7 +283,7 @@ static void sub_802CD38(void)
             break;
         case 5:
             ResetJobSlot(sUnknown_203B2F0->unkC);
-            sub_8096C80();
+            ShiftJobSlotsDown();
 
             if (HasNoAcceptedJobs()) {
                 sub_802C688();

@@ -79,11 +79,9 @@ void sub_802E73C(void);
 void sub_802E758(void);
 void sub_802E774(void);
 void sub_802E7D0(void);
-extern void sub_802E088(u32);
-extern void CreateMailboxMenu(void);
-extern void CreateMailActionMenu(void);
-extern void CreateMailAcceptedStatusBox(u32);
-extern void sub_8096078(void);
+void CreateMailboxMenu(void);
+void CreateMailActionMenu(void);
+void CreateMailAcceptedStatusBox(u32);
 
 u32 sub_802DFB0(void)
 {
@@ -417,10 +415,10 @@ void HandleMailActionMenu(void)
         case 5:
             PlaySound(0x133);
             AcceptJob(GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex));
-            sub_8096C80();
+            ShiftJobSlotsDown();
             SortJobSlots();
             ResetMailboxSlot(gUnknown_203B304->mailboxIndex);
-            sub_8096078();
+            ShiftMailboxSlotsDown();
             if(HasNoMailinMailbox())
             {
                 sub_802BEDC();
@@ -441,7 +439,7 @@ void HandleMailActionMenu(void)
             mail = GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex);
             ReceivePKMNNews(mail->unk4.dungeon.floor);
             ResetMailboxSlot(gUnknown_203B304->mailboxIndex);
-            sub_8096078();
+            ShiftMailboxSlotsDown();
             if(HasNoMailinMailbox())
             {
                 sub_802BEDC();

@@ -362,27 +362,27 @@ void sub_802EDBC(void)
                 case MAIL_TYPE_UNK2:
                     gPelipperBoard->unk4 = 1;
                     ResetPelipperBoardSlot(gPelipperBoard->jobIndex);
-                    sub_80965F4();
+                    ShiftPelipperJobsDown();
                     sub_802C2D4();
                     SetPelipperBoardState(PELIPPER_BOARD_EXIT);
                     break;
                 case MAIL_TYPE_UNK3:
                     gPelipperBoard->unk4 = 2;
                     ResetPelipperBoardSlot(gPelipperBoard->jobIndex);
-                    sub_80965F4();
+                    ShiftPelipperJobsDown();
                     sub_802C2D4();
                     SetPelipperBoardState(PELIPPER_BOARD_EXIT);
                     break;
                 case MAIL_TYPE_UNK4:
                     gPelipperBoard->unk4 = 3;
                     ResetPelipperBoardSlot(gPelipperBoard->jobIndex);
-                    sub_80965F4();
+                    ShiftPelipperJobsDown();
                     sub_802C2D4();
                     SetPelipperBoardState(PELIPPER_BOARD_EXIT);
                     break;
                 default:
                     AcceptJob(mail);
-                    sub_8096C80();
+                    ShiftJobSlotsDown();
                     SortJobSlots();
                     if(HasNoPelipperBoardJobs())
                     {
