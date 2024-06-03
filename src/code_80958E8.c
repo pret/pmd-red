@@ -2,7 +2,6 @@
 #include "code_803C1D0.h"
 #include "code_8094F88.h"
 #include "code_80958E8.h"
-#include "code_80958E8.h"
 #include "code_80A26CC.h"
 #include "constants/dungeon.h"
 #include "constants/friend_area.h"

@@ -292,100 +292,39 @@ void ResetPelipperBoardSlot(u8 index)
     gUnknown_203B490->pelipperBoardJobs[index].rewardType = 0;
 }
 
-NAKED
 void sub_80965F4(void)
 {
-    asm_unified(
-	"\tpush {r4-r7,lr}\n"
-	"\tmov r7, r9\n"
-	"\tmov r6, r8\n"
-	"\tpush {r6,r7}\n"
-	"\tmovs r2, 0\n"
-	"\tmovs r3, 0\n"
-	"\tldr r0, _0809660C\n"
-	"\tmov r12, r0\n"
-	"\tmov r8, r3\n"
-	"\tmovs r4, 0\n"
-	"\tmov r9, r4\n"
-	"\tb _08096636\n"
-	"\t.align 2, 0\n"
-"_0809660C: .4byte gUnknown_203B490\n"
-"_08096610:\n"
-	"\tcmp r2, r3\n"
-	"\tble _0809662A\n"
-	"\tmov r1, r12\n"
-	"\tldr r0, [r1]\n"
-	"\tmov r5, r8\n"
-	"\tadds r1, r0, r5\n"
-	"\tadds r0, r4\n"
-	"\tadds r1, 0x50\n"
-	"\tadds r0, 0x50\n"
-	"\tldm r0!, {r5-r7}\n"
-	"\tstm r1!, {r5-r7}\n"
-	"\tldm r0!, {r6,r7}\n"
-	"\tstm r1!, {r6,r7}\n"
-"_0809662A:\n"
-	"\tadds r4, 0x14\n"
-	"\tmovs r0, 0x14\n"
-	"\tadd r9, r0\n"
-	"\tadds r2, 0x1\n"
-	"\tadd r8, r0\n"
-	"\tadds r3, 0x1\n"
-"_08096636:\n"
-	"\tcmp r2, 0x7\n"
-	"\tbgt _08096666\n"
-	"\tmov r1, r12\n"
-	"\tldr r0, [r1]\n"
-	"\tadds r0, r4\n"
-	"\tadds r0, 0x50\n"
-	"\tldrb r0, [r0]\n"
-	"\tcmp r0, 0\n"
-	"\tbne _08096666\n"
-	"\tldr r6, _08096694\n"
-	"\tmov r1, r9\n"
-"_0809664C:\n"
-	"\tadds r1, 0x14\n"
-	"\tadds r4, 0x14\n"
-	"\tmovs r5, 0x14\n"
-	"\tadd r9, r5\n"
-	"\tadds r2, 0x1\n"
-	"\tcmp r2, 0x7\n"
-	"\tbgt _08096666\n"
-	"\tldr r0, [r6]\n"
-	"\tadds r0, r1\n"
-	"\tadds r0, 0x50\n"
-	"\tldrb r0, [r0]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0809664C\n"
-"_08096666:\n"
-	"\tcmp r2, 0x8\n"
-	"\tbne _08096610\n"
-	"\tcmp r3, 0x7\n"
-	"\tbgt _08096688\n"
-	"\tldr r4, _08096694\n"
-	"\tmovs r2, 0\n"
-	"\tlsls r0, r3, 2\n"
-	"\tadds r0, r3\n"
-	"\tlsls r1, r0, 2\n"
-"_08096678:\n"
-	"\tldr r0, [r4]\n"
-	"\tadds r0, r1\n"
-	"\tadds r0, 0x50\n"
-	"\tstrb r2, [r0]\n"
-	"\tadds r1, 0x14\n"
-	"\tadds r3, 0x1\n"
-	"\tcmp r3, 0x7\n"
-	"\tble _08096678\n"
-"_08096688:\n"
-	"\tpop {r3,r4}\n"
-	"\tmov r8, r3\n"
-	"\tmov r9, r4\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_08096694: .4byte gUnknown_203B490");
+  int counter1; // r5
+  int counter2;
+    
+  
+  counter1 = 0;
+  counter2 = 0;
+
+  do {
+    for( ; counter1 < 8; counter1++)
+    {
+        if (gUnknown_203B490->pelipperBoardJobs[counter1].mailType != 0)
+            break;
+    }
+      
+    if (counter1 == 8) {
+        break;
+    }
+
+    if (counter1 > counter2) {
+        gUnknown_203B490->pelipperBoardJobs[counter2] = gUnknown_203B490->pelipperBoardJobs[counter1];
+    }
+    counter1++;
+    counter2++;
+  } while( 1 );
+
+  for(; counter2 < 8; counter2++)
+  {
+    gUnknown_203B490->pelipperBoardJobs[counter2].mailType = 0;
+  }
 }
+
 
 void SortPelipperJobs(void)
 {
@@ -730,3 +669,37 @@ void ResetJobSlot(u8 index)
   gUnknown_203B490->jobSlots[index].unk4.dungeon.floor = 0;
   gUnknown_203B490->jobSlots[index].rewardType = MONEY1;
 }
+
+void sub_8096C80(void)
+{
+  int counter1; // r5
+  int counter2;
+    
+  
+  counter1 = 0;
+  counter2 = 0;
+
+  do {
+    for( ; counter1 < 8; counter1++)
+    {
+        if (gUnknown_203B490->jobSlots[counter1].mailType != 0)
+            break;
+    }
+      
+    if (counter1 == 8) {
+        break;
+    }
+
+    if (counter1 > counter2) {
+        gUnknown_203B490->jobSlots[counter2] = gUnknown_203B490->jobSlots[counter1];
+    }
+    counter1++;
+    counter2++;
+  } while( 1 );
+
+  for(; counter2 < 8; counter2++)
+  {
+    gUnknown_203B490->jobSlots[counter2].mailType = 0;
+  }
+}
+
