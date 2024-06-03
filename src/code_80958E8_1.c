@@ -1,5 +1,5 @@
-#include "constants/mailbox.h"
 #include "global.h"
+#include "constants/mailbox.h"
 #include "constants/friend_area.h"
 #include "constants/dungeon.h"
 #include "constants/monster.h"
