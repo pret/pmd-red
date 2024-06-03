@@ -713,3 +713,36 @@ void ResetMailboxSlot(u8 index)
     gUnknown_203B490->mailboxSlots[index].unk4.dungeon.floor = 0;
     gUnknown_203B490->mailboxSlots[index].rewardType = MONEY1;
 }
+
+void sub_8096078(void)
+{
+  int counter1; // r5
+  int counter2;
+    
+  
+  counter1 = 0;
+  counter2 = 0;
+
+  do {
+    for( ; counter1 < 4; counter1++)
+    {
+        if (gUnknown_203B490->mailboxSlots[counter1].mailType != 0)
+            break;
+    }
+      
+    if (counter1 == 4) {
+        break;
+    }
+
+    if (counter1 > counter2) {
+        gUnknown_203B490->mailboxSlots[counter2] = gUnknown_203B490->mailboxSlots[counter1];
+    }
+    counter1++;
+    counter2++;
+  } while( 1 );
+
+  for(; counter2 < 4; counter2++)
+  {
+    gUnknown_203B490->mailboxSlots[counter2].mailType = 0;
+  }
+}
