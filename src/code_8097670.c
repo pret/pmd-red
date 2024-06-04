@@ -2,6 +2,7 @@
 #include "code_8097670.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
+#include "friend_area.h"
 
 static EWRAM_DATA struct unkStruct_203B494 sUnknown_2039778 = {0};
 
@@ -201,4 +202,144 @@ bool8 sub_8097900(s16 pokeIndex)
     if (preload->unk1C[iVar2 >> 5] & (1 << (baseSpecies + (iVar2 >> 5) * -0x20)))
         return TRUE;
     return FALSE;
+}
+
+void sub_8097944(void)
+{
+    bool8 bVar2;
+    bool8 bVar3;
+    int index;
+    s32 counter;
+    Move *move;
+    PokemonStruct1 *pokeStruct;
+    s32 index1;
+    s32 temp;
+
+    bVar2 = 1;
+    bVar3 = 1;
+    if ((sub_8097710(0xd) == 0) && (HasAllFriendAreas())) {
+        sub_80976F8(0xd);
+    }
+
+    for(index = 0; index < 0x19D; index++)
+    {
+
+#ifdef NONMATCHING
+        pokeStruct = &index[gRecruitedPokemonRef->pokemon];
+#else
+        register size_t offset asm("r1") = offsetof(unkStruct_203B45C, pokemon[index]);
+        PokemonStruct1* p = gRecruitedPokemonRef->pokemon;
+        size_t addr = offset + (size_t)p;
+        pokeStruct = (PokemonStruct1*)addr;
+#endif
+
+
+        if (((u8)(pokeStruct->unk0) & 1)) {
+            temp = pokeStruct->speciesNum;
+            gUnknown_203B494->unk1C[(temp / 32)] |= (1 << (temp + (temp / 32) * -32));
+
+            for(index1 = 0; index1 < MAX_MON_MOVES; index1++)
+            {
+                move = &gRecruitedPokemonRef->pokemon[index].moves[index1];
+                if ((move->moveFlags & 1) != 0) {
+                    gUnknown_203B494->unk8C[move->id / 32] |= 1 << (move->id & 0x1f);
+                }
+            }
+        }
+  }
+    
+  for(index = 0; index < 0x1A8; index++)
+  {
+    if (index != 0)
+        if(index != 0x179)
+            if(index != 0x17a)
+                if(index != 0x17b)
+                    if(index != 0x1a1)
+                        if(index != 0x1a2)
+                            if(index != 0x1a3)
+                                if(index != 0x1a4)
+                                    if(index != 0x1a5)
+                                        if(index != 0x1a6)
+                                            if(index != 0x1a7)
+                                            {
+                                              if ((gUnknown_203B494->unk54[(index / 32)] & (1 << (index + (index / 32) * -32))) == 0) {
+                                                bVar3 = 0;
+                                              }
+                                              if ((gUnknown_203B494->unk1C[(index / 32 )] & (1 << (index + (index / 32) * -32))) != 0)
+                                              {
+                                                if (index == 0x92) {
+                                                  sub_80976F8(0x10);
+                                                }
+                                                if (index == 0x91) {
+                                                  sub_80976F8(0x11);
+                                                }
+                                                if (index == 0x90) {
+                                                  sub_80976F8(0x12);
+                                                }
+                                                if (index == 0x19e) {
+                                                  sub_80976F8(0x13);
+                                                }
+                                                if (index == 0x10d) {
+                                                  sub_80976F8(0x14);
+                                                }
+                                                if (index == 0x10c) {
+                                                  sub_80976F8(0x15);
+                                                }
+                                                if (index == 0x10e) {
+                                                  sub_80976F8(0x16);
+                                                }
+                                                if (index == 0x113) {
+                                                  sub_80976F8(0x17);
+                                                }
+                                                if (index == 0x19a) {
+                                                  sub_80976F8(0x18);
+                                                }
+                                                if (index == 0x19b) {
+                                                  sub_80976F8(0x19);
+                                                }
+                                                if (index == 0x19c) {
+                                                  sub_80976F8(0x1a);
+                                                }
+                                                if (index == 0x112) {
+                                                  sub_80976F8(0x1b);
+                                                }
+                                                if (index == 0x114) {
+                                                  sub_80976F8(0x1c);
+                                                }
+                                                if (index == 0x97) {
+                                                  sub_80976F8(0x1d);
+                                                }
+                                                if (index == 0x96) {
+                                                  sub_80976F8(0x1e);
+                                                }
+                                                if (index == 0x19d) {
+                                                  sub_80976F8(0x1f);
+                                                }
+                                              }
+                                              else
+                                              {
+                                                bVar2 = 0;
+                                              }
+                                            }
+  }
+    
+  if (bVar2) {
+    sub_80976F8(0xf);
+  }
+  if (bVar3) {
+    sub_80976F8(0xe);
+  }
+  counter = 0;
+  for(index = 0; index < 0x19d; index++)
+  {
+    if ((((index != 0) && (index != 0x163)) && (index != 0x164)) && (index != 0x165)) {
+      if ((gUnknown_203B494->unk8C[(index / 32 )] & (1 << (index + (index / 32) * -32))) != 0) {
+        counter = counter + 1;
+      }
+    }
+  }
+  if (counter != 0) {
+    gUnknown_203B494->unk18 = counter;
+    sub_80976F8(7);
+  }
 }

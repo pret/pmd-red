@@ -11,8 +11,6 @@ void ReadPlayTime(struct unkStruct_8094924 *r0);
 void WriteGameOptions(struct unkStruct_8094924 *param_1);
 void WritePlayTime(struct unkStruct_8094924 *r0);
 
-extern void sub_8097944(void);
-
 void sub_8097C18(struct unkStruct_8094924 *r0)
 {
     sub_8097944();

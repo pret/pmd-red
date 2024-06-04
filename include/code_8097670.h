@@ -41,5 +41,6 @@ void sub_8097848(void);
 s16 sub_8097870(void);
 s16 sub_8097880(void);
 s16 sub_80978B8(void);
+void sub_8097944(void);
 
 #endif // GUARD_CODE_8097670_H
