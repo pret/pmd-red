@@ -42,5 +42,7 @@ s16 sub_8097870(void);
 s16 sub_8097880(void);
 s16 sub_80978B8(void);
 void sub_8097944(void);
+u32 sub_8097D60(u8 *r0, u32 size);
+u32 sub_8097D98(u8 *r0, u32 size);
 
 #endif // GUARD_CODE_8097670_H
