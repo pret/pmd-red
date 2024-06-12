@@ -52,7 +52,6 @@ struct unkStruct_806D010
     u8 unkF;
 };
 
-
 extern u8 *gUnknown_80FEDE8[];
 extern u8 *gUnknown_80FEDC8[];
 extern u8 *gUnknown_80FEDA8[];
