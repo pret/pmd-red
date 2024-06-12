@@ -87,7 +87,12 @@ typedef struct Dungeon
     u8 fill14[0xB8 - 0x14];
     Entity *unkB8;
     Entity *unkBC;
-    u8 fillC0[0x16D - 0xC0];
+    u8 fillC0[0x13C - 0xC0];
+    u8 unk13C[2];
+    u8 fill13E[0x16A - 0x13E];
+    u8 unk16A;
+    u8 unk16B;
+    u8 unk16C;
     u8 unk16D;
     u8 fill16E[0x179 - 0x16E];
     /* 0x179 */ bool8 pokemonExposed; // True if a Pokémon on the floor has the Exposed status.
