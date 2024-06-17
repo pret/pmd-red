@@ -2,7 +2,10 @@
 
 	.global gUnknown_80F54B4
 gUnknown_80F54B4: @ 80F54B4
-	.incbin "baserom.gba", 0xF54B4, 0x40
+    .4byte 0, 0, 0, 1
+    .4byte 0, 1, 1, 2
+    .4byte 0, 1, 2, 3
+    .4byte 1, 2, 3, 3
 
 	.global gUnknown_80F54F4
 gUnknown_80F54F4: @ 80F54F4

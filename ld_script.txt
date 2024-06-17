@@ -546,6 +546,7 @@ SECTIONS {
         data/data_80F59C8.o(.rodata);
         src/charge_move.o(.rodata);
         data/data_8106A4C.o(.rodata);
+        src/code_806CD90.o(.rodata);
         src/type_effectiveness.o(.data);
         data/data_8106F7C.o(.rodata);
         src/dungeon_capabilities.o(.rodata);

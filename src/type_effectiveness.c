@@ -11,6 +11,33 @@
 #include "type_chart.h"
 #include "weather.h"
 
+
+u32 gUnknown_8106EFC[] = { 0x00, 0x00  };
+u8 gUnknown_8106F04[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00 };
+u8 gUnknown_8106F0C[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00 };
+u8 gUnknown_8106F14[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x01, 0x00 };
+u8 gUnknown_8106F1C[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00 };
+u8 gUnknown_8106F24[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe7, 0x03,
+                          0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x00, 0x00,
+                         0x00, 0x00, 0x00, 0x00, 0xfe, 0x7f, 0x01, 0x00 };
+u8 gUnknown_8106F3C[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00};
+u8 gUnknown_8106F44[] = {0x00, 0x00, 0x00, 0x00, 0x66, 0xe6, 0x00, 0x00};
+u8 gUnknown_8106F4C[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x01, 0x00};
+
+
+struct dumb_struct 
+{
+    u8 *unk0[NUM_EFFECTIVENESS];
+};
+
+struct dumb_struct gUnknown_8106F54 = {
+        gUnknown_8106F3C, // IMMUNE
+        gUnknown_8106F44, // RESIST
+        gUnknown_8106F04, // NEUTRAL
+        gUnknown_8106F4C, // SUPER
+};
+
+u8 gUnknown_8106F64[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x00};
 u32 gTypeEffectivenessMultipliers[] = {0, 1, 2, 4};
 
 
@@ -18,87 +45,75 @@ struct unkStruct_806D010
 {   
     s32 unk0;
     u32 unk4;
-    u32 unk8;
+    u32 effectiveness;
     u8 unkC;
     u8 unkD;
     u8 unkE;
     u8 unkF;
 };
 
-struct dumb_struct 
-{
-    u32 *unk0[4];
-};
-extern struct dumb_struct gUnknown_8106F54;
-
-
-extern u32 gUnknown_8106F0C;
-extern u32 gUnknown_8106F1C;
-extern u32 gUnknown_8106F14;
-extern u32 gUnknown_8106F64;
-extern u32 gUnknown_8106EFC[2];
 
 extern u8 *gUnknown_80FEDE8[];
 extern u8 *gUnknown_80FEDC8[];
 extern u8 *gUnknown_80FEDA8[];
 extern u8 *gUnknown_80FED88[];
 
-extern s32 gUnknown_80F54B4[2][4];
+extern s32 gUnknown_80F54B4[NUM_EFFECTIVENESS][NUM_EFFECTIVENESS];
 
 void sub_80522F4(Entity *, Entity *, u8 *);
 void sub_80428D8(Entity *);
 void sub_8042978(Entity *);
 void sub_804298C(Entity *);
-u8 sub_800A2A0(s32 *);
-void sub_800A34C(s32 *, s32 *, s32 *);
+bool8 sub_800A2A0(s32 *);
+void sub_800A34C(s32 *, s32 *, const u8 *);
 void sub_800A020(s32 *, u32);
 void sub_80428EC(Entity *);
 
 bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct unkStruct_806D010 *param_5)
 {
-  bool8 bVar1;
-  bool8 bVar2;
-  bool8 bVar3;
-  bool8 bVar5;
-  char cVar3;
-  char cVar4;
-  char cVar5;
-  char cVar6;
+  bool8 torrentFlag;
+  bool8 overgrowFlag;
+  bool8 swarmFlag;
+  bool8 blazeFlag;
+  bool8 torrentVisualFlag;
+  bool8 overgrowVisualFlag;
+  bool8 swarmVisualFlag;
+  bool8 blazeVisualFlag;
   bool8 bVar4;
   EntityInfo *targetInfo;
   s32 effectiveness;
   s32 index;
   struct dumb_struct local_48;
   s32 local_38 [2];
-  s32 local_2c;
-  s32 local_28;
+  s32 hasWonderGuard;
+  s32 normalOrFightingType;
   EntityInfo *pokemonInfo;
   u8 weather;
   s32 temp;
 
   bVar4 = FALSE;
-  local_28 = FALSE;
+  normalOrFightingType = FALSE;
   pokemonInfo = pokemon->info;
   targetInfo = target->info;
   sub_800A020(param_1,1);
   param_5->unkD = 0;
   param_5->unkE = 0;
-  local_2c = FALSE;
+  hasWonderGuard = FALSE;
   if (!EntityExists(target)) {
     return TRUE;
   }
   else {
     if ((type == TYPE_NORMAL) || (type == TYPE_FIGHTING)) {
-      local_28 = TRUE;
+      normalOrFightingType = TRUE;
     }
     if ((HasAbility(target, ABILITY_WONDER_GUARD)) && (type != TYPE_NONE)) {
-      local_2c = TRUE;
+      hasWonderGuard = TRUE;
     }
-    param_5->unk8 = 2;
+    param_5->effectiveness = EFFECTIVENESS_NEUTRAL;
     for (index = 0; index < 2; index++) {
       local_48 = gUnknown_8106F54;
-      if (sub_800A2A0(param_1) != '\0') break;
-      if (((local_28) && (targetInfo->types[index] == TYPE_GHOST)) && (targetInfo->exposed == FALSE)) {
+      if (sub_800A2A0(param_1)) break;
+      if (((normalOrFightingType) && (targetInfo->types[index] == TYPE_GHOST)) && (targetInfo->exposed == FALSE)) {
             effectiveness = EFFECTIVENESS_IMMUNE;
             gDungeon->pokemonExposed = TRUE;
       }
@@ -112,9 +127,9 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
       gDungeon->unk13C[index] = effectiveness;
     }
 
-    param_5->unk8 = gUnknown_80F54B4[local_38[0]][local_38[1]];
+    param_5->effectiveness = gUnknown_80F54B4[local_38[0]][local_38[1]];
     bVar4 = TRUE;
-    if ((param_5->unk8 != 3) && (bVar4 = FALSE, local_2c != 0)) {
+    if ((param_5->effectiveness != EFFECTIVENESS_SUPER) && (bVar4 = FALSE, hasWonderGuard)) {
       temp = gUnknown_8106EFC[1];
       param_1[0] = gUnknown_8106EFC[0];
       param_1[1] = temp;
@@ -122,112 +137,112 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
       
     if (((type == TYPE_FIRE) || (type == TYPE_ICE)) && (HasAbility(target,ABILITY_THICK_FAT))) {
       gDungeon->unk16D = TRUE;
-      sub_800A34C(param_1,param_1,&gUnknown_8106F1C);
+      sub_800A34C(param_1,param_1,gUnknown_8106F1C);
     }
-    if ((type == TYPE_FIRE) && (GetFlashFireStatus(target) != '\0')) {
+    if ((type == TYPE_FIRE) && (GetFlashFireStatus(target) != FLASH_FIRE_STATUS_NONE)) {
       gDungeon->fill16E[0] = TRUE;
       sub_800A020(param_1,0);
-      param_5->unk8 = 0;
+      param_5->effectiveness = EFFECTIVENESS_IMMUNE;
       param_5->unkD = 0;
       param_5->unkE = 1;
-      bVar4 = '\0';
+      bVar4 = FALSE;
     }
     if ((type == TYPE_GROUND) && (HasAbility(target, ABILITY_LEVITATE))) {
       gDungeon->fill16E[1] = TRUE;
       sub_800A020(param_1,0);
-      param_5->unk8 = 0;
+      param_5->effectiveness = EFFECTIVENESS_IMMUNE;
       param_5->unkD = 0;
       param_5->unkE = 1;
-      bVar4 = '\0';
+      bVar4 = FALSE;
     }
     if ((type == TYPE_WATER) && (HasAbility(pokemon, ABILITY_TORRENT))) {
-      bVar1 = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
-      cVar3 = SetVisualFlags(pokemonInfo,0x80,bVar1);
-      if (bVar1) {
+      torrentFlag = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
+      torrentVisualFlag = SetVisualFlags(pokemonInfo,0x80,torrentFlag);
+      if (torrentFlag) {
         gDungeon->fill16E[2] = TRUE;
-        sub_800A34C(param_1,param_1,&gUnknown_8106F0C);
+        sub_800A34C(param_1,param_1,gUnknown_8106F0C);
       }
-      if (cVar3 != '\0') {
+      if (torrentVisualFlag) {
         sub_80428EC(pokemon);
         sub_80522F4(pokemon,target,*gUnknown_80FEDA8);
       }
     }
     if ((type == TYPE_GRASS) && (HasAbility(pokemon, ABILITY_OVERGROW))) {
-      bVar2 = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
-      cVar4 = SetVisualFlags(pokemonInfo,2,bVar2);
-      if (bVar2) {
+      overgrowFlag = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
+      overgrowVisualFlag = SetVisualFlags(pokemonInfo,2,overgrowFlag);
+      if (overgrowFlag) {
         gDungeon->fill16E[3] = TRUE;
-        sub_800A34C(param_1,param_1,&gUnknown_8106F0C);
+        sub_800A34C(param_1,param_1,gUnknown_8106F0C);
       }
-      if (cVar4 != '\0') {
+      if (overgrowVisualFlag) {
         sub_80428D8(pokemon);
         sub_80522F4(pokemon,target,*gUnknown_80FED88);
       }
     }
     if ((type == TYPE_BUG) && (HasAbility(pokemon, ABILITY_SWARM))) {
-      bVar3 = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
-      cVar5 = SetVisualFlags(pokemonInfo,0x10,bVar3);
-      if (bVar3) {
+      swarmFlag = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
+      swarmVisualFlag = SetVisualFlags(pokemonInfo,0x10,swarmFlag);
+      if (swarmFlag) {
         gDungeon->fill16E[4] = TRUE;
-        sub_800A34C(param_1,param_1,&gUnknown_8106F0C);
+        sub_800A34C(param_1,param_1,gUnknown_8106F0C);
       }
-      if (cVar5 != '\0') {
+      if (swarmVisualFlag) {
         sub_8042978(pokemon);
         sub_80522F4(pokemon,target,*gUnknown_80FEDC8);
       }
     }
     if ((type == TYPE_FIRE) && (HasAbility(pokemon, ABILITY_BLAZE))) {
-      bVar5 = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
-      cVar6 = SetVisualFlags(pokemonInfo,0x20,bVar5);
-      if (bVar5) {
+      blazeFlag = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
+      blazeVisualFlag = SetVisualFlags(pokemonInfo,0x20,blazeFlag);
+      if (blazeFlag) {
         gDungeon->fill16E[5] = TRUE;
-        sub_800A34C(param_1,param_1,&gUnknown_8106F0C);
+        sub_800A34C(param_1,param_1,gUnknown_8106F0C);
       }
-      if (cVar6 != '\0') {
+      if (blazeVisualFlag) {
         sub_804298C(pokemon);
         sub_80522F4(pokemon,target,*gUnknown_80FEDE8);
       }
     }
-    if ((sub_800A2A0(param_1) == '\0') && (MonsterIsType(pokemon, type))) {
+    if (!(sub_800A2A0(param_1)) && (MonsterIsType(pokemon, type))) {
       gDungeon->fill16E[6] = TRUE;
-      sub_800A34C(param_1,param_1,&gUnknown_8106F14);
+      sub_800A34C(param_1,param_1,gUnknown_8106F14);
     }
     weather = GetApparentWeather(pokemon);      
     if (weather == WEATHER_SUNNY) {
       if (type == TYPE_FIRE) {
         gDungeon->unk16C = TRUE;
-        sub_800A34C(param_1,param_1,&gUnknown_8106F14);
+        sub_800A34C(param_1,param_1,gUnknown_8106F14);
       }
       else if (type == TYPE_WATER) {
         gDungeon->unk16C = TRUE;
-        sub_800A34C(param_1,param_1,&gUnknown_8106F1C);
+        sub_800A34C(param_1,param_1,gUnknown_8106F1C);
       }
     }
     if (weather == WEATHER_RAIN) {
       if (type == TYPE_FIRE) {
         gDungeon->unk16B = TRUE;
-        sub_800A34C(param_1,param_1,&gUnknown_8106F1C);
+        sub_800A34C(param_1,param_1,gUnknown_8106F1C);
       }
       else if (type == TYPE_WATER) {
         gDungeon->unk16B = TRUE;
-        sub_800A34C(param_1,param_1,&gUnknown_8106F14);
+        sub_800A34C(param_1,param_1,gUnknown_8106F14);
       }
     }
     if ((weather == WEATHER_CLOUDY) && (type != TYPE_NORMAL)) {
-      sub_800A34C(param_1,param_1,&gUnknown_8106F64);
+      sub_800A34C(param_1,param_1, gUnknown_8106F64);
       gDungeon->unk16A = TRUE;
     }
     if (((gDungeon->mudSportTurns != 0) || (weather == WEATHER_FOG)) && (type == TYPE_ELECTRIC)) {
       gDungeon->fill16E[7] = TRUE;
-      sub_800A34C(param_1,param_1,&gUnknown_8106F1C);
+      sub_800A34C(param_1,param_1,gUnknown_8106F1C);
     }
     if ((gDungeon->waterSportTurns != 0) && (type == TYPE_FIRE)) {
       gDungeon->fill16E[8] = TRUE;
-      sub_800A34C(param_1,param_1,&gUnknown_8106F1C);
+      sub_800A34C(param_1,param_1,gUnknown_8106F1C);
     }
     if ((type == TYPE_ELECTRIC) && (pokemonInfo->charging.chargingStatus == STATUS_CHARGING)) {
       gDungeon->fill16E[9] = TRUE;
-      sub_800A34C(param_1,param_1,&gUnknown_8106F0C);
+      sub_800A34C(param_1,param_1,gUnknown_8106F0C);
     }
   }
   return bVar4;
