@@ -16,7 +16,7 @@ extern struct unkStruct_202D240 gUnknown_202D240[8];
 // code_8009804.s
 extern void sub_8009A1C(u32);
 
-void sub_80097B0(void)
+void InitFontPalette(void)
 {
     OpenedFile *fontpalFile;
     s32 i;

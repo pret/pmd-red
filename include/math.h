@@ -99,4 +99,15 @@ s32 s24_8_div(s32 r0, s32 r1);
  */
 u24_8 u24_8_mul(u24_8 x, u24_8 y);
 
+/**
+ * This function divides two unsigned 24.8 fixed-point numbers.
+ *
+ * @param[in] x   The first factor.
+ * @param[in] y   The second factor.
+ *
+ * @return        The quotient `x/y` as an unsigned 24.8 fixed-point number.
+ */
+u24_8 u24_8_div(u24_8 x, u24_8 y);
+
+
 #endif // GUARD_MATH_H
