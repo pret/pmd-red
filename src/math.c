@@ -4,8 +4,6 @@
 
 #include "data/math.h"
 
-u24_8 u24_8_div(u24_8 x, u24_8 y);
-
 u32 fast_mod_3(s32 x) {
     if (x < 0x100) {
         return gFastMod3Lookup[x];
