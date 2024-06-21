@@ -93,20 +93,20 @@ void sub_80117C4(void)
     FadeOutBGM(30);
 }
 
-// Some sound effect
-void sub_80117D0(void)
+// When you press A on a menu
+void PlayAcceptSoundEffect(void)
 {
     PlayFanfareSE(302, MAX_VOLUME);
 }
 
-// Some sound effect
-void sub_80117E4(void)
+// When you press B on a menu
+void PlayCancelSoundEffect(void)
 {
     PlayFanfareSE(303, MAX_VOLUME);
 }
 
-// Some sound effect
-void sub_80117F8(void)
+// When you go up or down
+void PlayCursorUpDownSoundEffect(void)
 {
     PlayFanfareSE(301, MAX_VOLUME);
 }

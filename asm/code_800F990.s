@@ -193,7 +193,7 @@ _0800FB1C:
 	ands r0, r1
 	cmp r0, 0
 	beq _0800FB2E
-	bl sub_80117D0
+	bl PlayAcceptSoundEffect
 	movs r5, 0x2
 _0800FB2E:
 	ldrh r1, [r4, 0x2]
@@ -201,7 +201,7 @@ _0800FB2E:
 	ands r0, r1
 	cmp r0, 0
 	beq _0800FB3E
-	bl sub_80117E4
+	bl PlayCancelSoundEffect
 	movs r5, 0x3
 _0800FB3E:
 	cmp r5, 0
@@ -247,7 +247,7 @@ _0800FB7E:
 	beq _0800FBA2
 	adds r0, r4, 0
 	bl MoveMenuCursorDown
-	bl sub_80117F8
+	bl PlayCursorUpDownSoundEffect
 _0800FBA2:
 	ldrh r1, [r6, 0x4]
 	movs r0, 0x40
@@ -256,7 +256,7 @@ _0800FBA2:
 	beq _0800FBB6
 	adds r0, r4, 0
 	bl MoveMenuCursorUp
-	bl sub_80117F8
+	bl PlayCursorUpDownSoundEffect
 _0800FBB6:
 	ldrh r1, [r6, 0x2]
 	movs r0, 0x1
@@ -269,7 +269,7 @@ _0800FBB6:
 	cmp r0, 0
 	beq _0800FC00
 _0800FBCA:
-	bl sub_80117D0
+	bl PlayAcceptSoundEffect
 	ldr r1, [r7]
 	movs r3, 0x18
 	ldrsh r2, [r4, r3]
@@ -301,7 +301,7 @@ _0800FC00:
 	cmp r0, 0
 	beq _0800FB7E
 _0800FC12:
-	bl sub_80117E4
+	bl PlayCancelSoundEffect
 _0800FC16:
 	mov r0, r8
 	pop {r3}
@@ -966,7 +966,7 @@ sub_80100C0:
 	adds r0, r2
 	ldr r0, [r0, 0x4]
 	str r0, [sp, 0x10]
-	bl sub_80117F8
+	bl PlayCursorUpDownSoundEffect
 	movs r7, 0
 	cmp r7, r8
 	bge _0801018A
@@ -2450,7 +2450,7 @@ _08010D18:
 	beq _08010D36
 	add r0, sp, 0x4
 	bl MoveMenuCursorDown
-	bl sub_80117F8
+	bl PlayCursorUpDownSoundEffect
 _08010D36:
 	ldrh r1, [r4, 0x4]
 	movs r0, 0x40
@@ -2459,7 +2459,7 @@ _08010D36:
 	beq _08010D4A
 	add r0, sp, 0x4
 	bl MoveMenuCursorUp
-	bl sub_80117F8
+	bl PlayCursorUpDownSoundEffect
 _08010D4A:
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x1
@@ -2472,7 +2472,7 @@ _08010D4A:
 	cmp r0, 0
 	beq _08010D18
 _08010D5E:
-	bl sub_80117D0
+	bl PlayAcceptSoundEffect
 	add r0, sp, 0x4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
