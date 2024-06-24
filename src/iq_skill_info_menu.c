@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
-#include "code_801C620.h"
+#include "iq_skill_info_menu.h"
 #include "code_8097DD0.h"
 #include "input.h"
 #include "memory.h"
@@ -17,7 +17,7 @@ extern u8 gAvailablePokemonNames[]; // 202DF98
 
 static EWRAM_DATA_2 struct unkStruct_203B240 *sUnknown_203B240 = {0};
 
-#include "data/code_801C620.h"
+#include "data/iq_skill_info_menu.h"
 
 static void SetIQSkillInfoMenuState(s32 newState);
 static void sub_801C6E4(void);

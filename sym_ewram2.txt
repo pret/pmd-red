@@ -132,7 +132,7 @@ gUnknown_203B1FC: /* 203B1FC (sub_80151C0 - sub_8015F84) */
 .include "src/code_801B60C.o"
 .include "src/iq_skill_menu.o"
 .include "src/iq_skill_list_menu.o"
-.include "src/code_801C620.o"
+.include "src/iq_skill_info_menu.o"
 .include "src/code_801C8C4.o"
 .include "src/code_801D014.o"
 .include "src/code_801D9E4.o"

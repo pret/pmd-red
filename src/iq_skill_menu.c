@@ -3,7 +3,7 @@
 #include "code_80118A4.h"
 #include "iq_skill_menu.h"
 #include "iq_skill_list_menu.h"
-#include "code_801C620.h"
+#include "iq_skill_info_menu.h"
 #include "common_strings.h"
 #include "input.h"
 #include "memory.h"
@@ -20,8 +20,8 @@ static void SetIQSkillMenuState(s32 newState);
 static void sub_801BFCC(void);
 static void HandleIQSkillMenuState(void);
 static void BuildIQSkillMenuActions(void);
-static void sub_801C118(void);
-static void sub_801C1A0(void);
+static void HandleIQSkillMenuMain(void);
+static void HandleIQSkillMenuAction(void);
 static void HandleIQSkillMenuInfo(void);
 
 bool8 CreateIQSkillMenu(s16 species)
@@ -47,10 +47,10 @@ u32 sub_801BF48(void)
             return 3;
         case IQ_SKILL_MENU_STATE_INIT:
         case IQ_SKILL_MENU_STATE_MAIN:
-            sub_801C118();
+            HandleIQSkillMenuMain();
             break;
         case 2:
-            sub_801C1A0();
+            HandleIQSkillMenuAction();
             break;
         case IQ_SKILL_MENU_STATE_INFO:
             HandleIQSkillMenuInfo();
@@ -98,10 +98,10 @@ static void HandleIQSkillMenuState(void)
             CreateIQSkillListMenu(sUnknown_203B238->species, 0, 8);
             break;
         case IQ_SKILL_MENU_STATE_MAIN:
-            sub_801C3B0(TRUE);
+            RedrawIQSkillListMenu(TRUE);
             break;
         case 2:
-            BuildIQSkillList(); // Build list of IQ Skills
+            BuildIQSkillList();
             BuildIQSkillMenuActions();
             sub_8012D60(&sUnknown_203B238->unk74, sUnknown_203B238->unk34, NULL, NULL, sUnknown_203B238->menuAction, 2);
             break;
@@ -143,7 +143,7 @@ static void BuildIQSkillMenuActions(void)
     sUnknown_203B238->menuAction = IQ_SKILL_MENU_SWITCH;
 }
 
-static void sub_801C118(void)
+static void HandleIQSkillMenuMain(void)
 {
     switch (HandleIQSkillListMenuInput(TRUE)) {
         case 3:
@@ -166,7 +166,7 @@ static void sub_801C118(void)
     }
 }
 
-static void sub_801C1A0(void)
+static void HandleIQSkillMenuAction(void)
 {
     s32 menuAction;
 

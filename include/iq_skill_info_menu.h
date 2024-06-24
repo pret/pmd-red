@@ -1,5 +1,5 @@
-#ifndef GUARD_CODE_801C620_H
-#define GUARD_CODE_801C620_H
+#ifndef GUARD_IQ_SKILL_INFO_MENU_H
+#define GUARD_IQ_SKILL_INFO_MENU_H
 
 #include "structs/menu.h"
 #include "structs/subStruct_203B240.h"
@@ -24,4 +24,4 @@ bool8 CreateIQSkillInfoMenu(u8 iqSkill);
 u32 HandleIQSkillInfoMenuState(void);
 void CleanIQSkillInfoMenu(void);
 
-#endif // GUARD_CODE_801C620_H
+#endif // GUARD_IQ_SKILL_INFO_MENU_H

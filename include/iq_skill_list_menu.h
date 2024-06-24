@@ -22,7 +22,7 @@ bool8 HasNoAvailIQSkills(s16 species);
 bool8 CreateIQSkillListMenu(s16 species, u32 index, u32);
 u32 HandleIQSkillListMenuInput(bool8);
 s32 GetIQSkillSelection(void);
-void sub_801C3B0(bool8);
+void RedrawIQSkillListMenu(bool8);
 void CleanIQSkillListMenu(void);
 void BuildIQSkillList(void);
 

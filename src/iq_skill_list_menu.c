@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/input.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "iq_skill_list_menu.h"
@@ -14,7 +15,7 @@ extern u8 gUnknown_202DEA8[];
 
 static EWRAM_DATA_2 struct unkStruct_203B23C *sUnknown_203B23C = {0};
 
-#include "data/code_801C244.h"
+#include "data/iq_skill_list_menu.h"
 
 static void sub_801C440(void);
 
@@ -59,13 +60,13 @@ u32 HandleIQSkillListMenuInput(bool8 a0)
     }
 
     switch (GetKeyPress(&sUnknown_203B23C->s24.s0.input)) {
-        case 2:
+        case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
-        case 1:
+        case INPUT_A_BUTTON:
             PlayMenuSoundEffect(0);
             return 3;
-        case 4:
+        case INPUT_START_BUTTON:
             PlayMenuSoundEffect(4);
             return 4;
         default:
@@ -83,7 +84,7 @@ s32 GetIQSkillSelection(void)
     return (sUnknown_203B23C->s24.s0.input.unk1E * sUnknown_203B23C->s24.s0.input.unk1C) + sUnknown_203B23C->s24.s0.input.menuIndex;
 }
 
-void sub_801C3B0(bool8 r0)
+void RedrawIQSkillListMenu(bool8 addCursor)
 {
     ResetUnusedInputStruct();
     sub_800641C(sUnknown_203B23C->s24.s0.unk3C, FALSE, FALSE);
@@ -92,7 +93,7 @@ void sub_801C3B0(bool8 r0)
     sub_801C440();
     BuildIQSkillList();
 
-    if (r0)
+    if (addCursor)
        AddMenuCursorSprite(&sUnknown_203B23C->s24.s0.input);
 }
 
