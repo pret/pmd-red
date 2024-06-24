@@ -220,13 +220,13 @@ void CreatePelipperBoardMenu(void)
   loopMax = 0;
   MemoryFill16(gPelipperBoard->unkFC,0,sizeof(gPelipperBoard->unkFC));
   gPelipperBoard->menuItems[0].text = gPelipperBoard_BulletinBoard;
-  gPelipperBoard->menuItems[0].menuAction = 2;
+  gPelipperBoard->menuItems[0].menuAction = PELIPPER_BOARD_BULLETIN_BOARD;
   if ((HasNoPelipperBoardJobs())) {
     gPelipperBoard->unkFC[0] = 1;
   }
   loopMax += 1;
   gPelipperBoard->menuItems[loopMax].text = gPelipperBoard_JobList;
-  gPelipperBoard->menuItems[loopMax].menuAction = 3;
+  gPelipperBoard->menuItems[loopMax].menuAction = PELIPPER_BOARD_JOB_LIST;
 
   if(HasNoAcceptedJobs())
   {
@@ -235,7 +235,7 @@ void CreatePelipperBoardMenu(void)
     
   loopMax += 1;
   gPelipperBoard->menuItems[loopMax].text = NULL;
-  gPelipperBoard->menuItems[loopMax].menuAction = 1;
+  gPelipperBoard->menuItems[loopMax].menuAction = PELIPPER_BOARD_NULL;
 
   for(index = 0; index < loopMax; index++)
   {
@@ -259,7 +259,7 @@ void sub_802EC10(void) {
     s32 index;
     s32 loopMax = 0; 
     gPelipperBoard->menuItems[loopMax].text = gCommonAccept[0];
-    gPelipperBoard->menuItems[loopMax].menuAction = 4;
+    gPelipperBoard->menuItems[loopMax].menuAction = PELIPPER_BOARD_ACCEPT;
 
     if((IsMailinJobSlot(GetPelipperBoardSlotInfo(gPelipperBoard->jobIndex))) || (GetNumAcceptedJobs() >= MAX_ACCEPTED_JOBS))
     {
@@ -268,10 +268,10 @@ void sub_802EC10(void) {
 
     loopMax += 1;
     gPelipperBoard->menuItems[loopMax].text = gCommonInfo[0];
-    gPelipperBoard->menuItems[loopMax].menuAction = 5;
+    gPelipperBoard->menuItems[loopMax].menuAction = PELIPPER_BOARD_INFO;
     loopMax += 1;
     gPelipperBoard->menuItems[loopMax].text = NULL;
-    gPelipperBoard->menuItems[loopMax].menuAction = 1;
+    gPelipperBoard->menuItems[loopMax].menuAction = PELIPPER_BOARD_NULL;
 
     for(index = 0; index < loopMax; index++)
     {
@@ -280,7 +280,7 @@ void sub_802EC10(void) {
                 return;
     }
 
-    gPelipperBoard->menuAction2 = 5;
+    gPelipperBoard->menuAction2 = PELIPPER_BOARD_INFO;
 }
 
 void sub_802ECB4(void)
@@ -290,29 +290,27 @@ void sub_802ECB4(void)
     if(!sub_8012FD8(&gPelipperBoard->unk6C))
     {
         sub_8013114(&gPelipperBoard->unk6C, &menuAction);
-        if(menuAction != 1) gPelipperBoard->menuAction1 = menuAction;
+        if(menuAction != PELIPPER_BOARD_NULL) gPelipperBoard->menuAction1 = menuAction;
     }
 
     switch(menuAction)
     {
-        // Bulletin Board
-        case 2:
+        case PELIPPER_BOARD_BULLETIN_BOARD:
             if(!HasNoPelipperBoardJobs())
                 SetPelipperBoardState(4);
             else
                 sub_8012EA4(&gPelipperBoard->unk6C, 1);
             break;
-        // Job List
-        case 3:
+        case PELIPPER_BOARD_JOB_LIST:
             if(!HasNoAcceptedJobs())
                 SetPelipperBoardState(PELIPPER_JOB_LIST_MENU);
             else
                 sub_8012EA4(&gPelipperBoard->unk6C, 1);
             break;
-        case 5:
+        case PELIPPER_BOARD_INFO:
             SetPelipperBoardState(2);
             break;
-        case 1:
+        case PELIPPER_BOARD_NULL:
             SetPelipperBoardState(PELIPPER_BOARD_EXIT);
             break;
     }
@@ -322,15 +320,15 @@ void sub_802ED4C(void)
 {
     switch(sub_802C1E4(TRUE))
     {
-        case 3:
+        case 3: // A button
             gPelipperBoard->jobIndex = sub_802C26C();
             SetPelipperBoardState(6);
             break;
-        case 4:
+        case 4: // Start button
             gPelipperBoard->jobIndex = sub_802C26C();
             SetPelipperBoardState(7);
             break;
-        case 2:
+        case 2: // B button
             sub_802C2D4();
             SetPelipperBoardState(MAIN_PELIPPER_BOARD_MENU);
             break;
@@ -349,12 +347,11 @@ void sub_802EDBC(void)
     if(!sub_8012FD8(&gPelipperBoard->unk6C))
     {
         sub_8013114(&gPelipperBoard->unk6C, &menuAction);
-        if(menuAction != 1) gPelipperBoard->menuAction2 = menuAction;
+        if(menuAction != PELIPPER_BOARD_NULL) gPelipperBoard->menuAction2 = menuAction;
     }
     switch(menuAction)
     {
-        // Accept
-        case 4:
+        case PELIPPER_BOARD_ACCEPT:
             PlaySound(0x133);
             mail = GetPelipperBoardSlotInfo(gPelipperBoard->jobIndex);
             switch(mail->mailType)
@@ -394,11 +391,10 @@ void sub_802EDBC(void)
                     break;
             }
             break;
-        // Info
-        case 5:
+        case PELIPPER_BOARD_INFO:
             SetPelipperBoardState(PELIPPER_JOB_INFO);
             break;
-        case 1:
+        case PELIPPER_BOARD_NULL:
             SetPelipperBoardState(5);
             break;
     }

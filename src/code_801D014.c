@@ -3,7 +3,7 @@
 #include "bg_palette_buffer.h"
 #include "code_800D090.h"
 #include "code_80130A8.h"
-#include "code_801BEEC.h"
+#include "iq_skill_menu.h"
 #include "code_801D014.h"
 #include "code_80227B8.h"
 #include "code_8023868.h"
@@ -264,7 +264,7 @@ static void sub_801D3A8(void)
             sub_8027074();
             break;
         case 5:
-            sub_8025EF4(sUnknown_203B250->pokeStruct);
+            CreatePartyListMenu(sUnknown_203B250->pokeStruct);
             break;
         case 6:
             sub_80252F0(0);
@@ -276,7 +276,7 @@ static void sub_801D3A8(void)
             sub_8024458(sUnknown_203B250->index, 2);
             break;
         case 9:
-            sub_801BEEC(sUnknown_203B250->index);
+            CreateIQSkillMenu(sUnknown_203B250->index);
             break;
         case 10:
             sub_8021774(sUnknown_203B250->currFriendAreaLocation, TRUE, 2);
@@ -462,7 +462,7 @@ static void sub_801D798(void)
             if (sub_802604C())
                 sUnknown_203B250->unk7 = sUnknown_203B250->currFriendAreaLocation;
 
-            sub_8026058();
+            CleanPartyListMenu();
             sub_801D208(2);
             break;
     }
@@ -512,7 +512,7 @@ static void sub_801D824(void)
             break;
         case 2:
         case 3:
-            sub_801BF98();
+            CleanIQSkillMenu();
             sub_801D208(1);
             break;
     }

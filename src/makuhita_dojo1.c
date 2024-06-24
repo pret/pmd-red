@@ -105,7 +105,7 @@ bool8 MakuhitaDojo_New(u32 mode)
     return TRUE;
 }
 
-u32 sub_802FE58(void)
+u32 HandleMakuhitaDojoState(void)
 {
     switch (sMakuhitaDojoWork1->state) {
         case 0:

@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
-#include "code_801BEEC.h"
+#include "iq_skill_menu.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
 #include "code_8023868.h"
@@ -191,7 +191,7 @@ void sub_8027274(void)
             sub_8024458(sUnknown_203B2BC->targetPoke, 2);
             break;
         case FRIEND_AREA_ACTION_MENU_CHECK_IQ:
-            sub_801BEEC(sUnknown_203B2BC->targetPoke);
+            CreateIQSkillMenu(sUnknown_203B2BC->targetPoke);
             break;
         case 10:
             sub_801A5D8(1, 0, NULL, 10);
@@ -512,7 +512,7 @@ void sub_8027A5C(void)
     {
         case 2:
         case 3:
-            sub_801BF98();
+            CleanIQSkillMenu();
             SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_MAIN_2);
             break;
         case 0:

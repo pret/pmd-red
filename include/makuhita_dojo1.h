@@ -43,7 +43,7 @@ typedef struct MakuhitaDojoWork1
 void MakuhitaDojo_Delete(void);
 bool8 MakuhitaDojo_New(u32 mode);
 
-u32 sub_802FE58(void);
+u32 HandleMakuhitaDojoState(void);
 s16 sub_802FED0(void);
 
 #endif // GUARD_MAKUHITA_DOJO1_H

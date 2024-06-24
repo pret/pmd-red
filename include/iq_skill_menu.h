@@ -1,5 +1,5 @@
-#ifndef GUARD_CODE_801BEEC_H
-#define GUARD_CODE_801BEEC_H
+#ifndef GUARD_CODE_IQ_SKILL_MENU_H
+#define GUARD_CODE_IQ_SKILL_MENU_H
 
 #include "constants/iq_skill.h"
 #include "structs/menu.h"
@@ -13,7 +13,7 @@ struct unkStruct_203B238
     /* 0x4 */ s16 species;
     /* 0x8 */ PokemonStruct1 *pokeStruct;
     /* 0xC */ u8 iqSkills[NUM_IQ_SKILLS];
-    u32 unk24;
+    /* 0x24 */ u32 menuIndex;
     /* 0x28 */ u8 iqSkillIndex;
     /* 0x2C */ u32 numIQSkills;
     /* 0x30 */ s32 menuAction;
@@ -22,8 +22,23 @@ struct unkStruct_203B238
     UnkTextStruct2 unkC4[4];
 };
 
-bool8 sub_801BEEC(s16 species);
+bool8 CreateIQSkillMenu(s16 species);
 u32 sub_801BF48(void);
-void sub_801BF98(void);
+void CleanIQSkillMenu(void);
 
-#endif // GUARD_CODE_801BEEC_H
+enum IQSkillMenuStates
+{
+    IQ_SKILL_MENU_STATE_INIT,
+    IQ_SKILL_MENU_STATE_MAIN,
+    IQ_SKILL_MENU_STATE_INFO = 3,
+    IQ_SKILL_MENU_STATE_EXIT
+};
+
+enum IQSkillMenuActions
+{
+    IQ_SKILL_MENU_NULL = 1,
+    IQ_SKILL_MENU_SWITCH,
+    IQ_SKILL_MENU_INFO,
+};
+
+#endif // GUARD_CODE_IQ_SKILL_MENU_H

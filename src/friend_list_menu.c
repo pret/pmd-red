@@ -4,7 +4,7 @@
 #include "code_80130A8.h"
 #include "code_801602C.h"
 #include "code_801B3C0.h"
-#include "code_801BEEC.h"
+#include "iq_skill_menu.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
 #include "code_8023868.h"
@@ -237,7 +237,7 @@ void sub_8025518(void)
         sub_8024458(gUnknown_203B2B4->species,2);
         break;
     case 5:
-        sub_801BEEC(gUnknown_203B2B4->species);
+        CreateIQSkillMenu(gUnknown_203B2B4->species);
         break;
     case 0xb:
         sub_801A5D8(1, 0, NULL, 10);
@@ -505,7 +505,7 @@ void sub_8025BE8(void)
     {
         case 2:
         case 3:
-            sub_801BF98();
+            CleanIQSkillMenu();
             sub_8025434(2);
             break;
         case 0:

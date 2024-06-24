@@ -222,21 +222,21 @@ gUnknown_8116298: @ 8116298
 .4byte 1
 .4byte 0
 .4byte MakuhitaDojo_Delete
-.4byte sub_802FE58
+.4byte HandleMakuhitaDojoState
 
 .global gUnknown_81162A8
 gUnknown_81162A8: @ 81162A8
 .4byte 1
 .4byte 0
 .4byte MakuhitaDojo_Delete
-.4byte sub_802FE58
+.4byte HandleMakuhitaDojoState
 
 .global gUnknown_81162B8
 gUnknown_81162B8: @ 81162B8
         .4byte 1
         .4byte 0
         .4byte MakuhitaDojo_Delete
-        .4byte sub_802FE58
+        .4byte HandleMakuhitaDojoState
 
 .global gUnknown_81162C8
 gUnknown_81162C8: @ 81162C8

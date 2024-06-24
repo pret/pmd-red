@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
-#include "code_801C244.h"
+#include "iq_skill_list_menu.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
@@ -18,7 +18,7 @@ static EWRAM_DATA_2 struct unkStruct_203B23C *sUnknown_203B23C = {0};
 
 static void sub_801C440(void);
 
-bool8 sub_801C244(s16 species, u32 index, u32 a2)
+bool8 CreateIQSkillListMenu(s16 species, u32 index, u32 a2)
 {
 #ifndef NONMATCHING
     register s32 species_s32 asm("r4");
@@ -47,11 +47,11 @@ bool8 sub_801C244(s16 species, u32 index, u32 a2)
     sub_800641C(sUnknown_203B23C->s24.s0.unk3C, TRUE, TRUE);
     sub_8013818(&sUnknown_203B23C->s24.s0.input, sUnknown_203B23C->numIQSkills, a2, index);
     sub_801C440();
-    sub_801C4C8();
+    BuildIQSkillList();
     return TRUE;
 }
 
-u32 sub_801C308(bool8 a0)
+u32 HandleIQSkillListMenuInput(bool8 a0)
 {
     if (!a0) {
         sub_8013660(&sUnknown_203B23C->s24.s0.input);
@@ -71,14 +71,14 @@ u32 sub_801C308(bool8 a0)
         default:
             if (sub_80138B8(&sUnknown_203B23C->s24.s0.input, 1) != 0) {
                 sub_801C440();
-                sub_801C4C8();
+                BuildIQSkillList();
                 return 1;
             }
             return 0;
     }
 }
 
-s32 sub_801C390(void)
+s32 GetIQSkillSelection(void)
 {
     return (sUnknown_203B23C->s24.s0.input.unk1E * sUnknown_203B23C->s24.s0.input.unk1C) + sUnknown_203B23C->s24.s0.input.menuIndex;
 }
@@ -90,13 +90,13 @@ void sub_801C3B0(bool8 r0)
     sUnknown_203B23C->s24.s0.input.unk22 = sUnknown_203B23C->numIQSkills;
     sub_8013984(&sUnknown_203B23C->s24.s0.input);
     sub_801C440();
-    sub_801C4C8();
+    BuildIQSkillList();
 
     if (r0)
        AddMenuCursorSprite(&sUnknown_203B23C->s24.s0.input);
 }
 
-void sub_801C3F8(void)
+void CleanIQSkillListMenu(void)
 {
     if (sUnknown_203B23C != NULL) {
         sUnknown_203B23C->s24.s0.unk3C[sUnknown_203B23C->s24.s0.unk34] = sUnknown_80DBDD8;
@@ -119,7 +119,7 @@ static void sub_801C440(void)
     SUB_80095E4_CALL_2(sUnknown_203B23C->s24.s0);
 }
 
-void sub_801C4C8(void)
+void BuildIQSkillList(void)
 {
     u32 y;
     s32 x;

@@ -4,7 +4,7 @@
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
-#include "code_801BEEC.h"
+#include "iq_skill_menu.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
 #include "code_80227B8.h"
@@ -44,30 +44,30 @@ bool8 sub_8026EB8(PokemonStruct1 *r0);
 void sub_8026E08(u32 r0);
 void sub_8026DAC(u32 r0, BulkItem *item);
 void sub_8026FA4(void);
-void sub_8026878(void);
+void PartyListMenu_BuildYesNoMenu(void);
 extern void sub_808D31C(PokemonStruct1 *);
 
-void sub_802678C(void);
-void sub_80264CC(void);
-void sub_80261D0(void);
+void PartyListMenu_CreateMenu2(void);
+void PartyListMenu_CreateMenu1(void);
+void HandlePartyListMenuCallback(void);
 
-void sub_80268CC(void);
+void PartyListMenu_HandleMenu1(void);
 void sub_8026A78(void);
 void sub_8026A94(void);
 void sub_8026AB0(void);
 void sub_8026B10(void);
 void sub_8026B48(void);
 void sub_8026B64(void);
-void sub_8026C14(void);
+void PartyListMenu_HandleMenu2(void);
 void sub_8026CF0(void);
 void sub_8026D0C(void);
 void sub_8026D6C(void);
-void sub_8026D88(void);
+void PartyListMenu_GotoFallbackState(void);
 
-static void sub_8026074(s32 newState);
+static void SetPartyListMenuState(s32 newState);
 static void sub_802608C(void);
 
-bool8 sub_8025EF4(PokemonStruct1 *pokeStruct)
+bool8 CreatePartyListMenu(PokemonStruct1 *pokeStruct)
 {
     s32 i;
 
@@ -85,46 +85,46 @@ bool8 sub_8025EF4(PokemonStruct1 *pokeStruct)
     sUnknown_203B2B8->menuAction2 = 0;
     sUnknown_203B2B8->menuAction3 = 0;
     sUnknown_203B2B8->unk8 = FALSE;
-    sub_8026074(0);
+    SetPartyListMenuState(PARTY_LIST_STATE_INIT);
     return TRUE;
 }
 
 u32 sub_8025F68(void)
 {
     switch (sUnknown_203B2B8->state) {
-        case 0:
-            sub_8026074(1);
+        case PARTY_LIST_STATE_INIT:
+            SetPartyListMenuState(PARTY_LIST_STATE_MAIN_MENU);
             break;
-        case 1:
-        case 2:
-            sub_80268CC();
+        case PARTY_LIST_STATE_MAIN_MENU:
+        case PARTY_LIST_STATE_MAIN_MENU_1:
+            PartyListMenu_HandleMenu1();
             break;
-        case 3:
+        case PARTY_LIST_STATE_SUMMARY:
             sub_8026A78();
             break;
-        case 4:
+        case PARTY_LIST_STATE_CHECK_IQ:
             sub_8026A94();
             break;
-        case 0xc:
+        case PARTY_LIST_STATE_SAY_FAREWELL:
             sub_8026AB0();
             break;
-        case 0xd:
+        case PARTY_LIST_STATE_CONFIRM_SAY_FAREWELL:
             sub_8026B10();
             break;
-        case 0xe:
+        case PARTY_LIST_STATE_GIVE_GUMMI:
             sub_8026B48();
             break;
-        case 0x12:
-        case 0x13:
+        case PARTY_LIST_STATE_GIVE_ITEM:
+        case PARTY_LIST_STATE_GIVE_ITEM_1:
             sub_8026B64();
             break;
         case 0x14:
-            sub_8026C14();
+            PartyListMenu_HandleMenu2();
             break;
         case 0x15:
             sub_8026CF0();
             break;
-        case 0x16:
+        case PARTY_LIST_STATE_MOVES:
         case 0x17:
             sub_8026D0C();
             break;
@@ -132,9 +132,9 @@ u32 sub_8025F68(void)
             sub_8026D6C();
             break;
         default:
-            sub_8026D88();
+            PartyListMenu_GotoFallbackState();
             break;
-        case 0x19:
+        case PARTY_LIST_STATE_EXIT:
             return 3;
     }
     return 0;
@@ -145,7 +145,7 @@ bool8 sub_802604C(void)
     return sUnknown_203B2B8->unk8;
 }
 
-void sub_8026058(void)
+void CleanPartyListMenu(void)
 {
     if (sUnknown_203B2B8) {
         MemoryFree(sUnknown_203B2B8);
@@ -153,11 +153,11 @@ void sub_8026058(void)
     }
 }
 
-static void sub_8026074(s32 newState)
+static void SetPartyListMenuState(s32 newState)
 {
     sUnknown_203B2B8->state = newState;
     sub_802608C();
-    sub_80261D0();
+    HandlePartyListMenuCallback();
 }
 
 static void sub_802608C(void)
@@ -166,21 +166,21 @@ static void sub_802608C(void)
     sub_8006518(sUnknown_203B2B8->unk220);
     switch(sUnknown_203B2B8->state)
     {
-        case 1:
-        case 2:
+        case PARTY_LIST_STATE_MAIN_MENU:
+        case PARTY_LIST_STATE_MAIN_MENU_1:
             for(index = 0; index < 4; index++)
             {
                 sUnknown_203B2B8->unk220[index] = sUnknown_80DD310;
             }
             sUnknown_203B2B8->unk220[0] = sUnknown_80DD358;
             sUnknown_203B2B8->unk220[3] = sUnknown_80DD370;
-            sub_80264CC();
+            PartyListMenu_CreateMenu1();
             sUnknown_203B2B8->unk220[2] = sUnknown_80DD328;
             sub_8012CAC(&sUnknown_203B2B8->unk220[2], sUnknown_203B2B8->unk16C);
             sUnknown_203B2B8->unk220[2].unkC = 9;
             break;
         case 0x14:
-            sub_802678C();
+            PartyListMenu_CreateMenu2();
             sUnknown_203B2B8->unk220[2] = sUnknown_80DD340;
             sub_8012CAC(&sUnknown_203B2B8->unk220[2], sUnknown_203B2B8->unk16C);
             break;
@@ -195,38 +195,38 @@ static void sub_802608C(void)
     sub_800641C(sUnknown_203B2B8->unk220, TRUE, TRUE);
 }
 
-void sub_80261D0(void)
+void HandlePartyListMenuCallback(void)
 {
     Item item;
 
     switch(sUnknown_203B2B8->state) {
-        case 1:
+        case PARTY_LIST_STATE_MAIN_MENU:
             sub_8026E08(3);
             sub_8026DAC(0,&sUnknown_203B2B8->item2);
             PrintColoredPokeNameToBuffer(gAvailablePokemonNames,sUnknown_203B2B8->pokeStruct,7);
             PrintColoredPokeNameToBuffer(gAvailablePokemonNames + 0x50,sUnknown_203B2B8->pokeStruct,6);
             sub_8012D60(&sUnknown_203B2B8->unk7C,sUnknown_203B2B8->unk16C,0,sUnknown_203B2B8->unk20C,sUnknown_203B2B8->menuAction1,2);
             break;
-        case 2:
+        case PARTY_LIST_STATE_MAIN_MENU_1:
             sub_8026E08(3);
             sub_8026DAC(0,&sUnknown_203B2B8->item2);
             PrintColoredPokeNameToBuffer(gAvailablePokemonNames,sUnknown_203B2B8->pokeStruct,7);
             PrintColoredPokeNameToBuffer(gAvailablePokemonNames + 0x50,sUnknown_203B2B8->pokeStruct,6);
             sub_8012EA4(&sUnknown_203B2B8->unk7C,1);
             break;
-        case 3:
+        case PARTY_LIST_STATE_SUMMARY:
             sub_8024458(sUnknown_203B2B8->pokeSpecies,2);
             break;
-        case 4:
-            sub_801BEEC(sUnknown_203B2B8->pokeSpecies);
+        case PARTY_LIST_STATE_CHECK_IQ:
+            CreateIQSkillMenu(sUnknown_203B2B8->pokeSpecies);
             break;
-        case 0xe:
+        case PARTY_LIST_STATE_GIVE_GUMMI:
             sub_80227B8(sUnknown_203B2B8->pokeStruct);
             break;
-        case 0x12:
+        case PARTY_LIST_STATE_GIVE_ITEM:
             sub_801A5D8(1,0,NULL,10);
             break;
-        case 0x13:
+        case PARTY_LIST_STATE_GIVE_ITEM_1:
             sub_801A8D0(TRUE);
             break;
         case 0x14:
@@ -237,41 +237,41 @@ void sub_80261D0(void)
             HeldItemToSlot(&item,&sUnknown_203B2B8->item1);
             sub_801B3C0(&item);
             break;
-        case 0x16:
+        case PARTY_LIST_STATE_MOVES:
             unk_CopyMoves4To8(sUnknown_203B2B8->moves,sUnknown_203B2B8->pokeStruct->moves);
             sub_801EE10(3,sUnknown_203B2B8->pokeSpecies,sUnknown_203B2B8->moves,0,NULL,0);
             break;
         case 0x17:
             sub_801F1B0(TRUE, FALSE);
             break;
-        case 0xc:
-            sub_8026878();
+        case PARTY_LIST_STATE_SAY_FAREWELL:
+            PartyListMenu_BuildYesNoMenu();
             sub_8014248(sUnknown_80DD388,0,3,sUnknown_203B2B8->unk1BC,0,4,0,0,0x101);
             break;
-        case 0xd:
-            sub_8026878();
+        case PARTY_LIST_STATE_CONFIRM_SAY_FAREWELL:
+            PartyListMenu_BuildYesNoMenu();
             sub_8014248(sUnknown_80DD420,0,3,sUnknown_203B2B8->unk1BC,0,4,0,0,0x101);
             break;
         case 0x18:
             GetLinkedSequence(sUnknown_203B2B8->moveIndex, sUnknown_203B2B8->moves,sUnknown_203B2B8->moveIDs);
             sub_801F808(sUnknown_203B2B8->moveIDs);
             break;
-        case 5:
-            sUnknown_203B2B8->fallbackState = 0x19;
+        case PARTY_LIST_STATE_JOIN_TEAM:
+            sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_EXIT;
             PlaySound(0xcf);
             sub_80141B4(sUnknown_80DD4C4,0,0,0x101);
             break;
-        case 6:
-            sUnknown_203B2B8->fallbackState = 0x19;
+        case PARTY_LIST_STATE_STANDBY:
+            sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_EXIT;
             PlaySound(0xcf);
             sub_80141B4(sUnknown_80DD4F4,0,0,0x101);
             break;
-        case 7:
-            sUnknown_203B2B8->fallbackState = 0x19;
+        case PARTY_LIST_STATE_MAKE_LEADER:
+            sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_EXIT;
             PlaySound(0xcc);
             sub_80141B4(sBecameLeader,0,0,0x101);
             break;
-        case 8:
+        case PARTY_LIST_STATE_POKEMON_FAREWELL:
             sUnknown_203B2B8->fallbackState = 9;
             PlaySound(0xca);
             sub_80141B4(sUnknown_80DD564,0,0,0x101);
@@ -281,33 +281,33 @@ void sub_80261D0(void)
             sub_808D31C(sUnknown_203B2B8->pokeStruct);
             sUnknown_203B2B8->unk8 = TRUE;
             break;
-        case 0xf:
-            sUnknown_203B2B8->fallbackState = 2;
+        case PARTY_LIST_STATE_GIVEN_ITEM:
+            sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_MAIN_MENU_1;
             sub_80141B4(sUnknown_80DD594,0,0,0x101);
             break;
-        case 0x10:
-            sUnknown_203B2B8->fallbackState = 2;
+        case PARTY_LIST_STATE_GIVEN_ITEM_HELD_ITEM:
+            sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_MAIN_MENU_1;
             sub_80141B4(sUnknown_80DD5B8,0,0,0x101);
             break;
-        case 0x11:
-            sUnknown_203B2B8->fallbackState = 2;
+        case PARTY_LIST_STATE_TAKE_ITEM:
+            sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_MAIN_MENU_1;
             sub_80141B4(sUnknown_80DD60C,0,0,0x101);
             break;
         case 10:
-            sUnknown_203B2B8->fallbackState = 0x19;
+            sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_EXIT;
             sub_80141B4(sUnknown_80DD60C,0,0,0x101);
             break;
         case 0xb:
-            sUnknown_203B2B8->fallbackState = 0x19;
+            sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_EXIT;
             sub_80141B4(sUnknown_80DD63C,0,0,0x101);
             break;
-        case 0:
-        case 0x19:
+        case PARTY_LIST_STATE_INIT:
+        case PARTY_LIST_STATE_EXIT:
             break;
     }
 }
 
-void sub_80264CC(void) {
+void PartyListMenu_CreateMenu1(void) {
     PokemonStruct1 *pokeStruct;
     s32 index;
     s32 one;
@@ -322,7 +322,7 @@ void sub_80264CC(void) {
     if(temp = pokeStruct->unk0 >> 1, one = 1, temp & one)
     {
         sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuStandBy;
-        sUnknown_203B2B8->unk16C[loopMax].menuAction = 7;
+        sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_STANDBY;
         if(!sub_8026E88(pokeStruct))
         {
             sUnknown_203B2B8->unk20C[loopMax] = 1;
@@ -332,14 +332,14 @@ void sub_80264CC(void) {
         if(sub_80023E4(8) && !pokeStruct->isTeamLeader)
         {
             sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuMakeLeader;
-            sUnknown_203B2B8->unk16C[loopMax].menuAction = 8;
+            sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_MAKE_LEADER;
             loopMax += 1;
         }
     }
     else
     {
         sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuJoinTeam;
-        sUnknown_203B2B8->unk16C[loopMax].menuAction = 6;
+        sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_JOIN_TEAM;
         if(!sub_808D750(sUnknown_203B2B8->pokeSpecies))
         {
             sUnknown_203B2B8->unk20C[loopMax] = 1;
@@ -348,7 +348,7 @@ void sub_80264CC(void) {
     }
 
     sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuGiveGummi;
-    sUnknown_203B2B8->unk16C[loopMax].menuAction = 10;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_GIVE_GUMMI;
     if(!HasGummiItem())
     {
         sUnknown_203B2B8->unk20C[loopMax] = 1;
@@ -356,7 +356,7 @@ void sub_80264CC(void) {
     loopMax += 1;
 
     sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuGive;
-    sUnknown_203B2B8->unk16C[loopMax].menuAction = 0xB;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_GIVE_ITEM;
     if(GetNumberOfFilledInventorySlots() == 0)
     {
         sUnknown_203B2B8->unk20C[loopMax] = 1;
@@ -364,7 +364,7 @@ void sub_80264CC(void) {
     loopMax += 1;
 
     sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuTake;
-    sUnknown_203B2B8->unk16C[loopMax].menuAction = 0xC;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_TAKE_ITEM;
     if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE || sUnknown_203B2B8->item2.id == ITEM_NOTHING)
     {
         sUnknown_203B2B8->unk20C[loopMax] = 1;
@@ -374,7 +374,7 @@ void sub_80264CC(void) {
     if((temp = pokeStruct->unk0 >> 1, one = 1, temp & one) == 0)
     {
         sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuSayFarewell;
-        sUnknown_203B2B8->unk16C[loopMax].menuAction = 9;
+        sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_SAY_FAREWELL;
         if(!sub_8026EB8(pokeStruct))
         {
             sUnknown_203B2B8->unk20C[loopMax] = 1;
@@ -383,16 +383,16 @@ void sub_80264CC(void) {
     }
 
     sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuSummary;
-    sUnknown_203B2B8->unk16C[loopMax].menuAction = 4;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_SUMMARY;
     loopMax += 1;
     sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuMoves;
-    sUnknown_203B2B8->unk16C[loopMax].menuAction = 0xD;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_MOVES;
     loopMax += 1;
     sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuCheckIQ;
-    sUnknown_203B2B8->unk16C[loopMax].menuAction = 5;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_CHECK_IQ;
     loopMax += 1;
     sUnknown_203B2B8->unk16C[loopMax].text = NULL;
-    sUnknown_203B2B8->unk16C[loopMax].menuAction = 1;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_NULL;
 
     for(index = 0; index < loopMax; index++)
     {
@@ -412,23 +412,23 @@ void sub_80264CC(void) {
     }
 }
 
-void sub_802678C(void)
+void PartyListMenu_CreateMenu2(void)
 {
     s32 index;
     s32 loopMax = 0;
     MemoryFill16(sUnknown_203B2B8->unk20C, 0, sizeof(sUnknown_203B2B8->unk20C));
     sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuGive;
-    sUnknown_203B2B8->unk16C[loopMax].menuAction = 0xB;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_GIVE_ITEM;
     if(GetNumberOfFilledInventorySlots() == 0)
     {
         sUnknown_203B2B8->unk20C[0] = 1;
     }
     loopMax += 1;
     sUnknown_203B2B8->unk16C[loopMax].text = gCommonInfo[0];
-    sUnknown_203B2B8->unk16C[loopMax].menuAction = 4;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_INFO;
     loopMax += 1;
     sUnknown_203B2B8->unk16C[loopMax].text = NULL;
-    sUnknown_203B2B8->unk16C[loopMax].menuAction = 1;
+    sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_NULL;
 
     for(index = 0; index < loopMax; index++)
     {
@@ -448,19 +448,19 @@ void sub_802678C(void)
     }
 }
 
-void sub_8026878(void) {
+void PartyListMenu_BuildYesNoMenu(void) {
     s32 loopMax = 0;
     sUnknown_203B2B8->unk1BC[loopMax].text = gCommonYes[0];
-    sUnknown_203B2B8->unk1BC[loopMax].menuAction = 2;
+    sUnknown_203B2B8->unk1BC[loopMax].menuAction = PARTY_LIST_MENU_YES;
     loopMax += 1;
     sUnknown_203B2B8->unk1BC[loopMax].text = gCommonNo[0];
-    sUnknown_203B2B8->unk1BC[loopMax].menuAction = 3;
+    sUnknown_203B2B8->unk1BC[loopMax].menuAction = PARTY_LIST_MENU_NO;
     loopMax += 1;
     sUnknown_203B2B8->unk1BC[loopMax].text = NULL;
-    sUnknown_203B2B8->unk1BC[loopMax].menuAction = 1;
+    sUnknown_203B2B8->unk1BC[loopMax].menuAction = PARTY_LIST_MENU_NULL;
 }
 
-void sub_80268CC(void)
+void PartyListMenu_HandleMenu1(void)
 {
   PokemonStruct1 *playerPokemon;
   PokemonStruct1 *pokeStruct;
@@ -468,11 +468,11 @@ void sub_80268CC(void)
   s32 choice;
 
   choice = 0;
-  if ((sub_8012FD8(&sUnknown_203B2B8->unk7C) == 0) && (sub_8013114(&sUnknown_203B2B8->unk7C,&choice), choice != 1)) {
+  if ((sub_8012FD8(&sUnknown_203B2B8->unk7C) == 0) && (sub_8013114(&sUnknown_203B2B8->unk7C,&choice), choice != PARTY_LIST_MENU_NULL)) {
     sUnknown_203B2B8->menuAction1 = choice;
   }
   switch(choice) {
-    case 6:
+    case PARTY_LIST_MENU_JOIN_TEAM:
         if (sub_808D750(sUnknown_203B2B8->pokeSpecies)) {
 
 #ifdef NONMATCHING
@@ -488,15 +488,15 @@ void sub_80268CC(void)
             nullsub_104();
         }
         sub_808ED00();
-        sub_8026074(5);
+        SetPartyListMenuState(PARTY_LIST_STATE_JOIN_TEAM);
         break;
-    case 7:
+    case PARTY_LIST_MENU_STANDBY:
         sUnknown_203B2B8->pokeStruct->unk0 &= ~(FLAG_ON_TEAM);
         nullsub_104();
         sub_808ED00();
-        sub_8026074(6);
+        SetPartyListMenuState(PARTY_LIST_STATE_STANDBY);
         break;
-    case 8:
+    case PARTY_LIST_MENU_MAKE_LEADER:
         pokeStruct2 = &gRecruitedPokemonRef->pokemon[sUnknown_203B2B8->pokeSpecies];
         playerPokemon = GetPlayerPokemonStruct();
 
@@ -506,21 +506,21 @@ void sub_80268CC(void)
             nullsub_104();
         }
         sub_808ED00();
-        sub_8026074(7);
+        SetPartyListMenuState(PARTY_LIST_STATE_MAKE_LEADER);
         break;
-    case 9:
-        sub_8026074(0xc);
+    case PARTY_LIST_MENU_SAY_FAREWELL:
+        SetPartyListMenuState(PARTY_LIST_STATE_SAY_FAREWELL);
         break;
-    case 0xd:
-        sub_8026074(0x16);
+    case PARTY_LIST_MENU_MOVES:
+        SetPartyListMenuState(PARTY_LIST_STATE_MOVES);
         break;
-    case 10:
-        sub_8026074(0xe);
+    case PARTY_LIST_MENU_GIVE_GUMMI:
+        SetPartyListMenuState(PARTY_LIST_STATE_GIVE_GUMMI);
         break;
-    case 0xb:
-        sub_8026074(0x12);
+    case PARTY_LIST_MENU_GIVE_ITEM:
+        SetPartyListMenuState(PARTY_LIST_STATE_GIVE_ITEM);
         break;
-    case 0xc:
+    case PARTY_LIST_MENU_TAKE_ITEM:
         PlaySound(0x14d);
         if (sUnknown_203B2B8->item2.id != ITEM_NOTHING) {
             AddHeldItemToInventory(&sUnknown_203B2B8->item2);
@@ -530,16 +530,16 @@ void sub_80268CC(void)
         sUnknown_203B2B8->item2.quantity = 0;
         GivePokemonItem(sUnknown_203B2B8->pokeSpecies,&sUnknown_203B2B8->item2);
         nullsub_104();
-        sub_8026074(0x11);
+        SetPartyListMenuState(PARTY_LIST_STATE_TAKE_ITEM);
         break;
-    case 4:
-        sub_8026074(3);
+    case PARTY_LIST_MENU_SUMMARY:
+        SetPartyListMenuState(PARTY_LIST_STATE_SUMMARY);
         break;
-    case 5:
-        sub_8026074(4);
+    case PARTY_LIST_MENU_CHECK_IQ:
+        SetPartyListMenuState(PARTY_LIST_STATE_CHECK_IQ);
         break;
-    case 1:
-        sub_8026074(0x19);
+    case PARTY_LIST_MENU_NULL:
+        SetPartyListMenuState(PARTY_LIST_STATE_EXIT);
         break;
 
   }
@@ -552,7 +552,7 @@ void sub_8026A78(void)
         case 2:
         case 3:
             sub_802453C();
-            sub_8026074(2);
+            SetPartyListMenuState(PARTY_LIST_STATE_MAIN_MENU_1);
             break;
         case 0:
         case 1:
@@ -566,8 +566,8 @@ void sub_8026A94(void)
     {
         case 2:
         case 3:
-            sub_801BF98();
-            sub_8026074(2);
+            CleanIQSkillMenu();
+            SetPartyListMenuState(PARTY_LIST_STATE_MAIN_MENU_1);
             break;
         case 0:
         case 1:
@@ -592,13 +592,13 @@ void sub_8026AB0(void)
         {
             case 1:
             case 3:
-                sub_8026074(2);
+                SetPartyListMenuState(PARTY_LIST_STATE_MAIN_MENU_1);
                 break;
             case 2:
                 if (sub_8026AB0_sub())
-                    sub_8026074(0xD);
+                    SetPartyListMenuState(PARTY_LIST_STATE_CONFIRM_SAY_FAREWELL);
                 else
-                    sub_8026074(8);
+                    SetPartyListMenuState(PARTY_LIST_STATE_POKEMON_FAREWELL);
                 break;
         }
     }
@@ -613,10 +613,10 @@ void sub_8026B10(void)
         {
             case 1:
             case 3:
-                sub_8026074(2);
+                SetPartyListMenuState(PARTY_LIST_STATE_MAIN_MENU_1);
                 break;
             case 2:
-                sub_8026074(8);
+                SetPartyListMenuState(PARTY_LIST_STATE_POKEMON_FAREWELL);
                 break;
         }
     }
@@ -630,7 +630,7 @@ void sub_8026B48(void)
         case 2:
         case 3:
             sub_8022908();
-            sub_8026074(2);
+            SetPartyListMenuState(PARTY_LIST_STATE_MAIN_MENU_1);
             break;
         case 0:
         case 1:
@@ -647,18 +647,18 @@ void sub_8026B64(void)
             sUnknown_203B2B8->id = sub_801A8AC();
             sUnknown_203B2B8->item1.id = gTeamInventoryRef->teamItems[sUnknown_203B2B8->id].id;
             sUnknown_203B2B8->item1.quantity = gTeamInventoryRef->teamItems[sUnknown_203B2B8->id].quantity;
-            sub_8026074(0x14);
+            SetPartyListMenuState(0x14);
             break;
         case 4:
             sUnknown_203B2B8->id = sub_801A8AC();
             sUnknown_203B2B8->item1.id = gTeamInventoryRef->teamItems[sUnknown_203B2B8->id].id;
             sUnknown_203B2B8->item1.quantity = gTeamInventoryRef->teamItems[sUnknown_203B2B8->id].quantity;
             sub_8099690(0);
-            sub_8026074(0x15);
+            SetPartyListMenuState(0x15);
             break;
         case 2:
             sub_801A928();
-            sub_8026074(2);
+            SetPartyListMenuState(PARTY_LIST_STATE_MAIN_MENU_1);
             break;
         case 0:
         case 1:
@@ -666,7 +666,7 @@ void sub_8026B64(void)
     }
 }
 
-void sub_8026C14(void)
+void PartyListMenu_HandleMenu2(void)
 {
   u32 nextState;
   struct unkStruct_8090F58 temp;
@@ -675,19 +675,19 @@ void sub_8026C14(void)
 
   menuAction = 0;
   sub_801A6E8(FALSE);
-  if ((sub_8012FD8(&sUnknown_203B2B8->unkCC) == '\0') && (sub_8013114(&sUnknown_203B2B8->unkCC,&menuAction), menuAction != 1)) {
+  if ((sub_8012FD8(&sUnknown_203B2B8->unkCC) == '\0') && (sub_8013114(&sUnknown_203B2B8->unkCC,&menuAction), menuAction != PARTY_LIST_MENU_NULL)) {
     sUnknown_203B2B8->menuAction2 = menuAction;
   }
   switch(menuAction)
   {
-      case 0xb:
-        nextState = 0xF;
+      case PARTY_LIST_MENU_GIVE_ITEM:
+        nextState = PARTY_LIST_STATE_GIVEN_ITEM;
         PlaySound(0x14d);
         ShiftItemsDownFrom(sUnknown_203B2B8->id);
         FillInventoryGaps();
         if (sUnknown_203B2B8->item2.id != ITEM_NOTHING) {
           AddHeldItemToInventory(&sUnknown_203B2B8->item2);
-          nextState = 0x10;
+          nextState = PARTY_LIST_STATE_GIVEN_ITEM_HELD_ITEM;
         }
         HeldItemToSlot(&slot,&sUnknown_203B2B8->item1);
         temp.unk0 = 0;
@@ -698,14 +698,14 @@ void sub_8026C14(void)
         GivePokemonItem(sUnknown_203B2B8->pokeSpecies,&sUnknown_203B2B8->item1);
         sub_801A928();
         nullsub_104();
-        sub_8026074(nextState);
+        SetPartyListMenuState(nextState);
         break;
-      case 4:
+      case PARTY_LIST_MENU_INFO:
         sub_8099690(0);
-        sub_8026074(0x15);
+        SetPartyListMenuState(0x15);
         break;
-      case 1:
-        sub_8026074(0x13);
+      case PARTY_LIST_MENU_NULL:
+        SetPartyListMenuState(PARTY_LIST_STATE_GIVE_ITEM_1);
         break;
   }
 }
@@ -717,7 +717,7 @@ void sub_8026CF0(void)
         case 2:
         case 3:
             sub_801B450();
-            sub_8026074(0x13);
+            SetPartyListMenuState(PARTY_LIST_STATE_GIVE_ITEM_1);
             break;
         case 0:
         case 1:
@@ -737,11 +737,11 @@ void sub_8026D0C(void)
         case 4:
             sUnknown_203B2B8->moveIndex = sub_801F194();
             sUnknown_203B2B8->moveID = sUnknown_203B2B8->moves[sUnknown_203B2B8->moveIndex].id;
-            sub_8026074(0x18);
+            SetPartyListMenuState(0x18);
             break;
         case 2:
             sub_801F214();
-            sub_8026074(2);
+            SetPartyListMenuState(PARTY_LIST_STATE_MAIN_MENU_1);
             break;
     }
 }
@@ -753,7 +753,7 @@ void sub_8026D6C(void)
         case 2:
         case 3:
             sub_801F8D0();
-            sub_8026074(0x17);
+            SetPartyListMenuState(0x17);
             break;
         case 0:
         case 1:
@@ -761,12 +761,12 @@ void sub_8026D6C(void)
     }
 }
 
-void sub_8026D88(void)
+void PartyListMenu_GotoFallbackState(void)
 {
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        sub_8026074(sUnknown_203B2B8->fallbackState);
+        SetPartyListMenuState(sUnknown_203B2B8->fallbackState);
     }
 }
 
@@ -883,7 +883,7 @@ void sub_8026FA4(void)
             sUnknown_203B2B8->item2.id = ITEM_NOTHING;
             sUnknown_203B2B8->item2.quantity = 0;
             GivePokemonItem(sUnknown_203B2B8->pokeSpecies, &sUnknown_203B2B8->item2);
-            sub_8026074(0xA);
+            SetPartyListMenuState(0xA);
             break;
         case 2:
             PlaySound(0x14d);
@@ -899,11 +899,11 @@ void sub_8026FA4(void)
             sUnknown_203B2B8->item2.id = ITEM_NOTHING;
             sUnknown_203B2B8->item2.quantity = 0;
             GivePokemonItem(sUnknown_203B2B8->pokeSpecies, &sUnknown_203B2B8->item2);
-            sub_8026074(0xB);
+            SetPartyListMenuState(0xB);
             break;
         case 0:
         default:
-            sub_8026074(0x19);
+            SetPartyListMenuState(PARTY_LIST_STATE_EXIT);
             break;
     }
 }

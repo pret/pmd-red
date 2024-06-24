@@ -19,12 +19,12 @@ static EWRAM_DATA_2 struct unkStruct_203B240 *sUnknown_203B240 = {0};
 
 #include "data/code_801C620.h"
 
-static void sub_801C6D0(s32 newState);
+static void SetIQSkillInfoMenuState(s32 newState);
 static void sub_801C6E4(void);
 static void sub_801C7D4(void);
 static void sub_801C848(void);
 
-bool8 sub_801C620(u8 iqSkill)
+bool8 CreateIQSkillInfoMenu(u8 iqSkill)
 {
     ResetSprites(TRUE);
 
@@ -35,11 +35,11 @@ bool8 sub_801C620(u8 iqSkill)
     sub_80140B4(sUnknown_203B240->unk28);
     ResetUnusedInputStruct();
     sub_800641C(sUnknown_203B240->unk28, TRUE, TRUE);
-    sub_801C6D0(0);
+    SetIQSkillInfoMenuState(0);
     return TRUE;
 }
 
-u32 sub_801C674(void)
+u32 HandleIQSkillInfoMenuState(void)
 {
     switch (sUnknown_203B240->state) {
         case 0:
@@ -57,7 +57,7 @@ u32 sub_801C674(void)
     return 0;
 }
 
-void sub_801C6B4(void)
+void CleanIQSkillInfoMenu(void)
 {
     if (sUnknown_203B240 != NULL) {
         MemoryFree(sUnknown_203B240);
@@ -65,7 +65,7 @@ void sub_801C6B4(void)
     }
 }
 
-static void sub_801C6D0(s32 newState)
+static void SetIQSkillInfoMenuState(s32 newState)
 {
     sUnknown_203B240->state = newState;
     sub_801C6E4();
@@ -118,14 +118,14 @@ static void sub_801C7D4(void)
 
             if (sUnknown_203B240->unkC != 0) {
                 sUnknown_203B240->unk8 = 0;
-                sub_801C6D0(1);
+                SetIQSkillInfoMenuState(1);
             }
             else
-                sub_801C6D0(3);
+                SetIQSkillInfoMenuState(3);
             break;
         case 2:
             PlayMenuSoundEffect(1);
-            sub_801C6D0(2);
+            SetIQSkillInfoMenuState(2);
             break;
     }
 }
@@ -145,13 +145,13 @@ static void sub_801C848(void)
             sUnknown_203B240->unk8++;
 
             if (sUnknown_203B240->unk8 < sUnknown_203B240->unkC)
-                sub_801C6D0(1);
+                SetIQSkillInfoMenuState(1);
             else
-                sub_801C6D0(0);
+                SetIQSkillInfoMenuState(0);
             break;
         case 2:
             PlayMenuSoundEffect(1);
-            sub_801C6D0(2);
+            SetIQSkillInfoMenuState(2);
             break;
     }
 }

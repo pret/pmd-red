@@ -2938,7 +2938,7 @@ _0809C032:
 	ldr r0, [r6]
 	b _0809B972
 _0809C036:
-	bl sub_802FE58
+	bl HandleMakuhitaDojoState
 	cmp r0, 0x2
 	beq _0809C05E
 	cmp r0, 0x3

@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
-#include "code_801BEEC.h"
+#include "iq_skill_menu.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
 #include "code_8023868.h"
@@ -307,7 +307,7 @@ static void sub_801FF28(void)
             sub_8024458(gUnknown_203B27C->speciesNum,2);
             break;
         case 0x13:
-            sub_801BEEC(gUnknown_203B27C->speciesNum);
+            CreateIQSkillMenu(gUnknown_203B27C->speciesNum);
             break;
         case 0x14:
             gUnknown_203B27C->fallbackState = 0x15;
@@ -762,7 +762,7 @@ static void sub_8020C48(void)
     {
         case 2:
         case 3:
-            sub_801BF98();
+            CleanIQSkillMenu();
             sub_801FDA8(0x10);
             break;
         case 0:

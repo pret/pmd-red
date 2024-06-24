@@ -20,8 +20,8 @@ struct unkStruct_203B240
     MenuInputStructSub unk88;
 };
 
-bool8 sub_801C620(u8 iqSkill);
-u32 sub_801C674(void);
-void sub_801C6B4(void);
+bool8 CreateIQSkillInfoMenu(u8 iqSkill);
+u32 HandleIQSkillInfoMenuState(void);
+void CleanIQSkillInfoMenu(void);
 
 #endif // GUARD_CODE_801C620_H
