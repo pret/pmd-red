@@ -50,7 +50,7 @@ void sub_809C414(void)
 {
         gUnknown_3001B64->unk430 = -1;
     }
-    sub_8025418();
+    CleanFriendListMenu();
 
 }
 

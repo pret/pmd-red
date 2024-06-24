@@ -7,7 +7,7 @@
 #include "structs/str_text.h"
 
 // size: 0x124
-struct unkStruct_203B238
+struct IQSkillMenu
 {
     /* 0x0 */ u32 state;
     /* 0x4 */ s16 species;

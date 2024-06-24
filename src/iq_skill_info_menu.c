@@ -15,7 +15,7 @@
 extern u8 gUnknown_202DE58[];
 extern u8 gAvailablePokemonNames[]; // 202DF98
 
-static EWRAM_DATA_2 struct unkStruct_203B240 *sUnknown_203B240 = {0};
+static EWRAM_DATA_2 struct IQSkillInfoMenu *sIQSkillInfoMenu = {0};
 
 #include "data/iq_skill_info_menu.h"
 
@@ -28,20 +28,20 @@ bool8 CreateIQSkillInfoMenu(u8 iqSkill)
 {
     ResetSprites(TRUE);
 
-    sUnknown_203B240 = MemoryAlloc(sizeof(struct unkStruct_203B240), 8);
-    sUnknown_203B240->chosenIQSkill = iqSkill;
-    sub_801317C(&sUnknown_203B240->unk88);
-    sUnknown_203B240->unk24 = 0;
-    sub_80140B4(sUnknown_203B240->unk28);
+    sIQSkillInfoMenu = MemoryAlloc(sizeof(struct IQSkillInfoMenu), 8);
+    sIQSkillInfoMenu->chosenIQSkill = iqSkill;
+    sub_801317C(&sIQSkillInfoMenu->unk88);
+    sIQSkillInfoMenu->unk24 = 0;
+    sub_80140B4(sIQSkillInfoMenu->unk28);
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B240->unk28, TRUE, TRUE);
+    sub_800641C(sIQSkillInfoMenu->unk28, TRUE, TRUE);
     SetIQSkillInfoMenuState(0);
     return TRUE;
 }
 
 u32 HandleIQSkillInfoMenuState(void)
 {
-    switch (sUnknown_203B240->state) {
+    switch (sIQSkillInfoMenu->state) {
         case 0:
             sub_801C7D4();
             break;
@@ -59,15 +59,15 @@ u32 HandleIQSkillInfoMenuState(void)
 
 void CleanIQSkillInfoMenu(void)
 {
-    if (sUnknown_203B240 != NULL) {
-        MemoryFree(sUnknown_203B240);
-        sUnknown_203B240 = NULL;
+    if (sIQSkillInfoMenu != NULL) {
+        MemoryFree(sIQSkillInfoMenu);
+        sIQSkillInfoMenu = NULL;
     }
 }
 
 static void SetIQSkillInfoMenuState(s32 newState)
 {
-    sUnknown_203B240->state = newState;
+    sIQSkillInfoMenu->state = newState;
     sub_801C6E4();
 }
 
@@ -76,26 +76,26 @@ static void sub_801C6E4(void)
     u8 *skillName;
     struct subStruct_203B240 *preload;
 
-    switch (sUnknown_203B240->state) {
+    switch (sIQSkillInfoMenu->state) {
         case 0:
-            sub_8008C54(sUnknown_203B240->unk24);
-            sub_80073B8(sUnknown_203B240->unk24);
-            skillName = GetIQSkillName(sUnknown_203B240->chosenIQSkill);
+            sub_8008C54(sIQSkillInfoMenu->unk24);
+            sub_80073B8(sIQSkillInfoMenu->unk24);
+            skillName = GetIQSkillName(sIQSkillInfoMenu->chosenIQSkill);
             strcpy(gUnknown_202DE58, skillName);
             xxx_format_and_draw(16, 0, sFmtMoveItem0, 0, 0); // {ARG_MOVE_ITEM_0}
-            xxx_call_draw_string(8, 16, GetIQSkillDescription(sUnknown_203B240->chosenIQSkill), sUnknown_203B240->unk24, 0);
-            sub_80073E0(sUnknown_203B240->unk24);
-            sUnknown_203B240->unkC = sub_8097DF0(GetIQSkillDescription(sUnknown_203B240->chosenIQSkill), sUnknown_203B240->unk10);
-            sUnknown_203B240->unk20 = 0;
+            xxx_call_draw_string(8, 16, GetIQSkillDescription(sIQSkillInfoMenu->chosenIQSkill), sIQSkillInfoMenu->unk24, 0);
+            sub_80073E0(sIQSkillInfoMenu->unk24);
+            sIQSkillInfoMenu->unkC = sub_8097DF0(GetIQSkillDescription(sIQSkillInfoMenu->chosenIQSkill), sIQSkillInfoMenu->unk10);
+            sIQSkillInfoMenu->unk20 = 0;
             break;
         case 1:
-            sub_8008C54(sUnknown_203B240->unk24);
-            sub_80073B8(sUnknown_203B240->unk24);
-            preload = sUnknown_203B240->unk10[sUnknown_203B240->unk8];
+            sub_8008C54(sIQSkillInfoMenu->unk24);
+            sub_80073B8(sIQSkillInfoMenu->unk24);
+            preload = sIQSkillInfoMenu->unk10[sIQSkillInfoMenu->unk8];
             strcpy(gAvailablePokemonNames, preload->pokeName);
-            xxx_format_and_draw(16, 0, sFmtPkmn0, sUnknown_203B240->unk24, 0); // {ARG_POKEMON_0}
-            xxx_format_and_draw(4, 16, sUnknown_203B240->unk10[sUnknown_203B240->unk8]->unk4, sUnknown_203B240->unk24, 0);
-            sub_80073E0(sUnknown_203B240->unk24);
+            xxx_format_and_draw(16, 0, sFmtPkmn0, sIQSkillInfoMenu->unk24, 0); // {ARG_POKEMON_0}
+            xxx_format_and_draw(4, 16, sIQSkillInfoMenu->unk10[sIQSkillInfoMenu->unk8]->unk4, sIQSkillInfoMenu->unk24, 0);
+            sub_80073E0(sIQSkillInfoMenu->unk24);
             break;
         case 2:
         case 3:
@@ -105,19 +105,19 @@ static void sub_801C6E4(void)
 
 static void sub_801C7D4(void)
 {
-    if (sUnknown_203B240->unkC != 0) {
-        if (sUnknown_203B240->unk20 & 8)
+    if (sIQSkillInfoMenu->unkC != 0) {
+        if (sIQSkillInfoMenu->unk20 & 8)
             sub_8013F84();
 
-        sUnknown_203B240->unk20++;
+        sIQSkillInfoMenu->unk20++;
     }
 
-    switch (sub_8012A64(&sUnknown_203B240->unk88, sUnknown_203B240->unk24)) {
+    switch (sub_8012A64(&sIQSkillInfoMenu->unk88, sIQSkillInfoMenu->unk24)) {
         case 1:
             PlayMenuSoundEffect(0);
 
-            if (sUnknown_203B240->unkC != 0) {
-                sUnknown_203B240->unk8 = 0;
+            if (sIQSkillInfoMenu->unkC != 0) {
+                sIQSkillInfoMenu->unk8 = 0;
                 SetIQSkillInfoMenuState(1);
             }
             else
@@ -132,19 +132,19 @@ static void sub_801C7D4(void)
 
 static void sub_801C848(void)
 {
-    if (sUnknown_203B240->unk8 < sUnknown_203B240->unkC - 1) {
-        if (sUnknown_203B240->unk20 & 8)
+    if (sIQSkillInfoMenu->unk8 < sIQSkillInfoMenu->unkC - 1) {
+        if (sIQSkillInfoMenu->unk20 & 8)
             sub_8013F84();
 
-        sUnknown_203B240->unk20++;
+        sIQSkillInfoMenu->unk20++;
     }
 
-    switch (sub_8012A64(&sUnknown_203B240->unk88, sUnknown_203B240->unk24)) {
+    switch (sub_8012A64(&sIQSkillInfoMenu->unk88, sIQSkillInfoMenu->unk24)) {
         case 1:
             PlayMenuSoundEffect(0);
-            sUnknown_203B240->unk8++;
+            sIQSkillInfoMenu->unk8++;
 
-            if (sUnknown_203B240->unk8 < sUnknown_203B240->unkC)
+            if (sIQSkillInfoMenu->unk8 < sIQSkillInfoMenu->unkC)
                 SetIQSkillInfoMenuState(1);
             else
                 SetIQSkillInfoMenuState(0);

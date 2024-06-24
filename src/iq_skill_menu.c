@@ -12,7 +12,7 @@
 #include "text1.h"
 #include "text2.h"
 
-static EWRAM_DATA_2 struct unkStruct_203B238 *sUnknown_203B238 = {0};
+static EWRAM_DATA_2 struct IQSkillMenu *sIQSkillMenu = {0};
 
 #include "data/iq_skill_menu.h"
 
@@ -31,18 +31,18 @@ bool8 CreateIQSkillMenu(s16 species)
     if (HasNoAvailIQSkills(species_s32))
         return FALSE;
 
-    sUnknown_203B238 = MemoryAlloc(sizeof(struct unkStruct_203B238), 8);
-    sUnknown_203B238->menuAction = 0;
-    sUnknown_203B238->species = species_s32;
-    sUnknown_203B238->pokeStruct = &gRecruitedPokemonRef->pokemon[species_s32];
-    sUnknown_203B238->numIQSkills = GetNumAvailableIQSkills(sUnknown_203B238->iqSkills, sUnknown_203B238->pokeStruct->IQ);
+    sIQSkillMenu = MemoryAlloc(sizeof(struct IQSkillMenu), 8);
+    sIQSkillMenu->menuAction = 0;
+    sIQSkillMenu->species = species_s32;
+    sIQSkillMenu->pokeStruct = &gRecruitedPokemonRef->pokemon[species_s32];
+    sIQSkillMenu->numIQSkills = GetNumAvailableIQSkills(sIQSkillMenu->iqSkills, sIQSkillMenu->pokeStruct->IQ);
     SetIQSkillMenuState(IQ_SKILL_MENU_STATE_INIT);
     return TRUE;
 }
 
 u32 sub_801BF48(void)
 {
-    switch (sUnknown_203B238->state) {
+    switch (sIQSkillMenu->state) {
         case IQ_SKILL_MENU_STATE_EXIT:
             return 3;
         case IQ_SKILL_MENU_STATE_INIT:
@@ -61,15 +61,15 @@ u32 sub_801BF48(void)
 
 void CleanIQSkillMenu(void)
 {
-    if (sUnknown_203B238 != NULL) {
-        MemoryFree(sUnknown_203B238);
-        sUnknown_203B238 = NULL;
+    if (sIQSkillMenu != NULL) {
+        MemoryFree(sIQSkillMenu);
+        sIQSkillMenu = NULL;
     }
 }
 
 static void SetIQSkillMenuState(s32 newState)
 {
-    sUnknown_203B238->state = newState;
+    sIQSkillMenu->state = newState;
     sub_801BFCC();
     HandleIQSkillMenuState();
 }
@@ -78,24 +78,24 @@ static void sub_801BFCC(void)
 {
     s32 i;
 
-    sub_8006518(sUnknown_203B238->unkC4);
+    sub_8006518(sIQSkillMenu->unkC4);
 
-    if (sUnknown_203B238->state == 2)
-        sUnknown_203B238->unkC4[2] = sUnknown_80DBDB0;
+    if (sIQSkillMenu->state == 2)
+        sIQSkillMenu->unkC4[2] = sUnknown_80DBDB0;
     else {
         for (i = 0; i < 4; i++)
-            sUnknown_203B238->unkC4[i] = sUnknown_80DBD98;
+            sIQSkillMenu->unkC4[i] = sUnknown_80DBD98;
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B238->unkC4, TRUE, TRUE);
+    sub_800641C(sIQSkillMenu->unkC4, TRUE, TRUE);
 }
 
 static void HandleIQSkillMenuState(void)
 {
-    switch (sUnknown_203B238->state) {
+    switch (sIQSkillMenu->state) {
         case IQ_SKILL_MENU_STATE_INIT:
-            CreateIQSkillListMenu(sUnknown_203B238->species, 0, 8);
+            CreateIQSkillListMenu(sIQSkillMenu->species, 0, 8);
             break;
         case IQ_SKILL_MENU_STATE_MAIN:
             RedrawIQSkillListMenu(TRUE);
@@ -103,10 +103,10 @@ static void HandleIQSkillMenuState(void)
         case 2:
             BuildIQSkillList();
             BuildIQSkillMenuActions();
-            sub_8012D60(&sUnknown_203B238->unk74, sUnknown_203B238->unk34, NULL, NULL, sUnknown_203B238->menuAction, 2);
+            sub_8012D60(&sIQSkillMenu->unk74, sIQSkillMenu->unk34, NULL, NULL, sIQSkillMenu->menuAction, 2);
             break;
         case IQ_SKILL_MENU_STATE_INFO:
-            CreateIQSkillInfoMenu(sUnknown_203B238->iqSkillIndex);
+            CreateIQSkillInfoMenu(sIQSkillMenu->iqSkillIndex);
             break;
         case IQ_SKILL_MENU_STATE_EXIT:
             break;
@@ -115,16 +115,16 @@ static void HandleIQSkillMenuState(void)
 
 static void BuildIQSkillMenuActions(void)
 {
-    struct unkStruct_203B238 *puVar1;
+    struct IQSkillMenu *puVar1;
     s32 i;
     u8 *nullText;
     u32 menuAction;
     s32 max;
 
-    puVar1 = sUnknown_203B238;
+    puVar1 = sIQSkillMenu;
     nullText = NULL;
 
-    sUnknown_203B238->unk34[0].text = sSwitch;
+    sIQSkillMenu->unk34[0].text = sSwitch;
     puVar1->unk34[0].menuAction = IQ_SKILL_MENU_SWITCH;
 
     menuAction = IQ_SKILL_MENU_NULL;
@@ -136,24 +136,24 @@ static void BuildIQSkillMenuActions(void)
     puVar1->unk34[2].menuAction = menuAction;
 
     for (i = 0; i < max; i++) {
-        if (sUnknown_203B238->unk34[i].menuAction == sUnknown_203B238->menuAction)
+        if (sIQSkillMenu->unk34[i].menuAction == sIQSkillMenu->menuAction)
             return;
     }
 
-    sUnknown_203B238->menuAction = IQ_SKILL_MENU_SWITCH;
+    sIQSkillMenu->menuAction = IQ_SKILL_MENU_SWITCH;
 }
 
 static void HandleIQSkillMenuMain(void)
 {
     switch (HandleIQSkillListMenuInput(TRUE)) {
         case 3:
-            sUnknown_203B238->menuIndex = GetIQSkillSelection();
-            sUnknown_203B238->iqSkillIndex = sUnknown_203B238->iqSkills[sUnknown_203B238->menuIndex];
+            sIQSkillMenu->menuIndex = GetIQSkillSelection();
+            sIQSkillMenu->iqSkillIndex = sIQSkillMenu->iqSkills[sIQSkillMenu->menuIndex];
             SetIQSkillMenuState(2);
             break;
         case 4:
-            sUnknown_203B238->menuIndex = GetIQSkillSelection();
-            sUnknown_203B238->iqSkillIndex = sUnknown_203B238->iqSkills[sUnknown_203B238->menuIndex];
+            sIQSkillMenu->menuIndex = GetIQSkillSelection();
+            sIQSkillMenu->iqSkillIndex = sIQSkillMenu->iqSkills[sIQSkillMenu->menuIndex];
             SetIQSkillMenuState(IQ_SKILL_MENU_STATE_INFO);
             break;
         case 2:
@@ -173,17 +173,17 @@ static void HandleIQSkillMenuAction(void)
     menuAction = 0;
     HandleIQSkillListMenuInput(FALSE);
 
-    if (!sub_8012FD8(&sUnknown_203B238->unk74)) {
-        sub_8013114(&sUnknown_203B238->unk74, &menuAction);
+    if (!sub_8012FD8(&sIQSkillMenu->unk74)) {
+        sub_8013114(&sIQSkillMenu->unk74, &menuAction);
 
         if (menuAction != IQ_SKILL_MENU_NULL)
-            sUnknown_203B238->menuAction = menuAction;
+            sIQSkillMenu->menuAction = menuAction;
     }
 
     switch (menuAction) {
         case IQ_SKILL_MENU_SWITCH: // Switch
             PlaySound(307);
-            ToggleIQSkill((u8 *)&sUnknown_203B238->pokeStruct->IQSkills, sUnknown_203B238->iqSkillIndex);
+            ToggleIQSkill((u8 *)&sIQSkillMenu->pokeStruct->IQSkills, sIQSkillMenu->iqSkillIndex);
             SetIQSkillMenuState(IQ_SKILL_MENU_STATE_MAIN);
             break;
         case IQ_SKILL_MENU_INFO: // Info

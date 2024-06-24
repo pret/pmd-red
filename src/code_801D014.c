@@ -267,10 +267,10 @@ static void sub_801D3A8(void)
             CreatePartyListMenu(sUnknown_203B250->pokeStruct);
             break;
         case 6:
-            sub_80252F0(0);
+            CreateFriendListMenu(0);
             break;
         case 7:
-            sub_80252F0(1);
+            CreateFriendListMenu(1);
             break;
         case 8:
             sub_8024458(sUnknown_203B250->index, 2);
@@ -478,7 +478,7 @@ static void sub_801D7CC(void)
         case 2:
         case 3:
             sUnknown_203B250->unk7 = sub_802540C();
-            sub_8025418();
+            CleanFriendListMenu();
 
             if (sUnknown_203B250->unk7 != 0)
                 sub_801D208(2);

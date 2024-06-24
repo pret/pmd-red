@@ -8,7 +8,7 @@
 #include "structs/struct_sub80095e4.h"
 
 // size: 0xC4
-struct unkStruct_203B23C
+struct IQSkillListMenu
 {
     /* 0x0 */ s16 species;
     /* 0x4 */ PokemonStruct1 *pokeStruct;

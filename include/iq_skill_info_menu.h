@@ -6,7 +6,7 @@
 #include "structs/str_text.h"
 
 // size: 0x94
-struct unkStruct_203B240
+struct IQSkillInfoMenu
 {
     /* 0x0 */ s32 state;
     /* 0x4 */ u8 chosenIQSkill;

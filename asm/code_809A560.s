@@ -3128,7 +3128,7 @@ _0809C1C2:
 	b _0809C392
 _0809C1C8:
 	movs r0, 0x2
-	bl sub_80252F0
+	bl CreateFriendListMenu 
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C1EC
