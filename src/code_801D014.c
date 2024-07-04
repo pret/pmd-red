@@ -279,7 +279,7 @@ static void sub_801D3A8(void)
             CreateIQSkillMenu(sUnknown_203B250->index);
             break;
         case 10:
-            sub_8021774(sUnknown_203B250->currFriendAreaLocation, TRUE, 2);
+            CreateWigglytuffShopFriendAreaMenu(sUnknown_203B250->currFriendAreaLocation, TRUE, 2);
             break;
         case 11:
             InitializeJobListMenu(0);
@@ -520,14 +520,14 @@ static void sub_801D824(void)
 
 static void sub_801D840(void)
 {
-    switch (sub_80217EC()) {
+    switch (HandleWigglytuffShopFriendAreaMenuInput()) {
         case 0:
         case 1:
         default:
             break;
         case 2:
         case 3:
-            sub_8021830();
+            CleanWigglytuffShopFriendAreaInfoMenu();
             sub_801D208(1);
             break;
     }

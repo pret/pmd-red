@@ -41,7 +41,7 @@ static void sub_8022538(void);
 static void sub_80225C8(void);
 static void sub_8022668(void);
 static void sub_8022684(void);
-static void sub_80226CC(void);
+static void WigglytuffShop_GoToFallbackState(void);
 static void sub_80226F0(void);
 static void sub_8022790(void);
 
@@ -112,13 +112,13 @@ u32 sub_8021C5C(void)
         case WIGGLYTUFF_EXIT:
             return 3;
         default:
-            sub_80226CC();
+            WigglytuffShop_GoToFallbackState();
             break;
     }
     return 0;
 }
 
-void sub_8021D1C(void)
+void CleanWigglytuffShop(void)
 {
     if (sWigglytuffShop3Work) {
         CloseFile(sWigglytuffShop3Work->faceFile);
@@ -229,7 +229,7 @@ static void UpdateWigglytuffDialogue(void)
             sub_8014248(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_05], 0, 5, sWigglytuffShop3Work->unk1C, 0, 4, 0, sWigglytuffShop3Work->unkCC, 12);
             break;
         case FRIEND_AREA_INFO:
-            sub_8021774(sWigglytuffShop3Work->chosenFriendArea, FALSE, 2);
+            CreateWigglytuffShopFriendAreaMenu(sWigglytuffShop3Work->chosenFriendArea, FALSE, 2);
             break;
         case CONFIRM_BUY_FRIEND_AREA:
             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_UNKD;
@@ -516,10 +516,10 @@ static void sub_80225C8(void)
 
 static void sub_8022668(void)
 {
-    switch (sub_80217EC()) {
+    switch (HandleWigglytuffShopFriendAreaMenuInput()) {
         case 2:
         case 3:
-            sub_8021830();
+            CleanWigglytuffShopFriendAreaInfoMenu();
             SetWigglytuffState(WIGGLYTUFF_UNKA);
             break;
         case 0:
@@ -546,7 +546,7 @@ static void sub_8022684(void)
     }
 }
 
-static void sub_80226CC(void)
+static void WigglytuffShop_GoToFallbackState(void)
 {
     s32 temp;
 

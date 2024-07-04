@@ -1938,7 +1938,7 @@ _0809B7AC:
 	adds r0, r1, r3
 	ldr r1, [r0]
 	movs r0, 0
-	bl sub_801602C
+	bl CreateConfirmNameMenu
 	b _0809B784
 	.align 2, 0
 _0809B7D8: .4byte 0x00000424
@@ -1948,7 +1948,7 @@ _0809B7E0:
 	adds r0, r1, r2
 	ldr r1, [r0]
 	movs r0, 0x2
-	bl sub_801602C
+	bl CreateConfirmNameMenu
 	b _0809B784
 	.align 2, 0
 _0809B7F0: .4byte 0x0000042c
@@ -1956,7 +1956,7 @@ _0809B7F4:
 	bl sub_8016080
 	cmp r0, 0x3
 	bne _0809B80C
-	bl sub_80160D8
+	bl CleanConfirmNameMenu
 	ldr r0, [r6]
 	movs r3, 0x86
 	lsls r3, 3
@@ -1971,7 +1971,7 @@ _0809B80C:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0809B784
-	bl sub_80160D8
+	bl CleanConfirmNameMenu
 	ldr r0, [r6]
 	movs r2, 0x86
 	lsls r2, 3
@@ -1996,7 +1996,7 @@ _0809B834:
 	adds r0, r1
 	ldr r1, [r0]
 	movs r0, 0x1
-	bl sub_801602C
+	bl CreateConfirmNameMenu
 	b _0809B784
 	.align 2, 0
 _0809B858: .4byte 0x0000042c
@@ -2004,7 +2004,7 @@ _0809B85C:
 	bl sub_8016080
 	cmp r0, 0x3
 	bne _0809B874
-	bl sub_80160D8
+	bl CleanConfirmNameMenu
 	ldr r0, [r6]
 	movs r2, 0x86
 	lsls r2, 3
@@ -2023,7 +2023,7 @@ _0809B87A:
 	bne _0809B888
 	b _0809B784
 _0809B888:
-	bl sub_80160D8
+	bl CleanConfirmNameMenu
 	ldr r0, [r6]
 	movs r1, 0x86
 	lsls r1, 3

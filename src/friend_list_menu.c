@@ -256,7 +256,7 @@ void sub_8025518(void)
         sub_801F808(gUnknown_203B2B4->moveIDs);
         break;
     case 0x12:
-        sub_801602C(2,gUnknown_203B2B4->pokeStruct->name);
+        CreateConfirmNameMenu(2,gUnknown_203B2B4->pokeStruct->name);
         break;
     case FRIEND_LIST_MENU_STATE_EXIT:
         break;
@@ -616,7 +616,7 @@ void sub_8025E24(void)
     {
         case 2:
         case 3:
-            sub_80160D8();
+            CleanConfirmNameMenu();
             nullsub_104();
             SetFriendListMenuState(0x2);
             break;

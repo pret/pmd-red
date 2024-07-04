@@ -3321,7 +3321,7 @@ _0803EC34:
 _0803EC46:
 	movs r0, 0x2
 	adds r1, r5, 0
-	bl sub_801602C
+	bl CreateConfirmNameMenu 
 	b _0803EC84
 	.align 2, 0
 _0803EC50: .4byte gUnknown_203B40C

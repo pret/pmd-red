@@ -31,7 +31,7 @@ void sub_806CC10(void)
             if (entityInfo->unk166 != 0) {
                 entityInfo->unk166--;
                 if ((entityInfo->unk166 & 1) == 0) // If value is even:
-                    sub_806CDD4(entity, 0, (entityInfo->action.direction - 1) & 7);
+                    sub_806CDD4(entity, 0, (entityInfo->action.direction - 1) & DIRECTION_MASK);
             }
         }
     }

@@ -124,7 +124,7 @@ static void sub_803AD88(void)
             sub_803AE58();
             break;
         case 6:
-            sub_801602C(2, sUnknown_203B3F8->pokemon->name);
+            CreateConfirmNameMenu(2, sUnknown_203B3F8->pokemon->name);
         case 0:
         case 4:
         case 7:
@@ -241,7 +241,7 @@ static void sub_803B034(void)
     switch (sub_8016080()) {
         case 2:
         case 3:
-            sub_80160D8();
+            CleanConfirmNameMenu();
             sub_803ACD0(2);
             break;
     }

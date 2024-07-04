@@ -165,7 +165,7 @@ gUnknown_8116208: @ 8116208
 gUnknown_8116218: @ 8116218
 .4byte 1
 .4byte 0
-.4byte sub_8021D1C
+.4byte CleanWigglytuffShop 
 .4byte sub_8021C5C
 
 .global gUnknown_8116228

@@ -101,7 +101,7 @@ static void sub_803A9AC(void)
             sub_8012D60(&sUnknown_203B3F4->unk4C, sUnknown_203B3F4->menuItems, 0, 0, sUnknown_203B3F4->menuAction, 2);
             break;
         case 3:
-            sub_8021774(sUnknown_203B3F4->friendArea, 1, 0);
+            CreateWigglytuffShopFriendAreaMenu(sUnknown_203B3F4->friendArea, TRUE, 0);
             break;
         case 4:
             break;
@@ -193,10 +193,10 @@ static void sub_803AB34(void)
 
 static void sub_803ABAC(void)
 {
-    switch (sub_80217EC()) {
+    switch (HandleWigglytuffShopFriendAreaMenuInput()) {
         case 2:
         case 3:
-            sub_8021830();
+            CleanWigglytuffShopFriendAreaInfoMenu();
             sub_803A924(1);
             break;
         case 0:

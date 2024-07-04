@@ -24,6 +24,12 @@ static void sub_801C6E4(void);
 static void sub_801C7D4(void);
 static void sub_801C848(void);
 
+enum IQSkillInfoMenuState
+{
+    IQ_SKILL_INFO_MENU_INIT,
+    IQ_SKILL_INFO_MENU_EXIT = 3
+};
+
 bool8 CreateIQSkillInfoMenu(u8 iqSkill)
 {
     ResetSprites(TRUE);
@@ -35,20 +41,20 @@ bool8 CreateIQSkillInfoMenu(u8 iqSkill)
     sub_80140B4(sIQSkillInfoMenu->unk28);
     ResetUnusedInputStruct();
     sub_800641C(sIQSkillInfoMenu->unk28, TRUE, TRUE);
-    SetIQSkillInfoMenuState(0);
+    SetIQSkillInfoMenuState(IQ_SKILL_INFO_MENU_INIT);
     return TRUE;
 }
 
 u32 HandleIQSkillInfoMenuState(void)
 {
     switch (sIQSkillInfoMenu->state) {
-        case 0:
+        case IQ_SKILL_INFO_MENU_INIT:
             sub_801C7D4();
             break;
         case 1:
             sub_801C848();
             break;
-        case 3:
+        case IQ_SKILL_INFO_MENU_EXIT:
             return 3;
         case 2:
         default:
@@ -77,7 +83,7 @@ static void sub_801C6E4(void)
     struct subStruct_203B240 *preload;
 
     switch (sIQSkillInfoMenu->state) {
-        case 0:
+        case IQ_SKILL_INFO_MENU_INIT:
             sub_8008C54(sIQSkillInfoMenu->unk24);
             sub_80073B8(sIQSkillInfoMenu->unk24);
             skillName = GetIQSkillName(sIQSkillInfoMenu->chosenIQSkill);
@@ -98,7 +104,7 @@ static void sub_801C6E4(void)
             sub_80073E0(sIQSkillInfoMenu->unk24);
             break;
         case 2:
-        case 3:
+        case IQ_SKILL_INFO_MENU_EXIT:
             break;
     }
 }
@@ -121,7 +127,7 @@ static void sub_801C7D4(void)
                 SetIQSkillInfoMenuState(1);
             }
             else
-                SetIQSkillInfoMenuState(3);
+                SetIQSkillInfoMenuState(IQ_SKILL_INFO_MENU_EXIT);
             break;
         case 2:
             PlayMenuSoundEffect(1);
@@ -147,7 +153,7 @@ static void sub_801C848(void)
             if (sIQSkillInfoMenu->unk8 < sIQSkillInfoMenu->unkC)
                 SetIQSkillInfoMenuState(1);
             else
-                SetIQSkillInfoMenuState(0);
+                SetIQSkillInfoMenuState(IQ_SKILL_INFO_MENU_INIT);
             break;
         case 2:
             PlayMenuSoundEffect(1);

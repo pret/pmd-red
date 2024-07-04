@@ -10,12 +10,20 @@ struct unkStruct_203B200
     u32 unk4;
     /* 0x8 */ u8 *pokeName;
     /* 0xC */ s32 state;
-    /* 0x10 */ MenuItem menus[3];
-    u8 fill[0x50 - 0x28];
+    /* 0x10 */ MenuItem menus[8];
 };
 
-u32 sub_801602C(u32 mode, u8 *name);
+u32 CreateConfirmNameMenu(u32 mode, u8 *name);
 u32 sub_8016080(void);
-void sub_80160D8(void);
+void CleanConfirmNameMenu(void);
+
+enum ConfirmNameMenuStates
+{
+    CONFIRM_NAME_MENU_INIT,
+    CONFIRM_NAME_MENU_PROMPT,
+    CONFIRM_NAME_MENU_TOO_LONG,
+    CONFIRM_NAME_MENU_EMPTY,
+    CONFIRM_NAME_MENU_EXIT = 4
+};
 
 #endif // GUARD_CODE_801602C_H
