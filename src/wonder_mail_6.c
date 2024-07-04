@@ -119,11 +119,11 @@ bool8 sub_8030F58(u32 wonderMailType)
   if (HasNoWonderMailType(wonderMailType)) {
     switch(wonderMailType)
     {
-        case 2:
+        case WONDER_MAIL_TYPE_SOS_1:
             // "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.\0"
             sub_80141B4(gUnknown_80E09D8,0,&gUnknown_203B328->faceFile,0x101);
             break;
-        case 4:
+        case WONDER_MAIL_TYPE_AOK:
             // "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.\0"
             sub_80141B4(gUnknown_80E0A0C,0,&gUnknown_203B328->faceFile,0x101);
             break;
@@ -327,7 +327,7 @@ void sub_80313D8(u32 state)
                 }
                 break;
         }
-        if ((gUnknown_203B328->wonderMailType == 2) || (gUnknown_203B328->wonderMailType == 4)) {
+        if ((gUnknown_203B328->wonderMailType == 2) || (gUnknown_203B328->wonderMailType == WONDER_MAIL_TYPE_AOK)) {
             if (HasNoWonderMailType(gUnknown_203B328->wonderMailType)) {
                 sub_80310E4(5);
             }

@@ -136,7 +136,7 @@ void sub_8030E48(void)
   }
   switch(mail->mailType)
   {
-    case 2:
+    case WONDER_MAIL_TYPE_SOS_1:
     case WONDER_MAIL_TYPE_AOK:
         stack.mailDescriptionType = 10;
         break;
