@@ -213,7 +213,7 @@ void sub_803092C(void)
       local.clientSpecies = mail->clientSpecies;
       local.targetSpecies = mail->clientSpecies;
       local.targetItem = ITEM_NOTHING;
-      local.rewardType = 5;
+      local.rewardType = MONEY1;
 
       switch(mail->mailType)
       {
@@ -223,8 +223,8 @@ void sub_803092C(void)
         case WONDER_MAIL_TYPE_THANK_YOU:
             local.unk43 = 4;
             break;
-        case 1:
-        case 2:
+        case WONDER_MAIL_TYPE_SOS:
+        case WONDER_MAIL_TYPE_SOS_1:
             local.unk43 = 1;
             break;
         default:
@@ -261,21 +261,21 @@ s32 sub_8030A74(void)
             }
         }
         break;
-    case 1:
+    case WONDER_MAIL_TYPE_SOS:
         for (index = 0; index < 0x20; index++)
         {
             unkStruct_203B480 *p = gUnknown_203B480 + index;
-            if (p->mailType == 1) {
+            if (p->mailType == WONDER_MAIL_TYPE_SOS) {
                 gUnknown_203B320->unk0[count] = index;
                 count++;
             }
         }
         break;
-    case 2:
+    case WONDER_MAIL_TYPE_SOS_1:
         for (index = 0; index < 0x20; index++)
         {
             unkStruct_203B480 *p = gUnknown_203B480 + index;
-            if (p->mailType == 2) {
+            if (p->mailType == WONDER_MAIL_TYPE_SOS_1) {
                 gUnknown_203B320->unk0[count] = index;
                 count++;
             }
@@ -347,18 +347,18 @@ bool8 HasNoWonderMailType(u32 wonderMailType)
             }
         }
         break;
-    case 1:
+    case WONDER_MAIL_TYPE_SOS:
         for (index = 0; index < 0x20; index++)
         {
-            if (gUnknown_203B480[index].mailType == 1) {
+            if (gUnknown_203B480[index].mailType == WONDER_MAIL_TYPE_SOS) {
                 return FALSE;
             }
         }
         break;
-    case 2:
+    case WONDER_MAIL_TYPE_SOS_1:
         for (index = 0; index < 0x20; index++)
         {
-            if (gUnknown_203B480[index].mailType == 2) {
+            if (gUnknown_203B480[index].mailType == WONDER_MAIL_TYPE_SOS_1) {
                 return FALSE;
             }
         }

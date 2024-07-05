@@ -33,6 +33,13 @@ static void sub_80189C8(void);
 static void sub_8018AC8(void);
 static void sub_8018AE4(void);
 
+enum MenuActions {
+    CANCEL_ACTION = 1,
+    STORE_ACTION,
+    TAKE_ACTION,
+    INFO_ACTION
+};
+
 bool8 sub_8017E1C(void)
 {
     ResetUnusedInputStruct();
@@ -224,25 +231,25 @@ static void sub_80182E4(void)
     loopMax = 0;
     MemoryFill16(sUnknown_203B20C->unk60, 0, sizeof(sUnknown_203B20C->unk60));
     sUnknown_203B20C->unk20[0].text = gCommonStore[0];
-    sUnknown_203B20C->unk20[0].menuAction = 2;
+    sUnknown_203B20C->unk20[0].menuAction = STORE_ACTION;
 
     if (GetNumberOfFilledInventorySlots() == 0 || sub_801CF50(0))
         sUnknown_203B20C->unk60[0] = 1;
 
     loopMax += 1;
     sUnknown_203B20C->unk20[loopMax].text = gCommonTake[0];
-    sUnknown_203B20C->unk20[loopMax].menuAction = 3;
+    sUnknown_203B20C->unk20[loopMax].menuAction = TAKE_ACTION;
 
     if (sub_801CF14(1) || INVENTORY_SIZE <=  GetNumberOfFilledInventorySlots())
         sUnknown_203B20C->unk60[loopMax] = 1;
 
     loopMax += 1;
     sUnknown_203B20C->unk20[loopMax].text = gCommonCancel[0];
-    sUnknown_203B20C->unk20[loopMax].menuAction = 1;
+    sUnknown_203B20C->unk20[loopMax].menuAction = CANCEL_ACTION;
 
     loopMax += 1;
     sUnknown_203B20C->unk20[loopMax].text = NULL;
-    sUnknown_203B20C->unk20[loopMax].menuAction = 1;
+    sUnknown_203B20C->unk20[loopMax].menuAction = CANCEL_ACTION;
 
     for (index = 0; index < loopMax; index++) {
         if (sUnknown_203B20C->unk60[index] == 0) {
@@ -267,17 +274,17 @@ static void sub_801841C(void)
     loopMax = 0;
     MemoryFill16(sUnknown_203B20C->unk60,0,sizeof(sUnknown_203B20C->unk60));
     sUnknown_203B20C->unk20[0].text = gCommonStore[0];
-    sUnknown_203B20C->unk20[0].menuAction = 2;
+    sUnknown_203B20C->unk20[0].menuAction = STORE_ACTION;
     if (!sub_801ADA0(sUnknown_203B20C->itemIndex))
         sUnknown_203B20C->unk60[0] = 1;
 
     loopMax += 1;
     sUnknown_203B20C->unk20[loopMax].text = gCommonInfo[0];
-    sUnknown_203B20C->unk20[loopMax].menuAction = 4;
+    sUnknown_203B20C->unk20[loopMax].menuAction = INFO_ACTION;
 
     loopMax += 1;
     sUnknown_203B20C->unk20[loopMax].text = NULL;
-    sUnknown_203B20C->unk20[loopMax].menuAction = 1;
+    sUnknown_203B20C->unk20[loopMax].menuAction = CANCEL_ACTION;
 
     for (index = 0; index < loopMax; index++) {
         if (sUnknown_203B20C->unk60[index] == 0) {
@@ -302,18 +309,18 @@ static void sub_80184D4(void)
     loopMax = 0;
     MemoryFill16(sUnknown_203B20C->unk60, 0, sizeof(sUnknown_203B20C->unk60));
     sUnknown_203B20C->unk20[0].text = gCommonTake[0];
-    sUnknown_203B20C->unk20[0].menuAction = 3;
+    sUnknown_203B20C->unk20[0].menuAction = TAKE_ACTION;
 
     if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
         sUnknown_203B20C->unk60[0] = 1;
 
     loopMax += 1;
     sUnknown_203B20C->unk20[loopMax].text = gCommonInfo[0];
-    sUnknown_203B20C->unk20[loopMax].menuAction = 4;
+    sUnknown_203B20C->unk20[loopMax].menuAction = INFO_ACTION;
 
     loopMax += 1;
     sUnknown_203B20C->unk20[loopMax].text = NULL;
-    sUnknown_203B20C->unk20[loopMax].menuAction = 1;
+    sUnknown_203B20C->unk20[loopMax].menuAction = CANCEL_ACTION;
 
     for (index = 0; index < loopMax; index++) {
         if (sUnknown_203B20C->unk60[index] == 0) {
@@ -337,24 +344,24 @@ static void sub_8018588(void)
 
     if (sub_8012FD8(&sUnknown_203B20C->unk70) == 0) {
         sub_8013114(&sUnknown_203B20C->unk70, &menuAction);
-        if (menuAction != 1)
+        if (menuAction != CANCEL_ACTION)
             sUnknown_203B20C->menuAction1 = menuAction;
     }
 
     switch (menuAction) {
-        case 2:
+        case STORE_ACTION:
             if (GetNumberOfFilledInventorySlots() != 0 && !sub_801CF50(0))
                 sub_8017F10(4);
             else
                 sub_8012EA4(&sUnknown_203B20C->unk70, 1);
             break;
-        case 3:
+        case TAKE_ACTION:
             if (sub_801CF14(1))
                 sub_8012EA4(&sUnknown_203B20C->unk70, 1);
             else
                 sub_8017F10(10);
             break;
-        case 1:
+        case CANCEL_ACTION:
             sub_8017F10(3);
             break;
     }
@@ -509,12 +516,12 @@ static void sub_8018904(void)
     sub_801A6E8(FALSE);
     if (sub_8012FD8(&sUnknown_203B20C->unk70) == 0) {
         sub_8013114(&sUnknown_203B20C->unk70, &menuAction);
-        if (menuAction != 1)
+        if (menuAction != CANCEL_ACTION)
             sUnknown_203B20C->menuAction2 = menuAction;
     }
 
     switch (menuAction) {
-        case 2:
+        case STORE_ACTION:
             if (IsNotMoneyOrUsedTMItem(sUnknown_203B20C->item.id)) {
                 if (!sub_801ADA0(sUnknown_203B20C->itemIndex)) {
                 error:
@@ -536,11 +543,11 @@ static void sub_8018904(void)
             else
                 goto error;
             break;
-        case 4:
+        case INFO_ACTION:
             sub_8099690(0);
             sub_8017F10(7);
             break;
-        case 1:
+        case CANCEL_ACTION:
             sub_8017F10(5);
             break;
     }
@@ -556,12 +563,12 @@ static void sub_80189C8(void)
     sub_801CA08(FALSE);
     if (sub_8012FD8(&sUnknown_203B20C->unk70) == 0) {
         sub_8013114(&sUnknown_203B20C->unk70, &menuAction);
-        if (menuAction != 1)
+        if (menuAction != CANCEL_ACTION)
             sUnknown_203B20C->menuAction3 = menuAction;
     }
 
     switch (menuAction) {
-        case 3:
+        case TAKE_ACTION:
             if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
                 sub_8012EA4(&sUnknown_203B20C->unk70, 1);
             else if (IsThrowableItem(sUnknown_203B20C->item.id))
@@ -586,10 +593,10 @@ static void sub_80189C8(void)
                     goto error;
             }
             break;
-        case 4:
+        case INFO_ACTION:
             sub_8017F10(14);
             break;
-        case 1:
+        case CANCEL_ACTION:
             sub_8017F10(11);
             break;
     }

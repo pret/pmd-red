@@ -59,6 +59,12 @@ const UnkTextStruct2 gUnknown_80E03F4 = {
 
 const u8 gUnknown_80E040C[] = "Send";
 
+enum MenuActions {
+    CANCEL_ACTION = 1,
+    SEND_ACTION,
+    INFO_ACTION
+};
+
 u32 sub_802EF48(void)
 {
     gUnknown_203B30C = MemoryAlloc(sizeof(struct unkStruct_203B30C), 8);
@@ -163,13 +169,13 @@ void sub_802F108(void)
     s32 loopMax = 0;
 
     gUnknown_203B30C->unkB0[loopMax].text = gUnknown_80E040C;
-    gUnknown_203B30C->unkB0[loopMax].menuAction = 2;
+    gUnknown_203B30C->unkB0[loopMax].menuAction = SEND_ACTION;
     loopMax += 1;
     gUnknown_203B30C->unkB0[loopMax].text = gCommonInfo[0];
-    gUnknown_203B30C->unkB0[loopMax].menuAction = 3;
+    gUnknown_203B30C->unkB0[loopMax].menuAction = INFO_ACTION;
     loopMax += 1;
     gUnknown_203B30C->unkB0[loopMax].text = NULL;
-    gUnknown_203B30C->unkB0[loopMax].menuAction = 1;
+    gUnknown_203B30C->unkB0[loopMax].menuAction = CANCEL_ACTION;
 }
 
 void sub_802F148(void)
@@ -203,14 +209,14 @@ void sub_802F184(void)
 
     switch(menuAction)
     {
-        case 2:
+        case SEND_ACTION:
             sub_802CF14();
             sub_802EFEC(4);
             break;
-        case 3:
+        case INFO_ACTION:
             sub_802EFEC(3);
             break;
-        case 1:
+        case CANCEL_ACTION:
             sub_802EFEC(1);
             break;
     }
