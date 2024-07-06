@@ -14,6 +14,12 @@ static EWRAM_DATA_2 unkStruct_203B3F8 *sUnknown_203B3F8 = {0};
 
 #include "data/debug_menu4.h"
 
+enum menuActions {
+    CANCEL_ACTION = 1,
+    LEVEL_ACTION = 4,
+    NAME_ACTION
+};
+
 static void sub_803ACD0(u32 newState);
 static void sub_803ACE8(void);
 static void sub_803AD88(void);
@@ -154,15 +160,15 @@ static void sub_803AEB0(void)
 
     loopMax = 0;
     sUnknown_203B3F8->unk90[loopMax].text = sLevel;
-    sUnknown_203B3F8->unk90[loopMax].menuAction = 4;
+    sUnknown_203B3F8->unk90[loopMax].menuAction = LEVEL_ACTION;
 
     loopMax++;
     sUnknown_203B3F8->unk90[loopMax].text = sName;
-    sUnknown_203B3F8->unk90[loopMax].menuAction = 5;
+    sUnknown_203B3F8->unk90[loopMax].menuAction = NAME_ACTION;
 
     loopMax++;
     sUnknown_203B3F8->unk90[loopMax].text = NULL;
-    sUnknown_203B3F8->unk90[loopMax].menuAction = 1;
+    sUnknown_203B3F8->unk90[loopMax].menuAction = CANCEL_ACTION;
 
     for (i = 0; i < loopMax; i++) {
         if (sUnknown_203B3F8->unkD0[i] == 0) {
@@ -202,13 +208,13 @@ static void sub_803AF88(void)
         sub_8013114(&sUnknown_203B3F8->unk10, &menuAction);
 
     switch (menuAction) {
-        case 4:
+        case LEVEL_ACTION:
             sub_803ACD0(5);
             break;
-        case 5:
+        case NAME_ACTION:
             sub_803ACD0(6);
             break;
-        case 1:
+        case CANCEL_ACTION:
             sub_803ACD0(2);
             break;
         default:

@@ -28,6 +28,15 @@ static EWRAM_DATA_2 WigglytuffShop3Work *sWigglytuffShop3Work = {0};
 
 #include "data/wigglytuff_shop3.h"
 
+enum menuActions {
+    CANCEL_ACTION = 1,
+    BUY_ACTION,
+    CHECK_ACTION,
+    INFO_ACTION,
+    YES_ACTION,
+    NO_ACTION
+};
+
 static void CreateWigglytuffConfirmFriendAreaMenu(void);
 static void HandleWigglytuffConfirmFriendAreaMenu(void);
 static void SetWigglytuffState(s32 newState);
@@ -327,23 +336,23 @@ static void sub_80222C8(void)
     MemoryFill16(sWigglytuffShop3Work->unk5C, 0, sizeof(sWigglytuffShop3Work->unk5C));
 
     sWigglytuffShop3Work->unk1C[index].text = gCommonBuy[0];
-    sWigglytuffShop3Work->unk1C[index].menuAction = 2;
+    sWigglytuffShop3Work->unk1C[index].menuAction = BUY_ACTION;
 
     index++;
     sWigglytuffShop3Work->unk1C[index].text = gCommonCheck[0];
-    sWigglytuffShop3Work->unk1C[index].menuAction = 3;
+    sWigglytuffShop3Work->unk1C[index].menuAction = CHECK_ACTION;
 
     index++;
     sWigglytuffShop3Work->unk1C[index].text = gCommonInfo[0];
-    sWigglytuffShop3Work->unk1C[index].menuAction = 4;
+    sWigglytuffShop3Work->unk1C[index].menuAction = INFO_ACTION;
 
     index++;
     sWigglytuffShop3Work->unk1C[index].text = gCommonCancel[0];
-    sWigglytuffShop3Work->unk1C[index].menuAction = 1;
+    sWigglytuffShop3Work->unk1C[index].menuAction = CANCEL_ACTION;
 
     index++;
     sWigglytuffShop3Work->unk1C[index].text = NULL;
-    sWigglytuffShop3Work->unk1C[index].menuAction = 1;
+    sWigglytuffShop3Work->unk1C[index].menuAction = CANCEL_ACTION;
 
     for (i = 0; i < index; i++) {
         if (sWigglytuffShop3Work->unk5C[i] == 0 && sWigglytuffShop3Work->unk1C[i].menuAction == sWigglytuffShop3Work->menuAction1)
@@ -366,15 +375,15 @@ static void sub_8022380(void)
     MemoryFill16(sWigglytuffShop3Work->unk5C, 0, sizeof(sWigglytuffShop3Work->unk5C));
 
     sWigglytuffShop3Work->unk1C[index].text = gCommonBuy[0];
-    sWigglytuffShop3Work->unk1C[index].menuAction = 2;
+    sWigglytuffShop3Work->unk1C[index].menuAction = BUY_ACTION;
 
     index++;
     sWigglytuffShop3Work->unk1C[index].text = gCommonInfo[0];
-    sWigglytuffShop3Work->unk1C[index].menuAction = 4;
+    sWigglytuffShop3Work->unk1C[index].menuAction = INFO_ACTION;
 
     index++;
     sWigglytuffShop3Work->unk1C[index].text = NULL;
-    sWigglytuffShop3Work->unk1C[index].menuAction = 1;
+    sWigglytuffShop3Work->unk1C[index].menuAction = CANCEL_ACTION;
 
     for (i = 0; i < index; i++) {
         if (sWigglytuffShop3Work->unk5C[i] == 0 && sWigglytuffShop3Work->unk1C[i].menuAction == sWigglytuffShop3Work->menuAction2)
@@ -396,15 +405,15 @@ static void CreateWigglytuffConfirmFriendAreaMenu(void)
     MemoryFill16(sWigglytuffShop3Work->unk5C, 0, sizeof(sWigglytuffShop3Work->unk5C));
 
     sWigglytuffShop3Work->unk1C[index].text = gCommonYes[0];
-    sWigglytuffShop3Work->unk1C[index].menuAction = 5;
+    sWigglytuffShop3Work->unk1C[index].menuAction = YES_ACTION;
 
     index++;
     sWigglytuffShop3Work->unk1C[index].text = gCommonNo[0];
-    sWigglytuffShop3Work->unk1C[index].menuAction = 6;
+    sWigglytuffShop3Work->unk1C[index].menuAction = NO_ACTION;
 
     index++;
     sWigglytuffShop3Work->unk1C[index].text = NULL;
-    sWigglytuffShop3Work->unk1C[index].menuAction = 1;
+    sWigglytuffShop3Work->unk1C[index].menuAction = CANCEL_ACTION;
 }
 
 static void sub_8022460(void)
@@ -414,23 +423,23 @@ static void sub_8022460(void)
     if (sub_80144A4(&menuAction) != 0)
         return;
 
-    if (menuAction != 1)
+    if (menuAction != CANCEL_ACTION)
         sWigglytuffShop3Work->menuAction1 = menuAction;
 
     switch (menuAction) {
-        case 2:
+        case BUY_ACTION:
             if (sub_8021700(2))
                 SetWigglytuffState(WIGGLYTUFF_CANT_ADD_FRIEND_AREA);
             else
                 SetWigglytuffState(FRIEND_AREA_SELECT_BUY);
             break;
-        case 3:
+        case CHECK_ACTION:
             SetWigglytuffState(WIGGLYTUFF_CHECK);
             break;
-        case 4:
+        case INFO_ACTION:
             SetWigglytuffState(WIGGLYTUFF_INFO);
             break;
-        case 1:
+        case CANCEL_ACTION:
             SetWigglytuffState(WIGGLYTUFF_PRE_EXIT);
             break;
     }
@@ -444,14 +453,14 @@ static void HandleWigglytuffConfirmFriendAreaMenu(void)
         return;
 
     switch (menuAction) {
-        case 5:
+        case YES_ACTION:
             gTeamInventoryRef->teamMoney -= sWigglytuffShop3Work->friendAreaPrice;
             UnlockFriendArea(sWigglytuffShop3Work->chosenFriendArea);
             PlaySound(332);
             SetWigglytuffState(CONFIRM_BUY_FRIEND_AREA);
             break;
-        case 1:
-        case 6:
+        case CANCEL_ACTION:
+        case NO_ACTION:
             SetWigglytuffState(WIGGLYTUFF_UNKA);
             break;
     }
@@ -497,7 +506,7 @@ static void sub_80225C8(void)
     }
 
     switch (menuAction) {
-        case 2:
+        case BUY_ACTION:
             if (gTeamInventoryRef->teamMoney == 0)
                 SetWigglytuffState(NO_MONEY);
             else if (sWigglytuffShop3Work->friendAreaPrice > gTeamInventoryRef->teamMoney)
@@ -505,10 +514,10 @@ static void sub_80225C8(void)
             else
                 SetWigglytuffState(BUY_FRIEND_AREA);
             break;
-        case 4:
+        case INFO_ACTION:
             SetWigglytuffState(FRIEND_AREA_INFO);
             break;
-        case 1:
+        case CANCEL_ACTION:
             SetWigglytuffState(WIGGLYTUFF_UNKA);
             break;
     }

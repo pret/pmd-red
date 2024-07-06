@@ -33,6 +33,16 @@ enum WonderMailRescueStates
     // 13 - 16
 };
 
+enum menuActions {
+    CANCEL_ACTION = 1,
+    DELETE_ACTION,
+    YES_ACTION,
+    NO_ACTION,
+    INFO_ACTION,
+    NEW_MAIL_ACTION,
+    OLD_MAIL_ACTION
+};
+
 static EWRAM_DATA_2 unkStruct_203B2F8 *sUnknown_203B2F8 = {0};
 
 #include "data/wonder_mail_802D098.h"
@@ -279,15 +289,15 @@ static void sub_802D5A4(void)
     loopMax = 0;
     MemoryFill16(sUnknown_203B2F8->unk198, 0, sizeof(sUnknown_203B2F8->unk198));
     sUnknown_203B2F8->unk118[loopMax].text = gCommonDelete[0];
-    sUnknown_203B2F8->unk118[loopMax].menuAction = 2;
+    sUnknown_203B2F8->unk118[loopMax].menuAction = DELETE_ACTION;
 
     loopMax++;
     sUnknown_203B2F8->unk118[loopMax].text = gCommonInfo[0];
-    sUnknown_203B2F8->unk118[loopMax].menuAction = 5;
+    sUnknown_203B2F8->unk118[loopMax].menuAction = INFO_ACTION;
 
     loopMax++;
     sUnknown_203B2F8->unk118[loopMax].text = NULL;
-    sUnknown_203B2F8->unk118[loopMax].menuAction = 1;
+    sUnknown_203B2F8->unk118[loopMax].menuAction = CANCEL_ACTION;
 
     for (i = 0; i < loopMax; i++) {
         if (sUnknown_203B2F8->unk198[i] == 0) {
@@ -296,7 +306,7 @@ static void sub_802D5A4(void)
         }
     }
 
-    sUnknown_203B2F8->menuAction1 = 2;
+    sUnknown_203B2F8->menuAction1 = DELETE_ACTION;
 }
 
 static void sub_802D63C(void)
@@ -305,15 +315,15 @@ static void sub_802D63C(void)
 
     loopMax = 0;
     sUnknown_203B2F8->unk158[loopMax].text = gCommonYes[0];
-    sUnknown_203B2F8->unk158[loopMax].menuAction = 3;
+    sUnknown_203B2F8->unk158[loopMax].menuAction = YES_ACTION;
 
     loopMax++;
     sUnknown_203B2F8->unk158[loopMax].text = gCommonNo[0];
-    sUnknown_203B2F8->unk158[loopMax].menuAction = 4;
+    sUnknown_203B2F8->unk158[loopMax].menuAction = NO_ACTION;
 
     loopMax++;
     sUnknown_203B2F8->unk158[loopMax].text = NULL;
-    sUnknown_203B2F8->unk158[loopMax].menuAction = 1;
+    sUnknown_203B2F8->unk158[loopMax].menuAction = CANCEL_ACTION;
 }
 
 static void sub_802D690(void)
@@ -323,30 +333,30 @@ static void sub_802D690(void)
 
     loopMax = 0;
     sUnknown_203B2F8->unk158[loopMax].text = gCommonYes[0];
-    sUnknown_203B2F8->unk158[loopMax].menuAction = 3;
+    sUnknown_203B2F8->unk158[loopMax].menuAction = YES_ACTION;
 
     loopMax++;
     sUnknown_203B2F8->unk158[loopMax].text = gCommonNo[0];
-    sUnknown_203B2F8->unk158[loopMax].menuAction = 4;
+    sUnknown_203B2F8->unk158[loopMax].menuAction = NO_ACTION;
 
     loopMax++;
     sUnknown_203B2F8->unk158[loopMax].text = sNewMail;
-    sUnknown_203B2F8->unk158[loopMax].menuAction = 6;
+    sUnknown_203B2F8->unk158[loopMax].menuAction = NEW_MAIL_ACTION;
 
     loopMax++;
     sUnknown_203B2F8->unk158[loopMax].text = sOldMail;
-    sUnknown_203B2F8->unk158[loopMax].menuAction = 7;
+    sUnknown_203B2F8->unk158[loopMax].menuAction = OLD_MAIL_ACTION;
 
     loopMax++;
     sUnknown_203B2F8->unk158[loopMax].text = NULL;
-    sUnknown_203B2F8->unk158[loopMax].menuAction = 1;
+    sUnknown_203B2F8->unk158[loopMax].menuAction = CANCEL_ACTION;
 
     for (i = 0; i < loopMax; i++) {
         if (sUnknown_203B2F8->unk158[i].menuAction == sUnknown_203B2F8->menuAction3)
             return;
     }
 
-    sUnknown_203B2F8->menuAction3 = 4;
+    sUnknown_203B2F8->menuAction3 = NO_ACTION;
 }
 
 static void sub_802D73C(void)
@@ -356,26 +366,26 @@ static void sub_802D73C(void)
 
     loopMax = 0;
     sUnknown_203B2F8->unk158[loopMax].text = gCommonYes[0];
-    sUnknown_203B2F8->unk158[loopMax].menuAction = 3;
+    sUnknown_203B2F8->unk158[loopMax].menuAction = YES_ACTION;
 
     loopMax++;
     sUnknown_203B2F8->unk158[loopMax].text = gCommonNo[0];
-    sUnknown_203B2F8->unk158[loopMax].menuAction = 4;
+    sUnknown_203B2F8->unk158[loopMax].menuAction = NO_ACTION;
 
     loopMax++;
     sUnknown_203B2F8->unk158[loopMax].text = sNewMail;
-    sUnknown_203B2F8->unk158[loopMax].menuAction = 6;
+    sUnknown_203B2F8->unk158[loopMax].menuAction = NEW_MAIL_ACTION;
 
     loopMax++;
     sUnknown_203B2F8->unk158[loopMax].text = NULL;
-    sUnknown_203B2F8->unk158[loopMax].menuAction = 1;
+    sUnknown_203B2F8->unk158[loopMax].menuAction = CANCEL_ACTION;
 
     for (i = 0; i < loopMax; i++) {
         if (sUnknown_203B2F8->unk158[i].menuAction == sUnknown_203B2F8->menuAction2)
             return;
     }
 
-    sUnknown_203B2F8->menuAction2 = 4;
+    sUnknown_203B2F8->menuAction2 = NO_ACTION;
 }
 
 static void sub_802D7D0(void)
@@ -385,19 +395,19 @@ static void sub_802D7D0(void)
     if (sub_80144A4(&menuAction))
         return;
 
-    if (menuAction != 1)
+    if (menuAction != CANCEL_ACTION)
         sUnknown_203B2F8->menuAction2 = menuAction;
 
     switch (menuAction) {
-        case 3: // Yes
+        case YES_ACTION:
             sub_802D1A0(WONDER_MAIL_EXIT);
             break;
-        case 6: // New Mail
+        case NEW_MAIL_ACTION:
             sUnknown_203B2F8->fallbackState = 1;
             sub_802D1A0(0x10);
             break;
-        case 4: // No
-        case 2:
+        case NO_ACTION:
+        case DELETE_ACTION:
         default:
             sub_802D1A0(INITIAL_WONDER_MAIL_CHECK);
             break;
@@ -411,27 +421,27 @@ static void sub_802D82C(void)
     if (sub_80144A4(&menuAction))
         return;
 
-    if (menuAction != 1)
+    if (menuAction != CANCEL_ACTION)
         sUnknown_203B2F8->menuAction3 = menuAction;
 
     switch (menuAction) {
-        case 3: // Yes
+        case YES_ACTION:
             ResetJobSlot(sUnknown_203B2F8->jobSlotIndex);
             ShiftJobSlotsDown();
             sub_802D1A0(RECEIVE_WONDER_MAIL);
             break;
-        case 6: // New Mail
+        case NEW_MAIL_ACTION:
             sUnknown_203B2F8->fallbackState = 9;
             sub_802D1A0(16);
             break;
-        case 7: // Old Mail
+        case OLD_MAIL_ACTION:
             sUnknown_203B2F8->fallbackState = 9;
             sub_802D1A0(15);
             break;
-        default: // No
-        case 1:
-        case 2:
-        case 4:
+        default:
+        case CANCEL_ACTION:
+        case DELETE_ACTION:
+        case NO_ACTION:
             sub_802D1A0(1);
             break;
     }
@@ -469,12 +479,12 @@ static void sub_802D940(void)
 
     if (!sub_8012FD8(&sUnknown_203B2F8->unk78)) {
         sub_8013114(&sUnknown_203B2F8->unk78, &menuAction);
-        if (menuAction != 1)
+        if (menuAction != CANCEL_ACTION)
             sUnknown_203B2F8->menuAction1 = menuAction;
     }
 
     switch (menuAction) {
-        case 2: // Delete
+        case DELETE_ACTION:
             if (sUnknown_203B2F8->unk9) {
                 mail = &gUnknown_203B490->jobSlots[sUnknown_203B2F8->jobSlotIndex];
                 if (mail->mailType > MAIL_TYPE_SUSPENDED_JOB && sUnknown_203B2F8->dungeonID == mail->unk4.dungeon.id) {
@@ -485,11 +495,11 @@ static void sub_802D940(void)
 
             sub_802D1A0(14);
             break;
-        case 5: // Info
+        case INFO_ACTION:
             sUnknown_203B2F8->fallbackState = DRAW_JOB_LIST_1;
             sub_802D1A0(15);
             break;
-        case 1:
+        case CANCEL_ACTION:
             sub_802D1A0(DRAW_JOB_LIST_1);
             break;
     }
@@ -506,12 +516,12 @@ static void sub_802D9F0(void)
         sub_8013114(&sUnknown_203B2F8->unkC8, &menuAction);
 
     switch (menuAction) {
-        case 1: // No
-        case 4:
+        case CANCEL_ACTION:
+        case NO_ACTION:
             sub_802D1A0(DRAW_JOB_LIST_1);
             break;
        
-        case 3: // Yes
+        case YES_ACTION:
             sub_802C688();
             ResetJobSlot(sUnknown_203B2F8->jobSlotIndex);
             ShiftJobSlotsDown();

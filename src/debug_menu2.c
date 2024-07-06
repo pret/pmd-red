@@ -15,6 +15,12 @@ static EWRAM_DATA_2 unkStruct_203B3F0 *sUnknown_203B3F0 = {0};
 
 #include "data/debug_menu2.h"
 
+enum menuActions {
+    CANCEL_ACTION = 1,
+    NUMBER_ACTION,
+    INFO_ACTION
+};
+
 static void sub_803A504(u32 newState);
 static void sub_803A51C(void);
 static void sub_803A5A0(void);
@@ -147,20 +153,20 @@ static void sub_803A6F0(void)
     s32 loopMax = 0;
 
     sUnknown_203B3F0->menuItems[loopMax].text = sNumberPrompt;
-    sUnknown_203B3F0->menuItems[loopMax].menuAction = 2;
-    sUnknown_203B3F0->menuAction = 2;
+    sUnknown_203B3F0->menuItems[loopMax].menuAction = NUMBER_ACTION;
+    sUnknown_203B3F0->menuAction = NUMBER_ACTION;
     if (!IsNotMoneyOrUsedTMItem(sUnknown_203B3F0->id)) {
         sUnknown_203B3F0->menuItems[loopMax].menuAction = -1;
-        sUnknown_203B3F0->menuAction = 3;
+        sUnknown_203B3F0->menuAction = INFO_ACTION;
     }
 
     loopMax++;
     sUnknown_203B3F0->menuItems[loopMax].text = gCommonInfo[0];
-    sUnknown_203B3F0->menuItems[loopMax].menuAction = 3;
+    sUnknown_203B3F0->menuItems[loopMax].menuAction = INFO_ACTION;
 
     loopMax++;
     sUnknown_203B3F0->menuItems[loopMax].text = NULL;
-    sUnknown_203B3F0->menuItems[loopMax].menuAction = 1;
+    sUnknown_203B3F0->menuItems[loopMax].menuAction = CANCEL_ACTION;
 }
 
 static void sub_803A740(void)
@@ -196,13 +202,13 @@ static void sub_803A7B0(void)
         sub_8013114(&sUnknown_203B3F0->unk4C, &menuAction);
 
     switch (menuAction) {
-        case 2:
+        case NUMBER_ACTION:
             sub_803A504(3);
             break;
-        case 3:
+        case INFO_ACTION:
             sub_803A504(4);
             break;
-        case 1:
+        case CANCEL_ACTION:
             sub_803A504(1);
             break;
     }
