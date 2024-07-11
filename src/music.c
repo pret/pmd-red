@@ -502,28 +502,18 @@ bool8 IsFanfareSEPlaying(u16 songIndex)
 {
     u32 playerIndex;
     PMDMusicPlayer *musicPlayer;
-    #ifndef NONMATCHING
-    register u32 songIndex_u32 asm("r4");
-    register u32 songIndex_u32_2 asm("r5");
-    #else
-    u32 songIndex_u32;
-    u32 songIndex_u32_2;
-    #endif
 
-    songIndex_u32 = songIndex;
-    songIndex_u32_2 = songIndex_u32;
-
-    if (IsFanfare(songIndex_u32)) {
-        if (sFanfareMusicPlayerState != 0 && sCurrentFanfareSong == songIndex_u32)
+    if (IsFanfare(songIndex)) {
+        if (sFanfareMusicPlayerState != 0 && sCurrentFanfareSong == songIndex)
             return TRUE;
     }
-    else {
-        if (IsSoundEffect(songIndex_u32)) {
-            playerIndex = GetMusicPlayerIndex(songIndex_u32);
-            musicPlayer = &sBGMusicPlayers[playerIndex];
-            if (INDEX_SE1 <= playerIndex && musicPlayer->songIndex == songIndex_u32_2)
-                return TRUE;
-        }
+    else if (IsSoundEffect(songIndex)) {
+        playerIndex = GetMusicPlayerIndex(songIndex);
+        musicPlayer = &sBGMusicPlayers[playerIndex];
+        if (INDEX_SE1 > playerIndex)
+            return FALSE;
+        if (musicPlayer->songIndex == songIndex)
+            return TRUE;
     }
 
     return FALSE;
@@ -641,16 +631,12 @@ void UpdateSound(void)
     }
     else {
         if (!IsMusicPlayerPlaying(INDEX_BGM)) {
-#ifndef NONMATCHING
-            register u16 r2 asm("r2") = sQueuedBGSong, r1 = r2;
-#else
-            u16 r2, r1;
-            r2 = sQueuedBGSong, r1 = r2;
-#endif
-            if (r1 != STOP_BGM) {
+            u32 queuedBgSong = sQueuedBGSong;
+
+            if (sQueuedBGSong != STOP_BGM) {
                 sBGMusicPlayerstate = BG_PLAYER_STATE_PLAYING;
-                sCurrentBGSong = r2;
-                m4aSongNumStart(r1);
+                sCurrentBGSong = queuedBgSong;
+                m4aSongNumStart(queuedBgSong);
                 sQueuedBGSong = STOP_BGM;
             }
             else {
