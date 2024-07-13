@@ -20,14 +20,14 @@ const u8 UnkData_80D47C4[] = {0x01, 0x00, 0x10, 0x00};
 
 const UnkTextStruct2 gUnknown_80D47C8[4] = {
         0x00, 0x00, 0x00, 0x00,
-        0x06, 
+        0x06,
         0x02, 0x02,
         0x1a, 0x0c,
         0x0c, 0x00,
         UnkData_80D47C4,
 
         0x00, 0x00, 0x00, 0x00,
-        0x03, 
+        0x03,
         0x00, 0x00,
         0x00, 0x00,
         0x00, 0x00,
@@ -173,7 +173,7 @@ void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 a5)
     s32 *piVar4;
     s32 total_x;
     s32 decimal[8];
-    
+
     total_x = 0;
 
     ConvertToDecimal(decimal, n, len);
@@ -238,7 +238,7 @@ void sub_8012CAC(UnkTextStruct2 *a0, const MenuItem *a1)
     #else
     s32 r0;
     #endif
-    
+
     r7 = 0;
     r6 = 0;
 
@@ -479,7 +479,7 @@ void sub_8012EBC(MenuStruct *param_1)
                 counter++;
             } while (menuItemsPtr->text != NULL);
         }
-    
+
         sub_80073E0(param_1->index);
         param_1->unk4D = FALSE;
     }
@@ -592,7 +592,7 @@ static void sub_8013134(MenuInputStruct *param_1, u32 menuItemCounter, u32 index
     UnkTextStruct1 *temp;
 
     temp = &gUnknown_2027370[index];
-    
+
     param_1->unk0 = index;
     param_1->menuIndex = 0;
     param_1->unk1A = menuItemCounter;
@@ -833,7 +833,7 @@ static void sub_8013470(MenuInputStruct *a0)
             r1 = ptr->attrib3;
             r0 = r1 & (u16)~SPRITEOAM_MASK_TILENUM;
             r0 |= r2;
-        
+
             r0 &= (u16)~SPRITEOAM_MASK_PRIORITY;
 
             r5 = (u16)~SPRITEOAM_MASK_UNK6_4;
@@ -886,7 +886,7 @@ static void sub_8013470(MenuInputStruct *a0)
             r1 = ptr->attrib3;
             r0 = r1 & (u16)~SPRITEOAM_MASK_TILENUM;
             r0 |= r2;
-        
+
             r0 &= (u16)~SPRITEOAM_MASK_PRIORITY;
 
             r5 = (u16)~SPRITEOAM_MASK_UNK6_4;
@@ -936,7 +936,7 @@ void UpdateMenuCursorSpriteCoords(MenuInputStruct *param_1)
 }
 
 void MoveMenuCursorDown(MenuInputStruct *param_1)
-{ 
+{
     param_1->unk24 = 0;
 
     if (param_1->unk1A < 1)
@@ -950,7 +950,7 @@ void MoveMenuCursorDown(MenuInputStruct *param_1)
 }
 
 void sub_80136E0(MenuInputStruct *param_1, u8 param_2)
-{ 
+{
     param_1->unk24 = 0;
 
     if (param_1->unk1A < 1)
@@ -968,7 +968,7 @@ void sub_80136E0(MenuInputStruct *param_1, u8 param_2)
 }
 
 void MoveMenuCursorUp(MenuInputStruct *param_1)
-{ 
+{
     param_1->unk24 = 0;
 
     if (param_1->unk1A < 1)
@@ -982,7 +982,7 @@ void MoveMenuCursorUp(MenuInputStruct *param_1)
 }
 
 void sub_8013744(MenuInputStruct *param_1, u8 param_2)
-{ 
+{
     param_1->unk24 = 0;
 
     if (param_1->unk1A < 1)
@@ -1301,7 +1301,7 @@ u32 sub_8013BBC(unkStructFor8013AA0 *a0)
             a0->unk28.attrib2 |= temp;
         }
         AddSprite(&a0->unk28, 0x100, NULL, NULL);
-    
+
         a0->unk28.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
         {
             u32 temp = a0->unk28.unk6;

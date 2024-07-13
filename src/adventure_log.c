@@ -10,10 +10,11 @@
 #include "menu_input.h"
 #include "text1.h"
 #include "text2.h"
+#include "structs/struct_sub80095e4.h"
 
 extern u32 gUnknown_202DE30;
 
-static EWRAM_DATA_2 AdventureLog *sAdventureLog = {0};
+static EWRAM_DATA_2 struct_Sub80095E4_2 *sAdventureLog = {0};
 
 #include "data/adventure_log.h"
 
@@ -23,16 +24,16 @@ static void sub_8032084();
 
 bool8 CreateAdventureLogScreen(u32 kind)
 {
-    sAdventureLog = MemoryAlloc(sizeof(AdventureLog), 8);
-    sAdventureLog->unk34 = kind;
-    sAdventureLog->unk38 = &sAdventureLog->unk3C[kind];
-    sub_8006518(sAdventureLog->unk3C);
-    sAdventureLog->unk3C[sAdventureLog->unk34] = sUnknown_80E2008;
-    sAdventureLog->unk38->unk14 = sAdventureLog->unk9C;
+    sAdventureLog = MemoryAlloc(sizeof(*sAdventureLog), 8);
+    sAdventureLog->s0.unk34 = kind;
+    sAdventureLog->s0.unk38 = &sAdventureLog->s0.unk3C[kind];
+    sub_8006518(sAdventureLog->s0.unk3C);
+    sAdventureLog->s0.unk3C[sAdventureLog->s0.unk34] = sUnknown_80E2008;
+    sAdventureLog->s0.unk38->unk14 = sAdventureLog->unk9C;
 
     ResetUnusedInputStruct();
-    sub_800641C(sAdventureLog->unk3C, TRUE, TRUE);
-    sub_8013818(&sAdventureLog->input, 0x20, 8, kind);
+    sub_800641C(sAdventureLog->s0.unk3C, TRUE, TRUE);
+    sub_8013818(&sAdventureLog->s0.input, 0x20, 8, kind);
     sub_8032084();
     DisplayAdventureLog();
     return TRUE;
@@ -41,11 +42,11 @@ bool8 CreateAdventureLogScreen(u32 kind)
 u32 HandleAdventureLogInput(bool8 a0)
 {
     if (!a0) {
-        sub_8013660(&sAdventureLog->input);
+        sub_8013660(&sAdventureLog->s0.input);
         return 0;
     }
 
-    switch (GetKeyPress(&sAdventureLog->input)) {
+    switch (GetKeyPress(&sAdventureLog->s0.input)) {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
@@ -53,7 +54,7 @@ u32 HandleAdventureLogInput(bool8 a0)
             PlayMenuSoundEffect(0);
             return 3;
         default:
-            if (sub_8013938(&sAdventureLog->input)) {
+            if (sub_8013938(&sAdventureLog->s0.input)) {
                 sub_8032084();
                 DisplayAdventureLog();
                 return 1;
@@ -65,93 +66,23 @@ u32 HandleAdventureLogInput(bool8 a0)
 void CleanAdventureLogScreen(void)
 {
     if (sAdventureLog != NULL) {
-        sAdventureLog->unk3C[sAdventureLog->unk34] = sUnknown_80E1FF0;
+        sAdventureLog->s0.unk3C[sAdventureLog->s0.unk34] = sUnknown_80E1FF0;
         ResetUnusedInputStruct();
-        sub_800641C(sAdventureLog->unk3C, TRUE, TRUE);
+        sub_800641C(sAdventureLog->s0.unk3C, TRUE, TRUE);
         MemoryFree(sAdventureLog);
         sAdventureLog = NULL;
     }
 }
 
-#ifdef NONMATCHING // sub_80095E4 memes
 static void sub_8032084(void)
 {
-    u32 sVar2;
-
-    sAdventureLog->unk9C[0] = sAdventureLog->unk20;
-    sAdventureLog->unk9C[1] = sAdventureLog->unk0.unk1E;
+    sAdventureLog->unk9C[0] = sAdventureLog->s0.input.unk20;
+    sAdventureLog->unk9C[1] = sAdventureLog->s0.input.unk1E;
     sAdventureLog->unk9C[2] = 11;
     sAdventureLog->unk9C[3] = 0;
-    // So a sign extend..
-    sVar2 = sub_80095E4(sAdventureLog->unk0.unk1A, 12) + 2 << 0x10;
-    // TODO needs asr r3, r0, r16
-    //        and lsr r0, r0, r16
-    sAdventureLog->unk3C[sAdventureLog->unk34].unkE = sVar2;
-    // Good past here except regs for this store
-    sAdventureLog->unk3C[sAdventureLog->unk34].unk10 = sVar2 + 2;
-    ResetUnusedInputStruct();
-    sub_800641C(sAdventureLog->unk3C, TRUE, TRUE);
+
+    SUB_80095E4_CALL(sAdventureLog->s0);
 }
-#else
-NAKED
-static void sub_8032084(void)
-{
-    asm_unified("\tpush {r4,lr}\n"
-    "\tldr r4, _080320F4\n"
-    "\tldr r0, [r4]\n"
-    "\tldrh r1, [r0, 0x20]\n"
-    "\tadds r0, 0x9C\n"
-    "\tmovs r2, 0\n"
-    "\tstrb r1, [r0]\n"
-    "\tldr r0, [r4]\n"
-    "\tldrh r1, [r0, 0x1E]\n"
-    "\tadds r0, 0x9D\n"
-    "\tstrb r1, [r0]\n"
-    "\tldr r0, [r4]\n"
-    "\tadds r0, 0x9E\n"
-    "\tmovs r1, 0xB\n"
-    "\tstrb r1, [r0]\n"
-    "\tldr r0, [r4]\n"
-    "\tadds r0, 0x9F\n"
-    "\tstrb r2, [r0]\n"
-    "\tldr r0, [r4]\n"
-    "\tmovs r1, 0x1A\n"
-    "\tldrsh r0, [r0, r1]\n"
-    "\tmovs r1, 0xC\n"
-    "\tbl sub_80095E4\n"
-    "\tadds r0, 0x2\n"
-    "\tlsls r0, 16\n"
-    "\tldr r2, [r4]\n"
-    "\tldr r3, [r2, 0x34]\n"
-    "\tlsls r1, r3, 1\n"
-    "\tadds r1, r3\n"
-    "\tlsls r1, 3\n"
-    "\tadds r1, r2, r1\n"
-    "\tadds r1, 0x4A\n"
-    "\tasrs r3, r0, 16\n"
-    "\tlsrs r0, 16\n"
-    "\tstrh r0, [r1]\n"
-    "\tldr r1, [r2, 0x34]\n"
-    "\tlsls r0, r1, 1\n"
-    "\tadds r0, r1\n"
-    "\tlsls r0, 3\n"
-    "\tadds r2, r0\n"
-    "\tadds r3, 0x2\n"
-    "\tadds r2, 0x4C\n"
-    "\tstrh r3, [r2]\n"
-    "\tbl ResetUnusedInputStruct\n"
-    "\tldr r0, [r4]\n"
-    "\tadds r0, 0x3C\n"
-    "\tmovs r1, 0x1\n"
-    "\tmovs r2, 0x1\n"
-    "\tbl sub_800641C\n"
-    "\tpop {r4}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-"_080320F4: .4byte sAdventureLog");
-}
-#endif
 
 static void DisplayAdventureLog(void)
 {
@@ -161,59 +92,59 @@ static void DisplayAdventureLog(void)
     u8 temp;
     s32 v1, v2, v3, v4, v5, v6;
 
-    sub_8008C54(sAdventureLog->unk34);
-    sub_80073B8(sAdventureLog->unk34);
-    r4 = sAdventureLog->input.unk1E * 8;
+    sub_8008C54(sAdventureLog->s0.unk34);
+    sub_80073B8(sAdventureLog->s0.unk34);
+    r4 = sAdventureLog->s0.input.unk1E * 8;
     r6 = r4;
     r6 += 10;
-    xxx_call_draw_string(r6, 0, sAdventureLogText, sAdventureLog->unk34, 0);
+    xxx_call_draw_string(r6, 0, sAdventureLogText, sAdventureLog->s0.unk34, 0);
 
     r4 += 4;
     r6 = r4 + (sAdventureLog->unk9C[2] * 8);
-    sub_8012BC4(r6, 0, sAdventureLog->input.unk1E + 1, 1, 7, sAdventureLog->unk34);
+    sub_8012BC4(r6, 0, sAdventureLog->s0.input.unk1E + 1, 1, 7, sAdventureLog->s0.unk34);
 
-    for (i = 0; i < sAdventureLog->input.unk1A; i++) {
-        temp = (sAdventureLog->input.unk1E * sAdventureLog->input.unk1C) + i;
+    for (i = 0; i < sAdventureLog->s0.input.unk1A; i++) {
+        temp = (sAdventureLog->s0.input.unk1E * sAdventureLog->s0.input.unk1C) + i;
 
         if (sub_8097710(temp)) {
             switch (temp) {
                 case 12:
                     v1 = sub_80978B8();
                     gUnknown_202DE30 = (s16)v1;
-                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->input, i), GetAdventureLogLine(temp), sAdventureLog->unk34, 0);
+                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 7:
                     v2 = sub_8097880();
                     gUnknown_202DE30 = (s16)v2;
-                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->input, i), GetAdventureLogLine(temp), sAdventureLog->unk34, 0);
+                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 11:
                     v3 = sub_8097838();
                     gUnknown_202DE30 = (s16)v3;
-                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->input, i), GetAdventureLogLine(temp), sAdventureLog->unk34, 0);
+                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 8:
                     v4 = sub_80977B8();
                     gUnknown_202DE30 = v4;
-                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->input, i), GetAdventureLogLine(temp), sAdventureLog->unk34, 0);
+                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 9:
                     v5 = sub_80977F8();
                     gUnknown_202DE30 = v5;
-                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->input, i), GetAdventureLogLine(temp), sAdventureLog->unk34, 0);
+                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 10:
                     v6 = sub_8097870();
                     gUnknown_202DE30 = (s16)v6;
                     // fallthrough
                 default:
-                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->input, i), GetAdventureLogLine(temp), sAdventureLog->unk34, 0);
+                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
             }
         }
         else
-            xxx_call_draw_string(8, sub_8013800(&sAdventureLog->input, i), sPlaceholder, sAdventureLog->unk34, 0);
+            xxx_call_draw_string(8, sub_8013800(&sAdventureLog->s0.input, i), sPlaceholder, sAdventureLog->s0.unk34, 0);
     }
 
-    sub_80073E0(sAdventureLog->unk34);
+    sub_80073E0(sAdventureLog->s0.unk34);
 }

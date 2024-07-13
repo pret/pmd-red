@@ -4,15 +4,6 @@
 #include "structs/menu.h"
 #include "structs/str_text.h"
 
-// size: 0x9C
-struct unkStruct_203B264
-{
-    MenuInputStruct input;
-    u32 unk34;
-    UnkTextStruct2 *unk38;
-    UnkTextStruct2 unk3C[4];
-};
-
 void CreateHintSelectionScreen(bool8 cursorSprite);
 s32 GetChosenHintIndex(void);
 
