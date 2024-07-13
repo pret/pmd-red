@@ -41,4 +41,18 @@ typedef struct struct_Sub80095E4_2
     sub_800641C((ptr).unk3C, TRUE, TRUE);                                               \
 }
 
+// For sub_801C440 where unkE and unk10 are the same.
+#define SUB_80095E4_CALL_2(ptr)                                                         \
+{                                                                                       \
+    s32 a0 = sub_80095E4((ptr).input.unk1A, 12) + 2;                                    \
+    UNUSED s16 oldE = (ptr).unk3C[(ptr).unk34].unkE;                                    \
+    s16 newE = a0;                                                                      \
+                                                                                        \
+    (ptr).unk3C[(ptr).unk34].unkE = newE;                                               \
+    (ptr).unk3C[(ptr).unk34].unk10 = newE;                                              \
+                                                                                        \
+    ResetUnusedInputStruct();                                                           \
+    sub_800641C((ptr).unk3C, TRUE, TRUE);                                               \
+}
+
 #endif // GUARD_struct_sub80095e4_H

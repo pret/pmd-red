@@ -119,7 +119,7 @@ static void sub_801DBD4(void)
     n = sUnknown_203B258->s0.input.unk1E + 1;
     sub_8012BC4(x, 0, n, 2, 7, sUnknown_203B258->s0.unk34);
 
-    // This line has no real effect. It's a magic 'fakematch' to fool agb into generating the same asm. Remove if you don't care about matching.
+    // This line has no real effect. It's a magic 'fakematch' to fool agb into generating the same asm. It can be removed if you don't care about matching.
     if (x) { counter = 0; }
 
     for (counter = 0; counter < sUnknown_203B258->s0.input.unk1A; counter++) {
