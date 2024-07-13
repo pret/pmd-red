@@ -43,23 +43,23 @@ bool8 sub_8023144(s32 a0, s32 index, UnkTextStruct2_sub *sub, u32 a3)
     gUnknown_3001B5C->unk0 = param_1_u8;
     gUnknown_3001B5C->unk4 = gUnknown_203B298;
 
-    gUnknown_3001B5C->unk390 = index;
-    gUnknown_3001B5C->unk394 = &gUnknown_3001B5C->unk398[index];
-    sub_8006518(gUnknown_3001B5C->unk398);
-    gUnknown_3001B5C->unk398[gUnknown_3001B5C->unk390] = sUnknown_80DC91C;
+    gUnknown_3001B5C->s35C.s0.unk34 = index;
+    gUnknown_3001B5C->s35C.s0.unk38 = &gUnknown_3001B5C->s35C.s0.unk3C[index];
+    sub_8006518(gUnknown_3001B5C->s35C.s0.unk3C);
+    gUnknown_3001B5C->s35C.s0.unk3C[gUnknown_3001B5C->s35C.s0.unk34] = sUnknown_80DC91C;
 
-    gUnknown_3001B5C->unk394->unk14 = gUnknown_3001B5C->unk3F8;
+    gUnknown_3001B5C->s35C.s0.unk38->unk14 = gUnknown_3001B5C->s35C.unk9C;
 
     if (sub != NULL)
-        gUnknown_3001B5C->unk398[gUnknown_3001B5C->unk390].unk8 = *sub;
+        gUnknown_3001B5C->s35C.s0.unk3C[gUnknown_3001B5C->s35C.s0.unk34].unk8 = *sub;
 
-    sub_8012D08(gUnknown_3001B5C->unk394, a3);
+    sub_8012D08(gUnknown_3001B5C->s35C.s0.unk38, a3);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_3001B5C->unk398, TRUE, TRUE);
-    sub_8013818(&gUnknown_3001B5C->input, sub_80236A4(), a3, index);
-    gUnknown_3001B5C->input.menuIndex = gUnknown_203B29C;
-    gUnknown_3001B5C->input.unk1E = gUnknown_203B29E;
-    sub_8013984(&gUnknown_3001B5C->input);
+    sub_800641C(gUnknown_3001B5C->s35C.s0.unk3C, TRUE, TRUE);
+    sub_8013818(&gUnknown_3001B5C->s35C.s0.input, sub_80236A4(), a3, index);
+    gUnknown_3001B5C->s35C.s0.input.menuIndex = gUnknown_203B29C;
+    gUnknown_3001B5C->s35C.s0.input.unk1E = gUnknown_203B29E;
+    sub_8013984(&gUnknown_3001B5C->s35C.s0.input);
     sub_8023420();
     sub_80234BC();
     return TRUE;
@@ -71,11 +71,11 @@ u32 sub_8023278(bool8 a0)
     u32 temp;
 
     if (!a0) {
-        sub_8013660(&gUnknown_3001B5C->input);
+        sub_8013660(&gUnknown_3001B5C->s35C.s0.input);
         return 0;
     }
 
-    switch (GetKeyPress(&gUnknown_3001B5C->input)) {
+    switch (GetKeyPress(&gUnknown_3001B5C->s35C.s0.input)) {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
@@ -91,7 +91,7 @@ u32 sub_8023278(bool8 a0)
             sub_80236A4();
             break;
         default:
-            if (sub_80138B8(&gUnknown_3001B5C->input, 1) == 0)
+            if (sub_80138B8(&gUnknown_3001B5C->s35C.s0.input, 1) == 0)
                 return 0;
             break;
     }
@@ -103,109 +103,43 @@ u32 sub_8023278(bool8 a0)
 
 s16 sub_802331C(void)
 {
-    return gUnknown_3001B5C->unkC[(gUnknown_3001B5C->input.unk1E * gUnknown_3001B5C->input.unk1C) + gUnknown_3001B5C->input.menuIndex];
+    return gUnknown_3001B5C->unkC[(gUnknown_3001B5C->s35C.s0.input.unk1E * gUnknown_3001B5C->s35C.s0.input.unk1C) + gUnknown_3001B5C->s35C.s0.input.menuIndex];
 }
 
 void sub_8023354(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_3001B5C->unk398, FALSE, FALSE);
-    sub_8013984(&gUnknown_3001B5C->input);
+    sub_800641C(gUnknown_3001B5C->s35C.s0.unk3C, FALSE, FALSE);
+    sub_8013984(&gUnknown_3001B5C->s35C.s0.input);
     sub_8023420();
     sub_80234BC();
 
     if (cursorSprite)
-        AddMenuCursorSprite(&gUnknown_3001B5C->input);
+        AddMenuCursorSprite(&gUnknown_3001B5C->s35C.s0.input);
 }
 
 void sub_80233A0(void)
 {
     if (gUnknown_3001B5C != NULL) {
         gUnknown_203B298 = gUnknown_3001B5C->unk4;
-        gUnknown_203B29C = gUnknown_3001B5C->input.menuIndex;
-        gUnknown_203B29E = gUnknown_3001B5C->input.unk1E;
-        gUnknown_3001B5C->unk398[gUnknown_3001B5C->unk390] = sUnknown_80DC904;
+        gUnknown_203B29C = gUnknown_3001B5C->s35C.s0.input.menuIndex;
+        gUnknown_203B29E = gUnknown_3001B5C->s35C.s0.input.unk1E;
+        gUnknown_3001B5C->s35C.s0.unk3C[gUnknown_3001B5C->s35C.s0.unk34] = sUnknown_80DC904;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_3001B5C->unk398, TRUE, TRUE);
+        sub_800641C(gUnknown_3001B5C->s35C.s0.unk3C, TRUE, TRUE);
         MemoryFree(gUnknown_3001B5C);
         gUnknown_3001B5C = NULL;
     }
 }
 
-NAKED // sub_80095E4 memes
 static void sub_8023420(void)
 {
-    asm_unified(
-    "\tpush {r4,r5,lr}\n"
-    "\tldr r4, _080234A8\n"
-    "\tldr r0, [r4]\n"
-    "\tmovs r1, 0xFE\n"
-    "\tlsls r1, 2\n"
-    "\tadds r0, r1\n"
-    "\tmovs r2, 0\n"
-    "\tmovs r1, 0x1\n"
-    "\tstrb r1, [r0]\n"
-    "\tldr r0, [r4]\n"
-    "\tldr r1, _080234AC\n"
-    "\tadds r0, r1\n"
-    "\tstrb r2, [r0]\n"
-    "\tldr r0, [r4]\n"
-    "\tadds r1, 0x1\n"
-    "\tadds r0, r1\n"
-    "\tmovs r1, 0xC\n"
-    "\tstrb r1, [r0]\n"
-    "\tldr r0, [r4]\n"
-    "\tldr r1, _080234B0\n"
-    "\tadds r0, r1\n"
-    "\tstrb r2, [r0]\n"
-    "\tldr r0, [r4]\n"
-    "\tldr r2, _080234B4\n"
-    "\tadds r0, r2\n"
-    "\tmovs r1, 0\n"
-    "\tldrsh r0, [r0, r1]\n"
-    "\tmovs r1, 0xC\n"
-    "\tbl sub_80095E4\n"
-    "\tadds r0, 0x2\n"
-    "\tldr r3, [r4]\n"
-    "\tmovs r2, 0xE4\n"
-    "\tlsls r2, 2\n"
-    "\tadds r5, r3, r2\n"
-    "\tldr r2, [r5]\n"
-    "\tlsls r1, r2, 1\n"
-    "\tadds r1, r2\n"
-    "\tlsls r1, 3\n"
-    "\tadds r1, r3, r1\n"
-    "\tldr r2, _080234B8\n"
-    "\tadds r1, r2\n"
-    "\tlsls r0, 16\n"
-    "\tlsrs r0, 16\n"
-    "\tstrh r0, [r1]\n"
-    "\tldr r2, [r5]\n"
-    "\tlsls r1, r2, 1\n"
-    "\tadds r1, r2\n"
-    "\tlsls r1, 3\n"
-    "\tadds r3, r1\n"
-    "\tmovs r1, 0xEA\n"
-    "\tlsls r1, 2\n"
-    "\tadds r3, r1\n"
-    "\tstrh r0, [r3]\n"
-    "\tbl ResetUnusedInputStruct\n"
-    "\tldr r0, [r4]\n"
-    "\tmovs r2, 0xE6\n"
-    "\tlsls r2, 2\n"
-    "\tadds r0, r2\n"
-    "\tmovs r1, 0x1\n"
-    "\tmovs r2, 0x1\n"
-    "\tbl sub_800641C\n"
-    "\tpop {r4,r5}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-"_080234A8: .4byte gUnknown_3001B5C\n"
-"_080234AC: .4byte 0x000003f9\n"
-"_080234B0: .4byte 0x000003fb\n"
-"_080234B4: .4byte 0x00000376\n"
-"_080234B8: .4byte 0x000003a6");
+    gUnknown_3001B5C->s35C.unk9C[0] = 1;
+    gUnknown_3001B5C->s35C.unk9C[1] = 0;
+    gUnknown_3001B5C->s35C.unk9C[2] = 12;
+    gUnknown_3001B5C->s35C.unk9C[3] = 0;
+
+    SUB_80095E4_CALL_2(gUnknown_3001B5C->s35C.s0);
 }
 
 static void sub_80234BC(void)
@@ -221,15 +155,15 @@ static void sub_80234BC(void)
     u8 buffer1[100];
     unkStruct_8092638 auStack_2c;
 
-    sub_8008C54(gUnknown_3001B5C->unk390);
-    sub_80073B8(gUnknown_3001B5C->unk390);
-    xxx_call_draw_string(10, 0, sPokemon, gUnknown_3001B5C->unk390, 0);
+    sub_8008C54(gUnknown_3001B5C->s35C.s0.unk34);
+    sub_80073B8(gUnknown_3001B5C->s35C.s0.unk34);
+    xxx_call_draw_string(10, 0, sPokemon, gUnknown_3001B5C->s35C.s0.unk34, 0);
 
-    sub_8012BC4((gUnknown_3001B5C->unk3F8[2] * 8) + 4, 0, gUnknown_3001B5C->input.unk1E + 1, 2, 7, gUnknown_3001B5C->unk390);
+    sub_8012BC4((gUnknown_3001B5C->s35C.unk9C[2] * 8) + 4, 0, gUnknown_3001B5C->s35C.s0.input.unk1E + 1, 2, 7, gUnknown_3001B5C->s35C.s0.unk34);
 
-    for (i = 0; i < gUnknown_3001B5C->input.unk1A; i++) {
-        y = sub_8013800(&gUnknown_3001B5C->input, i);
-        species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->input.unk1E * gUnknown_3001B5C->input.unk1C) + i];
+    for (i = 0; i < gUnknown_3001B5C->s35C.s0.input.unk1A; i++) {
+        y = sub_8013800(&gUnknown_3001B5C->s35C.s0.input, i);
+        species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->s35C.s0.input.unk1E * gUnknown_3001B5C->s35C.s0.input.unk1C) + i];
         sub_8092638(GetFriendArea(species), &auStack_2c, FALSE, FALSE);
         color = COLOR_WHITE_2;
         if (auStack_2c.hasFriendArea)
@@ -237,26 +171,26 @@ static void sub_80234BC(void)
 
         iVar4 = GetDexInternalNo(species, 0);
         cVar2 = (iVar4 % 10) + 48;
-        sub_8012C60(20, y, cVar2, color, gUnknown_3001B5C->unk390);
+        sub_8012C60(20, y, cVar2, color, gUnknown_3001B5C->s35C.s0.unk34);
 
         if (9 < iVar4) {
             iVar4 /= 10;
             cVar2 = (iVar4 % 10) + 48;
-            sub_8012C60(13, y, cVar2, color, gUnknown_3001B5C->unk390);
+            sub_8012C60(13, y, cVar2, color, gUnknown_3001B5C->s35C.s0.unk34);
 
             if (9 < iVar4) {
                 uVar3 = iVar4 / 10;
                 cVar2 = (uVar3 % 10) + 48;
-                sub_8012C60(6, y, cVar2, color, gUnknown_3001B5C->unk390);
+                sub_8012C60(6, y, cVar2, color, gUnknown_3001B5C->s35C.s0.unk34);
             }
         }
 
         sub_808D930(buffer1,species);
         sprintfStatic(buffer2, sFmtColoredString, color, buffer1);
-        xxx_call_draw_string(36, y, buffer2, gUnknown_3001B5C->unk390, 0);
+        xxx_call_draw_string(36, y, buffer2, gUnknown_3001B5C->s35C.s0.unk34, 0);
     }
 
-    sub_80073E0(gUnknown_3001B5C->unk390);
+    sub_80073E0(gUnknown_3001B5C->s35C.s0.unk34);
 }
 
 static u32 sub_80236A4(void)

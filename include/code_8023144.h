@@ -3,6 +3,7 @@
 
 #include "structs/menu.h"
 #include "structs/str_text.h"
+#include "structs/struct_sub80095e4.h"
 
 // size: 0x3FC
 typedef struct unkStruct_3001B5C
@@ -15,11 +16,7 @@ typedef struct unkStruct_3001B5C
     u8 fill14[0x354 - 0x14];
     u8 unk354;
     u8 fill355[0x35C - 0x355];
-    /* 0x35C */ MenuInputStruct input;
-    u32 unk390;
-    UnkTextStruct2 *unk394;
-    UnkTextStruct2 unk398[4];
-    u8 unk3F8[4];
+    /* 0x35C */ struct_Sub80095E4_2 s35C;
 } unkStruct_3001B5C;
 
 bool8 sub_8023144(s32, s32 index, UnkTextStruct2_sub *sub, u32);
