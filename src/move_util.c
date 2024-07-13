@@ -27,60 +27,33 @@ bool8 sub_805755C(Entity* pokemon,u16 param_2);
 
 u32 sub_8057144(Entity * pokemon)
 {
-  Move **ppbVar3;
-  s32 entityIndex;
-  Move *move1;
-  Move *move2;
-  s32 index;
-  Entity *entity;
-  s32 counter;
-  Move *moveStack [80];
-  Move **local_20;
-#ifndef NONMATCHING
-  register s32 counter_1 asm("r0");
-  register Move** move_1 asm("r1");
-#else
-  s32 counter_1;
-  Move** move_1;
-#endif
+    Move *moveStack[80];
+    int i, j, nMoves;
 
-  counter = 0;
-
-  for(entityIndex = 0; entityIndex < DUNGEON_MAX_POKEMON; entityIndex++)
-  {
-    entity = gDungeon->allPokemon[entityIndex];
-    if (EntityExists(entity)) {
-      move1 = move2 = &entity->info->moves[0];
-      
-      // NOTE: reg flip here 
-       // add  r2, r0, r1 -> add     r2, r1, r0
-#ifdef NONMATCHING
-      ppbVar3 = &moveStack[counter]; 
-#else
-      counter_1 = counter;
-      move_1 = moveStack;
-      ppbVar3 = (move_1 + counter_1);
-#endif
-
-      for(index = 0; index < MAX_MON_MOVES; move1++, move2++, index++)
-      {
-        if ((move1->moveFlags & MOVE_FLAG_EXISTS)) {
-          local_20 = ppbVar3;
-          if (!sub_805755C(pokemon, move1->id) && (move1->id != MOVE_SKETCH) && (counter < 80)) {
-            *local_20 = move2;
-            ppbVar3++;
-            counter++;
-          }
+    nMoves = 0;
+    for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
+    {
+        Entity *dungeonMon = gDungeon->allPokemon[i];
+        if (EntityExists(dungeonMon)) {
+            Move *moves = dungeonMon->info->moves;
+            for (j = 0; j < MAX_MON_MOVES; j++)
+            {
+                if (moves[j].moveFlags & MOVE_FLAG_EXISTS
+                    && !sub_805755C(pokemon, moves[j].id)
+                    && moves[j].id != MOVE_SKETCH
+                    && nMoves < 80) {
+                    moveStack[nMoves++] = &moves[j];
+                }
+            }
         }
-      }
     }
-  }
-  if (counter == 0) {
-    return MOVE_REGULAR_ATTACK; // MOVE_REGULAR_ATTACK
-  }
-  else {
-    return moveStack[DungeonRandInt(counter)]->id;
-  }
+
+    if (nMoves == 0) {
+        return MOVE_REGULAR_ATTACK;
+    }
+    else {
+        return moveStack[DungeonRandInt(nMoves)]->id;
+    }
 }
 
 bool8 sub_80571F0(Entity * pokemon, Move *move)
