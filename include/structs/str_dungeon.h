@@ -36,11 +36,11 @@ typedef struct Weather
     /* 0xE264 */ u8 weather; // Uses the weather constants in weather.h.
     u8 unkE265; // Uses the weather constants in weather.h
     /* 0xE266 */ u8 weatherDamageCounter; // Timer for applying sandstorm/hail damage periodically.
-    /* 0xE267 */ u8 unkE267[0xE269 - 0xE267];
+    /* 0xE267 */ u8 unkE267[0xE269 - 0xE267]; // TODO: same size as naturalWeather according to SaveDungeonWeather
     u8 unkE269;
     u8 fillE26A;
     u8 unkE26B;
-    u8 weatherTurns;
+    /* 0xE26C */ u8 weatherTurns;
     u8 fillE26D[0xE26F - 0xE26D];
     /* 0xE26F */ u8 naturalWeather[8]; // The weather at the start of the floor. If the weather changes, then expires, revert back to the starting weather.
     /* 0xE277 */ u8 mudSportTurns;

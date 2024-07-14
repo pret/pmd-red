@@ -17,7 +17,7 @@ extern void sub_8082FA8(unkStruct_8094924 *, void *, s32);
 void SaveTile(unkStruct_8094924 *r0, Tile *tile);
 void sub_80830F8(void * , u32*);
 void sub_808312C(void *, u32 *);
-void SaveDungeonWeather(void *, Weather *);
+void SaveDungeonWeather(unkStruct_8094924 *r0, Weather *weather);
 void sub_8083078(void *, u32);
 void sub_80830B4(void *, u8);
 void sub_8083030(void *, u16);
@@ -745,4 +745,19 @@ void SaveTile(unkStruct_8094924 *r0, Tile *tile)
     sub_8082FA8(r0, &tile->unkE, 1);
 }
 
+void SaveDungeonWeather(unkStruct_8094924 *r0, Weather *weather)
+{
+    s32 index;
+    sub_8082FA8(r0, &weather->weather, 1);
+    sub_8082FA8(r0, &weather->unkE265, 1);
+    for(index = 0; index < 8; index++)
+    {
+        sub_8083060(r0, weather->unkE267[index]);
+        sub_8083060(r0, weather->naturalWeather[index]);
+    }
+    sub_8083060(r0, weather->weatherDamageCounter);
+    sub_8083060(r0, weather->mudSportTurns);
+    sub_8083060(r0, weather->waterSportTurns);
+    sub_80830B4(r0, weather->nullifyWeather);
+}
 

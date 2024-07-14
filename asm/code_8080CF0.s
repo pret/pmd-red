@@ -5,50 +5,6 @@
 
   	.text
 
-	thumb_func_start SaveDungeonWeather
-SaveDungeonWeather:
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	adds r5, r1, 0
-	movs r2, 0x1
-	bl sub_8082FA8
-	adds r1, r5, 0x1
-	adds r0, r6, 0
-	movs r2, 0x1
-	bl sub_8082FA8
-	movs r4, 0
-_08081BAC:
-	adds r0, r5, 0x3
-	adds r0, r4
-	ldrb r1, [r0]
-	adds r0, r6, 0
-	bl sub_8083060
-	adds r0, r5, 0
-	adds r0, 0xB
-	adds r0, r4
-	ldrb r1, [r0]
-	adds r0, r6, 0
-	bl sub_8083060
-	adds r4, 0x1
-	cmp r4, 0x7
-	ble _08081BAC
-	ldrb r1, [r5, 0x2]
-	adds r0, r6, 0
-	bl sub_8083060
-	ldrb r1, [r5, 0x13]
-	adds r0, r6, 0
-	bl sub_8083060
-	ldrb r1, [r5, 0x14]
-	adds r0, r6, 0
-	bl sub_8083060
-	ldrb r1, [r5, 0x15]
-	adds r0, r6, 0
-	bl sub_80830B4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end SaveDungeonWeather
-
 	thumb_func_start sub_8081BF4
 sub_8081BF4:
 	push {lr}
