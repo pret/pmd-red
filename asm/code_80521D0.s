@@ -4532,7 +4532,7 @@ _08054BD8:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_80594E0
+	bl SandstormMoveAction 
 	bl _080554BA
 _08054BE8:
 	adds r0, r7, 0
@@ -5250,7 +5250,7 @@ _08055190:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805785C
+	bl RainDanceMoveAction 
 	b _080554BA
 _0805519E:
 	adds r0, r7, 0
@@ -5313,7 +5313,7 @@ _0805520E:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_805A394
+	bl SunnyDayMoveAction 
 	b _080554BA
 _0805521C:
 	adds r0, r7, 0
@@ -5397,7 +5397,7 @@ _080552B6:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_80578A4
+	bl HailMoveAction 
 	b _080554BA
 _080552C4:
 	adds r0, r7, 0
