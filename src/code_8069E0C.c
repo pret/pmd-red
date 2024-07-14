@@ -71,23 +71,23 @@ void TriggerWeatherAbilities(void)
 
   if (gDungeon->unkC != 0) {
     gDungeon->unkC = 0;
-    gDungeon->nullifyWeather = FALSE;
+    gDungeon->weather.nullifyWeather = FALSE;
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
       entity = gDungeon->allPokemon[index];
       if (EntityExists(entity)) {
         if (HasAbility(entity, ABILITY_DRIZZLE)) {
-            gDungeon->naturalWeather[WEATHER_RAIN] = 1;
+            gDungeon->weather.naturalWeather[WEATHER_RAIN] = 1;
         }
         else if (HasAbility(entity, ABILITY_SAND_STREAM)) {
-            gDungeon->naturalWeather[WEATHER_SANDSTORM] = 1;
+            gDungeon->weather.naturalWeather[WEATHER_SANDSTORM] = 1;
         }
         else if (HasAbility(entity, ABILITY_DROUGHT)) {
-            gDungeon->naturalWeather[WEATHER_SUNNY] = 1;
+            gDungeon->weather.naturalWeather[WEATHER_SUNNY] = 1;
         }
         if ((HasAbility(entity, ABILITY_AIR_LOCK)) || (HasAbility(entity, ABILITY_CLOUD_NINE))) {
-            gDungeon->nullifyWeather = TRUE;
+            gDungeon->weather.nullifyWeather = TRUE;
         }
       }
     }

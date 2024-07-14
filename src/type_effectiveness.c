@@ -231,11 +231,11 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
       sub_800A34C(param_1,param_1, gUnknown_8106F64);
       gDungeon->unk16A = TRUE;
     }
-    if (((gDungeon->mudSportTurns != 0) || (weather == WEATHER_FOG)) && (type == TYPE_ELECTRIC)) {
+    if (((gDungeon->weather.mudSportTurns != 0) || (weather == WEATHER_FOG)) && (type == TYPE_ELECTRIC)) {
       gDungeon->fill16E[7] = TRUE;
       sub_800A34C(param_1,param_1,gUnknown_8106F1C);
     }
-    if ((gDungeon->waterSportTurns != 0) && (type == TYPE_FIRE)) {
+    if ((gDungeon->weather.waterSportTurns != 0) && (type == TYPE_FIRE)) {
       gDungeon->fill16E[8] = TRUE;
       sub_800A34C(param_1,param_1,gUnknown_8106F1C);
     }
@@ -388,11 +388,11 @@ s32 WeightWeakTypePicker(Entity *user, Entity *target, u8 moveType)
             return 2;
         }
     }
-    if (gDungeon->mudSportTurns != 0 && moveType == TYPE_ELECTRIC)
+    if (gDungeon->weather.mudSportTurns != 0 && moveType == TYPE_ELECTRIC)
     {
         return 2;
     }
-    if (gDungeon->waterSportTurns != 0 && moveType == TYPE_FIRE)
+    if (gDungeon->weather.waterSportTurns != 0 && moveType == TYPE_FIRE)
     {
         return 2;
     }

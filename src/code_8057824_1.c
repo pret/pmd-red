@@ -1072,7 +1072,7 @@ void ArticunoPreFightDialogue(void)
   DisplayDungeonDialogue(gArticunoPreFightDialogue_7);
   sub_803E708(10,0x46);
   PlaySoundEffect(0); // snow flurry
-  gDungeon->unkE265 = WEATHER_SNOW;
+  gDungeon->weather.unkE265 = WEATHER_SNOW;
   sub_807EAA0(0,1);
   PlaySoundEffect(0x1ee); // flash effect?
   sub_8088574();
@@ -1107,7 +1107,7 @@ void ArticunoReFightDialogue(void)
 
   LeaderEntity = xxx_call_GetLeader();
   ArticunoEntity = GetEntityFromClientType(0xd);
-  gDungeon->unkE265 = WEATHER_SNOW;
+  gDungeon->weather.unkE265 = WEATHER_SNOW;
   sub_807EAA0(0,1);
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(gArticunoReFightDialogue_1);
@@ -1134,7 +1134,7 @@ void ArticunoPostStoryPreFightDialogue(void)
     sub_80866C4(gUnknown_8102A9C);
   }
   else {
-    gDungeon->unkE265 = WEATHER_SNOW;
+    gDungeon->weather.unkE265 = WEATHER_SNOW;
     sub_807EAA0(0,1);
     ArticunoScreenFlash();
     sub_8086738();
@@ -2494,7 +2494,7 @@ void RaikouPreFightDialogue(void)
   DisplayDungeonDialogue(gRaikouPreFightDialogue_1);
   RaikouScreenFlash();
   DisplayDungeonDialogue(gRaikouPreFightDialogue_2);
-  gDungeon->unkE265 = WEATHER_RAIN;
+  gDungeon->weather.unkE265 = WEATHER_RAIN;
   sub_807EAA0(0,1);
   sub_803E708(10,70);
   DisplayDungeonDialogue(gRaikouPreFightDialogue_3);
@@ -2516,7 +2516,7 @@ void RaikouReFightDialogue(void)
 
   LeaderEntity = xxx_call_GetLeader();
   RaikouEntity = GetEntityFromClientType(0x13);
-  gDungeon->unkE265 = WEATHER_RAIN;
+  gDungeon->weather.unkE265 = WEATHER_RAIN;
   sub_807EAA0(0,1);
   RaikouScreenFlash();
   DisplayDungeonDialogue(gRaikouReFightDialogue_1);
@@ -2540,7 +2540,7 @@ void RaikouPostStoryPreFightDialogue(void)
     sub_80866C4(gRaikouPostStoryPreFightDialogue_4);
   }
   else {
-    gDungeon->unkE265 = WEATHER_RAIN;
+    gDungeon->weather.unkE265 = WEATHER_RAIN;
     sub_807EAA0(0,1);
     DisplayDungeonDialogue(gRaikouPostStoryPreFightDialogue_1);
     RaikouScreenFlash();
