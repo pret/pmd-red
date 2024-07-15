@@ -4,16 +4,14 @@
 #include "constants/friend_area.h"
 #include "structs/menu.h"
 #include "structs/str_text.h"
+#include "structs/struct_sub80095e4.h"
 
 typedef struct WigglytuffShop1Work
 {
     /* 0x0 */ u8 friendAreas[NUM_FRIEND_AREAS];
     /* 0x3C */ u32 mode;
-    MenuInputStruct unk40;
-    s32 unk74;
-    UnkTextStruct2 *unk78;
-    UnkTextStruct2 unk7C[4];
-    u8 unkDC[4];
+    struct_Sub80095E4_2 s40;
+
 } WigglytuffShop1Work;
 
 bool8 sub_80211AC(u32 mode, u32);

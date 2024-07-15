@@ -4,15 +4,13 @@
 #include "constants/wonder_mail.h"
 #include "structs/menu.h"
 #include "structs/str_text.h"
+#include "structs/struct_sub80095e4.h"
 
 // size: 0xD4;
 struct unkStruct_203B2CC
 {
     /* 0x0 */ u8 receivedNewsletters[NUM_POKEMON_NEWS];
-    /* 0x38 */ MenuInputStruct input;
-    u32 unk6C;
-    UnkTextStruct2 *unk70;
-    UnkTextStruct2 unk74[4];
+    /* 0x38 */ struct_Sub80095E4 s38;
 };
 
 u8 GetPokemonNewsIndex(void);

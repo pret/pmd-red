@@ -8,8 +8,9 @@
 #include "menu_input.h"
 #include "text1.h"
 #include "text2.h"
+#include "structs/struct_sub80095e4.h"
 
-static EWRAM_DATA_2 struct unkStruct_203B264 *sUnknown_203B264 = {0};
+static EWRAM_DATA_2 struct_Sub80095E4 *sUnknown_203B264 = {0};
 
 #include "data/hints_menu1.h"
 
@@ -20,7 +21,7 @@ static void sub_801E594(void);
 bool8 sub_801E3F0(u32 a0)
 {
     if (sUnknown_203B264 == NULL)
-        sUnknown_203B264 = MemoryAlloc(sizeof(struct unkStruct_203B264), 8);
+        sUnknown_203B264 = MemoryAlloc(sizeof(*sUnknown_203B264), 8);
 
     sUnknown_203B264->unk34 = a0;
     sUnknown_203B264->unk38 = &sUnknown_203B264->unk3C[a0];
@@ -93,48 +94,9 @@ void sub_801E54C(void)
     }
 }
 
-NAKED // sub_80095E4 memes
 static void sub_801E594(void)
 {
-    asm_unified(
-    "\tpush {r4,lr}\n"
-    "\tldr r4, _0801E5E4\n"
-    "\tldr r0, [r4]\n"
-    "\tmovs r1, 0x1A\n"
-    "\tldrsh r0, [r0, r1]\n"
-    "\tmovs r1, 0xC\n"
-    "\tbl sub_80095E4\n"
-    "\tadds r0, 0x2\n"
-    "\tlsls r0, 16\n"
-    "\tldr r2, [r4]\n"
-    "\tldr r3, [r2, 0x34]\n"
-    "\tlsls r1, r3, 1\n"
-    "\tadds r1, r3\n"
-    "\tlsls r1, 3\n"
-    "\tadds r1, r2, r1\n"
-    "\tadds r1, 0x4A\n"
-    "\tasrs r3, r0, 16\n"
-    "\tlsrs r0, 16\n"
-    "\tstrh r0, [r1]\n"
-    "\tldr r1, [r2, 0x34]\n"
-    "\tlsls r0, r1, 1\n"
-    "\tadds r0, r1\n"
-    "\tlsls r0, 3\n"
-    "\tadds r2, r0\n"
-    "\tadds r3, 0x2\n"
-    "\tadds r2, 0x4C\n"
-    "\tstrh r3, [r2]\n"
-    "\tbl ResetUnusedInputStruct\n"
-    "\tldr r0, [r4]\n"
-    "\tadds r0, 0x3C\n"
-    "\tmovs r1, 0x1\n"
-    "\tmovs r2, 0x1\n"
-    "\tbl sub_800641C\n"
-    "\tpop {r4}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-"_0801E5E4: .4byte sUnknown_203B264");
+    SUB_80095E4_CALL(*sUnknown_203B264);
 }
 
 static void DrawHintSelectionMenu(void)

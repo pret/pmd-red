@@ -32,23 +32,23 @@ void CreatePartnerSelectionMenu(s16 starterID)
 
     sub_803CEAC();
     gUnknown_203B404->StarterID = starterID_s32;
-    gUnknown_203B404->unk4C = 0;
-    gUnknown_203B404->unk50 = gUnknown_203B404->unk54;
+    gUnknown_203B404->s18.s0.unk34 = 0;
+    gUnknown_203B404->s18.s0.unk38 = gUnknown_203B404->s18.s0.unk3C;
 
-    gUnknown_203B404->unk54[0] = gUnknown_80F4290;
-    gUnknown_203B404->unk54[1] = gUnknown_80F42A8;
-    gUnknown_203B404->unk54[2] = gUnknown_80F4278;
-    gUnknown_203B404->unk54[3] = gUnknown_80F4278;
+    gUnknown_203B404->s18.s0.unk3C[0] = gUnknown_80F4290;
+    gUnknown_203B404->s18.s0.unk3C[1] = gUnknown_80F42A8;
+    gUnknown_203B404->s18.s0.unk3C[2] = gUnknown_80F4278;
+    gUnknown_203B404->s18.s0.unk3C[3] = gUnknown_80F4278;
 
-    gUnknown_203B404->unk50->unk14 = gUnknown_203B404->unkb4;
+    gUnknown_203B404->s18.s0.unk38->unk14 = gUnknown_203B404->s18.unk9C;
 
-    gUnknown_203B404->unkb4[0] = 1;
-    gUnknown_203B404->unkb4[1] = 0;
-    gUnknown_203B404->unkb4[2] = 6;
-    gUnknown_203B404->unkb4[3] = 0;
+    gUnknown_203B404->s18.unk9C[0] = 1;
+    gUnknown_203B404->s18.unk9C[1] = 0;
+    gUnknown_203B404->s18.unk9C[2] = 6;
+    gUnknown_203B404->s18.unk9C[3] = 0;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B404->unk54, TRUE, TRUE);
-    sub_8013818(&gUnknown_203B404->input, GetValidPartners(), 10, gUnknown_203B404->unk4C);
+    sub_800641C(gUnknown_203B404->s18.s0.unk3C, TRUE, TRUE);
+    sub_8013818(&gUnknown_203B404->s18.s0.input, GetValidPartners(), 10, gUnknown_203B404->s18.s0.unk34);
     RedrawPartnerSelectionMenu();
     PersonalityTest_DisplayPartnerSprite();
 }
@@ -57,18 +57,18 @@ u16 HandlePartnerSelectionInput(void)
 {
     s32 partnerID;
 
-    partnerID = gUnknown_203B404->input.menuIndex;
+    partnerID = gUnknown_203B404->s18.s0.input.menuIndex;
     gUnknown_203B404->unk16 = 0;
 
-    if (GetKeyPress(&gUnknown_203B404->input) == INPUT_A_BUTTON) {
+    if (GetKeyPress(&gUnknown_203B404->s18.s0.input) == INPUT_A_BUTTON) {
         PlayMenuSoundEffect(0);
-        return gUnknown_203B404->PartnerArray[gUnknown_203B404->input.menuIndex];
+        return gUnknown_203B404->PartnerArray[gUnknown_203B404->s18.s0.input.menuIndex];
     }
 
-    if (sub_80138B8(&gUnknown_203B404->input, TRUE))
+    if (sub_80138B8(&gUnknown_203B404->s18.s0.input, TRUE))
         RedrawPartnerSelectionMenu();
 
-    if (partnerID != gUnknown_203B404->input.menuIndex)
+    if (partnerID != gUnknown_203B404->s18.s0.input.menuIndex)
         PersonalityTest_DisplayPartnerSprite();
 
     if (gUnknown_203B404->unk16 != 0) {
@@ -79,20 +79,20 @@ u16 HandlePartnerSelectionInput(void)
 
 UNUSED static void sub_803CE34(bool8 cursorSprite)
 {
-    gUnknown_203B404->input.unk22 = GetValidPartners();
-    sub_8013984(&gUnknown_203B404->input);
+    gUnknown_203B404->s18.s0.input.unk22 = GetValidPartners();
+    sub_8013984(&gUnknown_203B404->s18.s0.input);
     RedrawPartnerSelectionMenu();
     PersonalityTest_DisplayPartnerSprite();
 
     if (cursorSprite)
-        AddMenuCursorSprite(&gUnknown_203B404->input);
+        AddMenuCursorSprite(&gUnknown_203B404->s18.s0.input);
 }
 
 void sub_803CE6C(void)
 {
-    gUnknown_203B404->unk54[gUnknown_203B404->unk4C] = gUnknown_80F4278;
+    gUnknown_203B404->s18.s0.unk3C[gUnknown_203B404->s18.s0.unk34] = gUnknown_80F4278;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B404->unk54, TRUE, TRUE);
+    sub_800641C(gUnknown_203B404->s18.s0.unk3C, TRUE, TRUE);
     sub_803CECC();
 }
 
@@ -116,38 +116,27 @@ static void sub_803CECC(void)
 }
 
 #ifdef NONMATCHING // sub_80095E4 memes
+// Unfortunately `SUB_80095E4_CALL` doesn't work in this case, because of a `mov r4, #0` instruction put 2 instructions too late...
 static void RedrawPartnerSelectionMenu(void)
 {
-    s32 sVar1;
     u32 yCoord;
     const u8 *monName;
     s32 monCounter;
 
-    sVar1 = sub_80095E4(gUnknown_203B404->unk32, 12);
+    SUB_80095E4_CALL(gUnknown_203B404->s18.s0);
 
-    // Have a feeling this is some graphical thing but
-    // still not sure structure so it's not matching yet bc of that
-    // and some casting stuff
-    sVar1 += 2;
-    sVar1 <<= 16;
-    gUnknown_203B404->unk54[gUnknown_203B404->unk4C].unk0[7] = sVar1;
-    gUnknown_203B404->unk54[gUnknown_203B404->unk4C].unk0[8] = sVar1 + 2;
-
-    // Everything after this matches
-    ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B404->unk54, TRUE, TRUE);
-    sub_8008C54(gUnknown_203B404->unk4C);
-    sub_80073B8(gUnknown_203B404->unk4C);
-    xxx_call_draw_string(12, 0, gPartnerSelectionHeaderText, gUnknown_203B404->unk4C, 0);
+    sub_8008C54(gUnknown_203B404->s18.s0.unk34);
+    sub_80073B8(gUnknown_203B404->s18.s0.unk34);
+    xxx_call_draw_string(12, 0, gPartnerSelectionHeaderText, gUnknown_203B404->s18.s0.unk34, 0);
 
     monCounter = 0;
-    while (monCounter < gUnknown_203B404->unk32) {
-        yCoord = sub_8013800(&gUnknown_203B404->unk18, monCounter);
+    while (monCounter < gUnknown_203B404->s18.s0.input.unk1A) {
+        yCoord = sub_8013800(&gUnknown_203B404->s18.s0.input, monCounter);
         monName = GetMonSpecies(gUnknown_203B404->PartnerArray[monCounter]);
-        xxx_call_draw_string(8, yCoord, monName, gUnknown_203B404->unk4C, 0);
+        xxx_call_draw_string(8, yCoord, monName, gUnknown_203B404->s18.s0.unk34, 0);
         monCounter++;
     }
-    sub_80073E0(gUnknown_203B404->unk4C);
+    sub_80073E0(gUnknown_203B404->s18.s0.unk34);
     gUnknown_203B404->unk16 = 1;
 }
 #else
@@ -259,7 +248,7 @@ static void PersonalityTest_DisplayPartnerSprite(void)
     u8 *r6;
     u32 faceIndex;
 
-    partnerID = gUnknown_203B404->PartnerArray[gUnknown_203B404->input.menuIndex];
+    partnerID = gUnknown_203B404->PartnerArray[gUnknown_203B404->s18.s0.input.menuIndex];
     sub_8008C54(1);
     sub_80073B8(1);
     faceFile = GetDialogueSpriteDataPtr(partnerID);
