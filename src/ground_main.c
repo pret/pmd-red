@@ -94,7 +94,7 @@ void sub_8098BDC(void)
 
 void sub_8098C58(void)
 {
-    s32 temp;
+    s32 temp, temp2;
     sub_80015C0(0, 54);
     sub_80015C0(0, 57);
     sub_809CB8C();
@@ -110,30 +110,11 @@ void sub_8098C58(void)
         sub_80018D8(0, 42, 0);
     }
 
-    // TODO this uses r2 but it should be r3
-    // Else this matches so nonmatch for now
-#ifdef NONMATCHING
-    temp = sub_8001784(0, 66, 0);
-    if (temp <= 0)
-        temp = 1;
-
-    sub_800199C(0, 66, 0, temp - 1);
-#else
-    asm_unified("\tmovs r0, 0\n"
-	"\tmovs r1, 0x42\n"
-	"\tmovs r2, 0\n"
-	"\tbl sub_8001784\n"
-	"\tadds r3, r0, 0\n"
-	"\tcmp r3, 0\n"
-	"\tbgt _08098CB4\n"
-	"\tmovs r3, 0x1\n"
-"_08098CB4:\n"
-	"\tsubs r3, 0x1\n"
-	"\tmovs r0, 0\n"
-	"\tmovs r1, 0x42\n"
-	"\tmovs r2, 0\n"
-	"\tbl sub_800199C");
-#endif
+    temp2 = sub_8001784(0, 66, 0);
+    if (temp2 <= 0)
+        temp2 = 1;
+    temp2--;
+    sub_800199C(0, 66, 0, temp2);
 
     sub_8098CC8();
 }
