@@ -284,10 +284,10 @@ extern const u8 gCelebiJoinDialogue_6[];
 extern const u8 gCelebiJoinDialogue_7[];
 extern const u8 gCelebiJoinDialogue_8[];
 extern const u8 gCelebiJoinDialogue_9[];
-extern const u32 *gPtrPurityForestAllowCelebiToJoinText;
-extern const u32 gPurityForestAllowCelebiToJoinPrompt;
-extern const u32 *gPtrPurityForestRefuseCelebiConfirmText;
-extern const u32 gPurityForestRefuseCelebiConfirmPrompt;
+extern const u8 *const gPtrPurityForestAllowCelebiToJoinText;
+extern const u8 gPurityForestAllowCelebiToJoinPrompt;
+extern const u8 *const gPtrPurityForestRefuseCelebiConfirmText;
+extern const u8 gPurityForestRefuseCelebiConfirmPrompt;
 extern const u8 gDeoxysPreFightDialogue_1[];
 extern const u8 gDeoxysPreFightDialogue_2[];
 extern const u8 gDeoxysPreFightDialogue_3[];
@@ -3335,7 +3335,7 @@ void sub_808B1CC(u8 itemID)
             return;
         }
         pos.x = entity->pos.x;
-        pos.y = entity->pos.y;    
+        pos.y = entity->pos.y;
     }
     sub_807FE04(&pos, 0);
     tile = GetTileSafe(pos.x, pos.y);
@@ -3560,7 +3560,7 @@ void JirachiWish(void)
       DisplayDungeonDialogue(gUnknown_810581C);
       sub_803E708(10,0x46);
       JirachiWishGrantDialogue(JirachiEntity);
-      
+
       for(counter = 0; counter < 6; counter = r8)
       {
         r8 = counter + 1;
@@ -3595,7 +3595,7 @@ void JirachiWish(void)
         }
         pos2.x = (JirachiEntity->pos.x + DungeonRandInt(3) - 1);
         pos2.y = (JirachiEntity->pos.y + DungeonRandInt(3) + -1);
-          
+
         if ((GetTileSafe(pos2.x, pos2.y)->terrainType & 3) != 0) {
           PlaySoundEffect(400);
           sub_808BB3C(&pos2);
@@ -3638,10 +3638,10 @@ void JirachiWish(void)
         DisplayDungeonDialogue(gUnknown_8105BA8);
         sub_803E708(10,0x46);
         JirachiWishGrantDialogue(JirachiEntity);
-    
+
         for(counter = 0; counter < 5; counter++)
         {
-    
+
           for(index = 0; index < 4; index++)
           {
             sub_8045C28(&strengthItems[index],gUnknown_81074FC[DungeonRandInt(8)],0);
@@ -3649,7 +3649,7 @@ void JirachiWish(void)
 
           pos3.x = (JirachiEntity->pos.x + DungeonRandInt(3) - 1);
           pos3.y = (JirachiEntity->pos.y + DungeonRandInt(3) + -1);
-            
+
           if ((GetTileSafe(pos3.x, pos3.y)->terrainType & 3) != 0) {
             PlaySoundEffect(400);
             sub_808BB3C(&pos3);
@@ -3703,7 +3703,7 @@ void JirachiReFightDialogue(void)
 void JirachiWishGrantFlash(void)
 {
   s32 iVar1;
-  
+
   PlaySoundEffect(0x2c1);
   gUnknown_202EDC8 = 0x1f;
 
@@ -3738,7 +3738,7 @@ void sub_808BB3C(Position *param_1)
   s32 iVar1;
 #endif
   Position local_8;
-  
+
   iVar1 = param_1->x * 0x1800 + 0xc00;
   local_8.x = iVar1 / 256;
 
@@ -4260,412 +4260,130 @@ void nullsub_100(u8 r0, u8 r1, u32 r2)
 {
 }
 
-#ifdef NONMATCHING
 void CelebiJoinDialogue(void)
 {
-  Entity *LeaderEntity;
-  s32 state;
-  s32 menuChoice;
-  Entity *CelebiEntity;
+    Entity *LeaderEntity;
+    s32 state;
+    s32 menuChoice;
+    Entity *CelebiEntity;
 
-  LeaderEntity = xxx_call_GetLeader();
-  CelebiEntity = GetEntityFromClientType(0x1e);
-  if ((HasRecruitedMon(MONSTER_CELEBI)) || (sub_806FD18(CelebiEntity) == '\0'))
-  {
-    sub_8068FE0(local_1c,0x21c,0);
-    SpriteLookAroundEffect(LeaderEntity);
-    sub_803E708(10,0x46);
-    // .........
-    DisplayDungeonDialogue(gCelebiJoinDialogue_10);
-  }
-  else
-  {
-    SpriteLookAroundEffect(LeaderEntity);
-    sub_803E708(10,0x46);
-    SpriteShockEffect(LeaderEntity);
-    sub_803E708(10,0x46);
-    // Oh? There's someone there.
-    DisplayDungeonDialogue(gCelebiJoinDialogue_1);
-    sub_803E708(10,0x46);
-    sub_8086598();
-    sub_8086598();
-    sub_8086598();
-    sub_8086598();
-    // The Time-Traveling Pokemon {ARG_POKEMON_2} (Celebi)!
-    DisplayDungeonDialogue(gCelebiJoinDialogue_2);
-    PlaySoundEffect(0x1c7);
-    sub_806CDD4(CelebiEntity,10,DIRECTION_SOUTH);
-    sub_803E708(0x14,0x46);
-    sub_806CE68(CelebiEntity, DIRECTION_SOUTH);
-    sub_803E708(4,0x46);
-    PlaySoundEffect(0x1c7);
-    sub_806CDD4(CelebiEntity,10,DIRECTION_SOUTH);
-    DisplayDungeonDialogue(gCelebiJoinDialogue_3);
-    sub_803E708(10,0x46);
-    state = 0;
-    do {
-      switch(state)
-      {
-       case 0:
-            do {
-                // NOTE: 0 and Load of ptr switch order in compiler but else matches
-                menuChoice = sub_8052C68(0,gPtrPurityForestAllowCelebiToJoinText,
-                                &gPurityForestAllowCelebiToJoinPrompt,0x701);
-            } while (menuChoice < 1);
-            sub_803E708(10,0x46);
-            if (menuChoice == 1)
+    LeaderEntity = xxx_call_GetLeader();
+    CelebiEntity = GetEntityFromClientType(0x1e);
+    if ((HasRecruitedMon(MONSTER_CELEBI)) || (sub_806FD18(CelebiEntity) == '\0'))
+    {
+        sub_8068FE0(CelebiEntity,0x21c,0);
+        SpriteLookAroundEffect(LeaderEntity);
+        sub_803E708(10,0x46);
+        // .........
+        DisplayDungeonDialogue(gCelebiJoinDialogue_10);
+    }
+    else
+    {
+        SpriteLookAroundEffect(LeaderEntity);
+        sub_803E708(10,0x46);
+        SpriteShockEffect(LeaderEntity);
+        sub_803E708(10,0x46);
+        // Oh? There's someone there.
+        DisplayDungeonDialogue(gCelebiJoinDialogue_1);
+        sub_803E708(10,0x46);
+        sub_8086598();
+        sub_8086598();
+        sub_8086598();
+        sub_8086598();
+        // The Time-Traveling Pokemon {ARG_POKEMON_2} (Celebi)!
+        DisplayDungeonDialogue(gCelebiJoinDialogue_2);
+        PlaySoundEffect(0x1c7);
+        sub_806CDD4(CelebiEntity,10,DIRECTION_SOUTH);
+        sub_803E708(0x14,0x46);
+        sub_806CE68(CelebiEntity, DIRECTION_SOUTH);
+        sub_803E708(4,0x46);
+        PlaySoundEffect(0x1c7);
+        sub_806CDD4(CelebiEntity,10,DIRECTION_SOUTH);
+        DisplayDungeonDialogue(gCelebiJoinDialogue_3);
+        sub_803E708(10,0x46);
+        state = 0;
+
+        do
+        {
+            switch(state)
             {
-                DungeonStopBGM();
-                PlaySoundEffect(0xcc);
-                while (IsFanfareSEPlaying_2(0xcc) != 0) {
-                    sub_803E46C(0x46);
+            case 0:
+                do
+                {
+                    menuChoice = sub_8052C68(0,gPtrPurityForestAllowCelebiToJoinText, &gPurityForestAllowCelebiToJoinPrompt,0x701);
+                } while (menuChoice < 1);
+
+                sub_803E708(10,0x46);
+
+                if (menuChoice == 1)
+                {
+                    DungeonStopBGM();
+                    PlaySoundEffect(0xcc);
+                    while (IsFanfareSEPlaying_2(0xcc) != 0) {
+                        sub_803E46C(0x46);
+                    }
+                    DungeonStartNewBGM(MUS_FRIEND_AREA_HEALING_FOREST);
+                    PlaySoundEffect(0x1c7);
+                    sub_80861D4(CelebiEntity,0xd,0);
+                    sub_803E708(0x37,0x46);
+                    PlaySoundEffect(0x1d5);
+                    sub_803E708(0x1a,0x46);
+                    PlaySoundEffect(0x1d5);
+                    sub_803E708(0x1c,0x46);
+                    DisplayDungeonDialogue(gCelebiJoinDialogue_4);
+                    sub_803E708(10,0x46);
+                    sub_806FDF4(LeaderEntity,CelebiEntity,&CelebiEntity);
+                    DungeonStartNewBGM(MUS_FRIEND_AREA_HEALING_FOREST);
+                    DisplayDungeonDialogue(gCelebiJoinDialogue_5);
+                    sub_803E708(10,0x46);
+                    PlaySoundEffect(0x1c7);
+                    sub_80861D4(CelebiEntity,0xd,0);
+                    sub_803E708(0x37,0x46);
+                    PlaySoundEffect(0x1d5);
+                    sub_803E708(0x1a,0x46);
+                    PlaySoundEffect(0x1d5);
+                    sub_803E708(0x1b,0x46);
+                    DisplayDungeonDialogue(gCelebiJoinDialogue_6);
+                    sub_803E708(10,0x46);
+                    state = 2;
                 }
-                DungeonStartNewBGM(MUS_FRIEND_AREA_HEALING_FOREST);
-                PlaySoundEffect(0x1c7);
-                sub_80861D4(CelebiEntity,0xd,0);
-                sub_803E708(0x37,0x46);
-                PlaySoundEffect(0x1d5);
-                sub_803E708(0x1a,0x46);
-                PlaySoundEffect(0x1d5);
-                sub_803E708(0x1c,0x46);
-                DisplayDungeonDialogue(gCelebiJoinDialogue_4);
-                sub_803E708(10,0x46);
-                sub_806FDF4(LeaderEntity,CelebiEntity,&CelebiEntity);
-                DungeonStartNewBGM(MUS_FRIEND_AREA_HEALING_FOREST);
-                DisplayDungeonDialogue(gCelebiJoinDialogue_5);
-                sub_803E708(10,0x46);
-                PlaySoundEffect(0x1c7);
-                sub_80861D4(CelebiEntity,0xd,0);
-                sub_803E708(0x37,0x46);
-                PlaySoundEffect(0x1d5);
-                sub_803E708(0x1a,0x46);
-                PlaySoundEffect(0x1d5);
-                sub_803E708(0x1b,0x46);
-                DisplayDungeonDialogue(gCelebiJoinDialogue_6);
-                sub_803E708(10,0x46);
-                state = 2;
+                else
+                {
+                    state = 1;
+                }
+                break;
+            case 1:
+                do
+                {
+                    menuChoice = sub_8052C68(0,gPtrPurityForestRefuseCelebiConfirmText, &gPurityForestRefuseCelebiConfirmPrompt,0x701);
+                } while (menuChoice < 1);
+                if (menuChoice == 1)
+                {
+                    state = 0;
+                }
+                else
+                {
+                    sub_803E708(10,0x46);
+                    DisplayDungeonDialogue(gCelebiJoinDialogue_7);
+                    sub_80861F8(0x3e,CelebiEntity,1);
+                    sub_803E708(0x18,0x46);
+                    sub_80861F8(0x3e,CelebiEntity,1);
+                    sub_803E708(0xe,0x46);
+                    DisplayDungeonDialogue(gCelebiJoinDialogue_8);
+                    sub_803E708(10,0x46);
+                    sub_808C8E0(CelebiEntity);
+                    DisplayDungeonDialogue(gCelebiJoinDialogue_9);
+                    sub_803E708(10,0x46);
+                    state = 2;
+                }
+                break;
             }
-            else
-            {
-                state = 1;
-            }
-            break;
-        case 1:
-            do {
-                // NOTE: 0 and Load of ptr switch order in compiler but else matches
-                menuChoice = sub_8052C68(0,gPtrPurityForestRefuseCelebiConfirmText,
-                                    &gPurityForestRefuseCelebiConfirmPrompt,0x701);
-            } while (menuChoice < 1);
-            if (menuChoice == 1)
-                state = 0;
-            else
-            {
-                sub_803E708(10,0x46);
-                DisplayDungeonDialogue(gCelebiJoinDialogue_7);
-                sub_80861F8(0x3e,CelebiEntity,1);
-                sub_803E708(0x18,0x46);
-                sub_80861F8(0x3e,CelebiEntity,1);
-                sub_803E708(0xe,0x46);
-                DisplayDungeonDialogue(gCelebiJoinDialogue_8);
-                sub_803E708(10,0x46);
-                sub_808C8E0(CelebiEntity);
-                DisplayDungeonDialogue(gCelebiJoinDialogue_9);
-                sub_803E708(10,0x46);
-                state = 2;
-            }
-            break;
-      }
-    } while (state != 2);
-  }
-  DungeonFadeOutBGM(0x1e);
-  sub_803E708(0x1e,0x46);
-  gDungeon->unk2 = 1;
+        } while (state != 2);
+    }
+    DungeonFadeOutBGM(0x1e);
+    sub_803E708(0x1e,0x46);
+    gDungeon->unk2 = 1;
 }
-#else
-NAKED
-void CelebiJoinDialogue(void)
-{
-        asm_unified(
-        "\tpush {r4-r7,lr}\n"
-	"\tmov r7, r8\n"
-	"\tpush {r7}\n"
-	"\tsub sp, 0x4\n"
-	"\tbl xxx_call_GetLeader\n"
-	"\tadds r7, r0, 0\n"
-	"\tmovs r0, 0x1E\n"
-	"\tbl GetEntityFromClientType\n"
-	"\tstr r0, [sp]\n"
-	"\tmovs r0, 0x8A\n"
-	"\tlsls r0, 1\n"
-	"\tbl HasRecruitedMon\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0808C658\n"
-	"\tldr r0, [sp]\n"
-	"\tbl sub_806FD18\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0808C680\n"
-"_0808C658:\n"
-	"\tmovs r1, 0x87\n"
-	"\tlsls r1, 2\n"
-	"\tldr r0, [sp]\n"
-	"\tmovs r2, 0\n"
-	"\tbl sub_8068FE0\n"
-	"\tadds r0, r7, 0\n"
-	"\tbl SpriteLookAroundEffect\n"
-	"\tmovs r0, 0xA\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tldr r0, _0808C67C\n"
-	"\tbl DisplayDungeonDialogue\n"
-	"\tb _0808C8AC\n"
-	"\t.align 2, 0\n"
-"_0808C67C: .4byte gCelebiJoinDialogue_10\n"
-"_0808C680:\n"
-	"\tadds r0, r7, 0\n"
-	"\tbl SpriteLookAroundEffect\n"
-	"\tmovs r0, 0xA\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tadds r0, r7, 0\n"
-	"\tbl SpriteShockEffect\n"
-	"\tmovs r0, 0xA\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tldr r0, _0808C71C\n"
-	"\tbl DisplayDungeonDialogue\n"
-	"\tmovs r0, 0xA\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tbl sub_8086598\n"
-	"\tbl sub_8086598\n"
-	"\tbl sub_8086598\n"
-	"\tbl sub_8086598\n"
-	"\tldr r0, _0808C720\n"
-	"\tbl DisplayDungeonDialogue\n"
-	"\tldr r4, _0808C724\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl PlaySoundEffect\n"
-	"\tldr r0, [sp]\n"
-	"\tmovs r1, 0xA\n"
-	"\tmovs r2, 0\n"
-	"\tbl sub_806CDD4\n"
-	"\tmovs r0, 0x14\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tldr r0, [sp]\n"
-	"\tmovs r1, 0\n"
-	"\tbl sub_806CE68\n"
-	"\tmovs r0, 0x4\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl PlaySoundEffect\n"
-	"\tldr r0, [sp]\n"
-	"\tmovs r1, 0xA\n"
-	"\tmovs r2, 0\n"
-	"\tbl sub_806CDD4\n"
-	"\tldr r0, _0808C728\n"
-	"\tbl DisplayDungeonDialogue\n"
-	"\tmovs r0, 0xA\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tmovs r0, 0\n"
-	"\tmov r8, r4\n"
-	"\tldr r6, _0808C72C\n"
-"_0808C70E:\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0808C730\n"
-	"\tcmp r0, 0x1\n"
-	"\tbne _0808C718\n"
-	"\tb _0808C828\n"
-"_0808C718:\n"
-	"\tb _0808C8A6\n"
-	"\t.align 2, 0\n"
-"_0808C71C: .4byte gCelebiJoinDialogue_1\n"
-"_0808C720: .4byte gCelebiJoinDialogue_2\n"
-"_0808C724: .4byte 0x000001c7\n"
-"_0808C728: .4byte gCelebiJoinDialogue_3\n"
-"_0808C72C: .4byte 0x000001d5\n"
-"_0808C730:\n"
-	"\tldr r5, _0808C75C\n"
-"_0808C732:\n"
-	"\tmovs r0, 0\n"
-	"\tldr r1, [r5]\n"
-	"\tldr r2, _0808C760\n"
-	"\tldr r3, _0808C764\n"
-	"\tbl sub_8052C68\n"
-	"\tadds r4, r0, 0\n"
-	"\tcmp r4, 0\n"
-	"\tble _0808C732\n"
-	"\tmovs r0, 0xA\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tcmp r4, 0x1\n"
-	"\tbne _0808C824\n"
-	"\tbl DungeonStopBGM\n"
-	"\tmovs r0, 0xCC\n"
-	"\tbl PlaySoundEffect\n"
-	"\tb _0808C76E\n"
-	"\t.align 2, 0\n"
-"_0808C75C: .4byte gPtrPurityForestAllowCelebiToJoinText\n"
-"_0808C760: .4byte gPurityForestAllowCelebiToJoinPrompt\n"
-"_0808C764: .4byte 0x00000701\n"
-"_0808C768:\n"
-	"\tmovs r0, 0x46\n"
-	"\tbl sub_803E46C\n"
-"_0808C76E:\n"
-	"\tmovs r0, 0xCC\n"
-	"\tbl IsFanfareSEPlaying_2\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0808C768\n"
-	"\tmovs r0, 0x7F\n"
-	"\tbl DungeonStartNewBGM\n"
-	"\tmov r0, r8\n"
-	"\tbl PlaySoundEffect\n"
-	"\tldr r0, [sp]\n"
-	"\tmovs r1, 0xD\n"
-	"\tmovs r2, 0\n"
-	"\tbl sub_80861D4\n"
-	"\tmovs r0, 0x37\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tadds r0, r6, 0\n"
-	"\tbl PlaySoundEffect\n"
-	"\tmovs r0, 0x1A\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tadds r0, r6, 0\n"
-	"\tbl PlaySoundEffect\n"
-	"\tmovs r0, 0x1C\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tldr r0, _0808C818\n"
-	"\tbl DisplayDungeonDialogue\n"
-	"\tmovs r0, 0xA\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tldr r1, [sp]\n"
-	"\tadds r0, r7, 0\n"
-	"\tmov r2, sp\n"
-	"\tbl sub_806FDF4\n"
-	"\tmovs r0, 0x7F\n"
-	"\tbl DungeonStartNewBGM\n"
-	"\tldr r0, _0808C81C\n"
-	"\tbl DisplayDungeonDialogue\n"
-	"\tmovs r0, 0xA\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tmov r0, r8\n"
-	"\tbl PlaySoundEffect\n"
-	"\tldr r0, [sp]\n"
-	"\tmovs r1, 0xD\n"
-	"\tmovs r2, 0\n"
-	"\tbl sub_80861D4\n"
-	"\tmovs r0, 0x37\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tadds r0, r6, 0\n"
-	"\tbl PlaySoundEffect\n"
-	"\tmovs r0, 0x1A\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tadds r0, r6, 0\n"
-	"\tbl PlaySoundEffect\n"
-	"\tmovs r0, 0x1B\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tldr r0, _0808C820\n"
-	"\tb _0808C898\n"
-	"\t.align 2, 0\n"
-"_0808C818: .4byte gCelebiJoinDialogue_4\n"
-"_0808C81C: .4byte gCelebiJoinDialogue_5\n"
-"_0808C820: .4byte gCelebiJoinDialogue_6\n"
-"_0808C824:\n"
-	"movs r0, 0x1\n"
-	"b _0808C8A6\n"
-"_0808C828:\n"
-	"\tldr r5, _0808C844\n"
-"_0808C82A:\n"
-	"\tmovs r0, 0\n"
-	"\tldr r1, [r5]\n"
-	"\tldr r2, _0808C848\n"
-	"\tldr r3, _0808C84C\n"
-	"\tbl sub_8052C68\n"
-	"\tadds r4, r0, 0\n"
-	"\tcmp r4, 0\n"
-	"\tble _0808C82A\n"
-	"\tcmp r4, 0x1\n"
-	"\tbne _0808C850\n"
-	"\tmovs r0, 0\n"
-	"\tb _0808C8A6\n"
-	"\t.align 2, 0\n"
-"_0808C844: .4byte gPtrPurityForestRefuseCelebiConfirmText\n"
-"_0808C848: .4byte gPurityForestRefuseCelebiConfirmPrompt\n"
-"_0808C84C: .4byte 0x00000701\n"
-"_0808C850:\n"
-	"\tmovs r0, 0xA\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tldr r0, _0808C8D0\n"
-	"\tbl DisplayDungeonDialogue\n"
-	"\tldr r1, [sp]\n"
-	"\tmovs r0, 0x3E\n"
-	"\tmovs r2, 0x1\n"
-	"\tbl sub_80861F8\n"
-	"\tmovs r0, 0x18\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tldr r1, [sp]\n"
-	"\tmovs r0, 0x3E\n"
-	"\tmovs r2, 0x1\n"
-	"\tbl sub_80861F8\n"
-	"\tmovs r0, 0xE\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tldr r0, _0808C8D4\n"
-	"\tbl DisplayDungeonDialogue\n"
-	"\tmovs r0, 0xA\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tldr r0, [sp]\n"
-	"\tbl sub_808C8E0\n"
-	"\tldr r0, _0808C8D8\n"
-"_0808C898:\n"
-	"\tbl DisplayDungeonDialogue\n"
-	"\tmovs r0, 0xA\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tmovs r0, 0x2\n"
-"_0808C8A6:\n"
-	"\tcmp r0, 0x2\n"
-	"\tbeq _0808C8AC\n"
-	"\tb _0808C70E\n"
-"_0808C8AC:\n"
-	"\tmovs r0, 0x1E\n"
-	"\tbl DungeonFadeOutBGM\n"
-	"\tmovs r0, 0x1E\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tldr r0, _0808C8DC\n"
-	"\tldr r1, [r0]\n"
-	"\tmovs r0, 0x1\n"
-	"\tstrb r0, [r1, 0x2]\n"
-	"\tadd sp, 0x4\n"
-	"\tpop {r3}\n"
-	"\tmov r8, r3\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_0808C8D0: .4byte gCelebiJoinDialogue_7\n"
-"_0808C8D4: .4byte gCelebiJoinDialogue_8\n"
-"_0808C8D8: .4byte gCelebiJoinDialogue_9\n"
-"_0808C8DC: .4byte gDungeon");
-}
-#endif
 
 void sub_808C8E0(Entity *param_1)
 {
