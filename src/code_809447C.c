@@ -82,11 +82,9 @@ static u8 sub_8094528(s16 moveID)
 
 void sub_8094558(u32 param_1,u8 *param_2,unkDungeonGlobal_unk1CE98_sub *param_3)
 {
-    int iVar2;
     u8 buffer [200];
-    s32 y;
+    s32 x, y;
     Item *item;
-    s32 var;
 
     sub_80073B8(param_1);
     xxx_format_and_draw(0x10,0,param_2,param_1,0);
@@ -103,18 +101,16 @@ void sub_8094558(u32 param_1,u8 *param_2,unkDungeonGlobal_unk1CE98_sub *param_3)
         // $m1
         xxx_format_string(*gUnknown_8113870,buffer,(u8*)((u32 **)&buffer + 50),0); // TODO: fix this hack
     }
-    iVar2 = sub_8008ED0(buffer);
-    xxx_format_and_draw(((0xb0 - iVar2) / 2),y,buffer,param_1,0);
+
+    x = (0xb0 - sub_8008ED0(buffer)) / 2;
+    xxx_format_and_draw(x,y,buffer,param_1,0);
+
     y += 0xA;
     sub_80944BC(param_3->moveID, buffer);
-#ifndef NONMATCHING
-    var = 0xb0 - sub_8008ED0(buffer);
-    var += (var < 0);
-    xxx_format_and_draw(var >> 1,y,buffer,param_1,0);
-    asm(""::"r"(var));
-#else
-    xxx_format_and_draw((0xb0 - sub_8008ED0(buffer) / 2),y,buffer,param_1,0);
-#endif
+
+    x = (0xb0 - sub_8008ED0(buffer)) / 2;
+    xxx_format_and_draw(x,y,buffer,param_1,0);
+
     y += 0x10;
     gUnknown_202DE30[0] = param_3->exp;
     gUnknown_202DE30[1] = param_3->level;
