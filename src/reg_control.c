@@ -50,151 +50,29 @@ void VBlankIntr(void)
     AckInterrupt(INTR_FLAG_VBLANK);
 }
 
-// Registers are a little off.. seems to be around the while loop
-#ifdef NONMATCHING
 void VCountIntr(void)
 {
-  s32 sVar1;
-  s32 sVar2;
-  
-  // Hack to get the lsr/asr shifts
-  sVar2 = REG_VCOUNT << 16;
-  sVar2 = sVar2 >> 16;
+    s32 sVar2 = (s16) REG_VCOUNT;
 
-  if (gUnknown_203B0AE < 0) {
-    if (gIntrCallbacks[2] != 0) {
-      gIntrCallbacks[2]();
+    if (gUnknown_203B0AE < 0) {
+        if (gIntrCallbacks[2] != 0) {
+            gIntrCallbacks[2]();
+        }
+        gUnknown_203B0AE = 0;
     }
-    gUnknown_203B0AE = 0;
-  }
-  if (gUnknown_203B0AE < gUnknown_203B0AC) {
-    sVar1 = gUnknown_202D648[gUnknown_203B0AE].unk2;
-    while (sVar1 <= sVar2) {
-      if ( gUnknown_202D648[gUnknown_203B0AE].unk4 != NULL) {
-        gUnknown_202D648[gUnknown_203B0AE].unk4();
-      }
-      gUnknown_203B0AE++;
-      if (gUnknown_203B0AC >= gUnknown_203B0AE) break;
-      sVar1 = gUnknown_202D648[gUnknown_203B0AE].unk2;
+
+    while (gUnknown_203B0AE < gUnknown_203B0AC && gUnknown_202D648[gUnknown_203B0AE].unk2 <= sVar2) {
+        if (gUnknown_202D648[gUnknown_203B0AE].unk4 != NULL) {
+            gUnknown_202D648[gUnknown_203B0AE].unk4();
+        }
+        gUnknown_203B0AE++;
     }
+
     if (gUnknown_203B0AE < gUnknown_203B0AC) {
-      REG_DISPSTAT = gUnknown_202D648[gUnknown_203B0AE].unk2 << 8 | DISPSTAT_VBLANK_INTR | DISPSTAT_VCOUNT_INTR;
+        REG_DISPSTAT = gUnknown_202D648[gUnknown_203B0AE].unk2 << 8 | DISPSTAT_VBLANK_INTR | DISPSTAT_VCOUNT_INTR;
     }
-  }
-  AckInterrupt(INTR_FLAG_VCOUNT);
+    AckInterrupt(INTR_FLAG_VCOUNT);
 }
-#else
-NAKED
-void VCountIntr(void)
-{
-    asm_unified(
-	"\tpush {r4-r7,lr}\n"
-	"\tmov r7, r8\n"
-	"\tpush {r7}\n"
-	"\tldr r0, _0800BA44\n"
-	"\tldrh r0, [r0]\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r6, r0, 16\n"
-	"\tldr r0, _0800BA48\n"
-	"\tmovs r2, 0\n"
-	"\tldrsh r1, [r0, r2]\n"
-	"\tadds r7, r0, 0\n"
-	"\tcmp r1, 0\n"
-	"\tbge _0800B9B2\n"
-	"\tldr r0, _0800BA4C\n"
-	"\tldr r0, [r0, 0x8]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0800B9AE\n"
-	"\tbl _call_via_r0\n"
-"_0800B9AE:\n"
-	"\tmovs r0, 0\n"
-	"\tstrh r0, [r7]\n"
-"_0800B9B2:\n"
-	"\tldr r0, _0800BA50\n"
-	"\tmovs r3, 0\n"
-	"\tldrsh r2, [r7, r3]\n"
-	"\tmovs r3, 0\n"
-	"\tldrsh r1, [r0, r3]\n"
-	"\tmov r8, r0\n"
-	"\tcmp r2, r1\n"
-	"\tbge _0800BA34\n"
-	"\tldr r1, _0800BA54\n"
-	"\tadds r0, r2, 0\n"
-	"\tlsls r0, 3\n"
-	"\tadds r0, r1\n"
-	"\tmovs r3, 0x2\n"
-	"\tldrsh r0, [r0, r3]\n"
-	"\tcmp r0, r6\n"
-	"\tbgt _0800BA10\n"
-	"\tadds r5, r1, 0\n"
-	"\tadds r4, r7, 0\n"
-"_0800B9D6:\n"
-	"\tmovs r1, 0\n"
-	"\tldrsh r0, [r4, r1]\n"
-	"\tlsls r0, 3\n"
-	"\tadds r1, r5, 0x4\n"
-	"\tadds r0, r1\n"
-	"\tldr r0, [r0]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0800B9EA\n"
-	"\tbl _call_via_r0\n"
-"_0800B9EA:\n"
-	"\tldrh r0, [r4]\n"
-	"\tadds r0, 0x1\n"
-	"\tstrh r0, [r4]\n"
-	"\tldr r1, _0800BA50\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r0, 16\n"
-	"\tmovs r2, 0\n"
-	"\tldrsh r1, [r1, r2]\n"
-	"\tcmp r0, r1\n"
-	"\tbge _0800BA34\n"
-	"\tmovs r3, 0\n"
-	"\tldrsh r0, [r4, r3]\n"
-	"\tlsls r0, 3\n"
-	"\tadds r0, r5\n"
-	"\tmovs r1, 0x2\n"
-	"\tldrsh r0, [r0, r1]\n"
-	"\tldr r7, _0800BA48\n"
-	"\tcmp r0, r6\n"
-	"\tble _0800B9D6\n"
-"_0800BA10:\n"
-	"\tmovs r2, 0\n"
-	"\tldrsh r1, [r7, r2]\n"
-	"\tmov r3, r8\n"
-	"\tmovs r2, 0\n"
-	"\tldrsh r0, [r3, r2]\n"
-	"\tcmp r1, r0\n"
-	"\tbge _0800BA34\n"
-	"\tldr r2, _0800BA58\n"
-	"\tldr r1, _0800BA54\n"
-	"\tmovs r3, 0\n"
-	"\tldrsh r0, [r7, r3]\n"
-	"\tlsls r0, 3\n"
-	"\tadds r0, r1\n"
-	"\tldrh r0, [r0, 0x2]\n"
-	"\tlsls r0, 8\n"
-	"\tmovs r1, 0x28\n"
-	"\torrs r0, r1\n"
-	"\tstrh r0, [r2]\n"
-"_0800BA34:\n"
-	"\tmovs r0, 0x4\n"
-	"\tbl AckInterrupt\n"
-	"\tpop {r3}\n"
-	"\tmov r8, r3\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_0800BA44: .4byte 0x04000006\n"
-"_0800BA48: .4byte gUnknown_203B0AE\n"
-"_0800BA4C: .4byte gIntrCallbacks\n"
-"_0800BA50: .4byte gUnknown_203B0AC\n"
-"_0800BA54: .4byte gUnknown_202D648\n"
-"_0800BA58: .4byte 0x04000004"
-    );
-}
-#endif
 
 void sub_800BA5C(void)
 {
