@@ -1,37 +1,35 @@
 #include "global.h"
+#include "other_random.h"
+
+struct unkStruct_809D158
+{
+    s32 a0;
+    s32 a4;
+};
 
 struct unkStruct_20399E8
 {
     u32 unk0;
-    u32 unk4;
+    s32 unk4;
     u32 unk8;
-    u32 unkC;
-    u32 unk10;
-    u32 unk14;
-    u32 unk18;
-    u32 unk1C;
-    u32 unk20;
-    
+    s32 unkC;
+    s32 unk10;
+    struct unkStruct_809D158 unk14;
+    struct unkStruct_809D158 unk1C;
     u32 unk24;
     u32 unk28;
-    u32 unk2C;
-    u32 unk30;
-    u32 unk34;
-    u32 unk38;
-    u32 unk3C;
-    u32 unk40;
+    s32 unk2C;
+    s32 unk30;
+    s32 unk34;
+    s32 unk38;
+    struct unkStruct_809D158 unk3C;
     u8 unk44;
-};
-
-struct unkStruct_809D158
-{
-    u32 unk0;
-    u32 unk4;
 };
 
 extern struct unkStruct_20399E8 gUnknown_20399E8;
 
 void sub_809D0BC(void);
+void sub_809D158(u32 r0, const struct unkStruct_809D158 *r1);
 
 s32 sub_809CFE8(u16 param_1)
 {
@@ -104,70 +102,23 @@ void nullsub_119(void)
 {
 }
 
-#ifndef NONMATCHING
-NAKED
-#endif
+extern const struct unkStruct_809D158 gUnknown_8116478;
+
 void sub_809D0BC(void)
 {
-#ifdef NONMATCHING
-    struct unkStruct_20399E8 *pre_load_203;
-    
-    u32 temp;
-    u32 temp1;
-
-    pre_load_203 = &gUnknown_20399E8;
-
-    // TODO regswap.. should be r2/r3, not r0, r1
-    temp = gUnknown_8116478.unk0;
-    temp1 = gUnknown_8116478.unk4;
-
-    pre_load_203->unk3C = temp;
-    pre_load_203->unk40 = temp1;
-    pre_load_203->unk44 = 0;
-    sub_809D158(0);
-    pre_load_203->unk8 = 0;
-    pre_load_203->unkC = 0;
-    pre_load_203->unk10 = 0;
-    pre_load_203->unk4 = -1;
-    pre_load_203->unk24 = 0;
-    pre_load_203->unk28 = 0;
-    pre_load_203->unk2C = 0;
-    pre_load_203->unk30 = 0;
-    pre_load_203->unk34 = 0;
-    pre_load_203->unk38 = 0;
-#else
-	asm_unified("\tpush {r4,r5,lr}\n"
-	"\tldr r5, _0809D0F8\n"
-	"\tldr r1, _0809D0FC\n"
-	"\tldr r2, [r1]\n"
-	"\tldr r3, [r1, 0x4]\n"
-	"\tstr r2, [r5, 0x3C]\n"
-	"\tstr r3, [r5, 0x40]\n"
-	"\tadds r0, r5, 0\n"
-	"\tadds r0, 0x44\n"
-	"\tmovs r4, 0\n"
-	"\tstrb r4, [r0]\n"
-	"\tmovs r0, 0\n"
-	"\tbl sub_809D158\n"
-	"\tstr r4, [r5, 0x8]\n"
-	"\tstr r4, [r5, 0xC]\n"
-	"\tstr r4, [r5, 0x10]\n"
-	"\tmovs r0, 0x1\n"
-	"\tnegs r0, r0\n"
-	"\tstr r0, [r5, 0x4]\n"
-	"\tstr r4, [r5, 0x24]\n"
-	"\tstr r4, [r5, 0x28]\n"
-	"\tstr r4, [r5, 0x2C]\n"
-	"\tstr r4, [r5, 0x30]\n"
-	"\tstr r4, [r5, 0x34]\n"
-	"\tstr r4, [r5, 0x38]\n"
-	"\tpop {r4,r5}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_0809D0F8: .4byte gUnknown_20399E8\n"
-"_0809D0FC: .4byte gUnknown_8116478\n");
-#endif
+    gUnknown_20399E8.unk3C = gUnknown_8116478;
+    gUnknown_20399E8.unk44 = 0;
+    sub_809D158(0, &gUnknown_8116478);
+    gUnknown_20399E8.unk8 = 0;
+    gUnknown_20399E8.unkC = 0;
+    gUnknown_20399E8.unk10 = 0;
+    gUnknown_20399E8.unk4 = -1;
+    gUnknown_20399E8.unk24 = 0;
+    gUnknown_20399E8.unk28 = 0;
+    gUnknown_20399E8.unk2C = 0;
+    gUnknown_20399E8.unk30 = 0;
+    gUnknown_20399E8.unk34 = 0;
+    gUnknown_20399E8.unk38 = 0;
 }
 
 void sub_809D100(u32 r0)
@@ -203,18 +154,16 @@ void sub_809D148(u32 r0)
 
 }
 
-void sub_809D158(u32 r0, struct unkStruct_809D158 *r1)
+struct Test1
 {
-    u32 temp;
-    u32 temp1;
+    u64 ukn0;
+};
+
+void sub_809D158(u32 r0, const struct unkStruct_809D158 *r1)
+{
     gUnknown_20399E8.unk0 = r0;
     gUnknown_20399E8.unk8 = 0;
-
-    // Load both first and then store
-    temp = r1->unk0;
-    temp1 = r1->unk4;
-    gUnknown_20399E8.unk1C = temp;
-    gUnknown_20399E8.unk20 = temp1;
+    gUnknown_20399E8.unk1C = *r1;
 }
 
 void sub_809D170(u32 r0, u32 r1)
@@ -233,17 +182,10 @@ void sub_809D180(u32 r0, u32 r1)
 
 void sub_809D190(u32 r0, struct unkStruct_809D158 *r1, u32 r2)
 {
-    u32 temp;
-    u32 temp1;
     gUnknown_20399E8.unk0 = r0;
     gUnknown_20399E8.unk8 = 1;
     gUnknown_20399E8.unkC = r2;
-
-    // Load both first and then store
-    temp = r1->unk0;
-    temp1 = r1->unk4;
-    gUnknown_20399E8.unk14 = temp;
-    gUnknown_20399E8.unk18 = temp1;
+    gUnknown_20399E8.unk14 = *r1;
 }
 
 void sub_809D1A8(u32 r0, u32 r1, u32 r2)
@@ -263,18 +205,10 @@ void sub_809D1BC(u32 r0, u32 r1)
 
 void sub_809D1CC(u32 r0, struct unkStruct_809D158 *r1, u32 r2)
 {
-    u32 temp;
-    u32 temp1;
-
     gUnknown_20399E8.unk0 = r0;
     gUnknown_20399E8.unk8 = 2;
     gUnknown_20399E8.unk10 = r2;
-
-    // Load both first and then store
-    temp = r1->unk0;
-    temp1 = r1->unk4;
-    gUnknown_20399E8.unk14 = temp;
-    gUnknown_20399E8.unk18 = temp1;
+    gUnknown_20399E8.unk14 = *r1;
 }
 
 void sub_809D1E4(u32 r0, u32 r1, u32 r2)
@@ -294,18 +228,10 @@ void sub_809D1F8(u32 r0, u32 r1)
 
 void sub_809D208(u32 r0, struct unkStruct_809D158 *r1, u32 r2)
 {
-    u32 temp;
-    u32 temp1;
-
     gUnknown_20399E8.unk0 = r0;
     gUnknown_20399E8.unk8 = 3;
     gUnknown_20399E8.unkC = r2;
-
-    // Load both first and then store
-    temp = r1->unk0;
-    temp1 = r1->unk4;
-    gUnknown_20399E8.unk14 = temp;
-    gUnknown_20399E8.unk18 = temp1;
+    gUnknown_20399E8.unk14 = *r1;
 }
 
 void sub_809D220(u32 r0, u32 r1, u32 r2)
@@ -321,32 +247,124 @@ bool32 sub_809D234(void)
     return gUnknown_20399E8.unk8 != 0;
 }
 
-// TODO regswap but matches otherwise
-// Loads struct into R1... should be R3
-#ifndef NONMATCHING
-NAKED
-#endif
 u8 sub_809D248(struct unkStruct_809D158 *r0)
 {
-#ifdef NONMATCHING
-    u32 temp;
-    u32 temp1;
-
-    temp = gUnknown_20399E8.unk3C;
-    temp1 = gUnknown_20399E8.unk40;
-    r0->unk0 = temp;
-    r0->unk4 = temp1;
+    *r0 = gUnknown_20399E8.unk3C;
     return gUnknown_20399E8.unk44;
-#else
-	asm_unified("\tldr r3, _0809D258\n"
-	"\tldr r1, [r3, 0x3C]\n"
-	"\tldr r2, [r3, 0x40]\n"
-	"\tstr r1, [r0]\n"
-	"\tstr r2, [r0, 0x4]\n"
-	"\tadds r3, 0x44\n"
-	"\tldrb r0, [r3]\n"
-	"\tbx lr\n"
-	"\t.align 2, 0\n"
-"_0809D258: .4byte gUnknown_20399E8");
-#endif
+}
+
+s32 sub_80A8FD8(s16 a0, struct unkStruct_809D158 *a1);
+s32 sub_80AC448(s16 a0, struct unkStruct_809D158 *a1);
+s32 sub_80AD360(s16 a0, struct unkStruct_809D158 *a1);
+void sub_800290C(struct unkStruct_809D158 *a0, s32 a1);
+void sub_8002934(struct unkStruct_809D158 *a0, struct unkStruct_809D158 *a1, struct unkStruct_809D158 *a2, u32 a3, u32 a4);
+s32 sub_8009FB8(s32 a0, s32 a1);
+bool8 sub_80A579C(struct unkStruct_809D158 *a0, struct unkStruct_809D158 *a1);
+
+void sub_809D25C(void)
+{
+    s32 r2, r1, r3;
+    struct unkStruct_809D158 sp4;
+    struct unkStruct_809D158 spC;
+    struct unkStruct_809D158 sp14;
+    struct unkStruct_809D158 sp1C;
+    u16 val;
+    // For some reason I have to compare with 0xFFFF instead of -1. Maybe it has to do with return value of the functions?
+    switch (gUnknown_20399E8.unk0)
+    {
+    case 1:
+        val = sub_80A8FD8(gUnknown_20399E8.unk4, &gUnknown_20399E8.unk1C);
+        if (val == (u16) -1)
+            gUnknown_20399E8.unk0 = 0;
+        break;
+    case 2:
+        val = sub_80AC448(gUnknown_20399E8.unk4, &gUnknown_20399E8.unk1C);
+        if (val == (u16) -1)
+            gUnknown_20399E8.unk0 = 0;
+        break;
+    case 3:
+        val = sub_80AD360(gUnknown_20399E8.unk4, &gUnknown_20399E8.unk1C);
+        if (val == (u16) -1)
+            gUnknown_20399E8.unk0 = 0;
+        break;
+    }
+
+    switch (gUnknown_20399E8.unk8)
+    {
+    case 1:
+        sp4.a0 = gUnknown_20399E8.unk1C.a0 - gUnknown_20399E8.unk14.a0;
+        sp4.a4 = gUnknown_20399E8.unk1C.a4 - gUnknown_20399E8.unk14.a4;
+        sub_800290C(&sp4, gUnknown_20399E8.unkC);
+        if (sp4.a0 == 0 && sp4.a4 == 0)
+        {
+            gUnknown_20399E8.unk8 = 0;
+        }
+        else
+        {
+            gUnknown_20399E8.unk14.a0 += sp4.a0;
+            gUnknown_20399E8.unk14.a4 += sp4.a4;
+        }
+        break;
+    case 3:
+        r2 = (gUnknown_20399E8.unk1C.a0 - gUnknown_20399E8.unk14.a0) / 256;
+        r1 = (gUnknown_20399E8.unk1C.a4 - gUnknown_20399E8.unk14.a4) / 256;
+        gUnknown_20399E8.unk10 = ((sub_8009FB8(r2 << 8, r1 << 8) / 256) << 8) / gUnknown_20399E8.unkC;
+        if (gUnknown_20399E8.unk10 <= 0)
+            gUnknown_20399E8.unk10 = 1;
+        gUnknown_20399E8.unk8 = 2;
+    // Breakthrough
+    case 2:
+        sub_8002934(&spC, &gUnknown_20399E8.unk14, &gUnknown_20399E8.unk1C, gUnknown_20399E8.unk10, 1);
+        gUnknown_20399E8.unk14 = spC;
+        if (--gUnknown_20399E8.unk10 <= 0)
+            gUnknown_20399E8.unk8 = 0;
+        break;
+    default:
+        gUnknown_20399E8.unk14 = gUnknown_20399E8.unk1C;
+        break;
+    }
+
+    switch (gUnknown_20399E8.unk24)
+    {
+    default:
+        gUnknown_20399E8.unk34 = 0;
+        gUnknown_20399E8.unk38 = 0;
+        break;
+    case 1:
+        if (--gUnknown_20399E8.unk30 <= 0)
+        {
+            gUnknown_20399E8.unk30 = 4;
+            gUnknown_20399E8.unk34 = OtherRandRange(-2, 2) << 0xA;
+            gUnknown_20399E8.unk38 = OtherRandRange(-2, 2) << 0xA;
+        }
+        break;
+    case 2:
+        if (--gUnknown_20399E8.unk30 <= 0)
+        {
+            gUnknown_20399E8.unk30 = gUnknown_20399E8.unk2C;
+            gUnknown_20399E8.unk34 = (OtherRandRange(-2, 2) * gUnknown_20399E8.unk28) << 0x8;
+            gUnknown_20399E8.unk38 = (OtherRandRange(-2, 2) * gUnknown_20399E8.unk28) << 0x8;
+        }
+        break;
+    }
+
+    if (sub_80A579C(&sp14, &sp1C))
+    {
+        r2 = gUnknown_20399E8.unk14.a0 + gUnknown_20399E8.unk34 - 0x80;
+        r3 = gUnknown_20399E8.unk14.a4 + gUnknown_20399E8.unk38 - 2944;
+
+        if (r2 < sp14.a0)
+            r2 = sp14.a0;
+        if (r2 >= sp1C.a0)
+            r2 = sp1C.a0 - 1;
+
+        if (r3 < sp14.a4)
+            r3 = sp14.a4;
+        if (r3 >= sp1C.a4)
+            r3 = sp1C.a4 - 1;
+
+        gUnknown_20399E8.unk3C.a0 = (r2 - 30976) / 256;
+        gUnknown_20399E8.unk3C.a4 = (r3 - 20480) / 256;
+        gUnknown_20399E8.unk44 = 1;
+    }
 }
