@@ -510,36 +510,18 @@ s32 FindItemInInventory(u8 id)
   return -1;
 }
 
-s32 GetItemCountInInventory(u8 _id)
+s32 GetItemCountInInventory(u8 id)
 {
-#ifdef NONMATCHING
-  s32 count = 0;
-  s32 i;
-  for (i = 0; i < INVENTORY_SIZE; i++) {
-    if ((gTeamInventoryRef->teamItems[i].unk0 & 1) && (gTeamInventoryRef->teamItems[i].id == _id)) {
-      count++;
-    }
-  }
-  return count;
-#else
-  // have to do hacky stuff to fix initialization order of r6 and r2
-  u32 id = _id;
-  s32 count = 0;
-  Item *slot = gTeamInventoryRef->teamItems;
-  s32 one = 1;
-  s32 i = 19;
+    s32 i;
+    s32 count = 0;
+    struct Item *item = &gTeamInventoryRef->teamItems[0];
 
-  do {
-    register u32 unk0 asm("r1") = slot->flags;
-    u32 bottom_bit = one;
-    bottom_bit &= unk0;
-    if (bottom_bit && (slot->id == id)) {
-      count++;
+    for (i = 0; i < INVENTORY_SIZE; item++, i++) {
+        if (item->flags & 1 && item->id == id)
+            count++;
     }
-    slot++;
-  } while(--i >= 0);
-  return count;
-#endif
+
+    return count;
 }
 
 s32 GetItemPossessionCount(u8 id)
