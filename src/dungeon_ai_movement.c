@@ -699,12 +699,11 @@ bool8 AvoidEnemies(Entity *pokemon)
     }
 }
 
-#ifdef NONMATCHING
 bool8 Wander(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = pokemon->info;
     s32 room = GetEntityRoom(pokemon);
-    s32 targetFacingDir;
+    s32 targetFacingDir = 0;
     if (room == CORRIDOR_ROOM)
     {
         bool8 isAtJunction = FALSE;
@@ -723,16 +722,15 @@ bool8 Wander(Entity *pokemon)
             if ((!isAtJunction || targetFacingDir != oppositeFacingDir) &&
                 CanAIMonsterMoveInDirection(pokemon, targetFacingDir, &pokemonInFront))
             {
-                pokemonInfo->aiObjective = AI_ROAM;
-                pokemonInfo->aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[targetFacingDir].x;
-                pokemonInfo->aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[targetFacingDir].y;
-                return TRUE;
+                // It's possible that the goto is an ugly fakematching, but we'll never know for sure.
+                goto DEFAULT;
             }
         }
         targetFacingDir2 = DungeonRandInt(NUM_DIRECTIONS);
-        pokemonInfo->aiObjective = AI_STAND_STILL;
-        pokemonInfo->aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[targetFacingDir2].x;
-        pokemonInfo->aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[targetFacingDir2].y;
+        pokemonInfo->aiTarget.aiObjective = AI_STAND_STILL;
+        pokemonInfo->aiTarget.aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[targetFacingDir2].x;
+        pokemonInfo->aiTarget.aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[targetFacingDir2].y;
+        return TRUE;
     }
     else
     {
@@ -741,21 +739,22 @@ bool8 Wander(Entity *pokemon)
         if (pokemonInfo->moveRandomly)
         {
             s32 targetFacingDir = DungeonRandInt(NUM_DIRECTIONS);
-            pokemonInfo->aiObjective = AI_STAND_STILL;
-            pokemonInfo->aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[targetFacingDir].x;
-            pokemonInfo->aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[targetFacingDir].y;
+            pokemonInfo->aiTarget.aiObjective = AI_STAND_STILL;
+            pokemonInfo->aiTarget.aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[targetFacingDir].x;
+            pokemonInfo->aiTarget.aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[targetFacingDir].y;
+            return TRUE;
         }
         else
         {
-            if (pokemonInfo->aiObjective != AI_LEAVE_ROOM)
+            if (pokemonInfo->aiTarget.aiObjective != AI_LEAVE_ROOM)
             {
                 s32 i;
                 if (naturalJunctionListCounts == 0)
                 {
                     targetFacingDir = DungeonRandInt(NUM_DIRECTIONS);
-                    pokemonInfo->aiObjective = AI_STAND_STILL;
-                    pokemonInfo->aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[targetFacingDir].x;
-                    pokemonInfo->aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[targetFacingDir].y;
+                    pokemonInfo->aiTarget.aiObjective = AI_STAND_STILL;
+                    pokemonInfo->aiTarget.aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[targetFacingDir].x;
+                    pokemonInfo->aiTarget.aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[targetFacingDir].y;
                     return TRUE;
                 }
                 for (i = 0; i < 10; i++)
@@ -764,9 +763,9 @@ bool8 Wander(Entity *pokemon)
                     if (pokemon->pos.x != naturalJunctionList[targetFacingDir].x ||
                         pokemon->pos.y != naturalJunctionList[targetFacingDir].y)
                     {
-                        pokemonInfo->aiObjective = AI_LEAVE_ROOM;
-                        pokemonInfo->aiTargetPos.x = naturalJunctionList[targetFacingDir].x;
-                        pokemonInfo->aiTargetPos.y = naturalJunctionList[targetFacingDir].y;
+                        pokemonInfo->aiTarget.aiObjective = AI_LEAVE_ROOM;
+                        pokemonInfo->aiTarget.aiTargetPos.x = naturalJunctionList[targetFacingDir].x;
+                        pokemonInfo->aiTarget.aiTargetPos.y = naturalJunctionList[targetFacingDir].y;
                         return TRUE;
                     }
                 }
@@ -788,9 +787,9 @@ bool8 Wander(Entity *pokemon)
                     if (GetTile(forwardX, forwardY)->room == CORRIDOR_ROOM &&
                         CanAIMonsterMoveInDirection(pokemon, targetFacingDir, &pokemonInFront))
                     {
-                        pokemonInfo->aiObjective = AI_ROAM;
-                        pokemonInfo->aiTargetPos.x = forwardX;
-                        pokemonInfo->aiTargetPos.y = forwardY;
+                        pokemonInfo->aiTarget.aiObjective = AI_ROAM;
+                        pokemonInfo->aiTarget.aiTargetPos.x = forwardX;
+                        pokemonInfo->aiTarget.aiTargetPos.y = forwardY;
                         return TRUE;
                     }
                 }
@@ -798,310 +797,12 @@ bool8 Wander(Entity *pokemon)
             return TRUE;
         }
     }
+DEFAULT:
+    pokemonInfo->aiTarget.aiObjective = AI_ROAM;
+    pokemonInfo->aiTarget.aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[targetFacingDir].x;
+    pokemonInfo->aiTarget.aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[targetFacingDir].y;
     return TRUE;
 }
-#else
-NAKED
-bool8 Wander(Entity *pokemon)
-{
-    asm_unified("push {r4-r7,lr}\n"
-"mov r7, r10\n"
-"mov r6, r9\n"
-"mov r5, r8\n"
-"push {r5-r7}\n"
-"sub sp, 0x10\n"
-"adds r6, r0, 0\n"
-"ldr r7, [r6, 0x70]\n"
-"bl GetEntityRoom\n"
-"lsls r0, 24\n"
-"lsrs r3, r0, 24\n"
-"cmp r3, 0xFF\n"
-"bne _0807B9DC\n"
-"movs r0, 0\n"
-"str r0, [sp, 0x4]\n"
-"adds r4, r7, 0\n"
-"adds r4, 0x46\n"
-"ldrb r0, [r4]\n"
-"adds r0, 0x4\n"
-"mov r8, r0\n"
-"movs r0, 0x7\n"
-"mov r1, r8\n"
-"ands r1, r0\n"
-"mov r8, r1\n"
-"adds r0, r6, 0\n"
-"bl IsAtJunction\n"
-"lsls r0, 24\n"
-"mov r9, r4\n"
-"cmp r0, 0\n"
-"beq _0807B96C\n"
-"movs r0, 0x8\n"
-"bl DungeonRandInt\n"
-"strb r0, [r4]\n"
-"movs r2, 0x1\n"
-"str r2, [sp, 0x4]\n"
-"_0807B96C:\n"
-"movs r3, 0\n"
-"movs r4, 0x78\n"
-"adds r4, r7\n"
-"mov r10, r4\n"
-"adds r0, r7, 0\n"
-"adds r0, 0x88\n"
-"str r0, [sp, 0x8]\n"
-"adds r7, 0x8A\n"
-"ldr r5, _0807B9D4\n"
-"_0807B97E:\n"
-"mov r1, r9\n"
-"ldrb r0, [r1]\n"
-"ldr r1, [r5]\n"
-"adds r4, r0, r1\n"
-"movs r0, 0x7\n"
-"ands r4, r0\n"
-"ldr r2, [sp, 0x4]\n"
-"cmp r2, 0\n"
-"beq _0807B994\n"
-"cmp r4, r8\n"
-"beq _0807B9AA\n"
-"_0807B994:\n"
-"adds r0, r6, 0\n"
-"adds r1, r4, 0\n"
-"mov r2, sp\n"
-"str r3, [sp, 0xC]\n"
-"bl CanAIMonsterMoveInDirection\n"
-"lsls r0, 24\n"
-"ldr r3, [sp, 0xC]\n"
-"cmp r0, 0\n"
-"beq _0807B9AA\n"
-"b _0807BB42\n"
-"_0807B9AA:\n"
-"adds r5, 0x4\n"
-"adds r3, 0x1\n"
-"cmp r3, 0x7\n"
-"ble _0807B97E\n"
-"movs r0, 0x8\n"
-"bl DungeonRandInt\n"
-"movs r1, 0x6\n"
-"mov r3, r10\n"
-"strb r1, [r3]\n"
-"ldr r1, _0807B9D8\n"
-"lsls r0, 2\n"
-"adds r0, r1\n"
-"ldrh r1, [r0]\n"
-"ldrh r4, [r6, 0x4]\n"
-"adds r1, r4\n"
-"ldr r2, [sp, 0x8]\n"
-"strh r1, [r2]\n"
-"ldrh r0, [r0, 0x2]\n"
-"b _0807BB5A\n"
-".align 2, 0\n"
-"_0807B9D4: .4byte gFaceDirectionIncrements\n"
-"_0807B9D8: .4byte gAdjacentTileOffsets\n"
-"_0807B9DC:\n"
-"ldr r0, _0807BA30\n"
-"ldr r2, [r0]\n"
-"lsls r1, r3, 1\n"
-"ldr r4, _0807BA34\n"
-"adds r0, r2, r4\n"
-"adds r0, r1\n"
-"movs r4, 0\n"
-"ldrsh r1, [r0, r4]\n"
-"mov r8, r1\n"
-"lsls r0, r3, 7\n"
-"ldr r1, _0807BA38\n"
-"adds r0, r1\n"
-"adds r2, r0\n"
-"mov r9, r2\n"
-"movs r2, 0x8A\n"
-"lsls r2, 1\n"
-"adds r0, r7, r2\n"
-"ldr r0, [r0]\n"
-"cmp r0, 0\n"
-"beq _0807BA40\n"
-"movs r0, 0x8\n"
-"bl DungeonRandInt\n"
-"adds r2, r7, 0\n"
-"adds r2, 0x78\n"
-"movs r1, 0x6\n"
-"strb r1, [r2]\n"
-"ldr r1, _0807BA3C\n"
-"lsls r0, 2\n"
-"adds r0, r1\n"
-"ldrh r1, [r0]\n"
-"ldrh r3, [r6, 0x4]\n"
-"adds r1, r3\n"
-"adds r2, 0x10\n"
-"strh r1, [r2]\n"
-"ldrh r0, [r0, 0x2]\n"
-"ldrh r6, [r6, 0x6]\n"
-"adds r0, r6\n"
-"adds r1, r7, 0\n"
-"adds r1, 0x8A\n"
-"strh r0, [r1]\n"
-"b _0807BB60\n"
-".align 2, 0\n"
-"_0807BA30: .4byte gDungeon\n"
-"_0807BA34: .4byte 0x00010844\n"
-"_0807BA38: .4byte 0x00010884\n"
-"_0807BA3C: .4byte gAdjacentTileOffsets\n"
-"_0807BA40:\n"
-"adds r0, r7, 0\n"
-"adds r0, 0x78\n"
-"ldrb r1, [r0]\n"
-"mov r10, r0\n"
-"cmp r1, 0x4\n"
-"beq _0807BAA2\n"
-"mov r4, r8\n"
-"cmp r4, 0\n"
-"bne _0807BA84\n"
-"movs r0, 0x8\n"
-"bl DungeonRandInt\n"
-"adds r4, r0, 0\n"
-"movs r0, 0x6\n"
-"mov r1, r10\n"
-"strb r0, [r1]\n"
-"ldr r0, _0807BA80\n"
-"lsls r2, r4, 2\n"
-"adds r2, r0\n"
-"ldrh r0, [r2]\n"
-"ldrh r3, [r6, 0x4]\n"
-"adds r0, r3\n"
-"adds r1, r7, 0\n"
-"adds r1, 0x88\n"
-"strh r0, [r1]\n"
-"ldrh r0, [r2, 0x2]\n"
-"ldrh r6, [r6, 0x6]\n"
-"adds r0, r6\n"
-"adds r1, 0x2\n"
-"strh r0, [r1]\n"
-"b _0807BB60\n"
-".align 2, 0\n"
-"_0807BA80: .4byte gAdjacentTileOffsets\n"
-"_0807BA84:\n"
-"movs r5, 0\n"
-"_0807BA86:\n"
-"mov r0, r8\n"
-"bl DungeonRandInt\n"
-"adds r4, r0, 0\n"
-"ldr r0, [r6, 0x4]\n"
-"lsls r1, r4, 2\n"
-"mov r4, r9\n"
-"adds r2, r1, r4\n"
-"ldr r1, [r2]\n"
-"cmp r0, r1\n"
-"bne _0807BB18\n"
-"adds r5, 0x1\n"
-"cmp r5, 0x9\n"
-"ble _0807BA86\n"
-"_0807BAA2:\n"
-"movs r1, 0x4\n"
-"ldrsh r0, [r6, r1]\n"
-"movs r2, 0x6\n"
-"ldrsh r1, [r6, r2]\n"
-"bl GetTile\n"
-"ldrh r1, [r0]\n"
-"movs r0, 0x8\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"beq _0807BB60\n"
-"movs r0, 0x8\n"
-"bl DungeonRandInt\n"
-"adds r4, r0, 0\n"
-"movs r3, 0\n"
-"mov r9, r3\n"
-"_0807BAC4:\n"
-"movs r0, 0x7\n"
-"ands r4, r0\n"
-"movs r0, 0x4\n"
-"ldrsh r2, [r6, r0]\n"
-"ldr r0, _0807BB14\n"
-"lsls r1, r4, 2\n"
-"adds r1, r0\n"
-"movs r3, 0\n"
-"ldrsh r0, [r1, r3]\n"
-"adds r2, r0\n"
-"mov r8, r2\n"
-"movs r0, 0x6\n"
-"ldrsh r2, [r6, r0]\n"
-"movs r3, 0x2\n"
-"ldrsh r0, [r1, r3]\n"
-"adds r5, r2, r0\n"
-"mov r0, r8\n"
-"adds r1, r5, 0\n"
-"bl GetTile\n"
-"ldrb r0, [r0, 0x9]\n"
-"cmp r0, 0xFF\n"
-"bne _0807BB04\n"
-"adds r0, r6, 0\n"
-"adds r1, r4, 0\n"
-"mov r2, sp\n"
-"adds r2, 0x1\n"
-"bl CanAIMonsterMoveInDirection\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"bne _0807BB2E\n"
-"_0807BB04:\n"
-"movs r0, 0x1\n"
-"add r9, r0\n"
-"adds r4, 0x1\n"
-"mov r1, r9\n"
-"cmp r1, 0x7\n"
-"ble _0807BAC4\n"
-"b _0807BB60\n"
-".align 2, 0\n"
-"_0807BB14: .4byte gAdjacentTileOffsets\n"
-"_0807BB18:\n"
-"movs r0, 0x4\n"
-"mov r3, r10\n"
-"strb r0, [r3]\n"
-"ldrh r1, [r2]\n"
-"adds r0, r7, 0\n"
-"adds r0, 0x88\n"
-"strh r1, [r0]\n"
-"ldrh r1, [r2, 0x2]\n"
-"adds r0, 0x2\n"
-"strh r1, [r0]\n"
-"b _0807BB60\n"
-"_0807BB2E:\n"
-"movs r0, 0x3\n"
-"mov r4, r10\n"
-"strb r0, [r4]\n"
-"adds r0, r7, 0\n"
-"adds r0, 0x88\n"
-"mov r1, r8\n"
-"strh r1, [r0]\n"
-"adds r0, 0x2\n"
-"strh r5, [r0]\n"
-"b _0807BB60\n"
-"_0807BB42:\n"
-"movs r0, 0x3\n"
-"mov r2, r10\n"
-"strb r0, [r2]\n"
-"ldr r0, _0807BB74\n"
-"lsls r1, r4, 2\n"
-"adds r1, r0\n"
-"ldrh r0, [r1]\n"
-"ldrh r3, [r6, 0x4]\n"
-"adds r0, r3\n"
-"ldr r4, [sp, 0x8]\n"
-"strh r0, [r4]\n"
-"ldrh r0, [r1, 0x2]\n"
-"_0807BB5A:\n"
-"ldrh r6, [r6, 0x6]\n"
-"adds r0, r6\n"
-"strh r0, [r7]\n"
-"_0807BB60:\n"
-"movs r0, 0x1\n"
-"add sp, 0x10\n"
-"pop {r3-r5}\n"
-"mov r8, r3\n"
-"mov r9, r4\n"
-"mov r10, r5\n"
-"pop {r4-r7}\n"
-"pop {r1}\n"
-"bx r1\n"
-".align 2, 0\n"
-"_0807BB74: .4byte gAdjacentTileOffsets");
-}
-#endif
 
 void sub_807BB78(Entity *pokemon)
 {
