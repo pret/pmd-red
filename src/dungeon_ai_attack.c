@@ -1,7 +1,7 @@
 #include "global.h"
 #include "code_806CD90.h"
+#include "code_80521D0.h"
 #include "dungeon_ai_attack.h"
-
 #include "constants/direction.h"
 #include "constants/dungeon_action.h"
 #include "constants/iq_skill.h"
@@ -12,15 +12,17 @@
 #include "constants/type.h"
 #include "charge_move.h"
 #include "dungeon_action.h"
-#include "dungeon_ai_targeting.h"
+#include "dungeon_ai.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_capabilities.h"
 #include "structs/str_dungeon.h"
+#include "dungeon_engine.h"
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
+#include "items.h"
 #include "move_util.h"
 #include "moves.h"
 #include "move_checks.h"
@@ -56,27 +58,14 @@ extern void sub_8057588(Entity *, u32);
 extern void sub_806A1B0(Entity *);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8044D40(ActionContainer *, u32);
-extern bool8 EntityExists(struct Entity *entity);
-extern bool8 IsBossFight(void);
-extern bool8 sub_8044B28(void);
 extern bool8 sub_8055FA0(struct Entity *, u32, u32, u32, u32, struct Move *);
-extern void SendMessage(struct Entity *pokemon, const char message[]);
-extern void TargetTileInFront(struct Entity *pokemon);
-extern void InitPokemonMove(struct Move *move, u16 moveID);
-extern s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, struct Entity *pokemon, struct Move *move);
-extern u16 GetItemMoveID(u8 index);
 extern void SetMessageArgument(u8 *buffer, struct Entity *r1, u32);
 extern void sub_8045BF8(u8 *, struct Item *);
 extern void sub_8044DF0(struct Entity *, u32, u32);
 extern void sub_8071DA4(struct Entity *);
-extern void sub_806CE68(struct Entity *, u32);
 extern void sub_804AC20(struct Position *);
 extern void sub_807EC28(bool8);
 extern void sub_806A5B8(struct Entity *entity);
-extern void sub_8075900(struct Entity *pokemon, u8 r1);
-extern void sub_806A1B0(struct Entity *pokemon);
-extern struct Item *sub_8044D90(struct Entity *, s32, u32);
-extern bool8 sub_8044D40(struct ActionContainer *, u32);
 
 void DecideAttack(Entity *pokemon)
 {
