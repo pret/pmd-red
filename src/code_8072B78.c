@@ -26,7 +26,7 @@ struct unkStruct_806B7F8
     u8 unk10;
 };
 
-extern void sub_806B7F8(struct unkStruct_806B7F8 *, u32);
+extern Entity* sub_806B7F8(struct unkStruct_806B7F8 *, bool8);
 extern void sub_806BFC0(EntityInfo *, u32);
 void sub_8069E0C(Entity *pokemon);
 void sub_80522F4(Entity *r0, Entity *r1, const char r2[]);
@@ -138,7 +138,7 @@ void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
       local_2c.pos.y = gAdjacentTileOffsets[index].y + target->pos.y;
       local_2c.unk4 = 0;
       local_2c.unk10 = 0;
-      sub_806B7F8(&local_2c,1);
+      sub_806B7F8(&local_2c, TRUE);
     }
   }
 }

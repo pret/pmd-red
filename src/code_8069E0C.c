@@ -37,7 +37,7 @@ extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);
 extern void sub_806ABAC(Entity *, Entity *);
 void sub_8041BBC(Entity *r0);
-extern u8 sub_8045888(Entity *);
+extern bool8 sub_8045888(Entity *);
 extern void sub_806A2BC(Entity *, u8);
 extern void sub_804178C(u32);
 extern void sub_803F508(Entity *);
@@ -245,7 +245,7 @@ void sub_806A1E8(Entity *pokemon)
     if (gGameOptionsRef->FarOffPals == '\0') {
       bVar3 = FALSE;
     }
-    if (bVar3 && (sub_8045888(pokemon) == '\0')) {
+    if (bVar3 && (!sub_8045888(pokemon))) {
       sub_806A2BC(pokemon,1);
     }
   }
@@ -262,7 +262,7 @@ void sub_806A240(Entity *pokemon, Entity *target)
         entityInfo = pokemon->info;
         isNotTeamMember = (!entityInfo->isNotTeamMember);
     }
-    if (isNotTeamMember && (sub_8045888(pokemon) == '\0')) {
+    if (isNotTeamMember && (!sub_8045888(pokemon))) {
         sub_806A2BC(pokemon,1);
         return;
     }
@@ -270,7 +270,7 @@ void sub_806A240(Entity *pokemon, Entity *target)
         entityInfo = target->info;
         isNotTeamMember = (!entityInfo->isNotTeamMember);
     }
-    if (isNotTeamMember && (sub_8045888(target) == '\0')) {
+    if (isNotTeamMember && (!sub_8045888(target))) {
         sub_806A2BC(target,1);
     }
   }

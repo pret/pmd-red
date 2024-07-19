@@ -356,6 +356,7 @@ _08042518:
 	bx r0
 	thumb_func_end sub_804245C
 
+@ https://decomp.me/scratch/nTem0 (kermalis 89.31%) `s32 sub_8042520(Entity *)`
 	thumb_func_start sub_8042520
 sub_8042520:
 	push {r4-r7,lr}
@@ -527,6 +528,8 @@ _08042668:
 	bx r1
 	thumb_func_end sub_8042520
 
+@ This func plays the appropriate ascend/descend SFX for stairs depending on the direction
+@ https://decomp.me/scratch/Soyeh (kermalis 100%) `void sub_804267C(void)`
 	thumb_func_start sub_804267C
 sub_804267C:
 	push {r4,lr}
@@ -565,6 +568,7 @@ _080426C0: .4byte 0x00000644
 _080426C4: .4byte 0x00000155
 	thumb_func_end sub_804267C
 
+@ https://decomp.me/scratch/vilX5 (kermalis 100%) `void sub_80426C8(u32, u32)`
 	thumb_func_start sub_80426C8
 sub_80426C8:
 	push {r4,r5,lr}
@@ -616,6 +620,7 @@ _08042712:
 	bx r0
 	thumb_func_end sub_80426C8
 
+@ https://decomp.me/scratch/AJFhQ (kermalis 100%) `void sub_8042730(Entity *, void *)`
 	thumb_func_start sub_8042730
 sub_8042730:
 	push {r4,r5,lr}
@@ -648,6 +653,7 @@ _08042760:
 	bx r0
 	thumb_func_end sub_8042730
 
+@ https://decomp.me/scratch/2oNpD (kermalis 100%) `bool8 sub_8042768(Entity *)`
 	thumb_func_start sub_8042768
 sub_8042768:
 	push {lr}
@@ -687,6 +693,7 @@ _080427A6:
 	bx r1
 	thumb_func_end sub_8042768
 
+@ https://decomp.me/scratch/uuAnf (kermalis 100%) `void sub_80427AC(void)`
 	thumb_func_start sub_80427AC
 sub_80427AC:
 	push {r4-r6,lr}
@@ -739,6 +746,7 @@ _08042810: .4byte gAvailablePokemonNames
 _08042814: .4byte gPtrFeralFoundItemMessage
 	thumb_func_end sub_80427AC
 
+@ https://decomp.me/scratch/hzCAZ (kermalis 100%) `void sub_8042818(u8 a0, bool8 a1)`
 	thumb_func_start sub_8042818
 sub_8042818:
 	push {r4-r7,lr}

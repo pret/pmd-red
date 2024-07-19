@@ -312,7 +312,7 @@ extern const u8 gUnknown_81058A8[];
 
 extern const u8 gUnknown_81074FC[];
 
-extern u8 sub_800E9A8(u32);
+extern bool8 sub_800E9A8(s32);
 extern void sub_800DC14(u32);
 
 extern void sub_8086A3C(Entity *r0);
@@ -3803,7 +3803,7 @@ void JirachiWishGrantDialogue(Entity *jirachiEntity)
   uVar2 = sub_80861F8(0x68,jirachiEntity,0);
   // Taaaaaaaah!
   DisplayDungeonDialogue(gUnknown_81058C4);
-  if (sub_800E9A8(uVar2) != 0) {
+  if (sub_800E9A8(uVar2)) {
     sub_800DC14(uVar2);
   }
   sub_803E708(10,0x46);

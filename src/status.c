@@ -147,7 +147,7 @@ extern void sub_803F580(u32);
 extern void sub_8040A84(void);
 extern void sub_8041CA8(Entity *);
 extern void sub_8041C94(Entity *);
-extern u8 sub_8045888(Entity *r0);
+extern bool8 sub_8045888(Entity *r0);
 extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern void sub_8041BF8(Entity *);
 extern void sub_8041BE8(Entity *);
@@ -685,13 +685,13 @@ void HealTargetHP(Entity *pokemon, Entity *target, s32 param_3, s32 param_4, boo
     {
         r8 = 0;
         if (maxHPStat != 0) {
-            if (sub_8045888(target) != 0) {
+            if (sub_8045888(target)) {
                 r8 = maxHPStat;
             }
             sub_80522F4(pokemon,target,*gUnknown_80FB240); // m0$'s max HP rose by {ARG_VALUE_1}
         }
         if (HP != 0) {
-            if (sub_8045888(target) != 0) {
+            if (sub_8045888(target)) {
                 r8 = HP;
             }
             if (param_3 != 0) {

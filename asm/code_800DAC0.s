@@ -1700,6 +1700,7 @@ _0800E994:
 _0800E9A4: .4byte gUnknown_203B0CC
 	thumb_func_end sub_800E970
 
+@ https://decomp.me/scratch/K8Xny (kermalis 100%) `bool8 sub_800E9A8(s32)`
 	thumb_func_start sub_800E9A8
 sub_800E9A8:
 	push {lr}
@@ -3880,6 +3881,7 @@ _0800F950:
 _0800F954: .4byte gDungeonPokemonSprites
 	thumb_func_end DeletePokemonDungeonSprite
 
+@ https://decomp.me/scratch/0YVWD (kermalis 100%) `void sub_800F958(s32 dungeonSpriteID, Position *pos, Position *statusOffsets, u32 a3)`
 	thumb_func_start sub_800F958
 sub_800F958:
 	push {r4-r7,lr}
@@ -6556,6 +6558,7 @@ _08010EE8: .4byte 0x00004dd6
 _08010EEC: .4byte 0x00004a30
 	thumb_func_end sub_8010DA4
 
+@ https://decomp.me/scratch/xe9WG (kermalis 100%) `void sub_8010EF0(void)`
 	thumb_func_start sub_8010EF0
 sub_8010EF0:
 	push {r4,lr}

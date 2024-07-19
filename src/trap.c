@@ -59,13 +59,13 @@ struct unkStruct_806B7F8
     struct Position pos;
     u8 unk10;
 };
-extern u32 sub_806B7F8(struct unkStruct_806B7F8 *, u32);
+extern Entity* sub_806B7F8(struct unkStruct_806B7F8 *, bool8);
 
 void sub_806A9B4(Entity *, u32);
 
 void sub_8079E34(Entity *param_1, Entity *param_2, u32);
 s16 sub_803D970(u32);
-u8 sub_806AA0C(s32, s32);
+bool8 sub_806AA0C(s32, s32);
 void sub_80421EC(Position *, u32);
 
 bool8 sub_8045888(Entity *);
@@ -617,14 +617,14 @@ void HandleSummonTrap(Entity *pokemon,Position *pos)
             species = sub_803D970(0);
             direction &= DIRECTION_MASK;
             stack.species = species;
-            if (sub_806AA0C(stack.species,0) != 0) {
+            if (sub_806AA0C(stack.species,0)) {
               stack.level = 0;
               stack.unk2 = 0;
               stack.pos.x = pos->x + gAdjacentTileOffsets[direction].x;
               stack.pos.y = pos->y + gAdjacentTileOffsets[direction].y;
               stack.unk4 = 0;
               stack.unk10 = 0;
-              if (sub_806B7F8(&stack,1) != 0) {
+              if (sub_806B7F8(&stack, TRUE) != NULL) {
                 pokemonSummonCount++;
               }
             }
