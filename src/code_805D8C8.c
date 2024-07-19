@@ -39,60 +39,16 @@ OpenedFile *sub_80687D0(s16 species)
     return gDungeon->sprites[species32];
 }
 
-// 85.94 matching (Seth)
-// https://decomp.me/scratch/CI98Y
-//
-#ifdef NONMATCHING
-static void sub_80687EC(s32 id)
+static void sub_80687EC(s32 _id)
 {
     u8 name [12];
+    s32 id = (s16)_id;
 
     if (gDungeon->sprites[id] == NULL) {
         sprintf(name, gUnknown_8106EA0, id);
         gDungeon->sprites[id] = OpenFileAndGetFileDataPtr(name, &gMonsterFileArchive);
     }
 }
-#else
-NAKED
-static void sub_80687EC(s32 _id)
-{
-    asm_unified(
-    "\tpush {r4,r5,lr}\n"
-    "\tsub sp, 0xC\n"
-    "\tlsls r0, 16\n"
-    "\tasrs r2, r0, 16\n"
-    "\tldr r5, _08068828\n"
-    "\tldr r0, [r5]\n"
-    "\tlsls r4, r2, 2\n"
-    "\tldr r1, _0806882C\n"
-    "\tadds r0, r1\n"
-    "\tadds r0, r4\n"
-    "\tldr r0, [r0]\n"
-    "\tcmp r0, 0\n"
-    "\tbne _08068820\n"
-    "\tldr r1, _08068830\n"
-    "\tmov r0, sp\n"
-    "\tbl sprintf\n"
-    "\tldr r1, _08068834\n"
-    "\tmov r0, sp\n"
-    "\tbl OpenFileAndGetFileDataPtr\n"
-    "\tldr r1, [r5]\n"
-    "\tldr r2, _0806882C\n"
-    "\tadds r1, r2\n"
-    "\tadds r1, r4\n"
-    "\tstr r0, [r1]\n"
-"_08068820:\n"
-    "\tadd sp, 0xC\n"
-    "\tpop {r4,r5}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-"_08068828: .4byte gDungeon\n"
-"_0806882C: .4byte 0x00017b44\n"
-"_08068830: .4byte gUnknown_8106EA0\n"
-"_08068834: .4byte gMonsterFileArchive");
-}
-#endif
 
 void sub_8068838(s16 id, bool32 a1)
 {
