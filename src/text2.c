@@ -396,8 +396,8 @@ void sub_8006C44(UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
     }
 }
 
-#ifdef NONMATCHING
 // Not even close but I don't feel like continuing atm https://decomp.me/scratch/F58jg
+/*
 void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const u8 *a3, u16 *a4)
 {
     s32 bVar1;
@@ -461,7 +461,7 @@ void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const u8 *a3, u16 *a4)
                 iVar3 = 0;
             else
                 iVar3 = a2 + a0->unk4;
-            
+
             local_24 = a4 + local_2c + iVar8 + 0x80;
             puVar10 = a4 + local_2c + iVar8 + 0x40;
             puVar6 = a4 + local_2c + iVar8;
@@ -485,7 +485,7 @@ void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const u8 *a3, u16 *a4)
                 iVar2++;
                 if (a2 != 0)
                     a2++;
-                
+
                 if (iVar3 != 0)
                     iVar3++;
             }
@@ -580,7 +580,7 @@ void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const u8 *a3, u16 *a4)
     (a4 + a1 * 0x20)[iVar2 + 0x40] = 0xF6D8;
     (a4 + a1 * 0x20)[iVar2 + 0x440] = 0xF2DB;
 }
-#else
+*/
 NAKED
 void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const u8 *a3, u16 *a4)
 {
@@ -1176,7 +1176,6 @@ void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const u8 *a3, u16 *a4)
 "_0800732C: .4byte 0x0000f27a\n"
 "_08007330: .4byte 0x0000f6d8");
 }
-#endif // NONMATCHING
 
 #ifdef NONMATCHING // https://decomp.me/scratch/zVTOf
 void sub_8007334(s32 a0)
@@ -1322,7 +1321,7 @@ UNUSED static void nullsub_156(void)
 }
 
 u32 xxx_call_draw_char(s32 x, s32 y, u32 a2, u32 color, u32 a4)
-{ 
+{
     return xxx_draw_char(gUnknown_2027370, x, y, a2, color, a4);
 }
 
@@ -1919,7 +1918,7 @@ UNUSED static void sub_80078E8(u32 a0, s32 x, s32 y, s32 a3, u32 color)
 }
 
 void sub_800792C(u32 a0, s32 x, s32 y, s32 a3, u32 color)
-{ 
+{
     sub_8007958(gUnknown_2027370, a0, x, y, a3, color);
 }
 
@@ -2052,7 +2051,7 @@ UNUSED static void nullsub_158(void)
 {
 }
 
-#if NONMATCHING // https://decomp.me/scratch/AU1bH
+#ifdef NONMATCHING // https://decomp.me/scratch/AU1bH
 void sub_8007BA8(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
 {
     s32 iVar1; // r1
@@ -2093,7 +2092,7 @@ void sub_8007BA8(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
             r6 = 0xF0000000;
             r5 = 0xE0000000;
             sp1C = 0;
-    
+
             for (iVar3 = 0; iVar3 < 8; iVar3++) {
                 if ((sp10[0] & r6) == 0)
                     sp1C |= r5;

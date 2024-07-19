@@ -336,7 +336,7 @@ s32 sub_8092DB8(Move *moves, s32 index)
 
     for (i = 0; i < MAX_MON_MOVES; i++) {
         u8 flag;
-        
+
         if (--index < 0) {
             for (j = MAX_MON_MOVES - 1; j >= 0; j--) {
                 if (!(moves[j].moveFlags & MOVE_FLAG_EXISTS)) {
@@ -370,7 +370,7 @@ s32 unk_FindMoveEnabledForAIAfter8(Move *moves, s32 index)
 
     for (i = 0; i < 8; i++) {
         u8 flag;
-        
+
         if (++index == 8)
             return 0;
 
@@ -968,7 +968,7 @@ s32 sub_80935B8(Move *moves, s32 index)
 
         if (!(moves[i].moveFlags & MOVE_FLAG_EXISTS))
             break;
-        
+
         if (move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN) {
             move->moveFlags &= ~MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN;
             any_move_linked = TRUE;
@@ -1064,7 +1064,7 @@ static void unk_LinkedSequencesToMoves4(Move *moves, Move linkedSequences[MAX_MO
 
         for (j = 0; j < MAX_MON_MOVES; j++) {
             u8 flag;
-            
+
             if (!(linkedSequences[i][j].moveFlags & MOVE_FLAG_EXISTS))
                 continue;
 
@@ -1214,7 +1214,7 @@ static void unk_LinkedSequencesToMoves8(Move *moves, Move linkedSequences[8][8])
 
         for (j = 0; j < 8; j++) {
             u8 flag;
-            
+
             if (!(linkedSequences[i][j].moveFlags & MOVE_FLAG_EXISTS))
                 continue;
 
@@ -1272,7 +1272,7 @@ static void unk_LinkedSequencesToMoves8_v2(Move *moves, Move linkedSequences[8][
 
         for (j = 0; j < 8; j++) {
             u8 flag;
-            
+
             if (!(linkedSequences[i][j].moveFlags & MOVE_FLAG_EXISTS))
                 continue;
 

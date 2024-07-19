@@ -23,7 +23,7 @@ bool8 sub_8083568(s32 inX, s32 inY, u8 index) {
 
     x = inX - gDungeon->cameraPixelPos.x;
     y = inY - gDungeon->cameraPixelPos.y;
-    
+
     if (x >= -16 && y >= -16 && x <= 255 && y <= 175)
     {
         struct unkStruct_202ED28 *ptr = gUnknown_202ED28;
@@ -50,7 +50,7 @@ bool8 sub_8083568(s32 inX, s32 inY, u8 index) {
         tmp2 |= tmp;
         sp->unk6 = tmp2;
 
-        
+
         AddSprite(sp, 0, NULL, NULL);
         return TRUE;
     }

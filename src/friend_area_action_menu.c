@@ -289,7 +289,7 @@ void CreateFriendActionMenu(void)
       sUnknown_203B2BC->unk16C[loopMax] = 1;
   }
   loopMax += 1;
-    
+
   sUnknown_203B2BC->menuItems[loopMax].text = sTake;
   sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_TAKE;
   if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE || sUnknown_203B2BC->item2.id == ITEM_NOTHING)
@@ -317,7 +317,7 @@ void CreateFriendActionMenu(void)
               return;
       }
   }
-    
+
   for(index = 0; index < loopMax; index++)
   {
       if(sUnknown_203B2BC->unk16C[index] == 0)
@@ -355,7 +355,7 @@ void sub_80276A8(void)
               return;
       }
   }
-    
+
   for(index = 0; index < loopMax; index++)
   {
       if(sUnknown_203B2BC->unk16C[index] == 0)
@@ -369,7 +369,7 @@ void sub_80276A8(void)
 void sub_8027794(void)
 {
   s32 loopMax = 0;
-  
+
   MemoryFill16(sUnknown_203B2BC->unk16C,0,sizeof(sUnknown_203B2BC->unk16C));
   sUnknown_203B2BC->menuItems[loopMax].text = gCommonYes[0];
   sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_YES;

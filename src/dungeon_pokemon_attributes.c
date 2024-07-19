@@ -263,7 +263,7 @@ bool8 sub_8071A8C(Entity *pokemon)
 }
 
 bool8 SetVisualFlags(EntityInfo *entityInfo, u16 newFlag, bool8 param_3)
-{ 
+{
   if ((entityInfo->visualFlags & newFlag)) {
     entityInfo->previousVisualFlags = newFlag | entityInfo->previousVisualFlags;
   }

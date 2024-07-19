@@ -43,13 +43,12 @@ OpenedFile *sub_80687D0(s16 species)
 // https://decomp.me/scratch/CI98Y
 //
 #ifdef NONMATCHING
-static void sub_80687EC(s32 _id)
+static void sub_80687EC(s32 id)
 {
     u8 name [12];
-    s16 id = _id;
 
     if (gDungeon->sprites[id] == NULL) {
-        sprintf(name, gUnknown_8106EA0);
+        sprintf(name, gUnknown_8106EA0, id);
         gDungeon->sprites[id] = OpenFileAndGetFileDataPtr(name, &gMonsterFileArchive);
     }
 }

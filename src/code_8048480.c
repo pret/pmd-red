@@ -37,7 +37,7 @@ extern s16 gUnknown_80F4FBC;
 extern s16 gUnknown_80F4FBE;
 extern s16 gUnknown_80F4F46; // 0xC
 extern s16 gUnknown_80F4FA2;
-extern s16 gUnknown_80F4FA4; // 0x14 
+extern s16 gUnknown_80F4FA4; // 0x14
 extern s16 gUnknown_80F4FA6; // 0x2D
 extern s16 gUnknown_80F4FA8; // 0xF
 extern s16 gUnknown_80F4FAA; // 0x1E
@@ -169,7 +169,7 @@ extern void sub_8042390(Entity *, Item *);
 bool8 sub_8047930(Entity *pokemon, Entity *target)
 {
   bool8 flag;
-  
+
   if (((target->info->shopkeeper == TRUE) ||
       (target->info->clientType == 4)) || (target->info->clientType == CLIENT_TYPE_CLIENT)) {
     return FALSE;
@@ -203,7 +203,7 @@ void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity
   u8 uStack_24;
   u8 uStack_23;
   u8 auStack_22;
-  
+
   if (param_1 != '\0') {
     if (param_2 == '\0') {
       flag = FALSE;
@@ -251,7 +251,7 @@ void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity
     else goto _jump;
   }
   else {
-    if (param_1 == 0) 
+    if (param_1 == 0)
 _jump:
         sub_804245C(target,item);
   }
@@ -329,7 +329,7 @@ _jump:
         break;
       case ITEM_WARP_SEED:
         WarpSeedItemAction(pokemon,target);
-        break;      
+        break;
       case ITEM_SLEEP_SEED:
         SleepSeedItemAction(pokemon,target);
         break;
@@ -341,10 +341,10 @@ _jump:
         break;
       case ITEM_DOOM_SEED:
         DoomSeedItemAction(pokemon,target);
-        break;   
+        break;
        case ITEM_STUN_SEED:
         StunSeedItemAction(pokemon,target);
-        break;      
+        break;
       case ITEM_PLAIN_SEED:
         PlainSeedItemAction(pokemon,target);
         break;
@@ -456,7 +456,7 @@ _jump:
         break;
       case ITEM_STEEL_PART:
         SteelPartItemAction(pokemon,target,param_1);
-        break;  
+        break;
       case ITEM_WISH_STONE:
         WishStoneItemAction(pokemon,target,param_1);
         break;
@@ -467,7 +467,7 @@ _jump:
         if (param_1 != '\0') {
             sub_806F370(pokemon,target,gUnknown_80F4FAC,1,&auStack_22,0,0x217,0,0,0);
         }
-        else 
+        else
         {
             sub_80522F4(pokemon,target,*gUnknown_80FE458);
         }
@@ -479,7 +479,7 @@ _080482B4:
 
 UNUSED void nullsub_205(void) { }
 
-void SleepSeedItemAction(Entity *pokemon, Entity *target) 
+void SleepSeedItemAction(Entity *pokemon, Entity *target)
 {
     sub_8075C58(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4E74, TRUE), TRUE);
 }
@@ -697,7 +697,7 @@ void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
   EntityInfo *entityInfo_1;
   Entity *entity;
   u8 auStack28 [4];
-  
+
   if (param_3 != 0) {
     entityInfo = target->info;
     entityInfo_1 = entityInfo;
@@ -764,7 +764,7 @@ void HandleGummiItemAction(Entity *pokemon, Entity *target, u8 gummiIndex)
   s32 iVar4;
   s32 iVar5;
   s32 currIQ;
-    
+
   targetInfo = target->info;
   gummiBoost = gTypeGummiIQBoost[targetInfo->types[0]][gummiIndex];
   gummiBoost += gTypeGummiIQBoost[targetInfo->types[1]][gummiIndex];
@@ -914,7 +914,7 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
   EntityInfo *pEVar6;
   s32 index;
   PokemonStruct2 *pokemon;
-  
+
   if ((item->flags & ITEM_FLAG_STICKY)) {
     PrintFieldMessage(0,*gUnknown_80FE3E8,1);
     return FALSE;
@@ -939,9 +939,9 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
           {
              pokemon = &gRecruitedPokemonRef->pokemon2[pEVar6->teamIndex];
              if (sub_806A538(pokemon->unkA))
-                 flag =  FALSE;   
+                 flag =  FALSE;
           }
-            
+
           if (CannotMove(entity, FALSE)) {
             flag = FALSE;
           }
@@ -1000,7 +1000,7 @@ bool32 sub_8048B9C(Entity *entity,Item *param_2)
   ActionContainer *actionPointer;
   ActionContainer actionContainer;
   u16 action;
-  
+
   bVar2 = FALSE;
   entityInfo = entity->info;
   actionPointer = &(entityInfo->action);
@@ -1076,7 +1076,7 @@ _clear:
                 SetMonsterActionFields(actionPointer,0x2c);
                 break;
               }
-          } 
+          }
           else
           {
                sub_8044C10(TRUE);
@@ -1084,7 +1084,7 @@ _clear:
           }
         }
         goto _load;
-      } 
+      }
     }
   }
   return bVar2;
@@ -1095,7 +1095,7 @@ bool8 sub_8048D50(Entity * pokemon, Item *item)
   EntityInfo *entityInfo;
 
   entityInfo = pokemon->info;
-  
+
   if ((item->flags & ITEM_FLAG_STICKY) != 0) {
     sub_8045BF8(gUnknown_202DE58, item);
     SendMessage(pokemon,*gUnknown_80FE3E8);
@@ -1142,7 +1142,7 @@ void GrimyFoodItemAction(Entity *pokemon, Entity * target)
             LowerAttackStageTarget(pokemon, target, gUnknown_8106A4C, 3, 1, TRUE);
             LowerAttackStageTarget(pokemon, target, gUnknown_8106A50, 3, 1, TRUE);
             break;
-    } 
+    }
 }
 
 void IcePartItemAction(Entity *pokemon, Entity *target, u8 r2)

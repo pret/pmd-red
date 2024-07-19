@@ -171,7 +171,7 @@ bool8 sub_805AFA4(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 #else
   EntityInfo *entityInfo;
 #endif
-  
+
   SendThawedMessage(pokemon, target);
   entityInfo = pokemon->info;
   r2 = entityInfo->maxHPStat;
@@ -200,13 +200,13 @@ bool8 sub_805AFA4(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 }
 
 bool8 sub_805B028(Entity * pokemon,Entity * target,Move *move)
-{ 
+{
     ParalyzeStatusTarget(pokemon,target, TRUE);
     return TRUE;
 }
 
 bool8 TransformMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
-{ 
+{
   if (IsBossFight()) {
     sub_80522F4(pokemon,target,*gUnknown_80FEFF4);
     return FALSE;
@@ -219,7 +219,7 @@ bool8 TransformMoveAction(Entity * pokemon, Entity * target, Move *move, s32 par
 }
 
 bool8 sub_805B074(Entity * pokemon, Entity * target, Move *move, s32 param_4)
-{ 
+{
     bool8 flag;
 
     flag = FALSE;
@@ -233,7 +233,7 @@ bool8 sub_805B074(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 }
 
 bool8 sub_805B0BC(Entity * pokemon, Entity * target)
-{ 
+{
     sub_807CD9C(pokemon, target, pokemon->info->action.direction);
     return TRUE;
 }
@@ -294,13 +294,13 @@ bool8 sub_805B17C(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 }
 
 bool8 PerishSongMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
-{ 
+{
     PerishSongTarget(pokemon, target);
     return TRUE;
 }
 
 bool8 WrapMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
-{ 
+{
     WrapTarget(pokemon, target);
     return TRUE;
 }
@@ -310,11 +310,11 @@ bool8 SpikesMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_
     bool8 trapLaid;
     u8 uVar2;
     bool8 isNotTeamMember;
-    
+
     trapLaid = FALSE;
     isNotTeamMember = pokemon->info->isNotTeamMember;
     uVar2 = 1;
-    
+
     if (isNotTeamMember) {
         uVar2 = 2;
     }
@@ -336,7 +336,7 @@ bool8 sub_805B264(Entity * pokemon, Entity * target, Move *move, s32 param_4)
     s32 iVar5;
     EntityInfo *entityInfo;
 
-    entityInfo = target->info;  
+    entityInfo = target->info;
     r3 = gUnknown_202F224;
     r6 = FALSE;
 
@@ -351,19 +351,19 @@ bool8 sub_805B264(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 }
 
 bool8 MagicCoatMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
-{ 
+{
     MagicCoatStatusTarget(pokemon, target);
     return TRUE;
 }
 
 bool8 ProtectMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
-{ 
+{
     ProtectStatusTarget(pokemon, target);
     return TRUE;
 }
 
 bool8 sub_805B2FC(Entity * pokemon,Entity * target,Move *move, s32 param_4)
-{ 
+{
     RaiseDefenseStageTarget(pokemon,target,gUnknown_8106A4C,1);
     return TRUE;
 }
@@ -389,24 +389,24 @@ bool8 sub_805B324(Entity * pokemon,Entity * target,Move *move, s32 param_4)
 }
 
 bool8 DestinyBondMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
-{ 
+{
     DestinyBondStatusTarget(pokemon, target);
     return TRUE;
 }
 
 bool8 sub_805B388(Entity * pokemon,Entity * target,Move *move, s32 param_4)
-{ 
+{
     return (sub_8055640(pokemon,target,move,0x100,param_4)) ? TRUE : FALSE;
 }
 
 bool8 MirrorCoatMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
-{ 
+{
     MirrorCoatStatusTarget(pokemon, target);
     return TRUE;
 }
 
 bool8 sub_805B3B4(Entity * pokemon,Entity * target,Move *move, s32 param_4)
-{ 
+{
     u32 stat = gUnknown_8106A50;
     RaiseAttackStageTarget(pokemon,target,stat,1);
     RaiseDefenseStageTarget(pokemon,target,stat,1);
@@ -414,7 +414,7 @@ bool8 sub_805B3B4(Entity * pokemon,Entity * target,Move *move, s32 param_4)
 }
 
 bool8 sub_805B3E0(Entity * pokemon,Entity * target,Move *move, s32 param_4)
-{ 
+{
     sub_8055640(pokemon,target,move,0x100,param_4);
     return TRUE;
 }
@@ -528,7 +528,7 @@ bool8 sub_805B618(Entity * pokemon, Entity * target, Move *move, s32 param_4)
   u32 index;
 
   index = gUnknown_202F228;
-  
+
   InitPokemonMove(&natureMove, gUnknown_80F59C8[index].moveID);
   flag = gUnknown_80F59C8[index].move(pokemon, target, &natureMove, param_4);
   return flag;
@@ -540,7 +540,7 @@ bool8 sub_805B668(Entity * pokemon, Entity * target, Move *move, s32 param_4)
   s32 iVar3;
   s32 newHP;
   bool8 flag;
-  
+
   flag = FALSE;
   hasLiquidOoze = HasAbility(target, ABILITY_LIQUID_OOZE);
   if (IsSleeping(target)) {
@@ -584,7 +584,7 @@ bool8 RecycleMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param
   s32 index;
   EntityInfo *entityInfo;
   bool8 isTMRecycled;
-  
+
   entityInfo = target->info;
   isTMRecycled = FALSE;
   if (!entityInfo->isNotTeamMember) {
@@ -635,7 +635,7 @@ bool8 sub_805B808(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 }
 
 bool8 sub_805B884( Entity * pokemon, Entity * target, Move *move, s32 param_4)
-{ 
+{
     RaiseAttackStageTarget(pokemon, target, gUnknown_8106A4C, 1);
     RaiseMovementSpeedTarget(pokemon, target, 0, TRUE);
     return TRUE;
@@ -1179,8 +1179,8 @@ bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 param_4)
     else
     {
         // Calculate the coordinates of the tile in front of the user
-        tileCoords.x = target->pos.x + gAdjacentTileOffsets[targetInfo->action.direction].x; 
-        tileCoords.y = target->pos.y + gAdjacentTileOffsets[targetInfo->action.direction].y; 
+        tileCoords.x = target->pos.x + gAdjacentTileOffsets[targetInfo->action.direction].x;
+        tileCoords.y = target->pos.y + gAdjacentTileOffsets[targetInfo->action.direction].y;
 
         sub_8042A54(&tileCoords);
         tileToFill = GetTileSafe(tileCoords.x,tileCoords.y);
