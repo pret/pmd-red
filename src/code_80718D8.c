@@ -25,7 +25,7 @@ extern s16 gUnknown_80F4DAC;
 extern u8 *gUnknown_80FED68[];
 
 extern void SetMessageArgument(char[], struct Entity*, u32);
-extern void sub_806B7F8(struct unkStruct_806B7F8 *, u32);
+extern Entity* sub_806B7F8(struct unkStruct_806B7F8 *, bool8);
 extern void sub_805239C(struct Entity *r0, const char r1[]);
 extern void sub_8042920(struct Entity *r0);
 extern s16 sub_803D970(u32);
@@ -125,7 +125,7 @@ void sub_8071B48(void)
             local_2c.unk4 = 0;
         }
         local_2c.unk10 = 0;
-        sub_806B7F8(&local_2c, 0);
+        sub_806B7F8(&local_2c, FALSE);
       }
   }
 }

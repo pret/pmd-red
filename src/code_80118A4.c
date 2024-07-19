@@ -15,12 +15,14 @@
 #include "game_options.h"
 #include "sprite.h"
 #include "event_flag.h"
+#include "file_system.h"
 
 // size: 0x4DD8
 struct UnkBgStruct
 {
-    u8 padding[0x4c4b];
-    /* 0x4C4C */ unkStruct_202EE8C unk4C4C[16];
+    OpenedFile *unk0[5];
+    u8 padding[0x4C4C - 0x14];
+    unkStruct_202EE8C unk4C4C[16];
     u32 unk4DCC;
     u32 unk4DD0;
     /* 0x4DD4 */ s16 xoffset;

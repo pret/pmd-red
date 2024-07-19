@@ -4,9 +4,9 @@
 
 extern void sub_804151C(Entity *r0, u32 r1, u8 r2);
 extern void sub_803E708(u32 r0, u32 r1);
-extern void sub_80416A4(Position *r0, u32 r1, u32 r2);
+extern void sub_80416A4(Position *r0, u32 r1, bool8 r2);
 extern void sub_80421C0(Entity *r0, u16 r1);
-extern u8 sub_8042768(Entity *pokemon);
+extern bool8 sub_8042768(Entity *pokemon);
 extern void sub_804178C(u32);
 extern void sub_804151C(Entity *pokemon, u32 r1, u8 r2);
 extern void sub_803E46C(u32);
@@ -111,13 +111,13 @@ void sub_80429E8(Entity *r0)
 
 void sub_80429FC(Position *r0)
 {
-    sub_80416A4(r0, 0xCF << 1, 1);
+    sub_80416A4(r0, 0x19E, TRUE);
     sub_80421C0(NULL, 0xD4);
 }
 
 void sub_8042A14(Position *r0)
 {
-    sub_80416A4(r0, 0x36, 1);
+    sub_80416A4(r0, 0x36, TRUE);
 }
 
 void sub_8042A24(Entity *r0)
@@ -127,7 +127,7 @@ void sub_8042A24(Entity *r0)
 
 void sub_8042A34(Position *r0)
 {
-    sub_80416A4(r0, 0x9F << 1, 0);
+    sub_80416A4(r0, 0x13E, FALSE);
 }
 
 void sub_8042A44(Entity *r0)
@@ -137,12 +137,12 @@ void sub_8042A44(Entity *r0)
 
 void sub_8042A54(Position *r0)
 {
-    sub_80416A4(r0, 0x37, 1);
+    sub_80416A4(r0, 0x37, TRUE);
 }
 
 void sub_8042A64(Position *r0)
 {
-    sub_80416A4(r0, 0x29, 1);
+    sub_80416A4(r0, 0x29, TRUE);
 }
 
 void sub_8042A74(Entity *r0)
@@ -160,7 +160,7 @@ void sub_8042A84(s16 param_1, Entity *entity, u32 param_3)
   param_1_s16 = param_1;
   
   r6 = 0x200;
-  if (sub_8042768(entity) != 0) {
+  if (sub_8042768(entity)) {
     sub_804151C(entity,param_1_s16,0);
     sub_803E708(param_3,0x42);
     do {

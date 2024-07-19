@@ -2,7 +2,7 @@
 #include "code_80521D0.h"
 
 extern void sub_80526D0(u8 r0);
-extern u8 sub_8045888(Entity *r0);
+extern bool8 sub_8045888(Entity *r0);
 extern void sub_80523A8(Entity *r0, const char r1[], u8 r2);
 extern u8 sub_8052DC0(Entity *);
 extern u8 sub_803F428(Position *);
@@ -14,14 +14,14 @@ void sub_805229C(void)
 
 void SendMessage(Entity *pokemon, const char message[])
 {
-    if (sub_8045888(pokemon) != 0){
+    if (sub_8045888(pokemon)){
         sub_80523A8(pokemon, message, 1);
     }
 }
 
 void sub_80522C8(Entity *r0, const char r1[])
 {
-    if (sub_8045888(r0) != 0){
+    if (sub_8045888(r0)){
         sub_80523A8(r0, r1, 0);
     }
 }

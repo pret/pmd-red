@@ -57,7 +57,7 @@ extern void HandleLuminousOrbAction(Entity *pokemon);
 extern void sub_807D510(Entity *, Entity *);
 extern void sub_807DA14(Entity *, Entity *, s32);
 extern s16 sub_803D970(u32);
-extern u8 sub_806AA0C(s32, u32);
+extern bool8 sub_806AA0C(s32, u32);
 extern void sub_806BB6C(Entity *, s32);
 extern void sub_807E254(Entity *, Entity *, u32);
 extern u32 sub_8055640(Entity *, Entity *, Move *, u32, u32);
@@ -935,7 +935,7 @@ bool8 TransferOrbAction(Entity *pokemon, Entity * target, Move *move, s32 param_
         {
             for (r6 = 0; r6 < 0x1E; r6++) {
                 targetID = sub_803D970(0);
-                if ((sub_806AA0C(targetID,0) != 0) && (oldID != targetID)) {
+                if ((sub_806AA0C(targetID,0)) && (oldID != targetID)) {
                     if (GetBodySize(oldID) == GetBodySize(targetID)) break;
                 }
             }
