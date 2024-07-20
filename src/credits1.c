@@ -76,7 +76,7 @@ bool8 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
         xxx_call_draw_string(x, y, srcText, 0, 0);
         cred++;
     }
-    
+
     sub_80073E0(0);
     SelectCharmap(0);
     do {

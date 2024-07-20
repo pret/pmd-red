@@ -304,19 +304,19 @@ void sub_808E9EC(PokemonStruct1 *r0, struct unkStruct_808E9EC *r1)
     u32 reg1_8;
     s16 reg1;
 
-    pokeAtt = r0->pokeAtt;
+    pokeAtt = r0->offense.att[0];
 
     r1->unk0 = pokeAtt;
-    r1->unk4 = r0->pokeSPAtt;
-    r1->unk8 = r0->pokeDef;
-    r1->unkC = r0->pokeSPDef;
+    r1->unk4 = r0->offense.att[1];
+    r1->unk8 = r0->offense.def[0];
+    r1->unkC = r0->offense.def[1];
     r1->unk10 = 0;
     r1->unk11 = 0;
     r1->unk12 = 0;
     r1->unk13 = 0;
-    if(r0->unk28 != 0)
+    if(r0->heldItem.id != 0)
     {
-        r4 = r0->unk28;
+        r4 = r0->heldItem.id;
         if(r4 == 0x13)
         {
             r1->unk10 = gUnknown_810AC60;
@@ -980,7 +980,7 @@ void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, u8 param_3
                         evolFlag = TRUE;
                     }
                 }
-                else 
+                else
                 {
                     if (FindItemInInventory(evolveConditions.evolutionRequirements.mainRequirement) < 0) {
                         evolveStatus->evolutionConditionStatus |= defaultReason;
@@ -1028,7 +1028,7 @@ void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, u8 param_3
                 else {
                     if (-1 < FindItemInInventory(ITEM_SUN_RIBBON)) goto _0808F6CA;
                     evolveStatus->evolutionConditionStatus |= defaultReason;
-                    continue;                
+                    continue;
                 }
             }
             else if (evolveConditions.evolutionRequirements.additionalRequirement == 9) {
@@ -1057,7 +1057,7 @@ void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, u8 param_3
             }
             else if (evolveConditions.evolutionRequirements.additionalRequirement == 10) {
                 if (param_3 != 0) {
-                    if ((evolveStatus->evoItem1 == ITEM_BEAUTY_SCARF) || (evolveStatus->evoItem2 == ITEM_BEAUTY_SCARF)) goto _0808F6CA; 
+                    if ((evolveStatus->evoItem1 == ITEM_BEAUTY_SCARF) || (evolveStatus->evoItem2 == ITEM_BEAUTY_SCARF)) goto _0808F6CA;
                     else continue;
                 }
                 else

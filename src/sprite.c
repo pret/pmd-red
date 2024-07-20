@@ -155,7 +155,7 @@ void sub_8004E8C(unkStruct_2039DB0 *a0)
 
 // https://decomp.me/scratch/VYqKb
 // spriteMasks is a u16[6]
-#if NONMATCHING
+#ifdef NONMATCHING
 static void sub_8004EA8(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, u16 *spriteMasks)
 {
     // size: 0xC

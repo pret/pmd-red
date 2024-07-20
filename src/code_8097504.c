@@ -86,7 +86,7 @@ bool32 IsMazeCompleted(s16 mazeIndex)
 }
 
 void sub_80975A8(s16 param_1,u8 param_2)
-{ 
+{
     u16 param_1_u16 = param_1;
     sub_800199C(0,0x2e,param_1_u16,param_2);
 }

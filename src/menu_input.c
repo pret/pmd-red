@@ -790,7 +790,7 @@ static void sub_801332C(s16 *a0)
 static void sub_8013470(MenuInputStruct *a0)
 {
     SpriteOAM sp = {};
-    #if NONMATCHING // SpriteOAM memes https://decomp.me/scratch/70Ieb TODO: Match like sub_8039174 with multiple vars and while(0)
+    #ifdef NONMATCHING // SpriteOAM memes https://decomp.me/scratch/70Ieb TODO: Match like sub_8039174 with multiple vars and while(0)
     SpriteOAM *ptr;
     u32 r0, r1, r5;
     #else

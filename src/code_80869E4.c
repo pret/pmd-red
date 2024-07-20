@@ -37,6 +37,7 @@ extern void sub_8086A54(Entity *);
 extern void sub_8086A3C(Entity *);
 extern void PlaySoundEffect(u32);
 extern void sub_80861F8(u32, Entity *, u32);
+extern u32 sub_8002A70(u32, s32, u8);
 
 void SpriteShockEffect(Entity *entity)
 {
@@ -480,7 +481,6 @@ void SpriteLookAroundEffect(Entity *entity)
 void sub_80869E4(Entity *a0, s32 a1, u8 a2, s8 a3)
 {
     u32 r4;
-    s8 *r5;
     s32 tmp;
     struct EntityInfo* info;
 

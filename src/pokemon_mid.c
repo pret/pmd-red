@@ -76,7 +76,7 @@ s32 sub_808D654(s32 *ptr) {
 }
 
 // 80 (97.58 % matching) - Seth
-// https://decomp.me/scratch/B8Ont 
+// https://decomp.me/scratch/B8Ont
 #ifdef NONMATCHING
 s32 sub_808D6A4(s32 *param_1)
 {
@@ -910,7 +910,7 @@ s32 GetEvolutionSequence(PokemonStruct1* pokemon, struct EvolveStage* a2)
   s32 species;
   s32 i;
 
-  a2[0].specesNum = pokemon->speciesNum;
+  a2[0].speciesNum = pokemon->speciesNum;
   a2[0].level = pokemon->level;
 
   count = 1;

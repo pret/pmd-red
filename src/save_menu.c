@@ -123,14 +123,14 @@ extern void sub_80140F8(void);
 void CreateSaveMenu(s32 currMenu)
 {
   s32 index;
-  
+
   if (sUnknown_203B364 == NULL) {
     sUnknown_203B364 = MemoryAlloc(sizeof(SaveMenuWork),8);
     MemoryFill8((u8 *)sUnknown_203B364,0,sizeof(SaveMenuWork));
   }
   for(index = 0; index < 4; index++){
     sUnknown_203B364->unk148[index] = gUnknown_80E6F20;
-  } 
+  }
   ResetUnusedInputStruct();
   sub_800641C(sUnknown_203B364->unk148, TRUE, TRUE);
 
@@ -174,7 +174,7 @@ s32 UpdateSaveMenu(void)
   switch(sUnknown_203B364->unk4)
   {
       default:
-      case 2:  
+      case 2:
         menu = MENU_NO_SCREEN_CHANGE;
         break;
       case 0:
