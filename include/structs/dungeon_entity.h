@@ -66,7 +66,7 @@ typedef struct AITarget
 
 } AITarget;
 
-typedef struct Sleep 
+typedef struct Sleep
 {
     /* 0x0 */ u8 sleep;
     /* 0x1 */ u8 sleepTurns;
@@ -77,7 +77,7 @@ typedef struct NonVolatile
     /* 0x0 */ u8 nonVolatileStatus;
     /* 0x1 */ u8 nonVolatileStatusTurns;
     /* 0x2 */ u8 nonVolatileStatusDamageCountdown;
-    /* 0x3 */ u8 unk4; 
+    /* 0x3 */ u8 unk4;
 } NonVolatile;
 
 typedef struct Immobilize
@@ -107,7 +107,7 @@ typedef struct Protection
     /* 0x1 */ u8 protectionStatusTurns;
 } Protection;
 
-typedef struct Waiting 
+typedef struct Waiting
 {
     /* 0xC8 */ u8 waitingStatus;
     /* 0xC9 */ bool8 enemyDecoy; // True if the Pokémon is a decoy and a wild Pokémon (i.e., not an allied Pokémon).
@@ -116,7 +116,7 @@ typedef struct Waiting
     /* 0xCC */ u8 curseDamageCountdown;
 } Waiting;
 
-typedef struct Linked 
+typedef struct Linked
 {
     /* 0xD0 */ u8 linkedStatus;
     /* 0xD4 */ u32 unkD4;
@@ -126,7 +126,7 @@ typedef struct Linked
 } Linked;
 
 
-typedef struct MoveStatus 
+typedef struct MoveStatus
 {
     /* 0xDC */ u8 moveStatus;
     /* 0xDD */ u8 moveStatusTurns;
@@ -143,13 +143,13 @@ typedef struct TransformStatus
     /* 0xE5 */ u8 transformStatusTurns;
 } TransformStatus;
 
-typedef struct EyesightStatus 
+typedef struct EyesightStatus
 {
     /* 0xE8 */ u8 eyesightStatus;
     /* 0xE9 */ u8 eyesightStatusTurns;
 } EyesightStatus;
 
-typedef struct Muzzled 
+typedef struct Muzzled
 {
     /* 0xEC */ bool8 muzzled;
     /* 0xED */ u8 muzzledTurns;
@@ -234,7 +234,7 @@ typedef struct EntityInfo
     /* 0xF0 */ bool8 powerEars;
     /* 0xF1 */ bool8 scanning;
     /* 0xF2 */ bool8 stairSpotter;
-    u8 fillF3;
+    /* 0xF3 */ bool8 unkF3;
     /* 0xF4 */ bool8 grudge;
     /* 0xF5 */ bool8 exposed;
     /* 0xF6 */ bool8 isColorChanged;

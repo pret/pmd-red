@@ -34,7 +34,7 @@ typedef struct DungeonPokemonSprite
 typedef struct DungeonPokemonSprites
 {
     /* 0x0 */ u32 frame;
-    /* 0x4 */ struct DungeonPokemonSprite sprites[22];
+    /* 0x4 */ DungeonPokemonSprite sprites[22];
 } DungeonPokemonSprites;
 
 void sub_800F958(s32 dungeonSpriteID, Position *pos, Position *statusOffsets, u32 a3);

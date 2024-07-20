@@ -125,7 +125,7 @@ bool8 sub_8072CF4(Entity *entity)
     gUnknown_203B434 = 1;
     info = entity->info;
     info->useHeldItem = FALSE;
-    info->fillF3 = 0;
+    info->unkF3 = FALSE;
     gDungeon->unkB8 = entity;
     if (gUnknown_80F58F4[(info->action).action][0] != 0) {
         if (info->isTeamLeader) {

@@ -109,8 +109,8 @@ void sub_80427AC(void)
         entity = gDungeon->allPokemon[i];
         if (EntityExists(entity)) {
             enInfo = entity->info;
-            if (enInfo->fillF3) {
-                enInfo->fillF3 = 0;
+            if (enInfo->unkF3) {
+                enInfo->unkF3 = FALSE;
                 sub_80429A0(entity);
                 if (!enInfo->isNotTeamMember) {
                     SetMessageArgument(gAvailablePokemonNames, entity, 0);
