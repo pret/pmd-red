@@ -184,7 +184,7 @@ void sub_80A658C(void)
 {
     sub_800DB7C();
     ResetSprites(FALSE);
-    nullsub_10(0);
+    nullsub_10(FALSE);
     sub_8005180();
     nullsub_12();
     CopySpritesToOam();

@@ -24,6 +24,7 @@ typedef struct DungeonLocation
 } DungeonLocation;
 
 // size: 0x4
+// This might be "RGB"... see `SetDungeonBGColorRGB()`
 typedef struct Dungeon_sub
 {
     u8 unk0;

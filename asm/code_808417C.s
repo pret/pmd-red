@@ -693,6 +693,7 @@ _08084768:
 _08084774: .4byte gUnknown_80FA3B8
 	thumb_func_end sub_80845E0
 
+@ https://decomp.me/scratch/vELLj (kermalis 100%) `void sub_8084778(void)`
 	thumb_func_start sub_8084778
 sub_8084778:
 	push {r4,lr}
