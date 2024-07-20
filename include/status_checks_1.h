@@ -3,6 +3,7 @@
 
 #include "structs/dungeon_entity.h"
 
+void SetMessageArgument_2(char buffer[], EntityInfo *param_2, s32 colorNum);
 bool8 HasNegativeStatus(Entity *pokemon);
 bool8 IsSleeping(Entity *pokemon);
 bool8 HasLowHealth(Entity *pokemon);

@@ -1,11 +1,13 @@
 #include "global.h"
+#include "code_8045A00.h"
 #include "constants/item.h"
-#include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
-#include "dungeon_util.h"
 #include "dungeon_random.h"
+#include "dungeon_util.h"
 #include "items.h"
+#include "status_checks_1.h"
 #include "structs/map.h"
+#include "structs/str_dungeon.h"
 #include "trap.h"
 
 extern u8 *gUnknown_80FE6F4[];
@@ -13,7 +15,6 @@ extern struct unkStruct_8090F58 gUnknown_80F699C;
 extern struct unkStruct_8090F58 gUnknown_80F69A8;
 extern struct unkStruct_8090F58 gUnknown_80F6990;
 
-extern void SetMessageArgument_2(u8 *, EntityInfo *, u32);
 extern bool8 IsNotSpecialItem(u8 id);
 void sub_8045BF8(u8 *, Item *);
 void sub_8046CE4(void *param_1,u32 param_2);
@@ -25,7 +26,7 @@ void sub_8045ACC(void)
   Entity *entity;
   s32 index;
   s32 pokeCount;
-  
+
   pokeCount = 0;
 
   for(index = 0; index < MAX_TEAM_MEMBERS; index++)
@@ -64,7 +65,7 @@ s32 GetTeamMemberEntityIndex(Entity *pokemon)
   return -1;
 }
 
-void SetMessageArgument(char *buffer, Entity *entity, u32 param_3)
+void SetMessageArgument(char buffer[], Entity *entity, u32 param_3)
 {
   switch(GetEntityType(entity))
   {
@@ -102,7 +103,7 @@ void sub_8045C28(Item *Item, u8 itemID, u32 param_3)
 {
   bool8 stickyFlag;
   u32 total;
-  
+
   xxx_init_itemslot_8090A8C(Item,itemID,0);
   stickyFlag = FALSE;
   if (IsNotSpecialItem(itemID)) {
@@ -145,7 +146,7 @@ void sub_8045CB0(void)
   Item item;
   Position pos;
   u32 flag;
-  
+
   x = DungeonRandInt(DUNGEON_MAX_SIZE_X);
   y = DungeonRandInt(DUNGEON_MAX_SIZE_Y);
   gDungeon->unk3904 = 0;

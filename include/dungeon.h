@@ -38,6 +38,7 @@ extern DungeonName gDungeonNames[];
 
 s32 GetDungeonFloorCount(u8 dungeon);
 const u8 *GetDungeonName1(u8 dungeon);
+bool8 IsStairDirectionUp(u8 dungeon);
 u32 GetMaxItemsAllowed(u8 dungeon);
 s8 GetRescuesAllowed(u8 dungeon);
 bool8 HasCheckpoint(u8 dungeon);

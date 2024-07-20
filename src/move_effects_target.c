@@ -1,35 +1,38 @@
 #include "global.h"
+#include "move_effects_target.h"
+
+#include "code_8045A00.h"
+#include "code_80521D0.h"
 #include "code_806CD90.h"
+#include "code_8077274_1.h"
+#include "code_808417C.h"
 #include "constants/ability.h"
-#include "constants/dungeon_action.h"
 #include "constants/direction.h"
+#include "constants/dungeon_action.h"
 #include "constants/iq_skill.h"
 #include "constants/item.h"
 #include "constants/status.h"
 #include "constants/targeting.h"
 #include "constants/type.h"
-#include "code_80521D0.h"
-#include "code_8077274_1.h"
-#include "code_808417C.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_attack.h"
 #include "dungeon_ai_items.h"
 #include "dungeon_ai_movement.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_capabilities.h"
-#include "structs/str_dungeon.h"
 #include "dungeon_items.h"
 #include "dungeon_leader.h"
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
-#include "dungeon_util.h"
 #include "dungeon_util_1.h"
+#include "dungeon_util.h"
 #include "dungeon_visibility.h"
-#include "structs/map.h"
-#include "move_effects_target.h"
 #include "pokemon.h"
 #include "status_checks.h"
+#include "status_checks_1.h"
+#include "structs/map.h"
+#include "structs/str_dungeon.h"
 #include "targeting.h"
 #include "tile_types.h"
 
@@ -139,8 +142,6 @@ extern void sub_8041EE8(Entity *);
 extern void sub_8041EC8(Entity *);
 extern void sub_8041ED8(Entity *);
 extern void EntityUpdateStatusSprites(Entity *);
-extern void SetMessageArgument(char[], Entity*, u32);
-extern void SetMessageArgument_2(char[], EntityInfo*, u32);
 extern void sub_8041AF4(Entity *);
 extern void sub_80522F4(Entity *r1, Entity *r2, u8 *);
 extern void nullsub_91(Entity *);
@@ -228,7 +229,7 @@ void sub_8075C58(Entity * pokemon, Entity * target, s32 turns, u8 displayMessage
 }
 
 bool8 CannotSleep(Entity * pokemon, Entity * target, u8 param_3, bool8 displayMessage)
-{  
+{
     if ((!EntityExists(target)) ||
         ((SetMessageArgument(gAvailablePokemonNames,target,0), param_3 != 0 &&
         (HasSafeguardStatus(pokemon,target,displayMessage))))) {
@@ -265,7 +266,7 @@ void NightmareStatusTarget(Entity * pokemon, Entity * target, s32 turns)
 {
   bool8 hasNightmare;
   EntityInfo *entityInfo;
-  
+
   hasNightmare = FALSE;
   if (!CannotSleep(pokemon, target, 1, TRUE)) {
     entityInfo = target->info;
@@ -302,7 +303,7 @@ void NappingStatusTarget(Entity * pokemon, Entity * target, s32 turns)
 {
   bool8 isSleeping;
   EntityInfo *entityInfo;
-  
+
   isSleeping = FALSE;
   if (!CannotSleep(pokemon, target, 0, TRUE)) {
     entityInfo = target->info;
@@ -338,7 +339,7 @@ void NappingStatusTarget(Entity * pokemon, Entity * target, s32 turns)
 void YawnedStatusTarget(Entity * pokemon, Entity * target, s32 turns)
 {
   EntityInfo *entityInfo;
-  
+
   if (CannotSleep(pokemon,target,1,TRUE)) {
     return;
   }
@@ -369,7 +370,7 @@ void SleeplessStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
   bool8 isAsleep;
-  
+
   isAsleep = FALSE;
   if (!EntityExists(target)) {
     return;
@@ -403,7 +404,7 @@ void SleeplessStatusTarget(Entity * pokemon, Entity * target)
 void PausedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, s32 turns, bool8 displayMessage)
 {
   EntityInfo *entityInfo;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -438,7 +439,7 @@ void PausedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, s32 turns
 void InfatuateStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
   EntityInfo *entityInfo;
-  
+
 
   if (EntityExists(target)) {
     entityInfo = target->info;
@@ -476,7 +477,7 @@ void BurnedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, bool8 dis
   struct Tile *tile_2;
   Entity *entity;
   s32 index;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -563,7 +564,7 @@ void PoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
   struct Tile *tile;
   Entity *entity;
   s32 index;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -605,7 +606,7 @@ void PoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
                     sub_806CE94(target, 8);
                 }
                 else
-                {   
+                {
                     sub_80522F4(pokemon,target,*gUnknown_80FB5D4);
                 }
             }
@@ -652,7 +653,7 @@ void BadlyPoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayM
   struct Tile *tile;
   Entity *entity;
   s32 index;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -730,7 +731,7 @@ void FrozenStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
   EntityInfo *entityInfo;
   struct Tile *tile;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -779,7 +780,7 @@ void SqueezedStatusTarget(Entity * pokemon, Entity * target, s16 param_3, bool32
   EntityInfo *entityInfo;
   s32 param_3_s32 = param_3;
   bool8 displayMessage_u8 = displayMessage;
-  
+
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,displayMessage_u8))) {
     entityInfo = target->info;
     if ((u8)(entityInfo->immobilize.immobilizeStatus - 3U) < 2) {
@@ -809,7 +810,7 @@ void SqueezedStatusTarget(Entity * pokemon, Entity * target, s16 param_3, bool32
 void ImmobilizedStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  
+
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
     entityInfo = target->info;
     if ((u8)(entityInfo->immobilize.immobilizeStatus - 3U) < 2) {
@@ -839,7 +840,7 @@ void IngrainedStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
   EntityInfo *entityInfo2;
-  
+
   if (EntityExists(target)) {
     entityInfo = target->info;
     entityInfo2 = entityInfo;
@@ -867,7 +868,7 @@ void WrapTarget(Entity * pokemon, Entity * target)
   s32 *piVar3;
   s32 *iVar5;
   EntityInfo * pokemonEntityData;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -948,7 +949,7 @@ void PetrifiedStatusTarget(Entity * pokemon, Entity * target)
   EntityInfo * entityInfo;
   Entity * entity;
   s32 index;
-  
+
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
     sub_8041C08(target);
     targetEntityInfo = target->info;
@@ -994,7 +995,7 @@ void LowerAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 de
 {
   EntityInfo *entityInfo;
   s32 attackStage = decrement;
-  
+
   if (!EntityExists(target)) {
     return;
   }
@@ -1049,7 +1050,7 @@ void LowerDefenseStageTarget(Entity * pokemon, Entity * target, s32 index, s32 d
 {
     EntityInfo *entityInfo;
     s32 defenseStage = decrement;
-    
+
     if (!EntityExists(target)) {
         return;
     }
@@ -1089,7 +1090,7 @@ void RaiseAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 in
 {
     EntityInfo *entityInfo;
     s32 attackStage = increment;
-    
+
     if (!EntityExists(target)) {
         return;
     }
@@ -1129,7 +1130,7 @@ void RaiseDefenseStageTarget(Entity * pokemon, Entity * target, s32 index, s32 i
 {
     EntityInfo *entityInfo;
     s32 defenseStage = increment;
-    
+
     if (!EntityExists(target)) {
         return;
     }

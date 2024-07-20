@@ -85,6 +85,12 @@ SECTIONS {
         src/code_800D090_1.o(.text);
         src/code_800DAC0.o(.text);
         asm/code_800DAC0.o(.text);
+        src/code_800E9A8.o(.text);
+        asm/code_800E9E4.o(.text);
+        src/code_800F958.o(.text);
+        asm/code_800F990.o(.text);
+        src/code_8010EF0.o(.text);
+        asm/code_8010F28.o(.text);
         src/code_80118A4.o(.text);
         src/debug.o(.text);
         src/save.o(.text);
@@ -198,8 +204,8 @@ SECTIONS {
         asm/code_8040094.o(.text);
         src/code_8041AD0.o(.text);
         asm/code_8041AD0.o(.text);
-        src/code_80428A0.o(.text);
-        asm/code_80428A0.o(.text);
+        src/code_804267C.o(.text);
+        asm/code_8042B34.o(.text);
         src/dungeon_engine.o(.text);
         asm/code_8044210.o(.text);
         src/dungeon_action.o(.text);

@@ -1,7 +1,10 @@
 #include "global.h"
-#include "code_806CD90.h"
-#include "code_80521D0.h"
 #include "dungeon_ai_attack.h"
+
+#include "charge_move.h"
+#include "code_8045A00.h"
+#include "code_80521D0.h"
+#include "code_806CD90.h"
 #include "constants/direction.h"
 #include "constants/dungeon_action.h"
 #include "constants/iq_skill.h"
@@ -10,12 +13,10 @@
 #include "constants/tactic.h"
 #include "constants/targeting.h"
 #include "constants/type.h"
-#include "charge_move.h"
 #include "dungeon_action.h"
-#include "dungeon_ai.h"
 #include "dungeon_ai_targeting.h"
+#include "dungeon_ai.h"
 #include "dungeon_capabilities.h"
-#include "structs/str_dungeon.h"
 #include "dungeon_engine.h"
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
@@ -23,14 +24,15 @@
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
 #include "items.h"
+#include "move_checks.h"
 #include "move_util.h"
 #include "moves.h"
-#include "move_checks.h"
 #include "position_util.h"
-#include "status_checks.h"
 #include "status_checks_1.h"
-#include "targeting.h"
+#include "status_checks.h"
+#include "structs/str_dungeon.h"
 #include "targeting_flags.h"
+#include "targeting.h"
 #include "type_effectiveness.h"
 
 #define REGULAR_ATTACK_INDEX 4
@@ -59,7 +61,6 @@ extern void sub_806A1B0(Entity *);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8044D40(ActionContainer *, u32);
 extern bool8 sub_8055FA0(struct Entity *, u32, u32, u32, u32, struct Move *);
-extern void SetMessageArgument(u8 *buffer, struct Entity *r1, u32);
 extern void sub_8045BF8(u8 *, struct Item *);
 extern void sub_8044DF0(struct Entity *, u32, u32);
 extern void sub_8071DA4(struct Entity *);
