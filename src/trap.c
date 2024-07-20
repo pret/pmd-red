@@ -1,21 +1,22 @@
 #include "global.h"
-#include "constants/type.h"
-#include "constants/trap.h"
-#include "structs/str_dungeon.h"
 #include "trap.h"
-#include "status.h"
-#include "code_80521D0.h"
-#include "items.h"
-#include "moves.h"
-#include "code_808417C.h"
 
+#include "code_8045A00.h"
+#include "code_80521D0.h"
+#include "code_808417C.h"
+#include "constants/trap.h"
+#include "constants/type.h"
 #include "dungeon_engine.h"
 #include "dungeon_items.h"
-#include "dungeon_random.h"
 #include "dungeon_map_access.h"
+#include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "structs/map.h"
+#include "items.h"
 #include "move_effects_target.h"
+#include "moves.h"
+#include "status.h"
+#include "structs/map.h"
+#include "structs/str_dungeon.h"
 
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DE58[];
@@ -72,7 +73,6 @@ bool8 sub_8045888(Entity *);
 void SetTrap(Tile *, u32);
 void sub_803E708(u32, u32);
 u8 sub_8043D10(void);
-void SetMessageArgument(u8 *, Entity *, u32);
 void sub_8068FE0(Entity *, u32, Entity *);
 void sub_805239C(Entity *, u8 *);
 void sub_8045C28(Item *, u8 , u8);

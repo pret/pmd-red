@@ -1,26 +1,28 @@
 #include "global.h"
 #include "dungeon_ai_leader.h"
 
+#include "charge_move.h"
+#include "code_804267C.h"
+#include "code_8045A00.h"
+#include "code_80521D0.h"
+#include "code_8077274_1.h"
+#include "constants/dungeon_action.h"
 #include "constants/dungeon.h"
-#include "constants/item.h"
 #include "constants/iq_skill.h"
+#include "constants/item.h"
 #include "constants/move_id.h"
 #include "constants/status.h"
 #include "constants/targeting.h"
-#include "constants/dungeon_action.h"
-#include "code_80521D0.h"
 #include "dungeon_ai_targeting.h"
+#include "dungeon_capabilities.h"
 #include "dungeon_items.h"
 #include "dungeon_leader.h"
-#include "dungeon_visibility.h"
-#include "dungeon_util.h"
-#include "dungeon_capabilities.h"
-#include "dungeon_pokemon_attributes.h"
 #include "dungeon_movement.h"
-#include "charge_move.h"
-#include "pokemon.h"
+#include "dungeon_pokemon_attributes.h"
+#include "dungeon_util.h"
+#include "dungeon_visibility.h"
 #include "pokemon_3.h"
-#include "code_8077274_1.h"
+#include "pokemon.h"
 
 extern u8 gUnknown_202F221;
 extern u8 gUnknown_202F222;
@@ -47,7 +49,6 @@ void sub_8085140(void);
 void sub_807360C(void);
 void sub_805EFB4(Entity *, u8);
 void sub_8074FB0(Entity *, u8, Position *);
-extern void SetMessageArgument(u8 *buffer, Entity *r1, u32);
 
 void HandlePlaceItemAction(Entity *);
 void HandlePickUpPlayerAction(Entity *);
@@ -58,7 +59,6 @@ void sub_807FD84(Entity *);
 void sub_8066BD4(Entity*);
 void HandleTalkFieldAction(Entity *);
 void HandleUseMovePlayerAction(Entity *);
-void sub_804267C(void);
 void HandleUseOrbAction(Entity *);
 void sub_8067904(Entity *, u32);
 void HandleGiveItemAction(Entity *);
@@ -125,7 +125,7 @@ bool8 sub_8072CF4(Entity *entity)
     gUnknown_203B434 = 1;
     info = entity->info;
     info->useHeldItem = FALSE;
-    info->fillF3 = 0;
+    info->unkF3 = FALSE;
     gDungeon->unkB8 = entity;
     if (gUnknown_80F58F4[(info->action).action][0] != 0) {
         if (info->isTeamLeader) {
@@ -175,19 +175,19 @@ bool8 sub_8072CF4(Entity *entity)
         case ACTION_WALK:
             if(info->immobilize.immobilizeStatus == STATUS_SHADOW_HOLD)
             {
-                goto _282;  
+                goto _282;
             }
             else if(info->immobilize.immobilizeStatus == STATUS_CONSTRICTION)
             {
-                goto _282;  
+                goto _282;
             }
             else if(info->immobilize.immobilizeStatus == STATUS_INGRAIN)
             {
-                goto _282;  
+                goto _282;
             }
             else if(info->immobilize.immobilizeStatus == STATUS_WRAP)
             {
-                goto _282;  
+                goto _282;
             }
             else if(info->immobilize.immobilizeStatus == STATUS_WRAPPED)
             {
@@ -232,7 +232,7 @@ bool8 sub_8072CF4(Entity *entity)
             }
             else
             {
-                sub_804267C();
+                PlayStairsSound();
                 gDungeon->unk2 = 1;
                 gUnknown_202F32C = (info->action).direction;
             }
@@ -297,7 +297,7 @@ bool8 sub_8072CF4(Entity *entity)
             break;
         case ACTION_STRUGGLE:
             sub_8067904(entity, MOVE_STRUGGLE);
-            break;    
+            break;
         case ACTION_REGULAR_ATTACK:
             sub_8067904(entity, MOVE_REGULAR_ATTACK);
             break;
@@ -312,7 +312,7 @@ bool8 sub_8072CF4(Entity *entity)
             break;
         case ACTION_THROW_ITEM_AI:
             HandleThrowItemAIAction(entity);
-            break;  
+            break;
         case ACTION_SECOND_THOUGHTS:
             SetMessageArgument(gAvailablePokemonNames,entity,0);
             SendMessage(entity,*gUnknown_80FE478);

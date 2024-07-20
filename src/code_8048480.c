@@ -1,27 +1,28 @@
 #include "global.h"
-#include "constants/dungeon.h"
+#include "code_8045A00.h"
+#include "code_80521D0.h"
+#include "code_8077274_1.h"
+#include "code_808417C.h"
 #include "constants/dungeon_action.h"
+#include "constants/dungeon.h"
 #include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "constants/type.h"
 #include "dungeon_action.h"
-#include "structs/dungeon_entity.h"
+#include "dungeon_capabilities.h"
 #include "dungeon_items.h"
 #include "dungeon_music.h"
-#include "dungeon_util.h"
-#include "structs/str_dungeon.h"
-#include "move_effects_target.h"
-#include "dungeon_capabilities.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
-#include "number_util.h"
+#include "dungeon_util.h"
+#include "move_effects_target.h"
 #include "moves.h"
-#include "code_8077274_1.h"
-#include "code_80521D0.h"
-#include "code_808417C.h"
+#include "number_util.h"
 #include "pokemon.h"
-#include "structs/str_position.h"
 #include "status.h"
+#include "structs/dungeon_entity.h"
+#include "structs/str_dungeon.h"
+#include "structs/str_position.h"
 
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DE58[];
@@ -108,7 +109,6 @@ extern u8 sub_8072938(Entity *, u16);
 extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, Position *r3);
 extern void sub_8072008(Entity *pokemon, Entity *r1, u32 r2, u8 r3, u32);
 extern void LevelDownTarget(Entity *pokemon, Entity *r1, u32 r2);
-extern void SetMessageArgument(u8 *buffer, Entity *r1, u32);
 extern void sub_80522F4(Entity *pokemon, Entity *r1, const u8[]);
 extern void sub_806F370(Entity *pokemon, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern void sub_8078A58(Entity *, Entity *, s16, u32);

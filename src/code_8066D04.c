@@ -1,9 +1,10 @@
 #include "global.h"
+#include "code_8045A00.h"
 #include "code_80521D0.h"
-#include "dungeon_util.h"
 #include "dungeon_map_access.h"
-#include "dungeon_music.h"
 #include "dungeon_movement.h"
+#include "dungeon_music.h"
+#include "dungeon_util.h"
 #include "items.h"
 
 extern u8 gUnknown_202DE58[];
@@ -28,7 +29,6 @@ extern u8 *gUnknown_80F8DE0[];
 extern u8 *gUnknown_80F8E04[];
 extern u8 *gUnknown_80F8E28[];
 
-extern void SetMessageArgument(u8 *, Entity *, u32);
 extern Item *sub_8044D90(Entity *, s32, u32);
 void sub_8045BF8(u8 *, Item *);
 u8 sub_80460F8(Position *, Item *, u32);

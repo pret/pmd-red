@@ -1,13 +1,14 @@
 #include "global.h"
+#include "charge_move.h"
+#include "code_8045A00.h"
+#include "code_806CD90.h"
+#include "code_8077274_1.h"
+#include "code_808417C.h"
 #include "constants/ability.h"
 #include "constants/status.h"
 #include "constants/targeting.h"
 #include "constants/type.h"
 #include "constants/weather.h"
-#include "charge_move.h"
-#include "number_util.h"
-#include "structs/str_dungeon.h"
-#include "structs/dungeon_entity.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
@@ -15,16 +16,16 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "code_806CD90.h"
-#include "code_8077274_1.h"
-#include "code_808417C.h"
-#include "structs/map.h"
-#include "moves.h"
 #include "move_effects_target.h"
+#include "moves.h"
+#include "number_util.h"
 #include "pokemon.h"
-#include "status.h"
 #include "status_actions.h"
 #include "status_checks_1.h"
+#include "status.h"
+#include "structs/dungeon_entity.h"
+#include "structs/map.h"
+#include "structs/str_dungeon.h"
 #include "tile_types.h"
 #include "weather.h"
 
@@ -205,7 +206,6 @@ extern void sub_8045C28(Item *, u8 , u8);
 extern void sub_805A7D4(Entity *, Entity *, Item *, Position *);
 extern void MudWaterSportEffect(u32);
 extern void sub_807D148(Entity *pokemon, Entity *target, u32 r2, Position *r3);
-extern void SetMessageArgument_2(u8 *buffer, EntityInfo *r1, u32);
 extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_806A6E8(Entity *);
 
@@ -225,7 +225,6 @@ bool8 sub_8057308(Entity *pokemon, s32 chance);
 bool8 sub_80571F0(Entity * pokemon, Move *move);
 
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-extern void SetMessageArgument(char[], Entity*, u32);
 extern u32 sub_8055640(Entity *, Entity *, Move *, u32, u32);
 u8 sub_8057620(u32 param_1);
 extern s16 sub_8094828(u16, u8);

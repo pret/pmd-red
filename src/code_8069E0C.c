@@ -1,19 +1,20 @@
 #include "global.h"
+#include "code_8045A00.h"
 #include "constants/ability.h"
 #include "constants/move_id.h"
 #include "constants/status.h"
 #include "constants/type.h"
 #include "constants/weather.h"
-#include "structs/dungeon_entity.h"
-#include "structs/str_dungeon.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
+#include "game_options.h"
 #include "move_effects_target.h"
 #include "pokemon.h"
-#include "weather.h"
-#include "game_options.h"
+#include "structs/dungeon_entity.h"
+#include "structs/str_dungeon.h"
 #include "text_util.h"
+#include "weather.h"
 
 struct unkStruct_80F520C
 {
@@ -31,7 +32,6 @@ extern u8 *gUnknown_80FCC7C[];
 extern u8 *gUnknown_80FCCAC[];
 extern u8 *gUnknown_80FDCC8[];
 
-extern void SetMessageArgument(char[], Entity*, u32);
 void sub_80522F4(Entity *r0, Entity *r1, const char r2[]);
 extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);
