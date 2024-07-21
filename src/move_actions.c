@@ -187,19 +187,15 @@ extern u8 gUnknown_202F218;
 extern u32 gUnknown_202F21C;
 extern bool8 gUnknown_202F220;
 
-extern void sub_804535C(Entity *, u32);
-extern void sub_804AC20(Position *);
 extern void sub_806A5B8(Entity *entity);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 void sub_8075900(Entity *pokemon, u8 r1);
 extern void sub_80943A0(void*, s32);
 extern u8 sub_8044B28(void);
 extern u8 sub_803F428(Position *pos);
-extern void IncreaseEntityPixelPos(Entity *, u32, u32);
 extern void sub_803E46C(u32);
 extern void sub_807EC28(bool8);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-extern void SetEntityPixelPos(Entity *, s32, s32);
 extern void sub_804652C(Entity *, Entity *, Item *, u32, Position *);
 extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_8045C28(Item *, u8 , u8);
@@ -214,7 +210,6 @@ extern u8 sub_806F4A4(Entity *, u32);
 extern void sub_807DF38(Entity *pokemon, Entity *target, Position *pos, u32, u8 moveType, s16);
 extern void nullsub_92(Entity *);
 extern u32 sub_8055864(Entity *pokemon, Entity *target, Move *param_3, s32 param_4, s32 param_5);
-void sub_8079E34(Entity * pokemon, Entity * target, bool8 param_3);
 extern u8 sub_807EAA0(u32, u32);
 extern void sub_80522F4(Entity *r1, Entity *r2, const char[]);
 extern s32 sub_80556BC(Entity *, Entity *, u8, Move *, u32, u32);
@@ -444,9 +439,9 @@ bool32 sub_805783C(Entity *pokemon, Entity *target, Move *move, s32 param_4)
   return TRUE;
 }
 
-bool32 sub_805785C(Entity *pokemon, Entity *target, Move *move, s32 param_4)
+bool32 RainDanceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-  gDungeon->unkE26B = gUnknown_80F4F42;
+  gDungeon->weather.unkE267[WEATHER_RAIN] = gUnknown_80F4F42;
   if (sub_807EAA0(1,0) == 0) {
     // The weather remains unchanged
     sub_80522F4(pokemon,target,*gUnknown_80FCF74);
@@ -454,9 +449,9 @@ bool32 sub_805785C(Entity *pokemon, Entity *target, Move *move, s32 param_4)
   return TRUE;
 }
 
-bool32 sub_80578A4(Entity *pokemon, Entity *target, Move *move, s32 param_4)
+bool32 HailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-  gDungeon->weatherTurns = gUnknown_80F4F42;
+  gDungeon->weather.unkE267[WEATHER_HAIL]= gUnknown_80F4F42;
   if (sub_807EAA0(1,0) == 0) {
     // The weather remains unchanged
     sub_80522F4(pokemon,target,*gUnknown_80FCF80);
@@ -2038,9 +2033,9 @@ bool8 sub_805946C(Entity * pokemon,Entity * target,Move * move,u32 param_4)
 }
 
 
-bool8 sub_80594E0(Entity *pokemon, Entity *target, Move *move, u32 param_4)
+bool8 SandstormMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
-    gDungeon->unkE269 = gUnknown_80F4F42;
+    gDungeon->weather.unkE267[WEATHER_SANDSTORM] = gUnknown_80F4F42;
     if(sub_807EAA0(1, 0) == 0)
     {
         sub_80522F4(pokemon, target, *gUnknown_80FCF78);
@@ -2732,9 +2727,9 @@ bool8 RolePlayMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
   }
 }
 
-bool8 sub_805A394(Entity *pokemon, Entity *target, Move *move, u32 param_4)
+bool8 SunnyDayMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
-  gDungeon->unkE267[1] = gUnknown_80F4F42;
+  gDungeon->weather.unkE267[WEATHER_SUNNY] = gUnknown_80F4F42;
   if (sub_807EAA0(1,0) == 0) {
     sub_80522F4(pokemon,target,*gUnknown_80FCF7C);
   }
@@ -3071,7 +3066,7 @@ _0805AA5E:
 #else
       Position *pos;
 #endif
-      sub_804535C(target, 0);
+      sub_804535C(target, NULL);
       pos = r9;
       if (sub_80706A4(target, pos)) {
         sub_807D148(pokemon,target,0,0);

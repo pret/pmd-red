@@ -3,6 +3,7 @@
 
 #include "code_8045A00.h"
 #include "code_80521D0.h"
+#include "code_8077274_1.h"
 #include "code_808417C.h"
 #include "constants/trap.h"
 #include "constants/type.h"
@@ -64,37 +65,17 @@ extern Entity* sub_806B7F8(struct unkStruct_806B7F8 *, bool8);
 
 void sub_806A9B4(Entity *, u32);
 
-void sub_8079E34(Entity *param_1, Entity *param_2, u32);
 s16 sub_803D970(u32);
 bool8 sub_806AA0C(s32, s32);
 void sub_80421EC(Position *, u32);
 
 bool8 sub_8045888(Entity *);
-void SetTrap(Tile *, u32);
 void sub_803E708(u32, u32);
 u8 sub_8043D10(void);
 void sub_8068FE0(Entity *, u32, Entity *);
 void sub_805239C(Entity *, u8 *);
 void sub_8045C28(Item *, u8 , u8);
 void sub_8045BF8(u8 *, Item *);
-void HandleTripTrap(Entity *pokemon,Entity *target);
-void HandleMudTrap(Entity *pokemon,Entity *target);
-void HandleStickyTrap(Entity *pokemon,Entity *target);
-void HandleGrimyTrap(Entity *pokemon,Entity *target);
-void HandleSummonTrap(Entity *pokemon,Position *pos);
-void HandlePitfallTrap(Entity *pokemon,Entity *target,Tile *tile);
-void HandleWarpTrap(Entity *pokemon,Entity *target);
-void HandleWhirlwindTrap(Entity *entity,Entity *target);
-void HandleSpinTrap(Entity *pokemon,Entity *target);
-void HandleSlumberTrap(Entity *pokemon,Entity *target);
-void HandleSlowTrap(Entity *pokemon,Entity *target);
-void HandleSealTrap(Entity *pokemon,Entity *target);
-void HandlePoisonTrap(Entity *pokemon,Entity *target);
-void HandleSelfdestructTrap(Entity *pokemon,Entity *target);
-void HandleExplosionTrap(Entity *pokemon,Entity *target);
-void HandlePPZeroTrap(Entity *pokemon,Entity *target);
-void HandleWonderTile(Entity *pokemon,Entity *target);
-void HandlePokemonTrap(Entity *pokemon,Position *pos);
 void sub_806F324(Entity *,s16,u32,u32);
 void sub_806F480(Entity *, u32);
 extern void sub_80421C0(Entity *, u32);
@@ -104,11 +85,20 @@ extern u8 sub_803F428(Position *pos);
 void sub_806A1E8(Entity *pokemon);
 void sub_8052364(Entity *, Position *, u8 *);
 void sub_8049ED4(void);
-void sub_80522F4(Entity *r0, Entity *r1, const char r2[]);
+void sub_80522F4(Entity *pokemon, Entity *target, const char r2[]);
 u8 sub_803D6FC(void);
 Entity *sub_8045684(u8, Position *, u8);
 extern void sub_807D148(Entity *pokemon, Entity *target, u32 r2, Position *r3);
 extern void sub_807DF38(Entity *pokemon, Entity *target, Position *pos, u32, u8 moveType, s16);
+
+void sub_807FC3C(Position *pos, u32 trapID, u32 param_3)
+{
+  gDungeon->trapPos.x = pos->x;
+  gDungeon->trapPos.y = pos->y;
+  gDungeon->trapID = trapID;
+  gDungeon->unk13579 = param_3;
+  gDungeon->unk13570 = 1;
+}
 
 bool8 CanLayTrap(Position *pos)
 {
@@ -681,7 +671,7 @@ void HandlePPZeroTrap(Entity *param_1,Entity *param_2)
   }
 }
 
-void HandleWonderTile(Entity *param_1, Entity *param_2)
+void HandleWonderTile(Entity *pokemon, Entity *target)
 {
-    sub_8079E34(param_1, param_2, 0);
+    sub_8079E34(pokemon, target, FALSE);
 }

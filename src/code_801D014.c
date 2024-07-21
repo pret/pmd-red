@@ -3,12 +3,12 @@
 #include "bg_palette_buffer.h"
 #include "code_800D090.h"
 #include "code_80130A8.h"
-#include "code_801BEEC.h"
+#include "iq_skill_menu.h"
 #include "code_801D014.h"
 #include "code_80227B8.h"
 #include "code_8023868.h"
 #include "code_8024458.h"
-#include "code_8096AF8.h"
+#include "code_80958E8.h"
 #include "common_strings.h"
 #include "constants/friend_area.h"
 #include "event_flag.h"
@@ -264,22 +264,22 @@ static void sub_801D3A8(void)
             sub_8027074();
             break;
         case 5:
-            sub_8025EF4(sUnknown_203B250->pokeStruct);
+            CreatePartyListMenu(sUnknown_203B250->pokeStruct);
             break;
         case 6:
-            sub_80252F0(0);
+            CreateFriendListMenu(0);
             break;
         case 7:
-            sub_80252F0(1);
+            CreateFriendListMenu(1);
             break;
         case 8:
             sub_8024458(sUnknown_203B250->index, 2);
             break;
         case 9:
-            sub_801BEEC(sUnknown_203B250->index);
+            CreateIQSkillMenu(sUnknown_203B250->index);
             break;
         case 10:
-            sub_8021774(sUnknown_203B250->currFriendAreaLocation, TRUE, 2);
+            CreateWigglytuffShopFriendAreaMenu(sUnknown_203B250->currFriendAreaLocation, TRUE, 2);
             break;
         case 11:
             InitializeJobListMenu(0);
@@ -462,7 +462,7 @@ static void sub_801D798(void)
             if (sub_802604C())
                 sUnknown_203B250->unk7 = sUnknown_203B250->currFriendAreaLocation;
 
-            sub_8026058();
+            CleanPartyListMenu();
             sub_801D208(2);
             break;
     }
@@ -478,7 +478,7 @@ static void sub_801D7CC(void)
         case 2:
         case 3:
             sUnknown_203B250->unk7 = sub_802540C();
-            sub_8025418();
+            CleanFriendListMenu();
 
             if (sUnknown_203B250->unk7 != 0)
                 sub_801D208(2);
@@ -512,7 +512,7 @@ static void sub_801D824(void)
             break;
         case 2:
         case 3:
-            sub_801BF98();
+            CleanIQSkillMenu();
             sub_801D208(1);
             break;
     }
@@ -520,14 +520,14 @@ static void sub_801D824(void)
 
 static void sub_801D840(void)
 {
-    switch (sub_80217EC()) {
+    switch (HandleWigglytuffShopFriendAreaMenuInput()) {
         case 0:
         case 1:
         default:
             break;
         case 2:
         case 3:
-            sub_8021830();
+            CleanWigglytuffShopFriendAreaInfoMenu();
             sub_801D208(1);
             break;
     }

@@ -24,6 +24,12 @@ static EWRAM_DATA_2 MakuhitaDojoWork1 *sMakuhitaDojoWork1 = {0};
 
 #include "data/makuhita_dojo1.h"
 
+enum menuActions {
+    CANCEL_ACTION = 1,
+    GO_TRAIN_ACTION,
+    INFO_ACTION
+};
+
 static void MakuhitaDojo_DrawMainMenu(void);
 static void MakuhitaDojo_GoToFallbackState(void);
 static void MakuhitaDojo_SetState(s32);
@@ -105,7 +111,7 @@ bool8 MakuhitaDojo_New(u32 mode)
     return TRUE;
 }
 
-u32 sub_802FE58(void)
+u32 HandleMakuhitaDojoState(void)
 {
     switch (sMakuhitaDojoWork1->state) {
         case 0:
@@ -237,10 +243,10 @@ static void MakuhitaDojo_DrawMainMenu(void)
 {
     s32 loopMax;
 
-    sMakuhitaDojoWork1->menuAction = 2;
+    sMakuhitaDojoWork1->menuAction = GO_TRAIN_ACTION;
     loopMax = 0;
     sMakuhitaDojoWork1->unk18[loopMax].text = sGoTrain;
-    sMakuhitaDojoWork1->unk18[loopMax].menuAction = 2;
+    sMakuhitaDojoWork1->unk18[loopMax].menuAction = GO_TRAIN_ACTION;
 
     if (MakuhitaDojo_ReturnFalse()) {
         sMakuhitaDojoWork1->unk18[loopMax].menuAction = -1;
@@ -249,13 +255,13 @@ static void MakuhitaDojo_DrawMainMenu(void)
 
     loopMax += 1;
     sMakuhitaDojoWork1->unk18[loopMax].text = gCommonInfo[0];
-    sMakuhitaDojoWork1->unk18[loopMax].menuAction = 3;
+    sMakuhitaDojoWork1->unk18[loopMax].menuAction = INFO_ACTION;
     loopMax += 1;
     sMakuhitaDojoWork1->unk18[loopMax].text = gCommonCancel[0];
-    sMakuhitaDojoWork1->unk18[loopMax].menuAction = 1;
+    sMakuhitaDojoWork1->unk18[loopMax].menuAction = CANCEL_ACTION;
     loopMax += 1;
     sMakuhitaDojoWork1->unk18[loopMax].text = NULL;
-    sMakuhitaDojoWork1->unk18[loopMax].menuAction = 1;
+    sMakuhitaDojoWork1->unk18[loopMax].menuAction = CANCEL_ACTION;
 }
 
 static void sub_8030208(void)
@@ -265,13 +271,13 @@ static void sub_8030208(void)
         sMakuhitaDojoWork1->menuAction = menuAction;
 
         switch (menuAction) {
-            case 2:
+            case GO_TRAIN_ACTION:
                 MakuhitaDojo_SetState(3);
                 break;
-            case 3:
+            case INFO_ACTION:
                 MakuhitaDojo_SetState(12);
                 break;
-            case 1:
+            case CANCEL_ACTION:
                 MakuhitaDojo_SetState(2);
                 break;
         }

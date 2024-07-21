@@ -1,7 +1,9 @@
 #include "global.h"
 #include "code_8097670.h"
+#include "exclusive_pokemon.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
+#include "friend_area.h"
 
 static EWRAM_DATA struct unkStruct_203B494 sUnknown_2039778 = {0};
 
@@ -9,6 +11,13 @@ EWRAM_DATA_2 struct unkStruct_203B494 *gUnknown_203B494 = {0};
 
 // data_810AE24.s
 extern const u8 *gAdventureLogText[];
+
+extern void SaveDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
+extern void RestoreDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
+void ReadGameOptions(struct unkStruct_8094924 *param_1);
+void ReadPlayTime(struct unkStruct_8094924 *r0);
+void WriteGameOptions(struct unkStruct_8094924 *param_1);
+void WritePlayTime(struct unkStruct_8094924 *r0);
 
 void sub_8097670(void)
 {
@@ -201,4 +210,202 @@ bool8 sub_8097900(s16 pokeIndex)
     if (preload->unk1C[iVar2 >> 5] & (1 << (baseSpecies + (iVar2 >> 5) * -0x20)))
         return TRUE;
     return FALSE;
+}
+
+void sub_8097944(void)
+{
+    bool8 bVar2;
+    bool8 bVar3;
+    int index;
+    s32 counter;
+    Move *move;
+    PokemonStruct1 *pokeStruct;
+    s32 index1;
+    s32 temp;
+
+    bVar2 = 1;
+    bVar3 = 1;
+    if (!sub_8097710(0xd) && (HasAllFriendAreas())) {
+        sub_80976F8(0xd);
+    }
+
+    for(index = 0; index < NUM_MONSTERS; index++)
+    {
+
+#ifdef NONMATCHING
+        pokeStruct = &index[gRecruitedPokemonRef->pokemon];
+#else
+        register size_t offset asm("r1") = offsetof(unkStruct_203B45C, pokemon[index]);
+        PokemonStruct1* p = gRecruitedPokemonRef->pokemon;
+        size_t addr = offset + (size_t)p;
+        pokeStruct = (PokemonStruct1*)addr;
+#endif
+
+
+        if (((u8)(pokeStruct->unk0) & 1)) {
+        temp = pokeStruct->speciesNum;
+        gUnknown_203B494->unk1C[temp / 32] |= 1 << temp % 32;
+
+            for(index1 = 0; index1 < MAX_MON_MOVES; index1++)
+            {
+                move = &gRecruitedPokemonRef->pokemon[index].moves[index1];
+                if ((move->moveFlags & MOVE_FLAG_EXISTS)) {
+                    gUnknown_203B494->unk8C[move->id / 32] |= 1 << move->id % 32;
+                }
+            }
+        }
+    }
+
+    for(index = 0; index < MONSTER_MAX; index++)
+    {
+        if (index == MONSTER_NONE) continue;
+        if (index == MONSTER_CASTFORM_SNOWY) continue;
+        if (index == MONSTER_CASTFORM_SUNNY) continue;
+        if (index == MONSTER_CASTFORM_RAINY) continue;
+        if (index == MONSTER_DEOXYS_ATTACK) continue;
+        if (index == MONSTER_DEOXYS_DEFENSE) continue;
+        if (index == MONSTER_DEOXYS_SPEED) continue;
+        if (index == MONSTER_MUNCHLAX) continue;
+        if (index == MONSTER_DECOY) continue;
+        if (index == MONSTER_STATUE) continue;
+        if (index == MONSTER_RAYQUAZA_CUTSCENE) continue;
+
+        if ((gUnknown_203B494->unk54[index / 32] & 1 << index % 32) == 0)
+        {
+            bVar3 = 0;
+        }
+        if ((gUnknown_203B494->unk1C[index / 32] & 1 << index % 32) != 0)
+        {
+            if (index == MONSTER_MOLTRES) {
+                sub_80976F8(0x10);
+            }
+            if (index == MONSTER_ZAPDOS) {
+                sub_80976F8(0x11);
+            }
+            if (index == MONSTER_ARTICUNO) {
+                sub_80976F8(0x12);
+            }
+            if (index == MONSTER_DEOXYS_NORMAL) {
+                sub_80976F8(0x13);
+            }
+            if (index == MONSTER_ENTEI) {
+                sub_80976F8(0x14);
+            }
+            if (index == MONSTER_RAIKOU) {
+                sub_80976F8(0x15);
+            }
+            if (index == MONSTER_SUICUNE) {
+                sub_80976F8(0x16);
+            }
+            if (index == MONSTER_HO_OH) {
+                sub_80976F8(0x17);
+            }
+            if (index == MONSTER_KYOGRE) {
+                sub_80976F8(0x18);
+            }
+            if (index == MONSTER_GROUDON) {
+                sub_80976F8(0x19);
+            }
+            if (index == MONSTER_RAYQUAZA) {
+                sub_80976F8(0x1a);
+            }
+            if (index == MONSTER_LUGIA) {
+                sub_80976F8(0x1b);
+            }
+            if (index == MONSTER_CELEBI) {
+                sub_80976F8(0x1c);
+            }
+            if (index == MONSTER_MEW) {
+                sub_80976F8(0x1d);
+            }
+            if (index == MONSTER_MEWTWO) {
+                sub_80976F8(0x1e);
+            }
+            if (index == MONSTER_JIRACHI) {
+                sub_80976F8(0x1f);
+            }
+        }
+        else
+        {
+            bVar2 = 0;
+        }
+    }
+
+    if (bVar2) {
+        sub_80976F8(0xf);
+    }
+    if (bVar3) {
+        sub_80976F8(0xe);
+    }
+    counter = 0;
+    for(index = 0; index < NUM_MONSTERS; index++)
+    {
+        if (index == MONSTER_NONE || index == MONSTER_FLYGON || index == MONSTER_CACNEA || index == MONSTER_CACTURNE) continue;
+        if (gUnknown_203B494->unk8C[index / 32] & 1 << index % 32) {
+            counter++;
+        }
+    }
+    if (counter != 0) {
+        gUnknown_203B494->unk18 = counter;
+        sub_80976F8(7);
+    }
+}
+
+void sub_8097C18(struct unkStruct_8094924 *r0)
+{
+    sub_8097944();
+    SaveIntegerBits(r0, &gUnknown_203B494->numAdventures, 0x11);
+    SaveIntegerBits(r0, &gUnknown_203B494->unk8, 0x11);
+    SaveIntegerBits(r0, &gUnknown_203B494->unkC, 0x11);
+    SaveIntegerBits(r0, &gUnknown_203B494->unk0, 0x20);
+    SaveIntegerBits(r0, &gUnknown_203B494->unk14, 0xE);
+    SaveIntegerBits(r0, &gUnknown_203B494->unk16, 0xE);
+    SaveIntegerBits(r0, &gUnknown_203B494->unk18, 0x9);
+    SaveIntegerBits(r0, &gUnknown_203B494->unkC0, 0x11);
+    SaveIntegerBits(r0, gUnknown_203B494->unk1C, 0xE0 << 1);
+    SaveIntegerBits(r0, gUnknown_203B494->unk54, 0xE0 << 1);
+    SaveIntegerBits(r0, gUnknown_203B494->unk8C, 0xD0 << 1);
+    SaveDungeonLocation(r0, &gUnknown_203B494->dungeonLocation);
+}
+
+void sub_8097CC0(struct unkStruct_8094924 *r0)
+{
+    RestoreIntegerBits(r0, &gUnknown_203B494->numAdventures, 0x11);
+    RestoreIntegerBits(r0, &gUnknown_203B494->unk8, 0x11);
+    RestoreIntegerBits(r0, &gUnknown_203B494->unkC, 0x11);
+    RestoreIntegerBits(r0, &gUnknown_203B494->unk0, 0x20);
+    RestoreIntegerBits(r0, &gUnknown_203B494->unk14, 0xE);
+    RestoreIntegerBits(r0, &gUnknown_203B494->unk16, 0xE);
+    RestoreIntegerBits(r0, &gUnknown_203B494->unk18, 0x9);
+    RestoreIntegerBits(r0, &gUnknown_203B494->unkC0, 0x11);
+    RestoreIntegerBits(r0, gUnknown_203B494->unk1C, 0xE0 << 1);
+    RestoreIntegerBits(r0, gUnknown_203B494->unk54, 0xE0 << 1);
+    RestoreIntegerBits(r0, gUnknown_203B494->unk8C, 0xD0 << 1);
+    RestoreDungeonLocation(r0, &gUnknown_203B494->dungeonLocation);
+}
+
+// Save something...
+u32 sub_8097D60(u8 *r0, u32 size)
+{
+    struct unkStruct_8094924 backup;
+    xxx_init_struct_8094924_save_809486C(&backup, r0, size);
+    WriteGameOptions(&backup);
+    WritePlayTime(&backup);
+    sub_8097C18(&backup);
+    WriteExclusivePokemon(&backup);
+    nullsub_102(&backup);
+    return backup.unk8;
+}
+
+// Read something...
+u32 sub_8097D98(u8 *r0, u32 size)
+{
+    struct unkStruct_8094924 backup;
+    xxx_init_struct_8094924_restore_809485C(&backup, r0, size);
+    ReadGameOptions(&backup);
+    ReadPlayTime(&backup);
+    sub_8097CC0(&backup);
+    ReadExclusivePokemon(&backup);
+    nullsub_102(&backup);
+    return backup.unk8;
 }

@@ -135,7 +135,7 @@ QuickSave:
 	movs r0, 0
 	bl xxx_update_some_bg_tiles
 	bl sub_8014144
-	bl sub_80097B0
+	bl InitFontPalette
 	movs r0, 0x2
 	bl sub_800CDA8
 	movs r0, 0
@@ -316,7 +316,7 @@ sub_80008C0:
 	movs r0, 0
 	bl xxx_update_some_bg_tiles
 	bl sub_8014144
-	bl sub_80097B0
+	bl InitFontPalette
 	movs r0, 0x2
 	bl sub_800CDA8
 	movs r0, 0

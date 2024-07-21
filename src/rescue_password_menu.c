@@ -641,7 +641,7 @@ u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, unkStruct_203B480 *param_3)
         if (param_3->mailType != WONDER_MAIL_TYPE_SOS) {
             return PASSWORD_ENTRY_NOT_SOS_MAIL;
         }
-        else if ( (HasMail(2, param_3->unk10.unk10)) || (HasMail(WONDER_MAIL_TYPE_AOK, param_3->unk10.unk10)) || (HasMail(WONDER_MAIL_TYPE_COMPLETED, param_3->unk10.unk10)) || (sub_8095298(param_3->unk10.unk10))) {
+        else if ( (HasMail(WONDER_MAIL_TYPE_SOS_1, param_3->unk10.unk10)) || (HasMail(WONDER_MAIL_TYPE_AOK, param_3->unk10.unk10)) || (HasMail(WONDER_MAIL_TYPE_COMPLETED, param_3->unk10.unk10)) || (sub_8095298(param_3->unk10.unk10))) {
             return PASSWORD_ENTRY_DUPLICATE_SOS_MAIL;
         }
         else if (FindOpenMailSlot() == -1) {

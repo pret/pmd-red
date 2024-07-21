@@ -5,140 +5,6 @@
 
 	.text
 
-        thumb_func_start sub_803D110
-sub_803D110:
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0x6C
-	adds r6, r0, 0
-	mov r9, r1
-	adds r5, r2, 0
-	add r7, sp, 0x48
-	adds r2, r7, 0
-	movs r1, 0
-	mov r0, sp
-	adds r0, 0x69
-_0803D12A:
-	strb r1, [r0]
-	subs r0, 0x1
-	cmp r0, r2
-	bge _0803D12A
-	movs r4, 0
-	cmp r4, r5
-	bge _0803D158
-_0803D138:
-	ldrb r0, [r6]
-	bl sub_803D0F0
-	add r1, sp, 0x10
-	adds r1, r4
-	strb r0, [r1]
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xFF
-	bne _0803D150
-	movs r0, 0
-	b _0803D19A
-_0803D150:
-	adds r6, 0x1
-	adds r4, 0x1
-	cmp r4, r5
-	blt _0803D138
-_0803D158:
-	lsls r0, r5, 2
-	adds r0, r5
-	adds r2, r0, 0x5
-	cmp r2, 0
-	bge _0803D164
-	adds r2, 0x7
-_0803D164:
-	asrs r2, 3
-	mov r8, r2
-	mov r0, sp
-	adds r1, r7, 0
-	bl xxx_init_struct_8094924_save_809486C
-	movs r4, 0
-	cmp r4, r5
-	bge _0803D188
-	add r6, sp, 0x10
-_0803D178:
-	adds r1, r6, r4
-	mov r0, sp
-	movs r2, 0x5
-	bl SaveIntegerBits
-	adds r4, 0x1
-	cmp r4, r5
-	blt _0803D178
-_0803D188:
-	mov r0, sp
-	bl nullsub_102
-	mov r0, r9
-	adds r1, r7, 0
-	mov r2, r8
-	bl MemoryCopy8
-	movs r0, 0x1
-_0803D19A:
-	add sp, 0x6C
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_803D110
-
-	thumb_func_start sub_803D1A8
-sub_803D1A8:
-	push {r4-r7,lr}
-	sub sp, 0x48
-	adds r7, r0, 0
-	adds r5, r2, 0
-	lsls r0, r5, 2
-	adds r0, r5
-	adds r2, r0, 0x5
-	cmp r2, 0
-	bge _0803D1BC
-	adds r2, 0x7
-_0803D1BC:
-	asrs r2, 3
-	mov r0, sp
-	bl xxx_init_struct_8094924_restore_809485C
-	movs r4, 0
-	cmp r4, r5
-	bge _0803D1DC
-	add r6, sp, 0x10
-_0803D1CC:
-	adds r1, r6, r4
-	mov r0, sp
-	movs r2, 0x5
-	bl RestoreIntegerBits
-	adds r4, 0x1
-	cmp r4, r5
-	blt _0803D1CC
-_0803D1DC:
-	mov r0, sp
-	bl nullsub_102
-	movs r4, 0
-	cmp r4, r5
-	bge _0803D1FC
-	add r6, sp, 0x10
-_0803D1EA:
-	adds r0, r6, r4
-	ldrb r0, [r0]
-	bl sub_803D100
-	strb r0, [r7]
-	adds r7, 0x1
-	adds r4, 0x1
-	cmp r4, r5
-	blt _0803D1EA
-_0803D1FC:
-	add sp, 0x48
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_803D1A8
-
 	thumb_func_start sub_803D204
 sub_803D204:
 	push {r4-r7,lr}
@@ -3458,7 +3324,7 @@ _0803EC34:
 _0803EC46:
 	movs r0, 0x2
 	adds r1, r5, 0
-	bl sub_801602C
+	bl CreateConfirmNameMenu 
 	b _0803EC84
 	.align 2, 0
 _0803EC50: .4byte gUnknown_203B40C

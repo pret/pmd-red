@@ -48,10 +48,10 @@ extern const u8 *const gUnknown_80FC718[];
 extern u8 gUnknown_202DE58[];
 extern u8 gAvailablePokemonNames[];
 
-extern bool8 gCanAttackInDirection[NUM_DIRECTIONS];
-extern s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS];
-extern u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS];
-extern Entity *gPotentialTargets[NUM_DIRECTIONS];
+EWRAM_DATA bool8 gCanAttackInDirection[NUM_DIRECTIONS] = {0};
+EWRAM_DATA u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS] = {0};
+EWRAM_DATA s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS] = {0};
+EWRAM_DATA Entity *gPotentialTargets[NUM_DIRECTIONS] = {0};
 
 extern void sub_8055A00(Entity *, u8, u32, u32, u32);
 extern void sub_806A9B4(Entity *, u8);

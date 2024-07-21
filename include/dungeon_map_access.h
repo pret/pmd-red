@@ -10,5 +10,6 @@ typedef struct unkStruct_202F190
 
 Tile *GetTile(s32 x, s32 y);
 Tile *GetTileSafe(s32 x, s32 y);
+void sub_804AC20(Position *pos);
 
 #endif

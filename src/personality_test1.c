@@ -348,14 +348,14 @@ static void AdvanceToPartnerNicknameScreen(void)
 static void NicknamePartner(void)
 {
     CopyStringtoBuffer(sPersonalityTestTracker->PartnerNick, GetMonSpecies(sPersonalityTestTracker->PartnerID));
-    sub_801602C(3, sPersonalityTestTracker->PartnerNick);
+    CreateConfirmNameMenu(3, sPersonalityTestTracker->PartnerNick);
     sPersonalityTestTracker->TestState = PERSONALITY_END_INTRO;
 }
 
 static void PrintEndIntroText(void)
 {
     if (sub_8016080()) {
-        sub_80160D8();
+        CleanConfirmNameMenu();
         sub_80141B4(gEndIntroText, 0, 0, 0x301);
         sPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_TEST_END;
     }

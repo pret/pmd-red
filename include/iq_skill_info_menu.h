@@ -1,12 +1,12 @@
-#ifndef GUARD_CODE_801C620_H
-#define GUARD_CODE_801C620_H
+#ifndef GUARD_IQ_SKILL_INFO_MENU_H
+#define GUARD_IQ_SKILL_INFO_MENU_H
 
 #include "structs/menu.h"
 #include "structs/subStruct_203B240.h"
 #include "structs/str_text.h"
 
 // size: 0x94
-struct unkStruct_203B240
+struct IQSkillInfoMenu
 {
     /* 0x0 */ s32 state;
     /* 0x4 */ u8 chosenIQSkill;
@@ -20,8 +20,8 @@ struct unkStruct_203B240
     MenuInputStructSub unk88;
 };
 
-bool8 sub_801C620(u8 iqSkill);
-u32 sub_801C674(void);
-void sub_801C6B4(void);
+bool8 CreateIQSkillInfoMenu(u8 iqSkill);
+u32 HandleIQSkillInfoMenuState(void);
+void CleanIQSkillInfoMenu(void);
 
-#endif // GUARD_CODE_801C620_H
+#endif // GUARD_IQ_SKILL_INFO_MENU_H

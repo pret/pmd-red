@@ -375,13 +375,13 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             break;
         }
         case MOVE_MUD_SPORT:
-            if (gDungeon->mudSportTurns > 0)
+            if (gDungeon->weather.mudSportTurns > 0)
             {
                 return FALSE;
             }
             break;
         case MOVE_WATER_SPORT:
-            if (gDungeon->waterSportTurns > 0)
+            if (gDungeon->weather.waterSportTurns > 0)
             {
                 return FALSE;
             }

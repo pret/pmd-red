@@ -2,7 +2,7 @@
 #include "bg_control.h"
 #include "cpu.h"
 
-extern u32 gUnknown_202D800;
+EWRAM_DATA u32 gUnknown_202D800 = {0};
 extern u16 gUnknown_203B0BE[];
 extern u16 *gUnknown_2026E3C;
 extern u8 gUnknown_2026E38;

@@ -115,9 +115,9 @@ SECTIONS {
         src/code_801AFA4.o(.text);
         src/code_801B3C0.o(.text);
         src/code_801B60C.o(.text);
-        src/code_801BEEC.o(.text);
-        src/code_801C244.o(.text);
-        src/code_801C620.o(.text);
+        src/iq_skill_menu.o(.text);
+        src/iq_skill_list_menu.o(.text);
+        src/iq_skill_info_menu.o(.text);
         src/code_801C8C4.o(.text);
         src/code_801D014.o(.text);
         src/code_801D9E4.o(.text);
@@ -160,6 +160,8 @@ SECTIONS {
         src/mailbox.o(.text);
         src/pelipper_board.o(.text);
         src/wonder_mail_3_mid.o(.text);
+        src/mission_reward.o(.text);
+        src/code_8072F3C.o(.text);
         asm/wonder_mail_3_mid.o(.text);
         src/wonder_mail_3_1.o(.text);
         src/makuhita_dojo1.o(.text);
@@ -221,7 +223,7 @@ SECTIONS {
         src/code_8048480.o(.text);
         src/dungeon_ai_item_weight.o(.text);
         src/dungeon_map_access.o(.text);
-        asm/code_80495E4.o(.text);
+        asm/dungeon_map_access.o(.text);
         src/dungeon_map_access_1.o(.text);
         src/tile_types.o(.text);
         asm/code_804AFAC.o(.text);
@@ -275,7 +277,6 @@ SECTIONS {
         src/code_807CD9C.o(.text);
         src/weather.o(.text);
         asm/code_807E5AC.o(.text);
-        src/code_807E5AC.o(.text);
         src/trap.o(.text);
         asm/code_807FCD4.o(.text);
         src/trap_1.o(.text);
@@ -317,20 +318,14 @@ SECTIONS {
         src/code_809447C.o(.text);
         src/code_8092334.o(.text);
         src/game_options.o(.text);
+        src/code_8094D28.o(.text);
         asm/code_8094D28.o(.text);
         src/play_time.o(.text);
         src/code_8094F88.o(.text);
         src/code_80958E8.o(.text);
-        asm/code_80958E8.o(.text);
-        src/code_80958E8_mid.o(.text);
-        src/mailbox_8095F8C.o(.text);
-        asm/code_80958E8_1.o(.text);
-        src/code_80958E8_1.o(.text);
-        asm/code_8096AF8.o(.text);
         src/code_80972F4.o(.text);
         src/code_8097504.o(.text);
         src/code_8097670.o(.text);
-        asm/code_8097670.o(.text);
         src/code_8097DD0.o(.text);
         asm/code_8097DD0.o(.text);
         src/code_8097F40.o(.text);
@@ -341,6 +336,7 @@ SECTIONS {
         asm/code_8098BDC.o(.text);
         src/code_809A560.o(.text);
         asm/code_809A560.o(.text);
+        src/code_809A560_1.o(.text);
         src/code_809C5C4.o(.text);
         asm/code_809C5C4.o(.text);
         src/code_809D148.o(.text);
@@ -457,9 +453,9 @@ SECTIONS {
         src/code_801AFA4.o(.rodata);
         src/code_801B3C0.o(.rodata);
         src/code_801B60C.o(.rodata);
-        src/code_801BEEC.o(.rodata);
-        src/code_801C244.o(.rodata);
-        src/code_801C620.o(.rodata);
+        src/iq_skill_menu.o(.rodata);
+        src/iq_skill_list_menu.o(.rodata);
+        src/iq_skill_info_menu.o(.rodata);
         src/code_801C8C4.o(.rodata);
         src/code_801D014.o(.rodata);
         src/code_801D9E4.o(.rodata);
@@ -499,6 +495,8 @@ SECTIONS {
         src/mailbox.o(.rodata);
         src/pelipper_board.o(.rodata);
         src/wonder_mail_3_mid.o(.rodata);
+        src/mission_reward.o(.rodata);
+        src/code_8072F3C.o(.rodata);
         src/makuhita_dojo1.o(.rodata);
         src/makuhita_dojo2.o(.rodata);
         src/wonder_mail_4.o(.rodata);
@@ -548,6 +546,7 @@ SECTIONS {
         data/data_80F59C8.o(.rodata);
         src/charge_move.o(.rodata);
         data/data_8106A4C.o(.rodata);
+        src/code_806CD90.o(.rodata);
         src/type_effectiveness.o(.data);
         data/data_8106F7C.o(.rodata);
         src/dungeon_capabilities.o(.rodata);

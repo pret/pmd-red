@@ -17,6 +17,13 @@ static EWRAM_DATA_2 unkStruct_203B3F4 *sUnknown_203B3F4 = {0};
 
 #include "data/debug_menu3.h"
 
+enum menuActions {
+    CANCEL_ACTION = 1,
+    OPEN_ACTION,
+    CLOSE_ACTION,
+    INFO_ACTION
+};
+
 static void sub_803A924(u32 newState);
 static void sub_803A93C(void);
 static void sub_803A9AC(void);
@@ -101,7 +108,7 @@ static void sub_803A9AC(void)
             sub_8012D60(&sUnknown_203B3F4->unk4C, sUnknown_203B3F4->menuItems, 0, 0, sUnknown_203B3F4->menuAction, 2);
             break;
         case 3:
-            sub_8021774(sUnknown_203B3F4->friendArea, 1, 0);
+            CreateWigglytuffShopFriendAreaMenu(sUnknown_203B3F4->friendArea, TRUE, 0);
             break;
         case 4:
             break;
@@ -121,22 +128,22 @@ static void sub_803AA34(void)
         sUnknown_203B3F4->menuItems[0].text = sClose;
 
         if (sub_803ABC8())
-            sUnknown_203B3F4->menuItems[0].menuAction = 3;
+            sUnknown_203B3F4->menuItems[0].menuAction = CLOSE_ACTION;
         else
             sUnknown_203B3F4->menuItems[0].menuAction = -1;
     }
     else {
         sUnknown_203B3F4->menuItems[0].text = sOpen;
-        sUnknown_203B3F4->menuItems[0].menuAction = 2;
+        sUnknown_203B3F4->menuItems[0].menuAction = OPEN_ACTION;
     }
 
     index++;
     sUnknown_203B3F4->menuItems[index].text = gCommonInfo[0];
-    sUnknown_203B3F4->menuItems[index].menuAction = 4;
+    sUnknown_203B3F4->menuItems[index].menuAction = INFO_ACTION;
 
     index++;
     sUnknown_203B3F4->menuItems[index].text = NULL;
-    sUnknown_203B3F4->menuItems[index].menuAction = 1;
+    sUnknown_203B3F4->menuItems[index].menuAction = CANCEL_ACTION;
 
     sUnknown_203B3F4->menuAction = sUnknown_203B3F4->menuItems[0].menuAction;
 }
@@ -174,18 +181,18 @@ static void sub_803AB34(void)
         sub_8013114(&sUnknown_203B3F4->unk4C, &menuAction);
 
     switch (menuAction) {
-        case 2:
+        case OPEN_ACTION:
             UnlockFriendArea(sUnknown_203B3F4->friendArea);
             sub_803A924(1);
             break;
-        case 3:
+        case CLOSE_ACTION:
             sub_809249C(sUnknown_203B3F4->friendArea, 1);
             sub_803A924(1);
             break;
-        case 4:
+        case INFO_ACTION:
             sub_803A924(3);
             break;
-        case 1:
+        case CANCEL_ACTION:
             sub_803A924(1);
             break;
     }
@@ -193,10 +200,10 @@ static void sub_803AB34(void)
 
 static void sub_803ABAC(void)
 {
-    switch (sub_80217EC()) {
+    switch (HandleWigglytuffShopFriendAreaMenuInput()) {
         case 2:
         case 3:
-            sub_8021830();
+            CleanWigglytuffShopFriendAreaInfoMenu();
             sub_803A924(1);
             break;
         case 0:

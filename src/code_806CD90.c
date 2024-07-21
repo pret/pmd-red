@@ -11,8 +11,7 @@
 #include "sprite.h"
 #include "tile_types.h"
 
-// data_8106A4C.s
-extern const u8 gUnknown_8106EEF[];
+const u8 gUnknown_8106EEF[] = {0x03, 0x04, 0x05, 0x00, 0x00, 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00 };
 
 // code_803D110.s
 extern void sub_803E46C(u32);
@@ -32,7 +31,7 @@ void sub_806CC10(void)
             if (entityInfo->unk166 != 0) {
                 entityInfo->unk166--;
                 if ((entityInfo->unk166 & 1) == 0) // If value is even:
-                    sub_806CDD4(entity, 0, (entityInfo->action.direction - 1) & 7);
+                    sub_806CDD4(entity, 0, (entityInfo->action.direction - 1) & DIRECTION_MASK);
             }
         }
     }
@@ -208,25 +207,25 @@ void sub_806CF60(void)
 u32 sub_806CF98(Entity *entity)
 {
     struct Tile *mapTile;
-    u32 uVar3;
+    u32 shadowSize;
     u16 terrainType;
     EntityInfo *entityInfo;
 
     mapTile = GetTileAtEntitySafe(entity);
     terrainType = mapTile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
     entityInfo = entity->info;
-    uVar3 = GetShadowSize(entityInfo->apparentID);
+    shadowSize = GetShadowSize(entityInfo->apparentID);
 
     if (terrainType == (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY))
         return 6;
 
     if (terrainType == TERRAIN_TYPE_NORMAL) {
         if (IsWaterTileset())
-            uVar3 = gUnknown_8106EEF[uVar3];
+            shadowSize = gUnknown_8106EEF[shadowSize];
     }
     else if (terrainType == TERRAIN_TYPE_SECONDARY && gDungeonWaterType[gDungeon->tileset] != DUNGEON_WATER_TYPE_LAVA)
-        uVar3 = gUnknown_8106EEF[uVar3];
+        shadowSize = gUnknown_8106EEF[shadowSize];
 
-    entityInfo->unk204 = uVar3;
-    return uVar3;
+    entityInfo->unk204 = shadowSize;
+    return shadowSize;
 }

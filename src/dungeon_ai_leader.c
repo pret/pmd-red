@@ -23,6 +23,8 @@
 #include "dungeon_visibility.h"
 #include "pokemon_3.h"
 #include "pokemon.h"
+#include "code_8077274_1.h"
+#include "trap.h"
 
 extern u8 gUnknown_202F221;
 extern u8 gUnknown_202F222;
@@ -55,7 +57,6 @@ void HandlePickUpPlayerAction(Entity *);
 void sub_8066E14(Entity * );
 void sub_807348C(void);
 void sub_80732F0(void);
-void sub_807FD84(Entity *);
 void sub_8066BD4(Entity*);
 void HandleTalkFieldAction(Entity *);
 void HandleUseMovePlayerAction(Entity *);
@@ -67,7 +68,6 @@ void HandleUseItemAction(Entity *);
 void sub_8066FA4(Entity *);
 void HandleSetItemAction(Entity *,bool8);
 void HandleUnsetItemAction(Entity *,bool8);
-void sub_807FE9C(Entity *,Position *,u32,u32);
 extern u8 sub_8044B28(void);
 extern u8 UseAttack(Entity *);
 void sub_8052740(u32);
@@ -79,7 +79,6 @@ void HandlePickUpAIAction(Entity *pokemon);
 void HandleThrowItemAIAction(Entity *pokemon);
 void HandleEatAIAction(Entity *pokemon);
 bool8 sub_8044B84(void);
-void sub_8046D20(void);
 extern void sub_8074094(Entity *);
 extern void sub_8071DA4(Entity *);
 extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, Position *r3);

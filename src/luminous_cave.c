@@ -50,6 +50,16 @@ enum
     LUMINOUS_CAVE_CANT_EVOLVE_YET,
 };
 
+enum LuminousCaveMenuActions
+{
+    LUMINOUS_CAVE_CANCEL = 1,
+    LUMINOUS_CAVE_INFO,
+    LUMINOUS_CAVE_EVOLVE,
+    LUMINOUS_CAVE_NO,
+    LUMINOUS_CAVE_YES,
+
+};
+
 extern u8 gAvailablePokemonNames[]; // 202DF98
 extern u8 gPlayerName[]; // 202E2B8
 
@@ -209,9 +219,9 @@ static void UpdateLuminousCaveDialogue(void)
     switch (sLuminousCaveWork->state) {
         case LUMINOUS_CAVE_ENTRY:
             if (LuminousCave_HasOnly1Member())
-                sLuminousCaveWork->menuAction1 = 3;
+                sLuminousCaveWork->menuAction1 = LUMINOUS_CAVE_EVOLVE;
             else
-                sLuminousCaveWork->menuAction1 = 1;
+                sLuminousCaveWork->menuAction1 = LUMINOUS_CAVE_CANCEL;
 
             sub_8024CFC();
             sub_8014248(sSeekEvolutionIntro,0,sLuminousCaveWork->menuAction1,sLuminousCaveWork->unk34,sLuminousCaveWork->unk74,4,0,0,5);
@@ -366,7 +376,7 @@ static void UpdateLuminousCaveDialogue(void)
             if (sLuminousCaveWork->pokeRenamed) {
                     BoundedCopyStringtoBuffer(sLuminousCaveWork->pokeStruct->name,GetMonSpecies(sLuminousCaveWork->pokeStruct->speciesNum),POKEMON_NAME_LENGTH);
             }
-            sub_801602C(0,sLuminousCaveWork->pokeStruct->name);
+            CreateConfirmNameMenu(0,sLuminousCaveWork->pokeStruct->name);
             break;
         default:
             break;
@@ -380,19 +390,19 @@ static void sub_8024CFC(void)
     MemoryFill16(sLuminousCaveWork->unk74, 0, sizeof(sLuminousCaveWork->unk74));
 
     sLuminousCaveWork->unk34[loopMax].text = sEvolve0;
-    sLuminousCaveWork->unk34[loopMax].menuAction = 3;
+    sLuminousCaveWork->unk34[loopMax].menuAction = LUMINOUS_CAVE_EVOLVE;
 
     loopMax += 1;
     sLuminousCaveWork->unk34[loopMax].text = gCommonInfo[0];
-    sLuminousCaveWork->unk34[loopMax].menuAction = 2;
+    sLuminousCaveWork->unk34[loopMax].menuAction = LUMINOUS_CAVE_INFO;
 
     loopMax += 1;
     sLuminousCaveWork->unk34[loopMax].text = gCommonCancel[0];
-    sLuminousCaveWork->unk34[loopMax].menuAction = 1;
+    sLuminousCaveWork->unk34[loopMax].menuAction = LUMINOUS_CAVE_CANCEL;
 
     loopMax += 1;
     sLuminousCaveWork->unk34[loopMax].text = NULL;
-    sLuminousCaveWork->unk34[loopMax].menuAction = 1;
+    sLuminousCaveWork->unk34[loopMax].menuAction = LUMINOUS_CAVE_CANCEL;
 }
 
 static void sub_8024D48(void)
@@ -403,16 +413,16 @@ static void sub_8024D48(void)
     loopMax = 0;
     MemoryFill16(sLuminousCaveWork->unk74, 0, sizeof(sLuminousCaveWork->unk74));
     sLuminousCaveWork->unk34[loopMax].text = sNo0;
-    sLuminousCaveWork->unk34[loopMax].menuAction = 4;
+    sLuminousCaveWork->unk34[loopMax].menuAction = LUMINOUS_CAVE_NO;
     loopMax += 1;
     sLuminousCaveWork->unk34[loopMax].text = sYes0;
-    sLuminousCaveWork->unk34[loopMax].menuAction = 5;
+    sLuminousCaveWork->unk34[loopMax].menuAction = LUMINOUS_CAVE_YES;
     loopMax += 1;
     sLuminousCaveWork->unk34[loopMax].text = gCommonCancel[0];
-    sLuminousCaveWork->unk34[loopMax].menuAction = 1;
+    sLuminousCaveWork->unk34[loopMax].menuAction = LUMINOUS_CAVE_CANCEL;
     loopMax += 1;
     sLuminousCaveWork->unk34[loopMax].text = NULL;
-    sLuminousCaveWork->unk34[loopMax].menuAction = 1;
+    sLuminousCaveWork->unk34[loopMax].menuAction = LUMINOUS_CAVE_CANCEL;
 
     for (index = 0; index < loopMax; index++) {
         if (sLuminousCaveWork->unk74[index] == 0) {
@@ -421,7 +431,7 @@ static void sub_8024D48(void)
         }
     }
 
-    sLuminousCaveWork->menuAction2 = 4;
+    sLuminousCaveWork->menuAction2 = LUMINOUS_CAVE_NO;
 }
 
 static void sub_8024DBC(void)
@@ -432,16 +442,16 @@ static void sub_8024DBC(void)
     loopMax = 0;
     MemoryFill16(sLuminousCaveWork->unk74, 0, sizeof(sLuminousCaveWork->unk74));
     sLuminousCaveWork->unk34[loopMax].text = sNo0;
-    sLuminousCaveWork->unk34[loopMax].menuAction = 4;
+    sLuminousCaveWork->unk34[loopMax].menuAction = LUMINOUS_CAVE_NO;
     loopMax += 1;
     sLuminousCaveWork->unk34[loopMax].text = sYes0;
-    sLuminousCaveWork->unk34[loopMax].menuAction = 5;
+    sLuminousCaveWork->unk34[loopMax].menuAction = LUMINOUS_CAVE_YES;
     loopMax += 1;
     sLuminousCaveWork->unk34[loopMax].text = gCommonCancel[0];
-    sLuminousCaveWork->unk34[loopMax].menuAction = 1;
+    sLuminousCaveWork->unk34[loopMax].menuAction = LUMINOUS_CAVE_CANCEL;
     loopMax += 1;
     sLuminousCaveWork->unk34[loopMax].text = NULL;
-    sLuminousCaveWork->unk34[loopMax].menuAction = 1;
+    sLuminousCaveWork->unk34[loopMax].menuAction = LUMINOUS_CAVE_CANCEL;
 
     for(index = 0; index < loopMax; index++)
     {
@@ -452,7 +462,7 @@ static void sub_8024DBC(void)
         }
     }
 
-    sLuminousCaveWork->menuAction2 = 4;
+    sLuminousCaveWork->menuAction2 = LUMINOUS_CAVE_NO;
 }
 
 static void sub_8024E30(void)
@@ -463,13 +473,13 @@ static void sub_8024E30(void)
     loopMax = 0;
     MemoryFill16(sLuminousCaveWork->unk74, 0, sizeof(sLuminousCaveWork->unk74));
     sLuminousCaveWork->unk34[loopMax].text = sYes0;
-    sLuminousCaveWork->unk34[loopMax].menuAction = 5;
+    sLuminousCaveWork->unk34[loopMax].menuAction = LUMINOUS_CAVE_YES;
     loopMax += 1;
     sLuminousCaveWork->unk34[loopMax].text = gCommonInfo[0];
-    sLuminousCaveWork->unk34[loopMax].menuAction = 2;
+    sLuminousCaveWork->unk34[loopMax].menuAction = LUMINOUS_CAVE_INFO;
     loopMax += 1;
     sLuminousCaveWork->unk34[loopMax].text = NULL;
-    sLuminousCaveWork->unk34[loopMax].menuAction = 1;
+    sLuminousCaveWork->unk34[loopMax].menuAction = LUMINOUS_CAVE_CANCEL;
 
     for(index = 0; index < loopMax; index++)
     {
@@ -480,7 +490,7 @@ static void sub_8024E30(void)
         }
     }
 
-    sLuminousCaveWork->menuAction3 = 5;
+    sLuminousCaveWork->menuAction3 = LUMINOUS_CAVE_YES;
 }
 
 static void sub_8024E9C(void)
@@ -488,19 +498,19 @@ static void sub_8024E9C(void)
     s32 menuAction;
     if(sub_80144A4(&menuAction) == 0)
     {
-        if(menuAction != 1) sLuminousCaveWork->menuAction1 = menuAction;
+        if(menuAction != LUMINOUS_CAVE_CANCEL) sLuminousCaveWork->menuAction1 = menuAction;
         switch(menuAction)
         {
-            case 3:
+            case LUMINOUS_CAVE_EVOLVE:
                 if(LuminousCave_HasOnly1Member())
                     UpdateLuminousCaveState(LUMINOUS_CAVE_GIVE_ITEM_1);
                 else
                     UpdateLuminousCaveState(LUMINOUS_CAVE_COME_ALONE);
                 break;
-            case 2:
+            case LUMINOUS_CAVE_INFO:
                 UpdateLuminousCaveState(LUMINOUS_CAVE_EVOLVE_INFO);
                 break;
-            case 1:
+            case LUMINOUS_CAVE_CANCEL:
                 UpdateLuminousCaveState(LUMINOUS_CAVE_SHALL_RETURN);
                 break;
         }
@@ -512,21 +522,21 @@ static void sub_8024F00(void)
     s32 menuAction;
     if(sub_80144A4(&menuAction) == 0)
     {
-        if(menuAction != 1) sLuminousCaveWork->menuAction2 = menuAction;
+        if(menuAction != LUMINOUS_CAVE_CANCEL) sLuminousCaveWork->menuAction2 = menuAction;
         switch(menuAction)
         {
-            case 4:
+            case LUMINOUS_CAVE_NO:
                 sLuminousCaveWork->evoItem1_InvIndex = INVENTORY_SIZE;
                 sLuminousCaveWork->evoItem2_InvIndex = INVENTORY_SIZE;
                 UpdateLuminousCaveState(LUMINOUS_CAVE_LET_US_BEGIN);
                 break;
-            case 5:
+            case LUMINOUS_CAVE_YES:
                 if(GetNumberOfFilledInventorySlots() == 0)
                     UpdateLuminousCaveState(LUMINOUS_CAVE_LACK_WHAT_NEEDED);
                 else
                     UpdateLuminousCaveState(0x6);
                 break;
-            case 1:
+            case LUMINOUS_CAVE_CANCEL:
                 UpdateLuminousCaveState(LUMINOUS_CAVE_ASK_EVOLVE);
                 break;
         }
@@ -538,19 +548,19 @@ static void sub_8024F70(void)
     s32 menuAction;
     if(sub_80144A4(&menuAction) == 0)
     {
-        if(menuAction != 1) sLuminousCaveWork->menuAction2 = menuAction;
+        if(menuAction != LUMINOUS_CAVE_CANCEL) sLuminousCaveWork->menuAction2 = menuAction;
         switch(menuAction)
         {
-            case 4:
+            case LUMINOUS_CAVE_NO:
                 UpdateLuminousCaveState(LUMINOUS_CAVE_LET_US_BEGIN);
                 break;
-            case 5:
+            case LUMINOUS_CAVE_YES:
                 if(GetNumberOfFilledInventorySlots() < 2)
                     UpdateLuminousCaveState(LUMINOUS_CAVE_ONLY_ONE_ITEM);
                 else
                     UpdateLuminousCaveState(0xB);
                 break;
-            case 1:
+            case LUMINOUS_CAVE_CANCEL:
                 UpdateLuminousCaveState(LUMINOUS_CAVE_ASK_EVOLVE);
                 break;
         }
@@ -614,19 +624,19 @@ static void sub_80250EC(void)
     if(!sub_8012FD8(&sLuminousCaveWork->unk84))
     {
         sub_8013114(&sLuminousCaveWork->unk84, &menuAction);
-        if(menuAction != 1) sLuminousCaveWork->menuAction3 = menuAction;
+        if(menuAction != LUMINOUS_CAVE_CANCEL) sLuminousCaveWork->menuAction3 = menuAction;
     }
     switch(menuAction)
     {
-        case 5:
+        case LUMINOUS_CAVE_YES:
             sub_801A928();
             UpdateLuminousCaveState(0xA);
             break;
-        case 2:
+        case LUMINOUS_CAVE_INFO:
             sub_8099690(0);
             UpdateLuminousCaveState(0x9);
             break;
-        case 1:
+        case LUMINOUS_CAVE_CANCEL:
             UpdateLuminousCaveState(0x7);
             break;
     }
@@ -641,19 +651,19 @@ static void sub_802515C(void)
     if(!sub_8012FD8(&sLuminousCaveWork->unk84))
     {
         sub_8013114(&sLuminousCaveWork->unk84, &menuAction);
-        if(menuAction != 1) sLuminousCaveWork->menuAction3 = menuAction;
+        if(menuAction != LUMINOUS_CAVE_CANCEL) sLuminousCaveWork->menuAction3 = menuAction;
     }
     switch(menuAction)
     {
-        case 5:
+        case LUMINOUS_CAVE_YES:
             sub_801A928();
             UpdateLuminousCaveState(LUMINOUS_CAVE_LET_US_BEGIN);
             break;
-        case 2:
+        case LUMINOUS_CAVE_INFO:
             sub_8099690(0);
             UpdateLuminousCaveState(0xE);
             break;
-        case 1:
+        case LUMINOUS_CAVE_CANCEL:
             UpdateLuminousCaveState(0xC);
             break;
     }
@@ -694,7 +704,7 @@ static void sub_8025204(void)
     switch(sub_8016080())
     {
         case 3:
-            sub_80160D8();
+            CleanConfirmNameMenu();
             sLuminousCaveWork->pokeRenamed = IsPokemonRenamed(sLuminousCaveWork->pokeStruct);
             UpdateLuminousCaveState(LUMINOUS_CAVE_SHALL_RETURN);
             break;

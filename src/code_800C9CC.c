@@ -3,8 +3,8 @@
 #include "random.h"
 #include "reg_control.h"
 
-extern u32 gUnknown_203B0B8;
-extern u16 gRawKeyInput;
+EWRAM_DATA_2 u32 gUnknown_203B0B8 = {0};
+EWRAM_DATA_2 u16 gRawKeyInput = {0};
 
 void sub_800CB20(void)
 {

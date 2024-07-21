@@ -16,10 +16,9 @@ extern u8 gAvailablePokemonNames[];
 
 struct unkStruct_203B278
 {
-    s32 state;
-    u16 *moveIDs;
-    u16 unk8;
-    u16 fillA;
+    /* 0x0 */ s32 state;
+    /* 0x4 */ u16 *moveIDs;
+    /* 0x8 */ u16 selectedMoveID;
     s32 unkC;
     s32 unk10;
     struct subStruct_203B240 *unk14[4];
@@ -141,8 +140,8 @@ void sub_801F9A4(void)
     switch (gUnknown_203B278->state) {
         case 0:
             sub_8008C54(gUnknown_203B278->unk5C);
-            gUnknown_203B278->unk8 = gUnknown_203B278->moveIDs[gUnknown_203B278->unk28.unk1E];
-            gUnknown_203B278->unk10 = unk_MoveIDPrintMoveDescription(gUnknown_203B278->unk28.unk1E,gUnknown_203B278->unk8,gUnknown_203B278->unk5C,gUnknown_203B278->unk14);
+            gUnknown_203B278->selectedMoveID = gUnknown_203B278->moveIDs[gUnknown_203B278->unk28.unk1E];
+            gUnknown_203B278->unk10 = unk_MoveIDPrintMoveDescription(gUnknown_203B278->unk28.unk1E,gUnknown_203B278->selectedMoveID,gUnknown_203B278->unk5C,gUnknown_203B278->unk14);
             gUnknown_203B278->unk24 = 0;
             break;
         case 1:

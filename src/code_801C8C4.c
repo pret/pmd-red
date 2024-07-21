@@ -218,7 +218,7 @@ void sub_801CCD8(void)
 {
     u32 y;
     u32 y2;
-    u32 uVar3;
+    u32 itemID;
     s32 index;
     u8 buffer[80];
 
@@ -228,14 +228,14 @@ void sub_801CCD8(void)
     sub_8012BC4(sUnknown_203B244->unk550[2] * 8 + 4, 0, sUnknown_203B244->input.unk1E + 1, 2, 7, sUnknown_203B244->unk4E8);
 
     for(index = 0; index < sUnknown_203B244->input.unk1A; index++) {
-        uVar3 = sUnknown_203B244->itemIDs[(sUnknown_203B244->input.unk1E * sUnknown_203B244->input.unk1C) + index];
-        BufferItemName(buffer, uVar3, NULL);
+        itemID = sUnknown_203B244->itemIDs[(sUnknown_203B244->input.unk1E * sUnknown_203B244->input.unk1C) + index];
+        BufferItemName(buffer, itemID, NULL);
         y = sub_8013800(&sUnknown_203B244->input, index);
         xxx_call_draw_string(8, y, buffer, sUnknown_203B244->unk4E8, 0);
         y2 = sub_8013800(&sUnknown_203B244->input, index);
-        sub_8012BC4((sUnknown_203B244->unk4EC->unkC * 8) - 2, y2, gTeamInventoryRef->teamStorage[uVar3], 3, 5, sUnknown_203B244->unk4E8);
+        sub_8012BC4((sUnknown_203B244->unk4EC->unkC * 8) - 2, y2, gTeamInventoryRef->teamStorage[itemID], 3, 5, sUnknown_203B244->unk4E8);
 
-        if (sub_801CFE0(uVar3) & 1)
+        if (sub_801CFE0(itemID) & 1)
             sub_8007B7C(sUnknown_203B244->unk4E8, 8, sub_8013800(&sUnknown_203B244->input, index), (sUnknown_203B244->unk4EC->unkC - 1) * '\b', 10); // TODO: Ghidra being crazy
     }
 

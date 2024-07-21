@@ -337,16 +337,16 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
     xxx_call_draw_string(10, y, gRewardText, param_1->unk0[0], 0);
 
     switch (param_1->rewardType) {
-        case 0:
+        case MONEY:
             sprintfStatic(buf_1, gMissionRewardText[param_1->rewardType], param_1->unk30);
             xxx_call_draw_string(68, y, buf_1, param_1->unk0[0], 0);
             break;
-        case 1:
+        case MONEY_EXTRA:
             sprintfStatic(buf_1, gMissionRewardText[param_1->rewardType], param_1->unk30);
             xxx_call_draw_string(68, y, buf_1, param_1->unk0[0], 0);
             break;
-        case 2: // Item
-        case 3: // Item + ?
+        case ITEM: // Item
+        case ITEM_EXTRA: // Item + ?
             BufferItemName(gUnknown_202DE58, param_1->rewardItem, NULL);
             sprintfStatic(buf_1, gMissionRewardText[param_1->rewardType], gUnknown_202DE58);
             xxx_call_draw_string(68, y, buf_1, param_1->unk0[0], 0);

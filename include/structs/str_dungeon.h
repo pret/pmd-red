@@ -32,6 +32,19 @@ typedef struct Dungeon_sub
     u8 unk2;
 } Dungeon_sub;
 
+typedef struct Weather
+{
+    /* 0xE264 */ u8 weather; // Uses the weather constants in weather.h.
+    u8 unkE265; // Uses the weather constants in weather.h
+    /* 0xE266 */ u8 weatherDamageCounter; // Timer for applying sandstorm/hail damage periodically.
+    /* 0xE267 */ u8 unkE267[8];
+    /* 0xE26F */ u8 naturalWeather[8]; // The weather at the start of the floor. If the weather changes, then expires, revert back to the starting weather.
+    /* 0xE277 */ u8 mudSportTurns;
+    /* 0xE278 */ u8 waterSportTurns;
+    /* 0xE279 */ bool8 nullifyWeather; // Air Lock and Cloud Nine toggle this to disable weather effects
+
+} Weather;
+
 // size: 0x30
 typedef struct unkDungeonGlobal_unk1CE98_sub
 {
@@ -88,7 +101,12 @@ typedef struct Dungeon
     u8 fill14[0xB8 - 0x14];
     Entity *unkB8;
     Entity *unkBC;
-    u8 fillC0[0x16D - 0xC0];
+    u8 fillC0[0x13C - 0xC0];
+    u8 unk13C[2];
+    u8 fill13E[0x16A - 0x13E];
+    u8 unk16A;
+    u8 unk16B;
+    u8 unk16C;
     u8 unk16D;
     u8 fill16E[0x179 - 0x16E];
     /* 0x179 */ bool8 pokemonExposed; // True if a Pokémon on the floor has the Exposed status.
@@ -171,20 +189,7 @@ typedef struct Dungeon
     u32 unkE250;
     u8 fillE254[0xE260 - 0xE254];
     u32 unkE260;
-    /* 0xE264 */ u8 weather; // Uses the weather constants in weather.h.
-    u8 unkE265; // Uses the weather constants in weather.h
-    /* 0xE266 */ u8 weatherDamageCounter; // Timer for applying sandstorm/hail damage periodically.
-    /* 0xE267 */ u8 unkE267[0xE269 - 0xE267];
-    u8 unkE269;
-    u8 fillE26A;
-    u8 unkE26B;
-    u8 weatherTurns;
-    u8 fillE26D[0xE26F - 0xE26D];
-    /* 0xE26F */ u8 naturalWeather[8]; // The weather at the start of the floor. If the weather changes, then expires, revert back to the starting weather.
-    /* 0xE277 */ u8 mudSportTurns;
-    /* 0xE278 */ u8 waterSportTurns;
-    /* 0xE279 */ bool8 nullifyWeather; // Air Lock and Cloud Nine toggle this to disable weather effects
-    u8 fillE27A[0xE27C - 0xE27A];
+    /* 0xE264 */ Weather weather; // Uses the weather constants in weather.h.
     /* 0xE27C */ Tile unkE27C[8][8];
     /* 0xE87C */ u8 unkE87C[8][8];
     u32 fillE8BC;

@@ -6,21 +6,21 @@
 #include "reg_control.h"
 #include "sprite.h"
 
-extern unkStruct_202D648 gUnknown_202D608[8];
-extern unkStruct_202D648 gUnknown_202D648[8];
+EWRAM_DATA unkStruct_202D648 gUnknown_202D608[8] = {0};
+EWRAM_DATA unkStruct_202D648 gUnknown_202D648[8] = {0};
 
-EWRAM_DATA bool8 gUnknown_203B099;
-EWRAM_DATA bool8 gUnknown_203B09A;
-EWRAM_DATA bool8 gUnknown_203B09B;
-EWRAM_DATA u32 gUnknown_203B09C;
-EWRAM_DATA u32 gUnknown_203B0A0;
-EWRAM_DATA u32 gUnknown_203B0A4; // Written to but never read
-EWRAM_DATA s16 gUnknown_203B0A8;
-EWRAM_DATA s16 gUnknown_203B0AA;
-EWRAM_DATA s16 gUnknown_203B0AC;
-EWRAM_DATA s16 gUnknown_203B0AE;
-EWRAM_DATA s16 gUnknown_203B0B0; // Written to but never read
-EWRAM_DATA s16 gUnknown_203B0B2; // Written to but never read
+EWRAM_DATA_2 bool8 gUnknown_203B099 = {0};
+EWRAM_DATA_2 bool8 gUnknown_203B09A = {0};
+EWRAM_DATA_2 bool8 gUnknown_203B09B = {0};
+EWRAM_DATA_2 u32 gUnknown_203B09C = {0};
+EWRAM_DATA_2 u32 gUnknown_203B0A0 = {0};
+EWRAM_DATA_2 u32 gUnknown_203B0A4 = {0}; // Written to but never read
+EWRAM_DATA_2 s16 gUnknown_203B0A8 = {0};
+EWRAM_DATA_2 s16 gUnknown_203B0AA = {0};
+EWRAM_DATA_2 s16 gUnknown_203B0AC = {0};
+EWRAM_DATA_2 s16 gUnknown_203B0AE = {0};
+EWRAM_DATA_2 s16 gUnknown_203B0B0 = {0}; // Written to but never read
+EWRAM_DATA_2 s16 gUnknown_203B0B2 = {0}; // Written to but never read
 
 static void UpdateBGControlRegisters(void);
 
