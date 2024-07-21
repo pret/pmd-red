@@ -6,16 +6,29 @@
 #include "code_80521D0.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_targeting.h"
+#include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
+#include "trap.h"
+#include "charge_move.h"
 #include "dungeon_map_access.h"
 #include "game_options.h"
+#include "dungeon_items.h"
 #include "dungeon_leader.h"
+#include "tile_types.h"
 #include "dungeon_visibility.h"
+#include "dungeon_movement.h"
 #include "bg_control.h"
 #include "items.h"
 #include "code_806CD90.h"
 #include "dungeon_capabilities.h"
+#include "constants/dungeon.h"
+#include "constants/status.h"
+#include "constants/iq_skill.h"
+#include "constants/dungeon_action.h"
 
+extern void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4);
+extern void sub_8045DB4(Position *, u32);
+extern s32 sub_8052B8C(u32, const u8 *, u32);
 void sub_806A2BC(Entity *a0, u8 a1);
 bool8 sub_805E874(void);
 bool8 sub_80701A4(Entity *a0);
@@ -24,6 +37,7 @@ void sub_805E738(Entity *a0);
 void sub_803E708(s32 a0, s32 a1);
 void sub_8040A78(void);
 void sub_805E804(void);
+void sub_8049ED4(void);
 void sub_8075680(u32);
 void sub_8094C88(void);
 void sub_8040A84(void);
@@ -39,7 +53,7 @@ void sub_805E2C4(Entity *leader);
 bool8 sub_8094C48(void);
 void sub_8052210(u8 a0);
 void sub_803E46C(s32 a0);
-bool8 sub_805EC4C(Entity *a0, u16 a1);
+bool8 sub_805EC4C(Entity *a0, u8 a1);
 void sub_803E724(s32 a0);
 void HandleTalkFieldAction(Entity *);
 bool8 sub_8044B28(void);
@@ -47,6 +61,7 @@ bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
 void ShowFieldMenu(u8 a0, u8 a1);
 bool8 sub_805EF60(Entity *a0, EntityInfo *a1);
 s32 GetTeamMemberEntityIndex(Entity *pokemon);
+bool8 sub_8070F80(Entity * pokemon, s32 direction);
 
 extern u8 gUnknown_202F22D;
 extern u8 gUnknown_202F22C;
@@ -63,6 +78,7 @@ extern const u8 *gUnknown_80F8B0C;
 extern const u8 *gUnknown_80FD4B0;
 extern const u8 *gUnknown_80F8A4C;
 extern const u8 *gUnknown_80F8A28;
+extern const u8 *gUnknown_8100208;
 
 #ifdef NONMATCHING
 
@@ -2524,4 +2540,148 @@ bool8 sub_805E874(void)
     }
 
     return TRUE;
+}
+
+bool8 sub_805EC2C(Entity *a0, s32 x, s32 y)
+{
+    Position pos = {.x = x, .y = y};
+    return sub_8070564(a0, &pos);
+}
+
+static inline bool8 IsClientOrTeamBase(s32 joinedDungeon)
+{
+    if (joinedDungeon == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON || joinedDungeon == DUNGEON_RESCUE_TEAM_BASE)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 sub_805EC4C(Entity *a0, u8 a1)
+{
+    Position pos;
+    Tile *tile;
+    EntityInfo *tileMonsterInfo;
+    Entity *tileMonster;
+    EntityInfo *entityInfo = a0->info;
+
+    pos.x = a0->pos.x + gAdjacentTileOffsets[entityInfo->action.direction].x;
+    pos.y = a0->pos.y + gAdjacentTileOffsets[entityInfo->action.direction].y;
+    tile = GetTile(pos.x, pos.y);
+    tileMonster = tile->monster;
+
+    if (tileMonster == NULL) return FALSE;
+    if (GetEntityType(tileMonster) != ENTITY_MONSTER) return FALSE;
+
+    tileMonsterInfo = tileMonster->info;
+    if (tileMonsterInfo->isNotTeamMember
+        && (tileMonsterInfo->shopkeeper != 1 && tileMonsterInfo->shopkeeper != 2)
+        && !IsClientOrTeamBase(tileMonsterInfo->joinedAt.joinedAt)
+        && tileMonsterInfo->clientType != 1) {
+        return FALSE;
+    }
+
+    if (entityInfo->immobilize.immobilizeStatus == STATUS_SHADOW_HOLD) return FALSE;
+    if (entityInfo->immobilize.immobilizeStatus == STATUS_FROZEN) return FALSE;
+    if (entityInfo->immobilize.immobilizeStatus == STATUS_CONSTRICTION) return FALSE;
+    if (entityInfo->immobilize.immobilizeStatus == STATUS_INGRAIN) return FALSE;
+    if (entityInfo->immobilize.immobilizeStatus == STATUS_WRAP) return FALSE;
+    if (entityInfo->immobilize.immobilizeStatus == STATUS_WRAPPED) return FALSE;
+
+    if (tileMonsterInfo->immobilize.immobilizeStatus == STATUS_SHADOW_HOLD) return FALSE;
+    if (tileMonsterInfo->immobilize.immobilizeStatus == STATUS_FROZEN) return FALSE;
+    if (tileMonsterInfo->immobilize.immobilizeStatus == STATUS_CONSTRICTION) return FALSE;
+    if (tileMonsterInfo->immobilize.immobilizeStatus == STATUS_INGRAIN) return FALSE;
+    if (tileMonsterInfo->immobilize.immobilizeStatus == STATUS_WRAP) return FALSE;
+    if (tileMonsterInfo->immobilize.immobilizeStatus == STATUS_WRAPPED) return FALSE;
+
+    if (entityInfo->volatileStatus.volatileStatus == STATUS_CONFUSED) return FALSE;
+    if (tileMonsterInfo->volatileStatus.volatileStatus == STATUS_CONFUSED) return FALSE;
+
+    if (tileMonsterInfo->sleep.sleep != STATUS_NONE && tileMonsterInfo->sleep.sleep != STATUS_SLEEPLESS && tileMonsterInfo->sleep.sleep != STATUS_YAWNING)  return FALSE;
+    if (entityInfo->sleep.sleep != STATUS_NONE      && entityInfo->sleep.sleep != STATUS_SLEEPLESS      && entityInfo->sleep.sleep != STATUS_YAWNING)       return FALSE;
+
+    if (IsCharging(tileMonster, FALSE)) return FALSE;
+    if (!sub_8070F80(a0, entityInfo->action.direction)) return FALSE;
+
+    if (a1 != 0 && sub_807049C(tileMonster, &a0->pos) && !sub_8052B8C(0, gUnknown_8100208, 0)) return FALSE;
+
+    SetMonsterActionFields(&entityInfo->action, ACTION_WALK);
+    if (gRealInputs.held & B_BUTTON) {
+        entityInfo->action.unk4[0].actionUseIndex = 0;
+    }
+    else {
+        entityInfo->action.unk4[0].actionUseIndex = 1;
+    }
+    entityInfo->flags |= 0x8000;
+
+    SetMonsterActionFields(&tileMonsterInfo->action, ACTION_WALK);
+    tileMonsterInfo->action.unk4[0].actionUseIndex = 0;
+    tileMonsterInfo->action.direction = (entityInfo->action.direction + 4) & 7;
+    tileMonsterInfo->flags |= 0x8000;
+    tileMonsterInfo->targetPos.x = tileMonster->pos.x;
+    tileMonsterInfo->targetPos.y = tileMonster->pos.y;
+    gDungeon->unkE = 1;
+    return TRUE;
+}
+
+void sub_805EE30(void)
+{
+    Entity *tileObject;
+    Tile *tile;
+    Entity *leader = GetLeader();
+    if (leader == NULL)
+        return;
+    if (sub_8044B28())
+        return;
+
+    tile = GetTileAtEntitySafe(leader);
+    if (IQSkillIsEnabled(leader, IQ_SUPER_MOBILE) && leader->info->transformStatus.transformStatus != STATUS_MOBILE && !HasHeldItem(leader, ITEM_MOBILE_SCARF))
+        sub_804AE84(&leader->pos);
+    if (tile->terrainType & TERRAIN_TYPE_STAIRS)
+        gDungeon->unk1 = 1;
+
+    tileObject = tile->object;
+    if (tileObject == NULL)
+        return;
+    switch (GetEntityType(tileObject))
+    {
+        case ENTITY_TRAP: {
+            Trap *trap = GetTrapData(tileObject);
+            bool32 r8 = FALSE;
+            bool32 r7 = FALSE;
+            if (IQSkillIsEnabled(leader, IQ_TRAP_SEER) && !tileObject->isVisible) {
+                tileObject->isVisible = TRUE;
+                sub_8049ED4();
+                r7 = TRUE;
+            }
+            if (trap->unk1 != 0) {
+                if (trap->unk1 == 1)
+                    break;
+                if (trap->unk1 == 2)
+                    r8 = TRUE;
+                if (r8 == FALSE)
+                    break;
+            }
+            if (!r7) {
+                sub_807FE9C(leader, &leader->pos, 0, 1);
+            }
+        }
+        break;
+        case ENTITY_ITEM: {
+            Item *item = GetItemData(tileObject);
+            if (!(item->flags & ITEM_FLAG_IN_SHOP)) {
+                sub_8045DB4(&leader->pos, 1);
+            }
+            else {
+                gDungeon->unk5C0 = 4;
+            }
+        }
+        break;
+        case ENTITY_NOTHING:
+        case ENTITY_MONSTER:
+        case ENTITY_UNK_4:
+        case ENTITY_UNK_5:
+        default:
+            break;
+    }
 }
