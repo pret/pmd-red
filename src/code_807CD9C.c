@@ -1,5 +1,6 @@
 #include "global.h"
 
+#include "code_804267C.h"
 #include "code_8045A00.h"
 #include "code_80521D0.h"
 #include "constants/ability.h"
@@ -17,7 +18,6 @@ extern u8 UseAttack(Entity *);
 extern void sub_805E804(void);
 void sub_806A2BC(Entity *pokemon, u8 param_2);
 extern u8 sub_8044B28(void);
-extern void sub_80426C8(u32, u32);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
 extern void nullsub_93(Position *);
 extern void sub_80522F4(Entity *, Entity *, u8 *);

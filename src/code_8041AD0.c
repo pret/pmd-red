@@ -1,14 +1,16 @@
 #include "global.h"
-#include "code_806CD90.h"
+#include "code_800E9A8.h"
+#include "code_803E46C.h"
 #include "code_804267C.h"
+#include "code_806CD90.h"
 #include "constants/direction.h"
 #include "constants/status.h"
 #include "constants/type.h"
-#include "structs/dungeon_entity.h"
-#include "structs/str_dungeon.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
 #include "items.h"
+#include "structs/dungeon_entity.h"
+#include "structs/str_dungeon.h"
 
 // size: 0xC
 struct unkStruct_80420E8
@@ -66,10 +68,8 @@ extern u8 sub_800E9FC(u8);
 extern void sub_800DBBC(void);
 extern void sub_803EA10(void);
 extern void sub_8042E98(void);
-extern void sub_803E46C(u32);
 extern void sub_800EE5C(u32);
 extern void sub_800EF64(void);
-extern bool8 sub_800E9A8(s32);
 extern u32 sub_800E890(unkStruct_80416E0 *);
 
 u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2);

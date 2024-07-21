@@ -150,17 +150,17 @@ typedef struct Dungeon
     s32 unk690;
     s32 unk694;
     u8 fill698;
-    u8 unk699;   
+    u8 unk699;
     u8 fill69A[0x69C - 0x69A];
     EntityInfo unk69C[4];
     EntityInfo unkEBC[1]; // Unsure about the size... See sub_8082A08()
-    u8 fill10C4[0x363C - 0x10C4]; 
+    u8 fill10C4[0x363C - 0x10C4];
     /* 0x363C */ u8 expYieldRankings[NUM_MONSTERS];
     u8 fill37D9[0x37F0 - 0x37D9];
     /* 0x37F0 */ u32 unk37F0;
     /* 0x37F4 */ s32 unk37F4;
     /* 0x37F8 */ bool8 plusIsActive[2]; // Index 0: Enemy , Index 1: Team
-    /* 0x37FA */ bool8 minusIsActive[2]; // Index 0: Enemy , Index 1: Team 
+    /* 0x37FA */ bool8 minusIsActive[2]; // Index 0: Enemy , Index 1: Team
     /* 0x37FC */ bool8 decoyActive;
     u8 fill37FD;
     /* 0x37FE */ bool8 deoxysDefeat; // Flag set for deoxys in Meteor Cave
@@ -247,7 +247,9 @@ typedef struct Dungeon
     u8 unk18211;
     u8 unk18212;
     u8 unk18213;
-    u8 fill18214[3];
+    u8 fill18214;
+    u8 unk18215;
+    u8 fill18216;
     u8 unk18217;
     u8 fill18218[0x1821A - 0x18218];
     u8 unk1821A;

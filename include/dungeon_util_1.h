@@ -4,6 +4,12 @@
 #include "structs/dungeon_entity.h"
 
 typedef void (*DungeonCallback)(Entity *);
+typedef struct struct_8085B80 {
+    u8 unk0;
+    Entity *unk4;
+    s32 unk8;
+    s16 *unkC;
+} struct_8085B80;
 
 Entity *xxx_call_GetLeader(void);
 Entity *GetPartnerEntity(void);

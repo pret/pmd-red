@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_803E46C.h"
 #include "code_8045A00.h"
 #include "code_80521D0.h"
 #include "code_805D8C8.h"
@@ -17,6 +18,7 @@
 #include "move_effects_target.h"
 #include "moves.h"
 #include "pokemon.h"
+#include "pokemon_mid.h"
 #include "status_checks_1.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
@@ -167,7 +169,6 @@ extern u8 *gUnknown_80FBF84[];
 
 extern void sub_8049ED4();
 extern void sub_8040A84();
-extern void sub_803E46C(u32);
 extern void sub_80522F4(Entity *pokemon, Entity *r1, const char[]);
 extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_8042A74(Entity *r0);
@@ -211,7 +212,6 @@ extern void sub_8041DD8(Entity *r0, s32 r1); // NOTE: is s16 in another file
 extern s32 sub_803D870(void *, u32);
 extern bool8 sub_806AA0C(s32, u32);
 u32 ExtractSpeciesIndex(PokemonStruct1 **r0); // TODO: look more into this and fix it.
-void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index);
 
 void MuzzleTarget(Entity *pokemon, Entity *target)
 {

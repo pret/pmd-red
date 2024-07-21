@@ -2,6 +2,7 @@
 #include "dungeon_ai_leader.h"
 
 #include "charge_move.h"
+#include "code_803E46C.h"
 #include "code_804267C.h"
 #include "code_8045A00.h"
 #include "code_80521D0.h"
@@ -72,7 +73,6 @@ extern u8 sub_8044B28(void);
 extern u8 UseAttack(Entity *);
 void sub_8052740(u32);
 void sub_806A1E8(Entity *pokemon);
-extern void sub_803E46C(u32);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 bool8 sub_804AE08(Position *pos);
 void HandlePickUpAIAction(Entity *pokemon);

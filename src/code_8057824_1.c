@@ -1,5 +1,10 @@
 #include "global.h"
+#include "code_800E9A8.h"
+#include "code_803E46C.h"
+#include "code_803E668.h"
+#include "code_804267C.h"
 #include "code_8045A00.h"
+#include "code_80861A8.h"
 #include "code_806CD90.h"
 #include "code_80869E4.h"
 #include "constants/bg_music.h"
@@ -314,16 +319,13 @@ extern const u8 gUnknown_81058A8[];
 
 extern const u8 gUnknown_81074FC[];
 
-extern bool8 sub_800E9A8(s32);
 extern void sub_800DC14(u32);
 
 extern void sub_8086A3C(Entity *r0);
 extern void sub_8068FE0(Entity *, u32, u32);
 
-extern void sub_803E708(u32, u32);
 extern void sub_8086448(void);
 extern void sub_8042B0C(Entity *);
-extern void sub_803E708(u32, u32);
 extern u8 sub_806FD18(Entity *);
 extern void sub_80861D4(Entity *, u32, s32 direction);
 extern void sub_806FDF4(Entity *, Entity *, Entity **);
@@ -362,7 +364,6 @@ extern void sub_806BFC0(EntityInfo *, u32);
 extern void sub_808BBA8(Entity * );
 extern void sub_8041888(u32);
 extern void sub_80861B8(Entity *, u32, u32);
-extern void sub_803E708(u32, u32);
 extern void DisplayDungeonDialogue(const u8 *r0);
 
 extern u32 sub_80861F8(u32, Entity *, u32);
@@ -382,10 +383,8 @@ extern void sub_80421C0(Entity *, u32);
 extern void sub_808B1CC(u8);
 extern void sub_80464C8(Entity *, u32 *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
-extern void sub_803E46C(u32);
 
 extern u32 sub_8085EC8(u32, u32, u32, Position *, u32);
-extern void sub_80426C8(u32, u32);
 extern void sub_807EAA0(u32, u32);
 
 extern void CreateJirachiWishWarpTile(void);
@@ -438,7 +437,6 @@ void ZapdosDropInEffect(Entity *param_1);
 void ZapdosScreenFlash(int param_1);
 
 extern s32 sub_8052C68(u32, const u8 *, const u8 *, u32);
-extern void sub_80861A8(Entity *);
 extern void sub_8045C28(Item *, u8 , u8 *);
 extern void EnableJirachiWishWarpTile(void);
 extern void sub_808BB3C(Position *);

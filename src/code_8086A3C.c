@@ -1,33 +1,34 @@
 #include "global.h"
+#include "code_803E46C.h"
+#include "code_803E668.h"
 #include "code_806CD90.h"
 #include "code_80869E4.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
 #include "constants/monster.h"
-#include "structs/dungeon_entity.h"
-#include "structs/str_dungeon.h"
 #include "dungeon_music.h"
 #include "dungeon_pokemon_attributes.h"
-#include "dungeon_util.h"
 #include "dungeon_util_1.h"
+#include "dungeon_util.h"
 #include "exclusive_pokemon.h"
-#include "pokemon.h"
 #include "pokemon_3.h"
+#include "pokemon.h"
+#include "structs/dungeon_entity.h"
+#include "structs/str_dungeon.h"
 
 extern u8 sub_8044B28(void);
 extern u8 gUnknown_202E038[];
 extern void sub_8085374();
 extern void sub_8068FE0(Entity *, u32, u32);
 extern void DisplayDungeonDialogue(const u8 *);
-extern void sub_803E708(u32, u32);
 extern void sub_8086448(void);
 extern void SkarmoryEntry(Entity *);
 extern void sub_8086A54(Entity *);
 extern void sub_8087144();
 extern void sub_8072008(Entity *pokemon, Entity *r1, u32 r2, u8 r3, u32);
 extern bool8 sub_8085B80(u8 *);
+// TODO The parameters don't match the function definition in dungeon_util_1.h (struct_8085B80*, s16**, Entity**, s32).
 extern void sub_8085B4C(u8 *, void *, Entity **, u32);
-extern void sub_803E46C(u32);
 
 extern const u8 gUnknown_810739C[];
 extern const u8 gUnknown_81073D4[];
@@ -298,14 +299,14 @@ void sub_8086F00(void)
 
 // From @jiangzhengwenjz:
 // Matches this way for -O2 but can match w/o this hack on -O1
-// https://decomp.me/scratch/BTqWo 
+// https://decomp.me/scratch/BTqWo
 void sub_8086F54(u8 param_1, u8 param_2)
 {
   Entity *entity;
   s32 index;
   u32 unk1 = 0;
 
-  
+
   if (param_2 == 4 || param_2 == 5) {
     void *labels[2];
     labels[0] = labels[1] = &&label;
@@ -452,7 +453,7 @@ void sub_808729C(void)
 {
   Entity *LeaderEntity;
   Entity *ZapdosEntity;
-  
+
   LeaderEntity = xxx_call_GetLeader();
   ZapdosEntity = GetEntityFromClientType(8);
   sub_80854D4();

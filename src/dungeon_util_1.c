@@ -1,22 +1,23 @@
 #include "global.h"
-#include "code_806CD90.h"
 #include "dungeon_util_1.h"
 
+#include "code_803E46C.h"
+#include "code_803E668.h"
+#include "code_806CD90.h"
 #include "constants/direction.h"
 #include "constants/dungeon.h"
-#include "structs/str_dungeon.h"
 #include "dungeon_leader.h"
 #include "dungeon_util.h"
 #include "random.h"
+#include "structs/str_dungeon.h"
 
+extern s32 gUnknown_202F3D8;
 extern const u8 gUnknown_8107358[25];
 
 extern s32 GetCameraXPos(void);
 extern s32 GetCameraYPos(void);
 extern void sub_803F4A0(u32);
 extern void sub_803F878(s32, s32);
-extern void sub_803E46C(u32);
-extern void sub_803E708(u32, u32);
 
 extern void sub_8068FE0(Entity *, u32, Entity*);
 extern void sub_80457DC(Entity *);
@@ -55,7 +56,7 @@ void sub_80854D4(void)
     Entity *entity3;
     Entity *entity4;
     Entity *entity5;
-    
+
     for(index = 0; index < MAX_TEAM_MEMBERS; index++)
     {
         entity = gDungeon->teamPokemon[index];
@@ -401,4 +402,18 @@ void sub_8085B0C(Entity *pokemon)
     sub_803E708(6,0x46);
     index++;
   }
+}
+
+void sub_8085B4C(struct_8085B80 *a0, s16 **a1, Entity **a2, s32 a3)
+{
+    s32 i;
+
+    gUnknown_202F3D8 = a3;
+
+    for (i = 0; i < a3; i++) {
+        a0[i].unk0 = 1;
+        a0[i].unk4 = a2[i];
+        a0[i].unkC = a1[i];
+        a0[i].unk8 = a1[i][2];
+    }
 }

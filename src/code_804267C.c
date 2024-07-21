@@ -1,5 +1,8 @@
 #include "global.h"
 #include "code_804267C.h"
+
+#include "code_803E46C.h"
+#include "code_803E668.h"
 #include "code_8045A00.h"
 #include "code_806CD90.h"
 #include "dungeon.h"
@@ -18,8 +21,6 @@ extern const u32 gUnknown_80F680C[8];
 extern const u16 gUnknown_80F682C[8];
 extern const u8 *gPtrFeralFoundItemMessage[];
 
-extern void sub_803E46C(u32);
-extern void sub_803E708(u32 r0, u32 r1);
 extern void sub_8040238(void);
 extern void sub_804151C(Entity *pokemon, u32 r1, u8 r2);
 extern void sub_804178C(u32);

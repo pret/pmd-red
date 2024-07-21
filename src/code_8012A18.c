@@ -8,7 +8,6 @@
 #include "game_options.h"
 #include "sprite.h"
 
-extern void nullsub_8(u8);
 extern void xxx_call_update_bg_vram();
 
 void sub_8012A18()
