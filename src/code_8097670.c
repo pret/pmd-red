@@ -225,7 +225,7 @@ void sub_8097944(void)
 
     bVar2 = 1;
     bVar3 = 1;
-    if ((sub_8097710(0xd) == 0) && (HasAllFriendAreas())) {
+    if (!sub_8097710(0xd) && (HasAllFriendAreas())) {
         sub_80976F8(0xd);
     }
 
@@ -243,113 +243,112 @@ void sub_8097944(void)
 
 
         if (((u8)(pokeStruct->unk0) & 1)) {
-            temp = pokeStruct->speciesNum;
-            gUnknown_203B494->unk1C[(temp / 32)] |= (1 << (temp + (temp / 32) * -32));
+        temp = pokeStruct->speciesNum;
+        gUnknown_203B494->unk1C[temp / 32] |= 1 << temp % 32;
 
             for(index1 = 0; index1 < MAX_MON_MOVES; index1++)
             {
                 move = &gRecruitedPokemonRef->pokemon[index].moves[index1];
-                if ((move->moveFlags & 1) != 0) {
-                    gUnknown_203B494->unk8C[move->id / 32] |= 1 << (move->id & 0x1f);
+                if ((move->moveFlags & MOVE_FLAG_EXISTS)) {
+                    gUnknown_203B494->unk8C[move->id / 32] |= 1 << move->id % 32;
                 }
             }
         }
-  }
-    
-  for(index = 0; index < MONSTER_MAX; index++)
-  {
-    if (index != MONSTER_NONE)
-        if(index != MONSTER_CASTFORM_SNOWY)
-            if(index != MONSTER_CASTFORM_SUNNY)
-                if(index != MONSTER_CASTFORM_RAINY)
-                    if(index != MONSTER_DEOXYS_ATTACK)
-                        if(index != MONSTER_DEOXYS_DEFENSE)
-                            if(index != MONSTER_DEOXYS_SPEED)
-                                if(index != MONSTER_MUNCHLAX)
-                                    if(index != MONSTER_DECOY)
-                                        if(index != MONSTER_STATUE)
-                                            if(index != MONSTER_RAYQUAZA_CUTSCENE)
-                                            {
-                                              if ((gUnknown_203B494->unk54[(index / 32)] & (1 << (index + (index / 32) * -32))) == 0) {
-                                                bVar3 = 0;
-                                              }
-                                              if ((gUnknown_203B494->unk1C[(index / 32 )] & (1 << (index + (index / 32) * -32))) != 0)
-                                              {
-                                                if (index == MONSTER_MOLTRES) {
-                                                  sub_80976F8(0x10);
-                                                }
-                                                if (index == MONSTER_ZAPDOS) {
-                                                  sub_80976F8(0x11);
-                                                }
-                                                if (index == MONSTER_ARTICUNO) {
-                                                  sub_80976F8(0x12);
-                                                }
-                                                if (index == MONSTER_DEOXYS_NORMAL) {
-                                                  sub_80976F8(0x13);
-                                                }
-                                                if (index == MONSTER_ENTEI) {
-                                                  sub_80976F8(0x14);
-                                                }
-                                                if (index == MONSTER_RAIKOU) {
-                                                  sub_80976F8(0x15);
-                                                }
-                                                if (index == MONSTER_SUICUNE) {
-                                                  sub_80976F8(0x16);
-                                                }
-                                                if (index == MONSTER_HO_OH) {
-                                                  sub_80976F8(0x17);
-                                                }
-                                                if (index == MONSTER_KYOGRE) {
-                                                  sub_80976F8(0x18);
-                                                }
-                                                if (index == MONSTER_GROUDON) {
-                                                  sub_80976F8(0x19);
-                                                }
-                                                if (index == MONSTER_RAYQUAZA) {
-                                                  sub_80976F8(0x1a);
-                                                }
-                                                if (index == MONSTER_LUGIA) {
-                                                  sub_80976F8(0x1b);
-                                                }
-                                                if (index == MONSTER_CELEBI) {
-                                                  sub_80976F8(0x1c);
-                                                }
-                                                if (index == MONSTER_MEW) {
-                                                  sub_80976F8(0x1d);
-                                                }
-                                                if (index == MONSTER_MEWTWO) {
-                                                  sub_80976F8(0x1e);
-                                                }
-                                                if (index == MONSTER_JIRACHI) {
-                                                  sub_80976F8(0x1f);
-                                                }
-                                              }
-                                              else
-                                              {
-                                                bVar2 = 0;
-                                              }
-                                            }
-  }
-    
-  if (bVar2) {
-    sub_80976F8(0xf);
-  }
-  if (bVar3) {
-    sub_80976F8(0xe);
-  }
-  counter = 0;
-  for(index = 0; index < NUM_MONSTERS; index++)
-  {
-    if ((((index != 0) && (index != 0x163)) && (index != 0x164)) && (index != 0x165)) {
-      if ((gUnknown_203B494->unk8C[(index / 32 )] & (1 << (index + (index / 32) * -32))) != 0) {
-        counter = counter + 1;
-      }
     }
-  }
-  if (counter != 0) {
-    gUnknown_203B494->unk18 = counter;
-    sub_80976F8(7);
-  }
+
+    for(index = 0; index < MONSTER_MAX; index++)
+    {
+        if (index == MONSTER_NONE) continue;
+        if (index == MONSTER_CASTFORM_SNOWY) continue;
+        if (index == MONSTER_CASTFORM_SUNNY) continue;
+        if (index == MONSTER_CASTFORM_RAINY) continue;
+        if (index == MONSTER_DEOXYS_ATTACK) continue;
+        if (index == MONSTER_DEOXYS_DEFENSE) continue;
+        if (index == MONSTER_DEOXYS_SPEED) continue;
+        if (index == MONSTER_MUNCHLAX) continue;
+        if (index == MONSTER_DECOY) continue;
+        if (index == MONSTER_STATUE) continue;
+        if (index == MONSTER_RAYQUAZA_CUTSCENE) continue;
+
+        if ((gUnknown_203B494->unk54[index / 32] & 1 << index % 32) == 0)
+        {
+            bVar3 = 0;
+        }
+        if ((gUnknown_203B494->unk1C[index / 32] & 1 << index % 32) != 0)
+        {
+            if (index == MONSTER_MOLTRES) {
+                sub_80976F8(0x10);
+            }
+            if (index == MONSTER_ZAPDOS) {
+                sub_80976F8(0x11);
+            }
+            if (index == MONSTER_ARTICUNO) {
+                sub_80976F8(0x12);
+            }
+            if (index == MONSTER_DEOXYS_NORMAL) {
+                sub_80976F8(0x13);
+            }
+            if (index == MONSTER_ENTEI) {
+                sub_80976F8(0x14);
+            }
+            if (index == MONSTER_RAIKOU) {
+                sub_80976F8(0x15);
+            }
+            if (index == MONSTER_SUICUNE) {
+                sub_80976F8(0x16);
+            }
+            if (index == MONSTER_HO_OH) {
+                sub_80976F8(0x17);
+            }
+            if (index == MONSTER_KYOGRE) {
+                sub_80976F8(0x18);
+            }
+            if (index == MONSTER_GROUDON) {
+                sub_80976F8(0x19);
+            }
+            if (index == MONSTER_RAYQUAZA) {
+                sub_80976F8(0x1a);
+            }
+            if (index == MONSTER_LUGIA) {
+                sub_80976F8(0x1b);
+            }
+            if (index == MONSTER_CELEBI) {
+                sub_80976F8(0x1c);
+            }
+            if (index == MONSTER_MEW) {
+                sub_80976F8(0x1d);
+            }
+            if (index == MONSTER_MEWTWO) {
+                sub_80976F8(0x1e);
+            }
+            if (index == MONSTER_JIRACHI) {
+                sub_80976F8(0x1f);
+            }
+        }
+        else
+        {
+            bVar2 = 0;
+        }
+    }
+
+    if (bVar2) {
+        sub_80976F8(0xf);
+    }
+    if (bVar3) {
+        sub_80976F8(0xe);
+    }
+    counter = 0;
+    for(index = 0; index < NUM_MONSTERS; index++)
+    {
+        if (index == MONSTER_NONE || index == MONSTER_FLYGON || index == MONSTER_CACNEA || index == MONSTER_CACTURNE) continue;
+        if (gUnknown_203B494->unk8C[index / 32] & 1 << index % 32) {
+            counter++;
+        }
+    }
+    if (counter != 0) {
+        gUnknown_203B494->unk18 = counter;
+        sub_80976F8(7);
+    }
 }
 
 void sub_8097C18(struct unkStruct_8094924 *r0)

@@ -6,8 +6,6 @@
 
 extern u8 gWalkableTileToCrossableTerrain[8];
 
-extern u8 gWalkableTileToCrossableTerrain[8];
-
 u8 GetCrossableTerrain(s16 species);
 u8 sub_807034C(s16 id, struct Tile *tile);
 u8 sub_80703A0(Entity *pokemon, Position *pos);

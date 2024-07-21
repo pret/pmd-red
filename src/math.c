@@ -288,7 +288,11 @@ s32 sub_8009FB8(s32 x, s32 y)
 
 void sub_800A020(s32 *param_1, u32 param_2)
 {
+#ifndef NONMATCHING
   register u32 temp asm("r4");
+#else
+  u32 temp;
+#endif
     
   temp = 0xffff0000;
   param_1[0] = param_2 >> 0x10;
