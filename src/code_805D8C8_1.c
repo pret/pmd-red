@@ -7,6 +7,7 @@
 #include "dungeon_action.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_pokemon_attributes.h"
+#include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "trap.h"
 #include "charge_move.h"
@@ -2685,3 +2686,49 @@ void sub_805EE30(void)
             break;
     }
 }
+
+extern Entity *sub_80696A8(Entity *a0);
+
+bool8 sub_805EF60(Entity *a0, EntityInfo *a1)
+{
+    Entity *r4 = sub_80696A8(a0);
+
+    if (r4 == NULL)
+        return FALSE;
+    if (GetEntityType(r4) != ENTITY_MONSTER)
+        return FALSE;
+    if (!sub_8070BC0(a0))
+        return FALSE;
+    if (r4->info->isNotTeamMember && r4->info->clientType != 1 && r4->info->shopkeeper != 1)
+        return FALSE;
+
+    SetMonsterActionFields(&a1->action, ACTION_TALK_FIELD);
+    return TRUE;
+}
+
+void sub_805EFB4(Entity *a0, bool8 a1)
+{
+    s32 i;
+    EntityInfo *leaderInfo = GetLeaderInfo();
+    if (a1 && leaderInfo->volatileStatus.volatileStatus == STATUS_COWERING) {
+        leaderInfo->action.direction += 4;
+        leaderInfo->action.direction &= 7;
+    }
+    else if (leaderInfo->volatileStatus.volatileStatus == STATUS_CONFUSED) {
+        s32 rnd = DungeonRandInt(8);
+        for (i = 0; i < 8; i++) {
+            if (a1 || CanMoveInDirection(a0, rnd)) {
+                leaderInfo->action.direction = rnd & 7;
+                return;
+            }
+            rnd = (rnd + 1) & 7;
+        }
+    }
+}
+
+/*
+void sub_805F02C(void)
+{
+
+}
+*/
