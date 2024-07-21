@@ -2,11 +2,15 @@
 #include "structs/str_dungeon.h"
 #include "number_util.h"
 #include "input.h"
+#include "structs/map.h"
 #include "code_80521D0.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_targeting.h"
+#include "dungeon_util.h"
+#include "dungeon_map_access.h"
 #include "game_options.h"
 #include "dungeon_leader.h"
+#include "dungeon_visibility.h"
 #include "bg_control.h"
 #include "items.h"
 #include "code_806CD90.h"
@@ -31,7 +35,7 @@ void sub_8044C10(u8 a0);
 u16 sub_805F1AC(void);
 void sub_80978C8(s16 a0);
 void sub_8044C50(u16 a0);
-void sub_805E2C4(Entity *a0);
+void sub_805E2C4(Entity *leader);
 bool8 sub_8094C48(void);
 void sub_8052210(u8 a0);
 void sub_803E46C(s32 a0);
@@ -1787,4 +1791,737 @@ NAKED void sub_805D8C8(void)
 
 #endif
 
-//
+/* Nope
+void sub_805E2C4(Entity *leader)
+{
+    unkDungeonGlobal_unk181E8_sub *unkPtr;
+
+    unkPtr = &gDungeon->unk181e8;
+    if (gUnknown_202F22C == 0) {
+
+    }
+}
+*/
+
+NAKED void sub_805E2C4(Entity *leader)
+{
+    asm_unified(	"\n"
+"	push {r4-r7,lr}\n"
+"	mov r7, r10\n"
+"	mov r6, r9\n"
+"	mov r5, r8\n"
+"	push {r5-r7}\n"
+"	sub sp, 0x28\n"
+"	str r0, [sp, 0x10]\n"
+"	ldr r0, _0805E47C\n"
+"	ldr r1, [r0]\n"
+"	ldr r0, _0805E480\n"
+"	adds r0, r1, r0\n"
+"	str r0, [sp, 0x14]\n"
+"	ldr r0, _0805E484\n"
+"	ldrb r0, [r0]\n"
+"	cmp r0, 0\n"
+"	bne _0805E2E6\n"
+"	b _0805E4C4\n"
+"_0805E2E6:\n"
+"	movs r1, 0\n"
+"	str r1, [sp, 0x18]\n"
+"	mov r7, sp\n"
+"	ldr r2, _0805E488\n"
+"	mov r10, r2\n"
+"_0805E2F0:\n"
+"	ldrh r0, [r7]\n"
+"	ldr r3, _0805E48C\n"
+"	adds r1, r3, 0\n"
+"	ands r1, r0\n"
+"	ldr r0, [sp]\n"
+"	mov r4, r10\n"
+"	ands r0, r4\n"
+"	orrs r0, r1\n"
+"	str r0, [sp]\n"
+"	ldrh r1, [r7]\n"
+"	mov r2, r10\n"
+"	ands r2, r0\n"
+"	orrs r2, r1\n"
+"	str r2, [sp]\n"
+"	ldrh r0, [r7]\n"
+"	ldr r5, _0805E490\n"
+"	adds r1, r5, 0\n"
+"	ands r1, r0\n"
+"	mov r0, r10\n"
+"	ands r0, r2\n"
+"	orrs r0, r1\n"
+"	str r0, [sp]\n"
+"	ldrh r2, [r7]\n"
+"	mov r1, r10\n"
+"	ands r1, r0\n"
+"	orrs r1, r2\n"
+"	str r1, [sp]\n"
+"	ldrh r2, [r7]\n"
+"	ldr r0, _0805E494\n"
+"	ands r0, r2\n"
+"	mov r3, r10\n"
+"	ands r3, r1\n"
+"	orrs r3, r0\n"
+"	str r3, [sp]\n"
+"	ldrh r1, [r7]\n"
+"	movs r0, 0x80\n"
+"	lsls r0, 3\n"
+"	orrs r0, r1\n"
+"	movs r6, 0\n"
+"	orrs r0, r6\n"
+"	mov r2, r10\n"
+"	ands r2, r3\n"
+"	orrs r2, r0\n"
+"	str r2, [sp]\n"
+"	ldrh r0, [r7]\n"
+"	ldr r3, _0805E498\n"
+"	adds r1, r3, 0\n"
+"	ands r1, r0\n"
+"	mov r0, r10\n"
+"	ands r0, r2\n"
+"	orrs r0, r1\n"
+"	str r0, [sp]\n"
+"	ldrh r1, [r7]\n"
+"	mov r2, r10\n"
+"	ands r2, r0\n"
+"	orrs r2, r1\n"
+"	str r2, [sp]\n"
+"	ldrh r0, [r7]\n"
+"	ldr r4, _0805E49C\n"
+"	adds r1, r4, 0\n"
+"	ands r1, r0\n"
+"	mov r0, r10\n"
+"	ands r0, r2\n"
+"	orrs r0, r1\n"
+"	str r0, [sp]\n"
+"	ldrh r1, [r7]\n"
+"	mov r2, r10\n"
+"	ands r2, r0\n"
+"	orrs r2, r1\n"
+"	str r2, [sp]\n"
+"	ldrh r1, [r7]\n"
+"	ldr r0, _0805E4A0\n"
+"	ands r0, r1\n"
+"	mov r1, r10\n"
+"	ands r1, r2\n"
+"	orrs r1, r0\n"
+"	str r1, [sp]\n"
+"	ldrh r2, [r7]\n"
+"	mov r0, r10\n"
+"	ands r0, r1\n"
+"	orrs r0, r2\n"
+"	str r0, [sp]\n"
+"	ldr r1, _0805E4A4\n"
+"	ldr r5, [sp, 0x18]\n"
+"	lsls r0, r5, 3\n"
+"	adds r0, r1\n"
+"	mov r12, r0\n"
+"	ldrb r1, [r0, 0x4]\n"
+"	negs r0, r1\n"
+"	orrs r0, r1\n"
+"	asrs r1, r0, 31\n"
+"	movs r0, 0x8\n"
+"	ands r1, r0\n"
+"	mov r6, r12\n"
+"	ldrb r0, [r6, 0x5]\n"
+"	cmp r0, 0\n"
+"	beq _0805E3B4\n"
+"	adds r1, 0x10\n"
+"_0805E3B4:\n"
+"	movs r0, 0x1F\n"
+"	ands r1, r0\n"
+"	lsls r1, 9\n"
+"	ldrh r3, [r7, 0x2]\n"
+"	ldr r2, _0805E4A8\n"
+"	adds r0, r2, 0\n"
+"	ands r3, r0\n"
+"	orrs r3, r1\n"
+"	ldr r4, _0805E4A0\n"
+"	ands r3, r4\n"
+"	strh r3, [r7, 0x2]\n"
+"	ldr r2, _0805E4AC\n"
+"	ldrh r0, [r7, 0x4]\n"
+"	movs r5, 0xFC\n"
+"	lsls r5, 8\n"
+"	adds r1, r5, 0\n"
+"	ands r0, r1\n"
+"	orrs r0, r2\n"
+"	movs r6, 0\n"
+"	orrs r0, r6\n"
+"	movs r1, 0x80\n"
+"	lsls r1, 4\n"
+"	ldr r2, _0805E494\n"
+"	ands r0, r2\n"
+"	orrs r0, r1\n"
+"	orrs r0, r6\n"
+"	ldr r4, _0805E4B0\n"
+"	mov r9, r4\n"
+"	ands r0, r4\n"
+"	strh r0, [r7, 0x4]\n"
+"	ldrh r4, [r7, 0x6]\n"
+"	ldr r5, _0805E4B4\n"
+"	adds r0, r5, 0\n"
+"	ands r4, r0\n"
+"	ldr r6, _0805E4B8\n"
+"	adds r0, r6, 0\n"
+"	ands r4, r0\n"
+"	strh r4, [r7, 0x6]\n"
+"	mov r0, r12\n"
+"	movs r1, 0\n"
+"	ldrsh r5, [r0, r1]\n"
+"	lsls r2, r5, 2\n"
+"	adds r2, r5\n"
+"	lsls r2, 1\n"
+"	ldr r6, _0805E4BC\n"
+"	mov r8, r6\n"
+"	movs r1, 0\n"
+"	ldrsh r0, [r6, r1]\n"
+"	lsrs r1, r0, 31\n"
+"	adds r0, r1\n"
+"	asrs r0, 1\n"
+"	movs r6, 0x7\n"
+"	ands r0, r6\n"
+"	muls r0, r5\n"
+"	adds r0, r2\n"
+"	adds r0, 0x74\n"
+"	ldr r1, _0805E4C0\n"
+"	ands r0, r1\n"
+"	movs r2, 0xFE\n"
+"	lsls r2, 8\n"
+"	adds r1, r2, 0\n"
+"	ands r3, r1\n"
+"	orrs r3, r0\n"
+"	strh r3, [r7, 0x2]\n"
+"	mov r5, r12\n"
+"	movs r0, 0x2\n"
+"	ldrsh r3, [r5, r0]\n"
+"	lsls r2, r3, 2\n"
+"	adds r2, r3\n"
+"	lsls r2, 1\n"
+"	mov r1, r8\n"
+"	movs r5, 0\n"
+"	ldrsh r0, [r1, r5]\n"
+"	lsrs r1, r0, 31\n"
+"	adds r0, r1\n"
+"	asrs r0, 1\n"
+"	ands r0, r6\n"
+"	muls r0, r3\n"
+"	adds r0, r2\n"
+"	adds r0, 0x52\n"
+"	mov r6, r9\n"
+"	ands r0, r6\n"
+"	lsls r0, 4\n"
+"	movs r1, 0xF\n"
+"	ands r4, r1\n"
+"	orrs r4, r0\n"
+"	strh r4, [r7, 0x6]\n"
+"	mov r0, sp\n"
+"	adds r1, 0xF1\n"
+"	movs r2, 0\n"
+"	movs r3, 0\n"
+"	bl AddSprite\n"
+"	ldr r2, [sp, 0x18]\n"
+"	adds r2, 0x1\n"
+"	str r2, [sp, 0x18]\n"
+"	cmp r2, 0x3\n"
+"	bgt _0805E47A\n"
+"	b _0805E2F0\n"
+"_0805E47A:\n"
+"	b _0805E6AC\n"
+"	.align 2, 0\n"
+"_0805E47C: .4byte gDungeon\n"
+"_0805E480: .4byte 0x000181e8\n"
+"_0805E484: .4byte gUnknown_202F22C\n"
+"_0805E488: .4byte 0xffff0000\n"
+"_0805E48C: .4byte 0x0000feff\n"
+"_0805E490: .4byte 0x0000fdff\n"
+"_0805E494: .4byte 0x0000f3ff\n"
+"_0805E498: .4byte 0x0000efff\n"
+"_0805E49C: .4byte 0x0000dfff\n"
+"_0805E4A0: .4byte 0x00003fff\n"
+"_0805E4A4: .4byte gUnknown_8106AC8\n"
+"_0805E4A8: .4byte 0x0000c1ff\n"
+"_0805E4AC: .4byte 0x00000213\n"
+"_0805E4B0: .4byte 0x00000fff\n"
+"_0805E4B4: .4byte 0x0000fffe\n"
+"_0805E4B8: .4byte 0x0000fffd\n"
+"_0805E4BC: .4byte gUnknown_202F22E\n"
+"_0805E4C0: .4byte 0x000001ff\n"
+"_0805E4C4:\n"
+"	ldr r3, _0805E6E4\n"
+"	adds r0, r1, r3\n"
+"	ldrb r0, [r0]\n"
+"	cmp r0, 0\n"
+"	bne _0805E4D0\n"
+"	b _0805E6AC\n"
+"_0805E4D0:\n"
+"	ldr r4, _0805E6E8\n"
+"	adds r0, r1, r4\n"
+"	ldrb r0, [r0]\n"
+"	str r0, [sp, 0x1C]\n"
+"	cmp r0, 0x7\n"
+"	bls _0805E4DE\n"
+"	b _0805E6AC\n"
+"_0805E4DE:\n"
+"	ldr r0, _0805E6EC\n"
+"	ldrb r0, [r0]\n"
+"	movs r7, 0x1\n"
+"	cmp r0, 0\n"
+"	beq _0805E4F2\n"
+"	ldr r0, _0805E6F0\n"
+"	ldrb r0, [r0]\n"
+"	cmp r0, 0\n"
+"	beq _0805E4F2\n"
+"	movs r7, 0x3\n"
+"_0805E4F2:\n"
+"	ldr r5, _0805E6F4\n"
+"	mov r12, r5\n"
+"	ldr r6, [sp, 0x1C]\n"
+"	lsls r5, r6, 1\n"
+"	adds r3, r5, r6\n"
+"	lsls r3, 2\n"
+"	add r3, r12\n"
+"	movs r0, 0\n"
+"	ldrsh r4, [r3, r0]\n"
+"	lsls r1, r4, 2\n"
+"	adds r1, r4\n"
+"	lsls r1, 1\n"
+"	ldr r0, _0805E6F8\n"
+"	movs r6, 0\n"
+"	ldrsh r2, [r0, r6]\n"
+"	lsrs r0, r2, 31\n"
+"	adds r2, r0\n"
+"	asrs r2, 1\n"
+"	movs r0, 0x7\n"
+"	ands r2, r0\n"
+"	adds r0, r4, 0\n"
+"	muls r0, r2\n"
+"	adds r0, r1\n"
+"	adds r0, 0x74\n"
+"	str r0, [sp, 0x20]\n"
+"	movs r1, 0x2\n"
+"	ldrsh r0, [r3, r1]\n"
+"	lsls r1, r0, 2\n"
+"	adds r1, r0\n"
+"	lsls r1, 1\n"
+"	muls r0, r2\n"
+"	adds r0, r1\n"
+"	adds r0, 0x52\n"
+"	mov r10, r0\n"
+"	str r5, [sp, 0x24]\n"
+"	cmp r7, 0\n"
+"	bne _0805E53E\n"
+"	b _0805E6AC\n"
+"_0805E53E:\n"
+"	add r6, sp, 0x8\n"
+"	ldr r2, _0805E6FC\n"
+"	mov r8, r2\n"
+"	mov r9, r7\n"
+"_0805E546:\n"
+"	ldrh r0, [r6]\n"
+"	ldr r3, _0805E700\n"
+"	adds r1, r3, 0\n"
+"	ands r1, r0\n"
+"	ldr r0, [sp, 0x8]\n"
+"	mov r4, r8\n"
+"	ands r0, r4\n"
+"	orrs r0, r1\n"
+"	str r0, [sp, 0x8]\n"
+"	ldrh r1, [r6]\n"
+"	mov r2, r8\n"
+"	ands r2, r0\n"
+"	orrs r2, r1\n"
+"	str r2, [sp, 0x8]\n"
+"	ldrh r0, [r6]\n"
+"	ldr r5, _0805E704\n"
+"	adds r1, r5, 0\n"
+"	ands r1, r0\n"
+"	mov r0, r8\n"
+"	ands r0, r2\n"
+"	orrs r0, r1\n"
+"	str r0, [sp, 0x8]\n"
+"	ldrh r2, [r6]\n"
+"	mov r1, r8\n"
+"	ands r1, r0\n"
+"	orrs r1, r2\n"
+"	str r1, [sp, 0x8]\n"
+"	ldrh r2, [r6]\n"
+"	ldr r0, _0805E708\n"
+"	ands r0, r2\n"
+"	mov r3, r8\n"
+"	ands r3, r1\n"
+"	orrs r3, r0\n"
+"	str r3, [sp, 0x8]\n"
+"	ldrh r1, [r6]\n"
+"	movs r0, 0x80\n"
+"	lsls r0, 3\n"
+"	orrs r0, r1\n"
+"	movs r1, 0\n"
+"	orrs r0, r1\n"
+"	mov r2, r8\n"
+"	ands r2, r3\n"
+"	orrs r2, r0\n"
+"	str r2, [sp, 0x8]\n"
+"	ldrh r0, [r6]\n"
+"	ldr r3, _0805E70C\n"
+"	adds r1, r3, 0\n"
+"	ands r1, r0\n"
+"	mov r0, r8\n"
+"	ands r0, r2\n"
+"	orrs r0, r1\n"
+"	str r0, [sp, 0x8]\n"
+"	ldrh r1, [r6]\n"
+"	mov r2, r8\n"
+"	ands r2, r0\n"
+"	orrs r2, r1\n"
+"	str r2, [sp, 0x8]\n"
+"	ldrh r0, [r6]\n"
+"	ldr r4, _0805E710\n"
+"	adds r1, r4, 0\n"
+"	ands r1, r0\n"
+"	mov r0, r8\n"
+"	ands r0, r2\n"
+"	orrs r0, r1\n"
+"	str r0, [sp, 0x8]\n"
+"	ldrh r1, [r6]\n"
+"	mov r2, r8\n"
+"	ands r2, r0\n"
+"	orrs r2, r1\n"
+"	str r2, [sp, 0x8]\n"
+"	ldrh r1, [r6]\n"
+"	ldr r0, _0805E714\n"
+"	ands r0, r1\n"
+"	mov r1, r8\n"
+"	ands r1, r2\n"
+"	orrs r1, r0\n"
+"	str r1, [sp, 0x8]\n"
+"	ldrh r2, [r6]\n"
+"	mov r0, r8\n"
+"	ands r0, r1\n"
+"	orrs r0, r2\n"
+"	str r0, [sp, 0x8]\n"
+"	ldr r5, [sp, 0x24]\n"
+"	ldr r1, [sp, 0x1C]\n"
+"	adds r0, r5, r1\n"
+"	lsls r2, r0, 2\n"
+"	ldr r3, _0805E6F4\n"
+"	adds r7, r2, r3\n"
+"	ldrb r1, [r7, 0x8]\n"
+"	negs r0, r1\n"
+"	orrs r0, r1\n"
+"	asrs r1, r0, 31\n"
+"	movs r0, 0x8\n"
+"	ands r1, r0\n"
+"	ldrb r0, [r7, 0x9]\n"
+"	cmp r0, 0\n"
+"	beq _0805E60A\n"
+"	adds r1, 0x10\n"
+"_0805E60A:\n"
+"	movs r0, 0x1F\n"
+"	ands r1, r0\n"
+"	lsls r1, 9\n"
+"	ldrh r3, [r6, 0x2]\n"
+"	ldr r4, _0805E718\n"
+"	adds r0, r4, 0\n"
+"	ands r3, r0\n"
+"	orrs r3, r1\n"
+"	ldr r5, _0805E714\n"
+"	ands r3, r5\n"
+"	strh r3, [r6, 0x2]\n"
+"	ldr r1, _0805E71C\n"
+"	adds r0, r2, r1\n"
+"	ldr r2, [r0]\n"
+"	ldr r0, _0805E720\n"
+"	ands r2, r0\n"
+"	ldrh r0, [r6, 0x4]\n"
+"	movs r4, 0xFC\n"
+"	lsls r4, 8\n"
+"	adds r1, r4, 0\n"
+"	ands r0, r1\n"
+"	orrs r0, r2\n"
+"	movs r1, 0x80\n"
+"	lsls r1, 4\n"
+"	ldr r5, _0805E708\n"
+"	ands r0, r5\n"
+"	orrs r0, r1\n"
+"	movs r1, 0\n"
+"	orrs r0, r1\n"
+"	movs r2, 0xF\n"
+"	mov r12, r2\n"
+"	ldr r4, _0805E724\n"
+"	ands r0, r4\n"
+"	strh r0, [r6, 0x4]\n"
+"	ldrh r1, [r6, 0x6]\n"
+"	ldr r5, _0805E728\n"
+"	adds r0, r5, 0\n"
+"	ands r1, r0\n"
+"	ldr r2, _0805E72C\n"
+"	adds r0, r2, 0\n"
+"	ands r1, r0\n"
+"	ldr r0, _0805E730\n"
+"	ldr r5, [sp, 0x20]\n"
+"	ands r0, r5\n"
+"	movs r5, 0xFE\n"
+"	lsls r5, 8\n"
+"	adds r2, r5, 0\n"
+"	ands r3, r2\n"
+"	orrs r3, r0\n"
+"	strh r3, [r6, 0x2]\n"
+"	mov r0, r10\n"
+"	ands r0, r4\n"
+"	lsls r0, 4\n"
+"	mov r2, r12\n"
+"	ands r1, r2\n"
+"	orrs r1, r0\n"
+"	strh r1, [r6, 0x6]\n"
+"	adds r0, r6, 0\n"
+"	movs r1, 0x80\n"
+"	lsls r1, 1\n"
+"	movs r2, 0\n"
+"	movs r3, 0\n"
+"	bl AddSprite\n"
+"	movs r3, 0\n"
+"	ldrsh r0, [r7, r3]\n"
+"	lsls r0, 2\n"
+"	ldr r4, [sp, 0x20]\n"
+"	adds r4, r0\n"
+"	str r4, [sp, 0x20]\n"
+"	movs r5, 0x2\n"
+"	ldrsh r0, [r7, r5]\n"
+"	lsls r0, 2\n"
+"	add r10, r0\n"
+"	movs r0, 0x1\n"
+"	negs r0, r0\n"
+"	add r9, r0\n"
+"	mov r1, r9\n"
+"	cmp r1, 0\n"
+"	beq _0805E6AC\n"
+"	b _0805E546\n"
+"_0805E6AC:\n"
+"	ldr r4, _0805E734\n"
+"	ldrb r0, [r4]\n"
+"	cmp r0, 0\n"
+"	beq _0805E6D4\n"
+"	ldr r2, [sp, 0x14]\n"
+"	adds r2, 0x34\n"
+"	ldr r3, [sp, 0x14]\n"
+"	adds r3, 0x33\n"
+"	ldrb r1, [r3]\n"
+"	ldrb r0, [r2]\n"
+"	cmp r0, r1\n"
+"	beq _0805E6D4\n"
+"	strb r1, [r2]\n"
+"	ldr r0, [sp, 0x10]\n"
+"	adds r0, 0x4\n"
+"	ldrb r1, [r3]\n"
+"	ldrb r3, [r4]\n"
+"	movs r2, 0\n"
+"	bl sub_804A728\n"
+"_0805E6D4:\n"
+"	add sp, 0x28\n"
+"	pop {r3-r5}\n"
+"	mov r8, r3\n"
+"	mov r9, r4\n"
+"	mov r10, r5\n"
+"	pop {r4-r7}\n"
+"	pop {r0}\n"
+"	bx r0\n"
+"	.align 2, 0\n"
+"_0805E6E4: .4byte 0x0001821a\n"
+"_0805E6E8: .4byte 0x0001821b\n"
+"_0805E6EC: .4byte gUnknown_202F231\n"
+"_0805E6F0: .4byte gUnknown_202F230\n"
+"_0805E6F4: .4byte gUnknown_8106AE8\n"
+"_0805E6F8: .4byte gUnknown_202F22E\n"
+"_0805E6FC: .4byte 0xffff0000\n"
+"_0805E700: .4byte 0x0000feff\n"
+"_0805E704: .4byte 0x0000fdff\n"
+"_0805E708: .4byte 0x0000f3ff\n"
+"_0805E70C: .4byte 0x0000efff\n"
+"_0805E710: .4byte 0x0000dfff\n"
+"_0805E714: .4byte 0x00003fff\n"
+"_0805E718: .4byte 0x0000c1ff\n"
+"_0805E71C: .4byte gUnknown_8106AEC\n"
+"_0805E720: .4byte 0x000003ff\n"
+"_0805E724: .4byte 0x00000fff\n"
+"_0805E728: .4byte 0x0000fffe\n"
+"_0805E72C: .4byte 0x0000fffd\n"
+"_0805E730: .4byte 0x000001ff\n"
+"_0805E734: .4byte gUnknown_202F22D"
+);
+}
+
+void sub_805E738(Entity *a0)
+{
+    Tile *tile;
+    s32 i, j;
+    EntityInfo *entityInfo = a0->info;
+    if (entityInfo->eyesightStatus.eyesightStatus != 1 && entityInfo->eyesightStatus.eyesightStatus != 2) {
+        // What???
+        for (i = 0; i < 1; i++) {
+            bool8 r9 = FALSE;
+            u32 r5 = entityInfo->action.direction;
+            r5++;
+            for (j = 1; j < 8; j++, r5++) {
+                r5 &= 7;
+                tile = GetTile(a0->pos.x + gAdjacentTileOffsets[r5].x, a0->pos.y + gAdjacentTileOffsets[r5].y);
+                if (tile->monster != NULL && GetEntityType(tile->monster) == ENTITY_MONSTER) {
+                    EntityInfo *tileMonsterInfo = tile->monster->info;
+                    if (CanSeeTarget(a0, tile->monster)) {
+                        if (i != 0 || tileMonsterInfo->isNotTeamMember) {
+                            r9 = TRUE;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (r9) {
+                a0->info->action.direction = r5 & 7;
+                sub_806CDD4(a0, sub_806CEBC(a0), r5);
+                break;
+            }
+        }
+    }
+}
+
+void sub_805E804(void)
+{
+    gDungeon->unk66D |= gDungeon->unk66C;
+    gDungeon->unk66C = 0;
+    while (gDungeon->unk66D != 0 && gRealInputs.held & R_BUTTON) {
+        sub_803E46C(0x54);
+    }
+}
+
+extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
+bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
+
+bool8 sub_805E874(void)
+{
+    u8 r7, r8, r0;
+    s32 i, j, k;
+    s32 xArray[3];
+    s32 yArray[3];
+    Dungeon *dungeon = gDungeon;
+    Entity *leader = GetLeader();
+    s32 direction = leader->info->action.direction;
+    s32 x = leader->pos.x;
+    s32 y = leader->pos.y;
+    Tile *leaderTile = GetTile(x, y);
+    s32 xAdjacent = x + gAdjacentTileOffsets[direction].x;
+    s32 yAdjacent = y + gAdjacentTileOffsets[direction].y;
+    s32 room;
+
+    if (dungeon->unk66C == 0)
+        return FALSE;
+    if (leaderTile->object != NULL)
+        return FALSE;
+    if (sub_805EC2C(leader, x, y))
+        return FALSE;
+    if (!sub_8070F14(leader, direction))
+        return FALSE;
+
+    room = leaderTile->room;
+    if (room == 0xFF) {
+        if (GetTile(xAdjacent, yAdjacent)->room != 0xFF)
+            return FALSE;
+    }
+    else {
+        if (leaderTile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
+            return FALSE;
+    }
+
+    for (j = -1; j < 2; j++) {
+        Tile *tile = GetTile(x + gAdjacentTileOffsets[(direction + j) & 7].x, y + gAdjacentTileOffsets[(direction + j) & 7].y);
+        if (tile->monster != NULL)
+            return FALSE;
+        if (tile->terrainType & TERRAIN_TYPE_STAIRS)
+            return FALSE;
+    }
+
+    xArray[0] = x + gAdjacentTileOffsets[(direction + 3) & 7].x;
+    xArray[1] = x + gAdjacentTileOffsets[(direction + 4) & 7].x;
+    xArray[2] = x + gAdjacentTileOffsets[(direction + 5) & 7].x;
+
+    yArray[0] = y + gAdjacentTileOffsets[(direction + 3) & 7].y;
+    yArray[1] = y + gAdjacentTileOffsets[(direction + 4) & 7].y;
+    yArray[2] = y + gAdjacentTileOffsets[(direction + 5) & 7].y;
+
+    for (i = -1; i < 2; i++) {
+        for (j = -1; j < 2; j++) {
+            Tile *tile = GetTile(x + i, y + j);
+            if (tile->object != NULL) {
+                for (k = 0; k < 3; k++) {
+                    if (x + i == xArray[k] && y + j == yArray[k])
+                        break;
+                }
+                if (k == 3 && GetEntityType(tile->object) == ENTITY_ITEM)
+                    return FALSE;
+            }
+
+            if (direction & 1) {
+                // This doesn't really have to be called two times...
+                if (tile->object != NULL && GetEntityType(tile->object) == ENTITY_TRAP && GetEntityType(tile->object) == ENTITY_TRAP) {
+                    if (tile->object->isVisible)
+                        return FALSE;
+                    if (gDungeon->unk181e8.unk1820F)
+                        return FALSE;
+                }
+            }
+            else if (i == 0 || j == 0) {
+                if (tile->object != NULL && GetEntityType(tile->object) == ENTITY_TRAP) {
+                    if (tile->object->isVisible)
+                        return FALSE;
+                    if (gDungeon->unk181e8.unk1820F)
+                        return FALSE;
+                }
+            }
+
+            if (i != 0 && j != 0) continue;
+            if (i == 0 && j == 0) continue;
+
+            if ((xArray[1] != x + i || yArray[1] != y + j) && !sub_805EC2C(leader, x + i, y + j) && room != 0xFF && room != tile->room)
+                return FALSE;
+        }
+    }
+
+    if (!(direction & 1)) {
+        if (direction == 0 || direction == 4) {
+            r8 = sub_805EC2C(leader, x - 1, y - 1);
+            r7 = sub_805EC2C(leader, x - 1, y);
+            r0 = sub_805EC2C(leader, x - 1, y + 1);
+            if (r7 == 0) {
+                if (r8 != 0 || r7 != r0)
+                    return FALSE;
+            }
+
+            r8 = sub_805EC2C(leader, x + 1, y - 1);
+            r7 = sub_805EC2C(leader, x + 1, y);
+            r0 = sub_805EC2C(leader, x + 1, y + 1);
+            if (r7 == 0) {
+                if (r8 != 0 || r7 != r0)
+                    return FALSE;
+            }
+        }
+        else {
+            r8 = sub_805EC2C(leader, x - 1, y - 1);
+            r7 = sub_805EC2C(leader, x, y - 1);
+            r0 = sub_805EC2C(leader, x + 1, y - 1);
+            if (r7 == 0) {
+                if (r8 != 0 || r7 != r0)
+                    return FALSE;
+            }
+
+            r8 = sub_805EC2C(leader, x - 1, y + 1);
+            r7 = sub_805EC2C(leader, x, y + 1);
+            r0 = sub_805EC2C(leader, x + 1, y + 1);
+            if (r7 == 0) {
+                if (r8 != 0 || r7 != r0)
+                    return FALSE;
+            }
+        }
+    }
+
+    return TRUE;
+}
