@@ -1,7 +1,9 @@
 #include "global.h"
 #include "dungeon_items.h"
 
+#include "code_803E668.h"
 #include "code_8045A00.h"
+#include "code_80861A8.h"
 #include "code_80869E4.h"
 #include "dungeon_capabilities.h"
 #include "dungeon_leader.h"
@@ -19,9 +21,7 @@ extern u8 *gUnknown_81053A8[];
 extern u8 *gUnknown_8105434[];
 
 extern s32 sub_8052B8C(u32, u8 *, u32);
-extern void sub_80861A8(void);
 extern void PrintFieldMessage(u32, u8 *, u32);
-extern void sub_803E708(u32, u32);
 extern void sub_80416E0(Position32 *r0, u32, bool8);
 extern void sub_80421C0(Entity *, u32);
 extern void sub_80855E4(void *);

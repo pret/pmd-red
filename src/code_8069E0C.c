@@ -1,4 +1,6 @@
 #include "global.h"
+#include "code_803E46C.h"
+#include "code_803E668.h"
 #include "code_8045A00.h"
 #include "constants/ability.h"
 #include "constants/move_id.h"
@@ -42,8 +44,6 @@ extern bool8 sub_8045888(Entity *);
 extern void sub_806A2BC(Entity *, u8);
 extern void sub_804178C(u32);
 extern void sub_803F508(Entity *);
-extern void sub_803E46C(u32);
-extern void sub_803E708(u32 r0, u32 r1);
 
 void sub_8069E0C(Entity *pokemon)
 {

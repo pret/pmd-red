@@ -1,20 +1,19 @@
 #include "global.h"
-#include "code_805D8C8.h"
 #include "code_806CD90.h"
+
+#include "code_803E46C.h"
+#include "code_805D8C8.h"
 #include "constants/direction.h"
 #include "constants/status.h"
-#include "structs/str_dungeon.h"
 #include "dungeon_util.h"
-#include "pokemon.h"
 #include "pokemon_mid.h"
+#include "pokemon.h"
 #include "random.h"
 #include "sprite.h"
+#include "structs/str_dungeon.h"
 #include "tile_types.h"
 
 const u8 gUnknown_8106EEF[] = {0x03, 0x04, 0x05, 0x00, 0x00, 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00 };
-
-// code_803D110.s
-extern void sub_803E46C(u32);
 
 void sub_806CC10(void)
 {

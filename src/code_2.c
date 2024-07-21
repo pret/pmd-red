@@ -25,8 +25,8 @@
 #include "play_time.h"
 #include "pokemon.h"
 #include "rescue_team_info.h"
-#include "save.h"
 #include "save_read.h"
+#include "save.h"
 #include "sprite.h"
 #include "text1.h"
 #include "text2.h"
@@ -41,8 +41,6 @@ extern void sub_80095CC(u32, u32);
 extern void nullsub_33(void);
 extern u32 sub_80009D0(u32);
 
-extern void nullsub_8(u32);
-extern void sub_80060EC(void);
 extern void xxx_call_update_bg_vram(void);
 
 extern u32 gUnknown_203B03C;

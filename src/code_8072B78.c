@@ -1,15 +1,16 @@
 #include "global.h"
-#include "structs/dungeon_entity.h"
-#include "structs/map.h"
-#include "structs/str_pokemon.h"
+#include "code_805D8C8.h"
+#include "code_806CD90.h"
 #include "dungeon_map_access.h"
 #include "dungeon_movement.h"
 #include "dungeon_random.h"
-#include "code_805D8C8.h"
-#include "code_806CD90.h"
 #include "moves.h"
 #include "pokemon_mid.h"
+#include "pokemon_mid.h"
 #include "status_checks_1.h"
+#include "structs/dungeon_entity.h"
+#include "structs/map.h"
+#include "structs/str_pokemon.h"
 
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DFE8[];
@@ -34,8 +35,6 @@ void sub_80522F4(Entity *r0, Entity *r1, const char r2[]);
 void sub_8042A44(Entity *r0);
 void sub_8083D78(void);
 extern bool8 sub_803D930(u32);
-
-void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index);
 
 void sub_8072AC8(s16 *param_1, s16 species, s32 param_3)
 {

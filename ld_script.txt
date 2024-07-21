@@ -202,6 +202,10 @@ SECTIONS {
         src/personality_test2.o(.text);
         src/code_803D0D8.o(.text);
         asm/code_803D110.o(.text);
+        src/code_803E46C.o(.text);
+        asm/code_803E490.o(.text);
+        src/code_803E668.o(.text);
+        asm/code_803E724.o(.text);
         src/code_8040094.o(.text);
         asm/code_8040094.o(.text);
         src/code_8041AD0.o(.text);
@@ -291,10 +295,16 @@ SECTIONS {
         src/dungeon_random.o(.text);
         src/code_808417C.o(.text);
         asm/code_808417C.o(.text);
+        src/code_8084778.o(.text);
+        asm/code_80847D4.o(.text);
         src/code_80848F0.o(.text);
         asm/code_80848F0.o(.text);
         src/dungeon_util_1.o(.text);
-        asm/code_8085B0C.o(.text);
+        asm/code_8085B80.o(.text);
+        src/code_8085E98.o(.text);
+        asm/code_8085EB0.o(.text);
+        src/code_80861A8.o(.text);
+        asm/code_80861B8.o(.text);
         src/code_80869E4.o(.text);
         src/code_8086A3C.o(.text);
         asm/code_8086A3C.o(.text);

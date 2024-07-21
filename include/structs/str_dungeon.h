@@ -103,7 +103,8 @@ typedef struct unkDungeonGlobal_unk181E8_sub
     u8 unk18212;
     u8 unk18213;
     u8 unk18214;
-    u8 fill18215[2];
+    u8 unk18215;
+    u8 fill18216;
     u8 unk18217;
     u8 fill18218;
     u8 fill18219;

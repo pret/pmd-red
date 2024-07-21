@@ -15,6 +15,7 @@ struct unkStructFor800561C
 extern s16 *gUnknown_203B078;
 
 void nullsub_7(s16 *);
+void nullsub_8(u32);
 void nullsub_9(void);
 void nullsub_10(bool8);
 void nullsub_12(void);

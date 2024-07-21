@@ -36,7 +36,6 @@ void InitializeRecruitedPokemon(void);
 
 // These two need to be overridden in status_actions.c
 // Uncomment when fixed
-//void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index);
 //u8 GetBodySize(s16 index);
 
 

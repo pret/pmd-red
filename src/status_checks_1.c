@@ -1,20 +1,21 @@
 #include "global.h"
 #include "status_checks_1.h"
 
+#include "code_800D090.h"
+#include "code_80521D0.h"
 #include "constants/ability.h"
 #include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "constants/weather.h"
 #include "dungeon_engine.h"
-#include "structs/str_dungeon.h"
 #include "dungeon_items.h"
+#include "dungeon_map_access.h"
 #include "dungeon_movement.h"
 #include "dungeon_pokemon_attributes.h"
-#include "dungeon_map_access.h"
 #include "dungeon_util.h"
-#include "code_800D090.h"
-#include "code_80521D0.h"
+#include "pokemon_mid.h"
 #include "pokemon.h"
+#include "structs/str_dungeon.h"
 #include "weather.h"
 
 extern void sub_80429B4(Entity *r0);
@@ -25,7 +26,6 @@ extern u8 *gUnknown_80F8994[];
 extern u8 *gUnknown_80F8968[];
 extern u8 *gUnknown_80F8988[];
 extern u8 gUnknown_8106FA4[];
-void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index);
 
 s32 sub_8070828(Entity *pokemon, bool8 displayMessage)
 {
