@@ -2514,6 +2514,7 @@ _0803E464: .4byte gUnknown_202EDC8
 _0803E468: .4byte gUnknown_202D058
 	thumb_func_end sub_803E250
 
+@ https://decomp.me/scratch/5arGc (kermalis 100%) `void sub_803E46C(u32)`
 	thumb_func_start sub_803E46C
 sub_803E46C:
 	push {lr}
@@ -2725,6 +2726,7 @@ _0803E660: .4byte 0x00018213
 _0803E664: .4byte gUnknown_202EDD4
 	thumb_func_end sub_803E490
 
+@ https://decomp.me/scratch/biQXr (kermalis 100%) `void sub_803E668(u32)`
 	thumb_func_start sub_803E668
 sub_803E668:
 	push {r4,lr}
@@ -2785,6 +2787,7 @@ _0803E700: .4byte gDungeon
 _0803E704: .4byte 0x00018213
 	thumb_func_end sub_803E668
 
+@ https://decomp.me/scratch/bDSdY (kermalis 100%) `void sub_803E708(s32, u32)`
 	thumb_func_start sub_803E708
 sub_803E708:
 	push {r4,r5,lr}
