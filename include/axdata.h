@@ -80,7 +80,7 @@ typedef struct axmain
 struct axPokemon
 {
     /* 0x0 */ axdata axdata;
-    /* 0x3C */ OpenedFile *spriteFile;
+    /* 0x3C */ OpenedFile *spriteFile; // This might be a unkStruct_202EE8C instead and unkStruct_202EE8C.unk0 might be a OpenedFile* etc. See sub_8010F28
     u16 unk40_maybeAnimTimer;
     u8 unk42_animId1;
     u8 unk43_animId2;

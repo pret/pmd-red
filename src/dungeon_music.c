@@ -128,7 +128,7 @@ bool8 sub_8083C88(u8 param_1)
 
   temp = &gDungeon->unk1CE98;
 
-  if ((!HasCheckpoint(gDungeon->dungeonLocation.id) && 
+  if ((!HasCheckpoint(gDungeon->dungeonLocation.id) &&
       ((gDungeon->unk65C != 0) || (param_1 != 0))) ||
      (temp->moveID != 0x227)) {
     return TRUE;
@@ -270,7 +270,7 @@ void StopDungeonBGM(void)
 
 void UpdateDungeonMusic(void)
 {
-#ifndef NONMATCHING    
+#ifndef NONMATCHING
   register s32 currSongIndex asm("r1");
   register u16 *bossSongIndex asm("r3");
 #else
@@ -279,7 +279,7 @@ void UpdateDungeonMusic(void)
 #endif
   s32 newSongIndex;
   DungeonMusicPlayer *musPlayer;
-  
+
   musPlayer = &gDungeon->musPlayer;
 
   bossSongIndex = &gDungeon->bossSongIndex;

@@ -1,12 +1,13 @@
 #include "global.h"
 #include "status_checks.h"
 
+#include "charge_move.h"
+#include "code_8045A00.h"
+#include "code_80521D0.h"
+#include "code_8077274_1.h"
 #include "constants/direction.h"
 #include "constants/dungeon_action.h"
 #include "constants/status.h"
-#include "code_80521D0.h"
-#include "code_8077274_1.h"
-#include "charge_move.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_attack.h"
 #include "dungeon_capabilities.h"
@@ -23,8 +24,6 @@ extern const char *gPtrInfatuatedMessage[];
 extern u8 gAvailablePokemonNames[];
 extern u8 *gUnknown_80F95EC[];
 extern char *gPtrMoveInterruptedMessage[];
-
-extern void SetMessageArgument(char[], Entity*, u32);
 
 bool8 HasStatusAffectingActions(Entity *pokemon)
 {
@@ -116,7 +115,7 @@ bool8 sub_80701A4(Entity *pokemon)
   s32 index_1;
   EntityInfo * pokemonInfo;
   u8 *r7;
-  
+
   pokemonInfo = pokemon->info;
   flag = FALSE;
   SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
@@ -177,7 +176,7 @@ bool8 sub_80701A4(Entity *pokemon)
                         index_1 = index;
                         r7 = &pokemonInfo->action.unk4[1].actionUseIndex;
                         if((index > 0) && (move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
-                        {   
+                        {
                             do {
                                 move2 = &pokemonInfo->moves[index_1 + 1];
                                 move2--, index_1--;
@@ -195,7 +194,7 @@ bool8 sub_80701A4(Entity *pokemon)
                 }
             }
             sub_8079764(pokemon);
-        }   
+        }
         return FALSE;
   }
 }

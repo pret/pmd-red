@@ -189,7 +189,7 @@ static void sub_802608C(void)
             {
                 sUnknown_203B2B8->unk220[index] = sUnknown_80DD310;
             }
-            break; 
+            break;
     }
     ResetUnusedInputStruct();
     sub_800641C(sUnknown_203B2B8->unk220, TRUE, TRUE);
@@ -346,7 +346,7 @@ void sub_80264CC(void) {
         }
         loopMax += 1;
     }
-    
+
     sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuGiveGummi;
     sUnknown_203B2B8->unk16C[loopMax].menuAction = 10;
     if(!HasGummiItem())
@@ -354,20 +354,20 @@ void sub_80264CC(void) {
         sUnknown_203B2B8->unk20C[loopMax] = 1;
     }
     loopMax += 1;
-    
+
     sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuGive;
     sUnknown_203B2B8->unk16C[loopMax].menuAction = 0xB;
     if(GetNumberOfFilledInventorySlots() == 0)
     {
-        sUnknown_203B2B8->unk20C[loopMax] = 1; 
+        sUnknown_203B2B8->unk20C[loopMax] = 1;
     }
     loopMax += 1;
-    
+
     sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuTake;
     sUnknown_203B2B8->unk16C[loopMax].menuAction = 0xC;
     if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE || sUnknown_203B2B8->item2.id == ITEM_NOTHING)
     {
-        sUnknown_203B2B8->unk20C[loopMax] = 1; 
+        sUnknown_203B2B8->unk20C[loopMax] = 1;
     }
     loopMax += 1;
 
@@ -377,11 +377,11 @@ void sub_80264CC(void) {
         sUnknown_203B2B8->unk16C[loopMax].menuAction = 9;
         if(!sub_8026EB8(pokeStruct))
         {
-            sUnknown_203B2B8->unk20C[loopMax] = 1; 
+            sUnknown_203B2B8->unk20C[loopMax] = 1;
         }
         loopMax += 1;
     }
-    
+
     sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuSummary;
     sUnknown_203B2B8->unk16C[loopMax].menuAction = 4;
     loopMax += 1;
@@ -466,7 +466,7 @@ void sub_80268CC(void)
   PokemonStruct1 *pokeStruct;
   PokemonStruct1 *pokeStruct2;
   s32 choice;
-  
+
   choice = 0;
   if ((sub_8012FD8(&sUnknown_203B2B8->unk7C) == 0) && (sub_8013114(&sUnknown_203B2B8->unk7C,&choice), choice != 1)) {
     sUnknown_203B2B8->menuAction1 = choice;

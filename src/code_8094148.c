@@ -1,13 +1,13 @@
 #include "global.h"
 
-s32 *sub_8094268(s32 *param_1, s32 param_2, s32 param_3) 
+s32 *sub_8094268(s32 *param_1, s32 param_2, s32 param_3)
 {
     s32 x;
     s32 y;
     u16 z;
 
     y = param_2;
-    
+
     x = ((y >> 0x10) + (param_3 >> 0x10)) << 0x10;
     y = (y & 0x0000ffff) | x;
     z = y + param_3;

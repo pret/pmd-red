@@ -1,24 +1,25 @@
 #include "global.h"
+#include "code_8045A00.h"
 #include "code_806CD90.h"
 #include "code_80869E4.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
 #include "constants/friend_area.h"
 #include "constants/weather.h"
-#include "structs/str_dungeon.h"
-#include "structs/dungeon_entity.h"
 #include "dungeon_leader.h"
 #include "dungeon_map_access.h"
 #include "dungeon_music.h"
 #include "dungeon_random.h"
-#include "dungeon_util.h"
 #include "dungeon_util_1.h"
+#include "dungeon_util.h"
+#include "exclusive_pokemon.h"
 #include "friend_area.h"
 #include "items.h"
-#include "pokemon.h"
 #include "pokemon_3.h"
+#include "pokemon.h"
 #include "position_util.h"
-#include "exclusive_pokemon.h"
+#include "structs/dungeon_entity.h"
+#include "structs/str_dungeon.h"
 
 extern u32 gUnknown_202EDC8;
 extern u8 gUnknown_202E038[0x50];
@@ -312,7 +313,7 @@ extern const u8 gUnknown_81058A8[];
 
 extern const u8 gUnknown_81074FC[];
 
-extern u8 sub_800E9A8(u32);
+extern bool8 sub_800E9A8(s32);
 extern void sub_800DC14(u32);
 
 extern void sub_8086A3C(Entity *r0);
@@ -385,7 +386,6 @@ extern u8 JirachiFriendAreaSearch(void);
 extern u8 sub_80860A8(u32);
 extern void sub_8049ED4();
 extern void sub_8052D44(s16 *, Entity *, Entity *);
-extern void SetMessageArgument(u8 *, Entity *, u32);
 extern void sub_80421C0(Entity *, u32);
 extern void sub_8046D20();
 extern void sub_808B1CC(u8);
@@ -3803,7 +3803,7 @@ void JirachiWishGrantDialogue(Entity *jirachiEntity)
   uVar2 = sub_80861F8(0x68,jirachiEntity,0);
   // Taaaaaaaah!
   DisplayDungeonDialogue(gUnknown_81058C4);
-  if (sub_800E9A8(uVar2) != 0) {
+  if (sub_800E9A8(uVar2)) {
     sub_800DC14(uVar2);
   }
   sub_803E708(10,0x46);

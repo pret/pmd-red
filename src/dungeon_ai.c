@@ -1,35 +1,36 @@
 #include "global.h"
 #include "dungeon_ai.h"
 
+#include "code_8045A00.h"
+#include "code_80521D0.h"
+#include "code_8077274_1.h"
+#include "code_808417C.h"
 #include "constants/ability.h"
-#include "constants/dungeon_action.h"
 #include "constants/direction.h"
+#include "constants/dungeon_action.h"
 #include "constants/iq_skill.h"
 #include "constants/item.h"
 #include "constants/status.h"
 #include "constants/targeting.h"
 #include "constants/type.h"
-#include "code_80521D0.h"
-#include "code_8077274_1.h"
-#include "code_808417C.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_attack.h"
 #include "dungeon_ai_items.h"
 #include "dungeon_ai_movement.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_capabilities.h"
-#include "structs/str_dungeon.h"
 #include "dungeon_items.h"
 #include "dungeon_leader.h"
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
-#include "dungeon_util.h"
 #include "dungeon_util_1.h"
+#include "dungeon_util.h"
 #include "dungeon_visibility.h"
-#include "structs/map.h"
 #include "pokemon.h"
 #include "status_checks.h"
+#include "structs/map.h"
+#include "structs/str_dungeon.h"
 #include "targeting.h"
 #include "tile_types.h"
 
@@ -37,7 +38,6 @@ extern char gAvailablePokemonNames[];
 extern char *gPtrCouldntBeUsedMessage;
 extern char *gPtrItsaMonsterHouseMessage;
 
-extern void SetMessageArgument(char[], Entity*, u32);
 extern u8 sub_8044B28(void);
 extern void sub_807AB38(Entity *, u32);
 extern void sub_8041888(u32);

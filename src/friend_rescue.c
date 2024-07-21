@@ -687,7 +687,7 @@ void sub_8032828(void)
     PokemonStruct1 *pokeStruct1;
     PokemonStruct1 *pokeStruct2;
     char *monName;
-    
+
     switch (gUnknown_203B33C->state) {
         case 0x0:
             if (CountMailType(WONDER_MAIL_TYPE_SOS) == 0 && CountMailType(WONDER_MAIL_TYPE_THANK_YOU) == 0) {
@@ -967,7 +967,7 @@ void sub_8032828(void)
                         gUnknown_203B33C->status = sub_8037D64(gUnknown_203B33C->unk40, &gUnknown_203B33C->unkA8, &gUnknown_203B33C->unk130);
                         break;
                 }
-                
+
                 if (gUnknown_203B33C->status == 0) {
                     switch (gUnknown_203B33C->unk40) {
                         case 2:
@@ -1004,7 +1004,7 @@ void sub_8032828(void)
             sub_800641C(NULL, TRUE, TRUE);
             sub_80306A8(1, 0, NULL, 6);
             break;
-        case 0x15:            
+        case 0x15:
             sub_8014248(&gUnknown_80E2F78[0], 0, 6, &gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
             break;
         case 0xF:

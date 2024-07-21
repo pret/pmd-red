@@ -21,7 +21,7 @@ extern s32 gUnknown_202EE6C;
 bool8 sub_80461C8(Position *, u32);
 void sub_80460F8(Position *, Item *, u32);
 extern u8 sub_8043D10(void);
-extern u8 sub_8045888(Entity *);
+extern bool8 sub_8045888(Entity *);
 
 struct unkStruct_202EE44
 {
@@ -240,7 +240,7 @@ bool8 IsNotAttacking(Entity *param_1, bool8 param_2)
 
     info = param_1->info;
     action = &(info->action).action;
-    if ((param_2 == 0) || (sub_8045888(param_1) != 0))
+    if ((param_2 == 0) || (sub_8045888(param_1)))
     {
         if(*action == ACTION_NOTHING)
             return TRUE;

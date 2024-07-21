@@ -1,15 +1,16 @@
 #include "global.h"
 
+#include "code_8045A00.h"
+#include "code_80521D0.h"
 #include "constants/ability.h"
 #include "constants/type.h"
-#include "structs/str_dungeon.h"
-#include "dungeon_leader.h"
-#include "dungeon_util.h"
-#include "code_80521D0.h"
 #include "dungeon_ai.h"
+#include "dungeon_leader.h"
 #include "dungeon_pokemon_attributes.h"
-#include "moves.h"
+#include "dungeon_util.h"
 #include "move_util.h"
+#include "moves.h"
+#include "structs/str_dungeon.h"
 
 extern u8 UseAttack(Entity *);
 extern void sub_805E804(void);
@@ -19,7 +20,6 @@ extern void sub_80426C8(u32, u32);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
 extern void nullsub_93(Position *);
 extern void sub_80522F4(Entity *, Entity *, u8 *);
-extern void SetMessageArgument(char[], Entity*, u32);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 extern void sub_804535C(Entity *, u32);
@@ -74,7 +74,7 @@ void sub_807E254(Entity *pokemon,Entity *target)
 {
   Position pokemonPos;
   Position targetPos;
-  
+
 
   if (HasAbility(pokemon, ABILITY_SUCTION_CUPS)) {
     SetMessageArgument(gAvailablePokemonNames,pokemon,0);
@@ -83,7 +83,7 @@ void sub_807E254(Entity *pokemon,Entity *target)
   else if(HasAbility(target, ABILITY_SUCTION_CUPS))
   {
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    sub_80522F4(pokemon,target,*gUnknown_80FCAC0); // $m0 is anchored! It won't switch places 
+    sub_80522F4(pokemon,target,*gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
   }
   else
   {
@@ -122,7 +122,7 @@ void sub_807E378(void)
 {
   u16 uVar2;
   Entity *leader;
-  
+
   leader = GetLeader();
   if (EntityExists(leader)) {
 

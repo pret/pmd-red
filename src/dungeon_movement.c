@@ -290,7 +290,7 @@ s32 CalcSpeedStage(Entity *pokemon)
   s32 index;
   s32 speed;
   EntityInfo * entityInfo;
-  
+
   entityInfo = pokemon->info;
   speed = 0;
 

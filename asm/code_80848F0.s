@@ -5,6 +5,7 @@
 
 	.text
 
+@ https://decomp.me/scratch/67fVt (kermalis 92.38%)
 	thumb_func_start sub_808529C
 sub_808529C:
 	push {lr}
@@ -136,6 +137,7 @@ _08085370:
 	bx r1
 	thumb_func_end sub_808529C
 
+@ https://decomp.me/scratch/verq3 (kermalis 97.1%)
 	thumb_func_start sub_8085374
 sub_8085374:
 	push {r4-r7,lr}

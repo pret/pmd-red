@@ -1,9 +1,10 @@
 #include "global.h"
+#include "code_8045A00.h"
 #include "code_80521D0.h"
-#include "dungeon_util.h"
 #include "dungeon_map_access.h"
-#include "dungeon_music.h"
 #include "dungeon_movement.h"
+#include "dungeon_music.h"
+#include "dungeon_util.h"
 #include "items.h"
 
 extern u8 gUnknown_202DE58[];
@@ -28,7 +29,6 @@ extern u8 *gUnknown_80F8DE0[];
 extern u8 *gUnknown_80F8E04[];
 extern u8 *gUnknown_80F8E28[];
 
-extern void SetMessageArgument(u8 *, Entity *, u32);
 extern Item *sub_8044D90(Entity *, s32, u32);
 void sub_8045BF8(u8 *, Item *);
 u8 sub_80460F8(Position *, Item *, u32);
@@ -50,7 +50,7 @@ void HandleSetItemAction(Entity *param_1, bool8 param_2)
   Item *item;
   Item *itemPtr;
   s32 index;
-  
+
   item = sub_8044D90(param_1,0,0xfe);
   for(index = 0; index < INVENTORY_SIZE; index++)
   {
@@ -92,7 +92,7 @@ void HandleUnsetItemAction(Entity *entity,bool8 enableMessage)
 {
   Item *item;
   int index;
-  
+
   for(index = 0; index < INVENTORY_SIZE; index++)
   {
     item = &gTeamInventoryRef->teamItems[index];
@@ -123,7 +123,7 @@ void HandleGiveItemAction(Entity *param_1)
   Item item1;
   Item item2;
   Item item3;
-  
+
   entity = sub_8044DA4(param_1,1);
   info1 = param_1->info;
   info2 = entity->info;
@@ -133,7 +133,7 @@ void HandleGiveItemAction(Entity *param_1)
       bVar3 = TRUE;
   else
       bVar3 = FALSE;
-    
+
   if ((!bVar3) && ((item->flags & (ITEM_FLAG_STICKY | ITEM_FLAG_SET)) == (ITEM_FLAG_STICKY | ITEM_FLAG_SET))) {
     sub_8045BF8(gUnknown_202DEA8,item);
     SendMessage(param_1,*gUnknown_80F8C44);
@@ -198,7 +198,7 @@ void HandleTakeItemAction(Entity *param_1)
   EntityInfo *info2;
   Item *heldItem;
   Item item;
-  
+
   entity = sub_8044DA4(param_1,0);
   info = entity->info;
   info2 = entity->info;
@@ -244,7 +244,7 @@ void sub_8066BD4(Entity *param_1)
   Item *item;
   Item *heldItem;
   Item temp;
-  
+
   entity = sub_8044DA4(param_1,0);
   info = entity->info;
   info2 = entity->info;
@@ -284,7 +284,7 @@ void sub_8066BD4(Entity *param_1)
 void HandleUseItemAction(Entity *param_1)
 {
   Entity *entity;
-  
+
   entity = sub_8044DA4(param_1,0);
   entity->info->useHeldItem = TRUE;
 }

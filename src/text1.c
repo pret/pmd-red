@@ -154,7 +154,7 @@ static void sub_8006438(const UnkTextStruct2 *a0, bool8 a1, bool8 a2, UnkTextStr
 {
     s32 i;
     u32 r9;
-    #if NONMATCHING // Simple regswap: https://decomp.me/scratch/EN6n0 99.79%
+    #ifdef NONMATCHING // Simple regswap: https://decomp.me/scratch/EN6n0 99.79%
     s16 **ptr2; // r2
     #else
     register s16 **ptr2 asm("r2");

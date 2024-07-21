@@ -1,12 +1,14 @@
 #include "global.h"
-#include "code_80869E4.h"
 #include "dungeon_items.h"
+
+#include "code_8045A00.h"
+#include "code_80869E4.h"
 #include "dungeon_capabilities.h"
-#include "structs/str_dungeon.h"
 #include "dungeon_leader.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "pokemon.h"
+#include "structs/str_dungeon.h"
 
 extern u8 gAvailablePokemonNames[];
 extern s32 gUnknown_810A3F0[];
@@ -21,8 +23,7 @@ extern s32 sub_8052B8C(u32, u8 *, u32);
 extern void sub_80861A8(void);
 extern void PrintFieldMessage(u32, u8 *, u32);
 extern void sub_803E708(u32, u32);
-extern void sub_80416E0(Position32 *r0, u32, u32);
-extern void SetMessageArgument(u8 *r0, Entity *r1, u32);
+extern void sub_80416E0(Position32 *r0, u32, bool8);
 extern void sub_80421C0(Entity *, u32);
 extern void sub_80855E4(void *);
 extern void PlaySoundEffect(u32);
@@ -164,7 +165,7 @@ void MusicBoxCreation(void)
     sub_803E708(0x3c,0x41);
     PrintFieldMessage(0,*gUnknown_8105360,1);
     sub_80869E4(entity,4,10,0);
-    sub_80416E0(&entity->pixelPos,0x10c,0);
+    sub_80416E0(&entity->pixelPos,0x10c,FALSE);
     sub_80421C0(entity,0xd7);
     sub_803E708(0x3c,0x41);
     SetMessageArgument(gAvailablePokemonNames,entity,0);

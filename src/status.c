@@ -1,21 +1,24 @@
 #include "global.h"
 #include "status.h"
+
+#include "code_8045A00.h"
 #include "code_806CD90.h"
+#include "code_8077274_1.h"
+#include "code_808417C.h"
 #include "constants/ability.h"
 #include "constants/status.h"
 #include "constants/type.h"
-#include "dungeon_pokemon_attributes.h"
-#include "dungeon_ai_targeting.h"
 #include "dungeon_ai_movement.h"
-#include "structs/str_dungeon.h"
-#include "dungeon_map_access.h"
-#include "dungeon_util.h"
+#include "dungeon_ai_targeting.h"
 #include "dungeon_items.h"
-#include "code_808417C.h"
-#include "code_8077274_1.h"
+#include "dungeon_map_access.h"
 #include "dungeon_movement.h"
-#include "structs/map.h"
+#include "dungeon_pokemon_attributes.h"
+#include "dungeon_util.h"
 #include "math.h"
+#include "status_checks_1.h"
+#include "structs/map.h"
+#include "structs/str_dungeon.h"
 
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DE58[];
@@ -147,7 +150,7 @@ extern void sub_803F580(u32);
 extern void sub_8040A84(void);
 extern void sub_8041CA8(Entity *);
 extern void sub_8041C94(Entity *);
-extern u8 sub_8045888(Entity *r0);
+extern bool8 sub_8045888(Entity *r0);
 extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern void sub_8041BF8(Entity *);
 extern void sub_8041BE8(Entity *);
@@ -161,8 +164,6 @@ extern void sub_8041FD8(Entity *r0, u32 r1);
 extern void sub_80522F4(Entity *r1, Entity *r2, u8 *);
 extern void sub_804201C(Entity *r0, u32 r1);
 extern void sub_8041FFC(Entity *r0, u32 r1);
-extern void SetMessageArgument(char[], Entity*, u32);
-extern void SetMessageArgument_2(char[], EntityInfo*, u32);
 extern void sub_8041C58(Entity *r0);
 extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_8042040(Entity *, s32);
@@ -685,13 +686,13 @@ void HealTargetHP(Entity *pokemon, Entity *target, s32 param_3, s32 param_4, boo
     {
         r8 = 0;
         if (maxHPStat != 0) {
-            if (sub_8045888(target) != 0) {
+            if (sub_8045888(target)) {
                 r8 = maxHPStat;
             }
             sub_80522F4(pokemon,target,*gUnknown_80FB240); // m0$'s max HP rose by {ARG_VALUE_1}
         }
         if (HP != 0) {
-            if (sub_8045888(target) != 0) {
+            if (sub_8045888(target)) {
                 r8 = HP;
             }
             if (param_3 != 0) {

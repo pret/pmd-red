@@ -1,10 +1,11 @@
 #include "global.h"
+#include "code_8045A00.h"
 #include "constants/dungeon.h"
-#include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
-#include "dungeon_util.h"
 #include "dungeon_random.h"
+#include "dungeon_util.h"
 #include "dungeon.h"
+#include "structs/str_dungeon.h"
 
 struct unkStruct_806B7F8
 {
@@ -24,8 +25,7 @@ extern s16 gUnknown_80F4DAA;
 extern s16 gUnknown_80F4DAC;
 extern u8 *gUnknown_80FED68[];
 
-extern void SetMessageArgument(char[], struct Entity*, u32);
-extern void sub_806B7F8(struct unkStruct_806B7F8 *, u32);
+extern Entity* sub_806B7F8(struct unkStruct_806B7F8 *, bool8);
 extern void sub_805239C(struct Entity *r0, const char r1[]);
 extern void sub_8042920(struct Entity *r0);
 extern s16 sub_803D970(u32);
@@ -45,7 +45,7 @@ void sub_8071B48(void)
   s32 level;
   struct Dungeon *dungeon; // feels like a hack
   struct unkStruct_806B7F8 local_2c;
-  
+
   entityPtr = NULL;
   dungeon = gDungeon;
   if ((dungeon->unk664 != 0) &&
@@ -69,10 +69,10 @@ void sub_8071B48(void)
         entityPtr = entity2;
       }
     }
-      
+
       dungeon->unk662 = 0;
       dungeon->unk17B34 = NULL;
-        
+
       counter = 0;
       for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
       {
@@ -90,7 +90,7 @@ void sub_8071B48(void)
             }
         }
         else
-        {         
+        {
             if (counter >= gUnknown_80F4DA8) {
               return;
             }
@@ -125,7 +125,7 @@ void sub_8071B48(void)
             local_2c.unk4 = 0;
         }
         local_2c.unk10 = 0;
-        sub_806B7F8(&local_2c, 0);
+        sub_806B7F8(&local_2c, FALSE);
       }
   }
 }
@@ -150,7 +150,7 @@ void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp)
   s32 newExp;
   s32 expDiff;
   EntityInfo *info;
-  
+
   info = target->info;
   if (info->level != 100) {
     if (!JoinLocationCannotUseItems(info)) {

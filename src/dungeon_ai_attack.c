@@ -1,7 +1,10 @@
 #include "global.h"
-#include "code_806CD90.h"
 #include "dungeon_ai_attack.h"
 
+#include "charge_move.h"
+#include "code_8045A00.h"
+#include "code_80521D0.h"
+#include "code_806CD90.h"
 #include "constants/direction.h"
 #include "constants/dungeon_action.h"
 #include "constants/iq_skill.h"
@@ -10,30 +13,40 @@
 #include "constants/tactic.h"
 #include "constants/targeting.h"
 #include "constants/type.h"
-#include "charge_move.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_targeting.h"
-#include "dungeon_ai_targeting.h"
+#include "dungeon_ai.h"
 #include "dungeon_capabilities.h"
-#include "structs/str_dungeon.h"
+#include "dungeon_engine.h"
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
+#include "items.h"
+#include "move_checks.h"
 #include "move_util.h"
 #include "moves.h"
-#include "move_checks.h"
 #include "position_util.h"
-#include "status_checks.h"
 #include "status_checks_1.h"
-#include "targeting.h"
+#include "status_checks.h"
+#include "structs/str_dungeon.h"
 #include "targeting_flags.h"
+#include "targeting.h"
 #include "type_effectiveness.h"
 
 #define REGULAR_ATTACK_INDEX 4
 
 const s16 gRegularAttackWeights[] = {100, 20, 30, 40, 50};
+
+extern const u8 *const gUnknown_80FE3E8[];
+extern const u8 *const gPtrMysteriousPowerPreventedUseMessage[];
+extern const u8 *const gUnknown_80FC6A8[];
+extern const u8 *const gUnknown_80FC714[];
+extern const u8 *const gUnknown_80FC718[];
+
+extern u8 gUnknown_202DE58[];
+extern u8 gAvailablePokemonNames[];
 
 extern bool8 gCanAttackInDirection[NUM_DIRECTIONS];
 extern s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS];
@@ -47,6 +60,13 @@ extern void sub_8057588(Entity *, u32);
 extern void sub_806A1B0(Entity *);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8044D40(ActionContainer *, u32);
+extern bool8 sub_8055FA0(struct Entity *, u32, u32, u32, u32, struct Move *);
+extern void sub_8045BF8(u8 *, struct Item *);
+extern void sub_8044DF0(struct Entity *, u32, u32);
+extern void sub_8071DA4(struct Entity *);
+extern void sub_804AC20(struct Position *);
+extern void sub_807EC28(bool8);
+extern void sub_806A5B8(struct Entity *entity);
 
 void DecideAttack(Entity *pokemon)
 {
@@ -958,7 +978,6 @@ void HandleUseMoveAIAction(Entity *target)
     sub_806A1B0(target);
 }
 
-#if NONMATCHING // 99.09% https://decomp.me/scratch/rpwXh
 void HandleUseOrbAction(Entity *pokemon)
 {
     bool8 r4;
@@ -1000,39 +1019,44 @@ void HandleUseOrbAction(Entity *pokemon)
                 TargetTileInFront(pokemon);
             }
         }
-    
-        if (entityInfo->volatileStatus == 1) {
+
+        if (entityInfo->volatileStatus.volatileStatus == 1) {
             SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
             SendMessage(pokemon, *gUnknown_80FC714);
             r4 = FALSE;
+            r8 = FALSE;
         }
-        else if (entityInfo->volatileStatus == 7) {
+        else if (entityInfo->volatileStatus.volatileStatus == 7) {
             SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
             SendMessage(pokemon, *gUnknown_80FC718);
             r4 = FALSE;
+            r8 = FALSE;
+        }
+        else if (entityInfo->nonVolatile.nonVolatileStatus == 4)
+        {
+            SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
+            SendMessage(pokemon, *gUnknown_80FC6A8);
+            r4 = FALSE;
+            r8 = FALSE;
+        }
+
+        if (r8) {
+            if ((IVar5.id == ITEM_SWITCHER_ORB) || (IVar5.id == ITEM_POUNCE_ORB)) {
+                sub_8044DF0(pokemon, 0, 122);
+                move.moveFlags |= MOVE_FLAG_SET;
+                move.moveFlags |= MOVE_FLAG_ENABLED_FOR_AI;
+                move.PP = 10;
+                sub_8055FA0(pokemon, 0, IVar5.id, 0, 0, &move);
+                r4 = FALSE;
+            }
+            else {
+                r4 = sub_8055FA0(pokemon, 0, IVar5.id, 0, 0, &move);
+            }
         }
         else {
-            if (entityInfo->nonVolatileStatus == 4) {
-                SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
-                SendMessage(pokemon, *gUnknown_80FC6A8);
-                r4 = FALSE;
-                r8 = FALSE;
-            }
-            if (r8) {
-                if ((IVar5.id == ITEM_SWITCHER_ORB) || (IVar5.id == ITEM_POUNCE_ORB)) {
-                    sub_8044DF0(pokemon, 0, 122);
-                    move.moveFlags |= MOVE_FLAG_SET;
-                    move.moveFlags |= MOVE_FLAG_ENABLED_FOR_AI;
-                    move.PP = 10;
-                    sub_8055FA0(pokemon, 0, IVar5.id, 0, 0, &move);
-                    r4 = FALSE;
-                }
-                else
-                    r4 = sub_8055FA0(pokemon, 0, IVar5.id, 0, 0, &move);
-            }
-            else
-                r4 = FALSE;
+            r4 = FALSE;
         }
+
     }
 
     if (EntityExists(pokemon)) {
@@ -1056,264 +1080,3 @@ void HandleUseOrbAction(Entity *pokemon)
     if (!sub_8044B28())
         sub_806A1B0(pokemon);
 }
-#else
-NAKED
-void HandleUseOrbAction(Entity *pokemon)
-{
-    asm_unified(
-    "push {r4-r7,lr}\n"
-    "\tmov r7, r10\n"
-    "\tmov r6, r9\n"
-    "\tmov r5, r8\n"
-    "\tpush {r5-r7}\n"
-    "\tsub sp, 0x30\n"
-    "\tadds r6, r0, 0\n"
-    "\tldr r7, [r6, 0x70]\n"
-    "\tmovs r1, 0\n"
-    "\tmovs r2, 0x15\n"
-    "\tbl sub_8044D90\n"
-    "\tadds r2, r0, 0\n"
-    "\tldr r5, [r2]\n"
-    "\tldrb r1, [r2]\n"
-    "\tmovs r0, 0x8\n"
-    "\tands r0, r1\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _0807CB80\n"
-    "\tldr r0, _0807CB78\n"
-    "\tadds r1, r2, 0\n"
-    "\tbl sub_8045BF8\n"
-    "\tldr r0, _0807CB7C\n"
-    "\tldr r1, [r0]\n"
-    "\tadds r0, r6, 0\n"
-    "\tbl SendMessage\n"
-    "\tb _0807CD54\n"
-    "\t.align 2, 0\n"
-"_0807CB78: .4byte gUnknown_202DE58\n"
-"_0807CB7C: .4byte gUnknown_80FE3E8\n"
-"_0807CB80:\n"
-    "\tadd r0, sp, 0x8\n"
-    "\tadds r1, r7, 0\n"
-    "\tadds r1, 0x44\n"
-    "\tldm r1!, {r2-r4}\n"
-    "\tstm r0!, {r2-r4}\n"
-    "\tldm r1!, {r2-r4}\n"
-    "\tstm r0!, {r2-r4}\n"
-    "\tbl IsBossFight\n"
-    "\tlsls r0, 24\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _0807CBAC\n"
-    "\tldr r0, _0807CBA8\n"
-    "\tldr r1, [r0]\n"
-    "\tadds r0, r6, 0\n"
-    "\tbl SendMessage\n"
-    "\tmovs r4, 0x1\n"
-    "\tb _0807CCDE\n"
-    "\t.align 2, 0\n"
-"_0807CBA8: .4byte gPtrMysteriousPowerPreventedUseMessage\n"
-"_0807CBAC:\n"
-    "\tmovs r0, 0x1\n"
-    "\tmov r8, r0\n"
-    "\tadd r4, sp, 0x20\n"
-    "\tlsls r5, 8\n"
-    "\tlsrs r0, r5, 24\n"
-    "\tbl GetItemMoveID\n"
-    "\tadds r1, r0, 0\n"
-    "\tlsls r1, 16\n"
-    "\tlsrs r1, 16\n"
-    "\tadds r0, r4, 0\n"
-    "\tbl InitPokemonMove\n"
-    "\tldrb r0, [r7, 0x7]\n"
-    "\tmov r10, r4\n"
-    "\tmov r9, r5\n"
-    "\tcmp r0, 0\n"
-    "\tbne _0807CC08\n"
-    "\tldr r1, _0807CC20\n"
-    "\tldr r0, [sp, 0x28]\n"
-    "\tands r0, r1\n"
-    "\tmov r1, r8\n"
-    "\torrs r0, r1\n"
-    "\tstr r0, [sp, 0x28]\n"
-    "\tmovs r0, 0xA\n"
-    "\tadd r4, sp, 0x28\n"
-    "\tstr r0, [r4, 0x4]\n"
-    "\tmovs r3, 0x8C\n"
-    "\tlsls r3, 1\n"
-    "\tadds r2, r7, r3\n"
-    "\tadds r0, r4, 0\n"
-    "\tadds r1, r6, 0\n"
-    "\tbl AIConsiderMove\n"
-    "\tldrb r0, [r4]\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _0807CC08\n"
-    "\tldrb r1, [r4, 0x1]\n"
-    "\tmovs r0, 0x7\n"
-    "\tands r0, r1\n"
-    "\tadds r1, r7, 0\n"
-    "\tadds r1, 0x46\n"
-    "\tstrb r0, [r1]\n"
-    "\tadds r0, r6, 0\n"
-    "\tbl TargetTileInFront\n"
-"_0807CC08:\n"
-    "\tadds r0, r7, 0\n"
-    "\tadds r0, 0xBC\n"
-    "\tldrb r0, [r0]\n"
-    "\tcmp r0, 0x1\n"
-    "\tbne _0807CC2C\n"
-    "\tldr r0, _0807CC24\n"
-    "\tadds r1, r6, 0\n"
-    "\tmovs r2, 0\n"
-    "\tbl SetMessageArgument\n"
-    "\tldr r0, _0807CC28\n"
-    "\tb _0807CC3C\n"
-    "\t.align 2, 0\n"
-"_0807CC20: .4byte 0xffffff00\n"
-"_0807CC24: .4byte gAvailablePokemonNames\n"
-"_0807CC28: .4byte gUnknown_80FC714\n"
-"_0807CC2C:\n"
-    "\tcmp r0, 0x7\n"
-    "\tbne _0807CC50\n"
-    "\tldr r0, _0807CC48\n"
-    "\tadds r1, r6, 0\n"
-    "\tmovs r2, 0\n"
-    "\tbl SetMessageArgument\n"
-    "\tldr r0, _0807CC4C\n"
-"_0807CC3C:\n"
-    "\tldr r1, [r0]\n"
-    "\tadds r0, r6, 0\n"
-    "\tbl SendMessage\n"
-    "\tb _0807CCDC\n"
-    "\t.align 2, 0\n"
-"_0807CC48: .4byte gAvailablePokemonNames\n"
-"_0807CC4C: .4byte gUnknown_80FC718\n"
-"_0807CC50:\n"
-    "\tadds r0, r7, 0\n"
-    "\tadds r0, 0xAC\n"
-    "\tldrb r0, [r0]\n"
-    "\tcmp r0, 0x4\n"
-    "\tbne _0807CC72\n"
-    "\tldr r0, _0807CCB8\n"
-    "\tadds r1, r6, 0\n"
-    "\tmovs r2, 0\n"
-    "\tbl SetMessageArgument\n"
-    "\tldr r0, _0807CCBC\n"
-    "\tldr r1, [r0]\n"
-    "\tadds r0, r6, 0\n"
-    "\tbl SendMessage\n"
-    "\tmovs r4, 0\n"
-    "\tmov r8, r4\n"
-"_0807CC72:\n"
-    "\tmov r0, r8\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _0807CCDC\n"
-    "\tmov r5, r9\n"
-    "\tlsrs r0, r5, 24\n"
-    "\tcmp r0, 0xB6\n"
-    "\tbeq _0807CC84\n"
-    "\tcmp r0, 0xBF\n"
-    "\tbne _0807CCC0\n"
-"_0807CC84:\n"
-    "\tadds r0, r6, 0\n"
-    "\tmovs r1, 0\n"
-    "\tmovs r2, 0x7A\n"
-    "\tbl sub_8044DF0\n"
-    "\tmov r2, r10\n"
-    "\tldrb r1, [r2]\n"
-    "\tmovs r0, 0x8\n"
-    "\tmovs r4, 0\n"
-    "\torrs r0, r1\n"
-    "\tadd r3, sp, 0x20\n"
-    "\tmovs r1, 0x4\n"
-    "\torrs r0, r1\n"
-    "\tstrb r0, [r3]\n"
-    "\tmovs r0, 0xA\n"
-    "\tstrb r0, [r3, 0x4]\n"
-    "\tlsrs r2, r5, 24\n"
-    "\tstr r4, [sp]\n"
-    "\tstr r3, [sp, 0x4]\n"
-    "\tadds r0, r6, 0\n"
-    "\tmovs r1, 0\n"
-    "\tmovs r3, 0\n"
-    "\tbl sub_8055FA0\n"
-    "\tb _0807CCDE\n"
-    "\t.align 2, 0\n"
-"_0807CCB8: .4byte gAvailablePokemonNames\n"
-"_0807CCBC: .4byte gUnknown_80FC6A8\n"
-"_0807CCC0:\n"
-    "\tmov r3, r9\n"
-    "\tlsrs r2, r3, 24\n"
-    "\tmovs r0, 0\n"
-    "\tstr r0, [sp]\n"
-    "\tmov r4, r10\n"
-    "\tstr r4, [sp, 0x4]\n"
-    "\tadds r0, r6, 0\n"
-    "\tmovs r1, 0\n"
-    "\tmovs r3, 0\n"
-    "\tbl sub_8055FA0\n"
-    "\tlsls r0, 24\n"
-    "\tlsrs r4, r0, 24\n"
-    "\tb _0807CCDE\n"
-"_0807CCDC:\n"
-    "\tmovs r4, 0\n"
-"_0807CCDE:\n"
-    "\tadds r0, r6, 0\n"
-    "\tbl EntityExists\n"
-    "\tlsls r0, 24\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _0807CD38\n"
-    "\tcmp r4, 0\n"
-    "\tbeq _0807CCF8\n"
-    "\tadds r0, r6, 0\n"
-    "\tmovs r1, 0\n"
-    "\tmovs r2, 0x7A\n"
-    "\tbl sub_8044DF0\n"
-"_0807CCF8:\n"
-    "\tadds r0, r6, 0\n"
-    "\tbl sub_8071DA4\n"
-    "\tadds r0, r6, 0\n"
-    "\tmovs r1, 0x8\n"
-    "\tbl sub_806CE68\n"
-    "\tldrb r0, [r7, 0x7]\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _0807CD18\n"
-    "\tadds r0, r6, 0x4\n"
-    "\tbl sub_804AC20\n"
-    "\tmovs r0, 0\n"
-    "\tbl sub_807EC28\n"
-"_0807CD18:\n"
-    "\tadds r0, r6, 0\n"
-    "\tbl sub_806A5B8\n"
-    "\tldr r0, _0807CD30\n"
-    "\tldr r0, [r0]\n"
-    "\tldr r1, _0807CD34\n"
-    "\tadds r0, r1\n"
-    "\tldrb r1, [r0]\n"
-    "\tadds r0, r6, 0\n"
-    "\tbl sub_8075900\n"
-    "\tb _0807CD44\n"
-    "\t.align 2, 0\n"
-"_0807CD30: .4byte gDungeon\n"
-"_0807CD34: .4byte 0x00003a08\n"
-"_0807CD38:\n"
-    "\tcmp r4, 0\n"
-    "\tbeq _0807CD44\n"
-    "\tadd r0, sp, 0x8\n"
-    "\tmovs r1, 0\n"
-    "\tbl sub_8044D40\n"
-"_0807CD44:\n"
-    "\tbl sub_8044B28\n"
-    "\tlsls r0, 24\n"
-    "\tcmp r0, 0\n"
-    "\tbne _0807CD54\n"
-    "\tadds r0, r6, 0\n"
-    "\tbl sub_806A1B0\n"
-"_0807CD54:\n"
-    "\tadd sp, 0x30\n"
-    "\tpop {r3-r5}\n"
-    "\tmov r8, r3\n"
-    "\tmov r9, r4\n"
-    "\tmov r10, r5\n"
-    "\tpop {r4-r7}\n"
-    "\tpop {r0}\n"
-    "\tbx r0");
-}
-#endif // NONMATCHING

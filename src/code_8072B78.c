@@ -9,6 +9,7 @@
 #include "code_806CD90.h"
 #include "moves.h"
 #include "pokemon_mid.h"
+#include "status_checks_1.h"
 
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DFE8[];
@@ -18,7 +19,7 @@ extern u8 *gUnknown_80FE2EC[];
 struct unkStruct_806B7F8
 {
     u16 species;
-    u8 unk2; 
+    u8 unk2;
     u32 unk4;
     u16 level;
     u8 fillA[0xC - 0xA];
@@ -26,11 +27,10 @@ struct unkStruct_806B7F8
     u8 unk10;
 };
 
-extern void sub_806B7F8(struct unkStruct_806B7F8 *, u32);
+extern Entity* sub_806B7F8(struct unkStruct_806B7F8 *, bool8);
 extern void sub_806BFC0(EntityInfo *, u32);
 void sub_8069E0C(Entity *pokemon);
 void sub_80522F4(Entity *r0, Entity *r1, const char r2[]);
-extern void SetMessageArgument_2(u8 *, EntityInfo *, u32);
 void sub_8042A44(Entity *r0);
 void sub_8083D78(void);
 extern bool8 sub_803D930(u32);
@@ -47,7 +47,7 @@ void sub_8072AC8(s16 *param_1, s16 species, s32 param_3)
   s32 index;
 
   species_s32 = species;
-  
+
   for(index = 0; index < MAX_MON_MOVES; index++) {
     param_1[index] = MOVE_NOTHING;
   }
@@ -109,7 +109,7 @@ void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
   EntityInfo *entityInfo;
   LevelData levelData;
   struct unkStruct_806B7F8 local_2c;
-  
+
   id_s32 = id;
   entityInfo = target->info;
   SetMessageArgument_2(gAvailablePokemonNames,entityInfo,0);
@@ -138,7 +138,7 @@ void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
       local_2c.pos.y = gAdjacentTileOffsets[index].y + target->pos.y;
       local_2c.unk4 = 0;
       local_2c.unk10 = 0;
-      sub_806B7F8(&local_2c,1);
+      sub_806B7F8(&local_2c, TRUE);
     }
   }
 }

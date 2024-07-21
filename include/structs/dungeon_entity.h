@@ -234,7 +234,7 @@ typedef struct EntityInfo
     /* 0xF0 */ bool8 powerEars;
     /* 0xF1 */ bool8 scanning;
     /* 0xF2 */ bool8 stairSpotter;
-    u8 fillF3;
+    /* 0xF3 */ bool8 unkF3;
     /* 0xF4 */ bool8 grudge;
     /* 0xF5 */ bool8 exposed;
     /* 0xF6 */ bool8 isColorChanged;

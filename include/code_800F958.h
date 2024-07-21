@@ -1,7 +1,7 @@
-#ifndef GUARD_DUNGEON_POKEMON_SPRITES_H
-#define GUARD_DUNGEON_POKEMON_SPRITES_H
+#ifndef GUARD_CODE_800F958_H
+#define GUARD_CODE_800F958_H
 
-#include "structs/str_position.h"
+#include "structs/str_dungeon.h"
 
 // size: 0x8
 typedef struct DungeonPokemonStatusSprite
@@ -37,6 +37,6 @@ typedef struct DungeonPokemonSprites
     /* 0x4 */ DungeonPokemonSprite sprites[22];
 } DungeonPokemonSprites;
 
-extern DungeonPokemonSprites *gDungeonPokemonSprites;
+void sub_800F958(s32 dungeonSpriteID, Position *pos, Position *statusOffsets, u32 a3);
 
-#endif // GUARD_DUNGEON_POKEMON_SPRITES_H
+#endif

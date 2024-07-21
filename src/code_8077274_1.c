@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_8045A00.h"
 #include "code_80521D0.h"
 #include "code_805D8C8.h"
 #include "code_806CD90.h"
@@ -8,17 +9,17 @@
 #include "constants/item.h"
 #include "constants/status.h"
 #include "constants/type.h"
-#include "structs/dungeon_entity.h"
-#include "structs/str_dungeon.h"
 #include "dungeon_items.h"
 #include "dungeon_movement.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "moves.h"
 #include "move_effects_target.h"
+#include "moves.h"
 #include "pokemon.h"
 #include "status_checks_1.h"
+#include "structs/dungeon_entity.h"
+#include "structs/str_dungeon.h"
 
 extern u8 gAvailablePokemonNames[0x58];
 extern u8 gUnknown_202DFE8[0x58];
@@ -167,7 +168,6 @@ extern u8 *gUnknown_80FBF84[];
 extern void sub_8049ED4();
 extern void sub_8040A84();
 extern void sub_803E46C(u32);
-extern void SetMessageArgument(u8 *buffer, Entity *r1, u32);
 extern void sub_80522F4(Entity *pokemon, Entity *r1, const char[]);
 extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_8042A74(Entity *r0);

@@ -59,7 +59,7 @@ void sub_8095118(void)
 {
   s32 index;
   unkStruct_203B480 *unused;
-  
+
   MemoryFill8((u8*)gUnknown_203B480,0, 0x20 * sizeof(unkStruct_203B480));
   MemoryFill8((u8*)gUnknown_203B484,0, sizeof(unkStruct_203B484));
   for(index = 0; index < 0x20; index++){
@@ -89,7 +89,7 @@ void nullsub_207(void)
 s32 FindOpenMailSlot(void)
 {
   s32 index;
-  
+
   for(index = 2; index < 0x20; index++){
     if(gUnknown_203B480[index].mailType == WONDER_MAIL_TYPE_NONE)
         return index;
@@ -149,7 +149,7 @@ void sub_8095274(u32 param_1)
 {
   s32 iVar2;
   s32 iVar3;
-  
+
   gUnknown_203B48C->unk4[gUnknown_203B48C->unk0] = param_1;
   iVar2 = gUnknown_203B48C->unk0;
   iVar3 = 0;
@@ -162,7 +162,7 @@ void sub_8095274(u32 param_1)
 bool8 sub_8095298(s32 param_1)
 {
   s32 index;
-  
+
   for(index = 0; index < 0x20; index++)
   {
     if(gUnknown_203B48C->unk4[index] == param_1) return TRUE;
@@ -173,7 +173,7 @@ bool8 sub_8095298(s32 param_1)
 void sub_80952C4(void)
 {
   s32 index;
-  
+
   gUnknown_203B48C->unk0 = 0;
   for(index = 0; index < 0x20; index++)
   {
@@ -185,9 +185,9 @@ bool8 HasMail(u8 mailType, u32 param_2)
 {
   unkStruct_203B480 *ptr;
   s32 index;
-  
+
   for(index = 0, ptr = &gUnknown_203B480[0]; index < 0x20; ptr++, index++)
-  {  
+  {
     if ((ptr->mailType == mailType) && (ptr->unk10.unk10 == param_2)) return TRUE;
   }
   return FALSE;
@@ -198,9 +198,9 @@ s32 CountMailType(u8 mailType)
   unkStruct_203B480 *ptr;
   s32 total = 0;
   s32 index;
-  
+
   for(index = 0, ptr = &gUnknown_203B480[0]; index < 0x20; ptr++, index++)
-  {  
+  {
     if (ptr->mailType == mailType) total++;
   }
   return total;
@@ -211,9 +211,9 @@ u32 CountAllMail(void)
   unkStruct_203B480 *ptr;
   u32 total = 0;
   s32 index;
-  
+
   for(index = 0, ptr = &gUnknown_203B480[0]; index < 0x20; ptr++, index++)
-  {  
+  {
     if (ptr->mailType != 0) total++;
   }
   return total;
@@ -224,9 +224,9 @@ s32 sub_8095374(void)
   unkStruct_203B480 *ptr;
   s32 retvar = -1;
   s32 index;
-  
+
   for(index = 0, ptr = &gUnknown_203B480[0]; index < 0x20; ptr++, index++)
-  {  
+  {
     if (ptr->mailType == 1) retvar = index;
   }
   return retvar;
@@ -237,9 +237,9 @@ s32 GetMailIndex(u8 mailType, u32 param_2)
 {
   unkStruct_203B480 *ptr;
   s32 index;
-  
+
   for(index = 0, ptr = &gUnknown_203B480[0]; index < 0x20; ptr++, index++)
-  {  
+  {
     if ((ptr->mailType == mailType) && (ptr->unk10.unk10 == param_2)) return index;
   }
   return -1;
@@ -250,9 +250,9 @@ s32 GetFirstIndexofMailType(u8 mailType)
 {
   unkStruct_203B480 *ptr;
   s32 index;
-  
+
   for(index = 0, ptr = &gUnknown_203B480[0]; index < 0x20; ptr++, index++)
-  {  
+  {
     if (ptr->mailType == mailType) return index;
   }
   return -1;
@@ -262,9 +262,9 @@ s32 sub_8095400(u32 param_1)
 {
   u32 *ptr;
   s32 index;
-  
+
   for(index = 0, ptr = &gUnknown_203B480[0].unk10.unk10; index < 0x20; ptr += 0xC, index++)
-  {  
+  {
     if (*ptr == param_1) return index;
   }
   return -1;
@@ -281,7 +281,7 @@ void sub_809542C(WonderMailSub *param_1)
 #endif
 
   u8 buffer [20];
-  
+
   gUnknown_203B480->mailType = 1;
   preload = gUnknown_203B480;
   seed = param_1->seed;
@@ -301,7 +301,7 @@ void sub_8095494(WonderMailSub *param_1, u8 index)
   u32 seed;
   DungeonLocation dungeon;
   unkStruct_203B480 *mail;
-  
+
   mail = gUnknown_203B480;
   mail += index;
 

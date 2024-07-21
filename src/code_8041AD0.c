@@ -1,5 +1,6 @@
 #include "global.h"
 #include "code_806CD90.h"
+#include "code_804267C.h"
 #include "constants/direction.h"
 #include "constants/status.h"
 #include "constants/type.h"
@@ -9,6 +10,7 @@
 #include "dungeon_util.h"
 #include "items.h"
 
+// size: 0xC
 struct unkStruct_80420E8
 {
     u32 unk0;
@@ -16,6 +18,7 @@ struct unkStruct_80420E8
     u32 unk8;
 };
 
+// size: 0x1C
 typedef struct unkStruct_80416E0
 {
     s32 unk0;
@@ -47,7 +50,6 @@ extern u32 gStatusSpriteMasks_MuzzledStatus[];
 
 extern void sub_803ED30(u8, Entity *pokemon, u8, u8);
 extern void sub_804151C(Entity *pokemon, u32 r1, u8 r2);
-extern u8 sub_8042768(Entity *pokemon);
 extern u32 sub_806F62C(u32);
 extern void PlaySoundEffect(u32);
 extern u8 sub_803F428(Position *pos);
@@ -67,13 +69,13 @@ extern void sub_8042E98(void);
 extern void sub_803E46C(u32);
 extern void sub_800EE5C(u32);
 extern void sub_800EF64(void);
-extern u8 sub_800E9A8(u32);
+extern bool8 sub_800E9A8(s32);
 extern u32 sub_800E890(unkStruct_80416E0 *);
 
-u32 sub_8041764(unkStruct_80416E0 *param_1, u8 param_2);
-s32 sub_80416E0(Position32 *pos, u32 param_2, u8 param_3);
+u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2);
+s32 sub_80416E0(Position32 *pos, u32 param_2, bool8 param_3);
 
-s32 sub_80416A4(Position *pos_1, u32 param_2, u8 param_3)
+s32 sub_80416A4(Position *pos_1, u32 param_2, bool8 param_3)
 {
   Position32 pos;
 
@@ -82,7 +84,7 @@ s32 sub_80416A4(Position *pos_1, u32 param_2, u8 param_3)
   return sub_80416E0(&pos, param_2, param_3);
 }
 
-s32 sub_80416E0(Position32 *pos, u32 param_2, u8 param_3)
+s32 sub_80416E0(Position32 *pos, u32 param_2, bool8 param_3)
 {
   int counter;
   s32 ret;
@@ -101,10 +103,10 @@ s32 sub_80416E0(Position32 *pos, u32 param_2, u8 param_3)
   auStack_10.unk12 = 0;
   auStack_10.unk18 = 0xffff;
   sub_8004E8C(&auStack_18);
-  ret = sub_8041764(&auStack_10,0);
-  if (param_3 != 0) {
+  ret = sub_8041764(&auStack_10, FALSE);
+  if (param_3) {
     counter = 0;
-    while ((counter < 100 && (sub_800E9A8(ret) != 0))) {
+    while ((counter < 100 && (sub_800E9A8(ret)))) {
       sub_803E46C(0x42);
       counter++;
     }
@@ -113,7 +115,7 @@ s32 sub_80416E0(Position32 *pos, u32 param_2, u8 param_3)
   return ret;
 }
 
-u32 sub_8041764(unkStruct_80416E0 *param_1, u8 param_2)
+u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2)
 {
     sub_800EE5C(param_1->unk0);
     sub_800EF64();
@@ -519,11 +521,10 @@ void nullsub_81(void)
 
 void sub_8041D5C(Entity *pokemon)
 {
-    if(sub_8042768(pokemon) == 0)
-    {
+    if (!sub_8042768(pokemon))
         return;
-    }
-    sub_803ED30(pokemon->info->stockpileStage, pokemon, 1, 0xB);
+
+    sub_803ED30(pokemon->info->stockpileStage, pokemon, 1, 11);
 }
 
 void sub_8041D84(Entity *pokemon)
@@ -874,7 +875,7 @@ void sub_804218C(Entity *pokemon, Entity *target)
 
 void sub_804219C(Position32 *pos)
 {
-    sub_80416E0(pos, 0x90, 1);
+    sub_80416E0(pos, 0x90, TRUE);
 }
 
 void sub_80421AC(Entity *pokemon, Entity * target)
@@ -884,10 +885,9 @@ void sub_80421AC(Entity *pokemon, Entity * target)
 
 void sub_80421C0(Entity *pokemon, u16 r1)
 {
-    if(pokemon == NULL)
+    if (pokemon == NULL)
         PlaySoundEffect(r1);
-    else
-        if(sub_8042768(pokemon) != 0)
+    else if (sub_8042768(pokemon))
             PlaySoundEffect(r1);
 }
 

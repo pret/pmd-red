@@ -257,7 +257,7 @@ void sub_8080E0C(unkStruct_8094924 *param_1,Entity *param_2)
     bool8 *pbStack_58;
     bool8 *pbStack_54;
     bool8 *pbStack_50;
-    u8 *puStack_4c;
+    bool8 *puStack_4c;
     bool8 *pbStack_48;
     bool8 *pbStack_44;
     bool8 *pbStack_40;
@@ -351,7 +351,7 @@ void sub_8080E0C(unkStruct_8094924 *param_1,Entity *param_2)
     pbStack_58 = &info->powerEars;
     pbStack_54 = &info->scanning;
     pbStack_50 = &info->stairSpotter;
-    puStack_4c = &info->fillF3;
+    puStack_4c = &info->unkF3;
     pbStack_48 = &info->grudge;
     puStack_34 = &info->unkFB;
     pbStack_44 = &info->exposed;

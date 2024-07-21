@@ -1,6 +1,7 @@
 #include "global.h"
 #include "dungeon_pokemon_attributes.h"
 
+#include "code_8045A00.h"
 #include "constants/ability.h"
 #include "constants/dungeon.h"
 #include "constants/iq_skill.h"
@@ -8,13 +9,13 @@
 #include "constants/status.h"
 #include "constants/tactic.h"
 #include "constants/type.h"
-#include "structs/str_dungeon.h"
 #include "dungeon_items.h"
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
 #include "moves.h"
-#include "pokemon.h"
 #include "pokemon_3.h"
+#include "pokemon.h"
+#include "structs/str_dungeon.h"
 
 const s16 gItemMasterMinWildLevel[] = {16};
 
@@ -23,7 +24,6 @@ extern u32 gUnknown_80FC31C;
 extern u32 gUnknown_80FCEFC;
 extern u32 gUnknown_80FC2FC;
 extern bool8 sub_805744C(Entity *, Move *, u32);
-extern void SetMessageArgument(char[], Entity*, u32);
 extern void sub_80522F4(Entity *r1, Entity *r2, u32);
 
 bool8 HasSafeguardStatus(Entity * pokemon, Entity * target, bool8 displayMessage)
@@ -263,7 +263,7 @@ bool8 sub_8071A8C(Entity *pokemon)
 }
 
 bool8 SetVisualFlags(EntityInfo *entityInfo, u16 newFlag, bool8 param_3)
-{ 
+{
   if ((entityInfo->visualFlags & newFlag)) {
     entityInfo->previousVisualFlags = newFlag | entityInfo->previousVisualFlags;
   }
