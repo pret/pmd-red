@@ -16,5 +16,8 @@ Trap* GetTrapData_1(Entity *entity);
 Item *GetItemData(Entity *entity);
 struct Tile *GetTileAtEntitySafe(Entity *entity);
 Item *GetItemData_1(Entity *entity);
+void sub_804535C(Entity *entity, Position32 *pos);
+void SetEntityPixelPos(Entity *entity, s32 x, s32 y);
+void IncreaseEntityPixelPos(Entity *entity, s32 x, s32 y);
 
 #endif

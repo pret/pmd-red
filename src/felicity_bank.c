@@ -32,6 +32,13 @@ static void sub_8016B00(void);
 static void sub_8016B24(void);
 static void sub_8016B48(u8 action);
 
+enum MenuActions {
+    CANCEL_ACTION = 1,
+    STORE_ACTION,
+    TAKE_ACTION,
+    INFO_ACTION
+};
+
 bool8 CreateFelicityBank(s32 mode)
 {
     u8 *monName;
@@ -267,23 +274,23 @@ static void CreateFelicityBankShopMenu(void)
     MemoryFill16(sFelicityBankWork->unk54, 0, sizeof(sFelicityBankWork->unk54));
 
     sFelicityBankWork->unk14[loopMax].text = gCommonStore[0];
-    sFelicityBankWork->unk14[loopMax].menuAction = 2;
+    sFelicityBankWork->unk14[loopMax].menuAction = STORE_ACTION;
 
     loopMax++;
     sFelicityBankWork->unk14[loopMax].text = gCommonTake[0];
-    sFelicityBankWork->unk14[loopMax].menuAction = 3;
+    sFelicityBankWork->unk14[loopMax].menuAction = TAKE_ACTION;
 
     loopMax++;
     sFelicityBankWork->unk14[loopMax].text = gCommonInfo[0];
-    sFelicityBankWork->unk14[loopMax].menuAction = 4;
+    sFelicityBankWork->unk14[loopMax].menuAction = INFO_ACTION;
 
     loopMax++;
     sFelicityBankWork->unk14[loopMax].text = gCommonCancel[0];
-    sFelicityBankWork->unk14[loopMax].menuAction = 1;
+    sFelicityBankWork->unk14[loopMax].menuAction = CANCEL_ACTION;
 
     loopMax++;
     sFelicityBankWork->unk14[loopMax].text = NULL;
-    sFelicityBankWork->unk14[loopMax].menuAction = 1;
+    sFelicityBankWork->unk14[loopMax].menuAction = CANCEL_ACTION;
 
     for (i = 0; i < loopMax; i++) {
         if (sFelicityBankWork->unk54[i] == 0 && sFelicityBankWork->unk14[i].menuAction == sFelicityBankWork->menuAction)
@@ -306,16 +313,16 @@ static void sub_80169BC(void)
 
     sFelicityBankWork->menuAction = menuAction;
     switch (menuAction) {
-        case 2:
+        case STORE_ACTION:
             UpdateFelicityBankState(7);
             break;
-        case 3:
+        case TAKE_ACTION:
             UpdateFelicityBankState(10);
             break;
-        case 4:
+        case INFO_ACTION:
             UpdateFelicityBankState(3);
             break;
-        case 1:
+        case CANCEL_ACTION:
             UpdateFelicityBankState(4);
             break;
     }

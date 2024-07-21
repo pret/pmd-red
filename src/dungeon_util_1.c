@@ -11,7 +11,6 @@
 
 extern const u8 gUnknown_8107358[25];
 
-extern void sub_804535C(Entity *, u32);
 extern s32 GetCameraXPos(void);
 extern s32 GetCameraYPos(void);
 extern void sub_803F4A0(u32);
@@ -24,7 +23,6 @@ extern void sub_80457DC(Entity *);
 extern void sub_80861D4(Entity *, u32, s32 direction);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 
-typedef void (*DungeonCallback)(Entity *);
 
 Entity *xxx_call_GetLeader(void)
 {
@@ -167,7 +165,7 @@ Entity *GetEntityFromClientType(u8 entityType)
 void sub_80856C8(Entity * pokemon, s32 x, s32 y)
 {
     sub_80694C0(pokemon, x, y, 1);
-    sub_804535C(pokemon,0);
+    sub_804535C(pokemon,NULL);
 }
 
 void sub_80856E0(Entity * pokemon, s32 direction)

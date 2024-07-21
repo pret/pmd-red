@@ -34,10 +34,12 @@ enum ItemTargetFlag
     ITEM_TARGET_ALLY = 1 << 1
 };
 
-extern s32 gNumPotentialTargets;
-extern u32 gPotentialItemTargetWeights[NUM_DIRECTIONS];
-extern u32 gPotentialItemTargetDirections[NUM_DIRECTIONS];
-extern bool8 gTargetAhead[NUM_DIRECTIONS];
+EWRAM_DATA_2 s32 gNumPotentialTargets = {0};
+
+EWRAM_DATA u32 gPotentialItemTargetDirections[NUM_DIRECTIONS] = {0};
+EWRAM_DATA bool8 gTargetAhead[NUM_DIRECTIONS] = {0};
+EWRAM_DATA u32 gPotentialItemTargetWeights[NUM_DIRECTIONS] = {0};
+
 extern TeamInventory *gTeamInventoryRef;
 
 void sub_807360C(void)

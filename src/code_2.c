@@ -99,7 +99,7 @@ void GameLoop(void)
         sub_800A8F8(2);
         ResetSprites(TRUE);
         xxx_update_some_bg_tiles(0);
-        sub_80097B0();
+        InitFontPalette();
         sub_800CDA8(2);
         sub_800641C(NULL, TRUE, TRUE);
         gUnknown_2026E4E = 0x1000;

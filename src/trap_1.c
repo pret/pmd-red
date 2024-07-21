@@ -1,4 +1,6 @@
 #include "global.h"
+#include "structs/dungeon_entity.h"
+#include "structs/map.h"
 #include "trap.h"
 #include "code_806CD90.h"
 #include "code_8092334.h"
@@ -10,17 +12,17 @@
 extern u8 gUnknown_81071E0[];
 extern u8 gUnknown_81071D4[];
 
-extern void sub_8082FA8(void *, void *, u32);
+extern void sub_8082FA8(unkStruct_8094924 *, void *, s32);
 
-void sub_8081B60(void *, Tile *);
+void SaveTile(unkStruct_8094924 *r0, Tile *tile);
 void sub_80830F8(void * , u32*);
 void sub_808312C(void *, u32 *);
-void sub_8081B94(void *, u8 *);
+void SaveDungeonWeather(unkStruct_8094924 *r0, Weather *weather);
 void sub_8083078(void *, u32);
 void sub_80830B4(void *, u8);
 void sub_8083030(void *, u16);
-void sub_8080E0C(unkStruct_8094924 *, Entity *);
-void sub_808300C(void *, u8 *);
+void SaveEntity(unkStruct_8094924 *param_1, Entity *);
+void sub_808300C(unkStruct_8094924 *param_1, u8 *);
 void sub_8081788(unkStruct_8094924 *param_1, Item *param_2);
 void sub_8080B90(unkStruct_8094924 *param_1);
 void SaveItemData(unkStruct_8094924 *param_1);
@@ -32,20 +34,20 @@ void sub_8080CF0(unkStruct_8094924 *param_1);
 void nullsub_98(unkStruct_8094924 *param_1);
 void sub_8082F9C(unkStruct_8094924 *param_1, u32, u32);
 void sub_8049ED4(void);
-void sub_8083060(void *, u32);
+void sub_8083060(unkStruct_8094924 *param_1, u32);
 void sub_80817F4(unkStruct_8094924 *param_1, u32 param_2);
-void sub_80830A0(void *, u32);
+void sub_80830A0(unkStruct_8094924 *param_1, u32);
 void sub_808180C(unkStruct_8094924 *param_1, u32 param_2);
-void sub_8083048(void *, u32);
+void sub_8083048(unkStruct_8094924 *param_1, u32);
 void sub_80818C8(unkStruct_8094924 *param_1, JoinedAt *param_2);
-void sub_80817C8(unkStruct_8094924 *param_1, ActionContainer *param_2);
-void sub_8081B34(void *, void *);
-void sub_8081B08(void *, Move *);
+void SaveActionContainer(unkStruct_8094924 *param_1, ActionContainer *param_2);
+void sub_8081B34(unkStruct_8094924 *r0, s16 *r1);
+void SaveEntityMoves(unkStruct_8094924 *r0, Move *move);
 void sub_8081824(unkStruct_8094924 *param_1, u32 param_2);
 void sub_80817B0(unkStruct_8094924 *param_1, u32 param_2);
 void SavePosition(void*, Position *);
-void sub_80818E4(unkStruct_8094924 *param_1, AITarget* param_2);
-void sub_8081B54(void *, u8 *);
+void SaveAITargetStatus(unkStruct_8094924 *param_1, AITarget* param_2);
+void SaveIQFlags(unkStruct_8094924 *r0, u8 *r1);
 void SaveSpeedStage(unkStruct_8094924 *param_1, s32 param_2);
 void sub_8081854(unkStruct_8094924 *param_1, s32 param_2);
 void sub_808183C(unkStruct_8094924 *param_1, s32 param_2);
@@ -64,33 +66,33 @@ void SaveHiddenPower(unkStruct_8094924 *param_1, HiddenPower *param_2);
 void SaveChargingStatus(unkStruct_8094924 *param_1, Charging *param_2);
 void SaveProtectionStatus(unkStruct_8094924 *param_1, Protection *param_2);
 void SaveWaitingStatus(unkStruct_8094924 *param_1, Waiting *param_2);
-void SaveSpeedCounters(void *, u8 *, u32);
+void SaveSpeedCounters(unkStruct_8094924 *param_1, u8 *speedCounters, u32 numCounters);
 void SaveClientType(unkStruct_8094924 *param_1, u8 param_2);
 void sub_803E708(u32, u32);
-void sub_80421C0(Entity *, u32);
+void sub_80421C0(Entity *, u16);
 void sub_804687C(Entity *, Position *, Position *, Item *, u32);
 
-void HandleTripTrap(Entity *param_1, Entity *param_2)
+void HandleTripTrap(Entity *pokemon, Entity *target)
 {
     u32 direction;
     EntityInfo *info;
     Position pos;
     Item item;
 
-    if (param_2 != NULL) {
-        sub_806CDD4(param_2, 6, NUM_DIRECTIONS);
+    if (target != NULL) {
+        sub_806CDD4(target, 6, NUM_DIRECTIONS);
         sub_803E708(0x10, 0x55);
-        sub_806CE68(param_2, NUM_DIRECTIONS);
-        info = param_2->info;
+        sub_806CE68(target, NUM_DIRECTIONS);
+        info = target->info;
         if ((info->heldItem).flags & ITEM_FLAG_EXISTS) {
             item =  (info->heldItem);
             (info->heldItem).flags = 0;
             FillInventoryGaps();
-            sub_80421C0(param_2, 400);
+            sub_80421C0(target, 400);
             direction = (info->action).direction & DIRECTION_MASK;
-            pos.x = (param_2->pos).x + gAdjacentTileOffsets[direction].x;
-            pos.y =  (param_2->pos).y + gAdjacentTileOffsets[direction].y;
-            sub_804687C(param_1, &param_2->pos, &pos, &item, 1);
+            pos.x = (target->pos).x + gAdjacentTileOffsets[direction].x;
+            pos.y =  (target->pos).y + gAdjacentTileOffsets[direction].y;
+            sub_804687C(pokemon, &target->pos, &pos, &item, 1);
         }
     }
 }
@@ -216,15 +218,15 @@ void sub_8080CF0(unkStruct_8094924 *param_1)
     sub_8083030(param_1,gDungeon->unk3800);
     for(counter = 0; counter < MAX_TEAM_MEMBERS; counter++)
     {
-        sub_8080E0C(param_1,gDungeon->teamPokemon[counter]);
+        SaveEntity(param_1,gDungeon->teamPokemon[counter]);
     }
     for(counter = 0; counter < DUNGEON_MAX_WILD_POKEMON; counter++)
     {
-        sub_8080E0C(param_1,gDungeon->wildPokemon[counter]);
+        SaveEntity(param_1,gDungeon->wildPokemon[counter]);
     }
 }
 
-void sub_8080E0C(unkStruct_8094924 *param_1,Entity *param_2)
+void SaveEntity(unkStruct_8094924 *param_1, Entity *param_2)
 {
     Position *pos;
     EntityInfo *info;
@@ -320,7 +322,7 @@ void sub_8080E0C(unkStruct_8094924 *param_1,Entity *param_2)
     sub_80830A0(param_1,info->offensiveMultipliers[1]);
     sub_80830A0(param_1,info->defensiveMultipliers[0]);
     sub_80830A0(param_1,info->defensiveMultipliers[1]);
-    sub_80817C8(param_1,&info->action);
+    SaveActionContainer(param_1,&info->action);
     sub_808180C(param_1,info->types[0]);
     sub_808180C(param_1,info->types[1]);
     sub_8081824(param_1,info->abilities[0]);
@@ -371,9 +373,9 @@ void sub_8080E0C(unkStruct_8094924 *param_1,Entity *param_2)
         pos++;
     }
 
-    sub_80818E4(param_1,temp3);
-    sub_8081B54(param_1,temp2);
-    sub_8081B54(param_1,temp1);
+    SaveAITargetStatus(param_1,temp3);
+    SaveIQFlags(param_1,temp2);
+    SaveIQFlags(param_1,temp1);
     SaveTactic(param_1,*puStack_a0);
     SaveHiddenPower(param_1,psStack_a4);
     sub_8083078(param_1,*puStack_9c);
@@ -413,9 +415,9 @@ void sub_8080E0C(unkStruct_8094924 *param_1,Entity *param_2)
     sub_8083060(param_1,info->stockpileStage);
     sub_8083060(param_1,info->fill113);
     sub_8083060(param_1,(u8)info->moveRandomly);
-    sub_8081B08(param_1,info->moves);
-    sub_8081B34(param_1,&info->belly);
-    sub_8081B34(param_1,&info->maxBelly);
+    SaveEntityMoves(param_1,info->moves);
+    sub_8081B34(param_1,(s16 *)&info->belly);
+    sub_8081B34(param_1,(s16 *)&info->maxBelly);
     sub_80830B4(param_1,info->aiNextToTarget);
     sub_80830B4(param_1,info->recalculateFollow);
     sub_80830B4(param_1,info->waiting);
@@ -470,7 +472,7 @@ void sub_8081454(unkStruct_8094924 *param_1)
 
         for(iVar2 = 0; iVar2 < DUNGEON_MAX_SIZE_X; iVar2++)
         {
-            sub_8081B60(param_1,&gDungeon->tiles[iVar1][iVar2]);
+            SaveTile(param_1,&gDungeon->tiles[iVar1][iVar2]);
         }
     }
 
@@ -492,11 +494,11 @@ void sub_8081454(unkStruct_8094924 *param_1)
     {
         for(iVar2 = 0; iVar2 < 8; iVar2++)
         {
-            sub_8081B60(param_1, &gDungeon->unkE27C[iVar1][iVar2]);
+            SaveTile(param_1, &gDungeon->unkE27C[iVar1][iVar2]);
             sub_8083060(param_1, gDungeon->unkE87C[iVar1][iVar2]);
         }
     }
-    sub_8081B94(param_1,&gDungeon->weather);
+    SaveDungeonWeather(param_1,&gDungeon->weather);
 }
 
 void sub_808165C(unkStruct_8094924 *param_1)
@@ -538,7 +540,7 @@ void sub_80817B0(unkStruct_8094924 *param_1, u32 param_2)
     sub_8082FA8(param_1, &stack, 1);
 }
 
-void sub_80817C8(unkStruct_8094924 *param_1, ActionContainer *param_2)
+void SaveActionContainer(unkStruct_8094924 *param_1, ActionContainer *param_2)
 {
     sub_8082FA8(param_1, &param_2->direction, 1);
     sub_8082FA8(param_1, &param_2->itemTargetPosition.x, 1);
@@ -607,7 +609,7 @@ void sub_80818C8(unkStruct_8094924 *param_1, JoinedAt *param_2)
     sub_8083060(param_1, param_2->unk1);
 }
 
-void sub_80818E4(unkStruct_8094924 *param_1, AITarget* param_2)
+void SaveAITargetStatus(unkStruct_8094924 *param_1, AITarget* param_2)
 {
     sub_8082FA8(param_1, &param_2->aiObjective, 1);
     sub_80830B4(param_1, param_2->aiNotNextToTarget);
@@ -703,5 +705,59 @@ void SaveMuzzledStatus(unkStruct_8094924 *param_1, Muzzled *param_2)
 {
     sub_8082FA8(param_1, &param_2->muzzled, 1);
     sub_8083060(param_1, param_2->muzzledTurns);
+}
+
+void SaveEntityMove(unkStruct_8094924 *r0, Move *r1)
+{
+    sub_8083060(r0, r1->moveFlags);
+    sub_8083060(r0, r1->moveFlags2);
+    sub_8082FA8(r0, &r1->id, 2);
+    sub_8083060(r0, r1->PP);
+    sub_8083060(r0, r1->ginseng);
+}
+
+void SaveEntityMoves(unkStruct_8094924 *r0, Move *move)
+{
+    s32 index;
+    for(index = 0; index < MAX_MON_MOVES; index++)
+    {
+        SaveEntityMove(r0, &move[index]);
+    }
+    sub_8083060(r0, *(u8 *)(move + 0x4)); // Struggle Move flags?
+}
+
+void sub_8081B34(unkStruct_8094924 *r0, s16 *r1)
+{
+    sub_8083048(r0, r1[0]);
+    sub_8083048(r0, r1[1]);
+}
+
+void SaveIQFlags(unkStruct_8094924 *r0, u8 *r1)
+{
+    sub_8082FA8(r0, r1, 3);
+}
+
+void SaveTile(unkStruct_8094924 *r0, Tile *tile)
+{
+    sub_8083030(r0, tile->terrainType);
+    sub_8083030(r0, tile->unk4);
+    sub_8082FA8(r0, &tile->room, 1);
+    sub_8082FA8(r0, &tile->unkE, 1);
+}
+
+void SaveDungeonWeather(unkStruct_8094924 *r0, Weather *weather)
+{
+    s32 index;
+    sub_8082FA8(r0, &weather->weather, 1);
+    sub_8082FA8(r0, &weather->unkE265, 1);
+    for(index = 0; index < 8; index++)
+    {
+        sub_8083060(r0, weather->unkE267[index]);
+        sub_8083060(r0, weather->naturalWeather[index]);
+    }
+    sub_8083060(r0, weather->weatherDamageCounter);
+    sub_8083060(r0, weather->mudSportTurns);
+    sub_8083060(r0, weather->waterSportTurns);
+    sub_80830B4(r0, weather->nullifyWeather);
 }
 

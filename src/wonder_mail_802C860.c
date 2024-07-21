@@ -3,8 +3,7 @@
 #include "code_80118A4.h"
 #include "code_803B050.h"
 #include "code_802DE84.h"
-#include "code_80958E8_1.h"
-#include "code_8096AF8.h"
+#include "code_80958E8.h"
 #include "code_80A26CC.h"
 #include "common_strings.h"
 #include "input.h"
@@ -284,7 +283,7 @@ static void sub_802CD38(void)
             break;
         case 5:
             ResetJobSlot(sUnknown_203B2F0->unkC);
-            sub_8096C80();
+            ShiftJobSlotsDown();
 
             if (HasNoAcceptedJobs()) {
                 sub_802C688();

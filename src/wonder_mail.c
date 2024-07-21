@@ -129,20 +129,23 @@ enum FriendRescueStates
     FRIEND_RESCUE_COMMUNICATING_PRE = 5,
     FRIEND_RESCUE_COMMUNICATING = 6,
     FRIEND_RESCUE_ERROR = 7,
-    // 8
+    RECEIVE_SOS_MAIL,
     NO_MAIL_ROOM = 9,
     // 10 - 11
     NO_SOS_MAIL = 12,
-    // 13
+    CHOOSE_DELETE_SOS_MAIL = 13,
     NO_AOK_MAIL = 14,
-    // 15
+    CHOOSE_DELETE_AOK_MAIL = 15,
     NO_MAIL = 16,
-    // 17
+    CHOOSE_DELETE_ALL_MAIL,
     PROMPT_DELETE_ALL_MAIL = 18,
     CONFIRM_DELETE_ALL_MAIL_1,
     CONFIRM_DELETE_ALL_MAIL_2,
     DELETE_ALL_MAIL_SAVE_PRE,
-    // 22 - 25
+    // 22
+    SAVING_ADVENTURE = 23,
+    FINISH_SAVING_ADVENTURE = 24,
+    PROMPT_DELETE_ANY_OTHER_MAIL = 25,
     NO_SOS_MAIL_TO_SEND = 26,
     // 27
     CANT_GO_TO_DUNGEON = 28,
@@ -169,6 +172,27 @@ enum FriendRescueStates
     AOK_PASSWORD_DISPLAY,
     // 59 - 60
     DEFAULT_FALLBACK_STATE = 61
+};
+
+enum MenuActions {
+    RECEIVE_SOS_MAIL_ACTION,
+    LEAVE_FOR_RESCUE_ACTION,
+    SEND_AOK_MAIL_ACTION,
+    DELETE_MAIL_ACTION,
+    // 0x4
+    DELETE_SOS_MAIL_ACTION = 5,
+    DELETE_AOK_MAIL_ACTION,
+    DELETE_ALL_MAIL_ACTION,
+    YES_ACTION,
+    NO_ACTION,
+    CANCEL_ACTION,
+    CONFIRM_ACTION,
+    INFO_ACTION,
+    GAME_LINK_CABLE_ACTION,
+    // 14
+    PASSWORD_ACTION = 15,
+    SEND_POKEMON_ACTION = 17,
+    SEND_WO_POKEMON_ACTION = 18
 };
 
 #include "data/wonder_mail_1.h"
@@ -299,7 +323,7 @@ u32 sub_8028078(void)
     case FRIEND_RESCUE_COMMUNICATING_PRE:
         sub_802958C();
         break;
-    case 8:
+    case RECEIVE_SOS_MAIL:
         sub_8029208();
         break;
     case NO_SOS_MAIL_TO_SEND:
@@ -333,17 +357,17 @@ u32 sub_8028078(void)
     case 0xb:
         sub_8028D4C();
         break;
-    case 0xd:
-    case 0xf:
+    case CHOOSE_DELETE_SOS_MAIL:
+    case CHOOSE_DELETE_AOK_MAIL:
         sub_8028DE8(0xA);
         break;
-    case 0x11:
+    case CHOOSE_DELETE_ALL_MAIL:
         sub_8028E08();
         break;
     case NO_SOS_MAIL:
     case NO_AOK_MAIL:
     case NO_MAIL:
-        sub_8028DE8(0x19);
+        sub_8028DE8(PROMPT_DELETE_ANY_OTHER_MAIL);
         break;
     case PROMPT_DELETE_ALL_MAIL:
         sub_8028E24();
@@ -351,13 +375,13 @@ u32 sub_8028078(void)
     case CONFIRM_DELETE_ALL_MAIL_1:
         sub_8028E54();
         break;
-    case 0x17:
+    case SAVING_ADVENTURE:
         sub_8028E84();
         break;
-    case 0x18:
+    case FINISH_SAVING_ADVENTURE:
         sub_8028EAC();
         break;
-    case 0x19:
+    case PROMPT_DELETE_ANY_OTHER_MAIL:
         sub_8028ED4();
         break;
     case CONFIRM_DELETE_ALL_MAIL_2:
@@ -623,10 +647,10 @@ void sub_8028348(void)
             switch((u32)sUnknown_203B2C0->unk538)
             {
                 case 5:
-                    sub_8030F58(2);
+                    sub_8030F58(WONDER_MAIL_TYPE_SOS_1); // SOS
                     break;
                 case 6:
-                    sub_8030F58(4);
+                    sub_8030F58(WONDER_MAIL_TYPE_AOK); // AOK
                     break;
                 default:
                 case 7:
@@ -636,19 +660,19 @@ void sub_8028348(void)
         case 0xB:
             sub_8014248(gUnknown_80DE48C, 0, 5, gUnknown_80DD9EC, 0, 4, 0, &sUnknown_203B2C0->faceFile,0xC);
             break;
-        case 0xD:
+        case CHOOSE_DELETE_SOS_MAIL:
             sub_80141B4(gUnknown_80DE4B8, 0, &sUnknown_203B2C0->faceFile,0x10d);
             break;
         case NO_SOS_MAIL:
             sub_80141B4(gUnknown_80DE4F0, 0, &sUnknown_203B2C0->faceFile,0x10d);
             break;
-        case 0xF:
+        case CHOOSE_DELETE_AOK_MAIL:
             sub_80141B4(gUnknown_80DE524, 0, &sUnknown_203B2C0->faceFile,0x10d);
             break;
         case NO_AOK_MAIL:
             sub_80141B4(gUnknown_80DE614, 0, &sUnknown_203B2C0->faceFile,0x10d);
             break;
-        case 0x11:
+        case CHOOSE_DELETE_ALL_MAIL:
             sub_80141B4(gUnknown_80DE648, 0, &sUnknown_203B2C0->faceFile,0x10d);
             break;
         case NO_MAIL:
@@ -660,13 +684,13 @@ void sub_8028348(void)
         case CONFIRM_DELETE_ALL_MAIL_1:
             sub_8014248(gUnknown_80DE754, 0, 8, gUnknown_80DDA48, 0, 4, 0, &sUnknown_203B2C0->faceFile,0xC);
             break;
-        case 0x17:
+        case SAVING_ADVENTURE:
             sub_80141B4(gUnknown_80DE7B8, 0, &sUnknown_203B2C0->faceFile,0x10d);
             break;
-        case 0x18:
+        case FINISH_SAVING_ADVENTURE:
             sub_80141B4(gUnknown_80DE7E8, 0, &sUnknown_203B2C0->faceFile,0x10d);
             break;
-        case 0x19:
+        case PROMPT_DELETE_ANY_OTHER_MAIL:
             sub_8014248(gUnknown_80DE808, 0, 8, gUnknown_80DDA64, 0, 4, 0, &sUnknown_203B2C0->faceFile,0xC);
             break;
         case CONFIRM_DELETE_ALL_MAIL_2:
@@ -757,19 +781,19 @@ void sub_8028BF0(void)
     sUnknown_203B2C0->speciesNum = -1;
     switch(menuChoice)
     {
-        case 0:
+        case RECEIVE_SOS_MAIL_ACTION:
             sUnknown_203B2C0->unk40 = 3;
             sUnknown_203B2C0->unk538 = 0;
             if(FindOpenMailSlot() != -1)
             {
-                SetFriendRescueCounterState(8);
+                SetFriendRescueCounterState(RECEIVE_SOS_MAIL);
             }
             else
             {
                 SetFriendRescueCounterState(NO_MAIL_ROOM);
             }
             break;
-        case 1:
+        case LEAVE_FOR_RESCUE_ACTION:
             if(CountMailType(2) != 0)
             {
                 SetFriendRescueCounterState(PROMPT_CHOOSE_SOS_MAIL);
@@ -779,7 +803,7 @@ void sub_8028BF0(void)
                 SetFriendRescueCounterState(NO_SOS_MAIL_TO_SEND);
             }
             break;
-        case 2:
+        case SEND_AOK_MAIL_ACTION:
             sUnknown_203B2C0->unk40 = 4;
             sUnknown_203B2C0->unk538 = 2;
             if(CountMailType(WONDER_MAIL_TYPE_AOK) != 0)
@@ -791,10 +815,10 @@ void sub_8028BF0(void)
                 SetFriendRescueCounterState(NO_AOK_MAIL_TO_SEND);
             }
             break;
-        case 3:
+        case DELETE_MAIL_ACTION:
             SetFriendRescueCounterState(11);
             break;
-        case 10:
+        case CANCEL_ACTION:
             SetFriendRescueCounterState(FRIEND_RESCUE_EXIT_PRE);
             break;
         default:
@@ -831,11 +855,11 @@ void sub_8028CFC()
             sub_80310B4();
             if(newMailCount != sUnknown_203B2C0->mailCount)
             {
-                SetFriendRescueCounterState(0x17);
+                SetFriendRescueCounterState(SAVING_ADVENTURE);
             }
             else
             {
-                SetFriendRescueCounterState(0x19);
+                SetFriendRescueCounterState(PROMPT_DELETE_ANY_OTHER_MAIL);
             }
             break;
         default:
@@ -854,25 +878,25 @@ void sub_8028D4C()
     sUnknown_203B2C0->unk538 = menuChoice;
     switch(sUnknown_203B2C0->unk538)
     {
-        case 5:
+        case DELETE_SOS_MAIL_ACTION:
             if(HasNoWonderMailType(2))
                 SetFriendRescueCounterState(NO_SOS_MAIL);
             else
-                SetFriendRescueCounterState(0xD);
+                SetFriendRescueCounterState(CHOOSE_DELETE_SOS_MAIL);
             break;
-        case 6:
+        case DELETE_AOK_MAIL_ACTION:
             if(HasNoWonderMailType(WONDER_MAIL_TYPE_AOK))
                 SetFriendRescueCounterState(NO_AOK_MAIL);
             else
-                SetFriendRescueCounterState(0xF);
+                SetFriendRescueCounterState(CHOOSE_DELETE_AOK_MAIL);
             break;
-        case 7:
+        case DELETE_ALL_MAIL_ACTION:
             if(HasNoWonderMailType(WONDER_MAIL_TYPE_NONE))
                 SetFriendRescueCounterState(NO_MAIL);
             else
-                SetFriendRescueCounterState(0x11);
+                SetFriendRescueCounterState(CHOOSE_DELETE_ALL_MAIL);
             break;
-        case 10:
+        case CANCEL_ACTION:
             SetFriendRescueCounterState(FRIEND_RESCUE_MAIN);
             break;
         default:
@@ -912,10 +936,10 @@ void sub_8028E24()
     }
     switch(menuChoice)
     {
-        case 8:
+        case YES_ACTION:
             SetFriendRescueCounterState(CONFIRM_DELETE_ALL_MAIL_1);
             break;
-        case 10:
+        case CANCEL_ACTION:
             SetFriendRescueCounterState(FRIEND_RESCUE_MAIN);
             break;
         default:
@@ -933,10 +957,10 @@ void sub_8028E54()
     }
     switch(menuChoice)
     {
-        case 8:
+        case YES_ACTION:
             SetFriendRescueCounterState(CONFIRM_DELETE_ALL_MAIL_2);
             break;
-        case 10:
+        case CANCEL_ACTION:
             SetFriendRescueCounterState(FRIEND_RESCUE_MAIN);
             break;
         default:
@@ -952,7 +976,7 @@ void sub_8028E84()
     {
         return;
     }
-    SetFriendRescueCounterState(0x18);
+    SetFriendRescueCounterState(FINISH_SAVING_ADVENTURE);
     sub_8011C28(1);
     PrepareSavePakWrite(MONSTER_NONE);
 }
@@ -968,7 +992,7 @@ void sub_8028EAC()
     if(!WriteSavePak())
     {
         FinishWriteSavePak();
-        SetFriendRescueCounterState(0x19);
+        SetFriendRescueCounterState(PROMPT_DELETE_ANY_OTHER_MAIL);
     }
 }
 
@@ -981,11 +1005,11 @@ void sub_8028ED4()
         return;
     }
     switch(menuChoice){
-        case 8:
+        case YES_ACTION:
             SetFriendRescueCounterState(0xB);
             break;
-        case 9:
-        case 10:
+        case NO_ACTION:
+        case CANCEL_ACTION:
             SetFriendRescueCounterState(FRIEND_RESCUE_EXIT_PRE);
             break;
         default:
@@ -1071,7 +1095,7 @@ void sub_8028FDC(void)
     }
     switch(menuChoice)
     {
-        case 8:
+        case YES_ACTION:
             mail = GetMailatIndex(sUnknown_203B2C0->mailIndex);
             if(!sub_80A2824(mail->unk4.dungeon.id))
             {
@@ -1086,8 +1110,8 @@ void sub_8028FDC(void)
                 SetFriendRescueCounterState(0x1B);
             }
             break;
-        case 9:
-        case 10:
+        case NO_ACTION:
+        case CANCEL_ACTION:
             SetFriendRescueCounterState(FRIEND_RESCUE_MAIN);
             break;
         default:
@@ -1140,11 +1164,11 @@ void sub_80290F0(void)
     }
     switch(menuAction)
     {
-        case 11:
+        case CONFIRM_ACTION:
             sub_803084C();
             SetFriendRescueCounterState(0x22);
             break;
-        case 12:
+        case INFO_ACTION:
             sUnknown_203B2C0->fallbackState = DEFAULT_FALLBACK_STATE;
             sub_8006518(sUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
@@ -1153,7 +1177,7 @@ void sub_80290F0(void)
             SetFriendRescueCounterState(0x21);
             break;
         case 4:
-        case 10:
+        case CANCEL_ACTION:
             sub_8035CC0(sUnknown_203B2C0->unk35C, 2);
             sub_8030810(1);
             SetFriendRescueCounterState(0x1F);
@@ -1197,7 +1221,7 @@ void sub_8029208(void)
     switch(menuChoice)
     {
 
-        case 13:
+        case GAME_LINK_CABLE_ACTION:
         case 14:
             sUnknown_203B2C0->unk534 = 13;
             switch(sUnknown_203B2C0->unk538)
@@ -1212,7 +1236,7 @@ void sub_8029208(void)
                     return;
             }
             break;
-        case 15:
+        case PASSWORD_ACTION:
             sUnknown_203B2C0->unk534 = 15;
             switch(sUnknown_203B2C0->unk538)
             {
@@ -1226,7 +1250,7 @@ void sub_8029208(void)
                     return;
             }
             break;
-        case 10:
+        case CANCEL_ACTION:
             SetFriendRescueCounterState(FRIEND_RESCUE_MAIN);
             break;
     }
@@ -1241,7 +1265,7 @@ void sub_80292A4(void)
     }
     switch(menuChoice)
     {
-        case 8:
+        case YES_ACTION:
             switch(sUnknown_203B2C0->unk538)
             {
                 case 0:
@@ -1250,7 +1274,7 @@ void sub_80292A4(void)
                     break;
             }
             break;
-        case 10:
+        case CANCEL_ACTION:
             SetFriendRescueCounterState(FRIEND_RESCUE_MAIN);
             break;
     }
@@ -1405,10 +1429,10 @@ void sub_802955C(void)
     }
     switch(menuChoice)
     {
-        case 8:
+        case YES_ACTION:
             SetFriendRescueCounterState(PROMPT_SOS_MAIL_PASSWORD);
             break;
-        case 10:
+        case CANCEL_ACTION:
             SetFriendRescueCounterState(FRIEND_RESCUE_MAIN);
             break;
     }
@@ -1433,11 +1457,11 @@ void sub_80295A8(void)
     }
     switch(menuChoice)
     {
-        case 8:
-            SetFriendRescueCounterState(0x8);
+        case YES_ACTION:
+            SetFriendRescueCounterState(RECEIVE_SOS_MAIL);
             break;
-        case 9:
-        case 10:
+        case NO_ACTION:
+        case CANCEL_ACTION:
             SetFriendRescueCounterState(FRIEND_RESCUE_MAIN);
             break;
 
@@ -1489,11 +1513,11 @@ void sub_8029684(void)
     }
     switch(menuAction)
     {
-        case 0xB:
+        case CONFIRM_ACTION:
             sub_803084C();
             SetFriendRescueCounterState(0x2D);
             break;
-        case 0xC:
+        case INFO_ACTION:
             sUnknown_203B2C0->fallbackState = DEFAULT_FALLBACK_STATE;
             sub_8006518(sUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
@@ -1502,7 +1526,7 @@ void sub_8029684(void)
             SetFriendRescueCounterState(0x2C);
             break;
         case 0x4:
-        case 0xA:
+        case CANCEL_ACTION:
             sub_8035CC0(sUnknown_203B2C0->unk35C,2);
             sub_8030810(1);
             SetFriendRescueCounterState(0x2A);
@@ -1589,11 +1613,11 @@ void sub_8029884(void)
     }
     switch(menuAction)
     {
-        case 0xB:
+        case CONFIRM_ACTION:
             sub_8023C60();
             SetFriendRescueCounterState(4);
             break;
-        case 0xC:
+        case INFO_ACTION:
             sUnknown_203B2C0->fallbackState = DEFAULT_FALLBACK_STATE;
             sub_8006518(sUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
@@ -1602,7 +1626,7 @@ void sub_8029884(void)
             SetFriendRescueCounterState(0x35);
             break;
         case 0x4:
-        case 0xA:
+        case CANCEL_ACTION:
             sub_8035CC0(sUnknown_203B2C0->unk35C, 3);
             sub_8023B7C(1);
             SetFriendRescueCounterState(SELECT_HELPER_POKEMON);
@@ -1651,10 +1675,10 @@ void sub_80299AC(void)
     }
     switch(menuChoice)
     {
-        case 0x12:
+        case SEND_WO_POKEMON_ACTION:
             SetFriendRescueCounterState(4);
             break;
-        case 0xA:
+        case CANCEL_ACTION:
             SetFriendRescueCounterState(FRIEND_RESCUE_MAIN);
             break;
         default:
@@ -1672,13 +1696,13 @@ void sub_80299D8(void)
     switch(menuChoice)
     {
 
-        case 8:
+        case YES_ACTION:
             SetFriendRescueCounterState(4);
             break;
-        case 9:
+        case NO_ACTION:
             SetFriendRescueCounterState(PROMPT_SELECT_HELPER_POKEMON);
             break;
-        case 0xA:
+        case CANCEL_ACTION:
             SetFriendRescueCounterState(FRIEND_RESCUE_MAIN);
             break;
     }
@@ -1693,7 +1717,7 @@ void sub_8029A18(void)
     }
     switch(menuChoice)
     {
-        case 0x11:
+        case SEND_POKEMON_ACTION:
             if(sub_8024108(3) != 0)
             {
                 SetFriendRescueCounterState(NO_POKEMON_IN_FRIEND_AREA);
@@ -1703,10 +1727,10 @@ void sub_8029A18(void)
                 SetFriendRescueCounterState(PROMPT_SELECT_HELPER_POKEMON);
             }
             break;
-        case 0x12:
+        case SEND_WO_POKEMON_ACTION:
             SetFriendRescueCounterState(0x4);
             break;
-        case 0xA:
+        case CANCEL_ACTION:
             SetFriendRescueCounterState(FRIEND_RESCUE_MAIN);
             break;
     }

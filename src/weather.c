@@ -19,7 +19,7 @@ u8 GetApparentWeather(Entity *pokemon)
     {
         return WEATHER_CLEAR;
     }
-    return gDungeon->weather;
+    return gDungeon->weather.weather;
 }
 
 void sub_807E5AC(void)
@@ -38,18 +38,18 @@ void sub_807E5E4(u8 weather)
   int index;
   u8 *preload;
 
-  gDungeon->unkE265 = weather;
-  gDungeon->weather = gDungeon->unkE265;
-  gDungeon->nullifyWeather = FALSE;
+  gDungeon->weather.unkE265 = weather;
+  gDungeon->weather.weather = gDungeon->weather.unkE265;
+  gDungeon->weather.nullifyWeather = FALSE;
   for(index = 0; index < 8; index++) {
-    gDungeon->unkE267[index] = 0;
-    gDungeon->naturalWeather[index] = 0;
+    gDungeon->weather.unkE267[index] = 0;
+    gDungeon->weather.naturalWeather[index] = 0;
   }
-  preload = &gDungeon->weatherDamageCounter;
+  preload = &gDungeon->weather.weatherDamageCounter;
   index = 0;
   *preload = 9;
-  gDungeon->mudSportTurns = 0;
-  gDungeon->waterSportTurns = 0;
+  gDungeon->weather.mudSportTurns = 0;
+  gDungeon->weather.waterSportTurns = 0;
   for(index = 0; index < 0x100; index++)
   {
     gDungeon->unk17C[index].unk0 = index;

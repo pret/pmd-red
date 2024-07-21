@@ -3555,7 +3555,7 @@ _08009714:
 	bl CpuCopy
 	adds r0, r6, 0
 	bl CloseFile
-	bl sub_80097B0
+	bl InitFontPalette
 	ldr r0, _080097AC
 	adds r1, r4, 0
 	bl OpenFileAndGetFileDataPtr

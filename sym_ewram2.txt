@@ -72,11 +72,7 @@ gUnknown_203B0B2: /* 203B0B2 */
 .include "src/flash.o"
     .space 0x3
 
-gUnknown_203B0B8: /* 203B0B8 (sub_800CB20 - sub_800CB50) */
-	.space 0x4
-
-gRawKeyInput: /* 203B0BC (sub_800CB20 - ReadKeyInput) */
-	.space 0x2
+.include "src/code_800C9CC.o"
 
 gUnknown_203B0BE: /* 203B0BE (sub_800CDA8) */
 	.space 0xE
@@ -134,9 +130,9 @@ gUnknown_203B1FC: /* 203B1FC (sub_80151C0 - sub_8015F84) */
 .include "src/code_801AFA4.o"
 .include "src/code_801B3C0.o"
 .include "src/code_801B60C.o"
-.include "src/code_801BEEC.o"
-.include "src/code_801C244.o"
-.include "src/code_801C620.o"
+.include "src/iq_skill_menu.o"
+.include "src/iq_skill_list_menu.o"
+.include "src/iq_skill_info_menu.o"
 .include "src/code_801C8C4.o"
 .include "src/code_801D014.o"
 .include "src/code_801D9E4.o"
@@ -195,13 +191,8 @@ gUnknown_203B2AA: /* 203B2AA (sub_8023868 - sub_8023C60) */
 .include "src/mailbox.o"
 .include "src/pelipper_board.o"
 .include "src/wonder_mail_3_mid.o"
-
-gUnknown_203B310: /* 203B310 (sub_802F204 - ProceedToNextRewardSceneState) */
-	.space 0x4
-
-gUnknown_203B314: /* 203B314 (sub_802F73C - sub_802FA50) */
-	.space 0x4
-
+.include "src/mission_reward.o"
+.include "src/code_8072F3C.o"
 .include "src/makuhita_dojo1.o"
 .include "src/makuhita_dojo2.o"
 .include "src/wonder_mail_4.o"
@@ -260,8 +251,7 @@ gUnknown_203B420: /* 203B420 (sub_80462AC) */
 gUnknown_203B428: /* 203B428 (sub_80462AC) */
 	.space 0x8
 
-gUnknown_203B430: /* 203B430 (GetTile - sub_8049840) */
-	.space 0x4
+    .include "src/dungeon_map_access.o"
 
 gUnknown_203B434: /* 203B434 (sub_80521D0 - sub_8072CF4) */
 	.space 0x4
@@ -272,8 +262,7 @@ gUnknown_203B438: /* 203B438 (sub_8055FA0 - sub_8056F80) */
 gUnknown_203B43C: /* 203B43C (sub_8065FB4) */
 	.space 0x4
 
-gNumPotentialTargets: /* 203B440 (DecideUseItem - TargetThrownItem) */
-	.space 0x4
+    .include "src/dungeon_ai_items.o"
 
 gUnknown_203B444: /* 203B444 (sub_807DF38) */
 	.space 0xC
@@ -288,12 +277,9 @@ gLeaderPointer: /* 203B450 (xxx_dungeon_8042F6C - sub_8082280) */
     .include "src/rescue_team_info.o"
     .include "src/friend_area.o"
     .include "src/game_options.o"
+    .include "src/code_8094D28.o"
 
-gUnknown_203B470: /* 203B470 (sub_8094D28 - sub_8094E4C) */
 	.space 0x4
-
-gUnknown_203B474: /* 203B474 (sub_8094E4C) */
-	.space 0x8
 
     .include "src/play_time.o"
     .include "src/code_8094F88.o"

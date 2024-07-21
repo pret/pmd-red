@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
-#include "code_801BEEC.h"
+#include "iq_skill_menu.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
 #include "code_8023868.h"
@@ -29,6 +29,25 @@ extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
 #include "data/gulpin_shop_801FB50.h"
+
+enum menuActions {
+    CANCEL_ACTION = 1,
+    PROCEED_ACTION,
+    REMEMBER_ACTION,
+    MOVES_ACTION,
+    SET_ACTION,
+    DESELECT_ACTION,
+    LINK_ACTION = 8,
+    DE_LINK_ACTION,
+    FORGET_ACTION,
+    INFO_ACTION,
+    CHECK_IQ_ACTION,
+    SETTING_MOVES_ACTION,
+    LINKING_MOVES_ACTION,
+    REMEMBERING_MOVES_ACTION,
+    YES_ACTION,
+    NO_ACTION,
+};
 
 static void CreateGulpinLinkMenu(void);
 static void CreateGulpinShopMenu(void);
@@ -307,7 +326,7 @@ static void sub_801FF28(void)
             sub_8024458(gUnknown_203B27C->speciesNum,2);
             break;
         case 0x13:
-            sub_801BEEC(gUnknown_203B27C->speciesNum);
+            CreateIQSkillMenu(gUnknown_203B27C->speciesNum);
             break;
         case 0x14:
             gUnknown_203B27C->fallbackState = 0x15;
@@ -412,16 +431,16 @@ static void CreateGulpinShopMenu(void)
     s32 loopMax = 0;
     MemoryFill16(gUnknown_203B27C->unkBC, 0, sizeof(gUnknown_203B27C->unkBC));
     gUnknown_203B27C->unk7C[loopMax].text = gGulpinProceed;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 2;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = PROCEED_ACTION;
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gGulpinInfo;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 0xb;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = INFO_ACTION;
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gCommonCancel[0];
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 1;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = CANCEL_ACTION;
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = 0x0;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 1;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = CANCEL_ACTION;
 }
 
 static void sub_80205D0(void)
@@ -433,23 +452,23 @@ static void sub_80205D0(void)
     MemoryFill16(gUnknown_203B27C->unkBC, 0, sizeof(gUnknown_203B27C->unkBC));
 
     gUnknown_203B27C->unk7C[loopMax].text = gUnknown_80DC3D8;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 4;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = MOVES_ACTION;
 
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gUnknown_80DC3E0;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 0xB;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = INFO_ACTION;
 
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gUnknown_80DC3E8;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 0xC;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = CHECK_IQ_ACTION;
 
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gUnknown_80DC3F4;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 0x3;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = REMEMBER_ACTION;
 
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = NULL;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 1;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = CANCEL_ACTION;
 
     for (i = 0; i < loopMax; i++) {
         if (gUnknown_203B27C->unkBC[i] == 0 && gUnknown_203B27C->unk7C[i].menuAction == gUnknown_203B27C->menuAction2)
@@ -472,15 +491,15 @@ static void sub_802069C(void)
     MemoryFill16(gUnknown_203B27C->unkBC, 0, sizeof(gUnknown_203B27C->unkBC));
 
     gUnknown_203B27C->unk7C[loopMax].text = gUnknown_80DC3F4;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 3;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = REMEMBER_ACTION;
 
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gCommonInfo[0];
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 11;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = INFO_ACTION;
 
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = NULL;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 1;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = CANCEL_ACTION;
 
     for (i = 0; i < loopMax; i++) {
         if (gUnknown_203B27C->unkBC[i] == 0 && gUnknown_203B27C->unk7C[i].menuAction == gUnknown_203B27C->menuAction3)
@@ -507,12 +526,12 @@ static void CreateGulpinLinkMenu(void)
         if(IsMoveSet(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves))
         {
             gUnknown_203B27C->unk7C[loopMax].text = gGulpinDeselect;
-            gUnknown_203B27C->unk7C[loopMax].menuAction = 6;
+            gUnknown_203B27C->unk7C[loopMax].menuAction = DESELECT_ACTION;
         }
         else
         {
             gUnknown_203B27C->unk7C[loopMax].text = gGulpinSet;
-            gUnknown_203B27C->unk7C[loopMax].menuAction = 5;
+            gUnknown_203B27C->unk7C[loopMax].menuAction = SET_ACTION;
         }
     }
     else
@@ -530,23 +549,23 @@ static void CreateGulpinLinkMenu(void)
     
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gGulpinLink;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 8;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = LINK_ACTION;
     
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gGulpinDelink;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 9;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = DE_LINK_ACTION;
     
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gGulpinForget;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 10;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = FORGET_ACTION;
 
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gCommonInfo[0];
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 11;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = INFO_ACTION;
 
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = NULL;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 1;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = CANCEL_ACTION;
 
     for (i = 0; i < loopMax; i++) {
         if (gUnknown_203B27C->unkBC[i] == 0 && gUnknown_203B27C->unk7C[i].menuAction == gUnknown_203B27C->menuAction4)
@@ -565,13 +584,13 @@ static void sub_80208B0(void)
     s32 loopMax = 0;
     MemoryFill16(gUnknown_203B27C->unkBC, 0, sizeof(gUnknown_203B27C->unkBC));
     gUnknown_203B27C->unk7C[loopMax].text = gCommonYes[0];
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 0x10;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = YES_ACTION;
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gCommonNo[0];
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 0x11;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = NO_ACTION;
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = NULL;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 1;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = CANCEL_ACTION;
 }
 
 static void sub_8020900(void)
@@ -579,10 +598,10 @@ static void sub_8020900(void)
     s32 loopMax = 0;
     MemoryFill16(gUnknown_203B27C->unkBC, 0, sizeof(gUnknown_203B27C->unkBC));
     gUnknown_203B27C->unk7C[loopMax].text = gCommonYes[0];
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 0x10;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = YES_ACTION;
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gCommonNo[0];
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 0x11;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = NO_ACTION;
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = NULL;
     gUnknown_203B27C->unk7C[loopMax].menuAction = -1;
@@ -594,16 +613,16 @@ static void sub_8020950(void)
     MemoryFill16(gUnknown_203B27C->unkBC, 0, sizeof(gUnknown_203B27C->unkBC));
 
     gUnknown_203B27C->unk7C[loopMax].text = gUnknown_80DC428;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 0xD;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = SETTING_MOVES_ACTION;
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gUnknown_80DC438;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 0xE;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = LINKING_MOVES_ACTION;
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gUnknown_80DC448;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 0xF;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = REMEMBERING_MOVES_ACTION;
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = NULL;
-    gUnknown_203B27C->unk7C[loopMax].menuAction = 1;
+    gUnknown_203B27C->unk7C[loopMax].menuAction = CANCEL_ACTION;
 }
 
 static void sub_80209AC(void)
@@ -614,13 +633,13 @@ static void sub_80209AC(void)
         gUnknown_203B27C->menuAction1 = menuAction;
         switch(menuAction)
         {
-            case 2:
+            case PROCEED_ACTION:
                 sub_801FDA8(0xe);
                 break;
-            case 0xB:
+            case INFO_ACTION:
                 sub_801FDA8(0x8);
                 break;
-            case 1:
+            case CANCEL_ACTION:
                 sub_801FDA8(0xC);
                 break;
         }
@@ -634,11 +653,11 @@ static void sub_80209FC(void)
     {
         switch(menuAction)
         {
-            case 0x10:
+            case YES_ACTION:
                 sub_801FDA8(0xe);
                 break;
-            case 0x11:
-            case 1:
+            case NO_ACTION:
+            case CANCEL_ACTION:
                 sub_801FDA8(0xC);
                 break;
         }
@@ -652,16 +671,16 @@ static void sub_8020A34(void)
     {
         switch(menuAction)
         {
-            case 0xD:
+            case SETTING_MOVES_ACTION:
                 sub_801FDA8(0x9);
                 break;
-            case 0xE:
+            case LINKING_MOVES_ACTION:
                 sub_801FDA8(10);
                 break;
-            case 0xF:
+            case REMEMBERING_MOVES_ACTION:
                 sub_801FDA8(0xb);
                 break;
-            case 1:
+            case CANCEL_ACTION:
                 sub_801FDA8(0x1);
                 break;
         }
@@ -704,18 +723,18 @@ static void sub_8020B38(void)
     sub_8023A94(FALSE);
     if (!sub_8012FD8(&gUnknown_203B27C->unkCC)) {
         sub_8013114(&gUnknown_203B27C->unkCC,&menuAction);
-        if (menuAction != 1) {
+        if (menuAction != CANCEL_ACTION) {
             gUnknown_203B27C->menuAction2 = menuAction;
         }
     }
 
     switch(menuAction)
     {
-        case 0x1:
-        case 0x11:
+        case CANCEL_ACTION:
+        case NO_ACTION:
             sub_801FDA8(0x10);
             break;
-        case 0x3:
+        case REMEMBER_ACTION:
             if(GetBaseSpeciesNoUnown(gUnknown_203B27C->pokeStruct->speciesNum) == MONSTER_DEOXYS_NORMAL)
             {
                 sub_801FDA8(0x1C);
@@ -729,13 +748,13 @@ static void sub_8020B38(void)
                 sub_801FDA8(0x14);
             }
             break;
-        case 0x4:
+        case MOVES_ACTION:
             sub_801FDA8(0x1e);
             break;
-        case 0xB:
+        case INFO_ACTION:
             sub_801FDA8(0x12);
             break;
-        case 0xC:
+        case CHECK_IQ_ACTION:
             sub_801FDA8(0x13);
             break;
     }
@@ -762,7 +781,7 @@ static void sub_8020C48(void)
     {
         case 2:
         case 3:
-            sub_801BF98();
+            CleanIQSkillMenu();
             sub_801FDA8(0x10);
             break;
         case 0:
@@ -800,18 +819,18 @@ static void sub_8020CC0(void)
     sub_801F520(0);
     if (!sub_8012FD8(&gUnknown_203B27C->unkCC)) {
         sub_8013114(&gUnknown_203B27C->unkCC,&menuAction);
-        if (menuAction != 1) {
+        if (menuAction != CANCEL_ACTION) {
             gUnknown_203B27C->menuAction3 = menuAction;
         }
     }
 
     switch(menuAction)
     {
-        case 0x1:
-        case 0x11:
+        case CANCEL_ACTION:
+        case NO_ACTION:
             sub_801FDA8(0x16);
             break;
-        case 0x3:
+        case REMEMBER_ACTION:
             sub_801F63C();
             unk_CopyMoves4To8(gUnknown_203B27C->moves,gUnknown_203B27C->pokeStruct->moves);
             for(index = 0; index < MAX_MON_MOVES * 2; index++)
@@ -832,7 +851,7 @@ static void sub_8020CC0(void)
                 sub_801FDA8(0x19);
             }
             break;
-        case 0xB:
+        case INFO_ACTION:
             sub_801FDA8(0x18);
             break;
     }
@@ -919,14 +938,14 @@ static void sub_8020EB4(void)
     sub_801EF38(0);
     if (!sub_8012FD8(&gUnknown_203B27C->unkCC)) {
         sub_8013114(&gUnknown_203B27C->unkCC,&menuAction);
-        if (menuAction != 1) {
+        if (menuAction != CANCEL_ACTION) {
             gUnknown_203B27C->menuAction4 = menuAction;
         }
     }
 
     switch(menuAction)
     {
-        case 5:
+        case SET_ACTION:
             if(ToggleSetMove(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves))
             {
                 PlaySound(0x133);
@@ -938,7 +957,7 @@ static void sub_8020EB4(void)
                 sub_801FDA8(0x1F);
             }
             break;
-        case 6:
+        case DESELECT_ACTION:
             PlaySound(0x133);
             UnSetMove(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves);
             sub_801FDA8(0x1F);
@@ -955,7 +974,7 @@ static void sub_8020EB4(void)
             }
             sub_801FDA8(0x1F);
             break;
-        case 8:
+        case LINK_ACTION:
             if(gTeamInventoryRef->teamMoney < 150)
             {
                 PlayMenuSoundEffect(2);
@@ -981,7 +1000,7 @@ static void sub_8020EB4(void)
                 sub_801FDA8(0x1F);
             }
             break;
-        case 9:
+        case DE_LINK_ACTION:
             if(!sub_809333C(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves))
             {
                 PlayMenuSoundEffect(2);
@@ -994,11 +1013,11 @@ static void sub_8020EB4(void)
                 sub_801FDA8(0x1F);
             }
             break;
-        case 1:
-        case 0x11:
+        case CANCEL_ACTION:
+        case NO_ACTION:
             sub_801FDA8(0x1F);
             break;
-        case 0xA:
+        case FORGET_ACTION:
             if(!IsAnyMoveLinked(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves))
             {
                 PlayMenuSoundEffect(2);
@@ -1011,10 +1030,10 @@ static void sub_8020EB4(void)
                 sub_801FDA8(0x22);
             }
             break;
-        case 0xB:
+        case INFO_ACTION:
             sub_801FDA8(33);
             break;
-        case 0xC ... 0xF:
+        case CHECK_IQ_ACTION ... REMEMBERING_MOVES_ACTION:
             break;
     }
 }
@@ -1039,12 +1058,12 @@ static void sub_80210E4(void)
 
     if (sub_80144A4(&menuAction) == 0) {
         switch (menuAction) {
-            case 16:
+            case YES_ACTION:
                 RemoveLinkSequenceFromMoves8(gUnknown_203B27C->moves, gUnknown_203B27C->moveIndex);
                 sub_801FDA8(35);
                 break;
-            case 1:
-            case 17:
+            case CANCEL_ACTION:
+            case NO_ACTION:
                 sub_801FDA8(31);
                 break;
         }

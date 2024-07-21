@@ -6,6 +6,7 @@
 #include "constants/direction.h"
 #include "constants/friend_area.h"
 #include "constants/weather.h"
+#include "dungeon_items.h"
 #include "dungeon_leader.h"
 #include "dungeon_map_access.h"
 #include "dungeon_music.h"
@@ -18,8 +19,8 @@
 #include "pokemon_3.h"
 #include "pokemon.h"
 #include "position_util.h"
-#include "structs/dungeon_entity.h"
-#include "structs/str_dungeon.h"
+#include "exclusive_pokemon.h"
+#include "trap.h"
 
 extern u32 gUnknown_202EDC8;
 extern u8 gUnknown_202E038[0x50];
@@ -317,14 +318,10 @@ extern bool8 sub_800E9A8(s32);
 extern void sub_800DC14(u32);
 
 extern void sub_8086A3C(Entity *r0);
-extern void sub_80854D4(void);
-extern void sub_80855E4(void *);
 extern void sub_8068FE0(Entity *, u32, u32);
 
 extern void sub_803E708(u32, u32);
 extern void sub_8086448(void);
-extern void PlaySoundEffect(u32);
-extern void IncreaseEntityPixelPos(Entity *, u32, u32);
 extern void sub_8042B0C(Entity *);
 extern void sub_803E708(u32, u32);
 extern u8 sub_806FD18(Entity *);
@@ -338,13 +335,12 @@ extern void SetupBossFightHP(Entity *, u32, u32);
 extern void sub_803E9D0(void);
 extern void DeoxysScreenFlash(void);
 extern void sub_8085EB0();
-extern void sub_808563C(void *);
 
 void SetupDeoxysFightHP(Entity *r0);
 void sub_808C550(void);
 void sub_808C590(Entity *r0);
 void SetupDeoxysFacingDirection(Entity *r0);
-void sub_808C9B0();
+void sub_808C9B0(Entity *);
 void sub_808C8E0(Entity *param_1);
 void sub_808C360(void);
 void KyogreScreenFlash();
@@ -352,7 +348,6 @@ void KyogreScreenFlash();
 void sub_808C0CC();
 void LugiaScreenFlash();
 void LugiaScreenFlash2();
-extern void sub_80861B8(Entity *, u32, u32);
 
 void nullsub_99();
 
@@ -364,10 +359,7 @@ extern void sub_8086A54(Entity *);
 
 extern void sub_806BFC0(EntityInfo *, u32);
 
-
-extern Entity *xxx_call_GetLeader(void);
 extern void sub_808BBA8(Entity * );
-extern void sub_80855E4(void *);
 extern void sub_8041888(u32);
 extern void sub_80861B8(Entity *, u32, u32);
 extern void sub_803E708(u32, u32);
@@ -387,7 +379,6 @@ extern u8 sub_80860A8(u32);
 extern void sub_8049ED4();
 extern void sub_8052D44(s16 *, Entity *, Entity *);
 extern void sub_80421C0(Entity *, u32);
-extern void sub_8046D20();
 extern void sub_808B1CC(u8);
 extern void sub_80464C8(Entity *, u32 *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
@@ -421,13 +412,11 @@ void sub_80891F0(void);
 void sub_8089294(void);
 void GroudonScreenFlash2(void);
 
-extern u8 sub_8086AE4(u32);
-
+extern u8 sub_8086AE4(s16);
 
 extern void sub_8072008(Entity *, Entity *, s16, u32, u32);
 extern void sub_8085374();
 
-extern void sub_80856C8(Entity *, s32, s32);
 extern void sub_8086A54(Entity *);
 
 extern void sub_803F878(u32,s32);
@@ -449,7 +438,7 @@ void ZapdosDropInEffect(Entity *param_1);
 void ZapdosScreenFlash(int param_1);
 
 extern s32 sub_8052C68(u32, const u8 *, const u8 *, u32);
-extern void sub_80861A8(void);
+extern void sub_80861A8(Entity *);
 extern void sub_8045C28(Item *, u8 , u8 *);
 extern void EnableJirachiWishWarpTile(void);
 extern void sub_808BB3C(Position *);
@@ -457,7 +446,6 @@ extern void sub_8046860(Entity *, Position *, Item *, u32);
 extern u32 sub_803D73C(u32);
 
 extern void sub_80460F8(Position *, Item *, u8);
-extern void sub_807FE04(Position *, u8);
 
 void ZapdosReFightDialogue(void)
 {
@@ -1084,7 +1072,7 @@ void ArticunoPreFightDialogue(void)
   DisplayDungeonDialogue(gArticunoPreFightDialogue_7);
   sub_803E708(10,0x46);
   PlaySoundEffect(0); // snow flurry
-  gDungeon->unkE265 = WEATHER_SNOW;
+  gDungeon->weather.unkE265 = WEATHER_SNOW;
   sub_807EAA0(0,1);
   PlaySoundEffect(0x1ee); // flash effect?
   sub_8088574();
@@ -1119,7 +1107,7 @@ void ArticunoReFightDialogue(void)
 
   LeaderEntity = xxx_call_GetLeader();
   ArticunoEntity = GetEntityFromClientType(0xd);
-  gDungeon->unkE265 = WEATHER_SNOW;
+  gDungeon->weather.unkE265 = WEATHER_SNOW;
   sub_807EAA0(0,1);
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(gArticunoReFightDialogue_1);
@@ -1146,7 +1134,7 @@ void ArticunoPostStoryPreFightDialogue(void)
     sub_80866C4(gUnknown_8102A9C);
   }
   else {
-    gDungeon->unkE265 = WEATHER_SNOW;
+    gDungeon->weather.unkE265 = WEATHER_SNOW;
     sub_807EAA0(0,1);
     ArticunoScreenFlash();
     sub_8086738();
@@ -2506,7 +2494,7 @@ void RaikouPreFightDialogue(void)
   DisplayDungeonDialogue(gRaikouPreFightDialogue_1);
   RaikouScreenFlash();
   DisplayDungeonDialogue(gRaikouPreFightDialogue_2);
-  gDungeon->unkE265 = WEATHER_RAIN;
+  gDungeon->weather.unkE265 = WEATHER_RAIN;
   sub_807EAA0(0,1);
   sub_803E708(10,70);
   DisplayDungeonDialogue(gRaikouPreFightDialogue_3);
@@ -2528,7 +2516,7 @@ void RaikouReFightDialogue(void)
 
   LeaderEntity = xxx_call_GetLeader();
   RaikouEntity = GetEntityFromClientType(0x13);
-  gDungeon->unkE265 = WEATHER_RAIN;
+  gDungeon->weather.unkE265 = WEATHER_RAIN;
   sub_807EAA0(0,1);
   RaikouScreenFlash();
   DisplayDungeonDialogue(gRaikouReFightDialogue_1);
@@ -2552,7 +2540,7 @@ void RaikouPostStoryPreFightDialogue(void)
     sub_80866C4(gRaikouPostStoryPreFightDialogue_4);
   }
   else {
-    gDungeon->unkE265 = WEATHER_RAIN;
+    gDungeon->weather.unkE265 = WEATHER_RAIN;
     sub_807EAA0(0,1);
     DisplayDungeonDialogue(gRaikouPostStoryPreFightDialogue_1);
     RaikouScreenFlash();

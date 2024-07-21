@@ -17,7 +17,7 @@ struct unkStruct_202D038
 
 void vram_related_8009804(void);
 
-void sub_80097B0(void);
+void InitFontPalette(void);
 void sub_80098A0(void);
 void sub_80098BC(u32 *, u32 *, u32);
 void sub_80098F8(u32);

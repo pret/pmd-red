@@ -7,25 +7,26 @@
 #include "tile_types.h"
 #include "random.h"
 #include "dungeon_engine.h"
+#include "dungeon_movement.h"
 
-extern unkStruct_202F190 gUnknown_202F190;
-extern unkStruct_202F190 *gUnknown_203B430;
 extern unkStruct_202F190 gUnknown_80F69D4;
 extern unkStruct_202F190 gUnknown_80F69EC;
-
-extern u8 gUnknown_8108EC0[];
 extern u8 gUnknown_80F6A04[];
 extern u8 gUnknown_80F6A10[];
 extern u8 gUnknown_80F6A28[];
 extern u8 gUnknown_80F6A1C[];
 extern u8 gUnknown_80F6A34[];
 extern u8 gUnknown_80F6A40[];
+extern u8 gUnknown_8108EC0[];
 extern const struct FileArchive gDungeonFileArchive;
 
-extern OpenedFile *gUnknown_202F18C;
-extern OpenedFile *gDungeonPaletteFile;
-extern unkStruct_202EE8C gUnknown_202EE8C[32];
-extern u8 gWalkableTileToCrossableTerrain[8];
+EWRAM_DATA OpenedFile *gDungeonPaletteFile = {0};
+EWRAM_DATA unkStruct_202EE8C gUnknown_202EE8C[32] = {0};
+EWRAM_DATA OpenedFile *gUnknown_202F18C = {0};
+EWRAM_DATA unkStruct_202F190 gUnknown_202F190 = {0};
+
+EWRAM_DATA_2 unkStruct_202F190 *gUnknown_203B430 = {0};
+
 extern u8 sub_8043CE4(u32);
 
 extern int sprintf(char *, const char *, ...);

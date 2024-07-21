@@ -5,6 +5,7 @@
 
 	.text
 
+@ https://decomp.me/scratch/GE070 (kermalis 100%) `void sub_8085B4C(struct_8085B80 *, s16 **, Entity **, s32)` idk the structs
 	thumb_func_start sub_8085B4C
 sub_8085B4C:
 	push {r4-r6,lr}
@@ -37,6 +38,7 @@ _08085B76:
 _08085B7C: .4byte gUnknown_202F3D8
 	thumb_func_end sub_8085B4C
 
+@ https://decomp.me/scratch/lb4jF (kermalis 87.53%) `bool8 sub_8085B80(struct_8085B80 *)`
 	thumb_func_start sub_8085B80
 sub_8085B80:
 	push {r4-r7,lr}
@@ -450,6 +452,7 @@ _08085E90: .4byte gUnknown_202ECA4
 _08085E94: .4byte 0x000181e4
 	thumb_func_end SetDungeonBGColorRGB
 
+@ gDungeon->field_0x18215 = 0;
 	thumb_func_start sub_8085E98
 sub_8085E98:
 	ldr r0, _08085EA8
@@ -789,6 +792,7 @@ _080861A0: .4byte gUnknown_81066F0
 _080861A4: .4byte gUnknown_810671C
 	thumb_func_end sub_8086130
 
+@ `sub_806CDD4(a0, 0, 8);`
 	thumb_func_start sub_80861A8
 sub_80861A8:
 	push {lr}

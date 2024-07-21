@@ -34,8 +34,8 @@ enum WonderMailTypes
 {
     WONDER_MAIL_TYPE_NONE = 0,
     WONDER_MAIL_TYPE_SOS,
-    //WONDER_MAIL_TYPE_SOS = 2, // SOS MAIL is 1 and 2?
-    // 2 - 3
+    WONDER_MAIL_TYPE_SOS_1,
+    // 3
     WONDER_MAIL_TYPE_AOK = 4,
     WONDER_MAIL_TYPE_THANK_YOU = 5,
     WONDER_MAIL_TYPE_WONDER = 5,

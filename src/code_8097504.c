@@ -13,7 +13,6 @@ extern void sub_800199C(u8, u8, u16, s32);
 extern u32 sub_8001784(u32, u32, u16);
 extern void sub_80018D8(u8, u8, u32);
 
-
 bool8 sub_8097504(s16 mazeIndex)
 {
     s32 mazeIndex_s32;

@@ -15,10 +15,10 @@
 #include "structs/str_dungeon.h"
 #include "tile_types.h"
 #include "position_util.h"
+#include "trap.h"
 
 extern void sub_8049ED4(void);
 extern void sub_8073D14(Entity *);
-extern void sub_807FE9C(Entity *, Position *, u32, u32);
 
 void sub_8075680(void)
 {

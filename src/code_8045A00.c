@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_8045A00.h"
 #include "constants/item.h"
+#include "dungeon_items.h"
 #include "dungeon_map_access.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
@@ -15,9 +16,7 @@ extern struct unkStruct_8090F58 gUnknown_80F699C;
 extern struct unkStruct_8090F58 gUnknown_80F69A8;
 extern struct unkStruct_8090F58 gUnknown_80F6990;
 
-extern bool8 IsNotSpecialItem(u8 id);
 void sub_8045BF8(u8 *, Item *);
-void sub_8046CE4(void *param_1,u32 param_2);
 extern u32 sub_803D73C(u32);
 void sub_80460F8(Position *, Item *, u32);
 

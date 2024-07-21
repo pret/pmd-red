@@ -1495,7 +1495,7 @@ _0805FBF4:
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _0805FBF4
-	bl sub_80160D8
+	bl CleanConfirmNameMenu
 	movs r0, 0xE
 	bl sub_803E46C
 	movs r0, 0

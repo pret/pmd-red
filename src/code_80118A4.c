@@ -32,10 +32,11 @@ extern struct UnkBgStruct *gUnknown_203B0E4;
 
 
 extern const u16 gUnknown_80D4144[8];
-EWRAM_DATA u32 gUnknown_202DE1C;
-EWRAM_DATA s16 gUnknown_202DE20;
-EWRAM_DATA s16 gUnknown_202DE22;
-EWRAM_DATA s16 gUnknown_202DE24;
+
+EWRAM_DATA u32 gUnknown_202DE1C = {0};
+EWRAM_DATA s16 gUnknown_202DE20 = {0};
+EWRAM_DATA s16 gUnknown_202DE22 = {0};
+EWRAM_DATA s16 gUnknown_202DE24 = {0};
 
 void nullsub_8(u32);
 extern void xxx_call_update_bg_vram(void);
@@ -92,20 +93,20 @@ void sub_80117C4(void)
     FadeOutBGM(30);
 }
 
-// Some sound effect
-void sub_80117D0(void)
+// When you press A on a menu
+void PlayAcceptSoundEffect(void)
 {
     PlayFanfareSE(302, MAX_VOLUME);
 }
 
-// Some sound effect
-void sub_80117E4(void)
+// When you press B on a menu
+void PlayCancelSoundEffect(void)
 {
     PlayFanfareSE(303, MAX_VOLUME);
 }
 
-// Some sound effect
-void sub_80117F8(void)
+// When you go up or down
+void PlayCursorUpDownSoundEffect(void)
 {
     PlayFanfareSE(301, MAX_VOLUME);
 }

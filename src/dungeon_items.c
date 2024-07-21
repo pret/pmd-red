@@ -18,7 +18,6 @@ extern u8 *gUnknown_8105360[];
 extern u8 *gUnknown_81053A8[];
 extern u8 *gUnknown_8105434[];
 
-extern u8 sub_8046D70(void);
 extern s32 sub_8052B8C(u32, u8 *, u32);
 extern void sub_80861A8(void);
 extern void PrintFieldMessage(u32, u8 *, u32);
@@ -30,7 +29,8 @@ extern void PlaySoundEffect(u32);
 extern void sub_804178C(u32);
 extern void sub_8040A84(void);
 
-void MusicBoxCreation(void);
+static void MusicBoxCreation(void);
+static u8 sub_8046D70(void);
 
 bool8 HasHeldItem(Entity *pokemon, u8 id)
 {
@@ -51,7 +51,7 @@ bool8 HasHeldItem(Entity *pokemon, u8 id)
     return TRUE;
 }
 
-void sub_8046CE4(u8 *param_1,s32 param_2)
+void sub_8046CE4(Item *item,s32 param_2)
 {
   s32 iVar1;
   s32 iVar2;
@@ -60,12 +60,12 @@ void sub_8046CE4(u8 *param_1,s32 param_2)
   for(iVar2 = 0; iVar2 < 200; iVar2++)
   {
     if (gUnknown_810A3F0[iVar1] <= param_2) {
-      param_1[1] = iVar1;
+      item->quantity = iVar1;
       return;
     }
     iVar1 = iVar1 / 2;
   }
-  param_1[1] = 1;
+  item->quantity = 1;
 }
 
 void sub_8046D20(void)
