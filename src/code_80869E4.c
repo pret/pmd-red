@@ -1,11 +1,13 @@
 #include "global.h"
+#include "code_803E46C.h"
+#include "code_803E668.h"
 #include "code_806CD90.h"
 #include "code_80869E4.h"
 #include "constants/direction.h"
-#include "structs/str_dungeon.h"
 #include "dungeon_util.h"
 #include "dungeon_util_1.h"
 #include "random.h"
+#include "structs/str_dungeon.h"
 
 // This file may originally be merged with code_8086A3C.c and code_8057824_1.c
 
@@ -18,8 +20,6 @@ EWRAM_DATA unkStruct_202F3D0 gUnknown_202F3D0 = {0};
 extern u32 gUnknown_8107314[];
 
 s8 sub_8002984(s8, u8);
-void sub_803E708(u32, u32);
-extern void sub_803E46C(u32);
 extern void sub_803E9D0(void);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern void PlaySoundEffect(u32);

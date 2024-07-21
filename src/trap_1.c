@@ -2,6 +2,7 @@
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"
 #include "trap.h"
+#include "code_803E668.h"
 #include "code_806CD90.h"
 #include "code_8092334.h"
 #include "items.h"
@@ -68,7 +69,6 @@ void SaveProtectionStatus(unkStruct_8094924 *param_1, Protection *param_2);
 void SaveWaitingStatus(unkStruct_8094924 *param_1, Waiting *param_2);
 void SaveSpeedCounters(unkStruct_8094924 *param_1, u8 *speedCounters, u32 numCounters);
 void SaveClientType(unkStruct_8094924 *param_1, u8 param_2);
-void sub_803E708(u32, u32);
 void sub_80421C0(Entity *, u16);
 void sub_804687C(Entity *, Position *, Position *, Item *, u32);
 

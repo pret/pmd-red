@@ -88,6 +88,7 @@ extern void sub_807CD9C(Entity *, Entity *, u32 direction);
 // NOTE: Override pokemon.c types for these two funcs
 // GetSize is ok
 extern u8 GetBodySize(s32 index);
+// TODO The parameters don't match the function definition in pokemon_mid.h (u8*, s16).
 extern void CopyCyanMonsterNametoBuffer(u8 *buffer, s32 index);
 extern u32 GetSize(s16 index);
 

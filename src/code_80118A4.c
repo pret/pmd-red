@@ -38,7 +38,6 @@ EWRAM_DATA s16 gUnknown_202DE20 = {0};
 EWRAM_DATA s16 gUnknown_202DE22 = {0};
 EWRAM_DATA s16 gUnknown_202DE24 = {0};
 
-void nullsub_8(u32);
 extern void xxx_call_update_bg_vram(void);
 extern bool8 sub_80111C4();
 extern void sub_8010F28();

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "trap.h"
 
+#include "code_803E668.h"
 #include "code_8045A00.h"
 #include "code_80521D0.h"
 #include "code_8077274_1.h"
@@ -70,7 +71,6 @@ bool8 sub_806AA0C(s32, s32);
 void sub_80421EC(Position *, u32);
 
 bool8 sub_8045888(Entity *);
-void sub_803E708(u32, u32);
 u8 sub_8043D10(void);
 void sub_8068FE0(Entity *, u32, Entity *);
 void sub_805239C(Entity *, u8 *);

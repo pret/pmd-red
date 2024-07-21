@@ -1,6 +1,7 @@
 #include "global.h"
 #include "dungeon_ai.h"
 
+#include "code_803E668.h"
 #include "code_8045A00.h"
 #include "code_80521D0.h"
 #include "code_8077274_1.h"
@@ -42,7 +43,6 @@ extern u8 sub_8044B28(void);
 extern void sub_807AB38(Entity *, u32);
 extern void sub_8041888(u32);
 extern u8 sub_803F428(s16 *);
-extern void sub_803E708(u32, u32);
 
 void sub_8075900(Entity *pokemon, u8 r1)
 {

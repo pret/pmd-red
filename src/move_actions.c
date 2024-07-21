@@ -1,5 +1,6 @@
 #include "global.h"
 #include "charge_move.h"
+#include "code_803E46C.h"
 #include "code_8045A00.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
@@ -193,7 +194,6 @@ void sub_8075900(Entity *pokemon, u8 r1);
 extern void sub_80943A0(void*, s32);
 extern u8 sub_8044B28(void);
 extern u8 sub_803F428(Position *pos);
-extern void sub_803E46C(u32);
 extern void sub_807EC28(bool8);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern void sub_804652C(Entity *, Entity *, Item *, u32, Position *);

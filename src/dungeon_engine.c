@@ -1,13 +1,15 @@
 #include "global.h"
-#include "structs/dungeon_entity.h"
 #include "dungeon_engine.h"
+
+#include "code_803E46C.h"
 #include "constants/dungeon.h"
-#include "structs/str_dungeon.h"
-#include "dungeon_ai.h"
 #include "dungeon_ai_leader.h"
+#include "dungeon_ai.h"
 #include "dungeon_leader.h"
 #include "dungeon_movement.h"
 #include "dungeon_util.h"
+#include "structs/dungeon_entity.h"
+#include "structs/str_dungeon.h"
 
 extern s16 gSpeedTurns[2][25];
 
@@ -25,7 +27,6 @@ extern void sub_8071DA4(Entity *);
 extern void TriggerWeatherAbilities(void);
 extern void sub_805D8C8(void);
 extern void sub_805F02C(void);
-extern void sub_803E46C(u32);
 
 static void sub_8044454(void);
 static bool8 xxx_dungeon_80442D0(bool8);
@@ -60,7 +61,7 @@ bool8 IsMakuhitaTrainingMaze(void)
 void RunFractionalTurn(bool8 param_1)
 {
   bool8 cVar2;
-  
+
   if (!sub_8044B28()) {
     TrySpawnMonsterAndActivatePlusMinus();
     if (!sub_8044B28()) {
@@ -95,7 +96,7 @@ static bool8 xxx_dungeon_80442D0(bool8 param_1)
   EntityInfo *entityInfo;
   Entity *entity;
   s32 movSpeed;
-  
+
   entity = GetLeader();
   if (entity == NULL) {
       return FALSE;
@@ -175,10 +176,10 @@ static void sub_8044454(void)
   Entity *entity;
   EntityInfo *entityInfo;
   s32 index;
-  
+
   if (gDungeon->unkE) {
     gDungeon->unkE = 0;
-    
+
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
       entity = gDungeon->allPokemon[index];
@@ -203,10 +204,10 @@ void sub_80444F4(Entity *pokemon)
   Entity *entity;
   EntityInfo *entityInfo;
   s32 index;
-  
+
   if (pokemon == GetLeader() && gDungeon->unkE) {
     gDungeon->unkE = 0;
-    
+
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
       entity = gDungeon->allPokemon[index];

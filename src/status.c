@@ -1,6 +1,7 @@
 #include "global.h"
 #include "status.h"
 
+#include "code_803E46C.h"
 #include "code_8045A00.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
@@ -131,7 +132,6 @@ extern void RaiseAttackStageTarget(Entity *, Entity *, u32, u32);
 extern void RaiseDefenseStageTarget(Entity *, Entity *, u32, u32);
 extern void sub_8041D48(Entity *);
 extern void sub_8041D38(Entity * pokemon);
-extern void sub_803E46C(u32);
 extern u8 sub_8043D10(void);
 extern void sub_8041CDC(Entity *pokemon);
 extern void sub_8041CEC(Entity *pokemon);

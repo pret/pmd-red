@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_803E668.h"
 #include "code_8045A00.h"
 #include "code_80521D0.h"
 #include "code_8077274_1.h"
@@ -115,7 +116,6 @@ extern void sub_8078A58(Entity *, Entity *, s16, u32);
 extern s32 sub_8042520(Entity *);
 Entity *sub_80696FC(Entity *);
 extern void sub_80943A0(void*, s32);
-extern void sub_803E708(u32 r0, u32 r1);
 extern void sub_806A7E8(EntityInfo *, s32);
 extern u32 sub_8055640(struct Entity *, struct Entity *, struct Move *, u32, u32);
 
