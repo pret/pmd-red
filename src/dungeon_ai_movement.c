@@ -282,7 +282,7 @@ bool8 ChooseTargetPosition(Entity *pokemon)
         // This item targeting code is never reached because the leader is never AI-controlled.
         u8 room;
         s32 minX, minY, maxX, maxY, x, y, maxY2;
-        if (gDungeon->visibilityRange) {
+        if (gDungeon->unk181e8.visibilityRange) {
             // Dead code.
             u8 a = -a;
         }

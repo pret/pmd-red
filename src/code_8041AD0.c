@@ -76,7 +76,7 @@ s32 sub_80416E0(Position32 *pos, u32 param_2, u8 param_3);
 s32 sub_80416A4(Position *pos_1, u32 param_2, u8 param_3)
 {
   Position32 pos;
-  
+
   pos.x = pos_1->x * 0x1800 + 0xc00;
   pos.y = pos_1->y * 0x1800 + 0x1000;
   return sub_80416E0(&pos, param_2, param_3);
@@ -95,7 +95,7 @@ s32 sub_80416E0(Position32 *pos, u32 param_2, u8 param_3)
 
   auStack_10.x = pos->x / 256;
   auStack_10.y = pos->y / 256;
-    
+
   auStack_10.unk14 = -1;
   auStack_10.unk10 = 0;
   auStack_10.unk12 = 0;
@@ -126,9 +126,9 @@ void sub_804178C(u8 param_1)
 {
   u32 temp;
   s32 counter;
-  
+
   counter = 0;
-  gDungeon->unk18204 = 0;
+  gDungeon->unk181e8.unk18204 = 0;
   if (sub_800E9FC(param_1) != 0) {
     while ((counter < 1000 && (sub_800E9FC(param_1) != 0))) {
       sub_803E46C(0x4a);
@@ -196,7 +196,7 @@ void EntityUpdateStatusSprites(Entity *entity)
   EntityInfo *entityInfo;
   u32 spriteStatus;
   u8 temp;
-  
+
   if (EntityExists(entity)) {
     entityInfo = entity->info;
     spriteStatus = 0;
@@ -204,7 +204,7 @@ void EntityUpdateStatusSprites(Entity *entity)
 
     if (entityInfo->id == 0xb9) {
       // NOTE: clean this up sometime
-      temp = entityInfo->sleep.sleepTurns; 
+      temp = entityInfo->sleep.sleepTurns;
       flag = 0x7f;
       temp ^= flag;
       flag = (temp) != 0;
@@ -212,7 +212,7 @@ void EntityUpdateStatusSprites(Entity *entity)
     if (flag) {
       spriteStatus = gStatusSpriteMasks_SleepStatus[entityInfo->sleep.sleep];
     }
-    spriteStatus = spriteStatus | 
+    spriteStatus = spriteStatus |
             gStatusSpriteMasks_NonVolatileStatus[entityInfo->nonVolatile.nonVolatileStatus] |
             gStatusSpriteMasks_ImmobilizeStatus[entityInfo->immobilize.immobilizeStatus] |
             gStatusSpriteMasks_VolatileStatus[entityInfo->volatileStatus.volatileStatus] |
@@ -245,15 +245,15 @@ void EntityUpdateStatusSprites(Entity *entity)
     if ((gDungeon->itemHoldersIdentified) && (entityInfo->heldItem.flags & ITEM_FLAG_EXISTS)) {
       spriteStatus = spriteStatus | STATUS_SPRITE_LOWHP;
     }
-    if ( (entityInfo->offensiveMultipliers[0] < DEFAULT_STAT_MULTIPLIER) || 
+    if ( (entityInfo->offensiveMultipliers[0] < DEFAULT_STAT_MULTIPLIER) ||
         (entityInfo->offensiveMultipliers[1] < DEFAULT_STAT_MULTIPLIER) ||
         (entityInfo->defensiveMultipliers[0] < DEFAULT_STAT_MULTIPLIER) ||
         (entityInfo->defensiveMultipliers[1] < DEFAULT_STAT_MULTIPLIER) ||
         (entityInfo->offensiveStages[0] < DEFAULT_STAT_STAGE) ||
         (entityInfo->offensiveStages[1] < DEFAULT_STAT_STAGE) ||
-        (entityInfo->defensiveStages[0] < DEFAULT_STAT_STAGE) || 
+        (entityInfo->defensiveStages[0] < DEFAULT_STAT_STAGE) ||
         (entityInfo->defensiveStages[1] < DEFAULT_STAT_STAGE) ||
-        (entityInfo->hitChanceStages[0]) < DEFAULT_STAT_STAGE || 
+        (entityInfo->hitChanceStages[0]) < DEFAULT_STAT_STAGE ||
         (entityInfo->hitChanceStages[1] < DEFAULT_STAT_STAGE)) {
         spriteStatus = spriteStatus | STATUS_SPRITE_STAT_DOWN;
     }

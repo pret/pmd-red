@@ -483,7 +483,7 @@ void sub_8081454(unkStruct_8094924 *param_1)
     for(iVar4 = 0; iVar4 < 8; iVar4++)
     {
         SavePosition(param_1,&gDungeon->unkE220[iVar4]);
-    } 
+    }
     sub_80830F8(param_1,&gDungeon->unkE240);
     sub_80830F8(param_1,&gDungeon->unkE250);
     sub_808312C(param_1,&gDungeon->unkE260);
@@ -503,17 +503,17 @@ void sub_808165C(unkStruct_8094924 *param_1)
 {
 
     sub_808300C(param_1,gUnknown_81071E0);
-    sub_8083060(param_1, gDungeon->unk18208);
-    sub_8083060(param_1, gDungeon->visibilityRange);
-    sub_80830B4(param_1, gDungeon->blinded);
-    sub_80830B4(param_1, gDungeon->unk1820B);
-    sub_80830B4(param_1, gDungeon->unk1820C);
-    sub_80830B4(param_1, gDungeon->unk1820D);
-    sub_80830B4(param_1, gDungeon->unk1820E);
-    sub_80830B4(param_1, gDungeon->unk1820F);
-    sub_80830B4(param_1, gDungeon->hallucinating);
-    sub_80830B4(param_1, gDungeon->unk18211);
-    sub_80830B4(param_1, gDungeon->unk18213);
+    sub_8083060(param_1, gDungeon->unk181e8.unk18208);
+    sub_8083060(param_1, gDungeon->unk181e8.visibilityRange);
+    sub_80830B4(param_1, gDungeon->unk181e8.blinded);
+    sub_80830B4(param_1, gDungeon->unk181e8.unk1820B);
+    sub_80830B4(param_1, gDungeon->unk181e8.unk1820C);
+    sub_80830B4(param_1, gDungeon->unk181e8.unk1820D);
+    sub_80830B4(param_1, gDungeon->unk181e8.unk1820E);
+    sub_80830B4(param_1, gDungeon->unk181e8.unk1820F);
+    sub_80830B4(param_1, gDungeon->unk181e8.hallucinating);
+    sub_80830B4(param_1, gDungeon->unk181e8.unk18211);
+    sub_80830B4(param_1, gDungeon->unk181e8.unk18213);
 }
 
 // NOTE: forcing this s16 for now - Seth

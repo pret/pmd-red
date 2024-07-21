@@ -225,7 +225,7 @@ void sub_806A120(Entity * pokemon, Entity * target, Move* move)
 }
 
 void sub_806A1B0(Entity *pokemon)
-{ 
+{
   if ((EntityExists(pokemon)) && (HasAbility(pokemon, ABILITY_TRUANT))) {
     PausedStatusTarget(pokemon,pokemon,0,1,0);
   }
@@ -235,7 +235,7 @@ void sub_806A1E8(Entity *pokemon)
 {
   bool8 bVar3;
   EntityInfo *entityInfo;
-  
+
   bVar3 = FALSE;
   if (EntityExists(pokemon)) {
     if (GetEntityType(pokemon) == ENTITY_MONSTER) {
@@ -255,7 +255,7 @@ void sub_806A240(Entity *pokemon, Entity *target)
 {
   bool8 isNotTeamMember;
   EntityInfo *entityInfo;
-  
+
   isNotTeamMember = FALSE;
   if (EntityExists(pokemon)){
     if (GetEntityType(pokemon) == ENTITY_MONSTER) {
@@ -278,7 +278,7 @@ void sub_806A240(Entity *pokemon, Entity *target)
 
 void sub_806A2BC(Entity *pokemon, u8 param_2)
 {
-  if ((EntityExists(pokemon)) && (GetEntityType(pokemon) == ENTITY_MONSTER) && (gDungeon->cameraTarget != pokemon)) {
+  if ((EntityExists(pokemon)) && (GetEntityType(pokemon) == ENTITY_MONSTER) && (gDungeon->unk181e8.cameraTarget != pokemon)) {
     if (param_2 != '\0') {
       sub_804178C(1);
       while (gDungeon->unk12 < 0x3c) {

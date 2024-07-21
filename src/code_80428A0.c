@@ -158,7 +158,7 @@ void sub_8042A84(s16 param_1, Entity *entity, u32 param_3)
   s32 param_1_s16;
 
   param_1_s16 = param_1;
-  
+
   r6 = 0x200;
   if (sub_8042768(entity) != 0) {
     sub_804151C(entity,param_1_s16,0);
@@ -173,7 +173,7 @@ void sub_8042A84(s16 param_1, Entity *entity, u32 param_3)
       if (iVar3 < 0) {
         iVar3 += 0xff;
       }
-    } while (-8 <= (iVar3 >> 8) - gDungeon->cameraPixelPos.y);
+    } while (-8 <= (iVar3 >> 8) - gDungeon->unk181e8.cameraPixelPos.y);
     entity->isVisible = 0;
     sub_804178C(0);
   }

@@ -271,7 +271,7 @@ void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4)
         if (HasHeldItem(target, ITEM_TRAP_SCARF)) {
             text = *gUnknown_80FDB5C;
         }
-        if ((flag == TRUE) || (gDungeon->unk1820F != 0)) {
+        if ((flag == TRUE) || (gDungeon->unk181e8.unk1820F != 0)) {
             if (rand < 0) text = *gUnknown_80FDB7C;
         }
         else if (rand < 0xf) {
@@ -291,7 +291,7 @@ void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4)
         sub_80421C0(0,0x15c);
         sub_8049ED4();
         sub_804225C(pokemon,pos,trapData->id);
-        if (gDungeon->blinded) {
+        if (gDungeon->unk181e8.blinded) {
             SendMessage(pokemon,*gUnknown_80FD7F4);
         }
         else {
