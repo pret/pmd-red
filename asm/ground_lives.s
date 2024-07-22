@@ -1722,7 +1722,7 @@ _080A8508:
 	adds r0, r4, 0
 	adds r2, r5, 0
 	ldr r3, [sp, 0x14]
-	bl sub_809D600
+	bl InitActionWithParams
 	ldr r0, _080A8548
 	ldr r2, [r0]
 	movs r1, 0xCB
@@ -1754,7 +1754,7 @@ _080A855C:
 	adds r0, r4, 0
 	adds r2, r5, 0
 	ldr r3, [sp, 0x14]
-	bl sub_809D600
+	bl InitActionWithParams
 _080A8566:
 	ldr r3, [sp, 0x10]
 	ldr r2, [r3, 0xC]
@@ -1766,7 +1766,7 @@ _080A8566:
 _080A8574:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_809D6D8
+	bl SetPredefinedScript
 	ldr r0, [sp, 0x10]
 	ldr r2, [r0, 0x10]
 	cmp r2, 0
@@ -1776,7 +1776,7 @@ _080A8574:
 _080A8588:
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_809D6D8
+	bl SetPredefinedScript
 	ldr r1, [sp, 0x10]
 	ldr r2, [r1, 0x14]
 	cmp r2, 0
@@ -1786,14 +1786,14 @@ _080A8588:
 _080A859C:
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_809D6D8
+	bl SetPredefinedScript
 	ldr r3, [sp, 0x10]
 	ldr r2, [r3, 0x8]
 	cmp r2, 0
 	beq _080A8630
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_809D6D8
+	bl SetPredefinedScript
 	ldr r0, [sp, 0x20]
 	cmp r0, 0
 	bne _080A860C

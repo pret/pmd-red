@@ -442,7 +442,7 @@ s32 sub_809D52C(void *a0)
     return 0;
 }
 
-void sub_809D568(ScriptData *a0)
+void InitScriptData(ScriptData *a0)
 {
     s32 i;
 
@@ -466,7 +466,7 @@ void sub_809D568(ScriptData *a0)
     }
 }
 
-void sub_809D5B8(Action *a0)
+void InitAction(Action *a0)
 {
     s32 i;
 
@@ -480,6 +480,6 @@ void sub_809D5B8(Action *a0)
         a0->predefinedScripts[i] = NULL;
     }
 
-    sub_809D568(&a0->scriptData);
-    sub_809D568(&a0->scriptData2);
+    InitScriptData(&a0->scriptData);
+    InitScriptData(&a0->scriptData2);
 }

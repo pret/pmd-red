@@ -4,7 +4,7 @@
 #include "ground_map_1.h"
 #include "ground_script.h"
 
-extern GroundMapAction *gUnknown_3001B6C;
+extern GroundMapAction *gGroundMapAction;
 
 extern const u8 gUnknown_8117594[];
 extern const u8 gUnknown_81175EC[];
@@ -39,7 +39,7 @@ void GroundMap_ExecuteEvent(s16 scriptIndex, u32 param_2)
     if (iVar2 != 0)
         script.state = 5;
 
-    GroundScript_ExecutePP(&gUnknown_3001B6C->action, 0, &script, &gUnknown_81175E0);
+    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, &gUnknown_81175E0);
 }
 
 void GroundMap_ExecuteStation(s16 param_1, s16 param_2, s8 param_3, u32 param_4)
@@ -60,7 +60,7 @@ void GroundMap_ExecuteStation(s16 param_1, s16 param_2, s8 param_3, u32 param_4)
     if (iVar4 != 0)
         script.state = 5;
 
-    GroundScript_ExecutePP(&gUnknown_3001B6C->action, 0, &script, &gUnknown_8117644);
+    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, &gUnknown_8117644);
 }
 
 void GroundMap_ExecuteEnter(s16 param_1)
@@ -75,18 +75,18 @@ void GroundMap_ExecuteEnter(s16 param_1)
     script.state = 2;
     script.group = 0;
     script.sector = 0;
-    GroundScript_ExecutePP(&gUnknown_3001B6C->action, 0, &script, &gUnknown_8117698);
+    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, &gUnknown_8117698);
 }
 
 UNUSED static u8 sub_80A4D14(void)
 {
-    return sub_809D678(&gUnknown_3001B6C->action);
+    return sub_809D678(&gGroundMapAction->action);
 }
 
 bool8 sub_80A4D2C(s16 param_1)
 {
     s32 iVar1 = param_1;
-    return sub_809D968(&gUnknown_3001B6C->action, iVar1);
+    return sub_809D968(&gGroundMapAction->action, iVar1);
 }
 
 bool8 sub_80A4D48(s16 index)

@@ -733,7 +733,7 @@ _080AC0C0:
 	adds r0, r4, 0
 	adds r2, r5, 0
 	mov r3, r10
-	bl sub_809D600
+	bl InitActionWithParams
 	adds r6, r4, 0
 	mov r1, r8
 	ldr r2, [r1, 0xC]
@@ -751,7 +751,7 @@ _080AC0C0:
 _080AC0F2:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_809D6D8
+	bl SetPredefinedScript
 	adds r1, r4, 0
 	mov r3, r8
 	ldr r2, [r3, 0x10]
@@ -762,7 +762,7 @@ _080AC0F2:
 _080AC108:
 	adds r0, r1, 0
 	movs r1, 0x2
-	bl sub_809D6D8
+	bl SetPredefinedScript
 	mov r0, r8
 	ldr r2, [r0, 0x14]
 	cmp r2, 0
@@ -772,14 +772,14 @@ _080AC108:
 _080AC11C:
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_809D6D8
+	bl SetPredefinedScript
 	mov r1, r8
 	ldr r2, [r1, 0x8]
 	cmp r2, 0
 	beq _080AC140
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_809D6D8
+	bl SetPredefinedScript
 	ldr r3, _080AC164
 	adds r0, r4, 0
 	movs r1, 0

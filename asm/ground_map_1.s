@@ -101,7 +101,7 @@ _080A4E08:
 _080A4E38: .4byte gUnknown_81176A4
 _080A4E3C: .4byte gUnknown_3001B70
 _080A4E40: .4byte 0x0000055c
-_080A4E44: .4byte gUnknown_3001B6C
+_080A4E44: .4byte gGroundMapAction
 _080A4E48: .4byte gUnknown_8117324
 _080A4E4C:
 	lsls r0, r5, 1
@@ -258,7 +258,7 @@ _080A4F30:
 	.align 2, 0
 _080A4FA0: .4byte gUnknown_3001B70
 _080A4FA4: .4byte gUnknown_8117324
-_080A4FA8: .4byte gUnknown_3001B6C
+_080A4FA8: .4byte gGroundMapAction
 _080A4FAC:
 	cmp r0, 0xAA
 	beq _080A500C
@@ -467,7 +467,7 @@ _080A5138:
 _080A514C: .4byte gUnknown_8117700
 _080A5150: .4byte gUnknown_3001B70
 _080A5154: .4byte 0x0000055c
-_080A5158: .4byte gUnknown_3001B6C
+_080A5158: .4byte gGroundMapAction
 _080A515C: .4byte gUnknown_8117324
 _080A5160:
 	lsls r0, r5, 1
@@ -1272,7 +1272,7 @@ sub_80A56F0:
 	str r1, [r2, 0x4]
 	bx lr
 	.align 2, 0
-_080A5700: .4byte gUnknown_3001B6C
+_080A5700: .4byte gGroundMapAction
 	thumb_func_end sub_80A56F0
 
 	thumb_func_start sub_80A5704
@@ -1293,7 +1293,7 @@ sub_80A5704:
 	str r1, [r0]
 	bx lr
 	.align 2, 0
-_080A5724: .4byte gUnknown_3001B6C
+_080A5724: .4byte gGroundMapAction
 	thumb_func_end sub_80A5704
 
 	thumb_func_start sub_80A5728
@@ -1305,7 +1305,7 @@ sub_80A5728:
 	ldrsh r0, [r0, r1]
 	bx lr
 	.align 2, 0
-_080A5734: .4byte gUnknown_3001B6C
+_080A5734: .4byte gGroundMapAction
 	thumb_func_end sub_80A5728
 
 	thumb_func_start sub_80A5738
@@ -1322,7 +1322,7 @@ sub_80A5738:
 	adds r0, r1
 	bx lr
 	.align 2, 0
-_080A5750: .4byte gUnknown_3001B6C
+_080A5750: .4byte gGroundMapAction
 _080A5754: .4byte gUnknown_811BAF4
 	thumb_func_end sub_80A5738
 
@@ -1451,7 +1451,7 @@ _080A5832:
 	b _080A5856
 	.align 2, 0
 _080A5838: .4byte gUnknown_3001B70
-_080A583C: .4byte gUnknown_3001B6C
+_080A583C: .4byte gGroundMapAction
 _080A5840: .4byte gUnknown_811BAF4
 _080A5844: .4byte 0xffff8800
 _080A5848: .4byte 0xffffb000
@@ -1678,7 +1678,7 @@ GroundMap_Action:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A59D4: .4byte gUnknown_3001B6C
+_080A59D4: .4byte gGroundMapAction
 _080A59D8: .4byte gUnknown_8117770
 	thumb_func_end GroundMap_Action
 
@@ -1734,7 +1734,7 @@ _080A5A32:
 	b _080A5E46
 	.align 2, 0
 _080A5A34: .4byte gUnknown_3001B70
-_080A5A38: .4byte gUnknown_3001B6C
+_080A5A38: .4byte gGroundMapAction
 _080A5A3C:
 	cmp r0, 0xA8
 	beq _080A5AF4

@@ -621,7 +621,7 @@ _080AD01A:
 	adds r0, r4, 0
 	adds r2, r5, 0
 	mov r3, r10
-	bl sub_809D600
+	bl InitActionWithParams
 	ldr r2, [r7, 0x8]
 	cmp r2, 0
 	bne _080AD04C
@@ -641,7 +641,7 @@ _080AD048:
 _080AD04C:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_809D6D8
+	bl SetPredefinedScript
 	ldr r3, _080AD07C
 	adds r0, r4, 0
 	movs r1, 0

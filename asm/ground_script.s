@@ -1704,12 +1704,12 @@ _0809E98E:
 	bl _call_via_r2
 _0809E9A2:
 	adds r0, r4, 0
-	bl sub_809D568
+	bl InitScriptData
 	b _0809E9D6
 _0809E9AA:
 	adds r0, r7, 0
 	adds r0, 0x24
-	bl sub_809D568
+	bl InitScriptData
 	b _0809E9D6
 _0809E9B4:
 	movs r0, 0x4
@@ -3930,7 +3930,7 @@ _0809FE04:
 	cmp r0, 0x1
 	bne _0809FE16
 	adds r0, r1, 0
-	bl sub_809D568
+	bl InitScriptData
 _0809FE16:
 	mov r0, r9
 	ldr r1, [r0]
@@ -4028,7 +4028,7 @@ _0809FED0:
 	cmp r0, 0x1
 	bne _0809FEEE
 	adds r0, r1, 0
-	bl sub_809D568
+	bl InitScriptData
 _0809FEEE:
 	mov r3, r9
 	ldr r2, [r3]
@@ -6697,7 +6697,7 @@ GroundScript_ExecuteTrigger:
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_809D600
+	bl InitActionWithParams
 	movs r0, 0
 	add r1, sp, 0x4
 	adds r2, r4, 0

@@ -17,7 +17,7 @@ extern u8 gUnknown_811656C[];
 extern DebugLocation gUnknown_81165C8;
 
 extern void sub_809D520(void *);
-extern void sub_809D568(void *);
+extern void InitScriptData(void *);
 extern u8 sub_80AC378(void);
 extern u8 sub_80AD290(void);
 extern u8 sub_80A8B74(void);
@@ -34,7 +34,7 @@ typedef struct FunctionScript
 
 extern FunctionScript gFunctionScriptTable[];
 
-void sub_809D6D8(Action *param_1, s16 index, ScriptCommand *param_3)
+void SetPredefinedScript(Action *param_1, s16 index, ScriptCommand *param_3)
 {
     param_1->predefinedScripts[index] = param_3;
 }
@@ -67,17 +67,17 @@ void sub_809D710(Action *param_1, ScriptInfoSmall *script, s16 index)
     }
 }
 
-bool8 sub_809D754(Action *param_1, DebugLocation *unused)
+bool8 InitActionScriptData(Action *param_1, DebugLocation *unused)
 {
-    sub_809D568(&param_1->scriptData);
-    sub_809D568(&param_1->scriptData2);
+    InitScriptData(&param_1->scriptData);
+    InitScriptData(&param_1->scriptData2);
     return TRUE;
 }
 
 bool8 sub_809D770(Action *param_1, DebugLocation *unused)
 {
-    sub_809D568(&param_1->scriptData);
-    sub_809D568(&param_1->scriptData2);
+    InitScriptData(&param_1->scriptData);
+    InitScriptData(&param_1->scriptData2);
     param_1->scriptData.savedState = 4;
     return TRUE;
 }
@@ -95,7 +95,7 @@ bool8 GroundScript_ExecutePP(Action *action, s32 *param_2, ScriptInfoSmall *para
                 break;
             }
             if (action->scriptData.state == 5) {
-                sub_809D568(&action->scriptData2);
+                InitScriptData(&action->scriptData2);
             }
             break;
         case 5:
@@ -115,13 +115,13 @@ bool8 GroundScript_ExecutePP(Action *action, s32 *param_2, ScriptInfoSmall *para
             break;
         case 1:
         _0809D84A:
-            sub_809D568(&action->scriptData2);
+            InitScriptData(&action->scriptData2);
             break;
         default:
             // "execute script type error %d" at ../ground/ground_script.c:708
             FatalError(&gUnknown_8116588, gUnknown_8116594, param_3->state);
     }
-    sub_809D568(&action->scriptData);
+    InitScriptData(&action->scriptData);
     if (param_2 != NULL) {
         action->unkC.raw = param_2[0];
     }

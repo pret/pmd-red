@@ -111,7 +111,7 @@ _08098522:
 	bl sub_809C5C4
 	bl sub_809A560
 	bl sub_809CB50
-	bl sub_80A4A7C
+	bl AllocGroundMapAction
 	bl nullsub_117
 	bl sub_80AD990
 	bl sub_80A77F8
@@ -539,7 +539,7 @@ _08098988:
 	bhi _08098990
 	b _080985DC
 _08098990:
-	bl sub_80A4AC4
+	bl FreeGroundMapAction
 	bl nullsub_118
 	bl sub_80A78F0
 	bl sub_80ABBD4
