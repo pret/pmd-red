@@ -40,7 +40,7 @@ extern u8 gUnknown_202E628[];
 extern u8 gUnknown_202DEA8[];
 extern u8 gUnknown_202E5D8[];
 extern u8 gAvailablePokemonNames[];
-extern u32 gUnknown_202DE30;
+extern u32 gFormatData_202DE30;
 
 enum FriendRewardStates
 {
@@ -222,7 +222,7 @@ void HandleMissionReward(void)
             SetRewardSceneState(PREP_FRIEND_AREA_REWARD);
         }
         else {
-            gUnknown_202DE30 = moneyReward;
+            gFormatData_202DE30 = moneyReward;
             if (gUnknown_203B310->displayClientDialogueSprite) {
                 sub_80141B4(gUnknown_80E0434,0,&gUnknown_203B310->faceFile,0x10d);
                 gUnknown_203B310->nextState = MONEY_REWARD;
@@ -348,7 +348,7 @@ void HandleMissionReward(void)
             else {
                 gUnknown_203B310->nextState = REWARD_EXIT;
             }
-            gUnknown_202DE30 = gUnknown_203B310->unk10->teamRankPtsReward;
+            gFormatData_202DE30 = gUnknown_203B310->unk10->teamRankPtsReward;
             sub_80141B4(gUnknown_80E0670,0,0,0x101);
         }
         break;

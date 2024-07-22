@@ -121,7 +121,7 @@ _080A4E4C:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080A4E6C: .4byte gUnknown_811BAF4
+_080A4E6C: .4byte gGroundConversion_811BAF4
 _080A4E70: .4byte _080A4E74
 	.align 2, 0
 _080A4E74:
@@ -486,7 +486,7 @@ _080A5160:
 	adds r2, r5, 0
 	bl FatalError
 	.align 2, 0
-_080A5180: .4byte gUnknown_811BAF4
+_080A5180: .4byte gGroundConversion_811BAF4
 _080A5184: .4byte gUnknown_8117734
 _080A5188: .4byte gUnknown_8117740
 _080A518C:
@@ -1323,7 +1323,7 @@ sub_80A5738:
 	bx lr
 	.align 2, 0
 _080A5750: .4byte gGroundMapAction
-_080A5754: .4byte gUnknown_811BAF4
+_080A5754: .4byte gGroundConversion_811BAF4
 	thumb_func_end sub_80A5738
 
 	thumb_func_start sub_80A5758
@@ -1452,7 +1452,7 @@ _080A5832:
 	.align 2, 0
 _080A5838: .4byte gUnknown_3001B70
 _080A583C: .4byte gGroundMapAction
-_080A5840: .4byte gUnknown_811BAF4
+_080A5840: .4byte gGroundConversion_811BAF4
 _080A5844: .4byte 0xffff8800
 _080A5848: .4byte 0xffffb000
 _080A584C: .4byte 0xffff7000

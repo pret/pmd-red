@@ -27,8 +27,6 @@ EWRAM_DATA_2 u8 gUnknown_203B49D = {0};
 
 #include "data/ground_main.h"
 
-extern unkStruct_811BAF4 gUnknown_811BAF4[10];
-
 extern void sub_809B57C();
 extern void GroundScript_Unlock();
 extern void sub_809D25C();
@@ -293,7 +291,7 @@ s16 sub_8098FCC(u32 unused)
   s32 iVar4;
   s32 iVar5;
   s32 iVar6;
-  const unkStruct_80A2608 *iVar3;
+  const DungeonInfo *iVar3;
 
   iVar5 = (s16)sub_8001658(0,0x13);
   iVar6 = iVar5;
@@ -330,7 +328,7 @@ const char *sub_80990B8(void)
     index = sub_8098FCC(0xB);
     if(index != -1)
     {
-        return sub_80A2B18(gUnknown_811BAF4[index].unk2);
+        return sub_80A2B18(gGroundConversion_811BAF4[index].unk2);
     }
     else
     {

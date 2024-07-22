@@ -1250,7 +1250,7 @@ _0809E628:
 	movs r0, 0
 	movs r1, 0
 	bl sub_80A87AC
-	bl sub_809A76C
+	bl ScriptPrintNullTextbox
 	b _0809E9CC
 	.align 2, 0
 _0809E638: .4byte 0x0000ffff
@@ -1506,7 +1506,7 @@ _0809E812:
 	asrs r1, 16
 	ldr r2, [r7, 0x28]
 	ldr r2, [r2, 0xC]
-	bl sub_809AE90
+	bl ScriptPrintText
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809E844

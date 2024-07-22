@@ -387,7 +387,7 @@ void sub_809D490(void)
     sub_809D4B0();
 }
 
-extern s16 gUnknown_2039A30;
+extern s16 gCurrentMap;
 extern s16 gUnknown_2039A32;
 extern s16 gUnknown_2039A34;
 extern u8 gUnknown_2039A36;
@@ -399,7 +399,7 @@ void sub_809D4B0(void)
 {
     s32 i;
 
-    gUnknown_2039A30 = -1;
+    gCurrentMap = -1;
     gUnknown_2039A32 = -1;
     gUnknown_2039A34 = -1;
     gUnknown_2039A36 = 0;

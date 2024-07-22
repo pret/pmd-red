@@ -27,7 +27,7 @@ void PrintFuncFileLine(u8 *buf, DebugLocation *loc, const u8 *prefix);
 void PrintMessageWithFuncFileLine(u8 *buffer, DebugLocation *debug, const u8 *text, ...);
 void sub_8011B08(void);
 void sub_8011B88(const u8 *text, ...);
-u32 sub_8011BA4(void);
+u32 ScriptLoggingEnabled(bool8);
 u32 sub_8011BA8(void);
 const u8 *sub_8011BAC(void);
 void sub_8011B14(void);

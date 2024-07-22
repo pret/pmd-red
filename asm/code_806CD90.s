@@ -1010,7 +1010,7 @@ _0806D808:
 	bl sub_80522F4
 	b _0806D84A
 	.align 2, 0
-_0806D824: .4byte gUnknown_202DE30
+_0806D824: .4byte gFormatData_202DE30
 _0806D828: .4byte gUnknown_80F9764
 _0806D82C: .4byte 0x000003e7
 _0806D830:

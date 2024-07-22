@@ -15,7 +15,7 @@ static EWRAM_DATA MoveDataEntry *sMovesData = {0};
 static EWRAM_DATA MoveLearnset *sMoveLearnsets = {0}; // 420 entries, aka (MONSTER_DEOXYS_SPEED + 1), aka (MONSTER_MUNCHLAX)
 
 // ???
-extern u32 gUnknown_202DE30;
+extern u32 gFormatData_202DE30;
 extern u8 gAvailablePokemonNames[]; // 202DF98
 
 // data_8107010.s
@@ -1449,7 +1449,7 @@ static void unk_MovePrintData(Move *move, s32 y)
     text = GetUnformattedTypeString(type);
     xxx_format_and_draw(64, 86, text, y, 0);
     power = GetMoveBasePower(move);
-    gUnknown_202DE30 = power;
+    gFormatData_202DE30 = power;
 }
 
 static void CopyAndResetMove(Move *dest, Move *src)

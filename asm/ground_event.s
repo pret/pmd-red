@@ -30,7 +30,7 @@ _080AD9AC:
 	adds r1, 0x20
 	cmp r0, 0x1F
 	ble _080AD9AC
-	bl sub_80AD9D0
+	bl DeleteBlankGroundEvents
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -39,8 +39,8 @@ _080AD9C8: .4byte gUnknown_3001B90
 _080AD9CC: .4byte 0x0000ffff
 	thumb_func_end sub_80AD990
 
-	thumb_func_start sub_80AD9D0
-sub_80AD9D0:
+	thumb_func_start DeleteBlankGroundEvents
+DeleteBlankGroundEvents:
 	push {r4-r6,lr}
 	ldr r0, _080ADA04
 	ldr r4, [r0]
@@ -70,12 +70,12 @@ _080AD9EE:
 	bx r0
 	.align 2, 0
 _080ADA04: .4byte gUnknown_3001B90
-	thumb_func_end sub_80AD9D0
+	thumb_func_end DeleteBlankGroundEvents
 
 	thumb_func_start sub_80ADA08
 sub_80ADA08:
 	push {r4,lr}
-	bl sub_80AD9D0
+	bl DeleteBlankGroundEvents
 	ldr r4, _080ADA20
 	ldr r0, [r4]
 	bl MemoryFree
@@ -352,7 +352,7 @@ _080ADC02:
 	ldr r0, [r1, 0x8]
 	ldr r0, [r0, 0x8]
 	str r0, [r4, 0x1C]
-	bl sub_80A7A78
+	bl GroundLives_CancelBlank_2
 	adds r0, r7, 0
 _080ADC24:
 	add sp, 0x14

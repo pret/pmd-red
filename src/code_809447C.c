@@ -17,7 +17,7 @@ struct unkStruct_8113080
 
 extern u8 gUnknown_202DE58[];
 extern u8 gAvailablePokemonNames[];
-extern s32 gUnknown_202DE30[2];
+extern s32 gFormatData_202DE30[2];
 
 extern const u8 *gUnknown_811383C[];
 extern const u8 *gUnknown_8113850[];
@@ -112,46 +112,46 @@ void sub_8094558(u32 param_1,u8 *param_2,unkDungeonGlobal_unk1CE98_sub *param_3)
     xxx_format_and_draw(x,y,buffer,param_1,0);
 
     y += 0x10;
-    gUnknown_202DE30[0] = param_3->exp;
-    gUnknown_202DE30[1] = param_3->level;
-    if (gUnknown_202DE30[1] >= 100) {
+    gFormatData_202DE30[0] = param_3->exp;
+    gFormatData_202DE30[1] = param_3->level;
+    if (gFormatData_202DE30[1] >= 100) {
         xxx_format_and_draw(4,y,*gUnknown_81138C0,param_1,0);
     }
     else {
         xxx_format_and_draw(4,y,*gUnknown_8113898,param_1,0);
     }
     y += 0xA;
-    gUnknown_202DE30[0] = param_3->maxHPStat;
+    gFormatData_202DE30[0] = param_3->maxHPStat;
     xxx_format_and_draw(4,y,*gUnknown_81138D0,param_1,0);
     y += 0xA;
-    gUnknown_202DE30[0] = param_3->atk;
-    gUnknown_202DE30[1] = param_3->def;
+    gFormatData_202DE30[0] = param_3->atk;
+    gFormatData_202DE30[1] = param_3->def;
     if (param_3->attBoost) {
-        gUnknown_202DE30[0] = gUnknown_202DE30[0] + param_3->attBoost;
+        gFormatData_202DE30[0] = gFormatData_202DE30[0] + param_3->attBoost;
         xxx_format_and_draw(4,y,*gUnknown_8113950,param_1,0);
     }
     else {
         xxx_format_and_draw(4,y,*gUnknown_81138E4,param_1,0);
     }
     if (param_3->defBoost) {
-        gUnknown_202DE30[1] = gUnknown_202DE30[1] + param_3->defBoost;
+        gFormatData_202DE30[1] = gFormatData_202DE30[1] + param_3->defBoost;
         xxx_format_and_draw(4,y,*gUnknown_8113974,param_1,0);
     }
     else {
         xxx_format_and_draw(4,y,*gUnknown_8113900,param_1,0);
     }
     y += 0xA;
-    gUnknown_202DE30[0] = param_3->spAtk;
-    gUnknown_202DE30[1] = param_3->spDef;
+    gFormatData_202DE30[0] = param_3->spAtk;
+    gFormatData_202DE30[1] = param_3->spDef;
     if (param_3->spAttBoost) {
-        gUnknown_202DE30[0] = gUnknown_202DE30[0] + param_3->spAttBoost;
+        gFormatData_202DE30[0] = gFormatData_202DE30[0] + param_3->spAttBoost;
         xxx_format_and_draw(4,y,*gUnknown_8113990,param_1,0);
     }
     else {
         xxx_format_and_draw(4,y,*gUnknown_8113918,param_1,0);
     }
     if (param_3->spDefBoost) {
-        gUnknown_202DE30[1] = gUnknown_202DE30[1] + param_3->spDefBoost;
+        gFormatData_202DE30[1] = gFormatData_202DE30[1] + param_3->spDefBoost;
         xxx_format_and_draw(4,y,*gUnknown_81139B4,param_1,0);
     }
     else {

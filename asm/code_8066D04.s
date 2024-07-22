@@ -2163,7 +2163,7 @@ _08067F4C:
 	b _08067FA4
 	.align 2, 0
 _08067F8C: .4byte gAvailablePokemonNames
-_08067F90: .4byte gUnknown_202DE30
+_08067F90: .4byte gFormatData_202DE30
 _08067F94: .4byte gUnknown_202DE58
 _08067F98: .4byte gUnknown_8106E2C
 _08067F9C:
@@ -2262,7 +2262,7 @@ _0806804C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08068064: .4byte gUnknown_202DE30
+_08068064: .4byte gFormatData_202DE30
 _08068068: .4byte gUnknown_8106E6C
 	thumb_func_end sub_8067F00
 

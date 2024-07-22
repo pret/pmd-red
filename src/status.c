@@ -122,7 +122,7 @@ extern u8 *gUnknown_80FBBB8[];
 extern u8 *gUnknown_80FBB94[];
 extern s16 gUnknown_80F4EF4[];
 
-extern s32 gUnknown_202DE30[10];
+extern s32 gFormatData_202DE30[10];
 
 extern void sub_8041D84(Entity *);
 extern void sub_804178C(u32);
@@ -670,8 +670,8 @@ void HealTargetHP(Entity *pokemon, Entity *target, s32 param_3, s32 param_4, boo
     maxHPStat = entityInfo->maxHPStat - maxHPStat;
     HP = entityInfo->HP - HP;
     EntityUpdateStatusSprites(target);
-    gUnknown_202DE30[0] = HP;
-    gUnknown_202DE30[1] = maxHPStat;
+    gFormatData_202DE30[0] = HP;
+    gFormatData_202DE30[1] = maxHPStat;
     SetMessageArgument(gAvailablePokemonNames,target,0);
     if ((HP == 0) && (maxHPStat == 0)) {
         if (displayMessage_u8)
@@ -1139,7 +1139,7 @@ void HandleStockpile(Entity * pokemon, Entity * target)
       entityInfo->stockpileStage++;
       sub_804178C(1);
       sub_8041D5C(target);
-      gUnknown_202DE30[0] = entityInfo->stockpileStage;
+      gFormatData_202DE30[0] = entityInfo->stockpileStage;
       sub_80522F4(pokemon,target,*gUnknown_80FBA38);
     }
     else {

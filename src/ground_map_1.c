@@ -12,7 +12,6 @@ extern const DebugLocation gUnknown_81175E0;
 extern const DebugLocation gUnknown_8117644;
 extern const u8 gUnknown_8117650[];
 extern const DebugLocation gUnknown_8117698;
-extern const unkStruct_811BAF4 gUnknown_811BAF4[10];
 
 extern void GroundMap_GetStationScript(ScriptInfoSmall *, s16, u32, u32);
 
@@ -92,7 +91,7 @@ bool8 sub_80A4D2C(s16 param_1)
 bool8 sub_80A4D48(s16 index)
 {
     if (index == -1) return TRUE;
-    if (gUnknown_811BAF4[index].unk0 == 5) return FALSE;
-    if (gUnknown_811BAF4[index].unk0 != 8) return TRUE;
+    if (gGroundConversion_811BAF4[index].unk0 == 5) return FALSE;
+    if (gGroundConversion_811BAF4[index].unk0 != 8) return TRUE;
     return FALSE;
 }

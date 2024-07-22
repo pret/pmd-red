@@ -32,7 +32,7 @@ _080ABB74:
 	adds r1, r4
 	cmp r0, 0xF
 	ble _080ABB74
-	bl sub_80ABB98
+	bl DeleteBlankGroundObjects
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -41,8 +41,8 @@ _080ABB90: .4byte gUnknown_3001B88
 _080ABB94: .4byte 0x0000ffff
 	thumb_func_end sub_80ABB54
 
-	thumb_func_start sub_80ABB98
-sub_80ABB98:
+	thumb_func_start DeleteBlankGroundObjects
+DeleteBlankGroundObjects:
 	push {r4-r6,lr}
 	ldr r0, _080ABBD0
 	ldr r4, [r0]
@@ -74,12 +74,12 @@ _080ABBB6:
 	bx r0
 	.align 2, 0
 _080ABBD0: .4byte gUnknown_3001B88
-	thumb_func_end sub_80ABB98
+	thumb_func_end DeleteBlankGroundObjects
 
 	thumb_func_start sub_80ABBD4
 sub_80ABBD4:
 	push {r4,lr}
-	bl sub_80ABB98
+	bl DeleteBlankGroundObjects
 	ldr r4, _080ABBEC
 	ldr r0, [r4]
 	bl MemoryFree

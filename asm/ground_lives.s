@@ -52,7 +52,7 @@ _080A7826:
 	adds r0, r1
 	movs r1, 0x1
 	strh r1, [r0]
-	bl sub_80A786C
+	bl DeleteBlankGroundLives
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -62,8 +62,8 @@ _080A7864: .4byte gUnknown_3001B84
 _080A7868: .4byte 0x0000ffff
 	thumb_func_end sub_80A77F8
 
-	thumb_func_start sub_80A786C
-sub_80A786C:
+	thumb_func_start DeleteBlankGroundLives
+DeleteBlankGroundLives:
 	push {r4-r6,lr}
 	ldr r0, _080A78E8
 	ldr r4, [r0]
@@ -131,12 +131,12 @@ _080A78CE:
 	.align 2, 0
 _080A78E8: .4byte gUnknown_3001B84
 _080A78EC: .4byte gUnknown_3001B80
-	thumb_func_end sub_80A786C
+	thumb_func_end DeleteBlankGroundLives
 
 	thumb_func_start sub_80A78F0
 sub_80A78F0:
 	push {r4,r5,lr}
-	bl sub_80A786C
+	bl DeleteBlankGroundLives
 	ldr r4, _080A7914
 	ldr r0, [r4]
 	bl MemoryFree
@@ -270,8 +270,8 @@ _080A79F4: .4byte gUnknown_81180BC
 _080A79F8: .4byte gUnknown_3001B84
 	thumb_func_end GroundLives_Cancel
 
-	thumb_func_start sub_80A79FC
-sub_80A79FC:
+	thumb_func_start GroundLives_CancelBlank_1
+GroundLives_CancelBlank_1:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -331,10 +331,10 @@ _080A7A50:
 	.align 2, 0
 _080A7A70: .4byte gUnknown_81180D8
 _080A7A74: .4byte gUnknown_3001B84
-	thumb_func_end sub_80A79FC
+	thumb_func_end GroundLives_CancelBlank_1
 
-	thumb_func_start sub_80A7A78
-sub_80A7A78:
+	thumb_func_start GroundLives_CancelBlank_2
+GroundLives_CancelBlank_2:
 	push {r4-r7,lr}
 	ldr r1, _080A7AC0
 	movs r0, 0
@@ -391,7 +391,7 @@ _080A7ACC:
 	bx r0
 	.align 2, 0
 _080A7AE4: .4byte 0x0000ffff
-	thumb_func_end sub_80A7A78
+	thumb_func_end GroundLives_CancelBlank_2
 
 	thumb_func_start sub_80A7AE8
 sub_80A7AE8:

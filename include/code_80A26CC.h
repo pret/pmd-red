@@ -2,7 +2,7 @@
 #define GUARD_CODE_80A26CC_H
 
 // size: 0x14
-typedef struct unkStruct_80A2608
+typedef struct DungeonInfo
 {
     /* 0x0 */ s16 unk0;
     /* 0x2 */ s16 unk2;
@@ -15,7 +15,7 @@ typedef struct unkStruct_80A2608
     /* 0xE */ s16 unkE;
     /* 0x10 */ u8 unk10;
     /* 0x11 */ u8 unk11;
-} unkStruct_80A2608;
+} DungeonInfo;
 
 void sub_80A2500(s32, s16 *);
 void sub_80A252C(s32, s16 *);
@@ -23,8 +23,8 @@ void sub_80A2558(s32, s16 *);
 void sub_80A2584(s16, s16);
 void sub_80A2598(s16, s16);
 u32 sub_80A25AC(u16);
-const unkStruct_80A2608 *sub_80A2608(s16 index);
-const unkStruct_80A2608 *sub_80A2620(s16 index);
+const DungeonInfo *sub_80A2608(s16 index);
+const DungeonInfo *sub_80A2620(s16 index);
 s16 sub_80A2654(s16 index);
 s16 sub_80A2668(u32);
 s16 sub_80A2688(u8);

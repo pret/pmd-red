@@ -164,7 +164,7 @@ _080985DC:
 	movs r0, 0x1
 	negs r0, r0
 	bl sub_809A71C
-	bl sub_809A76C
+	bl ScriptPrintNullTextbox
 	bl sub_809977C
 	ldr r0, _08098600
 	ldr r0, [r0]
@@ -394,10 +394,10 @@ _080987C0:
 	bl sub_809A62C
 	bl GroundMap_Reset
 	bl sub_809D0BC
-	bl sub_80AD9D0
-	bl sub_80A786C
-	bl sub_80ABB98
-	bl sub_80ACBD4
+	bl DeleteBlankGroundEvents
+	bl DeleteBlankGroundLives
+	bl DeleteBlankGroundObjects
+	bl DeleteBlankGroundEffects
 	bl sub_809C658
 	bl nullsub_16
 	bl sub_8097944

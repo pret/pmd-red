@@ -1460,7 +1460,7 @@ _08014E78:
 	b _08014F0E
 	.align 2, 0
 _08014E7C: .4byte gUnknown_80D4900
-_08014E80: .4byte gUnknown_202DE30
+_08014E80: .4byte gFormatData_202DE30
 _08014E84:
 	adds r5, 0x1
 	ldr r1, _08014EBC
@@ -1492,7 +1492,7 @@ _08014EB2:
 	bne _08014EAC
 	b _08014E78
 	.align 2, 0
-_08014EBC: .4byte gUnknown_202DE30
+_08014EBC: .4byte gFormatData_202DE30
 _08014EC0: .4byte gUnknown_80D4904
 _08014EC4:
 	adds r5, 0x1
@@ -1525,7 +1525,7 @@ _08014EF2:
 	bne _08014EEC
 	b _08014E78
 	.align 2, 0
-_08014EFC: .4byte gUnknown_202DE30
+_08014EFC: .4byte gFormatData_202DE30
 _08014F00: .4byte gUnknown_80D4908
 _08014F04:
 	ldr r4, _08014F08

@@ -304,7 +304,7 @@ _0809EEF4:
 	add r0, sp, 0x8
 	ldrb r5, [r0, 0x1]
 	movs r0, 0x1
-	bl sub_8011BA4
+	bl ScriptLoggingEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809EF26
@@ -330,7 +330,7 @@ _0809EF26:
 	b _0809EAE0
 	.align 2, 0
 _0809EF38: .4byte gUnknown_81165D4
-_0809EF3C: .4byte gUnknown_811BAF4
+_0809EF3C: .4byte gGroundConversion_811BAF4
 _0809EF40:
 	ldr r0, [sp, 0xC]
 	lsls r0, 16
@@ -346,7 +346,7 @@ _0809EF40:
 	asrs r4, r0, 16
 _0809EF5A:
 	movs r0, 0x1
-	bl sub_8011BA4
+	bl ScriptLoggingEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809EF70
@@ -494,7 +494,7 @@ _0809F088:
 	bl sub_80018D8
 _0809F092:
 	movs r0, 0x1
-	bl sub_8011BA4
+	bl ScriptLoggingEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809F0A8
@@ -540,7 +540,7 @@ _0809F0D0:
 	ldr r1, _0809F124
 	strh r0, [r1]
 	movs r0, 0x1
-	bl sub_8011BA4
+	bl ScriptLoggingEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809F16A
@@ -561,11 +561,11 @@ _0809F0D0:
 	bl Log
 	b _0809F16A
 	.align 2, 0
-_0809F11C: .4byte gUnknown_2039A30
+_0809F11C: .4byte gCurrentMap
 _0809F120: .4byte gUnknown_2039A32
 _0809F124: .4byte gUnknown_2039A34
 _0809F128: .4byte gUnknown_8116628
-_0809F12C: .4byte gUnknown_811BAF4
+_0809F12C: .4byte gGroundConversion_811BAF4
 _0809F130:
 	ldr r5, _0809F1E8
 	ldr r4, _0809F1EC
@@ -575,7 +575,7 @@ _0809F130:
 	ldr r0, _0809F1F0
 	strh r1, [r0]
 	movs r0, 0x1
-	bl sub_8011BA4
+	bl ScriptLoggingEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809F16A
@@ -618,10 +618,10 @@ _0809F16A:
 	ldrsh r0, [r4, r1]
 	bl GroundSprite_Reset
 	bl sub_809D0BC
-	bl sub_80AD9D0
-	bl sub_80A786C
-	bl sub_80ABB98
-	bl sub_80ACBD4
+	bl DeleteBlankGroundEvents
+	bl DeleteBlankGroundLives
+	bl DeleteBlankGroundObjects
+	bl DeleteBlankGroundEffects
 	movs r2, 0
 	ldrsh r0, [r5, r2]
 	lsls r1, r0, 1
@@ -647,10 +647,10 @@ _0809F16A:
 	b _0809F2A0
 	.align 2, 0
 _0809F1E8: .4byte gUnknown_2039A32
-_0809F1EC: .4byte gUnknown_2039A30
+_0809F1EC: .4byte gCurrentMap
 _0809F1F0: .4byte gUnknown_2039A34
 _0809F1F4: .4byte gUnknown_8116644
-_0809F1F8: .4byte gUnknown_811BAF4
+_0809F1F8: .4byte gGroundConversion_811BAF4
 _0809F1FC:
 	ldr r0, [sp, 0xC]
 	lsls r0, 16
@@ -665,7 +665,7 @@ _0809F1FC:
 	strh r0, [r5]
 	strh r0, [r1]
 	movs r0, 0x1
-	bl sub_8011BA4
+	bl ScriptLoggingEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809F242
@@ -689,10 +689,10 @@ _0809F242:
 	ldrsh r0, [r5, r1]
 	bl GroundSprite_Reset
 	bl sub_809D0BC
-	bl sub_80AD9D0
-	bl sub_80A786C
-	bl sub_80ABB98
-	bl sub_80ACBD4
+	bl DeleteBlankGroundEvents
+	bl DeleteBlankGroundLives
+	bl DeleteBlankGroundObjects
+	bl DeleteBlankGroundEffects
 	ldrb r2, [r6, 0xC]
 	ldr r1, _0809F2C0
 	ldr r0, [sp, 0x58]
@@ -731,9 +731,9 @@ _0809F2A0:
 	.align 2, 0
 _0809F2AC: .4byte gUnknown_2039A34
 _0809F2B0: .4byte gUnknown_2039A32
-_0809F2B4: .4byte gUnknown_2039A30
+_0809F2B4: .4byte gCurrentMap
 _0809F2B8: .4byte gUnknown_8116664
-_0809F2BC: .4byte gUnknown_811BAF4
+_0809F2BC: .4byte gGroundConversion_811BAF4
 _0809F2C0: .4byte 0xffffff00
 _0809F2C4: .4byte 0xffff00ff
 _0809F2C8:
@@ -894,7 +894,7 @@ _0809F41E:
 	bl GroundEvent_Cancel
 	bl _0809EAE0
 _0809F42A:
-	bl sub_80A79FC
+	bl GroundLives_CancelBlank_1
 	bl _0809EAE0
 _0809F432:
 	bl GroundObject_CancelBlank
@@ -1117,7 +1117,7 @@ _0809F5DC:
 	ldrsh r1, [r0, r5]
 	b _0809F5FA
 	.align 2, 0
-_0809F5F0: .4byte gUnknown_2039A30
+_0809F5F0: .4byte gCurrentMap
 _0809F5F4:
 	mov r0, r10
 	movs r2, 0xC
@@ -1212,7 +1212,7 @@ _0809F68E:
 	cmp r5, r0
 	bne _0809F6D8
 	movs r0, 0x1
-	bl sub_8011BA4
+	bl ScriptLoggingEnabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809F6C6
@@ -1502,10 +1502,10 @@ _0809F91A:
 	bl sub_809D8EC
 	bl _080A130A
 _0809F92E:
-	bl sub_809A76C
+	bl ScriptPrintNullTextbox
 	bl _0809EAE0
 _0809F936:
-	bl sub_809A7B4
+	bl ScriptPrintEmptyTextbox
 	bl _0809EAE0
 _0809F93E:
 	add r0, sp, 0x8
@@ -1704,7 +1704,7 @@ _0809FAD8:
 	str r0, [r1]
 	bl _0809EAE0
 	.align 2, 0
-_0809FAF4: .4byte gUnknown_202DE30
+_0809FAF4: .4byte gFormatData_202DE30
 _0809FAF8:
 	add r0, sp, 0x8
 	movs r4, 0x2
@@ -1755,7 +1755,7 @@ _0809FB5C:
 	ldrsh r1, [r0, r2]
 	ldr r2, [sp, 0x14]
 	movs r0, 0
-	bl sub_809AE90
+	bl ScriptPrintText
 	b _0809FBBA
 _0809FB6C:
 	add r0, sp, 0x8
@@ -1763,7 +1763,7 @@ _0809FB6C:
 	ldrsh r1, [r0, r3]
 	ldr r2, [sp, 0x14]
 	movs r0, 0x1
-	bl sub_809AE90
+	bl ScriptPrintText
 	b _0809FBBA
 _0809FB7C:
 	add r0, sp, 0x8
@@ -1771,7 +1771,7 @@ _0809FB7C:
 	ldrsh r1, [r0, r4]
 	ldr r2, [sp, 0x14]
 	movs r0, 0x2
-	bl sub_809AE90
+	bl ScriptPrintText
 	b _0809FBBA
 _0809FB8C:
 	add r0, sp, 0x8
@@ -1779,7 +1779,7 @@ _0809FB8C:
 	ldrsh r1, [r0, r5]
 	ldr r2, [sp, 0x14]
 	movs r0, 0x3
-	bl sub_809AE90
+	bl ScriptPrintText
 	b _0809FBBA
 _0809FB9C:
 	add r0, sp, 0x8
@@ -1787,7 +1787,7 @@ _0809FB9C:
 	ldrsh r1, [r0, r2]
 	ldr r2, [sp, 0x14]
 	movs r0, 0x4
-	bl sub_809AE90
+	bl ScriptPrintText
 	b _0809FBBA
 _0809FBAC:
 	ldr r0, [sp, 0x14]
@@ -5088,7 +5088,7 @@ _080A16FC:
 	movs r0, 0
 	movs r1, 0x1
 	add r2, sp, 0x4
-	bl sub_809AE90
+	bl ScriptPrintText
 _080A171E:
 	lsls r0, 24
 _080A1720:
@@ -6050,7 +6050,7 @@ _080A1EE8:
 	negs r1, r1
 	ldr r2, _080A1F34
 	movs r0, 0
-	bl sub_809AE90
+	bl ScriptPrintText
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1EBE

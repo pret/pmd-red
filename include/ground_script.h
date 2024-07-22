@@ -127,6 +127,15 @@ typedef struct GroundMapAction
     /* .... */ u8  fillE8[0x110 - 0xE6];
 } GroundMapAction;
 
+typedef struct FunctionScript
+{
+    u32 unk0;
+    u8 *funcName;
+    ScriptCommand *script;
+} FunctionScript;
+
+extern FunctionScript gFunctionScriptTable[];
+
 #include "debug.h"
 
 bool8 GroundScript_ExecutePP(Action *, s32 *, ScriptInfoSmall *, const DebugLocation *unused);

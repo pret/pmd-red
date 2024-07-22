@@ -147,7 +147,7 @@ _0809043C:
 	ldr r0, _08090470
 	b _08090476
 	.align 2, 0
-_08090464: .4byte gUnknown_202DE30
+_08090464: .4byte gFormatData_202DE30
 _08090468: .4byte gUnknown_81159DC
 _0809046C: .4byte gDungeons
 _08090470: .4byte gUnknown_8115A80

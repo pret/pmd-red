@@ -25,15 +25,6 @@ extern u8 sub_809A750(void);
 extern ScriptCommand *sub_80A2460(Action *param_1, u32);
 void FatalError(u32 *, const char *, ...) __attribute__((noreturn));
 
-typedef struct FunctionScript
-{
-    u32 unk0;
-    u8 *funcName;
-    ScriptCommand *script;
-} FunctionScript;
-
-extern FunctionScript gFunctionScriptTable[];
-
 void SetPredefinedScript(Action *param_1, s16 index, ScriptCommand *param_3)
 {
     param_1->predefinedScripts[index] = param_3;
