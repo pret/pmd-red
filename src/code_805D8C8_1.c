@@ -9,6 +9,8 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
+#include "pokemon.h"
+#include "code_8045A00.h"
 #include "trap.h"
 #include "charge_move.h"
 #include "dungeon_map_access.h"
@@ -19,6 +21,8 @@
 #include "dungeon_visibility.h"
 #include "dungeon_movement.h"
 #include "bg_control.h"
+#include "menu_input.h"
+#include "music.h"
 #include "items.h"
 #include "code_806CD90.h"
 #include "dungeon_capabilities.h"
@@ -27,9 +31,30 @@
 #include "constants/iq_skill.h"
 #include "constants/dungeon_action.h"
 
+struct UnkMenuBitsStruct {
+    u8 a0_8;
+    u8 a0_16;
+    u8 a0_24;
+    u8 a0_32;
+};
+
+extern void PrintFieldMessage(u32, const u8 *, u32);
+extern void HandleSetItemAction(Entity *,bool8);
+extern void HandleUnsetItemAction(Entity *,bool8);
+extern bool8 sub_8048A68(Entity *param_1,Item *item);
+extern bool8 sub_8048950(Entity *param_1,Item *item);
+extern bool8 sub_8048B9C(Entity *param_1,Item *item);
+extern Item *sub_8044D90(Entity *, s32, u32);
+extern void sub_8083D44(void);
+extern void sub_8083D30(void);
+extern void sub_8083D08(void);
+extern void sub_805239C(Entity *, const u8 *);
+extern void sub_806A6E8(Entity *);
+extern bool8 sub_8047084(s32 itemFlag);
 extern void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4);
 extern void sub_8045DB4(Position *, u32);
 extern s32 sub_8052B8C(u32, const u8 *, u32);
+bool8 sub_807EF48(void);
 void sub_806A2BC(Entity *a0, u8 a1);
 bool8 sub_805E874(void);
 bool8 sub_80701A4(Entity *a0);
@@ -39,6 +64,7 @@ void sub_803E708(s32 a0, s32 a1);
 void sub_8040A78(void);
 void sub_805E804(void);
 void sub_8049ED4(void);
+void sub_8064BE0(void);
 void sub_8075680(u32);
 void sub_8094C88(void);
 void sub_8040A84(void);
@@ -47,7 +73,7 @@ void sub_804AA60(void);
 void sub_80532B4(void);
 void sub_806A914(u8 a0, u8 a1, u8 a2);
 void sub_8044C10(u8 a0);
-u16 sub_805F1AC(void);
+u16 GetLeaderActionId(void);
 void sub_80978C8(s16 a0);
 void sub_8044C50(u16 a0);
 void sub_805E2C4(Entity *leader);
@@ -63,6 +89,27 @@ void ShowFieldMenu(u8 a0, u8 a1);
 bool8 sub_805EF60(Entity *a0, EntityInfo *a1);
 s32 GetTeamMemberEntityIndex(Entity *pokemon);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
+void DrawFieldMenu(u8 a0);
+bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1);
+bool8 sub_805FD3C(struct UnkMenuBitsStruct *a0);
+void sub_8060D24(UNUSED ActionContainer *a0);
+bool8 sub_8060E38(Entity *a0);
+void sub_8062D8C(ActionContainer *a0);
+void sub_80637E8(ActionContainer *a0);
+void sub_8063B54(ActionContainer *a0);
+void sub_8063BB4(ActionContainer *a0);
+void sub_806752C(ActionContainer *a0);
+bool8 sub_8061A38(ActionContainer *a0, bool8 a1);
+void sub_8063A70(ActionContainer *a0, bool8 a1);
+void sub_8063CF0(ActionContainer *a0, bool8 a1);
+void sub_8067768(UNUSED ActionContainer *a0);
+void sub_80615E8(ActionContainer *a0);
+void sub_804A728(Position *pos, s32 a1, u8 a2, u8 a3);
+extern bool8 sub_8071A8C(Entity *pokemon);
+extern void sub_80643AC(Entity *pokemon);
+extern u8 sub_8062F90(Entity *, u32, u32, u32, u32);
+
+extern Entity *gLeaderPointer;
 
 extern u8 gUnknown_202F22D;
 extern u8 gUnknown_202F22C;
@@ -80,18 +127,17 @@ extern const u8 *gUnknown_80FD4B0;
 extern const u8 *gUnknown_80F8A4C;
 extern const u8 *gUnknown_80F8A28;
 extern const u8 *gUnknown_8100208;
+extern const u8 *gUnknown_80F9BD8;
+extern const u8 *gUnknown_80F9C08;
+extern const u8 *gUnknown_80F9C2C;
+extern const u8 *gUnknown_80F9BB0;
+extern const u8 *gUnknown_80FDE18;
 
 #ifdef NONMATCHING
 
-struct UnkR6Struct {
-    u8 a0_8;
-    u8 a0_16;
-    u8 a0_24;
-};
-
 void sub_805D8C8(void)
 {
-    struct UnkR6Struct r6;
+    struct UnkMenuBitsStruct r6;
     s32 i; //r4
     s32 j; // r3
     u32 r7;
@@ -130,7 +176,7 @@ void sub_805D8C8(void)
             sub_80647F0(GetLeader());
             ResetRepeatTimers();
             ResetUnusedInputStruct();
-            if (sub_805F1AC() != 0) {
+            if (GetLeaderActionId() != 0) {
                 return;
             }
         }
@@ -628,7 +674,7 @@ NAKED void sub_805D8C8(void)
 "bl sub_80647F0\n"
 "bl ResetRepeatTimers\n"
 "bl ResetUnusedInputStruct\n"
-"bl sub_805F1AC\n"
+"bl GetLeaderActionId\n"
 "lsls r0, 16\n"
 "cmp r0, 0\n"
 "beq _0805D976\n"
@@ -2688,6 +2734,7 @@ void sub_805EE30(void)
 }
 
 extern Entity *sub_80696A8(Entity *a0);
+extern u8 sub_806A538(s32);
 
 bool8 sub_805EF60(Entity *a0, EntityInfo *a1)
 {
@@ -2726,9 +2773,454 @@ void sub_805EFB4(Entity *a0, bool8 a1)
     }
 }
 
-/*
+extern void sub_803EAF0(u32, u32);
+extern void sub_803F508(Entity *);
+extern void sub_8041AD0(Entity *pokemon);
+extern void sub_8041AE0(Entity *pokemon);
+extern void sub_807EC28(bool8);
+extern void sub_8083CE0(u8 param_1);
+
+extern u8 gAvailablePokemonNames[];
+
+extern u8 gUnknown_202749A[];
+extern u32 gUnknown_202F260;
+extern MenuInputStruct gUnknown_202EE10;
+
 void sub_805F02C(void)
 {
+    s32 i;
+    Entity *r7 = gDungeon->unkBC;
+    Entity *leader = GetLeader();
+    EntityInfo *r8 = r7->info;
+    EntityInfo *leaderInfo = leader->info;
 
+    if (r8->isTeamLeader) {
+        sub_805239C(r7, gUnknown_80F9BD8);
+    }
+    else if (sub_8047084(ITEM_FLAG_IN_SHOP) || sub_807EF48()) {
+        sub_805239C(r7, gUnknown_80F9C08);
+    }
+    else if (gDungeon->unk66E) {
+        sub_805239C(r7, gUnknown_80F9C2C);
+    }
+    else {
+        gDungeon->unk679 = 0;
+        r8->isTeamLeader = TRUE;
+        leaderInfo->isTeamLeader = FALSE;
+        for (i = 0; i < 4; i++) {
+            PokemonStruct2 *mon = &gRecruitedPokemonRef->pokemon2[i];
+            PokemonStruct1 *r5 = NULL;
+
+            if ((u8)mon->unk0 & 1) {
+                if (!sub_806A538(mon->unkA)) {
+                    r5 = &gRecruitedPokemonRef->pokemon[mon->unkA];
+                }
+                if (i == r8->teamIndex) {
+                    mon->isTeamLeader = TRUE;
+                    if (r5 != NULL) {
+                        r5->isTeamLeader = TRUE;
+                    }
+                }
+                else {
+                    mon->isTeamLeader = FALSE;
+                    if (r5 != NULL) {
+                        r5->isTeamLeader = FALSE;
+                    }
+                }
+            }
+        }
+        gLeaderPointer = NULL;
+        r8->action = leaderInfo->action;
+        sub_803F508(r7);
+        sub_8041AD0(leader);
+        sub_8041AE0(GetLeader());
+        SetMessageArgument(gAvailablePokemonNames, r7, 0);
+        SendMessage(r7, gUnknown_80F9BB0);
+        sub_807EC28(FALSE);
+        r8->unk64 = 0;
+        leaderInfo->unk64 = 0;
+        sub_806A6E8(leader);
+        sub_806A6E8(r7);
+    }
 }
-*/
+
+ActionContainer *GetLeaderActionContainer(void)
+{
+    return &GetLeaderInfo()->action;
+}
+
+u16 GetLeaderActionId(void)
+{
+    return GetLeaderInfo()->action.action;
+}
+
+void ShowFieldMenu(u8 a0_, u8 a1)
+{
+    Item *item;
+    u16 action;
+    s32 r10;
+    u8 a0 = a0_; // Needed to match.
+    s32 var_28;
+    s32 var_24;
+    struct UnkMenuBitsStruct var_30;
+    struct UnkMenuBitsStruct var_34;
+
+    r10 = gDungeon->unk5C0;
+    var_28 = 0;
+    var_24 = (gDungeon->unk5C0 > - 1);
+    gDungeon->unk5C0 = -1;
+    if (r10 >= 0) {
+        var_28 = r10;
+    }
+
+    if (a1) {
+        PlayFanfareSE(0x137, 0x100);
+    }
+    else {
+        sub_8083D44();
+    }
+
+    while (1) {
+        if (r10 < 0) {
+            sub_8044C10(1);
+            gUnknown_202F260 = -1;
+            DrawFieldMenu(a0);
+            sub_806A2BC(GetLeader(), 0);
+            while (1) {
+                AddMenuCursorSprite(&gUnknown_202EE10);
+                sub_803E46C(0x1D);
+                if (gRealInputs.repeated & DPAD_DOWN) {
+                    sub_8083CE0(1);
+                    sub_80136E0(&gUnknown_202EE10, 1);
+                }
+                if (gRealInputs.repeated & DPAD_UP) {
+                    sub_8083CE0(1);
+                    sub_8013744(&gUnknown_202EE10, 1);
+                }
+                if ((gRealInputs.pressed & A_BUTTON || gUnknown_202EE10.unk28.a_button)) {
+                    if (gUnknown_202749A[gUnknown_202EE10.menuIndex + 1] == 7) {
+                        sub_8083D08();
+                        var_28 = gUnknown_202EE10.menuIndex;
+                        break;
+                    }
+                    sub_8083D30();
+                }
+                if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
+                    sub_8083D30();
+                    var_28 = -1;
+                    break;
+                }
+            }
+            AddMenuCursorSprite(&gUnknown_202EE10);
+            sub_803E46C(0x1D);
+            a0 = 1;
+        }
+
+        r10 = var_28;
+        if (var_28 == 1) {
+            sub_8044C10(1);
+            var_34.a0_8 = 0;
+            var_34.a0_16 = 1;
+            var_34.a0_24 = 0;
+            var_34.a0_32 = 0;
+            if (sub_805FD74(GetLeader(), &var_34)) {
+                r10 = -1;
+            }
+            if (sub_805FD3C(&var_34) && sub_805FD74(GetLeader(), &var_34)) {
+                sub_8044C10(1);
+            }
+            action = GetLeaderActionId();
+            if (action == 12) {
+                sub_8044D90(GetLeader(), 0, 12)->flags |= ITEM_FLAG_UNPAID;
+                sub_8060D24(GetLeaderActionContainer());
+                sub_8044C10(1);
+            }
+            else if (action == 53) {
+                item = sub_8044D90(GetLeader(), 0, 13);
+                if (!sub_8048A68(GetLeader(), item)) {
+                    sub_8044C10(1);
+                }
+            }
+            else if (action == 16) {
+                item = sub_8044D90(GetLeader(), 0, 14);
+                if (!sub_8048950(GetLeader(), item)) {
+                    sub_8044C10(1);
+                }
+            }
+            else if (action == 44) {
+                item = sub_8044D90(GetLeader(), 0, 15);
+                if (!sub_8048B9C(GetLeader(), item)) {
+                    sub_8044C10(1);
+                }
+            }
+            else if (action == 60) {
+                HandleSetItemAction(GetLeader(), TRUE);
+                sub_8044C10(1);
+                sub_803E708(0x50, 0x4D);
+                sub_8052210(0);
+                break;
+            }
+            else if (action == 61) {
+                HandleUnsetItemAction(GetLeader(), TRUE);
+                sub_8044C10(1);
+                sub_803E708(0x50, 0x4D);
+                sub_8052210(0);
+                break;
+            }
+
+            if (GetLeaderActionId() != 0)
+                break;
+        }
+        else if (var_28 == 2) {
+            sub_8044C10(1);
+            if (sub_8060E38(GetLeader())) {
+                r10 = -1;
+            }
+
+            if (GetLeaderActionId() == 0x1B) {
+                sub_8061A38(GetLeaderActionContainer(), FALSE);
+                sub_8044C10(1);
+            }
+            else if (GetLeaderActionId() == 0x1C) {
+                sub_806752C(GetLeaderActionContainer());
+                sub_8044C10(1);
+            }
+            else if (GetLeaderActionId() == 0x34) {
+                sub_8067768(GetLeaderActionContainer());
+                sub_8044C10(1);
+            }
+            else if (GetLeaderActionId() == 0x1A) {
+                sub_80615E8(GetLeaderActionContainer());
+                sub_8044C10(1);
+            }
+            else if (GetLeaderActionId() == 0x30) {
+                sub_8061A38(GetLeaderActionContainer(), TRUE);
+                sub_8044C10(1);
+            }
+            else if (GetLeaderActionId() == 0x19) {
+                s32 i, count;
+
+                sub_8062D8C(GetLeaderActionContainer());
+                count = 0;
+                for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+                    Entity *teamMon = gDungeon->teamPokemon[i];
+                    if (EntityExists(teamMon)) {
+                        if (i == GetLeaderActionContainer()->unk4[0].actionUseIndex) {
+                            gUnknown_202F260 = count;
+                            if (GetLeaderActionId() != 0) {
+                                sub_806A2BC(teamMon, 0);
+                            }
+                            break;
+                        }
+                        count++;
+                    }
+                }
+            }
+
+            if (GetLeaderActionId() != 0)
+                break;
+        }
+        else if (var_28 == 0) {
+            s32 i, r7, r8, r9, r4;
+            Entity *r6;
+
+            r7 = 0;
+            sub_8044C10(1);
+            for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+                Entity *teamMon = gDungeon->teamPokemon[i];
+                if (EntityExists(teamMon)) {
+                    if (teamMon->info->isTeamLeader) {
+                        r7 = i;
+                        break;
+                    }
+                }
+            }
+
+
+            while (1) {
+                sub_8044C10(0);
+            LOOP_START_NO_CALL: // Actions 6 and 7 don't call sub_8044C10
+                r6 = NULL;
+                r9 = 0;
+                r8 = 0;
+                for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+                    Entity *teamMon = gDungeon->teamPokemon[i];
+                    if (sub_8071A8C(teamMon)) {
+                        if (i == r7) {
+                            r9 = r8;
+                            r6 = teamMon;
+                        }
+                        r8++;
+                    }
+                }
+                if (r6 == NULL) {
+                    r6 = GetLeader();
+                }
+
+                sub_806A2BC(r6, 0);
+                sub_804A728(&r6->pos, 0, 1, 1);
+                GetLeaderInfo()->action.unk4[0].actionUseIndex = r7;
+                sub_8044C10(0);
+                if (sub_8062F90(r6, 0, 1, r9, r8)) {
+                    r10 = -1;
+                }
+
+                if (GetLeaderActionId() == 6) {
+                    r4 = r7;
+                    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+                        if (++r7 >= MAX_TEAM_MEMBERS) {
+                            r7 = 0;
+                        }
+                        r6 = gDungeon->teamPokemon[r7];
+                        if (sub_8071A8C(r6))
+                            break;
+                    }
+                    GetLeaderInfo()->action.unk4[0].actionUseIndex = r7;
+                    if (r4 != r7) {
+                        sub_8083CE0(0);
+                    }
+                    goto LOOP_START_NO_CALL;
+                }
+                else if (GetLeaderActionId() == 7) {
+                    r4 = r7;
+                    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+                        if (--r7 < 0) {
+                            r7 = MAX_TEAM_MEMBERS - 1;
+                        }
+                        r6 = gDungeon->teamPokemon[r7];
+                        if (sub_8071A8C(r6))
+                            break;
+                    }
+                    GetLeaderInfo()->action.unk4[0].actionUseIndex = r7;
+                    if (r4 != r7) {
+                        sub_8083CE0(0);
+                    }
+                    goto LOOP_START_NO_CALL;
+                }
+                else if (GetLeaderActionId() == 0x1D) {
+                    sub_80637E8(GetLeaderActionContainer());
+
+                }
+                else if (GetLeaderActionId() == 0x1E || GetLeaderActionId() == 0x33) {
+                    sub_8063A70(GetLeaderActionContainer(), FALSE);
+
+                }
+                else if (GetLeaderActionId() == 0x1F) {
+                    sub_8063B54(GetLeaderActionContainer());
+
+                }
+                else if (GetLeaderActionId() == 0x20) {
+                    sub_8063BB4(GetLeaderActionContainer());
+
+                }
+                else if (GetLeaderActionId() == 0x21) {
+                    sub_8063CF0(GetLeaderActionContainer(), FALSE);
+
+                }
+                else {
+                    break;
+                }
+            }
+            sub_806A2BC(GetLeader(), 0);
+            sub_804A728(&GetLeader()->pos, 0, 1, 1);
+            if (GetLeaderActionId() != 0)
+                break;
+        }
+        else if (var_28 == 4) {
+            Entity *leader = GetLeader();
+            Tile *tile = GetTile(leader->pos.x, leader->pos.y);
+            Entity *tileObject = tile->object;
+            if (tileObject != NULL) {
+                if (GetEntityType(tileObject) == ENTITY_ITEM) {
+                    u16 action;
+
+                    sub_8044C10(1);
+                    var_30.a0_8 = 0;
+                    var_30.a0_16 = 1;
+                    var_30.a0_24 = 1;
+                    var_30.a0_32 = 1;
+                    if (sub_805FD74(GetLeader(), &var_30)) {
+                        // This actually doesn't do anything, it's just there to make the code match as the compiler does a `lsl r0, r0, #0x10, mov r0, r4`
+                        leader = 0; leader = leader;
+                    }
+                    if (sub_805FD3C(&var_30) && sub_805FD74(GetLeader(), &var_30)) {
+                        sub_8044C10(1);
+                    }
+
+                    action = GetLeaderActionId();
+                    if (action == 0xC) {
+                        sub_8044D90(GetLeader(), 0, 0x10)->flags |= ITEM_FLAG_UNPAID;
+                        sub_8060D24(GetLeaderActionContainer());
+                        sub_8044C10(1);
+                    }
+                    else if (action == 0x35) {
+                        item = sub_8044D90(GetLeader(), 0, 0x11);
+                        if (!sub_8048A68(GetLeader(), item)) {
+                            sub_8044C10(1);
+                        }
+                    }
+                    else if (action == 0x10) {
+                        item = sub_8044D90(GetLeader(), 0, 0x12);
+                        if (!sub_8048950(GetLeader(), item)) {
+                            sub_8044C10(1);
+                        }
+                    }
+                    else if (action == 0x2C) {
+                        item = sub_8044D90(GetLeader(), 0, 0x13);
+                        if (!sub_8048B9C(GetLeader(), item)) {
+                            sub_8044C10(1);
+                        }
+                    }
+                    if (GetLeaderActionId() != 0)
+                        break;
+                }
+                else if (GetEntityType(tileObject) == ENTITY_TRAP) {
+                    sub_8044C10(1);
+                    sub_80643AC(GetLeader());
+                    if (GetLeaderActionId() != 0)
+                        break;
+                }
+            }
+            else
+            {
+                if (tile->terrainType & TERRAIN_TYPE_STAIRS) {
+                    sub_8044C10(1);
+                    sub_80647F0(GetLeader());
+                    if (GetLeaderActionId() != 0)
+                        break;
+                }
+                else {
+                    SetMessageArgument(gAvailablePokemonNames, GetLeader(), 0);
+                    PrintFieldMessage(0, gUnknown_80FDE18, 1);
+                }
+            }
+            r10 = -1;
+        }
+        else if (var_28 == 3) {
+            sub_8064BE0();
+            if (gDungeon->unk4)
+                break;
+            if (GetLeaderActionId() != 0)
+                break;
+            r10 = -1;
+        }
+
+        if (var_28 < 0)
+            break;
+
+        if (var_24 == 0) {
+            ResetRepeatTimers();
+            ResetUnusedInputStruct();
+        }
+        else {
+            sub_806A2BC(GetLeader(), 0);
+            break;
+        }
+    }
+
+    sub_803EAF0(0, 0);
+    ResetRepeatTimers();
+    ResetUnusedInputStruct();
+}
+
+//

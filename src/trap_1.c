@@ -328,7 +328,7 @@ void SaveEntity(unkStruct_8094924 *param_1, Entity *param_2)
     sub_8081824(param_1,info->abilities[0]);
     sub_8081824(param_1,info->abilities[1]);
     sub_8081788(param_1,&info->heldItem);
-    sub_80817B0(param_1,info->fill64[0]);
+    sub_80817B0(param_1,info->unk64);
     temp3 = &info->aiTarget;
     temp2 = info->IQSkillMenuFlags;
     temp1 = info->IQSkillFlags;

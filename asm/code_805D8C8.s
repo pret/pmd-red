@@ -6,1082 +6,6 @@
   	.text
 
 
-
-	thumb_func_start sub_805F02C
-sub_805F02C:
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x14
-	ldr r5, _0805F058
-	ldr r0, [r5]
-	adds r0, 0xBC
-	ldr r7, [r0]
-	bl GetLeader
-	mov r9, r0
-	ldr r0, [r7, 0x70]
-	mov r8, r0
-	mov r1, r9
-	ldr r4, [r1, 0x70]
-	ldrb r0, [r0, 0x7]
-	cmp r0, 0
-	beq _0805F060
-	ldr r0, _0805F05C
-	b _0805F08E
-	.align 2, 0
-_0805F058: .4byte gDungeon
-_0805F05C: .4byte gUnknown_80F9BD8
-_0805F060:
-	movs r0, 0x2
-	bl sub_8047084
-	lsls r0, 24
-	cmp r0, 0
-	bne _0805F076
-	bl sub_807EF48
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805F080
-_0805F076:
-	ldr r0, _0805F07C
-	b _0805F08E
-	.align 2, 0
-_0805F07C: .4byte gUnknown_80F9C08
-_0805F080:
-	ldr r2, [r5]
-	ldr r3, _0805F098
-	adds r0, r2, r3
-	ldrb r1, [r0]
-	cmp r1, 0
-	beq _0805F0A0
-	ldr r0, _0805F09C
-_0805F08E:
-	ldr r1, [r0]
-	adds r0, r7, 0
-	bl sub_805239C
-	b _0805F184
-	.align 2, 0
-_0805F098: .4byte 0x0000066e
-_0805F09C: .4byte gUnknown_80F9C2C
-_0805F0A0:
-	ldr r5, _0805F114
-	adds r0, r2, r5
-	strb r1, [r0]
-	movs r0, 0x1
-	mov r2, r8
-	strb r0, [r2, 0x7]
-	strb r1, [r4, 0x7]
-	movs r6, 0
-	movs r3, 0x44
-	add r3, r8
-	mov r10, r3
-	adds r5, r4, 0
-	adds r5, 0x44
-	str r5, [sp]
-	adds r2, 0x64
-	str r2, [sp, 0x4]
-	adds r4, 0x64
-	str r4, [sp, 0x8]
-	ldr r3, _0805F118
-	movs r2, 0x1
-_0805F0C8:
-	movs r0, 0x64
-	muls r0, r6
-	ldr r1, _0805F11C
-	adds r0, r1
-	ldr r1, [r3]
-	adds r4, r1, r0
-	movs r5, 0
-	ldrb r1, [r4]
-	adds r0, r2, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _0805F12A
-	movs r1, 0xA
-	ldrsh r0, [r4, r1]
-	str r2, [sp, 0xC]
-	str r3, [sp, 0x10]
-	bl sub_806A538
-	lsls r0, 24
-	ldr r2, [sp, 0xC]
-	ldr r3, [sp, 0x10]
-	cmp r0, 0
-	bne _0805F102
-	movs r5, 0xA
-	ldrsh r1, [r4, r5]
-	movs r0, 0x58
-	muls r1, r0
-	ldr r0, [r3]
-	adds r5, r0, r1
-_0805F102:
-	mov r0, r8
-	ldrb r0, [r0, 0xA]
-	cmp r6, r0
-	bne _0805F120
-	strb r2, [r4, 0x2]
-	cmp r5, 0
-	beq _0805F12A
-	strb r2, [r5, 0x2]
-	b _0805F12A
-	.align 2, 0
-_0805F114: .4byte 0x00000679
-_0805F118: .4byte gRecruitedPokemonRef
-_0805F11C: .4byte 0x00008df8
-_0805F120:
-	movs r0, 0
-	strb r0, [r4, 0x2]
-	cmp r5, 0
-	beq _0805F12A
-	strb r0, [r5, 0x2]
-_0805F12A:
-	adds r6, 0x1
-	cmp r6, 0x3
-	ble _0805F0C8
-	ldr r0, _0805F194
-	movs r4, 0
-	str r4, [r0]
-	mov r1, r10
-	ldr r0, [sp]
-	ldm r0!, {r2,r3,r5}
-	stm r1!, {r2,r3,r5}
-	ldm r0!, {r2,r3,r5}
-	stm r1!, {r2,r3,r5}
-	adds r0, r7, 0
-	bl sub_803F508
-	mov r0, r9
-	bl sub_8041AD0
-	bl GetLeader
-	bl sub_8041AE0
-	ldr r0, _0805F198
-	adds r1, r7, 0
-	movs r2, 0
-	bl SetMessageArgument
-	ldr r0, _0805F19C
-	ldr r1, [r0]
-	adds r0, r7, 0
-	bl SendMessage
-	movs r0, 0
-	bl sub_807EC28
-	ldr r0, [sp, 0x4]
-	strb r4, [r0]
-	ldr r1, [sp, 0x8]
-	strb r4, [r1]
-	mov r0, r9
-	bl sub_806A6E8
-	adds r0, r7, 0
-	bl sub_806A6E8
-_0805F184:
-	add sp, 0x14
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0805F194: .4byte gLeaderPointer
-_0805F198: .4byte gAvailablePokemonNames
-_0805F19C: .4byte gUnknown_80F9BB0
-	thumb_func_end sub_805F02C
-
-	thumb_func_start sub_805F1A0
-sub_805F1A0:
-	push {lr}
-	bl GetLeaderInfo
-	adds r0, 0x44
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805F1A0
-
-	thumb_func_start sub_805F1AC
-sub_805F1AC:
-	push {lr}
-	bl GetLeaderInfo
-	adds r0, 0x44
-	ldrh r0, [r0]
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805F1AC
-
-	thumb_func_start ShowFieldMenu
-ShowFieldMenu:
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x18
-	lsls r0, 24
-	lsls r1, 24
-	lsrs r2, r1, 24
-	lsrs r0, 24
-	str r0, [sp, 0xC]
-	ldr r0, _0805F208
-	ldr r1, [r0]
-	movs r0, 0xB8
-	lsls r0, 3
-	adds r1, r0
-	ldr r3, [r1]
-	mov r10, r3
-	movs r0, 0
-	str r0, [sp, 0x10]
-	mvns r0, r3
-	lsrs r0, 31
-	str r0, [sp, 0x14]
-	movs r0, 0x1
-	negs r0, r0
-	str r0, [r1]
-	cmp r3, 0
-	blt _0805F1F8
-	mov r1, r10
-	str r1, [sp, 0x10]
-_0805F1F8:
-	cmp r2, 0
-	beq _0805F23C
-	ldr r0, _0805F20C
-	movs r1, 0x80
-	lsls r1, 1
-	bl PlayFanfareSE
-	b _0805F240
-	.align 2, 0
-_0805F208: .4byte gDungeon
-_0805F20C: .4byte 0x00000137
-_0805F210:
-	bl GetLeader
-	movs r1, 0x1
-	bl HandleSetItemAction
-	b _0805F226
-_0805F21C:
-	bl GetLeader
-	movs r1, 0x1
-	bl HandleUnsetItemAction
-_0805F226:
-	movs r0, 0x1
-	bl sub_8044C10
-	movs r0, 0x50
-	movs r1, 0x4D
-	bl sub_803E708
-	movs r0, 0
-	bl sub_8052210
-	b _0805F92A
-_0805F23C:
-	bl sub_8083D44
-_0805F240:
-	mov r2, r10
-	cmp r2, 0
-	bge _0805F2FA
-	movs r0, 0x1
-	bl sub_8044C10
-	ldr r0, _0805F388
-	movs r1, 0x1
-	negs r1, r1
-	str r1, [r0]
-	ldr r0, [sp, 0xC]
-	bl DrawFieldMenu
-	bl GetLeader
-	movs r1, 0
-	bl sub_806A2BC
-	ldr r4, _0805F38C
-	ldr r5, _0805F390
-	adds r6, r4, 0
-	adds r6, 0x2A
-_0805F26C:
-	adds r0, r4, 0
-	bl AddMenuCursorSprite
-	movs r0, 0x1D
-	bl sub_803E46C
-	ldrh r1, [r5, 0x4]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _0805F290
-	movs r0, 0x1
-	bl sub_8083CE0
-	adds r0, r4, 0
-	movs r1, 0x1
-	bl sub_80136E0
-_0805F290:
-	ldrh r1, [r5, 0x4]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _0805F2A8
-	movs r0, 0x1
-	bl sub_8083CE0
-	adds r0, r4, 0
-	movs r1, 0x1
-	bl sub_8013744
-_0805F2A8:
-	ldrh r1, [r5, 0x2]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _0805F2BC
-	adds r0, r4, 0
-	adds r0, 0x29
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0805F2D0
-_0805F2BC:
-	ldr r0, _0805F394
-	movs r3, 0x18
-	ldrsh r1, [r4, r3]
-	adds r1, 0x1
-	adds r1, r0
-	ldrb r0, [r1]
-	cmp r0, 0x7
-	beq _0805F3A8
-	bl sub_8083D30
-_0805F2D0:
-	ldrh r1, [r5, 0x2]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	bne _0805F2E0
-	ldrb r0, [r6]
-	cmp r0, 0
-	beq _0805F26C
-_0805F2E0:
-	bl sub_8083D30
-	movs r0, 0x1
-	negs r0, r0
-_0805F2E8:
-	str r0, [sp, 0x10]
-	ldr r0, _0805F38C
-	bl AddMenuCursorSprite
-	movs r0, 0x1D
-	bl sub_803E46C
-	movs r1, 0x1
-	str r1, [sp, 0xC]
-_0805F2FA:
-	ldr r2, [sp, 0x10]
-	mov r10, r2
-	cmp r2, 0x1
-	beq _0805F304
-	b _0805F428
-_0805F304:
-	movs r0, 0x1
-	bl sub_8044C10
-	ldr r1, _0805F398
-	ldr r0, [sp, 0x4]
-	ands r0, r1
-	ldr r1, _0805F39C
-	ands r0, r1
-	movs r1, 0x80
-	lsls r1, 1
-	orrs r0, r1
-	ldr r1, _0805F3A0
-	ands r0, r1
-	ldr r1, _0805F3A4
-	ands r0, r1
-	str r0, [sp, 0x4]
-	bl GetLeader
-	add r1, sp, 0x4
-	bl sub_805FD74
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805F33A
-	movs r3, 0x1
-	negs r3, r3
-	mov r10, r3
-_0805F33A:
-	add r0, sp, 0x4
-	bl sub_805FD3C
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805F35C
-	bl GetLeader
-	add r1, sp, 0x4
-	bl sub_805FD74
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805F35C
-	movs r0, 0x1
-	bl sub_8044C10
-_0805F35C:
-	bl sub_805F1AC
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0xC
-	bne _0805F3B2
-	bl GetLeader
-	movs r1, 0
-	movs r2, 0xC
-	bl sub_8044D90
-	ldrb r2, [r0]
-	movs r1, 0x4
-	orrs r1, r2
-	strb r1, [r0]
-	bl sub_805F1A0
-	bl sub_8060D24
-	b _0805F412
-	.align 2, 0
-_0805F388: .4byte gUnknown_202F260
-_0805F38C: .4byte gUnknown_202EE10
-_0805F390: .4byte gRealInputs
-_0805F394: .4byte gUnknown_202749A
-_0805F398: .4byte 0xffffff00
-_0805F39C: .4byte 0xffff00ff
-_0805F3A0: .4byte 0xff00ffff
-_0805F3A4: .4byte 0x00ffffff
-_0805F3A8:
-	bl sub_8083D08
-	movs r1, 0x18
-	ldrsh r0, [r4, r1]
-	b _0805F2E8
-_0805F3B2:
-	cmp r0, 0x35
-	bne _0805F3D0
-	bl GetLeader
-	movs r1, 0
-	movs r2, 0xD
-	bl sub_8044D90
-	adds r4, r0, 0
-	bl GetLeader
-	adds r1, r4, 0
-	bl sub_8048A68
-	b _0805F40A
-_0805F3D0:
-	cmp r0, 0x10
-	bne _0805F3EE
-	bl GetLeader
-	movs r1, 0
-	movs r2, 0xE
-	bl sub_8044D90
-	adds r4, r0, 0
-	bl GetLeader
-	adds r1, r4, 0
-	bl sub_8048950
-	b _0805F40A
-_0805F3EE:
-	cmp r0, 0x2C
-	bne _0805F41A
-	bl GetLeader
-	movs r1, 0
-	movs r2, 0xF
-	bl sub_8044D90
-	adds r4, r0, 0
-	bl GetLeader
-	adds r1, r4, 0
-	bl sub_8048B9C
-_0805F40A:
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805F412
-	b _0805F72C
-_0805F412:
-	movs r0, 0x1
-	bl sub_8044C10
-	b _0805F72C
-_0805F41A:
-	cmp r0, 0x3C
-	bne _0805F420
-	b _0805F210
-_0805F420:
-	cmp r0, 0x3D
-	bne _0805F426
-	b _0805F21C
-_0805F426:
-	b _0805F72C
-_0805F428:
-	ldr r2, [sp, 0x10]
-	cmp r2, 0x2
-	beq _0805F430
-	b _0805F52E
-_0805F430:
-	movs r0, 0x1
-	bl sub_8044C10
-	bl GetLeader
-	bl sub_8060E38
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805F44A
-	movs r3, 0x1
-	negs r3, r3
-	mov r10, r3
-_0805F44A:
-	bl sub_805F1AC
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x1B
-	bne _0805F45E
-	bl sub_805F1A0
-	movs r1, 0
-	b _0805F4B2
-_0805F45E:
-	bl sub_805F1AC
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x1C
-	bne _0805F474
-	bl sub_805F1A0
-	bl sub_806752C
-	b _0805F4B6
-_0805F474:
-	bl sub_805F1AC
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x34
-	bne _0805F48A
-	bl sub_805F1A0
-	bl sub_8067768
-	b _0805F4B6
-_0805F48A:
-	bl sub_805F1AC
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x1A
-	bne _0805F4A0
-	bl sub_805F1A0
-	bl sub_80615E8
-	b _0805F4B6
-_0805F4A0:
-	bl sub_805F1AC
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x30
-	bne _0805F4BE
-	bl sub_805F1A0
-	movs r1, 0x1
-_0805F4B2:
-	bl sub_8061A38
-_0805F4B6:
-	movs r0, 0x1
-	bl sub_8044C10
-	b _0805F72C
-_0805F4BE:
-	bl sub_805F1AC
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x19
-	beq _0805F4CC
-	b _0805F72C
-_0805F4CC:
-	bl sub_805F1A0
-	bl sub_8062D8C
-	movs r6, 0
-	movs r4, 0
-_0805F4D8:
-	ldr r0, _0805F518
-	ldr r0, [r0]
-	lsls r1, r4, 2
-	ldr r2, _0805F51C
-	adds r0, r2
-	adds r0, r1
-	ldr r5, [r0]
-	adds r0, r5, 0
-	bl EntityExists
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805F526
-	bl sub_805F1A0
-	ldrb r0, [r0, 0x4]
-	cmp r4, r0
-	bne _0805F524
-	ldr r0, _0805F520
-	str r6, [r0]
-	bl sub_805F1AC
-	lsls r0, 16
-	cmp r0, 0
-	bne _0805F50C
-	b _0805F72C
-_0805F50C:
-	adds r0, r5, 0
-	movs r1, 0
-	bl sub_806A2BC
-	b _0805F72C
-	.align 2, 0
-_0805F518: .4byte gDungeon
-_0805F51C: .4byte 0x0001357c
-_0805F520: .4byte gUnknown_202F260
-_0805F524:
-	adds r6, 0x1
-_0805F526:
-	adds r4, 0x1
-	cmp r4, 0x3
-	ble _0805F4D8
-	b _0805F72C
-_0805F52E:
-	ldr r3, [sp, 0x10]
-	cmp r3, 0
-	beq _0805F536
-	b _0805F73A
-_0805F536:
-	movs r7, 0
-	movs r0, 0x1
-	bl sub_8044C10
-	movs r5, 0
-	b _0805F544
-_0805F542:
-	adds r5, 0x1
-_0805F544:
-	cmp r5, 0x3
-	bgt _0805F56C
-	ldr r0, _0805F600
-	ldr r0, [r0]
-	lsls r1, r5, 2
-	ldr r2, _0805F604
-	adds r0, r2
-	adds r0, r1
-	ldr r4, [r0]
-	adds r0, r4, 0
-	bl EntityExists
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805F542
-	ldr r0, [r4, 0x70]
-	ldrb r0, [r0, 0x7]
-	cmp r0, 0
-	beq _0805F542
-	adds r7, r5, 0
-_0805F56C:
-	movs r0, 0
-	bl sub_8044C10
-_0805F572:
-	movs r6, 0
-	mov r9, r6
-	mov r8, r6
-	movs r5, 0
-_0805F57A:
-	ldr r0, _0805F600
-	ldr r0, [r0]
-	lsls r1, r5, 2
-	ldr r3, _0805F604
-	adds r0, r3
-	adds r0, r1
-	ldr r4, [r0]
-	adds r0, r4, 0
-	bl sub_8071A8C
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805F5A0
-	cmp r5, r7
-	bne _0805F59C
-	mov r9, r8
-	adds r6, r4, 0
-_0805F59C:
-	movs r0, 0x1
-	add r8, r0
-_0805F5A0:
-	adds r5, 0x1
-	cmp r5, 0x3
-	ble _0805F57A
-	cmp r6, 0
-	bne _0805F5B0
-	bl GetLeader
-	adds r6, r0, 0
-_0805F5B0:
-	adds r0, r6, 0
-	movs r1, 0
-	bl sub_806A2BC
-	adds r0, r6, 0x4
-	movs r1, 0
-	movs r2, 0x1
-	movs r3, 0x1
-	bl sub_804A728
-	bl GetLeaderInfo
-	adds r0, 0x48
-	strb r7, [r0]
-	movs r0, 0
-	bl sub_8044C10
-	mov r1, r8
-	str r1, [sp]
-	adds r0, r6, 0
-	movs r1, 0
-	movs r2, 0x1
-	mov r3, r9
-	bl sub_8062F90
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805F5EE
-	movs r2, 0x1
-	negs r2, r2
-	mov r10, r2
-_0805F5EE:
-	bl sub_805F1AC
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x6
-	bne _0805F63C
-	adds r4, r7, 0
-	movs r5, 0
-	b _0805F60A
-	.align 2, 0
-_0805F600: .4byte gDungeon
-_0805F604: .4byte 0x0001357c
-_0805F608:
-	adds r5, 0x1
-_0805F60A:
-	cmp r5, 0x3
-	bgt _0805F676
-	adds r7, 0x1
-	cmp r7, 0x3
-	ble _0805F616
-	movs r7, 0
-_0805F616:
-	ldr r0, _0805F634
-	ldr r0, [r0]
-	lsls r1, r7, 2
-	ldr r3, _0805F638
-	adds r0, r3
-	adds r0, r1
-	ldr r6, [r0]
-	adds r0, r6, 0
-	bl sub_8071A8C
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805F608
-	b _0805F676
-	.align 2, 0
-_0805F634: .4byte gDungeon
-_0805F638: .4byte 0x0001357c
-_0805F63C:
-	bl sub_805F1AC
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x7
-	bne _0805F694
-	adds r4, r7, 0
-	movs r5, 0
-	b _0805F650
-_0805F64E:
-	adds r5, 0x1
-_0805F650:
-	cmp r5, 0x3
-	bgt _0805F676
-	subs r7, 0x1
-	cmp r7, 0
-	bge _0805F65C
-	movs r7, 0x3
-_0805F65C:
-	ldr r0, _0805F68C
-	ldr r0, [r0]
-	lsls r1, r7, 2
-	ldr r2, _0805F690
-	adds r0, r2
-	adds r0, r1
-	ldr r6, [r0]
-	adds r0, r6, 0
-	bl sub_8071A8C
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805F64E
-_0805F676:
-	bl GetLeaderInfo
-	adds r0, 0x48
-	strb r7, [r0]
-	cmp r4, r7
-	bne _0805F684
-	b _0805F572
-_0805F684:
-	movs r0, 0
-	bl sub_8083CE0
-	b _0805F572
-	.align 2, 0
-_0805F68C: .4byte gDungeon
-_0805F690: .4byte 0x0001357c
-_0805F694:
-	bl sub_805F1AC
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x1D
-	bne _0805F6AA
-	bl sub_805F1A0
-	bl sub_80637E8
-	b _0805F56C
-_0805F6AA:
-	bl sub_805F1AC
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x1E
-	beq _0805F6C2
-	bl sub_805F1AC
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x33
-	bne _0805F6CE
-_0805F6C2:
-	bl sub_805F1A0
-	movs r1, 0
-	bl sub_8063A70
-	b _0805F56C
-_0805F6CE:
-	bl sub_805F1AC
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x1F
-	bne _0805F6E4
-	bl sub_805F1A0
-	bl sub_8063B54
-	b _0805F56C
-_0805F6E4:
-	bl sub_805F1AC
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x20
-	bne _0805F6FA
-	bl sub_805F1A0
-	bl sub_8063BB4
-	b _0805F56C
-_0805F6FA:
-	bl sub_805F1AC
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x21
-	bne _0805F712
-	bl sub_805F1A0
-	movs r1, 0
-	bl sub_8063CF0
-	b _0805F56C
-_0805F712:
-	bl GetLeader
-	movs r1, 0
-	bl sub_806A2BC
-	bl GetLeader
-	adds r0, 0x4
-	movs r1, 0
-	movs r2, 0x1
-	movs r3, 0x1
-	bl sub_804A728
-_0805F72C:
-	bl sub_805F1AC
-	lsls r0, 16
-	cmp r0, 0
-	beq _0805F738
-	b _0805F92A
-_0805F738:
-	b _0805F904
-_0805F73A:
-	ldr r3, [sp, 0x10]
-	cmp r3, 0x4
-	beq _0805F742
-	b _0805F8E0
-_0805F742:
-	bl GetLeader
-	movs r1, 0x4
-	ldrsh r2, [r0, r1]
-	movs r3, 0x6
-	ldrsh r1, [r0, r3]
-	adds r0, r2, 0
-	bl GetTile
-	ldr r4, [r0, 0x14]
-	cmp r4, 0
-	bne _0805F75C
-	b _0805F88C
-_0805F75C:
-	adds r0, r4, 0
-	bl GetEntityType
-	cmp r0, 0x3
-	beq _0805F768
-	b _0805F872
-_0805F768:
-	movs r0, 0x1
-	bl sub_8044C10
-	ldr r1, _0805F7F0
-	ldr r0, [sp, 0x8]
-	ands r0, r1
-	ldr r1, _0805F7F4
-	ands r0, r1
-	movs r1, 0x80
-	lsls r1, 1
-	orrs r0, r1
-	ldr r1, _0805F7F8
-	ands r0, r1
-	movs r1, 0x80
-	lsls r1, 9
-	orrs r0, r1
-	ldr r1, _0805F7FC
-	ands r0, r1
-	adds r1, 0x1
-	orrs r0, r1
-	str r0, [sp, 0x8]
-	bl GetLeader
-	add r4, sp, 0x8
-	adds r1, r4, 0
-	bl sub_805FD74
-	lsls r0, 24
-	adds r0, r4, 0
-	bl sub_805FD3C
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805F7C2
-	bl GetLeader
-	adds r1, r4, 0
-	bl sub_805FD74
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805F7C2
-	movs r0, 0x1
-	bl sub_8044C10
-_0805F7C2:
-	bl sub_805F1AC
-	lsls r0, 16
-	lsrs r0, 16
-	adds r1, r0, 0
-	cmp r0, 0xC
-	bne _0805F800
-	bl GetLeader
-	movs r1, 0
-	movs r2, 0x10
-	bl sub_8044D90
-	ldrb r2, [r0]
-	movs r1, 0x4
-	orrs r1, r2
-	strb r1, [r0]
-	bl sub_805F1A0
-	bl sub_8060D24
-	b _0805F840
-	.align 2, 0
-_0805F7F0: .4byte 0xffffff00
-_0805F7F4: .4byte 0xffff00ff
-_0805F7F8: .4byte 0xff00ffff
-_0805F7FC: .4byte 0x00ffffff
-_0805F800:
-	cmp r0, 0x35
-	bne _0805F81E
-	bl GetLeader
-	movs r1, 0
-	movs r2, 0x11
-	bl sub_8044D90
-	adds r4, r0, 0
-	bl GetLeader
-	adds r1, r4, 0
-	bl sub_8048A68
-	b _0805F83A
-_0805F81E:
-	cmp r0, 0x10
-	bne _0805F848
-	bl GetLeader
-	movs r1, 0
-	movs r2, 0x12
-	bl sub_8044D90
-	adds r4, r0, 0
-	bl GetLeader
-	adds r1, r4, 0
-	bl sub_8048950
-_0805F83A:
-	lsls r0, 24
-	cmp r0, 0
-	bne _0805F8A8
-_0805F840:
-	movs r0, 0x1
-	bl sub_8044C10
-	b _0805F8A8
-_0805F848:
-	cmp r1, 0x2C
-	bne _0805F8A8
-	bl GetLeader
-	movs r1, 0
-	movs r2, 0x13
-	bl sub_8044D90
-	adds r4, r0, 0
-	bl GetLeader
-	adds r1, r4, 0
-	bl sub_8048B9C
-	lsls r0, 24
-	cmp r0, 0
-	bne _0805F8A8
-	movs r0, 0x1
-	bl sub_8044C10
-	b _0805F8A8
-_0805F872:
-	adds r0, r4, 0
-	bl GetEntityType
-	cmp r0, 0x2
-	bne _0805F8CE
-	movs r0, 0x1
-	bl sub_8044C10
-	bl GetLeader
-	bl sub_80643AC
-	b _0805F8A8
-_0805F88C:
-	ldrh r0, [r0]
-	movs r2, 0x80
-	lsls r2, 2
-	adds r1, r2, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _0805F8B4
-	movs r0, 0x1
-	bl sub_8044C10
-	bl GetLeader
-	bl sub_80647F0
-_0805F8A8:
-	bl sub_805F1AC
-	lsls r0, 16
-	cmp r0, 0
-	bne _0805F92A
-	b _0805F8CE
-_0805F8B4:
-	bl GetLeader
-	adds r1, r0, 0
-	ldr r0, _0805F8D8
-	movs r2, 0
-	bl SetMessageArgument
-	ldr r0, _0805F8DC
-	ldr r1, [r0]
-	movs r0, 0
-	movs r2, 0x1
-	bl PrintFieldMessage
-_0805F8CE:
-	movs r3, 0x1
-	negs r3, r3
-	mov r10, r3
-	b _0805F904
-	.align 2, 0
-_0805F8D8: .4byte gAvailablePokemonNames
-_0805F8DC: .4byte gUnknown_80FDE18
-_0805F8E0:
-	ldr r0, [sp, 0x10]
-	cmp r0, 0x3
-	bne _0805F904
-	bl sub_8064BE0
-	ldr r0, _0805F91C
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x4]
-	cmp r0, 0
-	bne _0805F92A
-	bl sub_805F1AC
-	lsls r0, 16
-	cmp r0, 0
-	bne _0805F92A
-	movs r1, 0x1
-	negs r1, r1
-	mov r10, r1
-_0805F904:
-	ldr r2, [sp, 0x10]
-	cmp r2, 0
-	blt _0805F92A
-	ldr r3, [sp, 0x14]
-	cmp r3, 0
-	bne _0805F920
-	bl ResetRepeatTimers
-	bl ResetUnusedInputStruct
-	b _0805F240
-	.align 2, 0
-_0805F91C: .4byte gDungeon
-_0805F920:
-	bl GetLeader
-	movs r1, 0
-	bl sub_806A2BC
-_0805F92A:
-	movs r0, 0
-	movs r1, 0
-	bl sub_803EAF0
-	bl ResetRepeatTimers
-	bl ResetUnusedInputStruct
-	add sp, 0x18
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end ShowFieldMenu
-
 	thumb_func_start DrawFieldMenu
 DrawFieldMenu:
 	push {r4-r7,lr}
@@ -1538,7 +462,7 @@ _0805FD38: .4byte gUnknown_8106B50
 sub_805FD3C:
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_805F1AC
+	bl GetLeaderActionId
 	lsls r0, 16
 	lsrs r0, 16
 	adds r2, r0, 0
@@ -7601,7 +6525,7 @@ _08062DDA:
 	beq _08062E10
 	b _08062F80
 _08062E10:
-	bl sub_805F1AC
+	bl GetLeaderActionId
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x6
@@ -7646,7 +6570,7 @@ _08062E54:
 _08062E64: .4byte gDungeon
 _08062E68: .4byte 0x0001357c
 _08062E6C:
-	bl sub_805F1AC
+	bl GetLeaderActionId
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x7
@@ -7688,16 +6612,16 @@ _08062EA6:
 _08062EB8: .4byte gDungeon
 _08062EBC: .4byte 0x0001357c
 _08062EC0:
-	bl sub_805F1AC
+	bl GetLeaderActionId
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1D
 	bne _08062ED6
-	bl sub_805F1A0
+	bl GetLeaderActionContainer
 	bl sub_80637E8
 	b _08062F32
 _08062ED6:
-	bl sub_805F1AC
+	bl GetLeaderActionId
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1E
@@ -7705,12 +6629,12 @@ _08062ED6:
 	movs r0, 0
 	movs r1, 0
 	bl sub_803EAF0
-	bl sub_805F1A0
+	bl GetLeaderActionContainer
 	movs r1, 0x1
 	bl sub_8063A70
 	b _08062F32
 _08062EF6:
-	bl sub_805F1AC
+	bl GetLeaderActionId
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x33
@@ -7718,12 +6642,12 @@ _08062EF6:
 	movs r0, 0
 	movs r1, 0
 	bl sub_803EAF0
-	bl sub_805F1A0
+	bl GetLeaderActionContainer
 	movs r1, 0
 	bl sub_8063A70
 	b _08062F32
 _08062F16:
-	bl sub_805F1AC
+	bl GetLeaderActionId
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1F
@@ -7731,14 +6655,14 @@ _08062F16:
 	movs r0, 0
 	movs r1, 0
 	bl sub_803EAF0
-	bl sub_805F1A0
+	bl GetLeaderActionContainer
 	bl sub_8063B54
 _08062F32:
 	movs r0, 0x1
 	bl sub_8044C10
 	b _08062F5E
 _08062F3A:
-	bl sub_805F1AC
+	bl GetLeaderActionId
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x21
@@ -7746,13 +6670,13 @@ _08062F3A:
 	movs r0, 0
 	movs r1, 0
 	bl sub_803EAF0
-	bl sub_805F1A0
+	bl GetLeaderActionContainer
 	movs r1, 0x1
 	bl sub_8063CF0
 	movs r0, 0x1
 	bl sub_8044C10
 _08062F5E:
-	bl sub_805F1AC
+	bl GetLeaderActionId
 	lsls r0, 16
 	cmp r0, 0
 	bne _08062F6A
@@ -11524,7 +10448,7 @@ _08064D36:
 	ldrb r0, [r0, 0x4]
 	cmp r0, 0
 	bne _08064D4C
-	bl sub_805F1AC
+	bl GetLeaderActionId
 	lsls r0, 16
 	cmp r0, 0
 	bne _08064D4C
@@ -12058,7 +10982,7 @@ _0806517C:
 	bne _08065184
 	bl sub_80651FC
 _08065184:
-	bl sub_805F1AC
+	bl GetLeaderActionId
 	lsls r0, 16
 	cmp r0, 0
 	beq _080650D6
@@ -12108,7 +11032,7 @@ sub_80651D0:
 	bl sub_8052B8C
 	cmp r0, 0x1
 	bne _080651F4
-	bl sub_805F1A0
+	bl GetLeaderActionContainer
 	movs r1, 0x2B
 	bl SetMonsterActionFields
 	movs r0, 0
@@ -12133,7 +11057,7 @@ sub_80651FC:
 	adds r5, r0, 0
 	cmp r5, 0x1
 	bne _08065248
-	bl sub_805F1A0
+	bl GetLeaderActionContainer
 	movs r1, 0x2E
 	bl SetMonsterActionFields
 	ldr r4, _0806523C
