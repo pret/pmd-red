@@ -19,7 +19,7 @@ typedef struct ScriptInfoSmall
     /* 0x0 */ ScriptCommand *ptr;
     /* 0x4 */ s16 state;
     /* 0x6 */ s16 group;
-    /* 0x8 */ u8  sector;
+    /* 0x8 */ s8  sector;
 } ScriptInfoSmall;
 
 typedef struct ScriptInfo
@@ -28,17 +28,17 @@ typedef struct ScriptInfo
     /* 0x0 */ ScriptCommand *ptr;
     /* 0x4 */ ScriptCommand *ptr2;
     /* 0x8 */ s16 group;
-    /* 0xA */ u8  sector;
+    /* 0xA */ s8  sector;
 } ScriptInfo;
 
 typedef union ScriptUnion832 {
-    u32 raw;
-    u8  arr[4];
+    s32 raw;
+    s8  arr[4];
 } ScriptUnion832;
 
 typedef union ScriptUnion1632 {
-    u32 raw;
-    u16 arr[2];
+    s32 raw;
+    s16 arr[2];
 } ScriptUnion1632;
 
 typedef struct ScriptData

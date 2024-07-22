@@ -7,9 +7,9 @@ typedef struct DungeonInfo
     /* 0x0 */ s16 unk0;
     /* 0x2 */ s16 unk2;
     /* 0x4 */ s16 unk4;
-    /* 0x6 */ u16 unk6;
-    /* 0x8 */ u16 unk8;
-    /* 0xA */ u16 unkA;
+    /* 0x6 */ s16 unk6;
+    /* 0x8 */ s16 unk8;
+    /* 0xA */ s16 unkA;
     /* 0xC */ u8 dungeonIndex;
     /* 0xD */ u8 unkD;
     /* 0xE */ s16 unkE;
