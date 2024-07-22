@@ -6,7 +6,7 @@
 #include "ground_script.h"
 #include "memory.h"
 
-IWRAM_DATA GroundScript_ExecutePP_1 *gUnknown_3001B6C = {0};
+IWRAM_DATA GroundMapAction *gUnknown_3001B6C = {0};
 IWRAM_DATA unkStruct_3001B70 *gUnknown_3001B70 = {0};
 
 extern const u8 gUnknown_811736C[];
@@ -15,14 +15,14 @@ extern const DebugLocation gUnknown_8117538[];
 extern void sub_809D600(void *, const u8 *, u32, u32, u32);
 extern void sub_809D648(void *);
 extern void sub_80A2D00(unkStruct_3001B70 *);
-extern void sub_809D754(GroundScript_ExecutePP_1 *, const DebugLocation *);
+extern void sub_809D754(GroundMapAction *, const DebugLocation *);
 extern void sub_80A2D68(unkStruct_3001B70 *);
 extern void sub_80A2D88(unkStruct_3001B70 *);
 
 void sub_80A4A7C(void)
 {
-    gUnknown_3001B6C = MemoryAlloc(sizeof(GroundScript_ExecutePP_1), 6);
-    gUnknown_3001B6C->unkE4 = -1;
+    gUnknown_3001B6C = MemoryAlloc(sizeof(GroundMapAction), 6);
+    gUnknown_3001B6C->groundMapId = -1;
     sub_809D600(gUnknown_3001B6C, gUnknown_811736C, 0, -1, -1);
     sub_80A5E8C(0);
     GroundMap_Reset();
