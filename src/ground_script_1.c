@@ -4,20 +4,12 @@
 #include "ground_map.h"
 #include "dungeon.h"
 
-// Needs incorrect redeclaration
-#define GroundMainGroundRequest jaksdlasjdklajksdklajsd
-#define GroundMainRescueRequest pudmvjhieasmlzgvouh
-#include "ground_main.h"
-#undef GroundMainGroundRequest
-#undef GroundMainRescueRequest
-bool8 GroundMainGroundRequest(s32 r0, u32 r1, s32 r2);
-bool8 GroundMainRescueRequest(s32 r0, u32 r1);
+#ifndef NONMATCHING
+#define GROUND_SCRIPT_INCOMPLETE_DECLARATIONS
+#endif
 
-// Needs incorrect redeclaration
-#define sub_80A2608 vpoiuj345nmoszuozgvdyhz
+#include "ground_main.h"
 #include "code_80A26CC.h"
-#undef sub_80A2608
-const DungeonInfo *sub_80A2608(s32 index);
 
 typedef struct {
     u8 xTiles;
@@ -25,16 +17,12 @@ typedef struct {
     u8 yTiles;
     u8 yFlags;
 } PosInfo;
-typedef union {
-    u32 raw;
-    PosInfo fields;
-} UPos;
 typedef struct GroundObjectData {
     u8 kind;
     u8 unk1;
     u8 widthTiles;
     u8 heightTiles;
-    UPos pos;
+    PosInfo pos;
     ScriptCommand *scripts[4]; // 2 - dialogue script
 } GroundObjectData;
 typedef struct GroundEffectData {
@@ -42,7 +30,7 @@ typedef struct GroundEffectData {
     u8 unk1;
     u8 widthTiles; //???
     u8 heightTiles;
-    UPos pos;
+    PosInfo pos;
     ScriptCommand *script;
 } GroundEffectData;
 
@@ -466,7 +454,7 @@ s32 ExecuteScriptCommand(Action *action) {
                     .unk1 = *unk,
                     .widthTiles = 1,
                     .heightTiles = 1,
-                    .pos = {.raw = 0},
+                    .pos = {},
                     .kind = curCmd.arg2,
                     .scripts = { [3] = gFunctionScriptTable[curCmd.arg1].script },
                     };
@@ -493,7 +481,7 @@ s32 ExecuteScriptCommand(Action *action) {
                     .unk1 = unk,
                     .widthTiles = 1,
                     .heightTiles = 1,
-                    .pos = {.raw = 0},
+                    .pos = {},
                     .kind = curCmd.arg2,
                     .script = gFunctionScriptTable[curCmd.arg1].script,
                     };
