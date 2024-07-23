@@ -12,6 +12,9 @@
 #include "pokemon.h"
 #include "code_8045A00.h"
 #include "code_80130A8.h"
+#include "code_803E46C.h"
+#include "code_801602C.h"
+#include "code_800D090.h"
 #include "trap.h"
 #include "charge_move.h"
 #include "dungeon_map_access.h"
@@ -28,12 +31,15 @@
 #include "items.h"
 #include "play_time.h"
 #include "text2.h"
+#include "text1.h"
 #include "code_806CD90.h"
 #include "dungeon_capabilities.h"
 #include "constants/dungeon.h"
 #include "constants/status.h"
 #include "constants/iq_skill.h"
 #include "constants/dungeon_action.h"
+#include "structs/struct_sub80095e4.h"
+#include "structs/str_text.h"
 
 struct UnkMenuBitsStruct {
     u8 a0_8;
@@ -83,7 +89,6 @@ void sub_8044C50(u16 a0);
 void sub_805E2C4(Entity *leader);
 bool8 sub_8094C48(void);
 void sub_8052210(u8 a0);
-void sub_803E46C(s32 a0);
 bool8 sub_805EC4C(Entity *a0, u8 a1);
 void sub_803E724(s32 a0);
 void HandleTalkFieldAction(Entity *);
@@ -2777,7 +2782,7 @@ void sub_805EFB4(Entity *a0, bool8 a1)
     }
 }
 
-extern void sub_803EAF0(u32, u32);
+extern void sub_803EAF0(u32, u8 *);
 extern void sub_803F508(Entity *);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
@@ -3223,7 +3228,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
         }
     }
 
-    sub_803EAF0(0, 0);
+    sub_803EAF0(0, NULL);
     ResetRepeatTimers();
     ResetUnusedInputStruct();
 }
@@ -3257,14 +3262,14 @@ void DrawFieldMenu(u8 a0)
     gUnknown_202EE10.unkC = 0;
     gUnknown_202EE10.unkE = 0;
     gUnknown_202EE10.unk0 = 0;
-    gUnknown_202EE10.unk14 = 0;
+    gUnknown_202EE10.unk14.x = 0;
     sub_801317C(&gUnknown_202EE10.unk28);
     sub_80137B0(&gUnknown_202EE10, 0x38);
     if (a0) {
-        sub_803EAF0(7, 0);
+        sub_803EAF0(7, NULL);
     }
     else {
-        sub_803EAF0(6, 0);
+        sub_803EAF0(6, NULL);
     }
 
     sub_80073B8(0);
@@ -3343,3 +3348,85 @@ void DrawFieldMenu(u8 a0)
     }
 }
 
+bool8 sub_805FBE8(u8 *a0)
+{
+    s32 r4;
+    sub_803EAF0(8, a0);
+    do
+    {
+        sub_803E46C(0xE);
+        xxx_draw_string_80144C4();
+        r4 = sub_8016080();
+    } while (r4 == 0);
+    CleanConfirmNameMenu();
+    sub_803E46C(0xE);
+    sub_803EAF0(0, NULL);
+    if (r4 == 3 && *a0 != 0)
+        return TRUE;
+
+    return FALSE;
+}
+
+extern u8 *sub_8044EC8(s32 param_1);
+extern bool8 sub_8044F3C(s32 param_1);
+extern s32 gUnknown_202EE6C;
+extern const u8 gUnknown_8106B50[];
+
+extern void sub_803ECB4(struct UnkTextStruct2 *a0, u8 a1);
+
+// Inline needed to match.
+static inline void SetUpTxtStructs(struct UnkTextStruct2 *sp, struct UnkTextStruct2 *a0, u32 size)
+{
+    memset(sp, 0, size);
+    sp[0].unk4 = 3;
+    sp[1].unk4 = 3;
+    sp[1].unk8.unk0.separate.unk0 = 0x16;
+    sp[1].unk8.unk0.separate.unk2 = 4;
+    sp[1].unkC = 6;
+    sp[1].unkE = 4;
+    sp[1].unk10 = 4;
+    sp[2].unk4 = 3;
+    sp[3].unk4 = 3;
+}
+
+void sub_805FC30(struct UnkTextStruct2 *a0, s32 a1)
+{
+    s32 i;
+    struct UnkTextStruct2 sp[4];
+
+    SetUpTxtStructs(sp, a0, sizeof(sp));
+    sp[0] = a0[0];
+    sp[0].unk0 = 0x80;
+
+    gUnknown_202EE10.menuIndex = 0;
+    gUnknown_202EE10.unk1C = gUnknown_202EE6C;
+    gUnknown_202EE10.unk1A = gUnknown_202EE6C;
+    gUnknown_202EE10.unk1E = 0;
+    gUnknown_202EE10.unk20 = 0;
+    gUnknown_202EE10.unk4 = 0;
+    gUnknown_202EE10.unk6 = 0;
+    gUnknown_202EE10.unk0 = 1;
+    gUnknown_202EE10.unkC = 0;
+    gUnknown_202EE10.unkE = 0;
+    gUnknown_202EE10.unk14 = gUnknown_202EE10.unk8;
+
+    sub_801317C(&gUnknown_202EE10.unk28);
+
+    sp[1].unk8.unk0.separate.unk0 = a1;
+    sp[1].unkC = 28 - a1;
+    sp[1].unkE = sp[1].unk10 = sub_80095E4(gUnknown_202EE10.unk1C, 0);
+    sub_803ECB4(sp, 0);
+    sub_80137B0(&gUnknown_202EE10, sp[1].unkE * 8);
+    sub_80073B8(1);
+
+    for (i = 0; i < gUnknown_202EE6C; i++) {
+        s32 r4, y;
+        u8 text[20];
+
+        r4 = (sub_8044F3C(i) != 0) ? 7 : 2;
+        sprintfStatic(text, gUnknown_8106B50, r4, sub_8044EC8(i));
+        y = sub_8013800(&gUnknown_202EE10, i);
+        xxx_call_draw_string(8, y, text, 1, 0);
+    }
+    sub_80073E0(1);
+}
