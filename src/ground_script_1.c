@@ -3,6 +3,9 @@
 #include "ground_script.h"
 #include "ground_map.h"
 #include "dungeon.h"
+#include "other_random.h"
+#include "rescue_team_info.h"
+#include "code_80118A4.h"
 
 #ifndef NONMATCHING
 #define GROUND_SCRIPT_INCOMPLETE_DECLARATIONS
@@ -62,7 +65,6 @@ s16 GroundObject_Add(s16 id, GroundObjectData*, s16 group, s8 sector);
 s16 GroundEffect_Add(s16 id, GroundEffectData*, s16 group, s8 sector);
 u32 FlagCalc();
 u32 FlagJudge();
-s32 OtherRandInt(s32); // IT RETURNS s32!! Not s16!
 void FatalError(void* loc, char* fmt, ...) __attribute__((noreturn));
 
 s32 sub_8001658(ScriptUnion832*, s32);
@@ -89,23 +91,20 @@ u32 sub_8002C60();
 u32 sub_8002D54();
 u8 sub_8002DF0(Position32*, Position32*, Position32*, Position32*);
 s32 sub_8009FB8();
+
+// TODO: move to code_80118A4.h
 u32 StopAllMusic_1();
-u32 FadeOutAllMusic();
 u32 xxx_call_start_new_bgm();
 u32 xxx_call_queue_bgm();
-u32 xxx_call_stop_bgm();
-u32 xxx_call_fade_out_bgm();
 u32 xxx_call_play_fanfare_se();
-u32 xxx_call_stop_fanfare_se();
 u32 xxx_call_fade_out_fanfare_se();
-void xxx_call_fade_in_new_bgm(u16 id, u16 arg); //sub_8011900
+
 bool8 sub_8021700(s32);
 bool8 sub_802FCF0(void);
 
 
 s32 FindItemInInventory();
 u32 ShiftItemsDownFrom();
-u32 sub_80920B8();
 void sub_809733C(s16, bool8);
 void sub_80973A8(s16, bool8);
 void sub_8097418(s16, bool8);
@@ -209,7 +208,6 @@ extern char gUnknown_81166D8[];
 
 extern DebugLocation gUnknown_81166B4;
 
-/* No decompiler yet implemented for arm32 */
 s32 ExecuteScriptCommand(Action *action) {
     ScriptCommand curCmd;
     ScriptData *scriptData = &action->scriptData;
@@ -535,9 +533,8 @@ s32 ExecuteScriptCommand(Action *action) {
                 s32 a = (s16)sub_8001658(0, 19);
                 const DungeonInfo *ret1 = sub_80A2608(a);
                 s32 thing = sub_8001784(0, 48, a) == 0 ? ret1->unk6 : ret1->unk8;
-                //s32 as = a;
-                //if (!(a >= 0x37 && a < 0x48) && (s16)sub_80A2750(a) == 1) {
-                // fakematch lmao
+                // fakematch: this is almost certainly a range check of the form 0x37 <= a && a < 0x48
+                // but that loses the s32 -> u16 cast. Inlines, macros, or other schenanigans are likely involved
                 if (!((u16)(a - 0x37) < 0x11) && (s16)sub_80A2750(a) == 1) {
                     if (thing == -1) {
                         if (ScriptLoggingEnabled(TRUE)) {
@@ -632,8 +629,9 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0x27: case 0x28: {
-                //s8 color[4];
                 // THANK YOU pidgey, only an array *inside* a struct works
+                // TODO: Define this struct globally, so it can be passed to sub_8099A5C and sub_8099AFC
+                // This kind of hackiness is used at all callsites (or they load from a global)
                 s32 color = ({
                     struct color { u8 arr[4]; } color = {{
                         curCmd.arg2 >> 16,
@@ -643,8 +641,6 @@ s32 ExecuteScriptCommand(Action *action) {
                     }};
                     *(s32*)&color;
                 });
-                //u32 raw;
-                //raw = *(u32*)color;
                 switch (curCmd.op) {
                     case 0x27:
                         sub_8099A5C(curCmd.argShort, curCmd.arg1, color);
@@ -990,7 +986,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 Position32 unk;
                 action->callbacks->func0C(action->parentObject, &unk);
                 sub_80AD8B4((s16)curCmd.arg1, &unk);
-                action->callbacks->func24(action->parentObject, &unk); //FIXME: landing end of unwanted tailmerge
+                action->callbacks->func24(action->parentObject, &unk); // landing end of unwanted tailmerge
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
@@ -1027,7 +1023,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 action->callbacks->func28(action->parentObject, height);
                 action->scriptData.unk26 = dir;
                 action->callbacks->func2C(action->parentObject, dir);
-                // FIXME: unwanted tailmerge
+                // NONMATCHING: unwanted tailmerge
 #ifndef NONNMATCHING
                 asm("");
 #endif
@@ -1265,7 +1261,7 @@ s32 ExecuteScriptCommand(Action *action) {
                     ret = sub_8002DF0(&pos3, &pos4, &pos1, &pos2); // wtf
                     *&dir = ret;
 
-                    tmp = -1; // This feels like a fakematch...
+                    tmp = -1;
                     if (dir == tmp) {
                         dir = sub_8002D54(&pos3, &gUnknown_81164DC, &pos1, &gUnknown_81164DC);
                     }
@@ -1672,7 +1668,7 @@ s32 ExecuteScriptCommand(Action *action) {
                     }
                     case 0xc9: {
                         s16 tmp = (s16)sub_80A7AE8((s16)curCmd.arg1);
-                        if (tmp >= 0) { // ???
+                        if (tmp >= 0) {
                             Position32 pos1, pos2, pos3;
                             action->callbacks->func0C(action->parentObject, &pos1);
                             action->callbacks->func08(action->parentObject, &pos2);
