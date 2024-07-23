@@ -210,6 +210,19 @@ extern char gUnknown_81166D8[];
 
 extern DebugLocation gUnknown_81166B4;
 
+// Return values:
+// This function returns what's likely an enum, which controls the state of the script engine state machine, and possibly provides information to code calling the engine.
+// The enum is shared at least with HandleAction.
+// This value is saved into the state field of the Action when returned from this function.
+// - Value 0 indicates a RET on script engine level, HandleAction copies action->scriptData2 onto action->scriptData, and reinitializes scriptData2.
+//     If there is no active scriptData2 it clears and reinits scriptData.
+//     Ultimately returns code 3 to the script engine caller.
+//     Caveat: If the scripting engine is in state 0, HandleAction will immediately return 0 without performing any work.
+// - Value 1 is a terminal state (script success? error?), no further scripting progress will happen. This code is always returned to the caller from now on.
+// - Value 2 gives control back to the HandleAction function (entry point into the scripting engine state machine)
+//     This is the only return value that does not return to the script engine caller
+// - Value 3 returns to the caller, but will give control back to ExecuteScriptCommand when reentering the script ("script not finished")
+// - Value 4 is some kind of fatal error state, no further scripting progress will happen. This code is always returned to the caller from now on.
 s32 ExecuteScriptCommand(Action *action) {
     ScriptCommand curCmd;
     ScriptData *scriptData = &action->scriptData;
@@ -1839,18 +1852,18 @@ s32 ExecuteScriptCommand(Action *action) {
             }
             case 0xee: { // RESTORE_SAVED
                 if (scriptData->savedScript.ptr == NULL) {
-                    return 0; // huh?
+                    return 0;
                 }
                 scriptData->script = scriptData->savedScript;
                 scriptData->savedScript.ptr = NULL;
                 scriptData->savedScript.ptr2 = NULL;
                 break;
             }
-            case 0xef: // RETURN_FALSE
-                return 0; // success
-            case 0xf0: // RETURN_TRUE
-                return 1; // error?
-            case 0xf1: // RETURN_ERROR
+            case 0xef:
+                return 0;
+            case 0xf0:
+                return 1;
+            case 0xf1:
                 return 4; // fatal error?
             case 0xf2: case 0xf3: case 0xf4: case 0xf5: case 0xf6: {
                 // Debug, not in release ROM
