@@ -887,7 +887,7 @@ _08011624: .4byte 0x00004df8
 _08011628: .4byte 0x00004ddc
 _0801162C: .4byte 0x00004de0
 _08011630: .4byte gUnknown_80D4104
-_08011634: .4byte gUnknown_202DE30
+_08011634: .4byte gFormatData_202DE30
 _08011638: .4byte gUnknown_202DE58
 _0801163C: .4byte gUnknown_80D4120
 _08011640:

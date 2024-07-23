@@ -387,7 +387,7 @@ void sub_809D490(void)
     sub_809D4B0();
 }
 
-extern s16 gUnknown_2039A30;
+extern s16 gCurrentMap;
 extern s16 gUnknown_2039A32;
 extern s16 gUnknown_2039A34;
 extern u8 gUnknown_2039A36;
@@ -399,7 +399,7 @@ void sub_809D4B0(void)
 {
     s32 i;
 
-    gUnknown_2039A30 = -1;
+    gCurrentMap = -1;
     gUnknown_2039A32 = -1;
     gUnknown_2039A34 = -1;
     gUnknown_2039A36 = 0;
@@ -442,44 +442,44 @@ s32 sub_809D52C(void *a0)
     return 0;
 }
 
-void sub_809D568(GroundScript_ExecutePP_1_sub_not_packed *a0)
+void InitScriptData(ScriptData *a0)
 {
     s32 i;
 
-    a0->scriptType = -1;
-    a0->unk2 = 0;
-    a0->scriptPointer2 = 0;
-    a0->scriptPointer1 = 0;
-    a0->unk14 = 0;
-    a0->unk10 = 0;
-    a0->unk20 = 0;
-    a0->unk1C = 0;
+    a0->state = -1;
+    a0->savedState = 0;
+    a0->script.ptr2 = 0;
+    a0->script.ptr = 0;
+    a0->savedScript.ptr2 = 0;
+    a0->savedScript.ptr = 0;
+    a0->curScriptOp = 0;
+    a0->curPtr = 0;
     a0->unk22 = -1;
     a0->unk24 = 0;
     a0->unk26 = 0xFF;
-    a0->unk28 = 0;
+    a0->branchDiscriminant = 0;
     a0->unk2A = 0;
     a0->unk2C = 0;
     a0->unk30 = 0;
     for (i = 0; i < 4; i++) {
-        a0->unk5C[i] = 0;
+        a0->unk50[i].raw = 0;
     }
 }
 
-void sub_809D5B8(GroundScript_ExecutePP_1 *a0)
+void InitAction(Action *a0)
 {
     s32 i;
 
-    a0->unk0 = 0;
-    a0->unk4 = 0;
-    a0->unk10 = -1;
-    a0->unk12 = 0xFF;
+    a0->callbacks = NULL;
+    a0->parentObject = NULL;
+    a0->group = -1;
+    a0->sector = 0xFF;
     sub_809D520(&a0->unkC);
 
     for (i = 0; i < 4; i++) {
-        a0->unk14[i] = 0;
+        a0->predefinedScripts[i] = NULL;
     }
 
-    sub_809D568((void *) &a0->unk24); // Casting to void* because packed/not packed
-    sub_809D568((void *) &a0->unk84); // Casting to void* because packed/not packed
+    InitScriptData(&a0->scriptData);
+    InitScriptData(&a0->scriptData2);
 }

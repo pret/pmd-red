@@ -5,7 +5,7 @@
 #include "ground_main.h"
 
 // data_8115F5C.s
-extern const unkStruct_80A2608 gUnknown_81168A8[];
+extern const DungeonInfo gUnknown_81168A8[];
 extern const s16 gUnknown_8116F24[];
 extern const s16 gUnknown_8116F9A[];
 extern const u8 *gUnknown_8117000[];
@@ -78,12 +78,12 @@ u32 sub_80A25AC(u16 param_1)
     return 1;
 }
 
-const unkStruct_80A2608 *sub_80A2608(s16 index)
+const DungeonInfo *sub_80A2608(s16 index)
 {
     return &gUnknown_81168A8[index];
 }
 
-const unkStruct_80A2608 *sub_80A2620(s16 index)
+const DungeonInfo *sub_80A2620(s16 index)
 {
     u32 temp;
     temp = sub_80A26B8(index);
@@ -97,7 +97,7 @@ UNUSED static s16 sub_80A2644(u32 index)
 
 s16 sub_80A2654(s16 index)
 {
-    const unkStruct_80A2608 *temp;
+    const DungeonInfo *temp;
 
     temp = sub_80A2608(index);
     return temp->unkE;
@@ -149,7 +149,7 @@ UNUSED static s16 sub_80A26D8(u8 index)
 {
     s32 i;
     s16 counter2;
-    const unkStruct_80A2608 *temp;
+    const DungeonInfo *temp;
 
     for (i = 0; i < 83; i++) {
         counter2 = i;
@@ -165,7 +165,7 @@ UNUSED static s16 sub_80A26D8(u8 index)
 
 u8 sub_80A270C(s16 index)
 {
-    const unkStruct_80A2608 *temp;
+    const DungeonInfo *temp;
     s32 index_s32;
 
     index_s32 = index; // forcing a shift before addressing
@@ -175,7 +175,7 @@ u8 sub_80A270C(s16 index)
 
 u8 sub_80A2728(s16 index)
 {
-    const unkStruct_80A2608 *temp;
+    const DungeonInfo *temp;
 
     s16 temp_number = 55 + index;
     temp = sub_80A2608(temp_number);
@@ -184,7 +184,7 @@ u8 sub_80A2728(s16 index)
 
 u8 sub_80A2740(s32 index)
 {
-    const unkStruct_80A2608 *temp;
+    const DungeonInfo *temp;
 
     temp = sub_80A2608(index);
     return temp->dungeonIndex;
@@ -192,7 +192,7 @@ u8 sub_80A2740(s32 index)
 
 s16 sub_80A2750(s16 r0)
 {
-    const unkStruct_80A2608 *temp;
+    const DungeonInfo *temp;
     s32 temp_32;
     s32 temp_2;
 
@@ -227,7 +227,7 @@ bool8 sub_80A27CC(s16 r0)
 {
     s32 temp;
     s32 temp2;
-    const unkStruct_80A2608 *t;
+    const DungeonInfo *t;
 
     // Same dumbness as above to get a match
     temp2 = r0;
@@ -250,7 +250,7 @@ bool8 sub_80A27CC(s16 r0)
 bool8 sub_80A2824(u8 index)
 {
     s32 i;
-    const unkStruct_80A2608 *temp;
+    const DungeonInfo *temp;
 
     if (sub_80023E4(5))
         return FALSE;
@@ -285,7 +285,7 @@ bool8 sub_80A2824(u8 index)
 
 UNUSED static bool8 sub_80A28B4(s16 r0)
 {
-    const unkStruct_80A2608 *temp;
+    const DungeonInfo *temp;
 
     temp = sub_80A2620(r0);
 
@@ -302,7 +302,7 @@ UNUSED static bool8 sub_80A28B4(s16 r0)
 bool8 sub_80A28F0(u8 index)
 {
     s32 counter;
-    const unkStruct_80A2608 *temp;
+    const DungeonInfo *temp;
 
     for (counter = 0; counter < 0x2E; counter++) {
         temp = sub_80A2620(counter);
@@ -323,7 +323,7 @@ bool8 sub_80A28F0(u8 index)
 UNUSED static s32 sub_80A293C(u8 *param_1)
 {
     u8 *pcVar2;
-    const unkStruct_80A2608 *iVar3;
+    const DungeonInfo *iVar3;
     s32 index;
     s32 counter;
     u8 local_68[64];
@@ -358,7 +358,7 @@ UNUSED static s32 sub_80A293C(u8 *param_1)
 s32 sub_80A29B0(u8 *param_1)
 {
     u8 *pcVar2;
-    const unkStruct_80A2608 *iVar3;
+    const DungeonInfo *iVar3;
     s32 index;
     s32 counter;
     u8 *local1;
@@ -409,7 +409,7 @@ s32 sub_80A29B0(u8 *param_1)
 UNUSED static s32 sub_80A2A5C(u8 *param_1)
 {
     u8 *pcVar2;
-    const unkStruct_80A2608 *iVar3;
+    const DungeonInfo *iVar3;
     s32 index;
     s32 counter;
     u8 local_58[0x40];

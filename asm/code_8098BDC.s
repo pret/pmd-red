@@ -450,7 +450,7 @@ sub_80993F0:
 	movs r0, 0
 	movs r1, 0
 	bl sub_8005838
-	bl sub_80A4A7C
+	bl AllocGroundMapAction
 	mov r7, sp
 	add r0, sp, 0x8
 	mov r8, r0
@@ -662,7 +662,7 @@ _08099620: .4byte gGameOptionsRef
 _08099624:
 	movs r0, 0x10
 	bl FadeOutAllMusic
-	bl sub_80A4AC4
+	bl FreeGroundMapAction
 	bl sub_8099768
 	bl nullsub_103
 	add sp, 0x28

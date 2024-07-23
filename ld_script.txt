@@ -352,6 +352,8 @@ SECTIONS {
         src/code_809D148.o(.text);
         asm/code_809D148.o(.text);
         src/ground_script.o(.text);
+        asm/handleaction.o(.text);
+        src/ground_script_1.o(.text);
         asm/ground_script.o(.text);
         src/code_80A26CC.o(.text);
         asm/code_80A26CC_1.o(.text);

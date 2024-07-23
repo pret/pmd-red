@@ -18,7 +18,7 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u32 gUnknown_202DE30;
+extern u32 gFormatData_202DE30;
 extern u8 gUnknown_202DE58[];
 extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
@@ -341,7 +341,7 @@ static void UpdateKecleonStoreDialogue(void)
         case 22:
             sub_8019700();
             sub_8090E14(gUnknown_202DE58, &sKecleonBrosWork1->soldItem, 0);
-            gUnknown_202DE30 = sKecleonBrosWork1->itemSellPrice;
+            gFormatData_202DE30 = sKecleonBrosWork1->itemSellPrice;
             sub_8019E04(FALSE);
             sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_05], 0, 5,sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->unkE4, 12);
             break;
@@ -394,7 +394,7 @@ static void UpdateKecleonStoreDialogue(void)
         case 30:
             sub_8019700();
             sub_8090E14(gUnknown_202DE58, &sKecleonBrosWork1->soldItem, NULL);
-            gUnknown_202DE30 = sKecleonBrosWork1->itemSellPrice;
+            gFormatData_202DE30 = sKecleonBrosWork1->itemSellPrice;
             sub_8019E04(FALSE);
             sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_09], 0, 5, sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->unkE4, 12);
             break;
@@ -415,7 +415,7 @@ static void UpdateKecleonStoreDialogue(void)
             break;
         case 31:
             sub_8019700();
-            gUnknown_202DE30 = sKecleonBrosWork1->inventoryItemSellPrice;
+            gFormatData_202DE30 = sKecleonBrosWork1->inventoryItemSellPrice;
             sub_8019E04(FALSE);
             sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_10], 0, 5, sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->unkE4, 12);
             break;

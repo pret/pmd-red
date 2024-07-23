@@ -32,7 +32,7 @@ _080ABB74:
 	adds r1, r4
 	cmp r0, 0xF
 	ble _080ABB74
-	bl sub_80ABB98
+	bl DeleteBlankGroundObjects
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -41,8 +41,8 @@ _080ABB90: .4byte gUnknown_3001B88
 _080ABB94: .4byte 0x0000ffff
 	thumb_func_end sub_80ABB54
 
-	thumb_func_start sub_80ABB98
-sub_80ABB98:
+	thumb_func_start DeleteBlankGroundObjects
+DeleteBlankGroundObjects:
 	push {r4-r6,lr}
 	ldr r0, _080ABBD0
 	ldr r4, [r0]
@@ -74,12 +74,12 @@ _080ABBB6:
 	bx r0
 	.align 2, 0
 _080ABBD0: .4byte gUnknown_3001B88
-	thumb_func_end sub_80ABB98
+	thumb_func_end DeleteBlankGroundObjects
 
 	thumb_func_start sub_80ABBD4
 sub_80ABBD4:
 	push {r4,lr}
-	bl sub_80ABB98
+	bl DeleteBlankGroundObjects
 	ldr r4, _080ABBEC
 	ldr r0, [r4]
 	bl MemoryFree
@@ -733,7 +733,7 @@ _080AC0C0:
 	adds r0, r4, 0
 	adds r2, r5, 0
 	mov r3, r10
-	bl sub_809D600
+	bl InitActionWithParams
 	adds r6, r4, 0
 	mov r1, r8
 	ldr r2, [r1, 0xC]
@@ -751,7 +751,7 @@ _080AC0C0:
 _080AC0F2:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_809D6D8
+	bl SetPredefinedScript
 	adds r1, r4, 0
 	mov r3, r8
 	ldr r2, [r3, 0x10]
@@ -762,7 +762,7 @@ _080AC0F2:
 _080AC108:
 	adds r0, r1, 0
 	movs r1, 0x2
-	bl sub_809D6D8
+	bl SetPredefinedScript
 	mov r0, r8
 	ldr r2, [r0, 0x14]
 	cmp r2, 0
@@ -772,14 +772,14 @@ _080AC108:
 _080AC11C:
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_809D6D8
+	bl SetPredefinedScript
 	mov r1, r8
 	ldr r2, [r1, 0x8]
 	cmp r2, 0
 	beq _080AC140
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_809D6D8
+	bl SetPredefinedScript
 	ldr r3, _080AC164
 	adds r0, r4, 0
 	movs r1, 0

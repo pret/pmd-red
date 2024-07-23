@@ -1392,7 +1392,7 @@ _0807F158:
 _0807F168: .4byte gDungeon
 _0807F16C: .4byte 0xffff0000
 _0807F170: .4byte 0xff00ffff
-_0807F174: .4byte gUnknown_202DE30
+_0807F174: .4byte gFormatData_202DE30
 _0807F178: .4byte gUnknown_80FE5C0
 _0807F17C: .4byte 0x0000068c
 _0807F180: .4byte 0x0000e240
@@ -1451,7 +1451,7 @@ _0807F1EC: .4byte 0xffff0000
 _0807F1F0: .4byte 0xff00ffff
 _0807F1F4: .4byte gDungeon
 _0807F1F8: .4byte 0x00000694
-_0807F1FC: .4byte gUnknown_202DE30
+_0807F1FC: .4byte gFormatData_202DE30
 _0807F200: .4byte gUnknown_80FE568
 _0807F204:
 	ldr r0, _0807F224

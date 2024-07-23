@@ -75,7 +75,7 @@ _0809CC20:
 	movs r0, 0
 	adds r2, r5, 0
 _0809CC4A:
-	bl sub_809AE90
+	bl ScriptPrintText
 _0809CC4E:
 	movs r0, 0
 	b _0809CC82
@@ -94,7 +94,7 @@ _0809CC5E:
 	negs r1, r1
 	movs r0, 0
 	adds r2, r7, 0
-	bl sub_809AE90
+	bl ScriptPrintText
 	movs r1, 0x80
 	lsls r1, 1
 	movs r0, 0xCB

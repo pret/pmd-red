@@ -4317,7 +4317,7 @@ _0805FBB0: .4byte gFieldMenuTeamPtr
 _0805FBB4: .4byte gFieldMenuOthersPtr
 _0805FBB8: .4byte gFieldMenuGroundPtr
 _0805FBBC: .4byte gPlayTimeRef
-_0805FBC0: .4byte gUnknown_202DE30
+_0805FBC0: .4byte gFormatData_202DE30
 _0805FBC4: .4byte gUnknown_80F9174
 _0805FBC8: .4byte gTeamInventoryRef
 _0805FBCC: .4byte gUnknown_80F9190
@@ -7317,7 +7317,7 @@ _080613EE:
 	b _08061438
 	.align 2, 0
 _0806141C: .4byte gUnknown_8106BD0
-_08061420: .4byte gUnknown_202DE30
+_08061420: .4byte gFormatData_202DE30
 _08061424: .4byte gUnknown_202EE10
 _08061428: .4byte gUnknown_8106BD4
 _0806142C:

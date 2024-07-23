@@ -14,7 +14,6 @@
 static EWRAM_DATA_2 struct struct_Sub80095E4_2 *sUnknown_203B258 = {0};
 
 extern struct unkStruct_81188F0 gUnknown_81188F0[10];
-extern unkStruct_811BAF4 gUnknown_811BAF4[10];
 
 #include "data/code_801D9E4.h"
 
@@ -105,7 +104,7 @@ static void sub_801DB54(void)
 
 static void sub_801DBD4(void)
 {
-    unkStruct_811BAF4 *temp;
+    GroundConversionStruct *temp;
     struct unkStruct_81188F0 *temp2;
     s32 x, y, n;
     s16 index;
@@ -124,7 +123,7 @@ static void sub_801DBD4(void)
 
     for (counter = 0; counter < sUnknown_203B258->s0.input.unk1A; counter++) {
         index = (sUnknown_203B258->s0.input.unk1E * sUnknown_203B258->s0.input.unk1C) + counter;
-        temp = &gUnknown_811BAF4[index];
+        temp = &gGroundConversion_811BAF4[index];
         temp2 = &gUnknown_81188F0[temp->unk4];
 
         y = sub_8013800(&sUnknown_203B258->s0.input, counter);
