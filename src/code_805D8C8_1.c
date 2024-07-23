@@ -11,10 +11,12 @@
 #include "dungeon_util.h"
 #include "pokemon.h"
 #include "code_8045A00.h"
+#include "code_80130A8.h"
 #include "trap.h"
 #include "charge_move.h"
 #include "dungeon_map_access.h"
 #include "game_options.h"
+#include "weather.h"
 #include "dungeon_items.h"
 #include "dungeon_leader.h"
 #include "tile_types.h"
@@ -24,6 +26,8 @@
 #include "menu_input.h"
 #include "music.h"
 #include "items.h"
+#include "play_time.h"
+#include "text2.h"
 #include "code_806CD90.h"
 #include "dungeon_capabilities.h"
 #include "constants/dungeon.h"
@@ -85,7 +89,7 @@ void sub_803E724(s32 a0);
 void HandleTalkFieldAction(Entity *);
 bool8 sub_8044B28(void);
 bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
-void ShowFieldMenu(u8 a0, u8 a1);
+void ShowFieldMenu(u8 a0, bool8 a1);
 bool8 sub_805EF60(Entity *a0, EntityInfo *a1);
 s32 GetTeamMemberEntityIndex(Entity *pokemon);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
@@ -2854,10 +2858,9 @@ u16 GetLeaderActionId(void)
     return GetLeaderInfo()->action.action;
 }
 
-void ShowFieldMenu(u8 a0_, u8 a1)
+void ShowFieldMenu(u8 a0_, bool8 a1)
 {
     Item *item;
-    u16 action;
     s32 r10;
     u8 a0 = a0_; // Needed to match.
     s32 var_28;
@@ -2918,6 +2921,8 @@ void ShowFieldMenu(u8 a0_, u8 a1)
 
         r10 = var_28;
         if (var_28 == 1) {
+            u16 action;
+
             sub_8044C10(1);
             var_34.a0_8 = 0;
             var_34.a0_16 = 1;
@@ -3223,4 +3228,118 @@ void ShowFieldMenu(u8 a0_, u8 a1)
     ResetUnusedInputStruct();
 }
 
-//
+extern const u8 *const gFieldMenuMovesPtr;
+extern const u8 *const gFieldMenuItemsPtr;
+extern const u8 *const gFieldMenuTeamPtr;
+extern const u8 *const gFieldMenuOthersPtr;
+extern const u8 *const gFieldMenuGroundPtr;
+extern const u8 *const gUnknown_80F9174;
+extern const u8 *const gUnknown_80F9190;
+extern const u8 *const gUnknown_80F91C8;
+extern const u8 *const gUnknown_80F91E0;
+extern const u8 *const gUnknown_80F91A8;
+
+const u8 *sub_805317C(void);
+void GetWeatherName(u8 *dst, u8 weatherId);
+
+extern s32 gUnknown_202DE30[];
+
+void DrawFieldMenu(u8 a0)
+{
+    s32 i, x, y, yLoop;
+
+    gUnknown_202EE10.menuIndex = 0;
+    gUnknown_202EE10.unk1A = 5;
+    gUnknown_202EE10.unk1C = 5;
+    gUnknown_202EE10.unk1E = 0;
+    gUnknown_202EE10.unk4 = 0;
+    gUnknown_202EE10.unk6 = 2;
+    gUnknown_202EE10.unkC = 0;
+    gUnknown_202EE10.unkE = 0;
+    gUnknown_202EE10.unk0 = 0;
+    gUnknown_202EE10.unk14 = 0;
+    sub_801317C(&gUnknown_202EE10.unk28);
+    sub_80137B0(&gUnknown_202EE10, 0x38);
+    if (a0) {
+        sub_803EAF0(7, 0);
+    }
+    else {
+        sub_803EAF0(6, 0);
+    }
+
+    sub_80073B8(0);
+    if (ShouldMonsterRunAwayAndShowEffect(GetLeader(), TRUE)) {
+        gUnknown_202749A[1] = 2;
+        gUnknown_202749A[2] = 2;
+        gUnknown_202749A[3] = 2;
+        gUnknown_202749A[4] = 7;
+        gUnknown_202749A[5] = 2;
+    }
+    else
+    {
+        gUnknown_202749A[1] = 7;
+        gUnknown_202749A[2] = 7;
+        gUnknown_202749A[3] = 7;
+        gUnknown_202749A[4] = 7;
+        gUnknown_202749A[5] = 7;
+    }
+
+    y = sub_8013800(&gUnknown_202EE10, 0);
+    xxx_call_draw_string(8, y, gFieldMenuMovesPtr, 0, 0);
+
+    y = sub_8013800(&gUnknown_202EE10, 1);
+    xxx_call_draw_string(8, y, gFieldMenuItemsPtr, 0, 0);
+
+    y = sub_8013800(&gUnknown_202EE10, 2);
+    xxx_call_draw_string(8, y, gFieldMenuTeamPtr, 0, 0);
+
+    y = sub_8013800(&gUnknown_202EE10, 3);
+    xxx_call_draw_string(8, y, gFieldMenuOthersPtr, 0, 0);
+
+    y = sub_8013800(&gUnknown_202EE10, 4);
+    xxx_call_draw_string(8, y, gFieldMenuGroundPtr, 0, 0);
+
+    sub_80073E0(0);
+    if (a0) {
+        u32 hours, minutes, seconds;
+        EntityInfo *leaderInfo = GetLeader()->info;
+        const u8 *dungeonName = sub_805317C();
+
+        x = (136 - sub_8008ED0(dungeonName)) / 2;
+        sub_80073B8(1);
+        xxx_call_draw_string(x, 2, dungeonName, 1, 0);
+        sub_80073E0(1);
+        sub_80073B8(2);
+        DeconstructPlayTime(gPlayTimeRef, &hours, &minutes, &seconds);
+
+        gUnknown_202DE30[0] = RoundUpFixedPoint(leaderInfo->belly);
+        gUnknown_202DE30[1] = RoundUpFixedPoint(leaderInfo->maxBelly);
+        xxx_format_and_draw(0x73, 0, gUnknown_80F9174, 2, 0);
+
+        gUnknown_202DE30[0] = gTeamInventoryRef->teamMoney;
+        xxx_format_and_draw(0x73, 12, gUnknown_80F9190, 2, 0);
+
+        GetWeatherName(gAvailablePokemonNames, GetApparentWeather(NULL));
+        xxx_format_and_draw(0x73, 24, gUnknown_80F91A8, 2, 0);
+
+        gUnknown_202DE30[0] = hours;
+        gUnknown_202DE30[1] = minutes;
+        gUnknown_202DE30[2] = seconds;
+        xxx_format_and_draw(0x73, 36, gUnknown_80F91C8, 2, 0);
+        for (yLoop = 0, i = 0; i < MAX_TEAM_MEMBERS; i++) {
+            Entity *teamMon = gDungeon->teamPokemon[i];
+            if (EntityExists(teamMon)) {
+                EntityInfo *monInfo = teamMon->info;
+                SetMessageArgument(gAvailablePokemonNames, teamMon, 0);
+                gUnknown_202DE30[0] = monInfo->HP;
+                gUnknown_202DE30[1] = monInfo->maxHPStat;
+                xxx_format_and_draw(4, yLoop, gUnknown_80F91E0, 2, 0);
+                yLoop += 12;
+                if (yLoop >= 12 * MAX_TEAM_MEMBERS)
+                    break;
+            }
+        }
+        sub_80073E0(2);
+    }
+}
+
