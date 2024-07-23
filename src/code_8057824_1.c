@@ -416,8 +416,6 @@ extern u8 sub_8086AE4(s16);
 extern void sub_8072008(Entity *, Entity *, s16, u32, u32);
 extern void sub_8085374();
 
-extern void sub_8086A54(Entity *);
-
 extern void sub_803F878(u32,s32);
 
 void SceneGroudonMovement(Entity * param_1);
