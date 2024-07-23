@@ -63,10 +63,12 @@ void GroundWeather_Select(s16);
 u32 GroundLives_ExecutePlayerScriptActionLives();
 s16 GroundObject_Add(s16 id, GroundObjectData*, s16 group, s8 sector);
 s16 GroundEffect_Add(s16 id, GroundEffectData*, s16 group, s8 sector);
-u32 FlagCalc();
-u32 FlagJudge();
 void FatalError(void* loc, char* fmt, ...) __attribute__((noreturn));
 
+// Beware of the declarations without specified arguments, returning u32 or s32, these were quickly hacked in to get the code to compile and link
+// The return values are almost certainly NOT correct and will need to be rechecked when moving to header files
+u32 FlagCalc();
+u32 FlagJudge();
 s32 sub_8001658(ScriptUnion832*, s32);
 void sub_8001570(u8*, s16);
 void sub_80015C0(u8*, s16);
