@@ -19,6 +19,7 @@
 #include "trap.h"
 #include "charge_move.h"
 #include "dungeon_map_access.h"
+#include "status_checks_1.h"
 #include "game_options.h"
 #include "weather.h"
 #include "dungeon_items.h"
@@ -143,6 +144,11 @@ extern const u8 *gUnknown_80F9C2C;
 extern const u8 *gUnknown_80F9BB0;
 extern const u8 *gUnknown_80FDE18;
 extern const u8 *gUnknown_80F8B24;
+extern const u8 *gTeamToolboxAPtr;
+extern const u8 *gTeamToolboxBPtr;
+extern const u8 *gFieldItemMenuGroundTextPtr;
+extern const u8 *gUnknown_80FE940;
+extern const u8 *gWhichTextPtr1;
 
 #ifdef NONMATCHING
 
@@ -3369,31 +3375,40 @@ extern bool8 sub_8044F3C(s32 param_1);
 extern s32 gUnknown_202EE6C;
 extern const u8 gUnknown_8106B50[];
 
-extern void sub_803ECB4(struct UnkTextStruct2 *a0, u8 a1);
+typedef struct UnkTextStruct3 {
+    UnkTextStruct2 a0[4];
+    // Something ugly, so that sub_805FD74 could match weird compiler memcpy/stack initialization
+    #ifndef NONMATCHING
+    u8 fakeMatch[0];
+    #endif // NONMATCHING
+} UnkTextStruct3;
 
-// Inline needed to match.
-static inline void SetUpTxtStructs(struct UnkTextStruct2 *sp, struct UnkTextStruct2 *a0, u32 size)
+extern void sub_803ECB4(UnkTextStruct3 *a0, u8 a1);
+void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 *a4, u8 *a5);
+
+// Inline needed to (fake?)match.
+static inline void sub_805FC30_SetUpTxtStruct(UnkTextStruct3 *src)
 {
-    memset(sp, 0, size);
-    sp[0].unk4 = 3;
-    sp[1].unk4 = 3;
-    sp[1].unk8.unk0.separate.unk0 = 0x16;
-    sp[1].unk8.unk0.separate.unk2 = 4;
-    sp[1].unkC = 6;
-    sp[1].unkE = 4;
-    sp[1].unk10 = 4;
-    sp[2].unk4 = 3;
-    sp[3].unk4 = 3;
+    memset(src, 0, sizeof(*src));
+    src->a0[0].unk4 = 3;
+    src->a0[1].unk4 = 3;
+    src->a0[1].unk8.unk0.separate.unk0 = 0x16;
+    src->a0[1].unk8.unk0.separate.unk2 = 4;
+    src->a0[1].unkC = 6;
+    src->a0[1].unkE = 4;
+    src->a0[1].unk10 = 4;
+    src->a0[2].unk4 = 3;
+    src->a0[3].unk4 = 3;
 }
 
-void sub_805FC30(struct UnkTextStruct2 *a0, s32 a1)
+void sub_805FC30(UnkTextStruct3 *a0, s32 a1)
 {
     s32 i;
-    struct UnkTextStruct2 sp[4];
+    UnkTextStruct3 sp;
 
-    SetUpTxtStructs(sp, a0, sizeof(sp));
-    sp[0] = a0[0];
-    sp[0].unk0 = 0x80;
+    sub_805FC30_SetUpTxtStruct(&sp);
+    sp.a0[0] = a0->a0[0];
+    sp.a0[0].unk0 = 0x80;
 
     gUnknown_202EE10.menuIndex = 0;
     gUnknown_202EE10.unk1C = gUnknown_202EE6C;
@@ -3409,11 +3424,11 @@ void sub_805FC30(struct UnkTextStruct2 *a0, s32 a1)
 
     sub_801317C(&gUnknown_202EE10.unk28);
 
-    sp[1].unk8.unk0.separate.unk0 = a1;
-    sp[1].unkC = 28 - a1;
-    sp[1].unkE = sp[1].unk10 = sub_80095E4(gUnknown_202EE10.unk1C, 0);
-    sub_803ECB4(sp, 0);
-    sub_80137B0(&gUnknown_202EE10, sp[1].unkE * 8);
+    sp.a0[1].unk8.unk0.separate.unk0 = a1;
+    sp.a0[1].unkC = 28 - a1;
+    sp.a0[1].unkE = sp.a0[1].unk10 = sub_80095E4(gUnknown_202EE10.unk1C, 0);
+    sub_803ECB4(&sp, 0);
+    sub_80137B0(&gUnknown_202EE10, sp.a0[1].unkE * 8);
     sub_80073B8(1);
 
     for (i = 0; i < gUnknown_202EE6C; i++) {
@@ -3455,20 +3470,14 @@ extern s32 gUnknown_202F258;
 
 s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4);
 
-void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct2 *a4, u8 *a5);
 void sub_8060890(Position *a0);
 bool8 sub_8060860(s32 a0);
 void sub_8060900(Entity *a0);
-void sub_8060800(u8 *a0, s32 a1);
+s32 sub_8060800(u8 *a0, s32 a1);
 void sub_8060CE8(ActionContainer *a0);
 extern Entity *DrawFieldGiveItemMenu(u8 *a0, s32 a1);
 
-struct TestStruct {
-    UnkTextStruct2 a0[4];
-    u8 fakeMatch[0];
-};
-
-// TODO: Fix casts to (void*) and to TestStruct once more functions are decompiled.
+// TODO: Fix casts to (void*) once more functions are decompiled.
 bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
 {
     s32 i, i_r6;
@@ -3482,7 +3491,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
     EntityInfo *a0Info = a0->info;
     u32 var_3C;
 
-    struct TestStruct var_FC =
+    UnkTextStruct3 var_FC =
     {
         .a0 =
         {
@@ -3547,7 +3556,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
                 }
             }
         }
-        CreateFieldItemMenu(r8, a0, var_2C, var_30, (void*)&var_FC, (void*)&var_3C);
+        CreateFieldItemMenu(r8, a0, var_2C, var_30, &var_FC, (void*)&var_3C);
 
         id = gUnknown_202F248[gUnknown_202EE10.unk1E];
         if (id >= MAX_TEAM_MEMBERS) {
@@ -3675,7 +3684,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
 
             sub_8060900(a0);
             sub_8060800((void*)&var_3C, gUnknown_202EE10.unk1E);
-            sub_805FC30((void*)&var_FC, 0x16);
+            sub_805FC30(&var_FC, 0x16);
             while (1) {
                 AddMenuCursorSprite(&gUnknown_202EE10);
                 sub_803E46C(0x14);
@@ -3741,4 +3750,177 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
     return r9;
 }
 
-//A
+extern const struct UnkTextStruct2 gUnknown_8106B6C;
+extern const struct unkStruct_8090F58 gUnknown_8106B60;
+
+static inline Item *GetTeamItem(s32 id)
+{
+    UNUSED s32 b = id * sizeof(Item);
+    UNUSED struct Item *currItem = &gTeamInventoryRef->teamItems[id];
+    struct Item *items = gTeamInventoryRef->teamItems;
+    return &items[id];
+}
+
+static inline bool32 ItemExists(s32 id)
+{
+    UNUSED s32 b = id * 4;
+    UNUSED struct Item *currItem = &gTeamInventoryRef->teamItems[id];
+    struct Item *items = gTeamInventoryRef->teamItems;
+    return (items[id].flags & 1);
+}
+
+void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 *a4, u8 *a5)
+{
+    s32 i, x, y;
+    s32 r10;
+    UnkTextStruct1 *txtStrPtr;
+    UnkTextStruct2 var_94;
+    u8 txtBuff[80];
+    EntityInfo *a1Info;
+
+    var_94 = gUnknown_8106B6C;
+    a1Info = a1->info;
+    r10 = sub_8060800(a5, a0);
+    gUnknown_202EE10.menuIndex = gUnknown_202F240;
+    gUnknown_202EE10.unk1A = 0;
+    gUnknown_202EE10.unk1E = a0;
+    gUnknown_202EE10.unk20 = gUnknown_202F258;
+    gUnknown_202EE10.unk4 = 0;
+    gUnknown_202EE10.unk0 = 0;
+    gUnknown_202EE10.unk14.x = 0;
+    sub_801317C(&gUnknown_202EE10.unk28);
+    gDungeon->unk181e8.unk18212 = 0;
+    switch (gUnknown_202F248[a0]) {
+        case 0:
+        case 1:
+            a4->a0[0].unk10 = 0x10;
+            a4->a0[0].unkE = 0x10;
+            a5[2] = 0xC;
+            gUnknown_202EE10.unk6 = 0x10;
+            gUnknown_202EE10.unk1C = 0xA;
+            gDungeon->unk181e8.unk18212 = 1;
+            break;
+        case 2:
+            a4->a0[0].unk10 = 4;
+            a4->a0[0].unkE = 4;
+            a5[2] = 6;
+            gUnknown_202EE10.unk6 = 0x12;
+            gUnknown_202EE10.unk1C = 1;
+            break;
+        case 3:
+        default:
+            a4->a0[0].unk10 = 4;
+            a4->a0[0].unkE = 4;
+            a5[2] = 0xC;
+            gUnknown_202EE10.unk6 = 0x12;
+            gUnknown_202EE10.unk1C = 1;
+            break;
+    }
+
+    if (a2) {
+        gUnknown_202EE10.unkC += 0x40;
+        a4->a0[0].unk8.unk0.separate.unk0 = 0xA;
+        a4->a0[1] = var_94;
+    }
+    else {
+        a4->a0[0].unk8.unk0.separate.unk0 = 2;
+        a4->a0[1] = a4->a0[3];
+    }
+
+    sub_803ECB4(a4, 1);
+    txtStrPtr = &gUnknown_2027370[0];
+    gUnknown_202EE10.unkC = (txtStrPtr->unk0 + 0x10) * 8;
+    gUnknown_202EE10.unkE = ((txtStrPtr->unk2 + 1) * 8) - 2;
+    sub_80137B0(&gUnknown_202EE10, 0x70);
+    sub_80073B8(0);
+    x = ((a0 - r10) * 8) + 0xC;
+    switch (gUnknown_202F248[a0])
+    {
+    case 0:
+        xxx_format_and_draw(x, 0, gTeamToolboxAPtr, 0, 0);
+        for (i = 0; i < 10; i++) {
+            if ((ItemExists(i)))
+            {
+                gUnknown_202EE10.unk1A++;
+                sub_8090E14(txtBuff, &gTeamInventoryRef->teamItems[i], &gUnknown_8106B60);
+                y = sub_8013800(&gUnknown_202EE10, i);
+                xxx_format_and_draw(8, y, txtBuff, 0, 0);
+            }
+            else
+                break;
+        }
+        break;
+    case 1:
+        xxx_format_and_draw(x, 0, gTeamToolboxBPtr, 0, 0);
+        for (i = 0; i < 10; i++) {
+            UNUSED s32 b = i * sizeof(Item);
+            UNUSED struct Item *currItem = &gTeamInventoryRef->teamItems[i];
+            struct Item *items = gTeamInventoryRef->teamItems;
+            if (items[i + 10].flags & 1)
+            {
+                gUnknown_202EE10.unk1A++;
+                sub_8090E14(txtBuff, &gTeamInventoryRef->teamItems[i + 10], &gUnknown_8106B60);
+                y = sub_8013800(&gUnknown_202EE10, i);
+                xxx_format_and_draw(8, y, txtBuff, 0, 0);
+            }
+            else
+                break;
+        }
+        break;
+    case 2: {
+            Tile *tile = GetTile(a1->pos.x, a1->pos.y);
+            Item *item = GetItemData(tile->object);
+            xxx_format_and_draw(x, 0, gFieldItemMenuGroundTextPtr, 0, 0);
+            if (item->flags & ITEM_FLAG_EXISTS) {
+                gUnknown_202EE10.unk1A++;
+                sub_8090E14(txtBuff, item, &gUnknown_8106B60);
+                y = sub_8013800(&gUnknown_202EE10, 0);
+                xxx_format_and_draw(8, y, txtBuff, 0, 0);
+            }
+            if (a3) {
+                gUnknown_202EE10.unk8.x = gUnknown_202EE10.unk8.y = 0;
+            }
+        }
+        break;
+    case 3: {
+            Item *item = &a1->info->heldItem;
+            SetMessageArgument_2(gAvailablePokemonNames, a1Info, 0);
+            xxx_format_and_draw(x, 0, gUnknown_80FE940, 0, 0);
+            if (item->flags & ITEM_FLAG_EXISTS) {
+                gUnknown_202EE10.unk1A++;
+                sub_8090E14(txtBuff, item, &gUnknown_8106B60);
+                y = sub_8013800(&gUnknown_202EE10, 0);
+                xxx_format_and_draw(8, y, txtBuff, 0, 0);
+            }
+        }
+        break;
+    default: {
+            Entity *chosenTeamMember = gDungeon->teamPokemon[gUnknown_202F248[a0] - MAX_TEAM_MEMBERS];
+            if (EntityExists(chosenTeamMember)) {
+                Item *item = &chosenTeamMember->info->heldItem;
+                SetMessageArgument_2(gAvailablePokemonNames, chosenTeamMember->info, 0);
+                xxx_format_and_draw(x, 0, gUnknown_80FE940, 0, 0);
+                if (item->flags & ITEM_FLAG_EXISTS) {
+                    gUnknown_202EE10.unk1A++;
+                    sub_8090E14(txtBuff, item, &gUnknown_8106B60);
+                    y = sub_8013800(&gUnknown_202EE10, 0);
+                    xxx_format_and_draw(8, y, txtBuff, 0, 0);
+                }
+            }
+        }
+        break;
+    }
+
+    if (gUnknown_202EE10.menuIndex >= gUnknown_202EE10.unk1A) {
+        gUnknown_202EE10.menuIndex = 0;
+    }
+    sub_80073E0(0);
+    if (a2) {
+        sub_80073B8(1);
+        xxx_format_and_draw(4, 2, gWhichTextPtr1, 1, 0);
+        sub_80073E0(1);
+    }
+}
+
+
+//

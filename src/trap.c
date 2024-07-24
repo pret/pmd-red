@@ -411,19 +411,20 @@ void HandleStickyTrap(Entity *pokemon,Entity *target)
     {
         itemCount = 0;
         if (info->isTeamLeader) {
-            for (index = 0; index < 20; index++) {
-                // Matching shenanigans. The unused variable is NEEDED to match.
-                UNUSED struct Item *currItem = &gTeamInventoryRef->teamItems[index];
-                struct Item *items = gTeamInventoryRef->teamItems;
-                if ((items[index].flags & 1)
+            for (index = 0; index < INVENTORY_SIZE; index++) {
+                struct Item *items;
+                DUMMY_TEAM_ITEMS_ASM_MATCH(index);
+
+                items = gTeamInventoryRef->teamItems;
+                if ((items[index].flags & ITEM_FLAG_EXISTS)
                     && IsNotSpecialItem(items[index].id)
-                    && !(gTeamInventoryRef->teamItems[index].flags & 8)) {
+                    && !(gTeamInventoryRef->teamItems[index].flags & ITEM_FLAG_STICKY)) {
                         itemStack[itemCount] = &gTeamInventoryRef->teamItems[index];
                         itemCount++;
                     }
             }
         }
-        if ((info->heldItem.flags & 1) && IsNotSpecialItem((info->heldItem).id) && !(info->heldItem.flags & 8)) {
+        if ((info->heldItem.flags & ITEM_FLAG_EXISTS) && IsNotSpecialItem((info->heldItem).id) && !(info->heldItem.flags & ITEM_FLAG_STICKY)) {
               itemStack[itemCount] = &info->heldItem;
               itemCount++;
         }
@@ -434,7 +435,7 @@ void HandleStickyTrap(Entity *pokemon,Entity *target)
         else {
           newIndex = DungeonRandInt(itemCount);
           sub_8045BF8(gUnknown_202DE58, itemStack[newIndex]);
-          itemStack[newIndex]->flags |= 8;
+          itemStack[newIndex]->flags |= ITEM_FLAG_STICKY;
           sub_80421C0(target, 0x192);
           sub_80522F4(pokemon,target,*gUnknown_80FDC18);
         }

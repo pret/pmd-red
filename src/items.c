@@ -41,7 +41,7 @@ bool8 AddKecleonWareItem(u8);
 
 #include "data/items.h"
 
-static void sub_8090F58(u8 *, u8 *, Item *, unkStruct_8090F58 *);
+static void sub_8090F58(u8 *, u8 *, Item *, const unkStruct_8090F58 *);
 
 void LoadItemParameters(void)
 {
@@ -312,7 +312,7 @@ extern const u8 gUnknown_810977C[];
 extern const u8 gUnknown_8109784[];
 extern const u8 gUnknown_810978C[];
 
-void sub_8090E14(u8* ext_buffer, Item* slot, struct unkStruct_8090F58* a3) {
+void sub_8090E14(u8* ext_buffer, Item* slot, const struct unkStruct_8090F58* a3) {
   s32 unk8 = 0;
   u8 buffer[80];
 
@@ -372,7 +372,7 @@ void sub_8090E14(u8* ext_buffer, Item* slot, struct unkStruct_8090F58* a3) {
   return;
 }
 
-static void sub_8090F58(u8* a1, u8 *a2, Item *slot, struct unkStruct_8090F58* a4) {
+static void sub_8090F58(u8* a1, u8 *a2, Item *slot, const struct unkStruct_8090F58* a4) {
   u32 unk0;
   s32 value;
   u8 buffer[40];
@@ -484,18 +484,14 @@ void FillInventoryGaps()
 
   // clear out the rest of the slots
   for (; last_filled < INVENTORY_SIZE; last_filled++) {
-      Item *slot;
-#ifdef NONMATCHING
-      slot = &gTeamInventoryRef->teamItems[last_filled];
-#else
-      size_t offs = last_filled << 2;
-      size_t _slot = offs;
-      _slot += (size_t)gTeamInventoryRef->teamItems;
-      slot = (Item*)_slot; // &gTeamInventoryRef->teamItems[end];
-#endif
-      slot->id = ITEM_NOTHING;
-      slot->quantity = 0;
-      slot->flags = 0;
+      struct Item *items;
+
+      DUMMY_TEAM_ITEMS_ASM_MATCH(last_filled);
+      items = gTeamInventoryRef->teamItems;
+
+      items[last_filled].id = ITEM_NOTHING;
+      items[last_filled].quantity = 0;
+      items[last_filled].flags = 0;
   }
 }
 
@@ -588,7 +584,7 @@ bool8 AddItemToInventory(const Item* slot)
   return TRUE;
 }
 
-void ConvertMoneyItemToMoney()
+void ConvertMoneyItemToMoney(void)
 {
   s32 i = 0;
 
@@ -909,14 +905,16 @@ bool8 IsGummiItem(u8 id)
 
 bool8 HasGummiItem(void)
 {
-  s32 i;
-  for (i = 0; i < INVENTORY_SIZE; i++) {
-    UNUSED size_t offs = offsetof(TeamInventory, teamItems[i]);
-    if ((i[gTeamInventoryRef->teamItems].flags & ITEM_FLAG_EXISTS) && IsGummiItem(i[gTeamInventoryRef->teamItems].id)) {
-      return TRUE;
+    struct Item *items;
+    s32 i;
+    for (i = 0; i < INVENTORY_SIZE; i++) {
+        DUMMY_TEAM_ITEMS_ASM_MATCH(i);
+        items = gTeamInventoryRef->teamItems;
+        if ((items[i].flags & ITEM_FLAG_EXISTS) && IsGummiItem(items[i].id)) {
+            return TRUE;
+        }
     }
-  }
-  return FALSE;
+    return FALSE;
 }
 
 void MoveToStorage(Item* slot)

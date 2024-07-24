@@ -31,7 +31,7 @@ u32 GetSpawnAmountRange(u8 id, u32 r1);
 u8 *GetItemDescription(u8 id);
 bool8 GetItemAIFlag(u8 id, u32 r1);
 void BufferItemName(u8 *, u8 id, unkStruct_8090F58 *);
-void sub_8090E14(u8 *ext_buffer, Item *slot, unkStruct_8090F58 *);
+void sub_8090E14(u8 *ext_buffer, Item *slot, const unkStruct_8090F58 *);
 bool8 AddItemToInventory(const Item* slot);
 void ConvertMoneyItemToMoney();
 void AddToTeamMoney(s32 amount);
@@ -82,5 +82,13 @@ s32 SaveTeamInventory(u8 *, u32 size);
 
 s32 sub_8090FEC(s32, u8 *strbuf, u8);
 u32 sub_80913E0(Item *slot, u32, struct subStruct_203B240 **);
+
+// This macro doesn't do anything, it creates unused variables for the purpose of tricking the compiler and matching the asm.
+// It's possible there was some unknown macro, or the structure of TeamInventory/Item is not 100% how it was originally written.
+#define DUMMY_TEAM_ITEMS_ASM_MATCH(id)                                  \
+{                                                                       \
+    UNUSED size_t offs = id * sizeof(Item);                             \
+    UNUSED Item *item = &gTeamInventoryRef->teamItems[id];              \
+}
 
 #endif // GUARD_ITEMS_H
