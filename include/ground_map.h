@@ -11,8 +11,8 @@ extern unkStruct_3001B70 *gUnknown_3001B70;
 
 void GroundMap_Reset(void);
 
-void sub_80A4A7C(void);
-void sub_80A4AC4(void);
+void AllocGroundMapAction(void);
+void FreeGroundMapAction(void);
 void sub_80A4B38(void);
 void sub_80A4B54(void);
 

@@ -18,7 +18,7 @@
 #include "wigglytuff_shop2.h"
 #include "wigglytuff_shop3.h"
 
-extern u32 gUnknown_202DE30[2];
+extern u32 gFormatData_202DE30[2];
 extern u8 gAvailablePokemonNames[]; // 202DF98
 extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
@@ -234,7 +234,7 @@ static void UpdateWigglytuffDialogue(void)
         case BUY_FRIEND_AREA:
             CreateWigglytuffConfirmFriendAreaMenu();
             sub_8092578(gUnknown_202E628, sWigglytuffShop3Work->chosenFriendArea, FALSE);
-            gUnknown_202DE30[0] = sWigglytuffShop3Work->friendAreaPrice;
+            gFormatData_202DE30[0] = sWigglytuffShop3Work->friendAreaPrice;
             sub_8014248(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_05], 0, 5, sWigglytuffShop3Work->unk1C, 0, 4, 0, sWigglytuffShop3Work->unkCC, 12);
             break;
         case FRIEND_AREA_INFO:

@@ -143,7 +143,7 @@ u32 sub_809A768(void)
     return 0;
 }
 
-u8 sub_809A76C(void)
+u8 ScriptPrintNullTextbox(void)
 {
     switch(gUnknown_3001B64->unk0)
     {
@@ -158,7 +158,7 @@ u8 sub_809A76C(void)
     }
 }
 
-u8 sub_809A7B4(void)
+u8 ScriptPrintEmptyTextbox(void)
 {
     switch(gUnknown_3001B64->unk0)
     {

@@ -1,4 +1,6 @@
 #include "global.h"
+#include "code_8086A3C.h"
+
 #include "code_803E46C.h"
 #include "code_803E668.h"
 #include "code_806CD90.h"
@@ -26,9 +28,7 @@ extern void SkarmoryEntry(Entity *);
 extern void sub_8086A54(Entity *);
 extern void sub_8087144();
 extern void sub_8072008(Entity *pokemon, Entity *r1, u32 r2, u8 r3, u32);
-extern bool8 sub_8085B80(u8 *);
-// TODO The parameters don't match the function definition in dungeon_util_1.h (struct_8085B80*, s16**, Entity**, s32).
-extern void sub_8085B4C(u8 *, void *, Entity **, u32);
+extern bool8 sub_8085B80(struct_8087144 *);
 
 extern const u8 gUnknown_810739C[];
 extern const u8 gUnknown_81073D4[];
@@ -394,12 +394,12 @@ void sub_8087144(void)
     Entity *iVar2;
     Entity *iVar3;
     Entity *iVar4;
-    u8 auStack_10c [56];
-    u8 puStack_60[56];
-    u8 puStack_5c[56];
-    u8 *puStack_64[3];
+    s16 auStack_10c[28];
+    s16 puStack_60[28];
+    s16 puStack_5c[28];
+    s16 *puStack_64[3];
     Entity *pEStack_58[3];
-    u8 auStack_4c [48];
+    struct_8087144 auStack_4c;
 
     iVar2 = GetEntityFromClientType(5);
     iVar3 = GetEntityFromClientType(6);
@@ -417,12 +417,12 @@ void sub_8087144(void)
     sub_8086A54(iVar2);
     sub_8086A54(iVar3);
     sub_8086A54(iVar4);
-    sub_8085B4C(auStack_4c,puStack_64,pEStack_58,3);
+    sub_8085B4C(&auStack_4c.unk0,puStack_64,pEStack_58,3);
     iVar2->info->unk15F = 1;
     iVar3->info->unk15F = 1;
     iVar4->info->unk15F = 1;
     while( TRUE ) {
-        if (!sub_8085B80(auStack_4c)) break;
+        if (!sub_8085B80(&auStack_4c)) break;
         sub_803E46C(0x46);
     }
     iVar2->info->unk15F = 0;

@@ -183,10 +183,10 @@ gUnknown_202DE19: /* 202DE19 (sub_800F990 - sub_8010014) */
     .include "src/save.o"
 	.align 4
 
-/* gUnknown_202DE30[0] seems to be the s32 value to insert in place of "$d0" (ARG_VALUE_0) in strings */
-/* gUnknown_202DE30[1] through gUnknown_202DE30[4] are for "$d1" (ARG_VALUE_1) through "$d4" (ARG_VALUE_4) */
+/* gFormatData_202DE30[0] seems to be the s32 value to insert in place of "$d0" (ARG_VALUE_0) in strings */
+/* gFormatData_202DE30[1] through gFormatData_202DE30[4] are for "$d1" (ARG_VALUE_1) through "$d4" (ARG_VALUE_4) */
 /* No known occurences after those (in pmd red) */
-gUnknown_202DE30: /* 202DE30 [used everywhere tbh] */
+gFormatData_202DE30: /* 202DE30 [used everywhere tbh] */
 	.space 0x28
 /* Seems to be a general u8 buffer for text, mostly used with item names */
 gUnknown_202DE58: /* 202DE58 [used everywhere tbh] */
@@ -579,7 +579,7 @@ gUnknown_20399E8: /* 20399E8 (sub_809D0BC - sub_809D25C) */
 	.space 0x14
 gUnknown_20399FC: /* 20399FC (sub_809D25C) */
 	.space 0x34
-gUnknown_2039A30: /* 2039A30 (sub_809D4B0 - ExecuteScriptCommand) */
+gCurrentMap: /* 2039A30 (sub_809D4B0 - ExecuteScriptCommand) */
 	.space 0x2
 gUnknown_2039A32: /* 2039A32 (sub_809D4B0 - ExecuteScriptCommand) */
 	.space 0x2

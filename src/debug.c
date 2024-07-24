@@ -170,7 +170,7 @@ void nullsub_28(void)
 {
 }
 
-u32 sub_8011BA4(void)
+s8 ScriptLoggingEnabled(bool8 unused)
 {
     return 0;
 }

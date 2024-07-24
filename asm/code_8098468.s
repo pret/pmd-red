@@ -111,7 +111,7 @@ _08098522:
 	bl sub_809C5C4
 	bl sub_809A560
 	bl sub_809CB50
-	bl sub_80A4A7C
+	bl AllocGroundMapAction
 	bl nullsub_117
 	bl sub_80AD990
 	bl sub_80A77F8
@@ -164,7 +164,7 @@ _080985DC:
 	movs r0, 0x1
 	negs r0, r0
 	bl sub_809A71C
-	bl sub_809A76C
+	bl ScriptPrintNullTextbox
 	bl sub_809977C
 	ldr r0, _08098600
 	ldr r0, [r0]
@@ -394,10 +394,10 @@ _080987C0:
 	bl sub_809A62C
 	bl GroundMap_Reset
 	bl sub_809D0BC
-	bl sub_80AD9D0
-	bl sub_80A786C
-	bl sub_80ABB98
-	bl sub_80ACBD4
+	bl DeleteBlankGroundEvents
+	bl DeleteBlankGroundLives
+	bl DeleteBlankGroundObjects
+	bl DeleteBlankGroundEffects
 	bl sub_809C658
 	bl nullsub_16
 	bl sub_8097944
@@ -539,7 +539,7 @@ _08098988:
 	bhi _08098990
 	b _080985DC
 _08098990:
-	bl sub_80A4AC4
+	bl FreeGroundMapAction
 	bl nullsub_118
 	bl sub_80A78F0
 	bl sub_80ABBD4

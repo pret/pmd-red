@@ -3244,7 +3244,7 @@ extern const u8 *const gUnknown_80F91A8;
 const u8 *sub_805317C(void);
 void GetWeatherName(u8 *dst, u8 weatherId);
 
-extern s32 gUnknown_202DE30[];
+extern s32 gFormatData_202DE30[];
 
 void DrawFieldMenu(u8 a0)
 {
@@ -3314,27 +3314,27 @@ void DrawFieldMenu(u8 a0)
         sub_80073B8(2);
         DeconstructPlayTime(gPlayTimeRef, &hours, &minutes, &seconds);
 
-        gUnknown_202DE30[0] = RoundUpFixedPoint(leaderInfo->belly);
-        gUnknown_202DE30[1] = RoundUpFixedPoint(leaderInfo->maxBelly);
+        gFormatData_202DE30[0] = RoundUpFixedPoint(leaderInfo->belly);
+        gFormatData_202DE30[1] = RoundUpFixedPoint(leaderInfo->maxBelly);
         xxx_format_and_draw(0x73, 0, gUnknown_80F9174, 2, 0);
 
-        gUnknown_202DE30[0] = gTeamInventoryRef->teamMoney;
+        gFormatData_202DE30[0] = gTeamInventoryRef->teamMoney;
         xxx_format_and_draw(0x73, 12, gUnknown_80F9190, 2, 0);
 
         GetWeatherName(gAvailablePokemonNames, GetApparentWeather(NULL));
         xxx_format_and_draw(0x73, 24, gUnknown_80F91A8, 2, 0);
 
-        gUnknown_202DE30[0] = hours;
-        gUnknown_202DE30[1] = minutes;
-        gUnknown_202DE30[2] = seconds;
+        gFormatData_202DE30[0] = hours;
+        gFormatData_202DE30[1] = minutes;
+        gFormatData_202DE30[2] = seconds;
         xxx_format_and_draw(0x73, 36, gUnknown_80F91C8, 2, 0);
         for (yLoop = 0, i = 0; i < MAX_TEAM_MEMBERS; i++) {
             Entity *teamMon = gDungeon->teamPokemon[i];
             if (EntityExists(teamMon)) {
                 EntityInfo *monInfo = teamMon->info;
                 SetMessageArgument(gAvailablePokemonNames, teamMon, 0);
-                gUnknown_202DE30[0] = monInfo->HP;
-                gUnknown_202DE30[1] = monInfo->maxHPStat;
+                gFormatData_202DE30[0] = monInfo->HP;
+                gFormatData_202DE30[1] = monInfo->maxHPStat;
                 xxx_format_and_draw(4, yLoop, gUnknown_80F91E0, 2, 0);
                 yLoop += 12;
                 if (yLoop >= 12 * MAX_TEAM_MEMBERS)

@@ -747,8 +747,8 @@ _0809AE8A:
 	bx r1
 	thumb_func_end sub_809AE3C
 
-	thumb_func_start sub_809AE90
-sub_809AE90:
+	thumb_func_start ScriptPrintText
+ScriptPrintText:
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r4, r2, 0
@@ -756,7 +756,7 @@ sub_809AE90:
 	asrs r6, r1, 16
 	cmp r4, 0
 	bne _0809AEA4
-	bl sub_809A76C
+	bl ScriptPrintNullTextbox
 	b _0809AEE0
 _0809AEA4:
 	ldrb r0, [r4]
@@ -784,14 +784,14 @@ _0809AED0: .4byte gUnknown_8116134
 _0809AED4: .4byte gUnknown_3001B64
 _0809AED8: .4byte gUnknown_8116148
 _0809AEDC:
-	bl sub_809A7B4
+	bl ScriptPrintEmptyTextbox
 _0809AEE0:
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809AE90
+	thumb_func_end ScriptPrintText
 
 	thumb_func_start sub_809AEEC
 sub_809AEEC:
@@ -817,7 +817,7 @@ sub_809AEEC:
 	.align 2, 0
 _0809AF18: .4byte gUnknown_3001B64
 _0809AF1C:
-	bl sub_809A76C
+	bl ScriptPrintNullTextbox
 _0809AF20:
 	lsls r0, 24
 	lsrs r0, 24
@@ -850,7 +850,7 @@ sub_809AF2C:
 	.align 2, 0
 _0809AF58: .4byte gUnknown_3001B64
 _0809AF5C:
-	bl sub_809A76C
+	bl ScriptPrintNullTextbox
 _0809AF60:
 	lsls r0, 24
 	lsrs r0, 24
@@ -883,7 +883,7 @@ sub_809AF6C:
 	.align 2, 0
 _0809AF98: .4byte gUnknown_3001B64
 _0809AF9C:
-	bl sub_809A76C
+	bl ScriptPrintNullTextbox
 _0809AFA0:
 	lsls r0, 24
 	lsrs r0, 24

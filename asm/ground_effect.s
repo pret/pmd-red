@@ -32,7 +32,7 @@ _080ACBB0:
 	adds r1, r4
 	cmp r0, 0xF
 	ble _080ACBB0
-	bl sub_80ACBD4
+	bl DeleteBlankGroundEffects
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -41,8 +41,8 @@ _080ACBCC: .4byte gUnknown_3001B8C
 _080ACBD0: .4byte 0x0000ffff
 	thumb_func_end sub_80ACB90
 
-	thumb_func_start sub_80ACBD4
-sub_80ACBD4:
+	thumb_func_start DeleteBlankGroundEffects
+DeleteBlankGroundEffects:
 	push {r4-r6,lr}
 	ldr r0, _080ACC0C
 	ldr r4, [r0]
@@ -74,12 +74,12 @@ _080ACBF2:
 	bx r0
 	.align 2, 0
 _080ACC0C: .4byte gUnknown_3001B8C
-	thumb_func_end sub_80ACBD4
+	thumb_func_end DeleteBlankGroundEffects
 
 	thumb_func_start sub_80ACC10
 sub_80ACC10:
 	push {r4,lr}
-	bl sub_80ACBD4
+	bl DeleteBlankGroundEffects
 	ldr r4, _080ACC28
 	ldr r0, [r4]
 	bl MemoryFree
@@ -621,7 +621,7 @@ _080AD01A:
 	adds r0, r4, 0
 	adds r2, r5, 0
 	mov r3, r10
-	bl sub_809D600
+	bl InitActionWithParams
 	ldr r2, [r7, 0x8]
 	cmp r2, 0
 	bne _080AD04C
@@ -641,7 +641,7 @@ _080AD048:
 _080AD04C:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_809D6D8
+	bl SetPredefinedScript
 	ldr r3, _080AD07C
 	adds r0, r4, 0
 	movs r1, 0

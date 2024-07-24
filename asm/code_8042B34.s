@@ -874,7 +874,7 @@ _08043208: .4byte 0x0000067c
 _0804320C: .4byte 0x00ffffff
 _08043210: .4byte gDungeon
 _08043214: .4byte 0x00000644
-_08043218: .4byte gUnknown_202DE30
+_08043218: .4byte gFormatData_202DE30
 _0804321C: .4byte 0x0000067b
 _08043220: .4byte gUnknown_80FEC48
 _08043224:
@@ -948,7 +948,7 @@ _0804326A:
 _080432B4: .4byte gUnknown_80FEC7C
 _080432B8: .4byte gDungeon
 _080432BC: .4byte 0x00000644
-_080432C0: .4byte gUnknown_202DE30
+_080432C0: .4byte gFormatData_202DE30
 _080432C4: .4byte gUnknown_81002B8
 _080432C8:
 	ldr r4, _080432CC

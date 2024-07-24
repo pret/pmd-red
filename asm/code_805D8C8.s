@@ -2011,7 +2011,7 @@ _080613EE:
 	b _08061438
 	.align 2, 0
 _0806141C: .4byte gUnknown_8106BD0
-_08061420: .4byte gUnknown_202DE30
+_08061420: .4byte gFormatData_202DE30
 _08061424: .4byte gUnknown_202EE10
 _08061428: .4byte gUnknown_8106BD4
 _0806142C:

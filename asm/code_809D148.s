@@ -8,8 +8,8 @@
 
 
 
-	thumb_func_start sub_809D600
-sub_809D600:
+	thumb_func_start InitActionWithParams
+InitActionWithParams:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -22,7 +22,7 @@ sub_809D600:
 	asrs r4, 16
 	lsls r5, 24
 	asrs r5, 24
-	bl sub_809D5B8
+	bl InitAction
 	str r6, [r7]
 	mov r0, r8
 	str r0, [r7, 0x4]
@@ -45,12 +45,12 @@ _0809D63C:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_809D600
+	thumb_func_end InitActionWithParams
 
 	thumb_func_start sub_809D648
 sub_809D648:
 	push {lr}
-	bl sub_809D5B8
+	bl InitAction
 	pop {r0}
 	bx r0
 	thumb_func_end sub_809D648
