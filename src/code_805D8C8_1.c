@@ -10,6 +10,7 @@
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "pokemon.h"
+#include "dungeon_music.h"
 #include "code_8045A00.h"
 #include "code_80130A8.h"
 #include "code_803E46C.h"
@@ -141,6 +142,7 @@ extern const u8 *gUnknown_80F9C08;
 extern const u8 *gUnknown_80F9C2C;
 extern const u8 *gUnknown_80F9BB0;
 extern const u8 *gUnknown_80FDE18;
+extern const u8 *gUnknown_80F8B24;
 
 #ifdef NONMATCHING
 
@@ -3109,23 +3111,18 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
                 }
                 else if (GetLeaderActionId() == 0x1D) {
                     sub_80637E8(GetLeaderActionContainer());
-
                 }
                 else if (GetLeaderActionId() == 0x1E || GetLeaderActionId() == 0x33) {
                     sub_8063A70(GetLeaderActionContainer(), FALSE);
-
                 }
                 else if (GetLeaderActionId() == 0x1F) {
                     sub_8063B54(GetLeaderActionContainer());
-
                 }
                 else if (GetLeaderActionId() == 0x20) {
                     sub_8063BB4(GetLeaderActionContainer());
-
                 }
                 else if (GetLeaderActionId() == 0x21) {
                     sub_8063CF0(GetLeaderActionContainer(), FALSE);
-
                 }
                 else {
                     break;
@@ -3430,3 +3427,318 @@ void sub_805FC30(struct UnkTextStruct2 *a0, s32 a1)
     }
     sub_80073E0(1);
 }
+
+bool8 sub_805FD3C(struct UnkMenuBitsStruct *a0)
+{
+    u16 action = GetLeaderActionId();
+
+    a0->a0_8 = 0;
+    a0->a0_16 = 0;
+    a0->a0_24 = 0;
+    a0->a0_32 = 0;
+    if (action == 0xA) {
+        a0->a0_8 = 1;
+        a0->a0_32 = 1;
+    }
+    if (action == 0x3E) {
+        a0->a0_8 = 1;
+        a0->a0_16 = 0;
+        a0->a0_32 = 1;
+    }
+    return a0->a0_8;
+}
+
+extern unkStruct_8044CC8 gUnknown_202F238;
+extern s32 gUnknown_202F240;
+extern s16 gUnknown_202F248[];
+extern s32 gUnknown_202F258;
+
+s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4);
+
+void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct2 *a4, u8 *a5);
+void sub_8060890(Position *a0);
+bool8 sub_8060860(s32 a0);
+void sub_8060900(Entity *a0);
+void sub_8060800(u8 *a0, s32 a1);
+void sub_8060CE8(ActionContainer *a0);
+extern Entity *DrawFieldGiveItemMenu(u8 *a0, s32 a1);
+
+struct TestStruct {
+    UnkTextStruct2 a0[4];
+    u8 fakeMatch[0];
+};
+
+// TODO: Fix casts to (void*) and to TestStruct once more functions are decompiled.
+bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
+{
+    s32 i, i_r6;
+    s32 r8;
+    s32 r9 = 0;
+
+    u8 var_34 = 1;
+    u8 var_30 = 0;
+    u8 var_2C = 0;
+    u8 var_28 = 0;
+    EntityInfo *a0Info = a0->info;
+    u32 var_3C;
+
+    struct TestStruct var_FC =
+    {
+        .a0 =
+        {
+            [0] =
+            {
+                .unk4 = 6,
+                .unk8 = {2, 2},
+                .unkC = 0x12,
+                .unkE = 0x10,
+                .unk10 = 0x10,
+                .unk14 = (void*)(&var_3C),
+            },
+            {.unk4 = 3}, {.unk4 = 3}, {.unk4 = 3},
+        },
+    };
+
+    gUnknown_202F238.actionUseIndex = 0;
+    gUnknown_202F238.lastItemThrowPosition.x = 0;
+    gUnknown_202F238.lastItemThrowPosition.y = 0;
+    if (a1 != NULL) {
+        var_2C = (a1->a0_8 != 0);
+        var_34 = (a1->a0_16 != 0);
+        var_30 = (a1->a0_24 != 0);
+        var_28 = (a1->a0_32 != 0);
+    }
+
+    gUnknown_202F258 = sub_8060D64(gUnknown_202F248, var_30, var_34, var_28, a0);
+    if (gUnknown_202F258 == 0) {
+        PrintFieldMessage(0, gUnknown_80F8B24, 1);
+        return TRUE;
+    }
+
+    r8 = 0;
+    gUnknown_202F240 = 0;
+    while (1)
+    {
+        s32 id;
+        Entity *r4;
+
+        r9 = 0;
+        for (i = 0; i < INVENTORY_SIZE; i++) {
+            Item *item = &gTeamInventoryRef->teamItems[i];
+            if (item->flags & ITEM_FLAG_EXISTS && item->flags & ITEM_FLAG_UNPAID) {
+                item->flags &= ~(ITEM_FLAG_UNPAID);
+                r8 = i / 10;
+                gUnknown_202F240 = i % 10;
+            }
+        }
+        for (i_r6 = 0; i_r6 < MAX_TEAM_MEMBERS; i_r6++) {
+            Entity *teamMon = gDungeon->teamPokemon[i_r6];
+            if (EntityExists(teamMon)) {
+                EntityInfo *monInfo = teamMon->info;
+                if (monInfo->heldItem.flags & ITEM_FLAG_EXISTS && monInfo->heldItem.flags & ITEM_FLAG_UNPAID) {
+                    monInfo->heldItem.flags &= ~(ITEM_FLAG_UNPAID);
+                    for (i = 0; i < gUnknown_202F258; i++) {
+                        if (gUnknown_202F248[i] == i_r6 + 4) {
+                            r8 = i;
+                            break;
+                        }
+                    }
+                    gUnknown_202F240 = 0;
+                }
+            }
+        }
+        CreateFieldItemMenu(r8, a0, var_2C, var_30, (void*)&var_FC, (void*)&var_3C);
+
+        id = gUnknown_202F248[gUnknown_202EE10.unk1E];
+        if (id >= MAX_TEAM_MEMBERS) {
+            r4 = gDungeon->teamPokemon[id - MAX_TEAM_MEMBERS];
+        }
+        else {
+            r4 = a0;
+        }
+        sub_806A2BC(r4, 0);
+        sub_804A728(&r4->pos, 0, 1, 1);
+
+        while (1) {
+            AddMenuCursorSprite(&gUnknown_202EE10);
+            sub_803E46C(0x14);
+            if (!var_30) {
+                if (gUnknown_202F258 > 1) {
+                    if ((gRealInputs.pressed & DPAD_LEFT) || gUnknown_202EE10.unk28.dpad_left) {
+                        sub_8083CE0(0);
+                        if (--r8 < 0) {
+                            r8 = gUnknown_202F258 - 1;
+                        }
+                        gUnknown_202F240 = var_30;
+                        break;
+                    }
+                    if ((gRealInputs.pressed & DPAD_RIGHT) || gUnknown_202EE10.unk28.dpad_right) {
+                        sub_8083CE0(0);
+                        if (++r8 == gUnknown_202F258) {
+                            r8 = 0;
+                        }
+                        gUnknown_202F240 = var_30;
+                        break;
+                    }
+                }
+                if (gRealInputs.repeated & DPAD_DOWN && sub_8060860(r8)) {
+                    sub_8083CE0(1);
+                    sub_80136E0(&gUnknown_202EE10, 1);
+                }
+                if (gRealInputs.repeated & DPAD_UP && sub_8060860(r8)) {
+                    sub_8083CE0(1);
+                    sub_8013744(&gUnknown_202EE10, 1);
+                }
+                if (gRealInputs.pressed & SELECT_BUTTON && gUnknown_202F248[r8] <= 1) {
+                    s32 r3;
+                    bool32 r7 = TRUE;
+                    s16 arr[10];
+
+                    PlaySoundEffect(0x132);
+                    sub_8047158();
+                    ConvertMoneyItemToMoney();
+                    gUnknown_202F240 = 0;
+                    r3 = sub_8060D64(arr, var_30, var_34, var_28, a0);
+                    if (gUnknown_202F258 == r3) {
+                        for (i_r6 = 0; i_r6 < r3; i_r6++) {
+                            if (arr[i_r6] != gUnknown_202F248[i_r6]) {
+                                break;
+                            }
+                        }
+                        if (i_r6 == r3) {
+                            r7 = FALSE;
+                        }
+                    }
+                    if (r7) {
+                        r8 = 0;
+                        gUnknown_202F240 = 0;
+                        gUnknown_202F258 = r3;
+                        for (i_r6 = 0; i_r6 < gUnknown_202F258; i_r6++) {
+                            gUnknown_202F248[i_r6] = arr[i_r6];
+                        }
+                    }
+                    break;
+                }
+                if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
+                    sub_8083D08();
+                    sub_8060890(&a0->pos);
+                    r9 = 1;
+                    break;
+                }
+                if (gRealInputs.pressed & START_BUTTON) {
+                    sub_8083D44();
+                    sub_8060890(&a0->pos);
+                    r9 = 3;
+                    break;
+                }
+                if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
+                    sub_8083D30();
+                    r9 = 2;
+                    break;
+                }
+            }
+            else {
+                sub_8060890(&a0->pos);
+                r9 = 1;
+                break;
+            }
+        }
+        AddMenuCursorSprite(&gUnknown_202EE10);
+        sub_803E46C(0x14);
+        if (gUnknown_202F248[gUnknown_202EE10.unk1E] <= 1 && !(gTeamInventoryRef->teamItems[0].flags & ITEM_FLAG_EXISTS)) {
+            r9 = 2;
+        }
+
+        if (r9 == 2) {
+            sub_803EAF0(0, NULL);
+            r9 = 1;
+            break;
+        }
+        else if (r9 == 0) {
+            continue;
+        }
+        else if (r9 == 3) {
+            SetMonsterActionFields(&a0Info->action, 0xC);
+            a0Info->action.unk4[0] = gUnknown_202F238;
+            sub_803EAF0(0, NULL);
+            r9 = 0;
+            break;
+        }
+        else {
+            gUnknown_202F240 = gUnknown_202EE10.menuIndex;
+            if (var_2C != 0) {
+                a0Info->action.unk4[1] = gUnknown_202F238;
+                sub_803EAF0(0, NULL);
+                r9 = 0;
+                break;
+            }
+
+            sub_8060900(a0);
+            sub_8060800((void*)&var_3C, gUnknown_202EE10.unk1E);
+            sub_805FC30((void*)&var_FC, 0x16);
+            while (1) {
+                AddMenuCursorSprite(&gUnknown_202EE10);
+                sub_803E46C(0x14);
+                if (gRealInputs.repeated & DPAD_DOWN) {
+                    sub_8083CE0(1);
+                    sub_80136E0(&gUnknown_202EE10, 1);
+                }
+                if (gRealInputs.repeated & DPAD_UP) {
+                    sub_8083CE0(1);
+                    sub_8013744(&gUnknown_202EE10, 1);
+                }
+                if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
+                    if (sub_8044F3C(gUnknown_202EE10.menuIndex)) {
+                        sub_8083D08();
+                        sub_8060CE8(&a0Info->action);
+                        r9 = 0;
+                        break;
+                    }
+                    sub_8083D30();
+                }
+                if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
+                    sub_8083D30();
+                    r9 = 1;
+                    break;
+                }
+            }
+            AddMenuCursorSprite(&gUnknown_202EE10);
+            sub_803E46C(0x14);
+            gDungeon->unk181e8.unk18212 = 0;
+            if (r9 != 1 || var_30 != 0) {
+                if (a0Info->action.action == 0x37 || a0Info->action.action == 0x38 || a0Info->action.action == 0x3E) {
+                    // Hm...
+                    int newAction = gUnknown_202F238.actionUseIndex - 0x90;
+                    a0Info->action.unk4[0].actionUseIndex = newAction;
+                    sub_803EAF0(0, 0);
+                    r9 = 0;
+                    break;
+                }
+                else if (a0Info->action.action == 0x36) {
+                    u32 var_38;
+                    if (DrawFieldGiveItemMenu((void*)&var_38, 2) != NULL) {
+                        a0Info->action.unk4[1].actionUseIndex = var_38;
+                        sub_803EAF0(0, 0);
+                        r9 = 0;
+                        break;
+                    }
+                    sub_803EAF0(0, NULL);
+                    sub_8044C10(1);
+                }
+                else {
+                    sub_803EAF0(0, 0);
+                    r9 = 0;
+                    break;
+                }
+            }
+        }
+    }
+
+    gDungeon->unk181e8.unk18212 = 0;
+    sub_803E708(2, 0x61);
+    sub_804AA60();
+    sub_803E708(2, 0x61);
+    return r9;
+}
+
+//A
