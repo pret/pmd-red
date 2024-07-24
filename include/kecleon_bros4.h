@@ -6,6 +6,7 @@
 #include "structs/str_text.h"
 
 // size: 0xF4
+// TODO: UNIFY
 typedef struct unkStruct_203B224
 {
     u32 unk0;
@@ -14,7 +15,7 @@ typedef struct unkStruct_203B224
     u32 unk88;
     UnkTextStruct2 *unk8C;
     UnkTextStruct2 unk90[4];
-    u8 unkF0[4];
+    UnkTextStruct2_sub2 unkF0;
 } unkStruct_203B224;
 
 bool8 sub_801A5D8(u32, s32, UnkTextStruct2_sub *, u32);

@@ -5,13 +5,14 @@
 #include "structs/str_text.h"
 
 // size: 0xA0
+// TODO: UNIFY THIS
 struct unkStruct_203B268
 {
     MenuInputStruct input;
     u32 unk34;
     UnkTextStruct2 *unk38;
     UnkTextStruct2 unk3C[4];
-    u8 unk9C[4];
+    UnkTextStruct2_sub2 unk9C;
 };
 
 bool8 CreateHintDisplayScreen(u32 index);

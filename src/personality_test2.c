@@ -40,12 +40,12 @@ void CreatePartnerSelectionMenu(s16 starterID)
     gUnknown_203B404->s18.s0.unk3C[2] = gUnknown_80F4278;
     gUnknown_203B404->s18.s0.unk3C[3] = gUnknown_80F4278;
 
-    gUnknown_203B404->s18.s0.unk38->unk14 = gUnknown_203B404->s18.unk9C;
+    gUnknown_203B404->s18.s0.unk38->unk14 = &gUnknown_203B404->s18.unk9C;
 
-    gUnknown_203B404->s18.unk9C[0] = 1;
-    gUnknown_203B404->s18.unk9C[1] = 0;
-    gUnknown_203B404->s18.unk9C[2] = 6;
-    gUnknown_203B404->s18.unk9C[3] = 0;
+    gUnknown_203B404->s18.unk9C.f0 = 1;
+    gUnknown_203B404->s18.unk9C.f1 = 0;
+    gUnknown_203B404->s18.unk9C.f2 = 6;
+    gUnknown_203B404->s18.unk9C.f3 = 0;
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B404->s18.s0.unk3C, TRUE, TRUE);
     sub_8013818(&gUnknown_203B404->s18.s0.input, GetValidPartners(), 10, gUnknown_203B404->s18.s0.unk34);

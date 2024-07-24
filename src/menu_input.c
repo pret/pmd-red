@@ -16,7 +16,7 @@
 
 const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
-const u8 UnkData_80D47C4[] = {0x01, 0x00, 0x10, 0x00};
+const UnkTextStruct2_sub2 UnkData_80D47C4 = {0x01, 0x00, 0x10, 0x00};
 
 const UnkTextStruct2 gUnknown_80D47C8[4] = {
         0x00, 0x00, 0x00, 0x00,
@@ -24,7 +24,7 @@ const UnkTextStruct2 gUnknown_80D47C8[4] = {
         0x02, 0x02,
         0x1a, 0x0c,
         0x0c, 0x00,
-        UnkData_80D47C4,
+        &UnkData_80D47C4,
 
         0x00, 0x00, 0x00, 0x00,
         0x03,
@@ -449,7 +449,7 @@ void sub_8012EBC(MenuStruct *param_1)
             ptr_text2 = &textStack[index];
             sub_8006518(textStack);
             x = sub_8008ED0(param_1->unk0);
-            xxx_format_and_draw(((ptr_text2->unk14[2] * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
+            xxx_format_and_draw(((ptr_text2->unk14->f2 * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
         }
 
         colorArray = param_1->menuTextColorArray;

@@ -1,14 +1,14 @@
 static const UnkTextStruct2 sUnknown_80E1EFC =
 {
     0, 0, 0, 0,
-    3, 
+    3,
     0, 0,
     0, 0,
     0, 0,
     NULL
 };
 
-static const u8 sUnknown_80E1F14[] = {1, 0, 8, 0};
+static const UnkTextStruct2_sub2 sUnknown_80E1F14 = {1, 0, 8, 0};
 
 static const UnkTextStruct2 sUnknown_80E1F18 =
 {
@@ -17,7 +17,7 @@ static const UnkTextStruct2 sUnknown_80E1F18 =
     2, 2,
     20, 4,
     4, 0,
-    sUnknown_80E1F14
+    &sUnknown_80E1F14
 };
 
 ALIGNED(4) static const u8 sObjectives[] = "Objectives";

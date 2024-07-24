@@ -41,7 +41,7 @@ bool8 sub_801A5D8(u32 param_1, s32 param_2, UnkTextStruct2_sub *param_3, u32 par
     gUnknown_203B224->unk8C = &gUnknown_203B224->unk90[param_2];
     sub_8006518(gUnknown_203B224->unk90);
     gUnknown_203B224->unk90[gUnknown_203B224->unk88] = sUnknown_80DB95C;
-    gUnknown_203B224->unk8C->unk14 = gUnknown_203B224->unkF0;
+    gUnknown_203B224->unk8C->unk14 = &gUnknown_203B224->unkF0;
 
     if (param_3 != NULL)
         gUnknown_203B224->unk90[gUnknown_203B224->unk88].unk8 = *param_3;
@@ -176,10 +176,10 @@ void sub_801A928(void)
 
 static void sub_801A998(void)
 {
-    gUnknown_203B224->unkF0[0] = gUnknown_203B224->input.unk20;
-    gUnknown_203B224->unkF0[1] = gUnknown_203B224->input.unk1E;
-    gUnknown_203B224->unkF0[2] = 11;
-    gUnknown_203B224->unkF0[3] = 0;
+    gUnknown_203B224->unkF0.f0 = gUnknown_203B224->input.unk20;
+    gUnknown_203B224->unkF0.f1 = gUnknown_203B224->input.unk1E;
+    gUnknown_203B224->unkF0.f2 = 11;
+    gUnknown_203B224->unkF0.f3 = 0;
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B224->unk90, TRUE, TRUE);
 }
@@ -295,7 +295,7 @@ void sub_801A9E0(void)
 }
 
 void sub_801AD34(u32 param_1)
-{ 
+{
     sub_8008C54(param_1);
     sub_80073B8(param_1);
     xxx_call_draw_string(6, 0, sItems, param_1, 0);

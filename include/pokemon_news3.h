@@ -4,6 +4,7 @@
 #include "structs/menu.h"
 #include "structs/str_text.h"
 
+// TODO: UNIFY
 // size: 0xA4
 struct unkStruct_203B2D8
 {
@@ -12,7 +13,7 @@ struct unkStruct_203B2D8
     u32 unk38;
     UnkTextStruct2 *unk3C;
     UnkTextStruct2 unk40[4];
-    u8 unkA0[4];
+    UnkTextStruct2_sub2 unkA0;
 };
 
 void CreateMailMenu(void);

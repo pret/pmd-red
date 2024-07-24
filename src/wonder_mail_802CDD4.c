@@ -28,7 +28,7 @@ bool8 sub_802CDD4(u32 a0)
     sUnknown_203B2F4->unk38 = &sUnknown_203B2F4->unk3C[sUnknown_203B2F4->unk34];
     sub_8006518(sUnknown_203B2F4->unk3C);
     sUnknown_203B2F4->unk3C[sUnknown_203B2F4->unk34] = sUnknown_80DFDA4;
-    sUnknown_203B2F4->unk38->unk14 = sUnknown_203B2F4->unk9C;
+    sUnknown_203B2F4->unk38->unk14 = &sUnknown_203B2F4->unk9C;
     sub_8012D34(sUnknown_203B2F4->unk38, 4);
     ResetUnusedInputStruct();
     sub_800641C(sUnknown_203B2F4->unk3C, TRUE, TRUE);
@@ -163,7 +163,7 @@ void sub_802CFD0(void)
     xxx_call_draw_string(r5, 0, sRescueEvent, sUnknown_203B2F4->unk34, 0);
 
     r4 -= 6;
-    r5 = r4 + (sUnknown_203B2F4->unk9C[2] * 8);
+    r5 = r4 + (sUnknown_203B2F4->unk9C.f2 * 8);
     sub_8012BC4(r5, 0, sUnknown_203B2F4->input.unk1E + 1, 2, 7, sUnknown_203B2F4->unk34);
 
     for (r5 = 0; r5 < sUnknown_203B2F4->input.unk1A; r5++) {

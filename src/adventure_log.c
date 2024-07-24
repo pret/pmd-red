@@ -29,7 +29,7 @@ bool8 CreateAdventureLogScreen(u32 kind)
     sAdventureLog->s0.unk38 = &sAdventureLog->s0.unk3C[kind];
     sub_8006518(sAdventureLog->s0.unk3C);
     sAdventureLog->s0.unk3C[sAdventureLog->s0.unk34] = sUnknown_80E2008;
-    sAdventureLog->s0.unk38->unk14 = sAdventureLog->unk9C;
+    sAdventureLog->s0.unk38->unk14 = &sAdventureLog->unk9C;
 
     ResetUnusedInputStruct();
     sub_800641C(sAdventureLog->s0.unk3C, TRUE, TRUE);
@@ -76,10 +76,10 @@ void CleanAdventureLogScreen(void)
 
 static void sub_8032084(void)
 {
-    sAdventureLog->unk9C[0] = sAdventureLog->s0.input.unk20;
-    sAdventureLog->unk9C[1] = sAdventureLog->s0.input.unk1E;
-    sAdventureLog->unk9C[2] = 11;
-    sAdventureLog->unk9C[3] = 0;
+    sAdventureLog->unk9C.f0 = sAdventureLog->s0.input.unk20;
+    sAdventureLog->unk9C.f1 = sAdventureLog->s0.input.unk1E;
+    sAdventureLog->unk9C.f2 = 11;
+    sAdventureLog->unk9C.f3 = 0;
 
     SUB_80095E4_CALL(sAdventureLog->s0);
 }
@@ -100,7 +100,7 @@ static void DisplayAdventureLog(void)
     xxx_call_draw_string(r6, 0, sAdventureLogText, sAdventureLog->s0.unk34, 0);
 
     r4 += 4;
-    r6 = r4 + (sAdventureLog->unk9C[2] * 8);
+    r6 = r4 + (sAdventureLog->unk9C.f2 * 8);
     sub_8012BC4(r6, 0, sAdventureLog->s0.input.unk1E + 1, 1, 7, sAdventureLog->s0.unk34);
 
     for (i = 0; i < sAdventureLog->s0.input.unk1A; i++) {

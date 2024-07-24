@@ -2,6 +2,7 @@
 #define GUARD_CODE_8024458_H
 
 #include "structs/menu.h"
+
 #include "structs/str_text.h"
 
 struct unkStruct_203B2AC
@@ -17,7 +18,7 @@ struct unkStruct_203B2AC
     u32 unkE0;
     UnkTextStruct2 *unkE4;
     UnkTextStruct2 unkE8[4];
-    u8 unk148[4];
+    UnkTextStruct2_sub2 unk148;
 };
 
 bool8 sub_8024458(s16 speciesNum, s32);

@@ -137,7 +137,7 @@ static void CreatePKMNNewsMenu(void)
     sub_80073B8(sUnknown_203B2CC->s38.unk34);
     xxx_call_draw_string(10, 0, sNewsList, sUnknown_203B2CC->s38.unk34, 0);
 
-    sub_8012BC4((sUnknown_80DFBE8[2] * 8) + 4, 0, sUnknown_203B2CC->s38.input.unk1E + 1, 2, 7, sUnknown_203B2CC->s38.unk34);
+    sub_8012BC4((sUnknown_80DFBE8.f2 * 8) + 4, 0, sUnknown_203B2CC->s38.input.unk1E + 1, 2, 7, sUnknown_203B2CC->s38.unk34);
 
     for (index = 0; index < sUnknown_203B2CC->s38.input.unk1A; index++) {
         y = sub_8013800(&sUnknown_203B2CC->s38.input, index);

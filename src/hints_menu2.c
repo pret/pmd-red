@@ -25,7 +25,7 @@ bool8 CreateHintDisplayScreen(u32 index)
     sUnknown_203B268->unk38 = sUnknown_203B268->unk3C;
     sub_8006518(sUnknown_203B268->unk3C);
     sUnknown_203B268->unk3C[sUnknown_203B268->unk34] = sUnknown_80DC0FC;
-    sUnknown_203B268->unk38->unk14 = sUnknown_203B268->unk9C;
+    sUnknown_203B268->unk38->unk14 = &sUnknown_203B268->unk9C;
     ResetUnusedInputStruct();
     sub_800641C(sUnknown_203B268->unk3C, TRUE, TRUE);
     sub_8013818(&sUnknown_203B268->input, 5, 1, sUnknown_203B268->unk34);
@@ -72,10 +72,10 @@ void DestroyHintDisplayScreen(void)
 
 static void sub_801E76C(void)
 {
-    sUnknown_203B268->unk9C[0] = sUnknown_203B268->input.unk20;
-    sUnknown_203B268->unk9C[1] = sUnknown_203B268->input.unk1E;
-    sUnknown_203B268->unk9C[2] = 15;
-    sUnknown_203B268->unk9C[3] = 0;
+    sUnknown_203B268->unk9C.f0 = sUnknown_203B268->input.unk20;
+    sUnknown_203B268->unk9C.f1 = sUnknown_203B268->input.unk1E;
+    sUnknown_203B268->unk9C.f2 = 15;
+    sUnknown_203B268->unk9C.f3 = 0;
     ResetUnusedInputStruct();
     sub_800641C(sUnknown_203B268->unk3C, TRUE, TRUE);
 }

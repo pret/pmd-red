@@ -5,6 +5,7 @@
 #include "structs/menu.h"
 #include "structs/str_text.h"
 
+// TODO: UNIFY
 // size: 0xA8
 struct unkStruct_203B2E8
 {
@@ -13,7 +14,7 @@ struct unkStruct_203B2E8
     u32 unk3C;
     UnkTextStruct2 *unk40;
     UnkTextStruct2 unk44[4];
-    u8 unkA4[4];
+    UnkTextStruct2_sub2 unkA4;
 };
 
 void DrawJobListMenu(void);

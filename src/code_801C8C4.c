@@ -33,7 +33,7 @@ bool8 sub_801C8C4(s32 a0, s32 a1, UnkTextStruct2_sub *a2, u32 a3)
     sUnknown_203B244->unk4EC = &sUnknown_203B244->unk4F0[a1];
     sub_8006518(sUnknown_203B244->unk4F0);
     sUnknown_203B244->unk4F0[sUnknown_203B244->unk4E8] = sUnknown_80DBE54;
-    sUnknown_203B244->unk4EC->unk14 = sUnknown_203B244->unk550;
+    sUnknown_203B244->unk4EC->unk14 = &sUnknown_203B244->unk550;
 
     if (a2 != NULL)
         sUnknown_203B244->unk4F0[sUnknown_203B244->unk4E8].unk8 = *a2;
@@ -225,7 +225,7 @@ void sub_801CCD8(void)
     sub_8008C54(sUnknown_203B244->unk4E8);
     sub_80073B8(sUnknown_203B244->unk4E8);
     xxx_call_draw_string(10, 0, sStorage, sUnknown_203B244->unk4E8, 0);
-    sub_8012BC4(sUnknown_203B244->unk550[2] * 8 + 4, 0, sUnknown_203B244->input.unk1E + 1, 2, 7, sUnknown_203B244->unk4E8);
+    sub_8012BC4(sUnknown_203B244->unk550.f2 * 8 + 4, 0, sUnknown_203B244->input.unk1E + 1, 2, 7, sUnknown_203B244->unk4E8);
 
     for(index = 0; index < sUnknown_203B244->input.unk1A; index++) {
         itemID = sUnknown_203B244->itemIDs[(sUnknown_203B244->input.unk1E * sUnknown_203B244->input.unk1C) + index];

@@ -5,6 +5,7 @@
 #include "structs/menu.h"
 #include "structs/str_text.h"
 
+// TODO: CHANGE THIS TO struct_Sub80095E4_2
 // size: 0x554
 struct unkStruct_203B244
 {
@@ -15,7 +16,7 @@ struct unkStruct_203B244
     u32 unk4E8;
     UnkTextStruct2 *unk4EC;
     UnkTextStruct2 unk4F0[4];
-    u8 unk550[4];
+    UnkTextStruct2_sub2 unk550;
 };
 
 bool8 sub_801C8C4(s32, s32, UnkTextStruct2_sub *, u32);

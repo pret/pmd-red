@@ -21,7 +21,7 @@ typedef struct struct_Sub80095E4
 typedef struct struct_Sub80095E4_2
 {
     /* 0x0 */ struct_Sub80095E4 s0; // s as in 'struct' ; decided to go against unk as to not have `->unk0->unk3C`
-    u8 unk9C[4];
+    UnkTextStruct2_sub2 unk9C;
 } struct_Sub80095E4_2;
 
 // Note: In order to get matching ASM, this macro had to be created.

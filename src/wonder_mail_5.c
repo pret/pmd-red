@@ -38,7 +38,7 @@ const UnkTextStruct2 gUnknown_80E0900 = {
     NULL
 };
 
-const u8 gUnknown_80E0918[] = {0x01, 0x00, 0x12, 0x00};
+const UnkTextStruct2_sub2 gUnknown_80E0918 = {0x01, 0x00, 0x12, 0x00};
 
 const UnkTextStruct2 gUnknown_80E091C = {
     0x00, 0x00, 0x00, 0x00,
@@ -46,7 +46,7 @@ const UnkTextStruct2 gUnknown_80E091C = {
     0x02, 0x02,
     0x1A, 0x10,
     0x10, 0x00,
-    gUnknown_80E0918
+    &gUnknown_80E0918
 };
 
 const u8 gUnknown_80E0934[] = "ID:";
@@ -58,7 +58,7 @@ void sub_8030E2C(void);
 void sub_8030E48(void);
 
 bool8 sub_8030D40(u8 mailIndex, s32 param_2)
-{ 
+{
   gUnknown_203B324 = MemoryAlloc(sizeof(struct unkStruct_203B324), 8);
   gUnknown_203B324->mailIndex = mailIndex;
   sub_801317C(&gUnknown_203B324->unk0);
@@ -71,7 +71,7 @@ bool8 sub_8030D40(u8 mailIndex, s32 param_2)
 }
 
 u8 sub_8030DA0(void)
-{ 
+{
   switch(sub_8012A64(&gUnknown_203B324->unk0, gUnknown_203B324->unk10))
   {
     case 2:
@@ -92,7 +92,7 @@ void sub_8030DD4(void)
 }
 
 void sub_8030DE4(void)
-{ 
+{
   if(gUnknown_203B324 != NULL)
   {
       gUnknown_203B324->unk18[gUnknown_203B324->unk10] = gUnknown_80E0900;
@@ -115,7 +115,7 @@ void sub_8030E48(void)
   unkStruct_203B480 *mail;
   unkStruct_802C39C stack;
   u8 buffer [256];
-  
+
   mail = &gUnknown_203B480[gUnknown_203B324->mailIndex];
   sub_80073B8(gUnknown_203B324->unk10);
   stack.unk0[0] = gUnknown_203B324->unk10;

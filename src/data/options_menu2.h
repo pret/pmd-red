@@ -7,14 +7,14 @@ static const UnkTextStruct2 sUnknown_80DC020 = {
     NULL
 };
 
-static const u8 sUnknown_80DC038[] = {1, 0, 10, 0};
+static const UnkTextStruct2_sub2 sUnknown_80DC038 = {1, 0, 10, 0};
 static const UnkTextStruct2 sUnknown_80DC03C = {
     0, 0, 0, 0,
     6,
     2, 2,
     24, 16,
     18, 0,
-    sUnknown_80DC038
+    &sUnknown_80DC038
 };
 
 ALIGNED(4) static const u8 sGameOptions[] = _("Game Options");

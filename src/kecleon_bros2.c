@@ -29,7 +29,7 @@ bool8 sub_8019E40(u32 r0)
     gUnknown_203B214->s0.unk38 = &gUnknown_203B214->s0.unk3C[gUnknown_203B214->s0.unk34];
     sub_8006518(gUnknown_203B214->s0.unk3C);
     gUnknown_203B214->s0.unk3C[gUnknown_203B214->s0.unk34] = sUnknown_80DB8CC;
-    gUnknown_203B214->s0.unk38->unk14 = gUnknown_203B214->unk9C;
+    gUnknown_203B214->s0.unk38->unk14 = &gUnknown_203B214->unk9C;
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B214->s0.unk3C, TRUE, TRUE);
     sub_8013818(&gUnknown_203B214->s0.input, CountKecleonShopItems(), 10, r0);
@@ -108,10 +108,10 @@ void sub_801A010(void)
 
 static void sub_801A064(void)
 {
-    gUnknown_203B214->unk9C[0] = gUnknown_203B214->s0.input.unk20;
-    gUnknown_203B214->unk9C[1] = gUnknown_203B214->s0.input.unk1E;
-    gUnknown_203B214->unk9C[2] = 10;
-    gUnknown_203B214->unk9C[3] = 0;
+    gUnknown_203B214->unk9C.f0 = gUnknown_203B214->s0.input.unk20;
+    gUnknown_203B214->unk9C.f1 = gUnknown_203B214->s0.input.unk1E;
+    gUnknown_203B214->unk9C.f2 = 10;
+    gUnknown_203B214->unk9C.f3 = 0;
 
     SUB_80095E4_CALL(gUnknown_203B214->s0);
 }

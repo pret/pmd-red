@@ -34,7 +34,7 @@ bool8 sub_802C4C8(s32 a0, UnkTextStruct2_sub *a1, u32 a2)
     sub_8006518(gUnknown_203B2E8->unk44);
 
     gUnknown_203B2E8->unk44[gUnknown_203B2E8->unk3C] = sUnknown_80DFCFC;
-    gUnknown_203B2E8->unk40->unk14 = gUnknown_203B2E8->unkA4;
+    gUnknown_203B2E8->unk40->unk14 = &gUnknown_203B2E8->unkA4;
 
     if (a1 != NULL)
         gUnknown_203B2E8->unk44[gUnknown_203B2E8->unk3C].unk8 = *a1;
@@ -182,7 +182,7 @@ void DrawJobListMenu(void)
     xxx_call_draw_string(x, 0, sJobList, gUnknown_203B2E8->unk3C, 0);
 
     r4 += 4;
-    x = r4 + (gUnknown_203B2E8->unkA4[2] * 8);
+    x = r4 + (gUnknown_203B2E8->unkA4.f2 * 8);
     sub_8012BC4(x, 0, gUnknown_203B2E8->input.unk1E + 1, 2, 7, gUnknown_203B2E8->unk3C);
 
     for (i = 0;  i < gUnknown_203B2E8->input.unk1A; i++) {

@@ -40,7 +40,7 @@ bool8 sub_802BD14(s32 a0, UnkTextStruct2_sub *a1, u32 a2)
     sUnknown_203B2D8->unk3C = &sUnknown_203B2D8->unk40[a0];
     sub_8006518(sUnknown_203B2D8->unk40);
     sUnknown_203B2D8->unk40[sUnknown_203B2D8->unk38] = sUnknown_80DFC74;
-    sUnknown_203B2D8->unk3C->unk14 = sUnknown_203B2D8->unkA0;
+    sUnknown_203B2D8->unk3C->unk14 = &sUnknown_203B2D8->unkA0;
 
     if (a1 != NULL)
         sUnknown_203B2D8->unk40[sUnknown_203B2D8->unk38].unk8 = *a1;

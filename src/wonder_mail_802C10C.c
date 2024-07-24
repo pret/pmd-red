@@ -34,7 +34,7 @@ bool8 sub_802C10C(s32 a0, UnkTextStruct2_sub *a1, s32 a2)
     sub_8006518(gUnknown_203B2E0->unk44);
 
     gUnknown_203B2E0->unk44[gUnknown_203B2E0->unk3C] = sUnknown_80DFCB4;
-    gUnknown_203B2E0->unk40->unk14 = gUnknown_203B2E0->unkA4;
+    gUnknown_203B2E0->unk40->unk14 = &gUnknown_203B2E0->unkA4;
 
     if (a1 != NULL)
         gUnknown_203B2E0->unk44[gUnknown_203B2E0->unk3C].unk8 = *a1;
@@ -184,7 +184,7 @@ void DrawPelipperBoardJobMenu(void)
     xxx_call_draw_string(x, 0, sBulletinBoard, gUnknown_203B2E0->unk3C, 0);
 
     iVar4 += 4;
-    x = iVar4 + (gUnknown_203B2E0->unkA4[2] * 8);
+    x = iVar4 + (gUnknown_203B2E0->unkA4.f2 * 8);
     sub_8012BC4(x, 0, gUnknown_203B2E0->input.unk1E + 1, 2, 7, gUnknown_203B2E0->unk3C);
 
     for (i = 0; i < gUnknown_203B2E0->input.unk1A; i++) {

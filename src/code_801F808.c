@@ -14,6 +14,7 @@
 
 extern u8 gAvailablePokemonNames[];
 
+// TODO: UNIFY WITH struct_Sub80095E4
 struct unkStruct_203B278
 {
     /* 0x0 */ s32 state;
@@ -27,7 +28,7 @@ struct unkStruct_203B278
     u32 unk5C;
     UnkTextStruct2 *unk60;
     UnkTextStruct2 unk64[4];
-    u8 unkC4[4];
+    UnkTextStruct2_sub2 unkC4;
     MenuInputStructSub unkC8;
 };
 
@@ -116,11 +117,11 @@ void sub_801F930(void)
     switch(gUnknown_203B278->state)
     {
         case 0:
-            gUnknown_203B278->unk60->unk14 = gUnknown_203B278->unkC4;
-            gUnknown_203B278->unkC4[0] = gUnknown_203B278->unk28.unk20;
-            gUnknown_203B278->unkC4[1] = gUnknown_203B278->unk28.unk1E;
-            gUnknown_203B278->unkC4[2] = 0x10;
-            gUnknown_203B278->unkC4[3] = 0;
+            gUnknown_203B278->unk60->unk14 = &gUnknown_203B278->unkC4;
+            gUnknown_203B278->unkC4.f0 = gUnknown_203B278->unk28.unk20;
+            gUnknown_203B278->unkC4.f1 = gUnknown_203B278->unk28.unk1E;
+            gUnknown_203B278->unkC4.f2 = 0x10;
+            gUnknown_203B278->unkC4.f3 = 0;
             ResetUnusedInputStruct();
             sub_800641C(gUnknown_203B278->unk64, TRUE, TRUE);
             break;

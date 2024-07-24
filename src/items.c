@@ -571,17 +571,20 @@ bool8 AddHeldItemToInventory(BulkItem* slot)
 
 bool8 AddItemToInventory(const Item* slot)
 {
-  s32 i;
+    s32 i;
 
-  // try to add item to inventory, return 1 if failed
-  for (i = 0; i < INVENTORY_SIZE; i++) {
-    UNUSED Item* current = &gTeamInventoryRef->teamItems[i];
-    if (!(i[gTeamInventoryRef->teamItems].flags & ITEM_FLAG_EXISTS)) {
-      gTeamInventoryRef->teamItems[i] = *slot;
-      return FALSE;
+    // try to add item to inventory, return 1 if failed
+    for (i = 0; i < INVENTORY_SIZE; i++) {
+        Item *items;
+        DUMMY_TEAM_ITEMS_ASM_MATCH(i);
+
+        items = gTeamInventoryRef->teamItems;
+        if (!(items[i].flags & ITEM_FLAG_EXISTS)) {
+            items[i] = *slot;
+            return FALSE;
+        }
     }
-  }
-  return TRUE;
+    return TRUE;
 }
 
 void ConvertMoneyItemToMoney(void)
@@ -905,7 +908,7 @@ bool8 IsGummiItem(u8 id)
 
 bool8 HasGummiItem(void)
 {
-    struct Item *items;
+    Item *items;
     s32 i;
     for (i = 0; i < INVENTORY_SIZE; i++) {
         DUMMY_TEAM_ITEMS_ASM_MATCH(i);

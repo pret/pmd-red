@@ -3753,22 +3753,6 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
 extern const struct UnkTextStruct2 gUnknown_8106B6C;
 extern const struct unkStruct_8090F58 gUnknown_8106B60;
 
-static inline Item *GetTeamItem(s32 id)
-{
-    UNUSED s32 b = id * sizeof(Item);
-    UNUSED struct Item *currItem = &gTeamInventoryRef->teamItems[id];
-    struct Item *items = gTeamInventoryRef->teamItems;
-    return &items[id];
-}
-
-static inline bool32 ItemExists(s32 id)
-{
-    UNUSED s32 b = id * 4;
-    UNUSED struct Item *currItem = &gTeamInventoryRef->teamItems[id];
-    struct Item *items = gTeamInventoryRef->teamItems;
-    return (items[id].flags & 1);
-}
-
 void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 *a4, u8 *a5)
 {
     s32 i, x, y;
@@ -3839,32 +3823,37 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     case 0:
         xxx_format_and_draw(x, 0, gTeamToolboxAPtr, 0, 0);
         for (i = 0; i < 10; i++) {
-            if ((ItemExists(i)))
-            {
+            Item *items;
+            DUMMY_TEAM_ITEMS_ASM_MATCH(i);
+
+            items = gTeamInventoryRef->teamItems;
+            if (items[i].flags & ITEM_FLAG_EXISTS) {
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, &gTeamInventoryRef->teamItems[i], &gUnknown_8106B60);
                 y = sub_8013800(&gUnknown_202EE10, i);
                 xxx_format_and_draw(8, y, txtBuff, 0, 0);
             }
-            else
+            else {
                 break;
+            }
         }
         break;
     case 1:
         xxx_format_and_draw(x, 0, gTeamToolboxBPtr, 0, 0);
         for (i = 0; i < 10; i++) {
-            UNUSED s32 b = i * sizeof(Item);
-            UNUSED struct Item *currItem = &gTeamInventoryRef->teamItems[i];
-            struct Item *items = gTeamInventoryRef->teamItems;
-            if (items[i + 10].flags & 1)
-            {
+            Item *items;
+            DUMMY_TEAM_ITEMS_ASM_MATCH(i);
+
+            items = gTeamInventoryRef->teamItems;
+            if (items[i + 10].flags & 1) {
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, &gTeamInventoryRef->teamItems[i + 10], &gUnknown_8106B60);
                 y = sub_8013800(&gUnknown_202EE10, i);
                 xxx_format_and_draw(8, y, txtBuff, 0, 0);
             }
-            else
+            else {
                 break;
+            }
         }
         break;
     case 2: {
@@ -3922,5 +3911,41 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     }
 }
 
+/*
+struct TstStruct {
+    u8 f0;
+    u8 f1;
+    u8 f2;
+    u8 f3;
+};
 
-//
+s32 sub_8060800(struct TstStruct *a0, s32 a1)
+{
+    s32 i, r1, r2, r3;
+
+    r1 = 0;
+    for (i = 0; i < gUnknown_202F258; i++) {
+        if (gUnknown_202F248[i] <= 1) {
+            r1++;
+        }
+    }
+
+    if (gUnknown_202F248[a1] <= 1) {
+        r3 = a1;
+        r2 = r1;
+        r1 = 0;
+    }
+    else {
+        r3 = a1 - r1;
+        r2 = gUnknown_202F258 - r1;
+    }
+
+    if (a0 != NULL) {
+        a0->f0 = r2;
+        a0->f1 = r3;
+        a0->f3 = 0;
+    }
+
+    return r1;
+}
+*/

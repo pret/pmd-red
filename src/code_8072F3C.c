@@ -82,7 +82,7 @@ u32 sub_802F73C(u32 r0, UnkTextStruct2_sub *r1, u32 r2, u8 r3)
     else
         gUnknown_203B314->sBC.s0.unk3C[gUnknown_203B314->sBC.s0.unk34] = gUnknown_80E0714;
 
-    gUnknown_203B314->sBC.s0.unk38->unk14 = gUnknown_203B314->sBC.unk9C;
+    gUnknown_203B314->sBC.s0.unk38->unk14 = &gUnknown_203B314->sBC.unk9C;
 
     if (r1 != 0)
         gUnknown_203B314->sBC.s0.unk3C[gUnknown_203B314->sBC.s0.unk34].unk8 = *r1;
@@ -177,10 +177,10 @@ void sub_802F974(void)
 
 void sub_802F9C0(void)
 {
-    gUnknown_203B314->sBC.unk9C[0] = 1;
-    gUnknown_203B314->sBC.unk9C[1] = 0;
-    gUnknown_203B314->sBC.unk9C[2] = 8;
-    gUnknown_203B314->sBC.unk9C[3] = 0;
+    gUnknown_203B314->sBC.unk9C.f0 = 1;
+    gUnknown_203B314->sBC.unk9C.f1 = 0;
+    gUnknown_203B314->sBC.unk9C.f2 = 8;
+    gUnknown_203B314->sBC.unk9C.f3 = 0;
 
     SUB_80095E4_CALL(gUnknown_203B314->sBC.s0);
 }
@@ -197,7 +197,7 @@ void sub_802FA50(void)
   sub_8008C54(gUnknown_203B314->sBC.s0.unk34);
   sub_80073B8(gUnknown_203B314->sBC.s0.unk34);
   xxx_call_draw_string(10,0,gUnknown_80E0744,gUnknown_203B314->sBC.s0.unk34,0);
-  sub_8012BC4(gUnknown_203B314->sBC.unk9C[2] * 8 + 4,0,gUnknown_203B314->sBC.s0.input.unk1E + 1,2,7,gUnknown_203B314->sBC.s0.unk34);
+  sub_8012BC4(gUnknown_203B314->sBC.unk9C.f2 * 8 + 4,0,gUnknown_203B314->sBC.s0.input.unk1E + 1,2,7,gUnknown_203B314->sBC.s0.unk34);
   if (gUnknown_203B314->unkB8 != 0) {
     for(counter = 0; counter < gUnknown_203B314->sBC.s0.input.unk1A; counter++)
     {
