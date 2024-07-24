@@ -155,7 +155,8 @@ typedef struct Dungeon
     /* 0x644 */ DungeonLocation dungeonLocation;
     u8 fill646[0x654 - 0x648];
     u8 unk654;
-    u8 fill655[0x65C - 0x655];
+    u8 fill655[0x65B - 0x655];
+    u8 unk65B;
     u8 unk65C;
     u8 fill65D[0x660 - 0x65D];
     /* 0x660 */ s16 fractionalTurn; // Handles turn order when Pokémon have different movement speeds.

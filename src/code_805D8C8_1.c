@@ -35,6 +35,7 @@
 #include "text2.h"
 #include "text1.h"
 #include "code_806CD90.h"
+#include "code_8044CC8.h"
 #include "dungeon_capabilities.h"
 #include "constants/dungeon.h"
 #include "constants/status.h"
@@ -3970,10 +3971,210 @@ void sub_8060890(Position *a0)
     gUnknown_202F238.lastItemThrowPosition.x = a0->x;
     gUnknown_202F238.lastItemThrowPosition.y = a0->y;
 }
-/*
+
+extern Item * sub_8044CC8(Entity *param_1, unkStruct_8044CC8 *param_2, UNUSED s32 a3);
+extern void sub_8044F5C(u16 param_1, u8 param_2);
+extern void sub_8044FF0(u16 param_1);
+extern u16 sub_8044DC8(Item *param_1);
+extern bool8 sub_8046F00(Item *item);
+extern void sub_8045064(void);
+
 void sub_8060900(Entity *a0)
 {
+    u16 val_sub8044DC8;
+    Item *item = sub_8044CC8(a0, &gUnknown_202F238, 0xA);
+    EntityInfo *a0Info = a0->info;
 
+    gUnknown_202EE6C = 0;
+    if (gUnknown_202F238.actionUseIndex < 144) {
+        if (gUnknown_202F238.actionUseIndex == 128) {
+            sub_8044F5C(9, item->id);
+            if (GetItemCategory(item->id) != CATEGORY_POKE) {
+                bool32 r2 = 0;
+                if (gDungeon->unk65B != 0) {
+                    if (gTeamInventoryRef->teamItems[INVENTORY_SIZE - 1].flags & ITEM_FLAG_EXISTS) {
+                        r2 = TRUE;
+                    }
+                }
+                else if (a0Info->heldItem.flags & ITEM_FLAG_EXISTS) {
+                    r2 = TRUE;
+                }
+
+                if (r2) {
+                    sub_8044FF0(9);
+                }
+            }
+            // Why is it checking actionUseIndex again?
+            if (gUnknown_202F238.actionUseIndex == 128 && gDungeon->unk65B != 0) {
+                sub_8044F5C(10, item->id);
+            }
+        }
+        val_sub8044DC8 = sub_8044DC8(item);
+        if (val_sub8044DC8 != 0) {
+            sub_8044F5C(val_sub8044DC8, item->id);
+            if (item->flags & ITEM_FLAG_STICKY) {
+                sub_8044FF0(val_sub8044DC8);
+            }
+            if (!sub_8046F00(item)) {
+                sub_8044FF0(val_sub8044DC8);
+            }
+        }
+
+        if (gUnknown_202F238.actionUseIndex <= 20
+            && (GetItemCategory(item->id) == CATEGORY_THROWN_LINE || GetItemCategory(item->id) == CATEGORY_THROWN_ARC))
+        {
+            s32 i;
+
+            if (item->flags & ITEM_FLAG_SET) {
+                sub_8044F5C(0x3D, item->id);
+            }
+            else {
+                sub_8044F5C(0x3C, item->id);
+            }
+
+            for (i = 0; i < INVENTORY_SIZE; i++) {
+                // Compiler uses r5 without the fakematch trick. It's gTeamInventoryRef causing matching issues again...
+                #ifndef NONMATCHING
+                item++;item--;
+                #endif // NONMATCHING
+                if (gTeamInventoryRef->teamItems[i].flags & ITEM_FLAG_EXISTS
+                    && gTeamInventoryRef->teamItems[i].flags & ITEM_FLAG_SET
+                    && gTeamInventoryRef->teamItems[i].flags & ITEM_FLAG_STICKY)
+                {
+                    sub_8044FF0(0x3C);
+                    sub_8044FF0(0x3D);
+                    break;
+                }
+            }
+        }
+
+        if (gUnknown_202F238.actionUseIndex != 129) {
+            if (gUnknown_202F238.actionUseIndex != 128) {
+                s32 i;
+                bool32 r8 = FALSE;
+
+                sub_8044F5C(0x36, item->id);
+                for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+                    Entity *teamMon = gDungeon->teamPokemon[i];
+                    if (EntityExists(teamMon)) {
+                        EntityInfo *teamMonInfo = teamMon->info;
+                        teamMonInfo->unk157 = FALSE;
+                        if (!CannotUseItems(teamMon)) {
+                            r8 = TRUE;
+                            teamMonInfo->unk157 = TRUE;
+                        }
+                    }
+                }
+                if (!r8) {
+                    sub_8044FF0(0x36);
+                }
+            }
+        }
+        else if (gDungeon->unk65B) {
+            if (gTeamInventoryRef->teamItems[INVENTORY_SIZE - 1].flags & ITEM_FLAG_EXISTS) {
+                sub_8044F5C(0x3E, item->id);
+            }
+            else {
+                sub_8044F5C(0x37, item->id);
+            }
+
+            if (CannotUseItems(a0)) {
+                sub_8044FF0(0x37);
+                sub_8044FF0(0x3E);
+            }
+        }
+
+        if (gUnknown_202F238.actionUseIndex <= 20) {
+            Entity *tileEntity = GetTile(a0->pos.x, a0->pos.y)->object;
+            if (tileEntity == NULL) {
+                sub_8044F5C(8, item->id);
+            }
+            else if (GetEntityType(tileEntity) == ENTITY_ITEM) {
+                sub_8044F5C(0x3A, item->id);
+            }
+        }
+
+        if (GetItemCategory(item->id) == CATEGORY_THROWN_LINE) {
+            sub_8044F5C(0x27, item->id);
+        }
+        else if (GetItemCategory(item->id) == CATEGORY_THROWN_ARC) {
+            sub_8044F5C(0x41, item->id);
+        }
+        else {
+            sub_8044F5C(0xB, item->id);
+        }
+
+        if (!ToolboxEnabled(a0Info)) {
+            sub_8044FF0(0x27);
+            sub_8044FF0(0x41);
+            sub_8044FF0(0xB);
+        }
+    }
+    else {
+        s32 index = gUnknown_202F238.actionUseIndex - 144;
+        Entity *teamMon = gDungeon->teamPokemon[index];
+        if (EntityExists(teamMon)) {
+            bool32 r5, r6, r4;
+            EntityInfo *teamMonInfo = teamMon->info;
+
+            r5 = FALSE;
+            if (CannotUseItems(teamMon))
+                r6 = TRUE;
+            else
+                r6 = FALSE;
+
+            if (gTeamInventoryRef->teamItems[INVENTORY_SIZE - 1].flags & ITEM_FLAG_EXISTS)
+                r4 = TRUE;
+            else
+                r4 = FALSE;
+
+            if (GetItemCategory(item->id) == CATEGORY_TMS_HMS) r5 = TRUE;
+            if (GetItemCategory(item->id) == CATEGORY_ORBS) r5 = TRUE;
+
+            if (gDungeon->unk65B) {
+                if (r4) {
+                    sub_8044F5C(0x3E, item->id);
+                }
+                else {
+                    sub_8044F5C(0x37, item->id);
+                }
+
+                if (r6) {
+                    sub_8044FF0(0x37);
+                    sub_8044FF0(0x3E);
+                }
+            }
+
+            if (teamMonInfo->isTeamLeader) {
+                val_sub8044DC8 = sub_8044DC8(item);
+                if (val_sub8044DC8 != 0) {
+                    sub_8044F5C(val_sub8044DC8, item->id);
+                    if (item->flags & ITEM_FLAG_STICKY) {
+                        sub_8044FF0(val_sub8044DC8);
+                    }
+                    if (!sub_8046F00(item)) {
+                        sub_8044FF0(val_sub8044DC8);
+                    }
+                }
+            }
+            else {
+                sub_8044F5C(0x38, item->id);
+                if (r5) {
+                    sub_8044FF0(0x38);
+                }
+            }
+        }
+    }
+
+    sub_8044F5C(0xC, item->id);
+    sub_8045064();
 }
 
-//*/
+void sub_8060CE8(ActionContainer *a0)
+{
+    SetMonsterActionFields(a0, gUnknown_202EE44[gUnknown_202EE10.menuIndex].unk0);
+    a0->unk4[0] = gUnknown_202F238;
+    a0->unk4[1].actionUseIndex = 0;
+    a0->unk4[1].lastItemThrowPosition.x = 0;
+    a0->unk4[1].lastItemThrowPosition.y = 0;
+}
