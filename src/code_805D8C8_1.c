@@ -3384,7 +3384,7 @@ typedef struct UnkTextStruct3 {
 } UnkTextStruct3;
 
 extern void sub_803ECB4(UnkTextStruct3 *a0, u8 a1);
-void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 *a4, u8 *a5);
+void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 *a4, UnkTextStruct2_sub2 *a5);
 
 // Inline needed to (fake?)match.
 static inline void sub_805FC30_SetUpTxtStruct(UnkTextStruct3 *src)
@@ -3473,11 +3473,10 @@ s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4);
 void sub_8060890(Position *a0);
 bool8 sub_8060860(s32 a0);
 void sub_8060900(Entity *a0);
-s32 sub_8060800(u8 *a0, s32 a1);
+s32 sub_8060800(UnkTextStruct2_sub2 *a0, s32 a1);
 void sub_8060CE8(ActionContainer *a0);
 extern Entity *DrawFieldGiveItemMenu(u8 *a0, s32 a1);
 
-// TODO: Fix casts to (void*) once more functions are decompiled.
 bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
 {
     s32 i, i_r6;
@@ -3489,7 +3488,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
     u8 var_2C = 0;
     u8 var_28 = 0;
     EntityInfo *a0Info = a0->info;
-    u32 var_3C;
+    UnkTextStruct2_sub2 var_3C;
 
     UnkTextStruct3 var_FC =
     {
@@ -3502,7 +3501,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
                 .unkC = 0x12,
                 .unkE = 0x10,
                 .unk10 = 0x10,
-                .unk14 = (void*)(&var_3C),
+                .unk14 = &var_3C,
             },
             {.unk4 = 3}, {.unk4 = 3}, {.unk4 = 3},
         },
@@ -3556,7 +3555,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
                 }
             }
         }
-        CreateFieldItemMenu(r8, a0, var_2C, var_30, &var_FC, (void*)&var_3C);
+        CreateFieldItemMenu(r8, a0, var_2C, var_30, &var_FC, &var_3C);
 
         id = gUnknown_202F248[gUnknown_202EE10.unk1E];
         if (id >= MAX_TEAM_MEMBERS) {
@@ -3683,7 +3682,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
             }
 
             sub_8060900(a0);
-            sub_8060800((void*)&var_3C, gUnknown_202EE10.unk1E);
+            sub_8060800(&var_3C, gUnknown_202EE10.unk1E);
             sub_805FC30(&var_FC, 0x16);
             while (1) {
                 AddMenuCursorSprite(&gUnknown_202EE10);
@@ -3753,7 +3752,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
 extern const struct UnkTextStruct2 gUnknown_8106B6C;
 extern const struct unkStruct_8090F58 gUnknown_8106B60;
 
-void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 *a4, u8 *a5)
+void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 *a4, UnkTextStruct2_sub2 *a5)
 {
     s32 i, x, y;
     s32 r10;
@@ -3779,7 +3778,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
         case 1:
             a4->a0[0].unk10 = 0x10;
             a4->a0[0].unkE = 0x10;
-            a5[2] = 0xC;
+            a5->f2 = 0xC;
             gUnknown_202EE10.unk6 = 0x10;
             gUnknown_202EE10.unk1C = 0xA;
             gDungeon->unk181e8.unk18212 = 1;
@@ -3787,7 +3786,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
         case 2:
             a4->a0[0].unk10 = 4;
             a4->a0[0].unkE = 4;
-            a5[2] = 6;
+            a5->f2 = 6;
             gUnknown_202EE10.unk6 = 0x12;
             gUnknown_202EE10.unk1C = 1;
             break;
@@ -3795,7 +3794,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
         default:
             a4->a0[0].unk10 = 4;
             a4->a0[0].unkE = 4;
-            a5[2] = 0xC;
+            a5->f2 = 0xC;
             gUnknown_202EE10.unk6 = 0x12;
             gUnknown_202EE10.unk1C = 1;
             break;
@@ -3911,15 +3910,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     }
 }
 
-/*
-struct TstStruct {
-    u8 f0;
-    u8 f1;
-    u8 f2;
-    u8 f3;
-};
-
-s32 sub_8060800(struct TstStruct *a0, s32 a1)
+s32 sub_8060800(UnkTextStruct2_sub2 *a0, s32 a1)
 {
     s32 i, r1, r2, r3;
 
@@ -3948,4 +3939,41 @@ s32 sub_8060800(struct TstStruct *a0, s32 a1)
 
     return r1;
 }
-*/
+
+bool8 sub_8060860(s32 a0)
+{
+    if (gUnknown_202EE10.unk1A <= 1 || gUnknown_202F248[a0] > 1)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+void sub_8060890(Position *a0)
+{
+    s32 var = gUnknown_202F248[gUnknown_202EE10.unk1E];
+    switch (var)
+    {
+    case 0:
+        gUnknown_202F238.actionUseIndex = gUnknown_202EE10.menuIndex + 1;
+        break;
+    case 1:
+        gUnknown_202F238.actionUseIndex = gUnknown_202EE10.menuIndex + 11;
+        break;
+    case 2:
+        gUnknown_202F238.actionUseIndex = 128;
+        break;
+    default:
+        gUnknown_202F238.actionUseIndex = var - 116;
+        break;
+    }
+
+    gUnknown_202F238.lastItemThrowPosition.x = a0->x;
+    gUnknown_202F238.lastItemThrowPosition.y = a0->y;
+}
+/*
+void sub_8060900(Entity *a0)
+{
+
+}
+
+//*/
