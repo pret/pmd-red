@@ -36,6 +36,7 @@
 #include "text1.h"
 #include "code_806CD90.h"
 #include "code_8044CC8.h"
+#include "code_801B3C0.h"
 #include "dungeon_capabilities.h"
 #include "constants/dungeon.h"
 #include "constants/status.h"
@@ -4177,4 +4178,50 @@ void sub_8060CE8(ActionContainer *a0)
     a0->unk4[1].actionUseIndex = 0;
     a0->unk4[1].lastItemThrowPosition.x = 0;
     a0->unk4[1].lastItemThrowPosition.y = 0;
+}
+
+void sub_8060D24(UNUSED ActionContainer *a0)
+{
+    Item *item = sub_8044D90(GetLeader(), 0, 0xB);
+    sub_803ECB4(NULL, 0);
+    sub_801B3C0(item);
+
+    do {
+        sub_803E46C(0x16);
+    } while (sub_801B410() == 0);
+
+    sub_801B450();
+    sub_803EAF0(0, NULL);
+}
+
+extern bool8 sub_804ACE4(Position *pos);
+
+s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4)
+{
+    s32 i;
+    s32 count = 0;
+
+    if (gDungeon->unk65B && !a1) {
+        if (gTeamInventoryRef->teamItems[0].flags & ITEM_FLAG_EXISTS) {
+            a0[count++] = 0;
+        }
+        if (gTeamInventoryRef->teamItems[INVENTORY_SIZE / 2].flags & ITEM_FLAG_EXISTS) {
+            a0[count++] = 1;
+        }
+    }
+
+    if (a2 && sub_804ACE4(&a4->pos)) {
+        a0[count++] = 2;
+    }
+
+    if (!a1 && !a3) {
+        for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+            Entity *teamMon = gDungeon->teamPokemon[i];
+            if (EntityExists(teamMon) && teamMon->info->heldItem.flags & ITEM_FLAG_EXISTS) {
+                a0[count++] = i + MAX_TEAM_MEMBERS;
+            }
+        }
+    }
+
+    return count;
 }
