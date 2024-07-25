@@ -4225,3 +4225,164 @@ s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4)
 
     return count;
 }
+
+extern UnkTextStruct2_sub2 gUnknown_202F270;
+
+struct UnkFieldTeamMenuStruct
+{
+    s32 unk0;
+    s32 unk4[MAX_TEAM_MEMBERS];
+    u8 unk14[MAX_TEAM_MEMBERS];
+};
+
+void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bool8 a2);
+void sub_806145C(struct UnkFieldTeamMenuStruct *a0);
+void sub_80615B4(ActionContainer *a0, struct UnkFieldTeamMenuStruct *a1);
+
+extern u8 gUnknown_202EE39;
+
+bool8 sub_8060E38(Entity *a0)
+{
+    s32 i;
+    bool32 r10, ret;
+
+    struct UnkFieldTeamMenuStruct sp;
+    UnkTextStruct3 var_84 = {0};
+
+    var_84.a0[0].unk4 = 6;
+    var_84.a0[0].unk8.unk0.separate.unk0 = 2;
+    var_84.a0[0].unk8.unk0.separate.unk2 = 2;
+    var_84.a0[0].unkC = 0xE;
+    var_84.a0[0].unkE = 0x10;
+    var_84.a0[0].unk10 = 0x10;
+    var_84.a0[0].unk14 = &gUnknown_202F270;
+    var_84.a0[1].unk4 = 3;
+    var_84.a0[2].unk4 = 3;
+    var_84.a0[3].unk4 = 3;
+
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        Entity *teamMon = gDungeon->teamPokemon[i];
+        if (EntityExists(teamMon)) {
+            teamMon->info->unk157 = TRUE;
+        }
+    }
+
+    if (!gDungeon->unk65B) {
+        var_84.a0[0].unk4 = 3;
+        var_84.a0[0].unk8.unk0.arr[1]++;
+    }
+
+    while (1) {
+        s32 id;
+        bool32 r4;
+
+        ret = FALSE;
+        DrawFieldTeamMenu(&sp, &var_84, TRUE);
+        r10 = FALSE;
+        while (1) {
+            s32 id = sp.unk4[gUnknown_202EE10.menuIndex];
+            if (id >= 0) {
+                Entity *teamMon = gDungeon->teamPokemon[id];
+                sub_806A2BC(teamMon, 0);
+                sub_804A728(&teamMon->pos, 0, 1, 1);
+            }
+
+            AddMenuCursorSprite(&gUnknown_202EE10);
+            sub_803E46C(0x1B);
+            if (gRealInputs.repeated & DPAD_DOWN) {
+                sub_8083CE0(1);
+                sub_80136E0(&gUnknown_202EE10, 1);
+            }
+            if (gRealInputs.repeated & DPAD_UP) {
+                sub_8083CE0(1);
+                sub_8013744(&gUnknown_202EE10, 1);
+            }
+            if (gRealInputs.pressed & START_BUTTON) {
+                if (sp.unk14[gUnknown_202EE10.menuIndex] != 0) {
+                    sub_8083D44();
+                    r10 = TRUE;
+                    break;
+                }
+                sub_8083D30();
+            }
+            if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button)
+            {
+                if (sp.unk14[gUnknown_202EE10.menuIndex] != 0) {
+                    sub_8083D08();
+                    break;
+                }
+                sub_8083D30();
+            }
+            if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
+                sub_8083D30();
+                ret = TRUE;
+                break;
+            }
+        }
+
+        id = sp.unk4[gUnknown_202EE10.menuIndex];
+        if (id >= 0) {
+            Entity *teamMon = gDungeon->teamPokemon[id];
+            sub_806A2BC(teamMon, 0);
+            sub_804A728(&teamMon->pos, 0, 1, 1);
+        }
+
+        AddMenuCursorSprite(&gUnknown_202EE10);
+        sub_803E46C(0x1B);
+        sub_804AA60();
+        if (ret) {
+            break;
+        }
+
+        sp.unk0 = gUnknown_202EE10.menuIndex;
+        gUnknown_202F260 = gUnknown_202EE10.menuIndex;
+        sub_806145C(&sp);
+        if (r10) {
+            EntityInfo *info = a0->info;
+            SetMonsterActionFields(&info->action, 0x1B);
+            info->action.unk4[0].actionUseIndex = sp.unk4[sp.unk0];
+            ret = FALSE;
+            break;
+        }
+
+        sub_805FC30(&var_84, 0x12);
+        while (1) {
+            AddMenuCursorSprite(&gUnknown_202EE10);
+            sub_803E46C(0x1B);
+            if (gRealInputs.repeated & DPAD_DOWN) {
+                sub_8083CE0(1);
+                sub_80136E0(&gUnknown_202EE10, 1);
+            }
+            if (gRealInputs.repeated & DPAD_UP) {
+                sub_8083CE0(1);
+                sub_8013744(&gUnknown_202EE10, 1);
+            }
+            if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
+                if (sub_8044F3C(gUnknown_202EE10.menuIndex)) {
+                    sub_80615B4(&a0->info->action, &sp);
+                    sub_8083D08();
+                    r4 = FALSE;
+                    break;
+                }
+                sub_8083D30();
+            }
+            if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
+                sub_8083D30();
+                r4 = TRUE;
+                break;
+            }
+        }
+        AddMenuCursorSprite(&gUnknown_202EE10);
+        sub_803E46C(0x1B);
+        if (r4 != TRUE) {
+            ret = FALSE;
+            break;
+        }
+    }
+
+    if (ret) {
+        sub_806A2BC(GetLeader(), 0);
+    }
+    sub_803EAF0(0, NULL);
+    return ret;
+}
