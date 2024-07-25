@@ -28,6 +28,6 @@ void sub_8085930(s32 direction);
 void sub_80859F0(s32 direction);
 bool8 IsMovingClient(Entity *entity);
 void sub_8085B0C(Entity *pokemon);
-void sub_8085B4C(struct_8085B80 *a0, s16 **a1, Entity **a2, s32 a3);
+void sub_8085B4C(struct_8085B80 a0[], s16 *a1[], Entity *a2[], s32 a3);
 
 #endif
