@@ -11,6 +11,7 @@
 #include "dungeon_util.h"
 #include "pokemon.h"
 #include "dungeon_music.h"
+#include "dungeon_ai_movement.h"
 #include "code_8045A00.h"
 #include "code_80130A8.h"
 #include "code_803E46C.h"
@@ -2802,7 +2803,7 @@ extern void sub_8083CE0(u8 param_1);
 extern u8 gAvailablePokemonNames[];
 
 extern u8 gUnknown_202749A[];
-extern u32 gUnknown_202F260;
+extern s32 gUnknown_202F260;
 extern MenuInputStruct gUnknown_202EE10;
 
 void sub_805F02C(void)
@@ -4386,3 +4387,403 @@ bool8 sub_8060E38(Entity *a0)
     sub_803EAF0(0, NULL);
     return ret;
 }
+
+bool32 sub_8069D18(Position *a0, Entity *a1);
+
+extern const u8 gUnknown_8106BB0[];
+extern const u8 gUnknown_8106BB4[];
+extern const u8 gUnknown_8106BB8[];
+extern const u8 gUnknown_8106BBC[];
+extern const u8 gUnknown_8106BC0[];
+extern const u8 gUnknown_8106BC4[];
+extern const u8 gUnknown_8106BC8[];
+extern const u8 gUnknown_8106BCC[];
+extern const u8 gUnknown_8106BD0[];
+extern const u8 gUnknown_8106BD4[];
+extern const u8 gUnknown_8106BE0[];
+
+extern void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum);
+
+void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bool8 a2)
+{
+    s32 r0;
+    Position pos;
+    s32 i;
+
+    s32 count = 0;
+    bool8 r10 = (a1->a0[0].unk4 == 6);
+
+    sub_8069D18(&pos, GetLeader());
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        EntityInfo *monInfo;
+        Entity *teamMon = gDungeon->teamPokemon[i];
+        if (EntityExists(teamMon)) {
+            a0->unk4[count] = i;
+            monInfo = teamMon->info;
+            a0->unk14[count] = monInfo->unk157;
+            if (pos.x == teamMon->pos.x && pos.y == teamMon->pos.y && gUnknown_202F260 < 0) {
+                gUnknown_202F260 = count;
+            }
+            count++;
+        }
+    }
+
+    if (gUnknown_202F260 >= count) {
+        gUnknown_202F260 = count - 1;
+    }
+    if (gUnknown_202F260 < 0) {
+        gUnknown_202F260 = 0;
+    }
+
+    for (i = count; i < MAX_TEAM_MEMBERS; i++) {
+        a0->unk4[i] = -1;
+        a0->unk14[i] = 0;
+    }
+
+    gUnknown_202F270.f0 = 1;
+    gUnknown_202F270.f1 = 0;
+    gUnknown_202F270.f3 = 0;
+    gUnknown_202EE10.menuIndex = gUnknown_202F260;
+    gUnknown_202EE10.unk1A = count;
+    gUnknown_202EE10.unk1C = count;
+    gUnknown_202EE10.unk1E = 0;
+    gUnknown_202EE10.unk20 = 0;
+    gUnknown_202EE10.unk4 = 0;
+    gUnknown_202EE10.unk6 = (r10 != FALSE) * 16;
+    gUnknown_202EE10.unkC = 0;
+    gUnknown_202EE10.unkE = 0;
+    gUnknown_202EE10.unk14.x = 0;
+    gUnknown_202EE10.unk0 = 0;
+    sub_801317C(&gUnknown_202EE10.unk28);
+    r0 = sub_80095E4(count, 0);
+    if (r10) {
+        r0 += 2;
+    }
+    a1->a0[0].unk10 = r0;
+    a1->a0[0].unkE = r0;
+    gUnknown_202F270.f2 = 8;
+    if (a2) {
+        a1->a0[1] = a1->a0[3];
+    }
+
+    sub_803ECB4(a1, 1);
+    sub_80137B0(&gUnknown_202EE10, 0);
+    sub_80073B8(0);
+    if (r10) {
+        xxx_format_and_draw(0xC, 0, gUnknown_8106BB0, 0, 0);
+    }
+
+    // Print hp/max hp
+    for (i = 0; i < count; i++) {
+        s32 y;
+        s32 id = a0->unk4[i];
+        if (id >= 0) {
+            Entity *teamMon = gDungeon->teamPokemon[id];
+            if (EntityExists(teamMon))
+            {
+                EntityInfo *monInfo = teamMon->info;
+                s32 color = (a0->unk14[i] != 0) ? 6 : 2;
+
+                sub_8070968(gAvailablePokemonNames, monInfo, color);
+                if (sub_806A538(gRecruitedPokemonRef->pokemon2[monInfo->teamIndex].unkA)) {
+                    if (monInfo->HP <= monInfo->maxHPStat / 4) {
+                        strcpy(gAvailablePokemonNames + 0x50, gUnknown_8106BB4);
+                    }
+                    else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 2) {
+                        strcpy(gAvailablePokemonNames + 0x50, gUnknown_8106BB8);
+                    }
+                    else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 3) {
+                        strcpy(gAvailablePokemonNames + 0x50, gUnknown_8106BBC);
+                    }
+                    else {
+                        strcpy(gAvailablePokemonNames + 0x50, gUnknown_8106BC0);
+                    }
+                }
+                else {
+                    if (monInfo->HP <= monInfo->maxHPStat / 4) {
+                        strcpy(gAvailablePokemonNames + 0x50, gUnknown_8106BC4);
+                    }
+                    else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 2) {
+                        strcpy(gAvailablePokemonNames + 0x50, gUnknown_8106BC8);
+                    }
+                    else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 3) {
+                        strcpy(gAvailablePokemonNames + 0x50, gUnknown_8106BCC);
+                    }
+                    else {
+                        strcpy(gAvailablePokemonNames + 0x50, gUnknown_8106BD0);
+                    }
+                }
+
+                gFormatData_202DE30[0] = monInfo->HP;
+                gFormatData_202DE30[1] = monInfo->maxHPStat;
+                y = sub_8013800(&gUnknown_202EE10, i);
+                if (monInfo->isTeamLeader) {
+                    xxx_format_and_draw(9, y, gUnknown_8106BD4, 0, 0);
+                }
+                else {
+                    xxx_format_and_draw(9, y, gUnknown_8106BE0, 0, 0);
+                }
+            }
+        }
+    }
+
+    sub_80073E0(0);
+}
+
+extern bool8 CanLeaderSwitch(u8 dungeon);
+
+void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
+{
+    Entity *teamMon;
+    EntityInfo *monInfo;
+
+    gUnknown_202EE6C = 0;
+    teamMon = gDungeon->teamPokemon[a0->unk4[gUnknown_202EE10.menuIndex]];
+    monInfo = teamMon->info;
+    sub_8044F5C(0x1B, 0);
+    sub_8044F5C(0x19, 0);
+    if (!monInfo->isTeamLeader) {
+        if (!gDungeon->unk65D && (monInfo->joinedAt.joinedAt != DUNGEON_JOIN_LOCATION_PARTNER || gDungeon->unk65C)) {
+            sub_8044F5C(0x34, 0);
+        }
+        sub_8044F5C(0x1C, 0);
+    }
+    sub_8044F5C(0x30, 0);
+    if (!monInfo->isTeamLeader) {
+        sub_8044F5C(0x1A, 0);
+        // Why checking teamLeader again?
+        if (!monInfo->isTeamLeader && gDungeon->unk65C && CanLeaderSwitch(gDungeon->dungeonLocation.id)) {
+            bool32 r5;
+
+            sub_8044F5C(0x3B, 0);
+            r5 = TRUE;
+            if (monInfo->teamIndex >= MAX_TEAM_MEMBERS) {
+                r5 = FALSE;
+            }
+            else {
+                PokemonStruct2 *mon = &gRecruitedPokemonRef->pokemon2[monInfo->teamIndex];
+                if (sub_806A538(mon->unkA)) {
+                    r5 = FALSE;
+                }
+            }
+
+            if (CannotMove(teamMon, FALSE)) {
+                r5 = FALSE;
+            }
+            if (!r5) {
+                sub_8044FF0(0x3B);
+            }
+        }
+    }
+
+    if (IsClientOrTeamBase(monInfo->joinedAt.joinedAt)) {
+        sub_8044FF0(0x19);
+        sub_8044FF0(0x3B);
+        sub_8044FF0(0x1A);
+        sub_8044FF0(0x30);
+        sub_8044FF0(0x34);
+    }
+
+    sub_8045064();
+}
+
+void sub_80615B4(ActionContainer *a0, struct UnkFieldTeamMenuStruct *a1)
+{
+    SetMonsterActionFields(a0, gUnknown_202EE44[gUnknown_202EE10.menuIndex].unk0);
+    a0->unk4[0].actionUseIndex = a1->unk4[a1->unk0];
+}
+
+void sub_806195C(s32 a0, void *a1, EntityInfo *a3, s32 a4);
+void sub_80623B0(void);
+void sub_8062D68(void);
+void sub_8062230(void);
+void sub_8062748(u8 a0);
+
+extern void (*gUnknown_203B080)(s32 a0);
+extern void (*gUnknown_203B084)(s32 a0);
+
+static inline void SetTxtStruct(UnkTextStruct3 *sp)
+{
+    memset(sp, 0, sizeof(*sp));
+    sp->a0[0].unk4 = 6;
+    sp->a0[0].unk8.unk0.separate.unk0 = 2;
+    sp->a0[0].unk8.unk0.separate.unk2 = 2;
+    sp->a0[0].unkC = 0x12;
+    sp->a0[0].unkE = 0xE;
+    sp->a0[0].unk10 = 0x12;
+    sp->a0[0].unk12 = 2;
+    sp->a0[0].unk14 = &gUnknown_202F270;
+    sp->a0[1].unk4 = 3;
+    sp->a0[2].unk4 = 3;
+    sp->a0[3].unk4 = 3;
+}
+
+void sub_80615E8(ActionContainer *a0)
+{
+    UnkTextStruct3 sp;
+    EntityInfo *monInfo;
+    u8 var_3C[9];
+    s32 var_30;
+    s32 var_2C;
+    Entity *teamMon;
+
+    SetTxtStruct(&sp);
+    teamMon = gDungeon->teamPokemon[a0->unk4[0].actionUseIndex];
+    monInfo = teamMon->info;
+    var_2C = 0;
+    var_30 = 0;
+    while (1) {
+        s32 i;
+        bool32 addCursor = 1;
+        bool32 loopBreak = FALSE;
+
+        gUnknown_202F270.f0 = 1;
+        gUnknown_202F270.f1 = 0;
+        gUnknown_202F270.f2 = 10;
+        gUnknown_202F270.f3 = 0;
+        sub_803ECB4(&sp, 1);
+        sub_806195C(var_30, var_3C, monInfo, 0);
+        for (i = 0; i < 8; i++) {
+            if (var_3C[i] == 11)
+                break;
+        }
+        gUnknown_202EE10.unk1A = i;
+        gUnknown_202EE10.unk1C = 8;
+        gUnknown_202EE10.unk1E = 0;
+        gUnknown_202EE10.unk20 = 0;
+        gUnknown_202EE10.unk4 = 0;
+        gUnknown_202EE10.unk6 = 16;
+        gUnknown_202EE10.unkC = 0;
+        gUnknown_202EE10.unkE = 0;
+        gUnknown_202EE10.unk14.x = 0;
+        gUnknown_202EE10.unk0 = 0;
+        sub_801317C(&gUnknown_202EE10.unk28);
+        sub_80137B0(&gUnknown_202EE10, 0);
+        gUnknown_202EE10.menuIndex = var_2C;
+        while (1) {
+            s32 i;
+
+            AddMenuCursorSprite(&gUnknown_202EE10);
+            if (var_3C[8] != 11) {
+                sub_80623B0();
+            }
+            if (var_30 != 0) {
+                sub_8062230();
+            }
+            sub_803E46C(0x3D);
+            if (gRealInputs.repeated & DPAD_DOWN) {
+                sub_8083CE0(1);
+                if (gUnknown_202EE10.menuIndex == 7) {
+                    if (var_3C[8] != 11) {
+                        for (i = 0; i < 6; i++) {
+                            gUnknown_203B080(0);
+                            sub_803E46C(0x3D);
+                        }
+                        var_30++;
+                    }
+                    var_2C = 7;
+                    break;
+                }
+                sub_80136E0(&gUnknown_202EE10, 0);
+            }
+            if (gRealInputs.repeated & DPAD_UP) {
+                sub_8083CE0(1);
+                if (gUnknown_202EE10.menuIndex == 0) {
+                    if (var_30 != 0) {
+                        for (i = 0; i < 6; i++) {
+                            gUnknown_203B084(0);
+                            sub_803E46C(0x3D);
+                        }
+                        var_30--;
+                    }
+                    var_2C = 0;
+                    break;
+                }
+                sub_8013744(&gUnknown_202EE10, 0);
+            }
+            if (gRealInputs.pressed & START_BUTTON) {
+                s32 var = var_3C[gUnknown_202EE10.menuIndex];
+                var_2C = gUnknown_202EE10.menuIndex;
+                sub_8083D44();
+                sub_8062748(var);
+                loopBreak = FALSE;
+                break;
+            }
+            if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
+                bool32 changed;
+
+                u8 var = var_3C[gUnknown_202EE10.menuIndex];
+                var_2C = gUnknown_202EE10.menuIndex;
+                sub_8062D68();
+                sub_8083D08();
+                gUnknown_202EE6C = 0;
+                sub_8044F5C(0x2F, 0);
+                sub_8044F5C(0xC, 0);
+                if (CannotMove(teamMon, TRUE)) {
+                    sub_8044FF0(0x2F);
+                }
+                sub_805FC30(&sp, 0x16);
+                while (1) {
+                    changed = FALSE;
+                    AddMenuCursorSprite(&gUnknown_202EE10);
+                    sub_803E46C(0x3D);
+                    if (gRealInputs.repeated & DPAD_DOWN) {
+                        sub_8083CE0(1);
+                        sub_80136E0(&gUnknown_202EE10, 1);
+                    }
+                    if (gRealInputs.repeated & DPAD_UP) {
+                        sub_8083CE0(1);
+                        sub_8013744(&gUnknown_202EE10, 1);
+                    }
+                    if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
+                        if (sub_8044F3C(gUnknown_202EE10.menuIndex)) {
+                            changed = TRUE;
+                            break;
+                        }
+                        sub_8083D30();
+                    }
+                    if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
+                        sub_8083D30();
+                        changed = FALSE;
+                        break;
+                    }
+                }
+                if (changed) {
+                    sub_8083D08();
+                    if (gUnknown_202EE10.menuIndex == 0) {
+                        PlaySoundEffect(0x133);
+                        monInfo->tactic = var;
+                        monInfo->aiTarget.aiObjective = 6;
+                        monInfo->aiTarget.aiTarget = NULL;
+                        monInfo->aiTarget.unkC = 0;
+                        monInfo->aiTarget.aiTargetSpawnGenID = 0;
+                        if (!monInfo->isTeamLeader) {
+                            MoveIfPossible(teamMon, TRUE);
+                        }
+                    }
+                    else {
+                        sub_8062748(var);
+                        addCursor = FALSE;
+                    }
+                }
+                loopBreak = FALSE;
+                break;
+            }
+            if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
+                sub_8083D30();
+                loopBreak = TRUE;
+                break;
+            }
+        }
+
+        if (addCursor) {
+            AddMenuCursorSprite(&gUnknown_202EE10);
+        }
+        sub_803E46C(0x3D);
+        if (loopBreak)
+            break;
+    }
+    sub_803EAF0(0, NULL);
+}
+
+//

@@ -61,7 +61,7 @@ typedef struct AITarget
     /* 0x3 */ bool8 aiTurningAround;
     /* 0x4 */ u16 aiTargetSpawnGenID;
     /* 0x8 */ struct Entity *aiTarget;
-    /* 0xC */ u8 fillC[4];
+    /* 0xC */ u32 unkC;
     /* 0x10 */ Position aiTargetPos;
 
 } AITarget;
