@@ -97,7 +97,7 @@ static void DisplayAdventureLog(void)
     r4 = sAdventureLog->s0.input.unk1E * 8;
     r6 = r4;
     r6 += 10;
-    xxx_call_draw_string(r6, 0, sAdventureLogText, sAdventureLog->s0.unk34, 0);
+    PrintStringOnWindow(r6, 0, sAdventureLogText, sAdventureLog->s0.unk34, 0);
 
     r4 += 4;
     r6 = r4 + (sAdventureLog->unk9C.f2 * 8);
@@ -111,39 +111,39 @@ static void DisplayAdventureLog(void)
                 case 12:
                     v1 = sub_80978B8();
                     gFormatData_202DE30 = (s16)v1;
-                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                    PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 7:
                     v2 = sub_8097880();
                     gFormatData_202DE30 = (s16)v2;
-                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                    PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 11:
                     v3 = sub_8097838();
                     gFormatData_202DE30 = (s16)v3;
-                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                    PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 8:
                     v4 = sub_80977B8();
                     gFormatData_202DE30 = v4;
-                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                    PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 9:
                     v5 = sub_80977F8();
                     gFormatData_202DE30 = v5;
-                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                    PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 10:
                     v6 = sub_8097870();
                     gFormatData_202DE30 = (s16)v6;
                     // fallthrough
                 default:
-                    xxx_format_and_draw(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                    PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
             }
         }
         else
-            xxx_call_draw_string(8, sub_8013800(&sAdventureLog->s0.input, i), sPlaceholder, sAdventureLog->s0.unk34, 0);
+            PrintStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), sPlaceholder, sAdventureLog->s0.unk34, 0);
     }
 
     sub_80073E0(sAdventureLog->s0.unk34);

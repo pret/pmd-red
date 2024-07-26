@@ -127,13 +127,13 @@ static void RedrawPartnerSelectionMenu(void)
 
     sub_8008C54(gUnknown_203B404->s18.s0.unk34);
     sub_80073B8(gUnknown_203B404->s18.s0.unk34);
-    xxx_call_draw_string(12, 0, gPartnerSelectionHeaderText, gUnknown_203B404->s18.s0.unk34, 0);
+    PrintStringOnWindow(12, 0, gPartnerSelectionHeaderText, gUnknown_203B404->s18.s0.unk34, 0);
 
     monCounter = 0;
     while (monCounter < gUnknown_203B404->s18.s0.input.unk1A) {
         yCoord = sub_8013800(&gUnknown_203B404->s18.s0.input, monCounter);
         monName = GetMonSpecies(gUnknown_203B404->PartnerArray[monCounter]);
-        xxx_call_draw_string(8, yCoord, monName, gUnknown_203B404->s18.s0.unk34, 0);
+        PrintStringOnWindow(8, yCoord, monName, gUnknown_203B404->s18.s0.unk34, 0);
         monCounter++;
     }
     sub_80073E0(gUnknown_203B404->s18.s0.unk34);
@@ -190,7 +190,7 @@ static void RedrawPartnerSelectionMenu(void)
     "\tstr r4, [sp]\n"
     "\tmovs r0, 0xC\n"
     "\tmovs r1, 0\n"
-    "\tbl xxx_call_draw_string\n"
+    "\tbl PrintStringOnWindow\n"
     "\tmovs r5, 0\n"
     "\tb _0803CF98\n"
     "\t.align 2, 0\n"
@@ -216,7 +216,7 @@ static void RedrawPartnerSelectionMenu(void)
     "\tstr r0, [sp]\n"
     "\tmovs r0, 0x8\n"
     "\tadds r1, r4, 0\n"
-    "\tbl xxx_call_draw_string\n"
+    "\tbl PrintStringOnWindow\n"
     "\tadds r5, 0x1\n"
 "_0803CF98:\n"
     "\tldr r0, [r6]\n"

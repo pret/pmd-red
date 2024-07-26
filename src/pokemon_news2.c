@@ -86,8 +86,8 @@ static void sub_802BB28(void)
         case 1:
             sub_8008C54(sUnknown_203B2D4->unk24);
             sub_80073B8(sUnknown_203B2D4->unk24);
-            xxx_format_and_draw(10, 0, GetPokemonMailHeadline(sUnknown_203B2D4->currMailIndex), sUnknown_203B2D4->unk24, 0);
-            xxx_format_and_draw(6, 20, sUnknown_203B2D4->unk10[sUnknown_203B2D4->unk8], sUnknown_203B2D4->unk24, 0);
+            PrintFormatStringOnWindow(10, 0, GetPokemonMailHeadline(sUnknown_203B2D4->currMailIndex), sUnknown_203B2D4->unk24, 0);
+            PrintFormatStringOnWindow(6, 20, sUnknown_203B2D4->unk10[sUnknown_203B2D4->unk8], sUnknown_203B2D4->unk24, 0);
             sub_80073E0(sUnknown_203B2D4->unk24);
             sUnknown_203B2D4->unk8++;
             break;

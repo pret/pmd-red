@@ -83,7 +83,7 @@ static void sub_801E76C(void)
 static void DisplayChosenHint(void)
 {
     sub_80073B8(sUnknown_203B268->unk34);
-    xxx_call_draw_string((sUnknown_203B268->input.unk1E * 8) + 16, 0, gCommonHints[sUnknown_203B268->input.unk1E].heading, sUnknown_203B268->unk34, 0);
-    xxx_call_draw_string(10, 20, gCommonHints[sUnknown_203B268->input.unk1E].body, sUnknown_203B268->unk34, 0);
+    PrintStringOnWindow((sUnknown_203B268->input.unk1E * 8) + 16, 0, gCommonHints[sUnknown_203B268->input.unk1E].heading, sUnknown_203B268->unk34, 0);
+    PrintStringOnWindow(10, 20, gCommonHints[sUnknown_203B268->input.unk1E].body, sUnknown_203B268->unk34, 0);
     sub_80073E0(sUnknown_203B268->unk34);
 }

@@ -194,7 +194,7 @@ void sub_803092C(void)
   r4 = gUnknown_203B320->s28.s0.input.unk1E * 8;
   r5 = r4;
   r5 += 10;
-  xxx_call_draw_string(r5,0,gUnknown_80E086C[gUnknown_203B320->wonderMailType],gUnknown_203B320->s28.s0.unk34,0);
+  PrintStringOnWindow(r5,0,gUnknown_80E086C[gUnknown_203B320->wonderMailType],gUnknown_203B320->s28.s0.unk34,0);
   r4 += 4;
   r5 = r4 + gUnknown_203B320->s28.unk9C.f2 * 8;
   sub_8012BC4(r5,0,gUnknown_203B320->s28.s0.input.unk1E + 1,1,7,gUnknown_203B320->s28.s0.unk34);

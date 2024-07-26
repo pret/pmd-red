@@ -157,7 +157,7 @@ static void sub_80234BC(void)
 
     sub_8008C54(gUnknown_3001B5C->s35C.s0.unk34);
     sub_80073B8(gUnknown_3001B5C->s35C.s0.unk34);
-    xxx_call_draw_string(10, 0, sPokemon, gUnknown_3001B5C->s35C.s0.unk34, 0);
+    PrintStringOnWindow(10, 0, sPokemon, gUnknown_3001B5C->s35C.s0.unk34, 0);
 
     sub_8012BC4((gUnknown_3001B5C->s35C.unk9C.f2 * 8) + 4, 0, gUnknown_3001B5C->s35C.s0.input.unk1E + 1, 2, 7, gUnknown_3001B5C->s35C.s0.unk34);
 
@@ -187,7 +187,7 @@ static void sub_80234BC(void)
 
         sub_808D930(buffer1,species);
         sprintfStatic(buffer2, sFmtColoredString, color, buffer1);
-        xxx_call_draw_string(36, y, buffer2, gUnknown_3001B5C->s35C.s0.unk34, 0);
+        PrintStringOnWindow(36, y, buffer2, gUnknown_3001B5C->s35C.s0.unk34, 0);
     }
 
     sub_80073E0(gUnknown_3001B5C->s35C.s0.unk34);

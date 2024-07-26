@@ -87,15 +87,15 @@ static void PopulateWigglytuffShopFriendAreaInfoScreen(void)
 
     sub_80073B8(sWigglytuffShop2Work->unk74);
     sub_8092578(buffer1, sWigglytuffShop2Work->friendArea, FALSE);
-    xxx_call_draw_string(20, 0, buffer1, sWigglytuffShop2Work->unk74, 0);
+    PrintStringOnWindow(20, 0, buffer1, sWigglytuffShop2Work->unk74, 0);
 
     string = GetFriendAreaDescription(sWigglytuffShop2Work->friendArea);
-    xxx_call_draw_string(10, 20, string, sWigglytuffShop2Work->unk74, 0);
+    PrintStringOnWindow(10, 20, string, sWigglytuffShop2Work->unk74, 0);
 
     if (sWigglytuffShop2Work->unkD != 0)
-        xxx_call_draw_string(32, 60, sUnknown_80DC4F0, sWigglytuffShop2Work->unk74, 0);
+        PrintStringOnWindow(32, 60, sUnknown_80DC4F0, sWigglytuffShop2Work->unk74, 0);
     else
-        xxx_call_draw_string(32, 60, sInhabitants, sWigglytuffShop2Work->unk74, 0);
+        PrintStringOnWindow(32, 60, sInhabitants, sWigglytuffShop2Work->unk74, 0);
 
     sub_800792C(sWigglytuffShop2Work->unk74, 4, 64, 20, 4);
 
@@ -115,14 +115,14 @@ static void PopulateWigglytuffShopFriendAreaInfoScreen(void)
 
         switch (sWigglytuffShop2Work->pokemonStatus[i]) {
             case POKEMON_UNKNOWN: 
-                xxx_call_draw_string(x, y, gCommonTripleQuestionMark[0], sWigglytuffShop2Work->unk74, 0);
+                PrintStringOnWindow(x, y, gCommonTripleQuestionMark[0], sWigglytuffShop2Work->unk74, 0);
                 break;
             case POKEMON_SEEN: 
-                xxx_call_draw_string(x, y, buffer2, sWigglytuffShop2Work->unk74, 0);
+                PrintStringOnWindow(x, y, buffer2, sWigglytuffShop2Work->unk74, 0);
                 break;
             case POKEMON_RECRUITED:
                 sprintfStatic(buffer1, sFmtCyanString, buffer2);
-                xxx_call_draw_string(x, y, buffer1, sWigglytuffShop2Work->unk74, 0);
+                PrintStringOnWindow(x, y, buffer1, sWigglytuffShop2Work->unk74, 0);
                 break;
         }
     }

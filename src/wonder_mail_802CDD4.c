@@ -160,7 +160,7 @@ void sub_802CFD0(void)
     sub_80073B8(sUnknown_203B2F4->unk34);
 
     r5 = r4 = (sUnknown_203B2F4->input.unk1E * 8) + 10;
-    xxx_call_draw_string(r5, 0, sRescueEvent, sUnknown_203B2F4->unk34, 0);
+    PrintStringOnWindow(r5, 0, sRescueEvent, sUnknown_203B2F4->unk34, 0);
 
     r4 -= 6;
     r5 = r4 + (sUnknown_203B2F4->unk9C.f2 * 8);

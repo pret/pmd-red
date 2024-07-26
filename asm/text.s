@@ -2485,8 +2485,8 @@ sub_8008F8C:
 _08008FB8: .4byte gUnknown_2027370
 	thumb_func_end sub_8008F8C
 
-	thumb_func_start xxx_call_draw_string
-xxx_call_draw_string:
+	thumb_func_start PrintStringOnWindow
+PrintStringOnWindow:
 	push {r4-r6,lr}
 	sub sp, 0x10
 	adds r4, r0, 0
@@ -2510,7 +2510,7 @@ xxx_call_draw_string:
 	bx r0
 	.align 2, 0
 _08008FE8: .4byte gUnknown_2027370
-	thumb_func_end xxx_call_draw_string
+	thumb_func_end PrintStringOnWindow
 
 	thumb_func_start nullsub_170
 nullsub_170:

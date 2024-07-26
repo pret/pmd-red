@@ -181,7 +181,7 @@ void DrawPelipperBoardJobMenu(void)
     iVar4 = gUnknown_203B2E0->input.unk1E * 8;
     x = iVar4;
     x += 10;
-    xxx_call_draw_string(x, 0, sBulletinBoard, gUnknown_203B2E0->unk3C, 0);
+    PrintStringOnWindow(x, 0, sBulletinBoard, gUnknown_203B2E0->unk3C, 0);
 
     iVar4 += 4;
     x = iVar4 + (gUnknown_203B2E0->unkA4.f2 * 8);

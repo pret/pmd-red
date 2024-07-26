@@ -132,7 +132,7 @@ void BuildIQSkillList(void)
     x = sIQSkillListMenu->s24.s0.input.unk1E * 8;
     x2 = x;
     x2 += 10;
-    xxx_call_draw_string(x2, 0, sIQSkills, sIQSkillListMenu->s24.s0.unk34, 0);
+    PrintStringOnWindow(x2, 0, sIQSkills, sIQSkillListMenu->s24.s0.unk34, 0);
 
     x += 4;
     x2 = x + sIQSkillListMenu->s24.unk9C.f2 * 8;
@@ -149,7 +149,7 @@ void BuildIQSkillList(void)
         else
             strcpy(gUnknown_202DEA8 - 80, sUnknown_80DBE18);
 
-        xxx_format_and_draw(12, y, sFmt01, sIQSkillListMenu->s24.s0.unk34, 0);
+        PrintFormatStringOnWindow(12, y, sFmt01, sIQSkillListMenu->s24.s0.unk34, 0);
     }
 
     sub_80073E0(sIQSkillListMenu->s24.s0.unk34);

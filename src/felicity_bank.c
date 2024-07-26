@@ -392,9 +392,9 @@ static void sub_8016B48(u8 action)
     sub_80073B8(sFelicityBankWork->unk64.unk14);
 
     if (action != FELICITY_BANK_ACTION_WITHDRAW)
-        xxx_call_draw_string(12, 0, gCommonDepositPrompt[0], sFelicityBankWork->unk64.unk14, 0);
+        PrintStringOnWindow(12, 0, gCommonDepositPrompt[0], sFelicityBankWork->unk64.unk14, 0);
     else
-        xxx_call_draw_string(12, 0, gCommonWithdrawPrompt[0], sFelicityBankWork->unk64.unk14, 0);
+        PrintStringOnWindow(12, 0, gCommonWithdrawPrompt[0], sFelicityBankWork->unk64.unk14, 0);
 
     sub_8013C68(&sFelicityBankWork->unk64);
     sub_80073E0(sFelicityBankWork->unk64.unk14);
@@ -404,9 +404,9 @@ static void CreateFelicityMoneySavingsHeader(u32 param_1)
 {
     sub_8008C54(param_1);
     sub_80073B8(param_1);
-    xxx_call_draw_string(16, 4, sDisplayMoney, param_1, 0);
+    PrintStringOnWindow(16, 4, sDisplayMoney, param_1, 0);
     sub_8012BC4(96, 4, gTeamInventoryRef->teamMoney, 5, 5, param_1);
-    xxx_call_draw_string(112, 4, sDisplaySavings, param_1, 0);
+    PrintStringOnWindow(112, 4, sDisplaySavings, param_1, 0);
     sub_8012BC4(200, 4, gTeamInventoryRef->teamSavings, 7, 5, param_1);
     sub_80073E0(param_1);
 }
@@ -415,7 +415,7 @@ void DrawTeamMoneyBox(u32 param_1)
 { 
     sub_8008C54(param_1);
     sub_80073B8(param_1);
-    xxx_call_draw_string(6, 0, sMoney, param_1, 0);
+    PrintStringOnWindow(6, 0, sMoney, param_1, 0);
     sub_8012BC4(42, 12, gTeamInventoryRef->teamMoney, 5, 5, param_1);
     sub_80073E0(param_1);
 }

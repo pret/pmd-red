@@ -586,7 +586,7 @@ static void sub_801D894(void)
     x_coord = (128 - location_length) / 2; // Centers the location name
     sub_8008C54(1);
     sub_80073B8(1);
-    xxx_call_draw_string(x_coord, 4, buffer, 1, 0);
+    PrintStringOnWindow(x_coord, 4, buffer, 1, 0);
     sub_80073E0(1);
     sub_8008C54(2);
     sub_80073B8(2);
@@ -596,9 +596,9 @@ static void sub_801D894(void)
     r5 = sFmtPointsCyan; // %s {COLOR_1 CYAN}%d{END_COLOR_TEXT_1} Pts.
     rank = GetRescueTeamRank();
     sprintfStatic(buffer, r5, GetTeamRankString(rank), GetTeamRankPts());
-    xxx_call_draw_string(32, 4, buffer, 2, 0);
+    PrintStringOnWindow(32, 4, buffer, 2, 0);
     sprintfStatic(buffer, sFmtMoneyCyan, gTeamInventoryRef->teamMoney);
-    xxx_call_draw_string(32, 18, buffer, 2, 0);
+    PrintStringOnWindow(32, 18, buffer, 2, 0);
     sub_80073E0(2);
 }
 

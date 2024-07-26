@@ -179,7 +179,7 @@ void DrawJobListMenu(void)
     r4 = gUnknown_203B2E8->input.unk1E * 8;
     x = r4;
     x += 10;
-    xxx_call_draw_string(x, 0, sJobList, gUnknown_203B2E8->unk3C, 0);
+    PrintStringOnWindow(x, 0, sJobList, gUnknown_203B2E8->unk3C, 0);
 
     r4 += 4;
     x = r4 + (gUnknown_203B2E8->unkA4.f2 * 8);

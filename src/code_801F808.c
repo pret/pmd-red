@@ -150,8 +150,8 @@ void sub_801F9A4(void)
             sub_80073B8(gUnknown_203B278->unk5C);
             name = &(gUnknown_203B278->unk14[gUnknown_203B278->unkC]->pokeName);
             strcpy(gAvailablePokemonNames, *name);
-            xxx_format_and_draw(0x10,0,gUnknown_80DC310,gUnknown_203B278->unk5C,0); // $m0
-            xxx_format_and_draw(4,0x10,gUnknown_203B278->unk14[gUnknown_203B278->unkC]->unk4,gUnknown_203B278->unk5C,0);
+            PrintFormatStringOnWindow(0x10,0,gUnknown_80DC310,gUnknown_203B278->unk5C,0); // $m0
+            PrintFormatStringOnWindow(4,0x10,gUnknown_203B278->unk14[gUnknown_203B278->unkC]->unk4,gUnknown_203B278->unk5C,0);
             sub_80073E0(gUnknown_203B278->unk5C);
             break;
         case 2:

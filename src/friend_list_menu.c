@@ -645,7 +645,7 @@ void sub_8025E68(u32 r0, BulkItem *heldItem)
     a3.unk8 = 1;
     item.flags = ITEM_FLAG_EXISTS;
     sub_8090E14(gUnknown_202DE58, &item, &a3);
-    xxx_format_and_draw(4, 3, sItemBuffered, r0, 0);
+    PrintFormatStringOnWindow(4, 3, sItemBuffered, r0, 0);
     sub_80073E0(r0);
 }
 

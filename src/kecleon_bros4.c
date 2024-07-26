@@ -197,9 +197,9 @@ void sub_801A9E0(void)
     x = gUnknown_203B224->input.unk1E * 8 + 10;
 
     if (gUnknown_203B224->input.unk1E == 0)
-        xxx_call_draw_string(x, 0, sTeamToolboxA, gUnknown_203B224->unk88, 0);
+        PrintStringOnWindow(x, 0, sTeamToolboxA, gUnknown_203B224->unk88, 0);
     else
-        xxx_call_draw_string(x, 0, sTeamToolboxB, gUnknown_203B224->unk88, 0);
+        PrintStringOnWindow(x, 0, sTeamToolboxB, gUnknown_203B224->unk88, 0);
 
     for (r7 = 0; r7 < gUnknown_203B224->input.unk1A; r7++) {
         teamItemIndex = (gUnknown_203B224->input.unk1E * gUnknown_203B224->input.unk1C) + r7;
@@ -208,7 +208,7 @@ void sub_801A9E0(void)
         switch (gUnknown_203B224->unk0) {
             case 0: {
                 sub_8090E14(buf1, &item, 0);
-                xxx_call_draw_string(8, sub_8013800(&gUnknown_203B224->input, r7), buf1, gUnknown_203B224->unk88, 0);
+                PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->input, r7), buf1, gUnknown_203B224->unk88, 0);
                 break;
             }
             case 1:
@@ -221,7 +221,7 @@ void sub_801A9E0(void)
                 item.flags = 1;
                 sub_8090E14(buf1, &item, &thing);
 
-                xxx_call_draw_string(8, sub_8013800(&gUnknown_203B224->input, r7), buf1, gUnknown_203B224->unk88, 0);
+                PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->input, r7), buf1, gUnknown_203B224->unk88, 0);
                 break;
             }
             case 3: {
@@ -234,10 +234,10 @@ void sub_801A9E0(void)
                 sub_8090E14(buf1, &item, &thing);
 
                 if (gUnknown_203B224->unk4[teamItemIndex] != 0 || sub_801ADA0(teamItemIndex))
-                    xxx_call_draw_string(8,sub_8013800(&gUnknown_203B224->input,r7), buf1, gUnknown_203B224->unk88, 0);
+                    PrintStringOnWindow(8,sub_8013800(&gUnknown_203B224->input,r7), buf1, gUnknown_203B224->unk88, 0);
                 else {
                     strncpy(gUnknown_202DE58, buf1, 80);
-                    xxx_format_and_draw(8, sub_8013800(&gUnknown_203B224->input, r7), sFmtMoveItem0, gUnknown_203B224->unk88, 0);
+                    PrintFormatStringOnWindow(8, sub_8013800(&gUnknown_203B224->input, r7), sFmtMoveItem0, gUnknown_203B224->unk88, 0);
                 }
                 break;
             }
@@ -255,15 +255,15 @@ void sub_801A9E0(void)
 
                     if (GetStackSellPrice(&item) + gTeamInventoryRef->teamMoney > MAX_TEAM_MONEY) {
                         sprintfStatic(buf2, sFmtRed, buf1);
-                        xxx_call_draw_string(8, sub_8013800(&gUnknown_203B224->input, r7), buf2, gUnknown_203B224->unk88, 0);
+                        PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->input, r7), buf2, gUnknown_203B224->unk88, 0);
                     }
                     else
-                        xxx_call_draw_string(8, sub_8013800(&gUnknown_203B224->input, r7), buf1, gUnknown_203B224->unk88, 0);
+                        PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->input, r7), buf1, gUnknown_203B224->unk88, 0);
                 }
                 else {
                     sub_8090E14(buf1, &item, 0);
                     strncpy(gUnknown_202DE58, buf1, 80);
-                    xxx_format_and_draw(8, sub_8013800(&gUnknown_203B224->input, r7), sFmtMoveItem0, gUnknown_203B224->unk88, 0);
+                    PrintFormatStringOnWindow(8, sub_8013800(&gUnknown_203B224->input, r7), sFmtMoveItem0, gUnknown_203B224->unk88, 0);
                 }
                 break;
             }
@@ -278,10 +278,10 @@ void sub_801A9E0(void)
                 sub_8090E14(buf1, &item, &thing);
 
                 if (IsGummiItem(item.id))
-                    xxx_call_draw_string(8, sub_8013800(&gUnknown_203B224->input, r7), buf1, gUnknown_203B224->unk88, 0);
+                    PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->input, r7), buf1, gUnknown_203B224->unk88, 0);
                 else {
                     strncpy(gUnknown_202DE58, buf1, 80);
-                    xxx_format_and_draw(8, sub_8013800(&gUnknown_203B224->input, r7), sFmtMoveItem0, gUnknown_203B224->unk88, 0);
+                    PrintFormatStringOnWindow(8, sub_8013800(&gUnknown_203B224->input, r7), sFmtMoveItem0, gUnknown_203B224->unk88, 0);
                 }
                 break;
             }
@@ -298,9 +298,9 @@ void sub_801AD34(u32 param_1)
 {
     sub_8008C54(param_1);
     sub_80073B8(param_1);
-    xxx_call_draw_string(6, 0, sItems, param_1, 0);
+    PrintStringOnWindow(6, 0, sItems, param_1, 0);
     sub_8012BC4(18, 13, GetNumberOfFilledInventorySlots(), 2, 7, param_1);
-    xxx_call_draw_string(22, 13, sSlash, param_1, 0);
+    PrintStringOnWindow(22, 13, sSlash, param_1, 0);
     sub_8012BC4(43, 13, INVENTORY_SIZE, 2, 7, param_1);
     sub_80073E0(param_1);
 }

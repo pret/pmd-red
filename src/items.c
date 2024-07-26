@@ -672,9 +672,9 @@ u32 sub_80913E0(Item* slot, u32 a2, struct subStruct_203B240 ** a3)
     BufferItemName(gUnknown_202DE58, (u8)(slot->quantity + 125), NULL);
   }
   sub_80073B8(a2);
-  xxx_format_and_draw(16, 0, buffer88, a2, 0);
+  PrintFormatStringOnWindow(16, 0, buffer88, a2, 0);
 
-  xxx_format_and_draw(8, 24, GetItemDescription(slot->id), a2, 0);
+  PrintFormatStringOnWindow(8, 24, GetItemDescription(slot->id), a2, 0);
   if (GetItemCategory(slot->id) == CATEGORY_TMS_HMS) {
     Move *buffer8 = (Move*) (buffer88 + 80);  // field in struct
     u16 move = GetItemMoveID(slot->id);
@@ -684,13 +684,13 @@ u32 sub_80913E0(Item* slot, u32 a2, struct subStruct_203B240 ** a3)
 
     InitPokemonMove(buffer8, move);
     sub_80078A4(a2, 4, 82, 200, COLOR_WHITE_2);
-    xxx_format_and_draw(4, 84, gPtrTypeText, a2, 0);
+    PrintFormatStringOnWindow(4, 84, gPtrTypeText, a2, 0);
     moves_data = GetMoveType(buffer8);
     typestring = GetUnformattedTypeString(moves_data);
-    xxx_format_and_draw(64, 84, typestring, a2, 0);
+    PrintFormatStringOnWindow(64, 84, typestring, a2, 0);
     result = GetMoveBasePP(buffer8);
     gFormatData_202DE30 = result;
-    xxx_format_and_draw(128, 84, gPtrPPD0Text, a2, 0);
+    PrintFormatStringOnWindow(128, 84, gPtrPPD0Text, a2, 0);
   }
 
   sub_80073E0(a2);

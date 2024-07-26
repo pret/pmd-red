@@ -7,116 +7,6 @@
 
 
 
-	thumb_func_start sub_806195C
-sub_806195C:
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x14
-	adds r5, r0, 0
-	mov r9, r1
-	str r2, [sp, 0x10]
-	adds r7, r3, 0
-	subs r5, 0x1
-	adds r0, r7, 0
-	bl sub_80073B8
-	ldr r0, _080619B4
-	ldr r2, [r0]
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0x10
-	movs r1, 0
-	adds r3, r7, 0
-	bl xxx_call_draw_string
-	movs r0, 0x14
-	mov r8, r0
-	movs r1, 0xB
-	mov r0, r9
-	adds r0, 0x8
-_08061994:
-	strb r1, [r0]
-	subs r0, 0x1
-	cmp r0, r9
-	bge _08061994
-	bl GetLeaderInfo
-	ldrb r1, [r0, 0x9]
-	add r0, sp, 0x4
-	bl GetAvailTacticsforLvl
-	movs r6, 0x1
-	negs r6, r6
-	movs r1, 0
-	mov r10, r1
-	b _080619FC
-	.align 2, 0
-_080619B4: .4byte gUnknown_80FE954
-_080619B8:
-	ldr r0, _080619DC
-	adds r1, r4, 0
-	bl CopyTacticsNameToBuffer
-	ldr r0, [sp, 0x10]
-	adds r0, 0x94
-	ldrb r0, [r0]
-	cmp r0, r4
-	bne _080619E4
-	mov r0, r10
-	str r0, [sp]
-	movs r0, 0x10
-	mov r1, r8
-	ldr r2, _080619E0
-	adds r3, r7, 0
-	bl xxx_format_and_draw
-	b _080619F4
-	.align 2, 0
-_080619DC: .4byte gAvailablePokemonNames
-_080619E0: .4byte gUnknown_8106BEC
-_080619E4:
-	mov r1, r10
-	str r1, [sp]
-	movs r0, 0x10
-	mov r1, r8
-	ldr r2, _08061A34
-	adds r3, r7, 0
-	bl xxx_format_and_draw
-_080619F4:
-	adds r6, 0x1
-	movs r0, 0xC
-	add r8, r0
-	adds r5, 0x1
-_080619FC:
-	cmp r6, 0x9
-	bgt _08061A1E
-	cmp r5, 0
-	blt _080619F4
-	cmp r5, 0xB
-	bgt _080619F4
-	mov r0, sp
-	adds r0, r5
-	adds r0, 0x4
-	ldrb r4, [r0]
-	cmp r6, 0x8
-	bhi _08061A1A
-	mov r1, r9
-	adds r0, r1, r6
-	strb r4, [r0]
-_08061A1A:
-	cmp r4, 0xB
-	bne _080619B8
-_08061A1E:
-	adds r0, r7, 0
-	bl sub_80073E0
-	add sp, 0x14
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08061A34: .4byte gUnknown_8106BF4
-	thumb_func_end sub_806195C
 
 	thumb_func_start sub_8061A38
 sub_8061A38:
@@ -1678,7 +1568,7 @@ _08062650:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	mov r0, r10
 	bl GetIQSkillDescription
 	adds r2, r0, 0
@@ -1687,7 +1577,7 @@ _08062650:
 	movs r0, 0x8
 	movs r1, 0x10
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	mov r0, r10
@@ -1808,7 +1698,7 @@ _0806276C:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	mov r0, r10
 	bl GetTacticsDescription
 	adds r2, r0, 0
@@ -1817,7 +1707,7 @@ _0806276C:
 	movs r0, 0x8
 	movs r1, 0x10
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	mov r0, r10
@@ -1961,7 +1851,7 @@ sub_806285C:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	mov r0, r10
 	bl sub_808E51C
 	adds r2, r0, 0
@@ -1970,7 +1860,7 @@ sub_806285C:
 	movs r0, 0x8
 	movs r1, 0x10
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	add r4, sp, 0x4
@@ -2080,7 +1970,7 @@ _080629CA:
 	movs r0, 0x4
 	movs r1, 0x3
 	movs r3, 0x1
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	movs r0, 0x1
 	bl sub_80073E0
 	ldr r0, _08062A40
@@ -2289,7 +2179,7 @@ sub_8062B74:
 	movs r0, 0xC
 	movs r1, 0
 	movs r3, 0x2
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r1, 0x10
 	mov r8, r1
 	mov r0, r9
@@ -2322,7 +2212,7 @@ _08062BDE:
 	movs r0, 0xC
 	mov r1, r8
 	movs r3, 0x2
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	b _08062C8A
 	.align 2, 0
 _08062BF0: .4byte gUnknown_8106C90
@@ -2394,7 +2284,7 @@ _08062C6C:
 	mov r1, r8
 	ldr r2, _08062CA4
 	movs r3, 0x2
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r0, 0xC
 	add r8, r0
 _08062C80:
@@ -2440,7 +2330,7 @@ sub_8062CA8:
 	movs r0, 0xC
 	movs r1, 0
 	movs r3, 0x2
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r7, 0x8
 	movs r6, 0x12
 	adds r0, r5, 0
@@ -2489,7 +2379,7 @@ _08062D18:
 _08062D2C:
 	adds r1, r6, 0
 	movs r3, 0x2
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	b _08062D52
 	.align 2, 0
 _08062D38: .4byte gUnknown_8106C9C
@@ -2502,7 +2392,7 @@ _08062D3C:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	movs r3, 0x2
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 _08062D52:
 	movs r0, 0x2
 	bl sub_80073E0
@@ -3500,7 +3390,7 @@ _08063526:
 	movs r0, 0x4
 	movs r1, 0
 	movs r3, 0x2
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r0, 0x2
 	bl sub_80073E0
 	add sp, 0x24
@@ -3549,7 +3439,7 @@ sub_8063578:
 	adds r0, r4, 0
 	movs r1, 0
 	mov r3, r8
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r1, 0
 	mov r9, r1
 	ldr r0, [sp, 0x10]
@@ -3632,7 +3522,7 @@ _08063658:
 	adds r1, r4, 0
 	ldr r2, _08063694
 	mov r3, r8
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 _08063668:
 	adds r7, 0x8
 	adds r5, 0x8
@@ -4111,13 +4001,13 @@ sub_80639E4:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	ldr r2, [r5, 0x4]
 	str r4, [sp]
 	movs r0, 0x4
 	movs r1, 0x10
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	ldr r0, _08063A6C
@@ -5575,7 +5465,7 @@ sub_806455C:
 	movs r0, 0xC
 	movs r1, 0
 	movs r3, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	ldr r0, [r4, 0x14]
 	bl EntityExists
 	lsls r0, 24
@@ -5590,7 +5480,7 @@ sub_806455C:
 	movs r1, 0x12
 	add r2, sp, 0x4
 	movs r3, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 _080645C0:
 	movs r0, 0
 	bl sub_80073E0
@@ -5739,7 +5629,7 @@ _080646C4:
 	movs r1, 0
 	mov r2, r10
 	movs r3, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	ldr r5, _08064720
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -5749,7 +5639,7 @@ _080646C4:
 	movs r0, 0x8
 	movs r1, 0x18
 	movs r3, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	ldrb r0, [r4]
@@ -6118,13 +6008,13 @@ _080649E6:
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	str r4, [sp]
 	movs r0, 0x8
 	movs r1, 0x12
 	adds r2, r5, 0
 	movs r3, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	add sp, 0x4
@@ -6233,7 +6123,7 @@ _08064A58:
 	str r1, [sp]
 	movs r0, 0x10
 	movs r3, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	ldr r0, _08064B10
 	adds r4, r0
 	ldr r4, [r4]
@@ -6243,7 +6133,7 @@ _08064A58:
 	movs r1, 0x18
 	adds r2, r4, 0
 	movs r3, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	adds r0, r4, 0
@@ -7278,7 +7168,7 @@ _080652D2:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_8013800
@@ -7288,7 +7178,7 @@ _080652D2:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_8013800
@@ -7298,7 +7188,7 @@ _080652D2:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl sub_8013800
@@ -7308,7 +7198,7 @@ _080652D2:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r5, 0x4
 	adds r0, r4, 0
 	movs r1, 0x3
@@ -7319,7 +7209,7 @@ _080652D2:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	ldr r1, _080653D8
 	ldr r0, [r1]
 	movs r1, 0xCB
@@ -7342,7 +7232,7 @@ _080652D2:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	b _0806540E
 	.align 2, 0
 _080653D0: .4byte gUnknown_202EE10
@@ -7365,7 +7255,7 @@ _080653F4:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 _0806540E:
 	ldr r0, _08065444
 	adds r1, r5, 0
@@ -7377,7 +7267,7 @@ _0806540E:
 	str r0, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	add sp, 0xC8
@@ -7488,7 +7378,7 @@ sub_806544C:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_8013800
@@ -7501,7 +7391,7 @@ sub_806544C:
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_8013800
@@ -7513,7 +7403,7 @@ sub_806544C:
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	add sp, 0xC8
@@ -7640,28 +7530,28 @@ CreateFieldGameOptionsMenu:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	ldr r1, [sp, 0x4]
 	ldr r0, _080656B4
 	ldr r2, [r0]
 	str r6, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	ldr r1, [sp, 0x8]
 	ldr r0, _080656B8
 	ldr r2, [r0]
 	str r6, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	ldr r1, [sp, 0xC]
 	ldr r0, _080656BC
 	ldr r2, [r0]
 	str r6, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	add sp, 0xD4
@@ -7802,42 +7692,42 @@ CreateFieldDungeonMenu:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	ldr r1, [sp, 0x4]
 	ldr r0, _08065848
 	ldr r2, [r0]
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	ldr r1, [sp, 0x8]
 	ldr r0, _0806584C
 	ldr r2, [r0]
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	ldr r1, [sp, 0xC]
 	ldr r0, _08065850
 	ldr r2, [r0]
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	ldr r1, [sp, 0x10]
 	ldr r0, _08065854
 	ldr r2, [r0]
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	ldr r1, [sp, 0x14]
 	ldr r0, _08065858
 	ldr r2, [r0]
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	ldr r0, _0806585C
 	ldrb r0, [r0]
 	adds r4, r7, 0
@@ -8085,14 +7975,14 @@ _08065A0A:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	ldr r1, [r6]
 	ldr r0, _08065A84
 	ldr r2, [r0]
 	str r4, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	ldr r0, _08065A88
 	ldrb r1, [r0, 0x8]
 	lsls r3, r1, 2
@@ -8522,7 +8412,7 @@ sub_8065CAC:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r4, 0
 	ldr r5, _08065DB8
 _08065D7A:
@@ -8535,7 +8425,7 @@ _08065D7A:
 	str r0, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	adds r4, 0x1
 	cmp r4, 0x6
 	ble _08065D7A
@@ -8691,7 +8581,7 @@ _08065E0C:
 	str r7, [sp]
 	movs r1, 0
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	ldr r1, _08065F38
 	ldr r2, [sp, 0xC8]
 	lsls r0, r2, 5
@@ -8702,7 +8592,7 @@ _08065E0C:
 	movs r0, 0x8
 	movs r1, 0x10
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 _08065EF4:
@@ -9063,7 +8953,7 @@ sub_80661AC:
 	movs r0, 0xC
 	movs r1, 0
 	movs r3, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	b _080661F6
 	.align 2, 0
 _080661DC: .4byte gUnknown_202F2F8
@@ -9076,7 +8966,7 @@ _080661E4:
 	movs r0, 0x14
 	movs r1, 0
 	movs r3, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 _080661F6:
 	movs r1, 0x9F
 	lsls r1, 3
@@ -9114,7 +9004,7 @@ _08066208:
 	mov r1, r8
 	add r2, sp, 0x4
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 _08066244:
 	subs r7, 0x1
 	adds r5, 0x2
@@ -9135,7 +9025,7 @@ _08066260:
 	movs r0, 0x8
 	mov r1, r8
 	movs r3, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 _08066270:
 	movs r0, 0
 	bl sub_80073E0
@@ -9212,7 +9102,7 @@ _080662C4:
 	movs r1, 0x14
 	add r2, sp, 0x4
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	movs r0, 0x45
@@ -9314,7 +9204,7 @@ _080663A0:
 	adds r1, r6, 0
 	add r2, sp, 0x4
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	movs r0, 0xD

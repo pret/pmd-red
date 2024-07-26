@@ -112,7 +112,7 @@ static void sub_801DBD4(void)
 
     sub_8008C54(sUnknown_203B258->s0.unk34);
     sub_80073B8(sUnknown_203B258->s0.unk34);
-    xxx_call_draw_string(10, 0, sField, sUnknown_203B258->s0.unk34, 0); // Field
+    PrintStringOnWindow(10, 0, sField, sUnknown_203B258->s0.unk34, 0); // Field
 
     x = (sUnknown_203B258->unk9C.f2 * 8) - 2;
     n = sUnknown_203B258->s0.input.unk1E + 1;
@@ -127,10 +127,10 @@ static void sub_801DBD4(void)
         temp2 = &gUnknown_81188F0[temp->unk4];
 
         y = sub_8013800(&sUnknown_203B258->s0.input, counter);
-        xxx_call_draw_string(8, y, temp2->text1, sUnknown_203B258->s0.unk34, 0);
+        PrintStringOnWindow(8, y, temp2->text1, sUnknown_203B258->s0.unk34, 0);
 
         y = sub_8013800(&sUnknown_203B258->s0.input, counter);
-        xxx_call_draw_string(62, y, temp->text, sUnknown_203B258->s0.unk34, 0);
+        PrintStringOnWindow(62, y, temp->text, sUnknown_203B258->s0.unk34, 0);
     }
 
     sub_80073E0(sUnknown_203B258->s0.unk34);

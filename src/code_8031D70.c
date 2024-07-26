@@ -118,7 +118,7 @@ void DrawSOSPasswordScreen(void)
 
   mail = &gUnknown_203B480[gUnknown_203B334->mailIndex];
   sub_80073B8(gUnknown_203B334->unk10);
-  xxx_call_draw_string(0x14,0,gUnknown_80E1FDC,gUnknown_203B334->unk10,0); // Password
+  PrintStringOnWindow(0x14,0,gUnknown_80E1FDC,gUnknown_203B334->unk10,0); // Password
   sub_803D2C0(buffer, mail);
   for(index = 0; index < PASSWORD_BUFFER_SIZE; index++)
   {

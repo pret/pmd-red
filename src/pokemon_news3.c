@@ -184,7 +184,7 @@ void CreateMailMenu(void)
 
     sub_8008C54(sUnknown_203B2D8->unk38);
     sub_80073B8(sUnknown_203B2D8->unk38);
-    xxx_call_draw_string((sUnknown_203B2D8->input.unk1E * 8) + 10, 0, sMailbox, sUnknown_203B2D8->unk38, 0);
+    PrintStringOnWindow((sUnknown_203B2D8->input.unk1E * 8) + 10, 0, sMailbox, sUnknown_203B2D8->unk38, 0);
 
     for (i = 0; i < sUnknown_203B2D8->input.unk1A; i++) {
         mail = GetMailboxSlotInfo(sUnknown_203B2D8->unk0[(sUnknown_203B2D8->input.unk1E * sUnknown_203B2D8->input.unk1C) + i]);
@@ -196,7 +196,7 @@ void CreateMailMenu(void)
             sub_803B6B0(10, y, 6, sUnknown_203B2D8->unk38);
             PrintPokeNameToBuffer(gAvailablePokemonNames, GetPlayerPokemonStruct());
             sprintfStatic(buffer, GetPokemonMailHeadline(mail->unk4.dungeon.floor), gAvailablePokemonNames);
-            xxx_call_draw_string(21, y, buffer, sUnknown_203B2D8->unk38, 0);
+            PrintStringOnWindow(21, y, buffer, sUnknown_203B2D8->unk38, 0);
         }
         else {
             sub_803B35C(mail, &local);

@@ -2043,7 +2043,7 @@ _080533F0:
 	str r0, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	adds r6, 0xE
 _08053402:
 	adds r4, 0x1
@@ -2169,7 +2169,7 @@ _080534EA:
 	str r0, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 _080534FA:
 	movs r0, 0
 	bl sub_80073E0
@@ -2291,7 +2291,7 @@ _080535E4:
 	str r0, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 _080535F4:
 	movs r0, 0
 	bl sub_80073E0

@@ -224,14 +224,14 @@ void sub_801CCD8(void)
 
     sub_8008C54(sUnknown_203B244->unk4E8);
     sub_80073B8(sUnknown_203B244->unk4E8);
-    xxx_call_draw_string(10, 0, sStorage, sUnknown_203B244->unk4E8, 0);
+    PrintStringOnWindow(10, 0, sStorage, sUnknown_203B244->unk4E8, 0);
     sub_8012BC4(sUnknown_203B244->unk550.f2 * 8 + 4, 0, sUnknown_203B244->input.unk1E + 1, 2, 7, sUnknown_203B244->unk4E8);
 
     for(index = 0; index < sUnknown_203B244->input.unk1A; index++) {
         itemID = sUnknown_203B244->itemIDs[(sUnknown_203B244->input.unk1E * sUnknown_203B244->input.unk1C) + index];
         BufferItemName(buffer, itemID, NULL);
         y = sub_8013800(&sUnknown_203B244->input, index);
-        xxx_call_draw_string(8, y, buffer, sUnknown_203B244->unk4E8, 0);
+        PrintStringOnWindow(8, y, buffer, sUnknown_203B244->unk4E8, 0);
         y2 = sub_8013800(&sUnknown_203B244->input, index);
         sub_8012BC4((sUnknown_203B244->unk4EC->unkC * 8) - 2, y2, gTeamInventoryRef->teamStorage[itemID], 3, 5, sUnknown_203B244->unk4E8);
 

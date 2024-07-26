@@ -310,7 +310,7 @@ sub_803B284:
 	str r0, [sp]
 	movs r0, 0xA
 	movs r1, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	ldr r1, [r6]
 	adds r0, r1, 0
 	adds r0, 0x9E
@@ -362,7 +362,7 @@ _0803B2DC:
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x8
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	adds r5, 0x1
 	ldr r0, [r6]
 	movs r3, 0x1A

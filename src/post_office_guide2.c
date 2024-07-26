@@ -110,7 +110,7 @@ static void DisplayMissionObjectives(void)
 
     sub_80073B8(sUnknown_203B330->unk10);
     // Objectives
-    xxx_call_draw_string(10, 0, sObjectives, sUnknown_203B330->unk10, 0);
+    PrintStringOnWindow(10, 0, sObjectives, sUnknown_203B330->unk10, 0);
 
     switch (sUnknown_203B330->unkC) {
         case 1:
@@ -119,14 +119,14 @@ static void DisplayMissionObjectives(void)
             sub_803B6B0(10, 16, 3, sUnknown_203B330->unk10);
             // %dF
             sprintfStatic(buffer,sFmt1,mail->unk4.dungeon.floor);
-            xxx_call_draw_string(21,16,buffer,sUnknown_203B330->unk10,0);
+            PrintStringOnWindow(21,16,buffer,sUnknown_203B330->unk10,0);
             // Rescue #C6%s#R
             sprintfStatic(buffer,sFmtRescue,GetMonSpecies(mail->clientSpecies));
-            xxx_call_draw_string(40, 16, buffer, sUnknown_203B330->unk10, 0);
+            PrintStringOnWindow(40, 16, buffer, sUnknown_203B330->unk10, 0);
             break;
         case 2:
             if (CountJobsinDungeon(sUnknown_203B330->dungeonIndex) == 0)
-                xxx_call_draw_string(10, 16, sJustGo, sUnknown_203B330->unk10, 0);
+                PrintStringOnWindow(10, 16, sJustGo, sUnknown_203B330->unk10, 0);
             else {
                 yCoord = 16;
 
@@ -142,27 +142,27 @@ static void DisplayMissionObjectives(void)
 
                         if (jobInfo->missionType != WONDER_MAIL_MISSION_TYPE_FIND_ITEM) {
                             sprintfStatic(buffer1, sFmt1, jobInfo->unk4.dungeon.floor);
-                            xxx_call_draw_string(21, yCoord, buffer1, sUnknown_203B330->unk10, 0);
+                            PrintStringOnWindow(21, yCoord, buffer1, sUnknown_203B330->unk10, 0);
                         }
 
                         switch (jobInfo->missionType) {
                             case WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM:
                                 BufferItemName(gUnknown_202DE58, jobInfo->targetItem, NULL);
                                 sprintfStatic(buffer1, sFmtBring, gUnknown_202DE58);
-                                xxx_call_draw_string(40, yCoord, buffer1, sUnknown_203B330->unk10, 0);
+                                PrintStringOnWindow(40, yCoord, buffer1, sUnknown_203B330->unk10, 0);
                                 break;
                             case WONDER_MAIL_MISSION_TYPE_FIND_ITEM:
                                 BufferItemName(gUnknown_202DE58, jobInfo->targetItem, NULL);
                                 sprintfStatic(buffer1, sFmtFind, gUnknown_202DE58);
-                                xxx_call_draw_string(40, yCoord, buffer1, sUnknown_203B330->unk10, 0);
+                                PrintStringOnWindow(40, yCoord, buffer1, sUnknown_203B330->unk10, 0);
                                 break;
                             case WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT:
                                 sprintfStatic(buffer1, sFmtEscort, GetMonSpecies(jobInfo->targetSpecies));
-                                xxx_call_draw_string(40, yCoord, buffer1, sUnknown_203B330->unk10, 0);
+                                PrintStringOnWindow(40, yCoord, buffer1, sUnknown_203B330->unk10, 0);
                                 break;
                             default:
                                 sprintfStatic(buffer1, sFmtRescue, GetMonSpecies(jobInfo->targetSpecies));
-                                xxx_call_draw_string(40, yCoord, buffer1, sUnknown_203B330->unk10, 0);
+                                PrintStringOnWindow(40, yCoord, buffer1, sUnknown_203B330->unk10, 0);
                                 break;
                         }
 
@@ -175,11 +175,11 @@ static void DisplayMissionObjectives(void)
         case 0:
         default:
             if (sub_80992E0(&auStack44, &missionIndex) != 0)
-                xxx_call_draw_string(10, 16, GetCurrentMissionText(missionIndex), sUnknown_203B330->unk10, 0);
+                PrintStringOnWindow(10, 16, GetCurrentMissionText(missionIndex), sUnknown_203B330->unk10, 0);
             else if (sub_8099360(&local_test) != 0)
-                xxx_call_draw_string(10, 16, sub_80975DC(sub_80A2688(local_test)), sUnknown_203B330->unk10, 0);
+                PrintStringOnWindow(10, 16, sub_80975DC(sub_80A2688(local_test)), sUnknown_203B330->unk10, 0);
             else
-                xxx_call_draw_string(10, 16, sRedQuestionMarks, sUnknown_203B330->unk10, 0);
+                PrintStringOnWindow(10, 16, sRedQuestionMarks, sUnknown_203B330->unk10, 0);
             break;
     }
 

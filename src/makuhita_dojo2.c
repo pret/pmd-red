@@ -122,7 +122,7 @@ static void MakuhitaDojo_DrawCourseList(void)
 
     sub_8008C54(sMakuhitaDojoWork2->s30.s0.unk34);
     sub_80073B8(sMakuhitaDojoWork2->s30.s0.unk34);
-    xxx_call_draw_string(10, 0, sCourses, sMakuhitaDojoWork2->s30.s0.unk34, 0);
+    PrintStringOnWindow(10, 0, sCourses, sMakuhitaDojoWork2->s30.s0.unk34, 0);
     sub_8012BC4((sMakuhitaDojoWork2->s30.unk9C.f2 * 8) + 4, 0, sMakuhitaDojoWork2->s30.s0.input.unk1E + 1, 2, 7, sMakuhitaDojoWork2->s30.s0.unk34);
 
     for (i = 0; i < sMakuhitaDojoWork2->s30.s0.input.unk1A; i++) {
@@ -134,11 +134,11 @@ static void MakuhitaDojo_DrawCourseList(void)
         y = sub_8013800(&sMakuhitaDojoWork2->s30.s0.input, i);
         color = COLOR_WHITE_2; // COLOR_WHITE again?
         if ((bool8)IsMazeCompleted(mazeIndex)) {
-            xxx_call_draw_string(8, y, sStarBullet, sMakuhitaDojoWork2->s30.s0.unk34, 0);
+            PrintStringOnWindow(8, y, sStarBullet, sMakuhitaDojoWork2->s30.s0.unk34, 0);
             color = COLOR_GREEN;
         }
         sprintfStatic(buffer, sFmtColor, color, GetDungeonName1(dungeonIndex));
-        xxx_call_draw_string(16, y, buffer, sMakuhitaDojoWork2->s30.s0.unk34, 0);
+        PrintStringOnWindow(16, y, buffer, sMakuhitaDojoWork2->s30.s0.unk34, 0);
     }
     sub_80073E0(sMakuhitaDojoWork2->s30.s0.unk34);
 }

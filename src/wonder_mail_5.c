@@ -150,8 +150,8 @@ void sub_8030E48(void)
   }
   CreateRescueDescription(&stack);
   uVar2 = mail->unk10.unk10_u16 % 10000;
-  xxx_call_draw_string(10,0x68,gUnknown_80E0934,gUnknown_203B324->unk10,0); // ID:
+  PrintStringOnWindow(10,0x68,gUnknown_80E0934,gUnknown_203B324->unk10,0); // ID:
   sprintfStatic(buffer,gUnknown_80E0938,uVar2); // %-4d
-  xxx_call_draw_string(0x44,0x68,buffer,gUnknown_203B324->unk10,0);
+  PrintStringOnWindow(0x44,0x68,buffer,gUnknown_203B324->unk10,0);
   sub_80073E0(gUnknown_203B324->unk10);
 }

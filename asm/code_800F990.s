@@ -2299,7 +2299,7 @@ _08010BD0:
 	movs r0, 0xC
 	movs r1, 0x2
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	add sp, 0x64
@@ -2397,7 +2397,7 @@ _08010C86:
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	movs r0, 0x1
@@ -2407,13 +2407,13 @@ _08010C86:
 	movs r0, 0xA
 	movs r1, 0
 	movs r3, 0x1
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	ldr r2, _08010D78
 	str r4, [sp]
 	movs r0, 0xA
 	movs r1, 0xC
 	movs r3, 0x1
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r0, 0x1
 	bl sub_80073E0
 	add r0, sp, 0x4

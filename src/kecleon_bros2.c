@@ -130,7 +130,7 @@ void sub_801A0D8(void)
 
     sub_8008C54(gUnknown_203B214->s0.unk34);
     sub_80073B8(gUnknown_203B214->s0.unk34);
-    xxx_call_draw_string((gUnknown_203B214->s0.input.unk1E * 8) + 10, 0, sGoods, gUnknown_203B214->s0.unk34, 0);
+    PrintStringOnWindow((gUnknown_203B214->s0.input.unk1E * 8) + 10, 0, sGoods, gUnknown_203B214->s0.unk34, 0);
 
     for (index = 0; index < gUnknown_203B214->s0.input.unk1A; index++) {
         temp_calc = (gUnknown_203B214->s0.input.unk1E * gUnknown_203B214->s0.input.unk1C) + index;
@@ -147,12 +147,12 @@ void sub_801A0D8(void)
 
         if (buyPrice <= gTeamInventoryRef->teamMoney) {
             y = sub_8013800(&gUnknown_203B214->s0.input, index);
-            xxx_call_draw_string(8, y, auStack204, gUnknown_203B214->s0.unk34, 0);
+            PrintStringOnWindow(8, y, auStack204, gUnknown_203B214->s0.unk34, 0);
         }
         else {
             sprintfStatic(auStack112, sFmtRed, auStack204);
             y = sub_8013800(&gUnknown_203B214->s0.input, index);
-            xxx_call_draw_string(8, y, auStack112, gUnknown_203B214->s0.unk34, 0);
+            PrintStringOnWindow(8, y, auStack112, gUnknown_203B214->s0.unk34, 0);
         }
     }
 

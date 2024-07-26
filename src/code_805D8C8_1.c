@@ -33,6 +33,7 @@
 #include "music.h"
 #include "items.h"
 #include "play_time.h"
+#include "pokemon_3.h"
 #include "text2.h"
 #include "text1.h"
 #include "code_806CD90.h"
@@ -41,6 +42,7 @@
 #include "dungeon_capabilities.h"
 #include "constants/dungeon.h"
 #include "constants/status.h"
+#include "constants/tactic.h"
 #include "constants/iq_skill.h"
 #include "constants/dungeon_action.h"
 #include "structs/struct_sub80095e4.h"
@@ -117,7 +119,7 @@ bool8 sub_8061A38(ActionContainer *a0, bool8 a1);
 void sub_8063A70(ActionContainer *a0, bool8 a1);
 void sub_8063CF0(ActionContainer *a0, bool8 a1);
 void sub_8067768(UNUSED ActionContainer *a0);
-void sub_80615E8(ActionContainer *a0);
+void ShowTacticsMenu(ActionContainer *a0);
 void sub_804A728(Position *pos, s32 a1, u8 a2, u8 a3);
 extern bool8 sub_8071A8C(Entity *pokemon);
 extern void sub_80643AC(Entity *pokemon);
@@ -3011,7 +3013,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
                 sub_8044C10(1);
             }
             else if (GetLeaderActionId() == 0x1A) {
-                sub_80615E8(GetLeaderActionContainer());
+                ShowTacticsMenu(GetLeaderActionContainer());
                 sub_8044C10(1);
             }
             else if (GetLeaderActionId() == 0x30) {
@@ -3249,6 +3251,7 @@ extern const u8 *const gUnknown_80F9190;
 extern const u8 *const gUnknown_80F91C8;
 extern const u8 *const gUnknown_80F91E0;
 extern const u8 *const gUnknown_80F91A8;
+extern const u8 *const gUnknown_80FE954;
 
 const u8 *sub_805317C(void);
 void GetWeatherName(u8 *dst, u8 weatherId);
@@ -3296,19 +3299,19 @@ void DrawFieldMenu(u8 a0)
     }
 
     y = sub_8013800(&gUnknown_202EE10, 0);
-    xxx_call_draw_string(8, y, gFieldMenuMovesPtr, 0, 0);
+    PrintStringOnWindow(8, y, gFieldMenuMovesPtr, 0, 0);
 
     y = sub_8013800(&gUnknown_202EE10, 1);
-    xxx_call_draw_string(8, y, gFieldMenuItemsPtr, 0, 0);
+    PrintStringOnWindow(8, y, gFieldMenuItemsPtr, 0, 0);
 
     y = sub_8013800(&gUnknown_202EE10, 2);
-    xxx_call_draw_string(8, y, gFieldMenuTeamPtr, 0, 0);
+    PrintStringOnWindow(8, y, gFieldMenuTeamPtr, 0, 0);
 
     y = sub_8013800(&gUnknown_202EE10, 3);
-    xxx_call_draw_string(8, y, gFieldMenuOthersPtr, 0, 0);
+    PrintStringOnWindow(8, y, gFieldMenuOthersPtr, 0, 0);
 
     y = sub_8013800(&gUnknown_202EE10, 4);
-    xxx_call_draw_string(8, y, gFieldMenuGroundPtr, 0, 0);
+    PrintStringOnWindow(8, y, gFieldMenuGroundPtr, 0, 0);
 
     sub_80073E0(0);
     if (a0) {
@@ -3318,25 +3321,25 @@ void DrawFieldMenu(u8 a0)
 
         x = (136 - sub_8008ED0(dungeonName)) / 2;
         sub_80073B8(1);
-        xxx_call_draw_string(x, 2, dungeonName, 1, 0);
+        PrintStringOnWindow(x, 2, dungeonName, 1, 0);
         sub_80073E0(1);
         sub_80073B8(2);
         DeconstructPlayTime(gPlayTimeRef, &hours, &minutes, &seconds);
 
         gFormatData_202DE30[0] = RoundUpFixedPoint(leaderInfo->belly);
         gFormatData_202DE30[1] = RoundUpFixedPoint(leaderInfo->maxBelly);
-        xxx_format_and_draw(0x73, 0, gUnknown_80F9174, 2, 0);
+        PrintFormatStringOnWindow(0x73, 0, gUnknown_80F9174, 2, 0);
 
         gFormatData_202DE30[0] = gTeamInventoryRef->teamMoney;
-        xxx_format_and_draw(0x73, 12, gUnknown_80F9190, 2, 0);
+        PrintFormatStringOnWindow(0x73, 12, gUnknown_80F9190, 2, 0);
 
         GetWeatherName(gAvailablePokemonNames, GetApparentWeather(NULL));
-        xxx_format_and_draw(0x73, 24, gUnknown_80F91A8, 2, 0);
+        PrintFormatStringOnWindow(0x73, 24, gUnknown_80F91A8, 2, 0);
 
         gFormatData_202DE30[0] = hours;
         gFormatData_202DE30[1] = minutes;
         gFormatData_202DE30[2] = seconds;
-        xxx_format_and_draw(0x73, 36, gUnknown_80F91C8, 2, 0);
+        PrintFormatStringOnWindow(0x73, 36, gUnknown_80F91C8, 2, 0);
         for (yLoop = 0, i = 0; i < MAX_TEAM_MEMBERS; i++) {
             Entity *teamMon = gDungeon->teamPokemon[i];
             if (EntityExists(teamMon)) {
@@ -3344,7 +3347,7 @@ void DrawFieldMenu(u8 a0)
                 SetMessageArgument(gAvailablePokemonNames, teamMon, 0);
                 gFormatData_202DE30[0] = monInfo->HP;
                 gFormatData_202DE30[1] = monInfo->maxHPStat;
-                xxx_format_and_draw(4, yLoop, gUnknown_80F91E0, 2, 0);
+                PrintFormatStringOnWindow(4, yLoop, gUnknown_80F91E0, 2, 0);
                 yLoop += 12;
                 if (yLoop >= 12 * MAX_TEAM_MEMBERS)
                     break;
@@ -3441,7 +3444,7 @@ void sub_805FC30(UnkTextStruct3 *a0, s32 a1)
         r4 = (sub_8044F3C(i) != 0) ? 7 : 2;
         sprintfStatic(text, gUnknown_8106B50, r4, sub_8044EC8(i));
         y = sub_8013800(&gUnknown_202EE10, i);
-        xxx_call_draw_string(8, y, text, 1, 0);
+        PrintStringOnWindow(8, y, text, 1, 0);
     }
     sub_80073E0(1);
 }
@@ -3823,7 +3826,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     switch (gUnknown_202F248[a0])
     {
     case 0:
-        xxx_format_and_draw(x, 0, gTeamToolboxAPtr, 0, 0);
+        PrintFormatStringOnWindow(x, 0, gTeamToolboxAPtr, 0, 0);
         for (i = 0; i < 10; i++) {
             Item *items;
             DUMMY_TEAM_ITEMS_ASM_MATCH(i);
@@ -3833,7 +3836,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, &gTeamInventoryRef->teamItems[i], &gUnknown_8106B60);
                 y = sub_8013800(&gUnknown_202EE10, i);
-                xxx_format_and_draw(8, y, txtBuff, 0, 0);
+                PrintFormatStringOnWindow(8, y, txtBuff, 0, 0);
             }
             else {
                 break;
@@ -3841,7 +3844,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
         }
         break;
     case 1:
-        xxx_format_and_draw(x, 0, gTeamToolboxBPtr, 0, 0);
+        PrintFormatStringOnWindow(x, 0, gTeamToolboxBPtr, 0, 0);
         for (i = 0; i < 10; i++) {
             Item *items;
             DUMMY_TEAM_ITEMS_ASM_MATCH(i);
@@ -3851,7 +3854,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, &gTeamInventoryRef->teamItems[i + 10], &gUnknown_8106B60);
                 y = sub_8013800(&gUnknown_202EE10, i);
-                xxx_format_and_draw(8, y, txtBuff, 0, 0);
+                PrintFormatStringOnWindow(8, y, txtBuff, 0, 0);
             }
             else {
                 break;
@@ -3861,12 +3864,12 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     case 2: {
             Tile *tile = GetTile(a1->pos.x, a1->pos.y);
             Item *item = GetItemData(tile->object);
-            xxx_format_and_draw(x, 0, gFieldItemMenuGroundTextPtr, 0, 0);
+            PrintFormatStringOnWindow(x, 0, gFieldItemMenuGroundTextPtr, 0, 0);
             if (item->flags & ITEM_FLAG_EXISTS) {
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, item, &gUnknown_8106B60);
                 y = sub_8013800(&gUnknown_202EE10, 0);
-                xxx_format_and_draw(8, y, txtBuff, 0, 0);
+                PrintFormatStringOnWindow(8, y, txtBuff, 0, 0);
             }
             if (a3) {
                 gUnknown_202EE10.unk8.x = gUnknown_202EE10.unk8.y = 0;
@@ -3876,12 +3879,12 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     case 3: {
             Item *item = &a1->info->heldItem;
             SetMessageArgument_2(gAvailablePokemonNames, a1Info, 0);
-            xxx_format_and_draw(x, 0, gUnknown_80FE940, 0, 0);
+            PrintFormatStringOnWindow(x, 0, gUnknown_80FE940, 0, 0);
             if (item->flags & ITEM_FLAG_EXISTS) {
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, item, &gUnknown_8106B60);
                 y = sub_8013800(&gUnknown_202EE10, 0);
-                xxx_format_and_draw(8, y, txtBuff, 0, 0);
+                PrintFormatStringOnWindow(8, y, txtBuff, 0, 0);
             }
         }
         break;
@@ -3890,12 +3893,12 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
             if (EntityExists(chosenTeamMember)) {
                 Item *item = &chosenTeamMember->info->heldItem;
                 SetMessageArgument_2(gAvailablePokemonNames, chosenTeamMember->info, 0);
-                xxx_format_and_draw(x, 0, gUnknown_80FE940, 0, 0);
+                PrintFormatStringOnWindow(x, 0, gUnknown_80FE940, 0, 0);
                 if (item->flags & ITEM_FLAG_EXISTS) {
                     gUnknown_202EE10.unk1A++;
                     sub_8090E14(txtBuff, item, &gUnknown_8106B60);
                     y = sub_8013800(&gUnknown_202EE10, 0);
-                    xxx_format_and_draw(8, y, txtBuff, 0, 0);
+                    PrintFormatStringOnWindow(8, y, txtBuff, 0, 0);
                 }
             }
         }
@@ -3908,7 +3911,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     sub_80073E0(0);
     if (a2) {
         sub_80073B8(1);
-        xxx_format_and_draw(4, 2, gWhichTextPtr1, 1, 0);
+        PrintFormatStringOnWindow(4, 2, gWhichTextPtr1, 1, 0);
         sub_80073E0(1);
     }
 }
@@ -4401,6 +4404,8 @@ extern const u8 gUnknown_8106BCC[];
 extern const u8 gUnknown_8106BD0[];
 extern const u8 gUnknown_8106BD4[];
 extern const u8 gUnknown_8106BE0[];
+extern const u8 gUnknown_8106BEC[];
+extern const u8 gUnknown_8106BF4[];
 
 extern void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum);
 
@@ -4470,7 +4475,7 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
     sub_80137B0(&gUnknown_202EE10, 0);
     sub_80073B8(0);
     if (r10) {
-        xxx_format_and_draw(0xC, 0, gUnknown_8106BB0, 0, 0);
+        PrintFormatStringOnWindow(0xC, 0, gUnknown_8106BB0, 0, 0);
     }
 
     // Print hp/max hp
@@ -4518,10 +4523,10 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
                 gFormatData_202DE30[1] = monInfo->maxHPStat;
                 y = sub_8013800(&gUnknown_202EE10, i);
                 if (monInfo->isTeamLeader) {
-                    xxx_format_and_draw(9, y, gUnknown_8106BD4, 0, 0);
+                    PrintFormatStringOnWindow(9, y, gUnknown_8106BD4, 0, 0);
                 }
                 else {
-                    xxx_format_and_draw(9, y, gUnknown_8106BE0, 0, 0);
+                    PrintFormatStringOnWindow(9, y, gUnknown_8106BE0, 0, 0);
                 }
             }
         }
@@ -4593,7 +4598,7 @@ void sub_80615B4(ActionContainer *a0, struct UnkFieldTeamMenuStruct *a1)
     a0->unk4[0].actionUseIndex = a1->unk4[a1->unk0];
 }
 
-void sub_806195C(s32 a0, void *a1, EntityInfo *a3, s32 a4);
+void PrintMonTactics(s32 a0, u8 *tacticIds, EntityInfo *mon, s32 windowId);
 void sub_80623B0(void);
 void sub_8062D68(void);
 void sub_8062230(void);
@@ -4618,23 +4623,23 @@ static inline void SetTxtStruct(UnkTextStruct3 *sp)
     sp->a0[3].unk4 = 3;
 }
 
-void sub_80615E8(ActionContainer *a0)
+void ShowTacticsMenu(ActionContainer *a0)
 {
     UnkTextStruct3 sp;
     EntityInfo *monInfo;
-    u8 var_3C[9];
-    s32 var_30;
-    s32 var_2C;
+    u8 tacticIds[NUM_TACTICS];
+    s32 scrollFirstId;
+    s32 menuIndex;
     Entity *teamMon;
 
     SetTxtStruct(&sp);
     teamMon = gDungeon->teamPokemon[a0->unk4[0].actionUseIndex];
     monInfo = teamMon->info;
-    var_2C = 0;
-    var_30 = 0;
+    menuIndex = 0;
+    scrollFirstId = 0;
     while (1) {
         s32 i;
-        bool32 addCursor = 1;
+        bool32 addCursor = TRUE;
         bool32 loopBreak = FALSE;
 
         gUnknown_202F270.f0 = 1;
@@ -4642,9 +4647,9 @@ void sub_80615E8(ActionContainer *a0)
         gUnknown_202F270.f2 = 10;
         gUnknown_202F270.f3 = 0;
         sub_803ECB4(&sp, 1);
-        sub_806195C(var_30, var_3C, monInfo, 0);
+        PrintMonTactics(scrollFirstId, tacticIds, monInfo, 0);
         for (i = 0; i < 8; i++) {
-            if (var_3C[i] == 11)
+            if (tacticIds[i] == TACTIC_UNUSED)
                 break;
         }
         gUnknown_202EE10.unk1A = i;
@@ -4659,29 +4664,29 @@ void sub_80615E8(ActionContainer *a0)
         gUnknown_202EE10.unk0 = 0;
         sub_801317C(&gUnknown_202EE10.unk28);
         sub_80137B0(&gUnknown_202EE10, 0);
-        gUnknown_202EE10.menuIndex = var_2C;
+        gUnknown_202EE10.menuIndex = menuIndex;
         while (1) {
             s32 i;
 
             AddMenuCursorSprite(&gUnknown_202EE10);
-            if (var_3C[8] != 11) {
+            if (tacticIds[8] != TACTIC_UNUSED) {
                 sub_80623B0();
             }
-            if (var_30 != 0) {
+            if (scrollFirstId != 0) {
                 sub_8062230();
             }
             sub_803E46C(0x3D);
             if (gRealInputs.repeated & DPAD_DOWN) {
                 sub_8083CE0(1);
                 if (gUnknown_202EE10.menuIndex == 7) {
-                    if (var_3C[8] != 11) {
+                    if (tacticIds[8] != TACTIC_UNUSED) {
                         for (i = 0; i < 6; i++) {
                             gUnknown_203B080(0);
                             sub_803E46C(0x3D);
                         }
-                        var_30++;
+                        scrollFirstId++;
                     }
-                    var_2C = 7;
+                    menuIndex = 7;
                     break;
                 }
                 sub_80136E0(&gUnknown_202EE10, 0);
@@ -4689,31 +4694,31 @@ void sub_80615E8(ActionContainer *a0)
             if (gRealInputs.repeated & DPAD_UP) {
                 sub_8083CE0(1);
                 if (gUnknown_202EE10.menuIndex == 0) {
-                    if (var_30 != 0) {
+                    if (scrollFirstId != 0) {
                         for (i = 0; i < 6; i++) {
                             gUnknown_203B084(0);
                             sub_803E46C(0x3D);
                         }
-                        var_30--;
+                        scrollFirstId--;
                     }
-                    var_2C = 0;
+                    menuIndex = 0;
                     break;
                 }
                 sub_8013744(&gUnknown_202EE10, 0);
             }
             if (gRealInputs.pressed & START_BUTTON) {
-                s32 var = var_3C[gUnknown_202EE10.menuIndex];
-                var_2C = gUnknown_202EE10.menuIndex;
+                u32 tacticId = tacticIds[gUnknown_202EE10.menuIndex];
+                menuIndex = gUnknown_202EE10.menuIndex;
                 sub_8083D44();
-                sub_8062748(var);
+                sub_8062748(tacticId);
                 loopBreak = FALSE;
                 break;
             }
             if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
                 bool32 changed;
 
-                u8 var = var_3C[gUnknown_202EE10.menuIndex];
-                var_2C = gUnknown_202EE10.menuIndex;
+                u32 tacticId = tacticIds[gUnknown_202EE10.menuIndex];
+                menuIndex = gUnknown_202EE10.menuIndex;
                 sub_8062D68();
                 sub_8083D08();
                 gUnknown_202EE6C = 0;
@@ -4752,7 +4757,7 @@ void sub_80615E8(ActionContainer *a0)
                     sub_8083D08();
                     if (gUnknown_202EE10.menuIndex == 0) {
                         PlaySoundEffect(0x133);
-                        monInfo->tactic = var;
+                        monInfo->tactic = tacticId;
                         monInfo->aiTarget.aiObjective = 6;
                         monInfo->aiTarget.aiTarget = NULL;
                         monInfo->aiTarget.unkC = 0;
@@ -4762,7 +4767,7 @@ void sub_80615E8(ActionContainer *a0)
                         }
                     }
                     else {
-                        sub_8062748(var);
+                        sub_8062748(tacticId);
                         addCursor = FALSE;
                     }
                 }
@@ -4784,6 +4789,47 @@ void sub_80615E8(ActionContainer *a0)
             break;
     }
     sub_803EAF0(0, NULL);
+}
+
+extern void GetAvailTacticsforLvl(u8 *tacticsBuffer, s32 pokeLevel);
+
+void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 windowId)
+{
+    u8 tacticsBuffer[NUM_TACTICS];
+    u32 tactic;
+    s32 y, i, j;
+
+    firstId--;
+    sub_80073B8(windowId);
+    PrintStringOnWindow(0x10, 0, gUnknown_80FE954, windowId, 0);
+    y = 0x14;
+    for (j = 0; j < 9; j++) {
+        tacticIds[j] = TACTIC_UNUSED;
+    }
+    GetAvailTacticsforLvl(tacticsBuffer, GetLeaderInfo()->level);
+    for (i = -1; i < 10; i++, y += 12, firstId++) {
+        if (firstId < 0)
+            continue;
+        if (firstId >= NUM_TACTICS)
+            continue;
+
+        tactic = tacticsBuffer[firstId];
+        if (i >= 0 && i < 9) {
+            tacticIds[i] = tactic;
+        }
+        if (tactic == TACTIC_UNUSED)
+            break;
+
+        CopyTacticsNameToBuffer(gAvailablePokemonNames, tactic);
+        if (mon->tactic == tactic) {
+            PrintFormatStringOnWindow(0x10, y, gUnknown_8106BEC, windowId, 0);
+        }
+        else {
+            PrintFormatStringOnWindow(0x10, y, gUnknown_8106BF4, windowId, 0);
+        }
+    }
+
+    sub_80073E0(windowId);
 }
 
 //

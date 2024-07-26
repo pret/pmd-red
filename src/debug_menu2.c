@@ -141,7 +141,7 @@ static void sub_803A690(void)
 {
     sub_8008C54(sUnknown_203B3F0->unk9C.unk14);
     sub_80073B8(sUnknown_203B3F0->unk9C.unk14);
-    xxx_call_draw_string(4, 0, sNumberPrompt, sUnknown_203B3F0->unk9C.unk14, 0);
+    PrintStringOnWindow(4, 0, sNumberPrompt, sUnknown_203B3F0->unk9C.unk14, 0);
     sub_8013C68(&sUnknown_203B3F0->unk9C);
     sub_80073E0(sUnknown_203B3F0->unk9C.unk14);
     sub_801CCD8();

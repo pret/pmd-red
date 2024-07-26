@@ -135,7 +135,7 @@ static void CreatePKMNNewsMenu(void)
 
     sub_8008C54(sUnknown_203B2CC->s38.unk34);
     sub_80073B8(sUnknown_203B2CC->s38.unk34);
-    xxx_call_draw_string(10, 0, sNewsList, sUnknown_203B2CC->s38.unk34, 0);
+    PrintStringOnWindow(10, 0, sNewsList, sUnknown_203B2CC->s38.unk34, 0);
 
     sub_8012BC4((sUnknown_80DFBE8.f2 * 8) + 4, 0, sUnknown_203B2CC->s38.input.unk1E + 1, 2, 7, sUnknown_203B2CC->s38.unk34);
 
@@ -145,7 +145,7 @@ static void CreatePKMNNewsMenu(void)
         mailIndex = sUnknown_203B2CC->receivedNewsletters[new_index];
         sub_803B6B0(10, y, 6, sUnknown_203B2CC->s38.unk34);
         sub_802BC7C();
-        xxx_format_and_draw(21, y, GetPokemonMailHeadline(mailIndex), sUnknown_203B2CC->s38.unk34, 0);
+        PrintFormatStringOnWindow(21, y, GetPokemonMailHeadline(mailIndex), sUnknown_203B2CC->s38.unk34, 0);
     }
 
     sub_80073E0(sUnknown_203B2CC->s38.unk34);

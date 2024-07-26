@@ -146,12 +146,12 @@ void sub_801F700(void)
     sub_8008C54(gUnknown_203B274->s348.s0.unk34);
     sub_80073B8(gUnknown_203B274->s348.s0.unk34);
     sprintfStatic(buffer1,gUnknown_80DC2DC,gUnknown_203B274->s348.s0.input.unk1E + 1,gUnknown_203B274->s348.s0.input.unk20); // Moves Page: %d/%d
-    xxx_call_draw_string(0x10,0,buffer1,gUnknown_203B274->s348.s0.unk34,0);
+    PrintStringOnWindow(0x10,0,buffer1,gUnknown_203B274->s348.s0.unk34,0);
     for(index = 0; index < gUnknown_203B274->s348.s0.input.unk1A; index++)
     {
         sub_8092C84(buffer2,gUnknown_203B274->unk4->unk0[gUnknown_203B274->s348.s0.input.unk1E * gUnknown_203B274->s348.s0.input.unk1C + index]);
         y = sub_8013800(&gUnknown_203B274->s348.s0.input, index);
-        xxx_call_draw_string(8,y,buffer2,gUnknown_203B274->s348.s0.unk34,0);
+        PrintStringOnWindow(8,y,buffer2,gUnknown_203B274->s348.s0.unk34,0);
     }
     sub_80073E0(gUnknown_203B274->s348.s0.unk34);
 }

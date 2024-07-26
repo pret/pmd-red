@@ -712,7 +712,7 @@ _08023DE0:
 	movs r0, 0xA
 	movs r1, 0
 	add r2, sp, 0x8
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	b _08023E3C
 _08023E00:
 	ldr r2, _08023EBC
@@ -723,7 +723,7 @@ _08023E02:
 	str r0, [sp]
 	movs r0, 0xA
 	movs r1, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	ldr r1, [r4]
 	ldr r2, _08023EC0
 	adds r0, r1, r2
@@ -878,7 +878,7 @@ _08023F02:
 	str r0, [sp]
 	movs r0, 0x8
 	add r2, sp, 0x8
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	adds r7, 0x1
 	mov r1, r8
 	ldr r0, [r4]

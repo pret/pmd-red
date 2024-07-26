@@ -133,7 +133,7 @@ void sub_8021494(void)
 
     sub_8008C54(sWigglytuffShop1Work->s40.s0.unk34);
     sub_80073B8(sWigglytuffShop1Work->s40.s0.unk34);
-    xxx_call_draw_string(10, 0, sFriendAreas, sWigglytuffShop1Work->s40.s0.unk34, 0);
+    PrintStringOnWindow(10, 0, sFriendAreas, sWigglytuffShop1Work->s40.s0.unk34, 0);
 
     sub_8012BC4((sWigglytuffShop1Work->s40.unk9C.f2 * 8) + 4, 0, sWigglytuffShop1Work->s40.s0.input.unk1E + 1, 1, 7, sWigglytuffShop1Work->s40.s0.unk34);
 
@@ -144,22 +144,22 @@ void sub_8021494(void)
             sub_8092578(buffer1, friendAreaIndex, TRUE);
 
             if (GetFriendAreaPrice(friendAreaIndex) <= gTeamInventoryRef->teamMoney)
-                xxx_call_draw_string(8,sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), buffer1, sWigglytuffShop1Work->s40.s0.unk34, 0);
+                PrintStringOnWindow(8,sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), buffer1, sWigglytuffShop1Work->s40.s0.unk34, 0);
             else {
                 sprintfStatic(buffer2, sFmtRedString, buffer1);
-                xxx_call_draw_string(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), buffer2, sWigglytuffShop1Work->s40.s0.unk34, 0);
+                PrintStringOnWindow(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), buffer2, sWigglytuffShop1Work->s40.s0.unk34, 0);
             }
         }
         else if (sWigglytuffShop1Work->mode == 0) {
             if (gFriendAreas[friendAreaIndex] == TRUE)
-                xxx_call_draw_string(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), GetFriendAreaName(friendAreaIndex), sWigglytuffShop1Work->s40.s0.unk34, 0);
+                PrintStringOnWindow(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), GetFriendAreaName(friendAreaIndex), sWigglytuffShop1Work->s40.s0.unk34, 0);
             else {
                 sprintfStatic(buffer2, sFmtGreenString, GetFriendAreaName(friendAreaIndex));
-                xxx_call_draw_string(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), buffer2, sWigglytuffShop1Work->s40.s0.unk34, 0);
+                PrintStringOnWindow(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), buffer2, sWigglytuffShop1Work->s40.s0.unk34, 0);
             }
         }
         else
-            xxx_call_draw_string(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), GetFriendAreaName(friendAreaIndex), sWigglytuffShop1Work->s40.s0.unk34, 0);
+            PrintStringOnWindow(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), GetFriendAreaName(friendAreaIndex), sWigglytuffShop1Work->s40.s0.unk34, 0);
     }
 
     sub_80073E0(sWigglytuffShop1Work->s40.s0.unk34);
