@@ -6,7 +6,6 @@
 #include "structs/struct_sub80095e4.h"
 
 // size: 0xF4
-// TODO: UNIFY
 typedef struct unkStruct_203B224
 {
     u32 unk0;

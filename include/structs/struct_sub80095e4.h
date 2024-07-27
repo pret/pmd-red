@@ -61,7 +61,7 @@ typedef struct struct_Sub80095E4_2
     sub_800641C((ptr).unk3C, TRUE, TRUE);                                               \
 }
 
-// sub_802BF30 uses a different function call, and 24 instead of 12
+// sub_802BF30 and sub_802C328 use a different function call, and 24 instead of 12
 #define SUB_8009614_CALL(ptr)                                                           \
 {                                                                                       \
     SUB_8009_MATCH(ptr, sub_8009614((ptr).input.unk1A, 24) + 2)                         \

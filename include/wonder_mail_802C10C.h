@@ -3,18 +3,13 @@
 
 #include "constants/mailbox.h"
 #include "structs/menu.h"
-#include "structs/str_text.h"
+#include "structs/struct_sub80095e4.h"
 
-// TODO: UNIFY
 // size: 0xA8
 struct unkStruct_203B2E0
 {
     u8 pelipperBoardSlots[MAX_ACCEPTED_JOBS];
-    /* 0x8 */ MenuInputStruct input;
-    s32 unk3C;
-    UnkTextStruct2 *unk40;
-    UnkTextStruct2 unk44[4];
-    UnkTextStruct2_sub2 unkA4;
+    /* 0x8 */ struct_Sub80095E4_2 unk8;
 };
 
 void DrawPelipperBoardJobMenu(void);
