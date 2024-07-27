@@ -1,5 +1,4 @@
 .global itempat_SIRO
-#include "asm/macros.inc"
 itempat_SIRO:
 .string "SIRO"
 .4byte itempat_table
