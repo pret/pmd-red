@@ -3,7 +3,7 @@
 
 #include "constants/item.h"
 #include "structs/menu.h"
-#include "structs/str_text.h"
+#include "structs/struct_sub80095e4.h"
 
 // size: 0xF4
 // TODO: UNIFY
@@ -11,11 +11,7 @@ typedef struct unkStruct_203B224
 {
     u32 unk0;
     u32 unk4[INVENTORY_SIZE];
-    /* 0x54 */ MenuInputStruct input;
-    u32 unk88;
-    UnkTextStruct2 *unk8C;
-    UnkTextStruct2 unk90[4];
-    UnkTextStruct2_sub2 unkF0;
+    /* 0x54 */ struct_Sub80095E4_2 unk54;
 } unkStruct_203B224;
 
 bool8 sub_801A5D8(u32, s32, UnkTextStruct2_sub *, u32);

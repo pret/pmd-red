@@ -37,23 +37,23 @@ bool8 sub_801A5D8(u32 param_1, s32 param_2, UnkTextStruct2_sub *param_3, u32 par
     gUnknown_203B224->unk0 = param_1;
     FillInventoryGaps();
     sub_801AE84();
-    gUnknown_203B224->unk88 = param_2;
-    gUnknown_203B224->unk8C = &gUnknown_203B224->unk90[param_2];
-    sub_8006518(gUnknown_203B224->unk90);
-    gUnknown_203B224->unk90[gUnknown_203B224->unk88] = sUnknown_80DB95C;
-    gUnknown_203B224->unk8C->unk14 = &gUnknown_203B224->unkF0;
+    gUnknown_203B224->unk54.s0.unk34 = param_2;
+    gUnknown_203B224->unk54.s0.unk38 = &gUnknown_203B224->unk54.s0.unk3C[param_2];
+    sub_8006518(gUnknown_203B224->unk54.s0.unk3C);
+    gUnknown_203B224->unk54.s0.unk3C[gUnknown_203B224->unk54.s0.unk34] = sUnknown_80DB95C;
+    gUnknown_203B224->unk54.s0.unk38->unk14 = &gUnknown_203B224->unk54.unk9C;
 
     if (param_3 != NULL)
-        gUnknown_203B224->unk90[gUnknown_203B224->unk88].unk8 = *param_3;
+        gUnknown_203B224->unk54.s0.unk3C[gUnknown_203B224->unk54.s0.unk34].unk8 = *param_3;
 
-    sub_8012D08(gUnknown_203B224->unk8C, param_4);
+    sub_8012D08(gUnknown_203B224->unk54.s0.unk38, param_4);
     sub_8099690(1);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B224->unk90, TRUE, TRUE);
-    sub_8013818(&gUnknown_203B224->input, GetNumberOfFilledInventorySlots(), param_4, param_2);
-    gUnknown_203B224->input.menuIndex = gUnknown_203B228;
-    gUnknown_203B224->input.unk1E = gUnknown_203B22A;
-    sub_8013984(&gUnknown_203B224->input);
+    sub_800641C(gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
+    sub_8013818(&gUnknown_203B224->unk54.s0.input, GetNumberOfFilledInventorySlots(), param_4, param_2);
+    gUnknown_203B224->unk54.s0.input.menuIndex = gUnknown_203B228;
+    gUnknown_203B224->unk54.s0.input.unk1E = gUnknown_203B22A;
+    sub_8013984(&gUnknown_203B224->unk54.s0.input);
     sub_801A998();
     sub_801A9E0();
     return TRUE;
@@ -65,11 +65,11 @@ u32 sub_801A6E8(bool8 param_1)
     Item item;
 
     if (param_1 == FALSE) {
-        sub_8013660(&gUnknown_203B224->input);
+        sub_8013660(&gUnknown_203B224->unk54.s0.input);
         return 0;
     }
 
-    switch (GetKeyPress(&gUnknown_203B224->input)) {
+    switch (GetKeyPress(&gUnknown_203B224->unk54.s0.input)) {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
@@ -114,7 +114,7 @@ u32 sub_801A6E8(bool8 param_1)
             if (gUnknown_203B224->unk4[index] != 0 || sub_801ADA0(index)) {
                 PlayMenuSoundEffect(6);
                 gUnknown_203B224->unk4[index] ^= 1;
-                sub_80138B8(&gUnknown_203B224->input, 0);
+                sub_80138B8(&gUnknown_203B224->unk54.s0.input, 0);
                 sub_801A9E0();
                 return 1;
             }
@@ -130,7 +130,7 @@ u32 sub_801A6E8(bool8 param_1)
             // NOTE: fallthrough needed here
         default:
             _0801A87C:
-            if (sub_80138B8(&gUnknown_203B224->input, 1) != FALSE) {
+            if (sub_80138B8(&gUnknown_203B224->unk54.s0.input, 1) != FALSE) {
                 sub_801A998();
                 sub_801A9E0();
                 return 1;
@@ -143,32 +143,32 @@ u32 sub_801A6E8(bool8 param_1)
 
 s32 sub_801A8AC(void)
 {
-    return (gUnknown_203B224->input.unk1E * gUnknown_203B224->input.unk1C) + gUnknown_203B224->input.menuIndex;
+    return (gUnknown_203B224->unk54.s0.input.unk1E * gUnknown_203B224->unk54.s0.input.unk1C) + gUnknown_203B224->unk54.s0.input.menuIndex;
 }
 
 void sub_801A8D0(bool8 r0)
 {
     sub_8099690(1);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B224->unk90, FALSE, FALSE);
+    sub_800641C(gUnknown_203B224->unk54.s0.unk3C, FALSE, FALSE);
     FillInventoryGaps();
-    gUnknown_203B224->input.unk22 = GetNumberOfFilledInventorySlots();
-    sub_8013984(&gUnknown_203B224->input);
+    gUnknown_203B224->unk54.s0.input.unk22 = GetNumberOfFilledInventorySlots();
+    sub_8013984(&gUnknown_203B224->unk54.s0.input);
     sub_801A998();
     sub_801A9E0();
     if (r0)
-        AddMenuCursorSprite(&gUnknown_203B224->input);
+        AddMenuCursorSprite(&gUnknown_203B224->unk54.s0.input);
 }
 
 void sub_801A928(void)
 {
     if (gUnknown_203B224 != NULL) {
-        gUnknown_203B228 = gUnknown_203B224->input.menuIndex;
-        gUnknown_203B22A = gUnknown_203B224->input.unk1E;
-        gUnknown_203B224->unk90[gUnknown_203B224->unk88] = sUnknown_80DB944;
+        gUnknown_203B228 = gUnknown_203B224->unk54.s0.input.menuIndex;
+        gUnknown_203B22A = gUnknown_203B224->unk54.s0.input.unk1E;
+        gUnknown_203B224->unk54.s0.unk3C[gUnknown_203B224->unk54.s0.unk34] = sUnknown_80DB944;
         sub_8099690(0);
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B224->unk90, TRUE, TRUE);
+        sub_800641C(gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
         MemoryFree(gUnknown_203B224);
         gUnknown_203B224 = NULL;
     }
@@ -176,12 +176,12 @@ void sub_801A928(void)
 
 static void sub_801A998(void)
 {
-    gUnknown_203B224->unkF0.f0 = gUnknown_203B224->input.unk20;
-    gUnknown_203B224->unkF0.f1 = gUnknown_203B224->input.unk1E;
-    gUnknown_203B224->unkF0.f2 = 11;
-    gUnknown_203B224->unkF0.f3 = 0;
+    gUnknown_203B224->unk54.unk9C.f0 = gUnknown_203B224->unk54.s0.input.unk20;
+    gUnknown_203B224->unk54.unk9C.f1 = gUnknown_203B224->unk54.s0.input.unk1E;
+    gUnknown_203B224->unk54.unk9C.f2 = 11;
+    gUnknown_203B224->unk54.unk9C.f3 = 0;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B224->unk90, TRUE, TRUE);
+    sub_800641C(gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
 }
 
 void sub_801A9E0(void)
@@ -192,23 +192,23 @@ void sub_801A9E0(void)
     u8 buf1[80]; // sp4
     Item item; // spC8
 
-    sub_8008C54(gUnknown_203B224->unk88);
-    sub_80073B8(gUnknown_203B224->unk88);
-    x = gUnknown_203B224->input.unk1E * 8 + 10;
+    sub_8008C54(gUnknown_203B224->unk54.s0.unk34);
+    sub_80073B8(gUnknown_203B224->unk54.s0.unk34);
+    x = gUnknown_203B224->unk54.s0.input.unk1E * 8 + 10;
 
-    if (gUnknown_203B224->input.unk1E == 0)
-        PrintStringOnWindow(x, 0, sTeamToolboxA, gUnknown_203B224->unk88, 0);
+    if (gUnknown_203B224->unk54.s0.input.unk1E == 0)
+        PrintStringOnWindow(x, 0, sTeamToolboxA, gUnknown_203B224->unk54.s0.unk34, 0);
     else
-        PrintStringOnWindow(x, 0, sTeamToolboxB, gUnknown_203B224->unk88, 0);
+        PrintStringOnWindow(x, 0, sTeamToolboxB, gUnknown_203B224->unk54.s0.unk34, 0);
 
-    for (r7 = 0; r7 < gUnknown_203B224->input.unk1A; r7++) {
-        teamItemIndex = (gUnknown_203B224->input.unk1E * gUnknown_203B224->input.unk1C) + r7;
+    for (r7 = 0; r7 < gUnknown_203B224->unk54.s0.input.unk1A; r7++) {
+        teamItemIndex = (gUnknown_203B224->unk54.s0.input.unk1E * gUnknown_203B224->unk54.s0.input.unk1C) + r7;
         item = gTeamInventoryRef->teamItems[teamItemIndex];
 
         switch (gUnknown_203B224->unk0) {
             case 0: {
                 sub_8090E14(buf1, &item, 0);
-                PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->input, r7), buf1, gUnknown_203B224->unk88, 0);
+                PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
                 break;
             }
             case 1:
@@ -221,7 +221,7 @@ void sub_801A9E0(void)
                 item.flags = 1;
                 sub_8090E14(buf1, &item, &thing);
 
-                PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->input, r7), buf1, gUnknown_203B224->unk88, 0);
+                PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
                 break;
             }
             case 3: {
@@ -234,10 +234,10 @@ void sub_801A9E0(void)
                 sub_8090E14(buf1, &item, &thing);
 
                 if (gUnknown_203B224->unk4[teamItemIndex] != 0 || sub_801ADA0(teamItemIndex))
-                    PrintStringOnWindow(8,sub_8013800(&gUnknown_203B224->input,r7), buf1, gUnknown_203B224->unk88, 0);
+                    PrintStringOnWindow(8,sub_8013800(&gUnknown_203B224->unk54.s0.input,r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
                 else {
                     strncpy(gUnknown_202DE58, buf1, 80);
-                    PrintFormatStringOnWindow(8, sub_8013800(&gUnknown_203B224->input, r7), sFmtMoveItem0, gUnknown_203B224->unk88, 0);
+                    PrintFormatStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
                 }
                 break;
             }
@@ -255,15 +255,15 @@ void sub_801A9E0(void)
 
                     if (GetStackSellPrice(&item) + gTeamInventoryRef->teamMoney > MAX_TEAM_MONEY) {
                         sprintfStatic(buf2, sFmtRed, buf1);
-                        PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->input, r7), buf2, gUnknown_203B224->unk88, 0);
+                        PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), buf2, gUnknown_203B224->unk54.s0.unk34, 0);
                     }
                     else
-                        PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->input, r7), buf1, gUnknown_203B224->unk88, 0);
+                        PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
                 }
                 else {
                     sub_8090E14(buf1, &item, 0);
                     strncpy(gUnknown_202DE58, buf1, 80);
-                    PrintFormatStringOnWindow(8, sub_8013800(&gUnknown_203B224->input, r7), sFmtMoveItem0, gUnknown_203B224->unk88, 0);
+                    PrintFormatStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
                 }
                 break;
             }
@@ -278,20 +278,20 @@ void sub_801A9E0(void)
                 sub_8090E14(buf1, &item, &thing);
 
                 if (IsGummiItem(item.id))
-                    PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->input, r7), buf1, gUnknown_203B224->unk88, 0);
+                    PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
                 else {
                     strncpy(gUnknown_202DE58, buf1, 80);
-                    PrintFormatStringOnWindow(8, sub_8013800(&gUnknown_203B224->input, r7), sFmtMoveItem0, gUnknown_203B224->unk88, 0);
+                    PrintFormatStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
                 }
                 break;
             }
         }
 
         if (sub_801AED0(teamItemIndex) & 1)
-            sub_8007B7C(gUnknown_203B224->unk88, 8, sub_8013800(&gUnknown_203B224->input, r7), (gUnknown_203B224->unk8C->unkC - 2) * 8, 10);
+            sub_8007B7C(gUnknown_203B224->unk54.s0.unk34, 8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), (gUnknown_203B224->unk54.s0.unk38->unkC - 2) * 8, 10);
     }
 
-    sub_80073E0(gUnknown_203B224->unk88);
+    sub_80073E0(gUnknown_203B224->unk54.s0.unk34);
 }
 
 void sub_801AD34(u32 param_1)

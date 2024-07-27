@@ -2,18 +2,13 @@
 #define GUARD_POKEMON_NEWS3_H
 
 #include "structs/menu.h"
-#include "structs/str_text.h"
+#include "structs/struct_sub80095e4.h"
 
-// TODO: UNIFY
 // size: 0xA4
 struct unkStruct_203B2D8
 {
     u8 unk0[4];
-    /* 0x4 */ MenuInputStruct input;
-    u32 unk38;
-    UnkTextStruct2 *unk3C;
-    UnkTextStruct2 unk40[4];
-    UnkTextStruct2_sub2 unkA0;
+    /* 0x4 */ struct_Sub80095E4_2 unk4;
 };
 
 void CreateMailMenu(void);
