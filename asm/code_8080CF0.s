@@ -5,67 +5,6 @@
 
   	.text
 
-	thumb_func_start sub_8081BF4
-sub_8081BF4:
-	push {lr}
-	sub sp, 0x10
-	adds r3, r0, 0
-	adds r2, r1, 0
-	mov r0, sp
-	adds r1, r3, 0
-	bl sub_8082FD4
-	add r1, sp, 0xC
-	mov r0, sp
-	movs r2, 0x4
-	bl sub_8082FE0
-	mov r0, sp
-	bl sub_8081C50
-	mov r0, sp
-	bl sub_8081C7C
-	mov r0, sp
-	bl sub_8081F2C
-	mov r0, sp
-	bl sub_808201C
-	mov r0, sp
-	bl sub_8082060
-	mov r0, sp
-	bl sub_80820D8
-	mov r0, sp
-	bl sub_808217C
-	ldr r1, _08081C4C
-	mov r0, sp
-	bl sub_8083018
-	mov r0, sp
-	bl nullsub_98
-	add sp, 0x10
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08081C4C: .4byte gUnknown_81071D4
-	thumb_func_end sub_8081BF4
-
-	thumb_func_start sub_8081C50
-sub_8081C50:
-	push {r4,lr}
-	adds r4, r0, 0
-	ldr r1, _08081C70
-	bl sub_8083018
-	ldr r0, _08081C74
-	ldr r1, [r0]
-	ldr r0, _08081C78
-	adds r1, r0
-	adds r0, r4, 0
-	movs r2, 0x58
-	bl sub_8082FE0
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08081C70: .4byte gUnknown_81071E0
-_08081C74: .4byte gDungeon
-_08081C78: .4byte 0x00000644
-	thumb_func_end sub_8081C50
-
 	thumb_func_start sub_8081C7C
 sub_8081C7C:
 	push {r4-r7,lr}

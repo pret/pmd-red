@@ -71,6 +71,18 @@ void SaveSpeedCounters(unkStruct_8094924 *param_1, u8 *speedCounters, u32 numCou
 void SaveClientType(unkStruct_8094924 *param_1, u8 param_2);
 void sub_80421C0(Entity *, u16);
 void sub_804687C(Entity *, Position *, Position *, Item *, u32);
+extern void sub_8083018(unkStruct_8094924 *, u8 *);
+extern void sub_8081C50(unkStruct_8094924 *);
+extern void sub_8081C7C(unkStruct_8094924 *);
+extern void sub_8081F2C(unkStruct_8094924 *);
+extern void sub_808201C(unkStruct_8094924 *);
+extern void sub_8082060(unkStruct_8094924 *);
+extern void sub_80820D8(unkStruct_8094924 *);
+extern void sub_808217C(unkStruct_8094924 *);
+extern void sub_8082FD4(unkStruct_8094924 *, u32, u32);
+extern void sub_8082FE0(unkStruct_8094924 *, u32 *, u32);
+
+extern u8 gUnknown_81071D4[];
 
 void HandleTripTrap(Entity *pokemon, Entity *target)
 {
@@ -761,3 +773,27 @@ void SaveDungeonWeather(unkStruct_8094924 *r0, Weather *weather)
     sub_80830B4(r0, weather->nullifyWeather);
 }
 
+void sub_8081BF4(u32 r0, u32 r1)
+{
+    unkStruct_8094924 uStack_14;
+
+    sub_8082FD4(&uStack_14, r0, r1);
+
+    sub_8082FE0(&uStack_14, &uStack_14.unkC, 4);
+    sub_8081C50(&uStack_14);
+    sub_8081C7C(&uStack_14);
+    sub_8081F2C(&uStack_14);
+    sub_808201C(&uStack_14);
+    sub_8082060(&uStack_14);
+    sub_80820D8(&uStack_14);
+    sub_808217C(&uStack_14);
+    
+    sub_8083018(&uStack_14, gUnknown_81071D4);
+    nullsub_98(&uStack_14);
+}
+
+void sub_8081C50(unkStruct_8094924 *r0)
+{
+    sub_8083018(r0, gUnknown_81071E0);
+    sub_8082FE0(r0, (u32 *)&gDungeon->dungeonLocation, 0x58);
+}
