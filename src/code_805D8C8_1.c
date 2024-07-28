@@ -156,8 +156,7 @@ extern const u8 *gUnknown_80FE940;
 extern const u8 *gWhichTextPtr1;
 
 #ifdef NONMATCHING
-
-void sub_805D8C8(void)
+void sub_805D8C8(void) // https://decomp.me/scratch/96Sci
 {
     struct UnkMenuBitsStruct r6;
     s32 i; //r4
@@ -1876,7 +1875,7 @@ NAKED void sub_805D8C8(void)
 
 #endif
 
-/* Nope
+/* TODO: leaving this for now as it uses weird sprite OAM logic
 void sub_805E2C4(Entity *leader)
 {
     unkDungeonGlobal_unk181E8_sub *unkPtr;
@@ -4831,5 +4830,3 @@ void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 windowId)
 
     sub_80073E0(windowId);
 }
-
-//
