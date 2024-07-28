@@ -4,16 +4,6 @@
 #include "structs/menu.h"
 #include "structs/str_text.h"
 
-// size: 0xA0
-typedef struct unkStruct_203B2F4
-{
-    MenuInputStruct input;
-    u32 unk34;
-    UnkTextStruct2 *unk38;
-    UnkTextStruct2 unk3C[4];
-    u8 unk9C[4];
-} unkStruct_203B2F4;
-
 bool8 sub_802CDD4(u32);
 u32 sub_802CE5C(bool8);
 u8 sub_802CEBC(void);

@@ -8,7 +8,7 @@
 bool8 IsPositionActuallyInSight(Position *pos1, Position *pos2)
 {
     u8 pos1Room;
-    u8 visibility = gDungeon->visibilityRange;
+    u8 visibility = gDungeon->unk181e8.visibilityRange;
     struct Tile *tile1;
     if (visibility == 0)
     {
@@ -103,9 +103,9 @@ void sub_80833E8(Position *param_1, s32 *param_2)
   struct RoomData *mapRoom;
   u32 visibility;
   u32 room;
-  
+
   tile = GetTile(param_1->x, param_1->y);
-  visibility = gDungeon->visibilityRange;
+  visibility = gDungeon->unk181e8.visibilityRange;
   if (visibility == 0) {
     visibility = 2;
   }
@@ -136,7 +136,7 @@ bool8 IsTargetTwoTilesAway(Position *pos1, Position *pos2)
     s32 yDiff;
     s32 x2;
     s32 y2;
-  
+
     diff = pos1->x - pos2->x;
     if (diff < 0)
     {

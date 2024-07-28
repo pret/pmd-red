@@ -668,7 +668,7 @@ void sub_8036F30(void)
   uVar1 = sTradeItemsMenu->unk14.unk14;
   sub_8008C54(uVar1);
   sub_80073B8(uVar1);
-  xxx_call_draw_string(2, 0, sHowMany, uVar1, 0);
+  PrintStringOnWindow(2, 0, sHowMany, uVar1, 0);
   sub_8013C68(&sTradeItemsMenu->unk14);
   sub_80073E0(uVar1);
 }

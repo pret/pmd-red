@@ -34,7 +34,7 @@ bool8 sub_80211AC(u32 mode, u32 a1)
     sWigglytuffShop1Work->s40.s0.unk38 = &sWigglytuffShop1Work->s40.s0.unk3C[sWigglytuffShop1Work->s40.s0.unk34];
     sub_8006518(sWigglytuffShop1Work->s40.s0.unk3C);
     sWigglytuffShop1Work->s40.s0.unk3C[sWigglytuffShop1Work->s40.s0.unk34] = sUnknown_80DC47C;
-    sWigglytuffShop1Work->s40.s0.unk38->unk14 = sWigglytuffShop1Work->s40.unk9C;
+    sWigglytuffShop1Work->s40.s0.unk38->unk14 = &sWigglytuffShop1Work->s40.unk9C;
     ResetUnusedInputStruct();
     sub_800641C(sWigglytuffShop1Work->s40.s0.unk3C, TRUE, TRUE);
     sub_8013818(&sWigglytuffShop1Work->s40.s0.input, sub_8021664(), 10, a1);
@@ -114,10 +114,10 @@ void sub_80213A0(void)
 
 static void sub_8021410(void)
 {
-    sWigglytuffShop1Work->s40.unk9C[0] = 1;
-    sWigglytuffShop1Work->s40.unk9C[1] = 0;
-    sWigglytuffShop1Work->s40.unk9C[2] = 12;
-    sWigglytuffShop1Work->s40.unk9C[3] = 0;
+    sWigglytuffShop1Work->s40.unk9C.f0 = 1;
+    sWigglytuffShop1Work->s40.unk9C.f1 = 0;
+    sWigglytuffShop1Work->s40.unk9C.f2 = 12;
+    sWigglytuffShop1Work->s40.unk9C.f3 = 0;
     ResetUnusedInputStruct();
     sub_800641C(sWigglytuffShop1Work->s40.s0.unk3C, TRUE, TRUE);
 
@@ -133,9 +133,9 @@ void sub_8021494(void)
 
     sub_8008C54(sWigglytuffShop1Work->s40.s0.unk34);
     sub_80073B8(sWigglytuffShop1Work->s40.s0.unk34);
-    xxx_call_draw_string(10, 0, sFriendAreas, sWigglytuffShop1Work->s40.s0.unk34, 0);
+    PrintStringOnWindow(10, 0, sFriendAreas, sWigglytuffShop1Work->s40.s0.unk34, 0);
 
-    sub_8012BC4((sWigglytuffShop1Work->s40.unk9C[2] * 8) + 4, 0, sWigglytuffShop1Work->s40.s0.input.unk1E + 1, 1, 7, sWigglytuffShop1Work->s40.s0.unk34);
+    sub_8012BC4((sWigglytuffShop1Work->s40.unk9C.f2 * 8) + 4, 0, sWigglytuffShop1Work->s40.s0.input.unk1E + 1, 1, 7, sWigglytuffShop1Work->s40.s0.unk34);
 
     for (i = 0; i < sWigglytuffShop1Work->s40.s0.input.unk1A; i++) {
         friendAreaIndex = sWigglytuffShop1Work->friendAreas[(sWigglytuffShop1Work->s40.s0.input.unk1E * sWigglytuffShop1Work->s40.s0.input.unk1C) + i];
@@ -144,22 +144,22 @@ void sub_8021494(void)
             sub_8092578(buffer1, friendAreaIndex, TRUE);
 
             if (GetFriendAreaPrice(friendAreaIndex) <= gTeamInventoryRef->teamMoney)
-                xxx_call_draw_string(8,sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), buffer1, sWigglytuffShop1Work->s40.s0.unk34, 0);
+                PrintStringOnWindow(8,sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), buffer1, sWigglytuffShop1Work->s40.s0.unk34, 0);
             else {
                 sprintfStatic(buffer2, sFmtRedString, buffer1);
-                xxx_call_draw_string(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), buffer2, sWigglytuffShop1Work->s40.s0.unk34, 0);
+                PrintStringOnWindow(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), buffer2, sWigglytuffShop1Work->s40.s0.unk34, 0);
             }
         }
         else if (sWigglytuffShop1Work->mode == 0) {
             if (gFriendAreas[friendAreaIndex] == TRUE)
-                xxx_call_draw_string(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), GetFriendAreaName(friendAreaIndex), sWigglytuffShop1Work->s40.s0.unk34, 0);
+                PrintStringOnWindow(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), GetFriendAreaName(friendAreaIndex), sWigglytuffShop1Work->s40.s0.unk34, 0);
             else {
                 sprintfStatic(buffer2, sFmtGreenString, GetFriendAreaName(friendAreaIndex));
-                xxx_call_draw_string(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), buffer2, sWigglytuffShop1Work->s40.s0.unk34, 0);
+                PrintStringOnWindow(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), buffer2, sWigglytuffShop1Work->s40.s0.unk34, 0);
             }
         }
         else
-            xxx_call_draw_string(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), GetFriendAreaName(friendAreaIndex), sWigglytuffShop1Work->s40.s0.unk34, 0);
+            PrintStringOnWindow(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), GetFriendAreaName(friendAreaIndex), sWigglytuffShop1Work->s40.s0.unk34, 0);
     }
 
     sub_80073E0(sWigglytuffShop1Work->s40.s0.unk34);

@@ -42,7 +42,7 @@ bool8 CreateIQSkillListMenu(s16 species, u32 index, u32 a2)
     sIQSkillListMenu->s24.s0.unk38 = &sIQSkillListMenu->s24.s0.unk3C[index];
     sub_8006518(sIQSkillListMenu->s24.s0.unk3C);
     sIQSkillListMenu->s24.s0.unk3C[sIQSkillListMenu->s24.s0.unk34] = sUnknown_80DBDF0;
-    sIQSkillListMenu->s24.s0.unk38->unk14 = sIQSkillListMenu->s24.unk9C;
+    sIQSkillListMenu->s24.s0.unk38->unk14 = &sIQSkillListMenu->s24.unk9C;
     sub_8012D08(sIQSkillListMenu->s24.s0.unk38, a2);
     ResetUnusedInputStruct();
     sub_800641C(sIQSkillListMenu->s24.s0.unk3C, TRUE, TRUE);
@@ -110,10 +110,10 @@ void CleanIQSkillListMenu(void)
 
 static void sub_801C440(void)
 {
-    sIQSkillListMenu->s24.unk9C[0] = sIQSkillListMenu->s24.s0.input.unk20;
-    sIQSkillListMenu->s24.unk9C[1] = sIQSkillListMenu->s24.s0.input.unk1E;
-    sIQSkillListMenu->s24.unk9C[2] = 10;
-    sIQSkillListMenu->s24.unk9C[3] = 0;
+    sIQSkillListMenu->s24.unk9C.f0 = sIQSkillListMenu->s24.s0.input.unk20;
+    sIQSkillListMenu->s24.unk9C.f1 = sIQSkillListMenu->s24.s0.input.unk1E;
+    sIQSkillListMenu->s24.unk9C.f2 = 10;
+    sIQSkillListMenu->s24.unk9C.f3 = 0;
     ResetUnusedInputStruct();
     sub_800641C(sIQSkillListMenu->s24.s0.unk3C, TRUE, TRUE);
     SUB_80095E4_CALL_2(sIQSkillListMenu->s24.s0);
@@ -132,10 +132,10 @@ void BuildIQSkillList(void)
     x = sIQSkillListMenu->s24.s0.input.unk1E * 8;
     x2 = x;
     x2 += 10;
-    xxx_call_draw_string(x2, 0, sIQSkills, sIQSkillListMenu->s24.s0.unk34, 0);
+    PrintStringOnWindow(x2, 0, sIQSkills, sIQSkillListMenu->s24.s0.unk34, 0);
 
     x += 4;
-    x2 = x + sIQSkillListMenu->s24.unk9C[2] * 8;
+    x2 = x + sIQSkillListMenu->s24.unk9C.f2 * 8;
     sub_8012BC4(x2, 0, sIQSkillListMenu->s24.s0.input.unk1E + 1, 1, 7, sIQSkillListMenu->s24.s0.unk34);
 
     for (counter = 0; counter < sIQSkillListMenu->s24.s0.input.unk1A; counter++) {
@@ -149,7 +149,7 @@ void BuildIQSkillList(void)
         else
             strcpy(gUnknown_202DEA8 - 80, sUnknown_80DBE18);
 
-        xxx_format_and_draw(12, y, sFmt01, sIQSkillListMenu->s24.s0.unk34, 0);
+        PrintFormatStringOnWindow(12, y, sFmt01, sIQSkillListMenu->s24.s0.unk34, 0);
     }
 
     sub_80073E0(sIQSkillListMenu->s24.s0.unk34);

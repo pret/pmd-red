@@ -103,10 +103,10 @@ static void CreateOptionsMenu(void)
 
     sub_8008C54(sUnknown_203B260->unk44);
     sub_80073B8(sUnknown_203B260->unk44);
-    xxx_call_draw_string(16, 0, sGameOptions,sUnknown_203B260->unk44, 0);
+    PrintStringOnWindow(16, 0, sGameOptions,sUnknown_203B260->unk44, 0);
 
     y = sub_8013800(&sUnknown_203B260->input, 0);
-    xxx_call_draw_string(8, y, sUnknown_80DC064, sUnknown_203B260->unk44, 0);
+    PrintStringOnWindow(8, y, sUnknown_80DC064, sUnknown_203B260->unk44, 0);
 
     switch (sUnknown_203B260->optionsMenu->windowColor) {
         case WINDOW_COLOR_BLUE:

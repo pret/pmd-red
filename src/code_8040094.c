@@ -31,7 +31,7 @@ void HandleLuminousOrbAction(Entity *pokemon)
   int XCoord;
   int YCoord;
 
-  gDungeon->unk1820B = 1;
+  gDungeon->unk181e8.unk1820B = 1;
 
   for(YCoord = 0; YCoord < DUNGEON_MAX_SIZE_Y; YCoord++)
   {
@@ -49,7 +49,7 @@ void HandleLuminousOrbAction(Entity *pokemon)
 
 void sub_8040094(u8 r0)
 {
-    gDungeon->unk18217 = r0;
+    gDungeon->unk181e8.unk18217 = r0;
     sub_803F7BC();
     sub_80060EC();
     IncrementPlayTime(gPlayTimeRef);
@@ -63,15 +63,15 @@ void sub_8040094(u8 r0)
 void sub_80400D4(void)
 {
     s32 temp;
-    temp = gDungeon->unk18200;
+    temp = gDungeon->unk181e8.unk18200;
     if(temp == 0)
         return;
     if(temp > 0x1E)
         temp = 0x1F;
-    gDungeon->unk181FC = gUnknown_80F6568[temp];
-    gDungeon->unk18200--;
-    if(gDungeon->unk18200 == 0)
-        gDungeon->unk18200 = gDungeon->unk18204;
+    gDungeon->unk181e8.unk181FC = gUnknown_80F6568[temp];
+    gDungeon->unk181e8.unk18200--;
+    if(gDungeon->unk181e8.unk18200 == 0)
+        gDungeon->unk181e8.unk18200 = gDungeon->unk181e8.unk18204;
 }
 
 void sub_8040124(void)

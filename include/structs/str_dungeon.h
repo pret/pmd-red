@@ -79,6 +79,43 @@ typedef struct DungeonMusicPlayer
     /* 0xE */ u16 queuedSongIndex;
 } DungeonMusicPlayer;
 
+// Size unknown?
+typedef struct unkDungeonGlobal_unk181E8_sub
+{
+    /* 0x181E8 */ Position cameraPos;
+    /* 0x181EC */ Position cameraPosMirror;
+    /* 0x181F0 */ Position cameraPixelPos;
+    /* 0x181F4 */ Position cameraPixelPosMirror;
+    /* 0x181F8 */ Entity *cameraTarget;
+    u32 unk181FC;
+    u32 unk18200;
+    u32 unk18204;
+    u8 unk18208;
+    /* 0x18209 */ u8 visibilityRange; // Dungeon light level.
+    /* 0x1820A */ bool8 blinded; // Blacks out the screen when the player has the Blinker status.
+    u8 unk1820B;
+    u8 unk1820C;
+    u8 unk1820D;
+    u8 unk1820E;
+    u8 unk1820F;
+    /* 0x18210 */ bool8 hallucinating; // Displays Substitute and flower sprites when the player has the Cross-Eyed status.
+    u8 unk18211;
+    u8 unk18212;
+    u8 unk18213;
+    u8 unk18214;
+    u8 unk18215;
+    u8 fill18216;
+    u8 unk18217;
+    u8 fill18218;
+    u8 fill18219;
+    u8 unk1821A;
+    u8 unk1821B;
+    u8 unk1821C;
+    u8 fill1821D;
+    u8 fill1821E;
+    u8 fill1821F;
+} unkDungeonGlobal_unk181E8_sub;
+
 // size: 0x1CEDC
 typedef struct Dungeon
 {
@@ -112,13 +149,17 @@ typedef struct Dungeon
     /* 0x179 */ bool8 pokemonExposed; // True if a Pokémon on the floor has the Exposed status.
     u8 fill17A[0x17C - 0x17A];
     Dungeon_sub unk17C[0x100];
-    /* 0x57C */ u8 fill57C[0x644 - 0x57c];
+    /* 0x57C */ u8 fill57C[0x5C0 - 0x57c];
+    /* 0x5C0 */ s32 unk5C0;
+    /* 0x5C4 */ u8 fill5C4[0x644 - 0x5C4];
     /* 0x644 */ DungeonLocation dungeonLocation;
     u8 fill646[0x654 - 0x648];
     u8 unk654;
-    u8 fill655[0x65C - 0x655];
+    u8 fill655[0x65B - 0x655];
+    u8 unk65B;
     u8 unk65C;
-    u8 fill65D[0x660 - 0x65D];
+    u8 unk65D;
+    u8 fill65e[0x660 - 0x65e];
     /* 0x660 */ s16 fractionalTurn; // Handles turn order when Pokémon have different movement speeds.
     s16 unk662;
     s16 unk664;
@@ -227,33 +268,8 @@ typedef struct Dungeon
     /* 0x17B3C */ u32 unk17B40;
     /* 0x17B44 */ OpenedFile *sprites[MONSTER_MAX];
     /* 0x181E4 */ OpenedFile *paletFile;
-    /* 0x181E8 */ Position cameraPos;
-    /* 0x181EC */ Position cameraPosMirror;
-    /* 0x181F0 */ Position cameraPixelPos;
-    /* 0x181F4 */ Position cameraPixelPosMirror;
-    /* 0x181F8 */ Entity *cameraTarget;
-    u32 unk181FC;
-    u32 unk18200;
-    u32 unk18204;
-    u8 unk18208;
-    /* 0x18209 */ u8 visibilityRange; // Dungeon light level.
-    /* 0x1820A */ bool8 blinded; // Blacks out the screen when the player has the Blinker status.
-    u8 unk1820B;
-    u8 unk1820C;
-    u8 unk1820D;
-    u8 unk1820E;
-    u8 unk1820F;
-    /* 0x18210 */ bool8 hallucinating; // Displays Substitute and flower sprites when the player has the Cross-Eyed status.
-    u8 unk18211;
-    u8 unk18212;
-    u8 unk18213;
-    u8 fill18214;
-    u8 unk18215;
-    u8 fill18216;
-    u8 unk18217;
-    u8 fill18218[0x1821A - 0x18218];
-    u8 unk1821A;
-    u8 fill1821B[0x1C578 - 0x1821B];
+    /* 0x181E8 */ unkDungeonGlobal_unk181E8_sub unk181e8;
+    u8 fill18220[0x1C578 - 0x18220];
     u8 unk1C578;
     u8 fill1C579[0x1C57E - 0x1C579];
     u8 unk1C57E;

@@ -5,5 +5,5 @@
 
 void sub_8085E98(void)
 {
-    gDungeon->unk18215 = 0;
+    gDungeon->unk181e8.unk18215 = 0;
 }

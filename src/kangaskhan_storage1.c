@@ -361,7 +361,7 @@ static void sub_8017598(void)
 {
     sub_8008C54(gKangaskhanStorageWork->unkA8.unk14);
     sub_80073B8(gKangaskhanStorageWork->unkA8.unk14);
-    xxx_call_draw_string(4, 0, sNumber, gKangaskhanStorageWork->unkA8.unk14, 0);
+    PrintStringOnWindow(4, 0, sNumber, gKangaskhanStorageWork->unkA8.unk14, 0);
     sub_8013C68(&gKangaskhanStorageWork->unkA8);
     sub_80073E0(gKangaskhanStorageWork->unkA8.unk14);
     sub_801CCD8();

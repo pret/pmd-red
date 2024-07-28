@@ -44,6 +44,15 @@ typedef struct UnkTextStruct2_sub
     } unk0;
 } UnkTextStruct2_sub;
 
+
+typedef struct UnkTextStruct2_sub2
+{
+    u8 f0;
+    u8 f1;
+    u8 f2;
+    u8 f3;
+} UnkTextStruct2_sub2;
+
 // size: 0x18
 typedef struct UnkTextStruct2
 {
@@ -55,7 +64,7 @@ typedef struct UnkTextStruct2
     s16 unkE;
     s16 unk10;
     s16 unk12;
-    const u8 *unk14; // Pointer to 4 bytes which may be x-coord related
+    const UnkTextStruct2_sub2 *unk14; // Pointer to 4 bytes which may be x-coord related. Could be window's header?
 } UnkTextStruct2;
 
 #endif // GUARD_STR_TEXT_H

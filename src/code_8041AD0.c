@@ -130,7 +130,7 @@ void sub_804178C(u8 param_1)
   s32 counter;
 
   counter = 0;
-  gDungeon->unk18204 = 0;
+  gDungeon->unk181e8.unk18204 = 0;
   if (sub_800E9FC(param_1) != 0) {
     while ((counter < 1000 && (sub_800E9FC(param_1) != 0))) {
       sub_803E46C(0x4a);

@@ -21,7 +21,7 @@ void sub_804AA60(void) {
         }
     }
     sub_80098F8(2);
-    gDungeon->unk1821A = 0;
+    gDungeon->unk181e8.unk1821A = 0;
 }
 
 void sub_804AAAC(void)
@@ -121,8 +121,8 @@ void sub_804AC20(Position *pos)
 
     tile2 = GetTile(pos->x,pos->y);
     roomIndex = tile2->room;
-    visibilityRange = gDungeon->visibilityRange;
-    if (!gDungeon->blinded) {
+    visibilityRange = gDungeon->unk181e8.visibilityRange;
+    if (!gDungeon->unk181e8.blinded) {
         if (visibilityRange == 0) {
             visibilityRange = 2;
         }

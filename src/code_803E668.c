@@ -38,7 +38,7 @@ void sub_803E668(u32 a0)
     sub_8009908();
     xxx_call_update_bg_vram();
     xxx_call_update_bg_sound_input();
-    gDungeon->unk18213 = 0;
+    gDungeon->unk181e8.unk18213 = 0;
     sub_8011860();
     ResetSprites(FALSE);
     nullsub_10(FALSE);

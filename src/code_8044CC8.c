@@ -2,6 +2,7 @@
 #include "constants/dungeon_action.h"
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
+#include "code_8044CC8.h"
 #include "items.h"
 
 typedef struct ItemText
@@ -23,22 +24,14 @@ void sub_80460F8(Position *, Item *, u32);
 extern u8 sub_8043D10(void);
 extern bool8 sub_8045888(Entity *);
 
-struct unkStruct_202EE44
-{
-    u16 unk0;
-    u8 unk2;
-    bool8 unk3;
-};
-
-struct unkStruct_202EE44 gUnknown_202EE44[10];
-
+EWRAM_DATA struct unkStruct_202EE44 gUnknown_202EE44[10] = {0};
 
 Item * sub_8044CC8(Entity *param_1, unkStruct_8044CC8 *param_2)
 {
   Tile *tile;
   Item *item;
   EntityInfo *info;
-  
+
   if ((u8)(param_2->actionUseIndex - 1) < INVENTORY_SIZE) {
     item = &gTeamInventoryRef->teamItems[param_2->actionUseIndex - 1];
   }
@@ -65,7 +58,7 @@ bool8 sub_8044D40(ActionContainer *param_1,s32 index)
 {
   Item *item;
   unkStruct_8044CC8 *puVar1;
-  
+
   puVar1 = &param_1->unk4[index];
   if ((u8)(puVar1->actionUseIndex - 1) < INVENTORY_SIZE) {
     item = &gTeamInventoryRef->teamItems[puVar1->actionUseIndex - 1];
@@ -95,13 +88,13 @@ Entity *sub_8044DA4(Entity *entity, s32 index)
     return gDungeon->teamPokemon[info->action.unk4[index].actionUseIndex];
 }
 
-u16 sub_8044DC8(u8 *param_1)
+u16 sub_8044DC8(Item *param_1)
 {
-  if (param_1[2] == ITEM_SWITCH_BOX) {
+  if (param_1->id == ITEM_SWITCH_BOX) {
     return 0x35;
   }
   else {
-    return gUnknown_80F6964[GetItemCategory(param_1[2])];
+    return gUnknown_80F6964[GetItemCategory(param_1->id)];
   }
 }
 
@@ -109,7 +102,7 @@ void sub_8044DF0(Entity *entity, s32 index, u32 unused)
 {
   Item *item;
   EntityInfo *info;
-  
+
   info = entity->info;
   item = sub_8044D90(entity,index,unused);
   if ((info->action).unk4[0].actionUseIndex == 0x80) {
@@ -130,7 +123,7 @@ void sub_8044E24(Entity *entity,int index,u32 unused)
   EntityInfo *info;
   Position *pos;
   Item item;
-  
+
   itemPtr = sub_8044D90(entity,index,unused);
   info = entity->info;
   if (!IsHMItem(itemPtr->id)) {
@@ -192,7 +185,7 @@ bool8 sub_8044F3C(s32 param_1)
 void sub_8044F5C(u16 param_1, u8 param_2)
 {
   int index;
-  
+
   if (gUnknown_202EE6C < 10) {
     for(index = 0; index < gUnknown_202EE6C; index++)
     {

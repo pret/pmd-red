@@ -28,22 +28,22 @@ extern unkStruct_203B480 *gUnknown_203B480;
 
 const UnkTextStruct2 gUnknown_80E1FA8 = {
     0, 0, 0, 0,
-    3, 
+    3,
     0x0, 0x0,
     0x0, 0x0,
     0x0, 0,
     NULL
 };
 
-const u8 gUnkData_80E1FC0[4] = {0x01, 0x00, 0x0A, 0x00};
+const UnkTextStruct2_sub2 gUnkData_80E1FC0 = {0x01, 0x00, 0x0A, 0x00};
 
 const UnkTextStruct2 gUnknown_80E1FC4 = {
     0, 0, 0, 0,
-    6, 
+    6,
     0x2, 0x2,
     0x1A, 0xA,
     0xA, 0,
-    gUnkData_80E1FC0
+    &gUnkData_80E1FC0
 };
 
 ALIGNED(4) const u8 gUnknown_80E1FDC[] = "Password";
@@ -115,10 +115,10 @@ void DrawSOSPasswordScreen(void)
   s32 index;
   u8 buffer [PASSWORD_BUFFER_SIZE + 2];
   unkStruct_203B480 *mail;
-  
+
   mail = &gUnknown_203B480[gUnknown_203B334->mailIndex];
   sub_80073B8(gUnknown_203B334->unk10);
-  xxx_call_draw_string(0x14,0,gUnknown_80E1FDC,gUnknown_203B334->unk10,0); // Password
+  PrintStringOnWindow(0x14,0,gUnknown_80E1FDC,gUnknown_203B334->unk10,0); // Password
   sub_803D2C0(buffer, mail);
   for(index = 0; index < PASSWORD_BUFFER_SIZE; index++)
   {

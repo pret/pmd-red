@@ -58,11 +58,11 @@ bool8 sub_801F428(s16 index, s32 param_2)
     gUnknown_203B274->s348.s0.unk38 = &gUnknown_203B274->s348.s0.unk3C[gUnknown_203B274->s348.s0.unk34];
     sub_8006518(gUnknown_203B274->s348.s0.unk3C);
     gUnknown_203B274->s348.s0.unk3C[gUnknown_203B274->s348.s0.unk34] = sUnknown_80DC2C4;
-    gUnknown_203B274->s348.s0.unk38->unk14 = gUnknown_203B274->s348.unk9C;
-    gUnknown_203B274->s348.unk9C[0] = 1;
-    gUnknown_203B274->s348.unk9C[1] = 0;
-    gUnknown_203B274->s348.unk9C[2] = 0xC;
-    gUnknown_203B274->s348.unk9C[3] = 0;
+    gUnknown_203B274->s348.s0.unk38->unk14 = &gUnknown_203B274->s348.unk9C;
+    gUnknown_203B274->s348.unk9C.f0 = 1;
+    gUnknown_203B274->s348.unk9C.f1 = 0;
+    gUnknown_203B274->s348.unk9C.f2 = 0xC;
+    gUnknown_203B274->s348.unk9C.f3 = 0;
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B274->s348.s0.unk3C, TRUE, TRUE);
     sub_8013818(&gUnknown_203B274->s348.s0.input, sub_801F7E4(), 4, param_2);
@@ -146,12 +146,12 @@ void sub_801F700(void)
     sub_8008C54(gUnknown_203B274->s348.s0.unk34);
     sub_80073B8(gUnknown_203B274->s348.s0.unk34);
     sprintfStatic(buffer1,gUnknown_80DC2DC,gUnknown_203B274->s348.s0.input.unk1E + 1,gUnknown_203B274->s348.s0.input.unk20); // Moves Page: %d/%d
-    xxx_call_draw_string(0x10,0,buffer1,gUnknown_203B274->s348.s0.unk34,0);
+    PrintStringOnWindow(0x10,0,buffer1,gUnknown_203B274->s348.s0.unk34,0);
     for(index = 0; index < gUnknown_203B274->s348.s0.input.unk1A; index++)
     {
         sub_8092C84(buffer2,gUnknown_203B274->unk4->unk0[gUnknown_203B274->s348.s0.input.unk1E * gUnknown_203B274->s348.s0.input.unk1C + index]);
         y = sub_8013800(&gUnknown_203B274->s348.s0.input, index);
-        xxx_call_draw_string(8,y,buffer2,gUnknown_203B274->s348.s0.unk34,0);
+        PrintStringOnWindow(8,y,buffer2,gUnknown_203B274->s348.s0.unk34,0);
     }
     sub_80073E0(gUnknown_203B274->s348.s0.unk34);
 }

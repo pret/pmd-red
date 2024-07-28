@@ -16,7 +16,7 @@
 
 const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
-const u8 UnkData_80D47C4[] = {0x01, 0x00, 0x10, 0x00};
+const UnkTextStruct2_sub2 UnkData_80D47C4 = {0x01, 0x00, 0x10, 0x00};
 
 const UnkTextStruct2 gUnknown_80D47C8[4] = {
         0x00, 0x00, 0x00, 0x00,
@@ -24,7 +24,7 @@ const UnkTextStruct2 gUnknown_80D47C8[4] = {
         0x02, 0x02,
         0x1a, 0x0c,
         0x0c, 0x00,
-        UnkData_80D47C4,
+        &UnkData_80D47C4,
 
         0x00, 0x00, 0x00, 0x00,
         0x03,
@@ -66,7 +66,7 @@ const s32 gUnknown_80D4830[9] = {
 extern s16 sub_8009614(u32, u32);
 
 static void sub_8013134(MenuInputStruct *, u32, u32);
-static void sub_801332C(s16 *);
+static void sub_801332C(Position *a0);
 static void sub_8013470(MenuInputStruct *);
 static bool8 sub_8013DD0(unkStructFor8013AA0 *);
 
@@ -449,7 +449,7 @@ void sub_8012EBC(MenuStruct *param_1)
             ptr_text2 = &textStack[index];
             sub_8006518(textStack);
             x = sub_8008ED0(param_1->unk0);
-            xxx_format_and_draw(((ptr_text2->unk14[2] * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
+            PrintFormatStringOnWindow(((ptr_text2->unk14->f2 * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
         }
 
         colorArray = param_1->menuTextColorArray;
@@ -474,7 +474,7 @@ void sub_8012EBC(MenuStruct *param_1)
 
                 sprintfStatic(buffer,gUnknown_80D4828, color, textPtr);
                 y = sub_8013800(&param_1->input, counter);
-                xxx_format_and_draw(8, y, buffer, param_1->index, 0);
+                PrintFormatStringOnWindow(8, y, buffer, param_1->index, 0);
                 menuItemsPtr++;
                 counter++;
             } while (menuItemsPtr->text != NULL);
@@ -607,7 +607,7 @@ static void sub_8013134(MenuInputStruct *param_1, u32 menuItemCounter, u32 index
 
     param_1->unkC = 0;
     param_1->unkE = 0;
-    param_1->unk14 = 0;
+    param_1->unk14.x = 0;
     param_1->unk24 = 0;
     sub_801317C(&param_1->unk28);
 }
@@ -691,11 +691,11 @@ void AddMenuCursorSprite_(MenuInputStruct *a0, u8 *a1)
             ptr->unk6 &= ~SPRITEOAM_MASK_UNK6_0;
             ptr->unk6 &= ~SPRITEOAM_MASK_UNK6_1;
 
-            r0 = a0->unk8;
+            r0 = a0->unk8.x;
             r0 &= SPRITEOAM_MAX_X;
             ptr->attrib2 = r0;
 
-            value = a0->unkA + 1;
+            value = a0->unk8.y + 1;
             value &= SPRITEOAM_MAX_UNK6_4;
             value <<= SPRITEOAM_SHIFT_UNK6_4;
             ptr->unk6 &= r5;
@@ -706,7 +706,7 @@ void AddMenuCursorSprite_(MenuInputStruct *a0, u8 *a1)
     }
 
     sub_8013470(a0);
-    if (a0->unk14 != 0)
+    if (a0->unk14.x != 0)
         sub_801332C(&a0->unk14);
 
     a0->unk24++;
@@ -717,7 +717,7 @@ void nullsub_34(MenuInputStructSub *a0)
 }
 
 // Maybe Position
-static void sub_801332C(s16 *a0)
+static void sub_801332C(Position *a0)
 {
     SpriteOAM sp = {};
     SpriteOAM* ptr;
@@ -774,11 +774,11 @@ static void sub_801332C(s16 *a0)
     ptr->unk6 &= ~SPRITEOAM_MASK_UNK6_0;
     ptr->unk6 &= ~SPRITEOAM_MASK_UNK6_1;
 
-    r1 = a0[0];
+    r1 = a0->x;
     r1 &= SPRITEOAM_MAX_X;
     ptr->attrib2 = r1;
 
-    r0 = a0[1] + 1;
+    r0 = a0->y + 1;
     r0 &= SPRITEOAM_MAX_UNK6_4;
     r0 <<= SPRITEOAM_SHIFT_UNK6_4;
     ptr->unk6 &= r6;
@@ -931,8 +931,8 @@ void UpdateMenuCursorSpriteCoords(MenuInputStruct *param_1)
 
     index = param_1->unk0;
     temp = &gUnknown_2027370[index];
-    param_1->unk8 = temp->unk0 * 8 + param_1->unk4;
-    param_1->unkA = temp->unk2 * 8 + sub_8013800(param_1, param_1->menuIndex);
+    param_1->unk8.x = temp->unk0 * 8 + param_1->unk4;
+    param_1->unk8.y = temp->unk2 * 8 + sub_8013800(param_1, param_1->menuIndex);
 }
 
 void MoveMenuCursorDown(MenuInputStruct *param_1)
@@ -1061,7 +1061,7 @@ void sub_8013818(MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4
     param_1->unk0 = param_4;
     param_1->unk22 = param_2;
     param_1->unk1C = param_3;
-    param_1->unk14 = 0;
+    param_1->unk14.x = 0;
     param_1->unk24 = 0;
     param_1->menuIndex = 0;
     param_1->unk1E = 0;
@@ -1076,7 +1076,7 @@ void sub_8013848(MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4
     param_1->unk0 = param_4;
     param_1->unk22 = param_2;
     param_1->unk1C = param_3;
-    param_1->unk14 = 0;
+    param_1->unk14.x = 0;
     param_1->unk24 = 0;
     param_1->menuIndex = 0;
     param_1->unk1E = 0;
@@ -1142,7 +1142,7 @@ bool8 sub_8013938(MenuInputStruct *param_1)
 
     sVar1 = param_1->unk1E;
     param_1->unk1A = 0;
-    param_1->unk14 = 0;
+    param_1->unk14.x = 0;
     AddMenuCursorSprite(param_1);
 
     switch (GetKeyPress(param_1)) {

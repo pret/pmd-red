@@ -3,6 +3,7 @@
 
 #include "sprite_oam.h"
 #include "structs/str_text.h"
+#include "structs/str_position.h"
 
 // size: 0xC
 typedef struct MenuInputStructSub
@@ -23,13 +24,11 @@ typedef struct MenuInputStruct
     s32 unk0;
     u16 unk4;
     s16 unk6;
-    s16 unk8; // Maybe Position
-    s16 unkA;
+    Position unk8; // Maybe Position
     s16 unkC; // Maybe Position
     s16 unkE;
     u32 unk10;
-    s16 unk14; // Maybe Position
-    s16 unk16;
+    Position unk14; // Maybe Position
     /* 0x18 */ s16 menuIndex;
     s16 unk1A;
     s16 unk1C;

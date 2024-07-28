@@ -73,7 +73,7 @@ bool8 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
                 break;
         }
 
-        xxx_call_draw_string(x, y, srcText, 0, 0);
+        PrintStringOnWindow(x, y, srcText, 0, 0);
         cred++;
     }
 

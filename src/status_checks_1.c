@@ -57,8 +57,8 @@ s32 sub_8070828(Entity *pokemon, bool8 displayMessage)
 
 void SetMessageArgument_2(char buffer[], EntityInfo *param_2, s32 colorNum)
 {
-    if (((gDungeon->blinded ||
-        gDungeon->hallucinating) ||
+    if (((gDungeon->unk181e8.blinded ||
+        gDungeon->unk181e8.hallucinating) ||
         (param_2->transformStatus.transformStatus == STATUS_INVISIBLE)) &&
         (param_2->isNotTeamMember))
     {
@@ -101,8 +101,8 @@ void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum)
 
 void sub_80709C8(u8 *buffer, EntityInfo *entityInfo)
 {
-    if (((gDungeon->blinded ||
-          gDungeon->hallucinating) ||
+    if (((gDungeon->unk181e8.blinded ||
+          gDungeon->unk181e8.hallucinating) ||
           (entityInfo->transformStatus.transformStatus == STATUS_INVISIBLE)) &&
           (entityInfo->isNotTeamMember))
     {

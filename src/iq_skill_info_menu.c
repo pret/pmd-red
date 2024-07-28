@@ -88,8 +88,8 @@ static void sub_801C6E4(void)
             sub_80073B8(sIQSkillInfoMenu->unk24);
             skillName = GetIQSkillName(sIQSkillInfoMenu->chosenIQSkill);
             strcpy(gUnknown_202DE58, skillName);
-            xxx_format_and_draw(16, 0, sFmtMoveItem0, 0, 0); // {ARG_MOVE_ITEM_0}
-            xxx_call_draw_string(8, 16, GetIQSkillDescription(sIQSkillInfoMenu->chosenIQSkill), sIQSkillInfoMenu->unk24, 0);
+            PrintFormatStringOnWindow(16, 0, sFmtMoveItem0, 0, 0); // {ARG_MOVE_ITEM_0}
+            PrintStringOnWindow(8, 16, GetIQSkillDescription(sIQSkillInfoMenu->chosenIQSkill), sIQSkillInfoMenu->unk24, 0);
             sub_80073E0(sIQSkillInfoMenu->unk24);
             sIQSkillInfoMenu->unkC = sub_8097DF0(GetIQSkillDescription(sIQSkillInfoMenu->chosenIQSkill), sIQSkillInfoMenu->unk10);
             sIQSkillInfoMenu->unk20 = 0;
@@ -99,8 +99,8 @@ static void sub_801C6E4(void)
             sub_80073B8(sIQSkillInfoMenu->unk24);
             preload = sIQSkillInfoMenu->unk10[sIQSkillInfoMenu->unk8];
             strcpy(gAvailablePokemonNames, preload->pokeName);
-            xxx_format_and_draw(16, 0, sFmtPkmn0, sIQSkillInfoMenu->unk24, 0); // {ARG_POKEMON_0}
-            xxx_format_and_draw(4, 16, sIQSkillInfoMenu->unk10[sIQSkillInfoMenu->unk8]->unk4, sIQSkillInfoMenu->unk24, 0);
+            PrintFormatStringOnWindow(16, 0, sFmtPkmn0, sIQSkillInfoMenu->unk24, 0); // {ARG_POKEMON_0}
+            PrintFormatStringOnWindow(4, 16, sIQSkillInfoMenu->unk10[sIQSkillInfoMenu->unk8]->unk4, sIQSkillInfoMenu->unk24, 0);
             sub_80073E0(sIQSkillInfoMenu->unk24);
             break;
         case 2:

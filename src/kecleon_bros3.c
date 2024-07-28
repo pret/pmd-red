@@ -29,7 +29,7 @@ u8 sub_801A20C(u32 r0)
     gUnknown_203B21C->s0.unk38 = &gUnknown_203B21C->s0.unk3C[gUnknown_203B21C->s0.unk34];
     sub_8006518(gUnknown_203B21C->s0.unk3C);
     gUnknown_203B21C->s0.unk3C[gUnknown_203B21C->s0.unk34] = sUnknown_80DB914;
-    gUnknown_203B21C->s0.unk38->unk14 = gUnknown_203B21C->unk9C;
+    gUnknown_203B21C->s0.unk38->unk14 = &gUnknown_203B21C->unk9C;
     ResetUnusedInputStruct();
     sub_800641C(gUnknown_203B21C->s0.unk3C, TRUE, TRUE);
     sub_8013818(&gUnknown_203B21C->s0.input, CountKecleonWareItems(), 10, r0);
@@ -109,10 +109,10 @@ void sub_801A3DC(void)
 
 static void sub_801A430(void)
 {
-    gUnknown_203B21C->unk9C[0] = gUnknown_203B21C->s0.input.unk20;
-    gUnknown_203B21C->unk9C[1] = gUnknown_203B21C->s0.input.unk1E;
-    gUnknown_203B21C->unk9C[2] = 10;
-    gUnknown_203B21C->unk9C[3] = 0;
+    gUnknown_203B21C->unk9C.f0 = gUnknown_203B21C->s0.input.unk20;
+    gUnknown_203B21C->unk9C.f1 = gUnknown_203B21C->s0.input.unk1E;
+    gUnknown_203B21C->unk9C.f2 = 10;
+    gUnknown_203B21C->unk9C.f3 = 0;
 
     SUB_80095E4_CALL(gUnknown_203B21C->s0);
 }
@@ -131,7 +131,7 @@ void sub_801A4A4(void)
 
     sub_8008C54(gUnknown_203B21C->s0.unk34);
     sub_80073B8(gUnknown_203B21C->s0.unk34);
-    xxx_call_draw_string(gUnknown_203B21C->s0.input.unk1E * 8 + 10, 0, sGoods, gUnknown_203B21C->s0.unk34, 0);
+    PrintStringOnWindow(gUnknown_203B21C->s0.input.unk1E * 8 + 10, 0, sGoods, gUnknown_203B21C->s0.unk34, 0);
 
     for (index = 0; index < gUnknown_203B21C->s0.input.unk1A; index++) {
         temp_calc = (gUnknown_203B21C->s0.input.unk1E * gUnknown_203B21C->s0.input.unk1C) + index;
@@ -148,12 +148,12 @@ void sub_801A4A4(void)
 
         if (buyPrice <= gTeamInventoryRef->teamMoney) {
             y = sub_8013800(&gUnknown_203B21C->s0.input, index);
-            xxx_call_draw_string(8, y, buffer1, gUnknown_203B21C->s0.unk34, 0);
+            PrintStringOnWindow(8, y, buffer1, gUnknown_203B21C->s0.unk34, 0);
         }
         else {
             sprintfStatic(buffer2, sFmtRed, buffer1);
             y = sub_8013800(&gUnknown_203B21C->s0.input, index);
-            xxx_call_draw_string(8, y, buffer2, gUnknown_203B21C->s0.unk34, 0);
+            PrintStringOnWindow(8, y, buffer2, gUnknown_203B21C->s0.unk34, 0);
         }
     }
 

@@ -39,7 +39,7 @@ sub_801F280:
 	str r0, [sp]
 	movs r0, 0xC
 	movs r1, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	movs r7, 0
 	ldr r0, [r4]
 	movs r1, 0x36
@@ -131,7 +131,7 @@ _0801F372:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	ldr r2, _0801F3F4
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 _0801F386:
 	adds r7, 0x1
 	mov r1, r8
@@ -168,7 +168,7 @@ _0801F394:
 	str r0, [sp]
 	movs r0, 0x8
 	movs r1, 0
-	bl xxx_format_and_draw
+	bl PrintFormatStringOnWindow
 	ldr r0, [r4]
 	ldr r0, [r0, 0x54]
 	bl sub_80073E0

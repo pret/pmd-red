@@ -418,10 +418,10 @@ void sub_8086854(void)
         if (gUnknown_202F3D0.unk5 != 0)
             gUnknown_202F3D0.unk5--;
 
-        gDungeon->unk181FC = gUnknown_8107314[gUnknown_202F3D0.unk5];
+        gDungeon->unk181e8.unk181FC = gUnknown_8107314[gUnknown_202F3D0.unk5];
     }
     else
-        gDungeon->unk181FC = 0;
+        gDungeon->unk181e8.unk181FC = 0;
 }
 
 void sub_80868F4(Entity *entity)

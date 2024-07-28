@@ -77,40 +77,40 @@ Tile *GetTileAtEntitySafe(Entity *entity)
 void sub_804513C(void)
 {
   s32 index;
-  
+
   for(index = 0; index < MAX_TEAM_MEMBERS; index++)
   {
       gDungeon->teamPokemon[index] = &gDungeon->teamPokemonEntities[index];
       gDungeon->teamPokemon[index]->type = ENTITY_NOTHING;
   }
-    
+
   for(index = 0; index < 6; index++)
   {
       gUnknown_202EE70[index] = 0;
   }
-    
+
   for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
   {
       gDungeon->wildPokemon[index] = &gDungeon->wildPokemonEntities[index];
       gDungeon->wildPokemon[index]->type = ENTITY_NOTHING;
   }
-    
+
   for(index = 0; index < 0x10; index++)
   {
       gUnknown_202EE76[index] = 0;
   }
-    
+
   for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
   {
       gDungeon->allPokemon[index] = NULL;
   }
-    
+
   for (index = 0; index < DUNGEON_MAX_ITEMS; index++)
   {
       gDungeon->items[index] = &gDungeon->itemEntities[index];
       gDungeon->items[index]->type = ENTITY_NOTHING;
   }
-    
+
   for(index = 0; index < DUNGEON_MAX_TRAPS; index++)
   {
       gDungeon->traps[index] = &gDungeon->trapEntites[index];
@@ -126,15 +126,15 @@ void sub_804522C(void) {
     u32 statusSprites;
     bool8 crossEyed;
 
-    crossEyed = gDungeon->hallucinating;
-    if (gDungeon->blinded)
+    crossEyed = gDungeon->unk181e8.hallucinating;
+    if (gDungeon->unk181e8.blinded)
     {
         for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
         {
             entity = gDungeon->allPokemon[index];
             if(EntityExists(entity))
             {
-                if(entity == gDungeon->cameraTarget)
+                if(entity == gDungeon->unk181e8.cameraTarget)
                 {
                     sub_806C51C(entity);
                 }
@@ -165,12 +165,12 @@ void sub_804522C(void) {
                 sub_806C51C(entity2);
             }
         }
-  
+
         for(index = 0; index < gDungeon->unk3904; index++)
         {
             sub_80462AC(gDungeon->items[index], crossEyed, 1, 0xFF, 0);
         }
- 
+
         if(crossEyed)
             sub_807FA9C();
     }

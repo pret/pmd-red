@@ -268,12 +268,12 @@ void DrawLoadScreenText(void)
   iVar2 = sub_8011FA8();
   sub_8008C54(0);
   sub_80073B8(0);
-  xxx_call_draw_string(8,0, gTeamHeadingText,0,0); // Team:
-  xxx_call_draw_string(8,12,gNameHeadingText,0,0); // Name:
-  xxx_call_draw_string(8,24,gLocationHeadingText,0,0); // Location:
-  xxx_call_draw_string(8,36,gPlayTimeHeadingText,0,0); // Play time:
-  xxx_call_draw_string(8,48,gAdventuresHeadingText,0,0); // Adventures:
-  xxx_call_draw_string(8,60,gHelperHeadingText,0,0); // Helper:
+  PrintStringOnWindow(8,0, gTeamHeadingText,0,0); // Team:
+  PrintStringOnWindow(8,12,gNameHeadingText,0,0); // Name:
+  PrintStringOnWindow(8,24,gLocationHeadingText,0,0); // Location:
+  PrintStringOnWindow(8,36,gPlayTimeHeadingText,0,0); // Play time:
+  PrintStringOnWindow(8,48,gAdventuresHeadingText,0,0); // Adventures:
+  PrintStringOnWindow(8,60,gHelperHeadingText,0,0); // Helper:
 
   // Draw Team Name
   if (sub_80023E4(0)) {
@@ -286,7 +286,7 @@ void DrawLoadScreenText(void)
   }
 
   sprintfStatic(gLoadScreen->formattedTeamName,gUnknown_80E7804,r2);
-  xxx_call_draw_string(64,0,gLoadScreen->formattedTeamName,0,0);
+  PrintStringOnWindow(64,0,gLoadScreen->formattedTeamName,0,0);
 
   // Draw Player Name
   playerInfo = GetPlayerPokemonStruct();
@@ -295,7 +295,7 @@ void DrawLoadScreenText(void)
   else
         sub_80922B4(playerName, playerInfo->name, POKEMON_NAME_LENGTH);
   sprintfStatic(gLoadScreen->formattedPlayerName,gUnknown_80E7804,playerName);
-  xxx_call_draw_string(64,12,gLoadScreen->formattedPlayerName,0,0);
+  PrintStringOnWindow(64,12,gLoadScreen->formattedPlayerName,0,0);
 
   // Draw Location Info
   if ((CountMailType(WONDER_MAIL_TYPE_SOS) != 0) || (CountMailType(WONDER_MAIL_TYPE_OKD) != 0)) {
@@ -331,17 +331,17 @@ void DrawLoadScreenText(void)
             break;
     }
   }
-  xxx_call_draw_string(64,24,gLoadScreen->formattedLocation,0,0);
+  PrintStringOnWindow(64,24,gLoadScreen->formattedLocation,0,0);
 
   // Draw Play Time
   DeconstructPlayTime(gPlayTimeRef,&hours,&minutes,&seconds);
   sprintfStatic(gLoadScreen->formattedPlayTime,gPlayTimePlaceholder,hours,minutes,seconds);
-  xxx_call_draw_string(64,36,gLoadScreen->formattedPlayTime,0,0);
+  PrintStringOnWindow(64,36,gLoadScreen->formattedPlayTime,0,0);
 
   // Draw Adventures Info
   numAdventures = GetNumAdventures();
   sprintfStatic(gLoadScreen->formattedAdventures,gNumAdventurePlaceholder,numAdventures); // %d
-  xxx_call_draw_string(64,48,gLoadScreen->formattedAdventures,0,0);
+  PrintStringOnWindow(64,48,gLoadScreen->formattedAdventures,0,0);
 
   // Draw Helper Info
   if (iVar2 == 0xf1207){
@@ -359,7 +359,7 @@ void DrawLoadScreenText(void)
     print_helper_placeholder:
         sprintfStatic(gLoadScreen->formattedHelperInfo,gNoHelperText); // -----
   }
-  xxx_call_draw_string(64,60,gLoadScreen->formattedHelperInfo,0,0);
+  PrintStringOnWindow(64,60,gLoadScreen->formattedHelperInfo,0,0);
 
   sub_80397B4(); // Draw event icons??
   sub_80073E0(0);

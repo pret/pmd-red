@@ -35,7 +35,7 @@ bool8 sub_80302E8(s32 param_1, UnkTextStruct2_sub *param_2, u32 param_3)
     sMakuhitaDojoWork2->s30.s0.unk38 = &sMakuhitaDojoWork2->s30.s0.unk3C[param_1];
     sub_8006518(sMakuhitaDojoWork2->s30.s0.unk3C);
     sMakuhitaDojoWork2->s30.s0.unk3C[sMakuhitaDojoWork2->s30.s0.unk34] = sUnknown_80E0804;
-    sMakuhitaDojoWork2->s30.s0.unk38->unk14 = sMakuhitaDojoWork2->s30.unk9C;
+    sMakuhitaDojoWork2->s30.s0.unk38->unk14 = &sMakuhitaDojoWork2->s30.unk9C;
 
     if (param_2 != NULL)
         sMakuhitaDojoWork2->s30.s0.unk3C[sMakuhitaDojoWork2->s30.s0.unk34].unk8 = *param_2;
@@ -102,10 +102,10 @@ void sub_8030480(void)
 
 static void sub_80304C8(void)
 {
-    sMakuhitaDojoWork2->s30.unk9C[0] = 1;
-    sMakuhitaDojoWork2->s30.unk9C[1] = 0;
-    sMakuhitaDojoWork2->s30.unk9C[2] = 8;
-    sMakuhitaDojoWork2->s30.unk9C[3] = 0;
+    sMakuhitaDojoWork2->s30.unk9C.f0 = 1;
+    sMakuhitaDojoWork2->s30.unk9C.f1 = 0;
+    sMakuhitaDojoWork2->s30.unk9C.f2 = 8;
+    sMakuhitaDojoWork2->s30.unk9C.f3 = 0;
 
     SUB_80095E4_CALL(sMakuhitaDojoWork2->s30.s0);
 }
@@ -122,8 +122,8 @@ static void MakuhitaDojo_DrawCourseList(void)
 
     sub_8008C54(sMakuhitaDojoWork2->s30.s0.unk34);
     sub_80073B8(sMakuhitaDojoWork2->s30.s0.unk34);
-    xxx_call_draw_string(10, 0, sCourses, sMakuhitaDojoWork2->s30.s0.unk34, 0);
-    sub_8012BC4((sMakuhitaDojoWork2->s30.unk9C[2] * 8) + 4, 0, sMakuhitaDojoWork2->s30.s0.input.unk1E + 1, 2, 7, sMakuhitaDojoWork2->s30.s0.unk34);
+    PrintStringOnWindow(10, 0, sCourses, sMakuhitaDojoWork2->s30.s0.unk34, 0);
+    sub_8012BC4((sMakuhitaDojoWork2->s30.unk9C.f2 * 8) + 4, 0, sMakuhitaDojoWork2->s30.s0.input.unk1E + 1, 2, 7, sMakuhitaDojoWork2->s30.s0.unk34);
 
     for (i = 0; i < sMakuhitaDojoWork2->s30.s0.input.unk1A; i++) {
         iVar6 = sMakuhitaDojoWork2->unk0[sMakuhitaDojoWork2->s30.s0.input.unk1E * sMakuhitaDojoWork2->s30.s0.input.unk1C + i];
@@ -134,11 +134,11 @@ static void MakuhitaDojo_DrawCourseList(void)
         y = sub_8013800(&sMakuhitaDojoWork2->s30.s0.input, i);
         color = COLOR_WHITE_2; // COLOR_WHITE again?
         if ((bool8)IsMazeCompleted(mazeIndex)) {
-            xxx_call_draw_string(8, y, sStarBullet, sMakuhitaDojoWork2->s30.s0.unk34, 0);
+            PrintStringOnWindow(8, y, sStarBullet, sMakuhitaDojoWork2->s30.s0.unk34, 0);
             color = COLOR_GREEN;
         }
         sprintfStatic(buffer, sFmtColor, color, GetDungeonName1(dungeonIndex));
-        xxx_call_draw_string(16, y, buffer, sMakuhitaDojoWork2->s30.s0.unk34, 0);
+        PrintStringOnWindow(16, y, buffer, sMakuhitaDojoWork2->s30.s0.unk34, 0);
     }
     sub_80073E0(sMakuhitaDojoWork2->s30.s0.unk34);
 }

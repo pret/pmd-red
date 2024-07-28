@@ -21,8 +21,8 @@ bool8 sub_8083568(s32 inX, s32 inY, u8 index) {
     register s32 tmp asm("r2");
 #endif
 
-    x = inX - gDungeon->cameraPixelPos.x;
-    y = inY - gDungeon->cameraPixelPos.y;
+    x = inX - gDungeon->unk181e8.cameraPixelPos.x;
+    y = inY - gDungeon->unk181e8.cameraPixelPos.y;
 
     if (x >= -16 && y >= -16 && x <= 255 && y <= 175)
     {

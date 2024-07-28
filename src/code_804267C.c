@@ -91,8 +91,8 @@ bool8 sub_8042768(Entity* pokemon)
 {
     if (!pokemon->isVisible)
         return FALSE;
-    if (gDungeon->blinded) {
-        if (gDungeon->cameraTarget == pokemon)
+    if (gDungeon->unk181e8.blinded) {
+        if (gDungeon->unk181e8.cameraTarget == pokemon)
             return TRUE;
         else
             return FALSE;
@@ -126,7 +126,7 @@ void sub_8042818(u8 a0, bool8 a1)
 {
     Entity *en;
 
-    en = gDungeon->cameraTarget;
+    en = gDungeon->unk181e8.cameraTarget;
     if (en == NULL)
         en = GetLeader();
 
@@ -304,7 +304,7 @@ void sub_8042A84(s16 param_1, Entity *entity, u32 param_3)
       if (iVar3 < 0) {
         iVar3 += 0xff;
       }
-    } while (-8 <= (iVar3 >> 8) - gDungeon->cameraPixelPos.y);
+    } while (-8 <= (iVar3 >> 8) - gDungeon->unk181e8.cameraPixelPos.y);
     entity->isVisible = 0;
     sub_804178C(0);
   }

@@ -61,7 +61,7 @@ typedef struct AITarget
     /* 0x3 */ bool8 aiTurningAround;
     /* 0x4 */ u16 aiTargetSpawnGenID;
     /* 0x8 */ struct Entity *aiTarget;
-    /* 0xC */ u8 fillC[4];
+    /* 0xC */ u32 unkC;
     /* 0x10 */ Position aiTargetPos;
 
 } AITarget;
@@ -203,7 +203,7 @@ typedef struct EntityInfo
     /* 0x5C */ u8 types[2];
     /* 0x5E */ u8 abilities[2];
     /* 0x60 */ Item heldItem;
-    u8 fill64[0x68 - 0x64];
+    /* 0x64 */ u8 unk64;
     /* 0x68 */ Position prevPos[NUM_PREV_POS];
     /* 0x78 */ AITarget aiTarget;
     // Bitwise flags corresponding to selected IQ skills.

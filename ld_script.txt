@@ -240,6 +240,7 @@ SECTIONS {
         src/move_actions.o(.text);
         src/status_actions.o(.text);
         src/move_checks.o(.text);
+        src/code_805D8C8_1.o(.text);
         asm/code_805D8C8.o(.text);
         src/code_8066D04.o(.text);
         asm/code_8066D04.o(.text);

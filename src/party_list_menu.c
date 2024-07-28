@@ -783,7 +783,7 @@ void sub_8026DAC(u32 r0, BulkItem *item)
     temp.unk8 = 1;
     slot.flags = ITEM_FLAG_EXISTS;
     sub_8090E14(gUnknown_202DE58, &slot, &temp);
-    xxx_format_and_draw(4, 3, sPartyMenuItemPlaceholder, r0, 0);
+    PrintFormatStringOnWindow(4, 3, sPartyMenuItemPlaceholder, r0, 0);
     sub_80073E0(r0);
 }
 
@@ -799,7 +799,7 @@ void sub_8026E08(u32 r0)
     sub_808D930(buffer, sUnknown_203B2B8->pokeStruct->speciesNum);
     sprintfStatic(buffer1, sUnknown_80DD6E0, gAvailablePokemonNames);
     x = sub_8008ED0(buffer1);
-    xxx_call_draw_string(((sUnknown_80DD370.unkC << 3) - x) / 2, 3, buffer1, r0, 0);
+    PrintStringOnWindow(((sUnknown_80DD370.unkC << 3) - x) / 2, 3, buffer1, r0, 0);
     sub_80073E0(r0);
 }
 

@@ -340,8 +340,8 @@ bool8 sub_805B264(Entity * pokemon, Entity * target, Move *move, s32 param_4)
     r3 = gUnknown_202F224;
     r6 = FALSE;
 
-    gDungeon->unk18200 = gUnknown_8106A8C[r3];
-    gDungeon->unk18204 = 0;
+    gDungeon->unk181e8.unk18200 = gUnknown_8106A8C[r3];
+    gDungeon->unk181e8.unk18204 = 0;
     iVar5 = gUnknown_80F4F94[r3];
     if (entityInfo->charging.chargingStatus == STATUS_DIGGING) {
         iVar5 *= 2;
@@ -1026,10 +1026,10 @@ bool8 TrapbustOrbAction(Entity * pokemon,Entity * target, Move *move, s32 param_
     else
     {
         if (tile->room == CORRIDOR_ROOM) {
-            bottomRightCornerX    =   target->pos.x - gDungeon->visibilityRange;
-            bottomRightCornerY    =   target->pos.y - gDungeon->visibilityRange;
-            topLeftCornerX      =   bottomRightCornerX + gDungeon->visibilityRange;
-            topLeftCornerY      =   bottomRightCornerY + gDungeon->visibilityRange;
+            bottomRightCornerX    =   target->pos.x - gDungeon->unk181e8.visibilityRange;
+            bottomRightCornerY    =   target->pos.y - gDungeon->unk181e8.visibilityRange;
+            topLeftCornerX      =   bottomRightCornerX + gDungeon->unk181e8.visibilityRange;
+            topLeftCornerY      =   bottomRightCornerY + gDungeon->unk181e8.visibilityRange;
         }
         else {
             room       =   &gDungeon->roomData[tile->room];

@@ -56,9 +56,9 @@ void sub_806CCB4(Entity *entity, u8 a1)
     EntityInfo *info;
 
     info = entity->info;
-    flag = gDungeon->hallucinating;
+    flag = gDungeon->unk181e8.hallucinating;
 
-    if (entity == gDungeon->cameraTarget)
+    if (entity == gDungeon->unk181e8.cameraTarget)
         flag = FALSE;
 
     entity->unk6B = a1;

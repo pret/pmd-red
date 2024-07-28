@@ -106,11 +106,11 @@ static void DrawHintSelectionMenu(void)
 
     sub_8008C54(sUnknown_203B264->unk34);
     sub_80073B8(sUnknown_203B264->unk34);
-    xxx_call_draw_string(16, 0, sHints, sUnknown_203B264->unk34, 0);
+    PrintStringOnWindow(16, 0, sHints, sUnknown_203B264->unk34, 0);
 
     for (hintIndex = 0; hintIndex < NUM_HINTS; hintIndex++) {
         y = sub_8013800(&sUnknown_203B264->input, hintIndex);
-        xxx_call_draw_string(10, y, gCommonHints[hintIndex].heading, sUnknown_203B264->unk34, 0);
+        PrintStringOnWindow(10, y, gCommonHints[hintIndex].heading, sUnknown_203B264->unk34, 0);
     }
 
     sub_80073E0(sUnknown_203B264->unk34);

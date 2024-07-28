@@ -21,7 +21,7 @@ void sub_80069CC(UnkTextStruct1 *, s32, s32, s32, u16 *);
 void sub_8006AC4(UnkTextStruct1 *, s32, s32, s32, u16 *);
 void sub_8006B70(UnkTextStruct1 *, s32, s32, s32, u16 *);
 void sub_8006C44(UnkTextStruct1 *, s32, u16 *, u8);
-void sub_8006E94(UnkTextStruct1 *, s32, u32, const u8 *, u16 *);
+void sub_8006E94(UnkTextStruct1 *, s32, u32, const UnkTextStruct2_sub2 *, u16 *);
 void sub_8007958(UnkTextStruct1 *, u32, s32, s32, s32, u32);
 void sub_8007AA4(UnkTextStruct1 *, u32, s32, s32, s32, u32);
 void sub_8007BA8(UnkTextStruct1 *, u32, s32, s32, s32, s32);
@@ -398,7 +398,7 @@ void sub_8006C44(UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
 
 // Not even close but I don't feel like continuing atm https://decomp.me/scratch/F58jg
 /*
-void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const u8 *a3, u16 *a4)
+void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const UnkTextStruct2_sub2 *a3, u16 *a4)
 {
     s32 bVar1;
     s32 iVar2;
@@ -582,7 +582,7 @@ void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const u8 *a3, u16 *a4)
 }
 */
 NAKED
-void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const u8 *a3, u16 *a4)
+void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const UnkTextStruct2_sub2 *a3, u16 *a4)
 {
     asm_unified(
     "\tpush {r4-r7,lr}\n"

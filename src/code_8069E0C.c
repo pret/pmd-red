@@ -278,7 +278,7 @@ void sub_806A240(Entity *pokemon, Entity *target)
 
 void sub_806A2BC(Entity *pokemon, u8 param_2)
 {
-  if ((EntityExists(pokemon)) && (GetEntityType(pokemon) == ENTITY_MONSTER) && (gDungeon->cameraTarget != pokemon)) {
+  if ((EntityExists(pokemon)) && (GetEntityType(pokemon) == ENTITY_MONSTER) && (gDungeon->unk181e8.cameraTarget != pokemon)) {
     if (param_2 != '\0') {
       sub_804178C(1);
       while (gDungeon->unk12 < 0x3c) {

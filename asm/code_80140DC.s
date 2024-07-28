@@ -1132,7 +1132,7 @@ _08014B1E:
 	movs r0, 0x4
 	movs r1, 0x2
 	movs r3, 0x3
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	movs r0, 0x3
 	bl sub_80073E0
 _08014B6A:
@@ -1667,8 +1667,8 @@ _08014FE8:
 	bx r1
 	thumb_func_end sub_8014FA8
 
-	thumb_func_start xxx_format_and_draw
-xxx_format_and_draw:
+	thumb_func_start PrintFormatStringOnWindow
+PrintFormatStringOnWindow:
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -1691,7 +1691,7 @@ xxx_format_and_draw:
 	adds r1, r6, 0
 	add r2, sp, 0x4
 	mov r3, r8
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	add sp, 0x1F8
 	pop {r3}
 	mov r8, r3
@@ -1700,7 +1700,7 @@ xxx_format_and_draw:
 	bx r0
 	.align 2, 0
 _08015030: .4byte 0x000001f7
-	thumb_func_end xxx_format_and_draw
+	thumb_func_end PrintFormatStringOnWindow
 
 	thumb_func_start sub_8015034
 sub_8015034:
@@ -1819,7 +1819,7 @@ _080150AC:
 	movs r0, 0x4
 	movs r1, 0x4
 	movs r3, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	ldr r0, [r5]
@@ -3136,7 +3136,7 @@ _08015B34:
 	mov r2, r10
 _08015B6A:
 	movs r3, 0
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	b _08015B9E
 	.align 2, 0
 _08015B74: .4byte gUnknown_80DB4F4
@@ -3351,7 +3351,7 @@ _08015D28:
 	movs r1, 0x2
 _08015D32:
 	movs r3, 0x1
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 	b _08015D50
 	.align 2, 0
 _08015D3C: .4byte gUnknown_80DB638
@@ -3362,7 +3362,7 @@ _08015D40:
 	movs r0, 0x30
 	movs r1, 0x4
 	movs r3, 0x1
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 _08015D50:
 	ldr r5, _08015D68
 	ldr r0, [r5]
@@ -3445,7 +3445,7 @@ _08015DEE:
 	movs r1, 0x16
 	add r2, sp, 0x4
 	movs r3, 0x1
-	bl xxx_call_draw_string
+	bl PrintStringOnWindow
 _08015DFE:
 	movs r0, 0x1
 	bl sub_80073E0

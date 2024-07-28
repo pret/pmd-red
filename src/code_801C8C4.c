@@ -29,24 +29,24 @@ bool8 sub_801C8C4(s32 a0, s32 a1, UnkTextStruct2_sub *a2, u32 a3)
 
     sUnknown_203B244->unk0 = a0;
     sub_801CF94();
-    sUnknown_203B244->unk4E8 = a1;
-    sUnknown_203B244->unk4EC = &sUnknown_203B244->unk4F0[a1];
-    sub_8006518(sUnknown_203B244->unk4F0);
-    sUnknown_203B244->unk4F0[sUnknown_203B244->unk4E8] = sUnknown_80DBE54;
-    sUnknown_203B244->unk4EC->unk14 = sUnknown_203B244->unk550;
+    sUnknown_203B244->unk4B4.s0.unk34 = a1;
+    sUnknown_203B244->unk4B4.s0.unk38 = &sUnknown_203B244->unk4B4.s0.unk3C[a1];
+    sub_8006518(sUnknown_203B244->unk4B4.s0.unk3C);
+    sUnknown_203B244->unk4B4.s0.unk3C[sUnknown_203B244->unk4B4.s0.unk34] = sUnknown_80DBE54;
+    sUnknown_203B244->unk4B4.s0.unk38->unk14 = &sUnknown_203B244->unk4B4.unk9C;
 
     if (a2 != NULL)
-        sUnknown_203B244->unk4F0[sUnknown_203B244->unk4E8].unk8 = *a2;
+        sUnknown_203B244->unk4B4.s0.unk3C[sUnknown_203B244->unk4B4.s0.unk34].unk8 = *a2;
 
-    sub_8012D08(sUnknown_203B244->unk4EC, a3);
+    sub_8012D08(sUnknown_203B244->unk4B4.s0.unk38, a3);
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B244->unk4F0, TRUE, TRUE);
-    sub_8013818(&sUnknown_203B244->input, sub_801CE58(), a3, a1);
+    sub_800641C(sUnknown_203B244->unk4B4.s0.unk3C, TRUE, TRUE);
+    sub_8013818(&sUnknown_203B244->unk4B4.s0.input, sub_801CE58(), a3, a1);
 
     if (sUnknown_203B248 == sUnknown_203B244->unk0) {
-        sUnknown_203B244->input.menuIndex = sUnknown_203B24C;
-        sUnknown_203B244->input.unk1E = sUnknown_203B24E;
-        sub_8013984(&sUnknown_203B244->input);
+        sUnknown_203B244->unk4B4.s0.input.menuIndex = sUnknown_203B24C;
+        sUnknown_203B244->unk4B4.s0.input.unk1E = sUnknown_203B24E;
+        sub_8013984(&sUnknown_203B244->unk4B4.s0.input);
     }
 
     sub_801CC38();
@@ -61,11 +61,11 @@ u32 sub_801CA08(bool8 a0)
     u32 flag;
 
     if (a0 == FALSE) {
-        sub_8013660(&sUnknown_203B244->input);
+        sub_8013660(&sUnknown_203B244->unk4B4.s0.input);
         return 0;
     }
 
-    switch (GetKeyPress(&sUnknown_203B244->input)) {
+    switch (GetKeyPress(&sUnknown_203B244->unk4B4.s0.input)) {
         case 2:
             PlayMenuSoundEffect(1);
             return 2;
@@ -83,7 +83,7 @@ u32 sub_801CA08(bool8 a0)
             if (temp != 0 || (flag = (INVENTORY_SIZE > GetNumberOfFilledInventorySlots() + sub_801CFB8())) || flag) {
                 PlayMenuSoundEffect(6);
                 sUnknown_203B244->unkF4[index] = sUnknown_203B244->unkF4[index] ^ 1;
-                sub_80138B8(&sUnknown_203B244->input,0);
+                sub_80138B8(&sUnknown_203B244->unk4B4.s0.input,0);
                 sub_801CCD8();
                 return 1;
             }
@@ -95,7 +95,7 @@ u32 sub_801CA08(bool8 a0)
             return 4;
         default:
     _0801CAF2:
-            if (sub_80138B8(&sUnknown_203B244->input, 1)) {
+            if (sub_80138B8(&sUnknown_203B244->unk4B4.s0.input, 1)) {
                 sub_801CC38();
                 sub_801CCD8();
                 return 1;
@@ -106,112 +106,44 @@ u32 sub_801CA08(bool8 a0)
 
 u8 sub_801CB24(void)
 {
-    return sUnknown_203B244->itemIDs[(sUnknown_203B244->input.unk1E * sUnknown_203B244->input.unk1C) + sUnknown_203B244->input.menuIndex];
+    return sUnknown_203B244->itemIDs[(sUnknown_203B244->unk4B4.s0.input.unk1E * sUnknown_203B244->unk4B4.s0.input.unk1C) + sUnknown_203B244->unk4B4.s0.input.menuIndex];
 }
 
 void sub_801CB5C(bool8 a0)
 {
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B244->unk4F0, FALSE, FALSE);
-    sUnknown_203B244->input.unk22 = sub_801CE58();
-    sub_8013984(&sUnknown_203B244->input);
+    sub_800641C(sUnknown_203B244->unk4B4.s0.unk3C, FALSE, FALSE);
+    sUnknown_203B244->unk4B4.s0.input.unk22 = sub_801CE58();
+    sub_8013984(&sUnknown_203B244->unk4B4.s0.input);
     sub_801CC38();
     sub_801CCD8();
 
     if (a0)
-        AddMenuCursorSprite(&sUnknown_203B244->input);
+        AddMenuCursorSprite(&sUnknown_203B244->unk4B4.s0.input);
 }
 
 void sub_801CBB8(void)
 {
     if (sUnknown_203B244 != NULL) {
         sUnknown_203B248 = sUnknown_203B244->unk0;
-        sUnknown_203B24C = sUnknown_203B244->input.menuIndex;
-        sUnknown_203B24E = sUnknown_203B244->input.unk1E;
-        sUnknown_203B244->unk4F0[sUnknown_203B244->unk4E8] = sUnknown_80DBE3C;
+        sUnknown_203B24C = sUnknown_203B244->unk4B4.s0.input.menuIndex;
+        sUnknown_203B24E = sUnknown_203B244->unk4B4.s0.input.unk1E;
+        sUnknown_203B244->unk4B4.s0.unk3C[sUnknown_203B244->unk4B4.s0.unk34] = sUnknown_80DBE3C;
         ResetUnusedInputStruct();
-        sub_800641C(sUnknown_203B244->unk4F0, TRUE, TRUE);
+        sub_800641C(sUnknown_203B244->unk4B4.s0.unk3C, TRUE, TRUE);
         MemoryFree(sUnknown_203B244);
         sUnknown_203B244 = NULL;
     }
 }
 
-NAKED
 static void sub_801CC38(void)
 {
-    asm_unified(
-    "\tpush {r4,r5,lr}\n"
-    "\tldr r4, _0801CCC4\n"
-    "\tldr r0, [r4]\n"
-    "\tmovs r1, 0xAA\n"
-    "\tlsls r1, 3\n"
-    "\tadds r0, r1\n"
-    "\tmovs r2, 0\n"
-    "\tmovs r1, 0x1\n"
-    "\tstrb r1, [r0]\n"
-    "\tldr r0, [r4]\n"
-    "\tldr r1, _0801CCC8\n"
-    "\tadds r0, r1\n"
-    "\tstrb r2, [r0]\n"
-    "\tldr r0, [r4]\n"
-    "\tadds r1, 0x1\n"
-    "\tadds r0, r1\n"
-    "\tmovs r1, 0xC\n"
-    "\tstrb r1, [r0]\n"
-    "\tldr r0, [r4]\n"
-    "\tldr r1, _0801CCCC\n"
-    "\tadds r0, r1\n"
-    "\tstrb r2, [r0]\n"
-    "\tldr r0, [r4]\n"
-    "\tldr r2, _0801CCD0\n"
-    "\tadds r0, r2\n"
-    "\tmovs r1, 0\n"
-    "\tldrsh r0, [r0, r1]\n"
-    "\tmovs r1, 0xC\n"
-    "\tbl sub_80095E4\n"
-    "\tadds r0, 0x2\n"
-    "\tlsls r0, 16\n"
-    "\tldr r3, [r4]\n"
-    "\tmovs r2, 0x9D\n"
-    "\tlsls r2, 3\n"
-    "\tadds r5, r3, r2\n"
-    "\tldr r2, [r5]\n"
-    "\tlsls r1, r2, 1\n"
-    "\tadds r1, r2\n"
-    "\tlsls r1, 3\n"
-    "\tadds r1, r3, r1\n"
-    "\tldr r2, _0801CCD4\n"
-    "\tadds r1, r2\n"
-    "\tasrs r2, r0, 16\n"
-    "\tlsrs r0, 16\n"
-    "\tstrh r0, [r1]\n"
-    "\tldr r1, [r5]\n"
-    "\tlsls r0, r1, 1\n"
-    "\tadds r0, r1\n"
-    "\tlsls r0, 3\n"
-    "\tadds r3, r0\n"
-    "\tadds r2, 0x2\n"
-    "\tmovs r0, 0xA0\n"
-    "\tlsls r0, 3\n"
-    "\tadds r3, r0\n"
-    "\tstrh r2, [r3]\n"
-    "\tbl ResetUnusedInputStruct\n"
-    "\tldr r0, [r4]\n"
-    "\tmovs r1, 0x9E\n"
-    "\tlsls r1, 3\n"
-    "\tadds r0, r1\n"
-    "\tmovs r1, 0x1\n"
-    "\tmovs r2, 0x1\n"
-    "\tbl sub_800641C\n"
-    "\tpop {r4,r5}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-"_0801CCC4: .4byte sUnknown_203B244\n"
-"_0801CCC8: .4byte 0x00000551\n"
-"_0801CCCC: .4byte 0x00000553\n"
-"_0801CCD0: .4byte 0x000004ce\n"
-"_0801CCD4: .4byte 0x000004fe");
+    sUnknown_203B244->unk4B4.unk9C.f0 = 1;
+    sUnknown_203B244->unk4B4.unk9C.f1 = 0;
+    sUnknown_203B244->unk4B4.unk9C.f2 = 12;
+    sUnknown_203B244->unk4B4.unk9C.f3 = 0;
+
+    SUB_80095E4_CALL(sUnknown_203B244->unk4B4.s0);
 }
 
 void sub_801CCD8(void)
@@ -222,24 +154,24 @@ void sub_801CCD8(void)
     s32 index;
     u8 buffer[80];
 
-    sub_8008C54(sUnknown_203B244->unk4E8);
-    sub_80073B8(sUnknown_203B244->unk4E8);
-    xxx_call_draw_string(10, 0, sStorage, sUnknown_203B244->unk4E8, 0);
-    sub_8012BC4(sUnknown_203B244->unk550[2] * 8 + 4, 0, sUnknown_203B244->input.unk1E + 1, 2, 7, sUnknown_203B244->unk4E8);
+    sub_8008C54(sUnknown_203B244->unk4B4.s0.unk34);
+    sub_80073B8(sUnknown_203B244->unk4B4.s0.unk34);
+    PrintStringOnWindow(10, 0, sStorage, sUnknown_203B244->unk4B4.s0.unk34, 0);
+    sub_8012BC4(sUnknown_203B244->unk4B4.unk9C.f2 * 8 + 4, 0, sUnknown_203B244->unk4B4.s0.input.unk1E + 1, 2, 7, sUnknown_203B244->unk4B4.s0.unk34);
 
-    for(index = 0; index < sUnknown_203B244->input.unk1A; index++) {
-        itemID = sUnknown_203B244->itemIDs[(sUnknown_203B244->input.unk1E * sUnknown_203B244->input.unk1C) + index];
+    for(index = 0; index < sUnknown_203B244->unk4B4.s0.input.unk1A; index++) {
+        itemID = sUnknown_203B244->itemIDs[(sUnknown_203B244->unk4B4.s0.input.unk1E * sUnknown_203B244->unk4B4.s0.input.unk1C) + index];
         BufferItemName(buffer, itemID, NULL);
-        y = sub_8013800(&sUnknown_203B244->input, index);
-        xxx_call_draw_string(8, y, buffer, sUnknown_203B244->unk4E8, 0);
-        y2 = sub_8013800(&sUnknown_203B244->input, index);
-        sub_8012BC4((sUnknown_203B244->unk4EC->unkC * 8) - 2, y2, gTeamInventoryRef->teamStorage[itemID], 3, 5, sUnknown_203B244->unk4E8);
+        y = sub_8013800(&sUnknown_203B244->unk4B4.s0.input, index);
+        PrintStringOnWindow(8, y, buffer, sUnknown_203B244->unk4B4.s0.unk34, 0);
+        y2 = sub_8013800(&sUnknown_203B244->unk4B4.s0.input, index);
+        sub_8012BC4((sUnknown_203B244->unk4B4.s0.unk38->unkC * 8) - 2, y2, gTeamInventoryRef->teamStorage[itemID], 3, 5, sUnknown_203B244->unk4B4.s0.unk34);
 
         if (sub_801CFE0(itemID) & 1)
-            sub_8007B7C(sUnknown_203B244->unk4E8, 8, sub_8013800(&sUnknown_203B244->input, index), (sUnknown_203B244->unk4EC->unkC - 1) * '\b', 10); // TODO: Ghidra being crazy
+            sub_8007B7C(sUnknown_203B244->unk4B4.s0.unk34, 8, sub_8013800(&sUnknown_203B244->unk4B4.s0.input, index), (sUnknown_203B244->unk4B4.s0.unk38->unkC - 1) * '\b', 10); // TODO: Ghidra being crazy
     }
 
-    sub_80073E0(sUnknown_203B244->unk4E8);
+    sub_80073E0(sUnknown_203B244->unk4B4.s0.unk34);
 }
 
 static u32 sub_801CE58(void)

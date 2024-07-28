@@ -1619,8 +1619,8 @@ bool32 sub_8058F04(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 
   entityInfo = target->info;
   iVar3 = 1;
-  gDungeon->unk18200 = 0xc;
-  gDungeon->unk18204 = 0;
+  gDungeon->unk181e8.unk18200 = 0xc;
+  gDungeon->unk181e8.unk18204 = 0;
   if (entityInfo->charging.chargingStatus == STATUS_DIGGING) {
     iVar3 = 2;
   }
