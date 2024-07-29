@@ -6,7 +6,8 @@
 #include "structs/str_traps.h"
 
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
-extern u8 gUnknown_202EE76[0x10];
+extern u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
+
 u32 EntityGetStatusSprites(Entity *entity);
 void UpdateDungeonPokemonSprite(int id, short species, int status, char visible);
 
@@ -95,7 +96,7 @@ void sub_804513C(void)
       gDungeon->wildPokemon[index]->type = ENTITY_NOTHING;
   }
 
-  for(index = 0; index < 0x10; index++)
+  for(index = 0; index < DUNGEON_MAX_WILD_POKEMON_BODY_SIZE; index++)
   {
       gUnknown_202EE76[index] = 0;
   }
