@@ -2,8 +2,24 @@
 #include "code_8092334.h"
 #include "structs/str_position.h"
 
-extern void sub_8082FE0(unkStruct_8094924 *, void *, u32 size);
 extern void sub_8082FA8(unkStruct_8094924 *, void *, u32);
+
+void sub_8082FD4(unkStruct_8094924 *param_1, u8 *r1, u32 r2)
+{
+    param_1->unk0 = r1;
+    param_1->unk8 = 0;
+    param_1->unk4 = r1 + r2;
+}
+
+void sub_8082FE0(unkStruct_8094924 *param_1, u8 *param_2, s32 size) {
+    while (size != 0) {
+        *param_2 = *(param_1->unk0);
+        param_1->unk0++;
+        param_2++;
+        size--;
+        param_1->unk8++;
+    } 
+}
 
 void nullsub_98(unkStruct_8094924 *param_1)
 {}
@@ -106,7 +122,7 @@ u16 sub_8083158(unkStruct_8094924 *param_1)
 {
     u16 local_8;
 
-    sub_8082FE0(param_1,&local_8,2);
+    sub_8082FE0(param_1,(u8 *)&local_8,2);
     return local_8;
 }
 
@@ -114,7 +130,7 @@ s16 sub_8083170(unkStruct_8094924 *param_1)
 {
     s16 local_8;
 
-    sub_8082FE0(param_1,&local_8,2);
+    sub_8082FE0(param_1,(u8 *)&local_8,2);
     return local_8;
 }
 
@@ -130,7 +146,7 @@ u32 sub_80831A0(unkStruct_8094924 *param_1)
 {
     u32 local_8;
 
-    sub_8082FE0(param_1,&local_8,4);
+    sub_8082FE0(param_1,(u8 *)&local_8,4);
     return local_8;
 }
 
@@ -138,7 +154,7 @@ u32 sub_80831B4(unkStruct_8094924 *param_1)
 {
     u32 local_8;
 
-    sub_8082FE0(param_1,&local_8,4);
+    sub_8082FE0(param_1,(u8 *)&local_8,4);
     return local_8;
 }
 
@@ -146,7 +162,7 @@ u32 sub_80831C8(unkStruct_8094924 *param_1)
 {
     u32 local_8;
 
-    sub_8082FE0(param_1,&local_8,4);
+    sub_8082FE0(param_1,(u8 *)&local_8,4);
     return local_8;
 }
 
@@ -162,8 +178,8 @@ void sub_80831F8(unkStruct_8094924 *param_1,u16 *param_2)
 {
     param_2[0] = 0;
     param_2[1] = 0;
-    sub_8082FE0(param_1,&param_2[0],1);
-    sub_8082FE0(param_1,&param_2[1],1);
+    sub_8082FE0(param_1,(u8 *)&param_2[0],1);
+    sub_8082FE0(param_1,(u8 *)&param_2[1],1);
 }
 
 
@@ -173,22 +189,22 @@ void sub_8083220(unkStruct_8094924 *param_1,u32 *param_2)
     param_2[1] = 0;
     param_2[2] = 0;
     param_2[3] = 0;
-    sub_8082FE0(param_1,&param_2[0],1);
-    sub_8082FE0(param_1,&param_2[1],1);
-    sub_8082FE0(param_1,&param_2[2],1);
-    sub_8082FE0(param_1,&param_2[3],1);
+    sub_8082FE0(param_1,(u8 *)&param_2[0],1);
+    sub_8082FE0(param_1,(u8 *)&param_2[1],1);
+    sub_8082FE0(param_1,(u8 *)&param_2[2],1);
+    sub_8082FE0(param_1,(u8 *)&param_2[3],1);
 }
 
 void sub_8083260(unkStruct_8094924 *param_1,u16 *param_2)
 {
     param_2[0] = 0;
     param_2[1] = 0;
-    sub_8082FE0(param_1,&param_2[0],1);
-    sub_8082FE0(param_1,&param_2[1],1);
+    sub_8082FE0(param_1,(u8 *)&param_2[0],1);
+    sub_8082FE0(param_1,(u8 *)&param_2[1],1);
 }
 
 void sub_8083288(unkStruct_8094924 *r0, u16 *r1, u32 size)
 {
-    sub_8082FE0(r0, r1, size);
+    sub_8082FE0(r0, (u8 *)r1, size);
 }
 
