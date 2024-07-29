@@ -4,6 +4,7 @@
 #define POKEMON_NAME_LENGTH 10
 #define TEAM_NAME_LENGTH 10
 #define MAX_TEAM_MEMBERS 4
+#define MAX_TEAM_BODY_SIZE 6
 
 #define MAX_MON_MOVES 4
 
