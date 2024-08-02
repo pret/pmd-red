@@ -270,7 +270,10 @@ typedef struct Dungeon
     /* 0x17B44 */ OpenedFile *sprites[MONSTER_MAX];
     /* 0x181E4 */ OpenedFile *paletFile;
     /* 0x181E8 */ unkDungeonGlobal_unk181E8_sub unk181e8;
-    u8 fill18220[0x1C578 - 0x18220];
+    u8 fill18220[0x1C570 - 0x18220];
+    u8 unk1C570;
+    u8 unk1C571;
+    u8 fill1C572[0x1C578 - 0x1C572];
     u8 unk1C578;
     u8 fill1C579[0x1C57E - 0x1C579];
     u8 unk1C57E;
