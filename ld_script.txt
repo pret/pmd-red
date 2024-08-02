@@ -246,6 +246,7 @@ SECTIONS {
         asm/code_8066D04.o(.text);
         src/code_805D8C8.o(.text);
         asm/code_805D8C8_1.o(.text);
+        src/code_8069D4C.o(.text);
         src/targeting.o(.text);
         src/code_8069E0C.o(.text);
         asm/code_8069E0C.o(.text);

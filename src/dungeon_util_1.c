@@ -6,6 +6,7 @@
 #include "code_806CD90.h"
 #include "constants/direction.h"
 #include "constants/dungeon.h"
+#include "code_80861A8.h"
 #include "dungeon_leader.h"
 #include "dungeon_util.h"
 #include "random.h"
@@ -21,7 +22,6 @@ extern void sub_803F878(s32, s32);
 
 extern void sub_8068FE0(Entity *, u32, Entity*);
 extern void sub_80457DC(Entity *);
-extern void sub_80861D4(Entity *, u32, s32 direction);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 
 
