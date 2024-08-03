@@ -101,14 +101,14 @@ void sub_803D1A8(u8 *param_1, u8 *param_2, s32 size)
 bool8 sub_803D204(u8 *buffer,unkStruct_203B480 *param_2)
 {
   s32 innerIndex;
-  u8 uVar3;
+  u8 checksum;
   u8 local_c4 [34];
   u8 translateBuffer [PASSWORD_BUFFER_SIZE];
   u8 localBuffer [PASSWORD_BUFFER_SIZE];
   unkStruct_8094924 uStack_30;
   s32 index;
   
-    uVar3 = 0;
+    checksum = 0;
     MemoryCopy8(localBuffer,buffer,sizeof(localBuffer));
     for(index = 0; index < PASSWORD_BUFFER_SIZE; index++)
     {
@@ -124,9 +124,9 @@ bool8 sub_803D204(u8 *buffer,unkStruct_203B480 *param_2)
         
         for(index = 1; index < 34; index++)
         {
-          uVar3 += local_c4[index] + index;
+          checksum += local_c4[index] + index;
         }
-        if (local_c4[0] == uVar3) {
+        if (local_c4[0] == checksum) {
           xxx_init_struct_8094924_restore_809485C(&uStack_30,&local_c4[1],33);
           sub_8095774(&uStack_30,param_2);
           nullsub_102(&uStack_30);
@@ -138,14 +138,14 @@ bool8 sub_803D204(u8 *buffer,unkStruct_203B480 *param_2)
 
 void sub_803D2C0(u8 *buffer, unkStruct_203B480 *mail)
 {
-    u8 uVar2;
+    u8 checksum;
     int index;
     u8 local_c0 [34];
     u8 buffer1 [PASSWORD_BUFFER_SIZE];
     u8 buffer2 [PASSWORD_BUFFER_SIZE];
     unkStruct_8094924 auStack_2c;
 
-    uVar2 = 0;
+    checksum = 0;
 
     for(index = 0; index < 34; index++)
     {
@@ -157,9 +157,9 @@ void sub_803D2C0(u8 *buffer, unkStruct_203B480 *mail)
     nullsub_102(&auStack_2c);
     for(index = 1; index < 34; index++)
     {
-        uVar2 += + local_c0[index] + index;
+        checksum += + local_c0[index] + index;
     }
-    local_c0[0] = uVar2;
+    local_c0[0] = checksum;
     sub_803D1A8(buffer1,local_c0,sizeof(buffer1));
     for(index = 0; index < PASSWORD_BUFFER_SIZE; index++)
     {
@@ -172,13 +172,13 @@ bool8 DecodeWonderMailPassword(u8* buffer, WonderMail *mail)
 {
     s32 innerIndex;
     int index;
-    u8 uVar5;
+    u8 checksum;
     u8 local_70 [16];
     u8 local_60 [24];
     u8 password [24];
     unkStruct_8094924 puVar1;
 
-    uVar5 = 0;
+    checksum = 0;
     MemoryCopy8(password,buffer,24);
 
     for(index = 0; index < 24; index++)
@@ -196,9 +196,9 @@ bool8 DecodeWonderMailPassword(u8* buffer, WonderMail *mail)
 
         for(index = 1; index < 0xF; index++)
         {
-            uVar5 += (local_70[index] + index);
+            checksum += (local_70[index] + index);
         }
-        if (local_70[0] == uVar5) {
+        if (local_70[0] == checksum) {
             xxx_init_struct_8094924_restore_809485C(&puVar1,&local_70[1],0xc);
             RestoreWonderMail(&puVar1,mail);
             nullsub_102(&puVar1);
@@ -210,14 +210,14 @@ bool8 DecodeWonderMailPassword(u8* buffer, WonderMail *mail)
 
 void sub_803D414(u8 *buffer,WonderMail *mail)
 {
-    u8 uVar2;
+    u8 checksum;
     s32 index;
     u8 local_6c [15];
     u8 local_5c [24];
     u8 auStack_44 [24];
     unkStruct_8094924 uStack_2c;
 
-    uVar2 = 0;
+    checksum = 0;
     for(index = 0; index < 0xF; index++)
     {
         local_6c[index] = 0;
@@ -229,9 +229,9 @@ void sub_803D414(u8 *buffer,WonderMail *mail)
 
     for(index = 1; index < 0xF; index++)
     {
-        uVar2  += local_6c[index] + index;
+        checksum  += local_6c[index] + index;
     }
-    local_6c[0] = uVar2;
+    local_6c[0] = checksum;
     sub_803D1A8(local_5c,local_6c, sizeof(local_5c));
     for(index = 0; index < 0x18; index++)
     {
