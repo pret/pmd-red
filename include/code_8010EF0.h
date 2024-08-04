@@ -2,15 +2,7 @@
 #define GUARD_CODE_8010EF0_H
 
 #include "file_system.h"
-
-// size: 0x4
-typedef struct RGB
-{
-    // IDK which is R G B
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-} RGB;
+#include "structs/rgb.h"
 
 // size: 0x18
 typedef struct unkStruct_202EE8C
