@@ -5,65 +5,6 @@
 
   	.text
 
-	thumb_func_start sub_800E9E4
-sub_800E9E4:
-	push {lr}
-	bl sub_800E2C0
-	movs r1, 0x1
-	negs r1, r1
-	cmp r0, r1
-	bne _0800E9F6
-	movs r0, 0
-	b _0800E9F8
-_0800E9F6:
-	movs r0, 0x1
-_0800E9F8:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_800E9E4
-
-	thumb_func_start sub_800E9FC
-sub_800E9FC:
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r3, r0, 24
-	ldr r0, _0800EA38
-	ldr r1, [r0]
-	movs r2, 0
-	movs r4, 0x1
-	negs r4, r4
-_0800EA0C:
-	ldr r0, [r1, 0x4]
-	cmp r0, r4
-	beq _0800EA20
-	cmp r3, 0
-	bne _0800EA3C
-	adds r0, r1, 0
-	adds r0, 0x54
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0800EA3C
-_0800EA20:
-	adds r2, 0x1
-	adds r1, 0xD0
-	cmp r2, 0x1F
-	ble _0800EA0C
-	bl sub_800EC74
-	lsls r0, 24
-	cmp r0, 0
-	bne _0800EA3C
-	movs r0, 0
-	b _0800EA3E
-	.align 2, 0
-_0800EA38: .4byte gUnknown_203B0CC
-_0800EA3C:
-	movs r0, 0x1
-_0800EA3E:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_800E9FC
-
 	thumb_func_start sub_800EA44
 sub_800EA44:
 	push {r4-r6,lr}
