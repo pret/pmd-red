@@ -31,5 +31,7 @@ struct unkStruct_203B0CC
 };
 
 bool8 sub_800E9A8(s32 a0);
+bool8 sub_800E9E4(void);
+bool8 sub_800E9FC(u8 a0);
 
 #endif
