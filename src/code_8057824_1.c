@@ -327,7 +327,6 @@ extern void sub_8068FE0(Entity *, u32, u32);
 extern void sub_8086448(void);
 extern void sub_8042B0C(Entity *);
 extern u8 sub_806FD18(Entity *);
-extern void sub_80861D4(Entity *, u32, s32 direction);
 extern void sub_806FDF4(Entity *, Entity *, Entity **);
 extern u32 sub_80861F8(u32, Entity *, u32);
 extern s32 GetCameraXPos();
@@ -363,7 +362,6 @@ extern void sub_806BFC0(EntityInfo *, u32);
 
 extern void sub_808BBA8(Entity * );
 extern void sub_8041888(u32);
-extern void sub_80861B8(Entity *, u32, u32);
 extern void DisplayDungeonDialogue(const u8 *r0);
 
 extern u32 sub_80861F8(u32, Entity *, u32);
@@ -1259,7 +1257,7 @@ void sub_808862C(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   SetFacingDirection(AlakazamEntity, DIRECTION_NORTH);
-  sub_80861D4(AlakazamEntity,0xd,4);
+  sub_80861D4(AlakazamEntity,0xd,DIRECTION_NORTH);
   SetFacingDirection(GroudonEntity, DIRECTION_SOUTH);
   sub_8086A3C(GroudonEntity);
   sub_8085860(LeaderEntity->pos.x,LeaderEntity->pos.y -3);
@@ -1315,7 +1313,7 @@ void sub_808875C(void)
   else {
     sub_8072008(GroudonEntity,GroudonEntity,gUnknown_80F57D2,0,0);
     SetFacingDirection(GroudonEntity, DIRECTION_SOUTH);
-    sub_80861D4(GroudonEntity,0xf,0);
+    sub_80861D4(GroudonEntity,0xf,DIRECTION_SOUTH);
   }
   sub_8085860(LeaderEntity->pos.x,LeaderEntity->pos.y - 3);
   CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_GROUDON);
@@ -1375,7 +1373,7 @@ void GroudonPreFightDialogue(void)
   sub_803E708(10,0x46);
   sub_808682C();
   sub_803E708(0x3c,0x46);
-  sub_80861B8(AlakazamEntity,6,4);
+  sub_80861B8(AlakazamEntity,6,DIRECTION_NORTH);
   PlaySoundEffect(0x205);
   sub_8086738();
   sub_8068FE0(AlakazamEntity,0x21c,0);
@@ -1498,7 +1496,7 @@ void SceneGroudonMovement(Entity * GroudonEntity)
     sub_803E46C(0x46);
   }
   sub_80856C8(GroudonEntity,GroudonEntity->pos.x,GroudonEntity->pos.y + 1);
-  sub_80861D4(GroudonEntity,0xf,0);
+  sub_80861D4(GroudonEntity,0xf,DIRECTION_SOUTH);
   sub_803E708(10,0x46);
   sub_808682C();
   sub_8085930(DIRECTION_NORTH);
@@ -3465,7 +3463,7 @@ void sub_808B50C(void)
   sub_8041888(0);
   JirachiEntity->info->unk15C = 1;
   JirachiEntity->info->unk15E = 0;
-  sub_80861B8(JirachiEntity,0xe,0);
+  sub_80861B8(JirachiEntity,0xe,DIRECTION_SOUTH);
   DungeonFadeOutBGM(0x1e);
   sub_803E708(0x1e,70);
   // Fwaaaahhhh
@@ -3506,7 +3504,7 @@ void JirachiWish(void)
   sub_8041888(0);
   JirachiEntity->info->unk15C = 1;
   JirachiEntity->info->unk15E = 0;
-  sub_80861B8(JirachiEntity,0xe,0);
+  sub_80861B8(JirachiEntity,0xe,DIRECTION_SOUTH);
   sub_80855E4(sub_80861A8);
   gDungeon->unk1356C = 1;
   DungeonFadeOutBGM(0x1e);
@@ -3744,7 +3742,7 @@ void JirachiDropInEffect(Entity *jirachiEntity)
 
   sub_80861F8(0x1b,jirachiEntity,0);
   sub_8086A54(jirachiEntity);
-  sub_80861B8(jirachiEntity,0xe,0);
+  sub_80861B8(jirachiEntity,0xe,DIRECTION_SOUTH);
   iVar1 = 0xa000;
   iVar2 = 0x200;
   PlaySoundEffect(0x1f8);
@@ -3912,16 +3910,16 @@ void LugiaPreFightDialogue(void)
     sub_803E708(10,0x46);
     DisplayDungeonDialogue(gLugiaPreFightDialogue_4);
     PlaySoundEffect(0x1f8);
-    sub_80861D4(LugiaEntity,0xd,0);
+    sub_80861D4(LugiaEntity,0xd,DIRECTION_SOUTH);
     sub_803E708(0x2b,0x46);
-    sub_80861B8(LugiaEntity,0,0);
+    sub_80861B8(LugiaEntity,0,DIRECTION_SOUTH);
     DisplayDungeonDialogue(gLugiaPreFightDialogue_5);
     LugiaScreenFlash();
     DisplayDungeonDialogue(gLugiaPreFightDialogue_6);
     LugiaScreenFlash2();
     SetDungeonBGColorRGB(0xffffff06,0xffffff06,0xffffff06,1,0);
     DungeonStopBGM();
-    sub_80861D4(LugiaEntity,7,0);
+    sub_80861D4(LugiaEntity,7,DIRECTION_SOUTH);
     DisplayDungeonDialogue(gLugiaPreFightDialogue_7);
     LugiaScreenFlash();
     SetupBossFightHP(LugiaEntity,800,MUS_BATTLE_WITH_RAYQUAZA);
@@ -4308,7 +4306,7 @@ void CelebiJoinDialogue(void)
                     }
                     DungeonStartNewBGM(MUS_FRIEND_AREA_HEALING_FOREST);
                     PlaySoundEffect(0x1c7);
-                    sub_80861D4(CelebiEntity,0xd,0);
+                    sub_80861D4(CelebiEntity,0xd,DIRECTION_SOUTH);
                     sub_803E708(0x37,0x46);
                     PlaySoundEffect(0x1d5);
                     sub_803E708(0x1a,0x46);
@@ -4321,7 +4319,7 @@ void CelebiJoinDialogue(void)
                     DisplayDungeonDialogue(gCelebiJoinDialogue_5);
                     sub_803E708(10,0x46);
                     PlaySoundEffect(0x1c7);
-                    sub_80861D4(CelebiEntity,0xd,0);
+                    sub_80861D4(CelebiEntity,0xd,DIRECTION_SOUTH);
                     sub_803E708(0x37,0x46);
                     PlaySoundEffect(0x1d5);
                     sub_803E708(0x1a,0x46);

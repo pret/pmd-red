@@ -348,7 +348,7 @@ gUnknown_202EE6C: /* 202EE6C (sub_8044F5C - sub_8067A80) */
 gUnknown_202EE70: /* 202EE70 (sub_804513C - sub_80828E0) */
 	.space 0x6
 gUnknown_202EE76: /* 202EE76 (sub_804513C - sub_8082A08) */
-	.space 0x12
+	.space 0x10
 
     .include "src/dungeon_map_access.o"
 

@@ -2,6 +2,7 @@
 #include "globaldata.h"
 #include "constants/wonder_mail.h"
 #include "constants/colors.h"
+#include "code_803D0D8.h"
 #include "input.h"
 #include "memory.h"
 #include "text1.h"
@@ -47,8 +48,6 @@ const UnkTextStruct2 gUnknown_80E1FC4 = {
 };
 
 ALIGNED(4) const u8 gUnknown_80E1FDC[] = "Password";
-
-extern void sub_803D2C0(u8 *, unkStruct_203B480 *);
 
 void sub_8031E00(void);
 void sub_8031E58(void);

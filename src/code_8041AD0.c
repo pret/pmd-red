@@ -64,7 +64,6 @@ extern s32 gUnknown_202EDC8;
 extern u8 gUnknown_203B40D;
 extern s16 gUnknown_2026E4E;
 
-extern u8 sub_800E9FC(u8);
 extern void sub_800DBBC(void);
 extern void sub_803EA10(void);
 extern void sub_8042E98(void);

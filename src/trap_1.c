@@ -5,6 +5,7 @@
 #include "code_803E668.h"
 #include "code_806CD90.h"
 #include "code_8092334.h"
+#include "dungeon_map_access.h"
 #include "items.h"
 #include "dungeon_util.h"
 #include "structs/str_dungeon.h"
@@ -71,6 +72,32 @@ void SaveSpeedCounters(unkStruct_8094924 *param_1, u8 *speedCounters, u32 numCou
 void SaveClientType(unkStruct_8094924 *param_1, u8 param_2);
 void sub_80421C0(Entity *, u16);
 void sub_804687C(Entity *, Position *, Position *, Item *, u32);
+extern void sub_8083018(unkStruct_8094924 *, u8 *);
+extern void sub_8081C50(unkStruct_8094924 *);
+extern void sub_8081C7C(unkStruct_8094924 *);
+extern void sub_8081F2C(unkStruct_8094924 *);
+extern void RestoreDungeonMusic(unkStruct_8094924 *);
+extern void RestoreItemData(unkStruct_8094924 *);
+extern void RestoreTrapData(unkStruct_8094924 *);
+extern void sub_808217C(unkStruct_8094924 *);
+extern void sub_8082FD4(unkStruct_8094924 *param_1, u8 *r1, u32 r2);
+extern void sub_8082FE0(unkStruct_8094924 *, u32 *, u32);
+u8 sub_80831DC(unkStruct_8094924 *r0);
+u8 sub_8083188(unkStruct_8094924 *r0);
+s16 sub_8083170(unkStruct_8094924 *r0);
+void sub_80831F8(unkStruct_8094924 *r0, Position *);
+void RestoreDungeonWeather(unkStruct_8094924 *r0, Weather *);
+void sub_8083220(unkStruct_8094924 *r0, u32 *);
+void sub_8083260(unkStruct_8094924 *r0, u32 *);
+void RestoreTile(unkStruct_8094924 *r0, Tile *);
+extern u16 sub_8083158(unkStruct_8094924 *param_1);
+void sub_80820A8(unkStruct_8094924 *r0, Item *);
+void sub_80460F8(Position *, Item *, u32);
+Entity *sub_8045684(u8, Position *, u8);
+u32 sub_80831A0(unkStruct_8094924 *param_1);
+void sub_8082280(unkStruct_8094924 *param_1,bool8 isTeamMember,s32 index);
+
+extern u8 gUnknown_81071D4[];
 
 void HandleTripTrap(Entity *pokemon, Entity *target)
 {
@@ -759,5 +786,216 @@ void SaveDungeonWeather(unkStruct_8094924 *r0, Weather *weather)
     sub_8083060(r0, weather->mudSportTurns);
     sub_8083060(r0, weather->waterSportTurns);
     sub_80830B4(r0, weather->nullifyWeather);
+}
+
+void sub_8081BF4(u8 *r0, u32 r1)
+{
+    unkStruct_8094924 uStack_14;
+
+    sub_8082FD4(&uStack_14, r0, r1);
+
+    sub_8082FE0(&uStack_14, &uStack_14.unkC, 4);
+    sub_8081C50(&uStack_14);
+    sub_8081C7C(&uStack_14);
+    sub_8081F2C(&uStack_14);
+    RestoreDungeonMusic(&uStack_14);
+    RestoreItemData(&uStack_14);
+    RestoreTrapData(&uStack_14);
+    sub_808217C(&uStack_14);
+    
+    sub_8083018(&uStack_14, gUnknown_81071D4);
+    nullsub_98(&uStack_14);
+}
+
+void sub_8081C50(unkStruct_8094924 *r0)
+{
+    sub_8083018(r0, gUnknown_81071E0);
+    sub_8082FE0(r0, (u32 *)&gDungeon->dungeonLocation, 0x58);
+}
+
+void sub_8081C7C(unkStruct_8094924 *r0)
+{
+    int x;
+    int y;
+    s32 iVar7;
+
+    sub_8083018(r0,gUnknown_81071E0);
+    gDungeon->unk3A08 = sub_80831DC(r0);
+    gDungeon->unk3A09 = sub_80831DC(r0);
+    gDungeon->unk3A0A = sub_80831DC(r0);
+    gDungeon->unk3A0B = sub_80831DC(r0);
+    gDungeon->unk3A0C = sub_8083188(r0);
+    gDungeon->unk3A0D = sub_8083188(r0);
+    gDungeon->tileset = sub_8083170(r0);
+    gDungeon->unk3A10 = sub_8083170(r0);
+    gDungeon->unk3A12 = sub_8083170(r0);
+    gDungeon->bossBattleIndex = sub_8083170(r0);
+    gDungeon->unk3A16 = sub_8083170(r0);
+
+    for(y = 0; y < DUNGEON_MAX_SIZE_Y; y++)
+    {
+        for(x = 0; x < DUNGEON_MAX_SIZE_X; x++)
+        {
+            RestoreTile(r0,&gDungeon->tiles[y][x]);
+        }
+    }
+    sub_80831F8(r0,&gDungeon->unkE218);
+    sub_80831F8(r0,&gDungeon->unkE21C);
+
+    for(iVar7 = 0; iVar7 < 8; iVar7++)
+    {
+        sub_80831F8(r0,&gDungeon->unkE220[iVar7]);
+    }
+    sub_8083220(r0,&gDungeon->unkE240);
+    sub_8083220(r0,&gDungeon->unkE240 + 0x4);
+    sub_8083260(r0,&gDungeon->unkE240 + 0x8);
+
+
+    for(y = 0; y < 8; y++)
+    {
+        for(x = 0; x < 8; x++)
+        {
+            RestoreTile(r0,&gDungeon->unkE27C[y][x]);
+            gDungeon->unkE87C[y][x] = sub_8083188(r0);
+        }
+    }
+    RestoreDungeonWeather(r0,&gDungeon->weather);
+}
+
+void RestoreTile(unkStruct_8094924 *r0, Tile *tile)
+{
+    memset(tile, 0, sizeof(Tile));
+    tile->terrainType = sub_8083158(r0);
+    tile->unk4 = sub_8083158(r0);
+
+    sub_8082FE0(r0, (u32 *)&tile->room, 1);
+    sub_8082FE0(r0, (u32 *)&tile->unkE, 1);
+
+    tile->monster = NULL;
+    tile->object = NULL; 
+}
+
+void RestoreDungeonWeather(unkStruct_8094924 *r0, Weather *weather)
+{
+    s32 index;
+    memset(weather, 0, sizeof(Weather));
+    sub_8082FE0(r0, (u32 *)&weather->weather, 1);
+    sub_8082FE0(r0, (u32 *)&weather->unkE265, 1);
+    for(index = 0; index < 8; index++)
+    {
+        weather->unkE267[index] = sub_8083188(r0);
+        weather->naturalWeather[index] = sub_8083188(r0);
+    }
+    weather->weatherDamageCounter = sub_8083188(r0);
+    weather->mudSportTurns = sub_8083188(r0);
+    weather->waterSportTurns = sub_8083188(r0);
+    weather->nullifyWeather = sub_80831DC(r0);
+}
+
+void sub_8081F2C(unkStruct_8094924 *param_1)
+{
+    sub_8083018(param_1,gUnknown_81071E0);
+    gDungeon->unk181e8.cameraTarget = NULL;
+    gDungeon->unk181e8.unk18208 = sub_8083188(param_1);
+    gDungeon->unk181e8.visibilityRange = sub_8083188(param_1);
+    gDungeon->unk181e8.blinded        = sub_80831DC(param_1);
+    gDungeon->unk181e8.unk1820B       = sub_80831DC(param_1);
+    gDungeon->unk181e8.unk1820C       = sub_80831DC(param_1);
+    gDungeon->unk181e8.unk1820D       = sub_80831DC(param_1);
+    gDungeon->unk181e8.unk1820E       = sub_80831DC(param_1);
+    gDungeon->unk181e8.unk1820F       = sub_80831DC(param_1);
+    gDungeon->unk181e8.hallucinating  = sub_80831DC(param_1); 
+    gDungeon->unk181e8.unk18211 = sub_80831DC(param_1);
+    gDungeon->unk181e8.unk18213 = sub_80831DC(param_1);
+}
+
+void RestoreDungeonMusic(unkStruct_8094924 *r0)
+{
+    gDungeon->musPlayer.songIndex = sub_8083170(r0);
+    gDungeon->musPlayer.pastSongIndex = sub_8083170(r0);
+    gDungeon->musPlayer.queuedSongIndex = sub_8083170(r0);
+}
+
+void RestoreItemData(unkStruct_8094924 *r0) {
+    s32 index;
+    Item item;
+    Position pos;
+    sub_8083018(r0, gUnknown_81071E0);
+    for(index = 0; index < DUNGEON_MAX_ITEMS; index++)
+    {
+        sub_80820A8(r0, &item);
+        sub_80831F8(r0, &pos);
+        if(item.flags & ITEM_FLAG_EXISTS)
+            sub_80460F8(&pos, &item, 0);
+    }
+}
+
+void sub_80820A8(unkStruct_8094924 *param_1, Item *item)
+{
+    memset(item, 0, sizeof(Item));
+    sub_8082FE0(param_1,(u32 *)&item->flags,1);
+    sub_8082FE0(param_1,(u32 *)&item->quantity,1);
+    sub_8082FE0(param_1,(u32 *)&item->id,1);
+}
+
+
+void RestoreTrapData(unkStruct_8094924 *param_1)
+{
+    int counter;
+    Tile *tile;
+    Entity *entity;
+    Position pos;
+    u8 isVisible;
+    u8 unk1;
+    u8 trapID;
+
+    sub_8083018(param_1, gUnknown_81071E0);
+
+    for(counter = 0; counter < DUNGEON_MAX_TRAPS; counter++)
+    {
+        trapID = 6;
+        unk1 = 0;
+        sub_8082FE0(param_1,(u32 *)&trapID,1);
+        sub_8082FE0(param_1,(u32 *)&unk1,1);
+        isVisible = sub_80831DC(param_1);
+        sub_80831F8(param_1, &pos);
+        
+        if(trapID != 0xFF)
+        {
+            tile = GetTileSafe(pos.x, pos.y);
+            entity = sub_8045684(trapID, &pos, unk1);
+            if(entity)
+            {
+                tile->object = entity;
+                entity->isVisible = isVisible;
+            }
+        }
+    }
+}
+
+void sub_808217C(unkStruct_8094924 *param_1)
+{
+    s32 counter;
+
+    sub_8083018(param_1,gUnknown_81071E0);
+    gDungeon->unk37F0 = sub_80831A0(param_1);
+    gDungeon->unk37F4 = sub_80831A0(param_1);
+    gDungeon->plusIsActive[0] = sub_80831DC(param_1);
+    gDungeon->plusIsActive[1] = sub_80831DC(param_1);
+    gDungeon->minusIsActive[0] = sub_80831DC(param_1);
+    gDungeon->minusIsActive[1] = sub_80831DC(param_1);
+    gDungeon->decoyActive = sub_80831DC(param_1);
+    gDungeon->fill37FD = sub_80831DC(param_1);
+    gDungeon->deoxysDefeat = sub_80831DC(param_1);
+    gDungeon->fill37FF = sub_80831DC(param_1);
+    gDungeon->unk3800 = sub_8083158(param_1);
+    for(counter = 0; counter < MAX_TEAM_MEMBERS; counter++)
+    {
+        sub_8082280(param_1, TRUE, counter);
+    }
+    for(counter = 0; counter < DUNGEON_MAX_WILD_POKEMON; counter++)
+    {
+        sub_8082280(param_1, FALSE, counter);
+    }
 }
 

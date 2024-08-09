@@ -89,22 +89,22 @@ void sub_806CD90(void)
     }
 }
 
-void sub_806CDD4(Entity *entity, u8 a1, u32 a2)
+void sub_806CDD4(Entity *entity, u8 a1, u32 direction)
 {
     if (GetEntityType(entity) == ENTITY_MONSTER) {
         entity->unk6A = a1;
 
-        if (a2 < NUM_DIRECTIONS)
-            entity->direction = a2;
+        if (direction < NUM_DIRECTIONS)
+            entity->direction = direction;
     }
 }
 
-void sub_806CDFC(Entity *entity, u8 a1, u32 a2)
+void sub_806CDFC(Entity *entity, u8 a1, u32 direction)
 {
     if (GetEntityType(entity) == ENTITY_MONSTER) {
-        if (entity->unk6B == a1 && entity->direction2 == a2)
+        if (entity->unk6B == a1 && entity->direction2 == direction)
             return;
-        sub_806CDD4(entity, a1, a2);
+        sub_806CDD4(entity, a1, direction);
     }
 }
 

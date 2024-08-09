@@ -2,15 +2,7 @@
 #define GUARD_CODE_8004AA0_H
 
 #include "file_system.h"
-
-// size: 0x4
-typedef struct RGB
-{
-    // IDK which is R G B
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-} RGB;
+#include "structs/rgb.h"
 
 // size: 0x18
 typedef struct unkStruct_202EE8C
@@ -23,6 +15,8 @@ typedef struct unkStruct_202EE8C
     RGB *unk10;
     RGB unk14;
 } unkStruct_202EE8C;
+
+extern unkStruct_202EE8C gUnknown_202EE8C[32];
 
 // size: Variable
 typedef struct unkDataFor8004AA4

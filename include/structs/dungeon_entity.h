@@ -290,7 +290,8 @@ typedef struct EntityInfo
     u8 unk15D;
     u8 unk15E;
     u8 unk15F;
-    u8 fill160[0x164 - 0x160];
+    u8 unk160;
+    u8 fill161[3];
     /* 0x164 */ u8 unk164;
     /* 0x165 */ u8 unk165;
     /* 0x166 */ u8 unk166;

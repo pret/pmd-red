@@ -2445,11 +2445,11 @@ void sub_805E738(Entity *a0)
         // What???
         for (i = 0; i < 1; i++) {
             bool8 r9 = FALSE;
-            u32 r5 = entityInfo->action.direction;
-            r5++;
-            for (j = 1; j < 8; j++, r5++) {
-                r5 &= 7;
-                tile = GetTile(a0->pos.x + gAdjacentTileOffsets[r5].x, a0->pos.y + gAdjacentTileOffsets[r5].y);
+            u32 direction = entityInfo->action.direction;
+            direction++;
+            for (j = 1; j < 8; j++, direction++) {
+                direction &= DIRECTION_MASK;
+                tile = GetTile(a0->pos.x + gAdjacentTileOffsets[direction].x, a0->pos.y + gAdjacentTileOffsets[direction].y);
                 if (tile->monster != NULL && GetEntityType(tile->monster) == ENTITY_MONSTER) {
                     EntityInfo *tileMonsterInfo = tile->monster->info;
                     if (CanSeeTarget(a0, tile->monster)) {
@@ -2461,8 +2461,8 @@ void sub_805E738(Entity *a0)
                 }
             }
             if (r9) {
-                a0->info->action.direction = r5 & 7;
-                sub_806CDD4(a0, sub_806CEBC(a0), r5);
+                a0->info->action.direction = direction & DIRECTION_MASK;
+                sub_806CDD4(a0, sub_806CEBC(a0), direction);
                 break;
             }
         }

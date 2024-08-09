@@ -3,6 +3,7 @@
 
 #include "constants/mailbox.h"
 #include "structs/str_wonder_mail.h"
+#include "code_8092334.h"
 
 // size: 0xC
 typedef struct subStruct_203B490
@@ -67,5 +68,7 @@ u8 *sub_8096DD8(void);
 u8 *sub_8096DE8(void);
 u8 sub_8096E2C(void);
 void sub_8096EEC(WonderMail *mail);
+void SaveWonderMail(unkStruct_8094924 *a, WonderMail *b);
+void RestoreWonderMail(unkStruct_8094924 *a, WonderMail *b);
 
 #endif // GUARD_CODE_80958E8_H
