@@ -18,7 +18,7 @@
 
 extern u8 gUnknown_203B40C;
 extern u8 gUnknown_203B40D;
-extern u32 gUnknown_202EDC8;
+extern s32 gUnknown_202EDC8;
 extern s32 gUnknown_202EDCC;
 extern u32 gUnknown_202EDD0;
 extern s32 gUnknown_202EDD4;
@@ -39,6 +39,8 @@ void sub_8042E5C();
 void sub_8040B60();
 void sub_8040788();
 void sub_800F7D0(Position *);
+void sub_803E874(s32, s32);
+void sub_803EAF0(s32, s32);
 
 void sub_803E46C(u32 a0)
 {
@@ -152,3 +154,89 @@ void sub_803E708(s32 a0, u32 a1)
     }
 }
 
+void sub_803E724(s32 r0)
+{
+    do 
+    {
+        sub_803E46C(r0);
+    } while (gRealInputs.held & 0xF0);
+}
+
+void sub_803E748(void) {
+
+    s32 index1;
+    s32 index2;
+
+    index2 = 0x1F;
+    gUnknown_203B40D = 1;
+    gUnknown_202EDC8 = 0;
+
+    sub_803E874(1, 0x1F);
+
+    for(index1 = 0; index1 < 0x2C; index1++)
+    {
+        if(index1 < 0x20)
+        {
+            index2 -= 2;
+            if(index2 <= 0)
+            {
+                index2 = 0;
+                sub_803EAF0(1, 0);
+                gDungeon->unk181e8.unk18217 = index2;
+            }
+        }
+        if(index1 > 0xB)
+            if(gUnknown_202EDC8 <= 0x1E)
+                gUnknown_202EDC8++;
+        sub_803E874(1, index2);
+        sub_803E46C(5);
+    }
+    gUnknown_203B40D = 0;
+    gUnknown_202EDC8 = 0x1F;
+}
+
+void sub_803E7C8(void)
+{
+
+    s32 index1;
+    s32 index2;
+
+    index2 = 0x1F;
+    gUnknown_203B40D = 1;
+    gUnknown_202EDC8 = 0;
+
+    sub_803E46C(5);
+
+    for(index1 = 0; index1 < 0x2C; index1++)
+    {
+        sub_803E874(1, index2);
+        if(index1 < 0x20)
+        {
+            index2 -= 2;
+            if(index2 <= 0)
+            {
+                index2 = 0;
+                sub_803EAF0(1, 0);
+                gDungeon->unk181e8.unk18217 = index2;
+            }
+        }
+        sub_803E46C(5);
+    }
+    gUnknown_203B40D = 0;
+}
+
+void sub_803E830(void) 
+{
+    s32 index;
+
+    gUnknown_203B40D = 1;
+    for(index = 0; index < 0x20; index++)
+    {
+        sub_803E874(0, 0);
+        sub_803E46C(5);
+        if(gUnknown_202EDC8 > 0)
+            gUnknown_202EDC8--;
+    }
+    gUnknown_202EDC8 = 0;
+    gUnknown_203B40D = 0;
+}
