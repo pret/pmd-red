@@ -301,7 +301,6 @@ SECTIONS {
         asm/code_8085B80.o(.text);
         src/code_8085E98.o(.text);
         src/code_80861A8.o(.text);
-        asm/code_80861B8.o(.text);
         src/code_80869E4.o(.text);
         src/code_8086A3C.o(.text);
         asm/code_8086A3C.o(.text);
