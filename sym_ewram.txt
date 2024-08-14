@@ -602,18 +602,8 @@ gUnknown_2039DA4: /* 2039DA4 (HandleAction) */
 gUnknown_2039DA8: /* 2039DA8 (sub_80A14E8) */
 	.space 0x8
 
-gUnknown_2039DB0: /* 2039DB0 (GroundSprite_Reset - sub_80A65F0) [unkStruct_2039DB0] */
-	.space 0x10
-gUnknown_2039DC0: /* 2039DC0 (GroundSprite_Reset - sub_80A65F0) [unkStruct_2039DB0] */
-	.space 0xC
-gUnknown_2039DCC: /* 2039DCC (GroundSprite_Reset - sub_80A73EC) */
-	.space 0x2
-gUnknown_2039DCE: /* 2039DCE (GroundSprite_Reset - sub_80A73EC) */
-	.space 0x2
-gUnknown_2039DD0: /* 2039DD0 (sub_80A62F0 - sub_80A69FC) */
-	.space 0x4
-gUnknown_2039DD4: /* 2039DD4 (sub_80A62F0 - sub_80A69FC) */
-	.space 0x4
+    .include "src/ground_sprite.o"
+
 gUnknown_2039DD8: /* 2039DD8 (sub_80A6E80 - sub_80A7310) */
 	.space 0x8
 

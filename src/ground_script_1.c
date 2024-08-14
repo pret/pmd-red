@@ -1,6 +1,8 @@
 #include "global.h"
 #include "debug.h"
+#include "ground_link.h"
 #include "ground_script.h"
+#include "ground_sprite.h"
 #include "ground_map.h"
 #include "dungeon.h"
 #include "other_random.h"
@@ -37,7 +39,6 @@ typedef struct GroundEffectData {
     ScriptCommand *script;
 } GroundEffectData;
 
-void GroundSprite_Reset(s16);
 void GroundMap_Select(s16);
 void GroundMap_SelectDungeon(s16, DungeonLocation*, u8);
 void GroundMap_ExecuteEnter(s16);
@@ -47,7 +48,6 @@ void GroundMap_ExecuteStation(s32, s32, s32, bool8);
 void GroundLives_ExecuteScript(s32, s16 *, ScriptInfoSmall *);
 void GroundObject_ExecuteScript(s32, s16 *, ScriptInfoSmall *);
 void GroundEffect_ExecuteScript(s32, s16 *, ScriptInfoSmall *);
-void GroundLink_Select(s16);
 void GroundLives_Select(s16, s32 group, s32 sector);
 void GroundObject_Select(s16, s32 group, s32 sector);
 void GroundEffect_Select(s16, s32 group, s32 sector);

@@ -1,3 +1,4 @@
+#include "gba/defines.h"
 #include "global.h"
 #include "code_800558C.h"
 #include "code_800DAC0.h"
@@ -10,13 +11,16 @@
 
 IWRAM_DATA unkStruct_3001B7C *gUnknown_3001B7C = {0};
 
-extern unkStruct_2039DB0 gUnknown_2039DB0;
-extern unkStruct_2039DB0 gUnknown_2039DC0;
-extern u16 gUnknown_2039DCC;
-extern u16 gUnknown_2039DCE;
-extern u8 gUnknown_2039DD0;
-extern u32 gUnknown_2039DD4;
-extern OpenedFile *gUnknown_203B4B4;
+EWRAM_DATA unkStruct_2039DB0 gUnknown_2039DB0 = {0};
+EWRAM_DATA u32 sUnknown_2039DBC = {0}; // Unused, for alignment
+EWRAM_DATA unkStruct_2039DB0 gUnknown_2039DC0 = {0};
+EWRAM_DATA u16 gUnknown_2039DCC = {0};
+EWRAM_DATA u16 gUnknown_2039DCE = {0};
+EWRAM_DATA u8 gUnknown_2039DD0 = {0};
+EWRAM_DATA u8 gUnknown_2039DD1[3] = {0, 0, 0}; // Unused, for alignment
+EWRAM_DATA u32 gUnknown_2039DD4 = {0};
+
+EWRAM_DATA_2 OpenedFile *gUnknown_203B4B4 = {0};
 
 // dungeon_sbin.s
 extern const struct FileArchive gDungeonFileArchive;
