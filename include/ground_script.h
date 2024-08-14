@@ -139,5 +139,7 @@ extern FunctionScript gFunctionScriptTable[];
 #include "debug.h"
 
 bool8 GroundScript_ExecutePP(Action *, s32 *, ScriptInfoSmall *, const DebugLocation *unused);
+ScriptCommand *sub_80A242C(Action *action, s32 r1);
+ScriptCommand *sub_80A2460(Action *action, s32 r1);
 
 #endif // GUARD_GROUND_SCRIPT_H

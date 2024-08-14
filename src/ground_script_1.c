@@ -160,8 +160,6 @@ u8 sub_809D8EC(Action*, s16);
 bool8 sub_809D940(void);
 void sub_809D9B8(s16);
 bool8 sub_809DA08(Action*, s16, u8);
-ScriptCommand *sub_80A242C(Action*, s32);
-ScriptCommand *sub_80A2460(Action*, s32);
 s16 sub_80A4D7C(s32);
 s16 sub_80A7AE8(s16);
 void sub_80A87AC(s32, s32);
@@ -1871,4 +1869,11 @@ s32 ExecuteScriptCommand(Action *action) {
             }
         }
     }
+}
+
+u32 sub_80A14E8(u32, u8, u32, u32);
+
+UNUSED u32 sub_80A1440(u32 r0, u32 r1, u32 r2)
+{
+   return sub_80A14E8(0, r0, r1, r2); 
 }

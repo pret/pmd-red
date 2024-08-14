@@ -22,7 +22,6 @@ extern u8 sub_80AC378(void);
 extern u8 sub_80AD290(void);
 extern u8 sub_80A8B74(void);
 extern u8 sub_809A750(void);
-extern ScriptCommand *sub_80A2460(Action *param_1, u32);
 void FatalError(u32 *, const char *, ...) __attribute__((noreturn));
 
 void SetPredefinedScript(Action *param_1, s16 index, ScriptCommand *param_3)
