@@ -27,6 +27,7 @@ bool8 GroundMainRescueRequest(s16 r0, u32 r1);
 
 bool32 GroundMainGameEndRequest(u32 r0);
 bool32 GroundMainGameCancelRequest(u32 r0);
+bool8 sub_8098D80(u32 speed);
 
 extern GroundConversionStruct gGroundConversion_811BAF4[10];
 

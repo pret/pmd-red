@@ -16,7 +16,6 @@ extern const DebugLocation gUnknown_8117698;
 extern void GroundMap_GetStationScript(ScriptInfoSmall *, s16, u32, u32);
 
 extern u8 sub_809D678(void *);
-extern void sub_809D710(u8 *, ScriptInfoSmall *, s32);
 extern bool8 sub_809D968(void *, s32);
 
 static void sub_80A4BE8(ScriptInfoSmall *script, s16 r1)

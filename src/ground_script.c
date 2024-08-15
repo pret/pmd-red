@@ -195,7 +195,7 @@ void sub_809D710(Action *param_1, ScriptInfoSmall *script, s16 index)
     }
 }
 
-bool8 InitActionScriptData(Action *param_1, DebugLocation *unused)
+bool8 InitActionScriptData(Action *param_1, const DebugLocation *unused)
 {
     InitScriptData(&param_1->scriptData);
     InitScriptData(&param_1->scriptData2);

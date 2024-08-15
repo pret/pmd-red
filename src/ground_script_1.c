@@ -8,6 +8,9 @@
 #include "other_random.h"
 #include "rescue_team_info.h"
 #include "code_80118A4.h"
+#include "code_8097670.h"
+#include "exclusive_pokemon.h"
+#include "items.h"
 
 #ifndef NONMATCHING
 #define GROUND_SCRIPT_INCOMPLETE_DECLARATIONS
@@ -94,27 +97,15 @@ u32 sub_8002D54();
 u8 sub_8002DF0(Position32*, Position32*, Position32*, Position32*);
 s32 sub_8009FB8();
 
-// TODO: move to code_80118A4.h
-u32 StopAllMusic_1();
-u32 xxx_call_start_new_bgm();
-u32 xxx_call_queue_bgm();
-u32 xxx_call_play_fanfare_se();
-u32 xxx_call_fade_out_fanfare_se();
-
 bool8 sub_8021700(s32);
 bool8 sub_802FCF0(void);
 
 
-s32 FindItemInInventory();
-u32 ShiftItemsDownFrom();
 void sub_809733C(s16, bool8);
 void sub_80973A8(s16, bool8);
 void sub_8097418(s16, bool8);
 void sub_80975A8(s16, bool8);
-void sub_80976F8(u8);
-u32 sub_8098100();
 void sub_8098D1C(s32, u32, s32);
-void sub_8098D80(s32);
 void sub_8098E18(s32, s32);
 u32 sub_80999E8();
 u32 sub_80999FC();
@@ -129,7 +120,7 @@ u32 sub_809A738();
 u32 sub_809A768();
 bool8 ScriptPrintNullTextbox(void);
 bool8 ScriptPrintEmptyTextbox(void);
-u32 sub_809A83C();
+void sub_809A83C(s16);
 u32 sub_809AC7C();
 u32 sub_809ADD8();
 bool8 ScriptPrintText(s32, s16, char*);
@@ -154,12 +145,8 @@ void sub_809D1E4(s32, s32, s32);
 void sub_809D208(s32, Position32*, s32);
 void sub_809D220(s32, s32, s32);
 u32 sub_809D52C();
-u32 InitScriptData();
-void sub_809D710(Action*, ScriptInfoSmall*, s16);
-u8 sub_809D8EC(Action*, s16);
 bool8 sub_809D940(void);
 void sub_809D9B8(s16);
-bool8 sub_809DA08(Action*, s16, u8);
 s16 sub_80A4D7C(s32);
 s16 sub_80A7AE8(s16);
 void sub_80A87AC(s32, s32);
@@ -183,9 +170,7 @@ void DeleteBlankGroundObjects(void);
 void DeleteBlankGroundEffects(void);
 
 u32 sub_80A14E8(u32, u8, u32, u32);
-extern void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s16 group, s8 sector);
 s16 HandleAction(void *, DebugLocation *);
-extern void sub_809D648(void *);
 
 extern int gFormatData_202DE30[10];
 
@@ -1614,7 +1599,9 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0x41: {
-                if (FindItemInInventory((u8)curCmd.argShort) >= 0) ShiftItemsDownFrom();
+                s32 val;
+                val = FindItemInInventory(curCmd.argShort);
+                if ( val >= 0) ShiftItemsDownFrom(val);
                 break;
             }
             case 0xc0 ... 0xcb: {
