@@ -104,12 +104,12 @@ typedef struct CallbackData
 typedef struct Action
 {
     // size: 0xE4
-    /* 0x00 */ struct CallbackData *callbacks;
+    /* 0x00 */ const struct CallbackData *callbacks;
     /* 0x04 */ void *parentObject; // struct GroundObject *
     /* 0x08 */ s16 unk8[2]; // id?
     /* 0x0C */ ScriptUnion1632 unkC;
-    /* 0x10 */ u16 group;
-    /* 0x12 */ u8  sector;
+    /* 0x10 */ s16 group;
+    /* 0x12 */ s8  sector;
     // padding
     /* 0x14 */ ScriptCommand *predefinedScripts[4];
     /* 0x24 */ ScriptData scriptData;

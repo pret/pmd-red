@@ -1,7 +1,6 @@
 #include "global.h"
 #include "other_random.h"
 #include "memory.h"
-#include "ground_script.h"
 
 struct unkStruct_809D158
 {
@@ -414,72 +413,4 @@ void sub_809D508(void)
 {
     MemoryFree(gUnknown_203B4B0);
     gUnknown_203B4B0 = NULL;
-}
-
-// -1 didn't match
-void sub_809D520(void *a0)
-{
-    u16 *ptr = a0;
-    u16 v = 0xFFFF;
-    *ptr = v;
-}
-
-extern s32 sub_80A882C(s16);
-extern s32 sub_80AC240(s16);
-extern s32 sub_80AD158(s16);
-
-s32 sub_809D52C(void *a0)
-{
-    s16 *ptr = a0;
-
-    switch (ptr[0])
-    {
-    case 0: return 0;
-    case 1: return sub_80A882C(ptr[1]);
-    case 2: return sub_80AC240(ptr[1]);
-    case 3: return sub_80AD158(ptr[1]);
-    }
-    return 0;
-}
-
-void InitScriptData(ScriptData *a0)
-{
-    s32 i;
-
-    a0->state = -1;
-    a0->savedState = 0;
-    a0->script.ptr2 = 0;
-    a0->script.ptr = 0;
-    a0->savedScript.ptr2 = 0;
-    a0->savedScript.ptr = 0;
-    a0->curScriptOp = 0;
-    a0->curPtr = 0;
-    a0->unk22 = -1;
-    a0->unk24 = 0;
-    a0->unk26 = 0xFF;
-    a0->branchDiscriminant = 0;
-    a0->unk2A = 0;
-    a0->unk2C = 0;
-    a0->unk30 = 0;
-    for (i = 0; i < 4; i++) {
-        a0->unk50[i].raw = 0;
-    }
-}
-
-void InitAction(Action *a0)
-{
-    s32 i;
-
-    a0->callbacks = NULL;
-    a0->parentObject = NULL;
-    a0->group = -1;
-    a0->sector = 0xFF;
-    sub_809D520(&a0->unkC);
-
-    for (i = 0; i < 4; i++) {
-        a0->predefinedScripts[i] = NULL;
-    }
-
-    InitScriptData(&a0->scriptData);
-    InitScriptData(&a0->scriptData2);
 }
