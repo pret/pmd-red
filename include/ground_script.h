@@ -129,7 +129,8 @@ typedef struct GroundMapAction
 
 typedef struct FunctionScript
 {
-    u32 unk0;
+    u16 unk0;
+    s16 unk2;
     u8 *funcName;
     ScriptCommand *script;
 } FunctionScript;

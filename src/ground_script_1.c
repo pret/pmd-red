@@ -182,6 +182,11 @@ void DeleteBlankGroundLives(void);
 void DeleteBlankGroundObjects(void);
 void DeleteBlankGroundEffects(void);
 
+u32 sub_80A14E8(u32, u8, u32, u32);
+extern void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s16 group, s8 sector);
+s16 HandleAction(void *, DebugLocation *);
+extern void sub_809D648(void *);
+
 extern int gFormatData_202DE30[10];
 
 extern s16 gCurrentMap;
@@ -205,8 +210,11 @@ extern char gUnknown_8116684[];
 extern char gUnknown_81166C0[];
 extern char gUnknown_81166D8[];
 
-
+extern const CallbackData gUnknown_8116488;
 extern DebugLocation gUnknown_81166B4;
+extern DebugLocation gUnknown_81166F8;
+extern DebugLocation gUnknown_8116704;
+extern ScriptCommand gUnknown_81164E4;
 
 // Return values:
 // This function returns what's likely an enum, which controls the state of the script engine state machine, and possibly provides information to code calling the engine.
@@ -1871,9 +1879,33 @@ s32 ExecuteScriptCommand(Action *action) {
     }
 }
 
-u32 sub_80A14E8(u32, u8, u32, u32);
-
 UNUSED u32 sub_80A1440(u32 r0, u32 r1, u32 r2)
 {
    return sub_80A14E8(0, r0, r1, r2); 
+}
+
+UNUSED bool8 GroundScript_ExecuteTrigger(s16 r0) 
+{
+    s32 ret;
+    ScriptInfoSmall scriptInfo;
+    Action action;
+    FunctionScript *ptr;
+
+    ptr = &gFunctionScriptTable[r0];
+
+    if(ptr->unk2 != 0xB)
+        return FALSE;
+    InitActionWithParams(&action, &gUnknown_8116488, NULL, 0, 0);
+    sub_809D710(NULL, &scriptInfo, r0);
+    GroundScript_ExecutePP(&action, NULL, &scriptInfo, &gUnknown_81166F8);
+
+    action.scriptData.savedScript = action.scriptData.script;
+    action.scriptData.savedScript.ptr = &gUnknown_81164E4;
+    action.scriptData.savedScript.ptr2 = &gUnknown_81164E4;
+    ret = HandleAction(&action, &gUnknown_8116704);
+    sub_809D648(&action);
+    if(ret == 0)
+        return TRUE;
+    else
+        return FALSE;
 }
