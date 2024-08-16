@@ -113,8 +113,7 @@ gUnknown_203B0EC: /* 203B0EC (sub_8010C58) */
 gUnknown_203B198: /* 203B198 (sub_8014248 - sub_8014A88) */
 	.space 0x60
 
-gUnknown_203B1F8: /* 203B1F8 (sub_8015080 - sub_80151A4) */
-	.space 0x4
+.include "src/code_8015080.o"
 
 gUnknown_203B1FC: /* 203B1FC (sub_80151C0 - sub_8015F84) */
 	.space 0x4
