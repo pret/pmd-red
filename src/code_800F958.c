@@ -1,9 +1,60 @@
 #include "global.h"
 #include "code_800F958.h"
+#include "memory.h"
 
 extern DungeonPokemonSprites *gDungeonPokemonSprites;
-
+extern DungeonPokemonSprite *NewDungeonPokemonSprite(void);
 extern DungeonPokemonSprite* GetDungeonPokemonSprite(s32 id);
+
+extern Position gUnknown_80D3564;
+
+void AddPokemonDungeonSprite(s32 id, s16 species, Position *pos, u32 r3) {
+    DungeonPokemonSprite *dSprite;
+    DungeonPokemonSprite *newSprite;
+    Position newPos;
+    s32 species_s32;
+
+    species_s32 = species;
+
+    if(gDungeonPokemonSprites == NULL)
+        return;
+
+    dSprite = GetDungeonPokemonSprite(id);
+    if(dSprite != NULL)
+        return;
+
+    newSprite = NewDungeonPokemonSprite();
+    if(newSprite == NULL)
+        return;
+
+    newSprite->exists = 1;
+    newSprite->id = id;
+    newSprite->species = species_s32;
+    newSprite->status = 0;
+    newSprite->pos = *pos;
+    newSprite->unk11 = r3;
+    newPos = gUnknown_80D3564;
+    newSprite->statusOffsets[1] = newPos;
+    newSprite->statusOffsets[0] = newPos;
+    newSprite->statusSprites[0].status = 0;
+    newSprite->statusSprites[0].frame = 0;
+    newSprite->statusSprites[1].status = 0;
+    newSprite->statusSprites[1].frame = 0;
+}
+
+void DeletePokemonDungeonSprite(s32 id)
+{
+    DungeonPokemonSprite *dSprite;
+
+    if(gDungeonPokemonSprites == NULL)
+        return;
+
+    dSprite = GetDungeonPokemonSprite(id);
+    if(dSprite == NULL)
+        return;
+
+    MemoryClear8((u8 *)dSprite, sizeof(DungeonPokemonSprite));
+}
 
 void sub_800F958(s32 dungeonSpriteID, Position *pos, Position *statusOffsets, u32 a3)
 {
