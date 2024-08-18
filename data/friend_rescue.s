@@ -1,7 +1,5 @@
 	.section .rodata
 
-
-
 	.global gUnknown_80E2BE0
 gUnknown_80E2BE0: @ 80E2BE0
 .string "Your own Pokémon will not disappear\n"
