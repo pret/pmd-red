@@ -87,6 +87,8 @@ SECTIONS {
         asm/code_800DAC0.o(.text);
         src/code_800E9A8.o(.text);
         asm/code_800E9E4.o(.text);
+        src/code_800ED38.o(.text);
+        asm/code_800ED38.o(.text);
         src/code_800F958.o(.text);
         asm/code_800F990.o(.text);
         src/code_8010EF0.o(.text);
@@ -103,6 +105,8 @@ SECTIONS {
         asm/code_80130A8.o(.text);
         src/code_80140DC.o(.text);
         asm/code_80140DC.o(.text);
+        src/code_8015080.o(.text);
+        asm/code_8015080.o(.text);
         src/code_8012A18_1.o(.text);
         src/code_801602C.o(.text);
         src/felicity_bank.o(.text);
@@ -203,8 +207,6 @@ SECTIONS {
         src/code_803D0D8.o(.text);
         asm/code_803D110.o(.text);
         src/code_803E46C.o(.text);
-        asm/code_803E490.o(.text);
-        src/code_803E668.o(.text);
         asm/code_803E724.o(.text);
         src/code_8040094.o(.text);
         asm/code_8040094.o(.text);
@@ -246,6 +248,7 @@ SECTIONS {
         asm/code_8066D04.o(.text);
         src/code_805D8C8.o(.text);
         asm/code_805D8C8_1.o(.text);
+        src/code_8069D4C.o(.text);
         src/targeting.o(.text);
         src/code_8069E0C.o(.text);
         asm/code_8069E0C.o(.text);
@@ -296,15 +299,12 @@ SECTIONS {
         src/code_808417C.o(.text);
         asm/code_808417C.o(.text);
         src/code_8084778.o(.text);
-        asm/code_80847D4.o(.text);
         src/code_80848F0.o(.text);
         asm/code_80848F0.o(.text);
         src/dungeon_util_1.o(.text);
         asm/code_8085B80.o(.text);
         src/code_8085E98.o(.text);
-        asm/code_8085EB0.o(.text);
         src/code_80861A8.o(.text);
-        asm/code_80861B8.o(.text);
         src/code_80869E4.o(.text);
         src/code_8086A3C.o(.text);
         asm/code_8086A3C.o(.text);
@@ -351,11 +351,11 @@ SECTIONS {
         src/code_809C5C4.o(.text);
         asm/code_809C5C4.o(.text);
         src/code_809D148.o(.text);
-        asm/code_809D148.o(.text);
         src/ground_script.o(.text);
         asm/handleaction.o(.text);
         src/ground_script_1.o(.text);
         asm/ground_script.o(.text);
+        src/ground_script_2.o(.text);
         src/code_80A26CC.o(.text);
         asm/code_80A26CC_1.o(.text);
         src/ground_map.o(.text);
@@ -454,6 +454,7 @@ SECTIONS {
         src/code_80140DC.o(.rodata);
         data/data_80D47B8.o(.rodata);
         src/common_strings.o(.rodata);
+        src/code_8015080.o(.rodata);
         data/data_80DAF70.o(.rodata);
         src/code_801602C.o(.rodata);
         src/felicity_bank.o(.rodata);
@@ -519,6 +520,7 @@ SECTIONS {
         src/post_office_guide2.o(.rodata);
         src/code_8031D70.o(.rodata);
         src/adventure_log.o(.rodata);
+        src/friend_rescue.o(.rodata);
         data/friend_rescue.o(.rodata);
         data/credits1.o(.rodata);
         src/credits2.o(.rodata);
@@ -542,7 +544,6 @@ SECTIONS {
         src/personality_test1.o(.rodata);
         src/personality_test2.o(.rodata);
         src/code_803D0D8.o(.rodata);
-        data/data_80F4278.o(.rodata);
         src/dungeon_util.o(.rodata);
         data/data_80F4468.o(.rodata);
         src/dungeon_ai_movement.o(.rodata);

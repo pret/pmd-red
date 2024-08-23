@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_80118A4.h"
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
@@ -12,6 +13,7 @@
 #include "constants/wonder_mail.h"
 #include "cpu.h"
 #include "friend_rescue.h"
+#include "input.h"
 #include "items.h"
 #include "main_menu1.h"
 #include "memory.h"
@@ -30,6 +32,167 @@ extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
 extern TeamInventory *gTeamInventoryRef;
 
+
+// NOTE: MenuItems and UnkTextStruct2 defined in here..
+#include "data/friend_rescue_menus.h"
+
+const u8 gUnknown_80E25F4[] = "What would you like to do?";
+
+ALIGNED(4) const u8 gUnknown_80E2610[] = _(
+        "How would you like to send your\n"
+        "{COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}?");
+
+ALIGNED(4) const u8 gUnknown_80E2640[] = _(
+        "How would you like to receive your\n"
+        "friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}?");
+
+ALIGNED(4) const u8 gUnknown_80E2680[] = _(
+        "How would you like to send your\n"
+        "{COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}?");
+
+ALIGNED(4) const u8 gUnknown_80E26B0[] = _(
+        "How would you like to receive your\n"
+        "friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}?");
+
+ALIGNED(4) const u8 gUnknown_80E26F0[] = _(
+        "How would you like to send your\n"
+        "{COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?");
+
+ALIGNED(4) const u8 gUnknown_80E2728[] = _(
+        "How would you like to receive your\n"
+        "friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?");
+
+ALIGNED(4) const u8 gUnknown_80E276C[] = _(
+        "The GBA Game Pak does not have\n"
+        "an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} on it.");
+
+ALIGNED(4) const u8 gUnknown_80E27A4[] = _(
+        "If you accept an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}{COMMA} the\n"
+        "{COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} you received before\n"
+        "will be overwritten. Is that OK?");
+
+ALIGNED(4) const u8 gUnknown_80E2814[] = _(
+        "Please enter the {COLOR_1 LIGHT_BLUE}A-OK Mail password{END_COLOR_TEXT_1}.");
+
+ALIGNED(4) const u8 gUnknown_80E2840[] = _(
+        "The {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} will be received and\n"
+        "processed.");
+
+ALIGNED(4) const u8 gUnknown_80E2874[] = _(
+        "A {COLOR_1 LIGHT_BLUE}helper Pokémon{END_COLOR_TEXT_1} also arrived!");
+
+ALIGNED(4) const u8 gUnknown_80E2898[] = _(
+        "An {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} was received.\n"
+        "Your adventure will be saved.");
+
+ALIGNED(4) const u8 gUnknown_80E28D8[] = _(
+        "Resume your game using {COLOR_1 LIGHT_BLUE}Revive Team{END_COLOR_TEXT_1}.");
+
+ALIGNED(4) const u8 gUnknown_80E2904[] = _(
+        "Your friend{APOSTROPHE}s Mailbox is full.\n"
+        "This piece of mail cannot be sent.\n"
+        "The recipient must delete old mail.");
+
+ALIGNED(4) const u8 gUnknown_80E296C[] = _(
+        "Please choose the {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} you want\n"
+        "to send.");
+
+ALIGNED(4) const u8 gUnknown_80E29A0[] = _(
+        "This {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} will be sent.\n"
+        "Is that OK?");
+
+ALIGNED(4) const u8 gUnknown_80E29D0[] = _(
+        "Your {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} was sent.\n"
+        "Your adventure will be saved.");
+
+ALIGNED(4) const u8 gUnknown_80E2A0C[] = "Save completed.";
+
+ALIGNED(4) const u8 gUnknown_80E2A1C[] = _(
+        "Please give this password to the friend\n"
+        "coming to your rescue.");
+
+ALIGNED(4) const u8 gUnknown_80E2A5C[] = _(
+        "Here is the {COLOR_1 LIGHT_BLUE}SOS Mail password{END_COLOR_TEXT_1}.");
+
+ALIGNED(4) const u8 gUnknown_80E2A80[] = _(
+        "Here is the {COLOR_1 LIGHT_BLUE}A-OK Mail password{END_COLOR_TEXT_1}.");
+
+ALIGNED(4) const u8 gUnknown_80E2AA8[] = _(
+"Please give this password to the friend\n"
+"that you rescued.");
+
+ALIGNED(4) const u8 gUnknown_80E2AE4[] = _(
+"Please connect a {COLOR_1 LIGHT_BLUE}Link Cable{END_COLOR_TEXT_1}.\n"
+"When your friend{APOSTROPHE}s side is ready{COMMA} you may\n"
+"communicate and exchange data.");
+
+ALIGNED(4) const u8 gUnknown_80E2B54[] = _(
+"Your {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} was sent.\n"
+"Your adventure will be saved.");
+
+ALIGNED(4) const u8 gUnknown_80E2B90[] = _(
+"Using a {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}{COMMA}\n"
+"you can send a {COLOR_1 LIGHT_BLUE}helper Pokémon{END_COLOR_TEXT_1} to\n"
+"a friend.");
+
+extern u8 gUnknown_80E2BE0[];
+extern u8 gUnknown_80E2C48[];
+extern u8 gUnknown_80E2C94[];
+extern u8 gUnknown_80E2CD4[];
+extern u8 gUnknown_80E2CE8[];
+extern u8 gUnknown_80E2D30[];
+extern u8 gUnknown_80E2D60[];
+extern u8 gUnknown_80E2D7C[];
+extern u8 gUnknown_80E2DD0[];
+extern u8 gUnknown_80E2E20[];
+extern u8 gUnknown_80E2E54[];
+extern u8 gUnknown_80E2EB4[];
+extern u8 gUnknown_80E2F14[];
+extern u8 gUnknown_80E2F44[];
+extern u8 gUnknown_80E2F78[];
+extern u8 gUnknown_80E2FA0[];
+extern u8 gUnknown_80E2FEC[];
+extern u8 gUnknown_80E3030[];
+extern u8 gUnknown_80E3078[];
+extern u8 gUnknown_80E30A4[];
+extern u8 gUnknown_80E30D0[];
+extern u8 gUnknown_80E311C[];
+extern u8 gUnknown_80E314C[];
+extern u8 gUnknown_80E317C[];
+extern u8 gUnknown_80E319C[];
+extern u8 gUnknown_80E31D8[];
+extern u8 gUnknown_80E31FC[];
+extern u8 gUnknown_80E31FC[];
+extern u8 gUnknown_80E3220[];
+extern u8 gUnknown_80E3248[];
+extern u8 gUnknown_80E3288[];
+extern u8 gUnknown_80E32C4[];
+extern u8 gUnknown_80E331C[];
+extern u8 gUnknown_80E3378[];
+extern u8 gUnknown_80E339C[];
+extern u8 gUnknown_80E33D8[];
+extern u8 gUnknown_80E3430[];
+extern u8 gUnknown_80E34B0[];
+extern u8 gUnknown_80E34F0[];
+extern u8 gUnknown_80E352C[];
+extern u8 gUnknown_80E355C[];
+extern u8 gUnknown_80E35AC[];
+extern u8 gUnknown_80E35E8[];
+extern u8 gUnknown_80E360C[];
+extern u8 gUnknown_80E3644[];
+extern u8 gUnknown_80E367C[];
+extern u8 gUnknown_80E3690[];
+extern u8 gUnknown_80E3818[];
+extern u8 gUnknown_80E3998[];
+extern u8 gUnknown_80E3B1C[];
+extern u8 gUnknown_80E3BF8[];
+extern u8 gUnknown_80E3DE4[];
+extern u8 gUnknown_80E3E98[];
+extern u8 gUnknown_80E4014[];
+extern u8 gUnknown_80E4130[];
+extern u8 gUnknown_80E41DC[];
+extern u8 gUnknown_80E4314[];
+extern u8 gUnknown_80E4480[];
 extern u8 gUnknown_80E44A4[];
 extern u8 gUnknown_80E4500[];
 extern u8 gUnknown_80E4550[];
@@ -42,216 +205,98 @@ extern u8 gUnknown_80E4704[];
 extern u8 gUnknown_80E4744[];
 extern u8 gUnknown_80E4788[];
 extern u8 gUnknown_80E47D8[];
-extern u8 gUnknown_80E4480[];
 extern u8 gUnknown_80E482C[];
-extern u8 gUnknown_80E25F4[];
-extern u8 gUnknown_80E2D7C[];
-extern u8 gUnknown_80E2E20[];
-extern u8 gUnknown_80E319C[];
-extern u8 gUnknown_80E311C[];
-extern u8 gUnknown_80E32C4[];
-extern u8 gUnknown_80E4314[];
-extern u8 gUnknown_80E41DC[];
-extern u8 gUnknown_80E2FEC[];
-extern u8 gUnknown_80E2898[];
-extern u8 gUnknown_80E2B54[];
-extern u8 gUnknown_80E29D0[];
-extern u8 gUnknown_80E3220[];
-extern u8 gUnknown_80E2A0C[];
-extern u8 gUnknown_80E2610[];
-extern u8 gUnknown_80E2640[];
-extern u8 gUnknown_80E2680[];
-extern u8 gUnknown_80E26B0[];
-extern u8 gUnknown_80E26F0[];
-extern u8 gUnknown_80E2728[];
-extern u8 gUnknown_80E3690[];
-extern u8 gUnknown_80E3818[];
-extern u8 gUnknown_80E3998[];
-extern u8 gUnknown_80E3B1C[];
-extern u8 gUnknown_80E367C[];
-extern u8 gUnknown_80E3BF8[];
-extern u8 gUnknown_80E3DE4[];
-extern u8 gUnknown_80E4014[];
-extern u8 gUnknown_80E3E98[];
-extern u8 gUnknown_80E4130[];
-extern u8 gUnknown_80E2E54[];
-extern u8 gUnknown_80E2EB4[];
-extern u8 gUnknown_80E2DD0[];
-extern u8 gUnknown_80E2FA0[];
-extern u8 gUnknown_80E2F14[];
-extern u8 gUnknown_80E2F44[];
-extern u8 gUnknown_80E30A4[];
-extern u8 gUnknown_80E2F78[];
-extern u8 gUnknown_80E360C[];
-extern u8 gUnknown_80E3644[];
-extern u8 gUnknown_80E35E8[];
-extern u8 gUnknown_80E35AC[];
-extern u8 gUnknown_80E355C[];
-extern u8 gUnknown_80E352C[];
-extern u8 gUnknown_80E34F0[];
-extern u8 gUnknown_80E34B0[];
-extern u8 gUnknown_80E3430[];
-extern u8 gUnknown_80E33D8[];
-extern u8 gUnknown_80E339C[];
-extern u8 gUnknown_80E3378[];
-extern u8 gUnknown_80E331C[];
-extern u8 gUnknown_80E3288[];
-extern u8 gUnknown_80E3248[];
-extern u8 gUnknown_80E31FC[];
-extern u8 gUnknown_80E276C[];
-extern u8 gUnknown_80E27A4[];
-extern u8 gUnknown_80E2CD4[];
-extern u8 gUnknown_80E3030[];
-extern u8 gUnknown_80E3078[];
-extern u8 gUnknown_80E31D8[];
-extern u8 gUnknown_80E2CE8[];
-extern u8 gUnknown_80E2B90[];
-extern u8 gUnknown_80E2AE4[];
-extern u8 gUnknown_80E2A80[];
-extern u8 gUnknown_80E2AA8[];
-extern u8 gUnknown_80E2D60[];
-extern u8 gUnknown_80E2BE0[];
-extern u8 gUnknown_80E2C48[];
-extern u8 gUnknown_80E29A0[];
-extern u8 gUnknown_80E2A5C[];
-extern u8 gUnknown_80E2904[];
-extern u8 gUnknown_80E2C94[];
-extern u8 gUnknown_80E2D30[];
-extern u8 gUnknown_80E296C[];
-extern u8 gUnknown_80E314C[];
-extern u8 gUnknown_80E2A1C[];
-extern u8 gUnknown_80E2840[];
-extern u8 gUnknown_80E2874[];
-extern u8 gUnknown_80E317C[];
-extern u8 gUnknown_80E28D8[];
-extern u8 gUnknown_80E2814[];
-extern u8 gUnknown_80E30D0[];
 extern u8 gUnknown_80E48A8[];
-extern u8 gUnknown_80E49C4[];
-extern u8 gUnknown_80E4704[];
 extern u8 gUnknown_80E48E8[];
 extern u8 gUnknown_80E4928[];
 extern u8 gUnknown_80E4964[];
 extern u8 gUnknown_80E499C[];
-extern u8 gUnknown_80E460C[];
-extern u8 gUnknown_80E31FC[];
-
-extern MenuItem gUnknown_80E20B8;
-extern MenuItem gUnknown_80E2108;
-extern MenuItem gUnknown_80E20E0;
-extern MenuItem gUnknown_80E2068;
-extern MenuItem gUnknown_80E24F8;
-extern MenuItem gUnknown_80E2554;
-extern MenuItem gUnknown_80E22F0;
-extern MenuItem gUnknown_80E236C;
-extern MenuItem gUnknown_80E2440;
-extern MenuItem gUnknown_80E2470;
-extern MenuItem gUnknown_80E24B0;
-extern MenuItem gUnknown_80E2130;
-extern MenuItem gUnknown_80E2190;
-extern MenuItem gUnknown_80E21B8;
-extern MenuItem gUnknown_80E2268;
-extern MenuItem gUnknown_80E2218;
-extern MenuItem gUnknown_80E2240;
-extern MenuItem gUnknown_80E2290;
-extern MenuItem gUnknown_80E22D0;
-extern MenuItem gUnknown_80E234C;
-extern MenuItem gUnknown_80E24D8;
-extern MenuItem gUnknown_80E2458;
-extern MenuItem gUnknown_80E2408;
-extern MenuItem gUnknown_80E23A8;
-extern MenuItem gUnknown_80E22B4;
-
-extern UnkTextStruct2 gUnknown_80E231C;
-extern UnkTextStruct2 gUnknown_80E23F0;
-extern UnkTextStruct2 gUnknown_80E2334;
-
-extern MenuItem gUnknown_80E25B4;
+extern u8 gUnknown_80E49C4[];
 
 EWRAM_DATA_2 WonderMailStruct_203B33C *gUnknown_203B33C = {0};
 
 extern u8 sub_8039880(void);
 
-extern void sub_8035300(void);
-extern void QueueNextFriendRescueState(u32);
-extern void nullsub_41(void);
-extern void nullsub_42(void);
-extern void nullsub_43(void);
-extern void nullsub_44(void);
-extern void nullsub_45(void);
-extern void nullsub_46(void);
-extern void nullsub_47(void);
-extern void nullsub_48(void);
-extern void nullsub_49(void);
-extern void nullsub_50(void);
-extern void nullsub_51(void);
-extern void sub_8035374(void);
-extern void sub_80353BC(void);
-extern void sub_8033A2C(void);
-extern void sub_803477C(void);
-extern void sub_80347AC(void);
-extern void sub_80347C8(void);
-extern void sub_80347E4(void);
-extern void sub_8034804(void);
-extern void sub_80344C0(void);
-extern void sub_8034478(void);
-extern void sub_80344A0(void);
-extern void sub_803418C(void);
-extern void sub_8034254(void);
-extern void sub_8034310(void);
-extern void sub_8034378(void);
-extern void sub_80343C4(void);
-extern void sub_8034404(void);
-extern void sub_8034500(void);
-extern void sub_8034590(void);
-extern void sub_803464C(void);
-extern void sub_80346A8(void);
-extern void sub_80346D8(void);
-extern void sub_8034700(void);
-extern void sub_8034720(void);
-extern void sub_803473C(void);
-extern void sub_8033FB4(void);
-extern void sub_8034074(void);
-extern void sub_8034130(void);
-extern void sub_8033FE4(void);
-extern void sub_8033D74(void);
-extern void sub_8033D94(void);
-extern void sub_8033DBC(void);
-extern void sub_8033F64(void);
-extern void sub_8033C54(void);
-extern void sub_8033CAC(void);
-extern void sub_8033D48(void);
-extern void sub_8035424(void);
-extern void sub_8034970(void);
-extern void sub_80351E0(void);
-extern void sub_8034D74(void);
-extern void sub_8034EF0(void);
-extern void sub_8034F38(void);
-extern void sub_80352A4(void);
-extern void sub_8034EC8(void);
-extern void sub_8033B8C(void);
-extern void sub_80339C8(void);
-extern void sub_80348C4(void);
-extern void sub_803482C(void);
-extern void sub_80349B0(void);
-extern void sub_8034A70(void);
-extern void sub_8034B2C(void);
-extern void sub_80349E0(void);
-extern void sub_8034B88(void);
-extern void sub_8034C98(void);
-extern void sub_8034C38(void);
-extern void sub_8034D54(void);
-extern void sub_8034F18(void);
-extern void sub_8034F58(void);
-extern void sub_8034F88(void);
-extern void sub_8035018(void);
-extern void sub_8035038(void);
-extern void sub_8035094(void);
-extern void sub_80350F4(void);
-extern void sub_803517C(void);
-extern void sub_8035210(void);
-extern void sub_8035430(void);
-extern void sub_8034848(void);
+void sub_8035300(void);
+void QueueNextFriendRescueState(u32);
+void nullsub_41(void);
+void nullsub_42(void);
+void nullsub_43(void);
+void nullsub_44(void);
+void nullsub_45(void);
+void nullsub_46(void);
+void nullsub_47(void);
+void nullsub_48(void);
+void nullsub_49(void);
+void nullsub_50(void);
+void nullsub_51(void);
+void sub_80339C8(void);
+void sub_8033A2C(void);
+void sub_8033B8C(void);
+void sub_8033C54(void);
+void sub_8033CAC(void);
+void sub_8033D48(void);
+void sub_8033D74(void);
+void sub_8033D94(void);
+void sub_8033DBC(void);
+void sub_8033F64(void);
+void sub_8033FB4(void);
+void sub_8033FE4(void);
+void sub_8034074(void);
+void sub_8034130(void);
+void sub_803418C(void);
+void sub_8034254(void);
+void sub_8034310(void);
+void sub_8034378(void);
+void sub_80343C4(void);
+void sub_8034404(void);
+void sub_8034478(void);
+void sub_80344A0(void);
+void sub_80344C0(void);
+void sub_8034500(void);
+void sub_8034590(void);
+void sub_803464C(void);
+void sub_80346A8(void);
+void sub_80346D8(void);
+void sub_8034700(void);
+void sub_8034720(void);
+void sub_803473C(void);
+void sub_803477C(void);
+void sub_80347AC(void);
+void sub_80347C8(void);
+void sub_80347E4(void);
+void sub_8034804(void);
+void sub_803482C(void);
+void sub_8034848(void);
+void sub_80348C4(void);
+void sub_8034970(void);
+void sub_80349B0(void);
+void sub_80349E0(void);
+void sub_8034A70(void);
+void sub_8034B2C(void);
+void sub_8034B88(void);
+void sub_8034C38(void);
+void sub_8034C98(void);
+void sub_8034D54(void);
+void sub_8034D74(void);
+void sub_8034EC8(void);
+void sub_8034EF0(void);
+void sub_8034F18(void);
+void sub_8034F38(void);
+void sub_8034F58(void);
+void sub_8034F88(void);
+void sub_8035018(void);
+void sub_8035038(void);
+void sub_8035094(void);
+void sub_80350F4(void);
+void sub_803517C(void);
+void sub_80351E0(void);
+void sub_8035210(void);
+void sub_80352A4(void);
+void sub_8035374(void);
+void sub_80353BC(void);
+void sub_8035424(void);
+void sub_8035430(void);
 
 extern u32 sub_8030DA0(void);
 extern void sub_8030DE4(void);
@@ -262,13 +307,10 @@ extern void sub_8030D40(u8, u32);
 extern void sub_8030810(u32);
 extern u8 sub_80307EC(void);
 extern u32 sub_8031DCC(void);
-extern void sub_8031E10(void);
 extern void sub_8031E00(void);
 extern u32 sub_8039068(u32, u8 *passwordBuffer, unkStruct_203B480 *r0);
 
-extern void sub_803084C(void);
 extern void sub_8031E10(void);
-extern void sub_8030DE4(void);
 extern u8 sub_800D588(void);
 extern u32 sub_8023CE8(void);
 extern u32 sub_80306A8(u32 wonderMailType, u32, UnkTextStruct2_sub *, u32);
@@ -277,13 +319,7 @@ extern void sub_803092C(void);
 extern bool8 sub_8031D70(u32 mailIndex, s32);
 extern s32 sub_8037B28(u32);
 
-extern s32 CountMailType(u8 mailType);
 extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
-unkStruct_203B480 * GetMailatIndex(u8 index);
-extern s32 GetMailIndex(u8 mailType, u32 param_2);
-extern char * GetMonSpecies(s16 index);
-extern void MemoryFill8(u8 *dest, u8 value, s32 size);
-extern void ResetUnusedInputStruct(void);
 extern void sprintfStatic(char *buffer, const char *text, ...);
 
 u32 CreateFriendRescueMenu(void)
@@ -692,70 +728,70 @@ void sub_8032828(void)
         case 0x0:
             if (CountMailType(WONDER_MAIL_TYPE_SOS) == 0 && CountMailType(WONDER_MAIL_TYPE_THANK_YOU) == 0) {
                 if (gUnknown_203B33C->unk52C != 0)
-                    sub_8014248(&gUnknown_80E25F4[0], 0, 0, &gUnknown_80E2108, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E25F4[0], 0, 0, gUnknown_80E2108, NULL, 4, 0, NULL, 0x101);
                 else
-                    sub_8014248(&gUnknown_80E25F4[0], 0, 0, &gUnknown_80E20B8, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E25F4[0], 0, 0, gUnknown_80E20B8, NULL, 4, 0, NULL, 0x101);
             }
             else {
                 if (gUnknown_203B33C->unk52C != 0)
-                    sub_8014248(&gUnknown_80E25F4[0], 0, 0, &gUnknown_80E20E0, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E25F4[0], 0, 0, gUnknown_80E20E0, NULL, 4, 0, NULL, 0x101);
                 else
-                    sub_8014248(&gUnknown_80E25F4[0], 0, 0, &gUnknown_80E2068, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E25F4[0], 0, 0, gUnknown_80E2068, NULL, 4, 0, NULL, 0x101);
             }
             break;
         case 0x1:
             if (CountMailType(WONDER_MAIL_TYPE_SOS) == 0 && CountMailType(WONDER_MAIL_TYPE_THANK_YOU) == 0) {
                 if (gUnknown_203B33C->unk52C != 0)
-                    sub_8014248(&gUnknown_80E25F4[0], 0, 0, &gUnknown_80E2108, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E25F4[0], 0, 0, gUnknown_80E2108, NULL, 4, 0, NULL, 0x101);
                 else
-                    sub_8014248(&gUnknown_80E25F4[0], 0, 0, &gUnknown_80E20B8, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E25F4[0], 0, 0, gUnknown_80E20B8, NULL, 4, 0, NULL, 0x101);
             }
             else {
                 if (gUnknown_203B33C->unk52C != 0)
-                    sub_8014248(&gUnknown_80E25F4[0], 0, 0, &gUnknown_80E20E0, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E25F4[0], 0, 0, gUnknown_80E20E0, NULL, 4, 0, NULL, 0x101);
                 else
-                    sub_8014248(&gUnknown_80E25F4[0], 0, 0, &gUnknown_80E2068, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E25F4[0], 0, 0, gUnknown_80E2068, NULL, 4, 0, NULL, 0x101);
              }
             break;
         case 0x3:
             if (CountMailType(WONDER_MAIL_TYPE_AOK) != 0)
-                sub_8014248(&gUnknown_80E25F4[0], 0, 3, &gUnknown_80E2130, NULL, 4, 0, NULL, 0x101);
+                sub_8014248(&gUnknown_80E25F4[0], 0, 3, gUnknown_80E2130, NULL, 4, 0, NULL, 0x101);
             else
-                sub_8014248(&gUnknown_80E25F4[0], 0, 3, &gUnknown_80E2190, NULL, 4, 0, NULL, 0x101);
+                sub_8014248(&gUnknown_80E25F4[0], 0, 3, gUnknown_80E2190, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x4:
             if (CountMailType(WONDER_MAIL_TYPE_SOS) == 0) {
                 if (CountMailType(WONDER_MAIL_TYPE_THANK_YOU) == 0)
-                    sub_8014248(&gUnknown_80E25F4[0], 0, 17, &gUnknown_80E2268, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E25F4[0], 0, 17, gUnknown_80E2268, NULL, 4, 0, NULL, 0x101);
                 else
-                    sub_8014248(&gUnknown_80E25F4[0], 0, 17, &gUnknown_80E2218, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E25F4[0], 0, 17, gUnknown_80E2218, NULL, 4, 0, NULL, 0x101);
             }
             else {
                 if (CountMailType(WONDER_MAIL_TYPE_THANK_YOU) == 0)
-                    sub_8014248(&gUnknown_80E25F4[0], 0, 17, &gUnknown_80E2240, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E25F4[0], 0, 17, gUnknown_80E2240, NULL, 4, 0, NULL, 0x101);
                 else
-                    sub_8014248(&gUnknown_80E25F4[0], 0, 17, &gUnknown_80E21B8, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E25F4[0], 0, 17, gUnknown_80E21B8, NULL, 4, 0, NULL, 0x101);
             }
             break;
         case 0xE:
             switch(gUnknown_203B33C->unk528) {
                 case 0x11:
-                    sub_8014248(&gUnknown_80E2610[0], 0, 11, &gUnknown_80E236C, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E2610[0], 0, 11, gUnknown_80E236C, NULL, 4, 0, NULL, 0x101);
                     break;
                 case 0x3:
-                    sub_8014248(&gUnknown_80E2640[0], 0, 11, &gUnknown_80E236C, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E2640[0], 0, 11, gUnknown_80E236C, NULL, 4, 0, NULL, 0x101);
                     break;
                 case 0x4:
-                    sub_8014248(&gUnknown_80E2680[0], 0, 11, &gUnknown_80E236C, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E2680[0], 0, 11, gUnknown_80E236C, NULL, 4, 0, NULL, 0x101);
                     break;
                 case 0x12:
-                    sub_8014248(&gUnknown_80E26B0[0], 0, 11, &gUnknown_80E236C, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E26B0[0], 0, 11, gUnknown_80E236C, NULL, 4, 0, NULL, 0x101);
                     break;
                 case 0x13:
-                    sub_8014248(&gUnknown_80E26F0[0], 0, 11, &gUnknown_80E236C, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E26F0[0], 0, 11, gUnknown_80E236C, NULL, 4, 0, NULL, 0x101);
                     break;
                 case 0x14:
-                    sub_8014248(&gUnknown_80E2728[0], 0, 11, &gUnknown_80E236C, NULL, 4, 0, NULL, 0x101);
+                    sub_8014248(&gUnknown_80E2728[0], 0, 11, gUnknown_80E236C, NULL, 4, 0, NULL, 0x101);
                     break;
             }
             break;
@@ -763,7 +799,7 @@ void sub_8032828(void)
             sub_80141B4(&gUnknown_80E276C[0], 0, 0, 0x101);
             break;
         case 0x3D:
-            sub_8014248(&gUnknown_80E27A4[0], 0, 6, &gUnknown_80E2458, NULL, 4, 0, NULL, 0x101);
+            sub_8014248(&gUnknown_80E27A4[0], 0, 6, gUnknown_80E2458, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x43:
             sub_80141B4(&gUnknown_80E2814[0], 0, 0, 0x101);
@@ -802,7 +838,7 @@ void sub_8032828(void)
             }
             break;
         case 0x35:
-            sub_8014248(&gUnknown_80E29A0[0], 0, 6, &gUnknown_80E22B4, NULL, 4, 0, NULL, 0x101);
+            sub_8014248(&gUnknown_80E29A0[0], 0, 6, gUnknown_80E22B4, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x37:
             switch ((u32)gUnknown_203B33C->unk524) {
@@ -864,7 +900,7 @@ void sub_8032828(void)
             sub_80141B4(&gUnknown_80E2B90[0], 0, 0, 0x101);
             break;
         case 0x21:
-            sub_8014248(&gUnknown_80E2BE0[0], 0, 15, &gUnknown_80E23A8, NULL, 4, 0, NULL, 0x101);
+            sub_8014248(&gUnknown_80E2BE0[0], 0, 15, gUnknown_80E23A8, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x25:
             sub_80141B4(&gUnknown_80E2C48[0], 0, 0, 0x101);
@@ -878,15 +914,15 @@ void sub_8032828(void)
             break;
         case 0x27:
             sub_8006518(gUnknown_203B33C->unk35C);
-            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E2334, &gUnknown_80E234C, TRUE, 0, FALSE);
+            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E2334, gUnknown_80E234C, TRUE, 0, FALSE);
             sub_8023DA4();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;
         case 0x24:
-            sub_8014248(&gUnknown_80E2C94[0], 0, 16, &gUnknown_80E22F0, NULL, 4, 0, NULL, 0x101);
+            sub_8014248(&gUnknown_80E2C94[0], 0, 16, gUnknown_80E22F0, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x29:
-            sub_8014248(&gUnknown_80E2CD4[0], 0, 6, &gUnknown_80E22D0, NULL, 4, 0, NULL, 0x101);
+            sub_8014248(&gUnknown_80E2CD4[0], 0, 6, gUnknown_80E22D0, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x1C:
             sub_80141B4(&gUnknown_80E2CE8[0], 0, 0, 0x101);
@@ -899,17 +935,17 @@ void sub_8032828(void)
             }
             break;
         case 0x20:
-            sub_8014248(&gUnknown_80E2D30[0], 0, 6, &gUnknown_80E22B4, NULL, 4, 0, NULL, 0x101);
+            sub_8014248(&gUnknown_80E2D30[0], 0, 6, gUnknown_80E22B4, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x22:
             sub_80141B4(&gUnknown_80E2D60[0], 0, 0, 0x101);
             break;
         case 0x5:
-            sub_8014248(&gUnknown_80E2D7C[0], 0, 6, &gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
+            sub_8014248(&gUnknown_80E2D7C[0], 0, 6, gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
             break;
         case 0xA:
         case 0x4C:
-            sub_8014248(&gUnknown_80E2E20[0], 0, 6, &gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
+            sub_8014248(&gUnknown_80E2E20[0], 0, 6, gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
             break;
         case 0xB:
         case 0x4D:
@@ -1005,7 +1041,7 @@ void sub_8032828(void)
             sub_80306A8(1, 0, NULL, 6);
             break;
         case 0x15:
-            sub_8014248(&gUnknown_80E2F78[0], 0, 6, &gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
+            sub_8014248(&gUnknown_80E2F78[0], 0, 6, gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
             break;
         case 0xF:
             sub_80141B4(&gUnknown_80E2FA0[0], 0, 0, 0x101);
@@ -1034,14 +1070,14 @@ void sub_8032828(void)
             sub_80151C0(4, gUnknown_203B33C->passwordBuffer);
             break;
         case 0x5A:
-            sub_8014248(&gUnknown_80E30A4[0], 0, 6, &gUnknown_80E2458, NULL, 4, 0, NULL, 0x101);
+            sub_8014248(&gUnknown_80E30A4[0], 0, 6, gUnknown_80E2458, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x5B:
             sub_80141B4(gUnknown_80E30D0, 0, 0, 0x101);
             break;
         case 0x5D:
             sub_8006518(gUnknown_203B33C->unk35C);
-            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, &gUnknown_80E2408, TRUE, 0, FALSE);
+            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, gUnknown_80E2408, TRUE, 0, FALSE);
             sub_803092C();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;
@@ -1057,7 +1093,7 @@ void sub_8032828(void)
             break;
         case 0x60:
             sub_8006518(gUnknown_203B33C->unk35C);
-            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E23F0, &gUnknown_80E2408, TRUE, 0, FALSE);
+            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E23F0, gUnknown_80E2408, TRUE, 0, FALSE);
             sub_801CCD8();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;
@@ -1173,7 +1209,7 @@ void sub_8032828(void)
             sub_80141B4(gUnknown_80E3288, 0, 0, 0x101);
             break;
         case 0x69:
-            sub_8014248(&gUnknown_80E2D7C[0], 0, 6, &gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
+            sub_8014248(&gUnknown_80E2D7C[0], 0, 6, gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x59:
             sub_80922B4(buffer, GetPlayerPokemonStruct()->name, POKEMON_NAME_LENGTH);
@@ -1181,7 +1217,7 @@ void sub_8032828(void)
             sub_80141B4(gUnknown_203B33C->unk424, 0, 0, 0x101);
             break;
         case 0x58:
-            sub_8014248(&gUnknown_80E331C[0], 0, 6, &gUnknown_80E24D8, NULL, 4, 0, NULL, 0x101);
+            sub_8014248(&gUnknown_80E331C[0], 0, 6, gUnknown_80E24D8, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x75:
             sub_80141B4(gUnknown_80E317C, 0, 0, 0x101);
@@ -1193,16 +1229,16 @@ void sub_8032828(void)
             sub_80141B4(&gUnknown_80E3378[0], 0, 0, 0x101);
             break;
         case 0x56:
-            sub_8014248(&gUnknown_80E339C[0], 0, 22, &gUnknown_80E24B0, NULL, 4, 0, NULL, 0x101);
+            sub_8014248(&gUnknown_80E339C[0], 0, 22, gUnknown_80E24B0, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x55:
-            sub_8014248(&gUnknown_80E33D8[0], 0, 21, &gUnknown_80E2470, NULL, 4, 0, NULL, 0x101);
+            sub_8014248(&gUnknown_80E33D8[0], 0, 21, gUnknown_80E2470, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x53:
             sub_80141B4(&gUnknown_80E3430[0], 0, 0, 0x101);
             break;
         case 0x54:
-            sub_8014248(&gUnknown_80E34B0[0], 0, 6, &gUnknown_80E2440, NULL, 4, 0, NULL, 0x101);
+            sub_8014248(&gUnknown_80E34B0[0], 0, 6, gUnknown_80E2440, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x46:
             sub_80141B4(&gUnknown_80E34F0[0], 0, 0, 0x101);
@@ -1220,12 +1256,12 @@ void sub_8032828(void)
         case 0x1E:
         case 0x33:
             sub_8006518(gUnknown_203B33C->unk35C);
-            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, &gUnknown_80E234C, TRUE, 0, FALSE);
+            SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, gUnknown_80E234C, TRUE, 0, FALSE);
             sub_803092C();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;
         case 0x4A:
-            sub_8014248(&gUnknown_80E352C[0], 0, 6, &gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
+            sub_8014248(&gUnknown_80E352C[0], 0, 6, gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x44:
             sub_80141B4(&gUnknown_80E355C[0], 0, 0, 0x101);
@@ -1238,12 +1274,12 @@ void sub_8032828(void)
             break;
         case 0x52:
             if (gUnknown_203B33C->unk40 == 6)
-                sub_8014248(&gUnknown_80E360C[0], 0, 11, &gUnknown_80E236C, NULL, 4, 0, NULL, 0x101);
+                sub_8014248(&gUnknown_80E360C[0], 0, 11, gUnknown_80E236C, NULL, 4, 0, NULL, 0x101);
             else
-                sub_8014248(&gUnknown_80E3644[0], 0, 11, &gUnknown_80E236C, NULL, 4, 0, NULL, 0x101);
+                sub_8014248(&gUnknown_80E3644[0], 0, 11, gUnknown_80E236C, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x7C:
-            sub_8014248(&gUnknown_80E367C[0], 0, gUnknown_203B33C->unk564, &gUnknown_80E25B4, 0, 4, 0, 0, 0x101);
+            sub_8014248(&gUnknown_80E367C[0], 0, gUnknown_203B33C->unk564, gUnknown_80E25B4, 0, 4, 0, 0, 0x101);
             break;
         case 0x7D:
             switch (gUnknown_203B33C->unk564) {
@@ -1262,7 +1298,7 @@ void sub_8032828(void)
             }
             break;
         case 0x7A:
-            sub_8014248(&gUnknown_80E367C[0], 0, gUnknown_203B33C->unk564, &gUnknown_80E2554, 0, 4, 0, 0, 0x101);
+            sub_8014248(&gUnknown_80E367C[0], 0, gUnknown_203B33C->unk564, gUnknown_80E2554, 0, 4, 0, 0, 0x101);
             break;
         case 0x7B:
             switch (gUnknown_203B33C->unk564) {
@@ -1284,7 +1320,7 @@ void sub_8032828(void)
             }
             break;
         case 0x78:
-            sub_8014248(&gUnknown_80E367C[0], 0, gUnknown_203B33C->unk564, &gUnknown_80E24F8, 0, 4, 0, 0, 0x101);
+            sub_8014248(&gUnknown_80E367C[0], 0, gUnknown_203B33C->unk564, gUnknown_80E24F8, 0, 4, 0, 0, 0x101);
             break;
         case 0x79:
             switch (gUnknown_203B33C->unk564) {
@@ -1648,7 +1684,7 @@ void sub_8033DBC(void)
                 switch(sub_8039068(mailMode, gUnknown_203B33C->passwordBuffer, &mail))
                 {
                     case PASSWORD_ENTRY_INCORRECT_PASSWORD:
-                        sub_8014248(gUnknown_80E48A8, 0, 6, &gUnknown_80E2290, 0, 4, 0, 0, 0x101);
+                        sub_8014248(gUnknown_80E48A8, 0, 6, gUnknown_80E2290, 0, 4, 0, 0, 0x101);
                         SetFriendRescueMenuState(0x1B);
                         break;
                     case PASSWORD_ENTRY_NOT_SOS_MAIL:
@@ -2532,7 +2568,7 @@ void sub_8034D74(void)
                 switch(sub_8039068(PASSWORD_ENTRY_THANK_YOU_MAIL_MODE, gUnknown_203B33C->passwordBuffer, &mail))
                 {
                     case PASSWORD_ENTRY_INCORRECT_PASSWORD:
-                        sub_8014248(gUnknown_80E48A8, 0, 6, &gUnknown_80E2440, 0, 4, 0, 0, 0x101);
+                        sub_8014248(gUnknown_80E48A8, 0, 6, gUnknown_80E2440, 0, 4, 0, 0, 0x101);
                         SetFriendRescueMenuState(0x74);
                         break;
                     case PASSWORD_ENTRY_NOT_THANK_YOU_MAIL:

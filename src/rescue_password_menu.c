@@ -1,6 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80130A8.h"
+#include "code_803D0D8.h"
 #include "code_8094F88.h"
 #include "constants/main_menu.h"
 #include "dungeon.h"
@@ -251,7 +252,6 @@ void sub_8039174(void);
 void DisplayPasswordAcceptScreen(void);
 u32 sub_8039068(u32, u8 *passwordBuffer, unkStruct_203B480 *r0);
 void sub_80391F8(void);
-bool8 sub_803D204(u8 *, unkStruct_203B480 *);
 u32 ConvertMenutoRescuePasswordState(u32);
 
 void CreateRescuePasswordMenu(u32 currMenu)

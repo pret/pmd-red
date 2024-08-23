@@ -19,7 +19,7 @@ struct unkStruct_203B274
     unkStruct_808E218_arg unk8;
     struct_Sub80095E4_2 s348;
 };
-extern struct unkStruct_203B274 *gUnknown_203B274;
+EWRAM_DATA_2 struct unkStruct_203B274 *gUnknown_203B274 = {0};
 
 extern u8 gAvailablePokemonNames[];
 

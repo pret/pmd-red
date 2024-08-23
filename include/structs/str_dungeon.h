@@ -12,6 +12,7 @@
 #define DUNGEON_MAX_SIZE_X 56
 #define DUNGEON_MAX_SIZE_Y 32
 #define DUNGEON_MAX_WILD_POKEMON 16
+#define DUNGEON_MAX_WILD_POKEMON_BODY_SIZE 16
 #define DUNGEON_MAX_POKEMON MAX_TEAM_MEMBERS + DUNGEON_MAX_WILD_POKEMON
 #define DUNGEON_MAX_TRAPS 64
 #define DUNGEON_MAX_ITEMS 64
@@ -269,7 +270,12 @@ typedef struct Dungeon
     /* 0x17B44 */ OpenedFile *sprites[MONSTER_MAX];
     /* 0x181E4 */ OpenedFile *paletFile;
     /* 0x181E8 */ unkDungeonGlobal_unk181E8_sub unk181e8;
-    u8 fill18220[0x1C578 - 0x18220];
+    u8 fill18220[0x1C06C - 0x18220];
+    u32 unk1C06C; 
+    u8 fill1C070[0x1C570 - 0x1C070];
+    u8 unk1C570;
+    u8 unk1C571;
+    u8 fill1C572[0x1C578 - 0x1C572];
     u8 unk1C578;
     u8 fill1C579[0x1C57E - 0x1C579];
     u8 unk1C57E;

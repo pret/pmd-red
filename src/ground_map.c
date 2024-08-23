@@ -13,9 +13,7 @@ extern const CallbackData gUnknown_811736C;
 extern const DebugLocation gUnknown_8117538[];
 
 extern void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s16 group, s8 sector);
-extern void sub_809D648(void *);
 extern void sub_80A2D00(unkStruct_3001B70 *);
-extern void InitActionScriptData(GroundMapAction *, const DebugLocation *);
 extern void sub_80A2D68(unkStruct_3001B70 *);
 extern void sub_80A2D88(unkStruct_3001B70 *);
 
@@ -32,7 +30,7 @@ void FreeGroundMapAction(void)
 {
     GroundMap_Reset();
     sub_80A5EBC();
-    sub_809D648(gGroundMapAction);
+    sub_809D648((Action *)gGroundMapAction);
     MemoryFree(gGroundMapAction);
     gGroundMapAction = NULL;
 }
@@ -41,7 +39,7 @@ void GroundMap_Reset(void)
 {
     sub_80015C0(0, 0x37);
     sub_80015C0(0, 0x38);
-    InitActionScriptData(gGroundMapAction, gUnknown_8117538);
+    InitActionScriptData((Action *)gGroundMapAction, gUnknown_8117538);
 
     if (gUnknown_3001B70 != NULL) {
         sub_80A2D00(gUnknown_3001B70);

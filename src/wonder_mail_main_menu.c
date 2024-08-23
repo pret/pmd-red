@@ -5,6 +5,7 @@
 #include "code_801B3C0.h"
 #include "code_803B050.h"
 #include "code_801C8C4.h"
+#include "code_803D0D8.h"
 #include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
 #include "constants/wonder_mail.h"
@@ -77,7 +78,6 @@ extern void sub_802EF48(void);
 
 extern s32 sub_8037B28(u32);
 
-extern bool8 DecodeWonderMailPassword(u8 *, WonderMail *);
 extern bool8 IsValidWonderMail(WonderMail *WonderMailData);
 
 void PrintWonderMailMainMenuError(u32);

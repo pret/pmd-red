@@ -17,13 +17,150 @@ extern u8 gUnknown_811656C[];
 extern DebugLocation gUnknown_81165C8;
 
 extern void sub_809D520(void *);
-extern void InitScriptData(void *);
 extern u8 sub_80AC378(void);
 extern u8 sub_80AD290(void);
 extern u8 sub_80A8B74(void);
 extern u8 sub_809A750(void);
-extern ScriptCommand *sub_80A2460(Action *param_1, u32);
+extern s32 sub_80A882C(s16);
+extern s32 sub_80AC240(s16);
+extern s32 sub_80AD158(s16);
 void FatalError(u32 *, const char *, ...) __attribute__((noreturn));
+
+// -1 didn't match
+void sub_809D520(void *a0)
+{
+    u16 *ptr = a0;
+    u16 v = 0xFFFF;
+    *ptr = v;
+}
+
+s32 sub_809D52C(void *a0)
+{
+    s16 *ptr = a0;
+
+    switch (ptr[0])
+    {
+    case 0: return 0;
+    case 1: return sub_80A882C(ptr[1]);
+    case 2: return sub_80AC240(ptr[1]);
+    case 3: return sub_80AD158(ptr[1]);
+    }
+    return 0;
+}
+
+void InitScriptData(ScriptData *a0)
+{
+    s32 i;
+
+    a0->state = -1;
+    a0->savedState = 0;
+    a0->script.ptr2 = 0;
+    a0->script.ptr = 0;
+    a0->savedScript.ptr2 = 0;
+    a0->savedScript.ptr = 0;
+    a0->curScriptOp = 0;
+    a0->curPtr = 0;
+    a0->unk22 = -1;
+    a0->unk24 = 0;
+    a0->unk26 = 0xFF;
+    a0->branchDiscriminant = 0;
+    a0->unk2A = 0;
+    a0->unk2C = 0;
+    a0->unk30 = 0;
+    for (i = 0; i < 4; i++) {
+        a0->unk50[i].raw = 0;
+    }
+}
+
+void InitAction(Action *a0)
+{
+    s32 i;
+
+    a0->callbacks = NULL;
+    a0->parentObject = NULL;
+    a0->group = -1;
+    a0->sector = 0xFF;
+    sub_809D520(&a0->unkC);
+
+    for (i = 0; i < 4; i++) {
+        a0->predefinedScripts[i] = NULL;
+    }
+
+    InitScriptData(&a0->scriptData);
+    InitScriptData(&a0->scriptData2);
+}
+
+void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s16 group, s8 sector)
+{
+    s32 group_s32;
+    s32 sector_s32;
+
+    group_s32 = group;
+    sector_s32 = sector;
+
+    InitAction(action);
+
+    action->callbacks = callbacks;
+    action->parentObject = parent;
+    action->group = group_s32;
+    action->sector = sector_s32;
+    action->unk8[0] = callbacks->maybeId;
+
+    if(callbacks->func04)
+        action->unk8[1] = callbacks->func04(parent);
+    else
+        action->unk8[1] = 0;
+}
+
+void sub_809D648(Action *action)
+{
+    InitAction(action);
+}
+
+UNUSED s16 sub_809D654(Action *action)
+{
+    return action->scriptData.savedState;
+}
+
+UNUSED s16 sub_809D65C(Action *action)
+{
+    if(action->scriptData.savedState != 0)
+        return action->scriptData.state;
+    else
+        return -1;
+}
+
+bool8 sub_809D678(Action *action)
+{
+    return action->scriptData.savedState == 0 ? FALSE : TRUE;
+}
+
+bool8 sub_809D684(Action *action, ScriptCommand **scriptPtr)
+{
+    if(action->scriptData.savedState != 0)
+    {
+        if(action->scriptData.savedScript.ptr != 0)
+        {
+            if(action->scriptData.savedScript.ptr2 == *scriptPtr) return 1;
+        }
+        else
+        {
+            if(action->scriptData.script.ptr2 == *scriptPtr) return 1;
+        }
+    }
+    if(action->scriptData2.savedState != 0)
+    {
+        if(action->scriptData2.savedScript.ptr != 0)
+        {
+            if(action->scriptData2.savedScript.ptr2 == *scriptPtr) return 1;
+        }
+        else
+        {
+            if(action->scriptData2.script.ptr2 == *scriptPtr) return 1;
+        }
+    }
+    return 0;
+}
 
 void SetPredefinedScript(Action *param_1, s16 index, ScriptCommand *param_3)
 {
@@ -58,7 +195,7 @@ void sub_809D710(Action *param_1, ScriptInfoSmall *script, s16 index)
     }
 }
 
-bool8 InitActionScriptData(Action *param_1, DebugLocation *unused)
+bool8 InitActionScriptData(Action *param_1, const DebugLocation *unused)
 {
     InitScriptData(&param_1->scriptData);
     InitScriptData(&param_1->scriptData2);

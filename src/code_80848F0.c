@@ -1,7 +1,9 @@
 #include "global.h"
+#include "constants/weather.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_music.h"
 #include "exclusive_pokemon.h"
+#include "weather.h"
 
 extern void SkarmoryPreFightDialogue();
 extern void SkarmoryReFightDialogue();
@@ -143,35 +145,66 @@ extern void sub_808C9C4(void);
 extern void sub_808CB5C(void);
 extern void sub_808CBB0(void);
 extern void sub_808CD44(void);
+extern void sub_8040A84(void);
 
-extern void sub_807E5E4(u32);
+struct unkData_8107234
+{
+    u8 unk0[8];
+};
 
-void sub_8084854(u8 *param_1)
+extern struct unkData_8107234 gUnknown_8107234[];
+
+void sub_8084854(struct unkData_8107234 *);
+
+
+void sub_80847D4(void)
+{
+    u32 bossBattleIndex;
+    s32 index;
+
+    gDungeon->unk3A0D = 0;
+    gDungeon->unk1356C = 0;
+    sub_8040A84();
+    for(index = 0; index < 0x3e7 && gUnknown_8107234[index].unk0[0] != 0;  index++) {
+        bossBattleIndex = gDungeon->bossBattleIndex;
+        if (bossBattleIndex - 0x1c < 0x16) {
+            bossBattleIndex = 0x1b;
+        }
+        if (bossBattleIndex == gUnknown_8107234[index].unk0[0])
+        {
+            sub_8084854(&gUnknown_8107234[index]);
+            break;
+        }
+    }
+    sub_8097FF8();
+}
+
+void sub_8084854(struct unkData_8107234 *param_1)
 {
   if (gDungeon->unk678 != 0) {
-       gDungeon->unk3A0D = param_1[5];
+       gDungeon->unk3A0D = param_1->unk0[5];
   }
   else
   {
-    if (sub_8098100(param_1[4]) != 0) {
-        gDungeon->unk3A0D = param_1[5];
+    if (sub_8098100(param_1->unk0[4]) != 0) {
+        gDungeon->unk3A0D = param_1->unk0[5];
     }
     else
     {
-      if (sub_8098100(param_1[2]) != 0) {
-        gDungeon->unk3A0D = param_1[3];
+      if (sub_8098100(param_1->unk0[2]) != 0) {
+        gDungeon->unk3A0D = param_1->unk0[3];
       }
       else
       {
-        gDungeon->unk3A0D = param_1[1];
-        if (param_1[2] != 0x40) {
-          sub_8097FA8(param_1[2]);
+        gDungeon->unk3A0D = param_1->unk0[1];
+        if (param_1->unk0[2] != 0x40) {
+          sub_8097FA8(param_1->unk0[2]);
         }
       }
     }
   }
   gDungeon->unk675 = 1;
-  sub_807E5E4(0);
+  sub_807E5E4(WEATHER_CLEAR);
 }
 
 u32 sub_80848EC(void)

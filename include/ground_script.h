@@ -104,12 +104,12 @@ typedef struct CallbackData
 typedef struct Action
 {
     // size: 0xE4
-    /* 0x00 */ struct CallbackData *callbacks;
+    /* 0x00 */ const struct CallbackData *callbacks;
     /* 0x04 */ void *parentObject; // struct GroundObject *
     /* 0x08 */ s16 unk8[2]; // id?
     /* 0x0C */ ScriptUnion1632 unkC;
-    /* 0x10 */ u16 group;
-    /* 0x12 */ u8  sector;
+    /* 0x10 */ s16 group;
+    /* 0x12 */ s8  sector;
     // padding
     /* 0x14 */ ScriptCommand *predefinedScripts[4];
     /* 0x24 */ ScriptData scriptData;
@@ -129,7 +129,8 @@ typedef struct GroundMapAction
 
 typedef struct FunctionScript
 {
-    u32 unk0;
+    u16 unk0;
+    s16 unk2;
     u8 *funcName;
     ScriptCommand *script;
 } FunctionScript;
@@ -138,6 +139,15 @@ extern FunctionScript gFunctionScriptTable[];
 
 #include "debug.h"
 
+void InitScriptData(ScriptData *a0);
+u8 sub_809D8EC(Action *param_1, s16 param_2);
+void sub_809D648(Action *action);
+void sub_809D710(Action *param_1, ScriptInfoSmall *script, s16 index);
+bool8 sub_809DA08(Action *param_1, s16 index, u32 param_3);
+bool8 InitActionScriptData(Action *param_1, const DebugLocation *unused);
 bool8 GroundScript_ExecutePP(Action *, s32 *, ScriptInfoSmall *, const DebugLocation *unused);
+ScriptCommand *sub_80A242C(Action *action, s32 r1);
+ScriptCommand *sub_80A2460(Action *action, s32 r1);
+void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s16 group, s8 sector);
 
 #endif // GUARD_GROUND_SCRIPT_H

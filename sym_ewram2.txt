@@ -113,8 +113,7 @@ gUnknown_203B0EC: /* 203B0EC (sub_8010C58) */
 gUnknown_203B198: /* 203B198 (sub_8014248 - sub_8014A88) */
 	.space 0x60
 
-gUnknown_203B1F8: /* 203B1F8 (sub_8015080 - sub_80151A4) */
-	.space 0x4
+.include "src/code_8015080.o"
 
 gUnknown_203B1FC: /* 203B1FC (sub_80151C0 - sub_8015F84) */
 	.space 0x4
@@ -141,16 +140,9 @@ gUnknown_203B1FC: /* 203B1FC (sub_80151C0 - sub_8015F84) */
 .include "src/hints_menu1.o"
 .include "src/hints_menu2.o"
 .include "src/gulpin_shop.o"
-
-gUnknown_203B270: /* 203B270 (sub_801EE10 - sub_801F3F8) */
-	.space 0x4
-
-gUnknown_203B274: /* 203B274 (sub_801F428 - sub_801F7E4) */
-	.space 0x4
-
-gUnknown_203B278: /* 203B278 (sub_801F808 - sub_801FAD4) */
-	.space 0x4
-
+.include "src/code_801EE10.o"
+.include "src/code_801F428.o"
+.include "src/code_801F808.o"
 .include "src/gulpin_shop_801FB50.o"
 .include "src/wigglytuff_shop1.o"
 .include "src/wigglytuff_shop2.o"
@@ -298,7 +290,5 @@ gUnknown_203B4AC: /* 203B4AC (ExecuteScriptCommand) */
 gUnknown_203B4B0: /* 203B4B0 (sub_809D490 - HandleAction) */
 	.space 0x4
 
-gUnknown_203B4B4: /* 203B4B4 (sub_80A62F0 - sub_80A658C) */
-	.space 0x4
-
+.include "src/ground_sprite.o"
 .include "src/ground_link.o"

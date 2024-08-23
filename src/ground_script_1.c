@@ -1,11 +1,16 @@
 #include "global.h"
 #include "debug.h"
+#include "ground_link.h"
 #include "ground_script.h"
+#include "ground_sprite.h"
 #include "ground_map.h"
 #include "dungeon.h"
 #include "other_random.h"
 #include "rescue_team_info.h"
 #include "code_80118A4.h"
+#include "code_8097670.h"
+#include "exclusive_pokemon.h"
+#include "items.h"
 
 #ifndef NONMATCHING
 #define GROUND_SCRIPT_INCOMPLETE_DECLARATIONS
@@ -37,7 +42,6 @@ typedef struct GroundEffectData {
     ScriptCommand *script;
 } GroundEffectData;
 
-void GroundSprite_Reset(s16);
 void GroundMap_Select(s16);
 void GroundMap_SelectDungeon(s16, DungeonLocation*, u8);
 void GroundMap_ExecuteEnter(s16);
@@ -47,7 +51,6 @@ void GroundMap_ExecuteStation(s32, s32, s32, bool8);
 void GroundLives_ExecuteScript(s32, s16 *, ScriptInfoSmall *);
 void GroundObject_ExecuteScript(s32, s16 *, ScriptInfoSmall *);
 void GroundEffect_ExecuteScript(s32, s16 *, ScriptInfoSmall *);
-void GroundLink_Select(s16);
 void GroundLives_Select(s16, s32 group, s32 sector);
 void GroundObject_Select(s16, s32 group, s32 sector);
 void GroundEffect_Select(s16, s32 group, s32 sector);
@@ -94,27 +97,15 @@ u32 sub_8002D54();
 u8 sub_8002DF0(Position32*, Position32*, Position32*, Position32*);
 s32 sub_8009FB8();
 
-// TODO: move to code_80118A4.h
-u32 StopAllMusic_1();
-u32 xxx_call_start_new_bgm();
-u32 xxx_call_queue_bgm();
-u32 xxx_call_play_fanfare_se();
-u32 xxx_call_fade_out_fanfare_se();
-
 bool8 sub_8021700(s32);
 bool8 sub_802FCF0(void);
 
 
-s32 FindItemInInventory();
-u32 ShiftItemsDownFrom();
 void sub_809733C(s16, bool8);
 void sub_80973A8(s16, bool8);
 void sub_8097418(s16, bool8);
 void sub_80975A8(s16, bool8);
-void sub_80976F8(u8);
-u32 sub_8098100();
 void sub_8098D1C(s32, u32, s32);
-void sub_8098D80(s32);
 void sub_8098E18(s32, s32);
 u32 sub_80999E8();
 u32 sub_80999FC();
@@ -129,7 +120,7 @@ u32 sub_809A738();
 u32 sub_809A768();
 bool8 ScriptPrintNullTextbox(void);
 bool8 ScriptPrintEmptyTextbox(void);
-u32 sub_809A83C();
+void sub_809A83C(s16);
 u32 sub_809AC7C();
 u32 sub_809ADD8();
 bool8 ScriptPrintText(s32, s16, char*);
@@ -154,14 +145,8 @@ void sub_809D1E4(s32, s32, s32);
 void sub_809D208(s32, Position32*, s32);
 void sub_809D220(s32, s32, s32);
 u32 sub_809D52C();
-u32 InitScriptData();
-void sub_809D710(Action*, ScriptInfoSmall*, s16);
-u8 sub_809D8EC(Action*, s16);
 bool8 sub_809D940(void);
 void sub_809D9B8(s16);
-bool8 sub_809DA08(Action*, s16, u8);
-ScriptCommand *sub_80A242C(Action*, s32);
-ScriptCommand *sub_80A2460(Action*, s32);
 s16 sub_80A4D7C(s32);
 s16 sub_80A7AE8(s16);
 void sub_80A87AC(s32, s32);
@@ -183,6 +168,9 @@ void DeleteBlankGroundEvents(void);
 void DeleteBlankGroundLives(void);
 void DeleteBlankGroundObjects(void);
 void DeleteBlankGroundEffects(void);
+
+u32 sub_80A14E8(u32, u8, u32, u32);
+s16 HandleAction(void *, DebugLocation *);
 
 extern int gFormatData_202DE30[10];
 
@@ -207,8 +195,11 @@ extern char gUnknown_8116684[];
 extern char gUnknown_81166C0[];
 extern char gUnknown_81166D8[];
 
-
+extern const CallbackData gUnknown_8116488;
 extern DebugLocation gUnknown_81166B4;
+extern DebugLocation gUnknown_81166F8;
+extern DebugLocation gUnknown_8116704;
+extern ScriptCommand gUnknown_81164E4;
 
 // Return values:
 // This function returns what's likely an enum, which controls the state of the script engine state machine, and possibly provides information to code calling the engine.
@@ -1608,7 +1599,9 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0x41: {
-                if (FindItemInInventory((u8)curCmd.argShort) >= 0) ShiftItemsDownFrom();
+                s32 val;
+                val = FindItemInInventory(curCmd.argShort);
+                if ( val >= 0) ShiftItemsDownFrom(val);
                 break;
             }
             case 0xc0 ... 0xcb: {
@@ -1871,4 +1864,35 @@ s32 ExecuteScriptCommand(Action *action) {
             }
         }
     }
+}
+
+UNUSED u32 sub_80A1440(u32 r0, u32 r1, u32 r2)
+{
+   return sub_80A14E8(0, r0, r1, r2); 
+}
+
+UNUSED bool8 GroundScript_ExecuteTrigger(s16 r0) 
+{
+    s32 ret;
+    ScriptInfoSmall scriptInfo;
+    Action action;
+    FunctionScript *ptr;
+
+    ptr = &gFunctionScriptTable[r0];
+
+    if(ptr->unk2 != 0xB)
+        return FALSE;
+    InitActionWithParams(&action, &gUnknown_8116488, NULL, 0, 0);
+    sub_809D710(NULL, &scriptInfo, r0);
+    GroundScript_ExecutePP(&action, NULL, &scriptInfo, &gUnknown_81166F8);
+
+    action.scriptData.savedScript = action.scriptData.script;
+    action.scriptData.savedScript.ptr = &gUnknown_81164E4;
+    action.scriptData.savedScript.ptr2 = &gUnknown_81164E4;
+    ret = HandleAction(&action, &gUnknown_8116704);
+    sub_809D648(&action);
+    if(ret == 0)
+        return TRUE;
+    else
+        return FALSE;
 }
