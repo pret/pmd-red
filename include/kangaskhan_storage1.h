@@ -18,6 +18,17 @@ enum KangaskhanStorageStates
     KANGASKHAN_STORAGE_IS_MONEY_USED_TM = 9,
 };
 
+enum KangaskhanStorageMenuActions 
+{
+    MENU_CANCEL = 1,
+    MENU_STORE = 2,
+    MENU_TAKE = 3,
+    MENU_YES = 4,
+    MENU_NO = 5,
+    MENU_INFO = 6,
+
+};
+
 // size: 0x14C
 struct KangaskhanStorageWork
 {

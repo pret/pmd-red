@@ -5,6 +5,13 @@
 #include "structs/menu.h"
 #include "structs/str_text.h"
 
+enum KangaskhanStorage2States
+{
+    KANGASKHAN_STORAGE_2_INIT = 0,
+    KANGASKHAN_STORAGE_2_MAIN = 1,
+    KANGASKHAN_STORAGE_2_EXIT = 3
+};
+
 // size: 0x150
 typedef struct unkStruct_203B20C
 {

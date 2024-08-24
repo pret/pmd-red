@@ -28,11 +28,11 @@ static void UpdateKangaskhanStorageState(u32);
 static void sub_8016E80(void);
 static void sub_8016FF8(void);
 static void sub_8017598(void);
-static void sub_80175FC(void);
+static void BuildKangaskhanMainMenu(void);
 static void sub_80176B8(void);
 static void sub_8017758(void);
 static void sub_80177F8(void);
-static void sub_8017828(void);
+static void HandleKangaskhanMainMenu(void);
 static void sub_80178D0(void);
 static void sub_8017928(void);
 static void sub_80179A8(void);
@@ -84,7 +84,7 @@ u32 KangaskhanStorageCallback(void)
     switch (gKangaskhanStorageWork->currState) {
         case KANGASKHAN_STORAGE_INIT:
         case KANGASKHAN_STORAGE_MAIN_MENU:
-            sub_8017828();
+            HandleKangaskhanMainMenu();
             break;
         case 13:
         case 14:
@@ -188,13 +188,13 @@ static void sub_8016FF8(void)
 {
     switch (gKangaskhanStorageWork->currState) {
         case KANGASKHAN_STORAGE_INIT:
-            sub_80175FC();
+            BuildKangaskhanMainMenu();
             gKangaskhanStorageWork->unkE4 = TRUE;
             sub_8014248(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_WELCOME], 0, gKangaskhanStorageWork->menuAction1, gKangaskhanStorageWork->unk24,
                                     gKangaskhanStorageWork->unk4C, 4, 0, gKangaskhanStorageWork->unkE8, 12);
             break;
         case KANGASKHAN_STORAGE_MAIN_MENU:
-            sub_80175FC();
+            BuildKangaskhanMainMenu();
             gKangaskhanStorageWork->unkE4 = FALSE;
             sub_8014248(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_ANYTHING_ELSE], 0, gKangaskhanStorageWork->menuAction1, gKangaskhanStorageWork->unk24,
                                     gKangaskhanStorageWork->unk4C, 4, 0, gKangaskhanStorageWork->unkE8, 12);
@@ -369,7 +369,7 @@ static void sub_8017598(void)
     sub_8012EA4(&gKangaskhanStorageWork->unk58, 0);
 }
 
-static void sub_80175FC(void)
+static void BuildKangaskhanMainMenu(void)
 {
     s32 index;
     s32 loopMax;
@@ -377,23 +377,23 @@ static void sub_80175FC(void)
     MemoryFill16(gKangaskhanStorageWork->unk4C,0, sizeof(gKangaskhanStorageWork->unk4C));
     loopMax = 0;
     gKangaskhanStorageWork->unk24[loopMax].text = gCommonStore[0];
-    gKangaskhanStorageWork->unk24[loopMax].menuAction = 2;
+    gKangaskhanStorageWork->unk24[loopMax].menuAction = MENU_STORE;
 
     loopMax += 1;
     gKangaskhanStorageWork->unk24[loopMax].text = gCommonTake[0];
-    gKangaskhanStorageWork->unk24[loopMax].menuAction = 3;
+    gKangaskhanStorageWork->unk24[loopMax].menuAction = MENU_TAKE;
 
     loopMax += 1;
     gKangaskhanStorageWork->unk24[loopMax].text = gCommonInfo[0];
-    gKangaskhanStorageWork->unk24[loopMax].menuAction = 6;
+    gKangaskhanStorageWork->unk24[loopMax].menuAction = MENU_INFO;
 
     loopMax += 1;
     gKangaskhanStorageWork->unk24[loopMax].text = gCommonCancel[0];
-    gKangaskhanStorageWork->unk24[loopMax].menuAction = 1;
+    gKangaskhanStorageWork->unk24[loopMax].menuAction = MENU_CANCEL;
 
     loopMax += 1;
     gKangaskhanStorageWork->unk24[loopMax].text = NULL;
-    gKangaskhanStorageWork->unk24[loopMax].menuAction = 1;
+    gKangaskhanStorageWork->unk24[loopMax].menuAction = MENU_CANCEL;
 
     for (index = 0; index < loopMax; index++) {
         if (gKangaskhanStorageWork->unk4C[index] == 0) {
@@ -418,15 +418,15 @@ static void sub_80176B8(void)
     MemoryFill16(gKangaskhanStorageWork->unk4C, 0, sizeof(gKangaskhanStorageWork->unk4C));
     loopMax = 0;
     gKangaskhanStorageWork->unk24[loopMax].text = gCommonStore[0];
-    gKangaskhanStorageWork->unk24[loopMax].menuAction = 2;
+    gKangaskhanStorageWork->unk24[loopMax].menuAction = MENU_STORE;
 
     loopMax++;
     gKangaskhanStorageWork->unk24[loopMax].text = gCommonInfo[0];
-    gKangaskhanStorageWork->unk24[loopMax].menuAction = 6;
+    gKangaskhanStorageWork->unk24[loopMax].menuAction = MENU_INFO;
 
     loopMax++;
     gKangaskhanStorageWork->unk24[loopMax].text = NULL;
-    gKangaskhanStorageWork->unk24[loopMax].menuAction = 1;
+    gKangaskhanStorageWork->unk24[loopMax].menuAction = MENU_CANCEL;
 
     for (index = 0; index < loopMax; index++) {
         if (gKangaskhanStorageWork->unk4C[index] == 0) {
@@ -451,15 +451,15 @@ static void sub_8017758(void)
     MemoryFill16(gKangaskhanStorageWork->unk4C, 0, sizeof(gKangaskhanStorageWork->unk4C));
     loopMax = 0;
     gKangaskhanStorageWork->unk24[loopMax].text = gCommonTake[0];
-    gKangaskhanStorageWork->unk24[loopMax].menuAction = 3;
+    gKangaskhanStorageWork->unk24[loopMax].menuAction = MENU_TAKE;
 
     loopMax++;
     gKangaskhanStorageWork->unk24[loopMax].text = gCommonInfo[0];
-    gKangaskhanStorageWork->unk24[loopMax].menuAction = 6;
+    gKangaskhanStorageWork->unk24[loopMax].menuAction = MENU_INFO;
 
     loopMax++;
     gKangaskhanStorageWork->unk24[loopMax].text = NULL;
-    gKangaskhanStorageWork->unk24[loopMax].menuAction = 1;
+    gKangaskhanStorageWork->unk24[loopMax].menuAction = MENU_CANCEL;
 
     for (index = 0; index < loopMax; index++) {
         if (gKangaskhanStorageWork->unk4C[index] == 0) {
@@ -482,29 +482,29 @@ static void sub_80177F8(void)
 
     loopMax = 0;
     gKangaskhanStorageWork->unk24[loopMax].text = gCommonYes[0];
-    gKangaskhanStorageWork->unk24[loopMax].menuAction = 4;
+    gKangaskhanStorageWork->unk24[loopMax].menuAction = MENU_YES;
 
     loopMax++;
     gKangaskhanStorageWork->unk24[loopMax].text = gCommonNo[0];
-    gKangaskhanStorageWork->unk24[loopMax].menuAction = 5;
+    gKangaskhanStorageWork->unk24[loopMax].menuAction = MENU_NO;
 
     loopMax++;
     gKangaskhanStorageWork->unk24[loopMax].text = NULL;
-    gKangaskhanStorageWork->unk24[loopMax].menuAction = 1;
+    gKangaskhanStorageWork->unk24[loopMax].menuAction = MENU_CANCEL;
 }
 
-static void sub_8017828(void)
+static void HandleKangaskhanMainMenu(void)
 {
     s32 menuAction;
 
     if (sub_80144A4(&menuAction))
         return;
 
-    if (menuAction != 1)
+    if (menuAction != MENU_CANCEL)
         gKangaskhanStorageWork->menuAction1 = menuAction;
 
     switch (menuAction) {
-        case 2:
+        case MENU_STORE:
             if (GetNumberOfFilledInventorySlots() == 0)
                 UpdateKangaskhanStorageState(KANGASKHAN_STORAGE_NO_INV_ITEMS);
             else if (sub_801CF50(0))
@@ -512,7 +512,7 @@ static void sub_8017828(void)
             else
                 UpdateKangaskhanStorageState(11);
             break;
-        case 3:
+        case MENU_TAKE:
             if (sub_801CF14(1))
                 UpdateKangaskhanStorageState(7);
             else if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
@@ -520,10 +520,10 @@ static void sub_8017828(void)
             else
                 UpdateKangaskhanStorageState(20);
             break;
-        case 6:
+        case MENU_INFO:
             UpdateKangaskhanStorageState(2);
             break;
-        case 1:
+        case MENU_CANCEL:
             UpdateKangaskhanStorageState(3);
             break;
     }
@@ -537,14 +537,14 @@ static void sub_80178D0(void)
         return;
 
     switch (menuAction) {
-        case 4:
+        case MENU_YES:
             MoveToStorage(&gKangaskhanStorageWork->storedItem);
             ShiftItemsDownFrom(gKangaskhanStorageWork->itemIndex);
             FillInventoryGaps();
             UpdateKangaskhanStorageState(19);
             break;
-        case 1:
-        case 5:
+        case MENU_CANCEL:
+        case MENU_NO:
             UpdateKangaskhanStorageState(14);
             break;
     }
@@ -559,15 +559,15 @@ static void sub_8017928(void)
         return;
 
     switch (menuAction) {
-        case 4:
+        case MENU_YES:
             gTeamInventoryRef->teamStorage[gKangaskhanStorageWork->storedItem.id] -= gKangaskhanStorageWork->storedItem.quantity;
             item.id = gKangaskhanStorageWork->storedItem.id;
             item.quantity = gKangaskhanStorageWork->storedItem.quantity;
             AddHeldItemToInventory(&item);
             UpdateKangaskhanStorageState(29);
             break;
-        case 1:
-        case 5:
+        case MENU_CANCEL:
+        case MENU_NO:
             UpdateKangaskhanStorageState(23);
             break;
     }
@@ -582,7 +582,7 @@ static void sub_80179A8(void)
         return;
 
     switch (menuAction) {
-        case 4:
+        case MENU_YES:
             for (index = 0; index < INVENTORY_SIZE; index++) {
                 if (sub_801AED0(index)) {
                     MoveToStorage(&gTeamInventoryRef->teamItems[index]);
@@ -595,8 +595,8 @@ static void sub_80179A8(void)
             sub_801AE84();
             UpdateKangaskhanStorageState(19);
             break;
-        case 1:
-        case 5:
+        case MENU_CANCEL:
+        case MENU_NO:
             UpdateKangaskhanStorageState(14);
             break;
     }
@@ -612,7 +612,7 @@ static void sub_8017A1C(void)
         return;
 
     switch (menuAction) {
-        case 4:
+        case MENU_YES:
             for (itemID = 0; itemID < NUMBER_OF_ITEM_IDS; itemID++) {
                 if (sub_801CFE0(itemID)) {
                     item.id = itemID;
@@ -633,8 +633,8 @@ static void sub_8017A1C(void)
             sub_801CF94();
             UpdateKangaskhanStorageState(29);
             break;
-        case 1:
-        case 5:
+        case MENU_CANCEL:
+        case MENU_NO:
             UpdateKangaskhanStorageState(23);
             break;
     }
@@ -725,12 +725,12 @@ static void sub_8017C7C(void)
     sub_801A6E8(FALSE);
     if (sub_8012FD8(&gKangaskhanStorageWork->unk58) == 0) {
         sub_8013114(&gKangaskhanStorageWork->unk58, &menuAction);
-        if (menuAction != 1)
+        if (menuAction != MENU_CANCEL)
             gKangaskhanStorageWork->menuAction2 = menuAction;
     }
 
     switch (menuAction) {
-        case 2:
+        case MENU_STORE:
             sub_8099690(0);
             if (!IsNotMoneyOrUsedTMItem(gKangaskhanStorageWork->storedItem.id))
                 UpdateKangaskhanStorageState(KANGASKHAN_STORAGE_IS_MONEY_USED_TM);
@@ -739,11 +739,11 @@ static void sub_8017C7C(void)
             else
                 UpdateKangaskhanStorageState(17);
         break;
-        case 6:
+        case MENU_INFO:
             sub_8099690(0);
             UpdateKangaskhanStorageState(16);
             break;
-        case 1:
+        case MENU_CANCEL:
             UpdateKangaskhanStorageState(14);
             break;
     }
@@ -757,12 +757,12 @@ static void sub_8017D24(void)
     sub_801CA08(FALSE);
     if (sub_8012FD8(&gKangaskhanStorageWork->unk58) == 0) {
         sub_8013114(&gKangaskhanStorageWork->unk58, &menuAction);
-        if (menuAction != 1)
+        if (menuAction != MENU_CANCEL)
             gKangaskhanStorageWork->menuAction3 = menuAction;
     }
 
     switch (menuAction) {
-        case 3:
+        case MENU_TAKE:
             if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE) {
                 sub_801CBB8();
                 UpdateKangaskhanStorageState(KANGASKHAN_STORAGE_TOO_MANY_ITEMS);
@@ -772,10 +772,10 @@ static void sub_8017D24(void)
             else
                 UpdateKangaskhanStorageState(27);
             break;
-        case 6:
+        case MENU_INFO:
             UpdateKangaskhanStorageState(26);
             break;
-        case 1:
+        case MENU_CANCEL:
             UpdateKangaskhanStorageState(23);
             break;
     }

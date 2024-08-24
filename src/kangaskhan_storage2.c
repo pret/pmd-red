@@ -17,7 +17,7 @@ static EWRAM_DATA_2 unkStruct_203B20C *sUnknown_203B20C = {0};
 
 #include "data/kangaskhan_storage2.h"
 
-static void sub_8017F10(u32);
+static void UpdateKangaskhanStorage2State(u32);
 static void sub_8017F28(void);
 static void sub_8018100(void);
 static void sub_8018280(void);
@@ -48,17 +48,17 @@ bool8 sub_8017E1C(void)
     sUnknown_203B20C->menuAction1 = 0;
     sUnknown_203B20C->menuAction2 = 0;
     sUnknown_203B20C->menuAction3 = 0;
-    sub_8017F10(0);
+    UpdateKangaskhanStorage2State(KANGASKHAN_STORAGE_2_INIT);
     return TRUE;
 }
 
 u32 sub_8017E54(void)
 {
     switch (sUnknown_203B20C->state) {
-        case 0:
-            sub_8017F10(1);
+        case KANGASKHAN_STORAGE_2_INIT:
+            UpdateKangaskhanStorage2State(KANGASKHAN_STORAGE_2_MAIN);
             break;
-        case 1:
+        case KANGASKHAN_STORAGE_2_MAIN:
             sub_8018588();
             break;
         case 4:
@@ -84,7 +84,7 @@ u32 sub_8017E54(void)
         case 14:
             sub_8018AE4();
             break;
-        case 3:
+        case KANGASKHAN_STORAGE_2_EXIT:
             return 3;
     }
     return 0;
@@ -98,7 +98,7 @@ void sub_8017EF4(void)
     }
 }
 
-static void sub_8017F10(u32 newState)
+static void UpdateKangaskhanStorage2State(u32 newState)
 {
     sUnknown_203B20C->state = newState;
     sub_8017F28();
@@ -112,7 +112,7 @@ static void sub_8017F28(void)
     RestoreUnkTextStruct_8006518(sUnknown_203B20C->unkF0);
 
     switch (sUnknown_203B20C->state) {
-        case 1:
+        case KANGASKHAN_STORAGE_2_MAIN:
             sUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
             sUnknown_203B20C->unkF0[1] = sUnknown_80DB7B8;
             sUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
@@ -142,7 +142,7 @@ static void sub_8017F28(void)
             sUnknown_203B20C->unkF0[2] = sUnknown_80DB7E8;
             break;
         default:
-        case 0:
+        case KANGASKHAN_STORAGE_2_INIT:
             for (index = 0; index < 4; index++)
                 sUnknown_203B20C->unkF0[index] = sUnknown_80DB7B8;
             break;
@@ -154,7 +154,7 @@ static void sub_8017F28(void)
 static void sub_8018100(void)
 {
     switch (sUnknown_203B20C->state) {
-        case 1:
+        case KANGASKHAN_STORAGE_2_MAIN:
             sub_8012D60(&sUnknown_203B20C->unk70, sUnknown_203B20C->unk20, 0, sUnknown_203B20C->unk60, sUnknown_203B20C->menuAction1, 2);
             break;
         case 4:
@@ -205,7 +205,7 @@ static void sub_8018100(void)
         case 14:
             sub_801B3C0(&sUnknown_203B20C->item);
             break;
-        case 0:
+        case KANGASKHAN_STORAGE_2_INIT:
         default:
             break;
     }
@@ -351,7 +351,7 @@ static void sub_8018588(void)
     switch (menuAction) {
         case STORE_ACTION:
             if (GetNumberOfFilledInventorySlots() != 0 && !sub_801CF50(0))
-                sub_8017F10(4);
+                UpdateKangaskhanStorage2State(4);
             else
                 sub_8012EA4(&sUnknown_203B20C->unk70, 1);
             break;
@@ -359,10 +359,10 @@ static void sub_8018588(void)
             if (sub_801CF14(1))
                 sub_8012EA4(&sUnknown_203B20C->unk70, 1);
             else
-                sub_8017F10(10);
+                UpdateKangaskhanStorage2State(10);
             break;
         case CANCEL_ACTION:
-            sub_8017F10(3);
+            UpdateKangaskhanStorage2State(KANGASKHAN_STORAGE_2_EXIT);
             break;
     }
 }
@@ -387,25 +387,25 @@ static void sub_8018620(void)
 
                 if (GetNumberOfFilledInventorySlots() == 0) {
                     sub_801A928();
-                    sub_8017F10(1);
+                    UpdateKangaskhanStorage2State(KANGASKHAN_STORAGE_2_MAIN);
                 }
                 else
-                    sub_8017F10(5);
+                    UpdateKangaskhanStorage2State(5);
             }
             else {
                 sUnknown_203B20C->itemIndex = sub_801A8AC();
                 sUnknown_203B20C->item = gTeamInventoryRef->teamItems[sUnknown_203B20C->itemIndex];
-                sub_8017F10(6);
+                UpdateKangaskhanStorage2State(6);
             }
             break;
         case 4:
             sUnknown_203B20C->itemIndex = sub_801A8AC();
             sUnknown_203B20C->item = gTeamInventoryRef->teamItems[sUnknown_203B20C->itemIndex];
-            sub_8017F10(7);
+            UpdateKangaskhanStorage2State(7);
             break;
         case 2:
             sub_801A928();
-            sub_8017F10(1);
+            UpdateKangaskhanStorage2State(KANGASKHAN_STORAGE_2_MAIN);
             break;
     }
 }
@@ -440,28 +440,28 @@ static void sub_80186F8(void)
                 sub_801CF94();
 
                 if (!sub_801CF14(1) && GetNumberOfFilledInventorySlots() < INVENTORY_SIZE)
-                    sub_8017F10(11);
+                    UpdateKangaskhanStorage2State(11);
                 else {
                     sub_801CBB8();
-                    sub_8017F10(1);
+                    UpdateKangaskhanStorage2State(KANGASKHAN_STORAGE_2_MAIN);
                 }
             }
             else {
                 sUnknown_203B20C->id = sub_801CB24();
                 xxx_init_itemslot_8090A8C(&sUnknown_203B20C->item, sUnknown_203B20C->id, 0);
                 sUnknown_203B20C->item.quantity = 1;
-                sub_8017F10(13);
+                UpdateKangaskhanStorage2State(13);
             }
             break;
         case 4:
             sUnknown_203B20C->id = sub_801CB24();
             xxx_init_itemslot_8090A8C(&sUnknown_203B20C->item, sUnknown_203B20C->id, 0);
             sUnknown_203B20C->item.quantity = 1;
-            sub_8017F10(14);
+            UpdateKangaskhanStorage2State(14);
             break;
         case 2:
             sub_801CBB8();
-            sub_8017F10(1);
+            UpdateKangaskhanStorage2State(KANGASKHAN_STORAGE_2_MAIN);
             break;
         case 1:
             sub_801AD34(0);
@@ -488,16 +488,16 @@ static void sub_8018854(void)
                 if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE) {
                 error:
                     sub_801CBB8();
-                    sub_8017F10(1);
+                    UpdateKangaskhanStorage2State(KANGASKHAN_STORAGE_2_MAIN);
                 }
                 else
-                    sub_8017F10(11);
+                    UpdateKangaskhanStorage2State(11);
             }
             else
                 goto error;
             break;
         case 2:
-            sub_8017F10(11);
+            UpdateKangaskhanStorage2State(11);
             break;
         case 1:
             sub_8018280();
@@ -534,10 +534,10 @@ static void sub_8018904(void)
 
                     if (GetNumberOfFilledInventorySlots() == 0) {
                         sub_801A928();
-                        sub_8017F10(1);
+                        UpdateKangaskhanStorage2State(KANGASKHAN_STORAGE_2_MAIN);
                     }
                     else
-                        sub_8017F10(5);
+                        UpdateKangaskhanStorage2State(5);
                 }
             }
             else
@@ -545,10 +545,10 @@ static void sub_8018904(void)
             break;
         case INFO_ACTION:
             sub_8099690(0);
-            sub_8017F10(7);
+            UpdateKangaskhanStorage2State(7);
             break;
         case CANCEL_ACTION:
-            sub_8017F10(5);
+            UpdateKangaskhanStorage2State(5);
             break;
     }
 }
@@ -572,7 +572,7 @@ static void sub_80189C8(void)
             if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
                 sub_8012EA4(&sUnknown_203B20C->unk70, 1);
             else if (IsThrowableItem(sUnknown_203B20C->item.id))
-                sub_8017F10(12);
+                UpdateKangaskhanStorage2State(12);
             else {
                 gTeamInventoryRef->teamStorage[sUnknown_203B20C->item.id] -= sUnknown_203B20C->item.quantity;
                 item.id = sUnknown_203B20C->item.id;
@@ -584,20 +584,20 @@ static void sub_80189C8(void)
                     {
                     error:
                         sub_801CBB8();
-                        sub_8017F10(1);
+                        UpdateKangaskhanStorage2State(KANGASKHAN_STORAGE_2_MAIN);
                     }
                     else
-                        sub_8017F10(11);
+                        UpdateKangaskhanStorage2State(11);
                 }
                 else
                     goto error;
             }
             break;
         case INFO_ACTION:
-            sub_8017F10(14);
+            UpdateKangaskhanStorage2State(14);
             break;
         case CANCEL_ACTION:
-            sub_8017F10(11);
+            UpdateKangaskhanStorage2State(11);
             break;
     }
 }
@@ -608,7 +608,7 @@ static void sub_8018AC8(void)
         case 2:
         case 3:
             sub_801B450();
-            sub_8017F10(5);
+            UpdateKangaskhanStorage2State(5);
             break;
         case 0:
         case 1:
@@ -623,7 +623,7 @@ static void sub_8018AE4(void)
         case 2:
         case 3:
             sub_801B450();
-            sub_8017F10(11);
+            UpdateKangaskhanStorage2State(11);
             break;
         case 0:
         case 1:
