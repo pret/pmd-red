@@ -11,6 +11,7 @@
 #include "dungeon_engine.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
+#include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "items.h"
@@ -44,6 +45,9 @@ extern u8 *gUnknown_80FED04[];
 extern u8 *gUnknown_80FED0C[];
 extern u8 *gUnknown_80FDAA0[];
 extern u8 *gUnknown_80FDA80[];
+extern u8 *gUnknown_80FDB04[];
+extern u8 *gUnknown_80FDB2C[];
+
 
 extern s16 gUnknown_80F4E0E;
 extern s16 gUnknown_80F4F84;
@@ -90,6 +94,7 @@ u8 sub_803D6FC(void);
 Entity *sub_8045684(u8, Position *, u8);
 extern void sub_807D148(Entity *pokemon, Entity *target, u32 r2, Position *r3);
 extern void sub_807DF38(Entity *pokemon, Entity *target, Position *pos, u32, u8 moveType, s16);
+extern void sub_807CD9C(Entity *, Entity *, u32 direction);
 
 void sub_807FC3C(Position *pos, u32 trapID, u32 param_3)
 {
@@ -675,4 +680,47 @@ void HandlePPZeroTrap(Entity *param_1,Entity *param_2)
 void HandleWonderTile(Entity *pokemon, Entity *target)
 {
     sub_8079E34(pokemon, target, FALSE);
+}
+
+void HandleSealTrap(Entity *param_1,Entity *param_2)
+{
+    Move *move;
+    s32 moveIndex;
+    s32 i;
+    s32 counter;
+    EntityInfo *info;
+    Move *moveStack [MAX_MON_MOVES];
+    bool8 flag = FALSE;
+
+
+    if (param_2 != NULL && !HasSafeguardStatus(param_1, param_2, TRUE)) {
+        info = param_2->info;
+        counter = 0;
+        for(i = 0;  i < MAX_MON_MOVES;i++)
+        {
+            move = &info->moves[i];
+            if ((move->moveFlags & MOVE_FLAG_EXISTS) && !(move->moveFlags2 & MOVE_FLAG_SEALED)) {
+                moveStack[counter] = move;
+                counter++;
+            }
+        }
+        if (counter != 0) {
+            moveIndex = DungeonRandInt(counter);
+            moveStack[moveIndex]->moveFlags2 |= MOVE_FLAG_SEALED;
+            sub_80928C0(gUnknown_202DE58,moveStack[moveIndex], NULL);
+            flag = TRUE;
+        }
+        if(flag)
+            sub_80522F4(param_1,param_2,*gUnknown_80FDB04);
+        else
+            sub_80522F4(param_1,param_2,*gUnknown_80FDB2C);
+    }
+}
+
+void HandleWhirlwindTrap(Entity *pokemon, Entity *target)
+{
+    if(target)
+    {
+        sub_807CD9C(pokemon, target, DungeonRandInt(NUM_DIRECTIONS));
+    }
 }
