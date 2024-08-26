@@ -41,6 +41,7 @@ enum WonderMailTypes
     WONDER_MAIL_TYPE_WONDER = 5,
     WONDER_MAIL_TYPE_COMPLETED,
     WONDER_MAIL_TYPE_OKD,
+    MAX_WONDER_MAIL_TYPES
 };
 
 // Used in CreateRescueTitle and CreateRescueDescription

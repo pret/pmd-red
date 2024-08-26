@@ -23,6 +23,8 @@
 #include "text1.h"
 #include "text2.h"
 #include "thank_you_wonder_mail.h"
+#include "wonder_mail_4.h"
+#include "wonder_mail_5.h"
 
 static EWRAM_DATA_2 WonderMailStruct_203B2C4 *sUnknown_203B2C4 = {0};
 
@@ -54,9 +56,24 @@ static EWRAM_DATA_2 WonderMailStruct_203B2C4 *sUnknown_203B2C4 = {0};
 #define PROCESS_THANK_YOU_PASSWORD 0x27
 #define THANK_YOU_PASSWORD_WRONG 0x28
 
+enum menuActions {
+    CANCEL_ACTION,
+    SEND_THANK_YOU_MAIL_ACTION,
+    GET_THANK_YOU_MAIL_ACTION,
+    // 3 - GAME_LINK
+    // 4 - ???
+    // 5 - PASSWORD
+    YES_ACTION = 0x7,
+    NO_ACTION,
+    SEND_ITEM_ACTION,
+    NO_SEND_ITEM_ACTION,
+    CONFIRM_ACTION,
+    INFO_ACTION,
+};
+
 const Item gUnknown_80DED44 =
 {
-    1, 0, 0
+    ITEM_FLAG_EXISTS, 0, ITEM_NOTHING
 };
 
 extern char gUnknown_202E5D8[0x50];
@@ -88,9 +105,9 @@ extern const u8 DontSendItem_Text[];
 
 const MenuItem gUnknown_80DED78[3] =
 {
-    {"Confirm", 0xB},
-    {"Info", 0xC},
-    {NULL, 0x0},
+    {"Confirm", CONFIRM_ACTION},
+    {"Info", INFO_ACTION},
+    {NULL, CANCEL_ACTION},
 };
 
 // Unused
@@ -107,40 +124,40 @@ const UnkTextStruct2 gUnknown_80DEDA0 =
 
 const MenuItem gThankYouMailMainMenuItems[4] =
 {
-    {"Send Thank-You Mail", 0x1},
-    {"Get Thank-You Mail", 0x2},
-    {"Cancel", 0x0},
-    {NULL, 0x0},
+    {"Send Thank-You Mail", SEND_THANK_YOU_MAIL_ACTION},
+    {"Get Thank-You Mail", GET_THANK_YOU_MAIL_ACTION},
+    {"Cancel", CANCEL_ACTION},
+    {NULL, CANCEL_ACTION},
 };
 
 const MenuItem gUnknown_80DEE08[4] =
 {
     {"Game Link cable", WONDER_MAIL_GAME_LINK},
     {"Password", WONDER_MAIL_PASSWORD},
-    {"Cancel", 0x0},
-    {NULL, 0x0},
+    {"Cancel", CANCEL_ACTION},
+    {NULL, CANCEL_ACTION},
 };
 
 const MenuItem gUnknown_80DEE44[3] =
 {
-    {"Yes", 0x7},
-    {"Cancel", 0x0},
-    {NULL, 0x0},
+    {"Yes", YES_ACTION},
+    {"Cancel", CANCEL_ACTION},
+    {NULL, CANCEL_ACTION},
 };
 
 const MenuItem gUnknown_80DEE60[3] =
 {
-    {"Yes", 0x7},
-    {"No", 0x8},
-    {NULL, 0x0},
+    {"Yes", YES_ACTION},
+    {"No", NO_ACTION},
+    {NULL, CANCEL_ACTION},
 };
 
 const MenuItem gUnknown_80DEE7C[4] =
 {
-    {SendItem_Text, 0x9},
-    {DontSendItem_Text, 0xA},
-    {"Cancel", 0x0},
-    {NULL, 0x0},
+    {SendItem_Text, SEND_ITEM_ACTION},
+    {DontSendItem_Text, NO_SEND_ITEM_ACTION},
+    {"Cancel", CANCEL_ACTION},
+    {NULL, CANCEL_ACTION},
 };
 
 ALIGNED(4) static const u8 DontSendItem_Text[] =  _("Don{APOSTROPHE}t Send Item");
@@ -148,29 +165,24 @@ ALIGNED(4) static const u8 SendItem_Text[] = "Send Item";
 
 const MenuItem gUnknown_80DEEBC[3] =
 {
-    {"Send w/o Item", 0xA},
-    {"Cancel", 0x0},
-    {NULL, 0x0},
+    {"Send w/o Item", NO_SEND_ITEM_ACTION},
+    {"Cancel", CANCEL_ACTION},
+    {NULL, CANCEL_ACTION},
 };
 
 const MenuItem gUnknown_80DEEE4[4] =
 {
-    {"Yes", 0x7},
-    {"No", 0x8},
-    {"Cancel", 0x0},
-    {NULL, 0x0},
+    {"Yes", YES_ACTION},
+    {"No", NO_ACTION},
+    {"Cancel", CANCEL_ACTION},
+    {NULL, CANCEL_ACTION},
 };
 
 #include "data/thank_you_wonder_mail.h"
 
 
-extern void sub_8030810(u32);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E00(void);
-extern u32 sub_8030768(u32);
-extern s8 sub_80307EC(void);
-extern void sub_8030D40(u8, u32);
-extern u32 sub_8030DA0();
 extern void HandleThankYouMailPelipperMainMenu();
 extern void sub_802AAC8();
 extern void ReturnToThankYouMailMainMenu();
@@ -211,19 +223,13 @@ extern void HandleThankYouMailPasswordMenu();
 extern void sub_802A9FC();
 extern void sub_802A828();
 extern void sub_802A850();
-extern void sub_8030DE4();
-extern void sub_803084C();
 extern void sub_8031E10();
 extern void SetThankYouMailMenuState(u32);
-extern void sub_803092C(void);
 extern s32 sub_8037B28(u32);
-extern u32 sub_8030894(void);
-extern void sub_80306A8(u32, u32, u32, u32);
 extern u8 sub_800D588(void);
 extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
 extern void sub_8031D70(u8, u32);
 
-extern void sub_803092C(void);
 extern void sub_8011C28(u32);
 extern u32 sub_8039068(u32, u8 *r1, unkStruct_203B480 *r0);
 
@@ -543,11 +549,11 @@ void sub_802A090(void)
     {
         switch(menuAction)
         {
-            case 7:
+            case YES_ACTION:
                 SetThankYouMailMenuState(SELECT_THANK_YOU_MAIL_COMMS);
                 break;
-            case 8:
-            case 0:
+            case NO_ACTION:
+            case CANCEL_ACTION:
                 SetThankYouMailMenuState(ANYTHING_ELSE_THANK_YOU_MAIN_MENU);
                 break;
             default:
@@ -601,11 +607,11 @@ void sub_802A174(void)
 
   switch(menuAction)
   {
-      case 0xB:
+      case CONFIRM_ACTION:
         sub_803084C();
         SetThankYouMailMenuState(0xe);
         break;
-      case 0xC:
+      case INFO_ACTION:
         sUnknown_203B2C4->fallbackState = 0x2b;
         RestoreUnkTextStruct_8006518(sUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
@@ -613,7 +619,7 @@ void sub_802A174(void)
         sub_8030D40(sUnknown_203B2C4->mailIndex,0);
         SetThankYouMailMenuState(0x12);
         break;
-      case 0:
+      case CANCEL_ACTION:
       case 0xD:
         sub_8035CC0(sUnknown_203B2C4->unk35C,2);
         sub_8030810(1);
@@ -711,11 +717,11 @@ void sub_802A39C(void)
 
   switch(menuAction)
   {
-      case 0xB:
+      case CONFIRM_ACTION:
             sub_801CBB8();
             SetThankYouMailMenuState(CONFIRM_ITEM_TO_SEND);
             break;
-      case 0xC:
+      case INFO_ACTION:
             sUnknown_203B2C4->fallbackState = 0x2b;
             RestoreUnkTextStruct_8006518(sUnknown_203B2C4->unk3BC);
             ResetUnusedInputStruct();
@@ -723,7 +729,7 @@ void sub_802A39C(void)
             sub_801B3C0(&sUnknown_203B2C4->unk41C);
             SetThankYouMailMenuState(SHOW_ITEM_TO_SEND_INFO);
             break;
-      case 0:
+      case CANCEL_ACTION:
       case 0xD:
             sub_8035CC0(sUnknown_203B2C4->unk35C, 3);
             sub_801CCD8();
@@ -907,14 +913,14 @@ void sub_802A75C(void)
     {
         switch(menuAction)
         {
-            case 7:
+            case YES_ACTION:
                 // NOTE: if statement is needed to match
                 if(sUnknown_203B2C4->wonderMailMode)
                     SetThankYouMailMenuState(COMMUNICATING_THANK_YOU_MAIL);
                 else
                     SetThankYouMailMenuState(COMMUNICATING_THANK_YOU_MAIL);
                 break;
-            case 0:
+            case CANCEL_ACTION:
                 SetThankYouMailMenuState(ANYTHING_ELSE_THANK_YOU_MAIN_MENU);
                 break;
         }
@@ -929,7 +935,7 @@ void HandleConfirmItemtoSendMenu(void)
     {
         switch(menuAction)
         {
-            case 7:
+            case YES_ACTION:
                 mail = GetMailatIndex(sUnknown_203B2C4->mailIndex);
                 if(sUnknown_203B2C4->unk41C.id != ITEM_NOTHING)
                 {
@@ -938,10 +944,10 @@ void HandleConfirmItemtoSendMenu(void)
                 gTeamInventoryRef->teamStorage[sUnknown_203B2C4->unk41C.id]--;
                 SetThankYouMailMenuState(0x29);
                 break;
-            case 8:
+            case NO_ACTION:
                 SetThankYouMailMenuState(PROMPT_ITEM_TO_SEND);
                 break;
-            case 0:
+            case CANCEL_ACTION:
                 SetThankYouMailMenuState(ANYTHING_ELSE_THANK_YOU_MAIN_MENU);
                 break;
         }
@@ -997,7 +1003,7 @@ void sub_802A8BC(void)
     {
         switch(menuAction)
         {
-            case 0xA:
+            case NO_SEND_ITEM_ACTION:
                 switch(sUnknown_203B2C4->wonderMailMethod)
                 {
                     case WONDER_MAIL_GAME_LINK:
@@ -1009,7 +1015,7 @@ void sub_802A8BC(void)
                         break;
                 }
                 break;
-            case 0:
+            case CANCEL_ACTION:
                 SetThankYouMailMenuState(ANYTHING_ELSE_THANK_YOU_MAIN_MENU);
                 break;
         }
@@ -1023,7 +1029,7 @@ void sub_802A910(void)
     {
         switch(menuAction)
         {
-            case 9:
+            case SEND_ITEM_ACTION:
                 if(sub_801CF14(0))
                 {
                     SetThankYouMailMenuState(THANK_YOU_MAIL_STORAGE_EMPTY);
@@ -1033,7 +1039,7 @@ void sub_802A910(void)
                     SetThankYouMailMenuState(PROMPT_ITEM_TO_SEND);
                 }
                 break;
-            case 0xA:
+            case NO_SEND_ITEM_ACTION:
                 switch(sUnknown_203B2C4->wonderMailMethod)
                 {
                     case WONDER_MAIL_GAME_LINK:
@@ -1045,7 +1051,7 @@ void sub_802A910(void)
                         break;
                 }
                 break;
-            case 0:
+            case CANCEL_ACTION:
                 SetThankYouMailMenuState(ANYTHING_ELSE_THANK_YOU_MAIN_MENU);
                 break;
         }
@@ -1068,7 +1074,7 @@ void sub_802A9A8(void)
     {
         switch(menuAction)
         {
-            case 0x7:
+            case YES_ACTION:
                 switch(sUnknown_203B2C4->wonderMailMethod)
                 {
                     case WONDER_MAIL_GAME_LINK:
@@ -1080,7 +1086,7 @@ void sub_802A9A8(void)
                         break;
                 }
                 break;
-            case 0:
+            case CANCEL_ACTION:
                 SetThankYouMailMenuState(ANYTHING_ELSE_THANK_YOU_MAIN_MENU);
                 break;
         }
@@ -1094,10 +1100,10 @@ void sub_802A9FC(void)
     {
         switch(menuAction)
         {
-            case 0x7:
+            case YES_ACTION:
                 SetThankYouMailMenuState(PROMPT_THANK_YOU_PASSWORD);
                 break;
-            case 0:
+            case CANCEL_ACTION:
                 SetThankYouMailMenuState(ANYTHING_ELSE_THANK_YOU_MAIN_MENU);
                 break;
         }
@@ -1141,7 +1147,7 @@ void HandleMailCommunicationMenu(void)
                         break;
                 }
                 break;
-            case 0:
+            case CANCEL_ACTION:
                 SetThankYouMailMenuState(ANYTHING_ELSE_THANK_YOU_MAIN_MENU);
                 break;
         }
@@ -1173,7 +1179,7 @@ void HandleThankYouMailPelipperMainMenu(void)
     {
         switch(menuAction)
         {
-            case 1:
+            case SEND_THANK_YOU_MAIL_ACTION:
                 sUnknown_203B2C4->unk40 = 6;
                 sUnknown_203B2C4->wonderMailMode = WONDER_MAIL_MODE_SEND;
                 if(CountMailType(5) == 0)
@@ -1185,12 +1191,12 @@ void HandleThankYouMailPelipperMainMenu(void)
                     SetThankYouMailMenuState(PROMPT_THANK_YOU_TO_SEND);
                 }
                 break;
-            case 2:
+            case GET_THANK_YOU_MAIL_ACTION:
                 sUnknown_203B2C4->unk40 = 7;
                 sUnknown_203B2C4->wonderMailMode = WONDER_MAIL_MODE_RECEIVE;
                 SetThankYouMailMenuState(SELECT_THANK_YOU_MAIL_COMMS);
                 break;
-            case 0:
+            case CANCEL_ACTION:
                 SetThankYouMailMenuState(2);
                 break;
         }

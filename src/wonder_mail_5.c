@@ -1,3 +1,4 @@
+#include "constants/input.h"
 #include "global.h"
 #include "globaldata.h"
 #include "code_800D090.h"
@@ -19,7 +20,7 @@ struct unkStruct_203B324
     // size: 0x78
     MenuInputStructSub unk0;
     u8 mailIndex;
-    u32 unk10;
+    u32 windowID;
     UnkTextStruct2 *unk14;
     UnkTextStruct2 unk18[4];
 };
@@ -57,27 +58,27 @@ extern void sub_8030DD4(void);
 void sub_8030E2C(void);
 void sub_8030E48(void);
 
-bool8 sub_8030D40(u8 mailIndex, s32 param_2)
+bool8 sub_8030D40(u8 mailIndex, s32 windowID)
 {
   gUnknown_203B324 = MemoryAlloc(sizeof(struct unkStruct_203B324), 8);
   gUnknown_203B324->mailIndex = mailIndex;
   sub_801317C(&gUnknown_203B324->unk0);
-  gUnknown_203B324->unk10 = param_2;
-  gUnknown_203B324->unk14 = &gUnknown_203B324->unk18[param_2];
-  RestoreUnkTextStruct_8006518(gUnknown_203B324->unk18);
-  gUnknown_203B324->unk18[gUnknown_203B324->unk10] = gUnknown_80E091C;
+  gUnknown_203B324->windowID = windowID;
+  gUnknown_203B324->unk14 = &gUnknown_203B324->unk18[windowID];
+  sub_8006518(gUnknown_203B324->unk18);
+  gUnknown_203B324->unk18[gUnknown_203B324->windowID] = gUnknown_80E091C;
   sub_8030DD4();
   return TRUE;
 }
 
-u8 sub_8030DA0(void)
+u32 sub_8030DA0(void)
 {
-  switch(sub_8012A64(&gUnknown_203B324->unk0, gUnknown_203B324->unk10))
+  switch(sub_8012A64(&gUnknown_203B324->unk0, gUnknown_203B324->windowID))
   {
-    case 2:
+    case INPUT_B_BUTTON:
         PlayMenuSoundEffect(1);
         return 2;
-    case 1:
+    case INPUT_A_BUTTON:
         PlayMenuSoundEffect(0);
         return 3;
     default:
@@ -95,7 +96,7 @@ void sub_8030DE4(void)
 {
   if(gUnknown_203B324 != NULL)
   {
-      gUnknown_203B324->unk18[gUnknown_203B324->unk10] = gUnknown_80E0900;
+      gUnknown_203B324->unk18[gUnknown_203B324->windowID] = gUnknown_80E0900;
       ResetUnusedInputStruct();
       xxx_call_save_unk_text_struct_800641C(gUnknown_203B324->unk18, TRUE, TRUE);
       MemoryFree(gUnknown_203B324);
@@ -117,8 +118,8 @@ void sub_8030E48(void)
   u8 buffer [256];
 
   mail = &gUnknown_203B480[gUnknown_203B324->mailIndex];
-  sub_80073B8(gUnknown_203B324->unk10);
-  stack.unk0[0] = gUnknown_203B324->unk10;
+  sub_80073B8(gUnknown_203B324->windowID);
+  stack.unk0[0] = gUnknown_203B324->windowID;
   stack.mailTitleType = 7;
   stack.mailMissionType = MISSION_TYPE_FRIEND_RESCUE;
   stack.mailStatus = MAIL_STATUS_SUSPENDED;
@@ -150,8 +151,8 @@ void sub_8030E48(void)
   }
   CreateRescueDescription(&stack);
   uVar2 = mail->unk10.unk10_u16 % 10000;
-  PrintStringOnWindow(10,0x68,gUnknown_80E0934,gUnknown_203B324->unk10,0); // ID:
+  PrintStringOnWindow(10,0x68,gUnknown_80E0934,gUnknown_203B324->windowID,0); // ID:
   sprintfStatic(buffer,gUnknown_80E0938,uVar2); // %-4d
-  PrintStringOnWindow(0x44,0x68,buffer,gUnknown_203B324->unk10,0);
-  sub_80073E0(gUnknown_203B324->unk10);
+  PrintStringOnWindow(0x44,0x68,buffer,gUnknown_203B324->windowID,0);
+  sub_80073E0(gUnknown_203B324->windowID);
 }

@@ -112,7 +112,6 @@ extern void sub_8072008(Entity *pokemon, Entity *r1, u32 r2, u8 r3, u32);
 extern void LevelDownTarget(Entity *pokemon, Entity *r1, u32 r2);
 extern void sub_80522F4(Entity *pokemon, Entity *r1, const u8[]);
 extern void sub_806F370(Entity *pokemon, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-extern void sub_8078A58(Entity *, Entity *, s32, u32);
 extern s32 sub_8042520(Entity *);
 Entity *sub_80696FC(Entity *);
 extern void sub_806A7E8(EntityInfo *, s32);

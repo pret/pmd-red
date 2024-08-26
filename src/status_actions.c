@@ -35,7 +35,6 @@
 
 extern void sub_807F43C(Entity *, Entity *);
 extern void sub_807DC68(Entity *, Entity *);
-extern void sub_8078A58(Entity *, Entity *, s32, u32);
 extern u32 sub_803D73C(u32);
 extern void sub_8045C28(Item *, u8 , u8);
 extern void sub_80464C8(Entity *, Position *, Item *);

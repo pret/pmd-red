@@ -8,8 +8,8 @@
 #include "code_8094F88.h"
 #include "menu_input.h"
 #include "code_80130A8.h"
-
-extern bool8 HasNoWonderMailType(u32);
+#include "wonder_mail_4.h"
+#include "wonder_mail_5.h"
 
 struct unkStruct_203B328
 {
@@ -32,18 +32,27 @@ static EWRAM_DATA_2 struct unkStruct_203B328 *gUnknown_203B328 = {0};
 
 extern unkStruct_203B480 *gUnknown_203B480;
 
+enum MenuActions {
+   CANCEL_ACTION = 1,
+   YES_ACTION,
+   NO_ACTION,
+   DELETE_ACTION,
+   INFO_ACTION,
+   DELETE_ALL_MAIL_ACTION, // Unused
+};
+
 const MenuItem gUnknown_80E0948[] = 
 {
-    {"Yes", 0x2},
-    {"No", 0x3},
-    {NULL, 0x1}
+    {"Yes", YES_ACTION},
+    {"No", NO_ACTION},
+    {NULL, CANCEL_ACTION}
 };
 
 const MenuItem gUnknown_80E0968[] = 
 {
-    {"Delete", 0x4},
-    {"Info", 0x5},
-    {NULL, 0x1}
+    {"Delete", DELETE_ACTION},
+    {"Info", INFO_ACTION},
+    {NULL, CANCEL_ACTION}
 };
 
 const UnkTextStruct2 gUnknown_80E0990 = {
@@ -79,35 +88,18 @@ ALIGNED(4) const u8 gUnknown_80E0A0C[] = _(
         " ...Uh{COMMA} no?\n"
         "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.");
 
-extern void sub_80306A8(s32, u32, u32, u32);
 extern void sub_8031300(void);
 extern void sub_803136C(void);
 extern void sub_80313D8(u32);
 extern void sub_8031498(void);
-extern void sub_803084C(void);
 extern void sub_80310FC();
 extern void sub_8031258();
-extern u32 sub_8030768(u32);
-extern u8 sub_80307EC(void);
-extern u32 sub_8030DA0(void);
-extern void sub_8030DE4();
-
-extern void sub_8030810(u32);
-extern void sub_803092C(void);
-extern void sub_8030D40(u8, u32);
 
 enum States {
     INIT_STATE = 0,
     DELETE_SINGLE_MAIL_STATE = 2,
     DELETE_ALL_MAIL_STATE = 3,
-};
-
-enum MenuActions {
-   CANCEL_ACTION = 1,
-   YES_ACTION,
-   NO_ACTION,
-   DELETE_ACTION,
-   INFO_ACTION
+    INFO_STATE = 4,
 };
 
 bool8 sub_8030F58(u32 wonderMailType)
@@ -165,7 +157,7 @@ s32 sub_8031050(void)
         case DELETE_ALL_MAIL_STATE:
             sub_80313D8(gUnknown_203B328->state);
             break;
-        case 4:
+        case INFO_STATE:
             sub_8031498();
             break;
         case 5:
@@ -213,7 +205,7 @@ void sub_80310FC(void)
             gUnknown_203B328->unkA8[2] = gUnknown_80E09C0;
             sub_8012CAC(&gUnknown_203B328->unkA8[2], gUnknown_80E0948);
             break;
-        case 4:
+        case INFO_STATE:
             gUnknown_203B328->unkA8[0] = gUnknown_80E0990;
             gUnknown_203B328->unkA8[1] = gUnknown_80E0990;
             gUnknown_203B328->unkA8[2] = gUnknown_80E0990;
@@ -239,15 +231,15 @@ void sub_8031258(void)
             break;
         case 1:
             sub_803092C();
-            sub_8012D60(&gUnknown_203B328->unk8, gUnknown_80E0968, 0, 0, 4, 1);
+            sub_8012D60(&gUnknown_203B328->unk8, gUnknown_80E0968, NULL, NULL, DELETE_ACTION, 1);
             break;
         case DELETE_SINGLE_MAIL_STATE:
         case DELETE_ALL_MAIL_STATE:
             sub_803092C();
             sub_8012EA4(&gUnknown_203B328->unk8, 0);
-            sub_8012D60(&gUnknown_203B328->unk58, gUnknown_80E0948, 0, 0, 3, 2);
+            sub_8012D60(&gUnknown_203B328->unk58, gUnknown_80E0948, NULL, NULL, NO_ACTION, 2);
             break;
-        case 4:
+        case INFO_STATE:
             sub_8030D40(gUnknown_203B328->mailIndex, 3);
             break;
         case 5:
@@ -267,7 +259,7 @@ void sub_8031300(void)
             break;
         case 4:
             gUnknown_203B328->mailIndex = sub_80307EC();
-            sub_80310E4(4);
+            sub_80310E4(INFO_STATE);
             break;
         case 2:
             sub_80310E4(6);
@@ -291,16 +283,16 @@ void sub_803136C(void)
   switch(menuAction)
   {
     case CANCEL_ACTION:
-        sub_80310E4(0);
+        sub_80310E4(INIT_STATE);
         break;
-    case 6:
-        sub_80310E4(3);
+    case DELETE_ALL_MAIL_ACTION:
+        sub_80310E4(DELETE_ALL_MAIL_STATE);
         break;
     case DELETE_ACTION:
-        sub_80310E4(2);
+        sub_80310E4(DELETE_SINGLE_MAIL_STATE);
         break;
     case INFO_ACTION:
-        sub_80310E4(4);
+        sub_80310E4(INFO_STATE);
         break;
 
   }
@@ -323,7 +315,7 @@ void sub_80313D8(u32 state)
   {
     case CANCEL_ACTION:
     case NO_ACTION:
-        sub_80310E4(0);
+        sub_80310E4(INIT_STATE);
         break;
     case YES_ACTION:
         switch(state)
@@ -346,7 +338,7 @@ void sub_80313D8(u32 state)
                 sub_80310E4(5);
             }
             else {
-                sub_80310E4(0);
+                sub_80310E4(INIT_STATE);
             }
         }
         break;
@@ -363,7 +355,7 @@ void sub_8031498(void)
         case 2:
         case 3:
             sub_8030DE4();
-            sub_80310E4(0);
+            sub_80310E4(INIT_STATE);
             break;
     }
 }
