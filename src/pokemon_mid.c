@@ -483,9 +483,9 @@ u16 GetBaseHP(s16 index)
     return gMonsterParameters[index].baseHP;
 }
 
-bool8 IsToolboxEnabled(s16 index)
+bool8 MonsterIDCanThrowItems(s16 index)
 {
-    return gMonsterParameters[index].toolboxEnabled;
+    return gMonsterParameters[index].canThrowItems;
 }
 
 u8 GetUnk12(s16 index)

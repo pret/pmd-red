@@ -1823,7 +1823,7 @@ _0807F4E4:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl CanTarget
+	bl GetTreatmentBetweenMonsters
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1839,7 +1839,7 @@ _0807F50C:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl CanTarget
+	bl GetTreatmentBetweenMonsters
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807F602

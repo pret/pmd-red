@@ -3230,7 +3230,7 @@ bool8 sub_805AD54(Entity * pokemon, Entity * target, Move *move, u32 param_4)
   for ( index = 0; index < numPossibleTargets; index++) {
     targetEntity = possibleTargets[index];
     if ((((EntityExists(targetEntity)) && (pokemon != targetEntity)) &&
-        (CanTarget(pokemon,targetEntity,FALSE,FALSE) == TARGET_CAPABILITY_CANNOT_ATTACK)) &&
+        (GetTreatmentBetweenMonsters(pokemon,targetEntity,FALSE,FALSE) == TREATMENT_TREAT_AS_ALLY)) &&
        (targetEntity->info->clientType != CLIENT_TYPE_CLIENT)) {
       if (!sub_805AD54_sub(targetEntity)) {
         sub_807D148(pokemon,targetEntity,2,&target->pos);

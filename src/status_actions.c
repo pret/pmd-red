@@ -10,6 +10,7 @@
 #include "constants/ability.h"
 #include "constants/move_id.h"
 #include "constants/status.h"
+#include "constants/targeting.h"
 #include "constants/type.h"
 #include "constants/weather.h"
 #include "dungeon_ai_targeting.h"
@@ -1083,7 +1084,7 @@ bool8 sub_805C080(Entity * pokemon, Entity *target, Move *move, s32 param_4)
     for(index = 0; index < numPossibleTargets; index++){
         targetEntity = possibleTargets[index];
         if (((EntityExists(targetEntity)) && (pokemon != targetEntity)) &&
-            (CanTarget(pokemon,targetEntity,1,FALSE) == 0)) {
+            (GetTreatmentBetweenMonsters(pokemon,targetEntity,TRUE,FALSE) == TREATMENT_TREAT_AS_ALLY)) {
             sub_807D148(pokemon,targetEntity,2,&pokemon->pos);
             foundTarget = TRUE;
         }

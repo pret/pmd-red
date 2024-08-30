@@ -34,11 +34,11 @@ enum ItemTargetFlag
     ITEM_TARGET_ALLY = 1 << 1
 };
 
-EWRAM_DATA_2 s32 gNumPotentialTargets = {0};
+EWRAM_DATA_2 s32 gAIThrowItemActionChoiceCount = {0};
 
-EWRAM_DATA u32 gPotentialItemTargetDirections[NUM_DIRECTIONS] = {0};
-EWRAM_DATA bool8 gTargetAhead[NUM_DIRECTIONS] = {0};
-EWRAM_DATA u32 gPotentialItemTargetWeights[NUM_DIRECTIONS] = {0};
+EWRAM_DATA u32 gAIThrownItemDirections[NUM_DIRECTIONS] = {0};
+EWRAM_DATA bool8 gAIThrownItemDirectionIsUsed[NUM_DIRECTIONS] = {0};
+EWRAM_DATA u32 gAIThrownItemProbabilities[NUM_DIRECTIONS] = {0};
 
 extern TeamInventory *gTeamInventoryRef;
 
@@ -61,7 +61,7 @@ void sub_807360C(void)
     }
 }
 
-void DecideUseItem(Entity *pokemon)
+void AIDecideUseItem(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = pokemon->info;
     void *null;
@@ -69,7 +69,7 @@ void DecideUseItem(Entity *pokemon)
     s32 toolboxIndex;
     u8 selectedToolboxIndex;
     u32 *potentialTargetWeights;
-    if (CannotUseItems(pokemon))
+    if (CheckVariousConditions(pokemon))
     {
         pokemonInfo->useHeldItem = FALSE;
         return;
@@ -90,20 +90,20 @@ void DecideUseItem(Entity *pokemon)
             if (itemType == CATEGORY_THROWN_LINE)
             {
                 s32 targetIndex;
-                FindStraightThrowableTargets(pokemon, 2, item, 1);
-                for (targetIndex = 0; targetIndex < gNumPotentialTargets; targetIndex++)
+                GetPossibleAIThrownItemDirections(pokemon, ITEM_AI_FLAG_TARGET_ENEMY, item, TRUE);
+                for (targetIndex = 0; targetIndex < gAIThrowItemActionChoiceCount; targetIndex++)
                 {
-                    if (DungeonRandOutcome(gPotentialItemTargetWeights[targetIndex]))
+                    if (DungeonRandOutcome(gAIThrownItemProbabilities[targetIndex]))
                     {
                         SetMonsterActionFields(&pokemonInfo->action, ACTION_THROW_ITEM_AI);
                         pokemonInfo->action.unk4[0].actionUseIndex = selectedToolboxIndex;
                         pokemonInfo->action.unk4[0].lastItemThrowPosition.x = pokemon->pos.x;
                         pokemonInfo->action.unk4[0].lastItemThrowPosition.y = pokemon->pos.y;
-                        pokemonInfo->action.direction = gPotentialItemTargetDirections[targetIndex] & DIRECTION_MASK;
+                        pokemonInfo->action.direction = gAIThrownItemDirections[targetIndex] & DIRECTION_MASK;
                         break;
                     }
                 }
-                if (targetIndex == gNumPotentialTargets)
+                if (targetIndex == gAIThrowItemActionChoiceCount)
                 {
                     SetMonsterActionFields(&pokemonInfo->action, ACTION_SECOND_THOUGHTS);
                 }
@@ -111,14 +111,14 @@ void DecideUseItem(Entity *pokemon)
             else if (itemType == CATEGORY_THROWN_ARC)
             {
                 Position potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
-                FindRockItemTargets(pokemon, item, potentialTargetPositions, TRUE);
-                if (gNumPotentialTargets == 0)
+                GetPossibleAIArcItemTargets(pokemon, item, potentialTargetPositions, TRUE);
+                if (gAIThrowItemActionChoiceCount == 0)
                 {
                     SetMonsterActionFields(&pokemonInfo->action, ACTION_SECOND_THOUGHTS);
                 }
                 else
                 {
-                    u32 chosenTargetIndex = DungeonRandInt(gNumPotentialTargets);
+                    u32 chosenTargetIndex = DungeonRandInt(gAIThrowItemActionChoiceCount);
                     SetMonsterActionFields(&pokemonInfo->action, ACTION_THROW_ITEM_AI);
                     pokemonInfo->action.unk4[0].actionUseIndex = selectedToolboxIndex;
                     pokemonInfo->action.unk4[0].lastItemThrowPosition.x = pokemon->pos.x;
@@ -191,7 +191,7 @@ void DecideUseItem(Entity *pokemon)
                 {
                     if (GetItemAIFlag(item->id, ITEM_AI_FLAG_TARGET_SELF))
                     {
-                        u32 itemWeight = EvaluateItem(pokemon, item, ITEM_TARGET_ALLY);
+                        u32 itemWeight = GetAIUseItemProbability(pokemon, item, ITEM_TARGET_ALLY);
                         if (itemWeight != 0)
                         {
                             u8 itemType = GetItemCategory(item->id);
@@ -222,22 +222,22 @@ void DecideUseItem(Entity *pokemon)
             {
                 continue;
             }
-            if (ToolboxEnabled(pokemonInfo))
+            if (MonsterCanThrowItems(pokemonInfo))
             {
                 s32 thrownAIFlag;
                 for (thrownAIFlag = ITEM_AI_FLAG_TARGET_ALLY; thrownAIFlag <= ITEM_AI_FLAG_TARGET_ENEMY; thrownAIFlag++)
                 {
-                    potentialTargetWeights = gPotentialItemTargetWeights;
+                    potentialTargetWeights = gAIThrownItemProbabilities;
                     if (GetItemAIFlag(item->id, thrownAIFlag))
                     {
                         u8 itemType = GetItemCategory(item->id);
                         if (itemType == CATEGORY_THROWN_ARC)
                         {
                             Position potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
-                            FindRockItemTargets(pokemon, item, potentialTargetPositions, FALSE);
-                            if (gNumPotentialTargets != 0)
+                            GetPossibleAIArcItemTargets(pokemon, item, potentialTargetPositions, FALSE);
+                            if (gAIThrowItemActionChoiceCount != 0)
                             {
-                                u32 chosenTargetIndex = DungeonRandInt(gNumPotentialTargets);
+                                u32 chosenTargetIndex = DungeonRandInt(gAIThrowItemActionChoiceCount);
                                 SetMonsterActionFields(&pokemonInfo->action, ACTION_THROW_ITEM_AI);
                                 pokemonInfo->action.unk4[0].actionUseIndex = selectedToolboxIndex;
                                 pokemonInfo->action.unk4[0].lastItemThrowPosition.x = pokemon->pos.x;
@@ -250,8 +250,8 @@ void DecideUseItem(Entity *pokemon)
                         else
                         {
                             s32 targetIndex;
-                            FindStraightThrowableTargets(pokemon, thrownAIFlag, item, FALSE);
-                            for (targetIndex = 0; targetIndex < gNumPotentialTargets; targetIndex++)
+                            GetPossibleAIThrownItemDirections(pokemon, thrownAIFlag, item, FALSE);
+                            for (targetIndex = 0; targetIndex < gAIThrowItemActionChoiceCount; targetIndex++)
                             {
                                 if (DungeonRandOutcome(potentialTargetWeights[targetIndex]))
                                 {
@@ -259,7 +259,7 @@ void DecideUseItem(Entity *pokemon)
                                     pokemonInfo->action.unk4[0].actionUseIndex = selectedToolboxIndex;
                                     pokemonInfo->action.unk4[0].lastItemThrowPosition.x = pokemon->pos.x;
                                     pokemonInfo->action.unk4[0].lastItemThrowPosition.y = pokemon->pos.y;
-                                    pokemonInfo->action.direction = gPotentialItemTargetDirections[targetIndex] & DIRECTION_MASK;
+                                    pokemonInfo->action.direction = gAIThrownItemDirections[targetIndex] & DIRECTION_MASK;
                                     return;
                                 }
                             }
@@ -271,13 +271,13 @@ void DecideUseItem(Entity *pokemon)
     }
 }
 
-void FindStraightThrowableTargets(Entity *pokemon, s32 thrownAIFlag, Item *item, bool8 ignoreRollChance)
+void GetPossibleAIThrownItemDirections(Entity *pokemon, s32 thrownAIFlag, Item *item, bool8 ignoreRollChance)
 {
     s32 i;
-    gNumPotentialTargets = 0;
+    gAIThrowItemActionChoiceCount = 0;
     for (i = 0; i < NUM_DIRECTIONS; i++)
     {
-        gTargetAhead[i] = FALSE;
+        gAIThrownItemDirectionIsUsed[i] = FALSE;
     }
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
@@ -287,7 +287,7 @@ void FindStraightThrowableTargets(Entity *pokemon, s32 thrownAIFlag, Item *item,
             s32 targetingFlags;
             if (thrownAIFlag == ITEM_AI_FLAG_TARGET_ALLY)
             {
-                if (CanTarget(pokemon, targetPokemon, FALSE, FALSE) == TARGET_CAPABILITY_CANNOT_ATTACK)
+                if (GetTreatmentBetweenMonsters(pokemon, targetPokemon, FALSE, FALSE) == TREATMENT_TREAT_AS_ALLY)
                 {
                     targetingFlags = ITEM_TARGET_OTHER | ITEM_TARGET_ALLY;
                 }
@@ -296,7 +296,7 @@ void FindStraightThrowableTargets(Entity *pokemon, s32 thrownAIFlag, Item *item,
                     continue;
                 }
             }
-            else if (CanTarget(pokemon, targetPokemon, FALSE, TRUE) == TARGET_CAPABILITY_CAN_TARGET)
+            else if (GetTreatmentBetweenMonsters(pokemon, targetPokemon, FALSE, TRUE) == TREATMENT_TREAT_AS_ENEMY)
             {
                 targetingFlags = ITEM_TARGET_OTHER;
             }
@@ -312,15 +312,15 @@ void FindStraightThrowableTargets(Entity *pokemon, s32 thrownAIFlag, Item *item,
     }
 }
 
-void FindRockItemTargets(Entity *pokemon, Item *item, Position potentialTargets[], bool8 ignoreRollChance)
+void GetPossibleAIArcItemTargets(Entity *pokemon, Item *item, Position potentialTargets[], bool8 ignoreRollChance)
 {
     s32 i;
-    gNumPotentialTargets = 0;
+    gAIThrowItemActionChoiceCount = 0;
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
         Entity *targetPokemon = gDungeon->allPokemon[i];
         if (EntityExists(targetPokemon) && pokemon != targetPokemon &&
-            CanSeeTarget(pokemon, targetPokemon) && CanTarget(pokemon, targetPokemon, FALSE, TRUE) == TARGET_CAPABILITY_CAN_TARGET)
+            CanSeeTarget(pokemon, targetPokemon) && GetTreatmentBetweenMonsters(pokemon, targetPokemon, FALSE, TRUE) == TREATMENT_TREAT_AS_ENEMY)
         {
             s32 distanceX;
             s32 distance;
@@ -343,16 +343,16 @@ void FindRockItemTargets(Entity *pokemon, Item *item, Position potentialTargets[
                 Position *newPotentialTarget;
                 if (!ignoreRollChance)
                 {
-                    u32 itemWeight = EvaluateItem(targetPokemon, item, ITEM_TARGET_OTHER);
+                    u32 itemWeight = GetAIUseItemProbability(targetPokemon, item, ITEM_TARGET_OTHER);
                     if (!DungeonRandOutcome(itemWeight))
                     {
                         continue;
                     }
                 }
-                newPotentialTarget = &potentialTargets[gNumPotentialTargets];
+                newPotentialTarget = &potentialTargets[gAIThrowItemActionChoiceCount];
                 newPotentialTarget->x = targetPokemon->pos.x;
                 newPotentialTarget->y = targetPokemon->pos.y;
-                gNumPotentialTargets++;
+                gAIThrowItemActionChoiceCount++;
             }
         }
     }
@@ -414,15 +414,15 @@ void TargetThrownItem(Entity *pokemon, Entity *targetPokemon, Item *item, s32 ta
         }
     }
 
-    if (targetDirection > -1 && !gTargetAhead[targetDirection] && IsTargetInRange(pokemon, targetPokemon, targetDirection, RANGED_ATTACK_RANGE))
+    if (targetDirection > -1 && !gAIThrownItemDirectionIsUsed[targetDirection] && IsTargetInRange(pokemon, targetPokemon, targetDirection, RANGED_ATTACK_RANGE))
     {
         u32 itemWeight;
         u32 *targetWeight;
-        gTargetAhead[targetDirection] = TRUE;
-        gPotentialItemTargetDirections[gNumPotentialTargets] = targetDirection;
-        targetWeight = &gPotentialItemTargetWeights[gNumPotentialTargets];
-        itemWeight = !ignoreRollChance ? EvaluateItem(targetPokemon, item, targetingFlags) : 100;
+        gAIThrownItemDirectionIsUsed[targetDirection] = TRUE;
+        gAIThrownItemDirections[gAIThrowItemActionChoiceCount] = targetDirection;
+        targetWeight = &gAIThrownItemProbabilities[gAIThrowItemActionChoiceCount];
+        itemWeight = !ignoreRollChance ? GetAIUseItemProbability(targetPokemon, item, targetingFlags) : 100;
         *targetWeight = itemWeight;
-        gNumPotentialTargets++;
+        gAIThrowItemActionChoiceCount++;
     }
 }

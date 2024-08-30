@@ -758,12 +758,12 @@ _0806A8C8:
 	beq _0806A90E
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl CannotMove
+	bl CheckVariousStatuses2
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A8EE
 	adds r0, r4, 0
-	bl HasStatusThatPreventsActing
+	bl CheckVariousStatuses
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806A90E

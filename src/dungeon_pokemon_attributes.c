@@ -231,9 +231,9 @@ s32 GetMovePower(Entity *pokemon, Move *pokeMove)
         return (GetMoveBasePower(pokeMove) + pokeMove->ginseng);
 }
 
-bool8 ToolboxEnabled(EntityInfo *pokemon)
+bool8 MonsterCanThrowItems(EntityInfo *pokemon)
 {
-    if(!IsToolboxEnabled(pokemon->id))
+    if(!MonsterIDCanThrowItems(pokemon->id))
         return FALSE;
     return TRUE;
 }

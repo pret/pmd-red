@@ -100,7 +100,7 @@ Entity* GetLeaderIfVisible(Entity *pokemon)
         Entity *leader = GetLeader();
         if (leader &&
             leader->info->waitingStruct.waitingStatus != STATUS_DECOY &&
-            CanTarget(pokemon, leader, FALSE, FALSE) == TARGET_CAPABILITY_CANNOT_ATTACK &&
+            GetTreatmentBetweenMonsters(pokemon, leader, FALSE, FALSE) == TREATMENT_TREAT_AS_ALLY &&
             CanTargetEntity(pokemon, leader))
         {
             return leader;
@@ -134,7 +134,7 @@ bool8 sub_8072CF4(Entity *entity)
             sub_8075BA4(entity,gUnknown_80F58F4[(info->action).action][1]);
         }
     }
-    if ((CannotAttack(entity, FALSE)) && (IsCharging(entity, TRUE))) {
+    if ((CannotAttack(entity, FALSE)) && (IsChargingAnyTwoTurnMove(entity, TRUE))) {
         sub_8079764(entity);
     }
 
@@ -280,7 +280,7 @@ bool8 sub_8072CF4(Entity *entity)
         case ACTION_THROW_ITEM_PLAYER:
         case ACTION_THROW_STRAIGHT_PLAYER:
         case ACTION_THROW_ARC_PLAYER:
-            if (ToolboxEnabled(info)) {
+            if (MonsterCanThrowItems(info)) {
                 nullsub_95(entity);
                 sub_80671A0(entity);
                 break;

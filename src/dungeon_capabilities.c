@@ -17,7 +17,10 @@
 
 const u8 gDirectionBitMasks_1[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 
-bool8 CannotMove(Entity *pokemon, bool8 checkBlinker)
+// TODO CheckVariousStatuses, CheckVariousStatuses2, CheckVariousConditions all check for different conditions that interfere with a Pokémon's ability to act,
+// but I'm not sure what the reason is for each function checking the conditions that they do.
+// These functions could use better names if someone figures out a clear pattern/reasoning.
+bool8 CheckVariousStatuses2(Entity *pokemon, bool8 checkBlinker)
 {
     EntityInfo *pokemonInfo = pokemon->info;
 
@@ -40,7 +43,7 @@ bool8 sub_8070BC0(Entity* entity)
 {
     EntityInfo *entityInfo = entity->info;
 
-    if (IsCharging(entity, FALSE)
+    if (IsChargingAnyTwoTurnMove(entity, FALSE)
         || entityInfo->sleep.sleep == STATUS_YAWNING
         || entityInfo->sleep.sleep == STATUS_NIGHTMARE
         || ShouldMonsterRunAway(entity)
@@ -70,7 +73,7 @@ bool8 sub_8070BC0(Entity* entity)
     if (entityInfo->volatileStatus.volatileStatus != STATUS_INFATUATED
         && entityInfo->volatileStatus.volatileStatus != STATUS_PAUSED)
         return TRUE;
-        
+
     return FALSE;
 }
 
@@ -83,24 +86,24 @@ static inline bool8 JoinLocationCannotUseItems(EntityInfo *pokemonInfo)
     return FALSE;
 }
 
-bool8 CannotUseItems(Entity *pokemon)
+bool8 CheckVariousConditions(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = pokemon->info;
 
     if (pokemonInfo->clientType == CLIENT_TYPE_CLIENT
         || JoinLocationCannotUseItems(pokemonInfo)
         || (!pokemonInfo->isTeamLeader && ShouldMonsterRunAway(pokemon))
-        || CannotMove(pokemon, FALSE)
-        || HasStatusThatPreventsActing(pokemon))
+        || CheckVariousStatuses2(pokemon, FALSE)
+        || CheckVariousStatuses(pokemon))
         return TRUE;
 
-    if (IsCharging(pokemon, FALSE))
+    if (IsChargingAnyTwoTurnMove(pokemon, FALSE))
         return TRUE;
 
     return FALSE;
 }
 
-bool8 HasStatusThatPreventsActing(Entity *pokemon)
+bool8 CheckVariousStatuses(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = pokemon->info;
 

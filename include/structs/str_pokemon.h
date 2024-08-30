@@ -143,7 +143,7 @@ typedef struct MonsterDataEntry
     u8 unk30; // 10 for all Pokémon.
     u8 unk31; // 10 for all Pokémon.
     u8 unk32; // 24 for all Pokémon.
-    /* 0x33 */ bool8 toolboxEnabled; // If false, the AI can't use items. Doesn't seem to be used, as it's true for all Pokémon.
+    /* 0x33 */ bool8 canThrowItems; // If false, the AI can't use items. Doesn't seem to be used, as it's true for all Pokémon.
     /* 0x34 */ PreEvolution preEvolution;
     /* 0x38 */ EvolutionRequirements evolutionRequirements;
     /* 0x3C */ s16 dexInternal[2]; // dexNo and internalNo

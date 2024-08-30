@@ -370,7 +370,7 @@ bool8 sub_8046F00(Item *item)
         entity = gDungeon->teamPokemon[index];
         if (EntityExists(entity)) {
           canLearnMove = CanMonLearnMove(moveID, entity->info->id);
-          cannotMove = CannotMove(entity, FALSE);
+          cannotMove = CheckVariousStatuses2(entity, FALSE);
           if (cannotMove) {
             canLearnMove = FALSE;
           }

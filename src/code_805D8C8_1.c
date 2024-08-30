@@ -2668,7 +2668,7 @@ bool8 sub_805EC4C(Entity *a0, u8 a1)
     if (tileMonsterInfo->sleep.sleep != STATUS_NONE && tileMonsterInfo->sleep.sleep != STATUS_SLEEPLESS && tileMonsterInfo->sleep.sleep != STATUS_YAWNING)  return FALSE;
     if (entityInfo->sleep.sleep != STATUS_NONE      && entityInfo->sleep.sleep != STATUS_SLEEPLESS      && entityInfo->sleep.sleep != STATUS_YAWNING)       return FALSE;
 
-    if (IsCharging(tileMonster, FALSE)) return FALSE;
+    if (IsChargingAnyTwoTurnMove(tileMonster, FALSE)) return FALSE;
     if (!sub_8070F80(a0, entityInfo->action.direction)) return FALSE;
 
     if (a1 != 0 && sub_807049C(tileMonster, &a0->pos) && !sub_8052B8C(0, gUnknown_8100208, 0)) return FALSE;
@@ -4063,7 +4063,7 @@ void sub_8060900(Entity *a0)
                     if (EntityExists(teamMon)) {
                         EntityInfo *teamMonInfo = teamMon->info;
                         teamMonInfo->unk157 = FALSE;
-                        if (!CannotUseItems(teamMon)) {
+                        if (!CheckVariousConditions(teamMon)) {
                             r8 = TRUE;
                             teamMonInfo->unk157 = TRUE;
                         }
@@ -4082,7 +4082,7 @@ void sub_8060900(Entity *a0)
                 sub_8044F5C(0x37, item->id);
             }
 
-            if (CannotUseItems(a0)) {
+            if (CheckVariousConditions(a0)) {
                 sub_8044FF0(0x37);
                 sub_8044FF0(0x3E);
             }
@@ -4108,7 +4108,7 @@ void sub_8060900(Entity *a0)
             sub_8044F5C(0xB, item->id);
         }
 
-        if (!ToolboxEnabled(a0Info)) {
+        if (!MonsterCanThrowItems(a0Info)) {
             sub_8044FF0(0x27);
             sub_8044FF0(0x41);
             sub_8044FF0(0xB);
@@ -4122,7 +4122,7 @@ void sub_8060900(Entity *a0)
             EntityInfo *teamMonInfo = teamMon->info;
 
             r5 = FALSE;
-            if (CannotUseItems(teamMon))
+            if (CheckVariousConditions(teamMon))
                 r6 = TRUE;
             else
                 r6 = FALSE;
@@ -4571,7 +4571,7 @@ void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
                 }
             }
 
-            if (CannotMove(teamMon, FALSE)) {
+            if (CheckVariousStatuses2(teamMon, FALSE)) {
                 r5 = FALSE;
             }
             if (!r5) {
@@ -4723,7 +4723,7 @@ void ShowTacticsMenu(ActionContainer *a0)
                 gUnknown_202EE6C = 0;
                 sub_8044F5C(0x2F, 0);
                 sub_8044F5C(0xC, 0);
-                if (CannotMove(teamMon, TRUE)) {
+                if (CheckVariousStatuses2(teamMon, TRUE)) {
                     sub_8044FF0(0x2F);
                 }
                 sub_805FC30(&sp, 0x16);

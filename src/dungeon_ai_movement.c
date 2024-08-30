@@ -106,7 +106,7 @@ bool8 CanTakeItem(Entity *pokemon)
     EntityInfo *pokemonInfo = pokemon->info;
     struct Tile *mapTile;
     Entity *object;
-    if (!EntityExists(pokemon) || CannotUseItems(pokemon))
+    if (!EntityExists(pokemon) || CheckVariousConditions(pokemon))
     {
         return FALSE;
     }
@@ -173,7 +173,7 @@ bool8 ChooseTargetPosition(Entity *pokemon)
             {
                 if (gDungeon->decoyActive)
                 {
-                    if (CanTarget(pokemon, target, FALSE, TRUE) != TARGET_CAPABILITY_CAN_TARGET)
+                    if (GetTreatmentBetweenMonsters(pokemon, target, FALSE, TRUE) != TREATMENT_TREAT_AS_ENEMY)
                     {
                         continue;
                     }
@@ -534,7 +534,7 @@ bool8 AvoidEnemies(Entity *pokemon)
         if (EntityExists(target) && CanSeeTarget(pokemon, target))
         {
             s32 distance;
-            if (gDungeon->decoyActive && CanTarget(pokemon, target, FALSE, TRUE) != TARGET_CAPABILITY_CAN_TARGET)
+            if (gDungeon->decoyActive && GetTreatmentBetweenMonsters(pokemon, target, FALSE, TRUE) != TREATMENT_TREAT_AS_ENEMY)
             {
                 continue;
             }

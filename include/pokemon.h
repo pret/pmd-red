@@ -62,7 +62,7 @@ u32 GetWeight(s16 index);
 u32 GetSize(s16 index);
 u8 GetFriendArea(s32 index);
 u16 GetBaseHP(s16 index);
-bool8 IsToolboxEnabled(s16 index);
+bool8 MonsterIDCanThrowItems(s16 index);
 u8 GetUnk12(s16 index);
 s16 GetPokemonEvolveFrom(s16 index);
 u16 GetBaseOffensiveStat(s32 index, u32 r1);

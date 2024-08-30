@@ -31,7 +31,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             0,
             0
@@ -76,7 +76,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             1,
             1
@@ -120,7 +120,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_BULBASAUR",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -171,7 +171,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_IVYSAUR",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -223,7 +223,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             4,
             4
@@ -267,7 +267,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_CHARMANDER",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -320,7 +320,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_CHARMELEON",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -372,7 +372,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             7,
             7
@@ -416,7 +416,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SQUIRTLE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -468,7 +468,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_WARTORTLE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -519,7 +519,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             10,
             10
@@ -563,7 +563,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_CATERPIE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -616,7 +616,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_METAPOD",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -667,7 +667,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             13,
             13
@@ -711,7 +711,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_WEEDLE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -763,7 +763,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_KAKUNA",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -814,7 +814,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             16,
             16
@@ -858,7 +858,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_PIDGEY",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -909,7 +909,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_PIDGEOTTO",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -960,7 +960,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             19,
             19
@@ -1004,7 +1004,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_RATTATA",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -1055,7 +1055,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             21,
             21
@@ -1099,7 +1099,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SPEAROW",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -1151,7 +1151,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             23,
             23
@@ -1195,7 +1195,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_EKANS",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -1246,7 +1246,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_PICHU",
             "evolveType": "EVOLVE_TYPE_IQ"
@@ -1296,7 +1296,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_PIKACHU",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -1346,7 +1346,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             27,
             27
@@ -1389,7 +1389,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SANDSHREW",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -1439,7 +1439,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             29,
             29
@@ -1482,7 +1482,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_NIDORAN_F",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -1533,7 +1533,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_NIDORINA",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -1583,7 +1583,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             32,
             32
@@ -1626,7 +1626,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_NIDORAN_M",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -1677,7 +1677,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_NIDORINO",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -1727,7 +1727,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_CLEFFA",
             "evolveType": "EVOLVE_TYPE_IQ"
@@ -1777,7 +1777,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_CLEFAIRY",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -1828,7 +1828,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             37,
             37
@@ -1873,7 +1873,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_VULPIX",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -1923,7 +1923,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_IGGLYBUFF",
             "evolveType": "EVOLVE_TYPE_IQ"
@@ -1974,7 +1974,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_JIGGLYPUFF",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -2026,7 +2026,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             41,
             41
@@ -2071,7 +2071,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_ZUBAT",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -2122,7 +2122,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             43,
             43
@@ -2166,7 +2166,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_ODDISH",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -2217,7 +2217,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_GLOOM",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -2268,7 +2268,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             46,
             46
@@ -2312,7 +2312,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_PARAS",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -2363,7 +2363,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             48,
             48
@@ -2408,7 +2408,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_VENONAT",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -2460,7 +2460,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             50,
             50
@@ -2505,7 +2505,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_DIGLETT",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -2556,7 +2556,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             52,
             52
@@ -2600,7 +2600,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_MEOWTH",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -2653,7 +2653,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             54,
             54
@@ -2698,7 +2698,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_PSYDUCK",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -2749,7 +2749,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             56,
             56
@@ -2792,7 +2792,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_MANKEY",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -2844,7 +2844,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             58,
             58
@@ -2889,7 +2889,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_GROWLITHE",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -2941,7 +2941,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             60,
             60
@@ -2986,7 +2986,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_POLIWAG",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -3039,7 +3039,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_POLIWHIRL",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -3091,7 +3091,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             63,
             63
@@ -3135,7 +3135,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_ABRA",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -3187,7 +3187,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_KADABRA",
             "evolveType": "EVOLVE_TYPE_LINK_CABLE"
@@ -3239,7 +3239,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             66,
             66
@@ -3282,7 +3282,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_MACHOP",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -3332,7 +3332,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_MACHOKE",
             "evolveType": "EVOLVE_TYPE_LINK_CABLE"
@@ -3385,7 +3385,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             69,
             69
@@ -3429,7 +3429,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_BELLSPROUT",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -3480,7 +3480,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_WEEPINBELL",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -3533,7 +3533,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             72,
             72
@@ -3579,7 +3579,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_TENTACOOL",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -3631,7 +3631,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             74,
             74
@@ -3676,7 +3676,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_GEODUDE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -3729,7 +3729,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_GRAVELER",
             "evolveType": "EVOLVE_TYPE_LINK_CABLE"
@@ -3782,7 +3782,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             77,
             77
@@ -3827,7 +3827,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_PONYTA",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -3880,7 +3880,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             79,
             79
@@ -3926,7 +3926,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SLOWPOKE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -3980,7 +3980,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             81,
             81
@@ -4026,7 +4026,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_MAGNEMITE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -4078,7 +4078,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             83,
             83
@@ -4123,7 +4123,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             84,
             84
@@ -4168,7 +4168,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_DODUO",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -4219,7 +4219,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             86,
             86
@@ -4264,7 +4264,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SEEL",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -4315,7 +4315,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             88,
             88
@@ -4359,7 +4359,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_GRIMER",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -4410,7 +4410,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             90,
             90
@@ -4455,7 +4455,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SHELLDER",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -4507,7 +4507,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             92,
             92
@@ -4552,7 +4552,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_GASTLY",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -4605,7 +4605,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_HAUNTER",
             "evolveType": "EVOLVE_TYPE_LINK_CABLE"
@@ -4658,7 +4658,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             95,
             95
@@ -4701,7 +4701,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             96,
             96
@@ -4744,7 +4744,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_DROWZEE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -4796,7 +4796,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             98,
             98
@@ -4841,7 +4841,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_KRABBY",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -4892,7 +4892,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             100,
             100
@@ -4936,7 +4936,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_VOLTORB",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -4987,7 +4987,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             102,
             102
@@ -5031,7 +5031,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_EXEGGCUTE",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -5083,7 +5083,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             104,
             104
@@ -5127,7 +5127,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_CUBONE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -5177,7 +5177,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_TYROGUE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -5228,7 +5228,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_TYROGUE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -5280,7 +5280,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             108,
             108
@@ -5324,7 +5324,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             109,
             109
@@ -5368,7 +5368,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_KOFFING",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -5420,7 +5420,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             111,
             111
@@ -5465,7 +5465,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_RHYHORN",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -5516,7 +5516,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             113,
             113
@@ -5559,7 +5559,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             114,
             114
@@ -5603,7 +5603,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             115,
             115
@@ -5647,7 +5647,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             116,
             116
@@ -5691,7 +5691,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_HORSEA",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -5743,7 +5743,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             118,
             118
@@ -5788,7 +5788,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_GOLDEEN",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -5840,7 +5840,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             120,
             120
@@ -5886,7 +5886,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_STARYU",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -5936,7 +5936,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             122,
             122
@@ -5980,7 +5980,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             123,
             123
@@ -6024,7 +6024,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SMOOCHUM",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -6074,7 +6074,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_ELEKID",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -6125,7 +6125,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_MAGBY",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -6175,7 +6175,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             127,
             127
@@ -6218,7 +6218,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             128,
             128
@@ -6262,7 +6262,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             129,
             129
@@ -6307,7 +6307,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_MAGIKARP",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -6360,7 +6360,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             131,
             131
@@ -6403,7 +6403,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             132,
             132
@@ -6447,7 +6447,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             133,
             133
@@ -6491,7 +6491,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_EEVEE",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -6541,7 +6541,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_EEVEE",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -6592,7 +6592,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_EEVEE",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -6643,7 +6643,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             137,
             137
@@ -6689,7 +6689,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             138,
             138
@@ -6735,7 +6735,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_OMANYTE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -6788,7 +6788,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             140,
             140
@@ -6834,7 +6834,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_KABUTO",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -6887,7 +6887,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             142,
             142
@@ -6931,7 +6931,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_MUNCHLAX",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -6985,7 +6985,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             144,
             144
@@ -7032,7 +7032,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             145,
             145
@@ -7079,7 +7079,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             146,
             146
@@ -7123,7 +7123,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             147,
             147
@@ -7167,7 +7167,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_DRATINI",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -7219,7 +7219,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_DRAGONAIR",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -7270,7 +7270,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             150,
             150
@@ -7314,7 +7314,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             151,
             151
@@ -7358,7 +7358,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             152,
             152
@@ -7401,7 +7401,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_CHIKORITA",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -7451,7 +7451,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_BAYLEEF",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -7503,7 +7503,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             155,
             155
@@ -7547,7 +7547,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_CYNDAQUIL",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -7598,7 +7598,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_QUILAVA",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -7650,7 +7650,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             158,
             158
@@ -7694,7 +7694,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_TOTODILE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -7745,7 +7745,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_CROCONAW",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -7796,7 +7796,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             161,
             161
@@ -7840,7 +7840,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SENTRET",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -7892,7 +7892,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             163,
             163
@@ -7937,7 +7937,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_HOOTHOOT",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -7990,7 +7990,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             165,
             165
@@ -8036,7 +8036,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_LEDYBA",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -8088,7 +8088,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             167,
             167
@@ -8133,7 +8133,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SPINARAK",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -8185,7 +8185,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_GOLBAT",
             "evolveType": "EVOLVE_TYPE_IQ"
@@ -8238,7 +8238,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             170,
             170
@@ -8284,7 +8284,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_CHINCHOU",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -8334,7 +8334,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             172,
             172
@@ -8377,7 +8377,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             173,
             173
@@ -8420,7 +8420,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             174,
             174
@@ -8464,7 +8464,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             175,
             175
@@ -8509,7 +8509,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_TOGEPI",
             "evolveType": "EVOLVE_TYPE_IQ"
@@ -8561,7 +8561,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             177,
             177
@@ -8607,7 +8607,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_NATU",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -8657,7 +8657,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             179,
             179
@@ -8700,7 +8700,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_MAREEP",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -8750,7 +8750,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_FLAAFFY",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -8800,7 +8800,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_GLOOM",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -8852,7 +8852,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_AZURILL",
             "evolveType": "EVOLVE_TYPE_IQ"
@@ -8904,7 +8904,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_MARILL",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -8955,7 +8955,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             185,
             185
@@ -9000,7 +9000,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_POLIWHIRL",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -9052,7 +9052,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             187,
             187
@@ -9096,7 +9096,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_HOPPIP",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -9148,7 +9148,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SKIPLOOM",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -9199,7 +9199,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             190,
             190
@@ -9242,7 +9242,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             191,
             191
@@ -9285,7 +9285,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SUNKERN",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -9338,7 +9338,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             193,
             193
@@ -9384,7 +9384,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             194,
             194
@@ -9430,7 +9430,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_WOOPER",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -9480,7 +9480,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_EEVEE",
             "evolveType": "EVOLVE_TYPE_IQ"
@@ -9531,7 +9531,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_EEVEE",
             "evolveType": "EVOLVE_TYPE_IQ"
@@ -9583,7 +9583,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             198,
             198
@@ -9629,7 +9629,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SLOWPOKE",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -9681,7 +9681,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             200,
             200
@@ -9725,7 +9725,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             201
@@ -9769,7 +9769,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             202
@@ -9813,7 +9813,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             203
@@ -9857,7 +9857,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             204
@@ -9901,7 +9901,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             205
@@ -9945,7 +9945,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             206
@@ -9989,7 +9989,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             207
@@ -10033,7 +10033,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             208
@@ -10077,7 +10077,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             209
@@ -10121,7 +10121,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             210
@@ -10165,7 +10165,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             211
@@ -10209,7 +10209,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             212
@@ -10253,7 +10253,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             213
@@ -10297,7 +10297,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             214
@@ -10341,7 +10341,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             215
@@ -10385,7 +10385,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             216
@@ -10429,7 +10429,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             217
@@ -10473,7 +10473,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             218
@@ -10517,7 +10517,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             219
@@ -10561,7 +10561,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             220
@@ -10605,7 +10605,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             221
@@ -10649,7 +10649,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             222
@@ -10693,7 +10693,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             223
@@ -10737,7 +10737,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             224
@@ -10781,7 +10781,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             225
@@ -10825,7 +10825,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             226
@@ -10869,7 +10869,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_WYNAUT",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -10921,7 +10921,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             203,
             230
@@ -10964,7 +10964,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             204,
             231
@@ -11008,7 +11008,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_PINECO",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -11059,7 +11059,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             206,
             233
@@ -11105,7 +11105,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             207,
             234
@@ -11150,7 +11150,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_ONIX",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -11203,7 +11203,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             209,
             236
@@ -11247,7 +11247,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SNUBBULL",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -11300,7 +11300,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             211,
             238
@@ -11344,7 +11344,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SCYTHER",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -11396,7 +11396,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             213,
             240
@@ -11441,7 +11441,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             214,
             241
@@ -11486,7 +11486,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             215,
             242
@@ -11529,7 +11529,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             216,
             243
@@ -11572,7 +11572,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_TEDDIURSA",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -11624,7 +11624,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             218,
             245
@@ -11670,7 +11670,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SLUGMA",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -11721,7 +11721,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             220,
             247
@@ -11765,7 +11765,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SWINUB",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -11818,7 +11818,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             222,
             249
@@ -11862,7 +11862,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             223,
             250
@@ -11907,7 +11907,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_REMORAID",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -11959,7 +11959,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             225,
             252
@@ -12005,7 +12005,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             226,
             253
@@ -12051,7 +12051,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             227,
             254
@@ -12097,7 +12097,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             228,
             255
@@ -12143,7 +12143,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_HOUNDOUR",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -12195,7 +12195,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SEADRA",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -12246,7 +12246,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             231,
             258
@@ -12289,7 +12289,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_PHANPY",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -12340,7 +12340,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_PORYGON",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -12391,7 +12391,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             234,
             261
@@ -12435,7 +12435,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             235,
             262
@@ -12478,7 +12478,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             236,
             263
@@ -12521,7 +12521,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_TYROGUE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -12573,7 +12573,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             238,
             265
@@ -12616,7 +12616,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             239,
             266
@@ -12660,7 +12660,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             240,
             267
@@ -12703,7 +12703,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             241,
             268
@@ -12747,7 +12747,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_CHANSEY",
             "evolveType": "EVOLVE_TYPE_IQ"
@@ -12798,7 +12798,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             243,
             270
@@ -12843,7 +12843,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             244,
             271
@@ -12888,7 +12888,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             245,
             272
@@ -12932,7 +12932,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             246,
             273
@@ -12976,7 +12976,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_LARVITAR",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -13028,7 +13028,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_PUPITAR",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -13082,7 +13082,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             249,
             276
@@ -13128,7 +13128,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             250,
             277
@@ -13174,7 +13174,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             251,
             278
@@ -13218,7 +13218,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             252,
             279
@@ -13261,7 +13261,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_TREECKO",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -13311,7 +13311,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_GROVYLE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -13363,7 +13363,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             255,
             282
@@ -13408,7 +13408,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_TORCHIC",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -13460,7 +13460,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_COMBUSKEN",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -13512,7 +13512,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             258,
             285
@@ -13557,7 +13557,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_MUDKIP",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -13609,7 +13609,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_MARSHTOMP",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -13659,7 +13659,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             261,
             288
@@ -13702,7 +13702,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_POOCHYENA",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -13752,7 +13752,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             263,
             290
@@ -13795,7 +13795,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_ZIGZAGOON",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -13845,7 +13845,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             265,
             292
@@ -13888,7 +13888,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_WURMPLE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -13941,7 +13941,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SILCOON",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -13991,7 +13991,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_WURMPLE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -14044,7 +14044,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_CASCOON",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -14097,7 +14097,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             270,
             297
@@ -14144,7 +14144,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_LOTAD",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -14197,7 +14197,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_LOMBRE",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -14248,7 +14248,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             273,
             300
@@ -14293,7 +14293,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SEEDOT",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -14346,7 +14346,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_NUZLEAF",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -14397,7 +14397,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             276,
             303
@@ -14441,7 +14441,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_TAILLOW",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -14493,7 +14493,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             278,
             305
@@ -14539,7 +14539,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_WINGULL",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -14590,7 +14590,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             280,
             307
@@ -14634,7 +14634,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_RALTS",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -14686,7 +14686,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_KIRLIA",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -14738,7 +14738,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             283,
             310
@@ -14783,7 +14783,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SURSKIT",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -14833,7 +14833,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             285,
             312
@@ -14877,7 +14877,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SHROOMISH",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -14927,7 +14927,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             287,
             314
@@ -14970,7 +14970,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SLAKOTH",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -15020,7 +15020,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_VIGOROTH",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -15071,7 +15071,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             290,
             317
@@ -15116,7 +15116,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_NINCADA",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -15168,7 +15168,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_NINCADA",
             "evolveType": "EVOLVE_TYPE_NONE"
@@ -15218,7 +15218,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             293,
             320
@@ -15261,7 +15261,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_WHISMUR",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -15311,7 +15311,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_LOUDRED",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -15363,7 +15363,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             296,
             323
@@ -15407,7 +15407,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_MAKUHITA",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -15459,7 +15459,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             298,
             325
@@ -15503,7 +15503,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             299,
             326
@@ -15547,7 +15547,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             300,
             327
@@ -15590,7 +15590,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SKITTY",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -15641,7 +15641,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             302,
             329
@@ -15685,7 +15685,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             303,
             330
@@ -15730,7 +15730,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             304,
             331
@@ -15775,7 +15775,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_ARON",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -15827,7 +15827,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_LAIRON",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -15879,7 +15879,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             307,
             334
@@ -15924,7 +15924,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_MEDITITE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -15975,7 +15975,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             309,
             336
@@ -16019,7 +16019,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_ELECTRIKE",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -16069,7 +16069,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             311,
             338
@@ -16112,7 +16112,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             312,
             339
@@ -16156,7 +16156,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             313,
             340
@@ -16199,7 +16199,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             314,
             341
@@ -16244,7 +16244,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             315,
             342
@@ -16289,7 +16289,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             316,
             343
@@ -16333,7 +16333,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_GULPIN",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -16385,7 +16385,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             318,
             345
@@ -16430,7 +16430,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_CARVANHA",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -16482,7 +16482,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             320,
             347
@@ -16527,7 +16527,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_WAILMER",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -16579,7 +16579,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             322,
             349
@@ -16624,7 +16624,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_NUMEL",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -16675,7 +16675,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             324,
             351
@@ -16719,7 +16719,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             325,
             352
@@ -16763,7 +16763,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SPOINK",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -16814,7 +16814,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             327,
             354
@@ -16858,7 +16858,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             328,
             355
@@ -16903,7 +16903,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_TRAPINCH",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -16955,7 +16955,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_VIBRAVA",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -17005,7 +17005,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             331,
             358
@@ -17049,7 +17049,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_CACNEA",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -17101,7 +17101,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             333,
             360
@@ -17145,7 +17145,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SWABLU",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -17195,7 +17195,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             335,
             362
@@ -17238,7 +17238,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             336,
             363
@@ -17283,7 +17283,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             337,
             364
@@ -17328,7 +17328,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             338,
             365
@@ -17373,7 +17373,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             339,
             366
@@ -17419,7 +17419,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_BARBOACH",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -17471,7 +17471,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             341,
             368
@@ -17517,7 +17517,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_CORPHISH",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -17569,7 +17569,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             343,
             370
@@ -17614,7 +17614,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_BALTOY",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -17665,7 +17665,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             345,
             372
@@ -17709,7 +17709,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_LILEEP",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -17760,7 +17760,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             347,
             374
@@ -17804,7 +17804,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_ANORITH",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -17855,7 +17855,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             349,
             376
@@ -17899,7 +17899,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_FEEBAS",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -17950,7 +17950,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             351,
             378
@@ -17993,7 +17993,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             351,
             379
@@ -18036,7 +18036,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             351,
             380
@@ -18079,7 +18079,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             351,
             381
@@ -18123,7 +18123,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             352,
             382
@@ -18167,7 +18167,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             353,
             383
@@ -18211,7 +18211,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SHUPPET",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -18262,7 +18262,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             355,
             385
@@ -18305,7 +18305,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_DUSKULL",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -18356,7 +18356,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             357,
             387
@@ -18400,7 +18400,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             358,
             388
@@ -18445,7 +18445,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             359,
             389
@@ -18489,7 +18489,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             360,
             390
@@ -18532,7 +18532,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             361,
             391
@@ -18575,7 +18575,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SNORUNT",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -18627,7 +18627,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             363,
             393
@@ -18672,7 +18672,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SPHEAL",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -18724,7 +18724,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SEALEO",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -18775,7 +18775,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             366,
             396
@@ -18819,7 +18819,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_CLAMPERL",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -18871,7 +18871,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_CLAMPERL",
             "evolveType": "EVOLVE_TYPE_ITEM"
@@ -18925,7 +18925,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             369,
             399
@@ -18969,7 +18969,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             370,
             400
@@ -19012,7 +19012,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             371,
             401
@@ -19055,7 +19055,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_BAGON",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -19106,7 +19106,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_SHELGON",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -19158,7 +19158,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             374,
             404
@@ -19203,7 +19203,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_BELDUM",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -19254,7 +19254,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "preEvolution": {
             "evolveFrom": "MONSTER_METANG",
             "evolveType": "EVOLVE_TYPE_LEVEL"
@@ -19304,7 +19304,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             377,
             407
@@ -19347,7 +19347,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             378,
             408
@@ -19390,7 +19390,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             379,
             409
@@ -19437,7 +19437,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             380,
             410
@@ -19484,7 +19484,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             381,
             411
@@ -19530,7 +19530,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             382,
             412
@@ -19576,7 +19576,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             383,
             413
@@ -19623,7 +19623,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             384,
             414
@@ -19669,7 +19669,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             385,
             415
@@ -19715,7 +19715,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             386,
             416
@@ -19759,7 +19759,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             227
@@ -19803,7 +19803,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             201,
             228
@@ -19848,7 +19848,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             386,
             416
@@ -19893,7 +19893,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             386,
             417
@@ -19938,7 +19938,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             386,
             418
@@ -19982,7 +19982,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             387,
             419
@@ -20025,7 +20025,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             388,
             420
@@ -20068,7 +20068,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": false,
+        "canThrowItems": false,
         "dexInternal": [
             389,
             421
@@ -20114,7 +20114,7 @@
         "unk30": 10,
         "unk31": 10,
         "unk32": 24,
-        "toolboxEnabled": true,
+        "canThrowItems": true,
         "dexInternal": [
             384,
             422
