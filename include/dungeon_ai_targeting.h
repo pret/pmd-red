@@ -10,7 +10,7 @@ bool8 ShouldAvoidFirstHit(Entity *pokemon, bool8 forceAvoid);
 bool8 ShouldMonsterRunAway(Entity *pokemon);
 bool8 ShouldMonsterRunAwayAndShowEffect(Entity *pokemon, bool8 showRunAwayEffect);
 void CheckRunAwayVisualFlag(Entity *pokemon, bool8 showRunAwayEffect);
-u8 CanTarget(Entity *pokemon, Entity *targetPokemon, bool8 ignoreInvisible, bool8 checkPetrified);
+u8 GetTreatmentBetweenMonsters(Entity *pokemon, Entity *targetPokemon, bool8 ignoreInvisible, bool8 checkPetrified);
 u8 sub_807167C(Entity * pokemon, Entity * target);
 
 #endif

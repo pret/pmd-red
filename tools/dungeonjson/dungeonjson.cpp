@@ -634,7 +634,7 @@ string generate_monster_data_text(Json data) {
             << read_json_int(data_entry["unk30"], 1)
             << read_json_int(data_entry["unk31"], 1)
             << read_json_int(data_entry["unk32"], 1)
-            << read_json_bool(data_entry["toolboxEnabled"])
+            << read_json_bool(data_entry["canThrowItems"])
             << read_json_string(data_entry["preEvolution"]["evolveFrom"], 2)
             << read_json_string(data_entry["preEvolution"]["evolveType"], 2);
 

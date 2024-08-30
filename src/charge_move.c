@@ -85,7 +85,7 @@ bool8 MoveMatchesChargingStatus(Entity *pokemon, Move *move)
     }
 }
 
-bool8 IsCharging(Entity *pokemon, bool8 checkCharge)
+bool8 IsChargingAnyTwoTurnMove(Entity *pokemon, bool8 checkCharge)
 {
     if (!EntityExists(pokemon))
     {
@@ -113,6 +113,7 @@ bool8 IsCharging(Entity *pokemon, bool8 checkCharge)
                 return TRUE;
             }
         }
+        // BUG: This condition is never reached because the for loop terminates by returning FALSE at the end of the gMultiTurnChargingStatuses array.
         if (checkCharge && *chargingStatusPointer2 == chargeStatus)
         {
             return TRUE;

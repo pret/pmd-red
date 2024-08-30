@@ -71,7 +71,7 @@ _0806D088:
 	ldr r0, [sp, 0x44]
 	mov r9, r0
 	adds r0, r5, 0
-	bl HasStatusThatPreventsActing
+	bl CheckVariousStatuses
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D0A2

@@ -653,7 +653,7 @@ bool8 IsAITargetEligible(s32 targetingFlags, Entity *user, Entity *target, Move 
     u32 *categoryTargetingFlags2 = &categoryTargetingFlags; // Fixes a regswap.
     if (*categoryTargetingFlags2 == TARGETING_FLAG_TARGET_OTHER)
     {
-        if (CanTarget(user, target, FALSE, TRUE) == TARGET_CAPABILITY_CAN_TARGET)
+        if (GetTreatmentBetweenMonsters(user, target, FALSE, TRUE) == TREATMENT_TREAT_AS_ENEMY)
         {
             hasTarget = TRUE;
         }
@@ -691,7 +691,7 @@ bool8 IsAITargetEligible(s32 targetingFlags, Entity *user, Entity *target, Move 
             goto returnFalse;
         }
         checkCanTarget:
-        if (CanTarget(user, target, FALSE, TRUE) == TARGET_CAPABILITY_CANNOT_ATTACK)
+        if (GetTreatmentBetweenMonsters(user, target, FALSE, TRUE) == TREATMENT_TREAT_AS_ALLY)
         {
             hasTarget = TRUE;
         }
@@ -827,7 +827,7 @@ bool8 TargetRegularAttack(Entity *pokemon, u32 *targetDir, bool8 checkPetrified)
         if (target != NULL &&
             GetEntityType(target) == ENTITY_MONSTER &&
             CanAttackInDirection(pokemon, direction) &&
-            CanTarget(pokemon, target, FALSE, checkPetrified) == TARGET_CAPABILITY_CAN_TARGET &&
+            GetTreatmentBetweenMonsters(pokemon, target, FALSE, checkPetrified) == TREATMENT_TREAT_AS_ENEMY &&
             (!hasStatusChecker || target->info->immobilize.immobilizeStatus != STATUS_FROZEN))
         {
             potentialAttackTargetDirections[numPotentialTargets] = direction;

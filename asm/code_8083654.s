@@ -4,7 +4,7 @@
   	.syntax unified
 
   	.text
-  
+
 	thumb_func_start sub_8083660
 sub_8083660:
 	push {r4-r7,lr}
@@ -377,7 +377,7 @@ sub_8083904:
 	ldrb r6, [r5]
 	mov r0, r10
 	movs r1, 0x1
-	bl CannotMove
+	bl CheckVariousStatuses2
 	lsls r0, 24
 	cmp r0, 0
 	beq _08083954
@@ -507,7 +507,7 @@ _08083A00:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0
-	bl CanTarget
+	bl GetTreatmentBetweenMonsters
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

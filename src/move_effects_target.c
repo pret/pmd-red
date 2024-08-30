@@ -544,7 +544,7 @@ void BurnedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, bool8 dis
                         SetMessageArgument_2(gAvailablePokemonNames,entityInfo,0);
                         sub_80522F4(pokemon,target,*gUnknown_80FF01C);
                     }
-                    if (sub_807167C(target,entity) == TARGET_CAPABILITY_CAN_TARGET) {
+                    if (sub_807167C(target,entity) == TREATMENT_TREAT_AS_ENEMY) {
                         // Recurse with the new target
                         BurnedStatusTarget(pokemon,entity,1,displayMessage);
                     }
@@ -631,7 +631,7 @@ void PoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
                             SetMessageArgument_2(gAvailablePokemonNames,entityInfo,0);
                             sub_80522F4(pokemon,target,*gUnknown_80FF01C);
                         }
-                        if (sub_807167C(target,entity) == TARGET_CAPABILITY_CAN_TARGET) {
+                        if (sub_807167C(target,entity) == TREATMENT_TREAT_AS_ENEMY) {
                             // Recurse with the new target
                             PoisonedStatusTarget(pokemon,entity,displayMessage);
                         }
@@ -713,7 +713,7 @@ void BadlyPoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayM
                             SetMessageArgument_2(gAvailablePokemonNames,entityInfo,0);
                             sub_80522F4(pokemon,target,*gUnknown_80FF01C);
                         }
-                        if (sub_807167C(target,entity) == TARGET_CAPABILITY_CAN_TARGET) {
+                        if (sub_807167C(target,entity) == TREATMENT_TREAT_AS_ENEMY) {
                             // Recurse with the new target
                             BadlyPoisonedStatusTarget(pokemon,entity,displayMessage);
                         }

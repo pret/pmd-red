@@ -14,7 +14,7 @@ void LoadIQSkills(Entity *pokemon);
 bool8 CanSeeTeammate(Entity * pokemon);
 u8 GetMoveTypeForMonster(Entity *pokemon, Move *pokeMove);
 s32 GetMovePower(Entity *pokemon, Move *pokeMove);
-bool8 ToolboxEnabled(EntityInfo *pokemon);
+bool8 MonsterCanThrowItems(EntityInfo *pokemon);
 bool8 SetVisualFlags(EntityInfo *entityInfo, u16 newFlag, bool8 param_3);
 
 #endif

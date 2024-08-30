@@ -87,14 +87,14 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
         {
             if (pokemonInfo->clientType != CLIENT_TYPE_CLIENT && pokemonInfo->useHeldItem)
             {
-                if (CannotUseItems(pokemon))
+                if (CheckVariousConditions(pokemon))
                 {
                     pokemonInfo->useHeldItem = FALSE;
                     SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
                     SendMessage(pokemon, gPtrCouldntBeUsedMessage);
                     return;
                 }
-                DecideUseItem(pokemon);
+                AIDecideUseItem(pokemon);
                 if (pokemonInfo->action.action != ACTION_NOTHING)
                 {
                     return;
@@ -134,7 +134,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                 }
                 else
                 {
-                    DecideUseItem(pokemon);
+                    AIDecideUseItem(pokemon);
                     if (pokemonInfo->action.action == ACTION_NOTHING)
                     {
                         if (!IQSkillIsEnabled(pokemon, IQ_DEDICATED_TRAVELER))

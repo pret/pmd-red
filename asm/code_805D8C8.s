@@ -863,7 +863,7 @@ _080620C4:
 	bl sub_8044F5C
 	ldr r0, [sp, 0x110]
 	movs r1, 0x1
-	bl CannotMove
+	bl CheckVariousStatuses2
 	lsls r0, 24
 	cmp r0, 0
 	beq _08062102

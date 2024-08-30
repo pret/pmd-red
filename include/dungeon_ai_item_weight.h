@@ -3,7 +3,7 @@
 
 #include "structs/dungeon_entity.h"
 
-u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags);
-bool8 CanTargetAdjacentPokemon(Entity *pokemon);
+u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFlags);
+bool8 IsAdjacentToEnemy(Entity *pokemon);
 
 #endif

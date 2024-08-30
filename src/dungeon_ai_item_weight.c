@@ -11,7 +11,7 @@
 #include "number_util.h"
 #include "status_checks_1.h"
 
-u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
+u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
 {
     EntityInfo *pokemonInfo = targetPokemon->info;
     s32 itemWeight = 0;
@@ -62,7 +62,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             {
                 if (!targetOther)
                 {
-                    if (CanTargetAdjacentPokemon(targetPokemon))
+                    if (IsAdjacentToEnemy(targetPokemon))
                     {
                         itemWeight = 100;
                     }
@@ -153,7 +153,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
         case ITEM_LIFE_SEED:
             if (!targetOther)
             {
-                if (CanTargetAdjacentPokemon(targetPokemon))
+                if (IsAdjacentToEnemy(targetPokemon))
                 {
                     itemWeight = 10;
                 }
@@ -170,7 +170,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
         case ITEM_EYEDROP_SEED:
             if (!CanSeeInvisibleMonsters(targetPokemon))
             {
-                if (CanTargetAdjacentPokemon(targetPokemon))
+                if (IsAdjacentToEnemy(targetPokemon))
                 {
                     itemWeight = 80;
                 }
@@ -187,7 +187,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
         case ITEM_QUICK_SEED:
             if (targetPokemon->info->speedStage < MAX_SPEED_STAGE)
             {
-                if (CanTargetAdjacentPokemon(targetPokemon))
+                if (IsAdjacentToEnemy(targetPokemon))
                 {
                     itemWeight = 80;
                 }
@@ -204,7 +204,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
         case ITEM_ALLURE_SEED:
             if (pokemonInfo->eyesightStatus.eyesightStatus != STATUS_CROSS_EYED)
             {
-                if (CanTargetAdjacentPokemon(targetPokemon))
+                if (IsAdjacentToEnemy(targetPokemon))
                 {
                     itemWeight = 80;
                 }
@@ -223,7 +223,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             {
                 return 0;
             }
-            else if (CanTargetAdjacentPokemon(targetPokemon))
+            else if (IsAdjacentToEnemy(targetPokemon))
             {
                 itemWeight = 80;
             }
@@ -235,7 +235,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
         case ITEM_TOTTER_SEED:
             if (pokemonInfo->volatileStatus.volatileStatus != STATUS_CONFUSED)
             {
-                if (CanTargetAdjacentPokemon(targetPokemon))
+                if (IsAdjacentToEnemy(targetPokemon))
                 {
                     itemWeight = 80;
                 }
@@ -255,7 +255,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             {
                 return 0;
             }
-            else if (CanTargetAdjacentPokemon(targetPokemon))
+            else if (IsAdjacentToEnemy(targetPokemon))
             {
                 itemWeight = 100;
             }
@@ -267,7 +267,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
         case ITEM_BLINKER_SEED:
             if (pokemonInfo->eyesightStatus.eyesightStatus != STATUS_BLINKER)
             {
-                if (CanTargetAdjacentPokemon(targetPokemon))
+                if (IsAdjacentToEnemy(targetPokemon))
                 {
                     itemWeight = 80;
                 }
@@ -284,7 +284,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
         case ITEM_WARP_SEED:
             if (!targetAlly)
             {
-                if (CanTargetAdjacentPokemon(targetPokemon))
+                if (IsAdjacentToEnemy(targetPokemon))
                 {
                     itemWeight = 40;
                 }
@@ -297,7 +297,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             {
                 if (!targetOther)
                 {
-                    if (CanTargetAdjacentPokemon(targetPokemon))
+                    if (IsAdjacentToEnemy(targetPokemon))
                     {
                         itemWeight = 100;
                     }
@@ -320,7 +320,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
                 pokemonInfo->sleep.sleep != STATUS_NAPPING &&
                 pokemonInfo->sleep.sleep != STATUS_NIGHTMARE)
             {
-                if (CanTargetAdjacentPokemon(targetPokemon))
+                if (IsAdjacentToEnemy(targetPokemon))
                 {
                     itemWeight = 80;
                 }
@@ -392,7 +392,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             {
                 return 0;
             }
-            else if (CanTargetAdjacentPokemon(targetPokemon))
+            else if (IsAdjacentToEnemy(targetPokemon))
             {
                 itemWeight = 80;
             }
@@ -402,7 +402,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
             }
             break;
         case ITEM_BLAST_SEED:
-            if (CanTargetAdjacentPokemon(targetPokemon))
+            if (IsAdjacentToEnemy(targetPokemon))
             {
                 itemWeight = 80;
             }
@@ -443,7 +443,7 @@ u32 EvaluateItem(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
     return itemWeight;
 }
 
-bool8 CanTargetAdjacentPokemon(Entity *pokemon)
+bool8 IsAdjacentToEnemy(Entity *pokemon)
 {
     s32 direction;
     for (direction = 0; direction < NUM_DIRECTIONS; direction++)
@@ -451,7 +451,7 @@ bool8 CanTargetAdjacentPokemon(Entity *pokemon)
         struct Tile *mapTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x, pokemon->pos.y + gAdjacentTileOffsets[direction].y);
         Entity *adjacentPokemon = mapTile->monster;
         if (adjacentPokemon != NULL && GetEntityType(adjacentPokemon) != ENTITY_NOTHING &&
-            CanTarget(pokemon, adjacentPokemon, FALSE, TRUE) == TARGET_CAPABILITY_CAN_TARGET)
+            GetTreatmentBetweenMonsters(pokemon, adjacentPokemon, FALSE, TRUE) == TREATMENT_TREAT_AS_ENEMY)
         {
             return TRUE;
         }

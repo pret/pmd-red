@@ -40,7 +40,7 @@ void sub_8075680(void)
             if (targetPos->x == entity->pos.x && targetPos->y == entity->pos.y)
                 continue;
 
-            if (CannotMove(entity, TRUE))
+            if (CheckVariousStatuses2(entity, TRUE))
                 continue;
 
             direction = GetDirectionTowardsPosition(&entity->pos, targetPos);

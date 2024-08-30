@@ -1632,7 +1632,7 @@ _08074A46:
 	strb r0, [r7]
 	adds r0, r5, 0
 	movs r1, 0
-	bl CannotMove
+	bl CheckVariousStatuses2
 	lsls r0, 24
 	cmp r0, 0
 	bne _08074AD4
@@ -1643,7 +1643,7 @@ _08074A46:
 	cmp r0, 0
 	bne _08074AD4
 	adds r0, r5, 0
-	bl HasStatusThatPreventsActing
+	bl CheckVariousStatuses
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0
@@ -2659,12 +2659,12 @@ _0807524E:
 	beq _0807534C
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl CannotMove
+	bl CheckVariousStatuses2
 	lsls r0, 24
 	cmp r0, 0
 	beq _080752B2
 	adds r0, r5, 0
-	bl HasStatusThatPreventsActing
+	bl CheckVariousStatuses
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807534C

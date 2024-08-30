@@ -926,7 +926,7 @@ _08067594:
 	adds r1, r5, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl CanTarget
+	bl GetTreatmentBetweenMonsters
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -937,7 +937,7 @@ _080675AA:
 	adds r1, r6, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl CanTarget
+	bl GetTreatmentBetweenMonsters
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -966,7 +966,7 @@ _080675C0:
 	beq _08067600
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl CannotMove
+	bl CheckVariousStatuses2
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067610

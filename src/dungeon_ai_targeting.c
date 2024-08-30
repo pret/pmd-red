@@ -29,35 +29,35 @@ const u8 gDirectionBitMasks_5[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 const u8 gDirectionBitMasks_6[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 const u8 gDirectionBitMasks_7[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 
-const u8 gTargetingData[3][2][2][2] = {
+const u8 gTreatmentData[3][2][2][2] = {
     {
         {
-            {TARGET_CAPABILITY_CANNOT_ATTACK, TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET},
-            {TARGET_CAPABILITY_CAN_TARGET, TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET}
+            {TREATMENT_TREAT_AS_ALLY, TREATMENT_IGNORE},
+            {TREATMENT_TREAT_AS_ENEMY, TREATMENT_IGNORE}
         },
         {
-            {TARGET_CAPABILITY_CAN_TARGET, TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET},
-            {TARGET_CAPABILITY_CANNOT_ATTACK, TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET}
+            {TREATMENT_TREAT_AS_ENEMY, TREATMENT_IGNORE},
+            {TREATMENT_TREAT_AS_ALLY, TREATMENT_IGNORE}
         }
     },
     {
         {
-            {TARGET_CAPABILITY_CANNOT_ATTACK, TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET},
-            {TARGET_CAPABILITY_CAN_TARGET, TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET}
+            {TREATMENT_TREAT_AS_ALLY, TREATMENT_IGNORE},
+            {TREATMENT_TREAT_AS_ENEMY, TREATMENT_IGNORE}
         },
         {
-            {TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET, TARGET_CAPABILITY_CAN_TARGET},
-            {TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET, TARGET_CAPABILITY_CAN_TARGET}
+            {TREATMENT_IGNORE, TREATMENT_TREAT_AS_ENEMY},
+            {TREATMENT_IGNORE, TREATMENT_TREAT_AS_ENEMY}
         }
     },
     {
         {
-            {TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET, TARGET_CAPABILITY_CAN_TARGET},
-            {TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET, TARGET_CAPABILITY_CAN_TARGET}
+            {TREATMENT_IGNORE, TREATMENT_TREAT_AS_ENEMY},
+            {TREATMENT_IGNORE, TREATMENT_TREAT_AS_ENEMY}
         },
         {
-            {TARGET_CAPABILITY_CAN_TARGET, TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET},
-            {TARGET_CAPABILITY_CANNOT_ATTACK, TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET}
+            {TREATMENT_TREAT_AS_ENEMY, TREATMENT_IGNORE},
+            {TREATMENT_TREAT_AS_ALLY, TREATMENT_IGNORE}
         }
     }
 };
@@ -66,7 +66,7 @@ bool8 sub_8070F3C(Entity * pokemon, Position *pos, s32 direction)
 {
   u8 terrain;
   struct Tile *tile;
-  
+
   terrain = GetCrossableTerrain(pokemon->info->id);
 
   tile = GetTile(pos->x + gAdjacentTileOffsets[direction].x, pos->y + gAdjacentTileOffsets[direction].y);
@@ -110,7 +110,7 @@ bool8 sub_8070F3C(Entity * pokemon, Position *pos, s32 direction)
 bool8 sub_8070F14(Entity * pokemon, s32 direction)
 {
   struct Tile *tile;
-  
+
 
   tile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x, pokemon->pos.y + gAdjacentTileOffsets[direction].y);
   if ((!(tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)) &&
@@ -129,7 +129,7 @@ bool8 sub_8070F80(Entity * pokemon, s32 direction)
 {
   u8 terrain;
   struct Tile *tile;
-  
+
   terrain = GetCrossableTerrain(pokemon->info->id);
 
   tile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x, pokemon->pos.y + gAdjacentTileOffsets[direction].y);
@@ -174,7 +174,7 @@ bool8 sub_8071058(Entity * pokemon, s32 direction)
 {
   u8 terrain;
   struct Tile *tile;
-  
+
   terrain = GetCrossableTerrain(pokemon->info->id);
 
   tile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x, pokemon->pos.y + gAdjacentTileOffsets[direction].y);
@@ -460,7 +460,7 @@ void CheckRunAwayVisualFlag(Entity *pokemon, bool8 showRunAwayEffect)
   }
 }
 
-u8 CanTarget(Entity *pokemon, Entity *targetPokemon, bool8 ignoreInvisible, bool8 checkPetrified)
+u8 GetTreatmentBetweenMonsters(Entity *pokemon, Entity *targetPokemon, bool8 ignoreInvisible, bool8 checkPetrified)
 {
     EntityInfo *pokemonInfo = pokemon->info;
     EntityInfo *targetData = targetPokemon->info;
@@ -471,7 +471,7 @@ u8 CanTarget(Entity *pokemon, Entity *targetPokemon, bool8 ignoreInvisible, bool
     bool8 targetIsDecoy;
     if (pokemon == targetPokemon)
     {
-        return TARGET_CAPABILITY_CANNOT_ATTACK;
+        return TREATMENT_TREAT_AS_ALLY;
     }
     if (pokemonInfo->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER ||
         targetData->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER ||
@@ -482,7 +482,7 @@ u8 CanTarget(Entity *pokemon, Entity *targetPokemon, bool8 ignoreInvisible, bool
         (checkPetrified && !pokemonInfo->isNotTeamMember && targetData->immobilize.immobilizeStatus == STATUS_PETRIFIED) ||
         (!ignoreInvisible && targetData->transformStatus.transformStatus == STATUS_INVISIBLE && !CanSeeInvisibleMonsters(pokemon)))
     {
-        return TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET;
+        return TREATMENT_IGNORE;
     }
     pokemonTargetingDecoy = pokemonInfo->targetingDecoy;
     targetingDecoy = TARGETING_DECOY_NONE;
@@ -523,7 +523,7 @@ u8 CanTarget(Entity *pokemon, Entity *targetPokemon, bool8 ignoreInvisible, bool
     {
         targetIsDecoy = TRUE;
     }
-    return gTargetingData[targetingDecoy][pokemonIsEnemy][targetIsEnemy][targetIsDecoy];
+    return gTreatmentData[targetingDecoy][pokemonIsEnemy][targetIsEnemy][targetIsDecoy];
 }
 
 static inline bool8 JoinLocationCannotUseItems_1(EntityInfo *pokemonInfo)
@@ -553,15 +553,15 @@ u8 sub_807167C(Entity * pokemon, Entity * target)
       cannotUseItems = JoinLocationCannotUseItems_1(targetEntityInfo);
       if (cannotUseItems || (targetEntityInfo->shopkeeper != SHOPKEEPER_MODE_NORMAL)) {
 error:
-          return TARGET_CAPABILITY_CAN_ATTACK_NOT_TARGET;
+          return TREATMENT_IGNORE;
       }
       else
       {
         if ((pokemonEntityData->isNotTeamMember) != (targetEntityInfo->isNotTeamMember)) {
-          return TARGET_CAPABILITY_CAN_TARGET;
+          return TREATMENT_TREAT_AS_ENEMY;
         }
         else {
-          return TARGET_CAPABILITY_CANNOT_ATTACK;
+          return TREATMENT_TREAT_AS_ALLY;
         }
       }
     }

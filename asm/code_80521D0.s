@@ -2541,7 +2541,7 @@ _080537F8:
 	adds r1, r7, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl CanTarget
+	bl GetTreatmentBetweenMonsters
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3127,7 +3127,7 @@ _08053CD0:
 	adds r1, r5, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl CanTarget
+	bl GetTreatmentBetweenMonsters
 	lsls r0, 24
 	cmp r0, 0
 	bne _08053CEC
@@ -3274,7 +3274,7 @@ _08053DF2:
 	adds r1, r5, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl CanTarget
+	bl GetTreatmentBetweenMonsters
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4532,7 +4532,7 @@ _08054BD8:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl SandstormMoveAction 
+	bl SandstormMoveAction
 	bl _080554BA
 _08054BE8:
 	adds r0, r7, 0
@@ -5250,7 +5250,7 @@ _08055190:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl RainDanceMoveAction 
+	bl RainDanceMoveAction
 	b _080554BA
 _0805519E:
 	adds r0, r7, 0
@@ -5313,7 +5313,7 @@ _0805520E:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl SunnyDayMoveAction 
+	bl SunnyDayMoveAction
 	b _080554BA
 _0805521C:
 	adds r0, r7, 0
@@ -5397,7 +5397,7 @@ _080552B6:
 	adds r1, r5, 0
 	mov r2, r8
 	mov r3, r9
-	bl HailMoveAction 
+	bl HailMoveAction
 	b _080554BA
 _080552C4:
 	adds r0, r7, 0
@@ -9066,7 +9066,7 @@ _08056FD0:
 	adds r1, r7, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl CanTarget
+	bl GetTreatmentBetweenMonsters
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -9079,7 +9079,7 @@ _08056FE6:
 	adds r1, r7, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl CanTarget
+	bl GetTreatmentBetweenMonsters
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805702E
@@ -9099,7 +9099,7 @@ _0805700C:
 	adds r1, r7, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl CanTarget
+	bl GetTreatmentBetweenMonsters
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805702E

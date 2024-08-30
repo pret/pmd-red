@@ -218,7 +218,7 @@ void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity
           flag = IQSkillIsEnabled(target, IQ_ITEM_CATCHER);
         }
       }
-      if (CannotUseItems(target)) {
+      if (CheckVariousConditions(target)) {
         flag = FALSE;
       }
       if (flag && ((info->heldItem.flags & ITEM_FLAG_EXISTS) == 0)) {
@@ -867,7 +867,7 @@ bool8 sub_8048950(Entity *param_1,Item *item)
             if (EntityExists(entity)) {
                 entityInfo = entity->info;
                 flag = CanMonLearnMove(moveID, entityInfo->id);
-                if (CannotMove(entity, FALSE)) {
+                if (CheckVariousStatuses2(entity, FALSE)) {
                     flag = FALSE;
                 }
                 if (entityInfo->clientType == CLIENT_TYPE_CLIENT) {
@@ -942,7 +942,7 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
                  flag =  FALSE;
           }
 
-          if (CannotMove(entity, FALSE)) {
+          if (CheckVariousStatuses2(entity, FALSE)) {
             flag = FALSE;
           }
           if (pEVar6->clientType == CLIENT_TYPE_CLIENT) {
@@ -1016,7 +1016,7 @@ bool32 sub_8048B9C(Entity *entity,Item *param_2)
       if (EntityExists(entity1)) {
         entity1Info = entity1->info;
         flag = TRUE;
-        if(CannotMove(entity1, FALSE))
+        if(CheckVariousStatuses2(entity1, FALSE))
         {
             flag = FALSE;
         }
