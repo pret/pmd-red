@@ -1,6 +1,7 @@
 #include "global.h"
 #include "file_system.h"
 #include "memory.h"
+#include "code_800E9E4.h"
 
 struct unkStruct_203B0D0_sub
 {
@@ -25,16 +26,11 @@ struct unkStruct_203B0D0 {
 struct unkStruct_203B0D0 *gUnknown_203B0D0;
 
 extern s32 sub_8000728();
-s32 *sub_800ECA4(s32);
 OpenedFile *sub_800F1C0(s32, s32);
 s32 sub_800F0F4(s32, s32);
 void sub_800F204(OpenedFile *file);
-void sub_800F13C(s32, OpenedFile *, s32 *);
+void sub_800F13C(s32, OpenedFile *, unkStruct_80B9CC4 *);
 void sub_800F15C(s32);
-s16 *sub_800ECB8(u16);
-s16 sub_800ECE4(u8);
-s16 sub_800ECF8(u8 r0);
-s16 sub_800ED0C(u8 r0);
 
 void sub_800ED38(s32 r0)
 {
@@ -120,19 +116,19 @@ void sub_800EDF0(u32 r0, struct unkStruct_203B0D0_sub *r1) {
 
 void sub_800EE5C(s32 r0)
 {
-    s32 *ret;
+    unkStruct_80B9CC4 *ret;
     OpenedFile *file;
     s32 ret2;
 
     ret = sub_800ECA4(r0);
     if(r0 != 0)
     {
-        if((u32)(ret[0] - 1) > 1)
+        if((u32)(ret->unk0 - 1) > 1)
         {
-            file = sub_800F1C0(ret[0], ret[1]);
+            file = sub_800F1C0(ret->unk0, ret->unk4);
             if(file)
             {
-                ret2 = sub_800F0F4(ret[0], ret[1]);
+                ret2 = sub_800F0F4(ret->unk0, ret->unk4);
                 if(ret2 == -1)
                 {
                     sub_800F204(file);
@@ -147,7 +143,7 @@ void sub_800EE5C(s32 r0)
                 else {
                     sub_800F204(file);
                 }
-                sub_800F15C(ret[1]);
+                sub_800F15C(ret->unk4);
             }
         }
     }
@@ -155,30 +151,30 @@ void sub_800EE5C(s32 r0)
 
 void sub_800EEC8(u16 r0)
 {
-    s16 *ret;
+    unkStruct_80BDBC4 *ret;
     ret = sub_800ECB8(r0);
-    sub_800EE5C(ret[0]);
+    sub_800EE5C(ret->unk0);
 }
 
 void sub_800EEE0(u16 r0)
 {
-    s16 *ret;
+    unkStruct_80BDBC4 *ret;
     ret = sub_800ECB8(r0);
-    sub_800EE5C(ret[2]);
+    sub_800EE5C(ret->unk4);
 }
 
 void sub_800EEF8(u16 r0)
 {
-    s16 *ret;
+    unkStruct_80BDBC4 *ret;
     ret = sub_800ECB8(r0);
-    sub_800EE5C(ret[1]);
+    sub_800EE5C(ret->unk2);
 }
 
 void sub_800EF10(u16 r0)
 {
-    s16 *ret;
+    unkStruct_80BDBC4 *ret;
     ret = sub_800ECB8(r0);
-    sub_800EE5C(ret[3]);
+    sub_800EE5C(ret->unk6);
 }
 
 void sub_800EF28(u8 r0)

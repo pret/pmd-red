@@ -1,8 +1,8 @@
 #include "global.h"
 #include "code_800E9A8.h"
+#include "code_800E9E4.h"
 
-s32 sub_800E2C0(void);
-u8 sub_800EC74(void);
+s32 sub_800E2C0(u32);
 
 struct unkStruct_203B0CC *gUnknown_203B0CC;
 
@@ -26,9 +26,9 @@ bool8 sub_800E9A8(s32 a0)
     return FALSE;
 }
 
-bool8 sub_800E9E4(void)
+bool8 sub_800E9E4(u32 param_1)
 {
-    if(sub_800E2C0() != -1)
+    if(sub_800E2C0(param_1) != -1)
     {
         return TRUE;
     }
