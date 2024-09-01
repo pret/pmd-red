@@ -3,37 +3,9 @@
 #include "code_800558C.h"
 #include "code_800DAC0.h"
 #include "code_80118A4.h"
+#include "code_800E9A8.h"
 #include "file_system.h"
 #include "memory.h"
-
-struct unkStruct_203B0CC_sub
-{
-    // size: 0xD0
-    u32 unk0;
-    s32 unk4;
-    u8 fill8[0x34 - 8];
-    u32 unk34;
-    u32 unk38;
-    u8 fill3C[0x4C - 0x3C];
-    u32 unk4C;
-    s32 unk50;
-    u8 unk54;
-    u8 fill55[0xB8 - 0x55];
-    u32 unkB8;
-    u8 fillBC[0xD0 - 0xBC];
-};
-
-struct unkStruct_203B0CC
-{
-    // size: 0x1A18
-    struct unkStruct_203B0CC_sub unk0[0x20];
-    u32 unk1A00;
-    /* 0x1A04 */ u32 fileSelection;
-    u32 unk1A08;
-    u32 unk1A0C;
-    u32 unk1A10;
-    u8 fill1A14[0x1A18 - 0x1A14];
-};
 
 struct unkStruct_203B0CC *gUnknown_203B0CC;
 
@@ -43,7 +15,7 @@ struct unkStruct_800F18C
     u32 unk4;
 };
 
-extern s32 sub_800E2C0(void);
+extern s32 sub_800E2C0(u32);
 extern s32 sub_8000728(void);
 extern u32 sub_800E900(void);
 extern void sub_8009BE4(void);
@@ -59,7 +31,7 @@ extern struct FileArchive gEffectFileArchive;
 
 extern void sub_800F034(void);
 extern void sub_800ED38(u32);
-extern void sub_800DC14(void);
+extern void sub_800DC14(u32);
 extern void sub_800F078();
 extern void sub_800ED64();
 extern void sub_800ED80();
@@ -111,7 +83,7 @@ void sub_800DB7C(void)
   for(index = 0, preload = &gUnknown_203B0CC->unk0[index]; index < 0x20; index++, preload++)
   {
     if(preload->unk4 != -1)
-        sub_800DC14();
+        sub_800DC14(preload->unk4);
   }
 
 
@@ -134,7 +106,7 @@ void sub_800DBBC(void)
   for(index1 = 0, preload = &gUnknown_203B0CC->unk0[index1]; index1 < 0x20; index1++, preload++)
   {
     if(preload->unk4 != -1)
-        sub_800DC14();
+        sub_800DC14(preload->unk4);
   }
 
 
@@ -151,7 +123,7 @@ bool8 sub_800DCC0(void)
   return gUnknown_203B0CC != NULL;
 }
 
-void sub_800DC14(void)
+void sub_800DC14(u32 param_1)
 {
   s32 index1;
   s32 index2;
@@ -159,7 +131,7 @@ void sub_800DC14(void)
   struct unkStruct_800F18C *puVar4;
   struct unkStruct_203B0CC_sub *preload;
   
-  index1 = sub_800E2C0();
+  index1 = sub_800E2C0(param_1);
   if (index1 != -1) {
     preload = &gUnknown_203B0CC->unk0[index1];
     if (preload->unk34 == 4) {
