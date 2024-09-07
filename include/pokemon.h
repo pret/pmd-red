@@ -25,7 +25,7 @@ typedef struct unkStruct_808E218_arg
 typedef struct unkStruct_808E218
 {
     // leveldata? (same size)
-    unkStruct_808E6F4 unk0[3];
+    HiddenPower unk0[3];
 } unkStruct_808E218;
 
 extern unkStruct_203B45C *gRecruitedPokemonRef;
@@ -80,7 +80,7 @@ bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 r1);
 OpenedFile *OpenPokemonDialogueSpriteFile(s16 index);
 OpenedFile *GetDialogueSpriteDataPtr(s16 index);
 s32 GetUnownIndex(s16 index);
-void sub_808E6F4(unkStruct_808E6F4 *);
+void GenerateHiddenPower(HiddenPower *);
 s32 GetEvolutionSequence(PokemonStruct1 *pokemon, EvolveStage *);
 void xxx_pokemonstruct_to_pokemon2_808DE50(PokemonStruct2 *, PokemonStruct1 *, s32);
 void SavePokemonStruct(unkStruct_8094924 *, PokemonStruct1 *pokemon);

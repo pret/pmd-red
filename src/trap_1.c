@@ -64,7 +64,7 @@ void SaveImmobilizeStatus(unkStruct_8094924 *param_1, Immobilize *param_2);
 void SaveNonVolatileStatus(unkStruct_8094924 *param_1, NonVolatile *param_2);
 void SaveEntitySleep(unkStruct_8094924 *param_1, Sleep* param_2);
 void SaveTactic(unkStruct_8094924 *param_1, u8 param_2);
-void SaveHiddenPower(unkStruct_8094924 *param_1, HiddenPower *param_2);
+void SaveDungeonHiddenPower(unkStruct_8094924 *param_1, HiddenPower *param_2);
 void SaveChargingStatus(unkStruct_8094924 *param_1, Charging *param_2);
 void SaveProtectionStatus(unkStruct_8094924 *param_1, Protection *param_2);
 void SaveWaitingStatus(unkStruct_8094924 *param_1, Waiting *param_2);
@@ -404,7 +404,7 @@ void SaveEntity(unkStruct_8094924 *param_1, Entity *param_2)
     SaveIQFlags(param_1,temp2);
     SaveIQFlags(param_1,temp1);
     SaveTactic(param_1,*puStack_a0);
-    SaveHiddenPower(param_1,psStack_a4);
+    SaveDungeonHiddenPower(param_1,psStack_a4);
     sub_8083078(param_1,*puStack_9c);
     sub_8083078(param_1,*puStack_98);
     sub_8083078(param_1,*puStack_94);
@@ -619,7 +619,7 @@ void SaveTactic(unkStruct_8094924 *param_1, u8 param_2)
     sub_8082FA8(param_1, &param_2, 1);
 }
 
-void SaveHiddenPower(unkStruct_8094924 *param_1, HiddenPower *param_2)
+void SaveDungeonHiddenPower(unkStruct_8094924 *param_1, HiddenPower *param_2)
 {
     sub_8083048(param_1, param_2->hiddenPowerBasePower);
     sub_808180C(param_1, param_2->hiddenPowerType);

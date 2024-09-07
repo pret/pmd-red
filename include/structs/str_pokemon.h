@@ -41,13 +41,6 @@ typedef struct PokemonStruct1
 } PokemonStruct1;
 
 // size: 0x4
-typedef struct unkStruct_808E6F4
-{
-    s16 unk0;
-    u8 unk2;
-} unkStruct_808E6F4;
-
-// size: 0x4
 typedef struct EvolveStage
 {
     /* 0x0 */ s16 speciesNum;
@@ -78,11 +71,11 @@ typedef struct PokemonStruct2
     /* 0x18 */ u32 currExp;
     /* 0x1C */ unkStruct_8094184 moves;
     /* 0x40 */ Item itemSlot; // heldItem
-    /* 0x44 */ FixedPoint unk44;
-    /* 0x48 */ FixedPoint unk48;
+    u32 belly; // some struct
+    u32 maxBelly; // some struct (same type as 44)
     /* 0x4C */ u32 IQSkills; // unk20
     /* 0x50 */ u8 tacticIndex;
-    unkStruct_808E6F4 unk54;
+    /* 0x54 */ HiddenPower hiddenPower;
     /* 0x58 */ u8 name[POKEMON_NAME_LENGTH]; // name (other offset)
 } PokemonStruct2;
 

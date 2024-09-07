@@ -7,6 +7,7 @@
 #include "constants/evolution_status.h"
 #include "constants/iq_skill.h"
 #include "constants/tactic.h"
+#include "constants/type.h"
 #include "sprite.h"
 #include "text_util.h"
 #include "friend_area.h"
@@ -51,9 +52,9 @@ void RestoreDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
 void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
 
 extern void sub_809449C(struct unkStruct_8094924*, void*);
-extern void sub_808F448(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
+extern void SavePokemonHiddenPower(struct unkStruct_8094924*, HiddenPower*);
 extern void sub_809447C(struct unkStruct_8094924*, void*);
-extern void sub_808F428(struct unkStruct_8094924*, struct unkStruct_808E6F4*);
+extern void RestorePokemonHiddenPower(struct unkStruct_8094924*, HiddenPower*);
 s16 GetPokemonEvolveConditions(s16 index, unkEvolve *r1);
 
 u32 sub_808F798(PokemonStruct1 *, s16);
@@ -85,18 +86,18 @@ bool8 AddShadowSprite(s16 species, s16* a2, s16* a3)
 }
 
 
-void sub_808E6F4(struct unkStruct_808E6F4* a1)
+void GenerateHiddenPower(HiddenPower* a1)
 {
   s32 i;
 
-  a1->unk0 = gUnknown_810AC90[RandInt(10)];
+  a1->hiddenPowerBasePower = gUnknown_810AC90[RandInt(10)];
   for (i = 0; i < 100; i++) {
-    a1->unk2 = RandInt(18);
-    if ( a1->unk2 )
+    a1->hiddenPowerType = RandInt(NUM_TYPES);
+    if ( a1->hiddenPowerType )
       break;
   }
   if ( i == 100 )
-    a1->unk2 = 2;
+    a1->hiddenPowerType = TYPE_FIRE;
 }
 
 bool8 HasRecruitedMon(s16 species) {
@@ -824,11 +825,11 @@ s32 SavePokemonStruct2(u8* a1, s32 size)
     SaveIntegerBits(&backup, &pokemon2->currExp, 24);
     sub_8094184(&backup, &pokemon2->moves);
     SaveItemSlot(&backup, &pokemon2->itemSlot);
-    sub_809449C(&backup, &pokemon2->unk44);
-    sub_809449C(&backup, &pokemon2->unk48);
+    sub_809449C(&backup, &pokemon2->belly);
+    sub_809449C(&backup, &pokemon2->maxBelly);
     SaveIntegerBits(&backup, &pokemon2->IQSkills, 24);
     SaveIntegerBits(&backup, &pokemon2->tacticIndex, 4);
-    sub_808F448(&backup, &pokemon2->unk54);
+    SavePokemonHiddenPower(&backup, &pokemon2->hiddenPower);
     SaveIntegerBits(&backup, &pokemon2->name, 80);
   }
   nullsub_102(&backup);
@@ -872,11 +873,11 @@ s32 RestorePokemonStruct2(u8* a1, s32 size)
     RestoreIntegerBits(&backup, &pokemon2->currExp, 24);
     sub_80941FC(&backup, &pokemon2->moves);
     RestoreItemSlot(&backup, &pokemon2->itemSlot);
-    sub_809447C(&backup, &pokemon2->unk44);
-    sub_809447C(&backup, &pokemon2->unk48);
+    sub_809447C(&backup, &pokemon2->belly);
+    sub_809447C(&backup, &pokemon2->maxBelly);
     RestoreIntegerBits(&backup, &pokemon2->IQSkills, 24);
     RestoreIntegerBits(&backup, &pokemon2->tacticIndex, 4);
-    sub_808F428(&backup, &pokemon2->unk54);
+    RestorePokemonHiddenPower(&backup, &pokemon2->hiddenPower);
     RestoreIntegerBits(&backup, &pokemon2->name, 80);
   }
   nullsub_102(&backup);
@@ -893,16 +894,16 @@ void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924* a1, struct unkPokeSub
   SaveIntegerBits(a1, &unkC->level, 7);
 }
 
-void sub_808F428(unkStruct_8094924* a1, unkStruct_808E6F4* a2)
+void RestorePokemonHiddenPower(unkStruct_8094924* a1, HiddenPower* a2)
 {
-  RestoreIntegerBits(a1, &a2->unk0, 10);
-  RestoreIntegerBits(a1, &a2->unk2, 5);
+  RestoreIntegerBits(a1, &a2->hiddenPowerBasePower, 10);
+  RestoreIntegerBits(a1, &a2->hiddenPowerType, 5);
 }
 
-void sub_808F448(unkStruct_8094924* a1, unkStruct_808E6F4* a2)
+void SavePokemonHiddenPower(unkStruct_8094924* a1, HiddenPower* a2)
 {
-  SaveIntegerBits(a1, &a2->unk0, 10);
-  SaveIntegerBits(a1, &a2->unk2, 5);
+  SaveIntegerBits(a1, &a2->hiddenPowerBasePower, 10);
+  SaveIntegerBits(a1, &a2->hiddenPowerType, 5);
 }
 
 void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, u8 param_3)
