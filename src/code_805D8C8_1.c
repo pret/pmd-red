@@ -2616,14 +2616,6 @@ bool8 sub_805EC2C(Entity *a0, s32 x, s32 y)
     return sub_8070564(a0, &pos);
 }
 
-static inline bool8 IsClientOrTeamBase(s32 joinedDungeon)
-{
-    if (joinedDungeon == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON || joinedDungeon == DUNGEON_RESCUE_TEAM_BASE)
-        return TRUE;
-    else
-        return FALSE;
-}
-
 bool8 sub_805EC4C(Entity *a0, u8 a1)
 {
     Position pos;
