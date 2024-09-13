@@ -157,6 +157,17 @@ typedef struct Muzzled
     /* 0xED */ u8 muzzledTurns;
 } Muzzled;
 
+typedef struct Unk_Entity_x184
+{
+    /* 0x184 - 0x0 */ Position previousTargetMovePosition1;
+    /* 0x188 - 0x4 */ Position32 previousTargetMovePosition2;
+    /* 0x190 - 0xC */ s32 lastMoveDirection; // The last direction that the Pokémon moved in.
+    // Number of tiles that the Pokémon moved last, multiplied by 0x100.
+    /* 0x194 - 0x10*/ Position32 lastMoveIncrement;
+    /* 0x19C - 0x18 */ u8 walkAnimFramesLeft; // Set when the Pokémon starts moving, and counts down until the Pokémon's walk animation stops.
+    /* 0x19D - 0x19 */ u8 fill19d;
+    /* 0x19e - 0x1a */ u8 unk1A;
+} Unk_Entity_x184 ;
 
 // size: 0x208
 typedef struct EntityInfo
@@ -306,15 +317,8 @@ typedef struct EntityInfo
     u16 unk178;
     /* 0x17A */ u16 mimicMoveIDs[MAX_MON_MOVES]; // All moves that Mimic has copied (not sure on size...)
     // Previous value of targetPosition for movement, 1 and 2 moves ago.
-    /* 0x184 */ Position previousTargetMovePosition1;
-    /* 0x188 */ Position32 previousTargetMovePosition2;
-    /* 0x190 */ u8 lastMoveDirection; // The last direction that the Pokémon moved in.
-    // Number of tiles that the Pokémon moved last, multiplied by 0x100.
-    /* 0x194 */ Position32 lastMoveIncrement;
-    /* 0x19C */ u8 walkAnimFramesLeft; // Set when the Pokémon starts moving, and counts down until the Pokémon's walk animation stops.
-    u8 fill19D[0x1F4 - 0x19D];
-    /* 0x1F4 */ u8 numMoveTiles; // Number of tiles to move in a turn. Can be greater than 1 if the user's movement speed is boosted.
-    u8 fill1F5;
+    /* 0x184 */ Unk_Entity_x184 unk184[4];
+    /* 0x1F4 */ s16 numMoveTiles; // Number of tiles to move in a turn. Can be greater than 1 if the user's movement speed is boosted.
     /* 0x1F6 */ bool8 notMoving;
     /* 0x1F8 */ s16 unk1F8;
     /* 0x1FA */ s16 mobileTurnTimer; // When a Pokémon can pass through walls in a hallway, this counts up to 200 before the Pokémon turns in a random direction.

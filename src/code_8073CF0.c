@@ -10,6 +10,8 @@
 #include "structs/map.h"
 #include "structs/str_moves.h"
 #include "dungeon_music.h"
+#include "dungeon_movement.h"
+#include "game_options.h"
 #include "dungeon_items.h"
 #include "moves.h"
 #include "dungeon_random.h"
@@ -80,6 +82,8 @@ extern const u8 *gUnknown_80FD628;
 extern const u8 *gUnknown_80FEB30;
 extern const u8 *gUnknown_80FABD8;
 extern const u8 *gPtrProtectSavedItMessage;
+extern const u8 *gPtrStenchWavedOffMessage;
+extern const u8 *gUnknown_80FA124[];
 
 void sub_8073D14(Entity *entity)
 {
@@ -240,6 +244,8 @@ extern const s16 gUnknown_80F4F70;
 extern const s16 gUnknown_80F4F72;
 extern const s16 gUnknown_80F4F30;
 extern const s16 gUnknown_80F4F38;
+extern const s16 gUnknown_80F4FC4;
+extern const s16 gUnknown_80F4FC0;
 extern const s16 gUnknown_80F4F3A;
 extern const s16 gUnknown_80F4F3C;
 extern const s16 gUnknown_80F4FB2;
@@ -247,6 +253,7 @@ extern const s16 gUnknown_80F4F3E;
 extern const s16 gUnknown_80F4FB4;
 extern const s16 gUnknown_80F4F40;
 extern const s16 gUnknown_80F4F74;
+extern const s16 gUnknown_80F4FC2;
 extern const s16 gUnknown_80F4F76;
 extern const s16 gUnknown_80F4F36;
 extern const u8 gUnknown_80F54F4[][8];
@@ -595,5 +602,218 @@ void sub_8074094(Entity *entity)
         return;
 }
 
+void TickStatusHeal(Entity *entity)
+{
+    s32 i;
+    bool32 spdChange;
+    EntityInfo *entityInfo;
+
+    if (entity == NULL)
+        return;
+    if (!EntityExists(entity) || sub_8044B28())
+        return;
+
+    sub_805229C();
+    entityInfo = entity->info;
+
+    // HP heal
+    if (entityInfo->unk146 == 0 && entityInfo->nonVolatile.nonVolatileStatus != STATUS_POISONED && entityInfo->nonVolatile.nonVolatileStatus != STATUS_BADLY_POISONED) {
+        s32 r4 = 0;
+
+        if (!entityInfo->isNotTeamMember)
+            r4 = GetRegenSpeed(entityInfo->id);
+
+        if (r4 != 0) {
+            if (HasHeldItem(entity, ITEM_HEAL_RIBBON))
+                r4 += gUnknown_80F4FC4;
+            if (entityInfo->protection.protectionStatus == STATUS_WISH)
+                r4 += gUnknown_80F4FC0;
+            if (HasAbility(entity, ABILITY_RAIN_DISH) && GetApparentWeather(entity) == WEATHER_RAIN)
+                r4 += gUnknown_80F4FC2;
+
+            if (r4 > 500)
+                r4 = 500;
+            if (r4 < 30)
+                r4 = 30;
+
+            entityInfo->unk1F8 += entityInfo->maxHPStat;
+            while (entityInfo->unk1F8 >= r4) {
+                entityInfo->HP++;
+                entityInfo->unk1F8 -= r4;
+            }
+
+            if (entityInfo->HP >= entityInfo->maxHPStat)
+                entityInfo->HP = entityInfo->maxHPStat;
+        }
+    }
+
+    if (entityInfo->sleep.sleep != 0) {
+        sub_80838EC(&entityInfo->sleep.sleepTurns);
+        if (entityInfo->sleep.sleepTurns == 0) {
+            SendSleepEndMessage(entity, entity, TRUE, TRUE);
+        }
+    }
+    if (!EntityExists(entity) || sub_8044B28())
+        return;
+
+    if (entityInfo->nonVolatile.nonVolatileStatus != 0) {
+        sub_80838EC(&entityInfo->nonVolatile.nonVolatileStatusTurns);
+        if (entityInfo->nonVolatile.nonVolatileStatusTurns == 0) {
+            SendNonVolatileEndMessage(entity, entity);
+        }
+    }
+    if (!EntityExists(entity) || sub_8044B28())
+        return;
+
+    if (entityInfo->immobilize.immobilizeStatus != 0) {
+        sub_80838EC(&entityInfo->immobilize.immobilizeStatusTurns);
+        if (entityInfo->immobilize.immobilizeStatusTurns == 0) {
+            SendImmobilizeEndMessage(entity, entity);
+        }
+    }
+    if (!EntityExists(entity) || sub_8044B28())
+        return;
+
+    if (entityInfo->volatileStatus.volatileStatus != 0) {
+        sub_80838EC(&entityInfo->volatileStatus.volatileStatusTurns);
+        if (entityInfo->volatileStatus.volatileStatusTurns == 0) {
+            SendVolatileEndMessage(entity, entity);
+        }
+    }
+    if (!EntityExists(entity) || sub_8044B28())
+        return;
+
+    if (entityInfo->protection.protectionStatus != 0) {
+        sub_80838EC(&entityInfo->protection.protectionStatusTurns);
+        if (entityInfo->protection.protectionStatusTurns == 0) {
+            SendProtectionEndMessage(entity, entity);
+        }
+    }
+    if (!EntityExists(entity) || sub_8044B28())
+        return;
+
+    if (entityInfo->waitingStruct.waitingStatus != 0) {
+        sub_80838EC(&entityInfo->waitingStruct.waitingStatusTurns);
+        if (entityInfo->waitingStruct.waitingStatusTurns == 0) {
+            SendWaitingEndMessage(entity, entity, 0);
+        }
+    }
+    if (!EntityExists(entity) || sub_8044B28())
+        return;
+
+    if (entityInfo->linked.linkedStatus != 0) {
+        sub_80838EC(&entityInfo->linked.linkedStatusTurns);
+        if (entityInfo->linked.linkedStatusTurns == 0) {
+            SendLinkedEndMessage(entity, entity);
+        }
+    }
+    if (!EntityExists(entity) || sub_8044B28())
+        return;
+
+    if (entityInfo->moveStatus.moveStatus != 0) {
+        sub_80838EC(&entityInfo->moveStatus.moveStatusTurns);
+        if (entityInfo->moveStatus.moveStatusTurns == 0) {
+            SendMoveEndMessage(entity, entity);
+        }
+    }
+    if (!EntityExists(entity) || sub_8044B28())
+        return;
+
+    if (entityInfo->transformStatus.transformStatus != 0) {
+        sub_80838EC(&entityInfo->transformStatus.transformStatusTurns);
+        if (entityInfo->transformStatus.transformStatusTurns == 0) {
+            SendTransformEndMessage(entity, entity);
+        }
+    }
+    if (!EntityExists(entity) || sub_8044B28())
+        return;
+
+    if (entityInfo->eyesightStatus.eyesightStatus != 0) {
+        sub_80838EC(&entityInfo->eyesightStatus.eyesightStatusTurns);
+        if (entityInfo->eyesightStatus.eyesightStatusTurns == 0) {
+            SendEyesightEndMessage(entity, entity);
+        }
+    }
+    if (!EntityExists(entity) || sub_8044B28())
+        return;
+
+    if (entityInfo->muzzled.muzzled != 0) {
+        sub_80838EC(&entityInfo->muzzled.muzzledTurns);
+        if (entityInfo->muzzled.muzzledTurns == 0) {
+            SendMuzzledEndMessage(entity, entity);
+        }
+    }
+    if (!EntityExists(entity) || sub_8044B28())
+        return;
+
+    if (entityInfo->terrifiedTurns != 0) {
+        sub_80838EC(&entityInfo->terrifiedTurns);
+        if (entityInfo->terrifiedTurns == 0) {
+            SetMessageArgument(gAvailablePokemonNames, entity, 0);
+            SendMessage(entity, gPtrStenchWavedOffMessage);
+        }
+    }
+
+    spdChange = FALSE;
+    for (i = 0; i < NUM_SPEED_COUNTERS; i++) {
+        if (entityInfo->speedDownCounters[i] != 0) {
+            sub_80838EC(&entityInfo->speedDownCounters[i]);
+            if (entityInfo->speedDownCounters[i] == 0)
+                spdChange = TRUE;
+        }
+
+        if (entityInfo->speedUpCounters[i] != 0) {
+            sub_80838EC(&entityInfo->speedUpCounters[i]);
+            if (entityInfo->speedUpCounters[i] == 0)
+                spdChange = TRUE;
+        }
+    }
+    if (spdChange) {
+        s32 oldSpdStage = entity->info->speedStage;
+        s32 newSpdStage = CalcSpeedStage(entity);
+
+        if (oldSpdStage != newSpdStage) {
+            SetMessageArgument(gAvailablePokemonNames, entity, 0);
+            SendMessage(entity, gUnknown_80FA124[newSpdStage]);
+        }
+    }
+}
+
+extern s32 gUnknown_202F378;
+extern const Position gUnknown_80F4D44[];
+
+void sub_8075050(EntityInfo *info);
+
+void sub_8074FB0(Entity *entity, s32 a1, Position *pos)
+{
+    #ifdef NONMATCHING
+    Unk_Entity_x184 *strPtr;
+    #else
+    register Unk_Entity_x184 *strPtr asm("r1");
+    #endif // NONMATCHING
+
+    EntityInfo *entityInfo = entity->info;
+
+    if (entityInfo->numMoveTiles > 3) {
+        entityInfo->action.action = 0;
+        return;
+    }
+
+    if (gGameOptionsRef->dungeonSpeed != 0)
+        gUnknown_202F378 = 2;
+    else
+        gUnknown_202F378 = 1;
+
+    strPtr = &entityInfo->unk184[entityInfo->numMoveTiles];
+    strPtr->unk1A = 0;
+    strPtr->lastMoveDirection = a1;
+    strPtr->previousTargetMovePosition1.x = entity->pos.x;
+    strPtr->previousTargetMovePosition1.y = entity->pos.y;
+    strPtr->previousTargetMovePosition2.x = pos->x;
+    strPtr->previousTargetMovePosition2.y = pos->y;
+    strPtr->lastMoveIncrement.x = gUnknown_80F4D44[a1].x * gUnknown_202F378;
+    strPtr->lastMoveIncrement.y = gUnknown_80F4D44[a1].y * gUnknown_202F378;
+    sub_8075050(entityInfo);
+}
 //
 
