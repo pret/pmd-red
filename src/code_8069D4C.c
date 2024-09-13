@@ -2,7 +2,7 @@
 #include "pokemon_mid.h"
 #include "dungeon_util.h"
 
-struct unkStruct_8069D4C 
+struct unkStruct_8069D4C
 {
     s16 id;
     Position pos;
@@ -13,8 +13,8 @@ struct unkStruct_8069D4C
     u8 spDef;
     u16 level;
     u32 exp;
-    u32 belly;
-    u32 maxBelly;
+    FixedPoint belly;
+    FixedPoint maxBelly;
     Item heldItem;
     Move moves[MAX_MON_MOVES];
     u32 unk40; // strugglemoveFlags?

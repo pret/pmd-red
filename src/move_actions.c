@@ -191,7 +191,6 @@ extern bool8 gUnknown_202F220;
 extern void sub_806A5B8(Entity *entity);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 void sub_8075900(Entity *pokemon, u8 r1);
-extern void sub_80943A0(void*, s32);
 extern u8 sub_8044B28(void);
 extern u8 sub_803F428(Position *pos);
 extern void sub_807EC28(bool8);
@@ -3090,18 +3089,14 @@ bool8 sub_805AAD0(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 
 bool8 BellyDrumMoveAction(Entity * pokemon,Entity * target, Move *move, u32 param_4)
 {
-  u32 *belly;
-  u32 newBelly;
   EntityInfo *info;
   bool8 flag;
 
   info = pokemon->info;
   flag = FALSE;
-  belly = &info->belly;
-  if (RoundUpFixedPoint(*belly) > 1) {
+  if (FixedPointToInt(info->belly) > 1) {
     RaiseAttackStageTarget(pokemon,target,gUnknown_8106A4C,99);
-    sub_80943A0(&newBelly,1);
-    *belly = newBelly;
+    info->belly = IntToFixedPoint(1);
     flag = TRUE;
   }
   else {

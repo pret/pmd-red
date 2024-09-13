@@ -323,7 +323,6 @@ SECTIONS {
         src/text_util.o(.text);
         src/friend_area.o(.text);
         src/moves.o(.text);
-        src/code_8094148.o(.text);
         src/number_util.o(.text);
         src/code_809447C.o(.text);
         src/code_8092334.o(.text);

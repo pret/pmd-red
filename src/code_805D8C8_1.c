@@ -257,7 +257,7 @@ void sub_805D8C8(void) // https://decomp.me/scratch/96Sci
                 }
             }
 
-            if (gRealInputs.held & A_BUTTON && gRealInputs.held & B_BUTTON && RoundUpFixedPoint(leaderInfo->belly) != 0) {
+            if (gRealInputs.held & A_BUTTON && gRealInputs.held & B_BUTTON && FixedPointToInt(leaderInfo->belly) != 0) {
                 sub_8044C50(1);
                 gDungeon->unk673 = 1;
                 break;
@@ -266,7 +266,7 @@ void sub_805D8C8(void) // https://decomp.me/scratch/96Sci
             r9 = 0;
             if (gRealInputs.pressed & A_BUTTON) {
                 if (gRealInputs.held & B_BUTTON) {
-                    if (RoundUpFixedPoint(leaderInfo->belly) != 0) {
+                    if (FixedPointToInt(leaderInfo->belly) != 0) {
                         sub_8044C50(1);
                         gDungeon->unk673 = 1;
                         break;
@@ -557,7 +557,7 @@ void sub_805D8C8(void) // https://decomp.me/scratch/96Sci
                         sub_8044C50(2);
 
                         // mov r0, cmp r0, #0 wtf
-                        if ((gRealInputs.held & B_BUTTON || aaa != 0) && RoundUpFixedPoint(leaderInfo->belly) != 0) {
+                        if ((gRealInputs.held & B_BUTTON || aaa != 0) && FixedPointToInt(leaderInfo->belly) != 0) {
                             if (leader->info->volatileStatus.volatileStatus != 2) {
                                 gDungeon->unk66C = 1; // or r9?
                             }
@@ -965,7 +965,7 @@ NAKED void sub_805D8C8(void)
 "lsls r0, 1\n"
 "add r0, r8\n"
 "ldr r0, [r0]\n"
-"bl RoundUpFixedPoint\n"
+"bl FixedPointToInt\n"
 "cmp r0, 0\n"
 "beq _0805DBAA\n"
 "b _0805D9EC\n"
@@ -990,7 +990,7 @@ NAKED void sub_805D8C8(void)
 "lsls r0, 1\n"
 "add r0, r8\n"
 "ldr r0, [r0]\n"
-"bl RoundUpFixedPoint\n"
+"bl FixedPointToInt\n"
 "cmp r0, 0\n"
 "bne _0805DBDA\n"
 "b _0805DD02\n"
@@ -1699,7 +1699,7 @@ NAKED void sub_805D8C8(void)
 "lsls r0, 1\n"
 "add r0, r8\n"
 "ldr r0, [r0]\n"
-"bl RoundUpFixedPoint\n"
+"bl FixedPointToInt\n"
 "cmp r0, 0\n"
 "beq _0805E188\n"
 "mov r1, r10\n"
@@ -3317,8 +3317,8 @@ void DrawFieldMenu(u8 a0)
         sub_80073B8(2);
         DeconstructPlayTime(gPlayTimeRef, &hours, &minutes, &seconds);
 
-        gFormatData_202DE30[0] = RoundUpFixedPoint(leaderInfo->belly);
-        gFormatData_202DE30[1] = RoundUpFixedPoint(leaderInfo->maxBelly);
+        gFormatData_202DE30[0] = FixedPointToInt(leaderInfo->belly);
+        gFormatData_202DE30[1] = FixedPointToInt(leaderInfo->maxBelly);
         PrintFormatStringOnWindow(0x73, 0, gUnknown_80F9174, 2, 0);
 
         gFormatData_202DE30[0] = gTeamInventoryRef->teamMoney;

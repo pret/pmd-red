@@ -36,7 +36,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_DIET_RIBBON:
-            if (targetOther && RoundUpFixedPoint(pokemonInfo->belly) > 0)
+            if (targetOther && FixedPointToInt(pokemonInfo->belly) > 0)
             {
                 return 50;
             }
@@ -368,7 +368,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_HUNGER_SEED:
-            if (RoundUpFixedPoint(pokemonInfo->belly) > 0)
+            if (FixedPointToInt(pokemonInfo->belly) > 0)
             {
                 return 50;
             }
@@ -414,7 +414,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
         case ITEM_APPLE:
         case ITEM_BIG_APPLE:
         case ITEM_HUGE_APPLE:
-            if (RoundUpFixedPoint(pokemonInfo->belly) < 10)
+            if (FixedPointToInt(pokemonInfo->belly) < 10)
             {
                 return 100;
             }

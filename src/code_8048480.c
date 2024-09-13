@@ -115,7 +115,6 @@ extern void sub_806F370(Entity *pokemon, Entity *r1, u32, u32, u8 *, u8, s32, u3
 extern void sub_8078A58(Entity *, Entity *, s32, u32);
 extern s32 sub_8042520(Entity *);
 Entity *sub_80696FC(Entity *);
-extern void sub_80943A0(void*, s32);
 extern void sub_806A7E8(EntityInfo *, s32);
 extern u32 sub_8055640(struct Entity *, struct Entity *, struct Move *, u32, u32);
 
@@ -611,26 +610,19 @@ void RawstBerryItemAction(Entity *pokemon, Entity *target)
 
 void HungerSeedItemAction(Entity *pokemon, Entity * target)
 {
-  EntityInfo *entityInfo;
-  EntityInfo *entityInfo_1;
-  u32 *belly;
-  u32 newBelly;
-
-  entityInfo = target->info;
-  entityInfo_1 = entityInfo;
-  if (entityInfo->isTeamLeader)
+  EntityInfo *entityInfo = target->info;
+  if (target->info->isTeamLeader)
     sub_8078A58(pokemon, target, 0, 5);
   else
   {
+    entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames, target, 0);
     if (IQSkillIsEnabled(target, IQ_SELF_CURER))
         sub_80522F4(pokemon, target, *gPtrSelfHealPreventedHungerMessage);
     else
     {
-      belly = &entityInfo_1->belly;
-      if (RoundUpFixedPoint(*belly) != 0) {
-        sub_80943A0(&newBelly, 0);
-        *belly = newBelly;
+      if (FixedPointToInt(entityInfo->belly) != 0) {
+        entityInfo->belly = IntToFixedPoint(0);
         sub_80522F4(pokemon, target, *gUnknown_80F9740);
       }
       else

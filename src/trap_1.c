@@ -448,7 +448,7 @@ void SaveEntity(unkStruct_8094924 *param_1, Entity *param_2)
     sub_80830B4(param_1,info->aiNextToTarget);
     sub_80830B4(param_1,info->recalculateFollow);
     sub_80830B4(param_1,info->waiting);
-    sub_80830B4(param_1,info->fill146);
+    sub_80830B4(param_1,info->unk146);
     sub_80830B4(param_1,info->attacking);
     sub_80830B4(param_1,info->unk149);
     sub_80830B4(param_1,info->unk14A);
@@ -802,7 +802,7 @@ void sub_8081BF4(u8 *r0, u32 r1)
     RestoreItemData(&uStack_14);
     RestoreTrapData(&uStack_14);
     sub_808217C(&uStack_14);
-    
+
     sub_8083018(&uStack_14, gUnknown_81071D4);
     nullsub_98(&uStack_14);
 }
@@ -872,7 +872,7 @@ void RestoreTile(unkStruct_8094924 *r0, Tile *tile)
     sub_8082FE0(r0, (u32 *)&tile->unkE, 1);
 
     tile->monster = NULL;
-    tile->object = NULL; 
+    tile->object = NULL;
 }
 
 void RestoreDungeonWeather(unkStruct_8094924 *r0, Weather *weather)
@@ -904,7 +904,7 @@ void sub_8081F2C(unkStruct_8094924 *param_1)
     gDungeon->unk181e8.unk1820D       = sub_80831DC(param_1);
     gDungeon->unk181e8.unk1820E       = sub_80831DC(param_1);
     gDungeon->unk181e8.unk1820F       = sub_80831DC(param_1);
-    gDungeon->unk181e8.hallucinating  = sub_80831DC(param_1); 
+    gDungeon->unk181e8.hallucinating  = sub_80831DC(param_1);
     gDungeon->unk181e8.unk18211 = sub_80831DC(param_1);
     gDungeon->unk181e8.unk18213 = sub_80831DC(param_1);
 }
@@ -959,7 +959,7 @@ void RestoreTrapData(unkStruct_8094924 *param_1)
         sub_8082FE0(param_1,(u32 *)&unk1,1);
         isVisible = sub_80831DC(param_1);
         sub_80831F8(param_1, &pos);
-        
+
         if(trapID != 0xFF)
         {
             tile = GetTileSafe(pos.x, pos.y);

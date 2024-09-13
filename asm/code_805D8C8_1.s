@@ -2175,7 +2175,7 @@ _08069A02:
 	lsls r1, 1
 	adds r0, r5, r1
 	ldr r0, [r0]
-	bl RoundUpFixedPoint
+	bl FixedPointToInt
 	cmp r0, 0
 	bne _08069A38
 	ldrb r0, [r5, 0x7]

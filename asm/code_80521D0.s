@@ -2611,7 +2611,7 @@ _08053888:
 	lsls r2, 1
 	adds r0, r1, r2
 	ldr r0, [r0]
-	bl RoundUpFixedPoint
+	bl FixedPointToInt
 	ldr r1, _080538C4
 	movs r3, 0
 	ldrsh r1, [r1, r3]
@@ -2729,11 +2729,11 @@ _0805397C:
 	movs r2, 0
 	ldrsh r1, [r0, r2]
 	add r0, sp, 0x8
-	bl sub_80943A0
+	bl IntToFixedPoint
 	ldr r2, [sp, 0x8]
 	ldr r0, [sp, 0x40]
 	adds r1, r4, 0
-	bl sub_80942C0
+	bl FixedPoint_Substract
 	ldr r0, [sp, 0xC]
 	ldr r3, [sp, 0x3C]
 	str r0, [r3]

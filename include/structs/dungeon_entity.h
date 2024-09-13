@@ -7,6 +7,8 @@
 #include "structs/str_items.h"
 #include "structs/str_moves.h"
 
+#include "number_util.h"
+
 #define MAX_STAT_STAGE 20
 #define STAT_MULTIPLIER_THRESHOLD 63
 #define DEFAULT_STAT_STAGE 10
@@ -256,17 +258,17 @@ typedef struct EntityInfo
     /* 0x108 */ u8 speedUpCounters[NUM_SPEED_COUNTERS];
     /* 0x10D */ u8 speedDownCounters[NUM_SPEED_COUNTERS];
     /* 0x112 */ u8 stockpileStage;
-    u8 fill113;
+    /* 0x113 */ u8 unk113;
     // When non-zero, an AI Pokémon will move in a random direction every turn when it is a room.
     // There is a chance of this flag being set when a wild Pokémon spawns. The chance depends on the dungeon's randomMovementChance.
     /* 0x114 */ u32 moveRandomly;
     /* 0x118 */ Move moves[MAX_MON_MOVES];
     /* 0x138 */ u8 struggleMoveFlags;
-    /* 0x13C */ u32 belly;
-    /* 0x140 */ u32 maxBelly;
+    /* 0x13C */ FixedPoint belly;
+    /* 0x140 */ FixedPoint maxBelly;
     /* 0x144 */ bool8 aiNextToTarget; // True if an AI Pokémon is following another Pokémon and is already adjacent to them.
     /* 0x145 */ bool8 recalculateFollow; // Used by the AI to defer a movement decision until after all other Pokémon have moved.
-    u8 fill146;
+    /* 0x146 */ u8 unk146;
     /* 0x147 */ bool8 waiting; // True if an AI Pokémon decided to do nothing this turn.
     /* 0x148 */ bool8 attacking;
     /* 0x149 */ u8 unk149;

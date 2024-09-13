@@ -63,7 +63,7 @@ void MoveIfPossible(Entity *pokemon, bool8 showRunAwayEffect)
     {
         pokemonInfo->action.action = ACTION_NOTHING;
     }
-    else if (!pokemonInfo->isTeamLeader && RoundUpFixedPoint(pokemonInfo->belly) == 0)
+    else if (!pokemonInfo->isTeamLeader && FixedPointToInt(pokemonInfo->belly) == 0)
     {
         pokemonInfo->action.action = ACTION_NOTHING;
     }

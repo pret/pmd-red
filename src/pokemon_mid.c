@@ -34,7 +34,6 @@ extern LevelData gLevelCurrentData[];
 
 extern int sprintf(char *, const char *, ...);
 extern u32 ReturnIntFromChar(u8 r0);
-extern void sub_80943A0(void*, s32);
 extern void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1*, PokemonStruct2*);
 
 extern u8 GetBodySize(s16 index);
@@ -618,8 +617,6 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(PokemonStruct2 * a1, PokemonStruct1 *
     s32 i;
     BulkItem* held;
     Item* slot;
-    u32 somestruct_80943A0;
-    u32 somestruct2_80943A0;
 
     a1->unk0 = pokemon->unk0;
     a1->level = pokemon->level;
@@ -657,10 +654,9 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(PokemonStruct2 * a1, PokemonStruct1 *
         slot->quantity = 0;
         slot->flags = 0;
     }
-  sub_80943A0(&somestruct_80943A0, 100);
-  a1->unk44 = somestruct_80943A0;
-  sub_80943A0(&somestruct2_80943A0, 100);
-  a1->unk48 = somestruct2_80943A0;
+
+  a1->unk44 = IntToFixedPoint(100);
+  a1->unk48 = IntToFixedPoint(100);
 }
 
 void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, PokemonStruct2* a2)
