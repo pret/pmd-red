@@ -9,7 +9,7 @@ typedef struct FixedPoint
 
 struct unkStruct_80943A8
 {
-    FixedPoint s0;
+    s32 s0;
     s32 s4;
 } unkStruct_80943A8;
 

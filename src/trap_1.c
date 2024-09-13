@@ -440,7 +440,7 @@ void SaveEntity(unkStruct_8094924 *param_1, Entity *param_2)
     SaveSpeedCounters(param_1,info->speedUpCounters,NUM_SPEED_COUNTERS);
     SaveSpeedCounters(param_1,info->speedDownCounters,NUM_SPEED_COUNTERS);
     sub_8083060(param_1,info->stockpileStage);
-    sub_8083060(param_1,info->fill113);
+    sub_8083060(param_1,info->unk113);
     sub_8083060(param_1,(u8)info->moveRandomly);
     SaveEntityMoves(param_1,info->moves);
     sub_8081B34(param_1,(s16 *)&info->belly);
