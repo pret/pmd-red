@@ -4,6 +4,7 @@
 #include "code_8045A00.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
+#include "code_807CD9C.h"
 #include "code_808417C.h"
 #include "constants/ability.h"
 #include "constants/status.h"
@@ -200,7 +201,6 @@ extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_8045C28(Item *, u8 , u8);
 extern void sub_805A7D4(Entity *, Entity *, Item *, Position *);
 extern void MudWaterSportEffect(u32);
-extern void sub_807D148(Entity *pokemon, Entity *target, u32 r2, Position *r3);
 extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_806A6E8(Entity *);
 

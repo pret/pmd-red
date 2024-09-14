@@ -17,6 +17,7 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
 #include "math.h"
+#include "move_effects_target.h"
 #include "number_util.h"
 #include "status_checks_1.h"
 #include "structs/map.h"
@@ -134,8 +135,6 @@ extern s32 gFormatData_202DE30[10];
 extern void sub_8041D84(Entity *);
 extern void sub_804178C(u32);
 extern void sub_8041D5C(Entity *);
-extern void RaiseAttackStageTarget(Entity *, Entity *, u32, u32);
-extern void RaiseDefenseStageTarget(Entity *, Entity *, u32, u32);
 extern void sub_8041D48(Entity *);
 extern void sub_8041D38(Entity * pokemon);
 extern u8 sub_8043D10(void);
@@ -168,7 +167,6 @@ extern void sub_8041CCC(Entity *);
 extern void sub_8041CB8(Entity *r0);
 extern void sub_8041C1C(Entity *r0);
 extern void sub_8042060(Entity *, s32);
-extern bool8 sub_8071728(Entity * param_1, Entity * param_2, u8 param_3);
 extern void sub_8041FB4(Entity *r0, u32 r1);
 extern void sub_8041FD8(Entity *r0, u32 r1);
 extern void sub_80522F4(Entity *r1, Entity *r2, u8 *);

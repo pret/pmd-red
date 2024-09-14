@@ -7,6 +7,7 @@
 #include "code_8045A00.h"
 #include "code_80521D0.h"
 #include "code_8077274_1.h"
+#include "code_807CD9C.h"
 #include "constants/dungeon_action.h"
 #include "constants/dungeon.h"
 #include "constants/iq_skill.h"
@@ -24,7 +25,6 @@
 #include "dungeon_visibility.h"
 #include "pokemon_3.h"
 #include "pokemon.h"
-#include "code_8077274_1.h"
 #include "trap.h"
 
 extern u8 gUnknown_202F221;
@@ -81,7 +81,6 @@ void HandleEatAIAction(Entity *pokemon);
 bool8 sub_8044B84(void);
 extern void sub_8074094(Entity *);
 extern void sub_8071DA4(Entity *);
-extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, Position *r3);
 u32 sub_8075818(Entity *entity);
 
 bool8 TargetLeader(Entity *pokemon)

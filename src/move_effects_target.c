@@ -126,7 +126,6 @@ extern u8 *gUnknown_80FC270[];
 extern u8 *gUnknown_80FC138[];
 extern u8 *gUnknown_80FC21C[];
 
-extern bool8 sub_8071728(Entity * pokemon, Entity * target, bool8 displayMessage);
 extern void sub_8041F28(Entity *, s32);
 extern void sub_8041F4C(Entity *, s32);
 extern void sub_8041F70(Entity *, s32);

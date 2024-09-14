@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_8045A00.h"
 #include "code_80521D0.h"
+#include "code_807CD9C.h"
 #include "dungeon_map_access.h"
 #include "dungeon_movement.h"
 #include "dungeon_music.h"
@@ -34,7 +35,6 @@ void sub_8045BF8(u8 *, Item *);
 u8 sub_80460F8(Position *, Item *, u32);
 extern void sub_807AB38(Entity *, u32);
 extern Entity * sub_8044DA4(Entity *param_1,int param_2);
-extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, Position *r3);
 extern void sub_806A6E8(Entity *);
 extern void sub_8044DF0(Entity *, u32, u32);
 extern void sub_8045DB4(Position *, u32);

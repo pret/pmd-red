@@ -4,6 +4,7 @@
 #include "structs/dungeon_entity.h"
 
 bool8 HasSafeguardStatus(Entity * param_1, Entity * param_2, bool8 displayMessage);
+bool8 sub_8071728(Entity * pokemon, Entity * target, bool8 displayMessage);
 bool8 sub_80717A4(Entity *pokemon, u16 moveID);
 bool8 HasAbility(Entity *pokemon, u8 ability);
 bool8 MonsterIsType(Entity *pokemon, u8 type);

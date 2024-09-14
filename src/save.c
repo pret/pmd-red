@@ -44,7 +44,6 @@ extern u32 SaveRecruitedPokemon(u8 *, u32);
 extern u32 RestoreRecruitedPokemon(void* a, s32 b);
 extern u32 SavePokemonStruct2(u8 *, u32);
 extern u32 RestorePokemonStruct2(void* a, s32 b);
-extern u32 sub_80921C4(u8 *, u32);
 extern u32 sub_80954CC(void* a, s32 b);
 extern u32 sub_8095624(u8 *, u32);
 extern u32 RestoreMailInfo(void* a, s32 b);

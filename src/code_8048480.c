@@ -3,6 +3,7 @@
 #include "code_8045A00.h"
 #include "code_80521D0.h"
 #include "code_8077274_1.h"
+#include "code_807CD9C.h"
 #include "code_808417C.h"
 #include "constants/dungeon_action.h"
 #include "constants/dungeon.h"
@@ -107,7 +108,6 @@ extern void PrintFieldMessage(u32, u8 *, u32);
 extern void sub_8044E24(Entity *, u32, u32);
 extern void sub_804245C(Entity *, Item *);
 extern u8 sub_8072938(Entity *, u16);
-extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, Position *r3);
 extern void sub_8072008(Entity *pokemon, Entity *r1, u32 r2, u8 r3, u32);
 extern void LevelDownTarget(Entity *pokemon, Entity *r1, u32 r2);
 extern void sub_80522F4(Entity *pokemon, Entity *r1, const u8[]);

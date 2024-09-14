@@ -5,6 +5,7 @@
 #include "code_8045A00.h"
 #include "code_80521D0.h"
 #include "code_8077274_1.h"
+#include "code_807CD9C.h"
 #include "code_808417C.h"
 #include "constants/trap.h"
 #include "constants/type.h"
@@ -92,9 +93,7 @@ void sub_8049ED4(void);
 void sub_80522F4(Entity *pokemon, Entity *target, const char r2[]);
 u8 sub_803D6FC(void);
 Entity *sub_8045684(u8, Position *, u8);
-extern void sub_807D148(Entity *pokemon, Entity *target, u32 r2, Position *r3);
 extern void sub_807DF38(Entity *pokemon, Entity *target, Position *pos, u32, u8 moveType, s16);
-extern void sub_807CD9C(Entity *, Entity *, u32 direction);
 
 void sub_807FC3C(Position *pos, u32 trapID, u32 param_3)
 {

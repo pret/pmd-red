@@ -275,7 +275,7 @@ typedef struct Dungeon
     /* 0x3A16 */ s16 unk3A16;
     /* 0x3A18 */ Tile tiles[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     Position unkE218;
-    Position unkE21C;
+    Position unkE21C; // stair location?
     Position unkE220[8];
     u32 unkE240;
     u8 fillE244[0xE250 - 0xE244];

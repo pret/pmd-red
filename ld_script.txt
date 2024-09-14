@@ -279,8 +279,9 @@ SECTIONS {
         src/dungeon_ai_movement.o(.text);
         src/dungeon_ai_attack.o(.text);
         src/targeting_flags.o(.text);
-        asm/code_807CD9C.o(.text);
         src/code_807CD9C.o(.text);
+        asm/code_807CD9C.o(.text);
+        src/code_807E1A0.o(.text);
         src/weather.o(.text);
         asm/code_807E5AC.o(.text);
         src/trap.o(.text);
