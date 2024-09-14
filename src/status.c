@@ -154,9 +154,6 @@ extern void nullsub_82(Entity *);
 extern void nullsub_83(Entity *);
 extern void nullsub_84(Entity *);
 
-extern void sub_80943A0(void*, s32);
-extern void sub_80942C0(void*, s32, s32);
-extern void sub_8094318(u32 *, u32, u32 );
 extern void sub_8041D9C(Entity *);
 
 extern void sub_803F580(u32);
@@ -1240,35 +1237,23 @@ void EncoreStatusTarget(Entity *pokemon,Entity *target)
 }
 
 void sub_8078A58(struct Entity *pokemon, struct Entity *target, s32 param_3, s32 param_4)
-{   
+{
     struct EntityInfo *targetInfo;
-    u32 r7;
-    u32 sp_0x0;
-    u32 sp_0x4;
-    u32 sp_0x8;
-    u32 sp_0xC;
-    u32 sp_0x10;
-    u32 temp;
-    u32 temp2;
-    u32 temp3;
-    
+    FixedPoint bellyBefore;
+
     if (!EntityExists(target))
         return;
 
     targetInfo = target->info;
 
     if (param_4 != 0) {
-        sub_80943A0(&sp_0x0, param_4);
-        temp2 = sp_0x0;
-        r7 = targetInfo->maxBelly;
-        sub_80942C0(&sp_0x4, r7, temp2);
-        targetInfo->maxBelly = sp_0x4;
-        temp3 = targetInfo->belly;
-        sub_8094318(&sp_0x8, temp3, targetInfo->maxBelly);
-        targetInfo->belly = sp_0x8;
+        FixedPoint sp0 = IntToFixedPoint(param_4);
+        bellyBefore = targetInfo->maxBelly;
+        targetInfo->maxBelly = FixedPoint_Substract(bellyBefore, sp0);
+        targetInfo->belly = FixedPoint_Min(targetInfo->belly, targetInfo->maxBelly);
         SetMessageArgument(gAvailablePokemonNames, target, 0);
 
-        if (RoundUpFixedPoint(r7) != RoundUpFixedPoint(targetInfo->maxBelly)) {
+        if (FixedPointToInt(bellyBefore) != FixedPointToInt(targetInfo->maxBelly)) {
             sub_8041D9C(target);
             sub_80522F4(pokemon, target, *gUnknown_80FBD9C);
         }
@@ -1276,14 +1261,13 @@ void sub_8078A58(struct Entity *pokemon, struct Entity *target, s32 param_3, s32
             sub_80522F4(pokemon, target, *gUnknown_80FBE3C);
     }
     else {
-        sub_80943A0(&sp_0xC, param_3);
-        temp = sp_0xC;
-        r7 = targetInfo->belly;
-        sub_80942C0(&sp_0x10, r7, temp);
-        targetInfo->belly = sp_0x10;
+        FixedPoint sp8 = IntToFixedPoint(param_3);
+        bellyBefore = targetInfo->belly;
+        targetInfo->belly = FixedPoint_Substract(bellyBefore, sp8);
+
         SetMessageArgument(gAvailablePokemonNames, target, 0);
 
-        if (RoundUpFixedPoint(r7) != RoundUpFixedPoint(targetInfo->belly)) {
+        if (FixedPointToInt(bellyBefore) != FixedPointToInt(targetInfo->belly)) {
             nullsub_84(target);
             sub_80522F4(pokemon, target, *gUnknown_80FBD78);
         }

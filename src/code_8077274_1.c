@@ -176,7 +176,7 @@ extern void sub_807EC28(bool8);
 extern s32 sub_8069F54(Entity *param_1, s16 param_2);
 extern void sub_806A898(Entity *, u32, u32);
 extern void HealTargetHP(Entity *pokemon, Entity *r1, s16, s16, u32);
-extern void sub_806F324(Entity *, s16, u32, u32);
+extern void DealDamageToEntity(Entity *, s16, u32, u32);
 extern void sub_806BFC0(EntityInfo *, u32);
 extern void sub_80420C8(Entity *r0);
 extern void nullsub_68(Entity *);
@@ -1190,7 +1190,7 @@ void SendSleepEndMessage(Entity * pokemon, Entity * target, bool8 param_3, bool8
             isAsleep = TRUE;
             sub_80522F4(pokemon,target,*gUnknown_80FA70C);
             if (param_4) {
-                sub_806F324(target,gUnknown_80F4F78,8,0x20f);
+                DealDamageToEntity(target,gUnknown_80F4F78,8,0x20f);
             }
             break;
         case STATUS_NAPPING:
@@ -1570,65 +1570,22 @@ void SendMuzzledEndMessage(Entity * pokemon, Entity * target)
   EntityUpdateStatusSprites(target);
 }
 
-/*
- * https://decomp.me/scratch/kEFOw (97.58 % matching, Seth)
-
-    bool8 sub_807A96C(Entity * pokemon, Entity * target)
-    {
-      EntityInfo *entityInfo;
-      bool8 flag;
-
-      entityInfo = target->info;
-      flag = FALSE;
-      if (entityInfo->immobilize.immobilizeStatus == 6) {
-        SendImmobilizeEndMessage(pokemon, target);
-        flag = TRUE;
-      }
-
-      if (entityInfo->sleep.sleep == 1 && entityInfo->sleep.sleepTurns == 0x7f) {
-        SendSleepEndMessage(pokemon,target,0,1);
-        flag = TRUE;
-      }
-      return flag;
-    }
-*/
-NAKED
-void sub_807A96C(Entity *pokemon, Entity *target)
+bool8 TrySendImmobilizeSleepEndMsg(Entity * pokemon, Entity * target)
 {
-    asm_unified(
-	"\tpush {r4-r6,lr}\n"
-	"\tadds r6, r0, 0\n"
-	"\tadds r4, r1, 0\n"
-	"\tldr r0, [r4, 0x70]\n"
-	"\tadds r5, r0, 0\n"
-	"\tmovs r2, 0\n"
-	"\tadds r0, 0xB0\n"
-	"\tldrb r0, [r0]\n"
-	"\tcmp r0, 0x6\n"
-	"\tbne _0807A988\n"
-	"\tadds r0, r6, 0\n"
-	"\tbl SendImmobilizeEndMessage\n"
-	"\tmovs r2, 0x1\n"
-"_0807A988:\n"
-	"\tadds r0, r5, 0\n"
-	"\tadds r0, 0xA8\n"
-	"\tldrh r1, [r0]\n"
-	"\tldr r0, _0807A9AC\n"
-	"\tcmp r1, r0\n"
-	"\tbne _0807A9A2\n"
-	"\tadds r0, r6, 0\n"
-	"\tadds r1, r4, 0\n"
-	"\tmovs r2, 0\n"
-	"\tmovs r3, 0x1\n"
-	"\tbl SendSleepEndMessage\n"
-	"\tmovs r2, 0x1\n"
-"_0807A9A2:\n"
-	"\tadds r0, r2, 0\n"
-	"\tpop {r4-r6}\n"
-	"\tpop {r1}\n"
-	"\tbx r1\n"
-	"\t.align 2, 0\n"
-"_0807A9AC: .4byte 0x00007f01");
+    // entityInfoMatch needed to match
+    EntityInfo *entityInfoMatch = target->info;
+    EntityInfo *entityInfo = entityInfoMatch;
+    bool32 msg = FALSE;
+
+    if (entityInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED) {
+        SendImmobilizeEndMessage(pokemon, target);
+        msg = TRUE;
+    }
+    if (entityInfo->sleep.sleep == STATUS_SLEEP && entityInfo->sleep.sleepTurns == 0x7f) {
+        SendSleepEndMessage(pokemon,target, FALSE, TRUE);
+        msg = TRUE;
+    }
+    return msg;
 }
 
 void WakeUpPokemon(Entity * pokemon)

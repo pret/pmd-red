@@ -7,6 +7,8 @@
 #include "structs/str_items.h"
 #include "structs/str_moves.h"
 
+#include "number_util.h"
+
 #define MAX_STAT_STAGE 20
 #define STAT_MULTIPLIER_THRESHOLD 63
 #define DEFAULT_STAT_STAGE 10
@@ -155,6 +157,16 @@ typedef struct Muzzled
     /* 0xED */ u8 muzzledTurns;
 } Muzzled;
 
+typedef struct Unk_Entity_x184
+{
+    /* 0x184 - 0x0 */ Position previousTargetMovePosition1;
+    /* 0x188 - 0x4 */ Position32 previousTargetMovePosition2;
+    /* 0x190 - 0xC */ s32 lastMoveDirection; // The last direction that the Pokémon moved in.
+    // Number of tiles that the Pokémon moved last, multiplied by 0x100.
+    /* 0x194 - 0x10*/ Position32 lastMoveIncrement;
+    /* 0x19C - 0x18 */ s16 walkAnimFramesLeft; // Set when the Pokémon starts moving, and counts down until the Pokémon's walk animation stops.
+    /* 0x19e - 0x1a */ u8 unk1A;
+} Unk_Entity_x184 ;
 
 // size: 0x208
 typedef struct EntityInfo
@@ -256,17 +268,17 @@ typedef struct EntityInfo
     /* 0x108 */ u8 speedUpCounters[NUM_SPEED_COUNTERS];
     /* 0x10D */ u8 speedDownCounters[NUM_SPEED_COUNTERS];
     /* 0x112 */ u8 stockpileStage;
-    u8 fill113;
+    /* 0x113 */ u8 unk113;
     // When non-zero, an AI Pokémon will move in a random direction every turn when it is a room.
     // There is a chance of this flag being set when a wild Pokémon spawns. The chance depends on the dungeon's randomMovementChance.
     /* 0x114 */ u32 moveRandomly;
     /* 0x118 */ Move moves[MAX_MON_MOVES];
     /* 0x138 */ u8 struggleMoveFlags;
-    /* 0x13C */ u32 belly;
-    /* 0x140 */ u32 maxBelly;
+    /* 0x13C */ FixedPoint belly;
+    /* 0x140 */ FixedPoint maxBelly;
     /* 0x144 */ bool8 aiNextToTarget; // True if an AI Pokémon is following another Pokémon and is already adjacent to them.
     /* 0x145 */ bool8 recalculateFollow; // Used by the AI to defer a movement decision until after all other Pokémon have moved.
-    u8 fill146;
+    /* 0x146 */ u8 unk146;
     /* 0x147 */ bool8 waiting; // True if an AI Pokémon decided to do nothing this turn.
     /* 0x148 */ bool8 attacking;
     /* 0x149 */ u8 unk149;
@@ -304,16 +316,9 @@ typedef struct EntityInfo
     u16 unk178;
     /* 0x17A */ u16 mimicMoveIDs[MAX_MON_MOVES]; // All moves that Mimic has copied (not sure on size...)
     // Previous value of targetPosition for movement, 1 and 2 moves ago.
-    /* 0x184 */ Position previousTargetMovePosition1;
-    /* 0x188 */ Position32 previousTargetMovePosition2;
-    /* 0x190 */ u8 lastMoveDirection; // The last direction that the Pokémon moved in.
-    // Number of tiles that the Pokémon moved last, multiplied by 0x100.
-    /* 0x194 */ Position32 lastMoveIncrement;
-    /* 0x19C */ u8 walkAnimFramesLeft; // Set when the Pokémon starts moving, and counts down until the Pokémon's walk animation stops.
-    u8 fill19D[0x1F4 - 0x19D];
-    /* 0x1F4 */ u8 numMoveTiles; // Number of tiles to move in a turn. Can be greater than 1 if the user's movement speed is boosted.
-    u8 fill1F5;
-    /* 0x1F6 */ bool8 notMoving;
+    /* 0x184 */ Unk_Entity_x184 unk184[4];
+    /* 0x1F4 */ s16 numMoveTiles; // Number of tiles to move in a turn. Can be greater than 1 if the user's movement speed is boosted.
+    /* 0x1F6 */ s16 notMoving;
     /* 0x1F8 */ s16 unk1F8;
     /* 0x1FA */ s16 mobileTurnTimer; // When a Pokémon can pass through walls in a hallway, this counts up to 200 before the Pokémon turns in a random direction.
     /* 0x1FC */ u32 expGainedInTurn; // Used to accumulate experience when multiple enemies are defeated in one turn.

@@ -141,7 +141,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_BELLY_DRUM:
-            if (pokemonInfo->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE || RoundUpFixedPoint(pokemonInfo->belly) <= 0)
+            if (pokemonInfo->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE || FixedPointToInt(pokemonInfo->belly) <= 0)
             {
                 return FALSE;
             }

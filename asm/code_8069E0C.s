@@ -447,17 +447,17 @@ _0806A664:
 	mov r0, sp
 	adds r1, r5, 0
 	movs r2, 0x5
-	bl sub_80942C0
+	bl FixedPoint_Substract
 	ldr r0, [sp]
 	str r0, [r4]
 	movs r1, 0
 	mov r8, r1
 	adds r0, r5, 0
-	bl RoundUpFixedPoint
+	bl FixedPointToInt
 	cmp r0, 0x13
 	ble _0806A6A4
 	ldr r0, [r4]
-	bl RoundUpFixedPoint
+	bl FixedPointToInt
 	cmp r0, 0x13
 	bgt _0806A6A4
 	ldr r0, _0806A6E0
@@ -465,14 +465,14 @@ _0806A664:
 	mov r8, r0
 _0806A6A4:
 	adds r0, r5, 0
-	bl RoundUpFixedPoint
+	bl FixedPointToInt
 	cmp r0, 0x9
 	ble _0806A6C4
 	movs r2, 0x9E
 	lsls r2, 1
 	adds r0, r7, r2
 	ldr r0, [r0]
-	bl RoundUpFixedPoint
+	bl FixedPointToInt
 	cmp r0, 0x9
 	bgt _0806A6C4
 	ldr r0, _0806A6E4
@@ -525,11 +525,11 @@ _0806A70E:
 	ldr r4, [r5]
 	mov r0, sp
 	movs r1, 0xA
-	bl sub_80943A0
+	bl IntToFixedPoint
 	ldr r2, [sp]
 	add r0, sp, 0x4
 	adds r1, r4, 0
-	bl sub_80942C0
+	bl FixedPoint_Substract
 	ldr r0, [sp, 0x4]
 	str r0, [r5]
 	b _0806A744
@@ -538,7 +538,7 @@ _0806A72E:
 	bne _0806A744
 	add r0, sp, 0x8
 	movs r1, 0
-	bl sub_80943A0
+	bl IntToFixedPoint
 	movs r0, 0x9E
 	lsls r0, 1
 	adds r1, r6, r0
@@ -3484,7 +3484,7 @@ _0806BDA6:
 	strh r4, [r6, 0xE]
 	mov r0, sp
 	movs r1, 0x64
-	bl sub_80943A0
+	bl IntToFixedPoint
 	movs r2, 0x9E
 	lsls r2, 1
 	adds r1, r6, r2
@@ -3492,7 +3492,7 @@ _0806BDA6:
 	str r0, [r1]
 	add r0, sp, 0x4
 	movs r1, 0x64
-	bl sub_80943A0
+	bl IntToFixedPoint
 	movs r3, 0xA0
 	lsls r3, 1
 	adds r1, r6, r3

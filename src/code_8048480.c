@@ -115,7 +115,6 @@ extern void sub_806F370(Entity *pokemon, Entity *r1, u32, u32, u8 *, u8, s32, u3
 extern void sub_8078A58(Entity *, Entity *, s32, u32);
 extern s32 sub_8042520(Entity *);
 Entity *sub_80696FC(Entity *);
-extern void sub_80943A0(void*, s32);
 extern void sub_806A7E8(EntityInfo *, s32);
 extern u32 sub_8055640(struct Entity *, struct Entity *, struct Move *, u32, u32);
 
@@ -611,26 +610,19 @@ void RawstBerryItemAction(Entity *pokemon, Entity *target)
 
 void HungerSeedItemAction(Entity *pokemon, Entity * target)
 {
-  EntityInfo *entityInfo;
-  EntityInfo *entityInfo_1;
-  u32 *belly;
-  u32 newBelly;
-
-  entityInfo = target->info;
-  entityInfo_1 = entityInfo;
-  if (entityInfo->isTeamLeader)
+  EntityInfo *entityInfo = target->info;
+  if (target->info->isTeamLeader)
     sub_8078A58(pokemon, target, 0, 5);
   else
   {
+    entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames, target, 0);
     if (IQSkillIsEnabled(target, IQ_SELF_CURER))
         sub_80522F4(pokemon, target, *gPtrSelfHealPreventedHungerMessage);
     else
     {
-      belly = &entityInfo_1->belly;
-      if (RoundUpFixedPoint(*belly) != 0) {
-        sub_80943A0(&newBelly, 0);
-        *belly = newBelly;
+      if (FixedPointToInt(entityInfo->belly) != 0) {
+        entityInfo->belly = IntToFixedPoint(0);
         sub_80522F4(pokemon, target, *gUnknown_80F9740);
       }
       else
@@ -744,17 +736,6 @@ void sub_80487CC(Entity *pokemon, Entity * target, u32 param_3, u32 param_4)
     sub_8078B5C(pokemon, target, param_3, param_4, 1);
 }
 
-static inline bool8 JoinLocationCannotUseItems_1(EntityInfo *pokemonInfo)
-{
-    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
-        return TRUE;
-
-    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
-        return TRUE;
-
-    return FALSE;
-}
-
 void HandleGummiItemAction(Entity *pokemon, Entity *target, u8 gummiIndex)
 {
   s32 iVar3;
@@ -772,7 +753,7 @@ void HandleGummiItemAction(Entity *pokemon, Entity *target, u8 gummiIndex)
              gUnknown_810A808[targetInfo->types[0]][gummiIndex] +
              gUnknown_810A808[targetInfo->types[1]][gummiIndex],0,1);
   if (!targetInfo->isNotTeamMember) {
-    if (!JoinLocationCannotUseItems_1(targetInfo)) {
+    if (!IsClientOrTeamBase(targetInfo->joinedAt.joinedAt)) {
       baseIQ = targetInfo->IQ;
       targetInfo->IQ += gummiBoost;
       currIQ = baseIQ + gummiBoost;
@@ -828,19 +809,6 @@ void ZincItemAction(Entity *pokemon, Entity *target)
 void nullsub_94(Entity *pokemon, Entity *target, u8 r2)
 {}
 
-static inline bool8 JoinLocationCannotUseItems_2(EntityInfo *pokemonInfo)
-{
-    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
-    {
-        return TRUE;
-    }
-    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
-    {
-        return TRUE;
-    }
-    return FALSE;
-}
-
 bool8 sub_8048950(Entity *param_1,Item *item)
 {
     u8 flag;
@@ -873,7 +841,7 @@ bool8 sub_8048950(Entity *param_1,Item *item)
                 if (entityInfo->clientType == CLIENT_TYPE_CLIENT) {
                     flag = FALSE;
                 }
-                if (JoinLocationCannotUseItems_2(entityInfo)) {
+                if (IsClientOrTeamBase(entityInfo->joinedAt.joinedAt)) {
                     flag = FALSE;
                 }
                 entityInfo->unk157 = flag;
@@ -888,19 +856,6 @@ bool8 sub_8048950(Entity *param_1,Item *item)
             return FALSE;
         }
         sub_8044E24(param_1,0,0x141);
-        return TRUE;
-    }
-    return FALSE;
-}
-
-static inline bool8 JoinLocationCannotUseItems_3(EntityInfo *pokemonInfo)
-{
-    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
-    {
-        return TRUE;
-    }
-    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
-    {
         return TRUE;
     }
     return FALSE;
@@ -948,7 +903,7 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
           if (pEVar6->clientType == CLIENT_TYPE_CLIENT) {
             flag = FALSE;
           }
-          if (JoinLocationCannotUseItems_3(pEVar6)) {
+          if (IsClientOrTeamBase(pEVar6->joinedAt.joinedAt)) {
             flag = FALSE;
           }
           if (pEVar6->isTeamLeader) {
@@ -968,19 +923,6 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
     }
   }
   return FALSE;
-}
-
-static inline bool8 JoinLocationCannotUseItems_4(EntityInfo *pokemonInfo)
-{
-    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
-    {
-        return TRUE;
-    }
-    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
-    {
-        return TRUE;
-    }
-    return FALSE;
 }
 
 // TODO: should be bool8
@@ -1024,7 +966,7 @@ bool32 sub_8048B9C(Entity *entity,Item *param_2)
         {
             flag = FALSE;
         }
-        if(JoinLocationCannotUseItems_4(entity1Info))
+        if(IsClientOrTeamBase(entity1Info->joinedAt.joinedAt))
         {
             flag = FALSE;
         }

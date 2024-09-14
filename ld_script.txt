@@ -270,7 +270,6 @@ SECTIONS {
         asm/code_8072CF4.o(.text);
         src/dungeon_ai_items.o(.text);
         src/code_8073CF0.o(.text);
-        asm/code_8073CF0.o(.text);
         src/code_8075708.o(.text);
         src/dungeon_ai.o(.text);
         src/move_effects_target.o(.text);
@@ -323,7 +322,6 @@ SECTIONS {
         src/text_util.o(.text);
         src/friend_area.o(.text);
         src/moves.o(.text);
-        src/code_8094148.o(.text);
         src/number_util.o(.text);
         src/code_809447C.o(.text);
         src/code_8092334.o(.text);

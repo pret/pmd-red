@@ -60,13 +60,13 @@ _08078BB8:
 	lsls r1, 1
 	adds r0, r7, r1
 	ldr r0, [r0]
-	bl RoundUpFixedPoint
+	bl FixedPointToInt
 	adds r4, r0, 0
 	movs r1, 0xA0
 	lsls r1, 1
 	adds r0, r7, r1
 	ldr r0, [r0]
-	bl RoundUpFixedPoint
+	bl FixedPointToInt
 	cmp r4, r0
 	blt _08078BE0
 	movs r5, 0x1
@@ -87,10 +87,10 @@ _08078BE8:
 	adds r0, r7
 	mov r10, r0
 	ldr r0, [r0]
-	bl RoundUpFixedPoint
+	bl FixedPointToInt
 	adds r4, r0, 0
 	ldr r0, [r5]
-	bl RoundUpFixedPoint
+	bl FixedPointToInt
 	movs r1, 0
 	str r1, [sp, 0x24]
 	cmp r4, r0
@@ -100,20 +100,20 @@ _08078BE8:
 _08078C16:
 	mov r0, sp
 	ldr r1, [sp, 0x1C]
-	bl sub_80943A0
+	bl IntToFixedPoint
 	ldr r2, [sp]
 	ldr r1, [r5]
 	add r0, sp, 0x4
-	bl sub_8094268
+	bl FixedPoint_Add
 	ldr r4, [sp, 0x4]
 	str r4, [r5]
 	add r0, sp, 0x8
 	movs r1, 0xC8
-	bl sub_80943A0
+	bl IntToFixedPoint
 	ldr r2, [sp, 0x8]
 	add r0, sp, 0xC
 	adds r1, r4, 0
-	bl sub_8094318
+	bl FixedPoint_Min
 	ldr r0, [sp, 0xC]
 	str r0, [r5]
 	mov r1, r10
@@ -131,13 +131,13 @@ _08078C16:
 	bl sub_80522F4
 _08078C5E:
 	ldr r0, [sp, 0x20]
-	bl RoundUpFixedPoint
+	bl FixedPointToInt
 	adds r4, r0, 0
 	movs r1, 0xA0
 	lsls r1, 1
 	adds r0, r7, r1
 	ldr r0, [r0]
-	bl RoundUpFixedPoint
+	bl FixedPointToInt
 	cmp r4, r0
 	bne _08078C9C
 	ldr r0, _08078C94
@@ -176,11 +176,11 @@ _08078CC0:
 	ldr r4, [r5]
 	add r0, sp, 0x10
 	mov r1, r10
-	bl sub_80943A0
+	bl IntToFixedPoint
 	ldr r2, [sp, 0x10]
 	ldr r1, [r5]
 	add r0, sp, 0x14
-	bl sub_8094268
+	bl FixedPoint_Add
 	ldr r1, [sp, 0x14]
 	str r1, [r5]
 	movs r0, 0xA0
@@ -188,7 +188,7 @@ _08078CC0:
 	adds r7, r0
 	ldr r2, [r7]
 	add r0, sp, 0x18
-	bl sub_8094318
+	bl FixedPoint_Min
 	ldr r0, [sp, 0x18]
 	str r0, [r5]
 	ldr r0, _08078D28
@@ -204,10 +204,10 @@ _08078CFA:
 	movs r2, 0
 	bl SetMessageArgument
 	adds r0, r4, 0
-	bl RoundUpFixedPoint
+	bl FixedPointToInt
 	adds r4, r0, 0
 	ldr r0, [r5]
-	bl RoundUpFixedPoint
+	bl FixedPointToInt
 	cmp r4, r0
 	bne _08078D34
 	mov r1, r8
@@ -221,10 +221,10 @@ _08078D2C: .4byte gAvailablePokemonNames
 _08078D30: .4byte gUnknown_80FBE14
 _08078D34:
 	ldr r0, [r5]
-	bl RoundUpFixedPoint
+	bl FixedPointToInt
 	adds r4, r0, 0
 	ldr r0, [r7]
-	bl RoundUpFixedPoint
+	bl FixedPointToInt
 	cmp r4, r0
 	blt _08078D60
 	mov r0, r8

@@ -958,7 +958,7 @@ _080675C0:
 	bl sub_8084778
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_807A96C
+	bl TrySendImmobilizeSleepEndMsg
 	adds r0, r5, 0
 	bl sub_8070BC0
 	lsls r0, 24

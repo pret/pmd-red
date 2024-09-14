@@ -51,7 +51,7 @@ _0806EB3A:
 	lsls r0, 1
 	add r0, r10
 	ldr r0, [r0]
-	bl RoundUpFixedPoint
+	bl FixedPointToInt
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _0806EB72
@@ -1000,8 +1000,8 @@ _0806F2DE:
 _0806F320: .4byte 0x000003e7
 	thumb_func_end sub_806F2BC
 
-	thumb_func_start sub_806F324
-sub_806F324:
+	thumb_func_start DealDamageToEntity
+DealDamageToEntity:
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -1037,7 +1037,7 @@ sub_806F324:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806F324
+	thumb_func_end DealDamageToEntity
 
 	thumb_func_start sub_806F370
 sub_806F370:

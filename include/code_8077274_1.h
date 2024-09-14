@@ -44,7 +44,7 @@ void SendMoveEndMessage(Entity * pokemon, Entity * target);
 void SendTransformEndMessage(Entity * pokemon, Entity *target);
 void SendEyesightEndMessage(Entity * pokemon,Entity * target);
 void SendMuzzledEndMessage(Entity * pokemon, Entity * target);
-void sub_807A96C(Entity *pokemon, Entity *target);
+bool8 TrySendImmobilizeSleepEndMsg(Entity *pokemon, Entity *target);
 void WakeUpPokemon(Entity * pokemon);
 void SendThawedMessage(Entity *pokemon, Entity *target);
 void sub_807AA30(void);

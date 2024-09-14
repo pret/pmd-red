@@ -526,19 +526,6 @@ u8 GetTreatmentBetweenMonsters(Entity *pokemon, Entity *targetPokemon, bool8 ign
     return gTreatmentData[targetingDecoy][pokemonIsEnemy][targetIsEnemy][targetIsDecoy];
 }
 
-static inline bool8 JoinLocationCannotUseItems_1(EntityInfo *pokemonInfo)
-{
-    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
-    {
-        return TRUE;
-    }
-    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
-    {
-        return TRUE;
-    }
-    return FALSE;
-}
-
 u8 sub_807167C(Entity * pokemon, Entity * target)
 {
   bool8 cannotUseItems;
@@ -548,9 +535,9 @@ u8 sub_807167C(Entity * pokemon, Entity * target)
   pokemonEntityData = pokemon->info;
   targetEntityInfo = target->info;
   if (pokemonEntityData->clientType != CLIENT_TYPE_CLIENT) {
-    cannotUseItems = JoinLocationCannotUseItems_1(pokemonEntityData);
+    cannotUseItems = IsClientOrTeamBase(pokemonEntityData->joinedAt.joinedAt);
     if (!cannotUseItems && (pokemonEntityData->shopkeeper == SHOPKEEPER_MODE_NORMAL) && (targetEntityInfo->clientType != CLIENT_TYPE_CLIENT)) {
-      cannotUseItems = JoinLocationCannotUseItems_1(targetEntityInfo);
+      cannotUseItems = IsClientOrTeamBase(targetEntityInfo->joinedAt.joinedAt);
       if (cannotUseItems || (targetEntityInfo->shopkeeper != SHOPKEEPER_MODE_NORMAL)) {
 error:
           return TREATMENT_IGNORE;

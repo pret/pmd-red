@@ -130,21 +130,6 @@ void sub_8071B48(void)
   }
 }
 
-static inline bool8 JoinLocationCannotUseItems(EntityInfo *pokemonInfo)
-{
-    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
-    {
-        return TRUE;
-    }
-    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
-    {
-        return TRUE;
-    }
-
-    return FALSE;
-}
-
-
 void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp)
 {
   s32 newExp;
@@ -153,7 +138,7 @@ void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp)
 
   info = target->info;
   if (info->level != 100) {
-    if (!JoinLocationCannotUseItems(info)) {
+    if (!IsClientOrTeamBase(info->joinedAt.joinedAt)) {
       newExp = info->exp + exp;
       if (9999998 < newExp) {
         newExp = 9999999;

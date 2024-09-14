@@ -632,7 +632,7 @@ _0806D4FE:
 	ldr r3, _0806D524
 	adds r0, r4, 0
 	movs r2, 0xC
-	bl sub_806F324
+	bl DealDamageToEntity
 _0806D514:
 	add sp, 0x1C
 	pop {r3-r5}
@@ -677,7 +677,7 @@ _0806D55C:
 	ldr r6, [r7, 0x70]
 	mov r0, r9
 	adds r1, r7, 0
-	bl sub_807A96C
+	bl TrySendImmobilizeSleepEndMsg
 	mov r0, r9
 	adds r1, r7, 0
 	bl SetShopkeeperAggression

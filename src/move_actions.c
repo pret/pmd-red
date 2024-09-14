@@ -191,7 +191,6 @@ extern bool8 gUnknown_202F220;
 extern void sub_806A5B8(Entity *entity);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 void sub_8075900(Entity *pokemon, u8 r1);
-extern void sub_80943A0(void*, s32);
 extern u8 sub_8044B28(void);
 extern u8 sub_803F428(Position *pos);
 extern void sub_807EC28(bool8);
@@ -223,7 +222,7 @@ extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u3
 extern u32 sub_8055640(Entity *, Entity *, Move *, u32, u32);
 u8 sub_8057620(u32 param_1);
 extern s16 sub_8094828(u16, u8);
-extern void sub_806F324(Entity *, s32, u32, u32);
+extern void DealDamageToEntity(Entity *, s32, u32, u32);
 
 extern s16 gUnknown_80F4DB4;
 extern u32 gUnknown_8106A4C;
@@ -1199,7 +1198,7 @@ bool8 sub_80586DC(Entity * pokemon, Entity * target, Move * move, u32 param_4)
       entityInfo->unkFB = TRUE;
     }
     if (hasLiquidOoze) {
-        sub_806F324(pokemon, newHP, 0xd, 0x1fa);
+        DealDamageToEntity(pokemon, newHP, 0xd, 0x1fa);
     }
     else {
         HealTargetHP(pokemon, pokemon, newHP, 0, TRUE);
@@ -1772,7 +1771,7 @@ bool8 sub_80591E4(Entity *pokemon, Entity *target, Move *move, s32 param_4)
       }
       if (sub_8057308(pokemon,0)) {
         if (hasLiquidOoze) {
-            sub_806F324(pokemon,iVar4,0xd,0x1fa);
+            DealDamageToEntity(pokemon,iVar4,0xd,0x1fa);
         }
         else {
             HealTargetHP(pokemon,pokemon,iVar4,0,1);
@@ -3090,18 +3089,14 @@ bool8 sub_805AAD0(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 
 bool8 BellyDrumMoveAction(Entity * pokemon,Entity * target, Move *move, u32 param_4)
 {
-  u32 *belly;
-  u32 newBelly;
   EntityInfo *info;
   bool8 flag;
 
   info = pokemon->info;
   flag = FALSE;
-  belly = &info->belly;
-  if (RoundUpFixedPoint(*belly) > 1) {
+  if (FixedPointToInt(info->belly) > 1) {
     RaiseAttackStageTarget(pokemon,target,gUnknown_8106A4C,99);
-    sub_80943A0(&newBelly,1);
-    *belly = newBelly;
+    info->belly = IntToFixedPoint(1);
     flag = TRUE;
   }
   else {
