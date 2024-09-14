@@ -9,7 +9,11 @@
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"
 #include "structs/str_moves.h"
+#include "position_util.h"
 #include "dungeon_music.h"
+#include "dungeon_map_access.h"
+#include "code_803E46C.h"
+#include "code_806CD90.h"
 #include "dungeon_movement.h"
 #include "game_options.h"
 #include "dungeon_items.h"
@@ -30,6 +34,8 @@
 #include "dungeon_pokemon_attributes.h"
 
 extern bool8 sub_8044B28(void);
+extern void sub_8075708(Entity *entity);
+extern void sub_80526D0(u8 r0);
 extern void sub_806F324(Entity *, s32, u32, u32);
 extern void sub_8067110(Entity *);
 extern void sub_80671A0(Entity *);
@@ -40,7 +46,6 @@ extern bool8 sub_80461C8(Position *, u32);
 extern void sub_805229C(void);
 extern void sub_807E8F0(Entity *);
 extern void sub_80444F4(Entity *pokemon);
-extern u8 UseAttack(u32);
 extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, Position *r3);
 extern void sub_800A34C(struct unkStruct_80943A8 *, struct unkStruct_80943A8 *, const u8 *);
 extern void sub_80420B8(Entity *pokemon);
@@ -48,25 +53,23 @@ extern void sub_8041C4C(Entity *pokemon, u32 r1);
 extern void sub_805E804(void);
 extern void sub_80838EC(u8 *a);
 extern bool8 sub_8055FA0(struct Entity *, u32, u32, u32, u32, struct Move *);
+extern bool8 sub_8045888(Entity *);
+extern void nullsub_97(Entity *entity);
+extern void sub_805EE30(void);
+extern void sub_8086AC0(void);
+extern void sub_8085140(void);
+extern void sub_8075708(Entity *entity);
+extern void sub_8043ED0(u32);
+extern void sub_8071DA4(Entity *);
+extern void sub_8075900(Entity *pokemon, u8 r1);
+extern void sub_806A5B8(Entity *);
+extern void sub_807EC28(bool8);
 
+extern s32 gUnknown_202F378;
+extern u8 gUnknown_202F32D;
 extern u8 gUnknown_202DE58[];
 extern u8 gUnknown_202DFE8[];
 extern u8 gAvailablePokemonNames[];
-
-void HandleEatAIAction(Entity *pokemon)
-{
-    sub_8067110(pokemon);
-}
-
-void HandleThrowItemAIAction(Entity *pokemon)
-{
-    sub_80671A0(pokemon);
-}
-
-void HandlePickUpAIAction(Entity *pokemon)
-{
-    sub_8073D14(pokemon);
-}
 
 extern const u8 *gUnknown_80F8F88;
 extern const u8 *gUnknown_80F9054;
@@ -84,6 +87,51 @@ extern const u8 *gUnknown_80FABD8;
 extern const u8 *gPtrProtectSavedItMessage;
 extern const u8 *gPtrStenchWavedOffMessage;
 extern const u8 *gUnknown_80FA124[];
+
+extern const s16 gWarpScarfActivationChances[];
+extern const s16 gUnknown_80F4FC8[];
+extern const s16 gUnknown_80F4F8E;
+extern const s16 gUnknown_80F4E0C;
+extern const s16 gUnknown_80F4F32;
+extern const s16 gUnknown_80F4F34;
+extern const s16 gUnknown_80F4F70;
+extern const s16 gUnknown_80F4F72;
+extern const s16 gUnknown_80F4F30;
+extern const s16 gUnknown_80F4F38;
+extern const s16 gUnknown_80F4FC4;
+extern const s16 gUnknown_80F4FC0;
+extern const s16 gUnknown_80F4F3A;
+extern const s16 gUnknown_80F4F3C;
+extern const s16 gUnknown_80F4FB2;
+extern const s16 gUnknown_80F4F3E;
+extern const s16 gUnknown_80F4FB4;
+extern const s16 gUnknown_80F4F40;
+extern const s16 gUnknown_80F4F74;
+extern const s16 gUnknown_80F4FC2;
+extern const s16 gUnknown_80F4F76;
+extern const s16 gUnknown_80F4F36;
+extern const u8 gUnknown_80F54F4[][8];
+extern const s32 gUnknown_80F60DC[];
+
+extern const Position gUnknown_80F4D44[];
+
+bool8 UseAttack(Entity *a0);
+void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr);
+
+void HandleEatAIAction(Entity *pokemon)
+{
+    sub_8067110(pokemon);
+}
+
+void HandleThrowItemAIAction(Entity *pokemon)
+{
+    sub_80671A0(pokemon);
+}
+
+void HandlePickUpAIAction(Entity *pokemon)
+{
+    sub_8073D14(pokemon);
+}
 
 void sub_8073D14(Entity *entity)
 {
@@ -234,31 +282,6 @@ void sub_8073D14(Entity *entity)
     }
 }
 
-extern const s16 gWarpScarfActivationChances[];
-extern const s16 gUnknown_80F4FC8[];
-extern const s16 gUnknown_80F4F8E;
-extern const s16 gUnknown_80F4E0C;
-extern const s16 gUnknown_80F4F32;
-extern const s16 gUnknown_80F4F34;
-extern const s16 gUnknown_80F4F70;
-extern const s16 gUnknown_80F4F72;
-extern const s16 gUnknown_80F4F30;
-extern const s16 gUnknown_80F4F38;
-extern const s16 gUnknown_80F4FC4;
-extern const s16 gUnknown_80F4FC0;
-extern const s16 gUnknown_80F4F3A;
-extern const s16 gUnknown_80F4F3C;
-extern const s16 gUnknown_80F4FB2;
-extern const s16 gUnknown_80F4F3E;
-extern const s16 gUnknown_80F4FB4;
-extern const s16 gUnknown_80F4F40;
-extern const s16 gUnknown_80F4F74;
-extern const s16 gUnknown_80F4FC2;
-extern const s16 gUnknown_80F4F76;
-extern const s16 gUnknown_80F4F36;
-extern const u8 gUnknown_80F54F4[][8];
-extern const s32 gUnknown_80F60DC[];
-
 void sub_8074094(Entity *entity)
 {
     s32 rand;
@@ -279,7 +302,7 @@ void sub_8074094(Entity *entity)
         if (DungeonRandInt(100) < gWarpScarfActivationChances[entityInfo->turnsSinceWarpScarfActivation]) {
             entityInfo->turnsSinceWarpScarfActivation = 0;
             sub_80444F4(entity);
-            UseAttack(0);
+            UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
             sub_807D148(entity, entity, 0, NULL);
@@ -340,7 +363,7 @@ void sub_8074094(Entity *entity)
         if (FixedPointToInt(entityInfo->belly) == 0) {
             sub_805E804();
             sub_80444F4(entity);
-            UseAttack(0);
+            UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
             if (gDungeon->unk679 < 10)
@@ -390,7 +413,7 @@ void sub_8074094(Entity *entity)
 // Abilities check
     rand = DungeonRandInt(100);
     if (HasAbility(entity, ABILITY_SHED_SKIN) && rand < gUnknown_80F4E0C && HasNegativeStatus(entity)) {
-        UseAttack(0);
+        UseAttack(NULL);
         if (!EntityExists(entity) || sub_8044B28())
             return;
         sub_8079F20(entity, entity, 1, 0);
@@ -405,7 +428,7 @@ void sub_8074094(Entity *entity)
 
 // Statuses
     if (entityInfo->sleep.sleep == STATUS_YAWNING) {
-        UseAttack(0);
+        UseAttack(NULL);
         if (!EntityExists(entity) || sub_8044B28())
             return;
         sub_80420B8(entity);
@@ -413,7 +436,7 @@ void sub_8074094(Entity *entity)
 
     if (entityInfo->nonVolatile.nonVolatileStatus == STATUS_BURN) {
         if (entityInfo->nonVolatile.nonVolatileStatusDamageCountdown == 0 || --entityInfo->nonVolatile.nonVolatileStatusDamageCountdown == 0) {
-            UseAttack(0);
+            UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
             entityInfo->nonVolatile.nonVolatileStatusDamageCountdown = gUnknown_80F4F32;
@@ -426,7 +449,7 @@ void sub_8074094(Entity *entity)
 
     if (entityInfo->nonVolatile.nonVolatileStatus == STATUS_POISONED) {
         if (entityInfo->nonVolatile.nonVolatileStatusDamageCountdown == 0 || --entityInfo->nonVolatile.nonVolatileStatusDamageCountdown == 0) {
-            UseAttack(0);
+            UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
             entityInfo->nonVolatile.nonVolatileStatusDamageCountdown = gUnknown_80F4F34;
@@ -445,7 +468,7 @@ void sub_8074094(Entity *entity)
             if (turns >= 29)
                 turns = 29;
 
-            UseAttack(0);
+            UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
 
@@ -458,7 +481,7 @@ void sub_8074094(Entity *entity)
 
     if (entityInfo->immobilize.immobilizeStatus == STATUS_CONSTRICTION) {
         if (entityInfo->immobilize.immobilizeStatusDamageCountdown == 0 || --entityInfo->immobilize.immobilizeStatusDamageCountdown == 0) {
-            UseAttack(0);
+            UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
             entityInfo->immobilize.immobilizeStatusDamageCountdown = gUnknown_80F4F38;
@@ -471,7 +494,7 @@ void sub_8074094(Entity *entity)
     }
     else if (entityInfo->immobilize.immobilizeStatus == STATUS_WRAPPED) {
         if (entityInfo->immobilize.immobilizeStatusDamageCountdown == 0 || --entityInfo->immobilize.immobilizeStatusDamageCountdown == 0) {
-            UseAttack(0);
+            UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
             entityInfo->immobilize.immobilizeStatusDamageCountdown = gUnknown_80F4F3A;
@@ -483,7 +506,7 @@ void sub_8074094(Entity *entity)
     }
     else if (entityInfo->immobilize.immobilizeStatus == STATUS_INGRAIN) {
         if (entityInfo->immobilize.immobilizeStatusDamageCountdown == 0 || --entityInfo->immobilize.immobilizeStatusDamageCountdown == 0) {
-            UseAttack(0);
+            UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
             entityInfo->immobilize.immobilizeStatusDamageCountdown = gUnknown_80F4F3C;
@@ -497,7 +520,7 @@ void sub_8074094(Entity *entity)
             if (dmg == 0)
                 dmg = 1;
             entityInfo->waitingStruct.curseDamageCountdown = gUnknown_80F4F3E;
-            UseAttack(0);
+            UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
 
@@ -525,7 +548,7 @@ void sub_8074094(Entity *entity)
                 else {
                     bool8 dmgUser = HasAbility(entity, ABILITY_LIQUID_OOZE);
                     sub_80444F4(entity);
-                    UseAttack(0);
+                    UseAttack(NULL);
                     if (!EntityExists(entity) || !EntityExists(target) || sub_8044B28())
                         return;
 
@@ -550,7 +573,7 @@ void sub_8074094(Entity *entity)
     if (entityInfo->perishSongTurns != 0) {
         sub_80838EC(&entityInfo->perishSongTurns);
         if (entityInfo->perishSongTurns == 0) {
-            UseAttack(0);
+            UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
             SetMessageArgument(gUnknown_202DFE8, entity, 0);
@@ -574,7 +597,7 @@ void sub_8074094(Entity *entity)
             if (!CheckVariousStatuses2(entity, FALSE) && !CannotAttack(entity, FALSE) && !CheckVariousStatuses(entity)) {
                 Move bideMove;
 
-                UseAttack(0);
+                UseAttack(NULL);
                 InitPokemonMove(&bideMove, MOVE_BIDE_2);
                 bideMove.moveFlags |= MOVE_FLAG_LAST_USED;
                 sub_8055FA0(entity, 0, 0, 0, 0, &bideMove);
@@ -779,19 +802,9 @@ void TickStatusHeal(Entity *entity)
     }
 }
 
-extern s32 gUnknown_202F378;
-extern const Position gUnknown_80F4D44[];
-
-void sub_8075050(EntityInfo *info);
-
 void sub_8074FB0(Entity *entity, s32 a1, Position *pos)
 {
-    #ifdef NONMATCHING
     Unk_Entity_x184 *strPtr;
-    #else
-    register Unk_Entity_x184 *strPtr asm("r1");
-    #endif // NONMATCHING
-
     EntityInfo *entityInfo = entity->info;
 
     if (entityInfo->numMoveTiles > 3) {
@@ -813,7 +826,235 @@ void sub_8074FB0(Entity *entity, s32 a1, Position *pos)
     strPtr->previousTargetMovePosition2.y = pos->y;
     strPtr->lastMoveIncrement.x = gUnknown_80F4D44[a1].x * gUnknown_202F378;
     strPtr->lastMoveIncrement.y = gUnknown_80F4D44[a1].y * gUnknown_202F378;
-    sub_8075050(entityInfo);
+    sub_8075050(entityInfo, strPtr);
 }
-//
+
+void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr)
+{
+    s32 savedX, savedY;
+
+    if (gGameOptionsRef->dungeonSpeed != 0)
+        gUnknown_202F378 = 2;
+    else
+        gUnknown_202F378 = 1;
+
+    info->numMoveTiles++;
+    if (info->numMoveTiles == 2) {
+        info->unk184[0].walkAnimFramesLeft = 24 / (gUnknown_202F378 * 2);
+        info->unk184[0].lastMoveIncrement.x *= 2;
+        info->unk184[0].lastMoveIncrement.y *= 2;
+        strPtr->walkAnimFramesLeft = 24 / (gUnknown_202F378 * 2);
+        strPtr->lastMoveIncrement.x *= 2;
+        strPtr->lastMoveIncrement.y *= 2;
+    }
+    else if (info->numMoveTiles == 3) {
+        s32 i;
+
+        savedX = strPtr->lastMoveIncrement.x;
+        savedY = strPtr->lastMoveIncrement.y;
+        for (i = 0; i < 2; i++) {
+            info->unk184[i].walkAnimFramesLeft = 24 / (gUnknown_202F378 * 3);
+            info->unk184[i].lastMoveIncrement.x *= 3;
+            info->unk184[i].lastMoveIncrement.y *= 3;
+            info->unk184[i].lastMoveIncrement.x /= 2;
+            info->unk184[i].lastMoveIncrement.y /= 2;
+        }
+        strPtr->walkAnimFramesLeft = 24 / (gUnknown_202F378 * 3);
+        strPtr->lastMoveIncrement.x = savedX * 3;
+        strPtr->lastMoveIncrement.y = savedY * 3;
+    }
+    else if (info->numMoveTiles == 4) {
+        s32 i;
+
+        savedX = strPtr->lastMoveIncrement.x;
+        savedY = strPtr->lastMoveIncrement.y;
+        for (i = 0; i < 3; i++) {
+            info->unk184[i].walkAnimFramesLeft = 24 / (gUnknown_202F378 * 4);
+            info->unk184[i].lastMoveIncrement.x *= 4;
+            info->unk184[i].lastMoveIncrement.y *= 4;
+            info->unk184[i].lastMoveIncrement.x /= 3;
+            info->unk184[i].lastMoveIncrement.y /= 3;
+        }
+        strPtr->walkAnimFramesLeft = 24 / (gUnknown_202F378 * 4);
+        strPtr->lastMoveIncrement.x = savedX * 4;
+        strPtr->lastMoveIncrement.y = savedY * 4;
+    }
+    else {
+        strPtr->walkAnimFramesLeft = 24 / gUnknown_202F378;
+    }
+}
+
+bool8 UseAttack(Entity *a0)
+{
+    s32 i, j, loop;
+    Entity *savedEntityPtr;
+    bool32 r7 = FALSE;
+    bool32 r9 = FALSE;
+
+    gUnknown_202F32D = 0;
+    if (gGameOptionsRef->dungeonSpeed != 0)
+        gUnknown_202F378 = 2;
+    else
+        gUnknown_202F378 = 1;
+
+    for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
+        Entity *mon = gDungeon->allPokemon[i];
+        if (EntityExists(mon)) {
+            EntityInfo *monInfo = mon->info;
+            if (monInfo->numMoveTiles == 0) {
+                if (monInfo->waiting) {
+                    monInfo->waiting = FALSE;
+                    if ((monInfo->targetPos.x != 0 || monInfo->targetPos.y != 0)
+                        && (monInfo->targetPos.x != mon->pos.x || monInfo->targetPos.y != mon->pos.y)
+                        && (!CheckVariousStatuses2(mon, TRUE) || !CheckVariousStatuses(mon)))
+                    {
+                        s32 direction = GetDirectionTowardsPosition(&mon->pos, &monInfo->targetPos);
+                        if (direction != monInfo->action.direction)
+                            sub_806CE68(mon, direction);
+                    }
+                }
+            }
+            else {
+                Position32 pos;
+
+                monInfo->flags |= 0x2000;
+                pos.x = (monInfo->unk184[0].previousTargetMovePosition2.x * 0x1800) + 0xC00;
+                pos.y = (monInfo->unk184[0].previousTargetMovePosition2.y * 0x1800) + 0x1000;
+                sub_804535C(mon, &pos);
+                sub_806CDFC(mon, 0, monInfo->unk184[0].lastMoveDirection);
+                monInfo->notMoving = 0;
+                r7 = TRUE;
+                if (sub_8045888(mon))
+                    r9 = TRUE;
+            }
+        }
+    }
+
+    if (!r7)
+        return FALSE;
+
+    savedEntityPtr = gDungeon->unkB8;
+    gDungeon->unkB8 = a0;
+    if (gDungeon->unk66C == 0 && r9) {
+        sub_80526D0(0x35);
+        for (loop = 0; loop < 24 / gUnknown_202F378; loop++) {
+            sub_803E46C(7);
+            for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
+                Entity *mon = gDungeon->allPokemon[i];
+                if (EntityExists(mon)) {
+                    // r6 / r7 reg swap
+                    EntityInfo *monInfo_ = mon->info;
+                    EntityInfo *monInfo = monInfo_;
+                    Unk_Entity_x184 *strPtr = &monInfo->unk184[monInfo->notMoving];
+
+                    #ifndef NONMATCHING
+                    // Dummy needed to match, feel free to remove if you do not care about matching.
+                    i++;i--;
+                    #endif // NONMATCHING
+                    if (monInfo->numMoveTiles != 0) {
+                        IncreaseEntityPixelPos(mon, strPtr->lastMoveIncrement.x, strPtr->lastMoveIncrement.y);
+                        if (--strPtr->walkAnimFramesLeft == 0) {
+                            if (++monInfo->notMoving == monInfo->numMoveTiles) {
+                                monInfo->numMoveTiles = 0;
+                            }
+                            else {
+                                Position32 pos;
+
+                                pos.x = (monInfo->unk184[monInfo->notMoving].previousTargetMovePosition2.x * 0x1800) + 0xC00;
+                                pos.y = (monInfo->unk184[monInfo->notMoving].previousTargetMovePosition2.y * 0x1800) + 0x1000;
+                                sub_804535C(mon, &pos);
+                                sub_806CDFC(mon, 0, monInfo->unk184[monInfo->notMoving].lastMoveDirection);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
+        Entity *mon = gDungeon->allPokemon[i];
+        if (EntityExists(mon)) {
+            EntityInfo *monInfo = mon->info;
+            monInfo->numMoveTiles = 0;
+            nullsub_97(mon);
+            if (monInfo->flags & 0x2000) {
+                sub_804535C(mon, NULL);
+            }
+        }
+    }
+
+    sub_807AA30();
+    for (j = 0; j < 2; j++) {
+        for (loop = 0; loop < DUNGEON_MAX_POKEMON; loop++) {
+            Position monPosBefore;
+            EntityInfo *monInfo;
+            Entity *mon = gDungeon->allPokemon[loop];
+
+            if (!EntityExists(mon))
+                continue;
+            if (sub_8044B28())
+                break;
+
+            monInfo = mon->info;
+            if ((j == 0 && !monInfo->isTeamLeader) || (j != 0 && monInfo->isTeamLeader))
+                continue;
+
+            monPosBefore = mon->pos;
+
+            // Statement with no effect needed to match.
+            mon->info->isTeamLeader = mon->info->isTeamLeader;
+
+            if (monInfo->flags & 0x2000) {
+                monInfo->flags &= ~(0x2000);
+                if (monInfo->isTeamLeader) {
+                    sub_804AC20(&mon->pos);
+                    sub_807EC28(FALSE);
+                    sub_805EE30();
+                }
+                else {
+                    sub_8075708(mon);
+                }
+                if (!EntityExists(mon))
+                    continue;
+                if (sub_8044B28())
+                    break;
+
+                sub_8043ED0(0);
+                sub_8074094(mon);
+                if (!EntityExists(mon))
+                    continue;
+                if (sub_8044B28())
+                    break;
+
+                sub_8071DA4(mon);
+                sub_8046D20();
+                sub_8075900(mon, gDungeon->unk3A08);
+            }
+            if (!EntityExists(mon))
+                continue;
+            if (sub_8044B28())
+                break;
+
+            if (monPosBefore.x != mon->pos.x || monPosBefore.y != mon->pos.y)
+                gUnknown_202F32D = 1;
+
+            sub_806A5B8(mon);
+            if (sub_80706A4(mon, &mon->pos)) {
+                sub_807D148(mon, mon, 0, NULL);
+            }
+        }
+    }
+
+    sub_8086AC0();
+    if (!sub_8044B28()) {
+        sub_8085140();
+        gDungeon->unkB8 = savedEntityPtr;
+    }
+    else {
+        gDungeon->unkB8 = savedEntityPtr;
+    }
+
+    return TRUE;
+}
 
