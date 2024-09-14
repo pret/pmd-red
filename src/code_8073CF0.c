@@ -36,7 +36,7 @@
 extern bool8 sub_8044B28(void);
 extern void sub_8075708(Entity *entity);
 extern void sub_80526D0(u8 r0);
-extern void sub_806F324(Entity *, s32, u32, u32);
+extern void DealDamageToEntity(Entity *, s32, u32, u32);
 extern void sub_8067110(Entity *);
 extern void sub_80671A0(Entity *);
 extern void sub_8073D14(Entity *);
@@ -375,8 +375,8 @@ void sub_8074094(Entity *entity)
             if (gDungeon->unk679 == 3)
                 str = gUnknown_80FD628, sound = FALSE;
 
-            sub_807A96C(entity, entity);
-            sub_806F324(entity, 1, 0xE, 0x211);
+            TrySendImmobilizeSleepEndMsg(entity, entity);
+            DealDamageToEntity(entity, 1, 0xE, 0x211);
             entityInfo->unk146 = 1;
             if (FixedPointToInt(entityInfo->belly) != 0)
                 str = NULL;
@@ -398,12 +398,12 @@ void sub_8074094(Entity *entity)
     if (gDungeon->weather.weatherDamageCounter == 0) {
         if (GetApparentWeather(entity) == WEATHER_HAIL) {
             if (!MonsterIsType(entity, TYPE_ICE)) {
-                sub_806F324(entity, gUnknown_80F4F8E, 0x12, 0x220);
+                DealDamageToEntity(entity, gUnknown_80F4F8E, 0x12, 0x220);
             }
         }
         else if (GetApparentWeather(entity) == WEATHER_SANDSTORM) {
             if (!MonsterIsType(entity, TYPE_GROUND) && !MonsterIsType(entity, TYPE_ROCK) && !MonsterIsType(entity, TYPE_STEEL)) {
-                sub_806F324(entity, gUnknown_80F4F8E, 0x12, 0x220);
+                DealDamageToEntity(entity, gUnknown_80F4F8E, 0x12, 0x220);
             }
         }
         if (!EntityExists(entity) || sub_8044B28())
@@ -440,8 +440,8 @@ void sub_8074094(Entity *entity)
             if (!EntityExists(entity) || sub_8044B28())
                 return;
             entityInfo->nonVolatile.nonVolatileStatusDamageCountdown = gUnknown_80F4F32;
-            sub_807A96C(entity, entity);
-            sub_806F324(entity, gUnknown_80F4F70, 1, 0x208);
+            TrySendImmobilizeSleepEndMsg(entity, entity);
+            DealDamageToEntity(entity, gUnknown_80F4F70, 1, 0x208);
         }
         if (!EntityExists(entity) || sub_8044B28())
             return;
@@ -453,8 +453,8 @@ void sub_8074094(Entity *entity)
             if (!EntityExists(entity) || sub_8044B28())
                 return;
             entityInfo->nonVolatile.nonVolatileStatusDamageCountdown = gUnknown_80F4F34;
-            sub_807A96C(entity, entity);
-            sub_806F324(entity, gUnknown_80F4F72, 3, 0x20A);
+            TrySendImmobilizeSleepEndMsg(entity, entity);
+            DealDamageToEntity(entity, gUnknown_80F4F72, 3, 0x20A);
         }
         if (!EntityExists(entity) || sub_8044B28())
             return;
@@ -472,8 +472,8 @@ void sub_8074094(Entity *entity)
             if (!EntityExists(entity) || sub_8044B28())
                 return;
 
-            sub_807A96C(entity, entity);
-            sub_806F324(entity, gUnknown_80F4FC8[turns], 3, 0x20A);
+            TrySendImmobilizeSleepEndMsg(entity, entity);
+            DealDamageToEntity(entity, gUnknown_80F4FC8[turns], 3, 0x20A);
         }
         if (!EntityExists(entity) || sub_8044B28())
             return;
@@ -485,9 +485,9 @@ void sub_8074094(Entity *entity)
             if (!EntityExists(entity) || sub_8044B28())
                 return;
             entityInfo->immobilize.immobilizeStatusDamageCountdown = gUnknown_80F4F38;
-            sub_807A96C(entity, entity);
+            TrySendImmobilizeSleepEndMsg(entity, entity);
             sub_8041C4C(entity, entityInfo->immobilize.unk4);
-            sub_806F324(entity, gUnknown_80F4F74, 2, 0x209);
+            DealDamageToEntity(entity, gUnknown_80F4F74, 2, 0x209);
         }
         if (!EntityExists(entity) || sub_8044B28())
             return;
@@ -498,8 +498,8 @@ void sub_8074094(Entity *entity)
             if (!EntityExists(entity) || sub_8044B28())
                 return;
             entityInfo->immobilize.immobilizeStatusDamageCountdown = gUnknown_80F4F3A;
-            sub_807A96C(entity, entity);
-            sub_806F324(entity, gUnknown_80F4F76, 5, 0x20B);
+            TrySendImmobilizeSleepEndMsg(entity, entity);
+            DealDamageToEntity(entity, gUnknown_80F4F76, 5, 0x20B);
         }
         if (!EntityExists(entity) || sub_8044B28())
             return;
@@ -524,8 +524,8 @@ void sub_8074094(Entity *entity)
             if (!EntityExists(entity) || sub_8044B28())
                 return;
 
-            sub_807A96C(entity, entity);
-            sub_806F324(entity, dmg, 7, 0x20C);
+            TrySendImmobilizeSleepEndMsg(entity, entity);
+            DealDamageToEntity(entity, dmg, 7, 0x20C);
         }
         if (!EntityExists(entity) || sub_8044B28())
             return;
@@ -553,11 +553,11 @@ void sub_8074094(Entity *entity)
                         return;
 
                     if (entityInfo->immobilize.immobilizeStatus != STATUS_FROZEN) {
-                        sub_807A96C(entity, entity);
-                        sub_806F324(entity, hp, 9, 0x20D);
+                        TrySendImmobilizeSleepEndMsg(entity, entity);
+                        DealDamageToEntity(entity, hp, 9, 0x20D);
                         if (dmgUser) {
-                            sub_807A96C(target, target);
-                            sub_806F324(target, hp, 0xD, 0x1FA);
+                            TrySendImmobilizeSleepEndMsg(target, target);
+                            DealDamageToEntity(target, hp, 0xD, 0x1FA);
                         }
                         else {
                             HealTargetHP(target, target, hp, 0, TRUE);
@@ -578,12 +578,12 @@ void sub_8074094(Entity *entity)
                 return;
             SetMessageArgument(gUnknown_202DFE8, entity, 0);
             SendMessage(entity, gUnknown_80FEB30);
-            sub_807A96C(entity, entity);
+            TrySendImmobilizeSleepEndMsg(entity, entity);
             if (entityInfo->protection.protectionStatus == STATUS_PROTECT) {
                 SendMessage(entity, gPtrProtectSavedItMessage);
             }
             else {
-                sub_806F324(entity, 0x270F, 0xB, 0x20E);
+                DealDamageToEntity(entity, 0x270F, 0xB, 0x20E);
             }
             if (!EntityExists(entity) || sub_8044B28())
                 return;

@@ -421,7 +421,7 @@ _08047462:
 	bl sub_80522F4
 	mov r0, r9
 	adds r1, r4, 0
-	bl sub_807A96C
+	bl TrySendImmobilizeSleepEndMsg
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0
@@ -927,7 +927,7 @@ _0804786E:
 	bl sub_80522F4
 	ldr r0, [sp, 0x10]
 	adds r1, r5, 0
-	bl sub_807A96C
+	bl TrySendImmobilizeSleepEndMsg
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0

@@ -2827,7 +2827,7 @@ _08053A4C:
 	bl sub_806A1E8
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_807A96C
+	bl TrySendImmobilizeSleepEndMsg
 	movs r4, 0
 	adds r0, r7, 0
 	mov r1, r8

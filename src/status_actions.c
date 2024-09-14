@@ -80,7 +80,7 @@ extern void WrapTarget(Entity *, Entity *);
 extern void SqueezedStatusTarget(Entity *, Entity *, s32, bool32);
 extern void sub_8075C58(Entity *, Entity *, s32, s32);
 
-extern void sub_806F324(Entity *, s32, u32, u32);
+extern void DealDamageToEntity(Entity *, s32, u32, u32);
 extern bool8 sub_805755C(Entity* pokemon,u16 moveID);
 extern void sub_80783C4(Entity *, Entity *, u32);
 extern void sub_807CD9C(Entity *, Entity *, u32 direction);
@@ -558,7 +558,7 @@ bool8 sub_805B668(Entity * pokemon, Entity * target, Move *move, s32 param_4)
         }
         if (sub_8057308(pokemon,0) != 0) {
           if (hasLiquidOoze) {
-            sub_806F324(pokemon,newHP,0xd,0x1fa);
+            DealDamageToEntity(pokemon,newHP,0xd,0x1fa);
           }
           else {
             HealTargetHP(pokemon,pokemon,newHP,0,TRUE);

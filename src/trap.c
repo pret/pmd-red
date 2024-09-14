@@ -76,7 +76,7 @@ void sub_8068FE0(Entity *, u32, Entity *);
 void sub_805239C(Entity *, u8 *);
 void sub_8045C28(Item *, u8 , u8);
 void sub_8045BF8(u8 *, Item *);
-void sub_806F324(Entity *,s16,u32,u32);
+void DealDamageToEntity(Entity *,s16,u32,u32);
 void sub_806F480(Entity *, u32);
 extern void sub_80421C0(Entity *, u32);
 void sub_804225C(Entity *, Position *, u8);
@@ -349,7 +349,7 @@ void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4)
             break;
         case TRAP_CHESTNUT_TRAP:
             if (target != NULL) {
-                sub_806F324(target,gUnknown_80F4F86,0xf,0x213);
+                DealDamageToEntity(target,gUnknown_80F4F86,0xf,0x213);
             }
             break;
         case TRAP_WONDER_TILE:
@@ -361,7 +361,7 @@ void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4)
             break;
         case TRAP_SPIKE_TRAP:
             if (target != NULL) {
-                sub_806F324(target,gUnknown_80F4F84,10,0x206);
+                DealDamageToEntity(target,gUnknown_80F4F84,10,0x206);
             }
     }
     if (EntityExists(target)) {
@@ -560,7 +560,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
                     info->unk15C = 1;
                     info->unk15E = 1;
                     sub_803E708(0x28,0x4b);
-                    sub_806F324(target,gUnknown_80F4F8A,0x11,0x215);
+                    DealDamageToEntity(target,gUnknown_80F4F8A,0x11,0x215);
                     gDungeon->unk2 = 2;
                     return;
                 }

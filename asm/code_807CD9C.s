@@ -237,7 +237,7 @@ _0807CF4E:
 	bne _0807CF9E
 	mov r0, r9
 	ldr r1, [sp, 0x28]
-	bl sub_807A96C
+	bl TrySendImmobilizeSleepEndMsg
 	ldr r0, _0807D050
 	movs r1, 0
 	ldrsh r2, [r0, r1]
@@ -529,7 +529,7 @@ _0807D1DC:
 	bl sub_80522F4
 	adds r0, r5, 0
 	adds r1, r5, 0
-	bl sub_807A96C
+	bl TrySendImmobilizeSleepEndMsg
 	mov r0, r8
 	adds r1, r5, 0
 	bl sub_80421AC

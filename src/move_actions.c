@@ -222,7 +222,7 @@ extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u3
 extern u32 sub_8055640(Entity *, Entity *, Move *, u32, u32);
 u8 sub_8057620(u32 param_1);
 extern s16 sub_8094828(u16, u8);
-extern void sub_806F324(Entity *, s32, u32, u32);
+extern void DealDamageToEntity(Entity *, s32, u32, u32);
 
 extern s16 gUnknown_80F4DB4;
 extern u32 gUnknown_8106A4C;
@@ -1198,7 +1198,7 @@ bool8 sub_80586DC(Entity * pokemon, Entity * target, Move * move, u32 param_4)
       entityInfo->unkFB = TRUE;
     }
     if (hasLiquidOoze) {
-        sub_806F324(pokemon, newHP, 0xd, 0x1fa);
+        DealDamageToEntity(pokemon, newHP, 0xd, 0x1fa);
     }
     else {
         HealTargetHP(pokemon, pokemon, newHP, 0, TRUE);
@@ -1771,7 +1771,7 @@ bool8 sub_80591E4(Entity *pokemon, Entity *target, Move *move, s32 param_4)
       }
       if (sub_8057308(pokemon,0)) {
         if (hasLiquidOoze) {
-            sub_806F324(pokemon,iVar4,0xd,0x1fa);
+            DealDamageToEntity(pokemon,iVar4,0xd,0x1fa);
         }
         else {
             HealTargetHP(pokemon,pokemon,iVar4,0,1);
