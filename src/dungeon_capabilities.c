@@ -77,21 +77,12 @@ bool8 sub_8070BC0(Entity* entity)
     return FALSE;
 }
 
-static inline bool8 JoinLocationCannotUseItems(EntityInfo *pokemonInfo)
-{
-    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
-        return TRUE;
-    if (pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
-        return TRUE;
-    return FALSE;
-}
-
 bool8 CheckVariousConditions(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = pokemon->info;
 
     if (pokemonInfo->clientType == CLIENT_TYPE_CLIENT
-        || JoinLocationCannotUseItems(pokemonInfo)
+        || IsClientOrTeamBase(pokemonInfo->joinedAt.joinedAt)
         || (!pokemonInfo->isTeamLeader && ShouldMonsterRunAway(pokemon))
         || CheckVariousStatuses2(pokemon, FALSE)
         || CheckVariousStatuses(pokemon))
