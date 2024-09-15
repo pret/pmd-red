@@ -4,7 +4,7 @@
 gUnknown_2000A80: /* 2000A80 (GameLoop) */
 	.space 0x8
 
-gScriptVarBuffer: /* 2000A88 (ThouroughlyResetScriptVars - sub_8002718) */
+gScriptVarBuffer: /* 2000A88 (ThoroughlyResetScriptVars - sub_8002718) */
 	.space 0x400
 
     .include "src/memory.o"

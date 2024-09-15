@@ -55,7 +55,7 @@ extern void SetScriptVarValue(u32, u32, u32);
 extern void sub_80972F4(void);
 extern void nullsub_128(void);
 
-void ThouroughlyResetScriptVars(void)
+void ThoroughlyResetScriptVars(void)
 {
   s32 iVar1;
   s32 iVar3;
