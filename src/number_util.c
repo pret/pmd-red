@@ -15,7 +15,7 @@ FixedPoint FixedPoint_Add(FixedPoint a, FixedPoint b)
     return a;
 }
 
-FixedPoint FixedPoint_Substract(FixedPoint a, FixedPoint b)
+FixedPoint FixedPoint_Subtract(FixedPoint a, FixedPoint b)
 {
     a.unk2 -= b.unk2;
     a.unk0 -= b.unk0;

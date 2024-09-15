@@ -2733,7 +2733,7 @@ _0805397C:
 	ldr r2, [sp, 0x8]
 	ldr r0, [sp, 0x40]
 	adds r1, r4, 0
-	bl FixedPoint_Substract
+	bl FixedPoint_Subtract
 	ldr r0, [sp, 0xC]
 	ldr r3, [sp, 0x3C]
 	str r0, [r3]

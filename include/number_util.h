@@ -14,7 +14,7 @@ struct unkStruct_80943A8
 } unkStruct_80943A8;
 
 FixedPoint FixedPoint_Add(FixedPoint a, FixedPoint b);
-FixedPoint FixedPoint_Substract(FixedPoint a, FixedPoint b);
+FixedPoint FixedPoint_Subtract(FixedPoint a, FixedPoint b);
 FixedPoint FixedPoint_Min(FixedPoint a, FixedPoint b);
 FixedPoint FixedPoint_Max(FixedPoint a, FixedPoint b);
 FixedPoint sub_8094370(FixedPoint param_1, FixedPoint param_2);
