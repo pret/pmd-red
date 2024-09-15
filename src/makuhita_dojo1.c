@@ -47,7 +47,7 @@ bool8 MakuhitaDojo_New(u32 mode)
     u32 initialState;
 
     ResetUnusedInputStruct();
-    sub_800641C(NULL, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
 
     sMakuhitaDojoWork1 = MemoryAlloc(sizeof(MakuhitaDojoWork1), 8);
     sMakuhitaDojoWork1->unk10 = -1;
@@ -158,7 +158,7 @@ static void sub_802FF1C(void)
 {
     s32 index;
 
-    sub_8006518(sMakuhitaDojoWork1->unk6C);
+    RestoreUnkTextStruct_8006518(sMakuhitaDojoWork1->unk6C);
 
     switch (sMakuhitaDojoWork1->state) {
         case 0:
@@ -172,7 +172,7 @@ static void sub_802FF1C(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sMakuhitaDojoWork1->unk6C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sMakuhitaDojoWork1->unk6C, TRUE, TRUE);
 }
 
 static void MakuhitaDojo_UpdateDialogue(void)
@@ -189,11 +189,11 @@ static void MakuhitaDojo_UpdateDialogue(void)
             break;
         case 2:
             sMakuhitaDojoWork1->fallbackState = 13;
-            sub_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_2], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            xxx_info_box_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_2], 0, sMakuhitaDojoWork1->unk68, 0x10D);
             break;
         case 3:
             sMakuhitaDojoWork1->fallbackState = 4;
-            sub_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_3], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            xxx_info_box_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_3], 0, sMakuhitaDojoWork1->unk68, 0x10D);
             break;
         case 4:
             sub_80302E8(3, NULL, 10);
@@ -203,36 +203,36 @@ static void MakuhitaDojo_UpdateDialogue(void)
             dLoc.id = sub_80A2740(sMakuhitaDojoWork1->unk10);
             dLoc.floor = 1;
             PrintYellowDungeonNametoBuffer(gAvailablePokemonNames, &dLoc);
-            sub_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_4], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            xxx_info_box_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_4], 0, sMakuhitaDojoWork1->unk68, 0x10D);
             break;
         case 7:
             sMakuhitaDojoWork1->fallbackState = 13;
-            sub_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_6], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            xxx_info_box_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_6], 0, sMakuhitaDojoWork1->unk68, 0x10D);
             break;
         case 6:
             sMakuhitaDojoWork1->fallbackState = 13;
-            sub_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_5], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            xxx_info_box_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_5], 0, sMakuhitaDojoWork1->unk68, 0x10D);
             break;
         case 8:
             sMakuhitaDojoWork1->fallbackState = 9;
-            sub_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_7], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            xxx_info_box_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_7], 0, sMakuhitaDojoWork1->unk68, 0x10D);
             break;
         case 9:
             PrintColoredPokeNameToBuffer(gPlayerName, GetPlayerPokemonStruct(), COLOR_YELLOW);
             sMakuhitaDojoWork1->fallbackState = 11;
             PlaySound(203);
-            sub_80141B4(sReceivedBonslyDoll, 0, 0, 0x101);
+            xxx_info_box_80141B4(sReceivedBonslyDoll, 0, 0, 0x101);
             break;
         case 10:
             sMakuhitaDojoWork1->fallbackState = 13;
-            sub_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_8], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            xxx_info_box_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_8], 0, sMakuhitaDojoWork1->unk68, 0x10D);
             break;
         case 11:
             sub_801B60C(1, ITEM_GINSENG, 1);
             break;
         case 12:
             sMakuhitaDojoWork1->fallbackState = 1;
-            sub_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_9], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            xxx_info_box_80141B4(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_9], 0, sMakuhitaDojoWork1->unk68, 0x10D);
             break;
         case 13:
             return;

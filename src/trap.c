@@ -21,7 +21,7 @@
 #include "structs/str_dungeon.h"
 
 extern u8 gAvailablePokemonNames[];
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 
 extern u8 *gTrapNames[];
 extern u8 *gUnknown_80FC5FC[];
@@ -434,7 +434,7 @@ void HandleStickyTrap(Entity *pokemon,Entity *target)
         }
         else {
           newIndex = DungeonRandInt(itemCount);
-          sub_8045BF8(gUnknown_202DE58, itemStack[newIndex]);
+          sub_8045BF8(gFormatItems, itemStack[newIndex]);
           itemStack[newIndex]->flags |= ITEM_FLAG_STICKY;
           sub_80421C0(target, 0x192);
           sub_80522F4(pokemon,target,*gUnknown_80FDC18);
@@ -661,7 +661,7 @@ void HandlePPZeroTrap(Entity *param_1,Entity *param_2)
     if (counter != 0) {
       moveIndex = DungeonRandInt(counter);
       moveStack[moveIndex]->PP = 0;
-      sub_80928C0(gUnknown_202DE58,moveStack[moveIndex],0);
+      sub_80928C0(gFormatItems,moveStack[moveIndex],0);
       sub_806A9B4(param_2, indexStack[moveIndex]);
       flag = TRUE;
     }

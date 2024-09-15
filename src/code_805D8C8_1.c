@@ -4384,15 +4384,15 @@ bool8 sub_8060E38(Entity *a0)
 
 bool32 sub_8069D18(Position *a0, Entity *a1);
 
-extern const u8 gUnknown_8106BB0[];
-extern const u8 gUnknown_8106BB4[];
-extern const u8 gUnknown_8106BB8[];
-extern const u8 gUnknown_8106BBC[];
-extern const u8 gUnknown_8106BC0[];
-extern const u8 gUnknown_8106BC4[];
-extern const u8 gUnknown_8106BC8[];
-extern const u8 gUnknown_8106BCC[];
-extern const u8 gUnknown_8106BD0[];
+extern const u8 gTeamFormat[];
+extern const u8 gHeartRedTiny[];
+extern const u8 gHeartRedSmall[];
+extern const u8 gHeartRedMedium[];
+extern const u8 gHeartRedLarge[];
+extern const u8 gHeartYellowTiny[];
+extern const u8 gHeartYellowSmall[];
+extern const u8 gHeartYellowMedium[];
+extern const u8 gHeartYellowLarge[];
 extern const u8 gUnknown_8106BD4[];
 extern const u8 gUnknown_8106BE0[];
 extern const u8 gUnknown_8106BEC[];
@@ -4466,7 +4466,7 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
     sub_80137B0(&gUnknown_202EE10, 0);
     sub_80073B8(0);
     if (r10) {
-        PrintFormatStringOnWindow(0xC, 0, gUnknown_8106BB0, 0, 0);
+        PrintFormatStringOnWindow(0xC, 0, gTeamFormat, 0, 0);
     }
 
     // Print hp/max hp
@@ -4483,30 +4483,30 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
                 sub_8070968(gAvailablePokemonNames, monInfo, color);
                 if (sub_806A538(gRecruitedPokemonRef->pokemon2[monInfo->teamIndex].unkA)) {
                     if (monInfo->HP <= monInfo->maxHPStat / 4) {
-                        strcpy(gAvailablePokemonNames + 0x50, gUnknown_8106BB4);
+                        strcpy(gAvailablePokemonNames + 0x50, gHeartRedTiny);
                     }
                     else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 2) {
-                        strcpy(gAvailablePokemonNames + 0x50, gUnknown_8106BB8);
+                        strcpy(gAvailablePokemonNames + 0x50, gHeartRedSmall);
                     }
                     else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 3) {
-                        strcpy(gAvailablePokemonNames + 0x50, gUnknown_8106BBC);
+                        strcpy(gAvailablePokemonNames + 0x50, gHeartRedMedium);
                     }
                     else {
-                        strcpy(gAvailablePokemonNames + 0x50, gUnknown_8106BC0);
+                        strcpy(gAvailablePokemonNames + 0x50, gHeartRedLarge);
                     }
                 }
                 else {
                     if (monInfo->HP <= monInfo->maxHPStat / 4) {
-                        strcpy(gAvailablePokemonNames + 0x50, gUnknown_8106BC4);
+                        strcpy(gAvailablePokemonNames + 0x50, gHeartYellowTiny);
                     }
                     else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 2) {
-                        strcpy(gAvailablePokemonNames + 0x50, gUnknown_8106BC8);
+                        strcpy(gAvailablePokemonNames + 0x50, gHeartYellowSmall);
                     }
                     else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 3) {
-                        strcpy(gAvailablePokemonNames + 0x50, gUnknown_8106BCC);
+                        strcpy(gAvailablePokemonNames + 0x50, gHeartYellowMedium);
                     }
                     else {
-                        strcpy(gAvailablePokemonNames + 0x50, gUnknown_8106BD0);
+                        strcpy(gAvailablePokemonNames + 0x50, gHeartYellowLarge);
                     }
                 }
 

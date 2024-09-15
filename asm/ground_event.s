@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80AD990
-sub_80AD990:
+	thumb_func_start AllocGroundEvents
+AllocGroundEvents:
 	push {r4,lr}
 	ldr r4, _080AD9C8
 	movs r0, 0x80
@@ -30,17 +30,17 @@ _080AD9AC:
 	adds r1, 0x20
 	cmp r0, 0x1F
 	ble _080AD9AC
-	bl DeleteBlankGroundEvents
+	bl DeleteGroundEvents
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AD9C8: .4byte gUnknown_3001B90
+_080AD9C8: .4byte gGroundEvents
 _080AD9CC: .4byte 0x0000ffff
-	thumb_func_end sub_80AD990
+	thumb_func_end AllocGroundEvents
 
-	thumb_func_start DeleteBlankGroundEvents
-DeleteBlankGroundEvents:
+	thumb_func_start DeleteGroundEvents
+DeleteGroundEvents:
 	push {r4-r6,lr}
 	ldr r0, _080ADA04
 	ldr r4, [r0]
@@ -69,13 +69,13 @@ _080AD9EE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ADA04: .4byte gUnknown_3001B90
-	thumb_func_end DeleteBlankGroundEvents
+_080ADA04: .4byte gGroundEvents
+	thumb_func_end DeleteGroundEvents
 
-	thumb_func_start sub_80ADA08
-sub_80ADA08:
+	thumb_func_start FreeGroundEvents
+FreeGroundEvents:
 	push {r4,lr}
-	bl DeleteBlankGroundEvents
+	bl DeleteGroundEvents
 	ldr r4, _080ADA20
 	ldr r0, [r4]
 	bl MemoryFree
@@ -85,8 +85,8 @@ sub_80ADA08:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ADA20: .4byte gUnknown_3001B90
-	thumb_func_end sub_80ADA08
+_080ADA20: .4byte gGroundEvents
+	thumb_func_end FreeGroundEvents
 
 	thumb_func_start GroundEvent_Select
 GroundEvent_Select:
@@ -101,7 +101,7 @@ GroundEvent_Select:
 	asrs r6, r2, 24
 	ldr r1, _080ADA88
 	adds r0, r4, 0
-	bl sub_80A77D0
+	bl GetGroundScript
 	adds r5, r0, 0
 	ldr r1, _080ADA8C
 	str r6, [sp]
@@ -199,7 +199,7 @@ _080ADADC:
 	bx r0
 	.align 2, 0
 _080ADAF8: .4byte gGroundEventCancelText
-_080ADAFC: .4byte gUnknown_3001B90
+_080ADAFC: .4byte gGroundEvents
 	thumb_func_end GroundEvent_Cancel
 
 	thumb_func_start GroundEvent_Add
@@ -232,7 +232,7 @@ GroundEvent_Add:
 	movs r7, 0
 	b _080ADB68
 	.align 2, 0
-_080ADB38: .4byte gUnknown_3001B90
+_080ADB38: .4byte gGroundEvents
 _080ADB3C:
 	adds r0, r2, 0x1
 	lsls r0, 16
@@ -287,7 +287,7 @@ _080ADB68:
 	movs r0, 0x60
 	b _080ADBAA
 	.align 2, 0
-_080ADBA0: .4byte gUnknown_3001B90
+_080ADBA0: .4byte gGroundEvents
 _080ADBA4: .4byte gGroundEventAddText
 _080ADBA8:
 	movs r0, 0x20
@@ -383,7 +383,7 @@ GroundEvent_Delete:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ADC58: .4byte gUnknown_3001B90
+_080ADC58: .4byte gGroundEvents
 _080ADC5C: .4byte gGroundEventDeleteText
 _080ADC60: .4byte 0x0000ffff
 	thumb_func_end GroundEvent_Delete
@@ -406,7 +406,7 @@ sub_80ADC64:
 	movs r0, 0
 	b _080ADC9A
 	.align 2, 0
-_080ADC84: .4byte gUnknown_3001B90
+_080ADC84: .4byte gGroundEvents
 _080ADC88:
 	ldr r0, [r2, 0x1C]
 	str r0, [r3]
@@ -422,8 +422,8 @@ _080ADC9A:
 	bx r1
 	thumb_func_end sub_80ADC64
 
-	thumb_func_start sub_80ADCA0
-sub_80ADCA0:
+	thumb_func_start FindGroundEvent
+FindGroundEvent:
 	push {r4-r7,lr}
 	adds r7, r0, 0
 	adds r4, r1, 0
@@ -463,7 +463,7 @@ _080ADCB6:
 	adds r0, r5, 0
 	b _080ADD04
 	.align 2, 0
-_080ADCEC: .4byte gUnknown_3001B90
+_080ADCEC: .4byte gGroundEvents
 _080ADCF0:
 	adds r0, r6, 0
 	movs r1, 0x80
@@ -479,7 +479,7 @@ _080ADD04:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80ADCA0
+	thumb_func_end FindGroundEvent
 
 	thumb_func_start sub_80ADD0C
 sub_80ADD0C:
@@ -536,7 +536,7 @@ _080ADD2C:
 	adds r0, r7, 0
 	b _080ADD8C
 	.align 2, 0
-_080ADD74: .4byte gUnknown_3001B90
+_080ADD74: .4byte gGroundEvents
 _080ADD78:
 	mov r0, r12
 	movs r1, 0x80

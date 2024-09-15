@@ -83,7 +83,7 @@ static void sub_802C928(void)
 {
     s32 i;
 
-    sub_8006518(sUnknown_203B2F0->unk19C);
+    RestoreUnkTextStruct_8006518(sUnknown_203B2F0->unk19C);
 
     switch (sUnknown_203B2F0->state) {
         case 2:
@@ -101,7 +101,7 @@ static void sub_802C928(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B2F0->unk19C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B2F0->unk19C, TRUE, TRUE);
 }
 
 static void sub_802C9D8(void)

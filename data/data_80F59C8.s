@@ -2102,16 +2102,16 @@ gUnknown_80F8C14: @ 80F8C14
 .string "It can{APOSTROPHE}t be moved.\0"
 .align 2, 0
 
-.global gUnknown_80F8C40
-gUnknown_80F8C40: @ 80F8C40
+.global gItemStickyCannotMove1
+gItemStickyCannotMove1: @ 80F8C40
 .4byte gUnknown_80F8C14
 
-.global gUnknown_80F8C44
-gUnknown_80F8C44: @ 80F8C44
+.global gItemStickyCannotMove2
+gItemStickyCannotMove2: @ 80F8C44
 .4byte gUnknown_80F8C14
 
-.global gUnknown_80F8C48
-gUnknown_80F8C48: @ 80F8C48
+.global gItemStickyCannotMove3
+gItemStickyCannotMove3: @ 80F8C48
 .4byte gUnknown_80F8C14
 
 .global gUnknown_80F8C4C
@@ -2120,8 +2120,8 @@ gUnknown_80F8C4C: @ 80F8C4C
 .string "It can{APOSTROPHE}t be equipped.\0"
 .align 2,0
 
-.global gUnknown_80F8C7C
-gUnknown_80F8C7C: @ 80F8C7C
+.global gItemStickyCannotEquip
+gItemStickyCannotEquip: @ 80F8C7C
 .4byte gUnknown_80F8C4C
 
 .global gUnknown_80F8C80
@@ -2130,8 +2130,8 @@ gUnknown_80F8C80: @ 80F8C80
 .string "and returned the {ARG_MOVE_ITEM_1}.\0"
 .align 2,0
 
-.global gUnknown_80F8CA8
-gUnknown_80F8CA8: @ 80F8CA8
+.global gMonTookAndReturnedItem
+gMonTookAndReturnedItem: @ 80F8CA8
 @ replacing .incbin "baserom.gba", 0xF8CA8, 0x3C
 .4byte gUnknown_80F8C80
 
@@ -2251,8 +2251,8 @@ gUnknown_80F8E30: @ 80F8E30
 .string "Items can{APOSTROPHE}t be exchanged here.\0"
 .align 2, 0
 
-.global gUnknown_80F8E54
-gUnknown_80F8E54: @ 80F8E54
+.global gNoExchangesHere
+gNoExchangesHere: @ 80F8E54
 @ replacing .incbin "baserom.gba", 0xF8E54, 0x24
 .4byte gUnknown_80F8E30
 
@@ -2261,8 +2261,8 @@ gUnknown_80F8E58: @ 80F8E58
 .string "Nothing can be put down here.\0"
 .align 2, 0
 
-.global gUnknown_80F8E78
-gUnknown_80F8E78: @ 80F8E78
+.global gNothingCanBePutDownHere
+gNothingCanBePutDownHere: @ 80F8E78
 @ replacing .incbin "baserom.gba", 0xF8E78, 0x34
 .4byte gUnknown_80F8E58
 
@@ -2272,8 +2272,8 @@ gUnknown_80F8E7C: @ 80F8E7C
 .string "ground with the {ARG_MOVE_ITEM_0}.\0"
 .align 2, 0
 
-.global gUnknown_80F8EAC
-gUnknown_80F8EAC: @ 80F8EAC
+.global gSwappedGroundItem
+gSwappedGroundItem: @ 80F8EAC
 @ replacing .incbin "baserom.gba", 0xF8EAC, 0x18
 .4byte gUnknown_80F8E7C
 
@@ -2282,13 +2282,13 @@ gUnknown_80F8EB0: @ 80F8EB0
 .string "{ARG_POKEMON_0} threw the {ARG_MOVE_ITEM_0}!\0"
 .align 2, 0
 
-.global gUnknown_80F8EC4
-gUnknown_80F8EC4: @ 80F8EC4
+.global gMonThrewItem1
+gMonThrewItem1: @ 80F8EC4
 @ replacing .incbin "baserom.gba", 0xF8EC4, 0x4
 .4byte gUnknown_80F8EB0
 
-.global gUnknown_80F8EC8
-gUnknown_80F8EC8: @ 80F8EC8
+.global gMonThrewItem2
+gMonThrewItem2: @ 80F8EC8
 @ replacing .incbin "baserom.gba", 0xF8EC8, 0x1C
 .4byte gUnknown_80F8EB0
 
@@ -2297,8 +2297,8 @@ gUnknown_80F8ECC: @ 80F8ECC
 .string "You can{APOSTROPHE}t talk now.\0"
 .align 2, 0
 
-.global gUnknown_80F8EE4
-gUnknown_80F8EE4: @ 80F8EE4
+.global gCannotTalk
+gCannotTalk: @ 80F8EE4
 @ replacing .incbin "baserom.gba", 0xF8EE4, 0x24
 .4byte gUnknown_80F8ECC
 
@@ -2307,8 +2307,8 @@ gUnknown_80F8EE8: @ 80F8EE8
 .string "You can{APOSTROPHE}t say farewell now.\0"
 .align 2, 0
 
-.global gUnknown_80F8F08
-gUnknown_80F8F08: @ 80F8F08
+.global gCannotFarewell
+gCannotFarewell: @ 80F8F08
 @ replacing .incbin "baserom.gba", 0xF8F08, 0x18
 .4byte gUnknown_80F8EE8
 
@@ -2317,8 +2317,8 @@ gUnknown_80F8F0C: @ 80F8F0C
 .string "{ARG_POKEMON_0} is cringing!\0"
 .align 2, 0
 
-.global gUnknown_80F8F20
-gUnknown_80F8F20: @ 80F8F20
+.global gMonCringing
+gMonCringing: @ 80F8F20
 @ replacing .incbin "baserom.gba", 0xF8F20, 0x18
 .4byte gUnknown_80F8F0C
 
@@ -2327,8 +2327,8 @@ gUnknown_80F8F24: @ 80F8F24
 .string "{ARG_POKEMON_0} is paralyzed!\0"
 .align 2, 0
 
-.global gUnknown_80F8F38
-gUnknown_80F8F38: @ 80F8F38
+.global gMonParalyzed
+gMonParalyzed: @ 80F8F38
 @ replacing .incbin "baserom.gba", 0xF8F38, 0x1C
 .4byte gUnknown_80F8F24
 
@@ -2338,8 +2338,8 @@ gUnknown_80F8F3C: @ 80F8F3C
 .string "the {ARG_MOVE_ITEM_0}.\0"
 .align 2, 0
 
-.global gUnknown_80F8F54
-gUnknown_80F8F54: @ 80F8F54
+.global gMonSteppedOnItem
+gMonSteppedOnItem: @ 80F8F54
 @ replacing .incbin "baserom.gba", 0xF8F54, 0x34
 .4byte gUnknown_80F8F3C
 
@@ -2349,8 +2349,8 @@ gUnknown_80F8F58: @ 80F8F58
 .string "It didn{APOSTROPHE}t pick up the {ARG_MOVE_ITEM_0}.\0"
 .align 2, 0
 
-.global gUnknown_80F8F88
-gUnknown_80F8F88: @ 80F8F88
+.global gMonTerrifiedCouldntPickUpItem
+gMonTerrifiedCouldntPickUpItem: @ 80F8F88
 @ replacing .incbin "baserom.gba", 0xF8F88, 0x24
 .4byte gUnknown_80F8F58
 
@@ -2360,8 +2360,8 @@ gUnknown_80F8F8C: @ 80F8F8C
 .string "the {ARG_MOVE_ITEM_0}.\0"
 .align 2, 0
 
-.global gUnknown_80F8FAC
-gUnknown_80F8FAC: @ 80F8FAC
+.global gMonCouldntPickUpItem
+gMonCouldntPickUpItem: @ 80F8FAC
 @ replacing .incbin "baserom.gba", 0xF8FAC, 0x18
 .4byte gUnknown_80F8F8C
 
@@ -2370,8 +2370,8 @@ gUnknown_80F8FB0: @ 80F8FB0
 .string "Picked up the {ARG_MOVE_ITEM_0}.\0"
 .align 2, 0
 
-.global gUnknown_80F8FC4
-gUnknown_80F8FC4: @ 80F8FC4
+.global gPickedUpItem2
+gPickedUpItem2: @ 80F8FC4
 @ replacing .incbin "baserom.gba", 0xF8FC4, 0x34
 .4byte gUnknown_80F8FB0
 
@@ -2381,13 +2381,13 @@ gUnknown_80F8FC8: @ 80F8FC8
 .string "put it in the Toolbox.\0"
 .align 2, 0
 
-.global gUnknown_80F8FF8
-gUnknown_80F8FF8: @ 80F8FF8
+.global gPickedUpItemToolbox
+gPickedUpItemToolbox: @ 80F8FF8
 @ replacing .incbin "baserom.gba", 0xF8FF8, 0x4
 .4byte gUnknown_80F8FC8
 
-.global gUnknown_80F8FFC
-gUnknown_80F8FFC: @ 80F8FFC
+.global gPickedUpItem
+gPickedUpItem: @ 80F8FFC
 @ replacing .incbin "baserom.gba", 0xF8FFC, 0x1C
 .4byte gUnknown_80F8FB0
 
@@ -2397,8 +2397,8 @@ gUnknown_80F9000: @ 80F9000
 .string "the {ARG_MOVE_ITEM_0}.\0"
 .align 2, 0
 
-.global gUnknown_80F9018
-gUnknown_80F9018: @ 80F9018
+.global gMonPickedUpItem2
+gMonPickedUpItem2: @ 80F9018
 @ replacing .incbin "baserom.gba", 0xF9018, 0x38
 .4byte gUnknown_80F9000
 
@@ -2408,13 +2408,13 @@ gUnknown_80F901C: @ 80F901C
 .string "{ARG_MOVE_ITEM_0} and put it in the Toolbox.\0"
 .align 2, 0
 
-.global gUnknown_80F9050
-gUnknown_80F9050: @ 80F9050
+.global gMonPickedUpItemToolbox
+gMonPickedUpItemToolbox: @ 80F9050
 @ replacing .incbin "baserom.gba", 0xF9050, 0x4
 .4byte gUnknown_80F901C
 
-.global gUnknown_80F9054
-gUnknown_80F9054: @ 80F9054
+.global gMonPickedUpItem
+gMonPickedUpItem: @ 80F9054
 @ replacing .incbin "baserom.gba", 0xF9054, 0x40
 .4byte gUnknown_80F9000
 
@@ -2424,8 +2424,8 @@ gUnknown_80F9058: @ 80F9058
 .string "It will be gone from the team forever.\0"
 .align 2, 0
 
-.global gUnknown_80F9094
-gUnknown_80F9094: @ 80F9094
+.global gSayFarewellQ
+gSayFarewellQ: @ 80F9094
 @ replacing .incbin "baserom.gba", 0xF9094, 0x34
 .4byte gUnknown_80F9058
 
@@ -2435,8 +2435,8 @@ gUnknown_80F9098: @ 80F9098
 .string "{ARG_POKEMON_0}{APOSTROPHE}s hold item will be lost.\0"
 .align 2, 0
 
-.global gUnknown_80F90C8
-gUnknown_80F90C8: @ 80F90C8
+.global gSendMonBackWithItemQ
+gSendMonBackWithItemQ: @ 80F90C8
 @ replacing .incbin "baserom.gba", 0xF90C8, 0x14
 .4byte gUnknown_80F9098
 
@@ -2445,8 +2445,8 @@ gUnknown_80F90CC: @ 80F90CC
 .string "Send {ARG_POKEMON_0} back?\0"
 .align 2, 0
 
-.global gUnknown_80F90DC
-gUnknown_80F90DC: @ 80F90DC
+.global gSendMonBackQ
+gSendMonBackQ: @ 80F90DC
 @ replacing .incbin "baserom.gba", 0xF90DC, 0x38
 .4byte gUnknown_80F90CC
 
@@ -2476,13 +2476,13 @@ gUnknown_80F9140: @ 80F9140
 .string "{ARG_POKEMON_0} went back.\0"
 .align 2, 0
 
-.global gUnknown_80F9150
-gUnknown_80F9150: @ 80F9150
+.global gMonWentBack
+gMonWentBack: @ 80F9150
 @ replacing .incbin "baserom.gba", 0xF9150, 0x4
 .4byte gUnknown_80F9140
 
-.global gUnknown_80F9154
-gUnknown_80F9154: @ 80F9154
+.global gMonDisappointedAndLeft
+gMonDisappointedAndLeft: @ 80F9154
 @ replacing .incbin "baserom.gba", 0xF9154, 0x4
 .4byte gUnknown_80F9118
 
@@ -2725,8 +2725,8 @@ gUnknown_80F93CC: @ 80F93CC
 .string "The {ARG_MOVE_ITEM_0} fell on the ground.\0"
 .align 2, 0
 
-.global gUnknown_80F93E8
-gUnknown_80F93E8: @ 80F93E8
+.global gItemFellOnGround
+gItemFellOnGround: @ 80F93E8
 @ replacing .incbin "baserom.gba", 0xF93E8, 0x20
 .4byte gUnknown_80F93CC
 
@@ -2735,8 +2735,8 @@ gUnknown_80F93EC: @ 80F93EC
 .string "The {ARG_MOVE_ITEM_0} fell in the water.\0"
 .align 2, 0
 
-.global gUnknown_80F9408
-gUnknown_80F9408: @ 80F9408
+.global gItemFellInWater
+gItemFellInWater: @ 80F9408
 @ replacing .incbin "baserom.gba", 0xF9408, 0x1C
 .4byte gUnknown_80F93EC
 
@@ -2745,8 +2745,8 @@ gUnknown_80F940C: @ 80F940C
 .string "The {ARG_MOVE_ITEM_0} became buried.\0"
 .align 2, 0
 
-.global gUnknown_80F9424
-gUnknown_80F9424: @ 80F9424
+.global gItemBuried
+gItemBuried: @ 80F9424
 @ replacing .incbin "baserom.gba", 0xF9424, 0x18
 .4byte gUnknown_80F940C
 
@@ -2755,8 +2755,8 @@ gUnknown_80F9428: @ 80F9428
 .string "The {ARG_MOVE_ITEM_0} was lost!\0"
 .align 2, 0
 
-.global gUnknown_80F943C
-gUnknown_80F943C: @ 80F943C
+.global gItemLost
+gItemLost: @ 80F943C
 @ replacing .incbin "baserom.gba", 0xF943C, 0x20
 .4byte gUnknown_80F9428
 
@@ -2765,8 +2765,8 @@ gUnknown_80F9440: @ 80F9440
 .string "All the items were lost!\0"
 .align 2, 0
 
-.global gUnknown_80F945C
-gUnknown_80F945C: @ 80F945C
+.global gAllItemsLost
+gAllItemsLost: @ 80F945C
 @ replacing .incbin "baserom.gba", 0xF945C, 0x20
 .4byte gUnknown_80F9440
 
@@ -2775,8 +2775,8 @@ gUnknown_80F9460: @ 80F9460
 .string "Several items were lost!\0"
 .align 2, 0
 
-.global gUnknown_80F947C
-gUnknown_80F947C: @ 80F947C
+.global gSeveralItemsLost
+gSeveralItemsLost: @ 80F947C
 @ replacing .incbin "baserom.gba", 0xF947C, 0x20
 .4byte gUnknown_80F9460
 
@@ -2785,8 +2785,8 @@ gUnknown_80F9480: @ 80F9480
 .string "The {ARG_MOVE_ITEM_0} fell out of sight!\0"
 .align 2, 0
 
-.global gUnknown_80F949C
-gUnknown_80F949C: @ 80F949C
+.global gItemFellOutOfSight
+gItemFellOutOfSight: @ 80F949C
 @ replacing .incbin "baserom.gba", 0xF949C, 0x28
 .4byte gUnknown_80F9480
 
@@ -8518,8 +8518,8 @@ gUnknown_80FE3C0: @ 80FE3C0
 .string "It doesn{APOSTROPHE}t work!\0"
 .align 2, 0
 
-.global gUnknown_80FE3E8
-gUnknown_80FE3E8: @ 80FE3E8
+.global gItemStickyDoesntWorkText
+gItemStickyDoesntWorkText: @ 80FE3E8
 @ replacing .incbin "baserom.gba", 0xFE3E8, 0x24
 .4byte gUnknown_80FE3C0
 

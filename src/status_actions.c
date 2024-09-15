@@ -140,7 +140,7 @@ extern s16 gUnknown_80F4F94[];
 extern u8 *gUnknown_80FC5A8[];
 extern u8 *gPtrForecastPreventsTypeSwitchMessage[];
 extern u8 *gUnknown_80FEB08[];
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 extern s16 gUnknown_80F4E08;
 extern u8 gDungeonCamouflageTypes[76];
 extern u32 gUnknown_202F228;
@@ -257,7 +257,7 @@ bool8 HandleColorChange(Entity * pokemon, Entity * target)
         entityInfo->isColorChanged = TRUE;
         SetMessageArgument(gUnknown_202DFE8,target,0);
         typeString = GetUnformattedTypeString(newType);
-        strcpy(gUnknown_202DE58, typeString);
+        strcpy(gFormatItems, typeString);
         sub_80522F4(pokemon,target,*gUnknown_80FEB08);
         return TRUE;
     }

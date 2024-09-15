@@ -35,7 +35,7 @@ void DrawMainMenu(void)
         sUnknown_203B34C->unk144[i] = sUnknown_80E59C8;
 
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B34C->unk144, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B34C->unk144, TRUE, TRUE);
     SetMainMenuItems();
     sUnknown_203B34C->currMenuChoice = -1;
 
@@ -49,7 +49,7 @@ void DrawMainMenu(void)
 void CleanMainMenu(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(NULL, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
 
     if (sUnknown_203B34C != NULL) {
         MemoryFree(sUnknown_203B34C);

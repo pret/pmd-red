@@ -25,11 +25,11 @@ bool8 sub_801D9E4(void)
     sUnknown_203B258 = MemoryAlloc(sizeof(*sUnknown_203B258), 8);
     sUnknown_203B258->s0.unk34 = 3;
     sUnknown_203B258->s0.unk38 = &sUnknown_203B258->s0.unk3C[3];
-    sub_8006518(sUnknown_203B258->s0.unk3C);
+    RestoreUnkTextStruct_8006518(sUnknown_203B258->s0.unk3C);
     sUnknown_203B258->s0.unk3C[sUnknown_203B258->s0.unk34] = sUnknown_80DBF88;
     sUnknown_203B258->s0.unk38->unk14 = &sUnknown_203B258->unk9C;
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B258->s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B258->s0.unk3C, TRUE, TRUE);
     sub_8013818(&sUnknown_203B258->s0.input, 229, 10, sUnknown_203B258->s0.unk34);
     sub_801DB54();
     sub_801DBD4();
@@ -83,7 +83,7 @@ void sub_801DB0C(void)
     if (sUnknown_203B258 != NULL) {
         sUnknown_203B258->s0.unk3C[sUnknown_203B258->s0.unk34] = sUnknown_80DBF70;
         ResetUnusedInputStruct();
-        sub_800641C(sUnknown_203B258->s0.unk3C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(sUnknown_203B258->s0.unk3C, TRUE, TRUE);
         MemoryFree(sUnknown_203B258);
         sUnknown_203B258 = NULL;
     }
@@ -97,7 +97,7 @@ static void sub_801DB54(void)
     sUnknown_203B258->unk9C.f3 = 0;
 
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B258->s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B258->s0.unk3C, TRUE, TRUE);
 
     SUB_80095E4_CALL(sUnknown_203B258->s0);
 }
@@ -110,7 +110,7 @@ static void sub_801DBD4(void)
     s16 index;
     int counter;
 
-    sub_8008C54(sUnknown_203B258->s0.unk34);
+    CallPrepareTextbox_8008C54(sUnknown_203B258->s0.unk34);
     sub_80073B8(sUnknown_203B258->s0.unk34);
     PrintStringOnWindow(10, 0, sField, sUnknown_203B258->s0.unk34, 0); // Field
 

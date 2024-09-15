@@ -37,10 +37,10 @@ void PrepareSavePakWrite(s16 pokemonID)
 
     if (sSavePakWrite->faceFile != 0) {
         preload_face = &sSavePakWrite->faceFile;
-        sub_80141B4(sSavingAdventure, 0, preload_face, 0x20);
+        xxx_info_box_80141B4(sSavingAdventure, 0, preload_face, 0x20);
     }
     else
-        sub_80141B4(sSavingAdventure, 0, NULL, 0x20);
+        xxx_info_box_80141B4(sSavingAdventure, 0, NULL, 0x20);
 
     sSavePakWrite->state = 3;
 }
@@ -62,7 +62,7 @@ bool8 WriteSavePak(void)
         case 1:
             sSavePakWrite->unk4++;
             if (sSavePakWrite->unk4 > 8) {
-                sub_80141B4(sWriteGamePak, 0, 0, 0x20);
+                xxx_info_box_80141B4(sWriteGamePak, 0, 0, 0x20);
                 sSavePakWrite->state = 3;
             }
             break;
@@ -79,21 +79,21 @@ bool8 WriteSavePak(void)
             switch (sSavePakWrite->saveStatus) {
                 case SAVE_COMPLETED:
                     if (sSavePakWrite->faceFile != NULL)
-                        sub_80141B4(sSaveCompleted, 0, faceFile, 0x101);
+                        xxx_info_box_80141B4(sSaveCompleted, 0, faceFile, 0x101);
                     else
-                        sub_80141B4(sSaveCompleted, 0, faceFile, 0x101);
+                        xxx_info_box_80141B4(sSaveCompleted, 0, faceFile, 0x101);
 
                     sSavePakWrite->state = 5;
                     break;
                 case SAVE_NOT_WRTTEN:
-                    sub_80141B4(sSaveNotWritten, 0, 0, 0);
+                    xxx_info_box_80141B4(sSaveNotWritten, 0, 0, 0);
                     sSavePakWrite->state = 6;
                     break;
                 default:
                     if (sSavePakWrite->faceFile != NULL)
-                        sub_80141B4(sSaveFailed, 0, faceFile, 0x101);
+                        xxx_info_box_80141B4(sSaveFailed, 0, faceFile, 0x101);
                     else
-                        sub_80141B4(sSaveFailed, 0, faceFile, 0x101);
+                        xxx_info_box_80141B4(sSaveFailed, 0, faceFile, 0x101);
 
                     sSavePakWrite->state = 5;
                     break;

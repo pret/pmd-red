@@ -127,7 +127,7 @@ u32 sub_802F204(unkStruct_802F204 *r0, bool8 displayClientSprite)
     struct unkStruct_203B310 *preload;
 
     ResetUnusedInputStruct();
-    sub_800641C(NULL, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
     gUnknown_203B310 = MemoryAlloc(sizeof(struct unkStruct_203B310), 8);
     gUnknown_203B310->unk10 = r0;
     gUnknown_203B310->itemRewardIndex = 0;
@@ -195,13 +195,13 @@ void sub_802F300(void)
     switch(gUnknown_203B310->state)
     {
         case PREP_MONEY_REWARD:
-            sub_8006518(gUnknown_203B310->unk24);
+            RestoreUnkTextStruct_8006518(gUnknown_203B310->unk24);
             for(index = 0; index < 4; index++)
             {
                 gUnknown_203B310->unk24[index] = gUnknown_80E041C;
             }
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B310->unk24, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B310->unk24, TRUE, TRUE);
         default:
             break;
     }
@@ -224,7 +224,7 @@ void HandleMissionReward(void)
         else {
             gFormatData_202DE30 = moneyReward;
             if (gUnknown_203B310->displayClientDialogueSprite) {
-                sub_80141B4(gUnknown_80E0434,0,&gUnknown_203B310->faceFile,0x10d);
+                xxx_info_box_80141B4(gUnknown_80E0434,0,&gUnknown_203B310->faceFile,0x10d);
                 gUnknown_203B310->nextState = MONEY_REWARD;
             }
             else {
@@ -235,11 +235,11 @@ void HandleMissionReward(void)
     case MONEY_REWARD:
         PlaySound(0xcb);
         AddToTeamMoney(gUnknown_203B310->unk10->moneyReward);
-        if (sub_808D544(0) < 2) {
-            sub_80141B4(gUnknown_80E045C,0,0,0x101);
+        if (GetUnitSum_808D544(0) < 2) {
+            xxx_info_box_80141B4(gUnknown_80E045C,0,0,0x101);
         }
         else {
-            sub_80141B4(gUnknown_80E0484,0,0,0x101);
+            xxx_info_box_80141B4(gUnknown_80E0484,0,0,0x101);
         }
         gUnknown_203B310->nextState = PREP_FRIEND_AREA_REWARD;
         break;
@@ -248,9 +248,9 @@ void HandleMissionReward(void)
             SetRewardSceneState(PREP_ITEM_REWARD);
         }
         else {
-            sub_8092578(gUnknown_202E628,gUnknown_203B310->unk10->friendAreaReward,FALSE);
+            WriteFriendAreaName(gUnknown_202E628,gUnknown_203B310->unk10->friendAreaReward,FALSE);
             if (gUnknown_203B310->displayClientDialogueSprite) {
-                sub_80141B4(gUnknown_80E04B4,0,&gUnknown_203B310->faceFile,0x10d);
+                xxx_info_box_80141B4(gUnknown_80E04B4,0,&gUnknown_203B310->faceFile,0x10d);
                 gUnknown_203B310->nextState = UNLOCK_FRIEND_AREA;
             }
             else {
@@ -262,20 +262,20 @@ void HandleMissionReward(void)
         if (GetFriendAreaStatus(gUnknown_203B310->unk10->friendAreaReward)) {
             // We already have the friend area
             AddToTeamMoney(1000);
-            sub_80141B4(gUnknown_80E04F4,0,0,0x101);
+            xxx_info_box_80141B4(gUnknown_80E04F4,0,0,0x101);
         }
         else
         {
-            if (sub_808D544(0) < 2) {
+            if (GetUnitSum_808D544(0) < 2) {
                 UnlockFriendArea(gUnknown_203B310->unk10->friendAreaReward);
                 PlaySound(0xce);
-                sub_80141B4(gUnknown_80E05C0,0,0,0x101);
+                xxx_info_box_80141B4(gUnknown_80E05C0,0,0,0x101);
             }
             else
             {
                 UnlockFriendArea(gUnknown_203B310->unk10->friendAreaReward);
                 PlaySound(0xce);
-                sub_80141B4(gUnknown_80E05FC,0,0,0x101);
+                xxx_info_box_80141B4(gUnknown_80E05FC,0,0,0x101);
             }
         }
         gUnknown_203B310->nextState = PREP_ITEM_REWARD;
@@ -298,7 +298,7 @@ void HandleMissionReward(void)
                 local_20.unk8 = 1;
                 sub_8090E14(gUnknown_202DEA8,&item,&local_20);
                 if (gUnknown_203B310->displayClientDialogueSprite) {
-                    sub_80141B4(gUnknown_80E0640,0,&gUnknown_203B310->faceFile,0x10d);
+                    xxx_info_box_80141B4(gUnknown_80E0640,0,&gUnknown_203B310->faceFile,0x10d);
                     gUnknown_203B310->nextState = GIVE_ITEM_REWARD;
                 }
                 else
@@ -349,7 +349,7 @@ void HandleMissionReward(void)
                 gUnknown_203B310->nextState = REWARD_EXIT;
             }
             gFormatData_202DE30 = gUnknown_203B310->unk10->teamRankPtsReward;
-            sub_80141B4(gUnknown_80E0670,0,0,0x101);
+            xxx_info_box_80141B4(gUnknown_80E0670,0,0,0x101);
         }
         break;
     case NEW_TEAM_RANK:
@@ -359,7 +359,7 @@ void HandleMissionReward(void)
         strcpy(gUnknown_202E038,rankString);
         rankString = GetTeamRankString(GetRescueTeamRank());
         strcpy(gUnknown_202E038 + 0x50,rankString);
-        sub_80141B4(gUnknown_80E06A8,0,0,0x101);
+        xxx_info_box_80141B4(gUnknown_80E06A8,0,0,0x101);
         break;
     case REWARD_EXIT:
         break;

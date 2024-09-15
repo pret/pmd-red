@@ -29,7 +29,7 @@ static void sub_801629C(void);
 u32 CreateConfirmNameMenu(u32 mode, u8 *name)
 {
     ResetUnusedInputStruct();
-    sub_800641C(NULL, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
 
     sUnknown_203B200 = MemoryAlloc(sizeof(struct unkStruct_203B200), 8);
     sUnknown_203B200->unk0 = mode;
@@ -113,10 +113,10 @@ static void sub_8016110(void)
             break;
 
         case CONFIRM_NAME_MENU_TOO_LONG:
-            sub_80141B4(sNameTooLong, 0, 0, 0x121);
+            xxx_info_box_80141B4(sNameTooLong, 0, 0, 0x121);
             break;
         case CONFIRM_NAME_MENU_EMPTY:
-            sub_80141B4(sEnterAName, 0, 0, 0x121);
+            xxx_info_box_80141B4(sEnterAName, 0, 0, 0x121);
             break;
         default:
             break;

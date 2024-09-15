@@ -33,19 +33,19 @@ gUnknown_3001B5A: /* 3001B5A */
 .include "src/ground_map_2.o"
 .include "src/ground_sprite.o"
 
-gUnknown_3001B80: /* 3001B80 */
+gGroundLivesMeta: /* 3001B80 */
 	.space 0x4
 
-gUnknown_3001B84: /* 3001B84 */
+gGroundLives: /* 3001B84 */
 	.space 0x4
 
-gUnknown_3001B88: /* 3001B88 */
+gGroundObjects: /* 3001B88 */
 	.space 0x4
 
-gUnknown_3001B8C: /* 3001B8C */
+gGroundEffects: /* 3001B8C */
 	.space 0x4
 
-gUnknown_3001B90: /* 3001B90 */
+gGroundEvents: /* 3001B90 */
 	.space 0x2470
 
 .include "src/code_80001DC.o"

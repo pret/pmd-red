@@ -105,7 +105,7 @@ static void sub_801DD84(void)
 {
     s32 i;
 
-    sub_8006518(sUnknown_203B25C->unkBC);
+    RestoreUnkTextStruct_8006518(sUnknown_203B25C->unkBC);
 
     switch (sUnknown_203B25C->state) {
         case OPTIONS_MENU_INIT:
@@ -142,7 +142,7 @@ static void sub_801DD84(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B25C->unkBC, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B25C->unkBC, TRUE, TRUE);
 }
 
 static void sub_801DED0(void)

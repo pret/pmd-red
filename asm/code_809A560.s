@@ -354,7 +354,7 @@ _0809ABA0:
 	.align 2, 0
 _0809ABA8: .4byte gAvailablePokemonNames
 _0809ABAC: .4byte gPlayerName
-_0809ABB0: .4byte gUnknown_811617C
+_0809ABB0: .4byte gSpeechBubbleChar
 	thumb_func_end sub_809AB4C
 
 	thumb_func_start sub_809ABB4
@@ -767,7 +767,7 @@ _0809AEA4:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0
-	bl sub_809A680
+	bl xxx_script_textboxes_809A680
 	ldr r0, _0809AED4
 	ldr r0, [r0]
 	adds r0, 0xC
@@ -777,7 +777,7 @@ _0809AEA4:
 	ldrh r1, [r1]
 	adds r2, r6, 0
 	adds r3, r4, 0
-	bl sub_809B2B8
+	bl ScriptPrintText_809B2B8
 	b _0809AEE0
 	.align 2, 0
 _0809AED0: .4byte gUnknown_8116134
@@ -804,7 +804,7 @@ sub_809AEEC:
 	beq _0809AF1C
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_809A680
+	bl xxx_script_textboxes_809A680
 	ldr r0, _0809AF18
 	ldr r0, [r0]
 	adds r0, 0xC
@@ -812,7 +812,7 @@ sub_809AEEC:
 	negs r2, r2
 	movs r1, 0xC2
 	adds r3, r4, 0
-	bl sub_809B2B8
+	bl ScriptPrintText_809B2B8
 	b _0809AF20
 	.align 2, 0
 _0809AF18: .4byte gUnknown_3001B64
@@ -837,7 +837,7 @@ sub_809AF2C:
 	beq _0809AF5C
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_809A680
+	bl xxx_script_textboxes_809A680
 	ldr r0, _0809AF58
 	ldr r0, [r0]
 	adds r0, 0xC
@@ -845,7 +845,7 @@ sub_809AF2C:
 	negs r2, r2
 	movs r1, 0xC2
 	adds r3, r4, 0
-	bl sub_809B2B8
+	bl ScriptPrintText_809B2B8
 	b _0809AF60
 	.align 2, 0
 _0809AF58: .4byte gUnknown_3001B64
@@ -870,7 +870,7 @@ sub_809AF6C:
 	beq _0809AF9C
 	movs r0, 0x3
 	movs r1, 0x1
-	bl sub_809A680
+	bl xxx_script_textboxes_809A680
 	ldr r0, _0809AF98
 	ldr r0, [r0]
 	adds r0, 0xC
@@ -878,7 +878,7 @@ sub_809AF6C:
 	negs r2, r2
 	movs r1, 0x65
 	adds r3, r4, 0
-	bl sub_809B2B8
+	bl ScriptPrintText_809B2B8
 	b _0809AFA0
 	.align 2, 0
 _0809AF98: .4byte gUnknown_3001B64
@@ -983,7 +983,7 @@ sub_809B028:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0
-	bl sub_809A680
+	bl xxx_script_textboxes_809A680
 	ldr r0, _0809B088
 	ldr r1, [r0]
 	ldr r0, _0809B08C
@@ -1050,7 +1050,7 @@ _0809B09A:
 _0809B0D4: .4byte gUnknown_3001B64
 _0809B0D8: .4byte gUnknown_8116148
 _0809B0DC: .4byte gUnknown_202E5D8
-_0809B0E0: .4byte gUnknown_8116180
+_0809B0E0: .4byte gFormattedSpeechBubble
 _0809B0E4:
 	ldr r0, _0809B134
 	ldr r1, _0809B138
@@ -1205,7 +1205,7 @@ _0809B1F8:
 _0809B202:
 	movs r0, 0x4
 	movs r1, 0
-	bl sub_809A680
+	bl xxx_script_textboxes_809A680
 	ldr r0, _0809B254
 	ldr r1, [r0]
 	ldr r2, _0809B258
@@ -1280,11 +1280,11 @@ _0809B288:
 _0809B290: .4byte gUnknown_3001B64
 	thumb_func_end sub_809B260
 
-	thumb_func_start sub_809B294
-sub_809B294:
+	thumb_func_start ResetTextbox_809B294
+ResetTextbox_809B294:
 	push {lr}
 	movs r0, 0x3
-	bl sub_80063D8
+	bl SetCharacterMask
 	ldr r0, _0809B2B4
 	ldr r0, [r0]
 	adds r0, 0xC
@@ -1292,15 +1292,15 @@ sub_809B294:
 	negs r2, r2
 	movs r1, 0
 	movs r3, 0
-	bl sub_809B2B8
+	bl ScriptPrintText_809B2B8
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0809B2B4: .4byte gUnknown_3001B64
-	thumb_func_end sub_809B294
+	thumb_func_end ResetTextbox_809B294
 
-	thumb_func_start sub_809B2B8
-sub_809B2B8:
+	thumb_func_start ScriptPrintText_809B2B8
+ScriptPrintText_809B2B8:
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1330,7 +1330,7 @@ _0809B2E8:
 	bl sub_8014490
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_809A680
+	bl xxx_script_textboxes_809A680
 	b _0809B3FA
 _0809B2F6:
 	movs r0, 0x1
@@ -1347,7 +1347,7 @@ _0809B2F6:
 	b _0809B32A
 	.align 2, 0
 _0809B310: .4byte gUnknown_202E5D8
-_0809B314: .4byte gUnknown_8116180
+_0809B314: .4byte gFormattedSpeechBubble
 _0809B318:
 	ldr r0, _0809B3D0
 	ldr r1, _0809B3D4
@@ -1473,10 +1473,10 @@ _0809B3FC:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809B2B8
+	thumb_func_end ScriptPrintText_809B2B8
 
-	thumb_func_start sub_809B40C
-sub_809B40C:
+	thumb_func_start IsTextboxOpen_809B40C
+IsTextboxOpen_809B40C:
 	push {lr}
 	ldr r0, [r0, 0x4]
 	cmp r0, 0
@@ -1493,7 +1493,7 @@ _0809B420:
 _0809B422:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809B40C
+	thumb_func_end IsTextboxOpen_809B40C
 
 	thumb_func_start sub_809B428
 sub_809B428:
@@ -1583,7 +1583,7 @@ _0809B4B0:
 	ldr r0, [r4, 0x4]
 	cmp r0, 0
 	beq _0809B4F2
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	ldr r0, [r4, 0x4]
 	bl _call_via_r0
 	lsls r0, 24
@@ -1602,7 +1602,7 @@ _0809B4B0:
 _0809B4E8:
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_809A680
+	bl xxx_script_textboxes_809A680
 	b _0809B56E
 _0809B4F2:
 	ldrh r0, [r4]
@@ -1667,7 +1667,7 @@ _0809B558:
 	str r1, [r0]
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_809A680
+	bl xxx_script_textboxes_809A680
 _0809B56E:
 	bl sub_809B57C
 	pop {r4-r6}
@@ -1703,7 +1703,7 @@ sub_809B57C:
 	bne _0809B5E4
 	ldr r1, [sp]
 	movs r0, 0x1
-	bl sub_809D9E0
+	bl GroundScriptLock
 	ldr r1, [r5]
 	adds r2, r1, r4
 	movs r0, 0x3
@@ -1723,7 +1723,7 @@ _0809B5CC:
 	cmp r4, 0
 	bne _0809B5E4
 	movs r0, 0
-	bl sub_809D9B8
+	bl GroundScriptLockJumpZero
 	ldr r0, _0809B5FC
 	ldr r0, [r0]
 	str r4, [r0]
@@ -1899,7 +1899,7 @@ _0809B772:
 	cmp r0, 0x1
 	bne _0809B78A
 _0809B780:
-	bl sub_809B294
+	bl ResetTextbox_809B294
 _0809B784:
 	movs r0, 0x1
 	bl _0809C394
@@ -1927,7 +1927,7 @@ _0809B7AC:
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _0809B7F4
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	ldr r1, [r6]
 	ldr r2, _0809B7D8
 	adds r0, r1, r2
@@ -1990,7 +1990,7 @@ _0809B834:
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _0809B85C
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	ldr r0, [r6]
 	ldr r1, _0809B858
 	adds r0, r1
@@ -2039,7 +2039,7 @@ _0809B89C:
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _0809B8C4
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	ldr r0, [r6]
 	ldr r3, _0809B8C0
 	adds r0, r3
@@ -2111,7 +2111,7 @@ _0809B932:
 _0809B93C: .4byte 0x0000042c
 _0809B940: .4byte gUnknown_81161B8
 _0809B944:
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	ldr r4, _0809B984
 	ldr r0, [r4]
 	movs r2, 0x84
@@ -2120,7 +2120,7 @@ _0809B944:
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _0809B998
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	ldr r0, [r4]
 	ldr r3, _0809B988
 	adds r0, r3
@@ -2175,7 +2175,7 @@ _0809B9BC:
 	bl sub_80151A4
 	bl _0809C392
 _0809B9D2:
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	ldr r4, _0809BA08
 	ldr r0, [r4]
 	movs r1, 0x84
@@ -2184,7 +2184,7 @@ _0809B9D2:
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _0809BA1C
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	ldr r0, [r4]
 	ldr r2, _0809BA0C
 	adds r0, r2
@@ -2222,7 +2222,7 @@ _0809BA2A:
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _0809BA68
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	ldr r0, [r6]
 	ldr r2, _0809BA5C
 	adds r0, r2
@@ -2282,13 +2282,13 @@ _0809BAA8:
 	bne _0809BB10
 	movs r0, 0
 	movs r1, 0x12
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r0, 16
 	bl sub_80A2654
 	lsls r0, 16
 	asrs r4, r0, 16
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0xA
@@ -2315,7 +2315,7 @@ _0809BAEA:
 	movs r0, 0
 	movs r1, 0x12
 	adds r2, r5, 0
-	bl sub_80018D8
+	bl SetScriptVarValue
 _0809BB08:
 	movs r0, 0x4
 	bl PlayMenuSoundEffect
@@ -2340,7 +2340,7 @@ _0809BB20:
 	asrs r2, 16
 	movs r0, 0
 	movs r1, 0x12
-	bl sub_80018D8
+	bl SetScriptVarValue
 	ldr r0, [r6]
 	movs r3, 0x86
 	lsls r3, 3
@@ -2366,7 +2366,7 @@ _0809BB66:
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _0809BB9A
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0xA
@@ -2420,7 +2420,7 @@ _0809BBDA:
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _0809BC14
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	ldr r0, [r6]
 	ldr r2, _0809BC10
 	adds r0, r2
@@ -2430,7 +2430,7 @@ _0809BBDA:
 	movs r0, 0
 	movs r1, 0x18
 	movs r2, 0x1
-	bl sub_80018D8
+	bl SetScriptVarValue
 _0809BC02:
 	movs r0, 0x1
 	bl sub_8011C28
@@ -2456,7 +2456,7 @@ _0809BC26:
 	negs r4, r0
 	orrs r4, r0
 	lsrs r4, 31
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	adds r0, r4, 0
 	bl CreateKangaskhanStorage
 	lsls r0, 24
@@ -2495,7 +2495,7 @@ _0809BC78:
 	negs r4, r0
 	orrs r4, r0
 	lsrs r4, 31
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	adds r0, r4, 0
 	bl CreateFelicityBank
 	lsls r0, 24
@@ -2522,7 +2522,7 @@ _0809BCBC:
 	bl sub_80023E4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	ldr r0, _0809BCE0
 	ldr r0, [r0]
 	ldr r2, _0809BCE4
@@ -2571,7 +2571,7 @@ _0809BD1C:
 	negs r4, r0
 	orrs r4, r0
 	lsrs r4, 31
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	adds r0, r4, 0
 	bl sub_801FB50
 	lsls r0, 24
@@ -2604,10 +2604,10 @@ _0809BD64:
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _0809BD84
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	movs r0, 0
 	movs r1, 0x39
-	bl sub_80015C0
+	bl ClearScriptVarArray
 	bl sub_802465C
 	b _0809B784
 _0809BD84:
@@ -2615,7 +2615,7 @@ _0809BD84:
 	adds r4, r0, 0
 	movs r0, 0
 	movs r1, 0x39
-	bl sub_8001658
+	bl GetScriptVarValue
 	cmp r0, 0
 	bne _0809BDB2
 	bl HasEvolutionCompleted
@@ -2625,7 +2625,7 @@ _0809BD84:
 	movs r0, 0
 	movs r1, 0x39
 	movs r2, 0x1
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0x46
 	movs r1, 0
 	bl GroundMap_ExecuteEvent
@@ -2663,7 +2663,7 @@ _0809BDE8:
 	negs r4, r0
 	orrs r4, r0
 	lsrs r4, 31
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	adds r0, r4, 0
 	bl CreateWigglytuffShop
 	lsls r0, 24
@@ -2716,7 +2716,7 @@ _0809BE50:
 	.align 2, 0
 _0809BE5C: .4byte gUnknown_8116248
 _0809BE60:
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	movs r0, 0x98
 	lsls r0, 1
 	bl CreateHelperPelipperMenu
@@ -2777,7 +2777,7 @@ _0809BED4:
 	add r1, sp, 0x4
 	add r2, sp, 0x8
 	movs r0, 0x2
-	bl sub_8001B88
+	bl GetScriptVarScenario
 	ldr r0, [sp, 0x8]
 	cmp r0, 0x7
 	bgt _0809BF4E
@@ -2858,7 +2858,7 @@ _0809BF82:
 	add r1, sp, 0x14
 	add r2, sp, 0x18
 	movs r0, 0x2
-	bl sub_8001B88
+	bl GetScriptVarScenario
 	add r4, sp, 0x1C
 	ldr r1, [sp, 0x18]
 	lsls r1, 24
@@ -2883,18 +2883,18 @@ _0809BFA4:
 _0809BFB8:
 	movs r0, 0
 	movs r1, 0x19
-	bl sub_8001658
+	bl GetScriptVarValue
 	cmp r0, 0x63
 	bgt _0809BFCE
 	adds r2, r0, 0x1
 	movs r0, 0
 	movs r1, 0x19
-	bl sub_80018D8
+	bl SetScriptVarValue
 _0809BFCE:
 	movs r0, 0
 	movs r1, 0x39
 	movs r2, 0x1
-	bl sub_80018D8
+	bl SetScriptVarValue
 	ldr r1, [sp, 0x14]
 	ldr r2, [sp, 0x18]
 	adds r2, 0x1
@@ -2927,7 +2927,7 @@ _0809BFFC:
 	asrs r4, 31
 	movs r0, 0x4
 	ands r4, r0
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	adds r0, r4, 0
 	bl MakuhitaDojo_New
 	lsls r0, 24
@@ -2974,7 +2974,7 @@ _0809C072:
 	beq _0809C082
 	movs r4, 0x5
 _0809C082:
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	adds r0, r4, 0
 	bl MakuhitaDojo_New
 	lsls r0, 24
@@ -3008,7 +3008,7 @@ _0809C0B8:
 	beq _0809C0C8
 	movs r4, 0x6
 _0809C0C8:
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	adds r0, r4, 0
 	bl MakuhitaDojo_New
 	lsls r0, 24
@@ -3039,7 +3039,7 @@ _0809C0FC:
 	beq _0809C10C
 	movs r4, 0x7
 _0809C10C:
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	adds r0, r4, 0
 	bl MakuhitaDojo_New
 	lsls r0, 24
@@ -3083,7 +3083,7 @@ _0809C158:
 	.align 2, 0
 _0809C164: .4byte gUnknown_81162D8
 _0809C168:
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	bl sub_803B050
 	lsls r0, 24
 	cmp r0, 0
@@ -3124,7 +3124,7 @@ _0809C1BC:
 	str r1, [r0]
 	b _0809C392
 _0809C1C2:
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	b _0809C392
 _0809C1C8:
 	movs r0, 0x2
@@ -3187,7 +3187,7 @@ _0809C238:
 	ldr r3, _0809C26C
 	adds r0, r3
 	ldrb r4, [r0]
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -3220,11 +3220,11 @@ _0809C280:
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _0809C2B8
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
@@ -3272,7 +3272,7 @@ _0809C2CA:
 	b _0809C318
 	.align 2, 0
 _0809C304: .4byte gTeamInventoryRef
-_0809C308: .4byte gUnknown_202DE58
+_0809C308: .4byte gFormatItems
 _0809C30C:
 	ldr r0, [r6]
 	movs r3, 0x86
@@ -3300,7 +3300,7 @@ _0809C32A:
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _0809C36C
-	bl sub_809B294
+	bl ResetTextbox_809B294
 	ldr r1, [r4]
 	ldr r3, _0809C368
 	adds r0, r1, r3

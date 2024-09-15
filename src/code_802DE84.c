@@ -24,7 +24,7 @@ bool8 sub_802DE84(unkStruct_802C39C *mail)
     sub_801317C(&sUnknown_203B300->unk0);
     sUnknown_203B300->unk10 = sUnknown_203B300->mail->unk0[0];
     sUnknown_203B300->unk14 = &sUnknown_203B300->unk18[sUnknown_203B300->unk10];
-    sub_8006518(sUnknown_203B300->unk18);
+    RestoreUnkTextStruct_8006518(sUnknown_203B300->unk18);
     sUnknown_203B300->unk18[sUnknown_203B300->unk10] = sUnknown_80E0264;
     sub_802DF14();
     return TRUE;
@@ -55,7 +55,7 @@ void sub_802DF24(void)
     if (sUnknown_203B300 != NULL) {
         sUnknown_203B300->unk18[sUnknown_203B300->unk10] = sUnknown_80E0248;
         ResetUnusedInputStruct();
-        sub_800641C(sUnknown_203B300->unk18, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(sUnknown_203B300->unk18, TRUE, TRUE);
         MemoryFree(sUnknown_203B300);
         sUnknown_203B300 = NULL;
     }
@@ -64,7 +64,7 @@ void sub_802DF24(void)
 static void sub_802DF6C(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B300->unk18, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B300->unk18, TRUE, TRUE);
 }
 
 static void sub_802DF88(void)

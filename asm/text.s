@@ -1095,8 +1095,8 @@ _08008624:
 _0800862C: .4byte gUnknown_80B86A4
 	thumb_func_end GetCharacter
 
-	thumb_func_start sub_8008630
-sub_8008630:
+	thumb_func_start HexdigitValue
+HexdigitValue:
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -1124,7 +1124,7 @@ _08008658:
 _0800865C:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8008630
+	thumb_func_end HexdigitValue
 
 	thumb_func_start xxx_get_next_char_from_string
 xxx_get_next_char_from_string:
@@ -1136,10 +1136,10 @@ xxx_get_next_char_from_string:
 	bne _08008696
 	adds r5, 0x1
 	ldrb r0, [r5]
-	bl sub_8008630
+	bl HexdigitValue
 	adds r4, r0, 0
 	ldrb r0, [r5, 0x1]
-	bl sub_8008630
+	bl HexdigitValue
 	lsls r4, 4
 	adds r4, r0
 	ldrb r0, [r5]
@@ -2000,25 +2000,25 @@ _08008C44:
 	bx r0
 	thumb_func_end sub_80089AC
 
-	thumb_func_start sub_8008C54
-sub_8008C54:
+	thumb_func_start CallPrepareTextbox_8008C54
+CallPrepareTextbox_8008C54:
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, _08008C64
-	bl sub_8008C6C
+	bl PrepareTextbox_8008C6C
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08008C64: .4byte gUnknown_2027370
-	thumb_func_end sub_8008C54
+	thumb_func_end CallPrepareTextbox_8008C54
 
 	thumb_func_start nullsub_169
 nullsub_169:
 	bx lr
 	thumb_func_end nullsub_169
 
-	thumb_func_start sub_8008C6C
-sub_8008C6C:
+	thumb_func_start PrepareTextbox_8008C6C
+PrepareTextbox_8008C6C:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2164,7 +2164,7 @@ _08008D60:
 	.align 2, 0
 _08008D84: .4byte 0xeeeeeeee
 _08008D88: .4byte 0xdddddddd
-	thumb_func_end sub_8008C6C
+	thumb_func_end PrepareTextbox_8008C6C
 
 	thumb_func_start sub_8008D8C
 sub_8008D8C:
@@ -2745,8 +2745,8 @@ _08009186:
 	bx r1
 	thumb_func_end sub_800915C
 
-	thumb_func_start sub_8009190
-sub_8009190:
+	thumb_func_start xxx_handle_format_global
+xxx_handle_format_global:
 	push {lr}
 	adds r3, r0, 0
 	adds r2, r1, 0
@@ -2757,7 +2757,7 @@ sub_8009190:
 	bx r1
 	.align 2, 0
 _080091A4: .4byte gUnknown_2027370
-	thumb_func_end sub_8009190
+	thumb_func_end xxx_handle_format_global
 
 	thumb_func_start sub_80091A8
 sub_80091A8:
@@ -2940,7 +2940,7 @@ _080092D4:
 	str r0, [r5, 0x18]
 _080092DC:
 	ldrb r0, [r4, 0x2]
-	bl sub_800963C
+	bl InterpretColorChar
 	str r0, [r5, 0x10]
 	adds r4, 0x3
 	b _080091C0
@@ -3425,8 +3425,8 @@ _08009638:
 	bx r1
 	thumb_func_end sub_8009614
 
-	thumb_func_start sub_800963C
-sub_800963C:
+	thumb_func_start InterpretColorChar
+InterpretColorChar:
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3496,7 +3496,7 @@ _080096D8:
 _080096DA:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800963C
+	thumb_func_end InterpretColorChar
 
 	thumb_func_start InitGraphics
 InitGraphics:

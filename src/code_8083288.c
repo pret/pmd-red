@@ -32,7 +32,7 @@ void sub_8082B40(void)
     entity = gDungeon->allPokemon[index];
     if (EntityExists(entity)) {
       info = entity->info;
-      entity->sprite = sub_80687D0(info->apparentID);
+      entity->sprite = GetSpriteData(info->apparentID);
       sub_806CCB4(entity,sub_806CEBC(entity));
       pos = entity->pos;
       AddPokemonDungeonSprite(info->unk98,info->apparentID,&pos,3);

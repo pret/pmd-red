@@ -99,10 +99,10 @@ static void sub_801B080(void)
                 gTeamInventoryRef->teamItems[sUnknown_203B22C->teamItemIndex].id = ITEM_TM_USED_TM;
             }
             PlaySound(312);
-            sub_80141B4(sFmtLearnedTheMove, 0, 0, 0x121);
+            xxx_info_box_80141B4(sFmtLearnedTheMove, 0, 0, 0x121);
             break;
         case 3:
-            sub_80141B4(sFmtNoOneCanLearnThisMove, 0, 0, 0x121);
+            xxx_info_box_80141B4(sFmtNoOneCanLearnThisMove, 0, 0, 0x121);
             break;
         default:
         case 4:

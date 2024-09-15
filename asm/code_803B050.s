@@ -20,7 +20,7 @@ sub_803B050:
 	adds r1, 0x84
 	str r1, [r0, 0x38]
 	adds r0, 0x3C
-	bl sub_8006518
+	bl RestoreUnkTextStruct_8006518
 	ldr r1, [r4]
 	ldr r2, [r1, 0x34]
 	lsls r0, r2, 1
@@ -42,7 +42,7 @@ sub_803B050:
 	adds r0, 0x3C
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	movs r2, 0
 	movs r3, 0
 	movs r7, 0xCB
@@ -215,7 +215,7 @@ sub_803B1BC:
 	adds r0, 0x3C
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	ldr r0, [r4]
 	bl MemoryFree
 	movs r0, 0
@@ -253,7 +253,7 @@ sub_803B204:
 	adds r0, 0x3C
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	ldr r0, [r4]
 	movs r1, 0x1A
 	ldrsh r0, [r0, r1]
@@ -284,7 +284,7 @@ sub_803B204:
 	adds r0, 0x3C
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -299,7 +299,7 @@ sub_803B284:
 	ldr r6, _0803B338
 	ldr r0, [r6]
 	ldr r0, [r0, 0x34]
-	bl sub_8008C54
+	bl CallPrepareTextbox_8008C54
 	ldr r0, [r6]
 	ldr r0, [r0, 0x34]
 	bl sub_80073B8

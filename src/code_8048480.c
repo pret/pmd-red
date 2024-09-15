@@ -26,7 +26,7 @@
 #include "structs/str_position.h"
 
 extern u8 gAvailablePokemonNames[];
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 
 extern s16 gTypeGummiIQBoost[NUM_TYPES][NUMBER_OF_GUMMIS];
 
@@ -60,7 +60,7 @@ extern s16 gUnknown_80F4E74[];
 
 extern u8 *gUnknown_80FDBB8[];
 extern u8 *gUnknown_80FE458[];
-extern u8 *gUnknown_80FE3E8[];
+extern u8 *gItemStickyDoesntWorkText[];
 extern u8 *gUnknown_80FEAE8[];
 extern u8 *gUnknown_80FDBA0[];
 extern u8 *gUnknown_80FE434[];
@@ -73,16 +73,16 @@ extern u8 *gUnknown_80FD644[];
 extern u8 *gUnknown_80FD648[];
 extern u8 *gUnknown_80FD6E8[];
 extern u8 *gPtrCantUseInDungeonMessage[];
-extern u8 *gUnknown_80FE3E8[];
+extern u8 *gItemStickyDoesntWorkText[];
 extern u8 *gPtrMusicBoxPlayedCrumbledMessage[];
 extern u8 *gPtrWishStoneCrumbledMessage[];
 extern u8 *gPtrIcePartCrumbledMessage[];
 extern u8 *gPtrRockPartCrumbledMessage[];
 extern u8 *gPtrSteelPartCrumbledMessage[];
 extern u8 *gUnknown_80FDCA4[];
-extern u8 *gUnknown_80FE3E8[];
+extern u8 *gItemStickyDoesntWorkText[];
 extern u8 *gUnknown_80FECA0[];
-extern u8 *gUnknown_80FE3E8[];
+extern u8 *gItemStickyDoesntWorkText[];
 extern u8 *gUnknown_80F9BD8[];
 
 #include "data/code_8048480.h"
@@ -226,7 +226,7 @@ void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity
           return;
         }
         PlaySoundEffect(0x14d);
-        sub_8045BF8(gUnknown_202DE58,item);
+        sub_8045BF8(gFormatItems,item);
         SetMessageArgument(gAvailablePokemonNames,target,0);
         sub_80522F4(pokemon,target,*gUnknown_80FDBB8); // $m0 caught the $i0
         info->heldItem = *item;
@@ -240,8 +240,8 @@ void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity
     }
   }
   if ((item->flags & ITEM_FLAG_STICKY)) {
-    sub_8045BF8(gUnknown_202DE58,item);
-    sub_80522F4(pokemon,target,*gUnknown_80FE3E8);
+    sub_8045BF8(gFormatItems,item);
+    sub_80522F4(pokemon,target,*gItemStickyDoesntWorkText);
     if (param_1 != '\0') {
       sub_806F370(pokemon,target,gUnknown_80F4FAE,1,&uStack_24,0,0x217,0,0,0);
       sub_8071DA4(pokemon);
@@ -820,7 +820,7 @@ bool8 sub_8048950(Entity *param_1,Item *item)
 
     moveID = GetItemMoveID(item->id);
     if ((item->flags & ITEM_FLAG_STICKY)) {
-        PrintFieldMessage(0,*gUnknown_80FE3E8,1);
+        PrintFieldMessage(0,*gItemStickyDoesntWorkText,1);
         return FALSE;
     }
     else if (IsHMItem(item->id)) {
@@ -871,7 +871,7 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
   PokemonStruct2 *pokemon;
 
   if ((item->flags & ITEM_FLAG_STICKY)) {
-    PrintFieldMessage(0,*gUnknown_80FE3E8,1);
+    PrintFieldMessage(0,*gItemStickyDoesntWorkText,1);
     return FALSE;
   }
   else
@@ -947,7 +947,7 @@ bool32 sub_8048B9C(Entity *entity,Item *param_2)
   entityInfo = entity->info;
   actionPointer = &(entityInfo->action);
   if ((param_2->flags & ITEM_FLAG_STICKY)) {
-      PrintFieldMessage(0,*gUnknown_80FE3E8,1);
+      PrintFieldMessage(0,*gItemStickyDoesntWorkText,1);
       return FALSE;
   }
   else
@@ -1039,8 +1039,8 @@ bool8 sub_8048D50(Entity * pokemon, Item *item)
   entityInfo = pokemon->info;
 
   if ((item->flags & ITEM_FLAG_STICKY) != 0) {
-    sub_8045BF8(gUnknown_202DE58, item);
-    SendMessage(pokemon,*gUnknown_80FE3E8);
+    sub_8045BF8(gFormatItems, item);
+    SendMessage(pokemon,*gItemStickyDoesntWorkText);
     return FALSE;
   }
   else

@@ -21,7 +21,7 @@ sub_800F990:
 	movs r1, 0x14
 	bl sub_80095CC
 	movs r0, 0x2
-	bl xxx_update_some_bg_tiles
+	bl UpdateFadeInTile
 	ldr r1, [r4]
 	ldr r0, _0800FA2C
 	adds r2, r1, r0
@@ -439,7 +439,7 @@ _0800FD08:
 	str r4, [sp, 0x8]
 	adds r0, r3, 0
 	movs r3, 0
-	bl sub_80053AC
+	bl AxResInitFile_80053AC
 	b _0800FD32
 	.align 2, 0
 _0800FD1C: .4byte gUnknown_203B0E4
@@ -758,7 +758,7 @@ _0800FF60:
 	str r2, [sp, 0x8]
 	movs r2, 0
 	movs r3, 0
-	bl sub_80053AC
+	bl AxResInitFile_80053AC
 	ldr r2, [r4]
 	ldr r1, _0800FFD4
 	adds r0, r2, r1
@@ -948,7 +948,7 @@ sub_80100C0:
 	str r1, [sp, 0x8]
 	adds r1, r2, 0
 	movs r2, 0
-	bl sub_80053AC
+	bl AxResInitFile_80053AC
 	bl sub_8011168
 	ldr r0, [r4]
 	ldr r2, _080101E8
@@ -1053,7 +1053,7 @@ _0801018A:
 	str r2, [sp, 0x8]
 	movs r2, 0
 	movs r3, 0
-	bl sub_80053AC
+	bl AxResInitFile_80053AC
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3
@@ -1091,7 +1091,7 @@ _08010214: .4byte gUnknown_80D3EFC
 _08010218:
 	adds r0, r3, 0
 	movs r2, 0
-	bl sub_8092578
+	bl WriteFriendAreaName
 _08010220:
 	pop {r0}
 	bx r0
@@ -1157,7 +1157,7 @@ sub_8010268:
 	movs r1, 0x14
 	bl sub_80095CC
 	movs r0, 0x2
-	bl xxx_update_some_bg_tiles
+	bl UpdateFadeInTile
 	bl sub_801059C
 	adds r0, r5, 0x4
 	bl sub_8010494
@@ -1318,7 +1318,7 @@ _080103B0:
 	movs r2, 0x1
 	str r2, [sp, 0x8]
 	movs r2, 0
-	bl sub_80053AC
+	bl AxResInitFile_80053AC
 	movs r7, 0
 	cmp r7, r4
 	bge _08010448
@@ -1458,7 +1458,7 @@ _080104E6:
 	str r6, [sp, 0x8]
 	adds r0, r3, 0
 	movs r3, 0
-	bl sub_80053AC
+	bl AxResInitFile_80053AC
 	ldr r1, _08010508
 	lsls r0, r5, 2
 	adds r0, r1
@@ -1490,7 +1490,7 @@ _0801050E:
 	str r2, [sp, 0x8]
 	movs r2, 0
 	movs r3, 0
-	bl sub_80053AC
+	bl AxResInitFile_80053AC
 	ldr r2, [r4]
 	ldr r4, _08010588
 	adds r3, r2, r4
@@ -1675,7 +1675,7 @@ _080106A2:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	add sp, 0x14
 	pop {r3-r5}
 	mov r8, r3
@@ -1942,9 +1942,9 @@ _0801089A:
 _080108FC: .4byte gUnknown_203B0E8
 _08010900: .4byte 0x000052da
 _08010904: .4byte 0x000052d8
-_08010908: .4byte gUnknown_202C038
+_08010908: .4byte gFontTiles_202C038
 _0801090C: .4byte 0x00003114
-_08010910: .4byte gUnknown_202C838
+_08010910: .4byte gFontTilesExtra_202C838
 _08010914: .4byte 0x00001114
 	thumb_func_end sub_8010858
 
@@ -1985,7 +1985,7 @@ sub_8010950:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8010950
@@ -2148,7 +2148,7 @@ sub_8010A88:
 	ldr r5, [r1]
 	ldr r3, _08010B64
 	adds r0, r3
-	bl sub_80054BC
+	bl RunAxAnimationFrame_80054BC
 	mov r0, r9
 	cmp r0, 0
 	beq _08010AF6
@@ -2194,7 +2194,7 @@ _08010B04:
 	adds r5, r4, 0
 	adds r5, 0x8
 	adds r0, r5, 0
-	bl sub_80054BC
+	bl RunAxAnimationFrame_80054BC
 	mov r2, r9
 	cmp r2, 0
 	beq _08010B40
@@ -2287,7 +2287,7 @@ _08010BD0:
 	add r0, sp, 0x4
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	movs r0, 0
 	bl sub_80073B8
 	ldr r0, _08010C08
@@ -2389,7 +2389,7 @@ _08010C86:
 	adds r0, r3, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	movs r0, 0
 	bl sub_80073B8
 	str r4, [sp]
@@ -2625,7 +2625,7 @@ _08010E84:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	add sp, 0xC
 	pop {r3-r5}
 	mov r8, r3

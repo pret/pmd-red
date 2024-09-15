@@ -197,7 +197,7 @@ _08071F02:
 	beq _08071EF8
 	movs r2, 0
 	ldrsh r0, [r5, r2]
-	bl sub_80687D0
+	bl GetSpriteData
 	ldr r1, [sp, 0xD0]
 	cmp r0, 0
 	beq _08071EF8
@@ -305,7 +305,7 @@ _08071FE2:
 	.align 2, 0
 _08071FF4: .4byte gFormatData_202DE30
 _08071FF8: .4byte gAvailablePokemonNames
-_08071FFC: .4byte gUnknown_202DE58
+_08071FFC: .4byte gFormatItems
 _08072000: .4byte gUnknown_80FF730
 _08072004: .4byte 0x00000149
 	thumb_func_end sub_8071DA4
@@ -496,7 +496,7 @@ _08072162:
 	.align 2, 0
 _08072174: .4byte gFormatData_202DE30
 _08072178: .4byte gAvailablePokemonNames
-_0807217C: .4byte gUnknown_202DE58
+_0807217C: .4byte gFormatItems
 _08072180: .4byte gUnknown_80FF730
 _08072184: .4byte 0x00000149
 _08072188: .4byte gUnknown_80F9B74
@@ -1439,7 +1439,7 @@ _08072894:
 	b _08072928
 	.align 2, 0
 _080728C8: .4byte gAvailablePokemonNames
-_080728CC: .4byte gUnknown_202DE58
+_080728CC: .4byte gFormatItems
 _080728D0: .4byte gUnknown_80F9F04
 _080728D4:
 	mov r1, r8
@@ -1634,7 +1634,7 @@ _08072A0C:
 	b _08072A8C
 	.align 2, 0
 _08072A44: .4byte gAvailablePokemonNames
-_08072A48: .4byte gUnknown_202DE58
+_08072A48: .4byte gFormatItems
 _08072A4C: .4byte gUnknown_80F9F04
 _08072A50:
 	movs r0, 0

@@ -24,6 +24,6 @@ const u8 *sub_80975DC(u32);
 
 // These two are definitely bool8 but can't get them to match with it yet
 //bool8 sub_8097384(s16);
-//bool8 sub_80973F4(s16);
+//bool8 RescueScenarioConquered(s16);
 
 #endif // GUARD_CODE_80972F4_H

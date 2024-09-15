@@ -107,7 +107,7 @@ _0809CC82:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809CC8C: .4byte gUnknown_202DE58
+_0809CC8C: .4byte gFormatItems
 	thumb_func_end sub_809CBBC
 
 	thumb_func_start sub_809CC90
@@ -209,7 +209,7 @@ _0809CD44: .4byte gUnknown_20399E0
 	thumb_func_start sub_809CD48
 sub_809CD48:
 	push {lr}
-	bl sub_809A750
+	bl IsTextboxOpen_809A750
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809CD58
@@ -505,7 +505,7 @@ _0809CF4E:
 	b _0809CFDA
 _0809CF54:
 	movs r0, 0x2
-	bl sub_809D9B8
+	bl GroundScriptLockJumpZero
 	b _0809CFCC
 _0809CF5C:
 	add r0, sp, 0x4

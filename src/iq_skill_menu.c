@@ -78,7 +78,7 @@ static void sub_801BFCC(void)
 {
     s32 i;
 
-    sub_8006518(sIQSkillMenu->unkC4);
+    RestoreUnkTextStruct_8006518(sIQSkillMenu->unkC4);
 
     if (sIQSkillMenu->state == 2)
         sIQSkillMenu->unkC4[2] = sUnknown_80DBDB0;
@@ -88,7 +88,7 @@ static void sub_801BFCC(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sIQSkillMenu->unkC4, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sIQSkillMenu->unkC4, TRUE, TRUE);
 }
 
 static void HandleIQSkillMenuState(void)

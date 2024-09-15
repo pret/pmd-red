@@ -47,7 +47,7 @@ bool8 CreateHelperPelipperMenu(s16 speciesID)
 
     species_32 = speciesID;
     ResetUnusedInputStruct();
-    sub_800641C(NULL, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
 
     sPostOfficeHelper = MemoryAlloc(sizeof(PostOfficeWork), 8);
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, speciesID);
@@ -137,16 +137,16 @@ static void UpdateHelperPelipperText(void)
         case RETURN_TO_GET_HELP:
             switch (sPostOfficeHelper->currMenuChoice) {
                 case GETTING_HELP:
-                    sub_80141B4(sGettingHelpExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sGettingHelpExplanation, 0, faceFile, 0x10d);
                     break;
                 case SEND_SOS_MAIL:
-                    sub_80141B4(sSendSOSMailExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sSendSOSMailExplanation, 0, faceFile, 0x10d);
                     break;
                 case RECEIVE_AOK_MAIL:
-                    sub_80141B4(sReceiveAOKMailExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sReceiveAOKMailExplanation, 0, faceFile, 0x10d);
                     break;
                 case SEND_THANK_YOU_MAIL:
-                    sub_80141B4(sSendThankYouMailExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sSendThankYouMailExplanation, 0, faceFile, 0x10d);
                     break;
                 default:
                     break;
@@ -158,19 +158,19 @@ static void UpdateHelperPelipperText(void)
         case RETURN_TO_GO_RESCUE:
             switch (sPostOfficeHelper->currMenuChoice) {
                 case RESCUE_PROCEDURES:
-                    sub_80141B4(sRescueProceduresExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sRescueProceduresExplanation, 0, faceFile, 0x10d);
                     break;
                 case RECEIVE_SOS_MAIL:
-                    sub_80141B4(sReceiveSOSMailExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sReceiveSOSMailExplanation, 0, faceFile, 0x10d);
                     break;
                 case SEND_AOK_MAIL:
-                    sub_80141B4(sSendAOKMailExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sSendAOKMailExplanation, 0, faceFile, 0x10d);
                     break;
                 case LEAVE_FOR_RESCUE:
-                    sub_80141B4(sLeaveForRescueExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sLeaveForRescueExplanation, 0, faceFile, 0x10d);
                     break;
                 case GET_THANK_YOU_MAIL:
-                    sub_80141B4(sGetThankYouMailExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sGetThankYouMailExplanation, 0, faceFile, 0x10d);
                     break;
                 default:
                     break;
@@ -185,13 +185,13 @@ static void UpdateHelperPelipperText(void)
         case RETURN_TO_START_MENU:
             switch (sPostOfficeHelper->currMenuChoice) {
                 case POST_OFFICE:
-                    sub_80141B4(sPostOfficeExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sPostOfficeExplanation, 0, faceFile, 0x10d);
                     break;
                 case BULLETIN_BOARD:
-                    sub_80141B4(sBulletinBoardExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sBulletinBoardExplanation, 0, faceFile, 0x10d);
                     break;
                 case DELIVERY:
-                    sub_80141B4(sDeliveryExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sDeliveryExplanation, 0, faceFile, 0x10d);
                     break;
                 default:
                     break;
@@ -203,10 +203,10 @@ static void UpdateHelperPelipperText(void)
         case RETURN_TO_FRIEND_RESCUE:
             switch (sPostOfficeHelper->currMenuChoice) {
                 case FRIEND_RESCUE_INFO:
-                    sub_80141B4(sFriendRescueExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sFriendRescueExplanation, 0, faceFile, 0x10d);
                     break;
                 case DELETING_MAIL:
-                    sub_80141B4(sDeletingMailExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sDeletingMailExplanation, 0, faceFile, 0x10d);
                     break;
                 default:
                     break;

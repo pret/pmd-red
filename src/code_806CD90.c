@@ -69,9 +69,9 @@ void sub_806CCB4(Entity *entity, u8 a1)
     sVar1 = entity->unk68;
 
     if (info->waitingStruct.waitingStatus != STATUS_DECOY && !flag)
-        sub_80053AC(&entity->spriteInfo, entity->sprite, entity->unk6A, entity->direction, sVar1, Rand32Bit() & 3, FALSE);
+        AxResInitFile_80053AC(&entity->spriteInfo, entity->sprite, entity->unk6A, entity->direction, sVar1, Rand32Bit() & 3, FALSE);
     else
-        sub_80053AC(&entity->spriteInfo, sub_80687D0(MONSTER_DECOY), entity->unk6A, entity->direction, sVar1, Rand32Bit() & 3, FALSE);
+        AxResInitFile_80053AC(&entity->spriteInfo, GetSpriteData(MONSTER_DECOY), entity->unk6A, entity->direction, sVar1, Rand32Bit() & 3, FALSE);
 
     entity->unk6E = 0;
 }

@@ -45,7 +45,7 @@ bool8 sub_8023144(s32 a0, s32 index, UnkTextStruct2_sub *sub, u32 a3)
 
     gUnknown_3001B5C->s35C.s0.unk34 = index;
     gUnknown_3001B5C->s35C.s0.unk38 = &gUnknown_3001B5C->s35C.s0.unk3C[index];
-    sub_8006518(gUnknown_3001B5C->s35C.s0.unk3C);
+    RestoreUnkTextStruct_8006518(gUnknown_3001B5C->s35C.s0.unk3C);
     gUnknown_3001B5C->s35C.s0.unk3C[gUnknown_3001B5C->s35C.s0.unk34] = sUnknown_80DC91C;
 
     gUnknown_3001B5C->s35C.s0.unk38->unk14 = &gUnknown_3001B5C->s35C.unk9C;
@@ -55,7 +55,7 @@ bool8 sub_8023144(s32 a0, s32 index, UnkTextStruct2_sub *sub, u32 a3)
 
     sub_8012D08(gUnknown_3001B5C->s35C.s0.unk38, a3);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_3001B5C->s35C.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_3001B5C->s35C.s0.unk3C, TRUE, TRUE);
     sub_8013818(&gUnknown_3001B5C->s35C.s0.input, sub_80236A4(), a3, index);
     gUnknown_3001B5C->s35C.s0.input.menuIndex = gUnknown_203B29C;
     gUnknown_3001B5C->s35C.s0.input.unk1E = gUnknown_203B29E;
@@ -109,7 +109,7 @@ s16 sub_802331C(void)
 void sub_8023354(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_3001B5C->s35C.s0.unk3C, FALSE, FALSE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_3001B5C->s35C.s0.unk3C, FALSE, FALSE);
     sub_8013984(&gUnknown_3001B5C->s35C.s0.input);
     sub_8023420();
     sub_80234BC();
@@ -126,7 +126,7 @@ void sub_80233A0(void)
         gUnknown_203B29E = gUnknown_3001B5C->s35C.s0.input.unk1E;
         gUnknown_3001B5C->s35C.s0.unk3C[gUnknown_3001B5C->s35C.s0.unk34] = sUnknown_80DC904;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_3001B5C->s35C.s0.unk3C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(gUnknown_3001B5C->s35C.s0.unk3C, TRUE, TRUE);
         MemoryFree(gUnknown_3001B5C);
         gUnknown_3001B5C = NULL;
     }
@@ -155,7 +155,7 @@ static void sub_80234BC(void)
     u8 buffer1[100];
     unkStruct_8092638 auStack_2c;
 
-    sub_8008C54(gUnknown_3001B5C->s35C.s0.unk34);
+    CallPrepareTextbox_8008C54(gUnknown_3001B5C->s35C.s0.unk34);
     sub_80073B8(gUnknown_3001B5C->s35C.s0.unk34);
     PrintStringOnWindow(10, 0, sPokemon, gUnknown_3001B5C->s35C.s0.unk34, 0);
 

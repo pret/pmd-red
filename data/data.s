@@ -5,8 +5,8 @@
 .string "pksdir0\0"
 
 	.align 2, 0
-	.global gUnknown_80B6D30
-gUnknown_80B6D30:
+	.global gLocalScriptVarInfo
+gLocalScriptVarInfo:
     .2byte 5, 7, 0, 0, 1, 0; .4byte gUnknown_80B6D88
     .2byte 5, 7, 2, 0, 1, 0; .4byte gUnknown_80B6D80
     .2byte 5, 7, 4, 0, 1, 0; .4byte gUnknown_80B6D78
@@ -587,8 +587,8 @@ gUnknown_80B7388: @ 80B7388
 @ code.c
 .string "pksdir0\0"
 
-	.global gUnknown_80B7394
-gUnknown_80B7394: @ 80B7394
+	.global gScriptVarInfo
+gScriptVarInfo: @ 80B7394
     .2byte 6, 2, 0, 0, 1, 29; .4byte gUnknown_80B7DF8
     .2byte 6, 2, 4, 0, 1, 0; .4byte gUnknown_80B7DEC
     .2byte 2, 2, 110, 0, 2, 0; .4byte gUnknown_80B7DDC
@@ -1010,8 +1010,8 @@ gUnknown_80B7DF8:
 .string "pksdir0\0"
     .fill 8, 1, 0
 
-	.global gUnknown_80B7E3C
-gUnknown_80B7E3C: @ 80B7E3C
+	.global gVectorDirections
+gVectorDirections: @ 80B7E3C
     .4byte 0, 1, 1, 1, 1, 0, 1, -1, 0, -1, -1, -1, -1, 0, -1, 1
 
 @ ???
@@ -1787,8 +1787,8 @@ gUnknown_80B857C: @ 80B857C
     .4byte 0, 3, 0, 0, 0, 0
     .4byte 0, 3, 0, 0, 0, 0
 
-	.global gUnknown_80B85DC
-gUnknown_80B85DC: @ 80B85DC
+	.global gCharMasksOffsets
+gCharMasksOffsets: @ 80B85DC
     @ Type: unkShiftData[8]
     .4byte 0xFFFFFFFF, 0x00000000, 0x00, 0x20
     .4byte 0x0FFFFFFF, 0xF0000000, 0x04, 0x1C
@@ -1834,8 +1834,8 @@ gKanjiB_file_string: @ 80B87BC
         .string "kanji_b\0"
         .align 2,0
 
-	.global gUnknown_80B87C4
-gUnknown_80B87C4: @ 80B87C4
+	.global gFadeInNone
+gFadeInNone: @ 80B87C4
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
@@ -1845,8 +1845,8 @@ gUnknown_80B87C4: @ 80B87C4
         .byte 0x00, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
-	.global gUnknown_80B87E4
-gUnknown_80B87E4: @ 80B87E4
+	.global gFadeInDungeon
+gFadeInDungeon: @ 80B87E4
         .byte 0x88, 0x88, 0x88, 0x88
         .byte 0x88, 0x88, 0x88, 0x88
         .byte 0x88, 0x88, 0x88, 0x88

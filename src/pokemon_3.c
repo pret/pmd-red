@@ -33,7 +33,7 @@ struct unkStruct_808E9EC
 };
 extern s32 gUnknown_81076C4[6]; // x-coord positioning for shadow sprites
 
-extern SpriteOAM gUnknown_202F3E8[3]; // Shadow sprites of some kind
+extern SpriteOAM gShadowSprites[3]; // Shadow sprites of some kind
 extern s16 gUnknown_810AC60; // 0xC
 extern s16 gUnknown_810AC62; // 0xC
 extern s16 gUnknown_810AC68; // 0x8
@@ -58,7 +58,7 @@ s16 GetPokemonEvolveConditions(s16 index, unkEvolve *r1);
 
 u32 sub_808F798(PokemonStruct1 *, s16);
 
-bool8 sub_808E668(s16 species, s16* a2, s16* a3)
+bool8 AddShadowSprite(s16 species, s16* a2, s16* a3)
 {
     if (species != MONSTER_DIGLETT && species != MONSTER_DUGTRIO) {
         u8 shadowSize = GetShadowSize(species);
@@ -71,7 +71,7 @@ bool8 sub_808E668(s16 species, s16* a2, s16* a3)
         unk6 -= 4;
         x &= SPRITEOAM_MAX_X;
 
-        spr = &gUnknown_202F3E8[shadowSize];
+        spr = &gShadowSprites[shadowSize];
         spr->attrib2 &= ~SPRITEOAM_MASK_X;
         spr->attrib2 |= x;
         unk6 &= SPRITEOAM_MAX_UNK6_4;

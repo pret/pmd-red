@@ -32,7 +32,7 @@ u8 ReadSavePak(void)
         case 2:
             if (gSavePakRead->readStatus != READ_SAVE_VALID) {
                 if (IsSaveCorrupted()) {
-                    sub_80141B4(sSaveCorrupted, 0, 0, 0x301);
+                    xxx_info_box_80141B4(sSaveCorrupted, 0, 0, 0x301);
                     gSavePakRead->state = 3;
                 }
                 else

@@ -13,7 +13,7 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
@@ -37,7 +37,7 @@ bool8 sub_802DB28(u8 jobSlotIndex, u8 dungeon)
         return FALSE;
 
     ResetUnusedInputStruct();
-    sub_800641C(NULL, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
 
     sUnknown_203B2FC = MemoryAlloc(sizeof(struct unkStruct_203B2FC), 8);
     sUnknown_203B2FC->jobSlotIndex = jobSlotIndex;
@@ -97,7 +97,7 @@ static void sub_802DC40(void)
 {
     s32 i;
 
-    sub_8006518(sUnknown_203B2FC->unk48);
+    RestoreUnkTextStruct_8006518(sUnknown_203B2FC->unk48);
 
     switch (sUnknown_203B2FC->state) {
         case 0:
@@ -108,7 +108,7 @@ static void sub_802DC40(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B2FC->unk48, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B2FC->unk48, TRUE, TRUE);
 }
 
 static void sub_802DC9C(void)
@@ -125,7 +125,7 @@ static void sub_802DC9C(void)
             speciesText = GetMonSpecies(sUnknown_203B2FC->jobInfo->targetSpecies);
             strcpy(gUnknown_202E1C8 - 480, speciesText);
             UnlockExclusivePokemon(sUnknown_203B2FC->jobInfo->clientSpecies);
-            BufferItemName(gUnknown_202DE58, sUnknown_203B2FC->jobInfo->targetItem, NULL);
+            BufferItemName(gFormatItems, sUnknown_203B2FC->jobInfo->targetItem, NULL);
             sUnknown_203B2FC->fallbackState = 6;
 
             switch (sUnknown_203B2FC->jobInfo->missionType) {
@@ -150,16 +150,16 @@ static void sub_802DC9C(void)
             }
             break;
         case 1:
-            sub_80141B4(sThanksForRescuingMe, 0, &sUnknown_203B2FC->faceFile, 0x10D);
+            xxx_info_box_80141B4(sThanksForRescuingMe, 0, &sUnknown_203B2FC->faceFile, 0x10D);
             break;
         case 2:
-            sub_80141B4(sThanksForRescuingThem, 0, &sUnknown_203B2FC->faceFile, 0x10D);
+            xxx_info_box_80141B4(sThanksForRescuingThem, 0, &sUnknown_203B2FC->faceFile, 0x10D);
             break;
         case 3:
-            sub_80141B4(sThanksForEscortingMe, 0, &sUnknown_203B2FC->faceFile, 0x10D);
+            xxx_info_box_80141B4(sThanksForEscortingMe, 0, &sUnknown_203B2FC->faceFile, 0x10D);
             break;
         case 5:
-            sub_80141B4(sThanksForDelivering, 0, &sUnknown_203B2FC->faceFile, 0x10D);
+            xxx_info_box_80141B4(sThanksForDelivering, 0, &sUnknown_203B2FC->faceFile, 0x10D);
             break;
         case 4:
             index = FindItemInInventory(sUnknown_203B2FC->jobInfo->targetItem);
@@ -167,7 +167,7 @@ static void sub_802DC9C(void)
                 ShiftItemsDownFrom(index);
                 FillInventoryGaps();
             }
-            sub_80141B4(sThanksForGetting, 0, &sUnknown_203B2FC->faceFile, 0x10D);
+            xxx_info_box_80141B4(sThanksForGetting, 0, &sUnknown_203B2FC->faceFile, 0x10D);
             break;
         case 6:
             sub_802F204(&sUnknown_203B2FC->unk8, 1);

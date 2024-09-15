@@ -85,7 +85,7 @@ _08080848:
 	bl sub_80522F4
 	b _08080870
 	.align 2, 0
-_0808085C: .4byte gUnknown_202DE58
+_0808085C: .4byte gFormatItems
 _08080860: .4byte gUnknown_80FDB04
 _08080864:
 	ldr r0, _08080880

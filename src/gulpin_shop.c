@@ -114,7 +114,7 @@ static void sub_801E980(void)
 {
     s32 index;
 
-    sub_8006518(sGulpinShopWork->unk12C);
+    RestoreUnkTextStruct_8006518(sGulpinShopWork->unk12C);
 
     switch (sGulpinShopWork->state) {
         case 2:
@@ -131,7 +131,7 @@ static void sub_801E980(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sGulpinShopWork->unk12C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sGulpinShopWork->unk12C, TRUE, TRUE);
 }
 
 static void sub_801EA28(void)

@@ -16,7 +16,7 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 extern u8 gUnknown_202DEA8[];
 extern u8 gAvailablePokemonNames[]; // 202DF98
 
@@ -25,8 +25,8 @@ static EWRAM_DATA_2 unkStruct_203B234 *sUnknown_203B234 = {0};
 #include "data/code_801B60C.h" // 80DBA58
 
 // event_flag.s
-extern u32 sub_8001784(u32, u32, u16);
-extern void sub_800199C(u32, u32, u32, u32);
+extern u32 GetScriptVarArrayValue(u32, u32, u16);
+extern void SetScriptVarArrayValue(u32, u32, u32, u32);
 
 static void sub_801B748(u32);
 static void sub_801B760(void);
@@ -63,7 +63,7 @@ bool8 sub_801B60C(u32 r0, u8 id, u8 quantity)
     sUnknown_203B234->unk14.unk4 = 0;
     sUnknown_203B234->unk14.unk8 = 1;
     PrintColoredPokeNameToBuffer(gAvailablePokemonNames, GetPlayerPokemonStruct(), COLOR_YELLOW);
-    sub_8090E14(gUnknown_202DE58, &sUnknown_203B234->unk10, &sUnknown_203B234->unk14);
+    sub_8090E14(gFormatItems, &sUnknown_203B234->unk10, &sUnknown_203B234->unk14);
     sub_801B748(0);
     return TRUE;
 }
@@ -132,26 +132,26 @@ static void sub_801B760(void)
        case 13:
        case 14:
        case 15:
-            sub_8006518(sUnknown_203B234->unkF4);
+            RestoreUnkTextStruct_8006518(sUnknown_203B234->unkF4);
             for (i = 0; i < 4; i++)
                 sUnknown_203B234->unkF4[i] = sUnknown_80DBA58;
 
             ResetUnusedInputStruct();
-            sub_800641C(sUnknown_203B234->unkF4, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(sUnknown_203B234->unkF4, TRUE, TRUE);
             break;
         case 10:
-            sub_8006518(sUnknown_203B234->unkF4);
+            RestoreUnkTextStruct_8006518(sUnknown_203B234->unkF4);
             sub_801BB5C();
             sUnknown_203B234->unkF4[2] = sUnknown_80DBA70;
             sub_8012CAC(&sUnknown_203B234->unkF4[2], sUnknown_203B234->unkCC);
             ResetUnusedInputStruct();
-            sub_800641C(sUnknown_203B234->unkF4, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(sUnknown_203B234->unkF4, TRUE, TRUE);
             break;
         case 12:
-            sub_8006518(sUnknown_203B234->unkF4);
+            RestoreUnkTextStruct_8006518(sUnknown_203B234->unkF4);
             sUnknown_203B234->unkF4[1] = sUnknown_80DBA88;
             ResetUnusedInputStruct();
-            sub_800641C(sUnknown_203B234->unkF4, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(sUnknown_203B234->unkF4, TRUE, TRUE);
             break;
     }
 }
@@ -163,24 +163,24 @@ static void sub_801B874(void)
             if (sUnknown_203B234->unk10.id == ITEM_WEAVILE_FIG) {
                 sUnknown_203B234->fallbackState = 16;
 
-                if (sub_8001784(0, 71, 1)) {
+                if (GetScriptVarArrayValue(0, 71, 1)) {
                     AddToTeamMoney(1000);
                     sub_801B748(4);
                 }
                 else {
-                    sub_800199C(0, 71, 1, 1);
+                    SetScriptVarArrayValue(0, 71, 1, 1);
                     sub_801B748(3);
                 }
             }
             else if (sUnknown_203B234->unk10.id == ITEM_MIME_JR_FIG) {
                 sUnknown_203B234->fallbackState = 16;
 
-                if (sub_8001784(0, 71, 0)) {
+                if (GetScriptVarArrayValue(0, 71, 0)) {
                     AddToTeamMoney(1000);
                     sub_801B748(4);
                 }
                 else {
-                    sub_800199C(0, 71, 0, 1);
+                    SetScriptVarArrayValue(0, 71, 0, 1);
                     sub_801B748(3);
                 }
             }
@@ -214,24 +214,24 @@ store:
             }
             break;
         case 1:
-            if (sub_808D544(0) < 2)
-                sub_80141B4(sFmtReceivedThePromised, 0, 0, 0x101);
+            if (GetUnitSum_808D544(0) < 2)
+                xxx_info_box_80141B4(sFmtReceivedThePromised, 0, 0, 0x101);
             else
-                sub_80141B4(sFmtTeamReceivedThePromised, 0, 0, 0x101);
+                xxx_info_box_80141B4(sFmtTeamReceivedThePromised, 0, 0, 0x101);
             break;
         case 2:
-            sub_80141B4(sFmtTeamAlsoReceived, 0, 0, 0x101);
+            xxx_info_box_80141B4(sFmtTeamAlsoReceived, 0, 0, 0x101);
             break;
         case 3:
             PlaySound(212);
-            sub_80141B4(sFmtReceivedStatue, 0, 0, 0x101);
+            xxx_info_box_80141B4(sFmtReceivedStatue, 0, 0, 0x101);
             break;
         case 4:
-            sub_80141B4(sFmtReceive1000Instead, 0, 0, 0x101);
+            xxx_info_box_80141B4(sFmtReceive1000Instead, 0, 0, 0x101);
             break;
         case 5:
             sUnknown_203B234->fallbackState = 16;
-            sub_80141B4(sFmtFullSoSentToStorage, 0, 0, 0x101);
+            xxx_info_box_80141B4(sFmtFullSoSentToStorage, 0, 0, 0x101);
             break;
         case 6:
             sub_801BB20();
@@ -262,15 +262,15 @@ store:
             break;
         case 13:
             sUnknown_203B234->fallbackState = 16;
-            sub_80141B4(sFmtThrownAway, 0, 0, 0x101);
+            xxx_info_box_80141B4(sFmtThrownAway, 0, 0, 0x101);
             break;
         case 14:
             sUnknown_203B234->fallbackState = 16;
-            sub_80141B4(sFmtPutInStorageForReceive, 0, 0, 0x101);
+            xxx_info_box_80141B4(sFmtPutInStorageForReceive, 0, 0, 0x101);
             break;
         case 15:
             sUnknown_203B234->fallbackState = 16;
-            sub_80141B4(sFmtDiscardedForReceive, 0, 0, 0x101);
+            xxx_info_box_80141B4(sFmtDiscardedForReceive, 0, 0, 0x101);
             break;
         case 16:
             break;

@@ -33,7 +33,7 @@ bool8 CreateWigglytuffShopFriendAreaMenu(u8 friendArea, bool8 a1, s32 a2)
     sub_8021A60();
     sWigglytuffShop2Work->unk74 = a2;
     sWigglytuffShop2Work->unk78 = &sWigglytuffShop2Work->unk7C[a2];
-    sub_8006518(sWigglytuffShop2Work->unk7C);
+    RestoreUnkTextStruct_8006518(sWigglytuffShop2Work->unk7C);
     sWigglytuffShop2Work->unk7C[sWigglytuffShop2Work->unk74] = sUnknown_80DC4D8;
     sub_8021820();
     return TRUE;
@@ -64,7 +64,7 @@ void CleanWigglytuffShopFriendAreaInfoMenu(void)
     if (sWigglytuffShop2Work) {
         sWigglytuffShop2Work->unk7C[sWigglytuffShop2Work->unk74] = sUnknown_80DC4BC;
         ResetUnusedInputStruct();
-        sub_800641C(sWigglytuffShop2Work->unk7C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(sWigglytuffShop2Work->unk7C, TRUE, TRUE);
         MemoryFree(sWigglytuffShop2Work);
         sWigglytuffShop2Work = NULL;
     }
@@ -73,7 +73,7 @@ void CleanWigglytuffShopFriendAreaInfoMenu(void)
 static void sub_8021878(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(sWigglytuffShop2Work->unk7C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sWigglytuffShop2Work->unk7C, TRUE, TRUE);
 }
 
 static void PopulateWigglytuffShopFriendAreaInfoScreen(void)
@@ -86,7 +86,7 @@ static void PopulateWigglytuffShopFriendAreaInfoScreen(void)
     u8 buffer2[100];
 
     sub_80073B8(sWigglytuffShop2Work->unk74);
-    sub_8092578(buffer1, sWigglytuffShop2Work->friendArea, FALSE);
+    WriteFriendAreaName(buffer1, sWigglytuffShop2Work->friendArea, FALSE);
     PrintStringOnWindow(20, 0, buffer1, sWigglytuffShop2Work->unk74, 0);
 
     string = GetFriendAreaDescription(sWigglytuffShop2Work->friendArea);

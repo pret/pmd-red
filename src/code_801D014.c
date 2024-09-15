@@ -64,7 +64,7 @@ bool8 sub_801D014(PokemonStruct1 *a0)
     struct unk_203B250 *preload;
 
     ResetUnusedInputStruct();
-    sub_800641C(NULL, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
 
     sUnknown_203B250 = MemoryAlloc(sizeof(struct unk_203B250), 8);
     sUnknown_203B250->menuAction = sUnknown_203B254;
@@ -191,7 +191,7 @@ static void sub_801D220(void)
 {
     s32 i;
 
-    sub_8006518(sUnknown_203B250->unkB8);
+    RestoreUnkTextStruct_8006518(sUnknown_203B250->unkB8);
 
     switch (sUnknown_203B250->state) {
         case 0:
@@ -239,7 +239,7 @@ static void sub_801D220(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B250->unkB8, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B250->unkB8, TRUE, TRUE);
 }
 
 static void sub_801D3A8(void)
@@ -584,11 +584,11 @@ static void sub_801D894(void)
     xxx_format_string(location, buffer, (u8 *)(&preload_string + 1), 0);
     location_length = sub_8008ED0(buffer);
     x_coord = (128 - location_length) / 2; // Centers the location name
-    sub_8008C54(1);
+    CallPrepareTextbox_8008C54(1);
     sub_80073B8(1);
     PrintStringOnWindow(x_coord, 4, buffer, 1, 0);
     sub_80073E0(1);
-    sub_8008C54(2);
+    CallPrepareTextbox_8008C54(2);
     sub_80073B8(2);
     LoadTeamRankBadge(2, 8, 6);
 

@@ -148,7 +148,7 @@ void SetPelipperBoardState(u32 newState)
 void sub_802E94C(void)
 {
     s32 index;
-    sub_8006518(gPelipperBoard->unk10C);
+    RestoreUnkTextStruct_8006518(gPelipperBoard->unk10C);
     switch(gPelipperBoard->state)
     {
         case MAIN_PELIPPER_BOARD_MENU:
@@ -175,7 +175,7 @@ void sub_802E94C(void)
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(gPelipperBoard->unk10C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gPelipperBoard->unk10C, TRUE, TRUE);
 }
 
 void sub_802EA58(void)
@@ -435,7 +435,7 @@ void nullsub_134(void)
 
 void CreatePelipperAcceptedStatusBox(u32 r0)
 {
-    sub_8008C54(r0);
+    CallPrepareTextbox_8008C54(r0);
     sub_80073B8(r0);
     PrintStringOnWindow(3, 0, gPelipperBoard_Accepted, r0, 0);
     sub_8012BC4(0x12, 0xD, GetNumAcceptedJobs(), 2, 7, r0);

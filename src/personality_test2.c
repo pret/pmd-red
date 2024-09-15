@@ -47,7 +47,7 @@ void CreatePartnerSelectionMenu(s16 starterID)
     gUnknown_203B404->s18.unk9C.f2 = 6;
     gUnknown_203B404->s18.unk9C.f3 = 0;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B404->s18.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B404->s18.s0.unk3C, TRUE, TRUE);
     sub_8013818(&gUnknown_203B404->s18.s0.input, GetValidPartners(), 10, gUnknown_203B404->s18.s0.unk34);
     RedrawPartnerSelectionMenu();
     PersonalityTest_DisplayPartnerSprite();
@@ -92,7 +92,7 @@ void sub_803CE6C(void)
 {
     gUnknown_203B404->s18.s0.unk3C[gUnknown_203B404->s18.s0.unk34] = gUnknown_80F4278;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B404->s18.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B404->s18.s0.unk3C, TRUE, TRUE);
     sub_803CECC();
 }
 
@@ -125,7 +125,7 @@ static void RedrawPartnerSelectionMenu(void)
 
     SUB_80095E4_CALL(gUnknown_203B404->s18.s0);
 
-    sub_8008C54(gUnknown_203B404->s18.s0.unk34);
+    CallPrepareTextbox_8008C54(gUnknown_203B404->s18.s0.unk34);
     sub_80073B8(gUnknown_203B404->s18.s0.unk34);
     PrintStringOnWindow(12, 0, gPartnerSelectionHeaderText, gUnknown_203B404->s18.s0.unk34, 0);
 
@@ -177,10 +177,10 @@ static void RedrawPartnerSelectionMenu(void)
     "\tadds r0, 0x54\n"
     "\tmovs r1, 0x1\n"
     "\tmovs r2, 0x1\n"
-    "\tbl sub_800641C\n"
+    "\tbl xxx_call_save_unk_text_struct_800641C\n"
     "\tldr r0, [r6]\n"
     "\tldr r0, [r0, 0x4C]\n"
-    "\tbl sub_8008C54\n"
+    "\tbl CallPrepareTextbox_8008C54\n"
     "\tldr r0, [r6]\n"
     "\tldr r0, [r0, 0x4C]\n"
     "\tbl sub_80073B8\n"
@@ -249,7 +249,7 @@ static void PersonalityTest_DisplayPartnerSprite(void)
     u32 faceIndex;
 
     partnerID = gUnknown_203B404->PartnerArray[gUnknown_203B404->s18.s0.input.menuIndex];
-    sub_8008C54(1);
+    CallPrepareTextbox_8008C54(1);
     sub_80073B8(1);
     faceFile = GetDialogueSpriteDataPtr(partnerID);
     r6 = ((struct FaceData *)faceFile->data)->unk0[1 + EMOTION_NORMAL];

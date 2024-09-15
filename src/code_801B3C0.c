@@ -31,7 +31,7 @@ bool8 sub_801B3C0(Item *item)
     sUnknown_203B230->unk24 = 0;
     sub_80140B4(sUnknown_203B230->unk28);
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B230->unk28, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B230->unk28, TRUE, TRUE);
     sub_801B46C(0);
     return TRUE;
 }
@@ -75,12 +75,12 @@ static void sub_801B480(void)
 
     switch (sUnknown_203B230->state) {
         case 0:
-            sub_8008C54(sUnknown_203B230->unk24);
+            CallPrepareTextbox_8008C54(sUnknown_203B230->unk24);
             sUnknown_203B230->unkC = sub_80913E0(&sUnknown_203B230->item, sUnknown_203B230->unk24, sUnknown_203B230->unk10);
             sUnknown_203B230->unk20 = 0;
             break;
         case 1:
-            sub_8008C54(sUnknown_203B230->unk24);
+            CallPrepareTextbox_8008C54(sUnknown_203B230->unk24);
             sub_80073B8(sUnknown_203B230->unk24);
             preload = sUnknown_203B230->unk10[sUnknown_203B230->unk8];
             strcpy(gAvailablePokemonNames, preload->pokeName);

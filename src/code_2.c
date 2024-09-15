@@ -34,7 +34,7 @@
 extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);
 extern void sub_800DAAC(void);
-extern void sub_800135C(void);
+extern void ThouroughlyResetScriptVars(void);
 extern void xxx_script_related_8001334(u32);
 extern void LoadTitleScreen(void);
 extern void sub_80095CC(u32, u32);
@@ -84,22 +84,22 @@ void GameLoop(void)
     SetSavingIconCoords(NULL);
     tmp = 0;
     if (ReadSaveFromPak(&tmp))
-        sub_800135C();
+        ThouroughlyResetScriptVars();
     xxx_script_related_8001334(14);
     xxx_script_related_8001334(15);
-    sub_80015C0(0, 57);
+    ClearScriptVarArray(0, 57);
     xxx_script_related_8001334(16);
-    if (sub_8001658(0, 57) == 0)
+    if (GetScriptVarValue(0, 57) == 0)
         xxx_script_related_8001334(17);
 
     while (1) {
         gUnknown_203B03C = 0; // ???
         sub_800A8F8(2);
         ResetSprites(TRUE);
-        xxx_update_some_bg_tiles(0);
+        UpdateFadeInTile(0);
         InitFontPalette();
         sub_800CDA8(2);
-        sub_800641C(NULL, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
         gUnknown_2026E4E = 0x1000;
         LoadTitleScreen();
         SetBG2RegOffsets(0, 0);

@@ -23,7 +23,7 @@
 #include "structs/str_dungeon.h"
 
 extern u8 gAvailablePokemonNames[];
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 
 extern u8 *gUnknown_80FBD78[];
 extern u8 *gUnknown_80FBD9C[];
@@ -233,10 +233,10 @@ void ChangeAttackMultiplierTarget(Entity *pokemon, Entity *target, u32 statStage
   }
 
   if (statStage != STAT_STAGE_ATK) {
-    strcpy(gUnknown_202DE58,*gUnknown_80FC0C8);
+    strcpy(gFormatItems,*gUnknown_80FC0C8);
   }
   else {
-    strcpy(gUnknown_202DE58,*gUnknown_80FC0B8);
+    strcpy(gFormatItems,*gUnknown_80FC0B8);
   }
   if ((param_4 < 0x100) && sub_8071728(pokemon,target,displayMessage)) {
     return;
@@ -298,10 +298,10 @@ void ChangeDefenseMultiplierTarget(Entity *pokemon, Entity *target, u32 statStag
   }
 
   if (statStage != STAT_STAGE_DEF) {
-    strcpy(gUnknown_202DE58,*gUnknown_80FC0AC);
+    strcpy(gFormatItems,*gUnknown_80FC0AC);
   }
   else {
-    strcpy(gUnknown_202DE58,*gUnknown_80FC09C);
+    strcpy(gFormatItems,*gUnknown_80FC09C);
   }
   if ((param_4 < 0x100) && sub_8071728(pokemon,target,displayMessage)) {
     return;
@@ -348,10 +348,10 @@ void RaiseAccuracyStageTarget(Entity * pokemon, Entity * target, s32 statStage)
     SetMessageArgument(gAvailablePokemonNames,target,0);
     sub_8042040(target,statStage);
     if (statStage != STAT_STAGE_ACCURACY) {
-        strcpy(gUnknown_202DE58,*gUnknown_80FC090);
+        strcpy(gFormatItems,*gUnknown_80FC090);
     }
     else {
-        strcpy(gUnknown_202DE58,*gUnknown_80FC084);
+        strcpy(gFormatItems,*gUnknown_80FC084);
     }
     if (entityInfo->hitChanceStages[statStage] < MAX_STAT_STAGE) {
       entityInfo->hitChanceStages[statStage]++;
@@ -370,10 +370,10 @@ void LowerAccuracyStageTarget(Entity * pokemon, Entity * target, s32 statStage, 
 
   if (EntityExists(target)) {
     if (statStage != STAT_STAGE_ACCURACY) {
-        strcpy(gUnknown_202DE58,*gUnknown_80FC090);
+        strcpy(gFormatItems,*gUnknown_80FC090);
     }
     else {
-        strcpy(gUnknown_202DE58,*gUnknown_80FC084);
+        strcpy(gFormatItems,*gUnknown_80FC084);
     }
     if (!sub_8071728(pokemon,target,displayMessage)) {
       if (HasAbility(target, ABILITY_KEEN_EYE) && (statStage == STAT_STAGE_ACCURACY)){

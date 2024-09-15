@@ -36,7 +36,7 @@ static bool8 sub_803ABC8(void);
 UNUSED static bool8 sub_803A888(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(NULL, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
     sUnknown_203B3F4 = MemoryAlloc(sizeof(unkStruct_203B3F4), 8);
     sub_803A924(0);
     return TRUE;
@@ -80,7 +80,7 @@ static void sub_803A93C(void)
 {
     s32 i;
 
-    sub_8006518(sUnknown_203B3F4->unk9C);
+    RestoreUnkTextStruct_8006518(sUnknown_203B3F4->unk9C);
 
     if (sUnknown_203B3F4->state == 2)
         sUnknown_203B3F4->unk9C[2] = sUnknown_80E7EA4;
@@ -90,7 +90,7 @@ static void sub_803A93C(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B3F4->unk9C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B3F4->unk9C, TRUE, TRUE);
 }
 
 static void sub_803A9AC(void)

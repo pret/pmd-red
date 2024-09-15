@@ -89,7 +89,7 @@ u32 sub_80306A8(u32 wonderMailType, u32 r1, UnkTextStruct2_sub *r2, u32 r3)
     gUnknown_203B320->s28.s0.unk34 = r1;
 
     gUnknown_203B320->s28.s0.unk38 = &gUnknown_203B320->s28.s0.unk3C[gUnknown_203B320->s28.s0.unk34];
-    sub_8006518(gUnknown_203B320->s28.s0.unk3C);
+    RestoreUnkTextStruct_8006518(gUnknown_203B320->s28.s0.unk3C);
 
     gUnknown_203B320->s28.s0.unk3C[gUnknown_203B320->s28.s0.unk34] = gUnknown_80E0854;
     gUnknown_203B320->s28.s0.unk38->unk14 = &gUnknown_203B320->s28.unk9C;
@@ -99,7 +99,7 @@ u32 sub_80306A8(u32 wonderMailType, u32 r1, UnkTextStruct2_sub *r2, u32 r3)
 
     sub_8012D08(gUnknown_203B320->s28.s0.unk38, r3);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B320->s28.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B320->s28.s0.unk3C, TRUE, TRUE);
     sub_8013818(&gUnknown_203B320->s28.s0.input, sub_8030A74(), r3, r1);
     sub_80308A0();
     sub_803092C();
@@ -158,7 +158,7 @@ void sub_803084C()
     {
         gUnknown_203B320->s28.s0.unk3C[gUnknown_203B320->s28.s0.unk34] = gUnknown_80E083C;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B320->s28.s0.unk3C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(gUnknown_203B320->s28.s0.unk3C, TRUE, TRUE);
         MemoryFree(gUnknown_203B320);
         gUnknown_203B320 = NULL;
     }
@@ -176,7 +176,7 @@ void sub_80308A0(void)
     gUnknown_203B320->s28.unk9C.f2 = 12;
     gUnknown_203B320->s28.unk9C.f3 = 0;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B320->s28.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B320->s28.s0.unk3C, TRUE, TRUE);
 
     SUB_80095E4_CALL(gUnknown_203B320->s28.s0);
 }
@@ -189,7 +189,7 @@ void sub_803092C(void)
   s32 index;
   unkStruct_802C39C local;
 
-  sub_8008C54(gUnknown_203B320->s28.s0.unk34);
+  CallPrepareTextbox_8008C54(gUnknown_203B320->s28.s0.unk34);
   sub_80073B8(gUnknown_203B320->s28.s0.unk34);
   r4 = gUnknown_203B320->s28.s0.input.unk1E * 8;
   r5 = r4;

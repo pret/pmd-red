@@ -13,27 +13,27 @@ struct unkStruct_203B4B8
     u32 unk0;
 };
 
-EWRAM_DATA_2 struct unkStruct_203B4B8 gUnknown_203B4B8 = {0};
+EWRAM_DATA_2 struct unkStruct_203B4B8 gCurrentGroundLink = {0};
 extern DebugLocation gUnknown_8118798;
-extern struct unkStruct_80A77D0 *sub_80A77D0(s16 r0, DebugLocation *r1);
+extern struct unkStruct_80A77D0 *GetGroundScript(s16 r0, DebugLocation *r1);
 
 void sub_80AD868(void)
 {
-    gUnknown_203B4B8.unk0 = 0;
+    gCurrentGroundLink.unk0 = 0;
 }
 
 void sub_80AD874(void)
 {
-    gUnknown_203B4B8.unk0 = 0;
+    gCurrentGroundLink.unk0 = 0;
 }
 
 void GroundLink_Select(s16 r0)
 {
-    gUnknown_203B4B8.unk0 = sub_80A77D0(r0, &gUnknown_8118798)->unk8;
+    gCurrentGroundLink.unk0 = GetGroundScript(r0, &gUnknown_8118798)->unk8;
 }
 
-u32 sub_80AD8A0(s16 r0)
+u32 GetCurrentGroundLink(s16 r0)
 {
     u32 a = r0;
-    return gUnknown_203B4B8.unk0 + a * 8;
+    return gCurrentGroundLink.unk0 + a * 8;
 }

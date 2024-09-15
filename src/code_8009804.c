@@ -8,7 +8,7 @@
 extern const u8 gUnknown_80B88CC[];
 extern const struct FileArchive gSystemFileArchive; // 8300500
 
-extern struct unkStruct_202D038 gUnknown_202D038[8];
+extern struct unkStruct_202D038 gFontPalette[8];
 extern u8 gUnknown_202D238[4];
 extern s32 gUnknown_202D23C;
 extern struct unkStruct_202D240 gUnknown_202D240[8];
@@ -23,12 +23,12 @@ void InitFontPalette(void)
     u32 *ptr;
 
     fontpalFile = OpenFileAndGetFileDataPtr(gUnknown_80B88CC, &gSystemFileArchive); // fontpal
-    CpuCopy(gUnknown_202D038, fontpalFile->data, sizeof(gUnknown_202D038));
+    CpuCopy(gFontPalette, fontpalFile->data, sizeof(gFontPalette));
 
     if (sub_80063B0() == 1)
-        ptr = &gUnknown_202D038[0].unk0[0];
+        ptr = &gFontPalette[0].unk0[0];
     else
-        ptr = &gUnknown_202D038[1].unk0[0];
+        ptr = &gFontPalette[1].unk0[0];
 
     for (i = 0; i < 16; ptr++, i++)
         SetBGPaletteBufferColorArray(i + 240, (u8 *)ptr);
@@ -131,7 +131,7 @@ void sub_80099F0(u32 a0)
     s32 i;
 
     for (i = 0; i < 8; i++)
-        gUnknown_202D038[i].unk0[1] = a0;
+        gFontPalette[i].unk0[1] = a0;
 }
 
 UNUSED static void sub_8009A10(u32 *a0)

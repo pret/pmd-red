@@ -2,10 +2,10 @@
 #include "debug.h"
 #include "ground_script.h"
 
-extern u8 gUnknown_2039A36;
-extern u8 gUnknown_2039A38[];
-extern u32 gUnknown_2039B48[];
-extern u8 gUnknown_2039AC0[];
+extern u8 gAnyScriptLocked;
+extern u8 gScriptLocks[];
+extern u32 gUnlockBranchLabels[];
+extern u8 gScriptLockConds[];
 
 extern u32 gUnknown_8116588;
 extern u32 gUnknown_8116538;
@@ -17,10 +17,10 @@ extern u8 gUnknown_811656C[];
 extern DebugLocation gUnknown_81165C8;
 
 extern void sub_809D520(void *);
-extern u8 sub_80AC378(void);
-extern u8 sub_80AD290(void);
-extern u8 sub_80A8B74(void);
-extern u8 sub_809A750(void);
+extern u8 GroundObjectsCancellAll(void);
+extern u8 GroundEffectsCancelAll(void);
+extern u8 GroundLivesCancelAll(void);
+extern u8 IsTextboxOpen_809A750(void);
 extern s32 sub_80A882C(s16);
 extern s32 sub_80AC240(s16);
 extern s32 sub_80AD158(s16);
@@ -112,7 +112,7 @@ void InitActionWithParams(Action *action, const CallbackData *callbacks, void *p
         action->unk8[1] = 0;
 }
 
-void sub_809D648(Action *action)
+void InitAction2(Action *action)
 {
     InitAction(action);
 }
@@ -167,7 +167,7 @@ void SetPredefinedScript(Action *param_1, s16 index, ScriptCommand *param_3)
     param_1->predefinedScripts[index] = param_3;
 }
 
-bool8 sub_809D6E4(Action *param_1, ScriptInfoSmall *script, s16 _index)
+bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s16 _index)
 {
     ScriptCommand *scriptPtr;
     s32 index = _index;
@@ -180,7 +180,7 @@ bool8 sub_809D6E4(Action *param_1, ScriptInfoSmall *script, s16 _index)
     return scriptPtr != NULL;
 }
 
-void sub_809D710(Action *param_1, ScriptInfoSmall *script, s16 index)
+void GetFunctionScript(Action *param_1, ScriptInfoSmall *script, s16 index)
 {
     s32 index_s32 = index;
     script->ptr = gFunctionScriptTable[index_s32].script;
@@ -195,14 +195,14 @@ void sub_809D710(Action *param_1, ScriptInfoSmall *script, s16 index)
     }
 }
 
-bool8 InitActionScriptData(Action *param_1, const DebugLocation *unused)
+bool8 ActionResetScriptData(Action *param_1, const DebugLocation *unused)
 {
     InitScriptData(&param_1->scriptData);
     InitScriptData(&param_1->scriptData2);
     return TRUE;
 }
 
-bool8 sub_809D770(Action *param_1, DebugLocation *unused)
+bool8 ActionResetScriptDataForDeletion(Action *param_1, DebugLocation *unused)
 {
     InitScriptData(&param_1->scriptData);
     InitScriptData(&param_1->scriptData2);
@@ -271,28 +271,28 @@ bool8 GroundScript_ExecutePP(Action *action, s32 *param_2, ScriptInfoSmall *para
     return TRUE;
 }
 
-bool8 sub_809D8C0(Action *param_1, s32 *param_2, s16 index, DebugLocation *debug)
+bool8 ExecutePredefinedScript(Action *param_1, s32 *param_2, s16 index, DebugLocation *debug)
 {
     ScriptInfoSmall auStack28;
 
-    sub_809D6E4(param_1,&auStack28,index);
+    GetPredefinedScript(param_1,&auStack28,index);
     return GroundScript_ExecutePP(param_1, param_2, &auStack28, debug);
 }
 
-u8 sub_809D8EC(Action *param_1, s16 param_2)
+u8 GroundScriptCheckLockCondition(Action *param_1, s16 param_2)
 {
     s32 param_2_s32;
 
     param_2_s32 = param_2;
 
-    if ((param_2 == 0) && (sub_809A750() == 0)) {
-        param_1->scriptData.script.ptr = sub_80A2460(param_1, 0);
+    if ((param_2 == 0) && (IsTextboxOpen_809A750() == 0)) {
+        param_1->scriptData.script.ptr = ResolveJump(param_1, 0);
         return 0;
     }
     else {
         param_1->scriptData.unk22 = param_2_s32;
         param_1->scriptData.savedState = 2;
-        gUnknown_2039A36 = 1;
+        gAnyScriptLocked = 1;
         return 1;
     }
 }
@@ -301,20 +301,20 @@ u8 sub_809D8EC(Action *param_1, s16 param_2)
 bool8 GroundScript_Cancel(Action *r0)
 {
     // NOTE: Will always return TRUE
-    return sub_809D770(r0, &gUnknown_81165C8);
+    return ActionResetScriptDataForDeletion(r0, &gUnknown_81165C8);
 }
 
-u8 sub_809D940(void)
+u8 GroundCancelAllEntities(void)
 {
   u8 ret;
 
-  ret = sub_80A8B74();
-  ret |= sub_80AC378();
-  ret |= sub_80AD290();
+  ret = GroundLivesCancelAll();
+  ret |= GroundObjectsCancellAll();
+  ret |= GroundEffectsCancelAll();
   return ret;
 }
 
-bool8 sub_809D968(Action *param_1, s16 param_2)
+bool8 GroundScriptNotify(Action *param_1, s16 param_2)
 {
   s16 sVar1;
   s16 sVar2;
@@ -336,40 +336,40 @@ bool8 sub_809D968(Action *param_1, s16 param_2)
   return ret;
 }
 
-void sub_809D9B8(s16 index)
+void GroundScriptLockJumpZero(s16 index)
 {
   s32 index_s16 = index;
-  gUnknown_2039A38[index_s16] = 1;
-  gUnknown_2039B48[index_s16] = 0;
-  gUnknown_2039A36 = 1;
+  gScriptLocks[index_s16] = 1;
+  gUnlockBranchLabels[index_s16] = 0;
+  gAnyScriptLocked = 1;
 }
 
-void sub_809D9E0(s16 index, s32 r1)
+void GroundScriptLock(s16 index, s32 r1)
 {
   s32 index_s16 = index;
-  gUnknown_2039A38[index_s16] = 1;
-  gUnknown_2039B48[index_s16] = r1;
-  gUnknown_2039A36 = 1;
+  gScriptLocks[index_s16] = 1;
+  gUnlockBranchLabels[index_s16] = r1;
+  gAnyScriptLocked = 1;
 }
 
-bool8 sub_809DA08(Action *param_1, s16 index, u32 param_3)
+bool8 GroundScriptLockCond(Action *param_1, s16 index, u32 param_3)
 {
   s32 index_s32;
   
   index_s32 = index;
-  gUnknown_2039B48[index_s32] = param_3;
+  gUnlockBranchLabels[index_s32] = param_3;
   if (index_s32 == 0) {
-    if (sub_809A750() == 0) {
+    if (IsTextboxOpen_809A750() == 0) {
       return FALSE;
     }
     param_1->scriptData.unk22 = index_s32;
   }
   else {
     param_1->scriptData.unk22 = index_s32 | 0x80;
-    gUnknown_2039A38[index_s32] = 1;
-    gUnknown_2039AC0[index_s32] = 1;
+    gScriptLocks[index_s32] = 1;
+    gScriptLockConds[index_s32] = 1;
   }
   param_1->scriptData.savedState = 2;
-  gUnknown_2039A36 = 1;
+  gAnyScriptLocked = 1;
   return TRUE;
 }

@@ -27,7 +27,7 @@
 
 // TODO: Clean this
 
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 extern u8 gUnknown_202DEA8[];
 extern u8 gAvailablePokemonNames[]; // 202DF98
 
@@ -163,7 +163,7 @@ static void SetPartyListMenuState(s32 newState)
 static void sub_802608C(void)
 {
     s32 index;
-    sub_8006518(sUnknown_203B2B8->unk220);
+    RestoreUnkTextStruct_8006518(sUnknown_203B2B8->unk220);
     switch(sUnknown_203B2B8->state)
     {
         case PARTY_LIST_STATE_MAIN_MENU:
@@ -192,7 +192,7 @@ static void sub_802608C(void)
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B2B8->unk220, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B2B8->unk220, TRUE, TRUE);
 }
 
 void HandlePartyListMenuCallback(void)
@@ -259,22 +259,22 @@ void HandlePartyListMenuCallback(void)
         case PARTY_LIST_STATE_JOIN_TEAM:
             sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_EXIT;
             PlaySound(0xcf);
-            sub_80141B4(sUnknown_80DD4C4,0,0,0x101);
+            xxx_info_box_80141B4(sUnknown_80DD4C4,0,0,0x101);
             break;
         case PARTY_LIST_STATE_STANDBY:
             sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_EXIT;
             PlaySound(0xcf);
-            sub_80141B4(sUnknown_80DD4F4,0,0,0x101);
+            xxx_info_box_80141B4(sUnknown_80DD4F4,0,0,0x101);
             break;
         case PARTY_LIST_STATE_MAKE_LEADER:
             sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_EXIT;
             PlaySound(0xcc);
-            sub_80141B4(sBecameLeader,0,0,0x101);
+            xxx_info_box_80141B4(sBecameLeader,0,0,0x101);
             break;
         case PARTY_LIST_STATE_POKEMON_FAREWELL:
             sUnknown_203B2B8->fallbackState = 9;
             PlaySound(0xca);
-            sub_80141B4(sUnknown_80DD564,0,0,0x101);
+            xxx_info_box_80141B4(sUnknown_80DD564,0,0,0x101);
             break;
         case 9:
             sub_8026FA4();
@@ -283,23 +283,23 @@ void HandlePartyListMenuCallback(void)
             break;
         case PARTY_LIST_STATE_GIVEN_ITEM:
             sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_MAIN_MENU_1;
-            sub_80141B4(sUnknown_80DD594,0,0,0x101);
+            xxx_info_box_80141B4(sUnknown_80DD594,0,0,0x101);
             break;
         case PARTY_LIST_STATE_GIVEN_ITEM_HELD_ITEM:
             sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_MAIN_MENU_1;
-            sub_80141B4(sUnknown_80DD5B8,0,0,0x101);
+            xxx_info_box_80141B4(sUnknown_80DD5B8,0,0,0x101);
             break;
         case PARTY_LIST_STATE_TAKE_ITEM:
             sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_MAIN_MENU_1;
-            sub_80141B4(sUnknown_80DD60C,0,0,0x101);
+            xxx_info_box_80141B4(sUnknown_80DD60C,0,0,0x101);
             break;
         case 10:
             sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_EXIT;
-            sub_80141B4(sUnknown_80DD60C,0,0,0x101);
+            xxx_info_box_80141B4(sUnknown_80DD60C,0,0,0x101);
             break;
         case 0xb:
             sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_EXIT;
-            sub_80141B4(sUnknown_80DD63C,0,0,0x101);
+            xxx_info_box_80141B4(sUnknown_80DD63C,0,0,0x101);
             break;
         case PARTY_LIST_STATE_INIT:
         case PARTY_LIST_STATE_EXIT:
@@ -775,14 +775,14 @@ void sub_8026DAC(u32 r0, BulkItem *item)
     Item slot;
     struct unkStruct_8090F58 temp;
 
-    sub_8008C54(r0);
+    CallPrepareTextbox_8008C54(r0);
     sub_80073B8(r0);
     HeldItemToSlot(&slot, item);
     temp.unk0 = 0;
     temp.unk4 = 0;
     temp.unk8 = 1;
     slot.flags = ITEM_FLAG_EXISTS;
-    sub_8090E14(gUnknown_202DE58, &slot, &temp);
+    sub_8090E14(gFormatItems, &slot, &temp);
     PrintFormatStringOnWindow(4, 3, sPartyMenuItemPlaceholder, r0, 0);
     sub_80073E0(r0);
 }
@@ -793,7 +793,7 @@ void sub_8026E08(u32 r0)
     u8 buffer[20];
     s32 x;
 
-    sub_8008C54(r0);
+    CallPrepareTextbox_8008C54(r0);
     sub_80073B8(r0);
     sub_80922B4(gAvailablePokemonNames, sUnknown_203B2B8->pokeStruct->name, POKEMON_NAME_LENGTH);
     sub_808D930(buffer, sUnknown_203B2B8->pokeStruct->speciesNum);

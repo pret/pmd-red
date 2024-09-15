@@ -17,10 +17,10 @@ extern struct FileArchive gSystemFileArchive;
 extern const char gItemParaFileName[];
 extern const char gUnknown_8109794[];
 extern const char gUnknown_81097A4[];
-extern s32 gUnknown_81097B0[];
-extern u8 gUnknown_81097C4[];
+extern s32 gPowersOfTen[];
+extern u8 gHighDigits[];
 extern u16 gGummiStatBoostLUT[];
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 extern u32 gFormatData_202DE30;
 extern u8* gPtrTypeText;  // ptr to "Type\0"
 extern u8* gPtrPPD0Text;  // ptr to "PP {ARG_VALUE_0} \0"
@@ -404,16 +404,16 @@ static void sub_8090F58(u8* a1, u8 *a2, Item *slot, const struct unkStruct_8090F
   }
 
   if (a4->unk6) {
-    sub_8090FEC(value, buffer, 1);
+    WriteHighDecimal(value, buffer, 1);
     sprintfStatic(a1, gUnknown_8109794, a2, a4->unk6, buffer);
   }
   else {
-    sub_8090FEC(value, buffer, 0);
+    WriteHighDecimal(value, buffer, 0);
     sprintfStatic(a1, gUnknown_81097A4, a2, buffer);
   }
 }
 
-s32 sub_8090FEC(s32 a1, u8 *strbuf, u8 a3)
+s32 WriteHighDecimal(s32 a1, u8 *strbuf, u8 a3)
 {
   s32 i, count;
   s32 cond = 0;
@@ -423,8 +423,8 @@ s32 sub_8090FEC(s32 a1, u8 *strbuf, u8 a3)
     s32 div;
 
     div = 0;
-    while (a1 >= gUnknown_81097B0[i]) {
-        a1 -= gUnknown_81097B0[i];
+    while (a1 >= gPowersOfTen[i]) {
+        a1 -= gPowersOfTen[i];
         div++;
     }
 
@@ -434,13 +434,13 @@ s32 sub_8090FEC(s32 a1, u8 *strbuf, u8 a3)
 
     if (div) {
         cond = 1;
-        *strbuf++ = gUnknown_81097C4[2 * div];
-        *strbuf++ = (gUnknown_81097C4 + 1)[2 * div];  // weird staggered arrays...
+        *strbuf++ = gHighDigits[2 * div];
+        *strbuf++ = (gHighDigits + 1)[2 * div];  // weird staggered arrays...
         count++;
     }
     else if (cond) {
-        *strbuf++ = gUnknown_81097C4[0];
-        *strbuf++ = (gUnknown_81097C4 + 1)[0];  // weird staggered arrays...
+        *strbuf++ = gHighDigits[0];
+        *strbuf++ = (gHighDigits + 1)[0];  // weird staggered arrays...
         count++;
     }
     else if (a3) {
@@ -448,8 +448,8 @@ s32 sub_8090FEC(s32 a1, u8 *strbuf, u8 a3)
     }
   }
 
-  *strbuf++ = gUnknown_81097C4[2 * a1];
-  *strbuf   = (gUnknown_81097C4 + 1)[2 * a1];
+  *strbuf++ = gHighDigits[2 * a1];
+  *strbuf   = (gHighDigits + 1)[2 * a1];
   count += 1;
   strbuf[1] = 0;  // null termination
   return count;
@@ -669,7 +669,7 @@ u32 sub_80913E0(Item* slot, u32 a2, struct subStruct_203B240 ** a3)
   BufferItemName(buffer88, slot->id, NULL);
   if (slot->id == ITEM_TM_USED_TM) {
     // empty TM
-    BufferItemName(gUnknown_202DE58, (u8)(slot->quantity + 125), NULL);
+    BufferItemName(gFormatItems, (u8)(slot->quantity + 125), NULL);
   }
   sub_80073B8(a2);
   PrintFormatStringOnWindow(16, 0, buffer88, a2, 0);

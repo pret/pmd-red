@@ -132,7 +132,7 @@ void CreateSaveMenu(s32 currMenu)
     sUnknown_203B364->unk148[index] = gUnknown_80E6F20;
   }
   ResetUnusedInputStruct();
-  sub_800641C(sUnknown_203B364->unk148, TRUE, TRUE);
+  xxx_call_save_unk_text_struct_800641C(sUnknown_203B364->unk148, TRUE, TRUE);
 
   if (currMenu == MENU_DELETE_SAVE) {
       // Beware, Deleting your Adventure
@@ -153,7 +153,7 @@ void CreateSaveMenu(s32 currMenu)
 void CleanSaveMenu(void)
 {
   ResetUnusedInputStruct();
-  sub_800641C(NULL, TRUE, TRUE);
+  xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
   if (sUnknown_203B364 != NULL) {
     MemoryFree(sUnknown_203B364);
     sUnknown_203B364 = NULL;
@@ -203,7 +203,7 @@ s32 UpdateSaveMenu(void)
                 sUnknown_203B364->unk4 = 1;
                 break;
             case SAVE_NOT_WRTTEN:
-                sub_80141B4(gUnknown_80E7178,0,0,0);
+                xxx_info_box_80141B4(gUnknown_80E7178,0,0,0);
                 sUnknown_203B364->unk4 = 5;
                 break;
             default:

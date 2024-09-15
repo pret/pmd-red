@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80ABB54
-sub_80ABB54:
+	thumb_func_start AllocGroundObjects
+AllocGroundObjects:
 	push {r4,r5,lr}
 	ldr r4, _080ABB90
 	movs r0, 0xE2
@@ -32,17 +32,17 @@ _080ABB74:
 	adds r1, r4
 	cmp r0, 0xF
 	ble _080ABB74
-	bl DeleteBlankGroundObjects
+	bl DeleteGroundObjects
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ABB90: .4byte gUnknown_3001B88
+_080ABB90: .4byte gGroundObjects
 _080ABB94: .4byte 0x0000ffff
-	thumb_func_end sub_80ABB54
+	thumb_func_end AllocGroundObjects
 
-	thumb_func_start DeleteBlankGroundObjects
-DeleteBlankGroundObjects:
+	thumb_func_start DeleteGroundObjects
+DeleteGroundObjects:
 	push {r4-r6,lr}
 	ldr r0, _080ABBD0
 	ldr r4, [r0]
@@ -73,13 +73,13 @@ _080ABBB6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ABBD0: .4byte gUnknown_3001B88
-	thumb_func_end DeleteBlankGroundObjects
+_080ABBD0: .4byte gGroundObjects
+	thumb_func_end DeleteGroundObjects
 
-	thumb_func_start sub_80ABBD4
-sub_80ABBD4:
+	thumb_func_start FreeGroundObjects
+FreeGroundObjects:
 	push {r4,lr}
-	bl DeleteBlankGroundObjects
+	bl DeleteGroundObjects
 	ldr r4, _080ABBEC
 	ldr r0, [r4]
 	bl MemoryFree
@@ -89,8 +89,8 @@ sub_80ABBD4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ABBEC: .4byte gUnknown_3001B88
-	thumb_func_end sub_80ABBD4
+_080ABBEC: .4byte gGroundObjects
+	thumb_func_end FreeGroundObjects
 
 	thumb_func_start GroundObject_Select
 GroundObject_Select:
@@ -105,7 +105,7 @@ GroundObject_Select:
 	asrs r6, r2, 24
 	ldr r1, _080ABC54
 	adds r0, r4, 0
-	bl sub_80A77D0
+	bl GetGroundScript
 	adds r5, r0, 0
 	ldr r1, _080ABC58
 	str r6, [sp]
@@ -204,7 +204,7 @@ _080ABCA6:
 	bx r0
 	.align 2, 0
 _080ABCC4: .4byte gUnknown_8118414
-_080ABCC8: .4byte gUnknown_3001B88
+_080ABCC8: .4byte gGroundObjects
 	thumb_func_end GroundObject_Cancel
 
 	thumb_func_start GroundObject_CancelBlank
@@ -243,7 +243,7 @@ _080ABCF0:
 	lsls r1, 1
 	adds r0, r4, r1
 	mov r1, sp
-	bl sub_80A675C
+	bl IsOnscreen_80A675C
 	lsls r0, 24
 	cmp r0, 0
 	bne _080ABD20
@@ -267,7 +267,7 @@ _080ABD20:
 	bx r0
 	.align 2, 0
 _080ABD40: .4byte gUnknown_811842C
-_080ABD44: .4byte gUnknown_3001B88
+_080ABD44: .4byte gGroundObjects
 	thumb_func_end GroundObject_CancelBlank
 
 	thumb_func_start sub_80ABD48
@@ -291,7 +291,7 @@ _080ABD5E:
 	adds r0, r3, 0
 	b _080ABD80
 	.align 2, 0
-_080ABD6C: .4byte gUnknown_3001B88
+_080ABD6C: .4byte gGroundObjects
 _080ABD70:
 	adds r0, r2, 0
 	adds r2, r5
@@ -329,7 +329,7 @@ GroundObject_Add:
 	bne _080ABDDA
 	movs r0, 0
 	movs r1, 0x28
-	bl sub_8001658
+	bl GetScriptVarValue
 	cmp r0, 0x1
 	bgt _080ABDBC
 	movs r4, 0x1B
@@ -337,12 +337,12 @@ GroundObject_Add:
 _080ABDBC:
 	movs r0, 0
 	movs r1, 0x29
-	bl sub_8001658
+	bl GetScriptVarValue
 	cmp r0, 0
 	bne _080ABDD4
 	movs r0, 0
 	movs r1, 0x27
-	bl sub_8001658
+	bl GetScriptVarValue
 	adds r0, 0x1C
 	b _080ABDD6
 _080ABDD4:
@@ -378,8 +378,8 @@ _080ABDF4:
 	movs r7, 0
 	b _080ABE40
 	.align 2, 0
-_080ABE10: .4byte gUnknown_811ED20
-_080ABE14: .4byte gUnknown_3001B88
+_080ABE10: .4byte gGroundObjectTypes
+_080ABE14: .4byte gGroundObjects
 _080ABE18:
 	adds r0, r3, 0x1
 	lsls r0, 16
@@ -456,7 +456,7 @@ _080ABE9C:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080ABEA8: .4byte gUnknown_3001B88
+_080ABEA8: .4byte gGroundObjects
 _080ABEAC: .4byte gUnknown_8118448
 _080ABEB0: .4byte _080ABEB4
 	.align 2, 0
@@ -693,7 +693,7 @@ _080AC076:
 	adds r0, 0x28
 	adds r1, r5, 0
 	adds r1, 0x30
-	bl sub_80A5778
+	bl GetCurrentDungeonBounds
 	ldr r3, [sp, 0x10]
 	cmp r3, 0
 	beq _080AC0C0
@@ -742,7 +742,7 @@ _080AC0C0:
 	movs r2, 0xA2
 	lsls r2, 1
 	adds r0, r5, r2
-	bl sub_80A66A4
+	bl SpriteHasPokemonSize_80A66A4
 	lsls r0, 24
 	ldr r2, _080AC158
 	cmp r0, 0
@@ -784,7 +784,7 @@ _080AC11C:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_809D8C0
+	bl ExecutePredefinedScript
 _080AC140:
 	adds r0, r7, 0
 _080AC142:
@@ -797,7 +797,7 @@ _080AC142:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080AC154: .4byte gUnknown_81182A0
+_080AC154: .4byte gGroundObjectCallbacks
 _080AC158: .4byte gUnknown_81182F4
 _080AC15C: .4byte gUnknown_8118350
 _080AC160: .4byte gFunctionScriptTable
@@ -827,14 +827,14 @@ GroundObject_Delete:
 	bl sub_80A7658
 	adds r0, r4, 0
 	adds r0, 0x38
-	bl sub_809D648
+	bl InitAction2
 	ldr r0, _080AC1AC
 	strh r0, [r4, 0x6]
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AC1A4: .4byte gUnknown_3001B88
+_080AC1A4: .4byte gGroundObjects
 _080AC1A8: .4byte gUnknown_81184B0
 _080AC1AC: .4byte 0x0000ffff
 	thumb_func_end GroundObject_Delete
@@ -873,7 +873,7 @@ _080AC1EA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AC1F0: .4byte gUnknown_3001B88
+_080AC1F0: .4byte gGroundObjects
 	thumb_func_end sub_80AC1B0
 
 	thumb_func_start sub_80AC1F4
@@ -913,7 +913,7 @@ _080AC232:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AC238: .4byte gUnknown_3001B88
+_080AC238: .4byte gGroundObjects
 _080AC23C: .4byte 0x337fffff
 	thumb_func_end sub_80AC1F4
 
@@ -939,7 +939,7 @@ sub_80AC240:
 	movs r0, 0
 	b _080AC270
 	.align 2, 0
-_080AC268: .4byte gUnknown_3001B88
+_080AC268: .4byte gGroundObjects
 _080AC26C:
 	adds r0, r2, 0
 	adds r0, 0x38
@@ -973,13 +973,13 @@ sub_80AC274:
 	movs r0, 0
 	b _080AC2B4
 	.align 2, 0
-_080AC2A0: .4byte gUnknown_3001B88
+_080AC2A0: .4byte gGroundObjects
 _080AC2A4:
 	adds r0, r2, 0
 	adds r0, 0x38
 	adds r1, r4, 0
 	adds r2, r3, 0
-	bl sub_809D6E4
+	bl GetPredefinedScript
 	lsls r0, 24
 	lsrs r0, 24
 _080AC2B4:
@@ -1017,7 +1017,7 @@ GroundObject_ExecuteScript:
 	movs r0, 0
 	b _080AC314
 	.align 2, 0
-_080AC2F4: .4byte gUnknown_3001B88
+_080AC2F4: .4byte gGroundObjects
 _080AC2F8: .4byte gUnknown_81184CC
 _080AC2FC:
 	adds r0, r4, 0
@@ -1039,8 +1039,8 @@ _080AC314:
 _080AC31C: .4byte gUnknown_8118504
 	thumb_func_end GroundObject_ExecuteScript
 
-	thumb_func_start sub_80AC320
-sub_80AC320:
+	thumb_func_start GroundObjectsNotifyAll
+GroundObjectsNotifyAll:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1062,7 +1062,7 @@ _080AC33A:
 	adds r0, r4, 0
 	adds r0, 0x38
 	adds r1, r7, 0
-	bl sub_809D968
+	bl GroundScriptNotify
 	orrs r5, r0
 	lsls r0, r5, 24
 	lsrs r5, r0, 24
@@ -1084,11 +1084,11 @@ _080AC352:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080AC374: .4byte gUnknown_3001B88
-	thumb_func_end sub_80AC320
+_080AC374: .4byte gGroundObjects
+	thumb_func_end GroundObjectsNotifyAll
 
-	thumb_func_start sub_80AC378
-sub_80AC378:
+	thumb_func_start GroundObjectsCancellAll
+GroundObjectsCancellAll:
 	push {r4-r7,lr}
 	ldr r0, _080AC3BC
 	ldr r4, [r0]
@@ -1124,8 +1124,8 @@ _080AC39E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080AC3BC: .4byte gUnknown_3001B88
-	thumb_func_end sub_80AC378
+_080AC3BC: .4byte gGroundObjects
+	thumb_func_end GroundObjectsCancellAll
 
 	thumb_func_start sub_80AC3C0
 sub_80AC3C0:
@@ -1143,7 +1143,7 @@ sub_80AC3C0:
 	ldrsh r0, [r0, r1]
 	bx lr
 	.align 2, 0
-_080AC3DC: .4byte gUnknown_3001B88
+_080AC3DC: .4byte gGroundObjects
 	thumb_func_end sub_80AC3C0
 
 	thumb_func_start sub_80AC3E0
@@ -1167,7 +1167,7 @@ sub_80AC3E0:
 	ldrsh r0, [r0, r1]
 	bx lr
 	.align 2, 0
-_080AC404: .4byte gUnknown_3001B88
+_080AC404: .4byte gGroundObjects
 	thumb_func_end sub_80AC3E0
 
 	thumb_func_start sub_80AC408
@@ -1195,7 +1195,7 @@ sub_80AC408:
 	str r0, [r3, 0x4]
 	b _080AC440
 	.align 2, 0
-_080AC434: .4byte gUnknown_3001B88
+_080AC434: .4byte gGroundObjects
 _080AC438:
 	ldr r0, [r2, 0xC]
 	ldr r1, [r2, 0x10]
@@ -1232,7 +1232,7 @@ sub_80AC448:
 	str r0, [r3]
 	b _080AC492
 	.align 2, 0
-_080AC474: .4byte gUnknown_3001B88
+_080AC474: .4byte gGroundObjects
 _080AC478:
 	movs r1, 0x92
 	lsls r1, 1
@@ -1269,14 +1269,14 @@ sub_80AC49C:
 	ldr r4, [r3]
 	adds r4, r2
 	adds r0, r4, 0
-	bl sub_80AC6AC
+	bl TryMoveObjectRelative_80AC6AC
 	movs r1, 0x6
 	ldrsh r0, [r4, r1]
 	pop {r4}
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080AC4C4: .4byte gUnknown_3001B88
+_080AC4C4: .4byte gGroundObjects
 	thumb_func_end sub_80AC49C
 
 	thumb_func_start sub_80AC4C8
@@ -1334,7 +1334,7 @@ _080AC4DE:
 	adds r0, r5, 0
 	b _080AC54C
 	.align 2, 0
-_080AC530: .4byte gUnknown_3001B88
+_080AC530: .4byte gGroundObjects
 _080AC534:
 	adds r0, r6, 0
 	movs r1, 0x80
@@ -1416,7 +1416,7 @@ _080AC576:
 	adds r0, r6, 0
 	b _080AC5E4
 	.align 2, 0
-_080AC5C8: .4byte gUnknown_3001B88
+_080AC5C8: .4byte gGroundObjects
 _080AC5CC:
 	adds r0, r7, 0
 	movs r2, 0x80
@@ -1440,8 +1440,8 @@ _080AC5E4:
 	bx r1
 	thumb_func_end sub_80AC554
 
-	thumb_func_start sub_80AC5F4
-sub_80AC5F4:
+	thumb_func_start GetObjectCollision_80AC5F4
+GetObjectCollision_80AC5F4:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1500,7 +1500,7 @@ _080AC63A:
 	beq _080AC678
 	mov r0, sp
 	adds r1, r2, 0
-	bl sub_80A585C
+	bl CheckMapCollision_80A585C
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AC678
@@ -1522,7 +1522,7 @@ _080AC678:
 	negs r0, r0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl sub_80A92A0
+	bl GetLivesCollision_80A92A0
 	lsls r0, 16
 	cmp r0, 0
 	blt _080AC69E
@@ -1537,10 +1537,10 @@ _080AC6A0:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80AC5F4
+	thumb_func_end GetObjectCollision_80AC5F4
 
-	thumb_func_start sub_80AC6AC
-sub_80AC6AC:
+	thumb_func_start TryMoveObjectRelative_80AC6AC
+TryMoveObjectRelative_80AC6AC:
 	push {r4,r5,lr}
 	sub sp, 0x10
 	adds r5, r0, 0
@@ -1578,7 +1578,7 @@ _080AC6EA:
 _080AC6EE:
 	adds r0, r5, 0
 	mov r1, sp
-	bl sub_80AC5F4
+	bl GetObjectCollision_80AC5F4
 	cmp r0, 0
 	bne _080AC718
 	movs r0, 0x92
@@ -1601,10 +1601,10 @@ _080AC718:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80AC6AC
+	thumb_func_end TryMoveObjectRelative_80AC6AC
 
-	thumb_func_start sub_80AC720
-sub_80AC720:
+	thumb_func_start TryMoveRelative_80AC720
+TryMoveRelative_80AC720:
 	push {r4,r5,lr}
 	sub sp, 0x10
 	adds r4, r0, 0
@@ -1680,7 +1680,7 @@ _080AC7A4:
 _080AC7A6:
 	adds r0, r4, 0
 	mov r1, sp
-	bl sub_80AC5F4
+	bl GetObjectCollision_80AC5F4
 	cmp r0, 0
 	bne _080AC7D8
 	movs r3, 0x92
@@ -1708,26 +1708,26 @@ _080AC7D8:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80AC720
+	thumb_func_end TryMoveRelative_80AC720
 
-	thumb_func_start sub_80AC7E0
-sub_80AC7E0:
+	thumb_func_start CallbackObjectGetIndex
+CallbackObjectGetIndex:
 	movs r1, 0x4
 	ldrsh r0, [r0, r1]
 	bx lr
-	thumb_func_end sub_80AC7E0
+	thumb_func_end CallbackObjectGetIndex
 
-	thumb_func_start sub_80AC7E8
-sub_80AC7E8:
+	thumb_func_start CallbackObjectGetSize
+CallbackObjectGetSize:
 	ldr r2, [r0, 0xC]
 	ldr r3, [r0, 0x10]
 	str r2, [r1]
 	str r3, [r1, 0x4]
 	bx lr
-	thumb_func_end sub_80AC7E8
+	thumb_func_end CallbackObjectGetSize
 
-	thumb_func_start sub_80AC7F4
-sub_80AC7F4:
+	thumb_func_start CallbackObjectSetHitboxPos
+CallbackObjectSetHitboxPos:
 	push {r4,lr}
 	adds r3, r0, 0
 	adds r4, r1, 0
@@ -1817,10 +1817,10 @@ _080AC89A:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AC7F4
+	thumb_func_end CallbackObjectSetHitboxPos
 
-	thumb_func_start sub_80AC8A0
-sub_80AC8A0:
+	thumb_func_start CallbackObjectSetPositionBounds
+CallbackObjectSetPositionBounds:
 	push {r4,lr}
 	ldr r3, [r1]
 	ldr r4, [r1, 0x4]
@@ -1833,10 +1833,10 @@ sub_80AC8A0:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AC8A0
+	thumb_func_end CallbackObjectSetPositionBounds
 
-	thumb_func_start sub_80AC8B8
-sub_80AC8B8:
+	thumb_func_start CallbackObjectGetHitboxCenter
+CallbackObjectGetHitboxCenter:
 	adds r3, r0, 0
 	movs r2, 0x92
 	lsls r2, 1
@@ -1853,18 +1853,18 @@ sub_80AC8B8:
 	adds r0, r2
 	str r0, [r1, 0x4]
 	bx lr
-	thumb_func_end sub_80AC8B8
+	thumb_func_end CallbackObjectGetHitboxCenter
 
-	thumb_func_start sub_80AC8D8
-sub_80AC8D8:
+	thumb_func_start CallbackObjectMoveReal
+CallbackObjectMoveReal:
 	push {lr}
-	bl sub_80AC6AC
+	bl TryMoveObjectRelative_80AC6AC
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80AC8D8
+	thumb_func_end CallbackObjectMoveReal
 
-	thumb_func_start sub_80AC8E4
-sub_80AC8E4:
+	thumb_func_start CallbackObjectGetPosHeightAndUnk
+CallbackObjectGetPosHeightAndUnk:
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r4, 0x9A
@@ -1880,29 +1880,29 @@ sub_80AC8E4:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AC8E4
+	thumb_func_end CallbackObjectGetPosHeightAndUnk
 
-	thumb_func_start sub_80AC904
-sub_80AC904:
+	thumb_func_start CallbackObjectSetPosHeight
+CallbackObjectSetPosHeight:
 	movs r2, 0x9A
 	lsls r2, 1
 	adds r0, r2
 	str r1, [r0]
 	bx lr
-	thumb_func_end sub_80AC904
+	thumb_func_end CallbackObjectSetPosHeight
 
-	thumb_func_start sub_80AC910
-sub_80AC910:
+	thumb_func_start CallbackObjectGetDirection
+CallbackObjectGetDirection:
 	movs r2, 0x90
 	lsls r2, 1
 	adds r0, r2
 	ldrb r0, [r0]
 	strb r0, [r1]
 	bx lr
-	thumb_func_end sub_80AC910
+	thumb_func_end CallbackObjectGetDirection
 
-	thumb_func_start sub_80AC91C
-sub_80AC91C:
+	thumb_func_start CallbackObjectSetDirection
+CallbackObjectSetDirection:
 	push {lr}
 	adds r2, r0, 0
 	lsls r1, 24
@@ -1918,10 +1918,10 @@ sub_80AC91C:
 _080AC934:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AC91C
+	thumb_func_end CallbackObjectSetDirection
 
-	thumb_func_start sub_80AC938
-sub_80AC938:
+	thumb_func_start CallbackObjectSetEventIndex
+CallbackObjectSetEventIndex:
 	push {r4,r5,lr}
 	lsls r1, 16
 	adds r3, r0, 0
@@ -1973,10 +1973,10 @@ _080AC990:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AC938
+	thumb_func_end CallbackObjectSetEventIndex
 
-	thumb_func_start sub_80AC998
-sub_80AC998:
+	thumb_func_start CallbackObjectSetUnk_80AC998
+CallbackObjectSetUnk_80AC998:
 	push {lr}
 	lsls r1, 16
 	asrs r1, 16
@@ -1993,10 +1993,10 @@ _080AC9AA:
 	strh r2, [r0]
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AC998
+	thumb_func_end CallbackObjectSetUnk_80AC998
 
-	thumb_func_start sub_80AC9B8
-sub_80AC9B8:
+	thumb_func_start CallbackObjectSpriteRelatedCheck_80AC9B8
+CallbackObjectSpriteRelatedCheck_80AC9B8:
 	push {lr}
 	adds r1, r0, 0
 	movs r2, 0x9E
@@ -2016,10 +2016,10 @@ _080AC9D6:
 _080AC9D8:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80AC9B8
+	thumb_func_end CallbackObjectSpriteRelatedCheck_80AC9B8
 
-	thumb_func_start sub_80AC9DC
-sub_80AC9DC:
+	thumb_func_start CallbackObjectSpriteRelated_80AC9DC
+CallbackObjectSpriteRelated_80AC9DC:
 	push {lr}
 	adds r1, r0, 0
 	movs r2, 0xA0
@@ -2041,45 +2041,45 @@ _080AC9FE:
 _080ACA00:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80AC9DC
+	thumb_func_end CallbackObjectSpriteRelated_80AC9DC
 
-	thumb_func_start sub_80ACA04
-sub_80ACA04:
+	thumb_func_start CallbackObjectGetFlags
+CallbackObjectGetFlags:
 	movs r2, 0x8E
 	lsls r2, 1
 	adds r0, r2
 	ldr r0, [r0]
 	str r0, [r1]
 	bx lr
-	thumb_func_end sub_80ACA04
+	thumb_func_end CallbackObjectGetFlags
 
-	thumb_func_start sub_80ACA10
-sub_80ACA10:
+	thumb_func_start CallbackObjectSetFlags
+CallbackObjectSetFlags:
 	push {lr}
 	movs r2, 0x4
 	ldrsh r0, [r0, r2]
 	bl sub_80AC1B0
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80ACA10
+	thumb_func_end CallbackObjectSetFlags
 
-	thumb_func_start sub_80ACA20
-sub_80ACA20:
+	thumb_func_start CallbackObjectClearFlags
+CallbackObjectClearFlags:
 	push {lr}
 	movs r2, 0x4
 	ldrsh r0, [r0, r2]
 	bl sub_80AC1F4
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80ACA20
+	thumb_func_end CallbackObjectClearFlags
 
-	thumb_func_start sub_80ACA30
-sub_80ACA30:
+	thumb_func_start CallbackObjectMoveRelative
+CallbackObjectMoveRelative:
 	push {lr}
-	bl sub_80AC720
+	bl TryMoveRelative_80AC720
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80ACA30
+	thumb_func_end CallbackObjectMoveRelative
 
 	thumb_func_start GroundObject_Action
 GroundObject_Action:
@@ -2115,14 +2115,14 @@ _080ACA54:
 	bl GroundObject_Delete
 	b _080ACAB2
 	.align 2, 0
-_080ACA7C: .4byte gUnknown_3001B88
+_080ACA7C: .4byte gGroundObjects
 _080ACA80: .4byte gUnknown_8118524
 _080ACA84:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x1
 	ldr r3, _080ACAD0
-	bl sub_809D8C0
+	bl ExecutePredefinedScript
 _080ACA90:
 	ldrb r0, [r6]
 	cmp r0, 0
@@ -2253,7 +2253,7 @@ _080ACB64:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ACB8C: .4byte gUnknown_3001B88
+_080ACB8C: .4byte gGroundObjects
 	thumb_func_end sub_80ACAD4
 
         .align 2,0

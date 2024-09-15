@@ -80,7 +80,7 @@ s32 SaveTeamInventory(u8 *, u32 size);
 
 
 
-s32 sub_8090FEC(s32, u8 *strbuf, u8);
+s32 WriteHighDecimal(s32, u8 *strbuf, u8);
 u32 sub_80913E0(Item *slot, u32, struct subStruct_203B240 **);
 
 // This macro doesn't do anything, it creates unused variables for the purpose of tricking the compiler and matching the asm.

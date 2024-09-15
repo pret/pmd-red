@@ -84,9 +84,9 @@ void sub_8004E8C(unkStruct_2039DB0 *);
 void sub_8005180(void);
 void sub_8005304(void);
 void sub_800533C(ax_pose **, UnkSpriteMem **, axdata1 *, u16 *, bool8);
-void sub_80053AC(EntitySpriteInfo *, OpenedFile *, u32, u32, u32, u32, bool8);
-void sub_80053D0(EntitySpriteInfo *, Dungeon_ax *, u32, u32, u32, u32, bool8);
-void sub_800543C(EntitySpriteInfo *, OpenedFile *, u32, u32, u32, bool8);
-void sub_80054BC(struct axPokemon *);
+void AxResInitFile_80053AC(EntitySpriteInfo *, OpenedFile *, u32, u32, u32, u32, bool8);
+void AxResInit_80053D0(EntitySpriteInfo *, Dungeon_ax *, u32, u32, u32, u32, bool8);
+void AxResInitUnorientedFile_800543C(EntitySpriteInfo *, OpenedFile *, u32, u32, u32, bool8);
+void RunAxAnimationFrame_80054BC(struct axPokemon *);
 
 #endif // GUARD_SPRITE_H

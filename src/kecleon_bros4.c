@@ -13,7 +13,7 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 
 static EWRAM_DATA_2 unkStruct_203B224 *gUnknown_203B224 = {0};
 static EWRAM_DATA_2 u16 gUnknown_203B228 = {0};
@@ -39,7 +39,7 @@ bool8 sub_801A5D8(u32 param_1, s32 param_2, UnkTextStruct2_sub *param_3, u32 par
     sub_801AE84();
     gUnknown_203B224->unk54.s0.unk34 = param_2;
     gUnknown_203B224->unk54.s0.unk38 = &gUnknown_203B224->unk54.s0.unk3C[param_2];
-    sub_8006518(gUnknown_203B224->unk54.s0.unk3C);
+    RestoreUnkTextStruct_8006518(gUnknown_203B224->unk54.s0.unk3C);
     gUnknown_203B224->unk54.s0.unk3C[gUnknown_203B224->unk54.s0.unk34] = sUnknown_80DB95C;
     gUnknown_203B224->unk54.s0.unk38->unk14 = &gUnknown_203B224->unk54.unk9C;
 
@@ -49,7 +49,7 @@ bool8 sub_801A5D8(u32 param_1, s32 param_2, UnkTextStruct2_sub *param_3, u32 par
     sub_8012D08(gUnknown_203B224->unk54.s0.unk38, param_4);
     sub_8099690(1);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
     sub_8013818(&gUnknown_203B224->unk54.s0.input, GetNumberOfFilledInventorySlots(), param_4, param_2);
     gUnknown_203B224->unk54.s0.input.menuIndex = gUnknown_203B228;
     gUnknown_203B224->unk54.s0.input.unk1E = gUnknown_203B22A;
@@ -150,7 +150,7 @@ void sub_801A8D0(bool8 r0)
 {
     sub_8099690(1);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B224->unk54.s0.unk3C, FALSE, FALSE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B224->unk54.s0.unk3C, FALSE, FALSE);
     FillInventoryGaps();
     gUnknown_203B224->unk54.s0.input.unk22 = GetNumberOfFilledInventorySlots();
     sub_8013984(&gUnknown_203B224->unk54.s0.input);
@@ -168,7 +168,7 @@ void sub_801A928(void)
         gUnknown_203B224->unk54.s0.unk3C[gUnknown_203B224->unk54.s0.unk34] = sUnknown_80DB944;
         sub_8099690(0);
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
         MemoryFree(gUnknown_203B224);
         gUnknown_203B224 = NULL;
     }
@@ -181,7 +181,7 @@ static void sub_801A998(void)
     gUnknown_203B224->unk54.unk9C.f2 = 11;
     gUnknown_203B224->unk54.unk9C.f3 = 0;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
 }
 
 void sub_801A9E0(void)
@@ -192,7 +192,7 @@ void sub_801A9E0(void)
     u8 buf1[80]; // sp4
     Item item; // spC8
 
-    sub_8008C54(gUnknown_203B224->unk54.s0.unk34);
+    CallPrepareTextbox_8008C54(gUnknown_203B224->unk54.s0.unk34);
     sub_80073B8(gUnknown_203B224->unk54.s0.unk34);
     x = gUnknown_203B224->unk54.s0.input.unk1E * 8 + 10;
 
@@ -236,7 +236,7 @@ void sub_801A9E0(void)
                 if (gUnknown_203B224->unk4[teamItemIndex] != 0 || sub_801ADA0(teamItemIndex))
                     PrintStringOnWindow(8,sub_8013800(&gUnknown_203B224->unk54.s0.input,r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
                 else {
-                    strncpy(gUnknown_202DE58, buf1, 80);
+                    strncpy(gFormatItems, buf1, 80);
                     PrintFormatStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
                 }
                 break;
@@ -262,7 +262,7 @@ void sub_801A9E0(void)
                 }
                 else {
                     sub_8090E14(buf1, &item, 0);
-                    strncpy(gUnknown_202DE58, buf1, 80);
+                    strncpy(gFormatItems, buf1, 80);
                     PrintFormatStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
                 }
                 break;
@@ -280,7 +280,7 @@ void sub_801A9E0(void)
                 if (IsGummiItem(item.id))
                     PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
                 else {
-                    strncpy(gUnknown_202DE58, buf1, 80);
+                    strncpy(gFormatItems, buf1, 80);
                     PrintFormatStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
                 }
                 break;
@@ -296,7 +296,7 @@ void sub_801A9E0(void)
 
 void sub_801AD34(u32 param_1)
 {
-    sub_8008C54(param_1);
+    CallPrepareTextbox_8008C54(param_1);
     sub_80073B8(param_1);
     PrintStringOnWindow(6, 0, sItems, param_1, 0);
     sub_8012BC4(18, 13, GetNumberOfFilledInventorySlots(), 2, 7, param_1);

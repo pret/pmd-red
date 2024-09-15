@@ -214,7 +214,7 @@ _080A172C: .4byte gFriendAreaDialogue
 _080A1730:
 	movs r0, 0
 	movs r1, 0x14
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r0, 16
 	bl sub_80A2740
@@ -271,7 +271,7 @@ _080A1794:
 	movs r0, 0
 	movs r1, 0x2F
 	adds r2, r4, 0
-	bl sub_8001784
+	bl GetScriptVarArrayValue
 	cmp r0, 0
 	bne _080A17B6
 	bl _080A234E
@@ -1001,7 +1001,7 @@ _080A1DA8:
 	movs r0, 0
 	movs r1, 0x1F
 	adds r2, r5, 0
-	bl sub_80018D8
+	bl SetScriptVarValue
 	ldr r4, _080A1DE8
 	adds r0, r5, 0
 	bl GetFriendArea
@@ -1010,7 +1010,7 @@ _080A1DA8:
 	lsrs r1, 24
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_8092578
+	bl WriteFriendAreaName
 	adds r0, r5, 0
 	bl GetFriendArea
 	lsls r0, 24
@@ -1027,7 +1027,7 @@ _080A1DE8: .4byte gUnknown_202E628
 _080A1DEC:
 	movs r0, 0
 	movs r1, 0x1F
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r5, r0, 16
 	ldr r4, _080A1E2C
@@ -1038,7 +1038,7 @@ _080A1DEC:
 	lsrs r1, 24
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_8092578
+	bl WriteFriendAreaName
 	cmp r5, 0
 	bne _080A1E14
 	b _080A236A
@@ -1067,7 +1067,7 @@ _080A1E3C:
 _080A1E42:
 	movs r0, 0
 	movs r1, 0x1F
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r5, r0, 16
 	adds r6, r5, 0
@@ -1079,7 +1079,7 @@ _080A1E42:
 	lsrs r1, 24
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_8092578
+	bl WriteFriendAreaName
 	cmp r5, 0
 	bne _080A1E6C
 	b _080A236A
@@ -1171,7 +1171,7 @@ _080A1F28:
 	bl AddToTeamMoney
 	b _080A236A
 	.align 2, 0
-_080A1F30: .4byte gUnknown_202DE58
+_080A1F30: .4byte gFormatItems
 _080A1F34: .4byte gUnknown_81167EC
 _080A1F38: .4byte 0x00002710
 _080A1F3C:
@@ -1212,7 +1212,7 @@ _080A1F80:
 	negs r2, r2
 	movs r0, 0x3
 	movs r1, 0x12
-	bl sub_8001D44
+	bl ScriptVarScenarioAfter
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1F94
@@ -1220,7 +1220,7 @@ _080A1F80:
 _080A1F94:
 	movs r0, 0
 	movs r1, 0xF
-	bl sub_8001658
+	bl GetScriptVarValue
 	cmp r0, 0x4
 	bne _080A1FA2
 	b _080A236A
@@ -1228,7 +1228,7 @@ _080A1FA2:
 	movs r0, 0
 	movs r1, 0x42
 	movs r2, 0
-	bl sub_8001784
+	bl GetScriptVarArrayValue
 	cmp r0, 0
 	ble _080A1FB2
 	b _080A236A
@@ -1242,14 +1242,14 @@ _080A1FB2:
 	movs r1, 0x42
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_800199C
+	bl SetScriptVarArrayValue
 	b _080A1EBE
 _080A1FCC:
 	movs r0, 0
 	movs r1, 0x42
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_800199C
+	bl SetScriptVarArrayValue
 	b _080A236A
 _080A1FDA:
 	ldr r6, _080A200C
@@ -1527,7 +1527,7 @@ _080A21F4:
 	movs r2, 0x80
 	lsls r2, 1
 	add r0, sp, 0x360
-	bl sub_8002BB8
+	bl SetVecFromDirectionSpeed
 	add r0, sp, 0x360
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
@@ -1687,7 +1687,7 @@ _080A234E:
 	movs r1, 0x2F
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl sub_800199C
+	bl SetScriptVarArrayValue
 	adds r0, r5, 0
 	subs r0, 0x10
 	b _080A236C
@@ -1695,7 +1695,7 @@ _080A2360:
 	movs r0, 0
 	movs r1, 0x1F
 	movs r2, 0
-	bl sub_80018D8
+	bl SetScriptVarValue
 _080A236A:
 	movs r0, 0
 _080A236C:
@@ -1733,22 +1733,22 @@ _080A2390:
 	lsls r5, r6, 16
 	asrs r5, 16
 	adds r0, r5, 0
-	bl sub_80A4D2C
+	bl GroundMapNotifyAll
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
-	bl sub_80A8B1C
+	bl GroundLivesNotifyAll
 	orrs r4, r0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
-	bl sub_80AC320
+	bl GroundObjectsNotifyAll
 	orrs r4, r0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
-	bl sub_80AD238
+	bl GroundEffectsNotifyAll
 	orrs r4, r0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1765,13 +1765,13 @@ _080A2390:
 	lsls r4, 16
 	asrs r4, 16
 	adds r0, r4, 0
-	bl sub_80A4D2C
+	bl GroundMapNotifyAll
 	adds r0, r4, 0
-	bl sub_80A8B1C
+	bl GroundLivesNotifyAll
 	adds r0, r4, 0
-	bl sub_80AC320
+	bl GroundObjectsNotifyAll
 	adds r0, r4, 0
-	bl sub_80AD238
+	bl GroundEffectsNotifyAll
 	movs r0, 0
 	strb r0, [r5]
 _080A240C:
@@ -1785,10 +1785,10 @@ _080A2414:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A241C: .4byte gUnknown_2039A36
-_080A2420: .4byte gUnknown_2039A38
+_080A241C: .4byte gAnyScriptLocked
+_080A2420: .4byte gScriptLocks
 _080A2424: .4byte gUnknown_8116848
-_080A2428: .4byte gUnknown_2039AC0
+_080A2428: .4byte gScriptLockConds
 	thumb_func_end GroundScript_Unlock
 
     .align 2,0

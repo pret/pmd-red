@@ -260,7 +260,7 @@ _0803C398:
 	movs r0, 0
 	movs r1, 0x47
 	movs r2, 0x1
-	bl sub_8001784
+	bl GetScriptVarArrayValue
 	negs r1, r0
 	orrs r1, r0
 	lsrs r5, r1, 31
@@ -270,7 +270,7 @@ _0803C3BA:
 	movs r0, 0
 	movs r1, 0x47
 	movs r2, 0
-	bl sub_8001784
+	bl GetScriptVarArrayValue
 	cmp r0, 0
 	beq _0803C3CE
 	movs r5, 0x1

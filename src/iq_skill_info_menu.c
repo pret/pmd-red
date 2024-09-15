@@ -12,7 +12,7 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 extern u8 gAvailablePokemonNames[]; // 202DF98
 
 static EWRAM_DATA_2 struct IQSkillInfoMenu *sIQSkillInfoMenu = {0};
@@ -40,7 +40,7 @@ bool8 CreateIQSkillInfoMenu(u8 iqSkill)
     sIQSkillInfoMenu->unk24 = 0;
     sub_80140B4(sIQSkillInfoMenu->unk28);
     ResetUnusedInputStruct();
-    sub_800641C(sIQSkillInfoMenu->unk28, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sIQSkillInfoMenu->unk28, TRUE, TRUE);
     SetIQSkillInfoMenuState(IQ_SKILL_INFO_MENU_INIT);
     return TRUE;
 }
@@ -84,10 +84,10 @@ static void sub_801C6E4(void)
 
     switch (sIQSkillInfoMenu->state) {
         case IQ_SKILL_INFO_MENU_INIT:
-            sub_8008C54(sIQSkillInfoMenu->unk24);
+            CallPrepareTextbox_8008C54(sIQSkillInfoMenu->unk24);
             sub_80073B8(sIQSkillInfoMenu->unk24);
             skillName = GetIQSkillName(sIQSkillInfoMenu->chosenIQSkill);
-            strcpy(gUnknown_202DE58, skillName);
+            strcpy(gFormatItems, skillName);
             PrintFormatStringOnWindow(16, 0, sFmtMoveItem0, 0, 0); // {ARG_MOVE_ITEM_0}
             PrintStringOnWindow(8, 16, GetIQSkillDescription(sIQSkillInfoMenu->chosenIQSkill), sIQSkillInfoMenu->unk24, 0);
             sub_80073E0(sIQSkillInfoMenu->unk24);
@@ -95,7 +95,7 @@ static void sub_801C6E4(void)
             sIQSkillInfoMenu->unk20 = 0;
             break;
         case 1:
-            sub_8008C54(sIQSkillInfoMenu->unk24);
+            CallPrepareTextbox_8008C54(sIQSkillInfoMenu->unk24);
             sub_80073B8(sIQSkillInfoMenu->unk24);
             preload = sIQSkillInfoMenu->unk10[sIQSkillInfoMenu->unk8];
             strcpy(gAvailablePokemonNames, preload->pokeName);

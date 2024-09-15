@@ -56,7 +56,7 @@ _0800DD60:
 	b _0800DE28
 _0800DD64:
 	mov r0, r8
-	bl sub_80054BC
+	bl RunAxAnimationFrame_80054BC
 	movs r4, 0
 	ldr r0, [r5, 0x8]
 	movs r1, 0x7
@@ -633,7 +633,7 @@ _0800E1D2:
 	adds r4, 0x55
 	ldrb r4, [r4]
 	str r4, [sp, 0x4]
-	bl sub_800543C
+	bl AxResInitUnorientedFile_800543C
 	b _0800E200
 _0800E1E4:
 	adds r0, r5, 0
