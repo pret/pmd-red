@@ -59,7 +59,7 @@ typedef struct ScriptData
     // padding
     /* 0x28 */ s16 branchDiscriminant;
     /* 0x2A */ s16 unk2A;
-    /* 0x2C */ s16 unk2C;
+    /* 0x2C */ u16 unk2C;
     // padding
     /* 0x30 */ s32 unk30;
     /* 0x34 */ Position32 pos1;
