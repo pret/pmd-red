@@ -1249,7 +1249,7 @@ void sub_8078A58(struct Entity *pokemon, struct Entity *target, s32 param_3, s32
     if (param_4 != 0) {
         FixedPoint sp0 = IntToFixedPoint(param_4);
         bellyBefore = targetInfo->maxBelly;
-        targetInfo->maxBelly = FixedPoint_Substract(bellyBefore, sp0);
+        targetInfo->maxBelly = FixedPoint_Subtract(bellyBefore, sp0);
         targetInfo->belly = FixedPoint_Min(targetInfo->belly, targetInfo->maxBelly);
         SetMessageArgument(gAvailablePokemonNames, target, 0);
 
@@ -1263,7 +1263,7 @@ void sub_8078A58(struct Entity *pokemon, struct Entity *target, s32 param_3, s32
     else {
         FixedPoint sp8 = IntToFixedPoint(param_3);
         bellyBefore = targetInfo->belly;
-        targetInfo->belly = FixedPoint_Substract(bellyBefore, sp8);
+        targetInfo->belly = FixedPoint_Subtract(bellyBefore, sp8);
 
         SetMessageArgument(gAvailablePokemonNames, target, 0);
 

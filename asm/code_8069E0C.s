@@ -447,7 +447,7 @@ _0806A664:
 	mov r0, sp
 	adds r1, r5, 0
 	movs r2, 0x5
-	bl FixedPoint_Substract
+	bl FixedPoint_Subtract
 	ldr r0, [sp]
 	str r0, [r4]
 	movs r1, 0
@@ -529,7 +529,7 @@ _0806A70E:
 	ldr r2, [sp]
 	add r0, sp, 0x4
 	adds r1, r4, 0
-	bl FixedPoint_Substract
+	bl FixedPoint_Subtract
 	ldr r0, [sp, 0x4]
 	str r0, [r5]
 	b _0806A744

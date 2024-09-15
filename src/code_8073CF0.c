@@ -348,7 +348,7 @@ void sub_8074094(Entity *entity)
 
         bellyBefore = entityInfo->belly;
         var_38 = FixedPoint_SetFromUnk(&sp10);
-        entityInfo->belly = FixedPoint_Substract(bellyBefore, var_38);
+        entityInfo->belly = FixedPoint_Subtract(bellyBefore, var_38);
         sound = TRUE;
         if (FixedPointToInt(bellyBefore) > 19 && FixedPointToInt(entityInfo->belly) <= 19)
             str = gUnknown_80FD594;
