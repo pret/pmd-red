@@ -78,27 +78,27 @@ typedef struct CallbackData
     // size: 0x54
     /* 0x00 */ u16 maybeId;
     // padding
-    // (almost?) all callbacks take the parentObject as first parameter
+    // All callbacks take the parentObject as first parameter
     /* 0x04 */ s16 (*getIndex)(void*); // id related
-    /* 0x08 */ u32 (*getSize)();
-    /* 0x0C */ u32 (*getHitboxCenter)();
-    /* 0x10 */ u32 (*getPosHeightAndUnk)();
-    /* 0x14 */ u32 (*getDirection)();
-    /* 0x18 */ u32 (*getFlags)();
-    /* 0x1C */ u32 (*setHitboxPos)();
-    /* 0x20 */ u32 (*setPositionBounds)();
-    /* 0x24 */ u32 (*moveReal)();
-    /* 0x28 */ u32 (*setPosHeight)();
-    /* 0x2C */ u32 (*setDirection)();
-    /* 0x30 */ u32 (*setEventIndex)();
-    /* 0x34 */ u32 (*livesOnlyNullsub)();
-    /* 0x38 */ u32 (*func38)();
-    /* 0x3C */ u32 (*setFlags)();
-    /* 0x40 */ u32 (*clearFlags)();
-    /* 0x44 */ u32 (*func44_livesOnlySpriteRelated)();
-    /* 0x48 */ u32 (*moveRelative)();
-    /* 0x4C */ u32 (*func4C_spriteRelatedCheck)();
-    /* 0x50 */ u32 (*func50_spriteRelated)();
+    /* 0x08 */ void (*getSize)(void*, Position32 *out);
+    /* 0x0C */ void (*getHitboxCenter)(void*, Position32 *out);
+    /* 0x10 */ void (*getPosHeightAndUnk)(void*, u32 *height, u32 *unk);
+    /* 0x14 */ void (*getDirection)(void*, s8 *dir);
+    /* 0x18 */ void (*getFlags)(void*, u32 *flags);
+    /* 0x1C */ void (*setHitboxPos)(void*, Position32 *posOrNull);
+    /* 0x20 */ void (*setPositionBounds)(void*, Position32 *from, Position32 *to);
+    /* 0x24 */ bool8 (*moveReal)(void*, Position32*);
+    /* 0x28 */ void (*setPosHeight)(void*, u32 height);
+    /* 0x2C */ void (*setDirection)(void*, s8 dir); // direction must be signed char!
+    /* 0x30 */ void (*setEventIndex)(void*, u16);
+    /* 0x34 */ void (*livesOnlyNullsub)(void*, u16);
+    /* 0x38 */ void (*func38)(void*, s16, u32);
+    /* 0x3C */ void (*setFlags)(void*, u32 bits);
+    /* 0x40 */ void (*clearFlags)(void*, u32 bits);
+    /* 0x44 */ void (*func44_livesOnlySpriteRelated)(void*, u32);
+    /* 0x48 */ void (*moveRelative)(void*, Position32*);
+    /* 0x4C */ bool8 (*func4C_spriteRelatedCheck)(void*);
+    /* 0x50 */ bool8 (*func50_spriteRelated)(void*);
 } CallbackData;
 
 typedef struct Action

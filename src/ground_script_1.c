@@ -968,7 +968,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 u32 unk[2];
                 unk[0] = curCmd.arg1 << 8;
                 unk[1] = curCmd.arg2 << 8;
-                action->callbacks->moveReal(action->parentObject, unk);
+                action->callbacks->moveReal(action->parentObject, (Position32*)unk);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
@@ -976,7 +976,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 u32 unk[2];
                 unk[0] = curCmd.argShort << 8;
                 unk[1] = curCmd.arg1 << 8;
-                action->callbacks->moveRelative(action->parentObject, unk);
+                action->callbacks->moveRelative(action->parentObject, (Position32*)unk);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
@@ -984,7 +984,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 u32 unk[2];
                 unk[0] = OtherRandInt(curCmd.argShort) << 8;
                 unk[1] = OtherRandInt(curCmd.arg1) << 8;
-                action->callbacks->moveRelative(action->parentObject, unk);
+                action->callbacks->moveRelative(action->parentObject, (Position32*)unk);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
@@ -1064,7 +1064,7 @@ s32 ExecuteScriptCommand(Action *action) {
             }
             case 0x62: case 0x6a: {
                 u32 pos[2];
-                action->callbacks->getHitboxCenter(action->parentObject, pos);
+                action->callbacks->getHitboxCenter(action->parentObject, (Position32*)pos);
                 scriptData->pos2.x = pos[0] + (curCmd.arg1 << 8);
                 scriptData->pos2.y = pos[1] + (curCmd.arg2 << 8);
                 scriptData->unk30 = curCmd.argShort;
