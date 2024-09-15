@@ -453,7 +453,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 s16 res;
                 s32 group;
                 s32 sector;
-                action->callbacks->func14(action->parentObject, unk);
+                action->callbacks->getDirection(action->parentObject, unk);
                 obj = ({ GroundObjectData obj = {
                     .unk1 = *unk,
                     .widthTiles = 1,
@@ -468,7 +468,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 });
                 res = GroundObject_Add(-1, obj, group, sector);
                 if (res >= 0) {
-                    action->callbacks->func0C(action->parentObject, &pos);
+                    action->callbacks->getHitboxCenter(action->parentObject, &pos);
                     sub_80AC49C(res, &pos);
                 }
                 break;
@@ -480,7 +480,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 s16 res;
                 s32 group;
                 s32 sector;
-                action->callbacks->func14(action->parentObject, &unk);
+                action->callbacks->getDirection(action->parentObject, &unk);
                 eff = ({ GroundEffectData eff = {
                     .unk1 = unk,
                     .widthTiles = 1,
@@ -495,7 +495,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 });
                 res = GroundEffect_Add(-1, eff, group, sector);
                 if (res >= 0) {
-                    action->callbacks->func0C(action->parentObject, &pos);
+                    action->callbacks->getHitboxCenter(action->parentObject, &pos);
                     sub_80AD3B4(res, &pos);
                 }
                 break;
@@ -595,8 +595,8 @@ s32 ExecuteScriptCommand(Action *action) {
                 if (ret >= 0) {
                     sub_80A8BD8(ret, &unk);
                     if (unk & 0x200) {
-                        action->callbacks->func0C(action->parentObject, &pos1);
-                        action->callbacks->func08(action->parentObject, &pos2);
+                        action->callbacks->getHitboxCenter(action->parentObject, &pos1);
+                        action->callbacks->getSize(action->parentObject, &pos2);
                         sub_80A8FD8(ret, &pos3);
                         sub_80A8F9C(ret, &pos4);
                         if ((tmp = (s8)SizedDeltaDirection8(&pos3, &pos4, &pos1, &pos2)) != -1 ||
@@ -904,7 +904,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 if (action->scriptData2.state == 1) {
                     InitScriptData(&action->scriptData2);
                 }
-                action->callbacks->func1C(action->parentObject, 0);
+                action->callbacks->setHitboxPos(action->parentObject, 0);
                 break;
             }
             case 0x50: {
@@ -916,11 +916,11 @@ s32 ExecuteScriptCommand(Action *action) {
                     ptr = tmp;
                 }
                 if (ptr) {
-                    ptr->callbacks->func0C(action->parentObject, &pos);
-                    ptr->callbacks->func14(action->parentObject, &c);
-                    action->callbacks->func24(action->parentObject, &pos);
+                    ptr->callbacks->getHitboxCenter(action->parentObject, &pos);
+                    ptr->callbacks->getDirection(action->parentObject, &c);
+                    action->callbacks->moveReal(action->parentObject, &pos);
                     action->scriptData.unk26 = c;
-                    action->callbacks->func2C(action->parentObject, c);
+                    action->callbacks->setDirection(action->parentObject, c);
                 }
                 break;
             }
@@ -928,32 +928,32 @@ s32 ExecuteScriptCommand(Action *action) {
                 Position32 posIn;
                 Position32 posOut1;
                 Position32 posOut2;
-                action->callbacks->func0C(action->parentObject, &posIn);
+                action->callbacks->getHitboxCenter(action->parentObject, &posIn);
                 GroundLink_GetArea(curCmd.argShort, &posOut1, &posOut2, &posIn);
-                action->callbacks->func20(action->parentObject, &posOut1, &posOut2);
+                action->callbacks->setPositionBounds(action->parentObject, &posOut1, &posOut2);
                 break;
             }
             case 0x52: {
-                action->callbacks->func3C(action->parentObject, curCmd.arg1);
+                action->callbacks->setFlags(action->parentObject, curCmd.arg1);
                 break;
             }
             case 0x53: {
                 if (curCmd.arg1 & 0x400 && action->scriptData2.state == 1) {
                     InitScriptData(&action->scriptData2);
                 }
-                action->callbacks->func40(action->parentObject, curCmd.arg1);
+                action->callbacks->clearFlags(action->parentObject, curCmd.arg1);
                 break;
             }
             case 0x54: {
-                action->callbacks->func14(action->parentObject, &action->scriptData.unk26);
+                action->callbacks->getDirection(action->parentObject, &action->scriptData.unk26);
                 if (curCmd.argShort) {
                     action->scriptData.unk24 = curCmd.argShort;
                 }
-                action->callbacks->func30(action->parentObject, (u16)curCmd.argShort);
+                action->callbacks->setEventIndex(action->parentObject, (u16)curCmd.argShort);
                 break;
             }
             case 0x55: {
-                action->callbacks->func34(action->parentObject, (u16)curCmd.argShort);
+                action->callbacks->livesOnlyNullsub(action->parentObject, (u16)curCmd.argShort);
                 break;
             }
             case 0x56: {
@@ -961,14 +961,14 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0x57: {
-                action->callbacks->func44(action->parentObject, curCmd.argShort);
+                action->callbacks->func44_livesOnlySpriteRelated(action->parentObject, curCmd.argShort);
                 break;
             }
             case 0x58: {
                 u32 unk[2];
                 unk[0] = curCmd.arg1 << 8;
                 unk[1] = curCmd.arg2 << 8;
-                action->callbacks->func24(action->parentObject, unk);
+                action->callbacks->moveReal(action->parentObject, unk);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
@@ -976,7 +976,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 u32 unk[2];
                 unk[0] = curCmd.argShort << 8;
                 unk[1] = curCmd.arg1 << 8;
-                action->callbacks->func48(action->parentObject, unk);
+                action->callbacks->moveRelative(action->parentObject, unk);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
@@ -984,25 +984,25 @@ s32 ExecuteScriptCommand(Action *action) {
                 u32 unk[2];
                 unk[0] = OtherRandInt(curCmd.argShort) << 8;
                 unk[1] = OtherRandInt(curCmd.arg1) << 8;
-                action->callbacks->func48(action->parentObject, unk);
+                action->callbacks->moveRelative(action->parentObject, unk);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
             case 0x5b: {
                 Position32 unk;
-                action->callbacks->func0C(action->parentObject, &unk);
+                action->callbacks->getHitboxCenter(action->parentObject, &unk);
                 GroundLink_GetPos((s16)curCmd.arg1, &unk);
-                action->callbacks->func24(action->parentObject, &unk); // landing end of unwanted tailmerge
+                action->callbacks->moveReal(action->parentObject, &unk); // landing end of unwanted tailmerge
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
             case 0x5c: {
                 Position32 pos, pos1, pos2;
-                action->callbacks->func0C(action->parentObject, &pos);
+                action->callbacks->getHitboxCenter(action->parentObject, &pos);
                 GroundLink_GetArea((s16)curCmd.arg1, &pos1, &pos2, &pos);
                 pos.x = pos1.x + OtherRandInt(pos2.x - pos1.x);
                 pos.y = pos1.y + OtherRandInt(pos2.y - pos1.y);
-                action->callbacks->func24(action->parentObject, &pos);
+                action->callbacks->moveReal(action->parentObject, &pos);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
@@ -1011,7 +1011,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 s16 res = sub_80A7AE8((s16)curCmd.arg1);
                 if (res >= 0) {
                     sub_80A8FD8(res, &unk);
-                    action->callbacks->func24(action->parentObject, &unk);
+                    action->callbacks->moveReal(action->parentObject, &unk);
                     scriptData->unk2A = (u8)curCmd.argByte;
                     return 2;
                 }
@@ -1025,10 +1025,10 @@ s32 ExecuteScriptCommand(Action *action) {
                 pos.y = GetScriptVarArrayValue(0, 0x33, (u16)curCmd.arg1); // POSITION_Y
                 height = GetScriptVarArrayValue(0, 0x34, (u16)curCmd.arg1); // POSITION_HEIGHT
                 dir = (s8)GetScriptVarArrayValue(0, 0x35, (u16)curCmd.arg1); // POSITION_DIRECTION
-                action->callbacks->func24(action->parentObject, &pos);
-                action->callbacks->func28(action->parentObject, height);
+                action->callbacks->moveReal(action->parentObject, &pos);
+                action->callbacks->setPosHeight(action->parentObject, height);
                 action->scriptData.unk26 = dir;
-                action->callbacks->func2C(action->parentObject, dir);
+                action->callbacks->setDirection(action->parentObject, dir);
                 // NONMATCHING: unwanted tailmerge
 #ifndef NONNMATCHING
                 asm("");
@@ -1041,9 +1041,9 @@ s32 ExecuteScriptCommand(Action *action) {
                 u32 height;
                 u32 wat;
                 s8 dir;
-                action->callbacks->func0C(action->parentObject, &pos);
-                action->callbacks->func10(action->parentObject, &height, &wat);
-                action->callbacks->func14(action->parentObject, &dir);
+                action->callbacks->getHitboxCenter(action->parentObject, &pos);
+                action->callbacks->getPosHeightAndUnk(action->parentObject, &height, &wat);
+                action->callbacks->getDirection(action->parentObject, &dir);
                 SetScriptVarArrayValue(0, 0x32, (u16)curCmd.arg1, pos.x);
                 SetScriptVarArrayValue(0, 0x33, (u16)curCmd.arg1, pos.y);
                 SetScriptVarArrayValue(0, 0x34, (u16)curCmd.arg1, height);
@@ -1051,7 +1051,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0x60: {
-                action->callbacks->func28(action->parentObject, curCmd.arg1 << 8);
+                action->callbacks->setPosHeight(action->parentObject, curCmd.arg1 << 8);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
@@ -1064,7 +1064,7 @@ s32 ExecuteScriptCommand(Action *action) {
             }
             case 0x62: case 0x6a: {
                 u32 pos[2];
-                action->callbacks->func0C(action->parentObject, pos);
+                action->callbacks->getHitboxCenter(action->parentObject, pos);
                 scriptData->pos2.x = pos[0] + (curCmd.arg1 << 8);
                 scriptData->pos2.y = pos[1] + (curCmd.arg2 << 8);
                 scriptData->unk30 = curCmd.argShort;
@@ -1072,21 +1072,21 @@ s32 ExecuteScriptCommand(Action *action) {
                 return 2;
             }
             case 0x63: case 0x6b: {
-                action->callbacks->func0C(action->parentObject, &scriptData->pos2);
+                action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos2);
                 GroundLink_GetPos((s16)curCmd.arg1, &scriptData->pos2);
                 scriptData->unk30 = curCmd.argShort;
                 scriptData->unk2A = -1;
                 return 2;
             }
             case 0x64: case 0x6c: {
-                action->callbacks->func0C(action->parentObject, &scriptData->pos2);
+                action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos2);
                 GroundLink_GetPos((s16)curCmd.arg1, &scriptData->pos2);
                 scriptData->unk30 = curCmd.argShort;
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
             case 0x65: case 0x6d: {
-                action->callbacks->func0C(action->parentObject, &scriptData->pos2);
+                action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos2);
                 GroundLink_GetPos((s16)curCmd.arg1, &scriptData->pos2);
                 scriptData->unk30 = curCmd.argShort;
                 scriptData->unk2A = OtherRandInt((u8)curCmd.argByte);
@@ -1103,7 +1103,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0x71: case 0x77: case 0x7d: case 0x83: {
-                action->callbacks->func0C(action->parentObject, &scriptData->pos1);
+                action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
                 scriptData->pos2.x = curCmd.arg1 << 8;
                 scriptData->pos2.y = curCmd.arg2 << 8;
                 if (curCmd.op == 0x7d || curCmd.op == 0x83) {
@@ -1115,7 +1115,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 return 2;
             }
             case 0x72: case 0x78: case 0x7e: case 0x84: {
-                action->callbacks->func0C(action->parentObject, &scriptData->pos1);
+                action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
                 scriptData->pos2.x = scriptData->pos1.x + (curCmd.arg1 << 8);
                 scriptData->pos2.y = scriptData->pos1.y + (curCmd.arg2 << 8);
                 if (curCmd.op == 0x7e || curCmd.op == 0x84) {
@@ -1129,7 +1129,7 @@ s32 ExecuteScriptCommand(Action *action) {
             case 0x73: case 0x79: case 0x7f: case 0x85: {
                 s32 cap1 = curCmd.arg1 * 2 - 1;
                 s32 cap2 = curCmd.arg2 * 2 - 1;
-                action->callbacks->func0C(action->parentObject, &scriptData->pos1);
+                action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
                 scriptData->pos2.x = scriptData->pos1.x + ((OtherRandInt(cap1) - curCmd.argShort) << 8);
                 scriptData->pos2.y = scriptData->pos1.y + ((OtherRandInt(cap2) - curCmd.arg1) << 8);
                 if (curCmd.op == 0x7f || curCmd.op == 0x85) {
@@ -1141,7 +1141,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 return 2;
             }
             case 0x74: case 0x7a: case 0x80: case 0x86: {
-                action->callbacks->func0C(action->parentObject, &scriptData->pos1);
+                action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
                 scriptData->pos2 = scriptData->pos1;
                 GroundLink_GetPos((s16)curCmd.arg1, &scriptData->pos2);
                 if (curCmd.op == 0x80 || curCmd.op == 0x86) {
@@ -1154,7 +1154,7 @@ s32 ExecuteScriptCommand(Action *action) {
             }
             case 0x75: case 0x7b: case 0x81: case 0x87: {
                 s32 cap = curCmd.arg1 * 2 - 1;
-                action->callbacks->func0C(action->parentObject, &scriptData->pos2);
+                action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos2);
                 GroundLink_GetPos((s16)curCmd.arg2, &scriptData->pos2);
                 scriptData->pos2.x = scriptData->pos2.x + ((OtherRandInt(cap) - curCmd.argShort) << 8);
                 scriptData->pos2.y = scriptData->pos2.y + ((OtherRandInt(cap) - curCmd.argShort) << 8);
@@ -1169,7 +1169,7 @@ s32 ExecuteScriptCommand(Action *action) {
             case 0x76: case 0x7c: case 0x82: case 0x88: {
                 s16 ret = sub_80A7AE8((s16)curCmd.arg1);
                 if (ret >= 0) {
-                    action->callbacks->func0C(action->parentObject, &scriptData->pos1);
+                    action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
                     sub_80A8FD8(ret, &scriptData->pos2);
                     if (curCmd.op == 0x82 || curCmd.op == 0x88) {
                         scriptData->unk2A = sub_8009FB8(scriptData->pos2.x - scriptData->pos1.x, scriptData->pos2.y - scriptData->pos1.y) / curCmd.argShort;
@@ -1189,23 +1189,23 @@ s32 ExecuteScriptCommand(Action *action) {
             }
             case 0x89: {
                 action->scriptData.unk26 = curCmd.arg1;
-                action->callbacks->func2C(action->parentObject, (s8) curCmd.arg1);
+                action->callbacks->setDirection(action->parentObject, (s8) curCmd.arg1);
                 scriptData->unk30 = curCmd.argShort;
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
             case 0x8a: {
                 s8 dir;
-                action->callbacks->func14(action->parentObject, &dir);
+                action->callbacks->getDirection(action->parentObject, &dir);
                 action->scriptData.unk26 = sub_8002984(dir, (s8)curCmd.arg1);
-                action->callbacks->func2C(action->parentObject, action->scriptData.unk26);
+                action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
                 scriptData->unk30 = curCmd.argShort;
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
             case 0x8b: {
                 action->scriptData.unk26 = curCmd.argShort;
-                action->callbacks->func2C(action->parentObject, action->scriptData.unk26);
+                action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
@@ -1215,16 +1215,16 @@ s32 ExecuteScriptCommand(Action *action) {
                 if (ret >= 0) {
                     sub_80A9050(ret, &dir);
                     action->scriptData.unk26 = sub_8002984(dir, curCmd.argShort);
-                    action->callbacks->func2C(action->parentObject, action->scriptData.unk26);
+                    action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
                 }
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
             case 0x8d: {
                 s8 dir;
-                action->callbacks->func14(action->parentObject, &dir);
+                action->callbacks->getDirection(action->parentObject, &dir);
                 action->scriptData.unk26 = sub_8002984(dir, curCmd.argShort);
-                action->callbacks->func2C(action->parentObject, action->scriptData.unk26);
+                action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
@@ -1253,8 +1253,8 @@ s32 ExecuteScriptCommand(Action *action) {
                     }
                     case 0x90: {
                         flag = TRUE;
-                        action->callbacks->func0C(action->parentObject, &pos1);
-                        action->callbacks->func08(action->parentObject, &pos2);
+                        action->callbacks->getHitboxCenter(action->parentObject, &pos1);
+                        action->callbacks->getSize(action->parentObject, &pos2);
                         GroundLink_GetPos((s16)curCmd.arg1, &pos1);
                         break;
                     }
@@ -1262,8 +1262,8 @@ s32 ExecuteScriptCommand(Action *action) {
                 if (flag) {
                     s8 ret;
                     int tmp;
-                    action->callbacks->func0C(action->parentObject, &pos3);
-                    action->callbacks->func08(action->parentObject, &pos4);
+                    action->callbacks->getHitboxCenter(action->parentObject, &pos3);
+                    action->callbacks->getSize(action->parentObject, &pos4);
                     ret = SizedDeltaDirection8(&pos3, &pos4, &pos1, &pos2); // wtf
                     *&dir = ret;
 
@@ -1272,10 +1272,10 @@ s32 ExecuteScriptCommand(Action *action) {
                         dir = SizedDeltaDirection4(&pos3, &gUnknown_81164DC, &pos1, &gUnknown_81164DC);
                     }
                     if (dir == tmp) {
-                        action->callbacks->func14(action->parentObject, &dir);
+                        action->callbacks->getDirection(action->parentObject, &dir);
                     }
                     action->scriptData.unk26 = sub_8002984(dir, (s8)curCmd.argShort);
-                    action->callbacks->func2C(action->parentObject, action->scriptData.unk26);
+                    action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
                 }
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
@@ -1291,7 +1291,7 @@ s32 ExecuteScriptCommand(Action *action) {
             }
             case 0x92: {
                 s8 unk;
-                action->callbacks->func14(action->parentObject, &unk);
+                action->callbacks->getDirection(action->parentObject, &unk);
                 action->scriptData.unk4D = sub_8002984(unk, (s8)curCmd.arg1);
                 scriptData->unk2A = 0;
                 return 2;
@@ -1301,7 +1301,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0x98: {
-                s32 id = action->callbacks->func04(action->parentObject);
+                s32 id = action->callbacks->getIndex(action->parentObject);
                 switch(action->unk8[0]) {
                     case 1:
                         sub_809D170(1, id);
@@ -1316,7 +1316,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0x99: {
-                s32 id = action->callbacks->func04(action->parentObject);
+                s32 id = action->callbacks->getIndex(action->parentObject);
                 Position32 unk;
                 switch(action->unk8[0]) {
                     case 1:
@@ -1339,7 +1339,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0x9b: {
-                s32 id = action->callbacks->func04(action->parentObject);
+                s32 id = action->callbacks->getIndex(action->parentObject);
                 if (id < 0) break;
                 switch(action->unk8[0]) {
                     case 1:
@@ -1355,7 +1355,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0x9c: {
-                s32 id = action->callbacks->func04(action->parentObject);
+                s32 id = action->callbacks->getIndex(action->parentObject);
                 Position32 unk;
                 switch(action->unk8[0]) {
                     case 1:
@@ -1378,7 +1378,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 return 2;
             }
             case 0x9e: {
-                s32 id = action->callbacks->func04(action->parentObject);
+                s32 id = action->callbacks->getIndex(action->parentObject);
                 if (id < 0) break;
                 switch(action->unk8[0]) {
                     case 1:
@@ -1394,7 +1394,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0x9f: {
-                s32 id = action->callbacks->func04(action->parentObject);
+                s32 id = action->callbacks->getIndex(action->parentObject);
                 Position32 unk;
                 switch(action->unk8[0]) {
                     case 1:
@@ -1417,7 +1417,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 return 2;
             }
             case 0xa1: {
-                s32 id = action->callbacks->func04(action->parentObject);
+                s32 id = action->callbacks->getIndex(action->parentObject);
                 if (id < 0) break;
                 switch(action->unk8[0]) {
                     case 1:
@@ -1433,7 +1433,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0xa2: {
-                s32 id = action->callbacks->func04(action->parentObject);
+                s32 id = action->callbacks->getIndex(action->parentObject);
                 Position32 unk;
                 switch(action->unk8[0]) {
                     case 1:
@@ -1644,12 +1644,12 @@ s32 ExecuteScriptCommand(Action *action) {
                     }
                     case 0xc7: {
                         s8 dir;
-                        action->callbacks->func14(action->parentObject, &dir);
+                        action->callbacks->getDirection(action->parentObject, &dir);
                         val = dir;
                         break;
                     }
                     case 0xca: {
-                        action->callbacks->func0C(action->parentObject, &pos);
+                        action->callbacks->getHitboxCenter(action->parentObject, &pos);
                         pos2 = pos;
                         GroundLink_GetPos((s16)curCmd.arg1, &pos2);
                         pos3.x = pos2.x - pos.x;
@@ -1661,8 +1661,8 @@ s32 ExecuteScriptCommand(Action *action) {
                         s16 tmp = (s16)sub_80A7AE8((s16)curCmd.arg1);
                         if (tmp >= 0) {
                             Position32 pos1, pos2, pos3, pos4;
-                            action->callbacks->func0C(action->parentObject, &pos1);
-                            action->callbacks->func08(action->parentObject, &pos2);
+                            action->callbacks->getHitboxCenter(action->parentObject, &pos1);
+                            action->callbacks->getSize(action->parentObject, &pos2);
                             sub_80A8FD8(tmp, &pos3);
                             sub_80A8F9C(tmp, &pos4);
                             val = (s8)SizedDeltaDirection8(&pos1, &pos2, &pos3, &pos4);
@@ -1678,8 +1678,8 @@ s32 ExecuteScriptCommand(Action *action) {
                         s16 tmp = (s16)sub_80A7AE8((s16)curCmd.arg1);
                         if (tmp >= 0) {
                             Position32 pos1, pos2, pos3;
-                            action->callbacks->func0C(action->parentObject, &pos1);
-                            action->callbacks->func08(action->parentObject, &pos2);
+                            action->callbacks->getHitboxCenter(action->parentObject, &pos1);
+                            action->callbacks->getSize(action->parentObject, &pos2);
                             sub_80A8FD8(tmp, &pos3);
                             val = (s8)SizedDeltaDirection8(&pos1, &pos2, &pos3, &gUnknown_81164DC);
                             if (val == -1) {

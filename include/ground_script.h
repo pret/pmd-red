@@ -79,26 +79,26 @@ typedef struct CallbackData
     /* 0x00 */ u16 maybeId;
     // padding
     // (almost?) all callbacks take the parentObject as first parameter
-    /* 0x04 */ s16 (*func04)(void*); // id related
-    /* 0x08 */ u32 (*func08)();
-    /* 0x0C */ u32 (*func0C)();
-    /* 0x10 */ u32 (*func10)();
-    /* 0x14 */ u32 (*func14)();
-    /* 0x18 */ u32 (*func18)();
-    /* 0x1C */ u32 (*func1C)();
-    /* 0x20 */ u32 (*func20)();
-    /* 0x24 */ u32 (*func24)();
-    /* 0x28 */ u32 (*func28)();
-    /* 0x2C */ u32 (*func2C)();
-    /* 0x30 */ u32 (*func30)();
-    /* 0x34 */ u32 (*func34)();
+    /* 0x04 */ s16 (*getIndex)(void*); // id related
+    /* 0x08 */ u32 (*getSize)();
+    /* 0x0C */ u32 (*getHitboxCenter)();
+    /* 0x10 */ u32 (*getPosHeightAndUnk)();
+    /* 0x14 */ u32 (*getDirection)();
+    /* 0x18 */ u32 (*getFlags)();
+    /* 0x1C */ u32 (*setHitboxPos)();
+    /* 0x20 */ u32 (*setPositionBounds)();
+    /* 0x24 */ u32 (*moveReal)();
+    /* 0x28 */ u32 (*setPosHeight)();
+    /* 0x2C */ u32 (*setDirection)();
+    /* 0x30 */ u32 (*setEventIndex)();
+    /* 0x34 */ u32 (*livesOnlyNullsub)();
     /* 0x38 */ u32 (*func38)();
-    /* 0x3C */ u32 (*func3C)();
-    /* 0x40 */ u32 (*func40)();
-    /* 0x44 */ u32 (*func44)();
-    /* 0x48 */ u32 (*func48)();
-    /* 0x4C */ u32 (*func4C)();
-    /* 0x50 */ u32 (*func50)();
+    /* 0x3C */ u32 (*setFlags)();
+    /* 0x40 */ u32 (*clearFlags)();
+    /* 0x44 */ u32 (*func44_livesOnlySpriteRelated)();
+    /* 0x48 */ u32 (*moveRelative)();
+    /* 0x4C */ u32 (*func4C_spriteRelatedCheck)();
+    /* 0x50 */ u32 (*func50_spriteRelated)();
 } CallbackData;
 
 typedef struct Action

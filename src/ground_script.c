@@ -106,8 +106,8 @@ void InitActionWithParams(Action *action, const CallbackData *callbacks, void *p
     action->sector = sector_s32;
     action->unk8[0] = callbacks->maybeId;
 
-    if(callbacks->func04)
-        action->unk8[1] = callbacks->func04(parent);
+    if(callbacks->getIndex)
+        action->unk8[1] = callbacks->getIndex(parent);
     else
         action->unk8[1] = 0;
 }
@@ -265,8 +265,8 @@ bool8 GroundScript_ExecutePP(Action *action, s32 *param_2, ScriptInfoSmall *para
     action->scriptData.savedScript.ptr = 0;
     action->scriptData.savedScript.ptr2 = NULL;
 
-    if (action->callbacks->func14 != 0) {
-        action->callbacks->func14(action->parentObject, &action->scriptData.unk26);
+    if (action->callbacks->getDirection != 0) {
+        action->callbacks->getDirection(action->parentObject, &action->scriptData.unk26);
     }
     return TRUE;
 }
