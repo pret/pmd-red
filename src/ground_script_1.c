@@ -965,18 +965,18 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0x58: {
-                u32 unk[2];
-                unk[0] = curCmd.arg1 << 8;
-                unk[1] = curCmd.arg2 << 8;
-                action->callbacks->moveReal(action->parentObject, (Position32*)unk);
+                Position32 unk;
+                unk.x = curCmd.arg1 << 8;
+                unk.y = curCmd.arg2 << 8;
+                action->callbacks->moveReal(action->parentObject, &unk);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
             case 0x59: {
-                u32 unk[2];
-                unk[0] = curCmd.argShort << 8;
-                unk[1] = curCmd.arg1 << 8;
-                action->callbacks->moveRelative(action->parentObject, (Position32*)unk);
+                Position32 unk;
+                unk.x = curCmd.argShort << 8;
+                unk.y = curCmd.arg1 << 8;
+                action->callbacks->moveRelative(action->parentObject, &unk);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
@@ -1063,10 +1063,10 @@ s32 ExecuteScriptCommand(Action *action) {
                 return 2;
             }
             case 0x62: case 0x6a: {
-                u32 pos[2];
-                action->callbacks->getHitboxCenter(action->parentObject, (Position32*)pos);
-                scriptData->pos2.x = pos[0] + (curCmd.arg1 << 8);
-                scriptData->pos2.y = pos[1] + (curCmd.arg2 << 8);
+                Position32 pos;
+                action->callbacks->getHitboxCenter(action->parentObject, &pos);
+                scriptData->pos2.x = pos.x + (curCmd.arg1 << 8);
+                scriptData->pos2.y = pos.y + (curCmd.arg2 << 8);
                 scriptData->unk30 = curCmd.argShort;
                 scriptData->unk2A = -1;
                 return 2;
