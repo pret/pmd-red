@@ -900,7 +900,7 @@ bool8 UseAttack(Entity *a0)
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         Entity *mon = gDungeon->allPokemon[i];
         if (EntityExists(mon)) {
-            EntityInfo *monInfo = mon->info;
+            EntityInfo *monInfo = GetEntInfo(mon);
             if (monInfo->numMoveTiles == 0) {
                 if (monInfo->waiting) {
                     monInfo->waiting = FALSE;
@@ -942,9 +942,7 @@ bool8 UseAttack(Entity *a0)
             for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
                 Entity *mon = gDungeon->allPokemon[i];
                 if (EntityExists(mon)) {
-                    // r6 / r7 reg swap
-                    EntityInfo *monInfo_ = mon->info;
-                    EntityInfo *monInfo = monInfo_;
+                    EntityInfo *monInfo = GetEntInfo(mon);
                     Unk_Entity_x184 *strPtr = &monInfo->unk184[monInfo->notMoving];
 
                     #ifndef NONMATCHING
@@ -975,7 +973,7 @@ bool8 UseAttack(Entity *a0)
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         Entity *mon = gDungeon->allPokemon[i];
         if (EntityExists(mon)) {
-            EntityInfo *monInfo = mon->info;
+            EntityInfo *monInfo = GetEntInfo(mon);
             monInfo->numMoveTiles = 0;
             nullsub_97(mon);
             if (monInfo->flags & 0x2000) {
@@ -996,7 +994,7 @@ bool8 UseAttack(Entity *a0)
             if (sub_8044B28())
                 break;
 
-            monInfo = mon->info;
+            monInfo = GetEntInfo(mon);
             if ((j == 0 && !monInfo->isTeamLeader) || (j != 0 && monInfo->isTeamLeader))
                 continue;
 

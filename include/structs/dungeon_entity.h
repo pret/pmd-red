@@ -413,4 +413,9 @@ enum VisualFlag
     VISUAL_FLAG_RUN_AWAY = 2
 };
 
+static inline EntityInfo *GetEntInfo(Entity *ent)
+{
+    return ent->info;
+}
+
 #endif
