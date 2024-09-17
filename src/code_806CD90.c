@@ -32,6 +32,7 @@
 #include "code_804267C.h"
 #include "move_effects_target.h"
 #include "dungeon_pokemon_attributes.h"
+#include "code_8041AD0.h"
 
 extern u8 gUnknown_202F221;
 extern u8 gUnknown_202DFE8[];
@@ -255,18 +256,7 @@ u32 sub_806CF98(Entity *entity)
     return shadowSize;
 }
 
-struct UnkStruct_sub_806D010
-{
-    s32 unk0;
-    s32 unk4;
-    u32 unk8;
-    u8 unkC;
-    u8 unkD;
-    u8 unkE;
-    u8 unkF;
-};
-
-static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct UnkStruct_sub_806D010 *r5, bool32 isFalseSwipe, bool32 giveExp, s16 arg4_, s32 arg8);
+static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct DamageStruct *r5, bool32 isFalseSwipe, bool32 giveExp, s16 arg4_, s32 arg8);
 
 extern void sub_807F43C(Entity *, Entity *);
 extern void sub_8041B18(Entity *pokemon);
@@ -280,7 +270,6 @@ extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern bool8 sub_806A458(Entity *);
 extern bool8 sub_806F660(Entity *, Entity *);
 extern bool8 sub_806A58C(s16 a0);
-extern void sub_80420E8(Entity *pokemon, struct UnkStruct_sub_806D010 *r1); // To-do unify structs
 extern void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp);
 extern void sub_8042148(Entity *pokemon);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
@@ -336,16 +325,16 @@ extern const u8 *const gUnknown_80F9D28[];
 extern u8 gAvailablePokemonNames[];
 extern u32 gFormatData_202DE30;
 
-void HandleDealingDamage(Entity *attacker, Entity *target, struct UnkStruct_sub_806D010 *r8, bool32 isFalseSwipe, s32 giveExp, s16 arg4, bool32 arg8, s32 argC)
+void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, s32 giveExp, s16 arg4, bool32 arg8, s32 argC)
 {
     bool32 r9;
     // Some compiler weirdness, because it won't match without creating arg4 again
     s32 r10 = arg4;
-    s32 r7 = 0;
+    s32 returnDmg = 0;
 
-    if (HandleDealingDamageInternal(attacker, target, r8, isFalseSwipe, giveExp, r10, argC))
+    if (HandleDealingDamageInternal(attacker, target, dmgStruct, isFalseSwipe, giveExp, r10, argC))
         return;
-    if (r8->unkF)
+    if (dmgStruct->unkF)
         return;
     if (!EntityExists(attacker) || !EntityExists(target))
         return;
@@ -358,7 +347,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct UnkStruct_sub_
     if (r9
         && abs(attacker->pos.x - target->pos.x) <= 1 && abs(attacker->pos.y - target->pos.y) <= 1
         && attacker != target
-        && sub_8092354(r8->unkC)
+        && IsTypePhysical(dmgStruct->type)
         && target->info->protection.protectionStatus == STATUS_VITAL_THROW)
     {
         sub_8042730(target, attacker);
@@ -376,32 +365,32 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct UnkStruct_sub_
         && attacker != target
         && abs(attacker->pos.x - target->pos.x) <= 1 && abs(attacker->pos.y - target->pos.y) <= 1)
     {
-        u8 r4 = sub_8092354(r8->unkC); // Possibly move category/split
-        if (target->info->protection.protectionStatus == STATUS_COUNTER && r4 != 0) {
+        bool32 isPhysical = IsTypePhysical(dmgStruct->type);
+        if (target->info->protection.protectionStatus == STATUS_COUNTER && isPhysical) {
             sub_8041B18(target);
-            r7 += 4;
+            returnDmg += 4;
         }
-        if (target->info->protection.protectionStatus == STATUS_MINI_COUNTER && r4 != 0) {
+        if (target->info->protection.protectionStatus == STATUS_MINI_COUNTER && isPhysical) {
             sub_8041B18(target);
-            r7 += 1;
+            returnDmg += 1;
         }
-        if (target->info->protection.protectionStatus == STATUS_MIRROR_COAT && r4 == 0) {
+        if (target->info->protection.protectionStatus == STATUS_MIRROR_COAT && !isPhysical) {
             sub_8041B90(target);
-            r7 += 4;
+            returnDmg += 4;
         }
 
         if (HasAbility(target, ABILITY_ROUGH_SKIN))
-            r7 += 2;
+            returnDmg += 2;
 
-        if (r7) {
-            struct UnkStruct_sub_806D010 sp;
+        if (returnDmg) {
+            struct DamageStruct sp;
 
             sub_80522F4(attacker, target, gUnknown_80FCFA4);
-            sp.unk0 = (r8->unk0 * r7) / 4;
-            sp.unkC = r8->unkC;
-            sp.unk4 = 6;
-            sp.unk8 = 2;
-            sp.unkD = 0;
+            sp.dmg = (dmgStruct->dmg * returnDmg) / 4;
+            sp.type = dmgStruct->type;
+            sp.residualDmgType = 6;
+            sp.typeEffectiveness = 2;
+            sp.isCrit = FALSE;
             sp.unkE = 0;
             sp.unkF = 0;
             HandleDealingDamageInternal(target, attacker, &sp, FALSE, giveExp, r10, argC);
@@ -415,7 +404,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct UnkStruct_sub_
         && attacker != target
         && abs(attacker->pos.x - target->pos.x) <= 1 && abs(attacker->pos.y - target->pos.y) <= 1)
     {
-        bool8 unkBool = sub_8092354(r8->unkC);
+        bool32 isPhysical = IsTypePhysical(dmgStruct->type);
         EntityInfo *attackerInfo = attacker->info;
 
         if (HasAbility(target, ABILITY_ARENA_TRAP)
@@ -438,7 +427,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct UnkStruct_sub_
         }
 
         if (HasAbility(target, ABILITY_STATIC)
-            && unkBool
+            && isPhysical
             && DungeonRandInt(100) < gUnknown_80F4E16)
         {
             attackerInfo->unk178 |= 8;
@@ -449,7 +438,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct UnkStruct_sub_
             attackerInfo->unk178 |= 0x20;
         }
         if (HasAbility(target, ABILITY_EFFECT_SPORE)
-            && unkBool
+            && isPhysical
             && DungeonRandInt(100) < gUnknown_80F4E1A)
         {
             s32 rnd = DungeonRandInt(3);
@@ -466,7 +455,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct UnkStruct_sub_
             attackerInfo->unk178 |= 0x100;
         }
         if (HasAbility(target, ABILITY_CUTE_CHARM)
-            && unkBool
+            && isPhysical
             && DungeonRandInt(100) < gUnknown_80F4E1E)
         {
             attackerInfo->unk178 |= 0x200;
@@ -493,7 +482,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct UnkStruct_sub_
             }
             else {
                 sub_8041D00(destBondTarget, target);
-                DealDamageToEntity(destBondTarget, r8->unk0, 0xC, 0x1F9);
+                DealDamageToEntity(destBondTarget, dmgStruct->dmg, 0xC, 0x1F9);
             }
         }
     }
@@ -526,7 +515,7 @@ static inline u8 ItemId(Item *item)
     return item->id;
 }
 
-static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct UnkStruct_sub_806D010 *r5, bool32 isFalseSwipe, bool32 giveExp, s16 arg4_, s32 arg8)
+static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4_, s32 arg8)
 {
     s32 hpBefore, hpChange;
     EntityInfo *targetData;
@@ -536,9 +525,9 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     s32 r8  = 0;
     Tile *unkTile = NULL;
 
-    r5->unkF = 0;
+    dmgStruct->unkF = 0;
     if (GetEntityType(target) != ENTITY_MONSTER) {
-        r5->unkF = 1;
+        dmgStruct->unkF = 1;
         return FALSE;
     }
 
@@ -547,23 +536,23 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     SetShopkeeperAggression(attacker, target);
     if (GetEntityType(attacker) == ENTITY_MONSTER
         && attacker->info->moveStatus.moveStatus == STATUS_SET_DAMAGE
-        && r5->unkE == 0)
+        && dmgStruct->unkE == 0)
     {
-        r5->unk0 = gUnknown_80F4F8C;
+        dmgStruct->dmg = gUnknown_80F4F8C;
     }
 
-    if (arg4 != 0x20E && HasAbility(target, ABILITY_STURDY) && r5->unk0 == 9999) {
+    if (arg4 != 0x20E && HasAbility(target, ABILITY_STURDY) && dmgStruct->dmg == 9999) {
         SetMessageArgument(gUnknown_202DFE8, target, 0);
         sub_80522F4(attacker, target, gUnknown_80FCA90);
         sub_8042238(attacker, target);
-        r5->unkF = 1;
+        dmgStruct->unkF = 1;
         return FALSE;
     }
     if (targetData->immobilize.immobilizeStatus == STATUS_FROZEN) {
         SetMessageArgument(gUnknown_202DFE8, target, 0);
         sub_80522F4(attacker, target, gUnknown_80F9600);
         sub_8042238(attacker, target);
-        r5->unkF = 1;
+        dmgStruct->unkF = 1;
         return FALSE;
     }
 
@@ -573,22 +562,22 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         WakeUpPokemon(target);
     }
 
-    if ((HasAbility(target, ABILITY_VOLT_ABSORB) && r5->unkC == TYPE_ELECTRIC)) {
-        HealTargetHP(attacker, target, r5->unk0, 0, 0);
-        r5->unkF = 1;
+    if ((HasAbility(target, ABILITY_VOLT_ABSORB) && dmgStruct->type == TYPE_ELECTRIC)) {
+        HealTargetHP(attacker, target, dmgStruct->dmg, 0, 0);
+        dmgStruct->unkF = 1;
         return FALSE;
     }
-    else if (HasAbility(target, ABILITY_WATER_ABSORB) && r5->unkC == TYPE_WATER) {
-        HealTargetHP(attacker, target, r5->unk0, 0, 0);
-        r5->unkF = 1;
+    else if (HasAbility(target, ABILITY_WATER_ABSORB) && dmgStruct->type == TYPE_WATER) {
+        HealTargetHP(attacker, target, dmgStruct->dmg, 0, 0);
+        dmgStruct->unkF = 1;
         return FALSE;
     }
 
     if (targetData->unk152 == 0) {
-        if (r5->unkD != 0) {
+        if (dmgStruct->isCrit) {
             sub_80522F4(attacker, target, gUnknown_80F9614);
         }
-        switch (r5->unk8) {
+        switch (dmgStruct->typeEffectiveness) {
             case 0:
                 sub_80522F4(attacker, target, gUnknown_80F9630);
                 break;
@@ -603,7 +592,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 
     SetMessageArgument(gAvailablePokemonNames, attacker, 0);
     SetMessageArgument(gAvailablePokemonNames + 0x50, target, 0);
-    if (r5->unk0 == 0) {
+    if (dmgStruct->dmg == 0) {
         if (sub_8045888(attacker) && sub_8045888(target)) {
             if (targetData->unk152 == 0) {
                 sub_80522F4(attacker, target, gUnknown_80F9688);
@@ -616,10 +605,10 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             }
             sub_803E708(0x1E, 0x18);
         }
-        r5->unkF = 1;
+        dmgStruct->unkF = 1;
         return FALSE;
     }
-    else if (r5->unk0 == 9999) {
+    else if (dmgStruct->dmg == 9999) {
         if (arg8 != 0 && sub_8045888(target)) {
             unkTile = GetTileAtEntitySafe(target);
             sub_803E708(0x14, 0x18);
@@ -634,20 +623,20 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     else {
         const u8 *str;
 
-        gFormatData_202DE30 = r5->unk0;
-        str = gUnknown_80F9764[r5->unk4];
+        gFormatData_202DE30 = dmgStruct->dmg;
+        str = gUnknown_80F9764[dmgStruct->residualDmgType];
 
         // Needed to match - the line can be safely removed
-        r5++;r5--;
+        dmgStruct++;dmgStruct--;
         //
 
-        targetData->unkA0 += r5->unk0;
+        targetData->unkA0 += dmgStruct->dmg;
         if (targetData->unkA0 > 999)
             targetData->unkA0 = 999;
 
         if (sub_8045888(target)) {
-            if (r5->unk4 != 14) {
-                sub_803ED30(-r5->unk0, target, 1, -1);
+            if (dmgStruct->residualDmgType != 14) {
+                sub_803ED30(-dmgStruct->dmg, target, 1, -1);
             }
             if (targetData->unk152 == 0 && str != NULL) {
                 sub_80522F4(attacker, target, str);
@@ -660,7 +649,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         }
     }
 
-    if ((r5->unk4 != 14 || targetData->HP <= 1) && unkTile == NULL && sub_8045888(target)) {
+    if ((dmgStruct->residualDmgType != 14 || targetData->HP <= 1) && unkTile == NULL && sub_8045888(target)) {
         if ((attacker->pos.x != target->pos.x || attacker->pos.y != target->pos.y) && GetEntityType(attacker) == ENTITY_MONSTER) {
             bool32 unkBool = FALSE;
             if (targetData->isTeamLeader) {
@@ -683,14 +672,14 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             TargetTileInFront(target);
         }
         sub_806CDD4(target, 6, target->info->action.direction);
-        sub_80420E8(target, r5);
+        sub_80420E8(target, dmgStruct);
         var_24 = TRUE;
     }
 
     // HP goes down
     hpBefore = targetData->HP;
-    if (targetData->HP > r5->unk0)
-        targetData->HP -= r5->unk0;
+    if (targetData->HP > dmgStruct->dmg)
+        targetData->HP -= dmgStruct->dmg;
     else
         targetData->HP = 0;
 
@@ -716,7 +705,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         if (var_24) {
             sub_806CE68(target, 8);
         }
-        if (HasHeldItem(target, ITEM_JOY_RIBBON) && hpChange > 0 && r5->unk0 != 9999) {
+        if (HasHeldItem(target, ITEM_JOY_RIBBON) && hpChange > 0 && dmgStruct->dmg != 9999) {
             sub_8071D4C(attacker, target, hpChange);
         }
 
@@ -752,7 +741,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     targetData->unk14C = 0;
     SetMessageArgument(gAvailablePokemonNames, attacker, 0);
     SetMessageArgument(gAvailablePokemonNames + 0x50, target, 0);
-    if (r5->unk4 == 19 || r5->unk4 == 20) {
+    if (dmgStruct->residualDmgType == 19 || dmgStruct->residualDmgType == 20) {
         if (targetData->isNotTeamMember) {
             sub_80522F4(attacker, target, gUnknown_80F9E44);
         }

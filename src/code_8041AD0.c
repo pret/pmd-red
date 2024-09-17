@@ -3,6 +3,7 @@
 #include "code_803E46C.h"
 #include "code_804267C.h"
 #include "code_806CD90.h"
+#include "code_8041AD0.h"
 #include "constants/direction.h"
 #include "constants/status.h"
 #include "constants/type.h"
@@ -11,14 +12,6 @@
 #include "items.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
-
-// size: 0xC
-struct unkStruct_80420E8
-{
-    u32 unk0;
-    u32 unk4;
-    u32 unk8;
-};
 
 // size: 0x1C
 typedef struct unkStruct_80416E0
@@ -823,14 +816,14 @@ void nullsub_92(Entity *pokemon)
 {
 }
 
-void sub_80420E8(Entity *pokemon, struct unkStruct_80420E8 *r1)
+void sub_80420E8(Entity *pokemon, struct DamageStruct *dmgStruct)
 {
-    u32 temp;
+    u32 typeEffectiveness;
     u32 arg;
-    temp = r1->unk8;
+    typeEffectiveness = dmgStruct->typeEffectiveness;
     if(gDungeon->unk16D != 0)
-        temp = sub_806F62C(r1->unk8);
-    switch(temp)
+        typeEffectiveness = sub_806F62C(dmgStruct->typeEffectiveness);
+    switch(typeEffectiveness)
     {
         default:
         case 0:

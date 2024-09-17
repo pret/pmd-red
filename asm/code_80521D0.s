@@ -8611,7 +8611,7 @@ _08056C5A:
 	bl GetMoveType
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092354
+	bl IsTypePhysical
 	movs r1, 0
 	lsls r0, 24
 	cmp r0, 0

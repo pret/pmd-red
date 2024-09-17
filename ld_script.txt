@@ -253,7 +253,6 @@ SECTIONS {
         src/code_8069E0C.o(.text);
         asm/code_8069E0C.o(.text);
         src/code_806CD90.o(.text);
-        asm/code_806CD90.o(.text);
         src/type_effectiveness.o(.text);
         src/code_806E8B0.o(.text);
         asm/code_806E8B0.o(.text);

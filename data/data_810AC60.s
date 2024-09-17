@@ -41,8 +41,8 @@ gUnknown_810AC6A: @ 810AC6A
         .byte 0x10
         .byte 0x05
 
-	.global gUnknown_810AC7C
-gUnknown_810AC7C: @ 810AC7C
+	.global gIsTypePhysicalTable
+gIsTypePhysicalTable: @ 810AC7C
         .byte 0x01
         .byte 0x01
         .byte 0x00
