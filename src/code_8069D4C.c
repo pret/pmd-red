@@ -1,25 +1,7 @@
 #include "global.h"
 #include "pokemon_mid.h"
 #include "dungeon_util.h"
-
-struct unkStruct_8069D4C
-{
-    s16 id;
-    Position pos;
-    s16 HP;
-    u8 atk;
-    u8 spAtk;
-    u8 def;
-    u8 spDef;
-    u16 level;
-    u32 exp;
-    FixedPoint belly;
-    FixedPoint maxBelly;
-    Item heldItem;
-    Move moves[MAX_MON_MOVES];
-    u32 unk40; // strugglemoveFlags?
-    HiddenPower hiddenPower;
-};
+#include "code_8069D4C.h"
 
 u32 sub_8069D18(Position *pos,Entity *entity)
 {

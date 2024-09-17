@@ -225,7 +225,7 @@ typedef struct EntityInfo
     u8 fill95[0x98 - 0x95];
     /* 0x98 */ u32 unk98;
     /* 0x9C */ u32 unk9C;
-    /* 0xA0 */ u32 unkA0;
+    /* 0xA0 */ s32 unkA0;
     /* 0xA4 */ u8 clientType;
     u8 fillA5[0xA8 - 0xA5];
     // Statuses are split into groups based on which ones can't overlap.

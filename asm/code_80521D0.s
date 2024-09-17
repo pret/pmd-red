@@ -6018,7 +6018,7 @@ _08055790:
 	adds r1, r4, 0
 	mov r2, r8
 	mov r3, r10
-	bl sub_806D010
+	bl HandleDealingDamage
 	b _08055826
 	.align 2, 0
 _080557AC: .4byte gDungeon
@@ -6139,7 +6139,7 @@ sub_8055864:
 	adds r1, r7, 0
 	add r2, sp, 0x10
 	movs r3, 0
-	bl sub_806D010
+	bl HandleDealingDamage
 	add r0, sp, 0x10
 	ldrb r0, [r0, 0xF]
 	cmp r0, 0

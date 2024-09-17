@@ -6,19 +6,38 @@
 #include "constants/status.h"
 #include "constants/ability.h"
 #include "constants/type.h"
+#include "constants/dungeon.h"
+#include "constants/iq_skill.h"
 #include "dungeon_util.h"
+#include "code_803E668.h"
+#include "exclusive_pokemon.h"
+#include "code_8077274_1.h"
+#include "code_8069D4C.h"
+#include "code_8045A00.h"
+#include "position_util.h"
+#include "game_options.h"
+#include "dungeon_items.h"
+#include "status.h"
 #include "pokemon_mid.h"
 #include "pokemon.h"
 #include "random.h"
+#include "targeting.h"
 #include "sprite.h"
 #include "structs/str_dungeon.h"
 #include "tile_types.h"
 #include "dungeon_capabilities.h"
 #include "dungeon_random.h"
 #include "text_util.h"
+#include "dungeon_visibility.h"
 #include "code_804267C.h"
 #include "move_effects_target.h"
 #include "dungeon_pokemon_attributes.h"
+
+extern u8 gUnknown_202F221;
+extern u8 gUnknown_202DFE8[];
+
+extern void sub_806BFC0(EntityInfo *, u32);
+extern void sub_805239C(Entity *, const u8 *);
 
 const u8 gUnknown_8106EEF[] = {0x03, 0x04, 0x05, 0x00, 0x00, 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00 };
 
@@ -240,14 +259,14 @@ struct UnkStruct_sub_806D010
 {
     s32 unk0;
     s32 unk4;
-    s32 unk8;
+    u32 unk8;
     u8 unkC;
     u8 unkD;
     u8 unkE;
     u8 unkF;
 };
 
-bool8 sub_806D528(Entity *, Entity *, struct UnkStruct_sub_806D010 *r8, bool32, s32, s32, s32);
+static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct UnkStruct_sub_806D010 *r5, bool32 isFalseSwipe, bool32 giveExp, s16 arg4_, s32 arg8);
 
 extern void sub_807F43C(Entity *, Entity *);
 extern void sub_8041B18(Entity *pokemon);
@@ -255,6 +274,29 @@ extern void sub_8041B90(Entity *pokemon);
 extern void sub_80522F4(Entity *, Entity *, const u8 *);
 extern void sub_8041D00(Entity *pokemon, Entity *target);
 extern void DealDamageToEntity(Entity *, s32, u32, u32);
+extern void SetShopkeeperAggression(Entity *, Entity *);
+extern void sub_8042238(Entity *pokemon, Entity *target);
+extern void sub_803ED30(s32, Entity *r0, u8, s32);
+extern bool8 sub_806A458(Entity *);
+extern bool8 sub_806F660(Entity *, Entity *);
+extern bool8 sub_806A58C(s16 a0);
+extern void sub_80420E8(Entity *pokemon, struct UnkStruct_sub_806D010 *r1); // To-do unify structs
+extern void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp);
+extern void sub_8042148(Entity *pokemon);
+extern void sub_8068FE0(Entity *, u32, Entity *r2);
+extern void sub_80694C0(Entity *, s32, s32, u32);
+extern void sub_8042A24(Entity *r0);
+extern void sub_806A390(Entity *r0);
+extern void sub_806F63C(Entity *r0);
+extern void sub_8078084(Entity * pokemon);
+extern void sub_800DBBC(void);
+extern void sub_8045C28(Item *Item, u8 itemID, u32 param_3);
+extern void sub_80464C8(Entity *, Position *, Item *);
+extern bool8 DoEnemiesEvolveWhenKOed(u8 dungeon);
+extern bool8 sub_806FA5C(Entity *, Entity *, struct unkStruct_8069D4C *);
+extern void EntityUpdateStatusSprites(Entity *);
+extern bool8 sub_8045888(Entity *r0);
+extern void sub_8049ED4(void);
 
 extern const s32 gUnknown_8106A4C;
 extern const s16 gUnknown_80F4E10;
@@ -266,69 +308,95 @@ extern const s16 gUnknown_80F4E1A;
 extern const s16 gUnknown_80F4E1C;
 extern const s16 gUnknown_80F4E1E;
 extern const s16 gUnknown_80F4E20;
+extern const s16 gUnknown_80F4F8C;
 extern const u8 *const gUnknown_80FCFA4;
+extern const u8 *const gUnknown_80FCA90;
+extern const u8 *const gUnknown_80F9600;
+extern const u8 *const gUnknown_80F9614;
+extern const u8 *const gUnknown_80F9630;
+extern const u8 *const gUnknown_80F9654;
+extern const u8 *const gUnknown_80F9670;
+extern const u8 *const gUnknown_80F9614;
+extern const u8 *const gUnknown_80F9688;
+extern const u8 *const gUnknown_80FD484;
+extern const u8 *const gUnknown_80F96A8;
+extern const u8 *const gUnknown_8100548;
+extern const u8 *const gUnknown_80FD46C;
+extern const u8 *const gUnknown_810056C;
+extern const u8 *const gUnknown_80F9E44;
+extern const u8 *const gUnknown_80F9764[];
+extern const u8 *const gUnknown_80F9CC0[];
+extern const u8 *const gUnknown_80F9CEC[];
+extern const u8 *const gUnknown_80F9DAC[];
+extern const u8 *const gUnknown_80F9DF0[];
+extern const u8 *const gUnknown_80F9D8C[];
+extern const u8 *const gUnknown_80F9D84[];
+extern const u8 *const gUnknown_80F9D28[];
 
-void sub_806D010(Entity *r6, Entity *r5, struct UnkStruct_sub_806D010 *r8, bool32 r3, s32 arg0, s16 arg4, bool32 arg8, s32 argC)
+extern u8 gAvailablePokemonNames[];
+extern u32 gFormatData_202DE30;
+
+void HandleDealingDamage(Entity *attacker, Entity *target, struct UnkStruct_sub_806D010 *r8, bool32 isFalseSwipe, s32 giveExp, s16 arg4, bool32 arg8, s32 argC)
 {
     bool32 r9;
     // Some compiler weirdness, because it won't match without creating arg4 again
     s32 r10 = arg4;
     s32 r7 = 0;
 
-    if (sub_806D528(r6, r5, r8, r3, arg0, r10, argC))
+    if (HandleDealingDamageInternal(attacker, target, r8, isFalseSwipe, giveExp, r10, argC))
         return;
     if (r8->unkF)
         return;
-    if (!EntityExists(r6) || !EntityExists(r5))
+    if (!EntityExists(attacker) || !EntityExists(target))
         return;
-    if (GetEntityType(r6) != ENTITY_MONSTER || GetEntityType(r5) != ENTITY_MONSTER)
+    if (GetEntityType(attacker) != ENTITY_MONSTER || GetEntityType(target) != ENTITY_MONSTER)
         return;
 
     r9 = arg8;
-    if (CheckVariousStatuses(r5) || r5->info->charging.chargingStatus != 0)
+    if (CheckVariousStatuses(target) || target->info->charging.chargingStatus != 0)
         r9 = FALSE;
     if (r9
-        && abs(r6->pos.x - r5->pos.x) <= 1 && abs(r6->pos.y - r5->pos.y) <= 1
-        && r6 != r5
+        && abs(attacker->pos.x - target->pos.x) <= 1 && abs(attacker->pos.y - target->pos.y) <= 1
+        && attacker != target
         && sub_8092354(r8->unkC)
-        && r5->info->protection.protectionStatus == STATUS_VITAL_THROW)
+        && target->info->protection.protectionStatus == STATUS_VITAL_THROW)
     {
-        sub_8042730(r5, r6);
-        sub_807F43C(r5, r6);
+        sub_8042730(target, attacker);
+        sub_807F43C(target, attacker);
     }
 
-    if (r5->info->charging.chargingStatus == STATUS_ENRAGED) {
-        RaiseAttackStageTarget(r6, r5, gUnknown_8106A4C, 1);
+    if (target->info->charging.chargingStatus == STATUS_ENRAGED) {
+        RaiseAttackStageTarget(attacker, target, gUnknown_8106A4C, 1);
     }
 
-    if (!EntityExists(r6) || !EntityExists(r5))
+    if (!EntityExists(attacker) || !EntityExists(target))
         return;
 
     if (r9
-        && r6 != r5
-        && abs(r6->pos.x - r5->pos.x) <= 1 && abs(r6->pos.y - r5->pos.y) <= 1)
+        && attacker != target
+        && abs(attacker->pos.x - target->pos.x) <= 1 && abs(attacker->pos.y - target->pos.y) <= 1)
     {
         u8 r4 = sub_8092354(r8->unkC); // Possibly move category/split
-        if (r5->info->protection.protectionStatus == STATUS_COUNTER && r4 != 0) {
-            sub_8041B18(r5);
+        if (target->info->protection.protectionStatus == STATUS_COUNTER && r4 != 0) {
+            sub_8041B18(target);
             r7 += 4;
         }
-        if (r5->info->protection.protectionStatus == STATUS_MINI_COUNTER && r4 != 0) {
-            sub_8041B18(r5);
+        if (target->info->protection.protectionStatus == STATUS_MINI_COUNTER && r4 != 0) {
+            sub_8041B18(target);
             r7 += 1;
         }
-        if (r5->info->protection.protectionStatus == STATUS_MIRROR_COAT && r4 == 0) {
-            sub_8041B90(r5);
+        if (target->info->protection.protectionStatus == STATUS_MIRROR_COAT && r4 == 0) {
+            sub_8041B90(target);
             r7 += 4;
         }
 
-        if (HasAbility(r5, ABILITY_ROUGH_SKIN))
+        if (HasAbility(target, ABILITY_ROUGH_SKIN))
             r7 += 2;
 
         if (r7) {
             struct UnkStruct_sub_806D010 sp;
 
-            sub_80522F4(r6, r5, gUnknown_80FCFA4);
+            sub_80522F4(attacker, target, gUnknown_80FCFA4);
             sp.unk0 = (r8->unk0 * r7) / 4;
             sp.unkC = r8->unkC;
             sp.unk4 = 6;
@@ -336,97 +404,623 @@ void sub_806D010(Entity *r6, Entity *r5, struct UnkStruct_sub_806D010 *r8, bool3
             sp.unkD = 0;
             sp.unkE = 0;
             sp.unkF = 0;
-            sub_806D528(r5, r6, &sp, FALSE, arg0, r10, argC);
+            HandleDealingDamageInternal(target, attacker, &sp, FALSE, giveExp, r10, argC);
         }
     }
-    if (!EntityExists(r6) || !EntityExists(r5))
+    if (!EntityExists(attacker) || !EntityExists(target))
         return;
 
     // Check trapping / contact abilities
     if (r9
-        && r6 != r5
-        && abs(r6->pos.x - r5->pos.x) <= 1 && abs(r6->pos.y - r5->pos.y) <= 1)
+        && attacker != target
+        && abs(attacker->pos.x - target->pos.x) <= 1 && abs(attacker->pos.y - target->pos.y) <= 1)
     {
         bool8 unkBool = sub_8092354(r8->unkC);
-        EntityInfo *monInfo = r6->info;
+        EntityInfo *attackerInfo = attacker->info;
 
-        if (HasAbility(r5, ABILITY_ARENA_TRAP)
-            && !MonsterIsType(r6, TYPE_FLYING)
-            && !HasAbility(r6, ABILITY_LEVITATE)
+        if (HasAbility(target, ABILITY_ARENA_TRAP)
+            && !MonsterIsType(attacker, TYPE_FLYING)
+            && !HasAbility(attacker, ABILITY_LEVITATE)
             && DungeonRandInt(100) < gUnknown_80F4E10)
         {
-            monInfo->unk178 |= 1;
+            attackerInfo->unk178 |= 1;
         }
-        if (HasAbility(r5, ABILITY_SHADOW_TAG)
+        if (HasAbility(target, ABILITY_SHADOW_TAG)
             && DungeonRandInt(100) < gUnknown_80F4E12)
         {
-            monInfo->unk178 |= 2;
+            attackerInfo->unk178 |= 2;
         }
-        if (HasAbility(r5, ABILITY_MAGNET_PULL)
-            && MonsterIsType(r6, TYPE_STEEL)
+        if (HasAbility(target, ABILITY_MAGNET_PULL)
+            && MonsterIsType(attacker, TYPE_STEEL)
             && DungeonRandInt(100) < gUnknown_80F4E14)
         {
-            monInfo->unk178 |= 4;
+            attackerInfo->unk178 |= 4;
         }
 
-        if (HasAbility(r5, ABILITY_STATIC)
+        if (HasAbility(target, ABILITY_STATIC)
             && unkBool
             && DungeonRandInt(100) < gUnknown_80F4E16)
         {
-            monInfo->unk178 |= 8;
+            attackerInfo->unk178 |= 8;
         }
-        if (HasAbility(r5, ABILITY_POISON_POINT)
+        if (HasAbility(target, ABILITY_POISON_POINT)
             && DungeonRandInt(100) < gUnknown_80F4E18)
         {
-            monInfo->unk178 |= 0x20;
+            attackerInfo->unk178 |= 0x20;
         }
-        if (HasAbility(r5, ABILITY_EFFECT_SPORE)
+        if (HasAbility(target, ABILITY_EFFECT_SPORE)
             && unkBool
             && DungeonRandInt(100) < gUnknown_80F4E1A)
         {
             s32 rnd = DungeonRandInt(3);
             if (rnd < 1)
-                monInfo->unk178 |= 0x40;
+                attackerInfo->unk178 |= 0x40;
             else if (rnd < 2)
-                monInfo->unk178 |= 0x10;
+                attackerInfo->unk178 |= 0x10;
             else
-                monInfo->unk178 |= 0x80;
+                attackerInfo->unk178 |= 0x80;
         }
-        if (HasAbility(r5, ABILITY_FLAME_BODY)
+        if (HasAbility(target, ABILITY_FLAME_BODY)
             && DungeonRandInt(100) < gUnknown_80F4E1C)
         {
-            monInfo->unk178 |= 0x100;
+            attackerInfo->unk178 |= 0x100;
         }
-        if (HasAbility(r5, ABILITY_CUTE_CHARM)
+        if (HasAbility(target, ABILITY_CUTE_CHARM)
             && unkBool
             && DungeonRandInt(100) < gUnknown_80F4E1E)
         {
-            monInfo->unk178 |= 0x200;
+            attackerInfo->unk178 |= 0x200;
         }
-        if (HasAbility(r5, ABILITY_STENCH)
+        if (HasAbility(target, ABILITY_STENCH)
             && DungeonRandInt(100) < gUnknown_80F4E20)
         {
-            monInfo->unk178 |= 0x400;
+            attackerInfo->unk178 |= 0x400;
         }
     }
-    if (!EntityExists(r6) || !EntityExists(r5))
+    if (!EntityExists(attacker) || !EntityExists(target))
         return;
 
     // Destiny Bond
     if (r9) {
-        EntityInfo *monInfo = GetEntInfo(r5);
-        if (monInfo->linked.linkedStatus == STATUS_DESTINY_BOND) {
-            Entity *destBondTarget = gDungeon->allPokemon[monInfo->linked.unkD8];
+        EntityInfo *targetInfo = GetEntInfo(target);
+        if (targetInfo->linked.linkedStatus == STATUS_DESTINY_BOND) {
+            Entity *destBondTarget = gDungeon->allPokemon[targetInfo->linked.unkD8];
             if (destBondTarget == NULL) {
-                monInfo->linked.linkedStatus = 0;
+                targetInfo->linked.linkedStatus = 0;
             }
-            else if (destBondTarget->info->unk98 != monInfo->linked.unkD4) {
-                monInfo->linked.linkedStatus = 0;
+            else if (destBondTarget->info->unk98 != targetInfo->linked.unkD4) {
+                targetInfo->linked.linkedStatus = 0;
             }
             else {
-                sub_8041D00(destBondTarget, r5);
+                sub_8041D00(destBondTarget, target);
                 DealDamageToEntity(destBondTarget, r8->unk0, 0xC, 0x1F9);
             }
         }
     }
+}
+
+static inline void ZeroOutItem(Item *item)
+{
+    item->id = 0;
+    item->quantity = 0;
+    item->flags = 0;
+}
+
+static inline bool8 ItemSticky(Item *item)
+{
+    return (item->flags & ITEM_FLAG_STICKY);
+}
+
+static inline bool8 ItemExists(Item *item)
+{
+    return (item->flags & ITEM_FLAG_EXISTS);
+}
+
+static inline bool8 ItemInShop(Item *item)
+{
+    return (item->flags & ITEM_FLAG_IN_SHOP);
+}
+
+static inline u8 ItemId(Item *item)
+{
+    return item->id;
+}
+
+static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct UnkStruct_sub_806D010 *r5, bool32 isFalseSwipe, bool32 giveExp, s16 arg4_, s32 arg8)
+{
+    s32 hpBefore, hpChange;
+    EntityInfo *targetData;
+    s32 arg4 = arg4_;
+    bool32 var_24 = FALSE;
+    bool32 r10 = FALSE;
+    s32 r8  = 0;
+    Tile *unkTile = NULL;
+
+    r5->unkF = 0;
+    if (GetEntityType(target) != ENTITY_MONSTER) {
+        r5->unkF = 1;
+        return FALSE;
+    }
+
+    targetData = GetEntInfo(target);
+    TrySendImmobilizeSleepEndMsg(attacker, target);
+    SetShopkeeperAggression(attacker, target);
+    if (GetEntityType(attacker) == ENTITY_MONSTER
+        && attacker->info->moveStatus.moveStatus == STATUS_SET_DAMAGE
+        && r5->unkE == 0)
+    {
+        r5->unk0 = gUnknown_80F4F8C;
+    }
+
+    if (arg4 != 0x20E && HasAbility(target, ABILITY_STURDY) && r5->unk0 == 9999) {
+        SetMessageArgument(gUnknown_202DFE8, target, 0);
+        sub_80522F4(attacker, target, gUnknown_80FCA90);
+        sub_8042238(attacker, target);
+        r5->unkF = 1;
+        return FALSE;
+    }
+    if (targetData->immobilize.immobilizeStatus == STATUS_FROZEN) {
+        SetMessageArgument(gUnknown_202DFE8, target, 0);
+        sub_80522F4(attacker, target, gUnknown_80F9600);
+        sub_8042238(attacker, target);
+        r5->unkF = 1;
+        return FALSE;
+    }
+
+    if ((targetData->sleep.sleep == STATUS_SLEEP || targetData->sleep.sleep == STATUS_NAPPING || targetData->sleep.sleep == STATUS_NIGHTMARE)
+        && targetData->sleep.sleepTurns == 0x7F)
+    {
+        WakeUpPokemon(target);
+    }
+
+    if ((HasAbility(target, ABILITY_VOLT_ABSORB) && r5->unkC == TYPE_ELECTRIC)) {
+        HealTargetHP(attacker, target, r5->unk0, 0, 0);
+        r5->unkF = 1;
+        return FALSE;
+    }
+    else if (HasAbility(target, ABILITY_WATER_ABSORB) && r5->unkC == TYPE_WATER) {
+        HealTargetHP(attacker, target, r5->unk0, 0, 0);
+        r5->unkF = 1;
+        return FALSE;
+    }
+
+    if (targetData->unk152 == 0) {
+        if (r5->unkD != 0) {
+            sub_80522F4(attacker, target, gUnknown_80F9614);
+        }
+        switch (r5->unk8) {
+            case 0:
+                sub_80522F4(attacker, target, gUnknown_80F9630);
+                break;
+            case 1:
+                sub_80522F4(attacker, target, gUnknown_80F9654);
+                break;
+            case 3:
+                sub_80522F4(attacker, target, gUnknown_80F9670);
+                break;
+        }
+    }
+
+    SetMessageArgument(gAvailablePokemonNames, attacker, 0);
+    SetMessageArgument(gAvailablePokemonNames + 0x50, target, 0);
+    if (r5->unk0 == 0) {
+        if (sub_8045888(attacker) && sub_8045888(target)) {
+            if (targetData->unk152 == 0) {
+                sub_80522F4(attacker, target, gUnknown_80F9688);
+            }
+            sub_8042238(attacker, target);
+        }
+        else {
+            if (targetData->unk152 == 0) {
+                sub_80522F4(attacker, target, gUnknown_80F9688);
+            }
+            sub_803E708(0x1E, 0x18);
+        }
+        r5->unkF = 1;
+        return FALSE;
+    }
+    else if (r5->unk0 == 9999) {
+        if (arg8 != 0 && sub_8045888(target)) {
+            unkTile = GetTileAtEntitySafe(target);
+            sub_803E708(0x14, 0x18);
+            unkTile->unk4 |= 4;
+            sub_8049ED4();
+        }
+        if (targetData->unk152 == 0) {
+            sub_80522F4(attacker, target, gUnknown_80F96A8);
+        }
+        targetData->unkA0 = 999;
+    }
+    else {
+        const u8 *str;
+
+        gFormatData_202DE30 = r5->unk0;
+        str = gUnknown_80F9764[r5->unk4];
+
+        // Needed to match - the line can be safely removed
+        r5++;r5--;
+        //
+
+        targetData->unkA0 += r5->unk0;
+        if (targetData->unkA0 > 999)
+            targetData->unkA0 = 999;
+
+        if (sub_8045888(target)) {
+            if (r5->unk4 != 14) {
+                sub_803ED30(-r5->unk0, target, 1, -1);
+            }
+            if (targetData->unk152 == 0 && str != NULL) {
+                sub_80522F4(attacker, target, str);
+            }
+        }
+        else {
+            if (targetData->unk152 == 0 && str != NULL) {
+                sub_80522F4(attacker, target, str);
+            }
+        }
+    }
+
+    if ((r5->unk4 != 14 || targetData->HP <= 1) && unkTile == NULL && sub_8045888(target)) {
+        if ((attacker->pos.x != target->pos.x || attacker->pos.y != target->pos.y) && GetEntityType(attacker) == ENTITY_MONSTER) {
+            bool32 unkBool = FALSE;
+            if (targetData->isTeamLeader) {
+                if (gGameOptionsRef->damageTurn != 0 && !sub_806A458(target)) {
+                    if (CanSeeTarget(target, attacker))
+                        unkBool = TRUE;
+                    else
+                        unkBool = FALSE;
+                }
+            }
+            else {
+                unkBool = FALSE;
+            }
+            if (targetData->eyesightStatus.eyesightStatus == STATUS_BLINKER || targetData->eyesightStatus.eyesightStatus == STATUS_CROSS_EYED)
+                unkBool = FALSE;
+            if (unkBool) {
+                EntityInfo *info = GetEntInfo(target);
+                info->action.direction = (GetDirectionTowardsPosition(&target->pos, &attacker->pos) & 7);
+            }
+            TargetTileInFront(target);
+        }
+        sub_806CDD4(target, 6, target->info->action.direction);
+        sub_80420E8(target, r5);
+        var_24 = TRUE;
+    }
+
+    // HP goes down
+    hpBefore = targetData->HP;
+    if (targetData->HP > r5->unk0)
+        targetData->HP -= r5->unk0;
+    else
+        targetData->HP = 0;
+
+    if (targetData->protection.protectionStatus == STATUS_ENDURING) {
+        if (targetData->HP == 0) {
+            targetData->HP = 1;
+            sub_80522F4(attacker, target, gUnknown_8100548);
+        }
+    }
+    else if (isFalseSwipe == TRUE && targetData->HP == 0) {
+        targetData->HP = 1;
+        sub_80522F4(attacker, target, gUnknown_810056C);
+    }
+
+    hpChange = hpBefore - targetData->HP;
+    if (hpChange < 0)
+        hpChange = 0;
+
+    if (var_24 || unkTile != NULL)
+        sub_803E708(0xA, 0x18);
+
+    if (targetData->HP != 0) {
+        if (var_24) {
+            sub_806CE68(target, 8);
+        }
+        if (HasHeldItem(target, ITEM_JOY_RIBBON) && hpChange > 0 && r5->unk0 != 9999) {
+            sub_8071D4C(attacker, target, hpChange);
+        }
+
+        if (unkTile != NULL)
+        {
+            unkTile->unk4 &= ~(0x4);
+            sub_8049ED4();
+        }
+        return FALSE;
+    }
+
+    // 0 HP
+    if (targetData->transformStatus.transformStatus == STATUS_TRANSFORMED) {
+        SendTransformEndMessage(attacker, target);
+    }
+
+    if (unkTile != NULL) {
+        sub_803E708(0x14, 0x18);
+        target->unk22 = 2;
+        sub_803E708(0xA, 0x18);
+        unkTile->unk4 &= ~(0x4);
+        sub_8049ED4();
+    }
+    else if (var_24) {
+        target->unk22 = 1;
+        sub_803E708(0x1E, 0x18);
+    }
+
+    r8 = 1;
+    if (EntityExists(attacker) && GetEntityType(attacker) == ENTITY_MONSTER && attacker != target)
+        r8 = 0;
+
+    targetData->unk14C = 0;
+    SetMessageArgument(gAvailablePokemonNames, attacker, 0);
+    SetMessageArgument(gAvailablePokemonNames + 0x50, target, 0);
+    if (r5->unk4 == 19 || r5->unk4 == 20) {
+        if (targetData->isNotTeamMember) {
+            sub_80522F4(attacker, target, gUnknown_80F9E44);
+        }
+        else {
+            sub_805239C(attacker, gUnknown_80F9E44);
+        }
+    }
+    else if (targetData->isNotTeamMember)
+    {
+        if (targetData->clientType == CLIENT_TYPE_CLIENT) {
+            sub_805239C(attacker, gUnknown_80F9DF0[r8]);
+        }
+        else {
+            sub_80522F4(attacker, target, gUnknown_80F9CC0[r8]);
+        }
+    }
+    else {
+        PokemonStruct2 *recruitedMon = &gRecruitedPokemonRef->pokemon2[targetData->teamIndex];
+        if (targetData->isTeamLeader || (targetData->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER && gDungeon->unk65C == 0)) {
+            sub_805239C(attacker, gUnknown_80F9CEC[r8]);
+        }
+        else if (IsClientOrTeamBase(targetData->joinedAt.joinedAt)) {
+            sub_805239C(attacker, gUnknown_80F9DAC[r8]);
+        }
+        else if (targetData->clientType == CLIENT_TYPE_CLIENT) {
+            sub_805239C(attacker, gUnknown_80F9DF0[r8]);
+        }
+        else if (sub_806A58C(recruitedMon->unkA)) {
+            if (gDungeon->unk65D != 0) {
+                sub_805239C(attacker, gUnknown_80F9D8C[r8]);
+            }
+            else {
+                sub_805239C(attacker, gUnknown_80F9D84[r8]);
+            }
+        }
+        else {
+            sub_805239C(attacker, gUnknown_80F9D28[r8]);
+        }
+    }
+
+    if (targetData->immobilize.immobilizeStatus == STATUS_WRAP || targetData->immobilize.immobilizeStatus == STATUS_WRAPPED) {
+        sub_8076CB4(targetData->unk9C);
+    }
+
+    // Try revive items
+    if (targetData->heldItem.flags & ITEM_FLAG_EXISTS) {
+        // This do/while 0 loop has no effect other than matching asm, and can be removed.
+        do
+        {
+            if (!(ItemSticky(&targetData->heldItem)) && !(ItemInShop(&targetData->heldItem)) && ItemId(&targetData->heldItem) == ITEM_REVIVER_ORB) {
+                sub_8042148(target);
+                target->unk22 = 0;
+                targetData->HP = targetData->maxHPStat;
+                targetData->unk158 = 0;
+                targetData->unk14C = 1;
+                targetData->belly = targetData->maxBelly;
+                if (targetData->isTeamLeader) {
+                    gDungeon->unk679 = 0;
+                    gDungeon->itemHoldersIdentified = 0;
+                }
+                ZeroOutItem(&targetData->heldItem);
+                if (targetData->waitingStruct.waitingStatus == STATUS_SNATCH) {
+                    SendWaitingEndMessage(attacker, target, STATUS_SNATCH);
+                }
+                else if (targetData->waitingStruct.waitingStatus == STATUS_DECOY) {
+                    SendWaitingEndMessage(attacker, target, STATUS_DECOY);
+                }
+                sub_8078084(target);
+                sub_806BFC0(targetData, 0);
+                sub_800DBBC();
+                sub_806A390(target);
+                sub_806CCB4(target, sub_806CEBC(target));
+                EntityUpdateStatusSprites(target);
+                SetMessageArgument(gUnknown_202DFE8, target, 0);
+                sub_805239C(attacker, gUnknown_80FD46C);
+                sub_806F63C(target);
+                return FALSE;
+            }
+        } while(0);
+    }
+
+    if (targetData->isTeamLeader)
+    {
+        Item *heldItem = &targetData->heldItem;
+        if (ItemExists(heldItem) && !(ItemSticky(heldItem)) && ItemId(heldItem) == ITEM_POSSESS_ORB ) {
+            s32 i;
+            Entity *teamMember;
+
+            for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+                teamMember = gDungeon->teamPokemon[i];
+                if (EntityExists(teamMember)
+                    && teamMember != target
+                    && CanSeeTarget(target, teamMember)
+                    && abs(teamMember->pos.x - target->pos.x) <= 1 && abs(teamMember->pos.y - target->pos.y) <= 1)
+                {
+                    break;
+                }
+            }
+            if (i != MAX_TEAM_MEMBERS) {
+                Position monPos; // r4
+
+                sub_8042148(target);
+
+                monPos = teamMember->pos;
+                sub_8068FE0(teamMember, 0x221, target);
+                sub_80694C0(target, monPos.x, monPos.y, 1);
+                sub_804535C(target, NULL);
+                target->unk22 = 0;
+                targetData->HP = targetData->maxHPStat;
+                sub_8042A24(target);
+                targetData->unk158 = 0;
+                targetData->unk14C = 1;
+                targetData->belly = targetData->maxBelly;
+                if (targetData->isTeamLeader) {
+                    gDungeon->unk679 = 0;
+                    gDungeon->itemHoldersIdentified = 0;
+                }
+                ZeroOutItem(heldItem);
+                if (targetData->waitingStruct.waitingStatus == STATUS_SNATCH) {
+                    SendWaitingEndMessage(attacker, target, STATUS_SNATCH);
+                }
+                else if (targetData->waitingStruct.waitingStatus == STATUS_DECOY) {
+                    SendWaitingEndMessage(attacker, target, STATUS_DECOY);
+                }
+                sub_8078084(target);
+                sub_806BFC0(targetData, 0);
+                sub_800DBBC();
+                sub_806A390(target);
+                sub_806CCB4(target, sub_806CEBC(target));
+                EntityUpdateStatusSprites(target);
+                SetMessageArgument(gAvailablePokemonNames, target, 0);
+                SetMessageArgument(gAvailablePokemonNames + 0x50, teamMember, 0);
+                sub_805239C(attacker, gUnknown_80FD484);
+                sub_806F63C(target);
+                return FALSE;
+            }
+
+        }
+
+    }
+
+    if (IQSkillIsEnabled(target, IQ_ITEM_MASTER)) {
+        s32 i; // r3
+        Item *reviverSeed = NULL; // r4
+        if (ItemExists(&targetData->heldItem) && !ItemSticky(&targetData->heldItem) && ItemId(&targetData->heldItem) == ITEM_REVIVER_SEED)
+            reviverSeed = &targetData->heldItem;
+        if (reviverSeed == NULL && !targetData->isNotTeamMember) {
+            for (i = 0; i < INVENTORY_SIZE; i++) {
+                Item *bagItem = &gTeamInventoryRef->teamItems[i];
+                if (!(bagItem->flags & ITEM_FLAG_EXISTS))
+                    continue;
+                if (bagItem->flags & ITEM_FLAG_STICKY)
+                    continue;
+                if (bagItem->id == ITEM_REVIVER_SEED) {
+                    reviverSeed = bagItem;
+                    break;
+                }
+            }
+        }
+
+        if (reviverSeed != NULL) {
+            sub_8042148(target);
+            sub_8045C28(reviverSeed, ITEM_PLAIN_SEED, 2);
+            target->unk22 = 0;
+            targetData->HP = targetData->maxHPStat;
+            targetData->unk158 = 0;
+            targetData->unk14C = 1;
+            targetData->belly = targetData->maxBelly;
+            if (targetData->isTeamLeader) {
+                gDungeon->unk679 = 0;
+                gDungeon->itemHoldersIdentified = 0;
+            }
+            if (targetData->waitingStruct.waitingStatus == STATUS_SNATCH) {
+                SendWaitingEndMessage(attacker, target, STATUS_SNATCH);
+            }
+            else if (targetData->waitingStruct.waitingStatus == STATUS_DECOY) {
+                SendWaitingEndMessage(attacker, target, STATUS_DECOY);
+            }
+            sub_8078084(target);
+            sub_806BFC0(targetData, 0);
+            sub_800DBBC();
+            sub_806A390(target);
+            sub_806CCB4(target, sub_806CEBC(target));
+            EntityUpdateStatusSprites(target);
+            SetMessageArgument(gUnknown_202DFE8, target, 0);
+            sub_805239C(attacker, gUnknown_80FD46C);
+            sub_806F63C(target);
+            return FALSE;
+        }
+    }
+
+    if (!targetData->isTeamLeader && ItemExists(&targetData->heldItem)) {
+        sub_80464C8(target, &target->pos, &targetData->heldItem);
+        ZeroOutItem(&targetData->heldItem);
+    }
+    if (targetData->bossFlag) {
+        gDungeon->bossSongIndex = 999;
+    }
+
+    // Give exp
+    r10 = FALSE;
+    if (GetEntityType(attacker) == ENTITY_MONSTER) {
+        EntityInfo *attackerData = GetEntInfo(attacker);
+        s32 exp  = CalculateEXPGain(targetData->id, targetData->level);
+        switch (targetData->unkFB) {
+            case 2:
+                exp *= 3;
+                exp /= 2;
+                break;
+            case 0:
+                exp /= 2;
+                break;
+        }
+        if (exp == 0)
+            exp = 1;
+        if (attackerData->isTeamLeader) {
+            sub_80980B4(targetData->id);
+        }
+        if (targetData->grudge) {
+            attackerData->unk14B = 1;
+        }
+
+        if (giveExp == TRUE) {
+            if (!attackerData->isNotTeamMember) {
+                if (targetData->isNotTeamMember) {
+                    s32 i;
+
+                    sub_8071D4C(attacker, attacker, exp);
+                    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+                        Entity *teamMember = gDungeon->teamPokemon[i];
+                        if (EntityExists(teamMember) && teamMember != attacker) {
+                            sub_8071D4C(attacker, teamMember, exp);
+                        }
+                    }
+                    r10 = TRUE;
+                }
+            }
+            else {
+                if (DoEnemiesEvolveWhenKOed(gDungeon->dungeonLocation.id)) {
+                    attackerData->unk149 = 1;
+                    gDungeon->unkD = 1;
+                }
+            }
+        }
+    }
+
+    if (EntityExists(attacker) && GetEntityType(attacker) == ENTITY_MONSTER && !attacker->info->isTeamLeader)
+        r10 = FALSE;
+
+    if (r10) {
+        struct unkStruct_8069D4C sp;
+
+        sub_8069D4C(&sp, target);
+        if (sub_806F660(attacker, target)) {
+            if (!sub_806FA5C(attacker, target, &sp)) {
+                sub_8068FE0(target, 0x1F5, attacker);
+            }
+            else {
+                gUnknown_202F221 = 1;
+            }
+        }
+        else {
+            sub_8068FE0(target, arg4, attacker);
+        }
+    }
+    else {
+        sub_8068FE0(target, arg4, attacker);
+    }
+
+    return TRUE;
 }
