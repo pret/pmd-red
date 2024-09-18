@@ -1572,9 +1572,7 @@ void SendMuzzledEndMessage(Entity * pokemon, Entity * target)
 
 bool8 TrySendImmobilizeSleepEndMsg(Entity * pokemon, Entity * target)
 {
-    // entityInfoMatch needed to match
-    EntityInfo *entityInfoMatch = target->info;
-    EntityInfo *entityInfo = entityInfoMatch;
+    EntityInfo *entityInfo = GetEntInfo(target);
     bool32 msg = FALSE;
 
     if (entityInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED) {

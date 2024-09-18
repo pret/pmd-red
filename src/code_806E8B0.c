@@ -35,7 +35,7 @@ void sub_806E8B0(Entity * pokemon, Entity * target, u8 param_3, s32 *param_4, s3
   r8 = 1;
   sp_0x4 = 1;
   sp_0x8 = 1;
-  r10 = sub_8092354(param_3) == 0;
+  r10 = IsTypePhysical(param_3) == 0;
   
 
   if (HasAbility(pokemon, ABILITY_GUTS)) {
