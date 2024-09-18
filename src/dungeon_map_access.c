@@ -57,7 +57,7 @@ void sub_80495E4(void)
 {
   s32 YCoord;
   s32 XCoord;
-  
+
   for(YCoord = 0; YCoord < DUNGEON_MAX_SIZE_Y; YCoord++)
   {
     for(XCoord = 0; XCoord < DUNGEON_MAX_SIZE_X; XCoord++)
@@ -75,7 +75,7 @@ void LoadDungeonTilesetAssets(void)
   OpenedFile *file;
   OpenedFile *file_1;
   u8 fileName [12];
-  
+
   sprintf(fileName,gUnknown_80F6A04,gUnknown_8108EC0[gDungeon->tileset]); // b%02dfon
   file = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
   DecompressATGlobalFile((u32 *)0x06008000,0,file);
@@ -142,7 +142,7 @@ void sub_8049884(void)
 {
   s32 XCoord;
   s32 YCoord;
-  
+
   for(YCoord = 0; YCoord < DUNGEON_MAX_SIZE_Y; YCoord++)
   {
     for(XCoord = 0; XCoord < DUNGEON_MAX_SIZE_X; XCoord++) {
@@ -165,7 +165,7 @@ void sub_80498A8(int x,int y)
   u16 sp_0x20; // sp 0x20
   int r4;
   s32 r7; // r7
-  
+
   if (x < 0) {
     return;
   }
@@ -325,11 +325,111 @@ void sub_8049B8C(void)
 {
   s32 XCoord;
   s32 YCoord;
-  
+
   for(YCoord = 0; YCoord < DUNGEON_MAX_SIZE_Y; YCoord++)
   {
     for(XCoord = 0; XCoord < DUNGEON_MAX_SIZE_X; XCoord++) {
       sub_8049BB0(XCoord,YCoord);
     }
   }
+}
+
+void sub_8049BB0(s32 x, s32 y)
+{
+    s32 terrainFlags;
+    s32 i;
+    s32 flags[6];
+    s32 var_4C[8];
+    bool8 var_2C[8];
+
+    flags[0] = 0;
+    flags[1] = 0;
+    flags[2] = 0;
+    flags[3] = 0;
+
+    terrainFlags = GetTile(x,   y+1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    var_4C[0] = terrainFlags;
+    var_4C[1] = GetTile(x+1, y+1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    var_4C[2] = GetTile(x+1, y)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    var_4C[3] = GetTile(x+1, y-1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    var_4C[4] = GetTile(x,   y-1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    var_4C[5] = GetTile(x-1, y-1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    var_4C[6] = GetTile(x-1, y)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    var_4C[7] = GetTile(x-1, y+1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+
+    if (var_4C[0] == TERRAIN_TYPE_NORMAL)
+        flags[CROSSABLE_TERRAIN_REGULAR] |= 1;
+    if (var_4C[2] == TERRAIN_TYPE_NORMAL)
+        flags[CROSSABLE_TERRAIN_REGULAR] |= 4;
+    if (var_4C[4] == TERRAIN_TYPE_NORMAL)
+        flags[CROSSABLE_TERRAIN_REGULAR] |= 0x10;
+    if (var_4C[6] == TERRAIN_TYPE_NORMAL)
+        flags[CROSSABLE_TERRAIN_REGULAR] |= 0x40;
+
+    if (var_4C[0] != 0 && var_4C[1] == TERRAIN_TYPE_NORMAL && var_4C[2] != 0)
+        flags[CROSSABLE_TERRAIN_REGULAR] |= 2;
+    if (var_4C[2] != 0 && var_4C[3] == TERRAIN_TYPE_NORMAL && var_4C[4] != 0)
+        flags[CROSSABLE_TERRAIN_REGULAR] |= 8;
+    if (var_4C[4] != 0 && var_4C[5] == TERRAIN_TYPE_NORMAL && var_4C[6] != 0)
+        flags[CROSSABLE_TERRAIN_REGULAR] |= 0x20;
+    if (var_4C[6] != 0 && var_4C[7] == TERRAIN_TYPE_NORMAL && var_4C[0] != 0)
+        flags[CROSSABLE_TERRAIN_REGULAR] |= 0x80;
+
+    for (i = 0; i < 8; i++) {
+        if (var_4C[i] == TERRAIN_TYPE_NORMAL || var_4C[i] == TERRAIN_TYPE_SECONDARY)
+            var_2C[i] = TRUE;
+        else
+            var_2C[i] = FALSE;
+    }
+
+    if (var_2C[0])
+        flags[CROSSABLE_TERRAIN_LIQUID] |= 1;
+    if (var_2C[2])
+        flags[CROSSABLE_TERRAIN_LIQUID] |= 4;
+    if (var_2C[4])
+        flags[CROSSABLE_TERRAIN_LIQUID] |= 0x10;
+    if (var_2C[6])
+        flags[CROSSABLE_TERRAIN_LIQUID] |= 0x40;
+
+    if (var_4C[0] != 0 && var_2C[1] && var_4C[2] != 0)
+        flags[CROSSABLE_TERRAIN_LIQUID] |= 2;
+    if (var_4C[2] != 0 && var_2C[3] && var_4C[4] != 0)
+        flags[CROSSABLE_TERRAIN_LIQUID] |= 8;
+    if (var_4C[4] != 0 && var_2C[5] && var_4C[6] != 0)
+        flags[CROSSABLE_TERRAIN_LIQUID] |= 0x20;
+    if (var_4C[6] != 0 && var_2C[7] && var_4C[0] != 0)
+        flags[CROSSABLE_TERRAIN_LIQUID] |= 0x80;
+
+    if (var_4C[0] != 0)
+        flags[2] |= 1;
+    if (var_4C[2] != 0)
+        flags[2] |= 4;
+    if (var_4C[4] != 0)
+        flags[2] |= 0x10;
+    if (var_4C[6] != 0)
+        flags[2] |= 0x40;
+
+    if (var_4C[0] != 0 && var_4C[1] != 0 && var_4C[2] != 0)
+        flags[CROSSABLE_TERRAIN_CREVICE] |= 2;
+    if (var_4C[2] != 0 && var_4C[3] != 0 && var_4C[4] != 0)
+        flags[CROSSABLE_TERRAIN_CREVICE] |= 8;
+    if (var_4C[4] != 0 && var_4C[5] != 0 && var_4C[6] != 0)
+        flags[CROSSABLE_TERRAIN_CREVICE] |= 0x20;
+    if (var_4C[6] != 0 && var_4C[7] != 0 && var_4C[0] != 0)
+        flags[CROSSABLE_TERRAIN_CREVICE] |= 0x80;
+
+    flags[3] = 0xFF;
+    if (x <= 1)
+        flags[CROSSABLE_TERRAIN_WALL] = 0x1F;
+    if (y <= 1)
+        flags[CROSSABLE_TERRAIN_WALL] &= ~(0x8 | 0x10 | 0x20);
+    if (x > 53)
+        flags[CROSSABLE_TERRAIN_WALL] &= ~(0x2 | 0x4 | 0x8);
+    if (y > 29)
+        flags[CROSSABLE_TERRAIN_WALL] &= ~(0x80 | 0x1 | 0x2);
+
+    GetTileSafe(x, y)->walkableNeighborFlags[CROSSABLE_TERRAIN_REGULAR] = flags[CROSSABLE_TERRAIN_REGULAR];
+    GetTileSafe(x, y)->walkableNeighborFlags[CROSSABLE_TERRAIN_LIQUID] = flags[CROSSABLE_TERRAIN_LIQUID];
+    GetTileSafe(x, y)->walkableNeighborFlags[CROSSABLE_TERRAIN_CREVICE] = flags[CROSSABLE_TERRAIN_CREVICE];
+    GetTileSafe(x, y)->walkableNeighborFlags[CROSSABLE_TERRAIN_WALL] = flags[CROSSABLE_TERRAIN_WALL];
 }
