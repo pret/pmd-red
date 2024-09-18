@@ -33,6 +33,7 @@
 #include "move_effects_target.h"
 #include "dungeon_pokemon_attributes.h"
 #include "code_8041AD0.h"
+#include "type_chart.h"
 
 extern u8 gUnknown_202F221;
 extern u8 gUnknown_202DFE8[];
@@ -578,13 +579,13 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             sub_80522F4(attacker, target, gUnknown_80F9614);
         }
         switch (dmgStruct->typeEffectiveness) {
-            case 0:
+            case EFFECTIVENESS_IMMUNE:
                 sub_80522F4(attacker, target, gUnknown_80F9630);
                 break;
-            case 1:
+            case EFFECTIVENESS_RESIST:
                 sub_80522F4(attacker, target, gUnknown_80F9654);
                 break;
-            case 3:
+            case EFFECTIVENESS_SUPER:
                 sub_80522F4(attacker, target, gUnknown_80F9670);
                 break;
         }
@@ -628,7 +629,6 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 
         // Needed to match - the line can be safely removed
         dmgStruct++;dmgStruct--;
-        //
 
         targetData->unkA0 += dmgStruct->dmg;
         if (targetData->unkA0 > 999)
@@ -667,7 +667,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 unkBool = FALSE;
             if (unkBool) {
                 EntityInfo *info = GetEntInfo(target);
-                info->action.direction = (GetDirectionTowardsPosition(&target->pos, &attacker->pos) & 7);
+                info->action.direction = (GetDirectionTowardsPosition(&target->pos, &attacker->pos) & DIRECTION_MASK);
             }
             TargetTileInFront(target);
         }

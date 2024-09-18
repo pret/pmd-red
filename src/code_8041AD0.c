@@ -4,6 +4,7 @@
 #include "code_804267C.h"
 #include "code_806CD90.h"
 #include "code_8041AD0.h"
+#include "type_chart.h"
 #include "constants/direction.h"
 #include "constants/status.h"
 #include "constants/type.h"
@@ -826,16 +827,16 @@ void sub_80420E8(Entity *pokemon, struct DamageStruct *dmgStruct)
     switch(typeEffectiveness)
     {
         default:
-        case 0:
+        case EFFECTIVENESS_IMMUNE:
             arg = 8;
             break;
-        case 1:
+        case EFFECTIVENESS_RESIST:
             arg = 9;
             break;
-        case 2:
+        case EFFECTIVENESS_NEUTRAL:
             arg = 10;
             break;
-        case 3:
+        case EFFECTIVENESS_SUPER:
             arg = 11;
             break;
     }
