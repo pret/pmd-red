@@ -1429,7 +1429,7 @@ _080A7016:
 	str r0, [sp, 0x8]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl AxResInit_80053D0
+	bl AxResInit
 _080A7038:
 	add sp, 0xC
 	pop {r4-r7}
@@ -1772,7 +1772,7 @@ sub_80A72B8:
 	movs r0, 0
 	strh r0, [r1]
 	adds r0, r6, 0
-	bl RunAxAnimationFrame_80054BC
+	bl RunAxAnimationFrame
 	b _080A7304
 _080A72D2:
 	adds r5, r6, 0
@@ -1795,7 +1795,7 @@ _080A72EE:
 	adds r0, r7, r1
 	strh r0, [r5]
 	adds r0, r6, 0
-	bl RunAxAnimationFrame_80054BC
+	bl RunAxAnimationFrame
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	cmp r0, 0xFF

@@ -439,7 +439,7 @@ _0800FD08:
 	str r4, [sp, 0x8]
 	adds r0, r3, 0
 	movs r3, 0
-	bl AxResInitFile_80053AC
+	bl AxResInitFile
 	b _0800FD32
 	.align 2, 0
 _0800FD1C: .4byte gUnknown_203B0E4
@@ -758,7 +758,7 @@ _0800FF60:
 	str r2, [sp, 0x8]
 	movs r2, 0
 	movs r3, 0
-	bl AxResInitFile_80053AC
+	bl AxResInitFile
 	ldr r2, [r4]
 	ldr r1, _0800FFD4
 	adds r0, r2, r1
@@ -948,7 +948,7 @@ sub_80100C0:
 	str r1, [sp, 0x8]
 	adds r1, r2, 0
 	movs r2, 0
-	bl AxResInitFile_80053AC
+	bl AxResInitFile
 	bl sub_8011168
 	ldr r0, [r4]
 	ldr r2, _080101E8
@@ -1053,7 +1053,7 @@ _0801018A:
 	str r2, [sp, 0x8]
 	movs r2, 0
 	movs r3, 0
-	bl AxResInitFile_80053AC
+	bl AxResInitFile
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3
@@ -1318,7 +1318,7 @@ _080103B0:
 	movs r2, 0x1
 	str r2, [sp, 0x8]
 	movs r2, 0
-	bl AxResInitFile_80053AC
+	bl AxResInitFile
 	movs r7, 0
 	cmp r7, r4
 	bge _08010448
@@ -1458,7 +1458,7 @@ _080104E6:
 	str r6, [sp, 0x8]
 	adds r0, r3, 0
 	movs r3, 0
-	bl AxResInitFile_80053AC
+	bl AxResInitFile
 	ldr r1, _08010508
 	lsls r0, r5, 2
 	adds r0, r1
@@ -1490,7 +1490,7 @@ _0801050E:
 	str r2, [sp, 0x8]
 	movs r2, 0
 	movs r3, 0
-	bl AxResInitFile_80053AC
+	bl AxResInitFile
 	ldr r2, [r4]
 	ldr r4, _08010588
 	adds r3, r2, r4
@@ -2148,7 +2148,7 @@ sub_8010A88:
 	ldr r5, [r1]
 	ldr r3, _08010B64
 	adds r0, r3
-	bl RunAxAnimationFrame_80054BC
+	bl RunAxAnimationFrame
 	mov r0, r9
 	cmp r0, 0
 	beq _08010AF6
@@ -2194,7 +2194,7 @@ _08010B04:
 	adds r5, r4, 0
 	adds r5, 0x8
 	adds r0, r5, 0
-	bl RunAxAnimationFrame_80054BC
+	bl RunAxAnimationFrame
 	mov r2, r9
 	cmp r2, 0
 	beq _08010B40

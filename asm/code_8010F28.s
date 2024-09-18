@@ -29,7 +29,7 @@ sub_8010F28:
 	mov r8, r1
 	ldr r4, _0801108C
 	adds r0, r4
-	bl RunAxAnimationFrame_80054BC
+	bl RunAxAnimationFrame
 	ldr r3, [r6]
 	adds r4, r3, r4
 	ldr r7, _08011090
@@ -74,7 +74,7 @@ _08010F98:
 	beq _08010FD8
 	adds r4, 0x14
 	adds r0, r4, 0
-	bl RunAxAnimationFrame_80054BC
+	bl RunAxAnimationFrame
 	movs r2, 0x4
 	ldrsh r1, [r5, r2]
 	mov r3, r9
@@ -114,7 +114,7 @@ _08010FEC:
 	cmp r0, 0
 	beq _08011062
 	adds r0, r1, r6
-	bl RunAxAnimationFrame_80054BC
+	bl RunAxAnimationFrame
 	ldr r0, _080110A8
 	ldrh r0, [r0]
 	movs r2, 0x80
@@ -557,7 +557,7 @@ _0801132E:
 	movs r3, 0x1
 	str r3, [sp, 0x8]
 	movs r3, 0
-	bl AxResInitFile_80053AC
+	bl AxResInitFile
 _08011370:
 	adds r6, 0x3C
 	adds r5, 0x3C

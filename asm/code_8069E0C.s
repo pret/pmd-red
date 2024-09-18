@@ -4677,7 +4677,7 @@ _0806C6A8:
 	ldr r4, [sp, 0x38]
 	str r4, [sp, 0x8]
 	adds r0, r5, 0
-	bl AxResInitFile_80053AC
+	bl AxResInitFile
 	mov r10, r5
 	b _0806C704
 _0806C6D6:
@@ -4699,7 +4699,7 @@ _0806C6D6:
 	str r1, [sp, 0x8]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl AxResInitFile_80053AC
+	bl AxResInitFile
 	mov r10, r4
 _0806C704:
 	mov r2, r9
@@ -4749,12 +4749,12 @@ _0806C73C:
 	cmp r0, 0
 	beq _0806C76A
 	mov r0, r10
-	bl RunAxAnimationFrame_80054BC
+	bl RunAxAnimationFrame
 	mov r0, r10
-	bl RunAxAnimationFrame_80054BC
+	bl RunAxAnimationFrame
 _0806C76A:
 	mov r0, r10
-	bl RunAxAnimationFrame_80054BC
+	bl RunAxAnimationFrame
 	b _0806C7E2
 	.align 2, 0
 _0806C774: .4byte 0x000001a5
@@ -4780,9 +4780,9 @@ _0806C784:
 	cmp r0, 0
 	bne _0806C7BC
 	mov r0, r10
-	bl RunAxAnimationFrame_80054BC
+	bl RunAxAnimationFrame
 	mov r0, r10
-	bl RunAxAnimationFrame_80054BC
+	bl RunAxAnimationFrame
 	b _0806C7DC
 	.align 2, 0
 _0806C7B4: .4byte 0x0000066c
@@ -4803,10 +4803,10 @@ _0806C7C8:
 	cmp r0, 0x1
 	ble _0806C7DC
 	mov r0, r10
-	bl RunAxAnimationFrame_80054BC
+	bl RunAxAnimationFrame
 _0806C7DC:
 	mov r0, r10
-	bl RunAxAnimationFrame_80054BC
+	bl RunAxAnimationFrame
 _0806C7E2:
 	ldr r1, [r6, 0xC]
 	ldr r0, [r6, 0x14]

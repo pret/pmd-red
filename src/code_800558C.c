@@ -40,7 +40,7 @@ void DoAxFrame_800558C(struct axPokemon *a0, s32 spriteX, s32 spriteY, u32 a3, u
         return;
 
     if (a0->axdata.sub1.poseId < 0)
-        RunAxAnimationFrame_80054BC(a0);
+        RunAxAnimationFrame(a0);
 
     if (!(a0->axdata.flags >> 15))
         return;

@@ -1095,8 +1095,8 @@ _08008624:
 _0800862C: .4byte gUnknown_80B86A4
 	thumb_func_end GetCharacter
 
-	thumb_func_start HexdigitValue
-HexdigitValue:
+	thumb_func_start HexDigitValue
+HexDigitValue:
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -1124,7 +1124,7 @@ _08008658:
 _0800865C:
 	pop {r1}
 	bx r1
-	thumb_func_end HexdigitValue
+	thumb_func_end HexDigitValue
 
 	thumb_func_start xxx_get_next_char_from_string
 xxx_get_next_char_from_string:
@@ -1136,10 +1136,10 @@ xxx_get_next_char_from_string:
 	bne _08008696
 	adds r5, 0x1
 	ldrb r0, [r5]
-	bl HexdigitValue
+	bl HexDigitValue
 	adds r4, r0, 0
 	ldrb r0, [r5, 0x1]
-	bl HexdigitValue
+	bl HexDigitValue
 	lsls r4, 4
 	adds r4, r0
 	ldrb r0, [r5]
