@@ -43,7 +43,7 @@ void sub_8036FDC(s32 param_1)
     s32 index2;
 
     ResetUnusedInputStruct();
-    sub_800641C(NULL, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
     ResetSprites(FALSE);
 
     if (sUnknown_203B35C == NULL) {
@@ -64,7 +64,7 @@ void sub_8036FDC(s32 param_1)
         sUnknown_203B35C->unk15C[index2] = sUnknown_80E653C;
 
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B35C->unk15C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B35C->unk15C, TRUE, TRUE);
     SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6CD0, sUnknown_80E6CE8, FALSE, 6, FALSE);
     sub_8035CF4(sUnknown_203B35C->unk1C, 0, TRUE);
     sub_80376CC();

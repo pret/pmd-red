@@ -69,9 +69,9 @@ _08045E1E:
 	ldr r0, _08045E3C
 	b _08046048
 	.align 2, 0
-_08045E34: .4byte gUnknown_202DE58
+_08045E34: .4byte gFormatItems
 _08045E38: .4byte gAvailablePokemonNames
-_08045E3C: .4byte gUnknown_80F8F88
+_08045E3C: .4byte gMonTerrifiedCouldntPickUpItem
 _08045E40:
 	ldrb r0, [r5, 0x2]
 	bl GetItemCategory
@@ -94,8 +94,8 @@ _08045E40:
 	ldr r0, _08045E78
 	b _08045FD0
 	.align 2, 0
-_08045E74: .4byte gUnknown_202DE58
-_08045E78: .4byte gUnknown_80F8FFC
+_08045E74: .4byte gFormatItems
+_08045E78: .4byte gPickedUpItem
 _08045E7C:
 	ldr r0, _08045EA8
 	ldr r0, [r0]
@@ -282,8 +282,8 @@ _08045FD0:
 	b _08045FF2
 	.align 2, 0
 _08045FDC: .4byte 0x00ff0008
-_08045FE0: .4byte gUnknown_202DE58
-_08045FE4: .4byte gUnknown_80F8FC4
+_08045FE0: .4byte gFormatItems
+_08045FE4: .4byte gPickedUpItem2
 _08045FE8:
 	ldr r0, _08045FFC
 	ldr r1, [r0]
@@ -294,7 +294,7 @@ _08045FF2:
 	bl sub_8052EC0
 	b _080460E0
 	.align 2, 0
-_08045FFC: .4byte gUnknown_80F8FF8
+_08045FFC: .4byte gPickedUpItemToolbox
 _08046000:
 	movs r4, 0
 	cmp r4, r8
@@ -339,9 +339,9 @@ _08046048:
 	bl SendMessage
 	b _080460E0
 	.align 2, 0
-_08046054: .4byte gUnknown_202DE58
+_08046054: .4byte gFormatItems
 _08046058: .4byte gAvailablePokemonNames
-_0804605C: .4byte gUnknown_80F8F54
+_0804605C: .4byte gMonSteppedOnItem
 _08046060:
 	movs r0, 0xA5
 	lsls r0, 1
@@ -363,8 +363,8 @@ _08046060:
 	ldr r0, _08046090
 	b _080460AC
 	.align 2, 0
-_0804608C: .4byte gUnknown_202DE58
-_08046090: .4byte gUnknown_80F8FC4
+_0804608C: .4byte gFormatItems
+_08046090: .4byte gPickedUpItem2
 _08046094:
 	adds r0, r5, 0
 	bl AddItemToInventory
@@ -383,7 +383,7 @@ _080460AC:
 	b _080460DA
 	.align 2, 0
 _080460B8: .4byte gAvailablePokemonNames
-_080460BC: .4byte gUnknown_80F8FAC
+_080460BC: .4byte gMonCouldntPickUpItem
 _080460C0:
 	ldr r0, _080460F0
 	adds r1, r5, 0
@@ -408,8 +408,8 @@ _080460E0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080460F0: .4byte gUnknown_202DE58
-_080460F4: .4byte gUnknown_80F8FF8
+_080460F0: .4byte gFormatItems
+_080460F4: .4byte gPickedUpItemToolbox
 	thumb_func_end sub_8045DB4
 
 	thumb_func_start sub_80460F8
@@ -1128,7 +1128,7 @@ _08046644:
 	b _0804671E
 	.align 2, 0
 _08046688: .4byte gUnknown_80F4468
-_0804668C: .4byte gUnknown_202DE58
+_0804668C: .4byte gFormatItems
 _08046690:
 	cmp r0, 0x2
 	beq _080466A4
@@ -1139,17 +1139,17 @@ _0804669A:
 	ldr r0, _080466A0
 	b _080466B6
 	.align 2, 0
-_080466A0: .4byte gUnknown_80F93E8
+_080466A0: .4byte gItemFellOnGround
 _080466A4:
 	ldr r0, _080466A8
 	b _080466B6
 	.align 2, 0
-_080466A8: .4byte gUnknown_80F9408
+_080466A8: .4byte gItemFellInWater
 _080466AC:
 	ldr r0, _080466B0
 	b _080466B6
 	.align 2, 0
-_080466B0: .4byte gUnknown_80F9424
+_080466B0: .4byte gItemBuried
 _080466B4:
 	ldr r0, _080466C4
 _080466B6:
@@ -1159,7 +1159,7 @@ _080466B6:
 	bl sub_8052364
 	b _0804671E
 	.align 2, 0
-_080466C4: .4byte gUnknown_80F949C
+_080466C4: .4byte gItemFellOutOfSight
 _080466C8:
 	mov r3, r8
 	lsls r1, r3, 16
@@ -1213,7 +1213,7 @@ _0804671E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08046730: .4byte gUnknown_80F943C
+_08046730: .4byte gItemLost
 	thumb_func_end sub_804652C
 
 	thumb_func_start sub_8046734
@@ -1726,7 +1726,7 @@ _08046B0A:
 	.align 2, 0
 _08046B2C: .4byte 0x0000052c
 _08046B30: .4byte 0x000004b4
-_08046B34: .4byte gUnknown_80F945C
+_08046B34: .4byte gAllItemsLost
 _08046B38: .4byte 0x00000524
 _08046B3C:
 	ldr r0, _08046B4C
@@ -1737,7 +1737,7 @@ _08046B3C:
 	bl SendMessage
 	b _08046C7C
 	.align 2, 0
-_08046B4C: .4byte gUnknown_80F943C
+_08046B4C: .4byte gItemLost
 _08046B50: .4byte 0x00000524
 _08046B54:
 	mov r0, r9
@@ -1901,7 +1901,7 @@ _08046C7C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08046C90: .4byte gUnknown_80F947C
+_08046C90: .4byte gSeveralItemsLost
 _08046C94: .4byte 0x00000524
 _08046C98: .4byte gDungeon
 _08046C9C: .4byte 0x00018210

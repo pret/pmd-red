@@ -120,7 +120,7 @@ void sub_802F004(void)
 {
     s32 index;
 
-    sub_8006518(gUnknown_203B30C->unkF0);
+    RestoreUnkTextStruct_8006518(gUnknown_203B30C->unkF0);
     switch(gUnknown_203B30C->state)
     {
         case 2:
@@ -135,7 +135,7 @@ void sub_802F004(void)
             }
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B30C->unkF0, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B30C->unkF0, TRUE, TRUE);
 }
 
 void sub_802F088(void)

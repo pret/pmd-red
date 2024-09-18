@@ -9,7 +9,7 @@ void sub_808408C(u32 param_1)
     gUnknown_203B458 = (1 | param_1) & 0xffffff;
 }
 
-u32 sub_80840A4(void)
+u32 YetAnotherRandom24(void)
 {
     u32 r0;
     u32 r1;

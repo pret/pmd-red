@@ -17,7 +17,7 @@
 #include "text_util.h"
 #include "text2.h"
 
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 extern u8 gAvailablePokemonNames[]; // 202DF98
 
 #include "data/pokemon_mail.h"
@@ -57,13 +57,13 @@ void CreateRescueTitle(unkStruct_802C39C *param_1)
             PrintStringOnWindow(21, param_1->y, buf_1, param_1->unk0[0], 0);
             break;
         case 12:
-            BufferItemName(gUnknown_202DE58, param_1->targetItem, NULL);
-            sprintfStatic(buf_1, gUnknown_80E8830, gUnknown_202DE58);
+            BufferItemName(gFormatItems, param_1->targetItem, NULL);
+            sprintfStatic(buf_1, gUnknown_80E8830, gFormatItems);
             PrintStringOnWindow(21, param_1->y, buf_1, param_1->unk0[0], 0);
             break;
         case 11:
-            BufferItemName(gUnknown_202DE58, param_1->targetItem, NULL);
-            sprintfStatic(buf_1, gUnknown_80E8848, gUnknown_202DE58);
+            BufferItemName(gFormatItems, param_1->targetItem, NULL);
+            sprintfStatic(buf_1, gUnknown_80E8848, gFormatItems);
             PrintStringOnWindow(21, param_1->y, buf_1, param_1->unk0[0], 0);
             break;
         case 4:
@@ -163,13 +163,13 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             PrintStringOnWindow(10, y, gMedichamMissionDescription, param_1->unk0[0], 0);
             break;
         case 4:
-            BufferItemName(gUnknown_202DE58, param_1->targetItem, NULL);
-            sprintfStatic(buf_1, gUnknown_80E8968, gUnknown_202DE58);
+            BufferItemName(gFormatItems, param_1->targetItem, NULL);
+            sprintfStatic(buf_1, gUnknown_80E8968, gFormatItems);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
             break;
         case 5:
-            BufferItemName(gUnknown_202DE58, param_1->targetItem, NULL);
-            sprintfStatic(buf_1, gUnknown_80E89B0, gUnknown_202DE58);
+            BufferItemName(gFormatItems, param_1->targetItem, NULL);
+            sprintfStatic(buf_1, gUnknown_80E89B0, gFormatItems);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
             break;
         case 6:
@@ -194,12 +194,12 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
         case 16: {
             u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
             u8 bVar3 = param_1->unk8->seed + param_1->unk8->dungeon.floor;
-            BufferItemName(gUnknown_202DE58, param_1->targetItem, NULL);
-            sprintfStatic(buf_1, gUnknown_80EB3F8[bVar2 % 22], gUnknown_202DE58);
+            BufferItemName(gFormatItems, param_1->targetItem, NULL);
+            sprintfStatic(buf_1, gUnknown_80EB3F8[bVar2 % 22], gFormatItems);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
             y += 12;
 
-            sprintfStatic(buf_1, gUnknown_80EB72C[bVar3 % 22], gUnknown_202DE58);
+            sprintfStatic(buf_1, gUnknown_80EB72C[bVar3 % 22], gFormatItems);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
             y -= 12;
             break;
@@ -282,13 +282,13 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             PrintStringOnWindow(68, y, gUnknown_80E8AEC, param_1->unk0[0], 0);
             break;
         case MISSION_TYPE_DELIVER_ITEM:
-            BufferItemName(gUnknown_202DE58, param_1->targetItem, NULL);
-            sprintfStatic(buf_1, gUnknown_80E8AFC, gUnknown_202DE58);
+            BufferItemName(gFormatItems, param_1->targetItem, NULL);
+            sprintfStatic(buf_1, gUnknown_80E8AFC, gFormatItems);
             PrintStringOnWindow(68, y, buf_1, param_1->unk0[0], 0);
             break;
         case MISSION_TYPE_FIND_ITEM:
-            BufferItemName(gUnknown_202DE58, param_1->targetItem, NULL);
-            sprintfStatic(buf_1, gUnknown_80E8B10, gUnknown_202DE58);
+            BufferItemName(gFormatItems, param_1->targetItem, NULL);
+            sprintfStatic(buf_1, gUnknown_80E8B10, gFormatItems);
             PrintStringOnWindow(68, y, buf_1, param_1->unk0[0], 0);
             break;
         case MISSION_TYPE_RESCUE_CLIENT:
@@ -347,8 +347,8 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             break;
         case ITEM: // Item
         case ITEM_EXTRA: // Item + ?
-            BufferItemName(gUnknown_202DE58, param_1->rewardItem, NULL);
-            sprintfStatic(buf_1, gMissionRewardText[param_1->rewardType], gUnknown_202DE58);
+            BufferItemName(gFormatItems, param_1->rewardItem, NULL);
+            sprintfStatic(buf_1, gMissionRewardText[param_1->rewardType], gFormatItems);
             PrintStringOnWindow(68, y, buf_1, param_1->unk0[0], 0);
             break;
         case 4: // Friend Area

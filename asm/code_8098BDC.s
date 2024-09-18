@@ -15,7 +15,7 @@ sub_80990EC:
 	lsls r1, 16
 	asrs r4, r1, 16
 	adds r0, r4, 0
-	bl sub_80A2608
+	bl GetDungeonInfo_80A2608
 	mov r8, r0
 	ldrb r0, [r0, 0xC]
 	movs r5, 0
@@ -229,11 +229,11 @@ sub_809927C:
 	movs r0, 0
 	movs r1, 0x13
 	movs r2, 0x50
-	bl sub_80018D8
+	bl SetScriptVarValue
 	ldrb r2, [r4]
 	movs r0, 0
 	movs r1, 0x14
-	bl sub_80018D8
+	bl SetScriptVarValue
 	ldr r4, _080992DC
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -263,7 +263,7 @@ sub_80992E0:
 	adds r5, r1, 0
 	movs r0, 0
 	movs r1, 0x13
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r1, r0, 16
 	movs r0, 0x1
@@ -279,7 +279,7 @@ sub_80992E0:
 	strh r1, [r4]
 	movs r0, 0
 	movs r1, 0x14
-	bl sub_8001658
+	bl GetScriptVarValue
 	strh r0, [r5]
 	movs r0, 0x1
 	b _08099322
@@ -302,17 +302,17 @@ sub_8099328:
 	adds r4, r0, 0
 	movs r0, 0
 	movs r1, 0x13
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0x51
 	bne _08099358
 	movs r0, 0
 	movs r1, 0x14
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r0, 16
-	bl sub_80A2608
+	bl GetDungeonInfo_80A2608
 	ldrb r0, [r0, 0xC]
 	cmp r0, 0x3E
 	bhi _08099358
@@ -333,7 +333,7 @@ sub_8099360:
 	adds r4, r0, 0
 	movs r0, 0
 	movs r1, 0x13
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0x52
@@ -343,10 +343,10 @@ sub_8099360:
 _08099378:
 	movs r0, 0
 	movs r1, 0x14
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r0, 16
-	bl sub_80A2608
+	bl GetDungeonInfo_80A2608
 	ldrb r0, [r0, 0xC]
 	strb r0, [r4]
 	movs r0, 0x1
@@ -362,7 +362,7 @@ sub_8099394:
 	adds r4, r0, 0
 	movs r0, 0
 	movs r1, 0x13
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0x50
@@ -372,7 +372,7 @@ sub_8099394:
 _080993AC:
 	movs r0, 0
 	movs r1, 0x14
-	bl sub_8001658
+	bl GetScriptVarValue
 	strb r0, [r4]
 	movs r0, 0x1
 _080993B8:
@@ -432,14 +432,14 @@ sub_80993F0:
 	adds r0, r2, 0
 	strh r0, [r1]
 	movs r0, 0
-	bl xxx_update_some_bg_tiles
+	bl UpdateFadeInTile
 	movs r0, 0
 	movs r1, 0x14
 	bl sub_80095CC
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	movs r0, 0
 	movs r1, 0x14
 	bl sub_8009408
@@ -500,7 +500,7 @@ _080994B0:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	bl GroundMap_Reset
 	bl sub_809D0BC
 	mov r0, r10
@@ -574,7 +574,7 @@ _08099540:
 	add r0, sp, 0x10
 	movs r2, 0x80
 	lsls r2, 1
-	bl sub_8002BB8
+	bl SetVecFromDirectionSpeed
 	ldr r2, [sp, 0x10]
 	ldr r3, [sp, 0x14]
 	movs r0, 0x2
@@ -739,7 +739,7 @@ sub_8099690:
 _080996BC: .4byte gUnknown_8116028
 _080996C0: .4byte gSystemFileArchive
 _080996C4: .4byte gGameOptionsRef
-_080996C8: .4byte gUnknown_202D078
+_080996C8: .4byte gFontPaletteAlt
 _080996CC:
 	ldr r4, _080996D0
 	b _080996D6

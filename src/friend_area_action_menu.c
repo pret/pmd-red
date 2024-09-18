@@ -51,7 +51,7 @@ extern void SetFriendAreaActionMenuState(u32);
 extern void PlaySound(u32);
 
 extern void sub_808D31C(PokemonStruct1 *);
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 extern bool8 sub_808D750(s16 index_);
 extern void sub_808ED00(void);
 
@@ -143,7 +143,7 @@ void sub_802719C(void)
 {
     s32 index;
 
-    sub_8006518(sUnknown_203B2BC->unk180);
+    RestoreUnkTextStruct_8006518(sUnknown_203B2BC->unk180);
     switch(sUnknown_203B2BC->state)
     {
         case 3:
@@ -165,7 +165,7 @@ void sub_802719C(void)
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B2BC->unk180, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B2BC->unk180, TRUE, TRUE);
 }
 
 void sub_8027274(void)
@@ -228,11 +228,11 @@ void sub_8027274(void)
             break;
         case 6:
             sUnknown_203B2BC->fallbackState = FRIEND_AREA_ACTION_MENU_MAIN_2;
-            sub_80141B4(sReturnedToToolbox, 0, 0, 0x101);
+            xxx_info_box_80141B4(sReturnedToToolbox, 0, 0, 0x101);
             break;
         case 7:
             sUnknown_203B2BC->fallbackState = FRIEND_AREA_ACTION_MENU_MAIN_2;
-            sub_80141B4(sSentToStorage, 0, 0, 0x101);
+            xxx_info_box_80141B4(sSentToStorage, 0, 0, 0x101);
             break;
     }
 }
@@ -695,14 +695,14 @@ void sub_8027D40(u32 r0, BulkItem *heldItem)
     Item slot;
     struct unkStruct_8090F58 a3;
 
-    sub_8008C54(r0);
+    CallPrepareTextbox_8008C54(r0);
     sub_80073B8(r0);
     HeldItemToSlot(&slot, heldItem);
     a3.unk0 = 0;
     a3.unk4 = 0;
     a3.unk8 = 1;
     slot.flags = ITEM_FLAG_EXISTS;
-    sub_8090E14(gUnknown_202DE58, &slot, &a3);
+    sub_8090E14(gFormatItems, &slot, &a3);
     PrintFormatStringOnWindow(4, 3, sItemBuffered, r0, 0);
     sub_80073E0(r0);
 }

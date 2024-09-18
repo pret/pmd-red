@@ -12,7 +12,7 @@ extern const u8 *gUnknown_8117000[];
 
 // code_80972F4.h (read comment)
 extern bool8 sub_8097384(s16);
-extern bool8 sub_80973F4(s16);
+extern bool8 RescueScenarioConquered(s16);
 
 // code_8098BDC.s
 extern void sub_809AB4C(s32, s32);
@@ -74,11 +74,11 @@ u32 sub_80A25AC(u16 param_1)
         return 19;
     if (param_1 != 1)
         return param_1;
-    sub_8001658(0, 40);
+    GetScriptVarValue(0, 40);
     return 1;
 }
 
-const DungeonInfo *sub_80A2608(s16 index)
+const DungeonInfo *GetDungeonInfo_80A2608(s16 index)
 {
     return &gUnknown_81168A8[index];
 }
@@ -99,7 +99,7 @@ s16 sub_80A2654(s16 index)
 {
     const DungeonInfo *temp;
 
-    temp = sub_80A2608(index);
+    temp = GetDungeonInfo_80A2608(index);
     return temp->unkE;
 }
 
@@ -153,7 +153,7 @@ UNUSED static s16 sub_80A26D8(u8 index)
 
     for (i = 0; i < 83; i++) {
         counter2 = i;
-        temp = sub_80A2608(counter2);
+        temp = GetDungeonInfo_80A2608(counter2);
 
         if (temp->unk11 != 0) {
             if (temp->dungeonIndex == index)
@@ -169,7 +169,7 @@ u8 sub_80A270C(s16 index)
     s32 index_s32;
 
     index_s32 = index; // forcing a shift before addressing
-    temp = sub_80A2608(gUnknown_8116F9A[index_s32]);
+    temp = GetDungeonInfo_80A2608(gUnknown_8116F9A[index_s32]);
     return temp->dungeonIndex;
 }
 
@@ -178,7 +178,7 @@ u8 sub_80A2728(s16 index)
     const DungeonInfo *temp;
 
     s16 temp_number = 55 + index;
-    temp = sub_80A2608(temp_number);
+    temp = GetDungeonInfo_80A2608(temp_number);
     return temp->dungeonIndex;
 }
 
@@ -186,7 +186,7 @@ u8 sub_80A2740(s32 index)
 {
     const DungeonInfo *temp;
 
-    temp = sub_80A2608(index);
+    temp = GetDungeonInfo_80A2608(index);
     return temp->dungeonIndex;
 }
 
@@ -211,12 +211,12 @@ s16 sub_80A2750(s16 r0)
     if ((u16)(r0 - 55) <= 24)
         return 4;
 
-    temp = sub_80A2608(temp_2);
+    temp = GetDungeonInfo_80A2608(temp_2);
     if (temp->unkE == -1)
         return 1;
     if (sub_80023E4(5))
         return 1;
-    if (!sub_80973F4(temp->unkE))
+    if (!RescueScenarioConquered(temp->unkE))
         return 1;
     if (!sub_80023E4(1))
         return 1;
@@ -242,7 +242,7 @@ bool8 sub_80A27CC(s16 r0)
         return TRUE;
     if (!sub_80023E4(1))
         return FALSE;
-    if (!sub_80973F4(temp))
+    if (!RescueScenarioConquered(temp))
         return FALSE;
     return TRUE;
 }
@@ -263,7 +263,7 @@ bool8 sub_80A2824(u8 index)
                 if (temp->dungeonIndex == index) {
                     if (sub_8097384(i))
                         return TRUE;
-                    if (sub_80973F4(i))
+                    if (RescueScenarioConquered(i))
                         return TRUE;
                 }
             }
@@ -290,7 +290,7 @@ UNUSED static bool8 sub_80A28B4(s16 r0)
     temp = sub_80A2620(r0);
 
     if (temp->unk0 != -1) {
-        if (!sub_8097384(r0) && !sub_80973F4(r0))
+        if (!sub_8097384(r0) && !RescueScenarioConquered(r0))
             return FALSE;
         else
             return TRUE;
@@ -311,7 +311,7 @@ bool8 sub_80A28F0(u8 index)
             if (temp->dungeonIndex == index) {
                 if (sub_8097384(counter))
                     return TRUE;
-                if (sub_80973F4(counter))
+                if (RescueScenarioConquered(counter))
                     return TRUE;
             }
         }
@@ -386,7 +386,7 @@ s32 sub_80A29B0(u8 *param_1)
         for (index = 0; index < 46; index++) {
             iVar3 = sub_80A2620(index);
 
-            if (iVar3->unk11 != 0 && sub_80973F4(index))
+            if (iVar3->unk11 != 0 && RescueScenarioConquered(index))
                 local_68[iVar3->dungeonIndex] = 1;
         }
     }
@@ -428,7 +428,7 @@ UNUSED static s32 sub_80A2A5C(u8 *param_1)
         for (index = 0; index < 46; index++) {
             iVar3 = sub_80A2620(index);
 
-            if (iVar3->unk11 != 0 && (sub_8097384(index) || sub_80973F4(index)))
+            if (iVar3->unk11 != 0 && (sub_8097384(index) || RescueScenarioConquered(index)))
                 local_58[iVar3->dungeonIndex] = 1;
         }
     }
@@ -460,5 +460,5 @@ const u8 *sub_80A2B18(s16 param_1)
 
 UNUSED static const u8 *sub_80A2B28(u16 r0)
 {
-    return sub_80A2B18(sub_8001658(0, 17));
+    return sub_80A2B18(GetScriptVarValue(0, 17));
 }

@@ -60,7 +60,7 @@ bool8 CreateWigglytuffShop(u32 mode)
     OpenedFile *file;
 
     ResetUnusedInputStruct();
-    sub_800641C(NULL, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
 
     sWigglytuffShop3Work = MemoryAlloc(sizeof(WigglytuffShop3Work), 8);
     sWigglytuffShop3Work->menuAction1 = 0;
@@ -147,7 +147,7 @@ static void sub_8021D5C(void)
 {
     s32 i;
 
-    sub_8006518(sWigglytuffShop3Work->unkD0);
+    RestoreUnkTextStruct_8006518(sWigglytuffShop3Work->unkD0);
 
     switch (sWigglytuffShop3Work->state) {
         case WIGGLYTUFF_UNK9:
@@ -166,7 +166,7 @@ static void sub_8021D5C(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sWigglytuffShop3Work->unkD0, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sWigglytuffShop3Work->unkD0, TRUE, TRUE);
 }
 
 static void UpdateWigglytuffDialogue(void)
@@ -185,37 +185,37 @@ static void UpdateWigglytuffDialogue(void)
             break;
         case FRIEND_AREA_SELECT_BUY:
             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_UNK9;
-            sub_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_03], 0, sWigglytuffShop3Work->unkCC, 0x10d);
+            xxx_info_box_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_03], 0, sWigglytuffShop3Work->unkCC, 0x10d);
             break;
         case FRIEND_AREA_SELECT_BUY_AGAIN:
             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_UNKA;
-            sub_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_04], 0, sWigglytuffShop3Work->unkCC, 0x10d);
+            xxx_info_box_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_04], 0, sWigglytuffShop3Work->unkCC, 0x10d);
             break;
         case WIGGLYTUFF_INFO:
             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_MAIN_MENU;
-            sub_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_19], 0, sWigglytuffShop3Work->unkCC, 0x10d);
+            xxx_info_box_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_19], 0, sWigglytuffShop3Work->unkCC, 0x10d);
             break;
         case WIGGLYTUFF_PRE_EXIT:
             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_EXIT;
-            sub_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_02], 0, sWigglytuffShop3Work->unkCC, 0x30d);
+            xxx_info_box_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_02], 0, sWigglytuffShop3Work->unkCC, 0x30d);
             break;
         default:
             break;
         case WIGGLYTUFF_CANT_ADD_FRIEND_AREA:
             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_PRE_EXIT;
-            sub_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_08], 0, sWigglytuffShop3Work->unkCC, 0x10d);
+            xxx_info_box_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_08], 0, sWigglytuffShop3Work->unkCC, 0x10d);
             break;
         case NO_MONEY:
             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_UNKA;
-            sub_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_09], 0, sWigglytuffShop3Work->unkCC, 0x10d);
+            xxx_info_box_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_09], 0, sWigglytuffShop3Work->unkCC, 0x10d);
             break;
         case NO_FRIEND_AREAS:
             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_PRE_EXIT;
-            sub_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_10], 0, sWigglytuffShop3Work->unkCC, 0x10d);
+            xxx_info_box_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_10], 0, sWigglytuffShop3Work->unkCC, 0x10d);
             break;
         case NOT_ENOUGH_MONEY:
             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_UNKA;
-            sub_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_11], 0, sWigglytuffShop3Work->unkCC, 0x10d);
+            xxx_info_box_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_11], 0, sWigglytuffShop3Work->unkCC, 0x10d);
             break;
         case WIGGLYTUFF_UNK9:
             sub_80211AC(2, 3);
@@ -233,7 +233,7 @@ static void UpdateWigglytuffDialogue(void)
             break;
         case BUY_FRIEND_AREA:
             CreateWigglytuffConfirmFriendAreaMenu();
-            sub_8092578(gUnknown_202E628, sWigglytuffShop3Work->chosenFriendArea, FALSE);
+            WriteFriendAreaName(gUnknown_202E628, sWigglytuffShop3Work->chosenFriendArea, FALSE);
             gFormatData_202DE30[0] = sWigglytuffShop3Work->friendAreaPrice;
             sub_8014248(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_05], 0, 5, sWigglytuffShop3Work->unk1C, 0, 4, 0, sWigglytuffShop3Work->unkCC, 12);
             break;
@@ -242,8 +242,8 @@ static void UpdateWigglytuffDialogue(void)
             break;
         case CONFIRM_BUY_FRIEND_AREA:
             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_UNKD;
-            sub_8092578(gUnknown_202E628, sWigglytuffShop3Work->chosenFriendArea, FALSE);
-            sub_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_06], 0, sWigglytuffShop3Work->unkCC, 0x10d);
+            WriteFriendAreaName(gUnknown_202E628, sWigglytuffShop3Work->chosenFriendArea, FALSE);
+            xxx_info_box_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_06], 0, sWigglytuffShop3Work->unkCC, 0x10d);
             break;
         case WIGGLYTUFF_UNKD:
             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_UNKE;
@@ -263,15 +263,15 @@ static void UpdateWigglytuffDialogue(void)
                 sWigglytuffShop3Work->fallbackState = FRIEND_AREA_SELECT_BUY_AGAIN;
 
             PlaySound(206);
-            sub_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_07], 0, sWigglytuffShop3Work->unkCC, 0x10d);
+            xxx_info_box_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_07], 0, sWigglytuffShop3Work->unkCC, 0x10d);
             break;
         case WIGGLYTUFF_CHECK:
             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_UNK16;
-            sub_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_12], 0, sWigglytuffShop3Work->unkCC, 0x10d);
+            xxx_info_box_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_12], 0, sWigglytuffShop3Work->unkCC, 0x10d);
             break;
         case WIGGLYTUFF_CHECK_AGAIN:
             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_UNK17;
-            sub_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_13], 0, sWigglytuffShop3Work->unkCC, 0x10d);
+            xxx_info_box_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_13], 0, sWigglytuffShop3Work->unkCC, 0x10d);
             break;
         case WIGGLYTUFF_UNK16:
             sub_8023144(0, 3, 0, 10);
@@ -306,24 +306,24 @@ static void UpdateWigglytuffDialogue(void)
 
             string = GetMonSpecies(sWigglytuffShop3Work->chosenSpecies);
             strcpy(gAvailablePokemonNames, string);
-            sub_8092578(gUnknown_202E628, sWigglytuffShop3Work->chosenFriendArea, FALSE);
-            sub_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_14], 0, sWigglytuffShop3Work->unkCC, 0x10d);
+            WriteFriendAreaName(gUnknown_202E628, sWigglytuffShop3Work->chosenFriendArea, FALSE);
+            xxx_info_box_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_14], 0, sWigglytuffShop3Work->unkCC, 0x10d);
             break;
         case WIGGLYTUFF_CHECK_HAS_FRIEND_AREA:
             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_CHECK_AGAIN;
-            sub_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_15], 0, sWigglytuffShop3Work->unkCC, 0x10d);
+            xxx_info_box_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_15], 0, sWigglytuffShop3Work->unkCC, 0x10d);
             break;
         case WIGGLYTUFF_CHECK_POST_GAME:
             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_CHECK_AGAIN;
-            sub_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_16], 0, sWigglytuffShop3Work->unkCC, 0x10d);
+            xxx_info_box_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_16], 0, sWigglytuffShop3Work->unkCC, 0x10d);
             break;
         case WIGGLYTUFF_CHECK_WONDER_MAIL:
             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_CHECK_AGAIN;
-            sub_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_17], 0, sWigglytuffShop3Work->unkCC, 0x10d);
+            xxx_info_box_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_17], 0, sWigglytuffShop3Work->unkCC, 0x10d);
             break;
         case WIGGLYTUFF_CHECK_LEGENDARY:
             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_CHECK_AGAIN;
-            sub_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_18], 0, sWigglytuffShop3Work->unkCC, 0x10d);
+            xxx_info_box_80141B4(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_18], 0, sWigglytuffShop3Work->unkCC, 0x10d);
             break;
     }
 }

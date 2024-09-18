@@ -67,16 +67,16 @@ extern void sub_807EC28(bool8);
 
 extern s32 gUnknown_202F378;
 extern u8 gUnknown_202F32D;
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 extern u8 gUnknown_202DFE8[];
 extern u8 gAvailablePokemonNames[];
 
-extern const u8 *gUnknown_80F8F88;
-extern const u8 *gUnknown_80F9054;
-extern const u8 *gUnknown_80F9018;
-extern const u8 *gUnknown_80F9050;
-extern const u8 *gUnknown_80F8F54;
-extern const u8 *gUnknown_80F8FAC;
+extern const u8 *gMonTerrifiedCouldntPickUpItem;
+extern const u8 *gMonPickedUpItem;
+extern const u8 *gMonPickedUpItem2;
+extern const u8 *gMonPickedUpItemToolbox;
+extern const u8 *gMonSteppedOnItem;
+extern const u8 *gMonCouldntPickUpItem;
 extern const u8 *gUnknown_80FD594;
 extern const u8 *gUnknown_80FD5B8;
 extern const u8 *gUnknown_80FD5DC;
@@ -159,9 +159,9 @@ void sub_8073D14(Entity *entity)
         return;
 
     if (ShouldMonsterRunAwayAndShowEffect(entity, TRUE)) {
-        sub_8045BF8(gUnknown_202DE58, groundItem);
+        sub_8045BF8(gFormatItems, groundItem);
         SetMessageArgument(gAvailablePokemonNames, entity, 0);
-        sub_805239C(entity, gUnknown_80F8F88);
+        sub_805239C(entity, gMonTerrifiedCouldntPickUpItem);
     }
     else if (!_entityInfo->isNotTeamMember && GetItemCategory(groundItem->id) == CATEGORY_POKE) {
         // Why check the same thing again?
@@ -172,9 +172,9 @@ void sub_8073D14(Entity *entity)
             PlaySoundEffect(0x14C);
         }
         AddToTeamMoney(GetMoneyValue(groundItem));
-        sub_8045BF8(gUnknown_202DE58, groundItem);
+        sub_8045BF8(gFormatItems, groundItem);
         sub_80461C8(&entity->pos, 1);
-        sub_805239C(entity, gUnknown_80F9054);
+        sub_805239C(entity, gMonPickedUpItem);
     }
     else {
         s32 i, nItems, newInventoryId;
@@ -234,13 +234,13 @@ void sub_8073D14(Entity *entity)
                 if (groundItem->flags & ITEM_FLAG_STICKY)
                     carriedItems[newInventoryId]->flags |= ITEM_FLAG_STICKY;
 
-                sub_8045BF8(gUnknown_202DE58, groundItem);
+                sub_8045BF8(gFormatItems, groundItem);
                 sub_80461C8(&entity->pos, 1);
                 PlaySoundEffect(0x14A);
                 if (inventoryIds[newInventoryId] <= -1)
-                    sub_805239C(entity, gUnknown_80F9018);
+                    sub_805239C(entity, gMonPickedUpItem2);
                 else
-                    sub_805239C(entity, gUnknown_80F9050);
+                    sub_805239C(entity, gMonPickedUpItemToolbox);
 
                 return;
             }
@@ -252,8 +252,8 @@ void sub_8073D14(Entity *entity)
         }
 
         if (i == nItems) {
-            sub_8045BF8(gUnknown_202DE58, groundItem);
-            sub_805239C(entity, gUnknown_80F8F54);
+            sub_8045BF8(gFormatItems, groundItem);
+            sub_805239C(entity, gMonSteppedOnItem);
         }
         else {
             if (_entityInfo->isNotTeamMember) {
@@ -265,18 +265,18 @@ void sub_8073D14(Entity *entity)
 
             if (inventoryIds[i] <= -1) {
                 _entityInfo->heldItem = *groundItem;
-                sub_8045BF8(gUnknown_202DE58, groundItem);
+                sub_8045BF8(gFormatItems, groundItem);
                 sub_80461C8(&entity->pos, 1);
-                sub_805239C(entity, gUnknown_80F9018);
+                sub_805239C(entity, gMonPickedUpItem2);
             }
             else if (AddItemToInventory(groundItem)) {
                 SetMessageArgument(gAvailablePokemonNames, entity, 0);
-                sub_805239C(entity, gUnknown_80F8FAC);
+                sub_805239C(entity, gMonCouldntPickUpItem);
             }
             else {
-                sub_8045BF8(gUnknown_202DE58, groundItem);
+                sub_8045BF8(gFormatItems, groundItem);
                 sub_80461C8(&entity->pos, 1);
-                sub_805239C(entity, gUnknown_80F9050);
+                sub_805239C(entity, gMonPickedUpItemToolbox);
             }
         }
     }

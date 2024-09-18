@@ -11,8 +11,8 @@ extern const u8 gUnknown_8106EA0[]; // ax%03d
 // ???
 extern s32 sprintf(char *, const char *, ...);
 
-static void sub_8068884(void);
-static void sub_80688B0(void);
+static void EnsureCastformLoaded(void);
+static void EnsureDeoxysLoaded(void);
 
 void sub_8068768(void)
 {
@@ -23,7 +23,7 @@ void sub_8068768(void)
         entity = gDungeon->allPokemon[i];
 
         if (entity != NULL && EntityExists(entity))
-            sub_8068838(entity->info->apparentID, FALSE);
+            LoadPokemonSprite(entity->info->apparentID, FALSE);
     }
 }
 
@@ -33,13 +33,13 @@ void sub_80687AC(void)
     gDungeon->unk37F4 = 10;
 }
 
-OpenedFile *sub_80687D0(s16 species)
+OpenedFile *GetSpriteData(s16 species)
 {
     s32 species32 = species;
     return gDungeon->sprites[species32];
 }
 
-static void sub_80687EC(s32 _id)
+static void EnsureSpriteLoaded(s32 _id)
 {
     u8 name [12];
     s32 id = (s16)_id;
@@ -50,34 +50,34 @@ static void sub_80687EC(s32 _id)
     }
 }
 
-void sub_8068838(s16 id, bool32 a1)
+void LoadPokemonSprite(s16 id, bool32 a1)
 {
     s32 id_s32 = id;
     bool8 param_2 = a1;
 
     if (!param_2 &&
         (id_s32 == MONSTER_DEOXYS_NORMAL || id_s32 == MONSTER_DEOXYS_ATTACK || id_s32 == MONSTER_DEOXYS_DEFENSE || id_s32 == MONSTER_DEOXYS_SPEED)) {
-        sub_80688B0();
+        EnsureDeoxysLoaded();
     }
     else {
-        sub_80687EC(id_s32);
+        EnsureSpriteLoaded(id_s32);
         // >= MONSTER_CASTFORM && <= MONSTER_CASTFORM_RAINY
         if ((u16)(id_s32 - MONSTER_CASTFORM) < 4)
-            sub_8068884();
+            EnsureCastformLoaded();
     }
 }
 
-static void sub_8068884(void)
+static void EnsureCastformLoaded(void)
 {
-    sub_80687EC(MONSTER_CASTFORM);
-    sub_80687EC(MONSTER_CASTFORM_SNOWY);
-    sub_80687EC(MONSTER_CASTFORM_SUNNY);
-    sub_80687EC(MONSTER_CASTFORM_RAINY);
+    EnsureSpriteLoaded(MONSTER_CASTFORM);
+    EnsureSpriteLoaded(MONSTER_CASTFORM_SNOWY);
+    EnsureSpriteLoaded(MONSTER_CASTFORM_SUNNY);
+    EnsureSpriteLoaded(MONSTER_CASTFORM_RAINY);
 }
 
-static void sub_80688B0(void)
+static void EnsureDeoxysLoaded(void)
 {
-    sub_80687EC(gDungeon->unk3800);
+    EnsureSpriteLoaded(gDungeon->unk3800);
 }
 
 void CloseAllSpriteFiles(void)

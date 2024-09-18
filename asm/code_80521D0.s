@@ -301,7 +301,7 @@ _080525D0:
 _080525F2:
 	adds r0, r5, 0
 	add r1, sp, 0x4
-	bl sub_8009190
+	bl xxx_handle_format_global
 	adds r5, r0, 0
 	ldrb r0, [r5]
 	cmp r0, 0
@@ -950,7 +950,7 @@ _08052B14:
 	ldrh r3, [r1]
 	movs r1, 0
 	mov r2, r9
-	bl sub_80141B4
+	bl xxx_info_box_80141B4
 _08052B3C:
 	bl xxx_draw_string_80144C4
 	movs r0, 0x9
@@ -1565,7 +1565,7 @@ _08053016:
 _08053030: .4byte gUnknown_202B038
 _08053034: .4byte gUnknown_202F1F0
 _08053038: .4byte 0x0000f3ff
-_0805303C: .4byte gUnknown_202D038
+_0805303C: .4byte gFontPalette
 _08053040:
 	movs r2, 0x1
 	add r9, r2
@@ -1685,7 +1685,7 @@ _08053134:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	movs r0, 0x9
 	bl sub_803E46C
 	bl sub_8040238
@@ -1712,7 +1712,7 @@ _0805314C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08053178: .4byte gUnknown_202D038
+_08053178: .4byte gFontPalette
 	thumb_func_end sub_8052FB8
 
 	thumb_func_start sub_805317C
@@ -6585,7 +6585,7 @@ _08055BBA:
 	str r1, [sp, 0x4]
 	b _08055C26
 	.align 2, 0
-_08055C08: .4byte gUnknown_202DE58
+_08055C08: .4byte gFormatItems
 _08055C0C: .4byte gUnknown_80F93C8
 _08055C10: .4byte gUnknown_202F208
 _08055C14: .4byte 0x00000159
@@ -6798,7 +6798,7 @@ _08055DB4:
 	.align 2, 0
 _08055DC4: .4byte gUnknown_80FC6A4
 _08055DC8: .4byte 0x0000ffff
-_08055DCC: .4byte gUnknown_202DE58
+_08055DCC: .4byte gFormatItems
 _08055DD0: .4byte gUnknown_80FD2DC
 _08055DD4: .4byte gUnknown_202F222
 _08055DD8: .4byte gUnknown_80F4E70
@@ -7187,7 +7187,7 @@ _0805610C: .4byte 0x00003a0e
 _08056110: .4byte gNaturePowerMoveTable
 _08056114: .4byte gUnknown_80FECE0
 _08056118: .4byte gAvailablePokemonNames
-_0805611C: .4byte gUnknown_202DE58
+_0805611C: .4byte gFormatItems
 _08056120: .4byte gUnknown_80FC72C
 _08056124:
 	mov r0, r10
@@ -7272,7 +7272,7 @@ _080561A0:
 	b _08056188
 	.align 2, 0
 _080561D4: .4byte gAvailablePokemonNames
-_080561D8: .4byte gUnknown_202DE58
+_080561D8: .4byte gFormatItems
 _080561DC: .4byte gUnknown_80FC6D0
 _080561E0:
 	ldr r0, _0805620C
@@ -7293,7 +7293,7 @@ _080561E0:
 	bl SendMessage
 	b _08056190
 	.align 2, 0
-_0805620C: .4byte gUnknown_202DE58
+_0805620C: .4byte gFormatItems
 _08056210: .4byte gUnknown_80FC6FC
 _08056214:
 	ldr r0, _0805625C
@@ -7643,7 +7643,7 @@ _080564BC:
 	b _080564F2
 	.align 2, 0
 _080564DC: .4byte gAvailablePokemonNames
-_080564E0: .4byte gUnknown_202DE58
+_080564E0: .4byte gFormatItems
 _080564E4:
 	ldr r0, _08056508
 	ldr r2, [sp, 0x24]
@@ -7662,7 +7662,7 @@ _080564F2:
 	bl sub_805239C
 	b _08056518
 	.align 2, 0
-_08056508: .4byte gUnknown_202DE58
+_08056508: .4byte gFormatItems
 _0805650C: .4byte 0x00000163
 _08056510:
 	adds r0, r6, 0

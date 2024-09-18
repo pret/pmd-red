@@ -3633,8 +3633,8 @@ sub_80A4620:
 _080A4638: .4byte 0x00000449
 	thumb_func_end sub_80A4620
 
-	thumb_func_start sub_80A463C
-sub_80A463C:
+	thumb_func_start GetDungeonBounds
+GetDungeonBounds:
 	movs r3, 0
 	str r3, [r1]
 	str r3, [r1, 0x4]
@@ -3652,7 +3652,7 @@ sub_80A463C:
 	bx lr
 	.align 2, 0
 _080A465C: .4byte 0x00000449
-	thumb_func_end sub_80A463C
+	thumb_func_end GetDungeonBounds
 
 	thumb_func_start sub_80A4660
 sub_80A4660:

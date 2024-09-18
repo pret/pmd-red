@@ -17,7 +17,7 @@
 #include "text2.h"
 
 extern u8 gUnknown_202DEA8[];
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 extern u8 gAvailablePokemonNames[]; // 202DF98
 
 static EWRAM_DATA_2 unkStruct_203B294 *sUnknown_203B294 = {0};
@@ -38,7 +38,7 @@ static void sub_8023120(void);
 bool8 sub_80227B8(PokemonStruct1 *pkmn)
 {
     ResetUnusedInputStruct();
-    sub_800641C(NULL, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
 
     sUnknown_203B294 = MemoryAlloc(sizeof(unkStruct_203B294), 8);
     sUnknown_203B294->menuAction = 0;
@@ -113,7 +113,7 @@ static void sub_802293C(void)
 {
     s32 i;
 
-    sub_8006518(sUnknown_203B294->unk148);
+    RestoreUnkTextStruct_8006518(sUnknown_203B294->unk148);
 
     switch (sUnknown_203B294->state) {
         case 2:
@@ -134,7 +134,7 @@ static void sub_802293C(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B294->unk148, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B294->unk148, TRUE, TRUE);
 }
 
 static void sub_8022A10(void)
@@ -166,19 +166,19 @@ static void sub_8022A10(void)
             sub_801B3C0(&sUnknown_203B294->item);
             break;
         case 5:
-            sub_80141B4(sDoesNotAppearHungry, 0, 0, 0x301);
+            xxx_info_box_80141B4(sDoesNotAppearHungry, 0, 0, 0x301);
             break;
         case 6:
-            sub_80141B4(sFmtGummiBigFav, 0, 0, 0x101);
+            xxx_info_box_80141B4(sFmtGummiBigFav, 0, 0, 0x101);
             break;
         case 7:
-            sub_80141B4(sFmtGummiFav, 0, 0, 0x101);
+            xxx_info_box_80141B4(sFmtGummiFav, 0, 0, 0x101);
             break;
         case 8:
-            sub_80141B4(sFmtGummiOkay, 0, 0, 0x101);
+            xxx_info_box_80141B4(sFmtGummiOkay, 0, 0, 0x101);
             break;
         case 9:
-            sub_80141B4(sFmtGummiSatisfied, 0, 0, 0x101);
+            xxx_info_box_80141B4(sFmtGummiSatisfied, 0, 0, 0x101);
             break;
         case 10:
             do {
@@ -203,7 +203,7 @@ static void sub_8022A10(void)
                     sUnknown_203B294->fallbackState = 10;
                     strcpy(gUnknown_202DEA8, GetIQSkillName(sUnknown_203B294->unk40));
                     PlaySound(203);
-                    sub_80141B4(sFmtIQHelpedLearn, 0, 0, 0x101);
+                    xxx_info_box_80141B4(sFmtIQHelpedLearn, 0, 0, 0x101);
                     sUnknown_203B294->unk40++;
                     break;
                 }
@@ -238,35 +238,35 @@ static void sub_8022A10(void)
             }
             break;
         case 12:
-            sub_80141B4(sFmtPlusEverything, 0, 0, 0x301);
+            xxx_info_box_80141B4(sFmtPlusEverything, 0, 0, 0x301);
             break;
         case 13:
-            sub_80141B4(sFmtPlusAtk, 0, 0, 0x301);
+            xxx_info_box_80141B4(sFmtPlusAtk, 0, 0, 0x301);
             break;
         case 14:
-            sub_80141B4(sFmtPlusSpAtk, 0, 0, 0x301);
+            xxx_info_box_80141B4(sFmtPlusSpAtk, 0, 0, 0x301);
             break;
         case 15:
-            sub_80141B4(sFmtPlusDef, 0, 0, 0x301);
+            xxx_info_box_80141B4(sFmtPlusDef, 0, 0, 0x301);
             break;
         case 16:
-            sub_80141B4(sFmtPlusSpDef, 0, 0, 0x301);
+            xxx_info_box_80141B4(sFmtPlusSpDef, 0, 0, 0x301);
             break;
         case 17:
             sUnknown_203B294->fallbackState = 22;
-            sub_80141B4(sNoGummis, 0, 0, 0x301);
+            xxx_info_box_80141B4(sNoGummis, 0, 0, 0x301);
             break;
         case 18:
             sUnknown_203B294->fallbackState = 22;
-            sub_80141B4(sNoItem, 0, 0, 0x301);
+            xxx_info_box_80141B4(sNoItem, 0, 0, 0x301);
             break;
         case 19:
             sUnknown_203B294->fallbackState = 22;
-            sub_80141B4(sGummiGone, 0, 0, 0x301);
+            xxx_info_box_80141B4(sGummiGone, 0, 0, 0x301);
             break;
         case 20:
             sUnknown_203B294->fallbackState = 22;
-            sub_80141B4(sItemGone, 0, 0, 0x301);
+            xxx_info_box_80141B4(sItemGone, 0, 0, 0x301);
             break;
         case 21:
             sub_801AFA4(sUnknown_203B294->itemIndex);
@@ -375,7 +375,7 @@ static void sub_8022EF4(void)
             sUnknown_203B294->unk40 = 1;
             boostAmount = sUnknown_203B294->gummi.boostAmount;
 
-            sub_8090E14(gUnknown_202DE58, &gTeamInventoryRef->teamItems[sUnknown_203B294->itemIndex], NULL);
+            sub_8090E14(gFormatItems, &gTeamInventoryRef->teamItems[sUnknown_203B294->itemIndex], NULL);
 
             if (boostAmount != -1)
                 ShiftItemsDownFrom(sUnknown_203B294->itemIndex);

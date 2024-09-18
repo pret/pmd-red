@@ -38,7 +38,7 @@ extern const u8 *gUnknown_81178F4[];
 extern void sub_809971C(u16, u8 *, s16);
 extern void sub_80997F4(u16, u16);
 // pokemon_2.s
-extern void sub_808E53C(u32, u32);
+extern void InitShadowSprites(u32, u32);
 
 // ground_sprite.s
 extern void sub_80A6460(void);
@@ -89,7 +89,7 @@ void GroundSprite_Reset(s16 a0)
     gUnknown_2039DCE = 0;
     sub_80A6460();
 
-    sub_808E53C(496, sub_80A4D48(uVar2) ? 3 : 2);
+    InitShadowSprites(496, sub_80A4D48(uVar2) ? 3 : 2);
 
     bee = &gUnknown_2039DB0;
     sub_8004E8C(bee);

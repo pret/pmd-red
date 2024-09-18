@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8001570
-sub_8001570:
+	thumb_func_start ResetScriptVarArray
+ResetScriptVarArray:
 	push {r4-r7,lr}
 	adds r7, r0, 0
 	lsls r1, 16
@@ -19,7 +19,7 @@ sub_8001570:
 	b _08001590
 	.align 2, 0
 _08001584: .4byte 0x000003ff
-_08001588: .4byte gUnknown_80B7394
+_08001588: .4byte gScriptVarInfo
 _0800158C:
 	lsls r1, r6, 4
 	ldr r0, _08001598
@@ -35,7 +35,7 @@ _0800159C:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_800199C
+	bl SetScriptVarArrayValue
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -47,10 +47,10 @@ _080015B0:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8001570
+	thumb_func_end ResetScriptVarArray
 
-	thumb_func_start sub_80015C0
-sub_80015C0:
+	thumb_func_start ClearScriptVarArray
+ClearScriptVarArray:
 	push {r4-r7,lr}
 	adds r7, r0, 0
 	lsls r1, 16
@@ -63,7 +63,7 @@ sub_80015C0:
 	b _080015E0
 	.align 2, 0
 _080015D4: .4byte 0x000003ff
-_080015D8: .4byte gUnknown_80B7394
+_080015D8: .4byte gScriptVarInfo
 _080015DC:
 	lsls r1, r6, 4
 	ldr r0, _080015E8
@@ -78,7 +78,7 @@ _080015EC:
 	adds r1, r6, 0
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_800199C
+	bl SetScriptVarArrayValue
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -90,10 +90,10 @@ _080015FE:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80015C0
+	thumb_func_end ClearScriptVarArray
 
-	thumb_func_start sub_800160C
-sub_800160C:
+	thumb_func_start GetScriptVarRef
+GetScriptVarRef:
 	push {r4,lr}
 	adds r3, r0, 0
 	adds r4, r1, 0
@@ -113,8 +113,8 @@ sub_800160C:
 	b _0800164C
 	.align 2, 0
 _08001630: .4byte 0x000003ff
-_08001634: .4byte gUnknown_80B7394
-_08001638: .4byte gUnknown_2000A88
+_08001634: .4byte gScriptVarInfo
+_08001638: .4byte gScriptVarBuffer
 _0800163C:
 	lsls r1, 4
 	ldr r0, _08001654
@@ -131,10 +131,10 @@ _0800164C:
 	bx r0
 	.align 2, 0
 _08001654: .4byte 0x080b2d30
-	thumb_func_end sub_800160C
+	thumb_func_end GetScriptVarRef
 
-	thumb_func_start sub_8001658
-sub_8001658:
+	thumb_func_start GetScriptVarValue
+GetScriptVarValue:
 	push {r4,lr}
 	sub sp, 0x8
 	adds r2, r0, 0
@@ -143,7 +143,7 @@ sub_8001658:
 	mov r0, sp
 	adds r1, r2, 0
 	adds r2, r4, 0
-	bl sub_800160C
+	bl GetScriptVarRef
 	ldr r0, [sp]
 	ldrh r0, [r0]
 	subs r0, 0x1
@@ -235,7 +235,7 @@ _08001700:
 	.4byte _08001754
 	.4byte _08001764
 _08001734:
-	bl sub_8098F94
+	bl GetScriptMode
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -245,11 +245,11 @@ _0800173E:
 	lsrs r0, 31
 	b _0800177A
 _08001746:
-	bl sub_808D480
+	bl GetFriendSum_808D480
 	b _0800177A
 _0800174C:
 	movs r0, 0
-	bl sub_808D544
+	bl GetUnitSum_808D544
 	b _0800177A
 _08001754:
 	ldr r0, _08001760
@@ -277,11 +277,11 @@ _0800177A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8001658
+	thumb_func_end GetScriptVarValue
 
 @ https://decomp.me/scratch/xF3HH
-	thumb_func_start sub_8001784
-sub_8001784:
+	thumb_func_start GetScriptVarArrayValue
+GetScriptVarArrayValue:
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r3, r0, 0
@@ -292,7 +292,7 @@ sub_8001784:
 	mov r0, sp
 	adds r1, r3, 0
 	adds r2, r5, 0
-	bl sub_800160C
+	bl GetScriptVarRef
 	ldr r0, [sp]
 	ldrh r0, [r0]
 	subs r0, 0x1
@@ -399,7 +399,7 @@ _08001850:
 	.4byte _080018A4
 	.4byte _080018B8
 _08001884:
-	bl sub_8098F94
+	bl GetScriptMode
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -409,11 +409,11 @@ _0800188E:
 	lsrs r0, 31
 	b _080018CE
 _08001896:
-	bl sub_808D480
+	bl GetFriendSum_808D480
 	b _080018CE
 _0800189C:
 	movs r0, 0
-	bl sub_808D544
+	bl GetUnitSum_808D544
 	b _080018CE
 _080018A4:
 	ldr r0, _080018B4
@@ -442,10 +442,10 @@ _080018CE:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8001784
+	thumb_func_end GetScriptVarArrayValue
 
-	thumb_func_start sub_80018D8
-sub_80018D8:
+	thumb_func_start SetScriptVarValue
+SetScriptVarValue:
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r3, r0, 0
@@ -455,7 +455,7 @@ sub_80018D8:
 	mov r0, sp
 	adds r1, r3, 0
 	adds r2, r5, 0
-	bl sub_800160C
+	bl GetScriptVarRef
 	ldr r0, [sp]
 	ldrh r0, [r0]
 	subs r0, 0x1
@@ -545,10 +545,10 @@ _08001990:
 	bx r0
 	.align 2, 0
 _08001998: .4byte gTeamInventoryRef
-	thumb_func_end sub_80018D8
+	thumb_func_end SetScriptVarValue
 
-	thumb_func_start sub_800199C
-sub_800199C:
+	thumb_func_start SetScriptVarArrayValue
+SetScriptVarArrayValue:
 	push {r4-r7,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -560,7 +560,7 @@ sub_800199C:
 	mov r0, sp
 	adds r1, r4, 0
 	adds r2, r7, 0
-	bl sub_800160C
+	bl GetScriptVarRef
 	ldr r0, [sp]
 	ldrh r0, [r0]
 	subs r0, 0x1
@@ -659,6 +659,6 @@ _08001A68:
 	bx r0
 	.align 2, 0
 _08001A70: .4byte gTeamInventoryRef
-	thumb_func_end sub_800199C
+	thumb_func_end SetScriptVarArrayValue
 
 	.align 2, 0 @ Don't pad with nop.

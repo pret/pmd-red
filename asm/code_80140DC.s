@@ -159,7 +159,7 @@ _08014368:
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	ldr r1, _080143F0
 	movs r4, 0
 	movs r2, 0
@@ -188,7 +188,7 @@ _08014368:
 	movs r1, 0x8
 _080143C6:
 	adds r0, r1, 0
-	bl sub_80063D8
+	bl SetCharacterMask
 	ldr r0, _080143F8
 	movs r1, 0x1
 	str r1, [r0]
@@ -505,7 +505,7 @@ _08014652:
 	ldr r4, _08014698
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_8009190
+	bl xxx_handle_format_global
 	adds r6, r0, 0
 	adds r0, r4, 0
 	adds r0, 0x21
@@ -901,7 +901,7 @@ _08014978:
 	beq _080149A8
 _08014998:
 	movs r0, 0
-	bl sub_8008C54
+	bl CallPrepareTextbox_8008C54
 	b _080149B6
 	.align 2, 0
 _080149A0: .4byte gUnknown_202E748
@@ -966,7 +966,7 @@ _08014A04:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	ldr r1, _08014A30
 	movs r0, 0
 	str r0, [r1]
@@ -1107,7 +1107,7 @@ _08014B1E:
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	ldr r0, _08014B80
 	ldr r1, _08014B84
 	ldr r1, [r1]
@@ -1221,12 +1221,12 @@ _08014BEA:
 	adds r1, r4, 0
 	adds r2, r7, 0
 	mov r3, r8
-	bl sub_8014FA8
+	bl AppendString_8014FA8
 	ldr r0, _08014C20
 	adds r1, r4, 0
 	adds r2, r7, 0
 	mov r3, r8
-	bl sub_8014FA8
+	bl AppendString_8014FA8
 	b _08014C2E
 	.align 2, 0
 _08014C1C: .4byte gUnknown_202E5D8
@@ -1541,7 +1541,7 @@ _08014F0E:
 	adds r0, r4, 0
 	adds r2, r7, 0
 	mov r3, r8
-	bl sub_8014FA8
+	bl AppendString_8014FA8
 	lsls r0, 24
 	cmp r0, 0
 	bne _08014F7E
@@ -1623,8 +1623,8 @@ _08014F94:
 	bx r1
 	thumb_func_end xxx_format_string
 
-	thumb_func_start sub_8014FA8
-sub_8014FA8:
+	thumb_func_start AppendString_8014FA8
+AppendString_8014FA8:
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -1665,7 +1665,7 @@ _08014FE8:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8014FA8
+	thumb_func_end AppendString_8014FA8
 
 	thumb_func_start PrintFormatStringOnWindow
 PrintFormatStringOnWindow:

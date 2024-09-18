@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80A77F8
-sub_80A77F8:
+	thumb_func_start AllocGroundLives
+AllocGroundLives:
 	push {r4,r5,lr}
 	ldr r4, _080A7860
 	movs r0, 0xCE
@@ -45,25 +45,25 @@ _080A7826:
 	adds r1, r0
 	movs r0, 0
 	movs r2, 0x19
-	bl sub_809D710
+	bl GetFunctionScript
 	ldr r0, [r4]
 	movs r1, 0xCC
 	lsls r1, 2
 	adds r0, r1
 	movs r1, 0x1
 	strh r1, [r0]
-	bl DeleteBlankGroundLives
+	bl DeleteGroundLives
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A7860: .4byte gUnknown_3001B80
-_080A7864: .4byte gUnknown_3001B84
+_080A7860: .4byte gGroundLivesMeta
+_080A7864: .4byte gGroundLives
 _080A7868: .4byte 0x0000ffff
-	thumb_func_end sub_80A77F8
+	thumb_func_end AllocGroundLives
 
-	thumb_func_start DeleteBlankGroundLives
-DeleteBlankGroundLives:
+	thumb_func_start DeleteGroundLives
+DeleteGroundLives:
 	push {r4-r6,lr}
 	ldr r0, _080A78E8
 	ldr r4, [r0]
@@ -129,14 +129,14 @@ _080A78CE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A78E8: .4byte gUnknown_3001B84
-_080A78EC: .4byte gUnknown_3001B80
-	thumb_func_end DeleteBlankGroundLives
+_080A78E8: .4byte gGroundLives
+_080A78EC: .4byte gGroundLivesMeta
+	thumb_func_end DeleteGroundLives
 
-	thumb_func_start sub_80A78F0
-sub_80A78F0:
+	thumb_func_start FreeGroundLives
+FreeGroundLives:
 	push {r4,r5,lr}
-	bl DeleteBlankGroundLives
+	bl DeleteGroundLives
 	ldr r4, _080A7914
 	ldr r0, [r4]
 	bl MemoryFree
@@ -150,9 +150,9 @@ sub_80A78F0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A7914: .4byte gUnknown_3001B84
-_080A7918: .4byte gUnknown_3001B80
-	thumb_func_end sub_80A78F0
+_080A7914: .4byte gGroundLives
+_080A7918: .4byte gGroundLivesMeta
+	thumb_func_end FreeGroundLives
 
 	thumb_func_start GroundLives_Select
 GroundLives_Select:
@@ -167,7 +167,7 @@ GroundLives_Select:
 	asrs r6, r2, 24
 	ldr r1, _080A7980
 	adds r0, r4, 0
-	bl sub_80A77D0
+	bl GetGroundScript
 	adds r5, r0, 0
 	ldr r1, _080A7984
 	str r6, [sp]
@@ -267,7 +267,7 @@ _080A79D4:
 	bx r0
 	.align 2, 0
 _080A79F4: .4byte gUnknown_81180BC
-_080A79F8: .4byte gUnknown_3001B84
+_080A79F8: .4byte gGroundLives
 	thumb_func_end GroundLives_Cancel
 
 	thumb_func_start GroundLives_CancelBlank_1
@@ -306,7 +306,7 @@ _080A7A20:
 	lsls r1, 1
 	adds r0, r4, r1
 	mov r1, sp
-	bl sub_80A675C
+	bl IsOnscreen_80A675C
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A7A50
@@ -330,7 +330,7 @@ _080A7A50:
 	bx r0
 	.align 2, 0
 _080A7A70: .4byte gUnknown_81180D8
-_080A7A74: .4byte gUnknown_3001B84
+_080A7A74: .4byte gGroundLives
 	thumb_func_end GroundLives_CancelBlank_1
 
 	thumb_func_start GroundLives_CancelBlank_2
@@ -367,11 +367,11 @@ _080A7A92:
 	adds r0, 0x8
 	adds r2, r4, r0
 	movs r0, 0x20
-	bl sub_80ADCA0
+	bl FindGroundEvent
 	b _080A7ACA
 	.align 2, 0
 _080A7AC0: .4byte gUnknown_81180D8
-_080A7AC4: .4byte gUnknown_3001B84
+_080A7AC4: .4byte gGroundLives
 _080A7AC8:
 	ldr r0, _080A7AE4
 _080A7ACA:
@@ -425,7 +425,7 @@ _080A7B16:
 	adds r0, r3, 0
 	b _080A7B38
 	.align 2, 0
-_080A7B24: .4byte gUnknown_3001B84
+_080A7B24: .4byte gGroundLives
 _080A7B28:
 	adds r0, r2, 0
 	adds r2, r6
@@ -470,7 +470,7 @@ _080A7B58:
 	adds r0, r3, 0
 	b _080A7B8C
 	.align 2, 0
-_080A7B70: .4byte gUnknown_3001B84
+_080A7B70: .4byte gGroundLives
 _080A7B74:
 	adds r0, r2, 0
 	movs r3, 0x80
@@ -513,7 +513,7 @@ sub_80A7B94:
 	bne _080A7C10
 	movs r0, 0
 	movs r1, 0x1C
-	bl sub_8001658
+	bl GetScriptVarValue
 	adds r4, r0, 0
 	cmp r4, 0x1
 	beq _080A7BDE
@@ -523,7 +523,7 @@ sub_80A7B94:
 	beq _080A7BF2
 	b _080A7C08
 	.align 2, 0
-_080A7BD4: .4byte gUnknown_811E63C
+_080A7BD4: .4byte gGroundLivesTypeData_811E63C
 _080A7BD8:
 	cmp r4, 0x2
 	beq _080A7BE4
@@ -564,11 +564,11 @@ _080A7C14:
 	bne _080A7CD2
 	movs r0, 0
 	movs r1, 0x1D
-	bl sub_8001658
+	bl GetScriptVarValue
 	adds r4, r0, 0
 	movs r0, 0
 	movs r1, 0x1E
-	bl sub_8001658
+	bl GetScriptVarValue
 	adds r2, r0, 0
 	ldrh r1, [r7]
 	subs r0, r1, 0x4
@@ -704,7 +704,7 @@ _080A7D12:
 	bhi _080A7DA6
 	movs r0, 0
 	movs r1, 0x10
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r0, 16
 	bl sub_8002658
@@ -863,7 +863,7 @@ _080A7E22:
 	strh r6, [r7]
 	b _080A7E04
 	.align 2, 0
-_080A7E50: .4byte gUnknown_811E63C
+_080A7E50: .4byte gGroundLivesTypeData_811E63C
 _080A7E54: .4byte gUnknown_81180F0
 _080A7E58:
 	movs r0, 0x9
@@ -905,7 +905,7 @@ _080A7E90:
 _080A7E9E:
 	movs r0, 0
 	movs r1, 0x10
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r0, 16
 	bl sub_8002658
@@ -1064,7 +1064,7 @@ _080A8010: .4byte gUnknown_81180FC
 _080A8014:
 	movs r0, 0
 	movs r1, 0x1F
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -1091,7 +1091,7 @@ _080A8046:
 	add r1, sp, 0x14
 	add r2, sp, 0x18
 	movs r0, 0x2
-	bl sub_8001B88
+	bl GetScriptVarScenario
 	add r4, sp, 0x1C
 	ldr r1, [sp, 0x18]
 	lsls r1, 24
@@ -1200,7 +1200,7 @@ _080A8104:
 _080A8108:
 	movs r0, 0
 	movs r1, 0x1D
-	bl sub_8001658
+	bl GetScriptVarValue
 	cmp r0, 0
 	bne _080A8116
 	movs r7, 0x1
@@ -1225,7 +1225,7 @@ _080A8118:
 	adds r0, r2, 0
 	b _080A8162
 	.align 2, 0
-_080A813C: .4byte gUnknown_811E63C
+_080A813C: .4byte gGroundLivesTypeData_811E63C
 _080A8140:
 	ldr r0, _080A8150
 	ldr r0, [r0]
@@ -1236,7 +1236,7 @@ _080A8140:
 	movs r0, 0x21
 	b _080A8162
 	.align 2, 0
-_080A8150: .4byte gUnknown_3001B84
+_080A8150: .4byte gGroundLives
 _080A8154:
 	ldr r0, _080A8188
 	ldr r0, [r0]
@@ -1265,7 +1265,7 @@ _080A8162:
 	movs r6, 0x3
 	b _080A81B4
 	.align 2, 0
-_080A8188: .4byte gUnknown_3001B84
+_080A8188: .4byte gGroundLives
 _080A818C:
 	adds r0, r2, 0x1
 	lsls r0, 16
@@ -1354,7 +1354,7 @@ _080A81F0:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080A8234: .4byte gUnknown_3001B84
+_080A8234: .4byte gGroundLives
 _080A8238: .4byte gUnknown_811811C
 _080A823C: .4byte _080A8240
 	.align 2, 0
@@ -1566,7 +1566,7 @@ _080A834A:
 	b _080A83EC
 	.align 2, 0
 _080A83DC: .4byte 0x2300068d
-_080A83E0: .4byte gUnknown_3001B80
+_080A83E0: .4byte gGroundLivesMeta
 _080A83E4:
 	movs r4, 0xA0
 	lsls r4, 1
@@ -1589,7 +1589,7 @@ _080A83EC:
 	lsls r3, 1
 	adds r2, r5, r3
 	movs r0, 0x20
-	bl sub_80ADCA0
+	bl FindGroundEvent
 	movs r4, 0x9F
 	lsls r4, 1
 	adds r1, r5, r4
@@ -1605,7 +1605,7 @@ _080A8420:
 	adds r0, 0x28
 	adds r1, r5, 0
 	adds r1, 0x30
-	bl sub_80A5778
+	bl GetCurrentDungeonBounds
 	ldr r1, [sp, 0x20]
 	cmp r1, 0
 	beq _080A84AC
@@ -1664,7 +1664,7 @@ _080A8420:
 _080A849C: .4byte 0x0000ffff
 _080A84A0: .4byte 0x0000015d
 _080A84A4: .4byte 0x00000807
-_080A84A8: .4byte gUnknown_8117F10
+_080A84A8: .4byte gGroundLivesCallbacks
 _080A84AC:
 	adds r4, r5, 0
 	adds r4, 0x38
@@ -1700,7 +1700,7 @@ _080A84AC:
 	adds r0, r5
 	b _080A8508
 	.align 2, 0
-_080A84F0: .4byte gUnknown_3001B80
+_080A84F0: .4byte gGroundLivesMeta
 _080A84F4:
 	adds r1, r5, 0
 	adds r1, 0x80
@@ -1715,7 +1715,7 @@ _080A84F4:
 _080A8508:
 	mov r8, r0
 	adds r0, r4, 0
-	bl sub_809D648
+	bl InitAction2
 	ldr r1, _080A8544
 	ldr r0, [sp, 0x18]
 	str r0, [sp]
@@ -1741,12 +1741,12 @@ _080A8508:
 	mov r8, r1
 	b _080A8566
 	.align 2, 0
-_080A8544: .4byte gUnknown_8117F10
-_080A8548: .4byte gUnknown_3001B80
+_080A8544: .4byte gGroundLivesCallbacks
+_080A8548: .4byte gGroundLivesMeta
 _080A854C: .4byte gUnknown_8118170
 _080A8550:
 	adds r0, r4, 0
-	bl sub_809D648
+	bl InitAction2
 	ldr r1, _080A861C
 	ldr r2, [sp, 0x18]
 	str r2, [sp]
@@ -1842,12 +1842,12 @@ _080A860C:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_809D8C0
+	bl ExecutePredefinedScript
 	b _080A865A
 	.align 2, 0
-_080A861C: .4byte gUnknown_8117F10
+_080A861C: .4byte gGroundLivesCallbacks
 _080A8620: .4byte gFunctionScriptTable
-_080A8624: .4byte gUnknown_3001B80
+_080A8624: .4byte gGroundLivesMeta
 _080A8628: .4byte gUnknown_811817C
 _080A862C: .4byte gUnknown_8118188
 _080A8630:
@@ -1917,14 +1917,14 @@ GroundLives_Delete:
 	bl sub_80A74E4
 	adds r0, r4, 0
 	adds r0, 0x38
-	bl sub_809D648
+	bl InitAction2
 	ldr r0, _080A86C4
 	strh r0, [r4, 0x2]
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A86BC: .4byte gUnknown_3001B84
+_080A86BC: .4byte gGroundLives
 _080A86C0: .4byte gUnknown_8118194
 _080A86C4: .4byte 0x0000ffff
 	thumb_func_end GroundLives_Delete
@@ -1962,7 +1962,7 @@ sub_80A86C8:
 	bl sub_80AB5A4
 	b _080A872E
 	.align 2, 0
-_080A8708: .4byte gUnknown_3001B84
+_080A8708: .4byte gGroundLives
 _080A870C:
 	movs r0, 0x80
 	lsls r0, 5
@@ -1997,7 +1997,7 @@ _080A8744:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A874C: .4byte gUnknown_3001B80
+_080A874C: .4byte gGroundLivesMeta
 	thumb_func_end sub_80A86C8
 
 	thumb_func_start sub_80A8750
@@ -2047,7 +2047,7 @@ _080A87A2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A87A8: .4byte gUnknown_3001B84
+_080A87A8: .4byte gGroundLives
 	thumb_func_end sub_80A8750
 
 	thumb_func_start sub_80A87AC
@@ -2077,7 +2077,7 @@ _080A87D8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A87DC: .4byte gUnknown_3001B84
+_080A87DC: .4byte gGroundLives
 	thumb_func_end sub_80A87AC
 
 	thumb_func_start sub_80A87E0
@@ -2113,7 +2113,7 @@ sub_80A87E0:
 	movs r0, 0x1
 	b _080A8826
 	.align 2, 0
-_080A8820: .4byte gUnknown_3001B84
+_080A8820: .4byte gGroundLives
 _080A8824:
 	movs r0, 0
 _080A8826:
@@ -2142,7 +2142,7 @@ sub_80A882C:
 	movs r0, 0
 	b _080A8858
 	.align 2, 0
-_080A8850: .4byte gUnknown_3001B84
+_080A8850: .4byte gGroundLives
 _080A8854:
 	adds r0, r2, 0
 	adds r0, 0x38
@@ -2174,13 +2174,13 @@ sub_80A885C:
 	movs r0, 0
 	b _080A8898
 	.align 2, 0
-_080A8884: .4byte gUnknown_3001B84
+_080A8884: .4byte gGroundLives
 _080A8888:
 	adds r0, r2, 0
 	adds r0, 0x38
 	adds r1, r4, 0
 	adds r2, r3, 0
-	bl sub_809D6E4
+	bl GetPredefinedScript
 	lsls r0, 24
 	lsrs r0, 24
 _080A8898:
@@ -2209,7 +2209,7 @@ sub_80A88A0:
 	movs r0, 0
 	b _080A88D4
 	.align 2, 0
-_080A88C4: .4byte gUnknown_3001B84
+_080A88C4: .4byte gGroundLives
 _080A88C8:
 	adds r0, r2, 0
 	adds r0, 0x38
@@ -2252,7 +2252,7 @@ GroundLives_ExecuteScript:
 	movs r0, 0
 	b _080A8934
 	.align 2, 0
-_080A8914: .4byte gUnknown_3001B84
+_080A8914: .4byte gGroundLives
 _080A8918: .4byte gUnknown_81181B0
 _080A891C:
 	adds r0, r5, 0
@@ -2353,7 +2353,7 @@ sub_80A89AC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080A89CC: .4byte gUnknown_3001B84
+_080A89CC: .4byte gGroundLives
 	thumb_func_end sub_80A89AC
 
 	thumb_func_start GroundLives_ExecutePlayerScriptActionLives
@@ -2393,7 +2393,7 @@ GroundLives_ExecutePlayerScriptActionLives:
 	adds r0, r6, 0
 	mov r1, sp
 	movs r2, 0x2
-	bl sub_809D6E4
+	bl GetPredefinedScript
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A8A50
@@ -2406,7 +2406,7 @@ GroundLives_ExecutePlayerScriptActionLives:
 	ldr r3, _080A8A4C
 	adds r0, r6, 0
 	movs r2, 0x3
-	bl sub_809D8C0
+	bl ExecutePredefinedScript
 	add r1, sp, 0xC
 	adds r0, r5, 0
 	mov r2, sp
@@ -2415,7 +2415,7 @@ GroundLives_ExecutePlayerScriptActionLives:
 	lsrs r0, 24
 	b _080A8A52
 	.align 2, 0
-_080A8A48: .4byte gUnknown_3001B84
+_080A8A48: .4byte gGroundLives
 _080A8A4C: .4byte gUnknown_8118250
 _080A8A50:
 	movs r0, 0
@@ -2473,7 +2473,7 @@ sub_80A8A5C:
 	lsrs r0, 24
 	b _080A8AC2
 	.align 2, 0
-_080A8ABC: .4byte gUnknown_3001B84
+_080A8ABC: .4byte gGroundLives
 _080A8AC0:
 	movs r0, 0
 _080A8AC2:
@@ -2515,7 +2515,7 @@ sub_80A8ACC:
 	lsrs r0, 24
 	b _080A8B12
 	.align 2, 0
-_080A8B0C: .4byte gUnknown_3001B84
+_080A8B0C: .4byte gGroundLives
 _080A8B10:
 	movs r0, 0
 _080A8B12:
@@ -2525,8 +2525,8 @@ _080A8B12:
 	bx r1
 	thumb_func_end sub_80A8ACC
 
-	thumb_func_start sub_80A8B1C
-sub_80A8B1C:
+	thumb_func_start GroundLivesNotifyAll
+GroundLivesNotifyAll:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2548,7 +2548,7 @@ _080A8B36:
 	adds r0, r4, 0
 	adds r0, 0x38
 	adds r1, r7, 0
-	bl sub_809D968
+	bl GroundScriptNotify
 	orrs r5, r0
 	lsls r0, r5, 24
 	lsrs r5, r0, 24
@@ -2570,11 +2570,11 @@ _080A8B4E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080A8B70: .4byte gUnknown_3001B84
-	thumb_func_end sub_80A8B1C
+_080A8B70: .4byte gGroundLives
+	thumb_func_end GroundLivesNotifyAll
 
-	thumb_func_start sub_80A8B74
-sub_80A8B74:
+	thumb_func_start GroundLivesCancelAll
+GroundLivesCancelAll:
 	push {r4-r7,lr}
 	ldr r0, _080A8BB8
 	ldr r4, [r0]
@@ -2610,8 +2610,8 @@ _080A8B9A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080A8BB8: .4byte gUnknown_3001B84
-	thumb_func_end sub_80A8B74
+_080A8BB8: .4byte gGroundLives
+	thumb_func_end GroundLivesCancelAll
 
 	thumb_func_start sub_80A8BBC
 sub_80A8BBC:
@@ -2627,7 +2627,7 @@ sub_80A8BBC:
 	ldrsh r0, [r0, r1]
 	bx lr
 	.align 2, 0
-_080A8BD4: .4byte gUnknown_3001B84
+_080A8BD4: .4byte gGroundLives
 	thumb_func_end sub_80A8BBC
 
 	thumb_func_start sub_80A8BD8
@@ -2649,7 +2649,7 @@ sub_80A8BD8:
 	ldrsh r0, [r0, r1]
 	bx lr
 	.align 2, 0
-_080A8BF8: .4byte gUnknown_3001B84
+_080A8BF8: .4byte gGroundLives
 	thumb_func_end sub_80A8BD8
 
 	thumb_func_start sub_80A8BFC
@@ -2672,7 +2672,7 @@ sub_80A8BFC:
 	movs r0, 0
 	b _080A8C28
 	.align 2, 0
-_080A8C20: .4byte gUnknown_3001B84
+_080A8C20: .4byte gGroundLives
 _080A8C24:
 	movs r1, 0x8
 	ldrsh r0, [r2, r1]
@@ -2727,7 +2727,7 @@ sub_80A8C4C:
 	str r0, [r5]
 	b _080A8C8A
 	.align 2, 0
-_080A8C80: .4byte gUnknown_3001B84
+_080A8C80: .4byte gGroundLives
 _080A8C84:
 	movs r0, 0x63
 	strb r0, [r5]
@@ -2777,7 +2777,7 @@ _080A8CC6:
 	movs r0, 0x1
 	b _080A8CEA
 	.align 2, 0
-_080A8CD4: .4byte gUnknown_3001B84
+_080A8CD4: .4byte gGroundLives
 _080A8CD8: .4byte gUnknown_8117FCE
 _080A8CDC:
 	adds r1, 0x2
@@ -2851,7 +2851,7 @@ _080A8D4A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080A8D50: .4byte gUnknown_3001B84
+_080A8D50: .4byte gGroundLives
 	thumb_func_end sub_80A8D20
 
 	thumb_func_start sub_80A8D54
@@ -2947,7 +2947,7 @@ _080A8DF8:
 	bhi _080A8E92
 	movs r0, 0
 	movs r1, 0x10
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r0, 16
 	bl sub_8002658
@@ -3039,7 +3039,7 @@ sub_80A8E9C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080A8EBC: .4byte gUnknown_3001B84
+_080A8EBC: .4byte gGroundLives
 	thumb_func_end sub_80A8E9C
 
 	thumb_func_start sub_80A8EC0
@@ -3097,7 +3097,7 @@ _080A8F20:
 	bl strcpy
 	b _080A8F44
 	.align 2, 0
-_080A8F2C: .4byte gUnknown_811E63C
+_080A8F2C: .4byte gGroundLivesTypeData_811E63C
 _080A8F30:
 	movs r2, 0x2
 	ldrsh r1, [r0, r2]
@@ -3157,7 +3157,7 @@ sub_80A8F74:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A8F98: .4byte gUnknown_3001B84
+_080A8F98: .4byte gGroundLives
 	thumb_func_end sub_80A8F74
 
 	thumb_func_start sub_80A8F9C
@@ -3183,7 +3183,7 @@ sub_80A8F9C:
 	str r0, [r3, 0x4]
 	b _080A8FD0
 	.align 2, 0
-_080A8FC4: .4byte gUnknown_3001B84
+_080A8FC4: .4byte gGroundLives
 _080A8FC8:
 	ldr r0, [r2, 0xC]
 	ldr r1, [r2, 0x10]
@@ -3218,7 +3218,7 @@ sub_80A8FD8:
 	str r0, [r3]
 	b _080A901E
 	.align 2, 0
-_080A9000: .4byte gUnknown_3001B84
+_080A9000: .4byte gGroundLives
 _080A9004:
 	movs r1, 0xA2
 	lsls r1, 1
@@ -3260,7 +3260,7 @@ sub_80A9028:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080A904C: .4byte gUnknown_3001B84
+_080A904C: .4byte gGroundLives
 	thumb_func_end sub_80A9028
 
 	thumb_func_start sub_80A9050
@@ -3285,7 +3285,7 @@ sub_80A9050:
 	strb r3, [r4]
 	b _080A9086
 	.align 2, 0
-_080A9078: .4byte gUnknown_3001B84
+_080A9078: .4byte gGroundLives
 _080A907C:
 	movs r1, 0xA1
 	lsls r1, 1
@@ -3329,7 +3329,7 @@ _080A90BA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080A90C4: .4byte gUnknown_3001B84
+_080A90C4: .4byte gGroundLives
 	thumb_func_end sub_80A9090
 
 	thumb_func_start sub_80A90C8
@@ -3349,7 +3349,7 @@ sub_80A90C8:
 	ldrsh r0, [r0, r1]
 	bx lr
 	.align 2, 0
-_080A90E4: .4byte gUnknown_3001B84
+_080A90E4: .4byte gGroundLives
 	thumb_func_end sub_80A90C8
 
 	thumb_func_start sub_80A90E8
@@ -3416,17 +3416,17 @@ sub_80A90E8:
 	adds r3, r4, 0
 	adds r3, 0xC
 	mov r0, sp
-	bl sub_8002DF0
+	bl SizedDeltaDirection8
 	b _080A917E
 	.align 2, 0
-_080A916C: .4byte gUnknown_3001B84
+_080A916C: .4byte gGroundLives
 _080A9170:
 	adds r1, r5, 0
 	adds r1, 0xC
 	adds r3, r4, 0
 	adds r3, 0xC
 	mov r0, sp
-	bl sub_8002D54
+	bl SizedDeltaDirection4
 _080A917E:
 	lsls r0, 24
 	asrs r1, r0, 24
@@ -3520,7 +3520,7 @@ sub_80A91A0:
 	adds r1, r5, 0
 	adds r2, r4, 0
 	adds r3, r6, 0
-	bl sub_8002DF0
+	bl SizedDeltaDirection8
 	lsls r0, 24
 	asrs r0, 24
 	mov r9, r0
@@ -3528,7 +3528,7 @@ sub_80A91A0:
 	adds r1, r5, 0
 	adds r2, r4, 0
 	adds r3, r6, 0
-	bl sub_8002D54
+	bl SizedDeltaDirection4
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r9, r10
@@ -3546,7 +3546,7 @@ sub_80A91A0:
 	strb r2, [r0]
 	b _080A926C
 	.align 2, 0
-_080A9260: .4byte gUnknown_3001B84
+_080A9260: .4byte gGroundLives
 _080A9264:
 	movs r3, 0xA1
 	lsls r3, 1
@@ -3584,8 +3584,8 @@ _080A9290:
 	bx r1
 	thumb_func_end sub_80A91A0
 
-	thumb_func_start sub_80A92A0
-sub_80A92A0:
+	thumb_func_start GetLivesCollision_80A92A0
+GetLivesCollision_80A92A0:
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -3650,7 +3650,7 @@ _080A92C2:
 	adds r0, r2, 0
 	b _080A9338
 	.align 2, 0
-_080A931C: .4byte gUnknown_3001B84
+_080A931C: .4byte gGroundLives
 _080A9320:
 	adds r0, r5, 0
 	movs r7, 0x80
@@ -3671,7 +3671,7 @@ _080A9338:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A92A0
+	thumb_func_end GetLivesCollision_80A92A0
 
 	thumb_func_start sub_80A9344
 sub_80A9344:
@@ -3741,7 +3741,7 @@ _080A936E:
 	adds r0, r4, 0
 	b _080A93E0
 	.align 2, 0
-_080A93C4: .4byte gUnknown_3001B84
+_080A93C4: .4byte gGroundLives
 _080A93C8:
 	adds r0, r7, 0
 	movs r2, 0x80
@@ -3842,7 +3842,7 @@ _080A9458:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080A947C: .4byte gUnknown_3001B84
+_080A947C: .4byte gGroundLives
 _080A9480: .4byte 0x000007ff
 _080A9484: .4byte 0x000007fe
 	thumb_func_end sub_80A93F0
@@ -3910,7 +3910,7 @@ _080A94D2:
 	beq _080A9504
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_80A585C
+	bl CheckMapCollision_80A585C
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A9522
@@ -3948,7 +3948,7 @@ _080A9530:
 	ldrsh r0, [r5, r6]
 	adds r2, r7, 0
 	mov r3, r8
-	bl sub_80A92A0
+	bl GetLivesCollision_80A92A0
 	lsls r0, 16
 	cmp r0, 0
 	blt _080A9556
@@ -3984,7 +3984,7 @@ _080A957A:
 	movs r0, 0x40
 	adds r1, r7, 0
 	mov r2, r8
-	bl sub_80ADCA0
+	bl FindGroundEvent
 	lsls r0, 16
 	cmp r0, 0
 	blt _080A959E
@@ -4065,7 +4065,7 @@ _080A95F8:
 	beq _080A962C
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_80A585C
+	bl CheckMapCollision_80A585C
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A962C
@@ -4099,7 +4099,7 @@ _080A964A:
 	movs r1, 0x44
 	adds r2, r7, 0
 	mov r3, r8
-	bl sub_80A92A0
+	bl GetLivesCollision_80A92A0
 	lsls r0, 16
 	asrs r2, r0, 16
 	mov r9, r2
@@ -4144,7 +4144,7 @@ _080A96B2:
 	.align 2, 0
 _080A96BC: .4byte 0x000007ff
 _080A96C0: .4byte 0x000007fe
-_080A96C4: .4byte gUnknown_3001B84
+_080A96C4: .4byte gGroundLives
 _080A96C8:
 	movs r6, 0x8E
 	lsls r6, 1
@@ -4187,7 +4187,7 @@ _080A9708:
 	movs r0, 0x40
 	adds r1, r7, 0
 	mov r2, r8
-	bl sub_80ADCA0
+	bl FindGroundEvent
 	lsls r0, 16
 	asrs r1, r0, 16
 	cmp r1, 0
@@ -5119,7 +5119,7 @@ _080AA0F4:
 	movs r0, 0x20
 	mov r1, sp
 	adds r2, r5, 0
-	bl sub_80ADCA0
+	bl FindGroundEvent
 	lsls r0, 16
 	asrs r5, r0, 16
 	cmp r5, 0
@@ -5198,7 +5198,7 @@ sub_80AA180:
 	subs r1, r0
 	add r0, sp, 0x8
 	str r1, [r0, 0x4]
-	bl sub_8002C60
+	bl VecDirection8Radial
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r0, 0x1
@@ -5270,7 +5270,7 @@ _080AA220:
 	ldr r1, [sp, 0x4]
 	subs r1, r2
 	str r1, [r0, 0x4]
-	bl sub_8002C60
+	bl VecDirection8Radial
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r0, 0x1
@@ -5391,7 +5391,7 @@ _080AA31A:
 	movs r1, 0x80
 	mov r2, sp
 	mov r3, r9
-	bl sub_80A92A0
+	bl GetLivesCollision_80A92A0
 	lsls r0, 16
 	asrs r5, r0, 16
 	cmp r5, 0
@@ -5455,7 +5455,7 @@ _080AA3BE:
 	.align 2, 0
 _080AA3C4: .4byte 0x000007ff
 _080AA3C8: .4byte 0x000007fe
-_080AA3CC: .4byte gUnknown_3001B84
+_080AA3CC: .4byte gGroundLives
 _080AA3D0:
 	movs r0, 0x10
 	mov r1, r10
@@ -5494,7 +5494,7 @@ sub_80AA3F8:
 	movs r2, 0x80
 	lsls r2, 1
 	mov r0, sp
-	bl sub_8002BB8
+	bl SetVecFromDirectionSpeed
 	ldr r4, [sp]
 	ldr r5, [sp, 0x4]
 	movs r0, 0xA2
@@ -5843,7 +5843,7 @@ sub_80AA690:
 	movs r2, 0x80
 	lsls r2, 1
 	mov r0, sp
-	bl sub_8002BB8
+	bl SetVecFromDirectionSpeed
 	ldr r5, [sp]
 	ldr r6, [sp, 0x4]
 	ldr r0, [r7, 0xC]
@@ -6052,7 +6052,7 @@ _080AA80C:
 	movs r1, 0x80
 	mov r2, sp
 	adds r3, r4, 0
-	bl sub_80A92A0
+	bl GetLivesCollision_80A92A0
 	lsls r0, 16
 	asrs r4, r0, 16
 	cmp r4, 0
@@ -6131,7 +6131,7 @@ sub_80AA8BC:
 	lsls r2, 1
 	add r0, sp, 0x4
 	mov r1, r8
-	bl sub_8002BB8
+	bl SetVecFromDirectionSpeed
 	ldr r4, [sp, 0x4]
 	ldr r5, [sp, 0x8]
 	ldr r0, [r6, 0xC]
@@ -6538,7 +6538,7 @@ _080AABFC:
 	lsls r2, 1
 	add r0, sp, 0x28
 	adds r1, r4, 0
-	bl sub_8002BB8
+	bl SetVecFromDirectionSpeed
 	ldr r0, [sp, 0x28]
 	ldr r1, [sp, 0x2C]
 	str r0, [sp, 0x38]
@@ -6671,7 +6671,7 @@ _080AACF6:
 	lsls r2, 1
 	add r0, sp, 0x48
 	adds r1, r4, 0
-	bl sub_8002BB8
+	bl SetVecFromDirectionSpeed
 	ldr r0, [sp, 0x48]
 	ldr r1, [sp, 0x4C]
 	str r0, [sp, 0x50]
@@ -6750,7 +6750,7 @@ _080AAD7C:
 	strb r4, [r0]
 	b _080AADA6
 	.align 2, 0
-_080AAD98: .4byte gUnknown_3001B80
+_080AAD98: .4byte gGroundLivesMeta
 _080AAD9C:
 	ldr r0, _080AADF0
 	ldr r0, [r0]
@@ -6781,7 +6781,7 @@ _080AADCA:
 	lsls r2, 1
 	add r0, sp, 0x68
 	adds r1, r4, 0
-	bl sub_8002BB8
+	bl SetVecFromDirectionSpeed
 	ldr r0, [sp, 0x68]
 	ldr r1, [sp, 0x6C]
 	str r0, [sp, 0x70]
@@ -6794,7 +6794,7 @@ _080AADCA:
 	str r6, [sp, 0x78]
 	b _080AAEC0
 	.align 2, 0
-_080AADF0: .4byte gUnknown_3001B80
+_080AADF0: .4byte gGroundLivesMeta
 _080AADF4:
 	movs r4, 0xA1
 	lsls r4, 1
@@ -6818,7 +6818,7 @@ _080AAE06:
 	movs r0, 0
 	mov r1, sp
 	movs r2, 0x9
-	bl sub_809D710
+	bl GetFunctionScript
 	adds r0, r5, 0
 	movs r1, 0
 	mov r2, sp
@@ -6841,7 +6841,7 @@ _080AAE32:
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x6
-	bl sub_809D710
+	bl GetFunctionScript
 	movs r2, 0
 	ldrsh r0, [r6, r2]
 	adds r1, r5, 0
@@ -6877,7 +6877,7 @@ _080AAE9C:
 	ldr r2, _080AAEB4
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_809D710
+	bl GetFunctionScript
 	adds r0, r5, 0
 	movs r1, 0
 	adds r2, r4, 0
@@ -7064,24 +7064,24 @@ _080AB002:
 	bx r0
 	thumb_func_end sub_80AAF68
 
-	thumb_func_start sub_80AB008
-sub_80AB008:
+	thumb_func_start CallbackLivesGetIndex
+CallbackLivesGetIndex:
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	bx lr
-	thumb_func_end sub_80AB008
+	thumb_func_end CallbackLivesGetIndex
 
-	thumb_func_start sub_80AB010
-sub_80AB010:
+	thumb_func_start CallbackLivesGetSize
+CallbackLivesGetSize:
 	ldr r2, [r0, 0xC]
 	ldr r3, [r0, 0x10]
 	str r2, [r1]
 	str r3, [r1, 0x4]
 	bx lr
-	thumb_func_end sub_80AB010
+	thumb_func_end CallbackLivesGetSize
 
-	thumb_func_start sub_80AB01C
-sub_80AB01C:
+	thumb_func_start CallbackLivesSetHitboxPos
+CallbackLivesSetHitboxPos:
 	push {r4,lr}
 	adds r3, r0, 0
 	adds r4, r1, 0
@@ -7171,10 +7171,10 @@ _080AB0C2:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AB01C
+	thumb_func_end CallbackLivesSetHitboxPos
 
-	thumb_func_start sub_80AB0C8
-sub_80AB0C8:
+	thumb_func_start CallbackLivesSetPositionBounds
+CallbackLivesSetPositionBounds:
 	push {r4,lr}
 	ldr r3, [r1]
 	ldr r4, [r1, 0x4]
@@ -7187,10 +7187,10 @@ sub_80AB0C8:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AB0C8
+	thumb_func_end CallbackLivesSetPositionBounds
 
-	thumb_func_start sub_80AB0E0
-sub_80AB0E0:
+	thumb_func_start CallbackLivesGetHitboxCenter
+CallbackLivesGetHitboxCenter:
 	adds r3, r0, 0
 	movs r2, 0xA2
 	lsls r2, 1
@@ -7207,18 +7207,18 @@ sub_80AB0E0:
 	adds r0, r2
 	str r0, [r1, 0x4]
 	bx lr
-	thumb_func_end sub_80AB0E0
+	thumb_func_end CallbackLivesGetHitboxCenter
 
-	thumb_func_start sub_80AB100
-sub_80AB100:
+	thumb_func_start CallbackLivesMoveReal
+CallbackLivesMoveReal:
 	push {lr}
 	bl sub_80A9F20
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80AB100
+	thumb_func_end CallbackLivesMoveReal
 
-	thumb_func_start sub_80AB10C
-sub_80AB10C:
+	thumb_func_start CallbackLivesGetPosHeightAndUnk
+CallbackLivesGetPosHeightAndUnk:
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r4, 0xAA
@@ -7234,29 +7234,29 @@ sub_80AB10C:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AB10C
+	thumb_func_end CallbackLivesGetPosHeightAndUnk
 
-	thumb_func_start sub_80AB12C
-sub_80AB12C:
+	thumb_func_start CallbackLivesSetPosHeight
+CallbackLivesSetPosHeight:
 	movs r2, 0xAA
 	lsls r2, 1
 	adds r0, r2
 	str r1, [r0]
 	bx lr
-	thumb_func_end sub_80AB12C
+	thumb_func_end CallbackLivesSetPosHeight
 
-	thumb_func_start sub_80AB138
-sub_80AB138:
+	thumb_func_start CallbackLivesGetDirection
+CallbackLivesGetDirection:
 	movs r2, 0xA1
 	lsls r2, 1
 	adds r0, r2
 	ldrb r0, [r0]
 	strb r0, [r1]
 	bx lr
-	thumb_func_end sub_80AB138
+	thumb_func_end CallbackLivesGetDirection
 
-	thumb_func_start sub_80AB144
-sub_80AB144:
+	thumb_func_start CallbackLivesSetDirection
+CallbackLivesSetDirection:
 	push {lr}
 	adds r3, r0, 0
 	lsls r1, 24
@@ -7290,20 +7290,20 @@ _080AB17C:
 	bx r0
 	.align 2, 0
 _080AB180: .4byte 0x0000015d
-	thumb_func_end sub_80AB144
+	thumb_func_end CallbackLivesSetDirection
 
-	thumb_func_start sub_80AB184
-sub_80AB184:
+	thumb_func_start CallbackLivesSetEventIndex
+CallbackLivesSetEventIndex:
 	push {lr}
 	lsls r1, 16
 	lsrs r1, 16
 	bl sub_80A9750
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AB184
+	thumb_func_end CallbackLivesSetEventIndex
 
-	thumb_func_start sub_80AB194
-sub_80AB194:
+	thumb_func_start CallbackLivesSetUnk_80AB194
+CallbackLivesSetUnk_80AB194:
 	push {lr}
 	mov r12, r0
 	lsls r1, 16
@@ -7325,15 +7325,15 @@ _080AB1A8:
 	str r2, [r0]
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AB194
+	thumb_func_end CallbackLivesSetUnk_80AB194
 
 	thumb_func_start nullsub_211
 nullsub_211:
 	bx lr
 	thumb_func_end nullsub_211
 
-	thumb_func_start sub_80AB1C0
-sub_80AB1C0:
+	thumb_func_start CallbackLivesSpriteRelatedCheck_80AB1C0
+CallbackLivesSpriteRelatedCheck_80AB1C0:
 	push {lr}
 	adds r1, r0, 0
 	movs r2, 0xAE
@@ -7353,10 +7353,10 @@ _080AB1DE:
 _080AB1E0:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80AB1C0
+	thumb_func_end CallbackLivesSpriteRelatedCheck_80AB1C0
 
-	thumb_func_start sub_80AB1E4
-sub_80AB1E4:
+	thumb_func_start CallbackLivesSpriteRelated_80AB1E4
+CallbackLivesSpriteRelated_80AB1E4:
 	push {lr}
 	adds r1, r0, 0
 	movs r2, 0xB5
@@ -7378,40 +7378,40 @@ _080AB206:
 _080AB208:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80AB1E4
+	thumb_func_end CallbackLivesSpriteRelated_80AB1E4
 
-	thumb_func_start sub_80AB20C
-sub_80AB20C:
+	thumb_func_start CallbackLivesGetFlags
+CallbackLivesGetFlags:
 	movs r2, 0x8E
 	lsls r2, 1
 	adds r0, r2
 	ldr r0, [r0]
 	str r0, [r1]
 	bx lr
-	thumb_func_end sub_80AB20C
+	thumb_func_end CallbackLivesGetFlags
 
-	thumb_func_start sub_80AB218
-sub_80AB218:
+	thumb_func_start CallbackLivesSetFlags
+CallbackLivesSetFlags:
 	push {lr}
 	movs r2, 0
 	ldrsh r0, [r0, r2]
 	bl sub_80A86C8
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AB218
+	thumb_func_end CallbackLivesSetFlags
 
-	thumb_func_start sub_80AB228
-sub_80AB228:
+	thumb_func_start CallbackLivesClearFlags
+CallbackLivesClearFlags:
 	push {lr}
 	movs r2, 0
 	ldrsh r0, [r0, r2]
 	bl sub_80A8750
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AB228
+	thumb_func_end CallbackLivesClearFlags
 
-	thumb_func_start sub_80AB238
-sub_80AB238:
+	thumb_func_start CallbackLivesSpriteRelated_80AB238
+CallbackLivesSpriteRelated_80AB238:
 	push {lr}
 	movs r2, 0xB8
 	lsls r2, 1
@@ -7419,15 +7419,15 @@ sub_80AB238:
 	bl sub_80A6EC8
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AB238
+	thumb_func_end CallbackLivesSpriteRelated_80AB238
 
-	thumb_func_start sub_80AB248
-sub_80AB248:
+	thumb_func_start CallbackLivesMoveRelative
+CallbackLivesMoveRelative:
 	push {lr}
 	bl sub_80A9F94
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80AB248
+	thumb_func_end CallbackLivesMoveRelative
 
 	thumb_func_start GroundLives_Action
 GroundLives_Action:
@@ -7468,7 +7468,7 @@ _080AB292:
 	bl GroundLives_Delete
 	b _080AB47C
 	.align 2, 0
-_080AB29C: .4byte gUnknown_3001B84
+_080AB29C: .4byte gGroundLives
 _080AB2A0: .4byte gUnknown_8118280
 _080AB2A4:
 	movs r0, 0x8E
@@ -7624,7 +7624,7 @@ _080AB3C4:
 	ble _080AB44C
 _080AB3DA:
 	adds r0, r4, 0
-	bl sub_8002C60
+	bl VecDirection8Radial
 	add r1, sp, 0x8
 	strb r0, [r1]
 	lsls r0, 24
@@ -7682,7 +7682,7 @@ _080AB440:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x1
-	bl sub_809D8C0
+	bl ExecutePredefinedScript
 _080AB44C:
 	movs r2, 0xAE
 	lsls r2, 1
@@ -7748,8 +7748,8 @@ _080AB4BE:
 	.align 2, 0
 _080AB4C4: .4byte gUnknown_811828C
 _080AB4C8: .4byte 0x0000015d
-_080AB4CC: .4byte gUnknown_3001B80
-_080AB4D0: .4byte gUnknown_3001B84
+_080AB4CC: .4byte gGroundLivesMeta
+_080AB4D0: .4byte gGroundLives
 _080AB4D4:
 	movs r0, 0x80
 	lsls r0, 5
@@ -7889,7 +7889,7 @@ _080AB5BC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AB5D0: .4byte gUnknown_3001B80
+_080AB5D0: .4byte gGroundLivesMeta
 	thumb_func_end sub_80AB5A4
 
 	thumb_func_start sub_80AB5D4
@@ -7987,7 +7987,7 @@ _080AB670:
 	movs r2, 0x80
 	lsls r2, 1
 	mov r0, sp
-	bl sub_8002BB8
+	bl SetVecFromDirectionSpeed
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	str r0, [sp, 0x8]
@@ -8014,7 +8014,7 @@ _080AB6B0:
 	str r0, [r4, 0x4]
 	b _080AB9E6
 	.align 2, 0
-_080AB6BC: .4byte gUnknown_3001B80
+_080AB6BC: .4byte gGroundLivesMeta
 _080AB6C0:
 	ldr r5, [sp, 0x28]
 	ldr r0, [r5, 0x4]
@@ -8095,7 +8095,7 @@ _080AB71E:
 	mov r10, r4
 	b _080AB75A
 	.align 2, 0
-_080AB754: .4byte gUnknown_3001B80
+_080AB754: .4byte gGroundLivesMeta
 _080AB758:
 	str r6, [sp, 0x10]
 _080AB75A:
@@ -8169,7 +8169,7 @@ _080AB7C8:
 	str r0, [r4, 0x8]
 	b _080AB7DC
 	.align 2, 0
-_080AB7D4: .4byte gUnknown_3001B80
+_080AB7D4: .4byte gGroundLivesMeta
 _080AB7D8:
 	movs r5, 0
 	mov r10, r5
@@ -8243,7 +8243,7 @@ _080AB846:
 	mov r2, r8
 	b _080AB8B0
 	.align 2, 0
-_080AB860: .4byte gUnknown_3001B80
+_080AB860: .4byte gGroundLivesMeta
 _080AB864: .4byte gUnknown_8118050
 _080AB868: .4byte 0xffffff00
 _080AB86C:
@@ -8347,7 +8347,7 @@ _080AB8FC:
 	add r5, r9
 	movs r4, 0
 	ldrsb r4, [r5, r4]
-	bl sub_8002C60
+	bl VecDirection8Radial
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -8379,7 +8379,7 @@ _080AB95E:
 	bl sub_80AAF68
 	b _080AB982
 	.align 2, 0
-_080AB96C: .4byte gUnknown_3001B80
+_080AB96C: .4byte gGroundLivesMeta
 _080AB970:
 	ldr r4, _080AB9F8
 	movs r0, 0xB2
@@ -8483,7 +8483,7 @@ _080ABA24:
 	bne _080ABA24
 	b _080ABA72
 	.align 2, 0
-_080ABA34: .4byte gUnknown_3001B80
+_080ABA34: .4byte gGroundLivesMeta
 _080ABA38:
 	cmp r3, r1
 	bge _080ABA72
@@ -8633,7 +8633,7 @@ _080ABB2C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ABB50: .4byte gUnknown_3001B84
+_080ABB50: .4byte gGroundLives
 	thumb_func_end sub_80ABA7C
 
         .align 2,0

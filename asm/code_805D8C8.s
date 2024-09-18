@@ -1587,7 +1587,7 @@ _08062650:
 	adds r5, r0, 0
 	b _080626EA
 	.align 2, 0
-_080626CC: .4byte gUnknown_202DE58
+_080626CC: .4byte gFormatItems
 _080626D0: .4byte gUnknown_80FE95C
 _080626D4:
 	movs r0, 0x2
@@ -1717,7 +1717,7 @@ _0806276C:
 	adds r5, r0, 0
 	b _080627FE
 	.align 2, 0
-_080627E0: .4byte gUnknown_202DE58
+_080627E0: .4byte gFormatItems
 _080627E4: .4byte gUnknown_80FE960
 _080627E8:
 	movs r0, 0x2
@@ -1866,7 +1866,7 @@ sub_806285C:
 	add r4, sp, 0x4
 	b _08062938
 	.align 2, 0
-_0806291C: .4byte gUnknown_202DE58
+_0806291C: .4byte gFormatItems
 _08062920: .4byte gUnknown_80FE964
 _08062924:
 	movs r0, 0x2
@@ -2165,7 +2165,7 @@ sub_8062B74:
 	ldr r0, [r0, 0x70]
 	mov r9, r0
 	movs r0, 0x2
-	bl sub_8008C54
+	bl CallPrepareTextbox_8008C54
 	movs r0, 0x2
 	bl sub_80073B8
 	ldr r0, _08062BD0
@@ -2305,7 +2305,7 @@ _08062C8A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062CA0: .4byte gUnknown_202DE58
+_08062CA0: .4byte gFormatItems
 _08062CA4: .4byte gUnknown_8106C98
 	thumb_func_end sub_8062B74
 
@@ -2316,7 +2316,7 @@ sub_8062CA8:
 	adds r4, r0, 0
 	ldr r5, [r4, 0x70]
 	movs r0, 0x2
-	bl sub_8008C54
+	bl CallPrepareTextbox_8008C54
 	movs r0, 0x2
 	bl sub_80073B8
 	ldr r0, _08062CF8
@@ -2401,7 +2401,7 @@ _08062D52:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062D60: .4byte gUnknown_202DE58
+_08062D60: .4byte gFormatItems
 _08062D64: .4byte gUnknown_8106C98
 	thumb_func_end sub_8062CA8
 
@@ -3543,7 +3543,7 @@ _08063676:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806368C: .4byte gUnknown_202DE58
+_0806368C: .4byte gFormatItems
 _08063690: .4byte gUnknown_202EE10
 _08063694: .4byte gUnknown_8106CC4
 	thumb_func_end sub_8063578
@@ -4127,7 +4127,7 @@ _08063AEC:
 	.align 2, 0
 _08063B1C: .4byte gDungeon
 _08063B20: .4byte 0x0001357c
-_08063B24: .4byte gUnknown_202DE58
+_08063B24: .4byte gFormatItems
 _08063B28: .4byte 0x00000133
 _08063B2C: .4byte gUnknown_80F8B40
 _08063B30:
@@ -4192,7 +4192,7 @@ sub_8063B54:
 	.align 2, 0
 _08063BA4: .4byte gDungeon
 _08063BA8: .4byte 0x0001357c
-_08063BAC: .4byte gUnknown_202DE58
+_08063BAC: .4byte gFormatItems
 _08063BB0: .4byte 0x00000133
 	thumb_func_end sub_8063B54
 
@@ -4294,7 +4294,7 @@ _08063C5C:
 	.align 2, 0
 _08063C70: .4byte gDungeon
 _08063C74: .4byte 0x0001357c
-_08063C78: .4byte gUnknown_202DE58
+_08063C78: .4byte gFormatItems
 _08063C7C: .4byte 0x00000119
 _08063C80: .4byte gUnknown_202DEA8
 _08063C84: .4byte 0x00000133
@@ -4447,7 +4447,7 @@ _08063D70:
 	.align 2, 0
 _08063D98: .4byte gDungeon
 _08063D9C: .4byte 0x0001357c
-_08063DA0: .4byte gUnknown_202DE58
+_08063DA0: .4byte gFormatItems
 _08063DA4: .4byte 0x00000119
 _08063DA8: .4byte 0x00000133
 _08063DAC: .4byte gUnknown_80F8B88
@@ -4906,7 +4906,7 @@ _08064130:
 	b _0806414E
 	.align 2, 0
 _08064140: .4byte gUnknown_202F2D8
-_08064144: .4byte gUnknown_202DE58
+_08064144: .4byte gFormatItems
 _08064148: .4byte gUnknown_80FDF00
 _0806414C:
 	ldr r0, _0806415C

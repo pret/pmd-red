@@ -36,7 +36,7 @@ bool8 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
     sCredits1Work->unk0[0] = gUnknown_80E4A28;
 
     ResetUnusedInputStruct();
-    sub_800641C(&sCredits1Work->unk0[0], TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sCredits1Work->unk0[0], TRUE, TRUE);
     sub_8099690(2);
     sub_80073B8(0);
 
@@ -119,7 +119,7 @@ s32 sub_8035574(void)
         case 3:
             if (!sub_8099B94()) {
                 ResetUnusedInputStruct();
-                sub_800641C(NULL, TRUE, TRUE);
+                xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
                 sCredits1Work->unk60 = 4;
             }
             break;

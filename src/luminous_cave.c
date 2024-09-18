@@ -94,7 +94,7 @@ u32 sub_802465C(void)
     OpenedFile *faceFile;
 
     ResetUnusedInputStruct();
-    sub_800641C(NULL, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
     sLuminousCaveWork = MemoryAlloc(sizeof(LuminousCaveWork), 8);
     sLuminousCaveWork->menuAction1 = 0;
     sLuminousCaveWork->menuAction2 = 0;
@@ -184,7 +184,7 @@ static void sub_8024804(void)
 {
     s32 i;
 
-    sub_8006518(sLuminousCaveWork->unk114);
+    RestoreUnkTextStruct_8006518(sLuminousCaveWork->unk114);
 
     switch (sLuminousCaveWork->state) {
         case 8:
@@ -209,7 +209,7 @@ static void sub_8024804(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sLuminousCaveWork->unk114, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sLuminousCaveWork->unk114, TRUE, TRUE);
 }
 
 static void UpdateLuminousCaveDialogue(void)
@@ -232,12 +232,12 @@ static void UpdateLuminousCaveDialogue(void)
             break;
         case LUMINOUS_CAVE_EVOLVE_INFO:
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_ASK_EVOLVE;
-            sub_80141B4(sEvolveInfo,0,0,0x105);
+            xxx_info_box_80141B4(sEvolveInfo,0,0,0x105);
             break;
         case LUMINOUS_CAVE_SHALL_RETURN:
             sLuminousCaveWork->fallbackState = 4;
             xxx_call_fade_in_new_bgm(MUS_FILE_SELECT,0x3c);
-            sub_80141B4(sYeShallReturn,0,0,0x305);
+            xxx_info_box_80141B4(sYeShallReturn,0,0,0x305);
             break;
         case LUMINOUS_CAVE_GIVE_ITEM_1:
             sub_8024D48();
@@ -276,11 +276,11 @@ static void UpdateLuminousCaveDialogue(void)
             break;
         case LUMINOUS_CAVE_LACK_WHAT_NEEDED:
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_GIVE_ITEM_1;
-            sub_80141B4(sLackWhatIsNeeded,0,0,0x105);
+            xxx_info_box_80141B4(sLackWhatIsNeeded,0,0,0x105);
             break;
         case LUMINOUS_CAVE_ONLY_ONE_ITEM:
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_GIVE_ITEM_2;
-            sub_80141B4(sOnlyOneItem,0,0,0x105);
+            xxx_info_box_80141B4(sOnlyOneItem,0,0,0x105);
             break;
         case LUMINOUS_CAVE_LET_US_BEGIN:
             sub_8025254();
@@ -302,13 +302,13 @@ static void UpdateLuminousCaveDialogue(void)
             else
                 sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_CANT_EVOLVE_YET;
             xxx_call_fade_out_bgm(0x3c);
-            sub_80141B4(sLetUsBegin,0,0,0x105);
+            xxx_info_box_80141B4(sLetUsBegin,0,0,0x105);
             break;
         case LUMINOUS_CAVE_CHANGED_APPEARANCE:
             PrintColoredPokeNameToBuffer(gPlayerName,sLuminousCaveWork->pokeStruct, COLOR_CYAN);
             PlaySound(0x1ff);
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_EVOLVED;
-            sub_80141B4(sFmtChangedAppearance,0,0,0x105);
+            xxx_info_box_80141B4(sFmtChangedAppearance,0,0,0x105);
             break;
         case LUMINOUS_CAVE_EVOLVED:
             monName = GetMonSpecies(sLuminousCaveWork->pokeStruct->speciesNum);
@@ -333,44 +333,44 @@ static void UpdateLuminousCaveDialogue(void)
                     BoundedCopyStringtoBuffer(sLuminousCaveWork->pokeStruct->name,GetMonSpecies(sLuminousCaveWork->pokeStruct->speciesNum),POKEMON_NAME_LENGTH);
             }
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-            sub_80141B4(sFmtEvolved,0,0,0x105);
+            xxx_info_box_80141B4(sFmtEvolved,0,0,0x105);
             break;
         case LUMINOUS_CAVE_COME_ALONE:
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-            sub_80141B4(sComeAlone,0,0,0x105);
+            xxx_info_box_80141B4(sComeAlone,0,0,0x105);
             break;
         case LUMINOUS_CAVE_LACK_LEVEL:
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-            sub_80141B4(sLackLevel,0,0,0x105);
+            xxx_info_box_80141B4(sLackLevel,0,0,0x105);
             break;
         case LUMINOUS_CAVE_CANT_EVOLVE_ANYMORE:
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-            sub_80141B4(sNoMoreEvolutions,0,0,0x105);
+            xxx_info_box_80141B4(sNoMoreEvolutions,0,0,0x105);
             break;
         case LUMINOUS_CAVE_LACK_FRIEND_AREA:
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-            sub_80141B4(sLackFriendArea,0,0,0x105);
+            xxx_info_box_80141B4(sLackFriendArea,0,0,0x105);
             break;
         case LUMINOUS_CAVE_LACK_ROOM:
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-            sub_80141B4(sLackFriendAreaRoom,0,0,0x105);
+            xxx_info_box_80141B4(sLackFriendAreaRoom,0,0,0x105);
             break;
         case LUMINOUS_CAVE_LACK_IQ:
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-            sub_80141B4(sLackIQ,0,0,0x105);
+            xxx_info_box_80141B4(sLackIQ,0,0,0x105);
             break;
         case LUMINOUS_CAVE_LACK_ITEM:
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-            sub_80141B4(sLackItem,0,0,0x105);
+            xxx_info_box_80141B4(sLackItem,0,0,0x105);
             break;
         case LUMINOUS_CAVE_CANT_EVOLVE_YET:
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_SHALL_RETURN;
-            sub_80141B4(sCannotEvolveYet,0,0,0x105);
+            xxx_info_box_80141B4(sCannotEvolveYet,0,0,0x105);
             break;
         case LUMINOUS_CAVE_PROMPT_NAME:
             xxx_call_fade_in_new_bgm(8,0x3c);
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_FINISH_NAME;
-            sub_80141B4(sMustGiveName,0,0,0x105);
+            xxx_info_box_80141B4(sMustGiveName,0,0,0x105);
             break;
         case LUMINOUS_CAVE_FINISH_NAME:
             if (sLuminousCaveWork->pokeRenamed) {

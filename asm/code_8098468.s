@@ -32,7 +32,7 @@ xxx_script_related_8098468:
 _08098494: .4byte gUnknown_20398B4
 _08098498: .4byte gUnknown_20398B9
 _0809849C: .4byte gUnknown_20398B8
-_080984A0: .4byte gUnknown_20398BA
+_080984A0: .4byte gScriptMode
 _080984A4: .4byte _080984A8
 	.align 2, 0
 _080984A8:
@@ -60,7 +60,7 @@ _080984D4:
 	add r2, sp, 0x4
 	movs r0, 0x3
 	mov r1, sp
-	bl sub_8001B88
+	bl GetScriptVarScenario
 	ldr r2, _080984F4
 	movs r1, 0
 	ldr r0, [sp]
@@ -101,7 +101,7 @@ _08098522:
 	adds r0, r2, 0
 	strh r0, [r1]
 	movs r0, 0
-	bl xxx_update_some_bg_tiles
+	bl UpdateFadeInTile
 	bl sub_8099648
 	bl sub_809975C
 	bl sub_809D0AC
@@ -113,10 +113,10 @@ _08098522:
 	bl sub_809CB50
 	bl AllocGroundMapAction
 	bl nullsub_117
-	bl sub_80AD990
-	bl sub_80A77F8
-	bl sub_80ABB54
-	bl sub_80ACB90
+	bl AllocGroundEvents
+	bl AllocGroundLives
+	bl AllocGroundObjects
+	bl AllocGroundEffects
 	bl sub_809A62C
 	ldr r0, _080985BC
 	movs r1, 0
@@ -136,11 +136,11 @@ _08098522:
 	ldr r5, _080985D0
 	movs r0, 0
 	movs r1, 0xD
-	bl sub_8001658
+	bl GetScriptVarValue
 	strh r0, [r5]
 	movs r0, 0
 	movs r1, 0xE
-	bl sub_8001658
+	bl GetScriptVarValue
 	ldr r1, _080985D4
 	str r0, [r1]
 	ldr r0, _080985D8
@@ -219,20 +219,20 @@ _0809866A:
 	ldr r2, [r0]
 	movs r0, 0
 	movs r1, 0x16
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0x25
 	movs r2, 0
-	bl sub_80018D8
+	bl SetScriptVarValue
 	bl sub_8098C58
 	movs r0, 0
 	movs r1, 0x15
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_800226C
+	bl UpdateScriptVarWithImmediate
 	movs r0, 0
 	movs r1, 0x13
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r4, r0, 16
 	movs r0, 0x1
@@ -243,16 +243,16 @@ _0809866A:
 	bne _080986C0
 	movs r0, 0
 	movs r1, 0x14
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r0, 16
-	bl sub_80A2608
+	bl GetDungeonInfo_80A2608
 	b _080986C6
 	.align 2, 0
 _080986BC: .4byte gUnknown_20398B4
 _080986C0:
 	adds r0, r4, 0
-	bl sub_80A2608
+	bl GetDungeonInfo_80A2608
 _080986C6:
 	movs r1, 0xA
 	ldrsh r7, [r0, r1]
@@ -265,7 +265,7 @@ _080986C6:
 	movs r0, 0
 	movs r1, 0x31
 	movs r3, 0x1
-	bl sub_800199C
+	bl SetScriptVarArrayValue
 _080986E0:
 	ldr r0, [r5]
 	bl sub_8098FCC
@@ -293,19 +293,19 @@ _0809870C:
 	movs r0, 0
 	movs r1, 0x18
 	movs r2, 0x1
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0xF
 	movs r2, 0
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0xD
 	movs r2, 0
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0xE
 	movs r2, 0
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r7, 0x71
 	b _08098756
 	.align 2, 0
@@ -328,13 +328,13 @@ _08098756:
 	bne _080987C0
 	movs r0, 0
 	movs r1, 0xD
-	bl sub_8001658
+	bl GetScriptVarValue
 	adds r5, r0, 0
 	ldr r4, _08098794
 	ldr r2, [r4]
 	movs r0, 0
 	movs r1, 0x18
-	bl sub_80018D8
+	bl SetScriptVarValue
 	ldr r4, [r4]
 	cmp r4, 0x1
 	beq _080987A6
@@ -345,7 +345,7 @@ _08098756:
 	ldrsh r2, [r0, r1]
 	movs r0, 0
 	movs r1, 0xF
-	bl sub_80018D8
+	bl SetScriptVarValue
 	b _080987A6
 	.align 2, 0
 _08098790: .4byte gUnknown_20398B9
@@ -355,19 +355,19 @@ _0809879C:
 	movs r0, 0
 	movs r1, 0xF
 	adds r2, r5, 0
-	bl sub_80018D8
+	bl SetScriptVarValue
 _080987A6:
 	ldr r0, _0809882C
 	movs r1, 0
 	ldrsh r2, [r0, r1]
 	movs r0, 0
 	movs r1, 0xD
-	bl sub_80018D8
+	bl SetScriptVarValue
 	ldr r0, _08098830
 	ldr r2, [r0]
 	movs r0, 0
 	movs r1, 0xE
-	bl sub_80018D8
+	bl SetScriptVarValue
 _080987C0:
 	ldr r1, _08098834
 	movs r0, 0x2
@@ -394,10 +394,10 @@ _080987C0:
 	bl sub_809A62C
 	bl GroundMap_Reset
 	bl sub_809D0BC
-	bl DeleteBlankGroundEvents
-	bl DeleteBlankGroundLives
-	bl DeleteBlankGroundObjects
-	bl DeleteBlankGroundEffects
+	bl DeleteGroundEvents
+	bl DeleteGroundLives
+	bl DeleteGroundObjects
+	bl DeleteGroundEffects
 	bl sub_809C658
 	bl nullsub_16
 	bl sub_8097944
@@ -541,10 +541,10 @@ _08098988:
 _08098990:
 	bl FreeGroundMapAction
 	bl nullsub_118
-	bl sub_80A78F0
-	bl sub_80ABBD4
-	bl sub_80ACC10
-	bl sub_80ADA08
+	bl FreeGroundLives
+	bl FreeGroundObjects
+	bl FreeGroundEffects
+	bl FreeGroundEvents
 	bl sub_809CB74
 	bl sub_809A610
 	bl sub_809C618
@@ -605,46 +605,46 @@ _08098A30:
 	movs r0, 0
 	movs r1, 0x13
 	adds r2, r4, 0
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0x14
 	adds r2, r4, 0
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0x18
 	movs r2, 0x4
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0x16
 	movs r2, 0x4
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0xD
-	bl sub_8001658
+	bl GetScriptVarValue
 	adds r2, r0, 0
 	movs r0, 0
 	movs r1, 0xF
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0x5
 	b _08098BD2
 _08098A72:
 	movs r0, 0
 	movs r1, 0x13
 	movs r2, 0
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0x18
 	movs r2, 0x5
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0x16
 	movs r2, 0x5
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r2, 0x1
 	negs r2, r2
 	movs r0, 0
 	movs r1, 0x13
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0x6
 	b _08098BD2
 _08098AA0:
@@ -659,27 +659,27 @@ _08098AA0:
 	ldrsh r2, [r5, r0]
 	movs r0, 0
 	movs r1, 0x13
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0x14
 	adds r2, r4, 0
-	bl sub_80018D8
+	bl SetScriptVarValue
 	ldrh r2, [r5]
 	movs r0, 0
 	movs r1, 0x30
 	movs r3, 0x1
-	bl sub_800199C
+	bl SetScriptVarArrayValue
 	movs r0, 0
 	movs r1, 0x18
 	movs r2, 0x7
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0x16
 	movs r2, 0x7
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0x11
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0xA
@@ -687,7 +687,7 @@ _08098AA0:
 	movs r0, 0
 	movs r1, 0x11
 	movs r2, 0
-	bl sub_80018D8
+	bl SetScriptVarValue
 _08098B00:
 	movs r0, 0x7
 	b _08098BD2
@@ -697,24 +697,24 @@ _08098B08:
 	movs r0, 0
 	movs r1, 0x13
 	movs r2, 0x51
-	bl sub_80018D8
+	bl SetScriptVarValue
 	ldr r0, _08098B54
 	movs r1, 0
 	ldrsh r2, [r0, r1]
 	movs r0, 0
 	movs r1, 0x14
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0x18
 	movs r2, 0x7
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0x16
 	movs r2, 0x7
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0x11
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0xA
@@ -722,7 +722,7 @@ _08098B08:
 	movs r0, 0
 	movs r1, 0x11
 	movs r2, 0
-	bl sub_80018D8
+	bl SetScriptVarValue
 _08098B4E:
 	movs r0, 0x8
 	b _08098BD2
@@ -732,20 +732,20 @@ _08098B58:
 	movs r0, 0
 	movs r1, 0x13
 	movs r2, 0x50
-	bl sub_80018D8
+	bl SetScriptVarValue
 	ldr r0, _08098B88
 	ldrb r2, [r0]
 	movs r0, 0
 	movs r1, 0x14
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0x18
 	movs r2, 0x7
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0x16
 	movs r2, 0x7
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0x9
 	b _08098BD2
 	.align 2, 0
@@ -754,21 +754,21 @@ _08098B8C:
 	movs r0, 0
 	movs r1, 0x13
 	movs r2, 0x52
-	bl sub_80018D8
+	bl SetScriptVarValue
 	ldr r0, _08098BBC
 	movs r1, 0
 	ldrsh r2, [r0, r1]
 	movs r0, 0
 	movs r1, 0x14
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0x18
 	movs r2, 0x7
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0x16
 	movs r2, 0x7
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0xA
 	b _08098BD2
 	.align 2, 0
@@ -777,7 +777,7 @@ _08098BC0:
 	movs r0, 0
 	movs r1, 0x18
 	movs r2, 0x1
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0x10
 	bl FadeOutAllMusic
 	movs r0, 0xE

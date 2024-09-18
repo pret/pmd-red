@@ -4,7 +4,7 @@
 gUnknown_2000A80: /* 2000A80 (GameLoop) */
 	.space 0x8
 
-gUnknown_2000A88: /* 2000A88 (sub_800135C - sub_8002718) */
+gScriptVarBuffer: /* 2000A88 (ThoroughlyResetScriptVars - sub_8002718) */
 	.space 0x400
 
     .include "src/memory.o"
@@ -58,36 +58,36 @@ gUnknown_20274A6: /* 20274A6 (HandleTextFormat) */
 	.space 0x6
 gCurrentCharmap: /* 20274AC (LoadCharmaps - xxx_draw_string) */
 	.space 0x4
-gUnknown_20274B0: /* 20274B0 (xxx_update_some_bg_tiles - sub_80063D8) */
+gUnknown_20274B0: /* 20274B0 (UpdateFadeInTile - SetCharacterMask) */
 	.space 0x4
-gUnknown_20274B4: /* 20274B4 (sub_8006438) */
+gUnknown_20274B4: /* 20274B4 (SaveUnkTextStructAndXXX_8006438) */
 	.space 0x3B00
 gCharmapFiles: /* 202AFB4 (LoadCharmaps) */
 	.space 0xC
-gUnknown_202AFC0: /* 202AFC0 (sub_8006438 - sub_8006518) */
+gUnknown_202AFC0: /* 202AFC0 (SaveUnkTextStructAndXXX_8006438 - RestoreUnkTextStruct_8006518) */
 	.space 0x60
 gUnknown_202B020: /* 202B020 (LoadCharmaps - sub_80095CC) */
 	.space 0x4
 gUnknown_202B024: /* 202B024 (LoadCharmaps - sub_80095CC) */
 	.space 0x4
-gUnknown_202B028: /* 202B028 (LoadCharmaps - xxx_draw_char) */
+gCharHeight: /* 202B028 (LoadCharmaps - xxx_draw_char) */
 	.space 0x8
-gUnknown_202B030: /* 202B030 (LoadCharmaps - sub_80078E8) */
+gTextShadowMask: /* 202B030 (LoadCharmaps - sub_80078E8) */
 	.space 0x4
-gUnknown_202B034: /* 202B034 (LoadCharmaps - xxx_draw_char) */
+gDrawTextShadow: /* 202B034 (LoadCharmaps - xxx_draw_char) */
 	.space 0x4
 gUnknown_202B038: /* 202B038 (LoadTitleScreen - sub_80A2B40) */
 	.space 0x1000
 
-gUnknown_202C038: /* 202C038 (sub_8010858 - sub_804A728) */
+gFontTiles_202C038: /* 202C038 (sub_8010858 - sub_804A728) */
 	.space 0x800
-gUnknown_202C838: /* 202C838 (sub_8010858 - sub_804A49C) */
+gFontTilesExtra_202C838: /* 202C838 (sub_8010858 - sub_804A49C) */
 	.space 0x720
 
 gUnknown_202CF58: /* 202CF58 (xxx_format_string) */
 	.space 0xE0
 
-gUnknown_202D038: /* 202D038 (sub_80097B0 - sub_8052FB8) */
+gFontPalette: /* 202D038 (sub_80097B0 - sub_8052FB8) */
 	.space 0x4
 
 gUnknown_202D03C: /* 202D03C (sub_8040238) */
@@ -99,7 +99,7 @@ gUnknown_202D068: /* 202D068 (sub_803FB74) */
 gUnknown_202D06C: /* 202D06C (sub_803F38C) */
 	.space 0xC
 
-gUnknown_202D078: /* 202D078 (sub_8099690) */
+gFontPaletteAlt: /* 202D078 (sub_8099690) */
 	.space 0x20
 
 gUnknown_202D098: /* 202D098 (xxx_format_string) */
@@ -189,7 +189,7 @@ gUnknown_202DE19: /* 202DE19 (sub_800F990 - sub_8010014) */
 gFormatData_202DE30: /* 202DE30 [used everywhere tbh] */
 	.space 0x28
 /* Seems to be a general u8 buffer for text, mostly used with item names */
-gUnknown_202DE58: /* 202DE58 [used everywhere tbh] */
+gFormatItems: /* 202DE58 [used everywhere tbh] */
 	.space 80
 gUnknown_202DEA8: /* 202DEA8 [used everywhere tbh] */
 	.space 240
@@ -516,7 +516,7 @@ gMonsterParameters: /* 202F3E0 (LoadMonsterParameters - IsPokemonDialogueSpriteA
 	.space 0x4
 gMonsterParametersFile: /* 202F3E4 (LoadMonsterParameters) */
 	.space 0x4
-gUnknown_202F3E8: /* 202F3E8 (sub_808E53C - sub_808E668) */
+gShadowSprites: /* 202F3E8 (InitShadowSprites - AddShadowSprite) */
 	.space 0x18
 gRecruitedPokemon: /* 202F400 [used everywhere tbh] */
 	.space 0x90E8
@@ -585,15 +585,15 @@ gUnknown_2039A32: /* 2039A32 (sub_809D4B0 - ExecuteScriptCommand) */
 	.space 0x2
 gUnknown_2039A34: /* 2039A34 (sub_809D4B0 - ExecuteScriptCommand) */
 	.space 0x2
-gUnknown_2039A36: /* 2039A36 (sub_809D4B0 - GroundScript_Unlock) */
+gAnyScriptLocked: /* 2039A36 (sub_809D4B0 - GroundScript_Unlock) */
 	.space 0x2
-gUnknown_2039A38: /* 2039A38 (sub_809D4B0 - GroundScript_Unlock) */
+gScriptLocks: /* 2039A38 (sub_809D4B0 - GroundScript_Unlock) */
 	.space 0x88
-gUnknown_2039AC0: /* 2039AC0 (sub_809D4B0 - GroundScript_Unlock) */
+gScriptLockConds: /* 2039AC0 (sub_809D4B0 - GroundScript_Unlock) */
 	.space 0x88
-gUnknown_2039B48: /* 2039B48 (sub_809D4B0 - HandleAction) */
+gUnlockBranchLabels: /* 2039B48 (sub_809D4B0 - HandleAction) */
 	.space 0x208
-gUnknown_2039D50: /* 2039D50 (ExecuteScriptCommand) */
+gChoices: /* 2039D50 (ExecuteScriptCommand) */
 	.space 0x48
 gUnknown_2039D98: /* 2039D98 (HandleAction - sub_80A14E8) [seems to be storage for strings.. used for both Team Name and Player Name] */
 	.space 0xC

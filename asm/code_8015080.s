@@ -380,7 +380,7 @@ _080154A0:
 	adds r0, r4
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	movs r0, 0x1
 	bl sub_8015A08
 	bl sub_8015C1C
@@ -1063,7 +1063,7 @@ sub_8015A08:
 	push {r5-r7}
 	sub sp, 0x24
 	movs r0, 0
-	bl sub_8008C54
+	bl CallPrepareTextbox_8008C54
 	movs r0, 0
 	bl sub_80073B8
 	ldr r3, _08015A68
@@ -1325,7 +1325,7 @@ sub_8015C1C:
 	push {r4,r5,lr}
 	sub sp, 0x54
 	movs r0, 0x1
-	bl sub_8008C54
+	bl CallPrepareTextbox_8008C54
 	movs r0, 0x1
 	bl sub_80073B8
 	ldr r0, _08015C74

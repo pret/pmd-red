@@ -91,7 +91,7 @@ void sub_801416C(s32 param_1,s32 param_2)
     gUnknown_202E73C = (param_2 < 0 ) ? 0 : param_2;
 }
 
-void sub_80141B4(const u8 *text, u32 param_2, OpenedFile **file, u16 param_4)
+void xxx_info_box_80141B4(const u8 *text, u32 param_2, OpenedFile **file, u16 param_4)
 {
     sub_8014248(text, param_2, -1, NULL, NULL, 3, 0, file, param_4);
 }

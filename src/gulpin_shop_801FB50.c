@@ -85,7 +85,7 @@ bool8 sub_801FB50(u32 mode)
     OpenedFile *faceFile;
 
     ResetUnusedInputStruct();
-    sub_800641C(NULL, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
     gUnknown_203B27C = MemoryAlloc(sizeof(unkStruct_203B27C), 0x8);
     gUnknown_203B27C->menuAction2 = 0;
     gUnknown_203B27C->menuAction3 = 0;
@@ -201,7 +201,7 @@ static void sub_801FDC0(void)
 {
     s32 index;
 
-    sub_8006518(gUnknown_203B27C->unk180);
+    RestoreUnkTextStruct_8006518(gUnknown_203B27C->unk180);
 
     switch (gUnknown_203B27C->state) {
         case 0x2:
@@ -210,21 +210,21 @@ static void sub_801FDC0(void)
             gUnknown_203B27C->unk180[2].unk0 = 0x80;
             gUnknown_203B27C->unk180[3] = gUnknown_80DC37C;
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B27C->unk180, TRUE, FALSE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B27C->unk180, TRUE, FALSE);
             break;
         case 0x11:
             sub_80205D0();
             gUnknown_203B27C->unk180[2] = gUnknown_80DC334;
             sub_8012CAC(&gUnknown_203B27C->unk180[2], gUnknown_203B27C->unk7C);
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B27C->unk180, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B27C->unk180, TRUE, TRUE);
             break;
         case 0x17:
             sub_802069C();
             gUnknown_203B27C->unk180[2] = gUnknown_80DC334;
             sub_8012CAC(&gUnknown_203B27C->unk180[2], gUnknown_203B27C->unk7C);
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B27C->unk180, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B27C->unk180, TRUE, TRUE);
             break;
         case 0x20:
             CreateGulpinLinkMenu();
@@ -232,14 +232,14 @@ static void sub_801FDC0(void)
             gUnknown_203B27C->unk180[2] = gUnknown_80DC34C;
             sub_8012CAC(&gUnknown_203B27C->unk180[2], gUnknown_203B27C->unk7C);
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B27C->unk180, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B27C->unk180, TRUE, TRUE);
             break;
         default:
             for (index = 0; index < 4; index++)
                 gUnknown_203B27C->unk180[index] = gUnknown_80DC31C;
 
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B27C->unk180, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B27C->unk180, TRUE, TRUE);
             break;
     }
 }
@@ -266,19 +266,19 @@ static void sub_801FF28(void)
             break;
         case 3:
             gUnknown_203B27C->fallbackState = 0x1f;
-            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_02],0,gUnknown_203B27C->unk17C,0x10d);
+            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_02],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 4:
             gUnknown_203B27C->fallbackState = 0x1f;
-            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_03],0,gUnknown_203B27C->unk17C,0x10d);
+            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_03],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 5:
             gUnknown_203B27C->fallbackState = 0x1f;
-            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_04],0,gUnknown_203B27C->unk17C,0x10d);
+            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_04],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 6:
             gUnknown_203B27C->fallbackState = 0x1f;
-            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_05],0,gUnknown_203B27C->unk17C,0x10d);
+            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_05],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 7:
             sub_8020900();
@@ -294,23 +294,23 @@ static void sub_801FF28(void)
             break;
         case 9:
             gUnknown_203B27C->fallbackState = 1;
-            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_22],0,gUnknown_203B27C->unk17C,0x10d);
+            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_22],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 10:
             gUnknown_203B27C->fallbackState = 1;
-            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_23],0,gUnknown_203B27C->unk17C,0x10d);
+            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_23],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 0xb:
             gUnknown_203B27C->fallbackState = 1;
-            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_24],0,gUnknown_203B27C->unk17C,0x10d);
+            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_24],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 0xc:
             gUnknown_203B27C->fallbackState = 0xd;
-            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_07],0,gUnknown_203B27C->unk17C,0x10d);
+            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_07],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 0xe:
             gUnknown_203B27C->fallbackState = 0xf;
-            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_08],0,gUnknown_203B27C->unk17C,0x10d);
+            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_08],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 0xf:
             sub_8023868(2,0,0,10);
@@ -330,7 +330,7 @@ static void sub_801FF28(void)
             break;
         case 0x14:
             gUnknown_203B27C->fallbackState = 0x15;
-            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_09],0,gUnknown_203B27C->unk17C,0x10d);
+            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_09],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 0x15:
             sub_801F428(gUnknown_203B27C->speciesNum,0);
@@ -354,17 +354,17 @@ static void sub_801FF28(void)
             sub_8094060(gUnknown_203B27C->moves,gUnknown_203B27C->pokeStruct->moves);
             gUnknown_203B27C->fallbackState = 0x10;
             sub_8092C84(gAvailablePokemonNames,gUnknown_203B27C->unk1E);
-            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_10],0,gUnknown_203B27C->unk17C,0x10d);
+            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_10],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 0x1a:
             sub_8094060(gUnknown_203B27C->moves,gUnknown_203B27C->pokeStruct->moves);
             gUnknown_203B27C->fallbackState = 0x10;
             if (gUnknown_203B27C->isNextMoveLinked) {
-                sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_14],0,gUnknown_203B27C->unk17C,0x10d);
+                xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_14],0,gUnknown_203B27C->unk17C,0x10d);
             }
             else
         {
-                sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_13],0,gUnknown_203B27C->unk17C,0x10d);
+                xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_13],0,gUnknown_203B27C->unk17C,0x10d);
             }
             break;
         case 0x1d:
@@ -377,11 +377,11 @@ static void sub_801FF28(void)
             break;
         case 0x1b:
             gUnknown_203B27C->fallbackState = 0x10;
-            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_15],0,gUnknown_203B27C->unk17C,0x10d);
+            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_15],0,gUnknown_203B27C->unk17C,0x10d);
             break;
         case 0x1c:
             gUnknown_203B27C->fallbackState = 0x10;
-            sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_16],0,gUnknown_203B27C->unk17C,0x10d);
+            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_16],0,gUnknown_203B27C->unk17C,0x10d);
             break;
 
         case 0x1e:
@@ -416,11 +416,11 @@ static void sub_801FF28(void)
             sub_8092C84(gUnknown_202DFE8,gUnknown_203B27C->unk20);
             if (gUnknown_203B27C->isNextMoveLinked) 
             {
-                sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_20],0,gUnknown_203B27C->unk17C,0x10d);
+                xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_20],0,gUnknown_203B27C->unk17C,0x10d);
             }
             else
         {
-                sub_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_19],0,gUnknown_203B27C->unk17C,0x10d);
+                xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_19],0,gUnknown_203B27C->unk17C,0x10d);
             }
             break;
     }

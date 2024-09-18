@@ -29,7 +29,7 @@ sub_8010F28:
 	mov r8, r1
 	ldr r4, _0801108C
 	adds r0, r4
-	bl sub_80054BC
+	bl RunAxAnimationFrame
 	ldr r3, [r6]
 	adds r4, r3, r4
 	ldr r7, _08011090
@@ -74,7 +74,7 @@ _08010F98:
 	beq _08010FD8
 	adds r4, 0x14
 	adds r0, r4, 0
-	bl sub_80054BC
+	bl RunAxAnimationFrame
 	movs r2, 0x4
 	ldrsh r1, [r5, r2]
 	mov r3, r9
@@ -114,7 +114,7 @@ _08010FEC:
 	cmp r0, 0
 	beq _08011062
 	adds r0, r1, r6
-	bl sub_80054BC
+	bl RunAxAnimationFrame
 	ldr r0, _080110A8
 	ldrh r0, [r0]
 	movs r2, 0x80
@@ -278,9 +278,9 @@ _080110F2:
 _08011150: .4byte gUnknown_203B0E4
 _08011154: .4byte 0x00004dd6
 _08011158: .4byte 0x00004dd4
-_0801115C: .4byte gUnknown_202C038
+_0801115C: .4byte gFontTiles_202C038
 _08011160: .4byte 0x00002014
-_08011164: .4byte gUnknown_202C838
+_08011164: .4byte gFontTilesExtra_202C838
 	thumb_func_end sub_80110B0
 
 	thumb_func_start sub_8011168
@@ -289,7 +289,7 @@ sub_8011168:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	ldr r3, _080111B0
 	ldr r1, [r3]
 	ldr r2, _080111B4
@@ -557,7 +557,7 @@ _0801132E:
 	movs r3, 0x1
 	str r3, [sp, 0x8]
 	movs r3, 0
-	bl sub_80053AC
+	bl AxResInitFile
 _08011370:
 	adds r6, 0x3C
 	adds r5, 0x3C
@@ -636,7 +636,7 @@ _08011406:
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	movs r0, 0
 	bl sub_80073B8
 	ldr r1, _0801147C
@@ -825,7 +825,7 @@ _0801152A:
 	add r0, sp, 0x4
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	ldr r1, [r5]
 	ldr r2, _08011628
 	adds r0, r1, r2
@@ -888,7 +888,7 @@ _08011628: .4byte 0x00004ddc
 _0801162C: .4byte 0x00004de0
 _08011630: .4byte gUnknown_80D4104
 _08011634: .4byte gFormatData_202DE30
-_08011638: .4byte gUnknown_202DE58
+_08011638: .4byte gFormatItems
 _0801163C: .4byte gUnknown_80D4120
 _08011640:
 	ldr r1, _08011690

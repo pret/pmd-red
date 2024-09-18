@@ -37,7 +37,7 @@ u8 sub_80923D4(s32 target);
 void sub_8092404(u8, u16 *, bool8, bool8);
 void sub_809249C(u8 friendArea, bool8 clear);
 void sub_8092558(u8 *buffer, u8 index);
-void sub_8092578(u8 *buffer, u8 index, bool8 printPrice);
+void WriteFriendAreaName(u8 *buffer, u8 index, bool8 printPrice);
 void sub_8092638(u8 friendArea, unkStruct_8092638 *, bool8 checkLeader, bool8 checkDungeon);
 void sub_80926F8(u8, unkStruct_8092638 *, u8);
 

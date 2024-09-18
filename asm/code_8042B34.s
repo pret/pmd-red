@@ -715,7 +715,7 @@ _0804300C:
 	movs r0, 0
 	bl sub_800DAC0
 	movs r0, 0x1
-	bl xxx_update_some_bg_tiles
+	bl UpdateFadeInTile
 	bl sub_803DF60
 	bl sub_803E02C
 	bl sub_8042E98
@@ -767,7 +767,7 @@ _080430D8:
 	b _0804315E
 	.align 2, 0
 _0804310C: .4byte gUnknown_203B40C
-_08043110: .4byte gUnknown_203B41C
+_08043110: .4byte gSerializedData_203B41C
 _08043114: .4byte gDungeon
 _08043118: .4byte 0x0001cedb
 _0804311C: .4byte gUnknown_203B410
@@ -995,7 +995,7 @@ _08043318:
 	strb r5, [r0]
 	cmp r6, 0
 	bne _08043346
-	bl sub_80840A4
+	bl YetAnotherRandom24
 	ldr r1, [r4]
 	movs r3, 0xD0
 	lsls r3, 3
@@ -1184,7 +1184,7 @@ _08043390:
 	bl sub_80842F0
 _080434A6:
 	bl sub_803D8F0
-	bl sub_8068658
+	bl LoadDungeonPokemonSprites
 	cmp r6, 0
 	bne _08043514
 	bl sub_80687AC
@@ -1706,7 +1706,7 @@ _0804398C: .4byte gPtrClientFaintedMessage
 _08043990: .4byte 0x00000222
 _08043994: .4byte gDungeonNameBannerPalette
 _08043998: .4byte gUnknown_203B40C
-_0804399C: .4byte gUnknown_203B41C
+_0804399C: .4byte gSerializedData_203B41C
 _080439A0:
 	movs r0, 0x2
 	bl sub_8046F84
@@ -1999,7 +1999,7 @@ _08043BFC:
 	str r0, [r1]
 	b _08043C32
 	.align 2, 0
-_08043C20: .4byte gUnknown_203B41C
+_08043C20: .4byte gSerializedData_203B41C
 _08043C24: .4byte 0x00000644
 _08043C28:
 	movs r0, 0x2
@@ -2083,7 +2083,7 @@ _08043CAC:
 	bx r0
 	.align 2, 0
 _08043CD0: .4byte gDungeon
-_08043CD4: .4byte gUnknown_203B41C
+_08043CD4: .4byte gSerializedData_203B41C
 	thumb_func_end xxx_dungeon_8042F6C
 
 	thumb_func_start sub_8043CD8

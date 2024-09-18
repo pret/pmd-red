@@ -3,18 +3,18 @@
 #include "ground_map_1.h"
 #include "ground_script.h"
 
-s32 sub_8001658(ScriptUnion832*, s32);
+s32 GetScriptVarValue(ScriptUnion832*, s32);
 u8 FlagJudge(s32 r0, s32 r1, u32 operation);
 
-extern u8 gUnknown_2039A36;
-extern u8 gUnknown_2039A38[];
-extern u32 gUnknown_2039B48[];
-extern u8 gUnknown_2039AC0[];
+extern u8 gAnyScriptLocked;
+extern u8 gScriptLocks[];
+extern u32 gUnlockBranchLabels[];
+extern u8 gScriptLockConds[];
 extern u8 gUnknown_8116848[];
 
-s32 sub_80A8B1C(s16);
-s32 sub_80AC320(s16);
-s32 sub_80AD238(s16);
+s32 GroundLivesNotifyAll(s16);
+s32 GroundObjectsNotifyAll(s16);
+s32 GroundEffectsNotifyAll(s16);
 
 // TODO: this is still WIP
 
@@ -24,41 +24,41 @@ s32 sub_80AD238(s16);
 //     u8 temp;
 //     s16 temp_s16;
 // 
-//     if(gUnknown_2039A36 != 0)
+//     if(gAnyScriptLocked != 0)
 //     {
-//         gUnknown_2039A36 = 0;
+//         gAnyScriptLocked = 0;
 //         for(index = 0; index < 0x81; index++)
 //         {
-//             if(gUnknown_2039A38[index] != 0)
+//             if(gScriptLocks[index] != 0)
 //             {
 //                 Log(1, gUnknown_8116848, index);
-//                 temp = sub_80A4D2C(index);
-//                 temp |= sub_80A8B1C(index);
-//                 temp |= sub_80AC320(index);
-//                 temp |= sub_80AD238(index);
+//                 temp = GroundMapNotifyAll(index);
+//                 temp |= GroundLivesNotifyAll(index);
+//                 temp |= GroundObjectsNotifyAll(index);
+//                 temp |= GroundEffectsNotifyAll(index);
 // 
-//                 if(gUnknown_2039AC0[index] != 0)
+//                 if(gScriptLockConds[index] != 0)
 //                 {
 //                    if (temp != 0)
 //                    {
 //                         temp_s16 = index;
 //                         temp_s16 |= 0x80;
-//                         sub_80A4D2C(temp_s16);
-//                         sub_80A8B1C(temp_s16);
-//                         sub_80AC320(temp_s16);
-//                         sub_80AD238(temp_s16);
-//                         gUnknown_2039AC0[index] = 0;
+//                         GroundMapNotifyAll(temp_s16);
+//                         GroundLivesNotifyAll(temp_s16);
+//                         GroundObjectsNotifyAll(temp_s16);
+//                         GroundEffectsNotifyAll(temp_s16);
+//                         gScriptLockConds[index] = 0;
 //                    }
 //                 }
 //                 else {
-//                    gUnknown_2039A38[index] = 0;
+//                    gScriptLocks[index] = 0;
 //                 }
 //             }
 //         }
 //     }
 // }
 
-ScriptCommand *sub_80A242C(Action *action, s32 r1)
+ScriptCommand *FindLabel(Action *action, s32 r1)
 {
     ScriptCommand script;
     ScriptCommand *scriptPtr2;
@@ -79,7 +79,7 @@ ScriptCommand *sub_80A242C(Action *action, s32 r1)
     }
 }
 
-ScriptCommand *sub_80A2460(Action *action, s32 r1)
+ScriptCommand *ResolveJump(Action *action, s32 r1)
 {
     ScriptCommand script;
     ScriptCommand *scriptPtr;
@@ -93,18 +93,18 @@ ScriptCommand *sub_80A2460(Action *action, s32 r1)
         if (script.op == 0xCC)
         {
             if(FlagJudge(r1, script.arg1, 0x2))
-                return sub_80A242C(action, script.argShort);
+                return FindLabel(action, script.argShort);
         }
         else if (script.op == 0xCD)
         {
             if(FlagJudge(r1, script.arg1, script.argByte))
-                return sub_80A242C(action, script.argShort);
+                return FindLabel(action, script.argShort);
         }
         else if (script.op == 0xCE)
         {
-            temp = sub_8001658(action->scriptData.unk50, (s16)script.arg1);
+            temp = GetScriptVarValue(action->scriptData.unk50, (s16)script.arg1);
             if(FlagJudge(r1, temp, script.argByte))
-                return sub_80A242C(action, script.argShort);
+                return FindLabel(action, script.argShort);
         }
         else
         {

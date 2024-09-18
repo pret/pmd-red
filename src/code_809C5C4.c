@@ -51,8 +51,8 @@ void nullsub_116();
 
 // Event_flag.h
 u8 sub_8002658(s16);
-s16 sub_8001658(u32, u32);
-extern void sub_80015C0(u32, u32);
+s16 GetScriptVarValue(u32, u32);
+extern void ClearScriptVarArray(u32, u32);
 
 void sub_809C5C4(void)
 {
@@ -276,7 +276,7 @@ void sub_809C770(s16 param_1, s16 param_2)
                     break;
                 case 0:
                 default:
-                    iVar5 = sub_8001658(0,0x13);
+                    iVar5 = GetScriptVarValue(0,0x13);
                     break;
 
             }
@@ -417,11 +417,11 @@ void sub_809CB74(void) {
 
 
 void sub_809CB8C(void) {
-    sub_80015C0(0, 0x3B);
-    sub_80015C0(0, 0x3D);
+    ClearScriptVarArray(0, 0x3B);
+    ClearScriptVarArray(0, 0x3D);
 }
 
-bool8 sub_809CBA4(u8 item)
+bool8 HasItemInInventory(u8 item)
 {
     if(FindItemInInventory(item) >= 0)
         return TRUE;

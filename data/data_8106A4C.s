@@ -72,43 +72,43 @@ gUnknown_8106B8C: @ 8106B8C
 .byte 0x68, 0x00, 0x18, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00
 
-	.global gUnknown_8106BB0
-gUnknown_8106BB0: @ 8106BB0
+	.global gTeamFormat
+gTeamFormat: @ 8106BB0
         .string "$t\0"
         .align 2,0
 
 @ Red Heart Symbols
-	.global gUnknown_8106BB4
-gUnknown_8106BB4: @ 8106BB4
+	.global gHeartRedTiny
+gHeartRedTiny: @ 8106BB4
         .byte 0x87, 0x46, 0x00, 0x00
 
-	.global gUnknown_8106BB8
-gUnknown_8106BB8: @ 8106BB8
+	.global gHeartRedSmall
+gHeartRedSmall: @ 8106BB8
         .byte 0x87, 0x47, 0x00, 0x00
 
-	.global gUnknown_8106BBC
-gUnknown_8106BBC: @ 8106BBC
+	.global gHeartRedMedium
+gHeartRedMedium: @ 8106BBC
         .byte 0x87, 0x48, 0x00, 0x00
 
-	.global gUnknown_8106BC0
-gUnknown_8106BC0: @ 8106BC0
+	.global gHeartRedLarge
+gHeartRedLarge: @ 8106BC0
         .byte 0x87, 0x49, 0x00, 0x00
 
 @ Yellow Heart Symbols
-	.global gUnknown_8106BC4
-gUnknown_8106BC4: @ 8106BC4
+	.global gHeartYellowTiny
+gHeartYellowTiny: @ 8106BC4
         .byte 0x87, 0x4A, 0x00, 0x00
 
-	.global gUnknown_8106BC8
-gUnknown_8106BC8: @ 8106BC8
+	.global gHeartYellowSmall
+gHeartYellowSmall: @ 8106BC8
         .byte 0x87, 0x4B, 0x00, 0x00
 
-	.global gUnknown_8106BCC
-gUnknown_8106BCC: @ 8106BCC
+	.global gHeartYellowMedium
+gHeartYellowMedium: @ 8106BCC
         .byte 0x87, 0x4C, 0x00, 0x00
 
-	.global gUnknown_8106BD0
-gUnknown_8106BD0: @ 8106BD0
+	.global gHeartYellowLarge
+gHeartYellowLarge: @ 8106BD0
         .byte 0x87, 0x4D, 0x00, 0x00
 
 	.global gUnknown_8106BD4

@@ -29,7 +29,7 @@ struct unkStruct_80F520C
 extern struct unkStruct_80F520C gUnknown_80F520C[];
 
 extern u8 gAvailablePokemonNames[];
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 extern u8 gUnknown_80F51E4[];
 extern u8 *gUnknown_80FCC7C[];
 extern u8 *gUnknown_80FCCAC[];
@@ -193,7 +193,7 @@ _0806A068:
         iVar6->isColorChanged = TRUE;
         SetMessageArgument(gAvailablePokemonNames,target,0);
         __src = GetUnformattedTypeString(iVar6->types[0]);
-        strcpy(gUnknown_202DE58,__src);
+        strcpy(gFormatItems,__src);
         sub_80522F4(pokemon,target,*gUnknown_80FCCAC);
         sub_8042968(target);
       }
@@ -218,7 +218,7 @@ void sub_806A120(Entity * pokemon, Entity * target, Move* move)
       sub_8041BBC(target);
       SetMessageArgument(gAvailablePokemonNames,target,0);
       typeString = GetUnformattedTypeString(uVar2_u32);
-      strcpy(gUnknown_202DE58,typeString);
+      strcpy(gFormatItems,typeString);
       sub_80522F4(pokemon,target,*gUnknown_80FDCC8);
     }
   }

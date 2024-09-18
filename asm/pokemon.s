@@ -391,8 +391,8 @@ _0808D478:
 	bx r1
 	thumb_func_end sub_808D434
 
-	thumb_func_start sub_808D480
-sub_808D480:
+	thumb_func_start GetFriendSum_808D480
+GetFriendSum_808D480:
 	push {r4,r5,lr}
 	ldr r0, _0808D4A8
 	ldr r2, [r0]
@@ -418,7 +418,7 @@ _0808D498:
 	.align 2, 0
 _0808D4A8: .4byte gRecruitedPokemonRef
 _0808D4AC: .4byte 0x0000019d
-	thumb_func_end sub_808D480
+	thumb_func_end GetFriendSum_808D480
 
 	thumb_func_start sub_808D4B0
 sub_808D4B0:
@@ -504,8 +504,8 @@ _0808D53C: .4byte gRecruitedPokemonRef
 _0808D540: .4byte 0x0000fffd
 	thumb_func_end sub_808D500
 
-	thumb_func_start sub_808D544
-sub_808D544:
+	thumb_func_start GetUnitSum_808D544
+GetUnitSum_808D544:
 	push {r4-r7,lr}
 	adds r4, r0, 0
 	ldr r0, _0808D57C
@@ -539,7 +539,7 @@ _0808D56C:
 	bx r1
 	.align 2, 0
 _0808D57C: .4byte gRecruitedPokemonRef
-	thumb_func_end sub_808D544
+	thumb_func_end GetUnitSum_808D544
 
 	thumb_func_start sub_808D580
 sub_808D580:

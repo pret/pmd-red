@@ -38,7 +38,7 @@ bool8 sub_802BD14(s32 a0, UnkTextStruct2_sub *a1, u32 a2)
 
     sUnknown_203B2D8->unk4.s0.unk34 = a0;
     sUnknown_203B2D8->unk4.s0.unk38 = &sUnknown_203B2D8->unk4.s0.unk3C[a0];
-    sub_8006518(sUnknown_203B2D8->unk4.s0.unk3C);
+    RestoreUnkTextStruct_8006518(sUnknown_203B2D8->unk4.s0.unk3C);
     sUnknown_203B2D8->unk4.s0.unk3C[sUnknown_203B2D8->unk4.s0.unk34] = sUnknown_80DFC74;
     sUnknown_203B2D8->unk4.s0.unk38->unk14 = &sUnknown_203B2D8->unk4.unk9C;
 
@@ -47,7 +47,7 @@ bool8 sub_802BD14(s32 a0, UnkTextStruct2_sub *a1, u32 a2)
 
     sub_8012D34(sUnknown_203B2D8->unk4.s0.unk38, a2);
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B2D8->unk4.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B2D8->unk4.s0.unk3C, TRUE, TRUE);
     sub_8013848(&sUnknown_203B2D8->unk4.s0.input, CountEmptyMailSlots(), a2, a0);
     sUnknown_203B2D8->unk4.s0.input.menuIndex = sUnknown_203B2DC;
     sub_8013984(&sUnknown_203B2D8->unk4.s0.input);
@@ -91,7 +91,7 @@ u8 sub_802BE74(void)
 void sub_802BE94(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B2D8->unk4.s0.unk3C, FALSE, FALSE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B2D8->unk4.s0.unk3C, FALSE, FALSE);
 
     sUnknown_203B2D8->unk4.s0.input.unk22 = CountEmptyMailSlots();
     sub_8013984(&sUnknown_203B2D8->unk4.s0.input);
@@ -108,7 +108,7 @@ void sub_802BEDC(void)
         sUnknown_203B2DC = sUnknown_203B2D8->unk4.s0.input.menuIndex;
         sUnknown_203B2D8->unk4.s0.unk3C[sUnknown_203B2D8->unk4.s0.unk34] = sUnknown_80DFC5C;
         ResetUnusedInputStruct();
-        sub_800641C(sUnknown_203B2D8->unk4.s0.unk3C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(sUnknown_203B2D8->unk4.s0.unk3C, TRUE, TRUE);
         MemoryFree(sUnknown_203B2D8);
         sUnknown_203B2D8 = NULL;
     }
@@ -131,7 +131,7 @@ void CreateMailMenu(void)
     unkStruct_802C39C local;
     u8 buffer[128];
 
-    sub_8008C54(sUnknown_203B2D8->unk4.s0.unk34);
+    CallPrepareTextbox_8008C54(sUnknown_203B2D8->unk4.s0.unk34);
     sub_80073B8(sUnknown_203B2D8->unk4.s0.unk34);
     PrintStringOnWindow((sUnknown_203B2D8->unk4.s0.input.unk1E * 8) + 10, 0, sMailbox, sUnknown_203B2D8->unk4.s0.unk34, 0);
 

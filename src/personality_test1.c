@@ -287,7 +287,7 @@ static void RevealStarter(void)
     s32 temp;
 
     if (sub_80144A4(&temp) == 0) {
-        sub_80141B4(gStarterReveal, 0, 0, 0x101);
+        xxx_info_box_80141B4(gStarterReveal, 0, 0, 0x101);
         PersonalityTest_DisplayStarterSprite();
         sPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_PARTNER_SELECTION_1;
     }
@@ -303,7 +303,7 @@ static void AdvanceToPickPartnerPrompt(void)
 
 static void PromptPickPartner(void)
 {
-    sub_80141B4(gPartnerPrompt, 0, 0, 0x301);
+    xxx_info_box_80141B4(gPartnerPrompt, 0, 0, 0x301);
     sPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_PARTNER_SELECTION_3;
 }
 
@@ -331,7 +331,7 @@ static void PromptForPartnerNickname(void)
         if (selectedPartner != 0xFFFE) {
             sub_803CE6C();
             sPersonalityTestTracker->PartnerID = selectedPartner;
-            sub_80141B4(gPartnerNickPrompt, 0, 0, 0x301);
+            xxx_info_box_80141B4(gPartnerNickPrompt, 0, 0, 0x301);
             sPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_PARTNER_NICKNAME_2;
         }
     }
@@ -356,7 +356,7 @@ static void PrintEndIntroText(void)
 {
     if (sub_8016080()) {
         CleanConfirmNameMenu();
-        sub_80141B4(gEndIntroText, 0, 0, 0x301);
+        xxx_info_box_80141B4(gEndIntroText, 0, 0, 0x301);
         sPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_TEST_END;
     }
 }
@@ -380,7 +380,7 @@ static void PromptNewQuestion(void)
 static void PrintPersonalityTypeDescription(void)
 {
     CopyMonsterNametoBuffer(gAvailablePokemonNames, sPersonalityTestTracker->StarterID);
-    sub_80141B4(sPersonalityTypeDescriptionTable[sPersonalityTestTracker->playerNature], 0, 0, 0x101);
+    xxx_info_box_80141B4(sPersonalityTypeDescriptionTable[sPersonalityTestTracker->playerNature], 0, 0, 0x101);
 }
 
 static void PersonalityTest_DisplayStarterSprite(void)
@@ -393,11 +393,11 @@ static void PersonalityTest_DisplayStarterSprite(void)
     UnkTextStruct2 stackArray[4];
 
     starterID = sPersonalityTestTracker->StarterID;
-    sub_8006518(stackArray);
+    RestoreUnkTextStruct_8006518(stackArray);
     stackArray[1] = sUnknown_80F4244;
     ResetUnusedInputStruct();
-    sub_800641C(stackArray, TRUE, FALSE);
-    sub_8008C54(1);
+    xxx_call_save_unk_text_struct_800641C(stackArray, TRUE, FALSE);
+    CallPrepareTextbox_8008C54(1);
     sub_80073B8(1);
 
     faceFile = GetDialogueSpriteDataPtr(starterID);

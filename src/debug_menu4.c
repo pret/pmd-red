@@ -83,7 +83,7 @@ static void sub_803ACE8(void)
 {
     s32 i;
 
-    sub_8006518(sUnknown_203B3F8->unkE0);
+    RestoreUnkTextStruct_8006518(sUnknown_203B3F8->unkE0);
 
     switch (sUnknown_203B3F8->state) {
         case 3:
@@ -101,7 +101,7 @@ static void sub_803ACE8(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B3F8->unkE0, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B3F8->unkE0, TRUE, TRUE);
 }
 
 static void sub_803AD88(void)
@@ -142,7 +142,7 @@ static void sub_803AD88(void)
 
 static void sub_803AE58(void)
 {
-    sub_8008C54(sUnknown_203B3F8->unk60.unk14);
+    CallPrepareTextbox_8008C54(sUnknown_203B3F8->unk60.unk14);
     sub_80073B8(sUnknown_203B3F8->unk60.unk14);
     PrintStringOnWindow(4, 0, sNumberPrompt, sUnknown_203B3F8->unk60.unk14, 0);
     sub_8013C68(&sUnknown_203B3F8->unk60);

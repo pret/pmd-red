@@ -602,8 +602,8 @@ _08002BAE:
 	bx r1
 	thumb_func_end sub_8002B5C
 
-	thumb_func_start sub_8002BB8
-sub_8002BB8:
+	thumb_func_start SetVecFromDirectionSpeed
+SetVecFromDirectionSpeed:
 	push {r4,r5,lr}
 	lsls r1, 24
 	asrs r1, 21
@@ -621,11 +621,11 @@ sub_8002BB8:
 	pop {r2}
 	bx r2
 	.align 2, 0
-_08002BD8: .4byte gUnknown_80B7E3C
-	thumb_func_end sub_8002BB8
+_08002BD8: .4byte gVectorDirections
+	thumb_func_end SetVecFromDirectionSpeed
 
-	thumb_func_start sub_8002BDC
-sub_8002BDC:
+	thumb_func_start VecDirection8Sign
+VecDirection8Sign:
 	push {lr}
 	ldr r1, [r0]
 	cmp r1, 0
@@ -676,10 +676,10 @@ _08002C28:
 _08002C2A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8002BDC
+	thumb_func_end VecDirection8Sign
 
-	thumb_func_start sub_8002C30
-sub_8002C30:
+	thumb_func_start VecDirection4SignYX
+VecDirection4SignYX:
 	push {lr}
 	ldr r1, [r0, 0x4]
 	cmp r1, 0
@@ -708,10 +708,10 @@ _08002C58:
 _08002C5A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8002C30
+	thumb_func_end VecDirection4SignYX
 
-	thumb_func_start sub_8002C60
-sub_8002C60:
+	thumb_func_start VecDirection8Radial
+VecDirection8Radial:
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r0, [r4]
@@ -797,10 +797,10 @@ _08002CE8:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8002C60
+	thumb_func_end VecDirection8Radial
 
-	thumb_func_start sub_8002CF0
-sub_8002CF0:
+	thumb_func_start VecDirection4Radial
+VecDirection4Radial:
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r3, [r4]
@@ -862,10 +862,10 @@ _08002D4C:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8002CF0
+	thumb_func_end VecDirection4Radial
 
-	thumb_func_start sub_8002D54
-sub_8002D54:
+	thumb_func_start SizedDeltaDirection4
+SizedDeltaDirection4:
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r4, r1, 0
@@ -941,17 +941,17 @@ _08002DD8:
 	str r0, [sp, 0x4]
 _08002DDC:
 	mov r0, sp
-	bl sub_8002CF0
+	bl VecDirection4Radial
 	lsls r0, 24
 	asrs r0, 24
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8002D54
+	thumb_func_end SizedDeltaDirection4
 
-	thumb_func_start sub_8002DF0
-sub_8002DF0:
+	thumb_func_start SizedDeltaDirection8
+SizedDeltaDirection8:
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r4, r1, 0
@@ -1027,13 +1027,13 @@ _08002E74:
 	str r0, [sp, 0x4]
 _08002E78:
 	mov r0, sp
-	bl sub_8002C60
+	bl VecDirection8Radial
 	lsls r0, 24
 	asrs r0, 24
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8002DF0
+	thumb_func_end SizedDeltaDirection8
 
 	.align 2, 0 @ Don't pad with nop.

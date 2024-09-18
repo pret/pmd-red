@@ -648,7 +648,7 @@ _08068E1C:
 	ldr r0, _08068E78
 	mov r1, r8
 	movs r2, 0
-	bl sub_8092578
+	bl WriteFriendAreaName
 	ldr r0, _08068E7C
 	ldr r1, [r0]
 	movs r0, 0
@@ -690,7 +690,7 @@ _08068E52:
 	movs r0, 0x1
 	b _08068E82
 	.align 2, 0
-_08068E78: .4byte gUnknown_202DE58
+_08068E78: .4byte gFormatItems
 _08068E7C: .4byte gUnknown_80FE1A4
 _08068E80:
 	movs r0, 0

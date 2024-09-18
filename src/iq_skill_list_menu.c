@@ -40,12 +40,12 @@ bool8 CreateIQSkillListMenu(s16 species, u32 index, u32 a2)
     sIQSkillListMenu->numIQSkills = GetNumAvailableIQSkills(sIQSkillListMenu->iqSkills, sIQSkillListMenu->pokeStruct->IQ);
     sIQSkillListMenu->s24.s0.unk34 = index;
     sIQSkillListMenu->s24.s0.unk38 = &sIQSkillListMenu->s24.s0.unk3C[index];
-    sub_8006518(sIQSkillListMenu->s24.s0.unk3C);
+    RestoreUnkTextStruct_8006518(sIQSkillListMenu->s24.s0.unk3C);
     sIQSkillListMenu->s24.s0.unk3C[sIQSkillListMenu->s24.s0.unk34] = sUnknown_80DBDF0;
     sIQSkillListMenu->s24.s0.unk38->unk14 = &sIQSkillListMenu->s24.unk9C;
     sub_8012D08(sIQSkillListMenu->s24.s0.unk38, a2);
     ResetUnusedInputStruct();
-    sub_800641C(sIQSkillListMenu->s24.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sIQSkillListMenu->s24.s0.unk3C, TRUE, TRUE);
     sub_8013818(&sIQSkillListMenu->s24.s0.input, sIQSkillListMenu->numIQSkills, a2, index);
     sub_801C440();
     BuildIQSkillList();
@@ -87,7 +87,7 @@ s32 GetIQSkillSelection(void)
 void RedrawIQSkillListMenu(bool8 addCursor)
 {
     ResetUnusedInputStruct();
-    sub_800641C(sIQSkillListMenu->s24.s0.unk3C, FALSE, FALSE);
+    xxx_call_save_unk_text_struct_800641C(sIQSkillListMenu->s24.s0.unk3C, FALSE, FALSE);
     sIQSkillListMenu->s24.s0.input.unk22 = sIQSkillListMenu->numIQSkills;
     sub_8013984(&sIQSkillListMenu->s24.s0.input);
     sub_801C440();
@@ -102,7 +102,7 @@ void CleanIQSkillListMenu(void)
     if (sIQSkillListMenu != NULL) {
         sIQSkillListMenu->s24.s0.unk3C[sIQSkillListMenu->s24.s0.unk34] = sUnknown_80DBDD8;
         ResetUnusedInputStruct();
-        sub_800641C(sIQSkillListMenu->s24.s0.unk3C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(sIQSkillListMenu->s24.s0.unk3C, TRUE, TRUE);
         MemoryFree(sIQSkillListMenu);
         sIQSkillListMenu = NULL;
     }
@@ -115,7 +115,7 @@ static void sub_801C440(void)
     sIQSkillListMenu->s24.unk9C.f2 = 10;
     sIQSkillListMenu->s24.unk9C.f3 = 0;
     ResetUnusedInputStruct();
-    sub_800641C(sIQSkillListMenu->s24.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sIQSkillListMenu->s24.s0.unk3C, TRUE, TRUE);
     SUB_80095E4_CALL_2(sIQSkillListMenu->s24.s0);
 }
 
@@ -127,7 +127,7 @@ void BuildIQSkillList(void)
     u32 skillIndex;
     s32 counter;
 
-    sub_8008C54(sIQSkillListMenu->s24.s0.unk34);
+    CallPrepareTextbox_8008C54(sIQSkillListMenu->s24.s0.unk34);
     sub_80073B8(sIQSkillListMenu->s24.s0.unk34);
     x = sIQSkillListMenu->s24.s0.input.unk1E * 8;
     x2 = x;

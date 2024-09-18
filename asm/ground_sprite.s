@@ -105,8 +105,8 @@ sub_80A6688:
 	bx r0
 	thumb_func_end sub_80A6688
 
-	thumb_func_start sub_80A66A4
-sub_80A66A4:
+	thumb_func_start SpriteHasPokemonSize_80A66A4
+SpriteHasPokemonSize_80A66A4:
 	push {lr}
 	movs r1, 0
 	adds r0, 0x48
@@ -119,7 +119,7 @@ _080A66B4:
 	adds r0, r1, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A66A4
+	thumb_func_end SpriteHasPokemonSize_80A66A4
 
 	thumb_func_start sub_80A66BC
 sub_80A66BC:
@@ -224,8 +224,8 @@ _080A6754:
 	bx r1
 	thumb_func_end sub_80A671C
 
-	thumb_func_start sub_80A675C
-sub_80A675C:
+	thumb_func_start IsOnscreen_80A675C
+IsOnscreen_80A675C:
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r6, r1, 0
@@ -287,7 +287,7 @@ _080A67C2:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A675C
+	thumb_func_end IsOnscreen_80A675C
 
 	thumb_func_start sub_80A67CC
 sub_80A67CC:
@@ -1429,7 +1429,7 @@ _080A7016:
 	str r0, [sp, 0x8]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80053D0
+	bl AxResInit
 _080A7038:
 	add sp, 0xC
 	pop {r4-r7}
@@ -1772,7 +1772,7 @@ sub_80A72B8:
 	movs r0, 0
 	strh r0, [r1]
 	adds r0, r6, 0
-	bl sub_80054BC
+	bl RunAxAnimationFrame
 	b _080A7304
 _080A72D2:
 	adds r5, r6, 0
@@ -1795,7 +1795,7 @@ _080A72EE:
 	adds r0, r7, r1
 	strh r0, [r5]
 	adds r0, r6, 0
-	bl sub_80054BC
+	bl RunAxAnimationFrame
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	cmp r0, 0xFF
@@ -2153,7 +2153,7 @@ _080A758C:
 	add r1, sp, 0x14
 	mov r0, r8
 	adds r2, r5, 0
-	bl sub_808E668
+	bl AddShadowSprite
 _080A75B4:
 	adds r0, r5, 0
 	adds r1, r6, 0
@@ -2207,7 +2207,7 @@ sub_80A75CC:
 	str r0, [sp, 0x4]
 	b _080A762A
 	.align 2, 0
-_080A7618: .4byte gUnknown_8117AE4
+_080A7618: .4byte gGroundObjectKinds
 _080A761C: .4byte 0xffff0000
 _080A7620: .4byte 0x0000ffff
 _080A7624: .4byte gOrnamentFileArchive

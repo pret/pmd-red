@@ -217,13 +217,13 @@ void sub_8092558(u8 *buffer, u8 index)
     sprintfStatic(buffer, sUnknown_81098A4, sFriendAreaNames[index]);
 }
 
-void sub_8092578(u8 *buffer, u8 index, bool8 printPrice)
+void WriteFriendAreaName(u8 *buffer, u8 index, bool8 printPrice)
 {
     // I think this is when we buy the friend area from wigglytuff
     u8 priceBuffer[20];
 
     if (printPrice) {
-        sub_8090FEC(sFriendAreaSettings[index].price, priceBuffer, 1);
+        WriteHighDecimal(sFriendAreaSettings[index].price, priceBuffer, 1);
         sprintfStatic(buffer, sUnknown_81098AC, sFriendAreaNames[index], 96, priceBuffer);
     }
     else

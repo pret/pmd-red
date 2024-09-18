@@ -39,13 +39,13 @@
 
 const s16 gRegularAttackWeights[] = {100, 20, 30, 40, 50};
 
-extern const u8 *const gUnknown_80FE3E8[];
+extern const u8 *const gItemStickyDoesntWorkText[];
 extern const u8 *const gPtrMysteriousPowerPreventedUseMessage[];
 extern const u8 *const gUnknown_80FC6A8[];
 extern const u8 *const gUnknown_80FC714[];
 extern const u8 *const gUnknown_80FC718[];
 
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 extern u8 gAvailablePokemonNames[];
 
 EWRAM_DATA bool8 gCanAttackInDirection[NUM_DIRECTIONS] = {0};
@@ -994,8 +994,8 @@ void HandleUseOrbAction(Entity *pokemon)
     IVar5 = *item;
 
     if (item->flags & ITEM_FLAG_STICKY) {
-        sub_8045BF8(gUnknown_202DE58, item);
-        SendMessage(pokemon, *gUnknown_80FE3E8);
+        sub_8045BF8(gFormatItems, item);
+        SendMessage(pokemon, *gItemStickyDoesntWorkText);
         return;
     }
 

@@ -27,11 +27,11 @@ bool8 sub_8019E40(u32 r0)
     gUnknown_203B214 = MemoryAlloc(sizeof(*gUnknown_203B214), 8);
     gUnknown_203B214->s0.unk34 = r0;
     gUnknown_203B214->s0.unk38 = &gUnknown_203B214->s0.unk3C[gUnknown_203B214->s0.unk34];
-    sub_8006518(gUnknown_203B214->s0.unk3C);
+    RestoreUnkTextStruct_8006518(gUnknown_203B214->s0.unk3C);
     gUnknown_203B214->s0.unk3C[gUnknown_203B214->s0.unk34] = sUnknown_80DB8CC;
     gUnknown_203B214->s0.unk38->unk14 = &gUnknown_203B214->unk9C;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B214->s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B214->s0.unk3C, TRUE, TRUE);
     sub_8013818(&gUnknown_203B214->s0.input, CountKecleonShopItems(), 10, r0);
     gUnknown_203B214->s0.input.menuIndex = gUnknown_203B218;
     sub_8013984(&gUnknown_203B214->s0.input);
@@ -85,7 +85,7 @@ u8 sub_8019FB0(void)
 void sub_8019FCC(bool8 r0)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B214->s0.unk3C, FALSE, FALSE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B214->s0.unk3C, FALSE, FALSE);
     gUnknown_203B214->s0.input.unk22 = CountKecleonShopItems();
     sub_8013984(&gUnknown_203B214->s0.input);
     sub_801A064();
@@ -100,7 +100,7 @@ void sub_801A010(void)
         gUnknown_203B218 = gUnknown_203B214->s0.input.menuIndex;
         gUnknown_203B214->s0.unk3C[gUnknown_203B214->s0.unk34] = sUnknown_80DB8B4;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B214->s0.unk3C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(gUnknown_203B214->s0.unk3C, TRUE, TRUE);
         MemoryFree(gUnknown_203B214);
         gUnknown_203B214 = NULL;
     }
@@ -128,7 +128,7 @@ void sub_801A0D8(void)
     Item item;
     u8 temp_calc;
 
-    sub_8008C54(gUnknown_203B214->s0.unk34);
+    CallPrepareTextbox_8008C54(gUnknown_203B214->s0.unk34);
     sub_80073B8(gUnknown_203B214->s0.unk34);
     PrintStringOnWindow((gUnknown_203B214->s0.input.unk1E * 8) + 10, 0, sGoods, gUnknown_203B214->s0.unk34, 0);
 

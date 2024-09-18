@@ -26,7 +26,7 @@
 #include "text2.h"
 
 
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 extern u8 gUnknown_202DEA8[];
 extern u8 gAvailablePokemonNames[];
 
@@ -150,7 +150,7 @@ void sub_802544C(void)
 {
     s32 i;
 
-    sub_8006518(gUnknown_203B2B4->unk118);
+    RestoreUnkTextStruct_8006518(gUnknown_203B2B4->unk118);
 
     switch (gUnknown_203B2B4->state) {
         case 3:
@@ -174,7 +174,7 @@ void sub_802544C(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2B4->unk118, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B2B4->unk118, TRUE, TRUE);
 }
 
 void sub_8025518(void)
@@ -186,7 +186,7 @@ void sub_8025518(void)
   {
     case 0:
         gUnknown_203B2B4->fallbackState = 1;
-        sub_80141B4(sVisitWhoPrompt,0,0,0x301);
+        xxx_info_box_80141B4(sVisitWhoPrompt,0,0,0x301);
         break;
     case 1:
         uVar3 = 4;
@@ -229,20 +229,20 @@ void sub_8025518(void)
         break;
     case FRIEND_LIST_MENU_STATE_ITEM_GIVEN:
         gUnknown_203B2B4->fallbackState = 2;
-        sub_80141B4(sItemHandedOver,0,0,0x101);
+        xxx_info_box_80141B4(sItemHandedOver,0,0,0x101);
         break;
     case FRIEND_LIST_MENU_STATE_ITEM_EXCHANGE:
         gUnknown_203B2B4->fallbackState = 2;
-        sub_80141B4(sItemExchanged,0,0,0x101);
+        xxx_info_box_80141B4(sItemExchanged,0,0,0x101);
         break;
     case FRIEND_LIST_MENU_STATE_TAKE:
         gUnknown_203B2B4->fallbackState = 2;
-        sub_80141B4(sReturnedToToolbox,0,0,0x101);
+        xxx_info_box_80141B4(sReturnedToToolbox,0,0,0x101);
         break;
     case FRIEND_LIST_MENU_STATE_STANDBY:
         gUnknown_203B2B4->fallbackState = 1;
         PlaySound(0xcf);
-        sub_80141B4(sLeftOnStandby,0,0,0x101);
+        xxx_info_box_80141B4(sLeftOnStandby,0,0,0x101);
         break;
     case FRIEND_LIST_MENU_STATE_MOVES:
         unk_CopyMoves4To8(gUnknown_203B2B4->moves,gUnknown_203B2B4->pokeStruct->moves);
@@ -637,14 +637,14 @@ void sub_8025E68(u32 r0, BulkItem *heldItem)
     Item item;
     struct unkStruct_8090F58 a3;
 
-    sub_8008C54(r0);
+    CallPrepareTextbox_8008C54(r0);
     sub_80073B8(r0);
     HeldItemToSlot(&item, heldItem);
     a3.unk0 = 0;
     a3.unk4 = 0;
     a3.unk8 = 1;
     item.flags = ITEM_FLAG_EXISTS;
-    sub_8090E14(gUnknown_202DE58, &item, &a3);
+    sub_8090E14(gFormatItems, &item, &a3);
     PrintFormatStringOnWindow(4, 3, sItemBuffered, r0, 0);
     sub_80073E0(r0);
 }
