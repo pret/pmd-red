@@ -419,7 +419,7 @@ bool8 FlagJudge(s32 r0, s32 r1, u32 operation)
     return _FlagJudge(r0, r1, operation);
 }
 
-bool8 sub_80022F8(u8 *param_1, s16 param_2, s32 param_3, u32 operation)
+bool8 JudgeVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, u32 operation)
 {
   s32 uVar1;
   
@@ -427,7 +427,7 @@ bool8 sub_80022F8(u8 *param_1, s16 param_2, s32 param_3, u32 operation)
   return _FlagJudge(uVar1,param_3,operation);
 }
 
-bool8 sub_8002318(u8 *param_1, s16 param_2, s16 param_3, u32 operation)
+bool8 JudgeVarWithVar(u8 *param_1, s16 param_2, s16 param_3, u32 operation)
 {
   s32 uVar1;
   s32 uVar2;

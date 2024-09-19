@@ -1499,19 +1499,19 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0xb3: {
-                if ((u8)sub_80022F8(0, curCmd.argShort, curCmd.arg1, 2)) {
+                if ((u8)JudgeVarWithImmediate(0, curCmd.argShort, curCmd.arg1, 2)) {
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;
             }
             case 0xb4: {
-                if ((s8)sub_80022F8(scriptData->localVars.buf, (s16)curCmd.arg1, curCmd.arg2, (u8)curCmd.argByte)) {
+                if ((s8)JudgeVarWithImmediate(scriptData->localVars.buf, (s16)curCmd.arg1, curCmd.arg2, (u8)curCmd.argByte)) {
                     scriptData->script.ptr = FindLabel(action, curCmd.argShort);
                 }
                 break;
             }
             case 0xb5: {
-                if ((s8)sub_8002318(scriptData->localVars.buf, (s16)curCmd.arg1, (s16)curCmd.arg2, (u8)curCmd.argByte)) {
+                if ((s8)JudgeVarWithVar(scriptData->localVars.buf, (s16)curCmd.arg1, (s16)curCmd.arg2, (u8)curCmd.argByte)) {
                     scriptData->script.ptr = FindLabel(action, curCmd.argShort);
                 }
                 break;
