@@ -8,6 +8,8 @@
 #include "random.h"
 #include "dungeon_engine.h"
 #include "dungeon_movement.h"
+#include "dungeon_util.h"
+#include "code_8009804.h"
 
 extern unkStruct_202F190 gUnknown_80F69D4;
 extern unkStruct_202F190 gUnknown_80F69EC;
@@ -86,7 +88,7 @@ void LoadDungeonTilesetAssets(void)
 
   sprintf(fileName,gUnknown_80F6A1C,gUnknown_8108EC0[gDungeon->tileset]); // b%02dcel
   file_1 = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
-  DecompressATFile(gDungeon->unk11884,0x1194,file_1);
+  DecompressATFile((void*)gDungeon->unk11884,0x1194,file_1);
   CloseFile(file_1);
 
   if (gDungeon->tileset < 0x40) {
@@ -336,10 +338,10 @@ void sub_8049B8C(void)
 
 void sub_8049BB0(s32 x, s32 y)
 {
-    s32 terrainFlags;
     s32 i;
-    s32 flags[6];
-    s32 var_4C[8];
+    u32 terrainFlags;
+    u32 flags[6];
+    u32 var_4C[8];
     bool8 var_2C[8];
 
     flags[0] = 0;
@@ -433,3 +435,136 @@ void sub_8049BB0(s32 x, s32 y)
     GetTileSafe(x, y)->walkableNeighborFlags[CROSSABLE_TERRAIN_CREVICE] = flags[CROSSABLE_TERRAIN_CREVICE];
     GetTileSafe(x, y)->walkableNeighborFlags[CROSSABLE_TERRAIN_WALL] = flags[CROSSABLE_TERRAIN_WALL];
 }
+
+extern const s16 gUnknown_80F6A4A[];
+extern const s16 gUnknown_80F6C06[];
+
+extern u16 gUnknown_202B038[4][32][32];
+
+void sub_8049ED4(void)
+{
+    s32 var_58;
+    s32 var_54;
+    s16 *r2;
+    Tile *r5;
+    s32 r7;
+    s32 i;
+    s32 r10;
+    s32 j;
+    s32 x, y;
+    s32 r8;
+    s32 var_48, var_44;
+
+    Dungeon *dungeon = gDungeon;
+    var_58 = dungeon->unk181e8.hallucinating;
+    var_54 = dungeon->unk181e8.unk1820F;
+    x = dungeon->unk181e8.cameraPixelPos.x >> 3;
+    r10 = gUnknown_80F6A4A[30 + x];
+    var_48 = gUnknown_80F6C06[30 + x];
+
+    for (i = 0; i <= 30; i++) {
+
+        y = (dungeon->unk181e8.cameraPixelPos.y >> 3) - 1;
+        x &= 0x1F;
+        r8 = gUnknown_80F6A4A[30 + y];
+        var_44 = gUnknown_80F6C06[30 + y];
+        r7 = r10 + (r8 * 3);
+        r5 = GetTile(var_48, var_44);
+        if (r5->terrainType & TERRAIN_TYPE_UNK_x1000) {
+            r2 = &dungeon->unk12BEC[r7];
+        }
+        else if (r5->terrainType & TERRAIN_TYPE_SHOP) {
+            r2 = &dungeon->unk12BDA[r7];
+        }
+        else if (var_58 != 0) {
+            r2 = &dungeon->unk11884[r5->unk8][r7];
+        }
+        else if (r5->unk4 & 4) {
+            r2 = &dungeon->unk12BFE[r7];
+        }
+        else
+        {
+            Entity *tileObject = r5->object;
+            if (tileObject != NULL) {
+                if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || var_54 != 0)) {
+                    u8 trapType = tileObject->info->flags;
+                    r2 = &dungeon->unk12A18[trapType][r7];
+                }
+                else {
+                    r2 = &dungeon->unk11884[r5->unk8][r7];
+                }
+            }
+            else {
+                if (r5->terrainType & TERRAIN_TYPE_STAIRS) {
+                    r2 = &dungeon->unk12A18[dungeon->unk3A12][r7];
+                }
+                else {
+                    r2 = &dungeon->unk11884[r5->unk8][r7];
+                }
+            }
+        }
+
+
+        for (j = 0; j < 23; j++) {
+            y &= 0x1F;
+
+            gUnknown_202B038[3][y][x] = *r2;
+
+            r2 += 3;
+            y++;
+            r8++;
+            if (r8 == 3)
+            {
+                r8 = 0;
+                var_44++;
+                r7 = r10;
+                r5 = GetTile(var_48, var_44);
+                if (r5->terrainType & TERRAIN_TYPE_SHOP) {
+                    r2 = &dungeon->unk12BDA[r7];
+                }
+                else if (r5->terrainType & TERRAIN_TYPE_UNK_x1000) {
+                    r2 = &dungeon->unk12BEC[r7];
+                }
+                else if (var_58 != 0) {
+                    r2 = &dungeon->unk11884[r5->unk8][r7];
+                }
+                else if (r5->unk4 & 4) {
+                    r2 = &dungeon->unk12BFE[r7];
+                }
+                else
+                {
+                    Entity *tileObject = r5->object;
+                    if (tileObject != NULL) {
+                        if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || var_54 != 0)) {
+                            u8 trapType = tileObject->info->flags;
+                            r2 = &dungeon->unk12A18[trapType][r7];
+                        }
+                        else {
+                            r2 = &dungeon->unk11884[r5->unk8][r7];
+                        }
+                    }
+                    else {
+                        if (r5->terrainType & TERRAIN_TYPE_STAIRS) {
+                            r2 = &dungeon->unk12A18[dungeon->unk3A12][r7];
+                        }
+                        else {
+                            r2 = &dungeon->unk11884[r5->unk8][r7];
+                        }
+                    }
+                }
+
+            }
+        }
+
+        x++;
+        r10++;
+        if (r10 == 3) {
+            r10 = 0;
+            var_48++;
+        }
+    }
+
+    sub_80098F8(3);
+}
+
+//

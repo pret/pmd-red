@@ -9,15 +9,18 @@
 
 enum TerrainType
 {
-    TERRAIN_TYPE_NORMAL = 1 << 0,
-    TERRAIN_TYPE_SECONDARY = 1 << 1, // Water or lava depending on the dungeon.
-    TERRAIN_TYPE_UNK_2 = 1 << 2,
-    TERRAIN_TYPE_NATURAL_JUNCTION = 1 << 3,
-    TERRAIN_TYPE_IMPASSABLE_WALL = 1 << 4,
-    TERRAIN_TYPE_SHOP = 1 << 5,
-    TERRAIN_TYPE_IN_MONSTER_HOUSE = 1 << 6,
-    TERRAIN_TYPE_UNK_8 = 1 << 8,
-    TERRAIN_TYPE_STAIRS = 1 << 9,
+    TERRAIN_TYPE_NORMAL = 1 << 0, // x1
+    TERRAIN_TYPE_SECONDARY = 1 << 1, // Water or lava depending on the dungeon. x2
+    TERRAIN_TYPE_UNK_2 = 1 << 2, // x4
+    TERRAIN_TYPE_NATURAL_JUNCTION = 1 << 3, // x8
+    TERRAIN_TYPE_IMPASSABLE_WALL = 1 << 4, // x10
+    TERRAIN_TYPE_SHOP = 1 << 5, // x20
+    TERRAIN_TYPE_IN_MONSTER_HOUSE = 1 << 6, // x40
+    TERRAIN_TYPE_UNK_8 = 1 << 8, // x100
+    TERRAIN_TYPE_STAIRS = 1 << 9, // x200
+    TERRAIN_TYPE_UNK_x400 = 1 << 10,
+    TERRAIN_TYPE_UNK_x800 = 1 << 11,
+    TERRAIN_TYPE_UNK_x1000 = 1 << 12,
 };
 
 enum CrossableTerrain

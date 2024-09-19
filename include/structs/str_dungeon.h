@@ -240,8 +240,11 @@ typedef struct Dungeon
     /* 0x104C4 */ RoomData roomData[MAX_ROOM_COUNT];
     /* 0x10844 */ s16 naturalJunctionListCounts[MAX_ROOM_COUNT];
     /* 0x10884 */ Position naturalJunctionList[MAX_ROOM_COUNT][MAX_ROOM_COUNT]; // Arrays of room exits for each room.
-    u8 unk11884[0x1194];
-    u8 fill12A18[0x12C24 - 0x12A18];
+    u16 unk11884[250][9];
+    u16 unk12A18[25][9];
+    u16 unk12BDA[9];
+    u16 unk12BEC[9];
+    u16 unk12BFE[19];
     u8 unk12C24[0x930];
     u8 fill13554[0x1356C - 0x13554];
     u8 unk1356C;
@@ -271,7 +274,7 @@ typedef struct Dungeon
     /* 0x181E4 */ OpenedFile *paletFile;
     /* 0x181E8 */ unkDungeonGlobal_unk181E8_sub unk181e8;
     u8 fill18220[0x1C06C - 0x18220];
-    u32 unk1C06C; 
+    u32 unk1C06C;
     u8 fill1C070[0x1C570 - 0x1C070];
     u8 unk1C570;
     u8 unk1C571;
