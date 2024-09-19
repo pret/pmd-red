@@ -272,7 +272,7 @@ void sub_809C770(s16 param_1, s16 param_2)
                     break;
                 case 0:
                 default:
-                    iVar5 = (s16)GetScriptVarValue(0,0x13);
+                    iVar5 = (s16)GetScriptVarValue(NULL,0x13);
                     break;
 
             }
@@ -413,8 +413,8 @@ void sub_809CB74(void) {
 
 
 void sub_809CB8C(void) {
-    ClearScriptVarArray(0, 0x3B);
-    ClearScriptVarArray(0, 0x3D);
+    ClearScriptVarArray(NULL, 0x3B);
+    ClearScriptVarArray(NULL, 0x3D);
 }
 
 bool8 HasItemInInventory(u8 item)

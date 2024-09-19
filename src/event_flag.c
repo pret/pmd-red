@@ -131,8 +131,8 @@ void ScriptVarStringPopFirstChar(s16 varId,u32 param_2,s32 maxLen)
 
 void GetScriptVarScenario(s32 param_1,u32 *param_2,u32 *param_3)
 {
-  *param_2 = GetScriptVarArrayValue(0, (s16)param_1, 0);
-  *param_3 = GetScriptVarArrayValue(0, (s16)param_1, 1);
+  *param_2 = GetScriptVarArrayValue(NULL, (s16)param_1, 0);
+  *param_3 = GetScriptVarArrayValue(NULL, (s16)param_1, 1);
 }
 
 void ScenarioCalc(s16 param_1,s32 param_2,s32 param_3)
@@ -145,10 +145,10 @@ void ScenarioCalc(s16 param_1,s32 param_2,s32 param_3)
   GetScriptVarScenario(param_1_s32,&local_18,&local_14);
   Log(6,gUnknown_80B72CC,param_1_s32,local_18,local_14,param_2,param_3); // SCENARIO CALC [%3d] %4d %4d -> %4d %4d 
   if ((param_1_s32 == 3) && ((param_2 != local_18 || (param_3 != local_14)))) {
-    SetScriptVarValue(0,0x19,0);
+    SetScriptVarValue(NULL,0x19,0);
   }
-  SetScriptVarArrayValue(0,param_1_s32,0,param_2);
-  SetScriptVarArrayValue(0,param_1_s32,1,param_3);
+  SetScriptVarArrayValue(NULL,param_1_s32,0,param_2);
+  SetScriptVarArrayValue(NULL,param_1_s32,1,param_3);
 
   switch(param_1_s32)
   {
@@ -186,8 +186,8 @@ bool8 ScriptVarScenarioBefore(s16 param_1,u32 param_2,s32 param_3)
   s32 uVar1;
   s32 iVar2;
   
-  uVar1 = GetScriptVarArrayValue(0,param_1,0);
-  iVar2 = GetScriptVarArrayValue(0,param_1,1);
+  uVar1 = GetScriptVarArrayValue(NULL,param_1,0);
+  iVar2 = GetScriptVarArrayValue(NULL,param_1,1);
   if ((uVar1 != 0x3a) &&
      (uVar1 < param_2 || (param_3 >= 0 && (uVar1 == param_2) && (iVar2 < param_3)))) {
     return TRUE;
@@ -202,8 +202,8 @@ bool8 ScriptVarScenarioEqual(s16 param_1,u32 param_2,s32 param_3)
   s32 uVar1;
   s32 iVar2;
   
-  uVar1 = GetScriptVarArrayValue(0, param_1, 0);
-  iVar2 = GetScriptVarArrayValue(0, param_1, 1);
+  uVar1 = GetScriptVarArrayValue(NULL, param_1, 0);
+  iVar2 = GetScriptVarArrayValue(NULL, param_1, 1);
   if (((uVar1 == param_2 && (((param_3 < 0) || (iVar2 == param_3)))))) {
     return TRUE;
   }
@@ -217,8 +217,8 @@ bool8 ScriptVarScenarioAfter(s16 param_1,u32 param_2,s32 param_3)
   s32 uVar1;
   s32 iVar2;
   
-  uVar1 = GetScriptVarArrayValue(0, param_1, 0);
-  iVar2 = GetScriptVarArrayValue(0, param_1, 1);
+  uVar1 = GetScriptVarArrayValue(NULL, param_1, 0);
+  iVar2 = GetScriptVarArrayValue(NULL, param_1, 1);
   if ((uVar1 != 0x3a) &&
      ((uVar1 > param_2 || (((param_3 >= 0 && (uVar1 == param_2)) && (iVar2 > param_3)))))) {
     return TRUE;
@@ -239,7 +239,7 @@ void sub_8001D88(void)
       if (ScriptVarScenarioAfter(3,0xf,7) != 0) {
         ScenarioCalc(4,0x1f,0);
         sub_8097418(0xe,1);
-        SetScriptVarValue(0,0x28,2);
+        SetScriptVarValue(NULL,0x28,2);
       }
       else {
         if ((ScriptVarScenarioEqual(4,0,0)) && (ScriptVarScenarioAfter(3,0xf,3))) {
@@ -622,7 +622,7 @@ bool8 sub_8002718(u8 *r0)
 
 void sub_8002758(s32 r0)
 {
-    UpdateScriptVarWithImmediate(0, 0x1, r0, 0x9);
+    UpdateScriptVarWithImmediate(NULL, 0x1, r0, 0x9);
 }
 
 u8 sub_800276C(void)

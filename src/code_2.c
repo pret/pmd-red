@@ -86,9 +86,9 @@ void GameLoop(void)
         ThoroughlyResetScriptVars();
     xxx_script_related_8001334(14);
     xxx_script_related_8001334(15);
-    ClearScriptVarArray(0, 57);
+    ClearScriptVarArray(NULL, 57);
     xxx_script_related_8001334(16);
-    if (GetScriptVarValue(0, 57) == 0)
+    if (GetScriptVarValue(NULL, 57) == 0)
         xxx_script_related_8001334(17);
 
     while (1) {

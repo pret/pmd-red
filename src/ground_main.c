@@ -90,26 +90,26 @@ void sub_8098BDC(void)
 void sub_8098C58(void)
 {
     s32 temp, temp2;
-    ClearScriptVarArray(0, 54);
-    ClearScriptVarArray(0, 57);
+    ClearScriptVarArray(NULL, 54);
+    ClearScriptVarArray(NULL, 57);
     sub_809CB8C();
     sub_8001D88();
 
-    if (GetScriptVarValue(0, 42) != 0) {
-        temp = GetScriptVarValue(0, 41);
+    if (GetScriptVarValue(NULL, 42) != 0) {
+        temp = GetScriptVarValue(NULL, 41);
         temp++;
         if (temp > 15)
             temp = 0;
 
-        SetScriptVarValue(0, 41, temp);
-        SetScriptVarValue(0, 42, 0);
+        SetScriptVarValue(NULL, 41, temp);
+        SetScriptVarValue(NULL, 42, 0);
     }
 
-    temp2 = GetScriptVarArrayValue(0, 66, 0);
+    temp2 = GetScriptVarArrayValue(NULL, 66, 0);
     if (temp2 <= 0)
         temp2 = 1;
     temp2--;
-    SetScriptVarArrayValue(0, 66, 0, temp2);
+    SetScriptVarArrayValue(NULL, 66, 0, temp2);
 
     sub_8098CC8();
 }
@@ -275,12 +275,12 @@ bool8 GetScriptMode(void)
 
 s16 sub_8098FA0(void)
 {
-    return GetScriptVarValue(0, 0x11);
+    return GetScriptVarValue(NULL, 0x11);
 }
 
 const char *sub_8098FB4(void)
 {
-    return sub_80A2B18(GetScriptVarValue(0, 0x11));
+    return sub_80A2B18(GetScriptVarValue(NULL, 0x11));
 }
 
 s16 sub_8098FCC(u32 unused)
@@ -290,12 +290,12 @@ s16 sub_8098FCC(u32 unused)
   s32 iVar6;
   const DungeonInfo *iVar3;
 
-  iVar5 = (s16)GetScriptVarValue(0,0x13);
+  iVar5 = (s16)GetScriptVarValue(NULL,0x13);
   iVar6 = iVar5;
   if (iVar5 == -1) return 0xC;
 
   if (iVar5 == 0x51)
-    iVar4 = (s16)GetScriptVarValue(0,0x14);
+    iVar4 = (s16)GetScriptVarValue(NULL,0x14);
   else
     iVar4 = iVar6;
 

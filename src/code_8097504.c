@@ -74,7 +74,7 @@ bool32 IsMazeCompleted(s16 mazeIndex)
 {
     bool32 mazeCompletion;
 
-    mazeCompletion = GetScriptVarArrayValue(0, 0x2e, mazeIndex);
+    mazeCompletion = GetScriptVarArrayValue(NULL, 0x2e, mazeIndex);
     if (mazeCompletion) {
         mazeCompletion = TRUE;
     }
@@ -84,7 +84,7 @@ bool32 IsMazeCompleted(s16 mazeIndex)
 void sub_80975A8(s16 param_1,u8 param_2)
 {
     u16 param_1_u16 = param_1;
-    SetScriptVarArrayValue(0,0x2e,param_1_u16,param_2);
+    SetScriptVarArrayValue(NULL,0x2e,param_1_u16,param_2);
 }
 
 const u8 *sub_80975C4(s16 index)
@@ -118,9 +118,9 @@ bool8 HasCompletedAllMazes(void)
 
 bool8 sub_8097640(void)
 {
-    if(GetScriptVarArrayValue(0, 0x2E, 0x1F) == 0 && HasCompletedAllMazes())
+    if(GetScriptVarArrayValue(NULL, 0x2E, 0x1F) == 0 && HasCompletedAllMazes())
     {
-        SetScriptVarArrayValue(0, 0x2E, 0x1F, 1);
+        SetScriptVarArrayValue(NULL, 0x2E, 0x1F, 1);
         return TRUE;
     }
     else

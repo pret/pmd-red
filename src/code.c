@@ -56,11 +56,11 @@ void ThoroughlyResetScriptVars(void)
     puVar1 = &gScriptVarInfo[iVar1];
     if (((puVar1->type != 0) && ((puVar1->type != 8)))) {
       for (uVar2 = 0; uVar2 < puVar1->arrayLen; uVar2++) {
-        SetScriptVarArrayValue(0, iVar1, uVar2, puVar1->defaultValue);
+        SetScriptVarArrayValue(NULL, iVar1, uVar2, puVar1->defaultValue);
       }
     }
   }
-  ClearScriptVarArray(0,1);
+  ClearScriptVarArray(NULL,1);
   ScenarioCalc(2,0,0);
   ScenarioCalc(3,0,0);
   ScenarioCalc(4,0,0);
@@ -72,37 +72,37 @@ void ThoroughlyResetScriptVars(void)
   ScenarioCalc(10,0,0);
   ScenarioCalc(0xb,0,0);
   ScenarioCalc(0xc,0,0);
-  SetScriptVarValue(0,0xd,0xa2);
-  SetScriptVarValue(0,0xe,0);
-  SetScriptVarValue(0,0xf,0xa2);
-  SetScriptVarValue(0,0x10,-1);
-  SetScriptVarValue(0,0x11,0x24);
-  SetScriptVarValue(0,0x12,-1);
-  SetScriptVarValue(0,0x13,0);
-  SetScriptVarValue(0,0x14,-1);
-  SetScriptVarValue(0,0x16,0);
-  SetScriptVarValue(0,0x18,0);
-  SetScriptVarValue(0,0x19,0);
-  SetScriptVarValue(0,0x1b,-1);
-  SetScriptVarValue(0,0x1c,0);
-  SetScriptVarValue(0,0x1d,0);
-  SetScriptVarValue(0,0x1e,0);
-  SetScriptVarValue(0,0x1f,0);
-  ClearScriptVarArray(0,0x24);
-  SetScriptVarValue(0,0x25,0);
-  SetScriptVarValue(0,0x26,0);
-  SetScriptVarValue(0,0x27,0);
-  SetScriptVarValue(0,0x28,0);
-  SetScriptVarValue(0,0x29,0);
-  SetScriptVarValue(0,0x2a,0);
-  ClearScriptVarArray(0,0x2b);
-  ClearScriptVarArray(0,0x2c);
-  ClearScriptVarArray(0,0x2d);
-  ClearScriptVarArray(0,0x2e);
-  ClearScriptVarArray(0,0x2f);
-  ClearScriptVarArray(0,0x30);
-  ClearScriptVarArray(0,0x31);
-  ClearScriptVarArray(0,0x41);
+  SetScriptVarValue(NULL,0xd,0xa2);
+  SetScriptVarValue(NULL,0xe,0);
+  SetScriptVarValue(NULL,0xf,0xa2);
+  SetScriptVarValue(NULL,0x10,-1);
+  SetScriptVarValue(NULL,0x11,0x24);
+  SetScriptVarValue(NULL,0x12,-1);
+  SetScriptVarValue(NULL,0x13,0);
+  SetScriptVarValue(NULL,0x14,-1);
+  SetScriptVarValue(NULL,0x16,0);
+  SetScriptVarValue(NULL,0x18,0);
+  SetScriptVarValue(NULL,0x19,0);
+  SetScriptVarValue(NULL,0x1b,-1);
+  SetScriptVarValue(NULL,0x1c,0);
+  SetScriptVarValue(NULL,0x1d,0);
+  SetScriptVarValue(NULL,0x1e,0);
+  SetScriptVarValue(NULL,0x1f,0);
+  ClearScriptVarArray(NULL,0x24);
+  SetScriptVarValue(NULL,0x25,0);
+  SetScriptVarValue(NULL,0x26,0);
+  SetScriptVarValue(NULL,0x27,0);
+  SetScriptVarValue(NULL,0x28,0);
+  SetScriptVarValue(NULL,0x29,0);
+  SetScriptVarValue(NULL,0x2a,0);
+  ClearScriptVarArray(NULL,0x2b);
+  ClearScriptVarArray(NULL,0x2c);
+  ClearScriptVarArray(NULL,0x2d);
+  ClearScriptVarArray(NULL,0x2e);
+  ClearScriptVarArray(NULL,0x2f);
+  ClearScriptVarArray(NULL,0x30);
+  ClearScriptVarArray(NULL,0x31);
+  ClearScriptVarArray(NULL,0x41);
   sub_80972F4();
 }
 

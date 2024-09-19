@@ -308,7 +308,7 @@ void DrawLoadScreenText(void)
     switch(sub_8011C1C())
     {
         case 1:
-            switch(GetScriptVarValue(0,24))
+            switch(GetScriptVarValue(NULL,24))
             {
                 default:
                     sprintfStatic(auStack356,gUnknown_80E7804,sub_8098FB4());
