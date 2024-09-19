@@ -1595,14 +1595,14 @@ static void sub_8094148(struct unkStruct_8094924 *r0, Move *move)
     SaveIntegerBits(r0, &move->ginseng, 7);
 }
 
-void sub_8094184(struct unkStruct_8094924 *r0, struct unkStruct_8094184 *r1)
+void sub_8094184(struct unkStruct_8094924 *r0, struct Moves *r1)
 {
     s32 i;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
         sub_8094148(r0, &r1->moves[i]);
 
-    SaveIntegerBits(r0, &r1->unk20, 8);
+    SaveIntegerBits(r0, &r1->struggleMoveFlags, 8);
 }
 
 static void sub_80941B0(struct unkStruct_8094924 *r0, Move *move)
@@ -1615,15 +1615,15 @@ static void sub_80941B0(struct unkStruct_8094924 *r0, Move *move)
     RestoreIntegerBits(r0, &move->ginseng, 7);
 }
 
-void sub_80941FC(struct unkStruct_8094924 *r0, struct unkStruct_8094184 *r1)
+void sub_80941FC(struct unkStruct_8094924 *r0, struct Moves*r1)
 {
     s32 i;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
         sub_80941B0(r0, &r1->moves[i]);
 
-    r1->unk20 = 0;
-    RestoreIntegerBits(r0, &r1->unk20, 8);
+    r1->struggleMoveFlags= 0;
+    RestoreIntegerBits(r0, &r1->struggleMoveFlags, 8);
 }
 
 bool8 DoesMoveCharge(u16 move)

@@ -652,7 +652,7 @@ void GinsengItemAction(Entity *pokemon, Entity * target)
   if (DungeonRandInt(100) < gUnknown_80F4F46)
     moveBoost = 3;
   if (entityInfo->isTeamLeader) {
-    for(moveIndex = 0, movePtr1 = &entityInfo->moves[0], movePtr2 = movePtr1; moveIndex < MAX_MON_MOVES; movePtr1++, movePtr2++, moveIndex++)
+    for(moveIndex = 0, movePtr1 = &entityInfo->moves.moves[0], movePtr2 = movePtr1; moveIndex < MAX_MON_MOVES; movePtr1++, movePtr2++, moveIndex++)
     {
         if((movePtr1->moveFlags & MOVE_FLAG_EXISTS) && (movePtr1->moveFlags & MOVE_FLAG_SET))
         {

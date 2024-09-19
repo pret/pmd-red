@@ -150,7 +150,7 @@ bool8 HasNegativeStatus(Entity *pokemon)
     }
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        Move *moves = pokemonInfo->moves;
+        Move *moves = pokemonInfo->moves.moves;
         if (moves[i].moveFlags & MOVE_FLAG_EXISTS && moves[i].moveFlags2 & MOVE_FLAG_SEALED)
         {
             return TRUE;

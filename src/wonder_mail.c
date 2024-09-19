@@ -1385,7 +1385,7 @@ void sub_80293F4(void)
                         sub_8095274(mail.unk10.unk10);
                         mail.mailType = 2;
                         sub_80951BC(&mail);
-                        sub_80141B4(gWonderMailAOKMailReceivedText, 0, &sUnknown_203B2C0->faceFile, 0x101);
+                        xxx_info_box_80141B4(gWonderMailAOKMailReceivedText, 0, &sUnknown_203B2C0->faceFile, 0x101);
                         SetFriendRescueCounterState(RECEIVED_FRIEND_SOS_MAIL);
                         break;
                     case 23:

@@ -1,6 +1,6 @@
 #include "global.h"
 #include "structs/str_pokemon.h"
-#include "structs/struct_8069D4C.h"
+#include "code_8069D4C.h"
 #include "code_80118A4.h"
 #include "code_803E668.h"
 #include "code_8045A00.h"

@@ -308,7 +308,7 @@ void sub_8057588(Entity * pokemon, u8 param_2)
         entityInfo = pokemon->info;
         for(index = 0; index < MAX_MON_MOVES; index++)
         {
-            move = &entityInfo->moves[index];
+            move = &entityInfo->moves.moves[index];
             if ((move->moveFlags & MOVE_FLAG_EXISTS)) {
                 PPtoRemove = 1;
                 if ((move->moveFlags2 & MOVE_FLAG_LAST_USED)) {
@@ -556,7 +556,7 @@ bool8 TormentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4
 
   for(iVar4 = 0; iVar4 < MAX_MON_MOVES; iVar4++)
   {
-    movePtr = &entityInfo->moves[iVar4];
+    movePtr = &entityInfo->moves.moves[iVar4];
     if ((movePtr->moveFlags & MOVE_FLAG_EXISTS) != 0) {
       if ((movePtr->moveFlags & MOVE_FLAG_DISABLED) == 0) {
         if ((movePtr->moveFlags & MOVE_FLAG_LAST_USED) != 0) {
@@ -573,18 +573,18 @@ bool8 TormentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4
     }
   };
 
-  if ((entityInfo->struggleMoveFlags & MOVE_FLAG_DISABLED) == 0) {
-    if ((entityInfo->struggleMoveFlags & MOVE_FLAG_LAST_USED) != 0) {
+  if ((entityInfo->moves.struggleMoveFlags & MOVE_FLAG_DISABLED) == 0) {
+    if ((entityInfo->moves.struggleMoveFlags & MOVE_FLAG_LAST_USED) != 0) {
       InitPokemonMove(&struggleMove, MOVE_STRUGGLE);
-      entityInfo->struggleMoveFlags |= MOVE_FLAG_DISABLED;
+      entityInfo->moves.struggleMoveFlags |= MOVE_FLAG_DISABLED;
       isTormented = TRUE;
       sub_80928C0(gFormatItems,&struggleMove,0);
       // $i0 was tormented
       sub_80522F4(pokemon,target,*gUnknown_80FCFBC);
     }
   }
-  else if ((entityInfo->struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0) {
-    entityInfo->struggleMoveFlags &= ~(MOVE_FLAG_DISABLED);
+  else if ((entityInfo->moves.struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0) {
+    entityInfo->moves.struggleMoveFlags &= ~(MOVE_FLAG_DISABLED);
   }
   if (isTormented)
   {
@@ -2321,7 +2321,7 @@ bool8 ConversionMoveAction(Entity * pokemon,Entity * target,Move * move,u32 para
   {
     for(index = 0; index < MAX_MON_MOVES; index++)
     {
-      movePtr = &info->moves[index];
+      movePtr = &info->moves.moves[index];
       if (((movePtr->moveFlags & MOVE_FLAG_EXISTS)) && (GetMoveTypeForMonster(target,movePtr) != TYPE_NONE)) {
         moveStack[counter]  = movePtr;
         counter++;

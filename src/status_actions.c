@@ -458,7 +458,7 @@ bool8 MimicMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4
 
     for(moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
-        movePtr = &targetEntityInfo->moves[moveIndex];
+        movePtr = &targetEntityInfo->moves.moves[moveIndex];
         if (((movePtr->moveFlags & MOVE_FLAG_EXISTS)) && !sub_805755C(pokemon,movePtr->id)) {
             if ((movePtr->id != MOVE_MIMIC) && (movePtr->id != MOVE_ASSIST) && (movePtr->id != MOVE_SKETCH) && (movePtr->id != MOVE_MIRROR_MOVE) &&
                 (movePtr->id != MOVE_ENCORE) && ((movePtr->moveFlags & MOVE_FLAG_LAST_USED))) {

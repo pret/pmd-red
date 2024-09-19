@@ -654,10 +654,9 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(PokemonStruct2 * a1, PokemonStruct1 *
         slot->quantity = 0;
         slot->flags = 0;
     }
-  sub_80943A0(&somestruct_80943A0, 100);
-  a1->belly = somestruct_80943A0;
-  sub_80943A0(&somestruct2_80943A0, 100);
-  a1->maxBelly = somestruct2_80943A0;
+
+    a1->belly = IntToFixedPoint(100);
+    a1->maxBelly = IntToFixedPoint(100);
 }
 
 void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, PokemonStruct2* a2)

@@ -655,7 +655,7 @@ void HandlePPZeroTrap(Entity *param_1,Entity *param_2)
     counter = 0;
     for(i = 0;  i < MAX_MON_MOVES; move++, i++)
     {
-      move = &info->moves[i];
+      move = &info->moves.moves[i];
       if (((move->moveFlags & MOVE_FLAG_EXISTS) != 0) && (move->PP != 0)) {
         moveStack[counter] = move;
         indexStack[counter] = i;
@@ -697,7 +697,7 @@ void HandleSealTrap(Entity *param_1,Entity *param_2)
         counter = 0;
         for(i = 0;  i < MAX_MON_MOVES;i++)
         {
-            move = &info->moves[i];
+            move = &info->moves.moves[i];
             if ((move->moveFlags & MOVE_FLAG_EXISTS) && !(move->moveFlags2 & MOVE_FLAG_SEALED)) {
                 moveStack[counter] = move;
                 counter++;
@@ -706,7 +706,7 @@ void HandleSealTrap(Entity *param_1,Entity *param_2)
         if (counter != 0) {
             moveIndex = DungeonRandInt(counter);
             moveStack[moveIndex]->moveFlags2 |= MOVE_FLAG_SEALED;
-            sub_80928C0(gUnknown_202DE58,moveStack[moveIndex], NULL);
+            sub_80928C0(gFormatItems,moveStack[moveIndex], NULL);
             flag = TRUE;
         }
         if(flag)

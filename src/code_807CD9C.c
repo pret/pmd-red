@@ -134,7 +134,7 @@ void sub_807CD9C(Entity *pokemon, Entity *target, u32 direction)
             if (sp_0x28 != NULL) {
                 InitPokemonMove(&move,0x163);
                 if (!sub_80571F0(sp_0x28,&move)) {
-                    sub_807A96C(pokemon,sp_0x28);
+                    TrySendImmobilizeSleepEndMsg(pokemon,sp_0x28);
                     sub_806F370(pokemon,sp_0x28,gUnknown_80F4F90,0,0,0,0x21a,0,0,0);
                 }
             }
@@ -248,7 +248,7 @@ void sub_807D148(Entity *pokemon, Entity *target, u32 param_3, Position *pos)
     }
 
     sub_80522F4(pokemon,target,*gUnknown_80FC584); // $m0 warped!
-    sub_807A96C(target,target);
+    TrySendImmobilizeSleepEndMsg(target,target);
     sub_80421AC(pokemon,target);
     if (sub_8045888(target)) {
         direction = (info->action).direction;

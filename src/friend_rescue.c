@@ -824,7 +824,7 @@ void sub_8032828(void)
         case 0x32:
             if (sub_8030894() == 0) {
                 ResetUnusedInputStruct();
-                sub_800641C(NULL, TRUE, TRUE);
+                xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
                 sub_80306A8(WONDER_MAIL_TYPE_SOS, 0, NULL, 6);
             }
             break;
@@ -921,7 +921,7 @@ void sub_8032828(void)
         case 0x1D:
             if (sub_8030894() == 0) {
                 ResetUnusedInputStruct();
-                sub_800641C(NULL, TRUE, TRUE);
+                xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
                 sub_80306A8(WONDER_MAIL_TYPE_AOK, 0, NULL, 6);
             }
             break;
@@ -1028,7 +1028,7 @@ void sub_8032828(void)
             if (sub_8030894() != 0)
                 break;
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_80306A8(WONDER_MAIL_TYPE_SOS, 0, NULL, 6);
             break;
         case 0x15:

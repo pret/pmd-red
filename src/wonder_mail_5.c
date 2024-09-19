@@ -65,7 +65,7 @@ bool8 sub_8030D40(u8 mailIndex, s32 windowID)
   sub_801317C(&gUnknown_203B324->unk0);
   gUnknown_203B324->windowID = windowID;
   gUnknown_203B324->unk14 = &gUnknown_203B324->unk18[windowID];
-  sub_8006518(gUnknown_203B324->unk18);
+  RestoreUnkTextStruct_8006518(gUnknown_203B324->unk18);
   gUnknown_203B324->unk18[gUnknown_203B324->windowID] = gUnknown_80E091C;
   sub_8030DD4();
   return TRUE;

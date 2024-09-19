@@ -69,10 +69,10 @@ typedef struct PokemonStruct2
     u16 unk12; // pokeHP
     /* 0x14 */ Offense offense; // offense (other offset)
     /* 0x18 */ u32 currExp;
-    /* 0x1C */ unkStruct_8094184 moves;
+    /* 0x1C */ Moves moves;
     /* 0x40 */ Item itemSlot; // heldItem
-    u32 belly; // some struct
-    u32 maxBelly; // some struct (same type as 44)
+    FixedPoint belly; // some struct
+    FixedPoint maxBelly; // some struct (same type as 44)
     /* 0x4C */ u32 IQSkills; // unk20
     /* 0x50 */ u8 tacticIndex;
     /* 0x54 */ HiddenPower hiddenPower;

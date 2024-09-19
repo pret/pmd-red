@@ -476,7 +476,7 @@ void RestorePPTarget(Entity * pokemon,Entity * target, s32 param_3)
 
     for(index = 0; index < MAX_MON_MOVES; index++)
     {
-      movePtr = &entityInfo->moves[index];
+      movePtr = &entityInfo->moves.moves[index];
       movePtr1 = movePtr;
       if ((movePtr->moveFlags & MOVE_FLAG_EXISTS)) {
         PP = movePtr->PP;
@@ -689,7 +689,7 @@ void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *
 
       for(index = 0; index < MAX_MON_MOVES; index++)
       {
-        movePtr = &entityInfo->moves[index];
+        movePtr = &entityInfo->moves.moves[index];
         if(movePtr == move)
         {
             entityInfo->charging.chargingStatusMoveIndex = index;
@@ -1118,7 +1118,7 @@ void sub_8079F20(Entity * pokemon, Entity * target, u8 param_3, u8 param_4)
 
     for(index = 0; index < MAX_MON_MOVES; index++)
     {
-        move = &entityInfo->moves[index];
+        move = &entityInfo->moves.moves[index];
         if ((move->moveFlags & MOVE_FLAG_EXISTS) && (move->moveFlags2 & MOVE_FLAG_EXISTS)) {
             bVar8 = TRUE;
             moveUnsealed = TRUE;
@@ -1155,7 +1155,7 @@ void sub_807A0CC(Entity * pokemon, Entity * target)
 
     for(index = 0; index < MAX_MON_MOVES; index++)
     {
-        move = &entityInfo->moves[index];
+        move = &entityInfo->moves.moves[index];
         if ((move->moveFlags & MOVE_FLAG_EXISTS)) {
             move->moveFlags2 &= ~(MOVE_FLAG_EXISTS);
         }

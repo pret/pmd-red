@@ -1211,10 +1211,10 @@ void EncoreStatusTarget(Entity *pokemon,Entity *target)
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
     for(index = 0; index < MAX_MON_MOVES; index++)
     {
-      movePtr = &EntityInfo->moves[index];
-      if ((EntityInfo->moves[index].moveFlags & MOVE_FLAG_EXISTS) && (movePtr->moveFlags & MOVE_FLAG_LAST_USED)) break;
+      movePtr = &EntityInfo->moves.moves[index];
+      if ((EntityInfo->moves.moves[index].moveFlags & MOVE_FLAG_EXISTS) && (movePtr->moveFlags & MOVE_FLAG_LAST_USED)) break;
     }
-    if ((index == MAX_MON_MOVES) && ((EntityInfo->struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0)) {
+    if ((index == MAX_MON_MOVES) && ((EntityInfo->moves.struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0)) {
       SetMessageArgument(gAvailablePokemonNames,target,0);
       sub_80522F4(pokemon,target,*gUnknown_80FBBD4);
     }

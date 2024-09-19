@@ -139,7 +139,7 @@ bool8 sub_8072CF4(Entity *entity)
 
     for(index = 0; index < MAX_MON_MOVES; index++)
     {
-        move = &info->moves[index];
+        move = &info->moves.moves[index];
         if ((move->moveFlags & MOVE_FLAG_EXISTS)) {
             move->moveFlags2 &= ~(MOVE_FLAG2_UNK4);
         }
@@ -334,8 +334,8 @@ bool8 sub_8072CF4(Entity *entity)
 
                 for(index = 0; index < MAX_MON_MOVES; index++)
                 {
-                    move = &info->moves[index];
-                    if ((info->moves[index].moveFlags & MOVE_FLAG_EXISTS) && (move->moveFlags & MOVE_FLAG_LAST_USED)) {
+                    move = &info->moves.moves[index];
+                    if ((info->moves.moves[index].moveFlags & MOVE_FLAG_EXISTS) && (move->moveFlags & MOVE_FLAG_LAST_USED)) {
                         move->PP = 0;
                         bVar4 = TRUE;
                     }

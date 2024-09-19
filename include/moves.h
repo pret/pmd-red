@@ -86,7 +86,7 @@ bool8 sub_8093318(s32, Move *moves);
 bool8 sub_809333C(s32, Move *moves);
 s32 sub_80935B8(Move *moves, s32 index);
 void sub_8094060(Move *srcMoves, Move *destMoves);
-void sub_8094184(struct unkStruct_8094924 *, struct unkStruct_8094184 *);
-void sub_80941FC(struct unkStruct_8094924 *, struct unkStruct_8094184 *);
+void sub_8094184(struct unkStruct_8094924 *, struct Moves *);
+void sub_80941FC(struct unkStruct_8094924 *, struct Moves *);
 
 #endif // GUARD_MOVES_H
