@@ -78,8 +78,8 @@ u8 sub_8002658(s16 param_1);
 s16 sub_8002694(u8 param_1);
 bool8 sub_80026CC(s16 r0);
 void sub_80026E8(s16 r0, bool8 r1);
-bool8 sub_8002700(void *r0);
-bool8 sub_8002718(u8 *r0);
+bool8 SaveGlobalScriptVars(void *r0);
+bool8 RestoreGlobalScriptVars(u8 *r0);
 void sub_8002758(s32 r0);
 u8 sub_800276C(void);
 

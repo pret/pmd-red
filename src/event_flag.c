@@ -604,13 +604,13 @@ void sub_80026E8(s16 r0, bool8 r1)
     UnlockFriendArea(sub_8002658(r0));
 }
 
-bool8 sub_8002700(void *r0)
+bool8 SaveGlobalScriptVars(void *r0)
 {
     MemoryCopy8(r0, gScriptVarBuffer, 0x400);
     return 1;
 }
 
-bool8 sub_8002718(u8 *r0)
+bool8 RestoreGlobalScriptVars(u8 *r0)
 {
     struct ScriptVarPtr temp;
     GetScriptVarRef(&temp, 0, 0);
