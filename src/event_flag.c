@@ -53,8 +53,7 @@ extern void sub_80973A8(u32, u32);
 // code_80972F4.h (read comment)
 extern bool8 RescueScenarioConquered(s16);
 
-// unused
-u8 *GetScriptVarPointer(s16 varId)
+UNUSED u8 *GetScriptVarPointer(s16 varId)
 {
     struct ScriptVarPtr local_1c;
 
@@ -62,8 +61,7 @@ u8 *GetScriptVarPointer(s16 varId)
     return local_1c.ptr;
 }
 
-// unused
-s16 GetScriptVarArrayLength(s16 varId)
+UNUSED s16 GetScriptVarArrayLength(s16 varId)
 {
     struct ScriptVarPtr local_1c;
 
@@ -89,8 +87,7 @@ s32 GetScriptVarArraySum(u8 *localVarBuf, s16 varId)
     return total;
 }
 
-// unused
-void GetScriptVarString(s16 varId, u8 *buf, s32 maxLen)
+UNUSED void GetScriptVarString(s16 varId, u8 *buf, s32 maxLen)
 {
   u8 *r1;
   s32 r2;
@@ -107,8 +104,7 @@ void GetScriptVarString(s16 varId, u8 *buf, s32 maxLen)
  *buf = 0;
 }
 
-// unused
-void ScriptVarStringPopFirstChar(s16 varId,u32 param_2,s32 maxLen)
+UNUSED void ScriptVarStringPopFirstChar(s16 varId,u32 param_2,s32 maxLen)
 {
   u8 *r1;
   s32 r2;
@@ -145,7 +141,7 @@ void ScenarioCalc(s16 param_1,s32 param_2,s32 param_3)
   GetScriptVarScenario(param_1_s32,&local_18,&local_14);
   Log(6,gUnknown_80B72CC,param_1_s32,local_18,local_14,param_2,param_3); // SCENARIO CALC [%3d] %4d %4d -> %4d %4d 
   if ((param_1_s32 == 3) && ((param_2 != local_18 || (param_3 != local_14)))) {
-    SetScriptVarValue(NULL,0x19,0);
+    SetScriptVarValue(NULL,CLEAR_COUNT,0);
   }
   SetScriptVarArrayValue(NULL,param_1_s32,0,param_2);
   SetScriptVarArrayValue(NULL,param_1_s32,1,param_3);
@@ -154,27 +150,27 @@ void ScenarioCalc(s16 param_1,s32 param_2,s32 param_3)
   {
       case 3:
         if (((u32)(param_2 - 1) < 0x1b)) {
-            if (ScriptVarScenarioAfter(3,8,-1)) {
+            if (ScriptVarScenarioAfter(SCENARIO_MAIN,8,-1)) {
                 sub_80976F8(0);
             }
-            if (ScriptVarScenarioAfter(3,0xb,3)) {
+            if (ScriptVarScenarioAfter(SCENARIO_MAIN,0xb,3)) {
                 sub_80976F8(1);
             }
-            if (ScriptVarScenarioAfter(3,0x11,0)) {
+            if (ScriptVarScenarioAfter(SCENARIO_MAIN,0x11,0)) {
                 sub_80976F8(2);
             }
         }
         break;
       case 4:
-        if (ScriptVarScenarioBefore(4,0x1f,0) == 0) {
+        if (ScriptVarScenarioBefore(SCENARIO_SUB1,0x1f,0) == 0) {
             sub_80976F8(4);
         }
-        if (ScriptVarScenarioBefore(4,0x20,0) == 0) {
+        if (ScriptVarScenarioBefore(SCENARIO_SUB1,0x20,0) == 0) {
             sub_80976F8(5);
         }
         break;
       case 0xC:
-        if(ScriptVarScenarioBefore(0xc,0x37,2) == 0) {
+        if(ScriptVarScenarioBefore(SCENARIO_SUB9,0x37,2) == 0) {
             sub_80976F8(3);
         }
         break;
@@ -235,26 +231,26 @@ void sub_8001D88(void)
   
   GetScriptVarScenario(3, &auStack8, &local_c);
   if (auStack8 - 1 < 0x1b) {
-    if (ScriptVarScenarioBefore(4,0x1f,0) != 0) {
-      if (ScriptVarScenarioAfter(3,0xf,7) != 0) {
-        ScenarioCalc(4,0x1f,0);
+    if (ScriptVarScenarioBefore(SCENARIO_SUB1,0x1f,0) != 0) {
+      if (ScriptVarScenarioAfter(SCENARIO_MAIN,0xf,7) != 0) {
+        ScenarioCalc(SCENARIO_SUB1,0x1f,0);
         sub_8097418(0xe,1);
-        SetScriptVarValue(NULL,0x28,2);
+        SetScriptVarValue(NULL,BASE_LEVEL,2);
       }
       else {
-        if ((ScriptVarScenarioEqual(4,0,0)) && (ScriptVarScenarioAfter(3,0xf,3))) {
-          ScenarioCalc(4,0x1d,1);
+        if ((ScriptVarScenarioEqual(SCENARIO_SUB1,0,0)) && (ScriptVarScenarioAfter(SCENARIO_MAIN,0xf,3))) {
+          ScenarioCalc(SCENARIO_SUB1,0x1d,1);
         }
       }
     }
-    if ((ScriptVarScenarioEqual(4,0x1f,0)) && (GetFriendAreaStatus(SKY_BLUE_PLAINS))) {
-      ScenarioCalc(4,0x1f,1);
+    if ((ScriptVarScenarioEqual(SCENARIO_SUB1,0x1f,0)) && (GetFriendAreaStatus(SKY_BLUE_PLAINS))) {
+      ScenarioCalc(SCENARIO_SUB1,0x1f,1);
       sub_809733C(0xf,1);
     }
     if (auStack8 > 0x11) {
       sub_80973A8(0x25,1);
       if (((FindItemInInventory(ITEM_HM_DIVE) != -1) || (gTeamInventoryRef->teamStorage[ITEM_HM_DIVE] != 0)) ||
-         (ScriptVarScenarioAfter(5,0x21,3) != 0)) {
+         (ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3) != 0)) {
         sub_80973A8(0x22,1);
       }
       if (GetFriendAreaStatus(FURNACE_DESERT) != 0) {
@@ -276,24 +272,24 @@ void sub_8001D88(void)
       if ((GetFriendAreaStatus(AGED_CHAMBER_AN)) && (GetFriendAreaStatus(AGED_CHAMBER_O_EXCLAIM))) {
         sub_80973A8(0x26,1);
       }
-      if (ScriptVarScenarioEqual(5,0,0)) {
-        ScenarioCalc(5,0x21,1);
+      if (ScriptVarScenarioEqual(SCENARIO_SUB2,0,0)) {
+        ScenarioCalc(SCENARIO_SUB2,0x21,1);
       }
       if ((FindItemInInventory(ITEM_HM_SURF) != -1) || (gTeamInventoryRef->teamStorage[ITEM_HM_SURF] != 0)) {
-        if (ScriptVarScenarioEqual(7,0,0)) {
-          ScenarioCalc(7,0x26,1);
+        if (ScriptVarScenarioEqual(SCENARIO_SUB4,0,0)) {
+          ScenarioCalc(SCENARIO_SUB4,0x26,1);
         }
-        if ((ScriptVarScenarioEqual(9,0,0)) && (GetFriendAreaStatus(SOUTHERN_ISLAND))) {
-          ScenarioCalc(9,0x2e,1);
+        if ((ScriptVarScenarioEqual(SCENARIO_SUB6,0,0)) && (GetFriendAreaStatus(SOUTHERN_ISLAND))) {
+          ScenarioCalc(SCENARIO_SUB6,0x2e,1);
         }
       }
-      if (!ScriptVarScenarioBefore(9,0x30,0)) {
-        if ((ScriptVarScenarioEqual(5,0x22,0)) && HasRecruitedMon(MONSTER_ARTICUNO) && HasRecruitedMon(MONSTER_ZAPDOS) && HasRecruitedMon(MONSTER_MOLTRES)) {
-          ScenarioCalc(5,0x22,1);
+      if (!ScriptVarScenarioBefore(SCENARIO_SUB6,0x30,0)) {
+        if ((ScriptVarScenarioEqual(SCENARIO_SUB2,0x22,0)) && HasRecruitedMon(MONSTER_ARTICUNO) && HasRecruitedMon(MONSTER_ZAPDOS) && HasRecruitedMon(MONSTER_MOLTRES)) {
+          ScenarioCalc(SCENARIO_SUB2,0x22,1);
         }
-        if (((ScriptVarScenarioEqual(0xb,0,0)) && (ScriptVarScenarioAfter(5,0x21,3) != 0)) &&
+        if (((ScriptVarScenarioEqual(SCENARIO_SUB8,0,0)) && (ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3) != 0)) &&
            (GetFriendAreaStatus(SKY_BLUE_PLAINS))) {
-          ScenarioCalc(0xb,0x33,1);
+          ScenarioCalc(SCENARIO_SUB8,0x33,1);
         }
         if (GetFriendAreaStatus(SKY_BLUE_PLAINS)) {
           sub_80973A8(0x27,1);
@@ -302,20 +298,20 @@ void sub_8001D88(void)
           sub_80973A8(0x29,1);
         }
       }
-      if (!ScriptVarScenarioBefore(5,0x22,0)) {
-        if (ScriptVarScenarioEqual(10,0,0)) {
-          ScenarioCalc(10,0x31,1);
+      if (!ScriptVarScenarioBefore(SCENARIO_SUB2,0x22,0)) {
+        if (ScriptVarScenarioEqual(SCENARIO_SUB7,0,0)) {
+          ScenarioCalc(SCENARIO_SUB7,0x31,1);
           sub_809733C(0x1b,1);
         }
-        if ((ScriptVarScenarioEqual(0xc,0,0)) && (!ScriptVarScenarioBefore(0xb,0x34,0))) {
-          ScenarioCalc(0xc,0x35,1);
+        if ((ScriptVarScenarioEqual(SCENARIO_SUB9,0,0)) && (!ScriptVarScenarioBefore(SCENARIO_SUB8,0x34,0))) {
+          ScenarioCalc(SCENARIO_SUB9,0x35,1);
         }
       }
-      if ((ScriptVarScenarioEqual(6,0,0)) && (HasRecruitedMon(MONSTER_LUGIA))) {
-        ScenarioCalc(6,0x24,1);
+      if ((ScriptVarScenarioEqual(SCENARIO_SUB3,0,0)) && (HasRecruitedMon(MONSTER_LUGIA))) {
+        ScenarioCalc(SCENARIO_SUB3,0x24,1);
       }
-      if ((ScriptVarScenarioEqual(8,0,0)) && (HasRecruitedMon(MONSTER_HO_OH))) {
-        ScenarioCalc(8,0x2c,1);
+      if ((ScriptVarScenarioEqual(SCENARIO_SUB5,0,0)) && (HasRecruitedMon(MONSTER_HO_OH))) {
+        ScenarioCalc(SCENARIO_SUB5,0x2c,1);
       }
     }
   }
@@ -440,8 +436,7 @@ bool8 JudgeVarWithVar(u8 *param_1, s16 param_2, s16 param_3, enum FlagJudgeOpera
   return _FlagJudge(uVar1,uVar2,operation);
 }
 
-// unused
-s32 sub_8002354(u32 param_1)
+UNUSED s32 sub_8002354(u32 param_1)
 {
   if (param_1 < 0x3b) {
     return gUnknown_80B6D90[param_1].num;
@@ -451,8 +446,7 @@ s32 sub_8002354(u32 param_1)
   }
 }
 
-// unused
-u8 *sub_8002374(u32 param_1)
+UNUSED u8 *sub_8002374(u32 param_1)
 {
   if (param_1 < 0x3b) {
     return gUnknown_80B6D90[param_1].text;
@@ -462,8 +456,7 @@ u8 *sub_8002374(u32 param_1)
   }
 }
 
-// Unused
-u8 *sub_8002394(u32 param_1)
+UNUSED u8 *sub_8002394(u32 param_1)
 {
   if (param_1 - 0x12 < 9) {
     return  gUnknown_80B714C[param_1 - 0x12];
@@ -476,8 +469,7 @@ u8 *sub_8002394(u32 param_1)
   }
 }
 
-// Unused
-u8 *sub_80023C4(u32 param_1)
+UNUSED u8 *sub_80023C4(u32 param_1)
 {
   if (param_1 < 4) {
    return gUnknown_80B71A0[param_1]; // CISTART, CECONTINUE, CNLAST, CWEND
@@ -492,59 +484,59 @@ bool8 sub_80023E4(u32 param_1)
 {
   switch(param_1) {
     case 0:
-        return ScriptVarScenarioAfter(3,2,-1);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,2,-1);
     case 1:
-        return ScriptVarScenarioAfter(3,3,3);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,3,3);
     case 2:
-        return ScriptVarScenarioAfter(3,4,3);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,4,3);
     case 3:
-        return ScriptVarScenarioAfter(3,5,0);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,5,0);
     case 4:
-        return (ScriptVarScenarioAfter(3,0xb,0) && ScriptVarScenarioBefore(3,0xd,0));
+        return (ScriptVarScenarioAfter(SCENARIO_MAIN,0xb,0) && ScriptVarScenarioBefore(SCENARIO_MAIN,0xd,0));
     case 5:
-        return (ScriptVarScenarioAfter(3,0xb,3) && ScriptVarScenarioBefore(3,0xf,0));
+        return (ScriptVarScenarioAfter(SCENARIO_MAIN,0xb,3) && ScriptVarScenarioBefore(SCENARIO_MAIN,0xf,0));
     case 6:
-        return ScriptVarScenarioAfter(3,0x11,-1);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x11,-1);
     case 7:
-        return ScriptVarScenarioAfter(3,0x12,2);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x12,2);
     case 8:
-        return ScriptVarScenarioAfter(3,0x12,3);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x12,3);
     case 9:
-        return ScriptVarScenarioAfter(3,0x12,-1);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x12,-1);
     case 10:
-        return ScriptVarScenarioAfter(3,5,4);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,5,4);
     case 0xb:
-        return ScriptVarScenarioAfter(3,5,4);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,5,4);
     case 0xc:
-        return (!ScriptVarScenarioEqual(3,0xb,2) && !ScriptVarScenarioEqual(3,0xb,3));
+        return (!ScriptVarScenarioEqual(SCENARIO_MAIN,0xb,2) && !ScriptVarScenarioEqual(SCENARIO_MAIN,0xb,3));
     case 0xd:
-        return ScriptVarScenarioEqual(3,0x10,2);
+        return ScriptVarScenarioEqual(SCENARIO_MAIN,0x10,2);
     case 0xe:
-        return !ScriptVarScenarioBefore(3,5,7);
+        return !ScriptVarScenarioBefore(SCENARIO_MAIN,5,7);
     case 0xf:
-        return !ScriptVarScenarioBefore(3,0xf,0);
+        return !ScriptVarScenarioBefore(SCENARIO_MAIN,0xf,0);
     case 0x10:
-        return ScriptVarScenarioAfter(3,7,-1);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,7,-1);
     case 0x11:
-        return ScriptVarScenarioAfter(3,0xc,-1);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,0xc,-1);
     case 0x12:
-        return ScriptVarScenarioAfter(3,0xd,-1);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,0xd,-1);
     case 0x13:
-        return ScriptVarScenarioAfter(3,0xf,-1);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,0xf,-1);
     case 0x14:
-        return ScriptVarScenarioAfter(3,0x10,-1);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x10,-1);
     case 0x15:
-        return ScriptVarScenarioAfter(5,0x21,-1);
+        return ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,-1);
     case 0x16:
-        return ScriptVarScenarioAfter(5,0x22,-1);
+        return ScriptVarScenarioAfter(SCENARIO_SUB2,0x22,-1);
     case 0x17:
-        return ScriptVarScenarioAfter(6,0x24,-1);
+        return ScriptVarScenarioAfter(SCENARIO_SUB3,0x24,-1);
     case 0x18:
-        return ScriptVarScenarioAfter(7,0x2a,-1);
+        return ScriptVarScenarioAfter(SCENARIO_SUB4,0x2a,-1);
     case 0x19:
-        return ScriptVarScenarioAfter(8,0x2c,-1);
+        return ScriptVarScenarioAfter(SCENARIO_SUB5,0x2c,-1);
     case 0x1a:
-        return ScriptVarScenarioAfter(10,0x31,-1);
+        return ScriptVarScenarioAfter(SCENARIO_SUB7,0x31,-1);
     case 0x1b:
         return RescueScenarioConquered(0x29);
     case 0x1c:
@@ -613,24 +605,24 @@ bool8 SaveGlobalScriptVars(void *r0)
 bool8 RestoreGlobalScriptVars(u8 *r0)
 {
     struct ScriptVarPtr temp;
-    GetScriptVarRef(&temp, 0, 0);
+    GetScriptVarRef(&temp, NULL, VERSION);
     MemoryCopy8(gScriptVarBuffer, r0, 0x400);
     if (temp.info->defaultValue != *(u32 *)temp.ptr)
         return 0;
     return 1;
 }
 
-void sub_8002758(s32 r0)
+UNUSED void SetConditionBit(s32 r0)
 {
-    UpdateScriptVarWithImmediate(NULL, 0x1, r0, CALC_SETBIT);
+    UpdateScriptVarWithImmediate(NULL, CONDITION, r0, CALC_SETBIT);
 }
 
-u8 sub_800276C(void)
+UNUSED u8 sub_800276C(void)
 {
     return 0;
 }
 
-void nullsub_140(void)
+UNUSED void nullsub_140(void)
 {
 
 }

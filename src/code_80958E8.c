@@ -808,7 +808,7 @@ bool8 sub_80961D8(void)
          gUnknown_203B490->unk328 = flag;
     }
     floor = 0x38;
-    if(ScriptVarScenarioEqual(0xA, 0x31, 0x1))
+    if(ScriptVarScenarioEqual(SCENARIO_SUB7, 0x31, 0x1))
     {
         if(!gUnknown_203B490->PKMNNewsReceived[0x35])
             if(!sub_8096E80(0x35)) floor = 0x35;

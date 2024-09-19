@@ -14,7 +14,7 @@ bool8 sub_8035678(void)
     sCredits2Work = MemoryAlloc(sizeof(Credits2Work), 8);
     sCredits2Work->state = 0;
     sCredits2Work->unk4 = 0;
-    ClearScriptVarArray(NULL, 57);
+    ClearScriptVarArray(NULL, EVENT_LOCAL);
     return TRUE;
 }
 
@@ -62,7 +62,7 @@ u32 sub_80356A0(void)
             return 3; // sub_809C478 clears the flash data when this is returned
     }
 
-    if (GetScriptVarValue(NULL, 57) != 0) {
+    if (GetScriptVarValue(NULL, EVENT_LOCAL) != 0) {
         sCredits2Work->state = 3;
         return 2;
     }

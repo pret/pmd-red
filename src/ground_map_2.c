@@ -52,7 +52,7 @@ void sub_80A5EBC(void)
 
 void sub_80A5EDC(u8 param_1)
 {
-    SetScriptVarValue(NULL, 27, -1);
+    SetScriptVarValue(NULL, WEATHER_KIND, -1);
     gUnknown_3001B74->unk0  = -1;
     gUnknown_3001B74->unk2 = param_1;
 
@@ -84,7 +84,7 @@ void GroundWeather_Select(s16 param_1)
     iVar2 = param_1;
     iVar3 = iVar2;
     Log(0, gGroundWeatherSelect, iVar2, gUnknown_3001B74->unk2);
-    SetScriptVarValue(NULL, 27, iVar2);
+    SetScriptVarValue(NULL, WEATHER_KIND, iVar2);
     gUnknown_3001B74->unk0 = iVar2;
 
     if (gUnknown_3001B74->unk2 == 0)

@@ -160,24 +160,24 @@ static void sub_801B874(void)
             if (sUnknown_203B234->unk10.id == ITEM_WEAVILE_FIG) {
                 sUnknown_203B234->fallbackState = 16;
 
-                if (GetScriptVarArrayValue(NULL, 71, 1)) {
+                if (GetScriptVarArrayValue(NULL, EVENT_B01P01, 1)) {
                     AddToTeamMoney(1000);
                     sub_801B748(4);
                 }
                 else {
-                    SetScriptVarArrayValue(NULL, 71, 1, 1);
+                    SetScriptVarArrayValue(NULL, EVENT_B01P01, 1, 1);
                     sub_801B748(3);
                 }
             }
             else if (sUnknown_203B234->unk10.id == ITEM_MIME_JR_FIG) {
                 sUnknown_203B234->fallbackState = 16;
 
-                if (GetScriptVarArrayValue(NULL, 71, 0)) {
+                if (GetScriptVarArrayValue(NULL, EVENT_B01P01, 0)) {
                     AddToTeamMoney(1000);
                     sub_801B748(4);
                 }
                 else {
-                    SetScriptVarArrayValue(NULL, 71, 0, 1);
+                    SetScriptVarArrayValue(NULL, EVENT_B01P01, 0, 1);
                     sub_801B748(3);
                 }
             }
