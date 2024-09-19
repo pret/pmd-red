@@ -1,5 +1,6 @@
 #include "global.h"
 #include "debug.h"
+#include "event_flag.h"
 #include "ground_link.h"
 #include "ground_script.h"
 #include "ground_sprite.h"
@@ -70,27 +71,6 @@ void FatalError(void* loc, char* fmt, ...) __attribute__((noreturn));
 
 // Beware of the declarations without specified arguments, returning u32 or s32, these were quickly hacked in to get the code to compile and link
 // The return values are almost certainly NOT correct and will need to be rechecked when moving to header files
-u32 FlagCalc();
-u32 FlagJudge();
-s32 GetScriptVarValue(ScriptUnion832*, s32);
-void ResetScriptVarArray(u8*, s16);
-void ClearScriptVarArray(u8*, s16);
-u32 GetScriptVarArrayValue(ScriptUnion832*, s16, u16);
-void SetScriptVarValue(s32, s32, s32);
-void SetScriptVarArrayValue(u8*, s16, u32, s32);
-u32 GetScriptVarArraySum();
-void GetScriptVarScenario(s16, s32*, s32*);
-u32 ScenarioCalc(s16, s32, s32);
-u32 ScriptVarScenarioBefore();
-u32 ScriptVarScenarioEqual();
-u32 ScriptVarScenarioAfter();
-void UpdateScriptVarWithImmediate(u8*, s16, s32, u8);
-void UpdateScriptVarWithVar(u8*, s16, s32, u8);
-u32 sub_80022F8();
-u32 sub_8002318();
-u32 sub_80023E4();
-u32 sub_80026CC();
-void sub_80026E8(s16, bool8);
 char sub_8002984(s32, u8);
 u32 VecDirection8Radial();
 u32 SizedDeltaDirection4();
@@ -235,7 +215,7 @@ s32 ExecuteScriptCommand(Action *action) {
             }
             case 0x02: {
                 s32 arg = (s16)curCmd.arg1;
-                if (arg == -1) arg = (s16)GetScriptVarValue(0, 19);
+                if (arg == -1) arg = (s16)GetScriptVarValue(NULL, DUNGEON_ENTER);
                 if (ScriptLoggingEnabled(TRUE)) {
                     // "    dungeon select %3d"
                     Log(1, gUnknown_81165F4, arg);
@@ -267,7 +247,7 @@ s32 ExecuteScriptCommand(Action *action) {
                     }
                     return 2; // do action
                 } else {
-                    SetScriptVarValue(0, 18, sub_80A26B8((s16)curCmd.arg1));
+                    SetScriptVarValue(NULL, DUNGEON_SELECT, sub_80A26B8((s16)curCmd.arg1));
                     action->scriptData.branchDiscriminant = 1;
                     return 2; // do action
                 }
@@ -284,7 +264,7 @@ s32 ExecuteScriptCommand(Action *action) {
                         return 2;
                     }
                 } else {
-                    SetScriptVarValue(0, 19, curCmd.arg1);
+                    SetScriptVarValue(NULL, DUNGEON_ENTER, curCmd.arg1);
                     action->scriptData.branchDiscriminant = 1;
                     return 2;
                 }
@@ -296,9 +276,9 @@ s32 ExecuteScriptCommand(Action *action) {
             case 0x07: {
                 s32 tmp = (s16)curCmd.arg1;
                 if (tmp == -1) {
-                    tmp = (s16)GetScriptVarValue(0, 19);
+                    tmp = (s16)GetScriptVarValue(NULL, DUNGEON_ENTER);
                 } else {
-                    SetScriptVarValue(0, 19, tmp);
+                    SetScriptVarValue(NULL, DUNGEON_ENTER, tmp);
                 }
                 if (ScriptLoggingEnabled(TRUE)) {
                     Log(1, gUnknown_811660C, tmp);
@@ -330,8 +310,8 @@ s32 ExecuteScriptCommand(Action *action) {
                             gGroundConversion_811BAF4[gCurrentMap].text);
                     }
                 }
-                SetScriptVarValue(0,0x10,gCurrentMap);
-                SetScriptVarValue(0,0x11,gGroundConversion_811BAF4[gCurrentMap].unk2);
+                SetScriptVarValue(NULL,GROUND_MAP,gCurrentMap);
+                SetScriptVarValue(NULL,GROUND_PLACE,gGroundConversion_811BAF4[gCurrentMap].unk2);
                 GroundSprite_Reset(gUnknown_2039A32);
                 sub_809D0BC();
                 DeleteGroundEvents();
@@ -536,9 +516,9 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0x1f: {
-                s32 a = (s16)GetScriptVarValue(0, 19);
+                s32 a = (s16)GetScriptVarValue(NULL, DUNGEON_ENTER);
                 const DungeonInfo *ret1 = GetDungeonInfo_80A2608(a);
-                s32 thing = GetScriptVarArrayValue(0, 48, a) == 0 ? ret1->unk6 : ret1->unk8;
+                s32 thing = GetScriptVarArrayValue(NULL, DUNGEON_ENTER_LIST, a) == 0 ? ret1->unk6 : ret1->unk8;
                 // fakematch: this is almost certainly a range check of the form 0x37 <= a && a < 0x48
                 // but that loses the s32 -> u16 cast. Inlines, macros, or other schenanigans are likely involved
                 if (!((u16)(a - 0x37) < 0x11) && (s16)sub_80A2750(a) == 1) {
@@ -1021,10 +1001,10 @@ s32 ExecuteScriptCommand(Action *action) {
                 Position32 pos;
                 s32 height;
                 s32 dir;
-                pos.x = GetScriptVarArrayValue(0, 0x32, (u16)curCmd.arg1); // POSITION_X
-                pos.y = GetScriptVarArrayValue(0, 0x33, (u16)curCmd.arg1); // POSITION_Y
-                height = GetScriptVarArrayValue(0, 0x34, (u16)curCmd.arg1); // POSITION_HEIGHT
-                dir = (s8)GetScriptVarArrayValue(0, 0x35, (u16)curCmd.arg1); // POSITION_DIRECTION
+                pos.x = GetScriptVarArrayValue(NULL, POSITION_X, (u16)curCmd.arg1);
+                pos.y = GetScriptVarArrayValue(NULL, POSITION_Y, (u16)curCmd.arg1);
+                height = GetScriptVarArrayValue(NULL, POSITION_HEIGHT, (u16)curCmd.arg1);
+                dir = (s8)GetScriptVarArrayValue(NULL, POSITION_DIRECTION, (u16)curCmd.arg1);
                 action->callbacks->moveReal(action->parentObject, &pos);
                 action->callbacks->setPosHeight(action->parentObject, height);
                 action->scriptData.unk26 = dir;
@@ -1044,10 +1024,10 @@ s32 ExecuteScriptCommand(Action *action) {
                 action->callbacks->getHitboxCenter(action->parentObject, &pos);
                 action->callbacks->getPosHeightAndUnk(action->parentObject, &height, &wat);
                 action->callbacks->getDirection(action->parentObject, &dir);
-                SetScriptVarArrayValue(0, 0x32, (u16)curCmd.arg1, pos.x);
-                SetScriptVarArrayValue(0, 0x33, (u16)curCmd.arg1, pos.y);
-                SetScriptVarArrayValue(0, 0x34, (u16)curCmd.arg1, height);
-                SetScriptVarArrayValue(0, 0x35, (u16)curCmd.arg1, dir);
+                SetScriptVarArrayValue(NULL, POSITION_X, (u16)curCmd.arg1, pos.x);
+                SetScriptVarArrayValue(NULL, POSITION_Y, (u16)curCmd.arg1, pos.y);
+                SetScriptVarArrayValue(NULL, POSITION_HEIGHT, (u16)curCmd.arg1, height);
+                SetScriptVarArrayValue(NULL, POSITION_DIRECTION, (u16)curCmd.arg1, dir);
                 break;
             }
             case 0x60: {
@@ -1456,23 +1436,23 @@ s32 ExecuteScriptCommand(Action *action) {
                 return 2;
             }
             case 0xa4: {
-                ResetScriptVarArray(scriptData->unk50[0].arr, curCmd.argShort);
+                ResetScriptVarArray(scriptData->localVars.buf, curCmd.argShort);
                 break;
             }
             case 0xa5: {
-                ClearScriptVarArray(scriptData->unk50[0].arr, curCmd.argShort);
+                ClearScriptVarArray(scriptData->localVars.buf, curCmd.argShort);
                 break;
             }
             case 0xa6: {
-                UpdateScriptVarWithImmediate(scriptData->unk50[0].arr, curCmd.argShort, curCmd.arg1, curCmd.argByte);
+                UpdateScriptVarWithImmediate(scriptData->localVars.buf, curCmd.argShort, curCmd.arg1, curCmd.argByte);
                 break;
             }
             case 0xa7: {
-                UpdateScriptVarWithVar(scriptData->unk50[0].arr, curCmd.argShort, (s16)curCmd.arg1, curCmd.argByte);
+                UpdateScriptVarWithVar(scriptData->localVars.buf, curCmd.argShort, (s16)curCmd.arg1, curCmd.argByte);
                 break;
             }
             case 0xa8: {
-                SetScriptVarArrayValue(scriptData->unk50[0].arr, curCmd.argShort, (u16)curCmd.arg1, curCmd.arg2);
+                SetScriptVarArrayValue(scriptData->localVars.buf, curCmd.argShort, (u16)curCmd.arg1, curCmd.arg2);
                 break;
             }
             case 0xa9: {
@@ -1486,12 +1466,12 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0xab: {
-                SetScriptVarValue(0, 19, curCmd.arg1);
-                SetScriptVarValue(0, 22, curCmd.argShort);
+                SetScriptVarValue(NULL, DUNGEON_ENTER, curCmd.arg1);
+                SetScriptVarValue(NULL, DUNGEON_RESULT, curCmd.argShort);
                 break;
             }
             case 0xac: {
-                SetScriptVarValue(0, 28, curCmd.argShort);
+                SetScriptVarValue(NULL, PLAYER_KIND, curCmd.argShort);
                 break;
             }
             case 0xad: {
@@ -1519,31 +1499,31 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0xb3: {
-                if ((u8)sub_80022F8(0, curCmd.argShort, curCmd.arg1, 2)) {
+                if ((u8)JudgeVarWithImmediate(NULL, curCmd.argShort, curCmd.arg1, JUDGE_EQ)) {
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;
             }
             case 0xb4: {
-                if ((s8)sub_80022F8(scriptData->unk50, (s16)curCmd.arg1, curCmd.arg2, (u8)curCmd.argByte)) {
+                if ((s8)JudgeVarWithImmediate(scriptData->localVars.buf, (s16)curCmd.arg1, curCmd.arg2, (u8)curCmd.argByte)) {
                     scriptData->script.ptr = FindLabel(action, curCmd.argShort);
                 }
                 break;
             }
             case 0xb5: {
-                if ((s8)sub_8002318(scriptData->unk50, (s16)curCmd.arg1, (s16)curCmd.arg2, (u8)curCmd.argByte)) {
+                if ((s8)JudgeVarWithVar(scriptData->localVars.buf, (s16)curCmd.arg1, (s16)curCmd.arg2, (u8)curCmd.argByte)) {
                     scriptData->script.ptr = FindLabel(action, curCmd.argShort);
                 }
                 break;
             }
             case 0xb6: {
-                if (GetScriptVarArrayValue(scriptData->unk50, (s16)curCmd.arg1, (u16)curCmd.arg2)) {
+                if (GetScriptVarArrayValue(scriptData->localVars.buf, (s16)curCmd.arg1, (u16)curCmd.arg2)) {
                     scriptData->script.ptr = FindLabel(action, curCmd.argShort);
                 }
                 break;
             }
             case 0xb7: {
-                if ((s8)FlagJudge(GetScriptVarArraySum(scriptData->unk50, (s16)curCmd.arg1), curCmd.arg2, (u8)curCmd.argByte)) {
+                if ((s8)FlagJudge(GetScriptVarArraySum(scriptData->localVars.buf, (s16)curCmd.arg1), curCmd.arg2, (u8)curCmd.argByte)) {
                     scriptData->script.ptr = FindLabel(action, curCmd.argShort);
                 }
                 break;
@@ -1609,20 +1589,20 @@ s32 ExecuteScriptCommand(Action *action) {
                 Position32 pos, pos2, pos3;
                 switch (curCmd.op) {
                     case 0xc0: {
-                        val = GetScriptVarValue(scriptData->unk50, curCmd.argShort);
+                        val = GetScriptVarValue(scriptData->localVars.buf, curCmd.argShort);
                         break;
                     }
                     case 0xc1: {
                         val = FlagCalc(
-                            GetScriptVarValue(scriptData->unk50, curCmd.argShort),
+                            GetScriptVarValue(scriptData->localVars.buf, curCmd.argShort),
                             curCmd.arg1,
                             (u8)curCmd.argByte);
                         break;
                     }
                     case 0xc2: {
                         val = FlagCalc(
-                            GetScriptVarValue(scriptData->unk50, curCmd.argShort),
-                            GetScriptVarValue(scriptData->unk50, (s16)curCmd.arg1),
+                            GetScriptVarValue(scriptData->localVars.buf, curCmd.argShort),
+                            GetScriptVarValue(scriptData->localVars.buf, (s16)curCmd.arg1),
                             (u8)curCmd.argByte);
                         break;
                     }
@@ -1631,11 +1611,11 @@ s32 ExecuteScriptCommand(Action *action) {
                         break;
                     }
                     case 0xc4: {
-                        val = GetScriptVarArrayValue(0, curCmd.argShort, 0);
+                        val = GetScriptVarArrayValue(NULL, curCmd.argShort, 0);
                         break;
                     }
                     case 0xc5: {
-                        val = GetScriptVarArrayValue(0, curCmd.argShort, 1);
+                        val = GetScriptVarArrayValue(NULL, curCmd.argShort, 1);
                         break;
                     }
                     case 0xc6: {
@@ -1704,7 +1684,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0xcf: {
-                scriptData->branchDiscriminant = GetScriptVarValue(scriptData->unk50, curCmd.argShort);
+                scriptData->branchDiscriminant = GetScriptVarValue(scriptData->localVars.buf, curCmd.argShort);
                 while (scriptData->script.ptr->op == 0xd0) {
                     if (scriptData->script.ptr->argShort == scriptData->branchDiscriminant)
                         return 2;
@@ -1722,7 +1702,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 scriptData->branchDiscriminant = 0;
                 switch(curCmd.op) {
                     case 0xd6: case 0xd7: case 0xd8: {
-                        s32 disc = GetScriptVarValue(scriptData->unk50, (s16)curCmd.arg2);
+                        s32 disc = GetScriptVarValue(scriptData->localVars.buf, (s16)curCmd.arg2);
                         for (; scriptData->script.ptr->op == 0xd0; scriptData->script.ptr++, scriptData->branchDiscriminant++) {
                             if (scriptData->script.ptr->argShort == disc)
                                 out = scriptData->script.ptr->argPtr;
@@ -1833,7 +1813,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0xec: {
-                gUnknown_2039A34 = GetAdjustedGroundMap((s16)GetScriptVarValue(scriptData->unk50, curCmd.argShort));
+                gUnknown_2039A34 = GetAdjustedGroundMap((s16)GetScriptVarValue(scriptData->localVars.buf, curCmd.argShort));
                 GroundCancelAllEntities();
                 GroundMap_ExecuteEnter(gUnknown_2039A34);
                 break;

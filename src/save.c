@@ -49,7 +49,6 @@ extern u32 sub_80954CC(void* a, s32 b);
 extern u32 sub_8095624(u8 *, u32);
 extern u32 RestoreMailInfo(void* a, s32 b);
 extern u32 SaveMailInfo(u8 *, u32);
-extern void ThoroughlyResetScriptVars(void);
 extern void sub_80958E4(u32 *a, u32 b);
 extern void sub_80972F4(void);
 extern void sub_80974E8(void);
@@ -219,7 +218,7 @@ u32 ReadSaveFromPak(u32 *a)
     if (!saveStatus)
     {
         if (gUnknown_203B184 == NULL) {
-            if (!sub_8002718(playerSave->unk004)) {
+            if (!RestoreGlobalScriptVars(playerSave->unk004)) {
                 saveStatus = 4;
             }
         }
@@ -344,7 +343,7 @@ u32 WriteSavetoPak(s32 *param_1, u32 param_2)
   gameName = GetGameInternalName();
   strncpy(playerSave->gameInternalName,gameName, ARRAY_COUNT(playerSave->gameInternalName));
   if (gUnknown_203B184 == NULL) {
-    sub_8002700(playerSave->unk004);
+    SaveGlobalScriptVars(playerSave->unk004);
   }
   else {
     MemoryCopy8(playerSave->unk004,gUnknown_203B184->unk04C,ARRAY_COUNT(playerSave->unk004));

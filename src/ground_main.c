@@ -48,10 +48,7 @@ extern void GroundLives_Action();
 extern void GroundObject_Action();
 extern void GroundEffect_Action();
 
-extern s32 GetScriptVarArrayValue(u8, u8, u8);
 extern void sub_809CB8C();
-extern void SetScriptVarValue(u8, u8, u32);
-extern void SetScriptVarArrayValue(u8, u8, u8, s32);
 extern void sub_8098CC8();
 extern void GeneratePelipperJobs();
 extern void sub_80961B4();
@@ -93,26 +90,26 @@ void sub_8098BDC(void)
 void sub_8098C58(void)
 {
     s32 temp, temp2;
-    ClearScriptVarArray(0, 54);
-    ClearScriptVarArray(0, 57);
+    ClearScriptVarArray(NULL, GROUND_LOCAL);
+    ClearScriptVarArray(NULL, EVENT_LOCAL);
     sub_809CB8C();
     sub_8001D88();
 
-    if (GetScriptVarValue(0, 42) != 0) {
-        temp = GetScriptVarValue(0, 41);
+    if (GetScriptVarValue(NULL, FLAG_KIND_CHANGE_REQUEST) != 0) {
+        temp = GetScriptVarValue(NULL, FLAG_KIND);
         temp++;
         if (temp > 15)
             temp = 0;
 
-        SetScriptVarValue(0, 41, temp);
-        SetScriptVarValue(0, 42, 0);
+        SetScriptVarValue(NULL, FLAG_KIND, temp);
+        SetScriptVarValue(NULL, FLAG_KIND_CHANGE_REQUEST, 0);
     }
 
-    temp2 = GetScriptVarArrayValue(0, 66, 0);
+    temp2 = GetScriptVarArrayValue(NULL, EVENT_GONBE, 0);
     if (temp2 <= 0)
         temp2 = 1;
     temp2--;
-    SetScriptVarArrayValue(0, 66, 0, temp2);
+    SetScriptVarArrayValue(NULL, EVENT_GONBE, 0, temp2);
 
     sub_8098CC8();
 }
@@ -120,15 +117,15 @@ void sub_8098C58(void)
 void sub_8098CC8(void)
 {
     u32 temp;
-    if(ScriptVarScenarioBefore(0x3, 0xB, 0))
+    if(ScriptVarScenarioBefore(SCENARIO_MAIN, 0xB, 0))
     {
         temp = 0;
     }
-    else if(ScriptVarScenarioBefore(0x3, 0xF, 0))
+    else if(ScriptVarScenarioBefore(SCENARIO_MAIN, 0xF, 0))
     {
         temp = 1;
     }
-    else if(ScriptVarScenarioBefore(0x3, 0x12, 0))
+    else if(ScriptVarScenarioBefore(SCENARIO_MAIN, 0x12, 0))
     {
         temp = 2;
     }
@@ -278,12 +275,12 @@ bool8 GetScriptMode(void)
 
 s16 sub_8098FA0(void)
 {
-    return GetScriptVarValue(0, 0x11);
+    return GetScriptVarValue(NULL, GROUND_PLACE);
 }
 
 const char *sub_8098FB4(void)
 {
-    return sub_80A2B18(GetScriptVarValue(0, 0x11));
+    return sub_80A2B18(GetScriptVarValue(NULL, GROUND_PLACE));
 }
 
 s16 sub_8098FCC(u32 unused)
@@ -293,12 +290,12 @@ s16 sub_8098FCC(u32 unused)
   s32 iVar6;
   const DungeonInfo *iVar3;
 
-  iVar5 = (s16)GetScriptVarValue(0,0x13);
+  iVar5 = (s16)GetScriptVarValue(NULL,DUNGEON_ENTER);
   iVar6 = iVar5;
   if (iVar5 == -1) return 0xC;
 
   if (iVar5 == 0x51)
-    iVar4 = (s16)GetScriptVarValue(0,0x14);
+    iVar4 = (s16)GetScriptVarValue(NULL,DUNGEON_ENTER_INDEX);
   else
     iVar4 = iVar6;
 
@@ -308,7 +305,7 @@ s16 sub_8098FCC(u32 unused)
   }
   switch((s16)(iVar3->unk4 - 0xb2)) {
     case 0:
-        if (ScriptVarScenarioAfter(3,2,-1) != 0) return 0xc;
+        if (ScriptVarScenarioAfter(SCENARIO_MAIN,2,-1) != 0) return 0xc;
         break;
     case 0xf:
     case 0x11:

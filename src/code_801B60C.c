@@ -7,6 +7,7 @@
 #include "code_8098BDC.h"
 #include "common_strings.h"
 #include "constants/colors.h"
+#include "event_flag.h"
 #include "input.h"
 #include "items.h"
 #include "kecleon_bros4.h"
@@ -23,10 +24,6 @@ extern u8 gAvailablePokemonNames[]; // 202DF98
 static EWRAM_DATA_2 unkStruct_203B234 *sUnknown_203B234 = {0};
 
 #include "data/code_801B60C.h" // 80DBA58
-
-// event_flag.s
-extern u32 GetScriptVarArrayValue(u32, u32, u16);
-extern void SetScriptVarArrayValue(u32, u32, u32, u32);
 
 static void sub_801B748(u32);
 static void sub_801B760(void);
@@ -163,24 +160,24 @@ static void sub_801B874(void)
             if (sUnknown_203B234->unk10.id == ITEM_WEAVILE_FIG) {
                 sUnknown_203B234->fallbackState = 16;
 
-                if (GetScriptVarArrayValue(0, 71, 1)) {
+                if (GetScriptVarArrayValue(NULL, EVENT_B01P01, 1)) {
                     AddToTeamMoney(1000);
                     sub_801B748(4);
                 }
                 else {
-                    SetScriptVarArrayValue(0, 71, 1, 1);
+                    SetScriptVarArrayValue(NULL, EVENT_B01P01, 1, 1);
                     sub_801B748(3);
                 }
             }
             else if (sUnknown_203B234->unk10.id == ITEM_MIME_JR_FIG) {
                 sUnknown_203B234->fallbackState = 16;
 
-                if (GetScriptVarArrayValue(0, 71, 0)) {
+                if (GetScriptVarArrayValue(NULL, EVENT_B01P01, 0)) {
                     AddToTeamMoney(1000);
                     sub_801B748(4);
                 }
                 else {
-                    SetScriptVarArrayValue(0, 71, 0, 1);
+                    SetScriptVarArrayValue(NULL, EVENT_B01P01, 0, 1);
                     sub_801B748(3);
                 }
             }

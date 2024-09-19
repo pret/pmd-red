@@ -75,7 +75,7 @@ void sub_809C478(void)
     
     sub_8035758();
 
-    GetScriptVarScenario(3, &temp, &temp1);
+    GetScriptVarScenario(SCENARIO_MAIN, &temp, &temp1);
     sub_80993C0(0);
 }
 
@@ -154,15 +154,15 @@ void sub_809C550(void)
     switch(ret)
     {
         case 1:
-            if(ScriptVarScenarioBefore(4, 0x1D, 0x3))
+            if(ScriptVarScenarioBefore(SCENARIO_SUB1, 0x1D, 0x3))
                val = 1;
             break;
         case 2:
-            if(ScriptVarScenarioBefore(4, 0x1F, 0x2))
+            if(ScriptVarScenarioBefore(SCENARIO_SUB1, 0x1F, 0x2))
                 val = 2;
             break;
         case 3:
-            if(ScriptVarScenarioBefore(0xB, 0x33, 0x8))
+            if(ScriptVarScenarioBefore(SCENARIO_SUB8, 0x33, 0x8))
                val = 3;
             break;
     }

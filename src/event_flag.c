@@ -16,14 +16,14 @@
 
 extern u8 gScriptVarBuffer[0x400];
 
-struct unkEventStruct
+struct GroundEventTableEntry
 {
     // size: 0x4
-    s16 unk0;
-    u8 unk2; // Seems like friend area number
+    s16 groundEnterId;
+    u8 value; // Seems like friend area number
 };
 
-extern struct unkEventStruct gUnknown_80B71E4[58];
+extern struct GroundEventTableEntry gGroundEnterLookupTable[58];
 
 struct unkStruct_80B6D90
 {
@@ -45,84 +45,80 @@ extern u8 gUnknown_80B7388[];
 
 void FatalError(DebugLocation *, const char *, ...) __attribute__((noreturn));
 extern bool8 HasCompletedAllMazes(void);
-extern void GetScriptVarRef(struct UnkEventStruct *r0, u32 r1, u32 r2);
 extern u8 sub_8002658(s16);
-extern void SetScriptVarValue(u32, u32, u32);
 extern void sub_809733C(u32, u32);
 extern void sub_80973A8(u32, u32);
-extern void SetScriptVarArrayValue(u32, s32, u32, s32);
-extern s32 GetScriptVarArrayValue(u32, s32, u16);
 
 
 // code_80972F4.h (read comment)
 extern bool8 RescueScenarioConquered(s16);
 
-u8 *GetScriptVarPointer(s16 param_1)
+UNUSED u8 *GetScriptVarPointer(s16 varId)
 {
-    struct UnkEventStruct local_1c;
+    struct ScriptVarPtr local_1c;
 
-    GetScriptVarRef(&local_1c,0,param_1);
-    return local_1c.unk4;
+    GetScriptVarRef(&local_1c,0,varId);
+    return local_1c.ptr;
 }
 
-s16 GetScriptVarArrayLength(s16 param_1)
+UNUSED s16 GetScriptVarArrayLength(s16 varId)
 {
-    struct UnkEventStruct local_1c;
+    struct ScriptVarPtr local_1c;
 
-    GetScriptVarRef(&local_1c,0,param_1);
-    return local_1c.unk0[4];
+    GetScriptVarRef(&local_1c,0,varId);
+    return local_1c.info->arrayLen;
 }
 
-s32 GetScriptVarArraySum(s32 param_1, s16 param_2)
+s32 GetScriptVarArraySum(u8 *localVarBuf, s16 varId)
 {
     s32 counter;
     s32 total;
-    struct UnkEventStruct local_1c;
-    s32 param_2_s32;
+    struct ScriptVarPtr local_1c;
+    s32 varId_s32;
 
-    param_2_s32 = param_2;
+    varId_s32 = varId;
 
     total = 0;
-    GetScriptVarRef(&local_1c, 0, param_2_s32);
-    for(counter = 0; counter < local_1c.unk0[4]; counter++)
+    GetScriptVarRef(&local_1c, 0, varId_s32);
+    for(counter = 0; counter < local_1c.info->arrayLen; counter++)
     {
-        total += GetScriptVarArrayValue(param_1, param_2_s32, counter);
+        total += GetScriptVarArrayValue(localVarBuf, varId_s32, counter);
     }
     return total;
 }
 
-void GetScriptVarString(s16 param_1, u8 *param_2, s32 param_3)
+UNUSED void GetScriptVarString(s16 varId, u8 *buf, s32 maxLen)
 {
   u8 *r1;
   s32 r2;
   u8 r0;
-  struct UnkEventStruct local_10;
+  struct ScriptVarPtr local_10;
   
-  GetScriptVarRef(&local_10,0,param_1);
-  for (r1 = local_10.unk4, r2 = 0; r2 < param_3; r2++) {
+  GetScriptVarRef(&local_10,0,varId);
+  for (r1 = local_10.ptr, r2 = 0; r2 < maxLen; r2++) {
     r0 = *r1;
     if (*r1++ == 0) break;
-    *param_2 = r0;
-    param_2++;
+    *buf = r0;
+    buf++;
   }
- *param_2 = 0;
+ *buf = 0;
 }
 
-void ScriptVarStringPopFirstChar(s16 param_1,u32 param_2,s32 param_3)
+UNUSED void ScriptVarStringPopFirstChar(s16 varId,u32 param_2,s32 maxLen)
 {
   u8 *r1;
   s32 r2;
   u8 r0;
-  struct UnkEventStruct local_10;
+  struct ScriptVarPtr local_10;
   
-  GetScriptVarRef(&local_10,0,param_1);
-  for (r1 = local_10.unk4, r2 = 0; r2 < param_3; r1++, r2++) {
+  GetScriptVarRef(&local_10,0,varId);
+  for (r1 = local_10.ptr, r2 = 0; r2 < maxLen; r1++, r2++) {
     r0 = *r1;
     if (*r1++ == 0) break;
     *r1 = r0;
   }
-  if (r2 < local_10.unk0[4]) {
-    for(; r2 < local_10.unk0[4]; r1++, r2++)
+  if (r2 < local_10.info->arrayLen) {
+    for(; r2 < local_10.info->arrayLen; r1++, r2++)
     {
       *r1 = 0;
     }
@@ -131,8 +127,8 @@ void ScriptVarStringPopFirstChar(s16 param_1,u32 param_2,s32 param_3)
 
 void GetScriptVarScenario(s32 param_1,u32 *param_2,u32 *param_3)
 {
-  *param_2 = GetScriptVarArrayValue(0, (s16)param_1, 0);
-  *param_3 = GetScriptVarArrayValue(0, (s16)param_1, 1);
+  *param_2 = GetScriptVarArrayValue(NULL, (s16)param_1, 0);
+  *param_3 = GetScriptVarArrayValue(NULL, (s16)param_1, 1);
 }
 
 void ScenarioCalc(s16 param_1,s32 param_2,s32 param_3)
@@ -145,36 +141,36 @@ void ScenarioCalc(s16 param_1,s32 param_2,s32 param_3)
   GetScriptVarScenario(param_1_s32,&local_18,&local_14);
   Log(6,gUnknown_80B72CC,param_1_s32,local_18,local_14,param_2,param_3); // SCENARIO CALC [%3d] %4d %4d -> %4d %4d 
   if ((param_1_s32 == 3) && ((param_2 != local_18 || (param_3 != local_14)))) {
-    SetScriptVarValue(0,0x19,0);
+    SetScriptVarValue(NULL,CLEAR_COUNT,0);
   }
-  SetScriptVarArrayValue(0,param_1_s32,0,param_2);
-  SetScriptVarArrayValue(0,param_1_s32,1,param_3);
+  SetScriptVarArrayValue(NULL,param_1_s32,0,param_2);
+  SetScriptVarArrayValue(NULL,param_1_s32,1,param_3);
 
   switch(param_1_s32)
   {
       case 3:
         if (((u32)(param_2 - 1) < 0x1b)) {
-            if (ScriptVarScenarioAfter(3,8,-1)) {
+            if (ScriptVarScenarioAfter(SCENARIO_MAIN,8,-1)) {
                 sub_80976F8(0);
             }
-            if (ScriptVarScenarioAfter(3,0xb,3)) {
+            if (ScriptVarScenarioAfter(SCENARIO_MAIN,0xb,3)) {
                 sub_80976F8(1);
             }
-            if (ScriptVarScenarioAfter(3,0x11,0)) {
+            if (ScriptVarScenarioAfter(SCENARIO_MAIN,0x11,0)) {
                 sub_80976F8(2);
             }
         }
         break;
       case 4:
-        if (ScriptVarScenarioBefore(4,0x1f,0) == 0) {
+        if (ScriptVarScenarioBefore(SCENARIO_SUB1,0x1f,0) == 0) {
             sub_80976F8(4);
         }
-        if (ScriptVarScenarioBefore(4,0x20,0) == 0) {
+        if (ScriptVarScenarioBefore(SCENARIO_SUB1,0x20,0) == 0) {
             sub_80976F8(5);
         }
         break;
       case 0xC:
-        if(ScriptVarScenarioBefore(0xc,0x37,2) == 0) {
+        if(ScriptVarScenarioBefore(SCENARIO_SUB9,0x37,2) == 0) {
             sub_80976F8(3);
         }
         break;
@@ -186,8 +182,8 @@ bool8 ScriptVarScenarioBefore(s16 param_1,u32 param_2,s32 param_3)
   s32 uVar1;
   s32 iVar2;
   
-  uVar1 = GetScriptVarArrayValue(0,param_1,0);
-  iVar2 = GetScriptVarArrayValue(0,param_1,1);
+  uVar1 = GetScriptVarArrayValue(NULL,param_1,0);
+  iVar2 = GetScriptVarArrayValue(NULL,param_1,1);
   if ((uVar1 != 0x3a) &&
      (uVar1 < param_2 || (param_3 >= 0 && (uVar1 == param_2) && (iVar2 < param_3)))) {
     return TRUE;
@@ -202,8 +198,8 @@ bool8 ScriptVarScenarioEqual(s16 param_1,u32 param_2,s32 param_3)
   s32 uVar1;
   s32 iVar2;
   
-  uVar1 = GetScriptVarArrayValue(0, param_1, 0);
-  iVar2 = GetScriptVarArrayValue(0, param_1, 1);
+  uVar1 = GetScriptVarArrayValue(NULL, param_1, 0);
+  iVar2 = GetScriptVarArrayValue(NULL, param_1, 1);
   if (((uVar1 == param_2 && (((param_3 < 0) || (iVar2 == param_3)))))) {
     return TRUE;
   }
@@ -217,8 +213,8 @@ bool8 ScriptVarScenarioAfter(s16 param_1,u32 param_2,s32 param_3)
   s32 uVar1;
   s32 iVar2;
   
-  uVar1 = GetScriptVarArrayValue(0, param_1, 0);
-  iVar2 = GetScriptVarArrayValue(0, param_1, 1);
+  uVar1 = GetScriptVarArrayValue(NULL, param_1, 0);
+  iVar2 = GetScriptVarArrayValue(NULL, param_1, 1);
   if ((uVar1 != 0x3a) &&
      ((uVar1 > param_2 || (((param_3 >= 0 && (uVar1 == param_2)) && (iVar2 > param_3)))))) {
     return TRUE;
@@ -235,26 +231,26 @@ void sub_8001D88(void)
   
   GetScriptVarScenario(3, &auStack8, &local_c);
   if (auStack8 - 1 < 0x1b) {
-    if (ScriptVarScenarioBefore(4,0x1f,0) != 0) {
-      if (ScriptVarScenarioAfter(3,0xf,7) != 0) {
-        ScenarioCalc(4,0x1f,0);
+    if (ScriptVarScenarioBefore(SCENARIO_SUB1,0x1f,0) != 0) {
+      if (ScriptVarScenarioAfter(SCENARIO_MAIN,0xf,7) != 0) {
+        ScenarioCalc(SCENARIO_SUB1,0x1f,0);
         sub_8097418(0xe,1);
-        SetScriptVarValue(0,0x28,2);
+        SetScriptVarValue(NULL,BASE_LEVEL,2);
       }
       else {
-        if ((ScriptVarScenarioEqual(4,0,0)) && (ScriptVarScenarioAfter(3,0xf,3))) {
-          ScenarioCalc(4,0x1d,1);
+        if ((ScriptVarScenarioEqual(SCENARIO_SUB1,0,0)) && (ScriptVarScenarioAfter(SCENARIO_MAIN,0xf,3))) {
+          ScenarioCalc(SCENARIO_SUB1,0x1d,1);
         }
       }
     }
-    if ((ScriptVarScenarioEqual(4,0x1f,0)) && (GetFriendAreaStatus(SKY_BLUE_PLAINS))) {
-      ScenarioCalc(4,0x1f,1);
+    if ((ScriptVarScenarioEqual(SCENARIO_SUB1,0x1f,0)) && (GetFriendAreaStatus(SKY_BLUE_PLAINS))) {
+      ScenarioCalc(SCENARIO_SUB1,0x1f,1);
       sub_809733C(0xf,1);
     }
     if (auStack8 > 0x11) {
       sub_80973A8(0x25,1);
       if (((FindItemInInventory(ITEM_HM_DIVE) != -1) || (gTeamInventoryRef->teamStorage[ITEM_HM_DIVE] != 0)) ||
-         (ScriptVarScenarioAfter(5,0x21,3) != 0)) {
+         (ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3) != 0)) {
         sub_80973A8(0x22,1);
       }
       if (GetFriendAreaStatus(FURNACE_DESERT) != 0) {
@@ -276,24 +272,24 @@ void sub_8001D88(void)
       if ((GetFriendAreaStatus(AGED_CHAMBER_AN)) && (GetFriendAreaStatus(AGED_CHAMBER_O_EXCLAIM))) {
         sub_80973A8(0x26,1);
       }
-      if (ScriptVarScenarioEqual(5,0,0)) {
-        ScenarioCalc(5,0x21,1);
+      if (ScriptVarScenarioEqual(SCENARIO_SUB2,0,0)) {
+        ScenarioCalc(SCENARIO_SUB2,0x21,1);
       }
       if ((FindItemInInventory(ITEM_HM_SURF) != -1) || (gTeamInventoryRef->teamStorage[ITEM_HM_SURF] != 0)) {
-        if (ScriptVarScenarioEqual(7,0,0)) {
-          ScenarioCalc(7,0x26,1);
+        if (ScriptVarScenarioEqual(SCENARIO_SUB4,0,0)) {
+          ScenarioCalc(SCENARIO_SUB4,0x26,1);
         }
-        if ((ScriptVarScenarioEqual(9,0,0)) && (GetFriendAreaStatus(SOUTHERN_ISLAND))) {
-          ScenarioCalc(9,0x2e,1);
+        if ((ScriptVarScenarioEqual(SCENARIO_SUB6,0,0)) && (GetFriendAreaStatus(SOUTHERN_ISLAND))) {
+          ScenarioCalc(SCENARIO_SUB6,0x2e,1);
         }
       }
-      if (!ScriptVarScenarioBefore(9,0x30,0)) {
-        if ((ScriptVarScenarioEqual(5,0x22,0)) && HasRecruitedMon(MONSTER_ARTICUNO) && HasRecruitedMon(MONSTER_ZAPDOS) && HasRecruitedMon(MONSTER_MOLTRES)) {
-          ScenarioCalc(5,0x22,1);
+      if (!ScriptVarScenarioBefore(SCENARIO_SUB6,0x30,0)) {
+        if ((ScriptVarScenarioEqual(SCENARIO_SUB2,0x22,0)) && HasRecruitedMon(MONSTER_ARTICUNO) && HasRecruitedMon(MONSTER_ZAPDOS) && HasRecruitedMon(MONSTER_MOLTRES)) {
+          ScenarioCalc(SCENARIO_SUB2,0x22,1);
         }
-        if (((ScriptVarScenarioEqual(0xb,0,0)) && (ScriptVarScenarioAfter(5,0x21,3) != 0)) &&
+        if (((ScriptVarScenarioEqual(SCENARIO_SUB8,0,0)) && (ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3) != 0)) &&
            (GetFriendAreaStatus(SKY_BLUE_PLAINS))) {
-          ScenarioCalc(0xb,0x33,1);
+          ScenarioCalc(SCENARIO_SUB8,0x33,1);
         }
         if (GetFriendAreaStatus(SKY_BLUE_PLAINS)) {
           sub_80973A8(0x27,1);
@@ -302,93 +298,93 @@ void sub_8001D88(void)
           sub_80973A8(0x29,1);
         }
       }
-      if (!ScriptVarScenarioBefore(5,0x22,0)) {
-        if (ScriptVarScenarioEqual(10,0,0)) {
-          ScenarioCalc(10,0x31,1);
+      if (!ScriptVarScenarioBefore(SCENARIO_SUB2,0x22,0)) {
+        if (ScriptVarScenarioEqual(SCENARIO_SUB7,0,0)) {
+          ScenarioCalc(SCENARIO_SUB7,0x31,1);
           sub_809733C(0x1b,1);
         }
-        if ((ScriptVarScenarioEqual(0xc,0,0)) && (!ScriptVarScenarioBefore(0xb,0x34,0))) {
-          ScenarioCalc(0xc,0x35,1);
+        if ((ScriptVarScenarioEqual(SCENARIO_SUB9,0,0)) && (!ScriptVarScenarioBefore(SCENARIO_SUB8,0x34,0))) {
+          ScenarioCalc(SCENARIO_SUB9,0x35,1);
         }
       }
-      if ((ScriptVarScenarioEqual(6,0,0)) && (HasRecruitedMon(MONSTER_LUGIA))) {
-        ScenarioCalc(6,0x24,1);
+      if ((ScriptVarScenarioEqual(SCENARIO_SUB3,0,0)) && (HasRecruitedMon(MONSTER_LUGIA))) {
+        ScenarioCalc(SCENARIO_SUB3,0x24,1);
       }
-      if ((ScriptVarScenarioEqual(8,0,0)) && (HasRecruitedMon(MONSTER_HO_OH))) {
-        ScenarioCalc(8,0x2c,1);
+      if ((ScriptVarScenarioEqual(SCENARIO_SUB5,0,0)) && (HasRecruitedMon(MONSTER_HO_OH))) {
+        ScenarioCalc(SCENARIO_SUB5,0x2c,1);
       }
     }
   }
 }
 
-u32 _FlagCalc(s32 param_1, s32 param_2, u32 operation)
+s32 _FlagCalc(s32 param_1, s32 param_2, enum FlagCalcOperation operation)
 { 
   switch(operation) {
-    case 0:
+    case CALC_SET:
         return param_2;
-    case 1:
+    case CALC_SUB:
         return param_1 - param_2;
-    case 2:
+    case CALC_ADD:
         return param_1 + param_2;
-    case 3:
+    case CALC_MUL:
         return param_1 * param_2;
-    case 4:
+    case CALC_DIV:
         return param_1 / param_2;
-    case 5:
+    case CALC_MOD:
         return param_1 % param_2;
-    case 6:
+    case CALC_AND:
         return param_1 & param_2;
-    case 7:
+    case CALC_OR:
         return param_1 | param_2;
-    case 8:
+    case CALC_XOR:
         return param_1 ^ param_2;
-    case 9:
+    case CALC_SETBIT:
         return (1 << param_2) | param_1;
-    case 10:
+    case CALC_CLEARBIT:
         return param_1 & ~(1 << param_2);
-    case 0xb:
+    case CALC_RANDOM:
         return OtherRandInt(param_2);
     default:
         FatalError(&gUnknown_80B7318,gUnknown_80B7324, operation); // event flag expansion error %d
   }
 }
 
-u8 _FlagJudge(s32 param_1, s32 param_2, u32 operation)
+bool8 _FlagJudge(s32 param_1, s32 param_2, enum FlagJudgeOperation operation)
 {
   switch(operation) {
-      case 0:
-        return 1;
-      case 1:
-        return 0;
-      case 2:
+      case JUDGE_TRUE:
+        return TRUE;
+      case JUDGE_FALSE:
+        return FALSE;
+      case JUDGE_EQ:
         return param_1 == param_2;
-      case 7:
+      case JUDGE_NE:
         return param_1 != param_2;
-      case 3:
+      case JUDGE_GT:
         return param_1 > param_2;
-      case 5:
+      case JUDGE_GE:
         return param_1 >= param_2;
-      case 4:
+      case JUDGE_LT:
         return param_1 < param_2;
-      case 6:
+      case JUDGE_LE:
         return param_1 <= param_2;
-      case 8:
+      case JUDGE_AND_NONZERO:
           return (param_1 & param_2) != 0;
-      case 9:
+      case JUDGE_XOR_NONZERO:
         return (param_1 ^ param_2) != 0;
-      case 10:
+      case JUDGE_BIT_SET:
         return param_1 >> (param_2) & 1;
       default:
         FatalError(&gUnknown_80B7350,gUnknown_80B735C, operation); // event flag rule error %d
   }
 }
 
-u32 FlagCalc(s32 r0, s32 r1, u32 operation)
+s32 FlagCalc(s32 r0, s32 r1, enum FlagCalcOperation operation)
 {
     return _FlagCalc(r0, r1, operation);
 }
 
-void UpdateScriptVarWithImmediate(u32 param_1, s16 param_2, s32 param_3, u32 operation)
+void UpdateScriptVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, enum FlagCalcOperation operation)
 {
   u32 uVar1;
   u32 uVar3;
@@ -398,7 +394,7 @@ void UpdateScriptVarWithImmediate(u32 param_1, s16 param_2, s32 param_3, u32 ope
   SetScriptVarValue(param_1,param_2,uVar3);
 }
 
-void UpdateScriptVarWithVar(u32 param_1, s16 param_2, s16 param_3, u32 operation)
+void UpdateScriptVarWithVar(u8 *param_1, s16 param_2, s16 param_3, enum FlagCalcOperation operation)
 {
   s32 uVar1;
   s32 uVar2;
@@ -414,12 +410,12 @@ void UpdateScriptVarWithVar(u32 param_1, s16 param_2, s16 param_3, u32 operation
   SetScriptVarValue(param_1,param_2_s32,uVar3);
 }
 
-u8 FlagJudge(s32 r0, s32 r1, u32 operation)
+bool8 FlagJudge(s32 r0, s32 r1, enum FlagJudgeOperation operation)
 {
     return _FlagJudge(r0, r1, operation);
 }
 
-u8 sub_80022F8(u32 param_1, s16 param_2, s32 param_3, u32 operation)
+bool8 JudgeVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, enum FlagJudgeOperation operation)
 {
   s32 uVar1;
   
@@ -427,7 +423,7 @@ u8 sub_80022F8(u32 param_1, s16 param_2, s32 param_3, u32 operation)
   return _FlagJudge(uVar1,param_3,operation);
 }
 
-u8 sub_8002318(u32 param_1, s16 param_2, s16 param_3, u32 operation)
+bool8 JudgeVarWithVar(u8 *param_1, s16 param_2, s16 param_3, enum FlagJudgeOperation operation)
 {
   s32 uVar1;
   s32 uVar2;
@@ -440,7 +436,7 @@ u8 sub_8002318(u32 param_1, s16 param_2, s16 param_3, u32 operation)
   return _FlagJudge(uVar1,uVar2,operation);
 }
 
-s32 sub_8002354(u32 param_1)
+UNUSED s32 sub_8002354(u32 param_1)
 {
   if (param_1 < 0x3b) {
     return gUnknown_80B6D90[param_1].num;
@@ -450,7 +446,7 @@ s32 sub_8002354(u32 param_1)
   }
 }
 
-u8 *sub_8002374(u32 param_1)
+UNUSED u8 *sub_8002374(u32 param_1)
 {
   if (param_1 < 0x3b) {
     return gUnknown_80B6D90[param_1].text;
@@ -460,8 +456,7 @@ u8 *sub_8002374(u32 param_1)
   }
 }
 
-// Unused
-u8 *sub_8002394(u32 param_1)
+UNUSED u8 *sub_8002394(u32 param_1)
 {
   if (param_1 - 0x12 < 9) {
     return  gUnknown_80B714C[param_1 - 0x12];
@@ -474,8 +469,7 @@ u8 *sub_8002394(u32 param_1)
   }
 }
 
-// Unused
-u8 *sub_80023C4(u32 param_1)
+UNUSED u8 *sub_80023C4(u32 param_1)
 {
   if (param_1 < 4) {
    return gUnknown_80B71A0[param_1]; // CISTART, CECONTINUE, CNLAST, CWEND
@@ -490,59 +484,59 @@ bool8 sub_80023E4(u32 param_1)
 {
   switch(param_1) {
     case 0:
-        return ScriptVarScenarioAfter(3,2,-1);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,2,-1);
     case 1:
-        return ScriptVarScenarioAfter(3,3,3);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,3,3);
     case 2:
-        return ScriptVarScenarioAfter(3,4,3);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,4,3);
     case 3:
-        return ScriptVarScenarioAfter(3,5,0);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,5,0);
     case 4:
-        return (ScriptVarScenarioAfter(3,0xb,0) && ScriptVarScenarioBefore(3,0xd,0));
+        return (ScriptVarScenarioAfter(SCENARIO_MAIN,0xb,0) && ScriptVarScenarioBefore(SCENARIO_MAIN,0xd,0));
     case 5:
-        return (ScriptVarScenarioAfter(3,0xb,3) && ScriptVarScenarioBefore(3,0xf,0));
+        return (ScriptVarScenarioAfter(SCENARIO_MAIN,0xb,3) && ScriptVarScenarioBefore(SCENARIO_MAIN,0xf,0));
     case 6:
-        return ScriptVarScenarioAfter(3,0x11,-1);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x11,-1);
     case 7:
-        return ScriptVarScenarioAfter(3,0x12,2);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x12,2);
     case 8:
-        return ScriptVarScenarioAfter(3,0x12,3);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x12,3);
     case 9:
-        return ScriptVarScenarioAfter(3,0x12,-1);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x12,-1);
     case 10:
-        return ScriptVarScenarioAfter(3,5,4);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,5,4);
     case 0xb:
-        return ScriptVarScenarioAfter(3,5,4);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,5,4);
     case 0xc:
-        return (!ScriptVarScenarioEqual(3,0xb,2) && !ScriptVarScenarioEqual(3,0xb,3));
+        return (!ScriptVarScenarioEqual(SCENARIO_MAIN,0xb,2) && !ScriptVarScenarioEqual(SCENARIO_MAIN,0xb,3));
     case 0xd:
-        return ScriptVarScenarioEqual(3,0x10,2);
+        return ScriptVarScenarioEqual(SCENARIO_MAIN,0x10,2);
     case 0xe:
-        return !ScriptVarScenarioBefore(3,5,7);
+        return !ScriptVarScenarioBefore(SCENARIO_MAIN,5,7);
     case 0xf:
-        return !ScriptVarScenarioBefore(3,0xf,0);
+        return !ScriptVarScenarioBefore(SCENARIO_MAIN,0xf,0);
     case 0x10:
-        return ScriptVarScenarioAfter(3,7,-1);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,7,-1);
     case 0x11:
-        return ScriptVarScenarioAfter(3,0xc,-1);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,0xc,-1);
     case 0x12:
-        return ScriptVarScenarioAfter(3,0xd,-1);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,0xd,-1);
     case 0x13:
-        return ScriptVarScenarioAfter(3,0xf,-1);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,0xf,-1);
     case 0x14:
-        return ScriptVarScenarioAfter(3,0x10,-1);
+        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x10,-1);
     case 0x15:
-        return ScriptVarScenarioAfter(5,0x21,-1);
+        return ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,-1);
     case 0x16:
-        return ScriptVarScenarioAfter(5,0x22,-1);
+        return ScriptVarScenarioAfter(SCENARIO_SUB2,0x22,-1);
     case 0x17:
-        return ScriptVarScenarioAfter(6,0x24,-1);
+        return ScriptVarScenarioAfter(SCENARIO_SUB3,0x24,-1);
     case 0x18:
-        return ScriptVarScenarioAfter(7,0x2a,-1);
+        return ScriptVarScenarioAfter(SCENARIO_SUB4,0x2a,-1);
     case 0x19:
-        return ScriptVarScenarioAfter(8,0x2c,-1);
+        return ScriptVarScenarioAfter(SCENARIO_SUB5,0x2c,-1);
     case 0x1a:
-        return ScriptVarScenarioAfter(10,0x31,-1);
+        return ScriptVarScenarioAfter(SCENARIO_SUB7,0x31,-1);
     case 0x1b:
         return RescueScenarioConquered(0x29);
     case 0x1c:
@@ -559,19 +553,19 @@ u8 sub_8002658(s16 param_1)
 {
   short sVar1;
   s32 param_1_s32;
-  struct unkEventStruct *ptr;
+  struct GroundEventTableEntry *ptr;
 
   param_1_s32 = param_1;
   
-  ptr = gUnknown_80B71E4;
-  sVar1 = gUnknown_80B71E4[0].unk0;
+  ptr = gGroundEnterLookupTable;
+  sVar1 = gGroundEnterLookupTable[0].groundEnterId;
   if (sVar1 != -1) {
     do {
       if (sVar1 == param_1_s32) {
-        return ptr->unk2;
+        return ptr->value;
       }
       ptr++;
-      sVar1 = ptr->unk0;
+      sVar1 = ptr->groundEnterId;
     } while (sVar1 != -1);
   }
   return 0;
@@ -580,11 +574,11 @@ u8 sub_8002658(s16 param_1)
 s16 sub_8002694(u8 param_1)
 {
 
-    struct unkEventStruct *puVar2 = gUnknown_80B71E4;
+    struct GroundEventTableEntry *puVar2 = gGroundEnterLookupTable;
 
-    while (puVar2->unk0 != -1) {
-        if (puVar2->unk2 == param_1) {
-            return puVar2->unk0;
+    while (puVar2->groundEnterId != -1) {
+        if (puVar2->value == param_1) {
+            return puVar2->groundEnterId;
         }
         puVar2++;
     }
@@ -597,38 +591,38 @@ bool8 sub_80026CC(s16 r0)
     return GetFriendAreaStatus(sub_8002658(r0));
 }
 
-void sub_80026E8(s16 r0)
+void sub_80026E8(s16 r0, bool8 r1)
 {
     UnlockFriendArea(sub_8002658(r0));
 }
 
-bool8 sub_8002700(void *r0)
+bool8 SaveGlobalScriptVars(void *r0)
 {
     MemoryCopy8(r0, gScriptVarBuffer, 0x400);
     return 1;
 }
 
-bool8 sub_8002718(u8 *r0)
+bool8 RestoreGlobalScriptVars(u8 *r0)
 {
-    struct UnkEventStruct temp;
-    GetScriptVarRef(&temp, 0, 0);
+    struct ScriptVarPtr temp;
+    GetScriptVarRef(&temp, NULL, VERSION);
     MemoryCopy8(gScriptVarBuffer, r0, 0x400);
-    if (temp.unk0[5] != *(u32 *)temp.unk4)
+    if (temp.info->defaultValue != *(u32 *)temp.ptr)
         return 0;
     return 1;
 }
 
-void sub_8002758(s32 r0)
+UNUSED void SetConditionBit(s32 r0)
 {
-    UpdateScriptVarWithImmediate(0, 0x1, r0, 0x9);
+    UpdateScriptVarWithImmediate(NULL, CONDITION, r0, CALC_SETBIT);
 }
 
-u8 sub_800276C(void)
+UNUSED u8 sub_800276C(void)
 {
     return 0;
 }
 
-void nullsub_140(void)
+UNUSED void nullsub_140(void)
 {
 
 }

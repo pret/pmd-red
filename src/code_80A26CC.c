@@ -74,7 +74,7 @@ u32 sub_80A25AC(u16 param_1)
         return 19;
     if (param_1 != 1)
         return param_1;
-    GetScriptVarValue(0, 40);
+    GetScriptVarValue(NULL, BASE_LEVEL); // wut???
     return 1;
 }
 
@@ -460,5 +460,5 @@ const u8 *sub_80A2B18(s16 param_1)
 
 UNUSED static const u8 *sub_80A2B28(u16 r0)
 {
-    return sub_80A2B18(GetScriptVarValue(0, 17));
+    return sub_80A2B18(GetScriptVarValue(NULL, GROUND_PLACE));
 }

@@ -37,8 +37,8 @@ void FreeGroundMapAction(void)
 
 void GroundMap_Reset(void)
 {
-    ClearScriptVarArray(0, 0x37);
-    ClearScriptVarArray(0, 0x38);
+    ClearScriptVarArray(NULL, MAP_LOCAL);
+    ClearScriptVarArray(NULL, MAP_LOCAL_DOOR);
     ActionResetScriptData((Action *)gGroundMapAction, gUnknown_8117538);
 
     if (gGroundMapDungeon_3001B70 != NULL) {

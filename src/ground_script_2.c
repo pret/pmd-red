@@ -1,10 +1,8 @@
 #include "debug.h"
 #include "global.h"
+#include "event_flag.h"
 #include "ground_map_1.h"
 #include "ground_script.h"
-
-s32 GetScriptVarValue(ScriptUnion832*, s32);
-u8 FlagJudge(s32 r0, s32 r1, u32 operation);
 
 extern u8 gAnyScriptLocked;
 extern u8 gScriptLocks[];
@@ -92,7 +90,7 @@ ScriptCommand *ResolveJump(Action *action, s32 r1)
 
         if (script.op == 0xCC)
         {
-            if(FlagJudge(r1, script.arg1, 0x2))
+            if(FlagJudge(r1, script.arg1, JUDGE_EQ))
                 return FindLabel(action, script.argShort);
         }
         else if (script.op == 0xCD)
@@ -102,7 +100,7 @@ ScriptCommand *ResolveJump(Action *action, s32 r1)
         }
         else if (script.op == 0xCE)
         {
-            temp = GetScriptVarValue(action->scriptData.unk50, (s16)script.arg1);
+            temp = GetScriptVarValue(action->scriptData.localVars.buf, (s16)script.arg1);
             if(FlagJudge(r1, temp, script.argByte))
                 return FindLabel(action, script.argShort);
         }

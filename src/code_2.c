@@ -34,7 +34,6 @@
 extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);
 extern void sub_800DAAC(void);
-extern void ThoroughlyResetScriptVars(void);
 extern void xxx_script_related_8001334(u32);
 extern void LoadTitleScreen(void);
 extern void sub_80095CC(u32, u32);
@@ -87,9 +86,9 @@ void GameLoop(void)
         ThoroughlyResetScriptVars();
     xxx_script_related_8001334(14);
     xxx_script_related_8001334(15);
-    ClearScriptVarArray(0, 57);
+    ClearScriptVarArray(NULL, EVENT_LOCAL);
     xxx_script_related_8001334(16);
-    if (GetScriptVarValue(0, 57) == 0)
+    if (GetScriptVarValue(NULL, EVENT_LOCAL) == 0)
         xxx_script_related_8001334(17);
 
     while (1) {
