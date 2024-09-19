@@ -1,6 +1,21 @@
 #ifndef GUARD_EVENT_FLAG_H
 #define GUARD_EVENT_FLAG_H
 
+enum FlagCalcOperation {
+    CALC_SET,
+    CALC_SUB,
+    CALC_ADD,
+    CALC_MUL,
+    CALC_DIV,
+    CALC_MOD,
+    CALC_AND,
+    CALC_OR,
+    CALC_XOR,
+    CALC_SETBIT,
+    CALC_CLEARBIT,
+    CALC_RANDOM,
+};
+
 enum FlagJudgeOperation {
     JUDGE_TRUE,
     JUDGE_FALSE,
@@ -50,11 +65,11 @@ bool8 ScriptVarScenarioBefore(s16 param_1, u32 param_2, s32 param_3);
 bool8 ScriptVarScenarioEqual(s16 param_1, u32 param_2, s32 param_3);
 bool8 ScriptVarScenarioAfter(s16 param_1, u32 param_2, s32 param_3);
 void sub_8001D88(void);
-u32 _FlagCalc(s32 param_1, s32 param_2, u32 operation);
+s32 _FlagCalc(s32 param_1, s32 param_2, enum FlagCalcOperation operation);
 bool8 _FlagJudge(s32 param_1, s32 param_2, enum FlagJudgeOperation operation);
-u32 FlagCalc(s32 r0, s32 r1, u32 operation);
-void UpdateScriptVarWithImmediate(u8 *localVarBuf, s16 varId, s32 val, u32 operation);
-void UpdateScriptVarWithVar(u8 *localVarBuf, s16 dstVarId, s16 srcVarId, u32 operation);
+s32 FlagCalc(s32 r0, s32 r1, enum FlagCalcOperation operation);
+void UpdateScriptVarWithImmediate(u8 *localVarBuf, s16 varId, s32 val, enum FlagCalcOperation operation);
+void UpdateScriptVarWithVar(u8 *localVarBuf, s16 dstVarId, s16 srcVarId, enum FlagCalcOperation operation);
 bool8 FlagJudge(s32 r0, s32 r1, enum FlagJudgeOperation operation);
 bool8 JudgeVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, enum FlagJudgeOperation operation);
 bool8 JudgeVarWithVar(u8 *param_1, s16 param_2, s16 param_3, enum FlagJudgeOperation operation);

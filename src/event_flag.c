@@ -321,32 +321,32 @@ void sub_8001D88(void)
   }
 }
 
-u32 _FlagCalc(s32 param_1, s32 param_2, u32 operation)
+s32 _FlagCalc(s32 param_1, s32 param_2, enum FlagCalcOperation operation)
 { 
   switch(operation) {
-    case 0:
+    case CALC_SET:
         return param_2;
-    case 1:
+    case CALC_SUB:
         return param_1 - param_2;
-    case 2:
+    case CALC_ADD:
         return param_1 + param_2;
-    case 3:
+    case CALC_MUL:
         return param_1 * param_2;
-    case 4:
+    case CALC_DIV:
         return param_1 / param_2;
-    case 5:
+    case CALC_MOD:
         return param_1 % param_2;
-    case 6:
+    case CALC_AND:
         return param_1 & param_2;
-    case 7:
+    case CALC_OR:
         return param_1 | param_2;
-    case 8:
+    case CALC_XOR:
         return param_1 ^ param_2;
-    case 9:
+    case CALC_SETBIT:
         return (1 << param_2) | param_1;
-    case 10:
+    case CALC_CLEARBIT:
         return param_1 & ~(1 << param_2);
-    case 0xb:
+    case CALC_RANDOM:
         return OtherRandInt(param_2);
     default:
         FatalError(&gUnknown_80B7318,gUnknown_80B7324, operation); // event flag expansion error %d
@@ -383,12 +383,12 @@ bool8 _FlagJudge(s32 param_1, s32 param_2, enum FlagJudgeOperation operation)
   }
 }
 
-u32 FlagCalc(s32 r0, s32 r1, u32 operation)
+s32 FlagCalc(s32 r0, s32 r1, enum FlagCalcOperation operation)
 {
     return _FlagCalc(r0, r1, operation);
 }
 
-void UpdateScriptVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, u32 operation)
+void UpdateScriptVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, enum FlagCalcOperation operation)
 {
   u32 uVar1;
   u32 uVar3;
@@ -398,7 +398,7 @@ void UpdateScriptVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, u32 ope
   SetScriptVarValue(param_1,param_2,uVar3);
 }
 
-void UpdateScriptVarWithVar(u8 *param_1, s16 param_2, s16 param_3, u32 operation)
+void UpdateScriptVarWithVar(u8 *param_1, s16 param_2, s16 param_3, enum FlagCalcOperation operation)
 {
   s32 uVar1;
   s32 uVar2;
@@ -622,7 +622,7 @@ bool8 sub_8002718(u8 *r0)
 
 void sub_8002758(s32 r0)
 {
-    UpdateScriptVarWithImmediate(NULL, 0x1, r0, 0x9);
+    UpdateScriptVarWithImmediate(NULL, 0x1, r0, CALC_SETBIT);
 }
 
 u8 sub_800276C(void)
