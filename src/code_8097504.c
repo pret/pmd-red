@@ -9,9 +9,6 @@ ALIGNED(4) const char gMeetNinetalesText[] =  "Meet Ninetales.";
 ALIGNED(4) const char gAvoidCaptureText[] = "Avoid capture.";
 ALIGNED(4) const char gFinalScenarioText[] = _("Defeat the final Pokémon.");
 
-extern void SetScriptVarArrayValue(u8, u8, u16, s32);
-extern u32 GetScriptVarArrayValue(u32, u32, u16);
-extern void SetScriptVarValue(u8, u8, u32);
 
 bool8 sub_8097504(s16 mazeIndex)
 {

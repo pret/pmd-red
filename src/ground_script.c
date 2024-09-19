@@ -68,7 +68,7 @@ void InitScriptData(ScriptData *a0)
     a0->unk2C = 0;
     a0->unk30 = 0;
     for (i = 0; i < 4; i++) {
-        a0->unk50[i].raw = 0;
+        a0->localVars.val[i] = 0;
     }
 }
 

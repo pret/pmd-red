@@ -34,7 +34,6 @@
 extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);
 extern void sub_800DAAC(void);
-extern void ThoroughlyResetScriptVars(void);
 extern void xxx_script_related_8001334(u32);
 extern void LoadTitleScreen(void);
 extern void sub_80095CC(u32, u32);

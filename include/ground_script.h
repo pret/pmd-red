@@ -31,11 +31,6 @@ typedef struct ScriptInfo
     /* 0xA */ s8  sector;
 } ScriptInfo;
 
-typedef union ScriptUnion832 {
-    s32 raw;
-    s8  arr[4];
-} ScriptUnion832;
-
 typedef union ScriptUnion1632 {
     s32 raw;
     s16 arr[2];
@@ -70,7 +65,10 @@ typedef struct ScriptData
     /* 0x4D */ u8  unk4D;
     // padding
     // ultimately accessed as ldrb, doesn't work as array of u32-sized structs, needs union
-    /* 0x50 */ ScriptUnion832 unk50[4];
+    /* 0x50 */ union {
+        u8  buf[16];
+        u32 val[4];
+    } localVars;
 } ScriptData;
 
 typedef struct CallbackData

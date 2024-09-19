@@ -471,8 +471,8 @@ gUnknown_80B71A0: @ 80B71A0
         .string "{COLOR_1 GREEN_2}START{END_COLOR_TEXT_1}\0"
         .align 2,0
 
-	.global gUnknown_80B71E4
-gUnknown_80B71E4: @ 80B71E4
+	.global gGroundEnterLookupTable
+gGroundEnterLookupTable: @ 80B71E4
     @ [struct unkEventStruct]
     .2byte 105, 1
     .2byte 106, 2

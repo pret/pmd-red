@@ -48,10 +48,7 @@ extern void GroundLives_Action();
 extern void GroundObject_Action();
 extern void GroundEffect_Action();
 
-extern s32 GetScriptVarArrayValue(u8, u8, u8);
 extern void sub_809CB8C();
-extern void SetScriptVarValue(u8, u8, u32);
-extern void SetScriptVarArrayValue(u8, u8, u8, s32);
 extern void sub_8098CC8();
 extern void GeneratePelipperJobs();
 extern void sub_80961B4();

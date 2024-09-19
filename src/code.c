@@ -36,22 +36,6 @@ void nullsub_3(s32 a0, s32 a1)
 /// TODO merge with event_flag
 /////////////////////////////////
 
-extern u8 gScriptVarBuffer[0x400];
-
-struct unkStruct_80B7394
-{
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6;
-    s16 unk8;
-    s16 unkA;
-    u8 *text;
-};
-
-extern struct unkStruct_80B7394 gScriptVarInfo[];
-extern void SetScriptVarArrayValue(u32, s32, u32, s32);
-extern void SetScriptVarValue(u32, u32, u32);
 extern void sub_80972F4(void);
 extern void nullsub_128(void);
 
@@ -60,7 +44,7 @@ void ThoroughlyResetScriptVars(void)
   s32 iVar1;
   s32 iVar3;
   u16 uVar2;
-  struct unkStruct_80B7394 *puVar1;
+  struct ScriptVarInfo *puVar1;
   
   for(iVar3 = 0; iVar3 < 0x400; iVar3++)
   {
@@ -70,9 +54,9 @@ void ThoroughlyResetScriptVars(void)
   for(iVar1 = 0; iVar1 < 0x51; iVar1 = (iVar1 + 1) * 0x10000 >> 0x10)
   {
     puVar1 = &gScriptVarInfo[iVar1];
-    if (((puVar1->unk0 != 0) && ((puVar1->unk0 != 8)))) {
-      for (uVar2 = 0; uVar2 < puVar1->unk8; uVar2++) {
-        SetScriptVarArrayValue(0, iVar1, uVar2, puVar1->unkA);
+    if (((puVar1->type != 0) && ((puVar1->type != 8)))) {
+      for (uVar2 = 0; uVar2 < puVar1->arrayLen; uVar2++) {
+        SetScriptVarArrayValue(0, iVar1, uVar2, puVar1->defaultValue);
       }
     }
   }

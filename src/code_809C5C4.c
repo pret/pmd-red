@@ -2,6 +2,7 @@
 #include "items.h"
 #include "memory.h"
 #include "game_options.h"
+#include "event_flag.h"
 #include "ground_main.h"
 #include "code_80A26CC.h"
 
@@ -48,11 +49,6 @@ void nullsub_113();
 void nullsub_114();
 void nullsub_115();
 void nullsub_116();
-
-// Event_flag.h
-u8 sub_8002658(s16);
-s16 GetScriptVarValue(u32, u32);
-extern void ClearScriptVarArray(u32, u32);
 
 void sub_809C5C4(void)
 {
@@ -276,7 +272,7 @@ void sub_809C770(s16 param_1, s16 param_2)
                     break;
                 case 0:
                 default:
-                    iVar5 = GetScriptVarValue(0,0x13);
+                    iVar5 = (s16)GetScriptVarValue(0,0x13);
                     break;
 
             }

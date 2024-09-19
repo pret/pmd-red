@@ -16,14 +16,14 @@
 
 extern u8 gScriptVarBuffer[0x400];
 
-struct unkEventStruct
+struct GroundEventTableEntry
 {
     // size: 0x4
-    s16 unk0;
-    u8 unk2; // Seems like friend area number
+    s16 groundEnterId;
+    u8 value; // Seems like friend area number
 };
 
-extern struct unkEventStruct gUnknown_80B71E4[58];
+extern struct GroundEventTableEntry gGroundEnterLookupTable[58];
 
 struct unkStruct_80B6D90
 {
@@ -45,84 +45,84 @@ extern u8 gUnknown_80B7388[];
 
 void FatalError(DebugLocation *, const char *, ...) __attribute__((noreturn));
 extern bool8 HasCompletedAllMazes(void);
-extern void GetScriptVarRef(struct UnkEventStruct *r0, u32 r1, u32 r2);
 extern u8 sub_8002658(s16);
-extern void SetScriptVarValue(u32, u32, u32);
 extern void sub_809733C(u32, u32);
 extern void sub_80973A8(u32, u32);
-extern void SetScriptVarArrayValue(u32, s32, u32, s32);
-extern s32 GetScriptVarArrayValue(u32, s32, u16);
 
 
 // code_80972F4.h (read comment)
 extern bool8 RescueScenarioConquered(s16);
 
-u8 *GetScriptVarPointer(s16 param_1)
+// unused
+u8 *GetScriptVarPointer(s16 varId)
 {
-    struct UnkEventStruct local_1c;
+    struct ScriptVarPtr local_1c;
 
-    GetScriptVarRef(&local_1c,0,param_1);
-    return local_1c.unk4;
+    GetScriptVarRef(&local_1c,0,varId);
+    return local_1c.ptr;
 }
 
-s16 GetScriptVarArrayLength(s16 param_1)
+// unused
+s16 GetScriptVarArrayLength(s16 varId)
 {
-    struct UnkEventStruct local_1c;
+    struct ScriptVarPtr local_1c;
 
-    GetScriptVarRef(&local_1c,0,param_1);
-    return local_1c.unk0[4];
+    GetScriptVarRef(&local_1c,0,varId);
+    return local_1c.info->arrayLen;
 }
 
-s32 GetScriptVarArraySum(s32 param_1, s16 param_2)
+s32 GetScriptVarArraySum(u8 *localVarBuf, s16 varId)
 {
     s32 counter;
     s32 total;
-    struct UnkEventStruct local_1c;
-    s32 param_2_s32;
+    struct ScriptVarPtr local_1c;
+    s32 varId_s32;
 
-    param_2_s32 = param_2;
+    varId_s32 = varId;
 
     total = 0;
-    GetScriptVarRef(&local_1c, 0, param_2_s32);
-    for(counter = 0; counter < local_1c.unk0[4]; counter++)
+    GetScriptVarRef(&local_1c, 0, varId_s32);
+    for(counter = 0; counter < local_1c.info->arrayLen; counter++)
     {
-        total += GetScriptVarArrayValue(param_1, param_2_s32, counter);
+        total += GetScriptVarArrayValue(localVarBuf, varId_s32, counter);
     }
     return total;
 }
 
-void GetScriptVarString(s16 param_1, u8 *param_2, s32 param_3)
+// unused
+void GetScriptVarString(s16 varId, u8 *buf, s32 maxLen)
 {
   u8 *r1;
   s32 r2;
   u8 r0;
-  struct UnkEventStruct local_10;
+  struct ScriptVarPtr local_10;
   
-  GetScriptVarRef(&local_10,0,param_1);
-  for (r1 = local_10.unk4, r2 = 0; r2 < param_3; r2++) {
+  GetScriptVarRef(&local_10,0,varId);
+  for (r1 = local_10.ptr, r2 = 0; r2 < maxLen; r2++) {
     r0 = *r1;
     if (*r1++ == 0) break;
-    *param_2 = r0;
-    param_2++;
+    *buf = r0;
+    buf++;
   }
- *param_2 = 0;
+ *buf = 0;
 }
 
-void ScriptVarStringPopFirstChar(s16 param_1,u32 param_2,s32 param_3)
+// unused
+void ScriptVarStringPopFirstChar(s16 varId,u32 param_2,s32 maxLen)
 {
   u8 *r1;
   s32 r2;
   u8 r0;
-  struct UnkEventStruct local_10;
+  struct ScriptVarPtr local_10;
   
-  GetScriptVarRef(&local_10,0,param_1);
-  for (r1 = local_10.unk4, r2 = 0; r2 < param_3; r1++, r2++) {
+  GetScriptVarRef(&local_10,0,varId);
+  for (r1 = local_10.ptr, r2 = 0; r2 < maxLen; r1++, r2++) {
     r0 = *r1;
     if (*r1++ == 0) break;
     *r1 = r0;
   }
-  if (r2 < local_10.unk0[4]) {
-    for(; r2 < local_10.unk0[4]; r1++, r2++)
+  if (r2 < local_10.info->arrayLen) {
+    for(; r2 < local_10.info->arrayLen; r1++, r2++)
     {
       *r1 = 0;
     }
@@ -353,7 +353,7 @@ u32 _FlagCalc(s32 param_1, s32 param_2, u32 operation)
   }
 }
 
-u8 _FlagJudge(s32 param_1, s32 param_2, u32 operation)
+bool8 _FlagJudge(s32 param_1, s32 param_2, u32 operation)
 {
   switch(operation) {
       case 0:
@@ -388,7 +388,7 @@ u32 FlagCalc(s32 r0, s32 r1, u32 operation)
     return _FlagCalc(r0, r1, operation);
 }
 
-void UpdateScriptVarWithImmediate(u32 param_1, s16 param_2, s32 param_3, u32 operation)
+void UpdateScriptVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, u32 operation)
 {
   u32 uVar1;
   u32 uVar3;
@@ -398,7 +398,7 @@ void UpdateScriptVarWithImmediate(u32 param_1, s16 param_2, s32 param_3, u32 ope
   SetScriptVarValue(param_1,param_2,uVar3);
 }
 
-void UpdateScriptVarWithVar(u32 param_1, s16 param_2, s16 param_3, u32 operation)
+void UpdateScriptVarWithVar(u8 *param_1, s16 param_2, s16 param_3, u32 operation)
 {
   s32 uVar1;
   s32 uVar2;
@@ -414,12 +414,12 @@ void UpdateScriptVarWithVar(u32 param_1, s16 param_2, s16 param_3, u32 operation
   SetScriptVarValue(param_1,param_2_s32,uVar3);
 }
 
-u8 FlagJudge(s32 r0, s32 r1, u32 operation)
+bool8 FlagJudge(s32 r0, s32 r1, u32 operation)
 {
     return _FlagJudge(r0, r1, operation);
 }
 
-u8 sub_80022F8(u32 param_1, s16 param_2, s32 param_3, u32 operation)
+bool8 sub_80022F8(u8 *param_1, s16 param_2, s32 param_3, u32 operation)
 {
   s32 uVar1;
   
@@ -427,7 +427,7 @@ u8 sub_80022F8(u32 param_1, s16 param_2, s32 param_3, u32 operation)
   return _FlagJudge(uVar1,param_3,operation);
 }
 
-u8 sub_8002318(u32 param_1, s16 param_2, s16 param_3, u32 operation)
+bool8 sub_8002318(u8 *param_1, s16 param_2, s16 param_3, u32 operation)
 {
   s32 uVar1;
   s32 uVar2;
@@ -440,6 +440,7 @@ u8 sub_8002318(u32 param_1, s16 param_2, s16 param_3, u32 operation)
   return _FlagJudge(uVar1,uVar2,operation);
 }
 
+// unused
 s32 sub_8002354(u32 param_1)
 {
   if (param_1 < 0x3b) {
@@ -450,6 +451,7 @@ s32 sub_8002354(u32 param_1)
   }
 }
 
+// unused
 u8 *sub_8002374(u32 param_1)
 {
   if (param_1 < 0x3b) {
@@ -559,19 +561,19 @@ u8 sub_8002658(s16 param_1)
 {
   short sVar1;
   s32 param_1_s32;
-  struct unkEventStruct *ptr;
+  struct GroundEventTableEntry *ptr;
 
   param_1_s32 = param_1;
   
-  ptr = gUnknown_80B71E4;
-  sVar1 = gUnknown_80B71E4[0].unk0;
+  ptr = gGroundEnterLookupTable;
+  sVar1 = gGroundEnterLookupTable[0].groundEnterId;
   if (sVar1 != -1) {
     do {
       if (sVar1 == param_1_s32) {
-        return ptr->unk2;
+        return ptr->value;
       }
       ptr++;
-      sVar1 = ptr->unk0;
+      sVar1 = ptr->groundEnterId;
     } while (sVar1 != -1);
   }
   return 0;
@@ -580,11 +582,11 @@ u8 sub_8002658(s16 param_1)
 s16 sub_8002694(u8 param_1)
 {
 
-    struct unkEventStruct *puVar2 = gUnknown_80B71E4;
+    struct GroundEventTableEntry *puVar2 = gGroundEnterLookupTable;
 
-    while (puVar2->unk0 != -1) {
-        if (puVar2->unk2 == param_1) {
-            return puVar2->unk0;
+    while (puVar2->groundEnterId != -1) {
+        if (puVar2->value == param_1) {
+            return puVar2->groundEnterId;
         }
         puVar2++;
     }
@@ -597,7 +599,7 @@ bool8 sub_80026CC(s16 r0)
     return GetFriendAreaStatus(sub_8002658(r0));
 }
 
-void sub_80026E8(s16 r0)
+void sub_80026E8(s16 r0, bool8 r1)
 {
     UnlockFriendArea(sub_8002658(r0));
 }
@@ -610,10 +612,10 @@ bool8 sub_8002700(void *r0)
 
 bool8 sub_8002718(u8 *r0)
 {
-    struct UnkEventStruct temp;
+    struct ScriptVarPtr temp;
     GetScriptVarRef(&temp, 0, 0);
     MemoryCopy8(gScriptVarBuffer, r0, 0x400);
-    if (temp.unk0[5] != *(u32 *)temp.unk4)
+    if (temp.info->defaultValue != *(u32 *)temp.ptr)
         return 0;
     return 1;
 }

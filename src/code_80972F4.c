@@ -10,10 +10,7 @@
 ALIGNED(4) const u8 gDummyScenarioText[] = _("{COLOR_1 YELLOW_3}Scenario try dummy{END_COLOR_TEXT_1}");
 ALIGNED(4) const u8 gBlankMission[] = _("{COLOR_1 RED_2}???{END_COLOR_TEXT_1}");
 
-extern void SetScriptVarArrayValue(u8, u8, u16, s32);
-extern u32 GetScriptVarArrayValue(u32, u32, u16);
 extern void GeneratePelipperJobs(void);
-extern void SetScriptVarValue(u8, u8, u32);
 
 void sub_80972F4(void)
 {

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "memory.h"
 #include "debug.h"
+#include "event_flag.h"
 #include "ground_map.h"
 #include "ground_map_2.h"
 
@@ -15,7 +16,6 @@ extern const u8 gGroundWeatherSelect[];
 extern const s32 gUnknown_81177BC[];
 
 extern void sub_80A3BB0(unkStruct_3001B70 *, u32);
-extern void SetScriptVarValue(u8, u8, u32);
 extern void sub_80A2D00(unkStruct_3001B70 *);
 extern void sub_80A2B40(unkStruct_3001B70 *, const u8 *);
 extern void sub_80A2FBC(unkStruct_3001B70 *, u32);

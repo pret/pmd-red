@@ -7,6 +7,7 @@
 #include "code_8098BDC.h"
 #include "common_strings.h"
 #include "constants/colors.h"
+#include "event_flag.h"
 #include "input.h"
 #include "items.h"
 #include "kecleon_bros4.h"
@@ -23,10 +24,6 @@ extern u8 gAvailablePokemonNames[]; // 202DF98
 static EWRAM_DATA_2 unkStruct_203B234 *sUnknown_203B234 = {0};
 
 #include "data/code_801B60C.h" // 80DBA58
-
-// event_flag.s
-extern u32 GetScriptVarArrayValue(u32, u32, u16);
-extern void SetScriptVarArrayValue(u32, u32, u32, u32);
 
 static void sub_801B748(u32);
 static void sub_801B760(void);
