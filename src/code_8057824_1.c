@@ -30,7 +30,7 @@
 extern u32 gUnknown_202EDC8;
 extern u8 gUnknown_202E038[0x50];
 extern u8 gAvailablePokemonNames[0x58];
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 
 extern const s16 gUnknown_80F57CA;
 extern const s16 gUnknown_80F57D2;
@@ -3610,7 +3610,7 @@ void JirachiWish(void)
           PlaySoundEffect(0xd4);
           LeaderEntity = GetLeader();
           SetMessageArgument(gAvailablePokemonNames,LeaderEntity,0);
-          sub_8092578(gUnknown_202DE58,friendArea,FALSE);
+          WriteFriendAreaName(gFormatItems,friendArea,FALSE);
           // Obtained the friend area!
           DisplayDungeonDialogue(gUnknown_8105B68);
         }

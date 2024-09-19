@@ -33,7 +33,7 @@ bool8 sub_80302E8(s32 param_1, UnkTextStruct2_sub *param_2, u32 param_3)
 
     sMakuhitaDojoWork2->s30.s0.unk34 = param_1;
     sMakuhitaDojoWork2->s30.s0.unk38 = &sMakuhitaDojoWork2->s30.s0.unk3C[param_1];
-    sub_8006518(sMakuhitaDojoWork2->s30.s0.unk3C);
+    RestoreUnkTextStruct_8006518(sMakuhitaDojoWork2->s30.s0.unk3C);
     sMakuhitaDojoWork2->s30.s0.unk3C[sMakuhitaDojoWork2->s30.s0.unk34] = sUnknown_80E0804;
     sMakuhitaDojoWork2->s30.s0.unk38->unk14 = &sMakuhitaDojoWork2->s30.unk9C;
 
@@ -42,7 +42,7 @@ bool8 sub_80302E8(s32 param_1, UnkTextStruct2_sub *param_2, u32 param_3)
 
     sub_8012D08(sMakuhitaDojoWork2->s30.s0.unk38, param_3);
     ResetUnusedInputStruct();
-    sub_800641C(sMakuhitaDojoWork2->s30.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sMakuhitaDojoWork2->s30.s0.unk3C, TRUE, TRUE);
     sub_8013818(&sMakuhitaDojoWork2->s30.s0.input, sub_8030668(), param_3, param_1);
     sub_80304C8();
     MakuhitaDojo_DrawCourseList();
@@ -94,7 +94,7 @@ void sub_8030480(void)
     if (sMakuhitaDojoWork2 != NULL) {
         sMakuhitaDojoWork2->s30.s0.unk3C[sMakuhitaDojoWork2->s30.s0.unk34] = sUnknown_80E07EC;
         ResetUnusedInputStruct();
-        sub_800641C(sMakuhitaDojoWork2->s30.s0.unk3C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(sMakuhitaDojoWork2->s30.s0.unk3C, TRUE, TRUE);
         MemoryFree(sMakuhitaDojoWork2);
         sMakuhitaDojoWork2 = NULL;
     }
@@ -120,7 +120,7 @@ static void MakuhitaDojo_DrawCourseList(void)
     s32 i;
     u8 buffer[256];
 
-    sub_8008C54(sMakuhitaDojoWork2->s30.s0.unk34);
+    CallPrepareTextbox_8008C54(sMakuhitaDojoWork2->s30.s0.unk34);
     sub_80073B8(sMakuhitaDojoWork2->s30.s0.unk34);
     PrintStringOnWindow(10, 0, sCourses, sMakuhitaDojoWork2->s30.s0.unk34, 0);
     sub_8012BC4((sMakuhitaDojoWork2->s30.unk9C.f2 * 8) + 4, 0, sMakuhitaDojoWork2->s30.s0.input.unk1E + 1, 2, 7, sMakuhitaDojoWork2->s30.s0.unk34);

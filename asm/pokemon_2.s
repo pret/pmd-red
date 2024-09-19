@@ -5,8 +5,8 @@
 
  	.text
 
-	thumb_func_start sub_808E53C
-sub_808E53C:
+	thumb_func_start InitShadowSprites
+InitShadowSprites:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -130,8 +130,8 @@ _0808E62C: .4byte gDungeonFileArchive
 _0808E630: .4byte 0x06010000
 _0808E634: .4byte 0x0000f3ff
 _0808E638: .4byte 0x00003fff
-_0808E63C: .4byte gUnknown_8107698
-_0808E640: .4byte gUnknown_202F3E8
+_0808E63C: .4byte gShadowSpriteSizeFlags_8107698
+_0808E640: .4byte gShadowSprites
 _0808E644: .4byte 0x0000feff
 _0808E648: .4byte 0x0000fdff
 _0808E64C: .4byte 0x0000efff
@@ -141,6 +141,6 @@ _0808E658: .4byte 0x000003ff
 _0808E65C: .4byte 0x00000fff
 _0808E660: .4byte 0x0000fffe
 _0808E664: .4byte 0x0000fffd
-	thumb_func_end sub_808E53C
+	thumb_func_end InitShadowSprites
 	
 	.align 2, 0 @ Don't pad with nop.

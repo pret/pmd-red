@@ -719,7 +719,7 @@ _0806A87A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806A890: .4byte gUnknown_202DE58
+_0806A890: .4byte gFormatItems
 _0806A894: .4byte gUnknown_80FEAC4
 	thumb_func_end sub_806A7E8
 
@@ -3234,7 +3234,7 @@ sub_806BB6C:
 	ldr r0, [r7, 0x70]
 	strh r5, [r0, 0x2]
 	adds r0, r2, 0
-	bl sub_80687D0
+	bl GetSpriteData
 	str r0, [r7, 0x64]
 	adds r1, r7, 0
 	adds r1, 0x6A
@@ -4677,12 +4677,12 @@ _0806C6A8:
 	ldr r4, [sp, 0x38]
 	str r4, [sp, 0x8]
 	adds r0, r5, 0
-	bl sub_80053AC
+	bl AxResInitFile
 	mov r10, r5
 	b _0806C704
 _0806C6D6:
 	ldr r0, _0806C774
-	bl sub_80687D0
+	bl GetSpriteData
 	adds r5, r0, 0
 	bl Rand32Bit
 	movs r1, 0x3
@@ -4699,7 +4699,7 @@ _0806C6D6:
 	str r1, [sp, 0x8]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80053AC
+	bl AxResInitFile
 	mov r10, r4
 _0806C704:
 	mov r2, r9
@@ -4749,12 +4749,12 @@ _0806C73C:
 	cmp r0, 0
 	beq _0806C76A
 	mov r0, r10
-	bl sub_80054BC
+	bl RunAxAnimationFrame
 	mov r0, r10
-	bl sub_80054BC
+	bl RunAxAnimationFrame
 _0806C76A:
 	mov r0, r10
-	bl sub_80054BC
+	bl RunAxAnimationFrame
 	b _0806C7E2
 	.align 2, 0
 _0806C774: .4byte 0x000001a5
@@ -4780,9 +4780,9 @@ _0806C784:
 	cmp r0, 0
 	bne _0806C7BC
 	mov r0, r10
-	bl sub_80054BC
+	bl RunAxAnimationFrame
 	mov r0, r10
-	bl sub_80054BC
+	bl RunAxAnimationFrame
 	b _0806C7DC
 	.align 2, 0
 _0806C7B4: .4byte 0x0000066c
@@ -4803,10 +4803,10 @@ _0806C7C8:
 	cmp r0, 0x1
 	ble _0806C7DC
 	mov r0, r10
-	bl sub_80054BC
+	bl RunAxAnimationFrame
 _0806C7DC:
 	mov r0, r10
-	bl sub_80054BC
+	bl RunAxAnimationFrame
 _0806C7E2:
 	ldr r1, [r6, 0xC]
 	ldr r0, [r6, 0x14]

@@ -447,7 +447,7 @@ void sub_8012EBC(MenuStruct *param_1)
 
         if (ptr_text->unkC == 6) {
             ptr_text2 = &textStack[index];
-            sub_8006518(textStack);
+            RestoreUnkTextStruct_8006518(textStack);
             x = sub_8008ED0(param_1->unk0);
             PrintFormatStringOnWindow(((ptr_text2->unk14->f2 * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
         }

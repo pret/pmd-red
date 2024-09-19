@@ -33,7 +33,7 @@ sub_806EAF4:
 	ldr r1, [r1, 0x70]
 	str r1, [sp, 0x7C]
 	adds r0, r2, 0
-	bl sub_8092354
+	bl IsTypePhysical
 	movs r2, 0
 	str r2, [sp, 0x80]
 	lsls r0, 24
@@ -1030,7 +1030,7 @@ DealDamageToEntity:
 	add r0, sp, 0x10
 	mov r1, r8
 	movs r3, 0
-	bl sub_806D010
+	bl HandleDealingDamage
 	add sp, 0x94
 	pop {r3}
 	mov r8, r3
@@ -1138,7 +1138,7 @@ _0806F414:
 	adds r1, r7, 0
 	add r2, sp, 0x10
 	movs r3, 0
-	bl sub_806D010
+	bl HandleDealingDamage
 	ldr r0, [sp, 0x4C]
 	cmp r0, 0
 	beq _0806F440

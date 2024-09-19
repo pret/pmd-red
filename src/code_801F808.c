@@ -61,7 +61,7 @@ bool8 sub_801F808(u16 *moveIDs)
     gUnknown_203B278->unk60 = gUnknown_203B278->unk64;
     sub_80140B4(gUnknown_203B278->unk64);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B278->unk64, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B278->unk64, TRUE, TRUE);
     gUnknown_203B278->moveIDs = moveIDs;
 
     for(index = 4; index > 1; index--)
@@ -98,7 +98,7 @@ void sub_801F8D0(void)
     {
         gUnknown_203B278->unk64[gUnknown_203B278->unk5C] = sUnknown_80DC2F8;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B278->unk64, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(gUnknown_203B278->unk64, TRUE, TRUE);
         MemoryFree(gUnknown_203B278);
         gUnknown_203B278 = NULL;
     }
@@ -123,11 +123,11 @@ void sub_801F930(void)
             gUnknown_203B278->unkC4.f2 = 0x10;
             gUnknown_203B278->unkC4.f3 = 0;
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B278->unk64, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B278->unk64, TRUE, TRUE);
             break;
         case 1:
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B278->unk64, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B278->unk64, TRUE, TRUE);
             break;
         default:
             break;
@@ -140,13 +140,13 @@ void sub_801F9A4(void)
 
     switch (gUnknown_203B278->state) {
         case 0:
-            sub_8008C54(gUnknown_203B278->unk5C);
+            CallPrepareTextbox_8008C54(gUnknown_203B278->unk5C);
             gUnknown_203B278->selectedMoveID = gUnknown_203B278->moveIDs[gUnknown_203B278->unk28.unk1E];
             gUnknown_203B278->unk10 = unk_MoveIDPrintMoveDescription(gUnknown_203B278->unk28.unk1E,gUnknown_203B278->selectedMoveID,gUnknown_203B278->unk5C,gUnknown_203B278->unk14);
             gUnknown_203B278->unk24 = 0;
             break;
         case 1:
-            sub_8008C54(gUnknown_203B278->unk5C);
+            CallPrepareTextbox_8008C54(gUnknown_203B278->unk5C);
             sub_80073B8(gUnknown_203B278->unk5C);
             name = &(gUnknown_203B278->unk14[gUnknown_203B278->unkC]->pokeName);
             strcpy(gAvailablePokemonNames, *name);

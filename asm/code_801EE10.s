@@ -19,7 +19,7 @@ sub_801F280:
 	ldr r4, _0801F30C
 	ldr r0, [r4]
 	ldr r0, [r0, 0x50]
-	bl sub_8008C54
+	bl CallPrepareTextbox_8008C54
 	ldr r0, [r4]
 	ldr r0, [r0, 0x50]
 	bl sub_80073B8
@@ -155,7 +155,7 @@ _0801F394:
 	cmp r0, 0
 	beq _0801F3DC
 	ldr r0, [r1, 0x54]
-	bl sub_8008C54
+	bl CallPrepareTextbox_8008C54
 	ldr r0, [r4]
 	ldr r0, [r0, 0x54]
 	bl sub_80073B8
@@ -182,7 +182,7 @@ _0801F3DC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801F3EC: .4byte gUnknown_202DE58
+_0801F3EC: .4byte gFormatItems
 _0801F3F0: .4byte gUnknown_203B270
 _0801F3F4: .4byte gUnknown_80DC2A0
 	thumb_func_end sub_801F280

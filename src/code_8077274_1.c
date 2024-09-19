@@ -267,7 +267,7 @@ void TransformStatusTarget(Entity * pokemon, Entity * target)
                 apparentID = apparentID_s16;
 
                 if (apparentID != entityInfo->apparentID && sub_806AA0C(apparentID, 1)) {
-                    sprite = sub_80687D0(apparentID);
+                    sprite = GetSpriteData(apparentID);
                     if (sprite != NULL)
                         break;
                 }
@@ -1504,7 +1504,7 @@ void SendTransformEndMessage(Entity * pokemon, Entity *target)
             break;
         case STATUS_TRANSFORMED:
             entityInfo->apparentID = sub_8069F54(target, entityInfo->id);
-            target->sprite = sub_80687D0(entityInfo->apparentID);
+            target->sprite = GetSpriteData(entityInfo->apparentID);
             uVar3 = sub_806CEBC(target);
             sub_806CCB4(target,uVar3);
             SendMessage(target,*gUnknown_80FAB6C);
@@ -1572,9 +1572,7 @@ void SendMuzzledEndMessage(Entity * pokemon, Entity * target)
 
 bool8 TrySendImmobilizeSleepEndMsg(Entity * pokemon, Entity * target)
 {
-    // entityInfoMatch needed to match
-    EntityInfo *entityInfoMatch = target->info;
-    EntityInfo *entityInfo = entityInfoMatch;
+    EntityInfo *entityInfo = GetEntInfo(target);
     bool32 msg = FALSE;
 
     if (entityInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED) {

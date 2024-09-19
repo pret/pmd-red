@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80A4D7C
-sub_80A4D7C:
+	thumb_func_start GetAdjustedGroundMap
+GetAdjustedGroundMap:
 	push {r4,r5,lr}
 	lsls r0, 16
 	asrs r5, r0, 16
@@ -23,11 +23,11 @@ _080A4D90:
 _080A4D94:
 	movs r0, 0
 	movs r1, 0x27
-	bl sub_8001658
+	bl GetScriptVarValue
 	adds r4, r0, 0
 	movs r0, 0
 	movs r1, 0x28
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r1, r4, 1
 	adds r1, r4
 	lsls r1, 1
@@ -48,7 +48,7 @@ _080A4DC4:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A4D7C
+	thumb_func_end GetAdjustedGroundMap
 
 	thumb_func_start GroundMap_Select
 GroundMap_Select:
@@ -61,10 +61,10 @@ GroundMap_Select:
 	bl Log
 	movs r0, 0
 	movs r1, 0x37
-	bl sub_80015C0
+	bl ClearScriptVarArray
 	movs r0, 0
 	movs r1, 0x38
-	bl sub_80015C0
+	bl ClearScriptVarArray
 	movs r0, 0
 	bl sub_80A5EDC
 	ldr r4, _080A4E3C
@@ -99,7 +99,7 @@ _080A4E08:
 	b _080A50BA
 	.align 2, 0
 _080A4E38: .4byte gUnknown_81176A4
-_080A4E3C: .4byte gUnknown_3001B70
+_080A4E3C: .4byte gGroundMapDungeon_3001B70
 _080A4E40: .4byte 0x0000055c
 _080A4E44: .4byte gGroundMapAction
 _080A4E48: .4byte gUnknown_8117324
@@ -150,7 +150,7 @@ _080A4EA8:
 	strh r0, [r1]
 	b _080A4F30
 	.align 2, 0
-_080A4EC0: .4byte gUnknown_3001B70
+_080A4EC0: .4byte gGroundMapDungeon_3001B70
 _080A4EC4: .4byte gUnknown_811733C
 _080A4EC8: .4byte gUnknown_2026E4E
 _080A4ECC:
@@ -163,7 +163,7 @@ _080A4ECC:
 	b _080A4EEA
 	.align 2, 0
 _080A4EDC: .4byte gUnknown_81173C0
-_080A4EE0: .4byte gUnknown_3001B70
+_080A4EE0: .4byte gGroundMapDungeon_3001B70
 _080A4EE4:
 	adds r4, 0xC
 	movs r2, 0
@@ -256,7 +256,7 @@ _080A4F30:
 	beq _080A5084
 	b _080A50A2
 	.align 2, 0
-_080A4FA0: .4byte gUnknown_3001B70
+_080A4FA0: .4byte gGroundMapDungeon_3001B70
 _080A4FA4: .4byte gUnknown_8117324
 _080A4FA8: .4byte gGroundMapAction
 _080A4FAC:
@@ -306,7 +306,7 @@ _080A4FEE:
 	ldr r2, _080A5008
 	b _080A5050
 	.align 2, 0
-_080A5000: .4byte gUnknown_3001B70
+_080A5000: .4byte gGroundMapDungeon_3001B70
 _080A5004: .4byte gUnknown_2026E4E
 _080A5008: .4byte 0x00000808
 _080A500C:
@@ -314,7 +314,7 @@ _080A500C:
 	ldr r0, [r0]
 	b _080A5062
 	.align 2, 0
-_080A5014: .4byte gUnknown_3001B70
+_080A5014: .4byte gGroundMapDungeon_3001B70
 _080A5018:
 	ldr r0, [r5]
 	movs r1, 0x1
@@ -327,7 +327,7 @@ _080A5020:
 	bl sub_80A3B80
 	b _080A50A2
 	.align 2, 0
-_080A5030: .4byte gUnknown_3001B70
+_080A5030: .4byte gGroundMapDungeon_3001B70
 _080A5034:
 	ldr r1, _080A503C
 	ldr r2, _080A5040
@@ -399,7 +399,7 @@ _080A50BA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A50C0: .4byte gUnknown_3001B70
+_080A50C0: .4byte gGroundMapDungeon_3001B70
 _080A50C4: .4byte gUnknown_81176F8
 	thumb_func_end GroundMap_Select
 
@@ -420,10 +420,10 @@ GroundMap_SelectDungeon:
 	bl Log
 	movs r0, 0
 	movs r1, 0x37
-	bl sub_80015C0
+	bl ClearScriptVarArray
 	movs r0, 0
 	movs r1, 0x38
-	bl sub_80015C0
+	bl ClearScriptVarArray
 	movs r0, 0
 	bl sub_80A5EDC
 	ldr r7, _080A5150
@@ -465,7 +465,7 @@ _080A5138:
 	b _080A51EC
 	.align 2, 0
 _080A514C: .4byte gUnknown_8117700
-_080A5150: .4byte gUnknown_3001B70
+_080A5150: .4byte gGroundMapDungeon_3001B70
 _080A5154: .4byte 0x0000055c
 _080A5158: .4byte gGroundMapAction
 _080A515C: .4byte gUnknown_8117324
@@ -1230,7 +1230,7 @@ sub_80A56A0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A56BC: .4byte gUnknown_3001B70
+_080A56BC: .4byte gGroundMapDungeon_3001B70
 	thumb_func_end sub_80A56A0
 
 	thumb_func_start sub_80A56C0
@@ -1244,7 +1244,7 @@ sub_80A56C0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A56D4: .4byte gUnknown_3001B70
+_080A56D4: .4byte gGroundMapDungeon_3001B70
 	thumb_func_end sub_80A56C0
 
 	thumb_func_start sub_80A56D8
@@ -1258,7 +1258,7 @@ sub_80A56D8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A56EC: .4byte gUnknown_3001B70
+_080A56EC: .4byte gGroundMapDungeon_3001B70
 	thumb_func_end sub_80A56D8
 
 	thumb_func_start sub_80A56F0
@@ -1337,7 +1337,7 @@ sub_80A5758:
 	movs r0, 0
 	b _080A5772
 	.align 2, 0
-_080A5768: .4byte gUnknown_3001B70
+_080A5768: .4byte gGroundMapDungeon_3001B70
 _080A576C:
 	bl sub_80A4608
 	movs r0, 0x1
@@ -1346,8 +1346,8 @@ _080A5772:
 	bx r1
 	thumb_func_end sub_80A5758
 
-	thumb_func_start sub_80A5778
-sub_80A5778:
+	thumb_func_start GetCurrentDungeonBounds
+GetCurrentDungeonBounds:
 	push {lr}
 	adds r3, r0, 0
 	adds r2, r1, 0
@@ -1358,15 +1358,15 @@ sub_80A5778:
 	movs r0, 0
 	b _080A5798
 	.align 2, 0
-_080A578C: .4byte gUnknown_3001B70
+_080A578C: .4byte gGroundMapDungeon_3001B70
 _080A5790:
 	adds r1, r3, 0
-	bl sub_80A463C
+	bl GetDungeonBounds
 	movs r0, 0x1
 _080A5798:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A5778
+	thumb_func_end GetCurrentDungeonBounds
 
 	thumb_func_start sub_80A579C
 sub_80A579C:
@@ -1396,7 +1396,7 @@ sub_80A579C:
 	adds r0, r3, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl sub_80A463C
+	bl GetDungeonBounds
 	ldr r2, [r6]
 	mov r12, r2
 	movs r0, 0xF0
@@ -1450,7 +1450,7 @@ _080A5832:
 	movs r0, 0x1
 	b _080A5856
 	.align 2, 0
-_080A5838: .4byte gUnknown_3001B70
+_080A5838: .4byte gGroundMapDungeon_3001B70
 _080A583C: .4byte gGroundMapAction
 _080A5840: .4byte gGroundConversion_811BAF4
 _080A5844: .4byte 0xffff8800
@@ -1465,8 +1465,8 @@ _080A5856:
 	bx r1
 	thumb_func_end sub_80A579C
 
-	thumb_func_start sub_80A585C
-sub_80A585C:
+	thumb_func_start CheckMapCollision_80A585C
+CheckMapCollision_80A585C:
 	push {r4-r7,lr}
 	adds r7, r1, 0
 	ldr r1, _080A5884
@@ -1488,7 +1488,7 @@ _080A587E:
 	movs r0, 0x1
 	b _080A58C0
 	.align 2, 0
-_080A5884: .4byte gUnknown_3001B70
+_080A5884: .4byte gGroundMapDungeon_3001B70
 _080A5888: .4byte 0x00000544
 _080A588C: .4byte 0x00000405
 _080A5890:
@@ -1524,7 +1524,7 @@ _080A58C0:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A585C
+	thumb_func_end CheckMapCollision_80A585C
 
 	thumb_func_start sub_80A58C8
 sub_80A58C8:
@@ -1549,7 +1549,7 @@ _080A58EA:
 	movs r0, 0x1
 	b _080A592C
 	.align 2, 0
-_080A58F0: .4byte gUnknown_3001B70
+_080A58F0: .4byte gGroundMapDungeon_3001B70
 _080A58F4: .4byte 0x00000544
 _080A58F8: .4byte 0x00000405
 _080A58FC:
@@ -1606,7 +1606,7 @@ sub_80A5934:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080A5958: .4byte gUnknown_3001B70
+_080A5958: .4byte gGroundMapDungeon_3001B70
 	thumb_func_end sub_80A5934
 
 	thumb_func_start sub_80A595C
@@ -1628,7 +1628,7 @@ sub_80A595C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080A5980: .4byte gUnknown_3001B70
+_080A5980: .4byte gGroundMapDungeon_3001B70
 	thumb_func_end sub_80A595C
 
 	thumb_func_start sub_80A5984
@@ -1645,7 +1645,7 @@ sub_80A5984:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080A599C: .4byte gUnknown_3001B70
+_080A599C: .4byte gGroundMapDungeon_3001B70
 	thumb_func_end sub_80A5984
 
 	thumb_func_start sub_80A59A0
@@ -1664,7 +1664,7 @@ sub_80A59A0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A59BC: .4byte gUnknown_3001B70
+_080A59BC: .4byte gGroundMapDungeon_3001B70
 	thumb_func_end sub_80A59A0
 
 	thumb_func_start GroundMap_Action
@@ -1733,7 +1733,7 @@ _080A5A2C:
 _080A5A32:
 	b _080A5E46
 	.align 2, 0
-_080A5A34: .4byte gUnknown_3001B70
+_080A5A34: .4byte gGroundMapDungeon_3001B70
 _080A5A38: .4byte gGroundMapAction
 _080A5A3C:
 	cmp r0, 0xA8
@@ -1832,7 +1832,7 @@ _080A5A8C:
 	ldr r0, [r5]
 	b _080A5DD0
 	.align 2, 0
-_080A5AF0: .4byte gUnknown_3001B70
+_080A5AF0: .4byte gGroundMapDungeon_3001B70
 _080A5AF4:
 	ldr r2, [r6]
 	adds r3, r2, 0
@@ -1883,7 +1883,7 @@ _080A5B20:
 	movs r1, 0
 	b _080A5DD2
 	.align 2, 0
-_080A5B54: .4byte gUnknown_3001B70
+_080A5B54: .4byte gGroundMapDungeon_3001B70
 _080A5B58:
 	adds r4, r3, 0
 	adds r4, 0xF0
@@ -2286,7 +2286,7 @@ _080A5E5A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A5E6C: .4byte gUnknown_3001B70
+_080A5E6C: .4byte gGroundMapDungeon_3001B70
 	thumb_func_end sub_80A59DC
 
         .align 2,0

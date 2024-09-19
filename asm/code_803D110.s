@@ -1653,7 +1653,7 @@ _0803E156:
 	bx r0
 	.align 2, 0
 _0803E170: .4byte gGameOptionsRef
-_0803E174: .4byte gUnknown_202D038
+_0803E174: .4byte gFontPalette
 	thumb_func_end sub_803E13C
 
 	thumb_func_start sub_803E178

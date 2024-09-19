@@ -17,9 +17,9 @@ extern OpenedFile *gCharmapFiles[2]; // 202AFB4
 extern UnkTextStruct2 gUnknown_202AFC0[4];
 extern u32 gUnknown_202B020;
 extern u32 gUnknown_202B024;
-extern u32 gUnknown_202B028[2];
-extern u32 gUnknown_202B030; // Some text color info is stored; retrieve via "& 0xF"
-extern u8 gUnknown_202B034;
+extern u32 gCharHeight[2];
+extern u32 gTextShadowMask; // Some text color info is stored; retrieve via "& 0xF"
+extern u8 gDrawTextShadow;
 extern u16 gUnknown_202B038[4][32][32];
 
 // ?
@@ -29,14 +29,14 @@ extern s16 gUnknown_3000E94[];
 extern const UnkTextStruct2 gUnknown_80B857C[4];
 extern const u8 gKanjiA_file_string[]; // 80B87B4
 extern const u8 gKanjiB_file_string[]; // 80B87BC
-extern const u32 gUnknown_80B87C4[8];
-extern const u32 gUnknown_80B87E4[8];
+extern const u32 gFadeInNone[8];
+extern const u32 gFadeInDungeon[8];
 extern const u32 gUnknown_80B8804[4];
 extern const u32 gUnknown_80B8814[];
 // system_sbin.s
 extern const struct FileArchive gSystemFileArchive;
 
-static void sub_8006438(const UnkTextStruct2 *, bool8, bool8, UnkTextStruct2_sub *);
+static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct2 *, bool8, bool8, UnkTextStruct2_sub *);
 
 void LoadCharmaps(void)
 {
@@ -49,8 +49,8 @@ void LoadCharmaps(void)
     gCharmapFiles[1] = OpenFileAndGetFileDataPtr(gKanjiB_file_string, &gSystemFileArchive);
     gCharmaps[0] = gCharmapFiles[0]->data;
     gCharmaps[1] = gCharmapFiles[1]->data;
-    gUnknown_202B028[0] = 11;
-    gUnknown_202B028[1] = 12;
+    gCharHeight[0] = 11;
+    gCharHeight[1] = 12;
 
     for (k = 0; k < 4; k++) {
         gUnknown_2027370[k].unk4 = 0;
@@ -70,16 +70,16 @@ void LoadCharmaps(void)
         }
     }
 
-    gUnknown_202B034 = 1;
-    gUnknown_202B030 = 0x88888888;
+    gDrawTextShadow = 1;
+    gTextShadowMask = 0x88888888;
     gUnknown_203B078 = NULL;
     gUnknown_20274A5 = 0;
     gUnknown_202B020 = 1;
     gUnknown_202B024 = 20;
-    xxx_update_some_bg_tiles(0);
+    UpdateFadeInTile(0);
 }
 
-u32 xxx_update_some_bg_tiles(u32 a0)
+u32 UpdateFadeInTile(u32 a0)
 {
     u32 r5 = gUnknown_20274B0;
     u32 *r4 = (u32 *)(VRAM + 0x4F40);
@@ -88,14 +88,14 @@ u32 xxx_update_some_bg_tiles(u32 a0)
 
     if (a0 == 0 || a0 == 2) {
         sub_800CDA8(2);
-        r2 = gUnknown_80B87C4;
+        r2 = gFadeInNone;
     }
     else {
         sub_800CDA8(1);
-        r2 = gUnknown_80B87E4;
+        r2 = gFadeInDungeon;
     }
 
-    gUnknown_202B030 = 0x88888888;
+    gTextShadowMask = 0x88888888;
     *r4++ = *r2++;
     *r4++ = *r2++;
     *r4++ = *r2++;
@@ -112,10 +112,10 @@ u32 sub_80063B0(void)
     return gUnknown_20274B0;
 }
 
-u8 sub_80063BC(u8 a0)
+u8 UnusedSetTextShadow(u8 a0)
 {
-    u8 retval = gUnknown_202B034;
-    gUnknown_202B034 = a0;
+    u8 retval = gDrawTextShadow;
+    gDrawTextShadow = a0;
     return retval;
 }
 
@@ -124,7 +124,7 @@ void SelectCharmap(u32 a0)
     gCurrentCharmap = a0;
 }
 
-void sub_80063D8(int a0)
+void SetCharacterMask(int a0)
 {
     u32 retval;
     if (a0 == 0) {
@@ -140,17 +140,17 @@ void sub_80063D8(int a0)
         retval |= ((a0 & 0xF) << 24);
         retval |= ((a0 & 0xF) << 28);
     }
-    gUnknown_202B030 = retval;
+    gTextShadowMask = retval;
 }
 
-// TODO: Move sub_800641C and sub_8006438 to text2.c ? data.s shows text1 and text2 are merged somehow but not fully
-void sub_800641C(UnkTextStruct2 *a0, bool8 a1, bool8 a2)
+// TODO: Move xxx_call_save_unk_text_struct_800641C and SaveUnkTextStructAndXXX_8006438 to text2.c ? data.s shows text1 and text2 are merged somehow but not fully
+void xxx_call_save_unk_text_struct_800641C(UnkTextStruct2 *a0, bool8 a1, bool8 a2)
 {
     UnkTextStruct2_sub r3 = {0, 0};
-    sub_8006438(a0, a1, a2, &r3);
+    SaveUnkTextStructAndXXX_8006438(a0, a1, a2, &r3);
 }
 
-static void sub_8006438(const UnkTextStruct2 *a0, bool8 a1, bool8 a2, UnkTextStruct2_sub *a3)
+static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct2 *a0, bool8 a1, bool8 a2, UnkTextStruct2_sub *a3)
 {
     s32 i;
     u32 r9;

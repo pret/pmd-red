@@ -104,13 +104,13 @@ void nullsub_119(void)
 {
 }
 
-extern const struct unkStruct_809D158 gUnknown_8116478;
+extern const struct unkStruct_809D158 gZeroPos_8116478;
 
 void sub_809D0BC(void)
 {
-    gUnknown_20399E8.unk3C = gUnknown_8116478;
+    gUnknown_20399E8.unk3C = gZeroPos_8116478;
     gUnknown_20399E8.unk44 = 0;
-    sub_809D158(0, &gUnknown_8116478);
+    sub_809D158(0, &gZeroPos_8116478);
     gUnknown_20399E8.unk8 = 0;
     gUnknown_20399E8.unkC = 0;
     gUnknown_20399E8.unk10 = 0;
@@ -389,10 +389,10 @@ void sub_809D490(void)
 extern s16 gCurrentMap;
 extern s16 gUnknown_2039A32;
 extern s16 gUnknown_2039A34;
-extern u8 gUnknown_2039A36;
-extern u8 gUnknown_2039A38[];
-extern u8 gUnknown_2039AC0[];
-extern u32 gUnknown_2039B48[];
+extern u8 gAnyScriptLocked;
+extern u8 gScriptLocks[];
+extern u8 gScriptLockConds[];
+extern u32 gUnlockBranchLabels[];
 
 void sub_809D4B0(void)
 {
@@ -401,11 +401,11 @@ void sub_809D4B0(void)
     gCurrentMap = -1;
     gUnknown_2039A32 = -1;
     gUnknown_2039A34 = -1;
-    gUnknown_2039A36 = 0;
+    gAnyScriptLocked = 0;
     for (i = 0; i < 0x81; i++) {
-        gUnknown_2039A38[i] = 0;
-        gUnknown_2039AC0[i] = 0;
-        gUnknown_2039B48[i] = 0;
+        gScriptLocks[i] = 0;
+        gScriptLockConds[i] = 0;
+        gUnlockBranchLabels[i] = 0;
     }
 }
 

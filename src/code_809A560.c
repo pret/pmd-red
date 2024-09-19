@@ -11,15 +11,15 @@ extern u8 gInvalidityText[];
 extern u8 gAvailablePokemonNames[];
 extern u8 gPlayerName[];
 
-extern u8 sub_809B2B8(u32 *, u32, u32, u32);
-extern u32 sub_809B40C(u32 *); 
+extern u8 ScriptPrintText_809B2B8(u32 *, u32, u32, u32);
+extern u32 IsTextboxOpen_809B40C(u32 *); 
 extern void sub_801416C(s32, s32);
 extern void sub_80095CC(u32, u32);
 extern void sub_8009408(u32, u32);
-extern void sub_809B294(void);
+extern void ResetTextbox_809B294(void);
 extern void sub_8014144(void);
 
-u32 sub_809A680(u32 param_1, u32 param_2);
+u32 xxx_script_textboxes_809A680(u32 param_1, u32 param_2);
 void sub_809A62C(void);
 void sub_809A7EC(void);
 void sub_809A83C(s16 index);
@@ -35,9 +35,9 @@ void sub_809A560(void)
     gUnknown_20399DC = 0;
     gUnknown_20399DE = 0;
     sub_80095CC(0,0x14);
-    sub_800641C(0,1,1);
+    xxx_call_save_unk_text_struct_800641C(0,1,1);
     sub_8009408(0,0x14);
-    sub_809B294();
+    ResetTextbox_809B294();
     gUnknown_3001B64->unk414 = 0;
     gUnknown_3001B64->unk418 = 0;
     gUnknown_3001B64->unk41C = 0;
@@ -72,31 +72,31 @@ void sub_809A62C(void)
         sub_809A83C(index);
     }
     gUnknown_3001B64->unk414 = 0;
-    sub_809A680(0, 1);
+    xxx_script_textboxes_809A680(0, 1);
 }
 
-u32 sub_809A680(u32 param_1, u32 param_2)
+u32 xxx_script_textboxes_809A680(u32 param_1, u32 param_2)
 {
     switch(param_1) {
         case 0:
-            sub_809B294();
-            sub_800641C(0,1,1);
+            ResetTextbox_809B294();
+            xxx_call_save_unk_text_struct_800641C(0,1,1);
             break;
         case 1:
-            sub_809B294();
+            ResetTextbox_809B294();
             break;
         case 2:
-            sub_809B294();
+            ResetTextbox_809B294();
             break;
         case 3:
-            sub_809B294();
+            ResetTextbox_809B294();
             break;
         case 4:
-            sub_809B294();
+            ResetTextbox_809B294();
             break;
         default:
-            sub_809B294();
-            sub_800641C(0,1,1);
+            ResetTextbox_809B294();
+            xxx_call_save_unk_text_struct_800641C(0,1,1);
     }
     gUnknown_3001B64->unk0 = param_1;
     return 1;
@@ -133,9 +133,9 @@ void sub_809A738(s32 param_1, s32 param_2)
     sub_801416C(param_1, param_2);
 }
 
-u8 sub_809A750(void)
+u8 IsTextboxOpen_809A750(void)
 {
-    return sub_809B40C(&gUnknown_3001B64->unkC);
+    return IsTextboxOpen_809B40C(&gUnknown_3001B64->unkC);
 }
 
 u32 sub_809A768(void)
@@ -148,12 +148,12 @@ u8 ScriptPrintNullTextbox(void)
     switch(gUnknown_3001B64->unk0)
     {
         case 3:
-            return sub_809B2B8(&gUnknown_3001B64->unkC,4,-1,0);
+            return ScriptPrintText_809B2B8(&gUnknown_3001B64->unkC,4,-1,0);
         case 1:
         case 2:
-            return sub_809B2B8(&gUnknown_3001B64->unkC,0x84,-1,0);
+            return ScriptPrintText_809B2B8(&gUnknown_3001B64->unkC,0x84,-1,0);
         default:
-            sub_809A680(0, 1);
+            xxx_script_textboxes_809A680(0, 1);
             return 0;
     }
 }
@@ -165,9 +165,9 @@ u8 ScriptPrintEmptyTextbox(void)
         case 3:
         case 1:
         case 2:
-            return sub_809B2B8(&gUnknown_3001B64->unkC,4,-1,0);
+            return ScriptPrintText_809B2B8(&gUnknown_3001B64->unkC,4,-1,0);
         default:
-            sub_809A680(0, 1);
+            xxx_script_textboxes_809A680(0, 1);
             return 0;
     }
 }

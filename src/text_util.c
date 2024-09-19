@@ -93,7 +93,7 @@ const char * const gFormattedTypeStrings[NUM_POKEMON_TYPES] =
 
 extern u8 *gAbilityNames[];
 extern u8 *AbilityDescriptions[];
-extern u8 gUnknown_810AC7C[];
+extern u8 gIsTypePhysicalTable[];
 extern u8 gUnknown_810AC6A[];
 
 extern u32 gUnknown_810983C[26]; // TODO: verify size later
@@ -169,9 +169,9 @@ const char * GetFormattedTypeString(u8 type)
     return gFormattedTypeStrings[type];
 }
 
-u8 sub_8092354(u8 index)
+u8 IsTypePhysical(u8 index)
 {
-    return gUnknown_810AC7C[index];
+    return gIsTypePhysicalTable[index];
 }
 
 u8 sub_8092364(u8 index)

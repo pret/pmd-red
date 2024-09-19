@@ -43,7 +43,7 @@ enum MenuActions {
 bool8 sub_8017E1C(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(NULL, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
     sUnknown_203B20C = MemoryAlloc(sizeof(unkStruct_203B20C), 8);
     sUnknown_203B20C->menuAction1 = 0;
     sUnknown_203B20C->menuAction2 = 0;
@@ -109,7 +109,7 @@ static void sub_8017F28(void)
 {
     s32 index;
 
-    sub_8006518(sUnknown_203B20C->unkF0);
+    RestoreUnkTextStruct_8006518(sUnknown_203B20C->unkF0);
 
     switch (sUnknown_203B20C->state) {
         case 1:
@@ -148,7 +148,7 @@ static void sub_8017F28(void)
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B20C->unkF0, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B20C->unkF0, TRUE, TRUE);
 }
 
 static void sub_8018100(void)
@@ -213,7 +213,7 @@ static void sub_8018100(void)
 
 static void sub_8018280(void)
 {
-    sub_8008C54(sUnknown_203B20C->unkC0.unk14);
+    CallPrepareTextbox_8008C54(sUnknown_203B20C->unkC0.unk14);
     sub_80073B8(sUnknown_203B20C->unkC0.unk14);
     PrintStringOnWindow(4, 0, sNumber, sUnknown_203B20C->unkC0.unk14, 0);
     sub_8013C68(&sUnknown_203B20C->unkC0);

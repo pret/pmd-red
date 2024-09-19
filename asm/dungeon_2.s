@@ -323,7 +323,7 @@ _080905D0: .4byte gUnknown_8115C4C
 _080905D4: .4byte gUnknown_8108F42
 _080905D8: .4byte gUnknown_8108F4A
 _080905DC: .4byte gDungeons
-_080905E0: .4byte gUnknown_202DE58
+_080905E0: .4byte gFormatItems
 _080905E4: .4byte gUnknown_8115CB8
 _080905E8:
 	ldr r0, _080906A0

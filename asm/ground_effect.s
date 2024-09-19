@@ -5,8 +5,8 @@
 
 	.text
 
-        thumb_func_start sub_80ACB90
-sub_80ACB90:
+        thumb_func_start AllocGroundEffects
+AllocGroundEffects:
 	push {r4,r5,lr}
 	ldr r4, _080ACBCC
 	movs r0, 0xE2
@@ -32,17 +32,17 @@ _080ACBB0:
 	adds r1, r4
 	cmp r0, 0xF
 	ble _080ACBB0
-	bl DeleteBlankGroundEffects
+	bl DeleteGroundEffects
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ACBCC: .4byte gUnknown_3001B8C
+_080ACBCC: .4byte gGroundEffects
 _080ACBD0: .4byte 0x0000ffff
-	thumb_func_end sub_80ACB90
+	thumb_func_end AllocGroundEffects
 
-	thumb_func_start DeleteBlankGroundEffects
-DeleteBlankGroundEffects:
+	thumb_func_start DeleteGroundEffects
+DeleteGroundEffects:
 	push {r4-r6,lr}
 	ldr r0, _080ACC0C
 	ldr r4, [r0]
@@ -73,13 +73,13 @@ _080ACBF2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ACC0C: .4byte gUnknown_3001B8C
-	thumb_func_end DeleteBlankGroundEffects
+_080ACC0C: .4byte gGroundEffects
+	thumb_func_end DeleteGroundEffects
 
-	thumb_func_start sub_80ACC10
-sub_80ACC10:
+	thumb_func_start FreeGroundEffects
+FreeGroundEffects:
 	push {r4,lr}
-	bl DeleteBlankGroundEffects
+	bl DeleteGroundEffects
 	ldr r4, _080ACC28
 	ldr r0, [r4]
 	bl MemoryFree
@@ -89,8 +89,8 @@ sub_80ACC10:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ACC28: .4byte gUnknown_3001B8C
-	thumb_func_end sub_80ACC10
+_080ACC28: .4byte gGroundEffects
+	thumb_func_end FreeGroundEffects
 
 	thumb_func_start GroundEffect_Select
 GroundEffect_Select:
@@ -105,7 +105,7 @@ GroundEffect_Select:
 	asrs r6, r2, 24
 	ldr r1, _080ACC90
 	adds r0, r4, 0
-	bl sub_80A77D0
+	bl GetGroundScript
 	adds r5, r0, 0
 	ldr r1, _080ACC94
 	str r6, [sp]
@@ -204,7 +204,7 @@ _080ACCE2:
 	bx r0
 	.align 2, 0
 _080ACD00: .4byte gUnknown_8118640
-_080ACD04: .4byte gUnknown_3001B8C
+_080ACD04: .4byte gGroundEffects
 	thumb_func_end GroundEffect_Cancel
 
 	thumb_func_start GroundEffect_CancelBlank
@@ -243,7 +243,7 @@ _080ACD2C:
 	lsls r1, 1
 	adds r0, r4, r1
 	mov r1, sp
-	bl sub_80A675C
+	bl IsOnscreen_80A675C
 	lsls r0, 24
 	cmp r0, 0
 	bne _080ACD5C
@@ -267,7 +267,7 @@ _080ACD5C:
 	bx r0
 	.align 2, 0
 _080ACD7C: .4byte gUnknown_8118658
-_080ACD80: .4byte gUnknown_3001B8C
+_080ACD80: .4byte gGroundEffects
 	thumb_func_end GroundEffect_CancelBlank
 
 	thumb_func_start sub_80ACD84
@@ -291,7 +291,7 @@ _080ACD9A:
 	adds r0, r3, 0
 	b _080ACDBC
 	.align 2, 0
-_080ACDA8: .4byte gUnknown_3001B8C
+_080ACDA8: .4byte gGroundEffects
 _080ACDAC:
 	adds r0, r2, 0
 	adds r2, r5
@@ -343,8 +343,8 @@ GroundEffect_Add:
 	movs r6, 0
 	b _080ACE38
 	.align 2, 0
-_080ACE08: .4byte gFunctionScriptData
-_080ACE0C: .4byte gUnknown_3001B8C
+_080ACE08: .4byte gGroundEffectTypes
+_080ACE0C: .4byte gGroundEffects
 _080ACE10:
 	adds r0, r2, 0x1
 	lsls r0, 16
@@ -582,7 +582,7 @@ _080ACFD2:
 	adds r0, 0x28
 	adds r1, r5, 0
 	adds r1, 0x30
-	bl sub_80A5778
+	bl GetCurrentDungeonBounds
 	ldr r0, [sp, 0xC]
 	cmp r0, 0
 	beq _080AD01A
@@ -646,7 +646,7 @@ _080AD04C:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_809D8C0
+	bl ExecutePredefinedScript
 _080AD060:
 	adds r0, r6, 0
 _080AD062:
@@ -659,7 +659,7 @@ _080AD062:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080AD074: .4byte gUnknown_8118544
+_080AD074: .4byte gGroundEffectCallbacks
 _080AD078: .4byte gFunctionScriptTable
 _080AD07C: .4byte gUnknown_81186CC
 	thumb_func_end GroundEffect_Add
@@ -687,14 +687,14 @@ GroundEffect_Delete:
 	bl sub_80A7714
 	adds r0, r4, 0
 	adds r0, 0x38
-	bl sub_809D648
+	bl InitAction2
 	ldr r0, _080AD0C4
 	strh r0, [r4, 0x6]
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AD0BC: .4byte gUnknown_3001B8C
+_080AD0BC: .4byte gGroundEffects
 _080AD0C0: .4byte gUnknown_81186D8
 _080AD0C4: .4byte 0x0000ffff
 	thumb_func_end GroundEffect_Delete
@@ -733,7 +733,7 @@ _080AD102:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AD108: .4byte gUnknown_3001B8C
+_080AD108: .4byte gGroundEffects
 	thumb_func_end sub_80AD0C8
 
 	thumb_func_start sub_80AD10C
@@ -773,7 +773,7 @@ _080AD14A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AD150: .4byte gUnknown_3001B8C
+_080AD150: .4byte gGroundEffects
 _080AD154: .4byte 0x337fffff
 	thumb_func_end sub_80AD10C
 
@@ -799,7 +799,7 @@ sub_80AD158:
 	movs r0, 0
 	b _080AD188
 	.align 2, 0
-_080AD180: .4byte gUnknown_3001B8C
+_080AD180: .4byte gGroundEffects
 _080AD184:
 	adds r0, r2, 0
 	adds r0, 0x38
@@ -833,13 +833,13 @@ sub_80AD18C:
 	movs r0, 0
 	b _080AD1CC
 	.align 2, 0
-_080AD1B8: .4byte gUnknown_3001B8C
+_080AD1B8: .4byte gGroundEffects
 _080AD1BC:
 	adds r0, r2, 0
 	adds r0, 0x38
 	adds r1, r4, 0
 	adds r2, r3, 0
-	bl sub_809D6E4
+	bl GetPredefinedScript
 	lsls r0, 24
 	lsrs r0, 24
 _080AD1CC:
@@ -877,7 +877,7 @@ GroundEffect_ExecuteScript:
 	movs r0, 0
 	b _080AD22C
 	.align 2, 0
-_080AD20C: .4byte gUnknown_3001B8C
+_080AD20C: .4byte gGroundEffects
 _080AD210: .4byte gUnknown_81186F4
 _080AD214:
 	adds r0, r4, 0
@@ -899,8 +899,8 @@ _080AD22C:
 _080AD234: .4byte gUnknown_811872C
 	thumb_func_end GroundEffect_ExecuteScript
 
-	thumb_func_start sub_80AD238
-sub_80AD238:
+	thumb_func_start GroundEffectsNotifyAll
+GroundEffectsNotifyAll:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -922,7 +922,7 @@ _080AD252:
 	adds r0, r4, 0
 	adds r0, 0x38
 	adds r1, r7, 0
-	bl sub_809D968
+	bl GroundScriptNotify
 	orrs r5, r0
 	lsls r0, r5, 24
 	lsrs r5, r0, 24
@@ -944,11 +944,11 @@ _080AD26A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080AD28C: .4byte gUnknown_3001B8C
-	thumb_func_end sub_80AD238
+_080AD28C: .4byte gGroundEffects
+	thumb_func_end GroundEffectsNotifyAll
 
-	thumb_func_start sub_80AD290
-sub_80AD290:
+	thumb_func_start GroundEffectsCancelAll
+GroundEffectsCancelAll:
 	push {r4-r7,lr}
 	ldr r0, _080AD2D4
 	ldr r4, [r0]
@@ -984,8 +984,8 @@ _080AD2B6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080AD2D4: .4byte gUnknown_3001B8C
-	thumb_func_end sub_80AD290
+_080AD2D4: .4byte gGroundEffects
+	thumb_func_end GroundEffectsCancelAll
 
 	thumb_func_start sub_80AD2D8
 sub_80AD2D8:
@@ -1003,7 +1003,7 @@ sub_80AD2D8:
 	ldrsh r0, [r0, r1]
 	bx lr
 	.align 2, 0
-_080AD2F4: .4byte gUnknown_3001B8C
+_080AD2F4: .4byte gGroundEffects
 	thumb_func_end sub_80AD2D8
 
 	thumb_func_start sub_80AD2F8
@@ -1027,7 +1027,7 @@ sub_80AD2F8:
 	ldrsh r0, [r0, r1]
 	bx lr
 	.align 2, 0
-_080AD31C: .4byte gUnknown_3001B8C
+_080AD31C: .4byte gGroundEffects
 	thumb_func_end sub_80AD2F8
 
 	thumb_func_start sub_80AD320
@@ -1055,7 +1055,7 @@ sub_80AD320:
 	str r0, [r3, 0x4]
 	b _080AD358
 	.align 2, 0
-_080AD34C: .4byte gUnknown_3001B8C
+_080AD34C: .4byte gGroundEffects
 _080AD350:
 	ldr r0, [r2, 0xC]
 	ldr r1, [r2, 0x10]
@@ -1092,7 +1092,7 @@ sub_80AD360:
 	str r0, [r3]
 	b _080AD3AA
 	.align 2, 0
-_080AD38C: .4byte gUnknown_3001B8C
+_080AD38C: .4byte gGroundEffects
 _080AD390:
 	movs r1, 0x92
 	lsls r1, 1
@@ -1136,7 +1136,7 @@ sub_80AD3B4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080AD3DC: .4byte gUnknown_3001B8C
+_080AD3DC: .4byte gGroundEffects
 	thumb_func_end sub_80AD3B4
 
 	thumb_func_start sub_80AD3E0
@@ -1261,24 +1261,24 @@ _080AD49C:
 	bx r1
 	thumb_func_end sub_80AD430
 
-	thumb_func_start sub_80AD4B8
-sub_80AD4B8:
+	thumb_func_start CallbackEffectGetIndex
+CallbackEffectGetIndex:
 	movs r1, 0x4
 	ldrsh r0, [r0, r1]
 	bx lr
-	thumb_func_end sub_80AD4B8
+	thumb_func_end CallbackEffectGetIndex
 
-	thumb_func_start sub_80AD4C0
-sub_80AD4C0:
+	thumb_func_start CallbackEffectGetSize
+CallbackEffectGetSize:
 	ldr r2, [r0, 0xC]
 	ldr r3, [r0, 0x10]
 	str r2, [r1]
 	str r3, [r1, 0x4]
 	bx lr
-	thumb_func_end sub_80AD4C0
+	thumb_func_end CallbackEffectGetSize
 
-	thumb_func_start sub_80AD4CC
-sub_80AD4CC:
+	thumb_func_start CallbackEffectSetHitboxPos
+CallbackEffectSetHitboxPos:
 	push {r4,lr}
 	adds r3, r0, 0
 	adds r4, r1, 0
@@ -1368,10 +1368,10 @@ _080AD572:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AD4CC
+	thumb_func_end CallbackEffectSetHitboxPos
 
-	thumb_func_start sub_80AD578
-sub_80AD578:
+	thumb_func_start CallbackEffectSetPositionBounds
+CallbackEffectSetPositionBounds:
 	push {r4,lr}
 	ldr r3, [r1]
 	ldr r4, [r1, 0x4]
@@ -1384,10 +1384,10 @@ sub_80AD578:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AD578
+	thumb_func_end CallbackEffectSetPositionBounds
 
-	thumb_func_start sub_80AD590
-sub_80AD590:
+	thumb_func_start CallbackEffectGetHitboxCenter
+CallbackEffectGetHitboxCenter:
 	adds r3, r0, 0
 	movs r2, 0x92
 	lsls r2, 1
@@ -1404,18 +1404,18 @@ sub_80AD590:
 	adds r0, r2
 	str r0, [r1, 0x4]
 	bx lr
-	thumb_func_end sub_80AD590
+	thumb_func_end CallbackEffectGetHitboxCenter
 
-	thumb_func_start sub_80AD5B0
-sub_80AD5B0:
+	thumb_func_start CallbackEffectMoveReal
+CallbackEffectMoveReal:
 	push {lr}
 	bl sub_80AD3E0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80AD5B0
+	thumb_func_end CallbackEffectMoveReal
 
-	thumb_func_start sub_80AD5BC
-sub_80AD5BC:
+	thumb_func_start CallbackEffectGetPosHeightAndUnk
+CallbackEffectGetPosHeightAndUnk:
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r4, 0x9A
@@ -1431,29 +1431,29 @@ sub_80AD5BC:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AD5BC
+	thumb_func_end CallbackEffectGetPosHeightAndUnk
 
-	thumb_func_start sub_80AD5DC
-sub_80AD5DC:
+	thumb_func_start CallbackEffectSetPosHeight
+CallbackEffectSetPosHeight:
 	movs r2, 0x9A
 	lsls r2, 1
 	adds r0, r2
 	str r1, [r0]
 	bx lr
-	thumb_func_end sub_80AD5DC
+	thumb_func_end CallbackEffectSetPosHeight
 
-	thumb_func_start sub_80AD5E8
-sub_80AD5E8:
+	thumb_func_start CallbackEffectGetDirection
+CallbackEffectGetDirection:
 	movs r2, 0x90
 	lsls r2, 1
 	adds r0, r2
 	ldrb r0, [r0]
 	strb r0, [r1]
 	bx lr
-	thumb_func_end sub_80AD5E8
+	thumb_func_end CallbackEffectGetDirection
 
-	thumb_func_start sub_80AD5F4
-sub_80AD5F4:
+	thumb_func_start CallbackEffectSetDirection
+CallbackEffectSetDirection:
 	push {lr}
 	adds r2, r0, 0
 	lsls r1, 24
@@ -1469,10 +1469,10 @@ sub_80AD5F4:
 _080AD60C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AD5F4
+	thumb_func_end CallbackEffectSetDirection
 
-	thumb_func_start sub_80AD610
-sub_80AD610:
+	thumb_func_start CallbackEffectSetEventIndex
+CallbackEffectSetEventIndex:
 	push {r4,r5,lr}
 	lsls r1, 16
 	adds r3, r0, 0
@@ -1524,10 +1524,10 @@ _080AD668:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AD610
+	thumb_func_end CallbackEffectSetEventIndex
 
-	thumb_func_start sub_80AD670
-sub_80AD670:
+	thumb_func_start CallbackEffectSetUnk_80AD670
+CallbackEffectSetUnk_80AD670:
 	push {lr}
 	lsls r1, 16
 	asrs r1, 16
@@ -1544,10 +1544,10 @@ _080AD682:
 	strh r2, [r0]
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AD670
+	thumb_func_end CallbackEffectSetUnk_80AD670
 
-	thumb_func_start sub_80AD690
-sub_80AD690:
+	thumb_func_start CallbackEffectSpriteRelatedCheck_80AD690
+CallbackEffectSpriteRelatedCheck_80AD690:
 	push {lr}
 	adds r1, r0, 0
 	movs r2, 0x9E
@@ -1567,10 +1567,10 @@ _080AD6AE:
 _080AD6B0:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80AD690
+	thumb_func_end CallbackEffectSpriteRelatedCheck_80AD690
 
-	thumb_func_start sub_80AD6B4
-sub_80AD6B4:
+	thumb_func_start CallbackEffectSpriteRelated_80AD6B4
+CallbackEffectSpriteRelated_80AD6B4:
 	push {lr}
 	adds r1, r0, 0
 	movs r2, 0xA0
@@ -1592,45 +1592,45 @@ _080AD6D6:
 _080AD6D8:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80AD6B4
+	thumb_func_end CallbackEffectSpriteRelated_80AD6B4
 
-	thumb_func_start sub_80AD6DC
-sub_80AD6DC:
+	thumb_func_start CallbackEffectGetFlags
+CallbackEffectGetFlags:
 	movs r2, 0x8E
 	lsls r2, 1
 	adds r0, r2
 	ldr r0, [r0]
 	str r0, [r1]
 	bx lr
-	thumb_func_end sub_80AD6DC
+	thumb_func_end CallbackEffectGetFlags
 
-	thumb_func_start sub_80AD6E8
-sub_80AD6E8:
+	thumb_func_start CallbackEffectSetFlags
+CallbackEffectSetFlags:
 	push {lr}
 	movs r2, 0x4
 	ldrsh r0, [r0, r2]
 	bl sub_80AD0C8
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AD6E8
+	thumb_func_end CallbackEffectSetFlags
 
-	thumb_func_start sub_80AD6F8
-sub_80AD6F8:
+	thumb_func_start CallbackEffectClearFlags
+CallbackEffectClearFlags:
 	push {lr}
 	movs r2, 0x4
 	ldrsh r0, [r0, r2]
 	bl sub_80AD10C
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AD6F8
+	thumb_func_end CallbackEffectClearFlags
 
-	thumb_func_start sub_80AD708
-sub_80AD708:
+	thumb_func_start CallbackEffectMoveRelative
+CallbackEffectMoveRelative:
 	push {lr}
 	bl sub_80AD430
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80AD708
+	thumb_func_end CallbackEffectMoveRelative
 
 	thumb_func_start GroundEffect_Action
 GroundEffect_Action:
@@ -1666,14 +1666,14 @@ _080AD72C:
 	bl GroundEffect_Delete
 	b _080AD78A
 	.align 2, 0
-_080AD754: .4byte gUnknown_3001B8C
+_080AD754: .4byte gGroundEffects
 _080AD758: .4byte gUnknown_811874C
 _080AD75C:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x1
 	ldr r3, _080AD7A8
-	bl sub_809D8C0
+	bl ExecutePredefinedScript
 _080AD768:
 	ldrb r0, [r6]
 	cmp r0, 0
@@ -1804,7 +1804,7 @@ _080AD83C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AD864: .4byte gUnknown_3001B8C
+_080AD864: .4byte gGroundEffects
 	thumb_func_end sub_80AD7AC
 
         .align 2,0

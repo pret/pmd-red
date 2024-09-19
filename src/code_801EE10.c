@@ -85,7 +85,7 @@ u8 sub_801EE10(u32 param_1, s16 species, Move *moves, u32 param_4, const u8 *tex
     if (iVar8 < four) {
         iVar8 = 4;
     }
-    sub_8006518(gUnknown_203B270->unk58);
+    RestoreUnkTextStruct_8006518(gUnknown_203B270->unk58);
     gUnknown_203B270->unk50 = param_6;
     gUnknown_203B270->unk58[param_6] = gUnknown_80DC25C;
     if (gUnknown_203B270->text != NULL) {
@@ -94,7 +94,7 @@ u8 sub_801EE10(u32 param_1, s16 species, Move *moves, u32 param_4, const u8 *tex
     }
     sub_8012D08(&gUnknown_203B270->unk58[gUnknown_203B270->unk50],iVar8);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B270->unk58, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B270->unk58, TRUE, TRUE);
     sub_8013818(&gUnknown_203B270->input,iVar5,iVar5,param_6);
     sub_8013780(&gUnknown_203B270->input,0);
     sub_801F280(1);
@@ -251,7 +251,7 @@ void sub_801F1B0(bool8 param_1, bool8 param_2)
     if(!gUnknown_203B270->unk4)
         gUnknown_203B270->unk4 = param_2;
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B270->unk58, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B270->unk58, TRUE, TRUE);
     gUnknown_203B270->input.unk22 = sub_801F3F8();
     sub_8013984(&gUnknown_203B270->input);
     gUnknown_203B270->input.menuIndex = sub_8092F4C(gUnknown_203B270->moves, gUnknown_203B270->input.menuIndex);
@@ -270,7 +270,7 @@ void sub_801F214(void)
             gUnknown_203B270->unk58[gUnknown_203B270->unk54] = gUnknown_80DC240;
         }
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B270->unk58, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(gUnknown_203B270->unk58, TRUE, TRUE);
         MemoryFree(gUnknown_203B270);
         gUnknown_203B270 = NULL;
     }

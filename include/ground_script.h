@@ -59,7 +59,7 @@ typedef struct ScriptData
     // padding
     /* 0x28 */ s16 branchDiscriminant;
     /* 0x2A */ s16 unk2A;
-    /* 0x2C */ s16 unk2C;
+    /* 0x2C */ u16 unk2C;
     // padding
     /* 0x30 */ s32 unk30;
     /* 0x34 */ Position32 pos1;
@@ -78,27 +78,27 @@ typedef struct CallbackData
     // size: 0x54
     /* 0x00 */ u16 maybeId;
     // padding
-    // (almost?) all callbacks take the parentObject as first parameter
-    /* 0x04 */ s16 (*func04)(void*); // id related
-    /* 0x08 */ u32 (*func08)();
-    /* 0x0C */ u32 (*func0C)();
-    /* 0x10 */ u32 (*func10)();
-    /* 0x14 */ u32 (*func14)();
-    /* 0x18 */ u32 (*func18)();
-    /* 0x1C */ u32 (*func1C)();
-    /* 0x20 */ u32 (*func20)();
-    /* 0x24 */ u32 (*func24)();
-    /* 0x28 */ u32 (*func28)();
-    /* 0x2C */ u32 (*func2C)();
-    /* 0x30 */ u32 (*func30)();
-    /* 0x34 */ u32 (*func34)();
-    /* 0x38 */ u32 (*func38)();
-    /* 0x3C */ u32 (*func3C)();
-    /* 0x40 */ u32 (*func40)();
-    /* 0x44 */ u32 (*func44)();
-    /* 0x48 */ u32 (*func48)();
-    /* 0x4C */ u32 (*func4C)();
-    /* 0x50 */ u32 (*func50)();
+    // All callbacks take the parentObject as first parameter
+    /* 0x04 */ s16 (*getIndex)(void*); // id related
+    /* 0x08 */ void (*getSize)(void*, Position32 *out);
+    /* 0x0C */ void (*getHitboxCenter)(void*, Position32 *out);
+    /* 0x10 */ void (*getPosHeightAndUnk)(void*, u32 *height, u32 *unk);
+    /* 0x14 */ void (*getDirection)(void*, s8 *dir);
+    /* 0x18 */ void (*getFlags)(void*, u32 *flags);
+    /* 0x1C */ void (*setHitboxPos)(void*, Position32 *posOrNull);
+    /* 0x20 */ void (*setPositionBounds)(void*, Position32 *from, Position32 *to);
+    /* 0x24 */ bool8 (*moveReal)(void*, Position32*);
+    /* 0x28 */ void (*setPosHeight)(void*, u32 height);
+    /* 0x2C */ void (*setDirection)(void*, s8 dir); // direction must be signed char!
+    /* 0x30 */ void (*setEventIndex)(void*, u16);
+    /* 0x34 */ void (*livesOnlyNullsub)(void*, u16);
+    /* 0x38 */ void (*func38)(void*, s16, u32);
+    /* 0x3C */ void (*setFlags)(void*, u32 bits);
+    /* 0x40 */ void (*clearFlags)(void*, u32 bits);
+    /* 0x44 */ void (*func44_livesOnlySpriteRelated)(void*, u32);
+    /* 0x48 */ void (*moveRelative)(void*, Position32*);
+    /* 0x4C */ bool8 (*func4C_spriteRelatedCheck)(void*);
+    /* 0x50 */ bool8 (*func50_spriteRelated)(void*);
 } CallbackData;
 
 typedef struct Action
@@ -140,14 +140,14 @@ extern FunctionScript gFunctionScriptTable[];
 #include "debug.h"
 
 void InitScriptData(ScriptData *a0);
-u8 sub_809D8EC(Action *param_1, s16 param_2);
-void sub_809D648(Action *action);
-void sub_809D710(Action *param_1, ScriptInfoSmall *script, s16 index);
-bool8 sub_809DA08(Action *param_1, s16 index, u32 param_3);
-bool8 InitActionScriptData(Action *param_1, const DebugLocation *unused);
+u8 GroundScriptCheckLockCondition(Action *param_1, s16 param_2);
+void InitAction2(Action *action);
+void GetFunctionScript(Action *param_1, ScriptInfoSmall *script, s16 index);
+bool8 GroundScriptLockCond(Action *param_1, s16 index, u32 param_3);
+bool8 ActionResetScriptData(Action *param_1, const DebugLocation *unused);
 bool8 GroundScript_ExecutePP(Action *, s32 *, ScriptInfoSmall *, const DebugLocation *unused);
-ScriptCommand *sub_80A242C(Action *action, s32 r1);
-ScriptCommand *sub_80A2460(Action *action, s32 r1);
+ScriptCommand *FindLabel(Action *action, s32 r1);
+ScriptCommand *ResolveJump(Action *action, s32 r1);
 void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s16 group, s8 sector);
 
 #endif // GUARD_GROUND_SCRIPT_H

@@ -389,7 +389,7 @@ _0803EB70:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	ldr r0, _0803EB94
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -406,7 +406,7 @@ _0803EB98:
 	ldr r0, _0803EBB4
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	ldr r0, _0803EBB8
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -504,7 +504,7 @@ _0803EC66:
 	movs r1, 0
 _0803EC6E:
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	b _0803EC84
 	.align 2, 0
 _0803EC78: .4byte gUnknown_203B40C
@@ -555,7 +555,7 @@ sub_803ECB4:
 	adds r0, r5, 0
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	pop {r4,r5}
 	pop {r0}
 	bx r0

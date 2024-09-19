@@ -98,7 +98,7 @@ _0804540C:
 	bl sub_8069F54
 	lsls r0, 16
 	asrs r0, 16
-	bl sub_80687D0
+	bl GetSpriteData
 	str r0, [r4, 0x64]
 	mov r1, r9
 	lsls r0, r1, 4
@@ -291,7 +291,7 @@ _0804557A:
 	bl sub_8069F54
 	lsls r0, 16
 	asrs r0, 16
-	bl sub_80687D0
+	bl GetSpriteData
 	str r0, [r4, 0x64]
 	adds r0, r4, 0
 	adds r0, 0x68

@@ -296,7 +296,7 @@ void SetMenuItems(MenuStruct *a0, UnkTextStruct2 *a1, s32 index, const UnkTextSt
 {
     a1[index] = *a3;
     ResetUnusedInputStruct();
-    sub_800641C(a1, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(a1, TRUE, TRUE);
 
     if (a5)
         sub_8012D60(&a0[index], menuItems, 0, 0, menuAction, index);
@@ -308,10 +308,10 @@ void SetMenuItems(MenuStruct *a0, UnkTextStruct2 *a1, s32 index, const UnkTextSt
 
 void sub_8035CC0(UnkTextStruct2 *dataArray, u32 index)
 {
-    sub_8006518(dataArray);
+    RestoreUnkTextStruct_8006518(dataArray);
     dataArray[index] = sUnknown_80E59A8;
     ResetUnusedInputStruct();
-    sub_800641C(dataArray, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(dataArray, TRUE, TRUE);
 }
 
 void sub_8035CF4(MenuStruct *menu, u32 index, bool8 a2)

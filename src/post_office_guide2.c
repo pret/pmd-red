@@ -17,7 +17,7 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 
 static EWRAM_DATA_2 unkStruct_203B330 *sUnknown_203B330 = {0};
 
@@ -70,7 +70,7 @@ void sub_8031A3C(void)
     if (sUnknown_203B330 != NULL) {
         sUnknown_203B330->unk18[sUnknown_203B330->unk10] = sUnknown_80E1EFC;
         ResetUnusedInputStruct();
-        sub_800641C(sUnknown_203B330->unk18, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(sUnknown_203B330->unk18, TRUE, TRUE);
         MemoryFree(sUnknown_203B330);
         sUnknown_203B330 = NULL;
     }
@@ -80,7 +80,7 @@ static void sub_8031A84(void)
 {
     s32 jobs;
 
-    sub_8006518(sUnknown_203B330->unk18);
+    RestoreUnkTextStruct_8006518(sUnknown_203B330->unk18);
     sUnknown_203B330->unk18[sUnknown_203B330->unk10] = sUnknown_80E1F18;
 
     if (sUnknown_203B330->unkC == 2) {
@@ -92,7 +92,7 @@ static void sub_8031A84(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B330->unk18, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B330->unk18, TRUE, TRUE);
 }
 
 static void DisplayMissionObjectives(void)
@@ -147,13 +147,13 @@ static void DisplayMissionObjectives(void)
 
                         switch (jobInfo->missionType) {
                             case WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM:
-                                BufferItemName(gUnknown_202DE58, jobInfo->targetItem, NULL);
-                                sprintfStatic(buffer1, sFmtBring, gUnknown_202DE58);
+                                BufferItemName(gFormatItems, jobInfo->targetItem, NULL);
+                                sprintfStatic(buffer1, sFmtBring, gFormatItems);
                                 PrintStringOnWindow(40, yCoord, buffer1, sUnknown_203B330->unk10, 0);
                                 break;
                             case WONDER_MAIL_MISSION_TYPE_FIND_ITEM:
-                                BufferItemName(gUnknown_202DE58, jobInfo->targetItem, NULL);
-                                sprintfStatic(buffer1, sFmtFind, gUnknown_202DE58);
+                                BufferItemName(gFormatItems, jobInfo->targetItem, NULL);
+                                sprintfStatic(buffer1, sFmtFind, gFormatItems);
                                 PrintStringOnWindow(40, yCoord, buffer1, sUnknown_203B330->unk10, 0);
                                 break;
                             case WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT:

@@ -23,10 +23,10 @@ GroundMap_GetStationScript:
 	lsls r5, 24
 	asrs r5, 24
 	adds r0, r4, 0
-	bl sub_80A77A0
+	bl ChangeScriptFile
 	ldr r1, _080A4BE0
 	adds r0, r4, 0
-	bl sub_80A77D0
+	bl GetGroundScript
 	mov r9, r0
 	ldr r1, _080A4BE4
 	str r5, [sp]

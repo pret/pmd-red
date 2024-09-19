@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80AD8B4
-sub_80AD8B4:
+	thumb_func_start GroundLink_GetPos
+GroundLink_GetPos:
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 16
@@ -55,11 +55,11 @@ _080AD906:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080AD910: .4byte gUnknown_203B4B8
-	thumb_func_end sub_80AD8B4
+_080AD910: .4byte gCurrentGroundLink
+	thumb_func_end GroundLink_GetPos
 
-	thumb_func_start sub_80AD914
-sub_80AD914:
+	thumb_func_start GroundLink_GetArea
+GroundLink_GetArea:
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	adds r5, r2, 0
@@ -123,7 +123,7 @@ _080AD970:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080AD98C: .4byte gUnknown_203B4B8
-	thumb_func_end sub_80AD914
+_080AD98C: .4byte gCurrentGroundLink
+	thumb_func_end GroundLink_GetArea
 
         .align 2,0

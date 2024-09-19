@@ -11,8 +11,8 @@
 #include "structs/str_dungeon.h"
 #include "structs/str_traps.h"
 
-extern u8 gUnknown_81071E0[];
-extern u8 gUnknown_81071D4[];
+extern u8 gMisakiSan[];
+extern u8 gYayoiSan[];
 
 extern void sub_8082FA8(unkStruct_8094924 *, void *, s32);
 
@@ -97,7 +97,7 @@ Entity *sub_8045684(u8, Position *, u8);
 u32 sub_80831A0(unkStruct_8094924 *param_1);
 void sub_8082280(unkStruct_8094924 *param_1,bool8 isTeamMember,s32 index);
 
-extern u8 gUnknown_81071D4[];
+extern u8 gYayoiSan[];
 
 void HandleTripTrap(Entity *pokemon, Entity *target)
 {
@@ -153,13 +153,13 @@ void sub_8080B30(u32 param_1,u32 param_2)
     SaveItemData(&uStack_14);
     SaveTrapData(&uStack_14);
     sub_8080CF0(&uStack_14);
-    sub_808300C(&uStack_14,gUnknown_81071D4);
+    sub_808300C(&uStack_14,gYayoiSan);
     nullsub_98(&uStack_14);
 }
 
 void sub_8080B90(unkStruct_8094924 *param_1)
 {
-    sub_808300C(param_1,gUnknown_81071E0);
+    sub_808300C(param_1,gMisakiSan);
     sub_8082FA8(param_1,&gDungeon->dungeonLocation,0x58);
 }
 
@@ -175,7 +175,7 @@ void SaveItemData(unkStruct_8094924 *param_1)
     {
         local_1c[counter] = 0;
     }
-    sub_808300C(param_1,gUnknown_81071E0);
+    sub_808300C(param_1,gMisakiSan);
 
     for(counter = 0; counter < DUNGEON_MAX_ITEMS; counter++)
     {
@@ -206,7 +206,7 @@ void SaveTrapData(unkStruct_8094924 *param_1)
     {
         local_1c[counter] = -1;
     }
-    sub_808300C(param_1,gUnknown_81071E0);
+    sub_808300C(param_1,gMisakiSan);
 
     for(counter = 0; counter < DUNGEON_MAX_TRAPS; counter++)
     {
@@ -231,7 +231,7 @@ void sub_8080CF0(unkStruct_8094924 *param_1)
 {
     s32 counter;
 
-    sub_808300C(param_1,gUnknown_81071E0);
+    sub_808300C(param_1,gMisakiSan);
     sub_8083078(param_1,gDungeon->unk37F0);
     sub_8083078(param_1,gDungeon->unk37F4);
     sub_80830B4(param_1,gDungeon->plusIsActive[0]);
@@ -482,7 +482,7 @@ void sub_8081454(unkStruct_8094924 *param_1)
     int iVar2;
     int iVar4;
 
-    sub_808300C(param_1,gUnknown_81071E0);
+    sub_808300C(param_1,gMisakiSan);
     sub_80830B4(param_1, gDungeon->unk3A08);
     sub_80830B4(param_1, gDungeon->unk3A09);
     sub_80830B4(param_1, gDungeon->unk3A0A);
@@ -531,7 +531,7 @@ void sub_8081454(unkStruct_8094924 *param_1)
 void sub_808165C(unkStruct_8094924 *param_1)
 {
 
-    sub_808300C(param_1,gUnknown_81071E0);
+    sub_808300C(param_1,gMisakiSan);
     sub_8083060(param_1, gDungeon->unk181e8.unk18208);
     sub_8083060(param_1, gDungeon->unk181e8.visibilityRange);
     sub_80830B4(param_1, gDungeon->unk181e8.blinded);
@@ -803,13 +803,13 @@ void sub_8081BF4(u8 *r0, u32 r1)
     RestoreTrapData(&uStack_14);
     sub_808217C(&uStack_14);
 
-    sub_8083018(&uStack_14, gUnknown_81071D4);
+    sub_8083018(&uStack_14, gYayoiSan);
     nullsub_98(&uStack_14);
 }
 
 void sub_8081C50(unkStruct_8094924 *r0)
 {
-    sub_8083018(r0, gUnknown_81071E0);
+    sub_8083018(r0, gMisakiSan);
     sub_8082FE0(r0, (u32 *)&gDungeon->dungeonLocation, 0x58);
 }
 
@@ -819,7 +819,7 @@ void sub_8081C7C(unkStruct_8094924 *r0)
     int y;
     s32 iVar7;
 
-    sub_8083018(r0,gUnknown_81071E0);
+    sub_8083018(r0,gMisakiSan);
     gDungeon->unk3A08 = sub_80831DC(r0);
     gDungeon->unk3A09 = sub_80831DC(r0);
     gDungeon->unk3A0A = sub_80831DC(r0);
@@ -894,7 +894,7 @@ void RestoreDungeonWeather(unkStruct_8094924 *r0, Weather *weather)
 
 void sub_8081F2C(unkStruct_8094924 *param_1)
 {
-    sub_8083018(param_1,gUnknown_81071E0);
+    sub_8083018(param_1,gMisakiSan);
     gDungeon->unk181e8.cameraTarget = NULL;
     gDungeon->unk181e8.unk18208 = sub_8083188(param_1);
     gDungeon->unk181e8.visibilityRange = sub_8083188(param_1);
@@ -920,7 +920,7 @@ void RestoreItemData(unkStruct_8094924 *r0) {
     s32 index;
     Item item;
     Position pos;
-    sub_8083018(r0, gUnknown_81071E0);
+    sub_8083018(r0, gMisakiSan);
     for(index = 0; index < DUNGEON_MAX_ITEMS; index++)
     {
         sub_80820A8(r0, &item);
@@ -949,7 +949,7 @@ void RestoreTrapData(unkStruct_8094924 *param_1)
     u8 unk1;
     u8 trapID;
 
-    sub_8083018(param_1, gUnknown_81071E0);
+    sub_8083018(param_1, gMisakiSan);
 
     for(counter = 0; counter < DUNGEON_MAX_TRAPS; counter++)
     {
@@ -977,7 +977,7 @@ void sub_808217C(unkStruct_8094924 *param_1)
 {
     s32 counter;
 
-    sub_8083018(param_1,gUnknown_81071E0);
+    sub_8083018(param_1,gMisakiSan);
     gDungeon->unk37F0 = sub_80831A0(param_1);
     gDungeon->unk37F4 = sub_80831A0(param_1);
     gDungeon->plusIsActive[0] = sub_80831DC(param_1);

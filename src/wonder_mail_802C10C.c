@@ -31,7 +31,7 @@ bool8 sub_802C10C(s32 a0, UnkTextStruct2_sub *a1, s32 a2)
 
     gUnknown_203B2E0->unk8.s0.unk34 = a0;
     gUnknown_203B2E0->unk8.s0.unk38 = &gUnknown_203B2E0->unk8.s0.unk3C[a0];
-    sub_8006518(gUnknown_203B2E0->unk8.s0.unk3C);
+    RestoreUnkTextStruct_8006518(gUnknown_203B2E0->unk8.s0.unk3C);
 
     gUnknown_203B2E0->unk8.s0.unk3C[gUnknown_203B2E0->unk8.s0.unk34] = sUnknown_80DFCB4;
     gUnknown_203B2E0->unk8.s0.unk38->unk14 = &gUnknown_203B2E0->unk8.unk9C;
@@ -41,7 +41,7 @@ bool8 sub_802C10C(s32 a0, UnkTextStruct2_sub *a1, s32 a2)
 
     sub_8012D34(gUnknown_203B2E0->unk8.s0.unk38, a2);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2E0->unk8.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B2E0->unk8.s0.unk3C, TRUE, TRUE);
     sub_8013848(&gUnknown_203B2E0->unk8.s0.input, CountPelipperBoardSlots(), a2, a0);
     gUnknown_203B2E0->unk8.s0.input.menuIndex = gUnknown_203B2E4;
     sub_8013984(&gUnknown_203B2E0->unk8.s0.input);
@@ -85,7 +85,7 @@ u8 sub_802C26C(void)
 void sub_802C28C(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B2E0->unk8.s0.unk3C, FALSE, FALSE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B2E0->unk8.s0.unk3C, FALSE, FALSE);
     gUnknown_203B2E0->unk8.s0.input.unk22 = CountPelipperBoardSlots();
     sub_8013984(&gUnknown_203B2E0->unk8.s0.input);
     sub_802C328();
@@ -101,7 +101,7 @@ void sub_802C2D4(void)
         gUnknown_203B2E4 = gUnknown_203B2E0->unk8.s0.input.menuIndex;
         gUnknown_203B2E0->unk8.s0.unk3C[gUnknown_203B2E0->unk8.s0.unk34] = sUnknown_80DFC9C;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B2E0->unk8.s0.unk3C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(gUnknown_203B2E0->unk8.s0.unk3C, TRUE, TRUE);
         MemoryFree(gUnknown_203B2E0);
         gUnknown_203B2E0 = NULL;
     }
@@ -126,7 +126,7 @@ void DrawPelipperBoardJobMenu(void)
     s32 i;
     unkStruct_802C39C local;
 
-    sub_8008C54(gUnknown_203B2E0->unk8.s0.unk34);
+    CallPrepareTextbox_8008C54(gUnknown_203B2E0->unk8.s0.unk34);
     sub_80073B8(gUnknown_203B2E0->unk8.s0.unk34);
     iVar4 = gUnknown_203B2E0->unk8.s0.input.unk1E * 8;
     x = iVar4;

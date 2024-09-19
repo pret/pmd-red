@@ -95,7 +95,7 @@ extern u32 sub_808D1DC(PokemonStruct1*);
 extern PokemonStruct1 *sub_808D378(void);
 extern PokemonStruct1 *sub_808D3BC(void);
 extern PokemonStruct1 *sub_808D3F8(void);
-extern s32 sub_808D544(u32);
+extern s32 GetUnitSum_808D544(u32);
 extern s32 sub_808D580(s32 *);
 
 #endif // GUARD_POKEMON_H

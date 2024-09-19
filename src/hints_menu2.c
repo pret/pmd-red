@@ -24,11 +24,11 @@ bool8 CreateHintDisplayScreen(u32 index)
     sUnknown_203B268 = MemoryAlloc(sizeof(struct_Sub80095E4_2), 8);
     sUnknown_203B268->s0.unk34 = 0;
     sUnknown_203B268->s0.unk38 = sUnknown_203B268->s0.unk3C;
-    sub_8006518(sUnknown_203B268->s0.unk3C);
+    RestoreUnkTextStruct_8006518(sUnknown_203B268->s0.unk3C);
     sUnknown_203B268->s0.unk3C[sUnknown_203B268->s0.unk34] = sUnknown_80DC0FC;
     sUnknown_203B268->s0.unk38->unk14 = &sUnknown_203B268->unk9C;
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B268->s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B268->s0.unk3C, TRUE, TRUE);
     sub_8013818(&sUnknown_203B268->s0.input, 5, 1, sUnknown_203B268->s0.unk34);
     sUnknown_203B268->s0.input.unk1E = index;
     sub_801E714();
@@ -65,7 +65,7 @@ void DestroyHintDisplayScreen(void)
     if (sUnknown_203B268 != NULL) {
         sUnknown_203B268->s0.unk3C[sUnknown_203B268->s0.unk34] = sUnknown_80DC0E4;
         ResetUnusedInputStruct();
-        sub_800641C(sUnknown_203B268->s0.unk3C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(sUnknown_203B268->s0.unk3C, TRUE, TRUE);
         MemoryFree(sUnknown_203B268);
         sUnknown_203B268 = NULL;
     }
@@ -78,7 +78,7 @@ static void sub_801E76C(void)
     sUnknown_203B268->unk9C.f2 = 15;
     sUnknown_203B268->unk9C.f3 = 0;
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B268->s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B268->s0.unk3C, TRUE, TRUE);
 }
 
 static void DisplayChosenHint(void)

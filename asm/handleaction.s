@@ -489,7 +489,7 @@ _0809E016:
 	bl _call_via_r2
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_8002C60
+	bl VecDirection8Radial
 	lsls r0, 24
 	adds r2, r7, 0
 	adds r2, 0x4A
@@ -595,7 +595,7 @@ _0809E0E8:
 	ldr r2, [r7, 0x54]
 	add r4, sp, 0xEC
 	adds r0, r4, 0
-	bl sub_8002BB8
+	bl SetVecFromDirectionSpeed
 	ldr r2, [r4]
 	ldr r3, [r4, 0x4]
 	add r1, sp, 0xF4
@@ -738,7 +738,7 @@ _0809E20C:
 	lsls r0, 16
 	asrs r0, 16
 	adds r1, r4, 0
-	bl sub_80AD8B4
+	bl GroundLink_GetPos
 _0809E234:
 	cmp r5, 0
 	beq _0809E282
@@ -759,7 +759,7 @@ _0809E234:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	adds r2, r6, 0
-	bl sub_8002DF0
+	bl SizedDeltaDirection8
 	lsls r0, 24
 	asrs r0, 24
 	mov r8, r0
@@ -771,7 +771,7 @@ _0809E234:
 	adds r0, r5, 0
 	adds r1, r3, 0
 	adds r2, r6, 0
-	bl sub_8002D54
+	bl SizedDeltaDirection4
 	lsls r0, 24
 	asrs r0, 24
 	mov r8, r0
@@ -844,7 +844,7 @@ _0809E2F0:
 	ldr r1, [r0]
 	b _0809E8EC
 	.align 2, 0
-_0809E304: .4byte gUnknown_2039B48
+_0809E304: .4byte gUnlockBranchLabels
 _0809E308:
 	adds r0, r7, 0
 	adds r0, 0x46
@@ -909,7 +909,7 @@ _0809E376:
 	add r0, sp, 0x11C
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl sub_80A2460
+	bl ResolveJump
 	b _0809E8C8
 _0809E382:
 	add r0, sp, 0x120
@@ -941,7 +941,7 @@ _0809E390:
 _0809E3BA:
 	ldr r1, [r4]
 	adds r0, r7, 0
-	bl sub_80A2460
+	bl ResolveJump
 	b _0809E8C8
 _0809E3C4:
 	adds r4, r7, 0
@@ -969,7 +969,7 @@ _0809E3DE:
 	asrs r2, 16
 	movs r0, 0
 	movs r1, 0x12
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0x1
 	b _0809E402
 _0809E400:
@@ -990,14 +990,14 @@ _0809E40C:
 	str r0, [r1]
 	movs r0, 0
 	movs r1, 0x12
-	bl sub_8001658
+	bl GetScriptVarValue
 	adds r2, r0, 0
 	lsls r2, 16
 	asrs r4, r2, 16
 	lsrs r2, 16
 	movs r0, 0
 	movs r1, 0x30
-	bl sub_8001784
+	bl GetScriptVarArrayValue
 	cmp r4, 0x13
 	bne _0809E43C
 	cmp r0, 0
@@ -1009,7 +1009,7 @@ _0809E43C:
 	bl sub_8098DCC
 	adds r0, r7, 0
 	movs r1, 0
-	bl sub_80A2460
+	bl ResolveJump
 	str r0, [r7, 0x28]
 	movs r0, 0
 	movs r1, 0
@@ -1019,7 +1019,7 @@ _0809E45A:
 	movs r0, 0
 	movs r1, 0x13
 	movs r2, 0x13
-	bl sub_80018D8
+	bl SetScriptVarValue
 _0809E464:
 	adds r0, r7, 0
 	adds r0, 0x4C
@@ -1053,7 +1053,7 @@ _0809E49C:
 	asrs r2, r0, 16
 	movs r0, 0
 	movs r1, 0x13
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0x1
 	b _0809E4AC
 _0809E4AA:
@@ -1075,7 +1075,7 @@ _0809E4B4:
 _0809E4C4:
 	movs r0, 0
 	movs r1, 0x13
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r6, r0, 16
 	add r4, sp, 0x18
@@ -1125,7 +1125,7 @@ _0809E524:
 	bne _0809E5B8
 	movs r0, 0
 	movs r1, 0x14
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetMailatIndex
@@ -1171,7 +1171,7 @@ _0809E58E:
 	bl sub_809B1C0
 	adds r0, r7, 0
 	movs r1, 0x1
-	bl sub_809D8EC
+	bl GroundScriptCheckLockCondition
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809E5A4
@@ -1231,7 +1231,7 @@ _0809E608:
 	adds r0, r7, 0
 	movs r1, 0x1
 _0809E60C:
-	bl sub_80A2460
+	bl ResolveJump
 	str r0, [r7, 0x28]
 	b _0809E9CC
 _0809E614:
@@ -1263,7 +1263,7 @@ _0809E63C:
 	movs r0, 0
 	movs r1, 0x13
 	adds r2, r4, 0
-	bl sub_80018D8
+	bl SetScriptVarValue
 	adds r0, r7, 0
 	adds r1, r4, 0
 	b _0809E8EE
@@ -1310,7 +1310,7 @@ _0809E6A4:
 	add r0, sp, 0x134
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl sub_80A2460
+	bl ResolveJump
 	b _0809E8C8
 	.align 2, 0
 _0809E6B0: .4byte gUnknown_2039D98
@@ -1331,7 +1331,7 @@ _0809E6C2:
 _0809E6D0:
 	ldr r1, [r4]
 	adds r0, r7, 0
-	bl sub_80A2460
+	bl ResolveJump
 	b _0809E8C8
 	.align 2, 0
 _0809E6DC: .4byte gUnknown_2039D98
@@ -1395,7 +1395,7 @@ _0809E74A:
 	add r0, sp, 0x13C
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl sub_80A2460
+	bl ResolveJump
 	b _0809E8C8
 	.align 2, 0
 _0809E758: .4byte gUnknown_2039D98
@@ -1515,7 +1515,7 @@ _0809E812:
 	bl sub_80A87AC
 	adds r0, r7, 0
 	movs r1, 0
-	bl sub_809D8EC
+	bl GroundScriptCheckLockCondition
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809E844
@@ -1593,7 +1593,7 @@ _0809E898:
 	ldrsh r1, [r0, r5]
 _0809E8C2:
 	adds r0, r7, 0
-	bl sub_80A242C
+	bl FindLabel
 _0809E8C8:
 	str r0, [r7, 0x28]
 _0809E8CA:
@@ -1619,14 +1619,14 @@ _0809E8D8:
 _0809E8EC:
 	adds r0, r7, 0
 _0809E8EE:
-	bl sub_80A2460
+	bl ResolveJump
 	str r0, [r7, 0x28]
 _0809E8F4:
 	movs r0, 0x3
 	strh r0, [r7, 0x26]
 	b _0809E9CC
 	.align 2, 0
-_0809E8FC: .4byte gUnknown_2039B48
+_0809E8FC: .4byte gUnlockBranchLabels
 _0809E900:
 	adds r0, r7, 0
 	bl ExecuteScriptCommand
@@ -1768,7 +1768,7 @@ _0809E9DA:
 	ldr r2, [r4, 0x4]
 	subs r1, r2
 	str r1, [r0, 0x4]
-	bl sub_8002C60
+	bl VecDirection8Radial
 	lsls r0, 24
 	adds r2, r7, 0
 	adds r2, 0x4A

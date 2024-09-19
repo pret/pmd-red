@@ -434,7 +434,7 @@ _0807E9D8:
 	ldrsh r0, [r4, r1]
 	cmp r0, r9
 	beq _0807E9FE
-	bl sub_80687D0
+	bl GetSpriteData
 	str r0, [r5, 0x64]
 	adds r0, r5, 0
 	bl sub_806CEBC

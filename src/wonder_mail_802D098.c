@@ -140,7 +140,7 @@ static void sub_802D1B8(void)
 {
     s32 i;
 
-    sub_8006518(sUnknown_203B2F8->unk1A8);
+    RestoreUnkTextStruct_8006518(sUnknown_203B2F8->unk1A8);
 
     switch (sUnknown_203B2F8->state) {
         case 13:
@@ -164,7 +164,7 @@ static void sub_802D1B8(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B2F8->unk1A8, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B2F8->unk1A8, TRUE, TRUE);
 }
 
 static void sub_802D2A8(void)
@@ -196,23 +196,23 @@ static void sub_802D2A8(void)
             break;
         case DUPLICATE_WONDER_MAIL:
             sUnknown_203B2F8->fallbackState = WONDER_MAIL_EXIT;
-            sub_80141B4(sMailAlreadyReceived, 0, NULL, 0x101);
+            xxx_info_box_80141B4(sMailAlreadyReceived, 0, NULL, 0x101);
             break;
         case DUPLICATE_WONDER_MAIL_1:
             sUnknown_203B2F8->fallbackState = WONDER_MAIL_EXIT;
-            sub_80141B4(sMailAlreadyReceivedMayNotReceiveAgain, 0, NULL, 0x101);
+            xxx_info_box_80141B4(sMailAlreadyReceivedMayNotReceiveAgain, 0, NULL, 0x101);
             break;
         case 5:
             sUnknown_203B2F8->fallbackState = WONDER_MAIL_EXIT;
-            sub_80141B4(sOnlyOneMailCanBeHeldPleaseCompleteFirst, 0, NULL, 0x101);
+            xxx_info_box_80141B4(sOnlyOneMailCanBeHeldPleaseCompleteFirst, 0, NULL, 0x101);
             break;
         case 6:
             sUnknown_203B2F8->fallbackState = WONDER_MAIL_EXIT;
-            sub_80141B4(sTeamQuicksavedCompleteFirst, 0, NULL, 0x101);
+            xxx_info_box_80141B4(sTeamQuicksavedCompleteFirst, 0, NULL, 0x101);
             break;
         case 7:
             sUnknown_203B2F8->fallbackState = DRAW_JOB_LIST_1;
-            sub_80141B4(sTeamQuicksavedCannotDelete, 0, NULL, 0x101);
+            xxx_info_box_80141B4(sTeamQuicksavedCannotDelete, 0, NULL, 0x101);
             break;
         case RECEIVE_WONDER_MAIL:
             sUnknown_203B2F8->wonderMailAccepted = TRUE;
@@ -241,7 +241,7 @@ static void sub_802D2A8(void)
             }
 
             sUnknown_203B2F8->fallbackState = WONDER_MAIL_EXIT;
-            sub_80141B4(sReceivedWonderMail, 0, NULL, 0x101);
+            xxx_info_box_80141B4(sReceivedWonderMail, 0, NULL, 0x101);
             break;
         case 9:
             sub_802D690();
@@ -249,7 +249,7 @@ static void sub_802D2A8(void)
             break;
         case JOB_LIST_FULL:
             sUnknown_203B2F8->fallbackState = DRAW_JOB_LIST;
-            sub_80141B4(sJobListFullPleaseDelete, 0, NULL, 0x101);
+            xxx_info_box_80141B4(sJobListFullPleaseDelete, 0, NULL, 0x101);
             break;
         case DRAW_JOB_LIST:
             sub_802C4C8(0, NULL, 4);

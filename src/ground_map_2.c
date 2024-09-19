@@ -15,7 +15,7 @@ extern const u8 gGroundWeatherSelect[];
 extern const s32 gUnknown_81177BC[];
 
 extern void sub_80A3BB0(unkStruct_3001B70 *, u32);
-extern void sub_80018D8(u8, u8, u32);
+extern void SetScriptVarValue(u8, u8, u32);
 extern void sub_80A2D00(unkStruct_3001B70 *);
 extern void sub_80A2B40(unkStruct_3001B70 *, const u8 *);
 extern void sub_80A2FBC(unkStruct_3001B70 *, u32);
@@ -29,8 +29,8 @@ static void sub_80A62D0(void);
 
 void sub_80A5E70(void)
 {
-    if (gUnknown_3001B70 != NULL)
-        sub_80A49E8(gUnknown_3001B70);
+    if (gGroundMapDungeon_3001B70 != NULL)
+        sub_80A49E8(gGroundMapDungeon_3001B70);
 
     sub_80A62D0();
 }
@@ -52,7 +52,7 @@ void sub_80A5EBC(void)
 
 void sub_80A5EDC(u8 param_1)
 {
-    sub_80018D8(0, 27, -1);
+    SetScriptVarValue(0, 27, -1);
     gUnknown_3001B74->unk0  = -1;
     gUnknown_3001B74->unk2 = param_1;
 
@@ -84,7 +84,7 @@ void GroundWeather_Select(s16 param_1)
     iVar2 = param_1;
     iVar3 = iVar2;
     Log(0, gGroundWeatherSelect, iVar2, gUnknown_3001B74->unk2);
-    sub_80018D8(0, 27, iVar2);
+    SetScriptVarValue(0, 27, iVar2);
     gUnknown_3001B74->unk0 = iVar2;
 
     if (gUnknown_3001B74->unk2 == 0)

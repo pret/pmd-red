@@ -14,7 +14,7 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
@@ -51,7 +51,7 @@ bool8 CreateKangaskhanStorage(u32 mode)
     OpenedFile *faceFile;
 
     ResetUnusedInputStruct();
-    sub_800641C(NULL, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
     gKangaskhanStorageWork = MemoryAlloc(sizeof(struct KangaskhanStorageWork), 8);
     gKangaskhanStorageWork->menuAction1 = 0;
     gKangaskhanStorageWork->menuAction2 = 0;
@@ -150,7 +150,7 @@ static void sub_8016E80(void)
 {
     s32 index;
 
-    sub_8006518(gKangaskhanStorageWork->unkEC);
+    RestoreUnkTextStruct_8006518(gKangaskhanStorageWork->unkEC);
 
     switch (gKangaskhanStorageWork->currState) {
         case 13:
@@ -181,7 +181,7 @@ static void sub_8016E80(void)
     }
 
     ResetUnusedInputStruct();
-    sub_800641C(gKangaskhanStorageWork->unkEC, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gKangaskhanStorageWork->unkEC, TRUE, TRUE);
 }
 
 static void sub_8016FF8(void)
@@ -202,53 +202,53 @@ static void sub_8016FF8(void)
         case 2:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             gKangaskhanStorageWork->unkE4 = FALSE;
-            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_HOW_IT_WORKS], 0, gKangaskhanStorageWork->unkE8, 0x10D);
+            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_HOW_IT_WORKS], 0, gKangaskhanStorageWork->unkE8, 0x10D);
             break;
         case 3:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_EXIT;
             gKangaskhanStorageWork->unkE4 = TRUE;
-            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_BYE], 0, gKangaskhanStorageWork->unkE8, 0x30D);
+            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_BYE], 0, gKangaskhanStorageWork->unkE8, 0x30D);
             break;
         case KANGASKHAN_STORAGE_NO_INV_ITEMS:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             gKangaskhanStorageWork->unkE4 = FALSE;
-            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_YOU_HAVE_NOTHING], 0, gKangaskhanStorageWork->unkE8, 0x10D);
+            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_YOU_HAVE_NOTHING], 0, gKangaskhanStorageWork->unkE8, 0x10D);
             break;
         case KANGASKHAN_STORAGE_TOO_MANY_ITEMS:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             gKangaskhanStorageWork->unkE4 = FALSE;
-            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_YOU_ARE_FULL], 0, gKangaskhanStorageWork->unkE8, 0x10D);
+            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_YOU_ARE_FULL], 0, gKangaskhanStorageWork->unkE8, 0x10D);
             break;
         case 7:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             gKangaskhanStorageWork->unkE4 = FALSE;
-            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORAGE_HAS_NOTHING], 0, gKangaskhanStorageWork->unkE8, 0x10D);
+            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORAGE_HAS_NOTHING], 0, gKangaskhanStorageWork->unkE8, 0x10D);
             break;
         case 8:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             gKangaskhanStorageWork->unkE4 = FALSE;
-            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORAGE_FULL], 0, gKangaskhanStorageWork->unkE8, 0x10D);
+            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORAGE_FULL], 0, gKangaskhanStorageWork->unkE8, 0x10D);
             break;
         case KANGASKHAN_STORAGE_IS_MONEY_USED_TM:
-            sub_8090E14(gUnknown_202DE58, &gKangaskhanStorageWork->storedItem, 0);
+            sub_8090E14(gFormatItems, &gKangaskhanStorageWork->storedItem, 0);
             gKangaskhanStorageWork->fallbackState = 14;
             gKangaskhanStorageWork->unkE4 = FALSE;
-            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT__INVALID_ITEM], 0, gKangaskhanStorageWork->unkE8, 0x30D);
+            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT__INVALID_ITEM], 0, gKangaskhanStorageWork->unkE8, 0x30D);
             break;
         case 10:
             gKangaskhanStorageWork->fallbackState = 14;
             gKangaskhanStorageWork->unkE4 = FALSE;
-            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT__TOO_MANY_OF_ITEM], 0, gKangaskhanStorageWork->unkE8, 0x30D);
+            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT__TOO_MANY_OF_ITEM], 0, gKangaskhanStorageWork->unkE8, 0x30D);
             break;
         case 11:
             gKangaskhanStorageWork->fallbackState = 13;
             gKangaskhanStorageWork->unkE4 = FALSE;
-            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORE_WHAT], 0, gKangaskhanStorageWork->unkE8, 0x30D);
+            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORE_WHAT], 0, gKangaskhanStorageWork->unkE8, 0x30D);
             break;
         case 12:
             gKangaskhanStorageWork->fallbackState = 14;
             gKangaskhanStorageWork->unkE4 = FALSE;
-            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORE_MORE], 0, gKangaskhanStorageWork->unkE8, 0x30D);
+            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORE_MORE], 0, gKangaskhanStorageWork->unkE8, 0x30D);
             break;
         case 13:
             sub_801A5D8(3, 3, NULL, 10);
@@ -263,7 +263,7 @@ static void sub_8016FF8(void)
             break;
         case 17:
             sub_80177F8();
-            sub_8090E14(gUnknown_202DE58, &gKangaskhanStorageWork->storedItem, 0);
+            sub_8090E14(gFormatItems, &gKangaskhanStorageWork->storedItem, 0);
             gKangaskhanStorageWork->unkE4 = FALSE;
             sub_8014248(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT_ONE_PROMPT], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
                                     gKangaskhanStorageWork->unkE8, 12);
@@ -283,17 +283,17 @@ static void sub_8016FF8(void)
                 gKangaskhanStorageWork->fallbackState = 12;
 
             gKangaskhanStorageWork->unkE4 = TRUE;
-            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT_CONFIRMATION], 0, gKangaskhanStorageWork->unkE8, 0x10D);
+            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT_CONFIRMATION], 0, gKangaskhanStorageWork->unkE8, 0x10D);
             break;
         case 20:
             gKangaskhanStorageWork->fallbackState = 22;
             gKangaskhanStorageWork->unkE4 = FALSE;
-            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_TAKE_WHAT], 0, gKangaskhanStorageWork->unkE8, 0x30D);
+            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_TAKE_WHAT], 0, gKangaskhanStorageWork->unkE8, 0x30D);
             break;
         case 21:
             gKangaskhanStorageWork->fallbackState = 23;
             gKangaskhanStorageWork->unkE4 = FALSE;
-            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_TAKE_MORE], 0, gKangaskhanStorageWork->unkE8, 0x30D);
+            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_TAKE_MORE], 0, gKangaskhanStorageWork->unkE8, 0x30D);
             break;
         case 22:
             sub_801C8C4(1, 3, 0, 10);
@@ -332,7 +332,7 @@ static void sub_8016FF8(void)
             break;
         case 27:
             sub_80177F8();
-            sub_8090E14(gUnknown_202DE58, &gKangaskhanStorageWork->storedItem, 0);
+            sub_8090E14(gFormatItems, &gKangaskhanStorageWork->storedItem, 0);
             gKangaskhanStorageWork->unkE4 = FALSE;
             sub_8014248(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_WITHDRAW_ONE_PROMPT], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
                                     gKangaskhanStorageWork->unkE8, 12);
@@ -352,14 +352,14 @@ static void sub_8016FF8(void)
                 gKangaskhanStorageWork->fallbackState = 21;
 
             gKangaskhanStorageWork->unkE4 = TRUE;
-            sub_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_WITHDRAW_CONFIRMATION], 0, gKangaskhanStorageWork->unkE8, 0x10D);
+            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_WITHDRAW_CONFIRMATION], 0, gKangaskhanStorageWork->unkE8, 0x10D);
             break;
     }
 }
 
 static void sub_8017598(void)
 {
-    sub_8008C54(gKangaskhanStorageWork->unkA8.unk14);
+    CallPrepareTextbox_8008C54(gKangaskhanStorageWork->unkA8.unk14);
     sub_80073B8(gKangaskhanStorageWork->unkA8.unk14);
     PrintStringOnWindow(4, 0, sNumber, gKangaskhanStorageWork->unkA8.unk14, 0);
     sub_8013C68(&gKangaskhanStorageWork->unkA8);

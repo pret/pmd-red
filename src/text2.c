@@ -4,14 +4,14 @@
 
 // data.s
 extern const u32 gUnknown_80B853C[16];
-extern const struct unkShiftData gUnknown_80B85DC[8];
+extern const struct unkShiftData gCharMasksOffsets[8];
 extern const u32 gUnknown_80B8814[];
 extern const struct unkStruct_80B8824 gUnknown_80B8824;
 extern const struct unkStruct_80B8848 gUnknown_80B8848;
 
 // text.s
 extern void sub_8007E64(UnkTextStruct1 *, u16 *, u32, u32, u32, u32, u32, u8 *, u32);
-extern void sub_8008C6C(UnkTextStruct1 *, u32);
+extern void PrepareTextbox_8008C6C(UnkTextStruct1 *, u32);
 
 void nullsub_129(u32, s32, s32, s32, u32);
 u32 xxx_draw_char(UnkTextStruct1 *, s32, s32, u32, u32, u32);
@@ -31,7 +31,7 @@ void nullsub_152(void)
 {
 }
 
-void sub_8006518(UnkTextStruct2 *unkData)
+void RestoreUnkTextStruct_8006518(UnkTextStruct2 *unkData)
 {
     s32 iVar2;
     for (iVar2 = 0; iVar2 < 4; iVar2++)
@@ -136,7 +136,7 @@ void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const Un
     }
 
     if ((a5->unk0 & 0x80) == 0)
-        sub_8008C6C(a0, a4);
+        PrepareTextbox_8008C6C(a0, a4);
 
     t1->unk46 = 0;
 }
@@ -1410,7 +1410,7 @@ u32 xxx_draw_char(UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u32 a5)
     "\tb _08007508\n"
     "\t.align 2, 0\n"
 "_080074F8: .4byte 0x00008199\n"
-"_080074FC: .4byte gUnknown_202B034\n"
+"_080074FC: .4byte gDrawTextShadow\n"
 "_08007500:\n"
     "\tmovs r3, 0\n"
     "\tstr r3, [sp, 0x1C]\n"
@@ -1607,8 +1607,8 @@ u32 xxx_draw_char(UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u32 a5)
     "\tblt _08007570\n"
     "\tb _0800786C\n"
     "\t.align 2, 0\n"
-"_08007664: .4byte gUnknown_80B85DC\n"
-"_08007668: .4byte gUnknown_202B028\n"
+"_08007664: .4byte gCharMasksOffsets\n"
+"_08007668: .4byte gCharHeight\n"
 "_0800766C: .4byte gCurrentCharmap\n"
 "_08007670:\n"
     "\tmovs r0, 0\n"
@@ -1897,24 +1897,24 @@ u32 xxx_draw_char(UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u32 a5)
     "\tpop {r1}\n"
     "\tbx r1\n"
     "\t.align 2, 0\n"
-"_0800788C: .4byte gUnknown_80B85DC\n"
-"_08007890: .4byte gUnknown_202B028\n"
+"_0800788C: .4byte gCharMasksOffsets\n"
+"_08007890: .4byte gCharHeight\n"
 "_08007894: .4byte gCurrentCharmap\n"
 "_08007898: .4byte 0x11111111\n"
-"_0800789C: .4byte gUnknown_202B030\n"
+"_0800789C: .4byte gTextShadowMask\n"
 "_080078A0: .4byte gCharacterSpacing");
 }
 
 void sub_80078A4(u32 a0, s32 x, s32 y, s32 a3, u32 color)
 {
     sub_800792C(a0, x, y, a3, color);
-    sub_800792C(a0, x, y + 1, a3, gUnknown_202B030 & 0xF);
+    sub_800792C(a0, x, y + 1, a3, gTextShadowMask & 0xF);
 }
 
 UNUSED static void sub_80078E8(u32 a0, s32 x, s32 y, s32 a3, u32 color)
 {
     nullsub_129(a0, x, y, a3, color);
-    nullsub_129(a0, x, y + 1, a3, gUnknown_202B030 & 0xF);
+    nullsub_129(a0, x, y + 1, a3, gTextShadowMask & 0xF);
 }
 
 void sub_800792C(u32 a0, s32 x, s32 y, s32 a3, u32 color)
@@ -1957,7 +1957,7 @@ void sub_8007958(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color)
         if (lol > 7)
             lol = 8;
 
-        shiftData = &gUnknown_80B85DC[x + (x / 8 * -8)];
+        shiftData = &gCharMasksOffsets[x + (x / 8 * -8)];
 
         uVar4 = dataLOL.arr[lol];
         uVar4 = (uVar4 & 0x11111111) + (uVar4 & r9);

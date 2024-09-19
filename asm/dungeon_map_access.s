@@ -232,7 +232,7 @@ _0804A386:
 	b _0804A476
 	.align 2, 0
 _0804A3AC: .4byte 0x00011884
-_0804A3B0: .4byte gUnknown_202C838
+_0804A3B0: .4byte gFontTilesExtra_202C838
 _0804A3B4: .4byte 0x00012bda
 _0804A3B8:
 	movs r3, 0x80
@@ -565,7 +565,7 @@ _0804A60C:
 	b _0804A702
 	.align 2, 0
 _0804A638: .4byte 0x00011884
-_0804A63C: .4byte gUnknown_202C838
+_0804A63C: .4byte gFontTilesExtra_202C838
 _0804A640: .4byte 0x00012bda
 _0804A644:
 	movs r2, 0x80
@@ -979,7 +979,7 @@ _0804A92C:
 	b _0804AA20
 	.align 2, 0
 _0804A968: .4byte 0x00013554
-_0804A96C: .4byte gUnknown_202C038
+_0804A96C: .4byte gFontTiles_202C038
 _0804A970: .4byte 0x00012b92
 _0804A974:
 	lsls r0, r5, 1

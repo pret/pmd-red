@@ -163,7 +163,7 @@ void CreateLoadScreen(u32 currMenu)
     gLoadScreen->unk144[index] = gUnknown_80E75F8;
   }
   ResetUnusedInputStruct();
-  sub_800641C(gLoadScreen->unk144, TRUE, TRUE);
+  xxx_call_save_unk_text_struct_800641C(gLoadScreen->unk144, TRUE, TRUE);
   SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,0,&gUnknown_80E7610,gUnknown_203B378,FALSE,6,FALSE);
   switch(gLoadScreen->currMenu){
     case MENU_CONTINUE:
@@ -192,7 +192,7 @@ void CreateLoadScreen(u32 currMenu)
 void CleanLoadScreen(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(NULL, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
     if(gLoadScreen != NULL)
     {
         MemoryFree(gLoadScreen);
@@ -266,7 +266,7 @@ void DrawLoadScreenText(void)
   u8 *r2;
 
   iVar2 = sub_8011FA8();
-  sub_8008C54(0);
+  CallPrepareTextbox_8008C54(0);
   sub_80073B8(0);
   PrintStringOnWindow(8,0, gTeamHeadingText,0,0); // Team:
   PrintStringOnWindow(8,12,gNameHeadingText,0,0); // Name:
@@ -308,7 +308,7 @@ void DrawLoadScreenText(void)
     switch(sub_8011C1C())
     {
         case 1:
-            switch(sub_8001658(0,24))
+            switch(GetScriptVarValue(0,24))
             {
                 default:
                     sprintfStatic(auStack356,gUnknown_80E7804,sub_8098FB4());

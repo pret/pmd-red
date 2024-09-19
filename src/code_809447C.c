@@ -15,7 +15,7 @@ struct unkStruct_8113080
     u8 *text;
 };
 
-extern u8 gUnknown_202DE58[];
+extern u8 gFormatItems[];
 extern u8 gAvailablePokemonNames[];
 extern s32 gFormatData_202DE30[2];
 
@@ -61,7 +61,7 @@ static void sub_80944BC(s16 moveID, u8 *buffer)
         // Needed this cast/variable to match
         moveID_u16 = moveID_s32;
         sub_8092AA8(&move, moveID_u16);
-        sub_80928C0(gUnknown_202DE58, &move, NULL);
+        sub_80928C0(gFormatItems, &move, NULL);
         xxx_format_string(*gUnknown_811383C, buffer, buffer + 200, 0); // $m0's $i0
     } else {
         strncpy(buffer, gUnknown_8113080[moveID - 0x1F4].text, 200);
@@ -160,10 +160,10 @@ void sub_8094558(u32 param_1,u8 *param_2,unkDungeonGlobal_unk1CE98_sub *param_3)
     y += 0x10;
     item = &(param_3->heldItem);
     if ((param_3->heldItem.flags & ITEM_FLAG_EXISTS)) {
-        sub_8090E14(gUnknown_202DE58,item,0);
+        sub_8090E14(gFormatItems,item,0);
     }
     else {
-        strcpy(gUnknown_202DE58,*gUnknown_81139B8);
+        strcpy(gFormatItems,*gUnknown_81139B8);
     }
     PrintFormatStringOnWindow(4,y,*gUnknown_81139CC,param_1,0);
     sub_80073E0(param_1);

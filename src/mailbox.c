@@ -151,7 +151,7 @@ void SetMailboxState(u32 newState)
 void sub_802E0A0(void)
 {
     s32 index;
-    sub_8006518(gUnknown_203B304->unk10C);
+    RestoreUnkTextStruct_8006518(gUnknown_203B304->unk10C);
     switch(gUnknown_203B304->state)
     {
         case MAIN_MAILBOX_MENU:
@@ -178,7 +178,7 @@ void sub_802E0A0(void)
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B304->unk10C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B304->unk10C, TRUE, TRUE);
 }
 
 void sub_802E1AC(void)
@@ -531,7 +531,7 @@ void nullsub_133(void)
 
 void CreateMailAcceptedStatusBox(u32 r0)
 {
-    sub_8008C54(r0);
+    CallPrepareTextbox_8008C54(r0);
     sub_80073B8(r0);
     PrintStringOnWindow(3, 0, gMailAccepted, r0, 0);
     sub_8012BC4(0x12, 0xD, GetNumAcceptedJobs(), 2, 7, r0);

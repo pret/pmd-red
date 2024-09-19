@@ -367,7 +367,7 @@ _0808FA74:
 	b _0808FAA6
 	.align 2, 0
 _0808FA94: .4byte gUnknown_810DE50
-_0808FA98: .4byte gUnknown_202DE58
+_0808FA98: .4byte gFormatItems
 _0808FA9C:
 	ldr r0, _0808FB24
 	ldr r1, _0808FB28
@@ -435,7 +435,7 @@ _0808FB10:
 	str r4, [sp]
 	b _0808FECC
 	.align 2, 0
-_0808FB24: .4byte gUnknown_202DE58
+_0808FB24: .4byte gFormatItems
 _0808FB28: .4byte gUnknown_810DE58
 _0808FB2C: .4byte gUnknown_810DE6C
 _0808FB30: .4byte gFormatData_202DE30
@@ -886,7 +886,7 @@ _0808FEEC: .4byte gUnknown_8107798
 _0808FEF0: .4byte gAvailablePokemonNames
 _0808FEF4: .4byte gFormatData_202DE30
 _0808FEF8: .4byte gUnknown_810DEB4
-_0808FEFC: .4byte gUnknown_202DE58
+_0808FEFC: .4byte gFormatItems
 _0808FF00: .4byte gUnknown_810DEC8
 _0808FF04: .4byte gUnknown_810DEDC
 _0808FF08: .4byte gUnknown_810DFB4

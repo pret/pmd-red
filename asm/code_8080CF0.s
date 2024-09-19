@@ -780,7 +780,7 @@ _0808294A:
 	ldr r0, [r7, 0x70]
 	strb r5, [r0, 0x6]
 	mov r0, r8
-	bl sub_80687D0
+	bl GetSpriteData
 	str r0, [r7, 0x64]
 	lsls r0, r4, 4
 	adds r0, 0x40
@@ -939,7 +939,7 @@ _08082A70:
 	ldr r0, [r7, 0x70]
 	strb r4, [r0, 0x6]
 	mov r0, r9
-	bl sub_80687D0
+	bl GetSpriteData
 	str r0, [r7, 0x64]
 	mov r1, r8
 	lsls r0, r1, 4

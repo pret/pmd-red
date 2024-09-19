@@ -64,7 +64,7 @@ bool8 sub_8030D40(u8 mailIndex, s32 param_2)
   sub_801317C(&gUnknown_203B324->unk0);
   gUnknown_203B324->unk10 = param_2;
   gUnknown_203B324->unk14 = &gUnknown_203B324->unk18[param_2];
-  sub_8006518(gUnknown_203B324->unk18);
+  RestoreUnkTextStruct_8006518(gUnknown_203B324->unk18);
   gUnknown_203B324->unk18[gUnknown_203B324->unk10] = gUnknown_80E091C;
   sub_8030DD4();
   return TRUE;
@@ -97,7 +97,7 @@ void sub_8030DE4(void)
   {
       gUnknown_203B324->unk18[gUnknown_203B324->unk10] = gUnknown_80E0900;
       ResetUnusedInputStruct();
-      sub_800641C(gUnknown_203B324->unk18, TRUE, TRUE);
+      xxx_call_save_unk_text_struct_800641C(gUnknown_203B324->unk18, TRUE, TRUE);
       MemoryFree(gUnknown_203B324);
       gUnknown_203B324 = NULL;
   }
@@ -106,7 +106,7 @@ void sub_8030DE4(void)
 void sub_8030E2C(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B324->unk18, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B324->unk18, TRUE, TRUE);
 }
 
 void sub_8030E48(void)

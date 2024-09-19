@@ -7,7 +7,7 @@ void CloseAllSpriteFiles(void);
 
 void sub_8068768(void);
 void sub_80687AC(void);
-OpenedFile *sub_80687D0(s16 species);
-void sub_8068838(s16 id, bool32);
+OpenedFile *GetSpriteData(s16 species);
+void LoadPokemonSprite(s16 id, bool32);
 
 #endif // GUARD_CODE_805D8C8_H

@@ -9,9 +9,9 @@ ALIGNED(4) const char gMeetNinetalesText[] =  "Meet Ninetales.";
 ALIGNED(4) const char gAvoidCaptureText[] = "Avoid capture.";
 ALIGNED(4) const char gFinalScenarioText[] = _("Defeat the final Pokémon.");
 
-extern void sub_800199C(u8, u8, u16, s32);
-extern u32 sub_8001784(u32, u32, u16);
-extern void sub_80018D8(u8, u8, u32);
+extern void SetScriptVarArrayValue(u8, u8, u16, s32);
+extern u32 GetScriptVarArrayValue(u32, u32, u16);
+extern void SetScriptVarValue(u8, u8, u32);
 
 bool8 sub_8097504(s16 mazeIndex)
 {
@@ -77,7 +77,7 @@ bool32 IsMazeCompleted(s16 mazeIndex)
 {
     bool32 mazeCompletion;
 
-    mazeCompletion = sub_8001784(0, 0x2e, mazeIndex);
+    mazeCompletion = GetScriptVarArrayValue(0, 0x2e, mazeIndex);
     if (mazeCompletion) {
         mazeCompletion = TRUE;
     }
@@ -87,7 +87,7 @@ bool32 IsMazeCompleted(s16 mazeIndex)
 void sub_80975A8(s16 param_1,u8 param_2)
 {
     u16 param_1_u16 = param_1;
-    sub_800199C(0,0x2e,param_1_u16,param_2);
+    SetScriptVarArrayValue(0,0x2e,param_1_u16,param_2);
 }
 
 const u8 *sub_80975C4(s16 index)
@@ -100,7 +100,7 @@ const u8 *sub_80975DC(u32 r0)
     // TODO: slight hack but matches
     r0 <<= 16;
     if((0xffe90000 + r0) >> 16 < 2)
-        if(sub_8001D08(0x3, 0xE, -1))
+        if(ScriptVarScenarioEqual(0x3, 0xE, -1))
             return gMeetNinetalesText;
         else
             return gAvoidCaptureText;
@@ -121,9 +121,9 @@ bool8 HasCompletedAllMazes(void)
 
 bool8 sub_8097640(void)
 {
-    if(sub_8001784(0, 0x2E, 0x1F) == 0 && HasCompletedAllMazes())
+    if(GetScriptVarArrayValue(0, 0x2E, 0x1F) == 0 && HasCompletedAllMazes())
     {
-        sub_800199C(0, 0x2E, 0x1F, 1);
+        SetScriptVarArrayValue(0, 0x2E, 0x1F, 1);
         return TRUE;
     }
     else

@@ -133,7 +133,7 @@ QuickSave:
 	movs r4, 0
 	movs r6, 0
 	movs r0, 0
-	bl xxx_update_some_bg_tiles
+	bl UpdateFadeInTile
 	bl sub_8014144
 	bl InitFontPalette
 	movs r0, 0x2
@@ -144,7 +144,7 @@ QuickSave:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	movs r0, 0
 	movs r1, 0x14
 	bl sub_8009408
@@ -160,7 +160,7 @@ QuickSave:
 	bl sub_8099744
 	bl sub_8099750
 	movs r0, 0x3
-	bl sub_80063D8
+	bl SetCharacterMask
 	movs r0, 0
 	movs r1, 0
 	bl sub_8005838
@@ -169,7 +169,7 @@ QuickSave:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x20
-	bl sub_80141B4
+	bl xxx_info_box_80141B4
 	b _08000892
 	.align 2, 0
 _080007AC: .4byte gUnknown_2026E4E
@@ -234,7 +234,7 @@ _08000822:
 	movs r1, 0
 	movs r2, 0
 	ldr r3, _08000838
-	bl sub_80141B4
+	bl xxx_info_box_80141B4
 	movs r6, 0x3C
 	movs r4, 0x1
 	b _08000892
@@ -248,7 +248,7 @@ _0800083C:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_80141B4
+	bl xxx_info_box_80141B4
 	movs r4, 0x3
 	b _08000892
 	.align 2, 0
@@ -258,7 +258,7 @@ _08000854:
 	movs r1, 0
 	movs r2, 0
 	ldr r3, _08000868
-	bl sub_80141B4
+	bl xxx_info_box_80141B4
 _08000860:
 	movs r4, 0x2
 	b _08000892
@@ -297,7 +297,7 @@ _08000892:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	movs r0, 0
 	bl xxx_update_stuff
 	add sp, 0xC
@@ -314,7 +314,7 @@ sub_80008C0:
 	movs r4, 0
 	movs r6, 0
 	movs r0, 0
-	bl xxx_update_some_bg_tiles
+	bl UpdateFadeInTile
 	bl sub_8014144
 	bl InitFontPalette
 	movs r0, 0x2
@@ -325,7 +325,7 @@ sub_80008C0:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	movs r0, 0
 	movs r1, 0x14
 	bl sub_8009408
@@ -341,7 +341,7 @@ sub_80008C0:
 	bl sub_8099744
 	bl sub_8099750
 	movs r0, 0x3
-	bl sub_80063D8
+	bl SetCharacterMask
 	cmp r5, 0x1
 	beq _08000948
 	cmp r5, 0x1
@@ -358,7 +358,7 @@ _08000934:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x20
-	bl sub_80141B4
+	bl xxx_info_box_80141B4
 	movs r4, 0x2
 	b _080009A2
 	.align 2, 0
@@ -374,7 +374,7 @@ _08000952:
 	ldr r3, _08000964
 	movs r1, 0
 	movs r2, 0
-	bl sub_80141B4
+	bl xxx_info_box_80141B4
 _0800095C:
 	movs r4, 0x1
 	b _080009A2
@@ -425,7 +425,7 @@ _080009A2:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_800641C
+	bl xxx_call_save_unk_text_struct_800641C
 	movs r0, 0
 	bl xxx_update_stuff
 	add sp, 0x4
@@ -446,7 +446,7 @@ sub_80009D0:
 	adds r4, r0, 0
 	movs r0, 0
 	movs r1, 0x18
-	bl sub_8001658
+	bl GetScriptVarValue
 	adds r7, r0, 0
 	movs r0, 0
 	mov r10, r0
@@ -468,7 +468,7 @@ _08000A08:
 	movs r0, 0
 	movs r1, 0x18
 	movs r2, 0xB
-	bl sub_80018D8
+	bl SetScriptVarValue
 	bl sub_8096BD0
 	movs r0, 0x3
 	bl QuickSave
@@ -490,13 +490,13 @@ _08000A30:
 _08000A3A:
 	movs r0, 0
 	movs r1, 0x41
-	bl sub_80015C0
+	bl ClearScriptVarArray
 _08000A42:
 	cmp r7, 0x4
 	bne _08000AB6
 	movs r0, 0
 	movs r1, 0xD
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r0, 16
 	bl sub_8002658
@@ -536,18 +536,18 @@ _08000AA0:
 _08000AA2:
 	movs r0, 0
 	movs r1, 0xD
-	bl sub_80018D8
+	bl SetScriptVarValue
 	movs r0, 0
 	movs r1, 0xE
 	movs r2, 0
-	bl sub_80018D8
+	bl SetScriptVarValue
 	b _08000B70
 _08000AB6:
 	cmp r7, 0x5
 	bne _08000B9C
 	movs r0, 0
 	movs r1, 0x12
-	bl sub_8001658
+	bl GetScriptVarValue
 	lsls r0, 16
 	asrs r0, 16
 	mov r8, r0
@@ -638,7 +638,7 @@ _08000B78:
 	movs r0, 0
 	movs r1, 0x13
 	mov r2, r8
-	bl sub_80018D8
+	bl SetScriptVarValue
 	ldr r1, _08000B98
 	movs r0, 0x2
 	str r0, [r1]
@@ -978,7 +978,7 @@ _08000E1E:
 	add r0, sp, 0x174
 	bl sub_80011E8
 	adds r0, r5, 0
-	bl sub_8000EDC
+	bl SaveLoadRelated_8000EDC
 	add r4, sp, 0x1EC
 	movs r0, 0
 	ldrsh r1, [r4, r0]
@@ -994,7 +994,7 @@ _08000E46:
 _08000E50:
 	movs r0, 0
 	movs r1, 0x41
-	bl sub_80015C0
+	bl ClearScriptVarArray
 	ldrh r0, [r4]
 	adds r0, 0x1
 	lsls r0, 16
@@ -1032,7 +1032,7 @@ _08000EA6:
 	movs r0, 0
 	movs r1, 0x41
 	movs r2, 0
-	bl sub_800199C
+	bl SetScriptVarArrayValue
 	b _08000A42
 _08000EB2:
 	movs r7, 0xA
@@ -1059,8 +1059,8 @@ _08000EC6:
 	bx r1
 	thumb_func_end sub_80009D0
 
-	thumb_func_start sub_8000EDC
-sub_8000EDC:
+	thumb_func_start SaveLoadRelated_8000EDC
+SaveLoadRelated_8000EDC:
 	push {r4-r7,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -1207,7 +1207,7 @@ _0800101C:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8000EDC
+	thumb_func_end SaveLoadRelated_8000EDC
 
 	thumb_func_start sub_8001024
 sub_8001024:
@@ -1225,7 +1225,7 @@ sub_8001024:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08001040: .4byte gUnknown_203B040
+_08001040: .4byte gPersonalityRelated_203B040
 	thumb_func_end sub_8001024
 
 	thumb_func_start sub_8001044
@@ -1244,7 +1244,7 @@ sub_8001044:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08001060: .4byte gUnknown_203B040
+_08001060: .4byte gPersonalityRelated_203B040
 	thumb_func_end sub_8001044
 
 	thumb_func_start sub_8001064
@@ -1273,7 +1273,7 @@ sub_8001064:
 	bl sub_808CE74
 	b _080010AE
 	.align 2, 0
-_0800109C: .4byte gUnknown_203B040
+_0800109C: .4byte gPersonalityRelated_203B040
 _080010A0:
 	movs r4, 0x4
 	ldrsh r0, [r5, r4]
@@ -1304,7 +1304,7 @@ _080010AE:
 	bl sub_808CE74
 	b _080010F2
 	.align 2, 0
-_080010E0: .4byte gUnknown_203B040
+_080010E0: .4byte gPersonalityRelated_203B040
 _080010E4:
 	movs r4, 0x6
 	ldrsh r0, [r5, r4]
@@ -1339,7 +1339,7 @@ _0800111C:
 	ldr r2, [r2]
 	movs r0, 0
 	movs r1, 0x27
-	bl sub_80018D8
+	bl SetScriptVarValue
 _08001126:
 	ldr r3, _08001164
 	movs r0, 0x6
@@ -1367,16 +1367,16 @@ _08001150:
 	ldr r2, [r2]
 	movs r0, 0
 	movs r1, 0x26
-	bl sub_80018D8
+	bl SetScriptVarValue
 _0800115A:
 	add sp, 0x28
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08001164: .4byte gUnknown_203B040
-_08001168: .4byte gUnknown_80B690C
-_0800116C: .4byte gUnknown_80B6994
+_08001164: .4byte gPersonalityRelated_203B040
+_08001168: .4byte gBaseKindTable
+_0800116C: .4byte gTalkKindTable
 	thumb_func_end sub_8001064
 
 	thumb_func_start sub_8001170

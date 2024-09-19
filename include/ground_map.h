@@ -7,7 +7,7 @@ typedef struct unkStruct_3001B70
     u8 fill0[0x55C - 0x0];
 } unkStruct_3001B70;
 
-extern unkStruct_3001B70 *gUnknown_3001B70;
+extern unkStruct_3001B70 *gGroundMapDungeon_3001B70;
 
 void GroundMap_Reset(void);
 

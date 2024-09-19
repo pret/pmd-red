@@ -12,7 +12,7 @@ gTitlePaletteFile: /* 203B038 (GameLoop) */
 	.space 0x4
 gUnknown_203B03C: /* 203B03C */
 	.space 0x4
-gUnknown_203B040: /* 203B040 */
+gPersonalityRelated_203B040: /* 203B040 */
 	.space 0x30
 
 .include "src/other_random.o"
@@ -20,7 +20,7 @@ gUnknown_203B040: /* 203B040 */
 
 .include "src/sprite.o"
 
-gUnknown_203B078: /* 203B078 (sub_80057E8 - sub_8006438) */
+gUnknown_203B078: /* 203B078 (sub_80057E8 - SaveUnkTextStructAndXXX_8006438) */
 	.space 0x4
 
 .include "src/random.o"
@@ -234,7 +234,7 @@ gUnknown_203B414: /* 203B414 (sub_8042B34 - sub_8042D7C) */
 gDungeon: /* 203B418 */
 	.space 0x4
 
-gUnknown_203B41C: /* 203B41C (xxx_dungeon_8042F6C) */
+gSerializedData_203B41C: /* 203B41C (xxx_dungeon_8042F6C) */
 	.space 0x4
 
 gUnknown_203B420: /* 203B420 (sub_80462AC) */
@@ -284,7 +284,7 @@ gLeaderPointer: /* 203B450 (xxx_dungeon_8042F6C - sub_8082280) */
 gUnknown_203B4A0: /* 203B4A0 (sub_809CCDC) */
 	.space 0xC
 
-gUnknown_203B4AC: /* 203B4AC (ExecuteScriptCommand) */
+gNumChoices: /* 203B4AC (ExecuteScriptCommand) */
 	.space 0x4
 
 gUnknown_203B4B0: /* 203B4B0 (sub_809D490 - HandleAction) */

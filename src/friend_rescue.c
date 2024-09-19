@@ -328,7 +328,7 @@ u32 CreateFriendRescueMenu(void)
   int counter;
 
   ResetUnusedInputStruct();
-  sub_800641C(NULL, TRUE, TRUE);
+  xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
   gUnknown_203B33C = MemoryAlloc(sizeof(WonderMailStruct_203B33C), 8);
   MemoryFill8((u8 *) gUnknown_203B33C, 0, sizeof(WonderMailStruct_203B33C));
   gUnknown_203B33C->unk530 = 0;
@@ -796,44 +796,44 @@ void sub_8032828(void)
             }
             break;
         case 0x3C:
-            sub_80141B4(&gUnknown_80E276C[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E276C[0], 0, 0, 0x101);
             break;
         case 0x3D:
             sub_8014248(&gUnknown_80E27A4[0], 0, 6, gUnknown_80E2458, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x43:
-            sub_80141B4(&gUnknown_80E2814[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2814[0], 0, 0, 0x101);
             break;
         case 0x3E:
-            sub_80141B4(&gUnknown_80E2840[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2840[0], 0, 0, 0x101);
             break;
         case 0x3F:
-            sub_80141B4(&gUnknown_80E2874[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2874[0], 0, 0, 0x101);
             break;
         case 0x40:
             switch ((u32)gUnknown_203B33C->unk524) {
                 case 0xB:
                 case 0xD:
                 case 0xE:
-                    sub_80141B4(&gUnknown_80E2898[0], 0, 0, 0x101);
+                    xxx_info_box_80141B4(&gUnknown_80E2898[0], 0, 0, 0x101);
                     break;
                 case 0xC:
                     break;
             }
             break;
         case 0x42:
-            sub_80141B4(&gUnknown_80E28D8[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E28D8[0], 0, 0, 0x101);
             break;
         case 0x30:
-            sub_80141B4(&gUnknown_80E2904[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2904[0], 0, 0, 0x101);
             break;
         case 0x31:
-            sub_80141B4(&gUnknown_80E296C[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E296C[0], 0, 0, 0x101);
             break;
         case 0x32:
             if (sub_8030894() == 0) {
                 ResetUnusedInputStruct();
-                sub_800641C(NULL, TRUE, TRUE);
+                xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
                 sub_80306A8(1, 0, NULL, 6);
             }
             break;
@@ -847,33 +847,33 @@ void sub_8032828(void)
                 case 0xB:
                 case 0xD:
                 case 0xE:
-                    sub_80141B4(&gUnknown_80E29D0[0], 0, 0, 0x101);
+                    xxx_info_box_80141B4(&gUnknown_80E29D0[0], 0, 0, 0x101);
                     break;
             }
             break;
         case 0x38:
-            sub_80141B4(&gUnknown_80E2A0C[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2A0C[0], 0, 0, 0x101);
             break;
         case 0x3A:
-            sub_8006518(gUnknown_203B33C->unk3BC);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_8031D70(gUnknown_203B33C->unk218, 0);
             break;
         case 0x3B:
-            sub_80141B4(&gUnknown_80E2A1C[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2A1C[0], 0, 0, 0x101);
             break;
         case 0x39:
-            sub_80141B4(&gUnknown_80E2A5C[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2A5C[0], 0, 0, 0x101);
             break;
         case 0x2D:
-            sub_80141B4(&gUnknown_80E2A80[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2A80[0], 0, 0, 0x101);
             break;
         case 0x2F:
-            sub_80141B4(&gUnknown_80E2AA8[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2AA8[0], 0, 0, 0x101);
             break;
         case 0x2A:
-            sub_80141B4(&gUnknown_80E2AE4[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2AE4[0], 0, 0, 0x101);
             break;
         case 0x2B:
         #ifndef NONMATCHING
@@ -889,31 +889,31 @@ void sub_8032828(void)
                     #ifndef NONMATCHING
                     gUnknown_80E2BE0[0] = gUnknown_80E2BE0[0];
                     #endif //NONMATCHING
-                    sub_80141B4(&gUnknown_80E2B54[0], 0, 0, 0x101);
+                    xxx_info_box_80141B4(&gUnknown_80E2B54[0], 0, 0, 0x101);
                     break;
             }
             break;
         case 0x2C:
-            sub_80141B4(&gUnknown_80E2A0C[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2A0C[0], 0, 0, 0x101);
             break;
         case 0x23:
-            sub_80141B4(&gUnknown_80E2B90[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2B90[0], 0, 0, 0x101);
             break;
         case 0x21:
             sub_8014248(&gUnknown_80E2BE0[0], 0, 15, gUnknown_80E23A8, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x25:
-            sub_80141B4(&gUnknown_80E2C48[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2C48[0], 0, 0, 0x101);
             break;
         case 0x26:
             if (sub_8023CE8() != 0)
                 sub_8023C60();
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_8023868(3, 0, 0, 9);
             break;
         case 0x27:
-            sub_8006518(gUnknown_203B33C->unk35C);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk35C);
             SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E2334, gUnknown_80E234C, TRUE, 0, FALSE);
             sub_8023DA4();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
@@ -925,12 +925,12 @@ void sub_8032828(void)
             sub_8014248(&gUnknown_80E2CD4[0], 0, 6, gUnknown_80E22D0, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x1C:
-            sub_80141B4(&gUnknown_80E2CE8[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2CE8[0], 0, 0, 0x101);
             break;
         case 0x1D:
             if (sub_8030894() == 0) {
                 ResetUnusedInputStruct();
-                sub_800641C(NULL, TRUE, TRUE);
+                xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
                 sub_80306A8(4, 0, NULL, 6);
             }
             break;
@@ -938,7 +938,7 @@ void sub_8032828(void)
             sub_8014248(&gUnknown_80E2D30[0], 0, 6, gUnknown_80E22B4, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x22:
-            sub_80141B4(&gUnknown_80E2D60[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2D60[0], 0, 0, 0x101);
             break;
         case 0x5:
             sub_8014248(&gUnknown_80E2D7C[0], 0, 6, gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
@@ -949,11 +949,11 @@ void sub_8032828(void)
             break;
         case 0xB:
         case 0x4D:
-            sub_80141B4(&gUnknown_80E2E54[0], 0, NULL, 0);
+            xxx_info_box_80141B4(&gUnknown_80E2E54[0], 0, NULL, 0);
             break;
         case 0xC:
         case 0x4E:
-            sub_80141B4(&gUnknown_80E2EB4[0], 0, NULL, 0);
+            xxx_info_box_80141B4(&gUnknown_80E2EB4[0], 0, NULL, 0);
             break;
         case 0x7:
             gUnknown_203B33C->status = 0;
@@ -1028,23 +1028,23 @@ void sub_8032828(void)
             xxx_call_start_bg_music();
             break;
         case 0x10:
-            sub_80141B4(&gUnknown_80E2F14[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2F14[0], 0, 0, 0x101);
             break;
         case 0x11:
-            sub_80141B4(&gUnknown_80E2F44[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2F44[0], 0, 0, 0x101);
             break;
         case 0x12:
             if (sub_8030894() != 0)
                 break;
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_80306A8(1, 0, NULL, 6);
             break;
         case 0x15:
             sub_8014248(&gUnknown_80E2F78[0], 0, 6, gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
             break;
         case 0xF:
-            sub_80141B4(&gUnknown_80E2FA0[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E2FA0[0], 0, 0, 0x101);
             break;
         case 0x16:
             switch ((u32)gUnknown_203B33C->unk524) {
@@ -1053,30 +1053,30 @@ void sub_8032828(void)
                 case 0xB:
                 case 0xD:
                 case 0xE:
-                    sub_80141B4(&gUnknown_80E2FEC[0], 0, 0, 0x101);
+                    xxx_info_box_80141B4(&gUnknown_80E2FEC[0], 0, 0, 0x101);
                     break;
             }
             break;
         case 0x18:
-            sub_80141B4(&gUnknown_80E3030[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E3030[0], 0, 0, 0x101);
             break;
         case 0x19:
-            sub_80141B4(&gUnknown_80E3078[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E3078[0], 0, 0, 0x101);
             break;
         case 0x1A:
-            sub_8006518(gUnknown_203B33C->unk3BC);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_80151C0(4, gUnknown_203B33C->passwordBuffer);
             break;
         case 0x5A:
             sub_8014248(&gUnknown_80E30A4[0], 0, 6, gUnknown_80E2458, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x5B:
-            sub_80141B4(gUnknown_80E30D0, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E30D0, 0, 0, 0x101);
             break;
         case 0x5D:
-            sub_8006518(gUnknown_203B33C->unk35C);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk35C);
             SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, gUnknown_80E2408, TRUE, 0, FALSE);
             sub_803092C();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
@@ -1084,7 +1084,7 @@ void sub_8032828(void)
         case 0x5F:
             if (sub_801D008() == NULL) {
                 ResetUnusedInputStruct();
-                sub_800641C(NULL, TRUE, TRUE);
+                xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
                 {
                 UnkTextStruct2_sub local_x = {3, 2};
                 sub_801C8C4(0, 1, &local_x, 9);
@@ -1092,7 +1092,7 @@ void sub_8032828(void)
             }
             break;
         case 0x60:
-            sub_8006518(gUnknown_203B33C->unk35C);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk35C);
             SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E23F0, gUnknown_80E2408, TRUE, 0, FALSE);
             sub_801CCD8();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
@@ -1126,38 +1126,38 @@ void sub_8032828(void)
             xxx_call_start_bg_music();
             break;
         case 0x72:
-            sub_80141B4(gUnknown_80E311C, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E311C, 0, 0, 0x101);
             break;
         case 0x73:
-            sub_8006518(gUnknown_203B33C->unk3BC);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_80151C0(4, gUnknown_203B33C->passwordBuffer);
             break;
         case 0x66:
-            sub_80141B4(gUnknown_80E314C, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E314C, 0, 0, 0x101);
             break;
         case 0x67:
         case 0x2E:
-            sub_8006518(gUnknown_203B33C->unk3BC);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_8031D70(gUnknown_203B33C->unk218, 0);
             break;
         case 0x68:
-            sub_80141B4(gUnknown_80E317C, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E317C, 0, 0, 0x101);
             break;
         case 0x6F:
-            sub_80141B4(gUnknown_80E319C, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E319C, 0, 0, 0x101);
             break;
         case 0x70: // Yes we need duplicates in order to match :) - Kermalis
-            sub_80141B4(gUnknown_80E317C, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E317C, 0, 0, 0x101);
             break;
         case 0x6C:
-            sub_80141B4(gUnknown_80E31D8, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E31D8, 0, 0, 0x101);
             break;
         case 0x50:
-            sub_80141B4(&gUnknown_80E31FC[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E31FC[0], 0, 0, 0x101);
             break;
         case 0x6D:
             switch ((u32)gUnknown_203B33C->unk524) {
@@ -1166,7 +1166,7 @@ void sub_8032828(void)
                 case 0xB:
                 case 0xD:
                 case 0xE:
-                    sub_80141B4(&gUnknown_80E3220[0], 0, 0, 0x101);
+                    xxx_info_box_80141B4(&gUnknown_80E3220[0], 0, 0, 0x101);
                     break;
             }
             break;
@@ -1192,7 +1192,7 @@ void sub_8032828(void)
         case 0xD:
         case 0x62:
             nullsub_23(FALSE);
-            sub_80141B4(&gUnknown_80E2DD0[0], 0, NULL, 0);
+            xxx_info_box_80141B4(&gUnknown_80E2DD0[0], 0, NULL, 0);
             break;
         case 0x64:
             switch ((u32)gUnknown_203B33C->unk524) {
@@ -1201,12 +1201,12 @@ void sub_8032828(void)
                 case 0xB:
                 case 0xD:
                 case 0xE:
-                    sub_80141B4(gUnknown_80E3248, 0, 0, 0x101);
+                    xxx_info_box_80141B4(gUnknown_80E3248, 0, 0, 0x101);
                     break;
             }
             break;
         case 0x63:
-            sub_80141B4(gUnknown_80E3288, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E3288, 0, 0, 0x101);
             break;
         case 0x69:
             sub_8014248(&gUnknown_80E2D7C[0], 0, 6, gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
@@ -1214,19 +1214,19 @@ void sub_8032828(void)
         case 0x59:
             sub_80922B4(buffer, GetPlayerPokemonStruct()->name, POKEMON_NAME_LENGTH);
             sprintfStatic(gUnknown_203B33C->unk424, gUnknown_80E32C4, buffer);
-            sub_80141B4(gUnknown_203B33C->unk424, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_203B33C->unk424, 0, 0, 0x101);
             break;
         case 0x58:
             sub_8014248(&gUnknown_80E331C[0], 0, 6, gUnknown_80E24D8, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x75:
-            sub_80141B4(gUnknown_80E317C, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E317C, 0, 0, 0x101);
             break;
         case 0x76:
-            sub_80141B4(gUnknown_80E2A0C, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E2A0C, 0, 0, 0x101);
             break;
         case 0x57:
-            sub_80141B4(&gUnknown_80E3378[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E3378[0], 0, 0, 0x101);
             break;
         case 0x56:
             sub_8014248(&gUnknown_80E339C[0], 0, 22, gUnknown_80E24B0, NULL, 4, 0, NULL, 0x101);
@@ -1235,19 +1235,19 @@ void sub_8032828(void)
             sub_8014248(&gUnknown_80E33D8[0], 0, 21, gUnknown_80E2470, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x53:
-            sub_80141B4(&gUnknown_80E3430[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E3430[0], 0, 0, 0x101);
             break;
         case 0x54:
             sub_8014248(&gUnknown_80E34B0[0], 0, 6, gUnknown_80E2440, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x46:
-            sub_80141B4(&gUnknown_80E34F0[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E34F0[0], 0, 0, 0x101);
             break;
         case 0x47:
         case 0x5C:
             if (sub_8030894() == 0) {
                 ResetUnusedInputStruct();
-                sub_800641C(NULL, TRUE, TRUE);
+                xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
                 sub_80306A8(5, 0, 0, 6);
             }
             break;
@@ -1255,7 +1255,7 @@ void sub_8032828(void)
         case 0x13:
         case 0x1E:
         case 0x33:
-            sub_8006518(gUnknown_203B33C->unk35C);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk35C);
             SetMenuItems(gUnknown_203B33C->unk21C, gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, gUnknown_80E234C, TRUE, 0, FALSE);
             sub_803092C();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
@@ -1264,13 +1264,13 @@ void sub_8032828(void)
             sub_8014248(&gUnknown_80E352C[0], 0, 6, gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x44:
-            sub_80141B4(&gUnknown_80E355C[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E355C[0], 0, 0, 0x101);
             break;
         case 0x45:
-            sub_80141B4(&gUnknown_80E35AC[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E35AC[0], 0, 0, 0x101);
             break;
         case 0x51:
-            sub_80141B4(&gUnknown_80E35E8[0], 0, 0, 0x101);
+            xxx_info_box_80141B4(&gUnknown_80E35E8[0], 0, 0, 0x101);
             break;
         case 0x52:
             if (gUnknown_203B33C->unk40 == 6)
@@ -1284,16 +1284,16 @@ void sub_8032828(void)
         case 0x7D:
             switch (gUnknown_203B33C->unk564) {
                 case 0x23:
-                    sub_80141B4(&gUnknown_80E3690[0], 0, 0, 0x101);
+                    xxx_info_box_80141B4(&gUnknown_80E3690[0], 0, 0, 0x101);
                     break;
                 case 0x24:
-                    sub_80141B4(&gUnknown_80E3818[0], 0, 0, 0x101);
+                    xxx_info_box_80141B4(&gUnknown_80E3818[0], 0, 0, 0x101);
                     break;
                 case 0x25:
-                    sub_80141B4(&gUnknown_80E3998[0], 0, 0, 0x101);
+                    xxx_info_box_80141B4(&gUnknown_80E3998[0], 0, 0, 0x101);
                     break;
                 case 0x26:
-                    sub_80141B4(&gUnknown_80E3B1C[0], 0, 0, 0x101);
+                    xxx_info_box_80141B4(&gUnknown_80E3B1C[0], 0, 0, 0x101);
                     break;
             }
             break;
@@ -1303,19 +1303,19 @@ void sub_8032828(void)
         case 0x7B:
             switch (gUnknown_203B33C->unk564) {
                 case 0x1E:
-                    sub_80141B4(&gUnknown_80E3BF8[0], 0, 0, 0x101);
+                    xxx_info_box_80141B4(&gUnknown_80E3BF8[0], 0, 0, 0x101);
                     break;
                 case 0x1F:
-                    sub_80141B4(&gUnknown_80E3DE4[0], 0, 0, 0x101);
+                    xxx_info_box_80141B4(&gUnknown_80E3DE4[0], 0, 0, 0x101);
                     break;
                 case 0x21:
-                    sub_80141B4(&gUnknown_80E3E98[0], 0, 0, 0x101);
+                    xxx_info_box_80141B4(&gUnknown_80E3E98[0], 0, 0, 0x101);
                     break;
                 case 0x20:
-                    sub_80141B4(&gUnknown_80E4014[0], 0, 0, 0x101);
+                    xxx_info_box_80141B4(&gUnknown_80E4014[0], 0, 0, 0x101);
                     break;
                 case 0x22:
-                    sub_80141B4(&gUnknown_80E4130[0], 0, 0, 0x101);
+                    xxx_info_box_80141B4(&gUnknown_80E4130[0], 0, 0, 0x101);
                     break;
             }
             break;
@@ -1325,10 +1325,10 @@ void sub_8032828(void)
         case 0x79:
             switch (gUnknown_203B33C->unk564) {
                 case 0x1D:
-                    sub_80141B4(&gUnknown_80E41DC[0], 0, 0, 0x101);
+                    xxx_info_box_80141B4(&gUnknown_80E41DC[0], 0, 0, 0x101);
                     break;
                 case 0x1A:
-                    sub_80141B4(&gUnknown_80E4314[0], 0, 0, 0x101);
+                    xxx_info_box_80141B4(&gUnknown_80E4314[0], 0, 0, 0x101);
                     break;
             }
             break;
@@ -1350,48 +1350,48 @@ void PrintFriendRescueError(u32 status)
         case COMMS_GOOD:
             break;
         case COMMS_INCORRECT_NUM_SYSTEMS:
-            sub_80141B4(gUnknown_80E44A4, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E44A4, 0, 0, 0x101);
             break;
         case COMMS_NO_RESPONSE:
-            sub_80141B4(gUnknown_80E4500, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E4500, 0, 0, 0x101);
             break;
         case COMMS_DIFFERENT_MODES:
-            sub_80141B4(gUnknown_80E4550, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E4550, 0, 0, 0x101);
             break;
         case COMMS_NO_ROOM_STORAGE:
-            sub_80141B4(gUnknown_80E45B4, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E45B4, 0, 0, 0x101);
             break;
         case COMMS_DUPLICATE_MAIL:
-            sub_80141B4(gUnknown_80E460C, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E460C, 0, 0, 0x101);
             break;
         case COMMS_MAIL_SENT_ALREADY:
-            sub_80141B4(gUnknown_80E4650, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E4650, 0, 0, 0x101);
             break;
         case COMMS_NOT_ELIGIBLE_1:
-            sub_80141B4(gUnknown_80E468C, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E468C, 0, 0, 0x101);
             break;
         case COMMS_FRIEND_NOT_ELIGIBLE:
-            sub_80141B4(gUnknown_80E46C8, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E46C8, 0, 0, 0x101);
             break;
         case COMMS_NOT_ELIGIBLE_2:
-            sub_80141B4(gUnknown_80E4704, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E4704, 0, 0, 0x101);
             break;
         case COMMS_FRIEND_NOT_ELIGIBLE_2:
-            sub_80141B4(gUnknown_80E4744, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E4744, 0, 0, 0x101);
             break;
         case 16:
-            sub_80141B4(gUnknown_80E4788, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E4788, 0, 0, 0x101);
             break;
         case COMMS_NO_ROOM_MAIL:
-            sub_80141B4(gUnknown_80E47D8, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E47D8, 0, 0, 0x101);
             break;
         case 1:
         case 5:
         case 14:
-            sub_80141B4(gUnknown_80E4480, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E4480, 0, 0, 0x101);
             break;
         case COMMS_NOT_READY:
-            sub_80141B4(gUnknown_80E482C, 0, 0, 0x101);
+            xxx_info_box_80141B4(gUnknown_80E482C, 0, 0, 0x101);
             break;
     }
 }
@@ -1688,26 +1688,26 @@ void sub_8033DBC(void)
                         SetFriendRescueMenuState(0x1B);
                         break;
                     case PASSWORD_ENTRY_NOT_SOS_MAIL:
-                        sub_80141B4(gUnknown_80E48E8, 0, 0, 0x101);
+                        xxx_info_box_80141B4(gUnknown_80E48E8, 0, 0, 0x101);
                         SetFriendRescueMenuState(FRIEND_RESCUE_MENU_ERROR);
                         break;
                     case PASSWORD_ENTRY_DUPLICATE_SOS_MAIL:
-                        sub_80141B4(gUnknown_80E460C, 0, 0, 0x101);
+                        xxx_info_box_80141B4(gUnknown_80E460C, 0, 0, 0x101);
                         SetFriendRescueMenuState(FRIEND_RESCUE_MENU_ERROR);
                         break;
                     case PASSWORD_ENTRY_SOS_MAIL_SUCCESS:
                         sub_8095274(mail.unk10.unk10);
                         mail.mailType = 2;
                         sub_80951BC(&mail);
-                        sub_80141B4(gUnknown_80E4928, 0, 0, 0x101);
+                        xxx_info_box_80141B4(gUnknown_80E4928, 0, 0, 0x101);
                         SetFriendRescueMenuState(0x16);
                         break;
                     case PASSWORD_ENTRY_NOT_AOK_MAIL:
-                        sub_80141B4(gUnknown_80E4964, 0, 0, 0x101);
+                        xxx_info_box_80141B4(gUnknown_80E4964, 0, 0, 0x101);
                         SetFriendRescueMenuState(FRIEND_RESCUE_MENU_ERROR);
                         break;
                     case PASSWORD_ENTRY_DUPLICATE_AOK_MAIL:
-                        sub_80141B4(gUnknown_80E499C, 0, 0, 0x101);
+                        xxx_info_box_80141B4(gUnknown_80E499C, 0, 0, 0x101);
                         SetFriendRescueMenuState(FRIEND_RESCUE_MENU_ERROR);
                         break;
                     case PASSWORD_ENTRY_AOK_MAIL_SUCCESS:
@@ -1727,7 +1727,7 @@ void sub_8033DBC(void)
         case 2:
             sub_80155F0();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             SetFriendRescueMenuState(FRIEND_RESCUE_MENU_MAIN);
             break;
         default:
@@ -1797,9 +1797,9 @@ void sub_8033FE4(void)
         case 4:
             gUnknown_203B33C->fallbackState = 0x1D;
             gUnknown_203B33C->unk218 = sub_80307EC();
-            sub_8006518(gUnknown_203B33C->unk3BC);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
             SetFriendRescueMenuState(0x1F);
             break;
@@ -1822,9 +1822,9 @@ void sub_8034074(void)
             break;
         case 10:
             gUnknown_203B33C->fallbackState = FRIEND_RESCUE_MENU_DEFAULT_FALLBACK;
-            sub_8006518(gUnknown_203B33C->unk3BC);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
             SetFriendRescueMenuState(0x1F);
             break;
@@ -1845,7 +1845,7 @@ void sub_8034130(void)
         case 3:
             sub_8030DE4();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             sub_803092C();
             if(gUnknown_203B33C->fallbackState == FRIEND_RESCUE_MENU_DEFAULT_FALLBACK)
             {
@@ -1880,9 +1880,9 @@ void sub_803418C(void)
         case 4:
             gUnknown_203B33C->fallbackState = 0x26;
             gUnknown_203B33C->speciesNum = sub_8023B44();
-            sub_8006518(gUnknown_203B33C->unk3BC);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_8024458(gUnknown_203B33C->speciesNum, 0);
             SetFriendRescueMenuState(0x28);
             break;
@@ -1905,9 +1905,9 @@ void sub_8034254(void)
             break;
         case 10:
             gUnknown_203B33C->fallbackState = FRIEND_RESCUE_MENU_DEFAULT_FALLBACK;
-            sub_8006518(gUnknown_203B33C->unk3BC);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_8024458(gUnknown_203B33C->speciesNum, 0);
             SetFriendRescueMenuState(0x28);
             break;
@@ -1931,7 +1931,7 @@ void sub_8034310(void)
         case 3:
             sub_802453C();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             sub_8023B7C(1);
             if(gUnknown_203B33C->fallbackState == FRIEND_RESCUE_MENU_DEFAULT_FALLBACK)
             {
@@ -2049,7 +2049,7 @@ void sub_80344C0(void)
         case 3:
             sub_8031E10();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             SetFriendRescueMenuState(0x2F);
             break;
         case 1:
@@ -2075,9 +2075,9 @@ void sub_8034500(void)
         case 4:
             gUnknown_203B33C->fallbackState = 0x32;
             gUnknown_203B33C->unk218 = sub_80307EC();
-            sub_8006518(gUnknown_203B33C->unk3BC);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
             SetFriendRescueMenuState(0x34);
             break;
@@ -2100,9 +2100,9 @@ void sub_8034590(void)
             break;
         case 10:
             gUnknown_203B33C->fallbackState = FRIEND_RESCUE_MENU_DEFAULT_FALLBACK;
-            sub_8006518(gUnknown_203B33C->unk3BC);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
             SetFriendRescueMenuState(0x34);
             break;
@@ -2123,7 +2123,7 @@ void sub_803464C(void)
         case 3:
             sub_8030DE4();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             sub_803092C();
             if(gUnknown_203B33C->fallbackState == FRIEND_RESCUE_MENU_DEFAULT_FALLBACK)
             {
@@ -2196,7 +2196,7 @@ void sub_803473C(void)
         case 3:
             sub_8031E10();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             SetFriendRescueMenuState(0x3B);
             break;
         case 1:
@@ -2325,7 +2325,7 @@ void sub_80348C4(void)
                         case 0xB:
                         case 0xD:
                         case 0xE:
-                            sub_80141B4(gUnknown_80E31FC, 0, 0, 0x101);
+                            xxx_info_box_80141B4(gUnknown_80E31FC, 0, 0, 0x101);
                             SetFriendRescueMenuState(0x77);
                             break;
                         case 0xC:
@@ -2355,7 +2355,7 @@ void sub_8034970(void)
         case 3:
             sub_8031E10();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             SetFriendRescueMenuState(0x68);
             break;
         case 1:
@@ -2399,9 +2399,9 @@ void sub_80349E0(void)
         case 4:
             gUnknown_203B33C->fallbackState = 0x5C;
             gUnknown_203B33C->unk218 = sub_80307EC();
-            sub_8006518(gUnknown_203B33C->unk3BC);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
             SetFriendRescueMenuState(0x5E);
             break;
@@ -2424,9 +2424,9 @@ void sub_8034A70(void)
             break;
         case 10:
             gUnknown_203B33C->fallbackState = FRIEND_RESCUE_MENU_DEFAULT_FALLBACK;
-            sub_8006518(gUnknown_203B33C->unk3BC);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
             SetFriendRescueMenuState(0x5E);
             break;
@@ -2447,7 +2447,7 @@ void sub_8034B2C(void)
         case 3:
             sub_8030DE4();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             sub_803092C();
             if(gUnknown_203B33C->fallbackState == FRIEND_RESCUE_MENU_DEFAULT_FALLBACK)
             {
@@ -2480,9 +2480,9 @@ void sub_8034B88(void)
         case 4:
             gUnknown_203B33C->fallbackState = 0x5F;
             gUnknown_203B33C->item.id = sub_801CB24();
-            sub_8006518(gUnknown_203B33C->unk3BC);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_801B3C0(&gUnknown_203B33C->item);
             SetFriendRescueMenuState(0x61);
             break;
@@ -2497,7 +2497,7 @@ void sub_8034C38(void)
         case 3:
             sub_801B450();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             sub_801CB5C(TRUE);
             if(gUnknown_203B33C->fallbackState == FRIEND_RESCUE_MENU_DEFAULT_FALLBACK)
             {
@@ -2529,9 +2529,9 @@ void sub_8034C98(void)
             break;
         case 10:
             gUnknown_203B33C->fallbackState = FRIEND_RESCUE_MENU_DEFAULT_FALLBACK;
-            sub_8006518(gUnknown_203B33C->unk3BC);
+            RestoreUnkTextStruct_8006518(gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_801B3C0(&gUnknown_203B33C->item);
             SetFriendRescueMenuState(0x61);
             break;
@@ -2572,11 +2572,11 @@ void sub_8034D74(void)
                         SetFriendRescueMenuState(0x74);
                         break;
                     case PASSWORD_ENTRY_NOT_THANK_YOU_MAIL:
-                        sub_80141B4(gUnknown_80E49C4, 0, 0, 0x101);
+                        xxx_info_box_80141B4(gUnknown_80E49C4, 0, 0, 0x101);
                         SetFriendRescueMenuState(FRIEND_RESCUE_MENU_ERROR_2);
                         break;
                     case PASSWORD_ENTRY_DUPLICATE_THANK_YOU_MAIL:
-                        sub_80141B4(gUnknown_80E4704, 0, 0, 0x101);
+                        xxx_info_box_80141B4(gUnknown_80E4704, 0, 0, 0x101);
                         SetFriendRescueMenuState(FRIEND_RESCUE_MENU_ERROR_2);
                         break;
                     case PASSWORD_ENTRY_THANK_YOU_MAIL_SUCCESS:
@@ -2595,7 +2595,7 @@ void sub_8034D74(void)
         case 2:
             sub_80155F0();
             ResetUnusedInputStruct();
-            sub_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(gUnknown_203B33C->unk3BC, TRUE, TRUE);
             SetFriendRescueMenuState(FRIEND_RESCUE_MENU_MAIN);
             break;
         default:

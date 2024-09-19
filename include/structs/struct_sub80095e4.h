@@ -39,7 +39,7 @@ typedef struct struct_Sub80095E4_2
     (ptr).unk3C[(ptr).unk34].unk10 = a0 + 2;                                            \
                                                                                         \
     ResetUnusedInputStruct();                                                           \
-    sub_800641C((ptr).unk3C, TRUE, TRUE);                                               \
+    xxx_call_save_unk_text_struct_800641C((ptr).unk3C, TRUE, TRUE);                                               \
 }
 
 #define SUB_80095E4_CALL(ptr)                                                           \
@@ -58,7 +58,7 @@ typedef struct struct_Sub80095E4_2
     (ptr).unk3C[(ptr).unk34].unk10 = newE;                                              \
                                                                                         \
     ResetUnusedInputStruct();                                                           \
-    sub_800641C((ptr).unk3C, TRUE, TRUE);                                               \
+    xxx_call_save_unk_text_struct_800641C((ptr).unk3C, TRUE, TRUE);                                               \
 }
 
 // sub_802BF30 and sub_802C328 use a different function call, and 24 instead of 12

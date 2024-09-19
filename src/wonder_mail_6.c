@@ -115,7 +115,7 @@ bool8 sub_8030F58(u32 wonderMailType)
   OpenedFile *file;
   
   ResetUnusedInputStruct();
-  sub_800641C(NULL, TRUE, TRUE);
+  xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
   if (gUnknown_203B328 == NULL) {
     gUnknown_203B328 = MemoryAlloc(sizeof(struct unkStruct_203B328),8);
     MemoryFill8((u8 *)gUnknown_203B328,0,sizeof(struct unkStruct_203B328));
@@ -135,11 +135,11 @@ bool8 sub_8030F58(u32 wonderMailType)
     {
         case WONDER_MAIL_TYPE_SOS_1:
             // "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.\0"
-            sub_80141B4(gUnknown_80E09D8,0,&gUnknown_203B328->faceFile,0x101);
+            xxx_info_box_80141B4(gUnknown_80E09D8,0,&gUnknown_203B328->faceFile,0x101);
             break;
         case WONDER_MAIL_TYPE_AOK:
             // "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.\0"
-            sub_80141B4(gUnknown_80E0A0C,0,&gUnknown_203B328->faceFile,0x101);
+            xxx_info_box_80141B4(gUnknown_80E0A0C,0,&gUnknown_203B328->faceFile,0x101);
             break;
     }
     gUnknown_203B328->state = 5;
@@ -194,7 +194,7 @@ void sub_80310E4(u32 newState)
 
 void sub_80310FC(void)
 {
-    sub_8006518(gUnknown_203B328->unkA8);
+    RestoreUnkTextStruct_8006518(gUnknown_203B328->unkA8);
     switch(gUnknown_203B328->state)
     {
         case INIT_STATE:
@@ -223,11 +223,11 @@ void sub_80310FC(void)
         case 6:
         default:
             ResetUnusedInputStruct();
-            sub_800641C(NULL, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             break;
     }
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B328->unkA8, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B328->unkA8, TRUE, TRUE);
 }
 
 void sub_8031258(void)

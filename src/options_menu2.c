@@ -24,11 +24,11 @@ bool8 sub_801E198(GameOptions *optionsMenu)
     sub_801317C(&sUnknown_203B260->unk4);
     sUnknown_203B260->unk44 = 0;
     sUnknown_203B260->unk48 = &sUnknown_203B260->unk4C[0];
-    sub_8006518(sUnknown_203B260->unk4C);
+    RestoreUnkTextStruct_8006518(sUnknown_203B260->unk4C);
     sUnknown_203B260->unk4C[sUnknown_203B260->unk44] = sUnknown_80DC03C;
     sub_8012D08(sUnknown_203B260->unk48, 1);
     ResetUnusedInputStruct();
-    sub_800641C(sUnknown_203B260->unk4C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sUnknown_203B260->unk4C, TRUE, TRUE);
     sub_8013818(&sUnknown_203B260->input, 1, 1, sUnknown_203B260->unk44);
     nullsub_38();
     CreateOptionsMenu();
@@ -86,7 +86,7 @@ void sub_801E2C4(void)
     if (sUnknown_203B260 != NULL) {
         sUnknown_203B260->unk4C[sUnknown_203B260->unk44] = sUnknown_80DC020;
         ResetUnusedInputStruct();
-        sub_800641C(sUnknown_203B260->unk4C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(sUnknown_203B260->unk4C, TRUE, TRUE);
         MemoryFree(sUnknown_203B260);
         sUnknown_203B260 = NULL;
     }
@@ -101,7 +101,7 @@ static void CreateOptionsMenu(void)
     u32 length;
     u32 y;
 
-    sub_8008C54(sUnknown_203B260->unk44);
+    CallPrepareTextbox_8008C54(sUnknown_203B260->unk44);
     sub_80073B8(sUnknown_203B260->unk44);
     PrintStringOnWindow(16, 0, sGameOptions,sUnknown_203B260->unk44, 0);
 

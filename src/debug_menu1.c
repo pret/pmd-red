@@ -49,14 +49,14 @@ void CreateDebugMenu(void)
         sDebugMenu->unk140[i] = sUnknown_80E7D40;
 
     ResetUnusedInputStruct();
-    sub_800641C(sDebugMenu->unk140, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(sDebugMenu->unk140, TRUE, TRUE);
     SetDebugMenuItems();
 }
 
 void DeleteDebugMenu(void)
 {
     ResetUnusedInputStruct();
-    sub_800641C(NULL, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
     if (sDebugMenu != NULL) {
         MemoryFree(sDebugMenu);
         sDebugMenu = NULL;

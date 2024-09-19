@@ -75,7 +75,7 @@ u32 sub_802F73C(u32 r0, UnkTextStruct2_sub *r1, u32 r2, u8 r3)
     gUnknown_203B314->unkB8 = r3;
     gUnknown_203B314->sBC.s0.unk34 = r0;
     gUnknown_203B314->sBC.s0.unk38 = &gUnknown_203B314->sBC.s0.unk3C[gUnknown_203B314->sBC.s0.unk34];
-    sub_8006518(gUnknown_203B314->sBC.s0.unk3C);
+    RestoreUnkTextStruct_8006518(gUnknown_203B314->sBC.s0.unk3C);
 
     if (r3 != 0)
         gUnknown_203B314->sBC.s0.unk3C[gUnknown_203B314->sBC.s0.unk34] = gUnknown_80E072C;
@@ -89,7 +89,7 @@ u32 sub_802F73C(u32 r0, UnkTextStruct2_sub *r1, u32 r2, u8 r3)
 
     sub_8012D08(gUnknown_203B314->sBC.s0.unk38, r2);
     ResetUnusedInputStruct();
-    sub_800641C(gUnknown_203B314->sBC.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(gUnknown_203B314->sBC.s0.unk3C, TRUE, TRUE);
     sub_8013818(&gUnknown_203B314->sBC.s0.input, sub_802FBF4(), r2, r0);
     sub_802F9C0();
     sub_802FA50();
@@ -169,7 +169,7 @@ void sub_802F974(void)
     {
         gUnknown_203B314->sBC.s0.unk3C[gUnknown_203B314->sBC.s0.unk34] = gUnknown_80E06FC;
         ResetUnusedInputStruct();
-        sub_800641C(gUnknown_203B314->sBC.s0.unk3C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(gUnknown_203B314->sBC.s0.unk3C, TRUE, TRUE);
         MemoryFree(gUnknown_203B314);
         gUnknown_203B314 = NULL;
     }
@@ -194,7 +194,7 @@ void sub_802FA50(void)
   int index;
   int counter;
 
-  sub_8008C54(gUnknown_203B314->sBC.s0.unk34);
+  CallPrepareTextbox_8008C54(gUnknown_203B314->sBC.s0.unk34);
   sub_80073B8(gUnknown_203B314->sBC.s0.unk34);
   PrintStringOnWindow(10,0,gUnknown_80E0744,gUnknown_203B314->sBC.s0.unk34,0);
   sub_8012BC4(gUnknown_203B314->sBC.unk9C.f2 * 8 + 4,0,gUnknown_203B314->sBC.s0.input.unk1E + 1,2,7,gUnknown_203B314->sBC.s0.unk34);
