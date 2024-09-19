@@ -1499,7 +1499,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0xb3: {
-                if ((u8)JudgeVarWithImmediate(NULL, curCmd.argShort, curCmd.arg1, 2)) {
+                if ((u8)JudgeVarWithImmediate(NULL, curCmd.argShort, curCmd.arg1, JUDGE_EQ)) {
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;

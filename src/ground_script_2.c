@@ -90,7 +90,7 @@ ScriptCommand *ResolveJump(Action *action, s32 r1)
 
         if (script.op == 0xCC)
         {
-            if(FlagJudge(r1, script.arg1, 0x2))
+            if(FlagJudge(r1, script.arg1, JUDGE_EQ))
                 return FindLabel(action, script.argShort);
         }
         else if (script.op == 0xCD)

@@ -353,30 +353,30 @@ u32 _FlagCalc(s32 param_1, s32 param_2, u32 operation)
   }
 }
 
-bool8 _FlagJudge(s32 param_1, s32 param_2, u32 operation)
+bool8 _FlagJudge(s32 param_1, s32 param_2, enum FlagJudgeOperation operation)
 {
   switch(operation) {
-      case 0:
-        return 1;
-      case 1:
-        return 0;
-      case 2:
+      case JUDGE_TRUE:
+        return TRUE;
+      case JUDGE_FALSE:
+        return FALSE;
+      case JUDGE_EQ:
         return param_1 == param_2;
-      case 7:
+      case JUDGE_NE:
         return param_1 != param_2;
-      case 3:
+      case JUDGE_GT:
         return param_1 > param_2;
-      case 5:
+      case JUDGE_GE:
         return param_1 >= param_2;
-      case 4:
+      case JUDGE_LT:
         return param_1 < param_2;
-      case 6:
+      case JUDGE_LE:
         return param_1 <= param_2;
-      case 8:
+      case JUDGE_AND_NONZERO:
           return (param_1 & param_2) != 0;
-      case 9:
+      case JUDGE_XOR_NONZERO:
         return (param_1 ^ param_2) != 0;
-      case 10:
+      case JUDGE_BIT_SET:
         return param_1 >> (param_2) & 1;
       default:
         FatalError(&gUnknown_80B7350,gUnknown_80B735C, operation); // event flag rule error %d
@@ -414,12 +414,12 @@ void UpdateScriptVarWithVar(u8 *param_1, s16 param_2, s16 param_3, u32 operation
   SetScriptVarValue(param_1,param_2_s32,uVar3);
 }
 
-bool8 FlagJudge(s32 r0, s32 r1, u32 operation)
+bool8 FlagJudge(s32 r0, s32 r1, enum FlagJudgeOperation operation)
 {
     return _FlagJudge(r0, r1, operation);
 }
 
-bool8 JudgeVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, u32 operation)
+bool8 JudgeVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, enum FlagJudgeOperation operation)
 {
   s32 uVar1;
   
@@ -427,7 +427,7 @@ bool8 JudgeVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, u32 operation
   return _FlagJudge(uVar1,param_3,operation);
 }
 
-bool8 JudgeVarWithVar(u8 *param_1, s16 param_2, s16 param_3, u32 operation)
+bool8 JudgeVarWithVar(u8 *param_1, s16 param_2, s16 param_3, enum FlagJudgeOperation operation)
 {
   s32 uVar1;
   s32 uVar2;

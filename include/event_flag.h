@@ -1,6 +1,20 @@
 #ifndef GUARD_EVENT_FLAG_H
 #define GUARD_EVENT_FLAG_H
 
+enum FlagJudgeOperation {
+    JUDGE_TRUE,
+    JUDGE_FALSE,
+    JUDGE_EQ,
+    JUDGE_GT,
+    JUDGE_LT,
+    JUDGE_GE,
+    JUDGE_LE,
+    JUDGE_NE,
+    JUDGE_AND_NONZERO,
+    JUDGE_XOR_NONZERO, // logically identical to JUDGE_NE
+    JUDGE_BIT_SET,
+};
+
 // size: 0x10
 struct ScriptVarInfo {
     s16 type;
@@ -37,13 +51,13 @@ bool8 ScriptVarScenarioEqual(s16 param_1, u32 param_2, s32 param_3);
 bool8 ScriptVarScenarioAfter(s16 param_1, u32 param_2, s32 param_3);
 void sub_8001D88(void);
 u32 _FlagCalc(s32 param_1, s32 param_2, u32 operation);
-bool8 _FlagJudge(s32 param_1, s32 param_2, u32 operation);
+bool8 _FlagJudge(s32 param_1, s32 param_2, enum FlagJudgeOperation operation);
 u32 FlagCalc(s32 r0, s32 r1, u32 operation);
 void UpdateScriptVarWithImmediate(u8 *localVarBuf, s16 varId, s32 val, u32 operation);
 void UpdateScriptVarWithVar(u8 *localVarBuf, s16 dstVarId, s16 srcVarId, u32 operation);
-bool8 FlagJudge(s32 r0, s32 r1, u32 operation);
-bool8 JudgeVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, u32 operation);
-bool8 JudgeVarWithVar(u8 *param_1, s16 param_2, s16 param_3, u32 operation);
+bool8 FlagJudge(s32 r0, s32 r1, enum FlagJudgeOperation operation);
+bool8 JudgeVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, enum FlagJudgeOperation operation);
+bool8 JudgeVarWithVar(u8 *param_1, s16 param_2, s16 param_3, enum FlagJudgeOperation operation);
 bool8 sub_80023E4(u32 param_1);
 u8 sub_8002658(s16 param_1);
 s16 sub_8002694(u8 param_1);
