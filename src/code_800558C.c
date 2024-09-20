@@ -36,24 +36,24 @@ s32 *sub_8005674(struct unkStructFor800561C *, s32);
 
 void DoAxFrame_800558C(struct axPokemon *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, u16 *spriteMasks)
 {
-    if (!(a0->axdata.flags >> 15))
+    if (!(a0->obj.axdata.flags >> 15))
         return;
 
-    if (a0->axdata.sub1.poseId < 0)
+    if (a0->obj.axdata.sub1.poseId < 0)
         RunAxAnimationFrame(a0);
 
-    if (!(a0->axdata.flags >> 15))
+    if (!(a0->obj.axdata.flags >> 15))
         return;
 
-    a0->axdata.sub1.xPos = a0->axdata.sub1.xOffset + spriteX;
-    a0->axdata.sub1.yPos = a0->axdata.sub1.yOffset + spriteY;
-    a0->axdata.sub1.paletteNum = paletteNum;
-    a0->axdata.sub1.unk16 = a3;
-    sub_800533C(a0->axdata.poseData, a0->axdata.spriteData, &a0->axdata.sub1, spriteMasks, !!(a0->axdata.sub1.lastPoseId ^ a0->axdata.sub1.poseId));
-    a0->axdata.sub1.lastPoseId = a0->axdata.sub1.poseId;
+    a0->obj.axdata.sub1.xPos = a0->obj.axdata.sub1.xOffset + spriteX;
+    a0->obj.axdata.sub1.yPos = a0->obj.axdata.sub1.yOffset + spriteY;
+    a0->obj.axdata.sub1.paletteNum = paletteNum;
+    a0->obj.axdata.sub1.unk16 = a3;
+    sub_800533C(a0->obj.axdata.poseData, a0->obj.axdata.spriteData, &a0->obj.axdata.sub1, spriteMasks, !!(a0->obj.axdata.sub1.lastPoseId ^ a0->obj.axdata.sub1.poseId));
+    a0->obj.axdata.sub1.lastPoseId = a0->obj.axdata.sub1.poseId;
 
-    if (a0->axdata.flags & 0x800)
-        a0->axdata.flags &= 0xF7FF;
+    if (a0->obj.axdata.flags & 0x800)
+        a0->obj.axdata.flags &= 0xF7FF;
 }
 
 void sub_8005610(OpenedFile *a0, s32 a1, s32 a2, u8 *a3)
@@ -97,12 +97,12 @@ void sub_800569C(s16 *a0, struct axPokemon *a1, u8 a2)
     a0[0] = 0;
     a0[1] = 0;
 
-    if (!(a1->axdata.flags >> 15) || a2 >= 4)
+    if (!(a1->obj.axdata.flags >> 15) || a2 >= 4)
         return;
 
-    if (a1->axdata.paletteData != NULL) {
-        ptr = (s16 *)a1->axdata.paletteData;
-        ptr += a1->axdata.sub1.poseId * 8;
+    if (a1->obj.axdata.paletteData != NULL) {
+        ptr = (s16 *)a1->obj.axdata.paletteData;
+        ptr += a1->obj.axdata.sub1.poseId * 8;
         ptr2 = ptr + (a2 * 2);
         if (ptr2[0] == 99 && ptr2[1] == 99) {
             a0[0] = 99;
@@ -110,8 +110,8 @@ void sub_800569C(s16 *a0, struct axPokemon *a1, u8 a2)
         }
         else {
             ptr3 = ptr + (a2 * 2);
-            a0[0] = a1->axdata.sub1.xOffset + ptr3[0];
-            a0[1] = a1->axdata.sub1.yOffset + ptr3[1];
+            a0[0] = a1->obj.axdata.sub1.xOffset + ptr3[0];
+            a0[1] = a1->obj.axdata.sub1.yOffset + ptr3[1];
         }
     }
     else {
@@ -126,20 +126,20 @@ void sub_8005700(s16 *a0, struct axPokemon *a1)
     s32 i;
     s16 *ptr;
 
-    if (!(a1->axdata.flags >> 15))
+    if (!(a1->obj.axdata.flags >> 15))
         return;
 
-    if (a1->axdata.paletteData != NULL) {
-        ptr = (s16 *)a1->axdata.paletteData;
-        ptr += a1->axdata.sub1.poseId * 8;
+    if (a1->obj.axdata.paletteData != NULL) {
+        ptr = (s16 *)a1->obj.axdata.paletteData;
+        ptr += a1->obj.axdata.sub1.poseId * 8;
         for (i = 0; i <= 6; i += 2) {
             if (ptr[i] == 99 && ptr[i + 1] == 99) {
                 a0[0] = 99;
                 a0[1] = 99;
             }
             else {
-                a0[0] = a1->axdata.sub1.xOffset + ptr[i];
-                a0[1] = a1->axdata.sub1.yOffset + ptr[i + 1];
+                a0[0] = a1->obj.axdata.sub1.xOffset + ptr[i];
+                a0[1] = a1->obj.axdata.sub1.yOffset + ptr[i + 1];
             }
             a0 += 2;
         }

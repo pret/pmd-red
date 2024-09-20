@@ -76,8 +76,8 @@ typedef struct axmain
     /* 0x10 */ void *palettes; // ?
 } axmain;
 
-// size: ?
-struct axPokemon
+// size: 0x4C
+struct axObject
 {
     /* 0x0 */ axdata axdata;
     /* 0x3C */ OpenedFile *spriteFile; // This might be a unkStruct_202EE8C instead and unkStruct_202EE8C.unk0 might be a OpenedFile* etc. See sub_8010F28
@@ -90,6 +90,12 @@ struct axPokemon
     u8 unk47;
     u8 unk48;
     u8 fill49[0x4C - 0x49];
+};
+
+// size: ?
+struct axPokemon
+{
+    struct axObject obj;
     /* 0x4C */ axmain *axmain;
     u8 flags_0x50;
     u8 fill51;
