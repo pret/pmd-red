@@ -822,7 +822,7 @@ void sub_80420E8(Entity *pokemon, struct DamageStruct *dmgStruct)
     u32 typeEffectiveness;
     u32 arg;
     typeEffectiveness = dmgStruct->typeEffectiveness;
-    if(gDungeon->unk16D != 0)
+    if(gDungeon->unk134.unk16D != 0)
         typeEffectiveness = sub_806F62C(dmgStruct->typeEffectiveness);
     switch(typeEffectiveness)
     {
