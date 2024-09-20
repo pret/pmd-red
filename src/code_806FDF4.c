@@ -32,7 +32,6 @@ extern u8 gUnknown_202E088[];
 extern u8 *gUnknown_80FA120[];
 extern u8 *gUnknown_80FA090[];
 
-void sub_8069D4C(struct unkStruct_8069D4C *r0, Entity *target);
 void sub_8068FE0(Entity *, u32, Entity *);
 u8 sub_806B8CC();
 bool8 sub_805FBE8(u8 *a0);
@@ -41,7 +40,6 @@ extern void PrintFieldMessage(u32, const u8 *, u32);
 void sub_8083D88();
 u8 sub_808529C(s32);
 extern u8 GetBodySize(s16 index);
-void sub_806F910();
 
 void nullsub_96(Entity *pokemon,Entity *target)
 {}
@@ -171,7 +169,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
             pokeStruct2->isTeamLeader = FALSE;
             pokeStruct2->level = param_3->level;
             pokeStruct2->IQ = 1;
-            SetDefaultIQSkills((u8 *)&(pokeStruct2->IQSkills),0);
+            SetDefaultIQSkills((u8 *)&(pokeStruct2->IQSkills),FALSE);
             pokeStruct2->hiddenPower = param_3->hiddenPower;
             pokeStruct2->tacticIndex = 0;
             pokeStruct2->unkA = -1;
@@ -211,7 +209,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
                 }
                 sub_808D9DC(gAvailablePokemonNames,pokeStruct2,0);
                 SendMessage(entity1,*gUnknown_80FA0F0);
-                if (flag != '\0') {
+                if (flag) {
                     leader = xxx_call_GetLeader();
                     SetMessageArgument(gAvailablePokemonNames,leader,0);
                     sub_8092558(gUnknown_202E628,friendArea);

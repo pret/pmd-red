@@ -6,8 +6,9 @@ struct unkStruct_8069D4C
     s16 id;
     Position pos;
     s16 HP;
-    /* 0x0 */ u8 att[2]; // Atk, SpAtk
-    /* 0x2 */ u8 def[2]; // Def, SpDef
+    // NOTE: cannot re-use offense struct as it pads.
+    u8 att[2]; // Atk, SpAtk
+    u8 def[2]; // Def, SpDef
     u16 level;
     u32 exp;
     FixedPoint belly;
