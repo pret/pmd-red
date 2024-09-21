@@ -2,15 +2,27 @@
 #include "dungeon.h"
 #include "pokemon.h"
 #include "file_system.h"
+#include "code_803E46C.h"
+#include "cpu.h"
 #include "dungeon_random.h"
+#include "bg_palette_buffer.h"
+#include "code_800D090.h"
 
 extern void sub_80901D8(DungeonLocation *param_1,DungeonLocation *param_2);
 extern s32 sub_80902C8(u8 dungeon);
-extern u16 ExtractSpeciesIndex(UnkDungeonGlobal_unk1CD98 *r0);
+extern s16 ExtractSpeciesIndex(UnkDungeonGlobal_unk1CD98 *r0);
+extern u32 ExtractLevel(UnkDungeonGlobal_unk1CD98 *r0);
 extern void sub_808E9C4(UnkDungeonGlobal_unk1CD98 *r0, s16 r1);
+extern u8 GetBodySize(s16 index);
+extern bool8 sub_80848EC(void);
 
 extern const char gUnknown_80F4D8C[]; // "mapparam"
+extern const char gUnknown_80F60F8[]; // "banrpal"
+extern const char gUnknown_80F6100[]; // "banfont"
 extern struct FileArchive gDungeonFileArchive;
+extern OpenedFile *gDungeonNameBannerPalette;
+extern OpenedFile *gDungeonNameBannerFontFile;
+extern void *gDungeonNameBannerFont;
 
 struct UnkDungeonFileData
 {
@@ -406,5 +418,159 @@ u8 sub_803D73C(s32 a0)
     }
 
     return 105;
+}
+
+s32 sub_803D808(UnkDungeonGlobal_unk1CD98 *strPtr, s32 id)
+{
+    s32 i;
+
+    for (i = 0; i < 32; i++) {
+        if (ExtractSpeciesIndex(&gDungeon->unk1CD98[i]) == 0)
+            break;
+        strPtr[id] = gDungeon->unk1CD98[i];
+        id++;
+    }
+
+    return id;
+}
+
+s32 sub_803D870(UnkDungeonGlobal_unk1CD98 *strPtr, s32 id)
+{
+    s32 i;
+
+    for (i = 0; i < 32; i++) {
+        s16 species = ExtractSpeciesIndex(&gDungeon->unk1CD98[i]);
+        if (species == 0)
+            break;
+        if (GetBodySize(species) < 2 && gDungeon->unk1CD98[i].unk2[0] != 0) {
+            strPtr[id] = gDungeon->unk1CD98[i];
+            id++;
+        }
+    }
+
+    return id;
+}
+
+void sub_803D8F0(void)
+{
+    if (gDungeon->unk37EC == 0) {
+        gDungeon->unk37EC = 1;
+        gDungeon->unk37E4 = sub_803D808(gDungeon->unk343C, 0);
+    }
+}
+
+// Hmm...
+static inline s16 SpeciesId(s32 id)
+{
+    return id;
+}
+
+bool8 sub_803D930(s16 speciesToFind)
+{
+    s32 i;
+    s32 id = SpeciesId(speciesToFind);
+
+    for (i = 0; i < 32; i++) {
+        s16 species = ExtractSpeciesIndex(&gDungeon->unk1CD98[i]);
+        if (species == 0)
+            break;
+        if (species == id)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+s16 sub_803D970(s32 arrId)
+{
+    s32 i;
+    s32 rand = DungeonRandInt(10000);
+
+    for (i = 0; i < gDungeon->unk37E4; i++) {
+        if (gDungeon->unk343C[i].unk2[arrId] != 0 && gDungeon->unk343C[i].unk2[arrId] >= rand) {
+            return ExtractSpeciesIndex(&gDungeon->unk343C[i]);
+        }
+    }
+    for (i = 0; i < gDungeon->unk37E4; i++) {
+        if (gDungeon->unk343C[i].unk2[arrId] != 0) {
+            return ExtractSpeciesIndex(&gDungeon->unk343C[i]);
+        }
+    }
+
+    return MONSTER_KECLEON;
+}
+
+s32 sub_803DA20(s32 species)
+{
+    s32 i;
+    s32 speciesId = SpeciesId(species);
+
+    for (i = 0; i < gDungeon->unk37E4; i++) {
+        if (ExtractSpeciesIndex(&gDungeon->unk343C[i]) == speciesId)
+            return ExtractLevel(&gDungeon->unk343C[i]);
+    }
+    return 1;
+}
+
+extern const u8 *GetDungeonName2(u8 dungeon);
+extern void sub_8008DC8(s32 r0, s32 r1, u16 r2, u16 r3);
+
+extern const char gUnknown_80F6108[];
+extern const char gUnknown_80F610C[];
+extern const char gUnknown_80F6110[];
+extern const char gUnknown_80F6118[];
+
+extern u8 gUnknown_20274A5;
+
+s32 sub_803DC14(const u8 *dungName, s32 strWidth, s32 a2);
+s32 CalcStringWidth(const u8 *dungName);
+
+void ShowDungeonNameBanner(void)
+{
+    u8 text[100];
+    s32 var;
+    s32 i, r7;
+    const u8 *r6;
+
+    gDungeonNameBannerPalette = OpenFileAndGetFileDataPtr(gUnknown_80F60F8, &gDungeonFileArchive);
+    gDungeonNameBannerFontFile = OpenFileAndGetFileDataPtr(gUnknown_80F6100, &gDungeonFileArchive);
+    gDungeonNameBannerFont = ((u8**) gDungeonNameBannerFontFile->data)[1];
+    for (i = 0; i < 16; i++) {
+        SetBGPaletteBufferColorArray(i + 224, (void*) &((u8**) gDungeonNameBannerPalette->data)[i]); // Todo: Fix when there is a better idea what to do with structs from opened files
+    }
+    CpuClear((void *)(VRAM + 0x140), 0x1C00);
+    if (sub_80848EC()) {
+        s32 r8 = gDungeon->dungeonLocation.floor + gDungeon->unk14;
+        const u8 *dungName = GetDungeonName2(gDungeon->dungeonLocation.id);
+        s32 r5 = 10;
+
+        for (r7 = 0; r7 < 8; r7++) {
+            for (i = 0; i < 28; r5++) {
+                u16 a2;
+
+                i++;
+                a2 = r5 | 0xE000;
+                sub_8008DC8(i, r7 + 4, r5 | a2, 0);
+            }
+        }
+
+        var = sub_803DC14(dungName, (224 - CalcStringWidth(dungName)) / 2, 0);
+        if (IsStairDirectionUp(gDungeon->dungeonLocation.id))
+            r6 = gUnknown_80F6108;
+        else
+            r6 = gUnknown_80F610C;
+
+        if (r8 > 9) {
+            sprintfStatic(text, gUnknown_80F6110, r6, 48 + (r8 / 10), 48 + (r8 % 10));
+        }
+        else {
+            sprintfStatic(text, gUnknown_80F6118, r6, 48 + r8);
+        }
+
+        sub_803DC14(text, (224 - CalcStringWidth(text)) / 2, var + 32);
+        gUnknown_20274A5 = 1;
+    }
+
+    CloseFile(gDungeonNameBannerFontFile);
+    sub_803E46C(2);
 }
 

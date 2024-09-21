@@ -157,8 +157,8 @@ typedef struct UnkDungeonGlobal_unk1C590
 
 typedef struct UnkDungeonGlobal_unk1CD98
 {
-    struct PokemonStruct1 *unk0;
-    void *unk4;
+    s16 unk0; // species
+    s16 unk2[2];
 } UnkDungeonGlobal_unk1CD98;
 
 // size: 0x1CEDC
@@ -242,9 +242,14 @@ typedef struct Dungeon
     u8 fill69A[0x69C - 0x69A];
     EntityInfo unk69C[4];
     EntityInfo unkEBC[1]; // Unsure about the size... See sub_8082A08()
-    u8 fill10C4[0x363C - 0x10C4];
+    u8 fill10C4[0x343C - 0x10C4];
+    /* 0x343C */ UnkDungeonGlobal_unk1CD98 unk343C[32];
+    u8 fill353C[0x363c-0x353c];
     /* 0x363C */ u8 expYieldRankings[NUM_MONSTERS];
-    u8 fill37D9[0x37F0 - 0x37D9];
+    u8 fill37D9[0x37E4 - 0x37D9];
+    /* 0x37E4 */ s32 unk37E4;
+    u8 fill37E8[4];
+    /* 0x37EC */ u8 unk37EC;
     /* 0x37F0 */ u32 unk37F0;
     /* 0x37F4 */ s32 unk37F4;
     /* 0x37F8 */ bool8 plusIsActive[2]; // Index 0: Enemy , Index 1: Team
