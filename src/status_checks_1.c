@@ -42,7 +42,7 @@ s32 sub_8070828(Entity *pokemon, bool8 displayMessage)
         if ((HasAbility(pokemon, ABILITY_CHLOROPHYLL)) && (GetApparentWeather(pokemon) == WEATHER_SUNNY)) {
             flag = TRUE;
         }
-        if (displayMessage && SetVisualFlags(pokemon->info, 0x40, flag)) {
+        if (displayMessage && SetVisualFlags(pokemon->axObj.info, 0x40, flag)) {
             sub_80429B4(pokemon);
             TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FEE80);
         }
@@ -128,7 +128,7 @@ void sub_80709C8(u8 *buffer, EntityInfo *entityInfo)
 
 bool8 HasNegativeStatus(Entity *pokemon)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     s32 i;
     if (pokemonInfo->sleep.sleep == STATUS_SLEEP ||
         pokemonInfo->sleep.sleep == STATUS_NIGHTMARE ||
@@ -168,9 +168,9 @@ bool8 HasNegativeStatus(Entity *pokemon)
 
 bool8 IsSleeping(Entity *pokemon)
 {
-    if (pokemon->info->sleep.sleep != STATUS_SLEEP &&
-        pokemon->info->sleep.sleep != STATUS_NAPPING &&
-        pokemon->info->sleep.sleep != STATUS_NIGHTMARE)
+    if (pokemon->axObj.info->sleep.sleep != STATUS_SLEEP &&
+        pokemon->axObj.info->sleep.sleep != STATUS_NAPPING &&
+        pokemon->axObj.info->sleep.sleep != STATUS_NIGHTMARE)
     {
         return FALSE;
     }

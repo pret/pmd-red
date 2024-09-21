@@ -70,7 +70,7 @@ extern void sub_806A5B8(struct Entity *entity);
 
 void DecideAttack(Entity *pokemon)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     s32 i;
     s32 chargeStatus = STATUS_CHARGING;
     struct AIPossibleMove aiPossibleMove[MAX_MON_MOVES + 1];
@@ -360,7 +360,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
 {
     s32 targetingFlags;
     s32 moveWeight = 1;
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     s32 numPotentialTargets = 0;
     s32 i;
     bool8 hasStatusChecker;
@@ -619,7 +619,7 @@ s32 TryAddTargetToAITargetList(s32 numPotentialTargets, s32 targetingFlags, Enti
     s32 direction;
     s32 targetingFlags2 = (s16) targetingFlags;
     bool8 hasStatusChecker2 = hasStatusChecker;
-    EntityInfo *userData = user->info;
+    EntityInfo *userData = user->axObj.info;
     if ((user->pos.x == target->pos.x && user->pos.y == target->pos.y) ||
         (targetingFlags2 & 0xF0) == TARGETING_FLAG_TARGET_ROOM ||
         (targetingFlags2 & 0xF0) == TARGETING_FLAG_TARGET_FLOOR ||
@@ -664,12 +664,12 @@ bool8 IsAITargetEligible(s32 targetingFlags, Entity *user, Entity *target, Move 
     }
     else if (categoryTargetingFlags == TARGETING_FLAG_LONG_RANGE)
     {
-        targetData = target->info;
+        targetData = target->axObj.info;
         goto checkThirdParty;
     }
     else if (categoryTargetingFlags == TARGETING_FLAG_ATTACK_ALL)
     {
-        targetData = target->info;
+        targetData = target->axObj.info;
         if (user == target)
         {
             goto returnFalse;
@@ -739,7 +739,7 @@ bool8 IsAITargetEligible(s32 targetingFlags, Entity *user, Entity *target, Move 
             }
             else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_EXPOSE)
             {
-                targetData = target->info;
+                targetData = target->axObj.info;
                 if ((targetData->types[0] != TYPE_GHOST && targetData->types[1] != TYPE_GHOST) || targetData->exposed)
                 {
                     if (*categoryTargetingFlags2); // Flips the conditional.
@@ -780,7 +780,7 @@ s32 WeightMove(Entity *user, s32 targetingFlags, Entity *target, u32 moveType)
     u8 moveType2 = moveType;
     u8 weight = 1;
     EntityInfo *targetData2;
-    targetData2 = targetData = target->info;
+    targetData2 = targetData = target->axObj.info;
     if (!targetData->isNotTeamMember || (targetingFlags2 & 0xF) != TARGETING_FLAG_TARGET_OTHER)
     {
         return 1;
@@ -809,7 +809,7 @@ s32 WeightMove(Entity *user, s32 targetingFlags, Entity *target, u32 moveType)
 
 bool8 TargetRegularAttack(Entity *pokemon, u32 *targetDir, bool8 checkPetrified)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     s32 numPotentialTargets = 0;
     s32 direction = pokemonInfo->action.direction;
     s32 faceTurnLimit = pokemonInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER ? 1 : 8;
@@ -828,7 +828,7 @@ bool8 TargetRegularAttack(Entity *pokemon, u32 *targetDir, bool8 checkPetrified)
             GetEntityType(target) == ENTITY_MONSTER &&
             CanAttackInDirection(pokemon, direction) &&
             GetTreatmentBetweenMonsters(pokemon, target, FALSE, checkPetrified) == TREATMENT_TREAT_AS_ENEMY &&
-            (!hasStatusChecker || target->info->immobilize.immobilizeStatus != STATUS_FROZEN))
+            (!hasStatusChecker || target->axObj.info->immobilize.immobilizeStatus != STATUS_FROZEN))
         {
             potentialAttackTargetDirections[numPotentialTargets] = direction;
             potentialAttackTargetWeights[numPotentialTargets] = WeightMove(pokemon, TARGETING_FLAG_TARGET_OTHER, target, TYPE_NONE);
@@ -960,7 +960,7 @@ void HandleUseMoveAIAction(Entity *target)
     while (TRUE) {
         if (counter >= sub_8070828(target, TRUE))
             break;
-        entityInfo = target->info;
+        entityInfo = target->axObj.info;
         sub_8055A00(target, entityInfo->action.unk4[0].actionUseIndex, 1, 0, 0);
         if (!EntityExists(target))
             break;
@@ -973,7 +973,7 @@ void HandleUseMoveAIAction(Entity *target)
 
     sub_8057588(target, 1);
     if (EntityExists(target))
-        sub_806A9B4(target, target->info->action.unk4[0].actionUseIndex);
+        sub_806A9B4(target, target->axObj.info->action.unk4[0].actionUseIndex);
 
     sub_806A1B0(target);
 }
@@ -989,7 +989,7 @@ void HandleUseOrbAction(Entity *pokemon)
     struct AIPossibleMove sp28;
     bool8 r8;
 
-    entityInfo = pokemon->info;
+    entityInfo = pokemon->axObj.info;
     item = sub_8044D90(pokemon, 0, 21);
     IVar5 = *item;
 

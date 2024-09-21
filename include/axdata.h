@@ -81,15 +81,14 @@ struct axObject
 {
     /* 0x0 */ axdata axdata;
     /* 0x3C */ OpenedFile *spriteFile; // This might be a unkStruct_202EE8C instead and unkStruct_202EE8C.unk0 might be a OpenedFile* etc. See sub_8010F28
-    u16 unk40_maybeAnimTimer;
+    s16 unk40_maybeAnimTimer;
     u8 unk42_animId1;
     u8 unk43_animId2;
-    u8 unk44;
+    u8 unk44_direction1;
     u8 unk45_orientation;
     u8 unk46;
     u8 unk47;
-    u8 unk48;
-    u8 fill49[0x4C - 0x49];
+    /* 0x48 */ struct EntityInfo* info;
 };
 
 // size: ?

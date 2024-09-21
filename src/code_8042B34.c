@@ -232,7 +232,9 @@ void sub_8042EC8(Entity *a0, s32 a1)
             EntityInfo *entInfo = GetEntInfo(a0);
 
             if (strPtr->unk8 != -1) {
-                sub_800569C(&sp4, &a0->spriteInfo, strPtr->unk8);
+                sub_800569C(&sp4,
+                            &(*(struct EntitySpriteInfo *)&a0->axObj.axdata),
+                            strPtr->unk8);
             }
 
             sub_800EB24(strPtr->unk0, &sp8, &sp4,a1, entInfo->action.direction);

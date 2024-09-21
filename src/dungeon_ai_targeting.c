@@ -67,14 +67,14 @@ bool8 sub_8070F3C(Entity * pokemon, Position *pos, s32 direction)
   u8 terrain;
   struct Tile *tile;
 
-  terrain = GetCrossableTerrain(pokemon->info->id);
+  terrain = GetCrossableTerrain(pokemon->axObj.info->id);
 
   tile = GetTile(pos->x + gAdjacentTileOffsets[direction].x, pos->y + gAdjacentTileOffsets[direction].y);
   if ((!(tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)) &&
      (((tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))))) {
     if (!IsCurrentFixedRoomBossFight())
     {
-        if (pokemon->info->transformStatus.transformStatus == STATUS_MOBILE ||
+        if (pokemon->axObj.info->transformStatus.transformStatus == STATUS_MOBILE ||
             HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
         {
             terrain = CROSSABLE_TERRAIN_WALL;
@@ -130,14 +130,14 @@ bool8 sub_8070F80(Entity * pokemon, s32 direction)
   u8 terrain;
   struct Tile *tile;
 
-  terrain = GetCrossableTerrain(pokemon->info->id);
+  terrain = GetCrossableTerrain(pokemon->axObj.info->id);
 
   tile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x, pokemon->pos.y + gAdjacentTileOffsets[direction].y);
   if ((!(tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)) &&
      (((tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))))) {
     if (!IsCurrentFixedRoomBossFight())
     {
-        if (pokemon->info->transformStatus.transformStatus == STATUS_MOBILE ||
+        if (pokemon->axObj.info->transformStatus.transformStatus == STATUS_MOBILE ||
             HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
         {
             terrain = CROSSABLE_TERRAIN_WALL;
@@ -175,15 +175,15 @@ bool8 sub_8071058(Entity * pokemon, s32 direction)
   u8 terrain;
   struct Tile *tile;
 
-  terrain = GetCrossableTerrain(pokemon->info->id);
+  terrain = GetCrossableTerrain(pokemon->axObj.info->id);
 
   tile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x, pokemon->pos.y + gAdjacentTileOffsets[direction].y);
   if ((!(tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)) &&
      (((tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER)) ||
-      (!tile->monster->info->isNotTeamMember)))) {
+      (!tile->monster->axObj.info->isNotTeamMember)))) {
     if (!IsCurrentFixedRoomBossFight())
     {
-        if (pokemon->info->transformStatus.transformStatus == STATUS_MOBILE ||
+        if (pokemon->axObj.info->transformStatus.transformStatus == STATUS_MOBILE ||
             HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
         {
             terrain = CROSSABLE_TERRAIN_WALL;
@@ -217,7 +217,7 @@ bool8 sub_8071058(Entity * pokemon, s32 direction)
 
 bool8 CanAttackInDirection(Entity *pokemon, s32 direction)
 {
-    u8 crossableTerrain = GetCrossableTerrain(pokemon->info->id);
+    u8 crossableTerrain = GetCrossableTerrain(pokemon->axObj.info->id);
     struct Tile *tile;
     if (crossableTerrain < CROSSABLE_TERRAIN_CREVICE)
     {
@@ -230,7 +230,7 @@ bool8 CanAttackInDirection(Entity *pokemon, s32 direction)
     {
         if (!IsCurrentFixedRoomBossFight())
         {
-            if (pokemon->info->transformStatus.transformStatus == STATUS_MOBILE ||
+            if (pokemon->axObj.info->transformStatus.transformStatus == STATUS_MOBILE ||
                 HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
             {
                 crossableTerrain = CROSSABLE_TERRAIN_WALL;
@@ -264,7 +264,7 @@ bool8 CanAttackInDirection(Entity *pokemon, s32 direction)
 
 bool8 CanAIMonsterMoveInDirection(Entity *pokemon, s32 direction, bool8 *pokemonInFront)
 {
-    u8 crossableTerrain = GetCrossableTerrain(pokemon->info->id);
+    u8 crossableTerrain = GetCrossableTerrain(pokemon->axObj.info->id);
     struct Tile *frontTile, *currentTile;
     *pokemonInFront = FALSE;
     frontTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x,
@@ -282,7 +282,7 @@ bool8 CanAIMonsterMoveInDirection(Entity *pokemon, s32 direction, bool8 *pokemon
     if (frontTile->object != NULL &&
         IQSkillIsEnabled(pokemon, IQ_TRAP_AVOIDER) &&
         GetEntityType(frontTile->object) == ENTITY_TRAP &&
-        (frontTile->object->isVisible || pokemon->info->eyesightStatus.eyesightStatus == STATUS_EYEDROPS))
+        (frontTile->object->isVisible || pokemon->axObj.info->eyesightStatus.eyesightStatus == STATUS_EYEDROPS))
     {
         return FALSE;
     }
@@ -294,7 +294,7 @@ bool8 CanAIMonsterMoveInDirection(Entity *pokemon, s32 direction, bool8 *pokemon
     }
     if (!IsCurrentFixedRoomBossFight())
     {
-        if (pokemon->info->transformStatus.transformStatus == STATUS_MOBILE ||
+        if (pokemon->axObj.info->transformStatus.transformStatus == STATUS_MOBILE ||
             HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
         {
             crossableTerrain = CROSSABLE_TERRAIN_WALL;
@@ -334,10 +334,10 @@ bool8 CanAIMonsterMoveInDirection(Entity *pokemon, s32 direction, bool8 *pokemon
 
 bool8 IsAtJunction(Entity *pokemon)
 {
-    u32 crossableTerrain = GetCrossableTerrain(pokemon->info->id);
+    u32 crossableTerrain = GetCrossableTerrain(pokemon->axObj.info->id);
     if (!IsCurrentFixedRoomBossFight())
     {
-        if (pokemon->info->transformStatus.transformStatus == STATUS_MOBILE || HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
+        if (pokemon->axObj.info->transformStatus.transformStatus == STATUS_MOBILE || HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
         {
             crossableTerrain = CROSSABLE_TERRAIN_WALL;
         }
@@ -352,7 +352,7 @@ bool8 IsAtJunction(Entity *pokemon)
     }
     if (crossableTerrain == CROSSABLE_TERRAIN_WALL)
     {
-        EntityInfo *pokemonInfo = pokemon->info;
+        EntityInfo *pokemonInfo = pokemon->axObj.info;
         pokemonInfo->mobileTurnTimer += DungeonRandInt(100);
         if (pokemonInfo->mobileTurnTimer < 200)
         {
@@ -409,7 +409,7 @@ bool8 ShouldMonsterRunAway(Entity *pokemon)
     }
     else
     {
-        EntityInfo *pokemonInfo = pokemon->info;
+        EntityInfo *pokemonInfo = pokemon->axObj.info;
         if (pokemonInfo->terrifiedTurns != 0)
         {
             return TRUE;
@@ -450,7 +450,7 @@ void CheckRunAwayVisualFlag(Entity *pokemon, bool8 showRunAwayEffect)
   bool8 cVar1;
   EntityInfo *iVar2;
   EntityInfo *iVar3;
-  iVar2 = pokemon->info;
+  iVar2 = pokemon->axObj.info;
   iVar3 = iVar2;
 
   if (((!iVar2->isTeamLeader) && HasAbility(pokemon,ABILITY_RUN_AWAY) &&
@@ -462,8 +462,8 @@ void CheckRunAwayVisualFlag(Entity *pokemon, bool8 showRunAwayEffect)
 
 u8 GetTreatmentBetweenMonsters(Entity *pokemon, Entity *targetPokemon, bool8 ignoreInvisible, bool8 checkPetrified)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
-    EntityInfo *targetData = targetPokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
+    EntityInfo *targetData = targetPokemon->axObj.info;
     u8 targetingDecoy;
     u8 pokemonTargetingDecoy;
     bool8 pokemonIsEnemy;
@@ -532,8 +532,8 @@ u8 sub_807167C(Entity * pokemon, Entity * target)
   EntityInfo * targetEntityInfo;
   EntityInfo * pokemonEntityData;
 
-  pokemonEntityData = pokemon->info;
-  targetEntityInfo = target->info;
+  pokemonEntityData = pokemon->axObj.info;
+  targetEntityInfo = target->axObj.info;
   if (pokemonEntityData->clientType != CLIENT_TYPE_CLIENT) {
     cannotUseItems = IsClientOrTeamBase(pokemonEntityData->joinedAt.joinedAt);
     if (!cannotUseItems && (pokemonEntityData->shopkeeper == SHOPKEEPER_MODE_NORMAL) && (targetEntityInfo->clientType != CLIENT_TYPE_CLIENT)) {

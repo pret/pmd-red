@@ -209,7 +209,7 @@ bool8 sub_805B074(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 
 bool8 sub_805B0BC(Entity * pokemon, Entity * target)
 {
-    sub_807CD9C(pokemon, target, pokemon->info->action.direction);
+    sub_807CD9C(pokemon, target, pokemon->axObj.info->action.direction);
     return TRUE;
 }
 
@@ -219,7 +219,7 @@ bool8 HandleColorChange(Entity * pokemon, Entity * target)
     const char *typeString;
     EntityInfo *entityInfo;
 
-    entityInfo = target->info;
+    entityInfo = target->axObj.info;
     newType = gDungeonCamouflageTypes[gDungeon->tileset];
     if (HasAbility(target, ABILITY_FORECAST)) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gPtrForecastPreventsTypeSwitchMessage);
@@ -287,7 +287,7 @@ bool8 SpikesMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_
     bool8 isNotTeamMember;
 
     trapLaid = FALSE;
-    isNotTeamMember = pokemon->info->isNotTeamMember;
+    isNotTeamMember = pokemon->axObj.info->isNotTeamMember;
     uVar2 = 1;
 
     if (isNotTeamMember) {
@@ -311,7 +311,7 @@ bool8 sub_805B264(Entity * pokemon, Entity * target, Move *move, s32 param_4)
     s32 iVar5;
     EntityInfo *entityInfo;
 
-    entityInfo = target->info;
+    entityInfo = target->axObj.info;
     r3 = gUnknown_202F224;
     r6 = FALSE;
 
@@ -403,7 +403,7 @@ bool8 sub_805B3FC(Entity * pokemon,Entity * target,Move *move, s32 param_4, s32 
     if (HandleDamagingMove(pokemon,target,move,0x100,param_5) != 0) {
         flag = TRUE;
         if (sub_805727C(pokemon,pokemon,gUnknown_80F4DCE) != 0) {
-            entityInfo = pokemon->info;
+            entityInfo = pokemon->axObj.info;
             RaiseAttackStageTarget(pokemon,pokemon,param_4,1);
             SetExpMultplier(entityInfo);
         }
@@ -427,8 +427,8 @@ bool8 MimicMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4
     bool8 mimicSuccess;
 
     mimicSuccess = FALSE;
-    entityInfo = pokemon->info;
-    targetEntityInfo = target->info;
+    entityInfo = pokemon->axObj.info;
+    targetEntityInfo = target->axObj.info;
     moveCounter = 0;
 
     for(moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
@@ -464,7 +464,7 @@ bool8 sub_805B53C(Entity * pokemon, Entity * target, Move *move, s32 param_4)
     EntityInfo *entityInfo;
 
     local_24 = 0;
-    entityInfo = pokemon->info;
+    entityInfo = pokemon->axObj.info;
     r5 = 1;
     index = 0;
     if (0 <= gUnknown_80F55EC[0]) {
@@ -641,7 +641,7 @@ bool8 sub_805B968(Entity * pokemon, Entity * target, Move * move, s32 param_4)
     if (HandleDamagingMove(pokemon,target,move,0x100,param_4) != 0) {
         flag = TRUE;
         if (sub_8057308(pokemon,0) != 0) {
-            entityHP = pokemon->info->maxHPStat;
+            entityHP = pokemon->axObj.info->maxHPStat;
             if (entityHP < 0) {
                 entityHP = entityHP + 3;
             }
@@ -696,10 +696,10 @@ bool8 sub_805BA50(Entity * pokemon, Entity * target, Move *move, s32 param_4)
     if (HandleDamagingMove(pokemon,target,move,0x100,param_4) != 0) {
         flag = TRUE;
         if (sub_805727C(pokemon,target, 0) != 0) {
-            iVar2 = pokemon->info;
-            iVar3 = pokemon->info;
-            iVar5 = target->info;
-            iVar6 = target->info;
+            iVar2 = pokemon->axObj.info;
+            iVar3 = pokemon->axObj.info;
+            iVar5 = target->axObj.info;
+            iVar6 = target->axObj.info;
             SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
             SetMessageArgument(gAvailablePokemonNames + 0x50, target, 0);
             if (HasAbility(target, ABILITY_STICKY_HOLD)) {
@@ -808,8 +808,8 @@ bool8 sub_805BC98(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 
     local_28 = 0;
     local_27 = 0;
-    entityInfo = pokemon->info;
-    targetHP = target->info->HP - 1;
+    entityInfo = pokemon->axObj.info;
+    targetHP = target->axObj.info->HP - 1;
     if (targetHP < 0) {
         targetHP = 0;
     }
@@ -857,8 +857,8 @@ bool8 TransferOrbAction(Entity *pokemon, Entity * target, Move *move, s32 param_
     bool8 didTransfer;
 
     didTransfer = FALSE;
-    if (target->info->isNotTeamMember) {
-        entityInfo = target->info;
+    if (target->axObj.info->isNotTeamMember) {
+        entityInfo = target->axObj.info;
         targetID = entityInfo->id;
         oldID = entityInfo->id;
         SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -1007,7 +1007,7 @@ bool8 sub_805C080(Entity * pokemon, Entity *target, Move *move, s32 param_4)
     s32 index;
 
     foundTarget = FALSE;
-    if (pokemon->info->isNotTeamMember) {
+    if (pokemon->axObj.info->isNotTeamMember) {
         possibleTargets = gDungeon->wildPokemon;
         numPossibleTargets = DUNGEON_MAX_WILD_POKEMON;
     }
@@ -1077,7 +1077,7 @@ bool8 sub_805C208(Entity *pokemon, Entity *target, Move *move, u32 param_4)
     u8 local_24;
 
     local_24 = 0;
-    targetSize = GetSize(target->info->apparentID);
+    targetSize = GetSize(target->axObj.info->apparentID);
     sub_806F370(pokemon,target,targetSize,1,&local_24,GetMoveType(move),sub_8057600(move,param_4),0,1,0);
 
     local_24 = local_24 == 0;
@@ -1106,7 +1106,7 @@ bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 param_4)
     Position tileCoords;
 
     filledInTile = FALSE;
-    targetInfo = target->info;
+    targetInfo = target->axObj.info;
     if (IsBossFight()) {
         TryDisplayDungeonLoggableMessage(pokemon,*gUnknown_80FD0B8);
         return FALSE;
@@ -1149,7 +1149,7 @@ bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 param_4)
 bool8 TrapperOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
     u32 var;
-    var = (target->info->isNotTeamMember ? 2 : 1);
+    var = (target->axObj.info->isNotTeamMember ? 2 : 1);
     sub_807FC3C(&target->pos, NUM_TRAPS, var);
     return TRUE;
 }
@@ -1159,7 +1159,7 @@ bool8 sub_805C3F8(Entity *pokemon, Entity *target, Move *move, s32 param_4)
     Item stack;
     Position posStruct = target->pos;
 
-    if(target->info->clientType != CLIENT_TYPE_NONE)
+    if(target->axObj.info->clientType != CLIENT_TYPE_NONE)
     {
         TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FF678);
         return FALSE;

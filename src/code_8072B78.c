@@ -110,14 +110,14 @@ void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
   struct unkStruct_806B7F8 local_2c;
 
   id_s32 = id;
-  entityInfo = target->info;
+  entityInfo = target->axObj.info;
   SetMessageArgument_2(gAvailablePokemonNames,entityInfo,0);
   CopyCyanMonsterNametoBuffer(gAvailablePokemonNames + 0x50,id_s32);
   file = GetSpriteData(id_s32);
   fu(entityInfo, id_s32);
   GetPokemonLevelData(&levelData,id_s32,entityInfo->level);
   entityInfo->exp = levelData.expRequired;
-  target->sprite = file;
+  target->axObj.spriteFile = file;
   sub_806BFC0(entityInfo,0);
   sub_8069E0C(target);
   sub_806CCB4(target,7);

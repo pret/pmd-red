@@ -64,7 +64,7 @@ void SetShopkeeperAggression(Entity *pokemon, Entity *target)
     {
         if(GetEntityType(pokemon) == ENTITY_MONSTER)
         {
-            if(pokemon->info->isNotTeamMember)
+            if(pokemon->axObj.info->isNotTeamMember)
             {
                 info->shopkeeper = SHOPKEEPER_MODE_ATTACK_ENEMIES;
             }
@@ -97,7 +97,7 @@ void sub_806F480(Entity *pokemon, u8 r1)
 
 u8 sub_806F4A4(Entity *pokemon, u8 type) {
 
-    EntityInfo *info = pokemon->info;
+    EntityInfo *info = pokemon->axObj.info;
     s32 index;
 
     if(MonsterIsType(pokemon, TYPE_GHOST))
@@ -666,10 +666,10 @@ void sub_806F910(void)
     {
         entity = gDungeon->teamPokemon[index];
         if (EntityExists(entity)) {
-            size = GetBodySize(entity->info->apparentID);
-            entity->unk68 = sVar6;
-            entity->info->unk167 = index;
-            entity->info->unk168 = size;
+            size = GetBodySize(entity->axObj.info->apparentID);
+            entity->axObj.unk40_maybeAnimTimer = sVar6;
+            entity->axObj.info->unk167 = index;
+            entity->axObj.info->unk168 = size;
             for (counter = 0; counter < size; counter++) {
                 if (totalSize < MAX_TEAM_BODY_SIZE) {
                     gUnknown_202EE70[totalSize] = 1;
@@ -844,7 +844,7 @@ bool8 sub_806FD18(Entity *param_1)
   EntityInfo *info;
   int index;
 
-  info = param_1->info;
+  info = param_1->axObj.info;
   iVar4 = -1;
   size = GetBodySize((int)info->apparentID);
   if (sub_806F9BC((int)info->id) != 0) {

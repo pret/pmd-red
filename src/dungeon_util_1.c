@@ -37,7 +37,7 @@ Entity *GetPartnerEntity(void)
     for(counter = 0; counter < MAX_TEAM_MEMBERS; counter++)
     {
         entity = gDungeon->teamPokemon[counter];
-        if(EntityExists(entity) && entity->info->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER)
+        if(EntityExists(entity) && entity->axObj.info->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER)
         {
             return entity;
         }
@@ -74,7 +74,7 @@ void sub_80854D4(void)
     for(index = 0; index < MAX_TEAM_MEMBERS; index++)
     {
         entity2 = stack1[index];
-        if(entity2 != NULL && entity2->info->isTeamLeader)
+        if(entity2 != NULL && entity2->axObj.info->isTeamLeader)
         {
             stack1[index] = NULL;
             stack2[counter] = entity2;
@@ -84,7 +84,7 @@ void sub_80854D4(void)
     for(index = 0; index < MAX_TEAM_MEMBERS; index++)
     {
         entity3 = stack1[index];
-        if(entity3 != NULL && entity3->info->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER)
+        if(entity3 != NULL && entity3->axObj.info->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER)
         {
             stack1[index] = NULL;
             stack2[counter] = entity3;
@@ -125,7 +125,7 @@ void sub_80855E4(DungeonCallback func)
     {
         entity = gDungeon->teamPokemon[index];
         if (EntityExists(entity)) {
-            if (entity->info->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER) {
+            if (entity->axObj.info->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER) {
                 flag = TRUE;
             }
             func(entity);
@@ -144,7 +144,7 @@ void sub_808563C(DungeonCallback func)
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
         entity = gDungeon->wildPokemon[index];
-        if ((EntityExists(entity)) && (entity->info->joinedAt.joinedAt != 0x41)) {
+        if ((EntityExists(entity)) && (entity->axObj.info->joinedAt.joinedAt != 0x41)) {
             func(entity);
         }
     }
@@ -158,7 +158,7 @@ Entity *GetEntityFromClientType(u8 entityType)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
         entity = gDungeon->allPokemon[index];
-        if ((EntityExists(entity)) && (entity->info->clientType == entityType)) return entity;
+        if ((EntityExists(entity)) && (entity->axObj.info->clientType == entityType)) return entity;
     }
     return NULL;
 }
@@ -174,7 +174,7 @@ void sub_80856E0(Entity * pokemon, s32 direction)
     EntityInfo *entityInfo;
     s32 counter;
 
-    entityInfo = pokemon->info;
+    entityInfo = pokemon->axObj.info;
     sub_80861D4(pokemon, 6, direction);
 
     for(counter = 0; counter < 5; counter++)
@@ -204,7 +204,7 @@ void sub_8085764(void)
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
         entity = gDungeon->wildPokemon[index];
-        if ((EntityExists(entity)) && (entity->info->clientType == CLIENT_TYPE_PARTNER)) {
+        if ((EntityExists(entity)) && (entity->axObj.info->clientType == CLIENT_TYPE_PARTNER)) {
             sub_8068FE0(entity,0x207,&stackEntity);
         }
     }
@@ -221,7 +221,7 @@ void sub_80857B8(void)
     {
         entity = gDungeon->allPokemon[index];
         if (EntityExists(entity)) {
-            entityInfo = entity->info;
+            entityInfo = entity->axObj.info;
             if ((gDungeon->unk4 == 0) && (gDungeon->unk2 == 0)) {
                 sub_804535C(entity, 0);
                 entityInfo->unk15C = 0;
@@ -274,7 +274,7 @@ void ShiftCameraToPosition(Position32 *posStruct, s32 cameraSteps)
 
 void SetFacingDirection(Entity *pokemon, s32 direction)
 {
-    pokemon->info->action.direction = direction & DIRECTION_MASK;
+    pokemon->axObj.info->action.direction = direction & DIRECTION_MASK;
     sub_806CE68(pokemon, direction);
 }
 
@@ -293,7 +293,7 @@ void sub_8085930(s32 direction)
             }
             else
             {
-                entity->info->action.direction = direction & DIRECTION_MASK;
+                entity->axObj.info->action.direction = direction & DIRECTION_MASK;
                 sub_806CE68(entity, direction);
             }
         }
@@ -303,7 +303,7 @@ void sub_8085930(s32 direction)
         entity = gDungeon->wildPokemon[index];
         if(EntityExists(entity))
         {
-            if(entity->info->clientType == CLIENT_TYPE_PARTNER)
+            if(entity->axObj.info->clientType == CLIENT_TYPE_PARTNER)
             {
                 if(direction >= NUM_DIRECTIONS)
                 {
@@ -311,7 +311,7 @@ void sub_8085930(s32 direction)
                 }
                 else
                 {
-                    entity->info->action.direction = direction & DIRECTION_MASK;
+                    entity->axObj.info->action.direction = direction & DIRECTION_MASK;
                     sub_806CE68(entity, direction);
                 }
             }
@@ -334,7 +334,7 @@ void sub_80859F0(s32 direction)
             }
             else
             {
-                entity->info->action.direction = direction & DIRECTION_MASK;
+                entity->axObj.info->action.direction = direction & DIRECTION_MASK;
                 sub_806CE68(entity, direction);
             }
         }
@@ -343,7 +343,7 @@ void sub_80859F0(s32 direction)
 
 bool8 IsMovingClient(Entity *pokemon)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     switch (pokemonInfo->clientType)
     {
         case CLIENT_TYPE_CLIENT:

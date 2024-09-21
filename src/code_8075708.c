@@ -31,7 +31,7 @@ void sub_8075680(void)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
         entity = gDungeon->allPokemon[index];
-        if ((EntityExists(entity)) && (info = entity->info, !info->isTeamLeader)) {
+        if ((EntityExists(entity)) && (info = entity->axObj.info, !info->isTeamLeader)) {
             targetPos = &(info->targetPos);
 
             if (targetPos->x == 0 && targetPos->y == 0)
@@ -62,7 +62,7 @@ void sub_8075708(Entity *entity)
     Entity *trap;
     EntityInfo *info;
 
-    info = entity->info;
+    info = entity->axObj.info;
     if (!EntityExists(entity)) {
         return;
     }
@@ -129,7 +129,7 @@ u32 sub_8075818(Entity *entity)
     Trap *trapData; // TODO: turn into struct when more research is done..
     u8 r1;
 
-    entityInfo = entity->info;
+    entityInfo = entity->axObj.info;
     if(EntityExists(entity))
     {
         tile = GetTileAtEntitySafe(entity);

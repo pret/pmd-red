@@ -27,7 +27,7 @@ extern char *gPtrMoveInterruptedMessage[];
 
 bool8 HasStatusAffectingActions(Entity *pokemon)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
     SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
     switch (pokemonInfo->sleep.sleep)
@@ -116,7 +116,7 @@ bool8 sub_80701A4(Entity *pokemon)
   EntityInfo * pokemonInfo;
   u8 *r7;
 
-  pokemonInfo = pokemon->info;
+  pokemonInfo = pokemon->axObj.info;
   flag = FALSE;
   SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
   SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);

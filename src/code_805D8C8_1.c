@@ -1349,7 +1349,7 @@ void sub_805E738(Entity *a0)
 {
     Tile *tile;
     s32 i, j;
-    EntityInfo *entityInfo = a0->info;
+    EntityInfo *entityInfo = a0->axObj.info;
     if (entityInfo->eyesightStatus.eyesightStatus != 1 && entityInfo->eyesightStatus.eyesightStatus != 2) {
         // What???
         for (i = 0; i < 1; i++) {
@@ -1360,7 +1360,7 @@ void sub_805E738(Entity *a0)
                 direction &= DIRECTION_MASK;
                 tile = GetTile(a0->pos.x + gAdjacentTileOffsets[direction].x, a0->pos.y + gAdjacentTileOffsets[direction].y);
                 if (tile->monster != NULL && GetEntityType(tile->monster) == ENTITY_MONSTER) {
-                    EntityInfo *tileMonsterInfo = tile->monster->info;
+                    EntityInfo *tileMonsterInfo = tile->monster->axObj.info;
                     if (CanSeeTarget(a0, tile->monster)) {
                         if (i != 0 || tileMonsterInfo->isNotTeamMember) {
                             r9 = TRUE;
@@ -1370,7 +1370,7 @@ void sub_805E738(Entity *a0)
                 }
             }
             if (r9) {
-                a0->info->action.direction = direction & DIRECTION_MASK;
+                a0->axObj.info->action.direction = direction & DIRECTION_MASK;
                 sub_806CDD4(a0, sub_806CEBC(a0), direction);
                 break;
             }
@@ -1398,7 +1398,7 @@ bool8 sub_805E874(void)
     s32 yArray[3];
     Dungeon *dungeon = gDungeon;
     Entity *leader = GetLeader();
-    s32 direction = leader->info->action.direction;
+    s32 direction = leader->axObj.info->action.direction;
     s32 x = leader->pos.x;
     s32 y = leader->pos.y;
     Tile *leaderTile = GetTile(x, y);
@@ -1604,7 +1604,7 @@ void sub_805EE30(void)
         return;
 
     tile = GetTileAtEntitySafe(leader);
-    if (IQSkillIsEnabled(leader, IQ_SUPER_MOBILE) && leader->info->transformStatus.transformStatus != STATUS_MOBILE && !HasHeldItem(leader, ITEM_MOBILE_SCARF))
+    if (IQSkillIsEnabled(leader, IQ_SUPER_MOBILE) && leader->axObj.info->transformStatus.transformStatus != STATUS_MOBILE && !HasHeldItem(leader, ITEM_MOBILE_SCARF))
         sub_804AE84(&leader->pos);
     if (tile->terrainType & TERRAIN_TYPE_STAIRS)
         gDungeon->unk1 = 1;
@@ -1668,7 +1668,7 @@ bool8 sub_805EF60(Entity *a0, EntityInfo *a1)
         return FALSE;
     if (!sub_8070BC0(a0))
         return FALSE;
-    if (r4->info->isNotTeamMember && r4->info->clientType != 1 && r4->info->shopkeeper != 1)
+    if (r4->axObj.info->isNotTeamMember && r4->axObj.info->clientType != 1 && r4->axObj.info->shopkeeper != 1)
         return FALSE;
 
     SetMonsterActionFields(&a1->action, ACTION_TALK_FIELD);
@@ -1712,8 +1712,8 @@ void sub_805F02C(void)
     s32 i;
     Entity *r7 = gDungeon->unkBC;
     Entity *leader = GetLeader();
-    EntityInfo *r8 = r7->info;
-    EntityInfo *leaderInfo = leader->info;
+    EntityInfo *r8 = r7->axObj.info;
+    EntityInfo *leaderInfo = leader->axObj.info;
 
     if (r8->isTeamLeader) {
         DisplayDungeonLoggableMessageTrue(r7, gUnknown_80F9BD8);
@@ -1962,7 +1962,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
             for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
                 Entity *teamMon = gDungeon->teamPokemon[i];
                 if (EntityExists(teamMon)) {
-                    if (teamMon->info->isTeamLeader) {
+                    if (teamMon->axObj.info->isTeamLeader) {
                         r7 = i;
                         break;
                     }
@@ -2226,7 +2226,7 @@ void DrawFieldMenu(u8 a0)
     sub_80073E0(0);
     if (a0) {
         u32 hours, minutes, seconds;
-        EntityInfo *leaderInfo = GetLeader()->info;
+        EntityInfo *leaderInfo = GetLeader()->axObj.info;
         const u8 *dungeonName = GetCurrentDungeonName();
 
         x = (136 - sub_8008ED0(dungeonName)) / 2;
@@ -2253,7 +2253,7 @@ void DrawFieldMenu(u8 a0)
         for (yLoop = 0, i = 0; i < MAX_TEAM_MEMBERS; i++) {
             Entity *teamMon = gDungeon->teamPokemon[i];
             if (EntityExists(teamMon)) {
-                EntityInfo *monInfo = teamMon->info;
+                EntityInfo *monInfo = teamMon->axObj.info;
                 SetMessageArgument(gAvailablePokemonNames, teamMon, 0);
                 gFormatData_202DE30[0] = monInfo->HP;
                 gFormatData_202DE30[1] = monInfo->maxHPStat;
@@ -2398,7 +2398,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
     u8 var_30 = 0;
     u8 var_2C = 0;
     u8 var_28 = 0;
-    EntityInfo *a0Info = a0->info;
+    EntityInfo *a0Info = a0->axObj.info;
     UnkTextStruct2_sub2 var_3C;
 
     UnkTextStruct3 var_FC =
@@ -2453,7 +2453,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
         for (i_r6 = 0; i_r6 < MAX_TEAM_MEMBERS; i_r6++) {
             Entity *teamMon = gDungeon->teamPokemon[i_r6];
             if (EntityExists(teamMon)) {
-                EntityInfo *monInfo = teamMon->info;
+                EntityInfo *monInfo = teamMon->axObj.info;
                 if (monInfo->heldItem.flags & ITEM_FLAG_EXISTS && monInfo->heldItem.flags & ITEM_FLAG_UNPAID) {
                     monInfo->heldItem.flags &= ~(ITEM_FLAG_UNPAID);
                     for (i = 0; i < sUnknown_202F258; i++) {
@@ -2673,7 +2673,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     EntityInfo *a1Info;
 
     var_94 = gUnknown_8106B6C;
-    a1Info = a1->info;
+    a1Info = a1->axObj.info;
     r10 = sub_8060800(a5, a0);
     gUnknown_202EE10.menuIndex = sUnknown_202F240;
     gUnknown_202EE10.unk1A = 0;
@@ -2774,7 +2774,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
         }
         break;
     case 3: {
-            Item *item = &a1->info->heldItem;
+            Item *item = &a1->axObj.info->heldItem;
             SetMessageArgument_2(gAvailablePokemonNames, a1Info, 0);
             PrintFormatStringOnWindow(x, 0, gUnknown_80FE940, 0, 0);
             if (item->flags & ITEM_FLAG_EXISTS) {
@@ -2788,8 +2788,9 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     default: {
             Entity *chosenTeamMember = gDungeon->teamPokemon[sUnknown_202F248[a0] - MAX_TEAM_MEMBERS];
             if (EntityExists(chosenTeamMember)) {
-                Item *item = &chosenTeamMember->info->heldItem;
-                SetMessageArgument_2(gAvailablePokemonNames, chosenTeamMember->info, 0);
+                Item *item = &chosenTeamMember->axObj.info->heldItem;
+                SetMessageArgument_2(gAvailablePokemonNames,
+                                     chosenTeamMember->axObj.info, 0);
                 PrintFormatStringOnWindow(x, 0, gUnknown_80FE940, 0, 0);
                 if (item->flags & ITEM_FLAG_EXISTS) {
                     gUnknown_202EE10.unk1A++;
@@ -2885,7 +2886,7 @@ void sub_8060900(Entity *a0)
 {
     u16 val_sub8044DC8;
     Item *item = sub_8044CC8(a0, &sUnknownActionUnk4, 0xA);
-    EntityInfo *a0Info = a0->info;
+    EntityInfo *a0Info = a0->axObj.info;
 
     gUnknown_202EE6C = 0;
     if (sUnknownActionUnk4.actionUseIndex < 144) {
@@ -2954,7 +2955,7 @@ void sub_8060900(Entity *a0)
                 for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
                     Entity *teamMon = gDungeon->teamPokemon[i];
                     if (EntityExists(teamMon)) {
-                        EntityInfo *teamMonInfo = teamMon->info;
+                        EntityInfo *teamMonInfo = teamMon->axObj.info;
                         teamMonInfo->unk157 = FALSE;
                         if (!CheckVariousConditions(teamMon)) {
                             r8 = TRUE;
@@ -3012,7 +3013,7 @@ void sub_8060900(Entity *a0)
         Entity *teamMon = gDungeon->teamPokemon[index];
         if (EntityExists(teamMon)) {
             bool32 r5, r6, r4;
-            EntityInfo *teamMonInfo = teamMon->info;
+            EntityInfo *teamMonInfo = teamMon->axObj.info;
 
             r5 = FALSE;
             if (CheckVariousConditions(teamMon))
@@ -3113,7 +3114,7 @@ s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4)
     if (!a1 && !a3) {
         for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
             Entity *teamMon = gDungeon->teamPokemon[i];
-            if (EntityExists(teamMon) && teamMon->info->heldItem.flags & ITEM_FLAG_EXISTS) {
+            if (EntityExists(teamMon) && teamMon->axObj.info->heldItem.flags & ITEM_FLAG_EXISTS) {
                 a0[count++] = i + MAX_TEAM_MEMBERS;
             }
         }
@@ -3159,7 +3160,7 @@ bool8 sub_8060E38(Entity *a0)
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         Entity *teamMon = gDungeon->teamPokemon[i];
         if (EntityExists(teamMon)) {
-            teamMon->info->unk157 = TRUE;
+            teamMon->axObj.info->unk157 = TRUE;
         }
     }
 
@@ -3234,7 +3235,7 @@ bool8 sub_8060E38(Entity *a0)
         sTeamMenuChosenId = gUnknown_202EE10.menuIndex;
         sub_806145C(&sp);
         if (r10) {
-            EntityInfo *info = a0->info;
+            EntityInfo *info = a0->axObj.info;
             SetMonsterActionFields(&info->action, 0x1B);
             info->action.unk4[0].actionUseIndex = sp.unk4[sp.unk0];
             ret = FALSE;
@@ -3255,7 +3256,7 @@ bool8 sub_8060E38(Entity *a0)
             }
             if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
                 if (sub_8044F3C(gUnknown_202EE10.menuIndex)) {
-                    sub_80615B4(&a0->info->action, &sp);
+                    sub_80615B4(&a0->axObj.info->action, &sp);
                     sub_8083D08();
                     r4 = FALSE;
                     break;
@@ -3316,7 +3317,7 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
         Entity *teamMon = gDungeon->teamPokemon[i];
         if (EntityExists(teamMon)) {
             a0->unk4[count] = i;
-            monInfo = teamMon->info;
+            monInfo = teamMon->axObj.info;
             a0->unk14[count] = monInfo->unk157;
             if (pos.x == teamMon->pos.x && pos.y == teamMon->pos.y && sTeamMenuChosenId < 0) {
                 sTeamMenuChosenId = count;
@@ -3378,7 +3379,7 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
             Entity *teamMon = gDungeon->teamPokemon[id];
             if (EntityExists(teamMon))
             {
-                EntityInfo *monInfo = teamMon->info;
+                EntityInfo *monInfo = teamMon->axObj.info;
                 s32 color = (a0->unk14[i] != 0) ? 6 : 2;
 
                 sub_8070968(gAvailablePokemonNames, monInfo, color);
@@ -3525,7 +3526,7 @@ void ShowTacticsMenu(ActionContainer *a0)
 
     SetTxtStruct(&sp);
     teamMon = gDungeon->teamPokemon[a0->unk4[0].actionUseIndex];
-    monInfo = teamMon->info;
+    monInfo = teamMon->axObj.info;
     menuIndex = 0;
     scrollFirstId = 0;
     while (1) {
