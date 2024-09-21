@@ -34,7 +34,7 @@ void sub_8083AB0(s16 param_0, Entity * target, Entity * entity)
   EntityInfo * targetEntityInfo;
   u8 *spAttPtr;
   u8 buffer [0x14];
-  unkDungeonGlobal_unk1CE98_sub *temp;
+  UnkDungeonGlobal_unk1CE98_sub *temp;
   u8 *id;
   s32 param_0_s32 = param_0;
 
@@ -96,7 +96,7 @@ void sub_8083AB0(s16 param_0, Entity * target, Entity * entity)
 
 bool8 sub_8083C24(void)
 {
-  unkDungeonGlobal_unk1CE98_sub *temp;
+  UnkDungeonGlobal_unk1CE98_sub *temp;
 
   temp = &gDungeon->unk1CE98;
 
@@ -110,7 +110,7 @@ bool8 sub_8083C24(void)
 
 bool8 sub_8083C50(void)
 {
-  unkDungeonGlobal_unk1CE98_sub *temp;
+  UnkDungeonGlobal_unk1CE98_sub *temp;
 
   temp = &gDungeon->unk1CE98;
 
@@ -124,7 +124,7 @@ bool8 sub_8083C50(void)
 
 bool8 sub_8083C88(u8 param_1)
 {
-  unkDungeonGlobal_unk1CE98_sub *temp;
+  UnkDungeonGlobal_unk1CE98_sub *temp;
 
   temp = &gDungeon->unk1CE98;
 

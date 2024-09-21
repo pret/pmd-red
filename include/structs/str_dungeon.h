@@ -47,7 +47,7 @@ typedef struct Weather
 } Weather;
 
 // size: 0x30
-typedef struct unkDungeonGlobal_unk1CE98_sub
+typedef struct UnkDungeonGlobal_unk1CE98_sub
 {
     /* 0x0 */ u8 buffer1[10];
     /* 0xA */ u8 buffer2[10];
@@ -67,7 +67,7 @@ typedef struct unkDungeonGlobal_unk1CE98_sub
     /* 0x2D */ u8 defBoost;
     /* 0x2E */ u8 spDefBoost;
     u8 unk2F; // speedBoost?
-} unkDungeonGlobal_unk1CE98_sub;
+} UnkDungeonGlobal_unk1CE98_sub;
 
 // size: 0x10
 typedef struct DungeonMusicPlayer
@@ -81,7 +81,7 @@ typedef struct DungeonMusicPlayer
 } DungeonMusicPlayer;
 
 // Size unknown?
-typedef struct unkDungeonGlobal_unk181E8_sub
+typedef struct UnkDungeonGlobal_unk181E8_sub
 {
     /* 0x181E8 */ Position cameraPos;
     /* 0x181EC */ Position cameraPosMirror;
@@ -115,7 +115,51 @@ typedef struct unkDungeonGlobal_unk181E8_sub
     u8 fill1821D;
     u8 fill1821E;
     u8 fill1821F;
-} unkDungeonGlobal_unk181E8_sub;
+} UnkDungeonGlobal_unk181E8_sub;
+
+// Sizeof: 0x1C
+typedef struct UnkDungeonGlobal_unk1C574
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
+    u8 unk8;
+    u8 unk9;
+    u8 unkA;
+    u8 unkB;
+    u8 unkC;
+    u8 unkD;
+    u8 unkE;
+    u8 unkF;
+    u8 unk10;
+    u8 unk11;
+    u8 unk12;
+    u8 unk13;
+    u8 unk14;
+    u8 unk15;
+    u8 unk16;
+    u8 unk17;
+    u8 unk18;
+    u8 unk19;
+    u8 unk1A;
+} UnkDungeonGlobal_unk1C574;
+
+typedef struct UnkDungeonGlobal_unk1C590
+{
+    s16 unk0[NUM_ITEM_CATEGORIES];
+    s16 unk18[NUMBER_OF_ITEM_IDS];
+} UnkDungeonGlobal_unk1C590;
+
+typedef struct UnkDungeonGlobal_unk1CD98
+{
+    struct PokemonStruct1 *unk0;
+    void *unk4;
+} UnkDungeonGlobal_unk1CD98;
 
 // size: 0x1CEDC
 typedef struct Dungeon
@@ -136,7 +180,8 @@ typedef struct Dungeon
     u8 unk10;
     u8 unk11;
     s16 unk12;
-    u8 fill14[0xB8 - 0x14];
+    s16 unk14;
+    u8 fill14[0xB8 - 0x16];
     Entity *unkB8;
     Entity *unkBC;
     u8 fillC0[0x13C - 0xC0];
@@ -154,7 +199,8 @@ typedef struct Dungeon
     /* 0x5C0 */ s32 unk5C0;
     /* 0x5C4 */ u8 fill5C4[0x644 - 0x5C4];
     /* 0x644 */ DungeonLocation dungeonLocation;
-    u8 fill646[0x654 - 0x648];
+    /* 0x648 */ DungeonLocation dungeonLocation2;
+    u8 fill64C[0x654 - 0x64C];
     u8 unk654;
     u8 fill655[0x65B - 0x655];
     u8 unk65B;
@@ -269,21 +315,17 @@ typedef struct Dungeon
     /* 0x17B3C */ u32 unk17B40;
     /* 0x17B44 */ OpenedFile *sprites[MONSTER_MAX];
     /* 0x181E4 */ OpenedFile *paletFile;
-    /* 0x181E8 */ unkDungeonGlobal_unk181E8_sub unk181e8;
+    /* 0x181E8 */ UnkDungeonGlobal_unk181E8_sub unk181e8;
     u8 fill18220[0x1C06C - 0x18220];
-    u32 unk1C06C; 
+    u32 unk1C06C;
     u8 fill1C070[0x1C570 - 0x1C070];
-    u8 unk1C570;
-    u8 unk1C571;
-    u8 fill1C572[0x1C578 - 0x1C572];
-    u8 unk1C578;
-    u8 fill1C579[0x1C57E - 0x1C579];
-    u8 unk1C57E;
-    u8 fill1C57F[0x1C58B - 0x1C57F];
-    u8 unk1C58B;
-    u8 fill1C58C[0x1CE98 - 0x1C58C];
-    unkDungeonGlobal_unk1CE98_sub unk1CE98; // TODO: not sure how large this is
-    u32 unk1CEC8;
+    /* 0x1C570 */ DungeonLocation unk1C570;
+    /* 0x1C574 */ UnkDungeonGlobal_unk1C574 unk1C574;
+    /* 0x1C590 */ UnkDungeonGlobal_unk1C590 unk1C590[4];
+    u16 unk1CD70[20];
+    UnkDungeonGlobal_unk1CD98 unk1CD98[32];
+    UnkDungeonGlobal_unk1CE98_sub unk1CE98; // TODO: not sure how large this is
+    u8 unk1CEC8;
     /* 0x1CECC */ DungeonMusicPlayer musPlayer;
 } Dungeon;
 
