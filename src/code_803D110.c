@@ -574,3 +574,146 @@ void ShowDungeonNameBanner(void)
     sub_803E46C(2);
 }
 
+s32 sub_803DC6C(u32 chr, s32 strWidth, s32 a2);
+
+s32 sub_803DC14(const u8 *dungName, s32 strWidth, s32 a2)
+{
+    while (*dungName != '\0') {
+        u32 currChar = *(dungName++);
+        if (currChar == '/') {
+            strWidth = 0;
+            a2 += 24;
+        }
+        else if (currChar == '#') {
+            strWidth += 8;
+        }
+        else if (currChar == ' ') {
+            strWidth += 12;
+        }
+        else {
+            if (currChar & 0x80 && *dungName != '\0') {
+                currChar = (currChar << 8) | *dungName;
+                dungName++;
+            }
+            strWidth += sub_803DC6C(currChar, strWidth, a2);
+        }
+    }
+    return a2;
+}
+
+struct UnkStruct_sub_803DC6C
+{
+    u8 *unk0;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+};
+
+struct UnkStruct_sub_803DC6C *sub_803DEC8(u32 chr);
+void sub_803DD30(u8 *a0, u32 *a1);
+
+extern const u32 gUnknown_80F6120[];
+
+s32 sub_803DC6C(u32 chr, s32 strWidth, s32 a2)
+{
+    u32 *spPtr;
+    s32 i, j, a2DivMul;
+    u32 *vramPtr;
+    const u32 *constData;
+    u32 sp[72];
+    s32 r9;
+    struct UnkStruct_sub_803DC6C *strPtr = sub_803DEC8(chr);
+
+    sub_803DD30(strPtr->unk0, sp);
+    r9 = strPtr->unk6;
+    spPtr = sp;
+
+    a2DivMul = ((a2 / 8) * 8);
+    vramPtr = (void *)(VRAM + 0x140 + (((a2DivMul - a2 / 8) * 4) + (strWidth / 8)) * 32); // Pixels?
+    vramPtr += a2 - a2DivMul;
+    constData = &gUnknown_80F6120[(strWidth - ((strWidth / 8) * 8)) * 4];
+    for (i = 0; i < 24; i++) {
+        u32 *vramPtrLoop = vramPtr;
+        for (j = 0; j < 3; j++) {
+            // Sadly cannot match it without asm :/
+            #ifdef NONMATCHING
+            u32 spVal = *spPtr;
+            #else
+            register u32 spVal asm("r2") = *spPtr;
+            #endif // NONMATCHING
+
+            if (spVal != 0) {
+                *vramPtrLoop |= ((constData[0] & spVal) << constData[2]);
+
+                vramPtrLoop += 8;
+                spVal &= constData[1];
+                spVal >>= constData[3];
+                *vramPtrLoop |= spVal;
+                vramPtrLoop -= 8;
+            }
+            spPtr++;
+            vramPtrLoop += 8;
+        }
+
+        vramPtr++;
+        a2++;
+
+        if (!(a2 & 7)) {
+            vramPtr += 216;
+        }
+    }
+
+    return r9;
+}
+
+void sub_803DD30(u8 *a0, u32 *a1)
+{
+    u8 sp[576];
+    u8 sp575[576];
+    s32 spId = 0;
+    s32 i, j = 0, k;
+    u32 currSp;
+    s32 r6;
+
+    for (i = 0; i < 576; i += 2) {
+        sp[i] = (*a0 >> 4) & 0xF;
+        sp[i+1] = *a0 & 0xF;
+        a0++;
+    }
+
+    while (j < 576) {
+        currSp = sp[spId++];
+        r6 = currSp & 7;
+        if (currSp & 8) {
+            currSp = sp[spId++];
+            for (k = 0; k < r6; k++) {
+                sp575[j] = currSp;
+                if (++j >= 576)
+                    break;
+            }
+        }
+        else {
+            for (k = 0; k < r6; k++) {
+                currSp = sp[spId++];
+                sp575[j] = currSp;
+                if (++j >= 576)
+                    break;
+            }
+        }
+        if (j >= 576)
+            break;
+    }
+
+    for (i = 0; i < 576; i += 8) {
+        u32 val = sp575[i + 7] << 0x1C;
+        val |= (sp575[i + 6] << 0x18) & 0xF000000;
+        val |= (sp575[i + 5] << 0x14) & 0xF00000;
+        val |= (sp575[i + 4] << 0x10) & 0xF0000;
+        val |= (sp575[i + 3] << 0xC) & 0xF000;
+        val |= (sp575[i + 2] << 0x8) & 0xF00;
+        val |= (sp575[i + 1] << 0x4) & 0xF0;
+        val |= (sp575[i]) & 0xF;
+        *(a1++) = val;
+    }
+}
+
