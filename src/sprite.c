@@ -34,7 +34,7 @@ UNUSED // TODO: Remove the "UNUSED" attribute after AddAxSprite is done
 #endif
 static void RegisterSpriteParts_80052BC(UnkSpriteMem *);
 
-static void AxResInitUnoriented(EntitySpriteInfo *, Dungeon_ax *, u32, u32, u32, bool8);
+static void AxResInitUnoriented(EntitySpriteInfo *, axmain *, u32, u32, u32, bool8);
 
 void InitSprites(void)
 {
@@ -903,10 +903,10 @@ void sub_800533C(ax_pose **a0, UnkSpriteMem **a1, axdata1 *a2, u16 *spriteMasks,
 
 void AxResInitFile(EntitySpriteInfo *a0, OpenedFile *a1, u32 a2, u32 a3, u32 a4, u32 spriteAnimIndex, bool8 a6)
 {
-    AxResInit(a0, (Dungeon_ax *)a1->data, a2, a3, a4, spriteAnimIndex, a6);
+    AxResInit(a0, (axmain *)a1->data, a2, a3, a4, spriteAnimIndex, a6);
 }
 
-void AxResInit(EntitySpriteInfo *a0, Dungeon_ax *a1, u32 a2, u32 direction, u32 a4, u32 spriteAnimIndex, bool8 a6)
+void AxResInit(EntitySpriteInfo *a0, axmain *a1, u32 a2, u32 direction, u32 a4, u32 spriteAnimIndex, bool8 a6)
 {
     a0->unk0 = 0x8000;
     if (a6)
@@ -922,19 +922,19 @@ void AxResInit(EntitySpriteInfo *a0, Dungeon_ax *a1, u32 a2, u32 direction, u32 
     a0->unk14 = 0;
     a0->unk18 = 0;
     a0->spriteAnimationCounter2 = 0;
-    a0->spriteBaseForDirection = a1->unk4[a2][direction];
+    a0->spriteBaseForDirection = (u32)a1->animations[a2][direction];
     a0->spriteGlobalIndex = a0->spriteBaseForDirection;
-    a0->unk34 = a1->unk0;
-    a0->unk38 = a1->unkC;
-    a0->unk30 = a1->unk10;
+    a0->unk34 = (u32)a1->poses;
+    a0->unk38 = (u32)a1->spriteData;
+    a0->unk30 = (u32)a1->palettes;
 }
 
 void AxResInitUnorientedFile(EntitySpriteInfo *a0, OpenedFile *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
 {
-    AxResInitUnoriented(a0, (Dungeon_ax *)a1->data, a2, a3, spriteAnimIndex, a5);
+    AxResInitUnoriented(a0, (axmain *)a1->data, a2, a3, spriteAnimIndex, a5);
 }
 
-static void AxResInitUnoriented(EntitySpriteInfo *a0, Dungeon_ax *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
+static void AxResInitUnoriented(EntitySpriteInfo *a0, axmain *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
 {
     a0->unk0 = 0x8000;
     if (a5)
@@ -950,9 +950,9 @@ static void AxResInitUnoriented(EntitySpriteInfo *a0, Dungeon_ax *a1, u32 a2, u3
     a0->unk14 = 0;
     a0->unk18 = 0;
     a0->spriteAnimationCounter2 = 0;
-    a0->spriteBaseForDirection = a1->unk4[a2][0];
+    a0->spriteBaseForDirection = (u32)a1->animations[a2][0];
     a0->spriteGlobalIndex = a0->spriteBaseForDirection;
-    a0->unk34 = a1->unk0;
+    a0->unk34 = (u32)a1->poses;
     a0->unk30 = 0;
 }
 
