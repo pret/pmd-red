@@ -45,8 +45,8 @@ void DoAxFrame_800558C(struct axPokemon *a0, s32 spriteX, s32 spriteY, u32 a3, u
     if (!(a0->obj.axdata.flags >> 15))
         return;
 
-    a0->obj.axdata.sub1.xPos = a0->obj.axdata.sub1.xOffset + spriteX;
-    a0->obj.axdata.sub1.yPos = a0->obj.axdata.sub1.yOffset + spriteY;
+    a0->obj.axdata.sub1.pos.x = a0->obj.axdata.sub1.offset.x + spriteX;
+    a0->obj.axdata.sub1.pos.y = a0->obj.axdata.sub1.offset.y + spriteY;
     a0->obj.axdata.sub1.paletteNum = paletteNum;
     a0->obj.axdata.sub1.unk16 = a3;
     sub_800533C(a0->obj.axdata.poseData, a0->obj.axdata.spriteData, &a0->obj.axdata.sub1, spriteMasks, !!(a0->obj.axdata.sub1.lastPoseId ^ a0->obj.axdata.sub1.poseId));
@@ -110,8 +110,8 @@ void sub_800569C(s16 *a0, struct axPokemon *a1, u8 a2)
         }
         else {
             ptr3 = ptr + (a2 * 2);
-            a0[0] = a1->obj.axdata.sub1.xOffset + ptr3[0];
-            a0[1] = a1->obj.axdata.sub1.yOffset + ptr3[1];
+            a0[0] = a1->obj.axdata.sub1.offset.x + ptr3[0];
+            a0[1] = a1->obj.axdata.sub1.offset.y + ptr3[1];
         }
     }
     else {
@@ -138,8 +138,8 @@ void sub_8005700(s16 *a0, struct axPokemon *a1)
                 a0[1] = 99;
             }
             else {
-                a0[0] = a1->obj.axdata.sub1.xOffset + ptr[i];
-                a0[1] = a1->obj.axdata.sub1.yOffset + ptr[i + 1];
+                a0[0] = a1->obj.axdata.sub1.offset.x + ptr[i];
+                a0[1] = a1->obj.axdata.sub1.offset.y + ptr[i + 1];
             }
             a0 += 2;
         }

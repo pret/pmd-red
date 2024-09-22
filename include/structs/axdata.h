@@ -2,6 +2,7 @@
 #define GUARD_AXDATA_H
 
 #include "file_system.h"
+#include "structs/str_position.h"
 
 // size: 0x8
 typedef struct UnkSpriteMem
@@ -13,12 +14,9 @@ typedef struct UnkSpriteMem
 // size: 0x20
 typedef struct axdata1
 {
-    /* 0x0 */ s16 xPos;
-    /* 0x2 */ s16 yPos;
-    /* 0x4 */ u16 xOffset;
-    /* 0x6 */ u16 yOffset;
-    /* 0x8 */ u16 xShadow;
-    /* 0xA */ u16 yShadow;
+    /* 0x0 */ Position pos;
+    /* 0x4 */ Position offset;
+    /* 0x8 */ Position shadow;
     u32 unkC;
     u32 unk10;
     /* 0x14 */ s16 vramTileOrMaybeAnimTimer;
@@ -45,10 +43,8 @@ typedef struct ax_anim
     /* 0x0 */ u8 frames;
     /* 0x1 */ u8 unkFlags;
     /* 0x2 */ s16 poseId;
-    /* 0x4 */ s16 xOffset;
-    /* 0x6 */ s16 yOffset;
-    /* 0x8 */ s16 xShadow;
-    /* 0xA */ s16 yShadow;
+    /* 0x4 */ Position offset;
+    /* 0x8 */ Position shadow;
 } ax_anim;
 
 // size: 0x3C

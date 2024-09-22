@@ -223,7 +223,7 @@ static void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, u16 *spriteM
     sprite->attrib3 = tileNum | (sprite->attrib3 & 0xFC00);
 
     x = (sprite->attrib2 & 0x1FF) - 256;
-    x += a1->xPos;
+    x += a1->pos.x;
     if (x < -64)
         return;
     if (x >= DISPLAY_WIDTH)
@@ -236,7 +236,7 @@ static void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, u16 *spriteM
     earlyMask = 0xFFF;
 
     y = (uVar9 >> 20) - 512;
-    y += a1->yPos;
+    y += a1->pos.y;
     if (y < -64)
         return;
     if (y >= DISPLAY_HEIGHT)
@@ -1002,10 +1002,10 @@ void RunAxAnimationFrame(struct axPokemon *a0)
     aData = a0->obj.axdata.activeAnimData;
     a0->obj.axdata.animFrames = aData->frames;
     a0->obj.axdata.sub1.poseId = aData->poseId;
-    a0->obj.axdata.sub1.xOffset = aData->xOffset;
-    a0->obj.axdata.sub1.yOffset = aData->yOffset;
-    a0->obj.axdata.sub1.xShadow = aData->xShadow;
-    a0->obj.axdata.sub1.yShadow = aData->yShadow;
+    a0->obj.axdata.sub1.offset.x = aData->offset.x;
+    a0->obj.axdata.sub1.offset.y = aData->offset.y;
+    a0->obj.axdata.sub1.shadow.x = aData->shadow.x;
+    a0->obj.axdata.sub1.shadow.y = aData->shadow.y;
     a0->obj.axdata.sub1.unkC = aData->unkFlags;
     a0->obj.axdata.sub1.unk10 |= aData->unkFlags;
     a0->obj.axdata.activeAnimData = aData + 1;
