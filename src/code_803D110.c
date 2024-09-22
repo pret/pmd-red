@@ -22,7 +22,7 @@ extern const char gUnknown_80F6100[]; // "banfont"
 extern struct FileArchive gDungeonFileArchive;
 extern OpenedFile *gDungeonNameBannerPalette;
 extern OpenedFile *gDungeonNameBannerFontFile;
-extern void *gDungeonNameBannerFont;
+extern s32 gDungeonNameBannerFont;
 
 struct UnkDungeonFileData
 {
@@ -533,7 +533,7 @@ void ShowDungeonNameBanner(void)
 
     gDungeonNameBannerPalette = OpenFileAndGetFileDataPtr(gUnknown_80F60F8, &gDungeonFileArchive);
     gDungeonNameBannerFontFile = OpenFileAndGetFileDataPtr(gUnknown_80F6100, &gDungeonFileArchive);
-    gDungeonNameBannerFont = ((u8**) gDungeonNameBannerFontFile->data)[1];
+    gDungeonNameBannerFont = (s32)(((u8**) gDungeonNameBannerFontFile->data)[1]);
     for (i = 0; i < 16; i++) {
         SetBGPaletteBufferColorArray(i + 224, (void*) &((u8**) gDungeonNameBannerPalette->data)[i]); // Todo: Fix when there is a better idea what to do with structs from opened files
     }
@@ -604,12 +604,11 @@ s32 sub_803DC14(const u8 *dungName, s32 strWidth, s32 a2)
 struct UnkStruct_sub_803DC6C
 {
     u8 *unk0;
-    u8 unk4;
-    u8 unk5;
+    u16 unk4;
     u8 unk6;
 };
 
-struct UnkStruct_sub_803DC6C *sub_803DEC8(u32 chr);
+struct UnkStruct_sub_803DC6C *sub_803DEC8(s32 chr);
 void sub_803DD30(u8 *a0, u32 *a1);
 
 extern const u32 gUnknown_80F6120[];
@@ -716,4 +715,75 @@ void sub_803DD30(u8 *a0, u32 *a1)
         *(a1++) = val;
     }
 }
+
+// Could be a misnomer?
+s32 CalcStringWidth(const u8 *dungName)
+{
+    s32 w = 0;
+
+    while (*dungName != '\0') {
+        u32 currChar = *(dungName++);
+        if (currChar == '#') {
+            w += 8;
+        }
+        else if (currChar == ' ') {
+            w += 12;
+        }
+        else {
+            struct UnkStruct_sub_803DC6C *strPtr;
+
+            if (currChar & 0x80 && *dungName != '\0') {
+                currChar = (currChar << 8) | *dungName;
+                dungName++;
+            }
+            strPtr = sub_803DEC8(currChar);
+            if (strPtr != NULL) {
+                w += strPtr->unk6;
+            }
+        }
+    }
+
+    return w;
+}
+
+struct UnkStruct_sub_803DC6C *sub_803DEC8(s32 chr)
+{
+    s32 r2, r4;
+    struct UnkStruct_sub_803DC6C *ret;
+    struct UnkStruct_sub_803DC6C *strPtr = *((struct UnkStruct_sub_803DC6C **) gDungeonNameBannerFontFile->data);
+    // Fakematch? Or just magic numbers which will make more sense once this file is documented?
+    if (chr > 63487 && chr < 65535)
+    {
+        s32 r2 = chr & 0xFF;
+        s32 r1 = (chr & 0xFF00) / 256;
+        r2 -= 32;
+        r1 -= 248;
+        ret = &strPtr[r1 * 224 + r2];
+    }
+    else
+    {
+        r4 = 0;
+        r2 = gDungeonNameBannerFont - 1;
+        while (r4 < r2) {
+            s32 r1 = (r4 + r2) / 2;
+            if (strPtr[r1].unk4 == chr) {
+                r4 = r1;
+                break;
+            }
+            else if (strPtr[r1].unk4 < chr) {
+                r4 = r1 + 1;
+            }
+            else {
+                r2 = r1;
+            }
+        }
+
+        ret = &strPtr[r4];
+        if (ret->unk4 != chr)
+            ret = &strPtr[1];
+
+
+    }
+    return ret;
+};
 
