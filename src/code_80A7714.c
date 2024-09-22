@@ -1,5 +1,5 @@
 #include "global.h"
-#include "axdata.h"
+#include "structs/axdata.h"
 
 extern void sub_80A68A0(u32);
 extern void sub_80A7094(struct axPokemon *, u32, u32, u32);

@@ -6,7 +6,7 @@
 #include "sprite.h"
 #include "structs/str_items.h"
 #include "structs/str_moves.h"
-#include "axdata.h"
+#include "structs/axdata.h"
 
 #include "number_util.h"
 

@@ -1,7 +1,7 @@
 #ifndef GUARD_SPRITE_H
 #define GUARD_SPRITE_H
 
-#include "axdata.h"
+#include "structs/axdata.h"
 #include "ground_sprite.h"
 #include "structs/str_position.h"
 #include "sprite_oam.h"
