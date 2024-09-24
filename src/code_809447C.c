@@ -80,7 +80,7 @@ static u8 sub_8094528(s16 moveID)
     }
 }
 
-void sub_8094558(u32 param_1,u8 *param_2,unkDungeonGlobal_unk1CE98_sub *param_3)
+void sub_8094558(u32 param_1,u8 *param_2,UnkDungeonGlobal_unk1CE98_sub *param_3)
 {
     u8 buffer [200];
     s32 x, y;

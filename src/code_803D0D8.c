@@ -46,7 +46,7 @@ u8 sub_803D110(u8 *param_1, u8 *param_2, s32 size)
         auStack_40[index1] = 0;
     }
 
-    for (index1 = 0; index1 < size; index1++) 
+    for (index1 = 0; index1 < size; index1++)
     {
         local_78[index1] = sub_803D0F0(*param_1);
         if (local_78[index1] == 0xff) {
@@ -107,7 +107,7 @@ bool8 sub_803D204(u8 *buffer,unkStruct_203B480 *param_2)
   u8 localBuffer [PASSWORD_BUFFER_SIZE];
   unkStruct_8094924 uStack_30;
   s32 index;
-  
+
     checksum = 0;
     MemoryCopy8(localBuffer,buffer,sizeof(localBuffer));
     for(index = 0; index < PASSWORD_BUFFER_SIZE; index++)
@@ -119,9 +119,9 @@ bool8 sub_803D204(u8 *buffer,unkStruct_203B480 *param_2)
         translateBuffer[index] = localBuffer[innerIndex];
     }
 
-      
+
     if (sub_803D110(translateBuffer,local_c4,sizeof(translateBuffer)) != 0) {
-        
+
         for(index = 1; index < 34; index++)
         {
           checksum += local_c4[index] + index;
@@ -242,6 +242,6 @@ void sub_803D414(u8 *buffer,WonderMail *mail)
 
 void sub_803D4AC(void)
 {
-    gDungeon->unk1C570 = 0x63;
-    gDungeon->unk1C571 = 0xFF;
+    gDungeon->unk1C570.id = 0x63;
+    gDungeon->unk1C570.floor = 0xFF;
 }
