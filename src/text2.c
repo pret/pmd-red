@@ -2862,3 +2862,78 @@ u8 *xxx_get_next_char_from_string(u8 *a1, u32 *a0)
         return a1 + 1;
     }
 }
+
+UNUSED void nullsub_165(void) {}
+UNUSED void nullsub_166(void) {}
+UNUSED void nullsub_167(void) {}
+UNUSED void nullsub_168(void) {}
+
+extern const u32 gUnknown_80B8868[];
+
+UNUSED void sub_80086C8(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5)
+{
+    u32 *r5;
+    s32 r2, r0, r1;
+    UnkTextStruct1 *strPtr = &a0[a1];
+
+    if (a2 < 0) {
+        a4 += a2;
+        a2 = 0;
+    }
+    if (a3 < 0) {
+        a5 += a3;
+        a3 = 0;
+    }
+
+    if (a4 + a2 > strPtr->unk4 * 8) {
+        a4 = (strPtr->unk4 * 8) - a2;
+    }
+    if (a3 + a5 > strPtr->unk8 * 8) {
+        a5 = (strPtr->unk8 * 8) - a3;
+    }
+
+    r2 = strPtr->unk4 * (a3 / 8);
+    r0 = 8 * (r2 + (a2 / 8));
+    r1 = a3 - ((a3 / 8) * 8);
+    r5 = &strPtr->unk18[r0 + r1];
+    while (a5 > 0) {
+        u32 *loopPtr;
+        s32 r4, r6;
+
+        loopPtr = r5;
+        r4 = a4;
+        r6 = a2;
+        if (strPtr->unk3C > r5) {
+            strPtr->unk3C = r5;
+        }
+
+        while (r4 > 0) {
+            s32 r3;
+            if (r4 < 8) {
+                r3 = r4;
+                *loopPtr &= gUnknown_80B8868[(r4 & 7) + 8];
+            }
+            else if ((r6 & 7) != 0) {
+                r3 = 8 - (r6 & 7);
+                *loopPtr &= gUnknown_80B8868[r6 & 7];
+            }
+            else {
+                r3 = 8;
+                *loopPtr = r6 & 7;
+            }
+
+            loopPtr += 8;
+            r4 -= r3;
+            r6 += r3;
+        }
+        a5--;
+        a3++;
+        if (strPtr->unk40 < r5) {
+            strPtr->unk40 = r5;
+        }
+        r5++;
+        if (!(a3 & 7)) {
+            r5 = &r5[strPtr->unk20];
+        }
+    }
+}
