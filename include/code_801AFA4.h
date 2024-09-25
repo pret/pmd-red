@@ -1,7 +1,6 @@
 #ifndef GUARD_CODE_801AFA4_H
 #define GUARD_CODE_801AFA4_H
 
-#include "global.h"
 #include "constants/move.h"
 #include "structs/menu.h"
 #include "pokemon.h"

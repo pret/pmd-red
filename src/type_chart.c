@@ -1,3 +1,4 @@
+#include "global.h"
 #include "type_chart.h"
 
 #define IMMUNE EFFECTIVENESS_IMMUNE

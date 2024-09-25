@@ -1,7 +1,7 @@
 #ifndef GUARD_MATH_H
 #define GUARD_MATH_H
 
-#include "global.h"
+#include "gba/types.h"
 
 /**
  * This type represents a signed 24.8 fixed-point number, where the 24 most
