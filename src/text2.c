@@ -2654,7 +2654,7 @@ void sub_8008274(s32 a0, const u8 *compressedData, s32 a2)
     sub_800829C(gUnknown_2027370, gUnknown_202B038[0], a0, compressedData, a2);
 }
 
-void nullsub_162() {}
+UNUSED void nullsub_162() {}
 
 void sub_800829C(UnkTextStruct1 *a0, u16 a1[32][32], s32 a2, const u8 *compressedData, u32 a4)
 {
@@ -2673,4 +2673,192 @@ void sub_800829C(UnkTextStruct1 *a0, u16 a1[32][32], s32 a2, const u8 *compresse
     strPtr->unk34 = strPtr->unk1C;
     strPtr->unk38 = strPtr->unk2C;
     strPtr->unk44 = 1;
+}
+
+void sub_8008334(u32 *r7, u32 *r12)
+{
+    s32 i;
+    u32 r2, r3;
+    u32 r4, r1;
+
+    r4 = *r7;
+    r1 = *r12;
+
+    r3 = 0;
+    r2 = 0;
+
+    for (i = 0; i < 32; i += 4) {
+        r2 <<= 4;
+        r3 <<= 4;
+        r2 |= r4 & 0xF;
+        r3 |= r1 & 0xF;
+        r4 >>= 4;
+        r1 >>= 4;
+    }
+    *r7 = r3;
+    *r12 = r2;
+}
+
+void sub_800838C(UnkTextStruct1 *a0, s32 a1, const u8 *compressedData, s32 a3);
+
+void sub_800836C(s32 a0, const u8 *compressedData, s32 a1)
+{
+    sub_800838C(gUnknown_2027370, a0, compressedData, a1);
+}
+
+UNUSED void nullsub_163(void) {}
+
+void sub_800838C(UnkTextStruct1 *a0, s32 a1, const u8 *compressedData, s32 a3)
+{
+    s32 i, j;
+    UnkTextStruct1 *strPtr = &a0[a1];
+
+    sub_8008274(a1, compressedData, a3);
+    for (i = 0; i < strPtr->unk8; i++) {
+        s32 r8 = strPtr->unk4 / 2;
+        if (strPtr->unk4 & 1)
+            r8++;
+        for (j = 0; j < r8; j++) {
+            u32 *r4, *r5;
+            s32 unk4Mul = strPtr->unk4 * i;
+
+            r4 = &strPtr->unk18[(unk4Mul + j) * 8];
+            unk4Mul--;
+            r5 = &strPtr->unk18[(unk4Mul + (strPtr->unk4 - j)) * 8];
+
+            sub_8008334(r4++, r5++);
+            sub_8008334(r4++, r5++);
+            sub_8008334(r4++, r5++);
+            sub_8008334(r4++, r5++);
+            sub_8008334(r4++, r5++);
+            sub_8008334(r4++, r5++);
+            sub_8008334(r4++, r5++);
+            sub_8008334(r4++, r5++);
+        }
+    }
+}
+
+void sub_80084A4(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 a8);
+
+UNUSED void sub_8008468(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a6)
+{
+    sub_80084A4(gUnknown_2027370, gUnknown_202B038[0], a0, a1, a2, a3, a4, a6);
+}
+
+UNUSED void nullsub_164(void) {}
+
+// Effectively unused
+void sub_80084A4(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 a8)
+{
+    s32 i, j;
+    UnkTextStruct1 *strPtr = &a0[a2];
+
+    a3 /= 8;
+    a4 /= 8;
+    a5 /= 8;
+    a6 /= 8;
+    a8 *= 4096;
+    if (a4 < strPtr->unk8) {
+        for (i = 0; i < a6; i++) {
+            s32 xMaybe = a3;
+            for (j = 0; j < a5; j++) {
+                if (xMaybe < strPtr->unk4) {
+                    a1[strPtr->unk2 + a4][strPtr->unk0 + xMaybe] &= 0xFFF;
+                    a1[strPtr->unk2 + a4][strPtr->unk0 + xMaybe] |= a8;
+                }
+                xMaybe++;
+            }
+            a4++;
+            if (a4 >= strPtr->unk8)
+                break;
+        }
+    }
+}
+
+extern const struct unkChar gUnknown_80B86A4;
+
+struct CharMapStruct
+{
+    s32 unk0;
+    struct unkChar *unk4;
+};
+extern struct CharMapStruct *gCharmaps[];
+extern s32 gCurrentCharmap;
+
+// Oddly similar to sub_803DEC8
+const struct unkChar *GetCharacter(s32 chr)
+{
+    s32 r2, r4;
+    const struct unkChar *ret;
+    const struct unkChar *strPtr = gCharmaps[gCurrentCharmap]->unk4;
+    // Fakematch? Or just magic numbers which will make more sense once this file is documented?
+    if (chr > 63487 && chr < 65535)
+    {
+        s32 r2 = chr & 0xFF;
+        s32 r1 = (chr & 0xFF00) >> 8;
+        r2 -= 32;
+        r1 -= 248;
+        ret = &strPtr[r1 * 224 + r2];
+    }
+    else
+    {
+        r4 = 0;
+        r2 = gCharmaps[gCurrentCharmap]->unk0 - 1;
+        while (r4 < r2) {
+            s32 r1 = (r4 + r2) / 2;
+            if (strPtr[r1].unk4 == chr) {
+                r4 = r1;
+                break;
+            }
+            else if (strPtr[r1].unk4 < chr) {
+                r4 = r1 + 1;
+            }
+            else {
+                r2 = r1;
+            }
+        }
+
+        ret = &strPtr[r4];
+        if (ret->unk4 != chr)
+            ret = &gUnknown_80B86A4;
+
+    }
+    return ret;
+}
+
+s32 HexDigitValue(u8 chr)
+{
+    if (chr >= '0' && chr <= '9')
+        return chr - '0';
+    else if (chr >= 'a' && chr <= 'f')
+        return (chr - 'a') + 10;
+    else
+        return 1;
+}
+
+u8 *xxx_get_next_char_from_string(u8 *a1, u32 *a0)
+{
+    s32 currChr = *a1;
+    if (currChr == 0x7E) {
+        s32 hexDigit;
+
+        a1++;
+        hexDigit = (HexDigitValue(a1[0]) << 4) + HexDigitValue(a1[1]);
+        if (*a1 != '\0') {
+            a1++;
+            if (*a1 != '\0') {
+                a1++;
+            }
+        }
+        *a0 = hexDigit;
+        return a1;
+    }
+    else if ((currChr >= 0x81 && currChr <= 0x84) || currChr == 0x87) {
+        *a0 = a1[1] | (a1[0] << 8);
+        return a1 + 2;
+    }
+    else {
+        *a0 = currChr;
+        return a1 + 1;
+    }
 }

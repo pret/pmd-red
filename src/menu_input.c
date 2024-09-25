@@ -167,7 +167,7 @@ void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 a5)
 {
     s32 iVar1;
     u32 uVar2;
-    struct unkChar *iVar3;
+    const struct unkChar *iVar3;
     s32 counter;
     s32 *piVar3;
     s32 *piVar4;
@@ -212,7 +212,7 @@ void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 a5)
 void sub_8012C60(u32 x, u32 y, u32 a2, u32 color, u32 a4)
 {
     u32 add_x;
-    struct unkChar *iVar3;
+    const struct unkChar *iVar3;
     u32 uVar2;
 
     uVar2 = ReturnIntFromChar2(a2);

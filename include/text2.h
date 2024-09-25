@@ -12,12 +12,13 @@ struct unkShiftData
     u32 shift_right;
 };
 
-// size: 0x8
+// size: 0xC
 struct unkChar
 {
     u32 *unk0;
-    s16 unk4;
+    u16 unk4;
     s16 unk6;
+    u32 fill8;
 };
 
 struct unkStruct_80B8824
@@ -42,9 +43,9 @@ void sub_8007B7C(u32, s32, s32, s32, u32);
 void sub_8007E20(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 *a5, u32 a6);
 
 // text.s
-extern struct unkChar *GetCharacter(u32);
+extern const struct unkChar *GetCharacter(s32);
 extern void InitGraphics(void);
-extern void sub_800836C(u32, u8 *, u32);
+void sub_800836C(s32 a0, const u8 *compressedData, s32 a1);
 extern void sub_800898C(void);
 extern void sub_80089AC(const UnkTextStruct2 *, UnkTextStruct2_sub *);
 extern void CallPrepareTextbox_8008C54(u32);
