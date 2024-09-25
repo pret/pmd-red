@@ -388,7 +388,7 @@ void sub_80397B4(void)
   for(index = 0; index < 12; index++)
   {
     if (sub_80023E4(gUnknown_203B3B8[index])) {
-      sub_8007E20(0,x,y,0x10,0x10,(u8 *)(*((s32*)clmkFile->data) + index * 0x80), gUnknown_203B388[index]);
+      sub_8007E20(0,x,y,0x10,0x10,(u32 *)(*((s32*)clmkFile->data) + index * 0x80), gUnknown_203B388[index]);
       x += 16;
     }
   }

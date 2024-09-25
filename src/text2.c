@@ -10,7 +10,7 @@ extern const struct unkStruct_80B8824 gUnknown_80B8824;
 extern const struct unkStruct_80B8848 gUnknown_80B8848;
 
 // text.s
-extern void sub_8007E64(UnkTextStruct1 *, u16 *, u32, u32, u32, u32, u32, u8 *, u32);
+void sub_8007E64(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 *a7, u32 a8);
 extern void PrepareTextbox_8008C6C(UnkTextStruct1 *, u32);
 
 void nullsub_129(u32, s32, s32, s32, u32);
@@ -2463,11 +2463,63 @@ void sub_8007D00(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
     "\tbx r0");
 }
 
-void sub_8007E20(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u8 *a5, u32 a6)
+void sub_8007E20(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 *a5, u32 a6)
 {
-    sub_8007E64(gUnknown_2027370, &gUnknown_202B038[0][0][0], a0, a1, a2, a3, a4, a5, a6);
+    sub_8007E64(gUnknown_2027370, gUnknown_202B038[0], a0, a1, a2, a3, a4, a5, a6);
 }
 
 UNUSED static void nullsub_160(void)
 {
+}
+
+void sub_8007E64(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 *a7, u32 a8)
+{
+    s32 i, j;
+    UnkTextStruct1 *r4 = &a0[a2];
+
+    a3 /= 8;
+    a4 /= 8;
+    a5 /= 8;
+    a6 /= 8;
+    a8 *= 4096;
+    if (a4 < r4->unk8) {
+        s32 id = (r4->unk4 * a4) + a3;
+        u32 *r8 = &r4->unk18[id * 8];
+
+        for (i = 0; i < a6; i++) {
+            s32 r6 = a3;
+            u32 *r3 = r8;
+            for (j = 0; j < a5; j++) {
+                if (r6 < r4->unk4) {
+                    if (r4->unk3C > r3) {
+                        r4->unk3C = r3;
+                    }
+                    *(r3++) = *(a7++);
+                    *(r3++) = *(a7++);
+                    *(r3++) = *(a7++);
+                    *(r3++) = *(a7++);
+                    *(r3++) = *(a7++);
+                    *(r3++) = *(a7++);
+                    *(r3++) = *(a7++);
+                    *(r3++) = *a7;
+                    if (r4->unk40 < r3) {
+                        r4->unk40 = r3;
+                    }
+                    a7++;
+                    a1[r4->unk2 + a4][r4->unk0 + r6] &= 0xFFF;
+                    a1[r4->unk2 + a4][r4->unk0 + r6] |= a8;
+                }
+                else {
+                    r3 += 8;
+                    a7 += 8;
+                }
+                r6++;
+            }
+            a4++;
+            r8 += r4->unk20;
+            r8 += 8;
+            if (a4 >= r4->unk8)
+                break;
+        }
+    }
 }

@@ -621,6 +621,6 @@ static void LoadTeamRankBadge(u32 a0, u32 a1, u32 a2)
 
     rank = GetRescueTeamRank();
     teamBadgePic = &teamBadgePic[rank * 128];
-    sub_8007E20(a0, a1, a2, 16, 16, teamBadgePic, 14);
+    sub_8007E20(a0, a1, a2, 16, 16, (void *) teamBadgePic, 14);
     CloseFile(teamBadgeFile);
 }
