@@ -1,6 +1,7 @@
 #include "global.h"
 #include "text1.h"
 #include "text2.h"
+#include "decompress.h"
 
 // data.s
 extern const u32 gUnknown_80B853C[16];
@@ -2475,51 +2476,201 @@ UNUSED static void nullsub_160(void)
 void sub_8007E64(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 *a7, u32 a8)
 {
     s32 i, j;
-    UnkTextStruct1 *r4 = &a0[a2];
+    UnkTextStruct1 *strPtr = &a0[a2];
 
     a3 /= 8;
     a4 /= 8;
     a5 /= 8;
     a6 /= 8;
     a8 *= 4096;
-    if (a4 < r4->unk8) {
-        s32 id = (r4->unk4 * a4) + a3;
-        u32 *r8 = &r4->unk18[id * 8];
+    if (a4 < strPtr->unk8) {
+        s32 id = (strPtr->unk4 * a4) + a3;
+        u32 *unk18Ptr = &strPtr->unk18[id * 8];
 
         for (i = 0; i < a6; i++) {
-            s32 r6 = a3;
-            u32 *r3 = r8;
+            s32 xMaybe = a3;
+            u32 *loopUnk18Ptr = unk18Ptr;
             for (j = 0; j < a5; j++) {
-                if (r6 < r4->unk4) {
-                    if (r4->unk3C > r3) {
-                        r4->unk3C = r3;
+                if (xMaybe < strPtr->unk4) {
+                    if (strPtr->unk3C > loopUnk18Ptr) {
+                        strPtr->unk3C = loopUnk18Ptr;
                     }
-                    *(r3++) = *(a7++);
-                    *(r3++) = *(a7++);
-                    *(r3++) = *(a7++);
-                    *(r3++) = *(a7++);
-                    *(r3++) = *(a7++);
-                    *(r3++) = *(a7++);
-                    *(r3++) = *(a7++);
-                    *(r3++) = *a7;
-                    if (r4->unk40 < r3) {
-                        r4->unk40 = r3;
+                    *(loopUnk18Ptr++) = *(a7++);
+                    *(loopUnk18Ptr++) = *(a7++);
+                    *(loopUnk18Ptr++) = *(a7++);
+                    *(loopUnk18Ptr++) = *(a7++);
+                    *(loopUnk18Ptr++) = *(a7++);
+                    *(loopUnk18Ptr++) = *(a7++);
+                    *(loopUnk18Ptr++) = *(a7++);
+                    *(loopUnk18Ptr++) = *a7;
+                    if (strPtr->unk40 < loopUnk18Ptr) {
+                        strPtr->unk40 = loopUnk18Ptr;
                     }
                     a7++;
-                    a1[r4->unk2 + a4][r4->unk0 + r6] &= 0xFFF;
-                    a1[r4->unk2 + a4][r4->unk0 + r6] |= a8;
+                    a1[strPtr->unk2 + a4][strPtr->unk0 + xMaybe] &= 0xFFF;
+                    a1[strPtr->unk2 + a4][strPtr->unk0 + xMaybe] |= a8;
                 }
                 else {
-                    r3 += 8;
+                    loopUnk18Ptr += 8;
                     a7 += 8;
                 }
-                r6++;
+                xMaybe++;
             }
             a4++;
-            r8 += r4->unk20;
-            r8 += 8;
-            if (a4 >= r4->unk8)
+            unk18Ptr += strPtr->unk20;
+            unk18Ptr += 8;
+            if (a4 >= strPtr->unk8)
                 break;
         }
     }
+}
+
+u32 sub_8007FA8(u32 a0)
+{
+    u32 r0;
+
+    r0 = (a0 >> 28)  & 0xF;
+    r0 |= (a0 >> 20) & 0xF0;
+    r0 |= (a0 >> 12) & 0xF00;
+    r0 |= (a0 >> 4)  & 0xF000;
+    r0 |= (a0 << 4)  & 0xF0000;
+    r0 |= (a0 << 12) & 0xF00000;
+    r0 |= (a0 << 20) & 0xF000000;
+    r0 |= (a0 << 28) & 0xF0000000;
+
+    return r0;
+}
+
+void sub_8008030(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 *a7, u32 a8);
+
+UNUSED void sub_8007FEC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 *a5, u32 a6)
+{
+    sub_8008030(gUnknown_2027370, gUnknown_202B038[0], a0, a1, a2, a3, a4, a5, a6);
+}
+
+void nullsub_161(void) {}
+
+// Similar to sub_8007E64
+void sub_8008030(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 *a7, u32 a8)
+{
+    s32 i, j;
+    UnkTextStruct1 *strPtr = &a0[a2];
+
+    a3 /= 8;
+    a4 /= 8;
+    a5 /= 8;
+    a6 /= 8;
+    a8 *= 4096;
+    if (a4 < strPtr->unk8) {
+        u32 *unk18Ptr = &strPtr->unk18[((strPtr->unk4 * a4) + (a3 + a5)) * 8];
+        for (i = 0; i < a6; i++) {
+            s32 xMaybe = a3 + a5;
+            u32 *loopUnk18Ptr = unk18Ptr;
+            for (j = 0; j < a5; j++) {
+                xMaybe--;
+                loopUnk18Ptr -= 8;
+                if (xMaybe < strPtr->unk4) {
+                    if (strPtr->unk3C > loopUnk18Ptr) {
+                        strPtr->unk3C = loopUnk18Ptr;
+                    }
+                    loopUnk18Ptr[0] = sub_8007FA8(*(a7++));
+                    loopUnk18Ptr[1] = sub_8007FA8(*(a7++));
+                    loopUnk18Ptr[2] = sub_8007FA8(*(a7++));
+                    loopUnk18Ptr[3] = sub_8007FA8(*(a7++));
+                    loopUnk18Ptr[4] = sub_8007FA8(*(a7++));
+                    loopUnk18Ptr[5] = sub_8007FA8(*(a7++));
+                    loopUnk18Ptr[6] = sub_8007FA8(*(a7++));
+                    loopUnk18Ptr[7] = sub_8007FA8(*(a7++));
+                    if (strPtr->unk40 < loopUnk18Ptr + 8) {
+                        strPtr->unk40 = loopUnk18Ptr + 8;
+                    }
+                    a1[strPtr->unk2 + a4][strPtr->unk0 + xMaybe] &= 0xFFF;
+                    a1[strPtr->unk2 + a4][strPtr->unk0 + xMaybe] |= a8;
+                }
+                else {
+                    a7 += 8;
+                }
+            }
+            a4++;
+            unk18Ptr += strPtr->unk20;
+            unk18Ptr += 8;
+            if (a4 >= strPtr->unk8)
+                break;
+        }
+    }
+}
+
+extern const u32 gUnknown_80B86B4[][32];
+
+// Similar to sub_8007E64
+UNUSED void sub_80081A4(s32 a0, s32 a3, s32 a4, s32 a7Id)
+{
+    s32 i, j, a5, a6;
+    UnkTextStruct1 *strPtr = &gUnknown_2027370[a0];
+    const u32 *a7 = gUnknown_80B86B4[a7Id];
+
+    a3 /= 8;
+    a4 /= 8;
+    a5 = 2;
+    a6 = 2;
+    if (a4 < strPtr->unk8) {
+        s32 id = (strPtr->unk4 * a4) + a3;
+        u32 *unk18Ptr = &strPtr->unk28[id * 8];
+
+        for (i = 0; i < a6; i++) {
+            s32 xMaybe = a3;
+            u32 *loopUnk18Ptr = unk18Ptr;
+            for (j = 0; j < a5; j++) {
+                if (xMaybe < strPtr->unk4) {
+                    *(loopUnk18Ptr++) = *(a7++);
+                    *(loopUnk18Ptr++) = *(a7++);
+                    *(loopUnk18Ptr++) = *(a7++);
+                    *(loopUnk18Ptr++) = *(a7++);
+                    *(loopUnk18Ptr++) = *(a7++);
+                    *(loopUnk18Ptr++) = *(a7++);
+                    *(loopUnk18Ptr++) = *(a7++);
+                    *(loopUnk18Ptr++) = *a7;
+                    a7++;
+                }
+                else {
+                    loopUnk18Ptr += 8;
+                    a7 += 8;
+                }
+                xMaybe++;
+            }
+            a4++;
+            unk18Ptr += strPtr->unk20;
+            unk18Ptr += 8;
+            if (a4 >= strPtr->unk8)
+                break;
+        }
+    }
+}
+
+void sub_800829C(UnkTextStruct1 *a0, u16 a1[32][32], s32 a2, const u8 *compressedData, u32 a4);
+
+void sub_8008274(s32 a0, const u8 *compressedData, s32 a2)
+{
+    sub_800829C(gUnknown_2027370, gUnknown_202B038[0], a0, compressedData, a2);
+}
+
+void nullsub_162() {}
+
+void sub_800829C(UnkTextStruct1 *a0, u16 a1[32][32], s32 a2, const u8 *compressedData, u32 a4)
+{
+    s32 i, j;
+    UnkTextStruct1 *strPtr = &a0[a2];
+
+    a4 *= 4096;
+    DecompressAT((u8 *)strPtr->unk18, (strPtr->unk4 * 32) * strPtr->unk8, compressedData);
+    for (i = 0; i < strPtr->unk8; i++) {
+        for (j = 0; j < strPtr->unk4; j++) {
+            a1[strPtr->unk2 + i][strPtr->unk0 + j] &= 0xFFF;
+            a1[strPtr->unk2 + i][strPtr->unk0 + j] |= a4;
+        }
+    }
+    strPtr->unk30 = strPtr->unk28;
+    strPtr->unk34 = strPtr->unk1C;
+    strPtr->unk38 = strPtr->unk2C;
+    strPtr->unk44 = 1;
 }
