@@ -1,8 +1,7 @@
 #include "global.h"
-#include "code_800F958.h"
+#include "dungeon_pokemon_sprites.h"
 #include "memory.h"
 
-extern DungeonPokemonSprites *gDungeonPokemonSprites;
 extern DungeonPokemonSprite *NewDungeonPokemonSprite(void);
 extern DungeonPokemonSprite* GetDungeonPokemonSprite(s32 id);
 
