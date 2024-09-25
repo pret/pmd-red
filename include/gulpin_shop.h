@@ -1,10 +1,10 @@
 #ifndef GUARD_GULPIN_SHOP_H
 #define GUARD_GULPIN_SHOP_H
 
-#include "constants/move.h"
 #include "file_system.h"
 #include "structs/menu.h"
 #include "structs/str_text.h"
+#include "structs/str_moves.h"
 
 // size: 0x18C
 typedef struct GulpinShopWork

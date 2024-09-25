@@ -1,3 +1,8 @@
+#ifndef GUARD_PELIPPER_BOARD_H
+#define GUARD_PELIPPER_BOARD_H
+
+#include "structs/menu.h"
+#include "structs/str_802C39C.h"
 
 // Guessing based off of 203B304
 struct unkStruct_203B308
@@ -36,3 +41,4 @@ enum PelipperBoardActions
     PELIPPER_BOARD_ACCEPT,
     PELIPPER_BOARD_INFO,
 };
+#endif // GUARD_PELIPPER_BOARD_H

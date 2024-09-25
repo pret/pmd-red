@@ -1,6 +1,8 @@
 #ifndef GUARD_CODE_8077274_1_H
 #define GUARD_CODE_8077274_1_H
 
+#include "structs/dungeon_entity.h"
+
 void MuzzleTarget(Entity *pokemon, Entity *target);
 void TransformStatusTarget(Entity * pokemon, Entity * target);
 void MobileStatusTarget(Entity * pokemon, Entity * target);

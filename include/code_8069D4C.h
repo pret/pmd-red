@@ -1,6 +1,8 @@
 #ifndef GUARD_CODE_8069D4C_H
 #define GUARD_CODE_8069D4C_H
 
+#include "structs/dungeon_entity.h"
+
 struct unkStruct_8069D4C
 {
     s16 id;
