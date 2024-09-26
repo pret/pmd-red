@@ -97,12 +97,12 @@ void sub_806CCB4(Entity *entity, u8 a1)
     sVar1 = entity->axObj.unk40_maybeAnimTimer;
 
     if (info->waitingStruct.waitingStatus != STATUS_DECOY && !flag)
-        AxResInitFile(&(*(struct EntitySpriteInfo *)&entity->axObj.axdata),
+        AxResInitFile(&entity->axObj.axdata,
                       entity->axObj.spriteFile, entity->axObj.unk42_animId1,
                       entity->axObj.unk44_direction1, sVar1,
                       Rand32Bit() & 3, FALSE);
     else
-        AxResInitFile(&(*(struct EntitySpriteInfo *)&entity->axObj.axdata),
+        AxResInitFile(&entity->axObj.axdata,
                       GetSpriteData(MONSTER_DECOY),
                       entity->axObj.unk42_animId1,
                       entity->axObj.unk44_direction1, sVar1, Rand32Bit() & 3,

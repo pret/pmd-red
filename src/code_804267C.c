@@ -81,7 +81,7 @@ void sub_8042730(Entity *a0, void *unused)
     sub_806CDD4(a0, 8, 8);
     for (i = 0; i < 100; i++) {
         sub_803E46C(0x51);
-        if (((*(struct EntitySpriteInfo *)&a0->axObj.axdata).unk18 & 3) != 0 || a0->axObj.unk43_animId2 != 8)
+        if ((a0->axObj.axdata.sub1.unk10 & 3) != 0 || a0->axObj.unk43_animId2 != 8)
             break;
     }
 }

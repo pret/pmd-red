@@ -66,7 +66,7 @@ typedef struct axdata
 typedef struct axmain
 {
     /* 0x0 */ ax_pose **poses;
-    /* 0x4 */ ax_anim ****animations;
+    /* 0x4 */ ax_anim ***animations;
     /* 0x8 */ u32 animCount;
     /* 0xC */ void *spriteData; // ?
     /* 0x10 */ void *palettes; // ?

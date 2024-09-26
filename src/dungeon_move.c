@@ -54,7 +54,7 @@ extern void sub_80428A0(Entity *r0);
 extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
 extern void sub_8040DA0(Entity *entity, Move *move);
 extern u16 sub_80412E0(u16 moveId, u8 weather, u8 a2);
-extern void sub_800569C(Position *, EntitySpriteInfo *, u8);
+extern void sub_800569C(Position *, axdata *, u8);
 extern u8 GetBodySize(s16 index);
 extern void sub_800EF10(u16 r0);
 extern s32 sub_800E710(s16 a0, u16 a1);
@@ -2311,7 +2311,7 @@ s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
             someRetVal = sub_800E710(entInfo->apparentID, sub_80412E0(move->id, GetApparentWeather(entity), 1));
             if (someRetVal != -1) {
                 sub_800569C(&unkSp1.unk8,
-                            &(*(struct EntitySpriteInfo *)&entity->axObj.axdata),
+                            &entity->axObj.axdata,
                             someRetVal);
             }
             else {

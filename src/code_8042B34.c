@@ -217,7 +217,7 @@ void sub_8042E98(void)
     }
 }
 
-extern void sub_800569C(Position *, EntitySpriteInfo *, u8);
+extern void sub_800569C(Position *, axdata *, u8);
 extern void sub_800EB24(s32 param_1, Position *param_2, Position *param_3, s32 param_4, s32 param_5);
 
 void sub_8042EC8(Entity *a0, s32 a1)
@@ -233,7 +233,7 @@ void sub_8042EC8(Entity *a0, s32 a1)
 
             if (strPtr->unk8 != -1) {
                 sub_800569C(&sp4,
-                            &(*(struct EntitySpriteInfo *)&a0->axObj.axdata),
+                            &a0->axObj.axdata,
                             strPtr->unk8);
             }
 

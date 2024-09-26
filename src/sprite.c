@@ -34,7 +34,7 @@ UNUSED // TODO: Remove the "UNUSED" attribute after AddAxSprite is done
 #endif
 static void RegisterSpriteParts_80052BC(UnkSpriteMem *);
 
-static void AxResInitUnoriented(EntitySpriteInfo *, axmain *, u32, u32, u32, bool8);
+static void AxResInitUnoriented(axdata *, axmain *, u32, u32, u32, bool8);
 
 void InitSprites(void)
 {
@@ -901,59 +901,59 @@ void sub_800533C(ax_pose **a0, UnkSpriteMem **a1, axdata1 *a2, u16 *spriteMasks,
     }
 }
 
-void AxResInitFile(EntitySpriteInfo *a0, OpenedFile *a1, u32 a2, u32 a3, u32 a4, u32 spriteAnimIndex, bool8 a6)
+void AxResInitFile(axdata *a0, OpenedFile *a1, u32 a2, u32 a3, u32 a4, u32 spriteAnimIndex, bool8 a6)
 {
     AxResInit(a0, (axmain *)a1->data, a2, a3, a4, spriteAnimIndex, a6);
 }
 
-void AxResInit(EntitySpriteInfo *a0, axmain *a1, u32 a2, u32 direction, u32 a4, u32 spriteAnimIndex, bool8 a6)
+void AxResInit(axdata *a0, axmain *a1, u32 a2, u32 direction, u32 a4, u32 spriteAnimIndex, bool8 a6)
 {
-    a0->unk0 = 0x8000;
+    a0->flags = 0x8000;
     if (a6)
-        a0->unk0 |= 0x1000;
+        a0->flags |= 0x1000;
 
-    a0->spriteAnimationCounter = 0;
-    a0->spriteAnimationIndex = spriteAnimIndex;
-    a0->spritePosOffset.x = 0;
-    a0->spritePosOffset.y = 0;
-    a0->unk1C = a4;
-    a0->spriteIndexForEntity = 0xFFFF;
-    a0->spriteIndexForEntity2 = 0xFFFF;
-    a0->unk14 = 0;
-    a0->unk18 = 0;
-    a0->spriteAnimationCounter2 = 0;
-    a0->spriteBaseForDirection = (u32)a1->animations[a2][direction];
-    a0->spriteGlobalIndex = a0->spriteBaseForDirection;
-    a0->unk34 = (u32)a1->poses;
-    a0->unk38 = (u32)a1->spriteData;
-    a0->unk30 = (u32)a1->palettes;
+    a0->animFrames = 0;
+    a0->animWaitFrames = spriteAnimIndex;
+    a0->sub1.offset.x = 0;
+    a0->sub1.offset.y = 0;
+    a0->sub1.vramTileOrMaybeAnimTimer = a4;
+    a0->sub1.poseId = 0xFFFF;
+    a0->sub1.lastPoseId = 0xFFFF;
+    a0->sub1.unkC = 0;
+    a0->sub1.unk10 = 0;
+    a0->totalFrames = 0;
+    a0->nextAnimData = a1->animations[a2][direction];
+    a0->activeAnimData = a0->nextAnimData;
+    a0->poseData = a1->poses;
+    a0->spriteData = a1->spriteData;
+    a0->paletteData = a1->palettes;
 }
 
-void AxResInitUnorientedFile(EntitySpriteInfo *a0, OpenedFile *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
+void AxResInitUnorientedFile(axdata *a0, OpenedFile *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
 {
     AxResInitUnoriented(a0, (axmain *)a1->data, a2, a3, spriteAnimIndex, a5);
 }
 
-static void AxResInitUnoriented(EntitySpriteInfo *a0, axmain *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
+static void AxResInitUnoriented(axdata *a0, axmain *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
 {
-    a0->unk0 = 0x8000;
+    a0->flags = 0x8000;
     if (a5)
-        a0->unk0 |= 0x1000;
+        a0->flags |= 0x1000;
 
-    a0->spriteAnimationCounter = 0;
-    a0->spriteAnimationIndex = spriteAnimIndex;
-    a0->spritePosOffset.x = 0;
-    a0->spritePosOffset.y = 0;
-    a0->unk1C = a3;
-    a0->spriteIndexForEntity = 0xFFFF;
-    a0->spriteIndexForEntity2 = 0xFFFF;
-    a0->unk14 = 0;
-    a0->unk18 = 0;
-    a0->spriteAnimationCounter2 = 0;
-    a0->spriteBaseForDirection = (u32)a1->animations[a2][0];
-    a0->spriteGlobalIndex = a0->spriteBaseForDirection;
-    a0->unk34 = (u32)a1->poses;
-    a0->unk30 = 0;
+    a0->animFrames = 0;
+    a0->animWaitFrames = spriteAnimIndex;
+    a0->sub1.offset.x = 0;
+    a0->sub1.offset.y = 0;
+    a0->sub1.vramTileOrMaybeAnimTimer = a3;
+    a0->sub1.poseId = 0xFFFF;
+    a0->sub1.lastPoseId = 0xFFFF;
+    a0->sub1.unkC = 0;
+    a0->sub1.unk10 = 0;
+    a0->totalFrames = 0;
+    a0->nextAnimData = a1->animations[a2][0];
+    a0->activeAnimData = a0->nextAnimData;
+    a0->poseData = a1->poses;
+    a0->paletteData = 0;
 }
 
 static inline s16 check_flag_for_80054BC(u16 flags) {
