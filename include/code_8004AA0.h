@@ -18,6 +18,20 @@ typedef struct unkStruct_202EE8C
 
 extern unkStruct_202EE8C gUnknown_202EE8C[32];
 
+// size: 0x4DD8
+struct UnkBgStruct
+{
+    OpenedFile *unk0[5];
+    u8 padding[0x4C4C - 0x14];
+    unkStruct_202EE8C unk4C4C[16];
+    u32 unk4DCC;
+    u32 unk4DD0;
+    /* 0x4DD4 */ s16 xoffset;
+    /* 0x4DD6 */ s16 yoffset;
+};
+
+extern struct UnkBgStruct *gUnknown_203B0E4;
+
 // size: Variable
 typedef struct unkDataFor8004AA4
 {

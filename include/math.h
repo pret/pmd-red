@@ -1,7 +1,7 @@
 #ifndef GUARD_MATH_H
 #define GUARD_MATH_H
 
-#include "global.h"
+#include "gba/types.h"
 
 /**
  * This type represents a signed 24.8 fixed-point number, where the 24 most
@@ -87,7 +87,7 @@ s24_8 s24_8_mul(s24_8 x, s24_8 y);
  *
  * @returns       The quotient `x/y` as a signed 24.8 fixed-point number.
  */
-s32 s24_8_div(s32 r0, s32 r1);
+s32 s24_8_div(s32 x, s32 y);
 
 /**
  * This function multiplies two unsigned 24.8 fixed-point numbers.

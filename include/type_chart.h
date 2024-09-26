@@ -1,7 +1,6 @@
 #ifndef GUARD_TYPE_CHART_H
 #define GUARD_TYPE_CHART_H
 
-#include "global.h"
 #include "constants/type.h"
 
 #define NUM_EFFECTIVENESS 4
