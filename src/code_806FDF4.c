@@ -174,7 +174,7 @@ s32 sub_806F62C(int param_1)
 
 void sub_806F63C(Entity *param_1)
 {
-    unkDungeonGlobal_unk181E8_sub *temp;
+    UnkDungeonGlobal_unk181E8_sub *temp;
 
     temp = &gDungeon->unk181e8;    
 
