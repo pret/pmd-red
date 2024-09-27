@@ -2,6 +2,9 @@
 #include "text1.h"
 #include "text2.h"
 #include "decompress.h"
+#include "code_8009804.h"
+#include "cpu.h"
+#include "structs/str_text.h"
 
 // data.s
 extern const u32 gUnknown_80B853C[16];
@@ -2934,6 +2937,276 @@ UNUSED void sub_80086C8(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 
         r5++;
         if (!(a3 & 7)) {
             r5 = &r5[strPtr->unk20];
+        }
+    }
+}
+
+void sub_8008818(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5);
+
+void sub_80087EC(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4)
+{
+    sub_8008818(gUnknown_2027370, a0, a1, a2, a3, a4);
+}
+
+UNUSED void nullsub_176(void) {}
+
+void sub_8008818(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5)
+{
+    s32 i, j;
+    UnkTextStruct1 *strPtr = &a0[a1];
+    s32 a2Div = a2 / 8;
+    s32 a3Div = a3 / 8;
+
+    for (i = 0; i < a5; i += 8) {
+        u32 *ptr = &strPtr->unk18[((strPtr->unk4 * a3Div) + a2Div) * 8];
+        for (j = 0; j < a4; j += 8) {
+            if (strPtr->unk3C > ptr) {
+                strPtr->unk3C = ptr;
+            }
+            *(ptr++) = 0;
+            *(ptr++) = 0;
+            *(ptr++) = 0;
+            *(ptr++) = 0;
+            *(ptr++) = 0;
+            *(ptr++) = 0;
+            *(ptr++) = 0;
+            *ptr = 0;
+            if (strPtr->unk40 < ptr) {
+                strPtr->unk40 = ptr;
+            }
+            ptr++;
+        }
+        a3Div++;
+    }
+}
+
+extern u8 gUnknown_20274A5;
+bool8 xxx_update_bg_vram(UnkTextStruct1 *a0);
+
+bool8 xxx_call_update_bg_vram(void)
+{
+    bool8 ret = FALSE;
+    if (gUnknown_20274A5 != 0) {
+        gUnknown_20274A5 = 0;
+        sub_80099C0();
+    }
+    ret = xxx_update_bg_vram(gUnknown_2027370);
+    return ret;
+}
+
+bool8 xxx_update_bg_vram(UnkTextStruct1 *a0)
+{
+    s32 i, j;
+    u32 r5;
+    bool8 ret = FALSE;
+
+    for (i = 0; i < 4; i++) {
+        UnkTextStruct1 *strPtr = &a0[i];
+        if (strPtr->unk4 == 0)
+            continue;
+        r5 = strPtr->unk38;
+        if (r5 == 0)
+            continue;
+
+        if (strPtr->unk45) {
+            u32 *r2, *r1;
+
+            CpuCopy(strPtr->unk28, strPtr->unk18, 0xD00);
+            // The reason for void casts is because we want to add 0xD00/r5 directly to pointers. Because pointers are u32, without the casts, it would multiply the value by 4.
+            r2 = (void *)(strPtr->unk18) + 0xD00;
+            r1 = (void *)(strPtr->unk28) + 0xD00;
+            for (j = 0; j < strPtr->unk4; j++) {
+                *(r1++) = *(r2++);
+                *(r1++) = *(r2++);
+                *(r1++) = *(r2++);
+                *(r1++) = *(r2++);
+                *(r1++) = *(r2++);
+                *(r1++) = 0xDDDDDDDD;
+                *(r1++) = 0xEEEEEEEE;
+                *(r1++) = 0xFFFFFFFF;
+                r2 += 3;
+            }
+            strPtr->unk38 = 0;
+        }
+        else {
+            CpuCopy(strPtr->unk30, strPtr->unk34, r5);
+            strPtr->unk34 += (r5 / 4);
+            strPtr->unk30 = (void *)(strPtr->unk30) + r5;
+            strPtr->unk38 -= r5;
+        }
+
+        if (strPtr->unk38 == 0) {
+            strPtr->unk44 = 0;
+        }
+        ret = TRUE;
+    }
+
+    return ret;
+}
+
+// Todo fix gUnknown_3000E94 being accessed as s16/u8
+extern s16 gUnknown_3000E94[];
+
+void sub_800898C(void)
+{
+    s32 i;
+
+    for (i = 0; i < 161; i++) {
+        gUnknown_3000E94[i] = 0xF0F0;
+    }
+}
+
+void sub_80089AC(const UnkTextStruct2 *r4, UnkTextStruct2_sub *r5_Str)
+{
+    u8 *r6;
+
+    if (r4->unk0 & 0x40)
+        return;
+
+    r6 = (void*) &gUnknown_3000E94;
+    if (r4->unk4 == 1) {
+        s32 r12 = (r4->unk8.unk0.separate.unk0 + r5_Str->unk0.separate.unk0) * 8;
+        s32 r5 = (r4->unk8.unk0.separate.unk2 + r5_Str->unk0.separate.unk2) * 8;
+        s32 r7 = (r4->unk8.unk0.separate.unk0 + r5_Str->unk0.separate.unk0 + r4->unkC) * 8;
+        s32 r2 = (r4->unk8.unk0.separate.unk2 + r5_Str->unk0.separate.unk2 + r4->unkE) * 8;
+        if (r4->unkE != 0) {
+            if (r5 < 0)
+                r5 = 0;
+            if (r2 < 0)
+                r2 = 0;
+            if (r5 > 160)
+                r5 = 160;
+            if (r2 > 160)
+                r2 = 160;
+            while (r5 < r2) {
+                s32 id = r5 * 2;
+                if (r6[id] == 240 && r6[id + 1] == 240) {
+                    r6[id++] = r7;
+                    r6[id] = r12;
+                }
+                else {
+                    if (r6[id] < r7) {
+                        r6[id] = r7;
+                    }
+                    id++;
+                    if (r6[id] > r12) {
+                        r6[id] = r12;
+                    }
+                }
+                r5++;
+            }
+        }
+    }
+    else if (r4->unk4 == 6) {
+        s32 i;
+        s32 r9 = ((r4->unk8.unk0.separate.unk0 + r5_Str->unk0.separate.unk0) * 8) - 5;
+        s32 r5 = ((r4->unk8.unk0.separate.unk2 + r5_Str->unk0.separate.unk2) * 8) - 4;
+        s32 var_24 = ((r4->unk8.unk0.separate.unk0 + r5_Str->unk0.separate.unk0 + r4->unkC) * 8) + 5;
+        s32 r8 = ((r4->unk8.unk0.separate.unk2 + r5_Str->unk0.separate.unk2 + r4->unkE) * 8) + 5;
+        s32 r12 = ((r4->unk8.unk0.separate.unk0 + r5_Str->unk0.separate.unk0) * 8) + 3;
+        const UnkTextStruct2_sub2 *r2 = r4->unk14;
+        s32 tmp = r2->f2 - 1;
+        s32 r10 = (((tmp + r2->f0 + 2) * 8) + r12) - 4;
+        s32 r4 = r9 + ((r2->f1 + 1) * 8);
+        s32 r7 = (r4 + ((r2->f2 + 2) * 8)) - 4;
+
+        if (r5 < 0)
+            r5 = 0;
+        if (r8 < 0)
+            r8 = 0;
+        if (r5 > 160)
+            r5 = 160;
+        if (r8 > 160)
+            r8 = 160;
+
+        for (i = 0; i < 4; i++) {
+            s32 id = r5 * 2;
+            if (r6[id] == 240 && r6[id + 1] == 240) {
+                r6[id++] = r7;
+                r6[id] = r4;
+            }
+            else {
+                if (r6[id] < r7) {
+                    r6[id] = r7;
+                }
+                id++;
+                if (r6[id] > r4) {
+                    r6[id] = r4;
+                }
+            }
+            r5++;
+        }
+        for (i = 0; i < 8; i++) {
+            s32 id = r5 * 2;
+            if (r6[id] == 240 && r6[id + 1] == 240) {
+                r6[id++] = r10;
+                r6[id] = r12;
+            }
+            else {
+                if (r6[id] < r10) {
+                    r6[id] = r10;
+                }
+                id++;
+                if (r6[id] > r12) {
+                    r6[id] = r12;
+                }
+            }
+            r5++;
+        }
+
+        while (r5 < r8) {
+            s32 id = r5 * 2;
+            if (r6[id] == 240 && r6[id + 1] == 240) {
+                r6[id++] = var_24;
+                r6[id] = r9;
+            }
+            else {
+                if (r6[id] < var_24) {
+                    r6[id] = var_24;
+                }
+                id++;
+                if (r6[id] > r9) {
+                    r6[id] = r9;
+                }
+            }
+            r5++;
+        }
+    }
+    else {
+        s32 r8 = ((r4->unk8.unk0.separate.unk0 + r5_Str->unk0.separate.unk0) * 8) - 5;
+        s32 r3 = ((r4->unk8.unk0.separate.unk2 + r5_Str->unk0.separate.unk2) * 8) - 5;
+        s32 r12 = ((r4->unk8.unk0.separate.unk0 + r5_Str->unk0.separate.unk0 + r4->unkC) * 8) + 5;
+        s32 r5 = ((r4->unk8.unk0.separate.unk2 + r5_Str->unk0.separate.unk2 + r4->unkE) * 8) + 5;
+        if (r4->unkE != 0) {
+            if (r4->unk4 == 0) {
+                r3 += 8;
+                r5 = ((r4->unk8.unk0.separate.unk2 + r5_Str->unk0.separate.unk2 + r4->unkE) * 8) - 3;
+            }
+            if (r3 < 0)
+                r3 = 0;
+            if (r5 < 0)
+                r5 = 0;
+            if (r3 > 160)
+                r3 = 160;
+            if (r5 > 160)
+                r5 = 160;
+            while (r3 < r5) {
+                s32 id = r3 * 2;
+                if (r6[id] == 240 && r6[id + 1] == 240) {
+                    r6[id++] = r12;
+                    r6[id] = r8;
+                }
+                else {
+                    if (r6[id] < r12) {
+                        r6[id] = r12;
+                    }
+                    id++;
+                    if (r6[id] > r8) {
+                        r6[id] = r8;
+                    }
+                }
+                r3++;
+            }
         }
     }
 }
