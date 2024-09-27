@@ -35,7 +35,7 @@ u32 sub_8057144(Entity * pokemon)
     {
         Entity *dungeonMon = gDungeon->allPokemon[i];
         if (EntityExists(dungeonMon)) {
-            Move *moves = dungeonMon->info->moves;
+            Move *moves = dungeonMon->axObj.info->moves;
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 if (moves[j].moveFlags & MOVE_FLAG_EXISTS
@@ -62,7 +62,7 @@ bool8 sub_80571F0(Entity * pokemon, Move *move)
     s32 tileset;
     EntityInfo *entityInfo;
 
-    entityInfo = pokemon->info;
+    entityInfo = pokemon->axObj.info;
 
     if (entityInfo->unkFF == 1) {
         moveID = move->id;
@@ -98,8 +98,8 @@ bool8 sub_805727C(Entity * pokemon, Entity * target, s32 chance)
 {
     bool8 uVar2;
     if (!sub_8044B28() && EntityExists(pokemon) && EntityExists(target) && 
-        (target->info->unk158 != 0) &&
-        (target->info->HP != 0)) {
+        (target->axObj.info->unk158 != 0) &&
+        (target->axObj.info->HP != 0)) {
         if (chance != 0) {
             if (HasAbility(pokemon, ABILITY_SERENE_GRACE)) {
                 uVar2 = DungeonRandOutcome_2(chance * 2);
@@ -140,7 +140,7 @@ bool8 sub_8057308(Entity *pokemon, s32 chance)
 
 bool8 CanAIUseMove(Entity *pokemon, s32 moveIndex, bool8 hasPPChecker)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     Move *move = &pokemonInfo->moves[moveIndex];
     s32 i;
     if (!(move->moveFlags & MOVE_FLAG_EXISTS))
@@ -183,7 +183,7 @@ bool8 CanAIUseMove(Entity *pokemon, s32 moveIndex, bool8 hasPPChecker)
 
 bool8 CanMonsterUseMove(Entity *pokemon, Move *move, bool8 hasPPChecker)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     if (move->id == MOVE_REGULAR_ATTACK)
     {
         return TRUE;
@@ -224,7 +224,7 @@ bool8 sub_805744C(Entity * pokemon, Move *move, bool8 param_3)
 {
   EntityInfo *entityInfo;
   
-  entityInfo = pokemon->info;
+  entityInfo = pokemon->axObj.info;
   if (move->id != MOVE_REGULAR_ATTACK) {
     if (((move->moveFlags & MOVE_FLAG_DISABLED)) || ((move->moveFlags2 & MOVE_FLAG_EXISTS))) {
         return FALSE;

@@ -7,7 +7,7 @@ u32 sub_8069D18(Position *pos,Entity *entity)
 {
     EntityInfo *info;
 
-    info = entity->info;
+    info = entity->axObj.info;
 
     pos->x = (entity->pos).x + gAdjacentTileOffsets[(info->action).direction].x;
     pos->y = (entity->pos).y + gAdjacentTileOffsets[(info->action).direction].y;
@@ -19,7 +19,7 @@ void sub_8069D4C(struct unkStruct_8069D4C *r0, Entity *target)
     EntityInfo *info;
     LevelData leveldata;
 
-    info = target->info;
+    info = target->axObj.info;
 
     r0->id = info->id;
     r0->pos = target->pos;

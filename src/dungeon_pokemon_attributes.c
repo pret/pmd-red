@@ -28,7 +28,7 @@ extern void sub_80522F4(Entity *r1, Entity *r2, u32);
 
 bool8 HasSafeguardStatus(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
-  if (target->info->protection.protectionStatus == STATUS_SAFEGUARD) {
+  if (target->axObj.info->protection.protectionStatus == STATUS_SAFEGUARD) {
     if (displayMessage) {
       SetMessageArgument(gAvailablePokemonNames,target,0);
       sub_80522F4(pokemon,target,gUnknown_80FC2FC);
@@ -40,7 +40,7 @@ bool8 HasSafeguardStatus(Entity * pokemon, Entity * target, bool8 displayMessage
 
 bool8 sub_8071728(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
-  if (target->info->protection.protectionStatus == STATUS_MIST) {
+  if (target->axObj.info->protection.protectionStatus == STATUS_MIST) {
     if (displayMessage) {
       SetMessageArgument(gAvailablePokemonNames, target, 0);
       sub_80522F4(pokemon, target, gUnknown_80FC31C);
@@ -64,7 +64,7 @@ bool8 sub_80717A4(Entity *pokemon, u16 moveID)
   EntityInfo * entityInfo;
   s32 index;
 
-  entityInfo = pokemon->info;
+  entityInfo = pokemon->axObj.info;
   if ((entityInfo->sleep.sleep != STATUS_SLEEP) && (entityInfo->sleep.sleep != STATUS_NAPPING) && (entityInfo->sleep.sleep != STATUS_NIGHTMARE)) {
       return FALSE;
   }
@@ -98,7 +98,7 @@ bool8 HasAbility(Entity *pokemon, u8 ability)
     }
     else
     {
-        EntityInfo *pokemonInfo = pokemon->info;
+        EntityInfo *pokemonInfo = pokemon->axObj.info;
         if (pokemonInfo->abilities[0] == ability || pokemonInfo->abilities[1] == ability)
         {
             return TRUE;
@@ -109,7 +109,7 @@ bool8 HasAbility(Entity *pokemon, u8 ability)
 
 bool8 MonsterIsType(Entity *pokemon, u8 type)
 {
-    EntityInfo *pokemonInfo = pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemonInfo = pokemon->axObj.info;
     if (type == TYPE_NONE)
     {
         return FALSE;
@@ -127,7 +127,7 @@ bool8 MonsterIsType(Entity *pokemon, u8 type)
 
 bool8 CanSeeInvisibleMonsters(Entity *pokemon)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     if (pokemonInfo->eyesightStatus.eyesightStatus != STATUS_EYEDROPS)
     {
         if (!HasHeldItem(pokemon, ITEM_GOGGLE_SPECS))
@@ -141,7 +141,7 @@ bool8 CanSeeInvisibleMonsters(Entity *pokemon)
 
 bool8 HasTactic(Entity *pokemon, u8 tactic)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     if (pokemonInfo->isTeamLeader)
     {
         bool8 isGoTheOtherWay = tactic == TACTIC_GO_THE_OTHER_WAY;
@@ -152,12 +152,13 @@ bool8 HasTactic(Entity *pokemon, u8 tactic)
 
 bool8 IQSkillIsEnabled(Entity *pokemon, u8 IQSkill)
 {
-    return IsIQSkillSet(pokemon->info->IQSkillFlags, 1 << IQSkill);
+    return IsIQSkillSet(pokemon->axObj.info->IQSkillFlags, 1 << IQSkill);
 }
 
 bool8 IQSkillPairIsEnabled(Entity *pokemon, u8 IQSkill1, u8 IQSkill2)
 {
-    return IsIQSkillSet(pokemon->info->IQSkillFlags, 1 << IQSkill1 | 1 << IQSkill2);
+    return IsIQSkillSet(pokemon->axObj.info->IQSkillFlags,
+                        1 << IQSkill1 | 1 << IQSkill2);
 }
 
 void LoadIQSkills(Entity *pokemon)
@@ -166,7 +167,7 @@ void LoadIQSkills(Entity *pokemon)
   s32 IQSkill;
   EntityInfo *pokemonInfo;
 
-  pokemonInfo = pokemon->info;
+  pokemonInfo = pokemon->axObj.info;
   if (pokemonInfo->isNotTeamMember) {
     iVar2 = pokemonInfo->IQSkillFlags;
     SetIQSkill(iVar2, IQ_STATUS_CHECKER);
@@ -198,7 +199,7 @@ bool8 CanSeeTeammate(Entity * pokemon)
   Entity *teamMember;
   s32 memberIdx;
 
-  if (pokemon->info->isNotTeamMember) {
+  if (pokemon->axObj.info->isNotTeamMember) {
       return FALSE;
   }
   else
@@ -218,7 +219,7 @@ bool8 CanSeeTeammate(Entity * pokemon)
 u8 GetMoveTypeForMonster(Entity *pokemon, Move *pokeMove)
 {
     if (pokeMove->id == MOVE_HIDDEN_POWER)
-        return pokemon->info->hiddenPower.hiddenPowerType;
+        return pokemon->axObj.info->hiddenPower.hiddenPowerType;
     else
         return GetMoveType(pokeMove);
 }
@@ -226,7 +227,7 @@ u8 GetMoveTypeForMonster(Entity *pokemon, Move *pokeMove)
 s32 GetMovePower(Entity *pokemon, Move *pokeMove)
 {
     if(pokeMove->id == MOVE_HIDDEN_POWER)
-        return (pokemon->info->hiddenPower.hiddenPowerBasePower + pokeMove->ginseng);
+        return (pokemon->axObj.info->hiddenPower.hiddenPowerBasePower + pokeMove->ginseng);
     else
         return (GetMoveBasePower(pokeMove) + pokeMove->ginseng);
 }
@@ -252,7 +253,7 @@ bool8 sub_8071A8C(Entity *pokemon)
     EntityInfo *pokemonInfo;
     if(EntityExists(pokemon))
     {
-        pokemonInfo = pokemon->info;
+        pokemonInfo = pokemon->axObj.info;
         if(pokemonInfo->clientType != CLIENT_TYPE_CLIENT)
         {
             if(!sub_8071A8C_sub(pokemonInfo))

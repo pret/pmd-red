@@ -73,7 +73,7 @@ u8 sub_80703A0(Entity *pokemon, Position *pos)
     u16 tileFlags;
     EntityInfo *entityInfo;
 
-    entityInfo = pokemon->info;
+    entityInfo = pokemon->axObj.info;
     tile = GetTile(pos->x,pos->y);
     if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
         (DUNGEON_MAX_SIZE_Y > pos->y) && (tile->monster == NULL) && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) {
@@ -106,7 +106,7 @@ u8 sub_80703A0(Entity *pokemon, Position *pos)
 
 bool8 CanCrossWalls(Entity *pokemon)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     EntityInfo *pokemonInfo2 = pokemonInfo;
     if (pokemonInfo2->transformStatus.transformStatus == STATUS_MOBILE)
     {
@@ -130,7 +130,7 @@ bool8 sub_807049C(Entity *pokemon, Position *pos)
     u16 tileFlags;
     EntityInfo *entityInfo;
 
-    entityInfo = pokemon->info;
+    entityInfo = pokemon->axObj.info;
     tile = GetTile(pos->x, pos->y);
     if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
         (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) &&
@@ -177,7 +177,7 @@ bool8 sub_8070564(Entity *pokemon, Position *pos)
     s32 crossableTerrain2;
 #endif
 
-    entityInfo = pokemon->info;
+    entityInfo = pokemon->axObj.info;
     tile = GetTile(pos->x, pos->y);
     if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
         (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) &&
@@ -214,7 +214,7 @@ bool8 sub_80705F0(Entity *pokemon, Position *pos)
     u16 tileFlags;
     EntityInfo *entityInfo;
 
-    entityInfo = pokemon->info;
+    entityInfo = pokemon->axObj.info;
     tile = GetTile(pos->x, pos->y);
     if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
         (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) &&
@@ -252,11 +252,11 @@ bool8 sub_80706A4(Entity *pokemon, Position *pos)
     u16 tileFlags;
     EntityInfo *entityInfo;
 
-    entityInfo = pokemon->info;
+    entityInfo = pokemon->axObj.info;
     tile = GetTile(pos->x, pos->y);
     if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
         (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) &&
-        ((tile->monster == NULL) || ((GetEntityType(tile->monster) == ENTITY_MONSTER) && (tile->monster->info == entityInfo)))) {
+        ((tile->monster == NULL) || ((GetEntityType(tile->monster) == ENTITY_MONSTER) && (tile->monster->axObj.info == entityInfo)))) {
         if (IsCurrentFixedRoomBossFight() || (entityInfo->transformStatus.transformStatus != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
             crossableTerrain = GetCrossableTerrain(entityInfo->id);
             tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
@@ -291,7 +291,7 @@ s32 CalcSpeedStage(Entity *pokemon)
   s32 speed;
   EntityInfo * entityInfo;
 
-  entityInfo = pokemon->info;
+  entityInfo = pokemon->axObj.info;
   speed = 0;
 
   for(index = 0; index < NUM_SPEED_COUNTERS; index++)

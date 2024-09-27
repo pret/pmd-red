@@ -45,7 +45,7 @@ void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s16 param_4,s32 para
   param_4_s32 = param_4;
 
   if (EntityExists(target)) {
-    targetInfo = target->info;
+    targetInfo = target->axObj.info;
     InitPokemonMove(&move, MOVE_REGULAR_ATTACK);
     if (!sub_80571F0(target,&move)) {
       if (!targetInfo->isNotTeamMember) {
@@ -98,7 +98,7 @@ void sub_807E254(Entity *pokemon,Entity *target)
     sub_804535C(target,NULL);
 
     if (EntityExists(pokemon)) {
-      if (pokemon->info->isTeamLeader) {
+      if (pokemon->axObj.info->isTeamLeader) {
         sub_804AC20(&pokemon->pos);
         sub_807EC28(FALSE);
       }
@@ -107,7 +107,7 @@ void sub_807E254(Entity *pokemon,Entity *target)
     }
 
     if (EntityExists(target)) {
-      if (target->info->isTeamLeader) {
+      if (target->axObj.info->isTeamLeader) {
         sub_804AC20(&target->pos);
         sub_807EC28(FALSE);
       }

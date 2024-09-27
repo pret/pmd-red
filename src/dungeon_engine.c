@@ -110,7 +110,7 @@ static bool8 xxx_dungeon_80442D0(bool8 param_1)
     }
     else
     {
-      if (entity->info->attacking) {
+      if (entity->axObj.info->attacking) {
           return FALSE;
       }
       else
@@ -127,7 +127,7 @@ static bool8 xxx_dungeon_80442D0(bool8 param_1)
                 (gDungeon->unk673 != 0)))) {
                 sub_803E46C(0xc);
             }
-            entity->info->speedStageChanged = FALSE;
+            entity->axObj.info->speedStageChanged = FALSE;
             if (sub_8044B28()) return FALSE;
             gDungeon->unkB8 = entity;
             gDungeon->unkBC = 0;
@@ -147,9 +147,9 @@ static bool8 xxx_dungeon_80442D0(bool8 param_1)
             sub_8086AC0();
             sub_8043ED0(0);
             if (sub_8044B28()) break;
-            entityInfo = entity->info;
+            entityInfo = entity->axObj.info;
             if ((entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)) {
-                entity->info->flags = (entityInfo->flags & ~(MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)) | MOVEMENT_FLAG_UNK_14;
+                entity->axObj.info->flags = (entityInfo->flags & ~(MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)) | MOVEMENT_FLAG_UNK_14;
             }
             if (sub_8044B28() ) break;
             sub_8044454();
@@ -160,7 +160,7 @@ static bool8 xxx_dungeon_80442D0(bool8 param_1)
                 param_1 = TRUE;
             }
             else {
-                if (!entity->info->speedStageChanged) break;
+                if (!entity->axObj.info->speedStageChanged) break;
                 gDungeon->fractionalTurn = 0;
             }
           }
@@ -183,7 +183,7 @@ static void sub_8044454(void)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
       entity = gDungeon->allPokemon[index];
-      if ((EntityExists(entity)) && (entityInfo = entity->info, (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
+      if ((EntityExists(entity)) && (entityInfo = entity->axObj.info, (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
         if (sub_8044B28()) break;
         TickStatusHeal(entity);
         if (EntityExists(entity)) {
@@ -211,7 +211,7 @@ void sub_80444F4(Entity *pokemon)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
       entity = gDungeon->allPokemon[index];
-      if ((EntityExists(entity)) && (pokemon != entity) && (entityInfo = entity->info, (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
+      if ((EntityExists(entity)) && (pokemon != entity) && (entityInfo = entity->axObj.info, (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
         if (sub_8044B28()) break;
         RunMonsterAI(entity, 0);
         sub_8072CF4(entity);

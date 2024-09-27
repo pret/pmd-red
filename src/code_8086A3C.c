@@ -64,14 +64,14 @@ extern const u8 gUnknown_8100D3C[];
 
 void sub_8086A3C(Entity *pokemon)
 {
-    pokemon->info->unk15C = 1;
-    pokemon->info->unk15E = 1;
+    pokemon->axObj.info->unk15C = 1;
+    pokemon->axObj.info->unk15E = 1;
 }
 
 void sub_8086A54(Entity *pokemon)
 {
-    pokemon->info->unk15C = 1;
-    pokemon->info->unk15E = 0;
+    pokemon->axObj.info->unk15C = 1;
+    pokemon->axObj.info->unk15E = 0;
 }
 
 void SetupBossFightHP(Entity *pokemon, s32 newHP, u16 songIndex)
@@ -81,8 +81,8 @@ void SetupBossFightHP(Entity *pokemon, s32 newHP, u16 songIndex)
   EntityInfo *entityInfo;
   EntityInfo *enityData_1;
 
-  entityInfo = pokemon->info;
-  enityData_1 = pokemon->info;
+  entityInfo = pokemon->axObj.info;
+  enityData_1 = pokemon->axObj.info;
 
   entityInfo->bossFlag = TRUE;
 
@@ -133,7 +133,7 @@ void sub_8086B14(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   sub_8086A3C(SkarmoryEntity);
-  DiglettEntity->info->unk15C = 1;
+  DiglettEntity->axObj.info->unk15C = 1;
   sub_8085860(LeaderEntity->pos.x,LeaderEntity->pos.y - 2);
   CopyMonsterNametoBuffer(gUnknown_202E038,MONSTER_DIGLETT);
   CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_SKARMORY);
@@ -196,7 +196,7 @@ void SkarmoryPreFightDialogue(void)
   ShiftCameraToPosition(&pos2,0x30);
   DisplayDungeonDialogue(gSkarmoryPreFightDialogue_2);
   sub_803E708(10,0x46);
-  DiglettEntity->info->unk15D = 1;
+  DiglettEntity->axObj.info->unk15D = 1;
   ShiftCameraToPosition(&pos1,0x30);
   DisplayDungeonDialogue(gSkarmoryPreFightDialogue_3); // Diglett: ...I...\nI'm scared.
   sub_803E708(10,0x46);
@@ -314,7 +314,7 @@ void sub_8086F54(u8 param_1, u8 param_2)
     for(index = 0; index < 0x10; index++)
     {
       entity = gDungeon->wildPokemon[index];
-      if ((EntityExists(entity)) && (entity->info->clientType != param_1)) {
+      if ((EntityExists(entity)) && (entity->axObj.info->clientType != param_1)) {
         return;
       }
     }
@@ -418,16 +418,16 @@ void sub_8087144(void)
     sub_8086A54(iVar3);
     sub_8086A54(iVar4);
     sub_8085B4C(auStack_4c,puStack_64,pEStack_58,3);
-    iVar2->info->unk15F = 1;
-    iVar3->info->unk15F = 1;
-    iVar4->info->unk15F = 1;
+    iVar2->axObj.info->unk15F = 1;
+    iVar3->axObj.info->unk15F = 1;
+    iVar4->axObj.info->unk15F = 1;
     while( TRUE ) {
         if (!sub_8085B80(auStack_4c)) break;
         sub_803E46C(0x46);
     }
-    iVar2->info->unk15F = 0;
-    iVar3->info->unk15F = 0;
-    iVar4->info->unk15F = 0;
+    iVar2->axObj.info->unk15F = 0;
+    iVar3->axObj.info->unk15F = 0;
+    iVar4->axObj.info->unk15F = 0;
 }
 
 void sub_8087230(void)

@@ -136,7 +136,7 @@ void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp)
   s32 expDiff;
   EntityInfo *info;
 
-  info = target->info;
+  info = target->axObj.info;
   if (info->level != 100) {
     if (!IsClientOrTeamBase(info->joinedAt.joinedAt)) {
       newExp = info->exp + exp;

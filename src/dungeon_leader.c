@@ -14,7 +14,7 @@ Entity* GetLeader(void)
         for (i = 0; i < MAX_TEAM_MEMBERS; i++)
         {
             Entity *currentPokemon = gDungeon->teamPokemon[i];
-            if (EntityExists(currentPokemon) && currentPokemon->info->isTeamLeader)
+            if (EntityExists(currentPokemon) && currentPokemon->axObj.info->isTeamLeader)
             {
                 gLeaderPointer = currentPokemon;
                 return currentPokemon;
@@ -27,5 +27,5 @@ Entity* GetLeader(void)
 
 EntityInfo* GetLeaderInfo(void)
 {
-    return GetLeader()->info;
+    return GetLeader()->axObj.info;
 }

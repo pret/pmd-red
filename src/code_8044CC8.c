@@ -41,13 +41,13 @@ Item * sub_8044CC8(Entity *param_1, unkStruct_8044CC8 *param_2)
   }
   else {
     if (param_2->actionUseIndex == 0x81) {
-      info = param_1->info;
+      info = param_1->axObj.info;
     }
     else {
       if (3 < (u8)(param_2->actionUseIndex + 0x70)) {
         return NULL;
       }
-      info = gDungeon->teamPokemon[param_2->actionUseIndex - 0x90]->info;
+      info = gDungeon->teamPokemon[param_2->actionUseIndex - 0x90]->axObj.info;
     }
     item = &info->heldItem;
   }
@@ -77,14 +77,14 @@ bool8 sub_8044D40(ActionContainer *param_1,s32 index)
 }
 
 Item *sub_8044D90(Entity *entity, s32 index, s32 unused) {
-    EntityInfo *info = entity->info;
+    EntityInfo *info = entity->axObj.info;
     register unkStruct_8044CC8 *puVar1 asm("r3") = &info->action.unk4[index];
     return sub_8044CC8(entity, puVar1);
 }
 
 Entity *sub_8044DA4(Entity *entity, s32 index)
 {
-    EntityInfo *info = entity->info;
+    EntityInfo *info = entity->axObj.info;
     return gDungeon->teamPokemon[info->action.unk4[index].actionUseIndex];
 }
 
@@ -103,7 +103,7 @@ void sub_8044DF0(Entity *entity, s32 index, u32 unused)
   Item *item;
   EntityInfo *info;
 
-  info = entity->info;
+  info = entity->axObj.info;
   item = sub_8044D90(entity,index,unused);
   if ((info->action).unk4[0].actionUseIndex == 0x80) {
     sub_80461C8(&(info->action).unk4[0].lastItemThrowPosition,1);
@@ -125,7 +125,7 @@ void sub_8044E24(Entity *entity,int index,u32 unused)
   Item item;
 
   itemPtr = sub_8044D90(entity,index,unused);
-  info = entity->info;
+  info = entity->axObj.info;
   if (!IsHMItem(itemPtr->id)) {
     if (GetItemCategory(itemPtr->id) == CATEGORY_TMS_HMS) {
       if (info->action.unk4[index].actionUseIndex == 0x80) {
@@ -231,7 +231,7 @@ bool8 IsNotAttacking(Entity *param_1, bool8 param_2)
     EntityInfo *info;
     u16 *action;
 
-    info = param_1->info;
+    info = param_1->axObj.info;
     action = &(info->action).action;
     if ((param_2 == 0) || (sub_8045888(param_1)))
     {

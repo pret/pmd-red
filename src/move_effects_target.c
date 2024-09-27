@@ -154,7 +154,7 @@ extern void nullsub_69(Entity *, Entity *);
 
 void sub_8075BA4(Entity *param_1, u8 param_2)
 {
-  EntityInfo * entityInfo = param_1->info;
+  EntityInfo * entityInfo = param_1->axObj.info;
 
   if ((param_2 != 0) && (entityInfo->volatileStatus.volatileStatus == STATUS_COWERING)) {
       entityInfo->action.direction = (entityInfo->action.direction + 4) & DIRECTION_MASK;
@@ -177,7 +177,7 @@ u8 sub_8075BF4(Entity * pokemon, s32 sleepTurns)
   }
   else
   {
-    entityInfo = pokemon->info;
+    entityInfo = pokemon->axObj.info;
 
     if(entityInfo->sleep.sleep != STATUS_NIGHTMARE && entityInfo->sleep.sleep != STATUS_SLEEP)
     {
@@ -204,7 +204,7 @@ void sub_8075C58(Entity * pokemon, Entity * target, s32 turns, u8 displayMessage
 
 
   if (!CannotSleep(pokemon,target,1,displayMessage)) {
-    sleep = target->info->sleep.sleep;
+    sleep = target->axObj.info->sleep.sleep;
     if (sleep == STATUS_SLEEPLESS) {
       if (displayMessage)
         sub_80522F4(pokemon,target,*gUnknown_80FB380);
@@ -269,7 +269,7 @@ void NightmareStatusTarget(Entity * pokemon, Entity * target, s32 turns)
 
   hasNightmare = FALSE;
   if (!CannotSleep(pokemon, target, 1, TRUE)) {
-    entityInfo = target->info;
+    entityInfo = target->axObj.info;
     if (entityInfo->sleep.sleep != STATUS_SLEEPLESS) {
       sub_8041EC8(target);
       if (entityInfo->sleep.sleep != STATUS_NIGHTMARE) {
@@ -306,7 +306,7 @@ void NappingStatusTarget(Entity * pokemon, Entity * target, s32 turns)
 
   isSleeping = FALSE;
   if (!CannotSleep(pokemon, target, 0, TRUE)) {
-    entityInfo = target->info;
+    entityInfo = target->axObj.info;
     if (entityInfo->sleep.sleep != STATUS_SLEEPLESS) {
       sub_8041ED8(target);
       if (entityInfo->sleep.sleep == STATUS_NONE || entityInfo->sleep.sleep == STATUS_YAWNING) {
@@ -343,7 +343,7 @@ void YawnedStatusTarget(Entity * pokemon, Entity * target, s32 turns)
   if (CannotSleep(pokemon,target,1,TRUE)) {
     return;
   }
-  entityInfo = target->info;
+  entityInfo = target->axObj.info;
   if (entityInfo->sleep.sleep == STATUS_NONE) {
     entityInfo->sleep.sleep = STATUS_YAWNING;
     entityInfo->sleep.sleepTurns = turns;
@@ -376,7 +376,7 @@ void SleeplessStatusTarget(Entity * pokemon, Entity * target)
     return;
   }
 
-  entityInfo = target->info;
+  entityInfo = target->axObj.info;
   if ((entityInfo->sleep.sleep == STATUS_SLEEP) || (entityInfo->sleep.sleep == STATUS_NAPPING) || (entityInfo->sleep.sleep == STATUS_NIGHTMARE)) {
     isAsleep = TRUE;
   }
@@ -408,7 +408,7 @@ void PausedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, s32 turns
   if (!EntityExists(target)) {
     return;
   }
-  entityInfo = target->info;
+  entityInfo = target->axObj.info;
   if ((param_3 != 0) && (HasSafeguardStatus(pokemon,target,displayMessage))) {
     return;
   }
@@ -442,7 +442,7 @@ void InfatuateStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessa
 
 
   if (EntityExists(target)) {
-    entityInfo = target->info;
+    entityInfo = target->axObj.info;
     if (!HasSafeguardStatus(pokemon,target,displayMessage)) {
       if (HasAbility(target,ABILITY_OBLIVIOUS)) {
         SetMessageArgument(gAvailablePokemonNames,target,0);
@@ -483,7 +483,7 @@ void BurnedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, bool8 dis
   }
 
   if (!HasSafeguardStatus(pokemon,target,displayMessage)) {
-    entityInfo = target->info;
+    entityInfo = target->axObj.info;
     SetMessageArgument_2(gAvailablePokemonNames,entityInfo,0);
     if (HasAbility(target, ABILITY_WATER_VEIL)) {
       if (displayMessage)
@@ -570,7 +570,7 @@ void PoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
   }
 
   if (!HasSafeguardStatus(pokemon,target,displayMessage)) {
-    entityInfo = target->info;
+    entityInfo = target->axObj.info;
     SetMessageArgument_2(gAvailablePokemonNames,entityInfo,0);
     if (HasHeldItem(target, ITEM_PECHA_SCARF)) {
       if (displayMessage)
@@ -659,7 +659,7 @@ void BadlyPoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayM
   }
 
   if (!HasSafeguardStatus(pokemon,target,displayMessage)) {
-    entityInfo = target->info;
+    entityInfo = target->axObj.info;
     SetMessageArgument_2(gAvailablePokemonNames,entityInfo,0);
     if (HasHeldItem(target, ITEM_PECHA_SCARF)) {
       if (displayMessage)
@@ -737,7 +737,7 @@ void FrozenStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
   }
 
   SetMessageArgument(gAvailablePokemonNames, target, 0);
-  entityInfo = target->info;
+  entityInfo = target->axObj.info;
 
   if ((entityInfo->immobilize.immobilizeStatus != STATUS_FROZEN) && !HasSafeguardStatus(pokemon,target,displayMessage)) {
     if (HasAbility(target, ABILITY_MAGMA_ARMOR)) {
@@ -782,7 +782,7 @@ void SqueezedStatusTarget(Entity * pokemon, Entity * target, s16 param_3, bool32
   bool8 displayMessage_u8 = displayMessage;
 
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,displayMessage_u8))) {
-    entityInfo = target->info;
+    entityInfo = target->axObj.info;
     if ((u8)(entityInfo->immobilize.immobilizeStatus - 3U) < 2) {
       sub_8076CB4(entityInfo->unk9C);
     }
@@ -812,7 +812,7 @@ void ImmobilizedStatusTarget(Entity * pokemon, Entity * target)
   EntityInfo *entityInfo;
 
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
-    entityInfo = target->info;
+    entityInfo = target->axObj.info;
     if ((u8)(entityInfo->immobilize.immobilizeStatus - 3U) < 2) {
       sub_8076CB4(entityInfo->unk9C);
     }
@@ -842,7 +842,7 @@ void IngrainedStatusTarget(Entity * pokemon, Entity * target)
   EntityInfo *entityInfo2;
 
   if (EntityExists(target)) {
-    entityInfo = target->info;
+    entityInfo = target->axObj.info;
     entityInfo2 = entityInfo;
     if ((u8)(entityInfo->immobilize.immobilizeStatus - 3U) < 2) {
       sub_8076CB4(entityInfo->unk9C);
@@ -876,8 +876,8 @@ void WrapTarget(Entity * pokemon, Entity * target)
   if (HasSafeguardStatus(pokemon, target, TRUE)) {
     return;
   }
-  pokemonEntityData = pokemon->info;
-  targetEntityInfo = target->info;
+  pokemonEntityData = pokemon->axObj.info;
+  targetEntityInfo = target->axObj.info;
   if ((u8)(pokemonEntityData->immobilize.immobilizeStatus - 3U) > 1) {
     if ((targetEntityInfo->immobilize.immobilizeStatus != STATUS_WRAP))
     {
@@ -931,7 +931,7 @@ void sub_8076CB4(s32 param_1)
   {
     entity = gDungeon->allPokemon[index];
     if (EntityExists(entity)) {
-      entityInfo = entity->info;
+      entityInfo = entity->axObj.info;
       if (entityInfo->unk9C == param_1) {
         if ((u8)(entityInfo->immobilize.immobilizeStatus - 3U) < 2) {
           entityInfo->immobilize.immobilizeStatus = STATUS_NONE;
@@ -952,7 +952,7 @@ void PetrifiedStatusTarget(Entity * pokemon, Entity * target)
 
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
     sub_8041C08(target);
-    targetEntityInfo = target->info;
+    targetEntityInfo = target->axObj.info;
     if ((u8)(targetEntityInfo->immobilize.immobilizeStatus - 3U) < 2) {
       sub_8076CB4(targetEntityInfo->unk9C);
     }
@@ -977,7 +977,7 @@ void PetrifiedStatusTarget(Entity * pokemon, Entity * target)
       {
         entity = gDungeon->teamPokemon[index];
         if (EntityExists(entity)) {
-          entityInfo = entity->info;
+          entityInfo = entity->axObj.info;
           if ((entityInfo->aiTarget.aiObjective == AI_CHASE_TARGET) && (entityInfo->aiTarget.aiTarget == target)) {
             entityInfo->aiTarget.aiObjective = AI_STAND_STILL;
             entityInfo->aiTarget.aiTarget = NULL;
@@ -1021,7 +1021,7 @@ void LowerAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 de
   }
   else {
 _08076EE4:
-    entityInfo = target->info;
+    entityInfo = target->axObj.info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
     sub_8041F28(target,index);
     if (decrement == 1) {
@@ -1061,7 +1061,7 @@ void LowerDefenseStageTarget(Entity * pokemon, Entity * target, s32 index, s32 d
         strcpy(gFormatItems,*gUnknown_80FC09C);
     }
     if (!param_5 || !sub_8071728(pokemon,target,displayMessage)) {
-        entityInfo = target->info;
+        entityInfo = target->axObj.info;
         SetMessageArgument(gAvailablePokemonNames,target,0);
         sub_8041F4C(target,index);
         if (decrement == 1) {
@@ -1094,7 +1094,7 @@ void RaiseAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 in
     if (!EntityExists(target)) {
         return;
     }
-    entityInfo = target->info;
+    entityInfo = target->axObj.info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
     sub_8041F70(target,index);
     if (index != STAT_STAGE_ATK) {
@@ -1134,7 +1134,7 @@ void RaiseDefenseStageTarget(Entity * pokemon, Entity * target, s32 index, s32 i
     if (!EntityExists(target)) {
         return;
     }
-    entityInfo = target->info;
+    entityInfo = target->axObj.info;
     SetMessageArgument(gAvailablePokemonNames,target,0);
     sub_8041F94(target,index);
     if (index != STAT_STAGE_DEF) {

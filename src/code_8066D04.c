@@ -41,7 +41,7 @@ extern void sub_8045DB4(Position *, u32);
 
 void HandlePickUpPlayerAction(Entity *entity)
 {
-  entity->info->action.unk4[0].actionUseIndex = 1;
+  entity->axObj.info->action.unk4[0].actionUseIndex = 1;
   sub_8045DB4(&entity->pos,0);
 }
 
@@ -125,8 +125,8 @@ void HandleGiveItemAction(Entity *param_1)
   Item item3;
 
   entity = sub_8044DA4(param_1,1);
-  info1 = param_1->info;
-  info2 = entity->info;
+  info1 = param_1->axObj.info;
+  info2 = entity->axObj.info;
   item = sub_8044D90(param_1,0,2);
 
   if((info1->action).unk4[0].actionUseIndex == 0x80)
@@ -200,8 +200,8 @@ void HandleTakeItemAction(Entity *param_1)
   Item item;
 
   entity = sub_8044DA4(param_1,0);
-  info = entity->info;
-  info2 = entity->info;
+  info = entity->axObj.info;
+  info2 = entity->axObj.info;
   heldItem = &info->heldItem;
   if ((gTeamInventoryRef->teamItems[ITEM_POWER_BAND].flags & ITEM_FLAG_EXISTS)) {
     SendMessage(param_1,*gUnknown_80F8D60);
@@ -246,8 +246,8 @@ void sub_8066BD4(Entity *param_1)
   Item temp;
 
   entity = sub_8044DA4(param_1,0);
-  info = entity->info;
-  info2 = entity->info;
+  info = entity->axObj.info;
+  info2 = entity->axObj.info;
   heldItem = &info->heldItem;
   item = sub_8044D90(param_1,1,0x1565);
   if (heldItem->flags & ITEM_FLAG_STICKY)
@@ -286,7 +286,7 @@ void HandleUseItemAction(Entity *param_1)
   Entity *entity;
 
   entity = sub_8044DA4(param_1,0);
-  entity->info->useHeldItem = TRUE;
+  entity->axObj.info->useHeldItem = TRUE;
 }
 
 void HandlePlaceItemAction(Entity *param_1)
@@ -302,7 +302,7 @@ void HandlePlaceItemAction(Entity *param_1)
 
     entity = param_1;
 
-    info = entity->info;
+    info = entity->axObj.info;
     item = sub_8044D90(entity,0,4);
     sub_8045BF8(gFormatItems,item);
     if (info->action.unk4[0].actionUseIndex == 0x80) {

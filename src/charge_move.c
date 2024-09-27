@@ -67,7 +67,7 @@ bool8 MoveMatchesChargingStatus(Entity *pokemon, Move *move)
     }
     else
     {
-        EntityInfo *pokemonInfo = pokemon->info;
+        EntityInfo *pokemonInfo = pokemon->axObj.info;
         s32 i;
         for (i = 0; i < 100; i++)
         {
@@ -93,7 +93,7 @@ bool8 IsChargingAnyTwoTurnMove(Entity *pokemon, bool8 checkCharge)
     }
     else
     {
-        EntityInfo *pokemonInfo = pokemon->info;
+        EntityInfo *pokemonInfo = pokemon->axObj.info;
         int i = 0;
         u8 *chargingStatusPointer = &pokemonInfo->charging.chargingStatus;
         u8 *chargingStatusPointer2;

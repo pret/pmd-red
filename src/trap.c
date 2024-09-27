@@ -403,7 +403,7 @@ void HandleStickyTrap(Entity *pokemon,Entity *target)
     int newIndex;
     Item *itemStack[21];
 
-    info = target->info;
+    info = target->axObj.info;
     if (HasHeldItem(target,0xe)) {
         sub_80522F4(pokemon,target,*gUnknown_80FDC7C);
     }
@@ -499,7 +499,7 @@ void HandleGrimyTrap(Entity *pokemon, Entity *target)
 
     badFoodCount = 0;
     if (target != NULL) {
-        info = target->info;
+        info = target->axObj.info;
         counter = 0;
         if (info->isTeamLeader) {
             for(index = 0; index < INVENTORY_SIZE; index++)
@@ -548,7 +548,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
         }
         else
         {
-            info = target->info;
+            info = target->axObj.info;
             if (sub_8045888(target)) {
                 SetTrap(tile, 0x1B);
                 flag = TRUE;
@@ -647,7 +647,7 @@ void HandlePPZeroTrap(Entity *param_1,Entity *param_2)
 
 
   if (param_2 != NULL) {
-    info = param_2->info;
+    info = param_2->axObj.info;
     counter = 0;
     for(i = 0;  i < MAX_MON_MOVES; move++, i++)
     {

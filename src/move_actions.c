@@ -305,7 +305,7 @@ void sub_8057588(Entity * pokemon, u8 param_2)
     EntityInfo *entityInfo;
 
     if (EntityExists(pokemon)) {
-        entityInfo = pokemon->info;
+        entityInfo = pokemon->axObj.info;
         for(index = 0; index < MAX_MON_MOVES; index++)
         {
             move = &entityInfo->moves[index];
@@ -496,7 +496,7 @@ bool32 sub_8057974(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   s32 newHP;
   bool8 local_24;
 
-  newHP = target->info->HP / 2;
+  newHP = target->axObj.info->HP / 2;
   local_24 = FALSE;
   if (newHP != 0) {
     sub_806F370(pokemon,target,newHP,1,&local_24,GetMoveType(move),sub_8057600(move,param_4),0,1,0);
@@ -519,9 +519,9 @@ bool8 PainSplitMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param
   EntityInfo *iVar5;
 
   // Need copies for some reason to match..
-  iVar3 = (pokemon->info);
+  iVar3 = (pokemon->axObj.info);
   iVar4 = iVar3;
-  iVar2 = (target->info);
+  iVar2 = (target->axObj.info);
   iVar5 = iVar2;
 
   newHP = ((iVar3->HP + iVar2->HP) / 2);
@@ -551,7 +551,7 @@ bool8 TormentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4
   EntityInfo *entityInfo;
   bool8 isTormented;
 
-  entityInfo = target->info;
+  entityInfo = target->axObj.info;
   isTormented = FALSE;
 
   for(iVar4 = 0; iVar4 < MAX_MON_MOVES; iVar4++)
@@ -673,7 +673,7 @@ bool8 WhirlpoolMoveAction(Entity * pokemon, Entity * target, Move * move, u32 pa
   u8 chargeStatus;
 
   flag = FALSE;
-  chargeStatus = target->info->charging.chargingStatus;
+  chargeStatus = target->axObj.info->charging.chargingStatus;
   uVar3 = 0x100;
   if (chargeStatus == STATUS_DIVING) {
     uVar3 = 0x200;
@@ -787,7 +787,7 @@ bool8 sub_8057E6C(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   bool8 flag;
 
   flag = FALSE;
-  entityInfo = pokemon->info;
+  entityInfo = pokemon->axObj.info;
   SendThawedMessage(pokemon,target);
   if (sub_8055640(pokemon,target,move,0x100,param_4) != 0) {
     flag = TRUE;
@@ -817,7 +817,7 @@ bool8 sub_8057F24(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
   EntityInfo *entityInfo;
 
-  entityInfo = pokemon->info;
+  entityInfo = pokemon->axObj.info;
   entityInfo->HP = 1;
   ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A4C,0x40,TRUE);
   ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A50,0x40,TRUE);
@@ -853,8 +853,8 @@ bool8 sub_8057FF4(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 
   flashFireStatus = GetFlashFireStatus(target);
   if (flashFireStatus != FLASH_FIRE_STATUS_NONE) {
-    if (target->info->unk152 == 0) {
-      target->info->unk152 = 1;
+    if (target->axObj.info->unk152 == 0) {
+      target->axObj.info->unk152 = 1;
       SetMessageArgument(gUnknown_202DFE8,target,0);
       if (flashFireStatus == FLASH_FIRE_STATUS_MAXED) {
         sub_80522F4(pokemon,target,*gUnknown_80FAE00); // Fire moves won't become stronger
@@ -879,7 +879,7 @@ bool8 sub_805805C(Entity * pokemon,Entity * target,Move * move,s32 param_4)
   EntityInfo *entityInfo;
   s32 IQ;
 
-  entityInfo = pokemon->info;
+  entityInfo = pokemon->axObj.info;
 
 
   r6 = 1;
@@ -906,7 +906,7 @@ bool8 GrudgeMoveAction(Entity *pokemon, Entity * target, Move *move, s32 param_4
   bool8 hasGrudge;
 
   hasGrudge = FALSE;
-  entityInfo = target->info;
+  entityInfo = target->axObj.info;
   SetMessageArgument(gUnknown_202DFE8,target,0);
   if (entityInfo->grudge) {
     sub_80522F4(pokemon,target,*gUnknown_80FD2B4);
@@ -977,7 +977,7 @@ bool8 sub_8058270(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   u32 r3;
 
   r3 = 1;
-  if((u8)(target->info->charging.chargingStatus - 7) <= 1)
+  if((u8)(target->axObj.info->charging.chargingStatus - 7) <= 1)
     r3 = 2;
   flag =  sub_8055640(pokemon,target,move,r3 << 8,param_4) ? TRUE : FALSE;
   return flag;
@@ -1028,7 +1028,7 @@ bool8 sub_805836C(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   bool8 local_18;
 
   local_18 = FALSE;
-  iVar2 = pokemon->info->unkA0 * 2;
+  iVar2 = pokemon->axObj.info->unkA0 * 2;
   if (999 < iVar2) {
     iVar2 = 999;
   }
@@ -1092,8 +1092,8 @@ bool8 sub_80584C0(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 
 
   local_24 = 0;
-  entityInfo = pokemon->info;
-  entityInfo1 = target->info;
+  entityInfo = pokemon->axObj.info;
+  entityInfo1 = target->axObj.info;
   diffHP = entityInfo1->HP - entityInfo->HP;
   if (diffHP < 0) {
     diffHP = 0;
@@ -1110,7 +1110,7 @@ bool8 sub_8058548(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   u32 r5;
 
   r5 = 0x80 << 1;
-  if((pokemon->info->nonVolatile.nonVolatileStatus) != STATUS_NONE)
+  if((pokemon->axObj.info->nonVolatile.nonVolatileStatus) != STATUS_NONE)
     r5 = gUnknown_80F4F6C;
   flag =  sub_8055640(pokemon,target,move,r5,param_4) ? TRUE : FALSE;
   return flag;
@@ -1136,7 +1136,7 @@ bool8 BrickBreakMoveAction(Entity *pokemon, Entity *target, Move *move, u32 para
   bool8 flag;
 
   flag = FALSE;
-  if ((target->info->protection.protectionStatus == STATUS_REFLECT) || (target->info->protection.protectionStatus == STATUS_LIGHT_SCREEN)) {
+  if ((target->axObj.info->protection.protectionStatus == STATUS_REFLECT) || (target->axObj.info->protection.protectionStatus == STATUS_LIGHT_SCREEN)) {
     sub_80522F4(pokemon,target,*gUnknown_80FD104); // The barrier was shattered
     SendProtectionEndMessage(pokemon,target);
     flag = TRUE;
@@ -1189,7 +1189,7 @@ bool8 sub_80586DC(Entity * pokemon, Entity * target, Move * move, u32 param_4)
   flag = uVar3 != 0 ? TRUE : FALSE;
   if (flag && sub_8057308(pokemon, 0)) {
     newHP = uVar3 / 2;
-    entityInfo = pokemon->info;
+    entityInfo = pokemon->axObj.info;
     flag = TRUE;
     if (newHP < 1) {
       newHP = 1;
@@ -1222,7 +1222,7 @@ bool8 sub_8058770(Entity * pokemon, Entity * target, Move * move, u32 param_4)
   EntityInfo *entityInfo;
 #endif
 
-  entityInfo = pokemon->info;
+  entityInfo = pokemon->axObj.info;
   r2 = entityInfo->maxHPStat;
   r0 = r2;
   if (r2 < 0) {
@@ -1252,7 +1252,7 @@ bool8 sub_80587E8(Entity * pokemon, Entity * target, Move * move, u32 param_4)
 {
   bool8 flag;
 
-  if (target->info->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS) {
+  if (target->axObj.info->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS) {
     flag = sub_8055640(pokemon,target,move,0x80 << 2,param_4) ? TRUE : FALSE;
     SendNonVolatileEndMessage(pokemon, target);
   }
@@ -1305,7 +1305,7 @@ bool8 sub_80588B8(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 bool8 sub_80588F4(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     bool8 flag;
-    EntityInfo *entityInfo = target->info;
+    EntityInfo *entityInfo = target->axObj.info;
 
     flag = sub_8055640(pokemon, target, move, GetWeight(entityInfo->apparentID), param_4) != 0 ? TRUE: FALSE;
     return flag;
@@ -1323,7 +1323,7 @@ bool8 sub_8058930(Entity *pokemon, Entity *target, Move *move, u32 param_4)
         flag = TRUE;
         if(sub_8057308(pokemon, gUnknown_80F4DD6))
         {
-            entityInfo = pokemon->info;
+            entityInfo = pokemon->axObj.info;
             RaiseMovementSpeedTarget(pokemon, pokemon, 0, TRUE);
             index1 = gUnknown_8106A4C;
             RaiseAttackStageTarget(pokemon, pokemon, index1, 1);
@@ -1424,7 +1424,7 @@ bool8 sub_8058B84(Entity *pokemon, Entity *target, Move *move, u32 param_4)
     flag = TRUE;
     if(sub_805727C(pokemon, pokemon, gUnknown_80F4DD0))
     {
-        entityInfo = pokemon->info;
+        entityInfo = pokemon->axObj.info;
         RaiseAttackStageTarget(pokemon, pokemon, gUnknown_8106A4C, 1);
         if(entityInfo->unkFB == 0)
             entityInfo->unkFB = 1;
@@ -1466,7 +1466,7 @@ bool8 sub_8058C48(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   bool8 flag;
 
   rand = DungeonRandRange(128, 384); // 0x80 - 0x180
-  rand = (rand * pokemon->info->level) / 256;
+  rand = (rand * pokemon->axObj.info->level) / 256;
   if (rand < 0) {
     rand = 1;
   }
@@ -1527,7 +1527,7 @@ bool8 sub_8058D44(Entity * pokemon, Entity * target, Move * move, u32 param_4)
   EntityInfo *entityInfo;
 #endif
 
-  entityInfo = pokemon->info;
+  entityInfo = pokemon->axObj.info;
   r2 = entityInfo->maxHPStat;
   r0 = r2;
   if (r2 < 0) {
@@ -1560,8 +1560,8 @@ bool8 PsychUpMoveAction(Entity * pokemon, Entity * target, Move * move, u32 para
   EntityInfo *iVar3;
   EntityInfo *iVar4;
 
-  iVar4 = pokemon->info;
-  iVar3 = target->info;
+  iVar4 = pokemon->axObj.info;
+  iVar3 = target->axObj.info;
   nullsub_92(target);
 
   for(index = 0; index < 2; index++)
@@ -1588,7 +1588,7 @@ bool8 sub_8058E5C(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 
   flag = FALSE;
   if ((sub_8055640(pokemon, target, move, 0x80 << 1, param_4) != 0) && (EntityExists(pokemon))) {
-    iVar2 = pokemon->info->maxHPStat;
+    iVar2 = pokemon->axObj.info->maxHPStat;
     if (iVar2 < 0) {
       iVar2 = iVar2 + 7;
     }
@@ -1606,7 +1606,7 @@ bool8 sub_8058E5C(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 
 bool8 sub_8058EE0(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
-    HealTargetHP(pokemon, target, target->info->maxHPStat / 2, 0, TRUE);
+    HealTargetHP(pokemon, target, target->axObj.info->maxHPStat / 2, 0, TRUE);
     return TRUE;
 }
 
@@ -1616,7 +1616,7 @@ bool32 sub_8058F04(Entity *pokemon, Entity *target, Move *move, s32 param_4)
   EntityInfo *entityInfo;
   s32 iVar3;
 
-  entityInfo = target->info;
+  entityInfo = target->axObj.info;
   iVar3 = 1;
   gDungeon->unk181e8.unk18200 = 0xc;
   gDungeon->unk181e8.unk18204 = 0;
@@ -1764,7 +1764,7 @@ bool8 sub_80591E4(Entity *pokemon, Entity *target, Move *move, s32 param_4)
       iVar4 = 1;
     }
     if (EntityExists(pokemon)) {
-      entityInfo = pokemon->info;
+      entityInfo = pokemon->axObj.info;
       flag = TRUE;
       if (entityInfo->unkFB == 0) {
         entityInfo->unkFB = 1;
@@ -1792,8 +1792,8 @@ bool8 SkillSwapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param
   EntityInfo * targetEntityInfo;
   EntityInfo * pokeEntityData;
 
-  pokeEntityData = pokemon->info;
-  targetEntityInfo = target->info;
+  pokeEntityData = pokemon->axObj.info;
+  targetEntityInfo = target->axObj.info;
   if ((HasAbility(target, ABILITY_WONDER_GUARD)) || (HasAbility(pokemon, ABILITY_WONDER_GUARD))) {
     sub_80522F4(pokemon,target,*gUnknown_80FC8C0);
     flag = FALSE;
@@ -1833,8 +1833,8 @@ bool32 SketchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4
   s32 other_flag = 0;
 
   flag = 0;
-  pokeInfo = pokemon->info;
-  targetInfo = target->info;
+  pokeInfo = pokemon->axObj.info;
+  targetInfo = target->axObj.info;
   moveID = 0;
 
   for(moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
@@ -2017,7 +2017,7 @@ bool8 sub_805946C(Entity * pokemon,Entity * target,Move * move,u32 param_4)
   if (sub_8055640(pokemon, target, move, 0x100, param_4) != 0) {
     flag = TRUE;
     if ((!HasAbility(pokemon, ABILITY_ROCK_HEAD)) && (sub_8057308(pokemon,0) != 0)) {
-      HP = pokemon->info->maxHPStat;
+      HP = pokemon->axObj.info->maxHPStat;
       if (HP < 0) {
         HP = HP + 7;
       }
@@ -2203,7 +2203,7 @@ bool8 sub_8059928(Entity * pokemon,Entity * target,Move * move,u32 param_4)
 
   iVar2 = 1;
   flag = FALSE;
-  if ((u8)(target->info->charging.chargingStatus - 7) <= 1){
+  if ((u8)(target->axObj.info->charging.chargingStatus - 7) <= 1){
       iVar2 = 2;
   }
   if (sub_8055640(pokemon,target,move,iVar2 << 8,param_4) != 0)
@@ -2236,7 +2236,7 @@ bool8 sub_80599EC(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     s32 HP;
 
-    HP = target->info->maxHPStat;
+    HP = target->axObj.info->maxHPStat;
     if(HP < 0)
         HP += 3;
     HealTargetHP(pokemon, target, HP >> 2, 0, TRUE);
@@ -2255,7 +2255,7 @@ bool8 sub_8059A2C(Entity * pokemon,Entity * target,Move * move,u32 param_4)
     u32 level;
 
     local_20 = 0;
-    level = pokemon->info->level;
+    level = pokemon->axObj.info->level;
     sub_806F370(pokemon,target,level,1,&local_20,GetMoveType(move),sub_8057600(move,param_4),0,1,0);
     local_20 = local_20 == 0;
     return local_20;
@@ -2312,7 +2312,7 @@ bool8 ConversionMoveAction(Entity * pokemon,Entity * target,Move * move,u32 para
   Move *moveStack [MAX_MON_MOVES];
 
   counter = 0;
-  info = target->info;
+  info = target->axObj.info;
   if (HasAbility(target, ABILITY_FORECAST)) {
       sub_80522F4(pokemon,target,*gPtrForecastPreventsTypeSwitchMessage);
       return FALSE;
@@ -2481,7 +2481,7 @@ bool8 sub_8059E54(Entity * pokemon,Entity * target,Move * move,u32 param_4,u8 pa
     movePower = GetMovePower(pokemon,move);
     moveCritChance = GetMoveCritChance(move);
     sub_806EAF4(pokemon,target,moveType,movePower,moveCritChance,local_30,0x100,move->id,0);
-    SetMessageArgument_2(gAvailablePokemonNames,pokemon->info,0);
+    SetMessageArgument_2(gAvailablePokemonNames,pokemon->axObj.info,0);
     sub_80522F4(pokemon,target,*gUnknown_80FC7C8);
     local_30[0] = local_30[0] / 2;
     if (local_30[0] == 0) {
@@ -2531,7 +2531,7 @@ bool8 sub_8059FC8(Entity * pokemon,Entity * target,Move * move,u32 param_4,u8 pa
     movePower = GetMovePower(pokemon,move);
     moveCritChance = GetMoveCritChance(move);
     sub_806EAF4(pokemon,target,moveType,movePower,moveCritChance,local_30,0x200,move->id,0);
-    SetMessageArgument_2(gAvailablePokemonNames,pokemon->info,0);
+    SetMessageArgument_2(gAvailablePokemonNames,pokemon->axObj.info,0);
     sub_80522F4(pokemon,target,*gUnknown_80FC7C8);
     local_30[0] = local_30[0] / 2;
     if (local_30[0] == 0) {
@@ -2582,9 +2582,9 @@ bool8 sub_805A120(Entity * pokemon,Entity * target, Move *move, u32 param_4)
     Item *item2;
 
     flag = FALSE;
-    r9 = pokemon->info;
+    r9 = pokemon->axObj.info;
     r7 = r9;
-    r8 = target->info;
+    r8 = target->axObj.info;
     sp = r8;
 
     SetMessageArgument(gAvailablePokemonNames,pokemon,0);
@@ -2689,7 +2689,7 @@ bool8 SurfMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   u32 uVar2;
 
   flag = FALSE;
-  if (target->info->charging.chargingStatus == STATUS_DIVING) {
+  if (target->axObj.info->charging.chargingStatus == STATUS_DIVING) {
       uVar2 = 0x200;
   }
   else
@@ -2706,8 +2706,8 @@ bool8 RolePlayMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
   EntityInfo * entityInfo;
   EntityInfo * targetEntityInfo;
 
-  entityInfo = pokemon->info;
-  targetEntityInfo = target->info;
+  entityInfo = pokemon->axObj.info;
+  targetEntityInfo = target->axObj.info;
   if (HasAbility(target, ABILITY_WONDER_GUARD)) {
     sub_80522F4(pokemon,target,*gUnknown_80FC854);
     return FALSE;
@@ -2811,7 +2811,7 @@ bool8 SwallowMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4
 {
   u8 *stockpileStage;
 
-  stockpileStage = &target->info->stockpileStage;
+  stockpileStage = &target->axObj.info->stockpileStage;
   if (*stockpileStage != 0) {
     HealTargetHP(pokemon,target,gUnknown_80F51D4[*stockpileStage],0,TRUE);
     *stockpileStage = 0;
@@ -2862,7 +2862,7 @@ bool8 sub_805A5E8(Entity *pokemon, Entity *target, Move *move, u32 stat, u32 par
   if (sub_8055640(pokemon,target,move,0x100,param_5) != 0) {
     flag = TRUE;
     if (sub_805727C(pokemon,pokemon,gUnknown_80F4DD2) != 0) {
-      entityInfo = pokemon->info;
+      entityInfo = pokemon->axObj.info;
       RaiseDefenseStageTarget(pokemon,pokemon,stat,1);
       if (entityInfo->unkFB == 0) {
         entityInfo->unkFB = 1;
@@ -2876,7 +2876,7 @@ bool8 SpitUpMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   u8 *stockpileStage;
 
-  stockpileStage = &pokemon->info->stockpileStage;
+  stockpileStage = &pokemon->axObj.info->stockpileStage;
   if (*stockpileStage != 0) {
     sub_8055640(pokemon,target,move,*stockpileStage << 8,param_4);
     *stockpileStage = 0;
@@ -2913,8 +2913,8 @@ bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
     u32 flag;
     u32 itemFlag;
 
-    entityInfo = pokemon->info;
-    targetEntityInfo1 = target->info;
+    entityInfo = pokemon->axObj.info;
+    targetEntityInfo1 = target->axObj.info;
     targetEntityInfo2 = targetEntityInfo1;
     SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
     SetMessageArgument(gAvailablePokemonNames + 0x50, target, 0);
@@ -2966,7 +2966,7 @@ void sub_805A7D4(Entity * pokemon, Entity * target, Item *item, Position *pos)
   stackEntity.unk24 = 0;
   stackEntity.isVisible = TRUE;
   stackEntity.unk22 = 0;
-  stackEntity.info = (EntityInfo*) item;
+  stackEntity.axObj.info = (EntityInfo*) item; // This seems wrong!
   stackEntity.pos.x = target->pos.x + pos->x;
   stackEntity.pos.y = target->pos.y + pos->y;
   SetEntityPixelPos(&stackEntity,(target->pos.x * 0x18 + 4) * 0x100,
@@ -3070,7 +3070,7 @@ _0805AA5E:
       if (sub_80706A4(target, pos)) {
         sub_807D148(pokemon,target,0,0);
       }
-      if (target->info->isTeamLeader) {
+      if (target->axObj.info->isTeamLeader) {
         sub_804AC20(r9);
         sub_807EC28(FALSE);
       }
@@ -3092,7 +3092,7 @@ bool8 BellyDrumMoveAction(Entity * pokemon,Entity * target, Move *move, u32 para
   EntityInfo *info;
   bool8 flag;
 
-  info = pokemon->info;
+  info = pokemon->axObj.info;
   flag = FALSE;
   if (FixedPointToInt(info->belly) > 1) {
     RaiseAttackStageTarget(pokemon,target,gUnknown_8106A4C,99);
@@ -3191,7 +3191,7 @@ bool8 sub_805AD34(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 
 static inline bool8 sub_805AD54_sub(Entity *entity)
 {
-    if ((entity->info->joinedAt.joinedAt == 0x4A) || (entity->info->joinedAt.joinedAt == 0x47)) {
+    if ((entity->axObj.info->joinedAt.joinedAt == 0x4A) || (entity->axObj.info->joinedAt.joinedAt == 0x47)) {
         return TRUE;
     }
     else {
@@ -3213,8 +3213,8 @@ bool8 sub_805AD54(Entity * pokemon, Entity * target, Move *move, u32 param_4)
   bool8 flag;
 
   flag = FALSE;
-  info = pokemon->info;
-  if (pokemon->info->isNotTeamMember) {
+  info = pokemon->axObj.info;
+  if (pokemon->axObj.info->isNotTeamMember) {
     possibleTargets = gDungeon->wildPokemon;
     numPossibleTargets = DUNGEON_MAX_WILD_POKEMON;
   }
@@ -3226,7 +3226,7 @@ bool8 sub_805AD54(Entity * pokemon, Entity * target, Move *move, u32 param_4)
     targetEntity = possibleTargets[index];
     if ((((EntityExists(targetEntity)) && (pokemon != targetEntity)) &&
         (GetTreatmentBetweenMonsters(pokemon,targetEntity,FALSE,FALSE) == TREATMENT_TREAT_AS_ALLY)) &&
-       (targetEntity->info->clientType != CLIENT_TYPE_CLIENT)) {
+       (targetEntity->axObj.info->clientType != CLIENT_TYPE_CLIENT)) {
       if (!sub_805AD54_sub(targetEntity)) {
         sub_807D148(pokemon,targetEntity,2,&target->pos);
         flag = TRUE;
@@ -3305,7 +3305,7 @@ bool8 PresentMoveAction(Entity * pokemon, Entity * target, Move *move, u32 param
   }
   else {
     if (rand1 < 0x1e) {
-      HP = target->info->maxHPStat;
+      HP = target->axObj.info->maxHPStat;
       if (HP < 0) {
         HP = HP + 3;
       }

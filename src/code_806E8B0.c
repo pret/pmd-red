@@ -39,7 +39,7 @@ void sub_806E8B0(Entity * pokemon, Entity * target, u8 param_3, s32 *param_4, s3
   
 
   if (HasAbility(pokemon, ABILITY_GUTS)) {
-    entityInfo = pokemon->info;
+    entityInfo = pokemon->axObj.info;
     hasNegStatus_pokemon = HasNegativeStatus(pokemon);
     visFlags_pokemon_1 = SetVisualFlags(entityInfo,1,hasNegStatus_pokemon);
     if (hasNegStatus_pokemon) {
@@ -52,7 +52,7 @@ void sub_806E8B0(Entity * pokemon, Entity * target, u8 param_3, s32 *param_4, s3
   }
 
   if ((HasAbility(pokemon, ABILITY_HUGE_POWER)) || (HasAbility(pokemon, ABILITY_PURE_POWER))) {
-    entityInfo_1 = pokemon->info;
+    entityInfo_1 = pokemon->axObj.info;
     iVar3 = 0;
     if ((param_6 < 0x21) && (!r10)) {
       iVar3 = 1;
@@ -73,7 +73,7 @@ void sub_806E8B0(Entity * pokemon, Entity * target, u8 param_3, s32 *param_4, s3
     r8 <<= 1;
   }
 
-  if(pokemon->info->isNotTeamMember)
+  if(pokemon->axObj.info->isNotTeamMember)
   {
       isNotEnemy = FALSE;
   }
@@ -99,7 +99,7 @@ void sub_806E8B0(Entity * pokemon, Entity * target, u8 param_3, s32 *param_4, s3
   }
 
   if ((HasAbility(target, ABILITY_MARVEL_SCALE)) && (!r10)) {
-    entityInfo = target->info;
+    entityInfo = target->axObj.info;
     hasNegStatus_target = HasNegativeStatus(target);
     visFlags_target = SetVisualFlags(entityInfo, 8, hasNegStatus_target);
     if (hasNegStatus_target) {

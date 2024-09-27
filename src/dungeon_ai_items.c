@@ -52,9 +52,9 @@ void sub_807360C(void)
         entity = gDungeon->allPokemon[index];
         if(EntityExists(entity))
         {
-            if(entity->info->unk152 != 0)
+            if(entity->axObj.info->unk152 != 0)
             {
-               entity->info->unk152 = 0;
+               entity->axObj.info->unk152 = 0;
                UpdateFlashFireBoost(entity, entity);
             }
         }
@@ -63,7 +63,7 @@ void sub_807360C(void)
 
 void AIDecideUseItem(Entity *pokemon)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     void *null;
     Item *item;
     s32 toolboxIndex;
@@ -366,7 +366,7 @@ void TargetThrownItem(Entity *pokemon, Entity *targetPokemon, Item *item, s32 ta
     distanceX = distanceX < 0 ? -distanceX : distanceX;
     distanceY = pokemon->pos.y - targetPokemon->pos.y;
     distanceY = distanceY < 0 ? -distanceY : distanceY;
-    if (pokemon->info->itemStatus.itemStatus == STATUS_NONE)
+    if (pokemon->axObj.info->itemStatus.itemStatus == STATUS_NONE)
     {
         s32 distance = distanceY < distanceX ? distanceX : distanceY;
         if (distance > RANGED_ATTACK_RANGE)

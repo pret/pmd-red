@@ -500,13 +500,13 @@ void ZapdosDropInEffect(Entity *zapdosEntity)
 {
   int iVar1;
 
-  zapdosEntity->info->unk15C = 1;
-  zapdosEntity->info->unk15E = 0;
-  zapdosEntity->info->unk174 = 200;
+  zapdosEntity->axObj.info->unk15C = 1;
+  zapdosEntity->axObj.info->unk15E = 0;
+  zapdosEntity->axObj.info->unk174 = 200;
   PlaySoundEffect(0x1ea);
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 5)
   {
-    zapdosEntity->info->unk174 = iVar1 * 256;
+    zapdosEntity->axObj.info->unk174 = iVar1 * 256;
     sub_803E46C(0x46);
   }
   sub_803E708(0x1e,0x46);
@@ -754,13 +754,13 @@ void MoltresDropInEffect(Entity * moltresEntity)
 {
   s32 iVar1;
 
-  moltresEntity->info->unk15C = 1;
-  moltresEntity->info->unk15E = 0;
-  moltresEntity->info->unk174 = 0xc800;
+  moltresEntity->axObj.info->unk15C = 1;
+  moltresEntity->axObj.info->unk15E = 0;
+  moltresEntity->axObj.info->unk174 = 0xc800;
   PlaySoundEffect(0x1f8);
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 5)
   {
-    moltresEntity->info->unk174 = iVar1 * 256;
+    moltresEntity->axObj.info->unk174 = iVar1 * 256;
     sub_803E46C(0x46);
   }
 }
@@ -1157,12 +1157,12 @@ void sub_8088484(Entity *param_1)
 {
   int iVar1;
 
-  param_1->info->unk15C = 1;
-  param_1->info->unk15E = 0;
+  param_1->axObj.info->unk15C = 1;
+  param_1->axObj.info->unk15E = 0;
   PlaySoundEffect(0x1ea);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 5)
   {
-    param_1->info->unk174 = iVar1 * 256;
+    param_1->axObj.info->unk174 = iVar1 * 256;
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1 / 2,1,0);
     sub_803E46C(0x46);
   }
@@ -1667,8 +1667,8 @@ void MagmaCavernMidDialogue(void)
   // Hey! {ARG_POKEMON_0}!
   // Over there!
   DisplayDungeonDialogue(MagmaCavernMidDialogue_5);
-  iVar3->info->unk15E = 0;
-  iVar4->info->unk15E =0;
+  iVar3->axObj.info->unk15E = 0;
+  iVar4->axObj.info->unk15E =0;
   local_20.x = (iVar3->pixelPos.x + iVar4->pixelPos.x) / 2;
   local_20.y = (iVar3->pixelPos.y + iVar4->pixelPos.y) / 2 + 0x800;
   ShiftCameraToPosition(&local_20,0x20);
@@ -1750,14 +1750,14 @@ void sub_808919C(Entity *r0)
 void sub_80891B0(Entity *r0)
 {
     sub_806CDD4(r0, 0, DIRECTION_NORTH);
-    r0->info->unk15F = 1;
+    r0->axObj.info->unk15F = 1;
 }
 
 
 void sub_80891D0(Entity *r0)
 {
     sub_806CDD4(r0, 7, DIRECTION_NORTH);
-    r0->info->unk15F = 0;
+    r0->axObj.info->unk15F = 0;
 }
 
 void sub_80891F0(void)
@@ -1973,7 +1973,7 @@ void RayquazaDropInEffect(Entity *rayquazaEntity)
   s32 iVar1;
   s32 iVar2;
 
-  rayquazaEntity->info->unk15E = 0;
+  rayquazaEntity->axObj.info->unk15E = 0;
   iVar2 = 51200;
   iVar1 = 0x600;
   PlaySoundEffect(0x1f8);
@@ -1984,10 +1984,10 @@ void RayquazaDropInEffect(Entity *rayquazaEntity)
       iVar1 = 0x14;
     }
     if (iVar2 < 0) break;
-    rayquazaEntity->info->unk174 = iVar2;
+    rayquazaEntity->axObj.info->unk174 = iVar2;
     sub_803E46C(0x46);
   }
-  rayquazaEntity->info->unk174 = 0;
+  rayquazaEntity->axObj.info->unk174 = 0;
 }
 
 void RayquazaScreenFlash(void)
@@ -2054,7 +2054,7 @@ void sub_8089788(Entity *entity, u8 param_2, u8 param_3)
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
       monEntity = gDungeon->wildPokemon[index];
-      if ((EntityExists(monEntity)) && (monEntity != entity) && (monEntity->info->clientType == param_2)) {
+      if ((EntityExists(monEntity)) && (monEntity != entity) && (monEntity->axObj.info->clientType == param_2)) {
         return;
       }
     }
@@ -2246,7 +2246,7 @@ void MewtwoDropInEffect(Entity *mewtwoEntity)
   s32 iVar1;
   s32 iVar2;
 
-  mewtwoEntity->info->unk15E = 0;
+  mewtwoEntity->axObj.info->unk15E = 0;
   iVar2 = 51200;
   iVar1 = 0x400;
   PlaySoundEffect(0x1f8);
@@ -2257,10 +2257,10 @@ void MewtwoDropInEffect(Entity *mewtwoEntity)
       iVar1 = 0x1e;
     }
     if (iVar2 < 0) break;
-    mewtwoEntity->info->unk174 = iVar2;
+    mewtwoEntity->axObj.info->unk174 = iVar2;
     sub_803E46C(0x46);
   }
-  mewtwoEntity->info->unk174 = 0;
+  mewtwoEntity->axObj.info->unk174 = 0;
 }
 
 void MewtwoScreenFlash(void)
@@ -2705,7 +2705,7 @@ void sub_808A528(Entity * param_1)
   s32 iVar1;
   s32 iVar2;
 
-  param_1->info->unk15E = 0;
+  param_1->axObj.info->unk15E = 0;
   iVar2 = 51200;
   iVar1 = 3072;
   PlaySoundEffect(0x1f8);
@@ -2716,10 +2716,10 @@ void sub_808A528(Entity * param_1)
       iVar1 = 20;
     }
     if (iVar2 < 0) break;
-    param_1->info->unk174 = iVar2;
+    param_1->axObj.info->unk174 = iVar2;
     sub_803E46C(70);
   }
-  param_1->info->unk174 = 0;
+  param_1->axObj.info->unk174 = 0;
 }
 
 void SuicuneScreenFlash(void)
@@ -2883,7 +2883,7 @@ void HoOhDropInEffect(Entity * param_1)
   s32 iVar1;
   s32 iVar2;
 
-  param_1->info->unk15E = 0;
+  param_1->axObj.info->unk15E = 0;
   iVar2 = 51200;
   iVar1 = 3072;
   PlaySoundEffect(0x1f8);
@@ -2894,10 +2894,10 @@ void HoOhDropInEffect(Entity * param_1)
       iVar1 = 20;
     }
     if (iVar2 < 0) break;
-    param_1->info->unk174 = iVar2;
+    param_1->axObj.info->unk174 = iVar2;
     sub_803E46C(70);
   }
-  param_1->info->unk174 = 0;
+  param_1->axObj.info->unk174 = 0;
 }
 
 void HoOhScreenFlash(void)
@@ -3334,7 +3334,7 @@ void sub_808B1CC(u8 itemID)
 
 void SetupRegiFacingDirection(Entity *regiEntity)
 {
-    regiEntity->info->action.direction = DIRECTION_NORTH;
+    regiEntity->axObj.info->action.direction = DIRECTION_NORTH;
     sub_806CE68(regiEntity, DIRECTION_NORTH);
 }
 
@@ -3461,8 +3461,8 @@ void sub_808B50C(void)
   sub_80855E4(sub_808BBA8);
   sub_808BBA8(JirachiEntity);
   sub_8041888(0);
-  JirachiEntity->info->unk15C = 1;
-  JirachiEntity->info->unk15E = 0;
+  JirachiEntity->axObj.info->unk15C = 1;
+  JirachiEntity->axObj.info->unk15E = 0;
   sub_80861B8(JirachiEntity,0xe,DIRECTION_SOUTH);
   DungeonFadeOutBGM(0x1e);
   sub_803E708(0x1e,70);
@@ -3502,8 +3502,8 @@ void JirachiWish(void)
   sub_80855E4(sub_808BBA8);
   sub_808BBA8(JirachiEntity);
   sub_8041888(0);
-  JirachiEntity->info->unk15C = 1;
-  JirachiEntity->info->unk15E = 0;
+  JirachiEntity->axObj.info->unk15C = 1;
+  JirachiEntity->axObj.info->unk15E = 0;
   sub_80861B8(JirachiEntity,0xe,DIRECTION_SOUTH);
   sub_80855E4(sub_80861A8);
   gDungeon->unk1356C = 1;
@@ -3558,7 +3558,7 @@ void JirachiWish(void)
           sub_8046860(JirachiEntity,&pos1,auStack152,9);
         }
       }
-      JirachiEntity->info->unk15D  = 0;
+      JirachiEntity->axObj.info->unk15D  = 0;
     }
     if (wishChoice == 2) {
       // Lots of Items
@@ -3584,7 +3584,7 @@ void JirachiWish(void)
           sub_8046860(JirachiEntity,&pos2,itemStack,9);
         }
       }
-      JirachiEntity->info->unk15D = 0;
+      JirachiEntity->axObj.info->unk15D = 0;
     }
 
     if (wishChoice == 3)
@@ -3604,7 +3604,7 @@ void JirachiWish(void)
           DisplayDungeonDialogue(gUnknown_8105AD4);
           sub_803E708(10,0x46);
           JirachiWishGrantDialogue(JirachiEntity);
-          JirachiEntity->info->unk15D  = 0;
+          JirachiEntity->axObj.info->unk15D  = 0;
           DisplayDungeonDialogue(gUnknown_8105B20);
           UnlockFriendArea(friendArea);
           PlaySoundEffect(0xd4);
@@ -3638,7 +3638,7 @@ void JirachiWish(void)
             sub_8046860(JirachiEntity,&pos3,strengthItems,4);
           }
         }
-        JirachiEntity->info->unk15D  = 0;
+        JirachiEntity->axObj.info->unk15D  = 0;
         DisplayDungeonDialogue(gUnknown_8105BF4);
         sub_803E708(10,0x46);
     }
@@ -3647,7 +3647,7 @@ void JirachiWish(void)
         DisplayDungeonDialogue(gUnknown_8105D2C);
         sub_803E708(10,0x46);
         JirachiWishGrantDialogue(JirachiEntity);
-        JirachiEntity->info->unk15D  = 0;
+        JirachiEntity->axObj.info->unk15D  = 0;
         DisplayDungeonDialogue(gUnknown_8105D80);
         sub_803E708(10,0x46);
         LeaderPos = &GetLeader()->pos;
@@ -3732,7 +3732,7 @@ void sub_808BB3C(Position *param_1)
 
 void sub_808BBA8(Entity *jirachiEntity)
 {
-  sub_806BFC0(jirachiEntity->info,0);
+  sub_806BFC0(jirachiEntity->axObj.info,0);
 }
 
 void JirachiDropInEffect(Entity *jirachiEntity)
@@ -3752,10 +3752,10 @@ void JirachiDropInEffect(Entity *jirachiEntity)
       iVar2 = 0x100;
     }
     if (iVar1 < 0) break;
-    jirachiEntity->info->unk174 = iVar1;
+    jirachiEntity->axObj.info->unk174 = iVar1;
     sub_803E46C(0x46);
   }
- jirachiEntity->info->unk174 = 0;
+ jirachiEntity->axObj.info->unk174 = 0;
 }
 
 void JirachiSpinEffect(Entity * jirachiEntity)
@@ -3767,7 +3767,7 @@ void JirachiSpinEffect(Entity * jirachiEntity)
     SetFacingDirection(jirachiEntity, uVar1 & DIRECTION_MASK);
     sub_803E708(3,0x46);
   }
-  jirachiEntity->info->unk15E = 1;
+  jirachiEntity->axObj.info->unk15E = 1;
   PlaySoundEffect(0x27f);
   sub_80861F8(99,jirachiEntity,1);
 }
@@ -3776,7 +3776,7 @@ void JirachiWishGrantDialogue(Entity *jirachiEntity)
 {
   u32 uVar2;
 
-  jirachiEntity->info->unk15D = 1;
+  jirachiEntity->axObj.info->unk15D = 1;
   // Nnnnnnnnnn!
   DisplayDungeonDialogue(gUnknown_81058A8);
   PlaySoundEffect(0x375);
@@ -4374,11 +4374,11 @@ void sub_808C8E0(Entity *param_1)
   PlaySoundEffect(0x1a5);
   sub_806CDD4(param_1, 0, DIRECTION_SOUTH);
   for(iVar1 = 0; iVar1 < 16; iVar1++){
-    param_1->info->unk174 = iVar1 * 256;
+    param_1->axObj.info->unk174 = iVar1 * 256;
     sub_803E46C(0x46);
   }
   for(iVar1 = 16; iVar1 < 200; iVar1 += 4){
-    param_1->info->unk174 = iVar1 * 256;
+    param_1->axObj.info->unk174 = iVar1 * 256;
     sub_803E46C(0x46);
   }
   sub_8086A3C(param_1);
@@ -4420,7 +4420,7 @@ void sub_808C998(void)
 
 void sub_808C9B0(Entity *param_1)
 {
-    param_1->info->action.direction = DIRECTION_NORTH;
+    param_1->axObj.info->action.direction = DIRECTION_NORTH;
     sub_806CE68(param_1, DIRECTION_NORTH);
 }
 

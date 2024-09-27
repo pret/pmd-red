@@ -48,7 +48,7 @@ void sub_8075900(Entity *pokemon, u8 r1)
 {
     if(EntityExists(pokemon))
     {
-        if(!pokemon->info->isNotTeamMember)
+        if(!pokemon->axObj.info->isNotTeamMember)
         {
             if(!sub_8044B28())
             {
@@ -72,7 +72,7 @@ void sub_8075900(Entity *pokemon, u8 r1)
 
 void RunMonsterAI(Entity *pokemon, u32 unused)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     if (pokemonInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)
     {
         if (pokemonInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED)
@@ -110,10 +110,10 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                     {
                         target = gDungeon->allPokemon[i];
                         if (EntityExists(target) &&
-                            target->info->waitingStruct.waitingStatus == STATUS_DECOY &&
+                            target->axObj.info->waitingStruct.waitingStatus == STATUS_DECOY &&
                             CanSeeTarget(pokemon, target))
                         {
-                            bool8 enemyDecoy = target->info->waitingStruct.enemyDecoy;
+                            bool8 enemyDecoy = target->axObj.info->waitingStruct.enemyDecoy;
                             u8 targetingDecoy = TARGETING_DECOY_TEAM;
                             if (enemyDecoy)
                             {

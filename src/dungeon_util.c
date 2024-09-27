@@ -47,22 +47,22 @@ u8 GetEntityRoom(Entity *entity)
 
 Trap* GetTrapData(Entity *entity)
 {
-    return (Trap *)entity->info;
+    return (Trap *) entity->axObj.info;
 }
 
 Item* GetItemData(Entity *entity)
 {
-    return (Item *)entity->info;
+    return (Item *) entity->axObj.info;
 }
 
 Trap* GetTrapData_1(Entity *entity)
 {
-    return (Trap *)entity->info;
+    return (Trap *) entity->axObj.info;
 }
 
 Item* GetItemData_1(Entity *entity)
 {
-    return (Item*)entity->info;
+    return (Item*) entity->axObj.info;
 }
 
 Tile *GetTileAtEntity(Entity *entity)
@@ -141,7 +141,7 @@ void sub_804522C(void) {
                 }
                 else
                 {
-                    info = entity->info;
+                    info = entity->axObj.info;
                     statusSprites = EntityGetStatusSprites(entity);
                     UpdateDungeonPokemonSprite(info->unk98, info->apparentID, statusSprites, FALSE);
                 }

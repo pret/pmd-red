@@ -1,7 +1,7 @@
 #ifndef GUARD_SPRITE_H
 #define GUARD_SPRITE_H
 
-#include "axdata.h"
+#include "structs/axdata.h"
 #include "ground_sprite.h"
 #include "structs/str_position.h"
 #include "sprite_oam.h"
@@ -64,16 +64,6 @@ typedef struct EntitySpriteInfo
     u32 unk38;
 } EntitySpriteInfo;
 
-// size: ?
-typedef struct Dungeon_ax
-{
-    u32 unk0;
-    u32 **unk4;
-    u8 fill8[0xC - 0x8];
-    u32 unkC;
-    u32 unk10;
-} Dungeon_ax;
-
 void AddSprite(SpriteOAM *, s32, UnkSpriteMem *, unkStruct_2039DB0 *);
 void BlinkSavingIcon(void);
 void CopySpritesToOam(void);
@@ -84,9 +74,9 @@ void sub_8004E8C(unkStruct_2039DB0 *);
 void sub_8005180(void);
 void sub_8005304(void);
 void sub_800533C(ax_pose **, UnkSpriteMem **, axdata1 *, u16 *, bool8);
-void AxResInitFile(EntitySpriteInfo *, OpenedFile *, u32, u32, u32, u32, bool8);
-void AxResInit(EntitySpriteInfo *, Dungeon_ax *, u32, u32, u32, u32, bool8);
-void AxResInitUnorientedFile(EntitySpriteInfo *, OpenedFile *, u32, u32, u32, bool8);
+void AxResInitFile(axdata *, OpenedFile *, u32, u32, u32, u32, bool8);
+void AxResInit(axdata *, axmain *, u32, u32, u32, u32, bool8);
+void AxResInitUnorientedFile(axdata *, OpenedFile *, u32, u32, u32, bool8);
 void RunAxAnimationFrame(struct axPokemon *);
 
 #endif // GUARD_SPRITE_H

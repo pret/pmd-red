@@ -426,14 +426,14 @@ void sub_8086854(void)
 
 void sub_80868F4(Entity *entity)
 {
-    entity->info->unk15C = 1;
-    entity->info->unk15D = 1;
+    entity->axObj.info->unk15C = 1;
+    entity->axObj.info->unk15D = 1;
 }
 
 void sub_8086910(Entity *entity)
 {
-    entity->info->unk15C = 0;
-    entity->info->unk15D = 0;
+    entity->axObj.info->unk15C = 0;
+    entity->axObj.info->unk15D = 0;
 }
 
 void sub_808692C(void)
@@ -456,7 +456,7 @@ void SpriteLookAroundEffect(Entity *entity)
     s8 r4;
     s8 r3;
 
-    r4 = sub_8002984(entity->info->action.direction, 4);
+    r4 = sub_8002984(entity->axObj.info->action.direction, 4);
 
     sub_80869E4(entity, 4, 2, r4);
 
@@ -484,7 +484,7 @@ void sub_80869E4(Entity *a0, s32 a1, u8 a2, s8 a3)
 
     tmp = (s8)a3;
 
-    info = a0->info;
+    info = a0->axObj.info;
     r4 = (s8)info->action.direction;
     while (r4 != tmp) {
         r4 = sub_8002A70(r4, tmp, a2);

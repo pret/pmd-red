@@ -69,7 +69,7 @@ void SetMessageArgument(char buffer[], Entity *entity, u32 param_3)
   switch(GetEntityType(entity))
   {
     case ENTITY_MONSTER:
-        SetMessageArgument_2(buffer, entity->info, param_3);
+        SetMessageArgument_2(buffer, entity->axObj.info, param_3);
         break;
     case ENTITY_ITEM:
         sub_8045BF8(buffer, GetItemData_1(entity));

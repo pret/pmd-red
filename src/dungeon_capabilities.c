@@ -22,7 +22,7 @@ const u8 gDirectionBitMasks_1[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 // These functions could use better names if someone figures out a clear pattern/reasoning.
 bool8 CheckVariousStatuses2(Entity *pokemon, bool8 checkBlinker)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
 
     if ((checkBlinker && pokemonInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER)
         || pokemonInfo->sleep.sleep == STATUS_SLEEP
@@ -41,7 +41,7 @@ bool8 CheckVariousStatuses2(Entity *pokemon, bool8 checkBlinker)
 
 bool8 sub_8070BC0(Entity* entity)
 {
-    EntityInfo *entityInfo = entity->info;
+    EntityInfo *entityInfo = entity->axObj.info;
 
     if (IsChargingAnyTwoTurnMove(entity, FALSE)
         || entityInfo->sleep.sleep == STATUS_YAWNING
@@ -79,7 +79,7 @@ bool8 sub_8070BC0(Entity* entity)
 
 bool8 CheckVariousConditions(Entity *pokemon)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
 
     if (pokemonInfo->clientType == CLIENT_TYPE_CLIENT
         || IsClientOrTeamBase(pokemonInfo->joinedAt.joinedAt)
@@ -96,7 +96,7 @@ bool8 CheckVariousConditions(Entity *pokemon)
 
 bool8 CheckVariousStatuses(Entity *pokemon)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
 
     if ((pokemonInfo->sleep.sleep != STATUS_SLEEPLESS
         && pokemonInfo->sleep.sleep != STATUS_NONE)
@@ -112,7 +112,7 @@ bool8 CheckVariousStatuses(Entity *pokemon)
 
 bool8 CannotAttack(Entity *pokemon, bool8 skipSleep)
 {
-  EntityInfo *pokemonInfo = pokemon->info;
+  EntityInfo *pokemonInfo = pokemon->axObj.info;
 
   if ((skipSleep ||
       pokemonInfo->sleep.sleep == STATUS_SLEEPLESS ||
@@ -134,7 +134,7 @@ bool8 CannotAttack(Entity *pokemon, bool8 skipSleep)
 
 bool8 CanMoveInDirection(Entity *pokemon, u32 direction)
 {
-    u8 crossableTerrain = GetCrossableTerrain(pokemon->info->id);
+    u8 crossableTerrain = GetCrossableTerrain(pokemon->axObj.info->id);
     struct Tile *currentMapTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x,
         pokemon->pos.y + gAdjacentTileOffsets[direction].y);
 
@@ -143,7 +143,7 @@ bool8 CanMoveInDirection(Entity *pokemon, u32 direction)
 
     if (!IsCurrentFixedRoomBossFight())
     {
-        if (pokemon->info->transformStatus.transformStatus == STATUS_MOBILE || HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
+        if (pokemon->axObj.info->transformStatus.transformStatus == STATUS_MOBILE || HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
             crossableTerrain = CROSSABLE_TERRAIN_WALL;
         else if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
             crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
