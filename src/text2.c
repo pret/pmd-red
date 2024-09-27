@@ -3210,3 +3210,164 @@ void sub_80089AC(const UnkTextStruct2 *r4, UnkTextStruct2_sub *r5_Str)
         }
     }
 }
+
+void PrepareTextbox_8008C6C(UnkTextStruct1 *strArr, u32 strId);
+
+void CallPrepareTextbox_8008C54(u32 strId)
+{
+    PrepareTextbox_8008C6C(gUnknown_2027370, strId);
+}
+
+UNUSED void nullsub_169(void) {}
+
+void PrepareTextbox_8008C6C(UnkTextStruct1 *strArr, u32 strId)
+{
+    s32 i;
+    UnkTextStruct1 *strPtr = &strArr[strId];
+
+    if (!strPtr->unk45) {
+        s32 count = (strPtr->unk4 * strPtr->unk8) * 32;
+        for (i = 0; i < count; i += 32) {
+            CpuClear(&strPtr->unk18[i / 4u], 32);
+        }
+    }
+    else {
+        s32 count = (strPtr->unk4 * (strPtr->unk8 - 1)) * 32;
+        u32 *ptr = strPtr->unk18;
+        for (i = 0; i < strPtr->unk4; i++) {
+            *(ptr++) = 0xFFFFFFFF;
+            *(ptr++) = 0xEEEEEEEE;
+            *(ptr++) = 0xDDDDDDDD;
+            *(ptr++) = 0;
+            *(ptr++) = 0;
+            *(ptr++) = 0;
+            *(ptr++) = 0;
+            *(ptr++) = 0;
+        }
+        for (i = 0; i < count; i += 32) {
+            CpuClear(ptr, 32);
+            ptr += 8;
+        }
+    }
+
+    if (strPtr->unkC == 6) {
+        strPtr->unk46 = 1;
+        sub_8007958(strArr, strId, 0, 10, strPtr->unk4 * 8, 0xE);
+        sub_8007958(strArr, strId, 0, 11, strPtr->unk4 * 8, 0xD);
+        strPtr->unk46 = 0;
+    }
+
+    strPtr->unk30 = strPtr->unk28;
+    strPtr->unk34 = strPtr->unk1C;
+    strPtr->unk38 = strPtr->unk2C;
+    strPtr->unk44 = 1;
+}
+
+bool8 sub_8008D8C(u32 strId)
+{
+    UnkTextStruct1 *strPtr = &gUnknown_2027370[strId];
+    return (strPtr->unk38 != 0);
+}
+
+UNUSED bool8 sub_8008DA8(void)
+{
+    return FALSE;
+}
+
+UNUSED void sub_8008DAC(s32 a0, s32 a1, s32 a2)
+{
+    gUnknown_202B038[0][a1][a0] = a2;
+    gUnknown_20274A5 = 1;
+}
+
+void sub_8008DC8(s32 a0, s32 a1, s32 a2, s32 a3)
+{
+    gUnknown_202B038[0][a1][a0] = a2;
+    gUnknown_202B038[1][a1][a0] = a3;
+    gUnknown_20274A5 = 1;
+}
+
+UNUSED void sub_8008DF4(s32 a0, s32 a1, u8 *a2)
+{
+    u8 r1;
+
+    while (1) {
+        if (*a2 == 0)
+            break;
+
+        r1 = *a2;
+        if (r1 >= 97 && r1 <= 122) {
+            r1 -= 32;
+        }
+        gUnknown_202B038[0][a1][a0] = 0xF000 | (r1 + 0x258);
+        a2++;
+        a0++;
+    }
+    gUnknown_20274A5 = 1;
+}
+
+UNUSED void sub_8008E58(s32 a0, s32 a1, u8 *a2, s32 a3)
+{
+    u8 r1;
+
+    while (1) {
+        if (*a2 == 0)
+            break;
+
+        r1 = *a2;
+        if (a3 == 0)
+            break;
+
+        if (r1 >= 97 && r1 <= 122) {
+            r1 -= 32;
+        }
+        gUnknown_202B038[0][a1][a0] = 0xF000 | (r1 + 0x258);
+        a2++;
+        a0++;
+        a3--;
+    }
+    gUnknown_20274A5 = 1;
+}
+
+extern s16 gCharacterSpacing;
+
+s32 sub_8008ED0(const u8 *str)
+{
+    s32 ret = 0;
+
+    while (1) {
+        u32 chr;
+
+        str = xxx_get_next_char_from_string(str, &chr);
+        if (chr == 0)
+            break;
+        if (chr == 0xD)
+            break;
+        if (chr == 0xA)
+            break;
+        if (chr == 0x82A0 || chr == 0x82A2)
+            continue;
+
+        if (chr == 0x23) {
+            switch (*str) {
+                case 0x6E:
+                    return ret;
+                case 0x5B:
+                    return ret;
+                case 0x50:
+                    return ret;
+            }
+        }
+        else if (chr == 0x60) {
+            ret += 6;
+        }
+        else {
+            unkChar *ptr = GetCharacter(chr);
+            if (ptr != NULL) {
+                ret += ptr->unk6 + gCharacterSpacing;
+            }
+        }
+    }
+
+    return ret;
+}
