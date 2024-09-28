@@ -32,22 +32,22 @@ static void SetKecleonBrosState(u32);
 static void UpdateKecleonStoreDialogue(void);
 
 static void sub_8018D30(void);
-static void sub_80194F8(void);
-static void sub_80195C0(void);
-static void sub_8019660(void);
-static void sub_8019700(void);
-static void sub_8019730(void);
-static void sub_8019850(void);
-static void sub_80198E8(void);
-static void sub_8019944(void);
+static void BuildKecleonBrosMainMenu(void);
+static void BuildKecleonBrosBuyItemMenu(void);
+static void BuildKecleonBrosSellItemMenu(void);
+static void BuildKecleonBrosYesNoMenu(void);
+static void HandleKecleonBrosMainMenu(void);
+static void HandleKecleonBrosBuyItemYesNoMenu(void);
+static void HandleKecleonBrosSellItemYesNoMenu(void);
+static void HandleKecleonBrosSellAllItemsMenu(void);
 static void sub_80199CC(void);
 static void sub_8019B08(void);
-static void sub_8019BBC(void);
-static void sub_8019C78(void);
+static void HandleKecleonBrosBuyItemMenu(void);
+static void HandleKecleonBrosSellItemMenu(void);
 static void sub_8019D30(void);
 static void sub_8019D4C(void);
-static void sub_8019D68(void);
-static void sub_8019DAC(void);
+static void ProceedToKecleonBros1FallbackState(void);
+static void KecleonCalcSellPriceForAllItems(void);
 static void sub_8019E04(bool32);
 
 enum MenuActions {
@@ -125,41 +125,41 @@ u32 KecleonBrosCallback(void)
     switch (sKecleonBrosWork1->currState) {
         case KECLEON_STORE_INIT:
         case KECLEON_STORE_MAIN_MENU:
-            sub_8019730();
+            HandleKecleonBrosMainMenu();
             break;
-        case 0x12:
-        case 0x13:
+        case 18:
+        case 19:
             sub_80199CC();
             break;
-        case 0x1a:
-        case 0x1b:
+        case 26:
+        case 27:
             sub_8019B08();
             break;
-        case 0x14:
-            sub_8019BBC();
+        case 20:
+            HandleKecleonBrosBuyItemMenu();
             break;
-        case 0x1c:
-            sub_8019C78();
+        case 28:
+            HandleKecleonBrosSellItemMenu();
             break;
-        case 0x16:
-            sub_8019850();
+        case KECLEON_STORE_BUY_ITEM:
+            HandleKecleonBrosBuyItemYesNoMenu();
             break;
-        case 0x1e:
-            sub_80198E8();
+        case KECLEON_STORE_SELL_ITEM:
+            HandleKecleonBrosSellItemYesNoMenu();
             break;
-        case 0x1f:
-            sub_8019944();
+        case KECLEON_STORE_SELL_ALL_ITEMS:
+            HandleKecleonBrosSellAllItemsMenu();
             break;
-        case 0x15:
+        case KECLEON_STORE_BUY_ITEM_INFO:
             sub_8019D30();
             break;
-        case 0x1d:
+        case KECLEON_STORE_SELL_ITEM_INFO:
             sub_8019D4C();
             break;
         case KECLEON_STORE_EXIT:
             return 3;
         default:
-            sub_8019D68();
+            ProceedToKecleonBros1FallbackState();
             break;
     }
     return 0;
@@ -207,11 +207,11 @@ static void sub_8018D30(void)
             sKecleonBrosWork1->unkE8[2] = sUnknown_80DB858;
             break;
         default:
-        case 21:
-        case 22:
+        case KECLEON_STORE_BUY_ITEM_INFO:
+        case KECLEON_STORE_BUY_ITEM:
         case 23:
-        case 24:
-        case 25:
+        case KECLEON_STORE_SELL_ITEM_MENU:
+        case KECLEON_STORE_SELL_ITEM_RECEIPT:
             for (i = 0; i < 4; i++)
                 sKecleonBrosWork1->unkE8[i] = sUnknown_80DB840;
             break;
@@ -225,26 +225,26 @@ static void UpdateKecleonStoreDialogue(void)
 {
     switch (sKecleonBrosWork1->currState) {
         case KECLEON_STORE_INIT:
-            sub_8019DAC();
-            sub_80194F8();
+            KecleonCalcSellPriceForAllItems();
+            BuildKecleonBrosMainMenu();
             sub_8019E04(FALSE);
             sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_00], 0, sKecleonBrosWork1->menuAction1,
                 sKecleonBrosWork1->menuItems, sKecleonBrosWork1->unk74, 4, 0, sKecleonBrosWork1->unkE4, 12);
             break;
         case KECLEON_STORE_MAIN_MENU:
-            sub_8019DAC();
-            sub_80194F8();
+            KecleonCalcSellPriceForAllItems();
+            BuildKecleonBrosMainMenu();
             sub_8019E04(FALSE);
             sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_01], 0, sKecleonBrosWork1->menuAction1,
                 sKecleonBrosWork1->menuItems, sKecleonBrosWork1->unk74, 4, 0, sKecleonBrosWork1->unkE4, 12);
             break;
-        case 2:
+        case KECLEON_STORE_INFO:
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_MAIN_MENU;
             sub_8019E04(FALSE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_22], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case 3:         
-            sKecleonBrosWork1->fallbackState = 4;
+            sKecleonBrosWork1->fallbackState = KECLEON_STORE_EXIT;
             sub_8019E04(FALSE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_02], 0, sKecleonBrosWork1->unkE4, 0x30D);
             break;
@@ -254,7 +254,7 @@ static void UpdateKecleonStoreDialogue(void)
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_12], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case KECLEON_STORE_NO_MONEY:
-            sKecleonBrosWork1->fallbackState = 16;
+            sKecleonBrosWork1->fallbackState = KECLEON_STORE_BUY_ITEM_MENU;
             sub_8019E04(TRUE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_13], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
@@ -263,12 +263,12 @@ static void UpdateKecleonStoreDialogue(void)
             sub_8019E04(TRUE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_14], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
-        case 8:
+        case KECLEON_STORE_NO_ITEMS_TO_SELL:
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_MAIN_MENU;
             sub_8019E04(TRUE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_15], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
-        case KECLEON_STORE_NO_ITEMS_TO_SELL:
+        case KECLEON_STORE_NO_ITEMS:
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_MAIN_MENU;
             sub_8019E04(TRUE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_16], 0, sKecleonBrosWork1->unkE4, 0x10D);
@@ -284,18 +284,18 @@ static void UpdateKecleonStoreDialogue(void)
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_18], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case KECLEON_STORE_NOT_ENOUGH_MONEY:
-            sKecleonBrosWork1->fallbackState = 16;
+            sKecleonBrosWork1->fallbackState = KECLEON_STORE_BUY_ITEM_MENU;
             sub_8019E04(TRUE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_19], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
         case KECLEON_STORE_CANT_SELL_ITEM:
             sub_8090E14(gFormatItems, &sKecleonBrosWork1->soldItem, NULL);
-            sKecleonBrosWork1->fallbackState = 24;
+            sKecleonBrosWork1->fallbackState = KECLEON_STORE_SELL_ITEM_MENU;
             sub_8019E04(TRUE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_20], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
-        case 14:
-            sKecleonBrosWork1->fallbackState = 24;
+        case KECLEON_STORE_SELL_ITEM_TOO_MUCH_MONEY:
+            sKecleonBrosWork1->fallbackState = KECLEON_STORE_SELL_ITEM_MENU;
             sub_8019E04(TRUE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_21], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
@@ -304,7 +304,7 @@ static void UpdateKecleonStoreDialogue(void)
             sub_8019E04(FALSE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_03], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
-        case 16:
+        case KECLEON_STORE_BUY_ITEM_MENU:
             sKecleonBrosWork1->fallbackState = 19;
             sub_8019E04(FALSE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_04], 0, sKecleonBrosWork1->unkE4, 0x10D);
@@ -335,17 +335,17 @@ static void UpdateKecleonStoreDialogue(void)
 
             sub_801AD34(0);
             DrawTeamMoneyBox(1);
-            sub_80195C0();
+            BuildKecleonBrosBuyItemMenu();
             sub_8012D60(&sKecleonBrosWork1->menu, sKecleonBrosWork1->menuItems, 0, sKecleonBrosWork1->unk74, sKecleonBrosWork1->menuAction3, 2);
             break;
-        case 22:
-            sub_8019700();
+        case KECLEON_STORE_BUY_ITEM:
+            BuildKecleonBrosYesNoMenu();
             sub_8090E14(gFormatItems, &sKecleonBrosWork1->soldItem, 0);
             gFormatData_202DE30 = sKecleonBrosWork1->itemSellPrice;
             sub_8019E04(FALSE);
             sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_05], 0, 5,sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->unkE4, 12);
             break;
-        case 17:
+        case KECLEON_STORE_BUY_ITEM_RECEIPT:
             if (CountKecleonItems() == 0) {
                 if (sKecleonBrosWork1->isKecleonItemShop != FALSE)
                     sub_801A010();
@@ -362,7 +362,7 @@ static void UpdateKecleonStoreDialogue(void)
                     sKecleonBrosWork1->fallbackState = KECLEON_STORE_MAIN_MENU;
                 }
                 else
-                    sKecleonBrosWork1->fallbackState = 16;
+                    sKecleonBrosWork1->fallbackState = KECLEON_STORE_BUY_ITEM_MENU;
             }
             sub_8019E04(FALSE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_06], 0, sKecleonBrosWork1->unkE4, 0x10D);
@@ -372,7 +372,7 @@ static void UpdateKecleonStoreDialogue(void)
             sub_8019E04(FALSE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_07], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
-        case 24:
+        case KECLEON_STORE_SELL_ITEM_MENU:
             sKecleonBrosWork1->fallbackState = 27;
             sub_8019E04(FALSE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_08], 0, sKecleonBrosWork1->unkE4, 0x10D);
@@ -388,38 +388,38 @@ static void UpdateKecleonStoreDialogue(void)
         case 28:
             sub_801A9E0();
             DrawTeamMoneyBox(1);
-            sub_8019660();
+            BuildKecleonBrosSellItemMenu();
             sub_8012D60(&sKecleonBrosWork1->menu, sKecleonBrosWork1->menuItems, 0, sKecleonBrosWork1->unk74, sKecleonBrosWork1->menuAction2, 2);
             break;
-        case 30:
-            sub_8019700();
+        case KECLEON_STORE_SELL_ITEM:
+            BuildKecleonBrosYesNoMenu();
             sub_8090E14(gFormatItems, &sKecleonBrosWork1->soldItem, NULL);
             gFormatData_202DE30 = sKecleonBrosWork1->itemSellPrice;
             sub_8019E04(FALSE);
             sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_09], 0, 5, sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->unkE4, 12);
             break;
-        case 21:
-        case 29:
+        case KECLEON_STORE_BUY_ITEM_INFO:
+        case KECLEON_STORE_SELL_ITEM_INFO:
             sub_801B3C0(&sKecleonBrosWork1->soldItem);
             break;
-        case 25:
+        case KECLEON_STORE_SELL_ITEM_RECEIPT:
             if (GetNumberOfFilledInventorySlots() == 0 || gTeamInventoryRef->teamMoney >= MAX_TEAM_MONEY) {
                 sub_801A928();
                 sKecleonBrosWork1->fallbackState = KECLEON_STORE_MAIN_MENU;
             }
             else
-                sKecleonBrosWork1->fallbackState = 24;
+                sKecleonBrosWork1->fallbackState = KECLEON_STORE_SELL_ITEM_MENU;
 
             sub_8019E04(FALSE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_11], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
-        case 31:
-            sub_8019700();
+        case KECLEON_STORE_SELL_ALL_ITEMS:
+            BuildKecleonBrosYesNoMenu();
             gFormatData_202DE30 = sKecleonBrosWork1->inventoryItemSellPrice;
             sub_8019E04(FALSE);
             sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_10], 0, 5, sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->unkE4, 12);
             break;
-        case 32:
+        case KECLEON_STORE_SELL_ALL_ITEMS_RECEIPT:
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_MAIN_MENU;
             sub_8019E04(FALSE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_11], 0, sKecleonBrosWork1->unkE4, 0x10D);
@@ -427,7 +427,7 @@ static void UpdateKecleonStoreDialogue(void)
     }
 }
 
-static void sub_80194F8(void)
+static void BuildKecleonBrosMainMenu(void)
 {
     s32 i;
     s32 loopMax;
@@ -473,7 +473,7 @@ static void sub_80194F8(void)
     }
 }
 
-static void sub_80195C0(void)
+static void BuildKecleonBrosBuyItemMenu(void)
 {
     s32 i;
     s32 loopMax;
@@ -507,7 +507,7 @@ static void sub_80195C0(void)
     }
 }
 
-static void sub_8019660(void)
+static void BuildKecleonBrosSellItemMenu(void)
 {
     s32 i;
     s32 loopMax;
@@ -541,7 +541,7 @@ static void sub_8019660(void)
     }
 }
 
-static void sub_8019700(void)
+static void BuildKecleonBrosYesNoMenu(void)
 {
     s32 loopMax = 0;
     sKecleonBrosWork1->menuItems[loopMax].text = gCommonYes[0];
@@ -556,14 +556,14 @@ static void sub_8019700(void)
     sKecleonBrosWork1->menuItems[loopMax].menuAction = CANCEL_ACTION;
 }
 
-static void sub_8019730(void)
+static void HandleKecleonBrosMainMenu(void)
 {
     s32 menuAction;
 
     if (sub_80144A4(&menuAction) != 0)
         return;
 
-    if (menuAction != 1)
+    if (menuAction != CANCEL_ACTION)
         sKecleonBrosWork1->menuAction1 = menuAction;
 
     switch (menuAction) {
@@ -577,9 +577,9 @@ static void sub_8019730(void)
             break;
         case SELL_ACTION:
             if (GetNumberOfFilledInventorySlots() == 0)
-                SetKecleonBrosState(KECLEON_STORE_NO_ITEMS_TO_SELL);
+                SetKecleonBrosState(KECLEON_STORE_NO_ITEMS);
             else if (sKecleonBrosWork1->numInventoryItemToSell == 0)
-                SetKecleonBrosState(8);
+                SetKecleonBrosState(KECLEON_STORE_NO_ITEMS_TO_SELL);
             else if (gTeamInventoryRef->teamMoney < MAX_TEAM_MONEY)
                 SetKecleonBrosState(23);
             else
@@ -587,16 +587,16 @@ static void sub_8019730(void)
             break;
         case SELL_ALL_ACTION:
             if (GetNumberOfFilledInventorySlots() == 0)
-                SetKecleonBrosState(KECLEON_STORE_NO_ITEMS_TO_SELL);
+                SetKecleonBrosState(KECLEON_STORE_NO_ITEMS);
             else if (sKecleonBrosWork1->numInventoryItemToSell == 0)
-                SetKecleonBrosState(8);
+                SetKecleonBrosState(KECLEON_STORE_NO_ITEMS_TO_SELL);
             else if (sKecleonBrosWork1->inventoryItemSellPrice + gTeamInventoryRef->teamMoney > MAX_TEAM_MONEY)
                 SetKecleonBrosState(KECLEON_STORE_TOO_MUCH_MONEY);
             else
-                SetKecleonBrosState(31);
+                SetKecleonBrosState(KECLEON_STORE_SELL_ALL_ITEMS);
             break;
         case INFO_ACTION:
-            SetKecleonBrosState(2);
+            SetKecleonBrosState(KECLEON_STORE_INFO);
             break;
         case CANCEL_ACTION:
             SetKecleonBrosState(3);
@@ -604,7 +604,7 @@ static void sub_8019730(void)
     }
 }
 
-static void sub_8019850(void)
+static void HandleKecleonBrosBuyItemYesNoMenu(void)
 {
     s32 menuAction;
 
@@ -625,17 +625,17 @@ static void sub_8019850(void)
                 }
 
                 PlaySound(332);
-                SetKecleonBrosState(17);
+                SetKecleonBrosState(KECLEON_STORE_BUY_ITEM_RECEIPT);
                 break;
             case NO_ACTION:
             case CANCEL_ACTION:
-                SetKecleonBrosState(16);
+                SetKecleonBrosState(KECLEON_STORE_BUY_ITEM_MENU);
                 break;
         }
     }
 }
 
-static void sub_80198E8(void)
+static void HandleKecleonBrosSellItemYesNoMenu(void)
 {
     s32 menuAction;
 
@@ -645,17 +645,17 @@ static void sub_80198E8(void)
                 AddToTeamMoney(sKecleonBrosWork1->itemSellPrice);
                 ShiftItemsDownFrom(sKecleonBrosWork1->soldItemInventoryIndex);
                 PlaySound(332);
-                SetKecleonBrosState(25);
+                SetKecleonBrosState(KECLEON_STORE_SELL_ITEM_RECEIPT);
                 break;
             case NO_ACTION:
             case CANCEL_ACTION:
-                SetKecleonBrosState(24);
+                SetKecleonBrosState(KECLEON_STORE_SELL_ITEM_MENU);
                 break;
         }
     }
 }
 
-static void sub_8019944(void)
+static void HandleKecleonBrosSellAllItemsMenu(void)
 {
     s32 slotIndex;
     s32 menuAction;
@@ -674,7 +674,7 @@ static void sub_8019944(void)
                 FillInventoryGaps();
                 AddToTeamMoney(sKecleonBrosWork1->inventoryItemSellPrice);
                 PlaySound(0x14c);
-                SetKecleonBrosState(32);
+                SetKecleonBrosState(KECLEON_STORE_SELL_ALL_ITEMS_RECEIPT);
                 break;
             case CANCEL_ACTION:
             case NO_ACTION:
@@ -695,7 +695,7 @@ static void sub_80199CC(void)
         menuAction = sub_801A2A8(TRUE);
 
     switch (menuAction) {
-        case SELL_ACTION:
+        case 3:
             if (sKecleonBrosWork1->isKecleonItemShop) {
                 sKecleonBrosWork1->itemShopItemIndex = sub_8019FB0();
                 item = GetKecleonShopItem(sKecleonBrosWork1->itemShopItemIndex);
@@ -710,7 +710,7 @@ static void sub_80199CC(void)
             sKecleonBrosWork1->itemSellPrice = GetStackBuyPrice(&sKecleonBrosWork1->soldItem);
             SetKecleonBrosState(20);
             break;
-        case SELL_ALL_ACTION:
+        case 4:
             if (sKecleonBrosWork1->isKecleonItemShop) {
                 sKecleonBrosWork1->itemShopItemIndex = sub_8019FB0();
                 item = GetKecleonShopItem(sKecleonBrosWork1->itemShopItemIndex);
@@ -723,9 +723,9 @@ static void sub_80199CC(void)
             xxx_init_itemslot_8090A8C(&sKecleonBrosWork1->soldItem, item->id, 0);
             sKecleonBrosWork1->soldItem.quantity = item->quantity;
             sKecleonBrosWork1->itemSellPrice = GetStackBuyPrice(&sKecleonBrosWork1->soldItem);
-            SetKecleonBrosState(21);
+            SetKecleonBrosState(KECLEON_STORE_BUY_ITEM_INFO);
             break;
-        case BUY_ACTION:
+        case 2:
             if (sKecleonBrosWork1->isKecleonItemShop)
                 sub_801A010();
             else
@@ -733,7 +733,7 @@ static void sub_80199CC(void)
 
             SetKecleonBrosState(KECLEON_STORE_MAIN_MENU);
             break;
-        case CANCEL_ACTION:
+        case 1:
             sub_801AD34(0);
             DrawTeamMoneyBox(1);
             break;
@@ -756,7 +756,7 @@ static void sub_8019B08(void)
             sKecleonBrosWork1->soldItem = gTeamInventoryRef->teamItems[sKecleonBrosWork1->soldItemInventoryIndex];
             sKecleonBrosWork1->itemSellPrice = GetStackSellPrice(&sKecleonBrosWork1->soldItem);
             sub_8099690(0);
-            SetKecleonBrosState(29);
+            SetKecleonBrosState(KECLEON_STORE_SELL_ITEM_INFO);
             break;
         case 2:
             sub_801A928();
@@ -769,7 +769,7 @@ static void sub_8019B08(void)
     }
 }
 
-static void sub_8019BBC(void)
+static void HandleKecleonBrosBuyItemMenu(void)
 {
     s32 menuAction;
 
@@ -780,7 +780,7 @@ static void sub_8019BBC(void)
     else
         sub_801A2A8(FALSE);
 
-    if (sub_8012FD8(&sKecleonBrosWork1->menu) == 0 && (sub_8013114(&sKecleonBrosWork1->menu, &menuAction), menuAction != 1))
+    if (sub_8012FD8(&sKecleonBrosWork1->menu) == 0 && (sub_8013114(&sKecleonBrosWork1->menu, &menuAction), menuAction != CANCEL_ACTION))
         sKecleonBrosWork1->menuAction3 = menuAction;
 
     switch (menuAction) {
@@ -790,10 +790,10 @@ static void sub_8019BBC(void)
             else if (sKecleonBrosWork1->itemSellPrice > gTeamInventoryRef->teamMoney)
                 SetKecleonBrosState(KECLEON_STORE_NOT_ENOUGH_MONEY);
             else
-                SetKecleonBrosState(22);
+                SetKecleonBrosState(KECLEON_STORE_BUY_ITEM);
             break;
         case INFO_ACTION:
-            SetKecleonBrosState(21);
+            SetKecleonBrosState(KECLEON_STORE_BUY_ITEM_INFO);
             break;
         case CANCEL_ACTION:
             SetKecleonBrosState(19);
@@ -801,7 +801,7 @@ static void sub_8019BBC(void)
     }
 }
 
-static void sub_8019C78(void)
+static void HandleKecleonBrosSellItemMenu(void)
 {
     s32 menuAction;
 
@@ -818,13 +818,13 @@ static void sub_8019C78(void)
             if (!CanSellItem(sKecleonBrosWork1->soldItem.id))
                 SetKecleonBrosState(KECLEON_STORE_CANT_SELL_ITEM);
             else if (sKecleonBrosWork1->itemSellPrice + gTeamInventoryRef->teamMoney > MAX_TEAM_MONEY)
-                SetKecleonBrosState(14);
+                SetKecleonBrosState(KECLEON_STORE_SELL_ITEM_TOO_MUCH_MONEY);
             else
-                SetKecleonBrosState(30);
+                SetKecleonBrosState(KECLEON_STORE_SELL_ITEM);
             break;
         case INFO_ACTION:
             sub_8099690(0);
-            SetKecleonBrosState(29);
+            SetKecleonBrosState(KECLEON_STORE_SELL_ITEM_INFO);
             break;
         case CANCEL_ACTION:
             SetKecleonBrosState(27);
@@ -860,7 +860,7 @@ static void sub_8019D4C(void)
     }
 }
 
-static void sub_8019D68(void)
+static void ProceedToKecleonBros1FallbackState(void)
 {
     s32 temp;
 
@@ -876,7 +876,7 @@ static u32 CountKecleonItems(void)
         return CountKecleonWareItems();
 }
 
-static void sub_8019DAC(void)
+static void KecleonCalcSellPriceForAllItems(void)
 {
     s32 sellPrice;
     Item *item;
