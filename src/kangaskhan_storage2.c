@@ -21,15 +21,15 @@ static void UpdateKangaskhanStorage2State(u32);
 static void sub_8017F28(void);
 static void sub_8018100(void);
 static void sub_8018280(void);
-static void sub_80182E4(void);
-static void sub_801841C(void);
-static void sub_80184D4(void);
-static void sub_8018588(void);
+static void BuildKangaskhanStorage2MainMenu(void);
+static void BuildKangaskhanStorage2StoreMenu(void);
+static void BuildKangaskhanStorage2TakeMenu(void);
+static void HandleKangaskhanStorage2MainMenu(void);
 static void sub_8018620(void);
 static void sub_80186F8(void);
 static void sub_8018854(void);
-static void sub_8018904(void);
-static void sub_80189C8(void);
+static void HandleKangaskhanStorage2StoreMenu(void);
+static void HandleKangaskhanStorage2TakeMenu(void);
 static void sub_8018AC8(void);
 static void sub_8018AE4(void);
 
@@ -59,14 +59,14 @@ u32 sub_8017E54(void)
             UpdateKangaskhanStorage2State(KANGASKHAN_STORAGE_2_MAIN);
             break;
         case KANGASKHAN_STORAGE_2_MAIN:
-            sub_8018588();
+            HandleKangaskhanStorage2MainMenu();
             break;
         case 4:
         case 5:
             sub_8018620();
             break;
         case 6:
-            sub_8018904();
+            HandleKangaskhanStorage2StoreMenu();
             break;
         case 7:
             sub_8018AC8();
@@ -79,7 +79,7 @@ u32 sub_8017E54(void)
             sub_8018854();
             break;
         case 13:
-            sub_80189C8();
+            HandleKangaskhanStorage2TakeMenu();
             break;
         case 14:
             sub_8018AE4();
@@ -116,7 +116,7 @@ static void sub_8017F28(void)
             sUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
             sUnknown_203B20C->unkF0[1] = sUnknown_80DB7B8;
             sUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
-            sub_80182E4();
+            BuildKangaskhanStorage2MainMenu();
             sUnknown_203B20C->unkF0[2] = sUnknown_80DB7D0;
             sub_8012CAC(&sUnknown_203B20C->unkF0[2], sUnknown_203B20C->unk20);
             break;
@@ -165,7 +165,7 @@ static void sub_8018100(void)
             break;
         case 6:
             sub_801A9E0();
-            sub_801841C();
+            BuildKangaskhanStorage2StoreMenu();
             sub_8012D60(&sUnknown_203B20C->unk70, sUnknown_203B20C->unk20, 0, sUnknown_203B20C->unk60, sUnknown_203B20C->menuAction2, 2);
             break;
         case 7:
@@ -199,7 +199,7 @@ static void sub_8018100(void)
         case 13:
             sub_801CCD8();
             sub_801AD34(0);
-            sub_80184D4();
+            BuildKangaskhanStorage2TakeMenu();
             sub_8012D60(&sUnknown_203B20C->unk70, sUnknown_203B20C->unk20, 0, sUnknown_203B20C->unk60, sUnknown_203B20C->menuAction3, 2);
             break;
         case 14:
@@ -223,7 +223,7 @@ static void sub_8018280(void)
     sub_8012EA4(&sUnknown_203B20C->unk70, 0);
 }
 
-static void sub_80182E4(void)
+static void BuildKangaskhanStorage2MainMenu(void)
 {
     int index;
     s32 loopMax;
@@ -266,7 +266,7 @@ static void sub_80182E4(void)
     }
 }
 
-static void sub_801841C(void)
+static void BuildKangaskhanStorage2StoreMenu(void)
 {
     s32 index;
     s32 loopMax;
@@ -301,7 +301,7 @@ static void sub_801841C(void)
     }
 }
 
-static void sub_80184D4(void)
+static void BuildKangaskhanStorage2TakeMenu(void)
 {
     s32 index;
     s32 loopMax;
@@ -337,7 +337,7 @@ static void sub_80184D4(void)
     }
 }
 
-static void sub_8018588(void)
+static void HandleKangaskhanStorage2MainMenu(void)
 {
     s32 menuAction;
     menuAction = 0;
@@ -507,7 +507,7 @@ static void sub_8018854(void)
     }
 }
 
-static void sub_8018904(void)
+static void HandleKangaskhanStorage2StoreMenu(void)
 {
     s32 menuAction;
 
@@ -553,7 +553,7 @@ static void sub_8018904(void)
     }
 }
 
-static void sub_80189C8(void)
+static void HandleKangaskhanStorage2TakeMenu(void)
 {
     BulkItem item;
     s32 menuAction;

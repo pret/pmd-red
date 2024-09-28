@@ -43,9 +43,9 @@ static void SetWigglytuffState(s32 newState);
 static void UpdateWigglytuffDialogue(void);
 
 static void sub_8021D5C(void);
-static void sub_80222C8(void);
+static void BuildWigglytuffMainMenu(void);
 static void sub_8022380(void);
-static void sub_8022460(void);
+static void HandleWigglytuffMainMenu(void);
 static void sub_8022538(void);
 static void sub_80225C8(void);
 static void sub_8022668(void);
@@ -93,7 +93,7 @@ u32 sub_8021C5C(void)
     switch (sWigglytuffShop3Work->state) {
         case WIGGLYTUFF_INIT:
         case WIGGLYTUFF_MAIN_MENU:
-            sub_8022460();
+            HandleWigglytuffMainMenu();
             break;
         case WIGGLYTUFF_UNK9:
         case WIGGLYTUFF_UNKA:
@@ -176,11 +176,11 @@ static void UpdateWigglytuffDialogue(void)
 
     switch (sWigglytuffShop3Work->state) {
         case WIGGLYTUFF_INIT:
-            sub_80222C8();
+            BuildWigglytuffMainMenu();
             sub_8014248(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_00], 0, sWigglytuffShop3Work->menuAction1, sWigglytuffShop3Work->unk1C, sWigglytuffShop3Work->unk5C, 4, 0, sWigglytuffShop3Work->unkCC, 12);
             break;
         case WIGGLYTUFF_MAIN_MENU:
-            sub_80222C8();
+            BuildWigglytuffMainMenu();
             sub_8014248(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_01], 0, sWigglytuffShop3Work->menuAction1, sWigglytuffShop3Work->unk1C, sWigglytuffShop3Work->unk5C, 4, 0, sWigglytuffShop3Work->unkCC, 12);
             break;
         case FRIEND_AREA_SELECT_BUY:
@@ -328,7 +328,7 @@ static void UpdateWigglytuffDialogue(void)
     }
 }
 
-static void sub_80222C8(void)
+static void BuildWigglytuffMainMenu(void)
 {
     s32 i;
     s32 index = 0;
@@ -416,7 +416,7 @@ static void CreateWigglytuffConfirmFriendAreaMenu(void)
     sWigglytuffShop3Work->unk1C[index].menuAction = CANCEL_ACTION;
 }
 
-static void sub_8022460(void)
+static void HandleWigglytuffMainMenu(void)
 {
     s32 menuAction;
 

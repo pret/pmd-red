@@ -88,18 +88,19 @@ ALIGNED(4) const u8 gUnknown_80E0A0C[] = _(
         " ...Uh{COMMA} no?\n"
         "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.");
 
-extern void sub_8031300(void);
-extern void sub_803136C(void);
-extern void sub_80313D8(u32);
-extern void sub_8031498(void);
-extern void sub_80310FC();
-extern void sub_8031258();
+static void sub_8031300(void);
+static void HandleWonderMail6MainMenu(void);
+static void HandleWonderMail6DeleteMailMenu(u32);
+static void sub_8031498(void);
+static void sub_80310FC();
+static void sub_8031258();
 
 enum States {
-    INIT_STATE = 0,
-    DELETE_SINGLE_MAIL_STATE = 2,
-    DELETE_ALL_MAIL_STATE = 3,
-    INFO_STATE = 4,
+    INIT_STATE,
+    MAIN_MENU,
+    DELETE_SINGLE_MAIL_STATE,
+    DELETE_ALL_MAIL_STATE,
+    INFO_STATE,
 };
 
 bool8 sub_8030F58(u32 wonderMailType)
@@ -150,12 +151,12 @@ s32 sub_8031050(void)
         case INIT_STATE:
             sub_8031300();
             break;
-        case 1:
-            sub_803136C();
+        case MAIN_MENU:
+            HandleWonderMail6MainMenu();
             break;
         case DELETE_SINGLE_MAIL_STATE:
         case DELETE_ALL_MAIL_STATE:
-            sub_80313D8(gUnknown_203B328->state);
+            HandleWonderMail6DeleteMailMenu(gUnknown_203B328->state);
             break;
         case INFO_STATE:
             sub_8031498();
@@ -184,7 +185,7 @@ void sub_80310E4(u32 newState)
     sub_8031258();
 }
 
-void sub_80310FC(void)
+static void sub_80310FC(void)
 {
     RestoreUnkTextStruct_8006518(gUnknown_203B328->unkA8);
     switch(gUnknown_203B328->state)
@@ -194,7 +195,7 @@ void sub_80310FC(void)
             gUnknown_203B328->unkA8[2] = gUnknown_80E0990;
             gUnknown_203B328->unkA8[3] = gUnknown_80E0990;
             break;
-        case 1:
+        case MAIN_MENU:
             gUnknown_203B328->unkA8[1] = gUnknown_80E09A8;
             gUnknown_203B328->unkA8[2] = gUnknown_80E0990;
             gUnknown_203B328->unkA8[3] = gUnknown_80E0990;
@@ -222,14 +223,14 @@ void sub_80310FC(void)
     xxx_call_save_unk_text_struct_800641C(gUnknown_203B328->unkA8, TRUE, TRUE);
 }
 
-void sub_8031258(void)
+static void sub_8031258(void)
 {
     switch(gUnknown_203B328->state)
     {
         case INIT_STATE:
             sub_8030810(1);
             break;
-        case 1:
+        case MAIN_MENU:
             sub_803092C();
             sub_8012D60(&gUnknown_203B328->unk8, gUnknown_80E0968, NULL, NULL, DELETE_ACTION, 1);
             break;
@@ -249,13 +250,13 @@ void sub_8031258(void)
     }
 }
 
-void sub_8031300(void)
+static void sub_8031300(void)
 {
     switch(sub_8030768(1))
     {
         case 3:
             gUnknown_203B328->mailIndex = sub_80307EC();
-            sub_80310E4(1);
+            sub_80310E4(MAIN_MENU);
             break;
         case 4:
             gUnknown_203B328->mailIndex = sub_80307EC();
@@ -270,13 +271,13 @@ void sub_8031300(void)
     }
 }
 
-void sub_803136C(void)
+static void HandleWonderMail6MainMenu(void)
 {
   s32 menuAction;
   
   menuAction = 0;
   sub_8030768(0);
-  if (sub_8012FD8(&gUnknown_203B328->unk8) == '\0') {
+  if (!sub_8012FD8(&gUnknown_203B328->unk8)) {
     sub_8013114(&gUnknown_203B328->unk8,&menuAction);
   }
 
@@ -298,7 +299,7 @@ void sub_803136C(void)
   }
 }
 
-void sub_80313D8(u32 state)
+static void HandleWonderMail6DeleteMailMenu(u32 state)
 {
   s32 index;
   s32 menuAction;
@@ -307,7 +308,7 @@ void sub_80313D8(u32 state)
   menuAction = 0;
   sub_8030768(0);
   sub_8012FD8(&gUnknown_203B328->unk8);
-  if (sub_8012FD8(&gUnknown_203B328->unk58) == 0) {
+  if (!sub_8012FD8(&gUnknown_203B328->unk58)) {
     sub_8013114(&gUnknown_203B328->unk58,&menuAction);
   }
 
@@ -345,7 +346,7 @@ void sub_80313D8(u32 state)
   }
 }
 
-void sub_8031498(void)
+static void sub_8031498(void)
 {
     switch(sub_8030DA0())
     {

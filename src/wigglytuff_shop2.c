@@ -22,7 +22,7 @@ static void sub_8021820(void);
 static void sub_8021878(void);
 static void PopulateWigglytuffShopFriendAreaInfoScreen(void);
 static void sub_8021A60(void);
-static s32 sub_8021B58(s16 species);
+static s32 CheckSpeciesinWigglytuffFriendArea(s16 species);
 
 bool8 CreateWigglytuffShopFriendAreaMenu(u8 friendArea, bool8 a1, s32 a2)
 {
@@ -132,7 +132,7 @@ static void PopulateWigglytuffShopFriendAreaInfoScreen(void)
 
 static void sub_8021A60(void)
 {
-    s32 sVar4;
+    s32 areaIndex;
     s32 iVar6;
     s32 index;
     PokemonStruct1 *pokeStruct;
@@ -158,9 +158,9 @@ static void sub_8021A60(void)
         if (!sub_8098134(index))
             continue;
 
-        sVar4 = sub_8021B58(index);
-        if (sVar4 != -1)
-            sWigglytuffShop2Work->pokemonStatus[sVar4] = POKEMON_SEEN;
+        areaIndex = CheckSpeciesinWigglytuffFriendArea(index);
+        if (areaIndex != -1)
+            sWigglytuffShop2Work->pokemonStatus[areaIndex] = POKEMON_SEEN;
     }
 
     for (index = 0; index < NUM_MONSTERS; index++) {
@@ -168,13 +168,14 @@ static void sub_8021A60(void)
         if (!((u8)pokeStruct->unk0 & 1))
             continue;
 
-        sVar4 = sub_8021B58(pokeStruct->speciesNum);
-        if (sVar4 != -1)
-            sWigglytuffShop2Work->pokemonStatus[sVar4] = POKEMON_RECRUITED;
+        areaIndex = CheckSpeciesinWigglytuffFriendArea(pokeStruct->speciesNum);
+        if (areaIndex != -1)
+            sWigglytuffShop2Work->pokemonStatus[areaIndex] = POKEMON_RECRUITED;
     }
 }
 
-static s32 sub_8021B58(s16 species)
+/* Return index of pokemon if in the friend area, else return -1 */ 
+static s32 CheckSpeciesinWigglytuffFriendArea(s16 species)
 {
     s32 baseSpecies;
     s32 i;
