@@ -129,6 +129,12 @@ extern u8 *gUnknown_80FBBD4[];
 extern u8 *gUnknown_80FBBB8[];
 extern u8 *gUnknown_80FBB94[];
 extern s16 gUnknown_80F4EF4[];
+extern u8 *gUnknown_80FBE84[];
+extern u8 *gUnknown_80FBEA0[];
+extern u8 *gUnknown_80FBE64[];
+extern u8 *gUnknown_80FBDF0[];
+extern u8 *gUnknown_80FBDC4[];
+extern u8 *gUnknown_80FBE14[];
 
 extern s32 gFormatData_202DE30[10];
 
@@ -152,11 +158,12 @@ extern void nullsub_81(Entity *);
 extern void nullsub_82(Entity *);
 extern void nullsub_83(Entity *);
 extern void nullsub_84(Entity *);
-
-extern void sub_8041D9C(Entity *);
+extern void nullsub_85(Entity *);
 
 extern void sub_803F580(u32);
 extern void sub_8040A84(void);
+extern void sub_8041D9C(Entity *);
+extern void sub_8041DB0(Entity *pokemon);
 extern void sub_8041CA8(Entity *);
 extern void sub_8041C94(Entity *);
 extern bool8 sub_8045888(Entity *r0);
@@ -1273,5 +1280,93 @@ void sub_8078A58(struct Entity *pokemon, struct Entity *target, s32 param_3, s32
             sub_80522F4(pokemon, target, *gUnknown_80FBE40);
     }
 
+    EntityUpdateStatusSprites(target);
+}
+
+void sub_8078B5C(Entity *pokemon, Entity *target, u32 param_3, s32 param_4, bool8 displayMessage)
+{
+    bool8 bVar1;
+    FixedPoint uVar7;
+    FixedPoint *bellyPtr;
+    EntityInfo *targetInfo;
+    FixedPoint *puVar8;
+    FixedPoint sp_0x0;
+    FixedPoint sp_0x4;
+    FixedPoint sp_0x8;
+    FixedPoint sp_0x10;
+    FixedPoint sp_0x14;
+    FixedPoint sp_0x18;
+    FixedPoint sp_0x20;
+    u32 sp_0x24;
+
+    if (!EntityExists(target)) {
+        return;
+    }
+    targetInfo = target->info;
+    if ((!targetInfo->isTeamLeader) && (HasHeldItem(target,0x1b))) {
+        if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBEA0);
+        return;
+    }
+    bVar1 = FALSE;
+    if (param_4 != 0) {
+        if(FixedPointToInt(targetInfo->belly) >= FixedPointToInt(targetInfo->maxBelly))
+        {
+            bVar1 = TRUE;
+        }
+        if (param_3 == 999) 
+        {
+            bVar1 = TRUE;
+        }
+    }
+    if (bVar1) {
+        bellyPtr = &targetInfo->maxBelly;
+        sp_0x20 = *bellyPtr;
+        sp_0x24 = (FixedPointToInt(targetInfo->belly) ==  FixedPointToInt(*bellyPtr));
+        sp_0x0 = IntToFixedPoint(param_4);
+        sp_0x4 = FixedPoint_Add(*bellyPtr,sp_0x0);
+        *bellyPtr = sp_0x4;
+        sp_0x8 = IntToFixedPoint(200);
+        *bellyPtr = FixedPoint_Min(sp_0x4,sp_0x8);
+        targetInfo->belly = *bellyPtr;
+        if ((sp_0x24 == 0) && (displayMessage)) {
+            sub_80522F4(pokemon,target,*gUnknown_80FBE64);
+        }
+        if (FixedPointToInt(sp_0x20) == FixedPointToInt(targetInfo->maxBelly)) {
+            SetMessageArgument(gAvailablePokemonNames,target,0);
+            if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBDF0);
+        }
+        else {
+            sub_8041DB0(target);
+            SetMessageArgument(gAvailablePokemonNames,target,0);
+            if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBDC4);
+        }
+    }
+    else {
+        bellyPtr = &targetInfo->belly;
+        uVar7 = *bellyPtr;
+        sp_0x10 = IntToFixedPoint(param_3);
+        sp_0x14 = FixedPoint_Add(*bellyPtr,sp_0x10);
+        *bellyPtr = sp_0x14;
+        puVar8 = &targetInfo->maxBelly;
+        sp_0x18 = FixedPoint_Min(sp_0x14,*puVar8);
+        *bellyPtr = sp_0x18;
+        if (param_3 == 999) {
+            *bellyPtr = *puVar8;
+        }
+        nullsub_85(target);
+        SetMessageArgument(gAvailablePokemonNames,target,0);
+        if (FixedPointToInt(uVar7) ==  FixedPointToInt(*bellyPtr)) {
+            if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBE14);
+        }
+        else {
+            if (FixedPointToInt(*bellyPtr) >= FixedPointToInt(*puVar8)) {
+                if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBE64);
+            }
+            else
+        {
+                if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBE84);
+            }
+        }
+    }
     EntityUpdateStatusSprites(target);
 }
