@@ -1283,10 +1283,10 @@ void sub_8078A58(struct Entity *pokemon, struct Entity *target, s32 param_3, s32
     EntityUpdateStatusSprites(target);
 }
 
-void sub_8078B5C(Entity *pokemon, Entity *target, u32 param_3, s32 param_4, bool8 displayMessage)
+void sub_8078B5C(Entity *pokemon, Entity *target, u32 bellyIncrement, s32 maxBellyIncrement, bool8 displayMessage)
 {
-    bool8 bVar1;
-    FixedPoint uVar7;
+    bool8 bellySizeIncreased;
+    FixedPoint oldBelly;
     FixedPoint *bellyPtr;
     EntityInfo *targetInfo;
     FixedPoint *puVar8;
@@ -1297,7 +1297,7 @@ void sub_8078B5C(Entity *pokemon, Entity *target, u32 param_3, s32 param_4, bool
     FixedPoint sp_0x14;
     FixedPoint sp_0x18;
     FixedPoint sp_0x20;
-    u32 sp_0x24;
+    bool32 bellySame;
 
     if (!EntityExists(target)) {
         return;
@@ -1307,64 +1307,64 @@ void sub_8078B5C(Entity *pokemon, Entity *target, u32 param_3, s32 param_4, bool
         if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBEA0);
         return;
     }
-    bVar1 = FALSE;
-    if (param_4 != 0) {
+    bellySizeIncreased = FALSE;
+    if (maxBellyIncrement != 0) {
         if(FixedPointToInt(targetInfo->belly) >= FixedPointToInt(targetInfo->maxBelly))
         {
-            bVar1 = TRUE;
+            bellySizeIncreased = TRUE;
         }
-        if (param_3 == 999) 
+        if (bellyIncrement == 999) 
         {
-            bVar1 = TRUE;
+            bellySizeIncreased = TRUE;
         }
     }
-    if (bVar1) {
+    if (bellySizeIncreased) {
         bellyPtr = &targetInfo->maxBelly;
         sp_0x20 = *bellyPtr;
-        sp_0x24 = (FixedPointToInt(targetInfo->belly) ==  FixedPointToInt(*bellyPtr));
-        sp_0x0 = IntToFixedPoint(param_4);
+        bellySame = (FixedPointToInt(targetInfo->belly) ==  FixedPointToInt(*bellyPtr));
+        sp_0x0 = IntToFixedPoint(maxBellyIncrement);
         sp_0x4 = FixedPoint_Add(*bellyPtr,sp_0x0);
         *bellyPtr = sp_0x4;
         sp_0x8 = IntToFixedPoint(200);
         *bellyPtr = FixedPoint_Min(sp_0x4,sp_0x8);
         targetInfo->belly = *bellyPtr;
-        if ((sp_0x24 == 0) && (displayMessage)) {
-            sub_80522F4(pokemon,target,*gUnknown_80FBE64);
+        if ((!bellySame) && (displayMessage)) {
+            sub_80522F4(pokemon,target,*gUnknown_80FBE64); // $m0's belly filled up full!
         }
         if (FixedPointToInt(sp_0x20) == FixedPointToInt(targetInfo->maxBelly)) {
             SetMessageArgument(gAvailablePokemonNames,target,0);
-            if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBDF0);
+            if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBDF0); // $m0's belly won't get any bigger!
         }
         else {
             sub_8041DB0(target);
             SetMessageArgument(gAvailablePokemonNames,target,0);
-            if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBDC4);
+            if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBDC4); // m0's max belly size increased!
         }
     }
     else {
         bellyPtr = &targetInfo->belly;
-        uVar7 = *bellyPtr;
-        sp_0x10 = IntToFixedPoint(param_3);
+        oldBelly = *bellyPtr;
+        sp_0x10 = IntToFixedPoint(bellyIncrement);
         sp_0x14 = FixedPoint_Add(*bellyPtr,sp_0x10);
         *bellyPtr = sp_0x14;
         puVar8 = &targetInfo->maxBelly;
         sp_0x18 = FixedPoint_Min(sp_0x14,*puVar8);
         *bellyPtr = sp_0x18;
-        if (param_3 == 999) {
+        if (bellyIncrement == 999) {
             *bellyPtr = *puVar8;
         }
         nullsub_85(target);
         SetMessageArgument(gAvailablePokemonNames,target,0);
-        if (FixedPointToInt(uVar7) ==  FixedPointToInt(*bellyPtr)) {
-            if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBE14);
+        if (FixedPointToInt(oldBelly) ==  FixedPointToInt(*bellyPtr)) {
+            if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBE14); // $m0's belly didn't change!
         }
         else {
             if (FixedPointToInt(*bellyPtr) >= FixedPointToInt(*puVar8)) {
-                if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBE64);
+                if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBE64); // $m0's belly filled up full! 
             }
             else
-        {
-                if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBE84);
+            {
+                if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBE84); // $m0's belly was filled!
             }
         }
     }
