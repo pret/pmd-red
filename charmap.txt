@@ -150,7 +150,7 @@
 '¹' = B9
 '⁰' = BA
 '»' = BB
-'←' = BC @ nonstandard, normally ¼
+@'←' = BC @ nonstandard, normally ¼
 '♂' = BD @ nonstandard, normally ½
 '♀' = BE @ nonstandard, normally ¾
 '¿' = BF
@@ -252,6 +252,10 @@ UNK_ICON_81_6A = 81 6A
 RIGHT_ARROW = 81 A8
 LEFT_ARROW = 81 A9
 UP_ARROW = 81 AA
+'→' = 81 A8
+'←' = 81 A9
+'↑' = 81 AA
+'↓' = 81 AB
 
 POKE = 83 BF 83 C4 @ This is actually two characters which can render separately; may need to be split eventually.
 UNK_ICON_83_C0 = 83 C0

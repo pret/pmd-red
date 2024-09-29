@@ -114,8 +114,8 @@
     .byte 15, 51, 0x00, 0x02, 0x01, 0x01, 0x02, 0x01 @ Chunsoft coordinates
     .byte 15, 71, 0x00, 0x02, 0x01, 0x01, 0x02, 0x01 @ Pokemon copyright coordinates
 
-    .global gUnknown_826F5A0
-    gUnknown_826F5A0:
+    .global gGroundScript_gs226
+    gGroundScript_gs226:
     .byte 0x02, 0x00, 0x00, 0x00
     .4byte CompanyScreensScenes
     .4byte CompanyScreensWaypoints

@@ -169,7 +169,7 @@ void SetPredefinedScript(Action *param_1, s16 index, ScriptCommand *param_3)
 
 bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s16 _index)
 {
-    ScriptCommand *scriptPtr;
+    const ScriptCommand *scriptPtr;
     s32 index = _index;
 
     scriptPtr = param_1->predefinedScripts[index];

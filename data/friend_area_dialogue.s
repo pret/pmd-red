@@ -1,5 +1,8 @@
         .section .rodata
 
+    .string "pksdir0\0"
+    .align 2,0
+
 	.global gFriendAreaDialogue
 gFriendAreaDialogue: @ 813237C
 @ replacing .incbin "baserom.gba", 0x0013237c, 0x13d610
@@ -116,8 +119,5 @@ gFriendAreaDialogue: @ 813237C
     .global FriendAreaFullEnergy
     FriendAreaFullEnergy:
     .string "{CENTER_ALIGN}It seems to be full of energy!\0"
-    .align 2,0
-
-    .string "pksdir0\0"
     .align 2,0
 

@@ -56,11 +56,11 @@ s32 GroundEffectsNotifyAll(s16);
 //     }
 // }
 
-ScriptCommand *FindLabel(Action *action, s32 r1)
+const ScriptCommand *FindLabel(Action *action, s32 r1)
 {
     ScriptCommand script;
-    ScriptCommand *scriptPtr2;
-    ScriptCommand *scriptPtr;
+    const ScriptCommand *scriptPtr2;
+    const ScriptCommand *scriptPtr;
 
     scriptPtr2 = action->scriptData.script.ptr2;
     scriptPtr = scriptPtr2 + 1;
@@ -77,10 +77,10 @@ ScriptCommand *FindLabel(Action *action, s32 r1)
     }
 }
 
-ScriptCommand *ResolveJump(Action *action, s32 r1)
+const ScriptCommand *ResolveJump(Action *action, s32 r1)
 {
     ScriptCommand script;
-    ScriptCommand *scriptPtr;
+    const ScriptCommand *scriptPtr;
     s32 temp;
 
     scriptPtr = action->scriptData.script.ptr;

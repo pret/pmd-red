@@ -20,29 +20,6 @@
 #include "ground_main.h"
 #include "code_80A26CC.h"
 
-typedef struct {
-    u8 xTiles;
-    u8 xFlags;
-    u8 yTiles;
-    u8 yFlags;
-} PosInfo;
-typedef struct GroundObjectData {
-    u8 kind;
-    u8 unk1;
-    u8 widthTiles;
-    u8 heightTiles;
-    PosInfo pos;
-    ScriptCommand *scripts[4]; // 2 - dialogue script
-} GroundObjectData;
-typedef struct GroundEffectData {
-    u8 kind;
-    u8 unk1;
-    u8 widthTiles; //???
-    u8 heightTiles;
-    PosInfo pos;
-    ScriptCommand *script;
-} GroundEffectData;
-
 void GroundMap_Select(s16);
 void GroundMap_SelectDungeon(s16, DungeonLocation*, u8);
 void GroundMap_ExecuteEnter(s16);
@@ -103,14 +80,14 @@ bool8 ScriptPrintEmptyTextbox(void);
 void sub_809A83C(s16);
 u32 sub_809AC7C();
 u32 sub_809ADD8();
-bool8 ScriptPrintText(s32, s16, char*);
-bool8 sub_809AEEC(char*);
-bool8 sub_809AF2C(char*);
-bool8 sub_809AF6C(s16, char*);
-void sub_809AFC8(bool8, s32, s32, char*);
+bool8 ScriptPrintText(s32, s16, const char*);
+bool8 sub_809AEEC(const char*);
+bool8 sub_809AF2C(const char*);
+bool8 sub_809AF6C(s16, const char*);
+void sub_809AFC8(bool8, s32, s32, const char*);
 u32 sub_809B028();
 bool8 sub_809B1C0(s32, s32, char[12]);
-void sub_809B1D4(u8, s32, s32, char*);
+void sub_809B1D4(u8, s32, s32, const char*);
 void sub_809C770(s16, s16);
 s32 HasItemInInventory(u8);
 u32 sub_809CC90();
@@ -158,11 +135,9 @@ extern s16 gCurrentMap;
 extern s16 gUnknown_2039A32;
 extern s16 gUnknown_2039A34;
 
-extern struct { char *unk0; s32 unk4; } gChoices[9];
+extern struct { const char *unk0; s32 unk4; } gChoices[9];
 extern char gUnknown_2039D98[12];
 extern int gNumChoices;
-
-extern FunctionScript gFunctionScriptTable[];
 
 extern Position32 gUnknown_81164DC;
 extern char gUnknown_81165D4[];
@@ -436,8 +411,8 @@ s32 ExecuteScriptCommand(Action *action) {
                 action->callbacks->getDirection(action->parentObject, unk);
                 obj = ({ GroundObjectData obj = {
                     .unk1 = *unk,
-                    .widthTiles = 1,
-                    .heightTiles = 1,
+                    .width = 1,
+                    .height = 1,
                     .pos = {},
                     .kind = curCmd.arg2,
                     .scripts = { [3] = gFunctionScriptTable[curCmd.arg1].script },
@@ -463,8 +438,8 @@ s32 ExecuteScriptCommand(Action *action) {
                 action->callbacks->getDirection(action->parentObject, &unk);
                 eff = ({ GroundEffectData eff = {
                     .unk1 = unk,
-                    .widthTiles = 1,
-                    .heightTiles = 1,
+                    .width = 1,
+                    .height = 1,
                     .pos = {},
                     .kind = curCmd.arg2,
                     .script = gFunctionScriptTable[curCmd.arg1].script,
@@ -1706,7 +1681,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0xd2 ... 0xd8: {
-                char *out = curCmd.argPtr;
+                const char *out = curCmd.argPtr;
                 gNumChoices = 0;
                 scriptData->branchDiscriminant = 0;
                 switch(curCmd.op) {
@@ -1865,11 +1840,11 @@ UNUSED bool8 GroundScript_ExecuteTrigger(s16 r0)
     s32 ret;
     ScriptInfoSmall scriptInfo;
     Action action;
-    FunctionScript *ptr;
+    const ScriptRef *ptr;
 
     ptr = &gFunctionScriptTable[r0];
 
-    if(ptr->unk2 != 0xB)
+    if(ptr->type != 0xB)
         return FALSE;
     InitActionWithParams(&action, &gGroundScriptTriggerCallbacks, NULL, 0, 0);
     GetFunctionScript(NULL, &scriptInfo, r0);

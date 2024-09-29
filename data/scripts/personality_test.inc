@@ -100,8 +100,8 @@
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00
 
-    .global gUnknown_826E288
-    gUnknown_826E288:
+    .global gGroundScript_gs223
+    gGroundScript_gs223:
     .byte 0x02, 0x00, 0x00, 0x00
     .4byte PersonalityTestScenes
     .4byte PersonalityTestWaypoints
