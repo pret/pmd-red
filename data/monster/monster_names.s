@@ -2655,7 +2655,7 @@ MonsterCategoryWildDuck:
 
 .global MonsterNameFarfetch
 MonsterNameFarfetch:
-.string "Farfetch'd\0"
+.asciz "Farfetch'd"
 .align 2,0
 
 .global MonsterNameMagneton

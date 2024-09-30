@@ -660,7 +660,7 @@ ItemNameThunderstone:
 
 .global ItemNameKingsRock
 ItemNameKingsRock:
-.string "King's Rock\0"
+.asciz "King's Rock"
 .align 2,0
 
 .global ItemNameUpgrade

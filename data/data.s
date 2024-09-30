@@ -1055,8 +1055,8 @@ gUnknown_80B7F14: @ 80B7F14
 
     .global gLocateSetErrorMessage
 gLocateSetErrorMessage: @ 80B7F20
-    .string "Memroy LocateSet [%p] buffer %8x size can't locate\n"
-    .string "    atb %02x grp %3d \0"
+    .ascii "Memroy LocateSet [%p] buffer %8x size can't locate\n"
+    .asciz "    atb %02x grp %3d \0"
     .align 2,0
 
 MemoryLocate_LocalCreateText:
@@ -1069,7 +1069,7 @@ gUnknown_80B7F88: @ 80B7F88
 
 	.global gLocalCreateErrorMessage
 gLocalCreateErrorMessage: @ 80B7F94
-        .string "Memroy LocalCreate buffer %08x size can't locate\0" @ Spelling error is intentional
+        .asciz "Memroy LocalCreate buffer %08x size can't locate\0" @ Spelling error is intentional
         .align 2,0
 
 @ code_80035F0
