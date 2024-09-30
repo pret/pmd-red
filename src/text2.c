@@ -2839,7 +2839,7 @@ s32 HexDigitValue(u8 chr)
         return 1;
 }
 
-u8 *xxx_get_next_char_from_string(u8 *a1, u32 *a0)
+const u8 *xxx_get_next_char_from_string(const u8 *a1, u32 *a0)
 {
     s32 currChr = *a1;
     if (currChr == 0x7E) {
@@ -3336,9 +3336,11 @@ s32 sub_8008ED0(const u8 *str)
     s32 ret = 0;
 
     while (1) {
+        const u8 *strPtr;
         u32 chr;
 
-        str = xxx_get_next_char_from_string(str, &chr);
+        strPtr = xxx_get_next_char_from_string(str, &chr);
+        str = strPtr;
         if (chr == 0)
             break;
         if (chr == 0xD)
@@ -3347,22 +3349,36 @@ s32 sub_8008ED0(const u8 *str)
             break;
         if (chr == 0x82A0 || chr == 0x82A2)
             continue;
+        if (chr == 0x1B)
+            break;
 
         if (chr == 0x23) {
-            switch (*str) {
-                case 0x6E:
-                    return ret;
-                case 0x5B:
-                    return ret;
-                case 0x50:
-                    return ret;
+            if (*strPtr == 0x6E || *strPtr == 0x5B || *strPtr == 0x50)
+                break;
+            switch (*strPtr) {
+                case 0x3D:
+                case 0x7E:
+                    str = strPtr + 2;
+                    break;
+                case 0x43:
+                case 0x63:
+                    str += 2;
+                    break;
+                case 0x52:
+                case 0x72:
+                    str++;
+                    break;
+                case 0x2B:
+                case 0x57:
+                    str = strPtr + 1;
+                    break;
             }
         }
         else if (chr == 0x60) {
             ret += 6;
         }
         else {
-            unkChar *ptr = GetCharacter(chr);
+            const struct unkChar *ptr = GetCharacter(chr);
             if (ptr != NULL) {
                 ret += ptr->unk6 + gCharacterSpacing;
             }
@@ -3370,4 +3386,92 @@ s32 sub_8008ED0(const u8 *str)
     }
 
     return ret;
+}
+
+void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 windowId, s32 a5, s32 a6, s32 a7);
+
+void sub_8008F8C(s32 x, s32 y, const u8 *str, u32 windowId, s32 a4, s32 a5)
+{
+    xxx_draw_string(gUnknown_2027370, x, y, str, windowId, a4, 0, a5);
+}
+
+void PrintStringOnWindow(s32 x, u32 y, const u8 *str, u32 windowId, u32 a4)
+{
+    xxx_draw_string(gUnknown_2027370, x, y, str, windowId, a4, 0, 0xD);
+}
+
+UNUSED void nullsub_170(void) {}
+
+// Identical to PrintStringOnWindow
+UNUSED void sub_8008FF0(s32 x, u32 y, const u8 *str, u32 windowId, u32 a4)
+{
+    xxx_draw_string(gUnknown_2027370, x, y, str, windowId, a4, 0, 0xD);
+}
+
+UNUSED void nullsub_171(void) {}
+
+struct UnkDrawStringStruct
+{
+    s16 unk0;
+    s16 unk2;
+    s32 unkC;
+    u32 unk10;
+    u32 unk14;
+    u32 unk18;
+    void *unk24;
+    u32 unk2C;
+    u8 fill[24];
+    u32 unk3C;
+};
+
+const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct UnkDrawStringStruct *sp);
+
+void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 windowId, s32 a5, s32 a6, s32 a7)
+{
+    struct UnkDrawStringStruct sp;
+
+    sp.unk0 = x;
+    sp.unk2 = y;
+    sp.unk14 = x;
+    sp.unk18 = 7;
+    while (1) {
+        str = HandleTextFormat(strArr, str, &sp);
+        str = xxx_get_next_char_from_string(str, &sp.unk3C);
+        if (sp.unk3C == '\0' || sp.unk3C == a5)
+            break;
+
+        if (sp.unk3C == 0x82A0) {
+            gCurrentCharmap = 0;
+        }
+        else if (sp.unk3C == 0x82A2) {
+            gCurrentCharmap = 1;
+        }
+        else if (sp.unk3C == 0x1B) {
+            break;
+        }
+        else if (sp.unk3C == 0xD || sp.unk3C == 0xA) {
+            sp.unk0 = sp.unk14;
+            sp.unk2 += a7;
+        }
+        else if (sp.unk3C == 0x1D) {
+            sp.unk0 = sp.unk14;
+            sp.unk2 += 5;
+        }
+        else if (sp.unk3C == 0x60) {
+            sp.unk0 += 6;
+        }
+        else if (a6 == 0) {
+            sp.unk0 += xxx_draw_char(strArr, sp.unk0, sp.unk2, sp.unk3C, sp.unk18, windowId);
+        }
+        else {
+            const struct unkChar *chrPtr = GetCharacter(sp.unk3C);
+            if (chrPtr != NULL) {
+                s32 x = sp.unk0;
+                s32 x2 = gCharacterSpacing + 10;
+                x +=((x2 - chrPtr->unk6) / 2);
+                xxx_draw_char(strArr, x, sp.unk2, sp.unk3C, sp.unk18, windowId);
+                sp.unk0 += a6;
+            }
+        }
+    }
 }
