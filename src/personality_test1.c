@@ -215,7 +215,7 @@ static void UpdateNatureTotals(void)
 {
     s32 answerIndex;
     s32 natureIndex;
-    const u8 *pointArray;
+    const u8 (*pointArray)[16];
 
     if (sub_80144A4(&answerIndex))
         return;
@@ -228,11 +228,9 @@ static void UpdateNatureTotals(void)
     }
     else {
         pointArray = gPersonalityQuestionPointerTable[sPersonalityTestTracker->currQuestionIndex]->effects;
-        // Skip until we get to the one for our answer
-        // Each Answer has 16 bytes. 13 are currently used with 3 remaining
-        pointArray += (NUM_PERSONALITIES + 3) * answerIndex;
+        pointArray += answerIndex;
         for (natureIndex = 0; natureIndex < NUM_PERSONALITIES; natureIndex++)
-            sPersonalityTestTracker->NatureTotals[natureIndex] += pointArray[natureIndex];
+            sPersonalityTestTracker->NatureTotals[natureIndex] += (*pointArray)[natureIndex];
 
         sPersonalityTestTracker->TestState = PERSONALITY_GENERATE_NEW_QUESTION;
     }

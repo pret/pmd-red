@@ -9,7 +9,7 @@ typedef struct PersonalityQuestion
 {
     /* 0x0 */ const u8 *question;
     /* 0x4 */ const MenuItem *answers;
-    /* 0x8 */ const u8 *effects;
+    /* 0x8 */ const u8 (*effects)[16];
 } PersonalityQuestion;
 
 struct PersonalityTestTracker
