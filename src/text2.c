@@ -3531,7 +3531,7 @@ UNUSED s32 sub_80091A8(s32 a0)
 extern u8 gUnknown_202749A[];
 extern u8 gUnknown_20274A6[];
 
-s32 InterpretColorChar(s32 a0);
+s32 InterpretColorChar(u8 a0);
 
 #ifdef NONMATCHING
 // https://decomp.me/scratch/AJ2km
@@ -3965,3 +3965,105 @@ void sub_8009408(s32 from, s32 to)
     gUnknown_20274A5 = 1;
 }
 
+UNUSED void sub_8009488(s32 strArrId)
+{
+    s32 i, j;
+    s32 id0, id1;
+    UnkTextStruct1 *strPtr = &gUnknown_2027370[strArrId];
+
+    id0 = strPtr->unk2;
+    for (i = 0; i < strPtr->unk6; i++) {
+        id1 = strPtr->unk0;
+        for (j = 0; j < strPtr->unk4; j++) {
+            gUnknown_202B038[0][id0][id1] &= 0xFC00;
+            gUnknown_202B038[1][id0][id1] = 0xF27A;
+            id1++;
+        }
+        id0++;
+    }
+}
+
+UNUSED void nullsub_172(void) {}
+
+void sub_8009524(s32 strArrId)
+{
+    s32 i, j;
+    UnkTextStruct1 *strPtr = &gUnknown_2027370[strArrId];
+    s32 id0 = strPtr->unk2 - 1;
+
+    for (i = 0; i < strPtr->unk6 + 2; i++) {
+        s32 id1 = strPtr->unk0 - 1;
+        for (j = 0; j < strPtr->unk4 + 2; j++) {
+            gUnknown_202B038[0][id0][id1] &= 0xFC00;
+            gUnknown_202B038[1][id0][id1] = 0xF27A;
+            id1++;
+        }
+        id0++;
+    }
+}
+
+UNUSED void nullsub_173(void) {}
+
+void sub_80095CC(s32 a0, s32 a1)
+{
+    gUnknown_202B020 = a0;
+    gUnknown_202B024 = a1;
+}
+
+UNUSED void nullsub_174(void) {}
+
+s32 sub_80095E4(s32 a0, s32 a1)
+{
+    s32 r1;
+
+    if (a1 == 0)
+        a1 = 10;
+    r1 = a0 * a1;
+
+    if ((r1 % 8) != 0)
+        return (r1 / 8) + 1;
+    else
+        return r1 / 8;
+}
+
+// Same as sub_80095E4 except it doesn't check for a1 == 0
+s32 sub_8009614(s32 a0, s32 a1)
+{
+    s32 r1;
+
+    r1 = a0 * a1;
+
+    if ((r1 % 8) != 0)
+        return (r1 / 8) + 1;
+    else
+        return r1 / 8;
+}
+
+s32 InterpretColorChar(u8 a0)
+{
+    if (a0 < 16)
+        return a0;
+    if (a0 >= 48 && a0 <= 63)
+        return a0 - 48;
+
+    switch (a0) {
+        case 72:
+        case 73:
+            return 4;
+        case 69:
+        case 83:
+        case 84:
+            return 15;
+        case 71:
+        case 77:
+            return 5;
+        case 67:
+        case 68:
+        case 78:
+            return 6;
+        case 87:
+            return 2;
+
+    }
+    return 7;
+}
