@@ -92,9 +92,9 @@ ALIGNED(4) static const u8 sUnknown_80D54A4[] = _(
     "I can store items that you\n"
     "found in dungeons...{EXTRA_MSG}"
     " Snarfle...\n"
-    "Things in storage don{APOSTROPHE}t get lost...{EXTRA_MSG}"
+    "Things in storage don't get lost...{EXTRA_MSG}"
     " Zzz... Zzz...\n"
-    "That{APOSTROPHE}s why...\n"
+    "That's why...\n"
     "Keep important items in storage...");
 
 ALIGNED(4) static const u8 sUnknown_80D555C[] = _(
@@ -103,12 +103,12 @@ ALIGNED(4) static const u8 sUnknown_80D555C[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D5590[] = _(
     " Zzz... No...\n"
-    "Can{APOSTROPHE}t store any more of that...");
+    "Can't store any more of that...");
 
 ALIGNED(4) static const u8 sUnknown_80D55C0[] = _(
     " Zzz... Zzz...\n"
     "That {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}...\n"
-    "Can{APOSTROPHE}t store it...");
+    "Can't store it...");
 
 ALIGNED(4) static const u8 sUnknown_80D55F4[] = _(
     " Snarfle? Hunh...?{WAIT_PRESS}\n"
@@ -117,12 +117,12 @@ ALIGNED(4) static const u8 sUnknown_80D55F4[] = _(
 ALIGNED(4) static const u8 sUnknown_80D5630[] = _(
     " Snarfle? Hunh...?{WAIT_PRESS}\n"
     "Zzz...\n"
-    "You don{APOSTROPHE}t have enough space...");
+    "You don't have enough space...");
 
 ALIGNED(4) static const u8 sUnknown_80D5670[] = _(
     " Snarfle? Hunh...?{WAIT_PRESS}\n"
     "Zzz...\n"
-    "You don{APOSTROPHE}t have anything...?");
+    "You don't have anything...?");
 
 ALIGNED(4) static const u8 sUnknown_80D56AC[] = _(
     " Zzz... Snork!\n"
@@ -149,11 +149,11 @@ ALIGNED(4) static const u8 sUnknown_80D5774[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D57C4[] = _(
     " Zzz... Zzz...\n"
-    "Yup{COMMA} I did... Stored away...");
+    "Yup, I did... Stored away...");
 
 ALIGNED(4) static const u8 sUnknown_80D57F4[] = _(
-    " Hunh{COMMA} wha--? Storage...?\n"
-    "I{APOSTROPHE}ll put away the things you chose...\n"
+    " Hunh, wha--? Storage...?\n"
+    "I'll put away the things you chose...\n"
     "That OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D5844[] = _(
@@ -166,7 +166,7 @@ ALIGNED(4) static const u8 sUnknown_80D5884[] = _(
     "Store anything else?");
 
 ALIGNED(4) static const u8 sUnknown_80D58B0[] = _(
-    " Hunh{COMMA} wha--? Store what...?\n"
+    " Hunh, wha--? Store what...?\n"
     "You can choose more than one using\n"
     "{L_BUTTON} or {R_BUTTON}...");
 
@@ -181,58 +181,58 @@ ALIGNED(4) static const u8 sUnknown_80D5934[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D5954[] = _(
     " Zzz... Zzz...\n"
-    "Hello{COMMA} there...\n"
+    "Hello, there...\n"
     "{ARG_POKEMON_6} Storage...");
 
 ALIGNED(4) static const u8 sUnknown_80D5984[] = _(
     " I can store items that you\n"
-    "found in dungeons{COMMA} or that you\n"
+    "found in dungeons, or that you\n"
     "bought from shops.{EXTRA_MSG}"
     " If you faint in\n"
-    "a dungeon{COMMA} your items will be lost...{WAIT_PRESS}\n"
-    "But what{APOSTROPHE}s in storage will be safe.{EXTRA_MSG}"
+    "a dungeon, your items will be lost...{WAIT_PRESS}\n"
+    "But what's in storage will be safe.{EXTRA_MSG}"
     " I keep guard over the\n"
-    "storage space{COMMA} so anything you leave\n"
-    "with me won{APOSTROPHE}t ever disappear!{EXTRA_MSG}"
+    "storage space, so anything you leave\n"
+    "with me won't ever disappear!{EXTRA_MSG}"
     " If you have any items that\n"
-    "you can{APOSTROPHE}t bear to lose{COMMA} be sure to leave\n"
+    "you can't bear to lose, be sure to leave\n"
     "them with me!");
 
 ALIGNED(4) static const u8 sUnknown_80D5AF0[] = _(
-    " Sorry{COMMA} dear.\n"
-    "I{APOSTROPHE}ve run out of storage space.");
+    " Sorry, dear.\n"
+    "I've run out of storage space.");
 
 ALIGNED(4) static const u8 sUnknown_80D5B24[] = _(
-    " Sorry{COMMA} dear.\n"
-    "I can{APOSTROPHE}t take any more of that item.");
+    " Sorry, dear.\n"
+    "I can't take any more of that item.");
 
 ALIGNED(4) static const u8 sUnknown_80D5B5C[] = _(
-    " Oh{COMMA} dear{COMMA} sorry.{WAIT_PRESS}\n"
+    " Oh, dear, sorry.{WAIT_PRESS}\n"
     "That {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} is an item you\n"
-    "can{APOSTROPHE}t put in storage.");
+    "can't put in storage.");
 
 ALIGNED(4) static const u8 sUnknown_80D5BAC[] = _(
     " Oh?\n"
-    "You don{APOSTROPHE}t have anything stored{COMMA} dear.");
+    "You don't have anything stored, dear.");
 
 ALIGNED(4) static const u8 sUnknown_80D5BDC[] = _(
-    " Oh? You don{APOSTROPHE}t have the room\n"
-    "to carry any more items{COMMA} dear.");
+    " Oh? You don't have the room\n"
+    "to carry any more items, dear.");
 
 ALIGNED(4) static const u8 sUnknown_80D5C1C[] = _(
     " Oh?\n"
-    "You don{APOSTROPHE}t seem to have anything?");
+    "You don't seem to have anything?");
 
 ALIGNED(4) static const u8 sUnknown_80D5C44[] = _(
     " There you go!\n"
-    "Just like you asked{COMMA} sweetie!");
+    "Just like you asked, sweetie!");
 
 ALIGNED(4) static const u8 sUnknown_80D5C74[] = _(
-    " I{APOSTROPHE}ll take the items you\n"
+    " I'll take the items you\n"
     "chose out of storage. OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D5CAC[] = _(
-    " Fine{COMMA} I{APOSTROPHE}ll take your\n"
+    " Fine, I'll take your\n"
     "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} out of storage. OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D5CE4[] = _(
@@ -245,15 +245,15 @@ ALIGNED(4) static const u8 sUnknown_80D5D0C[] = _(
     "{L_BUTTON} or {R_BUTTON}.");
 
 ALIGNED(4) static const u8 sUnknown_80D5D58[] = _(
-    " OK{COMMA} stored away!\n"
-    "You can count on me{COMMA} honey.");
+    " OK, stored away!\n"
+    "You can count on me, honey.");
 
 ALIGNED(4) static const u8 sUnknown_80D5D8C[] = _(
-    " I{APOSTROPHE}ll put the items you chose\n"
+    " I'll put the items you chose\n"
     "in storage. OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D5DBC[] = _(
-    " I{APOSTROPHE}ll put your\n"
+    " I'll put your\n"
     "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} in storage. OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D5DE8[] = _(
@@ -266,11 +266,11 @@ ALIGNED(4) static const u8 sUnknown_80D5E10[] = _(
     "{L_BUTTON} or {R_BUTTON}.");
 
 ALIGNED(4) static const u8 sUnknown_80D5E60[] = _(
-    " Thank you{COMMA} sweetie.\n"
+    " Thank you, sweetie.\n"
     "Come again!");
 
-ALIGNED(4) static const u8 sUnknown_80D5E84[] = _(" Anything else{COMMA} dear?");
+ALIGNED(4) static const u8 sUnknown_80D5E84[] = _(" Anything else, dear?");
 
 ALIGNED(4) static const u8 sUnknown_80D5E9C[] = _(
-    " Hello{COMMA} there!\n"
+    " Hello, there!\n"
     "Welcome to {ARG_POKEMON_6} Storage.");

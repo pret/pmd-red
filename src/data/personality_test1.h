@@ -52,7 +52,7 @@ static const MenuItem HardyQuest3Answers[] =
 static const u8 HardyQuest3Question[];
 static const PersonalityQuestion HardyQuest3 = { HardyQuest3Question, HardyQuest3Answers, HardyQuest3Points };
 ALIGNED(4) static const u8 HardyQuest3Question[] = _(
-    "When the going gets tough{COMMA} do you get\n"
+    "When the going gets tough, do you get\n"
     "going?");
 
 ALIGNED(4) static const u8 HardyQuest4Points[48] =
@@ -74,7 +74,7 @@ static const u8 HardyQuest4Question[];
 static const PersonalityQuestion HardyQuest4 = { HardyQuest4Question, HardyQuest4Answers, HardyQuest4Points };
 ALIGNED(4) static const u8 HardyQuest4Question[] = _(
     "There is a bucket. If you put\n"
-    "water in it{COMMA} how high will you fill it?");
+    "water in it, how high will you fill it?");
 
 ALIGNED(4) static const u8 DocileQuest1Points[32] =
 {
@@ -131,14 +131,14 @@ static const MenuItem DocileQuest3Answers[] =
     {DocileQuest3_Cool, 2},
     {NULL, -1},
 };
-ALIGNED(4) static const u8 DocileQuest3_Cool[] = _("Say thanks{COMMA} but be cool.");
+ALIGNED(4) static const u8 DocileQuest3_Cool[] = _("Say thanks, but be cool.");
 ALIGNED(4) static const u8 DocileQuest3_Joke[] = _("Say thanks with a joke.");
 ALIGNED(4) static const u8 DocileQuest3_Regular[] = _("Say thank you regularly.");
 
 static const u8 DocileQuest3Question[];
 static const PersonalityQuestion DocileQuest3 = { DocileQuest3Question, DocileQuest3Answers, DocileQuest3Points };
 ALIGNED(4) static const u8 DocileQuest3Question[] = _(
-    "A friend brought over something you{APOSTROPHE}d\n"
+    "A friend brought over something you'd\n"
     "forgotten.{WAIT_PRESS}\n"
     "How do you thank your friend?");
 
@@ -177,8 +177,8 @@ static const MenuItem BraveQuest1Answers[] =
 static const u8 BraveQuest1Question[];
 static const PersonalityQuestion BraveQuest1 = { BraveQuest1Question, BraveQuest1Answers, BraveQuest1Points };
 ALIGNED(4) static const u8 BraveQuest1Question[] = _(
-    "You{APOSTROPHE}re going bungee jumping for the first\n"
-    "time.{EXTRA_MSG}Since it{APOSTROPHE}s scary{COMMA} you decide to test the\n"
+    "You're going bungee jumping for the first\n"
+    "time.{EXTRA_MSG}Since it's scary, you decide to test the\n"
     "jump with a doll...{WAIT_PRESS}\n"
     "And the bungee cord snaps!{EXTRA_MSG}"
     "Will you still try to make a jump anyway?");
@@ -221,9 +221,9 @@ static const u8 BraveQuest2BQuestion[];
 static const PersonalityQuestion BraveQuest2B = { BraveQuest2BQuestion, BraveQuest2BAnswers, BraveQuest2BPoints };
 ALIGNED(4) static const u8 BraveQuest2BQuestion[] = _(
     "You valiantly fight the aliens...{WAIT_PRESS}\n"
-    "But{COMMA} you are defeated...{EXTRA_MSG}An alien says to you...{EXTRA_MSG}{QUOTE_START}YOU HAVE IMPRESSED US.\n"
-    "IT WAS A PLEASURE TO SEE.{EXTRA_MSG}JOIN US{COMMA} AND TOGETHER WE SHALL\n"
-    "RULE THE WORLD.{QUOTE_END}{WAIT_PRESS}\n"
+    "But, you are defeated...{EXTRA_MSG}An alien says to you...{EXTRA_MSG}“YOU HAVE IMPRESSED US.\n"
+    "IT WAS A PLEASURE TO SEE.{EXTRA_MSG}JOIN US, AND TOGETHER WE SHALL\n"
+    "RULE THE WORLD.”{WAIT_PRESS}\n"
     "What will you do?");
 
 ALIGNED(4) static const u8 BraveQuest3Points[32] =
@@ -267,7 +267,7 @@ static const MenuItem BraveQuest4Answers[] =
 };
 ALIGNED(4) static const u8 BraveQuest4_Nothing[] = _("Do nothing out of fear.");
 ALIGNED(4) static const u8 BraveQuest4_Police[] = _("Call the police.");
-ALIGNED(4) static const u8 BraveQuest4_Scared[] = _("Help{COMMA} even if scared.");
+ALIGNED(4) static const u8 BraveQuest4_Scared[] = _("Help, even if scared.");
 ALIGNED(4) static const u8 BraveQuest4_Hesitation[] = _("Help without hesitation.");
 
 static const u8 BraveQuest4Question[];
@@ -331,7 +331,7 @@ static const MenuItem JollyQuest3Answers[] =
 static const u8 JollyQuest3Question[];
 static const PersonalityQuestion JollyQuest3 = { JollyQuest3Question, JollyQuest3Answers, JollyQuest3Points };
 ALIGNED(4) static const u8 JollyQuest3Question[] = _(
-    "It{APOSTROPHE}s the summer holidays!\n"
+    "It's the summer holidays!\n"
     "Where would you like to go?");
 
 ALIGNED(4) static const u8 JollyQuest4Points[48] =
@@ -351,7 +351,7 @@ static const MenuItem JollyQuest4Answers[] =
     {JollyQuest4_Go, 2},
     {NULL, -1},
 };
-ALIGNED(4) static const u8 JollyQuest4_Go[] = _("Right... Well{COMMA} I gotta go.");
+ALIGNED(4) static const u8 JollyQuest4_Go[] = _("Right... Well, I gotta go.");
 ALIGNED(4) static const u8 JollyQuest4_Again[] = _("Um... Could you say that again?");
 ALIGNED(4) static const u8 JollyQuest4_Funny[] = _("Haha! Yes. Very funny!");
 
@@ -360,7 +360,7 @@ static const PersonalityQuestion JollyQuest4 = { JollyQuest4Question, JollyQuest
 ALIGNED(4) static const u8 JollyQuest4Question[] = _(
     "A foreign person has started up a\n"
     "conversation with you.{EXTRA_MSG}"
-    "To be honest{COMMA} you don{APOSTROPHE}t have a clue what\n"
+    "To be honest, you don't have a clue what\n"
     "this fellow is saying.{WAIT_PRESS}\n"
     "How do you reply?");
 
@@ -615,8 +615,8 @@ static const u8 HastyQuest1Question[];
 static const PersonalityQuestion HastyQuest1 = { HastyQuest1Question, HastyQuest1Answers, HastyQuest1Points };
 ALIGNED(4) static const u8 HastyQuest1Question[] = _(
     "You receive a gift!{WAIT_PRESS}\n"
-    "But you don{APOSTROPHE}t know what{APOSTROPHE}s in it.{WAIT_PRESS}\n"
-    "You{APOSTROPHE}re curious{COMMA} so what do you do?");
+    "But you don't know what's in it.{WAIT_PRESS}\n"
+    "You're curious, so what do you do?");
 
 ALIGNED(4) static const u8 HastyQuest2Points[48] =
 {
@@ -656,7 +656,7 @@ static const MenuItem HastyQuest3Answers[] =
     {HastyQuest3_Empty, 2},
     {NULL, -1},
 };
-ALIGNED(4) static const u8 HastyQuest3_Empty[] = _("It{APOSTROPHE}s going to be empty...");
+ALIGNED(4) static const u8 HastyQuest3_Empty[] = _("It's going to be empty...");
 ALIGNED(4) static const u8 HastyQuest3_Trap[] = _("No... Could be a trap...");
 ALIGNED(4) static const u8 HastyQuest3_Open[] = _("Open it right away!");
 
@@ -706,7 +706,7 @@ static const MenuItem SassyQuest1Answers[] =
 static const u8 SassyQuest1Question[];
 static const PersonalityQuestion SassyQuest1 = { SassyQuest1Question, SassyQuest1Answers, SassyQuest1Points };
 ALIGNED(4) static const u8 SassyQuest1Question[] = _(
-    "Your country{APOSTROPHE}s leader is in front of you.\n"
+    "Your country's leader is in front of you.\n"
     "How do you speak to him or her?");
 
 ALIGNED(4) static const u8 SassyQuest2Points[32] =
@@ -869,7 +869,7 @@ static const MenuItem RelaxedQuest2Answers[] =
 static const u8 RelaxedQuest2Question[];
 static const PersonalityQuestion RelaxedQuest2 = { RelaxedQuest2Question, RelaxedQuest2Answers, RelaxedQuest2Points };
 ALIGNED(4) static const u8 RelaxedQuest2Question[] = _(
-    "Do you get the feeling that you{APOSTROPHE}ve slowed\n"
+    "Do you get the feeling that you've slowed\n"
     "down lately?");
 
 ALIGNED(4) static const u8 RelaxedQuest3Points[48] =
@@ -962,8 +962,8 @@ static const MenuItem LonelyQuest3Answers[] =
 static const u8 LonelyQuest3Question[];
 static const PersonalityQuestion LonelyQuest3 = { LonelyQuest3Question, LonelyQuest3Answers, LonelyQuest3Points };
 ALIGNED(4) static const u8 LonelyQuest3Question[] = _(
-    "What do you do with your room{APOSTROPHE}s light\n"
-    "when you{APOSTROPHE}re going to bed at night?");
+    "What do you do with your room's light\n"
+    "when you're going to bed at night?");
 
 ALIGNED(4) static const u8 LonelyQuest4Points[48] =
 {
@@ -983,7 +983,7 @@ static const MenuItem LonelyQuest4Answers[] =
 static const u8 LonelyQuest4Question[];
 static const PersonalityQuestion LonelyQuest4 = { LonelyQuest4Question, LonelyQuest4Answers, LonelyQuest4Points };
 ALIGNED(4) static const u8 LonelyQuest4Question[] = _(
-    "It{APOSTROPHE}s a weekend{COMMA} but no one will play\n"
+    "It's a weekend, but no one will play\n"
     "with you...\n"
     "What do you do?");
 
@@ -1024,7 +1024,7 @@ static const MenuItem QuirkyQuest2Answers[] =
     {NULL, -1},
 };
 ALIGNED(4) static const u8 QuirkyQuest2_Trouble[] = _("Too much trouble.");
-ALIGNED(4) static const u8 QuirkyQuest2_MayMayNot[] = _("May reply{COMMA} may not.");
+ALIGNED(4) static const u8 QuirkyQuest2_MayMayNot[] = _("May reply, may not.");
 ALIGNED(4) static const u8 QuirkyQuest2_Reply[] = _("Reply right away.");
 
 static const u8 QuirkyQuest2Question[];
@@ -1052,7 +1052,7 @@ static const u8 QuirkyQuest3Question[];
 static const PersonalityQuestion QuirkyQuest3 = { QuirkyQuest3Question, QuirkyQuest3Answers, QuirkyQuest3Points };
 ALIGNED(4) static const u8 QuirkyQuest3Question[] = _(
     "There is a person you like...{WAIT_PRESS}\n"
-    "But there{APOSTROPHE}s no opportunity to get close.\n"
+    "But there's no opportunity to get close.\n"
     "What do you do?");
 
 ALIGNED(4) static const u8 QuirkyQuest4Points[48] =
@@ -1073,7 +1073,7 @@ static const MenuItem QuirkyQuest4Answers[] =
     {NULL, -1},
 };
 ALIGNED(4) static const u8 QuirkyQuest4_EitherSide[] = _("Choose either side.");
-ALIGNED(4) static const u8 QuirkyQuest4_GoLeft[] = _("It{APOSTROPHE}s a trap! Go left.");
+ALIGNED(4) static const u8 QuirkyQuest4_GoLeft[] = _("It's a trap! Go left.");
 ALIGNED(4) static const u8 QuirkyQuest4_GoRight[] = _("Instantly go right.");
 
 static const u8 QuirkyQuest4Question[];
@@ -1098,7 +1098,7 @@ static const MenuItem MiscQuest1Answers[] =
 
 static const u8 MiscQuest1Question[];
 static const PersonalityQuestion MiscQuest1 = { MiscQuest1Question, MiscQuest1Answers, MiscQuest1Points };
-ALIGNED(4) static const u8 MiscQuest1Question[] = _("On vacation outings{COMMA} you want to...");
+ALIGNED(4) static const u8 MiscQuest1Question[] = _("On vacation outings, you want to...");
 
 ALIGNED(4) static const u8 MiscQuest2Points[32] =
 {
@@ -1113,12 +1113,12 @@ static const MenuItem MiscQuest2Answers[] =
     {MiscQuest2_DontCare, 1},
     {NULL, -1},
 };
-ALIGNED(4) static const u8 MiscQuest2_DontCare[] = _("Don{APOSTROPHE}t care.");
+ALIGNED(4) static const u8 MiscQuest2_DontCare[] = _("Don't care.");
 
 static const u8 MiscQuest2Question[];
 static const PersonalityQuestion MiscQuest2 = { MiscQuest2Question, MiscQuest2Answers, MiscQuest2Points };
 ALIGNED(4) static const u8 MiscQuest2Question[] = _(
-    "It{APOSTROPHE}s the summer festival!\n"
+    "It's the summer festival!\n"
     "Do you like carnivals?");
 
 ALIGNED(4) static const u8 MiscQuest3Points[32] =
@@ -1137,7 +1137,7 @@ static const MenuItem MiscQuest3Answers[] =
 static const u8 MiscQuest3Question[];
 static const PersonalityQuestion MiscQuest3 = { MiscQuest3Question, MiscQuest3Answers, MiscQuest3Points };
 ALIGNED(4) static const u8 MiscQuest3Question[] = _(
-    "Somebody calls you {QUOTE_START}weird but funny.{QUOTE_END}\n"
+    "Somebody calls you “weird but funny.”\n"
     "How does that make you feel?");
 
 static const PersonalityQuestion* const gPersonalityQuestionPointerTable[NUM_QUIZ_QUESTIONS + 1] =
@@ -1224,12 +1224,12 @@ ALIGNED(4) static const u8 gPartnerPrompt[] = _(
         "{CENTER_ALIGN}as your partner from this group.");
 UNUSED ALIGNED(4) static const u8* const gPartnerPromptPtr = gPartnerPrompt;
 
-ALIGNED(4) static const u8 gPartnerNickPrompt[] = _("{CENTER_ALIGN}What is your partner{APOSTROPHE}s nickname?");
+ALIGNED(4) static const u8 gPartnerNickPrompt[] = _("{CENTER_ALIGN}What is your partner's nickname?");
 UNUSED ALIGNED(4) static const u8* const gPartnerNickPromptPtr[] = { gPartnerNickPrompt };
 
 ALIGNED(4) static const u8 gEndIntroText[] = _(
-    "{CENTER_ALIGN}OK! We{APOSTROPHE}re all set!{EXTRA_MSG}"
-    "{CENTER_ALIGN}Let{APOSTROPHE}s get you into the\n"
+    "{CENTER_ALIGN}OK! We're all set!{EXTRA_MSG}"
+    "{CENTER_ALIGN}Let's get you into the\n"
     "{CENTER_ALIGN}world of Pokémon!{EXTRA_MSG}"
     "{CENTER_ALIGN}Go for it!");
 UNUSED ALIGNED(4) static const u8* const gEndIntroTextPtr[] = { gEndIntroText };
@@ -1279,7 +1279,7 @@ ALIGNED(4) static const u8 gQuirkyDescription[] = _(
     "{CENTER_ALIGN}Maybe people are even upset\n"
     "{CENTER_ALIGN}with you for being so fickle?{EXTRA_MSG}"
     "{CENTER_ALIGN}If you realize how selfishly\n"
-    "{CENTER_ALIGN}you{APOSTROPHE}re behaving{COMMA} try to think\n"
+    "{CENTER_ALIGN}you're behaving, try to think\n"
     "{CENTER_ALIGN}before you do anything rash.{EXTRA_MSG}"
     "{CENTER_ALIGN}A quirky person like you should be...");
 
@@ -1288,23 +1288,23 @@ ALIGNED(4) static const u8 gLonelyDescription[] = _(
     "{CENTER_ALIGN}The lonely type.{EXTRA_MSG}"
     "{CENTER_ALIGN}You always act cheerful and\n"
     "{CENTER_ALIGN}jocular around other people.{EXTRA_MSG}"
-    "{CENTER_ALIGN}But that{APOSTROPHE}s only because\n"
+    "{CENTER_ALIGN}But that's only because\n"
     "{CENTER_ALIGN}you are with other people.{EXTRA_MSG}"
-    "{CENTER_ALIGN}However{COMMA} when you get alone...{EXTRA_MSG}"
+    "{CENTER_ALIGN}However, when you get alone...{EXTRA_MSG}"
     "{CENTER_ALIGN}Do you find yourself\n"
     "{CENTER_ALIGN}feeling oddly depressed?{EXTRA_MSG}"
-    "{CENTER_ALIGN}That{APOSTROPHE}s why you always\n"
+    "{CENTER_ALIGN}That's why you always\n"
     "{CENTER_ALIGN}want to be with others.{EXTRA_MSG}"
     "{CENTER_ALIGN}But if you go around feeling\n"
     "{CENTER_ALIGN}depressed too much...{EXTRA_MSG}"
     "{CENTER_ALIGN}Your nutritional balance goes out\n"
     "{CENTER_ALIGN}of wack. Eat more vegetables!{EXTRA_MSG}"
     "{CENTER_ALIGN}However...{WAIT_PRESS}\n"
-    "{CENTER_ALIGN}It{APOSTROPHE}s not a bad thing\n"
+    "{CENTER_ALIGN}It's not a bad thing\n"
     "{CENTER_ALIGN}to feel lonely.{EXTRA_MSG}"
-    "{CENTER_ALIGN}You know what it{APOSTROPHE}s like when you aren{APOSTROPHE}t\n"
-    "{CENTER_ALIGN}alone{COMMA} so that{APOSTROPHE}s why you feel lonesome.{EXTRA_MSG}"
-    "{CENTER_ALIGN}And that{APOSTROPHE}s why you aren{APOSTROPHE}t really alone.{EXTRA_MSG}"
+    "{CENTER_ALIGN}You know what it's like when you aren't\n"
+    "{CENTER_ALIGN}alone, so that's why you feel lonesome.{EXTRA_MSG}"
+    "{CENTER_ALIGN}And that's why you aren't really alone.{EXTRA_MSG}"
     "{CENTER_ALIGN}A lonely person like you should be...");
 
 ALIGNED(4) static const u8 gRelaxedDescription[] = _(
@@ -1315,28 +1315,28 @@ ALIGNED(4) static const u8 gRelaxedDescription[] = _(
     "{CENTER_ALIGN}Or do you find yourself dozing off?{EXTRA_MSG}"
     "{CENTER_ALIGN}Or is your reaction time\n"
     "{CENTER_ALIGN}a little slower than others?{EXTRA_MSG}"
-    "{CENTER_ALIGN}But that{APOSTROPHE}s not necessarily\n"
+    "{CENTER_ALIGN}But that's not necessarily\n"
     "{CENTER_ALIGN}a bad thing.{EXTRA_MSG}"
     "{CENTER_ALIGN}You can do things at your own\n"
     "{CENTER_ALIGN}tempo without feeling pressured.{EXTRA_MSG}"
     "{CENTER_ALIGN}You can live in a relaxed and\n"
     "{CENTER_ALIGN}unhurried manner without worries.{EXTRA_MSG}"
-    "{CENTER_ALIGN}I think that{APOSTROPHE}s a happy\n"
-    "{CENTER_ALIGN}lifestyle to be envied{COMMA} even.{EXTRA_MSG}"
-    "{CENTER_ALIGN}You{APOSTROPHE}re also surprisingly popular.{EXTRA_MSG}"
+    "{CENTER_ALIGN}I think that's a happy\n"
+    "{CENTER_ALIGN}lifestyle to be envied, even.{EXTRA_MSG}"
+    "{CENTER_ALIGN}You're also surprisingly popular.{EXTRA_MSG}"
     "{CENTER_ALIGN}The way you vacantly stare\n"
     "{CENTER_ALIGN}off into the distance...{EXTRA_MSG}"
     "{CENTER_ALIGN}It should make that someone\n"
-    "{CENTER_ALIGN}special{APOSTROPHE}s pulse race.{EXTRA_MSG}"
+    "{CENTER_ALIGN}special's pulse race.{EXTRA_MSG}"
     "{CENTER_ALIGN}A relaxed person like you should be...");
 
 ALIGNED(4) static const u8 gCalmDescription[] = _(
     "{CENTER_ALIGN}You appear to be...{WAIT_PRESS}\n"
     "{CENTER_ALIGN}The calm type.{EXTRA_MSG}"
-    "{CENTER_ALIGN}You{APOSTROPHE}re capable of giving advice\n"
+    "{CENTER_ALIGN}You're capable of giving advice\n"
     "{CENTER_ALIGN}to friends with worries.{EXTRA_MSG}"
-    "{CENTER_ALIGN}You don{APOSTROPHE}t like to fight.{EXTRA_MSG}"
-    "{CENTER_ALIGN}You{APOSTROPHE}re a warm{COMMA} kindhearted\n"
+    "{CENTER_ALIGN}You don't like to fight.{EXTRA_MSG}"
+    "{CENTER_ALIGN}You're a warm, kindhearted\n"
     "{CENTER_ALIGN}person who cares.{EXTRA_MSG}"
     "{CENTER_ALIGN}You must have many friends\n"
     "{CENTER_ALIGN}who look up to you.{EXTRA_MSG}"
@@ -1352,21 +1352,21 @@ ALIGNED(4) static const u8 gSassyDescription[] = _(
     "{CENTER_ALIGN}You appear to be...{WAIT_PRESS}\n"
     "{CENTER_ALIGN}The sassy type.{EXTRA_MSG}"
     "{CENTER_ALIGN}You tend to be somewhat cynical.{EXTRA_MSG}"
-    "{CENTER_ALIGN}Despite that{COMMA} there is something\n"
+    "{CENTER_ALIGN}Despite that, there is something\n"
     "{CENTER_ALIGN}appealing and lovable about you.{EXTRA_MSG}"
     "{CENTER_ALIGN}But do you occasionally say something\n"
     "{CENTER_ALIGN}arrogant that angers others?{EXTRA_MSG}"
     "{CENTER_ALIGN}Do you make that mistake?{EXTRA_MSG}"
     "{CENTER_ALIGN}Or have people called you\n"
-    "{CENTER_ALIGN}conceited{COMMA} vain{COMMA} or selfish?{EXTRA_MSG}"
+    "{CENTER_ALIGN}conceited, vain, or selfish?{EXTRA_MSG}"
     "{CENTER_ALIGN}Have people said that about you?{EXTRA_MSG}"
-    "{CENTER_ALIGN}Huh?{WAIT_PRESS} You{APOSTROPHE}re telling me to get lost?{EXTRA_MSG}"
-    "{CENTER_ALIGN}Why{COMMA} you... Come here and say that!{WAIT_PRESS}\n"
+    "{CENTER_ALIGN}Huh?{WAIT_PRESS} You're telling me to get lost?{EXTRA_MSG}"
+    "{CENTER_ALIGN}Why, you... Come here and say that!{WAIT_PRESS}\n"
     "{CENTER_ALIGN}......Gasp!{EXTRA_MSG}"
-    "{CENTER_ALIGN}...I{APOSTROPHE}m sorry.\n"
+    "{CENTER_ALIGN}...I'm sorry.\n"
     "{CENTER_ALIGN}I let my feelings run away.\n"
-    "{CENTER_ALIGN}I truly regret this{COMMA} really.{EXTRA_MSG}"
-    "{CENTER_ALIGN}Anyway{COMMA} your cool and aloof\n"
+    "{CENTER_ALIGN}I truly regret this, really.{EXTRA_MSG}"
+    "{CENTER_ALIGN}Anyway, your cool and aloof\n"
     "{CENTER_ALIGN}attitude is what defines you.{EXTRA_MSG}"
     "{CENTER_ALIGN}It makes you exasperating and\n"
     "{CENTER_ALIGN}appealing at the same time.{EXTRA_MSG}"
@@ -1377,18 +1377,18 @@ ALIGNED(4) static const u8 gHastyDescription[] = _(
     "{CENTER_ALIGN}The hasty type.{EXTRA_MSG}"
     "{CENTER_ALIGN}You like to take charge\n"
     "{CENTER_ALIGN}and get things done.{EXTRA_MSG}"
-    "{CENTER_ALIGN}You{APOSTROPHE}re a real go-getter.{EXTRA_MSG}"
+    "{CENTER_ALIGN}You're a real go-getter.{EXTRA_MSG}"
     "{CENTER_ALIGN}But are you also stressed out?{EXTRA_MSG}"
     "{CENTER_ALIGN}You get irritated when your\n"
-    "{CENTER_ALIGN}friends don{APOSTROPHE}t show up on time.{EXTRA_MSG}"
+    "{CENTER_ALIGN}friends don't show up on time.{EXTRA_MSG}"
     "{CENTER_ALIGN}You get frustrated when things\n"
-    "{CENTER_ALIGN}don{APOSTROPHE}t turn out the way you expect.{EXTRA_MSG}"
+    "{CENTER_ALIGN}don't turn out the way you expect.{EXTRA_MSG}"
     "{CENTER_ALIGN}Maybe you jab the elevator button\n"
     "{CENTER_ALIGN}if the elevator is slow to arrive.{EXTRA_MSG}"
-    "{CENTER_ALIGN}...Maybe you{APOSTROPHE}re already jabbing\n"
+    "{CENTER_ALIGN}...Maybe you're already jabbing\n"
     "{CENTER_ALIGN}the A Button repeatedly now.{EXTRA_MSG}"
     "{CENTER_ALIGN}Beware--getting too easily irritated\n"
-    "{CENTER_ALIGN}just isn{APOSTROPHE}t good for your well-being.{EXTRA_MSG}"
+    "{CENTER_ALIGN}just isn't good for your well-being.{EXTRA_MSG}"
     "{CENTER_ALIGN}A hasty person like you should be...");
 
 ALIGNED(4) static const u8 gTimidDescription[] = _(
@@ -1399,8 +1399,8 @@ ALIGNED(4) static const u8 gTimidDescription[] = _(
     "{CENTER_ALIGN}You may also find it too frightening\n"
     "{CENTER_ALIGN}to go back to school to get something\n"
     "{CENTER_ALIGN}you left behind in class.{EXTRA_MSG}"
-    "{CENTER_ALIGN}If you{APOSTROPHE}re ever walking on a dark\n"
-    "{CENTER_ALIGN}street at night{COMMA} you probably turn\n"
+    "{CENTER_ALIGN}If you're ever walking on a dark\n"
+    "{CENTER_ALIGN}street at night, you probably turn\n"
     "{CENTER_ALIGN}around often to check behind you.{EXTRA_MSG}"
     "{CENTER_ALIGN}But your timid nature is\n"
     "{CENTER_ALIGN}also your good point!{EXTRA_MSG}"
@@ -1411,7 +1411,7 @@ ALIGNED(4) static const u8 gTimidDescription[] = _(
 ALIGNED(4) static const u8 gNaiveDescription[] = _(
     "{CENTER_ALIGN}You appear to be...{WAIT_PRESS}\n"
     "{CENTER_ALIGN}The naive type.{EXTRA_MSG}"
-    "{CENTER_ALIGN}You are highly curious{COMMA}\n"
+    "{CENTER_ALIGN}You are highly curious,\n"
     "{CENTER_ALIGN}and you love rare things.{EXTRA_MSG}"
     "{CENTER_ALIGN}Your cheerful and carefree\n"
     "{CENTER_ALIGN}attitude should make things fun\n"
@@ -1419,38 +1419,38 @@ ALIGNED(4) static const u8 gNaiveDescription[] = _(
     "{CENTER_ALIGN}But you do have one flaw.\n"
     "{CENTER_ALIGN}You can be childish.{EXTRA_MSG}"
     "{CENTER_ALIGN}You can never sit still.\n"
-    "{CENTER_ALIGN}You{APOSTROPHE}re always on the move.{EXTRA_MSG}"
-    "{CENTER_ALIGN}You can also be selfish{COMMA}\n"
+    "{CENTER_ALIGN}You're always on the move.{EXTRA_MSG}"
+    "{CENTER_ALIGN}You can also be selfish,\n"
     "{CENTER_ALIGN}so you should watch yourself.{EXTRA_MSG}"
     "{CENTER_ALIGN}A naive person like you should be...");
 
 ALIGNED(4) static const u8 gImpishDescription[] = _(
     "{CENTER_ALIGN}You appear to be...{WAIT_PRESS}\n"
     "{CENTER_ALIGN}The impish type.{EXTRA_MSG}"
-    "{CENTER_ALIGN}You{APOSTROPHE}re playful{COMMA} cheerful{COMMA}\n"
+    "{CENTER_ALIGN}You're playful, cheerful,\n"
     "{CENTER_ALIGN}and you love pranks.{EXTRA_MSG}"
-    "{CENTER_ALIGN}You{APOSTROPHE}re also kindhearted.{EXTRA_MSG}"
-    "{CENTER_ALIGN}That{APOSTROPHE}s why the people around\n"
+    "{CENTER_ALIGN}You're also kindhearted.{EXTRA_MSG}"
+    "{CENTER_ALIGN}That's why the people around\n"
     "{CENTER_ALIGN}you find you so irresistible.{EXTRA_MSG}"
     "{CENTER_ALIGN}You must be the most\n"
     "{CENTER_ALIGN}popular person around!{EXTRA_MSG}"
-    "{CENTER_ALIGN}Oh?{WAIT_PRESS} You{APOSTROPHE}re not that popular?{WAIT_PRESS}\n"
-    "{CENTER_ALIGN}You{APOSTROPHE}re either being modest...\n"
-    "{CENTER_ALIGN}or you just don{APOSTROPHE}t notice it.{EXTRA_MSG}"
+    "{CENTER_ALIGN}Oh?{WAIT_PRESS} You're not that popular?{WAIT_PRESS}\n"
+    "{CENTER_ALIGN}You're either being modest...\n"
+    "{CENTER_ALIGN}or you just don't notice it.{EXTRA_MSG}"
     "{CENTER_ALIGN}I bet people are just too shy\n"
     "{CENTER_ALIGN}to let their feelings be known.{EXTRA_MSG}"
-    "{CENTER_ALIGN}There{APOSTROPHE}s someone out there who{APOSTROPHE}s\n"
+    "{CENTER_ALIGN}There's someone out there who's\n"
     "{CENTER_ALIGN}afraid to declare their love for you!{EXTRA_MSG}"
     "{CENTER_ALIGN}An impish person like you should be...");
 
 ALIGNED(4) static const u8 gJollyDescription[] = _(
     "{CENTER_ALIGN}You appear to be...{WAIT_PRESS}\n"
     "{CENTER_ALIGN}The jolly type.{EXTRA_MSG}"
-    "{CENTER_ALIGN}Always laughing and smiling{COMMA}\n"
+    "{CENTER_ALIGN}Always laughing and smiling,\n"
     "{CENTER_ALIGN}you uplift everyone around you.{EXTRA_MSG}"
     "{CENTER_ALIGN}You love jokes!{EXTRA_MSG}"
-    "{CENTER_ALIGN}You have lots of friends{COMMA} and\n"
-    "{CENTER_ALIGN}you{APOSTROPHE}re popular wherever you go.{EXTRA_MSG}"
+    "{CENTER_ALIGN}You have lots of friends, and\n"
+    "{CENTER_ALIGN}you're popular wherever you go.{EXTRA_MSG}"
     "{CENTER_ALIGN}But sometimes you get carried away\n"
     "{CENTER_ALIGN}and say things that get you in trouble.{EXTRA_MSG}"
     "{CENTER_ALIGN}You should learn to think before\n"
@@ -1468,19 +1468,19 @@ ALIGNED(4) static const u8 gBraveDescription[] = _(
     "{CENTER_ALIGN}For justice...{WAIT_PRESS}\n"
     "{CENTER_ALIGN}For peace on earth...{WAIT_PRESS}\n"
     "{CENTER_ALIGN}Fight the forces of evil!{EXTRA_MSG}"
-    "{CENTER_ALIGN}......{WAIT_PRESS}If I{APOSTROPHE}m wrong...{WAIT_PRESS}\n"
+    "{CENTER_ALIGN}......{WAIT_PRESS}If I'm wrong...{WAIT_PRESS}\n"
     "{CENTER_ALIGN}Work at becoming a true hero!{EXTRA_MSG}"
     "{CENTER_ALIGN}A brave person like you should be...");
 
 ALIGNED(4) static const u8 gDocileDescription[] = _(
     "{CENTER_ALIGN}You appear to be...{WAIT_PRESS}\n"
     "{CENTER_ALIGN}The docile type.{EXTRA_MSG}"
-    "{CENTER_ALIGN}You{APOSTROPHE}re very kindhearted.{WAIT_PRESS}\n"
+    "{CENTER_ALIGN}You're very kindhearted.{WAIT_PRESS}\n"
     "{CENTER_ALIGN}Very helpful.{WAIT_PRESS}\n"
     "{CENTER_ALIGN}You can make friends with anyone.{EXTRA_MSG}"
-    "{CENTER_ALIGN}You{APOSTROPHE}re a wonderful person.{EXTRA_MSG}"
+    "{CENTER_ALIGN}You're a wonderful person.{EXTRA_MSG}"
     "{CENTER_ALIGN}......{WAIT_PRESS}Is that going overboard?{WAIT_PRESS}\n"
-    "{CENTER_ALIGN}I don{APOSTROPHE}t think so.{EXTRA_MSG}"
+    "{CENTER_ALIGN}I don't think so.{EXTRA_MSG}"
     "{CENTER_ALIGN}You yourself should be\n"
     "{CENTER_ALIGN}the best judge of that.{EXTRA_MSG}"
     "{CENTER_ALIGN}A docile person like you should be...");
@@ -1488,14 +1488,14 @@ ALIGNED(4) static const u8 gDocileDescription[] = _(
 ALIGNED(4) static const u8 gHardyDescription[] = _(
     "{CENTER_ALIGN}You appear to be...{WAIT_PRESS}\n"
     "{CENTER_ALIGN}The hardy type.{EXTRA_MSG}"
-    "{CENTER_ALIGN}You do your homework diligently{COMMA}\n"
+    "{CENTER_ALIGN}You do your homework diligently,\n"
     "{CENTER_ALIGN}and you know to eat properly.{EXTRA_MSG}"
     "{CENTER_ALIGN}You have strong willpower that lets\n"
-    "{CENTER_ALIGN}you complete tasks{COMMA} however tough.{EXTRA_MSG}"
-    "{CENTER_ALIGN}But{COMMA} you can also be stubborn to the\n"
+    "{CENTER_ALIGN}you complete tasks, however tough.{EXTRA_MSG}"
+    "{CENTER_ALIGN}But, you can also be stubborn to the\n"
     "{CENTER_ALIGN}point of even feuding with friends...{EXTRA_MSG}"
-    "{CENTER_ALIGN}Nothing will go right for you when you{APOSTROPHE}re\n"
-    "{CENTER_ALIGN}irritated{COMMA} so learn to laugh it off.{EXTRA_MSG}"
+    "{CENTER_ALIGN}Nothing will go right for you when you're\n"
+    "{CENTER_ALIGN}irritated, so learn to laugh it off.{EXTRA_MSG}"
     "{CENTER_ALIGN}A hardy person like you should be...");
 
 static const UnkTextStruct2 sUnknown_80F4244 =

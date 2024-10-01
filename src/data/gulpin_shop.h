@@ -31,7 +31,7 @@ ALIGNED(4) static const u8 sWillAMoveBeForgotten[] = _(
 
 ALIGNED(4) static const u8 sForgetMoveAndLinkedOnes[] = _(
     "{CENTER_ALIGN}Forget the move {COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1} and\n"
-    "{CENTER_ALIGN}any moves linked to it{COMMA} and learn the move\n"
+    "{CENTER_ALIGN}any moves linked to it, and learn the move\n"
     "{CENTER_ALIGN}{COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}?");
 
 ALIGNED(4) static const u8 sForgetMoveOnly[] = _(

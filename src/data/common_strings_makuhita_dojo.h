@@ -56,7 +56,7 @@ ALIGNED(4) static const u8 sUnknown_80DA018[] = _(
     " Zzznarr... Urr!\n"
     "Make stronger rescue team...{EXTRA_MSG}"
     " Urr... Zzznarr!\n"
-    "Don{APOSTROPHE}t let up!");
+    "Don't let up!");
 
 ALIGNED(4) static const u8 sUnknown_80DA0DC[] = _(
     " Zzznarr... Zzz...!\n"
@@ -88,13 +88,13 @@ ALIGNED(4) static const u8 sUnknown_80DA204[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80DA248[] = _(
     " Aiyah... Zzznarr...\n"
-    "Didn{APOSTROPHE}t finish...{EXTRA_MSG}"
+    "Didn't finish...{EXTRA_MSG}"
     " Zzz... Urr?\n"
     "No giving up...");
 
 ALIGNED(4) static const u8 sUnknown_80DA290[] = _(
     " Zzz... Narr...\n"
-    "{ARG_POKEMON_0}? {APOSTROPHE}K{COMMA} go...");
+    "{ARG_POKEMON_0}? 'K, go...");
 
 ALIGNED(4) static const u8 sUnknown_80DA2B4[] = _(
     " Zzznarr... Zzz...\n"
@@ -123,18 +123,18 @@ ALIGNED(4) static const u8 sUnknown_80DA338[] = _(
     "Fire-type Pokémon.{EXTRA_MSG}"
     " In the {COLOR_1 YELLOW_4}Water Maze{END_COLOR_TEXT_1} there\n"
     "will only be Water-type Pokémon.{EXTRA_MSG}"
-    " In such ways{COMMA} only one type\n"
+    " In such ways, only one type\n"
     "of Pokémon will be in a given room.\n"
     "Study how types match up in battle.{EXTRA_MSG}"
-    " The Pokémon in this dojo{COMMA}\n"
-    "by the way{COMMA} are all volunteers.{EXTRA_MSG}"
+    " The Pokémon in this dojo,\n"
+    "by the way, are all volunteers.{EXTRA_MSG}"
     " They are participating\n"
     "because they want to see rescue teams\n"
     "succeed.{EXTRA_MSG}"
     " The only thanks they expect\n"
     "is to see you become stronger.\n"
-    "Don{APOSTROPHE}t let them down!{EXTRA_MSG}"
-    " There{APOSTROPHE}s more.{WAIT_PRESS}\n"
+    "Don't let them down!{EXTRA_MSG}"
+    " There's more.{WAIT_PRESS}\n"
     "For a rescue team that successfully\n"
     "completes all training courses...{EXTRA_MSG}"
     " I have a special reward!{EXTRA_MSG}"
@@ -142,7 +142,7 @@ ALIGNED(4) static const u8 sUnknown_80DA338[] = _(
     "harder!");
 
 ALIGNED(4) static const u8 sUnknown_80DA62C[] = _(
-    " Don{APOSTROPHE}t let up on your training!\n"
+    " Don't let up on your training!\n"
     "Keep bettering yourself!{EXTRA_MSG}"
     " May you never lose your\n"
     "drive!");
@@ -150,27 +150,27 @@ ALIGNED(4) static const u8 sUnknown_80DA62C[] = _(
 ALIGNED(4) static const u8 sUnknown_80DA688[] = _(
     " Ah...\n"
     "You have succeeded in your training!{EXTRA_MSG}"
-    " You{APOSTROPHE}ve shown your worth!{WAIT_PRESS}\n"
-    "Without a doubt{COMMA} you have grown more\n"
+    " You've shown your worth!{WAIT_PRESS}\n"
+    "Without a doubt, you have grown more\n"
     "powerful from your training!{WAIT_PRESS} Wait...{WAIT_PRESS} ...{EXTRA_MSG}"
     " Wuh?{WAIT_PRESS}\n"
-    "What{COMMA} what{COMMA} what?!{EXTRA_MSG}"
+    "What, what, what?!{EXTRA_MSG}"
     " Did you maybe...{WAIT_PRESS}\n"
     "Conquer all the training courses?{EXTRA_MSG}"
-    " That{APOSTROPHE}s...{WAIT_PRESS} Amazing! You!{WAIT_PRESS}\n"
+    " That's...{WAIT_PRESS} Amazing! You!{WAIT_PRESS}\n"
     "Congratulations!{EXTRA_MSG}"
     " I promised!{WAIT_PRESS}\n"
     "I promised you a reward for completing\n"
     "the training courses!{EXTRA_MSG}"
     " So... Here it is!{WAIT_PRESS}\n"
     "My {COLOR_1 GREEN_2}Bonsly Doll{END_COLOR_TEXT_1}!{EXTRA_MSG}"
-    " Isn{APOSTROPHE}t it smashing? Hey?!");
+    " Isn't it smashing? Hey?!");
 
 ALIGNED(4) static const u8 sUnknown_80DA844[] = _(
     " Ah...\n"
     "You have succeeded in your training!{EXTRA_MSG}"
-    " You{APOSTROPHE}ve shown your worth!{WAIT_PRESS}\n"
-    "Without a doubt{COMMA} you have grown more\n"
+    " You've shown your worth!{WAIT_PRESS}\n"
+    "Without a doubt, you have grown more\n"
     "powerful from your training!{EXTRA_MSG}"
     " May this success drive\n"
     "you to train even harder!");
@@ -191,12 +191,12 @@ ALIGNED(4) static const u8 sUnknown_80DA998[] = _(
 ALIGNED(4) static const u8 sUnknown_80DA9D4[] = _(" Where do you wish to train?");
 
 ALIGNED(4) static const u8 sUnknown_80DA9F4[] = _(
-    " Fine{COMMA} farewell.\n"
+    " Fine, farewell.\n"
     "Return if you seek more training.");
 
 ALIGNED(4) static const u8 sUnknown_80DAA2C[] = _(" What else do you seek?");
 
 ALIGNED(4) static const u8 sUnknown_80DAA44[] = _(
     " This is the Makuhita Dojo!{WAIT_PRESS}\n"
-    "Through rigorous training{COMMA} one begets\n"
+    "Through rigorous training, one begets\n"
     "true power.");

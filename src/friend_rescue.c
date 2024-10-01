@@ -46,7 +46,7 @@ ALIGNED(4) const u8 gUnknown_80E2610[] = _(
 
 ALIGNED(4) const u8 gUnknown_80E2640[] = _(
         "How would you like to receive your\n"
-        "friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}?");
+        "friend's {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}?");
 
 ALIGNED(4) const u8 gUnknown_80E2680[] = _(
         "How would you like to send your\n"
@@ -54,7 +54,7 @@ ALIGNED(4) const u8 gUnknown_80E2680[] = _(
 
 ALIGNED(4) const u8 gUnknown_80E26B0[] = _(
         "How would you like to receive your\n"
-        "friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}?");
+        "friend's {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}?");
 
 ALIGNED(4) const u8 gUnknown_80E26F0[] = _(
         "How would you like to send your\n"
@@ -62,14 +62,14 @@ ALIGNED(4) const u8 gUnknown_80E26F0[] = _(
 
 ALIGNED(4) const u8 gUnknown_80E2728[] = _(
         "How would you like to receive your\n"
-        "friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?");
+        "friend's {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?");
 
 ALIGNED(4) const u8 gUnknown_80E276C[] = _(
         "The GBA Game Pak does not have\n"
         "an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} on it.");
 
 ALIGNED(4) const u8 gUnknown_80E27A4[] = _(
-        "If you accept an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}{COMMA} the\n"
+        "If you accept an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}, the\n"
         "{COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} you received before\n"
         "will be overwritten. Is that OK?");
 
@@ -91,7 +91,7 @@ ALIGNED(4) const u8 gUnknown_80E28D8[] = _(
         "Resume your game using {COLOR_1 LIGHT_BLUE}Revive Team{END_COLOR_TEXT_1}.");
 
 ALIGNED(4) const u8 gUnknown_80E2904[] = _(
-        "Your friend{APOSTROPHE}s Mailbox is full.\n"
+        "Your friend's Mailbox is full.\n"
         "This piece of mail cannot be sent.\n"
         "The recipient must delete old mail.");
 
@@ -125,7 +125,7 @@ ALIGNED(4) const u8 gUnknown_80E2AA8[] = _(
 
 ALIGNED(4) const u8 gUnknown_80E2AE4[] = _(
 "Please connect a {COLOR_1 LIGHT_BLUE}Link Cable{END_COLOR_TEXT_1}.\n"
-"When your friend{APOSTROPHE}s side is ready{COMMA} you may\n"
+"When your friend's side is ready, you may\n"
 "communicate and exchange data.");
 
 ALIGNED(4) const u8 gUnknown_80E2B54[] = _(
@@ -133,7 +133,7 @@ ALIGNED(4) const u8 gUnknown_80E2B54[] = _(
 "Your adventure will be saved.");
 
 ALIGNED(4) const u8 gUnknown_80E2B90[] = _(
-"Using a {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}{COMMA}\n"
+"Using a {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1},\n"
 "you can send a {COLOR_1 LIGHT_BLUE}helper Pokémon{END_COLOR_TEXT_1} to\n"
 "a friend.");
 

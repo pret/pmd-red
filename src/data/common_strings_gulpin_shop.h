@@ -109,7 +109,7 @@ ALIGNED(4) const u8* const gCommonGulpin[GULPIN_SHOP_MODE_DIALOGUE_COUNT][GULPIN
 
 ALIGNED(4) static const u8 sUnknown_80D8950[] = _(
     " Zzz... Snuffle...\n"
-    "I{APOSTROPHE}d go broke if it weren{APOSTROPHE}t for those\n"
+    "I'd go broke if it weren't for those\n"
     "forgetful Pokémon...{EXTRA_MSG}"
     " Zzz... Gwaaah...\n"
     "Especially that {COLOR_1 CYAN}{ARG_POKEMON_4}{END_COLOR_TEXT_1}...\n"
@@ -121,7 +121,7 @@ ALIGNED(4) static const u8 sUnknown_80D8950[] = _(
     "But we decided to get rid of that\n"
     "{COLOR_1 CYAN}{ARG_POKEMON_4}{END_COLOR_TEXT_1}...{EXTRA_MSG}"
     " Gwaaaah... Gweh...\n"
-    "{COLOR_1 CYAN}{ARG_POKEMON_4}{END_COLOR_TEXT_1} won{APOSTROPHE}t be coming around\n"
+    "{COLOR_1 CYAN}{ARG_POKEMON_4}{END_COLOR_TEXT_1} won't be coming around\n"
     "anymore... ");
 
 ALIGNED(4) static const u8 sUnknown_80D8AB8[] = _(
@@ -147,7 +147,7 @@ ALIGNED(4) static const u8 sUnknown_80D8BD4[] = _(
     "Press {L_BUTTON} and {A_BUTTON}...{WAIT_PRESS} Use move!{WAIT_PRESS}\n"
     "Convenient...{EXTRA_MSG}"
     " Sssnore...\n"
-    "Switch the set move in a dungeon{COMMA} too...");
+    "Switch the set move in a dungeon, too...");
 
 ALIGNED(4) static const u8 sUnknown_80D8C98[] = _(
     " Zzznork... Fnurfle?\n"
@@ -186,9 +186,9 @@ ALIGNED(4) static const u8 sUnknown_80D8E28[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D8E48[] = _(
     " Zzznork...? Hunh?\n"
-    "You{APOSTROPHE}re a special Pokémon...{EXTRA_MSG}"
+    "You're a special Pokémon...{EXTRA_MSG}"
     " Mumble...\n"
-    "I can{APOSTROPHE}t help you...");
+    "I can't help you...");
 
 ALIGNED(4) static const u8 sUnknown_80D8E9C[] = _(
     " Zzz... Fwaah?\n"
@@ -202,7 +202,7 @@ ALIGNED(4) static const u8 sUnknown_80D8EC4[] = _(
     " Fwaaah hah!\n"
     "There...{EXTRA_MSG}"
     " Zzz... Mumble...\n"
-    "{COLOR_1 CYAN_3}{ARG_POKEMON_5}{END_COLOR_TEXT_1}{APOSTROPHE}s OK...{EXTRA_MSG}"
+    "{COLOR_1 CYAN_3}{ARG_POKEMON_5}{END_COLOR_TEXT_1}'s OK...{EXTRA_MSG}"
     " Sssnork... Forgotten...\n"
     "{COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1} and moves linked to it...\n"
     "Remembered {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}...");
@@ -237,7 +237,7 @@ ALIGNED(4) static const u8 sUnknown_80D90BC[] = _(
     "There...{EXTRA_MSG}"
     " Zzz... Zzz...\n"
     "{COLOR_1 CYAN_3}{ARG_POKEMON_5}{END_COLOR_TEXT_1} remembered...\n"
-    "Hunh? That move{COMMA} {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}...");
+    "Hunh? That move, {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}...");
 
 ALIGNED(4) static const u8 sUnknown_80D9168[] = _(
     " Zzz... Fgwah...?\n"
@@ -245,7 +245,7 @@ ALIGNED(4) static const u8 sUnknown_80D9168[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D9194[] = _(
     " Gwaah... Gwaah...\n"
-    "Who{APOSTROPHE}s gonna link moves?");
+    "Who's gonna link moves?");
 
 ALIGNED(4) static const u8 sUnknown_80D91C4[] = _(
     " Zzz... Zzz...\n"
@@ -257,7 +257,7 @@ ALIGNED(4) static const u8 sUnknown_80D91E4[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D9204[] = _(
     " Zzznort... Zzznnort...\n"
-    "Can{APOSTROPHE}t forget that...");
+    "Can't forget that...");
 
 ALIGNED(4) static const u8 sUnknown_80D9234[] = _(
     " Sssnork... Sssnork...\n"
@@ -282,13 +282,13 @@ ALIGNED(4) static const u8 sUnknown_80D92EC[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D9328[] = _(
     " What if you had to forget\n"
-    "a move{COMMA} but you wanted it back?{WAIT_PRESS}\n"
+    "a move, but you wanted it back?{WAIT_PRESS}\n"
     "Ever face that situation?{EXTRA_MSG}"
     " I can help!{WAIT_PRESS}\n"
-    "Come to me{COMMA} and I can make you instantly\n"
+    "Come to me, and I can make you instantly\n"
     "remember forgotten moves!{EXTRA_MSG}"
     " I...{WAIT_PRESS}\n"
-    "Well{COMMA} when Pokémon remember...{WAIT_PRESS}\n"
+    "Well, when Pokémon remember...{WAIT_PRESS}\n"
     "I love seeing that instant!{EXTRA_MSG}"
     " That look of enlightenment!{WAIT_PRESS}\n"
     "That amazed look of pleasure!{EXTRA_MSG}"
@@ -299,39 +299,39 @@ ALIGNED(4) static const u8 sUnknown_80D9498[] = _(
     " When moves are linked...{WAIT_PRESS}\n"
     "Two or more moves can be used one after\n"
     "another in one turn!{EXTRA_MSG}"
-    " For example{COMMA} if the moves\n"
+    " For example, if the moves\n"
     "{COLOR_1 CYAN}Scratch{END_COLOR_TEXT_1} and {COLOR_1 CYAN}Growl{END_COLOR_TEXT_1} are\n"
     "linked...{EXTRA_MSG}"
     " Both {COLOR_1 CYAN}Scratch{END_COLOR_TEXT_1} and {COLOR_1 CYAN}Growl{END_COLOR_TEXT_1} are\n"
     "used in one turn!{WAIT_PRESS}\n"
-    "See? Amazing{COMMA} huh?{EXTRA_MSG}"
-    " Using links{COMMA} heheh...{WAIT_PRESS}\n"
-    "Well{COMMA} depending on the moves you link{COMMA}\n"
+    "See? Amazing, huh?{EXTRA_MSG}"
+    " Using links, heheh...{WAIT_PRESS}\n"
+    "Well, depending on the moves you link,\n"
     "you can get incredible results!{EXTRA_MSG}"
-    " Oh{COMMA} yes.\n"
-    "When moves are linked{COMMA} they are used in\n"
+    " Oh, yes.\n"
+    "When moves are linked, they are used in\n"
     "sequence from the top one first.{EXTRA_MSG}"
     " You can also separate linked\n"
     "moves by selecting the Delink command.{EXTRA_MSG}"
     " The sequence of moves can\n"
-    "be changed by pressing {R_BUTTON}{COMMA}\n"
+    "be changed by pressing {R_BUTTON},\n"
     "then pressing up or down on {DPAD}.{EXTRA_MSG}"
     " Try to innovate with links.{WAIT_PRESS}\n"
     "Try creating links of your very own!");
 
 ALIGNED(4) static const u8 sUnknown_80D972C[] = _(
-    " When you{APOSTROPHE}re in a dungeon\n"
-    "and you{APOSTROPHE}re about to use a move...{WAIT_PRESS}\n"
-    "Isn{APOSTROPHE}t it a pain to open a window each time?{EXTRA_MSG}"
+    " When you're in a dungeon\n"
+    "and you're about to use a move...{WAIT_PRESS}\n"
+    "Isn't it a pain to open a window each time?{EXTRA_MSG}"
     " You can avoid that!{WAIT_PRESS}\n"
-    "You can just conveniently {QUOTE_START}Set{QUOTE_END}\n"
+    "You can just conveniently “Set”\n"
     "a move for instant use!{EXTRA_MSG}"
     " A set move can be instantly\n"
     "used with {L_BUTTON} and {A_BUTTON}!{WAIT_PRESS}\n"
-    "See? Isn{APOSTROPHE}t it easy?{EXTRA_MSG}"
+    "See? Isn't it easy?{EXTRA_MSG}"
     " Just set the move...{WAIT_PRESS}\n"
     "Hold {L_BUTTON} and then press {A_BUTTON} to use it!{WAIT_PRESS}\n"
-    "It{APOSTROPHE}s very convenient!{EXTRA_MSG}"
+    "It's very convenient!{EXTRA_MSG}"
     " You can also switch the set\n"
     "move in a dungeon.\n"
     "Do try it out!\n");
@@ -341,7 +341,7 @@ ALIGNED(4) static const u8 sUnknown_80D98D4[] = _(
     "What do you need information on?");
 
 ALIGNED(4) static const u8 sUnknown_80D9904[] = _(
-    " OK{COMMA} here goes!{EXTRA_MSG}"
+    " OK, here goes!{EXTRA_MSG}"
     " Gggggggg...{WAIT_PRESS} Poof!{EXTRA_MSG}"
     " There!\n"
     "Success!{EXTRA_MSG}"
@@ -350,7 +350,7 @@ ALIGNED(4) static const u8 sUnknown_80D9904[] = _(
     "linked to it!");
 
 ALIGNED(4) static const u8 sUnknown_80D9988[] = _(
-    " OK{COMMA} here goes!{EXTRA_MSG}"
+    " OK, here goes!{EXTRA_MSG}"
     " Gggggggg...{WAIT_PRESS} Poof!{EXTRA_MSG}"
     " There!\n"
     "Success!{EXTRA_MSG}"
@@ -358,37 +358,37 @@ ALIGNED(4) static const u8 sUnknown_80D9988[] = _(
     "the move {COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1}!");
 
 ALIGNED(4) static const u8 sUnknown_80D99F0[] = _(
-    " So{COMMA} forget the move\n"
+    " So, forget the move\n"
     "{COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1} and any moves linked to it?");
 
 ALIGNED(4) static const u8 sUnknown_80D9A2C[] = _(
-    " So{COMMA} forget the move\n"
+    " So, forget the move\n"
     "{COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1}?");
 
 ALIGNED(4) static const u8 sUnknown_80D9A50[] = _(
     " Uh... Huh?{WAIT_PRESS}\n"
     "You appear to be a special Pokémon.{EXTRA_MSG}"
-    " I can{APOSTROPHE}t help you remember\n"
-    "any moves{COMMA} I don{APOSTROPHE}t think.\n"
-    "I{APOSTROPHE}m sorry.");
+    " I can't help you remember\n"
+    "any moves, I don't think.\n"
+    "I'm sorry.");
 
 ALIGNED(4) static const u8 sUnknown_80D9ACC[] = _(
     " Uh... Hello?{WAIT_PRESS}\n"
-    "There don{APOSTROPHE}t appear to be any moves that\n"
+    "There don't appear to be any moves that\n"
     "can be remembered.");
 
 ALIGNED(4) static const u8 sUnknown_80D9B1C[] = _(
-    " OK{COMMA} here goes!{EXTRA_MSG}"
+    " OK, here goes!{EXTRA_MSG}"
     " Gggggggg...{WAIT_PRESS} Pwah! Gulpin!{EXTRA_MSG}"
     " There!\n"
     "Success!{EXTRA_MSG}"
     " {COLOR_1 CYAN_3}{ARG_POKEMON_5}{END_COLOR_TEXT_1} is done!{EXTRA_MSG}"
-    " It{APOSTROPHE}s forgotten the move\n"
-    "{COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1} and any moves linked to it{COMMA}\n"
+    " It's forgotten the move\n"
+    "{COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1} and any moves linked to it,\n"
     "and {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1} has been remembered!");
 
 ALIGNED(4) static const u8 sUnknown_80D9BD8[] = _(
-    " OK{COMMA} here goes!{EXTRA_MSG}"
+    " OK, here goes!{EXTRA_MSG}"
     " Gggggggg...{WAIT_PRESS} Pwah! Gulpin!{EXTRA_MSG}"
     " There!\n"
     "Success!{EXTRA_MSG}"
@@ -397,19 +397,19 @@ ALIGNED(4) static const u8 sUnknown_80D9BD8[] = _(
     "the move {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}!");
 
 ALIGNED(4) static const u8 sUnknown_80D9C68[] = _(
-    " So{COMMA} forget {COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1}\n"
-    "and any moves linked to it{COMMA} and remember\n"
+    " So, forget {COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1}\n"
+    "and any moves linked to it, and remember\n"
     "the move {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}?");
 
 ALIGNED(4) static const u8 sUnknown_80D9CC0[] = _(
-    " So{COMMA} forget the move\n"
+    " So, forget the move\n"
     "{COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1} and remember the move\n"
     "{COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}?");
 
 ALIGNED(4) static const u8 sUnknown_80D9D00[] = _(
-    " So{COMMA} the move {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}\n"
+    " So, the move {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}\n"
     "is the one to be remembered?{WAIT_PRESS}\n"
-    "OK{COMMA} here goes!{EXTRA_MSG}"
+    "OK, here goes!{EXTRA_MSG}"
     " Gggggggggggg...{WAIT_PRESS} Gulpin!{EXTRA_MSG}"
     " There!\n"
     "Success!{EXTRA_MSG}"
@@ -422,21 +422,21 @@ ALIGNED(4) static const u8 sUnknown_80D9DA4[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D9DCC[] = _(
     " Good!\n"
-    "Now{COMMA} who wants to link moves?");
+    "Now, who wants to link moves?");
 
 ALIGNED(4) static const u8 sUnknown_80D9DF4[] = _(
     " Whenever you get the urge\n"
-    "to link moves{COMMA} please come see me!");
+    "to link moves, please come see me!");
 
 ALIGNED(4) static const u8 sUnknown_80D9E34[] = _(" Shall we go on?");
 
 ALIGNED(4) static const u8 sUnknown_80D9E48[] = _(
-    " If you forget that move{COMMA}\n"
-    "you won{APOSTROPHE}t have any moves at all.");
+    " If you forget that move,\n"
+    "you won't have any moves at all.");
 
 ALIGNED(4) static const u8 sUnknown_80D9E88[] = _(
-    " That move isn{APOSTROPHE}t linked{COMMA}\n"
-    "so it can{APOSTROPHE}t be delinked.");
+    " That move isn't linked,\n"
+    "so it can't be delinked.");
 
 ALIGNED(4) static const u8 sUnknown_80D9EC0[] = _(
     " Too bad.\n"
@@ -444,7 +444,7 @@ ALIGNED(4) static const u8 sUnknown_80D9EC0[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D9EF4[] = _(
     " Uh... Hello?\n"
-    "You don{APOSTROPHE}t have enough money?");
+    "You don't have enough money?");
 
 ALIGNED(4) static const u8 sUnknown_80D9F24[] = _(
     " Welcome to the Gulpin\n"

@@ -42,7 +42,7 @@ const MenuItem gSavingAdventureMenuItems[] = {
     {sUnknown_80E6F70, 4},
     {NULL, 2}
 };
-ALIGNED(4) const u8 sUnknown_80E6F70[] = _("{CENTER_ALIGN}Don{APOSTROPHE}t turn off the power.");
+ALIGNED(4) const u8 sUnknown_80E6F70[] = _("{CENTER_ALIGN}Don't turn off the power.");
 ALIGNED(4) const u8 sUnknown_80E6F90[] = _("{CENTER_ALIGN}Saving your adventure!");
 ALIGNED(4) const u8 sUnknown_80E6FAC[] = _("{CENTER_ALIGN}{COLOR_1 RED}Beware!{END_COLOR_TEXT_1} ");
 

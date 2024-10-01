@@ -302,17 +302,17 @@ gUnknown_80DB5C0: @ 80DB5C0
 
 	.global gUnknown_80DB5D4
 gUnknown_80DB5D4: @ 80DB5D4
-        .string "What is this Pokémon{APOSTROPHE}s nickname?\0"
+        .string "What is this Pokémon's nickname?\0"
         .align 2,0
 
 	.global gUnknown_80DB5F8
 gUnknown_80DB5F8: @ 80DB5F8
-        .string "What is your partner{APOSTROPHE}s nickname?\0"
+        .string "What is your partner's nickname?\0"
         .align 2,0
 
 	.global gUnknown_80DB61C
 gUnknown_80DB61C: @ 80DB61C
-        .string "What is your team{APOSTROPHE}s name?\0"
+        .string "What is your team's name?\0"
         .align 2,0
 
 	.global gUnknown_80DB638

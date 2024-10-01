@@ -52,7 +52,7 @@
     .align 2,0
 
     SeveralQuestions_826E16C:
-    .string "{CENTER_ALIGN}But before I can let you through{COMMA}\n"
+    .string "{CENTER_ALIGN}But before I can let you through,\n"
     .string "{CENTER_ALIGN}I have several questions for you.\0"
     .align 2,0
 

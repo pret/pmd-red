@@ -57,7 +57,7 @@ ALIGNED(4) static const u8 sSayFarewellPrompt[] = _(
 
 ALIGNED(4) static const u8 sSayFarewellConfirm[] = _(
          "If you say farewell to this\n"
-         "Pokémon{COMMA} it will be gone forever.{EXTRA_MSG}"
+         "Pokémon, it will be gone forever.{EXTRA_MSG}"
          "You will never be able to get another one\n"
          "like it to join your team.\n"
          "Will you release it anyway?");

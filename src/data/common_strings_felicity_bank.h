@@ -71,38 +71,38 @@ ALIGNED(4) const u8* const gCommonFelicity[FEL_MODE_COUNT][FEL_DLG_MAX] =
 
 ALIGNED(4) static const u8 sUnknown_80D4A58[] = _(
     " Sssnore...\n"
-    "Ah{COMMA} you wish to know how the bank\n"
+    "Ah, you wish to know how the bank\n"
     "operates... Very well...{EXTRA_MSG}"
     " Zzz...\n"
-    "If you{APOSTROPHE}re defeated in a dungeon{COMMA}\n"
-    "you{APOSTROPHE}ll lose all your money. Did you know?{EXTRA_MSG}"
+    "If you're defeated in a dungeon,\n"
+    "you'll lose all your money. Did you know?{EXTRA_MSG}"
     " Purr...\n"
-    "But{COMMA} you{APOSTROPHE}ve nothing to fear if you leave\n"
+    "But, you've nothing to fear if you leave\n"
     "your money with Felicity Bank...{EXTRA_MSG}"
     " Meow... Even if you\n"
-    "return defeated from a dungeon{COMMA} your\n"
+    "return defeated from a dungeon, your\n"
     "money will be safe with me...{EXTRA_MSG}"
     " Sssnore...\n"
-    "I assure you{COMMA} my bank will keep your\n"
+    "I assure you, my bank will keep your\n"
     "money safe...{EXTRA_MSG}"
     " Zzz...\n"
-    "Simple{COMMA} isn{APOSTROPHE}t it...?");
+    "Simple, isn't it...?");
 
 ALIGNED(4) static const u8 sUnknown_80D4C14[] = _(
     " {POKE}... Purr...\n"
-    "Very well{COMMA} {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
+    "Very well, {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
     "Here you are.");
 
 ALIGNED(4) static const u8 sUnknown_80D4C50[] = _(
     " Fnarf? Hunh...?{EXTRA_MSG}"
-    " Purr... I so do apologize{COMMA}\n"
-    "but you couldn{APOSTROPHE}t possibly carry any more\n"
+    " Purr... I so do apologize,\n"
+    "but you couldn't possibly carry any more\n"
     "money with you...");
 
 ALIGNED(4) static const u8 sUnknown_80D4CC0[] = _(
     " Fnarf? Meow...?{EXTRA_MSG}"
     " Purr...\n"
-    "I so hate to disappoint{COMMA} but you have no\n"
+    "I so hate to disappoint, but you have no\n"
     "money saved with me...");
 
 ALIGNED(4) static const u8 sUnknown_80D4D20[] = _(
@@ -119,13 +119,13 @@ ALIGNED(4) static const u8 sUnknown_80D4D8C[] = _(
     "Meow! All this money...{WAIT_PRESS}\n"
     "Our safe is about to burst...{EXTRA_MSG}"
     " Purr...\n"
-    "I am so sorry to say{COMMA} but I can{APOSTROPHE}t accept\n"
+    "I am so sorry to say, but I can't accept\n"
     "any more of your money...");
 
 ALIGNED(4) static const u8 sUnknown_80D4E28[] = _(
     " Sssnore... Hmm?{EXTRA_MSG}"
     " Zzz...\n"
-    "I{APOSTROPHE}m so sorry to say{COMMA} but you appear not\n"
+    "I'm so sorry to say, but you appear not\n"
     "to have any money...");
 
 ALIGNED(4) static const u8 sUnknown_80D4E84[] = _(
@@ -158,32 +158,32 @@ ALIGNED(4) static const u8 sUnknown_80D4F94[] = _(
     "This is Felicity Bank...");
 
 ALIGNED(4) static const u8 sUnknown_80D4FC8[] = _(
-    " Ah{COMMA} you wish to know how\n"
+    " Ah, you wish to know how\n"
     "the bank operates. Very well.{EXTRA_MSG}"
     " If you are defeated\n"
-    "in a dungeon{COMMA} you{APOSTROPHE}ll lose all your money.\n"
+    "in a dungeon, you'll lose all your money.\n"
     "Did you know that?{EXTRA_MSG}"
     " But you can avoid that!{WAIT_PRESS}\n"
-    "You{APOSTROPHE}ve nothing to fear if you leave your\n"
+    "You've nothing to fear if you leave your\n"
     "money with Felicity Bank.{EXTRA_MSG}"
     " Even if you return\n"
-    "defeated from a dungeon{COMMA} your money will\n"
+    "defeated from a dungeon, your money will\n"
     "be safe with me!{EXTRA_MSG}"
-    " I assure you{COMMA} my bank\n"
+    " I assure you, my bank\n"
     "will keep your money safe.{EXTRA_MSG}"
-    " Simple{COMMA} isn{APOSTROPHE}t it?");
+    " Simple, isn't it?");
 
 ALIGNED(4) static const u8 sUnknown_80D5158[] = _(
-    " Very well{COMMA} {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
+    " Very well, {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
     "Here you are.");
 
 ALIGNED(4) static const u8 sUnknown_80D5184[] = _(
-    " Oh?{WAIT_PRESS} I do so apologize{COMMA}\n"
-    "but you couldn{APOSTROPHE}t possibly carry any more\n"
+    " Oh?{WAIT_PRESS} I do so apologize,\n"
+    "but you couldn't possibly carry any more\n"
     "money with you.");
 
 ALIGNED(4) static const u8 sUnknown_80D51DC[] = _(
-    " Oh?{WAIT_PRESS} I so hate to disappoint{COMMA}\n"
+    " Oh?{WAIT_PRESS} I so hate to disappoint,\n"
     "but you have no money saved with me.");
 
 ALIGNED(4) static const u8 sUnknown_80D5224[] = _(
@@ -197,11 +197,11 @@ ALIGNED(4) static const u8 sUnknown_80D5244[] = _(
 ALIGNED(4) static const u8 sUnknown_80D527C[] = _(
     " Meow! All this money!{WAIT_PRESS}\n"
     "Our safe is about to burst!{EXTRA_MSG}"
-    " I am so sorry to say{COMMA} but\n"
-    "I can{APOSTROPHE}t accept any more of your money!");
+    " I am so sorry to say, but\n"
+    "I can't accept any more of your money!");
 
 ALIGNED(4) static const u8 sUnknown_80D52F8[] = _(
-    " Oh?{WAIT_PRESS} I{APOSTROPHE}m so sorry to say{COMMA}\n"
+    " Oh?{WAIT_PRESS} I'm so sorry to say,\n"
     "but you appear not to have any money.");
 
 ALIGNED(4) static const u8 sUnknown_80D5340[] = _(

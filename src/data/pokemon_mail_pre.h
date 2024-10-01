@@ -519,7 +519,7 @@ const s16 gUnknown_80E81D4[386][2] = {
 };
 
 ALIGNED(4) const u8 gMankeyMission[] = _("Punish bad {COLOR_1 YELLOW}Mankey{END_COLOR_TEXT_1}!");
-ALIGNED(4) const u8 gSmeargleMission[] = _("{COLOR_1 YELLOW}Smeargle{END_COLOR_TEXT_1}{APOSTROPHE}s desperate plea!");
+ALIGNED(4) const u8 gSmeargleMission[] = _("{COLOR_1 YELLOW}Smeargle{END_COLOR_TEXT_1}'s desperate plea!");
 ALIGNED(4) const u8 gMedichamMission[] = _("{COLOR_1 YELLOW}Medicham{END_COLOR_TEXT_1}: Help me!");
 ALIGNED(4) const u8 gUnknown_80E8830[] = _("Deliver one {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}.");
 ALIGNED(4) const u8 gUnknown_80E8848[] = _("One {COLOR_1 GREEN}%s{END_COLOR_TEXT_1} wanted!");
@@ -527,23 +527,23 @@ ALIGNED(4) const u8 gUnknown_80E885C[] = _("Save my child!");
 ALIGNED(4) const u8 gUnknown_80E886C[] = _("Escort me to my love!");
 ALIGNED(4) const u8 gUnknown_80E8884[] = _("Near %s");
 ALIGNED(4) const u8 gUnknown_80E888C[] = _("Rescue Description");
-ALIGNED(4) const u8 gMankeyMissionDescription[] = _("Please punish bad {COLOR_1 YELLOW}Mankey{END_COLOR_TEXT_1}{APOSTROPHE}s gang.");
+ALIGNED(4) const u8 gMankeyMissionDescription[] = _("Please punish bad {COLOR_1 YELLOW}Mankey{END_COLOR_TEXT_1}'s gang.");
 
 ALIGNED(4) const u8 gSmeargleMissionDescription[] = _(
-    "I didn{APOSTROPHE}t want to become a grown-up{COMMA} so I\n"
-    "fled{COMMA} but now I{APOSTROPHE}ve lost my way! Help!");
+    "I didn't want to become a grown-up, so I\n"
+    "fled, but now I've lost my way! Help!");
 
 ALIGNED(4) const u8 gMedichamMissionDescription[] = _(
-    "This is {COLOR_1 YELLOW}Medicham{END_COLOR_TEXT_1}. Rescue me{COMMA} please!\n"
+    "This is {COLOR_1 YELLOW}Medicham{END_COLOR_TEXT_1}. Rescue me, please!\n"
     "The reward is a secret〜♪ ");
 
 ALIGNED(4) const u8 gUnknown_80E8968[] = _(
-    "With the item {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}{COMMA} I can\n"
-    "evolve! I{APOSTROPHE}m yearning to evolve! Help!");
+    "With the item {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}, I can\n"
+    "evolve! I'm yearning to evolve! Help!");
 
 ALIGNED(4) const u8 gUnknown_80E89B0[] = _(
     "The {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}! What I love to eat\n"
-    "and can{APOSTROPHE}t live without! Please get one!");
+    "and can't live without! Please get one!");
 
 ALIGNED(4) const u8 gUnknown_80E89FC[] = _(
     "This is a rescue through communication.\n"

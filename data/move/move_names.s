@@ -270,7 +270,7 @@ MoveNamePlaceholder:
 
 .global MoveUseTextBide
 MoveUseTextBide:
-.string "{ARG_POKEMON_0} can{APOSTROPHE}t take it anymore!\0"
+.string "{ARG_POKEMON_0} can't take it anymore!\0"
 .align 2,0
 
 .global MoveNameBide2
@@ -305,7 +305,7 @@ MoveNameRegularAttack:
 
 .global MoveDescriptionVoltTackle
 MoveDescriptionVoltTackle:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance.\nHowever{COMMA} it also hurts the user.\0"
+.string "Inflicts damage on the target, even at a\ndistance.\nHowever, it also hurts the user.\0"
 .align 2,0
 
 .global MoveNameVoltTackle
@@ -320,7 +320,7 @@ MoveNameAeroblast:
 
 .global MoveDescriptionStruggle
 MoveDescriptionStruggle:
-.string "Inflicts damage on the target.\nHowever{COMMA} the user also takes damage one\nquarter of its {COLOR_2 YELLOW}maximum HP{END_COLOR_TEXT_2}.\0"
+.string "Inflicts damage on the target.\nHowever, the user also takes damage one\nquarter of its {COLOR_2 YELLOW}maximum HP{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNameStruggle
@@ -340,7 +340,7 @@ MoveNameRockBlast:
 
 .global MoveDescriptionLockOn
 MoveDescriptionLockOn:
-.string "Gives the user the {COLOR_2 CYAN}Sure Shot{END_COLOR_TEXT_2} status{COMMA}\nmaking all its moves and attacks\ncompletely accurate.\0"
+.string "Gives the user the {COLOR_2 CYAN}Sure Shot{END_COLOR_TEXT_2} status,\nmaking all its moves and attacks\ncompletely accurate.\0"
 .align 2,0
 
 .global MoveNameLockOn
@@ -350,7 +350,7 @@ MoveNameLockOn:
 
 .global MoveDescriptionSkullBash
 MoveDescriptionSkullBash:
-.string "The user gains the {COLOR_2 CYAN}Skull Bash{END_COLOR_TEXT_2} status{COMMA}\ncausing it to attack strongly on the\nnext turn.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\0"
+.string "The user gains the {COLOR_2 CYAN}Skull Bash{END_COLOR_TEXT_2} status,\ncausing it to attack strongly on the\nnext turn.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\0"
 .align 2,0
 
 .global MoveNameSkullBash
@@ -370,7 +370,7 @@ MoveNameFuryCutter:
 
 .global MoveDescriptionIceBeam
 MoveDescriptionIceBeam:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance. It may also leave the target\n{COLOR_2 CYAN}frozen{END_COLOR_TEXT_2} and incapable of action.\0"
+.string "Inflicts damage on the target, even at a\ndistance. It may also leave the target\n{COLOR_2 CYAN}frozen{END_COLOR_TEXT_2} and incapable of action.\0"
 .align 2,0
 
 .global MoveNameIceBeam
@@ -385,7 +385,7 @@ MoveNameIcePunch:
 
 .global MoveDescriptionDragonDance
 MoveDescriptionDragonDance:
-.string "Boosts the user{APOSTROPHE}s {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} and {COLOR_2 YELLOW}Movement\nSpeed{END_COLOR_TEXT_2} by one level.\0"
+.string "Boosts the user's {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} and {COLOR_2 YELLOW}Movement\nSpeed{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveNameDragonDance
@@ -395,7 +395,7 @@ MoveNameDragonDance:
 
 .global MoveDescriptionDragonbreath
 MoveDescriptionDragonbreath:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance. It may also cause {COLOR_2 CYAN}paralysis{END_COLOR_TEXT_2}{COMMA}\npreventing any attacks or moves.\0"
+.string "Inflicts damage on the target, even at a\ndistance. It may also cause {COLOR_2 CYAN}paralysis{END_COLOR_TEXT_2},\npreventing any attacks or moves.\0"
 .align 2,0
 
 .global MoveNameDragonbreath
@@ -430,7 +430,7 @@ MoveNameRefresh:
 
 .global MoveDescriptionReflect
 MoveDescriptionReflect:
-.string "The user gains the {COLOR_2 CYAN}Reflect{END_COLOR_TEXT_2} status{COMMA}\nhalving the damage from all\n{COLOR_2 CYAN}Physical Attack moves{END_COLOR_TEXT_2} and\nregular attacks.\0"
+.string "The user gains the {COLOR_2 CYAN}Reflect{END_COLOR_TEXT_2} status,\nhalving the damage from all\n{COLOR_2 CYAN}Physical Attack moves{END_COLOR_TEXT_2} and\nregular attacks.\0"
 .align 2,0
 
 .global MoveNameReflect
@@ -440,7 +440,7 @@ MoveNameReflect:
 
 .global MoveDescriptionRecycle
 MoveDescriptionRecycle:
-.string "Repairs the item {COLOR_2 GREEN}{TM}Used TM{END_COLOR_TEXT_2} and restores\nit to its original{COMMA} unused state.\0"
+.string "Repairs the item {COLOR_2 GREEN}{TM}Used TM{END_COLOR_TEXT_2} and restores\nit to its original, unused state.\0"
 .align 2,0
 
 .global MoveNameRecycle
@@ -470,7 +470,7 @@ MoveNameSnatch:
 
 .global MoveDescriptionAcid
 MoveDescriptionAcid:
-.string "Inflicts damage on the target.\nIt may also lower the user{APOSTROPHE}s {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2} by\none level.\0"
+.string "Inflicts damage on the target.\nIt may also lower the user's {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2} by\none level.\0"
 .align 2,0
 
 .global MoveNameAcid
@@ -480,7 +480,7 @@ MoveNameAcid:
 
 .global MoveDescriptionDreamEater
 MoveDescriptionDreamEater:
-.string "Inflicts damage on the target and restores\nthe user{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}.\nEffective only against sleeping foes.\0"
+.string "Inflicts damage on the target and restores\nthe user's {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}.\nEffective only against sleeping foes.\0"
 .align 2,0
 
 .global MoveNameDreamEater
@@ -500,7 +500,7 @@ MoveNameMetronome:
 
 .global MoveDescriptionLeechSeed
 MoveDescriptionLeechSeed:
-.string "Inflicts the {COLOR_2 CYAN}Leech Seed{END_COLOR_TEXT_2} status\non the target.\nThe target{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} is leeched every several\nturns to restore the user{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}.\0"
+.string "Inflicts the {COLOR_2 CYAN}Leech Seed{END_COLOR_TEXT_2} status\non the target.\nThe target's {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} is leeched every several\nturns to restore the user's {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNameLeechSeed
@@ -510,7 +510,7 @@ MoveNameLeechSeed:
 
 .global MoveDescriptionFrustration
 MoveDescriptionFrustration:
-.string "Inflicts damage on the target.\nIt inflicts greater damage if the user{APOSTROPHE}s\n{COLOR_2 YELLOW}IQ{END_COLOR_TEXT_2} is low.\0"
+.string "Inflicts damage on the target.\nIt inflicts greater damage if the user's\n{COLOR_2 YELLOW}IQ{END_COLOR_TEXT_2} is low.\0"
 .align 2,0
 
 .global MoveNameFrustration
@@ -540,7 +540,7 @@ MoveNameAttract:
 
 .global MoveDescriptionMetalClaw
 MoveDescriptionMetalClaw:
-.string "Inflicts damage on the target.\nIt may also boost the user{APOSTROPHE}s {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} by\none level.\0"
+.string "Inflicts damage on the target.\nIt may also boost the user's {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} by\none level.\0"
 .align 2,0
 
 .global MoveNameMetalClaw
@@ -580,7 +580,7 @@ MoveNameMegaDrain:
 
 .global MoveDescriptionCalmMind
 MoveDescriptionCalmMind:
-.string "Boosts the Pokémon{APOSTROPHE}s {COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2} and\n{COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2} by one level.\0"
+.string "Boosts the Pokémon's {COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2} and\n{COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveNameCalmMind
@@ -655,7 +655,7 @@ MoveNameFuryAttack:
 
 .global MoveDescriptionWaterPulse
 MoveDescriptionWaterPulse:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance.\nIt may also leave the target {COLOR_2 CYAN}confused{END_COLOR_TEXT_2}.\0"
+.string "Inflicts damage on the target, even at a\ndistance.\nIt may also leave the target {COLOR_2 CYAN}confused{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNameWaterPulse
@@ -665,7 +665,7 @@ MoveNameWaterPulse:
 
 .global MoveDescriptionMistBall
 MoveDescriptionMistBall:
-.string "Inflicts damage on the target.\nIt may lower the target{APOSTROPHE}s {COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2}\nby one level.\0"
+.string "Inflicts damage on the target.\nIt may lower the target's {COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2}\nby one level.\0"
 .align 2,0
 
 .global MoveNameMistBall
@@ -680,7 +680,7 @@ MoveNameWaterGun:
 
 .global MoveDescriptionWaterSport
 MoveDescriptionWaterSport:
-.string "Changes the floor{APOSTROPHE}s status to {COLOR_2 CYAN}Water Sport{END_COLOR_TEXT_2}{COMMA}\nwhich halves the power of Fire-type\nmoves.\0"
+.string "Changes the floor's status to {COLOR_2 CYAN}Water Sport{END_COLOR_TEXT_2},\nwhich halves the power of Fire-type\nmoves.\0"
 .align 2,0
 
 .global MoveNameWaterSport
@@ -700,7 +700,7 @@ MoveNameDetect:
 
 .global MoveDescriptionSubstitute
 MoveDescriptionSubstitute:
-.string "The target gains the {COLOR_2 CYAN}Decoy{END_COLOR_TEXT_2} status{COMMA}\nmaking it the target of its fellow\nPokémon.\0"
+.string "The target gains the {COLOR_2 CYAN}Decoy{END_COLOR_TEXT_2} status,\nmaking it the target of its fellow\nPokémon.\0"
 .align 2,0
 
 .global MoveNameSubstitute
@@ -720,7 +720,7 @@ MoveNameDefenseCurl:
 
 .global MoveDescriptionProtect
 MoveDescriptionProtect:
-.string "The user gains the {COLOR_2 CYAN}Protect{END_COLOR_TEXT_2} status{COMMA}\npreventing damage from enemy attacks\nand moves.\0"
+.string "The user gains the {COLOR_2 CYAN}Protect{END_COLOR_TEXT_2} status,\npreventing damage from enemy attacks\nand moves.\0"
 .align 2,0
 
 .global MoveNameProtect
@@ -770,7 +770,7 @@ MoveDescriptionSpikes:
 
 .global MoveDescriptionWrap
 MoveDescriptionWrap:
-.string "The user gains the {COLOR_2 CYAN}Wrap{END_COLOR_TEXT_2} status{COMMA} and\nthe {COLOR_2 CYAN}Wrapped{END_COLOR_TEXT_2} status is inflicted on\nthe target.\nBoth Pokémon become incapable of action.\0"
+.string "The user gains the {COLOR_2 CYAN}Wrap{END_COLOR_TEXT_2} status, and\nthe {COLOR_2 CYAN}Wrapped{END_COLOR_TEXT_2} status is inflicted on\nthe target.\nBoth Pokémon become incapable of action.\0"
 .align 2,0
 
 .global MoveNameWrap
@@ -805,7 +805,7 @@ MoveNameFireSpin:
 
 .global MoveDescriptionBonemerang
 MoveDescriptionBonemerang:
-.string "Strikes the target twice{COMMA} even at a\ndistance.\0"
+.string "Strikes the target twice, even at a\ndistance.\0"
 .align 2,0
 
 .global MoveNameBonemerang
@@ -820,7 +820,7 @@ MoveNameBoneClub:
 
 .global MoveDescriptionTailGlow
 MoveDescriptionTailGlow:
-.string "Boosts the user{APOSTROPHE}s {COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2} by\ntwo levels.\0"
+.string "Boosts the user's {COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2} by\ntwo levels.\0"
 .align 2,0
 
 .global MoveNameTailGlow
@@ -835,7 +835,7 @@ MoveNameCovet:
 
 .global MoveDescriptionCamouflage
 MoveDescriptionCamouflage:
-.string "The user{APOSTROPHE}s type changes to match the\nterrain.\0"
+.string "The user's type changes to match the\nterrain.\0"
 .align 2,0
 
 .global MoveNameCamouflage
@@ -875,7 +875,7 @@ MoveNameGlare:
 
 .global MoveDescriptionSludgeBomb
 MoveDescriptionSludgeBomb:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance. It may also leave the target\n{COLOR_2 CYAN}poisoned{END_COLOR_TEXT_2}{COMMA} damaging it for several turns.\0"
+.string "Inflicts damage on the target, even at a\ndistance. It may also leave the target\n{COLOR_2 CYAN}poisoned{END_COLOR_TEXT_2}, damaging it for several turns.\0"
 .align 2,0
 
 .global MoveNameSludgeBomb
@@ -885,12 +885,12 @@ MoveNameSludgeBomb:
 
 .global MoveDescriptionSludge
 MoveDescriptionSludge:
-.string "Inflicts damage on the target.\nIt may also leave the target {COLOR_2 CYAN}poisoned{END_COLOR_TEXT_2}{COMMA}\ndamaging it for several turns.\0"
+.string "Inflicts damage on the target.\nIt may also leave the target {COLOR_2 CYAN}poisoned{END_COLOR_TEXT_2},\ndamaging it for several turns.\0"
 .align 2,0
 
 .global MoveDescriptionEruption
 MoveDescriptionEruption:
-.string "Inflicts damage on the target.\nThe higher the user{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}{COMMA} the greater\nthe damage.\nIt thaws and frees frozen Pokémon.\0"
+.string "Inflicts damage on the target.\nThe higher the user's {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}, the greater\nthe damage.\nIt thaws and frees frozen Pokémon.\0"
 .align 2,0
 
 .global MoveDescriptionPresent
@@ -920,7 +920,7 @@ MoveNameCrushClaw:
 
 .global MoveDescriptionTeeterDance
 MoveDescriptionTeeterDance:
-.string "Inflicts the {COLOR_2 CYAN}Confused{END_COLOR_TEXT_2} status on all\nPokémon on the floor{COMMA} making their attacks\nand movements erratic.\0"
+.string "Inflicts the {COLOR_2 CYAN}Confused{END_COLOR_TEXT_2} status on all\nPokémon on the floor, making their attacks\nand movements erratic.\0"
 .align 2,0
 
 .global MoveNameTeeterDance
@@ -935,7 +935,7 @@ MoveNameFlash:
 
 .global MoveDescriptionBlastBurn
 MoveDescriptionBlastBurn:
-.string "Inflicts damage on the target. However{COMMA} it\nalso inflicts the {COLOR_2 CYAN}Paused{END_COLOR_TEXT_2} status on the user.\nIt also thaws and frees frozen Pokémon.\0"
+.string "Inflicts damage on the target. However, it\nalso inflicts the {COLOR_2 CYAN}Paused{END_COLOR_TEXT_2} status on the user.\nIt also thaws and frees frozen Pokémon.\0"
 .align 2,0
 
 .global MoveNameBlastBurn
@@ -965,7 +965,7 @@ MoveNameBeatUp:
 
 .global MoveDescriptionWhirlwind
 MoveDescriptionWhirlwind:
-.string "Knocks the target flying.\nIf the target hits a wall or another\nPokémon{COMMA} it sustains damage.\0"
+.string "Knocks the target flying.\nIf the target hits a wall or another\nPokémon, it sustains damage.\0"
 .align 2,0
 
 .global MoveNameWhirlwind
@@ -975,7 +975,7 @@ MoveNameWhirlwind:
 
 .global MoveDescriptionFeatherdance
 MoveDescriptionFeatherdance:
-.string "Lowers the target{APOSTROPHE}s {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} by two levels.\0"
+.string "Lowers the target's {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} by two levels.\0"
 .align 2,0
 
 .global MoveNameFeatherdance
@@ -985,7 +985,7 @@ MoveNameFeatherdance:
 
 .global MoveDescriptionImprison
 MoveDescriptionImprison:
-.string "Inflicts the {COLOR_2 CYAN}Paused{END_COLOR_TEXT_2} status on the target{COMMA}\nmaking it incapable of action.\0"
+.string "Inflicts the {COLOR_2 CYAN}Paused{END_COLOR_TEXT_2} status on the target,\nmaking it incapable of action.\0"
 .align 2,0
 
 .global MoveNameImprison
@@ -995,7 +995,7 @@ MoveNameImprison:
 
 .global MoveDescriptionBulkUp
 MoveDescriptionBulkUp:
-.string "Raises the user{APOSTROPHE}s {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} and {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}\nby one level.\0"
+.string "Raises the user's {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} and {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}\nby one level.\0"
 .align 2,0
 
 .global MoveNameBulkUp
@@ -1045,7 +1045,7 @@ MoveNameLightScreen:
 
 .global MoveDescriptionBellyDrum
 MoveDescriptionBellyDrum:
-.string "Boosts the user{APOSTROPHE}s {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} to maximum{COMMA}\nbut empties its {COLOR_2 YELLOW}Belly{END_COLOR_TEXT_2} to just one.\nIt has no effect if the {COLOR_2 YELLOW}Belly{END_COLOR_TEXT_2} is one or less.\0"
+.string "Boosts the user's {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} to maximum,\nbut empties its {COLOR_2 YELLOW}Belly{END_COLOR_TEXT_2} to just one.\nIt has no effect if the {COLOR_2 YELLOW}Belly{END_COLOR_TEXT_2} is one or less.\0"
 .align 2,0
 
 .global MoveNameBellyDrum
@@ -1055,7 +1055,7 @@ MoveNameBellyDrum:
 
 .global MoveDescriptionFixedDamage
 MoveDescriptionFixedDamage:
-.string "The user gains the {COLOR_2 CYAN}Set Damage{END_COLOR_TEXT_2} status.\nIn this state{COMMA} all damage inflicted by the\nuser will remain constant.\0"
+.string "The user gains the {COLOR_2 CYAN}Set Damage{END_COLOR_TEXT_2} status.\nIn this state, all damage inflicted by the\nuser will remain constant.\0"
 .align 2,0
 
 .global MoveNameDoomDesire
@@ -1070,7 +1070,7 @@ MoveNameBubblebeam:
 
 .global MoveDescriptionSplash
 MoveDescriptionSplash:
-.string "Makes the user flop around as it moves.\nIf there is another Pokémon where it\nlands{COMMA} both Pokémon are hurt.\0"
+.string "Makes the user flop around as it moves.\nIf there is another Pokémon where it\nlands, both Pokémon are hurt.\0"
 .align 2,0
 
 .global MoveNameSplash
@@ -1090,7 +1090,7 @@ MoveNamePetalDance:
 
 .global MoveDescriptionBatonPass
 MoveDescriptionBatonPass:
-.string "Successively switches the user{APOSTROPHE}s position\nwith the positions of other Pokémon in\nthe room.\0"
+.string "Successively switches the user's position\nwith the positions of other Pokémon in\nthe room.\0"
 .align 2,0
 
 .global MoveNameBatonPass
@@ -1100,7 +1100,7 @@ MoveNameBatonPass:
 
 .global MoveDescriptionHighCriticalDistance
 MoveDescriptionHighCriticalDistance:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance.\nIt has a high critical-hit rate.\0"
+.string "Inflicts damage on the target, even at a\ndistance.\nIt has a high critical-hit rate.\0"
 .align 2,0
 
 .global MoveNameRazorLeaf
@@ -1115,7 +1115,7 @@ MoveNamePound:
 
 .global MoveDescriptionKnockOff
 MoveDescriptionKnockOff:
-.string "Knocks the target{APOSTROPHE}s hold item to\nthe ground.\0"
+.string "Knocks the target's hold item to\nthe ground.\0"
 .align 2,0
 
 .global MoveNameKnockOff
@@ -1155,7 +1155,7 @@ MoveNameSpitUp:
 
 .global MoveDescriptionSteelWing
 MoveDescriptionSteelWing:
-.string "Inflicts damage on the target.\nIt may also raise the user{APOSTROPHE}s {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2} by\none level.\0"
+.string "Inflicts damage on the target.\nIt may also raise the user's {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2} by\none level.\0"
 .align 2,0
 
 .global MoveNameSteelWing
@@ -1165,12 +1165,12 @@ MoveNameSteelWing:
 
 .global MoveDescriptionSuperpower
 MoveDescriptionSuperpower:
-.string "Inflicts damage on the target.\nHowever{COMMA} it also lowers the user{APOSTROPHE}s\n{COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} and {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2} by one level.\0"
+.string "Inflicts damage on the target.\nHowever, it also lowers the user's\n{COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} and {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveDescriptionHyperBeam
 MoveDescriptionHyperBeam:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance. It also inflicts the {COLOR_2 CYAN}Paused{END_COLOR_TEXT_2} status\non the user{COMMA} making it incapable of action.\0"
+.string "Inflicts damage on the target, even at a\ndistance. It also inflicts the {COLOR_2 CYAN}Paused{END_COLOR_TEXT_2} status\non the user, making it incapable of action.\0"
 .align 2,0
 
 .global MoveNameHyperBeam
@@ -1185,7 +1185,7 @@ MoveNameHyperVoice:
 
 .global MoveDescriptionHydroPump
 MoveDescriptionHydroPump:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance.\0"
+.string "Inflicts damage on the target, even at a\ndistance.\0"
 .align 2,0
 
 .global MoveNameHydroPump
@@ -1195,7 +1195,7 @@ MoveNameHydroPump:
 
 .global MoveDescriptionHydroCannon
 MoveDescriptionHydroCannon:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance. It also inflicts the {COLOR_2 CYAN}Paused{END_COLOR_TEXT_2}\nstatus on the user{COMMA} making it incapable\nof action.\0"
+.string "Inflicts damage on the target, even at a\ndistance. It also inflicts the {COLOR_2 CYAN}Paused{END_COLOR_TEXT_2}\nstatus on the user, making it incapable\nof action.\0"
 .align 2,0
 
 .global MoveNameHydroCannon
@@ -1205,7 +1205,7 @@ MoveNameHydroCannon:
 
 .global MoveDescriptionFrenzyPlant
 MoveDescriptionFrenzyPlant:
-.string "Inflicts damage on the target.\nHowever{COMMA} it also inflicts the {COLOR_2 CYAN}Paused{END_COLOR_TEXT_2} status\non the user{COMMA} making it incapable of action.\0"
+.string "Inflicts damage on the target.\nHowever, it also inflicts the {COLOR_2 CYAN}Paused{END_COLOR_TEXT_2} status\non the user, making it incapable of action.\0"
 .align 2,0
 
 .global MoveNameFrenzyPlant
@@ -1215,7 +1215,7 @@ MoveNameFrenzyPlant:
 
 .global MoveDescriptionCurse
 MoveDescriptionCurse:
-.string "Boosts the user{APOSTROPHE}s {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} and {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2} by\none level{COMMA} but also lowers {COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2}\nby one level. If used by a Ghost type{COMMA} the\ntarget is {COLOR_2 CYAN}cursed{END_COLOR_TEXT_2}{COMMA} and the user{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} halved.\0"
+.string "Boosts the user's {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} and {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2} by\none level, but also lowers {COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2}\nby one level. If used by a Ghost type, the\ntarget is {COLOR_2 CYAN}cursed{END_COLOR_TEXT_2}, and the user's {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} halved.\0"
 .align 2,0
 
 .global MoveNameCurse
@@ -1225,7 +1225,7 @@ MoveNameCurse:
 
 .global MoveDescriptionSwallow
 MoveDescriptionSwallow:
-.string "Restores the user{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}.\nThe {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} recovered depends on how often\nthe move {COLOR_2 GREEN}Stockpile{END_COLOR_TEXT_2} was used before.\0"
+.string "Restores the user's {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}.\nThe {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} recovered depends on how often\nthe move {COLOR_2 GREEN}Stockpile{END_COLOR_TEXT_2} was used before.\0"
 .align 2,0
 
 .global MoveNameBodySlam
@@ -1245,7 +1245,7 @@ MoveNameConfusion:
 
 .global MoveDescriptionIngrain
 MoveDescriptionIngrain:
-.string "The user gains the {COLOR_2 CYAN}Ingrain{END_COLOR_TEXT_2} status.\nThe user becomes incapable of moving{COMMA}\nbut regains {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} over several turns.\0"
+.string "The user gains the {COLOR_2 CYAN}Ingrain{END_COLOR_TEXT_2} status.\nThe user becomes incapable of moving,\nbut regains {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} over several turns.\0"
 .align 2,0
 
 .global MoveNameIngrain
@@ -1255,7 +1255,7 @@ MoveNameIngrain:
 
 .global MoveDescriptionRest
 MoveDescriptionRest:
-.string "The user gains the {COLOR_2 CYAN}Napping{END_COLOR_TEXT_2} status.\nUpon awakening{COMMA} the Pokémon regains {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}\nand recovers from any status problems.\0"
+.string "The user gains the {COLOR_2 CYAN}Napping{END_COLOR_TEXT_2} status.\nUpon awakening, the Pokémon regains {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}\nand recovers from any status problems.\0"
 .align 2,0
 
 .global MoveNameRest
@@ -1265,7 +1265,7 @@ MoveNameRest:
 
 .global MoveDescriptionSleepPowder
 MoveDescriptionSleepPowder:
-.string "Makes all foes around the user go to\n{COLOR_2 CYAN}sleep{END_COLOR_TEXT_2}{COMMA} making them incapable of action.\0"
+.string "Makes all foes around the user go to\n{COLOR_2 CYAN}sleep{END_COLOR_TEXT_2}, making them incapable of action.\0"
 .align 2,0
 
 .global MoveNameSleepPowder
@@ -1300,7 +1300,7 @@ MoveNameAssist:
 
 .global MoveDescriptionPayDay
 MoveDescriptionPayDay:
-.string "Inflicts damage on the target.\nIf the foe faints{COMMA} it will drop money.\0"
+.string "Inflicts damage on the target.\nIf the foe faints, it will drop money.\0"
 .align 2,0
 
 .global MoveNamePayDay
@@ -1330,7 +1330,7 @@ MoveNameFakeOut:
 
 .global MoveDescriptionWish
 MoveDescriptionWish:
-.string "The user gains the {COLOR_2 CYAN}Wish{END_COLOR_TEXT_2} status.\nIt boosts the user{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} recovery rate.\0"
+.string "The user gains the {COLOR_2 CYAN}Wish{END_COLOR_TEXT_2} status.\nIt boosts the user's {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} recovery rate.\0"
 .align 2,0
 
 .global MoveNameLeer
@@ -1340,7 +1340,7 @@ MoveNameLeer:
 
 .global MoveDescriptionSunnyDay
 MoveDescriptionSunnyDay:
-.string "Changes the dungeon floor{APOSTROPHE}s weather to\n{COLOR_2 CYAN}Sunny{END_COLOR_TEXT_2} over several turns.\0"
+.string "Changes the dungeon floor's weather to\n{COLOR_2 CYAN}Sunny{END_COLOR_TEXT_2} over several turns.\0"
 .align 2,0
 
 .global MoveNameSunnyDay
@@ -1365,7 +1365,7 @@ MoveNameNeedleArm:
 
 .global MoveDescriptionRolePlay
 MoveDescriptionRolePlay:
-.string "Copies the target{APOSTROPHE}s {COLOR_2 YELLOW}Special Ability{END_COLOR_TEXT_2}.\nThe user regains its own {COLOR_2 YELLOW}Special Ability{END_COLOR_TEXT_2}\nwhen it leaves the floor.\0"
+.string "Copies the target's {COLOR_2 YELLOW}Special Ability{END_COLOR_TEXT_2}.\nThe user regains its own {COLOR_2 YELLOW}Special Ability{END_COLOR_TEXT_2}\nwhen it leaves the floor.\0"
 .align 2,0
 
 .global MoveNameRolePlay
@@ -1400,7 +1400,7 @@ MoveNameGrowl:
 
 .global MoveDescriptionNightShade
 MoveDescriptionNightShade:
-.string "Damages all foes around the user.\nThe amount of damage depends on the\nuser{APOSTROPHE}s {COLOR_2 YELLOW}level{END_COLOR_TEXT_2}.\0"
+.string "Damages all foes around the user.\nThe amount of damage depends on the\nuser's {COLOR_2 YELLOW}level{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNameNightShade
@@ -1410,7 +1410,7 @@ MoveNameNightShade:
 
 .global MoveDescriptionAmnesia
 MoveDescriptionAmnesia:
-.string "Boosts the user{APOSTROPHE}s {COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2} by\ntwo levels.\0"
+.string "Boosts the user's {COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2} by\ntwo levels.\0"
 .align 2,0
 
 .global MoveNameAmnesia
@@ -1420,7 +1420,7 @@ MoveNameAmnesia:
 
 .global MoveDescriptionThief
 MoveDescriptionThief:
-.string "Inflicts damage on the target.\nIt also snatches the target{APOSTROPHE}s hold item\nto make it the user{APOSTROPHE}s.\0"
+.string "Inflicts damage on the target.\nIt also snatches the target's hold item\nto make it the user's.\0"
 .align 2,0
 
 .global MoveNameThief
@@ -1430,7 +1430,7 @@ MoveNameThief:
 
 .global MoveDescriptionMudSlap
 MoveDescriptionMudSlap:
-.string "Inflicts damage on the target.\nIt also lowers the target{APOSTROPHE}s {COLOR_2 YELLOW}Accuracy{END_COLOR_TEXT_2} by\none level.\0"
+.string "Inflicts damage on the target.\nIt also lowers the target's {COLOR_2 YELLOW}Accuracy{END_COLOR_TEXT_2} by\none level.\0"
 .align 2,0
 
 .global MoveNameMudSlap
@@ -1440,7 +1440,7 @@ MoveNameMudSlap:
 
 .global MoveDescriptionMudSport
 MoveDescriptionMudSport:
-.string "Changes the floor{APOSTROPHE}s status to {COLOR_2 CYAN}Mud Sport{END_COLOR_TEXT_2}{COMMA}\nwhich halves the power of Electric-type\nmoves.\0"
+.string "Changes the floor's status to {COLOR_2 CYAN}Mud Sport{END_COLOR_TEXT_2},\nwhich halves the power of Electric-type\nmoves.\0"
 .align 2,0
 
 .global MoveNameMudSport
@@ -1465,7 +1465,7 @@ MoveNameTripleKick:
 
 .global MoveDescriptionTrick
 MoveDescriptionTrick:
-.string "Switches the user{APOSTROPHE}s hold item with the\ntarget{APOSTROPHE}s hold item.\nIt only works if both Pokémon hold items.\0"
+.string "Switches the user's hold item with the\ntarget's hold item.\nIt only works if both Pokémon hold items.\0"
 .align 2,0
 
 .global MoveNameTrick
@@ -1480,7 +1480,7 @@ MoveNameDragonClaw:
 
 .global MoveDescriptionTriAttack
 MoveDescriptionTriAttack:
-.string "Inflicts damage on the target.\nIt may also cause a {COLOR_2 CYAN}burn{END_COLOR_TEXT_2}{COMMA}\n{COLOR_2 CYAN}paralysis{END_COLOR_TEXT_2}{COMMA} or leave the target {COLOR_2 CYAN}frozen{END_COLOR_TEXT_2}.\0"
+.string "Inflicts damage on the target.\nIt may also cause a {COLOR_2 CYAN}burn{END_COLOR_TEXT_2},\n{COLOR_2 CYAN}paralysis{END_COLOR_TEXT_2}, or leave the target {COLOR_2 CYAN}frozen{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNameTriAttack
@@ -1495,12 +1495,12 @@ MoveNameHiJumpKick:
 
 .global MoveDescriptionBounce
 MoveDescriptionBounce:
-.string "The user gains the {COLOR_2 CYAN}Bouncing{END_COLOR_TEXT_2} status{COMMA}\nmaking it attack strongly on the next turn.\nIt may also cause {COLOR_2 CYAN}paralysis{END_COLOR_TEXT_2}.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\0"
+.string "The user gains the {COLOR_2 CYAN}Bouncing{END_COLOR_TEXT_2} status,\nmaking it attack strongly on the next turn.\nIt may also cause {COLOR_2 CYAN}paralysis{END_COLOR_TEXT_2}.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\0"
 .align 2,0
 
 .global MoveDescriptionJumpKick
 MoveDescriptionJumpKick:
-.string "Inflicts damage on the target{COMMA} but hurts\nthe user if it misses.\0"
+.string "Inflicts damage on the target, but hurts\nthe user if it misses.\0"
 .align 2,0
 
 .global MoveNameJumpKick
@@ -1510,7 +1510,7 @@ MoveNameJumpKick:
 
 .global MoveDescriptionTakeDown
 MoveDescriptionTakeDown:
-.string "Inflicts damage on the target{COMMA} but also\nhurts the user.\0"
+.string "Inflicts damage on the target, but also\nhurts the user.\0"
 .align 2,0
 
 .global MoveNameTakeDown
@@ -1540,7 +1540,7 @@ MoveNamePoisonpowder:
 
 .global MoveDescriptionPoisonFang
 MoveDescriptionPoisonFang:
-.string "Inflicts damage on the target.\nIt may also leave the target\n{COLOR_2 CYAN}badly poisoned{END_COLOR_TEXT_2}{COMMA} damaging it over\nseveral turns.\0"
+.string "Inflicts damage on the target.\nIt may also leave the target\n{COLOR_2 CYAN}badly poisoned{END_COLOR_TEXT_2}, damaging it over\nseveral turns.\0"
 .align 2,0
 
 .global MoveNamePoisonFang
@@ -1550,7 +1550,7 @@ MoveNamePoisonFang:
 
 .global MoveDescriptionToxic
 MoveDescriptionToxic:
-.string "{COLOR_2 CYAN}Badly poisons{END_COLOR_TEXT_2} the target.\nIf a Pokémon is {COLOR_2 CYAN}badly poisoned{END_COLOR_TEXT_2}{COMMA} it\nsustains damage over several turns.\0"
+.string "{COLOR_2 CYAN}Badly poisons{END_COLOR_TEXT_2} the target.\nIf a Pokémon is {COLOR_2 CYAN}badly poisoned{END_COLOR_TEXT_2}, it\nsustains damage over several turns.\0"
 .align 2,0
 
 .global MoveNameToxic
@@ -1560,7 +1560,7 @@ MoveNameToxic:
 
 .global MoveDescriptionPoison
 MoveDescriptionPoison:
-.string "{COLOR_2 CYAN}Poisons{END_COLOR_TEXT_2} the target.\nIf a Pokémon is {COLOR_2 CYAN}poisoned{END_COLOR_TEXT_2}{COMMA} it sustains\ndamage over several turns.\0"
+.string "{COLOR_2 CYAN}Poisons{END_COLOR_TEXT_2} the target.\nIf a Pokémon is {COLOR_2 CYAN}poisoned{END_COLOR_TEXT_2}, it sustains\ndamage over several turns.\0"
 .align 2,0
 
 .global MoveNameHowl
@@ -1570,7 +1570,7 @@ MoveNameHowl:
 
 .global MoveDescriptionBlock
 MoveDescriptionBlock:
-.string "Inflicts the {COLOR_2 CYAN}Leg Hold{END_COLOR_TEXT_2} status on the\ntarget{COMMA} making it incapable of movement.\0"
+.string "Inflicts the {COLOR_2 CYAN}Leg Hold{END_COLOR_TEXT_2} status on the\ntarget, making it incapable of movement.\0"
 .align 2,0
 
 .global MoveNameBlock
@@ -1580,7 +1580,7 @@ MoveNameBlock:
 
 .global MoveDescriptionZapCannon
 MoveDescriptionZapCannon:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance. It also causes {COLOR_2 CYAN}paralysis{END_COLOR_TEXT_2}{COMMA}\npreventing any attacks or moves.\0"
+.string "Inflicts damage on the target, even at a\ndistance. It also causes {COLOR_2 CYAN}paralysis{END_COLOR_TEXT_2},\npreventing any attacks or moves.\0"
 .align 2,0
 
 .global MoveNameZapCannon
@@ -1605,7 +1605,7 @@ MoveNameQuickAttack:
 
 .global MoveDescriptionShockWave
 MoveDescriptionShockWave:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance.\nIt never misses.\0"
+.string "Inflicts damage on the target, even at a\ndistance.\nIt never misses.\0"
 .align 2,0
 
 .global MoveNameShockWave
@@ -1630,7 +1630,7 @@ MoveNameTeleport:
 
 .global MoveDescriptionBoostDefenseTwo
 MoveDescriptionBoostDefenseTwo:
-.string "Boosts the user{APOSTROPHE}s {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2} by two levels.\0"
+.string "Boosts the user's {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2} by two levels.\0"
 .align 2,0
 
 .global MoveNameIronDefense
@@ -1650,7 +1650,7 @@ MoveNameHelpingHand:
 
 .global MoveDescriptionConversion2
 MoveDescriptionConversion2:
-.string "The user gains the {COLOR_2 CYAN}Conversion 2{END_COLOR_TEXT_2} status.\nIt changes the user{APOSTROPHE}s type to one that is\nstrong against the move type it took last.\0"
+.string "The user gains the {COLOR_2 CYAN}Conversion 2{END_COLOR_TEXT_2} status.\nIt changes the user's type to one that is\nstrong against the move type it took last.\0"
 .align 2,0
 
 .global MoveNameConversion2
@@ -1660,7 +1660,7 @@ MoveNameConversion2:
 
 .global MoveDescriptionConversion
 MoveDescriptionConversion:
-.string "Changes the user{APOSTROPHE}s type into the same\ntype as one of its moves.\0"
+.string "Changes the user's type into the same\ntype as one of its moves.\0"
 .align 2,0
 
 .global MoveNameConversion
@@ -1675,7 +1675,7 @@ MoveNameVineWhip:
 
 .global MoveDescriptionSwordsDance
 MoveDescriptionSwordsDance:
-.string "Boosts the user{APOSTROPHE}s {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} by two levels.\0"
+.string "Boosts the user's {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} by two levels.\0"
 .align 2,0
 
 .global MoveNameSwordsDance
@@ -1735,7 +1735,7 @@ MoveNameTaunt:
 
 .global MoveDescriptionConfuse
 MoveDescriptionConfuse:
-.string "Inflicts the {COLOR_2 CYAN}Confused{END_COLOR_TEXT_2} status on the\ntarget{COMMA} making its attacks and\nmovements erratic.\0"
+.string "Inflicts the {COLOR_2 CYAN}Confused{END_COLOR_TEXT_2} status on the\ntarget, making its attacks and\nmovements erratic.\0"
 .align 2,0
 
 .global MoveNameSupersonic
@@ -1745,7 +1745,7 @@ MoveNameSupersonic:
 
 .global MoveDescriptionSeismicToss
 MoveDescriptionSeismicToss:
-.string "Inflicts damage on the target.\nThe amount of damage depends on the\nuser{APOSTROPHE}s {COLOR_2 YELLOW}level{END_COLOR_TEXT_2}.\0"
+.string "Inflicts damage on the target.\nThe amount of damage depends on the\nuser's {COLOR_2 YELLOW}level{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNameSeismicToss
@@ -1785,7 +1785,7 @@ MoveNameSoftboiled:
 
 .global MoveDescriptionTwineedle
 MoveDescriptionTwineedle:
-.string "Hits the target twice{COMMA} even at a distance.\nIt may also leave the target {COLOR_2 CYAN}poisoned{END_COLOR_TEXT_2}{COMMA}\ndamaging it over several turns.\0"
+.string "Hits the target twice, even at a distance.\nIt may also leave the target {COLOR_2 CYAN}poisoned{END_COLOR_TEXT_2},\ndamaging it over several turns.\0"
 .align 2,0
 
 .global MoveNameTwineedle
@@ -1795,7 +1795,7 @@ MoveNameTwineedle:
 
 .global MoveDescriptionMultiHitDistance
 MoveDescriptionMultiHitDistance:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance.\nIt hits two to five times in succession.\0"
+.string "Inflicts damage on the target, even at a\ndistance.\nIt hits two to five times in succession.\0"
 .align 2,0
 
 .global MoveNameBulletSeed
@@ -1805,7 +1805,7 @@ MoveNameBulletSeed:
 
 .global MoveDescriptionTwister
 MoveDescriptionTwister:
-.string "Inflicts damage on the target. It may also\ncause the target to {COLOR_2 CYAN}cringe{END_COLOR_TEXT_2}{COMMA} making\nit incapable of action. Doubles damage\non a {COLOR_2 CYAN}flying{END_COLOR_TEXT_2} or {COLOR_2 CYAN}bouncing{END_COLOR_TEXT_2} Pokémon.\0"
+.string "Inflicts damage on the target. It may also\ncause the target to {COLOR_2 CYAN}cringe{END_COLOR_TEXT_2}, making\nit incapable of action. Doubles damage\non a {COLOR_2 CYAN}flying{END_COLOR_TEXT_2} or {COLOR_2 CYAN}bouncing{END_COLOR_TEXT_2} Pokémon.\0"
 .align 2,0
 
 .global MoveNameTwister
@@ -1830,7 +1830,7 @@ MoveNameStockpile:
 
 .global MoveDescriptionMuddyWater
 MoveDescriptionMuddyWater:
-.string "Inflicts damage on the target.\nIt may also lower the target{APOSTROPHE}s {COLOR_2 YELLOW}Accuracy{END_COLOR_TEXT_2}\nby one level.\0"
+.string "Inflicts damage on the target.\nIt may also lower the target's {COLOR_2 YELLOW}Accuracy{END_COLOR_TEXT_2}\nby one level.\0"
 .align 2,0
 
 .global MoveNameMuddyWater
@@ -1850,7 +1850,7 @@ MoveNameFireBlast:
 
 .global MoveDescriptionDive
 MoveDescriptionDive:
-.string "The user gains the {COLOR_2 CYAN}Diving{END_COLOR_TEXT_2} status{COMMA}\nmaking it attack strongly on the next turn.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\nIt can{APOSTROPHE}t be used without water.\0"
+.string "The user gains the {COLOR_2 CYAN}Diving{END_COLOR_TEXT_2} status,\nmaking it attack strongly on the next turn.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\nIt can't be used without water.\0"
 .align 2,0
 
 .global MoveNameDive
@@ -1860,7 +1860,7 @@ MoveNameDive:
 
 .global MoveDescriptionExplosion
 MoveDescriptionExplosion:
-.string "Makes the user blow up in\na {COLOR_2 CYAN}huge explosion{END_COLOR_TEXT_2}{COMMA} inflicting damage on all\nsurrounding Pokémon. It also destroys\nsurrounding items and walls.\0"
+.string "Makes the user blow up in\na {COLOR_2 CYAN}huge explosion{END_COLOR_TEXT_2}, inflicting damage on all\nsurrounding Pokémon. It also destroys\nsurrounding items and walls.\0"
 .align 2,0
 
 .global MoveNameExplosion
@@ -1875,7 +1875,7 @@ MoveNameTackle:
 
 .global MoveDescriptionFly
 MoveDescriptionFly:
-.string "The user gains the {COLOR_2 CYAN}Flying{END_COLOR_TEXT_2} status{COMMA} \nmaking it attack strongly on the next turn.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\0"
+.string "The user gains the {COLOR_2 CYAN}Flying{END_COLOR_TEXT_2} status, \nmaking it attack strongly on the next turn.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\0"
 .align 2,0
 
 .global MoveNameFly
@@ -1885,7 +1885,7 @@ MoveNameFly:
 
 .global MoveDescriptionSonicboom
 MoveDescriptionSonicboom:
-.string "Inflicts a set amount of damage on the\ntarget{COMMA} even at a distance.\0"
+.string "Inflicts a set amount of damage on the\ntarget, even at a distance.\0"
 .align 2,0
 
 .global MoveNameSonicboom
@@ -1895,7 +1895,7 @@ MoveNameSonicboom:
 
 .global MoveDescriptionSolarbeam
 MoveDescriptionSolarbeam:
-.string "The user gains the {COLOR_2 CYAN}Solarbeam{END_COLOR_TEXT_2} status{COMMA}\nmaking it attack strongly on the next turn.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\0"
+.string "The user gains the {COLOR_2 CYAN}Solarbeam{END_COLOR_TEXT_2} status,\nmaking it attack strongly on the next turn.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\0"
 .align 2,0
 
 .global MoveNameSolarbeam
@@ -1925,7 +1925,7 @@ MoveNameSacredFire:
 
 .global MoveDescriptionGrowth
 MoveDescriptionGrowth:
-.string "Boosts the user{APOSTROPHE}s {COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2} by one\nlevel.\0"
+.string "Boosts the user's {COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2} by one\nlevel.\0"
 .align 2,0
 
 .global MoveNameGrowth
@@ -1935,7 +1935,7 @@ MoveNameGrowth:
 
 .global MoveDescriptionPoisonChance
 MoveDescriptionPoisonChance:
-.string "Inflicts damage on the target.\nIt may also leave the target {COLOR_2 CYAN}poisoned{END_COLOR_TEXT_2}{COMMA}\ndamaging it over several turns.\0"
+.string "Inflicts damage on the target.\nIt may also leave the target {COLOR_2 CYAN}poisoned{END_COLOR_TEXT_2},\ndamaging it over several turns.\0"
 .align 2,0
 
 .global MoveNameSmog
@@ -1965,7 +1965,7 @@ MoveNameSandTomb:
 
 .global MoveDescriptionLowerAccuracy
 MoveDescriptionLowerAccuracy:
-.string "Lowers the target{APOSTROPHE}s {COLOR_2 YELLOW}Accuracy{END_COLOR_TEXT_2} by one level.\0"
+.string "Lowers the target's {COLOR_2 YELLOW}Accuracy{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveNameSandAttack
@@ -1975,7 +1975,7 @@ MoveNameSandAttack:
 
 .global MoveDescriptionSandstorm
 MoveDescriptionSandstorm:
-.string "Changes the dungeon floor{APOSTROPHE}s weather to\n{COLOR_2 CYAN}Sandstorm{END_COLOR_TEXT_2} for several turns.\0"
+.string "Changes the dungeon floor's weather to\n{COLOR_2 CYAN}Sandstorm{END_COLOR_TEXT_2} for several turns.\0"
 .align 2,0
 
 .global MoveNameSandstorm
@@ -1995,7 +1995,7 @@ MoveNameHeadbutt:
 
 .global MoveDescriptionSketch
 MoveDescriptionSketch:
-.string "Copies the move last used by the target\nand makes it the user{APOSTROPHE}s.\n{COLOR_2 GREEN}Sketch{END_COLOR_TEXT_2} disappears after it copies a move.\0"
+.string "Copies the move last used by the target\nand makes it the user's.\n{COLOR_2 GREEN}Sketch{END_COLOR_TEXT_2} disappears after it copies a move.\0"
 .align 2,0
 
 .global MoveNameSketch
@@ -2005,7 +2005,7 @@ MoveNameSketch:
 
 .global MoveDescriptionSkillSwap
 MoveDescriptionSkillSwap:
-.string "Switches the user{APOSTROPHE}s {COLOR_2 YELLOW}Special Ability{END_COLOR_TEXT_2} with\nthat of the target.\0"
+.string "Switches the user's {COLOR_2 YELLOW}Special Ability{END_COLOR_TEXT_2} with\nthat of the target.\0"
 .align 2,0
 
 .global MoveNameSkillSwap
@@ -2030,7 +2030,7 @@ MoveNameAbsorb:
 
 .global MoveDescriptionSafeguard
 MoveDescriptionSafeguard:
-.string "The user and team members in the same\nroom gain the {COLOR_2 CYAN}Safeguard{END_COLOR_TEXT_2} status{COMMA}\nwhich prevents status problems.\0"
+.string "The user and team members in the same\nroom gain the {COLOR_2 CYAN}Safeguard{END_COLOR_TEXT_2} status,\nwhich prevents status problems.\0"
 .align 2,0
 
 .global MoveNameSafeguard
@@ -2040,7 +2040,7 @@ MoveNameSafeguard:
 
 .global MoveDescriptionExtrasensory
 MoveDescriptionExtrasensory:
-.string "Inflicts damage on the target.\nIt may also cause the target to {COLOR_2 CYAN}cringe{END_COLOR_TEXT_2}{COMMA}\nmaking it incapable of attacking\nor using moves.\0"
+.string "Inflicts damage on the target.\nIt may also cause the target to {COLOR_2 CYAN}cringe{END_COLOR_TEXT_2},\nmaking it incapable of attacking\nor using moves.\0"
 .align 2,0
 
 .global MoveNameExtrasensory
@@ -2070,7 +2070,7 @@ MoveNameFissure:
 
 .global MoveDescriptionMist
 MoveDescriptionMist:
-.string "The user gains the {COLOR_2 CYAN}Mist{END_COLOR_TEXT_2} status.\nIt prevents {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2}{COMMA} {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}{COMMA} {COLOR_2 YELLOW}Special\nAttack{END_COLOR_TEXT_2}{COMMA} {COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2}{COMMA} {COLOR_2 YELLOW}Accuracy{END_COLOR_TEXT_2}{COMMA} and\n{COLOR_2 YELLOW}Evasion{END_COLOR_TEXT_2} from being reduced.\0"
+.string "The user gains the {COLOR_2 CYAN}Mist{END_COLOR_TEXT_2} status.\nIt prevents {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2}, {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}, {COLOR_2 YELLOW}Special\nAttack{END_COLOR_TEXT_2}, {COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2}, {COLOR_2 YELLOW}Accuracy{END_COLOR_TEXT_2}, and\n{COLOR_2 YELLOW}Evasion{END_COLOR_TEXT_2} from being reduced.\0"
 .align 2,0
 
 .global MoveNameMist
@@ -2100,7 +2100,7 @@ MoveNameCharge:
 
 .global MoveDescriptionShadowBall
 MoveDescriptionShadowBall:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance. It may also lower the target{APOSTROPHE}s\n{COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2} by one level.\0"
+.string "Inflicts damage on the target, even at a\ndistance. It may also lower the target's\n{COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveNameShadowBall
@@ -2135,7 +2135,7 @@ MoveNameStunSpore:
 
 .global MoveDescriptionSelfdestruct
 MoveDescriptionSelfdestruct:
-.string "Makes the user {COLOR_2 CYAN}explode{END_COLOR_TEXT_2}{COMMA} inflicting\ndamage on all surrounding Pokémon.\nIt also destroys surrounding items.\0"
+.string "Makes the user {COLOR_2 CYAN}explode{END_COLOR_TEXT_2}, inflicting\ndamage on all surrounding Pokémon.\nIt also destroys surrounding items.\0"
 .align 2,0
 
 .global MoveNameSelfdestruct
@@ -2145,7 +2145,7 @@ MoveNameSelfdestruct:
 
 .global MoveDescriptionLowerDefense
 MoveDescriptionLowerDefense:
-.string "Lowers the target{APOSTROPHE}s {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2} by one level.\0"
+.string "Lowers the target's {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveNameTailWhip
@@ -2155,7 +2155,7 @@ MoveNameTailWhip:
 
 .global MoveDescriptionFlail
 MoveDescriptionFlail:
-.string "Inflicts damage on the target.\nThe lower the user{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}{COMMA} the greater\nthe damage.\0"
+.string "Inflicts damage on the target.\nThe lower the user's {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}, the greater\nthe damage.\0"
 .align 2,0
 
 .global MoveNameFlail
@@ -2190,7 +2190,7 @@ MoveNameEarthquake:
 
 .global MoveDescriptionRecover
 MoveDescriptionRecover:
-.string "Restores the user{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} by half its\n{COLOR_2 YELLOW}maximum HP{END_COLOR_TEXT_2}.\0"
+.string "Restores the user's {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} by half its\n{COLOR_2 YELLOW}maximum HP{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNameRecover
@@ -2200,7 +2200,7 @@ MoveNameRecover:
 
 .global MoveDescriptionRecoil
 MoveDescriptionRecoil:
-.string "Inflicts damage on the target.\nHowever{COMMA} it also damages the user.\0"
+.string "Inflicts damage on the target.\nHowever, it also damages the user.\0"
 .align 2,0
 
 .global MoveNameSubmission
@@ -2210,7 +2210,7 @@ MoveNameSubmission:
 
 .global MoveDescriptionPsychUp
 MoveDescriptionPsychUp:
-.string "Copies the target{APOSTROPHE}s levels for stats such\nas {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} and {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}.\0"
+.string "Copies the target's levels for stats such\nas {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} and {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNamePsychUp
@@ -2225,7 +2225,7 @@ MoveNameSignalBeam:
 
 .global MoveDescriptionWaterSpout
 MoveDescriptionWaterSpout:
-.string "Inflicts damage on the target.\nThe higher the user{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}{COMMA} the greater\nthe damage.\0"
+.string "Inflicts damage on the target.\nThe higher the user's {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}, the greater\nthe damage.\0"
 .align 2,0
 
 .global MoveNameWaterSpout
@@ -2235,7 +2235,7 @@ MoveNameWaterSpout:
 
 .global MoveDescriptionUproar
 MoveDescriptionUproar:
-.string "The user and team members in the room\ngain the {COLOR_2 CYAN}Sleepless{END_COLOR_TEXT_2} status{COMMA}\nso they cannot fall asleep.\nIt also awakens sleeping team members.\0"
+.string "The user and team members in the room\ngain the {COLOR_2 CYAN}Sleepless{END_COLOR_TEXT_2} status,\nso they cannot fall asleep.\nIt also awakens sleeping team members.\0"
 .align 2,0
 
 .global MoveNameUproar
@@ -2245,7 +2245,7 @@ MoveNameUproar:
 
 .global MoveDescriptionPsychoBoost
 MoveDescriptionPsychoBoost:
-.string "Inflicts damage on the target.\nHowever{COMMA} it also lowers the user{APOSTROPHE}s {COLOR_2 YELLOW}Special\nAttack{END_COLOR_TEXT_2} by two levels.\0"
+.string "Inflicts damage on the target.\nHowever, it also lowers the user's {COLOR_2 YELLOW}Special\nAttack{END_COLOR_TEXT_2} by two levels.\0"
 .align 2,0
 
 .global MoveNamePsychoBoost
@@ -2260,7 +2260,7 @@ MoveNamePsychic:
 
 .global MoveDescriptionPsywave
 MoveDescriptionPsywave:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance. The amount of damage depends\non the user{APOSTROPHE}s {COLOR_2 YELLOW}level{END_COLOR_TEXT_2}.\0"
+.string "Inflicts damage on the target, even at a\ndistance. The amount of damage depends\non the user's {COLOR_2 YELLOW}level{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNamePsywave
@@ -2270,7 +2270,7 @@ MoveNamePsywave:
 
 .global MoveDescriptionConfuseChanceDistance
 MoveDescriptionConfuseChanceDistance:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance. It may also leave the target\n{COLOR_2 CYAN}confused{END_COLOR_TEXT_2}.\0"
+.string "Inflicts damage on the target, even at a\ndistance. It may also leave the target\n{COLOR_2 CYAN}confused{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNamePsybeam
@@ -2280,7 +2280,7 @@ MoveNamePsybeam:
 
 .global MoveDescriptionLowerSpeed
 MoveDescriptionLowerSpeed:
-.string "Lowers the target{APOSTROPHE}s {COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2} by\none level.\0"
+.string "Lowers the target's {COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2} by\none level.\0"
 .align 2,0
 
 .global MoveNameScaryFace
@@ -2305,7 +2305,7 @@ MoveNameEndure:
 
 .global MoveDescriptionMeteorMash
 MoveDescriptionMeteorMash:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance. It may also boost the user{APOSTROPHE}s\n{COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} by one level.\0"
+.string "Inflicts damage on the target, even at a\ndistance. It may also boost the user's\n{COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveNameMeteorMash
@@ -2315,7 +2315,7 @@ MoveNameMeteorMash:
 
 .global MoveDescriptionFollowMe
 MoveDescriptionFollowMe:
-.string "The user gains the {COLOR_2 CYAN}Decoy{END_COLOR_TEXT_2} status{COMMA}\nmaking it the primary target of foes.\0"
+.string "The user gains the {COLOR_2 CYAN}Decoy{END_COLOR_TEXT_2} status,\nmaking it the primary target of foes.\0"
 .align 2,0
 
 .global MoveNameFollowMe
@@ -2335,7 +2335,7 @@ MoveNamePowderSnow:
 
 .global MoveDescriptionSkyAttack
 MoveDescriptionSkyAttack:
-.string "The user gains the {COLOR_2 CYAN}Sky Attack{END_COLOR_TEXT_2} status{COMMA}\nand it attacks strongly on the next turn.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\0"
+.string "The user gains the {COLOR_2 CYAN}Sky Attack{END_COLOR_TEXT_2} status,\nand it attacks strongly on the next turn.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\0"
 .align 2,0
 
 .global MoveNameSkyAttack
@@ -2345,7 +2345,7 @@ MoveNameSkyAttack:
 
 .global MoveDescriptionCosmicPower
 MoveDescriptionCosmicPower:
-.string "Boosts the user{APOSTROPHE}s {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2} and {COLOR_2 YELLOW}Special\nDefense{END_COLOR_TEXT_2} by one level.\0"
+.string "Boosts the user's {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2} and {COLOR_2 YELLOW}Special\nDefense{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveNameCosmicPower
@@ -2355,7 +2355,7 @@ MoveNameCosmicPower:
 
 .global MoveDescriptionMindReader
 MoveDescriptionMindReader:
-.string "Gives the user {COLOR_2 CYAN}Sure Shot{END_COLOR_TEXT_2} status{COMMA} making\nall its moves and attacks completely\naccurate.\0"
+.string "Gives the user {COLOR_2 CYAN}Sure Shot{END_COLOR_TEXT_2} status, making\nall its moves and attacks completely\naccurate.\0"
 .align 2,0
 
 .global MoveNameMindReader
@@ -2365,7 +2365,7 @@ MoveNameMindReader:
 
 .global MoveDescriptionIcyWind
 MoveDescriptionIcyWind:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance. It also lowers the target{APOSTROPHE}s\n{COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2} by one level.\0"
+.string "Inflicts damage on the target, even at a\ndistance. It also lowers the target's\n{COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveNameIcyWind
@@ -2375,7 +2375,7 @@ MoveNameIcyWind:
 
 .global MoveDescriptionRapidSpin
 MoveDescriptionRapidSpin:
-.string "Inflicts damage on the target.\nIt also frees the user from {COLOR_2 CYAN}Leech Seed{END_COLOR_TEXT_2}{COMMA}\n{COLOR_2 CYAN}Leg Hold{END_COLOR_TEXT_2}{COMMA} {COLOR_2 CYAN}Ingrain{END_COLOR_TEXT_2}{COMMA} or {COLOR_2 CYAN}Constriction{END_COLOR_TEXT_2}.\0"
+.string "Inflicts damage on the target.\nIt also frees the user from {COLOR_2 CYAN}Leech Seed{END_COLOR_TEXT_2},\n{COLOR_2 CYAN}Leg Hold{END_COLOR_TEXT_2}, {COLOR_2 CYAN}Ingrain{END_COLOR_TEXT_2}, or {COLOR_2 CYAN}Constriction{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNameRapidSpin
@@ -2395,7 +2395,7 @@ MoveNameAgility:
 
 .global MoveDescriptionSynthesis
 MoveDescriptionSynthesis:
-.string "Restores the user{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}.\nThe amount of {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} regained depends on\nthe weather.\0"
+.string "Restores the user's {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}.\nThe amount of {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} regained depends on\nthe weather.\0"
 .align 2,0
 
 .global MoveNameSynthesis
@@ -2405,7 +2405,7 @@ MoveNameSynthesis:
 
 .global MoveDescriptionAncientpower
 MoveDescriptionAncientpower:
-.string "Inflicts damage on the target.\nIt may also simultaneously raise by one\nlevel {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2}{COMMA} {COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2}{COMMA} {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}{COMMA}\n{COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2}{COMMA} and {COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2}.\0"
+.string "Inflicts damage on the target.\nIt may also simultaneously raise by one\nlevel {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2}, {COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2}, {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2},\n{COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2}, and {COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNameAncientpower
@@ -2415,7 +2415,7 @@ MoveNameAncientpower:
 
 .global MoveDescriptionLowKick
 MoveDescriptionLowKick:
-.string "Inflicts damage on the target.\nThe heavier the target{COMMA} the greater the\ndamage.\0"
+.string "Inflicts damage on the target.\nThe heavier the target, the greater the\ndamage.\0"
 .align 2,0
 
 .global MoveNameLowKick
@@ -2425,7 +2425,7 @@ MoveNameLowKick:
 
 .global MoveDescriptionOutrage
 MoveDescriptionOutrage:
-.string "Hits the target two to five times in\nsuccession. However{COMMA} it also makes the\nuser {COLOR_2 CYAN}confused{END_COLOR_TEXT_2}.\0"
+.string "Hits the target two to five times in\nsuccession. However, it also makes the\nuser {COLOR_2 CYAN}confused{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNameOutrage
@@ -2445,7 +2445,7 @@ MoveNameMeanLook:
 
 .global MoveDescriptionHaze
 MoveDescriptionHaze:
-.string "Resets the {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2}{COMMA} {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}{COMMA} etc.{COMMA} of all\nPokémon on the floor whether they were\nboosted or lowered.\0"
+.string "Resets the {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2}, {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}, etc., of all\nPokémon on the floor whether they were\nboosted or lowered.\0"
 .align 2,0
 
 .global MoveNameHaze
@@ -2460,7 +2460,7 @@ MoveNameCrabhammer:
 
 .global MoveDescriptionLegHolder
 MoveDescriptionLegHolder:
-.string "Inflicts the {COLOR_2 CYAN}Leg Hold{END_COLOR_TEXT_2} status on the target{COMMA}\nmaking it incapable of movement.\0"
+.string "Inflicts the {COLOR_2 CYAN}Leg Hold{END_COLOR_TEXT_2} status on the target,\nmaking it incapable of movement.\0"
 .align 2,0
 
 .global MoveNameSpiderWeb
@@ -2470,7 +2470,7 @@ MoveNameSpiderWeb:
 
 .global MoveDescriptionTickle
 MoveDescriptionTickle:
-.string "Reduces the target{APOSTROPHE}s {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} and {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}\nby one level.\0"
+.string "Reduces the target's {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} and {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}\nby one level.\0"
 .align 2,0
 
 .global MoveNameTickle
@@ -2480,7 +2480,7 @@ MoveNameTickle:
 
 .global MoveDescriptionSleep
 MoveDescriptionSleep:
-.string "Makes the target go to {COLOR_2 CYAN}sleep{END_COLOR_TEXT_2}{COMMA} causing it\nto be incapable of action.\0"
+.string "Makes the target go to {COLOR_2 CYAN}sleep{END_COLOR_TEXT_2}, causing it\nto be incapable of action.\0"
 .align 2,0
 
 .global MoveNameGrasswhistle
@@ -2490,7 +2490,7 @@ MoveNameGrasswhistle:
 
 .global MoveDescriptionMetalSound
 MoveDescriptionMetalSound:
-.string "Reduces the target{APOSTROPHE}s {COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2} by\nthree levels.\0"
+.string "Reduces the target's {COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2} by\nthree levels.\0"
 .align 2,0
 
 .global MoveNameMetalSound
@@ -2500,7 +2500,7 @@ MoveNameMetalSound:
 
 .global MoveDescriptionSilverWind
 MoveDescriptionSilverWind:
-.string "Inflicts damage on foes in the same room.\nIt may also simultaneously raise by one\nlevel {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2}{COMMA} {COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2}{COMMA} {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}{COMMA}\n{COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2}{COMMA} and {COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2}.\0"
+.string "Inflicts damage on foes in the same room.\nIt may also simultaneously raise by one\nlevel {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2}, {COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2}, {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2},\n{COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2}, and {COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNameSilverWind
@@ -2530,7 +2530,7 @@ MoveNameSpore:
 
 .global MoveDescriptionSmellingsalt
 MoveDescriptionSmellingsalt:
-.string "Inflicts damage on the target.\nIt inflicts greater damage if the target\nhas {COLOR_2 CYAN}paralysis{END_COLOR_TEXT_2}{COMMA} but it also heals {COLOR_2 CYAN}paralysis{END_COLOR_TEXT_2}.\0"
+.string "Inflicts damage on the target.\nIt inflicts greater damage if the target\nhas {COLOR_2 CYAN}paralysis{END_COLOR_TEXT_2}, but it also heals {COLOR_2 CYAN}paralysis{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNameSmellingsalt
@@ -2540,7 +2540,7 @@ MoveNameSmellingsalt:
 
 .global MoveDescriptionReversal
 MoveDescriptionReversal:
-.string "Inflicts damage on the target.\nThe lower the user{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}{COMMA} the greater the\ndamage it inflicts.\0"
+.string "Inflicts damage on the target.\nThe lower the user's {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}, the greater the\ndamage it inflicts.\0"
 .align 2,0
 
 .global MoveNameReversal
@@ -2550,7 +2550,7 @@ MoveNameReversal:
 
 .global MoveDescriptionDrain
 MoveDescriptionDrain:
-.string "Inflicts damage on the target.\nIt also restores the user{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} based\non the damage it inflicted.\0"
+.string "Inflicts damage on the target.\nIt also restores the user's {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} based\non the damage it inflicted.\0"
 .align 2,0
 
 .global MoveNameGigaDrain
@@ -2560,7 +2560,7 @@ MoveNameGigaDrain:
 
 .global MoveDescriptionFocusPunch
 MoveDescriptionFocusPunch:
-.string "The user gains the {COLOR_2 CYAN}Focus Punch{END_COLOR_TEXT_2} status{COMMA}\nand it attacks on the next turn.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\0"
+.string "The user gains the {COLOR_2 CYAN}Focus Punch{END_COLOR_TEXT_2} status,\nand it attacks on the next turn.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\0"
 .align 2,0
 
 .global MoveNameFocusPunch
@@ -2570,7 +2570,7 @@ MoveNameFocusPunch:
 
 .global MoveDescriptionFocusEnergy
 MoveDescriptionFocusEnergy:
-.string "The user gains the {COLOR_2 CYAN}Focus Energy{END_COLOR_TEXT_2} status{COMMA}\nraising its critical-hit rate.\0"
+.string "The user gains the {COLOR_2 CYAN}Focus Energy{END_COLOR_TEXT_2} status,\nraising its critical-hit rate.\0"
 .align 2,0
 
 .global MoveNameFocusEnergy
@@ -2580,7 +2580,7 @@ MoveNameFocusEnergy:
 
 .global MoveDescriptionDamageLowerSpeed
 MoveDescriptionDamageLowerSpeed:
-.string "Inflicts damage on the target.\nIt also lowers the target{APOSTROPHE}s {COLOR_2 YELLOW}Movement\nSpeed{END_COLOR_TEXT_2} by one level.\0"
+.string "Inflicts damage on the target.\nIt also lowers the target's {COLOR_2 YELLOW}Movement\nSpeed{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveNameRockTomb
@@ -2590,7 +2590,7 @@ MoveNameRockTomb:
 
 .global MoveDescriptionBrickBreak
 MoveDescriptionBrickBreak:
-.string "Shatters the target{APOSTROPHE}s {COLOR_2 CYAN}Reflect{END_COLOR_TEXT_2}\nor {COLOR_2 CYAN}Light Screen{END_COLOR_TEXT_2} to inflict damage.\0"
+.string "Shatters the target's {COLOR_2 CYAN}Reflect{END_COLOR_TEXT_2}\nor {COLOR_2 CYAN}Light Screen{END_COLOR_TEXT_2} to inflict damage.\0"
 .align 2,0
 
 .global MoveNameBrickBreak
@@ -2600,7 +2600,7 @@ MoveNameBrickBreak:
 
 .global MoveDescriptionConstrict
 MoveDescriptionConstrict:
-.string "Inflicts damage on the target.\nIt may also lower the target{APOSTROPHE}s {COLOR_2 YELLOW}Movement\nSpeed{END_COLOR_TEXT_2} by one level.\0"
+.string "Inflicts damage on the target.\nIt may also lower the target's {COLOR_2 YELLOW}Movement\nSpeed{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveNameConstrict
@@ -2615,7 +2615,7 @@ MoveNameWithdraw:
 
 .global MoveDescriptionConstriction
 MoveDescriptionConstriction:
-.string "Inflicts damage on the target.\nIt may also cause {COLOR_2 CYAN}constriction{END_COLOR_TEXT_2}{COMMA} making the\nfoe incapable of movement.\0"
+.string "Inflicts damage on the target.\nIt may also cause {COLOR_2 CYAN}constriction{END_COLOR_TEXT_2}, making the\nfoe incapable of movement.\0"
 .align 2,0
 
 .global MoveNameClamp
@@ -2630,7 +2630,7 @@ MoveNameKarateChop:
 
 .global MoveDescriptionFacade
 MoveDescriptionFacade:
-.string "Inflicts damage on the target.\nIf the user is {COLOR_2 CYAN}poisoned{END_COLOR_TEXT_2}{COMMA} {COLOR_2 CYAN}badly poisoned{END_COLOR_TEXT_2}{COMMA}\nor has a {COLOR_2 CYAN}burn{END_COLOR_TEXT_2}{COMMA} its power is doubled.\0"
+.string "Inflicts damage on the target.\nIf the user is {COLOR_2 CYAN}poisoned{END_COLOR_TEXT_2}, {COLOR_2 CYAN}badly poisoned{END_COLOR_TEXT_2},\nor has a {COLOR_2 CYAN}burn{END_COLOR_TEXT_2}, its power is doubled.\0"
 .align 2,0
 
 .global MoveNameFacade
@@ -2640,7 +2640,7 @@ MoveNameFacade:
 
 .global MoveDescriptionEndeavor
 MoveDescriptionEndeavor:
-.string "The difference between the foe{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} and\nthe user{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} is applied as this move{APOSTROPHE}s\ndamage.\0"
+.string "The difference between the foe's {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} and\nthe user's {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} is applied as this move's\ndamage.\0"
 .align 2,0
 
 .global MoveNameEndeavor
@@ -2665,7 +2665,7 @@ MoveDescriptionThunder:
 
 .global MoveDescriptionLowerSpecialDefenseChance
 MoveDescriptionLowerSpecialDefenseChance:
-.string "Inflicts damage on the target.\nIt may also lower the target{APOSTROPHE}s {COLOR_2 YELLOW}Special\nDefense{END_COLOR_TEXT_2} by one level.\0"
+.string "Inflicts damage on the target.\nIt may also lower the target's {COLOR_2 YELLOW}Special\nDefense{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveNameCrunch
@@ -2675,7 +2675,7 @@ MoveNameCrunch:
 
 .global MoveDescriptionBide
 MoveDescriptionBide:
-.string "The user gains the {COLOR_2 CYAN}Bide{END_COLOR_TEXT_2} status.\nWhen {COLOR_2 CYAN}Bide{END_COLOR_TEXT_2} is released{COMMA} the user looses an\nattack double the damage it took\nwhile waiting.\0"
+.string "The user gains the {COLOR_2 CYAN}Bide{END_COLOR_TEXT_2} status.\nWhen {COLOR_2 CYAN}Bide{END_COLOR_TEXT_2} is released, the user looses an\nattack double the damage it took\nwhile waiting.\0"
 .align 2,0
 
 .global MoveNameBide
@@ -2685,7 +2685,7 @@ MoveNameBide:
 
 .global MoveDescriptionRazorWind
 MoveDescriptionRazorWind:
-.string "The user gains the {COLOR_2 CYAN}Razor Wind{END_COLOR_TEXT_2} status{COMMA}\nand it looses a powerful attack with a\nhigh critical-hit rate on the next turn.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\0"
+.string "The user gains the {COLOR_2 CYAN}Razor Wind{END_COLOR_TEXT_2} status,\nand it looses a powerful attack with a\nhigh critical-hit rate on the next turn.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\0"
 .align 2,0
 
 .global MoveNameRazorWind
@@ -2705,7 +2705,7 @@ MoveNameDisable:
 
 .global MoveDescriptionBoostDefense
 MoveDescriptionBoostDefense:
-.string "Boosts the user{APOSTROPHE}s {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2} by one level.\0"
+.string "Boosts the user's {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveNameHarden
@@ -2725,7 +2725,7 @@ MoveNameGust:
 
 .global MoveDescriptionBoostEvasion
 MoveDescriptionBoostEvasion:
-.string "Boosts the user{APOSTROPHE}s {COLOR_2 YELLOW}Evasion{END_COLOR_TEXT_2} by one level.\0"
+.string "Boosts the user's {COLOR_2 YELLOW}Evasion{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveNameDoubleTeam
@@ -2735,7 +2735,7 @@ MoveNameDoubleTeam:
 
 .global MoveDescriptionBoostAttack
 MoveDescriptionBoostAttack:
-.string "Boosts the user{APOSTROPHE}s {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} by one level.\0"
+.string "Boosts the user's {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveNameSharpen
@@ -2755,7 +2755,7 @@ MoveNameOdorSleuth:
 
 .global MoveDescriptionFlamethrower
 MoveDescriptionFlamethrower:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance. It may also cause a {COLOR_2 CYAN}burn{END_COLOR_TEXT_2}.\nIt thaws and frees frozen Pokémon.\0"
+.string "Inflicts damage on the target, even at a\ndistance. It may also cause a {COLOR_2 CYAN}burn{END_COLOR_TEXT_2}.\nIt thaws and frees frozen Pokémon.\0"
 .align 2,0
 
 .global MoveNameFlamethrower
@@ -2790,7 +2790,7 @@ MoveNameStrength:
 
 .global MoveDescriptionGrudge
 MoveDescriptionGrudge:
-.string "The user gains the {COLOR_2 CYAN}Grudge{END_COLOR_TEXT_2} status.\nIf the user is defeated{COMMA} it zeroes the {COLOR_2 YELLOW}PP{END_COLOR_TEXT_2}\nof the move last used by the foe.\0"
+.string "The user gains the {COLOR_2 CYAN}Grudge{END_COLOR_TEXT_2} status.\nIf the user is defeated, it zeroes the {COLOR_2 YELLOW}PP{END_COLOR_TEXT_2}\nof the move last used by the foe.\0"
 .align 2,0
 
 .global MoveNameGrudge
@@ -2800,7 +2800,7 @@ MoveNameGrudge:
 
 .global MoveDescriptionReturn
 MoveDescriptionReturn:
-.string "Inflicts damage on the target.\nIts power rises with the user{APOSTROPHE}s\n{COLOR_2 YELLOW}IQ{END_COLOR_TEXT_2}.\0"
+.string "Inflicts damage on the target.\nIts power rises with the user's\n{COLOR_2 YELLOW}IQ{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNameReturn
@@ -2820,7 +2820,7 @@ MoveNameWillOWisp:
 
 .global MoveDescriptionCringe
 MoveDescriptionCringe:
-.string "Inflicts damage on the target.\nIt may also cause the target to {COLOR_2 CYAN}cringe{END_COLOR_TEXT_2}{COMMA}\nmaking it incapable of action.\0"
+.string "Inflicts damage on the target.\nIt may also cause the target to {COLOR_2 CYAN}cringe{END_COLOR_TEXT_2},\nmaking it incapable of action.\0"
 .align 2,0
 
 .global MoveNameAstonish
@@ -2830,7 +2830,7 @@ MoveNameAstonish:
 
 .global MoveDescriptionFlatter
 MoveDescriptionFlatter:
-.string "Inflicts the {COLOR_2 CYAN}Confused{END_COLOR_TEXT_2} status on the\ntarget{COMMA} but also raises its {COLOR_2 YELLOW}Special\nAttack{END_COLOR_TEXT_2} by one level.\0"
+.string "Inflicts the {COLOR_2 CYAN}Confused{END_COLOR_TEXT_2} status on the\ntarget, but also raises its {COLOR_2 YELLOW}Special\nAttack{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveNameFlatter
@@ -2840,7 +2840,7 @@ MoveNameFlatter:
 
 .global MoveDescriptionOctazooka
 MoveDescriptionOctazooka:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance. It may also lower the target{APOSTROPHE}s\n{COLOR_2 YELLOW}Accuracy{END_COLOR_TEXT_2} by one level.\0"
+.string "Inflicts damage on the target, even at a\ndistance. It may also lower the target's\n{COLOR_2 YELLOW}Accuracy{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveNameOctazooka
@@ -2850,7 +2850,7 @@ MoveNameOctazooka:
 
 .global MoveDescriptionMemento
 MoveDescriptionMemento:
-.string "Sharply reduces the {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} and {COLOR_2 YELLOW}Special\nAttack{END_COLOR_TEXT_2} of all foes in the room. It also\ncuts the user{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} to one and warps the\nuser to a different place on the floor.\n\0"
+.string "Sharply reduces the {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} and {COLOR_2 YELLOW}Special\nAttack{END_COLOR_TEXT_2} of all foes in the room. It also\ncuts the user's {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} to one and warps the\nuser to a different place on the floor.\n\0"
 .align 2,0
 
 .global MoveNameMemento
@@ -2860,7 +2860,7 @@ MoveNameMemento:
 
 .global MoveDescriptionAuroraBeam
 MoveDescriptionAuroraBeam:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance. It may also halve the \ntarget{APOSTROPHE}s {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2}.\0"
+.string "Inflicts damage on the target, even at a\ndistance. It may also halve the \ntarget's {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNameAuroraBeam
@@ -2870,7 +2870,7 @@ MoveNameAuroraBeam:
 
 .global MoveDescriptionOverheat
 MoveDescriptionOverheat:
-.string "Damages all foes around the user{COMMA} but\nalso lowers the user{APOSTROPHE}s {COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2}\nby two levels and thaws frozen Pokémon.\0"
+.string "Damages all foes around the user, but\nalso lowers the user's {COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2}\nby two levels and thaws frozen Pokémon.\0"
 .align 2,0
 
 .global MoveNameOverheat
@@ -2910,7 +2910,7 @@ MoveNamePursuit:
 
 .global MoveDescriptionSmokescreen
 MoveDescriptionSmokescreen:
-.string "Inflicts the {COLOR_2 CYAN}Whiffer{END_COLOR_TEXT_2} status on the target{COMMA}\nmaking it miss almost all of its attacks\nand moves.\0"
+.string "Inflicts the {COLOR_2 CYAN}Whiffer{END_COLOR_TEXT_2} status on the target,\nmaking it miss almost all of its attacks\nand moves.\0"
 .align 2,0
 
 .global MoveNameSmokescreen
@@ -2930,7 +2930,7 @@ MoveNameAirCutter:
 
 .global MoveDescriptionSpite
 MoveDescriptionSpite:
-.string "Zeroes the {COLOR_2 YELLOW}PP{END_COLOR_TEXT_2} of the move last used by\nthe target{COMMA} making it unusable.\0"
+.string "Zeroes the {COLOR_2 YELLOW}PP{END_COLOR_TEXT_2} of the move last used by\nthe target, making it unusable.\0"
 .align 2,0
 
 .global MoveNameSpite
@@ -2940,7 +2940,7 @@ MoveNameSpite:
 
 .global MoveDescriptionSing
 MoveDescriptionSing:
-.string "Makes the target go to {COLOR_2 CYAN}sleep{END_COLOR_TEXT_2}{COMMA} causing\nit to be incapable of action.\0"
+.string "Makes the target go to {COLOR_2 CYAN}sleep{END_COLOR_TEXT_2}, causing\nit to be incapable of action.\0"
 .align 2,0
 
 .global MoveNameSing
@@ -2950,7 +2950,7 @@ MoveNameSing:
 
 .global MoveDescriptionFakeTears
 MoveDescriptionFakeTears:
-.string "Lowers the target{APOSTROPHE}s {COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2} by\ntwo levels.\0"
+.string "Lowers the target's {COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2} by\ntwo levels.\0"
 .align 2,0
 
 .global MoveNameFakeTears
@@ -2960,7 +2960,7 @@ MoveNameFakeTears:
 
 .global MoveDescriptionWhirlpool
 MoveDescriptionWhirlpool:
-.string "Inflicts damage on the target.\nIt may also cause {COLOR_2 CYAN}constriction{END_COLOR_TEXT_2}{COMMA} making the\nfoe incapable of movement.\nInflicts double damage on a {COLOR_2 CYAN}diving{END_COLOR_TEXT_2} foe.\0"
+.string "Inflicts damage on the target.\nIt may also cause {COLOR_2 CYAN}constriction{END_COLOR_TEXT_2}, making the\nfoe incapable of movement.\nInflicts double damage on a {COLOR_2 CYAN}diving{END_COLOR_TEXT_2} foe.\0"
 .align 2,0
 
 .global MoveNameWhirlpool
@@ -2970,7 +2970,7 @@ MoveNameWhirlpool:
 
 .global MoveDescriptionWeatherBall
 MoveDescriptionWeatherBall:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance{COMMA} using the weather{APOSTROPHE}s power.\0"
+.string "Inflicts damage on the target, even at a\ndistance, using the weather's power.\0"
 .align 2,0
 
 .global MoveNameWeatherBall
@@ -2980,7 +2980,7 @@ MoveNameWeatherBall:
 
 .global MoveDescriptionRockSlide
 MoveDescriptionRockSlide:
-.string "Inflicts damage on the target.\nIt may also cause the target to {COLOR_2 CYAN}cringe{END_COLOR_TEXT_2}{COMMA} \nmaking it incapable of action.\0"
+.string "Inflicts damage on the target.\nIt may also cause the target to {COLOR_2 CYAN}cringe{END_COLOR_TEXT_2}, \nmaking it incapable of action.\0"
 .align 2,0
 
 .global MoveNameRockSlide
@@ -3010,7 +3010,7 @@ MoveNameRockThrow:
 
 .global MoveDescriptionScreech
 MoveDescriptionScreech:
-.string "Sharply lowers the target{APOSTROPHE}s {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}.\0"
+.string "Sharply lowers the target's {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNameHealBell
@@ -3020,7 +3020,7 @@ MoveNameHealBell:
 
 .global MoveDescriptionSnore
 MoveDescriptionSnore:
-.string "If the user is attacked while asleep{COMMA} it\ncounterattacks. It may also cause the\ntarget to {COLOR_2 CYAN}cringe{END_COLOR_TEXT_2}{COMMA} making it incapable\nof action.\0"
+.string "If the user is attacked while asleep, it\ncounterattacks. It may also cause the\ntarget to {COLOR_2 CYAN}cringe{END_COLOR_TEXT_2}, making it incapable\nof action.\0"
 .align 2,0
 
 .global MoveNameSnore
@@ -3030,7 +3030,7 @@ MoveNameSnore:
 
 .global MoveDescriptionSwagger
 MoveDescriptionSwagger:
-.string "Inflicts the {COLOR_2 CYAN}Confused{END_COLOR_TEXT_2} status on the\ntarget{COMMA} but also raises its {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} by\ntwo levels.\0"
+.string "Inflicts the {COLOR_2 CYAN}Confused{END_COLOR_TEXT_2} status on the\ntarget, but also raises its {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2} by\ntwo levels.\0"
 .align 2,0
 
 .global MoveNameSwagger
@@ -3040,7 +3040,7 @@ MoveNameSwagger:
 
 .global MoveDescriptionStringShot
 MoveDescriptionStringShot:
-.string "Reduces the target{APOSTROPHE}s {COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2} by\none level{COMMA} even at a distance.\0"
+.string "Reduces the target's {COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2} by\none level, even at a distance.\0"
 .align 2,0
 
 .global MoveNameStringShot
@@ -3050,7 +3050,7 @@ MoveNameStringShot:
 
 .global MoveDescriptionTorment
 MoveDescriptionTorment:
-.string "Prevents the targeted Pokémon{COMMA}\nwhile it remains on the floor{COMMA} from \nusing the last move it used.\0"
+.string "Prevents the targeted Pokémon,\nwhile it remains on the floor, from \nusing the last move it used.\0"
 .align 2,0
 
 .global MoveNameTorment
@@ -3060,7 +3060,7 @@ MoveNameTorment:
 
 .global MoveDescriptionPainSplit
 MoveDescriptionPainSplit:
-.string "Adds the {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} of the user and the target{COMMA}\nthen shares it equally.\0"
+.string "Adds the {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2} of the user and the target,\nthen shares it equally.\0"
 .align 2,0
 
 .global MoveNamePainSplit
@@ -3070,7 +3070,7 @@ MoveNamePainSplit:
 
 .global MoveDescriptionSuperFang
 MoveDescriptionSuperFang:
-.string "Halves the target{APOSTROPHE}s {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}.\0"
+.string "Halves the target's {COLOR_2 YELLOW}HP{END_COLOR_TEXT_2}.\0"
 .align 2,0
 
 .global MoveNameSuperFang
@@ -3100,7 +3100,7 @@ MoveNameCut:
 
 .global MoveDescriptionEncore
 MoveDescriptionEncore:
-.string "Inflicts the {COLOR_2 CYAN}Encore{END_COLOR_TEXT_2} status on the target{COMMA}\nmaking it capable of using only\nthe move it last used.\0"
+.string "Inflicts the {COLOR_2 CYAN}Encore{END_COLOR_TEXT_2} status on the target,\nmaking it capable of using only\nthe move it last used.\0"
 .align 2,0
 
 .global MoveNameEncore
@@ -3110,7 +3110,7 @@ MoveNameEncore:
 
 .global MoveDescriptionLowerSpeedChanceDistance
 MoveDescriptionLowerSpeedChanceDistance:
-.string "Inflicts damage on the target{COMMA} even at a\ndistance. It may also lower the target{APOSTROPHE}s\n{COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2} by one level.\0"
+.string "Inflicts damage on the target, even at a\ndistance. It may also lower the target's\n{COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2} by one level.\0"
 .align 2,0
 
 .global MoveNameBubble
@@ -3130,7 +3130,7 @@ MoveNameAromatherapy:
 
 .global MoveDescriptionHail
 MoveDescriptionHail:
-.string "Changes the dungeon floor{APOSTROPHE}s weather to\n{COLOR_2 CYAN}Hail{END_COLOR_TEXT_2} for several turns.\0"
+.string "Changes the dungeon floor's weather to\n{COLOR_2 CYAN}Hail{END_COLOR_TEXT_2} for several turns.\0"
 .align 2,0
 
 .global MoveNameHail
@@ -3140,7 +3140,7 @@ MoveNameHail:
 
 .global MoveDescriptionConfuseRay
 MoveDescriptionConfuseRay:
-.string "Inflicts the {COLOR_2 CYAN}Confused{END_COLOR_TEXT_2} status on\nthe target{COMMA} making its attacks and\nmovements erratic.\0"
+.string "Inflicts the {COLOR_2 CYAN}Confused{END_COLOR_TEXT_2} status on\nthe target, making its attacks and\nmovements erratic.\0"
 .align 2,0
 
 .global MoveNameConfuseRay
@@ -3150,7 +3150,7 @@ MoveNameConfuseRay:
 
 .global MoveDescriptionRainDance
 MoveDescriptionRainDance:
-.string "Changes the dungeon floor{APOSTROPHE}s weather to\n{COLOR_2 CYAN}Rain{END_COLOR_TEXT_2} over several turns.\0"
+.string "Changes the dungeon floor's weather to\n{COLOR_2 CYAN}Rain{END_COLOR_TEXT_2} over several turns.\0"
 .align 2,0
 
 .global MoveNameRainDance
@@ -3190,7 +3190,7 @@ MoveNameThrash:
 
 .global MoveDescriptionDig
 MoveDescriptionDig:
-.string "The user gains the {COLOR_2 CYAN}Digging{END_COLOR_TEXT_2} status{COMMA}\nand it attacks on the next turn.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\0"
+.string "The user gains the {COLOR_2 CYAN}Digging{END_COLOR_TEXT_2} status,\nand it attacks on the next turn.\nIt is not possible to {COLOR_2 CYAN}link{END_COLOR_TEXT_2} this move.\0"
 .align 2,0
 
 .global MoveNameDig
@@ -3220,7 +3220,7 @@ MoveNameMorningSun:
 
 .global MoveDescriptionNightmare
 MoveDescriptionNightmare:
-.string "Inflicts the {COLOR_2 CYAN}Nightmare{END_COLOR_TEXT_2} status\non the target{COMMA} making it incapable\nof action.\0"
+.string "Inflicts the {COLOR_2 CYAN}Nightmare{END_COLOR_TEXT_2} status\non the target, making it incapable\nof action.\0"
 .align 2,0
 
 .global MoveNameNightmare
@@ -3230,7 +3230,7 @@ MoveNameNightmare:
 
 .global MoveDescriptionLovelyKiss
 MoveDescriptionLovelyKiss:
-.string "Makes all foes around the user go to {COLOR_2 CYAN}sleep{END_COLOR_TEXT_2}{COMMA}\ncausing them to be incapable of action.\0"
+.string "Makes all foes around the user go to {COLOR_2 CYAN}sleep{END_COLOR_TEXT_2},\ncausing them to be incapable of action.\0"
 .align 2,0
 
 .global MoveNameLovelyKiss
@@ -3265,7 +3265,7 @@ MoveUseTextUse:
 
 .global MoveDescriptionLowerDefenseChance
 MoveDescriptionLowerDefenseChance:
-.string "Inflicts damage on the target.\nIt may also lower the target{APOSTROPHE}s {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}\nby one level.\0"
+.string "Inflicts damage on the target.\nIt may also lower the target's {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}\nby one level.\0"
 .align 2,0
 
 .global MoveNameIronTail

@@ -66,7 +66,7 @@ const UnkTextStruct2 gUnknown_80E041C = {
 };
 
 ALIGNED(4) const u8 gUnknown_80E0434[] = _(
-        " Here{APOSTROPHE}s your reward!\n"
+        " Here's your reward!\n"
         "{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}!");
 
 ALIGNED(4) const u8 gUnknown_80E045C[] = _(
@@ -74,22 +74,22 @@ ALIGNED(4) const u8 gUnknown_80E045C[] = _(
         "{CENTER_ALIGN}{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.");
 
 ALIGNED(4) const u8 gUnknown_80E0484[] = _(
-        "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s team received\n"
+        "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}'s team received\n"
         "{CENTER_ALIGN}{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.");
 
 ALIGNED(4) const u8 gUnknown_80E04B4[]= _(
-        " As your reward{COMMA} you can\n"
+        " As your reward, you can\n"
         "now go to the Friend Area\n"
         "{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}!");
 
 ALIGNED(4) const u8 gUnknown_80E04F4[] = _(
-        "{CENTER_ALIGN}...Oh{COMMA} wait{COMMA} sorry.{EXTRA_MSG}"
+        "{CENTER_ALIGN}...Oh, wait, sorry.{EXTRA_MSG}"
         "{CENTER_ALIGN}You already have the \n"
         "{CENTER_ALIGN}{COLOR_1 GREEN}{ARG_FRIEND_AREA} Friend Area{END_COLOR_TEXT_1}.{EXTRA_MSG}"
-        "{CENTER_ALIGN}I{APOSTROPHE}m sorry that my reward is\n"
+        "{CENTER_ALIGN}I'm sorry that my reward is\n"
         "{CENTER_ALIGN}something you already have.{EXTRA_MSG}"
-        "{CENTER_ALIGN}In its place{COMMA} {COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{COMMA}\n"
-        "{CENTER_ALIGN}you can have {COLOR_1 LIGHT_BLUE}1{COMMA}000{END_COLOR_TEXT_1} {POKE}.");
+        "{CENTER_ALIGN}In its place, {COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1},\n"
+        "{CENTER_ALIGN}you can have {COLOR_1 LIGHT_BLUE}1,000{END_COLOR_TEXT_1} {POKE}.");
 
 ALIGNED(4) const u8 gUnknown_80E05C0[] = _(
         "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1} gained access\n"
@@ -97,12 +97,12 @@ ALIGNED(4) const u8 gUnknown_80E05C0[] = _(
         "{CENTER_ALIGN}{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}.");
 
 ALIGNED(4) const u8 gUnknown_80E05FC[] = _(
-        "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s team gained access\n"
+        "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}'s team gained access\n"
         "{CENTER_ALIGN}to the Friend Area\n"
         "{CENTER_ALIGN}{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}.");
 
 ALIGNED(4) const u8 gUnknown_80E0640[] = _(
-        " Here{APOSTROPHE}s your reward!\n"
+        " Here's your reward!\n"
         "The promised {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1}!");
 
 ALIGNED(4) const u8 gUnknown_80E0670[] = _(

@@ -198,7 +198,7 @@ const MenuItem gUnknown_80E23A8[4] = {
     {NULL, 0x8},
 };
 
-ALIGNED(4) const u8 DontSendPokemon_80E23C8[] = _("Don{APOSTROPHE}t Send Pokémon");
+ALIGNED(4) const u8 DontSendPokemon_80E23C8[] = _("Don't Send Pokémon");
 ALIGNED(4) const u8 SendPokemon_80E23E0[] = _("Send Pokémon");
 
 const UnkTextStruct2 gUnknown_80E23F0 =
@@ -250,7 +250,7 @@ const MenuItem gUnknown_80E2470[4] = {
     {NULL, 0x8},
 };
 
-const u8 DontSendItem_80E2490[] = _("Don{APOSTROPHE}t Send Item");
+const u8 DontSendItem_80E2490[] = _("Don't Send Item");
 const u8 SendItem_80E24A4[] = "Send Item";
 
 extern const u8 SendwoItem_80E24C8[];

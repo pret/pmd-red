@@ -30,7 +30,7 @@ ALIGNED(4) static const u8 sFmtReceivedThePromised[] = _(
     "{CENTER_ALIGN}the promised {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}. ");
 
 ALIGNED(4) static const u8 sFmtTeamReceivedThePromised[] = _(
-    "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{APOSTROPHE}s team received\n"
+    "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}'s team received\n"
     "{CENTER_ALIGN}the promised {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}.");
 
 ALIGNED(4) static const u8 sFmtTeamAlsoReceived[] = _(
@@ -43,8 +43,8 @@ ALIGNED(4) static const u8 sFmtReceivedStatue[] = _(
 
 ALIGNED(4) static const u8 sFmtReceive1000Instead[] = _(
     "{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}...\n"
-    "{CENTER_ALIGN}You{APOSTROPHE}ve already acquired it.{EXTRA_MSG}{CENTER_ALIGN}Sorry to see that...{EXTRA_MSG}{CENTER_ALIGN}In its place{COMMA} {COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}{COMMA}\n"
-    "{CENTER_ALIGN}you can have {COLOR_1 LIGHT_BLUE}1{COMMA}000{END_COLOR_TEXT_1} {POKE}.");
+    "{CENTER_ALIGN}You've already acquired it.{EXTRA_MSG}{CENTER_ALIGN}Sorry to see that...{EXTRA_MSG}{CENTER_ALIGN}In its place, {COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1},\n"
+    "{CENTER_ALIGN}you can have {COLOR_1 LIGHT_BLUE}1,000{END_COLOR_TEXT_1} {POKE}.");
 
 ALIGNED(4) static const u8 sFmtFullSoSentToStorage[] = _(
     "{CENTER_ALIGN}Your Toolbox is full.\n"

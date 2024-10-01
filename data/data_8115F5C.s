@@ -285,7 +285,7 @@ gUnknown_8116318: @ 8116318
 
 .global gUnknown_811633C
 gUnknown_811633C: @ 811633C
-.string "{CENTER_ALIGN}{ARG_NICKNAME_0}{APOSTROPHE}s team received\n"
+.string "{CENTER_ALIGN}{ARG_NICKNAME_0}'s team received\n"
 .string "{CENTER_ALIGN}the {ARG_MOVE_ITEM_0} cash reward.\0"
 .align 2, 0
 
@@ -297,7 +297,7 @@ gUnknown_811636C: @ 811636C
 
 .global gUnknown_8116390
 gUnknown_8116390: @ 8116390
-.string "{CENTER_ALIGN}{ARG_NICKNAME_0}{APOSTROPHE}s team received\n"
+.string "{CENTER_ALIGN}{ARG_NICKNAME_0}'s team received\n"
 .string "{CENTER_ALIGN}the reward {ARG_MOVE_ITEM_0}.\0"
 .align 2, 0
 
@@ -322,13 +322,13 @@ gUnknown_81163E4: @ 81163E4
 
 .global gUnknown_81163F0
 gUnknown_81163F0: @ 81163F0
-.string "{CENTER_ALIGN}However{COMMA} {ARG_NICKNAME_0}{APOSTROPHE}s team\n"
+.string "{CENTER_ALIGN}However, {ARG_NICKNAME_0}'s team\n"
 .string "{CENTER_ALIGN}had too much money already...\0"
 .align 2,0
 
 .global gUnknown_811642C
 gUnknown_811642C: @ 811642C
-.string "{CENTER_ALIGN}However{COMMA} {ARG_NICKNAME_0}{APOSTROPHE}s team\n"
+.string "{CENTER_ALIGN}However, {ARG_NICKNAME_0}'s team\n"
 .string "{CENTER_ALIGN}had too many items already...\0"
 .align 2,0
 .string "pksdir0\0"

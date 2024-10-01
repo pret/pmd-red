@@ -87,114 +87,114 @@ static const MenuItem sPostOfficeHelpGetHelpMenu[] =
 };
 
 ALIGNED(4) static const u8 sWhatdYouWantToKnow[] =
-    _(" So{COMMA} what{APOSTROPHE}d you want to\n"
+    _(" So, what'd you want to\n"
     "know?");
 
 ALIGNED(4) static const u8 sGettingHelpExplanation[] =
     _(" If you need to call for\n"
-    "help{COMMA} first send your friend\n"
+    "help, first send your friend\n"
     "an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
-    " Once you send that mail{COMMA}\n"
+    " Once you send that mail,\n"
     "wait until your friend sends you back\n"
     "an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
     " When you get that\n"
-    "{COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} back{COMMA} your team\n"
+    "{COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} back, your team\n"
     "can continue from where it went down.{EXTRA_MSG}"
     " Make sure you send your\n"
     "friend a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.\n"
-    "That{APOSTROPHE}s if you get revived{COMMA} of course.");
+    "That's if you get revived, of course.");
 
 ALIGNED(4) static const u8 sSendSOSMailExplanation[] =
     _(" If your team gets defeated\n"
-    "in a dungeon{COMMA} you can send an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}\n"
+    "in a dungeon, you can send an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}\n"
     "to a friend willing to help.{EXTRA_MSG}"
     " But I have to warn you.\n"
-    "You can{APOSTROPHE}t get anyone to rescue you\n"
+    "You can't get anyone to rescue you\n"
     "in certain places.{EXTRA_MSG}"
     " If you need to send\n"
-    "an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}{COMMA} you send it from the\n"
+    "an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}, you send it from the\n"
     "{COLOR_1 LIGHT_BLUE}main menu{END_COLOR_TEXT_1}.");
 
 ALIGNED(4) static const u8 sReceiveAOKMailExplanation[] =
     _(" If your friend manages to\n"
-    "rescue your team{COMMA} you need to receive\n"
+    "rescue your team, you need to receive\n"
     "an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} from your friend.{EXTRA_MSG}"
-    " See{COMMA} once you get that\n"
-    "{COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}{COMMA} your team can continue from\n"
+    " See, once you get that\n"
+    "{COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}, your team can continue from\n"
     "where it went down in the dungeon.{EXTRA_MSG}"
-    " And{COMMA} if you use\n"
-    "a {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}{COMMA} your friend can\n"
+    " And, if you use\n"
+    "a {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}, your friend can\n"
     "even send you a {COLOR_1 LIGHT_BLUE}helper Pokémon{END_COLOR_TEXT_1}.{EXTRA_MSG}"
-    " There{APOSTROPHE}s just one thing.\n"
-    "A {COLOR_1 LIGHT_BLUE}helper Pokémon{END_COLOR_TEXT_1} can{APOSTROPHE}t bring\n"
+    " There's just one thing.\n"
+    "A {COLOR_1 LIGHT_BLUE}helper Pokémon{END_COLOR_TEXT_1} can't bring\n"
     "any item it happens to be holding.{EXTRA_MSG}"
     " You can receive that\n"
-    "team-saving {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} on the {COLOR_1 LIGHT_BLUE}main menu{END_COLOR_TEXT_1}{COMMA}\n"
+    "team-saving {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} on the {COLOR_1 LIGHT_BLUE}main menu{END_COLOR_TEXT_1},\n"
     "all right?");
 
 ALIGNED(4) static const u8 sSendThankYouMailExplanation[] =
-    _(" If your team gets rescued{COMMA}\n"
+    _(" If your team gets rescued,\n"
     "be sure to send your friend\n"
     "a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
     " You do that by going to\n"
-    "the {COLOR_1 LIGHT_BLUE}right counter{END_COLOR_TEXT_1}{COMMA} or\n"
+    "the {COLOR_1 LIGHT_BLUE}right counter{END_COLOR_TEXT_1}, or\n"
     "by selecting it from the {COLOR_1 LIGHT_BLUE}main menu{END_COLOR_TEXT_1}.{EXTRA_MSG}"
     " You can attach an item in\n"
     "storage to your {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}\n"
     "as a {COLOR_1 LIGHT_BLUE}reward item{END_COLOR_TEXT_1}.{EXTRA_MSG}"
-    " You don{APOSTROPHE}t want to ever\n"
+    " You don't want to ever\n"
     "forget to express your thanks.");
 
 ALIGNED(4) static const u8 sRescueProceduresExplanation[] =
     _(" If you want to go and\n"
-    "rescue your friend{APOSTROPHE}s KO{APOSTROPHE}d team{COMMA}\n"
+    "rescue your friend's KO'd team,\n"
     "you need to receive an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
-    " When you get that mail{COMMA}\n"
+    " When you get that mail,\n"
     "you can rescue your friend at\n"
     "the {COLOR_1 LIGHT_BLUE}left counter{END_COLOR_TEXT_1} over there.{EXTRA_MSG}"
     " If you do manage to rescue\n"
-    "the team{COMMA} you send your friend\n"
+    "the team, you send your friend\n"
     "an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
-    " After you do that{COMMA} your\n"
+    " After you do that, your\n"
     "friend can send back to you\n"
     "a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.");
 
 ALIGNED(4) static const u8 sReceiveSOSMailExplanation[] =
-    _(" To go off on a rescue{COMMA}\n"
-    "you first need to receive your friend{APOSTROPHE}s\n"
+    _(" To go off on a rescue,\n"
+    "you first need to receive your friend's\n"
     "{COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
     " You do that at\n"
-    "the {COLOR_1 LIGHT_BLUE}left counter{END_COLOR_TEXT_1} over there{COMMA}\n"
+    "the {COLOR_1 LIGHT_BLUE}left counter{END_COLOR_TEXT_1} over there,\n"
     "or by selecting it from the {COLOR_1 LIGHT_BLUE}main menu{END_COLOR_TEXT_1}.");
 
 ALIGNED(4) static const u8 sSendAOKMailExplanation[] =
     _(" If you succeed in rescuing\n"
-    "that team{COMMA} you send your friend an\n"
+    "that team, you send your friend an\n"
     "{COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
     " You do that by going to\n"
-    "the {COLOR_1 LIGHT_BLUE}left counter{END_COLOR_TEXT_1}{COMMA}\n"
+    "the {COLOR_1 LIGHT_BLUE}left counter{END_COLOR_TEXT_1},\n"
     "or from the {COLOR_1 LIGHT_BLUE}main menu{END_COLOR_TEXT_1}.{EXTRA_MSG}"
     " You can send your friend\n"
     "a Pokémon as a helper from your Friend\n"
     "Areas using a {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}.{EXTRA_MSG}"
-    " This Pokémon won{APOSTROPHE}t\n"
-    "disappear from its Friend Area{COMMA} so\n"
-    "don{APOSTROPHE}t you worry any.");
+    " This Pokémon won't\n"
+    "disappear from its Friend Area, so\n"
+    "don't you worry any.");
 
 ALIGNED(4) static const u8 sLeaveForRescueExplanation[] =
-    _(" If you get an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}{COMMA}\n"
+    _(" If you get an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1},\n"
     "you head off on the rescue from\n"
     "the {COLOR_1 LIGHT_BLUE}left counter{END_COLOR_TEXT_1}.{EXTRA_MSG}"
-    " But{COMMA} I have to warn you.\n"
-    "You can{APOSTROPHE}t go off to rescue in a dungeon\n"
-    "if you can{APOSTROPHE}t get into it.{EXTRA_MSG}"
-    " You{APOSTROPHE}ll be able to get\n"
+    " But, I have to warn you.\n"
+    "You can't go off to rescue in a dungeon\n"
+    "if you can't get into it.{EXTRA_MSG}"
+    " You'll be able to get\n"
     "there when you go farther in your\n"
-    "adventure{COMMA} so it won{APOSTROPHE}t do to fret.");
+    "adventure, so it won't do to fret.");
 
 ALIGNED(4) static const u8 sGetThankYouMailExplanation[] =
     _(" If you send your friend\n"
-    "an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}{COMMA} you can look forward\n"
+    "an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}, you can look forward\n"
     "to getting a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} back.{EXTRA_MSG}"
     " You can receive it at\n"
     "the {COLOR_1 LIGHT_BLUE}right counter{END_COLOR_TEXT_1}\n"
@@ -204,9 +204,9 @@ ALIGNED(4) static const u8 sGetThankYouMailExplanation[] =
     "before you get the {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} back.");
 
 ALIGNED(4) static const u8 sImYourGuide[] =
-    _(" I{APOSTROPHE}m your guide to what you\n"
+    _(" I'm your guide to what you\n"
     "can expect at the Pelipper Post Office.\n"
-    "If you have any questions{COMMA} just ask away!");
+    "If you have any questions, just ask away!");
 
 ALIGNED(4) static const u8 sAnythingElse[] =
     _(" Did you want to ask about\n"
@@ -219,14 +219,14 @@ ALIGNED(4) static const u8 sPostOfficeExplanation[] =
     " We inform folks\n"
     "about everything from gossip to calls\n"
     "for help from fellow Pokémon.{EXTRA_MSG}"
-    " For the latest news{COMMA} check\n"
+    " For the latest news, check\n"
     "{COLOR_1 LIGHT_BLUE}your Mailbox{END_COLOR_TEXT_1} or the {COLOR_1 LIGHT_BLUE}Bulletin Board{END_COLOR_TEXT_1}\n"
-    "outside{COMMA} all right?{EXTRA_MSG}"
-    " Oh{COMMA} that{APOSTROPHE}s not all.\n"
+    "outside, all right?{EXTRA_MSG}"
+    " Oh, that's not all.\n"
     "You can arrange for {COLOR_1 LIGHT_BLUE}Friend Rescue{END_COLOR_TEXT_1}\n"
     "missions at that counter there.{EXTRA_MSG}"
     " The {COLOR_1 LIGHT_BLUE}left counter{END_COLOR_TEXT_1} is\n"
-    "for rescues{COMMA} and the {COLOR_1 LIGHT_BLUE}right counter{END_COLOR_TEXT_1}\n"
+    "for rescues, and the {COLOR_1 LIGHT_BLUE}right counter{END_COLOR_TEXT_1}\n"
     "is for Thank-You Mail.");
 
 ALIGNED(4) static const u8 sBulletinBoardExplanation[] =
@@ -238,7 +238,7 @@ ALIGNED(4) static const u8 sBulletinBoardExplanation[] =
 
 ALIGNED(4) static const u8 sDeliveryExplanation[] =
     _(" If your rescue team\n"
-    "becomes famous for doing lots of rescues{COMMA}\n"
+    "becomes famous for doing lots of rescues,\n"
     "expect to get rescue requests directly.{EXTRA_MSG}"
     " Our delivery {ARG_POKEMON_0}\n"
     "will take those jobs straight to your\n"
@@ -247,14 +247,14 @@ ALIGNED(4) static const u8 sDeliveryExplanation[] =
 ALIGNED(4) static const u8 sFriendRescueExplanation[] =
     _(" Friend Rescue is what we\n"
     "call rescue missions between friends using\n"
-    "a {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}{COMMA} {COLOR_1 LIGHT_BLUE}passwords{END_COLOR_TEXT_1}{COMMA} etc.{EXTRA_MSG}"
-    " For instance{COMMA} you can send\n"
+    "a {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}, {COLOR_1 LIGHT_BLUE}passwords{END_COLOR_TEXT_1}, etc.{EXTRA_MSG}"
+    " For instance, you can send\n"
     "out for help saying your team wiped out\n"
     "in a dungeon at such and such a place.{EXTRA_MSG}"
     " Your friend could play\n"
-    "the hero and come to your team{APOSTROPHE}s rescue.\n"
-    "Or it can be the other way around{COMMA} too.{EXTRA_MSG}"
-    " If you use {COLOR_1 LIGHT_BLUE}passwords{END_COLOR_TEXT_1}{COMMA}\n"
+    "the hero and come to your team's rescue.\n"
+    "Or it can be the other way around, too.{EXTRA_MSG}"
+    " If you use {COLOR_1 LIGHT_BLUE}passwords{END_COLOR_TEXT_1},\n"
     "you can do rescues with friends in\n"
     "far-away places.{EXTRA_MSG}"
     " You can apply for Friend\n"
@@ -263,13 +263,13 @@ ALIGNED(4) static const u8 sFriendRescueExplanation[] =
 
 ALIGNED(4) static const u8 sDeletingMailExplanation[] =
     _(" Deleting mail just means\n"
-    "getting rid of old mail that you don{APOSTROPHE}t\n"
+    "getting rid of old mail that you don't\n"
     "need anymore.{EXTRA_MSG}"
     " If you do lots of Friend\n"
-    "Rescues{COMMA} you{APOSTROPHE}ll find {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} and\n"
+    "Rescues, you'll find {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} and\n"
     "{COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} piling up.{EXTRA_MSG}"
-    " Once you get {COLOR_1 LIGHT_BLUE}30 pieces{END_COLOR_TEXT_1}{COMMA}\n"
-    "you won{APOSTROPHE}t be able to receive more mail.\n"
-    "That{APOSTROPHE}s why you{APOSTROPHE}ll need to delete old mail.{EXTRA_MSG}"
+    " Once you get {COLOR_1 LIGHT_BLUE}30 pieces{END_COLOR_TEXT_1},\n"
+    "you won't be able to receive more mail.\n"
+    "That's why you'll need to delete old mail.{EXTRA_MSG}"
     " You can look through old\n"
     "mail at the {COLOR_1 LIGHT_BLUE}left counter{END_COLOR_TEXT_1} over there.");

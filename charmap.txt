@@ -276,11 +276,6 @@ SELECT_BUTTON = 87 72 87 73
 L_BUTTON = 87 74
 
 @ Character codes escaped with a '~'.
-DOUBLE_QUOTE = 7E 32 32 @ ~22 - double quote (") is a best guess until we find it in strings that are actually rendered
-APOSTROPHE = 7E 32 37 @ ~27
-COMMA = 7E 32 63 @ ~2c
-QUOTE_START = 7E 39 33 @ ~93
-QUOTE_END = 7E 39 34 @ ~94
 UNK_95 = 7E 39 35 @ ~95 - Seems to be a special (?) symbol
 
 @ Placeholders for message arguments to swap out for names within strings.

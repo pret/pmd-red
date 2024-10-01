@@ -197,7 +197,7 @@ static const MenuItem sUnknown_80E5D48[] =
     {sUnknown_80E5D60, 0xffde},
     {NULL, 0xffdd},
 };
-ALIGNED(4) static const u8 sUnknown_80E5D60[] = _("It won{APOSTROPHE}t be in the release version.");
+ALIGNED(4) static const u8 sUnknown_80E5D60[] = _("It won't be in the release version.");
 ALIGNED(4) static const u8 sUnknown_80E5D88[] = _("This is the Debug Mode.");
 
 static const u8 sUnknown_80E5DB8[];
@@ -230,7 +230,7 @@ static const MenuItem sUnknown_80E5E5C[] =
     {sUnknown_80E5E74, 0xFFDE},
     {0, 0xFFDD}
 };
-ALIGNED(4) static const u8 sUnknown_80E5E74[] = _("passwords{COMMA} friends may rescue each other.");
+ALIGNED(4) static const u8 sUnknown_80E5E74[] = _("passwords, friends may rescue each other.");
 ALIGNED(4) static const u8 sUnknown_80E5EA0[] = _("Using a Game Link cable or");
 
 static const u8 sUnknown_80E5ED4[];
@@ -242,7 +242,7 @@ static const MenuItem sUnknown_80E5EBC[] =
     {0, 0xFFDD}
 };
 ALIGNED(4) static const u8 sUnknown_80E5ED4[] = _("trade stored items with a friend.");
-ALIGNED(4) static const u8 sUnknown_80E5EF8[] = _("Using a Game Link cable{COMMA} you can");
+ALIGNED(4) static const u8 sUnknown_80E5EF8[] = _("Using a Game Link cable, you can");
 
 static const u8 sUnknown_80E5F34[];
 static const u8 sUnknown_80E5F58[];
@@ -264,7 +264,7 @@ static const MenuItem sUnknown_80E5F80[] =
     {0, 0xFFDD}
 };
 ALIGNED(4) static const u8 sUnknown_80E5F98[] = _("receive Wonder Mail.");
-ALIGNED(4) static const u8 sUnknown_80E5FB0[] = _("Using passwords{COMMA} you can");
+ALIGNED(4) static const u8 sUnknown_80E5FB0[] = _("Using passwords, you can");
 
 static const u8 sUnknown_80E5FE4[];
 static const u8 sUnknown_80E6008[];
@@ -275,7 +275,7 @@ static const MenuItem sUnknown_80E5FCC[] =
     {NULL, 0xFFDD}
 };
 ALIGNED(4) static const u8 sUnknown_80E5FE4[] = _("receive teams from your friends.");
-ALIGNED(4) static const u8 sUnknown_80E6008[] = _("Using the Dual Slot function{COMMA} you can");
+ALIGNED(4) static const u8 sUnknown_80E6008[] = _("Using the Dual Slot function, you can");
 
 static const u8 sUnknown_80E6048[];
 static const u8 sUnknown_80E6070[];
@@ -286,4 +286,4 @@ static const MenuItem sUnknown_80E6030[] =
     {NULL, 0xFFDD}
 };
 ALIGNED(4) static const u8 sUnknown_80E6048[] = _("go on an adventure to unknown worlds.");
-ALIGNED(4) static const u8 sUnknown_80E6070[] = _("Using wireless communication{COMMA} you can");
+ALIGNED(4) static const u8 sUnknown_80E6070[] = _("Using wireless communication, you can");

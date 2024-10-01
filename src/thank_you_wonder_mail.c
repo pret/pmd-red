@@ -160,7 +160,7 @@ const MenuItem gUnknown_80DEE7C[] =
     {},
 };
 
-ALIGNED(4) static const u8 DontSendItem_Text[] =  _("Don{APOSTROPHE}t Send Item");
+ALIGNED(4) static const u8 DontSendItem_Text[] =  _("Don't Send Item");
 ALIGNED(4) static const u8 SendItem_Text[] = "Send Item";
 
 const MenuItem gUnknown_80DEEBC[] =

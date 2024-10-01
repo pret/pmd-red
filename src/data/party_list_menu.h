@@ -52,7 +52,7 @@ ALIGNED(4) static const u8 sUnknown_80DD388[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80DD420[] = _(
 	"If you say farewell to this\n"
-	"Pokémon{COMMA} it will be gone forever.{EXTRA_MSG}"
+	"Pokémon, it will be gone forever.{EXTRA_MSG}"
 	"You will never be able to get another one\n"
 	"like it to join your team.\n"
 	"Will you release it anyway?");
@@ -72,7 +72,7 @@ ALIGNED(4) static const u8 sBecameLeader[] = _(
 ALIGNED(4) static const u8 sUnknown_80DD564[] = _(
 	"{CENTER_ALIGN}{ARG_POKEMON_1} left\n"
 	"{CENTER_ALIGN}the Friend Area.\n"
-	"{CENTER_ALIGN}Bye-bye{COMMA} {ARG_POKEMON_1}!");
+	"{CENTER_ALIGN}Bye-bye, {ARG_POKEMON_1}!");
 
 ALIGNED(4) static const u8 sUnknown_80DD594[] = _(
 	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1} was\n"

@@ -208,12 +208,12 @@ ALIGNED(4) static const u8 sUnknown_80D6038[] = _(
     "Come buy... Reep...");
 
 ALIGNED(4) static const u8 sUnknown_80D6128[] = _(
-    " Zzz... Eep? No{COMMA} no...{WAIT_PRESS}\n"
+    " Zzz... Eep? No, no...{WAIT_PRESS}\n"
     "You cannot hold any more money...");
 
 ALIGNED(4) static const u8 sUnknown_80D6168[] = _(
     " Zzz... Hunh? Wha--? Whoa!{WAIT_PRESS}\n"
-    "I... I can{APOSTROPHE}t accept anything like that!");
+    "I... I can't accept anything like that!");
 
 ALIGNED(4) static const u8 sUnknown_80D61B0[] = _(
     " Reep...? Eep!{WAIT_PRESS}\n"
@@ -231,7 +231,7 @@ ALIGNED(4) static const u8 sUnknown_80D6204[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D6250[] = _(
     " Zzzzzz... Oh?{WAIT_PRESS}\n"
-    "You{APOSTROPHE}ve got nothing...");
+    "You've got nothing...");
 
 ALIGNED(4) static const u8 sUnknown_80D627C[] = _(
     " Zzz... Oh...?{WAIT_PRESS}\n"
@@ -242,7 +242,7 @@ ALIGNED(4) static const u8 sUnknown_80D62B0[] = _(
     " Eep...? Zzz...\n"
     "You have too much money!{EXTRA_MSG}"
     " Zzz... Eh?\n"
-    "You can{APOSTROPHE}t hold any more money...");
+    "You can't hold any more money...");
 
 ALIGNED(4) static const u8 sUnknown_80D630C[] = _(
     " Reep eep! Oh?{WAIT_PRESS}\n"
@@ -259,8 +259,8 @@ ALIGNED(4) static const u8 sUnknown_80D6364[] = _(
     "Thank you...");
 
 ALIGNED(4) static const u8 sUnknown_80D6394[] = _(
-    " Zzz... Reep{COMMA} what...?\n"
-    "For all that I can buy{COMMA} I will pay\n"
+    " Zzz... Reep, what...?\n"
+    "For all that I can buy, I will pay\n"
     "{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}... OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D63E8[] = _(
@@ -306,94 +306,94 @@ ALIGNED(4) static const u8 sUnknown_80D6544[] = _(
     "This is...my shop...");
 
 ALIGNED(4) static const u8 sUnknown_80D6564[] = _(
-    " Wonder Orbs are very{COMMA}\n"
+    " Wonder Orbs are very,\n"
     "very convenient〜♪{EXTRA_MSG}"
-    " However{COMMA} they disappear\n"
+    " However, they disappear\n"
     "after one use...{WAIT_PRESS}\n"
     "But they are useful in a pinch!{EXTRA_MSG}"
-    " Use them cleverly{COMMA} and your\n"
+    " Use them cleverly, and your\n"
     "adventures will be made much easier〜♪{EXTRA_MSG}"
     " And moves...{WAIT_PRESS}\n"
     "They are the ultimate power!{EXTRA_MSG}"
     " Smash rocks!{WAIT_PRESS} Fly!{WAIT_PRESS}\n"
-    "There are many kinds of moves{COMMA} all of\n"
-    "them dynamic{COMMA} yet elegant!{EXTRA_MSG}"
+    "There are many kinds of moves, all of\n"
+    "them dynamic, yet elegant!{EXTRA_MSG}"
     " There are even moves of\n"
     "obscure rarity...{WAIT_PRESS}\n"
-    "Simply gorgeous{COMMA} they are!{EXTRA_MSG}"
-    " Now{COMMA} we have these moves!{WAIT_PRESS}\n"
+    "Simply gorgeous, they are!{EXTRA_MSG}"
+    " Now, we have these moves!{WAIT_PRESS}\n"
     "They can be learned using our Technical\n"
-    "Machines{COMMA} or TMs for short!{EXTRA_MSG}"
+    "Machines, or TMs for short!{EXTRA_MSG}"
     " You see?\n"
-    "Isn{APOSTROPHE}t it exciting? Even dreamy?{EXTRA_MSG}"
-    " Why{COMMA} it gets me so excited{COMMA}\n"
+    "Isn't it exciting? Even dreamy?{EXTRA_MSG}"
+    " Why, it gets me so excited,\n"
     "my color has turned a rosy tint!{EXTRA_MSG}"
     " I do hope you will shop\n"
     "with us--me and my brother next to\n"
     "me!");
 
 ALIGNED(4) static const u8 sUnknown_80D6818[] = _(
-    " Oh{COMMA} no{COMMA} no!{WAIT_PRESS}\n"
-    "My friend{COMMA} you cannot add to your money!\n"
+    " Oh, no, no!{WAIT_PRESS}\n"
+    "My friend, you cannot add to your money!\n"
     "I cannot do this.");
 
 ALIGNED(4) static const u8 sUnknown_80D6868[] = _(
-    " Whoa{COMMA} whoa!{WAIT_PRESS}\n"
-    "I... I can{APOSTROPHE}t accept anything like that!");
+    " Whoa, whoa!{WAIT_PRESS}\n"
+    "I... I can't accept anything like that!");
 
 ALIGNED(4) static const u8 sUnknown_80D68A4[] = _(
-    " Eep! Oh{COMMA} dear!{WAIT_PRESS}\n"
-    "You{APOSTROPHE}re short on money{COMMA} my friend!");
+    " Eep! Oh, dear!{WAIT_PRESS}\n"
+    "You're short on money, my friend!");
 
 ALIGNED(4) static const u8 sUnknown_80D68E0[] = _(
     " Oh? Uh-oh!{WAIT_PRESS}\n"
     "My shelves are bare of wares!{EXTRA_MSG}"
-    " I am completely sold out{COMMA}\n"
+    " I am completely sold out,\n"
     "my friend!");
 
 ALIGNED(4) static const u8 sUnknown_80D6938[] = _(
-    " Oh{COMMA} dear me!{WAIT_PRESS}\n"
-    "My friend{COMMA} you{APOSTROPHE}ve run out of space for\n"
+    " Oh, dear me!{WAIT_PRESS}\n"
+    "My friend, you've run out of space for\n"
     "my wares!");
 
 ALIGNED(4) static const u8 sUnknown_80D6980[] = _(
     " Oh?{WAIT_PRESS}\n"
-    "My friend{COMMA} you seem to have nothing?");
+    "My friend, you seem to have nothing?");
 
 ALIGNED(4) static const u8 sUnknown_80D69B0[] = _(
-    " Oh{COMMA} oh{COMMA} oh?{WAIT_PRESS}\n"
-    "My friend{COMMA} you seem to not have anything\n"
+    " Oh, oh, oh?{WAIT_PRESS}\n"
+    "My friend, you seem to not have anything\n"
     "that you can sell?");
 
 ALIGNED(4) static const u8 sUnknown_80D6A04[] = _(
-    " Oh{COMMA} my{COMMA} my!\n"
-    "My friend{COMMA} you have too much money!{EXTRA_MSG}"
-    " You can{APOSTROPHE}t carry any more\n"
+    " Oh, my, my!\n"
+    "My friend, you have too much money!{EXTRA_MSG}"
+    " You can't carry any more\n"
     "money than you have now.");
 
 ALIGNED(4) static const u8 sUnknown_80D6A74[] = _(
     " Oh?{WAIT_PRESS}\n"
-    "My friend{COMMA} you seem not to have\n"
+    "My friend, you seem not to have\n"
     "enough money?");
 
 ALIGNED(4) static const u8 sUnknown_80D6AAC[] = _(
     " ...{WAIT_PRESS}I am all out of wares...\n"
-    "I am so sorry{COMMA} my friend...{EXTRA_MSG}"
+    "I am so sorry, my friend...{EXTRA_MSG}"
     " Tomorrow!\n"
     "Tomorrow I shall have more wares!");
 
 ALIGNED(4) static const u8 sUnknown_80D6B18[] = _(
-    " Fine{COMMA} fine{COMMA} we have a deal!\n"
+    " Fine, fine, we have a deal!\n"
     "Thank you so much〜♪ ");
 
 ALIGNED(4) static const u8 sUnknown_80D6B50[] = _(
-    " For all that I can buy{COMMA} I can\n"
+    " For all that I can buy, I can\n"
     "offer you {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
     "Is that acceptable?");
 
 ALIGNED(4) static const u8 sUnknown_80D6BA0[] = _(
-    " {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}{COMMA} you say?\n"
-    "For that{COMMA} I can offer {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
+    " {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}, you say?\n"
+    "For that, I can offer {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
     "Is that acceptable?");
 
 ALIGNED(4) static const u8 sUnknown_80D6BF4[] = _(
@@ -405,7 +405,7 @@ ALIGNED(4) static const u8 sUnknown_80D6C1C[] = _(
     "A very good choice!");
 
 ALIGNED(4) static const u8 sUnknown_80D6C48[] = _(
-    " {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}{COMMA} you say?\n"
+    " {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}, you say?\n"
     "That will be {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
     "Is that acceptable?");
 
@@ -414,7 +414,7 @@ ALIGNED(4) static const u8 sUnknown_80D6C90[] = _(
     "anything else?");
 
 ALIGNED(4) static const u8 sUnknown_80D6CB8[] = _(
-    " Ah{COMMA} very well!\n"
+    " Ah, very well!\n"
     "Do examine my merchandise.\n"
     "I have chosen it with pride〜♪ ");
 
@@ -440,17 +440,17 @@ ALIGNED(4) static const u8 sUnknown_80D6D98[] = _(
     "With them...");
 
 ALIGNED(4) static const u8 sUnknown_80D6E30[] = _(
-    " Zzz... Hunh{COMMA} what...?{WAIT_PRESS}\n"
-    "Zzz... You can{APOSTROPHE}t hold any more money...");
+    " Zzz... Hunh, what...?{WAIT_PRESS}\n"
+    "Zzz... You can't hold any more money...");
 
 ALIGNED(4) static const u8 sUnknown_80D6E78[] = _(
     " Zzz... Whoa...{WAIT_PRESS}\n"
-    "I... I can{APOSTROPHE}t take that!");
+    "I... I can't take that!");
 
 ALIGNED(4) static const u8 sUnknown_80D6EA4[] = _(
-    " Zzz... Huh{COMMA} my...!{WAIT_PRESS}\n"
+    " Zzz... Huh, my...!{WAIT_PRESS}\n"
     "Meep... Meep...\n"
-    "You don{APOSTROPHE}t have enough money!");
+    "You don't have enough money!");
 
 ALIGNED(4) static const u8 sUnknown_80D6EEC[] = _(
     " Zzz... Uh-oh?!{WAIT_PRESS}\n"
@@ -458,33 +458,33 @@ ALIGNED(4) static const u8 sUnknown_80D6EEC[] = _(
     "Sold out! All gone!");
 
 ALIGNED(4) static const u8 sUnknown_80D6F18[] = _(
-    " Zzz... Oh{COMMA} my!{WAIT_PRESS}\n"
+    " Zzz... Oh, my!{WAIT_PRESS}\n"
     "Meep... You have no space...");
 
 ALIGNED(4) static const u8 sUnknown_80D6F4C[] = _(
     " Zzz... Eep...?{WAIT_PRESS}\n"
-    "Meep... You don{APOSTROPHE}t seem to have\n"
+    "Meep... You don't seem to have\n"
     "anything...?");
 
 ALIGNED(4) static const u8 sUnknown_80D6F8C[] = _(
     " Zzz... Huh?{WAIT_PRESS}\n"
     "Meep meep...\n"
-    "You don{APOSTROPHE}t seem to have anything to sell?");
+    "You don't seem to have anything to sell?");
 
 ALIGNED(4) static const u8 sUnknown_80D6FD4[] = _(
-    " Zzz... Oh{COMMA} my!\n"
+    " Zzz... Oh, my!\n"
     "You have so much money...!{EXTRA_MSG}"
     " Zzz... Meep...\n"
-    "You can{APOSTROPHE}t carry any more money...");
+    "You can't carry any more money...");
 
 ALIGNED(4) static const u8 sUnknown_80D7038[] = _(
     " Hunh?{WAIT_PRESS}\n"
     "Eep...?\n"
-    "You don{APOSTROPHE}t have money?");
+    "You don't have money?");
 
 ALIGNED(4) static const u8 sUnknown_80D7064[] = _(
     " ...{WAIT_PRESS} ZZZ!\n"
-    "I{APOSTROPHE}m sold out... Forgive me...");
+    "I'm sold out... Forgive me...");
 
 ALIGNED(4) static const u8 sUnknown_80D7090[] = _(
     " Done... Meep! Deal!\n"
@@ -506,7 +506,7 @@ ALIGNED(4) static const u8 sUnknown_80D7154[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D7184[] = _(
     " Zzz... Zzz...?\n"
-    "You{APOSTROPHE}re selling what...?");
+    "You're selling what...?");
 
 ALIGNED(4) static const u8 sUnknown_80D71B0[] = _(
     " Eep! Wah...?\n"
@@ -515,10 +515,10 @@ ALIGNED(4) static const u8 sUnknown_80D71B0[] = _(
 ALIGNED(4) static const u8 sUnknown_80D71CC[] = _(
     " Zzz... Meep meep...\n"
     "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}...?\n"
-    "{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}{COMMA} OK?");
+    "{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}, OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D7204[] = _(
-    " Buy? Huh{COMMA} eep?\n"
+    " Buy? Huh, eep?\n"
     "Anything else?");
 
 ALIGNED(4) static const u8 sUnknown_80D7228[] = _(
@@ -538,78 +538,78 @@ ALIGNED(4) static const u8 sUnknown_80D72A0[] = _(
     "Welcome...");
 
 ALIGNED(4) static const u8 sUnknown_80D72B8[] = _(
-    " We{COMMA} the {ARG_POKEMON_6}\n"
-    "Brothers{COMMA} have a passion for selling\n"
+    " We, the {ARG_POKEMON_6}\n"
+    "Brothers, have a passion for selling\n"
     "items.{EXTRA_MSG}"
     " Items are useful for your\n"
     "dungeon adventures.{EXTRA_MSG}"
     " Use your imagination and\n"
-    "discover innovative uses{COMMA} please.{EXTRA_MSG}"
-    " Ah{COMMA} yes.\n"
+    "discover innovative uses, please.{EXTRA_MSG}"
+    " Ah, yes.\n"
     "If my shop sells out...{EXTRA_MSG}"
     " New merchandise will\n"
     "arrive the following day.{EXTRA_MSG}"
-    " Until then{COMMA} please go to\n"
+    " Until then, please go to\n"
     "a dungeon and spend some time.\n"
     "Please visit on your return〜♪{EXTRA_MSG}"
-    " Ah{COMMA} yes. The {ARG_POKEMON_6}\n"
+    " Ah, yes. The {ARG_POKEMON_6}\n"
     "Shop is a nationwide chain.{EXTRA_MSG}"
     " There are shops even in\n"
     "dungeons.\n"
     "Please do visit〜♪ ");
 
 ALIGNED(4) static const u8 sUnknown_80D7480[] = _(
-    " Oh{COMMA} my!{WAIT_PRESS}\n"
-    "You can{APOSTROPHE}t add any more to your money.\n"
-    "I can{APOSTROPHE}t complete this deal{COMMA} sorry.");
+    " Oh, my!{WAIT_PRESS}\n"
+    "You can't add any more to your money.\n"
+    "I can't complete this deal, sorry.");
 
 ALIGNED(4) static const u8 sUnknown_80D74DC[] = _(
-    " Oh{COMMA} whoa{COMMA} whoa!{WAIT_PRESS}\n"
-    "I... I couldn{APOSTROPHE}t possibly take that from you!");
+    " Oh, whoa, whoa!{WAIT_PRESS}\n"
+    "I... I couldn't possibly take that from you!");
 
 ALIGNED(4) static const u8 sUnknown_80D7524[] = _(
-    " Oh{COMMA} my!{WAIT_PRESS}\n"
-    "Sorry{COMMA} but you don{APOSTROPHE}t have enough money!");
+    " Oh, my!{WAIT_PRESS}\n"
+    "Sorry, but you don't have enough money!");
 
 ALIGNED(4) static const u8 sUnknown_80D7560[] = _(
     " Uh-oh?!{WAIT_PRESS}\n"
-    "That{APOSTROPHE}s it! No more merchandise!{EXTRA_MSG}"
-    " I{APOSTROPHE}m completely sold out!");
+    "That's it! No more merchandise!{EXTRA_MSG}"
+    " I'm completely sold out!");
 
 ALIGNED(4) static const u8 sUnknown_80D75AC[] = _(
-    " Oh{COMMA} my!{WAIT_PRESS}\n"
+    " Oh, my!{WAIT_PRESS}\n"
     "You have no space for any more items!");
 
 ALIGNED(4) static const u8 sUnknown_80D75E0[] = _(
     " Oh? Oh?{WAIT_PRESS}\n"
-    "You don{APOSTROPHE}t seem to have anything?");
+    "You don't seem to have anything?");
 
 ALIGNED(4) static const u8 sUnknown_80D7610[] = _(
     " Oh? Oh?{WAIT_PRESS}\n"
     "You seem to have nothing to sell?");
 
 ALIGNED(4) static const u8 sUnknown_80D7640[] = _(
-    " Oh{COMMA} my goodness!\n"
-    "You{APOSTROPHE}re overflowing with money!{EXTRA_MSG}"
-    " You couldn{APOSTROPHE}t possibly carry\n"
+    " Oh, my goodness!\n"
+    "You're overflowing with money!{EXTRA_MSG}"
+    " You couldn't possibly carry\n"
     "any more money! ");
 
 ALIGNED(4) static const u8 sUnknown_80D76A8[] = _(
     " Huh?{WAIT_PRESS}\n"
-    "You don{APOSTROPHE}t seem to have the money?");
+    "You don't seem to have the money?");
 
 ALIGNED(4) static const u8 sUnknown_80D76D4[] = _(
-    " ...{WAIT_PRESS}I{APOSTROPHE}m sold out...\n"
-    "Please{COMMA} forgive me.{EXTRA_MSG}"
+    " ...{WAIT_PRESS}I'm sold out...\n"
+    "Please, forgive me.{EXTRA_MSG}"
     " I will have new merchandise\n"
-    "for you tomorrow{COMMA} I swear!");
+    "for you tomorrow, I swear!");
 
 ALIGNED(4) static const u8 sUnknown_80D7740[] = _(
     " Good! Done deal!\n"
     "Thank you so much〜♪ ");
 
 ALIGNED(4) static const u8 sUnknown_80D776C[] = _(
-    " For everything I can buy{COMMA}\n"
+    " For everything I can buy,\n"
     "I can offer {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
     "Is that acceptable to you?");
 
@@ -623,7 +623,7 @@ ALIGNED(4) static const u8 sUnknown_80D780C[] = _(
     "anything else?");
 
 ALIGNED(4) static const u8 sUnknown_80D7830[] = _(
-    " Ah{COMMA} very well!\n"
+    " Ah, very well!\n"
     "What do you wish to sell?");
 
 ALIGNED(4) static const u8 sUnknown_80D785C[] = _(
@@ -640,7 +640,7 @@ ALIGNED(4) static const u8 sUnknown_80D78CC[] = _(
     "anything else today?");
 
 ALIGNED(4) static const u8 sUnknown_80D78F8[] = _(
-    " Ah{COMMA} very well!\n"
+    " Ah, very well!\n"
     "Feel free to examine my merchandise〜♪");
 
 ALIGNED(4) static const u8 sUnknown_80D7934[] = _(

@@ -46,7 +46,7 @@ ALIGNED(4) const char gUnknown_80E79E4[] = "The sender and receiver appear to be
 
 ALIGNED(4) const char gUnknown_80E7A48[] =  _("There is no response from your friend.\n"
                                               "Please make sure the sender and receiver\n"
-                                              "are ready{COMMA} then redo this from the start.");
+                                              "are ready, then redo this from the start.");
 
 ALIGNED(4) const char gUnknown_80E7AC4[] = "What would you like to do?";
 
@@ -66,12 +66,12 @@ ALIGNED(4) const char gUnknown_80E7B88[] = _("The received {COLOR_1 LIGHT_BLUE}W
 ALIGNED(4) const char gUnknown_80E7BC8[] = _("The {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1} was refused.");
 
 ALIGNED(4) const char gUnknown_80E7BEC[] = _("Connect a {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}.\n"
-                                             "When you and your friend are ready{COMMA}\n"
+                                             "When you and your friend are ready,\n"
                                              "you may communicate. ");
 
 ALIGNED(4) const char gUnknown_80E7C48[] = _("{CENTER_ALIGN}In communication...\n"
                                              "{CENTER_ALIGN}Please wait with the power on.\n"
-                                             "{CENTER_ALIGN}To cancel{COMMA} press {B_BUTTON}.");
+                                             "{CENTER_ALIGN}To cancel, press {B_BUTTON}.");
 
 ALIGNED(4) const char gUnknown_80E7C98[] = _("Please enter the\n"
                                              "{COLOR_1 LIGHT_BLUE}Wonder Mail password{END_COLOR_TEXT_1}.");

@@ -65,7 +65,7 @@ static const MissionText gStoryMissionText[] = {
     { NULL, -1, -1, 0, 0 },
 };
 
-ALIGNED(4) const u8 gUnknown_8109A94[] = _("Break Gardevoir{APOSTROPHE}s curse.");
+ALIGNED(4) const u8 gUnknown_8109A94[] = _("Break Gardevoir's curse.");
 ALIGNED(4) const u8 gUnknown_8109AB0[] = _("Rescue Medicham.");
 ALIGNED(4) const u8 gUnknown_8109AC4[] = _("Investigate Relic.");
 ALIGNED(4) const u8 gUnknown_8109AD8[] = _("Rescue Latias.");
@@ -81,7 +81,7 @@ ALIGNED(4) const u8 gUnknown_8109B8C[] = _("Explore seafloor.");
 ALIGNED(4) const u8 gUnknown_8109BA0[] = _("Rescue Smeargle.");
 ALIGNED(4) const u8 gUnknown_8109BB4[] = _("Punish bad Mankey.");
 ALIGNED(4) const u8 gUnknown_8109BC8[] = _("{COLOR_1 YELLOW_3}Scenario Progress Dummy{END_COLOR_TEXT_1}");
-ALIGNED(4) const u8 gUnknown_8109BE8[] = _("Seek Rayquaza{APOSTROPHE}s help.");
+ALIGNED(4) const u8 gUnknown_8109BE8[] = _("Seek Rayquaza's help.");
 ALIGNED(4) const u8 gUnknown_8109C00[] = _("Rescue Alakazam.");
 ALIGNED(4) const u8 gUnknown_8109C14[] = _("Meet Ninetales.");
 ALIGNED(4) const u8 gUnknown_8109C24[] = _("Fugitive");
