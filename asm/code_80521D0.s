@@ -1277,21 +1277,21 @@ sub_8052DD0:
 	ldr r6, _08052E68
 	ldr r4, [r6]
 	adds r0, r4, 0
-	bl sub_80981A0
+	bl GetTutorialFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08052E46
 	ldr r6, _08052E6C
 	ldr r4, [r6]
 	adds r0, r4, 0
-	bl sub_80981A0
+	bl GetTutorialFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08052E46
 	ldr r6, _08052E70
 	ldr r4, [r6]
 	adds r0, r4, 0
-	bl sub_80981A0
+	bl GetTutorialFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08052E46
@@ -1305,27 +1305,27 @@ sub_8052DD0:
 	ldr r6, _08052E7C
 	ldr r4, [r6]
 	adds r0, r4, 0
-	bl sub_80981A0
+	bl GetTutorialFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08052E46
 	ldr r6, _08052E80
 	ldr r4, [r6]
 	adds r0, r4, 0
-	bl sub_80981A0
+	bl GetTutorialFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08052E46
 	ldr r6, _08052E84
 	ldr r4, [r6]
 	adds r0, r4, 0
-	bl sub_80981A0
+	bl GetTutorialFlag
 	lsls r0, 24
 	cmp r0, 0
 	bne _08052E88
 _08052E46:
 	adds r0, r4, 0
-	bl sub_8098170
+	bl SetTutorialFlag
 	bl sub_8083E28
 	ldr r4, [r6, 0x4]
 	movs r0, 0
@@ -1344,17 +1344,17 @@ _08052E74: .4byte gDungeon
 _08052E78: .4byte 0x00000644
 _08052E7C: .4byte gUnknown_80FF13C
 _08052E80: .4byte gUnknown_80FF1B4
-_08052E84: .4byte gUnknown_80FF22C
+_08052E84: .4byte gMovementTutorial
 _08052E88:
 	ldr r6, _08052EBC
 	ldr r4, [r6]
 	adds r0, r4, 0
-	bl sub_80981A0
+	bl GetTutorialFlag
 	lsls r0, 24
 	cmp r0, 0
 	bne _08052EB6
 	adds r0, r4, 0
-	bl sub_8098170
+	bl SetTutorialFlag
 	bl sub_8083E28
 	ldr r4, [r6, 0x4]
 	movs r0, 0
@@ -1369,11 +1369,11 @@ _08052EB6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08052EBC: .4byte gUnknown_80FF290
+_08052EBC: .4byte gHungerTutorial
 	thumb_func_end sub_8052DD0
 
-	thumb_func_start sub_8052EC0
-sub_8052EC0:
+	thumb_func_start HandleOnPickupTutorial
+HandleOnPickupTutorial:
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1387,28 +1387,28 @@ sub_8052EC0:
 	ldr r5, _08052EDC
 	b _08052F22
 	.align 2, 0
-_08052EDC: .4byte gUnknown_80FF310
+_08052EDC: .4byte gFoodTutorial
 _08052EE0:
 	cmp r4, 0x37
 	bne _08052EEC
 	ldr r5, _08052EE8
 	b _08052F22
 	.align 2, 0
-_08052EE8: .4byte gUnknown_80FF394
+_08052EE8: .4byte gOranTutorial
 _08052EEC:
 	cmp r4, 0x43
 	bne _08052EF8
 	ldr r5, _08052EF4
 	b _08052F22
 	.align 2, 0
-_08052EF4: .4byte gUnknown_80FF3E8
+_08052EF4: .4byte gCheriTutorial
 _08052EF8:
 	cmp r4, 0x48
 	bne _08052F04
 	ldr r5, _08052F00
 	b _08052F22
 	.align 2, 0
-_08052F00: .4byte gUnknown_80FF440
+_08052F00: .4byte gBlastSeedTutorial
 _08052F04:
 	cmp r4, 0x7
 	bne _08052F10
@@ -1422,7 +1422,7 @@ _08052F10:
 	ldr r5, _08052F18
 	b _08052F22
 	.align 2, 0
-_08052F18: .4byte gUnknown_80FF518
+_08052F18: .4byte gPechaTutorial
 _08052F1C:
 	cmp r4, 0x45
 	bne _08052F4C
@@ -1430,12 +1430,12 @@ _08052F1C:
 _08052F22:
 	ldr r4, [r5]
 	adds r0, r4, 0
-	bl sub_80981A0
+	bl GetTutorialFlag
 	lsls r0, 24
 	cmp r0, 0
 	bne _08052F74
 	adds r0, r4, 0
-	bl sub_8098170
+	bl SetTutorialFlag
 	bl sub_8083E28
 	ldr r1, [r5, 0x4]
 	movs r0, 0
@@ -1443,19 +1443,19 @@ _08052F22:
 	bl PrintFieldMessage
 	b _08052F74
 	.align 2, 0
-_08052F48: .4byte gUnknown_80FF57C
+_08052F48: .4byte gSleepSeedTutorial
 _08052F4C:
 	cmp r5, 0x69
 	bne _08052F74
 	ldr r5, _08052F7C
 	ldr r4, [r5]
 	adds r0, r4, 0
-	bl sub_80981A0
+	bl GetTutorialFlag
 	lsls r0, 24
 	cmp r0, 0
 	bne _08052F74
 	adds r0, r4, 0
-	bl sub_8098170
+	bl SetTutorialFlag
 	bl sub_8083E28
 	ldr r1, [r5, 0x4]
 	movs r0, 0
@@ -1466,8 +1466,8 @@ _08052F74:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08052F7C: .4byte gUnknown_80FF5E8
-	thumb_func_end sub_8052EC0
+_08052F7C: .4byte gMoneyTutorial
+	thumb_func_end HandleOnPickupTutorial
 
 	thumb_func_start sub_8052F80
 sub_8052F80:

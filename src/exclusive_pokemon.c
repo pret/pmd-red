@@ -163,7 +163,7 @@ bool8 sub_8098134(s16 pokeID)
     return ((ptr->unk4[(index >> 5)] & (1 << (s16)(pokeID_s32_1 - ((index >> 5) * 0x20)))) != 0) ? TRUE : FALSE;
 }
 
-void sub_8098170(s32 param_1)
+void SetTutorialFlag(s32 param_1)
 {
   s32 index;
   struct ExclusivePokemonData *ptr;
@@ -179,7 +179,7 @@ void sub_8098170(s32 param_1)
     ptr->unk54[(index >> 5)] |= 1 << (param_1 - ((index >> 5) * 0x20));
 }
 
-bool32 sub_80981A0(s32 param_1)
+bool32 GetTutorialFlag(s32 param_1)
 {
   s32 index;
   bool32 flag;
@@ -262,7 +262,7 @@ void WriteExclusivePokemon(struct unkStruct_8094924 *r0)
     }
     for(index = 0; index < 31; index++)
     {
-        stack_2 = sub_80981A0(index);
+        stack_2 = GetTutorialFlag(index);
         SaveIntegerBits(r0, &stack_2, 1);
     }
     for(index = 0; index < NUM_EXCLUSIVE_POKEMON; index++)
@@ -301,7 +301,7 @@ void ReadExclusivePokemon(struct unkStruct_8094924 *r0)
     {
         RestoreIntegerBits(r0, &stack_2, 1);
         if(stack_2)
-            sub_8098170(index);
+            SetTutorialFlag(index);
     }
     for(index = 0; index < NUM_EXCLUSIVE_POKEMON; index++)
     {

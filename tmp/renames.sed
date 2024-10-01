@@ -1,0 +1,13 @@
+s/gUnknown_80FF22C/gMovementTutorial/g
+s/gUnknown_80FF290/gHungerTutorial/g
+s/gUnknown_80FF310/gFoodTutorial/g
+s/gUnknown_80FF394/gOranTutorial/g
+s/gUnknown_80FF3E8/gCheriTutorial/g
+s/gUnknown_80FF440/gBlastSeedTutorial/g
+s/gUnknown_80FF490/gGravelerockTutorial/g
+s/gUnknown_80FF518/gPechaTutorial/g
+s/gUnknown_80FF57C/gSleepSeedTutorial/g
+s/gUnknown_80FF5E8/gMoneyTutorial/g
+s/sub_8052EC0/HandleOnPickupTutorial/g
+s/sub_80981A0/GetTutorialFlag/g
+s/sub_8098170/SetTutorialFlag/g

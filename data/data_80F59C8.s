@@ -9605,8 +9605,8 @@ gUnknown_80FF1BC: @ 80FF1BC
 .string "Cooperation with partners is the key!\0"
 .align 2, 0
 
-.global gUnknown_80FF22C
-gUnknown_80FF22C: @ 80FF22C
+.global gMovementTutorial
+gMovementTutorial: @ 80FF22C
 @ replacing .incbin "baserom.gba", 0xFF22C, 0x64
 .byte 0x0e, 0x00, 0x00, 0x00
 .4byte gUnknown_80FF234
@@ -9618,8 +9618,8 @@ gUnknown_80FF234: @ 80FF234
 .string "to move only diagonally.\0"
 .align 2, 0
 
-.global gUnknown_80FF290
-gUnknown_80FF290: @ 80FF290
+.global gHungerTutorial
+gHungerTutorial: @ 80FF290
 @ replacing .incbin "baserom.gba", 0xFF290, 0x80
 .byte 0x0f, 0x00, 0x00, 0x00
 .4byte gUnknown_80FF298
@@ -9631,8 +9631,8 @@ gUnknown_80FF298: @ 80FF298
 .string "fainting, so check your Belly in the menu.\0"
 .align 2, 0
 
-.global gUnknown_80FF310
-gUnknown_80FF310: @ 80FF310
+.global gFoodTutorial
+gFoodTutorial: @ 80FF310
 @ replacing .incbin "baserom.gba", 0xFF310, 0x84
 .byte 0x03, 0x00, 0x00, 0x00
 .4byte gUnknown_80FF318
@@ -9644,8 +9644,8 @@ gUnknown_80FF318: @ 80FF318
 .string "and eat one before your Belly gets empty.\0"
 .align 2, 0
 
-.global gUnknown_80FF394
-gUnknown_80FF394: @ 80FF394
+.global gOranTutorial
+gOranTutorial: @ 80FF394
 @ replacing .incbin "baserom.gba", 0xFF394, 0x54
 .byte 0x04, 0x00, 0x00, 0x00
 .4byte gUnknown_80FF39C
@@ -9657,8 +9657,8 @@ gUnknown_80FF39C: @ 80FF39C
 .string "select it under Items.\0"
 .align 2, 0
 
-.global gUnknown_80FF3E8
-gUnknown_80FF3E8: @ 80FF3E8
+.global gCheriTutorial
+gCheriTutorial: @ 80FF3E8
 @ replacing .incbin "baserom.gba", 0xFF3E8, 0x58
 .byte 0x05, 0x00, 0x00, 0x00
 .4byte gUnknown_80FF3F0
@@ -9670,8 +9670,8 @@ gUnknown_80FF3F0: @ 80FF3F0
 .string "select it under Items.\0"
 .align 2, 0
 
-.global gUnknown_80FF440
-gUnknown_80FF440: @ 80FF440
+.global gBlastSeedTutorial
+gBlastSeedTutorial: @ 80FF440
 @ replacing .incbin "baserom.gba", 0xFF440, 0x60
 .byte 0x06, 0x00, 0x00, 0x00
 .4byte gUnknown_80FF448
@@ -9696,8 +9696,8 @@ gUnknown_80FF4A8: @ 80FF4A8
 .string "Hold {L_BUTTON} then press {R_BUTTON} to throw them.\0"
 .align 2, 0
 
-.global gUnknown_80FF518
-gUnknown_80FF518: @ 80FF518
+.global gPechaTutorial
+gPechaTutorial: @ 80FF518
 @ replacing .incbin "baserom.gba", 0xFF518, 0x64
 .byte 0x09, 0x00, 0x00, 0x00
 .4byte gUnknown_80FF520
@@ -9709,8 +9709,8 @@ gUnknown_80FF520: @ 80FF520
 .string "select it under Items.\0"
 .align 2, 0
 
-.global gUnknown_80FF57C
-gUnknown_80FF57C: @ 80FF57C
+.global gSleepSeedTutorial
+gSleepSeedTutorial: @ 80FF57C
 @ replacing .incbin "baserom.gba", 0xFF57C, 0x6C
 .byte 0x0a, 0x00, 0x00, 0x00
 .4byte gUnknown_80FF584
@@ -9722,8 +9722,8 @@ gUnknown_80FF584: @ 80FF584
 .string "Eating it will put you to sleep!\0"
 .align 2, 0
 
-.global gUnknown_80FF5E8
-gUnknown_80FF5E8: @ 80FF5E8
+.global gMoneyTutorial
+gMoneyTutorial: @ 80FF5E8
 @ replacing .incbin "baserom.gba", 0xFF5E8, 0x8C
 .byte 0x0b, 0x00, 0x00, 0x00
 .4byte gUnknown_80FF5F0
