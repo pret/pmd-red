@@ -287,7 +287,7 @@ void sub_8071DA4(Entity *entity)
 "_08071E44: .4byte gDungeon\n"
 "_08071E48: .4byte 0x000135cc\n"
 "_08071E4C:\n"
-"	movs r1, 0xFE\n"
+"	movs r1, 254\n"
 "	lsls r1, 1\n"
 "	adds r0, r6, r1\n"
 "	ldr r0, [r0]\n"
@@ -472,7 +472,7 @@ void sub_8071DA4(Entity *entity)
 "	cmp r4, 0xB\n"
 "	ble _08071F94\n"
 "_08071FCA:\n"
-"	movs r1, 0xFE\n"
+"	movs r1, 254\n"
 "	lsls r1, 1\n"
 "	adds r0, r6, r1\n"
 "	movs r1, 0\n"
@@ -734,8 +734,8 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
         info->maxHPStat += leveldata.gainHP;
         info->HP += leveldata.gainHP;
 
-        if(info->maxHPStat > 0x3E6)
-            info->maxHPStat = 0x3E7;
+        if(info->maxHPStat > 998)
+            info->maxHPStat = 999;
 
         if(info->HP >= info->maxHPStat)
         {
@@ -752,14 +752,14 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
         gUnknown_202F324[0] += leveldata.gainDef;
         gUnknown_202F324[1] += leveldata.gainSPDef;
 
-        if(gUnknown_202F31C[0] > 0xFE)
-            gUnknown_202F31C[0] = 0xFF;
-        if(gUnknown_202F31C[1] > 0xFE)
-            gUnknown_202F31C[1] = 0xFF;
-        if(gUnknown_202F324[0] > 0xFE)
-            gUnknown_202F324[0] = 0xFF;
-        if(gUnknown_202F324[1] > 0xFE)
-            gUnknown_202F324[1] = 0xFF;
+        if(gUnknown_202F31C[0] > 254)
+            gUnknown_202F31C[0] = 255;
+        if(gUnknown_202F31C[1] > 254)
+            gUnknown_202F31C[1] = 255;
+        if(gUnknown_202F324[0] > 254)
+            gUnknown_202F324[0] = 255;
+        if(gUnknown_202F324[1] > 254)
+            gUnknown_202F324[1] = 255;
 
 
         LoadIQSkills(target);

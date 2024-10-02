@@ -60,9 +60,9 @@ enum menuActions {
     CANCEL_ACTION,
     SEND_THANK_YOU_MAIL_ACTION,
     GET_THANK_YOU_MAIL_ACTION,
-    // 3 - GAME_LINK
+    GAME_LINK_ACTION,
     // 4 - ???
-    // 5 - PASSWORD
+    PASSWORD_ACTION = 5,
     YES_ACTION = 0x7,
     NO_ACTION,
     SEND_ITEM_ACTION,
@@ -132,8 +132,8 @@ const MenuItem gThankYouMailMainMenuItems[4] =
 
 const MenuItem gUnknown_80DEE08[4] =
 {
-    {"Game Link cable", WONDER_MAIL_GAME_LINK},
-    {"Password", WONDER_MAIL_PASSWORD},
+    {"Game Link cable", GAME_LINK_ACTION},
+    {"Password", PASSWORD_ACTION},
     {"Cancel", CANCEL_ACTION},
     {NULL, CANCEL_ACTION},
 };

@@ -62,17 +62,17 @@ void SetShopkeeperAggression(Entity *pokemon, Entity *target)
 
     info = GetEntInfo(target);
 
-    if(info->shopkeeper != 0)
+    if(info->shopkeeper != SHOPKEEPER_MODE_NORMAL)
     {
         if(GetEntityType(pokemon) == ENTITY_MONSTER)
         {
             if(pokemon->info->isNotTeamMember)
             {
-                info->shopkeeper = 2;
+                info->shopkeeper = SHOPKEEPER_MODE_ATTACK_ENEMIES;
             }
             else
             {
-                info->shopkeeper = 3;
+                info->shopkeeper = SHOPKEEPER_MODE_ATTACK_TEAM;
             }
         }
     }
@@ -84,15 +84,15 @@ void sub_806F480(Entity *pokemon, u8 r1)
 
     info = GetEntInfo(pokemon);
 
-    if(info->shopkeeper != 0)
+    if(info->shopkeeper != SHOPKEEPER_MODE_NORMAL)
     {
         if(r1)
         {
-            info->shopkeeper = 2;
+            info->shopkeeper = SHOPKEEPER_MODE_ATTACK_ENEMIES;
         }
         else
         {
-            info->shopkeeper = 3;
+            info->shopkeeper = SHOPKEEPER_MODE_ATTACK_TEAM;
         }
     }
 }
@@ -254,7 +254,7 @@ bool8 sub_806F660(Entity *pokemon,Entity *target)
         iVar4 = DungeonRandInt(1000);
         recruitRate = GetRecruitRate(targetInfo->id);
         if (recruitRate != -999) {
-          if (HasHeldItem(pokemon,0x2e)) { // FRIEND_BOW
+          if (HasHeldItem(pokemon, ITEM_FRIEND_BOW)) { // FRIEND_BOW
             recruitRate += gUnknown_80F5008;
           }
           recruitRate += gUnknown_80F5700[pokemonInfo->level];
