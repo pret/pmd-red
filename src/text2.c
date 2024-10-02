@@ -2528,7 +2528,7 @@ void sub_8007E64(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32
     }
 }
 
-u32 sub_8007FA8(u32 a0)
+u32 FlipPixelsHorizontally(u32 a0)
 {
     u32 r0;
 
@@ -2576,14 +2576,14 @@ void sub_8008030(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32
                     if (strPtr->unk3C > loopUnk18Ptr) {
                         strPtr->unk3C = loopUnk18Ptr;
                     }
-                    loopUnk18Ptr[0] = sub_8007FA8(*(a7++));
-                    loopUnk18Ptr[1] = sub_8007FA8(*(a7++));
-                    loopUnk18Ptr[2] = sub_8007FA8(*(a7++));
-                    loopUnk18Ptr[3] = sub_8007FA8(*(a7++));
-                    loopUnk18Ptr[4] = sub_8007FA8(*(a7++));
-                    loopUnk18Ptr[5] = sub_8007FA8(*(a7++));
-                    loopUnk18Ptr[6] = sub_8007FA8(*(a7++));
-                    loopUnk18Ptr[7] = sub_8007FA8(*(a7++));
+                    loopUnk18Ptr[0] = FlipPixelsHorizontally(*(a7++));
+                    loopUnk18Ptr[1] = FlipPixelsHorizontally(*(a7++));
+                    loopUnk18Ptr[2] = FlipPixelsHorizontally(*(a7++));
+                    loopUnk18Ptr[3] = FlipPixelsHorizontally(*(a7++));
+                    loopUnk18Ptr[4] = FlipPixelsHorizontally(*(a7++));
+                    loopUnk18Ptr[5] = FlipPixelsHorizontally(*(a7++));
+                    loopUnk18Ptr[6] = FlipPixelsHorizontally(*(a7++));
+                    loopUnk18Ptr[7] = FlipPixelsHorizontally(*(a7++));
                     if (strPtr->unk40 < loopUnk18Ptr + 8) {
                         strPtr->unk40 = loopUnk18Ptr + 8;
                     }
@@ -2794,7 +2794,7 @@ const struct unkChar *GetCharacter(s32 chr)
     s32 r2, r4;
     const struct unkChar *ret;
     const struct unkChar *strPtr = gCharmaps[gCurrentCharmap]->unk4;
-    // Fakematch? Or just magic numbers which will make more sense once this file is documented?
+    // TODO: create labels for these
     if (chr > 63487 && chr < 65535)
     {
         s32 r2 = chr & 0xFF;
@@ -3345,14 +3345,14 @@ s32 sub_8008ED0(const u8 *str)
             break;
         if (chr == 0xD)
             break;
-        if (chr == 0xA)
+        if (chr == '\n')
             break;
         if (chr == 0x82A0 || chr == 0x82A2)
             continue;
         if (chr == 0x1B)
             break;
 
-        if (chr == 0x23) {
+        if (chr == '#') {
             if (*strPtr == 0x6E || *strPtr == 0x5B || *strPtr == 0x50)
                 break;
             switch (*strPtr) {
@@ -3374,7 +3374,7 @@ s32 sub_8008ED0(const u8 *str)
                     break;
             }
         }
-        else if (chr == 0x60) {
+        else if (chr == '`') {
             ret += 6;
         }
         else {
@@ -3467,7 +3467,7 @@ void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 wi
         else if (sp.unk34 == 0x1B) {
             break;
         }
-        else if (sp.unk34 == 0xD || sp.unk34 == 0xA) {
+        else if (sp.unk34 == 0xD || sp.unk34 == '\n') {
             sp.unk0 = sp.unkC;
             sp.unk2 += a7;
         }
@@ -3475,7 +3475,7 @@ void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 wi
             sp.unk0 = sp.unkC;
             sp.unk2 += 5;
         }
-        else if (sp.unk34 == 0x60) {
+        else if (sp.unk34 == '`') {
             sp.unk0 += 6;
         }
         else if (a6 == 0) {
@@ -3500,7 +3500,7 @@ const u8 *sub_800915C(s16 *a0, const u8 *str)
 
     while (1)
     {
-        if (*str == 0x2E) {
+        if (*str == '.') {
             str++;
             break;
         }
@@ -4043,8 +4043,8 @@ s32 InterpretColorChar(u8 a0)
 {
     if (a0 < 16)
         return a0;
-    if (a0 >= 48 && a0 <= 63)
-        return a0 - 48;
+    if (a0 >= '0' && a0 <= '?')
+        return a0 - '0';
 
     switch (a0) {
         case 72:
