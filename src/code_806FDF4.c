@@ -226,17 +226,17 @@ bool8 sub_806F660(Entity *pokemon,Entity *target)
   {
     if (((
     (2 < (u16)(targetInfo->id - 0x90)) &&
-    (targetInfo->id != 0x10d) &&
-    (targetInfo->id != 0x10c) &&
-    (targetInfo->id != 0x10e) &&
-    (targetInfo->id != 0x198) &&
-    (targetInfo->id != 0x199) &&
-    (targetInfo->id != 0x19d) &&
-    (targetInfo->id != 0x19c) &&
-    (targetInfo->id != 0x19e) &&
-    (targetInfo->id != 0x195) &&
-    (targetInfo->id != 0x196) &&
-    (targetInfo->id != 0x197)) || (HasRecruitedMon(targetInfo->id) == 0)) &&
+    (targetInfo->id != MONSTER_RAIKOU) &&
+    (targetInfo->id != MONSTER_ENTEI) &&
+    (targetInfo->id != MONSTER_SUICUNE) &&
+    (targetInfo->id != MONSTER_LATIAS) &&
+    (targetInfo->id != MONSTER_LATIOS) &&
+    (targetInfo->id != MONSTER_JIRACHI) &&
+    (targetInfo->id != MONSTER_RAYQUAZA) &&
+    (targetInfo->id != MONSTER_DEOXYS_NORMAL) &&
+    (targetInfo->id != 0MONSTER_REGIROCK &&
+    (targetInfo->id != MONSTER_REGICE) &&
+    (targetInfo->id != MONSTER_REGISTEEL)) || (HasRecruitedMon(targetInfo->id) == 0)) &&
      (sub_806F9BC(targetInfo->id) != 0)) {
     iVar5 = (pokemon->pos).x - (target->pos).x;
     if (iVar5 < 0) {
@@ -792,8 +792,8 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
 
             for(iVar2 = 0; iVar2 < 2; iVar2++)
             {
-                pokeStruct2->offense.att[iVar2] = param_3->att[iVar2];
-                pokeStruct2->offense.def[iVar2] = param_3->def[iVar2];
+                pokeStruct2->offense.att[iVar2] = param_3->offense.att[iVar2];
+                pokeStruct2->offense.def[iVar2] = param_3->offense.def[iVar2];
             }
 
             pokeStruct2->currExp = param_3->exp;
@@ -1052,8 +1052,8 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
 
     for(index2 = 0; index2 < 2; index2++)
     {
-      pokeStruct2->offense.att[index2] = local_74.att[index2];
-      pokeStruct2->offense.def[index2] = local_74.def[index2];
+      pokeStruct2->offense.att[index2] = local_74.offense.att[index2];
+      pokeStruct2->offense.def[index2] = local_74.offense.def[index2];
     }
       
     pokeStruct2->currExp = local_74.exp;
