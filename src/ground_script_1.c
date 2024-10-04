@@ -1110,8 +1110,17 @@ s32 ExecuteScriptCommand(Action *action) {
                 s32 cap1 = curCmd.arg1 * 2 - 1;
                 s32 cap2 = curCmd.arg2 * 2 - 1;
                 action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
+                // BUG: (or two): these lines use the wrong script command arguments to calculate the position offset
+                // making the target position nonsense. But even if they were correct,
+                // the way the cap is calculated would make the random offset biased off-center.
+                // This doesn't affect the released version because these script commands are never used.
+#ifndef BUGFIX
                 scriptData->pos2.x = scriptData->pos1.x + ((OtherRandInt(cap1) - curCmd.argShort) << 8);
                 scriptData->pos2.y = scriptData->pos1.y + ((OtherRandInt(cap2) - curCmd.arg1) << 8);
+#else
+                scriptData->pos2.x = scriptData->pos1.x + ((OtherRandInt(curCmd.arg1 * 2 + 1) - curCmd.arg1) << 8);
+                scriptData->pos2.y = scriptData->pos1.y + ((OtherRandInt(curCmd.arg2 * 2 + 1) - curCmd.arg2) << 8);
+#endif
                 if (curCmd.op == 0x7f || curCmd.op == 0x85) {
                     scriptData->unk2A = sub_8009FB8(scriptData->pos2.x - scriptData->pos1.x, scriptData->pos2.y - scriptData->pos1.y) / curCmd.argShort;
                     if (scriptData->unk2A <= 0) scriptData->unk2A = 1;

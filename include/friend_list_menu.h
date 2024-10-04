@@ -1,6 +1,11 @@
 #ifndef INCLUDE_FRIEND_LIST_MENU_H
 #define INCLUDE_FRIEND_LIST_MENU_H
 
+#include "structs/menu.h"
+#include "structs/str_items.h"
+#include "structs/str_moves.h"
+#include "structs/str_pokemon.h"
+
 // there might be more overlap with unkStruct_203B2BC
 // I was working on the moves and put the data that seemed to correspond to that
 // into a separate struct

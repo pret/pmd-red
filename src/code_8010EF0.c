@@ -1,9 +1,5 @@
 #include "global.h"
-#include "code_8010EF0.h"
-
-extern struct UnkBgStruct *gUnknown_203B0E4;
-
-extern void CloseFile(OpenedFile *);
+#include "code_8004AA0.h"
 
 void sub_8010EF0(void)
 {

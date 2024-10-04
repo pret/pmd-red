@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_DUNGEON_ACTION_H
 #define GUARD_CONSTANTS_DUNGEON_ACTION_H
 
-enum Action
+enum DungeonAction
 {
     ACTION_NOTHING = 0x0,
     ACTION_PASS_TURN = 0x1,

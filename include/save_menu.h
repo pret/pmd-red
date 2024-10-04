@@ -1,6 +1,8 @@
 #ifndef GUARD_SAVE_MENU_H
 #define GUARD_SAVE_MENU_H
 
+#include "structs/menu.h"
+
 // size: 0x1B4
 typedef struct SaveMenuWork
 {
