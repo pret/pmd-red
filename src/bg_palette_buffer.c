@@ -22,7 +22,7 @@ void InitBGPaletteBuffer(void)
 }
 
 // 99.48% (r3/r4 regswap) https://decomp.me/scratch/7Yc8i
-void SetBGPaletteBufferColorRGB(s32 index, u8 *colorArray, s32 a1, u8 *a2)
+void SetBGPaletteBufferColorRGB(s32 index, const u8 *colorArray, s32 a1, u8 *a2)
 {
     #ifdef NONMATCHING
     s32 var;
@@ -43,7 +43,7 @@ void SetBGPaletteBufferColorRGB(s32 index, u8 *colorArray, s32 a1, u8 *a2)
         sBGPaletteBuffer[index] = var = ((a2[4 * colorArray[2] + 2] * a1 / 256 & 0x1F) << 10) | ((a2[4 * colorArray[1] + 1] * a1 / 256 & 0x1F) << 5) | (a2[4 * colorArray[0]] * a1 / 256 & 0x1F);
 }
 
-void SetBGPaletteBufferColorArray(s32 index, u8 *colorArray)
+void SetBGPaletteBufferColorArray(s32 index, const u8 *colorArray)
 {
     sBGPaletteUsed[index / BG_PALETTE_BUFFER_CHUNK_SIZE] = TRUE;
     sBGPaletteBuffer[index] = (colorArray[2] >> 3) << 10 | (colorArray[1] >> 3) << 5 | colorArray[0] >> 3;
@@ -55,7 +55,7 @@ void SetBGPaletteBufferColor(s32 index, u16 *color)
     sBGPaletteBuffer[index] = *color;
 }
 
-void nullsub_4(s32 index, u8 *colorArray, s32 a1, u8 *a2)
+void nullsub_4(s32 index, const u8 *colorArray, s32 a1, u8 *a2)
 {
 }
 
