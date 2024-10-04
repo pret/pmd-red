@@ -20,7 +20,7 @@ EWRAM_DATA unkStruct_202F3D0 gUnknown_202F3D0 = {0};
 extern u32 gUnknown_8107314[];
 
 s8 sub_8002984(s8, u8);
-extern void sub_803E9D0(void);
+extern void BgColorCallNullsub4(void);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern void PlaySoundEffect(u32);
 extern void DisplayDungeonDialogue(const u8 *);
@@ -347,7 +347,7 @@ void sub_8086794(void)
 
     for (i = 0; i < 200; i++) {
         SetDungeonBGColorRGB(0, 0, 0, 1, 0);
-        sub_803E9D0();
+        BgColorCallNullsub4();
         sub_803E46C(70);
 
         if ((i & 3) == 0) {

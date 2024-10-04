@@ -71,7 +71,7 @@ void sub_803E874(bool8 r10, s32 r9)
     }
 }
 
-void sub_803E9D0(void)
+void BgColorCallNullsub4(void)
 {
     s32 i, index, count;
     const u8 *colorArray;
@@ -84,4 +84,36 @@ void sub_803E9D0(void)
         colorArray += 4;
         index++;
     }
+}
+
+void sub_803EA10(void)
+{
+    s32 i, index, count;
+    const u8 *colorArray;
+
+    colorArray = gDungeonPaletteFile->unk4;
+    SetBGPaletteBufferColorRGB(0, gUnknown_80F62AC, gUnknown_202EDC8, (void *) &gDungeon->unk17C);
+    colorArray += 4;
+    index = 1;
+    count = 159;
+    for (i = 0; i < count; i++) {
+        SetBGPaletteBufferColorRGB(index, colorArray, gUnknown_202EDC8, (void *) &gDungeon->unk17C);
+        colorArray += 4;
+        index++;
+    }
+
+    if (gDungeon->unk181e8.unk18215 == 0 || gDungeon->unk1C06C == 3) {
+        sub_8004AF0(TRUE, gUnknown_202EE8C, 0xA0, 0x20, gUnknown_202EDC8, (void *) &gDungeon->unk17C);
+    }
+
+    index += 32;
+    colorArray = gUnknown_202ECA4;
+    count = 32;
+    for (i = 0; i < count; i++) {
+        SetBGPaletteBufferColorRGB(index, colorArray, gUnknown_202EDC8, (void *) &gDungeon->unk17C);
+        colorArray += 4;
+        index++;
+    }
+
+    SetBGPaletteBufferColorRGB(248, gUnknown_202D058, gUnknown_202EDC8, NULL);
 }
