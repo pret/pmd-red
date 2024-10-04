@@ -3343,33 +3343,31 @@ s32 sub_8008ED0(const u8 *str)
         str = strPtr;
         if (chr == 0)
             break;
-        if (chr == 0xD)
-            break;
-        if (chr == '\n')
+        if (chr == '\r' || chr == '\n')
             break;
         if (chr == 0x82A0 || chr == 0x82A2)
             continue;
-        if (chr == 0x1B)
+        if (chr == '\e')
             break;
 
         if (chr == '#') {
-            if (*strPtr == 0x6E || *strPtr == 0x5B || *strPtr == 0x50)
+            if (*strPtr == 'n' || *strPtr == '[' || *strPtr == 'P')
                 break;
             switch (*strPtr) {
-                case 0x3D:
-                case 0x7E:
+                case '=':
+                case '~':
                     str = strPtr + 2;
                     break;
-                case 0x43:
-                case 0x63:
+                case 'C':
+                case 'c':
                     str += 2;
                     break;
-                case 0x52:
-                case 0x72:
+                case 'R':
+                case 'r':
                     str++;
                     break;
-                case 0x2B:
-                case 0x57:
+                case '+':
+                case 'W':
                     str = strPtr + 1;
                     break;
             }
@@ -3464,14 +3462,14 @@ void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 wi
         else if (sp.unk34 == 0x82A2) {
             gCurrentCharmap = 1;
         }
-        else if (sp.unk34 == 0x1B) {
+        else if (sp.unk34 == '\e') {
             break;
         }
-        else if (sp.unk34 == 0xD || sp.unk34 == '\n') {
+        else if (sp.unk34 == '\r' || sp.unk34 == '\n') {
             sp.unk0 = sp.unkC;
             sp.unk2 += a7;
         }
-        else if (sp.unk34 == 0x1D) {
+        else if (sp.unk34 == '\x1D') { // ASCII group separator.
             sp.unk0 = sp.unkC;
             sp.unk2 += 5;
         }
@@ -4047,21 +4045,21 @@ s32 InterpretColorChar(u8 a0)
         return a0 - '0';
 
     switch (a0) {
-        case 72:
-        case 73:
+        case 'H':
+        case 'I':
             return 4;
-        case 69:
-        case 83:
-        case 84:
+        case 'E':
+        case 'S':
+        case 'T':
             return 15;
-        case 71:
-        case 77:
+        case 'G':
+        case 'M':
             return 5;
-        case 67:
-        case 68:
-        case 78:
+        case 'C':
+        case 'D':
+        case 'N':
             return 6;
-        case 87:
+        case 'W':
             return 2;
 
     }
