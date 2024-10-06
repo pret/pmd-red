@@ -103,11 +103,11 @@ const UnkTextStruct2 gUnknown_80DED60 =
 extern const u8 SendItem_Text[];
 extern const u8 DontSendItem_Text[];
 
-const MenuItem gUnknown_80DED78[3] =
+const MenuItem gUnknown_80DED78[] =
 {
     {"Confirm", CONFIRM_ACTION},
     {"Info", INFO_ACTION},
-    {NULL, CANCEL_ACTION},
+    {},
 };
 
 // Unused
@@ -122,60 +122,60 @@ const UnkTextStruct2 gUnknown_80DEDA0 =
 };
 
 
-const MenuItem gThankYouMailMainMenuItems[4] =
+const MenuItem gThankYouMailMainMenuItems[] =
 {
     {"Send Thank-You Mail", SEND_THANK_YOU_MAIL_ACTION},
     {"Get Thank-You Mail", GET_THANK_YOU_MAIL_ACTION},
     {"Cancel", CANCEL_ACTION},
-    {NULL, CANCEL_ACTION},
+    {},
 };
 
-const MenuItem gUnknown_80DEE08[4] =
+const MenuItem gUnknown_80DEE08[] =
 {
     {"Game Link cable", GAME_LINK_ACTION},
     {"Password", PASSWORD_ACTION},
     {"Cancel", CANCEL_ACTION},
-    {NULL, CANCEL_ACTION},
+    {},
 };
 
-const MenuItem gUnknown_80DEE44[3] =
+const MenuItem gUnknown_80DEE44[] =
 {
     {"Yes", YES_ACTION},
     {"Cancel", CANCEL_ACTION},
-    {NULL, CANCEL_ACTION},
+    {},
 };
 
-const MenuItem gUnknown_80DEE60[3] =
+const MenuItem gUnknown_80DEE60[] =
 {
     {"Yes", YES_ACTION},
     {"No", NO_ACTION},
-    {NULL, CANCEL_ACTION},
+    {},
 };
 
-const MenuItem gUnknown_80DEE7C[4] =
+const MenuItem gUnknown_80DEE7C[] =
 {
     {SendItem_Text, SEND_ITEM_ACTION},
     {DontSendItem_Text, NO_SEND_ITEM_ACTION},
     {"Cancel", CANCEL_ACTION},
-    {NULL, CANCEL_ACTION},
+    {},
 };
 
 ALIGNED(4) static const u8 DontSendItem_Text[] =  _("Don{APOSTROPHE}t Send Item");
 ALIGNED(4) static const u8 SendItem_Text[] = "Send Item";
 
-const MenuItem gUnknown_80DEEBC[3] =
+const MenuItem gUnknown_80DEEBC[] =
 {
     {"Send w/o Item", NO_SEND_ITEM_ACTION},
     {"Cancel", CANCEL_ACTION},
-    {NULL, CANCEL_ACTION},
+    {},
 };
 
-const MenuItem gUnknown_80DEEE4[4] =
+const MenuItem gUnknown_80DEEE4[] =
 {
     {"Yes", YES_ACTION},
     {"No", NO_ACTION},
     {"Cancel", CANCEL_ACTION},
-    {NULL, CANCEL_ACTION},
+    {},
 };
 
 #include "data/thank_you_wonder_mail.h"
