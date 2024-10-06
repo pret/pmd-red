@@ -622,7 +622,7 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(PokemonStruct2 * a1, PokemonStruct1 *
     a1->level = pokemon->level;
     a1->IQ = pokemon->IQ;
     a1->IQSkills = pokemon->IQSkills;
-    sub_808E6F4(&a1->unk54);
+    GenerateHiddenPower(&a1->hiddenPower);
     a1->dungeonLocation = pokemon->dungeonLocation;
     a1->isTeamLeader = pokemon->isTeamLeader;
     a1->unkA = a3;
@@ -655,8 +655,8 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(PokemonStruct2 * a1, PokemonStruct1 *
         slot->flags = 0;
     }
 
-  a1->unk44 = IntToFixedPoint(100);
-  a1->unk48 = IntToFixedPoint(100);
+    a1->belly = IntToFixedPoint(100);
+    a1->maxBelly = IntToFixedPoint(100);
 }
 
 void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, PokemonStruct2* a2)

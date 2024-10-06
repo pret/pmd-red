@@ -168,6 +168,12 @@ typedef struct Unk_Entity_x184
     /* 0x19e - 0x1a */ u8 unk1A;
 } Unk_Entity_x184 ;
 
+typedef struct Moves
+{
+    /* 0x118 */ Move moves[MAX_MON_MOVES];
+    /* 0x138 */ u8 struggleMoveFlags;
+} Moves;
+
 // size: 0x208
 typedef struct EntityInfo
 {
@@ -272,8 +278,7 @@ typedef struct EntityInfo
     // When non-zero, an AI Pokémon will move in a random direction every turn when it is a room.
     // There is a chance of this flag being set when a wild Pokémon spawns. The chance depends on the dungeon's randomMovementChance.
     /* 0x114 */ u32 moveRandomly;
-    /* 0x118 */ Move moves[MAX_MON_MOVES];
-    /* 0x138 */ u8 struggleMoveFlags;
+    /* 0x118 */ Moves moves;
     /* 0x13C */ FixedPoint belly;
     /* 0x140 */ FixedPoint maxBelly;
     /* 0x144 */ bool8 aiNextToTarget; // True if an AI Pokémon is following another Pokémon and is already adjacent to them.

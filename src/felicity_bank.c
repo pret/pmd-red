@@ -27,7 +27,7 @@ static void UpdateFelicityBankDialogue(void);
 static void UpdateFelicityBankState(u32 newState);
 
 static void sub_801645C(void);
-static void sub_80169BC(void);
+static void HandleFelicityBankShopMenu(void);
 static void sub_8016B00(void);
 static void sub_8016B24(void);
 static void sub_8016B48(u8 action);
@@ -37,6 +37,18 @@ enum MenuActions {
     STORE_ACTION,
     TAKE_ACTION,
     INFO_ACTION
+};
+
+enum FelicityBankStates {
+    FELICITY_BANK_INIT,
+    FELICITY_BANK_INFO = 3,
+    FELICITY_BANK_EXIT = 6,
+    FELICITY_BANK_STORE,
+    FELICITY_BANK_STORE_HOW_MUCH,
+    FELICITY_BANK_STORE_RECEIPT,
+    FELICITY_BANK_TAKE,
+    FELICITY_BANK_TAKE_HOW_MUCH,
+    FELICITY_BANK_TAKE_DEPOSIT,
 };
 
 bool8 CreateFelicityBank(s32 mode)
@@ -67,7 +79,7 @@ bool8 CreateFelicityBank(s32 mode)
     sFelicityBankWork->unkA2 = 0;
     sFelicityBankWork->unk9C = 2;
     sFelicityBankWork->unk9E = 8;
-    UpdateFelicityBankState(0);
+    UpdateFelicityBankState(FELICITY_BANK_INIT);
     return TRUE;
 }
 
@@ -78,24 +90,24 @@ u32 FelicityBankCallback(void)
             sub_8016B24();
             break;
         case 2:
-            sub_80169BC();
+            HandleFelicityBankShopMenu();
             break;
-        case 8:
+        case FELICITY_BANK_STORE_HOW_MUCH:
             Felicity_DepositMoney();
             break;
-        case 11:
+        case FELICITY_BANK_TAKE_HOW_MUCH:
             Felicity_WithdrawMoney();
             break;
-        case 6:
+        case FELICITY_BANK_EXIT:
             return 3;
-        case 0:
-        case 3:
+        case FELICITY_BANK_INIT:
+        case FELICITY_BANK_INFO:
         case 4:
         case 5:
-        case 7:
-        case 9:
-        case 10:
-        case 12:
+        case FELICITY_BANK_STORE:
+        case FELICITY_BANK_STORE_RECEIPT:
+        case FELICITY_BANK_TAKE:
+        case FELICITY_BANK_TAKE_DEPOSIT:
         default:
             sub_8016B00();
             break;
@@ -134,8 +146,8 @@ static void sub_801645C(void)
             ResetUnusedInputStruct();
             xxx_call_save_unk_text_struct_800641C(sFelicityBankWork->unkA8, TRUE, FALSE);
             break;
-        case 8:
-        case 11:
+        case FELICITY_BANK_STORE_HOW_MUCH:
+        case FELICITY_BANK_TAKE_HOW_MUCH:
             sFelicityBankWork->unkA8[0].unk0 = 0x80;
             sFelicityBankWork->unkA8[1].unk0 = 0x80;
             sFelicityBankWork->unkA8[3] = sUnknown_80DB6F4;
@@ -156,7 +168,7 @@ static void sub_801645C(void)
 static void UpdateFelicityBankDialogue(void)
 {
     switch (sFelicityBankWork->currState) {
-        case 0:
+        case FELICITY_BANK_INIT:
             sFelicityBankWork->fallbackState = 1;
             xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WELCOME], 0, sFelicityBankWork->unkA4, 0x10D);
             break;
@@ -172,12 +184,12 @@ static void UpdateFelicityBankDialogue(void)
                     sFelicityBankWork->unk14, sFelicityBankWork->unk54, 4, 0, sFelicityBankWork->unkA4, 0xC);
             }
             break;
-        case 3:
+        case FELICITY_BANK_INFO:
             sFelicityBankWork->fallbackState = 1;
             xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_HOW_IT_WORKS], 0, sFelicityBankWork->unkA4, 0x10D);
             break;
         case 4:
-            sFelicityBankWork->fallbackState = 6;
+            sFelicityBankWork->fallbackState = FELICITY_BANK_EXIT;
             if (gTeamInventoryRef->teamSavings == 0)
                 xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_BYE__NO_MONEY], 0, sFelicityBankWork->unkA4, 0x10D);
             else {
@@ -189,7 +201,7 @@ static void UpdateFelicityBankDialogue(void)
             sFelicityBankWork->fallbackState = 1;
             xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_VERY_WELL], 0, sFelicityBankWork->unkA4, 0x10D);
             break;
-        case 7:
+        case FELICITY_BANK_STORE:
             if (gTeamInventoryRef->teamMoney == 0) {
                 sFelicityBankWork->fallbackState = 1;
                 xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_DEPOSIT__NO_MONEY], 0, sFelicityBankWork->unkA4, 0x10D);
@@ -199,11 +211,11 @@ static void UpdateFelicityBankDialogue(void)
                 xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_DEPOSIT__BANK_FULL], 0, sFelicityBankWork->unkA4, 0x10D);
             }
             else {
-                sFelicityBankWork->fallbackState = 8;
+                sFelicityBankWork->fallbackState = FELICITY_BANK_STORE_HOW_MUCH;
                 xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_DEPOSIT__HOW_MUCH], 0, sFelicityBankWork->unkA4, 0x10D);
             }
             break;
-        case 8:
+        case FELICITY_BANK_STORE_HOW_MUCH:
             sFelicityBankWork->unk64.unkC = MAX_TEAM_SAVINGS - gTeamInventoryRef->teamSavings;
             if (sFelicityBankWork->unk64.unkC > gTeamInventoryRef->teamMoney)
                 sFelicityBankWork->unk64.unkC = gTeamInventoryRef->teamMoney;
@@ -218,12 +230,12 @@ static void UpdateFelicityBankDialogue(void)
             sub_8016B48(FELICITY_BANK_ACTION_DEPOSIT);
             CreateFelicityMoneySavingsHeader(3);
             break;
-        case 9:
+        case FELICITY_BANK_STORE_RECEIPT:
             sFelicityBankWork->fallbackState = 1;
             gFormatData_202DE30 = sFelicityBankWork->chosenAmount;
             xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_DEPOSIT__RECEIPT], 0, sFelicityBankWork->unkA4, 0x10D);
             break;
-        case 10:
+        case FELICITY_BANK_TAKE:
             if (gTeamInventoryRef->teamMoney >= MAX_TEAM_MONEY) {
                 sFelicityBankWork->fallbackState = 1;
                 xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WITHDRAW__WALLET_FULL], 0, sFelicityBankWork->unkA4, 0x10D);
@@ -233,12 +245,12 @@ static void UpdateFelicityBankDialogue(void)
                 xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WITHDRAW__NO_MONEY], 0, sFelicityBankWork->unkA4, 0x10D);
             }
             else {
-                sFelicityBankWork->fallbackState = 11;
+                sFelicityBankWork->fallbackState = FELICITY_BANK_TAKE_HOW_MUCH;
                 gFormatData_202DE30 = gTeamInventoryRef->teamSavings;
                 xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WITHDRAW__HOW_MUCH], 0, sFelicityBankWork->unkA4, 0x10D);
             }
             break;
-        case 11:
+        case FELICITY_BANK_TAKE_HOW_MUCH:
             sFelicityBankWork->unk64.unkC = MAX_TEAM_MONEY - gTeamInventoryRef->teamMoney;
             if (sFelicityBankWork->unk64.unkC > gTeamInventoryRef->teamSavings)
                 sFelicityBankWork->unk64.unkC = gTeamInventoryRef->teamSavings;
@@ -256,7 +268,7 @@ static void UpdateFelicityBankDialogue(void)
         case 2:
             CreateFelicityMoneySavingsHeader(3);
             break;
-        case 12:
+        case FELICITY_BANK_TAKE_DEPOSIT:
             sFelicityBankWork->fallbackState = 1;
             gFormatData_202DE30 = sFelicityBankWork->chosenAmount;
             xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WITHDRAW__RECEIPT], 0, sFelicityBankWork->unkA4, 0x10D);
@@ -304,7 +316,7 @@ static void CreateFelicityBankShopMenu(void)
     }
 }
 
-static void sub_80169BC(void)
+static void HandleFelicityBankShopMenu(void)
 {
     s32 menuAction;
 
@@ -314,13 +326,13 @@ static void sub_80169BC(void)
     sFelicityBankWork->menuAction = menuAction;
     switch (menuAction) {
         case STORE_ACTION:
-            UpdateFelicityBankState(7);
+            UpdateFelicityBankState(FELICITY_BANK_STORE);
             break;
         case TAKE_ACTION:
-            UpdateFelicityBankState(10);
+            UpdateFelicityBankState(FELICITY_BANK_TAKE);
             break;
         case INFO_ACTION:
-            UpdateFelicityBankState(3);
+            UpdateFelicityBankState(FELICITY_BANK_INFO);
             break;
         case CANCEL_ACTION:
             UpdateFelicityBankState(4);
@@ -339,7 +351,7 @@ static void Felicity_DepositMoney(void)
             gTeamInventoryRef->teamSavings += sFelicityBankWork->chosenAmount;
             gTeamInventoryRef->teamMoney -= sFelicityBankWork->chosenAmount;
             PlaySound(332);
-            UpdateFelicityBankState(9);
+            UpdateFelicityBankState(FELICITY_BANK_STORE_RECEIPT);
             break;
         case 2:
             UpdateFelicityBankState(5);
@@ -360,7 +372,7 @@ static void Felicity_WithdrawMoney(void)
             gTeamInventoryRef->teamMoney += sFelicityBankWork->chosenAmount;
             gTeamInventoryRef->teamSavings -= sFelicityBankWork->chosenAmount;
             PlaySound(332);
-            UpdateFelicityBankState(12);
+            UpdateFelicityBankState(FELICITY_BANK_TAKE_DEPOSIT);
             break;
         case 2:
             UpdateFelicityBankState(5);

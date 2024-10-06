@@ -21,13 +21,14 @@
 #include "text1.h"
 #include "text2.h"
 #include "wonder_mail.h"
+#include "wonder_mail_4.h"
+#include "wonder_mail_5.h"
 
 static EWRAM_DATA_2 WonderMailStruct_203B2C0 *sUnknown_203B2C0 = {0};
 
 extern void sub_8011C28(u32);
 
 extern void sub_809927C(u8);
-extern bool8 HasNoWonderMailType(u32);
 extern u32 sub_8031050();
 extern void sub_80310B4();
 
@@ -36,28 +37,15 @@ extern char gAvailablePokemonNames[0x50];
 
 extern void nullsub_130(void);
 extern void sub_8028348(void);
-extern void sub_803084C();
-extern u32 sub_8030768(u32);
-extern s8 sub_80307EC();
-extern void sub_8030D40(u8, u32);
-extern void sub_8030810(u32);
-extern u32 sub_8030DA0(void);
-extern void sub_8030DE4(void);
-extern void sub_803092C(void);
 
 extern u32 sub_8039068(u32, u8 *r1, unkStruct_203B480 *r0);
-extern void sub_8095274(u32);
 extern u32 sub_8031DCC();
 extern void sub_8031E10();
 extern void sub_8031E00();
 extern void sub_8031E10(void);
-extern void sub_803084C(void);
-extern void sub_8030DE4();
-extern void sub_80306A8(u32, u32, u32, u32);
 extern s32 sub_8037B28(u32);
 extern void sub_8031D70(u8, u32);
 extern u32 sub_8023CE8(void);
-extern u32 sub_8030894(void);
 extern void sub_8030F58(u32);
 extern void sub_8029B34(void);
 extern void sub_8029AD8(void);
@@ -111,9 +99,7 @@ extern void sub_8029044(void);
 extern void sub_8028CFC(void);
 extern void sub_8028D4C(void);
 extern void sub_8031E10(void);
-extern void sub_803084C(void);
 extern void sub_80310B4(void);
-extern void sub_8030DE4(void);
 
 extern const u8 DontSendPokemon_80DDB80[];
 extern const u8 SendPokemon_80DDB98[];
@@ -632,7 +618,7 @@ void sub_8028348(void)
                 ResetUnusedInputStruct();
                 xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
                 // SOS Mail
-                sub_80306A8(2, 0, 0, 6);
+                sub_80306A8(WONDER_MAIL_TYPE_SOS_1, 0, 0, 6);
             }
             break;
         case 0x20:
@@ -1356,7 +1342,7 @@ void sub_802939C(void)
         }
         else
         {
-            SetFriendRescueCounterState(0x2);
+            SetFriendRescueCounterState(FRIEND_RESCUE_EXIT_PRE);
         }
     }
 }
@@ -1400,7 +1386,7 @@ void sub_80293F4(void)
                         mail.mailType = 2;
                         sub_80951BC(&mail);
                         xxx_info_box_80141B4(gWonderMailAOKMailReceivedText, 0, &sUnknown_203B2C0->faceFile, 0x101);
-                        SetFriendRescueCounterState(0x23);
+                        SetFriendRescueCounterState(RECEIVED_FRIEND_SOS_MAIL);
                         break;
                     case 23:
                     case 24:

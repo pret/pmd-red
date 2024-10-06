@@ -95,18 +95,18 @@ void DecideAttack(Entity *pokemon)
     {
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            if (pokemonInfo->moves[i].moveFlags & MOVE_FLAG_EXISTS &&
-                MoveMatchesChargingStatus(pokemon, &pokemonInfo->moves[i]) &&
+            if (pokemonInfo->moves.moves[i].moveFlags & MOVE_FLAG_EXISTS &&
+                MoveMatchesChargingStatus(pokemon, &pokemonInfo->moves.moves[i]) &&
                 pokemonInfo->charging.chargingStatusMoveIndex == i)
             {
                 s32 chosenMoveIndex;
                 SetMonsterActionFields(&pokemonInfo->action, ACTION_USE_MOVE_AI);
                 chosenMoveIndex = i;
-                if (i > 0 && pokemonInfo->moves[i].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)
+                if (i > 0 && pokemonInfo->moves.moves[i].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)
                 {
                     while (--chosenMoveIndex > 0)
                     {
-                        if (!(pokemonInfo->moves[chosenMoveIndex].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+                        if (!(pokemonInfo->moves.moves[chosenMoveIndex].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
                         {
                             break;
                         }
@@ -122,10 +122,10 @@ void DecideAttack(Entity *pokemon)
     numUsableMoves = 0;
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        Move *move = &pokemonInfo->moves[i];
-        if (pokemonInfo->moves[i].moveFlags & MOVE_FLAG_EXISTS)
+        Move *move = &pokemonInfo->moves.moves[i];
+        if (pokemonInfo->moves.moves[i].moveFlags & MOVE_FLAG_EXISTS)
         {
-            if (pokemonInfo->moves[i].moveFlags & MOVE_FLAG_ENABLED_FOR_AI)
+            if (pokemonInfo->moves.moves[i].moveFlags & MOVE_FLAG_ENABLED_FOR_AI)
             {
                 numUsableMoves++;
             }
@@ -161,7 +161,7 @@ void DecideAttack(Entity *pokemon)
         // This requires a separate check from the 0-PP check used for unlinked moves.
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            Move *move = &pokemonInfo->moves[i];
+            Move *move = &pokemonInfo->moves.moves[i];
             if (!(move->moveFlags & MOVE_FLAG_EXISTS))
             {
                 break;
@@ -202,7 +202,7 @@ void DecideAttack(Entity *pokemon)
     {
         Move *move;
         aiPossibleMove[i].canBeUsed = FALSE;
-        move = &pokemonInfo->moves[i];
+        move = &pokemonInfo->moves.moves[i];
         if (move->moveFlags & MOVE_FLAG_EXISTS &&
             willNotUnlinkMove[i] &&
             CanAIUseMove(pokemon, i, hasPPChecker) &&
@@ -319,17 +319,17 @@ void DecideAttack(Entity *pokemon)
                 }
                 else
                 {
-                    AIConsiderMove(&aiPossibleMove[i], pokemon, &pokemonInfo->moves[i]);
+                    AIConsiderMove(&aiPossibleMove[i], pokemon, &pokemonInfo->moves.moves[i]);
                     if (aiPossibleMove[i].canBeUsed)
                     {
                         s32 chosenMoveIndex;
                         SetMonsterActionFields(&pokemonInfo->action, ACTION_USE_MOVE_AI);
                         chosenMoveIndex = i;
-                        if (i > 0 && pokemonInfo->moves[i].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)
+                        if (i > 0 && pokemonInfo->moves.moves[i].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)
                         {
                             while (--chosenMoveIndex > 0)
                             {
-                                if (!(pokemonInfo->moves[chosenMoveIndex].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+                                if (!(pokemonInfo->moves.moves[chosenMoveIndex].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
                                 {
                                     break;
                                 }
@@ -1012,7 +1012,7 @@ void HandleUseOrbAction(Entity *pokemon)
         if (!entityInfo->isTeamLeader) {
             sp28.canBeUsed = r8;
             sp28.weight = 10;
-            AIConsiderMove(&sp28, pokemon, entityInfo->moves);
+            AIConsiderMove(&sp28, pokemon, entityInfo->moves.moves);
 
             if (sp28.canBeUsed) {
                 entityInfo->action.direction = sp28.direction & 7;

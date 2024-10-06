@@ -14,6 +14,7 @@
 #include "text1.h"
 #include "text2.h"
 #include "structs/struct_sub80095e4.h"
+#include "wonder_mail_4.h"
 
 struct unkStruct_203B320
 {
@@ -53,7 +54,7 @@ extern const u8 ThanksList[];
 extern const u8 CompletedJobs[];
 extern const u8 OkdRescue[];
 
-const u8 * const gUnknown_80E086C[] =
+const u8 * const gUnknown_80E086C[MAX_WONDER_MAIL_TYPES] =
 {
     SOSList,
     RequestList,
@@ -74,10 +75,8 @@ ALIGNED(4) const u8 SOSMail[] = "SOS Mail";
 ALIGNED(4) const u8 RequestList[] = "Request List";
 ALIGNED(4) const u8 SOSList[] = "SOS List";
 
-extern bool8 HasNoWonderMailType(u32);
-extern s32 sub_8030A74(void);
-extern void sub_80308A0(void);
-extern void sub_803092C(void);
+s32 sub_8030A74(void);
+void sub_80308A0(void);
 
 u32 sub_80306A8(u32 wonderMailType, u32 r1, UnkTextStruct2_sub *r2, u32 r3)
 {
@@ -125,7 +124,7 @@ u32 sub_8030768(u8 r0)
             PlayMenuSoundEffect(0);
             return 3;
         default:
-            if(sub_80138B8(&gUnknown_203B320->s28.s0.input, 1) != 0)
+            if(sub_80138B8(&gUnknown_203B320->s28.s0.input, TRUE) != 0)
             {
                 sub_80308A0();
                 sub_803092C();
@@ -152,7 +151,7 @@ void sub_8030810(u8 r0)
         AddMenuCursorSprite(&gUnknown_203B320->s28.s0.input);
 }
 
-void sub_803084C()
+void sub_803084C(void)
 {
     if(gUnknown_203B320 != NULL)
     {
@@ -164,7 +163,7 @@ void sub_803084C()
     }
 }
 
-u8 *sub_8030894()
+u8 *sub_8030894(void)
 {
     return gUnknown_203B320->unk0;
 }

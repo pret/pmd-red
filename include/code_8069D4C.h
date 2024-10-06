@@ -3,22 +3,26 @@
 
 #include "structs/dungeon_entity.h"
 
+// NOTE: basically Offense struct but packed to match
+struct unkStruct_8069D4C_sub
+{
+
+    u8 att[2]; // Atk, SpAtk
+    u8 def[2]; // Def, SpDef
+} __attribute__((packed));
+
 struct unkStruct_8069D4C
 {
     s16 id;
     Position pos;
     s16 HP;
-    u8 atk;
-    u8 spAtk;
-    u8 def;
-    u8 spDef;
+    struct unkStruct_8069D4C_sub offense;
     u16 level;
     u32 exp;
     FixedPoint belly;
     FixedPoint maxBelly;
     Item heldItem;
-    Move moves[MAX_MON_MOVES];
-    u32 unk40; // strugglemoveFlags?
+    Moves moves;
     HiddenPower hiddenPower;
 };
 

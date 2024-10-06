@@ -41,13 +41,6 @@ typedef struct PokemonStruct1
 } PokemonStruct1;
 
 // size: 0x4
-typedef struct unkStruct_808E6F4
-{
-    s16 unk0;
-    u8 unk2;
-} unkStruct_808E6F4;
-
-// size: 0x4
 typedef struct EvolveStage
 {
     /* 0x0 */ s16 speciesNum;
@@ -76,13 +69,13 @@ typedef struct PokemonStruct2
     u16 unk12; // pokeHP
     /* 0x14 */ Offense offense; // offense (other offset)
     /* 0x18 */ u32 currExp;
-    /* 0x1C */ unkStruct_8094184 moves;
+    /* 0x1C */ Moves moves;
     /* 0x40 */ Item itemSlot; // heldItem
-    /* 0x44 */ FixedPoint unk44;
-    /* 0x48 */ FixedPoint unk48;
+    FixedPoint belly; // some struct
+    FixedPoint maxBelly; // some struct (same type as 44)
     /* 0x4C */ u32 IQSkills; // unk20
     /* 0x50 */ u8 tacticIndex;
-    unkStruct_808E6F4 unk54;
+    /* 0x54 */ HiddenPower hiddenPower;
     /* 0x58 */ u8 name[POKEMON_NAME_LENGTH]; // name (other offset)
 } PokemonStruct2;
 
@@ -155,8 +148,7 @@ typedef struct MonsterDataEntry
 typedef struct LevelData
 {
     /* 0x0 */ s32 expRequired;
-    /* 0x4 */ u8 gainHP;
-    /* 0x5 */ u8 gainUnused;
+    /* 0x4 */ u16 gainHP;
     /* 0x6 */ u8 gainAtt;
     /* 0x7 */ u8 gainSPAtt;
     /* 0x8 */ u8 gainDef;

@@ -44,7 +44,7 @@ void sub_8083048(unkStruct_8094924 *param_1, u32);
 void sub_80818C8(unkStruct_8094924 *param_1, JoinedAt *param_2);
 void SaveActionContainer(unkStruct_8094924 *param_1, ActionContainer *param_2);
 void sub_8081B34(unkStruct_8094924 *r0, s16 *r1);
-void SaveEntityMoves(unkStruct_8094924 *r0, Move *move);
+void SaveEntityMoves(unkStruct_8094924 *r0, Moves *move);
 void sub_8081824(unkStruct_8094924 *param_1, u32 param_2);
 void sub_80817B0(unkStruct_8094924 *param_1, u32 param_2);
 void SavePosition(void*, Position *);
@@ -64,7 +64,7 @@ void SaveImmobilizeStatus(unkStruct_8094924 *param_1, Immobilize *param_2);
 void SaveNonVolatileStatus(unkStruct_8094924 *param_1, NonVolatile *param_2);
 void SaveEntitySleep(unkStruct_8094924 *param_1, Sleep* param_2);
 void SaveTactic(unkStruct_8094924 *param_1, u8 param_2);
-void SaveHiddenPower(unkStruct_8094924 *param_1, HiddenPower *param_2);
+void SaveDungeonHiddenPower(unkStruct_8094924 *param_1, HiddenPower *param_2);
 void SaveChargingStatus(unkStruct_8094924 *param_1, Charging *param_2);
 void SaveProtectionStatus(unkStruct_8094924 *param_1, Protection *param_2);
 void SaveWaitingStatus(unkStruct_8094924 *param_1, Waiting *param_2);
@@ -404,7 +404,7 @@ void SaveEntity(unkStruct_8094924 *param_1, Entity *param_2)
     SaveIQFlags(param_1,temp2);
     SaveIQFlags(param_1,temp1);
     SaveTactic(param_1,*puStack_a0);
-    SaveHiddenPower(param_1,psStack_a4);
+    SaveDungeonHiddenPower(param_1,psStack_a4);
     sub_8083078(param_1,*puStack_9c);
     sub_8083078(param_1,*puStack_98);
     sub_8083078(param_1,*puStack_94);
@@ -442,7 +442,7 @@ void SaveEntity(unkStruct_8094924 *param_1, Entity *param_2)
     sub_8083060(param_1,info->stockpileStage);
     sub_8083060(param_1,info->unk113);
     sub_8083060(param_1,(u8)info->moveRandomly);
-    SaveEntityMoves(param_1,info->moves);
+    SaveEntityMoves(param_1,&info->moves);
     sub_8081B34(param_1,(s16 *)&info->belly);
     sub_8081B34(param_1,(s16 *)&info->maxBelly);
     sub_80830B4(param_1,info->aiNextToTarget);
@@ -619,7 +619,7 @@ void SaveTactic(unkStruct_8094924 *param_1, u8 param_2)
     sub_8082FA8(param_1, &param_2, 1);
 }
 
-void SaveHiddenPower(unkStruct_8094924 *param_1, HiddenPower *param_2)
+void SaveDungeonHiddenPower(unkStruct_8094924 *param_1, HiddenPower *param_2)
 {
     sub_8083048(param_1, param_2->hiddenPowerBasePower);
     sub_808180C(param_1, param_2->hiddenPowerType);
@@ -743,14 +743,14 @@ void SaveEntityMove(unkStruct_8094924 *r0, Move *r1)
     sub_8083060(r0, r1->ginseng);
 }
 
-void SaveEntityMoves(unkStruct_8094924 *r0, Move *move)
+void SaveEntityMoves(unkStruct_8094924 *r0, Moves *move)
 {
     s32 index;
     for(index = 0; index < MAX_MON_MOVES; index++)
     {
-        SaveEntityMove(r0, &move[index]);
+        SaveEntityMove(r0, &move->moves[index]);
     }
-    sub_8083060(r0, *(u8 *)(move + 0x4)); // Struggle Move flags?
+    sub_8083060(r0, move->struggleMoveFlags); // Struggle Move flags?
 }
 
 void sub_8081B34(unkStruct_8094924 *r0, s16 *r1)

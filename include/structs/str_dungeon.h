@@ -160,6 +160,36 @@ typedef struct UnkDungeonGlobal_unk1CD98
     s16 unk2[2];
 } UnkDungeonGlobal_unk1CD98;
 
+struct unkStruct_Dungeon134_sub
+{
+    u8 unk134;
+    u32 unk138;
+    u8 unk13C[2];
+    u8 unk13E[2];
+    u16 unk140[7];
+    u32 unk150;
+    u32 unk154;
+    u32 unk158;
+    u32 unk15C;
+    u8 unk160;
+    u8 unk161;
+    u8 unk162;
+    u8 unk163;
+    u8 unk164;
+    u8 unk165;
+    u8 unk166;
+    u8 unk167;
+    u8 unk168;
+    u8 unk169;
+    u8 unk16A;
+    u8 unk16B;
+    u8 unk16C;
+    u8 unk16D;
+    u8 fill16E[0x179 - 0x16E];
+    bool8 pokemonExposed;
+    u8 unk17A;
+};
+
 // size: 0x1CEDC
 typedef struct Dungeon
 {
@@ -183,16 +213,8 @@ typedef struct Dungeon
     u8 fill14[0xB8 - 0x16];
     Entity *unkB8;
     Entity *unkBC;
-    u8 fillC0[0x13C - 0xC0];
-    u8 unk13C[2];
-    u8 fill13E[0x16A - 0x13E];
-    u8 unk16A;
-    u8 unk16B;
-    u8 unk16C;
-    u8 unk16D;
-    u8 fill16E[0x179 - 0x16E];
-    /* 0x179 */ bool8 pokemonExposed; // True if a Pokémon on the floor has the Exposed status.
-    u8 fill17A[0x17C - 0x17A];
+    u8 fillC0[0x134 - 0xC0];
+    struct unkStruct_Dungeon134_sub unk134;
     Dungeon_sub unk17C[0x100];
     /* 0x57C */ u8 fill57C[0x5C0 - 0x57c];
     /* 0x5C0 */ s32 unk5C0;
@@ -274,7 +296,7 @@ typedef struct Dungeon
     /* 0x3A16 */ s16 unk3A16;
     /* 0x3A18 */ Tile tiles[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     Position unkE218;
-    Position unkE21C;
+    Position unkE21C; // stair location?
     Position unkE220[8];
     u32 unkE240;
     u8 fillE244[0xE250 - 0xE244];

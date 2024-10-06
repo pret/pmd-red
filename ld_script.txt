@@ -255,6 +255,7 @@ SECTIONS {
         src/type_effectiveness.o(.text);
         src/code_806E8B0.o(.text);
         asm/code_806E8B0.o(.text);
+        src/code_806FDF4.o(.text);
         src/status_checks.o(.text);
         src/dungeon_movement.o(.text);
         src/status_checks_1.o(.text);
@@ -272,14 +273,14 @@ SECTIONS {
         src/dungeon_ai.o(.text);
         src/move_effects_target.o(.text);
         src/status.o(.text);
-        asm/code_8077274.o(.text);
         src/code_8077274_1.o(.text);
         asm/code_8077274_1.o(.text);
         src/dungeon_ai_movement.o(.text);
         src/dungeon_ai_attack.o(.text);
         src/targeting_flags.o(.text);
-        asm/code_807CD9C.o(.text);
         src/code_807CD9C.o(.text);
+        asm/code_807CD9C.o(.text);
+        src/code_807E1A0.o(.text);
         src/weather.o(.text);
         asm/code_807E5AC.o(.text);
         src/trap.o(.text);

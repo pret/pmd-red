@@ -168,7 +168,7 @@ bool8 sub_80701A4(Entity *pokemon)
                 SendMessage(pokemon,*gPtrMoveInterruptedMessage);
             }
             else {
-                for(index = 0, move = pokemonInfo->moves; index < MAX_MON_MOVES; move++, index++) {
+                for(index = 0, move = pokemonInfo->moves.moves; index < MAX_MON_MOVES; move++, index++) {
                     if ((move->moveFlags & MOVE_FLAG_EXISTS) &&
                     (MoveMatchesChargingStatus(pokemon,move)) &&
                     (pokemonInfo->charging.chargingStatusMoveIndex == index)) {
@@ -178,10 +178,10 @@ bool8 sub_80701A4(Entity *pokemon)
                         if((index > 0) && (move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
                         {
                             do {
-                                move2 = &pokemonInfo->moves[index_1 + 1];
+                                move2 = &pokemonInfo->moves.moves[index_1 + 1];
                                 move2--, index_1--;
                                 if(index_1 <= 0) break;
-                                if(!(pokemonInfo->moves[index_1].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+                                if(!(pokemonInfo->moves.moves[index_1].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
                                 {
                                     break;
                                 }

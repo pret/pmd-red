@@ -596,7 +596,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             {
                 return FALSE;
             }
-            if (!HasLastUsedMove(targetData->moves))
+            if (!HasLastUsedMove(targetData->moves.moves))
             {
                 return FALSE;
             }
@@ -614,7 +614,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_TORMENT:
-            if (HasDisabledMove(targetData->moves) || !HasLastUsedMove(targetData->moves))
+            if (HasDisabledMove(targetData->moves.moves) || !HasLastUsedMove(targetData->moves.moves))
             {
                 return FALSE;
             }
@@ -640,7 +640,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_SPITE:
-            if (LastUsedMoveOutOfPP(targetData->moves))
+            if (LastUsedMoveOutOfPP(targetData->moves.moves))
             {
                 return FALSE;
             }
@@ -850,7 +850,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             break;
         case MOVE_MIMIC:
         case MOVE_SKETCH:
-            if (!HasLastUsedMove(targetData->moves))
+            if (!HasLastUsedMove(targetData->moves.moves))
             {
                 return FALSE;
             }

@@ -66,20 +66,18 @@ const u8 gPelipperBoard_JobList[] = "Job List";
 const u8 gPelipperBoard_Accepted[] = "Accepted";
 const u8 gPelipperStatusSlash[] = "/";
 
-extern void sub_802ECB4(void);
-extern void nullsub_134(void);
-extern void sub_802ED4C(void);
-extern void sub_802EDBC(void);
-extern void sub_802EEA0(void);
-extern void sub_802EEBC(void);
-extern void sub_802E94C(void);
-extern void sub_802EA58(void);
-extern void CreatePelipperBoardMenu(void);
-extern void sub_802EC10(void);
-
-extern void CreatePelipperAcceptedStatusBox(u32);
-
-void SetPelipperBoardState(u32);
+static void sub_802ECB4(void);
+static void nullsub_134(void);
+static void sub_802ED4C(void);
+static void sub_802EDBC(void);
+static void sub_802EEA0(void);
+static void sub_802EEBC(void);
+static void sub_802E94C(void);
+static void sub_802EA58(void);
+static void CreatePelipperBoardMenu(void);
+static void sub_802EC10(void);
+static void CreatePelipperAcceptedStatusBox(u32);
+static void SetPelipperBoardState(u32);
 
 u32 sub_802E864(void)
 {

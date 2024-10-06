@@ -19,6 +19,8 @@
 #include "text2.h"
 #include "wonder_mail_802D098.h"
 #include "wonder_mail_main_menu.h"
+#include "wonder_mail_4.h"
+#include "wonder_mail_5.h"
 
 #define SELECT_WONDER_MAIL_MODE_MAIN_SCREEN 0
 #define SEND_WONDER_MAIL_MAIN_SCREEN 1
@@ -69,16 +71,10 @@ EWRAM_DATA_2 struct unkStruct_203B3E8 *gUnknown_203B3E8 = {0};
 #include "data/wonder_mail_main_menu.h"
 
 extern void SetWonderMailMainMenuState(u8);
-extern void sub_8030DE4(void);
-extern void sub_803084C(void);
 extern void sub_8031E10(void);
-
 extern u8 sub_800D588(void);
 extern void sub_802EF48(void);
-
 extern s32 sub_8037B28(u32);
-
-extern bool8 IsValidWonderMail(WonderMail *WonderMailData);
 
 void PrintWonderMailMainMenuError(u32);
 void HandleWonderMailMainScreen(void);

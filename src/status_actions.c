@@ -6,6 +6,7 @@
 #include "code_80521D0.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
+#include "code_807CD9C.h"
 #include "code_808417C.h"
 #include "constants/ability.h"
 #include "constants/move_id.h"
@@ -35,7 +36,6 @@
 
 extern void sub_807F43C(Entity *, Entity *);
 extern void sub_807DC68(Entity *, Entity *);
-extern void sub_8078A58(Entity *, Entity *, s32, u32);
 extern u32 sub_803D73C(u32);
 extern void sub_8045C28(Item *, u8 , u8);
 extern void sub_80464C8(Entity *, Position *, Item *);
@@ -51,7 +51,6 @@ extern void sub_8042A54(Position *);
 extern void sub_8049BB0(s32, s32);
 extern s16 sub_8057600(Move*, u32);
 extern u32 sub_8055864(Entity *pokemon, Entity *target, Move *param_3, s32 param_4, s32 param_5);
-extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, Position *r3);
 extern void sub_807DB74(Entity *);
 extern void HandleLuminousOrbAction(Entity *pokemon);
 extern void sub_807D510(Entity *, Entity *);
@@ -62,7 +61,6 @@ extern void sub_806BB6C(Entity *, s32);
 extern void sub_807E254(Entity *, Entity *, u32);
 extern u32 sub_8055640(Entity *, Entity *, Move *, u32, u32);
 extern void sub_806A6E8(Entity *);
-extern void sub_807D3CC(Entity *, Entity *);
 extern u8 sub_8069D18(Position *);
 extern u8 sub_804AD34(Position *);
 
@@ -83,7 +81,6 @@ extern void sub_8075C58(Entity *, Entity *, s32, s32);
 extern void DealDamageToEntity(Entity *, s32, u32, u32);
 extern bool8 sub_805755C(Entity* pokemon,u16 moveID);
 extern void sub_80783C4(Entity *, Entity *, u32);
-extern void sub_807CD9C(Entity *, Entity *, u32 direction);
 
 
 // NOTE: Override pokemon.c types for these two funcs
@@ -461,7 +458,7 @@ bool8 MimicMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4
 
     for(moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
-        movePtr = &targetEntityInfo->moves[moveIndex];
+        movePtr = &targetEntityInfo->moves.moves[moveIndex];
         if (((movePtr->moveFlags & MOVE_FLAG_EXISTS)) && !sub_805755C(pokemon,movePtr->id)) {
             if ((movePtr->id != MOVE_MIMIC) && (movePtr->id != MOVE_ASSIST) && (movePtr->id != MOVE_SKETCH) && (movePtr->id != MOVE_MIRROR_MOVE) &&
                 (movePtr->id != MOVE_ENCORE) && ((movePtr->moveFlags & MOVE_FLAG_LAST_USED))) {
@@ -727,7 +724,7 @@ bool8 RockSmashMoveAction(Entity * pokemon, Entity * target, Move *move, s32 par
 
 bool8 sub_805BA44(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    sub_807D3CC(pokemon, target);
+    sub_807D3CC(pokemon);
     return TRUE;
 }
 

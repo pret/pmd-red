@@ -3479,7 +3479,7 @@ _0806BDA6:
 	bl SetDefaultIQSkills
 	adds r0, r6, 0
 	adds r0, 0x3C
-	bl sub_808E6F4
+	bl GenerateHiddenPower
 	strh r4, [r6, 0x10]
 	strh r4, [r6, 0xE]
 	mov r0, sp

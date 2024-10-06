@@ -114,7 +114,7 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
       if (sub_800A2A0(param_1)) break;
       if (((normalOrFightingType) && (targetInfo->types[index] == TYPE_GHOST)) && (targetInfo->exposed == FALSE)) {
             effectiveness = EFFECTIVENESS_IMMUNE;
-            gDungeon->pokemonExposed = TRUE;
+            gDungeon->unk134.pokemonExposed = TRUE;
       }
       else {
             effectiveness = gTypeEffectivenessChart[type][targetInfo->types[index]];  
@@ -123,7 +123,7 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
         sub_800A34C(param_1,param_1,local_48.unk0[effectiveness]);
       }
       local_38[index] = effectiveness;
-      gDungeon->unk13C[index] = effectiveness;
+      gDungeon->unk134.unk13C[index] = effectiveness;
     }
 
     param_5->effectiveness = gUnknown_80F54B4[local_38[0]][local_38[1]];
@@ -135,11 +135,11 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
     }
       
     if (((type == TYPE_FIRE) || (type == TYPE_ICE)) && (HasAbility(target,ABILITY_THICK_FAT))) {
-      gDungeon->unk16D = TRUE;
+      gDungeon->unk134.unk16D = TRUE;
       sub_800A34C(param_1,param_1,gUnknown_8106F1C);
     }
     if ((type == TYPE_FIRE) && (GetFlashFireStatus(target) != FLASH_FIRE_STATUS_NONE)) {
-      gDungeon->fill16E[0] = TRUE;
+      gDungeon->unk134.fill16E[0] = TRUE;
       sub_800A020(param_1,0);
       param_5->effectiveness = EFFECTIVENESS_IMMUNE;
       param_5->unkD = 0;
@@ -147,7 +147,7 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
       bVar4 = FALSE;
     }
     if ((type == TYPE_GROUND) && (HasAbility(target, ABILITY_LEVITATE))) {
-      gDungeon->fill16E[1] = TRUE;
+      gDungeon->unk134.fill16E[1] = TRUE;
       sub_800A020(param_1,0);
       param_5->effectiveness = EFFECTIVENESS_IMMUNE;
       param_5->unkD = 0;
@@ -158,7 +158,7 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
       torrentFlag = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
       torrentVisualFlag = SetVisualFlags(pokemonInfo,0x80,torrentFlag);
       if (torrentFlag) {
-        gDungeon->fill16E[2] = TRUE;
+        gDungeon->unk134.fill16E[2] = TRUE;
         sub_800A34C(param_1,param_1,gUnknown_8106F0C);
       }
       if (torrentVisualFlag) {
@@ -170,7 +170,7 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
       overgrowFlag = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
       overgrowVisualFlag = SetVisualFlags(pokemonInfo,2,overgrowFlag);
       if (overgrowFlag) {
-        gDungeon->fill16E[3] = TRUE;
+        gDungeon->unk134.fill16E[3] = TRUE;
         sub_800A34C(param_1,param_1,gUnknown_8106F0C);
       }
       if (overgrowVisualFlag) {
@@ -182,7 +182,7 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
       swarmFlag = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
       swarmVisualFlag = SetVisualFlags(pokemonInfo,0x10,swarmFlag);
       if (swarmFlag) {
-        gDungeon->fill16E[4] = TRUE;
+        gDungeon->unk134.fill16E[4] = TRUE;
         sub_800A34C(param_1,param_1,gUnknown_8106F0C);
       }
       if (swarmVisualFlag) {
@@ -194,7 +194,7 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
       blazeFlag = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
       blazeVisualFlag = SetVisualFlags(pokemonInfo,0x20,blazeFlag);
       if (blazeFlag) {
-        gDungeon->fill16E[5] = TRUE;
+        gDungeon->unk134.fill16E[5] = TRUE;
         sub_800A34C(param_1,param_1,gUnknown_8106F0C);
       }
       if (blazeVisualFlag) {
@@ -203,44 +203,44 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
       }
     }
     if (!(sub_800A2A0(param_1)) && (MonsterIsType(pokemon, type))) {
-      gDungeon->fill16E[6] = TRUE;
+      gDungeon->unk134.fill16E[6] = TRUE;
       sub_800A34C(param_1,param_1,gUnknown_8106F14);
     }
     weather = GetApparentWeather(pokemon);      
     if (weather == WEATHER_SUNNY) {
       if (type == TYPE_FIRE) {
-        gDungeon->unk16C = TRUE;
+        gDungeon->unk134.unk16C = TRUE;
         sub_800A34C(param_1,param_1,gUnknown_8106F14);
       }
       else if (type == TYPE_WATER) {
-        gDungeon->unk16C = TRUE;
+        gDungeon->unk134.unk16C = TRUE;
         sub_800A34C(param_1,param_1,gUnknown_8106F1C);
       }
     }
     if (weather == WEATHER_RAIN) {
       if (type == TYPE_FIRE) {
-        gDungeon->unk16B = TRUE;
+        gDungeon->unk134.unk16B = TRUE;
         sub_800A34C(param_1,param_1,gUnknown_8106F1C);
       }
       else if (type == TYPE_WATER) {
-        gDungeon->unk16B = TRUE;
+        gDungeon->unk134.unk16B = TRUE;
         sub_800A34C(param_1,param_1,gUnknown_8106F14);
       }
     }
     if ((weather == WEATHER_CLOUDY) && (type != TYPE_NORMAL)) {
       sub_800A34C(param_1,param_1, gUnknown_8106F64);
-      gDungeon->unk16A = TRUE;
+      gDungeon->unk134.unk16A = TRUE;
     }
     if (((gDungeon->weather.mudSportTurns != 0) || (weather == WEATHER_FOG)) && (type == TYPE_ELECTRIC)) {
-      gDungeon->fill16E[7] = TRUE;
+      gDungeon->unk134.fill16E[7] = TRUE;
       sub_800A34C(param_1,param_1,gUnknown_8106F1C);
     }
     if ((gDungeon->weather.waterSportTurns != 0) && (type == TYPE_FIRE)) {
-      gDungeon->fill16E[8] = TRUE;
+      gDungeon->unk134.fill16E[8] = TRUE;
       sub_800A34C(param_1,param_1,gUnknown_8106F1C);
     }
     if ((type == TYPE_ELECTRIC) && (pokemonInfo->charging.chargingStatus == STATUS_CHARGING)) {
-      gDungeon->fill16E[9] = TRUE;
+      gDungeon->unk134.fill16E[9] = TRUE;
       sub_800A34C(param_1,param_1,gUnknown_8106F0C);
     }
   }
@@ -293,7 +293,7 @@ s32 WeightWeakTypePicker(Entity *user, Entity *target, u8 moveType)
         if (checkExposed && *targetType == TYPE_GHOST && !targetData->exposed)
         {
             effectiveness = 0;
-            gDungeon->pokemonExposed = TRUE;
+            gDungeon->unk134.pokemonExposed = TRUE;
         }
         else
         {

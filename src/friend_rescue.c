@@ -25,6 +25,8 @@
 #include "text_util.h"
 #include "text1.h"
 #include "text2.h"
+#include "wonder_mail_4.h"
+#include "wonder_mail_5.h"
 
 extern void SetFriendRescueMenuState(u32);
 
@@ -298,14 +300,6 @@ void sub_80353BC(void);
 void sub_8035424(void);
 void sub_8035430(void);
 
-extern u32 sub_8030DA0(void);
-extern void sub_8030DE4(void);
-extern void sub_803092C(void);
-extern u32 sub_8030768(u32);
-extern void sub_803084C(void);
-extern void sub_8030D40(u8, u32);
-extern void sub_8030810(u32);
-extern u8 sub_80307EC(void);
 extern u32 sub_8031DCC(void);
 extern void sub_8031E00(void);
 extern u32 sub_8039068(u32, u8 *passwordBuffer, unkStruct_203B480 *r0);
@@ -313,9 +307,6 @@ extern u32 sub_8039068(u32, u8 *passwordBuffer, unkStruct_203B480 *r0);
 extern void sub_8031E10(void);
 extern u8 sub_800D588(void);
 extern u32 sub_8023CE8(void);
-extern u32 sub_80306A8(u32 wonderMailType, u32, UnkTextStruct2_sub *, u32);
-extern u32 sub_8030894(void);
-extern void sub_803092C(void);
 extern bool8 sub_8031D70(u32 mailIndex, s32);
 extern s32 sub_8037B28(u32);
 
@@ -834,7 +825,7 @@ void sub_8032828(void)
             if (sub_8030894() == 0) {
                 ResetUnusedInputStruct();
                 xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
-                sub_80306A8(1, 0, NULL, 6);
+                sub_80306A8(WONDER_MAIL_TYPE_SOS, 0, NULL, 6);
             }
             break;
         case 0x35:
@@ -931,7 +922,7 @@ void sub_8032828(void)
             if (sub_8030894() == 0) {
                 ResetUnusedInputStruct();
                 xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
-                sub_80306A8(4, 0, NULL, 6);
+                sub_80306A8(WONDER_MAIL_TYPE_AOK, 0, NULL, 6);
             }
             break;
         case 0x20:
@@ -1038,7 +1029,7 @@ void sub_8032828(void)
                 break;
             ResetUnusedInputStruct();
             xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
-            sub_80306A8(1, 0, NULL, 6);
+            sub_80306A8(WONDER_MAIL_TYPE_SOS, 0, NULL, 6);
             break;
         case 0x15:
             sub_8014248(&gUnknown_80E2F78[0], 0, 6, gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);

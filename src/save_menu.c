@@ -114,10 +114,11 @@ ALIGNED(4) const u8 gUnknown_80E7178[] = _("{CENTER_ALIGN}The data could not be 
                                            "{CENTER_ALIGN}Please turn off the power and remove\n"
                                            "{CENTER_ALIGN}and reinsert the DS Card.");
 
-extern void sub_8038440();
-extern void sub_80384D0();
-extern void sub_8038830();
-extern void sub_80388C4(void);
+static void sub_8038830(void);
+static void sub_80388C4(void);
+
+extern void sub_8038440(void);
+extern void sub_80384D0(void);
 extern void sub_80140F8(void);
 
 void CreateSaveMenu(s32 currMenu)

@@ -79,7 +79,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             break;
         case ITEM_MAX_ELIXIR:
             itemWeight = 0;
-            move = pokemonInfo->moves;
+            move = pokemonInfo->moves.moves;
             move2 = move;
             for (i = 0; i < MAX_MON_MOVES; move++, move2++, i++)
             {
@@ -427,7 +427,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             itemWeight = 30;
             break;
         case ITEM_ROLLCALL_ORB:
-            move = pokemonInfo->moves; // Fixes a regswap.
+            move = pokemonInfo->moves.moves; // Fixes a regswap.
             if (targetOther)
             {
                 itemWeight = 0;

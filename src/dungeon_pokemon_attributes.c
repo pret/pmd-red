@@ -79,7 +79,7 @@ bool8 sub_80717A4(Entity *pokemon, u16 moveID)
 
     Move *pokeMove2; // some reason uses another pointer to same struct
 
-    for(index = 0, pokeMove = entityInfo->moves, pokeMove2 = pokeMove; index < MAX_MON_MOVES; pokeMove++, pokeMove2++, index++)
+    for(index = 0, pokeMove = entityInfo->moves.moves, pokeMove2 = pokeMove; index < MAX_MON_MOVES; pokeMove++, pokeMove2++, index++)
     {
       if (((pokeMove->moveFlags & MOVE_FLAG_EXISTS)) && (entityInfo->isTeamLeader || ((pokeMove->moveFlags & MOVE_FLAG_ENABLED_FOR_AI))))
             if((sub_805744C(pokemon, pokeMove2, TRUE) != 0) && (pokeMove->PP != 0))

@@ -36,5 +36,6 @@ void HandleStockpile(Entity * pokemon, Entity * target);
 void InvisibleStatusTarget(Entity * pokemon, Entity * target);
 void PerishSongTarget(Entity * pokemon, Entity * target);
 void EncoreStatusTarget(Entity * pokemon, Entity * target);
+void sub_8078A58(struct Entity *pokemon, struct Entity *target, s32 param_3, s32 param_4);
 
 #endif

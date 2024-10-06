@@ -17,6 +17,7 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
 #include "math.h"
+#include "move_effects_target.h"
 #include "number_util.h"
 #include "status_checks_1.h"
 #include "structs/map.h"
@@ -128,14 +129,18 @@ extern u8 *gUnknown_80FBBD4[];
 extern u8 *gUnknown_80FBBB8[];
 extern u8 *gUnknown_80FBB94[];
 extern s16 gUnknown_80F4EF4[];
+extern u8 *gUnknown_80FBE84[];
+extern u8 *gUnknown_80FBEA0[];
+extern u8 *gUnknown_80FBE64[];
+extern u8 *gUnknown_80FBDF0[];
+extern u8 *gUnknown_80FBDC4[];
+extern u8 *gUnknown_80FBE14[];
 
 extern s32 gFormatData_202DE30[10];
 
 extern void sub_8041D84(Entity *);
 extern void sub_804178C(u32);
 extern void sub_8041D5C(Entity *);
-extern void RaiseAttackStageTarget(Entity *, Entity *, u32, u32);
-extern void RaiseDefenseStageTarget(Entity *, Entity *, u32, u32);
 extern void sub_8041D48(Entity *);
 extern void sub_8041D38(Entity * pokemon);
 extern u8 sub_8043D10(void);
@@ -153,11 +158,12 @@ extern void nullsub_81(Entity *);
 extern void nullsub_82(Entity *);
 extern void nullsub_83(Entity *);
 extern void nullsub_84(Entity *);
-
-extern void sub_8041D9C(Entity *);
+extern void nullsub_85(Entity *);
 
 extern void sub_803F580(u32);
 extern void sub_8040A84(void);
+extern void sub_8041D9C(Entity *);
+extern void sub_8041DB0(Entity *pokemon);
 extern void sub_8041CA8(Entity *);
 extern void sub_8041C94(Entity *);
 extern bool8 sub_8045888(Entity *r0);
@@ -168,7 +174,6 @@ extern void sub_8041CCC(Entity *);
 extern void sub_8041CB8(Entity *r0);
 extern void sub_8041C1C(Entity *r0);
 extern void sub_8042060(Entity *, s32);
-extern bool8 sub_8071728(Entity * param_1, Entity * param_2, u8 param_3);
 extern void sub_8041FB4(Entity *r0, u32 r1);
 extern void sub_8041FD8(Entity *r0, u32 r1);
 extern void sub_80522F4(Entity *r1, Entity *r2, u8 *);
@@ -1213,10 +1218,10 @@ void EncoreStatusTarget(Entity *pokemon,Entity *target)
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
     for(index = 0; index < MAX_MON_MOVES; index++)
     {
-      movePtr = &EntityInfo->moves[index];
-      if ((EntityInfo->moves[index].moveFlags & MOVE_FLAG_EXISTS) && (movePtr->moveFlags & MOVE_FLAG_LAST_USED)) break;
+      movePtr = &EntityInfo->moves.moves[index];
+      if ((EntityInfo->moves.moves[index].moveFlags & MOVE_FLAG_EXISTS) && (movePtr->moveFlags & MOVE_FLAG_LAST_USED)) break;
     }
-    if ((index == MAX_MON_MOVES) && ((EntityInfo->struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0)) {
+    if ((index == MAX_MON_MOVES) && ((EntityInfo->moves.struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0)) {
       SetMessageArgument(gAvailablePokemonNames,target,0);
       sub_80522F4(pokemon,target,*gUnknown_80FBBD4);
     }
@@ -1275,5 +1280,93 @@ void sub_8078A58(struct Entity *pokemon, struct Entity *target, s32 param_3, s32
             sub_80522F4(pokemon, target, *gUnknown_80FBE40);
     }
 
+    EntityUpdateStatusSprites(target);
+}
+
+void sub_8078B5C(Entity *pokemon, Entity *target, u32 bellyIncrement, s32 maxBellyIncrement, bool8 displayMessage)
+{
+    bool8 bellySizeIncreased;
+    FixedPoint oldBelly;
+    FixedPoint *bellyPtr;
+    EntityInfo *targetInfo;
+    FixedPoint *puVar8;
+    FixedPoint sp_0x0;
+    FixedPoint sp_0x4;
+    FixedPoint sp_0x8;
+    FixedPoint sp_0x10;
+    FixedPoint sp_0x14;
+    FixedPoint sp_0x18;
+    FixedPoint sp_0x20;
+    bool32 bellySame;
+
+    if (!EntityExists(target)) {
+        return;
+    }
+    targetInfo = target->info;
+    if ((!targetInfo->isTeamLeader) && (HasHeldItem(target,0x1b))) {
+        if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBEA0);
+        return;
+    }
+    bellySizeIncreased = FALSE;
+    if (maxBellyIncrement != 0) {
+        if(FixedPointToInt(targetInfo->belly) >= FixedPointToInt(targetInfo->maxBelly))
+        {
+            bellySizeIncreased = TRUE;
+        }
+        if (bellyIncrement == 999) 
+        {
+            bellySizeIncreased = TRUE;
+        }
+    }
+    if (bellySizeIncreased) {
+        bellyPtr = &targetInfo->maxBelly;
+        sp_0x20 = *bellyPtr;
+        bellySame = (FixedPointToInt(targetInfo->belly) ==  FixedPointToInt(*bellyPtr));
+        sp_0x0 = IntToFixedPoint(maxBellyIncrement);
+        sp_0x4 = FixedPoint_Add(*bellyPtr,sp_0x0);
+        *bellyPtr = sp_0x4;
+        sp_0x8 = IntToFixedPoint(200);
+        *bellyPtr = FixedPoint_Min(sp_0x4,sp_0x8);
+        targetInfo->belly = *bellyPtr;
+        if ((!bellySame) && (displayMessage)) {
+            sub_80522F4(pokemon,target,*gUnknown_80FBE64); // $m0's belly filled up full!
+        }
+        if (FixedPointToInt(sp_0x20) == FixedPointToInt(targetInfo->maxBelly)) {
+            SetMessageArgument(gAvailablePokemonNames,target,0);
+            if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBDF0); // $m0's belly won't get any bigger!
+        }
+        else {
+            sub_8041DB0(target);
+            SetMessageArgument(gAvailablePokemonNames,target,0);
+            if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBDC4); // m0's max belly size increased!
+        }
+    }
+    else {
+        bellyPtr = &targetInfo->belly;
+        oldBelly = *bellyPtr;
+        sp_0x10 = IntToFixedPoint(bellyIncrement);
+        sp_0x14 = FixedPoint_Add(*bellyPtr,sp_0x10);
+        *bellyPtr = sp_0x14;
+        puVar8 = &targetInfo->maxBelly;
+        sp_0x18 = FixedPoint_Min(sp_0x14,*puVar8);
+        *bellyPtr = sp_0x18;
+        if (bellyIncrement == 999) {
+            *bellyPtr = *puVar8;
+        }
+        nullsub_85(target);
+        SetMessageArgument(gAvailablePokemonNames,target,0);
+        if (FixedPointToInt(oldBelly) ==  FixedPointToInt(*bellyPtr)) {
+            if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBE14); // $m0's belly didn't change!
+        }
+        else {
+            if (FixedPointToInt(*bellyPtr) >= FixedPointToInt(*puVar8)) {
+                if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBE64); // $m0's belly filled up full! 
+            }
+            else
+            {
+                if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBE84); // $m0's belly was filled!
+            }
+        }
+    }
     EntityUpdateStatusSprites(target);
 }

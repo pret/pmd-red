@@ -37,6 +37,11 @@ struct unkStruct_203B2C8
     u32 fill13C;
 };
 
+enum States {
+    INIT_STATE,
+    EXIT_STATE = 5
+};
+
 static EWRAM_DATA_2 struct unkStruct_203B2C8 *sUnknown_203B2C8 = {0};
 
 extern void sub_80920D8(u8 *buffer);
@@ -78,9 +83,8 @@ ALIGNED(4) const char gUnknown_80DFB14[] = _(
 	" Please give me a shout if\n"
 	"you would like to send {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.");
 
-u32 sub_802B2D4(void)
+s32 sub_802B2D4(void)
 {
-  s32 iVar1;
   OpenedFile *faceFile;
 
   ResetUnusedInputStruct();
@@ -97,19 +101,20 @@ u32 sub_802B2D4(void)
   sUnknown_203B2C8->unk12 = 0;
   sUnknown_203B2C8->unkC = 2;
   sUnknown_203B2C8->unkE = 8;
-  if (sub_8099394(&sUnknown_203B2C8->unk1) == 1) {
-    sub_802B548(0);
-    iVar1  = 1;
+  if (sub_8099394(&sUnknown_203B2C8->unk1) != 1) {
+    return 0;
   }
   else
-    iVar1 = 0;
-  return iVar1;
+  {
+    sub_802B548(INIT_STATE);
+    return 1;
+  }
 }
 
 u32 sub_802B358(void)
 {
   switch(sUnknown_203B2C8->currState) {
-    case 0:
+    case INIT_STATE:
         sub_802B560();
         break;
     case 1:
@@ -124,7 +129,7 @@ u32 sub_802B358(void)
     case 4:
         sub_802B624();
         break;
-    case 5:
+    case EXIT_STATE:
         return 3;
   }
   return 0;
@@ -151,7 +156,7 @@ void sub_802B3E0(void)
   char teamNameBuffer[40];
 
   switch(sUnknown_203B2C8->currState) {
-      case 0:
+      case INIT_STATE:
         if (sub_80023E4(0)) {
             // Copy Team Name to buffer
             sub_80920D8(teamNameBuffer);
@@ -179,7 +184,7 @@ void sub_802B3E0(void)
         sUnknown_203B2C8->unk114.itemRewards[2] = ITEM_NOTHING;
         sUnknown_203B2C8->unk114.quantity = 10;
         sUnknown_203B2C8->unk114.friendAreaReward = 0;
-        sub_802F204(&sUnknown_203B2C8->unk114, 0);
+        sub_802F204(&sUnknown_203B2C8->unk114, FALSE);
         break;
       case 2:
         // I hope you will keep on rescuing your friends
@@ -260,6 +265,6 @@ void sub_802B624(void)
   s32 temp;
 
   if (sub_80144A4(&temp) == 0) {
-    sub_802B548(5);
+    sub_802B548(EXIT_STATE);
   }
 }

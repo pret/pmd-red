@@ -31,15 +31,14 @@ void sub_8069D4C(struct unkStruct_8069D4C *r0, Entity *target)
 
     r0->level = info->level;
 
-
     GetPokemonLevelData(&leveldata, info->id, info->level);
     r0->exp = leveldata.expRequired;
-    r0->atk = info->atk;
-    r0->spAtk = info->spAtk;
-    r0->def = info->def;
-    r0->spDef = info->spDef;
+    r0->offense.att[0] = info->atk;
+    r0->offense.att[1] = info->spAtk;
+    r0->offense.def[0] = info->def;
+    r0->offense.def[1] = info->spDef;
     r0->heldItem = info->heldItem;
-    memcpy(r0->moves, info->moves, sizeof(r0->moves) + sizeof(r0->unk40));
+    memcpy(r0->moves.moves, info->moves.moves, sizeof(r0->moves));
     r0->belly = info->belly;
     r0->maxBelly = info->maxBelly;
     r0->hiddenPower = info->hiddenPower;

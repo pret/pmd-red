@@ -35,7 +35,7 @@ u32 sub_8057144(Entity * pokemon)
     {
         Entity *dungeonMon = gDungeon->allPokemon[i];
         if (EntityExists(dungeonMon)) {
-            Move *moves = dungeonMon->info->moves;
+            Move *moves = dungeonMon->info->moves.moves;
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 if (moves[j].moveFlags & MOVE_FLAG_EXISTS
@@ -141,7 +141,7 @@ bool8 sub_8057308(Entity *pokemon, s32 chance)
 bool8 CanAIUseMove(Entity *pokemon, s32 moveIndex, bool8 hasPPChecker)
 {
     EntityInfo *pokemonInfo = pokemon->info;
-    Move *move = &pokemonInfo->moves[moveIndex];
+    Move *move = &pokemonInfo->moves.moves[moveIndex];
     s32 i;
     if (!(move->moveFlags & MOVE_FLAG_EXISTS))
     {
@@ -174,7 +174,7 @@ bool8 CanAIUseMove(Entity *pokemon, s32 moveIndex, bool8 hasPPChecker)
         goto returnTrue;
     }
     move++;
-    if ((u32) move >= (u32) &pokemonInfo->struggleMoveFlags || !(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+    if ((u32) move >= (u32) &pokemonInfo->moves.struggleMoveFlags || !(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
     {
         return FALSE;
     }
@@ -206,7 +206,7 @@ bool8 CanMonsterUseMove(Entity *pokemon, Move *move, bool8 hasPPChecker)
         {
             if (move->id == MOVE_STRUGGLE)
             {
-                if (!(pokemonInfo->struggleMoveFlags & MOVE_FLAG_LAST_USED))
+                if (!(pokemonInfo->moves.struggleMoveFlags & MOVE_FLAG_LAST_USED))
                 {
                     return FALSE;
                 }
@@ -233,7 +233,7 @@ bool8 sub_805744C(Entity * pokemon, Move *move, bool8 param_3)
       if ((entityInfo->volatileStatus.volatileStatus == STATUS_TAUNTED) && (!MoveIgnoresTaunted(move))) return FALSE;
       if (entityInfo->volatileStatus.volatileStatus == STATUS_ENCORE) {
         if (move->id == MOVE_STRUGGLE) {
-          if((entityInfo->struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0) return FALSE;
+          if((entityInfo->moves.struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0) return FALSE;
         }
         else {
           if((move->moveFlags & MOVE_FLAG_LAST_USED) == 0) return FALSE;
