@@ -180,7 +180,7 @@ typedef struct Dungeon
     u8 unk11;
     s16 unk12;
     s16 unk14;
-    u8 fill14[0xB8 - 0x16];
+    u32 unk18[(0xB8 - 0x18) / 4];
     Entity *unkB8;
     Entity *unkBC;
     u8 fillC0[0x13C - 0xC0];

@@ -144,7 +144,7 @@ void SetCharacterMask(int a0)
 }
 
 // TODO: Move xxx_call_save_unk_text_struct_800641C and SaveUnkTextStructAndXXX_8006438 to text2.c ? data.s shows text1 and text2 are merged somehow but not fully
-void xxx_call_save_unk_text_struct_800641C(UnkTextStruct2 *a0, bool8 a1, bool8 a2)
+void xxx_call_save_unk_text_struct_800641C(const UnkTextStruct2 *a0, bool8 a1, bool8 a2)
 {
     UnkTextStruct2_sub r3 = {0, 0};
     SaveUnkTextStructAndXXX_8006438(a0, a1, a2, &r3);
