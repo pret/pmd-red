@@ -59,6 +59,7 @@ struct UnkDataFileStruct
     u16 **unk10;
 };
 
+// Very similar to unkChar struct
 struct UnkStruct_sub_803DC6C
 {
     u8 *unk0;
@@ -759,7 +760,7 @@ struct UnkStruct_sub_803DC6C *sub_803DEC8(s32 chr)
     if (chr > 63487 && chr < 65535)
     {
         s32 r2 = chr & 0xFF;
-        s32 r1 = (chr & 0xFF00) / 256;
+        s32 r1 = (chr & 0xFF00) >> 8;
         r2 -= 32;
         r1 -= 248;
         ret = &strPtr[r1 * 224 + r2];

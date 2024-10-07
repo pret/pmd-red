@@ -7,7 +7,7 @@
 
 s32 sub_8015FEC(u8 *buffer, s32 size)
 {
-    struct unkChar *iVar2;
+    const struct unkChar *iVar2;
     s32 currLength;
     s32 length;
     u8 *bufferPtr;
