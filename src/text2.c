@@ -3535,13 +3535,13 @@ s32 InterpretColorChar(u8 a0);
 // https://decomp.me/scratch/AJ2km
 const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct UnkDrawStringStruct *sp)
 {
-    while (*str == 0x23) {
-        if (str[1] == 0x5B) {
+    while (*str == '#') {
+        if (str[1] == '[') {
             const u8 *strBefore = str;
             str += 2;
             sp->unk21 = 0;
             while (*str != '\0') {
-                if (*str == 0x5D) {
+                if (*str == ']') {
                     str++;
                     break;
                 }
@@ -3557,94 +3557,94 @@ const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct UnkDraw
             if (sp->unk21 != 0)
                 break;
         }
-        else if (str[1] == 0x3D) {
+        else if (str[1] == '=') {
             sp->unk0 = str[2];
             str += 3;
-            if (*str == 0x2E)
+            if (*str == '.')
                 str++;
         }
-        else if (str[1] == 0x79) {
+        else if (str[1] == 'y') {
             sp->unk2 = str[2];
             str += 3;
-            if (*str == 0x2E)
+            if (*str == '.')
                 str++;
         }
-        else if (str[1] == 0x3E) {
+        else if (str[1] == '>') {
             str = sub_800915C(&sp->unk0, str + 2);
         }
-        else if (str[1] == 0x2E) {
+        else if (str[1] == '.') {
             sp->unk0 += str[2];
             str += 3;
         }
-        else if (str[1] == 0x6E) {
+        else if (str[1] == 'n') {
             sp->unk0 = sp->unkC;
             sp->unk2 += 11;
             str += 2;
         }
-        else if (str[1] == 0x3A) {
+        else if (str[1] == ':') {
             sp->unk0 = sp->unk4;
             str += 2;
         }
-        else if (str[1] == 0x3B) {
+        else if (str[1] == ';') {
             sp->unk0 = sp->unk4 + str[2];
             str += 3;
         }
-        else if (str[1] == 0x2B) {
+        else if (str[1] == '+') {
             str += 2;
             sp->unk0 = (strArr[0].unk4 * 8) - sub_8008ED0(str);
             sp->unk0 /= 2;
         }
-        else if (str[1] == 0x43) {
+        else if (str[1] == 'C') {
             sp->unk14 = sp->unk10;
             sp->unk10 = InterpretColorChar(str[2]);
             str += 3;
         }
-        else if (str[1] == 0x5F) {
+        else if (str[1] == '_') {
             sp->unk14 = sp->unk10;
             sp->unk10 = gUnknown_202749A[str[2]];
             str += 3;
-            if (*str == 0x2E)
+            if (*str == '.')
                 str++;
         }
-        else if (str[1] == 0x52) {
+        else if (str[1] == 'R') {
             sp->unk10 = sp->unk14;
             str += 2;
         }
-        else if (str[1] == 0x63) {
+        else if (str[1] == 'c') {
             sp->unk18 = sp->unk10;
             sp->unk10 = InterpretColorChar(str[2]);
             str += 3;
         }
-        else if (str[1] == 0x72) {
+        else if (str[1] == 'r') {
             sp->unk10 = sp->unk18;
             str += 2;
         }
-        else if (str[1] == 0x53) {
+        else if (str[1] == 'S') {
             gUnknown_20274A6[str[2] & 0x7F] = str[3] & 0x7F;
             str += 4;
         }
-        else if (str[1] == 0x57) {
+        else if (str[1] == 'W') {
             str += 2;
             sp->unk8 = ((strArr[0].unk0 * 8) + sp->unk0) - 2;
             sp->unkA = ((strArr[0].unk2 * 8) + sp->unk2) + 3;
             sp->unk20 = 1;
             break;
         }
-        else if (str[1] == 0x50) {
+        else if (str[1] == 'P') {
             str += 2;
             sp->unk2 = 9999;
             sp->unk1C = 0;
             sp->unk20 = 1;
             break;
         }
-        else if (str[1] == 0x70) {
+        else if (str[1] == 'p') {
             str += 2;
             sp->unk2 = 9999;
             sp->unk1C = 1;
             sp->unk20 = 1;
             break;
         }
-        else if (str[1] == 0x7E) {
+        else if (str[1] == '~') {
             sp->unk2C = str[2];
             sp->unk21 = 1;
             str += 3;
