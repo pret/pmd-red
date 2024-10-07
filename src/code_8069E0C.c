@@ -14,6 +14,7 @@
 #include "dungeon_util.h"
 #include "game_options.h"
 #include "move_effects_target.h"
+#include "moves.h"
 #include "pokemon.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
@@ -294,3 +295,96 @@ void sub_806A2BC(Entity *pokemon, u8 param_2)
 
 void nullsub_95(void)
 {}
+
+// https://decomp.me/scratch/tBuxP (90.38% matching - Seth)
+#ifdef NONMATCHING
+void sub_806A338(void)
+{
+  Entity *entity;
+  EntityInfo *info;
+  s32 index;
+   
+  for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
+  {
+    entity = gDungeon->allPokemon[index];
+    if (EntityExists(entity) && (entity->info->waitingStruct.waitingStatus == 3))
+    {
+        gDungeon->snatchPokemon = entity;
+        info = gDungeon->snatchPokemon->info;
+        gDungeon->unk17B3C = info->unk98;
+        break;
+    }
+  }
+}
+#else
+NAKED
+void sub_806A338(void)
+{
+    asm_unified(
+	"\tpush {r4-r6,lr}\n"
+	"\tmovs r5, 0\n"
+	"\tldr r6, _0806A378\n"
+"_0806A33E:\n"
+	"\tldr r0, [r6]\n"
+	"\tlsls r1, r5, 2\n"
+	"\tldr r2, _0806A37C\n"
+	"\tadds r0, r2\n"
+	"\tadds r0, r1\n"
+	"\tldr r4, [r0]\n"
+	"\tadds r0, r4, 0\n"
+	"\tbl EntityExists\n"
+	"\tlsls r0, 24\n"
+	"\tcmp r0, 0\n"
+	"\tbeq _0806A384\n"
+	"\tldr r0, [r4, 0x70]\n"
+	"\tadds r0, 0xC8\n"
+	"\tldrb r0, [r0]\n"
+	"\tcmp r0, 0x3\n"
+	"\tbne _0806A384\n"
+	"\tldr r1, [r6]\n"
+	"\tldr r2, _0806A380\n"
+	"\tadds r0, r1, r2\n"
+	"\tstr r4, [r0]\n"
+	"\tldr r0, [r4, 0x70]\n"
+	"\tadds r2, 0xC\n"
+	"\tadds r1, r2\n"
+	"\tadds r0, 0x98\n"
+	"\tldr r0, [r0]\n"
+	"\tstr r0, [r1]\n"
+	"\tb _0806A38A\n"
+	"\t.align 2, 0\n"
+"_0806A378: .4byte gDungeon\n"
+"_0806A37C: .4byte 0x000135cc\n"
+"_0806A380: .4byte 0x00017b30\n"
+"_0806A384:\n"
+	"\tadds r5, 0x1\n"
+	"\tcmp r5, 0x13\n"
+	"\tble _0806A33E\n"
+"_0806A38A:\n"
+	"\tpop {r4-r6}\n"
+	"\tpop {r0}\n"
+	"\tbx r0"
+    );
+}
+#endif
+
+void sub_806A390(Entity *pokemon)
+{
+    s32 index;
+    EntityInfo *info;
+    Move *move;
+    
+    info = pokemon->info;
+    for(index = 0; index < MAX_MON_MOVES; index++)
+    {
+        move = &info->moves.moves[index];
+
+        if(move->moveFlags & MOVE_FLAG_EXISTS)
+        {
+            move->moveFlags2 &= 0xF7;
+            move->moveFlags2 &= 0xEF;
+            move->moveFlags2 |= MOVE_FLAG2_UNK4;
+            move->PP = GetMoveBasePP(move);
+        }
+    }
+}
