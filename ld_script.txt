@@ -166,8 +166,6 @@ SECTIONS {
         src/wonder_mail_3_mid.o(.text);
         src/mission_reward.o(.text);
         src/code_8072F3C.o(.text);
-        asm/wonder_mail_3_mid.o(.text);
-        src/wonder_mail_3_1.o(.text);
         src/makuhita_dojo1.o(.text);
         src/makuhita_dojo2.o(.text);
         src/wonder_mail_4.o(.text);
