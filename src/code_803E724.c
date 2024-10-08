@@ -9,7 +9,15 @@
 #include "code_8009804.h"
 #include "code_803E46C.h"
 #include "dungeon_util.h"
+#include "dungeon_pokemon_attributes.h"
 #include "sprite.h"
+#include "bg_control.h"
+#include "game_options.h"
+#include "dungeon_range.h"
+#include "code_806CD90.h"
+#include "dungeon_items.h"
+#include "constants/item.h"
+#include "constants/status.h"
 
 extern s32 gUnknown_202EDC8;
 extern u32 gUnknown_202EDD0;
@@ -311,7 +319,7 @@ void sub_803ED30(s32 a0, Entity *mon, u8 a2, s32 a3)
     sub_80098BC((void *) VRAM + 0x142C0, gDungeon->unk18, 0x80);
 }
 
-SpriteOAM gUnknown_202EDDC;
+extern SpriteOAM gUnknown_202EDDC;
 
 void sub_803EDF0(void)
 {
@@ -388,6 +396,681 @@ void sub_803EDF0(void)
 
         AddSprite(&gUnknown_202EDDC, 0x100, NULL, NULL);
     }
+}
+
+/*
+Not even attempting this, opened file unknown structs weirdly put on stack, my head hurts just looking at this
+s32 sub_803EF90(s32 a0, u8 a1)
+{
+
+}
+*/
+
+NAKED s32 sub_803EF90(s32 a0, u8 a1)
+{
+    asm_unified("push {r4-r7,lr}\n"
+	"	mov r7, r10\n"
+	"	mov r6, r9\n"
+	"	mov r5, r8\n"
+	"	push {r5-r7}\n"
+	"	sub sp, 0x58\n"
+	"	str r0, [sp, 0x48]\n"
+	"	lsls r1, 24\n"
+	"	lsrs r5, r1, 24\n"
+	"	ldr r0, _0803F060\n"
+	"	ldr r0, [r0]\n"
+	"	adds r0, 0x18\n"
+	"	mov r8, r0\n"
+	"	ldr r0, _0803F064\n"
+	"	ldr r1, [r0]\n"
+	"	ldr r0, [r1, 0x4]\n"
+	"	movs r2, 0x92\n"
+	"	lsls r2, 1\n"
+	"	adds r0, r2\n"
+	"	str r0, [sp, 0x24]\n"
+	"	ldr r0, [r1, 0x4]\n"
+	"	movs r3, 0x82\n"
+	"	lsls r3, 1\n"
+	"	adds r0, r3\n"
+	"	str r0, [sp, 0x28]\n"
+	"	ldr r0, [r1, 0x4]\n"
+	"	adds r0, 0xE4\n"
+	"	str r0, [sp, 0x2C]\n"
+	"	ldr r0, [r1, 0x4]\n"
+	"	adds r0, 0xC4\n"
+	"	str r0, [sp, 0x30]\n"
+	"	ldr r0, [r1, 0x4]\n"
+	"	adds r0, 0xA4\n"
+	"	str r0, [sp, 0x34]\n"
+	"	ldr r0, [r1, 0x4]\n"
+	"	adds r0, 0x84\n"
+	"	str r0, [sp, 0x38]\n"
+	"	ldr r0, [r1, 0x4]\n"
+	"	adds r0, 0x64\n"
+	"	str r0, [sp, 0x3C]\n"
+	"	ldr r0, [r1, 0x4]\n"
+	"	adds r0, 0x44\n"
+	"	str r0, [sp, 0x40]\n"
+	"	ldr r0, [r1, 0x4]\n"
+	"	adds r0, 0x24\n"
+	"	str r0, [sp, 0x44]\n"
+	"	add r4, sp, 0x24\n"
+	"	mov r0, sp\n"
+	"	adds r1, r4, 0\n"
+	"	movs r2, 0x24\n"
+	"	bl memcpy\n"
+	"	movs r1, 0\n"
+	"	movs r6, 0x3\n"
+	"	mov r0, r8\n"
+	"_0803EFFE:\n"
+	"	stm r0!, {r1}\n"
+	"	stm r0!, {r1}\n"
+	"	stm r0!, {r1}\n"
+	"	stm r0!, {r1}\n"
+	"	stm r0!, {r1}\n"
+	"	stm r0!, {r1}\n"
+	"	stm r0!, {r1}\n"
+	"	stm r0!, {r1}\n"
+	"	subs r6, 0x1\n"
+	"	cmp r6, 0\n"
+	"	bge _0803EFFE\n"
+	"	ldr r0, _0803F068\n"
+	"	ldr r1, [sp, 0x48]\n"
+	"	cmp r1, r0\n"
+	"	bne _0803F0A6\n"
+	"	adds r0, r4, 0\n"
+	"	ldr r1, _0803F06C\n"
+	"	ldm r1!, {r2,r3,r5}\n"
+	"	stm r0!, {r2,r3,r5}\n"
+	"	ldr r1, [r1]\n"
+	"	str r1, [r0]\n"
+	"	movs r5, 0\n"
+	"	movs r2, 0\n"
+	"	mov r12, r4\n"
+	"	movs r0, 0x20\n"
+	"	mov r10, r0\n"
+	"_0803F032:\n"
+	"	mov r3, r8\n"
+	"	ldr r0, _0803F064\n"
+	"	ldr r1, [r0]\n"
+	"	lsls r0, r2, 2\n"
+	"	add r0, r12\n"
+	"	ldr r0, [r0]\n"
+	"	lsls r0, 5\n"
+	"	adds r0, 0x4\n"
+	"	ldr r1, [r1, 0x4]\n"
+	"	adds r4, r1, r0\n"
+	"	movs r1, 0x18\n"
+	"	adds r1, r5\n"
+	"	mov r9, r1\n"
+	"	adds r2, 0x1\n"
+	"	str r2, [sp, 0x54]\n"
+	"	mov r2, r10\n"
+	"	subs r7, r2, r5\n"
+	"	movs r6, 0x7\n"
+	"_0803F056:\n"
+	"	cmp r5, 0\n"
+	"	bne _0803F070\n"
+	"	movs r1, 0\n"
+	"	ldr r2, [r4]\n"
+	"	b _0803F07A\n"
+	"	.align 2, 0\n"
+	"_0803F060: .4byte gDungeon\n"
+	"_0803F064: .4byte gUnknown_202EC9C\n"
+	"_0803F068: .4byte 0x0000270f\n"
+	"_0803F06C: .4byte gUnknown_80F6478\n"
+	"_0803F070:\n"
+	"	ldr r0, [r4]\n"
+	"	adds r1, r0, 0\n"
+	"	lsrs r1, r7\n"
+	"	adds r2, r0, 0\n"
+	"	lsls r2, r5\n"
+	"_0803F07A:\n"
+	"	adds r4, 0x4\n"
+	"	ldr r0, [r3]\n"
+	"	orrs r0, r2\n"
+	"	str r0, [r3]\n"
+	"	ldr r0, [r3, 0x20]\n"
+	"	orrs r0, r1\n"
+	"	str r0, [r3, 0x20]\n"
+	"	adds r3, 0x4\n"
+	"	subs r6, 0x1\n"
+	"	cmp r6, 0\n"
+	"	bge _0803F056\n"
+	"	mov r5, r9\n"
+	"	cmp r5, 0x1F\n"
+	"	ble _0803F09C\n"
+	"	subs r5, 0x20\n"
+	"	movs r3, 0x20\n"
+	"	add r8, r3\n"
+	"_0803F09C:\n"
+	"	ldr r2, [sp, 0x54]\n"
+	"	cmp r2, 0x3\n"
+	"	ble _0803F032\n"
+	"	movs r0, 0x4\n"
+	"	b _0803F26A\n"
+	"_0803F0A6:\n"
+	"	ldr r0, _0803F0D8\n"
+	"	ldr r1, [sp, 0x48]\n"
+	"	cmp r1, r0\n"
+	"	ble _0803F0B0\n"
+	"	str r0, [sp, 0x48]\n"
+	"_0803F0B0:\n"
+	"	ldr r0, _0803F0DC\n"
+	"	ldr r2, [sp, 0x48]\n"
+	"	cmp r2, r0\n"
+	"	bge _0803F0BA\n"
+	"	str r0, [sp, 0x48]\n"
+	"_0803F0BA:\n"
+	"	ldr r1, _0803F0E0\n"
+	"	ldr r0, [r1]\n"
+	"	ldr r0, [r0, 0x4]\n"
+	"	movs r3, 0xC2\n"
+	"	lsls r3, 1\n"
+	"	adds r2, r0, r3\n"
+	"	cmp r5, 0\n"
+	"	beq _0803F0F4\n"
+	"	ldr r5, [sp, 0x48]\n"
+	"	cmp r5, 0\n"
+	"	ble _0803F0E4\n"
+	"	movs r1, 0xA2\n"
+	"	lsls r1, 1\n"
+	"	adds r2, r0, r1\n"
+	"	b _0803F0F4\n"
+	"	.align 2, 0\n"
+	"_0803F0D8: .4byte 0x000003e7\n"
+	"_0803F0DC: .4byte 0xfffffc19\n"
+	"_0803F0E0: .4byte gUnknown_202EC9C\n"
+	"_0803F0E4:\n"
+	"	ldr r3, [sp, 0x48]\n"
+	"	cmp r3, 0\n"
+	"	bge _0803F0F4\n"
+	"	movs r5, 0xB2\n"
+	"	lsls r5, 1\n"
+	"	adds r2, r0, r5\n"
+	"	negs r3, r3\n"
+	"	str r3, [sp, 0x48]\n"
+	"_0803F0F4:\n"
+	"	ldm r2!, {r0}\n"
+	"	mov r1, r8\n"
+	"	str r0, [r1]\n"
+	"	ldm r2!, {r0}\n"
+	"	str r0, [r1, 0x4]\n"
+	"	ldm r2!, {r0}\n"
+	"	str r0, [r1, 0x8]\n"
+	"	ldm r2!, {r0}\n"
+	"	str r0, [r1, 0xC]\n"
+	"	ldm r2!, {r0}\n"
+	"	str r0, [r1, 0x10]\n"
+	"	ldm r2!, {r0}\n"
+	"	str r0, [r1, 0x14]\n"
+	"	ldm r2!, {r0}\n"
+	"	str r0, [r1, 0x18]\n"
+	"	ldr r0, [r2]\n"
+	"	str r0, [r1, 0x1C]\n"
+	"	movs r5, 0x18\n"
+	"	movs r2, 0x1\n"
+	"	str r2, [sp, 0x4C]\n"
+	"	movs r3, 0\n"
+	"	str r3, [sp, 0x50]\n"
+	"	movs r2, 0\n"
+	"_0803F122:\n"
+	"	movs r0, 0\n"
+	"	mov r10, r0\n"
+	"	adds r1, r2, 0x1\n"
+	"	str r1, [sp, 0x54]\n"
+	"	lsls r0, r2, 3\n"
+	"	adds r0, r2\n"
+	"	lsls r0, 2\n"
+	"	mov r1, sp\n"
+	"	ldr r2, _0803F15C\n"
+	"	adds r7, r0, r2\n"
+	"_0803F136:\n"
+	"	ldr r0, [r7]\n"
+	"	ldr r3, [sp, 0x48]\n"
+	"	cmp r0, r3\n"
+	"	bgt _0803F1A2\n"
+	"	ldr r4, [r1]\n"
+	"	mov r2, r8\n"
+	"	movs r0, 0x18\n"
+	"	adds r0, r5\n"
+	"	mov r9, r0\n"
+	"	movs r1, 0x20\n"
+	"	subs r1, r5\n"
+	"	mov r12, r1\n"
+	"	movs r6, 0x7\n"
+	"_0803F150:\n"
+	"	cmp r5, 0\n"
+	"	bne _0803F160\n"
+	"	movs r3, 0\n"
+	"	ldr r1, [r4]\n"
+	"	b _0803F16C\n"
+	"	.align 2, 0\n"
+	"_0803F15C: .4byte gUnknown_80F6430\n"
+	"_0803F160:\n"
+	"	ldr r0, [r4]\n"
+	"	adds r3, r0, 0\n"
+	"	mov r1, r12\n"
+	"	lsrs r3, r1\n"
+	"	adds r1, r0, 0\n"
+	"	lsls r1, r5\n"
+	"_0803F16C:\n"
+	"	adds r4, 0x4\n"
+	"	ldr r0, [r2]\n"
+	"	orrs r0, r1\n"
+	"	str r0, [r2]\n"
+	"	ldr r0, [r2, 0x20]\n"
+	"	orrs r0, r3\n"
+	"	str r0, [r2, 0x20]\n"
+	"	adds r2, 0x4\n"
+	"	movs r3, 0x1\n"
+	"	str r3, [sp, 0x50]\n"
+	"	subs r6, 0x1\n"
+	"	cmp r6, 0\n"
+	"	bge _0803F150\n"
+	"	mov r5, r9\n"
+	"	cmp r5, 0x1F\n"
+	"	ble _0803F192\n"
+	"	subs r5, 0x20\n"
+	"	movs r0, 0x20\n"
+	"	add r8, r0\n"
+	"_0803F192:\n"
+	"	ldr r0, [r7]\n"
+	"	ldr r1, [sp, 0x48]\n"
+	"	subs r1, r0\n"
+	"	str r1, [sp, 0x48]\n"
+	"	ldr r2, [sp, 0x4C]\n"
+	"	adds r2, 0x1\n"
+	"	str r2, [sp, 0x4C]\n"
+	"	b _0803F1B0\n"
+	"_0803F1A2:\n"
+	"	adds r1, 0x4\n"
+	"	adds r7, 0x4\n"
+	"	movs r3, 0x1\n"
+	"	add r10, r3\n"
+	"	mov r0, r10\n"
+	"	cmp r0, 0x8\n"
+	"	ble _0803F136\n"
+	"_0803F1B0:\n"
+	"	mov r1, r10\n"
+	"	cmp r1, 0x9\n"
+	"	bne _0803F212\n"
+	"	ldr r2, [sp, 0x50]\n"
+	"	cmp r2, 0\n"
+	"	beq _0803F212\n"
+	"	ldr r3, _0803F1DC\n"
+	"	ldr r0, [r3]\n"
+	"	ldr r0, [r0, 0x4]\n"
+	"	adds r4, r0, 0x4\n"
+	"	mov r2, r8\n"
+	"	movs r0, 0x18\n"
+	"	adds r0, r5\n"
+	"	mov r9, r0\n"
+	"	movs r1, 0x20\n"
+	"	subs r7, r1, r5\n"
+	"	movs r6, 0x7\n"
+	"_0803F1D2:\n"
+	"	cmp r5, 0\n"
+	"	bne _0803F1E0\n"
+	"	movs r3, 0\n"
+	"	ldr r1, [r4]\n"
+	"	b _0803F1EA\n"
+	"	.align 2, 0\n"
+	"_0803F1DC: .4byte gUnknown_202EC9C\n"
+	"_0803F1E0:\n"
+	"	ldr r0, [r4]\n"
+	"	adds r3, r0, 0\n"
+	"	lsrs r3, r7\n"
+	"	adds r1, r0, 0\n"
+	"	lsls r1, r5\n"
+	"_0803F1EA:\n"
+	"	adds r4, 0x4\n"
+	"	ldr r0, [r2]\n"
+	"	orrs r0, r1\n"
+	"	str r0, [r2]\n"
+	"	ldr r0, [r2, 0x20]\n"
+	"	orrs r0, r3\n"
+	"	str r0, [r2, 0x20]\n"
+	"	adds r2, 0x4\n"
+	"	subs r6, 0x1\n"
+	"	cmp r6, 0\n"
+	"	bge _0803F1D2\n"
+	"	mov r5, r9\n"
+	"	cmp r5, 0x1F\n"
+	"	ble _0803F20C\n"
+	"	subs r5, 0x20\n"
+	"	movs r2, 0x20\n"
+	"	add r8, r2\n"
+	"_0803F20C:\n"
+	"	ldr r3, [sp, 0x4C]\n"
+	"	adds r3, 0x1\n"
+	"	str r3, [sp, 0x4C]\n"
+	"_0803F212:\n"
+	"	ldr r2, [sp, 0x54]\n"
+	"	cmp r2, 0x1\n"
+	"	ble _0803F122\n"
+	"	ldr r0, _0803F240\n"
+	"	ldr r1, [r0]\n"
+	"	ldr r2, [sp, 0x48]\n"
+	"	lsls r0, r2, 5\n"
+	"	adds r0, 0x4\n"
+	"	ldr r1, [r1, 0x4]\n"
+	"	adds r1, r0\n"
+	"	mov r3, r8\n"
+	"	ldr r0, [sp, 0x4C]\n"
+	"	adds r0, 0x1\n"
+	"	mov r8, r0\n"
+	"	movs r0, 0x20\n"
+	"	subs r7, r0, r5\n"
+	"	movs r6, 0x7\n"
+	"_0803F234:\n"
+	"	cmp r5, 0\n"
+	"	bne _0803F244\n"
+	"	movs r4, 0\n"
+	"	ldr r2, [r1]\n"
+	"	b _0803F24E\n"
+	"	.align 2, 0\n"
+	"_0803F240: .4byte gUnknown_202EC9C\n"
+	"_0803F244:\n"
+	"	ldr r0, [r1]\n"
+	"	adds r4, r0, 0\n"
+	"	lsrs r4, r7\n"
+	"	adds r2, r0, 0\n"
+	"	lsls r2, r5\n"
+	"_0803F24E:\n"
+	"	adds r1, 0x4\n"
+	"	ldr r0, [r3]\n"
+	"	orrs r0, r2\n"
+	"	str r0, [r3]\n"
+	"	ldr r0, [r3, 0x20]\n"
+	"	orrs r0, r4\n"
+	"	str r0, [r3, 0x20]\n"
+	"	adds r3, 0x4\n"
+	"	subs r6, 0x1\n"
+	"	cmp r6, 0\n"
+	"	bge _0803F234\n"
+	"	mov r1, r8\n"
+	"	str r1, [sp, 0x4C]\n"
+	"	adds r0, r1, 0\n"
+	"_0803F26A:\n"
+	"	add sp, 0x58\n"
+	"	pop {r3-r5}\n"
+	"	mov r8, r3\n"
+	"	mov r9, r4\n"
+	"	mov r10, r5\n"
+	"	pop {r4-r7}\n"
+	"	pop {r1}\n"
+	"	bx r1\n");
+}
+
+void sub_803F38C(void);
+
+extern u32 gUnknown_202EDFC;
+
+void sub_803F27C(bool8 a0)
+{
+    UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
+
+    strPtr->cameraPixelPos.x = 0;
+    strPtr->cameraPixelPos.y = 0;
+    strPtr->cameraPos.x = 0;
+    strPtr->cameraPos.y = 0;
+    strPtr->cameraPixelPosMirror.x = 0;
+    strPtr->cameraPixelPosMirror.y = 0;
+    strPtr->cameraPosMirror.x = 0;
+    strPtr->cameraPosMirror.y = 0;
+
+    strPtr->unk181FC = 0;
+    strPtr->unk18216 = 0;
+    strPtr->unk18217 = 1;
+    strPtr->unk18218 = 1;
+    strPtr->unk18219 = 0;
+
+    strPtr->unk18200 = 0;
+    strPtr->unk18204 = 0;
+    if (!a0) {
+        strPtr->blinded = 0;
+        strPtr->hallucinating = 0;
+        strPtr->unk1820F = 0;
+        strPtr->unk1820D = 0;
+        strPtr->unk18211 = 0;
+        strPtr->unk1820E = 0;
+        strPtr->unk1820B = 0;
+        strPtr->unk1820C = 0;
+    }
+
+    strPtr->cameraTarget = NULL;
+    strPtr->unk18208 = 3;
+    strPtr->unk1821A = 0;
+    strPtr->unk18212 = 0;
+    strPtr->unk1821B = 0;
+    strPtr->unk1821C = 0;
+    strPtr->unk18214 = 0;
+    strPtr->unk18215 = 1;
+    sub_803F38C();
+
+    gUnknown_202EDFC = 0xFFFF;
+    if (!a0) {
+        strPtr->visibilityRange = gDungeon->unk1C574.unk16 & 3;
+        if (strPtr->visibilityRange == 0) {
+            strPtr->unk1820C = 1;
+        }
+    }
+}
+
+extern u8 gUnknown_202D06C[];
+
+void sub_803F38C(void)
+{
+    s32 palAdd;
+    UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
+
+    strPtr->unk3A = -1;
+    strPtr->unk3C = -1;
+    strPtr->unk3E = -1;
+    strPtr->unk40 = -1;
+    strPtr->unk36 = -1;
+    strPtr->unk38 = -1;
+
+    palAdd = (gGameOptionsRef->playerGender != MALE) ? 256 : 0;
+
+    SetBGPaletteBufferColorArray(0xFD, &gUnknown_202D06C[0 + palAdd]);
+    SetBGPaletteBufferColorArray(0xFE, &gUnknown_202D06C[4 + palAdd]);
+    SetBGPaletteBufferColorArray(0xFF, &gUnknown_202D06C[8 + palAdd]);
+
+    nullsub_5(0xFD, &gUnknown_202D06C[0 + palAdd]);
+    nullsub_5(0xFE, &gUnknown_202D06C[4 + palAdd]);
+    nullsub_5(0xFF, &gUnknown_202D06C[8 + palAdd]);
+}
+
+bool8 sub_803F428(Position *pos)
+{
+    UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
+    Entity *cameraEntity = strPtr->cameraTarget;
+
+    if (abs(strPtr->cameraPos.x - pos->x) <= 6 && abs(strPtr->cameraPos.y - pos->y) <= 5) {
+        if (strPtr->unk1820B == 0 && strPtr->unk1820C == 0 && cameraEntity != NULL) {
+            return IsPositionActuallyInSight(&strPtr->cameraPos, pos);
+        }
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+void sub_803F580(u8 a0);
+void sub_803F7BC(void);
+extern void sub_8049ED4(void);
+extern void sub_8040A84(void);
+extern void sub_80400D4(void);
+
+void sub_803F4A0(Entity *a0)
+{
+    UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
+
+    strPtr->cameraTarget = a0;
+    if (a0 == NULL) {
+        strPtr->unk18216 = 0;
+    }
+    else if (!GetEntInfo(a0)->isTeamLeader) {
+        strPtr->unk18216 = 0;
+    }
+    else {
+        strPtr->unk18216 = 1;
+    }
+
+    sub_803F580(0);
+    sub_803F38C();
+    if (gDungeon->unk1356C == 0) {
+        sub_806CD90();
+    }
+}
+
+// Very similar to the one above
+void sub_803F508(Entity *a0)
+{
+    UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
+
+    if (a0 == NULL) {
+        strPtr->unk18216 = 0;
+    }
+    else if (!GetEntInfo(a0)->isTeamLeader) {
+        strPtr->unk18216 = 0;
+    }
+    else {
+        strPtr->unk18216 = 1;
+    }
+    strPtr->cameraTarget = a0;
+
+    sub_803F580(0);
+    sub_803F38C();
+    if (gDungeon->unk1356C == 0) {
+        sub_806CD90();
+    }
+    sub_8049ED4();
+    sub_8040A84();
+}
+
+extern void sub_8041888(u8 param_1);
+extern void sub_804A1F0(s32 a0, s32 a1);
+extern void sub_804A49C(s32 a0, s32 a1);
+extern void sub_80402AC(s32, s32);
+
+void sub_803F580(u8 a0)
+{
+    UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
+    Entity *cameraTarget = strPtr->cameraTarget;
+
+    if (cameraTarget != NULL && EntityExists(cameraTarget)) {
+        s32 i;
+        u32 before, unk18214;
+        EntityInfo *info = GetEntInfo(cameraTarget);
+
+        strPtr->cameraPixelPosMirror = strPtr->cameraPixelPos;
+        strPtr->cameraPosMirror = strPtr->cameraPos;
+        strPtr->cameraPos.x = cameraTarget->pos.x;
+        strPtr->cameraPos.y = cameraTarget->pos.y;
+
+        strPtr->cameraPixelPos.x = (cameraTarget->pixelPos.x / 256) - 120;
+        strPtr->cameraPixelPos.y = (cameraTarget->pixelPos.y / 256) - 96;
+
+        if (HasHeldItem(cameraTarget, ITEM_X_RAY_SPECS) && info->isTeamLeader) {
+            strPtr->unk1820D = 1;
+            strPtr->unk1820E = 1;
+        }
+        else {
+            strPtr->unk1820D = info->powerEars;
+            strPtr->unk1820E = info->scanning;
+        }
+
+        strPtr->unk18211 = info->stairSpotter;
+        before = strPtr->blinded;
+        unk18214 = strPtr->unk18214;
+        if (unk18214 == 0) {
+            u32 unkVar;
+            if (info->eyesightStatus.eyesightStatus == STATUS_BLINKER) {
+                strPtr->blinded = 1;
+                unkVar = 0xE;
+            }
+            else {
+                strPtr->blinded = unk18214;
+                unkVar = 0;
+            }
+
+            if (gUnknown_202EDFC != unkVar) {
+                gUnknown_202EDFC = unkVar;
+                SetBGOBJEnableFlags(unkVar);
+            }
+        }
+        else {
+            gUnknown_202EDFC = 0xFFFF;
+        }
+
+        if (before != strPtr->blinded) {
+            sub_8041888(0);
+        }
+
+        before = strPtr->hallucinating;
+        if (info->eyesightStatus.eyesightStatus == STATUS_CROSS_EYED) {
+            strPtr->hallucinating = 1;
+        }
+        else {
+            strPtr->hallucinating = 0;
+        }
+
+        if (before != strPtr->hallucinating) {
+            sub_806CC70();
+            sub_8041888(0);
+        }
+
+        before = strPtr->unk1820F;
+        if (CanSeeInvisibleMonsters(cameraTarget)) {
+            strPtr->unk1820F = 1;
+        }
+        else {
+            strPtr->unk1820F = 0;
+        }
+
+        if (before != strPtr->unk1820F) {
+            sub_8049ED4();
+            sub_8040A84();
+            sub_8041888(0);
+        }
+
+        if (a0 && strPtr->unk18213 == 0) {
+            if (abs(strPtr->cameraPixelPosMirror.x - strPtr->cameraPixelPos.x) > 7 || abs(strPtr->cameraPixelPosMirror.y - strPtr->cameraPixelPos.y) > 7) {
+                sub_8049ED4();
+                strPtr->unk18213 = 1;
+            }
+            else {
+                if (strPtr->cameraPixelPosMirror.x < strPtr->cameraPixelPos.x) {
+                    sub_804A1F0(240, 0);
+                }
+                else if (strPtr->cameraPixelPosMirror.x > strPtr->cameraPixelPos.x) {
+                    sub_804A1F0(0, 0);
+                }
+
+                if (strPtr->cameraPixelPosMirror.y < strPtr->cameraPixelPos.y) {
+                    sub_804A49C(0, 160);
+                }
+                else if (strPtr->cameraPixelPosMirror.y > strPtr->cameraPixelPos.y) {
+                    sub_804A49C(0, 0);
+                }
+            }
+        }
+
+        if (strPtr->cameraPos.x != strPtr->cameraPosMirror.x || strPtr->cameraPos.y != strPtr->cameraPosMirror.y) {
+            for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
+                Entity *mon = gDungeon->allPokemon[i];
+                if (EntityExists(mon)) {
+                    sub_80402AC(mon->pos.x, mon->pos.y);
+                }
+            }
+        }
+    }
+
+    sub_80400D4();
+    sub_803F7BC();
 }
 
 //

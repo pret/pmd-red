@@ -59,7 +59,7 @@ void nullsub_4(s32 index, const u8 *colorArray, s32 a1, u8 *a2)
 {
 }
 
-void nullsub_5(void)
+void nullsub_5(s32 index, const u8 *colorArray)
 {
 }
 

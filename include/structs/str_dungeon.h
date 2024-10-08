@@ -82,39 +82,43 @@ typedef struct DungeonMusicPlayer
 // Size unknown?
 typedef struct UnkDungeonGlobal_unk181E8_sub
 {
-    /* 0x181E8 */ Position cameraPos;
-    /* 0x181EC */ Position cameraPosMirror;
-    /* 0x181F0 */ Position cameraPixelPos;
-    /* 0x181F4 */ Position cameraPixelPosMirror;
-    /* 0x181F8 */ Entity *cameraTarget;
-    u32 unk181FC;
-    u32 unk18200;
-    u32 unk18204;
-    u8 unk18208;
-    /* 0x18209 */ u8 visibilityRange; // Dungeon light level.
-    /* 0x1820A */ bool8 blinded; // Blacks out the screen when the player has the Blinker status.
-    u8 unk1820B;
-    u8 unk1820C;
-    u8 unk1820D;
-    u8 unk1820E;
-    u8 unk1820F;
-    /* 0x18210 */ bool8 hallucinating; // Displays Substitute and flower sprites when the player has the Cross-Eyed status.
-    u8 unk18211;
-    u8 unk18212;
-    u8 unk18213;
-    u8 unk18214;
-    u8 unk18215;
-    u8 fill18216;
-    u8 unk18217;
-    u8 fill18218;
-    u8 fill18219;
-    u8 unk1821A;
-    u8 unk1821B;
-    u8 unk1821C;
-    u8 fill1821D;
-    u8 fill1821E;
-    u8 fill1821F;
-} UnkDungeonGlobal_unk181E8_sub;
+    /* 0x181E8 */ Position cameraPos;       // x0
+    /* 0x181EC */ Position cameraPosMirror; // x4
+    /* 0x181F0 */ Position cameraPixelPos;  // x8
+    /* 0x181F4 */ Position cameraPixelPosMirror; // xC
+    /* 0x181F8 */ Entity *cameraTarget; // x10
+    u32 unk181FC; // x14
+    u32 unk18200; // x18
+    u32 unk18204; // x1C
+    u8 unk18208; // x20
+    /* 0x18209 */ u8 visibilityRange; // x21 Dungeon light level.
+    /* 0x1820A */ bool8 blinded; // x22 Blacks out the screen when the player has the Blinker status.
+    u8 unk1820B; // x23
+    u8 unk1820C; // x24
+    u8 unk1820D; // x25
+    u8 unk1820E; // x26
+    u8 unk1820F; // x27
+    /* 0x18210 */ bool8 hallucinating; // x28 Displays Substitute and flower sprites when the player has the Cross-Eyed status.
+    u8 unk18211; // x29
+    u8 unk18212; // x2A
+    u8 unk18213; // x2B
+    u8 unk18214; // x2C
+    u8 unk18215; // x2D
+    u8 unk18216; // x2E
+    u8 unk18217; // x2F
+    u8 unk18218; // x30
+    u8 unk18219; // x31
+    u8 unk1821A; // x32
+    u8 unk1821B; // x33
+    u8 unk1821C; // x34
+    u8 fill1821D; // x35
+    s16 unk36; // x36
+    s16 unk38; // x38
+    s16 unk3A; // x3A
+    s16 unk3C; // x3C
+    s16 unk3E; // x3E
+    s16 unk40; // x40
+} UnkDungeonGlobal_unk181E8_sub; // x44
 
 // Sizeof: 0x1C
 typedef struct UnkDungeonGlobal_unk1C574
@@ -325,7 +329,7 @@ typedef struct Dungeon
     /* 0x17B44 */ OpenedFile *sprites[MONSTER_MAX];
     /* 0x181E4 */ OpenedFile *paletFile;
     /* 0x181E8 */ UnkDungeonGlobal_unk181E8_sub unk181e8;
-    u8 fill18220[0x1C06C - 0x18220];
+    u8 fill1822C[0x1C06C - 0x1822C];
     u32 unk1C06C;
     u8 fill1C070[0x1C570 - 0x1C070];
     /* 0x1C570 */ DungeonLocation unk1C570;
