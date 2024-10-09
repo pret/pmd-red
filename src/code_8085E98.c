@@ -4,31 +4,13 @@
 #include "code_803E46C.h"
 #include "dungeon_util.h"
 #include "items.h"
+#include "code_800DAC0.h"
 
 #include "structs/str_dungeon.h"
 
-struct unkStruct_80420E8
-{
-    u32 unk0;
-    u32 unk4;
-    u32 unk8;
-};
-extern const struct unkStruct_80420E8 gUnknown_8107374;
+extern const unkStruct_2039DB0 gUnknown_8107374;
 
-typedef struct unkStruct_80416E0
-{
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    u16 x;
-    u16 y;
-    u16 unk10;
-    u16 unk12;
-    s32 unk14;
-    u32 unk18;
-} unkStruct_80416E0;
 
-extern u32 sub_800E890(unkStruct_80416E0 *);
 void sub_800EF64(void);
 void sub_800EE5C(s32);
 void sub_8085F44(s32);
@@ -52,7 +34,6 @@ u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,Position *param_4,bool32 par
 {
     u32 uVar1;
     unkStruct_80416E0 local_40;
-    struct unkStruct_80420E8 local;
 
     bool8 param_5_bool8;
     s32 param_1_s32 = param_1;
@@ -71,8 +52,7 @@ u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,Position *param_4,bool32 par
     local_40.unk10 = 0;
     local_40.unk12 = 0;
     local_40.unk18 = 0xffff;
-    local = gUnknown_8107374;
-
+    local_40.unk1C = gUnknown_8107374;
 
     uVar1 = sub_800E890(&local_40);
     if (param_5_bool8) {

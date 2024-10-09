@@ -1,30 +1,12 @@
 #include "global.h"
 #include "constants/direction.h"
 #include "code_80861A8.h"
-
+#include "code_800DAC0.h"
 #include "code_803E668.h"
 #include "code_806CD90.h"
 #include "dungeon_music.h"
 
-typedef struct unkStruct_80416E0
-{
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    u16 x;
-    u16 y;
-    u16 unk10;
-    u16 unk12;
-    s32 unk14;
-    u32 unk18;
-} unkStruct_80416E0;
-extern s32 sub_800E890(unkStruct_80416E0 *);
-
-struct unkStruct_8107380
-{
-    u8 unk0[12];
-};
-extern struct unkStruct_8107380 gUnknown_8107380;
+extern const unkStruct_2039DB0 gUnknown_8107380;
 
 extern const u8 *gUnknown_810665C[];
 extern const u8 *gUnknown_810668C[];
@@ -41,7 +23,7 @@ s32 sub_800E700(s32);
 void sub_800569C(Position *, EntitySpriteInfo *, u8);
 void sub_8085F44(void);
 
-void sub_8052FB8(const u8 *); 
+void sub_8052FB8(const u8 *);
 
 void sub_8086124(Entity *entity, u8 param_2)
 {
@@ -97,7 +79,6 @@ s32 sub_80861F8(s16 param_1,Entity *param_2,bool32 param_3)
   s32 uStack_38;
   Position pos;
   unkStruct_80416E0 stack;
-  struct unkStruct_8107380 stack4;
 
 #ifdef NONMATCHING
   s32 param_1_s32 = param_1;
@@ -106,7 +87,7 @@ s32 sub_80861F8(s16 param_1,Entity *param_2,bool32 param_3)
 #endif
 
   u8 param_3_bool32 = param_3;
-    
+
   sub_800EE5C(param_1);
   sub_800EF64();
   sub_803E46C(0x46);
@@ -122,12 +103,12 @@ s32 sub_80861F8(s16 param_1,Entity *param_2,bool32 param_3)
   stack.unk8 = (u32)(info->action).direction;
   stack.x = (param_2->pixelPos).x / 256;
   stack.y = (param_2->pixelPos).y / 256;
-    
+
   stack.unk10 = pos.x;
   stack.unk12 = pos.y;
   stack.unk14 = uStack_38;
   stack.unk18 = 0xffff;
-  stack4 = gUnknown_8107380;
+  stack.unk1C = gUnknown_8107380;
 
   uVar2 = sub_800E890(&stack);
   if (param_3_bool32 != '\0') {
