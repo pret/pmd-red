@@ -118,6 +118,7 @@ typedef struct UnkDungeonGlobal_unk181E8_sub
     s16 unk3C; // x3C
     s16 unk3E; // x3E
     s16 unk40; // x40
+    s16 unk42; // x42
 } UnkDungeonGlobal_unk181E8_sub; // x44
 
 // Sizeof: 0x1C

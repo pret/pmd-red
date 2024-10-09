@@ -9,10 +9,13 @@
 #include "code_8009804.h"
 #include "code_803E46C.h"
 #include "dungeon_util.h"
+#include "code_800E9E4.h"
 #include "dungeon_pokemon_attributes.h"
+#include "dungeon_map_access.h"
 #include "sprite.h"
 #include "bg_control.h"
 #include "game_options.h"
+#include "code_800558C.h"
 #include "dungeon_range.h"
 #include "code_806CD90.h"
 #include "dungeon_items.h"
@@ -1071,6 +1074,362 @@ void sub_803F580(u8 a0)
 
     sub_80400D4();
     sub_803F7BC();
+}
+
+void sub_803F7BC(void)
+{
+    UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
+    Tile *tile = GetTile(strPtr->cameraPos.x, strPtr->cameraPos.y);
+    u32 roomId = tile->room;
+
+    if (strPtr->unk1820B != 0 || strPtr->unk1820C != 0 || strPtr->unk18217 != 0) {
+        sub_8005838(NULL, 0);
+    }
+    else if (roomId == 0xFF) {
+        u32 kind = (strPtr->visibilityRange == 2) ? 1 : 2;
+        sub_8005838(NULL, kind);
+    }
+    else {
+        s32 sp[4];
+        RoomData *room = &gDungeon->roomData[roomId];
+
+        sp[0] = room->unkC - strPtr->cameraPixelPos.x;
+        sp[1] = room->unk10 - strPtr->cameraPixelPos.y;
+        sp[2] = room->unk14 - strPtr->cameraPixelPos.x;
+        sp[3] = room->unk18 - strPtr->cameraPixelPos.y;
+        sub_8005838(sp, 3);
+    }
+}
+
+void sub_803F878(s32 a0, s32 a1)
+{
+    UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
+
+    strPtr->cameraPixelPosMirror = strPtr->cameraPixelPos;
+    strPtr->cameraPosMirror = strPtr->cameraPos;
+    strPtr->cameraPixelPos.x = (a0 / 256) - 120;
+    strPtr->cameraPixelPos.y = (a1 / 256) - 96;
+    strPtr->cameraPos.x = a0 / 6144;
+    strPtr->cameraPos.y = a1 / 6144;
+    strPtr->unk1820D = 0;
+    strPtr->unk1820E = 0;
+    strPtr->unk18211 = 0;
+    strPtr->unk18216 = 0;
+
+    if (gUnknown_202EDFC != 0) {
+        gUnknown_202EDFC = 0;
+        SetBGOBJEnableFlags(0);
+    }
+
+    if (abs(strPtr->cameraPixelPosMirror.x - strPtr->cameraPixelPos.x) > 7 || abs(strPtr->cameraPixelPosMirror.y - strPtr->cameraPixelPos.y) > 7) {
+        sub_8049ED4();
+        strPtr->unk18213 = 1;
+    }
+    else {
+        if (strPtr->cameraPixelPosMirror.x < strPtr->cameraPixelPos.x) {
+            sub_804A1F0(240, 0);
+        }
+        else if (strPtr->cameraPixelPosMirror.x > strPtr->cameraPixelPos.x) {
+            sub_804A1F0(0, 0);
+        }
+
+        if (strPtr->cameraPixelPosMirror.y < strPtr->cameraPixelPos.y) {
+            sub_804A49C(0, 160);
+        }
+        else if (strPtr->cameraPixelPosMirror.y > strPtr->cameraPixelPos.y) {
+            sub_804A49C(0, 0);
+        }
+    }
+
+    sub_803F7BC();
+}
+
+s32 GetCameraXPos(void)
+{
+    UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
+    return (strPtr->cameraPixelPos.x + 120) * 256;
+}
+
+s32 GetCameraYPos(void)
+{
+    UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
+    return (strPtr->cameraPixelPos.y + 96) * 256;
+}
+
+void sub_803FB74(void);
+extern u8 gUnknown_20274A5;
+
+void sub_803F9CC(void)
+{
+    s32 i;
+    Entity *cameraTarget = gDungeon->unk181e8.cameraTarget;
+    bool32 r5 = FALSE;
+
+    if (gDungeon->unk1356C != 0 || gDungeon->unk181e8.unk18218 != 0 || sub_800EC74() != 0) {
+        r5 = FALSE;
+    }
+    else if (cameraTarget != NULL && GetEntityType(cameraTarget) == ENTITY_MONSTER) {
+        r5 = TRUE;
+    }
+
+    if (!r5) {
+        for (i = 1; i < 30; i++) {
+            gUnknown_202B038[0][0][i] = 0;
+        }
+        sub_803F38C();
+    }
+    else {
+        sub_803FB74();
+    }
+
+    gUnknown_20274A5 = 1;
+}
+
+extern u32 gUnknown_3001018[];
+extern const u32 gUnknown_80F6490[];
+
+void sub_803FA4C(s32 a0, s32 a1, bool8 a2)
+{
+    s32 i;
+    s32 r5;
+    u32 r10, r9;
+    u32 sp[9];
+    UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
+    u32 *dst = gUnknown_3001018;
+    memcpy(sp, gUnknown_80F6490, sizeof(sp));
+
+    r10 = 0x22222222;
+    r9 = 0x44444444;
+    if (a0 == strPtr->unk3E && a1 == strPtr->unk40)
+        return;
+    if (!a2) {
+        r9 = 0x55555555;
+    }
+
+    strPtr->unk3E = a0;
+    strPtr->unk40 = a1;
+    r5 = a1;
+    if (r5 >= 96) {
+        r5 = 96;
+        a0 = (a0 * 96) / a1;
+    }
+
+    for (i = 0; i < 96; i += 8) {
+        u32 val0, val1;
+        u32 val6 = 0x77777777;
+        s32 id1 = a0;
+        s32 id2 = r5;
+
+        if (a0 >= 8) {
+            id1 = 8;
+        }
+        if (r5 >= 8) {
+            id2 = 8;
+        }
+
+        val1 = sp[id2] & ~(sp[id1]);
+        val1 &= r10;
+        val0 = (sp[id1] & r9) | val1;
+        val6 = sp[id2] & val6;
+        *(dst++) = 0;
+        *(dst++) = val6;
+        *(dst++) = val0;
+        *(dst++) = val0;
+        *(dst++) = val0;
+        *(dst++) = val0;
+        *(dst++) = val6;
+        *(dst++) = 0;
+
+        a0 -= 8;
+        r5 -= 8;
+        if (a0 < 0) {
+            a0 = 0;
+        }
+        if (r5 < 0) {
+            r5 = 0;
+        }
+    }
+    sub_80098BC((void *) VRAM + 0x5980, gUnknown_3001018, 0x180);
+}
+
+extern s32 gUnknown_202EDCC;
+
+// 2d array? possibly the same as gUnknown_202D06C TODO: merge the variables
+extern u8 gUnknown_202D068[];
+
+void sub_803FE30(s32 a0, u16 *a1, u8 a2, u8 a3);
+void sub_803FF18(s32 a0, u16 *a1, u8 a2);
+
+void sub_803FB74(void)
+{
+    s32 i;
+    u16 *arrPtr;
+    s32 r5, r6, unkFloor;
+    UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
+    bool32 lowHp = FALSE;
+    bool32 hungry = FALSE;
+    EntityInfo *entInfo = GetEntInfo(strPtr->cameraTarget);
+    s32 hp = entInfo->HP;
+    s32 maxHp = entInfo->maxHPStat;
+    s32 level = entInfo->level;
+
+    if (entInfo->HP > 0 && entInfo->HP <= entInfo->maxHPStat / 4) {
+        lowHp = TRUE;
+    }
+    // reloaded again
+    entInfo = GetEntInfo(strPtr->cameraTarget);
+    if (FixedPointToInt(entInfo->belly) == 0) {
+        hungry = TRUE;
+    }
+
+    if (lowHp && (gUnknown_202EDCC & 16) != 0) {
+        r5 = 32, r6 = 32;
+    }
+    else {
+        r5 = 0, r6 = 0;
+    }
+
+    if (hungry && (gUnknown_202EDCC & 16) != 0) {
+        r5 = 48, r6 = 48;
+    }
+
+    if (r5 == 0) {
+        if (strPtr->unk18212 != 0) {
+            r5 = 96;
+        }
+        else if (gGameOptionsRef->playerGender != MALE) {
+            r5 = 64;
+        }
+    }
+
+    if (r6 == 0) {
+        if (gGameOptionsRef->playerGender != MALE) {
+            r6 = 64;
+        }
+    }
+
+    if (strPtr->unk36 != r5) {
+        strPtr->unk36 = r5;
+        SetBGPaletteBufferColorArray(0xFC, &gUnknown_202D068[0 + r5 * 4]);
+        SetBGPaletteBufferColorArray(0xFD, &gUnknown_202D068[4 + r5 * 4]);
+        SetBGPaletteBufferColorArray(0xFE, &gUnknown_202D068[8 + r5 * 4]);
+        SetBGPaletteBufferColorArray(0xFF, &gUnknown_202D068[12 + r5 * 4]);
+    }
+
+    if (strPtr->unk38 != r6) {
+        strPtr->unk38 = r6;
+        nullsub_5(0xFC, &gUnknown_202D068[0 + r6 * 4]);
+        nullsub_5(0xFD, &gUnknown_202D068[4 + r6 * 4]);
+        nullsub_5(0xFE, &gUnknown_202D068[8 + r6 * 4]);
+        nullsub_5(0xFF, &gUnknown_202D068[12 + r6 * 4]);
+    }
+
+    arrPtr = gUnknown_202B038[0][0];
+    unkFloor = gDungeon->unk14 + gDungeon->dungeonLocation.floor;
+    if (strPtr->unk3A != unkFloor) {
+        strPtr->unk3A = unkFloor;
+        if (IsStairDirectionUp(gDungeon->dungeonLocation.id)) {
+            arrPtr[1] = 0;
+        }
+        else {
+            arrPtr[1] = 0xF2BE;
+        }
+
+        if (unkFloor < 10) {
+            sub_803FE30(unkFloor, &arrPtr[2], strPtr->unk18216, 1);
+            arrPtr[3] = 0xF2B8;
+        }
+        else {
+            sub_803FE30(unkFloor, &arrPtr[2], strPtr->unk18216, 0);
+            arrPtr[4] = 0xF2B8;
+        }
+    }
+
+    if (strPtr->unk3C != level) {
+        strPtr->unk3C = level;
+        arrPtr[5] = 0xF2B9;
+        arrPtr[6] = 0xF2BA;
+        sub_803FE30(level, &arrPtr[7], strPtr->unk18216, 0);
+    }
+
+    if (strPtr->unk3E != hp) {
+        arrPtr[9] = 0xF2BB;
+        arrPtr[10] = 0xF2BC;
+        sub_803FF18(hp, &arrPtr[11], strPtr->unk18216);
+    }
+
+    if (strPtr->unk40 != maxHp) {
+        arrPtr[14] = 0xF2BD;
+        sub_803FF18(maxHp, &arrPtr[15], strPtr->unk18216);
+    }
+
+    sub_803FA4C(hp, maxHp, strPtr->unk18216);
+    strPtr->unk40 = maxHp;
+    strPtr->unk3E = hp;
+    strPtr->unk42 = maxHp / 8;
+    if (maxHp % 8 != 0) {
+        strPtr->unk42++;
+    }
+
+    if (strPtr->unk42 >= 12) {
+        strPtr->unk42 = 12;
+    }
+
+    for (i = 0; i < 12; i++) {
+        gUnknown_202B038[0][0][18 + i] = (0x2CC + i) | 0xF000;
+    }
+}
+
+extern const s32 gUnknown_80F64B4[];
+extern const u16 gUnknown_80F64D8[][9];
+
+void sub_803FE30(s32 a0, u16 *a1, u8 a2, u8 a3)
+{
+    s32 var = 0;
+    if (!a2) {
+        var = 55;
+    }
+
+    if (a0 > 100) {
+        if (a2) {
+            a1[0] = 0xF291;
+            a1[1] = 0xF291;
+        }
+        else {
+            a1[0] = 0xF2C8;
+            a1[1] = 0xF2C8;
+        }
+    }
+    else if (a0 == 100) {
+        a1[0] = 0xF294;
+        a1[1] = 0xF295;
+    }
+    else {
+        // I thought 'ptr' was a compiler generated variable, but I couldn't match the function without declaring it.
+        u16 *ptr = a1 + 1;
+        s32 r7 = var + 48;
+
+        if (a0 >= 10) {
+            s32 i;
+            s32 arrId = (a2 == 0) ? 1 : 0;
+
+            for (i = 0; i < 9; i++) {
+                #ifndef NONMATCHING
+                a1++;a1--; // Good old matching trick.
+                #endif // NONMATCHING
+                if (gUnknown_80F64B4[i] <= a0) {
+                    *a1 = gUnknown_80F64D8[arrId][i];
+                    *ptr  = (((a0 - gUnknown_80F64B4[i]) + r7) + 0x258) | 0xF000;
+                    return;
+                }
+            }
+        }
+        if (a3 == 0) {
+            *(a1++) = 0xF278;
+        }
+
+        *a1 = (a0 + r7 + 0x258) | 0xF000;
+    }
 }
 
 //
