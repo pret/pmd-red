@@ -1090,7 +1090,7 @@ void sub_803F7BC(void)
     if (strPtr->unk1820B != 0 || strPtr->unk1820C != 0 || strPtr->unk18217 != 0) {
         sub_8005838(NULL, 0);
     }
-    else if (roomId == 0xFF) {
+    else if (roomId == CORRIDOR_ROOM) {
         u32 kind = (strPtr->visibilityRange == 2) ? 1 : 2;
         sub_8005838(NULL, kind);
     }
