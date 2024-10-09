@@ -25,6 +25,7 @@
 extern s32 gUnknown_202EDC8;
 extern u32 gUnknown_202EDD0;
 extern s32 gUnknown_202EDD8;
+extern u32 gUnknown_202EDFC;
 
 struct DungeonPalFile
 {
@@ -37,14 +38,52 @@ extern struct DungeonPalFile *gDungeonNameBannerPalette;
 extern struct DungeonPalFile *gUnknown_202EC94;
 extern u8 gUnknown_202ECA4[];
 extern u8 gUnknown_202D058[];
+extern u8 gUnknown_203B40C;
+extern MenuInputStruct gUnknown_202EE10;
+extern SpriteOAM gUnknown_202EDDC;
 
 extern const u8 gUnknown_80F62AC[];
+extern const struct UnkTextStruct2 gUnknown_80F62B0[];
+extern const struct UnkTextStruct2 gUnknown_80F6310[];
+extern const struct UnkTextStruct2 gUnknown_80F6370[];
+extern const struct UnkTextStruct2 gUnknown_80F63D0[];
+extern const u32 gUnknown_80F6490[];
+extern const s32 gUnknown_80F64B4[];
+extern const s32 gUnknown_80F64FC[];
+extern const s32 gUnknown_80F6520[];
+extern const u16 gUnknown_80F64D8[][9];
+extern const u16 gUnknown_80F6544[][9];
+
+extern u8 gUnknown_20274A5;
+
+extern u8 gUnknown_202D06C[];
+// 2d array? possibly the same as gUnknown_202D06C TODO: merge the variables
+extern u8 gUnknown_202D068[];
+
+extern s32 gUnknown_202EDCC;
+extern u32 gUnknown_3001018[];
 
 extern void sub_8052210(u32);
 extern void sub_8040A84();
 extern void sub_8083D44(void);
+extern void sub_8052210(u32);
+extern void sub_8049ED4(void);
+extern void sub_8040A84(void);
+extern void sub_80400D4(void);
+extern void sub_8041888(u8 param_1);
+extern void sub_804A1F0(s32 a0, s32 a1);
+extern void sub_804A49C(s32 a0, s32 a1);
+extern void sub_80402AC(s32, s32);
 
 void sub_803EC94(void);
+void sub_8040ABC(u8 a0);
+s32 sub_803EF90(s32 a0, u8 a1);
+void sub_803F580(u8 a0);
+void sub_803F7BC(void);
+void sub_803F38C(void);
+void sub_803FB74(void);
+void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3);
+void sub_803FF18(s32 a0, u16 *a1, bool8 a2);
 
 void sub_803E874(bool8 r10, s32 r9)
 {
@@ -146,15 +185,6 @@ void sub_803EA10(void)
     SetBGPaletteBufferColorRGB(248, gUnknown_202D058, gUnknown_202EDC8, NULL);
 }
 
-extern u8 gUnknown_203B40C;
-
-extern const struct UnkTextStruct2 gUnknown_80F62B0[];
-extern const struct UnkTextStruct2 gUnknown_80F6310[];
-extern const struct UnkTextStruct2 gUnknown_80F6370[];
-extern const struct UnkTextStruct2 gUnknown_80F63D0[];
-
-void sub_8040ABC(u8 a0);
-
 void sub_803EAF0(u32 a0, u8 *a1)
 {
     if (a0 == gUnknown_202EDD0)
@@ -237,8 +267,6 @@ void sub_803EAF0(u32 a0, u8 *a1)
     gUnknown_202EDD0 = a0;
 }
 
-extern MenuInputStruct gUnknown_202EE10;
-
 void sub_803EC94(void)
 {
     gUnknown_202EE10.unk1E = 0;
@@ -248,8 +276,6 @@ void sub_803EC94(void)
     gUnknown_202EE10.unk14.x = 0;
     sub_801317C(&gUnknown_202EE10.unk28);
 }
-
-extern void sub_8052210(u32);
 
 void sub_803ECB4(UnkTextStruct2 *a0, bool8 a1)
 {
@@ -269,8 +295,6 @@ void sub_803ECE0(void)
 
     sub_80098BC((void *)VRAM + 0x14400, gUnknown_202EC94->unk4 + ((gUnknown_202EDD8 / 4) * 0x240), 0x240);
 }
-
-s32 sub_803EF90(s32 a0, u8 a1);
 
 struct UnkStruct_202EDE8
 {
@@ -321,8 +345,6 @@ void sub_803ED30(s32 a0, Entity *mon, u8 a2, s32 a3)
 
     sub_80098BC((void *) VRAM + 0x142C0, gDungeon->unk18, 0x80);
 }
-
-extern SpriteOAM gUnknown_202EDDC;
 
 void sub_803EDF0(void)
 {
@@ -806,10 +828,6 @@ NAKED s32 sub_803EF90(s32 a0, u8 a1)
 	"	bx r1\n");
 }
 
-void sub_803F38C(void);
-
-extern u32 gUnknown_202EDFC;
-
 void sub_803F27C(bool8 a0)
 {
     UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
@@ -861,8 +879,6 @@ void sub_803F27C(bool8 a0)
     }
 }
 
-extern u8 gUnknown_202D06C[];
-
 void sub_803F38C(void)
 {
     s32 palAdd;
@@ -900,12 +916,6 @@ bool8 sub_803F428(Position *pos)
 
     return FALSE;
 }
-
-void sub_803F580(u8 a0);
-void sub_803F7BC(void);
-extern void sub_8049ED4(void);
-extern void sub_8040A84(void);
-extern void sub_80400D4(void);
 
 void sub_803F4A0(Entity *a0)
 {
@@ -953,11 +963,6 @@ void sub_803F508(Entity *a0)
     sub_8049ED4();
     sub_8040A84();
 }
-
-extern void sub_8041888(u8 param_1);
-extern void sub_804A1F0(s32 a0, s32 a1);
-extern void sub_804A49C(s32 a0, s32 a1);
-extern void sub_80402AC(s32, s32);
 
 void sub_803F580(u8 a0)
 {
@@ -1156,9 +1161,6 @@ s32 GetCameraYPos(void)
     return (strPtr->cameraPixelPos.y + 96) * 256;
 }
 
-void sub_803FB74(void);
-extern u8 gUnknown_20274A5;
-
 void sub_803F9CC(void)
 {
     s32 i;
@@ -1184,9 +1186,6 @@ void sub_803F9CC(void)
 
     gUnknown_20274A5 = 1;
 }
-
-extern u32 gUnknown_3001018[];
-extern const u32 gUnknown_80F6490[];
 
 void sub_803FA4C(s32 a0, s32 a1, bool8 a2)
 {
@@ -1251,14 +1250,6 @@ void sub_803FA4C(s32 a0, s32 a1, bool8 a2)
     }
     sub_80098BC((void *) VRAM + 0x5980, gUnknown_3001018, 0x180);
 }
-
-extern s32 gUnknown_202EDCC;
-
-// 2d array? possibly the same as gUnknown_202D06C TODO: merge the variables
-extern u8 gUnknown_202D068[];
-
-void sub_803FE30(s32 a0, u16 *a1, u8 a2, u8 a3);
-void sub_803FF18(s32 a0, u16 *a1, u8 a2);
 
 void sub_803FB74(void)
 {
@@ -1380,15 +1371,9 @@ void sub_803FB74(void)
     }
 }
 
-extern const s32 gUnknown_80F64B4[];
-extern const u16 gUnknown_80F64D8[][9];
-
-void sub_803FE30(s32 a0, u16 *a1, u8 a2, u8 a3)
+void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3)
 {
-    s32 var = 0;
-    if (!a2) {
-        var = 55;
-    }
+    s32 var = (a2) ? 0 : 55;
 
     if (a0 > 100) {
         if (a2) {
@@ -1407,11 +1392,11 @@ void sub_803FE30(s32 a0, u16 *a1, u8 a2, u8 a3)
     else {
         // I thought 'ptr' was a compiler generated variable, but I couldn't match the function without declaring it.
         u16 *ptr = a1 + 1;
-        s32 r7 = var + 48;
+        s32 varAdd = var + 48;
 
         if (a0 >= 10) {
             s32 i;
-            s32 arrId = (a2 == 0) ? 1 : 0;
+            s32 arrId = (!a2) ? 1 : 0;
 
             for (i = 0; i < 9; i++) {
                 #ifndef NONMATCHING
@@ -1419,17 +1404,58 @@ void sub_803FE30(s32 a0, u16 *a1, u8 a2, u8 a3)
                 #endif // NONMATCHING
                 if (gUnknown_80F64B4[i] <= a0) {
                     *a1 = gUnknown_80F64D8[arrId][i];
-                    *ptr  = (((a0 - gUnknown_80F64B4[i]) + r7) + 0x258) | 0xF000;
+                    *ptr  = (((a0 - gUnknown_80F64B4[i]) + varAdd) + 0x258) | 0xF000;
                     return;
                 }
             }
         }
-        if (a3 == 0) {
+        if (!a3) {
             *(a1++) = 0xF278;
         }
 
-        *a1 = (a0 + r7 + 0x258) | 0xF000;
+        *a1 = (a0 + varAdd + 0x258) | 0xF000;
     }
 }
 
-//
+void sub_803FF18(s32 a0, u16 *a1, bool8 a2)
+{
+    s32 arrId = (!a2) ? 1 : 0;
+    s32 var = (a2) ? 0 : 55;
+
+    if (a0 > 999) {
+        u16 val = gUnknown_80F6544[arrId][0];
+        *(a1++) = val;
+        *(a1++) = val;
+        *a1 = val;
+    }
+    else {
+        u8 toAdd = 32;
+        s32 i = 0;
+        s32 varAdd = var + 48;
+
+        for (i = 0; i < 9; i++) {
+            if (gUnknown_80F64FC[i] <= a0) {
+                *(a1++) = gUnknown_80F6544[arrId][i];
+                a0 -= gUnknown_80F64FC[i];
+                toAdd = varAdd;
+                break;
+            }
+        }
+        if (i == 9) {
+            *(a1++) = (toAdd + 0x258) | 0xF000;
+        }
+
+        for (i = 0; i < 9; i++) {
+            if (gUnknown_80F6520[i] <= a0) {
+                *(a1++) = gUnknown_80F6544[arrId][i];
+                a0 -= gUnknown_80F6520[i];
+                break;
+            }
+        }
+        if (i == 9) {
+            *(a1++) = (toAdd + 0x258) | 0xF000;
+        }
+
+        *a1 = (a0 + varAdd + 0x258) | 0xF000;
+    }
+}
