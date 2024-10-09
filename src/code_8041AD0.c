@@ -4,6 +4,7 @@
 #include "code_804267C.h"
 #include "code_806CD90.h"
 #include "code_8041AD0.h"
+#include "code_800DAC0.h"
 #include "type_chart.h"
 #include "constants/direction.h"
 #include "constants/status.h"
@@ -13,21 +14,6 @@
 #include "items.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
-
-// size: 0x1C
-typedef struct unkStruct_80416E0
-{
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    u16 x;
-    u16 y;
-    u16 unk10;
-    u16 unk12;
-    s32 unk14;
-    u32 unk18;
-} unkStruct_80416E0;
-
 
 extern u32 gStatusSpriteMasks_SleepStatus[];
 extern u32 gStatusSpriteMasks_NonVolatileStatus[];
@@ -63,7 +49,6 @@ extern void sub_803EA10(void);
 extern void sub_8042E98(void);
 extern void sub_800EE5C(u32);
 extern void sub_800EF64(void);
-extern u32 sub_800E890(unkStruct_80416E0 *);
 
 u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2);
 s32 sub_80416E0(Position32 *pos, u32 param_2, bool8 param_3);
@@ -82,7 +67,6 @@ s32 sub_80416E0(Position32 *pos, u32 param_2, bool8 param_3)
   int counter;
   s32 ret;
   unkStruct_80416E0 auStack_10;
-  unkStruct_2039DB0 auStack_18; // Size: 0xC
 
   auStack_10.unk0 = param_2;
   auStack_10.unk4 = 0;
@@ -95,7 +79,7 @@ s32 sub_80416E0(Position32 *pos, u32 param_2, bool8 param_3)
   auStack_10.unk10 = 0;
   auStack_10.unk12 = 0;
   auStack_10.unk18 = 0xffff;
-  sub_8004E8C(&auStack_18);
+  sub_8004E8C(&auStack_10.unk1C);
   ret = sub_8041764(&auStack_10, FALSE);
   if (param_3) {
     counter = 0;

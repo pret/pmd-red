@@ -31,7 +31,6 @@ extern struct FileArchive gEffectFileArchive;
 
 extern void sub_800F034(void);
 extern void sub_800ED38(u32);
-extern void sub_800DC14(u32);
 extern void sub_800F078();
 extern void sub_800ED64();
 extern void sub_800ED80();
@@ -42,7 +41,7 @@ void sub_800DAC0(u32 fileSelection)
   s32 index;
   OpenedFile *filePtr;
   struct unkStruct_203B0CC_sub *preload;
-  
+
   if (gUnknown_203B0CC != NULL) {
     sub_800DB7C();
   }
@@ -79,7 +78,7 @@ void sub_800DB7C(void)
 {
   s32 index;
   struct unkStruct_203B0CC_sub *preload;
-  
+
   for(index = 0, preload = &gUnknown_203B0CC->unk0[index]; index < 0x20; index++, preload++)
   {
     if(preload->unk4 != -1)
@@ -102,7 +101,7 @@ void sub_800DBBC(void)
   s32 index2;
   struct unkStruct_203B0CC_sub *preload;
   struct unkStruct_203B0CC_sub *preload2;
-  
+
   for(index1 = 0, preload = &gUnknown_203B0CC->unk0[index1]; index1 < 0x20; index1++, preload++)
   {
     if(preload->unk4 != -1)
@@ -123,14 +122,14 @@ bool8 sub_800DCC0(void)
   return gUnknown_203B0CC != NULL;
 }
 
-void sub_800DC14(u32 param_1)
+void sub_800DC14(s32 param_1)
 {
   s32 index1;
   s32 index2;
   struct unkStruct_800F18C *piVar3;
   struct unkStruct_800F18C *puVar4;
   struct unkStruct_203B0CC_sub *preload;
-  
+
   index1 = sub_800E2C0(param_1);
   if (index1 != -1) {
     preload = &gUnknown_203B0CC->unk0[index1];

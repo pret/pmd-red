@@ -228,8 +228,7 @@ gUnknown_203B40D: /* 203B40D (sub_803E250 - sub_807E698) */
 gUnknown_203B410: /* 203B410 (sub_8040150 - sub_8082280) */
 	.space 0x4
 
-gUnknown_203B414: /* 203B414 (sub_8042B34 - sub_8042D7C) */
-	.space 0x4
+.include "src/code_8042B34.o"
 
 gDungeon: /* 203B418 */
 	.space 0x4
