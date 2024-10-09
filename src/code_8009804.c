@@ -79,7 +79,7 @@ void sub_80098A0(void)
     gUnknown_202D238[3] = 0;
 }
 
-void sub_80098BC(u32 *r0, u32 *r1, u32 r2)
+void sub_80098BC(u32 *r0, const u32 *r1, u32 r2)
 {
     if (gUnknown_202D23C < 8) {
         gUnknown_202D240[gUnknown_202D23C].unk0 = r0;

@@ -13,6 +13,6 @@ void SelectCharmap(u32);
 u32 UpdateFadeInTile(u32 a0);
 
 u32 sub_80063B0(void);
-void xxx_call_save_unk_text_struct_800641C(UnkTextStruct2 *a0, bool8 a1, bool8 a2);
+void xxx_call_save_unk_text_struct_800641C(const UnkTextStruct2 *a0, bool8 a1, bool8 a2);
 
 #endif // GUARD_TEXT1_H

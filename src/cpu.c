@@ -35,7 +35,7 @@ UNUSED static bool8 sub_800CDE0(void)
     return TRUE;
 }
 
-void CpuCopy(void *dest, void *src, s32 size)
+void CpuCopy(void *dest, const void *src, s32 size)
 {
     CpuCopy32(src, dest, size);
 }

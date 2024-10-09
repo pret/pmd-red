@@ -5,7 +5,7 @@
 struct unkStruct_202D240
 {
     u32 *unk0;
-    u32 *unk4;
+    const u32 *unk4;
     u32 size;
 };
 
@@ -19,7 +19,7 @@ void vram_related_8009804(void);
 
 void InitFontPalette(void);
 void sub_80098A0(void);
-void sub_80098BC(u32 *, u32 *, u32);
+void sub_80098BC(u32 *, const u32 *, u32);
 void sub_80098F8(u32);
 void sub_8009908(void);
 void sub_80099C0(void);
