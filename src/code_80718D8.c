@@ -91,7 +91,7 @@ void sub_8071B48(void)
   entityPtr = NULL;
   dungeon = gDungeon;
   if ((dungeon->unk664 != 0) &&
-     ((dungeon->dungeonLocation.id != DUNGEON_METEOR_CAVE || (dungeon->fill37FD == 0)))) {
+     ((dungeon->dungeonLocation.id != DUNGEON_METEOR_CAVE || (dungeon->unk37FD == 0)))) {
     dungeon->unk662++;
     if (dungeon->unk66E == 0) {
       if ( dungeon->unk662 < gUnknown_80F4DAA) {
@@ -596,7 +596,7 @@ void sub_807218C(Entity *pokemon)
         {
             if(gDungeon->unk65C == 0)
                 r3 = 1;
-        }   
+        }
         sub_806A3D4(buffer, r1, 3, r3);
     }
     else
@@ -653,7 +653,7 @@ void LevelDownTarget(Entity *pokemon, Entity *target, u32 level)
     u8 flag;
     s32 newLevel;
     LevelData leveldata;
-    
+
     if(EntityExists(target))
     {
         flag = FALSE;
@@ -690,7 +690,7 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
     s32 id;
     s32 level;
     s32 exp;
-    
+
     if(!EntityExists(target)) return FALSE;
     info = target->info;
     id = info->id;
@@ -709,15 +709,15 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
         info->exp = exp;
 
         if(param_3)
-        {  
+        {
             if(!info->isNotTeamMember)
             {
-                sub_806A2BC(target, 0);   
+                sub_806A2BC(target, 0);
                 if(!flag)
                     sub_8083D58();
                 gFormatData_202DE30[0] = level;
 
-                SetMessageArgument_2(gAvailablePokemonNames, info, 0);            
+                SetMessageArgument_2(gAvailablePokemonNames, info, 0);
                 sub_80528F4(target, *gUnknown_80F9E80);
             }
             else
@@ -725,7 +725,7 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
                 if(!flag)
                     sub_8083D58();
                 gFormatData_202DE30[0] = level;
-                SetMessageArgument_2(gAvailablePokemonNames, info, 0); 
+                SetMessageArgument_2(gAvailablePokemonNames, info, 0);
                 sub_805239C(target, *gUnknown_80F9E80);
             }
         }
@@ -746,7 +746,7 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
         gUnknown_202F31C[1] = info->spAtk;
         gUnknown_202F324[0] = info->def;
         gUnknown_202F324[1] = info->spDef;
-        
+
         gUnknown_202F31C[0] += leveldata.gainAtt;
         gUnknown_202F31C[1] += leveldata.gainSPAtt;
         gUnknown_202F324[0] += leveldata.gainDef;
@@ -863,7 +863,7 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
             info->spAtk = gUnknown_202F31C[1];
             info->def = gUnknown_202F324[0];
             info->spDef = gUnknown_202F324[1];
-        }  
+        }
     }
 
 
