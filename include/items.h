@@ -91,4 +91,11 @@ u32 sub_80913E0(Item *slot, u32, struct subStruct_203B240 **);
     UNUSED Item *item = &gTeamInventoryRef->teamItems[id];              \
 }
 
+static inline void ZeroOutItem(Item *item)
+{
+    item->id = 0;
+    item->quantity = 0;
+    item->flags = 0;
+}
+
 #endif // GUARD_ITEMS_H

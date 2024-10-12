@@ -98,4 +98,21 @@ extern PokemonStruct1 *sub_808D3F8(void);
 extern s32 GetUnitSum_808D544(u32);
 extern s32 sub_808D580(s32 *);
 
+static inline bool8 PokemonFlag1(PokemonStruct1 *mon)
+{
+    return ((mon->unk0 & 1));
+}
+
+static inline bool8 PokemonFlag2(PokemonStruct1 *mon)
+{
+    return (((mon->unk0 >> 1) & 1));
+}
+
+#include "constants/dungeon.h"
+
+static inline bool8 IsMonPartner(PokemonStruct1 *mon)
+{
+    return (mon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER);
+}
+
 #endif // GUARD_POKEMON_H

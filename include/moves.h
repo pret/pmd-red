@@ -89,4 +89,9 @@ void sub_8094060(Move *srcMoves, Move *destMoves);
 void sub_8094184(struct unkStruct_8094924 *, struct Moves *);
 void sub_80941FC(struct unkStruct_8094924 *, struct Moves *);
 
+static inline bool8 MoveFlagExists(Move *move)
+{
+    return (move->moveFlags & MOVE_FLAG_EXISTS);
+}
+
 #endif // GUARD_MOVES_H

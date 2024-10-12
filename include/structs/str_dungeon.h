@@ -202,6 +202,7 @@ struct unkStruct_Dungeon5C4_sub
 struct unkStruct_Dungeon64C
 {
     u8 unk0;
+    u8 unk1;
     u32 unk4;
 };
 
@@ -237,7 +238,7 @@ typedef struct Dungeon
     /* 0x57C */ u8 fill57C[0x5C0 - 0x57c];
     /* 0x5C0 */ s32 unk5C0;
     /* 0x5C4 */ struct unkStruct_Dungeon5C4_sub unk5C4[3];
-    u8 fill5F4[0x644 - 0x5f4];
+    /* 0x5F4 */ u8 faintStringBuffer[80];
     /* 0x644 */ DungeonLocation dungeonLocation;
     /* 0x648 */ DungeonLocation dungeonLocation2;
     struct unkStruct_Dungeon64C unk64C;

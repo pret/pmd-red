@@ -30,7 +30,7 @@ typedef struct PokemonStruct1
     /* 0x8 */ s16 speciesNum;
     unkPokeSubStruct_C unkC[2];
     /* 0x14 */ s16 IQ;
-    /* 0x16 */ u16 pokeHP;
+    /* 0x16 */ s16 pokeHP;
     /* 0x18 */ Offense offense;
     /* 0x1C */ u32 currExp;
     /* 0x20 */ u32 IQSkills;

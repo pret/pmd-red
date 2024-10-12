@@ -17,15 +17,22 @@
 #include "cpu.h"
 #include "dungeon_music.h"
 #include "dungeon_random.h"
+#include "code_8009804.h"
+#include "tile_types.h"
 #include "text1.h"
 #include "code_805D8C8.h"
 #include "code_803E668.h"
 #include "dungeon_engine.h"
+#include "dungeon_map_access.h"
+#include "pokemon_mid.h"
 #include "weather.h"
+#include "moves.h"
 #include "code_8094F88.h"
 #include "bg_palette_buffer.h"
 #include "exclusive_pokemon.h"
 #include "constants/dungeon.h"
+#include "constants/monster.h"
+#include "constants/trap.h"
 
 extern void sub_800EE5C(s32);
 extern void sub_800EF64(void);
@@ -360,8 +367,7 @@ extern void sub_8068F80(void);
 extern bool8 sub_8044B28(void);
 extern bool8 sub_8083C24(void);
 extern bool8 sub_8083C88(u8 param_1);
-extern bool8 sub_8043ED0(u8);
-extern u8 sub_8043D10(void);
+extern bool8 sub_8043ED0(bool8);
 extern void LoadDungeonTilesetAssets(void);
 extern void LoadDungeonPokemonSprites(void);
 extern void ShowDungeonNameBanner(void);
@@ -372,9 +378,16 @@ extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
 extern void sub_8080B30(u8 *param_1,u32 param_2);
 extern void sub_8046F84(s32 itemFlag);
 extern bool8 sub_8083C50(void);
+extern void sub_8068FE0(Entity *, u32, Entity *r2);
+extern void sub_806BFC0(EntityInfo *, u32);
+extern s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 IQPoints);
+extern s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 IQPoints);
+extern bool8 IsKeepMoney(u8 dungeon);
+extern void sub_8042B0C(Entity *);
 
 extern s16 gUnknown_2026E4E;
 extern u8 gUnknown_202F32C;
+extern u8 gUnknown_202F1A8;
 extern s32 gFormatData_202DE30;
 extern s32 gUnknown_202EDC8;
 extern Entity *gLeaderPointer;
@@ -382,18 +395,22 @@ extern Entity *gLeaderPointer;
 void sub_8044124(void);
 void sub_8043FD0(void);
 void sub_806B404(void);
+u8 sub_8043D10(void);
 
 extern const u8 *gUnknown_80FEC48;
 extern const u8 *gUnknown_80FEC7C;
 extern const u8 *gUnknown_81002B8;
 extern const u8 *gPtrFinalChanceMessage;
 extern const u8 *gPtrClientFaintedMessage;
+extern const u8 *const gUnknown_80F89B4;
+extern const u8 *const gUnknown_80F89D4;
+extern const u8 *const gUnknown_80F89D8;
 
 extern const s16 gUnknown_80F6850[];
 extern const s16 gDungeonMusic[];
 
+extern u8 gAvailablePokemonNames[];
 extern OpenedFile *gDungeonNameBannerPalette;
-
 
 void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
 {
@@ -762,7 +779,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         }
 
         if (gDungeon->unk654 != 1) {
-            if (sub_8043ED0(1)) {
+            if (sub_8043ED0(TRUE)) {
                 gDungeon->unk654 = 1;
             }
         }
@@ -888,8 +905,8 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
                     var = 0x227;
                     sub_8083AB0(var, NULL, GetLeader());
                     check = TRUE;
-                    // This goto is a fakematch I had to create in order to generating matching code.
-                    // It has no real effect, because the control flow is the same without it(since check is TRUE).
+                    // This goto is a fakematch I had to create in order to generate matching code.
+                    // It has no real effect, because the control flow is the same without it(since check is TRUE). Unfortunately agbcc is blind and goto is needed.
                     // Feel free to remove it.
                     goto FAKEMATCH;
                 }
@@ -944,7 +961,6 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         }
     }
 
-
     sub_806863C();
     sub_803E214();
     nullsub_56();
@@ -970,4 +986,225 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
     nullsub_16();
 }
 
-//
+void sub_8043CD8(void)
+{
+    vram_related_8009804();
+}
+
+bool8 sub_8043CE4(s32 dungeonId)
+{
+    if (gUnknown_202F1A8)
+        return TRUE;
+
+    return (gDungeonWaterType[dungeonId] == 2);
+}
+
+u8 sub_8043D10(void)
+{
+    if (gDungeon->unk678 == 1 && gDungeon->unk64C.unk1 == gDungeon->dungeonLocation.floor)
+        return 2;
+    else if (IsBossFight())
+        return 1;
+    else
+        return 0;
+}
+
+void sub_8043D50(s32 *a0, s32 *a1)
+{
+    *a1 = sizeof(Dungeon);
+    *a0 = 0x4800; // Hmmm
+}
+
+void sub_8043D60(void)
+{
+    s32 x, y, monId;
+
+    for (monId = 0; monId < DUNGEON_MAX_WILD_POKEMON; monId++) {
+        Entity *mon = gDungeon->wildPokemon[monId];
+        if (EntityExists(mon)) {
+            EntityInfo *monInfo = GetEntInfo(mon);
+            bool32 unk = TRUE;
+
+            if (monInfo->shopkeeper == TRUE)
+                unk = FALSE;
+            if (IsClientOrTeamBase(monInfo->joinedAt.joinedAt))
+                unk = FALSE;
+            if (monInfo->clientType == CLIENT_TYPE_CLIENT)
+                unk = FALSE;
+
+            if (unk) {
+                sub_8068FE0(mon, 0x207, mon);
+            }
+        }
+    }
+
+    for (monId = 0; monId < MAX_TEAM_MEMBERS; monId++) {
+        Entity *mon = gDungeon->teamPokemon[monId];
+        if (EntityExists(mon)) {
+            s32 i;
+            EntityInfo *monInfo;
+
+            mon->unk22 = 0;
+            mon->isVisible = TRUE;
+            monInfo = GetEntInfo(mon);
+            monInfo->HP = monInfo->maxHPStat;
+            monInfo->belly = monInfo->maxBelly;
+            gDungeon->itemHoldersIdentified = FALSE;
+            sub_806BFC0(monInfo, 0);
+            monInfo->apparentID = monInfo->id;
+            monInfo->perishSongTurns = 0;
+            for (i = 0; i < MAX_MON_MOVES; i++) {
+                Move *move = &monInfo->moves.moves[i];
+                if (move->moveFlags & MOVE_FLAG_EXISTS) {
+                    move->PP = GetMoveBasePP(move);
+                }
+            }
+        }
+    }
+
+    for (y = 0; y < 32; y++) {
+        for (x = 0; x < 56; x++) {
+            Entity *object = GetTileSafe(x, y)->object;
+            if (EntityExists(object) && GetEntityType(object) == ENTITY_TRAP) {
+                Trap *trapData = GetTrapData(object);
+                if (trapData->id == 27) {
+                    trapData->id = TRAP_PITFALL_TRAP;
+                }
+            }
+        }
+    }
+
+    sub_8046F84(ITEM_FLAG_IN_SHOP);
+}
+
+bool8 sub_8043ED0(bool8 a0)
+{
+    bool8 ret = FALSE;
+
+    if (!a0 && sub_8044B28())
+        return FALSE;
+
+    if (gDungeon->unk10 == 1) {
+        Entity *leader = GetLeader();
+        if (EntityExists(leader)) {
+            if (!a0) {
+                strcpy(gAvailablePokemonNames, gDungeon->faintStringBuffer);
+                PrintFieldMessage(0, gUnknown_80F89B4, 1);
+            }
+            sub_8042B0C(leader);
+            sub_8068FE0(leader, 0x21F, leader);
+            ret = TRUE;
+        }
+    }
+    else if (gDungeon->unk10 == 2) {
+        Entity *leader = GetLeader();
+        if (EntityExists(leader)) {
+            if (!a0) {
+                strcpy(gAvailablePokemonNames, gDungeon->faintStringBuffer);
+                PrintFieldMessage(0, gUnknown_80F89D4, 1);
+            }
+            sub_8042B0C(leader);
+            sub_8068FE0(leader, 0x222, leader);
+            ret = TRUE;
+        }
+    }
+    else if (gDungeon->unk10 == 3) {
+        Entity *leader = GetLeader();
+        if (EntityExists(leader)) {
+            if (!a0) {
+                strcpy(gAvailablePokemonNames, gDungeon->faintStringBuffer);
+                PrintFieldMessage(0, gUnknown_80F89D8, 1);
+            }
+            sub_8042B0C(leader);
+            sub_8068FE0(leader, 0x222, leader);
+            ret = TRUE;
+        }
+    }
+
+    return ret;
+}
+
+void sub_8043FD0(void)
+{
+    s32 level;
+    for (level = 2; level < 6; level++) {
+        s32 i, monId, movesCount;
+        for (monId = 0; monId < NUM_MONSTERS; monId++) {
+            PokemonStruct1 *monStruct = &gRecruitedPokemonRef->pokemon[monId];
+            if (PokemonFlag1(monStruct) && PokemonFlag2(monStruct)) {
+                u16 learnedMoves[16];
+                LevelData levelData;
+                // I have to make the variables volatile to get matching code. I'm sure there's a solution for this, but keeping it like that for now.
+                #ifdef NONMATCHING
+                s32 atk, spAtk, def, spDef;
+                #else
+                vs32 atk, spAtk, def, spDef;
+                #endif // NONMATCHING
+
+                GetPokemonLevelData(&levelData, monStruct->speciesNum, level);
+                monStruct->level = level;
+                monStruct->currExp = levelData.expRequired;
+                monStruct->pokeHP += levelData.gainHP;
+                if (monStruct->pokeHP >= 999) // TODO: Make this a max hp define
+                    monStruct->pokeHP = 999;
+
+                atk = monStruct->offense.att[0];
+                spAtk = monStruct->offense.att[1];
+                def = monStruct->offense.def[0];
+                spDef = monStruct->offense.def[1];
+
+                atk += levelData.gainAtt;
+                spAtk += levelData.gainSPAtt;
+                def += levelData.gainDef;
+                spDef += levelData.gainSPDef;
+
+                // TODO: Make 255 max define for stats
+                if (atk >= 255)     {atk = 255;}
+                if (spAtk >= 255)   {spAtk = 255;}
+                if (def >= 255)     {def = 255;}
+                if (spDef >= 255)   {spDef = 255;}
+
+                monStruct->offense.att[0] = atk;
+                monStruct->offense.att[1] = spAtk;
+                monStruct->offense.def[0] = def;
+                monStruct->offense.def[1] = spDef;
+
+                movesCount = sub_808E0AC(learnedMoves, monStruct->speciesNum, monStruct->level, 999);
+                if (movesCount == 0)
+                    continue;
+
+                for (i = 0; i < movesCount; i++) {
+                    s32 moveSlot;
+                    for (moveSlot = 0; moveSlot < MAX_MON_MOVES; moveSlot++) {
+                        if (!MoveFlagExists(&monStruct->moves[moveSlot])) {
+                            InitZeroedPPPokemonMove(&monStruct->moves[moveSlot], learnedMoves[i]);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+void sub_8044124(void)
+{
+    s32 i;
+
+    if (GetMaxItemsAllowed(gDungeon->dungeonLocation.id) == 0)
+    {
+        for (i = 0; i < INVENTORY_SIZE; i++) {
+            ZeroOutItem(&gTeamInventoryRef->teamItems[i]);
+        }
+        for (i = 0; i < NUM_MONSTERS; i++) {
+            PokemonStruct1 *mon = (&gRecruitedPokemonRef->pokemon[i]);
+            if (PokemonFlag1(mon) && PokemonFlag2(mon)) {
+                mon->heldItem.id = 0;
+            }
+        }
+    }
+
+    if (!IsKeepMoney(gDungeon->dungeonLocation.id)) {
+        gTeamInventoryRef->teamMoney = 0;
+    }
+}

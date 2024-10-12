@@ -489,13 +489,6 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
     }
 }
 
-static inline void ZeroOutItem(Item *item)
-{
-    item->id = 0;
-    item->quantity = 0;
-    item->flags = 0;
-}
-
 static inline bool8 ItemSticky(Item *item)
 {
     return (item->flags & ITEM_FLAG_STICKY);
