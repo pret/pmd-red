@@ -108,6 +108,11 @@ static inline bool8 PokemonFlag2(PokemonStruct1 *mon)
     return (((mon->unk0 >> 1) & 1));
 }
 
+static inline bool8 IsMonTeamLeader(PokemonStruct1 *pokemon)
+{
+    return pokemon->isTeamLeader != FALSE;
+}
+
 #include "constants/dungeon.h"
 
 static inline bool8 IsMonPartner(PokemonStruct1 *mon)
