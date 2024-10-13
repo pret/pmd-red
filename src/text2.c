@@ -3532,7 +3532,7 @@ extern u8 gUnknown_20274A6[];
 s32 InterpretColorChar(u8 a0);
 
 #ifdef NONMATCHING
-// https://decomp.me/scratch/AJ2km
+// https://decomp.me/scratch/lp1Fo
 const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct UnkDrawStringStruct *sp)
 {
     while (*str == '#') {

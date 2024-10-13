@@ -2,7 +2,7 @@
 #define GUARD_CPU_H
 
 void CpuClear(void *, s32);
-void CpuCopy(void *, void *, s32);
+void CpuCopy(void *dest, const void *src, s32 size);
 void nullsub_23(bool8);
 void SetWindowTitle(u8 *);
 void sub_800CDA8(u32);

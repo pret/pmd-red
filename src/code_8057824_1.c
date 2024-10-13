@@ -333,7 +333,7 @@ extern s32 GetCameraXPos();
 extern s32 GetCameraYPos();
 extern void sub_803F878(u32, s32);
 extern void SetupBossFightHP(Entity *, u32, u32);
-extern void sub_803E9D0(void);
+extern void BgColorCallNullsub4(void);
 extern void DeoxysScreenFlash(void);
 extern void sub_8085EB0();
 
@@ -3987,7 +3987,7 @@ void sub_808C0CC(void)
 {
   gUnknown_202EDC8 = 0x1f;
   SetDungeonBGColorRGB(0,0,0,1,1);
-  sub_803E9D0();
+  BgColorCallNullsub4();
   sub_803E46C(0x46);
   gDungeon->unk7 = 0;
   LugiaScreenFlash();
@@ -4109,7 +4109,7 @@ void sub_808C360(void)
 {
   gUnknown_202EDC8 = 0x1f;
   SetDungeonBGColorRGB(0,0,0,1,1);
-  sub_803E9D0();
+  BgColorCallNullsub4();
   sub_803E46C(0x46);
   gDungeon->unk7 = 0;
   KyogreScreenFlash();
@@ -4196,7 +4196,7 @@ void sub_808C550(void)
 {
   gUnknown_202EDC8 = 0x1f;
   SetDungeonBGColorRGB(0,0,0,1,1);
-  sub_803E9D0();
+  BgColorCallNullsub4();
   sub_803E46C(0x46);
   gDungeon->unk7 = 0;
   DeoxysScreenFlash();
