@@ -94,4 +94,19 @@ static inline bool8 MoveFlagExists(Move *move)
     return (move->moveFlags & MOVE_FLAG_EXISTS);
 }
 
+static inline bool8 MoveFlagLinkChain(Move *move)
+{
+    return (move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN);
+}
+
+static inline bool8 MoveFlagDisabled(Move *move)
+{
+    return (move->moveFlags & MOVE_FLAG_DISABLED);
+}
+
+static inline bool8 MoveFlagSealed(Move *move)
+{
+    return (move->moveFlags2 & MOVE_FLAG_SEALED);
+}
+
 #endif // GUARD_MOVES_H

@@ -58,7 +58,6 @@ void sub_8092404(u8 r0, u16 *r1, bool8 allowLeader, bool8 allowPartner)
 
     count = 0;
     for (i = 0; i < NUM_MONSTERS; i++) {
-
         if (PokemonFlag1(&gRecruitedPokemonRef->pokemon[i])
             && (!IsMonTeamLeader(&gRecruitedPokemonRef->pokemon[i]) || allowLeader)
             && (!IsMonPartner(&gRecruitedPokemonRef->pokemon[i]) || allowPartner)
@@ -69,7 +68,6 @@ void sub_8092404(u8 r0, u16 *r1, bool8 allowLeader, bool8 allowPartner)
             r1[count] = i;
             count++;
         }
-
     }
 
     r1[count] = 0xFFFF;
