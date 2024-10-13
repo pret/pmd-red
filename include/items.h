@@ -98,4 +98,19 @@ static inline void ZeroOutItem(Item *item)
     item->flags = 0;
 }
 
+static inline bool8 ItemSticky(Item *item)
+{
+    return (item->flags & ITEM_FLAG_STICKY);
+}
+
+static inline bool8 ItemExists(Item *item)
+{
+    return (item->flags & ITEM_FLAG_EXISTS);
+}
+
+static inline bool8 ItemInShop(Item *item)
+{
+    return (item->flags & ITEM_FLAG_IN_SHOP);
+}
+
 #endif // GUARD_ITEMS_H

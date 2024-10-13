@@ -92,7 +92,6 @@ u8 sub_8046D70(void)
         return 0;
 }
 
-#ifdef NONMATCHING
 void MusicBoxCreation(void)
 {
   bool8 musicBoxOnce;
@@ -127,28 +126,13 @@ void MusicBoxCreation(void)
 
     if ((indexes[0] >= 0) && (indexes[1] >= 0) && (indexes[2] >= 0)) {
 
-      // NOTE: doesn't match here.. tried to register pin but still not perfect
-      register Item *pbVar4 asm("r1");
-      register Item *pbVar5 asm("r0");
-
       musicBoxOnce = TRUE;
       createMusicBox = TRUE;
 
       // clear out each of the parts
-      pbVar4 = &gTeamInventoryRef->teamItems[indexes[0]];
-      pbVar4->id = 0;
-      pbVar4->quantity = 0;
-      pbVar4->flags = 0;
-
-      pbVar5 = &gTeamInventoryRef->teamItems[indexes[1]];
-      pbVar5->id = 0;
-      pbVar5->quantity = 0;
-      pbVar5->flags = 0;
-
-      pbVar5 = &gTeamInventoryRef->teamItems[indexes[2]];
-      pbVar5->id = 0;
-      pbVar5->quantity = 0;
-      pbVar5->flags = 0;
+      ZeroOutItem(&gTeamInventoryRef->teamItems[indexes[0]]);
+      ZeroOutItem(&gTeamInventoryRef->teamItems[indexes[1]]);
+      ZeroOutItem(&gTeamInventoryRef->teamItems[indexes[2]]);
 
       // init the music box
       xxx_init_itemslot_8090A8C(&gTeamInventoryRef->teamItems[indexes[0]], ITEM_MUSIC_BOX, 0);
@@ -179,180 +163,6 @@ void MusicBoxCreation(void)
     sub_8040A84();
   }
 }
-#else
-NAKED
-void MusicBoxCreation(void)
-{
-    asm_unified(
-	"\tpush {r4-r7,lr}\n"
-	"\tsub sp, 0xC\n"
-	"\tmovs r6, 0\n"
-	"\tldr r5, _08046EDC\n"
-	"\tmovs r4, 0\n"
-"_08046D96:\n"
-	"\tmovs r7, 0\n"
-	"\tmovs r0, 0x1\n"
-	"\tnegs r0, r0\n"
-	"\tstr r0, [sp]\n"
-	"\tstr r0, [sp, 0x4]\n"
-	"\tstr r0, [sp, 0x8]\n"
-	"\tmovs r3, 0\n"
-	"\tldr r2, [r5]\n"
-"_08046DA6:\n"
-	"\tldrb r1, [r2]\n"
-	"\tmovs r0, 0x1\n"
-	"\tands r0, r1\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _08046DC8\n"
-	"\tldrb r0, [r2, 0x2]\n"
-	"\tcmp r0, 0x79\n"
-	"\tbne _08046DB8\n"
-	"\tstr r3, [sp]\n"
-"_08046DB8:\n"
-	"\tldrb r0, [r2, 0x2]\n"
-	"\tcmp r0, 0x77\n"
-	"\tbne _08046DC0\n"
-	"\tstr r3, [sp, 0x4]\n"
-"_08046DC0:\n"
-	"\tldrb r0, [r2, 0x2]\n"
-	"\tcmp r0, 0x78\n"
-	"\tbne _08046DC8\n"
-	"\tstr r3, [sp, 0x8]\n"
-"_08046DC8:\n"
-	"\tadds r2, 0x4\n"
-	"\tadds r3, 0x1\n"
-	"\tcmp r3, 0x13\n"
-	"\tble _08046DA6\n"
-	"\tldr r1, [sp]\n"
-	"\tcmp r1, 0\n"
-	"\tblt _08046E1E\n"
-	"\tldr r0, [sp, 0x4]\n"
-	"\tcmp r0, 0\n"
-	"\tblt _08046E1E\n"
-	"\tldr r0, [sp, 0x8]\n"
-	"\tcmp r0, 0\n"
-	"\tblt _08046E1E\n"
-	"\tmovs r7, 0x1\n"
-	"\tmovs r6, 0x1\n"
-	"\tlsls r1, 2\n"
-	"\tldr r0, [r5]\n"
-	"\tadds r1, r0\n"
-	"\tstrb r4, [r1, 0x2]\n"
-	"\tstrb r4, [r1, 0x1]\n"
-	"\tstrb r4, [r1]\n"
-	"\tldr r0, [sp, 0x4]\n"
-	"\tlsls r0, 2\n"
-	"\tldr r1, [r5]\n"
-	"\tadds r0, r1\n"
-	"\tstrb r4, [r0, 0x2]\n"
-	"\tstrb r4, [r0, 0x1]\n"
-	"\tstrb r4, [r0]\n"
-	"\tldr r0, [sp, 0x8]\n"
-	"\tlsls r0, 2\n"
-	"\tldr r1, [r5]\n"
-	"\tadds r0, r1\n"
-	"\tstrb r4, [r0, 0x2]\n"
-	"\tstrb r4, [r0, 0x1]\n"
-	"\tstrb r4, [r0]\n"
-	"\tldr r1, [sp]\n"
-	"\tlsls r1, 2\n"
-	"\tldr r0, [r5]\n"
-	"\tadds r0, r1\n"
-	"\tmovs r1, 0x7A\n"
-	"\tmovs r2, 0\n"
-	"\tbl xxx_init_itemslot_8090A8C\n"
-"_08046E1E:\n"
-	"\tcmp r7, 0\n"
-	"\tbne _08046D96\n"
-	"\tbl FillInventoryGaps\n"
-	"\tcmp r6, 0\n"
-	"\tbeq _08046ED4\n"
-	"\tbl GetLeader\n"
-	"\tadds r4, r0, 0\n"
-	"\tldr r0, _08046EE0\n"
-	"\tbl sub_80855E4\n"
-	"\tldr r6, _08046EE4\n"
-	"\tldr r0, [r6]\n"
-	"\tldr r5, _08046EE8\n"
-	"\tadds r0, r5\n"
-	"\tmovs r1, 0x1\n"
-	"\tstrb r1, [r0]\n"
-	"\tldr r0, _08046EEC\n"
-	"\tldr r1, [r0]\n"
-	"\tmovs r0, 0\n"
-	"\tmovs r2, 0x1\n"
-	"\tbl PrintFieldMessage\n"
-	"\tmovs r0, 0x3C\n"
-	"\tmovs r1, 0x41\n"
-	"\tbl sub_803E708\n"
-	"\tldr r0, _08046EF0\n"
-	"\tldr r1, [r0]\n"
-	"\tmovs r0, 0\n"
-	"\tmovs r2, 0x1\n"
-	"\tbl PrintFieldMessage\n"
-	"\tadds r0, r4, 0\n"
-	"\tmovs r1, 0x4\n"
-	"\tmovs r2, 0xA\n"
-	"\tmovs r3, 0\n"
-	"\tbl sub_80869E4\n"
-	"\tadds r0, r4, 0\n"
-	"\tadds r0, 0xC\n"
-	"\tmovs r1, 0x86\n"
-	"\tlsls r1, 1\n"
-	"\tmovs r2, 0\n"
-	"\tbl sub_80416E0\n"
-	"\tadds r0, r4, 0\n"
-	"\tmovs r1, 0xD7\n"
-	"\tbl sub_80421C0\n"
-	"\tmovs r0, 0x3C\n"
-	"\tmovs r1, 0x41\n"
-	"\tbl sub_803E708\n"
-	"\tldr r0, _08046EF4\n"
-	"\tadds r1, r4, 0\n"
-	"\tmovs r2, 0\n"
-	"\tbl SetMessageArgument\n"
-	"\tldr r0, _08046EF8\n"
-	"\tldr r1, [r0]\n"
-	"\tmovs r0, 0\n"
-	"\tmovs r2, 0x1\n"
-	"\tbl PrintFieldMessage\n"
-	"\tmovs r0, 0xA\n"
-	"\tmovs r1, 0x41\n"
-	"\tbl sub_803E708\n"
-	"\tmovs r0, 0xD4\n"
-	"\tbl PlaySoundEffect\n"
-	"\tldr r0, _08046EFC\n"
-	"\tldr r1, [r0]\n"
-	"\tmovs r0, 0\n"
-	"\tmovs r2, 0x1\n"
-	"\tbl PrintFieldMessage\n"
-	"\tmovs r0, 0xA\n"
-	"\tmovs r1, 0x41\n"
-	"\tbl sub_803E708\n"
-	"\tmovs r0, 0x1\n"
-	"\tbl sub_804178C\n"
-	"\tldr r0, [r6]\n"
-	"\tadds r0, r5\n"
-	"\tstrb r7, [r0]\n"
-	"\tbl sub_8040A84\n"
-"_08046ED4:\n"
-	"\tadd sp, 0xC\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_08046EDC: .4byte gTeamInventoryRef\n"
-"_08046EE0: .4byte sub_80861A8\n"
-"_08046EE4: .4byte gDungeon\n"
-"_08046EE8: .4byte 0x0001356c\n"
-"_08046EEC: .4byte gUnknown_810531C\n"
-"_08046EF0: .4byte gUnknown_8105360\n"
-"_08046EF4: .4byte gAvailablePokemonNames\n"
-"_08046EF8: .4byte gUnknown_81053A8\n"
-"_08046EFC: .4byte gUnknown_8105434"
-    );
-}
-#endif
 
 bool8 sub_8046F00(Item *item)
 {
@@ -448,35 +258,28 @@ void sub_804700C(void)
 
 bool8 sub_8047084(s32 itemFlag)
 {
-  Item *item;
-  Entity *entity;
-  EntityInfo *entityInfo;
-  s32 index;
+    s32 i;
 
-  // NEED THIS ORDERING TO MATCH
-  index = 0;
-  item = &gTeamInventoryRef->teamItems[index];
-
-  for(index = 0; index < INVENTORY_SIZE; item++, index++)
-  {
-    if ((item->flags & ITEM_FLAG_EXISTS) && (item->flags & itemFlag)) {
-      return TRUE;
+    for (i = 0; i < INVENTORY_SIZE; i++)
+    {
+        if ((ItemExists(&gTeamInventoryRef->teamItems[i])) && (gTeamInventoryRef->teamItems[i].flags & itemFlag)) {
+            return TRUE;
+        }
     }
-  }
-  FillInventoryGaps();
+    FillInventoryGaps();
 
-  for(index = 0; index < MAX_TEAM_MEMBERS; index++)
-  {
-    entity = gDungeon->teamPokemon[index];
-    if (EntityExists(entity)) {
-      entityInfo = entity->info;
-      item = &entityInfo->heldItem;
-      if ((item->flags & ITEM_FLAG_EXISTS) && (item->flags & itemFlag)) {
-        return TRUE;
-      }
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++)
+    {
+        Entity *entity = gDungeon->teamPokemon[i];
+        if (EntityExists(entity)) {
+            EntityInfo *entityInfo = GetEntInfo(entity);
+            Item *item = &entityInfo->heldItem;
+            if ((ItemExists(item) & ITEM_FLAG_EXISTS) && (item->flags & itemFlag)) {
+                return TRUE;
+            }
+        }
     }
-  }
-  return FALSE;
+    return FALSE;
 }
 
 void sub_8047104(void)

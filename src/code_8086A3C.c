@@ -76,13 +76,7 @@ void sub_8086A54(Entity *pokemon)
 
 void SetupBossFightHP(Entity *pokemon, s32 newHP, u16 songIndex)
 {
-
-  // NOTE: needed two of these to match.. very dumb
-  EntityInfo *entityInfo;
-  EntityInfo *enityData_1;
-
-  entityInfo = pokemon->info;
-  enityData_1 = pokemon->info;
+  EntityInfo *entityInfo = GetEntInfo(pokemon);
 
   entityInfo->bossFlag = TRUE;
 
@@ -97,7 +91,7 @@ void SetupBossFightHP(Entity *pokemon, s32 newHP, u16 songIndex)
   }
 
   gDungeon->bossSongIndex = songIndex;
-  SetDefaultIQSkills(enityData_1->IQSkillMenuFlags, enityData_1->bossFlag);
+  SetDefaultIQSkills(entityInfo->IQSkillMenuFlags, entityInfo->bossFlag);
   LoadIQSkills(pokemon);
 }
 

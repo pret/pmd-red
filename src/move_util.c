@@ -97,33 +97,34 @@ bool8 sub_80571F0(Entity * pokemon, Move *move)
 bool8 sub_805727C(Entity * pokemon, Entity * target, s32 chance)
 {
     bool8 uVar2;
-    if (!sub_8044B28() && EntityExists(pokemon) && EntityExists(target) &&
-        (target->info->unk158 != 0) &&
-        (target->info->HP != 0)) {
-        if (chance != 0) {
-            if (HasAbility(pokemon, ABILITY_SERENE_GRACE)) {
-                uVar2 = DungeonRandOutcome_2(chance * 2);
-            }
-            else
-            {
-                uVar2 = DungeonRandOutcome_2(chance);
-            }
+    if (sub_8044B28())
+        return FALSE;
+    if (!EntityExists(pokemon) || !EntityExists(target))
+        return FALSE;
+    if (target->info->unk158 == 0 || target->info->HP == 0)
+        return FALSE;
+
+    if (chance != 0) {
+        if (HasAbility(pokemon, ABILITY_SERENE_GRACE)) {
+            uVar2 = DungeonRandOutcome_2(chance * 2);
         }
         else
         {
-            uVar2 = TRUE;
+            uVar2 = DungeonRandOutcome_2(chance);
         }
-        if ((uVar2 != 0) && (pokemon != target) && HasAbility(target, ABILITY_SHIELD_DUST))
-        {
-            sub_80429C8(target);
-end:
-            return FALSE;
-        }
-        else
-            return uVar2;
+    }
+    else
+    {
+        uVar2 = TRUE;
     }
 
-    goto end;
+    if (uVar2 && (pokemon != target) && HasAbility(target, ABILITY_SHIELD_DUST))
+    {
+        sub_80429C8(target);
+        return FALSE;
+    }
+
+    return uVar2;
 }
 
 bool8 sub_8057308(Entity *pokemon, s32 chance)
