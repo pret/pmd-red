@@ -41,3 +41,5 @@ build/
 *.a
 .vscode/
 *.ss[0-9]
+*.pyc
+__pycache__/
