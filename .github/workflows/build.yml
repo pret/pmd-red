@@ -26,7 +26,7 @@ jobs:
 
       - name: Install xdelta and ARM GCC
         run: |
-            sudo apt-get install xdelta3 gcc-arm-none-eabi binutils-arm-none-eabi
+            sudo apt-get install xdelta3 gcc-arm-none-eabi binutils-arm-none-eabi libpng-dev
 
       - name: Install agbcc
         run: |
