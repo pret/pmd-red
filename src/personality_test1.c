@@ -215,7 +215,7 @@ static void UpdateNatureTotals(void)
 {
     s32 answerIndex;
     s32 natureIndex;
-    const u8 (*pointArray)[16];
+    const PersonalityEffects *pointArray;
 
     if (sub_80144A4(&answerIndex))
         return;

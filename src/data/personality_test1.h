@@ -1,4 +1,4 @@
-ALIGNED(4) static const u8 HardyQuest1Points[3][16] =
+ALIGNED(4) static const PersonalityEffects HardyQuest1Points[3] =
 {
     { [HARDY] = 0x02, },
     { [RELAXED] = 0x02, },
@@ -19,7 +19,7 @@ ALIGNED(4) static const u8 HardyQuest1Question[] = _(
     "A test is coming up.\n"
     "How do you study for it?");
 
-ALIGNED(4) static const u8 HardyQuest2Points[2][16] =
+ALIGNED(4) static const PersonalityEffects HardyQuest2Points[2] =
 {
     { [HARDY] = 0x02, [DOCILE] = 0x01, },
     { [QUIRKY] = 0x02, }
@@ -36,7 +36,7 @@ static const u8 HardyQuest2Question[];
 static const PersonalityQuestion HardyQuest2 = { HardyQuest2Question, HardyQuest2Answers, HardyQuest2Points };
 ALIGNED(4) static const u8 HardyQuest2Question[] = _("Can you focus on something you like?");
 
-ALIGNED(4) static const u8 HardyQuest3Points[2][16] =
+ALIGNED(4) static const PersonalityEffects HardyQuest3Points[2] =
 {
     { [HARDY] = 0x02, [BRAVE] = 0x02, },
     { [SASSY] = 0x02, [QUIRKY] = 0x02, }
@@ -55,7 +55,7 @@ ALIGNED(4) static const u8 HardyQuest3Question[] = _(
     "When the going gets tough, do you get\n"
     "going?");
 
-ALIGNED(4) static const u8 HardyQuest4Points[3][16] =
+ALIGNED(4) static const PersonalityEffects HardyQuest4Points[3] =
 {
     { [HARDY] = 0x02, },
     { [CALM] = 0x02, },
@@ -76,7 +76,7 @@ ALIGNED(4) static const u8 HardyQuest4Question[] = _(
     "There is a bucket. If you put\n"
     "water in it, how high will you fill it?");
 
-ALIGNED(4) static const u8 DocileQuest1Points[2][16] =
+ALIGNED(4) static const PersonalityEffects DocileQuest1Points[2] =
 {
     { [DOCILE] = 0x02, [NAIVE] = 0x01, },
     { [TIMID] = 0x02, [CALM] = 0x01, }
@@ -95,7 +95,7 @@ ALIGNED(4) static const u8 DocileQuest1Question[] = _(
     "You are offered a choice of two gifts.\n"
     "Which one will you take?");
 
-ALIGNED(4) static const u8 DocileQuest2Points[2][16] =
+ALIGNED(4) static const PersonalityEffects DocileQuest2Points[2] =
 {
     { [DOCILE] = 0x02, [HASTY] = 0x01, },
     { [NAIVE] = 0x02, [RELAXED] = 0x01, }
@@ -114,7 +114,7 @@ ALIGNED(4) static const u8 DocileQuest2Question[] = _(
     "You broke a rotten egg in your room!\n"
     "What will you do?");
 
-ALIGNED(4) static const u8 DocileQuest3Points[3][16] =
+ALIGNED(4) static const PersonalityEffects DocileQuest3Points[3] =
 {
     { [DOCILE] = 0x02, },
     { [NAIVE] = 0x01, [LONELY] = 0x01, },
@@ -142,7 +142,7 @@ ALIGNED(4) static const u8 DocileQuest3Question[] = _(
     "forgotten.{WAIT_PRESS}\n"
     "How do you thank your friend?");
 
-ALIGNED(4) static const u8 DocileQuest4Points[3][16] =
+ALIGNED(4) static const PersonalityEffects DocileQuest4Points[3] =
 {
     { [DOCILE] = 0x02, },
     { [NAIVE] = 0x02, },
@@ -161,7 +161,7 @@ static const u8 DocileQuest4Question[];
 static const PersonalityQuestion DocileQuest4 = { DocileQuest4Question, DocileQuest4Answers, DocileQuest4Points };
 ALIGNED(4) static const u8 DocileQuest4Question[] = _("There is a wallet at the side of a road.");
 
-ALIGNED(4) static const u8 BraveQuest1Points[2][16] =
+ALIGNED(4) static const PersonalityEffects BraveQuest1Points[2] =
 {
     { [BRAVE] = 0x03, [IMPISH] = 0x01, },
     { [DOCILE] = 0x02, [TIMID] = 0x01, }
@@ -183,7 +183,7 @@ ALIGNED(4) static const u8 BraveQuest1Question[] = _(
     "And the bungee cord snaps!{EXTRA_MSG}"
     "Will you still try to make a jump anyway?");
 
-ALIGNED(4) static const u8 BraveQuest2APoints[3][16] =
+ALIGNED(4) static const PersonalityEffects BraveQuest2APoints[3] =
 {
     { },
     { [TIMID] = 0x02, },
@@ -204,7 +204,7 @@ ALIGNED(4) static const u8 BraveQuest2AQuestion[] = _(
     "There is an alien invasion!\n"
     "What will you do?");
 
-ALIGNED(4) static const u8 BraveQuest2BPoints[2][16] =
+ALIGNED(4) static const PersonalityEffects BraveQuest2BPoints[2] =
 {
     { [SASSY] = 0x01, [RELAXED] = 0x01, },
     { [BRAVE] = 0x04, }
@@ -226,7 +226,7 @@ ALIGNED(4) static const u8 BraveQuest2BQuestion[] = _(
     "RULE THE WORLD.”{WAIT_PRESS}\n"
     "What will you do?");
 
-ALIGNED(4) static const u8 BraveQuest3Points[2][16] =
+ALIGNED(4) static const PersonalityEffects BraveQuest3Points[2] =
 {
     { [HARDY] = 0x01, [BRAVE] = 0x02, },
     { [NAIVE] = 0x02, }
@@ -245,7 +245,7 @@ ALIGNED(4) static const u8 BraveQuest3Question[] = _(
     "There is a scream from behind a door!{WAIT_PRESS}\n"
     "How will you react?");
 
-ALIGNED(4) static const u8 BraveQuest4Points[4][16] =
+ALIGNED(4) static const PersonalityEffects BraveQuest4Points[4] =
 {
     { [BRAVE] = 0x03, },
     { [HARDY] = 0x02, [BRAVE] = 0x02, },
@@ -277,7 +277,7 @@ ALIGNED(4) static const u8 BraveQuest4Question[] = _(
     "a busy city street!{WAIT_PRESS}\n"
     "What will you do?");
 
-ALIGNED(4) static const u8 JollyQuest1Points[2][16] =
+ALIGNED(4) static const PersonalityEffects JollyQuest1Points[2] =
 {
     { [JOLLY] = 0x02, [NAIVE] = 0x01, },
     { [SASSY] = 0x01, [QUIRKY] = 0x01, }
@@ -294,7 +294,7 @@ static const u8 JollyQuest1Question[];
 static const PersonalityQuestion JollyQuest1 = { JollyQuest1Question, JollyQuest1Answers, JollyQuest1Points };
 ALIGNED(4) static const u8 JollyQuest1Question[] = _("Are you a cheerful personality?");
 
-ALIGNED(4) static const u8 JollyQuest2Points[2][16] =
+ALIGNED(4) static const PersonalityEffects JollyQuest2Points[2] =
 {
     { [JOLLY] = 0x02, [LONELY] = 0x01, },
     { [TIMID] = 0x01, }
@@ -313,7 +313,7 @@ ALIGNED(4) static const u8 JollyQuest2Question[] = _(
     "Do you like to noisily enjoy yourself\n"
     "with others?");
 
-ALIGNED(4) static const u8 JollyQuest3Points[3][16] =
+ALIGNED(4) static const PersonalityEffects JollyQuest3Points[3] =
 {
     { [JOLLY] = 0x02, },
     { [CALM] = 0x02, },
@@ -334,7 +334,7 @@ ALIGNED(4) static const u8 JollyQuest3Question[] = _(
     "It's the summer holidays!\n"
     "Where would you like to go?");
 
-ALIGNED(4) static const u8 JollyQuest4Points[3][16] =
+ALIGNED(4) static const PersonalityEffects JollyQuest4Points[3] =
 {
     { [JOLLY] = 0x03, },
     { [HARDY] = 0x02, },
@@ -364,7 +364,7 @@ ALIGNED(4) static const u8 JollyQuest4Question[] = _(
     "this fellow is saying.{WAIT_PRESS}\n"
     "How do you reply?");
 
-ALIGNED(4) static const u8 ImpishQuest1Points[2][16] =
+ALIGNED(4) static const PersonalityEffects ImpishQuest1Points[2] =
 {
     { [IMPISH] = 0x02, [LONELY] = 0x01, },
     { [CALM] = 0x02, }
@@ -381,7 +381,7 @@ static const u8 ImpishQuest1Question[];
 static const PersonalityQuestion ImpishQuest1 = { ImpishQuest1Question, ImpishQuest1Answers, ImpishQuest1Points };
 ALIGNED(4) static const u8 ImpishQuest1Question[] = _("Have you ever made a pitfall trap?");
 
-ALIGNED(4) static const u8 ImpishQuest2Points[2][16] =
+ALIGNED(4) static const PersonalityEffects ImpishQuest2Points[2] =
 {
     { [IMPISH] = 0x02, },
     { [DOCILE] = 0x01, [RELAXED] = 0x01, }
@@ -398,7 +398,7 @@ static const u8 ImpishQuest2Question[];
 static const PersonalityQuestion ImpishQuest2 = { ImpishQuest2Question, ImpishQuest2Answers, ImpishQuest2Points };
 ALIGNED(4) static const u8 ImpishQuest2Question[] = _("Do you like pranks?");
 
-ALIGNED(4) static const u8 ImpishQuest3Points[2][16] =
+ALIGNED(4) static const PersonalityEffects ImpishQuest3Points[2] =
 {
     { [HARDY] = 0x01, [IMPISH] = 0x02, },
     { [SASSY] = 0x01, [QUIRKY] = 0x02, }
@@ -415,7 +415,7 @@ static const u8 ImpishQuest3Question[];
 static const PersonalityQuestion ImpishQuest3 = { ImpishQuest3Question, ImpishQuest3Answers, ImpishQuest3Points };
 ALIGNED(4) static const u8 ImpishQuest3Question[] = _("Are there many things that you would like\nto do?");
 
-ALIGNED(4) static const u8 ImpishQuest4Points[3][16] =
+ALIGNED(4) static const PersonalityEffects ImpishQuest4Points[3] =
 {
     { [BRAVE] = 0x03, },
     { [TIMID] = 0x02, },
@@ -436,7 +436,7 @@ ALIGNED(4) static const u8 ImpishQuest4Question[] = _(
     "Your friend is being bullied!\n"
     "What do you do?");
 
-ALIGNED(4) static const u8 NaiveQuest1Points[3][16] =
+ALIGNED(4) static const PersonalityEffects NaiveQuest1Points[3] =
 {
     { [IMPISH] = 0x01, [NAIVE] = 0x03, },
     { [JOLLY] = 0x02, },
@@ -455,7 +455,7 @@ static const u8 NaiveQuest1Question[];
 static const PersonalityQuestion NaiveQuest1 = { NaiveQuest1Question, NaiveQuest1Answers, NaiveQuest1Points };
 ALIGNED(4) static const u8 NaiveQuest1Question[] = _("Do you like groan-inducing puns?");
 
-ALIGNED(4) static const u8 NaiveQuest2Points[2][16] =
+ALIGNED(4) static const PersonalityEffects NaiveQuest2Points[2] =
 {
     { [DOCILE] = 0x01, [NAIVE] = 0x02, },
     { [QUIRKY] = 0x02, }
@@ -472,7 +472,7 @@ static const u8 NaiveQuest2Question[];
 static const PersonalityQuestion NaiveQuest2 = { NaiveQuest2Question, NaiveQuest2Answers, NaiveQuest2Points };
 ALIGNED(4) static const u8 NaiveQuest2Question[] = _("Do you tend to laugh a lot?");
 
-ALIGNED(4) static const u8 NaiveQuest3Points[2][16] =
+ALIGNED(4) static const PersonalityEffects NaiveQuest3Points[2] =
 {
     { [JOLLY] = 0x01, [NAIVE] = 0x02, },
     { [CALM] = 0x02, }
@@ -489,7 +489,7 @@ static const u8 NaiveQuest3Question[];
 static const PersonalityQuestion NaiveQuest3 = { NaiveQuest3Question, NaiveQuest3Answers, NaiveQuest3Points };
 ALIGNED(4) static const u8 NaiveQuest3Question[] = _("Do others often call you childish?");
 
-ALIGNED(4) static const u8 NaiveQuest4Points[2][16] =
+ALIGNED(4) static const PersonalityEffects NaiveQuest4Points[2] =
 {
     { [NAIVE] = 0x02, },
     { [HASTY] = 0x02, }
@@ -508,7 +508,7 @@ ALIGNED(4) static const u8 NaiveQuest4Question[] = _(
     "Do you like to imagine things for your\n"
     "amusement?");
 
-ALIGNED(4) static const u8 TimidQuest1Points[3][16] =
+ALIGNED(4) static const PersonalityEffects TimidQuest1Points[3] =
 {
     { [TIMID] = 0x02, },
     { [HARDY] = 0x01, [CALM] = 0x02, },
@@ -529,7 +529,7 @@ ALIGNED(4) static const u8 TimidQuest1Question[] = _(
     "A human hand extends out of a toilet!\n"
     "What would you do?");
 
-ALIGNED(4) static const u8 TimidQuest2Points[5][16] =
+ALIGNED(4) static const PersonalityEffects TimidQuest2Points[5] =
 {
     { [TIMID] = 0x02, },
     { [HASTY] = 0x02, },
@@ -555,7 +555,7 @@ ALIGNED(4) static const u8 TimidQuest2Question[] = _(
     "right hand.{WAIT_PRESS}\n"
     "Which digit did you grab?");
 
-ALIGNED(4) static const u8 TimidQuest3Points[3][16] =
+ALIGNED(4) static const PersonalityEffects TimidQuest3Points[3] =
 {
     { [TIMID] = 0x02, },
     { [LONELY] = 0x02, },
@@ -577,7 +577,7 @@ ALIGNED(4) static const u8 TimidQuest3Question[] = _(
     "pitch-black room!{WAIT_PRESS}\n"
     "What do you do?");
 
-ALIGNED(4) static const u8 TimidQuest4Points[3][16] =
+ALIGNED(4) static const PersonalityEffects TimidQuest4Points[3] =
 {
     { [BRAVE] = 0x03, },
     { [TIMID] = 0x02, },
@@ -596,7 +596,7 @@ static const u8 TimidQuest4Question[];
 static const PersonalityQuestion TimidQuest4 = { TimidQuest4Question, TimidQuest4Answers, TimidQuest4Points };
 ALIGNED(4) static const u8 TimidQuest4Question[] = _("Can you go into a haunted house?");
 
-ALIGNED(4) static const u8 HastyQuest1Points[3][16] =
+ALIGNED(4) static const PersonalityEffects HastyQuest1Points[3] =
 {
     { [HASTY] = 0x02, },
     { [CALM] = 0x02, },
@@ -618,7 +618,7 @@ ALIGNED(4) static const u8 HastyQuest1Question[] = _(
     "But you don't know what's in it.{WAIT_PRESS}\n"
     "You're curious, so what do you do?");
 
-ALIGNED(4) static const u8 HastyQuest2Points[3][16] =
+ALIGNED(4) static const PersonalityEffects HastyQuest2Points[3] =
 {
     { [JOLLY] = 0x02, [HASTY] = 0x01, },
     { [HARDY] = 0x01, [CALM] = 0x01, },
@@ -639,7 +639,7 @@ ALIGNED(4) static const u8 HastyQuest2Question[] = _(
     "You win a lottery!{WAIT_PRESS}\n"
     "What do you do with the money?");
 
-ALIGNED(4) static const u8 HastyQuest3Points[3][16] =
+ALIGNED(4) static const PersonalityEffects HastyQuest3Points[3] =
 {
     { [HASTY] = 0x02, },
     { [TIMID] = 0x02, },
@@ -666,7 +666,7 @@ ALIGNED(4) static const u8 HastyQuest3Question[] = _(
     "You come across a treasure chest!\n"
     "What do you do?");
 
-ALIGNED(4) static const u8 HastyQuest4Points[3][16] =
+ALIGNED(4) static const PersonalityEffects HastyQuest4Points[3] =
 {
     { [DOCILE] = 0x01, [HASTY] = 0x02, },
     { [RELAXED] = 0x02, },
@@ -688,7 +688,7 @@ ALIGNED(4) static const u8 HastyQuest4Question[] = _(
     "at the promised time.\n"
     "What do you do?");
 
-ALIGNED(4) static const u8 SassyQuest1Points[3][16] =
+ALIGNED(4) static const PersonalityEffects SassyQuest1Points[3] =
 {
     { [HARDY] = 0x02, },
     { [DOCILE] = 0x02, },
@@ -709,7 +709,7 @@ ALIGNED(4) static const u8 SassyQuest1Question[] = _(
     "Your country's leader is in front of you.\n"
     "How do you speak to him or her?");
 
-ALIGNED(4) static const u8 SassyQuest2Points[2][16] =
+ALIGNED(4) static const PersonalityEffects SassyQuest2Points[2] =
 {
     { [IMPISH] = 0x01, [SASSY] = 0x02, },
     { [CALM] = 0x02, }
@@ -726,7 +726,7 @@ static const u8 SassyQuest2Question[];
 static const PersonalityQuestion SassyQuest2 = { SassyQuest2Question, SassyQuest2Answers, SassyQuest2Points };
 ALIGNED(4) static const u8 SassyQuest2Question[] = _("Do others tell you to watch what you say?");
 
-ALIGNED(4) static const u8 SassyQuest3Points[2][16] =
+ALIGNED(4) static const PersonalityEffects SassyQuest3Points[2] =
 {
     { [SASSY] = 0x02, },
     { [RELAXED] = 0x02, }
@@ -745,7 +745,7 @@ ALIGNED(4) static const u8 SassyQuest3Question[] = _(
     "Do you think you are cool?\n"
     "Be honest.");
 
-ALIGNED(4) static const u8 SassyQuest4Points[2][16] =
+ALIGNED(4) static const PersonalityEffects SassyQuest4Points[2] =
 {
     { [DOCILE] = 0x02, [CALM] = 0x01, },
     { [SASSY] = 0x02, [QUIRKY] = 0x01, }
@@ -764,7 +764,7 @@ ALIGNED(4) static const u8 SassyQuest4Question[] = _(
     "Can you sincerely thank someone when you\n"
     "feel grateful?");
 
-ALIGNED(4) static const u8 CalmQuest1Points[2][16] =
+ALIGNED(4) static const PersonalityEffects CalmQuest1Points[2] =
 {
     { [CALM] = 0x02, [LONELY] = 0x01, },
     { [HARDY] = 0x02, }
@@ -783,7 +783,7 @@ ALIGNED(4) static const u8 CalmQuest1Question[] = _(
     "Do you occasionally consider yourself\n"
     "dull and overly cautious?");
 
-ALIGNED(4) static const u8 CalmQuest2Points[2][16] =
+ALIGNED(4) static const PersonalityEffects CalmQuest2Points[2] =
 {
     { [CALM] = 0x02, },
     { [IMPISH] = 0x02, }
@@ -802,7 +802,7 @@ ALIGNED(4) static const u8 CalmQuest2Question[] = _(
     "Do you dream of lounging around idly\n"
     "without much excitement?");
 
-ALIGNED(4) static const u8 CalmQuest3Points[2][16] =
+ALIGNED(4) static const PersonalityEffects CalmQuest3Points[2] =
 {
     { [IMPISH] = 0x01, [TIMID] = 0x02, },
     { [CALM] = 0x02, [LONELY] = 0x01, }
@@ -819,7 +819,7 @@ static const u8 CalmQuest3Question[];
 static const PersonalityQuestion CalmQuest3 = { CalmQuest3Question, CalmQuest3Answers, CalmQuest3Points };
 ALIGNED(4) static const u8 CalmQuest3Question[] = _("Do you like to fight?");
 
-ALIGNED(4) static const u8 CalmQuest4Points[2][16] =
+ALIGNED(4) static const PersonalityEffects CalmQuest4Points[2] =
 {
     { [CALM] = 0x02, [RELAXED] = 0x01, },
     { [HARDY] = 0x01, [HASTY] = 0x02, }
@@ -836,7 +836,7 @@ static const u8 CalmQuest4Question[];
 static const PersonalityQuestion CalmQuest4 = { CalmQuest4Question, CalmQuest4Answers, CalmQuest4Points };
 ALIGNED(4) static const u8 CalmQuest4Question[] = _("Do you often yawn?");
 
-ALIGNED(4) static const u8 RelaxedQuest1Points[2][16] =
+ALIGNED(4) static const PersonalityEffects RelaxedQuest1Points[2] =
 {
     { [SASSY] = 0x01, [RELAXED] = 0x02, },
     { [HARDY] = 0x02, [HASTY] = 0x01, }
@@ -853,7 +853,7 @@ static const u8 RelaxedQuest1Question[];
 static const PersonalityQuestion RelaxedQuest1 = { RelaxedQuest1Question, RelaxedQuest1Answers, RelaxedQuest1Points };
 ALIGNED(4) static const u8 RelaxedQuest1Question[] = _("Are you often late for school or meetings?");
 
-ALIGNED(4) static const u8 RelaxedQuest2Points[2][16] =
+ALIGNED(4) static const PersonalityEffects RelaxedQuest2Points[2] =
 {
     { [RELAXED] = 0x02, },
     { [IMPISH] = 0x01, [HASTY] = 0x02, }
@@ -872,7 +872,7 @@ ALIGNED(4) static const u8 RelaxedQuest2Question[] = _(
     "Do you get the feeling that you've slowed\n"
     "down lately?");
 
-ALIGNED(4) static const u8 RelaxedQuest3Points[3][16] =
+ALIGNED(4) static const PersonalityEffects RelaxedQuest3Points[3] =
 {
     { [JOLLY] = 0x02, },
     { [RELAXED] = 0x02, },
@@ -893,7 +893,7 @@ ALIGNED(4) static const u8 RelaxedQuest3Question[] = _(
     "It is a pleasant day at the beach.\n"
     "How do you feel?");
 
-ALIGNED(4) static const u8 RelaxedQuest4Points[2][16] =
+ALIGNED(4) static const PersonalityEffects RelaxedQuest4Points[2] =
 {
     { [CALM] = 0x01, [RELAXED] = 0x02, },
     { [HARDY] = 0x02, }
@@ -910,7 +910,7 @@ static const u8 RelaxedQuest4Question[];
 static const PersonalityQuestion RelaxedQuest4 = { RelaxedQuest4Question, RelaxedQuest4Answers, RelaxedQuest4Points };
 ALIGNED(4) static const u8 RelaxedQuest4Question[] = _("Do you fall asleep without noticing?");
 
-ALIGNED(4) static const u8 LonelyQuest1Points[2][16] =
+ALIGNED(4) static const PersonalityEffects LonelyQuest1Points[2] =
 {
     { [TIMID] = 0x01, [LONELY] = 0x02, },
     { [SASSY] = 0x02, }
@@ -927,7 +927,7 @@ static const u8 LonelyQuest1Question[];
 static const PersonalityQuestion LonelyQuest1 = { LonelyQuest1Question, LonelyQuest1Answers, LonelyQuest1Points };
 ALIGNED(4) static const u8 LonelyQuest1Question[] = _("Do you feel lonesome when you are alone?");
 
-ALIGNED(4) static const u8 LonelyQuest2Points[2][16] =
+ALIGNED(4) static const PersonalityEffects LonelyQuest2Points[2] =
 {
     { [TIMID] = 0x01, [LONELY] = 0x02, },
     { [BRAVE] = 0x03, [RELAXED] = 0x01, }
@@ -946,7 +946,7 @@ ALIGNED(4) static const u8 LonelyQuest2Question[] = _(
     "Do you hate to be the last person to leave\n"
     "class at the end of a school day?");
 
-ALIGNED(4) static const u8 LonelyQuest3Points[2][16] =
+ALIGNED(4) static const PersonalityEffects LonelyQuest3Points[2] =
 {
     { [TIMID] = 0x01, [LONELY] = 0x02, },
     { [CALM] = 0x02, }
@@ -965,7 +965,7 @@ ALIGNED(4) static const u8 LonelyQuest3Question[] = _(
     "What do you do with your room's light\n"
     "when you're going to bed at night?");
 
-ALIGNED(4) static const u8 LonelyQuest4Points[3][16] =
+ALIGNED(4) static const PersonalityEffects LonelyQuest4Points[3] =
 {
     { [JOLLY] = 0x01, [LONELY] = 0x01, },
     { [CALM] = 0x01, [RELAXED] = 0x02, },
@@ -987,7 +987,7 @@ ALIGNED(4) static const u8 LonelyQuest4Question[] = _(
     "with you...\n"
     "What do you do?");
 
-ALIGNED(4) static const u8 QuirkyQuest1Points[2][16] =
+ALIGNED(4) static const PersonalityEffects QuirkyQuest1Points[2] =
 {
     { [QUIRKY] = 0x02, },
     { [HARDY] = 0x02, }
@@ -1006,7 +1006,7 @@ ALIGNED(4) static const u8 QuirkyQuest1Question[] = _(
     "Do you sometimes run out of things to do\n"
     "all of a sudden?");
 
-ALIGNED(4) static const u8 QuirkyQuest2Points[3][16] =
+ALIGNED(4) static const PersonalityEffects QuirkyQuest2Points[3] =
 {
     { [HARDY] = 0x01, [HASTY] = 0x01, },
     { [QUIRKY] = 0x02, },
@@ -1031,7 +1031,7 @@ static const u8 QuirkyQuest2Question[];
 static const PersonalityQuestion QuirkyQuest2 = { QuirkyQuest2Question, QuirkyQuest2Answers, QuirkyQuest2Points };
 ALIGNED(4) static const u8 QuirkyQuest2Question[] = _("How quickly do you respond to an e-mail?");
 
-ALIGNED(4) static const u8 QuirkyQuest3Points[4][16] =
+ALIGNED(4) static const PersonalityEffects QuirkyQuest3Points[4] =
 {
     { [HARDY] = 0x01, [BRAVE] = 0x03, },
     { [QUIRKY] = 0x02, },
@@ -1055,7 +1055,7 @@ ALIGNED(4) static const u8 QuirkyQuest3Question[] = _(
     "But there's no opportunity to get close.\n"
     "What do you do?");
 
-ALIGNED(4) static const u8 QuirkyQuest4Points[3][16] =
+ALIGNED(4) static const PersonalityEffects QuirkyQuest4Points[3] =
 {
     { [DOCILE] = 0x02, },
     { [SASSY] = 0x02, },
@@ -1083,7 +1083,7 @@ ALIGNED(4) static const u8 QuirkyQuest4Question[] = _(
     "You are told there is a treasure on the\n"
     "right side. What do you do?");
 
-ALIGNED(4) static const u8 MiscQuest1Points[2][16] =
+ALIGNED(4) static const PersonalityEffects MiscQuest1Points[2] =
 {
     { [HASTY] = 0x01, [QUIRKY] = 0x01, },
     { [JOLLY] = 0x01, [LONELY] = 0x01, }
@@ -1100,7 +1100,7 @@ static const u8 MiscQuest1Question[];
 static const PersonalityQuestion MiscQuest1 = { MiscQuest1Question, MiscQuest1Answers, MiscQuest1Points };
 ALIGNED(4) static const u8 MiscQuest1Question[] = _("On vacation outings, you want to...");
 
-ALIGNED(4) static const u8 MiscQuest2Points[2][16] =
+ALIGNED(4) static const PersonalityEffects MiscQuest2Points[2] =
 {
     { [JOLLY] = 0x02, },
     { [SASSY] = 0x01, [QUIRKY] = 0x01, }
@@ -1121,7 +1121,7 @@ ALIGNED(4) static const u8 MiscQuest2Question[] = _(
     "It's the summer festival!\n"
     "Do you like carnivals?");
 
-ALIGNED(4) static const u8 MiscQuest3Points[2][16] =
+ALIGNED(4) static const PersonalityEffects MiscQuest3Points[2] =
 {
     { [NAIVE] = 0x01, [LONELY] = 0x01, },
     { [HASTY] = 0x01, [SASSY] = 0x01, }
