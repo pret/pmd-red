@@ -1,8 +1,0 @@
-#include "global.h"
-#include "dungeon.h"
-#include "memory.h"
-#include "pokemon.h"
-#include "random.h"
-#include "save.h"
-#include "text_util.h"
-#include "code_8094F88.h"
