@@ -38,6 +38,6 @@ void sub_8086854(void);
 void sub_80868F4(Entity *entity);
 void sub_8086910(Entity *entity);
 void sub_808692C(void);
-void sub_80869E4(Entity *, s32, u8, s8);
+void sub_80869E4(Entity *, s32, u8, s8 direction);
 
 #endif // GUARD_CODE_80869E4_H
