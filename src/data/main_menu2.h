@@ -219,7 +219,7 @@ static const MenuItem sUnknown_80E5DF0[] =
     {sUnknown_80E5E08, 0xFFDE},
     {0, 0xFFDD}
 };
-ALIGNED(4) static const u8 sUnknown_80E5E08[] = _("{COLOR_1 RED}Beware{END_COLOR_TEXT_1}! This will delete it forever!");
+ALIGNED(4) static const u8 sUnknown_80E5E08[] = _("{COLOR RED}Beware{RESET}! This will delete it forever!");
 ALIGNED(4) static const u8 sUnknown_80E5E34[] = _("This will delete your saved game data.");
 
 static const u8 sUnknown_80E5E74[];

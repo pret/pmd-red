@@ -107,7 +107,7 @@ ALIGNED(4) static const u8 sUnknown_80D5590[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D55C0[] = _(
     " Zzz... Zzz...\n"
-    "That {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}...\n"
+    "That {COLOR GREEN}{MOVE_ITEM_0}{RESET}...\n"
     "Can't store it...");
 
 ALIGNED(4) static const u8 sUnknown_80D55F4[] = _(
@@ -135,7 +135,7 @@ ALIGNED(4) static const u8 sUnknown_80D56CC[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D5710[] = _(
     " Hunh...? Taking...?\n"
-    "Oh... You want your {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}...\n"
+    "Oh... You want your {COLOR GREEN}{MOVE_ITEM_0}{RESET}...\n"
     "OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D574C[] = _(
@@ -158,7 +158,7 @@ ALIGNED(4) static const u8 sUnknown_80D57F4[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D5844[] = _(
     " Zzz... Store something?\n"
-    "Gonna put {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} in storage...\n"
+    "Gonna put {COLOR GREEN}{MOVE_ITEM_0}{RESET} in storage...\n"
     "OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D5884[] = _(
@@ -182,7 +182,7 @@ ALIGNED(4) static const u8 sUnknown_80D5934[] = _(
 ALIGNED(4) static const u8 sUnknown_80D5954[] = _(
     " Zzz... Zzz...\n"
     "Hello, there...\n"
-    "{ARG_POKEMON_6} Storage...");
+    "{POKEMON_6} Storage...");
 
 ALIGNED(4) static const u8 sUnknown_80D5984[] = _(
     " I can store items that you\n"
@@ -208,7 +208,7 @@ ALIGNED(4) static const u8 sUnknown_80D5B24[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D5B5C[] = _(
     " Oh, dear, sorry.{WAIT_PRESS}\n"
-    "That {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} is an item you\n"
+    "That {COLOR GREEN}{MOVE_ITEM_0}{RESET} is an item you\n"
     "can't put in storage.");
 
 ALIGNED(4) static const u8 sUnknown_80D5BAC[] = _(
@@ -233,7 +233,7 @@ ALIGNED(4) static const u8 sUnknown_80D5C74[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D5CAC[] = _(
     " Fine, I'll take your\n"
-    "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} out of storage. OK?");
+    "{COLOR GREEN}{MOVE_ITEM_0}{RESET} out of storage. OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D5CE4[] = _(
     " Would you like to take\n"
@@ -254,7 +254,7 @@ ALIGNED(4) static const u8 sUnknown_80D5D8C[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D5DBC[] = _(
     " I'll put your\n"
-    "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} in storage. OK?");
+    "{COLOR GREEN}{MOVE_ITEM_0}{RESET} in storage. OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D5DE8[] = _(
     " Do you want to store\n"
@@ -273,4 +273,4 @@ ALIGNED(4) static const u8 sUnknown_80D5E84[] = _(" Anything else, dear?");
 
 ALIGNED(4) static const u8 sUnknown_80D5E9C[] = _(
     " Hello, there!\n"
-    "Welcome to {ARG_POKEMON_6} Storage.");
+    "Welcome to {POKEMON_6} Storage.");

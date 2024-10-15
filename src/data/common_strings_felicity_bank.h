@@ -90,7 +90,7 @@ ALIGNED(4) static const u8 sUnknown_80D4A58[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D4C14[] = _(
     " {POKE}... Purr...\n"
-    "Very well, {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
+    "Very well, {COLOR CYAN}{VALUE_0}{RESET} {POKE}.\n"
     "Here you are.");
 
 ALIGNED(4) static const u8 sUnknown_80D4C50[] = _(
@@ -111,7 +111,7 @@ ALIGNED(4) static const u8 sUnknown_80D4D20[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D4D44[] = _(
     " Zzz...\n"
-    "{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}... Very well...{WAIT_PRESS}\n"
+    "{COLOR CYAN}{VALUE_0}{RESET} {POKE}... Very well...{WAIT_PRESS}\n"
     "I will guard it jealously...");
 
 ALIGNED(4) static const u8 sUnknown_80D4D8C[] = _(
@@ -146,7 +146,7 @@ ALIGNED(4) static const u8 sUnknown_80D4F08[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D4F24[] = _(
     " Sssnore... Purr...\n"
-    "Your account contains {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}...\n"
+    "Your account contains {COLOR CYAN}{VALUE_0}{RESET} {POKE}...\n"
     "How may I serve you?");
 
 ALIGNED(4) static const u8 sUnknown_80D4F74[] = _(
@@ -174,7 +174,7 @@ ALIGNED(4) static const u8 sUnknown_80D4FC8[] = _(
     " Simple, isn't it?");
 
 ALIGNED(4) static const u8 sUnknown_80D5158[] = _(
-    " Very well, {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
+    " Very well, {COLOR CYAN}{VALUE_0}{RESET} {POKE}.\n"
     "Here you are.");
 
 ALIGNED(4) static const u8 sUnknown_80D5184[] = _(
@@ -191,7 +191,7 @@ ALIGNED(4) static const u8 sUnknown_80D5224[] = _(
     "withdraw?");
 
 ALIGNED(4) static const u8 sUnknown_80D5244[] = _(
-    " {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}. Very well.{WAIT_PRESS}\n"
+    " {COLOR CYAN}{VALUE_0}{RESET} {POKE}. Very well.{WAIT_PRESS}\n"
     "I will guard it jealously.");
 
 ALIGNED(4) static const u8 sUnknown_80D527C[] = _(
@@ -214,7 +214,7 @@ ALIGNED(4) static const u8 sUnknown_80D5380[] = _(" Very well.");
 
 ALIGNED(4) static const u8 sUnknown_80D538C[] = _(
     " Your account contains\n"
-    "{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
+    "{COLOR CYAN}{VALUE_0}{RESET} {POKE}.\n"
     "How may I serve you?");
 
 ALIGNED(4) static const u8 sUnknown_80D53C8[] = _(" How may I serve you?");

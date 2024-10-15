@@ -518,31 +518,31 @@ const s16 gUnknown_80E81D4[386][2] = {
     { MONSTER_MACHOP, ITEM_ORANGE_GUMMI }
 };
 
-ALIGNED(4) const u8 gMankeyMission[] = _("Punish bad {COLOR_1 YELLOW}Mankey{END_COLOR_TEXT_1}!");
-ALIGNED(4) const u8 gSmeargleMission[] = _("{COLOR_1 YELLOW}Smeargle{END_COLOR_TEXT_1}'s desperate plea!");
-ALIGNED(4) const u8 gMedichamMission[] = _("{COLOR_1 YELLOW}Medicham{END_COLOR_TEXT_1}: Help me!");
-ALIGNED(4) const u8 gUnknown_80E8830[] = _("Deliver one {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}.");
-ALIGNED(4) const u8 gUnknown_80E8848[] = _("One {COLOR_1 GREEN}%s{END_COLOR_TEXT_1} wanted!");
+ALIGNED(4) const u8 gMankeyMission[] = _("Punish bad {COLOR YELLOW}Mankey{RESET}!");
+ALIGNED(4) const u8 gSmeargleMission[] = _("{COLOR YELLOW}Smeargle{RESET}'s desperate plea!");
+ALIGNED(4) const u8 gMedichamMission[] = _("{COLOR YELLOW}Medicham{RESET}: Help me!");
+ALIGNED(4) const u8 gUnknown_80E8830[] = _("Deliver one {COLOR GREEN}%s{RESET}.");
+ALIGNED(4) const u8 gUnknown_80E8848[] = _("One {COLOR GREEN}%s{RESET} wanted!");
 ALIGNED(4) const u8 gUnknown_80E885C[] = _("Save my child!");
 ALIGNED(4) const u8 gUnknown_80E886C[] = _("Escort me to my love!");
 ALIGNED(4) const u8 gUnknown_80E8884[] = _("Near %s");
 ALIGNED(4) const u8 gUnknown_80E888C[] = _("Rescue Description");
-ALIGNED(4) const u8 gMankeyMissionDescription[] = _("Please punish bad {COLOR_1 YELLOW}Mankey{END_COLOR_TEXT_1}'s gang.");
+ALIGNED(4) const u8 gMankeyMissionDescription[] = _("Please punish bad {COLOR YELLOW}Mankey{RESET}'s gang.");
 
 ALIGNED(4) const u8 gSmeargleMissionDescription[] = _(
     "I didn't want to become a grown-up, so I\n"
     "fled, but now I've lost my way! Help!");
 
 ALIGNED(4) const u8 gMedichamMissionDescription[] = _(
-    "This is {COLOR_1 YELLOW}Medicham{END_COLOR_TEXT_1}. Rescue me, please!\n"
+    "This is {COLOR YELLOW}Medicham{RESET}. Rescue me, please!\n"
     "The reward is a secret〜♪ ");
 
 ALIGNED(4) const u8 gUnknown_80E8968[] = _(
-    "With the item {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}, I can\n"
+    "With the item {COLOR GREEN}%s{RESET}, I can\n"
     "evolve! I'm yearning to evolve! Help!");
 
 ALIGNED(4) const u8 gUnknown_80E89B0[] = _(
-    "The {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}! What I love to eat\n"
+    "The {COLOR GREEN}%s{RESET}! What I love to eat\n"
     "and can't live without! Please get one!");
 
 ALIGNED(4) const u8 gUnknown_80E89FC[] = _(
@@ -558,14 +558,14 @@ ALIGNED(4) const u8 gUnknown_80E8A7C[] = _(
     "Send your thanks to your friend!");
 
 ALIGNED(4) const u8 gUnknown_80E8AC8[] = _("Client:");
-ALIGNED(4) const u8 gUnknown_80E8AD0[] = _("%s{COLOR_1 GREEN}{UNK_ICON_81_69}%s{UNK_ICON_81_6A}{END_COLOR_TEXT_1}");
+ALIGNED(4) const u8 gUnknown_80E8AD0[] = _("%s{COLOR GREEN}{UNK_ICON_81_69}%s{UNK_ICON_81_6A}{RESET}");
 ALIGNED(4) const u8 gUnknown_80E8AE0[] = _("Objective:");
 ALIGNED(4) const u8 gUnknown_80E8AEC[] = _("Friend Rescue");
-ALIGNED(4) const u8 gUnknown_80E8AFC[] = _("Deliver {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}.");
-ALIGNED(4) const u8 gUnknown_80E8B10[] = _("Find {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}.");
+ALIGNED(4) const u8 gUnknown_80E8AFC[] = _("Deliver {COLOR GREEN}%s{RESET}.");
+ALIGNED(4) const u8 gUnknown_80E8B10[] = _("Find {COLOR GREEN}%s{RESET}.");
 ALIGNED(4) const u8 gUnknown_80E8B20[] = _("Help me.");
-ALIGNED(4) const u8 gUnknown_80E8B2C[] = _("Escort to {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.");
-ALIGNED(4) const u8 gUnknown_80E8B40[] = _("Find {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.");
+ALIGNED(4) const u8 gUnknown_80E8B2C[] = _("Escort to {COLOR YELLOW}%s{RESET}.");
+ALIGNED(4) const u8 gUnknown_80E8B40[] = _("Find {COLOR YELLOW}%s{RESET}.");
 ALIGNED(4) const u8 gSpecialMissionText[] = _("Special mission");
 ALIGNED(4) const u8 gPlaceText[] = _("Place:");
 ALIGNED(4) const u8 gDifficultyText[] = _("Difficulty:");

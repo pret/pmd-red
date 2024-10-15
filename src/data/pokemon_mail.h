@@ -53,12 +53,12 @@ const u8 * const gUnknown_80E8BF8[7] = {
 };
 
 ALIGNED(4) static const u8 sUnknown_80E8C14[] = _("{STAR_BULLET}");
-ALIGNED(4) static const u8 sUnknown_80E8C18[] = _("{COLOR_1 RED}S{END_COLOR_TEXT_1}");
-ALIGNED(4) static const u8 sUnknown_80E8C20[] = _("{COLOR_1 CYAN}A{END_COLOR_TEXT_1}");
-ALIGNED(4) static const u8 sUnknown_80E8C28[] = _("{COLOR_1 CYAN}B{END_COLOR_TEXT_1}");
-ALIGNED(4) static const u8 sUnknown_80E8C30[] = _("{COLOR_1 GREEN}C{END_COLOR_TEXT_1}");
-ALIGNED(4) static const u8 sUnknown_80E8C38[] = _("{COLOR_1 GREEN}D{END_COLOR_TEXT_1}");
-ALIGNED(4) static const u8 sUnknown_80E8C40[] = _("{COLOR_1 WHITE}E{END_COLOR_TEXT_1}");
+ALIGNED(4) static const u8 sUnknown_80E8C18[] = _("{COLOR RED}S{RESET}");
+ALIGNED(4) static const u8 sUnknown_80E8C20[] = _("{COLOR CYAN}A{RESET}");
+ALIGNED(4) static const u8 sUnknown_80E8C28[] = _("{COLOR CYAN}B{RESET}");
+ALIGNED(4) static const u8 sUnknown_80E8C30[] = _("{COLOR GREEN}C{RESET}");
+ALIGNED(4) static const u8 sUnknown_80E8C38[] = _("{COLOR GREEN}D{RESET}");
+ALIGNED(4) static const u8 sUnknown_80E8C40[] = _("{COLOR DEFAULT}E{RESET}");
 
 static const u8 sUnknown_80E8C60[];
 static const u8 sUnknown_80E8C64[];
@@ -78,8 +78,8 @@ static const u8 * const gMissionRewardText[6] = {
 
 ALIGNED(4) static const u8 sUnknown_80E8C60[] = _("???");
 ALIGNED(4) static const u8 sUnknown_80E8C64[] = _("Friend Area");
-ALIGNED(4) static const u8 sUnknown_80E8C70[] = _("{COLOR_1 GREEN}%s{END_COLOR_TEXT_1} + ?");
-ALIGNED(4) static const u8 sUnknown_80E8C7C[] = _("{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}");
+ALIGNED(4) static const u8 sUnknown_80E8C70[] = _("{COLOR GREEN}%s{RESET} + ?");
+ALIGNED(4) static const u8 sUnknown_80E8C7C[] = _("{COLOR GREEN}%s{RESET}");
 ALIGNED(4) static const u8 sUnknown_80E8C84[] = _("%d {POKE} + ?");
 ALIGNED(4) static const u8 sUnknown_80E8C90[] = _("%d {POKE}");
 
@@ -248,9 +248,9 @@ ALIGNED(4) static const u8 sUnknown_80E914C[] = _("Hasn't come back.");
 ALIGNED(4) static const u8 sUnknown_80E9160[] = _("I'm worried.");
 ALIGNED(4) static const u8 sUnknown_80E9170[] = _("Somebody!");
 ALIGNED(4) static const u8 sUnknown_80E917C[] = _("Failed to return.");
-ALIGNED(4) static const u8 sUnknown_80E9190[] = _("Hurry, save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!");
-ALIGNED(4) static const u8 sUnknown_80E91A8[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} needs help!");
-ALIGNED(4) static const u8 sUnknown_80E91BC[] = _("Please help {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!");
+ALIGNED(4) static const u8 sUnknown_80E9190[] = _("Hurry, save {COLOR YELLOW}%s{RESET}!");
+ALIGNED(4) static const u8 sUnknown_80E91A8[] = _("{COLOR YELLOW}%s{RESET} needs help!");
+ALIGNED(4) static const u8 sUnknown_80E91BC[] = _("Please help {COLOR YELLOW}%s{RESET}!");
 
 static const u8 sUnknown_80E9288[];
 static const u8 sUnknown_80E92A4[];
@@ -346,51 +346,51 @@ static const u8 * const gUnknown_80E91D4[45] = {
     sUnknown_80E9288
 };
 
-ALIGNED(4) static const u8 sUnknown_80E9288[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} fell into a trap!");
-ALIGNED(4) static const u8 sUnknown_80E92A4[] = _("I lost contact with {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!");
-ALIGNED(4) static const u8 sUnknown_80E92C4[] = _("I can't contact {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!");
-ALIGNED(4) static const u8 sUnknown_80E92E0[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} can't walk anymore!");
-ALIGNED(4) static const u8 sUnknown_80E9300[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}'s been missing three days!");
-ALIGNED(4) static const u8 sUnknown_80E9328[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} went the wrong way!");
-ALIGNED(4) static const u8 sUnknown_80E9344[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is lost!");
-ALIGNED(4) static const u8 sUnknown_80E9358[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} appears to be stuck!");
-ALIGNED(4) static const u8 sUnknown_80E9378[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} appears to be lost!");
-ALIGNED(4) static const u8 sUnknown_80E9394[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} may have had an accident!");
-ALIGNED(4) static const u8 sUnknown_80E93B8[] = _("I'm worried for {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}'s safety!");
-ALIGNED(4) static const u8 sUnknown_80E93E0[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is fighting all alone!");
-ALIGNED(4) static const u8 sUnknown_80E9400[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is too hungry to move!");
-ALIGNED(4) static const u8 sUnknown_80E9420[] = _("Hurry, bring back {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.");
-ALIGNED(4) static const u8 sUnknown_80E9440[] = _("I got separated from {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.");
-ALIGNED(4) static const u8 sUnknown_80E9460[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is running out of time!");
-ALIGNED(4) static const u8 sUnknown_80E9480[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} was attacked, maybe!");
-ALIGNED(4) static const u8 sUnknown_80E94A0[] = _("Something happened to {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!");
-ALIGNED(4) static const u8 sUnknown_80E94C0[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} appears to be trapped!");
-ALIGNED(4) static const u8 sUnknown_80E94E0[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is stuck in a cave!");
-ALIGNED(4) static const u8 sUnknown_80E94FC[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} appears to be helpless!");
-ALIGNED(4) static const u8 sUnknown_80E951C[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} hasn't reemerged!");
-ALIGNED(4) static const u8 sUnknown_80E9538[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} was attacked by assailants!");
-ALIGNED(4) static const u8 sUnknown_80E955C[] = _("It appears as if {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} can't escape!");
-ALIGNED(4) static const u8 sUnknown_80E9588[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} may have fainted already!");
-ALIGNED(4) static const u8 sUnknown_80E95AC[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is about to faint!");
-ALIGNED(4) static const u8 sUnknown_80E95C8[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}'s been gone a long time!");
-ALIGNED(4) static const u8 sUnknown_80E95EC[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} has been cornered!");
-ALIGNED(4) static const u8 sUnknown_80E9608[] = _("I'm worried about {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!");
-ALIGNED(4) static const u8 sUnknown_80E9628[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}'s whereabouts are unknown!");
-ALIGNED(4) static const u8 sUnknown_80E9650[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} was paralyzed!");
-ALIGNED(4) static const u8 sUnknown_80E9668[] = _("Trouble may have found {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!");
-ALIGNED(4) static const u8 sUnknown_80E9688[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} appears to be freezing!");
-ALIGNED(4) static const u8 sUnknown_80E96A8[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} may be confused!");
-ALIGNED(4) static const u8 sUnknown_80E96C4[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is too scared to move!");
-ALIGNED(4) static const u8 sUnknown_80E96E4[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} went missing this morning!");
-ALIGNED(4) static const u8 sUnknown_80E9708[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} appears to be injured!");
-ALIGNED(4) static const u8 sUnknown_80E9728[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} may be facing danger!");
-ALIGNED(4) static const u8 sUnknown_80E9748[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} might be unable to return.");
-ALIGNED(4) static const u8 sUnknown_80E976C[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} hasn't come back!");
-ALIGNED(4) static const u8 sUnknown_80E9788[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} can't swim!");
-ALIGNED(4) static const u8 sUnknown_80E97A0[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} hasn't been heard from!");
-ALIGNED(4) static const u8 sUnknown_80E97C4[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is still missing.");
-ALIGNED(4) static const u8 sUnknown_80E97E0[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} may be endangered!");
-ALIGNED(4) static const u8 sUnknown_80E97FC[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} passed out from the heat!");
+ALIGNED(4) static const u8 sUnknown_80E9288[] = _("{COLOR YELLOW}%s{RESET} fell into a trap!");
+ALIGNED(4) static const u8 sUnknown_80E92A4[] = _("I lost contact with {COLOR YELLOW}%s{RESET}!");
+ALIGNED(4) static const u8 sUnknown_80E92C4[] = _("I can't contact {COLOR YELLOW}%s{RESET}!");
+ALIGNED(4) static const u8 sUnknown_80E92E0[] = _("{COLOR YELLOW}%s{RESET} can't walk anymore!");
+ALIGNED(4) static const u8 sUnknown_80E9300[] = _("{COLOR YELLOW}%s{RESET}'s been missing three days!");
+ALIGNED(4) static const u8 sUnknown_80E9328[] = _("{COLOR YELLOW}%s{RESET} went the wrong way!");
+ALIGNED(4) static const u8 sUnknown_80E9344[] = _("{COLOR YELLOW}%s{RESET} is lost!");
+ALIGNED(4) static const u8 sUnknown_80E9358[] = _("{COLOR YELLOW}%s{RESET} appears to be stuck!");
+ALIGNED(4) static const u8 sUnknown_80E9378[] = _("{COLOR YELLOW}%s{RESET} appears to be lost!");
+ALIGNED(4) static const u8 sUnknown_80E9394[] = _("{COLOR YELLOW}%s{RESET} may have had an accident!");
+ALIGNED(4) static const u8 sUnknown_80E93B8[] = _("I'm worried for {COLOR YELLOW}%s{RESET}'s safety!");
+ALIGNED(4) static const u8 sUnknown_80E93E0[] = _("{COLOR YELLOW}%s{RESET} is fighting all alone!");
+ALIGNED(4) static const u8 sUnknown_80E9400[] = _("{COLOR YELLOW}%s{RESET} is too hungry to move!");
+ALIGNED(4) static const u8 sUnknown_80E9420[] = _("Hurry, bring back {COLOR YELLOW}%s{RESET}.");
+ALIGNED(4) static const u8 sUnknown_80E9440[] = _("I got separated from {COLOR YELLOW}%s{RESET}.");
+ALIGNED(4) static const u8 sUnknown_80E9460[] = _("{COLOR YELLOW}%s{RESET} is running out of time!");
+ALIGNED(4) static const u8 sUnknown_80E9480[] = _("{COLOR YELLOW}%s{RESET} was attacked, maybe!");
+ALIGNED(4) static const u8 sUnknown_80E94A0[] = _("Something happened to {COLOR YELLOW}%s{RESET}!");
+ALIGNED(4) static const u8 sUnknown_80E94C0[] = _("{COLOR YELLOW}%s{RESET} appears to be trapped!");
+ALIGNED(4) static const u8 sUnknown_80E94E0[] = _("{COLOR YELLOW}%s{RESET} is stuck in a cave!");
+ALIGNED(4) static const u8 sUnknown_80E94FC[] = _("{COLOR YELLOW}%s{RESET} appears to be helpless!");
+ALIGNED(4) static const u8 sUnknown_80E951C[] = _("{COLOR YELLOW}%s{RESET} hasn't reemerged!");
+ALIGNED(4) static const u8 sUnknown_80E9538[] = _("{COLOR YELLOW}%s{RESET} was attacked by assailants!");
+ALIGNED(4) static const u8 sUnknown_80E955C[] = _("It appears as if {COLOR YELLOW}%s{RESET} can't escape!");
+ALIGNED(4) static const u8 sUnknown_80E9588[] = _("{COLOR YELLOW}%s{RESET} may have fainted already!");
+ALIGNED(4) static const u8 sUnknown_80E95AC[] = _("{COLOR YELLOW}%s{RESET} is about to faint!");
+ALIGNED(4) static const u8 sUnknown_80E95C8[] = _("{COLOR YELLOW}%s{RESET}'s been gone a long time!");
+ALIGNED(4) static const u8 sUnknown_80E95EC[] = _("{COLOR YELLOW}%s{RESET} has been cornered!");
+ALIGNED(4) static const u8 sUnknown_80E9608[] = _("I'm worried about {COLOR YELLOW}%s{RESET}!");
+ALIGNED(4) static const u8 sUnknown_80E9628[] = _("{COLOR YELLOW}%s{RESET}'s whereabouts are unknown!");
+ALIGNED(4) static const u8 sUnknown_80E9650[] = _("{COLOR YELLOW}%s{RESET} was paralyzed!");
+ALIGNED(4) static const u8 sUnknown_80E9668[] = _("Trouble may have found {COLOR YELLOW}%s{RESET}!");
+ALIGNED(4) static const u8 sUnknown_80E9688[] = _("{COLOR YELLOW}%s{RESET} appears to be freezing!");
+ALIGNED(4) static const u8 sUnknown_80E96A8[] = _("{COLOR YELLOW}%s{RESET} may be confused!");
+ALIGNED(4) static const u8 sUnknown_80E96C4[] = _("{COLOR YELLOW}%s{RESET} is too scared to move!");
+ALIGNED(4) static const u8 sUnknown_80E96E4[] = _("{COLOR YELLOW}%s{RESET} went missing this morning!");
+ALIGNED(4) static const u8 sUnknown_80E9708[] = _("{COLOR YELLOW}%s{RESET} appears to be injured!");
+ALIGNED(4) static const u8 sUnknown_80E9728[] = _("{COLOR YELLOW}%s{RESET} may be facing danger!");
+ALIGNED(4) static const u8 sUnknown_80E9748[] = _("{COLOR YELLOW}%s{RESET} might be unable to return.");
+ALIGNED(4) static const u8 sUnknown_80E976C[] = _("{COLOR YELLOW}%s{RESET} hasn't come back!");
+ALIGNED(4) static const u8 sUnknown_80E9788[] = _("{COLOR YELLOW}%s{RESET} can't swim!");
+ALIGNED(4) static const u8 sUnknown_80E97A0[] = _("{COLOR YELLOW}%s{RESET} hasn't been heard from!");
+ALIGNED(4) static const u8 sUnknown_80E97C4[] = _("{COLOR YELLOW}%s{RESET} is still missing.");
+ALIGNED(4) static const u8 sUnknown_80E97E0[] = _("{COLOR YELLOW}%s{RESET} may be endangered!");
+ALIGNED(4) static const u8 sUnknown_80E97FC[] = _("{COLOR YELLOW}%s{RESET} passed out from the heat!");
 
 static const u8 sUnknown_80E9848[];
 static const u8 sUnknown_80E985C[];
@@ -664,83 +664,83 @@ ALIGNED(4) static const u8 sUnknown_80EA1A8[] = _(
 ALIGNED(4) static const u8 sUnknown_80EA1FC[] = _("Please help my brother!");
 
 ALIGNED(4) static const u8 sUnknown_80EA214[] = _(
-    "We've been rivals with {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} for\n"
+    "We've been rivals with {COLOR YELLOW}%s{RESET} for\n"
     "generations. It can't suddenly end like this!");
 
 ALIGNED(4) static const u8 sUnknown_80EA26C[] = _(
-    "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} has been a rival since my\n"
+    "{COLOR YELLOW}%s{RESET} has been a rival since my\n"
     "ancestors' time. The rivalry can't end!");
 
 ALIGNED(4) static const u8 sUnknown_80EA2BC[] = _(
-    "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} can't leave without settling\n"
+    "{COLOR YELLOW}%s{RESET} can't leave without settling\n"
     "which one of us is better. Please help!");
 
 ALIGNED(4) static const u8 sUnknown_80EA30C[] = _(
-    "Please save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.\n"
+    "Please save {COLOR YELLOW}%s{RESET}.\n"
     "We owe each other a game!");
 
 ALIGNED(4) static const u8 sUnknown_80EA33C[] = _(
-    "Please rescue {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}! We detest\n"
+    "Please rescue {COLOR YELLOW}%s{RESET}! We detest\n"
     "each other, but we need each other!");
 
 ALIGNED(4) static const u8 sUnknown_80EA384[] = _("Rescue my rival!");
 
 ALIGNED(4) static const u8 sUnknown_80EA398[] = _(
-    "I can't live without {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
+    "I can't live without {COLOR YELLOW}%s{RESET}!\n"
     "My heart is breaking! Please! Help!");
 
 ALIGNED(4) static const u8 sUnknown_80EA3DC[] = _(
-    "Please save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
+    "Please save {COLOR YELLOW}%s{RESET}!\n"
     "We're no good if we're not together!");
 
 ALIGNED(4) static const u8 sUnknown_80EA41C[] = _(
-    "Please save my {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}! Now I\n"
-    "know what {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} means to me...");
+    "Please save my {COLOR YELLOW}%s{RESET}! Now I\n"
+    "know what {COLOR YELLOW}%s{RESET} means to me...");
 
 ALIGNED(4) static const u8 sUnknown_80EA45C[] = _(
-    "Please rescue {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}! We\n"
+    "Please rescue {COLOR YELLOW}%s{RESET}! We\n"
     "promised our futures together! Please!");
 
 ALIGNED(4) static const u8 sUnknown_80EA4A0[] = _(
-    "Please rescue my precious {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
+    "Please rescue my precious {COLOR YELLOW}%s{RESET}!\n"
     "We're in love! Please help!");
 
 ALIGNED(4) static const u8 sUnknown_80EA4E4[] = _(
-    "Please! Please rescue {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
+    "Please! Please rescue {COLOR YELLOW}%s{RESET}!\n"
     "We're madly in love!");
 
 ALIGNED(4) static const u8 sUnknown_80EA51C[] = _("Please save my love!");
 
 ALIGNED(4) static const u8 sUnknown_80EA534[] = _(
     "We make each other happy--it's in our\n"
-    "nature. Please save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!");
+    "nature. Please save {COLOR YELLOW}%s{RESET}!");
 
 ALIGNED(4) static const u8 sUnknown_80EA57C[] = _(
-    "Please rescue {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}! The beach\n"
+    "Please rescue {COLOR YELLOW}%s{RESET}! The beach\n"
     "feels empty without my usual friend...");
 
 ALIGNED(4) static const u8 sUnknown_80EA5C4[] = _(
-    "I feel lonely without {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} to pull\n"
+    "I feel lonely without {COLOR YELLOW}%s{RESET} to pull\n"
     "pranks and mess around with. Please help!");
 
 ALIGNED(4) static const u8 sUnknown_80EA614[] = _(
-    "Help {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}, please!\n"
+    "Help {COLOR YELLOW}%s{RESET}, please!\n"
     "We often took strolls on the wind!");
 
 ALIGNED(4) static const u8 sUnknown_80EA650[] = _(
-    "Please save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}! We're both\n"
+    "Please save {COLOR YELLOW}%s{RESET}! We're both\n"
     "old-timers who are longtime friends!");
 
 ALIGNED(4) static const u8 sUnknown_80EA698[] = _(
-    "Please save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}. We've been in\n"
+    "Please save {COLOR YELLOW}%s{RESET}. We've been in\n"
     "the delivery business for many years!");
 
 ALIGNED(4) static const u8 sUnknown_80EA6E4[] = _(
-    "I'm sad without {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}'s company.\n"
+    "I'm sad without {COLOR YELLOW}%s{RESET}'s company.\n"
     "We showed flowers to each other...");
 
 ALIGNED(4) static const u8 sUnknown_80EA730[] = _(
-    "Without {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}, there's no one for\n"
+    "Without {COLOR YELLOW}%s{RESET}, there's no one for\n"
     "me to play with in the dark! Please help!");
 
 ALIGNED(4) static const u8 sUnknown_80EA784[] = _(
@@ -748,15 +748,15 @@ ALIGNED(4) static const u8 sUnknown_80EA784[] = _(
     "Who was it?");
 
 ALIGNED(4) static const u8 sUnknown_80EA7A8[] = _(
-    "Please save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}. We're both alike\n"
+    "Please save {COLOR YELLOW}%s{RESET}. We're both alike\n"
     "in being kind of vacant and unpredictable!");
 
 ALIGNED(4) static const u8 sUnknown_80EA7FC[] = _(
-    "Without {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} around, there's no\n"
+    "Without {COLOR YELLOW}%s{RESET} around, there's no\n"
     "one to heckle! Please break my boredom!");
 
 ALIGNED(4) static const u8 sUnknown_80EA84C[] = _(
-    "Please help {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
+    "Please help {COLOR YELLOW}%s{RESET}!\n"
     "My tiny and round best friend!");
 
 ALIGNED(4) static const u8 sUnknown_80EA880[] = _(
@@ -764,15 +764,15 @@ ALIGNED(4) static const u8 sUnknown_80EA880[] = _(
     "sharp our claws could be... Someone, help!");
 
 ALIGNED(4) static const u8 sUnknown_80EA8D0[] = _(
-    "I lock horns with {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} for fun.\n"
+    "I lock horns with {COLOR YELLOW}%s{RESET} for fun.\n"
     "I terribly miss doing that...");
 
 ALIGNED(4) static const u8 sUnknown_80EA914[] = _(
-    "Please help {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}! We're both lazy,\n"
+    "Please help {COLOR YELLOW}%s{RESET}! We're both lazy,\n"
     "so we're comfortable around each other!");
 
 ALIGNED(4) static const u8 sUnknown_80EA968[] = _(
-    "I want to help {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
+    "I want to help {COLOR YELLOW}%s{RESET}!\n"
     "We both have a thing for pincers!");
 
 ALIGNED(4) static const u8 sUnknown_80EA9A4[] = _(
@@ -780,35 +780,35 @@ ALIGNED(4) static const u8 sUnknown_80EA9A4[] = _(
     "and hypnosis shows together. Please help!");
 
 ALIGNED(4) static const u8 sUnknown_80EA9F8[] = _(
-    "Someone save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}--my friend\n"
+    "Someone save {COLOR YELLOW}%s{RESET}--my friend\n"
     "and rival at ball juggling!");
 
 ALIGNED(4) static const u8 sUnknown_80EAA34[] = _(
-    "Please help {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}! Our cries are\n"
+    "Please help {COLOR YELLOW}%s{RESET}! Our cries are\n"
     "identical! We can tell each other anything!");
 
 ALIGNED(4) static const u8 sUnknown_80EAA84[] = _(
     "I can't play the biting game without my pal\n"
-    "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}! Please help!");
+    "{COLOR YELLOW}%s{RESET}! Please help!");
 
 ALIGNED(4) static const u8 sUnknown_80EAAC8[] = _(
-    "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is really noisy.\n"
+    "{COLOR YELLOW}%s{RESET} is really noisy.\n"
     "But it's lonely without the racket... Sob...");
 
 ALIGNED(4) static const u8 sUnknown_80EAB10[] = _(
-    "Without {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}, it's no fun playing\n"
+    "Without {COLOR YELLOW}%s{RESET}, it's no fun playing\n"
     "with toxic powders! Someone, please help!");
 
 ALIGNED(4) static const u8 sUnknown_80EAB68[] = _(
-    "Please rescue {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
+    "Please rescue {COLOR YELLOW}%s{RESET}!\n"
     "We've been friends since we were eggs!");
 
 ALIGNED(4) static const u8 sUnknown_80EABA8[] = _(
-    "Please help {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}--a good\n"
+    "Please help {COLOR YELLOW}%s{RESET}--a good\n"
     "friend who shares my love of fire!");
 
 ALIGNED(4) static const u8 sUnknown_80EABE8[] = _(
-    "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} and I are of the same height.\n"
+    "{COLOR YELLOW}%s{RESET} and I are of the same height.\n"
     "We're lifelong friends! Please help!");
 
 ALIGNED(4) static const u8 sUnknown_80EAC38[] = _(
@@ -816,27 +816,27 @@ ALIGNED(4) static const u8 sUnknown_80EAC38[] = _(
     "both evolved from Wurmple. Please help!");
 
 ALIGNED(4) static const u8 sUnknown_80EAC88[] = _(
-    "Help! I'm friends with {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}\n"
+    "Help! I'm friends with {COLOR YELLOW}%s{RESET}\n"
     "because we both evolve fast! Please help!");
 
 ALIGNED(4) static const u8 sUnknown_80EACD4[] = _(
-    "Help! {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} isn't much now, but\n"
+    "Help! {COLOR YELLOW}%s{RESET} isn't much now, but\n"
     "my friend is amazing after evolution!");
 
 ALIGNED(4) static const u8 sUnknown_80EAD20[] = _(
-    "Please rescue {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
+    "Please rescue {COLOR YELLOW}%s{RESET}!\n"
     "We always play together!");
 
 ALIGNED(4) static const u8 sUnknown_80EAD50[] = _(
-    "Please rescue {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.\n"
+    "Please rescue {COLOR YELLOW}%s{RESET}.\n"
     "I can't stand to see a sludge buddy hurt!");
 
 ALIGNED(4) static const u8 sUnknown_80EAD94[] = _(
-    "Please save my best friend {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!\n"
+    "Please save my best friend {COLOR YELLOW}%s{RESET}!\n"
     "We're both bivalves!");
 
 ALIGNED(4) static const u8 sUnknown_80EADD0[] = _(
-    "Please save {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1},\n"
+    "Please save {COLOR YELLOW}%s{RESET},\n"
     "my drilling buddy!");
 
 ALIGNED(4) static const u8 sUnknown_80EADFC[] = _(
@@ -860,7 +860,7 @@ static const u8 * const gUnknown_80EAE5C[4] = {
 
 ALIGNED(4) static const u8 EscortMe_Text[] = _("Escort me!");
 ALIGNED(4) static const u8 TakeMeWith_Text[] = _("Please take me with you!");
-ALIGNED(4) static const u8 WantToSee_Text[] = _("I want to see {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.");
+ALIGNED(4) static const u8 WantToSee_Text[] = _("I want to see {COLOR YELLOW}%s{RESET}.");
 ALIGNED(4) static const u8 TakeMe_Text[] = _("Take me!");
 
 static const u8 CloseFriends_80EAF08[];
@@ -907,26 +907,26 @@ static const u8 * const gUnknown_80EAEB8[20] = {
     CloseFriends_80EAF08
 };
 
-ALIGNED(4) static const u8 CloseFriends_80EAF08[] = _("I'm close friends with {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!");
-ALIGNED(4) static const u8 Apologize_80EAF2C[] = _("I want to apologize to {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.");
+ALIGNED(4) static const u8 CloseFriends_80EAF08[] = _("I'm close friends with {COLOR YELLOW}%s{RESET}!");
+ALIGNED(4) static const u8 Apologize_80EAF2C[] = _("I want to apologize to {COLOR YELLOW}%s{RESET}.");
 ALIGNED(4) static const u8 MustMeet_80EAF4C[] = _("I don't care how--we must meet!");
 ALIGNED(4) static const u8 HaveToMeet_80EAF70[] = _("We have to meet--whatever it takes!");
 ALIGNED(4) static const u8 HaveToGo_80EAF94[] = _("I have to go!");
 ALIGNED(4) static const u8 LongTime_80EAFA4[] = _("We haven't seen each other in a long time.");
 ALIGNED(4) static const u8 SickWorry_80EAFD4[] = _("I'm sick with worry...");
-ALIGNED(4) static const u8 FaintedInside_80EAFF0[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} may have fainted inside...");
-ALIGNED(4) static const u8 HasntReturned_80EB014[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} hasn't returned!");
-ALIGNED(4) static const u8 WantToHelp_80EB030[] = _("I want to help {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!");
-ALIGNED(4) static const u8 InTrouble_80EB048[] = _("Hurry, {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is in trouble...");
-ALIGNED(4) static const u8 WaitingForever_80EB06C[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} has been waiting forever...");
-ALIGNED(4) static const u8 WaitingInDungeon_80EB090[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is waiting in the dungeon.");
+ALIGNED(4) static const u8 FaintedInside_80EAFF0[] = _("{COLOR YELLOW}%s{RESET} may have fainted inside...");
+ALIGNED(4) static const u8 HasntReturned_80EB014[] = _("{COLOR YELLOW}%s{RESET} hasn't returned!");
+ALIGNED(4) static const u8 WantToHelp_80EB030[] = _("I want to help {COLOR YELLOW}%s{RESET}!");
+ALIGNED(4) static const u8 InTrouble_80EB048[] = _("Hurry, {COLOR YELLOW}%s{RESET} is in trouble...");
+ALIGNED(4) static const u8 WaitingForever_80EB06C[] = _("{COLOR YELLOW}%s{RESET} has been waiting forever...");
+ALIGNED(4) static const u8 WaitingInDungeon_80EB090[] = _("{COLOR YELLOW}%s{RESET} is waiting in the dungeon.");
 ALIGNED(4) static const u8 TooWeak_80EB0B4[] = _("I'm too weak. It's not possible.");
 ALIGNED(4) static const u8 OwnPower_80EB0DC[] = _("I can't go on my own power...");
 ALIGNED(4) static const u8 GoMyself_80EB0FC[] = _("I can't go by myself...");
-ALIGNED(4) static const u8 WorriedAbout_80EB118[] = _("I'm worried about {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}...");
-ALIGNED(4) static const u8 WantMeet_80EB138[] = _("I want to meet with {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}.");
+ALIGNED(4) static const u8 WorriedAbout_80EB118[] = _("I'm worried about {COLOR YELLOW}%s{RESET}...");
+ALIGNED(4) static const u8 WantMeet_80EB138[] = _("I want to meet with {COLOR YELLOW}%s{RESET}.");
 ALIGNED(4) static const u8 PromisedMeet_80EB158[] = _("We promised to meet in the dungeon!");
-ALIGNED(4) static const u8 WaitingForMe_80EB17C[] = _("{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1} is waiting for me!");
+ALIGNED(4) static const u8 WaitingForMe_80EB17C[] = _("{COLOR YELLOW}%s{RESET} is waiting for me!");
 
 static const u8 SomeonePleaseEscort[];
 static const u8 PleaseEscortMe[];
@@ -943,7 +943,7 @@ static const u8 * const gUnknown_80EB198[4] = {
 ALIGNED(4) static const u8 SomeonePleaseEscort[] = _("Someone, please escort me!");
 ALIGNED(4) static const u8 PleaseEscortMe[] = _("Please escort me there!");
 ALIGNED(4) static const u8 PleaseTakeMeThere[] = _("Please take me there with you!");
-ALIGNED(4) static const u8 PleaseTakeMeToSee[] = _("Please take me to see {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!");
+ALIGNED(4) static const u8 PleaseTakeMeToSee[] = _("Please take me to see {COLOR YELLOW}%s{RESET}!");
 
 static const u8 Without_80EB238[];
 static const u8 Worried_80EB250[];
@@ -961,12 +961,12 @@ static const u8 * const gUnknown_80EB220[6] = {
     Without_80EB238
 };
 
-ALIGNED(4) static const u8 Without_80EB238[] = _("Without {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}, I...");
-ALIGNED(4) static const u8 Worried_80EB250[] = _("I'm so worried about {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}...");
-ALIGNED(4) static const u8 WantMeet_80EB274[] = _("I really want to meet {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!");
-ALIGNED(4) static const u8 HelpMeet_80EB294[] = _("Help me meet {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!");
-ALIGNED(4) static const u8 Escort_80EB2AC[] = _("Please escort me to my {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!");
-ALIGNED(4) static const u8 TakeMeet_80EB2CC[] = _("Please! Take me to meet {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}!");
+ALIGNED(4) static const u8 Without_80EB238[] = _("Without {COLOR YELLOW}%s{RESET}, I...");
+ALIGNED(4) static const u8 Worried_80EB250[] = _("I'm so worried about {COLOR YELLOW}%s{RESET}...");
+ALIGNED(4) static const u8 WantMeet_80EB274[] = _("I really want to meet {COLOR YELLOW}%s{RESET}!");
+ALIGNED(4) static const u8 HelpMeet_80EB294[] = _("Help me meet {COLOR YELLOW}%s{RESET}!");
+ALIGNED(4) static const u8 Escort_80EB2AC[] = _("Please escort me to my {COLOR YELLOW}%s{RESET}!");
+ALIGNED(4) static const u8 TakeMeet_80EB2CC[] = _("Please! Take me to meet {COLOR YELLOW}%s{RESET}!");
 
 static const u8 Lonely_80EB308[];
 static const u8 NoGood_80EB334[];
@@ -1040,28 +1040,28 @@ static const u8 * const gUnknown_80EB3F8[22] = {
     sUnknown_80EB450
 };
 
-ALIGNED(4) static const u8 sUnknown_80EB450[] = _("Is it true about the {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}?");
-ALIGNED(4) static const u8 sUnknown_80EB470[] = _("The item {COLOR_1 GREEN}%s{END_COLOR_TEXT_1} is the in thing!");
-ALIGNED(4) static const u8 sUnknown_80EB494[] = _("Wanted: my own {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}.");
-ALIGNED(4) static const u8 sUnknown_80EB4AC[] = _("I lost my {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}.");
-ALIGNED(4) static const u8 sUnknown_80EB4C0[] = _("{COLOR_1 GREEN}%s{END_COLOR_TEXT_1} wanted for nostalgia.");
-ALIGNED(4) static const u8 sUnknown_80EB4E0[] = _("{COLOR_1 GREEN}%s{END_COLOR_TEXT_1} wanted to test effects.");
-ALIGNED(4) static const u8 sUnknown_80EB500[] = _("{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}'s texture is comforting.");
-ALIGNED(4) static const u8 sUnknown_80EB524[] = _("{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}--it's my mom's favorite.");
-ALIGNED(4) static const u8 sUnknown_80EB54C[] = _("{COLOR_1 GREEN}%s{END_COLOR_TEXT_1} makes me strong.");
-ALIGNED(4) static const u8 sUnknown_80EB568[] = _("I can't sleep without it: {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}.");
-ALIGNED(4) static const u8 sUnknown_80EB590[] = _("{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}--I get scared without it!");
-ALIGNED(4) static const u8 sUnknown_80EB5B4[] = _("Hard-to-find {COLOR_1 GREEN}%s{END_COLOR_TEXT_1} sought.");
-ALIGNED(4) static const u8 sUnknown_80EB5D4[] = _("I can't find one more {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}.");
-ALIGNED(4) static const u8 sUnknown_80EB5F8[] = _("Help this {COLOR_1 GREEN}%s{END_COLOR_TEXT_1} collector!");
-ALIGNED(4) static const u8 sUnknown_80EB618[] = _("{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}! Seeking in quantity!");
-ALIGNED(4) static const u8 sUnknown_80EB638[] = _("{COLOR_1 GREEN}%s{END_COLOR_TEXT_1} wanted as a charm.");
-ALIGNED(4) static const u8 sUnknown_80EB654[] = _("{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}--I can't leave without it.");
-ALIGNED(4) static const u8 sUnknown_80EB67C[] = _("{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}--I'd love to utilize one!");
-ALIGNED(4) static const u8 sUnknown_80EB6A0[] = _("{COLOR_1 GREEN}%s{END_COLOR_TEXT_1} wanted for exploration.");
-ALIGNED(4) static const u8 sUnknown_80EB6C0[] = _("{COLOR_1 GREEN}%s{END_COLOR_TEXT_1} wanted after long search.");
-ALIGNED(4) static const u8 sUnknown_80EB6E4[] = _("{COLOR_1 GREEN}%s{END_COLOR_TEXT_1}--it's convenient to have.");
-ALIGNED(4) static const u8 sUnknown_80EB708[] = _("Having one {COLOR_1 GREEN}%s{END_COLOR_TEXT_1} is reassuring.");
+ALIGNED(4) static const u8 sUnknown_80EB450[] = _("Is it true about the {COLOR GREEN}%s{RESET}?");
+ALIGNED(4) static const u8 sUnknown_80EB470[] = _("The item {COLOR GREEN}%s{RESET} is the in thing!");
+ALIGNED(4) static const u8 sUnknown_80EB494[] = _("Wanted: my own {COLOR GREEN}%s{RESET}.");
+ALIGNED(4) static const u8 sUnknown_80EB4AC[] = _("I lost my {COLOR GREEN}%s{RESET}.");
+ALIGNED(4) static const u8 sUnknown_80EB4C0[] = _("{COLOR GREEN}%s{RESET} wanted for nostalgia.");
+ALIGNED(4) static const u8 sUnknown_80EB4E0[] = _("{COLOR GREEN}%s{RESET} wanted to test effects.");
+ALIGNED(4) static const u8 sUnknown_80EB500[] = _("{COLOR GREEN}%s{RESET}'s texture is comforting.");
+ALIGNED(4) static const u8 sUnknown_80EB524[] = _("{COLOR GREEN}%s{RESET}--it's my mom's favorite.");
+ALIGNED(4) static const u8 sUnknown_80EB54C[] = _("{COLOR GREEN}%s{RESET} makes me strong.");
+ALIGNED(4) static const u8 sUnknown_80EB568[] = _("I can't sleep without it: {COLOR GREEN}%s{RESET}.");
+ALIGNED(4) static const u8 sUnknown_80EB590[] = _("{COLOR GREEN}%s{RESET}--I get scared without it!");
+ALIGNED(4) static const u8 sUnknown_80EB5B4[] = _("Hard-to-find {COLOR GREEN}%s{RESET} sought.");
+ALIGNED(4) static const u8 sUnknown_80EB5D4[] = _("I can't find one more {COLOR GREEN}%s{RESET}.");
+ALIGNED(4) static const u8 sUnknown_80EB5F8[] = _("Help this {COLOR GREEN}%s{RESET} collector!");
+ALIGNED(4) static const u8 sUnknown_80EB618[] = _("{COLOR GREEN}%s{RESET}! Seeking in quantity!");
+ALIGNED(4) static const u8 sUnknown_80EB638[] = _("{COLOR GREEN}%s{RESET} wanted as a charm.");
+ALIGNED(4) static const u8 sUnknown_80EB654[] = _("{COLOR GREEN}%s{RESET}--I can't leave without it.");
+ALIGNED(4) static const u8 sUnknown_80EB67C[] = _("{COLOR GREEN}%s{RESET}--I'd love to utilize one!");
+ALIGNED(4) static const u8 sUnknown_80EB6A0[] = _("{COLOR GREEN}%s{RESET} wanted for exploration.");
+ALIGNED(4) static const u8 sUnknown_80EB6C0[] = _("{COLOR GREEN}%s{RESET} wanted after long search.");
+ALIGNED(4) static const u8 sUnknown_80EB6E4[] = _("{COLOR GREEN}%s{RESET}--it's convenient to have.");
+ALIGNED(4) static const u8 sUnknown_80EB708[] = _("Having one {COLOR GREEN}%s{RESET} is reassuring.");
 
 static const u8 sUnknown_80EB784[];
 static const u8 sUnknown_80EB7A8[];
@@ -1329,7 +1329,7 @@ ALIGNED(4) static const u8 sLucarioRankText[] = _(
 ALIGNED(4) static const u8 sLucarioRankHeadline[] = _("Congratulations - Lucario Rank!");
 
 ALIGNED(4) static const u8 sBuriedRelicText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Mystery Ruin Found Underground!{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Mystery Ruin Found Underground!{RESET}\n"
     "Its site had been hidden by the crater of a\n"
     "meteor strike in ancient times. The Buried\n"
     "Relic is thought to date back beyond\n"
@@ -1341,11 +1341,11 @@ ALIGNED(4) static const u8 sBuriedRelicText[] = _(
 ALIGNED(4) static const u8 sBuriedRelicHeadline[] = _("Buried Relic Discovered!");
 
 ALIGNED(4) static const u8 sNewsText2[] = _(
-    "{CENTER_ALIGN}{COLOR_1 CYAN}{ARG_POKEMON_0} Innocent! Part 2{END_COLOR_TEXT_1}\n"
-    "{COLOR_1 GREEN}Quote from Charizard on the scene:{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN}{COLOR CYAN}{POKEMON_0} Innocent! Part 2{RESET}\n"
+    "{COLOR GREEN}Quote from Charizard on the scene:{RESET}\n"
     "“That's what I thought right from\n"
     "the start, hahaha!”\n"
-    "{COLOR_1 GREEN}Quote from Tyranitar on the scene:{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}Quote from Tyranitar on the scene:{RESET}\n"
     "“That muckraking Gengar...\n"
     "He's not getting away with this!\n"
     "He'd better be ready for it!”");
@@ -1353,13 +1353,13 @@ ALIGNED(4) static const u8 sNewsText2[] = _(
 ALIGNED(4) static const u8 sNewsHeadline2[] = _("Pokémon News Extra 2");
 
 ALIGNED(4) static const u8 sNewsText1[] = _(
-    "{CENTER_ALIGN}{COLOR_1 CYAN}{ARG_POKEMON_0} Innocent! Part 1{END_COLOR_TEXT_1}\n"
-    "{ARG_POKEMON_1} met with Ninetales on {COLOR_1 RED}Mt. Freeze{END_COLOR_TEXT_1}.\n"
-    "Ninetales testified that {ARG_POKEMON_0} was\n"
+    "{CENTER_ALIGN}{COLOR CYAN}{POKEMON_0} Innocent! Part 1{RESET}\n"
+    "{POKEMON_1} met with Ninetales on {COLOR RED}Mt. Freeze{RESET}.\n"
+    "Ninetales testified that {POKEMON_0} was\n"
     "not the human that appeared in the legend.\n"
     "As a result, Gengar's claims were found to\n"
     "be malicious lies.\n"
-    "{COLOR_1 GREEN}The clearly dismayed Gengar's quote:{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}The clearly dismayed Gengar's quote:{RESET}\n"
     "“Ugegegegegegegegegegegeh!”");
 
 ALIGNED(4) static const u8 sNewsHeadline1[] = _("Pokémon News Extra 1");
@@ -1376,39 +1376,39 @@ ALIGNED(4) static const u8 sPelipperText[] = _(
 ALIGNED(4) static const u8 sPelipperHeadline[] =_("A Letter from Pelipper");
 
 ALIGNED(4) static const u8 sLinkedProText2[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Try These Linked Moves to KO Foes!{END_COLOR_TEXT_1}\n\n"
+    "{CENTER_ALIGN COLOR YELLOW}Try These Linked Moves to KO Foes!{RESET}\n\n"
     "Psyduck\n"
-    "{COLOR_1 GREEN}Confusion{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Disable{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}Confusion{RESET} + {COLOR GREEN}Disable{RESET}\n"
     "Totodile\n"
-    "{COLOR_1 GREEN}Bite{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Scary Face{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}Bite{RESET} + {COLOR GREEN}Scary Face{RESET}\n"
     "Cyndaquil\n"
-    "{COLOR_1 GREEN}Flame Wheel{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Smokescreen{END_COLOR_TEXT_1}{EXTRA_MSG}"
+    "{COLOR GREEN}Flame Wheel{RESET} + {COLOR GREEN}Smokescreen{RESET}{EXTRA_MSG}"
     "Pikachu\n"
-    "{COLOR_1 GREEN}Thunderbolt{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Double Team{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}Thunderbolt{RESET} + {COLOR GREEN}Double Team{RESET}\n"
     "Skitty\n"
-    "{COLOR_1 GREEN}Tail Whip{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Doubleslap{END_COLOR_TEXT_1}");
+    "{COLOR GREEN}Tail Whip{RESET} + {COLOR GREEN}Doubleslap{RESET}");
 
 ALIGNED(4) static const u8 sLinkedProHeadline2[] =_("#50 Linked Moves Pro Level 2");
 
 ALIGNED(4) static const u8 sLinkedProText1[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}These Linked Move Combinations{END_COLOR_TEXT_1}\n"
-    "{CENTER_ALIGN COLOR_1 YELLOW}Can Be Devastating!{END_COLOR_TEXT_1}\n\n"
+    "{CENTER_ALIGN COLOR YELLOW}These Linked Move Combinations{RESET}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Can Be Devastating!{RESET}\n\n"
     "Bulbasaur\n"
-    "{COLOR_1 GREEN}Razor Leaf{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Sleep Powder{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}Razor Leaf{RESET} + {COLOR GREEN}Sleep Powder{RESET}\n"
     "Chikorita\n"
-    "{COLOR_1 GREEN}Body Slam{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Reflect{END_COLOR_TEXT_1}{EXTRA_MSG}"
+    "{COLOR GREEN}Body Slam{RESET} + {COLOR GREEN}Reflect{RESET}{EXTRA_MSG}"
     "Treecko\n"
-    "{COLOR_1 GREEN}Screech{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Pound{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}Screech{RESET} + {COLOR GREEN}Pound{RESET}\n"
     "Machop\n"
-    "{COLOR_1 GREEN}Focus Energy{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Karate Chop{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}Focus Energy{RESET} + {COLOR GREEN}Karate Chop{RESET}\n"
     "Cubone\n"
-    "{COLOR_1 GREEN}Tail Whip{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Bonemerang{END_COLOR_TEXT_1}");
+    "{COLOR GREEN}Tail Whip{RESET} + {COLOR GREEN}Bonemerang{RESET}");
 
 ALIGNED(4) static const u8 sLinkedProHeadline1[] = _("#49 Linked Moves Pro Level 1");
 
 ALIGNED(4) static const u8 sSlakothText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Relief for Delicate Souls Who Can't{END_COLOR_TEXT_1}\n"
-    "{CENTER_ALIGN COLOR_1 YELLOW}Sleep with Different Pillows!{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Relief for Delicate Souls Who Can't{RESET}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Sleep with Different Pillows!{RESET}\n"
     "Insomniacs rejoiced over the announcement\n"
     "of the Slakoth Pillow, which is said to\n"
     "induce sleepiness just by seeing it.\n"
@@ -1431,14 +1431,14 @@ ALIGNED(4) static const u8 sPitfallText[] = _(
 ALIGNED(4) static const u8 sPitfallHeadline[] = _("#47 Beware of Pitfalls");
 
 ALIGNED(4) static const u8 sSeaRescueText[] = _(
-    "A high-seas rescue in the {COLOR_1 RED}Stormy Sea{END_COLOR_TEXT_1} by\n"
-    "{COLOR_1 CYAN}Team Sea Dragons{END_COLOR_TEXT_1} ended yesterday with\n"
+    "A high-seas rescue in the {COLOR RED}Stormy Sea{RESET} by\n"
+    "{COLOR CYAN}Team Sea Dragons{RESET} ended yesterday with\n"
     "the successful recovery of Tentacool.\n"
     "The client, Corsola, is said to be delighted\n"
     "by the outcome.\n"
     "Tentacool stated, “I didn't realize how far\n"
     "I'd been washed out to sea.”\n"
-    "The {COLOR_1 RED}Stormy Sea{END_COLOR_TEXT_1} is unforgiving!");
+    "The {COLOR RED}Stormy Sea{RESET} is unforgiving!");
 
 ALIGNED(4) static const u8 sSeaRescueHeadline[] = _("#46 Sea Rescue a Success!");
 
@@ -1454,7 +1454,7 @@ ALIGNED(4) static const u8 sVileplumeText[] = _(
 ALIGNED(4) static const u8 sVileplumeHeadline[] = _("#45 Vileplume's Weighty Problem");
 
 ALIGNED(4) static const u8 sRawstText[] = _(
-    "Research has revealed that {COLOR_1 GREEN}Rawst Berries{END_COLOR_TEXT_1}\n"
+    "Research has revealed that {COLOR GREEN}Rawst Berries{RESET}\n"
     "found in dungeons are usually unripened\n"
     "and colored green. When ripe, they turn a\n"
     "sky blue color. An unripened one is easier\n"
@@ -1521,10 +1521,10 @@ ALIGNED(4) static const u8 sCastformHeadline[] = _("#39 Castform's Daily Weather
 
 ALIGNED(4) static const u8 sGasText[] = _(
     "Reports of a noxious gas leak caused\n"
-    "widespread chaos in the {COLOR_1 YELLOW_4}Sinister Woods{END_COLOR_TEXT_1}.\n"
+    "widespread chaos in the {COLOR YELLOW_D}Sinister Woods{RESET}.\n"
     "Specialists speculate that the recent\n"
     "natural disasters are to blame. However,\n"
-    "some also blame {COLOR_1 CYAN}Team Koffing{END_COLOR_TEXT_1}'s training\n"
+    "some also blame {COLOR CYAN}Team Koffing{RESET}'s training\n"
     "in the area for the foul-smelling gas.\n"
     "The answer, apparently, is blowing in the\n"
     "wind.");
@@ -1532,7 +1532,7 @@ ALIGNED(4) static const u8 sGasText[] = _(
 ALIGNED(4) static const u8 sGasHeadline[] = _("#38 Noxious Gas Leak?!");
 
 ALIGNED(4) static const u8 sKeyItemText2[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}When Used Somewhere Special...{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}When Used Somewhere Special...{RESET}\n"
     "Eevee and Water Stone, Fire Stone,\n"
     "Thunderstone, or...\n"
     "Exeggcute and Leaf Stone...\n"
@@ -1542,7 +1542,7 @@ ALIGNED(4) static const u8 sKeyItemText2[] = _(
 ALIGNED(4) static const u8 sKeyItemHeadline2[] = _("#37 Key Items for Pokémon 2");
 
 ALIGNED(4) static const u8 sKeyItemText1[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}When Used Somewhere Special...{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}When Used Somewhere Special...{RESET}\n"
     "Sunkern and Sun Stone...\n"
     "Skitty and Moon Stone...\n"
     "Growlithe and Fire Stone...\n"
@@ -1553,14 +1553,14 @@ ALIGNED(4) static const u8 sKeyItemText1[] = _(
 ALIGNED(4) static const u8 sKeyItemHeadline1[] = _("#36 Key Items for Pokémon 1");
 
 ALIGNED(4) static const u8 sSwitchText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Power Up Combination Attacks!{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Power Up Combination Attacks!{RESET}\n"
     "Some dungeons allow rescue teams to\n"
     "switch leaders on the spot for doing\n"
     "combination attacks and so on.\n"
     "When you enter a dungeon, open the menu,\n"
     "choose the Pokémon you want as the\n"
-    "leader under {COLOR_1 YELLOW}Team{END_COLOR_TEXT_1}, then select the\n"
-    "command {COLOR_1 YELLOW}Leader{END_COLOR_TEXT_1}.");
+    "leader under {COLOR YELLOW}Team{RESET}, then select the\n"
+    "command {COLOR YELLOW}Leader{RESET}.");
 
 ALIGNED(4) static const u8 sSwitchHeadline[] = _("#35 Switching Leaders");
 
@@ -1591,7 +1591,7 @@ ALIGNED(4) static const u8 sWobbuffetText[] = _(
     "Earlier today, Wobbuffet reportedly\n"
     "wobbled the wrong way and wandered off.\n"
     "It had to be rescued by the famous\n"
-    "{COLOR_1 CYAN}Team Hydro{END_COLOR_TEXT_1}.\n"
+    "{COLOR CYAN}Team Hydro{RESET}.\n"
     "Fortunately, the wayward wanderer\n"
     "Wobbuffet was only wobbly and otherwise\n"
     "unharmed.");
@@ -1602,8 +1602,8 @@ ALIGNED(4) static const u8 sPechaText[] = _(
     "Among rescue teams, there is growing\n"
     "demand for equipment that is not only\n"
     "practical, but also fashionably appealing.\n"
-    "The pink {COLOR_1 GREEN}Pecha Scarf{END_COLOR_TEXT_1} is especially popular.\n"
-    "Even the {COLOR_1 CYAN}Kecleon Shop{END_COLOR_TEXT_1} is having trouble\n"
+    "The pink {COLOR GREEN}Pecha Scarf{RESET} is especially popular.\n"
+    "Even the {COLOR CYAN}Kecleon Shop{RESET} is having trouble\n"
     "keeping it in stock.\n"
     "If you're lucky enough to spot one, make a\n"
     "beeline for it!");
@@ -1635,19 +1635,19 @@ ALIGNED(4) static const u8 sAzurillText[] = _(
 ALIGNED(4) static const u8 sAzurillHeadline[] = _("#29 Azurill--the Little Hero!");
 
 ALIGNED(4) static const u8 sKeyText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Head Out to the Desert Region!{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Head Out to the Desert Region!{RESET}\n"
     "If you've been wondering what lies behind\n"
-    "the mysterious locked doors of the {COLOR_1 YELLOW_4}Solar\n"
-    "Cave{END_COLOR_TEXT_1}, there's been a breakthrough!\n"
+    "the mysterious locked doors of the {COLOR YELLOW_D}Solar\n"
+    "Cave{RESET}, there's been a breakthrough!\n"
     "Reports indicate the door keys are easily\n"
-    "found in the {COLOR_1 YELLOW_4}Desert Region{END_COLOR_TEXT_1}. Explorers are\n"
+    "found in the {COLOR YELLOW_D}Desert Region{RESET}. Explorers are\n"
     "advised to compose teams with Pokémon\n"
     "adapted to the desert environment.");
 
 ALIGNED(4) static const u8 sKeyHeadline[] = _("#28 The Key");
 
 ALIGNED(4) static const u8 sSweetText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Feel a Little Envious?{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Feel a Little Envious?{RESET}\n"
     "Teddiursa is often seen licking its paws\n"
     "that have soaked up sweet honey. While it\n"
     "may be sticky shaking paws with\n"
@@ -1657,10 +1657,10 @@ ALIGNED(4) static const u8 sSweetText[] = _(
 ALIGNED(4) static const u8 sSweetHeadline[] = _("#27 Sweet Hands!");
 
 ALIGNED(4) static const u8 sRangeText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}All Moves Have Effective Ranges{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}All Moves Have Effective Ranges{RESET}\n"
     "Moves that affect an entire room have a\n"
     "range of two tiles in a corridor. The move\n"
-    "{COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}, which lowers the Attack stat of\n"
+    "{COLOR GREEN}Growl{RESET}, which lowers the Attack stat of\n"
     "foes in a room, will reach two tiles away\n"
     "in a corridor, for example. If, however,\n"
     "the visibility is limited to just one tile,\n"
@@ -1669,8 +1669,8 @@ ALIGNED(4) static const u8 sRangeText[] = _(
 ALIGNED(4) static const u8 sRangeHeadline[] = _("#26 The Range of Moves");
 
 ALIGNED(4) static const u8 sIQText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Make Your Explorations Easier by{END_COLOR_TEXT_1}\n"
-    "{CENTER_ALIGN COLOR_1 YELLOW}Boosting the IQ of Team Members!{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Make Your Explorations Easier by{RESET}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Boosting the IQ of Team Members!{RESET}\n"
     "Eating Gummis boosts the IQ of Pokémon.\n"
     "Upon reaching certain IQ levels, a Pokémon\n"
     "learns IQ Skills that can be very helpful\n"
@@ -1681,7 +1681,7 @@ ALIGNED(4) static const u8 sIQText[] = _(
 ALIGNED(4) static const u8 sIQHeadline[] = _("#25 IQ");
 
 ALIGNED(4) static const u8 sTrapTileText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}New Types of Floor Tiles?{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}New Types of Floor Tiles?{RESET}\n"
     "There have been numerous reports of new\n"
     "floor tiles other than Wonder Tiles.\n"
     "Believed to have been made by the recent\n"
@@ -1693,32 +1693,32 @@ ALIGNED(4) static const u8 sTrapTileText[] = _(
 ALIGNED(4) static const u8 sTrapTileHeadline[] = _("#24 New Floor Tiles?");
 
 ALIGNED(4) static const u8 sMakuhitaText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Study Type Matchups{END_COLOR_TEXT_1}\n"
-    "{CENTER_ALIGN COLOR_1 YELLOW}at the Makuhita Dojo!{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Study Type Matchups{RESET}\n"
+    "{CENTER_ALIGN COLOR YELLOW}at the Makuhita Dojo!{RESET}\n"
     "At the Makuhita Dojo, one can learn how\n"
     "Pokémon type matchups affect battles.\n"
     "It's because the dojo's training rooms are\n"
-    "divided by type. For example, in the {COLOR_1 YELLOW_4}Fire\n"
-    "Maze{END_COLOR_TEXT_1}, there are only Fire-type Pokémon.\n"
+    "divided by type. For example, in the {COLOR YELLOW_D}Fire\n"
+    "Maze{RESET}, there are only Fire-type Pokémon.\n"
     "Try move types to see what works best!");
 
 ALIGNED(4) static const u8 sMakuhitaHeadline[] = _("#23 Train at the Makuhita Dojo!");
 
 ALIGNED(4) static const u8 sMachineText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}New Types of Machines Discovered?{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}New Types of Machines Discovered?{RESET}\n"
     "In a recently discovered cave, explorers\n"
     "found unique types of Technical Machines.\n"
     "They apparently do not break after a single\n"
     "use. Further studies are said to be under\n"
     "consideration by the authorities.\n"
     "In related news, the cave is to be named\n"
-    "the {COLOR_1 YELLOW_4}Solar Cave{END_COLOR_TEXT_1}.");
+    "the {COLOR YELLOW_D}Solar Cave{RESET}.");
 
 ALIGNED(4) static const u8 sMachineHeadline[] = _("#22 New Types of Machines?");
 
 ALIGNED(4) static const u8 sUltimateText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}The Ultimate Dungeon{END_COLOR_TEXT_1}\n"
-    "{CENTER_ALIGN COLOR_1 YELLOW}Challenges You to Do Your Best!{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}The Ultimate Dungeon{RESET}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Challenges You to Do Your Best!{RESET}\n"
     "Somewhere in the world, there supposedly\n"
     "is an incredibly tough dungeon. One must\n"
     "enter alone at Level 1, and without any\n"
@@ -1729,7 +1729,7 @@ ALIGNED(4) static const u8 sUltimateText[] = _(
 ALIGNED(4) static const u8 sUltimateHeadline[] = _("#21 The Ultimate Dungeon");
 
 ALIGNED(4) static const u8 sGummiText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Gummis That Make You Smart{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Gummis That Make You Smart{RESET}\n"
     "Research has revealed that popular Gummi\n"
     "treats not only enhance intelligence, they\n"
     "also have different effects depending on\n"
@@ -1741,12 +1741,12 @@ ALIGNED(4) static const u8 sGummiText[] = _(
 ALIGNED(4) static const u8 sGummiHeadline[] = _("#20 Secrets of the Gummi");
 
 ALIGNED(4) static const u8 sMoveTipsText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Moving Diagonally{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Moving Diagonally{RESET}\n"
     "Move diagonally to avoid foes!\n"
     "Keeping {R_BUTTON}"
     " pressed, use\n"
     "{DPAD} to move diagonally.\n"
-    "{CENTER_ALIGN COLOR_1 YELLOW}Changing Direction{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Changing Direction{RESET}\n"
     "It's also very important to change\n"
     "directions without moving. Check Hints to\n"
     "see how you can do this maneuver!");
@@ -1766,7 +1766,7 @@ ALIGNED(4) static const u8 sAddMembersText[] = _(
 ALIGNED(4) static const u8 sAddMembersHeadline[] = _("#18 Adding Team Members");
 
 ALIGNED(4) static const u8 sTeamMoveText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Use Team Members Effectively!{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Use Team Members Effectively!{RESET}\n"
     "When you're fighting in a dungeon, it's\n"
     "important to use your team members. If\n"
     "attacked from the side, move horizontally.\n"
@@ -1778,7 +1778,7 @@ ALIGNED(4) static const u8 sTeamMoveText[] = _(
 ALIGNED(4) static const u8 sTeamMoveHeadline[] = _("#17 Moving as a Team");
 
 ALIGNED(4) static const u8 sWondersText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}The Seven Wonders of Pokémon?{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}The Seven Wonders of Pokémon?{RESET}\n"
     "The mysterious feet of Diglett.\n"
     "What is inside Forretress's shell.\n"
     "The intelligence of Girafarig's tail.\n"
@@ -1790,73 +1790,73 @@ ALIGNED(4) static const u8 sWondersText[] = _(
 ALIGNED(4) static const u8 sWondersHeadline[] = _("#16 Seven Wonders of Pokémon");
 
 ALIGNED(4) static const u8 sPollText[] = _(
-    "{COLOR_1 YELLOW}First{UNK_MACRO_3D_50}Gravelerock{END_COLOR_TEXT_1}\n"
-    "{COLOR_1 YELLOW}Second{UNK_MACRO_3D_50}Oran Berry{END_COLOR_TEXT_1}\n"
+    "{COLOR YELLOW}First{UNK_MACRO_3D_50}Gravelerock{RESET}\n"
+    "{COLOR YELLOW}Second{UNK_MACRO_3D_50}Oran Berry{RESET}\n"
     "In a nationwide survey involving rescue\n"
     "teams, the most popular item was found to\n"
-    "be {COLOR_1 GREEN}Gravelerocks{END_COLOR_TEXT_1}. According to Sudowoodo\n"
-    "of {COLOR_1 CYAN}Team Fakers{END_COLOR_TEXT_1}, “It lets you attack\n"
+    "be {COLOR GREEN}Gravelerocks{RESET}. According to Sudowoodo\n"
+    "of {COLOR CYAN}Team Fakers{RESET}, “It lets you attack\n"
     "from far away. It's invaluable.” The next\n"
-    "most popular item was {COLOR_1 GREEN}Oran Berries{END_COLOR_TEXT_1}.");
+    "most popular item was {COLOR GREEN}Oran Berries{RESET}.");
 
 ALIGNED(4) static const u8 sPollHeadline[] = _("#15 Poll: Top Two Items");
 
 ALIGNED(4) static const u8 sLinkedEntryText3[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}These Are the Final Linked Moves{END_COLOR_TEXT_1}\n"
-    "{CENTER_ALIGN COLOR_1 YELLOW}We Recommend in the Entry Level!{END_COLOR_TEXT_1}\n"
-    "{COLOR_1 RED}Electric and Water Types{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}These Are the Final Linked Moves{RESET}\n"
+    "{CENTER_ALIGN COLOR YELLOW}We Recommend in the Entry Level!{RESET}\n"
+    "{COLOR RED}Electric and Water Types{RESET}\n"
     "Pikachu\n"
-    "{COLOR_1 GREEN}Thundershock{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}Thundershock{RESET} + {COLOR GREEN}Growl{RESET}\n"
     "Squirtle\n"
-    "{COLOR_1 GREEN}Tail Whip{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Tackle{END_COLOR_TEXT_1}{EXTRA_MSG}Totodile\n"
-    "{COLOR_1 GREEN}Leer{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Scratch{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}Tail Whip{RESET} + {COLOR GREEN}Tackle{RESET}{EXTRA_MSG}Totodile\n"
+    "{COLOR GREEN}Leer{RESET} + {COLOR GREEN}Scratch{RESET}\n"
     "Mudkip\n"
-    "{COLOR_1 GREEN}Water Gun{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Mud-Slap{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}Water Gun{RESET} + {COLOR GREEN}Mud-Slap{RESET}\n"
     "Psyduck\n"
-    "{COLOR_1 GREEN}Tail Whip{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Scratch{END_COLOR_TEXT_1}");
+    "{COLOR GREEN}Tail Whip{RESET} + {COLOR GREEN}Scratch{RESET}");
 
 ALIGNED(4) static const u8 sLinkedEntryHeadline3[] = _("#14 Linked Moves Entry Level 3");
 
 ALIGNED(4) static const u8 sLinkedEntryText2[] = _(
-    "{COLOR_1 RED}Fire and Normal Types{END_COLOR_TEXT_1}\n"
+    "{COLOR RED}Fire and Normal Types{RESET}\n"
     "Charmander\n"
-    "{COLOR_1 GREEN}Ember{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}Ember{RESET} + {COLOR GREEN}Growl{RESET}\n"
     "Cyndaquil\n"
-    "{COLOR_1 GREEN}Leer{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Tackle{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}Leer{RESET} + {COLOR GREEN}Tackle{RESET}\n"
     "Torchic\n"
-    "{COLOR_1 GREEN}Ember{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}{EXTRA_MSG}Eevee\n"
-    "{COLOR_1 GREEN}Tail Whip{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Tackle{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}Ember{RESET} + {COLOR GREEN}Growl{RESET}{EXTRA_MSG}Eevee\n"
+    "{COLOR GREEN}Tail Whip{RESET} + {COLOR GREEN}Tackle{RESET}\n"
     "Meowth\n"
-    "{COLOR_1 GREEN}Scratch{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}Scratch{RESET} + {COLOR GREEN}Growl{RESET}\n"
     "Skitty\n"
-    "{COLOR_1 GREEN}Tail Whip{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Tackle{END_COLOR_TEXT_1}");
+    "{COLOR GREEN}Tail Whip{RESET} + {COLOR GREEN}Tackle{RESET}");
 
 ALIGNED(4) static const u8 sLinkedEntryHeadline2[] = _("#13 Linked Moves Entry Level 2");
 
 ALIGNED(4) static const u8 sLinkedEntryText1[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}These Are the Recommended{END_COLOR_TEXT_1}\n"
-    "{CENTER_ALIGN COLOR_1 YELLOW}Linked Moves for Beginners!{END_COLOR_TEXT_1}\n"
-    "{COLOR_1 RED}Grass, Fighting, and Ground Types{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}These Are the Recommended{RESET}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Linked Moves for Beginners!{RESET}\n"
+    "{COLOR RED}Grass, Fighting, and Ground Types{RESET}\n"
     "Bulbasaur\n"
-    "{COLOR_1 GREEN}Vine Whip{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}Vine Whip{RESET} + {COLOR GREEN}Growl{RESET}\n"
     "Chikorita\n"
-    "{COLOR_1 GREEN}Razor Leaf{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}{EXTRA_MSG}Treecko\n"
-    "{COLOR_1 GREEN}Leer{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Pound{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}Razor Leaf{RESET} + {COLOR GREEN}Growl{RESET}{EXTRA_MSG}Treecko\n"
+    "{COLOR GREEN}Leer{RESET} + {COLOR GREEN}Pound{RESET}\n"
     "Machop\n"
-    "{COLOR_1 GREEN}Leer{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Low Kick{END_COLOR_TEXT_1}\n"
+    "{COLOR GREEN}Leer{RESET} + {COLOR GREEN}Low Kick{RESET}\n"
     "Cubone\n"
-    "{COLOR_1 GREEN}Tail Whip{END_COLOR_TEXT_1} + {COLOR_1 GREEN}Bone Club{END_COLOR_TEXT_1}");
+    "{COLOR GREEN}Tail Whip{RESET} + {COLOR GREEN}Bone Club{RESET}");
 
 ALIGNED(4) static const u8 sLinkedEntryHeadline1[] = _("#12 Linked Moves Entry Level 1");
 
 ALIGNED(4) static const u8 sTypeText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Learn How Types Match Up!{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Learn How Types Match Up!{RESET}\n"
     "All Pokémon are of certain types, such as\n"
-    "{COLOR_1 RED}Fire{END_COLOR_TEXT_1} and {COLOR_1 CYAN}Water{END_COLOR_TEXT_1}. In a battle, the damage\n"
+    "{COLOR RED}Fire{RESET} and {COLOR CYAN}Water{RESET}. In a battle, the damage\n"
     "inflicted depends on how the Pokémon's\n"
     "type matches up with the move's type.\n"
-    "For example, a {COLOR_1 RED}Fire{END_COLOR_TEXT_1}-type Pokémon is\n"
-    "weak against {COLOR_1 CYAN}Water{END_COLOR_TEXT_1}-type moves.\n"
+    "For example, a {COLOR RED}Fire{RESET}-type Pokémon is\n"
+    "weak against {COLOR CYAN}Water{RESET}-type moves.\n"
     "Exploit type matchups to win battles!");
 
 ALIGNED(4) static const u8 sTypeHeadline[] = _("#11 Types and Matchups");
@@ -1867,17 +1867,17 @@ ALIGNED(4) static const u8 sDungeonText[] = _(
     "all the money you are carrying.\n"
     "Beware of what you're carrying before\n"
     "you go off on a rescue or an outing.\n"
-    "Use {COLOR_1 CYAN}Kangaskhan Storage{END_COLOR_TEXT_1} to keep\n"
+    "Use {COLOR CYAN}Kangaskhan Storage{RESET} to keep\n"
     "invaluable items safely stored.\n"
     "   - Pokémon Rescue Organization -");
 
 ALIGNED(4) static const u8 sDungeonHeadline[] = _("#10 Mysterious Dungeons?");
 
 ALIGNED(4) static const u8 sWonderText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Wonder Tiles Reset Attack and Defense!{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Wonder Tiles Reset Attack and Defense!{RESET}\n"
     "If your Attack is lowered by a foe's\n"
-    "{COLOR_1 GREEN}Growl{END_COLOR_TEXT_1}, or your Defense is lowered\n"
-    "by a foe's {COLOR_1 GREEN}Tail Whip{END_COLOR_TEXT_1}, for example, the\n"
+    "{COLOR GREEN}Growl{RESET}, or your Defense is lowered\n"
+    "by a foe's {COLOR GREEN}Tail Whip{RESET}, for example, the\n"
     "affected stat can be reset to normal by\n"
     "stepping on a Wonder Tile or going to the\n"
     "next floor. Beware, enhanced stats are\n"
@@ -1886,30 +1886,30 @@ ALIGNED(4) static const u8 sWonderText[] = _(
 ALIGNED(4) static const u8 sWonderHeadline[] = _("#9 Wonder Tiles");
 
 ALIGNED(4) static const u8 sMoveText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}The Benefits of Using Moves{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}The Benefits of Using Moves{RESET}\n"
     "If a move is used on a foe, when it is\n"
-    "defeated, {COLOR_1 CYAN}you earn more Exp. Points{END_COLOR_TEXT_1}!\n"
+    "defeated, {COLOR CYAN}you earn more Exp. Points{RESET}!\n"
     "A move only has to be used once on the\n"
     "foe: after that it can be defeated using a\n"
     "regular attack to earn more Exp. Points.\n"
     "Moves are also more likely to become\n"
-    "{COLOR_1 CYAN}critical hits{END_COLOR_TEXT_1}! Don't overuse them, though!");
+    "{COLOR CYAN}critical hits{RESET}! Don't overuse them, though!");
 
 ALIGNED(4) static const u8 sMoveHeadline[] = _("#8 Let's Use Moves!");
 
 ALIGNED(4) static const u8 sOptionsText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Change Your Option Settings{END_COLOR_TEXT_1}\n"
-    "{CENTER_ALIGN COLOR_1 YELLOW}to Suit Your Play Style!{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Change Your Option Settings{RESET}\n"
+    "{CENTER_ALIGN COLOR YELLOW}to Suit Your Play Style!{RESET}\n"
     "Press {B_BUTTON} to open the menu, then\n"
-    "choose {COLOR_1 YELLOW}Others{END_COLOR_TEXT_1} and {COLOR_1 YELLOW}Game Options{END_COLOR_TEXT_1}.\n"
+    "choose {COLOR YELLOW}Others{RESET} and {COLOR YELLOW}Game Options{RESET}.\n"
     "You can change settings to suit the way\n"
     "you play.");
 
 ALIGNED(4) static const u8 sOptionsHeadline[] = _("#7 Game Options");
 
 ALIGNED(4) static const u8 sDisasterText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Investigations Under Way into{END_COLOR_TEXT_1}\n"
-    "{CENTER_ALIGN COLOR_1 YELLOW}Recent Rash of Natural Disasters{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Investigations Under Way into{RESET}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Recent Rash of Natural Disasters{RESET}\n"
     "Pokémon in affected areas attack any\n"
     "outsider without hesitation. Some believe\n"
     "a mysterious force is behind their\n"
@@ -1920,7 +1920,7 @@ ALIGNED(4) static const u8 sDisasterText[] = _(
 ALIGNED(4) static const u8 sDisasterHeadline[] = _("#6 Recent Natural Disasters");
 
 ALIGNED(4) static const u8 sSeedText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Seeds Can Be Thrown, Too!{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Seeds Can Be Thrown, Too!{RESET}\n"
     "Seeds are usually meant to be eaten.\n"
     "But did you know? They can also be thrown\n"
     "at other Pokémon to unlock their effects.\n"
@@ -1931,14 +1931,14 @@ ALIGNED(4) static const u8 sSeedText[] = _(
 ALIGNED(4) static const u8 sSeedHeadline[] = _("#5 Throw Seeds!");
 
 ALIGNED(4) static const u8 sHungerText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Eat Something When You Get Hungry!{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Eat Something When You Get Hungry!{RESET}\n"
     "While you're exploring a dungeon, you will\n"
     "get progressively hungry (your Belly goes\n"
     "down). If you become famished, you will\n"
     "eventually lose HP and even faint.\n"
     "That's why you should eat something to fill\n"
     "your Belly! You can always buy food at the\n"
-    "{COLOR_1 CYAN}Kecleon Shop{END_COLOR_TEXT_1}.");
+    "{COLOR CYAN}Kecleon Shop{RESET}.");
 
 ALIGNED(4) static const u8 sHungerHeadline[] = _("#4 Getting Hungry");
 
@@ -1946,8 +1946,8 @@ ALIGNED(4) static const u8 sJobText[] = _(
     "If you want to go on a rescue job listed\n"
     "on the Bulletin Board at the Pelipper Post\n"
     "Office, or one that's delivered to your\n"
-    "Mailbox, you first need to {COLOR_1 YELLOW}Accept{END_COLOR_TEXT_1} the job,\n"
-    "then choose {COLOR_1 YELLOW}Take Job{END_COLOR_TEXT_1}. Only then will you\n"
+    "Mailbox, you first need to {COLOR YELLOW}Accept{RESET} the job,\n"
+    "then choose {COLOR YELLOW}Take Job{RESET}. Only then will you\n"
     "be able to handle that job.\n"
     "Try to do accepted jobs quickly!\n"
     "   - Pokémon Rescue Organization -");
@@ -1955,7 +1955,7 @@ ALIGNED(4) static const u8 sJobText[] = _(
 ALIGNED(4) static const u8 sJobHeadline[] = _("#3 Accepting Rescue Jobs");
 
 ALIGNED(4) static const u8 sBasicsText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}Saving Your Adventure and Pokémon News{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}Saving Your Adventure and Pokémon News{RESET}\n"
     "You can save your adventure by going to\n"
     "your bed. Get in the habit of saving often.\n"
     "You should also store old Pokémon News.\n"
@@ -1967,7 +1967,7 @@ ALIGNED(4) static const u8 sBasicsText[] = _(
 ALIGNED(4) static const u8 sBasicsHeadline[] = _("#2 Rescue Team Basics");
 
 ALIGNED(4) static const u8 sWelcomeText[] = _(
-    "{CENTER_ALIGN COLOR_1 YELLOW}To All New Members!{END_COLOR_TEXT_1}\n"
+    "{CENTER_ALIGN COLOR YELLOW}To All New Members!{RESET}\n"
     "Your badge has the power to send back\n"
     "to town any Pokémon you've rescued. Just\n"
     "hold the badge up, and it does the rest.\n"

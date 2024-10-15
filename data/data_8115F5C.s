@@ -86,12 +86,12 @@ gUnknown_8116148: @ 8116148
 
 .global gInvalidityText
 gInvalidityText: @ 811615C
-.string "{COLOR_1 RED_2}invalidity{END_COLOR_TEXT_1}\0"
+.string "{COLOR RED_W}invalidity{RESET}\0"
 .align 2,0
 
 .global gUndefineText
 gUndefineText: @ 811616C
-.string "{COLOR_1 RED_2}undefine{END_COLOR_TEXT_1}\0"
+.string "{COLOR RED_W}undefine{RESET}\0"
 .align 2,0
 
 .global gSpeechBubbleChar
@@ -100,11 +100,11 @@ gSpeechBubbleChar: @ 811617C
 
 .global gFormattedSpeechBubble
 gFormattedSpeechBubble: @ 8116180
-.string "{COLOR_1 YELLOW_5}{SPEECH_BUBBLE}{END_COLOR_TEXT_1}\0"
+.string "{COLOR YELLOW_N}{SPEECH_BUBBLE}{RESET}\0"
 
 .global gUnknown_8116188
 gUnknown_8116188: @ 8116188
-.string "{COLOR_1 YELLOW_5}%s{END_COLOR_TEXT_1}\0"
+.string "{COLOR YELLOW_N}%s{RESET}\0"
 .align 2,0
 
 .global gUnknown_8116190
@@ -285,20 +285,20 @@ gUnknown_8116318: @ 8116318
 
 .global gUnknown_811633C
 gUnknown_811633C: @ 811633C
-.string "{CENTER_ALIGN}{ARG_NICKNAME_0}'s team received\n"
-.string "{CENTER_ALIGN}the {ARG_MOVE_ITEM_0} cash reward.\0"
+.string "{CENTER_ALIGN}{NAME_0}'s team received\n"
+.string "{CENTER_ALIGN}the {MOVE_ITEM_0} cash reward.\0"
 .align 2, 0
 
 .global gUnknown_811636C
 gUnknown_811636C: @ 811636C
 .string "{CENTER_ALIGN}The team also received\n"
-.string "{CENTER_ALIGN}one {ARG_MOVE_ITEM_0}.\0"
+.string "{CENTER_ALIGN}one {MOVE_ITEM_0}.\0"
 .align 2, 0
 
 .global gUnknown_8116390
 gUnknown_8116390: @ 8116390
-.string "{CENTER_ALIGN}{ARG_NICKNAME_0}'s team received\n"
-.string "{CENTER_ALIGN}the reward {ARG_MOVE_ITEM_0}.\0"
+.string "{CENTER_ALIGN}{NAME_0}'s team received\n"
+.string "{CENTER_ALIGN}the reward {MOVE_ITEM_0}.\0"
 .align 2, 0
 
 .global gUnknown_81163BC
@@ -317,18 +317,18 @@ gUnknown_81163BC: @ 81163BC
 
 .global gUnknown_81163E4
 gUnknown_81163E4: @ 81163E4
-.string "{COLOR_1 LIGHT_BLUE}%d{END_COLOR_TEXT_1} %s\0"
+.string "{COLOR CYAN_G}%d{RESET} %s\0"
 .align 2,0
 
 .global gUnknown_81163F0
 gUnknown_81163F0: @ 81163F0
-.string "{CENTER_ALIGN}However, {ARG_NICKNAME_0}'s team\n"
+.string "{CENTER_ALIGN}However, {NAME_0}'s team\n"
 .string "{CENTER_ALIGN}had too much money already...\0"
 .align 2,0
 
 .global gUnknown_811642C
 gUnknown_811642C: @ 811642C
-.string "{CENTER_ALIGN}However, {ARG_NICKNAME_0}'s team\n"
+.string "{CENTER_ALIGN}However, {NAME_0}'s team\n"
 .string "{CENTER_ALIGN}had too many items already...\0"
 .align 2,0
 .string "pksdir0\0"
@@ -540,7 +540,7 @@ gUnknown_81167E8: @ 81167E8
 .global gUnknown_81167EC
 gUnknown_81167EC: @ 81167EC
 .string "{CENTER_ALIGN}The rescue rank went up from\n"
-.string "{CENTER_ALIGN}{ARG_MOVE_ITEM_0} to {ARG_MOVE_ITEM_1}!\0"
+.string "{CENTER_ALIGN}{MOVE_ITEM_0} to {MOVE_ITEM_1}!\0"
 .align 2,0
 
 .global gUnknown_811681C
@@ -747,12 +747,12 @@ gUnknown_8117000: @ 8117000
 
 .global gUnknown_811709C
 gUnknown_811709C: @ 811709C
-.string "{COLOR_1 RED_2}invalidity{END_COLOR_TEXT_1}\0"
+.string "{COLOR RED_W}invalidity{RESET}\0"
 .align 2,0
 
 .global gUnknown_81170AC
 gUnknown_81170AC: @ 81170AC
-.string "{COLOR_1 YELLOW_3}scene{END_COLOR_TEXT_1}\0"
+.string "{COLOR YELLOW_C}scene{RESET}\0"
 .align 2,0
 
 .global gUnknown_81170B8
@@ -762,7 +762,7 @@ gUnknown_81170B8: @ 81170B8
 
 .global gUnknown_81170C4
 gUnknown_81170C4: @ 81170C4
-.string "{COLOR_1 YELLOW_3}direction{END_COLOR_TEXT_1}\0"
+.string "{COLOR YELLOW_C}direction{RESET}\0"
 .align 2,0
 
 .global gUnknown_81170D4
@@ -1943,7 +1943,7 @@ gUnknown_8118250: @ 8118250
 
 .global gGroundLives_InvalidityText
 gGroundLives_InvalidityText: @ 811825C
-.string "{COLOR_1 RED_2}invalidity{END_COLOR_TEXT_1}\0"
+.string "{COLOR RED_W}invalidity{RESET}\0"
 .align 2,0
 
 .global GroundLives_ActionText

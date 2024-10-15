@@ -453,22 +453,22 @@ gUnknown_80B71A0: @ 80B71A0
 
         .global CWEND_text
         CWEND_text:
-        .string "{COLOR_1 RED_2}END{END_COLOR_TEXT_1}\0"
+        .string "{COLOR RED_W}END{RESET}\0"
         .align 2,0
 
         .global CNLAST_text
         CNLAST_text:
-        .string "{COLOR_1 YELLOW_5}LAST{END_COLOR_TEXT_1}\0"
+        .string "{COLOR YELLOW_N}LAST{RESET}\0"
         .align 2,0
 
         .global CECONTINUE_text
         CECONTINUE_text:
-        .string "{COLOR_1 GENDER_COLOR}CONTINUE{END_COLOR_TEXT_1}\0"
+        .string "{COLOR GENDER_COLOR}CONTINUE{RESET}\0"
         .align 2,0
 
         .global CISTART_text
         CISTART_text:
-        .string "{COLOR_1 GREEN_2}START{END_COLOR_TEXT_1}\0"
+        .string "{COLOR GREEN_I}START{RESET}\0"
         .align 2,0
 
 	.global gGroundEnterLookupTable

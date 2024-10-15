@@ -22,9 +22,9 @@ static const UnkTextStruct2 sUnknown_80E1F18 =
 
 ALIGNED(4) static const u8 sObjectives[] = "Objectives";
 ALIGNED(4) static const u8 sFmt1[] = "%dF";
-ALIGNED(4) static const u8 sFmtRescue[] = _("  Rescue {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}");
+ALIGNED(4) static const u8 sFmtRescue[] = _("  Rescue {COLOR YELLOW}%s{RESET}");
 ALIGNED(4) static const u8 sJustGo[] = "Just go!";
-ALIGNED(4) static const u8 sFmtBring[] = _("  Bring {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}");
-ALIGNED(4) static const u8 sFmtFind[] = _("  Find {COLOR_1 GREEN}%s{END_COLOR_TEXT_1}");
-ALIGNED(4) static const u8 sFmtEscort[] = _("  Escort to {COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}");
-ALIGNED(4) static const u8 sRedQuestionMarks[] = _("{COLOR_1 RED_2}???{END_COLOR_TEXT_1}");
+ALIGNED(4) static const u8 sFmtBring[] = _("  Bring {COLOR GREEN}%s{RESET}");
+ALIGNED(4) static const u8 sFmtFind[] = _("  Find {COLOR GREEN}%s{RESET}");
+ALIGNED(4) static const u8 sFmtEscort[] = _("  Escort to {COLOR YELLOW}%s{RESET}");
+ALIGNED(4) static const u8 sRedQuestionMarks[] = _("{COLOR RED_W}???{RESET}");

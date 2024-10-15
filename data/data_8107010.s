@@ -258,12 +258,12 @@ gUnknown_81075F4: @ 81075F4
 
 .global gUnknown_8107600
 gUnknown_8107600: @ 8107600
-.string "{COLOR_2 YELLOW_2}%s{END_COLOR_TEXT_2}"
+.string "{color YELLOW_RAW}%s{reset}"
 .align 2,0
 
 .global gUnknown_8107608
 gUnknown_8107608: @ 8107608
-.string "{COLOR_2 CYAN_2}%s{END_COLOR_TEXT_2}"
+.string "{color CYAN_RAW}%s{reset}"
 .align 2,0
 
 .global gUnownLetters
@@ -283,7 +283,7 @@ gUnknown_8107638: @ 8107638
 
 .global gUnknown_810763C
 gUnknown_810763C: @ 810763C
-.string "{COLOR_2}%c%s{END_COLOR_TEXT_2}\0"
+.string "{color}%c%s{reset}\0"
 
 .global gUnknown_8107645
 gUnknown_8107645: @ 8107645
@@ -378,7 +378,7 @@ gUnknown_8107770: @ 8107770
 
 .global gUnknown_8107784
 gUnknown_8107784: @ 8107784
-.string "{ARG_MOVE_ITEM_1}\0"
+.string "{MOVE_ITEM_1}\0"
 .align 2,0
 
 .global gUnknown_8107788
@@ -391,7 +391,7 @@ gUnknown_810778C: @ 810778C
 
 .global gUnknown_8107790
 gUnknown_8107790: @ 8107790
-.string "{ARG_MOVE_ITEM_0}{ARG_MOVE_ITEM_1}\0"
+.string "{MOVE_ITEM_0}{MOVE_ITEM_1}\0"
 .align 2,0
 
 .global gUnknown_8107798
@@ -1222,17 +1222,17 @@ gUnknown_8108EC0: @ 8108EC0
 
 .global gUnknown_8108F10
 gUnknown_8108F10: @ 8108F10
-.string "{COLOR_2 YELLOW_4}%s{END_COLOR_TEXT_2}\0"
+.string "{color YELLOW_D}%s{reset}\0"
 .align 2,0
 
 .global gUnknown_8108F18
 gUnknown_8108F18: @ 8108F18
-.string "{COLOR_2 YELLOW_4}%s{END_COLOR_TEXT_2}　{COLOR_2 CYAN}%d{END_COLOR_TEXT_2}F\0"
+.string "{color YELLOW_D}%s{reset}　{color CYAN}%d{reset}F\0"
 .align 2,0
 
 .global gUnknown_8108F2C
 gUnknown_8108F2C: @ 8108F2C
-.string "{COLOR_2 YELLOW_4}%s{END_COLOR_TEXT_2}　B{COLOR_2 CYAN}%d{END_COLOR_TEXT_2}F\0"
+.string "{color YELLOW_D}%s{reset}　B{color CYAN}%d{reset}F\0"
 .align 2,0
 
 .global gUnknown_8108F40
@@ -1423,13 +1423,13 @@ gUnknown_810978C: @ 810978C
 .global gUnknown_8109794
 gUnknown_8109794: @ 8109794
 @ replacing .incbin "baserom.gba", 0x00109794, 0x10
-.string "%s{UNK_MACRO_3D}%c{COLOR_1 UNK_COLOR_4}%s{END_COLOR_TEXT_1}\0"
+.string "%s{UNK_MACRO_3D}%c{COLOR GREEN_RAW}%s{RESET}\0"
 .align 2, 0
 
 .global gUnknown_81097A4
 gUnknown_81097A4: @ 81097A4
 @ replacing .incbin "baserom.gba", 0x001097a4, 0xc
-.string "%s{COLOR_1 UNK_COLOR_4}%s{END_COLOR_TEXT_1}\0"
+.string "%s{COLOR GREEN_RAW}%s{RESET}\0"
 .align 2, 0
 
 .global gPowersOfTen
@@ -1546,12 +1546,12 @@ gUnknown_8109888: @ 8109888
 
 .global sUnknown_81098A4
 sUnknown_81098A4: @ 81098A4
-.string "{COLOR_2 UNK_COLOR_4}%s{END_COLOR_TEXT_2}\0"
+.string "{color GREEN_RAW}%s{reset}\0"
 .align 2,0
 
 .global sUnknown_81098AC
 sUnknown_81098AC: @ 81098AC
-.string "%s{UNK_MACRO_3D}%c{COLOR_1 UNK_COLOR_4}%s{END_COLOR_TEXT_1}\0"
+.string "%s{UNK_MACRO_3D}%c{COLOR GREEN_RAW}%s{RESET}\0"
 .align 2,0
 @ END friend_area.c
 @ moves.c
@@ -1574,12 +1574,12 @@ gUnknown_81098DC: @ 81098DC
 
 .global gUnknown_81098E0
 gUnknown_81098E0: @ 81098E0
-.string "{COLOR_2}%c%s%s{END_COLOR_TEXT_2}\0"
+.string "{color}%c%s%s{reset}\0"
 .align 2,0
 
 .global gUnknown_81098EC
 gUnknown_81098EC: @ 81098EC
-.string "{COLOR_2}%c#:%s%s%s#;%c%2d/%2d{END_COLOR_TEXT_2}\0"
+.string "{color}%c#:%s%s%s#;%c%2d/%2d{reset}\0"
 .align 2,0
 
 .global gUnknown_8109908
@@ -1592,7 +1592,7 @@ gUnknown_810990C: @ 810990C
 
 .global gUnknown_8109910
 gUnknown_8109910: @ 8109910
-.string "{COLOR_2}%c%s%s%s{UNK_MACRO_3D}%c%2d/%2d{END_COLOR_TEXT_2}\0"
+.string "{color}%c%s%s%s{UNK_MACRO_3D}%c%2d/%2d{reset}\0"
 .align 2,0
 
 .global gUnknown_8109928
@@ -1610,7 +1610,7 @@ gUnknown_810992C: @ 810992C
 
 .global gUnknown_8109930
 gUnknown_8109930: @ 8109930
-.string "{ARG_POKEMON_0}\0"
+.string "{POKEMON_0}\0"
 .align 2,0
 @ ???
 .string "pksdir0\0"

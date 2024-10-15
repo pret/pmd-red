@@ -1214,7 +1214,7 @@ static const s16 gStarters[NUM_PERSONALITIES][2] =
 
 ALIGNED(4) static const u8 gStarterReveal[] = _(
     "\n"
-    "{CENTER_ALIGN}The Pokémon {ARG_POKEMON_0}!");
+    "{CENTER_ALIGN}The Pokémon {POKEMON_0}!");
 UNUSED ALIGNED(4) static const u8* const gStarterRevealPtr[] = { gStarterReveal };
 
 ALIGNED(4) static const u8 gPartnerPrompt[] = _(

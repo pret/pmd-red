@@ -1235,14 +1235,14 @@ gUnknown_80F7AF8: @ 80F7AF8
 
 .global gUnknown_80F7AFC
 gUnknown_80F7AFC: @ 80F7AFC
-.string "{COLOR_1 YELLOW}%s{END_COLOR_TEXT_1}\0"
+.string "{COLOR YELLOW}%s{RESET}\0"
 .align 2,0
 
 .global gUnknown_80F7B04
 gUnknown_80F7B04: @ 80F7B04
-.string "{COLOR_1 YELLOW}"
+.string "{COLOR YELLOW}"
 .byte 0x87, 0x45
-.string "{END_COLOR_TEXT_1}\0"
+.string "{RESET}\0"
 .align 2,0
 .string "pksdir0\0"
 .align 2,0
@@ -1284,8 +1284,8 @@ gActions: @ 80F7B14
 
 .global gEquipPutOnDescription
 gEquipPutOnDescription: @ 80F7B94
-.string "{ARG_POKEMON_0} put on\n"
-.string "the {ARG_MOVE_ITEM_0}.\0"
+.string "{POKEMON_0} put on\n"
+.string "the {MOVE_ITEM_0}.\0"
 
 .global gPeelText
 gPeelText: @ 80F7BA8
@@ -1294,8 +1294,8 @@ gPeelText: @ 80F7BA8
 
 .global gPeelDescription
 gPeelDescription: @ 80F7BB0
-.string "{ARG_POKEMON_0} peeled\n"
-.string "the {ARG_MOVE_ITEM_0}.\0"
+.string "{POKEMON_0} peeled\n"
+.string "the {MOVE_ITEM_0}.\0"
 .align 2,0
 
 .global gIngestText
@@ -1305,8 +1305,8 @@ gIngestText: @ 80F7BC4
 
 .global gIngestDescription
 gIngestDescription: @ 80F7BCC
-.string "{ARG_POKEMON_0} swallowed\n"
-.string "the {ARG_MOVE_ITEM_0}.\0"
+.string "{POKEMON_0} swallowed\n"
+.string "the {MOVE_ITEM_0}.\0"
 .align 2,0
 
 .global gEatText
@@ -1316,8 +1316,8 @@ gEatText: @ 80F7BE4
 
 .global gEatDescription
 gEatDescription: @ 80F7BE8
-.string "{ARG_POKEMON_0} ate\n"
-.string "the {ARG_MOVE_ITEM_0}.\0"
+.string "{POKEMON_0} ate\n"
+.string "the {MOVE_ITEM_0}.\0"
 .align 2,0
 
 .global gEquipText
@@ -1327,8 +1327,8 @@ gEquipText: @ 80F7BFC
 
 .global gEquipDescription
 gEquipDescription: @ 80F7C04
-.string "{ARG_POKEMON_0} equipped\n"
-.string "the {ARG_MOVE_ITEM_0}.\0"
+.string "{POKEMON_0} equipped\n"
+.string "the {MOVE_ITEM_0}.\0"
 .align 2,0
 
 .global gThrowText
@@ -1338,8 +1338,8 @@ gThrowText: @ 80F7C1C
 
 .global gThrowDescription
 gThrowDescription: @ 80F7C24
-.string "{ARG_POKEMON_0} threw\n"
-.string "the {ARG_MOVE_ITEM_0}.\0"
+.string "{POKEMON_0} threw\n"
+.string "the {MOVE_ITEM_0}.\0"
 .align 2,0
 
 .global gUseText
@@ -1352,8 +1352,8 @@ gUseDescription: @ 80F7C3C
 
 .global gUnknown_80F7C3C
 gUnknown_80F7C3C: @ 80F7C3C
-.string "{ARG_POKEMON_0} used\n"
-.string "the {ARG_MOVE_ITEM_0}.\0"
+.string "{POKEMON_0} used\n"
+.string "the {MOVE_ITEM_0}.\0"
 .align 2,0
 
 .global gUnknown_80F7C50
@@ -1683,7 +1683,7 @@ gUnknown_80F7F70: @ 80F7F70
 gRescueSpotDescription: @ 80F7F7C
 .string "You reached the rescue spot where your\n"
 .string "friend's team went down!\n"
-.string "Send an {COLOR_2 RED}A-OK Mail{END_COLOR_TEXT_2} from the Pelipper Post\n"
+.string "Send an {color RED}A-OK Mail{reset} from the Pelipper Post\n"
 .string "Office to let your friend know you've\n"
 .string "rescued the defeated team.\0"
 .align 2,0
@@ -1756,7 +1756,7 @@ gTrapDescriptions: @ 80F8130
 .global SpikeTrapDescription
 SpikeTrapDescription: @ 80F8180
 .string "Stepping on this trap inflicts damage.\n"
-.string "It can be made using the move {COLOR_2 YELLOW}Spikes{END_COLOR_TEXT_2}.\0"
+.string "It can be made using the move {color YELLOW}Spikes{reset}.\0"
 .align 2, 0
 
 .global PokemonTrapDescription
@@ -1769,7 +1769,7 @@ PokemonTrapDescription: @ 80F81D4
 WonderTileDescription: @ 80F8224
 .string "An odd floor tile seen in many dungeons.\n"
 .string "Stepping on it resets the Pokémon's\n"
-.string "{COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2}, {COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}, and so on, if\n"
+.string "{color YELLOW}Attack{reset}, {color YELLOW}Defense{reset}, and so on, if\n"
 .string "they are boosted or reduced.\0"
 .align 2, 0
 
@@ -1783,13 +1783,13 @@ ChestnutTrapDescription: @ 80F82C0
 .global PPZeroTrapDescription
 PPZeroTrapDescription: @ 80F8318
 .string "Stepping on this trap completely drains\n"
-.string "the {COLOR_2 YELLOW}PP{END_COLOR_TEXT_2} of a random move.\0"
+.string "the {color YELLOW}PP{reset} of a random move.\0"
 .align 2, 0
 
 .global ExplosionTrapDescription
 ExplosionTrapDescription: @ 80F8360
 .string "Stepping on this trap triggers a\n"
-.string "{COLOR_2 CYAN}huge explosion{END_COLOR_TEXT_2}.\n"
+.string "{color CYAN}huge explosion{reset}.\n"
 .string "Its damage extends to other Pokémon,\n"
 .string "items, and walls. It has a bigger\n"
 .string "range than a Selfdestruct Trap.\0"
@@ -1797,7 +1797,7 @@ ExplosionTrapDescription: @ 80F8360
 
 .global SelfdestructTrapDescription
 SelfdestructTrapDescription: @ 80F8404
-.string "Stepping on this trap makes it {COLOR_2 CYAN}explode{END_COLOR_TEXT_2}.\n"
+.string "Stepping on this trap makes it {color CYAN}explode{reset}.\n"
 .string "Its damage extends to other Pokémon,\n"
 .string "items, and walls around the trap.\0"
 .align 2, 0
@@ -1805,7 +1805,7 @@ SelfdestructTrapDescription: @ 80F8404
 .global PoisonTrapDescription
 PoisonTrapDescription: @ 80F847C
 .string "Stepping on this trap looses poison\n"
-.string "spikes that leave the Pokémon {COLOR_2 CYAN}poisoned{END_COLOR_TEXT_2}.\0"
+.string "spikes that leave the Pokémon {color CYAN}poisoned{reset}.\0"
 .align 2, 0
 
 .global SealTrapDescription
@@ -1818,21 +1818,21 @@ SealTrapDescription: @ 80F84D0
 .global SlowTrapDescription
 SlowTrapDescription: @ 80F8538
 .string "Stepping on this trap lowers the\n"
-.string "Pokémon's {COLOR_2 YELLOW}Movement Speed{END_COLOR_TEXT_2} by one level.\0"
+.string "Pokémon's {color YELLOW}Movement Speed{reset} by one level.\0"
 .align 2, 0
 
 .global SleepTrapDescription
 SleepTrapDescription: @ 80F8588
 .string "Stepping on this trap releases a sleeping\n"
 .string "gas that puts the Pokémon to\n"
-.string "{COLOR_2 CYAN}sleep{END_COLOR_TEXT_2}.\0"
+.string "{color CYAN}sleep{reset}.\0"
 .align 2, 0
 
 .global ConfuseTrapDescription
 ConfuseTrapDescription: @ 80F85DC
 .string "Stepping on this trap spins the Pokémon\n"
 .string "around dizzyingly, making it \n"
-.string "{COLOR_2 CYAN}confused{END_COLOR_TEXT_2}.\0"
+.string "{color CYAN}confused{reset}.\0"
 .align 2, 0
 
 .global GustTrapDescription
@@ -1878,9 +1878,9 @@ StickyTrapDescription: @ 80F8834
 .global MudTrapDescription
 MudTrapDescription: @ 80F887C
 .string "Stepping on this trap makes it blow\n"
-.string "mud that lowers the Pokémon's {COLOR_2 YELLOW}Attack{END_COLOR_TEXT_2},\n"
-.string "{COLOR_2 YELLOW}Defense{END_COLOR_TEXT_2}, {COLOR_2 YELLOW}Special Attack{END_COLOR_TEXT_2}, or\n"
-.string "{COLOR_2 YELLOW}Special Defense{END_COLOR_TEXT_2} by one level.\0"
+.string "mud that lowers the Pokémon's {color YELLOW}Attack{reset},\n"
+.string "{color YELLOW}Defense{reset}, {color YELLOW}Special Attack{reset}, or\n"
+.string "{color YELLOW}Special Defense{reset} by one level.\0"
 .align 2, 0
 @ This trap is unused in the game.
 
@@ -1892,7 +1892,7 @@ TripTrapDescription: @ 80F891C
 
 .global gUnknown_80F895C
 gUnknown_80F895C: @ 80F895C
-.string "{COLOR_2 YELLOW}Decoy{END_COLOR_TEXT_2}\0"
+.string "{color YELLOW}Decoy{reset}\0"
 .align 2, 0
 
 .global gUnknown_80F8968
@@ -1911,7 +1911,7 @@ gUnknown_80F8974: @ 80F8974
 
 .global gUnknown_80F8978
 gUnknown_80F8978: @ 80F8978
-.string "{COLOR_2 YELLOW}Pokémon{END_COLOR_TEXT_2}\0"
+.string "{color YELLOW}Pokémon{reset}\0"
 .align 2, 0
 
 .global gUnknown_80F8988
@@ -1930,7 +1930,7 @@ gUnknown_80F8994: @ 80F8994
 
 .global PartnerFainted_80F8998
 PartnerFainted_80F8998: @ 80F8998
-.string "Your partner {ARG_POKEMON_0} fainted!\0"
+.string "Your partner {POKEMON_0} fainted!\0"
 .align 2,0
 
 .global gUnknown_80F89B4
@@ -1939,7 +1939,7 @@ gUnknown_80F89B4: @ 80F89B4
 
 .global ClientFainted_80F89B8
 ClientFainted_80F89B8: @ 80F89B8
-.string "Your client {ARG_POKEMON_0} fainted!\0"
+.string "Your client {POKEMON_0} fainted!\0"
 .align 2,0
 
 .global gUnknown_80F89D4
@@ -1964,7 +1964,7 @@ gUnknown_80F89F4: @ 80F89F4
 
 .global BlownAway_80F89F8
 BlownAway_80F89F8: @ 80F89F8
-.string "{ARG_POKEMON_0} was blown away!\0"
+.string "{POKEMON_0} was blown away!\0"
 .align 2,0
 
 .global gUnknown_80F8A0C
@@ -2044,7 +2044,7 @@ gUnknown_80F8B24: @ 80F8B24
 
 .global gUnknown_80F8B28
 gUnknown_80F8B28: @ 80F8B28
-.string "The move {ARG_MOVE_ITEM_0} was set.\0"
+.string "The move {MOVE_ITEM_0} was set.\0"
 .align 2,0
 
 .global gUnknown_80F8B40
@@ -2053,7 +2053,7 @@ gUnknown_80F8B40: @ 80F8B40
 
 .global gUnknown_80F8B44
 gUnknown_80F8B44: @ 80F8B44
-.string "The move {ARG_MOVE_ITEM_0} was deselected.\0"
+.string "The move {MOVE_ITEM_0} was deselected.\0"
 .align 2,0
 
 .global gUnknown_80F8B64
@@ -2063,7 +2063,7 @@ gUnknown_80F8B64: @ 80F8B64
 
 .global gUnknown_80F8B6C
 gUnknown_80F8B6C: @ 80F8B6C
-.string "The move {ARG_MOVE_ITEM_0} was delinked.\0"
+.string "The move {MOVE_ITEM_0} was delinked.\0"
 .align 2,0
 
 .global gUnknown_80F8B88
@@ -2091,14 +2091,14 @@ gUnknown_80F8BE0: @ 80F8BE0
 
 .global gUnknown_80F8BE4
 gUnknown_80F8BE4: @ 80F8BE4
-.string "The {ARG_MOVE_ITEM_1} is all sticky!\n"
+.string "The {MOVE_ITEM_1} is all sticky!\n"
 .string "It doesn't work!\0"
 .align 2, 0
 .4byte gUnknown_80F8BE4
 
 .global gUnknown_80F8C14
 gUnknown_80F8C14: @ 80F8C14
-.string "The {ARG_MOVE_ITEM_1} is all sticky!\n"
+.string "The {MOVE_ITEM_1} is all sticky!\n"
 .string "It can't be moved.\0"
 .align 2, 0
 
@@ -2116,7 +2116,7 @@ gItemStickyCannotMove3: @ 80F8C48
 
 .global gUnknown_80F8C4C
 gUnknown_80F8C4C: @ 80F8C4C
-.string "The {ARG_MOVE_ITEM_0} is all sticky!\n"
+.string "The {MOVE_ITEM_0} is all sticky!\n"
 .string "It can't be equipped.\0"
 .align 2,0
 
@@ -2126,8 +2126,8 @@ gItemStickyCannotEquip: @ 80F8C7C
 
 .global gUnknown_80F8C80
 gUnknown_80F8C80: @ 80F8C80
-.string "{ARG_POKEMON_1} took the {ARG_MOVE_ITEM_0}\n"
-.string "and returned the {ARG_MOVE_ITEM_1}.\0"
+.string "{POKEMON_1} took the {MOVE_ITEM_0}\n"
+.string "and returned the {MOVE_ITEM_1}.\0"
 .align 2,0
 
 .global gMonTookAndReturnedItem
@@ -2137,7 +2137,7 @@ gMonTookAndReturnedItem: @ 80F8CA8
 
 .global gUnknown_80F8CAC
 gUnknown_80F8CAC: @ 80F8CAC
-.string "The {ARG_MOVE_ITEM_0} was set.\n"
+.string "The {MOVE_ITEM_0} was set.\n"
 .string "Hold {L_BUTTON} then press {R_BUTTON} to throw one.\0"
 .align 2, 0
 
@@ -2151,7 +2151,7 @@ gUnknown_80F8CE8: @ 80F8CE8
 
 .global gUnknown_80F8CEC
 gUnknown_80F8CEC: @ 80F8CEC
-.string "Equipped the item {ARG_MOVE_ITEM_0}.\0"
+.string "Equipped the item {MOVE_ITEM_0}.\0"
 .align 2,0
 
 .global gUnknown_80F8D04
@@ -2160,7 +2160,7 @@ gUnknown_80F8D04: @ 80F8D04
 
 .global gUnknown_80F8D08
 gUnknown_80F8D08: @ 80F8D08
-.string "The {ARG_MOVE_ITEM_0} was deselected.\0"
+.string "The {MOVE_ITEM_0} was deselected.\0"
 
 .global gUnknown_80F8D20
 gUnknown_80F8D20: @ 80F8D20
@@ -2168,8 +2168,8 @@ gUnknown_80F8D20: @ 80F8D20
 
 .global gUnknown_80F8D24
 gUnknown_80F8D24: @ 80F8D24
-.string "The item {ARG_MOVE_ITEM_0} was given\n"
-.string "to {ARG_POKEMON_1}.\0"
+.string "The item {MOVE_ITEM_0} was given\n"
+.string "to {POKEMON_1}.\0"
 .align 2,0
 
 .global gUnknown_80F8D44
@@ -2188,8 +2188,8 @@ gUnknown_80F8D60: @ 80F8D60
 
 .global gUnknown_80F8D64
 gUnknown_80F8D64: @ 80F8D64
-.string "{ARG_POKEMON_0} returned\n"
-.string "the {ARG_MOVE_ITEM_0}.\0"
+.string "{POKEMON_0} returned\n"
+.string "the {MOVE_ITEM_0}.\0"
 .align 2, 0
 
 .global gUnknown_80F8D7C
@@ -2199,8 +2199,8 @@ gUnknown_80F8D7C: @ 80F8D7C
 
 .global gUnknown_80F8D80
 gUnknown_80F8D80: @ 80F8D80
-.string "The {ARG_MOVE_ITEM_0} was exchanged for\n"
-.string "the {ARG_MOVE_ITEM_1} in the Toolbox.\0"
+.string "The {MOVE_ITEM_0} was exchanged for\n"
+.string "the {MOVE_ITEM_1} in the Toolbox.\0"
 .align 2, 0
 
 .global gUnknown_80F8DB4
@@ -2210,7 +2210,7 @@ gUnknown_80F8DB4: @ 80F8DB4
 
 .global gUnknown_80F8DB8
 gUnknown_80F8DB8: @ 80F8DB8
-.string "{ARG_POKEMON_1} used the {ARG_MOVE_ITEM_0}\n"
+.string "{POKEMON_1} used the {MOVE_ITEM_0}\n"
 .string "it was holding!\0"
 .align 2, 0
 .4byte gUnknown_80F8DB8
@@ -2232,7 +2232,7 @@ gUnknown_80F8E04: @ 80F8E04
 
 .global gUnknown_80F8E08
 gUnknown_80F8E08: @ 80F8E08
-.string "{ARG_POKEMON_0} put the {ARG_MOVE_ITEM_0}\n"
+.string "{POKEMON_0} put the {MOVE_ITEM_0}\n"
 .string "on the ground.\0"
 .align 2, 0
 
@@ -2268,8 +2268,8 @@ gNothingCanBePutDownHere: @ 80F8E78
 
 .global gUnknown_80F8E7C
 gUnknown_80F8E7C: @ 80F8E7C
-.string "Exchanged the {ARG_MOVE_ITEM_1} on the\n"
-.string "ground with the {ARG_MOVE_ITEM_0}.\0"
+.string "Exchanged the {MOVE_ITEM_1} on the\n"
+.string "ground with the {MOVE_ITEM_0}.\0"
 .align 2, 0
 
 .global gSwappedGroundItem
@@ -2279,7 +2279,7 @@ gSwappedGroundItem: @ 80F8EAC
 
 .global gUnknown_80F8EB0
 gUnknown_80F8EB0: @ 80F8EB0
-.string "{ARG_POKEMON_0} threw the {ARG_MOVE_ITEM_0}!\0"
+.string "{POKEMON_0} threw the {MOVE_ITEM_0}!\0"
 .align 2, 0
 
 .global gMonThrewItem1
@@ -2314,7 +2314,7 @@ gCannotFarewell: @ 80F8F08
 
 .global gUnknown_80F8F0C
 gUnknown_80F8F0C: @ 80F8F0C
-.string "{ARG_POKEMON_0} is cringing!\0"
+.string "{POKEMON_0} is cringing!\0"
 .align 2, 0
 
 .global gMonCringing
@@ -2324,7 +2324,7 @@ gMonCringing: @ 80F8F20
 
 .global gUnknown_80F8F24
 gUnknown_80F8F24: @ 80F8F24
-.string "{ARG_POKEMON_0} is paralyzed!\0"
+.string "{POKEMON_0} is paralyzed!\0"
 .align 2, 0
 
 .global gMonParalyzed
@@ -2334,8 +2334,8 @@ gMonParalyzed: @ 80F8F38
 
 .global gUnknown_80F8F3C
 gUnknown_80F8F3C: @ 80F8F3C
-.string "{ARG_POKEMON_0} stepped on\n"
-.string "the {ARG_MOVE_ITEM_0}.\0"
+.string "{POKEMON_0} stepped on\n"
+.string "the {MOVE_ITEM_0}.\0"
 .align 2, 0
 
 .global gMonSteppedOnItem
@@ -2345,8 +2345,8 @@ gMonSteppedOnItem: @ 80F8F54
 
 .global gUnknown_80F8F58
 gUnknown_80F8F58: @ 80F8F58
-.string "{ARG_POKEMON_0} is terrified.\n"
-.string "It didn't pick up the {ARG_MOVE_ITEM_0}.\0"
+.string "{POKEMON_0} is terrified.\n"
+.string "It didn't pick up the {MOVE_ITEM_0}.\0"
 .align 2, 0
 
 .global gMonTerrifiedCouldntPickUpItem
@@ -2356,8 +2356,8 @@ gMonTerrifiedCouldntPickUpItem: @ 80F8F88
 
 .global gUnknown_80F8F8C
 gUnknown_80F8F8C: @ 80F8F8C
-.string "{ARG_POKEMON_0} couldn't pick up\n"
-.string "the {ARG_MOVE_ITEM_0}.\0"
+.string "{POKEMON_0} couldn't pick up\n"
+.string "the {MOVE_ITEM_0}.\0"
 .align 2, 0
 
 .global gMonCouldntPickUpItem
@@ -2367,7 +2367,7 @@ gMonCouldntPickUpItem: @ 80F8FAC
 
 .global gUnknown_80F8FB0
 gUnknown_80F8FB0: @ 80F8FB0
-.string "Picked up the {ARG_MOVE_ITEM_0}.\0"
+.string "Picked up the {MOVE_ITEM_0}.\0"
 .align 2, 0
 
 .global gPickedUpItem2
@@ -2377,7 +2377,7 @@ gPickedUpItem2: @ 80F8FC4
 
 .global gUnknown_80F8FC8
 gUnknown_80F8FC8: @ 80F8FC8
-.string "Picked up the {ARG_MOVE_ITEM_0} and\n"
+.string "Picked up the {MOVE_ITEM_0} and\n"
 .string "put it in the Toolbox.\0"
 .align 2, 0
 
@@ -2393,8 +2393,8 @@ gPickedUpItem: @ 80F8FFC
 
 .global gUnknown_80F9000
 gUnknown_80F9000: @ 80F9000
-.string "{ARG_POKEMON_0} picked up\n"
-.string "the {ARG_MOVE_ITEM_0}.\0"
+.string "{POKEMON_0} picked up\n"
+.string "the {MOVE_ITEM_0}.\0"
 .align 2, 0
 
 .global gMonPickedUpItem2
@@ -2404,8 +2404,8 @@ gMonPickedUpItem2: @ 80F9018
 
 .global gUnknown_80F901C
 gUnknown_80F901C: @ 80F901C
-.string "{ARG_POKEMON_0} picked up the\n"
-.string "{ARG_MOVE_ITEM_0} and put it in the Toolbox.\0"
+.string "{POKEMON_0} picked up the\n"
+.string "{MOVE_ITEM_0} and put it in the Toolbox.\0"
 .align 2, 0
 
 .global gMonPickedUpItemToolbox
@@ -2420,7 +2420,7 @@ gMonPickedUpItem: @ 80F9054
 
 .global gUnknown_80F9058
 gUnknown_80F9058: @ 80F9058
-.string "Say farewell to {ARG_POKEMON_0}?\n"
+.string "Say farewell to {POKEMON_0}?\n"
 .string "It will be gone from the team forever.\0"
 .align 2, 0
 
@@ -2431,8 +2431,8 @@ gSayFarewellQ: @ 80F9094
 
 .global gUnknown_80F9098
 gUnknown_80F9098: @ 80F9098
-.string "Send {ARG_POKEMON_0} back?\n"
-.string "{ARG_POKEMON_0}'s hold item will be lost.\0"
+.string "Send {POKEMON_0} back?\n"
+.string "{POKEMON_0}'s hold item will be lost.\0"
 .align 2, 0
 
 .global gSendMonBackWithItemQ
@@ -2442,7 +2442,7 @@ gSendMonBackWithItemQ: @ 80F90C8
 
 .global gUnknown_80F90CC
 gUnknown_80F90CC: @ 80F90CC
-.string "Send {ARG_POKEMON_0} back?\0"
+.string "Send {POKEMON_0} back?\0"
 .align 2, 0
 
 .global gSendMonBackQ
@@ -2452,7 +2452,7 @@ gSendMonBackQ: @ 80F90DC
 
 .global gUnknown_80F90E0
 gUnknown_80F90E0: @ 80F90E0
-.string "Say farewell to {ARG_POKEMON_0} and dismiss\n"
+.string "Say farewell to {POKEMON_0} and dismiss\n"
 .string "it from the team?\0"
 .align 2, 0
 
@@ -2463,7 +2463,7 @@ gUnknown_80F9114: @ 80F9114
 
 .global gUnknown_80F9118
 gUnknown_80F9118: @ 80F9118
-.string "{ARG_POKEMON_0} seemed disappointed and left.\0"
+.string "{POKEMON_0} seemed disappointed and left.\0"
 .align 2, 0
 
 .global gUnknown_80F913C
@@ -2473,7 +2473,7 @@ gUnknown_80F913C: @ 80F913C
 
 .global gUnknown_80F9140
 gUnknown_80F9140: @ 80F9140
-.string "{ARG_POKEMON_0} went back.\0"
+.string "{POKEMON_0} went back.\0"
 .align 2, 0
 
 .global gMonWentBack
@@ -2493,7 +2493,7 @@ gUnknown_80F9158: @ 80F9158
 
 .global gUnknown_80F915C
 gUnknown_80F915C: @ 80F915C
-.string "$-Belly:{UNK_MACRO_3E M3E_147}{ARG_VALUE_0}/{ARG_VALUE_1}\0"
+.string "$-Belly:{UNK_MACRO_3E M3E_147}{VALUE_0}/{VALUE_1}\0"
 .align 2, 0
 
 .global gUnknown_80F9174
@@ -2503,7 +2503,7 @@ gUnknown_80F9174: @ 80F9174
 
 .global gUnknown_80F9178
 gUnknown_80F9178: @ 80F9178
-.string "Money:{UNK_MACRO_3E M3E_147}{ARG_VALUE_0} {POKE}\0"
+.string "Money:{UNK_MACRO_3E M3E_147}{VALUE_0} {POKE}\0"
 .align 2, 0
 
 .global gUnknown_80F9190
@@ -2513,7 +2513,7 @@ gUnknown_80F9190: @ 80F9190
 
 .global gUnknown_80F9194
 gUnknown_80F9194: @ 80F9194
-.string "Weather:{UNK_MACRO_3E M3E_159}{ARG_POKEMON_0}\0"
+.string "Weather:{UNK_MACRO_3E M3E_159}{POKEMON_0}\0"
 .align 2, 0
 
 .global gUnknown_80F91A8
@@ -2523,7 +2523,7 @@ gUnknown_80F91A8: @ 80F91A8
 
 .global gUnknown_80F91AC
 gUnknown_80F91AC: @ 80F91AC
-.string "Play:{UNK_MACRO_3E M3E_147}{ARG_VALUE_0}:$V12:$V22\0"
+.string "Play:{UNK_MACRO_3E M3E_147}{VALUE_0}:$V12:$V22\0"
 .align 2, 0
 
 .global gUnknown_80F91C8
@@ -2533,7 +2533,7 @@ gUnknown_80F91C8: @ 80F91C8
 
 .global gUnknown_80F91CC
 gUnknown_80F91CC: @ 80F91CC
-.string "{ARG_POKEMON_0}{UNK_MACRO_3E M3E_66}$v03/$v13\0"
+.string "{POKEMON_0}{UNK_MACRO_3E M3E_66}$v03/$v13\0"
 .align 2, 0
 
 .global gUnknown_80F91E0
@@ -2677,7 +2677,7 @@ gUnknown_80F9344: @ 80F9344
 
 .global gUnknown_80F9350
 gUnknown_80F9350: @ 80F9350
-.string "{ARG_POKEMON_1} is unaffected!\0"
+.string "{POKEMON_1} is unaffected!\0"
 .align 2, 0
 
 .global gUnknown_80F9364
@@ -2687,7 +2687,7 @@ gUnknown_80F9364: @ 80F9364
 
 .global gUnknown_80F9368
 gUnknown_80F9368: @ 80F9368
-.string "The move missed {ARG_POKEMON_1}!\0"
+.string "The move missed {POKEMON_1}!\0"
 .align 2, 0
 
 .global gUnknown_80F9380
@@ -2702,7 +2702,7 @@ gUnknown_80F9384: @ 80F9384
 
 .global gUnknown_80F9388
 gUnknown_80F9388: @ 80F9388
-.string "It had no effect on {ARG_POKEMON_1}!\0"
+.string "It had no effect on {POKEMON_1}!\0"
 .align 2, 0
 
 .global gUnknown_80F93A4
@@ -2712,7 +2712,7 @@ gUnknown_80F93A4: @ 80F93A4
 
 .global gUnknown_80F93A8
 gUnknown_80F93A8: @ 80F93A8
-.string "The move {ARG_MOVE_ITEM_0} can't be used!\0"
+.string "The move {MOVE_ITEM_0} can't be used!\0"
 .align 2, 0
 
 .global gUnknown_80F93C8
@@ -2722,7 +2722,7 @@ gUnknown_80F93C8: @ 80F93C8
 
 .global gUnknown_80F93CC
 gUnknown_80F93CC: @ 80F93CC
-.string "The {ARG_MOVE_ITEM_0} fell on the ground.\0"
+.string "The {MOVE_ITEM_0} fell on the ground.\0"
 .align 2, 0
 
 .global gItemFellOnGround
@@ -2732,7 +2732,7 @@ gItemFellOnGround: @ 80F93E8
 
 .global gUnknown_80F93EC
 gUnknown_80F93EC: @ 80F93EC
-.string "The {ARG_MOVE_ITEM_0} fell in the water.\0"
+.string "The {MOVE_ITEM_0} fell in the water.\0"
 .align 2, 0
 
 .global gItemFellInWater
@@ -2742,7 +2742,7 @@ gItemFellInWater: @ 80F9408
 
 .global gUnknown_80F940C
 gUnknown_80F940C: @ 80F940C
-.string "The {ARG_MOVE_ITEM_0} became buried.\0"
+.string "The {MOVE_ITEM_0} became buried.\0"
 .align 2, 0
 
 .global gItemBuried
@@ -2752,7 +2752,7 @@ gItemBuried: @ 80F9424
 
 .global gUnknown_80F9428
 gUnknown_80F9428: @ 80F9428
-.string "The {ARG_MOVE_ITEM_0} was lost!\0"
+.string "The {MOVE_ITEM_0} was lost!\0"
 .align 2, 0
 
 .global gItemLost
@@ -2782,7 +2782,7 @@ gSeveralItemsLost: @ 80F947C
 
 .global gUnknown_80F9480
 gUnknown_80F9480: @ 80F9480
-.string "The {ARG_MOVE_ITEM_0} fell out of sight!\0"
+.string "The {MOVE_ITEM_0} fell out of sight!\0"
 .align 2, 0
 
 .global gItemFellOutOfSight
@@ -2792,8 +2792,8 @@ gItemFellOutOfSight: @ 80F949C
 
 .global gUnknown_80F94A0
 gUnknown_80F94A0: @ 80F94A0
-.string "The {ARG_MOVE_ITEM_0} went flying\n"
-.string "towards {ARG_POKEMON_0}!\0"
+.string "The {MOVE_ITEM_0} went flying\n"
+.string "towards {POKEMON_0}!\0"
 .align 2, 0
 
 .global gUnknown_80F94C4
@@ -2803,7 +2803,7 @@ gUnknown_80F94C4: @ 80F94C4
 
 .global gUnknown_80F94C8
 gUnknown_80F94C8: @ 80F94C8
-.string "It missed {ARG_POKEMON_0}!\0"
+.string "It missed {POKEMON_0}!\0"
 .align 2, 0
 
 .global gUnknown_80F94D8
@@ -2813,7 +2813,7 @@ gUnknown_80F94D8: @ 80F94D8
 
 .global gUnknown_80F94DC
 gUnknown_80F94DC: @ 80F94DC
-.string "{ARG_POKEMON_0} dodged the {ARG_MOVE_ITEM_0}!\0"
+.string "{POKEMON_0} dodged the {MOVE_ITEM_0}!\0"
 .align 2, 0
 
 .global gUnknown_80F94F0
@@ -2823,8 +2823,8 @@ gUnknown_80F94F0: @ 80F94F0
 
 .global gUnknown_80F94F4
 gUnknown_80F94F4: @ 80F94F4
-.string "The {ARG_MOVE_ITEM_0} bounced off\n"
-.string "{ARG_POKEMON_0}!\0"
+.string "The {MOVE_ITEM_0} bounced off\n"
+.string "{POKEMON_0}!\0"
 .align 2, 0
 
 .global gUnknown_80F9510
@@ -2834,7 +2834,7 @@ gUnknown_80F9510: @ 80F9510
 
 .global gUnknown_80F9514
 gUnknown_80F9514: @ 80F9514
-.string "The {ARG_MOVE_ITEM_0} flew out of sight!\0"
+.string "The {MOVE_ITEM_0} flew out of sight!\0"
 .align 2, 0
 
 .global gUnknown_80F9530
@@ -2844,7 +2844,7 @@ gUnknown_80F9530: @ 80F9530
 
 .global gFrozenMessage
 gFrozenMessage: @ 80F9534
-.string "{ARG_POKEMON_0} is frozen solid!\0"
+.string "{POKEMON_0} is frozen solid!\0"
 .align 2, 0
 
 .global gPtrFrozenMessage
@@ -2853,7 +2853,7 @@ gPtrFrozenMessage: @ 80F954C
 
 .global gWrappedAroundMessage
 gWrappedAroundMessage: @ 80F9550
-.string "{ARG_POKEMON_0} has its foe wrapped!\0"
+.string "{POKEMON_0} has its foe wrapped!\0"
 .align 2, 0
 
 .global gPtrWrappedAroundMessage
@@ -2862,7 +2862,7 @@ gPtrWrappedAroundMessage: @ 80F956C
 
 .global gWrappedByMessage
 gWrappedByMessage: @ 80F9570
-.string "{ARG_POKEMON_0} is wrapped by its foe!\0"
+.string "{POKEMON_0} is wrapped by its foe!\0"
 .align 2, 0
 
 .global gPtrWrappedByMessage
@@ -2871,7 +2871,7 @@ gPtrWrappedByMessage: @ 80F958C
 
 .global gPausedMessage
 gPausedMessage: @ 80F9590
-.string "{ARG_POKEMON_0} can't move!\0"
+.string "{POKEMON_0} can't move!\0"
 .align 2, 0
 
 .global gPtrPausedMessage
@@ -2883,7 +2883,7 @@ gInfatuatedMessage: @ 80F95A8
 
 .global gUnknown_80F95A8
 gUnknown_80F95A8: @ 80F95A8
-.string "{ARG_POKEMON_0} is infatuated!\0"
+.string "{POKEMON_0} is infatuated!\0"
 .align 2, 0
 
 .global gPtrInfatuatedMessage
@@ -2892,7 +2892,7 @@ gPtrInfatuatedMessage: @ 80F95BC
 
 .global gBideMessage
 gBideMessage: @ 80F95C0
-.string "{ARG_POKEMON_0} is storing energy!\0"
+.string "{POKEMON_0} is storing energy!\0"
 .align 2, 0
 
 .global gPtrBideMessage
@@ -2905,7 +2905,7 @@ gUnknown_80F95DC: @ 80F95DC
 
 .global gUnknown_80F95DC
 gUnknown_80F95DC: @ 80F95DC
-.string "{ARG_POKEMON_0} is asleep!\0"
+.string "{POKEMON_0} is asleep!\0"
 .align 2, 0
 
 .global gUnknown_80F95EC
@@ -2915,7 +2915,7 @@ gUnknown_80F95EC: @ 80F95EC
 
 .global gUnknown_80F95F0
 gUnknown_80F95F0: @ 80F95F0
-.string "{ARG_POKEMON_1} is frozen!\0"
+.string "{POKEMON_1} is frozen!\0"
 .align 2, 0
 
 .global gUnknown_80F9600
@@ -2965,7 +2965,7 @@ gUnknown_80F9670: @ 80F9670
 
 .global gUnknown_80F9674
 gUnknown_80F9674: @ 80F9674
-.string "{ARG_POKEMON_1} took no damage!\0"
+.string "{POKEMON_1} took no damage!\0"
 .align 2, 0
 
 .global gUnknown_80F9688
@@ -2975,7 +2975,7 @@ gUnknown_80F9688: @ 80F9688
 
 .global gUnknown_80F968C
 gUnknown_80F968C: @ 80F968C
-.string "{ARG_POKEMON_1} took calamitous damage!\0"
+.string "{POKEMON_1} took calamitous damage!\0"
 .align 2, 0
 
 .global gUnknown_80F96A8
@@ -2985,7 +2985,7 @@ gUnknown_80F96A8: @ 80F96A8
 
 .global gUnknown_80F96AC
 gUnknown_80F96AC: @ 80F96AC
-.string "{ARG_POKEMON_0} exploded!\0"
+.string "{POKEMON_0} exploded!\0"
 .align 2, 0
 
 .global gUnknown_80F96BC
@@ -3006,7 +3006,7 @@ gUnknown_80F96EC: @ 80F96EC
 
 .global gUnknown_80F96F0
 gUnknown_80F96F0: @ 80F96F0
-.string "{ARG_POKEMON_0} fell into the pitfall!\0"
+.string "{POKEMON_0} fell into the pitfall!\0"
 .align 2, 0
 
 .global gUnknown_80F970C
@@ -3026,7 +3026,7 @@ gUnknown_80F9728: @ 80F9728
 
 .global gUnknown_80F972C
 gUnknown_80F972C: @ 80F972C
-.string "{ARG_POKEMON_0} is famished.\0"
+.string "{POKEMON_0} is famished.\0"
 .align 2, 0
 
 .global gUnknown_80F9740
@@ -3036,7 +3036,7 @@ gUnknown_80F9740: @ 80F9740
 
 .global gUnknown_80F9744
 gUnknown_80F9744: @ 80F9744
-.string "{ARG_POKEMON_0} is already famished.\0"
+.string "{POKEMON_0} is already famished.\0"
 .align 2, 0
 
 .global gUnknown_80F9760
@@ -3072,103 +3072,103 @@ gUnknown_80F9764: @ 80F9764
 
 .global gUnknown_80F97B8
 gUnknown_80F97B8: @ 80F97B8
-.string "The recoil hit {ARG_POKEMON_1} for\n"
-.string "{ARG_VALUE_0} damage!\0"
+.string "The recoil hit {POKEMON_1} for\n"
+.string "{VALUE_0} damage!\0"
 .align 2, 0
 
 .global gUnknown_80F97DC
 gUnknown_80F97DC: @ 80F97DC
 .string "The move failed!\n"
-.string "{ARG_POKEMON_1} took {ARG_VALUE_0} damage!\0"
+.string "{POKEMON_1} took {VALUE_0} damage!\0"
 .align 2, 0
 
 .global gUnknown_80F9804
 gUnknown_80F9804: @ 80F9804
-.string "The bad weather inflicted {ARG_VALUE_0} damage\n"
-.string "on {ARG_POKEMON_1}!\0"
+.string "The bad weather inflicted {VALUE_0} damage\n"
+.string "on {POKEMON_1}!\0"
 .align 2, 0
 
 .global gUnknown_80F9834
 gUnknown_80F9834: @ 80F9834
-.string "The Chestnut Trap hit {ARG_POKEMON_1}\n"
-.string "for {ARG_VALUE_0} damage!\0"
+.string "The Chestnut Trap hit {POKEMON_1}\n"
+.string "for {VALUE_0} damage!\0"
 .align 2, 0
 
 .global gUnknown_80F9860
 gUnknown_80F9860: @ 80F9860
-.string "{ARG_POKEMON_1} was showered with sludge\n"
-.string "for {ARG_VALUE_0} damage!\0"
+.string "{POKEMON_1} was showered with sludge\n"
+.string "for {VALUE_0} damage!\0"
 .align 2, 0
 
 .global gUnknown_80F9890
 gUnknown_80F9890: @ 80F9890
-.string "{ARG_POKEMON_1} took {ARG_VALUE_0} damage\n"
+.string "{POKEMON_1} took {VALUE_0} damage\n"
 .string "from Destiny Bond!\0"
 .align 2, 0
 
 .global gUnknown_80F98B8
 gUnknown_80F98B8: @ 80F98B8
-.string "{ARG_POKEMON_1} took {ARG_VALUE_0} damage\n"
+.string "{POKEMON_1} took {VALUE_0} damage\n"
 .string "from Perish Song!\0"
 .align 2, 0
 
 .global gUnknown_80F98E0
 gUnknown_80F98E0: @ 80F98E0
-.string "{ARG_POKEMON_1} stepped on spikes for\n"
-.string "{ARG_VALUE_0} damage!\0"
+.string "{POKEMON_1} stepped on spikes for\n"
+.string "{VALUE_0} damage!\0"
 .align 2, 0
 
 .global gUnknown_80F9908
 gUnknown_80F9908: @ 80F9908
-.string "{ARG_POKEMON_1} took {ARG_VALUE_0} damage\n"
+.string "{POKEMON_1} took {VALUE_0} damage\n"
 .string "from Leech Seed!\0"
 .align 2, 0
 
 .global gUnknown_80F9930
 gUnknown_80F9930: @ 80F9930
-.string "{ARG_POKEMON_1} awoke from its nightmare\n"
-.string "and took {ARG_VALUE_0} damage!\0"
+.string "{POKEMON_1} awoke from its nightmare\n"
+.string "and took {VALUE_0} damage!\0"
 .align 2, 0
 
 .global gUnknown_80F9964
 gUnknown_80F9964: @ 80F9964
-.string "{ARG_POKEMON_1} was cursed for\n"
-.string "{ARG_VALUE_0} damage!\0"
+.string "{POKEMON_1} was cursed for\n"
+.string "{VALUE_0} damage!\0"
 .align 2, 0
 
 .global gUnknown_80F9984
 gUnknown_80F9984: @ 80F9984
-.string "{ARG_POKEMON_1} took {ARG_VALUE_0} damage\n"
+.string "{POKEMON_1} took {VALUE_0} damage\n"
 .string "from the counterattack!\0"
 .align 2, 0
 
 .global gUnknown_80F99B0
 gUnknown_80F99B0: @ 80F99B0
-.string "{ARG_POKEMON_1} was wrapped for\n"
-.string "{ARG_VALUE_0} damage!\0"
+.string "{POKEMON_1} was wrapped for\n"
+.string "{VALUE_0} damage!\0"
 .align 2, 0
 
 .global gUnknown_80F99D0
 gUnknown_80F99D0: @ 80F99D0
-.string "{ARG_POKEMON_1} took {ARG_VALUE_0} damage\n"
+.string "{POKEMON_1} took {VALUE_0} damage\n"
 .string "from poison!\0"
 .align 2, 0
 
 .global gUnknown_80F99F4
 gUnknown_80F99F4: @ 80F99F4
-.string "{ARG_POKEMON_1} was squeezed for\n"
-.string "{ARG_VALUE_0} damage!\0"
+.string "{POKEMON_1} was squeezed for\n"
+.string "{VALUE_0} damage!\0"
 .align 2, 0
 
 .global gUnknown_80F9A18
 gUnknown_80F9A18: @ 80F9A18
-.string "{ARG_POKEMON_1}'s burn inflicted\n"
-.string "{ARG_VALUE_0} damage!\0"
+.string "{POKEMON_1}'s burn inflicted\n"
+.string "{VALUE_0} damage!\0"
 .align 2, 0
 
 .global gUnknown_80F9A3C
 gUnknown_80F9A3C: @ 80F9A3C
-.string "{ARG_POKEMON_1} took {ARG_VALUE_0} damage!\0"
+.string "{POKEMON_1} took {VALUE_0} damage!\0"
 .align 2, 0
 
 .global gWeatherNames
@@ -3225,7 +3225,7 @@ gUnknown_80F9AAC: @ 80F9AAC
 
 .global gUnknown_80F9AB4
 gUnknown_80F9AB4: @ 80F9AB4
-.string "{ARG_POKEMON_0}'s HP went up {ARG_VALUE_0}!\0"
+.string "{POKEMON_0}'s HP went up {VALUE_0}!\0"
 .align 2, 0
 
 .global gUnknown_80F9ACC
@@ -3235,7 +3235,7 @@ gUnknown_80F9ACC: @ 80F9ACC
 
 .global gUnknown_80F9AD0
 gUnknown_80F9AD0: @ 80F9AD0
-.string "{ARG_POKEMON_0}'s Attack went up {ARG_VALUE_1}!\0"
+.string "{POKEMON_0}'s Attack went up {VALUE_1}!\0"
 .align 2, 0
 
 .global gUnknown_80F9AEC
@@ -3245,7 +3245,7 @@ gUnknown_80F9AEC: @ 80F9AEC
 
 .global gUnknown_80F9AF0
 gUnknown_80F9AF0: @ 80F9AF0
-.string "{ARG_POKEMON_0}'s Defense went up {ARG_VALUE_2}!\0"
+.string "{POKEMON_0}'s Defense went up {VALUE_2}!\0"
 .align 2, 0
 
 .global gUnknown_80F9B10
@@ -3255,7 +3255,7 @@ gUnknown_80F9B10: @ 80F9B10
 
 .global gUnknown_80F9B14
 gUnknown_80F9B14: @ 80F9B14
-.string "{ARG_POKEMON_0}'s Sp. Atk. went up {ARG_VALUE_3}!\0"
+.string "{POKEMON_0}'s Sp. Atk. went up {VALUE_3}!\0"
 .align 2, 0
 
 .global gUnknown_80F9B34
@@ -3265,7 +3265,7 @@ gUnknown_80F9B34: @ 80F9B34
 
 .global gUnknown_80F9B38
 gUnknown_80F9B38: @ 80F9B38
-.string "{ARG_POKEMON_0}'s Sp. Def. went up $d4!\0"
+.string "{POKEMON_0}'s Sp. Def. went up $d4!\0"
 .align 2, 0
 
 .global gUnknown_80F9B58
@@ -3275,7 +3275,7 @@ gUnknown_80F9B58: @ 80F9B58
 
 .global gUnknown_80F9B5C
 gUnknown_80F9B5C: @ 80F9B5C
-.string "{ARG_POKEMON_0} didn't level up.\0"
+.string "{POKEMON_0} didn't level up.\0"
 .align 2, 0
 
 .global gUnknown_80F9B74
@@ -3285,7 +3285,7 @@ gUnknown_80F9B74: @ 80F9B74
 
 .global gUnknown_80F9B78
 gUnknown_80F9B78: @ 80F9B78
-.string "{ARG_POKEMON_0} didn't level down.\0"
+.string "{POKEMON_0} didn't level down.\0"
 .align 2, 0
 
 .global gUnknown_80F9B94
@@ -3295,7 +3295,7 @@ gUnknown_80F9B94: @ 80F9B94
 
 .global gUnknown_80F9B98
 gUnknown_80F9B98: @ 80F9B98
-.string "{ARG_POKEMON_0} became the leader!\0"
+.string "{POKEMON_0} became the leader!\0"
 .align 2, 0
 
 .global gUnknown_80F9BB0
@@ -3381,12 +3381,12 @@ gUnknown_80F9CC0: @ 80F9CC0
 
 .global gUnknown_80F9CC8
 gUnknown_80F9CC8: @ 80F9CC8
-.string "{ARG_POKEMON_1} fainted!\0"
+.string "{POKEMON_1} fainted!\0"
 .align 2, 0
 
 .global gUnknown_80F9CD8
 gUnknown_80F9CD8: @ 80F9CD8
-.string "{ARG_POKEMON_1} was defeated!\0"
+.string "{POKEMON_1} was defeated!\0"
 .align 2, 0
 
 .global gUnknown_80F9CEC
@@ -3397,12 +3397,12 @@ gUnknown_80F9CEC: @ 80F9CEC
 
 .global gUnknown_80F9CF4
 gUnknown_80F9CF4: @ 80F9CF4
-.string "Oh, no! {ARG_POKEMON_1} fainted!\0"
+.string "Oh, no! {POKEMON_1} fainted!\0"
 .align 2, 0
 
 .global gUnknown_80F9D0C
 gUnknown_80F9D0C: @ 80F9D0C
-.string "Oh, no! {ARG_POKEMON_1} was defeated!\0"
+.string "Oh, no! {POKEMON_1} was defeated!\0"
 .align 2, 0
 
 .global gUnknown_80F9D28
@@ -3413,13 +3413,13 @@ gUnknown_80F9D28: @ 80F9D28
 
 .global gUnknown_80F9D30
 gUnknown_80F9D30: @ 80F9D30
-.string "{ARG_POKEMON_1} fainted!\n"
+.string "{POKEMON_1} fainted!\n"
 .string "It left the rescue team!\0"
 .align 2, 0
 
 .global gUnknown_80F9D58
 gUnknown_80F9D58: @ 80F9D58
-.string "{ARG_POKEMON_1} was defeated!\n"
+.string "{POKEMON_1} was defeated!\n"
 .string "It left the rescue team!\0"
 .align 2, 0
 
@@ -3437,7 +3437,7 @@ gUnknown_80F9D8C: @ 80F9D8C
 
 .global gUnknown_80F9D94
 gUnknown_80F9D94: @ 80F9D94
-.string "{ARG_POKEMON_1} went back for now!\0"
+.string "{POKEMON_1} went back for now!\0"
 .align 2, 0
 
 .global gUnknown_80F9DAC
@@ -3448,12 +3448,12 @@ gUnknown_80F9DAC: @ 80F9DAC
 
 .global gUnknown_80F9DB4
 gUnknown_80F9DB4: @ 80F9DB4
-.string "Your client {ARG_POKEMON_1} fainted!\0"
+.string "Your client {POKEMON_1} fainted!\0"
 .align 2, 0
 
 .global gUnknown_80F9DD0
 gUnknown_80F9DD0: @ 80F9DD0
-.string "Your client {ARG_POKEMON_1} was defeated!\0"
+.string "Your client {POKEMON_1} was defeated!\0"
 .align 2, 0
 
 .global gUnknown_80F9DF0
@@ -3464,13 +3464,13 @@ gUnknown_80F9DF0: @ 80F9DF0
 
 .global gUnknown_80F9DF8
 gUnknown_80F9DF8: @ 80F9DF8
-.string "{ARG_POKEMON_1} fainted while awaiting\n"
+.string "{POKEMON_1} fainted while awaiting\n"
 .string "rescue!\0"
 .align 2, 0
 
 .global gUnknown_80F9E1C
 gUnknown_80F9E1C: @ 80F9E1C
-.string "{ARG_POKEMON_1} was defeated while awaiting\n"
+.string "{POKEMON_1} was defeated while awaiting\n"
 .string "rescue!\0"
 .align 2, 0
 
@@ -3481,7 +3481,7 @@ gUnknown_80F9E44: @ 80F9E44
 
 .global gUnknown_80F9E48
 gUnknown_80F9E48: @ 80F9E48
-.string "{ARG_POKEMON_0} gained {ARG_VALUE_0} Exp. Points!\0"
+.string "{POKEMON_0} gained {VALUE_0} Exp. Points!\0"
 .align 2, 0
 
 .global gUnknown_80F9E64
@@ -3491,7 +3491,7 @@ gUnknown_80F9E64: @ 80F9E64
 
 .global gUnknown_80F9E68
 gUnknown_80F9E68: @ 80F9E68
-.string "{ARG_POKEMON_0} grew to Level {ARG_VALUE_0}!\0"
+.string "{POKEMON_0} grew to Level {VALUE_0}!\0"
 .align 2, 0
 
 .global gUnknown_80F9E80
@@ -3501,13 +3501,13 @@ gUnknown_80F9E80: @ 80F9E80
 
 .global gUnknown_80F9E84
 gUnknown_80F9E84: @ 80F9E84
-.string "{ARG_POKEMON_0}'s level remained unchanged.\0"
+.string "{POKEMON_0}'s level remained unchanged.\0"
 .align 2, 0
 .4byte gUnknown_80F9E84
 
 .global gUnknown_80F9EAC
 gUnknown_80F9EAC: @ 80F9EAC
-.string "{ARG_POKEMON_0} dropped to Level {ARG_VALUE_0}!\0"
+.string "{POKEMON_0} dropped to Level {VALUE_0}!\0"
 .align 2, 0
 
 .global gUnknown_80F9EC8
@@ -3517,7 +3517,7 @@ gUnknown_80F9EC8: @ 80F9EC8
 
 .global gUnknown_80F9ECC
 gUnknown_80F9ECC: @ 80F9ECC
-.string "{ARG_POKEMON_0}'s level didn't go down.\0"
+.string "{POKEMON_0}'s level didn't go down.\0"
 .align 2, 0
 
 .global gUnknown_80F9EEC
@@ -3527,7 +3527,7 @@ gUnknown_80F9EEC: @ 80F9EEC
 
 .global gUnknown_80F9EF0
 gUnknown_80F9EF0: @ 80F9EF0
-.string "{ARG_POKEMON_0} learned {ARG_MOVE_ITEM_0}!\0"
+.string "{POKEMON_0} learned {MOVE_ITEM_0}!\0"
 .align 2, 0
 
 .global gUnknown_80F9F04
@@ -3537,7 +3537,7 @@ gUnknown_80F9F04: @ 80F9F04
 
 .global gUnknown_80F9F08
 gUnknown_80F9F08: @ 80F9F08
-.string "{ARG_POKEMON_0} didn't learn the new move.\0"
+.string "{POKEMON_0} didn't learn the new move.\0"
 .align 2, 0
 
 .global gUnknown_80F9F2C
@@ -3559,8 +3559,8 @@ gUnknown_80F9FA4: @ 80F9FA4
 
 .global gUnknown_80F9FA8
 gUnknown_80F9FA8: @ 80F9FA8
-.string "Yes! {ARG_POKEMON_0} wants to join the team!\n"
-.string "Accept {ARG_POKEMON_0} as a team member?\0"
+.string "Yes! {POKEMON_0} wants to join the team!\n"
+.string "Accept {POKEMON_0} as a team member?\0"
 .align 2, 0
 
 .global gUnknown_80F9FE8
@@ -3571,7 +3571,7 @@ gUnknown_80F9FE8: @ 80F9FE8
 
 .global gUnknown_80F9FF0
 gUnknown_80F9FF0: @ 80F9FF0
-.string "{ARG_POKEMON_0} went away...\0"
+.string "{POKEMON_0} went away...\0"
 .align 2, 0
 
 .global gUnknown_80FA004
@@ -3623,7 +3623,7 @@ gUnknown_80FA0C8: @ 80FA0C8
 
 .global gUnknown_80FA0CC
 gUnknown_80FA0CC: @ 80FA0CC
-.string "{ARG_POKEMON_0} joined $t to\n"
+.string "{POKEMON_0} joined $t to\n"
 .string "go on adventures!\0"
 .align 2, 0
 
@@ -3634,8 +3634,8 @@ gUnknown_80FA0F0: @ 80FA0F0
 
 .global gUnknown_80FA0F4
 gUnknown_80FA0F4: @ 80FA0F4
-.string "{ARG_POKEMON_0} gained access to\n"
-.string "the Friend Area {ARG_FRIEND_AREA}.\0"
+.string "{POKEMON_0} gained access to\n"
+.string "the Friend Area {FRIEND_AREA}.\0"
 .align 2, 0
 
 .global gUnknown_80FA120
@@ -3654,38 +3654,38 @@ gUnknown_80FA124: @ 80FA124
 
 .global gUnknown_80FA138
 gUnknown_80FA138: @ 80FA138
-.string "{ARG_POKEMON_0}'s at quadruple speed!\0"
+.string "{POKEMON_0}'s at quadruple speed!\0"
 .align 2, 0
 
 .global gUnknown_80FA154
 gUnknown_80FA154: @ 80FA154
-.string "{ARG_POKEMON_0}'s at triple speed!\0"
+.string "{POKEMON_0}'s at triple speed!\0"
 .align 2, 0
 
 .global gUnknown_80FA170
 gUnknown_80FA170: @ 80FA170
-.string "{ARG_POKEMON_0}'s at double speed!\0"
+.string "{POKEMON_0}'s at double speed!\0"
 .align 2, 0
 
 .global gUnknown_80FA18C
 gUnknown_80FA18C: @ 80FA18C
-.string "{ARG_POKEMON_0} returned to normal speed!\0"
+.string "{POKEMON_0} returned to normal speed!\0"
 .align 2, 0
 
 .global gUnknown_80FA1AC
 gUnknown_80FA1AC: @ 80FA1AC
-.string "{ARG_POKEMON_0} was slowed!\0"
+.string "{POKEMON_0} was slowed!\0"
 .align 2, 0
 
 .global gUnknown_80FA1BC
 gUnknown_80FA1BC: @ 80FA1BC
 .string "The Rescue Team Badge\n"
-.string "shone on {ARG_POKEMON_1}!\n"
-.string "{ARG_POKEMON_1} gained a magical power!\n"
-.string "{ARG_POKEMON_1}: Thank you!\n"
+.string "shone on {POKEMON_1}!\n"
+.string "{POKEMON_1} gained a magical power!\n"
+.string "{POKEMON_1}: Thank you!\n"
 .string "Please come see me at the Pelipper\n"
 .string "Post Office later.\n"
-.string "{ARG_POKEMON_1} escaped from the dungeon!\0"
+.string "{POKEMON_1} escaped from the dungeon!\0"
 .align 2, 0
 
 .global gUnknown_80FA260
@@ -3695,11 +3695,11 @@ gUnknown_80FA260: @ 80FA260
 
 .global gUnknown_80FA264
 gUnknown_80FA264: @ 80FA264
-.string "{ARG_POKEMON_1} happily accepted the item!\n"
+.string "{POKEMON_1} happily accepted the item!\n"
 .string "\n\n"
-.string "{ARG_POKEMON_1}: Thank you!\n"
+.string "{POKEMON_1}: Thank you!\n"
 .string "\n\n"
-.string "{ARG_POKEMON_1} left the dungeon!\n"
+.string "{POKEMON_1} left the dungeon!\n"
 .string "\n\0"
 .align 2, 0
 
@@ -3710,9 +3710,9 @@ gUnknown_80FA2B0: @ 80FA2B0
 
 .global gUnknown_80FA2B4
 gUnknown_80FA2B4: @ 80FA2B4
-.string "Yes! {ARG_POKEMON_1} was found!\n"
+.string "Yes! {POKEMON_1} was found!\n"
 .string "Use the Rescue Team Badge to save\n"
-.string "{ARG_POKEMON_1}?\0"
+.string "{POKEMON_1}?\0"
 .align 2, 0
 
 .global gUnknown_80FA2F0
@@ -3722,9 +3722,9 @@ gUnknown_80FA2F0: @ 80FA2F0
 
 .global gUnknown_80FA2F4
 gUnknown_80FA2F4: @ 80FA2F4
-.string "Yes! {ARG_POKEMON_1} was found!\n"
+.string "Yes! {POKEMON_1} was found!\n"
 .string "Deliver the requested item to\n"
-.string "{ARG_POKEMON_1}?\0"
+.string "{POKEMON_1}?\0"
 .align 2, 0
 
 .global gUnknown_80FA32C
@@ -3781,7 +3781,7 @@ gUnknown_80FA408: @ 80FA408
 
 .global gUnknown_80FA40C
 gUnknown_80FA40C: @ 80FA40C
-.string "The {ARG_MOVE_ITEM_0} isn't in the Toolbox.\n"
+.string "The {MOVE_ITEM_0} isn't in the Toolbox.\n"
 .string "It couldn't be delivered.\0"
 .align 2, 0
 
@@ -3792,7 +3792,7 @@ gUnknown_80FA448: @ 80FA448
 
 .global gUnknown_80FA44C
 gUnknown_80FA44C: @ 80FA44C
-.string "{ARG_POKEMON_1} can't talk now.\0"
+.string "{POKEMON_1} can't talk now.\0"
 .align 2, 0
 
 .global gUnknown_80FA464
@@ -3802,12 +3802,12 @@ gUnknown_80FA464: @ 80FA464
 
 .global gUnknown_80FA468
 gUnknown_80FA468: @ 80FA468
-.string "Yes! {ARG_POKEMON_2} was successfully\n"
+.string "Yes! {POKEMON_2} was successfully\n"
 .string "escorted!\n"
-.string "{ARG_POKEMON_2} is delighted!\n"
-.string "{ARG_POKEMON_2}: Thank you!\n"
+.string "{POKEMON_2} is delighted!\n"
+.string "{POKEMON_2}: Thank you!\n"
 .string "\n\n"
-.string "{ARG_POKEMON_2}'s twosome left the dungeon!\n"
+.string "{POKEMON_2}'s twosome left the dungeon!\n"
 .string "\n\0"
 .align 2, 0
 
@@ -3823,7 +3823,7 @@ gUnknown_80FA4D8: @ 80FA4D8
 
 .global gUnknown_80FA4DC
 gUnknown_80FA4DC: @ 80FA4DC
-.string "{ARG_POKEMON_2} doesn't seem to be around.\0"
+.string "{POKEMON_2} doesn't seem to be around.\0"
 .align 2, 0
 
 .global gUnknown_80FA500
@@ -3848,7 +3848,7 @@ gUnknown_80FA530: @ 80FA530
 
 .global gUnknown_80FA534
 gUnknown_80FA534: @ 80FA534
-.string "{ARG_POKEMON_2} can't talk now.\0"
+.string "{POKEMON_2} can't talk now.\0"
 .align 2, 0
 
 .global gUnknown_80FA54C
@@ -3901,7 +3901,7 @@ gUnknown_80FA61C: @ 80FA61C
 
 .global gUnknown_80FA620
 gUnknown_80FA620: @ 80FA620
-.string "{ARG_POKEMON_0}'s Reflect faded.\0"
+.string "{POKEMON_0}'s Reflect faded.\0"
 .align 2, 0
 
 .global gUnknown_80FA638
@@ -3911,7 +3911,7 @@ gUnknown_80FA638: @ 80FA638
 
 .global gUnknown_80FA63C
 gUnknown_80FA63C: @ 80FA63C
-.string "{ARG_POKEMON_0}'s Light Screen faded.\0"
+.string "{POKEMON_0}'s Light Screen faded.\0"
 .align 2, 0
 
 .global gUnknown_80FA658
@@ -3921,7 +3921,7 @@ gUnknown_80FA658: @ 80FA658
 
 .global gUnknown_80FA65C
 gUnknown_80FA65C: @ 80FA65C
-.string "{ARG_POKEMON_0}'s Counter effect faded.\0"
+.string "{POKEMON_0}'s Counter effect faded.\0"
 .align 2, 0
 
 .global gUnknown_80FA67C
@@ -3931,7 +3931,7 @@ gUnknown_80FA67C: @ 80FA67C
 
 .global gUnknown_80FA680
 gUnknown_80FA680: @ 80FA680
-.string "{ARG_POKEMON_0}'s Safeguard faded.\0"
+.string "{POKEMON_0}'s Safeguard faded.\0"
 .align 2, 0
 
 .global gUnknown_80FA69C
@@ -3941,7 +3941,7 @@ gUnknown_80FA69C: @ 80FA69C
 
 .global gUnknown_80FA6A0
 gUnknown_80FA6A0: @ 80FA6A0
-.string "{ARG_POKEMON_0}'s Magic Coat faded.\0"
+.string "{POKEMON_0}'s Magic Coat faded.\0"
 .align 2, 0
 
 .global gUnknown_80FA6BC
@@ -3951,7 +3951,7 @@ gUnknown_80FA6BC: @ 80FA6BC
 
 .global gUnknown_80FA6C0
 gUnknown_80FA6C0: @ 80FA6C0
-.string "{ARG_POKEMON_0}'s Wish faded.\0"
+.string "{POKEMON_0}'s Wish faded.\0"
 .align 2, 0
 
 .global gUnknown_80FA6D4
@@ -3961,7 +3961,7 @@ gUnknown_80FA6D4: @ 80FA6D4
 
 .global gUnknown_80FA6D8
 gUnknown_80FA6D8: @ 80FA6D8
-.string "{ARG_POKEMON_0} woke up!\0"
+.string "{POKEMON_0} woke up!\0"
 .align 2, 0
 
 .global gUnknown_80FA6E8
@@ -3971,7 +3971,7 @@ gUnknown_80FA6E8: @ 80FA6E8
 
 .global gUnknown_80FA6EC
 gUnknown_80FA6EC: @ 80FA6EC
-.string "{ARG_POKEMON_0} is no longer sleepless!\0"
+.string "{POKEMON_0} is no longer sleepless!\0"
 .align 2, 0
 
 .global gUnknown_80FA708
@@ -3991,7 +3991,7 @@ gUnknown_80FA710: @ 80FA710
 
 .global gUnknown_80FA714
 gUnknown_80FA714: @ 80FA714
-.string "{ARG_POKEMON_0} got over its drowsiness!\0"
+.string "{POKEMON_0} got over its drowsiness!\0"
 .align 2, 0
 
 .global gUnknown_80FA734
@@ -4021,7 +4021,7 @@ gUnknown_80FA778: @ 80FA778
 
 .global gUnknown_80FA77C
 gUnknown_80FA77C: @ 80FA77C
-.string "{ARG_POKEMON_0}'s Leech Seed wore off.\0"
+.string "{POKEMON_0}'s Leech Seed wore off.\0"
 .align 2, 0
 
 .global gUnknown_80FA79C
@@ -4031,7 +4031,7 @@ gUnknown_80FA79C: @ 80FA79C
 
 .global gUnknown_80FA7A0
 gUnknown_80FA7A0: @ 80FA7A0
-.string "{ARG_POKEMON_0} is no longer cursed!\0"
+.string "{POKEMON_0} is no longer cursed!\0"
 .align 2, 0
 
 .global gUnknown_80FA7BC
@@ -4041,7 +4041,7 @@ gUnknown_80FA7BC: @ 80FA7BC
 
 .global gUnknown_80FA7C0
 gUnknown_80FA7C0: @ 80FA7C0
-.string "{ARG_POKEMON_0}'s Snatch wore off!\0"
+.string "{POKEMON_0}'s Snatch wore off!\0"
 .align 2, 0
 
 .global gUnknown_80FA7DC
@@ -4051,7 +4051,7 @@ gUnknown_80FA7DC: @ 80FA7DC
 
 .global gUnknown_80FA7E0
 gUnknown_80FA7E0: @ 80FA7E0
-.string "{ARG_POKEMON_0} recovered from confusion!\0"
+.string "{POKEMON_0} recovered from confusion!\0"
 .align 2, 0
 
 .global gUnknown_80FA800
@@ -4061,7 +4061,7 @@ gUnknown_80FA800: @ 80FA800
 
 .global gUnknown_80FA804
 gUnknown_80FA804: @ 80FA804
-.string "{ARG_POKEMON_0} regained mobility!\0"
+.string "{POKEMON_0} regained mobility!\0"
 .align 2, 0
 
 .global gUnknown_80FA81C
@@ -4081,7 +4081,7 @@ gUnknown_80FA824: @ 80FA824
 
 .global gUnknown_80FA828
 gUnknown_80FA828: @ 80FA828
-.string "{ARG_POKEMON_0}'s Ingrain wore off!\0"
+.string "{POKEMON_0}'s Ingrain wore off!\0"
 .align 2, 0
 
 .global gUnknown_80FA844
@@ -4091,7 +4091,7 @@ gUnknown_80FA844: @ 80FA844
 
 .global gUnknown_80FA848
 gUnknown_80FA848: @ 80FA848
-.string "{ARG_POKEMON_0} recovered from paralysis!\0"
+.string "{POKEMON_0} recovered from paralysis!\0"
 .align 2, 0
 
 .global gUnknown_80FA868
@@ -4101,7 +4101,7 @@ gUnknown_80FA868: @ 80FA868
 
 .global gUnknown_80FA86C
 gUnknown_80FA86C: @ 80FA86C
-.string "{ARG_POKEMON_0} recovered from a burn!\0"
+.string "{POKEMON_0} recovered from a burn!\0"
 .align 2, 0
 
 .global gUnknown_80FA888
@@ -4111,7 +4111,7 @@ gUnknown_80FA888: @ 80FA888
 
 .global gUnknown_80FA88C
 gUnknown_80FA88C: @ 80FA88C
-.string "{ARG_POKEMON_0} recovered from poison!\0"
+.string "{POKEMON_0} recovered from poison!\0"
 .align 2, 0
 
 .global gUnknown_80FA8A8
@@ -4121,7 +4121,7 @@ gUnknown_80FA8A8: @ 80FA8A8
 
 .global gUnknown_80FA8AC
 gUnknown_80FA8AC: @ 80FA8AC
-.string "{ARG_POKEMON_0} thawed out!\0"
+.string "{POKEMON_0} thawed out!\0"
 .align 2, 0
 
 .global gUnknown_80FA8BC
@@ -4131,7 +4131,7 @@ gUnknown_80FA8BC: @ 80FA8BC
 
 .global gUnknown_80FA8C0
 gUnknown_80FA8C0: @ 80FA8C0
-.string "{ARG_POKEMON_0} lost its Sure Shot status!\0"
+.string "{POKEMON_0} lost its Sure Shot status!\0"
 .align 2, 0
 
 .global gUnknown_80FA8E0
@@ -4141,7 +4141,7 @@ gUnknown_80FA8E0: @ 80FA8E0
 
 .global gUnknown_80FA8E4
 gUnknown_80FA8E4: @ 80FA8E4
-.string "{ARG_POKEMON_0} recovered from its\n"
+.string "{POKEMON_0} recovered from its\n"
 .string "Whiffer status!\0"
 .align 2, 0
 
@@ -4152,7 +4152,7 @@ gUnknown_80FA90C: @ 80FA90C
 
 .global gUnknown_80FA910
 gUnknown_80FA910: @ 80FA910
-.string "{ARG_POKEMON_0}'s damage returned to normal!\0"
+.string "{POKEMON_0}'s damage returned to normal!\0"
 .align 2, 0
 
 .global gUnknown_80FA934
@@ -4162,7 +4162,7 @@ gUnknown_80FA934: @ 80FA934
 
 .global gUnknown_80FA938
 gUnknown_80FA938: @ 80FA938
-.string "{ARG_POKEMON_0} lost its Focus Energy status!\0"
+.string "{POKEMON_0} lost its Focus Energy status!\0"
 .align 2, 0
 
 .global gUnknown_80FA95C
@@ -4172,7 +4172,7 @@ gUnknown_80FA95C: @ 80FA95C
 
 .global gUnknown_80FA960
 gUnknown_80FA960: @ 80FA960
-.string "{ARG_POKEMON_0} is no longer cowering!\0"
+.string "{POKEMON_0} is no longer cowering!\0"
 .align 2, 0
 
 .global gUnknown_80FA97C
@@ -4192,7 +4192,7 @@ gUnknown_80FA9A0: @ 80FA9A0
 
 .global gUnknown_80FA9A4
 gUnknown_80FA9A4: @ 80FA9A4
-.string "{ARG_POKEMON_0}'s Protect wore off!\0"
+.string "{POKEMON_0}'s Protect wore off!\0"
 .align 2, 0
 
 .global gUnknown_80FA9C0
@@ -4202,7 +4202,7 @@ gUnknown_80FA9C0: @ 80FA9C0
 
 .global gUnknown_80FA9C4
 gUnknown_80FA9C4: @ 80FA9C4
-.string "{ARG_POKEMON_0}'s Taunt wore off!\0"
+.string "{POKEMON_0}'s Taunt wore off!\0"
 .align 2, 0
 
 .global gUnknown_80FA9DC
@@ -4212,7 +4212,7 @@ gUnknown_80FA9DC: @ 80FA9DC
 
 .global gUnknown_80FA9E0
 gUnknown_80FA9E0: @ 80FA9E0
-.string "{ARG_POKEMON_0} became visible!\0"
+.string "{POKEMON_0} became visible!\0"
 .align 2, 0
 
 .global gUnknown_80FA9F4
@@ -4222,7 +4222,7 @@ gUnknown_80FA9F4: @ 80FA9F4
 
 .global gUnknown_80FA9F8
 gUnknown_80FA9F8: @ 80FA9F8
-.string "{ARG_POKEMON_0} regained sight!\0"
+.string "{POKEMON_0} regained sight!\0"
 .align 2, 0
 
 .global gUnknown_80FAA0C
@@ -4232,7 +4232,7 @@ gUnknown_80FAA0C: @ 80FAA0C
 
 .global gUnknown_80FAA10
 gUnknown_80FAA10: @ 80FAA10
-.string "{ARG_POKEMON_0} can see normally again!\0"
+.string "{POKEMON_0} can see normally again!\0"
 .align 2, 0
 
 .global gUnknown_80FAA2C
@@ -4242,7 +4242,7 @@ gUnknown_80FAA2C: @ 80FAA2C
 
 .global gUnknown_80FAA30
 gUnknown_80FAA30: @ 80FAA30
-.string "{ARG_POKEMON_0} returned to normal!\0"
+.string "{POKEMON_0} returned to normal!\0"
 .align 2, 0
 
 .global gUnknown_80FAA48
@@ -4252,7 +4252,7 @@ gUnknown_80FAA48: @ 80FAA48
 
 .global gUnknown_80FAA4C
 gUnknown_80FAA4C: @ 80FAA4C
-.string "{ARG_POKEMON_0}'s Mirror Coat faded!\0"
+.string "{POKEMON_0}'s Mirror Coat faded!\0"
 .align 2, 0
 
 .global gUnknown_80FAA68
@@ -4262,7 +4262,7 @@ gUnknown_80FAA68: @ 80FAA68
 
 .global gUnknown_80FAA6C
 gUnknown_80FAA6C: @ 80FAA6C
-.string "{ARG_POKEMON_0} gave up on Destiny Bond!\0"
+.string "{POKEMON_0} gave up on Destiny Bond!\0"
 .align 2, 0
 
 .global gUnknown_80FAA8C
@@ -4272,7 +4272,7 @@ gUnknown_80FAA8C: @ 80FAA8C
 
 .global gUnknown_80FAA90
 gUnknown_80FAA90: @ 80FAA90
-.string "{ARG_POKEMON_0} recovered from Encore!\0"
+.string "{POKEMON_0} recovered from Encore!\0"
 .align 2, 0
 
 .global gUnknown_80FAAAC
@@ -4282,7 +4282,7 @@ gUnknown_80FAAAC: @ 80FAAAC
 
 .global gMonStoppedEnduringMessage
 gMonStoppedEnduringMessage: @ 80FAAB0
-.string "{ARG_POKEMON_0} stopped enduring!\0"
+.string "{POKEMON_0} stopped enduring!\0"
 .align 2, 0
 
 .global gPtrMonStoppedEnduringMessage
@@ -4291,7 +4291,7 @@ gPtrMonStoppedEnduringMessage: @ 80FAAC8
 
 .global gMonMirrorMoveFadedMessage
 gMonMirrorMoveFadedMessage: @ 80FAACC
-.string "{ARG_POKEMON_0}'s Mirror Move faded!\0"
+.string "{POKEMON_0}'s Mirror Move faded!\0"
 .align 2, 0
 
 .global gPtrMonMirrorMoveFadedMessage
@@ -4300,7 +4300,7 @@ gPtrMonMirrorMoveFadedMessage: @ 80FAAE8
 
 .global gMonConversion2FailedMessage
 gMonConversion2FailedMessage: @ 80FAAEC
-.string "{ARG_POKEMON_0}'s Conversion 2 faded!\0"
+.string "{POKEMON_0}'s Conversion 2 faded!\0"
 .align 2, 0
 
 .global gPtrMonConversion2FailedMessage
@@ -4309,7 +4309,7 @@ gPtrMonConversion2FailedMessage: @ 80FAB08
 
 .global gMonGaveUpVitalThrowMessage
 gMonGaveUpVitalThrowMessage: @ 80FAB0C
-.string "{ARG_POKEMON_0} gave up on Vital Throw!\0"
+.string "{POKEMON_0} gave up on Vital Throw!\0"
 .align 2, 0
 
 .global gPtrMonGaveUpVitalThrowMessage
@@ -4318,7 +4318,7 @@ gPtrMonGaveUpVitalThrowMessage: @ 80FAB28
 
 .global gUnknown_80FAB2C
 gUnknown_80FAB2C: @ 80FAB2C
-.string "{ARG_POKEMON_0}'s Mist faded!\0"
+.string "{POKEMON_0}'s Mist faded!\0"
 .align 2, 0
 
 .global gUnknown_80FAB40
@@ -4328,7 +4328,7 @@ gUnknown_80FAB40: @ 80FAB40
 
 .global gUnknown_80FAB44
 gUnknown_80FAB44: @ 80FAB44
-.string "{ARG_POKEMON_0}'s appearance returned to\n"
+.string "{POKEMON_0}'s appearance returned to\n"
 .string "normal!\0"
 .align 2, 0
 
@@ -4339,7 +4339,7 @@ gUnknown_80FAB6C: @ 80FAB6C
 
 .global gUnknown_80FAB70
 gUnknown_80FAB70: @ 80FAB70
-.string "{ARG_POKEMON_0} got over its infatuation!\0"
+.string "{POKEMON_0} got over its infatuation!\0"
 .align 2, 0
 
 .global gUnknown_80FAB90
@@ -4349,7 +4349,7 @@ gUnknown_80FAB90: @ 80FAB90
 
 .global gUnknown_80FAB94
 gUnknown_80FAB94: @ 80FAB94
-.string "{ARG_POKEMON_0} can't go through walls\n"
+.string "{POKEMON_0} can't go through walls\n"
 .string "anymore!\0"
 .align 2, 0
 
@@ -4365,7 +4365,7 @@ gUnknown_80FABC0: @ 80FABC0
 
 .global gUnknown_80FABC4
 gUnknown_80FABC4: @ 80FABC4
-.string "{ARG_POKEMON_0}'s rage faded!\0"
+.string "{POKEMON_0}'s rage faded!\0"
 .align 2, 0
 
 .global gUnknown_80FABD8
@@ -4375,7 +4375,7 @@ gUnknown_80FABD8: @ 80FABD8
 
 .global gMonNoLongerPetrifiedMessage
 gMonNoLongerPetrifiedMessage: @ 80FABDC
-.string "{ARG_POKEMON_0} is no longer petrified!\0"
+.string "{POKEMON_0} is no longer petrified!\0"
 .align 2, 0
 
 .global gPtrMonNoLongerPetrifiedMessage
@@ -4384,7 +4384,7 @@ gPtrMonNoLongerPetrifiedMessage: @ 80FABF8
 
 .global gMonNoLongerCringingMessage
 gMonNoLongerCringingMessage: @ 80FABFC
-.string "{ARG_POKEMON_0} is no longer cringing!\0"
+.string "{POKEMON_0} is no longer cringing!\0"
 .align 2, 0
 
 .global gPtrMonNoLongerCringingMessage
@@ -4393,7 +4393,7 @@ gPtrMonNoLongerCringingMessage: @ 80FAC18
 
 .global gUnknown_80FAC1C
 gUnknown_80FAC1C: @ 80FAC1C
-.string "{ARG_POKEMON_0} is no longer paused!\0"
+.string "{POKEMON_0} is no longer paused!\0"
 .align 2, 0
 
 .global gUnknown_80FAC38
@@ -4403,7 +4403,7 @@ gUnknown_80FAC38: @ 80FAC38
 
 .global gUnknown_80FAC3C
 gUnknown_80FAC3C: @ 80FAC3C
-.string "{ARG_POKEMON_0} readies Razor Wind!\0"
+.string "{POKEMON_0} readies Razor Wind!\0"
 .align 2, 0
 
 .global gUnknown_80FAC54
@@ -4413,7 +4413,7 @@ gUnknown_80FAC54: @ 80FAC54
 
 .global gUnknown_80FAC58
 gUnknown_80FAC58: @ 80FAC58
-.string "{ARG_POKEMON_0} began storing energy!\0"
+.string "{POKEMON_0} began storing energy!\0"
 .align 2, 0
 
 .global gUnknown_80FAC74
@@ -4423,7 +4423,7 @@ gUnknown_80FAC74: @ 80FAC74
 
 .global gUnknown_80FAC78
 gUnknown_80FAC78: @ 80FAC78
-.string "{ARG_POKEMON_0} is enraged!\0"
+.string "{POKEMON_0} is enraged!\0"
 .align 2, 0
 
 .global gUnknown_80FAC88
@@ -4433,7 +4433,7 @@ gUnknown_80FAC88: @ 80FAC88
 
 .global gUnknown_80FAC8C
 gUnknown_80FAC8C: @ 80FAC8C
-.string "{ARG_POKEMON_0} is focusing energy!\0"
+.string "{POKEMON_0} is focusing energy!\0"
 .align 2, 0
 
 .global gUnknown_80FACA4
@@ -4443,7 +4443,7 @@ gUnknown_80FACA4: @ 80FACA4
 
 .global gUnknown_80FACA8
 gUnknown_80FACA8: @ 80FACA8
-.string "{ARG_POKEMON_0} is readying Sky Attack!\0"
+.string "{POKEMON_0} is readying Sky Attack!\0"
 .align 2, 0
 
 .global gUnknown_80FACC4
@@ -4453,7 +4453,7 @@ gUnknown_80FACC4: @ 80FACC4
 
 .global gUnknown_80FACC8
 gUnknown_80FACC8: @ 80FACC8
-.string "{ARG_POKEMON_0} is readying Solarbeam!\0"
+.string "{POKEMON_0} is readying Solarbeam!\0"
 .align 2, 0
 
 .global gUnknown_80FACE4
@@ -4463,7 +4463,7 @@ gUnknown_80FACE4: @ 80FACE4
 
 .global gUnknown_80FACE8
 gUnknown_80FACE8: @ 80FACE8
-.string "{ARG_POKEMON_0} flew up high!\0"
+.string "{POKEMON_0} flew up high!\0"
 .align 2, 0
 
 .global gUnknown_80FACFC
@@ -4473,7 +4473,7 @@ gUnknown_80FACFC: @ 80FACFC
 
 .global gUnknown_80FAD00
 gUnknown_80FAD00: @ 80FAD00
-.string "{ARG_POKEMON_0} bounced up!\0"
+.string "{POKEMON_0} bounced up!\0"
 .align 2, 0
 
 .global gUnknown_80FAD10
@@ -4483,7 +4483,7 @@ gUnknown_80FAD10: @ 80FAD10
 
 .global gUnknown_80FAD14
 gUnknown_80FAD14: @ 80FAD14
-.string "{ARG_POKEMON_0} dove underwater!\0"
+.string "{POKEMON_0} dove underwater!\0"
 .align 2, 0
 
 .global gUnknown_80FAD2C
@@ -4493,7 +4493,7 @@ gUnknown_80FAD2C: @ 80FAD2C
 
 .global gUnknown_80FAD30
 gUnknown_80FAD30: @ 80FAD30
-.string "{ARG_POKEMON_0} burrowed underground!\0"
+.string "{POKEMON_0} burrowed underground!\0"
 .align 2, 0
 
 .global gUnknown_80FAD4C
@@ -4503,7 +4503,7 @@ gUnknown_80FAD4C: @ 80FAD4C
 
 .global gUnknown_80FAD50
 gUnknown_80FAD50: @ 80FAD50
-.string "{ARG_POKEMON_0} began charging power!\0"
+.string "{POKEMON_0} began charging power!\0"
 .align 2, 0
 
 .global gUnknown_80FAD6C
@@ -4533,7 +4533,7 @@ gUnknown_80FADB0: @ 80FADB0
 
 .global gUnknown_80FADB4
 gUnknown_80FADB4: @ 80FADB4
-.string "{ARG_POKEMON_1} used Flash Fire to absorb\n"
+.string "{POKEMON_1} used Flash Fire to absorb\n"
 .string "fire!\0"
 .align 2, 0
 
@@ -4554,7 +4554,7 @@ gUnknown_80FAE00: @ 80FAE00
 
 .global gUnknown_80FAE04
 gUnknown_80FAE04: @ 80FAE04
-.string "{ARG_POKEMON_0} began using Wish!\0"
+.string "{POKEMON_0} began using Wish!\0"
 .align 2, 0
 
 .global gUnknown_80FAE1C
@@ -4564,7 +4564,7 @@ gUnknown_80FAE1C: @ 80FAE1C
 
 .global gUnknown_80FAE20
 gUnknown_80FAE20: @ 80FAE20
-.string "{ARG_POKEMON_0} is already using Wish.\0"
+.string "{POKEMON_0} is already using Wish.\0"
 .align 2, 0
 
 .global gUnknown_80FAE3C
@@ -4574,7 +4574,7 @@ gUnknown_80FAE3C: @ 80FAE3C
 
 .global gUnknown_80FAE40
 gUnknown_80FAE40: @ 80FAE40
-.string "{ARG_POKEMON_0} took a leech seed!\0"
+.string "{POKEMON_0} took a leech seed!\0"
 .align 2, 0
 
 .global gUnknown_80FAE58
@@ -4584,7 +4584,7 @@ gUnknown_80FAE58: @ 80FAE58
 
 .global gUnknown_80FAE5C
 gUnknown_80FAE5C: @ 80FAE5C
-.string "{ARG_POKEMON_0} already has a leech seed!\0"
+.string "{POKEMON_0} already has a leech seed!\0"
 .align 2, 0
 
 .global gUnknown_80FAE7C
@@ -4644,7 +4644,7 @@ gUnknown_80FAF3C: @ 80FAF3C
 
 .global gUnknown_80FAF40
 gUnknown_80FAF40: @ 80FAF40
-.string "{ARG_POKEMON_0} put up its magic coat!\0"
+.string "{POKEMON_0} put up its magic coat!\0"
 .align 2, 0
 
 .global gUnknown_80FAF5C
@@ -4654,7 +4654,7 @@ gUnknown_80FAF5C: @ 80FAF5C
 
 .global gUnknown_80FAF60
 gUnknown_80FAF60: @ 80FAF60
-.string "{ARG_POKEMON_0} is already cloaked in its\n"
+.string "{POKEMON_0} is already cloaked in its\n"
 .string "magic coat!\0"
 .align 2, 0
 
@@ -4665,7 +4665,7 @@ gUnknown_80FAF8C: @ 80FAF8C
 
 .global gUnknown_80FAF90
 gUnknown_80FAF90: @ 80FAF90
-.string "{ARG_POKEMON_0} can locate foes now!\0"
+.string "{POKEMON_0} can locate foes now!\0"
 .align 2, 0
 
 .global gUnknown_80FAFAC
@@ -4685,7 +4685,7 @@ gUnknown_80FAFD0: @ 80FAFD0
 
 .global gUnknown_80FAFD4
 gUnknown_80FAFD4: @ 80FAFD4
-.string "{ARG_POKEMON_0} readies its Skull Bash!\0"
+.string "{POKEMON_0} readies its Skull Bash!\0"
 .align 2, 0
 
 .global gUnknown_80FAFF0
@@ -4695,7 +4695,7 @@ gUnknown_80FAFF0: @ 80FAFF0
 
 .global gUnknown_80FAFF4
 gUnknown_80FAFF4: @ 80FAFF4
-.string "{ARG_POKEMON_0} was cursed!\0"
+.string "{POKEMON_0} was cursed!\0"
 .align 2, 0
 
 .global gUnknown_80FB004
@@ -4705,7 +4705,7 @@ gUnknown_80FB004: @ 80FB004
 
 .global gUnknown_80FB008
 gUnknown_80FB008: @ 80FB008
-.string "{ARG_POKEMON_0} readied Snatch!\0"
+.string "{POKEMON_0} readied Snatch!\0"
 .align 2, 0
 
 .global gUnknown_80FB01C
@@ -4715,7 +4715,7 @@ gUnknown_80FB01C: @ 80FB01C
 
 .global gUnknown_80FB020
 gUnknown_80FB020: @ 80FB020
-.string "{ARG_POKEMON_0} gained the protection\n"
+.string "{POKEMON_0} gained the protection\n"
 .string "of Safeguard!\0"
 .align 2, 0
 
@@ -4726,7 +4726,7 @@ gUnknown_80FB048: @ 80FB048
 
 .global gUnknown_80FB04C
 gUnknown_80FB04C: @ 80FB04C
-.string "{ARG_POKEMON_0} is already protected\n"
+.string "{POKEMON_0} is already protected\n"
 .string "by Safeguard.\0"
 .align 2, 0
 
@@ -4737,7 +4737,7 @@ gUnknown_80FB074: @ 80FB074
 
 .global gUnknown_80FB078
 gUnknown_80FB078: @ 80FB078
-.string "{ARG_POKEMON_0} gained the protection\n"
+.string "{POKEMON_0} gained the protection\n"
 .string "of Mist!\0"
 .align 2, 0
 
@@ -4748,7 +4748,7 @@ gUnknown_80FB09C: @ 80FB09C
 
 .global gUnknown_80FB0A0
 gUnknown_80FB0A0: @ 80FB0A0
-.string "{ARG_POKEMON_0} is already protected\n"
+.string "{POKEMON_0} is already protected\n"
 .string "by Mist.\0"
 .align 2, 0
 
@@ -4759,7 +4759,7 @@ gUnknown_80FB0C4: @ 80FB0C4
 
 .global gUnknown_80FB0C8
 gUnknown_80FB0C8: @ 80FB0C8
-.string "{ARG_POKEMON_0} is set to counter!\0"
+.string "{POKEMON_0} is set to counter!\0"
 .align 2, 0
 
 .global gUnknown_80FB0E0
@@ -4769,7 +4769,7 @@ gUnknown_80FB0E0: @ 80FB0E0
 
 .global gUnknown_80FB0E4
 gUnknown_80FB0E4: @ 80FB0E4
-.string "{ARG_POKEMON_0} has been waiting to\n"
+.string "{POKEMON_0} has been waiting to\n"
 .string "counterattack!\0"
 .align 2, 0
 
@@ -4780,7 +4780,7 @@ gUnknown_80FB10C: @ 80FB10C
 
 .global gUnknown_80FB110
 gUnknown_80FB110: @ 80FB110
-.string "{ARG_POKEMON_0} put up its light screen!\0"
+.string "{POKEMON_0} put up its light screen!\0"
 .align 2, 0
 
 .global gUnknown_80FB130
@@ -4790,7 +4790,7 @@ gUnknown_80FB130: @ 80FB130
 
 .global gUnknown_80FB134
 gUnknown_80FB134: @ 80FB134
-.string "{ARG_POKEMON_0} is already protected\n"
+.string "{POKEMON_0} is already protected\n"
 .string "by Light Screen.\0"
 .align 2, 0
 
@@ -4801,7 +4801,7 @@ gUnknown_80FB160: @ 80FB160
 
 .global gUnknown_80FB164
 gUnknown_80FB164: @ 80FB164
-.string "{ARG_POKEMON_0} put up its reflect!\0"
+.string "{POKEMON_0} put up its reflect!\0"
 .align 2, 0
 
 .global gUnknown_80FB17C
@@ -4811,7 +4811,7 @@ gUnknown_80FB17C: @ 80FB17C
 
 .global gUnknown_80FB180
 gUnknown_80FB180: @ 80FB180
-.string "{ARG_POKEMON_0} is already protected by\n"
+.string "{POKEMON_0} is already protected by\n"
 .string "Reflect.\0"
 .align 2, 0
 
@@ -4822,7 +4822,7 @@ gUnknown_80FB1A8: @ 80FB1A8
 
 .global gUnknown_80FB1AC
 gUnknown_80FB1AC: @ 80FB1AC
-.string "{ARG_POKEMON_0} recovered {ARG_VALUE_0} HP!\0"
+.string "{POKEMON_0} recovered {VALUE_0} HP!\0"
 .align 2, 0
 
 .global gUnknown_80FB1C4
@@ -4832,7 +4832,7 @@ gUnknown_80FB1C4: @ 80FB1C4
 
 .global gUnknown_80FB1C8
 gUnknown_80FB1C8: @ 80FB1C8
-.string "{ARG_POKEMON_0} was fully healed!\0"
+.string "{POKEMON_0} was fully healed!\0"
 .align 2, 0
 
 .global gUnknown_80FB1E0
@@ -4842,7 +4842,7 @@ gUnknown_80FB1E0: @ 80FB1E0
 
 .global gUnknown_80FB1E4
 gUnknown_80FB1E4: @ 80FB1E4
-.string "{ARG_POKEMON_0}'s HP remained unchanged.\0"
+.string "{POKEMON_0}'s HP remained unchanged.\0"
 .align 2, 0
 
 .global gUnknown_80FB204
@@ -4852,7 +4852,7 @@ gUnknown_80FB204: @ 80FB204
 
 .global gUnknown_80FB208
 gUnknown_80FB208: @ 80FB208
-.string "{ARG_POKEMON_0} has full HP.\0"
+.string "{POKEMON_0} has full HP.\0"
 .align 2, 0
 
 .global gUnknown_80FB21C
@@ -4862,7 +4862,7 @@ gUnknown_80FB21C: @ 80FB21C
 
 .global gUnknown_80FB220
 gUnknown_80FB220: @ 80FB220
-.string "{ARG_POKEMON_0}'s max. HP rose by {ARG_VALUE_1}.\0"
+.string "{POKEMON_0}'s max. HP rose by {VALUE_1}.\0"
 .align 2, 0
 
 .global gUnknown_80FB240
@@ -4872,7 +4872,7 @@ gUnknown_80FB240: @ 80FB240
 
 .global gUnknown_80FB244
 gUnknown_80FB244: @ 80FB244
-.string "{ARG_POKEMON_0} became confused!\0"
+.string "{POKEMON_0} became confused!\0"
 .align 2, 0
 
 .global gUnknown_80FB25C
@@ -4882,7 +4882,7 @@ gUnknown_80FB25C: @ 80FB25C
 
 .global gUnknown_80FB260
 gUnknown_80FB260: @ 80FB260
-.string "{ARG_POKEMON_0} is already confused!\0"
+.string "{POKEMON_0} is already confused!\0"
 .align 2, 0
 
 .global gUnknown_80FB27C
@@ -4892,7 +4892,7 @@ gUnknown_80FB27C: @ 80FB27C
 
 .global gUnknown_80FB280
 gUnknown_80FB280: @ 80FB280
-.string "{ARG_POKEMON_0} became paralyzed!\n"
+.string "{POKEMON_0} became paralyzed!\n"
 .string "It can't attack!\0"
 .align 2, 0
 
@@ -4903,7 +4903,7 @@ gUnknown_80FB2AC: @ 80FB2AC
 
 .global gUnknown_80FB2B0
 gUnknown_80FB2B0: @ 80FB2B0
-.string "{ARG_POKEMON_0} is already paralyzed!\0"
+.string "{POKEMON_0} is already paralyzed!\0"
 .align 2, 0
 
 .global gUnknown_80FB2CC
@@ -4913,7 +4913,7 @@ gUnknown_80FB2CC: @ 80FB2CC
 
 .global gUnknown_80FB2D0
 gUnknown_80FB2D0: @ 80FB2D0
-.string "{ARG_POKEMON_0} cringed!\0"
+.string "{POKEMON_0} cringed!\0"
 .align 2, 0
 
 .global gUnknown_80FB2E0
@@ -4923,7 +4923,7 @@ gUnknown_80FB2E0: @ 80FB2E0
 
 .global gUnknown_80FB2E4
 gUnknown_80FB2E4: @ 80FB2E4
-.string "{ARG_POKEMON_0} is already cringing!\0"
+.string "{POKEMON_0} is already cringing!\0"
 .align 2, 0
 
 .global gUnknown_80FB300
@@ -4933,7 +4933,7 @@ gUnknown_80FB300: @ 80FB300
 
 .global gUnknown_80FB304
 gUnknown_80FB304: @ 80FB304
-.string "{ARG_POKEMON_0} fell asleep!\0"
+.string "{POKEMON_0} fell asleep!\0"
 .align 2, 0
 
 .global gUnknown_80FB318
@@ -4948,7 +4948,7 @@ gUnknown_80FB31C: @ 80FB31C
 
 .global gUnknown_80FB320
 gUnknown_80FB320: @ 80FB320
-.string "{ARG_POKEMON_0} is already asleep!\0"
+.string "{POKEMON_0} is already asleep!\0"
 .align 2, 0
 
 .global gUnknown_80FB338
@@ -4958,7 +4958,7 @@ gUnknown_80FB338: @ 80FB338
 
 .global gUnknown_80FB33C
 gUnknown_80FB33C: @ 80FB33C
-.string "{ARG_POKEMON_0} is locked in a nightmare!\0"
+.string "{POKEMON_0} is locked in a nightmare!\0"
 .align 2, 0
 
 .global gUnknown_80FB35C
@@ -4973,7 +4973,7 @@ gUnknown_80FB360: @ 80FB360
 
 .global gUnknown_80FB364
 gUnknown_80FB364: @ 80FB364
-.string "{ARG_POKEMON_0} didn't become drowsy!\0"
+.string "{POKEMON_0} didn't become drowsy!\0"
 .align 2, 0
 
 .global gUnknown_80FB380
@@ -4993,7 +4993,7 @@ gUnknown_80FB388: @ 80FB388
 
 .global gUnknown_80FB38C
 gUnknown_80FB38C: @ 80FB38C
-.string "{ARG_POKEMON_0} had a nightmare!\0"
+.string "{POKEMON_0} had a nightmare!\0"
 .align 2, 0
 
 .global gUnknown_80FB3A4
@@ -5003,7 +5003,7 @@ gUnknown_80FB3A4: @ 80FB3A4
 
 .global gUnknown_80FB3A8
 gUnknown_80FB3A8: @ 80FB3A8
-.string "{ARG_POKEMON_0} is already having\n"
+.string "{POKEMON_0} is already having\n"
 .string "a nightmare!\0"
 .align 2, 0
 
@@ -5019,7 +5019,7 @@ gUnknown_80FB3D0: @ 80FB3D0
 
 .global gUnknown_80FB3D4
 gUnknown_80FB3D4: @ 80FB3D4
-.string "{ARG_POKEMON_0} yawned!\0"
+.string "{POKEMON_0} yawned!\0"
 .align 2, 0
 
 .global gUnknown_80FB3E0
@@ -5029,7 +5029,7 @@ gUnknown_80FB3E0: @ 80FB3E0
 
 .global gUnknown_80FB3E4
 gUnknown_80FB3E4: @ 80FB3E4
-.string "{ARG_POKEMON_0} didn't yawn!\0"
+.string "{POKEMON_0} didn't yawn!\0"
 .align 2, 0
 
 .global gUnknown_80FB3F8
@@ -5039,7 +5039,7 @@ gUnknown_80FB3F8: @ 80FB3F8
 
 .global gUnknown_80FB3FC
 gUnknown_80FB3FC: @ 80FB3FC
-.string "{ARG_POKEMON_0} is already yawning!\0"
+.string "{POKEMON_0} is already yawning!\0"
 .align 2, 0
 
 .global gUnknown_80FB414
@@ -5059,7 +5059,7 @@ gUnknown_80FB41C: @ 80FB41C
 
 .global gUnknown_80FB420
 gUnknown_80FB420: @ 80FB420
-.string "{ARG_POKEMON_0} is already sleepless!\0"
+.string "{POKEMON_0} is already sleepless!\0"
 .align 2, 0
 
 .global gUnknown_80FB43C
@@ -5069,7 +5069,7 @@ gUnknown_80FB43C: @ 80FB43C
 
 .global gUnknown_80FB440
 gUnknown_80FB440: @ 80FB440
-.string "{ARG_POKEMON_0} became sleepless!\0"
+.string "{POKEMON_0} became sleepless!\0"
 .align 2, 0
 
 .global gUnknown_80FB458
@@ -5079,7 +5079,7 @@ gUnknown_80FB458: @ 80FB458
 
 .global gUnknown_80FB45C
 gUnknown_80FB45C: @ 80FB45C
-.string "{ARG_POKEMON_0} can't move on the next turn!\0"
+.string "{POKEMON_0} can't move on the next turn!\0"
 .align 2, 0
 
 .global gUnknown_80FB480
@@ -5089,7 +5089,7 @@ gUnknown_80FB480: @ 80FB480
 
 .global gUnknown_80FB484
 gUnknown_80FB484: @ 80FB484
-.string "{ARG_POKEMON_0} already can't move on\n"
+.string "{POKEMON_0} already can't move on\n"
 .string "the next turn!\0"
 .align 2, 0
 
@@ -5100,7 +5100,7 @@ gUnknown_80FB4B0: @ 80FB4B0
 
 .global gUnknown_80FB4B4
 gUnknown_80FB4B4: @ 80FB4B4
-.string "{ARG_POKEMON_0} can't move for a while!\0"
+.string "{POKEMON_0} can't move for a while!\0"
 .align 2, 0
 
 .global gUnknown_80FB4D4
@@ -5110,7 +5110,7 @@ gUnknown_80FB4D4: @ 80FB4D4
 
 .global gUnknown_80FB4D8
 gUnknown_80FB4D8: @ 80FB4D8
-.string "{ARG_POKEMON_0} is already paused!\0"
+.string "{POKEMON_0} is already paused!\0"
 .align 2, 0
 
 .global gUnknown_80FB4F0
@@ -5120,7 +5120,7 @@ gUnknown_80FB4F0: @ 80FB4F0
 
 .global gUnknown_80FB4F4
 gUnknown_80FB4F4: @ 80FB4F4
-.string "{ARG_POKEMON_0} became infatuated!\0"
+.string "{POKEMON_0} became infatuated!\0"
 .align 2, 0
 
 .global gUnknown_80FB50C
@@ -5130,7 +5130,7 @@ gUnknown_80FB50C: @ 80FB50C
 
 .global gUnknown_80FB510
 gUnknown_80FB510: @ 80FB510
-.string "{ARG_POKEMON_0} is already infatuated!\0"
+.string "{POKEMON_0} is already infatuated!\0"
 .align 2, 0
 
 .global gUnknown_80FB52C
@@ -5140,7 +5140,7 @@ gUnknown_80FB52C: @ 80FB52C
 
 .global gUnknown_80FB530
 gUnknown_80FB530: @ 80FB530
-.string "{ARG_POKEMON_0} sustained a burn!\0"
+.string "{POKEMON_0} sustained a burn!\0"
 .align 2, 0
 
 .global gUnknown_80FB548
@@ -5150,7 +5150,7 @@ gUnknown_80FB548: @ 80FB548
 
 .global gUnknown_80FB54C
 gUnknown_80FB54C: @ 80FB54C
-.string "{ARG_POKEMON_0} already has a burn!\0"
+.string "{POKEMON_0} already has a burn!\0"
 .align 2, 0
 
 .global gUnknown_80FB564
@@ -5170,7 +5170,7 @@ gUnknown_80FB580: @ 80FB580
 
 .global gUnknown_80FB584
 gUnknown_80FB584: @ 80FB584
-.string "{ARG_POKEMON_0} was poisoned!\0"
+.string "{POKEMON_0} was poisoned!\0"
 .align 2, 0
 
 .global gUnknown_80FB598
@@ -5180,7 +5180,7 @@ gUnknown_80FB598: @ 80FB598
 
 .global gUnknown_80FB59C
 gUnknown_80FB59C: @ 80FB59C
-.string "{ARG_POKEMON_0} was badly poisoned!\0"
+.string "{POKEMON_0} was badly poisoned!\0"
 .align 2, 0
 
 .global gUnknown_80FB5B4
@@ -5190,7 +5190,7 @@ gUnknown_80FB5B4: @ 80FB5B4
 
 .global gUnknown_80FB5B8
 gUnknown_80FB5B8: @ 80FB5B8
-.string "{ARG_POKEMON_0} is already poisoned!\0"
+.string "{POKEMON_0} is already poisoned!\0"
 .align 2, 0
 
 .global gUnknown_80FB5D4
@@ -5200,7 +5200,7 @@ gUnknown_80FB5D4: @ 80FB5D4
 
 .global gUnknown_80FB5D8
 gUnknown_80FB5D8: @ 80FB5D8
-.string "{ARG_POKEMON_0} is already badly poisoned!\0"
+.string "{POKEMON_0} is already badly poisoned!\0"
 .align 2, 0
 
 .global gUnknown_80FB5F8
@@ -5210,7 +5210,7 @@ gUnknown_80FB5F8: @ 80FB5F8
 
 .global gUnknown_80FB5FC
 gUnknown_80FB5FC: @ 80FB5FC
-.string "{ARG_POKEMON_0} became frozen!\0"
+.string "{POKEMON_0} became frozen!\0"
 .align 2, 0
 
 .global gUnknown_80FB610
@@ -5220,7 +5220,7 @@ gUnknown_80FB610: @ 80FB610
 
 .global gUnknown_80FB614
 gUnknown_80FB614: @ 80FB614
-.string "{ARG_POKEMON_0} was squeezed!\0"
+.string "{POKEMON_0} was squeezed!\0"
 .align 2, 0
 
 .global gUnknown_80FB628
@@ -5230,7 +5230,7 @@ gUnknown_80FB628: @ 80FB628
 
 .global gUnknown_80FB62C
 gUnknown_80FB62C: @ 80FB62C
-.string "{ARG_POKEMON_0} is already being squeezed!\0"
+.string "{POKEMON_0} is already being squeezed!\0"
 .align 2, 0
 
 .global gUnknown_80FB64C
@@ -5240,7 +5240,7 @@ gUnknown_80FB64C: @ 80FB64C
 
 .global gUnknown_80FB650
 gUnknown_80FB650: @ 80FB650
-.string "{ARG_POKEMON_0} became immobilized!\0"
+.string "{POKEMON_0} became immobilized!\0"
 .align 2, 0
 
 .global gUnknown_80FB668
@@ -5250,7 +5250,7 @@ gUnknown_80FB668: @ 80FB668
 
 .global gUnknown_80FB66C
 gUnknown_80FB66C: @ 80FB66C
-.string "{ARG_POKEMON_0} is already immobilized!\0"
+.string "{POKEMON_0} is already immobilized!\0"
 .align 2, 0
 
 .global gUnknown_80FB688
@@ -5260,7 +5260,7 @@ gUnknown_80FB688: @ 80FB688
 
 .global gUnknown_80FB68C
 gUnknown_80FB68C: @ 80FB68C
-.string "{ARG_POKEMON_0} put down its roots!\0"
+.string "{POKEMON_0} put down its roots!\0"
 .align 2, 0
 
 .global gUnknown_80FB6A4
@@ -5270,7 +5270,7 @@ gUnknown_80FB6A4: @ 80FB6A4
 
 .global gUnknown_80FB6A8
 gUnknown_80FB6A8: @ 80FB6A8
-.string "{ARG_POKEMON_0} is already rooted!\0"
+.string "{POKEMON_0} is already rooted!\0"
 .align 2, 0
 
 .global gUnknown_80FB6C0
@@ -5280,7 +5280,7 @@ gUnknown_80FB6C0: @ 80FB6C0
 
 .global gUnknown_80FB6C4
 gUnknown_80FB6C4: @ 80FB6C4
-.string "{ARG_POKEMON_0} became wrapped!\0"
+.string "{POKEMON_0} became wrapped!\0"
 .align 2, 0
 
 .global gUnknown_80FB6D8
@@ -5290,7 +5290,7 @@ gUnknown_80FB6D8: @ 80FB6D8
 
 .global gUnknown_80FB6DC
 gUnknown_80FB6DC: @ 80FB6DC
-.string "{ARG_POKEMON_0} has a foe wrapped already!\0"
+.string "{POKEMON_0} has a foe wrapped already!\0"
 .align 2, 0
 
 .global gUnknown_80FB6FC
@@ -5300,7 +5300,7 @@ gUnknown_80FB6FC: @ 80FB6FC
 
 .global gUnknown_80FB700
 gUnknown_80FB700: @ 80FB700
-.string "{ARG_POKEMON_0} is already wrapped!\0"
+.string "{POKEMON_0} is already wrapped!\0"
 .align 2, 0
 
 .global gUnknown_80FB718
@@ -5310,7 +5310,7 @@ gUnknown_80FB718: @ 80FB718
 
 .global gUnknown_80FB71C
 gUnknown_80FB71C: @ 80FB71C
-.string "{ARG_POKEMON_0} attained Sure Shot status!\0"
+.string "{POKEMON_0} attained Sure Shot status!\0"
 .align 2, 0
 
 .global gUnknown_80FB73C
@@ -5320,7 +5320,7 @@ gUnknown_80FB73C: @ 80FB73C
 
 .global gUnknown_80FB740
 gUnknown_80FB740: @ 80FB740
-.string "{ARG_POKEMON_0} already has Sure Shot\n"
+.string "{POKEMON_0} already has Sure Shot\n"
 .string "status!\0"
 .align 2, 0
 
@@ -5331,7 +5331,7 @@ gUnknown_80FB764: @ 80FB764
 
 .global gUnknown_80FB768
 gUnknown_80FB768: @ 80FB768
-.string "{ARG_POKEMON_0} became a whiffer!\0"
+.string "{POKEMON_0} became a whiffer!\0"
 .align 2, 0
 
 .global gUnknown_80FB780
@@ -5341,7 +5341,7 @@ gUnknown_80FB780: @ 80FB780
 
 .global gUnknown_80FB784
 gUnknown_80FB784: @ 80FB784
-.string "{ARG_POKEMON_0} is already a whiffer!\0"
+.string "{POKEMON_0} is already a whiffer!\0"
 .align 2, 0
 
 .global gUnknown_80FB7A0
@@ -5351,7 +5351,7 @@ gUnknown_80FB7A0: @ 80FB7A0
 
 .global gUnknown_80FB7A4
 gUnknown_80FB7A4: @ 80FB7A4
-.string "{ARG_POKEMON_0} became petrified!\0"
+.string "{POKEMON_0} became petrified!\0"
 .align 2, 0
 
 .global gUnknown_80FB7BC
@@ -5361,7 +5361,7 @@ gUnknown_80FB7BC: @ 80FB7BC
 
 .global gUnknown_80FB7C0
 gUnknown_80FB7C0: @ 80FB7C0
-.string "{ARG_POKEMON_0} is already petrified!\0"
+.string "{POKEMON_0} is already petrified!\0"
 .align 2, 0
 
 .global gUnknown_80FB7DC
@@ -5371,7 +5371,7 @@ gUnknown_80FB7DC: @ 80FB7DC
 
 .global gUnknown_80FB7E0
 gUnknown_80FB7E0: @ 80FB7E0
-.string "{ARG_POKEMON_0} was blinded!\0"
+.string "{POKEMON_0} was blinded!\0"
 .align 2, 0
 
 .global gUnknown_80FB7F4
@@ -5381,7 +5381,7 @@ gUnknown_80FB7F4: @ 80FB7F4
 
 .global gUnknown_80FB7F8
 gUnknown_80FB7F8: @ 80FB7F8
-.string "{ARG_POKEMON_0} is already blinded!\0"
+.string "{POKEMON_0} is already blinded!\0"
 .align 2, 0
 
 .global gUnknown_80FB810
@@ -5391,7 +5391,7 @@ gUnknown_80FB810: @ 80FB810
 
 .global gUnknown_80FB814
 gUnknown_80FB814: @ 80FB814
-.string "{ARG_POKEMON_0}'s vision turned weird!\0"
+.string "{POKEMON_0}'s vision turned weird!\0"
 .align 2, 0
 
 .global gUnknown_80FB834
@@ -5401,7 +5401,7 @@ gUnknown_80FB834: @ 80FB834
 
 .global gUnknown_80FB838
 gUnknown_80FB838: @ 80FB838
-.string "{ARG_POKEMON_0}'s vision is already weird!\0"
+.string "{POKEMON_0}'s vision is already weird!\0"
 .align 2, 0
 
 .global gUnknown_80FB85C
@@ -5411,7 +5411,7 @@ gUnknown_80FB85C: @ 80FB85C
 
 .global gUnknown_80FB860
 gUnknown_80FB860: @ 80FB860
-.string "{ARG_POKEMON_0}'s vision was restored!\0"
+.string "{POKEMON_0}'s vision was restored!\0"
 .align 2, 0
 
 .global gUnknown_80FB880
@@ -5421,7 +5421,7 @@ gUnknown_80FB880: @ 80FB880
 
 .global gUnknown_80FB884
 gUnknown_80FB884: @ 80FB884
-.string "{ARG_POKEMON_0}'s vision is fine!\0"
+.string "{POKEMON_0}'s vision is fine!\0"
 .align 2, 0
 
 .global gUnknown_80FB89C
@@ -5431,7 +5431,7 @@ gUnknown_80FB89C: @ 80FB89C
 
 .global gUnknown_80FB8A0
 gUnknown_80FB8A0: @ 80FB8A0
-.string "{ARG_POKEMON_0}'s damage was fixed!\0"
+.string "{POKEMON_0}'s damage was fixed!\0"
 .align 2, 0
 
 .global gUnknown_80FB8BC
@@ -5441,7 +5441,7 @@ gUnknown_80FB8BC: @ 80FB8BC
 
 .global gUnknown_80FB8C0
 gUnknown_80FB8C0: @ 80FB8C0
-.string "{ARG_POKEMON_0}'s damage is already fixed!\0"
+.string "{POKEMON_0}'s damage is already fixed!\0"
 .align 2, 0
 
 .global gUnknown_80FB8E4
@@ -5451,7 +5451,7 @@ gUnknown_80FB8E4: @ 80FB8E4
 
 .global gUnknown_80FB8E8
 gUnknown_80FB8E8: @ 80FB8E8
-.string "{ARG_POKEMON_0} is getting pumped!\0"
+.string "{POKEMON_0} is getting pumped!\0"
 .align 2, 0
 
 .global gUnknown_80FB900
@@ -5461,7 +5461,7 @@ gUnknown_80FB900: @ 80FB900
 
 .global gUnknown_80FB904
 gUnknown_80FB904: @ 80FB904
-.string "{ARG_POKEMON_0} is already getting pumped!\0"
+.string "{POKEMON_0} is already getting pumped!\0"
 .align 2, 0
 
 .global gUnknown_80FB924
@@ -5471,7 +5471,7 @@ gUnknown_80FB924: @ 80FB924
 
 .global gUnknown_80FB928
 gUnknown_80FB928: @ 80FB928
-.string "{ARG_POKEMON_0} cowered in fear!\0"
+.string "{POKEMON_0} cowered in fear!\0"
 .align 2, 0
 
 .global gUnknown_80FB940
@@ -5481,7 +5481,7 @@ gUnknown_80FB940: @ 80FB940
 
 .global gUnknown_80FB944
 gUnknown_80FB944: @ 80FB944
-.string "{ARG_POKEMON_0} is already cowering!\0"
+.string "{POKEMON_0} is already cowering!\0"
 .align 2, 0
 
 .global gUnknown_80FB960
@@ -5491,7 +5491,7 @@ gUnknown_80FB960: @ 80FB960
 
 .global gUnknown_80FB964
 gUnknown_80FB964: @ 80FB964
-.string "{ARG_POKEMON_0} became a decoy!\0"
+.string "{POKEMON_0} became a decoy!\0"
 .align 2, 0
 
 .global gUnknown_80FB978
@@ -5501,7 +5501,7 @@ gUnknown_80FB978: @ 80FB978
 
 .global gUnknown_80FB97C
 gUnknown_80FB97C: @ 80FB97C
-.string "{ARG_POKEMON_0} is already a decoy!\0"
+.string "{POKEMON_0} is already a decoy!\0"
 .align 2, 0
 
 .global gUnknown_80FB994
@@ -5511,7 +5511,7 @@ gUnknown_80FB994: @ 80FB994
 
 .global gUnknown_80FB998
 gUnknown_80FB998: @ 80FB998
-.string "{ARG_POKEMON_0} protected itself!\0"
+.string "{POKEMON_0} protected itself!\0"
 .align 2, 0
 
 .global gUnknown_80FB9B0
@@ -5521,7 +5521,7 @@ gUnknown_80FB9B0: @ 80FB9B0
 
 .global gUnknown_80FB9B4
 gUnknown_80FB9B4: @ 80FB9B4
-.string "{ARG_POKEMON_0} is already protecting itself!\0"
+.string "{POKEMON_0} is already protecting itself!\0"
 .align 2, 0
 
 .global gUnknown_80FB9D8
@@ -5531,7 +5531,7 @@ gUnknown_80FB9D8: @ 80FB9D8
 
 .global gUnknown_80FB9DC
 gUnknown_80FB9DC: @ 80FB9DC
-.string "{ARG_POKEMON_0} was taunted!\0"
+.string "{POKEMON_0} was taunted!\0"
 .align 2, 0
 
 .global gUnknown_80FB9F0
@@ -5541,7 +5541,7 @@ gUnknown_80FB9F0: @ 80FB9F0
 
 .global gUnknown_80FB9F4
 gUnknown_80FB9F4: @ 80FB9F4
-.string "{ARG_POKEMON_0} has been taunted already!\0"
+.string "{POKEMON_0} has been taunted already!\0"
 .align 2, 0
 
 .global gUnknown_80FBA14
@@ -5551,7 +5551,7 @@ gUnknown_80FBA14: @ 80FBA14
 
 .global gUnknown_80FBA18
 gUnknown_80FBA18: @ 80FBA18
-.string "{ARG_POKEMON_0} stored power {ARG_VALUE_0} time(s)!\0"
+.string "{POKEMON_0} stored power {VALUE_0} time(s)!\0"
 .align 2, 0
 
 .global gUnknown_80FBA38
@@ -5561,7 +5561,7 @@ gUnknown_80FBA38: @ 80FBA38
 
 .global gUnknown_80FBA3C
 gUnknown_80FBA3C: @ 80FBA3C
-.string "{ARG_POKEMON_0} can't store any more power!\0"
+.string "{POKEMON_0} can't store any more power!\0"
 .align 2, 0
 
 .global gUnknown_80FBA60
@@ -5571,7 +5571,7 @@ gUnknown_80FBA60: @ 80FBA60
 
 .global gUnknown_80FBA64
 gUnknown_80FBA64: @ 80FBA64
-.string "{ARG_POKEMON_0} disappeared from view!\0"
+.string "{POKEMON_0} disappeared from view!\0"
 .align 2, 0
 
 .global gUnknown_80FBA80
@@ -5581,7 +5581,7 @@ gUnknown_80FBA80: @ 80FBA80
 
 .global gUnknown_80FBA84
 gUnknown_80FBA84: @ 80FBA84
-.string "{ARG_POKEMON_0} is invisible already!\0"
+.string "{POKEMON_0} is invisible already!\0"
 .align 2, 0
 
 .global gUnknown_80FBAA0
@@ -5591,7 +5591,7 @@ gUnknown_80FBAA0: @ 80FBAA0
 
 .global gUnknown_80FBAA4
 gUnknown_80FBAA4: @ 80FBAA4
-.string "{ARG_POKEMON_0} put up its mirror coat!\0"
+.string "{POKEMON_0} put up its mirror coat!\0"
 .align 2, 0
 
 .global gUnknown_80FBAC0
@@ -5601,7 +5601,7 @@ gUnknown_80FBAC0: @ 80FBAC0
 
 .global gUnknown_80FBAC4
 gUnknown_80FBAC4: @ 80FBAC4
-.string "{ARG_POKEMON_0} already has a mirror coat!\0"
+.string "{POKEMON_0} already has a mirror coat!\0"
 .align 2, 0
 
 .global gUnknown_80FBAE4
@@ -5611,7 +5611,7 @@ gUnknown_80FBAE4: @ 80FBAE4
 
 .global gUnknown_80FBAE8
 gUnknown_80FBAE8: @ 80FBAE8
-.string "{ARG_POKEMON_0} heard the perish song!\0"
+.string "{POKEMON_0} heard the perish song!\0"
 .align 2, 0
 
 .global gUnknown_80FBB04
@@ -5621,7 +5621,7 @@ gUnknown_80FBB04: @ 80FBB04
 
 .global gUnknown_80FBB08
 gUnknown_80FBB08: @ 80FBB08
-.string "{ARG_POKEMON_0} already heard that song!\0"
+.string "{POKEMON_0} already heard that song!\0"
 .align 2, 0
 
 .global gUnknown_80FBB28
@@ -5631,7 +5631,7 @@ gUnknown_80FBB28: @ 80FBB28
 
 .global gUnknown_80FBB2C
 gUnknown_80FBB2C: @ 80FBB2C
-.string "{ARG_POKEMON_0} readied its Destiny Bond!\0"
+.string "{POKEMON_0} readied its Destiny Bond!\0"
 .align 2, 0
 
 .global gUnknown_80FBB4C
@@ -5641,7 +5641,7 @@ gUnknown_80FBB4C: @ 80FBB4C
 
 .global gUnknown_80FBB50
 gUnknown_80FBB50: @ 80FBB50
-.string "{ARG_POKEMON_0} already has Destiny Bond\n"
+.string "{POKEMON_0} already has Destiny Bond\n"
 .string "readied!\0"
 .align 2, 0
 
@@ -5652,7 +5652,7 @@ gUnknown_80FBB78: @ 80FBB78
 
 .global gUnknown_80FBB7C
 gUnknown_80FBB7C: @ 80FBB7C
-.string "{ARG_POKEMON_0} earned an encore!\0"
+.string "{POKEMON_0} earned an encore!\0"
 .align 2, 0
 
 .global gUnknown_80FBB94
@@ -5662,7 +5662,7 @@ gUnknown_80FBB94: @ 80FBB94
 
 .global gUnknown_80FBB98
 gUnknown_80FBB98: @ 80FBB98
-.string "{ARG_POKEMON_0} is already doing encores!\0"
+.string "{POKEMON_0} is already doing encores!\0"
 .align 2, 0
 
 .global gUnknown_80FBBB8
@@ -5672,7 +5672,7 @@ gUnknown_80FBBB8: @ 80FBBB8
 
 .global gUnknown_80FBBBC
 gUnknown_80FBBBC: @ 80FBBBC
-.string "{ARG_POKEMON_0} won't do encores!\0"
+.string "{POKEMON_0} won't do encores!\0"
 .align 2, 0
 
 .global gUnknown_80FBBD4
@@ -5682,7 +5682,7 @@ gUnknown_80FBBD4: @ 80FBBD4
 
 .global gUnknown_80FBBD8
 gUnknown_80FBBD8: @ 80FBBD8
-.string "{ARG_POKEMON_0} is set to endure!\0"
+.string "{POKEMON_0} is set to endure!\0"
 .align 2, 0
 
 .global gUnknown_80FBBF0
@@ -5692,7 +5692,7 @@ gUnknown_80FBBF0: @ 80FBBF0
 
 .global gUnknown_80FBBF4
 gUnknown_80FBBF4: @ 80FBBF4
-.string "{ARG_POKEMON_0} is already set to endure!\0"
+.string "{POKEMON_0} is already set to endure!\0"
 .align 2, 0
 
 .global gUnknown_80FBC14
@@ -5702,7 +5702,7 @@ gUnknown_80FBC14: @ 80FBC14
 
 .global gUnknown_80FBC18
 gUnknown_80FBC18: @ 80FBC18
-.string "{ARG_POKEMON_0} readied its Mirror Move!\0"
+.string "{POKEMON_0} readied its Mirror Move!\0"
 .align 2, 0
 
 .global gUnknown_80FBC38
@@ -5712,7 +5712,7 @@ gUnknown_80FBC38: @ 80FBC38
 
 .global gUnknown_80FBC3C
 gUnknown_80FBC3C: @ 80FBC3C
-.string "{ARG_POKEMON_0} already used Mirror Move!\0"
+.string "{POKEMON_0} already used Mirror Move!\0"
 .align 2, 0
 
 .global gUnknown_80FBC5C
@@ -5722,7 +5722,7 @@ gUnknown_80FBC5C: @ 80FBC5C
 
 .global gUnknown_80FBC60
 gUnknown_80FBC60: @ 80FBC60
-.string "{ARG_POKEMON_0} has Conversion 2 up!\0"
+.string "{POKEMON_0} has Conversion 2 up!\0"
 .align 2, 0
 
 .global gUnknown_80FBC7C
@@ -5732,7 +5732,7 @@ gUnknown_80FBC7C: @ 80FBC7C
 
 .global gUnknown_80FBC80
 gUnknown_80FBC80: @ 80FBC80
-.string "{ARG_POKEMON_0} already has Conversion 2 up!\0"
+.string "{POKEMON_0} already has Conversion 2 up!\0"
 .align 2, 0
 
 .global gUnknown_80FBCA4
@@ -5742,7 +5742,7 @@ gUnknown_80FBCA4: @ 80FBCA4
 
 .global gUnknown_80FBCA8
 gUnknown_80FBCA8: @ 80FBCA8
-.string "{ARG_POKEMON_0} readied its Vital Throw!\0"
+.string "{POKEMON_0} readied its Vital Throw!\0"
 .align 2, 0
 
 .global gUnknown_80FBCC8
@@ -5752,7 +5752,7 @@ gUnknown_80FBCC8: @ 80FBCC8
 
 .global gUnknown_80FBCCC
 gUnknown_80FBCCC: @ 80FBCCC
-.string "{ARG_POKEMON_0} is already set for\n"
+.string "{POKEMON_0} is already set for\n"
 .string "Vital Throw!\0"
 .align 2, 0
 
@@ -5763,7 +5763,7 @@ gUnknown_80FBCF0: @ 80FBCF0
 
 .global gUnknown_80FBCF4
 gUnknown_80FBCF4: @ 80FBCF4
-.string "{ARG_POKEMON_0}'s stats returned to normal.\0"
+.string "{POKEMON_0}'s stats returned to normal.\0"
 .align 2, 0
 
 .global gUnknown_80FBD18
@@ -5773,7 +5773,7 @@ gUnknown_80FBD18: @ 80FBD18
 
 .global gUnknown_80FBD1C
 gUnknown_80FBD1C: @ 80FBD1C
-.string "{ARG_POKEMON_0}'s stats appear unchanged.\0"
+.string "{POKEMON_0}'s stats appear unchanged.\0"
 .align 2, 0
 
 .global gUnknown_80FBD3C
@@ -5793,7 +5793,7 @@ gUnknown_80FBD58: @ 80FBD58
 
 .global gUnknown_80FBD5C
 gUnknown_80FBD5C: @ 80FBD5C
-.string "{ARG_POKEMON_0}'s Belly went down.\0"
+.string "{POKEMON_0}'s Belly went down.\0"
 .align 2, 0
 
 .global gUnknown_80FBD78
@@ -5803,7 +5803,7 @@ gUnknown_80FBD78: @ 80FBD78
 
 .global gUnknown_80FBD7C
 gUnknown_80FBD7C: @ 80FBD7C
-.string "{ARG_POKEMON_0}'s max. Belly size shrank!\0"
+.string "{POKEMON_0}'s max. Belly size shrank!\0"
 .align 2, 0
 
 .global gUnknown_80FBD9C
@@ -5813,7 +5813,7 @@ gUnknown_80FBD9C: @ 80FBD9C
 
 .global gUnknown_80FBDA0
 gUnknown_80FBDA0: @ 80FBDA0
-.string "{ARG_POKEMON_0}'s max. Belly size increased!\0"
+.string "{POKEMON_0}'s max. Belly size increased!\0"
 .align 2, 0
 
 .global gUnknown_80FBDC4
@@ -5823,7 +5823,7 @@ gUnknown_80FBDC4: @ 80FBDC4
 
 .global gUnknown_80FBDC8
 gUnknown_80FBDC8: @ 80FBDC8
-.string "{ARG_POKEMON_0}'s Belly won't get any bigger!\0"
+.string "{POKEMON_0}'s Belly won't get any bigger!\0"
 .align 2, 0
 
 .global gUnknown_80FBDF0
@@ -5833,7 +5833,7 @@ gUnknown_80FBDF0: @ 80FBDF0
 
 .global gUnknown_80FBDF4
 gUnknown_80FBDF4: @ 80FBDF4
-.string "{ARG_POKEMON_0}'s Belly didn't change!\0"
+.string "{POKEMON_0}'s Belly didn't change!\0"
 .align 2, 0
 
 .global gUnknown_80FBE14
@@ -5843,7 +5843,7 @@ gUnknown_80FBE14: @ 80FBE14
 
 .global gUnknown_80FBE18
 gUnknown_80FBE18: @ 80FBE18
-.string "{ARG_POKEMON_0}'s Belly size didn't change!\0"
+.string "{POKEMON_0}'s Belly size didn't change!\0"
 .align 2, 0
 
 .global gUnknown_80FBE3C
@@ -5858,7 +5858,7 @@ gUnknown_80FBE40: @ 80FBE40
 
 .global gUnknown_80FBE44
 gUnknown_80FBE44: @ 80FBE44
-.string "{ARG_POKEMON_0}'s Belly filled up full!\0"
+.string "{POKEMON_0}'s Belly filled up full!\0"
 .align 2, 0
 
 .global gUnknown_80FBE64
@@ -5868,7 +5868,7 @@ gUnknown_80FBE64: @ 80FBE64
 
 .global gUnknown_80FBE68
 gUnknown_80FBE68: @ 80FBE68
-.string "{ARG_POKEMON_0}'s Belly was filled!\0"
+.string "{POKEMON_0}'s Belly was filled!\0"
 .align 2, 0
 
 .global gUnknown_80FBE84
@@ -5878,7 +5878,7 @@ gUnknown_80FBE84: @ 80FBE84
 
 .global gUnknown_80FBE88
 gUnknown_80FBE88: @ 80FBE88
-.string "{ARG_POKEMON_0}'s Belly dropped!\0"
+.string "{POKEMON_0}'s Belly dropped!\0"
 .align 2, 0
 
 .global gUnknown_80FBEA0
@@ -5888,8 +5888,8 @@ gUnknown_80FBEA0: @ 80FBEA0
 
 .global gUnknown_80FBEA4
 gUnknown_80FBEA4: @ 80FBEA4
-.string "{ARG_POKEMON_0} transformed into\n"
-.string "{ARG_POKEMON_1}!\0"
+.string "{POKEMON_0} transformed into\n"
+.string "{POKEMON_1}!\0"
 .align 2, 0
 
 .global gUnknown_80FBEC0
@@ -5899,7 +5899,7 @@ gUnknown_80FBEC0: @ 80FBEC0
 
 .global gUnknown_80FBEC4
 gUnknown_80FBEC4: @ 80FBEC4
-.string "{ARG_POKEMON_0}'s transformation failed!\0"
+.string "{POKEMON_0}'s transformation failed!\0"
 .align 2, 0
 
 .global gUnknown_80FBEE4
@@ -5909,7 +5909,7 @@ gUnknown_80FBEE4: @ 80FBEE4
 
 .global gUnknown_80FBEE8
 gUnknown_80FBEE8: @ 80FBEE8
-.string "{ARG_POKEMON_0} is already transformed.\0"
+.string "{POKEMON_0} is already transformed.\0"
 .align 2, 0
 
 .global gUnknown_80FBF04
@@ -5919,7 +5919,7 @@ gUnknown_80FBF04: @ 80FBF04
 
 .global gUnknown_80FBF08
 gUnknown_80FBF08: @ 80FBF08
-.string "{ARG_POKEMON_0} can go through walls now!\0"
+.string "{POKEMON_0} can go through walls now!\0"
 .align 2, 0
 
 .global gUnknown_80FBF28
@@ -5929,7 +5929,7 @@ gUnknown_80FBF28: @ 80FBF28
 
 .global gUnknown_80FBF2C
 gUnknown_80FBF2C: @ 80FBF2C
-.string "{ARG_POKEMON_0} can already go through walls!\0"
+.string "{POKEMON_0} can already go through walls!\0"
 .align 2, 0
 
 .global gUnknown_80FBF50
@@ -5939,7 +5939,7 @@ gUnknown_80FBF50: @ 80FBF50
 
 .global gUnknown_80FBF54
 gUnknown_80FBF54: @ 80FBF54
-.string "{ARG_POKEMON_0} became muzzled!\0"
+.string "{POKEMON_0} became muzzled!\0"
 .align 2, 0
 
 .global gUnknown_80FBF68
@@ -5949,7 +5949,7 @@ gUnknown_80FBF68: @ 80FBF68
 
 .global gUnknown_80FBF6C
 gUnknown_80FBF6C: @ 80FBF6C
-.string "{ARG_POKEMON_0} is already muzzled!\0"
+.string "{POKEMON_0} is already muzzled!\0"
 .align 2, 0
 
 .global gUnknown_80FBF84
@@ -5959,7 +5959,7 @@ gUnknown_80FBF84: @ 80FBF84
 
 .global gUnknown_80FBF88
 gUnknown_80FBF88: @ 80FBF88
-.string "{ARG_POKEMON_0} was exposed!\0"
+.string "{POKEMON_0} was exposed!\0"
 .align 2, 0
 
 .global gUnknown_80FBF9C
@@ -5969,7 +5969,7 @@ gUnknown_80FBF9C: @ 80FBF9C
 
 .global gUnknown_80FBFA0
 gUnknown_80FBFA0: @ 80FBFA0
-.string "{ARG_POKEMON_0} is already exposed!\0"
+.string "{POKEMON_0} is already exposed!\0"
 .align 2, 0
 
 .global gUnknown_80FBFB8
@@ -5979,7 +5979,7 @@ gUnknown_80FBFB8: @ 80FBFB8
 
 .global gUnknown_80FBFBC
 gUnknown_80FBFBC: @ 80FBFBC
-.string "{ARG_POKEMON_0} isn't a Ghost type!\0"
+.string "{POKEMON_0} isn't a Ghost type!\0"
 .align 2, 0
 
 .global gUnknown_80FBFD8
@@ -5989,7 +5989,7 @@ gUnknown_80FBFD8: @ 80FBFD8
 
 .global gUnknown_80FBFDC
 gUnknown_80FBFDC: @ 80FBFDC
-.string "{ARG_POKEMON_0}'s Evasion returned to normal!\0"
+.string "{POKEMON_0}'s Evasion returned to normal!\0"
 .align 2, 0
 
 .global gUnknown_80FC000
@@ -6019,7 +6019,7 @@ gUnknown_80FC054: @ 80FC054
 
 .global gUnknown_80FC058
 gUnknown_80FC058: @ 80FC058
-.string "{ARG_POKEMON_0} is already in a rage!\0"
+.string "{POKEMON_0} is already in a rage!\0"
 .align 2, 0
 
 .global gUnknown_80FC074
@@ -6109,7 +6109,7 @@ gUnknown_80FC0E4: @ 80FC0E4
 
 .global gUnknown_80FC0E8
 gUnknown_80FC0E8: @ 80FC0E8
-.string "{ARG_POKEMON_0}'s {ARG_MOVE_ITEM_0} rose!\0"
+.string "{POKEMON_0}'s {MOVE_ITEM_0} rose!\0"
 .align 2, 0
 
 .global gUnknown_80FC0FC
@@ -6119,7 +6119,7 @@ gUnknown_80FC0FC: @ 80FC0FC
 
 .global gUnknown_80FC100
 gUnknown_80FC100: @ 80FC100
-.string "{ARG_POKEMON_0}'s {ARG_MOVE_ITEM_0} fell!\0"
+.string "{POKEMON_0}'s {MOVE_ITEM_0} fell!\0"
 .align 2, 0
 
 .global gUnknown_80FC114
@@ -6139,8 +6139,8 @@ gUnknown_80FC11C: @ 80FC11C
 
 .global gUnknown_80FC120
 gUnknown_80FC120: @ 80FC120
-.string "{ARG_POKEMON_0}'s {ARG_MOVE_ITEM_0} rose\n"
-.string "{ARG_MOVE_ITEM_1}!\0"
+.string "{POKEMON_0}'s {MOVE_ITEM_0} rose\n"
+.string "{MOVE_ITEM_1}!\0"
 .align 2, 0
 
 .global gUnknown_80FC138
@@ -6155,8 +6155,8 @@ gUnknown_80FC13C: @ 80FC13C
 
 .global gUnknown_80FC140
 gUnknown_80FC140: @ 80FC140
-.string "{ARG_POKEMON_0}'s {ARG_MOVE_ITEM_0} fell\n"
-.string "{ARG_MOVE_ITEM_1}!\0"
+.string "{POKEMON_0}'s {MOVE_ITEM_0} fell\n"
+.string "{MOVE_ITEM_1}!\0"
 .align 2, 0
 
 .global gUnknown_80FC158
@@ -6171,7 +6171,7 @@ gUnknown_80FC15C: @ 80FC15C
 
 .global gUnknown_80FC160
 gUnknown_80FC160: @ 80FC160
-.string "{ARG_POKEMON_0}'s {ARG_MOVE_ITEM_0} remained\n"
+.string "{POKEMON_0}'s {MOVE_ITEM_0} remained\n"
 .string "unchanged!\0"
 .align 2, 0
 
@@ -6187,7 +6187,7 @@ gUnknown_80FC184: @ 80FC184
 
 .global gUnknown_80FC188
 gUnknown_80FC188: @ 80FC188
-.string "{ARG_POKEMON_0}'s {ARG_MOVE_ITEM_0} fell\n"
+.string "{POKEMON_0}'s {MOVE_ITEM_0} fell\n"
 .string "slightly!\0"
 .align 2, 0
 
@@ -6198,7 +6198,7 @@ gUnknown_80FC1A4: @ 80FC1A4
 
 .global gUnknown_80FC1A8
 gUnknown_80FC1A8: @ 80FC1A8
-.string "{ARG_POKEMON_0}'s {ARG_MOVE_ITEM_0} rose\n"
+.string "{POKEMON_0}'s {MOVE_ITEM_0} rose\n"
 .string "slightly!\0"
 .align 2, 0
 
@@ -6209,7 +6209,7 @@ gUnknown_80FC1C4: @ 80FC1C4
 
 .global gUnknown_80FC1C8
 gUnknown_80FC1C8: @ 80FC1C8
-.string "{ARG_POKEMON_0}'s {ARG_MOVE_ITEM_0} won't\n"
+.string "{POKEMON_0}'s {MOVE_ITEM_0} won't\n"
 .string "go down any more!\0"
 .align 2, 0
 
@@ -6220,7 +6220,7 @@ gUnknown_80FC1F0: @ 80FC1F0
 
 .global gUnknown_80FC1F4
 gUnknown_80FC1F4: @ 80FC1F4
-.string "{ARG_POKEMON_0}'s {ARG_MOVE_ITEM_0} won't\n"
+.string "{POKEMON_0}'s {MOVE_ITEM_0} won't\n"
 .string "go up any more!\0"
 .align 2, 0
 
@@ -6236,7 +6236,7 @@ gUnknown_80FC21C: @ 80FC21C
 
 .global gUnknown_80FC220
 gUnknown_80FC220: @ 80FC220
-.string "{ARG_POKEMON_0}'s {ARG_MOVE_ITEM_0} won't\n"
+.string "{POKEMON_0}'s {MOVE_ITEM_0} won't\n"
 .string "go down any more.\0"
 .align 2, 0
 
@@ -6247,7 +6247,7 @@ gUnknown_80FC248: @ 80FC248
 
 .global gUnknown_80FC24C
 gUnknown_80FC24C: @ 80FC24C
-.string "{ARG_POKEMON_0}'s {ARG_MOVE_ITEM_0} won't\n"
+.string "{POKEMON_0}'s {MOVE_ITEM_0} won't\n"
 .string "go up any more.\0"
 .align 2, 0
 
@@ -6263,7 +6263,7 @@ gUnknown_80FC274: @ 80FC274
 
 .global gUnknown_80FC278
 gUnknown_80FC278: @ 80FC278
-.string "{ARG_POKEMON_0}'s speed didn't change!\0"
+.string "{POKEMON_0}'s speed didn't change!\0"
 .align 2, 0
 
 .global gUnknown_80FC298
@@ -6273,7 +6273,7 @@ gUnknown_80FC298: @ 80FC298
 
 .global gUnknown_80FC29C
 gUnknown_80FC29C: @ 80FC29C
-.string "{ARG_POKEMON_0} can't go any faster!\0"
+.string "{POKEMON_0} can't go any faster!\0"
 .align 2, 0
 
 .global gUnknown_80FC2B8
@@ -6283,7 +6283,7 @@ gUnknown_80FC2B8: @ 80FC2B8
 
 .global gUnknown_80FC2BC
 gUnknown_80FC2BC: @ 80FC2BC
-.string "{ARG_POKEMON_0} can't go any slower!\0"
+.string "{POKEMON_0} can't go any slower!\0"
 .align 2, 0
 
 .global gUnknown_80FC2D8
@@ -6293,7 +6293,7 @@ gUnknown_80FC2D8: @ 80FC2D8
 
 .global gUnknown_80FC2DC
 gUnknown_80FC2DC: @ 80FC2DC
-.string "{ARG_POKEMON_0} is protected by Safeguard!\0"
+.string "{POKEMON_0} is protected by Safeguard!\0"
 .align 2, 0
 
 .global gUnknown_80FC2FC
@@ -6303,7 +6303,7 @@ gUnknown_80FC2FC: @ 80FC2FC
 
 .global gUnknown_80FC300
 gUnknown_80FC300: @ 80FC300
-.string "{ARG_POKEMON_0} is protected by Mist!\0"
+.string "{POKEMON_0} is protected by Mist!\0"
 .align 2, 0
 
 .global gUnknown_80FC31C
@@ -6313,7 +6313,7 @@ gUnknown_80FC31C: @ 80FC31C
 
 .global gUnknown_80FC320
 gUnknown_80FC320: @ 80FC320
-.string "{ARG_POKEMON_0}'s Attack was boosted.\0"
+.string "{POKEMON_0}'s Attack was boosted.\0"
 .align 2, 0
 
 .global gUnknown_80FC33C
@@ -6323,7 +6323,7 @@ gUnknown_80FC33C: @ 80FC33C
 
 .global gUnknown_80FC340
 gUnknown_80FC340: @ 80FC340
-.string "{ARG_POKEMON_0}'s Attack didn't go up.\0"
+.string "{POKEMON_0}'s Attack didn't go up.\0"
 .align 2, 0
 
 .global gUnknown_80FC360
@@ -6333,7 +6333,7 @@ gUnknown_80FC360: @ 80FC360
 
 .global gUnknown_80FC364
 gUnknown_80FC364: @ 80FC364
-.string "{ARG_POKEMON_0}'s Special Attack was boosted.\0"
+.string "{POKEMON_0}'s Special Attack was boosted.\0"
 .align 2, 0
 
 .global gUnknown_80FC388
@@ -6343,7 +6343,7 @@ gUnknown_80FC388: @ 80FC388
 
 .global gUnknown_80FC38C
 gUnknown_80FC38C: @ 80FC38C
-.string "{ARG_POKEMON_0}'s Special Attack didn't go up.\0"
+.string "{POKEMON_0}'s Special Attack didn't go up.\0"
 .align 2, 0
 
 .global gUnknown_80FC3B4
@@ -6353,7 +6353,7 @@ gUnknown_80FC3B4: @ 80FC3B4
 
 .global gUnknown_80FC3B8
 gUnknown_80FC3B8: @ 80FC3B8
-.string "{ARG_POKEMON_0}'s Defense was boosted.\0"
+.string "{POKEMON_0}'s Defense was boosted.\0"
 .align 2, 0
 
 .global gUnknown_80FC3D8
@@ -6363,7 +6363,7 @@ gUnknown_80FC3D8: @ 80FC3D8
 
 .global gUnknown_80FC3DC
 gUnknown_80FC3DC: @ 80FC3DC
-.string "{ARG_POKEMON_0}'s Defense didn't go up.\0"
+.string "{POKEMON_0}'s Defense didn't go up.\0"
 .align 2, 0
 
 .global gUnknown_80FC3FC
@@ -6373,7 +6373,7 @@ gUnknown_80FC3FC: @ 80FC3FC
 
 .global gUnknown_80FC400
 gUnknown_80FC400: @ 80FC400
-.string "{ARG_POKEMON_0}'s Special Defense was\n"
+.string "{POKEMON_0}'s Special Defense was\n"
 .string "boosted.\0"
 .align 2, 0
 
@@ -6384,7 +6384,7 @@ gUnknown_80FC428: @ 80FC428
 
 .global gUnknown_80FC42C
 gUnknown_80FC42C: @ 80FC42C
-.string "{ARG_POKEMON_0}'s Special Defense didn't\n"
+.string "{POKEMON_0}'s Special Defense didn't\n"
 .string "go up.\0"
 .align 2, 0
 
@@ -6395,26 +6395,26 @@ gUnknown_80FC454: @ 80FC454
 
 .global gUnknown_80FC458
 gUnknown_80FC458: @ 80FC458
-.string "{ARG_POKEMON_0}'s Attack was weakened.\0"
+.string "{POKEMON_0}'s Attack was weakened.\0"
 .align 2, 0
 .4byte gUnknown_80FC458
 
 .global gUnknown_80FC47C
 gUnknown_80FC47C: @ 80FC47C
-.string "{ARG_POKEMON_0}'s Attack didn't go down.\0"
+.string "{POKEMON_0}'s Attack didn't go down.\0"
 .align 2, 0
 .4byte gUnknown_80FC47C
 
 .global gUnknown_80FC4A4
 gUnknown_80FC4A4: @ 80FC4A4
-.string "{ARG_POKEMON_0}'s Special Attack was\n"
+.string "{POKEMON_0}'s Special Attack was\n"
 .string "weakened.\0"
 .align 2, 0
 .4byte gUnknown_80FC4A4
 
 .global gUnknown_80FC4D0
 gUnknown_80FC4D0: @ 80FC4D0
-.string "{ARG_POKEMON_0}'s Special Attack didn't go\n"
+.string "{POKEMON_0}'s Special Attack didn't go\n"
 .string "down.\0"
 .align 2, 0
 .4byte gUnknown_80FC4D0
@@ -6441,7 +6441,7 @@ gUnknown_80FC558: @ 80FC558
 
 .global gUnknown_80FC55C
 gUnknown_80FC55C: @ 80FC55C
-.string "{ARG_POKEMON_1} protected itself!\0"
+.string "{POKEMON_1} protected itself!\0"
 .align 2, 0
 
 .global gUnknown_80FC574
@@ -6451,7 +6451,7 @@ gUnknown_80FC574: @ 80FC574
 
 .global gUnknown_80FC578
 gUnknown_80FC578: @ 80FC578
-.string "{ARG_POKEMON_0} warped!\0"
+.string "{POKEMON_0} warped!\0"
 .align 2, 0
 
 .global gUnknown_80FC584
@@ -6471,7 +6471,7 @@ gUnknown_80FC5A8: @ 80FC5A8
 
 .global gUnknown_80FC5AC
 gUnknown_80FC5AC: @ 80FC5AC
-.string "{ARG_POKEMON_0} was too hungry to use it!\0"
+.string "{POKEMON_0} was too hungry to use it!\0"
 .align 2, 0
 
 .global gUnknown_80FC5CC
@@ -6481,7 +6481,7 @@ gUnknown_80FC5CC: @ 80FC5CC
 
 .global gUnknown_80FC5D0
 gUnknown_80FC5D0: @ 80FC5D0
-.string "Weather: {ARG_POKEMON_0}\0"
+.string "Weather: {POKEMON_0}\0"
 .align 2, 0
 
 .global gUnknown_80FC5E0
@@ -6506,7 +6506,7 @@ gUnknown_80FC5FC: @ 80FC5FC
 
 .global gUnknown_80FC600
 gUnknown_80FC600: @ 80FC600
-.string "Got {ARG_POKEMON_1}'s item!\0"
+.string "Got {POKEMON_1}'s item!\0"
 .align 2, 0
 
 .global gUnknown_80FC614
@@ -6516,7 +6516,7 @@ gUnknown_80FC614: @ 80FC614
 
 .global gUnknown_80FC618
 gUnknown_80FC618: @ 80FC618
-.string "{ARG_POKEMON_0} has an item already.\n"
+.string "{POKEMON_0} has an item already.\n"
 .string "It couldn't get another item.\0"
 .align 2, 0
 
@@ -6527,7 +6527,7 @@ gUnknown_80FC654: @ 80FC654
 
 .global gUnknown_80FC658
 gUnknown_80FC658: @ 80FC658
-.string "{ARG_POKEMON_1} doesn't have anything!\0"
+.string "{POKEMON_1} doesn't have anything!\0"
 .align 2, 0
 
 .global gUnknown_80FC678
@@ -6582,7 +6582,7 @@ gUnknown_80FC6FC: @ 80FC6FC
 
 .global gUnknown_80FC700
 gUnknown_80FC700: @ 80FC700
-.string "{ARG_POKEMON_0} is muzzled!\0"
+.string "{POKEMON_0} is muzzled!\0"
 .align 2, 0
 
 .global gUnknown_80FC710
@@ -6602,7 +6602,7 @@ gUnknown_80FC718: @ 80FC718
 
 .global gUnknown_80FC71C
 gUnknown_80FC71C: @ 80FC71C
-.string "{ARG_POKEMON_0} loosed {ARG_MOVE_ITEM_0}!\0"
+.string "{POKEMON_0} loosed {MOVE_ITEM_0}!\0"
 .align 2, 0
 
 .global gUnknown_80FC72C
@@ -6642,8 +6642,8 @@ gUnknown_80FC770: @ 80FC770
 
 .global gUnknown_80FC774
 gUnknown_80FC774: @ 80FC774
-.string "{ARG_POKEMON_0} traded items with\n"
-.string "{ARG_POKEMON_1}!\0"
+.string "{POKEMON_0} traded items with\n"
+.string "{POKEMON_1}!\0"
 .align 2, 0
 
 .global gUnknown_80FC790
@@ -6663,7 +6663,7 @@ gUnknown_80FC7AC: @ 80FC7AC
 
 .global gUnknown_80FC7B0
 gUnknown_80FC7B0: @ 80FC7B0
-.string "{ARG_POKEMON_0}'s move missed!\0"
+.string "{POKEMON_0}'s move missed!\0"
 .align 2, 0
 
 .global gUnknown_80FC7C8
@@ -6673,7 +6673,7 @@ gUnknown_80FC7C8: @ 80FC7C8
 
 .global gUnknown_80FC7CC
 gUnknown_80FC7CC: @ 80FC7CC
-.string "{ARG_POKEMON_0} and {ARG_POKEMON_1} shared\n"
+.string "{POKEMON_0} and {POKEMON_1} shared\n"
 .string "their HP!\0"
 .align 2, 0
 
@@ -6684,7 +6684,7 @@ gUnknown_80FC7EC: @ 80FC7EC
 
 .global gUnknown_80FC7F0
 gUnknown_80FC7F0: @ 80FC7F0
-.string "{ARG_POKEMON_0} copied the target's\n"
+.string "{POKEMON_0} copied the target's\n"
 .string "special ability!\0"
 .align 2, 0
 
@@ -6695,7 +6695,7 @@ gUnknown_80FC81C: @ 80FC81C
 
 .global gUnknown_80FC820
 gUnknown_80FC820: @ 80FC820
-.string "{ARG_POKEMON_0} couldn't copy the target's\n"
+.string "{POKEMON_0} couldn't copy the target's\n"
 .string "Wonder Guard!\0"
 .align 2, 0
 
@@ -6706,7 +6706,7 @@ gUnknown_80FC854: @ 80FC854
 
 .global gUnknown_80FC858
 gUnknown_80FC858: @ 80FC858
-.string "{ARG_POKEMON_0} swapped special abilities\n"
+.string "{POKEMON_0} swapped special abilities\n"
 .string "with the target!\0"
 .align 2, 0
 
@@ -6717,7 +6717,7 @@ gUnknown_80FC888: @ 80FC888
 
 .global gUnknown_80FC88C
 gUnknown_80FC88C: @ 80FC88C
-.string "{ARG_POKEMON_0} couldn't swap the target's\n"
+.string "{POKEMON_0} couldn't swap the target's\n"
 .string "Wonder Guard!\0"
 .align 2, 0
 
@@ -6795,7 +6795,7 @@ gUnknown_80FC9E8: @ 80FC9E8
 
 .global gUnknown_80FC9EC
 gUnknown_80FC9EC: @ 80FC9EC
-.string "{ARG_POKEMON_0} couldn't be knocked flying!\0"
+.string "{POKEMON_0} couldn't be knocked flying!\0"
 .align 2, 0
 
 .global gUnknown_80FCA10
@@ -6815,7 +6815,7 @@ gUnknown_80FCA3C: @ 80FCA3C
 
 .global gUnknown_80FCA40
 gUnknown_80FCA40: @ 80FCA40
-.string "{ARG_POKEMON_0}'s {ARG_MOVE_ITEM_0} didn't\n"
+.string "{POKEMON_0}'s {MOVE_ITEM_0} didn't\n"
 .string "go down!\0"
 .align 2, 0
 
@@ -6831,7 +6831,7 @@ gUnknown_80FCA64: @ 80FCA64
 
 .global gUnknown_80FCA68
 gUnknown_80FCA68: @ 80FCA68
-.string "{ARG_POKEMON_1} is sturdy!\n"
+.string "{POKEMON_1} is sturdy!\n"
 .string "It withstood the move!\0"
 .align 2, 0
 
@@ -6842,7 +6842,7 @@ gUnknown_80FCA90: @ 80FCA90
 
 .global gUnknown_80FCA94
 gUnknown_80FCA94: @ 80FCA94
-.string "{ARG_POKEMON_0} is anchored!\n"
+.string "{POKEMON_0} is anchored!\n"
 .string "It won't switch places!\0"
 .align 2, 0
 
@@ -6853,7 +6853,7 @@ gUnknown_80FCAC0: @ 80FCAC0
 
 .global gUnknown_80FCAC4
 gUnknown_80FCAC4: @ 80FCAC4
-.string "{ARG_POKEMON_0} is anchored!\n"
+.string "{POKEMON_0} is anchored!\n"
 .string "It won't warp!\0"
 .align 2, 0
 
@@ -6874,7 +6874,7 @@ gUnknown_80FCB14: @ 80FCB14
 
 .global gUnknown_80FCB18
 gUnknown_80FCB18: @ 80FCB18
-.string "{ARG_POKEMON_0} is anchored!\n"
+.string "{POKEMON_0} is anchored!\n"
 .string "It can't be thrown!\0"
 .align 2, 0
 
@@ -6885,7 +6885,7 @@ gUnknown_80FCB40: @ 80FCB40
 
 .global gUnknown_80FCB44
 gUnknown_80FCB44: @ 80FCB44
-.string "{ARG_POKEMON_0} couldn't be thrown for\n"
+.string "{POKEMON_0} couldn't be thrown for\n"
 .string "some reason!\0"
 .align 2, 0
 
@@ -6896,7 +6896,7 @@ gUnknown_80FCB70: @ 80FCB70
 
 .global gUnknown_80FCB74
 gUnknown_80FCB74: @ 80FCB74
-.string "{ARG_POKEMON_0} is anchored!\n"
+.string "{POKEMON_0} is anchored!\n"
 .string "It can't leap!\0"
 .align 2, 0
 
@@ -6907,7 +6907,7 @@ gUnknown_80FCB98: @ 80FCB98
 
 .global gUnknown_80FCB9C
 gUnknown_80FCB9C: @ 80FCB9C
-.string "{ARG_POKEMON_0} is anchored!\n"
+.string "{POKEMON_0} is anchored!\n"
 .string "It can't be knocked flying!\0"
 .align 2, 0
 
@@ -6918,7 +6918,7 @@ gUnknown_80FCBCC: @ 80FCBCC
 
 .global gUnknown_80FCBD0
 gUnknown_80FCBD0: @ 80FCBD0
-.string "{ARG_POKEMON_0} is limber!\n"
+.string "{POKEMON_0} is limber!\n"
 .string "It can't be paralyzed!\0"
 .align 2, 0
 
@@ -6929,7 +6929,7 @@ gUnknown_80FCBF8: @ 80FCBF8
 
 .global gUnknown_80FCBFC
 gUnknown_80FCBFC: @ 80FCBFC
-.string "But {ARG_POKEMON_0} didn't cringe!\0"
+.string "But {POKEMON_0} didn't cringe!\0"
 .align 2, 0
 
 .global gUnknown_80FCC18
@@ -6939,7 +6939,7 @@ gUnknown_80FCC18: @ 80FCC18
 
 .global gUnknown_80FCC1C
 gUnknown_80FCC1C: @ 80FCC1C
-.string "{ARG_POKEMON_0} is oblivious!\n"
+.string "{POKEMON_0} is oblivious!\n"
 .string "It doesn't get infatuated!\0"
 .align 2, 0
 
@@ -6950,7 +6950,7 @@ gUnknown_80FCC4C: @ 80FCC4C
 
 .global gUnknown_80FCC50
 gUnknown_80FCC50: @ 80FCC50
-.string "{ARG_POKEMON_0} traced the target's\n"
+.string "{POKEMON_0} traced the target's\n"
 .string "special ability!\0"
 .align 2, 0
 
@@ -6961,8 +6961,8 @@ gUnknown_80FCC7C: @ 80FCC7C
 
 .global gUnknown_80FCC80
 gUnknown_80FCC80: @ 80FCC80
-.string "{ARG_POKEMON_0}'s Color Change made it\n"
-.string "the {ARG_MOVE_ITEM_0} type!\0"
+.string "{POKEMON_0}'s Color Change made it\n"
+.string "the {MOVE_ITEM_0} type!\0"
 .align 2, 0
 
 .global gUnknown_80FCCAC
@@ -7008,7 +7008,7 @@ gUnknown_80FCD28: @ 80FCD28
 
 .global gUnknown_80FCD2C
 gUnknown_80FCD2C: @ 80FCD2C
-.string "{ARG_POKEMON_0}'s Insomnia prevents\n"
+.string "{POKEMON_0}'s Insomnia prevents\n"
 .string "drowsiness!\0"
 .align 2, 0
 
@@ -7024,7 +7024,7 @@ gUnknown_80FCD58: @ 80FCD58
 
 .global gUnknown_80FCD5C
 gUnknown_80FCD5C: @ 80FCD5C
-.string "{ARG_POKEMON_0}'s Vital Spirit prevents\n"
+.string "{POKEMON_0}'s Vital Spirit prevents\n"
 .string "drowsiness!\0"
 .align 2, 0
 
@@ -7035,7 +7035,7 @@ gUnknown_80FCD88: @ 80FCD88
 
 .global gUnknown_80FCD8C
 gUnknown_80FCD8C: @ 80FCD8C
-.string "{ARG_POKEMON_0}'s Own Tempo prevents\n"
+.string "{POKEMON_0}'s Own Tempo prevents\n"
 .string "confusion!\0"
 .align 2, 0
 
@@ -7046,7 +7046,7 @@ gUnknown_80FCDB4: @ 80FCDB4
 
 .global gUnknown_80FCDB8
 gUnknown_80FCDB8: @ 80FCDB8
-.string "{ARG_POKEMON_0}'s Magma Armor prevents\n"
+.string "{POKEMON_0}'s Magma Armor prevents\n"
 .string "freezing!\0"
 .align 2, 0
 
@@ -7057,7 +7057,7 @@ gUnknown_80FCDE0: @ 80FCDE0
 
 .global gUnknown_80FCDE4
 gUnknown_80FCDE4: @ 80FCDE4
-.string "{ARG_POKEMON_0} is an unfreezable type!\0"
+.string "{POKEMON_0} is an unfreezable type!\0"
 .align 2, 0
 
 .global gUnknown_80FCE00
@@ -7067,7 +7067,7 @@ gUnknown_80FCE00: @ 80FCE00
 
 .global gUnknown_80FCE04
 gUnknown_80FCE04: @ 80FCE04
-.string "The magma's heat prevents {ARG_POKEMON_0}\n"
+.string "The magma's heat prevents {POKEMON_0}\n"
 .string "from freezing!\0"
 .align 2, 0
 
@@ -7078,7 +7078,7 @@ gUnknown_80FCE34: @ 80FCE34
 
 .global gUnknown_80FCE38
 gUnknown_80FCE38: @ 80FCE38
-.string "{ARG_POKEMON_0}'s Water Veil prevents burns!\0"
+.string "{POKEMON_0}'s Water Veil prevents burns!\0"
 .align 2, 0
 
 .global gUnknown_80FCE5C
@@ -7088,7 +7088,7 @@ gUnknown_80FCE5C: @ 80FCE5C
 
 .global gUnknown_80FCE60
 gUnknown_80FCE60: @ 80FCE60
-.string "{ARG_POKEMON_0}'s type doesn't get burns!\0"
+.string "{POKEMON_0}'s type doesn't get burns!\0"
 .align 2, 0
 
 .global gUnknown_80FCE84
@@ -7098,7 +7098,7 @@ gUnknown_80FCE84: @ 80FCE84
 
 .global gUnknown_80FCE88
 gUnknown_80FCE88: @ 80FCE88
-.string "{ARG_POKEMON_0}'s Immunity prevents\n"
+.string "{POKEMON_0}'s Immunity prevents\n"
 .string "poisoning!\0"
 .align 2, 0
 
@@ -7109,7 +7109,7 @@ gUnknown_80FCEB0: @ 80FCEB0
 
 .global gUnknown_80FCEB4
 gUnknown_80FCEB4: @ 80FCEB4
-.string "{ARG_POKEMON_0}'s type doesn't get poisoned!\0"
+.string "{POKEMON_0}'s type doesn't get poisoned!\0"
 .align 2, 0
 
 .global gUnknown_80FCEDC
@@ -7119,7 +7119,7 @@ gUnknown_80FCEDC: @ 80FCEDC
 
 .global gUnknown_80FCEE0
 gUnknown_80FCEE0: @ 80FCEE0
-.string "It had no effect on {ARG_POKEMON_0}!\0"
+.string "It had no effect on {POKEMON_0}!\0"
 .align 2, 0
 
 .global gUnknown_80FCEFC
@@ -7129,7 +7129,7 @@ gUnknown_80FCEFC: @ 80FCEFC
 
 .global gUnknown_80FCF00
 gUnknown_80FCF00: @ 80FCF00
-.string "Yes! {ARG_POKEMON_0} leveled up!\0"
+.string "Yes! {POKEMON_0} leveled up!\0"
 .align 2, 0
 
 .global gUnknown_80FCF18
@@ -7139,7 +7139,7 @@ gUnknown_80FCF18: @ 80FCF18
 
 .global gUnknown_80FCF1C
 gUnknown_80FCF1C: @ 80FCF1C
-.string "{ARG_POKEMON_0} uttered its sleep talk!\0"
+.string "{POKEMON_0} uttered its sleep talk!\0"
 .align 2, 0
 
 .global gUnknown_80FCF38
@@ -7149,7 +7149,7 @@ gUnknown_80FCF38: @ 80FCF38
 
 .global gUnknown_80FCF3C
 gUnknown_80FCF3C: @ 80FCF3C
-.string "{ARG_POKEMON_0} loosed a snore!\0"
+.string "{POKEMON_0} loosed a snore!\0"
 .align 2, 0
 
 .global gUnknown_80FCF50
@@ -7194,7 +7194,7 @@ gUnknown_80FCFA4: @ 80FCFA4
 
 .global gUnknown_80FCFA8
 gUnknown_80FCFA8: @ 80FCFA8
-.string "{ARG_MOVE_ITEM_0} was tormented!\0"
+.string "{MOVE_ITEM_0} was tormented!\0"
 .align 2, 0
 
 .global gUnknown_80FCFBC
@@ -7313,7 +7313,7 @@ gUnknown_80FD14C: @ 80FD14C
 
 .global gUnknown_80FD150
 gUnknown_80FD150: @ 80FD150
-.string "{ARG_POKEMON_1}'s item was swatted down!\0"
+.string "{POKEMON_1}'s item was swatted down!\0"
 .align 2, 0
 
 .global gUnknown_80FD170
@@ -7363,7 +7363,7 @@ gUnknown_80FD1EC: @ 80FD1EC
 
 .global gUnknown_80FD1F0
 gUnknown_80FD1F0: @ 80FD1F0
-.string "{ARG_POKEMON_1} can throw a long way!\0"
+.string "{POKEMON_1} can throw a long way!\0"
 .align 2, 0
 
 .global gUnknown_80FD20C
@@ -7373,7 +7373,7 @@ gUnknown_80FD20C: @ 80FD20C
 
 .global gUnknown_80FD210
 gUnknown_80FD210: @ 80FD210
-.string "{ARG_POKEMON_1} can throw far already!\0"
+.string "{POKEMON_1} can throw far already!\0"
 .align 2, 0
 
 .global gUnknown_80FD22C
@@ -7383,7 +7383,7 @@ gUnknown_80FD22C: @ 80FD22C
 
 .global gUnknown_80FD230
 gUnknown_80FD230: @ 80FD230
-.string "{ARG_POKEMON_1}'s throws can pierce things!\0"
+.string "{POKEMON_1}'s throws can pierce things!\0"
 .align 2, 0
 
 .global gUnknown_80FD254
@@ -7393,7 +7393,7 @@ gUnknown_80FD254: @ 80FD254
 
 .global gUnknown_80FD258
 gUnknown_80FD258: @ 80FD258
-.string "{ARG_POKEMON_1}'s throws can pierce already!\0"
+.string "{POKEMON_1}'s throws can pierce already!\0"
 .align 2, 0
 
 .global gUnknown_80FD27C
@@ -7403,7 +7403,7 @@ gUnknown_80FD27C: @ 80FD27C
 
 .global gUnknown_80FD280
 gUnknown_80FD280: @ 80FD280
-.string "{ARG_POKEMON_1} bears a grudge!\0"
+.string "{POKEMON_1} bears a grudge!\0"
 .align 2, 0
 
 .global gUnknown_80FD294
@@ -7413,7 +7413,7 @@ gUnknown_80FD294: @ 80FD294
 
 .global gUnknown_80FD298
 gUnknown_80FD298: @ 80FD298
-.string "{ARG_POKEMON_1} already bears a grudge!\0"
+.string "{POKEMON_1} already bears a grudge!\0"
 .align 2, 0
 
 .global gUnknown_80FD2B4
@@ -7433,7 +7433,7 @@ gUnknown_80FD2CC: @ 80FD2CC
 
 .global gUnknown_80FD2D0
 gUnknown_80FD2D0: @ 80FD2D0
-.string "Assist: {ARG_MOVE_ITEM_0}\0"
+.string "Assist: {MOVE_ITEM_0}\0"
 .align 2, 0
 
 .global gUnknown_80FD2DC
@@ -7463,7 +7463,7 @@ gUnknown_80FD320: @ 80FD320
 
 .global gUnknown_80FD324
 gUnknown_80FD324: @ 80FD324
-.string "The last move used by {ARG_POKEMON_1} lost\n"
+.string "The last move used by {POKEMON_1} lost\n"
 .string "all its PP!\0"
 .align 2, 0
 
@@ -7474,7 +7474,7 @@ gUnknown_80FD350: @ 80FD350
 
 .global gUnknown_80FD354
 gUnknown_80FD354: @ 80FD354
-.string "Nothing happened to {ARG_POKEMON_1}.\0"
+.string "Nothing happened to {POKEMON_1}.\0"
 .align 2, 0
 
 .global gUnknown_80FD370
@@ -7549,7 +7549,7 @@ gUnknown_80FD434: @ 80FD434
 
 .global gUnknown_80FD438
 gUnknown_80FD438: @ 80FD438
-.string "{ARG_POKEMON_0} can't transform!\0"
+.string "{POKEMON_0} can't transform!\0"
 .align 2, 0
 
 .global gUnknown_80FD450
@@ -7564,7 +7564,7 @@ gUnknown_80FD454: @ 80FD454
 
 .global gUnknown_80FD458
 gUnknown_80FD458: @ 80FD458
-.string "{ARG_POKEMON_1} was revived!\0"
+.string "{POKEMON_1} was revived!\0"
 .align 2, 0
 
 .global gUnknown_80FD46C
@@ -7574,7 +7574,7 @@ gUnknown_80FD46C: @ 80FD46C
 
 .global gUnknown_80FD470
 gUnknown_80FD470: @ 80FD470
-.string "{ARG_POKEMON_0} possessed {ARG_POKEMON_1}!\0"
+.string "{POKEMON_0} possessed {POKEMON_1}!\0"
 .align 2, 0
 
 .global gUnknown_80FD484
@@ -7594,7 +7594,7 @@ gUnknown_80FD4B0: @ 80FD4B0
 
 .global gUnknown_80FD4B4
 gUnknown_80FD4B4: @ 80FD4B4
-.string "{ARG_POKEMON_0} escaped!\0"
+.string "{POKEMON_0} escaped!\0"
 .align 2, 0
 
 .global gUnknown_80FD4C4
@@ -7604,7 +7604,7 @@ gUnknown_80FD4C4: @ 80FD4C4
 
 .global gUnknown_80FD4C8
 gUnknown_80FD4C8: @ 80FD4C8
-.string "{ARG_POKEMON_0} can't escape!\0"
+.string "{POKEMON_0} can't escape!\0"
 .align 2, 0
 
 .global gUnknown_80FD4DC
@@ -7614,7 +7614,7 @@ gUnknown_80FD4DC: @ 80FD4DC
 
 .global gUnknown_80FD4E0
 gUnknown_80FD4E0: @ 80FD4E0
-.string "{ARG_POKEMON_0} was protected by its Band!\0"
+.string "{POKEMON_0} was protected by its Band!\0"
 .align 2, 0
 
 .global gUnknown_80FD500
@@ -7624,7 +7624,7 @@ gUnknown_80FD500: @ 80FD500
 
 .global gUnknown_80FD504
 gUnknown_80FD504: @ 80FD504
-.string "{ARG_POKEMON_0} was protected by its Scarf!\0"
+.string "{POKEMON_0} was protected by its Scarf!\0"
 .align 2, 0
 
 .global gUnknown_80FD524
@@ -7634,7 +7634,7 @@ gUnknown_80FD524: @ 80FD524
 
 .global gUnknown_80FD528
 gUnknown_80FD528: @ 80FD528
-.string "{ARG_POKEMON_0} was protected by its Scope!\0"
+.string "{POKEMON_0} was protected by its Scope!\0"
 .align 2, 0
 
 .global gUnknown_80FD548
@@ -7650,7 +7650,7 @@ gUnknown_80FD550: @ 80FD550
 
 .global gUnknown_80FD554
 gUnknown_80FD554: @ 80FD554
-.string "{ARG_POKEMON_1} was protected by its Specs!\0"
+.string "{POKEMON_1} was protected by its Specs!\0"
 .align 2, 0
 
 .global gUnknown_80FD574
@@ -7921,12 +7921,12 @@ gUnknown_80FD98C: @ 80FD98C
 
 .global gUnknown_80FD9A0
 gUnknown_80FD9A0: @ 80FD9A0
-.string "Stepped on a {ARG_POKEMON_0}!\0"
+.string "Stepped on a {POKEMON_0}!\0"
 .align 2, 0
 
 .global gUnknown_80FD9B4
 gUnknown_80FD9B4: @ 80FD9B4
-.string "{ARG_POKEMON_0}!\0"
+.string "{POKEMON_0}!\0"
 .align 2, 0
 
 .global gUnknown_80FD9BC
@@ -7947,17 +7947,17 @@ gUnknown_80FDA0C: @ 80FDA0C
 
 .global gUnknown_80FDA28
 gUnknown_80FDA28: @ 80FDA28
-.string "Mud splashed up from the {ARG_POKEMON_0}!\0"
+.string "Mud splashed up from the {POKEMON_0}!\0"
 .align 2, 0
 
 .global gUnknown_80FDA48
 gUnknown_80FDA48: @ 80FDA48
-.string "There was a {ARG_POKEMON_0} underfoot!\0"
+.string "There was a {POKEMON_0} underfoot!\0"
 .align 2, 0
 
 .global gUnknown_80FDA64
 gUnknown_80FDA64: @ 80FDA64
-.string "The move {ARG_MOVE_ITEM_0} lost its PP!\0"
+.string "The move {MOVE_ITEM_0} lost its PP!\0"
 .align 2, 0
 
 .global gUnknown_80FDA80
@@ -7997,7 +7997,7 @@ gUnknown_80FDAE4: @ 80FDAE4
 
 .global gUnknown_80FDAE8
 gUnknown_80FDAE8: @ 80FDAE8
-.string "The move {ARG_MOVE_ITEM_0} was sealed!\0"
+.string "The move {MOVE_ITEM_0} was sealed!\0"
 .align 2, 0
 
 .global gUnknown_80FDB04
@@ -8048,7 +8048,7 @@ gUnknown_80FDBA0: @ 80FDBA0
 
 .global gUnknown_80FDBA4
 gUnknown_80FDBA4: @ 80FDBA4
-.string "{ARG_POKEMON_0} caught the {ARG_MOVE_ITEM_0}!\0"
+.string "{POKEMON_0} caught the {MOVE_ITEM_0}!\0"
 .align 2, 0
 
 .global gUnknown_80FDBB8
@@ -8058,7 +8058,7 @@ gUnknown_80FDBB8: @ 80FDBB8
 
 .global gUnknown_80FDBBC
 gUnknown_80FDBBC: @ 80FDBBC
-.string "{ARG_POKEMON_0} regained PP.\0"
+.string "{POKEMON_0} regained PP.\0"
 .align 2, 0
 
 .global gUnknown_80FDBD0
@@ -8068,7 +8068,7 @@ gUnknown_80FDBD0: @ 80FDBD0
 
 .global gUnknown_80FDBD4
 gUnknown_80FDBD4: @ 80FDBD4
-.string "{ARG_POKEMON_0} has full PP already!\0"
+.string "{POKEMON_0} has full PP already!\0"
 .align 2, 0
 
 .global gUnknown_80FDBF0
@@ -8078,7 +8078,7 @@ gUnknown_80FDBF0: @ 80FDBF0
 
 .global gUnknown_80FDBF4
 gUnknown_80FDBF4: @ 80FDBF4
-.string "The {ARG_MOVE_ITEM_0} became sticky and\n"
+.string "The {MOVE_ITEM_0} became sticky and\n"
 .string "unusable!\0"
 .align 2, 0
 
@@ -8130,8 +8130,8 @@ gUnknown_80FDCA4: @ 80FDCA4
 
 .global gUnknown_80FDCA8
 gUnknown_80FDCA8: @ 80FDCA8
-.string "{ARG_POKEMON_0} converted to\n"
-.string "the {ARG_MOVE_ITEM_0} type!\0"
+.string "{POKEMON_0} converted to\n"
+.string "the {MOVE_ITEM_0} type!\0"
 .align 2, 0
 
 .global gUnknown_80FDCC8
@@ -8141,7 +8141,7 @@ gUnknown_80FDCC8: @ 80FDCC8
 
 .global gUnknown_80FDCCC
 gUnknown_80FDCCC: @ 80FDCCC
-.string "{ARG_POKEMON_0} mimicked its foe!\0"
+.string "{POKEMON_0} mimicked its foe!\0"
 .align 2, 0
 
 .global gUnknown_80FDCE4
@@ -8151,7 +8151,7 @@ gUnknown_80FDCE4: @ 80FDCE4
 
 .global gUnknown_80FDCE8
 gUnknown_80FDCE8: @ 80FDCE8
-.string "{ARG_POKEMON_0}'s Mimic failed!\0"
+.string "{POKEMON_0}'s Mimic failed!\0"
 .align 2, 0
 
 .global gUnknown_80FDD00
@@ -8227,7 +8227,7 @@ gUnknown_80FDDF0: @ 80FDDF0
 
 .global gUnknown_80FDDF4
 gUnknown_80FDDF4: @ 80FDDF4
-.string "There is nothing at {ARG_POKEMON_0}'s feet.\0"
+.string "There is nothing at {POKEMON_0}'s feet.\0"
 .align 2, 0
 
 .global gUnknown_80FDE18
@@ -8260,7 +8260,7 @@ gUnknown_80FDEB8: @ 80FDEB8
 .global gUnknown_80FDEBC
 gUnknown_80FDEBC: @ 80FDEBC
 .string "Will the linked moves be forgotten,\n"
-.string "including the selected {ARG_MOVE_ITEM_0}?\0"
+.string "including the selected {MOVE_ITEM_0}?\0"
 .align 2, 0
 
 .global gUnknown_80FDF00
@@ -8281,7 +8281,7 @@ gUnknown_80FDF40: @ 80FDF40
 
 .global gUnknown_80FDF44
 gUnknown_80FDF44: @ 80FDF44
-.string "The move {ARG_MOVE_ITEM_0} will be\n"
+.string "The move {MOVE_ITEM_0} will be\n"
 .string "forgotten.\n"
 .string "Is that OK?\0"
 .align 2, 0
@@ -8316,7 +8316,7 @@ gUnknown_80FDFE8: @ 80FDFE8
 
 .global gUnknown_80FDFEC
 gUnknown_80FDFEC: @ 80FDFEC
-.string "{ARG_POKEMON_0} can't talk just now.\0"
+.string "{POKEMON_0} can't talk just now.\0"
 .align 2, 0
 
 .global gUnknown_80FE008
@@ -8347,7 +8347,7 @@ gUnknown_80FE060: @ 80FE060
 .global gUnknown_80FE064
 gUnknown_80FE064: @ 80FE064
 .string "There is no room on your team to accept\n"
-.string "the guest rescue team's {ARG_POKEMON_0}.\0"
+.string "the guest rescue team's {POKEMON_0}.\0"
 .align 2, 0
 
 .global gUnknown_80FE0AC
@@ -8358,7 +8358,7 @@ gUnknown_80FE0AC: @ 80FE0AC
 .global gUnknown_80FE0B0
 gUnknown_80FE0B0: @ 80FE0B0
 .string "There is no room on your team to fit\n"
-.string "the {ARG_POKEMON_0} that needs your help.\0"
+.string "the {POKEMON_0} that needs your help.\0"
 .align 2, 0
 
 .global gUnknown_80FE0F4
@@ -8373,7 +8373,7 @@ gUnknown_80FE0F8: @ 80FE0F8
 
 .global gUnknown_80FE0FC
 gUnknown_80FE0FC: @ 80FE0FC
-.string "The guest rescue team's {ARG_POKEMON_0}\n"
+.string "The guest rescue team's {POKEMON_0}\n"
 .string "joined your rescue team!\0"
 .align 2, 0
 
@@ -8384,7 +8384,7 @@ gUnknown_80FE134: @ 80FE134
 
 .global gUnknown_80FE138
 gUnknown_80FE138: @ 80FE138
-.string "Your client, {ARG_POKEMON_0}, joined\n"
+.string "Your client, {POKEMON_0}, joined\n"
 .string "your rescue team!\0"
 .align 2, 0
 
@@ -8395,7 +8395,7 @@ gUnknown_80FE168: @ 80FE168
 
 .global gUnknown_80FE16C
 gUnknown_80FE16C: @ 80FE16C
-.string "The Friend Area {ARG_MOVE_ITEM_0} is\n"
+.string "The Friend Area {MOVE_ITEM_0} is\n"
 .string "full.\n"
 .string "A friend must be released.\0"
 .align 2, 0
@@ -8452,7 +8452,7 @@ gUnknown_80FE2D0: @ 80FE2D0
 
 .global gUnknown_80FE2D4
 gUnknown_80FE2D4: @ 80FE2D4
-.string "{ARG_POKEMON_0} evolved into {ARG_POKEMON_1}!\0"
+.string "{POKEMON_0} evolved into {POKEMON_1}!\0"
 .align 2, 0
 
 .global gUnknown_80FE2EC
@@ -8472,7 +8472,7 @@ gPtrItsaMonsterHouseMessage: @ 80FE308
 
 .global gUnknown_80FE30C
 gUnknown_80FE30C: @ 80FE30C
-.string "It became the move {ARG_MOVE_ITEM_0}'s type!\0"
+.string "It became the move {MOVE_ITEM_0}'s type!\0"
 .align 2, 0
 
 .global gUnknown_80FE330
@@ -8493,7 +8493,7 @@ gUnknown_80FE36C: @ 80FE36C
 
 .global gUnknown_80FE370
 gUnknown_80FE370: @ 80FE370
-.string "The move {ARG_MOVE_ITEM_0} was sketched!\0"
+.string "The move {MOVE_ITEM_0} was sketched!\0"
 .align 2, 0
 
 .global gUnknown_80FE38C
@@ -8514,7 +8514,7 @@ gUnknown_80FE3BC: @ 80FE3BC
 
 .global gUnknown_80FE3C0
 gUnknown_80FE3C0: @ 80FE3C0
-.string "{ARG_MOVE_ITEM_0} is all sticky!\n"
+.string "{MOVE_ITEM_0} is all sticky!\n"
 .string "It doesn't work!\0"
 .align 2, 0
 
@@ -8525,8 +8525,8 @@ gItemStickyDoesntWorkText: @ 80FE3E8
 
 .global gUnknown_80FE3EC
 gUnknown_80FE3EC: @ 80FE3EC
-.string "{ARG_POKEMON_0} learned the move\n"
-.string "{ARG_MOVE_ITEM_0}.\0"
+.string "{POKEMON_0} learned the move\n"
+.string "{MOVE_ITEM_0}.\0"
 .align 2, 0
 .4byte gUnknown_80FE3EC
 
@@ -8562,7 +8562,7 @@ gUnknown_80FE458: @ 80FE458
 
 .global gUnknown_80FE45C
 gUnknown_80FE45C: @ 80FE45C
-.string "{ARG_POKEMON_0} had second thoughts!\0"
+.string "{POKEMON_0} had second thoughts!\0"
 .align 2, 0
 
 .global gUnknown_80FE478
@@ -8614,7 +8614,7 @@ gUnknown_80FE520: @ 80FE520
 .global gUnknown_80FE524
 gUnknown_80FE524: @ 80FE524
 .string "The merchandise you have chosen\n"
-.string "costs {ARG_VALUE_0} {POKE}.\n"
+.string "costs {VALUE_0} {POKE}.\n"
 .string "Is that acceptable?\0"
 .align 2, 0
 
@@ -8626,7 +8626,7 @@ gUnknown_80FE568: @ 80FE568
 .global gUnknown_80FE56C
 gUnknown_80FE56C: @ 80FE56C
 .string "For the merchandise you have left me,\n"
-.string "I shall pay {ARG_VALUE_0} {POKE}.\n"
+.string "I shall pay {VALUE_0} {POKE}.\n"
 .string "Is that acceptable?\0"
 .align 2, 0
 
@@ -8679,7 +8679,7 @@ gUnknown_80FE674: @ 80FE674
 
 .global gUnknown_80FE678
 gUnknown_80FE678: @ 80FE678
-.string "{ARG_POKEMON_0} was sent flying!\0"
+.string "{POKEMON_0} was sent flying!\0"
 .align 2, 0
 
 .global gUnknown_80FE690
@@ -8699,7 +8699,7 @@ gUnknown_80FE6B4: @ 80FE6B4
 
 .global gUnknown_80FE6B8
 gUnknown_80FE6B8: @ 80FE6B8
-.string "{ARG_POKEMON_0} can't throw items!\0"
+.string "{POKEMON_0} can't throw items!\0"
 .align 2, 0
 
 .global gUnknown_80FE6D4
@@ -8933,7 +8933,7 @@ gFieldItemMenuGroundTextPtr: @ 80FE92C
 
 .global ItemText_80FE930
 ItemText_80FE930: @ 80FE930
-.string "{ARG_POKEMON_0}'s item\0"
+.string "{POKEMON_0}'s item\0"
 .align 2,0
 
 .global gUnknown_80FE940
@@ -8959,7 +8959,7 @@ gUnknown_80FE954: @ 80FE954
 
 .global ItemText_80FE958
 ItemText_80FE958: @ 80FE958
-.string "{ARG_MOVE_ITEM_0}\0"
+.string "{MOVE_ITEM_0}\0"
 .align 2,0
 
 .global gUnknown_80FE95C
@@ -8976,7 +8976,7 @@ gUnknown_80FE964: @ 80FE964
 
 .global PokeMove_80FE968
 PokeMove_80FE968: @ 80FE968
-.string "{ARG_POKEMON_0}'s moves\0"
+.string "{POKEMON_0}'s moves\0"
 .align 2,0
 
 .global gUnknown_80FE978
@@ -9080,7 +9080,7 @@ gUnknown_80FEA28: @ 80FEA28
 
 .global gUnknown_80FEA2C
 gUnknown_80FEA2C: @ 80FEA2C
-.string "{COLOR_1 RED}Recruitment search{END_COLOR_TEXT_1}\0"
+.string "{COLOR RED}Recruitment search{RESET}\0"
 .align 2, 0
 
 .global gUnknown_80FEA44
@@ -9128,9 +9128,9 @@ gUnknown_80FEA8C: @ 80FEA8C
 
 .global gUnknown_80FEA90
 gUnknown_80FEA90: @ 80FEA90
-.string "{ARG_POKEMON_0}'s IQ rose!\n"
+.string "{POKEMON_0}'s IQ rose!\n"
 .string "It learned the IQ skill\n"
-.string "“{ARG_MOVE_ITEM_0}”!\0"
+.string "“{MOVE_ITEM_0}”!\0"
 .align 2, 0
 
 .global gUnknown_80FEAC4
@@ -9150,7 +9150,7 @@ gUnknown_80FEAE8: @ 80FEAE8
 
 .global gUnknown_80FEAEC
 gUnknown_80FEAEC: @ 80FEAEC
-.string "{ARG_POKEMON_1} became the {ARG_MOVE_ITEM_0} type.\0"
+.string "{POKEMON_1} became the {MOVE_ITEM_0} type.\0"
 .align 2, 0
 
 .global gUnknown_80FEB08
@@ -9160,7 +9160,7 @@ gUnknown_80FEB08: @ 80FEB08
 
 .global gUnknown_80FEB0C
 gUnknown_80FEB0C: @ 80FEB0C
-.string "{ARG_POKEMON_1} took Perish Song's effect!\0"
+.string "{POKEMON_1} took Perish Song's effect!\0"
 .align 2, 0
 
 .global gUnknown_80FEB30
@@ -9240,7 +9240,7 @@ gUnknown_80FEC28: @ 80FEC28
 
 .global gUnknown_80FEC2C
 gUnknown_80FEC2C: @ 80FEC2C
-.string "Rescue chances left: {ARG_VALUE_0}\0"
+.string "Rescue chances left: {VALUE_0}\0"
 .align 2, 0
 
 .global gUnknown_80FEC48
@@ -9270,7 +9270,7 @@ gUnknown_80FECA0: @ 80FECA0
 
 .global gUnknown_80FECA4
 gUnknown_80FECA4: @ 80FECA4
-.string "{ARG_POKEMON_0} waggled its finger!\0"
+.string "{POKEMON_0} waggled its finger!\0"
 .align 2, 0
 
 .global gUnknown_80FECBC
@@ -9280,7 +9280,7 @@ gUnknown_80FECBC: @ 80FECBC
 
 .global gUnknown_80FECC0
 gUnknown_80FECC0: @ 80FECC0
-.string "{ARG_POKEMON_0} drew out nature's power!\0"
+.string "{POKEMON_0} drew out nature's power!\0"
 .align 2, 0
 
 .global gUnknown_80FECE0
@@ -9325,13 +9325,13 @@ gUnknown_80FED30: @ 80FED30
 
 .global gUnknown_80FED34
 gUnknown_80FED34: @ 80FED34
-.string "{ARG_POKEMON_0} disappeared in the blast!\0"
+.string "{POKEMON_0} disappeared in the blast!\0"
 .align 2, 0
 .4byte gUnknown_80FED34
 
 .global gUnknown_80FED58
 gUnknown_80FED58: @ 80FED58
-.string "{ARG_POKEMON_0} blinked.\0"
+.string "{POKEMON_0} blinked.\0"
 .align 2, 0
 
 .global gUnknown_80FED68
@@ -9512,7 +9512,7 @@ gUnknown_80FEF98: @ 80FEF98
 .global gUnknown_80FEF9C
 gUnknown_80FEF9C: @ 80FEF9C
 .string "A horrid stench billowed out!\n"
-.string "{ARG_POKEMON_0} became terrified!\0"
+.string "{POKEMON_0} became terrified!\0"
 .align 2, 0
 
 .global gUnknown_80FEFD0
@@ -9532,7 +9532,7 @@ gUnknown_80FEFF4: @ 80FEFF4
 
 .global gUnknown_80FEFF8
 gUnknown_80FEFF8: @ 80FEFF8
-.string "{ARG_POKEMON_0}'s Synchronize took effect!\0"
+.string "{POKEMON_0}'s Synchronize took effect!\0"
 .align 2, 0
 
 .global gUnknown_80FF01C
@@ -9774,8 +9774,8 @@ gUnknown_80FF6F8: @ 80FF6F8
 
 .global gUnknown_80FF6FC
 gUnknown_80FF6FC: @ 80FF6FC
-.string "{ARG_MOVE_ITEM_0} was added to\n"
-.string "{ARG_POKEMON_0}'s list of usable tactics.\0"
+.string "{MOVE_ITEM_0} was added to\n"
+.string "{POKEMON_0}'s list of usable tactics.\0"
 .align 2, 0
 
 .global gUnknown_80FF730
@@ -9996,7 +9996,7 @@ gUnknown_8100208: @ 8100208
 
 .global gMagnitudeMessage
 gMagnitudeMessage: @ 810020C
-.string "It's Magnitude {ARG_VALUE_0}!\0"
+.string "It's Magnitude {VALUE_0}!\0"
 .align 2, 0
 
 .global gPtrMagnitudeMessage
@@ -10014,7 +10014,7 @@ gPtrSleepingTargetOnlyMessage: @ 810024C
 
 .global gFeralFoundItemMessage
 gFeralFoundItemMessage: @ 8100250
-.string "{ARG_POKEMON_0} found an item somewhere.\0"
+.string "{POKEMON_0} found an item somewhere.\0"
 .align 2, 0
 
 .global gPtrFeralFoundItemMessage
@@ -10032,7 +10032,7 @@ gPtrSelfHealPreventedHungerMessage: @ 8100298
 
 .global gUnknown_810029C
 gUnknown_810029C: @ 810029C
-.string "Rescue challenges left: {ARG_VALUE_0}\0"
+.string "Rescue challenges left: {VALUE_0}\0"
 .align 2, 0
 
 .global gUnknown_81002B8
@@ -10059,8 +10059,8 @@ gPtrLinkedMovesComeApartMessage: @ 81002FC
 
 .global gLinkMoveOneUseWarningMessage
 gLinkMoveOneUseWarningMessage: @ 8100300
-.string "{COLOR_2 YELLOW}The linked moves are almost out of PP!{END_COLOR_TEXT_2}\n"
-.string "{COLOR_2 YELLOW}Use them again and they will come apart!{END_COLOR_TEXT_2}\0"
+.string "{color YELLOW}The linked moves are almost out of PP!{reset}\n"
+.string "{color YELLOW}Use them again and they will come apart!{reset}\0"
 .align 2, 0
 
 .global gPtrLinkMoveOneUseWarningMessage
@@ -10069,8 +10069,8 @@ gPtrLinkMoveOneUseWarningMessage: @ 810035C
 
 .global gLinkMoveTwoUsesWarningMessage
 gLinkMoveTwoUsesWarningMessage: @ 8100360
-.string "{COLOR_2 YELLOW}The linked moves are almost out of PP!{END_COLOR_TEXT_2}\n"
-.string "{COLOR_2 YELLOW}Use them twice and they will come apart!{END_COLOR_TEXT_2}\0"
+.string "{color YELLOW}The linked moves are almost out of PP!{reset}\n"
+.string "{color YELLOW}Use them twice and they will come apart!{reset}\0"
 .align 2, 0
 
 .global gPtrLinkMoveTwoUsesWarningMessage
@@ -10155,7 +10155,7 @@ gUnknown_81004F0: @ 81004F0
 
 .global gUnknown_81004F4
 gUnknown_81004F4: @ 81004F4
-.string "{ARG_POKEMON_1}'s Soundproof suppressed\n"
+.string "{POKEMON_1}'s Soundproof suppressed\n"
 .string "the sound move!\0"
 .align 2, 0
 
@@ -10220,7 +10220,7 @@ gPtrCantLeechSeedSelfMessage: @ 8100610
 .global gCantLeechSeedMonMessage
 gCantLeechSeedMonMessage: @ 8100614
 .string "A leech seed couldn't be planted on\n"
-.string "{ARG_POKEMON_0}!\0"
+.string "{POKEMON_0}!\0"
 .align 2, 0
 
 .global gPtrCantLeechSeedMonMessage
@@ -10301,8 +10301,8 @@ gSkarmoryPreFightDialogue_1: @ 8100768
 
 .global gUnknown_8100774
 gUnknown_8100774: @ 8100774
-.string " Look, {ARG_POKEMON_0}!\n"
-.string "{ARG_POKEMON_2}'s over there!\0"
+.string " Look, {POKEMON_0}!\n"
+.string "{POKEMON_2}'s over there!\0"
 .align 2, 0
 
 .global gSkarmoryPreFightDialogue_2
@@ -10359,17 +10359,17 @@ gSkarmoryPreFightDialogue_5: @ 8100880
 .global gUnknown_8100898
 gUnknown_8100898: @ 8100898
 .string " We're here to rescue\n"
-.string "{ARG_POKEMON_2}!{EXTRA_MSG}"
-.string " {ARG_POKEMON_3}!\n"
-.string "Don't do this! Release {ARG_POKEMON_2}!\0"
+.string "{POKEMON_2}!{EXTRA_MSG}"
+.string " {POKEMON_3}!\n"
+.string "Don't do this! Release {POKEMON_2}!\0"
 .align 2, 0
 
 .global gUnknown_81008DC
 gUnknown_81008DC: @ 81008DC
 .string " We came to rescue\n"
-.string "{ARG_POKEMON_2}!{EXTRA_MSG}"
-.string " Hey, {ARG_POKEMON_3}!\n"
-.string "Quit doing this, and release {ARG_POKEMON_2}!\0"
+.string "{POKEMON_2}!{EXTRA_MSG}"
+.string " Hey, {POKEMON_3}!\n"
+.string "Quit doing this, and release {POKEMON_2}!\0"
 .align 2, 0
 
 .global gSkarmoryPreFightDialogue_6
@@ -10404,7 +10404,7 @@ gUnknown_8100A1C: @ 8100A1C
 .string "Well, it's true there have\n"
 .string "been many earthquakes lately, but...{EXTRA_MSG}"
 .string " It would take more than\n"
-.string "{ARG_POKEMON_2}'s family going wild under\n"
+.string "{POKEMON_2}'s family going wild under\n"
 .string "the ground to cause earthquakes.\0"
 .align 2, 0
 
@@ -10414,7 +10414,7 @@ gUnknown_8100AD4: @ 8100AD4
 .string " Sure there've been quakes\n"
 .string "galore lately...{EXTRA_MSG}"
 .string " But it would take more than\n"
-.string "{ARG_POKEMON_2}'s family running wild under\n"
+.string "{POKEMON_2}'s family running wild under\n"
 .string "the ground to set off a quake.\0"
 .align 2, 0
 
@@ -10442,7 +10442,7 @@ gSkarmoryPreFightDialogue_9: @ 8100BC0
 .global gUnknown_8100BD8
 gUnknown_8100BD8: @ 8100BD8
 .string " It's no good.\n"
-.string "{ARG_POKEMON_3} is too agitated to listen to\n"
+.string "{POKEMON_3} is too agitated to listen to\n"
 .string "reason.{EXTRA_MSG}"
 .string " We'll have to fight it out!\0"
 .align 2, 0
@@ -10450,7 +10450,7 @@ gUnknown_8100BD8: @ 8100BD8
 .global gUnknown_8100C34
 gUnknown_8100C34: @ 8100C34
 .string " It's useless.\n"
-.string "{ARG_POKEMON_3} is too steamed to talk\n"
+.string "{POKEMON_3} is too steamed to talk\n"
 .string "reasonably.{EXTRA_MSG}"
 .string " We're going to have to\n"
 .string "fight!\0"
@@ -10477,8 +10477,8 @@ gSkarmoryReFightDialogue_2: @ 8100CBC
 
 .global gUnknown_8100CC8
 gUnknown_8100CC8: @ 8100CC8
-.string " Let {ARG_POKEMON_2} go!\n"
-.string "{ARG_POKEMON_3}!\0"
+.string " Let {POKEMON_2} go!\n"
+.string "{POKEMON_3}!\0"
 .align 2, 0
 
 .global gSkarmoryReFightDialogue_3
@@ -10520,7 +10520,7 @@ gTeamMeaniesPreFightDialogue_1: @ 8100DB0
 gUnknown_8100DC8: @ 8100DC8
 .string " Wow, we came quite a ways\n"
 .string "into this forest.{EXTRA_MSG}"
-.string " I wonder if {ARG_POKEMON_2} is\n"
+.string " I wonder if {POKEMON_2} is\n"
 .string "ahead...\0"
 .align 2, 0
 
@@ -10528,7 +10528,7 @@ gUnknown_8100DC8: @ 8100DC8
 gUnknown_8100E18: @ 8100E18
 .string " We've come pretty far\n"
 .string "into this forest.{EXTRA_MSG}"
-.string " I wonder if {ARG_POKEMON_2} is\n"
+.string " I wonder if {POKEMON_2} is\n"
 .string "ahead...\0"
 .align 2, 0
 
@@ -10553,7 +10553,7 @@ gTeamMeaniesPreFightDialogue_3: @ 8100E88
 gUnknown_8100E94: @ 8100E94
 .string " Keke!\n"
 .string "You know who's going to get to\n"
-.string "{ARG_POKEMON_2} first? We are!{EXTRA_MSG}"
+.string "{POKEMON_2} first? We are!{EXTRA_MSG}"
 .string " So, for you to go ahead...{WAIT_PRESS}\n"
 .string "Well, we can't let that happen.\0"
 .align 2, 0
@@ -10572,21 +10572,21 @@ gTeamMeaniesPreFightDialogue_4: @ 8100F14
 .global gUnknown_8100F38
 gUnknown_8100F38: @ 8100F38
 .string " Wh-what?!{EXTRA_MSG}"
-.string " Now, hold on, {ARG_POKEMON_3}!{WAIT_PRESS}\n"
+.string " Now, hold on, {POKEMON_3}!{WAIT_PRESS}\n"
 .string "Why do you always interfere with us?\0"
 .align 2, 0
 
 .global gUnknown_8100F84
 gUnknown_8100F84: @ 8100F84
 .string " Wh-what!{EXTRA_MSG}"
-.string " Hey, {ARG_POKEMON_3}!{WAIT_PRESS}\n"
+.string " Hey, {POKEMON_3}!{WAIT_PRESS}\n"
 .string "Why do you always mess with us?\0"
 .align 2, 0
 
 .global gUnknown_8100FC0
 gUnknown_8100FC0: @ 8100FC0
 .string " Wh-what...?{EXTRA_MSG}"
-.string " Hey, {ARG_POKEMON_3}!{WAIT_PRESS}\n"
+.string " Hey, {POKEMON_3}!{WAIT_PRESS}\n"
 .string "Why do you always try to mess with us?\0"
 .align 2, 0
 
@@ -10610,9 +10610,9 @@ gTeamMeaniesPreFightDialogue_6: @ 8101050
 
 .global gUnknown_810105C
 gUnknown_810105C: @ 810105C
-.string " {ARG_POKEMON_4}'s mama will\n"
+.string " {POKEMON_4}'s mama will\n"
 .string "give us a generous reward...{EXTRA_MSG}"
-.string " And {ARG_POKEMON_4} will join\n"
+.string " And {POKEMON_4} will join\n"
 .string "us too...{WAIT_PRESS}\n"
 .string "That brings us closer to our goal.\0"
 .align 2, 0
@@ -10629,7 +10629,7 @@ gUnknown_81010DC: @ 81010DC
 .string "And for that, your lot is in the way!{EXTRA_MSG}"
 .string " So sorry to say, but your\n"
 .string "party's over right here and now!{EXTRA_MSG}"
-.string " Say good-bye, {ARG_POKEMON_1}!\0"
+.string " Say good-bye, {POKEMON_1}!\0"
 .align 2, 0
 
 .global gTeamMeaniesReFightDialogue_1
@@ -10643,17 +10643,17 @@ gTeamMeaniesReFightDialogue_1: @ 8101164
 
 .global gUnknown_810117C
 gUnknown_810117C: @ 810117C
-.string " This is where the {COLOR_1 CYAN}Meanies{END_COLOR_TEXT_1}\n"
+.string " This is where the {COLOR CYAN}Meanies{RESET}\n"
 .string "showed up last time.{EXTRA_MSG}"
-.string " I wonder if {ARG_POKEMON_3}'s\n"
-.string "bunch already found {ARG_POKEMON_2}...\0"
+.string " I wonder if {POKEMON_3}'s\n"
+.string "bunch already found {POKEMON_2}...\0"
 .align 2, 0
 
 .global gUnknown_81011E4
 gUnknown_81011E4: @ 81011E4
 .string " Last time, this is where\n"
-.string "{ARG_POKEMON_3}'s gang appeared.{EXTRA_MSG}"
-.string " Did they find {ARG_POKEMON_2}\n"
+.string "{POKEMON_3}'s gang appeared.{EXTRA_MSG}"
+.string " Did they find {POKEMON_2}\n"
 .string "already, I wonder?\0"
 .align 2, 0
 
@@ -10670,22 +10670,22 @@ gTeamMeaniesReFightDialogue_2: @ 8101240
 
 .global gUnknown_8101264
 gUnknown_8101264: @ 8101264
-.string " Huh? It's {ARG_POKEMON_3}!{EXTRA_MSG}"
-.string " Why is {ARG_POKEMON_3}'s gang\n"
+.string " Huh? It's {POKEMON_3}!{EXTRA_MSG}"
+.string " Why is {POKEMON_3}'s gang\n"
 .string "following us?\0"
 .align 2, 0
 
 .global gUnknown_810129C
 gUnknown_810129C: @ 810129C
-.string " Huh? It's {ARG_POKEMON_3}!{EXTRA_MSG}"
-.string " Why is the {ARG_POKEMON_3}\n"
+.string " Huh? It's {POKEMON_3}!{EXTRA_MSG}"
+.string " Why is the {POKEMON_3}\n"
 .string "gang following us?\0"
 .align 2, 0
 
 .global gUnknown_81012D4
 gUnknown_81012D4: @ 81012D4
-.string " Hah? It's {ARG_POKEMON_3}!{EXTRA_MSG}"
-.string " Why is {ARG_POKEMON_3}'s\n"
+.string " Hah? It's {POKEMON_3}!{EXTRA_MSG}"
+.string " Why is {POKEMON_3}'s\n"
 .string "crew coming after us?\0"
 .align 2, 0
 
@@ -10726,7 +10726,7 @@ gTeamMeaniesReFightDialogue_5: @ 8101408
 
 .global gUnknown_8101414
 gUnknown_8101414: @ 8101414
-.string " This is it, {ARG_POKEMON_1}!\n"
+.string " This is it, {POKEMON_1}!\n"
 .string "You're going down!\0"
 .align 2, 0
 
@@ -10773,19 +10773,19 @@ gUnknown_8101504: @ 8101504
 
 .global gUnknown_810151C
 gUnknown_810151C: @ 810151C
-.string " Hey! {ARG_POKEMON_3}!\n"
+.string " Hey! {POKEMON_3}!\n"
 .string "Where are you?!{EXTRA_MSG}"
 .string " We came to rescue\n"
-.string "{ARG_POKEMON_2}!\n"
+.string "{POKEMON_2}!\n"
 .string "Come out!\0"
 .align 2, 0
 
 .global gUnknown_810155C
 gUnknown_810155C: @ 810155C
-.string " Hey! {ARG_POKEMON_3}!\n"
+.string " Hey! {POKEMON_3}!\n"
 .string "Where are you?!{EXTRA_MSG}"
 .string " We came to rescue\n"
-.string "{ARG_POKEMON_2}!\n"
+.string "{POKEMON_2}!\n"
 .string "Show yourself!\0"
 .align 2, 0
 
@@ -10849,24 +10849,24 @@ gUnknown_810165C: @ 810165C
 
 .global gUnknown_8101680
 gUnknown_8101680: @ 8101680
-.string " Hey, {ARG_POKEMON_3}!\n"
-.string "We demand you release {ARG_POKEMON_2}!{EXTRA_MSG}"
+.string " Hey, {POKEMON_3}!\n"
+.string "We demand you release {POKEMON_2}!{EXTRA_MSG}"
 .string " We're a Pokémon rescue\n"
 .string "team!\0"
 .align 2, 0
 
 .global gUnknown_81016CC
 gUnknown_81016CC: @ 81016CC
-.string " Hey, {ARG_POKEMON_3}!\n"
-.string "Release {ARG_POKEMON_2}!{EXTRA_MSG}"
+.string " Hey, {POKEMON_3}!\n"
+.string "Release {POKEMON_2}!{EXTRA_MSG}"
 .string " We're a Pokémon rescue\n"
 .string "team!\0"
 .align 2, 0
 
 .global gUnknown_8101708
 gUnknown_8101708: @ 8101708
-.string " Hey, {ARG_POKEMON_3}!\n"
-.string "Let {ARG_POKEMON_2} go!{EXTRA_MSG}"
+.string " Hey, {POKEMON_3}!\n"
+.string "Let {POKEMON_2} go!{EXTRA_MSG}"
 .string " A Pokémon rescue team!\n"
 .string "That's what we are!\0"
 .align 2, 0
@@ -10919,21 +10919,21 @@ gZapdosReFightDialogue_1: @ 81017E4
 
 .global gUnknown_8101808
 gUnknown_8101808: @ 8101808
-.string " Hey, {ARG_POKEMON_3}!\n"
+.string " Hey, {POKEMON_3}!\n"
 .string "We're here again!{EXTRA_MSG}"
 .string " Show yourself!\0"
 .align 2, 0
 
 .global gUnknown_810183C
 gUnknown_810183C: @ 810183C
-.string " Hey, {ARG_POKEMON_3}!\n"
+.string " Hey, {POKEMON_3}!\n"
 .string "We're back!{EXTRA_MSG}"
 .string " Come out!\0"
 .align 2, 0
 
 .global gUnknown_8101864
 gUnknown_8101864: @ 8101864
-.string " Hey, {ARG_POKEMON_3}!\n"
+.string " Hey, {POKEMON_3}!\n"
 .string "Guess who's back?!{EXTRA_MSG}"
 .string " Show yourself!\0"
 .align 2, 0
@@ -11252,7 +11252,7 @@ gMoltresPreFightDialogue_11: @ 81020D4
 
 .global gUnknown_81020E0
 gUnknown_81020E0: @ 81020E0
-.string " I am {ARG_POKEMON_2}!\n"
+.string " I am {POKEMON_2}!\n"
 .string "The warrior of fire am I!\0"
 .align 2, 0
 
@@ -11278,7 +11278,7 @@ gMoltresReFightDialogue_1: @ 8102158
 .global gUnknown_8102164
 gUnknown_8102164: @ 8102164
 .string " ............{WAIT_PRESS}\n"
-.string "Maybe {ARG_POKEMON_2} isn't around...\0"
+.string "Maybe {POKEMON_2} isn't around...\0"
 .align 2, 0
 
 .global gMoltresReFightDialogue_2
@@ -11392,7 +11392,7 @@ gMoltresPostStoryPreFightDialogue_3: @ 81023C4
 .global gUnknown_81023D0
 gUnknown_81023D0: @ 81023D0
 .string " So be it!{WAIT_PRESS}\n"
-.string "I am the warrior of fire, {ARG_POKEMON_2}!\0"
+.string "I am the warrior of fire, {POKEMON_2}!\0"
 .align 2, 0
 
 .global gMoltresPostStoryPreFightDialogue_4
@@ -11470,7 +11470,7 @@ gArticunoPreFightDialogue_3: @ 81025D4
 .global gUnknown_81025E0
 gUnknown_81025E0: @ 81025E0
 .string " ...Huh?{WAIT_PRESS}\n"
-.string "{ARG_POKEMON_0}, did you just say something?\0"
+.string "{POKEMON_0}, did you just say something?\0"
 .align 2, 0
 
 .global gArticunoPreFightDialogue_4
@@ -11570,7 +11570,7 @@ gUnknown_810284C: @ 810284C
 
 .global gUnknown_810284C
 gUnknown_810284C: @ 810284C
-.string " I am {ARG_POKEMON_2}!{WAIT_PRESS}\n"
+.string " I am {POKEMON_2}!{WAIT_PRESS}\n"
 .string "The warder of ice!\0"
 
 .global gArticunoPreFightDialogue_11
@@ -11780,7 +11780,7 @@ MagmaCavernMidDialogue_5: @ 8102C30
 
 .global gUnknown_8102C3C
 gUnknown_8102C3C: @ 8102C3C
-.string " Hey! {ARG_POKEMON_0}!\n"
+.string " Hey! {POKEMON_0}!\n"
 .string "Over there!\0"
 .align 2, 0
 
@@ -11844,7 +11844,7 @@ MagmaCavernMidDialogue_9: @ 8102CF8
 .global gUnknown_8102D04
 gUnknown_8102D04: @ 8102D04
 .string " We challenged...\n"
-.string "{ARG_POKEMON_2}...{WAIT_PRESS}\n"
+.string "{POKEMON_2}...{WAIT_PRESS}\n"
 .string "And wiped out...\n\0"
 .align 2, 0
 
@@ -11856,7 +11856,7 @@ MagmaCavernMidDialogue_10: @ 8102D34
 
 .global gUnknown_8102D40
 gUnknown_8102D40: @ 8102D40
-.string " G-{ARG_POKEMON_2}?!\0"
+.string " G-{POKEMON_2}?!\0"
 .align 2, 0
 
 .global MagmaCavernMidDialogue_11
@@ -11883,15 +11883,15 @@ MagmaCavernMidDialogue_12: @ 8102D7C
 .global gUnknown_8102D94
 gUnknown_8102D94: @ 8102D94
 .string " That's right.{WAIT_PRESS}\n"
-.string "What happened to {ARG_POKEMON_3}?\n"
-.string "Where is {ARG_POKEMON_3}?\0"
+.string "What happened to {POKEMON_3}?\n"
+.string "Where is {POKEMON_3}?\0"
 .align 2, 0
 
 .global gUnknown_8102DCC
 gUnknown_8102DCC: @ 8102DCC
 .string " Wait...{WAIT_PRESS}\n"
-.string "What about {ARG_POKEMON_3}?\n"
-.string "Where did {ARG_POKEMON_3} go?\0"
+.string "What about {POKEMON_3}?\n"
+.string "Where did {POKEMON_3} go?\0"
 .align 2, 0
 
 .global MagmaCavernMidDialogue_13
@@ -11902,8 +11902,8 @@ MagmaCavernMidDialogue_13: @ 8102DFC
 
 .global gUnknown_8102E08
 gUnknown_8102E08: @ 8102E08
-.string " {ARG_POKEMON_3} is...{WAIT_PRESS}\n"
-.string "Still battling {ARG_POKEMON_2}...\0"
+.string " {POKEMON_3} is...{WAIT_PRESS}\n"
+.string "Still battling {POKEMON_2}...\0"
 .align 2, 0
 
 .global MagmaCavernMidDialogue_14
@@ -11915,7 +11915,7 @@ MagmaCavernMidDialogue_14: @ 8102E2C
 
 .global gUnknown_8102E38
 gUnknown_8102E38: @ 8102E38
-.string " {ARG_POKEMON_0}!\n"
+.string " {POKEMON_0}!\n"
 .string "We've got to hurry!\0"
 
 .global MagmaCavernMidDialogue_15
@@ -11940,13 +11940,13 @@ GroudonPreFightDialogue_1: @ 8102E70
 
 .global gUnknown_8102E88
 gUnknown_8102E88: @ 8102E88
-.string " It's {ARG_POKEMON_3}!\n"
+.string " It's {POKEMON_3}!\n"
 .string "Are you OK?!\0"
 .align 2, 0
 
 .global gUnknown_8102EA4
 gUnknown_8102EA4: @ 8102EA4
-.string " Oh! {ARG_POKEMON_3}!\n"
+.string " Oh! {POKEMON_3}!\n"
 .string "Are you OK?!\0"
 .align 2, 0
 
@@ -12040,8 +12040,8 @@ GroudonPreFightDialogue_9: @ 8102FC4
 
 .global gUnknown_8102FD0
 gUnknown_8102FD0: @ 8102FD0
-@ The "A-" only makes sense when ARG_POKEMON_3 is "Alakazam" (which it is when this is used). Kinda funny.
-.string " A-{ARG_POKEMON_3}!\0"
+@ The "A-" only makes sense when POKEMON_3 is "Alakazam" (which it is when this is used). Kinda funny.
+.string " A-{POKEMON_3}!\0"
 
 .global GroudonPreFightDialogue_10
 GroudonPreFightDialogue_10: @ 8102FD8
@@ -12054,14 +12054,14 @@ GroudonPreFightDialogue_10: @ 8102FD8
 
 .global gUnknown_8102FF0
 gUnknown_8102FF0: @ 8102FF0
-.string " {ARG_POKEMON_3} is gone!{EXTRA_MSG}"
+.string " {POKEMON_3} is gone!{EXTRA_MSG}"
 .string " Maybe...{WAIT_PRESS}\n"
 .string "Was he defeated?!\0"
 .align 2, 0
 
 .global gUnknown_8103020
 gUnknown_8103020: @ 8103020
-.string " {ARG_POKEMON_3}'s gone!{EXTRA_MSG}"
+.string " {POKEMON_3}'s gone!{EXTRA_MSG}"
 .string " Was he maybe...{WAIT_PRESS}\n"
 .string "knocked out?!\0"
 .align 2, 0
@@ -12130,13 +12130,13 @@ GroudonPreFightDialogue_14: @ 8103140
 
 .global gUnknown_8103158
 gUnknown_8103158: @ 8103158
-.string " {ARG_POKEMON_0}!\n"
+.string " {POKEMON_0}!\n"
 .string "Let's do our best!\0"
 .align 2, 0
 
 .global gUnknown_8103174
 gUnknown_8103174: @ 8103174
-.string " {ARG_POKEMON_0}!\n"
+.string " {POKEMON_0}!\n"
 .string "Hang tough!\0"
 .align 2, 0
 
@@ -12152,17 +12152,17 @@ gGroudonReFightDialogue_1: @ 8103188
 .global gUnknown_81031A0
 gUnknown_81031A0: @ 81031A0
 .string " Here it comes!\n"
-.string "{ARG_POKEMON_0}!{EXTRA_MSG}"
+.string "{POKEMON_0}!{EXTRA_MSG}"
 .string " Let's make sure we subdue\n"
-.string "{ARG_POKEMON_2} this time!\0"
+.string "{POKEMON_2} this time!\0"
 .align 2, 0
 
 .global gUnknown_81031E4
 gUnknown_81031E4: @ 81031E4
 .string " Here it comes!\n"
-.string "{ARG_POKEMON_0}!{EXTRA_MSG}"
+.string "{POKEMON_0}!{EXTRA_MSG}"
 .string " We've got to settle\n"
-.string "{ARG_POKEMON_2} down this time!\0"
+.string "{POKEMON_2} down this time!\0"
 .align 2, 0
 
 .global gGroudonReFightDialogue_2
@@ -12219,13 +12219,13 @@ gGroudonReFightDialogue_4: @ 8103340
 
 .global gUnknown_8103358
 gUnknown_8103358: @ 8103358
-.string " {ARG_POKEMON_0}!\n"
+.string " {POKEMON_0}!\n"
 .string "Let's give it our all!\0"
 .align 2, 0
 
 .global gUnknown_8103378
 gUnknown_8103378: @ 8103378
-.string " {ARG_POKEMON_0}!\n"
+.string " {POKEMON_0}!\n"
 .string "Let's give it what we've got!\0"
 .align 2, 0
 
@@ -12318,13 +12318,13 @@ gRayquazaPreFightDialogue_3: @ 8103578
 .global gUnknown_8103590
 gUnknown_8103590: @ 8103590
 .string " That voice...{WAIT_PRESS}\n"
-.string "Could it be {ARG_POKEMON_2}?\0"
+.string "Could it be {POKEMON_2}?\0"
 .align 2, 0
 
 .global gUnknown_81035B4
 gUnknown_81035B4: @ 81035B4
 .string " That voice...{WAIT_PRESS}\n"
-.string "Is that {ARG_POKEMON_2}?\0"
+.string "Is that {POKEMON_2}?\0"
 .align 2, 0
 
 .global gRayquazaPreFightDialogue_4
@@ -12719,7 +12719,7 @@ gMewtwoPreFightDialogue_2: @ 8103F0C
 
 .global gUnknown_8103F18
 gUnknown_8103F18: @ 8103F18
-.string " My name is {ARG_POKEMON_2}.{WAIT_PRESS}\n"
+.string " My name is {POKEMON_2}.{WAIT_PRESS}\n"
 .string "I came into being only to fight.\0"
 .align 2, 0
 
@@ -12793,7 +12793,7 @@ gMewtwoReFightDialogue_3: @ 81040CC
 
 .global gUnknown_81040D8
 gUnknown_81040D8: @ 81040D8
-.string " I am {ARG_POKEMON_2}.{WAIT_PRESS}\n"
+.string " I am {POKEMON_2}.{WAIT_PRESS}\n"
 .string "A Pokémon created only to fight...{WAIT_PRESS}\n"
 .string "And...\0"
 .align 2, 0
@@ -12837,7 +12837,7 @@ gEnteiPreFightDialogue_2: @ 81041AC
 
 .global gUnknown_81041B8
 gUnknown_81041B8: @ 81041B8
-.string " I am {ARG_POKEMON_2}!{WAIT_PRESS}\n"
+.string " I am {POKEMON_2}!{WAIT_PRESS}\n"
 .string "I live surrounded by the fiery lava of\n"
 .string "volcanoes!\0"
 .align 2, 0
@@ -12864,7 +12864,7 @@ gEnteiReFightDialogue_1: @ 8104240
 gUnknown_810424C: @ 810424C
 .string " Did I not say to never\n"
 .string "return?{EXTRA_MSG}"
-.string " This is the {COLOR_1 YELLOW_4}Fiery Field{END_COLOR_TEXT_1}!{WAIT_PRESS}\n"
+.string " This is the {COLOR YELLOW_D}Fiery Field{RESET}!{WAIT_PRESS}\n"
 .string "It is no place for your kind!\0"
 .align 2, 0
 
@@ -12895,9 +12895,9 @@ gEnteiPostStoryPreFightDialogue_1: @ 8104310
 
 .global gUnknown_810431C
 gUnknown_810431C: @ 810431C
-.string " This is the {COLOR_1 YELLOW_4}Fiery Field{END_COLOR_TEXT_1}!{WAIT_PRESS}\n"
+.string " This is the {COLOR YELLOW_D}Fiery Field{RESET}!{WAIT_PRESS}\n"
 .string "It is no place for your kind!{EXTRA_MSG}"
-.string " I am {ARG_POKEMON_2}!{WAIT_PRESS}\n"
+.string " I am {POKEMON_2}!{WAIT_PRESS}\n"
 .string "I live surrounded by the fiery lava of\n"
 .string "volcanoes!\0"
 .align 2, 0
@@ -12947,7 +12947,7 @@ gRaikouPreFightDialogue_1: @ 8104450
 gUnknown_810445C: @ 810445C
 .string " Why...{WAIT_PRESS}\n"
 .string "Why have you come...?{EXTRA_MSG}"
-.string " This is {COLOR_1 YELLOW_4}Lightning Field{END_COLOR_TEXT_1}.{WAIT_PRESS}\n"
+.string " This is {COLOR YELLOW_D}Lightning Field{RESET}.{WAIT_PRESS}\n"
 .string "It is my...{WAIT_PRESS}"
 .string "domain!\0"
 .align 2, 0
@@ -12960,7 +12960,7 @@ gRaikouPreFightDialogue_2: @ 81044B4
 
 .global gUnknown_81044C0
 gUnknown_81044C0: @ 81044C0
-.string " I am {ARG_POKEMON_2}!{WAIT_PRESS}\n"
+.string " I am {POKEMON_2}!{WAIT_PRESS}\n"
 .string "One who races with lightning!{EXTRA_MSG}"
 .string " A body like roiling rain\n"
 .string "clouds!\0"
@@ -13057,7 +13057,7 @@ gRaikouPostStoryPreFightDialogue_1: @ 81046CC
 
 .global gUnknown_81046D8
 gUnknown_81046D8: @ 81046D8
-.string " This is {COLOR_1 YELLOW_4}Lightning Field{END_COLOR_TEXT_1}!{WAIT_PRESS}\n"
+.string " This is {COLOR YELLOW_D}Lightning Field{RESET}!{WAIT_PRESS}\n"
 .string "My domain!{EXTRA_MSG}"
 .string " All those who enter...{WAIT_PRESS}\n"
 .string "I show no mercy, no matter what!\0"
@@ -13126,7 +13126,7 @@ gSuicunePreFightDialogue_4: @ 810484C
 
 .global gUnknown_8104858
 gUnknown_8104858: @ 8104858
-.string " I am {ARG_POKEMON_2}!{WAIT_PRESS}\n"
+.string " I am {POKEMON_2}!{WAIT_PRESS}\n"
 .string "One who runs with the north wind!\0"
 .align 2, 0
 
@@ -13262,7 +13262,7 @@ gUnknown_8104AE0: @ 8104AE0
 .string " Fought through many dangerous\n"
 .string "situations...{EXTRA_MSG}"
 .string " and finally ascended to the very peak\n"
-.string "of {COLOR_1 YELLOW_4}Mt. Faraway{END_COLOR_TEXT_1}!{EXTRA_MSG}"
+.string "of {COLOR YELLOW_D}Mt. Faraway{RESET}!{EXTRA_MSG}"
 .string " Truly, only the chosen have reached\n"
 .string "the summit.{EXTRA_MSG}"
 .string " However!\0"
@@ -13287,7 +13287,7 @@ gHoOhPreFightDialogue_3: @ 8104C10
 
 .global gUnknown_8104C1C
 gUnknown_8104C1C: @ 8104C1C
-.string " I am {ARG_POKEMON_2}!{WAIT_PRESS}\n"
+.string " I am {POKEMON_2}!{WAIT_PRESS}\n"
 .string "The builder of rainbows across the sky!\0"
 .align 2, 0
 
@@ -13395,7 +13395,7 @@ gUnknown_8104E6C: @ 8104E6C
 .string "I see. You're trying to get your TMs back.{EXTRA_MSG}"
 .string " But!{EXTRA_MSG}"
 .string " Nobody can stop me!{EXTRA_MSG}"
-.string " I'm the Eon Pokémon {ARG_POKEMON_2}!\0"
+.string " I'm the Eon Pokémon {POKEMON_2}!\0"
 .align 2, 0
 
 .global gLatiosPreFightDialogue_2
@@ -13478,8 +13478,8 @@ gRegirockPostFightDialogue_1: @ 8105040
 .global gUnknown_810504C
 gUnknown_810504C: @ 810504C
 .string "{CENTER_ALIGN}Something fell from\n"
-.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}Regirock{END_COLOR_TEXT_1}'s body.{EXTRA_MSG}"
-.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}Regirock{END_COLOR_TEXT_1} was apparently\n"
+.string "{CENTER_ALIGN}{COLOR CYAN_M}Regirock{RESET}'s body.{EXTRA_MSG}"
+.string "{CENTER_ALIGN}{COLOR CYAN_M}Regirock{RESET} was apparently\n"
 .string "{CENTER_ALIGN}guarding this item.\0"
 .align 2, 0
 
@@ -13491,9 +13491,9 @@ gRegirockPostFightDialogue_2: @ 81050B4
 
 .global gUnknown_81050C0
 gUnknown_81050C0: @ 81050C0
-.string "{CENTER_ALIGN}{ARG_POKEMON_0} obtained\n"
-.string "{CENTER_ALIGN}the {COLOR_1 GREEN_2}Rock Part{END_COLOR_TEXT_1}...{EXTRA_MSG}"
-.string "{CENTER_ALIGN}that {COLOR_1 CYAN_3}Regirock{END_COLOR_TEXT_1} was guarding!\0"
+.string "{CENTER_ALIGN}{POKEMON_0} obtained\n"
+.string "{CENTER_ALIGN}the {COLOR GREEN_I}Rock Part{RESET}...{EXTRA_MSG}"
+.string "{CENTER_ALIGN}that {COLOR CYAN_M}Regirock{RESET} was guarding!\0"
 .align 2, 0
 
 .global gRegicePostFightDialogue_1
@@ -13505,8 +13505,8 @@ gRegicePostFightDialogue_1: @ 810510C
 .global gUnknown_8105118
 gUnknown_8105118: @ 8105118
 .string "{CENTER_ALIGN}Something fell from\n"
-.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}Regice{END_COLOR_TEXT_1}'s body.{EXTRA_MSG}"
-.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}Regice{END_COLOR_TEXT_1} was apparently\n"
+.string "{CENTER_ALIGN}{COLOR CYAN_M}Regice{RESET}'s body.{EXTRA_MSG}"
+.string "{CENTER_ALIGN}{COLOR CYAN_M}Regice{RESET} was apparently\n"
 .string "{CENTER_ALIGN}guarding this item.\0"
 .align 2, 0
 
@@ -13518,9 +13518,9 @@ gRegicePostFightDialogue_2: @ 810517C
 
 .global gUnknown_8105188
 gUnknown_8105188: @ 8105188
-.string "{CENTER_ALIGN}{ARG_POKEMON_0} obtained\n"
-.string "{CENTER_ALIGN}the {COLOR_1 GREEN_2}Ice Part{END_COLOR_TEXT_1}...{EXTRA_MSG}"
-.string "{CENTER_ALIGN}that {COLOR_1 CYAN_3}Regice{END_COLOR_TEXT_1} was guarding!\0"
+.string "{CENTER_ALIGN}{POKEMON_0} obtained\n"
+.string "{CENTER_ALIGN}the {COLOR GREEN_I}Ice Part{RESET}...{EXTRA_MSG}"
+.string "{CENTER_ALIGN}that {COLOR CYAN_M}Regice{RESET} was guarding!\0"
 .align 2, 0
 
 .global gRegisteelPostFightDialogue_1
@@ -13532,8 +13532,8 @@ gRegisteelPostFightDialogue_1: @ 81051D0
 .global gUnknown_81051DC
 gUnknown_81051DC: @ 81051DC
 .string "{CENTER_ALIGN}Something fell from\n"
-.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}Registeel{END_COLOR_TEXT_1}'s body.{EXTRA_MSG}"
-.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}Registeel{END_COLOR_TEXT_1} was apparently\n"
+.string "{CENTER_ALIGN}{COLOR CYAN_M}Registeel{RESET}'s body.{EXTRA_MSG}"
+.string "{CENTER_ALIGN}{COLOR CYAN_M}Registeel{RESET} was apparently\n"
 .string "{CENTER_ALIGN}guarding this item.\0"
 .align 2, 0
 
@@ -13545,16 +13545,16 @@ gRegisteelPostFightDialogue_2: @ 8105244
 
 .global gUnknown_8105250
 gUnknown_8105250: @ 8105250
-.string "{CENTER_ALIGN}{ARG_POKEMON_0} obtained\n"
-.string "{CENTER_ALIGN}the {COLOR_1 GREEN_2}Steel Part{END_COLOR_TEXT_1}...{EXTRA_MSG}"
-.string "{CENTER_ALIGN}that {COLOR_1 CYAN_3}Registeel{END_COLOR_TEXT_1} was guarding!\0"
+.string "{CENTER_ALIGN}{POKEMON_0} obtained\n"
+.string "{CENTER_ALIGN}the {COLOR GREEN_I}Steel Part{RESET}...{EXTRA_MSG}"
+.string "{CENTER_ALIGN}that {COLOR CYAN_M}Registeel{RESET} was guarding!\0"
 .align 2, 0
 
 .global gUnknown_81052A0
 gUnknown_81052A0: @ 81052A0
 .string "{CENTER_ALIGN}That means...{EXTRA_MSG}"
-.string "{CENTER_ALIGN}By finding the {COLOR_1 GREEN_2}Rock Part{END_COLOR_TEXT_1},\n"
-.string "{CENTER_ALIGN}{COLOR_1 GREEN_2}Ice Part{END_COLOR_TEXT_1}, and {COLOR_1 GREEN_2}Steel Part{END_COLOR_TEXT_1}...{EXTRA_MSG}"
+.string "{CENTER_ALIGN}By finding the {COLOR GREEN_I}Rock Part{RESET},\n"
+.string "{CENTER_ALIGN}{COLOR GREEN_I}Ice Part{RESET}, and {COLOR GREEN_I}Steel Part{RESET}...{EXTRA_MSG}"
 .string "{CENTER_ALIGN}All three parts are yours!\0"
 .align 2, 0
 
@@ -13578,7 +13578,7 @@ gUnknown_8105360: @ 8105360
 gUnknown_8105364: @ 8105364
 .string "{CENTER_ALIGN}The three parts\n"
 .string "{CENTER_ALIGN}fit together...{EXTRA_MSG}"
-.string "{CENTER_ALIGN}and became a {COLOR_1 GREEN_2}Music Box{END_COLOR_TEXT_1}!\0"
+.string "{CENTER_ALIGN}and became a {COLOR GREEN_I}Music Box{RESET}!\0"
 .align 2, 0
 
 .global gUnknown_81053A8
@@ -13588,9 +13588,9 @@ gUnknown_81053A8: @ 81053A8
 
 .global gUnknown_81053AC
 gUnknown_81053AC: @ 81053AC
-.string "{CENTER_ALIGN}{ARG_POKEMON_0} obtained\n"
-.string "{CENTER_ALIGN}the {COLOR_1 GREEN_2}Music Box{END_COLOR_TEXT_1}!{EXTRA_MSG}"
-.string "{CENTER_ALIGN}The {COLOR_1 GREEN_2}Music Box{END_COLOR_TEXT_1} only needs\n"
+.string "{CENTER_ALIGN}{POKEMON_0} obtained\n"
+.string "{CENTER_ALIGN}the {COLOR GREEN_I}Music Box{RESET}!{EXTRA_MSG}"
+.string "{CENTER_ALIGN}The {COLOR GREEN_I}Music Box{RESET} only needs\n"
 .string "{CENTER_ALIGN}to be in the Toolbox for it to\n"
 .string "{CENTER_ALIGN}attract a special something!\0"
 .align 2, 0
@@ -13635,7 +13635,7 @@ gJirachiPreFightDialogue_3: @ 81054E4
 
 .global gUnknown_81054F0
 gUnknown_81054F0: @ 81054F0
-.string " I'm {ARG_POKEMON_2}.\n"
+.string " I'm {POKEMON_2}.\n"
 .string "Who are you?\0"
 .align 2, 0
 
@@ -13681,9 +13681,9 @@ gUnknown_81055F4: @ 81055F4
 
 .global gUnknown_8105600
 gUnknown_8105600: @ 8105600
-.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}{ARG_POKEMON_2}{END_COLOR_TEXT_1} fell\n"
+.string "{CENTER_ALIGN}{COLOR CYAN_M}{POKEMON_2}{RESET} fell\n"
 .string "{CENTER_ALIGN}back into a deep sleep...{EXTRA_MSG}"
-.string "{CENTER_ALIGN}Apparently, {COLOR_1 CYAN_3}{ARG_POKEMON_2}{END_COLOR_TEXT_1}\n"
+.string "{CENTER_ALIGN}Apparently, {COLOR CYAN_M}{POKEMON_2}{RESET}\n"
 .string "{CENTER_ALIGN}was fighting in its sleep...\0"
 .align 2, 0
 
@@ -13728,7 +13728,7 @@ gUnknown_81056DC: @ 81056DC
 gUnknown_81056E8: @ 81056E8
 .string " I don't know why, but I'm\n"
 .string "wide awake!{EXTRA_MSG}"
-.string " I'm {ARG_POKEMON_2}.{EXTRA_MSG}"
+.string " I'm {POKEMON_2}.{EXTRA_MSG}"
 .string " When I awaken, I grant\n"
 .string "a wish.\n"
 .string "I have to.{EXTRA_MSG}"
@@ -13739,7 +13739,7 @@ gUnknown_81056E8: @ 81056E8
 
 .global gUnknown_8105778
 gUnknown_8105778: @ 8105778
-.string "{COLOR_1 YELLOW_5}{ARG_POKEMON_2}{END_COLOR_TEXT_1}: What is your \n"
+.string "{COLOR YELLOW_N}{POKEMON_2}{RESET}: What is your \n"
 .string "wish?\0"
 .align 2, 0
 
@@ -13847,7 +13847,7 @@ gUnknown_810593C: @ 810593C
 
 .global gUnknown_8105948
 gUnknown_8105948: @ 8105948
-.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}{ARG_POKEMON_2}{END_COLOR_TEXT_1} fell\n"
+.string "{CENTER_ALIGN}{COLOR CYAN_M}{POKEMON_2}{RESET} fell\n"
 .string "{CENTER_ALIGN}back into a deep sleep...\0"
 .align 2, 0
 
@@ -13920,9 +13920,9 @@ gUnknown_8105B68: @ 8105B68
 
 .global gUnknown_8105B74
 gUnknown_8105B74: @ 8105B74
-.string "{CENTER_ALIGN}{COLOR_1 CYAN_3}{ARG_POKEMON_0}{END_COLOR_TEXT_1} obtained\n"
+.string "{CENTER_ALIGN}{COLOR CYAN_M}{POKEMON_0}{RESET} obtained\n"
 .string "{CENTER_ALIGN}the Friend Area\n"
-.string "{CENTER_ALIGN}{COLOR_1 UNK_COLOR_5}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}!\0"
+.string "{CENTER_ALIGN}{COLOR GREEN_H}{MOVE_ITEM_0}{RESET}!\0"
 .align 2, 0
 
 .global gUnknown_8105BA8
@@ -13951,7 +13951,7 @@ gUnknown_8105C00: @ 8105C00
 .string "all over the dungeon that may make you \n"
 .string "stronger.{EXTRA_MSG}"
 .string " But don't use them now.{WAIT_PRESS}\n"
-.string "When you leave the {COLOR_1 YELLOW_4}Wish Cave{END_COLOR_TEXT_1}, your\n"
+.string "When you leave the {COLOR YELLOW_D}Wish Cave{RESET}, your\n"
 .string "powers go back to their original state.{EXTRA_MSG}"
 .string " So, you should only use\n"
 .string "those items after you take them back.{EXTRA_MSG}"
@@ -14023,7 +14023,7 @@ gUnknown_8105E94: @ 8105E94
 .string " Why...{WAIT_PRESS}\n"
 .string "Why have you come here...?{EXTRA_MSG}"
 .string " This is...{WAIT_PRESS}"
-.string "the {COLOR_1 YELLOW_4}Silver Trench{END_COLOR_TEXT_1}.{WAIT_PRESS}\n"
+.string "the {COLOR YELLOW_D}Silver Trench{RESET}.{WAIT_PRESS}\n"
 .string "This is my territory!\0"
 .align 2, 0
 
@@ -14035,7 +14035,7 @@ gLugiaPreFightDialogue_2: @ 8105EF8
 
 .global gUnknown_8105F04
 gUnknown_8105F04: @ 8105F04
-.string " My name is {ARG_POKEMON_2}!{WAIT_PRESS}\n"
+.string " My name is {POKEMON_2}!{WAIT_PRESS}\n"
 .string "I am the guardian of the seas!\0"
 .align 2, 0
 
@@ -14154,7 +14154,7 @@ gKyogrePreFightDialogue_4: @ 8106140
 
 .global gUnknown_810614C
 gUnknown_810614C: @ 810614C
-.string " My duels against {ARG_POKEMON_3} left\n"
+.string " My duels against {POKEMON_3} left\n"
 .string "us both exhausted...{WAIT_PRESS}\n"
 .string "I took to a long and deep sleep...{EXTRA_MSG}"
 .string " All the time, I waited.\n"
@@ -14171,7 +14171,7 @@ gKyogrePreFightDialogue_5: @ 8106214
 
 .global gUnknown_8106220
 gUnknown_8106220: @ 8106220
-.string " I am {ARG_POKEMON_2}!{WAIT_PRESS}\n"
+.string " I am {POKEMON_2}!{WAIT_PRESS}\n"
 .string "The lord of the sea!\0"
 .align 2, 0
 
@@ -14229,7 +14229,7 @@ gUnknown_81062F4: @ 81062F4
 .string " There was a sudden explosion...{WAIT_PRESS}\n"
 .string "And I awakened to this...{EXTRA_MSG}"
 .string " What is this place?{EXTRA_MSG}"
-.string " I am {ARG_POKEMON_2}.{WAIT_PRESS}\n"
+.string " I am {POKEMON_2}.{WAIT_PRESS}\n"
 .string "I came from space.\0"
 .align 2, 0
 
@@ -14284,7 +14284,7 @@ gCelebiJoinDialogue_2: @ 8106400
 .global gPurityForestCelebiIntroText
 gPurityForestCelebiIntroText: @ 810640C
 .string "{CENTER_ALIGN}It's...{WAIT_PRESS}\n"
-.string "{CENTER_ALIGN}The Time Travel Pokémon {ARG_POKEMON_2}!\0"
+.string "{CENTER_ALIGN}The Time Travel Pokémon {POKEMON_2}!\0"
 .align 2, 0
 
 .global gCelebiJoinDialogue_3
@@ -14295,7 +14295,7 @@ gCelebiJoinDialogue_3: @ 810643C
 
 .global gPurityForestCelebiWantsToJoinText
 gPurityForestCelebiWantsToJoinText: @ 8106448
-.string "{CENTER_ALIGN}{ARG_POKEMON_2} wants to join the team.\0"
+.string "{CENTER_ALIGN}{POKEMON_2} wants to join the team.\0"
 .align 2, 0
 
 .global gCelebiJoinDialogue_4
@@ -14306,7 +14306,7 @@ gCelebiJoinDialogue_4: @ 8106468
 
 .global gPurityForestCelebiJoinedText
 gPurityForestCelebiJoinedText: @ 8106474
-.string "{CENTER_ALIGN}{ARG_POKEMON_2} joined the team! \0"
+.string "{CENTER_ALIGN}{POKEMON_2} joined the team! \0"
 .align 2, 0
 
 .global gCelebiJoinDialogue_5
@@ -14317,7 +14317,7 @@ gCelebiJoinDialogue_5: @ 810648C
 
 .global gPurityForestCelebiVeryHappyText
 gPurityForestCelebiVeryHappyText: @ 8106498
-.string "{CENTER_ALIGN}{ARG_POKEMON_3} appears to\n"
+.string "{CENTER_ALIGN}{POKEMON_3} appears to\n"
 .string "{CENTER_ALIGN}be very happy!\0"
 .align 2, 0
 
@@ -14341,7 +14341,7 @@ gCelebiJoinDialogue_7: @ 8106500
 
 .global gPurityForestTurnedDownOfferText
 gPurityForestTurnedDownOfferText: @ 810650C
-.string "{CENTER_ALIGN}{ARG_POKEMON_0} turned down\n"
+.string "{CENTER_ALIGN}{POKEMON_0} turned down\n"
 .string "{CENTER_ALIGN}the offer to join.\0"
 .align 2, 0
 
@@ -14364,13 +14364,13 @@ gCelebiJoinDialogue_9: @ 8106560
 
 .global gPurityForestCelebiLeftDejectedlyText
 gPurityForestCelebiLeftDejectedlyText: @ 810656C
-.string "{CENTER_ALIGN}{ARG_POKEMON_2} left\n"
+.string "{CENTER_ALIGN}{POKEMON_2} left\n"
 .string "{CENTER_ALIGN}dejectedly...\0"
 .align 2, 0
 
 .global gPurityForestAllowCelebiToJoinText
 gPurityForestAllowCelebiToJoinText: @ 8106588
-.string "{CENTER_ALIGN}Allow {ARG_POKEMON_2}\n"
+.string "{CENTER_ALIGN}Allow {POKEMON_2}\n"
 .string "{CENTER_ALIGN}to join the team?\0"
 .align 2, 0
 

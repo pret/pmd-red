@@ -63,11 +63,11 @@ ALIGNED(4) static const u8 sSayFarewellConfirm[] = _(
          "Will you release it anyway?");
 
 ALIGNED(4) static const u8 sReturnedToToolbox[] = _(
-         "{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
+         "{CENTER_ALIGN}The {COLOR GREEN}{MOVE_ITEM_0}{RESET} was\n"
          "{CENTER_ALIGN}returned to the Toolbox.");
 
 ALIGNED(4) static const u8 sSentToStorage[] = _(
-         "{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n{CENTER_ALIGN}sent to storage.");
+         "{CENTER_ALIGN}The {COLOR GREEN}{MOVE_ITEM_0}{RESET} was\n{CENTER_ALIGN}sent to storage.");
 
 ALIGNED(4) static const u8 sStandBy[] = "Stand By";
 ALIGNED(4) static const u8 sMakeLeader[] = "Make Leader";
@@ -79,4 +79,4 @@ ALIGNED(4) static const u8 sSummary[] = "Summary";
 ALIGNED(4) static const u8 sMoves[] = "Moves";
 ALIGNED(4) static const u8 sCheckIQ[] = "Check IQ";
 
-ALIGNED(4) static const u8 sItemBuffered[] = _("Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} ");
+ALIGNED(4) static const u8 sItemBuffered[] = _("Item: {COLOR GREEN}{MOVE_ITEM_0}{RESET} ");

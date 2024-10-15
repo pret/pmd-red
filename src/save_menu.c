@@ -44,7 +44,7 @@ const MenuItem gSavingAdventureMenuItems[] = {
 };
 ALIGNED(4) const u8 sUnknown_80E6F70[] = _("{CENTER_ALIGN}Don't turn off the power.");
 ALIGNED(4) const u8 sUnknown_80E6F90[] = _("{CENTER_ALIGN}Saving your adventure!");
-ALIGNED(4) const u8 sUnknown_80E6FAC[] = _("{CENTER_ALIGN}{COLOR_1 RED}Beware!{END_COLOR_TEXT_1} ");
+ALIGNED(4) const u8 sUnknown_80E6FAC[] = _("{CENTER_ALIGN}{COLOR RED}Beware!{RESET} ");
 
 extern const u8 sUnknown_80E6FDC[];
 extern const u8 sUnknown_80E7008[];
@@ -58,7 +58,7 @@ const MenuItem gAdventureSavedMenuItems[] = {
 };
 ALIGNED(4) const u8 sUnknown_80E6FDC[] = _("{CENTER_ALIGN}has been saved.");
 ALIGNED(4) const u8 sUnknown_80E6FF0[] = _("{CENTER_ALIGN}Your adventure so far");
-ALIGNED(4) const u8 sUnknown_80E7008[] = _("{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE}Success!{END_COLOR_TEXT_1} ");
+ALIGNED(4) const u8 sUnknown_80E7008[] = _("{CENTER_ALIGN}{COLOR CYAN_G}Success!{RESET} ");
 
 extern const u8 sUnknown_80E7078[];
 extern const u8 sUnknown_80E7050[];
@@ -72,7 +72,7 @@ const MenuItem gAdventureCouldNotBeSavedMenuItems[] = {
 };
 ALIGNED(4) const u8 sUnknown_80E703C[] = _("{CENTER_ALIGN}Please try again.");
 ALIGNED(4) const u8 sUnknown_80E7050[] = _("{CENTER_ALIGN}Your adventure could not be saved.");
-ALIGNED(4) const u8 sUnknown_80E7078[] = _("{CENTER_ALIGN}{COLOR_1 RED}Save failed!{END_COLOR_TEXT_1} ");
+ALIGNED(4) const u8 sUnknown_80E7078[] = _("{CENTER_ALIGN}{COLOR RED}Save failed!{RESET} ");
 
 
 extern const u8 DeletingAdventure_80E70B0[];
@@ -108,7 +108,7 @@ const MenuItem gAdventureCouldNotBeDeletedMenuItems[] = {
     {NULL, 2},
 };
 ALIGNED(4) const u8 sUnknown_80E7134[] = _("{CENTER_ALIGN}Your adventure could not be deleted.");
-ALIGNED(4) const u8 sUnknown_80E715C[] = _("{CENTER_ALIGN}{COLOR_1 RED}Deletion failed!{END_COLOR_TEXT_1} ");
+ALIGNED(4) const u8 sUnknown_80E715C[] = _("{CENTER_ALIGN}{COLOR RED}Deletion failed!{RESET} ");
 
 ALIGNED(4) const u8 gUnknown_80E7178[] = _("{CENTER_ALIGN}The data could not be written.\n"
                                            "{CENTER_ALIGN}Please turn off the power and remove\n"

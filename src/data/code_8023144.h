@@ -19,4 +19,4 @@ static const UnkTextStruct2 sUnknown_80DC91C =
 };
 
 ALIGNED(4) static const u8 sPokemon[] = _("Pokémon");
-ALIGNED(4) static const u8 sFmtColoredString[] = _("{COLOR_2}%c%s{END_COLOR_TEXT_2}");
+ALIGNED(4) static const u8 sFmtColoredString[] = _("{color}%c%s{reset}");

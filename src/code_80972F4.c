@@ -7,8 +7,8 @@
 
 #include "data/story_missions.h"
 
-ALIGNED(4) const u8 gDummyScenarioText[] = _("{COLOR_1 YELLOW_3}Scenario try dummy{END_COLOR_TEXT_1}");
-ALIGNED(4) const u8 gBlankMission[] = _("{COLOR_1 RED_2}???{END_COLOR_TEXT_1}");
+ALIGNED(4) const u8 gDummyScenarioText[] = _("{COLOR YELLOW_C}Scenario try dummy{RESET}");
+ALIGNED(4) const u8 gBlankMission[] = _("{COLOR RED_W}???{RESET}");
 
 extern void GeneratePelipperJobs(void);
 

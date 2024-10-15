@@ -58,7 +58,7 @@ const MenuItem gUnknown_80E7214[4] = {
 
 ALIGNED(4) const u8 CheckAgain_80E7234[] = _("{CENTER_ALIGN}Please check it again.");
 ALIGNED(4) const u8 IncorrectPassword_80E7250[] = _("{CENTER_ALIGN}Incorrect password!");
-ALIGNED(4) const u8 Error_80E7268[] = _("{CENTER_ALIGN}{COLOR_1 RED}Error!{END_COLOR_TEXT_1} ");
+ALIGNED(4) const u8 Error_80E7268[] = _("{CENTER_ALIGN}{COLOR RED}Error!{RESET} ");
 
 const UnkTextStruct2 gUnknown_80E7278 = {
     0x00, 0x00, 0x00, 0x00,
@@ -82,7 +82,7 @@ const MenuItem gUnknown_80E7290[4] = {
 
 ALIGNED(4) const u8 DATA_80E72B0[] = "  ";
 ALIGNED(4) const u8 PasswordAccept_80E72B4[] = _("{CENTER_ALIGN}The password has been accepted.");
-ALIGNED(4) const u8 Success_80E72D8[] = _("{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE}Success!{END_COLOR_TEXT_1} ");
+ALIGNED(4) const u8 Success_80E72D8[] = _("{CENTER_ALIGN}{COLOR CYAN_G}Success!{RESET} ");
 
 const UnkTextStruct2 gUnknown_80E72EC = {
     0x00, 0x00, 0x00, 0x00,
@@ -102,7 +102,7 @@ const MenuItem gUnknown_80E7304[4] = {
     {NULL, 0xA},
 };
 
-ALIGNED(4) const u8 NotSOSMail_80E7324[] = _("{CENTER_ALIGN}This is not an {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.");
+ALIGNED(4) const u8 NotSOSMail_80E7324[] = _("{CENTER_ALIGN}This is not an {COLOR CYAN_G}SOS Mail{RESET}.");
 
 const UnkTextStruct2 gUnknown_80E7344 = {
     0x00, 0x00, 0x00, 0x00,
@@ -122,7 +122,7 @@ const MenuItem gUnknown_80E735C[4] = {
     {NULL, 0xA},
 };
 
-ALIGNED(4) const u8 ReceiveSOSMail_80E737C[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} has been received already.");
+ALIGNED(4) const u8 ReceiveSOSMail_80E737C[] = _("{CENTER_ALIGN}This {COLOR CYAN_G}SOS Mail{RESET} has been received already.");
 
 const UnkTextStruct2 gUnknown_80E73AC = {
     0x00, 0x00, 0x00, 0x00,
@@ -142,7 +142,7 @@ const MenuItem gUnknown_80E73C4[4] = {
     {NULL, 0xA},
 };
 
-ALIGNED(4) const u8 sUnknown_80E73E4[] = _("{CENTER_ALIGN}This is not an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.");
+ALIGNED(4) const u8 sUnknown_80E73E4[] = _("{CENTER_ALIGN}This is not an {COLOR CYAN_G}A-OK Mail{RESET}.");
 
 const UnkTextStruct2 gUnknown_80E7408 = {
     0x00, 0x00, 0x00, 0x00,
@@ -162,7 +162,7 @@ const MenuItem gUnknown_80E7420[4] = {
     {NULL, 0xA},
 };
 
-ALIGNED(4) const u8 sUnknown_80E7440[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} cannot be used.");
+ALIGNED(4) const u8 sUnknown_80E7440[] = _("{CENTER_ALIGN}This {COLOR CYAN_G}A-OK Mail{RESET} cannot be used.");
 
 const UnkTextStruct2 gUnknown_80E7468 = {
     0x00, 0x00, 0x00, 0x00,
@@ -181,7 +181,7 @@ const MenuItem gUnknown_80E7480[4] = {
     {CheckAgain_80E7234, 0xC},
     {NULL, 0xA},
 };
-ALIGNED(4) const u8 sUnknown_80E74A0[] = _("{CENTER_ALIGN}This is not a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.");
+ALIGNED(4) const u8 sUnknown_80E74A0[] = _("{CENTER_ALIGN}This is not a {COLOR CYAN_G}Thank-You Mail{RESET}.");
 
 const UnkTextStruct2 gUnknown_80E74C8 = {
     0x00, 0x00, 0x00, 0x00,
@@ -201,7 +201,7 @@ const MenuItem gUnknown_80E74E0[4] = {
     {NULL, 0xA},
 };
 
-ALIGNED(4) const u8 sUnknown_80E7500[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} cannot be used.");
+ALIGNED(4) const u8 sUnknown_80E7500[] = _("{CENTER_ALIGN}This {COLOR CYAN_G}Thank-You Mail{RESET} cannot be used.");
 
 const UnkTextStruct2 gUnknown_80E752C = {
     0x00, 0x00, 0x00, 0x00,
@@ -220,7 +220,7 @@ const MenuItem gUnknown_80E7544[4] = {
     {CheckAgain_80E7234, 0xC},
     {NULL, 0xA},
 };
-ALIGNED(4) const u8 sUnknown_80E7564[] = _("{CENTER_ALIGN}This is not a {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1}.");
+ALIGNED(4) const u8 sUnknown_80E7564[] = _("{CENTER_ALIGN}This is not a {COLOR CYAN_G}Wonder Mail{RESET}.");
 
 const UnkTextStruct2 gUnknown_80E7588 = {
     0x00, 0x00, 0x00, 0x00,

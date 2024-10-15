@@ -30,12 +30,12 @@ ALIGNED(4) static const u8 sWillAMoveBeForgotten[] = _(
     "Will a move be forgotten?");
 
 ALIGNED(4) static const u8 sForgetMoveAndLinkedOnes[] = _(
-    "{CENTER_ALIGN}Forget the move {COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1} and\n"
+    "{CENTER_ALIGN}Forget the move {COLOR GREEN}{POKEMON_1}{RESET} and\n"
     "{CENTER_ALIGN}any moves linked to it, and learn the move\n"
-    "{CENTER_ALIGN}{COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}?");
+    "{CENTER_ALIGN}{COLOR CYAN}{POKEMON_0}{RESET}?");
 
 ALIGNED(4) static const u8 sForgetMoveOnly[] = _(
-    "{CENTER_ALIGN}Forget the move {COLOR_1 GREEN}{ARG_POKEMON_1}{END_COLOR_TEXT_1}\n"
-    "{CENTER_ALIGN}and learn {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}?");
+    "{CENTER_ALIGN}Forget the move {COLOR GREEN}{POKEMON_1}{RESET}\n"
+    "{CENTER_ALIGN}and learn {COLOR CYAN}{POKEMON_0}{RESET}?");
 
 ALIGNED(4) static const u8 sForget[] = _("Forget");

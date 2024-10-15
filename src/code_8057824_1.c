@@ -1664,7 +1664,7 @@ void MagmaCavernMidDialogue(void)
   SpriteLookAroundEffect(PartnerEntity);
   PlaySoundEffect(0x1c7);
   sub_80856E0(PartnerEntity, DIRECTION_NORTH);
-  // Hey! {ARG_POKEMON_0}!
+  // Hey! {POKEMON_0}!
   // Over there!
   DisplayDungeonDialogue(MagmaCavernMidDialogue_5);
   iVar3->info->unk15E = 0;
@@ -1691,7 +1691,7 @@ void MagmaCavernMidDialogue(void)
   DisplayDungeonDialogue(MagmaCavernMidDialogue_8);
   sub_803E708(10,0x46);
   // We challenged..
-  // {ARG_POKEMON_2}...
+  // {POKEMON_2}...
   // And wiped out..
   DisplayDungeonDialogue(MagmaCavernMidDialogue_9);
   sub_803E708(10,0x46);
@@ -1706,21 +1706,21 @@ void MagmaCavernMidDialogue(void)
   PlaySoundEffect(0x1d5);
   SpriteLookAroundEffect(PartnerEntity);
   // That's right...
-  // What happened to {ARG_POKEMON_3}?
-  // Where is {ARG_POKEMON_3}?
+  // What happened to {POKEMON_3}?
+  // Where is {POKEMON_3}?
   //
   // Wait...
-  // What about {ARG_POKEMON_3}?
-  // Where did {ARG_POKEMON_3} go?
+  // What about {POKEMON_3}?
+  // Where did {POKEMON_3} go?
   DisplayDungeonDialogue(MagmaCavernMidDialogue_12);
   sub_803E708(0x1e,0x46);
-  // {ARG_POKEMON_3} is...
-  // Still battling {ARG_POKEMON_2}...
+  // {POKEMON_3} is...
+  // Still battling {POKEMON_2}...
   DisplayDungeonDialogue(MagmaCavernMidDialogue_13);
   sub_803E708(10,0x46);
   sub_80869E4(PartnerEntity,4,1,2);
   sub_80869E4(LeaderEntity,4,2,6);
-  // {ARG_POKEMON_0}!
+  // {POKEMON_0}!
   // We've got to hurry!
   DisplayDungeonDialogue(MagmaCavernMidDialogue_14);
   sub_8089294();
@@ -3221,7 +3221,7 @@ void sub_808AFB0(char param_1)
   if ((sub_8098100(0x22) == 0) && (param_1 == 0x2E) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ROCK_PART) != 0)) {
     sub_8097FD0(0x1d);
     SetMessageArgument(gAvailablePokemonNames,GetLeader(),0);
-    // {ARG_POKEMON_0} obtained the Rock Part that Regirock was guarding
+    // {POKEMON_0} obtained the Rock Part that Regirock was guarding
     DisplayDungeonDialogue(gRegirockPostFightDialogue_2);
     sub_80421C0(0,0xd4);
     sub_803E708(10,70);
@@ -3239,7 +3239,7 @@ void sub_808B030(char param_1)
   if ((sub_8098100(0x22) == 0) && (param_1 == 0x2F) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ICE_PART) != 0)) {
     sub_8097FD0(0x1d);
     SetMessageArgument(gAvailablePokemonNames,GetLeader(),0);
-    // {ARG_POKEMON_0} obtained the Ice Part that Regice was guarding
+    // {POKEMON_0} obtained the Ice Part that Regice was guarding
     DisplayDungeonDialogue(gRegicePostFightDialogue_2);
     sub_80421C0(0,0xd4);
     sub_803E708(10,70);
@@ -3257,7 +3257,7 @@ void sub_808B0B0(char param_1)
   if ((sub_8098100(0x22) == 0) && (param_1 == 0x30) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_STEEL_PART) != 0)) {
     sub_8097FD0(0x1d);
     SetMessageArgument(gAvailablePokemonNames, GetLeader(), 0);
-    // {ARG_POKEMON_0} obtained the Steel Part that Registeel was guarding
+    // {POKEMON_0} obtained the Steel Part that Registeel was guarding
     DisplayDungeonDialogue(gRegisteelPostFightDialogue_2);
     sub_80421C0(0,0xd4);
     sub_803E708(10,70);
@@ -4058,10 +4058,10 @@ void KyogrePreFightDialogue(void)
     sub_803E708(10,0x46);
     DungeonFadeInNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE,0x3c);
     sub_808C360();
-    // My duels against {ARG_POKEMON_3} (Groudon) left us both exhausted
+    // My duels against {POKEMON_3} (Groudon) left us both exhausted
     DisplayDungeonDialogue(gKyogrePreFightDialogue_4);
     KyogreScreenFlash();
-    // I am {ARG_POKEMON_2} (Kyogre)!
+    // I am {POKEMON_2} (Kyogre)!
     // The lord of the sea!
     DisplayDungeonDialogue(gKyogrePreFightDialogue_5);
     KyogreScreenFlash();
@@ -4272,7 +4272,7 @@ void CelebiJoinDialogue(void)
         sub_8086598();
         sub_8086598();
         sub_8086598();
-        // The Time-Traveling Pokemon {ARG_POKEMON_2} (Celebi)!
+        // The Time-Traveling Pokemon {POKEMON_2} (Celebi)!
         DisplayDungeonDialogue(gCelebiJoinDialogue_2);
         PlaySoundEffect(0x1c7);
         sub_806CDD4(CelebiEntity,10,DIRECTION_SOUTH);

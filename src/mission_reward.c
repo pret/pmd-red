@@ -67,53 +67,53 @@ const UnkTextStruct2 gUnknown_80E041C = {
 
 ALIGNED(4) const u8 gUnknown_80E0434[] = _(
         " Here's your reward!\n"
-        "{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}!");
+        "{COLOR CYAN}{VALUE_0}{RESET} {POKE}!");
 
 ALIGNED(4) const u8 gUnknown_80E045C[] = _(
-        "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1} received\n"
-        "{CENTER_ALIGN}{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.");
+        "{CENTER_ALIGN}{COLOR YELLOW_N}{POKEMON_0}{RESET} received\n"
+        "{CENTER_ALIGN}{COLOR CYAN}{VALUE_0}{RESET} {POKE}.");
 
 ALIGNED(4) const u8 gUnknown_80E0484[] = _(
-        "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}'s team received\n"
-        "{CENTER_ALIGN}{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.");
+        "{CENTER_ALIGN}{COLOR YELLOW_N}{POKEMON_0}{RESET}'s team received\n"
+        "{CENTER_ALIGN}{COLOR CYAN}{VALUE_0}{RESET} {POKE}.");
 
 ALIGNED(4) const u8 gUnknown_80E04B4[]= _(
         " As your reward, you can\n"
         "now go to the Friend Area\n"
-        "{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}!");
+        "{COLOR GREEN}{FRIEND_AREA}{RESET}!");
 
 ALIGNED(4) const u8 gUnknown_80E04F4[] = _(
         "{CENTER_ALIGN}...Oh, wait, sorry.{EXTRA_MSG}"
         "{CENTER_ALIGN}You already have the \n"
-        "{CENTER_ALIGN}{COLOR_1 GREEN}{ARG_FRIEND_AREA} Friend Area{END_COLOR_TEXT_1}.{EXTRA_MSG}"
+        "{CENTER_ALIGN}{COLOR GREEN}{FRIEND_AREA} Friend Area{RESET}.{EXTRA_MSG}"
         "{CENTER_ALIGN}I'm sorry that my reward is\n"
         "{CENTER_ALIGN}something you already have.{EXTRA_MSG}"
-        "{CENTER_ALIGN}In its place, {COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1},\n"
-        "{CENTER_ALIGN}you can have {COLOR_1 LIGHT_BLUE}1,000{END_COLOR_TEXT_1} {POKE}.");
+        "{CENTER_ALIGN}In its place, {COLOR YELLOW_N}{POKEMON_0}{RESET},\n"
+        "{CENTER_ALIGN}you can have {COLOR CYAN_G}1,000{RESET} {POKE}.");
 
 ALIGNED(4) const u8 gUnknown_80E05C0[] = _(
-        "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1} gained access\n"
+        "{CENTER_ALIGN}{COLOR YELLOW_N}{POKEMON_0}{RESET} gained access\n"
         "{CENTER_ALIGN}to the Friend Area\n"
-        "{CENTER_ALIGN}{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}.");
+        "{CENTER_ALIGN}{COLOR GREEN}{FRIEND_AREA}{RESET}.");
 
 ALIGNED(4) const u8 gUnknown_80E05FC[] = _(
-        "{CENTER_ALIGN}{COLOR_1 YELLOW_5}{ARG_POKEMON_0}{END_COLOR_TEXT_1}'s team gained access\n"
+        "{CENTER_ALIGN}{COLOR YELLOW_N}{POKEMON_0}{RESET}'s team gained access\n"
         "{CENTER_ALIGN}to the Friend Area\n"
-        "{CENTER_ALIGN}{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}.");
+        "{CENTER_ALIGN}{COLOR GREEN}{FRIEND_AREA}{RESET}.");
 
 ALIGNED(4) const u8 gUnknown_80E0640[] = _(
         " Here's your reward!\n"
-        "The promised {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1}!");
+        "The promised {COLOR GREEN}{MOVE_ITEM_1}{RESET}!");
 
 ALIGNED(4) const u8 gUnknown_80E0670[] = _(
-        "{CENTER_ALIGN}Rescue Team {COLOR_1 LIGHT_BLUE}$t{END_COLOR_TEXT_1}\n"
-        "{CENTER_ALIGN}gained {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} rescue points.");
+        "{CENTER_ALIGN}Rescue Team {COLOR CYAN_G}$t{RESET}\n"
+        "{CENTER_ALIGN}gained {COLOR CYAN}{VALUE_0}{RESET} rescue points.");
 
 ALIGNED(4) const u8 gUnknown_80E06A8[] = _(
         "{CENTER_ALIGN}Congratulations!{EXTRA_MSG}"
-        "{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE}$t{END_COLOR_TEXT_1} went up in rank\n"
-        "{CENTER_ALIGN}from the {ARG_POKEMON_2}\n"
-        "{CENTER_ALIGN}to the {ARG_POKEMON_3}!");
+        "{CENTER_ALIGN}{COLOR CYAN_G}$t{RESET} went up in rank\n"
+        "{CENTER_ALIGN}from the {POKEMON_2}\n"
+        "{CENTER_ALIGN}to the {POKEMON_3}!");
 
 
 void SetRewardSceneState(u32);

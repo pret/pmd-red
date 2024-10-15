@@ -486,7 +486,7 @@ bool32 EncoreMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4
 
 bool32 RageMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-  // {ARG_POKEMON_0} is enraged
+  // {POKEMON_0} is enraged
   SetChargeStatusTarget(pokemon,target,STATUS_ENRAGED,move,gUnknown_80FAC88);
   return TRUE;
 }

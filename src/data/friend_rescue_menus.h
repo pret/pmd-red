@@ -282,8 +282,8 @@ const MenuItem gUnknown_80E24F8[5] = {
     {NULL, 0x19},
 };
 
-ALIGNED(4) const u8 GetHelp_80E2520[] = _("{COLOR_1 YELLOW}Get help{END_COLOR_TEXT_1} ");
-ALIGNED(4) const u8 GoRescue_80E530[] = _("{COLOR_1 YELLOW}Go rescue{END_COLOR_TEXT_1} ");
+ALIGNED(4) const u8 GetHelp_80E2520[] = _("{COLOR YELLOW}Get help{RESET} ");
+ALIGNED(4) const u8 GoRescue_80E530[] = _("{COLOR YELLOW}Go rescue{RESET} ");
 const u8 RescueInfo_80E2540[] = "Friend Rescue Info";
 
 extern const u8 RescueProcedures_80E25A0[];

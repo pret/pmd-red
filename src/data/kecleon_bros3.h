@@ -17,4 +17,4 @@ static const UnkTextStruct2 sUnknown_80DB914 = {
 };
 
 ALIGNED(4) static const u8 sGoods[] = _("Goods");
-ALIGNED(4) static const u8 sFmtRed[] = _("{COLOR_1 RED}%s{END_COLOR_TEXT_1}");
+ALIGNED(4) static const u8 sFmtRed[] = _("{COLOR RED}%s{RESET}");

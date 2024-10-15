@@ -42,8 +42,8 @@ const UnkTextStruct2 gUnknown_80DC274 = {
     NULL,
 };
 
-ALIGNED(4) const u8 gUnknown_80DC28C[] = _("Moves: {COLOR_1 YELLOW}{ARG_POKEMON_0}{END_COLOR_TEXT_1} ");
-ALIGNED(4) const u8 gUnknown_80DC2A0[] = _("{ARG_MOVE_ITEM_0}");
+ALIGNED(4) const u8 gUnknown_80DC28C[] = _("Moves: {COLOR YELLOW}{POKEMON_0}{RESET} ");
+ALIGNED(4) const u8 gUnknown_80DC2A0[] = _("{MOVE_ITEM_0}");
 
 u32 sub_8006544(u32 index);
 s32 sub_801F3F8(void);

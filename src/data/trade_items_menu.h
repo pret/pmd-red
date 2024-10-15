@@ -62,7 +62,7 @@ static const MenuItem sUnknown_80E618C[3] = {
 ALIGNED(4) static const u8 sWhatDoPrompt[] = "What would you like to do? ";
 ALIGNED(4) static const u8 sPleaseChooseItem[] = "Please choose the item to be sent.";
 ALIGNED(4) static const u8 sFmtWillBeSentPrompt[] = _(
-    "{COLOR_1 LIGHT_BLUE}{ARG_VALUE_0}{END_COLOR_TEXT_1} {COLOR_1 GREEN_2}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}\n"
+    "{COLOR CYAN_G}{VALUE_0}{RESET} {COLOR GREEN_I}{MOVE_ITEM_0}(s){RESET}\n"
     "will be sent.\n"
     "Is that OK?");
 
@@ -83,10 +83,10 @@ ALIGNED(4) static const u8 sInCommunication[] = _(
 
 ALIGNED(4) static const u8 sFmtYouReceived[] = _(
     "You received\n"
-    "{COLOR_1 LIGHT_BLUE}{ARG_VALUE_0}{END_COLOR_TEXT_1} {COLOR_1 GREEN_2}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}.\n"
+    "{COLOR CYAN_G}{VALUE_0}{RESET} {COLOR GREEN_I}{MOVE_ITEM_0}(s){RESET}.\n"
     "Your adventure will be saved.");
 
-ALIGNED(4) static const u8 sFmtYouSent[] = _("You sent {COLOR_1 LIGHT_BLUE}{ARG_VALUE_0}{END_COLOR_TEXT_1} {COLOR_1 GREEN_2}{ARG_MOVE_ITEM_0}(s){END_COLOR_TEXT_1}.");
+ALIGNED(4) static const u8 sFmtYouSent[] = _("You sent {COLOR CYAN_G}{VALUE_0}{RESET} {COLOR GREEN_I}{MOVE_ITEM_0}(s){RESET}.");
 
 // Trade Items Menu Link Error Messages
 ALIGNED(4) static const u8 sCommunicationError[] = "There was a communication error.";

@@ -78,7 +78,7 @@ ALIGNED(4) static const u8 sUnknown_80DA100[] = _(
     "Your reward...\n"
     "Promised...{EXTRA_MSG}"
     " Zzz... Urr!\n"
-    "{COLOR_1 GREEN_2}Bonsly Doll{END_COLOR_TEXT_1}...");
+    "{COLOR GREEN_I}Bonsly Doll{RESET}...");
 
 ALIGNED(4) static const u8 sUnknown_80DA204[] = _(
     " Ah... Zzznarr...\n"
@@ -94,7 +94,7 @@ ALIGNED(4) static const u8 sUnknown_80DA248[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80DA290[] = _(
     " Zzz... Narr...\n"
-    "{ARG_POKEMON_0}? 'K, go...");
+    "{POKEMON_0}? 'K, go...");
 
 ALIGNED(4) static const u8 sUnknown_80DA2B4[] = _(
     " Zzznarr... Zzz...\n"
@@ -119,9 +119,9 @@ ALIGNED(4) static const u8 sUnknown_80DA338[] = _(
     "level up...{WAIT_PRESS}\n"
     "And toughen up your rescue team.{EXTRA_MSG}"
     " Also...{WAIT_PRESS}\n"
-    "In the {COLOR_1 YELLOW_4}Fire Maze{END_COLOR_TEXT_1} you will find only\n"
+    "In the {COLOR YELLOW_D}Fire Maze{RESET} you will find only\n"
     "Fire-type Pokémon.{EXTRA_MSG}"
-    " In the {COLOR_1 YELLOW_4}Water Maze{END_COLOR_TEXT_1} there\n"
+    " In the {COLOR YELLOW_D}Water Maze{RESET} there\n"
     "will only be Water-type Pokémon.{EXTRA_MSG}"
     " In such ways, only one type\n"
     "of Pokémon will be in a given room.\n"
@@ -163,7 +163,7 @@ ALIGNED(4) static const u8 sUnknown_80DA688[] = _(
     "I promised you a reward for completing\n"
     "the training courses!{EXTRA_MSG}"
     " So... Here it is!{WAIT_PRESS}\n"
-    "My {COLOR_1 GREEN_2}Bonsly Doll{END_COLOR_TEXT_1}!{EXTRA_MSG}"
+    "My {COLOR GREEN_I}Bonsly Doll{RESET}!{EXTRA_MSG}"
     " Isn't it smashing? Hey?!");
 
 ALIGNED(4) static const u8 sUnknown_80DA844[] = _(
@@ -184,7 +184,7 @@ ALIGNED(4) static const u8 sUnknown_80DA908[] = _(
     "forward!");
 
 ALIGNED(4) static const u8 sUnknown_80DA998[] = _(
-    " The {ARG_POKEMON_0}?{WAIT_PRESS}\n"
+    " The {POKEMON_0}?{WAIT_PRESS}\n"
     "Your decision stands!{WAIT_PRESS}\n"
     "Let the training begin!");
 

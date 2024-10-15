@@ -77,12 +77,12 @@ ALIGNED(4) static const u8 sLetUsBegin[] = _(
     "{CENTER_ALIGN}Let us begin.");
 
 ALIGNED(4) static const u8 sFmtChangedAppearance[] = _(
-    "{CENTER_ALIGN}...{WAIT_PRESS}{ARG_NICKNAME_0} is undergoing changes...{EXTRA_MSG}"
-    "{CENTER_ALIGN}{ARG_NICKNAME_0}'s appearance changed...{EXTRA_MSG}");
+    "{CENTER_ALIGN}...{WAIT_PRESS}{NAME_0} is undergoing changes...{EXTRA_MSG}"
+    "{CENTER_ALIGN}{NAME_0}'s appearance changed...{EXTRA_MSG}");
 
 ALIGNED(4) static const u8 sFmtEvolved[] = _(
-    "{CENTER_ALIGN}It evolved from {COLOR_1 GREEN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}\n"
-    "{CENTER_ALIGN}to {COLOR_1 YELLOW}{ARG_POKEMON_1}{END_COLOR_TEXT_1}!");
+    "{CENTER_ALIGN}It evolved from {COLOR GREEN}{POKEMON_0}{RESET}\n"
+    "{CENTER_ALIGN}to {COLOR YELLOW}{POKEMON_1}{RESET}!");
 
 ALIGNED(4) static const u8 sComeAlone[] = _(
     "{CENTER_ALIGN}...{EXTRA_MSG}"

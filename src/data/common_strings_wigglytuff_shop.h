@@ -101,7 +101,7 @@ ALIGNED(4) static const u8 sUnknown_80D7A44[] = _(
     "their species...{EXTRA_MSG}"
     " Kwoo... Sssnore...\n"
     "See what Pokémon can live there by\n"
-    "checking {COLOR_1 YELLOW}Info{END_COLOR_TEXT_1}...{EXTRA_MSG}"
+    "checking {COLOR YELLOW}Info{RESET}...{EXTRA_MSG}"
     " Zzz...\n"
     "I don't sell some Friend Areas...{EXTRA_MSG}"
     " Kwoo...\n"
@@ -113,14 +113,14 @@ ALIGNED(4) static const u8 sUnknown_80D7A44[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D7C94[] = _(
     " Sssnore...\n"
-    "{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}...?\n"
+    "{COLOR GREEN}{FRIEND_AREA}{RESET}...?\n"
     "I can't get that Friend Area...{EXTRA_MSG}"
     " Zzz... Zzz...\n"
     "Sorry...");
 
 ALIGNED(4) static const u8 sUnknown_80D7CE8[] = _(
     " Zzz... Hunh...?\n"
-    "{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}...?\n"
+    "{COLOR GREEN}{FRIEND_AREA}{RESET}...?\n"
     "I don't know... I'll check...{EXTRA_MSG}"
     " Sssnore...\n"
     "I'll have it for sale...\n"
@@ -129,12 +129,12 @@ ALIGNED(4) static const u8 sUnknown_80D7CE8[] = _(
 ALIGNED(4) static const u8 sUnknown_80D7D64[] = _(
     " Sssnore...\n"
     "You can already go...\n"
-    "Friend Area {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}...");
+    "Friend Area {COLOR GREEN}{FRIEND_AREA}{RESET}...");
 
 ALIGNED(4) static const u8 sUnknown_80D7DA0[] = _(
     " Dwee... Kwoo...\n"
-    "{COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}'s Friend Area...\n"
-    "Zzz... {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}...");
+    "{COLOR CYAN}{POKEMON_0}{RESET}'s Friend Area...\n"
+    "Zzz... {COLOR GREEN}{FRIEND_AREA}{RESET}...");
 
 ALIGNED(4) static const u8 sUnknown_80D7DE0[] = _(
     " Another Pokémon...\n"
@@ -165,23 +165,23 @@ ALIGNED(4) static const u8 sUnknown_80D7ED0[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D7F10[] = _(
     " Grats... Zzz...{WAIT_PRESS}\n"
-    "You can go to {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}...{EXTRA_MSG}"
+    "You can go to {COLOR GREEN}{FRIEND_AREA}{RESET}...{EXTRA_MSG}"
     " Dwee... Sssnore...\n"
     "Make friends with Pokémon in...\n"
-    "{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}...");
+    "{COLOR GREEN}{FRIEND_AREA}{RESET}...");
 
 ALIGNED(4) static const u8 sUnknown_80D7F7C[] = _(
     " Zzz... Dwee... Gotcha...{WAIT_PRESS}\n"
     "Zzz... Let's do it...{EXTRA_MSG}"
     " Sssnore♪ Sssnore♪\n"
-    "{ARG_POKEMON_6}〜♪ {ARG_POKEMON_6}〜♪\n"
+    "{POKEMON_6}〜♪ {POKEMON_6}〜♪\n"
     "Let's be friends...{EXTRA_MSG}"
     " Kwoo!\n"
     "Taaaaaaah!");
 
 ALIGNED(4) static const u8 sUnknown_80D8000[] = _(
-    " Kwoo? {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}?\n"
-    "That's {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}...\n"
+    " Kwoo? {COLOR GREEN}{FRIEND_AREA}{RESET}?\n"
+    "That's {COLOR CYAN}{VALUE_0}{RESET} {POKE}...\n"
     "OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D8030[] = _(
@@ -203,7 +203,7 @@ ALIGNED(4) static const u8 sUnknown_80D80B0[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D80D4[] = _(
     " Friends... Zzz...\n"
-    "Welcome to the {ARG_POKEMON_6} Club...");
+    "Welcome to the {POKEMON_6} Club...");
 
 ALIGNED(4) static const u8 sUnknown_80D8104[] = _(
     " Would you like to get more\n"
@@ -222,7 +222,7 @@ ALIGNED(4) static const u8 sUnknown_80D8104[] = _(
     "their species.{EXTRA_MSG}"
     " If you're buying a Friend\n"
     "Area, you should confirm what Pokémon\n"
-    "can live there by checking {COLOR_1 YELLOW}Info{END_COLOR_TEXT_1}.{EXTRA_MSG}"
+    "can live there by checking {COLOR YELLOW}Info{RESET}.{EXTRA_MSG}"
     " Also, there are some Friend\n"
     "Areas that I don't sell.{EXTRA_MSG}"
     " I think there are some\n"
@@ -235,12 +235,12 @@ ALIGNED(4) static const u8 sUnknown_80D8104[] = _(
     "delighted when you make new friends!");
 
 ALIGNED(4) static const u8 sUnknown_80D8420[] = _(
-    " {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}?\n"
+    " {COLOR GREEN}{FRIEND_AREA}{RESET}?\n"
     "I can't get that Friend Area for you.{WAIT_PRESS}\n"
     "I'm really sorry.");
 
 ALIGNED(4) static const u8 sUnknown_80D8468[] = _(
-    " {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}?\n"
+    " {COLOR GREEN}{FRIEND_AREA}{RESET}?\n"
     "I don't know much about it at all.{WAIT_PRESS}\n"
     "I'll check up on it.{EXTRA_MSG}"
     " I'll add it to the Friend\n"
@@ -248,11 +248,11 @@ ALIGNED(4) static const u8 sUnknown_80D8468[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D84F8[] = _(
     " You can already go to the\n"
-    "Friend Area {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}.");
+    "Friend Area {COLOR GREEN}{FRIEND_AREA}{RESET}.");
 
 ALIGNED(4) static const u8 sUnknown_80D8528[] = _(
-    " {COLOR_1 CYAN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}'s Friend Area\n"
-    "is {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}.");
+    " {COLOR CYAN}{POKEMON_0}{RESET}'s Friend Area\n"
+    "is {COLOR GREEN}{FRIEND_AREA}{RESET}.");
 
 ALIGNED(4) static const u8 sUnknown_80D8550[] = _(
     " Is there another Pokémon\n"
@@ -282,19 +282,19 @@ ALIGNED(4) static const u8 sUnknown_80D8644[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D8674[] = _(
     " Congratulations!{WAIT_PRESS}\n"
-    "You can go to {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1} now!{EXTRA_MSG}"
+    "You can go to {COLOR GREEN}{FRIEND_AREA}{RESET} now!{EXTRA_MSG}"
     " You can recruit\n"
     "Pokémon that live in the Friend Area\n"
-    "{COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}.");
+    "{COLOR GREEN}{FRIEND_AREA}{RESET}.");
 
 ALIGNED(4) static const u8 sUnknown_80D86E4[] = _(
     " Gotcha! Let's do it!{WAIT_PRESS}\n"
-    "{ARG_POKEMON_6}〜♪ {ARG_POKEMON_6}〜♪{WAIT_PRESS}\n"
+    "{POKEMON_6}〜♪ {POKEMON_6}〜♪{WAIT_PRESS}\n"
     "Let's be friends... Yoomtaaaaaaah!");
 
 ALIGNED(4) static const u8 sUnknown_80D8738[] = _(
-    " {COLOR_1 GREEN}{ARG_FRIEND_AREA}{END_COLOR_TEXT_1}?\n"
-    "That will be {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
+    " {COLOR GREEN}{FRIEND_AREA}{RESET}?\n"
+    "That will be {COLOR CYAN}{VALUE_0}{RESET} {POKE}.\n"
     "Is that OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D876C[] = _(
@@ -316,5 +316,5 @@ ALIGNED(4) static const u8 sUnknown_80D8818[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D883C[] = _(
     " Friends are my treasures!\n"
-    "Welcome to the {ARG_POKEMON_6} Club--\n"
+    "Welcome to the {POKEMON_6} Club--\n"
     "a circle of friends! ");

@@ -37,7 +37,7 @@ static const struct ScriptCommand s_script_WAIT_START_FUNC[] = { /* 0x811ef28 */
 
 static const struct ScriptCommand s_script_INCOMPLETE_TALK[] = { /* 0x811ef58 */
     DEBUGINFO,
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("#CWUnregistered dialog script#R") },
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{COLOR RED_W}Unregistered dialog script{RESET}") },
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -75,7 +75,7 @@ static const struct ScriptCommand s_script_OBJECT_REPLY_NORMAL[] = { /* 0x811f0a
 
 static const struct ScriptCommand s_script_EXAMINE_MISS[] = { /* 0x811f0e8 */
     DEBUGINFO,
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("$n0 checked underfoot.") },
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{NAME_0} checked underfoot.") },
     { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("But there was nothing to be found...") },
     JUMP_SCRIPT(END_TALK),
 };
@@ -135,16 +135,16 @@ static const struct ScriptCommand s_script_HABITAT_TALK_S01E02A[] = { /* 0x811f3
     RET,
   LABEL(0), /* = 0x00 */
     { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Hello!") },
-    ASK3(FALSE, /*default*/ 1, /* speaker */ 1, _(" Oh?#W Did you perhaps wish\nto change the team flag's design?")),
+    ASK3(FALSE, /*default*/ 1, /* speaker */ 1, _(" Oh?{WAIT_PRESS} Did you perhaps wish\nto change the team flag's design?")),
     CHOICE(/* label */  1, _("No need to change.")),
     CHOICE(/* label */  2, _("Yes, please.")),
   LABEL(1), /* = 0x01 */
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I see.#W If you would like the\nflag's design changed, please tell me.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I see.{WAIT_PRESS} If you would like the\nflag's design changed, please tell me.") },
     { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x3b, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
     RET,
   LABEL(2), /* = 0x02 */
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Ah, very well!#W\nI may be unknown, but nonetheless, I am\nan artist.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Ah, very well!{WAIT_PRESS}\nI may be unknown, but nonetheless, I am\nan artist.") },
     { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I will do my best to create\na splendid design for you!\nPlease check the rescue team flag later!") },
     { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" If my design fails to\nimpress you, please let me know.") },
     { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" If so, I will change the\ndesign to one perhaps more to your liking.") },
@@ -556,8 +556,8 @@ static const struct ScriptCommand s_script_DISMISSAL_SALLY_MEMBER_FUNC[] = { /* 
     { 0xf2, 0x00,  0x0002,  0x00000000,  0x00000000, _("DISMISSAL_SALLY_MEMBER_FUNC\n") },
     { 0x3b, 0x09,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 0),
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("#+The rescue team member(s)\n#+dispersed to the Friend Area(s).") },
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("#+If you want to add members to\n#+the rescue team, go visit\n#+them in their Friend Areas.") },
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The rescue team member(s)\n{CENTER_ALIGN}dispersed to the Friend Area(s).") },
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.") },
     { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
   LABEL(0), /* = 0x00 */
     RET_DIRECT,
@@ -568,8 +568,8 @@ static const struct ScriptCommand s_script_DISMISSAL_SALLY_MEMBER2_FUNC[] = { /*
     { 0xf2, 0x00,  0x0002,  0x00000000,  0x00000000, _("DISMISSAL_SALLY_MEMBER2_FUNC\n") },
     { 0x3b, 0x09,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 0),
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("#+The rescue team member(s)\n#+dispersed to the Friend Area(s).") },
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("#+If you want to add members to\n#+the rescue team, go visit\n#+them in their Friend Areas.") },
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The rescue team member(s)\n{CENTER_ALIGN}dispersed to the Friend Area(s).") },
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.") },
     { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
   LABEL(0), /* = 0x00 */
     RET_DIRECT,
@@ -580,8 +580,8 @@ static const struct ScriptCommand s_script_DISMISSAL_SALLY_MEMBER3_FUNC[] = { /*
     { 0xf2, 0x00,  0x0002,  0x00000000,  0x00000000, _("DISMISSAL_SALLY_MEMBER3_FUNC\n") },
     { 0x3b, 0x09,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 0),
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("#+The rescue team member(s)\n#+dispersed to the Friend Area(s).") },
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("#+If you want to add members to\n#+the rescue team, go visit\n#+them in their Friend Areas.") },
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The rescue team member(s)\n{CENTER_ALIGN}dispersed to the Friend Area(s).") },
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.") },
     { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
   LABEL(0), /* = 0x00 */
     RET_DIRECT,
@@ -592,8 +592,8 @@ static const struct ScriptCommand s_script_DISMISSAL_SALLY_MEMBER4_FUNC[] = { /*
     { 0xf2, 0x00,  0x0002,  0x00000000,  0x00000000, _("DISMISSAL_SALLY_MEMBER4_FUNC\n") },
     { 0x3b, 0x09,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 0),
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("#+The rescue team member(s)\n#+dispersed to the Friend Area(s).") },
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("#+If you want to add members to\n#+the rescue team, go visit\n#+them in their Friend Areas.") },
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The rescue team member(s)\n{CENTER_ALIGN}dispersed to the Friend Area(s).") },
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.") },
     { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
   LABEL(0), /* = 0x00 */
     RET_DIRECT,
@@ -1763,11 +1763,11 @@ static const struct ScriptCommand s_script_EVENT_DIVIDE_WARP_LOCK_FUNC[] = { /* 
     { 0x2d, 0x09,  0x0001,  0x00000022,  0x00000000, NULL },
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Huh?\nAre you going home already?")),
-    VARIANT(/* == */  1, _(" We haven't gone to the\n#C5Pelipper Post Office#R yet?")),
-    VARIANT(/* == */  1, _(" You can go home after we\ngo to the #C5Pelipper Post Office#R.")),
+    VARIANT(/* == */  1, _(" We haven't gone to the\n{COLOR CYAN}Pelipper Post Office{RESET} yet?")),
+    VARIANT(/* == */  1, _(" You can go home after we\ngo to the {COLOR CYAN}Pelipper Post Office{RESET}.")),
     VARIANT_DEFAULT(_(" Huh?\nYou want to go home already?")),
     VARIANT_DEFAULT(_(" We're already here.\nLet me show you around a bit more.")),
-    VARIANT_DEFAULT(_(" Let's go to the #C5Pelipper\nPost Office#R at least.")),
+    VARIANT_DEFAULT(_(" Let's go to the {COLOR CYAN}Pelipper\nPost Office{RESET} at least.")),
     { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     RET_DIRECT,
   LABEL(1), /* = 0x01 */

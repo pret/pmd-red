@@ -283,34 +283,35 @@ L_BUTTON = 87 74
 UNK_95 = 7E 39 35 @ ~95 - Seems to be a special (?) symbol
 
 @ Placeholders for message arguments to swap out for names within strings.
-ARG_VALUE_0 = 24 64 30 @ $d0
-ARG_VALUE_1 = 24 64 31 @ $d1
-ARG_VALUE_2 = 24 64 32 @ $d2
-ARG_VALUE_3 = 24 64 33 @ $d3
-ARG_VALUE_4 = 24 64 34 @ $d4
-ARG_FRIEND_AREA = 24 68 @ $h
-ARG_MOVE_ITEM_0 = 24 69 30 @ $i0
-ARG_MOVE_ITEM_1 = 24 69 31 @ $i1
-ARG_POKEMON_0 = 24 6D 30 @ $m0
-ARG_POKEMON_1 = 24 6D 31 @ $m1
-ARG_POKEMON_2 = 24 6D 32 @ $m2
-ARG_POKEMON_3 = 24 6D 33 @ $m3
-ARG_POKEMON_4 = 24 6D 34 @ $m4
-ARG_POKEMON_5 = 24 6D 35 @ $m5
-ARG_POKEMON_6 = 24 6D 36 @ $m6
-ARG_POKEMON_7 = 24 6D 37 @ $m7
-ARG_POKEMON_8 = 24 6D 38 @ $m8
-ARG_NICKNAME_0 = 24 6E 30 @ $n0
-ARG_NICKNAME_1 = 24 6E 31 @ $n1
-ARG_NICKNAME_2 = 24 6E 32 @ $n2
-ARG_NICKNAME_3 = 24 6E 33 @ $n3
-ARG_NICKNAME_4 = 24 6E 34 @ $n4
-ARG_NICKNAME_5 = 24 6E 35 @ $n5
-ARG_NICKNAME_6 = 24 6E 36 @ $n6
-ARG_NICKNAME_7 = 24 6E 37 @ $n7
-ARG_NICKNAME_8 = 24 6E 38 @ $n8
-ARG_NICKNAME_9 = 24 6E 39 @ $n9
-ARG_TEAM_NAME = 24 74 @ $t
+
+VALUE_0 = 24 64 30 @ $d0
+VALUE_1 = 24 64 31 @ $d1
+VALUE_2 = 24 64 32 @ $d2
+VALUE_3 = 24 64 33 @ $d3
+VALUE_4 = 24 64 34 @ $d4
+FRIEND_AREA = 24 68 @ $h
+MOVE_ITEM_0 = 24 69 30 @ $i0
+MOVE_ITEM_1 = 24 69 31 @ $i1
+POKEMON_0 = 24 6D 30 @ $m0
+POKEMON_1 = 24 6D 31 @ $m1
+POKEMON_2 = 24 6D 32 @ $m2
+POKEMON_3 = 24 6D 33 @ $m3
+POKEMON_4 = 24 6D 34 @ $m4
+POKEMON_5 = 24 6D 35 @ $m5
+POKEMON_6 = 24 6D 36 @ $m6
+POKEMON_7 = 24 6D 37 @ $m7
+POKEMON_8 = 24 6D 38 @ $m8
+NAME_0 = 24 6E 30 @ $n0
+NAME_1 = 24 6E 31 @ $n1
+NAME_2 = 24 6E 32 @ $n2
+NAME_3 = 24 6E 33 @ $n3
+NAME_4 = 24 6E 34 @ $n4
+NAME_5 = 24 6E 35 @ $n5
+NAME_6 = 24 6E 36 @ $n6
+NAME_7 = 24 6E 37 @ $n7
+NAME_8 = 24 6E 38 @ $n8
+NAME_9 = 24 6E 39 @ $n9
+TEAM_NAME = 24 74 @ $t
 
 @ TEXT MACROS
 @
@@ -327,40 +328,43 @@ NEW_LINE = 23 6E     @ #n
 
 @ COLOR FORMATTING MACROS
 @
-@ TO USE: {COLOR_(1 or 2) ______} text here {END_COLOR_(# from first one)}
-@ EX: {COLOR_2 YELLOW}Steel{END_COLOR_TEXT_2} gets you a colored yellow "Steel"
-COLOR_1 = 23 43 @ #C
-COLOR_2 = 23 63 @ #c
-END_COLOR_TEXT_1 = 23 52 @ #R
-END_COLOR_TEXT_2 = 23 72 @ #r
+@ TO USE: {COLOR (or color lowercase) ______} text here {RESET (likewise)}
+@ EX: {COLOR YELLOW}Steel{RESET} gets you a colored yellow "Steel"
+COLOR = 23 43 @ #C
+color = 23 63 @ #c
+RESET = 23 52 @ #R
+reset = 23 72 @ #r
 
 @ COLORS
-WHITE = 30 @ 0
-BLUE = 31 @ 1
+@ note: unused refers to currently decomped data, possible they exist in incbin
+DEFAULT = 30 @ 0
+BLUE = 31 @ 1 - unused
 RED = 32 @ 2
-UNK_COLOR_2 = 02
-BLACK = 33 @ 3
+RED_RAW = 02
+RED_W = 57 @ W
+BLACK = 33 @ 3 - unused
 GREEN = 34 @ 4
-UNK_COLOR_4 = 04
+GREEN_RAW = 04
+GREEN_H = 48 @ H (Seems to be for Friend Areas)
+GREEN_I = 49 @ I
 CYAN = 35 @ 5
-CYAN_2 = 05
+CYAN_RAW = 05
+CYAN_G = 47 @ G
+CYAN_M = 4D @ M
 YELLOW = 36 @ 6
-YELLOW_2 = 06
-WHITE_2 = 37 @ 7
-DARKER_GRAY = 38 @ 8
-DARK_GRAY = 39 @ 9
-WHITE_3 = 41 @ A
-WHITE_4 = 42 @ B
-YELLOW_3 = 43 @ C
-YELLOW_4 = 44 @ D
-GENDER_COLOR = 45 @ E
-WHITE_5 = 46 @ F
-LIGHT_BLUE = 47 @ G (TODO CHECK THIS)
-UNK_COLOR_5 = 48 @ H (Seems to be for Friend Areas)
-GREEN_2 = 49 @ I
-CYAN_3 = 4D @ M
-YELLOW_5 = 4E @ N
-RED_2 = 57 @ W
+YELLOW_RAW = 06
+YELLOW_C = 43 @ C
+YELLOW_D = 44 @ D
+YELLOW_N = 4E @ N
+WHITE = 37 @ 7
+WHITE_A = 41 @ A - unused
+WHITE_B = 42 @ B - unused
+WHITE_F = 46 @ F - unused
+DARKER_GRAY = 38 @ 8 - unused
+DARK_GRAY = 39 @ 9 - unused
+GENDER_COLOR = 45 @ E - color 15
+COLOR15_S = 53 @ S - color 15 - unused
+COLOR15_T = 54 @ T - color 15 - unused
 
 
 @ FOR UNK_MACRO_3D

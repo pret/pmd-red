@@ -261,12 +261,12 @@ ALIGNED(4) static const u8 sUnknown_80D6364[] = _(
 ALIGNED(4) static const u8 sUnknown_80D6394[] = _(
     " Zzz... Reep, what...?\n"
     "For all that I can buy, I will pay\n"
-    "{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}... OK?");
+    "{COLOR CYAN}{VALUE_0}{RESET} {POKE}... OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D63E8[] = _(
     " Zzzzzz... Zzzzzz...?\n"
-    "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}?\n"
-    "Is {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE} OK?");
+    "{COLOR GREEN}{MOVE_ITEM_0}{RESET}?\n"
+    "Is {COLOR CYAN}{VALUE_0}{RESET} {POKE} OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D6420[] = _(
     " Reep reep... Eep...\n"
@@ -282,7 +282,7 @@ ALIGNED(4) static const u8 sUnknown_80D6478[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D6494[] = _(
     " Zzzzzz...\n"
-    "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} is {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}...\n"
+    "{COLOR GREEN}{MOVE_ITEM_0}{RESET} is {COLOR CYAN}{VALUE_0}{RESET} {POKE}...\n"
     "OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D64C0[] = _(
@@ -388,12 +388,12 @@ ALIGNED(4) static const u8 sUnknown_80D6B18[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D6B50[] = _(
     " For all that I can buy, I can\n"
-    "offer you {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
+    "offer you {COLOR CYAN}{VALUE_0}{RESET} {POKE}.\n"
     "Is that acceptable?");
 
 ALIGNED(4) static const u8 sUnknown_80D6BA0[] = _(
-    " {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}, you say?\n"
-    "For that, I can offer {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
+    " {COLOR GREEN}{MOVE_ITEM_0}{RESET}, you say?\n"
+    "For that, I can offer {COLOR CYAN}{VALUE_0}{RESET} {POKE}.\n"
     "Is that acceptable?");
 
 ALIGNED(4) static const u8 sUnknown_80D6BF4[] = _(
@@ -405,8 +405,8 @@ ALIGNED(4) static const u8 sUnknown_80D6C1C[] = _(
     "A very good choice!");
 
 ALIGNED(4) static const u8 sUnknown_80D6C48[] = _(
-    " {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}, you say?\n"
-    "That will be {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
+    " {COLOR GREEN}{MOVE_ITEM_0}{RESET}, you say?\n"
+    "That will be {COLOR CYAN}{VALUE_0}{RESET} {POKE}.\n"
     "Is that acceptable?");
 
 ALIGNED(4) static const u8 sUnknown_80D6C90[] = _(
@@ -492,13 +492,13 @@ ALIGNED(4) static const u8 sUnknown_80D7090[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D70B4[] = _(
     " Zzzzzz... Zzzzzz...?\n"
-    "I can pay you {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}\n"
+    "I can pay you {COLOR CYAN}{VALUE_0}{RESET} {POKE}\n"
     "for everything I can buy... OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D7108[] = _(
     " Zzzzzz... Zzzzzz...?\n"
-    "Selling that {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}...?\n"
-    "How about {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}?");
+    "Selling that {COLOR GREEN}{MOVE_ITEM_0}{RESET}...?\n"
+    "How about {COLOR CYAN}{VALUE_0}{RESET} {POKE}?");
 
 ALIGNED(4) static const u8 sUnknown_80D7154[] = _(
     " Zzz... Meep...\n"
@@ -514,8 +514,8 @@ ALIGNED(4) static const u8 sUnknown_80D71B0[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D71CC[] = _(
     " Zzz... Meep meep...\n"
-    "{COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}...?\n"
-    "{COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}, OK?");
+    "{COLOR GREEN}{MOVE_ITEM_0}{RESET}...?\n"
+    "{COLOR CYAN}{VALUE_0}{RESET} {POKE}, OK?");
 
 ALIGNED(4) static const u8 sUnknown_80D7204[] = _(
     " Buy? Huh, eep?\n"
@@ -538,7 +538,7 @@ ALIGNED(4) static const u8 sUnknown_80D72A0[] = _(
     "Welcome...");
 
 ALIGNED(4) static const u8 sUnknown_80D72B8[] = _(
-    " We, the {ARG_POKEMON_6}\n"
+    " We, the {POKEMON_6}\n"
     "Brothers, have a passion for selling\n"
     "items.{EXTRA_MSG}"
     " Items are useful for your\n"
@@ -552,7 +552,7 @@ ALIGNED(4) static const u8 sUnknown_80D72B8[] = _(
     " Until then, please go to\n"
     "a dungeon and spend some time.\n"
     "Please visit on your return〜♪{EXTRA_MSG}"
-    " Ah, yes. The {ARG_POKEMON_6}\n"
+    " Ah, yes. The {POKEMON_6}\n"
     "Shop is a nationwide chain.{EXTRA_MSG}"
     " There are shops even in\n"
     "dungeons.\n"
@@ -610,12 +610,12 @@ ALIGNED(4) static const u8 sUnknown_80D7740[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D776C[] = _(
     " For everything I can buy,\n"
-    "I can offer {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
+    "I can offer {COLOR CYAN}{VALUE_0}{RESET} {POKE}.\n"
     "Is that acceptable to you?");
 
 ALIGNED(4) static const u8 sUnknown_80D77C0[] = _(
-    " {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}?\n"
-    "I can offer you {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
+    " {COLOR GREEN}{MOVE_ITEM_0}{RESET}?\n"
+    "I can offer you {COLOR CYAN}{VALUE_0}{RESET} {POKE}.\n"
     "Will you sell it for that price?");
 
 ALIGNED(4) static const u8 sUnknown_80D780C[] = _(
@@ -631,8 +631,8 @@ ALIGNED(4) static const u8 sUnknown_80D785C[] = _(
     "It is yours to take!");
 
 ALIGNED(4) static const u8 sUnknown_80D788C[] = _(
-    " {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}?\n"
-    "That will be {COLOR_1 CYAN}{ARG_VALUE_0}{END_COLOR_TEXT_1} {POKE}.\n"
+    " {COLOR GREEN}{MOVE_ITEM_0}{RESET}?\n"
+    "That will be {COLOR CYAN}{VALUE_0}{RESET} {POKE}.\n"
     "Is that to your liking?");
 
 ALIGNED(4) static const u8 sUnknown_80D78CC[] = _(
@@ -653,4 +653,4 @@ ALIGNED(4) static const u8 sUnknown_80D7958[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80D797C[] = _(
     " Hello〜♪\n"
-    "Welcome to the {ARG_POKEMON_6} Shop〜♪ ");
+    "Welcome to the {POKEMON_6} Shop〜♪ ");
