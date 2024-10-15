@@ -108,6 +108,11 @@ static inline bool8 ItemExists(Item *item)
     return (item->flags & ITEM_FLAG_EXISTS);
 }
 
+static inline bool8 ItemSet(Item *item)
+{
+    return (item->flags & ITEM_FLAG_SET);
+}
+
 static inline bool8 ItemInShop(Item *item)
 {
     return (item->flags & ITEM_FLAG_IN_SHOP);

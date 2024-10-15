@@ -94,6 +94,11 @@ static inline bool8 MoveFlagExists(Move *move)
     return (move->moveFlags & MOVE_FLAG_EXISTS);
 }
 
+static inline bool8 MoveFlagSet(Move *move)
+{
+    return (move->moveFlags & MOVE_FLAG_SET);
+}
+
 static inline bool8 MoveFlagLinkChain(Move *move)
 {
     return (move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN);
