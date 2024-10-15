@@ -43,7 +43,7 @@ static const UnkTextStruct2 sUnknown_80DC2F8 = {
     NULL
 };
 
-const u8 gUnknown_80DC310[] = _("{ARG_POKEMON_0}");
+const u8 gUnknown_80DC310[] = _("{POKEMON_0}");
 
 extern void sub_801F918(s32);
 extern void sub_801FA58(void);

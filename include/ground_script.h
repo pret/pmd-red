@@ -10,13 +10,13 @@ typedef struct ScriptCommand {
     /* 0x2 */ s16 argShort;
     /* 0x4 */ s32 arg1;
     /* 0x8 */ s32 arg2;
-    /* 0xC */ u8* argPtr;
+    /* 0xC */ const u8* argPtr;
 } ScriptCommand;
 
 typedef struct ScriptInfoSmall
 {
     // size: 0xC (3 padding)
-    /* 0x0 */ ScriptCommand *ptr;
+    /* 0x0 */ const ScriptCommand *ptr;
     /* 0x4 */ s16 state;
     /* 0x6 */ s16 group;
     /* 0x8 */ s8  sector;
@@ -25,8 +25,8 @@ typedef struct ScriptInfoSmall
 typedef struct ScriptInfo
 {
     // size: 0xC (1 padding)
-    /* 0x0 */ ScriptCommand *ptr;
-    /* 0x4 */ ScriptCommand *ptr2;
+    /* 0x0 */ const ScriptCommand *ptr;
+    /* 0x4 */ const ScriptCommand *ptr2;
     /* 0x8 */ s16 group;
     /* 0xA */ s8  sector;
 } ScriptInfo;
@@ -45,7 +45,7 @@ typedef struct ScriptData
     // padding
     /* 0x10 */ ScriptInfo savedScript;
     // padding
-    /* 0x1C */ ScriptCommand *curPtr;
+    /* 0x1C */ const ScriptCommand *curPtr;
     /* 0x20 */ u8  curScriptOp;
     // padding
     /* 0x22 */ u16 unk22;
@@ -109,7 +109,7 @@ typedef struct Action
     /* 0x10 */ s16 group;
     /* 0x12 */ s8  sector;
     // padding
-    /* 0x14 */ ScriptCommand *predefinedScripts[4];
+    /* 0x14 */ const ScriptCommand *predefinedScripts[4];
     /* 0x24 */ ScriptData scriptData;
     /* 0x84 */ ScriptData scriptData2;
 } Action;
@@ -125,15 +125,83 @@ typedef struct GroundMapAction
     /* .... */ u8  fillE8[0x110 - 0xE6];
 } GroundMapAction;
 
-typedef struct FunctionScript
+typedef struct ScriptRef
 {
-    u16 unk0;
-    s16 unk2;
-    u8 *funcName;
-    ScriptCommand *script;
-} FunctionScript;
+    u16 id;
+    s16 type;
+    u8 *name;
+    const ScriptCommand *script;
+} ScriptRef;
 
-extern FunctionScript gFunctionScriptTable[];
+extern const ScriptRef gFunctionScriptTable[];
+
+struct CompactPos {
+    u8 xTiles;
+    u8 yTiles;
+    u8 xFlags;
+    u8 yFlags;
+};
+struct GroundLink {
+    struct CompactPos pos;
+    u8 width;
+    u8 height;
+    u8 ret;
+    u8 unk7;
+};
+typedef struct GroundLivesData {
+    u8 kind;
+    u8 unk1;
+    u8 width;
+    u8 height;
+    struct CompactPos pos;
+    const ScriptCommand *scripts[4];
+} GroundLivesData;
+typedef struct GroundObjectData {
+    u8 kind;
+    u8 unk1;
+    u8 width;
+    u8 height;
+    struct CompactPos pos;
+    const ScriptCommand *scripts[4];
+} GroundObjectData;
+typedef struct GroundEffectData {
+    u8 kind;
+    u8 unk1;
+    u8 width;
+    u8 height;
+    struct CompactPos pos;
+    const ScriptCommand *script;
+} GroundEffectData;
+typedef struct GroundEventData {
+    u8 kind;
+    u8 unk1;
+    u8 width;
+    u8 height;
+    struct CompactPos pos;
+    const ScriptRef *script;
+} GroundEventData;
+
+struct GroundScriptSector {
+    u32 nLives;
+    const GroundLivesData *lives;
+    u32 nObjects;
+    const GroundObjectData *objects;
+    u32 nEffects;
+    const GroundEffectData *effects;
+    u32 nEvents;
+    const GroundEventData *events;
+    u32 hasStation;
+    const ScriptRef * const *station;
+};
+struct GroundScriptGroup {
+    u32 nSectors;
+    const struct GroundScriptSector *sectors;
+};
+struct GroundScriptHeader {
+    u32 nGroups;
+    const struct GroundScriptGroup *groups;
+    const struct GroundLink *links;
+};
 
 #include "debug.h"
 
@@ -144,8 +212,8 @@ void GetFunctionScript(Action *param_1, ScriptInfoSmall *script, s16 index);
 bool8 GroundScriptLockCond(Action *param_1, s16 index, u32 param_3);
 bool8 ActionResetScriptData(Action *param_1, const DebugLocation *unused);
 bool8 GroundScript_ExecutePP(Action *, s32 *, ScriptInfoSmall *, const DebugLocation *unused);
-ScriptCommand *FindLabel(Action *action, s32 r1);
-ScriptCommand *ResolveJump(Action *action, s32 r1);
+const ScriptCommand *FindLabel(Action *action, s32 r1);
+const ScriptCommand *ResolveJump(Action *action, s32 r1);
 void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s16 group, s8 sector);
 
 #endif // GUARD_GROUND_SCRIPT_H

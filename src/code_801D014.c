@@ -593,7 +593,7 @@ static void sub_801D894(void)
     LoadTeamRankBadge(2, 8, 6);
 
     // Have to load before TeamRank funcs
-    r5 = sFmtPointsCyan; // %s {COLOR_1 CYAN}%d{END_COLOR_TEXT_1} Pts.
+    r5 = sFmtPointsCyan; // %s {COLOR CYAN}%d{RESET} Pts.
     rank = GetRescueTeamRank();
     sprintfStatic(buffer, r5, GetTeamRankString(rank), GetTeamRankPts());
     PrintStringOnWindow(32, 4, buffer, 2, 0);

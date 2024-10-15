@@ -453,22 +453,22 @@ gUnknown_80B71A0: @ 80B71A0
 
         .global CWEND_text
         CWEND_text:
-        .string "{COLOR_1 RED_2}END{END_COLOR_TEXT_1}\0"
+        .string "{COLOR RED_W}END{RESET}\0"
         .align 2,0
 
         .global CNLAST_text
         CNLAST_text:
-        .string "{COLOR_1 YELLOW_5}LAST{END_COLOR_TEXT_1}\0"
+        .string "{COLOR YELLOW_N}LAST{RESET}\0"
         .align 2,0
 
         .global CECONTINUE_text
         CECONTINUE_text:
-        .string "{COLOR_1 GENDER_COLOR}CONTINUE{END_COLOR_TEXT_1}\0"
+        .string "{COLOR GENDER_COLOR}CONTINUE{RESET}\0"
         .align 2,0
 
         .global CISTART_text
         CISTART_text:
-        .string "{COLOR_1 GREEN_2}START{END_COLOR_TEXT_1}\0"
+        .string "{COLOR GREEN_I}START{RESET}\0"
         .align 2,0
 
 	.global gGroundEnterLookupTable
@@ -1055,8 +1055,8 @@ gUnknown_80B7F14: @ 80B7F14
 
     .global gLocateSetErrorMessage
 gLocateSetErrorMessage: @ 80B7F20
-    .string "Memroy LocateSet [%p] buffer %8x size can't locate\n"
-    .string "    atb %02x grp %3d \0"
+    .ascii "Memroy LocateSet [%p] buffer %8x size can't locate\n"
+    .asciz "    atb %02x grp %3d \0"
     .align 2,0
 
 MemoryLocate_LocalCreateText:
@@ -1069,7 +1069,7 @@ gUnknown_80B7F88: @ 80B7F88
 
 	.global gLocalCreateErrorMessage
 gLocalCreateErrorMessage: @ 80B7F94
-        .string "Memroy LocalCreate buffer %08x size can't locate\0" @ Spelling error is intentional
+        .asciz "Memroy LocalCreate buffer %08x size can't locate\0" @ Spelling error is intentional
         .align 2,0
 
 @ code_80035F0

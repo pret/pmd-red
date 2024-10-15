@@ -18,7 +18,7 @@ static const UnkTextStruct2 sUnknown_80DB95C = {
 
 ALIGNED(4) static const u8 sTeamToolboxA[] = _("Team Toolbox A");
 ALIGNED(4) static const u8 sTeamToolboxB[] = _("Team Toolbox B");
-ALIGNED(4) static const u8 sFmtMoveItem0[] = _("{COLOR_1 UNK_COLOR_2}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1}");
-ALIGNED(4) static const u8 sFmtRed[] = _("{COLOR_1 RED}%s{END_COLOR_TEXT_1}");
+ALIGNED(4) static const u8 sFmtMoveItem0[] = _("{COLOR RED_RAW}{MOVE_ITEM_0}{RESET}");
+ALIGNED(4) static const u8 sFmtRed[] = _("{COLOR RED}%s{RESET}");
 ALIGNED(4) static const u8 sItems[] = _("Items");
 ALIGNED(4) static const u8 sSlash[] = _("/");

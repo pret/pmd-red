@@ -83,8 +83,8 @@
     .byte 15, 11, 0x00, 0x02, 0x01, 0x01, 0x02, 0x01
     .byte 15, 31, 0x00, 0x02, 0x01, 0x01, 0x02, 0x01
 
-    .global gUnknown_826F7FC
-    gUnknown_826F7FC:
+    .global gGroundScript_gs227
+    gGroundScript_gs227:
     .byte 0x02, 0x00, 0x00, 0x00
     .4byte HealthSafetyScenes
     .4byte HealthSafetyWaypoints

@@ -220,7 +220,10 @@ void CFile::TryConvertString()
 
     SkipWhitespace();
 
-    std::printf("{ ");
+    if (noTerminator)
+        std::printf("{ ");
+    else
+        std::printf("(");
 
     while (1)
     {
@@ -241,8 +244,16 @@ void CFile::TryConvertString()
                 RaiseError(e.what());
             }
 
-            for (int i = 0; i < length; i++)
-                printf("0x%02X, ", s[i]);
+            if (!noTerminator)
+                printf("\"");
+            for (int i = 0; i < length; i++) {
+                if (noTerminator)
+                    printf("0x%02X, ", s[i]);
+                else
+                    printf(' ' <= s[i] && s[i] <= '~' && s[i] != '\\' && s[i] != '\"' ? "%c" : "\\%03o", s[i]);
+            }
+            if (!noTerminator)
+                printf("\"");
         }
         else if (m_buffer[m_pos] == ')')
         {
@@ -263,7 +274,7 @@ void CFile::TryConvertString()
     if (noTerminator)
         std::printf(" }");
     else
-        std::printf("0x00 }");
+        std::printf(")");
 }
 
 bool CFile::CheckIdentifier(const std::string& ident)

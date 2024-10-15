@@ -1,6 +1,6 @@
 ALIGNED(4) static const u8 sSavingAdventure[] = _(
     "{CENTER_ALIGN}Saving your adventure...\n"
-    "{CENTER_ALIGN}Please don{APOSTROPHE}t turn off the power.");
+    "{CENTER_ALIGN}Please don't turn off the power.");
 
 ALIGNED(4) static const u8 sWriteGamePak[] = _(
     "{CENTER_ALIGN}Writing to GBA Game Pak.\n"

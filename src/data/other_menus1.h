@@ -24,9 +24,9 @@ const MenuItem sUnknown_80E656C[4] = { // TODO: MAKE STATIC WHEN other_menus1.s 
     {sUnknown_80E658C, 5},
     {NULL, 3},
 };
-ALIGNED(4) static const u8 sUnknown_80E658C[] = _("{CENTER_ALIGN}Don{APOSTROPHE}t turn the power off!");
+ALIGNED(4) static const u8 sUnknown_80E658C[] = _("{CENTER_ALIGN}Don't turn the power off!");
 ALIGNED(4) static const u8 sUnknown_80E65AC[] = _("{CENTER_ALIGN}Item transmitting!");
-ALIGNED(4) static const u8 sUnknown_80E65C4[] = _("{CENTER_ALIGN}{COLOR_1 RED}Caution!{END_COLOR_TEXT_1} ");
+ALIGNED(4) static const u8 sUnknown_80E65C4[] = _("{CENTER_ALIGN}{COLOR RED}Caution!{RESET} ");
 
 static const u8 sUnknown_80E65F8[];
 const MenuItem sUnknown_80E65D8[4] = { // TODO: MAKE STATIC WHEN other_menus1.s IS DED
@@ -82,7 +82,7 @@ static const MenuItem sUnknown_80E66D4[4] = {
 };
 ALIGNED(4) static const u8 sUnknown_80E66F4[] = _("{CENTER_ALIGN}Please press any button.");
 ALIGNED(4) static const u8 sUnknown_80E6710[] = _("{CENTER_ALIGN}Your adventure will be continued.");
-ALIGNED(4) static const u8 sUnknown_80E6734[] = _("{CENTER_ALIGN}{COLOR_1 LIGHT_BLUE}Success!{END_COLOR_TEXT_1} ");
+ALIGNED(4) static const u8 sUnknown_80E6734[] = _("{CENTER_ALIGN}{COLOR CYAN_G}Success!{RESET} ");
 
 static const UnkTextStruct2 sUnknown_80E6748 = {
     0, 0, 0, 0,
@@ -104,7 +104,7 @@ static const MenuItem sUnknown_80E6760[4] = {
 };
 ALIGNED(4) static const u8 sUnknown_80E6780[] = _("{CENTER_ALIGN}please try again.");
 ALIGNED(4) static const u8 sUnknown_80E6794[] = _("{CENTER_ALIGN}Check the Game Link cable and");
-ALIGNED(4) static const u8 sUnknown_80E67B4[] = _("{CENTER_ALIGN}{COLOR_1 RED}Communication error!{END_COLOR_TEXT_1} ");
+ALIGNED(4) static const u8 sUnknown_80E67B4[] = _("{CENTER_ALIGN}{COLOR RED}Communication error!{RESET} ");
 
 static const UnkTextStruct2 sUnknown_80E67D4 = {
     0, 0, 0, 0,
@@ -162,9 +162,9 @@ static const MenuItem sUnknown_80E68B4[4] = {
     {sUnknown_80E68D4, 5},
     {NULL, 3},
 };
-ALIGNED(4) static const u8 sUnknown_80E68D4[] = _("{CENTER_ALIGN}someone{APOSTROPHE}s storage space was full.");
+ALIGNED(4) static const u8 sUnknown_80E68D4[] = _("{CENTER_ALIGN}someone's storage space was full.");
 ALIGNED(4) static const u8 sUnknown_80E68FC[] = _("{CENTER_ALIGN}An item could not be transferred because");
-ALIGNED(4) static const u8 sUnknown_80E6928[] = _("{CENTER_ALIGN}{COLOR_1 RED}Error!{END_COLOR_TEXT_1} ");
+ALIGNED(4) static const u8 sUnknown_80E6928[] = _("{CENTER_ALIGN}{COLOR RED}Error!{RESET} ");
 
 static const UnkTextStruct2 sUnknown_80E6938 = {
     0, 0, 0, 0,
@@ -184,7 +184,7 @@ static const MenuItem sUnknown_80E6950[4] = {
     {NULL, 3},
 };
 ALIGNED(4) static const u8 sUnknown_80E6970[] = _("{CENTER_ALIGN}Please check again.");
-ALIGNED(4) static const u8 sUnknown_80E6988[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} can{APOSTROPHE}t be used.");
+ALIGNED(4) static const u8 sUnknown_80E6988[] = _("{CENTER_ALIGN}This {COLOR CYAN_G}SOS Mail{RESET} can't be used.");
 
 static const UnkTextStruct2 sUnknown_80E69B0 = {
     0, 0, 0, 0,
@@ -202,7 +202,7 @@ static const MenuItem sUnknown_80E69C8[4] = {
     {sUnknown_80E6970, 5},
     {NULL, 3},
 };
-ALIGNED(4) static const u8 sUnknown_80E69E8[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} can{APOSTROPHE}t be used.");
+ALIGNED(4) static const u8 sUnknown_80E69E8[] = _("{CENTER_ALIGN}This {COLOR CYAN_G}A-OK Mail{RESET} can't be used.");
 
 static const UnkTextStruct2 sUnknown_80E6A10 = {
     0, 0, 0, 0,
@@ -220,7 +220,7 @@ static const MenuItem sUnknown_80E6A28[4] = {
     {sUnknown_80E6970, 5},
     {NULL, 3},
 };
-ALIGNED(4) static const u8 sUnknown_80E6A48[] = _("{CENTER_ALIGN}This {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} can{APOSTROPHE}t be used.");
+ALIGNED(4) static const u8 sUnknown_80E6A48[] = _("{CENTER_ALIGN}This {COLOR CYAN_G}Thank-You Mail{RESET} can't be used.");
 
 static const UnkTextStruct2 sUnknown_80E6A74 = {
     0, 0, 0, 0,
@@ -239,7 +239,7 @@ static const MenuItem sUnknown_80E6A8C[4] = {
     {sUnknown_80E6AAC, 5},
     {NULL, 3},
 };
-ALIGNED(4) static const u8 sUnknown_80E6AAC[] = _("{CENTER_ALIGN}It can{APOSTROPHE}t be received.");
+ALIGNED(4) static const u8 sUnknown_80E6AAC[] = _("{CENTER_ALIGN}It can't be received.");
 ALIGNED(4) static const u8 sUnknown_80E6AC8[] = _("{CENTER_ALIGN}There is no space for new mail.");
 
 UNUSED static const UnkTextStruct2 sUnknown_80E6AEC = {
@@ -260,7 +260,7 @@ UNUSED static const MenuItem sUnknown_80E6B04[4] = {
     {NULL, 3},
 };
 ALIGNED(4) static const u8 sUnknown_80E6B24[] = _("{CENTER_ALIGN}You need to go further in the story.");
-ALIGNED(4) static const u8 sUnknown_80E6B4C[] = _("{CENTER_ALIGN}You may not go to that {COLOR_1 LIGHT_BLUE}dungeon{END_COLOR_TEXT_1} yet.");
+ALIGNED(4) static const u8 sUnknown_80E6B4C[] = _("{CENTER_ALIGN}You may not go to that {COLOR CYAN_G}dungeon{RESET} yet.");
 
 static const UnkTextStruct2 sUnknown_80E6B78 = {
     0, 0, 0, 0,
@@ -280,7 +280,7 @@ static const MenuItem sUnknown_80E6B90[4] = {
     {NULL, 3},
 };
 ALIGNED(4) static const u8 sUnknown_80E6BB0[] = _("{CENTER_ALIGN}Please try again.");
-ALIGNED(4) static const u8 sUnknown_80E6BC4[] = _("{CENTER_ALIGN}There was a problem on your friend{APOSTROPHE}s end.");
+ALIGNED(4) static const u8 sUnknown_80E6BC4[] = _("{CENTER_ALIGN}There was a problem on your friend's end.");
 
 static const UnkTextStruct2 sUnknown_80E6BF4 = {
     0, 0, 0, 0,

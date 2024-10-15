@@ -44,6 +44,7 @@ std::string StringParser::ReadCharOrEscape()
             if (sequence.length() == 0)
                 RaiseError("no mapping exists for double quote");
 
+            m_pos++;
             return sequence;
         }
         else if (m_buffer[m_pos] == '\\')
@@ -53,6 +54,7 @@ std::string StringParser::ReadCharOrEscape()
             if (sequence.length() == 0)
                 RaiseError("no mapping exists for backslash");
 
+            m_pos++;
             return sequence;
         }
     }

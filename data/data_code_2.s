@@ -101,7 +101,7 @@ gLoadScreenBackgroundPaletteFileNames: @ 80B6A28
 
 gSaveTextQuicksaving:: @ 80B6A34
 	.string "{CENTER_ALIGN}Quicksaving your adventure...\n"
-	.string "{CENTER_ALIGN}Please don{APOSTROPHE}t turn off the power.\0"
+	.string "{CENTER_ALIGN}Please don't turn off the power.\0"
 	.align 2, 0
 
 gSaveTextYourAdventureHasBeenSaved:: @ 80B6A7C
@@ -110,7 +110,7 @@ gSaveTextYourAdventureHasBeenSaved:: @ 80B6A7C
 
 gSaveTextYourAdventureHasBeenSavedLong:: @ 80B6AA0
 	.string "{CENTER_ALIGN}Your adventure has been saved.\n"
-	.string "{CENTER_ALIGN}When you are in a dungeon{COMMA} quicksave\n"
+	.string "{CENTER_ALIGN}When you are in a dungeon, quicksave\n"
 	.string "{CENTER_ALIGN}your progress before ending the game.\0"
 	.align 2, 0
 
@@ -131,11 +131,11 @@ gSaveTextError:: @ 80B6B88
 	.align 2, 0
 
 gSaveTextCantResume:: @ 80B6BDC
-	.string "{CENTER_ALIGN}Your data was not properly saved{COMMA}\n"
+	.string "{CENTER_ALIGN}Your data was not properly saved,\n"
 	.string "{CENTER_ALIGN}so your game cannot be resumed\n"
 	.string "{CENTER_ALIGN}from your last spot.{EXTRA_MSG}{CENTER_ALIGN}Your last outing is considered a defeat.\n"
-	.string "{CENTER_ALIGN}Before shutting down{COMMA} save in your\n"
-	.string "{CENTER_ALIGN}team base{COMMA} or quicksave in a dungeon.\0"
+	.string "{CENTER_ALIGN}Before shutting down, save in your\n"
+	.string "{CENTER_ALIGN}team base, or quicksave in a dungeon.\0"
 	.align 2, 0
 
 gSaveTextMayNotResume:: @ 80B6CB8

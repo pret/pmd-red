@@ -37,21 +37,21 @@ static const UnkTextStruct2 sUnknown_80DD190 = {
 ALIGNED(4) static const u8 sVisitWhoPrompt[] = "Whom would you like to visit?";
 
 ALIGNED(4) static const u8 sItemHandedOver[] = _(
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1} was\n"
+	"{CENTER_ALIGN}The {COLOR GREEN}{MOVE_ITEM_1}{RESET} was\n"
 	"{CENTER_ALIGN}handed over. ");
 
 ALIGNED(4) static const u8 sItemExchanged[] = _(
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1} was\n"
+	"{CENTER_ALIGN}The {COLOR GREEN}{MOVE_ITEM_1}{RESET} was\n"
 	"{CENTER_ALIGN}handed over.{EXTRA_MSG}"
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
+	"{CENTER_ALIGN}The {COLOR GREEN}{MOVE_ITEM_0}{RESET} was\n"
 	"{CENTER_ALIGN}returned to the Toolbox.");
 
 ALIGNED(4) static const u8 sReturnedToToolbox[] = _(
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
+	"{CENTER_ALIGN}The {COLOR GREEN}{MOVE_ITEM_0}{RESET} was\n"
 	"{CENTER_ALIGN}returned to the Toolbox.");
 
 ALIGNED(4) static const u8 sLeftOnStandby[] = _(
-    "{CENTER_ALIGN}{ARG_POKEMON_1} left the team to remain\n"
+    "{CENTER_ALIGN}{POKEMON_1} left the team to remain\n"
     "{CENTER_ALIGN}on standby in the Friend Area.");
 
 ALIGNED(4) static const u8 sGive[] = "Give";
@@ -62,4 +62,4 @@ ALIGNED(4) static const u8 sName[] = "Name";
 ALIGNED(4) static const u8 sSummary[] = "Summary";
 ALIGNED(4) static const u8 sMoves[] = "Moves";
 ALIGNED(4) static const u8 sCheckIQ[] = "Check IQ";
-ALIGNED(4) static const u8 sItemBuffered[] = _("Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} ");
+ALIGNED(4) static const u8 sItemBuffered[] = _("Item: {COLOR GREEN}{MOVE_ITEM_0}{RESET} ");

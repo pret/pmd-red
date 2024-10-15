@@ -22,6 +22,6 @@ const u8 sUnknown_80DC980[] = _("Friends");
 ALIGNED(4) //static // MAKE STATIC WHEN code_8023868.s IS DONE
 const u8 sUnknown_80DC988[] = _("Pokémon Friends");
 ALIGNED(4) //static // MAKE STATIC WHEN code_8023868.s IS DONE
-const u8 sUnknown_80DC998[] = _("{COLOR_2}%c%s{END_COLOR_TEXT_2}");
+const u8 sUnknown_80DC998[] = _("{color}%c%s{reset}");
 ALIGNED(4) //static // MAKE STATIC WHEN code_8023868.s IS DONE
 const u8 sUnknown_80DC9A4[] = _("%s");

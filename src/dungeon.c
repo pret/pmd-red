@@ -106,7 +106,7 @@ void sub_80901D8(DungeonLocation *param_1,DungeonLocation *param_2)
 
 void PrintYellowDungeonNametoBuffer(u8 *buffer, DungeonLocation *dungeonLocation)
 {
-    sprintfStatic(buffer, gUnknown_8108F10, gDungeonNames[dungeonLocation->id].name1); // {COLOR_2 YELLOW_4}%s{END_COLOR_TEXT_2} (normal floor print (no B)
+    sprintfStatic(buffer, gUnknown_8108F10, gDungeonNames[dungeonLocation->id].name1); // {color YELLOW_D}%s{reset} (normal floor print (no B)
 }
 
 void PrintDungeonLocationtoBuffer(u8 *buffer, DungeonLocation *dungeonLocation)

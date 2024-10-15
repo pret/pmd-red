@@ -81,12 +81,12 @@ const UnkTextStruct2 gUnknown_80E09C0 = {
 };
 
 ALIGNED(4) const u8 gUnknown_80E09D8[] = _(
-        " ...Uh{COMMA} no?\n"
-        "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.");
+        " ...Uh, no?\n"
+        "You don't have any {COLOR CYAN_G}SOS Mail{RESET}.");
 
 ALIGNED(4) const u8 gUnknown_80E0A0C[] = _(
-        " ...Uh{COMMA} no?\n"
-        "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.");
+        " ...Uh, no?\n"
+        "You don't have any {COLOR CYAN_G}A-OK Mail{RESET}.");
 
 static void sub_8031300(void);
 static void HandleWonderMail6MainMenu(void);
@@ -127,11 +127,11 @@ bool8 sub_8030F58(u32 wonderMailType)
     switch(wonderMailType)
     {
         case WONDER_MAIL_TYPE_SOS_1:
-            // "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}.\0"
+            // "You don't have any {COLOR CYAN_G}SOS Mail{RESET}.\0"
             xxx_info_box_80141B4(gUnknown_80E09D8,0,&gUnknown_203B328->faceFile,0x101);
             break;
         case WONDER_MAIL_TYPE_AOK:
-            // "You don{APOSTROPHE}t have any {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.\0"
+            // "You don't have any {COLOR CYAN_G}A-OK Mail{RESET}.\0"
             xxx_info_box_80141B4(gUnknown_80E0A0C,0,&gUnknown_203B328->faceFile,0x101);
             break;
     }

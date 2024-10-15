@@ -70,8 +70,8 @@
     .byte 0x00, 0x00, 0x00, 0x00
     .byte 0x00, 0x00, 0x00, 0x00
 
-    .global gUnknown_826F980
-    gUnknown_826F980:
+    .global gGroundScript_gs228
+    gGroundScript_gs228:
     .byte 0x02, 0x00, 0x00, 0x00
     .4byte WorldMapScenes
     .4byte WorldMapWaypoints

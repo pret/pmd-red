@@ -17,6 +17,6 @@ static const UnkTextStruct2 sUnknown_80DC4D8 = {
     &sUnknown_80DC4D4
 };
 
-ALIGNED(4) static const u8 sUnknown_80DC4F0[] = _("Inhabitants (Friends: {COLOR_2 CYAN}Light blue{END_COLOR_TEXT_2})");
+ALIGNED(4) static const u8 sUnknown_80DC4F0[] = _("Inhabitants (Friends: {color CYAN}Light blue{reset})");
 ALIGNED(4) static const u8 sInhabitants[] = _("Inhabitants");
-ALIGNED(4) static const u8 sFmtCyanString[] = _("{COLOR_2 CYAN}%s{END_COLOR_TEXT_2}");
+ALIGNED(4) static const u8 sFmtCyanString[] = _("{color CYAN}%s{reset}");

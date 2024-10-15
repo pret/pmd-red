@@ -4,12 +4,14 @@
 #include "constants/personality_test.h"
 #include "structs/menu.h"
 
+typedef u8 PersonalityEffects[NUM_PERSONALITY_TEST_EFFECTS];
+
 // size: 0xC
 typedef struct PersonalityQuestion
 {
     /* 0x0 */ const u8 *question;
     /* 0x4 */ const MenuItem *answers;
-    /* 0x8 */ const u8 *effects;
+    /* 0x8 */ const PersonalityEffects *effects;
 } PersonalityQuestion;
 
 struct PersonalityTestTracker

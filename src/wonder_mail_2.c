@@ -62,10 +62,10 @@ extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
 ALIGNED(4) const char gRescueTeamNamePlaceholder[] = "????";
 
 ALIGNED(4) const char gUnknown_80DF9F8[] = _(
-	" Oh{COMMA} hello!\n"
-	"Your rescue mission went well{COMMA} didn{APOSTROPHE}t it?\n"
-	"I wouldn{APOSTROPHE}t expect any less{COMMA} {COLOR_1 LIGHT_BLUE}%s{END_COLOR_TEXT_1}!{EXTRA_MSG}"
-	" Well{COMMA} well!\n"
+	" Oh, hello!\n"
+	"Your rescue mission went well, didn't it?\n"
+	"I wouldn't expect any less, {COLOR CYAN_G}%s{RESET}!{EXTRA_MSG}"
+	" Well, well!\n"
 	"Here is your reward from the Pokémon\n"
 	"Rescue Organization!");
 
@@ -73,15 +73,15 @@ ALIGNED(4) const char gUnknown_80DFAA8[] = _(
 	" I hope you will keep on\n"
 	"rescuing your friends in\n"
 	"dire straits.{EXTRA_MSG}"
-	" And now{COMMA} I must save\n"
+	" And now, I must save\n"
 	"your adventure.");
 
 ALIGNED(4) const char gUnknown_80DFB14[] = _(
-	" Oh{COMMA} yes{COMMA} that{APOSTROPHE}s right.\n"
-	"Please don{APOSTROPHE}t forget to send an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}\n"
+	" Oh, yes, that's right.\n"
+	"Please don't forget to send an {COLOR CYAN_G}A-OK Mail{RESET}\n"
 	"to the friend you just rescued.{EXTRA_MSG}"
 	" Please give me a shout if\n"
-	"you would like to send {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}.");
+	"you would like to send {COLOR CYAN_G}A-OK Mail{RESET}.");
 
 s32 sub_802B2D4(void)
 {

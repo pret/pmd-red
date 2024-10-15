@@ -48,7 +48,7 @@ gUnknown_8106AEC: @ 8106AEC
 
 	.global gUnknown_8106B50
 gUnknown_8106B50: @ 8106B50
-        .string "{COLOR_1}%c%s\0"
+        .string "{COLOR}%c%s\0"
 
 
 
@@ -177,7 +177,7 @@ gUnknown_8106C90: @ 8106C90
 
 	.global gUnknown_8106C98
 gUnknown_8106C98: @ 8106C98
-        .string "{ARG_MOVE_ITEM_0}\0"
+        .string "{MOVE_ITEM_0}\0"
         .align 2,0
 
 	.global gUnknown_8106C9C
@@ -201,7 +201,7 @@ gUnknown_8106CAC: @ 8106CAC
 
 	.global gUnknown_8106CC4
 gUnknown_8106CC4: @ 8106CC4
-        .string "{ARG_MOVE_ITEM_0}\0"
+        .string "{MOVE_ITEM_0}\0"
         .align 2,0
 
 	.global gUnknown_8106CC8
@@ -210,7 +210,7 @@ gUnknown_8106CC8: @ 8106CC8
 
 	.global gUnknown_8106CCC
 gUnknown_8106CCC: @ 8106CCC
-        .string "{ARG_POKEMON_0}\0"
+        .string "{POKEMON_0}\0"
 
 @ ???
         .align 2,0
@@ -255,7 +255,7 @@ gUnknown_8106D68: @ 8106D68
 
 	.global gUnknown_8106D8C
 gUnknown_8106D8C: @ 8106D8C
-        .string "{COLOR_2}%d{ARG_POKEMON_0}\0"
+        .string "{color}%d{POKEMON_0}\0"
 
 @ ???
         .align 2,0
@@ -279,7 +279,7 @@ gUnknown_8106DC8: @ 8106DC8
 
 	.global gUnknown_8106E28
 gUnknown_8106E28: @ 8106E28
-        .string "{ARG_POKEMON_0}\0"
+        .string "{POKEMON_0}\0"
         .align 2,0
 
 	.global gUnknown_8106E2C
@@ -292,12 +292,12 @@ gUnknown_8106E30: @ 8106E30
 
 	.global gUnknown_8106E34
 gUnknown_8106E34: @ 8106E34
-        .string "{ARG_MOVE_ITEM_0}{COLOR_2 CYAN}$v02:{ARG_POKEMON_0}{END_COLOR_TEXT_2}\0"
+        .string "{MOVE_ITEM_0}{color CYAN}$v02:{POKEMON_0}{reset}\0"
         .align 2,0
 
 	.global gUnknown_8106E48
 gUnknown_8106E48: @ 8106E48
-        .string "{ARG_MOVE_ITEM_0}{COLOR_2 YELLOW}$v02:{ARG_POKEMON_0}{END_COLOR_TEXT_2}\0"
+        .string "{MOVE_ITEM_0}{color YELLOW}$v02:{POKEMON_0}{reset}\0"
         .align 2,0
 
 	.global gUnknown_8106E5C
@@ -309,7 +309,7 @@ gUnknown_8106E5C: @ 8106E5C
 	.global gUnknown_8106E6C
 gUnknown_8106E6C: @ 8106E6C
         .string "Say bye to\n"
-        .string "{ARG_VALUE_0} more\0"
+        .string "{VALUE_0} more\0"
         .align 2,0
 
 	.global gUnknown_8106E80

@@ -277,13 +277,13 @@ void CopyMonsterNametoBuffer(u8 * buffer, s16 index)
 void CopyYellowMonsterNametoBuffer(u8 *buffer, s16 index)
 {
     s32 new_index = index;
-    sprintfStatic(buffer, gUnknown_8107600, gMonsterParameters[new_index].species); // {COLOR_2 YELLOW}%s{END_COLOR_TEXT_2}
+    sprintfStatic(buffer, gUnknown_8107600, gMonsterParameters[new_index].species); // {color YELLOW}%s{reset}
 }
 
 void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index)
 {
     s32 new_index = index;
-    sprintfStatic(buffer, gUnknown_8107608, gMonsterParameters[new_index].species); // {COLOR_2 CYAN}%s{END_COLOR_TEXT_2}
+    sprintfStatic(buffer, gUnknown_8107608, gMonsterParameters[new_index].species); // {color CYAN}%s{reset}
 }
 
 void sub_808D930(u8 *buffer, s32 index)
@@ -317,7 +317,7 @@ void PrintColoredPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon, s32 color
   if (colorNum == COLOR_WHITE) {
     colorNum = COLOR_CYAN;
   }
-  sprintfStatic(buffer,gUnknown_810763C,colorNum,nameBuffer); // {COLOR_2}%c%s{END_COLOR_TEXT_2}
+  sprintfStatic(buffer,gUnknown_810763C,colorNum,nameBuffer); // {color}%c%s{reset}
 }
 
 void sub_808D9DC(u8 *buffer, PokemonStruct2 *param_2, s32 colorNum)
@@ -328,7 +328,7 @@ void sub_808D9DC(u8 *buffer, PokemonStruct2 *param_2, s32 colorNum)
   if (colorNum == COLOR_WHITE) {
     colorNum = COLOR_YELLOW;
   }
-  sprintfStatic(buffer,gUnknown_810763C,colorNum,nameBuffer); // {COLOR_2}%c%s{END_COLOR_TEXT_2}
+  sprintfStatic(buffer,gUnknown_810763C,colorNum,nameBuffer); // {color}%c%s{reset}
 }
 
 void sub_808DA0C(u8 *buffer, PokemonStruct2 *param_2)

@@ -42,69 +42,69 @@ const u8 gUnknown_80E25F4[] = "What would you like to do?";
 
 ALIGNED(4) const u8 gUnknown_80E2610[] = _(
         "How would you like to send your\n"
-        "{COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}?");
+        "{COLOR CYAN_G}SOS Mail{RESET}?");
 
 ALIGNED(4) const u8 gUnknown_80E2640[] = _(
         "How would you like to receive your\n"
-        "friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1}?");
+        "friend's {COLOR CYAN_G}SOS Mail{RESET}?");
 
 ALIGNED(4) const u8 gUnknown_80E2680[] = _(
         "How would you like to send your\n"
-        "{COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}?");
+        "{COLOR CYAN_G}A-OK Mail{RESET}?");
 
 ALIGNED(4) const u8 gUnknown_80E26B0[] = _(
         "How would you like to receive your\n"
-        "friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}?");
+        "friend's {COLOR CYAN_G}A-OK Mail{RESET}?");
 
 ALIGNED(4) const u8 gUnknown_80E26F0[] = _(
         "How would you like to send your\n"
-        "{COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?");
+        "{COLOR CYAN_G}Thank-You Mail{RESET}?");
 
 ALIGNED(4) const u8 gUnknown_80E2728[] = _(
         "How would you like to receive your\n"
-        "friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?");
+        "friend's {COLOR CYAN_G}Thank-You Mail{RESET}?");
 
 ALIGNED(4) const u8 gUnknown_80E276C[] = _(
         "The GBA Game Pak does not have\n"
-        "an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} on it.");
+        "an {COLOR CYAN_G}A-OK Mail{RESET} on it.");
 
 ALIGNED(4) const u8 gUnknown_80E27A4[] = _(
-        "If you accept an {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1}{COMMA} the\n"
-        "{COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} you received before\n"
+        "If you accept an {COLOR CYAN_G}A-OK Mail{RESET}, the\n"
+        "{COLOR CYAN_G}Thank-You Mail{RESET} you received before\n"
         "will be overwritten. Is that OK?");
 
 ALIGNED(4) const u8 gUnknown_80E2814[] = _(
-        "Please enter the {COLOR_1 LIGHT_BLUE}A-OK Mail password{END_COLOR_TEXT_1}.");
+        "Please enter the {COLOR CYAN_G}A-OK Mail password{RESET}.");
 
 ALIGNED(4) const u8 gUnknown_80E2840[] = _(
-        "The {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} will be received and\n"
+        "The {COLOR CYAN_G}A-OK Mail{RESET} will be received and\n"
         "processed.");
 
 ALIGNED(4) const u8 gUnknown_80E2874[] = _(
-        "A {COLOR_1 LIGHT_BLUE}helper Pokémon{END_COLOR_TEXT_1} also arrived!");
+        "A {COLOR CYAN_G}helper Pokémon{RESET} also arrived!");
 
 ALIGNED(4) const u8 gUnknown_80E2898[] = _(
-        "An {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} was received.\n"
+        "An {COLOR CYAN_G}A-OK Mail{RESET} was received.\n"
         "Your adventure will be saved.");
 
 ALIGNED(4) const u8 gUnknown_80E28D8[] = _(
-        "Resume your game using {COLOR_1 LIGHT_BLUE}Revive Team{END_COLOR_TEXT_1}.");
+        "Resume your game using {COLOR CYAN_G}Revive Team{RESET}.");
 
 ALIGNED(4) const u8 gUnknown_80E2904[] = _(
-        "Your friend{APOSTROPHE}s Mailbox is full.\n"
+        "Your friend's Mailbox is full.\n"
         "This piece of mail cannot be sent.\n"
         "The recipient must delete old mail.");
 
 ALIGNED(4) const u8 gUnknown_80E296C[] = _(
-        "Please choose the {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} you want\n"
+        "Please choose the {COLOR CYAN_G}SOS Mail{RESET} you want\n"
         "to send.");
 
 ALIGNED(4) const u8 gUnknown_80E29A0[] = _(
-        "This {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} will be sent.\n"
+        "This {COLOR CYAN_G}SOS Mail{RESET} will be sent.\n"
         "Is that OK?");
 
 ALIGNED(4) const u8 gUnknown_80E29D0[] = _(
-        "Your {COLOR_1 LIGHT_BLUE}SOS Mail{END_COLOR_TEXT_1} was sent.\n"
+        "Your {COLOR CYAN_G}SOS Mail{RESET} was sent.\n"
         "Your adventure will be saved.");
 
 ALIGNED(4) const u8 gUnknown_80E2A0C[] = "Save completed.";
@@ -114,27 +114,27 @@ ALIGNED(4) const u8 gUnknown_80E2A1C[] = _(
         "coming to your rescue.");
 
 ALIGNED(4) const u8 gUnknown_80E2A5C[] = _(
-        "Here is the {COLOR_1 LIGHT_BLUE}SOS Mail password{END_COLOR_TEXT_1}.");
+        "Here is the {COLOR CYAN_G}SOS Mail password{RESET}.");
 
 ALIGNED(4) const u8 gUnknown_80E2A80[] = _(
-        "Here is the {COLOR_1 LIGHT_BLUE}A-OK Mail password{END_COLOR_TEXT_1}.");
+        "Here is the {COLOR CYAN_G}A-OK Mail password{RESET}.");
 
 ALIGNED(4) const u8 gUnknown_80E2AA8[] = _(
 "Please give this password to the friend\n"
 "that you rescued.");
 
 ALIGNED(4) const u8 gUnknown_80E2AE4[] = _(
-"Please connect a {COLOR_1 LIGHT_BLUE}Link Cable{END_COLOR_TEXT_1}.\n"
-"When your friend{APOSTROPHE}s side is ready{COMMA} you may\n"
+"Please connect a {COLOR CYAN_G}Link Cable{RESET}.\n"
+"When your friend's side is ready, you may\n"
 "communicate and exchange data.");
 
 ALIGNED(4) const u8 gUnknown_80E2B54[] = _(
-"Your {COLOR_1 LIGHT_BLUE}A-OK Mail{END_COLOR_TEXT_1} was sent.\n"
+"Your {COLOR CYAN_G}A-OK Mail{RESET} was sent.\n"
 "Your adventure will be saved.");
 
 ALIGNED(4) const u8 gUnknown_80E2B90[] = _(
-"Using a {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}{COMMA}\n"
-"you can send a {COLOR_1 LIGHT_BLUE}helper Pokémon{END_COLOR_TEXT_1} to\n"
+"Using a {COLOR CYAN_G}Game Link cable{RESET},\n"
+"you can send a {COLOR CYAN_G}helper Pokémon{RESET} to\n"
 "a friend.");
 
 extern u8 gUnknown_80E2BE0[];

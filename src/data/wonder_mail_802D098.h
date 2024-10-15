@@ -45,19 +45,19 @@ UNUSED static const UnkTextStruct2 sUnknown_80DFE34 = {
 
 ALIGNED(4) static const u8 sReplaceOldMailPrompt[] = _(
     "Are you sure you want to replace the\n"
-    "old  {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1} with the new one?");
+    "old  {COLOR CYAN_G}Wonder Mail{RESET} with the new one?");
 
 ALIGNED(4) static const u8 sMailAlreadyReceived[] = _(
-    "This {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1} has already been\n"
+    "This {COLOR CYAN_G}Wonder Mail{RESET} has already been\n"
     "received.");
 
 ALIGNED(4) static const u8 sMailAlreadyReceivedMayNotReceiveAgain[] = _(
-    "This {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1} has already been\n"
+    "This {COLOR CYAN_G}Wonder Mail{RESET} has already been\n"
     "received.\n"
     "You may not receive the same one again.");
 
 ALIGNED(4) static const u8 sOnlyOneMailCanBeHeldPleaseCompleteFirst[] = _(
-    "Only {COLOR_1 LIGHT_BLUE}one piece{END_COLOR_TEXT_1} of {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1} can be held.\n"
+    "Only {COLOR CYAN_G}one piece{RESET} of {COLOR CYAN_G}Wonder Mail{RESET} can be held.\n"
     "Please receive it after completing any\n"
     "rescue mission in progress.");
 
@@ -71,15 +71,15 @@ ALIGNED(4) static const u8 sTeamQuicksavedCannotDelete[] = _(
     "a dungeon with a mission in progress.\n"
     "Mail cannot be deleted now.");
 
-ALIGNED(4) static const u8 sReceivedWonderMail[] = _("Received the {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1}!");
+ALIGNED(4) static const u8 sReceivedWonderMail[] = _("Received the {COLOR CYAN_G}Wonder Mail{RESET}!");
 
 ALIGNED(4) static const u8 sOnlyOneMailCanBeHeldSoReplacePrompt[] = _(
-    "Only {COLOR_1 LIGHT_BLUE}one piece{END_COLOR_TEXT_1} of {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1} can be held.\n"
-    "Is it OK to replace the old {COLOR_1 LIGHT_BLUE}Wonder Mail{END_COLOR_TEXT_1}\n"
+    "Only {COLOR CYAN_G}one piece{RESET} of {COLOR CYAN_G}Wonder Mail{RESET} can be held.\n"
+    "Is it OK to replace the old {COLOR CYAN_G}Wonder Mail{RESET}\n"
     "with the new one?");
 
 ALIGNED(4) static const u8 sJobListFullPleaseDelete[] = _(
-    "Your {COLOR_1 LIGHT_BLUE}Job List{END_COLOR_TEXT_1} is full.\n"
+    "Your {COLOR CYAN_G}Job List{RESET} is full.\n"
     "Please select and delete unwanted mail.");
 
 ALIGNED(4) static const u8 sNewMail[] = _("New Mail");

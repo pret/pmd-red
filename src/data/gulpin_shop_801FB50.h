@@ -48,7 +48,7 @@ ALIGNED(4) static const u8 gUnknown_80DC394[] = _(
     "{R_BUTTON}+{A_BUTTON}: Switch link  {SELECT_BUTTON} Set");
 
 ALIGNED(4) static const u8 gGulpinProceed[] = _("Proceed");
-ALIGNED(4) static const u8 gGulpinInfo[] = _("{COLOR_1 YELLOW}Info{END_COLOR_TEXT_1} ");
+ALIGNED(4) static const u8 gGulpinInfo[] = _("{COLOR YELLOW}Info{RESET} ");
 ALIGNED(4) static const u8 gUnknown_80DC3D8[] = _("Moves");
 ALIGNED(4) static const u8 gUnknown_80DC3E0[] = _("Summary");
 ALIGNED(4) static const u8 gUnknown_80DC3E8[] = _("Check IQ");

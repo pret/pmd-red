@@ -1,5 +1,8 @@
         .section .rodata
 
+    .string "pksdir0\0"
+    .align 2,0
+
 	.global gFriendAreaDialogue
 gFriendAreaDialogue: @ 813237C
 @ replacing .incbin "baserom.gba", 0x0013237c, 0x13d610
@@ -24,8 +27,8 @@ gFriendAreaDialogue: @ 813237C
 
     .global FriendAreaSleepyEnergy
     FriendAreaSleepyEnergy:
-    .string "{CENTER_ALIGN}It appears to be a little sleepy{COMMA}\n"
-    .string "{CENTER_ALIGN}but it{APOSTROPHE}s still full of energy.\0"
+    .string "{CENTER_ALIGN}It appears to be a little sleepy,\n"
+    .string "{CENTER_ALIGN}but it's still full of energy.\0"
     .align 2,0
 
     .global FriendAreaGummi
@@ -41,13 +44,13 @@ gFriendAreaDialogue: @ 813237C
 
     .global FriendAreaPensive
     FriendAreaPensive:
-    .string "{CENTER_ALIGN}It looked pensive for a moment{COMMA}\n"
-    .string "{CENTER_ALIGN}but it{APOSTROPHE}s grinning widely again.\0"
+    .string "{CENTER_ALIGN}It looked pensive for a moment,\n"
+    .string "{CENTER_ALIGN}but it's grinning widely again.\0"
     .align 2,0
 
     .global FriendAreaGrin
     FriendAreaGrin:
-    .string "{CENTER_ALIGN}It{APOSTROPHE}s looking this way with a grin.\0"
+    .string "{CENTER_ALIGN}It's looking this way with a grin.\0"
     .align 2,0
 
     .global FriendAreaEager
@@ -58,7 +61,7 @@ gFriendAreaDialogue: @ 813237C
 
     .global FriendAreaWorried
     FriendAreaWorried:
-    .string "{CENTER_ALIGN}It appeared to have been worried{COMMA}\n"
+    .string "{CENTER_ALIGN}It appeared to have been worried,\n"
     .string "{CENTER_ALIGN}but seems to have solved it.\0"
     .align 2,0
 
@@ -94,8 +97,8 @@ gFriendAreaDialogue: @ 813237C
 
     .global FriendAreaStraight
     FriendAreaStraight:
-    .string "{CENTER_ALIGN}It{APOSTROPHE}s trying to keep a straight face{COMMA}\n"
-    .string "{CENTER_ALIGN}but it can{APOSTROPHE}t stop laughing!\0"
+    .string "{CENTER_ALIGN}It's trying to keep a straight face,\n"
+    .string "{CENTER_ALIGN}but it can't stop laughing!\0"
     .align 2,0
 
     .global FriendAreaGrinning
@@ -116,8 +119,5 @@ gFriendAreaDialogue: @ 813237C
     .global FriendAreaFullEnergy
     FriendAreaFullEnergy:
     .string "{CENTER_ALIGN}It seems to be full of energy!\0"
-    .align 2,0
-
-    .string "pksdir0\0"
     .align 2,0
 

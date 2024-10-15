@@ -1,5 +1,5 @@
 ALIGNED(4) const char gUnknown_80DEF04[] =  _(" ...Oh?\n"
-                                              "Something{APOSTROPHE}s gone wrong.");
+                                              "Something's gone wrong.");
 
 ALIGNED(4) const char gUnknown_80DEF28[] = " ...Oh? The number of linked\n"
                                            "GBA systems is incorrect.\n"
@@ -17,12 +17,12 @@ ALIGNED(4) const u8 gUnknown_80DEFDC[]=
 
 ALIGNED(4) const u8 gUnknown_80DF044[]= _(
 	 " ...Oh?\n"
-	 "I think you{APOSTROPHE}ve received this mail before.\n"
-	 "You can{APOSTROPHE}t get the same mail twice.");
+	 "I think you've received this mail before.\n"
+	 "You can't get the same mail twice.");
 
 ALIGNED(4) const u8 gUnknown_80DF0A0[]= _(
 	 " ...Oh?\n"
-	 "I don{APOSTROPHE}t think you{APOSTROPHE}re eligible to receive\n"
+	 "I don't think you're eligible to receive\n"
 	 "this mail.");
 
 ALIGNED(4) const u8 gUnknown_80DF0E0[]=
@@ -31,12 +31,12 @@ ALIGNED(4) const u8 gUnknown_80DF0E0[]=
 	 "Please delete some mail and try again.";
 
 ALIGNED(4) const u8 gUnknown_80DF138[]= _(
-	 " ...Oh? Your friend didn{APOSTROPHE}t\n"
+	 " ...Oh? Your friend didn't\n"
 	 "follow through on their side.\n"
 	 "Please try again from the start.");
 
 ALIGNED(4) const u8 gUnknown_80DF194[]= _(
-	" Your {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}\n"
+	" Your {COLOR CYAN_G}Thank-You Mail{RESET}\n"
 	"has been sent.");
 
 ALIGNED(4) const u8 gUnknown_80DF1C0[]=
@@ -45,29 +45,29 @@ ALIGNED(4) const u8 gUnknown_80DF1C0[]=
 	"Would you like to try again?";
 
 ALIGNED(4) const u8 gUnknown_80DF208[]= _(
-	" ...Oh? This password doesn{APOSTROPHE}t\n"
-	"appear to be for a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.");
+	" ...Oh? This password doesn't\n"
+	"appear to be for a {COLOR CYAN_G}Thank-You Mail{RESET}.");
 
 ALIGNED(4) const u8 gUnknown_80DF250[]= _(
 	": This is the counter for\n"
-	"{COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.{EXTRA_MSG}"
-	": Oh{COMMA} hi{COMMA} {COLOR_1 YELLOW_5}%s{END_COLOR_TEXT_1}.\n"
-	"I{APOSTROPHE}ve been waiting for you. You wanted me\n"
-	"to process a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?{EXTRA_MSG}"
+	"{COLOR CYAN_G}Thank-You Mail{RESET}.{EXTRA_MSG}"
+	": Oh, hi, {COLOR YELLOW_N}%s{RESET}.\n"
+	"I've been waiting for you. You wanted me\n"
+	"to process a {COLOR CYAN_G}Thank-You Mail{RESET}?{EXTRA_MSG}"
 	": Let me get on it right away.");
 
 ALIGNED(4) const u8 gUnknown_80DF304[]= _(
 	" Is it OK to send this\n"
-	"{COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?");
+	"{COLOR CYAN_G}Thank-You Mail{RESET}?");
 
 ALIGNED(4) const u8 gUnknown_80DF330[]= _(
 	" Please choose the\n"
-	"{COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} that you want to\n"
+	"{COLOR CYAN_G}Thank-You Mail{RESET} that you want to\n"
 	"send to your friend.");
 
 ALIGNED(4) const u8 gUnknown_80DF380[]= _(
 	" OK. Please enter the\n"
-	"{COLOR_1 LIGHT_BLUE}Thank-You Mail password{END_COLOR_TEXT_1}.");
+	"{COLOR CYAN_G}Thank-You Mail password{RESET}.");
 
 ALIGNED(4) const u8 gUnknown_80DF3B4[]= _(
 	" Please give this password\n"
@@ -76,8 +76,8 @@ ALIGNED(4) const u8 gUnknown_80DF3B4[]= _(
 	"adventure.");
 
 ALIGNED(4) const u8 gUnknown_80DF418[]= _(
-	" OK{COMMA} here is your\n"
-	"{COLOR_1 LIGHT_BLUE}Thank-You Mail password{END_COLOR_TEXT_1}.");
+	" OK, here is your\n"
+	"{COLOR CYAN_G}Thank-You Mail password{RESET}.");
 
 ALIGNED(4) const u8 gUnknown_80DF44C[]=
 	" I need to save your\n"
@@ -85,46 +85,46 @@ ALIGNED(4) const u8 gUnknown_80DF44C[]=
 
 ALIGNED(4) const u8 gUnknown_80DF46C[]= _(
 	" There we go.\n"
-	"I{APOSTROPHE}m all done.{EXTRA_MSG}"
-	" Doesn{APOSTROPHE}t it feel great to\n"
+	"I'm all done.{EXTRA_MSG}"
+	" Doesn't it feel great to\n"
 	"be appreciated for doing something good?\n"
 	"Please keep up your rescue work!");
 
 ALIGNED(4) const u8 gUnknown_80DF4F4[]= _(
-	" A {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1} has\n"
+	" A {COLOR CYAN_G}Thank-You Mail{RESET} has\n"
 	"arrived from your friend for your rescue\n"
 	"mission.");
 
 ALIGNED(4) const u8 gUnknown_80DF544[]= _(
 	 "{CENTER_ALIGN}Communicating...\n"
 	 "{CENTER_ALIGN}Please wait with the power on.\n"
-	 "{CENTER_ALIGN}To cancel{COMMA} press {B_BUTTON}.");
+	 "{CENTER_ALIGN}To cancel, press {B_BUTTON}.");
 
 ALIGNED(4) const u8 gUnknown_80DF594[]= _(
-	" There. I{APOSTROPHE}ve sent your\n"
-	"{COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.\n"
+	" There. I've sent your\n"
+	"{COLOR CYAN_G}Thank-You Mail{RESET}.\n"
 	"I need to save your adventure.");
 
 ALIGNED(4) const u8 gUnknown_80DF5E4[]= _(
 	" Please connect the GBA\n"
-	"systems with a {COLOR_1 LIGHT_BLUE}Game Link cable{END_COLOR_TEXT_1}.\n"
+	"systems with a {COLOR CYAN_G}Game Link cable{RESET}.\n"
 	"Is your friend also ready?");
 
 ALIGNED(4) const u8 gUnknown_80DF63C[]= _(
-	" There{COMMA} all done.\n"
-	"{COLOR_1 YELLOW_5}%s{END_COLOR_TEXT_1}{COMMA} I hope your friend\n"
+	" There, all done.\n"
+	"{COLOR YELLOW_N}%s{RESET}, I hope your friend\n"
 	"appreciates your sense of gratitude.");
 
 ALIGNED(4) const u8 gUnknown_80DF694[]= _(
-	" The item you{APOSTROPHE}ve chosen\n"
-	"here can{APOSTROPHE}t be exchanged later.\n"
+	" The item you've chosen\n"
+	"here can't be exchanged later.\n"
 	"Are you certain this item is OK?");
 
 ALIGNED(4) const u8 gUnknown_80DF6F0[]= _(
-	" I{APOSTROPHE}ve saved your adventure. ");
+	" I've saved your adventure. ");
 
 ALIGNED(4) const u8 gUnknown_80DF710[]= _(
-	" OK{COMMA} please choose\n"
+	" OK, please choose\n"
 	"the item to be sent.");
 
 ALIGNED(4) const u8 gUnknown_80DF73C[]=
@@ -134,15 +134,15 @@ ALIGNED(4) const u8 gUnknown_80DF73C[]=
 
 ALIGNED(4) const u8 gUnknown_80DF77C[]= _(
 	" Would you like to choose\n"
-	"a {COLOR_1 LIGHT_BLUE}reward item{END_COLOR_TEXT_1} from storage and\n"
+	"a {COLOR CYAN_G}reward item{RESET} from storage and\n"
 	"send it with your mail?");
 
 ALIGNED(4) const u8 gUnknown_80DF7D4[]= _(
 	" ...Oh?\n"
-	"You{APOSTROPHE}ve already attached a {COLOR_1 LIGHT_BLUE}reward item{END_COLOR_TEXT_1}\n"
+	"You've already attached a {COLOR CYAN_G}reward item{RESET}\n"
 	"to this mail.{EXTRA_MSG}"
-	" I{APOSTROPHE}m sorry{COMMA} but once an item\n"
-	"has been attached to mail{COMMA} it can{APOSTROPHE}t be\n"
+	" I'm sorry, but once an item\n"
+	"has been attached to mail, it can't be\n"
 	"exchanged.");
 
 ALIGNED(4) const u8 gUnknown_80DF870[]=
@@ -151,11 +151,11 @@ ALIGNED(4) const u8 gUnknown_80DF870[]=
 
 ALIGNED(4) const u8 gUnknown_80DF8B4[]= _(
 	" ...Oh?\n"
-	"You don{APOSTROPHE}t seem to have a {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.");
+	"You don't seem to have a {COLOR CYAN_G}Thank-You Mail{RESET}.");
 
 ALIGNED(4) const u8 gUnknown_80DF8EC[]= _(
 	" Hello.\n"
-	"I handle {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}.\n"
+	"I handle {COLOR CYAN_G}Thank-You Mail{RESET}.\n"
 	"How may I serve you?");
 
 ALIGNED(4) const u8 gUnknown_80DF928[]=
@@ -168,8 +168,8 @@ ALIGNED(4) const u8 gUnknown_80DF94C[] =
 
 ALIGNED(4) const u8 gUnknown_80DF96C[] = _(
 	" How would you like to send\n"
-	"your {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?");
+	"your {COLOR CYAN_G}Thank-You Mail{RESET}?");
 
 ALIGNED(4) const u8 gUnknown_80DF9A4[]= _(
 	" How would you like to\n"
-	"receive your friend{APOSTROPHE}s {COLOR_1 LIGHT_BLUE}Thank-You Mail{END_COLOR_TEXT_1}?");
+	"receive your friend's {COLOR CYAN_G}Thank-You Mail{RESET}?");

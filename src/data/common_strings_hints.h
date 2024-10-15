@@ -19,7 +19,7 @@ ALIGNED(4) const Hints gCommonHints[NUM_HINTS] =
 };
 
 ALIGNED(4) static const u8 sUnknown_80DAAC0[] = _(
-    "Before leaving on an adventure{COMMA} go visit\n"
+    "Before leaving on an adventure, go visit\n"
     "friends in their Friend Areas and pick\n"
     "your mission members.\n"
     "The team can include members up to\n"
@@ -30,14 +30,14 @@ ALIGNED(4) static const u8 sUnknown_80DAAC0[] = _(
 ALIGNED(4) static const u8 sUnknown_80DABD8[] = _("Building a Team");
 
 ALIGNED(4) static const u8 sUnknown_80DABE8[] = _(
-    "If new recruits join you{COMMA} try to return to\n"
+    "If new recruits join you, try to return to\n"
     "your base without letting them faint.\n"
-    "If you get them out safely{COMMA} they{APOSTROPHE}ll wait\n"
+    "If you get them out safely, they'll wait\n"
     "for you in their Friend Areas.\n"
-    "Once you get them out{COMMA} they{APOSTROPHE}ll always\n"
+    "Once you get them out, they'll always\n"
     "return home if they faint in a dungeon.\n"
-    "If you faint in a dungeon{COMMA} you lose all your\n"
-    "money and some items{COMMA} too.");
+    "If you faint in a dungeon, you lose all your\n"
+    "money and some items, too.");
 ALIGNED(4) static const u8 sUnknown_80DAD28[] = _("Adventures with Friends");
 
 ALIGNED(4) static const u8 sUnknown_80DAD40[] = _(
@@ -49,9 +49,9 @@ ALIGNED(4) static const u8 sUnknown_80DADCC[] = _("Saving");
 
 ALIGNED(4) static const u8 sUnknown_80DADD4[] = _(
     "Selecting multiple items in storage:\n"
-    "  Select an item{COMMA} then press {L_BUTTON} or {R_BUTTON}.\n"
+    "  Select an item, then press {L_BUTTON} or {R_BUTTON}.\n"
     "Moving to the Friend Area Map:\n"
-    "  Move out from the town{APOSTROPHE}s west side\n"
+    "  Move out from the town's west side\n"
     "  while pressing {L_BUTTON} or {R_BUTTON}.\n"
     "Moving diagonally on the Friend Area Map:\n"
     "  {DPAD} while keeping {R_BUTTON} pressed.");
@@ -63,5 +63,5 @@ ALIGNED(4) static const u8 sUnknown_80DAEE0[] = _(
     "Window: {B_BUTTON} lightly\n"
     "Message scroll: {A_BUTTON} or {B_BUTTON}\n"
     "Cancel: {B_BUTTON}\n"
-    "Description: Choose item or move{COMMA} {START_BUTTON}");
+    "Description: Choose item or move, {START_BUTTON}");
 ALIGNED(4) static const u8 sUnknown_80DAF54[] = _("Controls in Town 1");

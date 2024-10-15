@@ -41,7 +41,7 @@ ALIGNED(4) static const u8 sEvolveInfo[] = _(
     "{CENTER_ALIGN}spot if they satisfy certain conditions.{EXTRA_MSG}"
     "{CENTER_ALIGN}Evolution brings about changes\n"
     "{CENTER_ALIGN}in appearance and abilities.{EXTRA_MSG}"
-    "{CENTER_ALIGN}Not only that{COMMA} some Pokémon even change\n"
+    "{CENTER_ALIGN}Not only that, some Pokémon even change\n"
     "{CENTER_ALIGN}type and learn different moves.{EXTRA_MSG}"
     "{CENTER_ALIGN}However...{WAIT_PRESS} The requirements for\n"
     "{CENTER_ALIGN}evolution differ among Pokémon.{EXTRA_MSG}"
@@ -50,7 +50,7 @@ ALIGNED(4) static const u8 sEvolveInfo[] = _(
     "{CENTER_ALIGN}Still others may need special items\n"
     "{CENTER_ALIGN}to attain evolution.{EXTRA_MSG}"
     "{CENTER_ALIGN}Ye must also be aware of this:{EXTRA_MSG}"
-    "{CENTER_ALIGN}Once it has evolved{COMMA} a Pokémon\n"
+    "{CENTER_ALIGN}Once it has evolved, a Pokémon\n"
     "{CENTER_ALIGN}can never regain its previous form.{EXTRA_MSG}"
     "{CENTER_ALIGN}That is why ye must think carefully\n"
     "{CENTER_ALIGN}before committing to evolution.");
@@ -66,7 +66,7 @@ ALIGNED(4) static const u8 sGiveAnotherItemPrompt[] = _(
     "{CENTER_ALIGN}Will ye give yet another item?");
 
 ALIGNED(4) static const u8 sLackWhatIsNeeded[] = _(
-    "{CENTER_ALIGN}Alas{COMMA} ye seem to lack what is needed\n"
+    "{CENTER_ALIGN}Alas, ye seem to lack what is needed\n"
     "{CENTER_ALIGN}for evolution.");
 
 ALIGNED(4) static const u8 sOnlyOneItem[] = _(
@@ -77,12 +77,12 @@ ALIGNED(4) static const u8 sLetUsBegin[] = _(
     "{CENTER_ALIGN}Let us begin.");
 
 ALIGNED(4) static const u8 sFmtChangedAppearance[] = _(
-    "{CENTER_ALIGN}...{WAIT_PRESS}{ARG_NICKNAME_0} is undergoing changes...{EXTRA_MSG}"
-    "{CENTER_ALIGN}{ARG_NICKNAME_0}{APOSTROPHE}s appearance changed...{EXTRA_MSG}");
+    "{CENTER_ALIGN}...{WAIT_PRESS}{NAME_0} is undergoing changes...{EXTRA_MSG}"
+    "{CENTER_ALIGN}{NAME_0}'s appearance changed...{EXTRA_MSG}");
 
 ALIGNED(4) static const u8 sFmtEvolved[] = _(
-    "{CENTER_ALIGN}It evolved from {COLOR_1 GREEN}{ARG_POKEMON_0}{END_COLOR_TEXT_1}\n"
-    "{CENTER_ALIGN}to {COLOR_1 YELLOW}{ARG_POKEMON_1}{END_COLOR_TEXT_1}!");
+    "{CENTER_ALIGN}It evolved from {COLOR GREEN}{POKEMON_0}{RESET}\n"
+    "{CENTER_ALIGN}to {COLOR YELLOW}{POKEMON_1}{RESET}!");
 
 ALIGNED(4) static const u8 sComeAlone[] = _(
     "{CENTER_ALIGN}...{EXTRA_MSG}"

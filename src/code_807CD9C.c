@@ -73,12 +73,12 @@ void sub_807CD9C(Entity *pokemon, Entity *target, u32 direction)
     {
         if (pokemon == target) {
             SetMessageArgument(gAvailablePokemonNames,target,0);
-            sub_80522F4(pokemon,target,*gUnknown_80FCA10); // {ARG_POKEMON_0} couldn't be knocked flying!
+            sub_80522F4(pokemon,target,*gUnknown_80FCA10); // {POKEMON_0} couldn't be knocked flying!
             return;
         }
         SetMessageArgument(gAvailablePokemonNames,target,0);
         if (HasAbility(target,ABILITY_SUCTION_CUPS)) {
-            sub_80522F4(pokemon,target,*gUnknown_80FCBCC); // {ARG_POKEMON_0} is anchored! It can't be knocked flying!
+            sub_80522F4(pokemon,target,*gUnknown_80FCBCC); // {POKEMON_0} is anchored! It can't be knocked flying!
             return;
         }
         else
@@ -86,7 +86,7 @@ void sub_807CD9C(Entity *pokemon, Entity *target, u32 direction)
             (target->info->action).direction = (direction + 4) & DIRECTION_MASK;
             sub_806CDD4(target, 6, (direction + 4) & DIRECTION_MASK);
             sub_80421C0(target,0x1a3);
-            sub_80522F4(pokemon,target,*gUnknown_80F8A0C); // {ARG_POKEMON_0} was blown away!
+            sub_80522F4(pokemon,target,*gUnknown_80F8A0C); // {POKEMON_0} was blown away!
             flag = TRUE;
             sp_0x28 = NULL;
 

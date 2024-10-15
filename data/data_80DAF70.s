@@ -276,23 +276,23 @@ gUnknown_80DB580: @ 80DB580
 
 	.global gUnknown_80DB598
 gUnknown_80DB598: @ 80DB598
-        .string "{COLOR_1 GREEN}OVR{END_COLOR_TEXT_1}\0"
+        .string "{COLOR GREEN}OVR{RESET}\0"
         .align 2,0
 
 	.global gUnknown_80DB5A4
 gUnknown_80DB5A4: @ 80DB5A4
-        .string "{COLOR_1 YELLOW}INS{END_COLOR_TEXT_1}\0"
+        .string "{COLOR YELLOW}INS{RESET}\0"
         .align 2,0
 
 	.global gUnknown_80DB5B0
 gUnknown_80DB5B0: @ 80DB5B0
-        .string "{COLOR_1}%c"
+        .string "{COLOR}%c"
         .byte 0x81, 0x59
         .align 2,0
 
 	.global gUnknown_80DB5B8
 gUnknown_80DB5B8: @ 80DB5B8
-        .string "{COLOR_1}%c%s\0"
+        .string "{COLOR}%c%s\0"
         .align 2,0
 
 	.global gUnknown_80DB5C0
@@ -302,17 +302,17 @@ gUnknown_80DB5C0: @ 80DB5C0
 
 	.global gUnknown_80DB5D4
 gUnknown_80DB5D4: @ 80DB5D4
-        .string "What is this Pokémon{APOSTROPHE}s nickname?\0"
+        .string "What is this Pokémon's nickname?\0"
         .align 2,0
 
 	.global gUnknown_80DB5F8
 gUnknown_80DB5F8: @ 80DB5F8
-        .string "What is your partner{APOSTROPHE}s nickname?\0"
+        .string "What is your partner's nickname?\0"
         .align 2,0
 
 	.global gUnknown_80DB61C
 gUnknown_80DB61C: @ 80DB61C
-        .string "What is your team{APOSTROPHE}s name?\0"
+        .string "What is your team's name?\0"
         .align 2,0
 
 	.global gUnknown_80DB638
@@ -322,12 +322,12 @@ gUnknown_80DB638: @ 80DB638
 
 	.global gUnknown_80DB654
 gUnknown_80DB654: @ 80DB654
-        .string "{COLOR_1 RED}%s{END_COLOR_TEXT_1}\0"
+        .string "{COLOR RED}%s{RESET}\0"
         .align 2,0
 
 	.global gUnknown_80DB65C
 gUnknown_80DB65C: @ 80DB65C
-        .string "{COLOR_1 CYAN}%s{END_COLOR_TEXT_1}\0"
+        .string "{COLOR CYAN}%s{RESET}\0"
         .align 2,0
 
 	.global gUnknown_80DB664

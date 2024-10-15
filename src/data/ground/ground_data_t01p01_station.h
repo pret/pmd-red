@@ -1,0 +1,17921 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+static const struct ScriptCommand s_gs1_g0_s0_station_sref_script[] = { /* 0x8138268 */
+    DEBUGINFO,
+    SELECT_MAP(1),
+    CJUMP_SCENARIO_0(SCENARIO_MAIN),
+    COND(JUDGE_LT, 4, /* to label */ 0),
+    COND(JUDGE_EQ, 4, /* to label */ 1),
+    COND(JUDGE_EQ, 5, /* to label */ 2),
+    COND(JUDGE_EQ, 6, /* to label */ 3),
+    COND(JUDGE_EQ, 7, /* to label */ 4),
+    COND(JUDGE_EQ, 8, /* to label */ 5),
+    COND(JUDGE_EQ, 9, /* to label */ 6),
+    COND(JUDGE_EQ, 10, /* to label */ 7),
+    COND(JUDGE_EQ, 11, /* to label */ 8),
+    COND(JUDGE_LT, 15, /* to label */ 0),
+    COND(JUDGE_EQ, 15, /* to label */ 9),
+    COND(JUDGE_EQ, 16, /* to label */ 10),
+    COND(JUDGE_LT, 18, /* to label */ 11),
+    COND(JUDGE_EQ, 18, /* to label */ 12),
+    JUMP_LABEL(13),
+  LABEL(1), /* = 0x01 */
+    CJUMP_SCENARIO_1(SCENARIO_MAIN),
+    COND(JUDGE_LE, 3, /* to label */ 14),
+    JUMP_LABEL(15),
+  LABEL(14), /* = 0x0e */
+    CALL_STATION(  7,  0),
+    JUMP_LABEL(0),
+  LABEL(15), /* = 0x0f */
+    CALL_STATION(  7,  0),
+    JUMP_LABEL(0),
+  LABEL(2), /* = 0x02 */
+    CJUMP_SCENARIO_1(SCENARIO_MAIN),
+    COND(JUDGE_LE, 1, /* to label */ 16),
+    COND(JUDGE_LE, 3, /* to label */ 17),
+    COND_EQUAL(4, /* to label */ 18),
+    CALL_STATION( 11,  0),
+    JUMP_LABEL(0),
+  LABEL(16), /* = 0x10 */
+    CALL_STATION(  7,  0),
+    JUMP_LABEL(0),
+  LABEL(17), /* = 0x11 */
+    CALL_STATION(  8,  0),
+    JUMP_LABEL(0),
+  LABEL(18), /* = 0x12 */
+    CALL_STATION(  8,  0),
+    SELECT_ENTITIES(8, 2),
+    JUMP_LABEL(0),
+  LABEL(3), /* = 0x03 */
+    CJUMP_SCENARIO_1(SCENARIO_MAIN),
+    COND(JUDGE_LE, 1, /* to label */ 19),
+    CALL_STATION( 13,  0),
+    JUMP_LABEL(0),
+  LABEL(19), /* = 0x13 */
+    CALL_STATION( 11,  0),
+    JUMP_LABEL(0),
+  LABEL(4), /* = 0x04 */
+    CJUMP_SCENARIO_1(SCENARIO_MAIN),
+    COND(JUDGE_LE, 1, /* to label */ 20),
+    CALL_STATION( 14,  0),
+    JUMP_LABEL(0),
+  LABEL(20), /* = 0x14 */
+    CALL_STATION( 13,  0),
+    JUMP_LABEL(0),
+  LABEL(5), /* = 0x05 */
+    CJUMP_SCENARIO_1(SCENARIO_MAIN),
+    COND(JUDGE_LE, 1, /* to label */ 21),
+    CALL_STATION( 15,  0),
+    JUMP_LABEL(0),
+  LABEL(21), /* = 0x15 */
+    CALL_STATION( 14,  0),
+    JUMP_LABEL(0),
+  LABEL(6), /* = 0x06 */
+    CJUMP_SCENARIO_1(SCENARIO_MAIN),
+    COND(JUDGE_LE, 1, /* to label */ 22),
+    COND(JUDGE_LE, 3, /* to label */ 23),
+    COND(JUDGE_LE, 5, /* to label */ 24),
+    JUMP_LABEL(0),
+  LABEL(22), /* = 0x16 */
+    CALL_STATION( 15,  0),
+    JUMP_LABEL(0),
+  LABEL(23), /* = 0x17 */
+    CALL_STATION( 16,  0),
+    JUMP_LABEL(0),
+  LABEL(24), /* = 0x18 */
+    CALL_STATION( 18,  0),
+    JUMP_LABEL(0),
+  LABEL(7), /* = 0x07 */
+    CJUMP_SCENARIO_1(SCENARIO_MAIN),
+    COND(JUDGE_LE, 3, /* to label */ 25),
+    JUMP_LABEL(0),
+  LABEL(25), /* = 0x19 */
+    JUMP_SCRIPT(EVENT_M01E06A_L003),
+  LABEL(8), /* = 0x08 */
+    CALL_STATION( 22,  0),
+    JUMP_LABEL(0),
+  LABEL(9), /* = 0x09 */
+    CJUMP_SCENARIO_1(SCENARIO_MAIN),
+    COND(JUDGE_LE, 3, /* to label */ 26),
+    COND(JUDGE_LE, 5, /* to label */ 27),
+    COND(JUDGE_LE, 7, /* to label */ 28),
+    COND(JUDGE_LE, 11, /* to label */ 29),
+    JUMP_LABEL(30),
+  LABEL(26), /* = 0x1a */
+    CALL_STATION( 24,  0),
+    JUMP_LABEL(0),
+  LABEL(27), /* = 0x1b */
+    CALL_STATION( 25,  0),
+    JUMP_LABEL(0),
+  LABEL(28), /* = 0x1c */
+    CALL_STATION( 27,  0),
+    JUMP_LABEL(0),
+  LABEL(29), /* = 0x1d */
+    CALL_STATION( 29,  0),
+    JUMP_LABEL(0),
+  LABEL(30), /* = 0x1e */
+    CALL_STATION( 30,  0),
+    JUMP_LABEL(0),
+  LABEL(10), /* = 0x0a */
+    CJUMP_SCENARIO_1(SCENARIO_MAIN),
+    COND(JUDGE_LE, 2, /* to label */ 31),
+    COND(JUDGE_LE, 4, /* to label */ 32),
+    JUMP_LABEL(33),
+  LABEL(31), /* = 0x1f */
+    CALL_STATION( 34,  0),
+    JUMP_LABEL(0),
+  LABEL(32), /* = 0x20 */
+    CALL_STATION( 35,  0),
+    JUMP_LABEL(0),
+  LABEL(33), /* = 0x21 */
+    CALL_STATION( 36,  0),
+    JUMP_LABEL(0),
+  LABEL(11), /* = 0x0b */
+    CALL_STATION( 36,  0),
+    JUMP_LABEL(0),
+  LABEL(12), /* = 0x0c */
+    CALL_STATION( 38,  0),
+    JUMP_LABEL(0),
+  LABEL(13), /* = 0x0d */
+    CALL_STATION(  1,  0),
+    JUMP_LABEL(0),
+  LABEL(0), /* = 0x00 */
+    JUMPIF_EQUAL(START_MODE, 1, /* to label */ 34),
+    JUMPIF_EQUAL(START_MODE, 3, /* to label */ 35),
+    JUMPIF_EQUAL(START_MODE, 2, /* to label */ 36),
+    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 36),
+    JUMP_LABEL(34),
+  LABEL(36), /* = 0x24 */
+    CJUMP_VAR(GROUND_GETOUT),
+    COND_EQUAL(9, /* to label */ 37),
+    COND_EQUAL(10, /* to label */ 37),
+    COND_EQUAL(11, /* to label */ 37),
+    COND_EQUAL(15, /* to label */ 37),
+    COND_EQUAL(16, /* to label */ 37),
+    COND_EQUAL(17, /* to label */ 37),
+    COND_EQUAL(2, /* to label */ 38),
+    COND_EQUAL(3, /* to label */ 38),
+    COND_EQUAL(4, /* to label */ 39),
+    COND_EQUAL(6, /* to label */ 40),
+    JUMP_LABEL(37),
+  LABEL(34), /* = 0x22 */
+    SELECT_LIVES(0, 7),
+    JUMP_LABEL(41),
+  LABEL(35), /* = 0x23 */
+    SELECT_LIVES(0, 8),
+    JUMP_LABEL(41),
+  LABEL(37), /* = 0x25 */
+    SELECT_LIVES(0, 1),
+    JUMP_LABEL(41),
+  LABEL(38), /* = 0x26 */
+    SELECT_LIVES(0, 2),
+    JUMP_LABEL(41),
+  LABEL(39), /* = 0x27 */
+    SELECT_LIVES(0, 3),
+    JUMP_LABEL(41),
+  LABEL(40), /* = 0x28 */
+    SELECT_LIVES(0, 4),
+    JUMP_LABEL(41),
+  LABEL(41), /* = 0x29 */
+    BGM_SWITCH(7),
+    JUMP_SCRIPT(COMMON_ENTER),
+};
+
+static const struct ScriptRef s_gs1_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs1_g0_s0_station_sref_script }; /* 0x8138db4 */
+
+static const struct ScriptCommand s_gs1_g0_s0_evt0_sref_script[] = { /* 0x8138dc0 */
+    DEBUGINFO,
+    JUMPIF_SCENE_EQ(SCENARIO_MAIN, 9, 5, /* to label */ 0),
+    JUMPIF_EQUAL(WARP_LOCK, 0, /* to label */ 1),
+    JUMPIF_EQUAL(WARP_LOCK, 3, /* to label */ 2),
+    JUMPIF_EQUAL(WARP_LOCK, 4, /* to label */ 3),
+    JUMP_LABEL(1),
+    CALL_SCRIPT(EVENT_DIVIDE_WARP_LOCK_FUNC),
+    RET,
+  LABEL(1), /* = 0x01 */
+    { 0x01, 0x00, -0x0001,  0x00000009,  0x00000000, NULL },
+    HALT,
+  LABEL(2), /* = 0x02 */
+    EXECUTE_STATION(-1, 7, 1),
+    HALT,
+  LABEL(3), /* = 0x03 */
+    EXECUTE_STATION(-1, 8, 1),
+    HALT,
+  LABEL(0), /* = 0x00 */
+    EXECUTE_STATION(-1, 19, 0),
+    HALT,
+};
+
+static const struct ScriptRef s_gs1_g0_s0_evt0_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs1_g0_s0_evt0_sref_script }; /* 0x8138f00 */
+
+
+static const struct ScriptCommand s_gs1_g0_s0_evt1_sref_script[] = { /* 0x8138f0c */
+    DEBUGINFO,
+    { 0x01, 0x00, -0x0001,  0x00000002,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptRef s_gs1_g0_s0_evt1_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs1_g0_s0_evt1_sref_script }; /* 0x8138f3c */
+
+static const struct ScriptCommand s_gs1_g0_s0_evt2_sref_script[] = { /* 0x8138f48 */
+    DEBUGINFO,
+    { 0x01, 0x00, -0x0001,  0x00000004,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptRef s_gs1_g0_s0_evt2_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs1_g0_s0_evt2_sref_script }; /* 0x8138f78 */
+
+static const struct ScriptCommand s_gs1_g0_s0_evt3_sref_script[] = { /* 0x8138f84 */
+    DEBUGINFO,
+    { 0x01, 0x00, -0x0001,  0x00000006,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptRef s_gs1_g0_s0_evt3_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs1_g0_s0_evt3_sref_script }; /* 0x8138fb4 */
+
+static const struct ScriptCommand s_gs1_g0_s0_obj0_dlg2[] = { /* 0x8138fc0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}Welcome!\n{CENTER_ALIGN}The fun and bustling Pokémon Square!") },
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("Whiscash Pond ↑\n                 Pelipper Post Office →") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g0_s0_obj1_dlg2[] = { /* 0x81390c0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}↑\n{CENTER_ALIGN}Whiscash Pond") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g0_s0_obj2_dlg2[] = { /* 0x8139158 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("\n{CENTER_ALIGN}Pelipper Post Office →") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g0_s1_lives0_dlg0[] = { /* 0x81391f4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(WAIT_START_FUNC),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g0_s1_lives1_dlg0[] = { /* 0x8139234 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(WAIT_START_FUNC),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g0_s2_lives0_dlg0[] = { /* 0x8139274 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(WAIT_START_FUNC),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g0_s2_lives1_dlg0[] = { /* 0x81392b4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(WAIT_START_FUNC),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g0_s3_lives0_dlg0[] = { /* 0x81392f4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(WAIT_START_FUNC),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g0_s3_lives1_dlg0[] = { /* 0x8139334 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(WAIT_START_FUNC),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g0_s4_lives0_dlg0[] = { /* 0x8139374 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(WAIT_START_FUNC),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g0_s4_lives1_dlg0[] = { /* 0x81393b4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(WAIT_START_FUNC),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g0_s7_lives0_dlg0[] = { /* 0x81393f4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(WAIT_START_FUNC),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g0_s7_lives1_dlg0[] = { /* 0x8139434 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(WAIT_START_FUNC),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g0_s8_lives0_dlg0[] = { /* 0x8139474 */
+    DEBUGINFO,
+    CALL_SCRIPT(LIVES_WARP_ARRIVE_FUNC),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g0_s8_lives1_dlg0[] = { /* 0x81394a4 */
+    DEBUGINFO,
+    CALL_SCRIPT(LIVES_WARP_ARRIVE2_FUNC),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g1_s0_station_sref_script[] = { /* 0x81394d4 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    JUMP_STATION(  2,  0),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g1_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g1_s0_station_sref_script }; /* 0x8139514 */
+
+static const struct ScriptCommand s_gs1_g1_s0_lives0_dlg2[] = { /* 0x8139520 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g1_s0_lives1_dlg2[] = { /* 0x8139580 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g1_s0_lives2_dlg2[] = { /* 0x81395e0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g1_s0_lives3_dlg2[] = { /* 0x8139640 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g1_s0_lives4_dlg2[] = { /* 0x81396a0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g1_s0_lives5_dlg2[] = { /* 0x8139700 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g1_s0_lives6_dlg2[] = { /* 0x8139760 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" What's your rescue rank?\nHow high'd you get it?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" We're still Normal Rank.{WAIT_PRESS}\nWe're trying, but...") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g1_s0_lives7_dlg2[] = { /* 0x8139840 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It sounds like the natural\ndisasters were interfering with our ability\nto evolve.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I think the timing's right.{WAIT_PRESS}\nI should think about evolving...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" But when I evolve...{WAIT_PRESS}\nI become a {COLOR CYAN_M}Ludicolo{RESET}...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You know? \n{COLOR CYAN_M}Ludicolo{RESET} is a carefree Pokémon.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I don't know about having\nmy personality become carefree...{WAIT_PRESS}\nWhat do you think? Huh?") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g1_s0_lives8_dlg2[] = { /* 0x8139a3c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000050,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I've given up on trying to\nturn back into {POKEMON_2}.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" From now on, I'm living as\n{POKEMON_1}.\nPleased to meet you.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g1_s0_lives9_dlg2[] = { /* 0x8139b2c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Our team got the Gold Rank,\nbut...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I think the rescue ranks go\nhigher than that.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g1_s0_lives10_dlg2[] = { /* 0x8139bf4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I wonder what's higher than\nthe Gold Rank?{WAIT_PRESS}\nI can't imagine it.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g1_s0_lives11_dlg2[] = { /* 0x8139c9c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" For many years, countless\nPokémon have served on rescue teams.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Many have engraved\ntheir names in glory.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" But if anyone asks\nabout the greatest of them all...{WAIT_PRESS}\nThere is but one hero.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It's Lucario...{WAIT_PRESS}\nwhose exploits as a rescue leader are the\nstuff of legend.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I aspire to become like\nLucario.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" To become even closer to\nLucario's greatness...\nThat is my goal and my dream.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g1_s0_lives12_dlg2[] = { /* 0x8139ef4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" KEEP UP YOUR RESCUE\nWORK! BZBZBZZZ!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g1_s0_lives13_dlg2[] = { /* 0x8139f7c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" YOUR TEAM HAS MY\nSUPPORT! BZBZBZZT!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g2_s0_station_sref_script[] = { /* 0x813a004 */
+    DEBUGINFO,
+    JUMPIF_EQUAL(WARP_LOCK, 0, /* to label */ 0),
+    RET_DIRECT,
+  LABEL(0), /* = 0x00 */
+    JUMPIF_SCENE_LT(SCENARIO_MAIN, 19, -1, /* to label */ 6),
+    CJUMP_VAR(GROUND_GETOUT),
+    COND_EQUAL(4, /* to label */ 2),
+    JUMPIF_SCENE_EQ(SCENARIO_SUB4, 38, 1, /* to label */ 3),
+  LABEL(2), /* = 0x02 */
+    JUMPIF_SCENE_EQ(SCENARIO_SUB4, 43, 0, /* to label */ 4),
+    JUMPIF_SCENE_EQ(SCENARIO_SUB4, 43, 1, /* to label */ 4),
+    JUMPIF_SCENE_EQ(SCENARIO_SUB9, 53, 3, /* to label */ 5),
+    JUMPIF_SCENE_EQ(SCENARIO_SUB9, 53, 4, /* to label */ 5),
+    JUMPIF_SCENE_LT(SCENARIO_SUB7, 49, 2, /* to label */ 6),
+    JUMPIF_SCENE_GT(SCENARIO_SUB7, 49, -1, /* to label */ 6),
+    JUMPIF_SCENE_LT(SCENARIO_SUB7, 49, 4, /* to label */ 7),
+    JUMPIF_SUM(JUDGE_LT, EVENT_S07E01, 11, /* to label */ 7),
+  LABEL(6), /* = 0x06 */
+    CLEAR_ARRAY(EVENT_LOCAL),
+    JUMPIF_SCENE_EQ(SCENARIO_SUB1, 32, 2, /* to label */ 9),
+    JUMP_LABEL(10),
+  LABEL(9), /* = 0x09 */
+    SELECT_ENTITIES(39, 0),
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    JUMP_LABEL(10),
+  LABEL(10), /* = 0x0a */
+    CJUMP_SCENARIO_0(SCENARIO_SUB2),
+    COND(JUDGE_EQ, 33, /* to label */ 12),
+    COND(JUDGE_EQ, 34, /* to label */ 13),
+    JUMP_LABEL(14),
+  LABEL(12), /* = 0x0c */
+    JUMPIF_SCENE_EQ(SCENARIO_SUB2, 33, 2, /* to label */ 15),
+    JUMP_LABEL(14),
+  LABEL(15), /* = 0x0f */
+    SELECT_ENTITIES(40, 0),
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    JUMP_LABEL(14),
+  LABEL(13), /* = 0x0d */
+    JUMPIF_SCENE_EQ(SCENARIO_SUB2, 34, 1, /* to label */ 16),
+    JUMP_LABEL(14),
+  LABEL(16), /* = 0x10 */
+    SELECT_ENTITIES(41, 0),
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    JUMP_LABEL(14),
+  LABEL(14), /* = 0x0e */
+    JUMPIF_SCENE_LT(SCENARIO_SUB4, 38, 2, /* to label */ 19),
+    JUMPIF_SCENE_LT(SCENARIO_SUB4, 43, 0, /* to label */ 20),
+    JUMP_LABEL(19),
+  LABEL(3), /* = 0x03 */
+    SELECT_ENTITIES(42, 0),
+    RET_DIRECT,
+  LABEL(20), /* = 0x14 */
+    SELECT_ENTITIES(44, 0),
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    JUMP_LABEL(19),
+  LABEL(4), /* = 0x04 */
+    SELECT_ENTITIES(45, 0),
+    RET_DIRECT,
+  LABEL(19), /* = 0x13 */
+    JUMP_LABEL(22),
+  LABEL(7), /* = 0x07 */
+    SELECT_ENTITIES(50, 0),
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    JUMP_LABEL(6),
+  LABEL(22), /* = 0x16 */
+    JUMPIF_SCENE_EQ(SCENARIO_SUB9, 55, 2, /* to label */ 24),
+    JUMP_LABEL(25),
+  LABEL(5), /* = 0x05 */
+    SELECT_ENTITIES(51, 0),
+    RET_DIRECT,
+  LABEL(24), /* = 0x18 */
+    SELECT_ENTITIES(52, 0),
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    JUMP_LABEL(25),
+  LABEL(25), /* = 0x19 */
+    JUMPIF_SCENE_LT(SCENARIO_MAIN, 19, -1, /* to label */ 26),
+    JUMPIF(JUDGE_NE, EVENT_LOCAL, 0, /* to label */ 26),
+    { 0x3b, 0x33,  0x0000,  0x00000000,  0x00000000, NULL },
+    COND_EQUAL(1, /* to label */ 27),
+    WAIT(0),
+    JUMP_LABEL(26),
+  LABEL(28), /* = 0x1c */
+    SELECT_ENTITIES(3, 0),
+    JUMP_LABEL(26),
+  LABEL(27), /* = 0x1b */
+    CJUMP_RANDOM(2),
+    COND_EQUAL(0, /* to label */ 29),
+    COND_EQUAL(1, /* to label */ 30),
+  LABEL(29), /* = 0x1d */
+    SELECT_ENTITIES(4, 0),
+    JUMP_LABEL(26),
+  LABEL(30), /* = 0x1e */
+    SELECT_ENTITIES(5, 0),
+    JUMP_LABEL(26),
+  LABEL(26), /* = 0x1a */
+    RET_DIRECT,
+};
+
+static const struct ScriptRef s_gs1_g2_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g2_s0_station_sref_script }; /* 0x813a604 */
+
+
+
+
+
+
+
+
+static const struct ScriptCommand s_gs1_g3_s0_lives0_dlg2[] = { /* 0x813a610 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    ASK3( TRUE, /*default*/ 0, /* speaker */ -1, _(" Activate the subevent \"Munchlax\"?")),
+    CHOICE(/* label */  1, _("Activate Type 1")),
+    CHOICE(/* label */  2, _("Activate Type 2")),
+    CHOICE(/* label */  3, _("*Cancel")),
+  LABEL(3), /* = 0x03 */
+    JUMP_SCRIPT(END_TALK),
+  LABEL(1), /* = 0x01 */
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CANCEL_ENTITIES(3, 0),
+    SELECT_ENTITIES(4, 0),
+    JUMP_SCRIPT(END_TALK),
+  LABEL(2), /* = 0x02 */
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CANCEL_ENTITIES(3, 0),
+    SELECT_ENTITIES(5, 0),
+    JUMP_SCRIPT(END_TALK),
+};
+
+
+static const struct ScriptCommand s_gs1_g4_s0_lives0_dlg1[] = { /* 0x813a7a0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3b, 0x11,  0x0000,  0x00000000,  0x00000000, NULL },
+    COND_EQUAL(0, /* to label */ 1),
+    { 0x3b, 0x15,  0x0000,  0x00000020,  0x00000000, NULL },
+    COND_EQUAL(1, /* to label */ 2),
+  LABEL(1), /* = 0x01 */
+    { 0x6a, 0x00,  0x0080, -0x00000001,  0x00000000, NULL },
+    CJUMP_DIR_TO_LINK(1),
+    COND_EQUAL(6, /* to label */ 0),
+    { 0x6b, 0x00,  0x0080,  0x00000002,  0x00000000, NULL },
+    END_DELETE,
+  LABEL(2), /* = 0x02 */
+    EXECUTE_STATION(-1, -1, 1),
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g4_s0_lives0_dlg2[] = { /* 0x813a8b0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ....................................") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g4_s1_station_sref_script[] = { /* 0x813a938 */
+    DEBUGINFO,
+    { 0xb2, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    SELECT_ENTITIES(-1, 1),
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    SELECT_ENTITIES(-1, 3),
+    SELECT_ENTITIES(1, 0),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g4_s1_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs1_g4_s1_station_sref_script }; /* 0x813a9a8 */
+
+static const struct ScriptCommand s_gs1_g4_s1_lives0_dlg0[] = { /* 0x813a9b4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x02,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(515),
+    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _(" ...Grrruummmmmbbbbblle...!") },
+    WAIT(60),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    FANFARE_PLAY2(465),
+    SELECT_ENTITIES(-1, 2),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    WAIT(60),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ....................................\n................................................\n................................................") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ...Belly...rumbling...{WAIT_PRESS}\nHungry...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g4_s1_lives1_dlg0[] = { /* 0x813ac3c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g4_s1_lives2_dlg0[] = { /* 0x813acdc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x8b, 0x3c,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g4_s2_lives0_dlg0[] = { /* 0x813ad6c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g4_s2_lives1_dlg0[] = { /* 0x813adcc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g4_s2_lives2_dlg0[] = { /* 0x813ae2c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g4_s2_lives3_dlg0[] = { /* 0x813ae8c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g4_s2_lives4_dlg0[] = { /* 0x813aeec */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g4_s2_lives5_dlg0[] = { /* 0x813af4c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g4_s2_lives6_dlg0[] = { /* 0x813afac */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g4_s2_lives7_dlg0[] = { /* 0x813b00c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g4_s2_lives8_dlg0[] = { /* 0x813b06c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g4_s2_lives9_dlg0[] = { /* 0x813b0cc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g4_s3_lives0_dlg0[] = { /* 0x813b12c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0300,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0001,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g4_s3_lives0_dlg1[] = { /* 0x813b16c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0080,  0x00000002,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g4_s3_lives0_dlg2[] = { /* 0x813b1ac */
+    DEBUGINFO,
+    CLEAR_ARRAY(EVENT_LOCAL),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x02,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x00000000,  0x00000000, NULL },
+    ASK3(FALSE, /*default*/ -1, /* speaker */ 1, _(" Munchlax hungry...{WAIT_PRESS}\nYou have food?")),
+    CHOICE(/* label */  1, _("Yes.")),
+    CHOICE(/* label */  2, _("No.")),
+  LABEL(1), /* = 0x01 */
+    { 0x2e, 0x15,  0x0001,  0x00000042,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" R-really?!") },
+    { 0x2e, 0x15,  0x0001,  0x00000041,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" What kind food?!\nShow Munchlax! Show, show!") },
+    { 0x3c, 0x2d,  0x0000,  0x00000000,  0x00000000, NULL },
+    COND_EQUAL(-1, /* to label */ 2),
+    JUMP_LABEL(3),
+  LABEL(2), /* = 0x02 */
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x15,  0x0001,  0x00000045,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ...Nnnnn?{WAIT_PRESS}\nOh... Don't have food...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Munchlax feel sad...{WAIT_PRESS}\nMunchlax go now.") },
+    JUMP_SCRIPT(END_TALK),
+  LABEL(3), /* = 0x03 */
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}{NAME_0} gave Munchlax\n{CENTER_ALIGN}one {COLOR GREEN_I}{MOVE_ITEM_0}{RESET}.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x15,  0x0001,  0x00000041,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Th-this {COLOR GREEN_I}{MOVE_ITEM_0}{RESET}!{WAIT_PRESS}\nM-Munchlax big favorite!") },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(516),
+    { 0x33, 0x00, -0x0001,  0x00000000,  0x00000000, _("Munch, munch, munch, munch, munch,\nmunch, munch, munch, munch, munch,\nmunch, munch, munch, munch, munch...") },
+    { 0x33, 0x00, -0x0001,  0x00000000,  0x00000000, _("Munch, munch, munch, munch, munch,\nmunch, munch, munch, munch, munch,\nmunch, munch, munch, munch, munch...") },
+    FANFARE_STOP2(516),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0001,  0x00000044,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Nnnnnnnnn!{WAIT_PRESS}\nDeeeeelicious!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0001,  0x00000043,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Munchlax satisfied!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ............{WAIT_PRESS}\nYou, good to Munchlax.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Munchlax say thank you\nwith this.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x3c, 0x2c,  0x0000,  0x0000002b,  0x00000000, NULL },
+    WAIT(30),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Munchlax go now.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    SELECT_ENTITIES(-1, 4),
+    RET,
+};
+
+
+
+
+
+static const struct ScriptCommand s_gs1_g4_s3_lives0_dlg3[] = { /* 0x813b7d8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x8d, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    JUMPIF(JUDGE_EQ, EVENT_LOCAL, 1, /* to label */ 0),
+    { 0xe3, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    WAIT(12),
+    RET,
+  LABEL(0), /* = 0x00 */
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x8b, 0x0a,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x001f,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x08,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g4_s4_lives0_dlg1[] = { /* 0x813b948 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000002,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g4_s4_lives0_dlg2[] = { /* 0x813b988 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x00000044,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ............{WAIT_PRESS}\nYou, good to Munchlax.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g5_s0_lives0_dlg1[] = { /* 0x813b9e8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000004,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3b, 0x11,  0x0000,  0x00000000,  0x00000000, NULL },
+    COND_EQUAL(0, /* to label */ 1),
+    { 0x3b, 0x15,  0x0000,  0x00000040,  0x00000000, NULL },
+    COND_EQUAL(1, /* to label */ 2),
+  LABEL(1), /* = 0x01 */
+    { 0x6a, 0x00,  0x0100, -0x00000001,  0x00000000, NULL },
+    CJUMP_DIR_TO_LINK(5),
+    COND_EQUAL(6, /* to label */ 0),
+    { 0x6b, 0x00,  0x0100,  0x00000006,  0x00000000, NULL },
+    END_DELETE,
+  LABEL(2), /* = 0x02 */
+    EXECUTE_STATION(-1, -1, 1),
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s0_lives0_dlg2[] = { /* 0x813baf8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ........................") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g5_s1_station_sref_script[] = { /* 0x813bb74 */
+    DEBUGINFO,
+    { 0xb2, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    SELECT_LIVES(-1, 1),
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    SELECT_ENTITIES(-1, 3),
+    SELECT_ENTITIES(1, 0),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g5_s1_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs1_g5_s1_station_sref_script }; /* 0x813bbe4 */
+
+static const struct ScriptCommand s_gs1_g5_s1_lives0_dlg0[] = { /* 0x813bbf0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x02,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(400),
+    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Flump!") },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(900),
+    SELECT_OBJECTS(-1, 1),
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    FANFARE_PLAY2(465),
+    SELECT_ENTITIES(-1, 2),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    WAIT(60),
+    { 0x2e, 0x02,  0x0002,  0x00000045,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ....................................") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g5_s1_lives1_dlg0[] = { /* 0x813be18 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g5_s1_lives2_dlg0[] = { /* 0x813beb8 */
+    DEBUGINFO,
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0013,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(8),
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x001a,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s1_obj0_dlg0[] = { /* 0x813bfc8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x5d, 0x00,  0x0000,  0x0000007f,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0200, -0x00000020,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100, -0x00000008,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0080, -0x00000002,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00000004,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00000040,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g5_s1_obj0_dlg1[] = { /* 0x813c058 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s1_obj0_dlg2[] = { /* 0x813c088 */
+    DEBUGINFO,
+    FANFARE_PLAY2(330),
+    CANCEL_OBJECTS(-1, 1),
+    EXECUTE_STATION(-1, -1, 4),
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s1_obj1_dlg0[] = { /* 0x813c0d8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x5d, 0x00,  0x0000,  0x0000007f,  0x00000000, NULL },
+    { 0x84, 0x00,  0x0200, -0x00000018, -0x00000004, NULL },
+    { 0x84, 0x00,  0x0100, -0x00000008, -0x00000002, NULL },
+    { 0x84, 0x00,  0x0080, -0x00000002, -0x00000001, NULL },
+    { 0x52, 0x00,  0x0000,  0x00000004,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00000040,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g5_s1_obj1_dlg1[] = { /* 0x813c168 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s1_obj1_dlg2[] = { /* 0x813c198 */
+    DEBUGINFO,
+    FANFARE_PLAY2(330),
+    CANCEL_OBJECTS(-1, 1),
+    EXECUTE_STATION(-1, -1, 4),
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s1_obj2_dlg0[] = { /* 0x813c1e8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x5d, 0x00,  0x0000,  0x0000007f,  0x00000000, NULL },
+    { 0x84, 0x00,  0x0200, -0x00000018,  0x00000004, NULL },
+    { 0x84, 0x00,  0x0100, -0x00000008,  0x00000002, NULL },
+    { 0x84, 0x00,  0x0080, -0x00000002,  0x00000001, NULL },
+    { 0x52, 0x00,  0x0000,  0x00000004,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00000040,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g5_s1_obj2_dlg1[] = { /* 0x813c278 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s1_obj2_dlg2[] = { /* 0x813c2a8 */
+    DEBUGINFO,
+    FANFARE_PLAY2(330),
+    CANCEL_OBJECTS(-1, 1),
+    EXECUTE_STATION(-1, -1, 4),
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s2_lives0_dlg0[] = { /* 0x813c2f8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s2_lives1_dlg0[] = { /* 0x813c358 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s2_lives2_dlg0[] = { /* 0x813c3b8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s2_lives3_dlg0[] = { /* 0x813c418 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s2_lives4_dlg0[] = { /* 0x813c478 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s2_lives5_dlg0[] = { /* 0x813c4d8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s2_lives6_dlg0[] = { /* 0x813c538 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s2_lives7_dlg0[] = { /* 0x813c598 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s2_lives8_dlg0[] = { /* 0x813c5f8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s2_lives9_dlg0[] = { /* 0x813c658 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000007f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s3_lives0_dlg1[] = { /* 0x813c6b8 */
+    DEBUGINFO,
+    { 0x53, 0x00,  0x0000,  0x00000008,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0040, -0x00000024,  0x00000000, NULL },
+    CANCEL_OBJECTS(-1, 1),
+    WAIT(30),
+    { 0x6b, 0x00,  0x0080,  0x00000006,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g5_s3_lives0_dlg2[] = { /* 0x813c738 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ........................") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g5_s4_station_sref_script[] = { /* 0x813c798 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g5_s4_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs1_g5_s4_station_sref_script }; /* 0x813c7d8 */
+
+static const struct ScriptCommand s_gs1_g5_s4_lives0_dlg0[] = { /* 0x813c7e4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x08,  0x000a,  0x0000007f,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0002,  0x00000000,  0x00000000, NULL },
+    ASK3(FALSE, /*default*/ -1, /* speaker */ 2, _(" ............{WAIT_PRESS}Hey.{WAIT_PRESS}\nThat belong to Munchlax.{WAIT_PRESS}\nMunchlax want back.")),
+    CHOICE(/* label */  1, _("Return it.")),
+    CHOICE(/* label */  2, _("Keep it.")),
+  LABEL(1), /* = 0x01 */
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    FANFARE_PLAY2(333),
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}{NAME_0} returned\n{CENTER_ALIGN}the {COLOR GREEN_I}Apple{RESET} to Munchlax.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x15,  0x0002,  0x00000044,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" R-really?!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Really, you give food back\nto Munchlax?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0002,  0x00000042,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Snivel...\nMunchlax feel all squishy inside...") },
+    { 0x2e, 0x15,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ............{WAIT_PRESS}\nYou honest and nice.\nMunchlax like.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Munchlax say thank you\nwith this.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x3c, 0x2c,  0x0000,  0x0000002b,  0x00000000, NULL },
+    WAIT(30),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Munchlax go now.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    SELECT_ENTITIES(-1, 5),
+    { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    RET,
+  LABEL(2), /* = 0x02 */
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x15,  0x0002,  0x00000045,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Nnnnnnnnnnnn!{WAIT_PRESS}\nNnnnnnnnnnnnnnnnnnnnnnnnnnnnnn!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ..................{WAIT_PRESS}\nMunchlax sad...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ..................{WAIT_PRESS}\nMeanie...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    SELECT_ENTITIES(-1, 6),
+    { 0x3b, 0x34,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+
+
+
+
+static const struct ScriptCommand s_gs1_g5_s4_lives1_dlg0[] = { /* 0x813cd90 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g5_s4_lives2_dlg0[] = { /* 0x813cdf0 */
+    DEBUGINFO,
+    { 0x53, 0x00,  0x0000,  0x00000400,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00, -0x0001,  0x00000058,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xda, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    COND_EQUAL(1, /* to label */ 0),
+    COND_EQUAL(2, /* to label */ 1),
+  LABEL(0), /* = 0x00 */
+    HALT,
+  LABEL(1), /* = 0x01 */
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x8b, 0x0a,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0020,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0018,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x54, 0x00,  0x0300,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x95, 0x08,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0021,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x00000004,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0080,  0x00000020,  0x00000000, NULL },
+  LABEL(2), /* = 0x02 */
+    { 0x3b, 0x15,  0x0000,  0x00000040,  0x00000000, NULL },
+    COND_EQUAL(0, /* to label */ 3),
+    { 0x6a, 0x00,  0x0080,  0x00000004,  0x00000000, NULL },
+    JUMP_LABEL(2),
+  LABEL(3), /* = 0x03 */
+    { 0x54, 0x00,  0x0800,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x54, 0x00,  0x0300,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00000004,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x95, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g5_s5_lives0_dlg1[] = { /* 0x813d100 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000006,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g5_s5_lives0_dlg2[] = { /* 0x813d140 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ............{WAIT_PRESS}\nYou, good to Munchlax.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g5_s6_lives0_dlg1[] = { /* 0x813d190 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0021,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000003,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g5_s6_lives0_dlg2[] = { /* 0x813d1d0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x15,  0x0001,  0x00000045,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ..................{WAIT_PRESS}\nMeanie...") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g6_s0_station_sref_script[] = { /* 0x813d240 */
+    DEBUGINFO,
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 1),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 9),
+    UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 2),
+    UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
+    SELECT_MAP(1),
+    SELECT_ENTITIES(-1, 0),
+    SELECT_ENTITIES(7, 0),
+    BGM_SWITCH(7),
+    { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    SELECT_EVENTS(0, 0),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g6_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs1_g6_s0_station_sref_script }; /* 0x813d310 */
+
+static const struct ScriptCommand s_gs1_g6_s0_eff0_script[] = { /* 0x813d31c */
+    DEBUGINFO,
+    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x86, 0x00,  0x0200,  0x00000009,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x86, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x86, 0x00,  0x0200,  0x0000000b,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x86, 0x00,  0x0200,  0x0000000c,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x86, 0x00,  0x0200,  0x0000000d,  0x00000000, NULL },
+    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g6_s0_lives0_dlg0[] = { /* 0x813d45c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0080,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" This is Pokémon Square.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" That's the {COLOR CYAN}Kecleon Shop{RESET}.{WAIT_PRESS}\nYou can buy and sell items there.")),
+    VARIANT_DEFAULT(_(" That's the {COLOR CYAN}Kecleon Shop{RESET}.{WAIT_PRESS}\nYou can buy and sell items there.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" That's {COLOR CYAN}Felicity Bank{RESET}.")),
+    VARIANT(/* == */  1, _(" You can save your money\nthere.")),
+    VARIANT_DEFAULT(_(" That's {COLOR CYAN}Felicity Bank{RESET}.")),
+    VARIANT_DEFAULT(_(" You can save your money\nthere.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" This is the\n{COLOR CYAN}Gulpin Link Shop{RESET}.{WAIT_PRESS}\nGulpin will link moves for you.")),
+    VARIANT(/* == */  1, _(" Hah?{WAIT_PRESS} What's linking?{WAIT_PRESS}\nWell, if you link moves...{WAIT_PRESS}\nYou can use them at the same time.")),
+    VARIANT(/* == */  1, _(" If you need details, you'd\nbe better off asking Gulpin.")),
+    VARIANT(/* == */  3, _(" This is the\n{COLOR CYAN}Gulpin Link Shop{RESET}.{WAIT_PRESS}\nGulpin can link moves for you.")),
+    VARIANT(/* == */  3, _(" Huh?{WAIT_PRESS} What's linking?{WAIT_PRESS}\nWell, if you link moves...{WAIT_PRESS}\nYou can use them at the same time.")),
+    VARIANT(/* == */  3, _(" You should just ask Gulpin\nfor details.")),
+    VARIANT_DEFAULT(_(" This is the\n{COLOR CYAN}Gulpin Link Shop{RESET}.{WAIT_PRESS}\nGulpin can link moves for you.")),
+    VARIANT_DEFAULT(_(" Huh?{WAIT_PRESS} What's linking?{WAIT_PRESS}\nWell, if you link moves...{WAIT_PRESS}\nYou can use them at the same time.")),
+    VARIANT_DEFAULT(_(" I think you should ask Gulpin\nif you want to know more.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" This is {COLOR CYAN}Kangaskhan Storage{RESET}.\nStore items here so they'll never be\nlost.")),
+    VARIANT(/* == */  1, _(" If you have important\nitems, you should store them before you\nhead out to a dungeon.")),
+    VARIANT_DEFAULT(_(" This is {COLOR CYAN}Kangaskhan Storage{RESET}.\nIf you store items here, they'll never go\nmissing.")),
+    VARIANT_DEFAULT(_(" You should store important\nitems here before you go out on any\ndungeon adventure.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" How do you like it?\nThe shops are useful, huh?")),
+    VARIANT_DEFAULT(_(" What do you think?\nThe businesses here help us.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Oh, yeah, there's also the\n{COLOR CYAN}Pelipper Post Office{RESET}.\nIt's straight ahead past here.")),
+    VARIANT_DEFAULT(_(" Oh, and there's also the\n{COLOR CYAN}Pelipper Post Office{RESET}.\nThat's up past here.")),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" I'm sure you can get\ninformation on rescue jobs there.")),
+    VARIANT(/* == */  1, _(" So, let's start with a visit\nto the {COLOR CYAN}Pelipper Post Office{RESET}.")),
+    VARIANT(/* == */  3, _(" I think we can get rescue-\njob information there.")),
+    VARIANT(/* == */  3, _(" So, how about we go to\nthe {COLOR CYAN}Pelipper Post Office{RESET} first?")),
+    VARIANT_DEFAULT(_(" I think we can get some\ninformation on rescue jobs.")),
+    VARIANT_DEFAULT(_(" Let's first go to the\n{COLOR CYAN}Pelipper Post Office{RESET}.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+
+static const struct ScriptCommand s_gs1_g6_s0_lives1_dlg0[] = { /* 0x813df88 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0080,  0x00000008,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x8e, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x8e, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g7_s0_station_sref_script[] = { /* 0x813e0f8 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    RET_DIRECT,
+};
+
+static const struct ScriptRef s_gs1_g7_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g7_s0_station_sref_script }; /* 0x813e128 */
+
+static const struct ScriptCommand s_gs1_g7_s0_lives0_dlg2[] = { /* 0x813e134 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g7_s0_lives1_dlg2[] = { /* 0x813e194 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g7_s0_lives2_dlg2[] = { /* 0x813e1f4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g7_s0_lives3_dlg2[] = { /* 0x813e254 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g7_s0_lives4_dlg2[] = { /* 0x813e2b4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g7_s0_lives5_dlg1[] = { /* 0x813e314 */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_BOY),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g7_s0_lives5_dlg2[] = { /* 0x813e354 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I don't know why, but\nthere've been many natural disasters\nlately.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" A lot of Pokémon have gone\nwild and violent because the disasters\nscared them...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It's a mean world out there.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g7_s0_lives6_dlg1[] = { /* 0x813e494 */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_GIRL),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g7_s0_lives6_dlg2[] = { /* 0x813e4d4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" There was a forest fire not\nlong ago.\nIt was terrible.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Luckily, Blastoise and\nFeraligatr were able to douse it quickly...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" But it could have been much\nworse if they were slower getting\nthere.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g7_s0_lives7_dlg2[] = { /* 0x813e61c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Pardon?\nOh, the {COLOR CYAN}Pelipper Post Office{RESET}?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" The {COLOR CYAN}Pelipper Post Office{RESET}\nwould be...") },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Straight down this path.") },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It's out at the cape.\nYou can't miss it.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g7_s0_lives7_dlg3[] = { /* 0x813e794 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(WAIT_END_TALK_FUNC),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g7_s1_station_sref_script[] = { /* 0x813e844 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g7_s1_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs1_g7_s1_station_sref_script }; /* 0x813e874 */
+
+static const struct ScriptCommand s_gs1_g7_s1_lives0_dlg0[] = { /* 0x813e880 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x03,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Huh?\nAre you going home already?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x08,  0x000a,  0x00000004,  0x00000000, NULL },
+    WAIT(10),
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" We haven't gone to the\n{COLOR CYAN}Pelipper Post Office{RESET} yet?")),
+    VARIANT(/* == */  1, _(" You can go home after we\ngo to the {COLOR CYAN}Pelipper Post Office{RESET}.")),
+    VARIANT_DEFAULT(_(" We haven't gone to the\n{COLOR CYAN}Pelipper Post Office{RESET} yet.")),
+    VARIANT_DEFAULT(_(" Let's go to the {COLOR CYAN}Pelipper\nPost Office{RESET} at least.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+
+static const struct ScriptCommand s_gs1_g7_s1_lives1_dlg0[] = { /* 0x813ead4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x08,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g8_s0_station_sref_script[] = { /* 0x813eb54 */
+    DEBUGINFO,
+    JUMPIF_SCENE_LT(SCENARIO_MAIN, 5, 4, /* to label */ 0),
+    CANCEL_LIVES(8, 0),
+    JUMP_LABEL(1),
+  LABEL(0), /* = 0x00 */
+    SELECT_ENTITIES(-1, -1),
+  LABEL(1), /* = 0x01 */
+    RET_DIRECT,
+};
+
+static const struct ScriptRef s_gs1_g8_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g8_s0_station_sref_script }; /* 0x813ebd4 */
+
+static const struct ScriptCommand s_gs1_g8_s0_lives0_dlg2[] = { /* 0x813ebe0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g8_s0_lives1_dlg2[] = { /* 0x813ec40 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g8_s0_lives2_dlg2[] = { /* 0x813eca0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g8_s0_lives3_dlg2[] = { /* 0x813ed00 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g8_s0_lives4_dlg2[] = { /* 0x813ed60 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g8_s0_lives5_dlg2[] = { /* 0x813edc0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_SCENE_LT(SCENARIO_MAIN, 5, 4, /* to label */ 0),
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+  LABEL(0), /* = 0x00 */
+    EXECUTE_STATION(-1, 9, 0),
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g8_s0_lives6_dlg1[] = { /* 0x813ee60 */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_BOY),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g8_s0_lives6_dlg2[] = { /* 0x813eea0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" There've been so many\nnatural disasters lately...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" More Pokémon are starting\ntheir own rescue teams.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g8_s0_lives7_dlg1[] = { /* 0x813ef7c */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_GIRL),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g8_s0_lives7_dlg2[] = { /* 0x813efbc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0001,  0x0000004f,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Oh, my gosh, the forest fire\na while back was simply awful.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I hightailed it out of there!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g8_s1_station_sref_script[] = { /* 0x813f0a0 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g8_s1_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs1_g8_s1_station_sref_script }; /* 0x813f0d0 */
+
+static const struct ScriptCommand s_gs1_g8_s1_lives0_dlg0[] = { /* 0x813f0dc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x03,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Huh?\nYou want to go home already?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x08,  0x000a,  0x00000004,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" We're already here.\nLet me show you around a bit more.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g8_s1_lives1_dlg0[] = { /* 0x813f23c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x08,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g8_s2_lives0_dlg0[] = { /* 0x813f2bc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g8_s2_lives1_dlg0[] = { /* 0x813f2ec */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g8_s2_lives2_dlg0[] = { /* 0x813f31c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g8_s2_lives3_dlg0[] = { /* 0x813f34c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g8_s2_lives4_dlg0[] = { /* 0x813f37c */
+    DEBUGINFO,
+    { 0x4f, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g8_s2_lives5_dlg0[] = { /* 0x813f3bc */
+    DEBUGINFO,
+    { 0x4f, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g8_s2_lives6_dlg0[] = { /* 0x813f3fc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0008,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g8_s2_lives7_dlg0[] = { /* 0x813f44c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g8_s2_lives8_dlg2[] = { /* 0x813f49c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g8_s2_lives9_dlg2[] = { /* 0x813f4fc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g8_s2_evt0_sref_script[] = { /* 0x813f55c */
+    DEBUGINFO,
+    EXECUTE_STATION(-1, 10, 0),
+    HALT,
+};
+
+static const struct ScriptRef s_gs1_g8_s2_evt0_sref = { 57, 7, NULL /* NORMAL_EVENT */, s_gs1_g8_s2_evt0_sref_script }; /* 0x813f58c */
+
+static const struct ScriptCommand s_gs1_g9_s0_station_sref_script[] = { /* 0x813f598 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    SCENARIO_CALC(SCENARIO_MAIN,  5,  4),
+    CANCEL_LIVES(8, 0),
+    SELECT_ENTITIES(8, 2),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g9_s0_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs1_g9_s0_station_sref_script }; /* 0x813f608 */
+
+static const struct ScriptCommand s_gs1_g9_s0_lives0_dlg0[] = { /* 0x813f614 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000012,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x03,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Friends are my treasures!\nWelcome to {NAME_2} Club--a circle\nof friends! ") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ...Oh?{WAIT_PRESS}\nIs this your first visit here?") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ...Oh, I get it!{WAIT_PRESS}\nYou started a rescue team too, didn't you?") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" You've come to the right\nplace!{WAIT_PRESS} I sell Friend Areas to add\nmembers to your rescue team.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Since you're here for the\nvery first time, I'll give you two Friend\nAreas for free!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Let's do it!{WAIT_PRESS}\nWigglytuff〜♪ Wigglytuff〜♪{WAIT_PRESS}\nLet's be friends... Taaaaaaah!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(603),
+    { 0x28, 0x01,  0x0005,  0x00000002,  0x00808010, NULL },
+    { 0x27, 0x01,  0x0005,  0x00000002,  0x00808010, NULL },
+    { 0x28, 0x01,  0x0005,  0x00000002,  0x00808010, NULL },
+    { 0x27, 0x01,  0x0005,  0x00000002,  0x00808010, NULL },
+    { 0xe2, 0x00,  0x025b,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY(206),
+    { 0x3b, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Congratulations!{WAIT_PRESS}\nYou can go to the {COLOR GREEN_H}Wild Plains{RESET} now.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" You can also go to the\n{COLOR GREEN_H}Mist-Rise Forest{RESET}.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Now you can recruit\nPokémon that live in these two Friend\nAreas.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" How do you recruit new\nmembers?{WAIT_PRESS} Well, if you're fighting\nPokémon that live in a Friend Area...") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Sometimes, they will come\nto admire you as a friend.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" In that case, they may ask\nto join your team.{WAIT_PRESS}\nJust keep trying!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    SELECT_ENTITIES(-1, 1),
+    WAIT(1),
+    WAIT(15),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0c,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" BZBZBZZT!{WAIT_PRESS}\nIF YOU'RE GIVING FRIEND AREAS AWAY...") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" CAN YOU ALSO GIVE MY\nFRIENDS ACCESS TO THE {COLOR GREEN_H}POWER PLANT{RESET}\nFRIEND AREA?") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I ALSO WANT TO JOIN\nTHEIR RESCUE TEAM.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" OK! Gotcha!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" I'm giving it away today!{WAIT_PRESS}\nWigglytuff〜♪ Wigglytuff〜♪{WAIT_PRESS}\nLet's be friends... Taaaaaaah!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(603),
+    { 0x28, 0x01,  0x0005,  0x00000002,  0x00808010, NULL },
+    { 0x27, 0x01,  0x0005,  0x00000002,  0x00808010, NULL },
+    { 0x28, 0x01,  0x0005,  0x00000002,  0x00808010, NULL },
+    { 0x27, 0x01,  0x0005,  0x00000002,  0x00808010, NULL },
+    { 0xe2, 0x00,  0x025b,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY(206),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Congratulations!{WAIT_PRESS}\nYou can go to the {COLOR GREEN_H}Power Plant{RESET} now.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0004,  0x00000041,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" YES!\nNOW I CAN JOIN THEIR TEAM!") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" YAY! BZBZBZZT!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" SORRY.{WAIT_PRESS}\nI KNOW MY FRIEND TURNED DOWN YOUR\nOFFER TO JOIN YOUR TEAM YESTERDAY...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" BUT AFTER MULLING IT\nOVER ALL LAST NIGHT...") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" MY FRIEND DEVELOPED AN\nOVERWHELMING DESIRE TO BECOME YOUR\nTEAM MEMBER.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I APOLOGIZE, BUT COULD\nYOU ALLOW MY FRIEND TO JOIN YOUR\nRESCUE TEAM?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Oh, wow!{WAIT_PRESS}\nDon't forget, we were the ones that asked\nyour friend to join us.") },
+    { 0x2e, 0x15,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" So, yes, that'd be awesome!\nGlad to have your friend on board!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0003,  0x00000041,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" ALL RIGHT!\nGOOD ON YOU! BZBZBZZ!") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" DO YOUR BEST, AND TRY\nNOT TO HINDER YOUR RESCUE\nTEAMMATES! BZBZBZZT!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0004,  0x00000041,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" YEAH! I'LL DO MY BEST!") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" YAY, BZBZBZZ!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    FANFARE_PLAY(204),
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}{NAME_4} became a team member!") },
+    { 0xe1, 0x00,  0x00cc,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x3b, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    ASK1(FALSE, /*default*/ -1, /* speaker */ -1, _("Give a nickname to {NAME_4}?")),
+    CHOICE(/* label */  0, _("*Yes.")),
+    CHOICE(/* label */  1, _("No.")),
+  LABEL(0), /* = 0x00 */
+    { 0x3d, 0x00,  0x0000, -0x00000001,  0x00000000, NULL },
+  LABEL(1), /* = 0x01 */
+    { 0x3b, 0x19,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x15,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" I'LL BE RESTING UP IN THE\n{COLOR GREEN_H}POWER PLANT{RESET} FRIEND AREA.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" IF YOU WANT ME ALONG\nFOR A RESCUE, COME GET ME AT THE\n{COLOR GREEN_H}POWER PLANT{RESET}.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" OK! BZBZBZZ!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" You can go to your Friend\nAreas by taking the left path from your\nrescue team base.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" There's a sign on the path\nto the left of your rescue team base,\nso you shouldn't have any trouble.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" That's all the giveaways\ntoday!{WAIT_PRESS} If you want more Friend Areas,\nyou'll have to buy them now.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g9_s0_lives1_dlg0[] = { /* 0x81408d0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000013,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(7),
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g9_s0_lives2_dlg0[] = { /* 0x8140a10 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g9_s0_lives2_dlg2[] = { /* 0x8140ae0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_SCENE_LT(SCENARIO_MAIN, 5, 4, /* to label */ 0),
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+  LABEL(0), /* = 0x00 */
+    SCENARIO_CALC(SCENARIO_MAIN,  5,  4),
+    CANCEL_LIVES(8, 0),
+    SELECT_ENTITIES(8, 2),
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g9_s1_lives0_dlg0[] = { /* 0x8140ba0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0180,  0x00000014,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_START_FUNC),
+    CALL_SCRIPT(JUMP_HAPPY_FUNC),
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x10,  0x0080,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_HAPPY_FUNC),
+    CALL_SCRIPT(SMILE_START_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x89, 0x88,  0x0100,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g9_s1_lives1_dlg0[] = { /* 0x8140dc0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0180,  0x00000015,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_START_FUNC),
+    WAIT(7),
+    CALL_SCRIPT(JUMP_HAPPY_FUNC),
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_START_FUNC),
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x89, 0x88,  0x0100,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g10_s0_station_sref_script[] = { /* 0x8140f60 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, 0),
+    CANCEL_ENTITIES(8, 0),
+    BGM_SWITCH(7),
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    SELECT_ENTITIES(-1, 1),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    SELECT_ENTITIES(-1, 2),
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x23, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    EXECUTE_FUNCTION(EVENT_M01E03A_L003),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g10_s0_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs1_g10_s0_station_sref_script }; /* 0x8141040 */
+
+static const struct ScriptCommand s_gs1_g10_s0_eff0_script[] = { /* 0x814104c */
+    DEBUGINFO,
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x28,  0x0200,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x28,  0x0200,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x28,  0x0200,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x20,  0x0300,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x30,  0x0200,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x88, 0x00,  0x0400,  0x00000059,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x88, 0x00,  0x0100,  0x0000005a,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x88, 0x00,  0x0100,  0x00000058,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x7a, 0x00,  0x00f0,  0x0000001b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x18,  0x0100,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x88, 0x00,  0x0180,  0x0000005b,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g10_s0_lives2_dlg0[] = { /* 0x81412bc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0001,  0x00000004,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Huh? What's going on over\nthere?{WAIT_PRESS}\nThere seems to be a commotion.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    BGM_FADEOUT(120),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x86, 0x00,  0x0100,  0x00000016,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x0000004e,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0x2e, 0x0f,  0x0002,  0x00000041,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Please help my friend!\nPlease, I need help!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x02,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Forget it.\nWe're not about to work for that.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" But my friend needs a gust\nof wind! Please!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0e,  0x0001,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Hey, what's up?")),
+    VARIANT_DEFAULT(_(" Hi, what's going on?")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x93, 0x04,  0x000b,  0x0000004d,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x05,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Huh? That scene there?") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" {NAME_2}'s begging for\na rescue mission, but not finding any luck.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" See that guy?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000055,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x00,  0x0004, -0x00000002,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" There, the one in the middle\nwith the pointy nose.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" He's a Pokémon named\n{POKEMON_3}.\nHe's got his own rescue team.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x05,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" But his team's greedy.\nThey don't work unless they get paid\nroyally.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" {NAME_2}'s been begging\nfor help, but...{WAIT_PRESS}\nI feel sorry for that poor Pokémon.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Wait!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    { 0x93, 0x04,  0x000b,  0x00000058,  0x00000000, NULL },
+    WAIT(1),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(70),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0f,  0x0003,  0x00000041,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Oh! Wh-what do you want?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Oh! It's {NAME_5}!") },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" That's {NAME_5}?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0e,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Hey. Rather coldhearted,\naren't you?") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" To save {NAME_2}'s\nfriend, a strong wind is needed.") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Your leafy fans can whip up\npowerful winds.") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" It's an easy matter for you.{WAIT_PRESS}\nHelp that Pokémon out.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x10,  0x0003,  0x00000041,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Grr...{WAIT_PRESS}\nTch! OK, we'll do it.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Wow...") },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" That {NAME_3} agreed without\nany argument...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    BGM_FADEIN(80, 7),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0e,  0x0001,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Hey, who are those guys?")),
+    VARIANT_DEFAULT(_(" Say, who are they?")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x05,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" What? You don't know?!\nIt's {NAME_5}'s team!") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" They're the most famous\nrescue team around these parts.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x00,  0x0004, -0x00000002,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" That's {NAME_6}.{WAIT_PRESS}\nHis Flamethrower can melt mountains!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" That's {NAME_7}.{WAIT_PRESS}\nHe takes great pride in his armored\nbody and amazing strength.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" And that's the leader,\n{NAME_5}.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" {NAME_5} doesn't like\nphysical attacks.\nHe fights with his psychic powers.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" He's endowed with an\namazing brain and an IQ of 5,000.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Apparently, he's memorized\neverything that's happened in the world.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" {NAME_5} does all the\ncommanding in the team.{WAIT_PRESS}\nHe's clearly in charge.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(16),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Th-thank you.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0x2e, 0x02,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" No need for thanks.\nIt is only natural that you get help.") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" If anyone turns you down\nagain, come see me.\nTake care.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    WAIT(1),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    WAIT(46),
+    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _("{COLOR YELLOW}{SPEECH_BUBBLE}{RESET}: C-cool...") },
+    WAIT(60),
+    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _("{COLOR YELLOW}{SPEECH_BUBBLE}{RESET}: I wouldn't expect less from a Gold\nRank rescue team.") },
+    WAIT(40),
+    { 0x91, 0x0a,  0x000b,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(70),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    BGM_FADEOUT(30),
+    WAIT(10),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x14,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" ...!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    WAIT(24),
+    { 0x2e, 0x02,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Wah! What's wrong?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" What's up?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x0f,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" ......{WAIT_PRESS}\nIt's fine. Nothing.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(64),
+    { 0x2e, 0x14,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Let's go.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    WAIT(94),
+    WAIT(30),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    BGM_FADEIN(60, 7),
+    { 0x2e, 0x02,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Whew!\nThat was scary! Sheesh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0c,  0x0001,  0x0000000b,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ...C-cool...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0001,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Whew, {NAME_0}...{WAIT_PRESS}\nThat's what we've got to become.")),
+    VARIANT(/* == */  1, _(" Let's get more members and\nmake our rescue team first-class!")),
+    VARIANT(/* == */  3, _(" Whew, {NAME_0}!{WAIT_PRESS}\nWe need to become like them!")),
+    VARIANT(/* == */  3, _(" Let's recruit more members\nand make our rescue team first-class!")),
+    VARIANT_DEFAULT(_(" Whew, {NAME_0}!{WAIT_PRESS}\nWe need to become like them!")),
+    VARIANT_DEFAULT(_(" Let's recruit more members\nand make our rescue team first-class!")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(32),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Not if I can help it!\nKekeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    BGM_FADEOUT(120),
+    WAIT(30),
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+static const struct ScriptCommand s_gs1_g10_s0_lives3_dlg0[] = { /* 0x8142cf4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x0000004e,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x86, 0x00,  0x0100,  0x00000017,  0x00000000, NULL },
+    { 0x8e, 0x01,  0x0000,  0x0000004e,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x0000004d,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(3),
+    FANFARE_PLAY2(465),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000058,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x0000004d,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000058,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x0a,  0x0002,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(455),
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x90, 0x20,  0x0000,  0x0000001c,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g10_s0_lives4_dlg0[] = { /* 0x8142f64 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000058,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0x91, 0x01,  0x0001,  0x00000006,  0x00000000, NULL },
+    { 0x61, 0x00,  0x0400,  0x00000230,  0x00000108, NULL },
+    WAIT(30),
+    { 0x91, 0x04,  0x0001,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    WAIT(150),
+    { 0x91, 0x08,  0x0002,  0x00000001,  0x00000000, NULL },
+    WAIT(60),
+    { 0x91, 0x04,  0x0002,  0x00000002,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g10_s0_lives5_dlg0[] = { /* 0x8143104 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    WAIT(150),
+    { 0x91, 0x08,  0x0001,  0x00000003,  0x00000000, NULL },
+    WAIT(60),
+    { 0x91, 0x04,  0x0001,  0x00000002,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g10_s0_lives6_dlg0[] = { /* 0x8143254 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0008,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000058,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    WAIT(65),
+    { 0x91, 0x01,  0x0002,  0x00000002,  0x00000000, NULL },
+    { 0x61, 0x00,  0x0400,  0x000001d0,  0x00000108, NULL },
+    WAIT(30),
+    { 0x91, 0x04,  0x0002,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    WAIT(120),
+    { 0x91, 0x04,  0x0002,  0x00000002,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g10_s0_lives7_dlg0[] = { /* 0x81433e4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x10,  0x0200,  0x00000006,  0x00000000, NULL },
+    { 0x89, 0x10,  0x0100,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    WAIT(48),
+    CALL_SCRIPT(SMILE_START_FUNC),
+    WAIT(20),
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x08,  0x0100,  0x00000003,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000007,  0x00000000, NULL },
+    WAIT(50),
+    { 0x91, 0x04,  0x000b,  0x00000002,  0x00000000, NULL },
+    WAIT(70),
+    { 0x89, 0x30,  0x0100,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g10_s0_lives8_dlg0[] = { /* 0x8143574 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x8e, 0x01,  0x0000,  0x00000058,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    FANFARE_STOP2(465),
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000002,  0x00000000, NULL },
+    FANFARE_PLAY2(468),
+    WAIT(48),
+    { 0x91, 0x04,  0x000b,  0x00000006,  0x00000000, NULL },
+    WAIT(40),
+    { 0x91, 0x04,  0x000b,  0x00000005,  0x00000000, NULL },
+    FANFARE_PLAY2(468),
+    WAIT(40),
+    { 0x91, 0x04,  0x000b,  0x00000007,  0x00000000, NULL },
+    FANFARE_PLAY2(468),
+    WAIT(40),
+    FANFARE_STOP2(468),
+    { 0x91, 0x04,  0x000b,  0x00000006,  0x00000000, NULL },
+    WAIT(16),
+    FANFARE_PLAY2(470),
+    CALL_SCRIPT(SWEAT_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x01cc,  0x00000018,  0x00000000, NULL },
+    WAIT(1),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x01cc,  0x00000018,  0x00000000, NULL },
+    WAIT(32),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g10_s0_lives9_dlg0[] = { /* 0x81437d4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x8e, 0x01,  0x0000,  0x00000058,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x01cc,  0x00000019,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g10_s0_lives10_dlg0[] = { /* 0x8143884 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x8e, 0x01,  0x0000,  0x00000058,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x01cc,  0x00000019,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g10_s0_lives11_dlg0[] = { /* 0x8143934 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x8e, 0x01,  0x0000,  0x00000004,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x0002,  0x00000055,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(3),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x8e, 0x01,  0x0000,  0x00000058,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x8e, 0x01,  0x0000,  0x00000004,  0x00000000, NULL },
+    FANFARE_PLAY2(455),
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x8e, 0x01,  0x0000,  0x00000058,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x0a,  0x0001,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(455),
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0x62, 0x00,  0x0100, -0x00000008, -0x00000008, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g10_s1_lives0_dlg0[] = { /* 0x8143b44 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x0000001a,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x0f,  0x0100,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x7a, 0x00,  0x00f0,  0x0000001b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(466),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x8e, 0x10,  0x0000,  0x00000059,  0x00000000, NULL },
+    WAIT(16),
+    { 0x8e, 0x10,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT(16),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x7a, 0x00,  0x0080,  0x0000001c,  0x00000000, NULL },
+    WAIT(128),
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g10_s1_lives1_dlg0[] = { /* 0x8143d14 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x0000001d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x7a, 0x00,  0x00f0,  0x0000001e,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    { 0x8e, 0x10,  0x0000,  0x00000058,  0x00000000, NULL },
+    WAIT(16),
+    FANFARE_PLAY2(469),
+    CALL_SCRIPT(QUESTION_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    FANFARE_STOP2(469),
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x7a, 0x00,  0x0088,  0x0000001f,  0x00000000, NULL },
+    WAIT(136),
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g10_s1_lives2_dlg0[] = { /* 0x8143e74 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000020,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x7a, 0x00,  0x00f0,  0x00000021,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x8e, 0x10,  0x0000,  0x00000058,  0x00000000, NULL },
+    WAIT(16),
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x7a, 0x00,  0x0088,  0x00000022,  0x00000000, NULL },
+    WAIT(136),
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g10_s2_lives0_dlg0[] = { /* 0x8143f74 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x01,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x8e, 0x04,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x0a,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x54, 0x00,  0x0018,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    { 0x7a, 0x00,  0x008c,  0x00000023,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g11_s0_station_sref_script[] = { /* 0x8144064 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    RET_DIRECT,
+};
+
+static const struct ScriptRef s_gs1_g11_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g11_s0_station_sref_script }; /* 0x8144094 */
+
+static const struct ScriptCommand s_gs1_g11_s0_lives0_dlg2[] = { /* 0x81440a0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g11_s0_lives1_dlg2[] = { /* 0x8144100 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g11_s0_lives2_dlg2[] = { /* 0x8144160 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g11_s0_lives3_dlg2[] = { /* 0x81441c0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g11_s0_lives4_dlg2[] = { /* 0x8144220 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g11_s0_lives5_dlg2[] = { /* 0x8144280 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g11_s0_lives6_dlg1[] = { /* 0x81442e0 */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x0024,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_BOY),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g11_s0_lives6_dlg2[] = { /* 0x8144320 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0001,  0x0000004d,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Alakazam and his sidekicks\nwere sure cool before.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" That's how a real hero has\nto carry himself.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" By the way...{WAIT_PRESS}\nApparently, it's been impossible for us to\nevolve lately.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You know how we Pokémon\nevolve if the conditions are right?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" But for some reason, we\nhaven't been able to evolve at all.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It's rumored that the natural\ndisasters are to blame, but...{WAIT_PRESS}\nI wonder what's going on.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g11_s0_lives7_dlg1[] = { /* 0x8144578 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x8b, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g11_s0_lives7_dlg2[] = { /* 0x81445b8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Did you know that a new\ntraining gym--I think they called it\na dojo--opened in town?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You know how many rescue\nteams started up? To deal with all\nthe natural disasters?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" There was a group of\nconcerned Pokémon...{WAIT_PRESS}\nThey wanted to support rescue teams.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" So they got together and\nbuilt the dojo.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You can find the dojo easily.") },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" From here, it's just straight\ndown this path.") },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" If you have a rescue team\ntoo, I highly recommend you pay the dojo\na visit.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g11_s0_lives7_dlg3[] = { /* 0x8144888 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(WAIT_END_TALK_FUNC),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g11_s0_lives8_dlg2[] = { /* 0x8144938 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Alakazam's team has the\nGold Rank. Isn't that awesome?") },
+    ASK3( TRUE, /*default*/ -1, /* speaker */ 1, _(" You have a rescue team too,\ndon't you?{WAIT_PRESS}\nWhat's your rank?")),
+    CHOICE(/* label */  0, _("Nothing special.")),
+    CHOICE(/* label */  1, _("Gold Rank.")),
+  LABEL(0), /* = 0x00 */
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I guess that's true.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It might be rude to say it...{WAIT_PRESS}\nbut you obviously look like you really are\nnothing special.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It just goes to show how\nawesome Alakazam's team is!") },
+    JUMP_SCRIPT(END_TALK),
+  LABEL(1), /* = 0x01 */
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" What?!\nYou're Gold Rank too?!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ......{WAIT_PRESS}\nI'm not falling for a lie like that.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g12_s0_station_sref_script[] = { /* 0x8144bf0 */
+    DEBUGINFO,
+    SELECT_MAP(1),
+    SELECT_ENTITIES(-1, 0),
+    FANFARE_PLAY(0),
+    { 0x27, 0x01,  0x000e,  0x0000001e,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    FANFARE_STOP(0),
+    { 0x28, 0x01,  0x000e,  0x0000001e,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g12_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs1_g12_s0_station_sref_script }; /* 0x8144c80 */
+
+static const struct ScriptCommand s_gs1_g12_s0_lives0_dlg0[] = { /* 0x8144c8c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0f,  0x0000,  0x00000041,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0000,  0x00000000,  0x00000000, _(" Please help my friend!\nPlease, I need help!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x02,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Forget it.\nWe're not about to work for that.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0000,  0x00000000,  0x00000000, _(" But my friend needs a gust\nof wind! Please!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+
+
+
+static const struct ScriptCommand s_gs1_g12_s0_lives1_dlg0[] = { /* 0x8144d9c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g12_s0_lives2_dlg0[] = { /* 0x8144ddc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g12_s0_lives3_dlg0[] = { /* 0x8144e0c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g12_s0_lives4_dlg0[] = { /* 0x8144e3c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g12_s0_lives5_dlg0[] = { /* 0x8144e6c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g12_s0_lives6_dlg0[] = { /* 0x8144e9c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g12_s0_lives7_dlg0[] = { /* 0x8144ecc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g12_s0_lives8_dlg0[] = { /* 0x8144efc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g12_s0_lives9_dlg0[] = { /* 0x8144f2c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g13_s0_station_sref_script[] = { /* 0x8144f5c */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    RET_DIRECT,
+};
+
+static const struct ScriptRef s_gs1_g13_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g13_s0_station_sref_script }; /* 0x8144f8c */
+
+static const struct ScriptCommand s_gs1_g13_s0_lives0_dlg2[] = { /* 0x8144f98 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g13_s0_lives1_dlg2[] = { /* 0x8144ff8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g13_s0_lives2_dlg2[] = { /* 0x8145058 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g13_s0_lives3_dlg2[] = { /* 0x81450b8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g13_s0_lives4_dlg2[] = { /* 0x8145118 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g13_s0_lives5_dlg2[] = { /* 0x8145178 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g13_s0_lives6_dlg1[] = { /* 0x81451d8 */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x0026,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_BOY),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g13_s0_lives6_dlg2[] = { /* 0x8145218 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" We heard.{WAIT_PRESS}\nShiftry hasn't returned?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I wonder...\nDid Shiftry maybe just run off?") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g13_s0_lives7_dlg1[] = { /* 0x81452e0 */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x0025,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_GIRL),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g13_s0_lives7_dlg2[] = { /* 0x8145320 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'm afraid Shiftry's team is\nalways about the money.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" They went out on that\nrescue only because Alakazam told them\nto...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I don't think they were\nvery enthusiastic about it.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g14_s0_station_sref_script[] = { /* 0x8145458 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    RET_DIRECT,
+};
+
+static const struct ScriptRef s_gs1_g14_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g14_s0_station_sref_script }; /* 0x8145488 */
+
+static const struct ScriptCommand s_gs1_g14_s0_lives0_dlg2[] = { /* 0x8145494 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g14_s0_lives1_dlg2[] = { /* 0x81454f4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g14_s0_lives2_dlg2[] = { /* 0x8145554 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g14_s0_lives3_dlg2[] = { /* 0x81455b4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g14_s0_lives4_dlg2[] = { /* 0x8145614 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g14_s0_lives5_dlg2[] = { /* 0x8145674 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g14_s0_lives6_dlg1[] = { /* 0x81456d4 */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x0028,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_BOY),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g14_s0_lives6_dlg2[] = { /* 0x8145714 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Shiftry was abducted?\nThat's shocking news!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g14_s0_lives7_dlg1[] = { /* 0x81457a4 */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x0027,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_GIRL),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g14_s0_lives7_dlg2[] = { /* 0x81457e4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Is that right...\nShiftry was taken away to {COLOR YELLOW_D}Mt. Thunder{RESET}...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I wonder what that place is\nlike?{WAIT_PRESS}\nIt sounds rather horrible.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Oh? Me?{WAIT_PRESS}\nI couldn't possibly go rescue him.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g14_s0_lives8_dlg1[] = { /* 0x8145914 */
+    DEBUGINFO,
+    { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g14_s0_lives8_dlg2[] = { /* 0x8145944 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000050,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0003,  0x0000004e,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x03,  0x0003,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" I'm glad to see you're\nback safe.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Thank you.\nBut Shiftry is in trouble now...") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Shiftry came and rescued\nme...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x02,  0x0003,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I hope he is safe...") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g14_s0_lives9_dlg1[] = { /* 0x8145ae4 */
+    DEBUGINFO,
+    { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g14_s0_lives9_dlg2[] = { /* 0x8145b14 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000050,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0003,  0x0000004e,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x03,  0x0003,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" I'm glad to see you're\nback safe.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Thank you.\nBut Shiftry is in trouble now...") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Shiftry came and rescued\nme...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x02,  0x0003,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I hope he is safe...") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g14_s0_lives10_dlg1[] = { /* 0x8145c24 */
+    DEBUGINFO,
+    { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g14_s0_lives10_dlg2[] = { /* 0x8145c54 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000050,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0003,  0x0000004e,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x03,  0x0003,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" I'm glad to see you're\nback safe.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Thank you.\nBut Shiftry is in trouble now...") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Shiftry came and rescued\nme...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x02,  0x0003,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I hope he is safe...") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g15_s0_station_sref_script[] = { /* 0x8145d64 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    RET_DIRECT,
+};
+
+static const struct ScriptRef s_gs1_g15_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g15_s0_station_sref_script }; /* 0x8145d94 */
+
+static const struct ScriptCommand s_gs1_g15_s0_lives0_dlg2[] = { /* 0x8145da0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g15_s0_lives1_dlg2[] = { /* 0x8145e00 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g15_s0_lives2_dlg2[] = { /* 0x8145e60 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g15_s0_lives3_dlg2[] = { /* 0x8145ec0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g15_s0_lives4_dlg2[] = { /* 0x8145f20 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g15_s0_lives5_dlg2[] = { /* 0x8145f80 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g15_s0_lives6_dlg1[] = { /* 0x8145fe0 */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x0029,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_BOY),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g15_s0_lives6_dlg2[] = { /* 0x8146020 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0001,  0x0000004d,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Xatu?{WAIT_PRESS} I wouldn't know.{WAIT_PRESS}\nThere's really a Pokémon named that?") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g15_s0_lives7_dlg1[] = { /* 0x81460d8 */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x002a,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_BOY),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g15_s0_lives7_dlg2[] = { /* 0x8146118 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0001,  0x0000004f,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I must say, I'm very\nimpressed.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Your team is surprisingly\ncourageous. It casts you in a new light!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g15_s0_lives8_dlg2[] = { /* 0x8146204 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'm glad that Shiftry is\nsafe.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g15_s0_lives9_dlg2[] = { /* 0x8146288 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" {NAME_0}, your team is\nfantastic!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It's shocking to hear that\nyou've beaten Zapdos!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g16_s0_station_sref_script[] = { /* 0x8146350 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    RET_DIRECT,
+};
+
+static const struct ScriptRef s_gs1_g16_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g16_s0_station_sref_script }; /* 0x8146380 */
+
+static const struct ScriptCommand s_gs1_g16_s0_lives0_dlg2[] = { /* 0x814638c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g16_s0_lives1_dlg2[] = { /* 0x81463ec */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g16_s0_lives2_dlg2[] = { /* 0x814644c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g16_s0_lives3_dlg2[] = { /* 0x81464ac */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g16_s0_lives4_dlg2[] = { /* 0x814650c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g16_s0_lives5_dlg2[] = { /* 0x814656c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g16_s0_evt0_sref_script[] = { /* 0x81465cc */
+    DEBUGINFO,
+    EXECUTE_STATION(-1, 17, 0),
+    HALT,
+};
+
+static const struct ScriptRef s_gs1_g16_s0_evt0_sref = { 57, 7, NULL /* NORMAL_EVENT */, s_gs1_g16_s0_evt0_sref_script }; /* 0x81465fc */
+
+static const struct ScriptCommand s_gs1_g17_s0_station_sref_script[] = { /* 0x8146608 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, 0),
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    SELECT_ENTITIES(18, 0),
+    CANCEL_ENTITIES(16, 0),
+    SCENARIO_CALC(SCENARIO_MAIN,  9,  4),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g17_s0_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs1_g17_s0_station_sref_script }; /* 0x8146678 */
+
+static const struct ScriptCommand s_gs1_g17_s0_eff0_script[] = { /* 0x8146684 */
+    DEBUGINFO,
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x9b, 0x00,  0x0180,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g17_s0_lives0_dlg0[] = { /* 0x8146704 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0005,  0x00000062,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0006,  0x00000063,  0x00000000, NULL },
+    WAIT(30),
+    { 0x93, 0x04,  0x0001,  0x00000004,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Hah?{WAIT_PRESS}\nWhat are those guys talking about?")),
+    VARIANT_DEFAULT(_(" Huh?{WAIT_PRESS}\nWhat are they chatting about?")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Yeah, I'm kind of shocked.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x03,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" I always thought it was\nonly a legend.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x0f,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" But could it be true?{WAIT_PRESS}\nI'm having a hard time believing it...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x0000002d,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x0000002b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Hey, what's up?")),
+    VARIANT_DEFAULT(_(" Hi, what's happening?")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x10,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Well, you know the\n{COLOR GREEN}{NAME_6} legend{RESET}?\nThat old story?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000010,  0x00000000, NULL },
+    { 0x91, 0x08,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x00000004,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" The {NAME_6} legend?{WAIT_PRESS}\nWhat's that?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" What, you don't know?") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" You know, it's that old\nfairy tale.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" How you'll get cursed if you\never grab one of Ninetales's tails.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" All this time, everyone\nthought it was just a legend.") },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" But lately, it's been rumored\nthat maybe it really happened.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Well, it is still a mere\nrumor.") },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000002,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I wouldn't put too much\nstock in that story if I were you.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Personally, I don't believe\nin rumors of that sort.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" If you want to know more\nabout the {NAME_6} legend...") },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" You should go see a\nPokémon named {NAME_5}.\nHe knows the story well.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" {NAME_5} is uh...{WAIT_PRESS}\nYou know, in his pond.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000004,  0x00000000, NULL },
+    WAIT(60),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0x2e, 0x10,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" You should visit him if you\nwant to know more.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g17_s0_lives1_dlg0[] = { /* 0x8147160 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(464),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0x8e, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x0000002c,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000010,  0x00000000, NULL },
+    { 0x91, 0x08,  0x0002,  0x00000003,  0x00000000, NULL },
+    WAIT(20),
+    FANFARE_PLAY2(469),
+    CALL_SCRIPT(QUESTION_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g17_s0_lives2_dlg0[] = { /* 0x8147330 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    CALL_SCRIPT(SMILE_START_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0x91, 0x04,  0x0001,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000004,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g17_s0_lives3_dlg0[] = { /* 0x81474c0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x8b, 0x01,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0x91, 0x04,  0x0001,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g17_s0_lives4_dlg0[] = { /* 0x8147590 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0x91, 0x04,  0x0002,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g18_s0_station_sref_script[] = { /* 0x8147620 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    RET_DIRECT,
+};
+
+static const struct ScriptRef s_gs1_g18_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g18_s0_station_sref_script }; /* 0x8147650 */
+
+static const struct ScriptCommand s_gs1_g18_s0_lives0_dlg2[] = { /* 0x814765c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g18_s0_lives1_dlg2[] = { /* 0x81476bc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g18_s0_lives2_dlg2[] = { /* 0x814771c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g18_s0_lives3_dlg2[] = { /* 0x814777c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g18_s0_lives4_dlg2[] = { /* 0x81477dc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g18_s0_lives5_dlg2[] = { /* 0x814783c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g18_s0_lives6_dlg2[] = { /* 0x814789c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Whiscash is in the pond just\nnorth of here.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You should visit him if you\nwant to chat.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g18_s0_lives7_dlg2[] = { /* 0x8147968 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Well, it is still a mere\nrumor.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I don't put any stock in\nrumors like that...") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g18_s0_lives8_dlg2[] = { /* 0x8147a08 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I always thought it was\nonly a legend.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g19_s0_station_sref_script[] = { /* 0x8147a68 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    BGM_FADEOUT(45),
+    { 0x23, 0x01,  0x002d,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    EXECUTE_FUNCTION(EVENT_M01E05B_L005),
+    HALT,
+};
+
+static const struct ScriptRef s_gs1_g19_s0_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs1_g19_s0_station_sref_script }; /* 0x8147ae8 */
+
+static const struct ScriptCommand s_gs1_g19_s0_lives0_dlg0[] = { /* 0x8147af4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x03,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0001,  0x00000004,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" ...Listen, {NAME_0}.")),
+    VARIANT_DEFAULT(_(" ...Say, {NAME_0}.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000002,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x03,  0x0001,  0x00000005,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Want to knock\noff for today?\nI can't seem to get into it...")),
+    VARIANT_DEFAULT(_(" Want to call it a day now?\nI can't seem to get motivated today...")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(45),
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g19_s0_lives1_dlg0[] = { /* 0x8147cf0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x08,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g20_s0_station_sref_script[] = { /* 0x8147d50 */
+    DEBUGINFO,
+    SELECT_MAP(1),
+    SELECT_ENTITIES(-1, 0),
+    BGM_STOP,
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x22, 0x00,  0x001e,  0x00000000,  0x00000000, NULL },
+    WAIT(120),
+    { 0x23, 0x00,  0x001e,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x22, 0x00,  0x001e,  0x00000000,  0x00000000, NULL },
+    WAIT(120),
+    { 0x23, 0x00,  0x001e,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x22, 0x00,  0x001e,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g20_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs1_g20_s0_station_sref_script }; /* 0x8147ea0 */
+
+static const struct ScriptCommand s_gs1_g20_s0_eff0_script[] = { /* 0x8147eac */
+    DEBUGINFO,
+    { 0x5b, 0x00,  0x0000,  0x0000002e,  0x00000000, NULL },
+    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x7a, 0x00,  0x00b4,  0x0000002f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x5b, 0x00,  0x0000,  0x00000030,  0x00000000, NULL },
+    { 0x6c, 0xb4,  0x0100,  0x00000031,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x5b, 0x00,  0x0000,  0x00000032,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100, -0x00000050,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g20_s0_lives0_dlg0[] = { /* 0x8147f8c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0080,  0x00000050,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(469),
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x00000004,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Huh?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x05,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    { 0x91, 0x0a,  0x0001,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" The town's atmosphere\nfeels different somehow...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Maybe something's happened.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" {NAME_0}, let's check\nit out!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000078,  0x00000000, NULL },
+    HALT,
+};
+
+
+static const struct ScriptCommand s_gs1_g20_s0_lives1_dlg0[] = { /* 0x81481f8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0080,  0x00000050,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(QUESTION_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000048,  0x00000000, NULL },
+    { 0x91, 0x05,  0x000a,  0x00000004,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x05,  0x0001,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x05,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(15),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000078,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g21_s0_station_sref_script[] = { /* 0x8148378 */
+    DEBUGINFO,
+    SELECT_MAP(1),
+    SELECT_ENTITIES(-1, 0),
+    BGM_STOP,
+    { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g21_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs1_g21_s0_station_sref_script }; /* 0x81483f8 */
+
+static const struct ScriptCommand s_gs1_g21_s0_eff0_script[] = { /* 0x8148404 */
+    DEBUGINFO,
+    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x6b, 0x00,  0x0200,  0x00000033,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x7a, 0x00,  0x0005,  0x0000003a,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g21_s0_lives0_dlg0[] = { /* 0x81484d4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0007,  0x00000061,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0008,  0x00000052,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000046,  0x00000000, NULL },
+    WAIT(30),
+    FANFARE_PLAY2(464),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Look!\nWhy's everyone gathered over there?")),
+    VARIANT_DEFAULT(_(" Look!\nWhy is everyone gathered together?")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Hey, what's up?")),
+    VARIANT_DEFAULT(_(" Hi, what's going on?")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0005,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Let me tell you, I was\namazed!{WAIT_PRESS}\nIt really was true!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" What are you talking about?")),
+    VARIANT_DEFAULT(_(" What was true?")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x15,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" The Ninetales legend!") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" I never believed the\nrumors, so you can bet I was shocked\nto learn the truth!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" {NAME_0}, {NAME_1}.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(463),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0x93, 0x05,  0x000a,  0x00000036,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Oh, hi, {NAME_3}!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x0a,  0x000a,  0x00000036,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x02,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Even you came out,\n{NAME_3}?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0x2e, 0x03,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Yes.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" Ssh!{WAIT_PRESS} Quiet.") },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" That guy there's telling us.\nKeep it down.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x15,  0x0001,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Hah?{WAIT_PRESS}\nWho's doing the talking?")),
+    VARIANT_DEFAULT(_(" Huh?{WAIT_PRESS} Who's talking?")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I-it's...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(15),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x7a, 0x00,  0x0096,  0x00000037,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(30),
+    FANFARE_PLAY2(473),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0x2e, 0x15,  0x0001,  0x0000000c,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Ge-{NAME_2}?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    BGM_SWITCH(9),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0f,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ...So I went up to the\n{COLOR CYAN}Hill of the Ancients{RESET}.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" And that's where I saw it!\nIt was shocking stuff, I tell you!\nKekeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x03,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Shocking stuff?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" This certain Pokémon was\ngetting advice from {NAME_7}.") },
+    { 0x2e, 0x15,  0x0002,  0x00000004,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" That Pokémon...\nIt looks like an ordinary Pokémon...") },
+    { 0x2e, 0x15,  0x0002,  0x00000006,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" But get this!{WAIT_PRESS}\nIt was originally a human!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(15),
+    FANFARE_PLAY2(464),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0x93, 0x05,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0x2e, 0x0c,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" What?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0x2e, 0x05,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" It really existed...\nA human that turned into a Pokémon.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0x2e, 0x15,  0x0002,  0x00000004,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" There's more.\n{NAME_7} told the human...") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" That how the human became\na Pokémon has a lot to do with how\nthe world's balance is upset.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0x2e, 0x03,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Wait a second...{WAIT_PRESS}\nThat's exactly like the Ninetales legend!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x14,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Kekeh!\nDon't be too shocked yet.\nThere's more.") },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0f,  0x0002,  0x00000004,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" You all know how there've\nbeen many natural disasters, correct?") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" According to {NAME_7},\nthose disasters are caused by the world's\nbalance being upset.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" And if the world's balance\nisn't restored soon...") },
+    { 0x2e, 0x15,  0x0002,  0x00000006,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" The unthinkable will happen\nto the world! That's what Xatu said!\nKekeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(15),
+    FANFARE_PLAY2(473),
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Wh-what?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x0c,  0x0005,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" The world...{WAIT_PRESS}\nThe unthinkable's going to happen?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" What are we to do?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x15,  0x0001,  0x00000003,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" That Gengar...!{WAIT_PRESS}\nHe's getting everyone worked up...")),
+    VARIANT_DEFAULT(_(" That Gengar...!{WAIT_PRESS}\nHe's deliberately working everyone up...")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x15,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Now, now, people.{WAIT_PRESS}\nThere's no need to panic.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Why, I think there's a way\nwe can do something about this.\nKekeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    { 0xe4, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    WAIT(60),
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" Wh-what can we do?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Oh, it's quite simple,\nactually.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" If the world's balance is\nupset by a human becoming a Pokémon...") },
+    { 0x2e, 0x15,  0x0002,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Then, if that human is\ngone, then everything should return\nto normal, correct?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0xe5, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Th-that's true!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x04,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" When you put it that way...\nmaybe you're right.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x15,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Kekeh!\nAnd that human is the rotten coward\nthat abandoned {NAME_8}, correct?") },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0002,  0x00000004,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" I don't think the human can\ncomplain about anything if we get\nrid of it.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    BGM_STOP,
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Isn't that right,\n{NAME_0}?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(15),
+    FANFARE_PLAY2(473),
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    CLEAR_ARRAY(EVENT_LOCAL),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Wha...{WAIT_PRESS} What?!{WAIT_PRESS}\nIt... It can't be!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Y-you...{WAIT_PRESS}\nYou were that human?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x03,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" Is that true?\nHey!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    BGM_SWITCH(10),
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0001,  0x0000000c,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" W-w-whoa...{WAIT_PRESS}\nThis is, like...\nWe can explain...")),
+    VARIANT_DEFAULT(_(" W-w-wait...{WAIT_PRESS}\nThis is, like...\nThere's a good explanation for...")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" We're not asking you.\nWe're asking {NAME_0}!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" Hey! {NAME_0}!\nSo what is it?!") },
+    { 0x2e, 0x15,  0x0006, -0x00000002,  0x00000000, NULL },
+    ASK3(FALSE, /*default*/ -1, /* speaker */ 6, _(" Are you really the human\nthat was in the legend?")),
+    CHOICE(/* label */ 35, _("..................")),
+    CHOICE(/* label */ 35, _("..................")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+  LABEL(35), /* = 0x23 */
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0001,  0x00000005,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" {NAME_0}...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x05,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" {NAME_0}...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0002,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Kekekekekekeh!\nLooks like you have nothing to say\nin your defense, {NAME_0}!") },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" That's how it is, fellow\nPokémon.") },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(15),
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(60),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0002,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Let's get rid of\n{NAME_0} and regain peace.\nKekekekekeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(15),
+    WAIT(60),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(15),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x0000000c,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" ...Wh-what?")),
+    VARIANT(/* == */  1, _(" E-everyone, hold up.\nWhat's with you?{WAIT_PRESS}\nWhat are you going to do?")),
+    VARIANT_DEFAULT(_(" ...Wh-what?")),
+    VARIANT_DEFAULT(_(" E-everyone, what's gotten\ninto you?{WAIT_PRESS}\nWhat are you going to do?")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x05,  0x0002,  0x00000004,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x05,  0x0001,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x05,  0x0002,  0x00000002,  0x00000000, NULL },
+    { 0x62, 0x00,  0x004c, -0x00000008,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" {NAME_0}, forgive me!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x8b, 0x00,  0x0001,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(497),
+    { 0x54, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100, -0x00000008, -0x00000008, NULL },
+    WAIT(60),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Wah! What the...?!")),
+    VARIANT_DEFAULT(_(" Wah! What are you doing?!")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Waaaaah!{WAIT_PRESS}\n{NAME_0}, run!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x02,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(15),
+    WAIT(15),
+    { 0xe5, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0300, -0x00000078,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x15,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Serves them right!\nKekekekeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    HALT,
+  LABEL(15), /* = 0x0f */
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    RET_DIRECT,
+    HALT,
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+static const struct ScriptCommand s_gs1_g21_s0_lives1_dlg0[] = { /* 0x814a970 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000050,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000018,  0x00000000, NULL },
+    WAIT(15),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x05,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x0a,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x7a, 0x00,  0x0096,  0x00000036,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    WAIT(15),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0x93, 0x05,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x91, 0x08,  0x000a,  0x00000003,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x08,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    WAIT(15),
+    { 0x6a, 0x00,  0x0100,  0x00000010,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x00000050,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x70, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
+    WAIT(2),
+    { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x004c, -0x00000008, -0x00000008, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0x91, 0x02,  0x0002,  0x00000004,  0x00000000, NULL },
+    WAIT(15),
+    { 0x62, 0x00,  0x004c, -0x00000008,  0x00000008, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x02,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0x6b, 0x00,  0x0200,  0x00000037,  0x00000000, NULL },
+    { 0x91, 0x02,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x02,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT(15),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0x6a, 0x00,  0x0300, -0x00000078,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g21_s0_lives2_dlg0[] = { /* 0x814aee0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_START_FUNC),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000004d,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x05,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x0a,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_START_FUNC),
+    CALL_SCRIPT(JUMP_HAPPY_FUNC),
+    CALL_SCRIPT(JUMP_HAPPY_FUNC),
+    CALL_SCRIPT(JUMP_HAPPY_FUNC),
+    WAIT(30),
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x06,  0x0001,  0x00000006,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x06,  0x0002,  0x00000002,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x06,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x05,  0x000a,  0x00000007,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_START_FUNC),
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0x8b, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x004c,  0x00000000, -0x00000010, NULL },
+    { 0x93, 0x05,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x05,  0x000a,  0x00000006,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_START_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g21_s0_lives3_dlg0[] = { /* 0x814b1e0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x0000003d,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x0a,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0080,  0x0000003e,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0080,  0x00000035,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    CJUMP_RANDOM(4),
+    COND_EQUAL(0, /* to label */ 2),
+    COND_EQUAL(1, /* to label */ 3),
+    COND_EQUAL(2, /* to label */ 4),
+    COND_EQUAL(3, /* to label */ 5),
+  LABEL(2), /* = 0x02 */
+    { 0x91, 0x05,  0x000a,  0x00000004,  0x00000000, NULL },
+    JUMP_LABEL(6),
+  LABEL(3), /* = 0x03 */
+    { 0x91, 0x05,  0x000a,  0x00000003,  0x00000000, NULL },
+    JUMP_LABEL(6),
+  LABEL(4), /* = 0x04 */
+    { 0x91, 0x05,  0x000a,  0x00000005,  0x00000000, NULL },
+    JUMP_LABEL(6),
+  LABEL(5), /* = 0x05 */
+    { 0x91, 0x05,  0x000a,  0x00000002,  0x00000000, NULL },
+    JUMP_LABEL(6),
+  LABEL(6), /* = 0x06 */
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x05,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x08,  0x0002,  0x00000005,  0x00000000, NULL },
+    { 0x91, 0x08,  0x0001,  0x00000003,  0x00000000, NULL },
+    { 0x91, 0x08,  0x0002,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x8b, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0080, -0x00000010,  0x00000010, NULL },
+    WAIT(30),
+    { 0x93, 0x05,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x04,  0x0002,  0x00000005,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g21_s0_lives4_dlg0[] = { /* 0x814b6a0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    CJUMP_RANDOM(4),
+    COND_EQUAL(0, /* to label */ 3),
+    COND_EQUAL(1, /* to label */ 4),
+    COND_EQUAL(2, /* to label */ 5),
+    COND_EQUAL(3, /* to label */ 6),
+  LABEL(3), /* = 0x03 */
+    { 0x91, 0x05,  0x000a,  0x00000004,  0x00000000, NULL },
+    JUMP_LABEL(7),
+  LABEL(4), /* = 0x04 */
+    { 0x91, 0x05,  0x000a,  0x00000007,  0x00000000, NULL },
+    JUMP_LABEL(7),
+  LABEL(5), /* = 0x05 */
+    { 0x91, 0x05,  0x000a,  0x00000005,  0x00000000, NULL },
+    JUMP_LABEL(7),
+  LABEL(6), /* = 0x06 */
+    { 0x91, 0x05,  0x000a,  0x00000006,  0x00000000, NULL },
+    JUMP_LABEL(7),
+  LABEL(7), /* = 0x07 */
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x00000050,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0080,  0x00000039,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x7a, 0x00,  0x001e,  0x00000037,  0x00000000, NULL },
+    { 0x57, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0080,  0x00000018,  0x00000000, NULL },
+    { 0x57, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x004c,  0x00000008,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0x62, 0x00,  0x0300, -0x00000030,  0x00000000, NULL },
+    HALT,
+};
+
+
+static const struct ScriptCommand s_gs1_g21_s0_lives5_dlg0[] = { /* 0x814bad0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    WAIT(15),
+    { 0x6b, 0x00,  0x00cc,  0x0000003b,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_HAPPY_FUNC),
+    CALL_SCRIPT(JUMP_HAPPY_FUNC),
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x0002,  0x00000036,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000036,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0080,  0x0000003c,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0080,  0x00000038,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    CJUMP_RANDOM(4),
+    COND_EQUAL(0, /* to label */ 3),
+    COND_EQUAL(1, /* to label */ 4),
+    COND_EQUAL(2, /* to label */ 5),
+    COND_EQUAL(3, /* to label */ 6),
+  LABEL(3), /* = 0x03 */
+    { 0x91, 0x05,  0x000a,  0x00000002,  0x00000000, NULL },
+    JUMP_LABEL(7),
+  LABEL(4), /* = 0x04 */
+    { 0x91, 0x05,  0x000a,  0x00000001,  0x00000000, NULL },
+    JUMP_LABEL(7),
+  LABEL(5), /* = 0x05 */
+    { 0x91, 0x05,  0x000a,  0x00000000,  0x00000000, NULL },
+    JUMP_LABEL(7),
+  LABEL(6), /* = 0x06 */
+    { 0x91, 0x05,  0x000a,  0x00000007,  0x00000000, NULL },
+    JUMP_LABEL(7),
+  LABEL(7), /* = 0x07 */
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x8b, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x004c, -0x00000008,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x004c,  0x00000000,  0x00000008, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x05,  0x0001,  0x00000006,  0x00000000, NULL },
+    WAIT(15),
+    { 0x62, 0x00,  0x0200, -0x00000008,  0x00000008, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+
+static const struct ScriptCommand s_gs1_g21_s0_lives6_dlg0[] = { /* 0x814bfb0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x02,  0x000a,  0x00000022,  0x00000000, NULL },
+    CALL_SCRIPT(ANGRY_START_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(ANGRY_END_FUNC),
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0080,  0x00000034,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    CJUMP_RANDOM(4),
+    COND_EQUAL(0, /* to label */ 3),
+    COND_EQUAL(1, /* to label */ 4),
+    COND_EQUAL(2, /* to label */ 5),
+    COND_EQUAL(3, /* to label */ 6),
+  LABEL(3), /* = 0x03 */
+    { 0x91, 0x05,  0x000a,  0x00000004,  0x00000000, NULL },
+    JUMP_LABEL(7),
+  LABEL(4), /* = 0x04 */
+    { 0x91, 0x05,  0x000a,  0x00000003,  0x00000000, NULL },
+    JUMP_LABEL(7),
+  LABEL(5), /* = 0x05 */
+    { 0x91, 0x05,  0x000a,  0x00000005,  0x00000000, NULL },
+    JUMP_LABEL(7),
+  LABEL(6), /* = 0x06 */
+    { 0x91, 0x05,  0x000a,  0x00000006,  0x00000000, NULL },
+    JUMP_LABEL(7),
+  LABEL(7), /* = 0x07 */
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000004d,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(ANGRY_START_FUNC),
+    { 0x93, 0x05,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(ANGRY_END_FUNC),
+    WAIT(30),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x05,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x004c, -0x00000018,  0x00000000, NULL },
+    { 0x8b, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x004c, -0x00000008,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x05,  0x0002,  0x00000006,  0x00000000, NULL },
+    WAIT(15),
+    { 0x62, 0x00,  0x0200, -0x00000008, -0x00000008, NULL },
+    HALT,
+};
+
+
+static const struct ScriptCommand s_gs1_g21_s0_lives7_dlg0[] = { /* 0x814c4b0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x91, 0x06,  0x0002,  0x00000001,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x91, 0x06,  0x0001,  0x00000006,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(2),
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(2),
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(2),
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(2),
+    { 0x6a, 0x00,  0x0080, -0x00000040, -0x00000008, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(2),
+    { 0x6a, 0x00,  0x0300, -0x00000010,  0x00000008, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+  LABEL(2), /* = 0x02 */
+    WAIT_RANDOM(0, 30),
+    RET_DIRECT,
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g21_s0_lives8_dlg0[] = { /* 0x814c770 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x91, 0x06,  0x0001,  0x00000003,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x91, 0x06,  0x0002,  0x00000006,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(2),
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(2),
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(2),
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(2),
+    { 0x6a, 0x00,  0x0080, -0x00000018, -0x00000008, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(2),
+    { 0x62, 0x00,  0x0300, -0x00000008,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+  LABEL(2), /* = 0x02 */
+    WAIT_RANDOM(0, 30),
+    RET_DIRECT,
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g21_s0_lives9_dlg0[] = { /* 0x814ca30 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x62, 0x00,  0x0080,  0x00000000, -0x00000010, NULL },
+    WAIT_RANDOM(15, 90),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 2),
+    { 0x62, 0x00,  0x0080,  0x00000000,  0x00000010, NULL },
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(0),
+  LABEL(2), /* = 0x02 */
+    { 0x62, 0x00,  0x0080,  0x00000000,  0x00000010, NULL },
+  LABEL(1), /* = 0x01 */
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(3),
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(3),
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(3),
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(3),
+    { 0x6a, 0x00,  0x0080, -0x00000020,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0080, -0x00000020,  0x00000018, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(3),
+    { 0x62, 0x00,  0x0100, -0x00000020,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000e,  0x00000000,  0x00000000, NULL },
+  LABEL(3), /* = 0x03 */
+    WAIT_RANDOM(0, 30),
+    RET_DIRECT,
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g21_s0_lives10_dlg0[] = { /* 0x814cd40 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x54, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x70, 0x00,  0x0200,  0x00000007,  0x00000000, NULL },
+    WAIT(1),
+    { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(2),
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(2),
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(2),
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(2),
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+  LABEL(2), /* = 0x02 */
+    WAIT_RANDOM(0, 30),
+    RET_DIRECT,
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g21_s0_lives11_dlg0[] = { /* 0x814cfe0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    WAIT(15),
+    { 0x93, 0x04,  0x000a,  0x00000047,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(0),
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(0),
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(0),
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0x6a, 0x00,  0x004c, -0x00000018, -0x00000010, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(0),
+    { 0x93, 0x04,  0x000a,  0x00000047,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    WAIT_RANDOM(0, 30),
+    RET_DIRECT,
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g21_s0_lives12_dlg0[] = { /* 0x814d270 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    WAIT(15),
+    { 0x93, 0x04,  0x000a,  0x00000046,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(0),
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(0),
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(0),
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x6a, 0x00,  0x004c, -0x00000010, -0x00000008, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    CALL_LABEL(0),
+    { 0x93, 0x04,  0x000a,  0x00000046,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    WAIT_RANDOM(0, 30),
+    RET_DIRECT,
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_station_sref_script[] = { /* 0x814d4f0 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    RET_DIRECT,
+};
+
+static const struct ScriptRef s_gs1_g22_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g22_s0_station_sref_script }; /* 0x814d520 */
+
+static const struct ScriptCommand s_gs1_g22_s0_lives0_dlg1[] = { /* 0x814d52c */
+    DEBUGINFO,
+    JUMP_SCRIPT(MOVE_SLEEP),
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_lives0_dlg2[] = { /* 0x814d54c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x00,  0x0001, -0x00000002,  0x00000000, NULL },
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_lives0_dlg3[] = { /* 0x814d5cc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(LIVES_REPLY),
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_lives1_dlg1[] = { /* 0x814d5fc */
+    DEBUGINFO,
+    JUMP_SCRIPT(MOVE_SLEEP),
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_lives1_dlg2[] = { /* 0x814d61c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x00,  0x0001, -0x00000002,  0x00000000, NULL },
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_lives1_dlg3[] = { /* 0x814d69c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(LIVES_REPLY),
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_lives2_dlg1[] = { /* 0x814d6cc */
+    DEBUGINFO,
+    JUMP_SCRIPT(MOVE_SLEEP),
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_lives2_dlg2[] = { /* 0x814d6ec */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x00,  0x0001, -0x00000002,  0x00000000, NULL },
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_lives2_dlg3[] = { /* 0x814d76c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(LIVES_REPLY),
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_lives3_dlg1[] = { /* 0x814d79c */
+    DEBUGINFO,
+    JUMP_SCRIPT(MOVE_SLEEP),
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_lives3_dlg2[] = { /* 0x814d7bc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x00,  0x0001, -0x00000002,  0x00000000, NULL },
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_lives3_dlg3[] = { /* 0x814d83c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(LIVES_REPLY),
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_lives4_dlg1[] = { /* 0x814d86c */
+    DEBUGINFO,
+    JUMP_SCRIPT(MOVE_SLEEP),
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_lives4_dlg2[] = { /* 0x814d88c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x00,  0x0001, -0x00000002,  0x00000000, NULL },
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_lives4_dlg3[] = { /* 0x814d90c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(LIVES_REPLY),
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_lives5_dlg1[] = { /* 0x814d93c */
+    DEBUGINFO,
+    JUMP_SCRIPT(MOVE_SLEEP),
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_lives5_dlg2[] = { /* 0x814d95c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x00,  0x0001, -0x00000002,  0x00000000, NULL },
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g22_s0_lives5_dlg3[] = { /* 0x814d9dc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(LIVES_REPLY),
+};
+
+static const struct ScriptCommand s_gs1_g23_s0_station_sref_script[] = { /* 0x814da0c */
+    DEBUGINFO,
+    BGM_STOP,
+    { 0x23, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x26, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    SELECT_MAP(1),
+    { 0x39, 0x00,  0x001e,  0x00000000,  0x00000000, _("{CENTER_ALIGN}Meanwhile, back in\n{CENTER_ALIGN}Pokémon Square...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    SELECT_ENTITIES(-1, 0),
+    { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    BGM_FADEOUT(60),
+    { 0x23, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g23_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs1_g23_s0_station_sref_script }; /* 0x814db38 */
+
+
+static const struct ScriptCommand s_gs1_g23_s0_eff0_script[] = { /* 0x814db44 */
+    DEBUGINFO,
+    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x20,  0x0100,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x1c,  0x0100,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x40,  0x0099,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g23_s0_lives0_dlg0[] = { /* 0x814dc14 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    FANFARE_PLAY2(472),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0f,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Kekeh!\nYou lot!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Why aren't you out there\nhunting down {NAME_0}'s team?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x02,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" That's easy for you to say...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" It's too much for us...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0x2e, 0x03,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" They say {NAME_0}'s\nteam has gone way far out there.") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" If we went, the best we\ncould hope for is maybe the Lapis Cave.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0003, -0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I joined the chase...") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" But they fled into Mt. Blaze.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" For the life of me, I can't\ngo in there.\nAnd that's where I lost their trail.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I'm a Grass type, see.{WAIT_PRESS}\nFire doesn't agree with me at all.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I don't know what became\nof {NAME_0}'s team after that.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" ...But those fugitives...\nTo think they would risk Mt. Blaze...") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" They've grown up tough!\nI can't keep up!") },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0003,  0x00000042,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Hahaha!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0b,  0x0002,  0x00000043,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Kekeh!\nWhat a spineless lot you are!\nTch!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0004,  0x00000041,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" You're so full of big talk!\nWhat about your team, Gengar?") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" You just hang around in the\nsquare and don't do a thing.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Walk the talk.\nYou guys go.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0f,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" We're out of that picture.\nKekeh!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Our role is to receive word\nabout {NAME_0}'s demise.\nKekekekekeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0x2e, 0x15,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Tch!\nJust appointed yourself that...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Oh, my gosh! Oh, my goodness!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" {NAME_7}, what's\nthe word?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0c,  0x0007,  0x00000042,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0007,  0x00000000,  0x00000000, _(" {NAME_0}...\n{NAME_0} is...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    FANFARE_PLAY2(465),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0002,  0x00000041,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Oh! Finally!\nWe're finally rid of {NAME_0}!\nKekeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0007,  0x00000045,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0007,  0x00000000,  0x00000000, _(" No!{WAIT_PRESS}\nIt's the opposite!") },
+    { 0x34, 0x00,  0x0007,  0x00000000,  0x00000000, _(" {NAME_0} is back!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(463),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0002,  0x00000046,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Kekeh?!\nWhat did you say?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(50),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x0000003f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    FANFARE_PLAY2(465),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x0d,  0x0003,  0x00000042,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0003,  0x00000000, -0x00000001, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" H-hey! Over there...") },
+    WAIT(4),
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x05,  0x0006,  0x00000042,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0006, -0x00000002,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" ...{NAME_0}!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0x2e, 0x03,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0005,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Th-they're back...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000040,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    BGM_SWITCH(7),
+    { 0x2e, 0x02,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Hi, everyone!\nWe're back!") },
+    { 0x2e, 0x15,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Whew!\nWe finally made it back.\nWe've been gone for so long...") },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" It's good to be back in the\nsquare again, {NAME_0}.")),
+    VARIANT_DEFAULT(_(" It feels kind of nostalgic\nto be back in the square, {NAME_0}.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Hey, {NAME_1}!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0001,  0x00000003,  0x00000000, NULL },
+    { 0x93, 0x01,  0x000b,  0x0000005b,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Hm! Oh, it's you,\n{NAME_2}.\nIt's been a while.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0002,  0x00000044,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" (Kekeh! What's with that\nsmug confidence?)") },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" (Kekeh! Maybe...)\n") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" {NAME_2}!{WAIT_PRESS}\nYou spewed all sorts of trumped up\ngarbage, didn't you?!")),
+    VARIANT(/* == */  1, _(" {NAME_0} had nothing to\ndo with it!")),
+    VARIANT(/* == */  1, _(" {NAME_0} was innocent!")),
+    VARIANT_DEFAULT(_(" {NAME_2}!{WAIT_PRESS}\nEverything you said was completely\nwrong!")),
+    VARIANT_DEFAULT(_(" {NAME_0} had nothing to\ndo with it!")),
+    VARIANT_DEFAULT(_(" {NAME_0} was innocent!")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(463),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x15,  0x0002,  0x00000046,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Ugege?!") },
+    { 0x2e, 0x05,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0004,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Wh-what?!") },
+    { 0x2e, 0x0d,  0x0003,  0x00000042,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0003, -0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Is that true?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0x2e, 0x15,  0x0001,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" You bet.\nWe met Ninetales and found out.")),
+    VARIANT(/* == */  1, _(" {NAME_0} isn't the human\nfrom that legend.")),
+    VARIANT(/* == */  1, _(" We came back when we\nfound that out.")),
+    VARIANT_DEFAULT(_(" Yup.\nWe met Ninetales and asked.")),
+    VARIANT_DEFAULT(_(" {NAME_0} isn't the human\nfrom the legend.")),
+    VARIANT_DEFAULT(_(" We're back because we\ndiscovered the truth.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Ugegegegegegegeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    FANFARE_PLAY2(470),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Kekeh! W-wait a second!{WAIT_PRESS}\nYou can't be trusted yet.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" If you're going to make that\nclaim, let's see some proof.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0001,  0x00000004,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" P-proof?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000022,  0x00000000, NULL },
+    WAIT(45),
+    { 0x2e, 0x15,  0x0002,  0x00000041,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" That's right.\nSome hard evidence! Kekeh!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Let's see some proof!\nCome on, out with it!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0001,  0x00000005,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Proof...{WAIT_PRESS}\nWe don't have any proof...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(470),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Kekekekekekeh!{WAIT_PRESS}\nIt's too bad you don't have proof!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" You came back for us so\nwe could get rid of you easier!\nHow conveniently foolish! Kekekeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Now, fellow Pokémon.{WAIT_PRESS}\nHere's your chance to get rid of\n{NAME_0}! Kekekekekeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(90),
+    FANFARE_PLAY2(468),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    WAIT(180),
+    { 0x2e, 0x15,  0x0002,  0x00000044,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ............{WAIT_PRESS}Kekeh?!{WAIT_PRESS}\nWhat's wrong, everyone?\nDon't you want to be rid of {NAME_0}?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000001,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" I...{WAIT_PRESS}\nI always believed in {NAME_0}!") },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" You don't fool me!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(468),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0002,  0x00000046,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Ugeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x0000005b,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" ...I...\nI'm out.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I was saved by\n{NAME_0}'s team before.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I joined the chase with a\nheavy heart because of your urging...") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" But I simply can't think\nof {NAME_0} being bad in any way.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(455),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x14,  0x0002,  0x00000046,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Ugegegeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0004,  0x00000041,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" I've heard enough too!\nI believe {NAME_0}!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Yeah, that's right!\nWho needs proof?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x2e, 0x0f,  0x0002,  0x00000046,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Ugegegegegege!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(45),
+    { 0x2e, 0x15,  0x0001,  0x00000008,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" E-everyone...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    SELECT_ENTITIES(-1, 1),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0x2b, 0x00,  0x0000,  0x000000d2,  0x000000d2, NULL },
+    { 0x2e, 0x03,  0x0009, -0x00000002,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0009,  0x00000000,  0x00000000, _(" Extra! Extra!\nRead all about it!") },
+    { 0x31, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2b, 0x00,  0x0000, -0x00000001, -0x00000001, NULL },
+    { 0x91, 0x0a,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    { 0x91, 0x08,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(90),
+    FANFARE_PLAY2(468),
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0c,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0008,  0x00000000,  0x00000000, _(" What?\nWhat is this?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(4),
+    { 0x2e, 0x0c,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0007,  0x00000000,  0x00000000, _(" ......{WAIT_PRESS}\nIt looks like a newspaper...\nDoesn't it?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0f,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" OK, I'll read it aloud.\nLet's see...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x35, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}<Pokémon News>\n{CENTER_ALIGN}= EXTRA =") },
+    { 0x35, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN} \n{CENTER_ALIGN}{NAME_0} Innocent!") },
+    { 0x35, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}{NAME_0} met with Ninetales under\n{CENTER_ALIGN}the watchful eye of Alakazam...") },
+    { 0x35, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}...And proved that it had nothing to\n{CENTER_ALIGN}do with the human in the legend.") },
+    { 0x35, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}As a result, Gengar's claims were\n{CENTER_ALIGN}found to be malicious lies.") },
+    { 0x35, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}-End-") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(470),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Ugegegegegegegegegegegeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x05,  0x0004,  0x00000041,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0004,  0x00000002,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" You rotten...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(455),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Gegegeh!\nR-run!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000004,  0x00000000, NULL },
+    WAIT(80),
+    FANFARE_PLAY2(471),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Stop, you liar!\nYou conned us!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(180),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x08,  0x000b,  0x00000036,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x03,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" Welcome back!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0001,  0x00000009,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Yup! It's good to be back!{WAIT_PRESS}\nWe're back like we promised.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0006,  0x00000042,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" ...Sniffle...") },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" I'm so glad...{WAIT_PRESS}\n{NAME_0} isn't suspected anymore...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Yup, I'm glad too.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" We won't have to keep\nrunning from everyone anymore.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000022,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0001,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" All right, {NAME_0}.")),
+    VARIANT(/* == */  1, _(" We're both worn out.\nI'm going to get some sleep.")),
+    VARIANT(/* == */  1, _(" Our rescue team is back\nin business tomorrow!{WAIT_PRESS}\nLet's give it our best!")),
+    VARIANT_DEFAULT(_(" {NAME_0}.")),
+    VARIANT_DEFAULT(_(" We're both exhausted.\nI'm going to get some sleep.")),
+    VARIANT_DEFAULT(_(" Our rescue team gets\nrevived tomorrow!{WAIT_PRESS}\nLet's try to do our best!")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+static const struct ScriptCommand s_gs1_g23_s0_lives1_dlg0[] = { /* 0x8150a08 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000041,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000042,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x0000005b,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_ANGRY_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SWEAT_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    { 0x93, 0x04,  0x000b,  0x00000036,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(210),
+    { 0x91, 0x0a,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x0c,  0x000a,  0x00000004,  0x00000000, NULL },
+    WAIT(45),
+    { 0x91, 0x0c,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000036,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g23_s0_lives2_dlg0[] = { /* 0x8150cb8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000043,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000044,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    WAIT(220),
+    { 0x91, 0x0c,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    WAIT(45),
+    { 0x91, 0x0c,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x08,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    { 0x93, 0x08,  0x000a,  0x00000036,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g23_s0_lives3_dlg0[] = { /* 0x8150de8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_ANGRY_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    WAIT(6),
+    { 0x93, 0x04,  0x000b,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(ANGRY_START_FUNC),
+    WAIT(60),
+    CALL_SCRIPT(ANGRY_END_FUNC),
+    FANFARE_PLAY2(472),
+    CALL_SCRIPT(JUMP_ANGRY_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x08,  0x000b,  0x0000004d,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x0000005d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    WAIT(65),
+    { 0x6b, 0x00,  0x0099,  0x00000048,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x08,  0x0100,  0x00000007,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SWEAT_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(LOOK_AROUND_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SWEAT_FUNC),
+    { 0x7e, 0x00,  0x0100,  0x00000008, -0x00000008, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_ANGRY_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x04,  0x000b,  0x00000001,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(QUESTION_FUNC),
+    WAIT(1),
+    CALL_SCRIPT(LOOK_AROUND_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000055,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x08,  0x000b,  0x0000004d,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(LOOK_AROUND_FUNC),
+    CALL_SCRIPT(SWEAT_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(180),
+    { 0x91, 0x0c,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    CALL_SCRIPT(LOOK_AROUND_FUNC),
+    WAIT(20),
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    { 0x62, 0x00,  0x0100,  0x00000000, -0x0000000c, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(LOOK_AROUND_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x40,  0x0200,  0x00000004,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g23_s0_lives4_dlg0[] = { /* 0x81513c8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x93, 0x04,  0x000b,  0x0000004d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x08,  0x000b,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_START_FUNC),
+    WAIT(30),
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    { 0x93, 0x04,  0x000b,  0x0000005d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    { 0x93, 0x04,  0x000b,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    { 0x93, 0x04,  0x000b,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(140),
+    { 0x91, 0x0a,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x0a,  0x000a,  0x00000004,  0x00000000, NULL },
+    WAIT(20),
+    { 0x91, 0x0a,  0x000a,  0x00000006,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x08,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x10,  0x0099,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x0000004d,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_ANGRY_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x38,  0x0200,  0x00000004,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g23_s0_lives5_dlg0[] = { /* 0x81516e8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000050,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x08,  0x000b,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x0000005b,  0x00000000, NULL },
+    CALL_SCRIPT(ANGRY_START_FUNC),
+    WAIT(30),
+    CALL_SCRIPT(ANGRY_END_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(2),
+    { 0x93, 0x3c,  0x000b,  0x0000005d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(2),
+    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(62),
+    { 0x6b, 0x00,  0x0099,  0x00000047,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(2),
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    { 0x93, 0x08,  0x000b,  0x0000005b,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(8),
+    { 0x93, 0x04,  0x000b,  0x00000022,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x0000005b,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(160),
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(12),
+    { 0x91, 0x08,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x08,  0x000a,  0x00000003,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x08,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x30,  0x0099,  0x00000004,  0x00000000, NULL },
+    { 0x54, 0x00,  0x001f,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0xe4, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0016,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    FANFARE_PLAY2(471),
+    CALL_SCRIPT(ANGRY_START_FUNC),
+    WAIT(45),
+    CALL_SCRIPT(ANGRY_END_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x89, 0x38,  0x0200,  0x00000004,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g23_s0_lives6_dlg0[] = { /* 0x8151b48 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    { 0x93, 0x04,  0x000b,  0x0000004d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    { 0x93, 0x08,  0x000b,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(2),
+    { 0x93, 0x04,  0x000b,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(6),
+    { 0x91, 0x04,  0x000b,  0x00000006,  0x00000000, NULL },
+    WAIT(60),
+    { 0x91, 0x04,  0x000b,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(8),
+    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x08,  0x000b,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(8),
+    { 0x93, 0x04,  0x000b,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_ANGRY_FUNC),
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(150),
+    { 0x91, 0x0c,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x06,  0x0100,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    { 0x89, 0x38,  0x0200,  0x00000004,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g23_s0_lives7_dlg0[] = { /* 0x8151e18 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    WAIT(8),
+    { 0x93, 0x04,  0x000b,  0x00000055,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000006,  0x00000000, NULL },
+    WAIT(45),
+    { 0x91, 0x04,  0x000b,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    WAIT(8),
+    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_HAPPY_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x6b, 0x00,  0x0099,  0x00000045,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    WAIT(2),
+    { 0x93, 0x08,  0x000b,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    WAIT(2),
+    { 0x93, 0x04,  0x000b,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x08,  0x000b,  0x0000005b,  0x00000000, NULL },
+    { 0x89, 0x08,  0x0100,  0x00000004,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_ANGRY_FUNC),
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(200),
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    WAIT(13),
+    { 0x91, 0x0a,  0x000a,  0x00000003,  0x00000000, NULL },
+    WAIT(10),
+    { 0x91, 0x0a,  0x000a,  0x00000004,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x08,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x08,  0x0080,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x89, 0x18,  0x0080,  0x00000004,  0x00000000, NULL },
+    { 0x89, 0x05,  0x0080,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g23_s0_lives8_dlg0[] = { /* 0x81521a8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0200,  0x00000049,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x0000005b,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_ANGRY_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    WAIT(55),
+    { 0x6b, 0x00,  0x0099,  0x0000004a,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    WAIT(2),
+    { 0x93, 0x08,  0x000b,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_START_FUNC),
+    WAIT(20),
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000002,  0x00000000, NULL },
+    WAIT(45),
+    { 0x91, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(469),
+    CALL_SCRIPT(QUESTION_FUNC),
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000001,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x0000004d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    CALL_SCRIPT(LOOK_AROUND_FUNC),
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(230),
+    { 0x91, 0x08,  0x000a,  0x00000003,  0x00000000, NULL },
+    WAIT(120),
+    { 0x91, 0x0c,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SWEAT_FUNC),
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x89, 0x40,  0x0200,  0x00000004,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g23_s0_lives9_dlg0[] = { /* 0x81525b8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x0000005d,  0x00000000, NULL },
+    WAIT(45),
+    { 0x91, 0x04,  0x000b,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    WAIT(45),
+    { 0x91, 0x04,  0x000b,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x08,  0x000b,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_START_FUNC),
+    WAIT(20),
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000006,  0x00000000, NULL },
+    WAIT(45),
+    { 0x91, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    CALL_SCRIPT(QUESTION_FUNC),
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000001,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000b,  0x0000004d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    CALL_SCRIPT(LOOK_AROUND_FUNC),
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(215),
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    CALL_SCRIPT(LOOK_AROUND_FUNC),
+    { 0x91, 0x0a,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000b,  0x00000001,  0x00000000, NULL },
+    CALL_SCRIPT(QUESTION_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SWEAT_FUNC),
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0x89, 0x40,  0x0200,  0x00000004,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g23_s1_lives0_dlg0[] = { /* 0x8152988 */
+    DEBUGINFO,
+    { 0x2d, 0x07,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x01000000,  0x00000000, NULL },
+    FANFARE_PLAY2(451),
+    { 0x54, 0x00,  0x0017,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x8b, 0x00,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0017,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x8b, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0017,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    FANFARE_STOP2(451),
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g23_s1_eff0_script[] = { /* 0x8152a68 */
+    DEBUGINFO,
+    { 0xe3, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    WAIT(344),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x00000065,  0x00000000, NULL },
+    WAIT(288),
+    { 0x52, 0x00,  0x0000,  0x00020000,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x00000066,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g23_s1_eff1_script[] = { /* 0x8152ba8 */
+    DEBUGINFO,
+    { 0x52, 0x00,  0x0000,  0x00020000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    WAIT(328),
+    { 0x56, 0x00,  0x0000,  0x000001be,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g24_s0_station_sref_script[] = { /* 0x8152c28 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    JUMP_STATION(  2,  0),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g24_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g24_s0_station_sref_script }; /* 0x8152c68 */
+
+static const struct ScriptCommand s_gs1_g24_s0_lives0_dlg2[] = { /* 0x8152c74 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_2N, 0, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_2N,  0,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'm so sorry.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I was fully convinced of\nyour guilt, {NAME_0}.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" But I am glad to hear\nyou are free from that cloud of\nsuspicion〜♪") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'll never give you my\nbusiness again!{WAIT_PRESS}\nI hope you won't say that.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g24_s0_lives1_dlg2[] = { /* 0x8152e2c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_2N, 1, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_2N,  1,  1),
+    EXECUTE_STATION(-1, 24, 1),
+    HALT,
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g24_s0_lives2_dlg2[] = { /* 0x8152edc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_2N, 2, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_2N,  2,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I do apologize.{WAIT_PRESS}\nHow could one run a bank without\ntrusting clients?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I promise to satisfy all\nyour banking needs from now on.\nI hope you'll stay.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g24_s0_lives3_dlg2[] = { /* 0x8153034 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_2N, 3, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_2N,  3,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I doubted you too!\nI do so apologize!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" If you could wipe the slate\nclean, I will do my best to serve your\nlinking needs!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g24_s0_lives4_dlg2[] = { /* 0x8153174 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_2N, 4, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_2N,  4,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I expected this.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I thought there had to\nbe a mistake.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I mean, look at you.\nYou don't look like the sort who can be\nup to no good.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'll keep looking after your\nthings, dears! You can always count on me!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g24_s0_lives5_dlg2[] = { /* 0x8153334 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_2N, 5, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_2N,  5,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I believed in you,\n{NAME_0}!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Because you're my friend!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g24_s0_lives6_dlg1[] = { /* 0x8153430 */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x004f,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_BOY),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g24_s0_lives6_dlg2[] = { /* 0x8153470 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" We got conned by Gengar...{WAIT_PRESS}\nI'm sorry.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g24_s0_lives7_dlg1[] = { /* 0x81534fc */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x004e,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_GIRL),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g24_s0_lives7_dlg2[] = { /* 0x815353c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'm truly sorry for what\nhappened.{WAIT_PRESS}\nSorry for suspecting you.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g24_s0_lives8_dlg1[] = { /* 0x81535e0 */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x004d,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_RANDOM),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g24_s0_lives8_dlg2[] = { /* 0x8153620 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ...So, what became of\nAlakazam's team?\nDid they head underground?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Groudon...{WAIT_PRESS}\nThe mythical Pokémon...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It is rather worrying...{WAIT_PRESS}\nBut I suppose it is Alakazam's team.\nThey should be fine.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g24_s0_lives9_dlg2[] = { /* 0x8153768 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Aww. No...\nI thought you were completely guilty.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'm sorry you had to go\nthrough such a miserable time.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g24_s1_station_sref_script[] = { /* 0x8153848 */
+    DEBUGINFO,
+    SELECT_LIVES(-1, 1),
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g24_s1_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs1_g24_s1_station_sref_script }; /* 0x8153888 */
+
+static const struct ScriptCommand s_gs1_g24_s1_lives0_dlg0[] = { /* 0x8153894 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x0c,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I am so sorry!") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I was convinced that\n{NAME_0} had to be the one.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I'm very ashamed that I\ntreated a valuable customer with such\ndisdain and suspicion...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" It isn't just you, my brother.{WAIT_PRESS}\nI am guilty of the same.") },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" B-Brother...{WAIT_PRESS}\nSniffle... My brother...") },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" We both promise, we will\nnot repeat the same mistake.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I will do my best to obtain\neven better Technical Machines and Orbs.\nI hope for your continued patronage!") },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    SELECT_LIVES(-1, 0),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g24_s1_lives1_dlg0[] = { /* 0x8153bf4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g24_s1_lives2_dlg0[] = { /* 0x8153c34 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g24_s1_lives2_dlg2[] = { /* 0x8153cd4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_2N, 0, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_2N,  0,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'm so sorry.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I was fully convinced of\nyour guilt, {NAME_0}.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" But I am glad to hear\nyou are free from that cloud of\nsuspicion〜♪") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'll never give you my\nbusiness again!{WAIT_PRESS}\nI hope you won't say that.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g24_s1_lives3_dlg0[] = { /* 0x8153db4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g24_s1_lives3_dlg2[] = { /* 0x8153e64 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_2N, 1, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_2N,  1,  1),
+    EXECUTE_STATION(-1, 24, 1),
+    HALT,
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g25_s0_station_sref_script[] = { /* 0x8153f14 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    JUMP_STATION(  2,  0),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g25_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g25_s0_station_sref_script }; /* 0x8153f54 */
+
+static const struct ScriptCommand s_gs1_g25_s0_lives0_dlg2[] = { /* 0x8153f60 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g25_s0_lives1_dlg2[] = { /* 0x8153fc0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g25_s0_lives2_dlg2[] = { /* 0x8154020 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g25_s0_lives3_dlg2[] = { /* 0x8154080 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g25_s0_lives4_dlg2[] = { /* 0x81540e0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g25_s0_lives5_dlg2[] = { /* 0x8154140 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g25_s0_lives6_dlg1[] = { /* 0x81541a0 */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x0052,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_BOY),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g25_s0_lives6_dlg2[] = { /* 0x81541e0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" That quake was\nsomething else!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It caught me by surprise.\nI almost drowned in the pond!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g25_s0_lives7_dlg1[] = { /* 0x81542ac */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x0051,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_GIRL),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g25_s0_lives7_dlg2[] = { /* 0x81542ec */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Oh, wasn't it shocking?!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" That earthquake was\nterrible!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g25_s0_lives8_dlg1[] = { /* 0x815439c */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x0050,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_RANDOM),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g25_s0_lives8_dlg2[] = { /* 0x81543dc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" What's that?\nHas Alakazam's team returned?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'm not sure...{WAIT_PRESS}\nI haven't seen them around the square.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I don't think Alakazam's\nteam has come back.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g25_s0_lives9_dlg2[] = { /* 0x8154500 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" That earthquake here\nwas wicked...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" If it can happen here,\nwill more serious natural disasters\ncome to the square?") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g26_s0_station_sref_script[] = { /* 0x81545e8 */
+    DEBUGINFO,
+    SELECT_MAP(1),
+    SELECT_ENTITIES(-1, 0),
+    BGM_STOP,
+    { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    BGM_FADEOUT(120),
+    { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g26_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs1_g26_s0_station_sref_script }; /* 0x8154678 */
+
+static const struct ScriptCommand s_gs1_g26_s0_eff0_script[] = { /* 0x8154684 */
+    DEBUGINFO,
+    { 0x59, 0x00, -0x0040,  0x00000000,  0x00000000, NULL },
+    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000040,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100, -0x00000040,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000040,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100, -0x00000040,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g26_s0_lives0_dlg0[] = { /* 0x8154794 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0008,  0x00000058,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0009,  0x00000067,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000053,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Wow!\nLook at all the Pokémon!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004d,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x0f,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Looks like they sent out\nto a lot of rescue teams for help.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" I've seen some pretty\nfamous leaders from faraway places.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" That {NAME_3}...\nI wonder what he's planning to do with\nall these rescue teams?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(60),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0003,  0x00000000, -0x00000001, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Can I get everyone's\nattention here?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I, uh...{WAIT_PRESS}\nIt's not my style to get up in front of\neveryone like this, and...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" ...Sorry.\nThis isn't the time for that!") },
+    BGM_SWITCH(10),
+    { 0x2e, 0x15,  0x0003,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" There's big trouble!{WAIT_PRESS}\n{NAME_8}'s team went underground...") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" But they haven't returned!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 0),
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(473),
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    WAIT(90),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Wh-what?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Is that true?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x15,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Yes, unfortunately.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" {NAME_8} led his team\nunderground to quell {NAME_9}...") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" And that's it.\nWe haven't heard anything from them.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" To be honest...{WAIT_PRESS}\nWe have no idea what became of them.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(90),
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" No idea?{WAIT_PRESS}\nHow is that possible?!{WAIT_PRESS}\nThis is {NAME_8} you're talking about?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" But they haven't come back.\nThat's for real!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" That's right...\nAnd it sounds as if {NAME_9} is out of\nour league...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" What? It's that tough?\nThis Pokémon named {NAME_9}?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Why don't you go underground and\nsee for yourself?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Hunh?!\nYou've gotta be kidding me!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" There's magma flowing everywhere\nunderground.{WAIT_PRESS}\nI'd burn up if I went anywhere like that!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Quiet, please! Be quiet!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(60),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" There's no denying that\nit is dangerous underground.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" It's not a place where just\nanyone can go.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" That's why I asked so many\nrescue teams to gather today.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I propose that a special\nteam be formed by choosing the best of\nthe best.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 0),
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Who will step forward?!") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Who among us will be the\nheroes to take on the challenges\nunderground?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    BGM_FADEOUT(150),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Hey, {NAME_0}.\nThis is some chance. Let's go for it.")),
+    VARIANT_DEFAULT(_(" Say, {NAME_0}.\nThis is a great opportunity. Let's go.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100, -0x00000010,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Don't bother, you guys.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0001,  0x0000000c,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" What's with you?\nCan you get out of the way?")),
+    VARIANT_DEFAULT(_(" What's with you?\nCan you step aside?")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" You guys have gotten a lot\ntougher, that's for sure, but...") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" There's plenty of tougher\nPokémon out there.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Will no one step forward?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    WAIT(120),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" I'll go.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(60),
+    BGM_SWITCH(7),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Whoa!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" It's B-{NAME_4}!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" You mean...\n{COLOR CYAN}Team Hydro{RESET}'s roughneck {NAME_4}?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Those waterspouts on his back can\nrocket water so fast that it punches\nthrough thick iron plates!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 0),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x03,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0004,  0x00000000,  0x00000001, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" It's rumored {NAME_9}\nis a Ground type.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" I am a Water type.\nStrong against the Ground type.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" My Hydro Pump will put\n{NAME_9} down in one shot.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" I'll join the party too.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    WAIT(60),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Woohoo! It's {NAME_5}!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" She's {COLOR CYAN}Team Constrictor{RESET}'s leader.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" She's known for persistent and\nclingy attacks.{WAIT_PRESS} She ensnares foes with\nher tentacles, then head-butts them!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" She'd be nasty to face in any battle\nof endurance.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 0),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x0d,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0005,  0x00000000, -0x00000001, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Darlings, when I see a tough\nPokémon, I want to tangle with them.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Say, how about not forgetting about\nme?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    WAIT(60),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Wow! {NAME_6}!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" He's the most brutal out of {COLOR CYAN}Team\nRumblerock{RESET}!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" His body is rock hard.\nHe's supposed to be able to withstand\nhuge explosions without taking damage.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x03,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0006,  0x00000000,  0x00000001, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" If {NAME_9}'s awakened\nunderground, that suits me fine.") },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" I'll use my Rock Throw to\nkeep it buried underground.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 0),
+    WAIT(30),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Oh, {NAME_4}!\n{NAME_5}! And {NAME_6}!") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" No one could complain\nabout your selection.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" We will have these three\nrescuers head underground!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Yeah! Good choice!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" You're representing us!\nMake us proud!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Let's go!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000054,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000055,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0x91, 0x1e,  0x0002,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Win it for us!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Save {NAME_8}'s team!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 0),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004d,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" See?\nThey look pretty tough, eh?") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Let them handle things.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x00000004,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" OK...\nI guess we can't say anything,\n{NAME_0}.")),
+    VARIANT_DEFAULT(_(" Hmmm...\nIt can't be helped, {NAME_0}.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+static const struct ScriptCommand s_gs1_g26_s0_lives1_dlg0[] = { /* 0x8156884 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000056,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    WAIT(10),
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    WAIT(10),
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x8b, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100,  0x00000000, -0x00000010, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(15),
+    CALL_SCRIPT(JUMP_ANGRY_FUNC),
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x6b, 0x00,  0x0100,  0x00000054,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000057,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0x91, 0x14,  0x0002,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g26_s0_lives2_dlg0[] = { /* 0x8156c44 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000058,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000000,  0x00000008, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000059,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x1e,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000000,  0x00000010, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g26_s0_lives3_dlg0[] = { /* 0x8156eb4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x08,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT(5),
+    { 0x91, 0x08,  0x000a,  0x00000007,  0x00000000, NULL },
+    WAIT(5),
+    { 0x91, 0x08,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x08,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT(5),
+    { 0x91, 0x08,  0x000a,  0x00000007,  0x00000000, NULL },
+    WAIT(5),
+    { 0x91, 0x08,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x08,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT(5),
+    { 0x91, 0x08,  0x000a,  0x00000007,  0x00000000, NULL },
+    WAIT(5),
+    { 0x91, 0x08,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+
+
+
+static const struct ScriptCommand s_gs1_g26_s0_lives4_dlg0[] = { /* 0x81570c4 */
+    DEBUGINFO,
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    CJUMP_RANDOM(3),
+    COND_EQUAL(0, /* to label */ 3),
+    COND_EQUAL(1, /* to label */ 4),
+    COND_EQUAL(2, /* to label */ 5),
+  LABEL(3), /* = 0x03 */
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    JUMP_LABEL(6),
+  LABEL(4), /* = 0x04 */
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    JUMP_LABEL(6),
+  LABEL(5), /* = 0x05 */
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    JUMP_LABEL(6),
+  LABEL(6), /* = 0x06 */
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(7), /* = 0x07 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 8),
+    { 0x91, 0x08,  0x000a,  0x00000003,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 8),
+    { 0x91, 0x08,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(7),
+  LABEL(8), /* = 0x08 */
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x004c,  0x00000008,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x004c,  0x0000005a,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+  LABEL(9), /* = 0x09 */
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 9),
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+  LABEL(10), /* = 0x0a */
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 10),
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    WAIT(30),
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x0000005b,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+
+static const struct ScriptCommand s_gs1_g26_s0_lives5_dlg0[] = { /* 0x81575e4 */
+    DEBUGINFO,
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    CJUMP_RANDOM(3),
+    COND_EQUAL(0, /* to label */ 2),
+    COND_EQUAL(1, /* to label */ 3),
+    COND_EQUAL(2, /* to label */ 4),
+  LABEL(2), /* = 0x02 */
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    JUMP_LABEL(5),
+  LABEL(3), /* = 0x03 */
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    JUMP_LABEL(5),
+  LABEL(4), /* = 0x04 */
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+  LABEL(5), /* = 0x05 */
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(6), /* = 0x06 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 7),
+    { 0x91, 0x08,  0x0002,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 7),
+    { 0x91, 0x08,  0x0001,  0x00000005,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(6),
+  LABEL(7), /* = 0x07 */
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+  LABEL(8), /* = 0x08 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 8),
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x004c,  0x0000005c,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+  LABEL(9), /* = 0x09 */
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 9),
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    WAIT(30),
+    { 0x6b, 0x00,  0x0100,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g26_s0_lives6_dlg0[] = { /* 0x8157a64 */
+    DEBUGINFO,
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    CJUMP_RANDOM(3),
+    COND_EQUAL(0, /* to label */ 2),
+    COND_EQUAL(1, /* to label */ 3),
+    COND_EQUAL(2, /* to label */ 4),
+  LABEL(2), /* = 0x02 */
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    JUMP_LABEL(5),
+  LABEL(3), /* = 0x03 */
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    JUMP_LABEL(5),
+  LABEL(4), /* = 0x04 */
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+  LABEL(5), /* = 0x05 */
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(6), /* = 0x06 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 7),
+    { 0x91, 0x08,  0x0002,  0x00000006,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 7),
+    { 0x91, 0x08,  0x0001,  0x00000003,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(6),
+  LABEL(7), /* = 0x07 */
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+  LABEL(8), /* = 0x08 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 8),
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+  LABEL(9), /* = 0x09 */
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 9),
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x004c,  0x0000005d,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    WAIT(60),
+    { 0x6b, 0x00,  0x0100,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g26_s0_lives7_dlg0[] = { /* 0x8157ee4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x70, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
+    WAIT(2),
+    { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    CJUMP_RANDOM(3),
+    COND_EQUAL(0, /* to label */ 2),
+    COND_EQUAL(1, /* to label */ 3),
+    COND_EQUAL(2, /* to label */ 4),
+  LABEL(2), /* = 0x02 */
+    { 0x91, 0x08,  0x0001,  0x00000003,  0x00000000, NULL },
+    JUMP_LABEL(5),
+  LABEL(3), /* = 0x03 */
+    { 0x91, 0x08,  0x000a,  0x00000005,  0x00000000, NULL },
+    JUMP_LABEL(5),
+  LABEL(4), /* = 0x04 */
+    { 0x91, 0x08,  0x0002,  0x00000007,  0x00000000, NULL },
+  LABEL(5), /* = 0x05 */
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(6), /* = 0x06 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 6),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(7), /* = 0x07 */
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 7),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(8), /* = 0x08 */
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 8),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 120),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(9), /* = 0x09 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(30),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 9),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g26_s0_lives8_dlg0[] = { /* 0x8158324 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x70, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
+    WAIT(2),
+    { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 0),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(1), /* = 0x01 */
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(2), /* = 0x02 */
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 2),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 120),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(3), /* = 0x03 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(30),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 3),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g26_s0_lives9_dlg0[] = { /* 0x8158684 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x91, 0x08,  0x000a,  0x00000003,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x91, 0x08,  0x000a,  0x00000001,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(2), /* = 0x02 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 3),
+    { 0x91, 0x08,  0x000a,  0x00000003,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 3),
+    { 0x91, 0x08,  0x000a,  0x00000001,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(2),
+  LABEL(3), /* = 0x03 */
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(4), /* = 0x04 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 4),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(5), /* = 0x05 */
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 5),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(6), /* = 0x06 */
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 6),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 120),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(7), /* = 0x07 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(30),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 7),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g26_s0_lives10_dlg0[] = { /* 0x8158a44 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x70, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
+    WAIT(2),
+    { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 0),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(1), /* = 0x01 */
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(2), /* = 0x02 */
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 2),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 120),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(3), /* = 0x03 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(30),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 3),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g26_s0_lives11_dlg0[] = { /* 0x8158da4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x70, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
+    WAIT(2),
+    { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 0),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(1), /* = 0x01 */
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(2), /* = 0x02 */
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 2),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 120),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(3), /* = 0x03 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(30),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 3),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g26_s0_lives12_dlg0[] = { /* 0x8159104 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x70, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
+    WAIT(2),
+    { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 0),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(1), /* = 0x01 */
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(2), /* = 0x02 */
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 2),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 120),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(3), /* = 0x03 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(30),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 3),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g26_s0_lives13_dlg0[] = { /* 0x8159464 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x70, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
+    WAIT(2),
+    { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 0),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(1), /* = 0x01 */
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(2), /* = 0x02 */
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 2),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 120),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT(15),
+    { 0x6b, 0x00,  0x0080,  0x0000005f,  0x00000000, NULL },
+  LABEL(3), /* = 0x03 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(30),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 3),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g26_s0_lives14_dlg0[] = { /* 0x8159804 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 0),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(1), /* = 0x01 */
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(2), /* = 0x02 */
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 2),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 120),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(3), /* = 0x03 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(30),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 3),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g26_s0_lives15_dlg0[] = { /* 0x8159b04 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x70, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
+    WAIT(2),
+    { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(0, 60),
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 0),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(1), /* = 0x01 */
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(2), /* = 0x02 */
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 2),
+    { 0xe3, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    { 0x86, 0x00,  0x0100,  0x0000005e,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 120),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(3), /* = 0x03 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(30),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 3),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g26_s0_lives16_dlg0[] = { /* 0x8159e94 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(2), /* = 0x02 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 3),
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 3),
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(2),
+  LABEL(3), /* = 0x03 */
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(4), /* = 0x04 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 4),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(5), /* = 0x05 */
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    WAIT(60),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 5),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(6), /* = 0x06 */
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    WAIT(60),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 6),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 120),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(7), /* = 0x07 */
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    WAIT(30),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 7),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g27_s0_station_sref_script[] = { /* 0x815a254 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    JUMP_STATION(  2,  0),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g27_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g27_s0_station_sref_script }; /* 0x815a294 */
+
+static const struct ScriptCommand s_gs1_g27_s0_lives0_dlg2[] = { /* 0x815a2a0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g27_s0_lives1_dlg2[] = { /* 0x815a300 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g27_s0_lives2_dlg2[] = { /* 0x815a360 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g27_s0_lives3_dlg2[] = { /* 0x815a3c0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g27_s0_lives4_dlg2[] = { /* 0x815a420 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g27_s0_lives5_dlg2[] = { /* 0x815a480 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g27_s0_lives6_dlg1[] = { /* 0x815a4e0 */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x0062,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_BOY),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g27_s0_lives6_dlg2[] = { /* 0x815a520 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You bet I'm worried about\nAlakazam's team...{WAIT_PRESS}\nBut Blastoise and company are tough.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Don't you worry now.\nThey'll get the job done.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g27_s0_lives7_dlg1[] = { /* 0x815a620 */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x0061,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_GIRL),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g27_s0_lives7_dlg2[] = { /* 0x815a660 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" There have been so many\nearthquakes...{WAIT_PRESS}\nI can't get a decent night's sleep!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g27_s0_lives8_dlg1[] = { /* 0x815a714 */
+    DEBUGINFO,
+    { 0x51, 0x00,  0x0060,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(MOVE_RANDOM),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g27_s0_lives8_dlg2[] = { /* 0x815a754 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" We agreed to let Blastoise's\ncrew handle this situation.\nLet's give them some time.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g27_s0_lives9_dlg2[] = { /* 0x815a810 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You know how we've had\nso many earthquakes lately?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Are they signs that\nsomething a lot worse is coming?{WAIT_PRESS}\nI shudder to think!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g28_s0_station_sref_script[] = { /* 0x815a904 */
+    DEBUGINFO,
+    SELECT_MAP(1),
+    SELECT_ENTITIES(-1, 0),
+    BGM_STOP,
+    { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    BGM_FADEOUT(60),
+    { 0x23, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g28_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs1_g28_s0_station_sref_script }; /* 0x815a9a4 */
+
+static const struct ScriptCommand s_gs1_g28_s0_eff0_script[] = { /* 0x815a9b0 */
+    DEBUGINFO,
+    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000070,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x86, 0x00,  0x0100,  0x00000071,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x86, 0x00,  0x0100,  0x00000070,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000072,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000070,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g28_s0_lives0_dlg0[] = { /* 0x815aae0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0008,  0x00000058,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0009,  0x00000067,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000063,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004d,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Hey, {NAME_2}!")),
+    VARIANT(/* == */  1, _(" What's up here?")),
+    VARIANT_DEFAULT(_(" Oh! {NAME_2}!")),
+    VARIANT_DEFAULT(_(" What's going on here?")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0f,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Hey, {NAME_1}.\nW-well...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ...You should just go see\nfor yourself...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000064,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    BGM_SWITCH(9),
+    { 0x2e, 0x0e,  0x0001,  0x0000000c,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Look!\nIt's {NAME_5}!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" {NAME_3}!{WAIT_PRESS}\nWhat's going on here?!")),
+    VARIANT_DEFAULT(_(" {NAME_3}!{WAIT_PRESS}\nWhat happened here?!")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x0d,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0003,  0x00000000, -0x00000001, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" ............{WAIT_PRESS}\nThey were wiped out...{WAIT_PRESS}\nIn the underground dungeon...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You're kidding!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x03,  0x0005,  0x00000003,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0005,  0x00000000,  0x00000001, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Groan... That place...{WAIT_PRESS}\nIt's rough, seriously...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x0d,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0006,  0x00000000, -0x00000001, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" ...We couldn't get far\nenough to even see {NAME_9}...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x03,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0007,  0x00000000,  0x00000001, NULL },
+    { 0x34, 0x00,  0x0007,  0x00000000,  0x00000000, _(" I don't want to ever go\nback to a place that bad...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    WAIT(60),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" ...It appears the dungeon\nunderground...{WAIT_PRESS}\nis far worse than we'd imagined...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    BGM_FADEOUT(60),
+    WAIT(60),
+    BGM_SWITCH(10),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Kekekekekeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(5),
+    CALL_SCRIPT(SHOCK_FUNC),
+    WAIT(30),
+    { 0x2e, 0x0e,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" What fools.{WAIT_PRESS}\nThat's what you get for trying the\nimpossible.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x05,  0x0001,  0x00000003,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Ge-{NAME_4}!")),
+    VARIANT(/* == */  1, _(" Why don't you shut up?!{WAIT_PRESS}\nThis is about saving {NAME_8}'s team.\nWe have to try!")),
+    VARIANT_DEFAULT(_(" Ge-{NAME_4}!")),
+    VARIANT_DEFAULT(_(" What are you saying?!{WAIT_PRESS}\nIt's only expected that we try. This is for\nsaving {NAME_8}'s team.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(15),
+    { 0x2e, 0x0e,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Kekeh!\nYou really find thinking hard, don't you?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x13,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Even they look smart\ncompared to you.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 0),
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" It's too much...\nEven {NAME_5} went down...") },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" It's gotta be awful tough.") },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Who'd want to go into a dungeon that\ndangerous?") },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" There's no way. I can't go.{WAIT_PRESS}\nI burn too easily.") },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" I can't take earthquakes.") },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" It'd be like going and knowing full\nwell we'd get wiped...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x0d,  0x0001,  0x00000005,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ...E-everyone...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(15),
+    { 0x2e, 0x0e,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" You see?\nEven they finally seem to understand\ntheir situation. Kekeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I...{WAIT_PRESS}\nMy leafy fans would burn up...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    WAIT(15),
+    { 0x2e, 0x0e,  0x0001,  0x00000005,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0001, -0x00000002,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" E-even {NAME_3}...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x13,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Kekeh! Get over it!\nDon't expect to be rewarded just because\nyou tried!") },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Sometimes, it's better to\nwise up and give up!") },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0e,  0x0004,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" ............Huh?{WAIT_PRESS}\nDid I say something profound?\nKekekekekekekeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x0d,  0x0001,  0x00000005,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Urf...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    BGM_FADEOUT(150),
+    WAIT(30),
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" {NAME_0}...\nI don't know anymore...")),
+    VARIANT(/* == */  1, _(" What should we do?")),
+    VARIANT(/* == */  1, _(" Even if it's impossible...")),
+    VARIANT(/* == */  3, _(" {NAME_0}...\nI don't know anymore...")),
+    VARIANT(/* == */  3, _(" What should we do?")),
+    VARIANT(/* == */  3, _(" Even if it's the impossible...")),
+    VARIANT_DEFAULT(_(" {NAME_0}...\nI don't know anymore...")),
+    VARIANT_DEFAULT(_(" What should we do?")),
+    VARIANT_DEFAULT(_(" Even if it's the impossible...")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(17), /* = 0x11 */
+    ASK3(FALSE, /*default*/ -1, /* speaker */ 1, _(" Should we still\ntry to rescue {NAME_8}?")),
+    CHOICE(/* label */ 18, _("Let's go!")),
+    CHOICE(/* label */ 19, _("Let's not.")),
+  LABEL(19), /* = 0x13 */
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ...{WAIT_PRESS}Really...?{WAIT_PRESS}\nYou honestly think we shouldn't go?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_LABEL(17),
+  LABEL(18), /* = 0x12 */
+    { 0x2e, 0x15,  0x0001,  0x0000000b,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" ...{WAIT_PRESS}Yes...{WAIT_PRESS}\nYeah, you're right.")),
+    VARIANT(/* == */  1, _(" All right, {NAME_0}!")),
+    VARIANT_DEFAULT(_(" ...{WAIT_PRESS}Yes...{WAIT_PRESS}\nI think so too.")),
+    VARIANT_DEFAULT(_(" OK, {NAME_0}!")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    BGM_SWITCH(7),
+    { 0x2e, 0x15,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Everyone, listen!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" We're going!\nTo rescue {NAME_8}'s team!")),
+    VARIANT(/* == */  3, _(" We're going!\nTo rescue {NAME_8}'s team!")),
+    VARIANT_DEFAULT(_(" We're going!\nTo rescue {NAME_8}'s team!")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    WAIT(30),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Wha-what?!") },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" What did they say?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x15,  0x0004,  0x00000006,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Ugegege?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 0),
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Hey, who are they?") },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Can't say I know them...") },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" It's {COLOR CYAN}Team {TEAM_NAME}{RESET}.{WAIT_PRESS}\nThey're well known around these parts.") },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" {COLOR CYAN}Team {TEAM_NAME}{RESET}...?{WAIT_PRESS}\nYou mean the lot that were suspected of\ninvolvement in the Ninetales legend?") },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" I heard about that!{WAIT_PRESS}\nWeren't they living like fugitives until\nrecently?") },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Can they handle it?{WAIT_PRESS}\nThey don't look very tough.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0001,  0x00000004,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Sure, the rescue might be\ntoo much for us to handle.")),
+    VARIANT(/* == */  3, _(" Yes, the rescue might be too\nmuch of a challenge for us.")),
+    VARIANT_DEFAULT(_(" It's true--the rescue might\nbe too much for us to handle.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    WAIT(30),
+    { 0x2e, 0x15,  0x0001,  0x00000005,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" But...{WAIT_PRESS}\nwe're still a rescue team.")),
+    VARIANT(/* == */  1, _(" I wanted to help Pokémon\nthat were suffering from the natural\ndisasters...")),
+    VARIANT(/* == */  1, _(" That's why we started up\nour rescue team!")),
+    VARIANT(/* == */  3, _(" But...{WAIT_PRESS}\nEven so, we're still a rescue team.")),
+    VARIANT(/* == */  3, _(" To help Pokémon suffering\nfrom the natural disasters...")),
+    VARIANT(/* == */  3, _(" That's why we started up\nour rescue team!")),
+    VARIANT_DEFAULT(_(" But...{WAIT_PRESS}\nwe're still a rescue team.")),
+    VARIANT_DEFAULT(_(" To help Pokémon suffering\nfrom the natural disasters...")),
+    VARIANT_DEFAULT(_(" That's why we started up\nour rescue team!")),
+    { 0x2e, 0x15,  0x0001,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" That's why I want to\nrescue {NAME_8}'s team more than\nanything.")),
+    VARIANT(/* == */  1, _(" Never giving up...\nThat's what {COLOR CYAN}Team {TEAM_NAME}{RESET} takes\npride in!")),
+    VARIANT(/* == */  3, _(" That's why I want to rescue\n{NAME_8}'s team, even if it's risky.")),
+    VARIANT(/* == */  3, _(" Never giving up...\nThat's where {COLOR CYAN}Team {TEAM_NAME}{RESET} stakes\nits pride!")),
+    VARIANT_DEFAULT(_(" That's why I want to\nrescue {NAME_8}'s team more than\nanything.")),
+    VARIANT_DEFAULT(_(" Never giving up...\nThat's where {COLOR CYAN}Team {TEAM_NAME}{RESET} stakes\nits pride!")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x2e, 0x0e,  0x0004,  0x00000003,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" ............{WAIT_PRESS}Keh.{WAIT_PRESS} Kekekeh!{WAIT_PRESS}\nYou really aren't very bright, are you?") },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0x2e, 0x13,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Why don't you do like\neveryone else and wise up?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x0d,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0003,  0x00000000, -0x00000001, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" ...No.\n{NAME_1} is right.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x0001,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0e,  0x0004,  0x00000003,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" ...Ugeh?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" ...That's right.\nI wasn't thinking straight...out of fear.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x13,  0x0004,  0x00000006,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" ...Ugegegeh?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" We all forgot the most important\nthing. We are rescue teams.") },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" ...Pride...") },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" We have it too!\nPride as rescuers!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0004,  0x00000006,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Ugegegegeh!\nHave you lost your senses?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0004,  0x00000003,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Why would you listen to\nthat clown and, worse, be persuaded?") },
+    WAIT(15),
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0004,  0x00000002,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Why go if you're facing\ncertain defeat?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x2e, 0x15,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Is that so...?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x0001,  0x00000068,  0x00000000, NULL },
+    WAIT(60),
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" ...We've only failed once.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x0e,  0x0001,  0x0000000b,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" {NAME_5}!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" ...This is no time to be\nlying around!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0e,  0x0004,  0x00000006,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Ugegeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" Yes, no more wallowing in\nwoe-is-me self-pity.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0007,  0x00000000,  0x00000000, _(" If we give up, that's how\nit ends. Not for me.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x0e,  0x0001,  0x0000000b,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" {NAME_6}!\nAnd {NAME_7} too!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0004,  0x00000003,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Ugegegeh!\nYou lot, that wasn't the tune you\nwere whistling just a little...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Aye, that's right!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000005,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" There've got to be ways we can\nget through!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" If we all pull together, we'll be sure\nto find a way!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" We'll conquer the dungeon by\nhaving all the rescue teams cooperate!") },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Wrooooooooaaaar!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Ugegegegegegegegeh!{WAIT_PRESS}\nAre you dreaming?!") },
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 0),
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Don't say I didn't warn you\nwhen you get into a world of pain!\nUgegegegeh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x0a,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    WAIT(30),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Thank you, {NAME_1}.") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" You stopped us from\nthrowing away the most important thing\nwe have--pride.") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" My thanks from all of us.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Everyone!{WAIT_PRESS}\nIt's time to get to work!") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Let's show them what we\nrescue teams are really about!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Wrooooooaaaaar!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+static const struct ScriptCommand s_gs1_g28_s0_lives1_dlg0[] = { /* 0x815dbb8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000065,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004d,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x6b, 0x00,  0x0100,  0x00000066,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000067,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(464),
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(463),
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(5),
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x0002,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x08,  0x0001,  0x00000004,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x08,  0x0002,  0x00000001,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x08,  0x0001,  0x00000007,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x08,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x08,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x08,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x0002,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x0002,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(0, /* to label */ 0),
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g28_s0_lives2_dlg0[] = { /* 0x815e298 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(0, /* to label */ 0),
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g28_s0_lives3_dlg0[] = { /* 0x815e488 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000068,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000069,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    WAIT(30),
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    WAIT(15),
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x04,  0x0002,  0x00000002,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    WAIT(15),
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000069,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000006a,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000005,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000001,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_ANGRY_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0300,  0x0000006a,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g28_s0_lives4_dlg0[] = { /* 0x815eaa8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x001a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0017,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g28_s0_lives5_dlg0[] = { /* 0x815ebb8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0016,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0017,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g28_s0_lives6_dlg0[] = { /* 0x815ec78 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0016,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0017,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g28_s0_lives7_dlg0[] = { /* 0x815ed38 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x0001,  0x00000022,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000002,  0x00000000, NULL },
+    WAIT(60),
+    { 0x93, 0x04,  0x0001,  0x00000022,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(0, /* to label */ 0),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g28_s0_lives8_dlg0[] = { /* 0x815f118 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(0, /* to label */ 0),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g28_s0_lives9_dlg0[] = { /* 0x815f428 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x08,  0x000a,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x6b, 0x00,  0x0080,  0x0000006b,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(60, 120),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x6b, 0x00,  0x0080,  0x0000006c,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(60, 120),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    { 0x6b, 0x00,  0x0080,  0x0000006d,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(30),
+    { 0x6b, 0x00,  0x004c,  0x0000006e,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000008e,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000008e,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100, -0x00000010,  0x00000000, NULL },
+  LABEL(2), /* = 0x02 */
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(0, /* to label */ 2),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0080,  0x00000010,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g28_s0_lives10_dlg0[] = { /* 0x815f928 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(0, /* to label */ 0),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g28_s0_lives11_dlg0[] = { /* 0x815fc58 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x08,  0x000a,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x91, 0x08,  0x000a,  0x00000007,  0x00000000, NULL },
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(60, 120),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x91, 0x08,  0x000a,  0x00000001,  0x00000000, NULL },
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(60, 120),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(2), /* = 0x02 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 3),
+    { 0x91, 0x08,  0x000a,  0x00000007,  0x00000000, NULL },
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 3),
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(60, 120),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 3),
+    { 0x91, 0x08,  0x000a,  0x00000001,  0x00000000, NULL },
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 3),
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    WAIT_RANDOM(60, 120),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    JUMP_LABEL(2),
+  LABEL(3), /* = 0x03 */
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(4), /* = 0x04 */
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(0, /* to label */ 4),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g28_s0_lives12_dlg0[] = { /* 0x8160158 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(2), /* = 0x02 */
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 3),
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 3),
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT_RANDOM(15, 90),
+    JUMP_LABEL(2),
+  LABEL(3), /* = 0x03 */
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(4), /* = 0x04 */
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(0, /* to label */ 4),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g28_s0_lives13_dlg0[] = { /* 0x8160588 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(0, /* to label */ 0),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g28_s0_lives14_dlg0[] = { /* 0x8160898 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x08,  0x000a,  0x00000088,  0x00000000, NULL },
+    WAIT(30),
+    { 0x6b, 0x00,  0x0080,  0x0000006f,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000088,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100,  0x00000010,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(0, /* to label */ 0),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g28_s0_lives15_dlg0[] = { /* 0x8160c78 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(15),
+    { 0x62, 0x00,  0x0100,  0x00000000,  0x00000010, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100, -0x00000010,  0x00000010, NULL },
+    { 0x6a, 0x00,  0x0100, -0x00000008,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000055,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x93, 0x04,  0x000a,  0x0000005b,  0x00000000, NULL },
+    WAIT(15),
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(0, /* to label */ 0),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
+    WAIT_RANDOM(30, 90),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_station_sref_script[] = { /* 0x8161008 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    JUMP_STATION(  2,  0),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g29_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g29_s0_station_sref_script }; /* 0x8161048 */
+
+static const struct ScriptCommand s_gs1_g29_s0_lives0_dlg2[] = { /* 0x8161054 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000022,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_8N, 0, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_8N,  0,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Oh, my goodness, yes!\n{NAME_2}'s talk was such an\ninspiration!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It has stoked a raging fire\nin our hearts!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I will keep bringing in fine\nmerchandise!{WAIT_PRESS} This, I do for you!{WAIT_PRESS}\nSo...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives1_dlg2[] = { /* 0x81611f0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_8N, 1, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_8N,  1,  1),
+    EXECUTE_STATION(-1, 29, 1),
+    HALT,
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives2_dlg2[] = { /* 0x81612a0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_8N, 2, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_8N,  2,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Aren't you remarkable?{WAIT_PRESS}\nYour money will be jealously guarded,\nso feel secure on your outings!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives3_dlg2[] = { /* 0x81613b4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000022,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_8N, 3, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_8N,  3,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" {NAME_2}'s words struck\nme deeply.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You can count on me for all\nyour move-linking needs!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives4_dlg2[] = { /* 0x81614e0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_8N, 4, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_8N,  4,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Dear, I wasn't wrong about\nyou at all.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I always thought you weren't\nthe ordinary sort.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'll keep your valuables\nunder my watchful eye! You can go out and\nfight without worrying about them!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives5_dlg2[] = { /* 0x816167c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_8N, 5, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_8N,  5,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'll do my best to get more\nFriend Areas!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Because {NAME_0}'s team\nare my friends!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives6_dlg0[] = { /* 0x8161794 */
+    DEBUGINFO,
+    { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives6_dlg2[] = { /* 0x81617c4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x0000004d,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0003,  0x00000068,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x02,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" What's it like?\nThis {COLOR YELLOW_D}Magma Cavern{RESET}.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" It was teeming with tough\nPokémon, that's for sure.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I'm strong against fire...{WAIT_PRESS}\nbut that place is special.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives7_dlg0[] = { /* 0x8161948 */
+    DEBUGINFO,
+    { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives7_dlg2[] = { /* 0x8161978 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x0000004d,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0003,  0x00000068,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x02,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" What's it like?\nThis {COLOR YELLOW_D}Magma Cavern{RESET}.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" It was teeming with tough\nPokémon, that's for sure.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I'm strong against fire...{WAIT_PRESS}\nbut that place is special.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives8_dlg0[] = { /* 0x8161a58 */
+    DEBUGINFO,
+    { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives8_dlg2[] = { /* 0x8161a88 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x0000004f,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0003,  0x00000069,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x02,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" The {COLOR YELLOW_D}Magma Cavern{RESET}...\nAbove all, there were many Fire-type\nPokémon.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Fire-type Pokémon...{WAIT_PRESS}\nI think they would burn me up in no time...") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" But, no!{WAIT_PRESS}\nI mustn't make excuses for myself!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Now is the time for each\nand every one of us to make a stand!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives9_dlg0[] = { /* 0x8161c7c */
+    DEBUGINFO,
+    { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives9_dlg2[] = { /* 0x8161cac */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x0000004f,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0003,  0x00000069,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x02,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" The {COLOR YELLOW_D}Magma Cavern{RESET}...\nAbove all, there were many Fire-type\nPokémon.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Fire-type Pokémon...{WAIT_PRESS}\nI think they would burn me up in no time...") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" But, no!{WAIT_PRESS}\nI mustn't make excuses for myself!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Now is the time for each\nand every one of us to make a stand!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives10_dlg0[] = { /* 0x8161d9c */
+    DEBUGINFO,
+    { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives10_dlg2[] = { /* 0x8161dcc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000055,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0003,  0x0000006a,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x02,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Oi, you lot shouldn't go.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" The {COLOR YELLOW_D}Magma Cavern{RESET} is\nalive with flames. You'll be burned up!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" We can't do that!{WAIT_PRESS}\nWe are a rescue team too.\nWe can't stand by idly!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives11_dlg0[] = { /* 0x8161f5c */
+    DEBUGINFO,
+    { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives11_dlg2[] = { /* 0x8161f8c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000055,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0003,  0x0000006a,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x02,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Oi, you lot shouldn't go.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" The {COLOR YELLOW_D}Magma Cavern{RESET} is\nalive with flames. You'll be burned up!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" We can't do that!{WAIT_PRESS}\nWe are a rescue team too.\nWe can't stand by idly!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g29_s0_lives12_dlg2[] = { /* 0x816206c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Several rescue teams have\nalready left for the {COLOR YELLOW_D}Magma Cavern{RESET}.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" {NAME_0}, you guys take\ncare, too.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g29_s1_station_sref_script[] = { /* 0x8162144 */
+    DEBUGINFO,
+    SELECT_LIVES(-1, 1),
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g29_s1_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs1_g29_s1_station_sref_script }; /* 0x8162184 */
+
+static const struct ScriptCommand s_gs1_g29_s1_lives0_dlg0[] = { /* 0x8162190 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0001,  0x00000022,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x0c,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" {NAME_1}'s words\nshook me up with inspiration!") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Especially the part about\ntaking pride...{WAIT_PRESS} That made me...{WAIT_PRESS}\nIt left me choked up...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" It isn't just you, my brother.{WAIT_PRESS}\nI am likewise inspired beyond words.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" B-Brother...{WAIT_PRESS}\nSniffle... My brother...") },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I will do my best to obtain\neven better Technical Machines and Orbs.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" All with the pride of a\nmerchant!") },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    SELECT_LIVES(-1, 0),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g29_s1_lives1_dlg0[] = { /* 0x81624a0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g29_s1_lives2_dlg0[] = { /* 0x81624e0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g29_s1_lives2_dlg2[] = { /* 0x8162580 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000022,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_8N, 0, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_8N,  0,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Oh, my goodness, yes!\n{NAME_2}'s talk was such an\ninspiration!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It has stoked a raging fire\nin our hearts!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I will keep bringing in fine\nmerchandise!{WAIT_PRESS} This, I do for you!{WAIT_PRESS}\nSo...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g29_s1_lives3_dlg0[] = { /* 0x8162660 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g29_s1_lives3_dlg2[] = { /* 0x8162710 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_8N, 1, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_8N,  1,  1),
+    EXECUTE_STATION(-1, 29, 1),
+    HALT,
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_station_sref_script[] = { /* 0x81627c0 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    JUMP_STATION(  2,  0),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g30_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g30_s0_station_sref_script }; /* 0x8162800 */
+
+static const struct ScriptCommand s_gs1_g30_s0_lives0_dlg2[] = { /* 0x816280c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000022,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_8N, 0, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_8N,  0,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Oh, my goodness, yes!\n{NAME_2}'s talk was such an\ninspiration!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It has stoked a raging fire\nin our hearts!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I will keep bringing in fine\nmerchandise!{WAIT_PRESS} This, I do for you!{WAIT_PRESS}\nSo...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_lives1_dlg0[] = { /* 0x81628ec */
+    DEBUGINFO,
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_lives1_dlg2[] = { /* 0x816290c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_8N, 1, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_8N,  1,  1),
+    EXECUTE_STATION(-1, 30, 1),
+    HALT,
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_lives2_dlg2[] = { /* 0x81629bc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_8N, 2, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_8N,  2,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Aren't you remarkable?{WAIT_PRESS}\nYour money will be jealously guarded,\nso feel secure on your outings!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_lives3_dlg2[] = { /* 0x8162a6c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000022,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_8N, 3, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_8N,  3,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" {NAME_2}'s words struck\nme deeply.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You can count on me for all\nyour move-linking needs!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_lives4_dlg2[] = { /* 0x8162b3c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_8N, 4, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_8N,  4,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Dears, I wasn't wrong about\nyou at all.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I always thought you weren't\nthe ordinary sort.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'll keep your valuables\nunder my watchful eye! You can go out and\nfight without worrying about them!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_lives5_dlg2[] = { /* 0x8162c3c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_8N, 5, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_8N,  5,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'll do my best to get more\nFriend Areas!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Because {NAME_0}'s team\nare my friends!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_lives6_dlg0[] = { /* 0x8162cfc */
+    DEBUGINFO,
+    { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_lives6_dlg2[] = { /* 0x8162d2c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000068,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0003,  0x00000069,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0004,  0x0000006a,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0005,  0x0000006b,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x00,  0x0005, -0x00000002,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" We got wiped again...{WAIT_PRESS}\nFifteen times now we have been to that\ninfernal {COLOR YELLOW_D}Magma Cavern{RESET}.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Why does this keep\nhappening?{WAIT_PRESS}\nWe can't be that weak!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Maybe we're just lacking\nthe will to win.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" The will to win?{WAIT_PRESS}\nThat's it! This is about willpower!\nI didn't realize!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Darlings, we will will\nourselves to win, and we will win!") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Let's take it down! Groudon!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Hoorah!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_lives7_dlg0[] = { /* 0x8163090 */
+    DEBUGINFO,
+    { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_lives7_dlg2[] = { /* 0x81630c0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000068,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0003,  0x00000069,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0004,  0x0000006a,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0005,  0x0000006b,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x00,  0x0005, -0x00000002,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" We got wiped again...{WAIT_PRESS}\nFifteen times now we have been to that\ninfernal {COLOR YELLOW_D}Magma Cavern{RESET}.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Why does this keep\nhappening?{WAIT_PRESS}\nWe can't be that weak!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Maybe we're just lacking\nthe will to win.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" The will to win?{WAIT_PRESS}\nThat's it! This is about willpower!\nI didn't realize!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Darlings, we will will\nourselves to win, and we will win!") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Let's take it down! Groudon!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Hoorah!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_lives8_dlg0[] = { /* 0x81632a0 */
+    DEBUGINFO,
+    { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_lives8_dlg2[] = { /* 0x81632d0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000068,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0003,  0x00000069,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0004,  0x0000006a,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0005,  0x0000006b,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x00,  0x0005, -0x00000002,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" We got wiped again...{WAIT_PRESS}\nFifteen times now we have been to that\ninfernal {COLOR YELLOW_D}Magma Cavern{RESET}.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Why does this keep\nhappening?{WAIT_PRESS}\nWe can't be that weak!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Maybe we're just lacking\nthe will to win.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" The will to win?{WAIT_PRESS}\nThat's it! This is about willpower!\nI didn't realize!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Darlings, we will will\nourselves to win, and we will win!") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Let's take it down! Groudon!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Hoorah!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_lives9_dlg1[] = { /* 0x81634b0 */
+    DEBUGINFO,
+  LABEL(0), /* = 0x00 */
+    { 0x54, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100, -0x00000010,  0x00000000, NULL },
+    WAIT(10),
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(90),
+    { 0x6a, 0x00,  0x0100,  0x00000010,  0x00000000, NULL },
+    WAIT(90),
+    { 0x6a, 0x00,  0x0100,  0x00000010,  0x00000000, NULL },
+    WAIT(10),
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(90),
+    { 0x6a, 0x00,  0x0100, -0x00000010,  0x00000000, NULL },
+    WAIT(90),
+    JUMP_LABEL(0),
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_lives9_dlg2[] = { /* 0x81635b0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I ventured into the {COLOR YELLOW_D}Magma\nCavern{RESET}, but...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I got nowhere.{WAIT_PRESS}\nI got KO'd and kicked out as soon as I\nwent in...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" But I won't give up!\nNot ever!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_lives10_dlg2[] = { /* 0x81636d0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It's tough for us to get\nvery deep in there...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" But it helps that other\nrescue teams give us information about\nwhat's underground.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" However...{WAIT_PRESS}\nWhatever became of Alakazam?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" If he had fallen in\na dungeon, he would've been\nexpelled back here...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Since he hasn't returned,\ndoes it mean he's still in the dungeon?") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_lives11_dlg2[] = { /* 0x81638c0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I talked to other rescue\nteams.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" They all say the {COLOR YELLOW_D}Magma\nCavern{RESET} goes very deep.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I wonder exactly how deep\nit goes?") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g30_s0_lives12_dlg2[] = { /* 0x81639bc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I overheard some rescue\nteam Pokémon earlier.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" They say it's very taxing\nbecause it's so easy to get burns there.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Please be careful of burns,\n{NAME_0}.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g30_s1_station_sref_script[] = { /* 0x8163ad8 */
+    DEBUGINFO,
+    SELECT_LIVES(-1, 1),
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g30_s1_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs1_g30_s1_station_sref_script }; /* 0x8163b18 */
+
+static const struct ScriptCommand s_gs1_g30_s1_lives0_dlg0[] = { /* 0x8163b24 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0001,  0x00000022,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x0c,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" {NAME_1}'s words\nshook me up with inspiration!") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Especially the part about\ntaking pride...{WAIT_PRESS} That made me...{WAIT_PRESS}\nIt left me choked up...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" It isn't just you, my brother.{WAIT_PRESS}\nI am likewise inspired beyond words.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" B-Brother...{WAIT_PRESS}\nSniffle... My brother...") },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I will do my best to obtain\neven better Technical Machines and Orbs.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" All with the pride of a\nmerchant!") },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    SELECT_LIVES(-1, 0),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g30_s1_lives1_dlg0[] = { /* 0x8163cf4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g30_s1_lives2_dlg0[] = { /* 0x8163d34 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g30_s1_lives2_dlg2[] = { /* 0x8163dd4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000022,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_8N, 0, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_8N,  0,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Oh, my goodness, yes!\n{NAME_2}'s talk was such an\ninspiration!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It has stoked a raging fire\nin our hearts!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I will keep bringing in fine\nmerchandise!{WAIT_PRESS} This, I do for you!{WAIT_PRESS}\nSo...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g30_s1_lives3_dlg0[] = { /* 0x8163eb4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g30_s1_lives3_dlg2[] = { /* 0x8163f64 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E09A_8N, 1, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E09A_8N,  1,  1),
+    EXECUTE_STATION(-1, 30, 1),
+    HALT,
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_station_sref_script[] = { /* 0x8164014 */
+    DEBUGINFO,
+    BGM_STOP,
+    { 0x23, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x26, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    SELECT_MAP(1),
+    { 0x39, 0x00,  0x001e,  0x00000000,  0x00000000, _("{CENTER_ALIGN}And in the square...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    SELECT_ENTITIES(-1, -1),
+    BGM_SWITCH(7),
+    { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x28, 0x01,  0x0005,  0x00000014,  0x00ffffff, NULL },
+    WAIT(20),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g31_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs1_g31_s0_station_sref_script }; /* 0x816412c */
+
+
+static const struct ScriptCommand s_gs1_g31_s0_eff0_script[] = { /* 0x8164138 */
+    DEBUGINFO,
+    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000073,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives0_dlg0[] = { /* 0x81641b8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Is {NAME_0}'s team\nalmost here?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x10,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0003, -0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Look!\nHere they come!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" It's true, darlings!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Let's go!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    WAIT(90),
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x00cc,  0x00000074,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0004,  0x00000042,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Great work!\nGreat work, {NAME_0}!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x03,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0007,  0x00000000,  0x00000000, _(" You really took down that\nGroudon?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" Darlings, it's fantastic!{WAIT_PRESS}\nYou have won me over!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0e,  0x0001,  0x0000000c,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Whoa!\nW-wait a second!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" How does everyone know\nabout what happened underground?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0f,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0003,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Pelipper spread the word\nwith an extra edition of the Pokémon\nNews.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" You bunch became stronger\nthan I expected!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0007,  0x00000000,  0x00000000, _(" You can be proud of it!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x0d,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" You lot did great!{WAIT_PRESS}\nWhy don't we team up sometime?\nGahahahaha!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0008,  0x00000000,  0x00000000, _(" You've earned everyone's\nrespect now.") },
+    { 0x34, 0x00,  0x0008,  0x00000000,  0x00000000, _(" Your {COLOR CYAN}Team {TEAM_NAME}{RESET}\nis a first-class rescue team.") },
+    { 0x34, 0x00,  0x0008,  0x00000000,  0x00000000, _(" Take pride in that.{WAIT_PRESS}\n{NAME_1}, {NAME_0}.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    WAIT(5),
+    { 0x2e, 0x15,  0x0001,  0x00000008,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Sniff... Sniffle...{WAIT_PRESS}\n{NAME_0}!{WAIT_PRESS} This is great!")),
+    VARIANT(/* == */  1, _(" All the work we put in...\nIt was all worth it!")),
+    VARIANT(/* == */  3, _(" Sniff... Sniffle...{WAIT_PRESS}\n{NAME_0}!{WAIT_PRESS} I can't believe it!")),
+    VARIANT(/* == */  3, _(" Everything we experienced...\nIt was all worthwhile!")),
+    VARIANT_DEFAULT(_(" Sniff... Sniffle...{WAIT_PRESS}\n{NAME_0}!{WAIT_PRESS} This is great!")),
+    VARIANT_DEFAULT(_(" Every bit of our effort...\nIt was all worthwhile!")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Would you look at that?{WAIT_PRESS}\nI didn't think someone that could take down\nGroudon'd be such a crybaby! Gahahahaha!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    WAIT(90),
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    BGM_FADEOUT(30),
+    FANFARE_PLAY2(487),
+    { 0x28, 0x01,  0x0001,  0x0000000f,  0x00ffffff, NULL },
+    { 0x27, 0x01,  0x0001,  0x0000000f,  0x00ffffff, NULL },
+    WAIT(60),
+    FANFARE_PLAY2(468),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Huh?{WAIT_PRESS} What was that?") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" I thought I heard something\njust for a moment...{WAIT_PRESS}\nDid I just imagine it?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    FANFARE_PLAY2(487),
+    { 0x28, 0x01,  0x0001,  0x0000000f,  0x00ffffff, NULL },
+    { 0x27, 0x01,  0x0001,  0x0000000f,  0x00ffffff, NULL },
+    WAIT(60),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" No. I heard it too.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" Me too.{WAIT_PRESS}\nEven now, I hear it...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0007,  0x00000000,  0x00000000, _(" Someone talking?{WAIT_PRESS}\n...Not sure.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    FANFARE_PLAY2(487),
+    { 0x28, 0x01,  0x0001,  0x0000000f,  0x00ffffff, NULL },
+    { 0x27, 0x01,  0x0001,  0x0000000f,  0x00ffffff, NULL },
+    WAIT(60),
+    { 0x2d, 0x09,  0x0009,  0x00000061,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0001,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Th-this voice...{WAIT_PRESS}\nI remember this voice.")),
+    VARIANT(/* == */  1, _(" This voice...{WAIT_PRESS} I think...{WAIT_PRESS}\nThat's it! It's {NAME_9}!")),
+    VARIANT_DEFAULT(_(" Th-this voice...{WAIT_PRESS}\nI've heard it before.")),
+    VARIANT_DEFAULT(_(" This voice...{WAIT_PRESS} I'm sure...{WAIT_PRESS}\nThat's it! It's {NAME_9}!")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0008,  0x00000000,  0x00000000, _(" {NAME_9}?{WAIT_PRESS}\nAh, that's it! Telepathy!") },
+    { 0x34, 0x00,  0x0008,  0x00000000,  0x00000000, _(" {NAME_9} is calling out\nto us using telepathy!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    FANFARE_PLAY2(487),
+    { 0x28, 0x01,  0x0001,  0x0000000f,  0x00ffffff, NULL },
+    { 0x27, 0x01,  0x0001,  0x0000000f,  0x00ffffff, NULL },
+    WAIT(30),
+    BGM_SWITCH(19),
+    { 0x2e, 0x00,  0x0009, -0x00000002,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0009,  0x00000000,  0x00000000, _(" ...To all Pokémon!\nCalling all Pokémon!") },
+    { 0x34, 0x00,  0x0009,  0x00000000,  0x00000000, _(" Terrible, it is!{WAIT_PRESS}\nFrom the sky...{WAIT_PRESS} Falls a star...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+static const struct ScriptCommand s_gs1_g31_s0_lives1_dlg0[] = { /* 0x8165464 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x00cc,  0x00000075,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_ANGRY_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(3),
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    CALL_SCRIPT(LOOK_AROUND_FUNC),
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    CALL_SCRIPT(LOOK_AROUND_FUNC),
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives2_dlg0[] = { /* 0x8165654 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x0000007b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_START_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(QUESTION_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives3_dlg0[] = { /* 0x8165794 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_HAPPY_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000079,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0080, -0x00000008,  0x00000008, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x0c,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x0c,  0x000a,  0x00000001,  0x00000000, NULL },
+    WAIT(10),
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x0c,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x0c,  0x000a,  0x00000001,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x0c,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives4_dlg0[] = { /* 0x8165964 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x0000007a,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_HAPPY_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    CALL_SCRIPT(LOOK_AROUND_FUNC),
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    CALL_SCRIPT(LOOK_AROUND_FUNC),
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives5_dlg0[] = { /* 0x8165ab4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x0000007c,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_START_FUNC),
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x08,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(45),
+    { 0x91, 0x08,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x08,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(45),
+    { 0x91, 0x08,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives6_dlg0[] = { /* 0x8165c34 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_ANGRY_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x0000007d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x08,  0x000a,  0x00000004,  0x00000000, NULL },
+    WAIT(50),
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x08,  0x000a,  0x00000004,  0x00000000, NULL },
+    WAIT(50),
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives7_dlg0[] = { /* 0x8165d94 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x0000007e,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(LOOK_AROUND_FUNC),
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(LOOK_AROUND_FUNC),
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives8_dlg0[] = { /* 0x8165ea4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x00cc,  0x00000076,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000d,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives9_dlg0[] = { /* 0x8165f34 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x00cc,  0x00000077,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x0c,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT(45),
+    { 0x91, 0x0c,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x0c,  0x000a,  0x00000005,  0x00000000, NULL },
+    WAIT(45),
+    { 0x91, 0x0c,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives10_dlg0[] = { /* 0x8166034 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x00cc,  0x00000078,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x0c,  0x000a,  0x00000007,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x0c,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x0c,  0x000a,  0x00000007,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x0c,  0x000a,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0010,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives11_dlg0[] = { /* 0x8166134 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000084,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    CALL_SCRIPT(SMILE_START_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x91, 0x0c,  0x000a,  0x00000001,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x0c,  0x000a,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x91, 0x0c,  0x000a,  0x00000001,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x0c,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives12_dlg0[] = { /* 0x81662a4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(45),
+    { 0x6b, 0x00,  0x0100,  0x00000086,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(3),
+    CALL_SCRIPT(SMILE_START_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    { 0x91, 0x0c,  0x000a,  0x00000001,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x0c,  0x000a,  0x00000006,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x0c,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    { 0x91, 0x0c,  0x000a,  0x00000001,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x0c,  0x000a,  0x00000006,  0x00000000, NULL },
+    WAIT(15),
+    { 0x91, 0x0c,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives13_dlg0[] = { /* 0x8166474 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x6b, 0x00,  0x0100,  0x00000085,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(6),
+    CALL_SCRIPT(SMILE_START_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x08,  0x000a,  0x00000001,  0x00000000, NULL },
+    WAIT(45),
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x08,  0x000a,  0x00000001,  0x00000000, NULL },
+    WAIT(45),
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives14_dlg0[] = { /* 0x81665d4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000080,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(5),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(7),
+    { 0x91, 0x0c,  0x000a,  0x00000006,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x0c,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(7),
+    { 0x91, 0x0c,  0x000a,  0x00000006,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x0c,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives15_dlg0[] = { /* 0x8166724 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x6b, 0x00,  0x0100,  0x00000081,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives16_dlg0[] = { /* 0x81667f4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x0000007f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives17_dlg0[] = { /* 0x81668b4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(45),
+    { 0x6b, 0x00,  0x0100,  0x00000082,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(2),
+    CALL_SCRIPT(SMILE_START_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(3),
+    CALL_SCRIPT(LOOK_AROUND_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives18_dlg0[] = { /* 0x81669d4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x6b, 0x00,  0x0100,  0x00000083,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_START_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(12),
+    { 0x91, 0x0c,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(20),
+    { 0x91, 0x08,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    WAIT(12),
+    { 0x91, 0x0c,  0x000a,  0x00000002,  0x00000000, NULL },
+    WAIT(20),
+    { 0x91, 0x08,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives19_dlg0[] = { /* 0x8166b54 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives19_dlg2[] = { /* 0x8166b84 */
+    DEBUGINFO,
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives20_dlg0[] = { /* 0x8166ba4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g31_s0_lives20_dlg2[] = { /* 0x8166bd4 */
+    DEBUGINFO,
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_station_sref_script[] = { /* 0x8166bf4 */
+    DEBUGINFO,
+    SELECT_MAP(1),
+    SELECT_ENTITIES(-1, 0),
+    BGM_SWITCH(19),
+    { 0x27, 0x00,  0x0005,  0x00000020,  0x00ffffff, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g32_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs1_g32_s0_station_sref_script }; /* 0x8166c74 */
+
+static const struct ScriptCommand s_gs1_g32_s0_lives0_dlg0[] = { /* 0x8166c80 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x34, 0x00,  0x0008,  0x00000000,  0x00000000, _(" {NAME_9}.{WAIT_PRESS}\nTell us.") },
+    { 0x34, 0x00,  0x0008,  0x00000000,  0x00000000, _(" Can the falling star be\nstopped?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2d, 0x09,  0x0007,  0x0000006c,  0x00000000, NULL },
+    FANFARE_PLAY2(487),
+    { 0x28, 0x01,  0x0001,  0x0000000f,  0x00ffffff, NULL },
+    { 0x27, 0x01,  0x0001,  0x0000000f,  0x00ffffff, NULL },
+    WAIT(30),
+    { 0x2e, 0x00,  0x0009, -0x00000002,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0009,  0x00000000,  0x00000000, _(" ............{WAIT_PRESS}There is a way.") },
+    { 0x34, 0x00,  0x0009,  0x00000000,  0x00000000, _(" ...To prevent collision,\nthere is but one solution.") },
+    { 0x34, 0x00,  0x0009,  0x00000000,  0x00000000, _(" You must ask {NAME_7}.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x0d,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" {NAME_7}?{WAIT_PRESS}\nWhat might that be?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(487),
+    { 0x28, 0x01,  0x0001,  0x0000000f,  0x00ffffff, NULL },
+    { 0x27, 0x01,  0x0001,  0x0000000f,  0x00ffffff, NULL },
+    WAIT(30),
+    { 0x34, 0x00,  0x0009,  0x00000000,  0x00000000, _(" A Pokémon, living far above\nus in the sky.\nLegendary, it is.") },
+    { 0x34, 0x00,  0x0009,  0x00000000,  0x00000000, _(" {NAME_7} must be asked\nto destroy the star from the sky.") },
+    { 0x34, 0x00,  0x0009,  0x00000000,  0x00000000, _(" However...{WAIT_PRESS}\nFar, far up in the sky lives {NAME_7}.\nKnown by few and seen by none.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0008,  0x00000000,  0x00000000, _(" The sky...{WAIT_PRESS}\nHow are we to go there?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    FANFARE_PLAY2(487),
+    { 0x28, 0x01,  0x0001,  0x0000000f,  0x00ffffff, NULL },
+    { 0x27, 0x01,  0x0001,  0x0000000f,  0x00ffffff, NULL },
+    WAIT(30),
+    { 0x34, 0x00,  0x0009,  0x00000000,  0x00000000, _(" {NAME_8} and I\namplify our Teleport together...") },
+    { 0x34, 0x00,  0x0009,  0x00000000,  0x00000000, _(" And send Pokémon to the\nsky.") },
+    { 0x34, 0x00,  0x0009,  0x00000000,  0x00000000, _(" However...{WAIT_PRESS}\nThe sky is a world above the clouds.") },
+    { 0x34, 0x00,  0x0009,  0x00000000,  0x00000000, _(" What will become of the\nPokémon sent to the sky?{WAIT_PRESS}\nEven I can guess nothing...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x10,  0x0001,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Then, we'll do it!{WAIT_PRESS}\nWe'll go!")),
+    VARIANT(/* == */  3, _(" Then, we'll do it!{WAIT_PRESS}\nWe'll go!")),
+    VARIANT_DEFAULT(_(" Then, we'll do it!{WAIT_PRESS}\nWe'll go!")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0008,  0x00000000,  0x00000000, _(" I also...{WAIT_PRESS}\nI thought there could be none but you...") },
+    { 0x34, 0x00,  0x0008,  0x00000000,  0x00000000, _(" But...{WAIT_PRESS} Are you sure?{WAIT_PRESS}\nThere's no telling what you would find\nin that world above the clouds.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" We expect danger!")),
+    VARIANT(/* == */  1, _(" It's my wish that all\nPokémon can live in peace.")),
+    VARIANT(/* == */  3, _(" We expect danger!")),
+    VARIANT(/* == */  3, _(" It's my wish that all\nPokémon can live in peace.")),
+    VARIANT_DEFAULT(_(" We expect danger!")),
+    VARIANT_DEFAULT(_(" It's my wish that all\nPokémon can live in peace.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    FANFARE_PLAY2(487),
+    { 0x28, 0x01,  0x0001,  0x0000000f,  0x00ffffff, NULL },
+    { 0x27, 0x01,  0x0001,  0x0000000f,  0x00ffffff, NULL },
+    WAIT(30),
+    { 0x34, 0x00,  0x0009,  0x00000000,  0x00000000, _(" {NAME_1}, {NAME_0}.{WAIT_PRESS}\nDo you hear?{WAIT_PRESS} This is {NAME_9}.") },
+    { 0x34, 0x00,  0x0009,  0x00000000,  0x00000000, _(" Discuss we will,\n{NAME_8} and I, about how our\nTeleport can be amplified.") },
+    { 0x34, 0x00,  0x0009,  0x00000000,  0x00000000, _(" Departure, it is tomorrow.{WAIT_PRESS}\nRest you should until then.") },
+    { 0x34, 0x00,  0x0009,  0x00000000,  0x00000000, _(" Last word.{WAIT_PRESS}\nDangerous will be your adventure...{WAIT_PRESS}\nBut fail, you must not. Surpass yourselves.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" No problem!\nWe'll be fine!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Hey, {NAME_0}!\nLet's get it done!")),
+    VARIANT_DEFAULT(_(" Right, {NAME_0}?\nLet's get it done!")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+
+
+
+
+
+
+
+
+
+
+
+static const struct ScriptCommand s_gs1_g32_s0_lives1_dlg0[] = { /* 0x8167744 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_ANGRY_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_HAPPY_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_lives2_dlg0[] = { /* 0x8167814 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_lives3_dlg0[] = { /* 0x8167854 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x59, 0x00, -0x0008,  0x00000008,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_lives4_dlg0[] = { /* 0x81678a4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0004,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_lives5_dlg0[] = { /* 0x81678e4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0005,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_lives6_dlg0[] = { /* 0x8167924 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0006,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_lives7_dlg0[] = { /* 0x8167964 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0007,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_lives8_dlg0[] = { /* 0x81679a4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0008,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_lives9_dlg0[] = { /* 0x8167a04 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_lives10_dlg0[] = { /* 0x8167a34 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_lives11_dlg0[] = { /* 0x8167a64 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_lives12_dlg0[] = { /* 0x8167aa4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_lives13_dlg0[] = { /* 0x8167ae4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_lives14_dlg0[] = { /* 0x8167b24 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_lives15_dlg0[] = { /* 0x8167b64 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_lives16_dlg0[] = { /* 0x8167ba4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_lives17_dlg0[] = { /* 0x8167be4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g32_s0_lives18_dlg0[] = { /* 0x8167c24 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0014,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g33_s0_station_sref_script[] = { /* 0x8167c64 */
+    DEBUGINFO,
+    SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 1),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 9),
+    UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
+    UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
+    SELECT_MAP(1),
+    SELECT_ENTITIES(-1, 0),
+    SELECT_ENTITIES(0, 0),
+    CALL_STATION( 34,  0),
+    BGM_SWITCH(19),
+    { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g33_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs1_g33_s0_station_sref_script }; /* 0x8167d34 */
+
+static const struct ScriptCommand s_gs1_g33_s0_lives0_dlg0[] = { /* 0x8167d40 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(WAIT_START_FUNC),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g34_s0_station_sref_script[] = { /* 0x8167d80 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    RET_DIRECT,
+};
+
+static const struct ScriptRef s_gs1_g34_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g34_s0_station_sref_script }; /* 0x8167db0 */
+
+static const struct ScriptCommand s_gs1_g34_s0_lives0_dlg2[] = { /* 0x8167dbc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" {NAME_0}.")),
+    VARIANT_DEFAULT(_(" {NAME_0}.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    ASK3_VAR(FALSE, /*default*/ -1, /* speaker */ 1, PARTNER_TALK_KIND),
+    VARIANT(/* == */  1, _(" Are you all ready for\nthe sky?")),
+    VARIANT_DEFAULT(_(" Are you all ready for\nthe sky?")),
+    CHOICE(/* label */  2, _("All set!")),
+    CHOICE(/* label */  3, _("Not yet.")),
+  LABEL(3), /* = 0x03 */
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" All right.")),
+    VARIANT(/* == */  1, _(" Give me a shout when you're\nall set to go to the sky.")),
+    VARIANT_DEFAULT(_(" OK.")),
+    VARIANT_DEFAULT(_(" Just tell me when you're\nready to go to the sky.")),
+    JUMP_SCRIPT(END_TALK),
+  LABEL(2), /* = 0x02 */
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Great!\nLooks like you're all set to roll!")),
+    VARIANT(/* == */  1, _(" We leave tomorrow.")),
+    VARIANT(/* == */  1, _(" Let's get plenty of rest\ntonight and get set for tomorrow.")),
+    VARIANT(/* == */  1, _(" Tomorrow!{WAIT_PRESS}\nLet's give it everything we've got,\n{NAME_0}!")),
+    VARIANT_DEFAULT(_(" Yup!\nLooks like we're ready to go!")),
+    VARIANT_DEFAULT(_(" We leave tomorrow.")),
+    VARIANT_DEFAULT(_(" So let's get plenty of rest\nfor tomorrow.")),
+    VARIANT_DEFAULT(_(" Tomorrow!{WAIT_PRESS}\nLet's give it everything we can,\n{NAME_0}!")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    BGM_FADEOUT(150),
+    { 0x23, 0x01,  0x002d,  0x00000000,  0x00000000, NULL },
+    WAIT(180),
+    EXECUTE_FUNCTION(EVENT_M01E10A_L002),
+    HALT,
+};
+
+
+
+static const struct ScriptCommand s_gs1_g34_s0_lives1_dlg2[] = { /* 0x8168208 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_1N, 0, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_1N,  0,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" We hope you'll succeed!\nPlease don't give up!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g34_s0_lives2_dlg2[] = { /* 0x81682ec */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_1N, 1, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_1N,  1,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I also hope for your\nsuccess. Fight!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g34_s0_lives3_dlg2[] = { /* 0x81683c4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_1N, 2, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_1N,  2,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" {NAME_0}, you're our\none hope!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g34_s0_lives4_dlg2[] = { /* 0x8168494 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_1N, 3, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_1N,  3,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'm rooting for your\nsuccess, {NAME_0}!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g34_s0_lives5_dlg2[] = { /* 0x816856c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_1N, 4, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_1N,  4,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You'll do fine!{WAIT_PRESS}\nI'm sure you'll find success!\nHave confidence in yourselves!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g34_s0_lives6_dlg2[] = { /* 0x8168674 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_1N, 5, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_1N,  5,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I don't know what sort of\nPokémon Rayquaza is...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" But with you, I know it can\nbecome a friend!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g34_s0_lives7_dlg2[] = { /* 0x8168798 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Everything depends on you!\nDon't fail!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g34_s0_lives8_dlg2[] = { /* 0x8168824 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Darlings, I can't begin to\nimagine a world above the clouds...{WAIT_PRESS}\nThe best of luck!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g34_s0_lives9_dlg2[] = { /* 0x81688dc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Rayquaza is a legendary\nPokémon, isn't that right?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Getting to it sounds difficult\nenough...\nBut you can't fail!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g34_s0_lives10_dlg2[] = { /* 0x81689c4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" If anyone can do it, it's you!\nKeep your faith!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g34_s0_lives11_dlg2[] = { /* 0x8168a5c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" This is getting heavy!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" But I have this feeling\nthat you can do it.{WAIT_PRESS}\nWe need you to win!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g34_s0_lives12_dlg2[] = { /* 0x8168b28 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I will wait for you.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" {NAME_0}, I'm sure that\nyou will succeed and come back.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g34_s0_lives13_dlg2[] = { /* 0x8168be8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I will set out to confer\nwith Xatu.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You leave tomorrow.\nPrepare for your journey before then.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g34_s0_lives14_dlg2[] = { /* 0x8168cbc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'm throwing in my lot with\n{COLOR CYAN}Team {TEAM_NAME}{RESET}!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Get out there and save\nthe world!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g34_s0_lives15_dlg2[] = { /* 0x8168d80 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You can do it!{WAIT_PRESS}\nYou can stop the star from falling!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g35_s0_station_sref_script[] = { /* 0x8168e18 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    JUMP_STATION(  2,  0),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g35_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g35_s0_station_sref_script }; /* 0x8168e58 */
+
+static const struct ScriptCommand s_gs1_g35_s0_lives0_dlg2[] = { /* 0x8168e64 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_3N, 0, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_3N,  0,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I see you're heading out\nsoon.\nThe best of luck!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g35_s0_lives1_dlg2[] = { /* 0x8168f48 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_3N, 1, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_3N,  1,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Ah, you're leaving?\nGood luck!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g35_s0_lives2_dlg2[] = { /* 0x816901c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_3N, 2, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_3N,  2,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" {NAME_0}, don't let us\ndown!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g35_s0_lives3_dlg2[] = { /* 0x81690ec */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_3N, 3, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_3N,  3,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'm rooting for you!\nGo get 'em, {NAME_0}!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g35_s0_lives4_dlg2[] = { /* 0x81691cc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_3N, 4, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_3N,  4,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" This is it, isn't it?\nMake us proud!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g35_s0_lives5_dlg2[] = { /* 0x81692a8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_3N, 5, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_3N,  5,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Are you heading out now?\nDon't give up!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g35_s0_lives6_dlg2[] = { /* 0x8169384 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You're going, hey?\nBuckle down and get it done!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g35_s0_lives7_dlg2[] = { /* 0x816941c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" {NAME_0}, take care,\ndarling.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g35_s0_lives8_dlg2[] = { /* 0x816949c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I can't even imagine what's\nup in the sky, but be brave!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g35_s0_lives9_dlg2[] = { /* 0x816953c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Go with care!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g35_s0_lives10_dlg2[] = { /* 0x81695ac */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Oh, yeah. Leaving soon?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Give it your best shot!\nDon't you lose!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g35_s0_lives11_dlg2[] = { /* 0x8169664 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You guys can do it for sure!\nThere's nothing to worry about!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Go with confidence!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g35_s0_lives12_dlg2[] = { /* 0x816972c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Go for it! Take care!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g35_s0_lives13_dlg2[] = { /* 0x81697a4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" WE CAME TO WISH YOU\nWELL TOO! BZBZBZZZT!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g35_s0_lives14_dlg2[] = { /* 0x8169830 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" SAVE THE WORLD!\nBZBZBZZ!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g36_s0_station_sref_script[] = { /* 0x81698ac */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    JUMP_STATION(  2,  0),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g36_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g36_s0_station_sref_script }; /* 0x81698ec */
+
+static const struct ScriptCommand s_gs1_g36_s0_lives0_dlg2[] = { /* 0x81698f8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_5N, 0, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_5N,  0,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You still have everything\nto prove!\nThe best of luck!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g36_s0_lives1_dlg2[] = { /* 0x81699e0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_5N, 1, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_5N,  1,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" {NAME_0}, I'm certain\nthat you will succeed!\nGood luck!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g36_s0_lives2_dlg2[] = { /* 0x8169ac8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_5N, 2, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_5N,  2,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It must be difficult, but\ndon't let us down!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g36_s0_lives3_dlg2[] = { /* 0x8169bac */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_5N, 3, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_5N,  3,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You're not finished yet!\nI hope I can serve you in good stead!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g36_s0_lives4_dlg2[] = { /* 0x8169ca0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_5N, 4, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_5N,  4,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I know you too well.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You're not about to ever\ngive up!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Your fight's only begun!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g36_s0_lives5_dlg2[] = { /* 0x8169dcc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M01E10A_5N, 5, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M01E10A_5N,  5,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Everyone hopes you reach\nRayquaza.\nKeep it up!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g36_s0_lives6_dlg2[] = { /* 0x8169eac */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" From failure comes success.\nKeep your faith!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g36_s0_lives7_dlg2[] = { /* 0x8169f3c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Darling, you've only begun.{WAIT_PRESS}\n{NAME_0}, keep your chin up!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g36_s0_lives8_dlg2[] = { /* 0x8169fdc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Huh? There's a tower of\nclouds in the sky?!{WAIT_PRESS}\nIt exists? Amazing!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g36_s0_lives9_dlg2[] = { /* 0x816a084 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I know exactly how gutsy\nyou are.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" This is just a setback!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g36_s0_lives10_dlg2[] = { /* 0x816a134 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Go for it!\nDon't you lose!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g36_s0_lives11_dlg2[] = { /* 0x816a1b4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You'll be fine!\nGo with confidence!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g36_s0_lives12_dlg2[] = { /* 0x816a23c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Get it done the next time!\nKeep at it!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g36_s0_lives13_dlg2[] = { /* 0x816a2c4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" IT'S NOT OVER YET!\nBZBZBZZ!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g36_s0_lives14_dlg2[] = { /* 0x816a344 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" THE TIME IS NOW!\nSAVE THE WORLD! BZBZBZZ!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g37_s0_station_sref_script[] = { /* 0x816a3d0 */
+    DEBUGINFO,
+    SELECT_MAP(1),
+    SELECT_ENTITIES(-1, -1),
+    { 0x22, 0x01,  0x002d,  0x00000000,  0x00000000, NULL },
+    WAIT(240),
+    { 0x23, 0x01,  0x002d,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g37_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs1_g37_s0_station_sref_script }; /* 0x816a440 */
+
+static const struct ScriptCommand s_gs1_g37_s0_eff0_script[] = { /* 0x816a44c */
+    DEBUGINFO,
+    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0099,  0x00000087,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g38_s0_station_sref_script[] = { /* 0x816a48c */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    JUMP_STATION(  2,  0),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g38_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs1_g38_s0_station_sref_script }; /* 0x816a4cc */
+
+static const struct ScriptCommand s_gs1_g38_s0_lives0_dlg2[] = { /* 0x816a4d8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M02E01A_2N, 0, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M02E01A_2N,  0,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Yes! You did it,\n{NAME_0}!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Now that peace has been\nrestored, I can sell my wares with\npeace of mind.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Thank you so much!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g38_s0_lives1_dlg2[] = { /* 0x816a628 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M02E01A_2N, 1, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M02E01A_2N,  1,  1),
+    EXECUTE_STATION(-1, 38, 1),
+    HALT,
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g38_s0_lives2_dlg2[] = { /* 0x816a6d8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M02E01A_2N, 2, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M02E01A_2N,  2,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Peace has returned!\nThank you, {NAME_0}!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g38_s0_lives3_dlg2[] = { /* 0x816a7b0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M02E01A_2N, 3, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M02E01A_2N,  3,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Thank you so much!\nI can keep my shop running, thanks to you!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g38_s0_lives4_dlg2[] = { /* 0x816a8a4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M02E01A_2N, 4, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M02E01A_2N,  4,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You did it! Good for you!\nThat is so cool!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g38_s0_lives5_dlg2[] = { /* 0x816a980 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M02E01A_2N, 5, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M02E01A_2N,  5,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It's peaceful again!\nThank you! I never expected less from\nyou, my friend!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g38_s0_lives6_dlg2[] = { /* 0x816aa80 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You guys were amazing...{WAIT_PRESS}\nTruly, you've impressed me.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g38_s0_lives7_dlg2[] = { /* 0x816ab1c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You've done it,\n{NAME_0}!\nYou're the greatest! Really!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g38_s0_lives8_dlg2[] = { /* 0x816abb8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000022,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" {NAME_0}! {NAME_2}!\nYou both hung in there! Great job!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ...But you're still not up to\nour caliber!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g38_s0_lives9_dlg2[] = { /* 0x816ac98 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" We're here now because\nyou succeeded! You have my thanks!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ...Of course, we did our bit\nto help too!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g38_s0_lives10_dlg2[] = { /* 0x816ad78 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" THANK YOU, BZBZBZZ!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g38_s0_lives11_dlg2[] = { /* 0x816adf0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" AWESOME! AWESOME!\nBZBZBZZZT!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g38_s0_lives12_dlg2[] = { /* 0x816ae70 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000022,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" We will soon be departing\nthe area.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Sincerely, thank you for\nall the help and kindness you've given us.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" {NAME_0} and\n{NAME_2}, please do take care!") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g38_s0_lives13_dlg2[] = { /* 0x816af9c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0002,  0x00000022,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" We will soon be leaving\nthis area.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" We Jumpluff travel the\nworld, carried wherever the winds will\ntake us.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" {NAME_0} and\n{NAME_2}, we owe so much to you.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Thank you for everything.{WAIT_PRESS}\nMay we meet again.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g38_s1_station_sref_script[] = { /* 0x816b104 */
+    DEBUGINFO,
+    SELECT_LIVES(-1, 1),
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g38_s1_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs1_g38_s1_station_sref_script }; /* 0x816b144 */
+
+static const struct ScriptCommand s_gs1_g38_s1_lives0_dlg0[] = { /* 0x816b150 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0001,  0x00000022,  0x00000000, NULL },
+    WAIT(1),
+    { 0x2e, 0x0c,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I'm all shaken up with\nemotion!") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Knowing that the square will\nbe safe...{WAIT_PRESS} That made me...{WAIT_PRESS}\nIt left me choked up...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" It isn't just you, my brother.{WAIT_PRESS}\nI am likewise overcome with joy.") },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" B-Brother...{WAIT_PRESS}\nSniffle... My brother...") },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" {NAME_0} and\n{NAME_1}...{WAIT_PRESS}\nWe only have gratitude for you.") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Thank you ever so much!") },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g38_s1_lives1_dlg0[] = { /* 0x816b424 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g38_s1_lives1_dlg2[] = { /* 0x816b4d4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M02E01A_2N, 0, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M02E01A_2N,  0,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Oh, my, you've outdone\nyourself, {NAME_0}!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Because peace has been\nrestored, I may go about securely in my\nbusiness.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Thank you ever so much!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g38_s1_lives2_dlg0[] = { /* 0x816b620 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g38_s1_lives2_dlg2[] = { /* 0x816b6f0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_M02E01A_2N, 1, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_M02E01A_2N,  1,  1),
+    EXECUTE_STATION(-1, 38, 1),
+    HALT,
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g39_s0_lives0_dlg2[] = { /* 0x816b7a0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    ASK3(FALSE, /*default*/ -1, /* speaker */ 1, _(" Have you made room so\nI may join your rescue team?")),
+    CHOICE(/* label */  0, _("Yes.")),
+    CHOICE(/* label */  1, _("No.")),
+  LABEL(0), /* = 0x00 */
+    { 0x3b, 0x1d,  0x0000,  0x00000000,  0x00000000, NULL },
+    COND_EQUAL(1, /* to label */ 2),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Thank you!") },
+    FANFARE_PLAY(204),
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}{NAME_1} \n{CENTER_ALIGN}became a member!") },
+    { 0xe1, 0x00,  0x00cc,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x3b, 0x1e,  0x0000,  0x00000000,  0x00000000, NULL },
+    ASK1(FALSE, /*default*/ -1, /* speaker */ -1, _("Give a nickname to {NAME_1}?")),
+    CHOICE(/* label */  3, _("*Yes.")),
+    CHOICE(/* label */  4, _("No.")),
+  LABEL(3), /* = 0x03 */
+    { 0x3d, 0x00,  0x0000, -0x00000001,  0x00000000, NULL },
+  LABEL(4), /* = 0x04 */
+    { 0x3b, 0x1f,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    SCENARIO_CALC(SCENARIO_SUB1, 32,  3),
+    { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    CANCEL_ENTITIES(39, -1),
+    WAIT(30),
+    { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+  LABEL(2), /* = 0x02 */
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Yes!\nThank you!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ...But there appears to be\nno room for me in my Friend Area...{WAIT_PRESS}\nHow disappointing...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I would be able to join your\nrescue team if there were less Pokémon\nin {COLOR GREEN}Sky Blue Plains{RESET}...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Please let me know then.") },
+    JUMP_SCRIPT(END_TALK),
+  LABEL(1), /* = 0x01 */
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Oh, I see...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" There still is no room for\nme in the Friend Area I must go to...\nHow disappointing...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I would be able to join your\nrescue team if there were less Pokémon\nin {COLOR GREEN}Sky Blue Plains{RESET}...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Please let me know then.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g40_s0_lives0_dlg0[] = { /* 0x816bc04 */
+    DEBUGINFO,
+    { 0x4f, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g40_s0_lives0_dlg2[] = { /* 0x816bc34 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 0),
+    WAIT(1),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Huh? What's that?{WAIT_PRESS}\n...Oh, you mean what happened at sea?") },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I wasn't drowning!{WAIT_PRESS}\nSheesh, they're making up stories about\nme!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x15,  0x0001,  0x00000000,  0x00000000, NULL },
+    ASK3( TRUE, /*default*/ -1, /* speaker */ 1, _(" Want to know what really\nhappened?")),
+    CHOICE(/* label */  2, _("Yes.")),
+    CHOICE(/* label */  3, _("No.")),
+  LABEL(3), /* = 0x03 */
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Tch! Fine, then!\nHumph!") },
+    RESET_ARRAY(EVENT_LOCAL),
+    JUMP_SCRIPT(END_TALK),
+  LABEL(2), /* = 0x02 */
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    { 0x2e, 0x15,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" See, I went out to the sea\nto frolic a while back.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You know?{WAIT_PRESS}\nI was trying that Dive thing.") },
+    { 0x2e, 0x15,  0x0001,  0x00000003,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" So, I was having fun\ngoing underwater...{WAIT_PRESS}\nAnd I got washed out to sea a bit.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" All of a sudden, these\nwicked clouds rolled in...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" And before I knew it, there\nwas a full-blown storm raging!") },
+    { 0x2e, 0x15,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" There's more!{WAIT_PRESS}\nA dungeon appeared in the sea!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I was shocked witless!\nI got out of there fast!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" But who'd've guessed it?\nA dungeon in a stormy sea!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x54, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(45),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    FANFARE_PLAY2(468),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Huh?{WAIT_PRESS}\nYou want to know more about that\ndungeon in the sea?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I vamoosed it out of there,\nso I can't tell you much...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    FANFARE_PLAY2(465),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I know!{WAIT_PRESS}\nMaybe Whiscash would know something.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Yeah, that'd be best.\nGo talk to Whiscash.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    RESET_ARRAY(EVENT_LOCAL),
+    JUMPIF_SCENE_GT(SCENARIO_SUB2, 33, 3, /* to label */ 4),
+    SCENARIO_CALC(SCENARIO_SUB2, 33,  3),
+  LABEL(4), /* = 0x04 */
+    JUMP_SCRIPT(END_TALK),
+};
+
+
+
+static const struct ScriptCommand s_gs1_g40_s0_lives0_dlg3[] = { /* 0x816c390 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005e,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(0, /* to label */ 0),
+    CALL_SCRIPT(QUESTION_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x92, 0x04,  0x000b,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x92, 0x04,  0x000b,  0x00000005,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+  LABEL(0), /* = 0x00 */
+    { 0x8d, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    WAIT(12),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g41_s0_lives0_dlg0[] = { /* 0x816c510 */
+    DEBUGINFO,
+    { 0x4f, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g41_s0_lives0_dlg2[] = { /* 0x816c540 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I have heard of a weather\nanomaly afflicting a certain sea.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" They say a whirlpool\nstretches from sea to sky in a\ncolossal tornado.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It is said to be near the\n{COLOR GREEN}Legendary Island{RESET} Friend Area.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It hasn't caused any damage\nso far as I know...{WAIT_PRESS}\nBut it does concern me.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" The {COLOR GREEN}Legendary Island{RESET}\nbelongs to your team.") },
+    ASK3( TRUE, /*default*/ -1, /* speaker */ 1, _(" Will you travel to the\n{COLOR GREEN}Legendary Island{RESET} and observe what is\ntaking place?")),
+    CHOICE(/* label */  2, _("Yes.")),
+    CHOICE(/* label */  3, _("No.")),
+  LABEL(3), /* = 0x03 */
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Feeling contrary today?{WAIT_PRESS}\nWe need your help, please.") },
+    ASK3( TRUE, /*default*/ -1, /* speaker */ 1, _(" Will you travel to the\n{COLOR GREEN}Legendary Island{RESET} and observe what is\ntaking place?")),
+    CHOICE(/* label */  2, _("Yes.")),
+    CHOICE(/* label */  3, _("No.")),
+  LABEL(2), /* = 0x02 */
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Ah, good.\nYou accept the job.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I hope for the best from\nyou.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMPIF_SCENE_GT(SCENARIO_SUB2, 34, 2, /* to label */ 4),
+    SCENARIO_CALC(SCENARIO_SUB2, 34,  2),
+  LABEL(4), /* = 0x04 */
+    JUMP_SCRIPT(END_TALK),
+};
+
+
+
+static const struct ScriptCommand s_gs1_g41_s0_lives0_dlg3[] = { /* 0x816c958 */
+    DEBUGINFO,
+    { 0x52, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00000400,  0x00000000, NULL },
+    { 0x8d, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x8d, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    WAIT(12),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g42_s0_lives0_dlg2[] = { /* 0x816ca38 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0001,  0x0000004d,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It's cool and all that it's\npeaceful, but...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" There's also been no\nexcitement. It's a little sad.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I wish there was some\npizzazz to spice things up...") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g42_s0_lives1_dlg0[] = { /* 0x816cb70 */
+    DEBUGINFO,
+    CANCEL_ENTITIES(1, 0),
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g42_s0_lives1_dlg2[] = { /* 0x816cba0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0001,  0x0000004f,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Good morning.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Ahh... Another refreshing\nday...") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g42_s0_lives2_dlg2[] = { /* 0x816cc54 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g42_s0_lives3_dlg2[] = { /* 0x816ccb4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g42_s0_lives4_dlg2[] = { /* 0x816cd14 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g42_s0_lives5_dlg2[] = { /* 0x816cd74 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g42_s0_lives6_dlg2[] = { /* 0x816cdd4 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g42_s0_evt0_sref_script[] = { /* 0x816ce34 */
+    DEBUGINFO,
+    EXECUTE_STATION(-1, 43, 0),
+    HALT,
+};
+
+static const struct ScriptRef s_gs1_g42_s0_evt0_sref = { 57, 7, NULL /* NORMAL_EVENT */, s_gs1_g42_s0_evt0_sref_script }; /* 0x816ce64 */
+
+static const struct ScriptCommand s_gs1_g43_s0_station_sref_script[] = { /* 0x816ce70 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, 0),
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    BGM_FADEOUT(60),
+    { 0x23, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
+    EXECUTE_FUNCTION(EVENT_S04E01A_L001),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g43_s0_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs1_g43_s0_station_sref_script }; /* 0x816cef0 */
+
+static const struct ScriptCommand s_gs1_g43_s0_eff0_script[] = { /* 0x816cefc */
+    DEBUGINFO,
+    { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0200, -0x00000100,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g43_s0_lives0_dlg0[] = { /* 0x816cf4c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x11,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Oh?") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Who is that? Over there.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Never seen it before.{WAIT_PRESS}\nIt's not from around these parts.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    BGM_FADEOUT(120),
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    WAIT(20),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x58, 0x01,  0x0000,  0x000001c0,  0x00000138, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" No more...{WAIT_PRESS}\nI can't walk anymore...") },
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" I'm falling down...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Goodness!{WAIT_PRESS}\nIt needs help!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x01cc, -0x000000a0,  0x00000000, NULL },
+    HALT,
+};
+
+
+
+
+
+static const struct ScriptCommand s_gs1_g43_s0_lives1_dlg0[] = { /* 0x816d2cc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x8e, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x58, 0x01,  0x0000,  0x000001d0,  0x00000150, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x01cc, -0x000000c8,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g43_s0_lives2_dlg0[] = { /* 0x816d39c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    WAIT(10),
+    FANFARE_PLAY2(469),
+    CALL_SCRIPT(QUESTION_FUNC),
+    { 0xe2, 0x00,  0x01d4,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x58, 0x01,  0x0000,  0x000001f0,  0x00000138, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x01cc, -0x000000c8,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g43_s0_lives3_dlg0[] = { /* 0x816d48c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe2, 0x00,  0x01d1,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x58, 0x01,  0x0000,  0x000001f0,  0x00000150, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x01cc, -0x000000c8,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g43_s0_lives4_dlg0[] = { /* 0x816d56c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    { 0x54, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000008, -0x00000008, NULL },
+    WAIT(60),
+    { 0x6a, 0x00,  0x0100,  0x00000008,  0x00000008, NULL },
+    WAIT(60),
+    { 0x6a, 0x00,  0x0100,  0x00000008, -0x00000008, NULL },
+    FANFARE_PLAY2(468),
+    { 0xe2, 0x00,  0x01d4,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(468),
+    WAIT(45),
+    { 0x6a, 0x00,  0x0100,  0x00000008,  0x00000008, NULL },
+    FANFARE_PLAY2(468),
+    { 0xe2, 0x00,  0x01d4,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(468),
+    WAIT(45),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(809),
+    { 0x54, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x01,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe2, 0x00,  0x0329,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0016,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(510),
+    WAIT(60),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g44_s0_lives0_dlg2[] = { /* 0x816d78c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x09,  0x0001,  0x00000073,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I...{WAIT_PRESS}\nI've given up on ever seeing the mirage\nPokémon...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I...{WAIT_PRESS}\nI've reached the limit of my endurance...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I'm as tired as tired can\nbe...") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct ScriptCommand s_gs1_g45_s0_lives0_dlg2[] = { /* 0x816d8b4 */
+    DEBUGINFO,
+    EXECUTE_STATION(-1, 45, 1),
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g45_s1_station_sref_script[] = { /* 0x816d8e4 */
+    DEBUGINFO,
+    SELECT_ENTITIES(-1, -1),
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    SCENARIO_CALC(SCENARIO_SUB4, 43,  2),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g45_s1_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs1_g45_s1_station_sref_script }; /* 0x816d934 */
+
+static const struct ScriptCommand s_gs1_g45_s1_lives0_dlg0[] = { /* 0x816d940 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Wh-wh-wh-what?!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" You've seen the mirage\nPokémon?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Wh-wh-what sort of a\nPokémon was it?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ...I see.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ............I see, I see.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ...Ah... Understood.\nSo, it is named Ho-Oh...") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Ah, I see indeed!{WAIT_PRESS}\nTruly!{WAIT_PRESS} Truly, I envy you!") },
+    { 0x3b, 0x23,  0x0000,  0x00000000,  0x00000000, NULL },
+    COND_EQUAL(0, /* to label */ 1),
+    COND_EQUAL(1, /* to label */ 1),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ...Wait!{WAIT_PRESS} Huh?!{WAIT_PRESS}\nYou are!{WAIT_PRESS} You are the one-and-only Ho-Oh?!") },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+  LABEL(1), /* = 0x01 */
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x3b, 0x23,  0x0000,  0x00000000,  0x00000000, NULL },
+    COND_EQUAL(2, /* to label */ 2),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Wroooooooah!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" I...{WAIT_PRESS} You...{WAIT_PRESS}\nYou've made me open my eyes!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Well, they still look googly,\nbut still...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" The lesson is: we mustn't\never give up!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Because if you give up,\nthat's when it ends!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Thank you!{WAIT_PRESS}\nYou have inspired me to resume my\ntravels!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" I will again travel the\nworld to find rare Pokémon, perhaps even\nbefore you.{WAIT_PRESS} Farewell!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_LABEL(3),
+  LABEL(2), /* = 0x02 */
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Waaaaaaaaaaaah!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" My head...{WAIT_PRESS} Is spinning...{WAIT_PRESS}\nMy head's spinning...{WAIT_PRESS} Waaaaaah!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    WAIT(90),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" I'm so sorry I keeled over\nlike that...") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" And you even came to my\naid when I was down...{WAIT_PRESS}\nThank you...") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" But I...{WAIT_PRESS}\nI'm feeling overcome by emotion.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Never...{WAIT_PRESS}\nNever did I expect to meet the mirage\nPokémon...") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" I feel giddily elated...") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" The lesson is we mustn't\never give up!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Because if you give up,\nthat's when it ends!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Thank you!{WAIT_PRESS}\nYou have inspired me to resume my\ntravels!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" My meeting you...\nIt will be a memory I will cherish\nforever!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" I will keep the memory...{WAIT_PRESS}\nin a special place deep in my heart!{WAIT_PRESS}\nFarewell!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(3), /* = 0x03 */
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00000004,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100, -0x00000020,  0x00000000, NULL },
+    { 0x8e, 0x0f,  0x000a,  0x00000073,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
+    RET,
+};
+
+
+static const struct ScriptCommand s_gs1_g45_s1_lives1_dlg0[] = { /* 0x816e32c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe2, 0x00,  0x01d1,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x54, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x3b, 0x23,  0x0000,  0x00000000,  0x00000000, NULL },
+    COND_EQUAL(0, /* to label */ 0),
+    COND_EQUAL(1, /* to label */ 0),
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    WAIT(20),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x54, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(762),
+    { 0x54, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe2, 0x00,  0x02fa,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(510),
+    WAIT(60),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x3b, 0x23,  0x0000,  0x00000000,  0x00000000, NULL },
+    COND_EQUAL(2, /* to label */ 1),
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    WAIT(80),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    JUMP_LABEL(2),
+  LABEL(1), /* = 0x01 */
+    FANFARE_PLAY2(473),
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe2, 0x00,  0x01d9,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    WAIT(80),
+    { 0x54, 0x00,  0x0016,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(510),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+  LABEL(2), /* = 0x02 */
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
+    WAIT(20),
+    { 0x54, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x6a, 0x00,  0x0100,  0x00000008,  0x00000010, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x6a, 0x00,  0x0100, -0x00000008,  0x00000010, NULL },
+    WAIT(60),
+    { 0x6a, 0x00,  0x0100,  0x00000008,  0x00000010, NULL },
+    WAIT(60),
+    { 0x6a, 0x00,  0x0100, -0x00000008,  0x00000010, NULL },
+    WAIT(60),
+    { 0x6a, 0x00,  0x0100,  0x00000008,  0x00000010, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x6a, 0x00,  0x0100, -0x00000008,  0x00000010, NULL },
+    WAIT(60),
+    { 0x6a, 0x00,  0x0100,  0x00000008,  0x00000010, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x6a, 0x00,  0x0100, -0x00000008,  0x00000010, NULL },
+    WAIT(30),
+    { 0x6a, 0x00,  0x0100,  0x00000008,  0x00000010, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g46_s0_station_sref_script[] = { /* 0x816e8bc */
+    DEBUGINFO,
+    SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 1),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 9),
+    UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
+    UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
+    SELECT_MAP(1),
+    SELECT_ENTITIES(-1, 0),
+    BGM_SWITCH(7),
+    { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g46_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs1_g46_s0_station_sref_script }; /* 0x816e97c */
+
+static const struct ScriptCommand s_gs1_g46_s0_eff0_script[] = { /* 0x816e988 */
+    DEBUGINFO,
+    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100, -0x00000020,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g46_s0_lives0_dlg0[] = { /* 0x816e9f8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x2e, 0x0d,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0c,  0x0005,  0x00000001,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" ...I've always wondered...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(15),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Who would be the most\npowerful Pokémon of all?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" What, there's someone\nbesides Rayquaza?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Is that it?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Well, sheesh, Rayquaza\ndestroyed a star!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Wobbuffet!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Who else but Rayquaza\nwould be able to do that?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Wobbuffet!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" But there's Groudon.\nIsn't that tough?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Is that true?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Why, even Alakazam's team\ncouldn't defeat it!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Wobbuffet!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Legend has it that Groudon\nshaped continents.\nIt's an incredible Pokémon!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Wobbuffet!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x6b, 0x00,  0x0100,  0x00000089,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Hey, you came along at\nthe right time.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" We're having a little\nargument about who the most powerful\nPokémon happens to be.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" {NAME_0}, what do you\nthink?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    ASK3( TRUE, /*default*/ -1, /* speaker */ 2, _(" Who do you think is the\nmost powerful Pokémon?")),
+    CHOICE(/* label */  5, _("Rayquaza.")),
+    CHOICE(/* label */  6, _("Groudon.")),
+    CHOICE(/* label */  7, _("Me.")),
+  LABEL(5), /* = 0x05 */
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    FANFARE_PLAY2(465),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Oh, yeah?\n{NAME_0}, you think so too?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0002,  0x00000002,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Yeah, you bet it is!{WAIT_PRESS}\nRayquaza is the toughest!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_LABEL(8),
+  LABEL(6), /* = 0x06 */
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 2),
+    FANFARE_PLAY2(465),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Ah, yes!\n{NAME_0}! Isn't that right!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Groudon is the most\npowerful when all's said and done!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_LABEL(8),
+  LABEL(7), /* = 0x07 */
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 3),
+    FANFARE_PLAY2(470),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0003,  0x00000001,  0x00000000, NULL },
+    { 0x2e, 0x07,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x11,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _("....................................") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _("...................................") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _("....................................") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _("....................................") },
+    { 0x35, 0x00, -0x0001,  0x00000000,  0x00000000, _("...............................................................\n...............................................................\n...............................................................") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ...{WAIT_PRESS}Well, uh...{WAIT_PRESS}\nI know you want to become tougher, but...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I hope you never give up\nchasing your dreams.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+  LABEL(8), /* = 0x08 */
+    { 0x2e, 0x0d,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0c,  0x0005,  0x00000001,  0x00000000, NULL },
+    WAIT(60),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" ...Um...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000006d,  0x00000000, NULL },
+    WAIT(60),
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" I heard this story...") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Somewhere in the world is\na Pokémon that was made for fighting.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" A Pokémon...{WAIT_PRESS}\nmade for fighting?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Yup.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" They say it has so much\nfighting power...") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" All it can think of is\ndefeating anything it meets.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0003,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Th-that's rather a savage\nPokémon! I shudder to think...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Where might such a horrid\nPokémon be now?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Rumors say...{WAIT_PRESS}\nit is storing its power...") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" They say it is sleeping in\na dungeon somewhere...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    BGM_FADEOUT(60),
+    WAIT(30),
+    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" That rumor...{WAIT_PRESS}\nIt's true...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000059,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    BGM_SWITCH(9),
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    WAIT(120),
+    { 0x62, 0x00,  0x0080,  0x00000010,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" {NAME_6}...{WAIT_PRESS}\nAnd {NAME_7}...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Oh my gosh!\nWhat happened to you?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" They're hurt bad...{WAIT_PRESS}\nWhat exactly happened?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x02,  0x0006,  0x00000003,  0x00000000, NULL },
+    { 0x2e, 0x0c,  0x0007,  0x00000003,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0007,  0x00000000,  0x00000000, _(" Urgh...{WAIT_PRESS}\nIt's what that {NAME_4} was saying...") },
+    { 0x34, 0x00,  0x0007,  0x00000000,  0x00000000, _(" ...We were wiped out by\nthat Pokémon...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    FANFARE_PLAY2(473),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Wh-what did you say?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" Grgh... There's no mistake...{WAIT_PRESS}\nIt said it was born to fight...") },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" ...But that Pokémon's\npower...{WAIT_PRESS}\nThere was nothing fake about it...") },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" ...It really was the most\npowerful...{WAIT_PRESS}\n...Gfah!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(473),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Ch-{NAME_6}!\nAre you OK?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    WAIT(60),
+    { 0x34, 0x00,  0x0007,  0x00000000,  0x00000000, _(" There is a cave...\nfar in the west...{WAIT_PRESS}\nIt's there...") },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0007,  0x00000000,  0x00000000, _(" I never want...{WAIT_PRESS}\nto go back again...{WAIT_PRESS} Gfwoh!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(473),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" Oh, my gosh!\nBlastoise went down, too!{WAIT_PRESS}\nThey need help now!") },
+    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" I'll go get someone!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0c,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x12,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ...Wow, it really exists...{WAIT_PRESS}\nA Pokémon that tough...") },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004d,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" ...But, you know?{WAIT_PRESS}\nSo we now know that Pokémon is in the\n{COLOR YELLOW_D}Western Cave{RESET}...") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" I still don't feel like going\nout there...") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Going anywhere like that'd\nbe too scary by half!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" I'm scared too...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000006d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0005,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Wobbuffet!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The cave shunned\n{CENTER_ALIGN}by all out of fear...") },
+    BGM_STOP,
+    FANFARE_PLAY(205),
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The {COLOR YELLOW_D}Western Cave{RESET}\n{CENTER_ALIGN}is now open for exploration!") },
+    { 0xe1, 0x00,  0x00cd,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+static const struct ScriptCommand s_gs1_g46_s0_lives1_dlg0[] = { /* 0x817094c */
+    DEBUGINFO,
+    END_DELETE,
+    RET,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g46_s0_lives2_dlg0[] = { /* 0x81709ac */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004f,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000007,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004f,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0x93, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 0),
+    COND_EQUAL(2, /* to label */ 1),
+    COND_EQUAL(3, /* to label */ 2),
+  LABEL(0), /* = 0x00 */
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005d,  0x00000000, NULL },
+    WAIT(60),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    JUMP_LABEL(3),
+  LABEL(1), /* = 0x01 */
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004f,  0x00000000, NULL },
+    JUMP_LABEL(3),
+  LABEL(2), /* = 0x02 */
+    CALL_SCRIPT(SWEAT_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+  LABEL(3), /* = 0x03 */
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000006d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000059,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x0000008a,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000059,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g46_s0_lives3_dlg0[] = { /* 0x8170d6c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004d,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0x93, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 0),
+    COND_EQUAL(2, /* to label */ 1),
+    COND_EQUAL(3, /* to label */ 2),
+  LABEL(0), /* = 0x00 */
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004d,  0x00000000, NULL },
+    JUMP_LABEL(3),
+  LABEL(1), /* = 0x01 */
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005d,  0x00000000, NULL },
+    WAIT(60),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    JUMP_LABEL(3),
+  LABEL(2), /* = 0x02 */
+    CALL_SCRIPT(SWEAT_FUNC),
+  LABEL(3), /* = 0x03 */
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000006d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000059,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x0000008b,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000059,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0300,  0x0000008c,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0300,  0x0000008d,  0x00000000, NULL },
+    END_DELETE,
+};
+
+static const struct ScriptCommand s_gs1_g46_s0_lives4_dlg0[] = { /* 0x817113c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    WAIT(30),
+    FANFARE_PLAY2(465),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 0),
+    COND_EQUAL(2, /* to label */ 1),
+    COND_EQUAL(3, /* to label */ 2),
+  LABEL(0), /* = 0x00 */
+    JUMP_LABEL(3),
+  LABEL(1), /* = 0x01 */
+    JUMP_LABEL(3),
+  LABEL(2), /* = 0x02 */
+    CALL_SCRIPT(SWEAT_FUNC),
+  LABEL(3), /* = 0x03 */
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000004,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004f,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000059,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g46_s0_lives5_dlg0[] = { /* 0x817145c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0013,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0013,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004f,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0013,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0013,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    WAIT(30),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    CJUMP_VAR(EVENT_LOCAL),
+    COND_EQUAL(1, /* to label */ 0),
+    COND_EQUAL(2, /* to label */ 1),
+    COND_EQUAL(3, /* to label */ 2),
+  LABEL(0), /* = 0x00 */
+    JUMP_LABEL(3),
+  LABEL(1), /* = 0x01 */
+    JUMP_LABEL(3),
+  LABEL(2), /* = 0x02 */
+    CALL_SCRIPT(SWEAT_FUNC),
+  LABEL(3), /* = 0x03 */
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000006d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000059,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x00000068,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005b,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000004d,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x93, 0x04,  0x000a,  0x0000006d,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0013,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g46_s0_lives6_dlg0[] = { /* 0x817197c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0020,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x6c, 0x78,  0x004c,  0x0000008e,  0x00000000, NULL },
+    WAIT_RANDOM(30, 60),
+    { 0x6c, 0x78,  0x004c,  0x0000008e,  0x00000000, NULL },
+    WAIT_RANDOM(30, 60),
+    { 0x6b, 0x00,  0x004c,  0x0000008e,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0019,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0300,  0x00000000,  0x00000000, NULL },
+    WAIT(25),
+    FANFARE_PLAY2(400),
+    { 0xe2, 0x00,  0x0190,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g46_s0_lives7_dlg0[] = { /* 0x8171aac */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0021,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x6c, 0xb4,  0x004c,  0x0000008f,  0x00000000, NULL },
+    WAIT_RANDOM(30, 60),
+    { 0x6c, 0x78,  0x004c,  0x0000008f,  0x00000000, NULL },
+    WAIT_RANDOM(30, 60),
+    { 0x6b, 0x00,  0x004c,  0x0000008f,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x001a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0300,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    FANFARE_PLAY2(400),
+    { 0xe2, 0x00,  0x0190,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g47_s0_station_sref_script[] = { /* 0x8171bec */
+    DEBUGINFO,
+    SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 1),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 9),
+    UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
+    UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
+    SELECT_MAP(1),
+    SELECT_ENTITIES(-1, 0),
+    BGM_SWITCH(7),
+    { 0x22, 0x00,  0x001e,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    BGM_FADEOUT(60),
+    { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g47_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs1_g47_s0_station_sref_script }; /* 0x8171cdc */
+
+static const struct ScriptCommand s_gs1_g47_s0_eff0_script[] = { /* 0x8171ce8 */
+    DEBUGINFO,
+    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g47_s0_lives0_dlg0[] = { /* 0x8171d48 */
+    DEBUGINFO,
+    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000050,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Hey, {NAME_0}.\nEveryone's gathered around.")),
+    VARIANT_DEFAULT(_(" Look, {NAME_0}.\nEveryone's gathered around.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0002,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Aiyiyi...\nI do not deserve this! I am outraged!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000091,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" What's up, folks?")),
+    VARIANT_DEFAULT(_(" What's up, everyone?")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Up? Up? Up?!\nHow could it be up, I ask you!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" My beautiful shop...\nMy fine wares were stolen from me!") },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    { 0x56, 0x00,  0x0000,  0x00000146,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Many, many TMs are simply\ngone! Spirited away!\nDark clouds fill my heart!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" My bank wasn't hit, but...{WAIT_PRESS}\nThese are frightening times.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Is the storage OK?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x91, 0x04,  0x0002,  0x00000003,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0f,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" No problem.{WAIT_PRESS}\nNothing gets stolen from under my eye.") },
+    { 0x2e, 0x0f,  0x0005,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" This mama's not about to\nmake a stupid mistake like that! Kakakah!") },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0c,  0x0002,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" You're insinuating...{WAIT_PRESS}\nthat we were robbed for being careless?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000002,  0x00000000, NULL },
+    { 0x2e, 0x0f,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" Now wait.") },
+    WAIT(10),
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" Tell me, Kecleon.{WAIT_PRESS}\nYou saw...this thief?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0c,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Hmm...?{WAIT_PRESS}\nNo, not very clearly, I didn't.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" When I saw it, it had\nalready taken off...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" Taken off?{WAIT_PRESS}\nYou mean it flew away?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Yes.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x11,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" It flew off in yonder\ndirection, yes.") },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0c,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" At tremendous speed\ntoo.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" The yonder direction...{WAIT_PRESS}\nThat would be the Northern Range...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" It's impossible to determine\nwhat the thief is...") },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" So we'll need to investigate\nthis matter properly.") },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x11,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Yes. I beg for justice.{WAIT_PRESS}\nMy business faces ruination.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" {NAME_0}.\nWant to go check it out?")),
+    VARIANT_DEFAULT(_(" {NAME_0}.\nWant to look into this?")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}{NAME_0}'s team took on\n{CENTER_ALIGN}the case of pursuing the burglar\n{CENTER_ALIGN}that struck Kecleon's shop.") },
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The burglar's alleged\n{CENTER_ALIGN}getaway spot...") },
+    BGM_STOP,
+    FANFARE_PLAY(205),
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The {COLOR YELLOW_D}Northern Range{RESET}\n{CENTER_ALIGN}is now open for investigation!") },
+    { 0xe1, 0x00,  0x00cd,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+static const struct ScriptCommand s_gs1_g47_s0_lives1_dlg0[] = { /* 0x8172b68 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000050,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe2, 0x00,  0x01d1,  0x00000000,  0x00000000, NULL },
+    WAIT(20),
+    { 0x8e, 0x01,  0x0000,  0x00000001,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x6b, 0x00,  0x0100,  0x00000090,  0x00000000, NULL },
+    FANFARE_PLAY2(468),
+    CALL_SCRIPT(QUESTION_FUNC),
+    { 0xe2, 0x00,  0x01d4,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x00000146,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x01,  0x000a,  0x00000004,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g47_s0_lives2_dlg0[] = { /* 0x8172d68 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000004,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g47_s0_lives3_dlg0[] = { /* 0x8172de8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(ANGRY_START_FUNC),
+    WAIT(60),
+    { 0x91, 0x04,  0x0001,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    CALL_SCRIPT(ANGRY_END_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0200, -0x00000010,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000004,  0x00000000, NULL },
+    FANFARE_PLAY2(457),
+    CALL_SCRIPT(JUMP_ANGRY_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000002,  0x00000000, NULL },
+    FANFARE_PLAY2(469),
+    CALL_SCRIPT(QUESTION_FUNC),
+    { 0xe2, 0x00,  0x01d5,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000005,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000006,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g47_s0_lives4_dlg0[] = { /* 0x8173008 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000004,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g47_s0_lives5_dlg0[] = { /* 0x81730a8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x03,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_START_FUNC),
+    WAIT(30),
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g47_s0_lives6_dlg0[] = { /* 0x8173188 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100, -0x00000008,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100, -0x00000008,  0x00000018, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe2, 0x00,  0x01d1,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000005,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000006,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g48_s0_station_sref_script[] = { /* 0x81732b8 */
+    DEBUGINFO,
+    SELECT_MAP(1),
+    SELECT_ENTITIES(-1, 0),
+    BGM_SWITCH(7),
+    { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    BGM_FADEOUT(60),
+    { 0x23, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g48_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs1_g48_s0_station_sref_script }; /* 0x8173358 */
+
+static const struct ScriptCommand s_gs1_g48_s0_eff0_script[] = { /* 0x8173364 */
+    DEBUGINFO,
+    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g48_s0_lives0_dlg0[] = { /* 0x8173394 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Look! He's waking up!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0e,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0005, -0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" ...Wh-where...?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" This is Pokémon Square.")),
+    VARIANT(/* == */  1, _(" You passed out in the\n{COLOR YELLOW_D}Northern Range{RESET}, so we brought you back\nwith us.")),
+    VARIANT_DEFAULT(_(" This is Pokémon Square.")),
+    VARIANT_DEFAULT(_(" You fainted in the {COLOR YELLOW_D}Northern\nRange{RESET}, so we brought you back here.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0002,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" You! How dare you steal\nmy fine selection of quality merchandise!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" You had better be prepared\nfor harsh justice!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0d,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x2f, 0x00,  0x0004, -0x00000003,  0x00000001, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Now wait.{WAIT_PRESS}\nThere must be a good reason for this.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" We should at least hear\nthat.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" ...!{WAIT_PRESS} That's right!\nI have to get my sister...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe2, 0x00,  0x01d1,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Ggh! This wound!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" You're injured.\nYou can't fly for now.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Tell me, how do you justify\nwhat you've done?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    BGM_SWITCH(114),
+    WAIT(60),
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" I have a younger sister.\nHer name is Latias.") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Latias...{WAIT_PRESS}\nCrashed somewhere in the {COLOR YELLOW_D}Pitfall Valley{RESET}...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" What?!{WAIT_PRESS}\nThe {COLOR YELLOW_D}Pitfall Valley{RESET}?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x00000004,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" ...What is that?{WAIT_PRESS}\nWhat's the {COLOR YELLOW_D}Pitfall Valley{RESET}?")),
+    VARIANT_DEFAULT(_(" ...What is that?{WAIT_PRESS}\nWhat is the {COLOR YELLOW_D}Pitfall Valley{RESET}?")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" It is near the {COLOR YELLOW_D}Northern\nRange{RESET}.") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" They say that anyone so\nunlucky to fall into the {COLOR YELLOW_D}Pitfall Valley{RESET}...{WAIT_PRESS}\nwill never again emerge.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Latias and I were flying\nover the Northern Range.") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" When suddenly, what\nappeared to be a meteorite struck\nLatias on the wing...") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Her wing shattered by the\nblow, Latias tumbled down into the\ndepths of the {COLOR YELLOW_D}Pitfall Valley{RESET}...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x0000000c,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" A meteorite?!") },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" {NAME_0}!{WAIT_PRESS}\nDo you think maybe that it's a chunk of\nthe blown-up meteor?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000003,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" I went to the {COLOR YELLOW_D}Pitfall Valley{RESET}\nin hopes of rescuing my sister, but...") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" I made little headway...\nI wasn't up to the task...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x15,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" So that drove you to steal\nTechnical Machines...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Yes.{WAIT_PRESS}\nI intended to make amends after I saved\nmy sister...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" But that doesn't mean I can\nget away with thievery.{WAIT_PRESS}\nIt was wrong, and I'm sorry.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Oh... Oh, my!{WAIT_PRESS}\nIt is not a problem! Not a problem at all!") },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" For a reason so compelling,\nit can't be helped. Hahaha.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" However...{WAIT_PRESS}\nEven if you were to plumb the depths of\n{COLOR YELLOW_D}Pitfall Valley{RESET}...") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" What would you do then?") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" The nether regions of the\n{COLOR YELLOW_D}Pitfall Valley{RESET} are a void...") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" You will wander forever,\nneither falling...{WAIT_PRESS}nor living...{WAIT_PRESS}\nWhat then?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" ............{WAIT_PRESS}\nSo much time has passed since my sister\ncrashed.") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Latias hasn't been able to\nclimb out of the depths.\nShe is all alone down there.") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Even if I end up like her,\nunable to escape...{WAIT_PRESS}\nTwo would be better than one.") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Latias wouldn't have to\nbe so alone...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" How foolish...{WAIT_PRESS}\nDo you think Latias wishes for that?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x02,  0x0001,  0x00000004,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" But...{WAIT_PRESS}\nIt's a place you can never escape, right?")),
+    VARIANT(/* == */  1, _(" How are we supposed to pull\noff a rescue from a place like that...?")),
+    VARIANT_DEFAULT(_(" But...{WAIT_PRESS}\nIt's a place you can't escape, isn't it?")),
+    VARIANT_DEFAULT(_(" I don't see how we could\ndo a rescue in a place like that...")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" No...{WAIT_PRESS} There is...{WAIT_PRESS}\nThere is but one possible way...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0x91, 0x04,  0x0001,  0x00000002,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x0000000c,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You can?!{WAIT_PRESS}\nHow?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" You already have the means\nin your possession.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" The {COLOR GREEN_I}Teleport Gem{RESET}.{WAIT_PRESS}\nUse that.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x02,  0x0001,  0x00000004,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" The {COLOR GREEN_I}Teleport Gem{RESET}?{WAIT_PRESS}\nThe one we used to get up to the sky\nwhere Rayquaza lives?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" But it got broken in the\nfalling star's explosion.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" While it is unlikely to\ncarry you to the sky again, it should\nbe able to carry you a shorter distance.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" If you were to use the\n{COLOR GREEN_I}Teleport Gem{RESET} from deep within the {COLOR YELLOW_D}Pitfall\nValley{RESET}...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x02,  0x0001,  0x00000009,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" That's it!{WAIT_PRESS}\nIf we did that, we could escape with\nLatias!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x00000000,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" {NAME_0}!{WAIT_PRESS}\nThis is a rescue that only we can do!")),
+    VARIANT(/* == */  1, _(" Let's get out there and\nhelp Latias!")),
+    VARIANT(/* == */  3, _(" {NAME_0}!{WAIT_PRESS}\nThis is a rescue that only we can do!")),
+    VARIANT(/* == */  3, _(" Let's go get Latias!")),
+    VARIANT_DEFAULT(_(" {NAME_0}!{WAIT_PRESS}\nThis is a rescue that only we can do!")),
+    VARIANT_DEFAULT(_(" Let's go rescue Latias!")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    BGM_STOP,
+    FANFARE_PLAY(205),
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}{NAME_0} gained access to\n{CENTER_ALIGN}the {COLOR YELLOW_D}Pitfall Valley{RESET}!") },
+    { 0xe1, 0x00,  0x00cd,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+static const struct ScriptCommand s_gs1_g48_s0_lives1_dlg0[] = { /* 0x8174e1c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000001,  0x00000000, NULL },
+    FANFARE_PLAY2(469),
+    CALL_SCRIPT(QUESTION_FUNC),
+    { 0xe2, 0x00,  0x01d5,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe2, 0x00,  0x01d1,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000005,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g48_s0_lives2_dlg0[] = { /* 0x817500c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g48_s0_lives3_dlg0[] = { /* 0x81750cc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(ANGRY_START_FUNC),
+    WAIT(1),
+    FANFARE_PLAY2(457),
+    CALL_SCRIPT(JUMP_ANGRY_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x6a, 0x00,  0x0100,  0x00000000, -0x00000008, NULL },
+    CALL_SCRIPT(ANGRY_END_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe2, 0x00,  0x01d1,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000005,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    FANFARE_PLAY2(468),
+    { 0x91, 0x04,  0x0002,  0x00000005,  0x00000000, NULL },
+    WAIT(20),
+    FANFARE_PLAY2(468),
+    { 0x91, 0x04,  0x0001,  0x00000003,  0x00000000, NULL },
+    WAIT(30),
+    { 0x91, 0x04,  0x0002,  0x00000004,  0x00000000, NULL },
+    FANFARE_PLAY2(457),
+    { 0x56, 0x00,  0x0000,  0x00000047,  0x00000000, NULL },
+    { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g48_s0_lives4_dlg0[] = { /* 0x817534c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0500, -0x00000008,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0200, -0x00000028,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000004,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000018,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100, -0x00000018,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000004,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000007,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g48_s0_lives5_dlg0[] = { /* 0x81754ac */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe2, 0x00,  0x01d1,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x001b,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    BGM_STOP,
+    FANFARE_PLAY2(465),
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(475),
+    { 0x54, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe2, 0x00,  0x01db,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x001a,  0x00000000,  0x00000000, NULL },
+    WAIT(40),
+    FANFARE_PLAY2(682),
+    { 0xe2, 0x00,  0x02aa,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0019,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x001b,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x54, 0x00,  0x001d,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0019,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x001d,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SHOCK_FUNC),
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g49_s0_station_sref_script[] = { /* 0x817576c */
+    DEBUGINFO,
+    SELECT_MAP(1),
+    SELECT_ENTITIES(-1, 0),
+    { 0x27, 0x01,  0x0001,  0x0000003c,  0x00ffffff, NULL },
+    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x23, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    RET,
+};
+
+static const struct ScriptRef s_gs1_g49_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs1_g49_s0_station_sref_script }; /* 0x81757ec */
+
+static const struct ScriptCommand s_gs1_g49_s0_lives0_dlg0[] = { /* 0x81757f8 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    BGM_SWITCH(7),
+    WAIT(30),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" {NAME_6}!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" Latios!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0005,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" You're safe!\nThis is incredible...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x02,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" I'm sorry...\nI caused you so much worry...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x0c,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0002,  0x00000000,  0x00000000, _(" Oh, this is great...\nIt's so touching... Sniffle...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" My sister is safe, all\nthanks to you.") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" To be honest, I came close\nto giving up...") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" But we're back together\nagain...{WAIT_PRESS}\nIt's happiness beyond words...") },
+    { 0x2e, 0x15,  0x0005,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" We owe you so much\ngratitude! Thank you!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x02,  0x0001,  0x00000009,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Hey, now, that's OK.{WAIT_PRESS}\nIt's even a little embarrassing when you\nput it that way, hahaha!")),
+    VARIANT_DEFAULT(_(" It's OK, really.{WAIT_PRESS}\nWhen you put it that way, it's even a little\nembarrassing. Hahaha.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x15,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" However...\nWe have no money or any other way of\nrepaying your kindness.") },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" So, and it's the least we\ncan do...{WAIT_PRESS}\nMay we join your rescue team?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x0000000c,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Huh...?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x03,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" We would like to join {COLOR CYAN}Team\n{TEAM_NAME}{RESET} and help with your rescue\nwork.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Would that work?{WAIT_PRESS}\nWould you be willing to accept us on\nyour rescue team?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x00000004,  0x00000000, NULL },
+    ASK3_VAR( TRUE, /*default*/ -1, /* speaker */ 1, PARTNER_TALK_KIND),
+    VARIANT(/* == */  1, _(" {NAME_0}, what do you\nsay?{WAIT_PRESS}\nShould we let Latios and Latias join?")),
+    VARIANT_DEFAULT(_(" {NAME_0}, what should\nwe do?{WAIT_PRESS}\nDo we let Latios and Latias join?")),
+    CHOICE(/* label */ 10, _("Yes.")),
+    CHOICE(/* label */ 11, _("No.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+  LABEL(11), /* = 0x0b */
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 0),
+    FANFARE_PLAY2(455),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x0000000c,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Huh?\nYou're really sure about that?!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x02,  0x0001,  0x00000005,  0x00000000, NULL },
+    ASK3( TRUE, /*default*/ -1, /* speaker */ 1, _(" They're volunteering!\nDon't you think we should let them join?")),
+    CHOICE(/* label */ 10, _("Accept.")),
+    CHOICE(/* label */ 13, _("No, forget it.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+  LABEL(13), /* = 0x0d */
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    FANFARE_PLAY2(455),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x2e, 0x0d,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" It is you who decides.\nThe outcome is of no concern to me.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" However...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000003,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Latios and Latias are\nPokémon so rarely seen that they are\nconsidered mythical.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" If you part ways with them\nnow, you may never see them again.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Strike that.\nYou will never again see them.") },
+    { 0x34, 0x00,  0x0004,  0x00000000,  0x00000000, _(" Even knowing that...{WAIT_PRESS}\nEven if you would never see them again,\nyou will still not accept them?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x00000004,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" {NAME_0}, think good\nand hard about this.")),
+    VARIANT_DEFAULT(_(" {NAME_0}, give it good\nthought.")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x2e, 0x02,  0x0001,  0x00000000,  0x00000000, NULL },
+    ASK3_VAR( TRUE, /*default*/ -1, /* speaker */ 1, PARTNER_TALK_KIND),
+    VARIANT(/* == */  1, _(" Should we let Latios and\nLatias join?")),
+    VARIANT_DEFAULT(_(" Do we let Latios and Latias\njoin?")),
+    CHOICE(/* label */ 10, _("Yes.")),
+    CHOICE(/* label */ 11, _("No.")),
+  LABEL(10), /* = 0x0a */
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x02,  0x0001,  0x00000009,  0x00000000, NULL },
+    MSG_VAR(2, PARTNER_TALK_KIND, 1),
+    VARIANT(/* == */  1, _(" Done deal!")),
+    VARIANT(/* == */  1, _(" You're our fellow members\nfrom now on! Welcome aboard!")),
+    VARIANT_DEFAULT(_(" Done!")),
+    VARIANT_DEFAULT(_(" You're our fellow members\nfrom now on. Great to have you!")),
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0005,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0005,  0x00000000,  0x00000000, _(" Thanks for having us!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x2e, 0x15,  0x0006,  0x00000001,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0006,  0x00000000,  0x00000000, _(" Delighted to join!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}And thus...") },
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}{COLOR CYAN}Team {TEAM_NAME}{RESET} was\n{CENTER_ALIGN}joined by {NAME_5} and {NAME_6}!") },
+    BGM_STOP,
+    FANFARE_PLAY(204),
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}{NAME_5} and {NAME_6}\n{CENTER_ALIGN}became team members!") },
+    { 0xe1, 0x00,  0x00cc,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x3b, 0x24,  0x0000,  0x00000000,  0x00000000, NULL },
+    ASK1(FALSE, /*default*/ -1, /* speaker */ -1, _("Give a nickname to {NAME_5}?")),
+    CHOICE(/* label */ 17, _("*Yes.")),
+    CHOICE(/* label */ 18, _("No.")),
+  LABEL(17), /* = 0x11 */
+    { 0x3d, 0x00,  0x0000, -0x00000001,  0x00000000, NULL },
+  LABEL(18), /* = 0x12 */
+    { 0x3b, 0x25,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x3b, 0x26,  0x0000,  0x00000000,  0x00000000, NULL },
+    ASK1(FALSE, /*default*/ -1, /* speaker */ -1, _("Give a nickname to {NAME_6}?")),
+    CHOICE(/* label */ 19, _("*Yes.")),
+    CHOICE(/* label */ 20, _("No.")),
+  LABEL(19), /* = 0x13 */
+    { 0x3d, 0x00,  0x0000, -0x00000001,  0x00000000, NULL },
+  LABEL(20), /* = 0x14 */
+    { 0x3b, 0x27,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+static const struct ScriptCommand s_gs1_g49_s0_lives1_dlg0[] = { /* 0x8176dcc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(SMILE_START_FUNC),
+    WAIT(30),
+    CALL_SCRIPT(SMILE_END_FUNC),
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(465),
+    CALL_SCRIPT(SHOCK_FUNC),
+    { 0xe2, 0x00,  0x01d1,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000003,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000002,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000004,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    JUMPIF(JUDGE_EQ, EVENT_LOCAL, 1, /* to label */ 1),
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    JUMPIF(JUDGE_EQ, EVENT_LOCAL, 1, /* to label */ 1),
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000003,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000004,  0x00000000, NULL },
+    CALL_SCRIPT(JUMP_ANGRY_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    { 0x91, 0x04,  0x0001,  0x00000002,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000003,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    HALT,
+};
+
+
+static const struct ScriptCommand s_gs1_g49_s0_lives2_dlg0[] = { /* 0x817708c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    JUMPIF(JUDGE_EQ, EVENT_LOCAL, 1, /* to label */ 1),
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    JUMPIF(JUDGE_EQ, EVENT_LOCAL, 1, /* to label */ 1),
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    { 0x91, 0x04,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0016,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000007,  0x00000000, NULL },
+    HALT,
+};
+
+
+static const struct ScriptCommand s_gs1_g49_s0_lives3_dlg0[] = { /* 0x817725c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    JUMPIF(JUDGE_EQ, EVENT_LOCAL, 1, /* to label */ 1),
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    JUMPIF(JUDGE_EQ, EVENT_LOCAL, 1, /* to label */ 1),
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000001,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000007,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    { 0x91, 0x04,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0016,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0008,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000007,  0x00000000, NULL },
+    HALT,
+};
+
+
+static const struct ScriptCommand s_gs1_g49_s0_lives4_dlg0[] = { /* 0x817742c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0500, -0x00000008,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    JUMPIF(JUDGE_EQ, EVENT_LOCAL, 1, /* to label */ 1),
+    CALL_SCRIPT(JUMP_SURPRISE_FUNC),
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    JUMPIF(JUDGE_EQ, EVENT_LOCAL, 1, /* to label */ 1),
+    { 0x6a, 0x00,  0x0100, -0x00000010,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100,  0x00000010,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
+    JUMP_LABEL(0),
+  LABEL(1), /* = 0x01 */
+    { 0x91, 0x04,  0x0002,  0x00000007,  0x00000000, NULL },
+    HALT,
+};
+
+
+static const struct ScriptCommand s_gs1_g49_s0_lives5_dlg0[] = { /* 0x817755c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0016,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100, -0x00000010,  0x00000000, NULL },
+    WAIT(30),
+    { 0x54, 0x00,  0x0017,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x6a, 0x00,  0x0100, -0x00000008,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0018,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100, -0x00000008,  0x00000008, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000006,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0200, -0x00000008,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000004,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100, -0x00000008, -0x00000008, NULL },
+    { 0x91, 0x01,  0x0001,  0x00000003,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100, -0x00000008, -0x00000008, NULL },
+    { 0x91, 0x01,  0x0001,  0x00000002,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100,  0x00000008, -0x00000008, NULL },
+    { 0x91, 0x01,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100,  0x00000008, -0x00000008, NULL },
+    { 0x91, 0x01,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100,  0x00000008,  0x00000008, NULL },
+    { 0x91, 0x01,  0x0001,  0x00000007,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100,  0x00000008,  0x00000008, NULL },
+    { 0x91, 0x01,  0x0001,  0x00000006,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100, -0x00000008,  0x00000008, NULL },
+    { 0x91, 0x01,  0x0001,  0x00000005,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100, -0x00000008,  0x00000008, NULL },
+    { 0x91, 0x01,  0x0001,  0x00000004,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0200,  0x00000008,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000006,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g49_s0_lives6_dlg0[] = { /* 0x817785c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0016,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000010,  0x00000000, NULL },
+    WAIT(30),
+    { 0x54, 0x00,  0x0017,  0x00000000,  0x00000000, NULL },
+    WAIT(60),
+    { 0x54, 0x00,  0x0018,  0x00000000,  0x00000000, NULL },
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x6a, 0x00,  0x0100,  0x00000000, -0x00000010, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000006,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0002,  0x00000000,  0x00000000, NULL },
+    FANFARE_PLAY2(455),
+    { 0x54, 0x00,  0x0011,  0x00000000,  0x00000000, NULL },
+    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100,  0x00000008,  0x00000008, NULL },
+    { 0x91, 0x01,  0x0001,  0x00000007,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100,  0x00000008,  0x00000008, NULL },
+    { 0x91, 0x01,  0x0001,  0x00000006,  0x00000000, NULL },
+    FANFARE_PLAY2(457),
+    { 0x62, 0x00,  0x0100, -0x00000008,  0x00000008, NULL },
+    { 0x91, 0x01,  0x0001,  0x00000005,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100, -0x00000008,  0x00000008, NULL },
+    { 0x91, 0x01,  0x0001,  0x00000004,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100, -0x00000008, -0x00000008, NULL },
+    { 0x91, 0x01,  0x0001,  0x00000003,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100, -0x00000008, -0x00000008, NULL },
+    { 0x91, 0x01,  0x0001,  0x00000002,  0x00000000, NULL },
+    FANFARE_PLAY2(457),
+    { 0x62, 0x00,  0x0100,  0x00000008, -0x00000008, NULL },
+    { 0x91, 0x01,  0x0001,  0x00000001,  0x00000000, NULL },
+    { 0x62, 0x00,  0x0100,  0x00000008, -0x00000008, NULL },
+    { 0x91, 0x01,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x000b,  0x00000000,  0x00000000, NULL },
+    { 0x91, 0x04,  0x0001,  0x00000006,  0x00000000, NULL },
+    HALT,
+};
+
+static const struct ScriptCommand s_gs1_g50_s0_lives0_dlg2[] = { /* 0x8177b2c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    SET_ARRAYVAL(EVENT_S07E01,  0,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Hey, have you heard?\nAbout the {COLOR YELLOW_D}Buried Relic{RESET}.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" They're rumoring that there\nare treasures in there.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" And they say the treasures\naren't just lying around on the ground.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Know what they're saying?{WAIT_PRESS}\nThey're saying that treasures are even\nembedded in the walls!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" If you knock down the walls,\nthere might be treasures galore!{WAIT_PRESS}\nSounds really enticing, eh?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I think Shiftry knows where\nthe {COLOR YELLOW_D}Buried Relic{RESET} is.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+
+static const struct ScriptCommand s_gs1_g50_s0_lives1_dlg2[] = { /* 0x8177da0 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    SET_ARRAYVAL(EVENT_S07E01,  1,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I heard rumors that\nPokémon from ancient times live in the\n{COLOR YELLOW_D}Buried Relic{RESET}.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+
+static const struct ScriptCommand s_gs1_g50_s0_lives2_dlg2[] = { /* 0x8177e60 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    SET_ARRAYVAL(EVENT_S07E01,  2,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I've heard that there are\ntreasures to be found in the relic.{WAIT_PRESS}\nI wonder how much is true?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" But, I must admit...{WAIT_PRESS}\nI do get a certain thrill from it!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I guess there's a sense of\ndrama and adventure about it.") },
+    JUMP_SCRIPT(END_TALK),
+};
+
+
+static const struct ScriptCommand s_gs1_g50_s0_lives3_dlg0[] = { /* 0x8177fcc */
+    DEBUGINFO,
+    { 0x4f, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x52, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x54, 0x00,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x8b, 0x01, -0x0001,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g50_s0_lives3_dlg2[] = { /* 0x817803c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    SET_ARRAYVAL(EVENT_S07E01,  4,  1),
+    FANFARE_PLAY2(465),
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" What's that?\nWhere is the {COLOR YELLOW_D}Buried Relic{RESET}?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" The {COLOR YELLOW_D}Buried Relic{RESET} is deep\nin the jungle to the southeast.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Are you dreaming about\nthe treasures too?") },
+    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Kukukuh...{WAIT_PRESS} Me too!{WAIT_PRESS}\nBest of luck, compadre!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    JUMPIF_SCENE_GT(SCENARIO_SUB7, 49, 2, /* to label */ 1),
+    WAIT(30),
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}Leaving aside the disturbing fact that\n{CENTER_ALIGN}{NAME_1} made them compadres...") },
+    FANFARE_PLAY(205),
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}{NAME_0}'s team gained\n{CENTER_ALIGN}access to the {COLOR YELLOW_D}Buried Relic{RESET}!") },
+    { 0xe1, 0x00,  0x00cd,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMPIF_SCENE_GT(SCENARIO_SUB7, 49, 2, /* to label */ 1),
+    { 0xaf, 0x01,  0x001b,  0x00000000,  0x00000000, NULL },
+    SCENARIO_CALC(SCENARIO_SUB7, 49,  3),
+  LABEL(1), /* = 0x01 */
+    JUMP_SCRIPT(END_TALK),
+};
+
+
+
+static const struct ScriptCommand s_gs1_g50_s0_lives3_dlg3[] = { /* 0x8178340 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x8d, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    CALL_SCRIPT(NOTICE_FUNC),
+    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    { 0x56, 0x00,  0x0000,  0x0000005d,  0x00000000, NULL },
+    WAIT(60),
+    { 0x56, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    RET,
+};
+
+static const struct ScriptCommand s_gs1_g50_s0_lives4_dlg2[] = { /* 0x8178410 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_S07E01, 5, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_S07E01,  5,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It seems talk of the relic\nis on everyone's lips today!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" If you find any\ntreasures, please do sell them to me.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" And now...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+
+static const struct ScriptCommand s_gs1_g50_s0_lives5_dlg2[] = { /* 0x8178564 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_S07E01, 6, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_S07E01,  6,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Oh, isn't it exciting?{WAIT_PRESS}\nWhy, I wouldn't mind closing up the shop\nso I could go treasure hunting!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" And now...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+
+static const struct ScriptCommand s_gs1_g50_s0_lives6_dlg2[] = { /* 0x8178690 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_S07E01, 7, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_S07E01,  7,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" If you find a fortune in the\nrelic, save it here with me!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+
+static const struct ScriptCommand s_gs1_g50_s0_lives7_dlg2[] = { /* 0x8178780 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_S07E01, 8, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_S07E01,  8,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I wonder what kinds of\nfriends are in the {COLOR YELLOW_D}Buried Relic{RESET}?") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+
+static const struct ScriptCommand s_gs1_g50_s0_lives8_dlg2[] = { /* 0x8178870 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_S07E01, 9, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_S07E01,  9,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" You're going too, aren't you?\nTo the {COLOR YELLOW_D}Buried Relic{RESET}.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" This mama's behind you all\nthe way! Go for it!") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" OK...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+
+static const struct ScriptCommand s_gs1_g50_s0_lives9_dlg2[] = { /* 0x81789bc */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    JUMPIF_ARRAY(EVENT_S07E01, 10, /* to label */ 0),
+    SET_ARRAYVAL(EVENT_S07E01, 10,  1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" What treasures can be\nfound in the {COLOR YELLOW_D}Buried Relic{RESET}, I wonder?") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" It makes me drool thinking\nwhat I could swallow in a place like that.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+  LABEL(0), /* = 0x00 */
+    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+
+static const struct ScriptCommand s_gs1_g51_s0_lives0_dlg2[] = { /* 0x8178b08 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I think Gengar headed off\nto {COLOR YELLOW_D}Mt. Freeze{RESET}.") },
+    { 0x2e, 0x02,  0x0001,  0x00000044,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I have heard it is a place\nthat is very difficult.{WAIT_PRESS}\nWill he be OK?") },
+    SCENARIO_CALC(SCENARIO_SUB9, 53,  4),
+    JUMP_SCRIPT(END_TALK),
+};
+
+
+static const struct ScriptCommand s_gs1_g51_s0_lives1_dlg2[] = { /* 0x8178c10 */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Gengar wants to meet with\nNinetales. That's what I think.") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" What he means to do when\nhe does meet...I don't know.") },
+    SCENARIO_CALC(SCENARIO_SUB9, 53,  4),
+    JUMP_SCRIPT(END_TALK),
+};
+
+
+static const struct ScriptCommand s_gs1_g52_s0_lives0_dlg2[] = { /* 0x8178d0c */
+    DEBUGINFO,
+    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(1),
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I have done a lot of\nthinking...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I would like to join {COLOR CYAN}Team \n{TEAM_NAME}{RESET} and help on rescues.") },
+    ASK3(FALSE, /*default*/ -1, /* speaker */ 1, _(" Please, may I become\na member?")),
+    CHOICE(/* label */  2, _("Yes.")),
+    CHOICE(/* label */  3, _("No.")),
+  LABEL(2), /* = 0x02 */
+    { 0x3b, 0x30,  0x0000,  0x00000000,  0x00000000, NULL },
+    COND_EQUAL(1, /* to label */ 4),
+    { 0x2e, 0x02,  0x0001,  0x00000041,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Thank you!{WAIT_PRESS}\nI promise to do my best for the team!") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(10),
+    FANFARE_PLAY(204),
+    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}{NAME_1} became the\n{CENTER_ALIGN}rescue team's newest member!") },
+    { 0xe1, 0x00,  0x00cc,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WAIT(30),
+    { 0x3b, 0x31,  0x0000,  0x00000000,  0x00000000, NULL },
+    ASK1(FALSE, /*default*/ -1, /* speaker */ -1, _("Give a nickname to {NAME_1}?")),
+    CHOICE(/* label */  6, _("*Yes.")),
+    CHOICE(/* label */  7, _("No.")),
+  LABEL(6), /* = 0x06 */
+    { 0x3d, 0x00,  0x0000, -0x00000001,  0x00000000, NULL },
+  LABEL(7), /* = 0x07 */
+    { 0x3b, 0x32,  0x0000,  0x00000000,  0x00000000, NULL },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    SCENARIO_CALC(SCENARIO_SUB9, 55,  3),
+    { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    CANCEL_ENTITIES(52, -1),
+    WAIT(30),
+    { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+  LABEL(4), /* = 0x04 */
+    { 0x2e, 0x02,  0x0001,  0x00000041,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Yes!\nThank you!") },
+    { 0x2e, 0x15,  0x0001,  0x00000000,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ...However, there seems to\nbe no space for me in my Friend Area...{WAIT_PRESS}\nThis is disappointing...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I could join your rescue\nteam if there were less Pokémon in\n{COLOR GREEN}Sky Blue Plains{RESET}...") },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Please tell me then.") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+  LABEL(3), /* = 0x03 */
+    { 0x2e, 0x15,  0x0001,  0x00000042,  0x00000000, NULL },
+    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" ...I see.{WAIT_PRESS}\nThis is disappointing...") },
+    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    JUMP_SCRIPT(END_TALK),
+};
+
+static const struct GroundLivesData s_gs1_g0_s1_lives[] = { /* 0x8179214 */
+    /*  0 */ {   0,   2,   0,   0, {   8,  40, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g0_s1_lives0_dlg0,
+    } },
+    /*  1 */ {   4,   2,   0,   0, {   5,  40, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g0_s1_lives1_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g0_s2_lives[] = { /* 0x8179244 */
+    /*  0 */ {   0,   0,   0,   0, {  64,   9, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g0_s2_lives0_dlg0,
+    } },
+    /*  1 */ {   4,   0,   0,   0, {  64,   7, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g0_s2_lives1_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g0_s3_lives[] = { /* 0x8179274 */
+    /*  0 */ {   0,   6,   0,   0, { 112,  40, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g0_s3_lives0_dlg0,
+    } },
+    /*  1 */ {   4,   6,   0,   0, { 115,  40, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g0_s3_lives1_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g0_s4_lives[] = { /* 0x81792a4 */
+    /*  0 */ {   0,   4,   0,   0, {  66,  83, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g0_s4_lives0_dlg0,
+    } },
+    /*  1 */ {   4,   4,   0,   0, {  66,  85, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g0_s4_lives1_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g0_s7_lives[] = { /* 0x81792d4 */
+    /*  0 */ {   0,   0,   0,   0, {  64,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g0_s7_lives0_dlg0,
+    } },
+    /*  1 */ {   4,   0,   0,   0, {  64,  30, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g0_s7_lives1_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g0_s8_lives[] = { /* 0x8179304 */
+    /*  0 */ {   0,   0,   0,   0, {   8,  40, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g0_s8_lives0_dlg0,
+    } },
+    /*  1 */ {   4,   0,   0,   0, {   5,  40, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g0_s8_lives1_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g1_s0_lives[] = { /* 0x8179334 */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g1_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g1_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g1_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g1_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g1_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g1_s0_lives5_dlg2,
+    } },
+    /*  6 */ {  85,   7,   0,   0, {  69,  36, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g1_s0_lives6_dlg2,
+    } },
+    /*  7 */ {  77,   5,   0,   0, {  71,  44, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g1_s0_lives7_dlg2,
+    } },
+    /*  8 */ {  81,   0,   0,   0, {  58,  44, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g1_s0_lives8_dlg2,
+    } },
+    /*  9 */ {  89,   2,   0,   0, {  57,  33, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g1_s0_lives9_dlg2,
+    } },
+    /* 10 */ {  90,   6,   0,   0, {  61,  33, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g1_s0_lives10_dlg2,
+    } },
+    /* 11 */ {  88,   0,   0,   0, {  90,  37, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g1_s0_lives11_dlg2,
+    } },
+    /* 12 */ {  61,   0,   0,   0, {  58,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g1_s0_lives12_dlg2,
+    } },
+    /* 13 */ {  62,   0,   0,   0, {  61,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g1_s0_lives13_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g3_s0_lives[] = { /* 0x8179484 */
+    /*  0 */ { 127,   0,   0,   0, { 109,  38, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g3_s0_lives0_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g4_s0_lives[] = { /* 0x817949c */
+    /*  0 */ { 127,   0,   0,   0, { 115,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g4_s0_lives0_dlg1,
+        [2] = s_gs1_g4_s0_lives0_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g4_s1_lives[] = { /* 0x81794b4 */
+    /*  0 */ {   0,   0,   0,   0, { 115,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g4_s1_lives0_dlg0,
+    } },
+    /*  1 */ {   4,   0,   0,   0, { 115,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g4_s1_lives1_dlg0,
+    } },
+    /*  2 */ { 127,   6,   0,   0, { 115,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g4_s1_lives2_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g4_s2_lives[] = { /* 0x81794fc */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g4_s2_lives0_dlg0,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g4_s2_lives1_dlg0,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g4_s2_lives2_dlg0,
+    } },
+    /*  3 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g4_s2_lives3_dlg0,
+    } },
+    /*  4 */ {  85,   7,   0,   0, {  69,  36, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g4_s2_lives4_dlg0,
+    } },
+    /*  5 */ {  77,   5,   0,   0, {  71,  44, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g4_s2_lives5_dlg0,
+    } },
+    /*  6 */ {  81,   0,   0,   0, {  58,  44, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g4_s2_lives6_dlg0,
+    } },
+    /*  7 */ {  89,   2,   0,   0, {  57,  33, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g4_s2_lives7_dlg0,
+    } },
+    /*  8 */ {  90,   6,   0,   0, {  61,  33, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g4_s2_lives8_dlg0,
+    } },
+    /*  9 */ {  88,   0,   0,   0, {  90,  37, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g4_s2_lives9_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g4_s3_lives[] = { /* 0x81795ec */
+    /*  0 */ { 127,   6,   0,   0, { 115,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g4_s3_lives0_dlg0,
+        [1] = s_gs1_g4_s3_lives0_dlg1,
+        [2] = s_gs1_g4_s3_lives0_dlg2,
+        [3] = s_gs1_g4_s3_lives0_dlg3,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g4_s4_lives[] = { /* 0x8179604 */
+    /*  0 */ { 127,   6,   0,   0, { 115,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g4_s4_lives0_dlg1,
+        [2] = s_gs1_g4_s4_lives0_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g5_s0_lives[] = { /* 0x817961c */
+    /*  0 */ { 127,   0,   0,   0, { 115,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g5_s0_lives0_dlg1,
+        [2] = s_gs1_g5_s0_lives0_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g5_s1_lives[] = { /* 0x8179634 */
+    /*  0 */ {   0,   0,   0,   0, { 115,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s1_lives0_dlg0,
+    } },
+    /*  1 */ {   4,   0,   0,   0, { 115,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s1_lives1_dlg0,
+    } },
+    /*  2 */ { 127,   6,   0,   0, { 115,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s1_lives2_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g5_s2_lives[] = { /* 0x817967c */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s2_lives0_dlg0,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s2_lives1_dlg0,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s2_lives2_dlg0,
+    } },
+    /*  3 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s2_lives3_dlg0,
+    } },
+    /*  4 */ {  85,   7,   0,   0, {  69,  36, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s2_lives4_dlg0,
+    } },
+    /*  5 */ {  77,   5,   0,   0, {  71,  44, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s2_lives5_dlg0,
+    } },
+    /*  6 */ {  81,   0,   0,   0, {  58,  44, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s2_lives6_dlg0,
+    } },
+    /*  7 */ {  89,   2,   0,   0, {  57,  33, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s2_lives7_dlg0,
+    } },
+    /*  8 */ {  90,   6,   0,   0, {  61,  33, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s2_lives8_dlg0,
+    } },
+    /*  9 */ {  88,   0,   0,   0, {  90,  37, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s2_lives9_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g5_s3_lives[] = { /* 0x817976c */
+    /*  0 */ { 127,   6,   0,   0, { 115,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g5_s3_lives0_dlg1,
+        [2] = s_gs1_g5_s3_lives0_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g5_s4_lives[] = { /* 0x8179784 */
+    /*  0 */ {   0,   0,   0,   0, { 115,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s4_lives0_dlg0,
+    } },
+    /*  1 */ {   4,   0,   0,   0, { 115,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s4_lives1_dlg0,
+    } },
+    /*  2 */ { 127,   6,   0,   0, { 115,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s4_lives2_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g5_s5_lives[] = { /* 0x81797cc */
+    /*  0 */ { 127,   6,   0,   0, { 115,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g5_s5_lives0_dlg1,
+        [2] = s_gs1_g5_s5_lives0_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g5_s6_lives[] = { /* 0x81797e4 */
+    /*  0 */ { 127,   2,   0,   0, { 115,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g5_s6_lives0_dlg1,
+        [2] = s_gs1_g5_s6_lives0_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g6_s0_lives[] = { /* 0x81797fc */
+    /*  0 */ {   0,   2,   0,   0, {   5,  41, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g6_s0_lives0_dlg0,
+    } },
+    /*  1 */ {   7,   2,   0,   0, {   8,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g6_s0_lives1_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g7_s0_lives[] = { /* 0x817982c */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g7_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g7_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g7_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g7_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g7_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  77,   0,   0,   0, {  60,  35, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g7_s0_lives5_dlg1,
+        [2] = s_gs1_g7_s0_lives5_dlg2,
+    } },
+    /*  6 */ {  79,   3,   0,   0, {  62,  45, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g7_s0_lives6_dlg1,
+        [2] = s_gs1_g7_s0_lives6_dlg2,
+    } },
+    /*  7 */ {  80,   6,   0,   0, {  69,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g7_s0_lives7_dlg2,
+        [3] = s_gs1_g7_s0_lives7_dlg3,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g7_s1_lives[] = { /* 0x81798ec */
+    /*  0 */ {   0,   2,   0,   0, {   5,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g7_s1_lives0_dlg0,
+    } },
+    /*  1 */ {   7,   2,   0,   0, {   8,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g7_s1_lives1_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g8_s0_lives[] = { /* 0x817991c */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g8_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g8_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g8_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g8_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g8_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g8_s0_lives5_dlg2,
+    } },
+    /*  6 */ {  77,   0,   0,   0, {  75,  41, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g8_s0_lives6_dlg1,
+        [2] = s_gs1_g8_s0_lives6_dlg2,
+    } },
+    /*  7 */ {  79,   0,   0,   0, {  65,  46, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g8_s0_lives7_dlg1,
+        [2] = s_gs1_g8_s0_lives7_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g8_s1_lives[] = { /* 0x81799dc */
+    /*  0 */ {   0,   2,   0,   0, {   5,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g8_s1_lives0_dlg0,
+    } },
+    /*  1 */ {   7,   2,   0,   0, {   8,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g8_s1_lives1_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g8_s2_lives[] = { /* 0x8179a0c */
+    /*  0 */ {  78,   6,   0,   0, {  70,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g8_s2_lives0_dlg0,
+    } },
+    /*  1 */ {  85,   2,   0,   0, {  65,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g8_s2_lives1_dlg0,
+    } },
+    /*  2 */ {  86,   2,   0,   0, {  62,  38, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g8_s2_lives2_dlg0,
+    } },
+    /*  3 */ {  87,   2,   0,   0, {  62,  42, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g8_s2_lives3_dlg0,
+    } },
+    /*  4 */ {  77,   6,   0,   0, {  75,  41, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g8_s2_lives4_dlg0,
+    } },
+    /*  5 */ {  79,   4,   0,   0, {  65,  46, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g8_s2_lives5_dlg0,
+    } },
+    /*  6 */ {  54,   0,   0,   0, {  62,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g8_s2_lives6_dlg0,
+    } },
+    /*  7 */ {  80,   0,   0,   0, {  66,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g8_s2_lives7_dlg0,
+    } },
+    /*  8 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g8_s2_lives8_dlg2,
+    } },
+    /*  9 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g8_s2_lives9_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g9_s0_lives[] = { /* 0x8179afc */
+    /*  0 */ {   0,   4,   0,   0, {  97,  37, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g9_s0_lives0_dlg0,
+    } },
+    /*  1 */ {   7,   4,   0,   0, {  97,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g9_s0_lives1_dlg0,
+    } },
+    /*  2 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g9_s0_lives2_dlg0,
+        [2] = s_gs1_g9_s0_lives2_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g9_s1_lives[] = { /* 0x8179b44 */
+    /*  0 */ {  61,   6,   0,   0, {  79,  37, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g9_s1_lives0_dlg0,
+    } },
+    /*  1 */ {  62,   6,   0,   0, {  77,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g9_s1_lives1_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g10_s0_lives[] = { /* 0x8179b74 */
+    /*  0 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {} },
+    /*  1 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {} },
+    /*  2 */ {   0,   6,   0,   0, {  79,  41, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g10_s0_lives2_dlg0,
+    } },
+    /*  3 */ {   7,   2,   0,   0, {  79,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g10_s0_lives3_dlg0,
+    } },
+    /*  4 */ {  80,   0,   0,   0, {  66,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g10_s0_lives4_dlg0,
+    } },
+    /*  5 */ {  79,   4,   0,   0, {  65,  46, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g10_s0_lives5_dlg0,
+    } },
+    /*  6 */ {  54,   0,   0,   0, {  62,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g10_s0_lives6_dlg0,
+    } },
+    /*  7 */ {  78,   6,   0,   0, {  70,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g10_s0_lives7_dlg0,
+    } },
+    /*  8 */ {  85,   2,   0,   0, {  65,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g10_s0_lives8_dlg0,
+    } },
+    /*  9 */ {  86,   6,   0,   0, {  62,  38, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g10_s0_lives9_dlg0,
+    } },
+    /* 10 */ {  87,   2,   0,   0, {  62,  42, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g10_s0_lives10_dlg0,
+    } },
+    /* 11 */ {  77,   6,   0,   0, {  75,  41, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g10_s0_lives11_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g10_s1_lives[] = { /* 0x8179c94 */
+    /*  0 */ {  88,   2,   0,   0, {  47,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g10_s1_lives0_dlg0,
+    } },
+    /*  1 */ {  89,   2,   0,   0, {  44,  38, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g10_s1_lives1_dlg0,
+    } },
+    /*  2 */ {  90,   2,   0,   0, {  44,  42, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g10_s1_lives2_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g10_s2_lives[] = { /* 0x8179cdc */
+    /*  0 */ {  91,   4,   0,   0, {  62,  60, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g10_s2_lives0_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g11_s0_lives[] = { /* 0x8179cf4 */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g11_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g11_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g11_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g11_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g11_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g11_s0_lives5_dlg2,
+    } },
+    /*  6 */ {  77,   0,   0,   0, {  57,  46, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g11_s0_lives6_dlg1,
+        [2] = s_gs1_g11_s0_lives6_dlg2,
+    } },
+    /*  7 */ {  79,   6,   0,   0, {  67,  41, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g11_s0_lives7_dlg1,
+        [2] = s_gs1_g11_s0_lives7_dlg2,
+        [3] = s_gs1_g11_s0_lives7_dlg3,
+    } },
+    /*  8 */ {  80,   0,   0,   0, {  68,  30, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g11_s0_lives8_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g12_s0_lives[] = { /* 0x8179dcc */
+    /*  0 */ {  78,   6,   0,   0, {  70,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g12_s0_lives0_dlg0,
+    } },
+    /*  1 */ {  85,   2,   0,   0, {  65,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g12_s0_lives1_dlg0,
+    } },
+    /*  2 */ {  86,   2,   0,   0, {  62,  38, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g12_s0_lives2_dlg0,
+    } },
+    /*  3 */ {  87,   2,   0,   0, {  62,  42, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g12_s0_lives3_dlg0,
+    } },
+    /*  4 */ {  77,   6,   0,   0, {  75,  41, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g12_s0_lives4_dlg0,
+    } },
+    /*  5 */ {  80,   0,   0,   0, {  66,  33, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g12_s0_lives5_dlg0,
+    } },
+    /*  6 */ {  79,   4,   0,   0, {  65,  46, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g12_s0_lives6_dlg0,
+    } },
+    /*  7 */ {  54,   0,   0,   0, {  62,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g12_s0_lives7_dlg0,
+    } },
+    /*  8 */ {   0,   6,   0,   0, {  76,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g12_s0_lives8_dlg0,
+    } },
+    /*  9 */ {  34,   6,   0,   0, {  76,  37, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g12_s0_lives9_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g13_s0_lives[] = { /* 0x8179ebc */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g13_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g13_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g13_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g13_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g13_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g13_s0_lives5_dlg2,
+    } },
+    /*  6 */ {  77,   0,   0,   0, {  77,  41, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g13_s0_lives6_dlg1,
+        [2] = s_gs1_g13_s0_lives6_dlg2,
+    } },
+    /*  7 */ {  79,   0,   0,   0, {  59,  47, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g13_s0_lives7_dlg1,
+        [2] = s_gs1_g13_s0_lives7_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g14_s0_lives[] = { /* 0x8179f7c */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g14_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g14_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g14_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g14_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g14_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g14_s0_lives5_dlg2,
+    } },
+    /*  6 */ {  77,   0,   0,   0, {  77,  41, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g14_s0_lives6_dlg1,
+        [2] = s_gs1_g14_s0_lives6_dlg2,
+    } },
+    /*  7 */ {  79,   0,   0,   0, {  59,  47, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g14_s0_lives7_dlg1,
+        [2] = s_gs1_g14_s0_lives7_dlg2,
+    } },
+    /*  8 */ {  80,   0,   0,   0, {  59,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g14_s0_lives8_dlg1,
+        [2] = s_gs1_g14_s0_lives8_dlg2,
+    } },
+    /*  9 */ {  78,   3,   0,   0, {  57,  35, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g14_s0_lives9_dlg1,
+        [2] = s_gs1_g14_s0_lives9_dlg2,
+    } },
+    /* 10 */ {  95,   5,   0,   0, {  61,  35, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g14_s0_lives10_dlg1,
+        [2] = s_gs1_g14_s0_lives10_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g15_s0_lives[] = { /* 0x817a084 */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g15_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g15_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g15_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g15_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g15_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g15_s0_lives5_dlg2,
+    } },
+    /*  6 */ {  77,   2,   0,   0, {  70,  45, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g15_s0_lives6_dlg1,
+        [2] = s_gs1_g15_s0_lives6_dlg2,
+    } },
+    /*  7 */ {  79,   6,   0,   0, {  59,  47, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g15_s0_lives7_dlg1,
+        [2] = s_gs1_g15_s0_lives7_dlg2,
+    } },
+    /*  8 */ {  78,   0,   0,   0, {  57,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g15_s0_lives8_dlg2,
+    } },
+    /*  9 */ {  95,   0,   0,   0, {  61,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g15_s0_lives9_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g16_s0_lives[] = { /* 0x817a174 */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g16_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g16_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g16_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g16_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g16_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g16_s0_lives5_dlg2,
+    } },
+    /*  6 */ {  77,   2,   0,   0, {  63,  40, 0, 0 }, {} },
+    /*  7 */ {  79,   7,   0,   0, {  67,  37, CPOS_HALFTILE, CPOS_HALFTILE }, {} },
+    /*  8 */ {  80,   5,   0,   0, {  67,  41, CPOS_HALFTILE, CPOS_HALFTILE }, {} },
+};
+
+static const struct GroundLivesData s_gs1_g17_s0_lives[] = { /* 0x817a24c */
+    /*  0 */ {   0,   2,   0,   0, {  46,  40, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g17_s0_lives0_dlg0,
+    } },
+    /*  1 */ {   7,   2,   0,   0, {  41,  40, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g17_s0_lives1_dlg0,
+    } },
+    /*  2 */ {  77,   2,   0,   0, {  63,  40, 0, 0 }, {
+        [0] = s_gs1_g17_s0_lives2_dlg0,
+    } },
+    /*  3 */ {  79,   7,   0,   0, {  67,  37, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g17_s0_lives3_dlg0,
+    } },
+    /*  4 */ {  80,   5,   0,   0, {  67,  41, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g17_s0_lives4_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g18_s0_lives[] = { /* 0x817a2c4 */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g18_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g18_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g18_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g18_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g18_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g18_s0_lives5_dlg2,
+    } },
+    /*  6 */ {  77,   2,   0,   0, {  63,  40, 0, 0 }, {
+        [2] = s_gs1_g18_s0_lives6_dlg2,
+    } },
+    /*  7 */ {  79,   7,   0,   0, {  67,  38, 0, 0 }, {
+        [2] = s_gs1_g18_s0_lives7_dlg2,
+    } },
+    /*  8 */ {  80,   5,   0,   0, {  67,  42, 0, 0 }, {
+        [2] = s_gs1_g18_s0_lives8_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g19_s0_lives[] = { /* 0x817a39c */
+    /*  0 */ {   0,   2,   0,   0, {   5,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g19_s0_lives0_dlg0,
+    } },
+    /*  1 */ {   7,   2,   0,   0, {   8,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g19_s0_lives1_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g20_s0_lives[] = { /* 0x817a3cc */
+    /*  0 */ {   0,   2,   0,   0, {   7,  41, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g20_s0_lives0_dlg0,
+    } },
+    /*  1 */ {  34,   2,   0,   0, {   4,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g20_s0_lives1_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g21_s0_lives[] = { /* 0x817a3fc */
+    /*  0 */ {   0,   2,   0,   0, {  34,  41, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g21_s0_lives0_dlg0,
+    } },
+    /*  1 */ {  34,   2,   0,   0, {  34,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g21_s0_lives1_dlg0,
+    } },
+    /*  2 */ {  91,   0,   0,   0, {  65,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g21_s0_lives2_dlg0,
+    } },
+    /*  3 */ {  54,   3,   0,   0, {  60,  41, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g21_s0_lives3_dlg0,
+    } },
+    /*  4 */ {  77,   5,   0,   0, {  69,  43, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g21_s0_lives4_dlg0,
+    } },
+    /*  5 */ {  79,   3,   0,   0, {  59,  38, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g21_s0_lives5_dlg0,
+    } },
+    /*  6 */ {  80,   3,   0,   0, {  61,  44, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g21_s0_lives6_dlg0,
+    } },
+    /*  7 */ {  72,   7,   0,   0, {  70,  35, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g21_s0_lives7_dlg0,
+    } },
+    /*  8 */ {  75,   5,   0,   0, {  71,  47, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g21_s0_lives8_dlg0,
+    } },
+    /*  9 */ {  73,   6,   0,   0, {  77,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g21_s0_lives9_dlg0,
+    } },
+    /* 10 */ {  76,   4,   0,   0, {  63,  48, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g21_s0_lives10_dlg0,
+    } },
+    /* 11 */ {  70,   6,   0,   0, {  72,  38, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g21_s0_lives11_dlg0,
+    } },
+    /* 12 */ {  71,   6,   0,   0, {  72,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g21_s0_lives12_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g22_s0_lives[] = { /* 0x817a534 */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [1] = s_gs1_g22_s0_lives0_dlg1,
+        [2] = s_gs1_g22_s0_lives0_dlg2,
+        [3] = s_gs1_g22_s0_lives0_dlg3,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [1] = s_gs1_g22_s0_lives1_dlg1,
+        [2] = s_gs1_g22_s0_lives1_dlg2,
+        [3] = s_gs1_g22_s0_lives1_dlg3,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g22_s0_lives2_dlg1,
+        [2] = s_gs1_g22_s0_lives2_dlg2,
+        [3] = s_gs1_g22_s0_lives2_dlg3,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g22_s0_lives3_dlg1,
+        [2] = s_gs1_g22_s0_lives3_dlg2,
+        [3] = s_gs1_g22_s0_lives3_dlg3,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g22_s0_lives4_dlg1,
+        [2] = s_gs1_g22_s0_lives4_dlg2,
+        [3] = s_gs1_g22_s0_lives4_dlg3,
+    } },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g22_s0_lives5_dlg1,
+        [2] = s_gs1_g22_s0_lives5_dlg2,
+        [3] = s_gs1_g22_s0_lives5_dlg3,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g23_s0_lives[] = { /* 0x817a5c4 */
+    /*  0 */ {   0,   2,   0,   0, {  43,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g23_s0_lives0_dlg0,
+    } },
+    /*  1 */ {  34,   2,   0,   0, {  43,  42, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g23_s0_lives1_dlg0,
+    } },
+    /*  2 */ {  83,   2,   0,   0, {  40,  41, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g23_s0_lives2_dlg0,
+    } },
+    /*  3 */ {  91,   0,   0,   0, {  65,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g23_s0_lives3_dlg0,
+    } },
+    /*  4 */ {  85,   6,   0,   0, {  70,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g23_s0_lives4_dlg0,
+    } },
+    /*  5 */ {  77,   4,   0,   0, {  65,  44, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g23_s0_lives5_dlg0,
+    } },
+    /*  6 */ {  80,   5,   0,   0, {  70,  43, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g23_s0_lives6_dlg0,
+    } },
+    /*  7 */ {  54,   3,   0,   0, {  60,  43, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g23_s0_lives7_dlg0,
+    } },
+    /*  8 */ {  93,   2,   0,   0, {  46,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g23_s0_lives8_dlg0,
+    } },
+    /*  9 */ {  92,   1,   0,   0, {  62,  37, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g23_s0_lives9_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g23_s1_lives[] = { /* 0x817a6b4 */
+    /*  0 */ {  55,   0,   0,   0, {  65,  44, CPOS_HALFTILE, 0 }, {
+        [0] = s_gs1_g23_s1_lives0_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g24_s0_lives[] = { /* 0x817a6cc */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g24_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g24_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g24_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g24_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g24_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g24_s0_lives5_dlg2,
+    } },
+    /*  6 */ {  77,   5,   0,   0, {  70,  45, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g24_s0_lives6_dlg1,
+        [2] = s_gs1_g24_s0_lives6_dlg2,
+    } },
+    /*  7 */ {  79,   3,   0,   0, {  59,  47, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g24_s0_lives7_dlg1,
+        [2] = s_gs1_g24_s0_lives7_dlg2,
+    } },
+    /*  8 */ {  85,   6,   0,   0, {  65,  36, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g24_s0_lives8_dlg1,
+        [2] = s_gs1_g24_s0_lives8_dlg2,
+    } },
+    /*  9 */ {  80,   0,   0,   0, {  68,  31, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g24_s0_lives9_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g24_s1_lives[] = { /* 0x817a7bc */
+    /*  0 */ {   0,   0,   0,   0, {  61,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g24_s1_lives0_dlg0,
+    } },
+    /*  1 */ {   4,   0,   0,   0, {  61,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g24_s1_lives1_dlg0,
+    } },
+    /*  2 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g24_s1_lives2_dlg0,
+        [2] = s_gs1_g24_s1_lives2_dlg2,
+    } },
+    /*  3 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g24_s1_lives3_dlg0,
+        [2] = s_gs1_g24_s1_lives3_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g25_s0_lives[] = { /* 0x817a81c */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g25_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g25_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g25_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g25_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g25_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g25_s0_lives5_dlg2,
+    } },
+    /*  6 */ {  77,   0,   0,   0, {  70,  45, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g25_s0_lives6_dlg1,
+        [2] = s_gs1_g25_s0_lives6_dlg2,
+    } },
+    /*  7 */ {  79,   0,   0,   0, {  59,  47, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g25_s0_lives7_dlg1,
+        [2] = s_gs1_g25_s0_lives7_dlg2,
+    } },
+    /*  8 */ {  85,   0,   0,   0, {  65,  36, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g25_s0_lives8_dlg1,
+        [2] = s_gs1_g25_s0_lives8_dlg2,
+    } },
+    /*  9 */ {  80,   0,   0,   0, {  68,  31, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g25_s0_lives9_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g26_s0_lives[] = { /* 0x817a90c */
+    /*  0 */ {   0,   2,   0,   0, {  38,  41, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g26_s0_lives0_dlg0,
+    } },
+    /*  1 */ {  34,   2,   0,   0, {  35,  41, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g26_s0_lives1_dlg0,
+    } },
+    /*  2 */ {  77,   2,   0,   0, {  38,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g26_s0_lives2_dlg0,
+    } },
+    /*  3 */ {  85,   6,   0,   0, {  76,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g26_s0_lives3_dlg0,
+    } },
+    /*  4 */ { 104,   2,   0,   0, {  63,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g26_s0_lives4_dlg0,
+    } },
+    /*  5 */ { 105,   1,   0,   0, {  69,  35, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g26_s0_lives5_dlg0,
+    } },
+    /*  6 */ { 106,   3,   0,   0, {  67,  45, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g26_s0_lives6_dlg0,
+    } },
+    /*  7 */ { 135,   1,   0,   0, {  64,  36, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g26_s0_lives7_dlg0,
+    } },
+    /*  8 */ { 136,   1,   0,   0, {  61,  35, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g26_s0_lives8_dlg0,
+    } },
+    /*  9 */ { 137,   2,   0,   0, {  60,  38, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g26_s0_lives9_dlg0,
+    } },
+    /* 10 */ { 138,   1,   0,   0, {  65,  33, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g26_s0_lives10_dlg0,
+    } },
+    /* 11 */ { 139,   2,   0,   0, {  64,  43, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g26_s0_lives11_dlg0,
+    } },
+    /* 12 */ { 140,   3,   0,   0, {  63,  46, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g26_s0_lives12_dlg0,
+    } },
+    /* 13 */ { 141,   2,   0,   0, {  60,  44, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g26_s0_lives13_dlg0,
+    } },
+    /* 14 */ { 142,   2,   0,   0, {  67,  38, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g26_s0_lives14_dlg0,
+    } },
+    /* 15 */ { 143,   2,   0,   0, {  68,  41, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g26_s0_lives15_dlg0,
+    } },
+    /* 16 */ {  79,   3,   0,   0, {  70,  47, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g26_s0_lives16_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g27_s0_lives[] = { /* 0x817aaa4 */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g27_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g27_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g27_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g27_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g27_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g27_s0_lives5_dlg2,
+    } },
+    /*  6 */ {  77,   0,   0,   0, {  72,  45, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g27_s0_lives6_dlg1,
+        [2] = s_gs1_g27_s0_lives6_dlg2,
+    } },
+    /*  7 */ {  79,   0,   0,   0, {  59,  47, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g27_s0_lives7_dlg1,
+        [2] = s_gs1_g27_s0_lives7_dlg2,
+    } },
+    /*  8 */ {  85,   0,   0,   0, {  62,  36, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g27_s0_lives8_dlg1,
+        [2] = s_gs1_g27_s0_lives8_dlg2,
+    } },
+    /*  9 */ {  80,   0,   0,   0, {  68,  31, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g27_s0_lives9_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g28_s0_lives[] = { /* 0x817ab94 */
+    /*  0 */ {   0,   2,   0,   0, {  41,  41, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g28_s0_lives0_dlg0,
+    } },
+    /*  1 */ {  34,   2,   0,   0, {  41,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g28_s0_lives1_dlg0,
+    } },
+    /*  2 */ {  85,   6,   0,   0, {  76,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g28_s0_lives2_dlg0,
+    } },
+    /*  3 */ {  91,   0,   0,   0, {  64,  28, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g28_s0_lives3_dlg0,
+    } },
+    /*  4 */ { 104,   6,   0,   0, {  72,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g28_s0_lives4_dlg0,
+    } },
+    /*  5 */ { 105,   6,   0,   0, {  72,  37, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g28_s0_lives5_dlg0,
+    } },
+    /*  6 */ { 106,   5,   0,   0, {  72,  43, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g28_s0_lives6_dlg0,
+    } },
+    /*  7 */ {  77,   2,   0,   0, {  57,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g28_s0_lives7_dlg0,
+    } },
+    /*  8 */ {  79,   3,   0,   0, {  66,  47, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g28_s0_lives8_dlg0,
+    } },
+    /*  9 */ { 136,   1,   0,   0, {  61,  35, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g28_s0_lives9_dlg0,
+    } },
+    /* 10 */ { 137,   2,   0,   0, {  60,  38, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g28_s0_lives10_dlg0,
+    } },
+    /* 11 */ { 139,   2,   0,   0, {  64,  43, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g28_s0_lives11_dlg0,
+    } },
+    /* 12 */ { 140,   3,   0,   0, {  63,  46, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g28_s0_lives12_dlg0,
+    } },
+    /* 13 */ { 141,   2,   0,   0, {  60,  44, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g28_s0_lives13_dlg0,
+    } },
+    /* 14 */ { 142,   1,   0,   0, {  68,  35, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g28_s0_lives14_dlg0,
+    } },
+    /* 15 */ { 143,   2,   0,   0, {  64,  37, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g28_s0_lives15_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g29_s0_lives[] = { /* 0x817ad14 */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g29_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g29_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g29_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g29_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g29_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g29_s0_lives5_dlg2,
+    } },
+    /*  6 */ {  77,   2,   0,   0, {  62,  37, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g29_s0_lives6_dlg0,
+        [2] = s_gs1_g29_s0_lives6_dlg2,
+    } },
+    /*  7 */ { 104,   6,   0,   0, {  65,  37, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g29_s0_lives7_dlg0,
+        [2] = s_gs1_g29_s0_lives7_dlg2,
+    } },
+    /*  8 */ {  79,   2,   0,   0, {  59,  47, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g29_s0_lives8_dlg0,
+        [2] = s_gs1_g29_s0_lives8_dlg2,
+    } },
+    /*  9 */ { 105,   6,   0,   0, {  62,  47, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g29_s0_lives9_dlg0,
+        [2] = s_gs1_g29_s0_lives9_dlg2,
+    } },
+    /* 10 */ {  85,   2,   0,   0, {  65,  43, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g29_s0_lives10_dlg0,
+        [2] = s_gs1_g29_s0_lives10_dlg2,
+    } },
+    /* 11 */ { 106,   6,   0,   0, {  68,  43, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g29_s0_lives11_dlg0,
+        [2] = s_gs1_g29_s0_lives11_dlg2,
+    } },
+    /* 12 */ {  80,   0,   0,   0, {  68,  31, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g29_s0_lives12_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g29_s1_lives[] = { /* 0x817ae4c */
+    /*  0 */ {   0,   0,   0,   0, {  61,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g29_s1_lives0_dlg0,
+    } },
+    /*  1 */ {   4,   0,   0,   0, {  61,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g29_s1_lives1_dlg0,
+    } },
+    /*  2 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g29_s1_lives2_dlg0,
+        [2] = s_gs1_g29_s1_lives2_dlg2,
+    } },
+    /*  3 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g29_s1_lives3_dlg0,
+        [2] = s_gs1_g29_s1_lives3_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g30_s0_lives[] = { /* 0x817aeac */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g30_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g30_s0_lives1_dlg0,
+        [2] = s_gs1_g30_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g30_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g30_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g30_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g30_s0_lives5_dlg2,
+    } },
+    /*  6 */ { 104,   0,   0,   0, {  65,  37, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g30_s0_lives6_dlg0,
+        [2] = s_gs1_g30_s0_lives6_dlg2,
+    } },
+    /*  7 */ { 105,   3,   0,   0, {  62,  42, 0, 0 }, {
+        [0] = s_gs1_g30_s0_lives7_dlg0,
+        [2] = s_gs1_g30_s0_lives7_dlg2,
+    } },
+    /*  8 */ { 106,   5,   0,   0, {  68,  41, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g30_s0_lives8_dlg0,
+        [2] = s_gs1_g30_s0_lives8_dlg2,
+    } },
+    /*  9 */ {  79,   0,   0,   0, {  59,  47, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [1] = s_gs1_g30_s0_lives9_dlg1,
+        [2] = s_gs1_g30_s0_lives9_dlg2,
+    } },
+    /* 10 */ {  85,   0,   0,   0, {  57,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g30_s0_lives10_dlg2,
+    } },
+    /* 11 */ {  80,   0,   0,   0, {  68,  31, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g30_s0_lives11_dlg2,
+    } },
+    /* 12 */ {  78,   0,   0,   0, {  69,  14, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g30_s0_lives12_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g30_s1_lives[] = { /* 0x817afe4 */
+    /*  0 */ {   0,   0,   0,   0, {  61,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g30_s1_lives0_dlg0,
+    } },
+    /*  1 */ {   4,   0,   0,   0, {  61,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g30_s1_lives1_dlg0,
+    } },
+    /*  2 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g30_s1_lives2_dlg0,
+        [2] = s_gs1_g30_s1_lives2_dlg2,
+    } },
+    /*  3 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g30_s1_lives3_dlg0,
+        [2] = s_gs1_g30_s1_lives3_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g31_s0_lives[] = { /* 0x817b044 */
+    /*  0 */ {   0,   2,   0,   0, {  46,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives0_dlg0,
+    } },
+    /*  1 */ {  34,   2,   0,   0, {  46,  41, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives1_dlg0,
+    } },
+    /*  2 */ {  77,   4,   0,   0, {  82,  42, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives2_dlg0,
+    } },
+    /*  3 */ {  54,   6,   0,   0, {  78,  36, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives3_dlg0,
+    } },
+    /*  4 */ {  85,   0,   0,   0, {  82,  38, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives4_dlg0,
+    } },
+    /*  5 */ { 104,   7,   0,   0, {  89,  37, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives5_dlg0,
+    } },
+    /*  6 */ { 105,   6,   0,   0, {  90,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives6_dlg0,
+    } },
+    /*  7 */ { 106,   5,   0,   0, {  87,  42, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives7_dlg0,
+    } },
+    /*  8 */ {  88,   2,   0,   0, {  41,  40, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives8_dlg0,
+    } },
+    /*  9 */ {  89,   2,   0,   0, {  40,  38, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives9_dlg0,
+    } },
+    /* 10 */ {  90,   2,   0,   0, {  40,  42, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives10_dlg0,
+    } },
+    /* 11 */ { 143,   3,   0,   0, {  56,  50, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives11_dlg0,
+    } },
+    /* 12 */ { 135,   4,   0,   0, {  75,  54, 0, 0 }, {
+        [0] = s_gs1_g31_s0_lives12_dlg0,
+    } },
+    /* 13 */ { 137,   4,   0,   0, {  67,  54, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives13_dlg0,
+    } },
+    /* 14 */ {  79,   0,   0,   0, {  62,  26, 0, 0 }, {
+        [0] = s_gs1_g31_s0_lives14_dlg0,
+    } },
+    /* 15 */ { 136,   0,   0,   0, {  65,  24, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives15_dlg0,
+    } },
+    /* 16 */ { 140,   0,   0,   0, {  66,  26, 0, 0 }, {
+        [0] = s_gs1_g31_s0_lives16_dlg0,
+    } },
+    /* 17 */ { 141,   0,   0,   0, {  60,  22, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives17_dlg0,
+    } },
+    /* 18 */ { 142,   0,   0,   0, {  68,  21, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives18_dlg0,
+    } },
+    /* 19 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives19_dlg0,
+        [2] = s_gs1_g31_s0_lives19_dlg2,
+    } },
+    /* 20 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g31_s0_lives20_dlg0,
+        [2] = s_gs1_g31_s0_lives20_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g32_s0_lives[] = { /* 0x817b23c */
+    /*  0 */ {   0,   6,   0,   0, {  63,  41, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives0_dlg0,
+    } },
+    /*  1 */ {  34,   6,   0,   0, {  63,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives1_dlg0,
+    } },
+    /*  2 */ {  77,   5,   0,   0, {  67,  42, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives2_dlg0,
+    } },
+    /*  3 */ {  54,   7,   0,   0, {  68,  36, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives3_dlg0,
+    } },
+    /*  4 */ {  85,   6,   0,   0, {  70,  38, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives4_dlg0,
+    } },
+    /*  5 */ { 104,   6,   0,   0, {  72,  37, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives5_dlg0,
+    } },
+    /*  6 */ { 105,   6,   0,   0, {  72,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives6_dlg0,
+    } },
+    /*  7 */ { 106,   5,   0,   0, {  70,  42, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives7_dlg0,
+    } },
+    /*  8 */ {  88,   2,   0,   0, {  59,  40, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives8_dlg0,
+    } },
+    /*  9 */ {  89,   2,   0,   0, {  58,  38, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives9_dlg0,
+    } },
+    /* 10 */ {  90,   2,   0,   0, {  58,  42, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives10_dlg0,
+    } },
+    /* 11 */ { 143,   4,   0,   0, {  60,  44, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives11_dlg0,
+    } },
+    /* 12 */ { 135,   5,   0,   0, {  71,  45, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives12_dlg0,
+    } },
+    /* 13 */ { 137,   4,   0,   0, {  65,  46, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives13_dlg0,
+    } },
+    /* 14 */ {  79,   0,   0,   0, {  62,  35, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives14_dlg0,
+    } },
+    /* 15 */ { 136,   0,   0,   0, {  63,  32, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives15_dlg0,
+    } },
+    /* 16 */ { 140,   0,   0,   0, {  66,  34, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives16_dlg0,
+    } },
+    /* 17 */ { 141,   1,   0,   0, {  58,  34, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives17_dlg0,
+    } },
+    /* 18 */ { 142,   7,   0,   0, {  70,  33, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g32_s0_lives18_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g33_s0_lives[] = { /* 0x817b404 */
+    /*  0 */ {   0,   0,   0,   0, {  65,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g33_s0_lives0_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g34_s0_lives[] = { /* 0x817b41c */
+    /*  0 */ {  34,   0,   0,   0, {  65,  37, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g34_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g34_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g34_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g34_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g34_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g34_s0_lives5_dlg2,
+    } },
+    /*  6 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g34_s0_lives6_dlg2,
+    } },
+    /*  7 */ { 104,   6,   0,   0, {  72,  37, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g34_s0_lives7_dlg2,
+    } },
+    /*  8 */ { 105,   6,   0,   0, {  72,  44, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g34_s0_lives8_dlg2,
+    } },
+    /*  9 */ { 106,   4,   0,   0, {  64,  48, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g34_s0_lives9_dlg2,
+    } },
+    /* 10 */ {  85,   6,   0,   0, {  70,  34, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g34_s0_lives10_dlg2,
+    } },
+    /* 11 */ {  77,   5,   0,   0, {  59,  47, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g34_s0_lives11_dlg2,
+    } },
+    /* 12 */ {  54,   1,   0,   0, {  56,  44, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g34_s0_lives12_dlg2,
+    } },
+    /* 13 */ {  88,   1,   0,   0, {  60,  34, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g34_s0_lives13_dlg2,
+    } },
+    /* 14 */ {  89,   1,   0,   0, {  56,  35, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g34_s0_lives14_dlg2,
+    } },
+    /* 15 */ {  90,   1,   0,   0, {  59,  31, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g34_s0_lives15_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g35_s0_lives[] = { /* 0x817b59c */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g35_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g35_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g35_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g35_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g35_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g35_s0_lives5_dlg2,
+    } },
+    /*  6 */ { 104,   7,   0,   0, {  71,  34, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g35_s0_lives6_dlg2,
+    } },
+    /*  7 */ { 105,   6,   0,   0, {  73,  37, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g35_s0_lives7_dlg2,
+    } },
+    /*  8 */ { 106,   0,   0,   0, {  68,  31, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g35_s0_lives8_dlg2,
+    } },
+    /*  9 */ {  85,   5,   0,   0, {  71,  45, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g35_s0_lives9_dlg2,
+    } },
+    /* 10 */ {  77,   0,   0,   0, {  58,  36, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g35_s0_lives10_dlg2,
+    } },
+    /* 11 */ {  89,   3,   0,   0, {  59,  46, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g35_s0_lives11_dlg2,
+    } },
+    /* 12 */ {  90,   4,   0,   0, {  62,  48, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g35_s0_lives12_dlg2,
+    } },
+    /* 13 */ {  61,   1,   0,   0, {  61,  28, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g35_s0_lives13_dlg2,
+    } },
+    /* 14 */ {  62,   1,   0,   0, {  59,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g35_s0_lives14_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g36_s0_lives[] = { /* 0x817b704 */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g36_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g36_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g36_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g36_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g36_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g36_s0_lives5_dlg2,
+    } },
+    /*  6 */ { 104,   7,   0,   0, {  71,  37, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g36_s0_lives6_dlg2,
+    } },
+    /*  7 */ { 105,   2,   0,   0, {  58,  20, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g36_s0_lives7_dlg2,
+    } },
+    /*  8 */ { 106,   1,   0,   0, {  61,  18, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g36_s0_lives8_dlg2,
+    } },
+    /*  9 */ {  85,   6,   0,   0, {  68,  34, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g36_s0_lives9_dlg2,
+    } },
+    /* 10 */ {  77,   5,   0,   0, {  71,  45, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g36_s0_lives10_dlg2,
+    } },
+    /* 11 */ {  89,   1,   0,   0, {  59,  46, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g36_s0_lives11_dlg2,
+    } },
+    /* 12 */ {  90,   5,   0,   0, {  62,  48, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g36_s0_lives12_dlg2,
+    } },
+    /* 13 */ {  61,   0,   0,   0, {  57,  36, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g36_s0_lives13_dlg2,
+    } },
+    /* 14 */ {  62,   0,   0,   0, {  60,  36, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g36_s0_lives14_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g37_s0_lives[] = { /* 0x817b86c */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {} },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {} },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {} },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {} },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {} },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {} },
+};
+
+static const struct GroundLivesData s_gs1_g38_s0_lives[] = { /* 0x817b8fc */
+    /*  0 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g38_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g38_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g38_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g38_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g38_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g38_s0_lives5_dlg2,
+    } },
+    /*  6 */ {  85,   7,   0,   0, {  69,  36, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g38_s0_lives6_dlg2,
+    } },
+    /*  7 */ {  77,   0,   0,   0, {  90,  37, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g38_s0_lives7_dlg2,
+    } },
+    /*  8 */ {  89,   0,   0,   0, {  57,  33, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g38_s0_lives8_dlg2,
+    } },
+    /*  9 */ {  90,   0,   0,   0, {  61,  33, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g38_s0_lives9_dlg2,
+    } },
+    /* 10 */ {  61,   0,   0,   0, {  58,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g38_s0_lives10_dlg2,
+    } },
+    /* 11 */ {  62,   0,   0,   0, {  61,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g38_s0_lives11_dlg2,
+    } },
+    /* 12 */ {  95,   2,   0,   0, {  60,  43, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g38_s0_lives12_dlg2,
+    } },
+    /* 13 */ {  78,   6,   0,   0, {  64,  43, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g38_s0_lives13_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g38_s1_lives[] = { /* 0x817ba4c */
+    /*  0 */ {   0,   0,   0,   0, {  35,  25, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g38_s1_lives0_dlg0,
+    } },
+    /*  1 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g38_s1_lives1_dlg0,
+        [2] = s_gs1_g38_s1_lives1_dlg2,
+    } },
+    /*  2 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g38_s1_lives2_dlg0,
+        [2] = s_gs1_g38_s1_lives2_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g39_s0_lives[] = { /* 0x817ba94 */
+    /*  0 */ { 124,   0,   0,   0, {  60,  11, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g39_s0_lives0_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g40_s0_lives[] = { /* 0x817baac */
+    /*  0 */ {  77,   5,   0,   0, {  71,  44, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g40_s0_lives0_dlg0,
+        [2] = s_gs1_g40_s0_lives0_dlg2,
+        [3] = s_gs1_g40_s0_lives0_dlg3,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g41_s0_lives[] = { /* 0x817bac4 */
+    /*  0 */ {  88,   0,   0,   0, {  68,  27, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g41_s0_lives0_dlg0,
+        [2] = s_gs1_g41_s0_lives0_dlg2,
+        [3] = s_gs1_g41_s0_lives0_dlg3,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g42_s0_lives[] = { /* 0x817badc */
+    /*  0 */ {  77,   0,   0,   0, {  65,  37, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g42_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  79,   0,   0,   0, {  65,  36, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g42_s0_lives1_dlg0,
+        [2] = s_gs1_g42_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g42_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g42_s0_lives3_dlg2,
+    } },
+    /*  4 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g42_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  76,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g42_s0_lives5_dlg2,
+    } },
+    /*  6 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g42_s0_lives6_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g43_s0_lives[] = { /* 0x817bb84 */
+    /*  0 */ {   0,   2,   0,   0, {  70,  37, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g43_s0_lives0_dlg0,
+    } },
+    /*  1 */ {   4,   2,   0,   0, {  70,  42, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g43_s0_lives1_dlg0,
+    } },
+    /*  2 */ {  77,   6,   0,   0, {  65,  38, 0, 0 }, {
+        [0] = s_gs1_g43_s0_lives2_dlg0,
+    } },
+    /*  3 */ {  79,   0,   0,   0, {  65,  37, 0, 0 }, {
+        [0] = s_gs1_g43_s0_lives3_dlg0,
+    } },
+    /*  4 */ { 115,   2,   0,   0, {  29,  41, 0, 0 }, {
+        [0] = s_gs1_g43_s0_lives4_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g44_s0_lives[] = { /* 0x817bbfc */
+    /*  0 */ { 115,   0,   0,   0, {  70,  20, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g44_s0_lives0_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g45_s0_lives[] = { /* 0x817bc14 */
+    /*  0 */ { 115,   0,   0,   0, {  70,  20, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g45_s0_lives0_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g45_s1_lives[] = { /* 0x817bc2c */
+    /*  0 */ {   0,   2,   0,   0, {  46,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g45_s1_lives0_dlg0,
+    } },
+    /*  1 */ { 115,   2,   0,   0, {  26,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g45_s1_lives1_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g46_s0_lives[] = { /* 0x817bc5c */
+    /*  0 */ {   1,   2,   0,   0, {  46,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g46_s0_lives0_dlg0,
+    } },
+    /*  1 */ {   4,   2,   0,   0, {  55,  40, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g46_s0_lives1_dlg0,
+    } },
+    /*  2 */ {  77,   7,   0,   0, {  67,  38, 0, 0 }, {
+        [0] = s_gs1_g46_s0_lives2_dlg0,
+    } },
+    /*  3 */ {  79,   5,   0,   0, {  67,  43, 0, 0 }, {
+        [0] = s_gs1_g46_s0_lives3_dlg0,
+    } },
+    /*  4 */ { 109,   3,   0,   0, {  63,  43, 0, 0 }, {
+        [0] = s_gs1_g46_s0_lives4_dlg0,
+    } },
+    /*  5 */ { 110,   1,   0,   0, {  63,  38, 0, 0 }, {
+        [0] = s_gs1_g46_s0_lives5_dlg0,
+    } },
+    /*  6 */ {  89,   2,   0,   0, {  42,  42, 0, 0 }, {
+        [0] = s_gs1_g46_s0_lives6_dlg0,
+    } },
+    /*  7 */ { 104,   2,   0,   0, {  39,  39, 0, 0 }, {
+        [0] = s_gs1_g46_s0_lives7_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g47_s0_lives[] = { /* 0x817bd1c */
+    /*  0 */ {   1,   2,   0,   0, {  39,  41, 0, 0 }, {
+        [0] = s_gs1_g47_s0_lives0_dlg0,
+    } },
+    /*  1 */ {  34,   2,   0,   0, {  43,  41, 0, 0 }, {
+        [0] = s_gs1_g47_s0_lives1_dlg0,
+    } },
+    /*  2 */ {  70,   5,   0,   0, {  67,  44, 0, 0 }, {
+        [0] = s_gs1_g47_s0_lives2_dlg0,
+    } },
+    /*  3 */ {  71,   4,   0,   0, {  65,  40, 0, 0 }, {
+        [0] = s_gs1_g47_s0_lives3_dlg0,
+    } },
+    /*  4 */ {  72,   3,   0,   0, {  63,  44, 0, 0 }, {
+        [0] = s_gs1_g47_s0_lives4_dlg0,
+    } },
+    /*  5 */ {  75,   1,   0,   0, {  63,  37, 0, 0 }, {
+        [0] = s_gs1_g47_s0_lives5_dlg0,
+    } },
+    /*  6 */ {  88,   7,   0,   0, {  68,  37, 0, 0 }, {
+        [0] = s_gs1_g47_s0_lives6_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g48_s0_lives[] = { /* 0x817bdc4 */
+    /*  0 */ {   1,   3,   0,   0, {  60,  42, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g48_s0_lives0_dlg0,
+    } },
+    /*  1 */ {  34,   3,   0,   0, {  62,  44, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g48_s0_lives1_dlg0,
+    } },
+    /*  2 */ {  70,   5,   0,   0, {  68,  44, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g48_s0_lives2_dlg0,
+    } },
+    /*  3 */ {  71,   4,   0,   0, {  65,  46, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g48_s0_lives3_dlg0,
+    } },
+    /*  4 */ {  88,   5,   0,   0, {  71,  42, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g48_s0_lives4_dlg0,
+    } },
+    /*  5 */ { 121,   0,   0,   0, {  65,  39, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g48_s0_lives5_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g49_s0_lives[] = { /* 0x817be54 */
+    /*  0 */ {   1,   2,   0,   0, {  59,  38, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g49_s0_lives0_dlg0,
+    } },
+    /*  1 */ {  34,   2,   0,   0, {  59,  41, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g49_s0_lives1_dlg0,
+    } },
+    /*  2 */ {  70,   0,   0,   0, {  63,  35, 0, 0 }, {
+        [0] = s_gs1_g49_s0_lives2_dlg0,
+    } },
+    /*  3 */ {  71,   0,   0,   0, {  67,  35, 0, 0 }, {
+        [0] = s_gs1_g49_s0_lives3_dlg0,
+    } },
+    /*  4 */ {  88,   7,   0,   0, {  71,  37, 0, 0 }, {
+        [0] = s_gs1_g49_s0_lives4_dlg0,
+    } },
+    /*  5 */ { 121,   6,   0,   0, {  69,  41, 0, 0 }, {
+        [0] = s_gs1_g49_s0_lives5_dlg0,
+    } },
+    /*  6 */ { 122,   2,   0,   0, {  62,  41, 0, 0 }, {
+        [0] = s_gs1_g49_s0_lives6_dlg0,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g50_s0_lives[] = { /* 0x817befc */
+    /*  0 */ {  77,   0,   0,   0, {  71,  44, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g50_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  81,   4,   0,   0, {  58,  44, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g50_s0_lives1_dlg2,
+    } },
+    /*  2 */ {  79,   4,   0,   0, {  59,  47, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g50_s0_lives2_dlg2,
+    } },
+    /*  3 */ {  85,   2,   0,   0, {  61,  19, 0, CPOS_HALFTILE }, {
+        [0] = s_gs1_g50_s0_lives3_dlg0,
+        [2] = s_gs1_g50_s0_lives3_dlg2,
+        [3] = s_gs1_g50_s0_lives3_dlg3,
+    } },
+    /*  4 */ {  70,   0,   0,   0, {  36,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g50_s0_lives4_dlg2,
+    } },
+    /*  5 */ {  71,   0,   0,   0, {  39,  30, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g50_s0_lives5_dlg2,
+    } },
+    /*  6 */ {  72,   0,   0,   0, {  82,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g50_s0_lives6_dlg2,
+    } },
+    /*  7 */ {  73,   0,   0,   0, {  97,  33, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g50_s0_lives7_dlg2,
+    } },
+    /*  8 */ {  75,   0,   0,   0, {  41,  61, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g50_s0_lives8_dlg2,
+    } },
+    /*  9 */ {  74,   0,   0,   0, {  82,  60, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [2] = s_gs1_g50_s0_lives9_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g51_s0_lives[] = { /* 0x817bfec */
+    /*  0 */ {  93,   2,   0,   0, {  61,  48, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g51_s0_lives0_dlg2,
+    } },
+    /*  1 */ {  92,   6,   0,   0, {  65,  48, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g51_s0_lives1_dlg2,
+    } },
+};
+
+static const struct GroundLivesData s_gs1_g52_s0_lives[] = { /* 0x817c01c */
+    /*  0 */ {  82,   6,   0,   0, {  65,  48, 0, CPOS_HALFTILE }, {
+        [2] = s_gs1_g52_s0_lives0_dlg2,
+    } },
+};
+
+static const struct GroundObjectData s_gs1_g0_s0_objs[] = { /* 0x817c034 */
+    /*  0 */ {  15,   0,   3,   2, {  13,  37, CPOS_HALFTILE, 0 }, {
+        [2] = s_gs1_g0_s0_obj0_dlg2,
+    } },
+    /*  1 */ {  15,   0,   3,   2, {  68,  10, CPOS_HALFTILE, 0 }, {
+        [2] = s_gs1_g0_s0_obj1_dlg2,
+    } },
+    /*  2 */ {  15,   0,   3,   2, { 114,  36, CPOS_HALFTILE, 0 }, {
+        [2] = s_gs1_g0_s0_obj2_dlg2,
+    } },
+};
+
+static const struct GroundObjectData s_gs1_g5_s1_objs[] = { /* 0x817c07c */
+    /*  0 */ {  66,   0,   2,   2, { 115,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s1_obj0_dlg0,
+        [1] = s_gs1_g5_s1_obj0_dlg1,
+        [2] = s_gs1_g5_s1_obj0_dlg2,
+    } },
+    /*  1 */ {  66,   0,   2,   2, { 115,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s1_obj1_dlg0,
+        [1] = s_gs1_g5_s1_obj1_dlg1,
+        [2] = s_gs1_g5_s1_obj1_dlg2,
+    } },
+    /*  2 */ {  66,   0,   2,   2, { 115,  39, CPOS_HALFTILE, CPOS_HALFTILE }, {
+        [0] = s_gs1_g5_s1_obj2_dlg0,
+        [1] = s_gs1_g5_s1_obj2_dlg1,
+        [2] = s_gs1_g5_s1_obj2_dlg2,
+    } },
+};
+
+static const struct GroundEffectData s_gs1_g6_s0_effs[] = { /* 0x817c0c4 */
+    /*  0 */ {   0,   0,   1,   1, {  15,  39, 0, CPOS_HALFTILE }, s_gs1_g6_s0_eff0_script },
+};
+
+static const struct GroundEffectData s_gs1_g10_s0_effs[] = { /* 0x817c0d0 */
+    /*  0 */ {   0,   0,   1,   1, {  66,  40, 0, CPOS_HALFTILE }, s_gs1_g10_s0_eff0_script },
+};
+
+static const struct GroundEffectData s_gs1_g12_s0_effs[] = { /* 0x817c0dc */
+    /*  0 */ {   0,   0,   1,   1, {  66,  40, 0, CPOS_HALFTILE }, NULL },
+};
+
+static const struct GroundEffectData s_gs1_g17_s0_effs[] = { /* 0x817c0e8 */
+    /*  0 */ {   0,   0,   1,   1, {  64,  40, CPOS_HALFTILE, CPOS_HALFTILE }, s_gs1_g17_s0_eff0_script },
+};
+
+static const struct GroundEffectData s_gs1_g20_s0_effs[] = { /* 0x817c0f4 */
+    /*  0 */ {   0,   0,   1,   1, {  11,  40, 0, CPOS_HALFTILE }, s_gs1_g20_s0_eff0_script },
+};
+
+static const struct GroundEffectData s_gs1_g21_s0_effs[] = { /* 0x817c100 */
+    /*  0 */ {   0,   0,   1,   1, {  43,  42, 0, CPOS_HALFTILE }, s_gs1_g21_s0_eff0_script },
+};
+
+static const struct GroundEffectData s_gs1_g23_s0_effs[] = { /* 0x817c10c */
+    /*  0 */ {   0,   0,   1,   1, {  66,  42, 0, CPOS_HALFTILE }, s_gs1_g23_s0_eff0_script },
+};
+
+static const struct GroundEffectData s_gs1_g23_s1_effs[] = { /* 0x817c118 */
+    /*  0 */ {   5,   0,   1,   1, {  66,  41, 0, CPOS_HALFTILE }, s_gs1_g23_s1_eff0_script },
+    /*  1 */ {   5,   0,   1,   1, {  66,  41, 0, CPOS_HALFTILE }, s_gs1_g23_s1_eff1_script },
+};
+
+static const struct GroundEffectData s_gs1_g26_s0_effs[] = { /* 0x817c130 */
+    /*  0 */ {   0,   0,   1,   1, {  65,  42, 0, CPOS_HALFTILE }, s_gs1_g26_s0_eff0_script },
+};
+
+static const struct GroundEffectData s_gs1_g28_s0_effs[] = { /* 0x817c13c */
+    /*  0 */ {   0,   0,   1,   1, {  53,  42, CPOS_HALFTILE, CPOS_HALFTILE }, s_gs1_g28_s0_eff0_script },
+};
+
+static const struct GroundEffectData s_gs1_g31_s0_effs[] = { /* 0x817c148 */
+    /*  0 */ {   0,   0,   1,   1, {  84,  40, 0, CPOS_HALFTILE }, s_gs1_g31_s0_eff0_script },
+};
+
+static const struct GroundEffectData s_gs1_g32_s0_effs[] = { /* 0x817c154 */
+    /*  0 */ {   0,   0,   1,   1, {  65,  40, 0, CPOS_HALFTILE }, NULL },
+};
+
+static const struct GroundEffectData s_gs1_g37_s0_effs[] = { /* 0x817c160 */
+    /*  0 */ {   0,   0,   1,   1, {  23,  34, 0, CPOS_HALFTILE }, s_gs1_g37_s0_eff0_script },
+};
+
+static const struct GroundEffectData s_gs1_g43_s0_effs[] = { /* 0x817c16c */
+    /*  0 */ {   0,   0,   1,   1, {  69,  40, 0, CPOS_HALFTILE }, s_gs1_g43_s0_eff0_script },
+};
+
+static const struct GroundEffectData s_gs1_g46_s0_effs[] = { /* 0x817c178 */
+    /*  0 */ {   0,   0,   1,   1, {  64,  42, 0, 0 }, s_gs1_g46_s0_eff0_script },
+};
+
+static const struct GroundEffectData s_gs1_g47_s0_effs[] = { /* 0x817c184 */
+    /*  0 */ {   0,   0,   1,   1, {  65,  41, 0, 0 }, s_gs1_g47_s0_eff0_script },
+};
+
+static const struct GroundEffectData s_gs1_g48_s0_effs[] = { /* 0x817c190 */
+    /*  0 */ {   0,   0,   1,   1, {  65,  44, 0, 0 }, s_gs1_g48_s0_eff0_script },
+};
+
+static const struct GroundEffectData s_gs1_g49_s0_effs[] = { /* 0x817c19c */
+    /*  0 */ {   0,   0,   1,   1, {  64,  41, CPOS_HALFTILE, 0 }, NULL },
+};
+
+static const struct GroundEventData s_gs1_g0_s0_evts[] = { /* 0x817c1a8 */
+    /*  0 */ {   3,  12,   0,   0, {   0,  35, 0, 0 }, &s_gs1_g0_s0_evt0_sref },
+    /*  1 */ {  15,   6,   0,   0, {  57,   0, 0, 0 }, &s_gs1_g0_s0_evt1_sref },
+    /*  2 */ {   3,  12,   0,   0, { 117,  34, 0, 0 }, &s_gs1_g0_s0_evt2_sref },
+    /*  3 */ {   9,   3,   0,   0, {  63,  87, 0, 0 }, &s_gs1_g0_s0_evt3_sref },
+};
+
+static const struct GroundEventData s_gs1_g8_s2_evts[] = { /* 0x817c1d8 */
+    /*  0 */ {   3,   9,   0,   0, {  75,  35, 0, 0 }, &s_gs1_g8_s2_evt0_sref },
+};
+
+static const struct GroundEventData s_gs1_g16_s0_evts[] = { /* 0x817c1e4 */
+    /*  0 */ {   6,   9,   0,   0, {  47,  36, 0, 0 }, &s_gs1_g16_s0_evt0_sref },
+};
+
+static const struct GroundEventData s_gs1_g42_s0_evts[] = { /* 0x817c1f0 */
+    /*  0 */ {   6,   9,   0,   0, {  71,  35, 0, 0 }, &s_gs1_g42_s0_evt0_sref },
+};
+
+static const struct ScriptRef * const (sStationScripts[]) = { /* 0x817c1fc */
+    &s_gs1_g0_s0_station_sref,
+    &s_gs1_g1_s0_station_sref,
+    &s_gs1_g2_s0_station_sref,
+    &s_gs1_g4_s1_station_sref,
+    &s_gs1_g5_s1_station_sref,
+    &s_gs1_g5_s4_station_sref,
+    &s_gs1_g6_s0_station_sref,
+    &s_gs1_g7_s0_station_sref,
+    &s_gs1_g7_s1_station_sref,
+    &s_gs1_g8_s0_station_sref,
+    &s_gs1_g8_s1_station_sref,
+    &s_gs1_g9_s0_station_sref,
+    &s_gs1_g10_s0_station_sref,
+    &s_gs1_g11_s0_station_sref,
+    &s_gs1_g12_s0_station_sref,
+    &s_gs1_g13_s0_station_sref,
+    &s_gs1_g14_s0_station_sref,
+    &s_gs1_g15_s0_station_sref,
+    &s_gs1_g16_s0_station_sref,
+    &s_gs1_g17_s0_station_sref,
+    &s_gs1_g18_s0_station_sref,
+    &s_gs1_g19_s0_station_sref,
+    &s_gs1_g20_s0_station_sref,
+    &s_gs1_g21_s0_station_sref,
+    &s_gs1_g22_s0_station_sref,
+    &s_gs1_g23_s0_station_sref,
+    &s_gs1_g24_s0_station_sref,
+    &s_gs1_g24_s1_station_sref,
+    &s_gs1_g25_s0_station_sref,
+    &s_gs1_g26_s0_station_sref,
+    &s_gs1_g27_s0_station_sref,
+    &s_gs1_g28_s0_station_sref,
+    &s_gs1_g29_s0_station_sref,
+    &s_gs1_g29_s1_station_sref,
+    &s_gs1_g30_s0_station_sref,
+    &s_gs1_g30_s1_station_sref,
+    &s_gs1_g31_s0_station_sref,
+    &s_gs1_g32_s0_station_sref,
+    &s_gs1_g33_s0_station_sref,
+    &s_gs1_g34_s0_station_sref,
+    &s_gs1_g35_s0_station_sref,
+    &s_gs1_g36_s0_station_sref,
+    &s_gs1_g37_s0_station_sref,
+    &s_gs1_g38_s0_station_sref,
+    &s_gs1_g38_s1_station_sref,
+    &s_gs1_g43_s0_station_sref,
+    &s_gs1_g45_s1_station_sref,
+    &s_gs1_g46_s0_station_sref,
+    &s_gs1_g47_s0_station_sref,
+    &s_gs1_g48_s0_station_sref,
+    &s_gs1_g49_s0_station_sref,
+};
+
+static const struct GroundScriptSector s_gs1_g0_sectors[] = { /* 0x817c2c8 */
+    { 0,NULL, LPARRAY(s_gs1_g0_s0_objs), 0,NULL, LPARRAY(s_gs1_g0_s0_evts), 1,&sStationScripts[0], },
+    { LPARRAY(s_gs1_g0_s1_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+    { LPARRAY(s_gs1_g0_s2_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+    { LPARRAY(s_gs1_g0_s3_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+    { LPARRAY(s_gs1_g0_s4_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+    { 0,NULL, 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+    { 0,NULL, 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+    { LPARRAY(s_gs1_g0_s7_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+    { LPARRAY(s_gs1_g0_s8_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+};
+
+static const struct GroundScriptSector s_gs1_g1_sectors[] = { /* 0x817c430 */
+    { LPARRAY(s_gs1_g1_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[1], },
+};
+
+static const struct GroundScriptSector s_gs1_g2_sectors[] = { /* 0x817c458 */
+    { 0,NULL, 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[2], },
+};
+
+static const struct GroundScriptSector s_gs1_g3_sectors[] = { /* 0x817c480 */
+    { LPARRAY(s_gs1_g3_s0_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+};
+
+static const struct GroundScriptSector s_gs1_g4_sectors[] = { /* 0x817c4a8 */
+    { LPARRAY(s_gs1_g4_s0_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+    { LPARRAY(s_gs1_g4_s1_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[3], },
+    { LPARRAY(s_gs1_g4_s2_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+    { LPARRAY(s_gs1_g4_s3_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+    { LPARRAY(s_gs1_g4_s4_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+};
+
+static const struct GroundScriptSector s_gs1_g5_sectors[] = { /* 0x817c570 */
+    { LPARRAY(s_gs1_g5_s0_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+    { LPARRAY(s_gs1_g5_s1_lives), LPARRAY(s_gs1_g5_s1_objs), 0,NULL, 0,NULL, 1,&sStationScripts[4], },
+    { LPARRAY(s_gs1_g5_s2_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+    { LPARRAY(s_gs1_g5_s3_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+    { LPARRAY(s_gs1_g5_s4_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[5], },
+    { LPARRAY(s_gs1_g5_s5_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+    { LPARRAY(s_gs1_g5_s6_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+};
+
+static const struct GroundScriptSector s_gs1_g6_sectors[] = { /* 0x817c688 */
+    { LPARRAY(s_gs1_g6_s0_lives), 0,NULL, LPARRAY(s_gs1_g6_s0_effs), 0,NULL, 1,&sStationScripts[6], },
+};
+
+static const struct GroundScriptSector s_gs1_g7_sectors[] = { /* 0x817c6b0 */
+    { LPARRAY(s_gs1_g7_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[7], },
+    { LPARRAY(s_gs1_g7_s1_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[8], },
+};
+
+static const struct GroundScriptSector s_gs1_g8_sectors[] = { /* 0x817c700 */
+    { LPARRAY(s_gs1_g8_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[9], },
+    { LPARRAY(s_gs1_g8_s1_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[10], },
+    { LPARRAY(s_gs1_g8_s2_lives), 0,NULL, 0,NULL, LPARRAY(s_gs1_g8_s2_evts), 0,NULL, },
+};
+
+static const struct GroundScriptSector s_gs1_g9_sectors[] = { /* 0x817c778 */
+    { LPARRAY(s_gs1_g9_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[11], },
+    { LPARRAY(s_gs1_g9_s1_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+};
+
+static const struct GroundScriptSector s_gs1_g10_sectors[] = { /* 0x817c7c8 */
+    { LPARRAY(s_gs1_g10_s0_lives), 0,NULL, LPARRAY(s_gs1_g10_s0_effs), 0,NULL, 1,&sStationScripts[12], },
+    { LPARRAY(s_gs1_g10_s1_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+    { LPARRAY(s_gs1_g10_s2_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+};
+
+static const struct GroundScriptSector s_gs1_g11_sectors[] = { /* 0x817c840 */
+    { LPARRAY(s_gs1_g11_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[13], },
+};
+
+static const struct GroundScriptSector s_gs1_g12_sectors[] = { /* 0x817c868 */
+    { LPARRAY(s_gs1_g12_s0_lives), 0,NULL, LPARRAY(s_gs1_g12_s0_effs), 0,NULL, 1,&sStationScripts[14], },
+};
+
+static const struct GroundScriptSector s_gs1_g13_sectors[] = { /* 0x817c890 */
+    { LPARRAY(s_gs1_g13_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[15], },
+};
+
+static const struct GroundScriptSector s_gs1_g14_sectors[] = { /* 0x817c8b8 */
+    { LPARRAY(s_gs1_g14_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[16], },
+};
+
+static const struct GroundScriptSector s_gs1_g15_sectors[] = { /* 0x817c8e0 */
+    { LPARRAY(s_gs1_g15_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[17], },
+};
+
+static const struct GroundScriptSector s_gs1_g16_sectors[] = { /* 0x817c908 */
+    { LPARRAY(s_gs1_g16_s0_lives), 0,NULL, 0,NULL, LPARRAY(s_gs1_g16_s0_evts), 1,&sStationScripts[18], },
+};
+
+static const struct GroundScriptSector s_gs1_g17_sectors[] = { /* 0x817c930 */
+    { LPARRAY(s_gs1_g17_s0_lives), 0,NULL, LPARRAY(s_gs1_g17_s0_effs), 0,NULL, 1,&sStationScripts[19], },
+};
+
+static const struct GroundScriptSector s_gs1_g18_sectors[] = { /* 0x817c958 */
+    { LPARRAY(s_gs1_g18_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[20], },
+};
+
+static const struct GroundScriptSector s_gs1_g19_sectors[] = { /* 0x817c980 */
+    { LPARRAY(s_gs1_g19_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[21], },
+};
+
+static const struct GroundScriptSector s_gs1_g20_sectors[] = { /* 0x817c9a8 */
+    { LPARRAY(s_gs1_g20_s0_lives), 0,NULL, LPARRAY(s_gs1_g20_s0_effs), 0,NULL, 1,&sStationScripts[22], },
+};
+
+static const struct GroundScriptSector s_gs1_g21_sectors[] = { /* 0x817c9d0 */
+    { LPARRAY(s_gs1_g21_s0_lives), 0,NULL, LPARRAY(s_gs1_g21_s0_effs), 0,NULL, 1,&sStationScripts[23], },
+};
+
+static const struct GroundScriptSector s_gs1_g22_sectors[] = { /* 0x817c9f8 */
+    { LPARRAY(s_gs1_g22_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[24], },
+};
+
+static const struct GroundScriptSector s_gs1_g23_sectors[] = { /* 0x817ca20 */
+    { LPARRAY(s_gs1_g23_s0_lives), 0,NULL, LPARRAY(s_gs1_g23_s0_effs), 0,NULL, 1,&sStationScripts[25], },
+    { LPARRAY(s_gs1_g23_s1_lives), 0,NULL, LPARRAY(s_gs1_g23_s1_effs), 0,NULL, 0,NULL, },
+};
+
+static const struct GroundScriptSector s_gs1_g24_sectors[] = { /* 0x817ca70 */
+    { LPARRAY(s_gs1_g24_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[26], },
+    { LPARRAY(s_gs1_g24_s1_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[27], },
+};
+
+static const struct GroundScriptSector s_gs1_g25_sectors[] = { /* 0x817cac0 */
+    { LPARRAY(s_gs1_g25_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[28], },
+};
+
+static const struct GroundScriptSector s_gs1_g26_sectors[] = { /* 0x817cae8 */
+    { LPARRAY(s_gs1_g26_s0_lives), 0,NULL, LPARRAY(s_gs1_g26_s0_effs), 0,NULL, 1,&sStationScripts[29], },
+};
+
+static const struct GroundScriptSector s_gs1_g27_sectors[] = { /* 0x817cb10 */
+    { LPARRAY(s_gs1_g27_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[30], },
+};
+
+static const struct GroundScriptSector s_gs1_g28_sectors[] = { /* 0x817cb38 */
+    { LPARRAY(s_gs1_g28_s0_lives), 0,NULL, LPARRAY(s_gs1_g28_s0_effs), 0,NULL, 1,&sStationScripts[31], },
+};
+
+static const struct GroundScriptSector s_gs1_g29_sectors[] = { /* 0x817cb60 */
+    { LPARRAY(s_gs1_g29_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[32], },
+    { LPARRAY(s_gs1_g29_s1_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[33], },
+};
+
+static const struct GroundScriptSector s_gs1_g30_sectors[] = { /* 0x817cbb0 */
+    { LPARRAY(s_gs1_g30_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[34], },
+    { LPARRAY(s_gs1_g30_s1_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[35], },
+};
+
+static const struct GroundScriptSector s_gs1_g31_sectors[] = { /* 0x817cc00 */
+    { LPARRAY(s_gs1_g31_s0_lives), 0,NULL, LPARRAY(s_gs1_g31_s0_effs), 0,NULL, 1,&sStationScripts[36], },
+};
+
+static const struct GroundScriptSector s_gs1_g32_sectors[] = { /* 0x817cc28 */
+    { LPARRAY(s_gs1_g32_s0_lives), 0,NULL, LPARRAY(s_gs1_g32_s0_effs), 0,NULL, 1,&sStationScripts[37], },
+};
+
+static const struct GroundScriptSector s_gs1_g33_sectors[] = { /* 0x817cc50 */
+    { LPARRAY(s_gs1_g33_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[38], },
+};
+
+static const struct GroundScriptSector s_gs1_g34_sectors[] = { /* 0x817cc78 */
+    { LPARRAY(s_gs1_g34_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[39], },
+};
+
+static const struct GroundScriptSector s_gs1_g35_sectors[] = { /* 0x817cca0 */
+    { LPARRAY(s_gs1_g35_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[40], },
+};
+
+static const struct GroundScriptSector s_gs1_g36_sectors[] = { /* 0x817ccc8 */
+    { LPARRAY(s_gs1_g36_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[41], },
+};
+
+static const struct GroundScriptSector s_gs1_g37_sectors[] = { /* 0x817ccf0 */
+    { LPARRAY(s_gs1_g37_s0_lives), 0,NULL, LPARRAY(s_gs1_g37_s0_effs), 0,NULL, 1,&sStationScripts[42], },
+};
+
+static const struct GroundScriptSector s_gs1_g38_sectors[] = { /* 0x817cd18 */
+    { LPARRAY(s_gs1_g38_s0_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[43], },
+    { LPARRAY(s_gs1_g38_s1_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[44], },
+};
+
+static const struct GroundScriptSector s_gs1_g39_sectors[] = { /* 0x817cd68 */
+    { LPARRAY(s_gs1_g39_s0_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+};
+
+static const struct GroundScriptSector s_gs1_g40_sectors[] = { /* 0x817cd90 */
+    { LPARRAY(s_gs1_g40_s0_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+};
+
+static const struct GroundScriptSector s_gs1_g41_sectors[] = { /* 0x817cdb8 */
+    { LPARRAY(s_gs1_g41_s0_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+};
+
+static const struct GroundScriptSector s_gs1_g42_sectors[] = { /* 0x817cde0 */
+    { LPARRAY(s_gs1_g42_s0_lives), 0,NULL, 0,NULL, LPARRAY(s_gs1_g42_s0_evts), 0,NULL, },
+};
+
+static const struct GroundScriptSector s_gs1_g43_sectors[] = { /* 0x817ce08 */
+    { LPARRAY(s_gs1_g43_s0_lives), 0,NULL, LPARRAY(s_gs1_g43_s0_effs), 0,NULL, 1,&sStationScripts[45], },
+};
+
+static const struct GroundScriptSector s_gs1_g44_sectors[] = { /* 0x817ce30 */
+    { LPARRAY(s_gs1_g44_s0_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+};
+
+static const struct GroundScriptSector s_gs1_g45_sectors[] = { /* 0x817ce58 */
+    { LPARRAY(s_gs1_g45_s0_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+    { LPARRAY(s_gs1_g45_s1_lives), 0,NULL, 0,NULL, 0,NULL, 1,&sStationScripts[46], },
+};
+
+static const struct GroundScriptSector s_gs1_g46_sectors[] = { /* 0x817cea8 */
+    { LPARRAY(s_gs1_g46_s0_lives), 0,NULL, LPARRAY(s_gs1_g46_s0_effs), 0,NULL, 1,&sStationScripts[47], },
+};
+
+static const struct GroundScriptSector s_gs1_g47_sectors[] = { /* 0x817ced0 */
+    { LPARRAY(s_gs1_g47_s0_lives), 0,NULL, LPARRAY(s_gs1_g47_s0_effs), 0,NULL, 1,&sStationScripts[48], },
+};
+
+static const struct GroundScriptSector s_gs1_g48_sectors[] = { /* 0x817cef8 */
+    { LPARRAY(s_gs1_g48_s0_lives), 0,NULL, LPARRAY(s_gs1_g48_s0_effs), 0,NULL, 1,&sStationScripts[49], },
+};
+
+static const struct GroundScriptSector s_gs1_g49_sectors[] = { /* 0x817cf20 */
+    { LPARRAY(s_gs1_g49_s0_lives), 0,NULL, LPARRAY(s_gs1_g49_s0_effs), 0,NULL, 1,&sStationScripts[50], },
+};
+
+static const struct GroundScriptSector s_gs1_g50_sectors[] = { /* 0x817cf48 */
+    { LPARRAY(s_gs1_g50_s0_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+};
+
+static const struct GroundScriptSector s_gs1_g51_sectors[] = { /* 0x817cf70 */
+    { LPARRAY(s_gs1_g51_s0_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+};
+
+static const struct GroundScriptSector s_gs1_g52_sectors[] = { /* 0x817cf98 */
+    { LPARRAY(s_gs1_g52_s0_lives), 0,NULL, 0,NULL, 0,NULL, 0,NULL, },
+};
+
+static const struct GroundScriptGroup s_gs1_groups[] = { /* 0x817cfc0 */
+    { LPARRAY(s_gs1_g0_sectors) },
+    { LPARRAY(s_gs1_g1_sectors) },
+    { LPARRAY(s_gs1_g2_sectors) },
+    { LPARRAY(s_gs1_g3_sectors) },
+    { LPARRAY(s_gs1_g4_sectors) },
+    { LPARRAY(s_gs1_g5_sectors) },
+    { LPARRAY(s_gs1_g6_sectors) },
+    { LPARRAY(s_gs1_g7_sectors) },
+    { LPARRAY(s_gs1_g8_sectors) },
+    { LPARRAY(s_gs1_g9_sectors) },
+    { LPARRAY(s_gs1_g10_sectors) },
+    { LPARRAY(s_gs1_g11_sectors) },
+    { LPARRAY(s_gs1_g12_sectors) },
+    { LPARRAY(s_gs1_g13_sectors) },
+    { LPARRAY(s_gs1_g14_sectors) },
+    { LPARRAY(s_gs1_g15_sectors) },
+    { LPARRAY(s_gs1_g16_sectors) },
+    { LPARRAY(s_gs1_g17_sectors) },
+    { LPARRAY(s_gs1_g18_sectors) },
+    { LPARRAY(s_gs1_g19_sectors) },
+    { LPARRAY(s_gs1_g20_sectors) },
+    { LPARRAY(s_gs1_g21_sectors) },
+    { LPARRAY(s_gs1_g22_sectors) },
+    { LPARRAY(s_gs1_g23_sectors) },
+    { LPARRAY(s_gs1_g24_sectors) },
+    { LPARRAY(s_gs1_g25_sectors) },
+    { LPARRAY(s_gs1_g26_sectors) },
+    { LPARRAY(s_gs1_g27_sectors) },
+    { LPARRAY(s_gs1_g28_sectors) },
+    { LPARRAY(s_gs1_g29_sectors) },
+    { LPARRAY(s_gs1_g30_sectors) },
+    { LPARRAY(s_gs1_g31_sectors) },
+    { LPARRAY(s_gs1_g32_sectors) },
+    { LPARRAY(s_gs1_g33_sectors) },
+    { LPARRAY(s_gs1_g34_sectors) },
+    { LPARRAY(s_gs1_g35_sectors) },
+    { LPARRAY(s_gs1_g36_sectors) },
+    { LPARRAY(s_gs1_g37_sectors) },
+    { LPARRAY(s_gs1_g38_sectors) },
+    { LPARRAY(s_gs1_g39_sectors) },
+    { LPARRAY(s_gs1_g40_sectors) },
+    { LPARRAY(s_gs1_g41_sectors) },
+    { LPARRAY(s_gs1_g42_sectors) },
+    { LPARRAY(s_gs1_g43_sectors) },
+    { LPARRAY(s_gs1_g44_sectors) },
+    { LPARRAY(s_gs1_g45_sectors) },
+    { LPARRAY(s_gs1_g46_sectors) },
+    { LPARRAY(s_gs1_g47_sectors) },
+    { LPARRAY(s_gs1_g48_sectors) },
+    { LPARRAY(s_gs1_g49_sectors) },
+    { LPARRAY(s_gs1_g50_sectors) },
+    { LPARRAY(s_gs1_g51_sectors) },
+    { LPARRAY(s_gs1_g52_sectors) },
+};
+
+static const struct GroundLink s_gs1_links[] = { /* 0x817d168 */
+    /* link   0 */ { { /*x*/  90, /*y*/  39, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link   1 */ { { /*x*/  30, /*y*/  39, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link   2 */ { { /*x*/   2, /*y*/  39, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link   3 */ { { /*x*/ 117, /*y*/  39, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link   4 */ { { /*x*/  70, /*y*/  39, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link   5 */ { { /*x*/  59, /*y*/  39, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link   6 */ { { /*x*/   2, /*y*/  39, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link   7 */ { { /*x*/  12, /*y*/  41, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link   8 */ { { /*x*/  14, /*y*/  39, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link   9 */ { { /*x*/  37, /*y*/  34, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  10 */ { { /*x*/  82, /*y*/  34, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  11 */ { { /*x*/  82, /*y*/  61, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  12 */ { { /*x*/  41, /*y*/  61, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  13 */ { { /*x*/  14, /*y*/  41, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  14 */ { { /*x*/  56, /*y*/  42, /*flags*/ 0, 0 }, /*w*/ 12, /*h*/  7, /*ret*/ 3, /*?*/ 2 },
+    /* link  15 */ { { /*x*/  56, /*y*/  30, /*flags*/ 0, 0 }, /*w*/ 12, /*h*/  9, /*ret*/ 3, /*?*/ 2 },
+    /* link  16 */ { { /*x*/  68, /*y*/  33, /*flags*/ 0, 0 }, /*w*/  8, /*h*/ 13, /*ret*/ 3, /*?*/ 2 },
+    /* link  17 */ { { /*x*/  56, /*y*/  42, /*flags*/ 0, 0 }, /*w*/ 12, /*h*/  7, /*ret*/ 3, /*?*/ 2 },
+    /* link  18 */ { { /*x*/  97, /*y*/  37, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  19 */ { { /*x*/  97, /*y*/  39, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  20 */ { { /*x*/  93, /*y*/  37, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  21 */ { { /*x*/  93, /*y*/  39, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  22 */ { { /*x*/  76, /*y*/  39, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  23 */ { { /*x*/  76, /*y*/  37, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  24 */ { { /*x*/  65, /*y*/  23, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  25 */ { { /*x*/  62, /*y*/  23, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  26 */ { { /*x*/  58, /*y*/  40, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  27 */ { { /*x*/  83, /*y*/  40, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  28 */ { { /*x*/ 101, /*y*/  40, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  29 */ { { /*x*/  56, /*y*/  38, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  30 */ { { /*x*/  86, /*y*/  38, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  31 */ { { /*x*/  98, /*y*/  38, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  32 */ { { /*x*/  56, /*y*/  42, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  33 */ { { /*x*/  86, /*y*/  42, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  34 */ { { /*x*/  99, /*y*/  42, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  35 */ { { /*x*/  49, /*y*/  65, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  36 */ { { /*x*/  56, /*y*/  42, /*flags*/ 0, 0 }, /*w*/ 12, /*h*/  7, /*ret*/ 3, /*?*/ 2 },
+    /* link  37 */ { { /*x*/  56, /*y*/  41, /*flags*/ 0, 0 }, /*w*/ 11, /*h*/  8, /*ret*/ 3, /*?*/ 2 },
+    /* link  38 */ { { /*x*/  67, /*y*/  33, /*flags*/ 0, 0 }, /*w*/ 12, /*h*/ 13, /*ret*/ 3, /*?*/ 2 },
+    /* link  39 */ { { /*x*/  56, /*y*/  41, /*flags*/ 0, 0 }, /*w*/ 11, /*h*/  8, /*ret*/ 3, /*?*/ 2 },
+    /* link  40 */ { { /*x*/  67, /*y*/  33, /*flags*/ 0, 0 }, /*w*/ 12, /*h*/ 13, /*ret*/ 3, /*?*/ 2 },
+    /* link  41 */ { { /*x*/  68, /*y*/  33, /*flags*/ 0, 0 }, /*w*/  8, /*h*/ 13, /*ret*/ 3, /*?*/ 2 },
+    /* link  42 */ { { /*x*/  56, /*y*/  42, /*flags*/ 0, 0 }, /*w*/ 12, /*h*/  7, /*ret*/ 3, /*?*/ 2 },
+    /* link  43 */ { { /*x*/  58, /*y*/  37, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  44 */ { { /*x*/  58, /*y*/  41, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  45 */ { { /*x*/  56, /*y*/  38, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  46 */ { { /*x*/  94, /*y*/  20, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  47 */ { { /*x*/  94, /*y*/  43, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  48 */ { { /*x*/  35, /*y*/  62, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  49 */ { { /*x*/  87, /*y*/  62, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  50 */ { { /*x*/  26, /*y*/  40, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  51 */ { { /*x*/  65, /*y*/  42, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  52 */ { { /*x*/  65, /*y*/  44, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  53 */ { { /*x*/  61, /*y*/  44, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  54 */ { { /*x*/  59, /*y*/  39, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  55 */ { { /*x*/  59, /*y*/  41, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  56 */ { { /*x*/  60, /*y*/  36, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  57 */ { { /*x*/  65, /*y*/  41, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  58 */ { { /*x*/  61, /*y*/  42, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  59 */ { { /*x*/  51, /*y*/  39, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  60 */ { { /*x*/  57, /*y*/  39, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  61 */ { { /*x*/  51, /*y*/  41, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  62 */ { { /*x*/  57, /*y*/  41, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  63 */ { { /*x*/  50, /*y*/  40, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  64 */ { { /*x*/  60, /*y*/  40, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  65 */ { { /*x*/  50, /*y*/  42, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  66 */ { { /*x*/  60, /*y*/  42, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  67 */ { { /*x*/  47, /*y*/  41, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  68 */ { { /*x*/  56, /*y*/  41, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  69 */ { { /*x*/  63, /*y*/  44, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  70 */ { { /*x*/  63, /*y*/  41, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  71 */ { { /*x*/  66, /*y*/  44, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  72 */ { { /*x*/  66, /*y*/  38, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  73 */ { { /*x*/  60, /*y*/  39, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  74 */ { { /*x*/  59, /*y*/  37, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  75 */ { { /*x*/  65, /*y*/  40, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  76 */ { { /*x*/  39, /*y*/  40, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link  77 */ { { /*x*/  55, /*y*/  29, /*flags*/ 0, 0 }, /*w*/ 11, /*h*/  9, /*ret*/ 3, /*?*/ 2 },
+    /* link  78 */ { { /*x*/  56, /*y*/  41, /*flags*/ 0, 0 }, /*w*/ 11, /*h*/  8, /*ret*/ 3, /*?*/ 2 },
+    /* link  79 */ { { /*x*/  68, /*y*/  33, /*flags*/ 0, 0 }, /*w*/ 10, /*h*/ 13, /*ret*/ 3, /*?*/ 2 },
+    /* link  80 */ { { /*x*/  55, /*y*/  29, /*flags*/ 0, 0 }, /*w*/ 11, /*h*/  9, /*ret*/ 3, /*?*/ 2 },
+    /* link  81 */ { { /*x*/  56, /*y*/  41, /*flags*/ 0, 0 }, /*w*/ 11, /*h*/  8, /*ret*/ 3, /*?*/ 2 },
+    /* link  82 */ { { /*x*/  68, /*y*/  33, /*flags*/ 0, 0 }, /*w*/ 10, /*h*/ 13, /*ret*/ 3, /*?*/ 2 },
+    /* link  83 */ { { /*x*/  57, /*y*/  41, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  84 */ { { /*x*/  57, /*y*/  41, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  85 */ { { /*x*/  60, /*y*/  43, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  86 */ { { /*x*/  54, /*y*/  41, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  87 */ { { /*x*/  57, /*y*/  43, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  88 */ { { /*x*/  57, /*y*/  39, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  89 */ { { /*x*/  57, /*y*/  37, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  90 */ { { /*x*/  72, /*y*/  40, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  91 */ { { /*x*/  35, /*y*/  40, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  92 */ { { /*x*/  72, /*y*/  37, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  93 */ { { /*x*/  72, /*y*/  43, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  94 */ { { /*x*/  67, /*y*/  45, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  95 */ { { /*x*/  59, /*y*/  46, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link  96 */ { { /*x*/  55, /*y*/  29, /*flags*/ 0, 0 }, /*w*/ 11, /*h*/  9, /*ret*/ 3, /*?*/ 2 },
+    /* link  97 */ { { /*x*/  56, /*y*/  41, /*flags*/ 0, 0 }, /*w*/ 11, /*h*/  8, /*ret*/ 3, /*?*/ 2 },
+    /* link  98 */ { { /*x*/  68, /*y*/  33, /*flags*/ 0, 0 }, /*w*/ 10, /*h*/ 13, /*ret*/ 3, /*?*/ 2 },
+    /* link  99 */ { { /*x*/  53, /*y*/  41, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 100 */ { { /*x*/  67, /*y*/  41, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 101 */ { { /*x*/  53, /*y*/  39, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 102 */ { { /*x*/  64, /*y*/  41, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 103 */ { { /*x*/  67, /*y*/  38, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 104 */ { { /*x*/  64, /*y*/  35, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 105 */ { { /*x*/  64, /*y*/  38, /*flags*/ CPOS_CURRENT, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 106 */ { { /*x*/  64, /*y*/  21, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 107 */ { { /*x*/  62, /*y*/  35, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 108 */ { { /*x*/  58, /*y*/  35, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 109 */ { { /*x*/  60, /*y*/  35, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 110 */ { { /*x*/  62, /*y*/  35, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 111 */ { { /*x*/  65, /*y*/  35, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 112 */ { { /*x*/  65, /*y*/  42, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 113 */ { { /*x*/  62, /*y*/  44, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 114 */ { { /*x*/  70, /*y*/  42, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 115 */ { { /*x*/  65, /*y*/  40, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 116 */ { { /*x*/  63, /*y*/  41, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 117 */ { { /*x*/  63, /*y*/  39, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 118 */ { { /*x*/  59, /*y*/  40, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 119 */ { { /*x*/  58, /*y*/  38, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 120 */ { { /*x*/  58, /*y*/  42, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 121 */ { { /*x*/  68, /*y*/  36, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 122 */ { { /*x*/  70, /*y*/  38, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 123 */ { { /*x*/  67, /*y*/  42, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 124 */ { { /*x*/  72, /*y*/  37, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 125 */ { { /*x*/  72, /*y*/  40, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 126 */ { { /*x*/  70, /*y*/  42, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 127 */ { { /*x*/  66, /*y*/  34, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 128 */ { { /*x*/  62, /*y*/  35, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 129 */ { { /*x*/  63, /*y*/  32, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 130 */ { { /*x*/  58, /*y*/  34, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 131 */ { { /*x*/  70, /*y*/  33, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 132 */ { { /*x*/  60, /*y*/  44, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 133 */ { { /*x*/  65, /*y*/  46, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 134 */ { { /*x*/  71, /*y*/  45, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 135 */ { { /*x*/  59, /*y*/  34, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 136 */ { { /*x*/  65, /*y*/  20, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
+    /* link 137 */ { { /*x*/  59, /*y*/  40, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 138 */ { { /*x*/  59, /*y*/  35, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 139 */ { { /*x*/  59, /*y*/  44, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 140 */ { { /*x*/  67, /*y*/  44, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 141 */ { { /*x*/  67, /*y*/  59, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 142 */ { { /*x*/  56, /*y*/  41, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 143 */ { { /*x*/  57, /*y*/  38, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 144 */ { { /*x*/  60, /*y*/  41, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+    /* link 145 */ { { /*x*/  60, /*y*/  38, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
+};
+
+/*extern*/ const struct GroundScriptHeader gGroundScript_gs1 = { LPARRAY(s_gs1_groups), s_gs1_links }; /* 0x817d5f8 */

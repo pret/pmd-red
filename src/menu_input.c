@@ -48,7 +48,7 @@ const UnkTextStruct2 gUnknown_80D47C8[4] = {
         NULL,
 };
 
-ALIGNED(4) const u8 gUnknown_80D4828[] = _("{COLOR_1}%c%s");
+ALIGNED(4) const u8 gUnknown_80D4828[] = _("{COLOR}%c%s");
 
 const s32 gUnknown_80D4830[9] = {
         1,

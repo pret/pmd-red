@@ -52,7 +52,7 @@ const MenuItem gUnknown_80E6EAC[4] = {
 
 ALIGNED(4) const u8 CheckAgain_80E6ECC[] = _("{CENTER_ALIGN}Please check again.");
 ALIGNED(4) const u8 StorageEmpty_80E6EE4[] = _("{CENTER_ALIGN}The storage space is empty!");
-ALIGNED(4) const u8 Caution_80E6F04[] = _("{CENTER_ALIGN}{COLOR_1 RED}Caution!{END_COLOR_TEXT_1} ");
+ALIGNED(4) const u8 Caution_80E6F04[] = _("{CENTER_ALIGN}{COLOR RED}Caution!{RESET} ");
 static const u8 fill0[] = "pksdir0";
 
 extern void sub_8038440();

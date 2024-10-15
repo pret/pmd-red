@@ -52,44 +52,44 @@ ALIGNED(4) static const u8 sUnknown_80DD388[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80DD420[] = _(
 	"If you say farewell to this\n"
-	"Pokémon{COMMA} it will be gone forever.{EXTRA_MSG}"
+	"Pokémon, it will be gone forever.{EXTRA_MSG}"
 	"You will never be able to get another one\n"
 	"like it to join your team.\n"
 	"Will you release it anyway?");
 
 ALIGNED(4) static const u8 sUnknown_80DD4C4[] = _(
-	"{CENTER_ALIGN}{ARG_POKEMON_1} joined the\n"
+	"{CENTER_ALIGN}{POKEMON_1} joined the\n"
 	"{CENTER_ALIGN}rescue team for adventures!");
 
 ALIGNED(4) static const u8 sUnknown_80DD4F4[] = _(
-	"{CENTER_ALIGN}{ARG_POKEMON_1} left the team to remain\n"
+	"{CENTER_ALIGN}{POKEMON_1} left the team to remain\n"
 	"{CENTER_ALIGN}on standby in the Friend Area.");
 
 ALIGNED(4) static const u8 sBecameLeader[] = _(
-	"{CENTER_ALIGN}{ARG_POKEMON_1} became the leader\n"
+	"{CENTER_ALIGN}{POKEMON_1} became the leader\n"
 	"{CENTER_ALIGN}of the rescue team.");
 
 ALIGNED(4) static const u8 sUnknown_80DD564[] = _(
-	"{CENTER_ALIGN}{ARG_POKEMON_1} left\n"
+	"{CENTER_ALIGN}{POKEMON_1} left\n"
 	"{CENTER_ALIGN}the Friend Area.\n"
-	"{CENTER_ALIGN}Bye-bye{COMMA} {ARG_POKEMON_1}!");
+	"{CENTER_ALIGN}Bye-bye, {POKEMON_1}!");
 
 ALIGNED(4) static const u8 sUnknown_80DD594[] = _(
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1} was\n"
+	"{CENTER_ALIGN}The {COLOR GREEN}{MOVE_ITEM_1}{RESET} was\n"
 	"{CENTER_ALIGN}handed over. ");
 
 ALIGNED(4) static const u8 sUnknown_80DD5B8[] = _(
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_1}{END_COLOR_TEXT_1} was\n"
+	"{CENTER_ALIGN}The {COLOR GREEN}{MOVE_ITEM_1}{RESET} was\n"
 	"{CENTER_ALIGN}handed over.{EXTRA_MSG}"
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
+	"{CENTER_ALIGN}The {COLOR GREEN}{MOVE_ITEM_0}{RESET} was\n"
 	"{CENTER_ALIGN}returned to the Toolbox.");
 
 ALIGNED(4) static const u8 sUnknown_80DD60C[] = _(
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
+	"{CENTER_ALIGN}The {COLOR GREEN}{MOVE_ITEM_0}{RESET} was\n"
 	"{CENTER_ALIGN}returned to the Toolbox.");
 
 ALIGNED(4) static const u8 sUnknown_80DD63C[] = _(
-	"{CENTER_ALIGN}The {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} was\n"
+	"{CENTER_ALIGN}The {COLOR GREEN}{MOVE_ITEM_0}{RESET} was\n"
 	"{CENTER_ALIGN}sent to storage.");
 
 ALIGNED(4) static const u8 sPartyMenuStandBy[] = "Stand By";
@@ -102,5 +102,5 @@ ALIGNED(4) static const u8 sPartyMenuSayFarewell[] = "Say Farewell";
 ALIGNED(4) static const u8 sPartyMenuSummary[] = "Summary";
 ALIGNED(4) static const u8 sPartyMenuMoves[] = "Moves";
 ALIGNED(4) static const u8 sPartyMenuCheckIQ[] = "Check IQ";
-ALIGNED(4) static const u8 sPartyMenuItemPlaceholder[] = _("Item: {COLOR_1 GREEN}{ARG_MOVE_ITEM_0}{END_COLOR_TEXT_1} ");
+ALIGNED(4) static const u8 sPartyMenuItemPlaceholder[] = _("Item: {COLOR GREEN}{MOVE_ITEM_0}{RESET} ");
 ALIGNED(4) static const u8 sUnknown_80DD6E0[] = "%s";

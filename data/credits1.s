@@ -881,7 +881,7 @@ gUnknown_80E4A40: @ 80E4A40
 
         .global AmbrellaCoLtd
         AmbrellaCoLtd:
-        .string "Ambrella Co., Ltd.\0"
+        .asciz "Ambrella Co., Ltd."
         .align 2,0
 
         .global GameFreakInc
