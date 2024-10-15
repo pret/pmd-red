@@ -17,11 +17,11 @@ const struct ExclusivePokemon gExclusivePokemon[NUM_EXCLUSIVE_POKEMON] = {
     BLUE_EXCLUSIVE(MONSTER_AIPOM),
 };
 
-const u8 filler_ex0[8] = 
+const u8 filler_ex0[8] =
 {
     'p', 'k', 's', 'd', 'i', 'r', '0', 0
 };
-const u8 filler_ex1[8] = 
+const u8 filler_ex1[8] =
 {
     'p', 'k', 's', 'd', 'i', 'r', '0', 0
 };
@@ -50,12 +50,12 @@ void InitializeExclusivePokemon(void)
 }
 
 void sub_8097FA8(u8 param_1)
-{   
+{
     gUnknown_203B498->unk48[param_1 >> 5] |= 1 << ((param_1 & 0x1f));
 }
 
 void sub_8097FD0(u8 param_1)
-{   
+{
     gUnknown_203B498->unk3C[param_1 >> 5] |= 1 << ((param_1 & 0x1f));
 }
 
@@ -98,7 +98,7 @@ void sub_8098080(void)
     }
 }
 
-u32 sub_80980A4(void)
+u8 sub_80980A4(void)
 {
     u32 temp = gUnknown_203B498->unk0;
     gUnknown_203B498->unk0 = 1;
@@ -167,7 +167,7 @@ void sub_8098170(s32 param_1)
 {
   s32 index;
   struct ExclusivePokemonData *ptr;
-  
+
     ptr =  gUnknown_203B498;
     if (param_1 < 0) {
         index = param_1 + 0x1f;
@@ -184,7 +184,7 @@ bool32 sub_80981A0(s32 param_1)
   s32 index;
   bool32 flag;
   struct ExclusivePokemonData *ptr;
-  
+
   if (param_1 > 0x1e) {
     return FALSE;
   }
@@ -251,7 +251,7 @@ void WriteExclusivePokemon(struct unkStruct_8094924 *r0)
 
     SaveIntegerBits(r0, gUnknown_203B498, 1);
     for(index = 0; index < MONSTER_MAX; index++)
-    {   
+    {
         stack_0 = sub_8098134(index);
         SaveIntegerBits(r0, &stack_0, 1);
     }

@@ -97,33 +97,34 @@ bool8 sub_80571F0(Entity * pokemon, Move *move)
 bool8 sub_805727C(Entity * pokemon, Entity * target, s32 chance)
 {
     bool8 uVar2;
-    if (!sub_8044B28() && EntityExists(pokemon) && EntityExists(target) && 
-        (target->info->unk158 != 0) &&
-        (target->info->HP != 0)) {
-        if (chance != 0) {
-            if (HasAbility(pokemon, ABILITY_SERENE_GRACE)) {
-                uVar2 = DungeonRandOutcome_2(chance * 2);
-            }
-            else
-            {
-                uVar2 = DungeonRandOutcome_2(chance);
-            }
+    if (sub_8044B28())
+        return FALSE;
+    if (!EntityExists(pokemon) || !EntityExists(target))
+        return FALSE;
+    if (target->info->unk158 == 0 || target->info->HP == 0)
+        return FALSE;
+
+    if (chance != 0) {
+        if (HasAbility(pokemon, ABILITY_SERENE_GRACE)) {
+            uVar2 = DungeonRandOutcome_2(chance * 2);
         }
         else
         {
-            uVar2 = TRUE;
+            uVar2 = DungeonRandOutcome_2(chance);
         }
-        if ((uVar2 != 0) && (pokemon != target) && HasAbility(target, ABILITY_SHIELD_DUST))
-        {
-            sub_80429C8(target);
-end:
-            return FALSE;
-        }
-        else
-            return uVar2;
+    }
+    else
+    {
+        uVar2 = TRUE;
     }
 
-    goto end;
+    if (uVar2 && (pokemon != target) && HasAbility(target, ABILITY_SHIELD_DUST))
+    {
+        sub_80429C8(target);
+        return FALSE;
+    }
+
+    return uVar2;
 }
 
 bool8 sub_8057308(Entity *pokemon, s32 chance)
@@ -140,45 +141,25 @@ bool8 sub_8057308(Entity *pokemon, s32 chance)
 
 bool8 CanAIUseMove(Entity *pokemon, s32 moveIndex, bool8 hasPPChecker)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
-    Move *move = &pokemonInfo->moves.moves[moveIndex];
     s32 i;
-    if (!(move->moveFlags & MOVE_FLAG_EXISTS))
-    {
+    EntityInfo *pokemonInfo = GetEntInfo(pokemon);
+    Move *move = &pokemonInfo->moves.moves[moveIndex];
+    if (!MoveFlagExists(move))
         return FALSE;
-    }
-    if (move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)
-    {
+    if (MoveFlagLinkChain(move) || MoveFlagDisabled(move) || MoveFlagSealed(move))
         return FALSE;
+
+    for (i = 0; i < MAX_MON_MOVES; i++) {
+        if (CanMonsterUseMove(pokemon, move, hasPPChecker))
+            return TRUE;
+        move++;
+        if (move >= &pokemonInfo->moves.moves[MAX_MON_MOVES])
+            break;
+        if (!(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+            break;
     }
-    if (move->moveFlags & MOVE_FLAG_DISABLED ||
-        move->moveFlags2 & MOVE_FLAG_SEALED)
-    {
-        return FALSE;
-    }
-    goto initMoveIndex;
-    returnTrue:
-    return TRUE;
-    initMoveIndex:
-    i = 0;
-    goto checkMoveUsable;
-    incMoveIndex:
-    i++;
-    checkMoveUsable:
-    if (i >= MAX_MON_MOVES)
-    {
-        return FALSE;
-    }
-    if (CanMonsterUseMove(pokemon, move, hasPPChecker))
-    {
-        goto returnTrue;
-    }
-    move++;
-    if ((u32) move >= (u32) &pokemonInfo->moves.struggleMoveFlags || !(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
-    {
-        return FALSE;
-    }
-    goto incMoveIndex;
+
+    return FALSE;
 }
 
 bool8 CanMonsterUseMove(Entity *pokemon, Move *move, bool8 hasPPChecker)
@@ -223,7 +204,7 @@ bool8 CanMonsterUseMove(Entity *pokemon, Move *move, bool8 hasPPChecker)
 bool8 sub_805744C(Entity * pokemon, Move *move, bool8 param_3)
 {
   EntityInfo *entityInfo;
-  
+
   entityInfo = pokemon->info;
   if (move->id != MOVE_REGULAR_ATTACK) {
     if (((move->moveFlags & MOVE_FLAG_DISABLED)) || ((move->moveFlags2 & MOVE_FLAG_EXISTS))) {

@@ -49,7 +49,7 @@ void sub_8097FD0(u8 param_1);
 void sub_8097FF8(void);
 void sub_8098044(u8 param_1);
 void sub_8098080(void);
-u32 sub_80980A4(void);
+u8 sub_80980A4(void);
 void sub_80980B4(s16 pokeID);
 bool8 sub_8098100(u8 param_1);
 bool8 sub_8098134(s16 pokeID);

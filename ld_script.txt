@@ -214,7 +214,7 @@ SECTIONS {
         src/code_8041AD0.o(.text);
         asm/code_8041AD0.o(.text);
         src/code_804267C.o(.text);
-        asm/code_8042B34.o(.text);
+        src/code_8042B34.o(.text);
         src/dungeon_engine.o(.text);
         asm/code_8044210.o(.text);
         src/dungeon_action.o(.text);

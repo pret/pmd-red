@@ -240,14 +240,12 @@ void sub_8066BD4(Entity *param_1)
 {
   Entity *entity;
   EntityInfo *info;
-  EntityInfo *info2; // NOTE: needed two of these to match
   Item *item;
   Item *heldItem;
   Item temp;
 
   entity = sub_8044DA4(param_1,0);
-  info = entity->info;
-  info2 = entity->info;
+  info = GetEntInfo(entity);
   heldItem = &info->heldItem;
   item = sub_8044D90(param_1,1,0x1565);
   if (heldItem->flags & ITEM_FLAG_STICKY)
@@ -274,8 +272,8 @@ void sub_8066BD4(Entity *param_1)
     if (sub_80706A4(entity,&entity->pos) != 0) {
       sub_807D148(param_1,entity,0,0);
     }
-    if (!info2->isTeamLeader) {
-      info2->flags = info2->flags | MOVEMENT_FLAG_UNK_14;
+    if (!info->isTeamLeader) {
+      info->flags = info->flags | MOVEMENT_FLAG_UNK_14;
     }
     sub_807AB38(param_1,gDungeon->unk3A08);
   }

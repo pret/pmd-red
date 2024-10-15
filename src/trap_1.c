@@ -239,9 +239,9 @@ void sub_8080CF0(unkStruct_8094924 *param_1)
     sub_80830B4(param_1,gDungeon->minusIsActive[0]);
     sub_80830B4(param_1,gDungeon->minusIsActive[1]);
     sub_80830B4(param_1,gDungeon->decoyActive);
-    sub_80830B4(param_1,gDungeon->fill37FD);
+    sub_80830B4(param_1,gDungeon->unk37FD);
     sub_80830B4(param_1,gDungeon->deoxysDefeat);
-    sub_80830B4(param_1,gDungeon->fill37FF);
+    sub_80830B4(param_1,gDungeon->unk37FF);
     sub_8083030(param_1,gDungeon->unk3800);
     for(counter = 0; counter < MAX_TEAM_MEMBERS; counter++)
     {
@@ -985,9 +985,9 @@ void sub_808217C(unkStruct_8094924 *param_1)
     gDungeon->minusIsActive[0] = sub_80831DC(param_1);
     gDungeon->minusIsActive[1] = sub_80831DC(param_1);
     gDungeon->decoyActive = sub_80831DC(param_1);
-    gDungeon->fill37FD = sub_80831DC(param_1);
+    gDungeon->unk37FD = sub_80831DC(param_1);
     gDungeon->deoxysDefeat = sub_80831DC(param_1);
-    gDungeon->fill37FF = sub_80831DC(param_1);
+    gDungeon->unk37FF = sub_80831DC(param_1);
     gDungeon->unk3800 = sub_8083158(param_1);
     for(counter = 0; counter < MAX_TEAM_MEMBERS; counter++)
     {

@@ -51,129 +51,31 @@ u8 sub_80923D4(s32 target)
     return 0;
 }
 
-#ifdef NONMATCHING // 96.99% https://decomp.me/scratch/pj7Q5
-void sub_8092404(u8 r0, u16 *r1, bool8 r2, bool8 r3)
+void sub_8092404(u8 r0, u16 *r1, bool8 allowLeader, bool8 allowPartner)
 {
     s32 i;
-    bool32 flag;
     s32 count;
-    PokemonStruct1 *pokemon;
 
     count = 0;
-
     for (i = 0; i < NUM_MONSTERS; i++) {
-        pokemon = &gRecruitedPokemonRef->pokemon[i];
-
-        if (!((u8)pokemon->unk0 & 1))
-            continue;
-        if (pokemon->isTeamLeader && !r2)
-            continue;
-
-        flag = pokemon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER;
-        if (flag && !r3)
-            continue;
-        if (sub_80923D4(i) != r0)
-            continue;
-        if (count > 15)
-            continue;
-
-        r1[count] = i;
-        count++;
+        if (PokemonFlag1(&gRecruitedPokemonRef->pokemon[i])
+            && (!IsMonTeamLeader(&gRecruitedPokemonRef->pokemon[i]) || allowLeader)
+            && (!IsMonPartner(&gRecruitedPokemonRef->pokemon[i]) || allowPartner)
+            && sub_80923D4(i) == r0
+            && count < 16
+            )
+        {
+            r1[count] = i;
+            count++;
+        }
     }
 
     r1[count] = 0xFFFF;
 }
-#else
-NAKED
-void sub_8092404(u8 r0, u16 *r1, bool8 r2, bool8 r3)
-{
-	asm_unified("push {r4-r7,lr}\n"
-	"\tmov r7, r10\n"
-	"\tmov r6, r9\n"
-	"\tmov r5, r8\n"
-	"\tpush {r5-r7}\n"
-	"\tmov r10, r1\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tmov r9, r0\n"
-	"\tlsls r2, 24\n"
-	"\tlsrs r2, 24\n"
-	"\tmov r8, r2\n"
-	"\tlsls r3, 24\n"
-	"\tlsrs r7, r3, 24\n"
-	"\tmovs r6, 0\n"
-	"\tmovs r4, 0\n"
-	"\tmov r5, r10\n"
-"_08092426:\n"
-	"\tmovs r0, 0x58\n"
-	"\tadds r1, r4, 0\n"
-	"\tmuls r1, r0\n"
-	"\tldr r0, _08092494\n"
-	"\tldr r0, [r0]\n"
-	"\tadds r2, r1, r0\n"
-	"\tldrb r1, [r2]\n"
-	"\tmovs r0, 0x1\n"
-	"\tands r0, r1\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _08092472\n"
-	"\tldrb r0, [r2, 0x2]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _08092448\n"
-	"\tmov r0, r8\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _08092472\n"
-"_08092448:\n"
-	"\tmovs r1, 0\n"
-	"\tldrb r0, [r2, 0x4]\n"
-	"\tcmp r0, 0x41\n"
-	"\tbne _08092452\n"
-	"\tmovs r1, 0x1\n"
-"_08092452:\n"
-	"\tcmp r1, 0\n"
-	"\tbeq _0809245A\n"
-	"\tcmp r7, 0\n"
-	"\tbeq _08092472\n"
-"_0809245A:\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sub_80923D4\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tcmp r0, r9\n"
-	"\tbne _08092472\n"
-	"\tcmp r6, 0xF\n"
-	"\tbgt _08092472\n"
-	"\tstrh r4, [r5]\n"
-	"\tadds r5, 0x2\n"
-	"\tadds r6, 0x1\n"
-"_08092472:\n"
-	"\tadds r4, 0x1\n"
-	"\tmovs r0, 0xCE\n"
-	"\tlsls r0, 1\n"
-	"\tcmp r4, r0\n"
-	"\tble _08092426\n"
-	"\tlsls r0, r6, 1\n"
-	"\tadd r0, r10\n"
-	"\tldr r2, _08092498\n"
-	"\tadds r1, r2, 0\n"
-	"\tstrh r1, [r0]\n"
-	"\tpop {r3-r5}\n"
-	"\tmov r8, r3\n"
-	"\tmov r9, r4\n"
-	"\tmov r10, r5\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_08092494: .4byte gRecruitedPokemonRef\n"
-"_08092498: .4byte 0x0000ffff");
-}
-#endif // NONMATCHING
 
 void sub_809249C(u8 friendArea, bool8 clear)
 {
     s32 i;
-    bool32 dungeonCheck;
-    bool32 isTeamLeader;
 
     if (!gFriendAreas[friendArea])
         return;
@@ -181,16 +83,12 @@ void sub_809249C(u8 friendArea, bool8 clear)
     for (i = 0; i < NUM_MONSTERS; i++) {
         PokemonStruct1 *pokemon = &gRecruitedPokemonRef->pokemon[i];
 
-        if (!((u8)pokemon->unk0 & 1))
-            continue;
-        if (sub_80923D4(i) != friendArea)
-            continue;
-
-        dungeonCheck = pokemon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER;
-        if (dungeonCheck || (isTeamLeader = pokemon->isTeamLeader != FALSE, isTeamLeader))
-            clear = FALSE;
-        else
-            pokemon->unk0 = 0;
+        if (PokemonFlag1(pokemon) && sub_80923D4(i) == friendArea) {
+            if (IsMonPartner(pokemon) || IsMonTeamLeader(pokemon))
+                clear = FALSE;
+            else
+                pokemon->unk0 = 0;
+        }
     }
 
     if (clear)
@@ -278,8 +176,8 @@ void sub_8092638(u8 friendArea, unkStruct_8092638 *param_2, bool8 checkLeader, b
         for (i = 0; i < param_2->numPokemon; i++, iVar4++) {
             pokeStruct = &gRecruitedPokemonRef->pokemon[iVar4];
 
-            if ((((u8)pokeStruct->unk0 & 1) &&
-                (!checkLeader || !pokeStruct->isTeamLeader)) &&
+            if (PokemonFlag1(pokeStruct) &&
+                (!checkLeader || !IsMonTeamLeader(pokeStruct)) &&
                 (!checkDungeon || pokeStruct->dungeonLocation.id != DUNGEON_JOIN_LOCATION_PARTNER)) {
                 param_2->unk2++;
             }
@@ -313,7 +211,7 @@ void sub_80926F8(u8 a0, unkStruct_8092638 *a1, u8 a2)
 
         for (i = 0; i < max; i++, r5++) {
             mon = &gRecruitedPokemonRef->pokemon[r5];
-            if ((u8)mon->unk0 & 1) {
+            if (PokemonFlag1(mon)) {
                 if (mon->isTeamLeader || (a2 == 0 && mon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER))
                     a1->numPokemon--;
                 else

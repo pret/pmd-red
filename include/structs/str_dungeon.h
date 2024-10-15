@@ -195,6 +195,22 @@ struct unkStruct_Dungeon134_sub
     u8 unk17A;
 };
 
+// size 0x10
+struct unkStruct_Dungeon5C4_sub
+{
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    Entity *unkC;
+};
+
+struct unkStruct_Dungeon64C
+{
+    u8 unk0;
+    u8 unk1;
+    u32 unk4;
+};
+
 // size: 0x1CEDC
 typedef struct Dungeon
 {
@@ -203,10 +219,13 @@ typedef struct Dungeon
     u8 unk2;
     u8 unk3;
     u8 unk4;
-    u8 fill5[0x7 - 0x5];
+    u8 unk5;
+    u8 unk6;
     u8 unk7;
     u8 unk8;
-    u8 fill9[0xC - 0x9];
+    u8 unk9;
+    u8 unkA;
+    u8 unkB;
     u8 unkC;
     u8 unkD;
     u8 unkE;
@@ -223,12 +242,18 @@ typedef struct Dungeon
     Dungeon_sub unk17C[0x100];
     /* 0x57C */ u8 fill57C[0x5C0 - 0x57c];
     /* 0x5C0 */ s32 unk5C0;
-    /* 0x5C4 */ u8 fill5C4[0x644 - 0x5C4];
+    /* 0x5C4 */ struct unkStruct_Dungeon5C4_sub unk5C4[3];
+    /* 0x5F4 */ u8 faintStringBuffer[80];
     /* 0x644 */ DungeonLocation dungeonLocation;
     /* 0x648 */ DungeonLocation dungeonLocation2;
-    u8 fill64C[0x654 - 0x64C];
+    struct unkStruct_Dungeon64C unk64C;
     u8 unk654;
-    u8 fill655[0x65B - 0x655];
+    u8 fill655;
+    u8 fill656;
+    u8 fill657;
+    u8 unk658;
+    u8 unk659;
+    u8 unk65A;
     u8 unk65B;
     u8 unk65C;
     u8 unk65D;
@@ -254,7 +279,9 @@ typedef struct Dungeon
     u8 unk678;
     u8 unk679;
     u8 unk67A;
-    u8 unk67B[0x684 - 0x67B];
+    s8 unk67B;
+    u32 unk67C;
+    u32 unk680;
     s16 unk684;
     s16 unk686;
     s16 unk688;
@@ -263,7 +290,7 @@ typedef struct Dungeon
     s32 unk68C;
     s32 unk690;
     s32 unk694;
-    u8 fill698;
+    u8 unk698;
     u8 unk699;
     u8 fill69A[0x69C - 0x69A];
     EntityInfo unk69C[4];
@@ -281,9 +308,9 @@ typedef struct Dungeon
     /* 0x37F8 */ bool8 plusIsActive[2]; // Index 0: Enemy , Index 1: Team
     /* 0x37FA */ bool8 minusIsActive[2]; // Index 0: Enemy , Index 1: Team
     /* 0x37FC */ bool8 decoyActive;
-    u8 fill37FD;
+    /* 0x37FD */ u8 unk37FD;
     /* 0x37FE */ bool8 deoxysDefeat; // Flag set for deoxys in Meteor Cave
-    u8 fill37FF;
+    /* 0x37FE */ u8 unk37FF;
     s16 unk3800;
     u8 fill3802[0x3904 - 0x3802];
     /* 0x3904 */ s16 unk3904;
@@ -352,7 +379,9 @@ typedef struct Dungeon
     /* 0x17B44 */ OpenedFile *sprites[MONSTER_MAX];
     /* 0x181E4 */ OpenedFile *paletFile;
     /* 0x181E8 */ UnkDungeonGlobal_unk181E8_sub unk181e8;
-    u8 fill1822C[0x1C06C - 0x1822C];
+    u8 fill18220[0x1C05E - 0x1822C];
+    u8 unk1C05E;
+    u8 fill1C05F[0x1C06C - 0x1C05F];
     u32 unk1C06C;
     u8 fill1C070[0x1C570 - 0x1C070];
     /* 0x1C570 */ DungeonLocation unk1C570;

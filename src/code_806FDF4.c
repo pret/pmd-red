@@ -101,7 +101,7 @@ u8 sub_806F4A4(Entity *pokemon, u8 type) {
 
     EntityInfo *info = pokemon->info;
     s32 index;
-    
+
     if(MonsterIsType(pokemon, TYPE_GHOST))
     {
         if(type == TYPE_NORMAL || type == TYPE_FIGHTING)
@@ -176,7 +176,7 @@ void sub_806F63C(Entity *param_1)
 {
     UnkDungeonGlobal_unk181E8_sub *temp;
 
-    temp = &gDungeon->unk181e8;    
+    temp = &gDungeon->unk181e8;
 
     if (temp->cameraTarget == param_1) {
         sub_803F508(temp->cameraTarget);
@@ -259,7 +259,7 @@ bool8 sub_806F660(Entity *pokemon,Entity *target)
           }
           recruitRate += gUnknown_80F5700[pokemonInfo->level];
           if (iVar4 < recruitRate) {
-            for (index = 0; index <= (6 - size); index++) 
+            for (index = 0; index <= (6 - size); index++)
             {
               for(uVar6 = 0; uVar6 < size; uVar6++)
               {
@@ -694,7 +694,7 @@ bool8 sub_806F9BC(s16 species)
     unkStruct_8092638 auStack_18;
 
     id = species;
-    if (((gDungeon->fill655[3] == 0) || (sub_808529C(id) == 0)) ||
+    if (((gDungeon->unk658 == 0) || (sub_808529C(id) == 0)) ||
         ((id == MONSTER_MEW && (gDungeon->unk678 == 1)))) {
         return FALSE;
     }
@@ -751,7 +751,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
 
     if (sub_8052B8C(0,*gUnknown_80F9FE8,1) == 0) {
         if (param_3->id != MONSTER_JIRACHI) {
-            SendMessage(entity1,*gUnknown_80FA004);  
+            SendMessage(entity1,*gUnknown_80FA004);
         }
         return 0;
     }
@@ -759,7 +759,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
     {
         for(pokeIndex = 0; pokeIndex < MAX_TEAM_MEMBERS; pokeIndex++)
         {
-            if (((u8)(pokeIndex[gRecruitedPokemonRef->pokemon2].unk0) & 1) == 0) 
+            if (((u8)(pokeIndex[gRecruitedPokemonRef->pokemon2].unk0) & 1) == 0)
                 break;
         }
 
@@ -831,11 +831,11 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
                 }
             }
             return TRUE;
-        }     
+        }
     }
 }
 
-// https://decomp.me/scratch/LByEy (93.86% matching - Seth) 
+// https://decomp.me/scratch/LByEy (93.86% matching - Seth)
 
 #ifdef NONMATCHING
 bool8 sub_806FD18(Entity *param_1)
@@ -845,7 +845,7 @@ bool8 sub_806FD18(Entity *param_1)
   int iVar4;
   EntityInfo *info;
   int index;
-  
+
   info = param_1->info;
   iVar4 = -1;
   size = GetBodySize((int)info->apparentID);
@@ -865,7 +865,7 @@ bool8 sub_806FD18(Entity *param_1)
         {
             if (((u8)(index[gRecruitedPokemonRef->pokemon2].unk0) & 1) == 0) break;
         }
-            
+
       if (index != 4) {
         for(index = 0; index < 4; index++)
         {
@@ -1027,7 +1027,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
   {
     if (((u8)(index[gRecruitedPokemonRef->pokemon2].unk0) & 1) == 0) break;
   }
-    
+
   if (index == MAX_TEAM_MEMBERS) {
     return FALSE;
   }
@@ -1055,10 +1055,10 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
       pokeStruct2->offense.att[index2] = local_74.offense.att[index2];
       pokeStruct2->offense.def[index2] = local_74.offense.def[index2];
     }
-      
+
     pokeStruct2->currExp = local_74.exp;
     pokeStruct2->moves = local_74.moves;
-      
+
     pokeStruct2->itemSlot = local_74.heldItem;
     buffer = pokeStruct2->name;
     BoundedCopyStringtoBuffer(buffer,GetMonSpecies(local_74.id), POKEMON_NAME_LENGTH);
