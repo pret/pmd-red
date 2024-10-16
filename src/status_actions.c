@@ -159,42 +159,29 @@ extern struct NaturePowerMove gUnknown_80F59C8[10];
 
 bool8 sub_805AFA4(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
-  s32 r0;
-  s32 r2;
-  s32 r1;
-  bool8 flag;
+    EntityInfo *entityInfo;
+    s32 maxHp;
+    s32 index;
+    bool8 flag;
+    SendThawedMessage(pokemon, target);
 
-#ifndef NONMATCHING
-  register EntityInfo *entityInfo asm("r3");
-#else
-  EntityInfo *entityInfo;
-#endif
+    entityInfo = GetEntInfo(pokemon);
+    maxHp = entityInfo->maxHPStat;
+    if (entityInfo->HP <= entityInfo->maxHPStat / 4) {
+        index = 0;
+    }
+    else if (entityInfo->HP <= maxHp / 2) {
+        index = 1;
+    }
+    else if (entityInfo->HP <= (maxHp * 3) / 4) {
+        index = 2;
+    }
+    else {
+        index = 3;
+    }
 
-  SendThawedMessage(pokemon, target);
-  entityInfo = pokemon->info;
-  r2 = entityInfo->maxHPStat;
-  r0 = r2;
-  if (r2 < 0) {
-    r0 = r2 + 3;
-  }
-  if (entityInfo->HP <= r0 >> 2) {
-    r2 = 0;
-  }
-  else if (r1 = entityInfo->HP, r1 <= r2 / 2) {
-      r2 = 1;
-  }
-  else
-  {
-    r0 = r2 * 3;
-    if (r0 < 0) {
-        r0 = r0 + 3;
-    }
-    if (r0 >>= 2, r2 = 3, r1 <= r0) {
-        r2 = 2;
-    }
-  }
-  flag =  sub_8055640(pokemon,target,move,gUnknown_80F51C4[r2],param_4) ? TRUE : FALSE;
-  return flag;
+    flag = sub_8055640(pokemon,target,move,gUnknown_80F51C4[index],param_4) ? TRUE : FALSE;
+    return flag;
 }
 
 bool8 sub_805B028(Entity * pokemon,Entity * target,Move *move)

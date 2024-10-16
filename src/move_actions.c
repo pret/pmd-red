@@ -1208,44 +1208,28 @@ bool8 sub_80586DC(Entity * pokemon, Entity * target, Move * move, u32 param_4)
 }
 
 
-// NOTE: copy of sub_805AFA4  in status_checker.c except for different reg for entityInfo
+// NOTE: almost the same as sub_8058D44 and sub_805AFA4 in status_actions.c
 bool8 sub_8058770(Entity * pokemon, Entity * target, Move * move, u32 param_4)
 {
-  s32 r0;
-  s32 r2;
-  s32 r1;
-  bool8 flag;
-
-#ifndef NONMATCHING
-  register EntityInfo *entityInfo asm("r2");
-#else
-  EntityInfo *entityInfo;
-#endif
-
-  entityInfo = pokemon->info;
-  r2 = entityInfo->maxHPStat;
-  r0 = r2;
-  if (r2 < 0) {
-    r0 = r2 + 3;
-  }
-  if (entityInfo->HP <= r0 >> 2) {
-    r2 = 0;
-  }
-  else if (r1 = entityInfo->HP, r1 <= r2 / 2) {
-      r2 = 1;
-  }
-  else
-  {
-    r0 = r2 * 3;
-    if (r0 < 0) {
-        r0 = r0 + 3;
+    s32 index;
+    bool8 flag;
+    EntityInfo *entityInfo = GetEntInfo(pokemon);
+    s32 maxHp = entityInfo->maxHPStat;
+    if (entityInfo->HP <= entityInfo->maxHPStat / 4) {
+        index = 0;
     }
-    if (r0 >>= 2, r2 = 3, r1 <= r0) {
-        r2 = 2;
+    else if (entityInfo->HP <= maxHp / 2) {
+        index = 1;
     }
-  }
-  flag =  sub_8055640(pokemon,target,move,gUnknown_80F51A4[r2],param_4) ? TRUE : FALSE;
-  return flag;
+    else if (entityInfo->HP <= (maxHp * 3) / 4) {
+        index = 2;
+    }
+    else {
+        index = 3;
+    }
+
+    flag = sub_8055640(pokemon,target,move,gUnknown_80F51A4[index],param_4) ? TRUE : FALSE;
+    return flag;
 }
 
 bool8 sub_80587E8(Entity * pokemon, Entity * target, Move * move, u32 param_4)
@@ -1516,41 +1500,25 @@ bool8 sub_8058D38(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 // NOTE: same as sub_8058770
 bool8 sub_8058D44(Entity * pokemon, Entity * target, Move * move, u32 param_4)
 {
-  s32 r0;
-  s32 r2;
-  s32 r1;
-  bool8 flag;
-
-#ifndef NONMATCHING
-  register EntityInfo *entityInfo asm("r2");
-#else
-  EntityInfo *entityInfo;
-#endif
-
-  entityInfo = pokemon->info;
-  r2 = entityInfo->maxHPStat;
-  r0 = r2;
-  if (r2 < 0) {
-    r0 = r2 + 3;
-  }
-  if (entityInfo->HP <= r0 >> 2) {
-    r2 = 0;
-  }
-  else if (r1 = entityInfo->HP, r1 <= r2 / 2) {
-      r2 = 1;
-  }
-  else
-  {
-    r0 = r2 * 3;
-    if (r0 < 0) {
-        r0 = r0 + 3;
+    s32 index;
+    bool8 flag;
+    EntityInfo *entityInfo = GetEntInfo(pokemon);
+    s32 maxHp = entityInfo->maxHPStat;
+    if (entityInfo->HP <= entityInfo->maxHPStat / 4) {
+        index = 0;
     }
-    if (r0 >>= 2, r2 = 3, r1 <= r0) {
-        r2 = 2;
+    else if (entityInfo->HP <= maxHp / 2) {
+        index = 1;
     }
-  }
-  flag =  sub_8055640(pokemon,target,move,gUnknown_80F51B4[r2],param_4) ? TRUE : FALSE;
-  return flag;
+    else if (entityInfo->HP <= (maxHp * 3) / 4) {
+        index = 2;
+    }
+    else {
+        index = 3;
+    }
+
+    flag = sub_8055640(pokemon,target,move,gUnknown_80F51B4[index],param_4) ? TRUE : FALSE;
+    return flag;
 }
 
 
