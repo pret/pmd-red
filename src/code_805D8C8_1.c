@@ -2731,11 +2731,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     case 0:
         PrintFormatStringOnWindow(x, 0, gTeamToolboxAPtr, 0, 0);
         for (i = 0; i < 10; i++) {
-            Item *items;
-            DUMMY_TEAM_ITEMS_ASM_MATCH(i);
-
-            items = gTeamInventoryRef->teamItems;
-            if (items[i].flags & ITEM_FLAG_EXISTS) {
+            if (ItemExists(&gTeamInventoryRef->teamItems[i])) {
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, &gTeamInventoryRef->teamItems[i], &gUnknown_8106B60);
                 y = sub_8013800(&gUnknown_202EE10, i);
@@ -2749,11 +2745,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     case 1:
         PrintFormatStringOnWindow(x, 0, gTeamToolboxBPtr, 0, 0);
         for (i = 0; i < 10; i++) {
-            Item *items;
-            DUMMY_TEAM_ITEMS_ASM_MATCH(i);
-
-            items = gTeamInventoryRef->teamItems;
-            if (items[i + 10].flags & 1) {
+            if (ItemExists(&gTeamInventoryRef->teamItems[i + 10])) {
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, &gTeamInventoryRef->teamItems[i + 10], &gUnknown_8106B60);
                 y = sub_8013800(&gUnknown_202EE10, i);
@@ -2912,10 +2904,9 @@ void sub_8060900(Entity *a0)
                     sub_8044FF0(9);
                 }
             }
-            // Why is it checking actionUseIndex again?
-            if (gUnknown_202F238.actionUseIndex == 128 && gDungeon->unk65B != 0) {
-                sub_8044F5C(10, item->id);
-            }
+        }
+        if (gUnknown_202F238.actionUseIndex == 128 && gDungeon->unk65B != 0) {
+            sub_8044F5C(10, item->id);
         }
         val_sub8044DC8 = sub_8044DC8(item);
         if (val_sub8044DC8 != 0) {
@@ -2933,7 +2924,7 @@ void sub_8060900(Entity *a0)
         {
             s32 i;
 
-            if (item->flags & ITEM_FLAG_SET) {
+            if (ItemSet(item)) {
                 sub_8044F5C(0x3D, item->id);
             }
             else {
@@ -2941,13 +2932,9 @@ void sub_8060900(Entity *a0)
             }
 
             for (i = 0; i < INVENTORY_SIZE; i++) {
-                // Compiler uses r5 without the fakematch trick. It's gTeamInventoryRef causing matching issues again...
-                #ifndef NONMATCHING
-                item++;item--;
-                #endif // NONMATCHING
-                if (gTeamInventoryRef->teamItems[i].flags & ITEM_FLAG_EXISTS
-                    && gTeamInventoryRef->teamItems[i].flags & ITEM_FLAG_SET
-                    && gTeamInventoryRef->teamItems[i].flags & ITEM_FLAG_STICKY)
+                if (ItemExists(&gTeamInventoryRef->teamItems[i])
+                    && ItemSet(&gTeamInventoryRef->teamItems[i])
+                    && ItemSticky(&gTeamInventoryRef->teamItems[i]))
                 {
                     sub_8044FF0(0x3C);
                     sub_8044FF0(0x3D);

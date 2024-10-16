@@ -484,14 +484,7 @@ void FillInventoryGaps()
 
   // clear out the rest of the slots
   for (; last_filled < INVENTORY_SIZE; last_filled++) {
-      struct Item *items;
-
-      DUMMY_TEAM_ITEMS_ASM_MATCH(last_filled);
-      items = gTeamInventoryRef->teamItems;
-
-      items[last_filled].id = ITEM_NOTHING;
-      items[last_filled].quantity = 0;
-      items[last_filled].flags = 0;
+      ZeroOutItem(&gTeamInventoryRef->teamItems[last_filled]);
   }
 }
 
@@ -575,12 +568,8 @@ bool8 AddItemToInventory(const Item* slot)
 
     // try to add item to inventory, return 1 if failed
     for (i = 0; i < INVENTORY_SIZE; i++) {
-        Item *items;
-        DUMMY_TEAM_ITEMS_ASM_MATCH(i);
-
-        items = gTeamInventoryRef->teamItems;
-        if (!(items[i].flags & ITEM_FLAG_EXISTS)) {
-            items[i] = *slot;
+        if (!ItemExists(&gTeamInventoryRef->teamItems[i])) {
+            gTeamInventoryRef->teamItems[i] = *slot;
             return FALSE;
         }
     }
@@ -908,12 +897,9 @@ bool8 IsGummiItem(u8 id)
 
 bool8 HasGummiItem(void)
 {
-    Item *items;
     s32 i;
     for (i = 0; i < INVENTORY_SIZE; i++) {
-        DUMMY_TEAM_ITEMS_ASM_MATCH(i);
-        items = gTeamInventoryRef->teamItems;
-        if ((items[i].flags & ITEM_FLAG_EXISTS) && IsGummiItem(items[i].id)) {
+        if (ItemExists(&gTeamInventoryRef->teamItems[i]) && IsGummiItem(gTeamInventoryRef->teamItems[i].id)) {
             return TRUE;
         }
     }
