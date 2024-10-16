@@ -95,7 +95,7 @@ void sub_8044C10(u8 a0);
 u16 GetLeaderActionId(void);
 void sub_80978C8(s16 a0);
 void sub_8044C50(u16 a0);
-void sub_805E2C4(Entity *leader);
+static void TryCreateModeArrows(Entity *leader);
 bool8 sub_8094C48(void);
 void sub_8052210(u8 a0);
 bool8 sub_805EC4C(Entity *a0, u8 a1);
@@ -129,12 +129,12 @@ extern u8 sub_8062F90(Entity *, u32, u32, u32, u32);
 
 extern Entity *gLeaderPointer;
 
-extern u8 gUnknown_202F22D;
-extern u8 gUnknown_202F22C;
+extern u8 sInRotateMode;
+extern u8 sInDiagonalMode;
 extern u8 gUnknown_202F230;
 extern u8 gUnknown_202F231;
 extern u8 gUnknown_202EE00;
-extern u16 gUnknown_202F22E;
+extern s16 gUnknown_202F22E;
 
 extern const u8 *gUnknown_80F8A84;
 extern const u8 *gUnknown_80F8A6C;
@@ -157,7 +157,7 @@ extern const u8 *gFieldItemMenuGroundTextPtr;
 extern const u8 *gUnknown_80FE940;
 extern const u8 *gWhichTextPtr1;
 
-void sub_805D8C8(void)
+void DungeonHandlePlayerInput(void)
 {
     struct UnkMenuBitsStruct r6;
     bool8 triggers[5]; // Always FALSE, if one of these is TRUE - they can open various menus or cause an item throw. Most likely used for debugging/testing.
@@ -204,8 +204,8 @@ void sub_805D8C8(void)
             }
             sub_805E804();
         }
-        gUnknown_202F22D = 0;
-        gUnknown_202F22C = 0;
+        sInRotateMode = FALSE;
+        sInDiagonalMode = FALSE;
         if (gDungeon->unk5C0 >= 0) {
             r6.a0_8 = 1;
             r6.a0_16 = 0;
@@ -223,10 +223,9 @@ void sub_805D8C8(void)
         gUnknown_202F231 = 0;
 
         while (r6.a0_8 == 0) {
-            u32 buttonsR1, buttonsR2;
+            u32 dpadDiagonal, dpadSimple;
             bool32 highlightTiles, tryItemThrow;
             bool32 bPress, rPress, unkBool; // Always FALSE, might've been used as debug variables.
-            u32 r4;
             s32 directionNew;
 
             gUnknown_202F22E++;
@@ -241,7 +240,7 @@ void sub_805D8C8(void)
                 sub_8075680(0);
             }
 
-            sub_805E2C4(leader);
+            TryCreateModeArrows(leader);
             unkBool = FALSE;
             {
                 s32 i;
@@ -273,55 +272,54 @@ void sub_805D8C8(void)
                     gDungeon->unk673 = 1;
                     break;
                 }
-                else {
-                    if (gRealInputs.held & L_BUTTON) {
-                        bool8 canUseMove;
-                        s32 i, j;
+                else if (gRealInputs.held & L_BUTTON) {
+                    bool32 canUseMove;
+                    s32 i, j;
 
-                        for (i = 0; i < MAX_MON_MOVES; i++) {
-                            if (MoveFlagExists(&leaderInfo->moves.moves[i]) && MoveFlagSet(&leaderInfo->moves.moves[i])) {
-                                break;
-                            }
-                        }
-                        if (i == MAX_MON_MOVES) {
-                            SendMessage(leader, gUnknown_80F8A28);
+                    for (i = 0; i < MAX_MON_MOVES; i++) {
+                        if (MoveFlagExists(&leaderInfo->moves.moves[i]) && MoveFlagSet(&leaderInfo->moves.moves[i])) {
                             break;
-                        }
-
-                        for (j = 0; j < MAX_MON_MOVES; j++) {
-                            if (MoveFlagExists(&leaderInfo->moves.moves[j])) {
-                                if (leaderInfo->moves.moves[j].PP != 0)
-                                    break;
-                            }
-                        }
-                        if (j == MAX_MON_MOVES) {
-                            SetMonsterActionFields(&leaderInfo->action, 0x17);
-                            break;
-                        }
-
-                        canUseMove = FALSE;
-                        for (j = i; j < MAX_MON_MOVES; j++) {
-                            if (j != i && !(leaderInfo->moves.moves[j].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)) {
-                                break;
-                            }
-                            if (leaderInfo->moves.moves[j].PP != 0) {
-                                canUseMove = TRUE;
-                                break;
-                            }
-                        }
-                        if (!canUseMove) {
-                            SendMessage(leader, gUnknown_80F8A4C);
-                        }
-                        else {
-                            SetMonsterActionFields(&leaderInfo->action, 0x14);
-                            leaderInfo->action.unk4[0].actionUseIndex = GetTeamMemberEntityIndex(leader);
-                            leaderInfo->action.unk4[1].actionUseIndex = i;
                         }
                     }
-                    else {
-                        if (!sub_805EF60(leader, leaderInfo)) {
-                            SetMonsterActionFields(&leaderInfo->action, 0x32);
+                    if (i == MAX_MON_MOVES) {
+                        SendMessage(leader, gUnknown_80F8A28);
+                        break;
+                    }
+
+                    for (j = 0; j < MAX_MON_MOVES; j++) {
+                        if (MoveFlagExists(&leaderInfo->moves.moves[j])) {
+                            if (leaderInfo->moves.moves[j].PP != 0)
+                                break;
                         }
+                    }
+                    if (j == MAX_MON_MOVES) {
+                        SetMonsterActionFields(&leaderInfo->action, 0x17);
+                        break;
+                    }
+
+                    canUseMove = FALSE;
+                    for (j = i; j < MAX_MON_MOVES; j++) {
+                        if (j != i && !(leaderInfo->moves.moves[j].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)) {
+                            break;
+                        }
+                        if (leaderInfo->moves.moves[j].PP != 0) {
+                            canUseMove = TRUE;
+                            break;
+                        }
+                    }
+                    if (!canUseMove) {
+                        SendMessage(leader, gUnknown_80F8A4C);
+                    }
+                    else {
+                        SetMonsterActionFields(&leaderInfo->action, 0x14);
+                        leaderInfo->action.unk4[0].actionUseIndex = GetTeamMemberEntityIndex(leader);
+                        leaderInfo->action.unk4[1].actionUseIndex = i;
+                    }
+                    break;
+                }
+                else {
+                    if (!sub_805EF60(leader, leaderInfo)) {
+                        SetMonsterActionFields(&leaderInfo->action, 0x32);
                     }
                     break;
                 }
@@ -355,28 +353,26 @@ void sub_805D8C8(void)
                 break;
             }
             else if (triggers[4]) { // Opens regular menu
-
                 r6.a0_8 = 1;
                 r6.a0_16 = 0;
                 r6.a0_24 = 1;
                 break;
             }
             else if (frames > 0x707) { // Opens simple menu when idling
-
                 r6.a0_8 = 1;
                 r6.a0_16 = 1;
                 r6.a0_24 = 0;
                 break;
             }
 
-            r4 = gGameOptionsRef->unk9;
-            if (r4 == 0) {
-                if ((gRealInputs.pressed & B_BUTTON || (!unkBool && bPress)) && unkPtr->unk1821A != 0) {
-                    sub_804AA60();
-                    gUnknown_202F22D = r4;
-                    ResetRepeatTimers();
-                    ResetUnusedInputStruct();
-                }
+            if (gGameOptionsRef->unk9 == 0
+                && (gRealInputs.pressed & B_BUTTON || (!unkBool && bPress))
+                && unkPtr->unk1821A != 0)
+            {
+                sub_804AA60();
+                sInRotateMode = FALSE;
+                ResetRepeatTimers();
+                ResetUnusedInputStruct();
             }
 
             if (gRealInputs.held & L_BUTTON) {
@@ -386,15 +382,16 @@ void sub_805D8C8(void)
                     ResetUnusedInputStruct();
                 }
             }
+
             tryItemThrow = FALSE;
             if (gRealInputs.held & R_BUTTON) {
-                if (gUnknown_202F22C == 0) {
+                if (!sInDiagonalMode) {
                     gUnknown_202F22E = 0;
                 }
-                gUnknown_202F22C = 1;
+                sInDiagonalMode = TRUE;
             }
             else {
-                gUnknown_202F22C = 0;
+                sInDiagonalMode = FALSE;
             }
 
             highlightTiles = FALSE;
@@ -405,7 +402,7 @@ void sub_805D8C8(void)
             }
             if (highlightTiles) {
                 sub_805E738(leader);
-                gUnknown_202F22D = 1;
+                sInRotateMode = TRUE;
                 unkPtr->unk1821B = leaderInfo->action.direction;
                 unkPtr->unk1821C = 0xFF;
                 ResetRepeatTimers();
@@ -453,7 +450,7 @@ void sub_805D8C8(void)
                         break;
 
                     if (gRealInputs.pressed & A_BUTTON) {
-                        gUnknown_202EE00 = (gUnknown_202EE00 == 0) ? 1 : 0;
+                        gUnknown_202EE00 = (gUnknown_202EE00 == 0) ? 1 : 0; // Flip
                         sub_8040A84();
                     }
                 }
@@ -466,39 +463,39 @@ void sub_805D8C8(void)
                 sub_803E46C(0x2F);
             }
 
-            if (gDungeon->unk66D != 0 && gUnknown_202F22C == 0) {
-                buttonsR1 = buttonsR2 = gRealInputs.pressed;
+            if (gDungeon->unk66D != 0 && !sInDiagonalMode) {
+                dpadDiagonal = dpadSimple = gRealInputs.pressed;
             }
             else {
-                buttonsR1 = gRealInputs.held;
-                buttonsR2 = (unkPtr->unk1821A == 0) ? gRealInputs.held : gRealInputs.pressed;
+                dpadDiagonal = gRealInputs.held;
+                dpadSimple = (unkPtr->unk1821A == 0) ? gRealInputs.held : gRealInputs.pressed;
             }
 
-            buttonsR1 &= DPAD_ANY;
-            buttonsR2 &= DPAD_ANY;
+            dpadDiagonal &= DPAD_ANY;
+            dpadSimple &= DPAD_ANY;
             directionNew = -1;
-            if (buttonsR1 == (DPAD_UP | DPAD_RIGHT))
+            if (dpadDiagonal == (DPAD_UP | DPAD_RIGHT))
                 directionNew = DIRECTION_NORTHEAST;
-            if (buttonsR1 == (DPAD_UP | DPAD_LEFT))
+            if (dpadDiagonal == (DPAD_UP | DPAD_LEFT))
                 directionNew = DIRECTION_NORTHWEST;
-            if (buttonsR1 == (DPAD_DOWN | DPAD_RIGHT))
+            if (dpadDiagonal == (DPAD_DOWN | DPAD_RIGHT))
                 directionNew = DIRECTION_SOUTHEAST;
-            if (buttonsR1 == (DPAD_DOWN | DPAD_LEFT))
+            if (dpadDiagonal == (DPAD_DOWN | DPAD_LEFT))
                 directionNew = DIRECTION_SOUTHWEST;
 
-            if (buttonsR2 == DPAD_UP)
+            if (dpadSimple == DPAD_UP)
                 directionNew = DIRECTION_NORTH;
-            if (buttonsR2 == DPAD_DOWN)
+            if (dpadSimple == DPAD_DOWN)
                 directionNew = DIRECTION_SOUTH;
-            if (buttonsR2 == DPAD_RIGHT)
+            if (dpadSimple == DPAD_RIGHT)
                 directionNew = DIRECTION_EAST;
-            if (buttonsR2 == DPAD_LEFT)
+            if (dpadSimple == DPAD_LEFT)
                 directionNew = DIRECTION_WEST;
 
-            if (directionNew >= 0 && (gUnknown_202F22C == 0 || (directionNew & 1))) {
+            if (directionNew >= 0 && (!sInDiagonalMode || (directionNew & 1))) {
                 bool32 directionChanged = (leaderInfo->action.direction != directionNew);
                 leaderInfo->action.direction = directionNew & DIRECTION_MASK;
-                if (gUnknown_202F22D != 0) {
+                if (sInRotateMode) {
                     unkPtr->unk1821B = directionNew;
                     sub_806CDD4(leader, sub_806CEBC(leader), directionNew);
                 }
@@ -589,7 +586,7 @@ void sub_805D8C8(void)
             ShowFieldMenu((r6.a0_16 == 0) ? 1 : 0, r6.a0_24);
             ResetRepeatTimers();
             ResetUnusedInputStruct();
-            gUnknown_202F22D = 0;
+            sInRotateMode = FALSE;
             unkPtr->unk1821A = 0;
             sub_804AA60();
             if (sub_8044B28())
@@ -612,19 +609,195 @@ void sub_805D8C8(void)
     }
 }
 
-/* TODO: leaving this for now as it uses weird sprite OAM logic
-void sub_805E2C4(Entity *leader)
+struct UnkStruct_8106AC8
 {
-    unkDungeonGlobal_unk181E8_sub *unkPtr;
+    s16 unk0;
+    s16 unk2;
+    u8 unk4;
+    u8 unk5;
+};
 
-    unkPtr = &gDungeon->unk181e8;
-    if (gUnknown_202F22C == 0) {
+extern const struct UnkStruct_8106AC8 gUnknown_8106AC8[];
 
+struct UnkStruct_8106AE8
+{
+    s16 unk0;
+    s16 unk2;
+    u32 unk4;
+    u8 unk8;
+    u8 unk9;
+    u8 unkA;
+};
+
+extern const struct UnkStruct_8106AE8 gUnknown_8106AE8[];
+
+#ifdef NONMATCHING
+// Not even close in terms of matching, but functionally equivalent. Sprite OAM memes break the stack here.
+// Creates arrow sprites which are used when in rotate or diagonal modes.
+static void TryCreateModeArrows(Entity *leader)
+{
+    UnkDungeonGlobal_unk181E8_sub *unkPtr = &gDungeon->unk181e8;
+
+    if (sInDiagonalMode) {
+        s32 i;
+        SpriteOAM sprite;
+
+        for (i = 0; i < 4; i++) {
+            u32 objMode, matrixNum, tileNum, prio, xSprite, unk6;
+            s32 x, xMul, x2;
+            s32 unk1, unk1Mul, unk2;
+
+            sprite.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
+            sprite.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+
+            objMode = 1 << SPRITEOAM_SHIFT_OBJMODE;
+            sprite.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
+            sprite.attrib1 |= objMode;
+
+            sprite.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
+            sprite.attrib1 &= ~SPRITEOAM_MASK_BPP;
+
+            sprite.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
+
+            if (gUnknown_8106AC8[i].unk4 != 0)
+                matrixNum = 8;
+            else
+                matrixNum = 0;
+
+            if (gUnknown_8106AC8[i].unk5)
+                matrixNum += 16;
+
+            matrixNum &= SPRITEOAM_MAX_MATRIXNUM;
+            matrixNum <<= SPRITEOAM_SHIFT_MATRIXNUM;
+            sprite.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
+            sprite.attrib2 |= matrixNum;
+
+            sprite.attrib2 &= ~SPRITEOAM_MASK_SHAPE;
+
+            tileNum = 0x213 << SPRITEOAM_SHIFT_TILENUM;
+            sprite.attrib3 &= ~SPRITEOAM_MASK_TILENUM;
+            sprite.attrib3 |= tileNum;
+
+            prio = 2 << SPRITEOAM_SHIFT_PRIORITY;
+            sprite.attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
+            sprite.attrib3 |= prio;
+
+            sprite.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
+
+            sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_0;
+            sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_1;
+
+            x = gUnknown_8106AC8[i].unk0;
+            xMul = x * 10;
+            x2 = (gUnknown_202F22E / 2) & 7;
+            xSprite = xMul + 116 + (x2 * x);
+            xSprite &= SPRITEOAM_MAX_X;
+            xSprite <<= SPRITEOAM_SHIFT_X;
+            sprite.attrib2 &= ~SPRITEOAM_MASK_X;
+            sprite.attrib2 |= xSprite;
+
+            unk1 = gUnknown_8106AC8[i].unk2;
+            unk1Mul = unk1 * 10;
+            unk2 = (gUnknown_202F22E / 2) & 7;
+            unk6 = 82 + unk1Mul + (unk2 * unk1);
+            unk6 &= SPRITEOAM_MAX_UNK6_4;
+            unk6 <<= SPRITEOAM_SHIFT_UNK6_4;
+            sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
+            sprite.unk6 |= unk6;
+
+            AddSprite(&sprite, 0x100, NULL, NULL);
+        }
+    }
+    else if (unkPtr->unk1821A) {
+        s32 i, to;
+        SpriteOAM sprite;
+        s32 var_2C = unkPtr->unk1821B;
+        s32 x, y;
+        s32 x1, x2, xMul;
+        s32 y1, y2, yMul;
+
+        if (var_2C < 8u) {
+            to = (gUnknown_202F231 != 0 && gUnknown_202F230 != 0) ? 3 : 1;
+
+            x1 = gUnknown_8106AE8[var_2C].unk0;
+            xMul = x1 * 10;
+            x2 = (gUnknown_202F22E / 2) & 7;
+            x =  xMul + 116 + (x1 * x2);
+
+            y1 = gUnknown_8106AE8[var_2C].unk2;
+            yMul = y1 * 10;
+            y2 = (gUnknown_202F22E / 2) & 7;
+            y = 82 + yMul + (y2 * y1);
+            for (i = 0; i < to; i++) {
+                u32 objMode, tileNum, prio, matrixNum, xSprite, ySprite;
+
+                sprite.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
+                sprite.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+
+                objMode = 1 << SPRITEOAM_SHIFT_OBJMODE;
+                sprite.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
+                sprite.attrib1 |= objMode;
+
+                sprite.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
+                sprite.attrib1 &= ~SPRITEOAM_MASK_BPP;
+
+                sprite.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
+
+                if (gUnknown_8106AE8[var_2C].unk8 != 0)
+                    matrixNum = 8;
+                else
+                    matrixNum = 0;
+
+                if (gUnknown_8106AE8[var_2C].unk9)
+                    matrixNum += 16;
+
+                matrixNum &= SPRITEOAM_MAX_MATRIXNUM;
+                matrixNum <<= SPRITEOAM_SHIFT_MATRIXNUM;
+                sprite.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
+                sprite.attrib2 |= matrixNum;
+
+                sprite.attrib2 &= ~SPRITEOAM_MASK_SIZE;
+
+                tileNum = gUnknown_8106AE8[var_2C].unk4;
+                sprite.attrib3 &= ~SPRITEOAM_MASK_TILENUM;
+                sprite.attrib3 |= tileNum;
+
+                prio = 2 << SPRITEOAM_SHIFT_PRIORITY;
+                sprite.attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
+                sprite.attrib3 |= prio;
+
+                sprite.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
+
+                sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_0;
+                sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_1;
+
+                xSprite = x;
+                xSprite &= SPRITEOAM_MAX_X;
+                xSprite <<= SPRITEOAM_SHIFT_X;
+                sprite.attrib2 &= ~SPRITEOAM_MASK_X;
+                sprite.attrib2 |= xSprite;
+
+                ySprite = y;
+                ySprite &= SPRITEOAM_MAX_UNK6_4;
+                ySprite <<= SPRITEOAM_SHIFT_UNK6_4;
+                sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
+                sprite.unk6 |= ySprite;
+
+                AddSprite(&sprite, 0x100, NULL, NULL);
+                x += gUnknown_8106AE8[var_2C].unk0 * 4;
+                y += gUnknown_8106AE8[var_2C].unk2 * 4;
+            }
+        }
+    }
+
+    if (sInRotateMode && unkPtr->unk1821C != unkPtr->unk1821B) {
+        unkPtr->unk1821C = unkPtr->unk1821B;
+        sub_804A728(&leader->pos, unkPtr->unk1821B, 0, sInRotateMode);
     }
 }
-*/
 
-NAKED void sub_805E2C4(Entity *leader)
+#else
+NAKED static void TryCreateModeArrows(Entity *leader)
 {
     asm_unified(	"\n"
 "	push {r4-r7,lr}\n"
@@ -853,7 +1026,7 @@ NAKED void sub_805E2C4(Entity *leader)
 "	.align 2, 0\n"
 "_0805E47C: .4byte gDungeon\n"
 "_0805E480: .4byte 0x000181e8\n"
-"_0805E484: .4byte gUnknown_202F22C\n"
+"_0805E484: .4byte sInDiagonalMode\n"
 "_0805E488: .4byte 0xffff0000\n"
 "_0805E48C: .4byte 0x0000feff\n"
 "_0805E490: .4byte 0x0000fdff\n"
@@ -1163,15 +1336,17 @@ NAKED void sub_805E2C4(Entity *leader)
 "_0805E710: .4byte 0x0000dfff\n"
 "_0805E714: .4byte 0x00003fff\n"
 "_0805E718: .4byte 0x0000c1ff\n"
-"_0805E71C: .4byte gUnknown_8106AEC\n"
+"_0805E71C: .4byte gUnknown_8106AE8 + 4\n"
 "_0805E720: .4byte 0x000003ff\n"
 "_0805E724: .4byte 0x00000fff\n"
 "_0805E728: .4byte 0x0000fffe\n"
 "_0805E72C: .4byte 0x0000fffd\n"
 "_0805E730: .4byte 0x000001ff\n"
-"_0805E734: .4byte gUnknown_202F22D"
+"_0805E734: .4byte sInRotateMode"
 );
 }
+
+#endif // NONMATCHING
 
 void sub_805E738(Entity *a0)
 {
