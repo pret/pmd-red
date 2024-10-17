@@ -4,6 +4,7 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "friend_area.h"
+#include "moves.h"
 
 static EWRAM_DATA struct unkStruct_203B494 sUnknown_2039778 = {0};
 
@@ -216,12 +217,9 @@ void sub_8097944(void)
 {
     bool8 bVar2;
     bool8 bVar3;
-    int index;
+    s32 i, j;
     s32 counter;
     Move *move;
-    PokemonStruct1 *pokeStruct;
-    s32 index1;
-    s32 temp;
 
     bVar2 = 1;
     bVar3 = 1;
@@ -229,99 +227,88 @@ void sub_8097944(void)
         sub_80976F8(0xd);
     }
 
-    for(index = 0; index < NUM_MONSTERS; index++)
+    for(i = 0; i < NUM_MONSTERS; i++)
     {
+        if (PokemonFlag1(&gRecruitedPokemonRef->pokemon[i])) {
+            s32 species = gRecruitedPokemonRef->pokemon[i].speciesNum;
+            gUnknown_203B494->unk1C[species / 32] |= 1 << species % 32;
 
-#ifdef NONMATCHING
-        pokeStruct = &index[gRecruitedPokemonRef->pokemon];
-#else
-        register size_t offset asm("r1") = offsetof(unkStruct_203B45C, pokemon[index]);
-        PokemonStruct1* p = gRecruitedPokemonRef->pokemon;
-        size_t addr = offset + (size_t)p;
-        pokeStruct = (PokemonStruct1*)addr;
-#endif
-
-
-        if (((u8)(pokeStruct->unk0) & 1)) {
-        temp = pokeStruct->speciesNum;
-        gUnknown_203B494->unk1C[temp / 32] |= 1 << temp % 32;
-
-            for(index1 = 0; index1 < MAX_MON_MOVES; index1++)
+            for(j = 0; j < MAX_MON_MOVES; j++)
             {
-                move = &gRecruitedPokemonRef->pokemon[index].moves[index1];
-                if ((move->moveFlags & MOVE_FLAG_EXISTS)) {
+                move = &gRecruitedPokemonRef->pokemon[i].moves[j];
+                if (MoveFlagExists(move)) {
                     gUnknown_203B494->unk8C[move->id / 32] |= 1 << move->id % 32;
                 }
             }
         }
     }
 
-    for(index = 0; index < MONSTER_MAX; index++)
+    for(i = 0; i < MONSTER_MAX; i++)
     {
-        if (index == MONSTER_NONE) continue;
-        if (index == MONSTER_CASTFORM_SNOWY) continue;
-        if (index == MONSTER_CASTFORM_SUNNY) continue;
-        if (index == MONSTER_CASTFORM_RAINY) continue;
-        if (index == MONSTER_DEOXYS_ATTACK) continue;
-        if (index == MONSTER_DEOXYS_DEFENSE) continue;
-        if (index == MONSTER_DEOXYS_SPEED) continue;
-        if (index == MONSTER_MUNCHLAX) continue;
-        if (index == MONSTER_DECOY) continue;
-        if (index == MONSTER_STATUE) continue;
-        if (index == MONSTER_RAYQUAZA_CUTSCENE) continue;
+        if (i == MONSTER_NONE) continue;
+        if (i == MONSTER_CASTFORM_SNOWY) continue;
+        if (i == MONSTER_CASTFORM_SUNNY) continue;
+        if (i == MONSTER_CASTFORM_RAINY) continue;
+        if (i == MONSTER_DEOXYS_ATTACK) continue;
+        if (i == MONSTER_DEOXYS_DEFENSE) continue;
+        if (i == MONSTER_DEOXYS_SPEED) continue;
+        if (i == MONSTER_MUNCHLAX) continue;
+        if (i == MONSTER_DECOY) continue;
+        if (i == MONSTER_STATUE) continue;
+        if (i == MONSTER_RAYQUAZA_CUTSCENE) continue;
 
-        if ((gUnknown_203B494->unk54[index / 32] & 1 << index % 32) == 0)
+        if ((gUnknown_203B494->unk54[i / 32] & 1 << i % 32) == 0)
         {
             bVar3 = 0;
         }
-        if ((gUnknown_203B494->unk1C[index / 32] & 1 << index % 32) != 0)
+        if ((gUnknown_203B494->unk1C[i / 32] & 1 << i % 32) != 0)
         {
-            if (index == MONSTER_MOLTRES) {
+            if (i == MONSTER_MOLTRES) {
                 sub_80976F8(0x10);
             }
-            if (index == MONSTER_ZAPDOS) {
+            if (i == MONSTER_ZAPDOS) {
                 sub_80976F8(0x11);
             }
-            if (index == MONSTER_ARTICUNO) {
+            if (i == MONSTER_ARTICUNO) {
                 sub_80976F8(0x12);
             }
-            if (index == MONSTER_DEOXYS_NORMAL) {
+            if (i == MONSTER_DEOXYS_NORMAL) {
                 sub_80976F8(0x13);
             }
-            if (index == MONSTER_ENTEI) {
+            if (i == MONSTER_ENTEI) {
                 sub_80976F8(0x14);
             }
-            if (index == MONSTER_RAIKOU) {
+            if (i == MONSTER_RAIKOU) {
                 sub_80976F8(0x15);
             }
-            if (index == MONSTER_SUICUNE) {
+            if (i == MONSTER_SUICUNE) {
                 sub_80976F8(0x16);
             }
-            if (index == MONSTER_HO_OH) {
+            if (i == MONSTER_HO_OH) {
                 sub_80976F8(0x17);
             }
-            if (index == MONSTER_KYOGRE) {
+            if (i == MONSTER_KYOGRE) {
                 sub_80976F8(0x18);
             }
-            if (index == MONSTER_GROUDON) {
+            if (i == MONSTER_GROUDON) {
                 sub_80976F8(0x19);
             }
-            if (index == MONSTER_RAYQUAZA) {
+            if (i == MONSTER_RAYQUAZA) {
                 sub_80976F8(0x1a);
             }
-            if (index == MONSTER_LUGIA) {
+            if (i == MONSTER_LUGIA) {
                 sub_80976F8(0x1b);
             }
-            if (index == MONSTER_CELEBI) {
+            if (i == MONSTER_CELEBI) {
                 sub_80976F8(0x1c);
             }
-            if (index == MONSTER_MEW) {
+            if (i == MONSTER_MEW) {
                 sub_80976F8(0x1d);
             }
-            if (index == MONSTER_MEWTWO) {
+            if (i == MONSTER_MEWTWO) {
                 sub_80976F8(0x1e);
             }
-            if (index == MONSTER_JIRACHI) {
+            if (i == MONSTER_JIRACHI) {
                 sub_80976F8(0x1f);
             }
         }
@@ -338,10 +325,10 @@ void sub_8097944(void)
         sub_80976F8(0xe);
     }
     counter = 0;
-    for(index = 0; index < NUM_MONSTERS; index++)
+    for(i = 0; i < NUM_MONSTERS; i++)
     {
-        if (index == MONSTER_NONE || index == MONSTER_FLYGON || index == MONSTER_CACNEA || index == MONSTER_CACTURNE) continue;
-        if (gUnknown_203B494->unk8C[index / 32] & 1 << index % 32) {
+        if (i == MONSTER_NONE || i == MONSTER_FLYGON || i == MONSTER_CACNEA || i == MONSTER_CACTURNE) continue;
+        if (gUnknown_203B494->unk8C[i / 32] & 1 << i % 32) {
             counter++;
         }
     }

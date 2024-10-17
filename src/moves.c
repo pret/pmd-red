@@ -171,40 +171,24 @@ u8 GetMoveType(Move *move)
 
 const u8 *GetLevelUpMoves(s16 species)
 {
-#ifndef NONMATCHING
-    register s32 species1 asm("r1"), species2;
-#else
-    s32 species1, species2;
-#endif
-
-    species1 = species;
-    species2 = species1;
-    if (species1 == MONSTER_DECOY || species1 == MONSTER_NONE)
+    s32 id = SpeciesId(species);
+    if (species == MONSTER_DECOY || species == MONSTER_NONE)
+        return &gUnknown_810992B;
+    if (id == MONSTER_MUNCHLAX)
         return &gUnknown_810992B;
 
-    if (species2 == MONSTER_MUNCHLAX)
-        return &gUnknown_810992B;
-
-    return sMoveLearnsets[species2].levelUpMoves;
+    return sMoveLearnsets[id].levelUpMoves;
 }
 
 const u8 *GetHMTMMoves(s16 species)
 {
-#ifndef NONMATCHING
-    register s32 species1 asm("r1"), species2;
-#else
-    s32 species1, species2;
-#endif
-
-    species1 = species;
-    species2 = species1;
-    if (species1 == MONSTER_DECOY || species1 == MONSTER_NONE)
+    s32 id = SpeciesId(species);
+    if (species == MONSTER_DECOY || species == MONSTER_NONE)
+        return &gUnknown_810992B;
+    if (id == MONSTER_MUNCHLAX)
         return &gUnknown_810992B;
 
-    if (species2 == MONSTER_MUNCHLAX)
-        return &gUnknown_810992B;
-
-    return sMoveLearnsets[species2].HMTMMoves;
+    return sMoveLearnsets[id].HMTMMoves;
 }
 
 u8 GetMoveAIWeight(Move *move)
@@ -1325,15 +1309,7 @@ UNUSED static void RemoveLinkSequenceFromMoves8_v2(Move *moves, s32 index)
 
     for (i = index + 1; i < 8; i++) {
         Move* move = &moves[i];
-
-        #ifndef NONMATCHING
-        asm("");
-        #endif
-
-        if (!(move->moveFlags & MOVE_FLAG_EXISTS))
-            break;
-
-        if (!(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+        if (!MoveFlagExists(move) || !(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
             break;
 
         move->moveFlags = 0;
@@ -1364,15 +1340,7 @@ void RemoveLinkSequenceFromMoves8(Move *moves, s32 index)
 
     for (i = index + 1; i < 8; i++) {
         Move* move = &moves[i];
-
-        #ifndef NONMATCHING
-        asm("");
-        #endif
-
-        if (!(move->moveFlags & MOVE_FLAG_EXISTS))
-            break;
-
-        if (!(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+        if (!MoveFlagExists(move) || !(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
             break;
 
         move->moveFlags = 0;
@@ -1454,7 +1422,7 @@ static void unk_MovePrintData(Move *move, s32 y)
 
 static void CopyAndResetMove(Move *dest, Move *src)
 {
-    if (src->moveFlags & MOVE_FLAG_EXISTS) {
+    if (MoveFlagExists(src)) {
         dest->moveFlags = src->moveFlags;
         dest->moveFlags2 = 0;
         dest->id = src->id;
@@ -1465,26 +1433,23 @@ static void CopyAndResetMove(Move *dest, Move *src)
         dest->moveFlags = 0;
 }
 
-void CopyAndResetMoves(Move *destMoves, Move *srcMoves)
+void CopyAndResetMoves(Moves *destMoves, Move *srcMoves)
 {
     s32 i;
 
     for (i = 0; i < MAX_MON_MOVES; i++) {
-        if (srcMoves[i].moveFlags & 1) {
-            destMoves[i].moveFlags = srcMoves[i].moveFlags;
-            destMoves[i].moveFlags2 = 0;
-            destMoves[i].id = srcMoves[i].id;
-            destMoves[i].PP = sMovesData[srcMoves[i].id].basePP;
-            destMoves[i].ginseng = srcMoves[i].PP; // This seems horribly bugged
+        if (MoveFlagExists(&srcMoves[i])) {
+            destMoves->moves[i].moveFlags = srcMoves[i].moveFlags;
+            destMoves->moves[i].moveFlags2 = 0;
+            destMoves->moves[i].id = srcMoves[i].id;
+            destMoves->moves[i].PP = sMovesData[srcMoves[i].id].basePP;
+            destMoves->moves[i].ginseng = srcMoves[i].PP; // This seems horribly bugged
         }
         else
-            destMoves[i].moveFlags = 0;
+            destMoves->moves[i].moveFlags = 0;
     }
 
-    // possibly destMoves is not just an array and this is the
-    // next struct field
-    // this index would be out of bounds after all
-    destMoves[MAX_MON_MOVES].moveFlags = 0;
+    destMoves->struggleMoveFlags = 0;
 }
 
 void CopyBareMoveData(Move *destMoves, Move *srcMoves)
