@@ -8,6 +8,7 @@
 #include "code_8023868.h"
 #include "code_8024458.h"
 #include "code_8098BDC.h"
+#include "code_8099360.h"
 #include "common_strings.h"
 #include "constants/dungeon.h"
 #include "event_flag.h"

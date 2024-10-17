@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80130A8.h"
-#include "code_8098BDC.h"
+#include "code_8099360.h"
 #include "memory.h"
 #include "save.h"
 #include "save_write.h"

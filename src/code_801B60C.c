@@ -4,7 +4,7 @@
 #include "code_80130A8.h"
 #include "code_801B3C0.h"
 #include "code_801B60C.h"
-#include "code_8098BDC.h"
+#include "code_8099360.h"
 #include "common_strings.h"
 #include "constants/colors.h"
 #include "event_flag.h"

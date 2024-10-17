@@ -1,0 +1,7 @@
+#ifndef GUARD_CODE_8099328_H
+#define GUARD_CODE_8099328_H
+
+
+bool8 sub_8099328(u8 *);
+
+#endif // GUARD_CODE_8099328_H
