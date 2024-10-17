@@ -924,12 +924,12 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     if (GetEntityType(attacker) == ENTITY_MONSTER) {
         EntityInfo *attackerData = GetEntInfo(attacker);
         s32 exp  = CalculateEXPGain(targetData->id, targetData->level);
-        switch (targetData->unkFB) {
-            case 2:
+        switch (targetData->expMultiplier) {
+            case EXP_BOOSTED:
                 exp *= 3;
                 exp /= 2;
                 break;
-            case 0:
+            case EXP_HALVED:
                 exp /= 2;
                 break;
         }

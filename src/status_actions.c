@@ -415,8 +415,8 @@ bool8 sub_805B3FC(Entity * pokemon,Entity * target,Move *move, s32 param_4, s32 
         if (sub_805727C(pokemon,pokemon,gUnknown_80F4DCE) != 0) {
             entityInfo = pokemon->info;
             RaiseAttackStageTarget(pokemon,pokemon,param_4,1);
-            if (entityInfo->unkFB == 0) {
-                entityInfo->unkFB = 1;
+            if (entityInfo->expMultiplier == 0) {
+                entityInfo->expMultiplier = 1;
             }
         }
     }
@@ -456,8 +456,8 @@ bool8 MimicMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4
     }
     SetMessageArgument(gAvailablePokemonNames,pokemon,0);
     if (moveCounter != 0) {
-        if (entityInfo->unkFB == 0) {
-            entityInfo->unkFB = 1;
+        if (entityInfo->expMultiplier == 0) {
+            entityInfo->expMultiplier = 1;
         }
         sub_80522F4(pokemon,target,*gUnknown_80FDCE4);
         mimicSuccess = TRUE;
@@ -500,8 +500,8 @@ _0805B598:
 bool8 LeechSeedMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
     HandleLeechSeed(pokemon, target, TRUE);
-    if (pokemon->info->unkFB == 0) {
-        pokemon->info->unkFB = 1;
+    if (pokemon->info->expMultiplier == 0) {
+        pokemon->info->expMultiplier = 1;
     }
     return TRUE;
 }
@@ -537,8 +537,8 @@ bool8 sub_805B668(Entity * pokemon, Entity * target, Move *move, s32 param_4)
         newHP = 1;
       }
       if (sub_8057308(pokemon,0) != 0) {
-        if (pokemon->info->unkFB == 0) {
-          pokemon->info->unkFB = 1;
+        if (pokemon->info->expMultiplier == 0) {
+          pokemon->info->expMultiplier = 1;
         }
         if (sub_8057308(pokemon,0) != 0) {
           if (hasLiquidOoze) {
@@ -760,8 +760,8 @@ bool8 sub_805BA50(Entity * pokemon, Entity * target, Move *move, s32 param_4)
                     targetItem->flags = 0;
                     sub_806A6E8(pokemon);
                     sub_806A6E8(target);
-                    if (iVar3->unkFB == 0) {
-                        iVar3->unkFB = 1;
+                    if (iVar3->expMultiplier == 0) {
+                        iVar3->expMultiplier = 1;
                     }
                     sub_80522F4(pokemon,target,*gUnknown_80FC614); // Got $m1's item!
                 }
@@ -779,10 +779,7 @@ bool8 ReboundOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_
 
 bool8 sub_805BB74(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    if(pokemon->info->unkFB == 0)
-    {
-        pokemon->info->unkFB = 1;
-    }
+    SetExpMultplier(GetEntInfo(pokemon));
     sub_807E254(pokemon, target, 1);
     return TRUE;
 }

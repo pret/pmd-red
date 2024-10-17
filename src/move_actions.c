@@ -510,37 +510,27 @@ bool32 sub_8057974(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   return local_24;
 }
 
-bool8 PainSplitMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
+bool8 PainSplitMoveAction(Entity *attacker, Entity *target, Move *move, s32 param_4)
 {
-  s32 newHP;
-  EntityInfo *iVar2;
-  EntityInfo *iVar3;
-  EntityInfo *iVar4;
-  EntityInfo *iVar5;
+    EntityInfo *attackerInfo = GetEntInfo(attacker);
+    EntityInfo *targetInfo = GetEntInfo(target);
+    s32 newHP = (attackerInfo->HP + targetInfo->HP) / 2;
 
-  // Need copies for some reason to match..
-  iVar3 = (pokemon->info);
-  iVar4 = iVar3;
-  iVar2 = (target->info);
-  iVar5 = iVar2;
+    attackerInfo->HP = newHP;
+    targetInfo->HP = newHP;
+    if (attackerInfo->HP > attackerInfo->maxHPStat) {
+        attackerInfo->HP = attackerInfo->maxHPStat;
+    }
+    if (targetInfo->HP > targetInfo->maxHPStat) {
+        targetInfo->HP = targetInfo->maxHPStat;
+    }
+    SetMessageArgument(gAvailablePokemonNames,attacker,0);
+    SetMessageArgument(gAvailablePokemonNames + 0x50,target,0);
+    SetExpMultplier(attackerInfo);
 
-  newHP = ((iVar3->HP + iVar2->HP) / 2);
-  iVar3->HP = newHP;
-  iVar5->HP = newHP;
-  if (iVar3->HP > iVar3->maxHPStat) {
-    iVar3->HP = iVar3->maxHPStat;
-  }
-  if (iVar5->HP > iVar5->maxHPStat) {
-    iVar5->HP = iVar5->maxHPStat;
-  }
-  SetMessageArgument(gAvailablePokemonNames,pokemon,0);
-  SetMessageArgument(gAvailablePokemonNames + 0x50,target,0);
-  if (iVar4->unkFB == 0) {
-    iVar4->unkFB = 1;
-  }
-  // $m0 and $m1 shared their HP
-  sub_80522F4(pokemon,target,*gUnknown_80FC7EC);
-  return TRUE;
+    // $m0 and $m1 shared their HP
+    sub_80522F4(attacker,target,*gUnknown_80FC7EC);
+    return TRUE;
 }
 
 bool8 TormentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
@@ -1194,8 +1184,8 @@ bool8 sub_80586DC(Entity * pokemon, Entity * target, Move * move, u32 param_4)
     if (newHP < 1) {
       newHP = 1;
     }
-    if (!entityInfo->unkFB) {
-      entityInfo->unkFB = TRUE;
+    if (!entityInfo->expMultiplier) {
+      entityInfo->expMultiplier = TRUE;
     }
     if (hasLiquidOoze) {
         DealDamageToEntity(pokemon, newHP, 0xd, 0x1fa);
@@ -1315,9 +1305,9 @@ bool8 sub_8058930(Entity *pokemon, Entity *target, Move *move, u32 param_4)
             RaiseAttackStageTarget(pokemon, pokemon, index2, 1);
             RaiseDefenseStageTarget(pokemon, pokemon, index1, 1);
             RaiseDefenseStageTarget(pokemon, pokemon, index2, 1);
-            if(entityInfo->unkFB == 0)
+            if(entityInfo->expMultiplier == 0)
             {
-                entityInfo->unkFB = 1;
+                entityInfo->expMultiplier = 1;
             }
         }
     }
@@ -1410,8 +1400,8 @@ bool8 sub_8058B84(Entity *pokemon, Entity *target, Move *move, u32 param_4)
     {
         entityInfo = pokemon->info;
         RaiseAttackStageTarget(pokemon, pokemon, gUnknown_8106A4C, 1);
-        if(entityInfo->unkFB == 0)
-            entityInfo->unkFB = 1;
+        if(entityInfo->expMultiplier == 0)
+            entityInfo->expMultiplier = 1;
     }
   }
   return flag;
@@ -1542,8 +1532,8 @@ bool8 PsychUpMoveAction(Entity * pokemon, Entity * target, Move * move, u32 para
   }
   SetMessageArgument(gAvailablePokemonNames,target,0);
   sub_80522F4(pokemon,target,*gUnknown_80FBD58); // It psyched itself up!
-  if (iVar4->unkFB == 0) {
-    iVar4->unkFB  = 1;
+  if (iVar4->expMultiplier == 0) {
+    iVar4->expMultiplier  = 1;
   }
   return TRUE;
 }
@@ -1734,8 +1724,8 @@ bool8 sub_80591E4(Entity *pokemon, Entity *target, Move *move, s32 param_4)
     if (EntityExists(pokemon)) {
       entityInfo = pokemon->info;
       flag = TRUE;
-      if (entityInfo->unkFB == 0) {
-        entityInfo->unkFB = 1;
+      if (entityInfo->expMultiplier == 0) {
+        entityInfo->expMultiplier = 1;
       }
       if (sub_8057308(pokemon,0)) {
         if (hasLiquidOoze) {
@@ -1778,8 +1768,8 @@ bool8 SkillSwapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param
     pokeEntityData->abilities[1] = ability_2;
     gDungeon->unkC = 1;
     sub_80522F4(pokemon,target,*gUnknown_80FC888);
-    if (pokeEntityData->unkFB == 0) {
-      pokeEntityData->unkFB = 1;
+    if (pokeEntityData->expMultiplier == 0) {
+      pokeEntityData->expMultiplier = 1;
     }
     sub_806ABAC(pokemon,pokemon);
     sub_806ABAC(pokemon,target);
@@ -1788,178 +1778,44 @@ bool8 SkillSwapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param
   return flag;
 }
 
-// https://decomp.me/scratch/Ul8x5
-#ifdef NONMATCHING
 bool32 SketchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-  u16 moveID;
-  struct EntityInfo *targetInfo;
-  struct EntityInfo *pokeInfo;
-  int moveIndex;
-  register bool32 flag asm("sl");
-  struct Move *move1;
-  s32 other_flag = 0;
+    s32 i;
+    bool32 ret = FALSE;
+    EntityInfo *pokeInfo = GetEntInfo(pokemon);
+    EntityInfo *targetInfo = GetEntInfo(target);
+    bool32 moveFound = FALSE;
+    u16 moveId = MOVE_NOTHING;
 
-  flag = 0;
-  pokeInfo = pokemon->info;
-  targetInfo = target->info;
-  moveID = 0;
-
-  for(moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
-  {
-      move1 = &targetInfo->moves[moveIndex];
-      if ((((move1->moveFlags & MOVE_FLAG_EXISTS))) && ((targetInfo->moves[moveIndex].moveFlags & 0x10))) {
-            moveID = targetInfo->moves[moveIndex].id;
-            goto _moveIDcheck;
-      }
-  }
-
-  if(other_flag == 0)
-  {
-      sub_80522F4(pokemon, target, *gUnknown_80FE3BC);
-      return 0;
-  }
-
-_moveIDcheck:
-  if (moveID == 0) {
-      sub_80522F4(pokemon, target, *gUnknown_80FE3BC);
-  }
-  else {
-      InitPokemonMove(move, moveID);
-      sub_80928C0(gFormatItems, move, 0);
-      move->moveFlags2 |= MOVE_FLAG2_UNK4;
-      move->moveFlags2 |= MOVE_FLAG_REPLACE;
-      sub_80522F4(pokemon, target, *gUnknown_80FE38C);
-      if (pokeInfo->unkFB == 0) {
-        pokeInfo->unkFB = 1;
-      }
-      flag = 1;
+    for (i = 0; i < MAX_MON_MOVES; i++) {
+        if (MoveFlagExists(&targetInfo->moves.moves[i]) && targetInfo->moves.moves[i].moveFlags & MOVE_FLAG_LAST_USED) {
+            moveId = targetInfo->moves.moves[i].id;
+            moveFound = TRUE;
+            break;
+        }
     }
-    return flag;
-}
 
-#else
-NAKED
-bool32 SketchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
-{
-    asm_unified(
-	"\tpush {r4-r7,lr}\n"
-	"\tmov r7, r10\n"
-	"\tmov r6, r9\n"
-	"\tmov r5, r8\n"
-	"\tpush {r5-r7}\n"
-	"\tsub sp, 0x4\n"
-	"\tadds r6, r0, 0\n"
-	"\tadds r7, r1, 0\n"
-	"\tadds r5, r2, 0\n"
-	"\tmovs r0, 0\n"
-	"\tmov r10, r0\n"
-	"\tldr r1, [r6, 0x70]\n"
-	"\tstr r1, [sp]\n"
-	"\tldr r0, [r7, 0x70]\n"
-	"\tmovs r2, 0\n"
-	"\tmov r12, r2\n"
-	"\tmovs r4, 0\n"
-	"\tmovs r1, 0x8C\n"
-	"\tlsls r1, 1\n"
-	"\tadds r3, r0, r1\n"
-	"\tadds r1, r0, 0\n"
-	"\tmovs r2, 0x1\n"
-	"\tmov r9, r2\n"
-	"\tmovs r0, 0x10\n"
-	"\tmov r8, r0\n"
-"_08059372:\n"
-	"\tldrb r2, [r3]\n"
-	"\tmov r0, r9\n"
-	"\tands r0, r2\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _08059384\n"
-	"\tmov r0, r8\n"
-	"\tands r0, r2\n"
-	"\tcmp r0, 0\n"
-	"\tbne _080593A8\n"
-"_08059384:\n"
-	"\tadds r3, 0x8\n"
-	"\tadds r1, 0x8\n"
-	"\tadds r4, 0x1\n"
-	"\tcmp r4, 0x3\n"
-	"\tble _08059372\n"
-	"\tmovs r0, 0\n"
-	"\tcmp r0, 0\n"
-	"\tbne _080593B2\n"
-	"\tldr r0, _080593A4\n"
-	"\tldr r2, [r0]\n"
-	"\tadds r0, r6, 0\n"
-	"\tadds r1, r7, 0\n"
-	"\tbl sub_80522F4\n"
-	"\tmovs r0, 0\n"
-	"\tb _0805940A\n"
-	"\t.align 2, 0\n"
-"_080593A4: .4byte gUnknown_80FE3BC\n"
-"_080593A8:\n"
-	"\tmovs r2, 0x8D\n"
-	"\tlsls r2, 1\n"
-	"\tadds r0, r1, r2\n"
-	"\tldrh r0, [r0]\n"
-	"\tmov r12, r0\n"
-"_080593B2:\n"
-	"\tmov r0, r12\n"
-	"\tcmp r0, 0\n"
-	"\tbne _080593CC\n"
-	"\tldr r0, _080593C8\n"
-	"\tldr r2, [r0]\n"
-	"\tadds r0, r6, 0\n"
-	"\tadds r1, r7, 0\n"
-	"\tbl sub_80522F4\n"
-	"\tb _08059408\n"
-	"\t.align 2, 0\n"
-"_080593C8: .4byte gUnknown_80FE3BC\n"
-"_080593CC:\n"
-	"\tadds r0, r5, 0\n"
-	"\tmov r1, r12\n"
-	"\tbl InitPokemonMove\n"
-	"\tldr r0, _0805941C\n"
-	"\tadds r1, r5, 0\n"
-	"\tmovs r2, 0\n"
-	"\tbl sub_80928C0\n"
-	"\tldrb r1, [r5, 0x1]\n"
-	"\tmovs r0, 0x4\n"
-	"\torrs r0, r1\n"
-	"\tmovs r1, 0x20\n"
-	"\torrs r0, r1\n"
-	"\tstrb r0, [r5, 0x1]\n"
-	"\tldr r0, _08059420\n"
-	"\tldr r2, [r0]\n"
-	"\tadds r0, r6, 0\n"
-	"\tadds r1, r7, 0\n"
-	"\tbl sub_80522F4\n"
-	"\tldr r1, [sp]\n"
-	"\tadds r1, 0xFB\n"
-	"\tldrb r0, [r1]\n"
-	"\tcmp r0, 0\n"
-	"\tbne _08059404\n"
-	"\tmovs r0, 0x1\n"
-	"\tstrb r0, [r1]\n"
-"_08059404:\n"
-	"\tmovs r1, 0x1\n"
-	"\tmov r10, r1\n"
-"_08059408:\n"
-	"\tmov r0, r10\n"
-"_0805940A:\n"
-	"\tadd sp, 0x4\n"
-	"\tpop {r3-r5}\n"
-	"\tmov r8, r3\n"
-	"\tmov r9, r4\n"
-	"\tmov r10, r5\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r1}\n"
-	"\tbx r1\n"
-	"\t.align 2, 0\n"
-"_0805941C: .4byte gFormatItems\n"
-"_08059420: .4byte gUnknown_80FE38C\n"
-    );
+    if (!moveFound) {
+        sub_80522F4(pokemon, target, *gUnknown_80FE3BC);
+        return FALSE;
+    }
+
+    if (moveId == MOVE_NOTHING) {
+        sub_80522F4(pokemon, target, *gUnknown_80FE3BC);
+    }
+    else {
+        InitPokemonMove(move, moveId);
+        sub_80928C0(gFormatItems, move, 0);
+        move->moveFlags2 |= MOVE_FLAG2_UNK4;
+        move->moveFlags2 |= MOVE_FLAG_REPLACE;
+        sub_80522F4(pokemon, target, *gUnknown_80FE38C);
+        ASM_MATCH_TRICK(pokeInfo);
+        SetExpMultplier(pokeInfo);
+        ret = TRUE;
+    }
+
+    return ret;
 }
-#endif
 
 bool8 sub_8059424(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
@@ -2587,9 +2443,7 @@ bool8 sub_805A120(Entity * pokemon,Entity * target, Move *move, u32 param_4)
             sp->heldItem = item;
             sub_806A6E8(pokemon);
             sub_806A6E8(target);
-            if (r7->unkFB == 0) {
-                r7->unkFB = 1;
-            }
+            SetExpMultplier(r7);
             sub_80522F4(pokemon,target,*gUnknown_80FC790); // Traded items
             return TRUE;
         }
@@ -2685,9 +2539,7 @@ bool8 RolePlayMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
     entityInfo->abilities[0] = targetEntityInfo->abilities[0];
     entityInfo->abilities[1] = targetEntityInfo->abilities[1];
     gDungeon->unkC = 1;
-    if (entityInfo->unkFB == 0) {
-      entityInfo->unkFB = 1;
-    }
+    SetExpMultplier(entityInfo);
     sub_80522F4(pokemon,target,*gUnknown_80FC81C);
     sub_806ABAC(pokemon, pokemon);
     return TRUE;
@@ -2832,9 +2684,7 @@ bool8 sub_805A5E8(Entity *pokemon, Entity *target, Move *move, u32 stat, u32 par
     if (sub_805727C(pokemon,pokemon,gUnknown_80F4DD2) != 0) {
       entityInfo = pokemon->info;
       RaiseDefenseStageTarget(pokemon,pokemon,stat,1);
-      if (entityInfo->unkFB == 0) {
-        entityInfo->unkFB = 1;
-      }
+      SetExpMultplier(entityInfo);
     }
   }
   return flag;
@@ -3157,57 +3007,42 @@ bool8 sub_805AD34(Entity *pokemon, Entity *target, Move *move, u32 param_4)
     return TRUE;
 }
 
-static inline bool8 sub_805AD54_sub(Entity *entity)
+bool32 sub_805AD54(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
-    if ((entity->info->joinedAt.joinedAt == 0x4A) || (entity->info->joinedAt.joinedAt == 0x47)) {
-        return TRUE;
+    s32 numPossibleTargets;
+    s32 i;
+    Entity **possibleTargets;
+    bool32 flag = FALSE;
+    EntityInfo *info = GetEntInfo(pokemon);
+
+    if (info->isNotTeamMember) {
+        possibleTargets = gDungeon->wildPokemon;
+        numPossibleTargets = DUNGEON_MAX_WILD_POKEMON;
     }
     else {
-        return FALSE;
+        possibleTargets = gDungeon->teamPokemon;
+        numPossibleTargets = MAX_TEAM_MEMBERS;
     }
-}
 
-bool8 sub_805AD54(Entity * pokemon, Entity * target, Move *move, u32 param_4)
-{
-  s32 numPossibleTargets;
-  EntityInfo *info;
-  Entity *targetEntity;
-#ifndef NONMATCHING
-  register s32 index asm("r6");
-#else
-  s32 index;
-#endif
-  Entity **possibleTargets;
-  bool8 flag;
-
-  flag = FALSE;
-  info = pokemon->info;
-  if (pokemon->info->isNotTeamMember) {
-    possibleTargets = gDungeon->wildPokemon;
-    numPossibleTargets = DUNGEON_MAX_WILD_POKEMON;
-  }
-  else {
-    possibleTargets = gDungeon->teamPokemon;
-    numPossibleTargets = MAX_TEAM_MEMBERS;
-  }
-  for ( index = 0; index < numPossibleTargets; index++) {
-    targetEntity = possibleTargets[index];
-    if ((((EntityExists(targetEntity)) && (pokemon != targetEntity)) &&
-        (GetTreatmentBetweenMonsters(pokemon,targetEntity,FALSE,FALSE) == TREATMENT_TREAT_AS_ALLY)) &&
-       (targetEntity->info->clientType != CLIENT_TYPE_CLIENT)) {
-      if (!sub_805AD54_sub(targetEntity)) {
-        sub_807D148(pokemon,targetEntity,2,&target->pos);
-        flag = TRUE;
-        if (info->unkFB == 0) {
-          info->unkFB = 1;
+    for (i = 0; i < numPossibleTargets; i++) {
+        Entity *targetEntity = possibleTargets[i];
+        if (EntityExists(targetEntity)
+             && pokemon != targetEntity
+             && GetTreatmentBetweenMonsters(pokemon,targetEntity,FALSE,FALSE) == TREATMENT_TREAT_AS_ALLY)
+        {
+            EntityInfo *targetInfo = GetEntInfo(targetEntity);
+            if (targetInfo->clientType != CLIENT_TYPE_CLIENT && !IsClientOrTeamBase(targetInfo->joinedAt.joinedAt)) {
+                sub_807D148(pokemon,targetEntity,2,&target->pos);
+                flag = TRUE;
+                SetExpMultplier(info);
+            }
         }
-      }
     }
-  }
-  if (!flag) {
-    sub_80522F4(pokemon,target,*gUnknown_81004EC);
-  }
-  return flag;
+
+    if (!flag) {
+        sub_80522F4(pokemon,target,*gUnknown_81004EC);
+    }
+    return flag;
 }
 
 bool8 sub_805AE3C(Entity *pokemon, Entity *target, Move *move, u32 param_4)
