@@ -127,14 +127,8 @@ extern bool8 sub_8071A8C(Entity *pokemon);
 extern void sub_80643AC(Entity *pokemon);
 extern u8 sub_8062F90(Entity *, u32, u32, u32, u32);
 
-extern Entity *gLeaderPointer;
-
-extern u8 sInRotateMode;
-extern u8 sInDiagonalMode;
-extern u8 gUnknown_202F230;
-extern u8 gUnknown_202F231;
 extern u8 gUnknown_202EE00;
-extern s16 gUnknown_202F22E;
+extern Entity *gLeaderPointer;
 
 extern const u8 *gUnknown_80F8A84;
 extern const u8 *gUnknown_80F8A6C;
@@ -156,6 +150,14 @@ extern const u8 *gTeamToolboxBPtr;
 extern const u8 *gFieldItemMenuGroundTextPtr;
 extern const u8 *gUnknown_80FE940;
 extern const u8 *gWhichTextPtr1;
+
+static EWRAM_DATA bool8 sInDiagonalMode = 0;
+static EWRAM_DATA bool8 sInRotateMode = 0;
+// Frames counter for arrows in diagonal/rotate mode.
+static EWRAM_DATA s16 sArrowsFrames = 0;
+// If both of these are set to TRUE, there are 3 arrows visible instead of 1 in rotate mode
+static EWRAM_DATA bool8 sShowThreeArrows1 = 0;
+static EWRAM_DATA bool8 sShowThreeArrows2 = 0;
 
 void DungeonHandlePlayerInput(void)
 {
@@ -219,8 +221,8 @@ void DungeonHandlePlayerInput(void)
 
         frames = 0;
         sub_8044C50(0);
-        gUnknown_202F230 = 0;
-        gUnknown_202F231 = 0;
+        sShowThreeArrows1 = FALSE;
+        sShowThreeArrows2 = FALSE;
 
         while (r6.a0_8 == 0) {
             u32 dpadDiagonal, dpadSimple;
@@ -228,7 +230,7 @@ void DungeonHandlePlayerInput(void)
             bool32 bPress, rPress, unkBool; // Always FALSE, might've been used as debug variables.
             s32 directionNew;
 
-            gUnknown_202F22E++;
+            sArrowsFrames++;
             if (unkPtr->unk1821A != 0) {
                 frames = 0;
             }
@@ -386,7 +388,7 @@ void DungeonHandlePlayerInput(void)
             tryItemThrow = FALSE;
             if (gRealInputs.held & R_BUTTON) {
                 if (!sInDiagonalMode) {
-                    gUnknown_202F22E = 0;
+                    sArrowsFrames = 0;
                 }
                 sInDiagonalMode = TRUE;
             }
@@ -689,7 +691,7 @@ static void TryCreateModeArrows(Entity *leader) // https://decomp.me/scratch/gFX
 
             x = gUnknown_8106AC8[i].unk0;
             xMul = x * 10;
-            x2 = (gUnknown_202F22E / 2) & 7;
+            x2 = (sArrowsFrames / 2) & 7;
             xSprite = xMul + 116 + (x2 * x);
             xSprite &= SPRITEOAM_MAX_X;
             xSprite <<= SPRITEOAM_SHIFT_X;
@@ -698,7 +700,7 @@ static void TryCreateModeArrows(Entity *leader) // https://decomp.me/scratch/gFX
 
             unk1 = gUnknown_8106AC8[i].unk2;
             unk1Mul = unk1 * 10;
-            unk2 = (gUnknown_202F22E / 2) & 7;
+            unk2 = (sArrowsFrames / 2) & 7;
             unk6 = 82 + unk1Mul + (unk2 * unk1);
             unk6 &= SPRITEOAM_MAX_UNK6_4;
             unk6 <<= SPRITEOAM_SHIFT_UNK6_4;
@@ -717,16 +719,16 @@ static void TryCreateModeArrows(Entity *leader) // https://decomp.me/scratch/gFX
         s32 y1, y2, yMul;
 
         if (var_2C < 8u) {
-            to = (gUnknown_202F231 != 0 && gUnknown_202F230 != 0) ? 3 : 1;
+            to = (sShowThreeArrows2 != 0 && sShowThreeArrows1 != 0) ? 3 : 1;
 
             x1 = gUnknown_8106AE8[var_2C].unk0;
             xMul = x1 * 10;
-            x2 = (gUnknown_202F22E / 2) & 7;
+            x2 = (sArrowsFrames / 2) & 7;
             x =  xMul + 116 + (x1 * x2);
 
             y1 = gUnknown_8106AE8[var_2C].unk2;
             yMul = y1 * 10;
-            y2 = (gUnknown_202F22E / 2) & 7;
+            y2 = (sArrowsFrames / 2) & 7;
             y = 82 + yMul + (y2 * y1);
             for (i = 0; i < to; i++) {
                 u32 objMode, tileNum, prio, matrixNum, xSprite, ySprite;
@@ -1040,7 +1042,7 @@ NAKED static void TryCreateModeArrows(Entity *leader)
 "_0805E4B0: .4byte 0x00000fff\n"
 "_0805E4B4: .4byte 0x0000fffe\n"
 "_0805E4B8: .4byte 0x0000fffd\n"
-"_0805E4BC: .4byte gUnknown_202F22E\n"
+"_0805E4BC: .4byte sArrowsFrames\n"
 "_0805E4C0: .4byte 0x000001ff\n"
 "_0805E4C4:\n"
 "	ldr r3, _0805E6E4\n"
@@ -1324,10 +1326,10 @@ NAKED static void TryCreateModeArrows(Entity *leader)
 "	.align 2, 0\n"
 "_0805E6E4: .4byte 0x0001821a\n"
 "_0805E6E8: .4byte 0x0001821b\n"
-"_0805E6EC: .4byte gUnknown_202F231\n"
-"_0805E6F0: .4byte gUnknown_202F230\n"
+"_0805E6EC: .4byte sShowThreeArrows2\n"
+"_0805E6F0: .4byte sShowThreeArrows1\n"
 "_0805E6F4: .4byte gUnknown_8106AE8\n"
-"_0805E6F8: .4byte gUnknown_202F22E\n"
+"_0805E6F8: .4byte sArrowsFrames\n"
 "_0805E6FC: .4byte 0xffff0000\n"
 "_0805E700: .4byte 0x0000feff\n"
 "_0805E704: .4byte 0x0000fdff\n"
@@ -1708,7 +1710,6 @@ extern void sub_8083CE0(u8 param_1);
 extern u8 gAvailablePokemonNames[];
 
 extern u8 gUnknown_202749A[];
-extern s32 gUnknown_202F260;
 extern MenuInputStruct gUnknown_202EE10;
 
 void sub_805F02C(void)
@@ -1779,6 +1780,17 @@ u16 GetLeaderActionId(void)
     return GetLeaderInfo()->action.action;
 }
 
+// Could this be a start of a new file?
+static UNUSED EWRAM_DATA u8 sUnused[4] = {0};
+static EWRAM_DATA unkStruct_8044CC8 sUnknownActionUnk4 = {0};
+static EWRAM_DATA s32 sUnknown_202F240 = 0;
+static UNUSED EWRAM_DATA u8 sUnused2[4] = {0};
+static EWRAM_DATA s16 sUnknown_202F248[8] = {0};
+static EWRAM_DATA s32 sUnknown_202F258 = 0;
+static UNUSED EWRAM_DATA u8 sUnused3[4] = {0};
+static EWRAM_DATA s32 sTeamMenuChosenId = 0;
+static UNUSED EWRAM_DATA u8 sUnused4[4] = {0};
+
 void ShowFieldMenu(u8 a0_, bool8 a1)
 {
     Item *item;
@@ -1807,7 +1819,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
     while (1) {
         if (r10 < 0) {
             sub_8044C10(1);
-            gUnknown_202F260 = -1;
+            sTeamMenuChosenId = -1;
             DrawFieldMenu(a0);
             sub_806A2BC(GetLeader(), 0);
             while (1) {
@@ -1932,7 +1944,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
                     Entity *teamMon = gDungeon->teamPokemon[i];
                     if (EntityExists(teamMon)) {
                         if (i == GetLeaderActionContainer()->unk4[0].actionUseIndex) {
-                            gUnknown_202F260 = count;
+                            sTeamMenuChosenId = count;
                             if (GetLeaderActionId() != 0) {
                                 sub_806A2BC(teamMon, 0);
                             }
@@ -2372,11 +2384,6 @@ bool8 sub_805FD3C(struct UnkMenuBitsStruct *a0)
     return a0->a0_8;
 }
 
-extern unkStruct_8044CC8 gUnknown_202F238;
-extern s32 gUnknown_202F240;
-extern s16 gUnknown_202F248[];
-extern s32 gUnknown_202F258;
-
 s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4);
 
 void sub_8060890(Position *a0);
@@ -2416,9 +2423,9 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
         },
     };
 
-    gUnknown_202F238.actionUseIndex = 0;
-    gUnknown_202F238.lastItemThrowPosition.x = 0;
-    gUnknown_202F238.lastItemThrowPosition.y = 0;
+    sUnknownActionUnk4.actionUseIndex = 0;
+    sUnknownActionUnk4.lastItemThrowPosition.x = 0;
+    sUnknownActionUnk4.lastItemThrowPosition.y = 0;
     if (a1 != NULL) {
         var_2C = (a1->a0_8 != 0);
         var_34 = (a1->a0_16 != 0);
@@ -2426,14 +2433,14 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
         var_28 = (a1->a0_32 != 0);
     }
 
-    gUnknown_202F258 = sub_8060D64(gUnknown_202F248, var_30, var_34, var_28, a0);
-    if (gUnknown_202F258 == 0) {
+    sUnknown_202F258 = sub_8060D64(sUnknown_202F248, var_30, var_34, var_28, a0);
+    if (sUnknown_202F258 == 0) {
         PrintFieldMessage(0, gUnknown_80F8B24, 1);
         return TRUE;
     }
 
     r8 = 0;
-    gUnknown_202F240 = 0;
+    sUnknown_202F240 = 0;
     while (1)
     {
         s32 id;
@@ -2445,7 +2452,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
             if (item->flags & ITEM_FLAG_EXISTS && item->flags & ITEM_FLAG_UNPAID) {
                 item->flags &= ~(ITEM_FLAG_UNPAID);
                 r8 = i / 10;
-                gUnknown_202F240 = i % 10;
+                sUnknown_202F240 = i % 10;
             }
         }
         for (i_r6 = 0; i_r6 < MAX_TEAM_MEMBERS; i_r6++) {
@@ -2454,19 +2461,19 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
                 EntityInfo *monInfo = teamMon->info;
                 if (monInfo->heldItem.flags & ITEM_FLAG_EXISTS && monInfo->heldItem.flags & ITEM_FLAG_UNPAID) {
                     monInfo->heldItem.flags &= ~(ITEM_FLAG_UNPAID);
-                    for (i = 0; i < gUnknown_202F258; i++) {
-                        if (gUnknown_202F248[i] == i_r6 + 4) {
+                    for (i = 0; i < sUnknown_202F258; i++) {
+                        if (sUnknown_202F248[i] == i_r6 + 4) {
                             r8 = i;
                             break;
                         }
                     }
-                    gUnknown_202F240 = 0;
+                    sUnknown_202F240 = 0;
                 }
             }
         }
         CreateFieldItemMenu(r8, a0, var_2C, var_30, &var_FC, &var_3C);
 
-        id = gUnknown_202F248[gUnknown_202EE10.unk1E];
+        id = sUnknown_202F248[gUnknown_202EE10.unk1E];
         if (id >= MAX_TEAM_MEMBERS) {
             r4 = gDungeon->teamPokemon[id - MAX_TEAM_MEMBERS];
         }
@@ -2480,21 +2487,21 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
             AddMenuCursorSprite(&gUnknown_202EE10);
             sub_803E46C(0x14);
             if (!var_30) {
-                if (gUnknown_202F258 > 1) {
+                if (sUnknown_202F258 > 1) {
                     if ((gRealInputs.pressed & DPAD_LEFT) || gUnknown_202EE10.unk28.dpad_left) {
                         sub_8083CE0(0);
                         if (--r8 < 0) {
-                            r8 = gUnknown_202F258 - 1;
+                            r8 = sUnknown_202F258 - 1;
                         }
-                        gUnknown_202F240 = var_30;
+                        sUnknown_202F240 = var_30;
                         break;
                     }
                     if ((gRealInputs.pressed & DPAD_RIGHT) || gUnknown_202EE10.unk28.dpad_right) {
                         sub_8083CE0(0);
-                        if (++r8 == gUnknown_202F258) {
+                        if (++r8 == sUnknown_202F258) {
                             r8 = 0;
                         }
-                        gUnknown_202F240 = var_30;
+                        sUnknown_202F240 = var_30;
                         break;
                     }
                 }
@@ -2506,7 +2513,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
                     sub_8083CE0(1);
                     sub_8013744(&gUnknown_202EE10, 1);
                 }
-                if (gRealInputs.pressed & SELECT_BUTTON && gUnknown_202F248[r8] <= 1) {
+                if (gRealInputs.pressed & SELECT_BUTTON && sUnknown_202F248[r8] <= 1) {
                     s32 r3;
                     bool32 r7 = TRUE;
                     s16 arr[10];
@@ -2514,11 +2521,11 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
                     PlaySoundEffect(0x132);
                     sub_8047158();
                     ConvertMoneyItemToMoney();
-                    gUnknown_202F240 = 0;
+                    sUnknown_202F240 = 0;
                     r3 = sub_8060D64(arr, var_30, var_34, var_28, a0);
-                    if (gUnknown_202F258 == r3) {
+                    if (sUnknown_202F258 == r3) {
                         for (i_r6 = 0; i_r6 < r3; i_r6++) {
-                            if (arr[i_r6] != gUnknown_202F248[i_r6]) {
+                            if (arr[i_r6] != sUnknown_202F248[i_r6]) {
                                 break;
                             }
                         }
@@ -2528,10 +2535,10 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
                     }
                     if (r7) {
                         r8 = 0;
-                        gUnknown_202F240 = 0;
-                        gUnknown_202F258 = r3;
-                        for (i_r6 = 0; i_r6 < gUnknown_202F258; i_r6++) {
-                            gUnknown_202F248[i_r6] = arr[i_r6];
+                        sUnknown_202F240 = 0;
+                        sUnknown_202F258 = r3;
+                        for (i_r6 = 0; i_r6 < sUnknown_202F258; i_r6++) {
+                            sUnknown_202F248[i_r6] = arr[i_r6];
                         }
                     }
                     break;
@@ -2562,7 +2569,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
         }
         AddMenuCursorSprite(&gUnknown_202EE10);
         sub_803E46C(0x14);
-        if (gUnknown_202F248[gUnknown_202EE10.unk1E] <= 1 && !(gTeamInventoryRef->teamItems[0].flags & ITEM_FLAG_EXISTS)) {
+        if (sUnknown_202F248[gUnknown_202EE10.unk1E] <= 1 && !(gTeamInventoryRef->teamItems[0].flags & ITEM_FLAG_EXISTS)) {
             r9 = 2;
         }
 
@@ -2576,15 +2583,15 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
         }
         else if (r9 == 3) {
             SetMonsterActionFields(&a0Info->action, 0xC);
-            a0Info->action.unk4[0] = gUnknown_202F238;
+            a0Info->action.unk4[0] = sUnknownActionUnk4;
             sub_803EAF0(0, NULL);
             r9 = 0;
             break;
         }
         else {
-            gUnknown_202F240 = gUnknown_202EE10.menuIndex;
+            sUnknown_202F240 = gUnknown_202EE10.menuIndex;
             if (var_2C != 0) {
-                a0Info->action.unk4[1] = gUnknown_202F238;
+                a0Info->action.unk4[1] = sUnknownActionUnk4;
                 sub_803EAF0(0, NULL);
                 r9 = 0;
                 break;
@@ -2625,7 +2632,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
             if (r9 != 1 || var_30 != 0) {
                 if (a0Info->action.action == 0x37 || a0Info->action.action == 0x38 || a0Info->action.action == 0x3E) {
                     // Hm...
-                    int newAction = gUnknown_202F238.actionUseIndex - 0x90;
+                    int newAction = sUnknownActionUnk4.actionUseIndex - 0x90;
                     a0Info->action.unk4[0].actionUseIndex = newAction;
                     sub_803EAF0(0, 0);
                     r9 = 0;
@@ -2673,16 +2680,16 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     var_94 = gUnknown_8106B6C;
     a1Info = a1->info;
     r10 = sub_8060800(a5, a0);
-    gUnknown_202EE10.menuIndex = gUnknown_202F240;
+    gUnknown_202EE10.menuIndex = sUnknown_202F240;
     gUnknown_202EE10.unk1A = 0;
     gUnknown_202EE10.unk1E = a0;
-    gUnknown_202EE10.unk20 = gUnknown_202F258;
+    gUnknown_202EE10.unk20 = sUnknown_202F258;
     gUnknown_202EE10.unk4 = 0;
     gUnknown_202EE10.unk0 = 0;
     gUnknown_202EE10.unk14.x = 0;
     sub_801317C(&gUnknown_202EE10.unk28);
     gDungeon->unk181e8.unk18212 = 0;
-    switch (gUnknown_202F248[a0]) {
+    switch (sUnknown_202F248[a0]) {
         case 0:
         case 1:
             a4->a0[0].unk10 = 0x10;
@@ -2726,7 +2733,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     sub_80137B0(&gUnknown_202EE10, 0x70);
     sub_80073B8(0);
     x = ((a0 - r10) * 8) + 0xC;
-    switch (gUnknown_202F248[a0])
+    switch (sUnknown_202F248[a0])
     {
     case 0:
         PrintFormatStringOnWindow(x, 0, gTeamToolboxAPtr, 0, 0);
@@ -2784,7 +2791,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
         }
         break;
     default: {
-            Entity *chosenTeamMember = gDungeon->teamPokemon[gUnknown_202F248[a0] - MAX_TEAM_MEMBERS];
+            Entity *chosenTeamMember = gDungeon->teamPokemon[sUnknown_202F248[a0] - MAX_TEAM_MEMBERS];
             if (EntityExists(chosenTeamMember)) {
                 Item *item = &chosenTeamMember->info->heldItem;
                 SetMessageArgument_2(gAvailablePokemonNames, chosenTeamMember->info, 0);
@@ -2816,20 +2823,20 @@ s32 sub_8060800(UnkTextStruct2_sub2 *a0, s32 a1)
     s32 i, r1, r2, r3;
 
     r1 = 0;
-    for (i = 0; i < gUnknown_202F258; i++) {
-        if (gUnknown_202F248[i] <= 1) {
+    for (i = 0; i < sUnknown_202F258; i++) {
+        if (sUnknown_202F248[i] <= 1) {
             r1++;
         }
     }
 
-    if (gUnknown_202F248[a1] <= 1) {
+    if (sUnknown_202F248[a1] <= 1) {
         r3 = a1;
         r2 = r1;
         r1 = 0;
     }
     else {
         r3 = a1 - r1;
-        r2 = gUnknown_202F258 - r1;
+        r2 = sUnknown_202F258 - r1;
     }
 
     if (a0 != NULL) {
@@ -2843,7 +2850,7 @@ s32 sub_8060800(UnkTextStruct2_sub2 *a0, s32 a1)
 
 bool8 sub_8060860(s32 a0)
 {
-    if (gUnknown_202EE10.unk1A <= 1 || gUnknown_202F248[a0] > 1)
+    if (gUnknown_202EE10.unk1A <= 1 || sUnknown_202F248[a0] > 1)
         return FALSE;
     else
         return TRUE;
@@ -2851,25 +2858,25 @@ bool8 sub_8060860(s32 a0)
 
 void sub_8060890(Position *a0)
 {
-    s32 var = gUnknown_202F248[gUnknown_202EE10.unk1E];
+    s32 var = sUnknown_202F248[gUnknown_202EE10.unk1E];
     switch (var)
     {
     case 0:
-        gUnknown_202F238.actionUseIndex = gUnknown_202EE10.menuIndex + 1;
+        sUnknownActionUnk4.actionUseIndex = gUnknown_202EE10.menuIndex + 1;
         break;
     case 1:
-        gUnknown_202F238.actionUseIndex = gUnknown_202EE10.menuIndex + 11;
+        sUnknownActionUnk4.actionUseIndex = gUnknown_202EE10.menuIndex + 11;
         break;
     case 2:
-        gUnknown_202F238.actionUseIndex = 128;
+        sUnknownActionUnk4.actionUseIndex = 128;
         break;
     default:
-        gUnknown_202F238.actionUseIndex = var - 116;
+        sUnknownActionUnk4.actionUseIndex = var - 116;
         break;
     }
 
-    gUnknown_202F238.lastItemThrowPosition.x = a0->x;
-    gUnknown_202F238.lastItemThrowPosition.y = a0->y;
+    sUnknownActionUnk4.lastItemThrowPosition.x = a0->x;
+    sUnknownActionUnk4.lastItemThrowPosition.y = a0->y;
 }
 
 extern Item * sub_8044CC8(Entity *param_1, unkStruct_8044CC8 *param_2, UNUSED s32 a3);
@@ -2882,12 +2889,12 @@ extern void sub_8045064(void);
 void sub_8060900(Entity *a0)
 {
     u16 val_sub8044DC8;
-    Item *item = sub_8044CC8(a0, &gUnknown_202F238, 0xA);
+    Item *item = sub_8044CC8(a0, &sUnknownActionUnk4, 0xA);
     EntityInfo *a0Info = a0->info;
 
     gUnknown_202EE6C = 0;
-    if (gUnknown_202F238.actionUseIndex < 144) {
-        if (gUnknown_202F238.actionUseIndex == 128) {
+    if (sUnknownActionUnk4.actionUseIndex < 144) {
+        if (sUnknownActionUnk4.actionUseIndex == 128) {
             sub_8044F5C(9, item->id);
             if (GetItemCategory(item->id) != CATEGORY_POKE) {
                 bool32 r2 = 0;
@@ -2905,7 +2912,7 @@ void sub_8060900(Entity *a0)
                 }
             }
         }
-        if (gUnknown_202F238.actionUseIndex == 128 && gDungeon->unk65B != 0) {
+        if (sUnknownActionUnk4.actionUseIndex == 128 && gDungeon->unk65B != 0) {
             sub_8044F5C(10, item->id);
         }
         val_sub8044DC8 = sub_8044DC8(item);
@@ -2919,7 +2926,7 @@ void sub_8060900(Entity *a0)
             }
         }
 
-        if (gUnknown_202F238.actionUseIndex <= 20
+        if (sUnknownActionUnk4.actionUseIndex <= 20
             && (GetItemCategory(item->id) == CATEGORY_THROWN_LINE || GetItemCategory(item->id) == CATEGORY_THROWN_ARC))
         {
             s32 i;
@@ -2943,8 +2950,8 @@ void sub_8060900(Entity *a0)
             }
         }
 
-        if (gUnknown_202F238.actionUseIndex != 129) {
-            if (gUnknown_202F238.actionUseIndex != 128) {
+        if (sUnknownActionUnk4.actionUseIndex != 129) {
+            if (sUnknownActionUnk4.actionUseIndex != 128) {
                 s32 i;
                 bool32 r8 = FALSE;
 
@@ -2979,7 +2986,7 @@ void sub_8060900(Entity *a0)
             }
         }
 
-        if (gUnknown_202F238.actionUseIndex <= 20) {
+        if (sUnknownActionUnk4.actionUseIndex <= 20) {
             Entity *tileEntity = GetTile(a0->pos.x, a0->pos.y)->object;
             if (tileEntity == NULL) {
                 sub_8044F5C(8, item->id);
@@ -3006,7 +3013,7 @@ void sub_8060900(Entity *a0)
         }
     }
     else {
-        s32 index = gUnknown_202F238.actionUseIndex - 144;
+        s32 index = sUnknownActionUnk4.actionUseIndex - 144;
         Entity *teamMon = gDungeon->teamPokemon[index];
         if (EntityExists(teamMon)) {
             bool32 r5, r6, r4;
@@ -3068,7 +3075,7 @@ void sub_8060900(Entity *a0)
 void sub_8060CE8(ActionContainer *a0)
 {
     SetMonsterActionFields(a0, gUnknown_202EE44[gUnknown_202EE10.menuIndex].unk0);
-    a0->unk4[0] = gUnknown_202F238;
+    a0->unk4[0] = sUnknownActionUnk4;
     a0->unk4[1].actionUseIndex = 0;
     a0->unk4[1].lastItemThrowPosition.x = 0;
     a0->unk4[1].lastItemThrowPosition.y = 0;
@@ -3229,7 +3236,7 @@ bool8 sub_8060E38(Entity *a0)
         }
 
         sp.unk0 = gUnknown_202EE10.menuIndex;
-        gUnknown_202F260 = gUnknown_202EE10.menuIndex;
+        sTeamMenuChosenId = gUnknown_202EE10.menuIndex;
         sub_806145C(&sp);
         if (r10) {
             EntityInfo *info = a0->info;
@@ -3316,18 +3323,18 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
             a0->unk4[count] = i;
             monInfo = teamMon->info;
             a0->unk14[count] = monInfo->unk157;
-            if (pos.x == teamMon->pos.x && pos.y == teamMon->pos.y && gUnknown_202F260 < 0) {
-                gUnknown_202F260 = count;
+            if (pos.x == teamMon->pos.x && pos.y == teamMon->pos.y && sTeamMenuChosenId < 0) {
+                sTeamMenuChosenId = count;
             }
             count++;
         }
     }
 
-    if (gUnknown_202F260 >= count) {
-        gUnknown_202F260 = count - 1;
+    if (sTeamMenuChosenId >= count) {
+        sTeamMenuChosenId = count - 1;
     }
-    if (gUnknown_202F260 < 0) {
-        gUnknown_202F260 = 0;
+    if (sTeamMenuChosenId < 0) {
+        sTeamMenuChosenId = 0;
     }
 
     for (i = count; i < MAX_TEAM_MEMBERS; i++) {
@@ -3338,7 +3345,7 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
     gUnknown_202F270.f0 = 1;
     gUnknown_202F270.f1 = 0;
     gUnknown_202F270.f3 = 0;
-    gUnknown_202EE10.menuIndex = gUnknown_202F260;
+    gUnknown_202EE10.menuIndex = sTeamMenuChosenId;
     gUnknown_202EE10.unk1A = count;
     gUnknown_202EE10.unk1C = count;
     gUnknown_202EE10.unk1E = 0;

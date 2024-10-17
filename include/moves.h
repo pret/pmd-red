@@ -22,7 +22,7 @@ typedef struct MoveDataFile
 } MoveDataFile;
 
 bool8 CanBeSnatched(u16 moveID);
-void CopyAndResetMoves(Move *destMoves, Move *srcMoves);
+void CopyAndResetMoves(Moves *destMoves, Move *srcMoves);
 void CopyBareMoveData(Move *destMoves, Move *srcMoves);
 bool8 DoesMoveCharge(u16 move);
 bool8 FailsWhileMuzzled(u16 moveID);

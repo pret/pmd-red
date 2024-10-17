@@ -1399,9 +1399,7 @@ void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3)
             s32 arrId = (!a2) ? 1 : 0;
 
             for (i = 0; i < 9; i++) {
-                #ifndef NONMATCHING
-                a1++;a1--; // Good old matching trick.
-                #endif // NONMATCHING
+                ASM_MATCH_TRICK(a1);
                 if (gUnknown_80F64B4[i] <= a0) {
                     *a1 = gUnknown_80F64D8[arrId][i];
                     *ptr  = (((a0 - gUnknown_80F64B4[i]) + varAdd) + 0x258) | 0xF000;

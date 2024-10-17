@@ -503,11 +503,11 @@ s32 GetItemCountInInventory(u8 id)
 {
     s32 i;
     s32 count = 0;
-    struct Item *item = &gTeamInventoryRef->teamItems[0];
 
-    for (i = 0; i < INVENTORY_SIZE; item++, i++) {
-        if (item->flags & 1 && item->id == id)
+    for (i = 0; i < INVENTORY_SIZE; i++) {
+        if (ItemExists(&gTeamInventoryRef->teamItems[i]) && gTeamInventoryRef->teamItems[i].id == id) {
             count++;
+        }
     }
 
     return count;
@@ -515,20 +515,20 @@ s32 GetItemCountInInventory(u8 id)
 
 s32 GetItemPossessionCount(u8 id)
 {
-  s32 item_count = GetItemCountInInventory(id);
-  s32 i = 0;
+    s32 count = GetItemCountInInventory(id);
+    s32 i = 0;
 
-  unkStruct_203B45C *_gRecruitedPokemonRef = gRecruitedPokemonRef;
-  for (i = 0; i < NUM_MONSTERS; i++) {
-     PokemonStruct1* pokemon = &_gRecruitedPokemonRef->pokemon[i];
-    if ((1 & pokemon->unk0)
-          && ((pokemon->unk0 >> 1) % 2)
-          && (pokemon->heldItem.id != ITEM_NOTHING)
-          && (pokemon->heldItem.id == id)) {
-      item_count++;
+    for (i = 0; i < NUM_MONSTERS; i++) {
+        PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[i];
+        if (PokemonFlag1(mon)
+        && PokemonFlag2(mon)
+        && (mon->heldItem.id != ITEM_NOTHING)
+        && (mon->heldItem.id == id))
+        {
+            count++;
+        }
     }
-  }
-  return item_count;
+    return count;
 }
 
 void ShiftItemsDownFrom(s32 start)
