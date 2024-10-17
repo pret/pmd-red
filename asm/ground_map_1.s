@@ -5,51 +5,6 @@
 
 	.text
 
-	thumb_func_start GetAdjustedGroundMap
-GetAdjustedGroundMap:
-	push {r4,r5,lr}
-	lsls r0, 16
-	asrs r5, r0, 16
-	cmp r5, 0x9
-	beq _080A4D94
-	cmp r5, 0x9
-	bgt _080A4D90
-	cmp r5, 0x2
-	beq _080A4DB6
-	b _080A4DC4
-_080A4D90:
-	cmp r5, 0xC
-	bne _080A4DC4
-_080A4D94:
-	movs r0, 0
-	movs r1, 0x27
-	bl GetScriptVarValue
-	adds r4, r0, 0
-	movs r0, 0
-	movs r1, 0x28
-	bl GetScriptVarValue
-	lsls r1, r4, 1
-	adds r1, r4
-	lsls r1, 1
-	adds r1, r0
-	adds r1, r5, r1
-	lsls r1, 16
-	asrs r5, r1, 16
-	b _080A4DC4
-_080A4DB6:
-	movs r0, 0x6
-	bl sub_80023E4
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A4DC4
-	movs r5, 0x3
-_080A4DC4:
-	adds r0, r5, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end GetAdjustedGroundMap
-
 	thumb_func_start GroundMap_Select
 GroundMap_Select:
 	push {r4-r6,lr}
