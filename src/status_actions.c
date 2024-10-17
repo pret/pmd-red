@@ -415,9 +415,7 @@ bool8 sub_805B3FC(Entity * pokemon,Entity * target,Move *move, s32 param_4, s32 
         if (sub_805727C(pokemon,pokemon,gUnknown_80F4DCE) != 0) {
             entityInfo = pokemon->info;
             RaiseAttackStageTarget(pokemon,pokemon,param_4,1);
-            if (entityInfo->expMultiplier == 0) {
-                entityInfo->expMultiplier = 1;
-            }
+            SetExpMultplier(entityInfo);
         }
     }
     return flag;
@@ -456,9 +454,7 @@ bool8 MimicMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4
     }
     SetMessageArgument(gAvailablePokemonNames,pokemon,0);
     if (moveCounter != 0) {
-        if (entityInfo->expMultiplier == 0) {
-            entityInfo->expMultiplier = 1;
-        }
+        SetExpMultplier(entityInfo);
         sub_80522F4(pokemon,target,*gUnknown_80FDCE4);
         mimicSuccess = TRUE;
     }
@@ -500,9 +496,7 @@ _0805B598:
 bool8 LeechSeedMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
     HandleLeechSeed(pokemon, target, TRUE);
-    if (pokemon->info->expMultiplier == 0) {
-        pokemon->info->expMultiplier = 1;
-    }
+    SetExpMultplier(GetEntInfo(pokemon));
     return TRUE;
 }
 
@@ -537,9 +531,7 @@ bool8 sub_805B668(Entity * pokemon, Entity * target, Move *move, s32 param_4)
         newHP = 1;
       }
       if (sub_8057308(pokemon,0) != 0) {
-        if (pokemon->info->expMultiplier == 0) {
-          pokemon->info->expMultiplier = 1;
-        }
+        SetExpMultplier(GetEntInfo(pokemon));
         if (sub_8057308(pokemon,0) != 0) {
           if (hasLiquidOoze) {
             DealDamageToEntity(pokemon,newHP,0xd,0x1fa);
@@ -565,42 +557,35 @@ bool8 SnatchMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_
 
 bool8 RecycleMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-  Item *item;
-  s32 index;
-  EntityInfo *entityInfo;
-  bool8 isTMRecycled;
+    s32 i;
+    EntityInfo *entityInfo = GetEntInfo(target);
+    bool32 isTMRecycled = FALSE;
 
-  entityInfo = target->info;
-  isTMRecycled = FALSE;
-  if (!entityInfo->isNotTeamMember) {
-    for(index = 0; index < INVENTORY_SIZE; index++)
-    {
-#ifdef NONMATCHING
-    item = &gTeamInventoryRef->teamItems[index];
-#else
-        register size_t offset asm("r1") = offsetof(TeamInventory, teamItems[index]);
-        Item* p = gTeamInventoryRef->teamItems;
-        size_t addr = offset + (size_t)p;
-        item = (Item*)addr;
-#endif
-        if ((item->flags & ITEM_FLAG_EXISTS) && ((item->flags & ITEM_FLAG_IN_SHOP) == 0))
-            if(item->id == ITEM_TM_USED_TM) {
-                xxx_init_itemslot_8090A8C(item, item->quantity + 0x7d,0);
-                isTMRecycled = TRUE;
+    if (!entityInfo->isNotTeamMember) {
+        for(i = 0; i < INVENTORY_SIZE; i++)
+        {
+            if (ItemExists(&gTeamInventoryRef->teamItems[i]) && !ItemInShop(&gTeamInventoryRef->teamItems[i]))
+            {
+                Item *item = &gTeamInventoryRef->teamItems[i];
+                if (item->id == ITEM_TM_USED_TM) {
+                    xxx_init_itemslot_8090A8C(item, item->quantity + 0x7d,0);
+                    isTMRecycled = TRUE;
+                }
             }
         }
-    if ((entityInfo->heldItem.flags & ITEM_FLAG_EXISTS) && (entityInfo->heldItem.id == ITEM_TM_USED_TM)) {
-      xxx_init_itemslot_8090A8C(&entityInfo->heldItem,entityInfo->heldItem.quantity + 0x7D,0);
-      isTMRecycled = TRUE;
+        if (ItemExists(&entityInfo->heldItem) && (entityInfo->heldItem.id == ITEM_TM_USED_TM)) {
+            xxx_init_itemslot_8090A8C(&entityInfo->heldItem,entityInfo->heldItem.quantity + 0x7D,0);
+            isTMRecycled = TRUE;
+        }
     }
-  }
-  if (isTMRecycled) {
-    sub_80522F4(pokemon,target,*gUnknown_80FDC9C); // The Used TM was recharged!
-  }
-  else {
-    sub_80522F4(pokemon,target,*gUnknown_80FDCA0); // But nothing happened!
-  }
-  return isTMRecycled;
+
+    if (isTMRecycled) {
+        sub_80522F4(pokemon,target,*gUnknown_80FDC9C); // The Used TM was recharged!
+    }
+    else {
+        sub_80522F4(pokemon,target,*gUnknown_80FDCA0); // But nothing happened!
+    }
+    return isTMRecycled;
 }
 
 bool8 ReflectMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
@@ -682,29 +667,21 @@ bool8 sub_805B968(Entity * pokemon, Entity * target, Move * move, s32 param_4)
 
 bool8 RockSmashMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    bool8 flag;
     Position pos;
+    bool8 flag = FALSE;
 
-#ifdef NONMATCHING
-    Entity *temp;
-    Entity *temp1;
-#else
-    register Entity *temp asm("r5");
-    register Entity *temp1 asm("r4");
-#endif
-
-    temp = pokemon;
-    temp1 = target;
-
-    flag = 0;
     if (sub_8069D18(&pos) != 0) {
-        sub_80522F4(temp,temp1,*gUnknown_80FD430); // Can't use that diagonally!
-    }
-    else if (flag = (sub_804AD34(&pos)), flag != 0) {
-        sub_80522F4(temp,temp1,*gUnknown_80FD3F0); // It dug the wall in front!
+        sub_80522F4(pokemon,target,*gUnknown_80FD430); // Can't use that diagonally!
     }
     else {
-        sub_80522F4(temp,temp1,*gUnknown_80FD40C); // Can't use that here!
+        ASM_MATCH_TRICK(target);
+        flag = sub_804AD34(&pos);
+        if (flag) {
+            sub_80522F4(pokemon,target,*gUnknown_80FD3F0); // It dug the wall in front!
+        }
+        else {
+            sub_80522F4(pokemon,target,*gUnknown_80FD40C); // Can't use that here!
+        }
     }
     return flag;
 }
@@ -755,14 +732,10 @@ bool8 sub_805BA50(Entity * pokemon, Entity * target, Move *move, s32 param_4)
                 }
                 else {
                     iVar3->heldItem = iVar6->heldItem;
-                    targetItem->id = ITEM_NOTHING;
-                    targetItem->quantity = 0;
-                    targetItem->flags = 0;
+                    ZeroOutItem(targetItem);
                     sub_806A6E8(pokemon);
                     sub_806A6E8(target);
-                    if (iVar3->expMultiplier == 0) {
-                        iVar3->expMultiplier = 1;
-                    }
+                    SetExpMultplier(iVar3);
                     sub_80522F4(pokemon,target,*gUnknown_80FC614); // Got $m1's item!
                 }
             }
@@ -792,43 +765,33 @@ bool8 sub_805BB98(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 
 bool8 CleanseOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    Item *item;
-    Entity *entity;
-    EntityInfo *entityInfo;
-    s32 index;
-    bool8 isItemCleaned;
+    s32 i;
+    EntityInfo *entityInfo = GetEntInfo(target);
+    bool32 isItemCleaned = FALSE;
 
-#ifdef NONMATCHING
-    u8 flag;
-#else
-    register u8 flag asm("r2");
-#endif
-
-    entityInfo = target->info;
-    isItemCleaned = FALSE;
     if (!entityInfo->isNotTeamMember) {
-        for(index = 0; index < INVENTORY_SIZE; index++){
-            // WTF why does this work...
-            UNUSED Item* current = &gTeamInventoryRef->teamItems[index];
-            flag = index[gTeamInventoryRef->teamItems].flags;
-            if (((flag & ITEM_FLAG_EXISTS) != 0) && ((flag & ITEM_FLAG_IN_SHOP) == 0))
-                if((flag & ITEM_FLAG_STICKY) != 0) {
-                    gTeamInventoryRef->teamItems[index].flags = flag & 0xf7;
+        for(i = 0; i < INVENTORY_SIZE; i++){
+            if (ItemExists(&gTeamInventoryRef->teamItems[i])
+                && !ItemInShop(&gTeamInventoryRef->teamItems[i])
+                && ItemSticky(&gTeamInventoryRef->teamItems[i]))
+            {
+                gTeamInventoryRef->teamItems[i].flags &= ~(ITEM_FLAG_STICKY);
+                isItemCleaned = TRUE;
+            }
+        }
+        for(i = 0; i < MAX_TEAM_MEMBERS; i++)
+        {
+            Entity *entity = gDungeon->teamPokemon[i];
+            if (EntityExists(entity)) {
+                Item *item = &GetEntInfo(entity)->heldItem;
+                if (ItemExists(item) && ItemSticky(item)) {
+                    item->flags &= ~(ITEM_FLAG_STICKY);
                     isItemCleaned = TRUE;
                 }
-        }
-        for(index = 0; index < MAX_TEAM_MEMBERS; index++)
-            {
-                entity = gDungeon->teamPokemon[index];
-                if (EntityExists(entity)) {
-                    item = &entity->info->heldItem;
-                    if (((item->flags & ITEM_FLAG_EXISTS) != 0) && ((item->flags & ITEM_FLAG_STICKY) != 0)) {
-                        item->flags &= 0xf7;
-                        isItemCleaned = TRUE;
-                    }
-                }
             }
+        }
     }
+
     if (isItemCleaned) {
         sub_80522F4(pokemon,target,*gUnknown_80FC8F0);
     }
