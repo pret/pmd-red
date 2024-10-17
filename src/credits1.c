@@ -1,5 +1,5 @@
 #include "global.h"
-#include "code_8098BDC.h"
+#include "code_8099360.h"
 #include "credits1.h"
 #include "event_flag.h"
 #include "input.h"

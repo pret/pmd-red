@@ -5,7 +5,7 @@
 #include "code_80130A8.h"
 #include "code_801602C.h"
 #include "code_8094D28.h"
-#include "code_8098BDC.h"
+#include "code_8099360.h"
 #include "constants/emotions.h"
 #include "game_options.h"
 #include "input.h"
