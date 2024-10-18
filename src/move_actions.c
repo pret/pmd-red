@@ -2663,17 +2663,12 @@ bool8 sub_805A688(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     EntityInfo *entityInfo;
-    EntityInfo *targetEntityInfo1;
-    EntityInfo *targetEntityInfo2;
+    EntityInfo *targetEntityInfo;
     Item heldItem;
     Position pos;
-    Item *itemPtr;
-    u32 flag;
-    u32 itemFlag;
 
-    entityInfo = pokemon->info;
-    targetEntityInfo1 = target->info;
-    targetEntityInfo2 = targetEntityInfo1;
+    entityInfo = GetEntInfo(pokemon);
+    targetEntityInfo = GetEntInfo(target);
     SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
     SetMessageArgument(gAvailablePokemonNames + 0x50, target, 0);
     if (HasAbility(target, ABILITY_STICKY_HOLD))
@@ -2688,21 +2683,15 @@ bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
     }
     else
     {
-        heldItem = targetEntityInfo1->heldItem;
-        itemFlag = heldItem.flags;
-        flag = ITEM_FLAG_EXISTS;
-        flag &= itemFlag;
-        if (flag == 0)
+        heldItem = targetEntityInfo->heldItem;
+        if (!ItemExists(&heldItem))
         {
             sub_80522F4(pokemon,target,*gUnknown_80FD18C);
             return FALSE;
         }
         else
         {
-            itemPtr = &targetEntityInfo2->heldItem;
-            itemPtr->id = ITEM_NOTHING;
-            itemPtr->quantity = 0;
-            itemPtr->flags = 0;
+            ZeroOutItem(&targetEntityInfo->heldItem);
             sub_80522F4(pokemon,target,*gUnknown_80FD170); // $m1's item was swatted down!
             pos.x = gAdjacentTileOffsets[entityInfo->action.direction].x;
             pos.y = gAdjacentTileOffsets[entityInfo->action.direction].y;

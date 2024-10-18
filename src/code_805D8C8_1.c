@@ -502,39 +502,39 @@ void DungeonHandlePlayerInput(void)
                     sub_806CDD4(leader, sub_806CEBC(leader), directionNew);
                 }
                 else {
-                    u8 r4 = 0;
-                    const u8 *msg = NULL;
+                    u8 canMoveFlags = 0;
+                    const u8 *immobilizedMsg = NULL;
 
                     if (sub_805EC4C(leader, 1))
                         break;
 
-                    if (leaderInfo->immobilize.immobilizeStatus == 2) {
-                        msg = gUnknown_80F8A84, r4 |= 1;
+                    if (leaderInfo->immobilize.immobilizeStatus == STATUS_SHADOW_HOLD) {
+                        immobilizedMsg = gUnknown_80F8A84, canMoveFlags |= 1;
                     }
-                    else if (leaderInfo->immobilize.immobilizeStatus == 7) {
-                        msg = gUnknown_80F8A6C, r4 |= 1;
+                    else if (leaderInfo->immobilize.immobilizeStatus == STATUS_CONSTRICTION) {
+                        immobilizedMsg = gUnknown_80F8A6C, canMoveFlags |= 1;
                     }
-                    else if (leaderInfo->immobilize.immobilizeStatus == 5) {
-                        msg = gUnknown_80F8AB0, r4 |= 1;
+                    else if (leaderInfo->immobilize.immobilizeStatus == STATUS_INGRAIN) {
+                        immobilizedMsg = gUnknown_80F8AB0, canMoveFlags |= 1;
                     }
-                    else if (leaderInfo->immobilize.immobilizeStatus == 3) {
-                        msg = gUnknown_80F8ADC, r4 |= 1;
+                    else if (leaderInfo->immobilize.immobilizeStatus == STATUS_WRAP) {
+                        immobilizedMsg = gUnknown_80F8ADC, canMoveFlags |= 1;
                     }
-                    else if (leaderInfo->immobilize.immobilizeStatus == 4) {
-                        msg = gUnknown_80F8B0C, r4 |= 1;
+                    else if (leaderInfo->immobilize.immobilizeStatus == STATUS_WRAPPED) {
+                        immobilizedMsg = gUnknown_80F8B0C, canMoveFlags |= 1;
                     }
 
                     if (!CanMoveInDirection(leader, directionNew))
-                        r4 |= 2;
+                        canMoveFlags |= 2;
 
                     if (directionChanged) {
                         sub_806CDD4(leader, sub_806CEBC(leader), directionNew);
                     }
 
-                    if (!(r4 & 2)) {
-                        if (r4 & 1) {
-                            if (msg != NULL) {
-                                SendMessage(leader, msg);
+                    if (!(canMoveFlags & 2)) {
+                        if (canMoveFlags & 1) {
+                            if (immobilizedMsg != NULL) {
+                                SendMessage(leader, immobilizedMsg);
                             }
                             sub_8044C50(1);
                             gDungeon->unk673 = 1;
@@ -542,7 +542,7 @@ void DungeonHandlePlayerInput(void)
                         else {
                             sub_8044C50(2);
                             if ((gRealInputs.held & B_BUTTON || bPress) && FixedPointToInt(leaderInfo->belly) != 0) {
-                                if (GetEntInfo(leader)->volatileStatus.volatileStatus != 2) {
+                                if (GetEntInfo(leader)->volatileStatus.volatileStatus != STATUS_CONFUSED) {
                                     gDungeon->unk66C = 1;
                                 }
                                 leaderInfo->action.unk4[0].actionUseIndex = 0;
@@ -553,7 +553,7 @@ void DungeonHandlePlayerInput(void)
                         }
                         break;
                     }
-                    else if (r4 & 1) {
+                    else if (canMoveFlags & 1) {
                         sub_803E724(0x23);
                     }
 
@@ -1536,7 +1536,7 @@ bool8 sub_805EC4C(Entity *a0, u8 a1)
     Tile *tile;
     EntityInfo *tileMonsterInfo;
     Entity *tileMonster;
-    EntityInfo *entityInfo = a0->info;
+    EntityInfo *entityInfo = GetEntInfo(a0);
 
     pos.x = a0->pos.x + gAdjacentTileOffsets[entityInfo->action.direction].x;
     pos.y = a0->pos.y + gAdjacentTileOffsets[entityInfo->action.direction].y;
@@ -1546,11 +1546,11 @@ bool8 sub_805EC4C(Entity *a0, u8 a1)
     if (tileMonster == NULL) return FALSE;
     if (GetEntityType(tileMonster) != ENTITY_MONSTER) return FALSE;
 
-    tileMonsterInfo = tileMonster->info;
+    tileMonsterInfo = GetEntInfo(tileMonster);
     if (tileMonsterInfo->isNotTeamMember
         && (tileMonsterInfo->shopkeeper != 1 && tileMonsterInfo->shopkeeper != 2)
         && !IsClientOrTeamBase(tileMonsterInfo->joinedAt.joinedAt)
-        && tileMonsterInfo->clientType != 1) {
+        && tileMonsterInfo->clientType != CLIENT_TYPE_CLIENT) {
         return FALSE;
     }
 
@@ -3441,7 +3441,7 @@ void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
 
     gUnknown_202EE6C = 0;
     teamMon = gDungeon->teamPokemon[a0->unk4[gUnknown_202EE10.menuIndex]];
-    monInfo = teamMon->info;
+    monInfo = GetEntInfo(teamMon);
     sub_8044F5C(0x1B, 0);
     sub_8044F5C(0x19, 0);
     if (!monInfo->isTeamLeader) {
@@ -3453,28 +3453,27 @@ void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
     sub_8044F5C(0x30, 0);
     if (!monInfo->isTeamLeader) {
         sub_8044F5C(0x1A, 0);
-        // Why checking teamLeader again?
-        if (!monInfo->isTeamLeader && gDungeon->unk65C && CanLeaderSwitch(gDungeon->dungeonLocation.id)) {
-            bool32 r5;
+    }
+    if (!monInfo->isTeamLeader && gDungeon->unk65C && CanLeaderSwitch(gDungeon->dungeonLocation.id)) {
+        bool32 r5;
 
-            sub_8044F5C(0x3B, 0);
-            r5 = TRUE;
-            if (monInfo->teamIndex >= MAX_TEAM_MEMBERS) {
+        sub_8044F5C(0x3B, 0);
+        r5 = TRUE;
+        if (monInfo->teamIndex >= MAX_TEAM_MEMBERS) {
+            r5 = FALSE;
+        }
+        else {
+            PokemonStruct2 *mon = &gRecruitedPokemonRef->pokemon2[monInfo->teamIndex];
+            if (sub_806A538(mon->unkA)) {
                 r5 = FALSE;
             }
-            else {
-                PokemonStruct2 *mon = &gRecruitedPokemonRef->pokemon2[monInfo->teamIndex];
-                if (sub_806A538(mon->unkA)) {
-                    r5 = FALSE;
-                }
-            }
+        }
 
-            if (CheckVariousStatuses2(teamMon, FALSE)) {
-                r5 = FALSE;
-            }
-            if (!r5) {
-                sub_8044FF0(0x3B);
-            }
+        if (CheckVariousStatuses2(teamMon, FALSE)) {
+            r5 = FALSE;
+        }
+        if (!r5) {
+            sub_8044FF0(0x3B);
         }
     }
 

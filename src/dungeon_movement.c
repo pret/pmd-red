@@ -106,9 +106,8 @@ u8 sub_80703A0(Entity *pokemon, Position *pos)
 
 bool8 CanCrossWalls(Entity *pokemon)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
-    EntityInfo *pokemonInfo2 = pokemonInfo;
-    if (pokemonInfo2->transformStatus.transformStatus == STATUS_MOBILE)
+    EntityInfo *pokemonInfo = GetEntInfo(pokemon);
+    if (pokemonInfo->transformStatus.transformStatus == STATUS_MOBILE)
     {
         return TRUE;
     }
@@ -116,7 +115,7 @@ bool8 CanCrossWalls(Entity *pokemon)
     {
         return TRUE;
     }
-    if (GetCrossableTerrain(pokemonInfo2->id) == CROSSABLE_TERRAIN_WALL)
+    if (GetCrossableTerrain(pokemonInfo->id) == CROSSABLE_TERRAIN_WALL)
     {
         return TRUE;
     }
