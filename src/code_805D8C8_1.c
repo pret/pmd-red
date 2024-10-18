@@ -2074,7 +2074,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
                     var_30.a0_32 = 1;
                     if (sub_805FD74(GetLeader(), &var_30)) {
                         // This actually doesn't do anything, it's just there to make the code match as the compiler does a `lsl r0, r0, #0x10, mov r0, r4`
-                        leader = 0; leader = leader;
+                        ASM_MATCH_TRICK(leader);
                     }
                     if (sub_805FD3C(&var_30) && sub_805FD74(GetLeader(), &var_30)) {
                         sub_8044C10(1);
