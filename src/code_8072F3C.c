@@ -2,6 +2,8 @@
 #include "globaldata.h"
 #include "constants/input.h"
 #include "code_80118A4.h"
+#include "code_80958E8.h"
+#include "code_80A26CC.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
@@ -61,12 +63,13 @@ ALIGNED(4) const u8 gUnknown_80E0754[] = {0x83, 0xC0};
 void sub_802F9C0(void);
 void sub_802FA50(void);
 const u8 *sub_80974A0(s16 index);
-extern bool8 sub_802FCF0(u32);
-extern s32 sub_802FBF4(void);
+extern bool8 sub_802FCF0(void);
+s32 sub_802FBF4(void);
+extern u8 sub_8097384(s16);
 
 u32 sub_802F73C(u32 r0, UnkTextStruct2_sub *r1, u32 r2, u8 r3)
 {
-    if (sub_802FCF0(r0))
+    if (sub_802FCF0())
         return 0;
 
     if (gUnknown_203B314 == NULL)
@@ -223,3 +226,69 @@ void sub_802FA50(void)
   }
   sub_80073E0(gUnknown_203B314->sBC.s0.unk34);
 }
+
+static inline void sub_802FBF4_sub(u8 *test, s32 counter)
+{
+    test[counter] = 0;
+}
+
+s32 sub_802FBF4(void)
+{
+    bool8 bVar1;
+    u32 dungeonIndex;
+    s32 iVar6;
+    s32 counter;
+    s32 index;
+
+    counter = 0;
+    for(index = 0; index  < 0x2E; index++)
+    {
+        iVar6 = iVar6 = (s16)index; // NOTE: LOLOL
+        if (((sub_80A27CC(index) != 0) && (iVar6 != 0x13)) && (iVar6 != 0x1d)) {
+            gUnknown_203B314->unk0[counter] = iVar6;
+            sub_802FBF4_sub(gUnknown_203B314->unk5C, counter);
+            sub_802FBF4_sub(gUnknown_203B314->unk8A, counter);
+            if ((gUnknown_203B314->unkB8 != 0) && (iVar6 != 0xd)) {
+                dungeonIndex = sub_80A270C(index);
+                bVar1 = FALSE;
+                if (0x1e >= iVar6)
+                {
+                    if (sub_8097384(iVar6) == 0) {
+                        if (iVar6 == 6) {
+                            if (sub_8097384(0x13) != 0) {
+                                gUnknown_203B314->unk0[counter] = 0x13;
+                                bVar1 = TRUE;
+                            }
+                        }
+                        else if ((iVar6 == 10) && (sub_8097384(0x1d) != 0)) {
+                            gUnknown_203B314->unk0[counter] = 0x1d;
+                            bVar1 = TRUE;
+                        }
+                    }
+                    else {
+                        bVar1 = TRUE;
+                    }
+                }
+                gUnknown_203B314->unk5C[counter] = bVar1;
+                if ((!bVar1) && (0 < CountJobsinDungeon(dungeonIndex))) {
+                    gUnknown_203B314->unk8A[counter] = 1;
+                }
+            }
+            counter++;
+        }
+    }
+    return counter;
+}
+
+bool8 sub_802FCF0(void)
+{
+    s32 i;
+
+    for (i = 0; i < 0x2E; i++) {
+        if (sub_80A27CC(i))
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
