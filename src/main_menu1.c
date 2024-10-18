@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "adventure_log_menu.h"
-#include "code_8098BDC.h"
+#include "code_8099360.h"
 #include "constants/item.h"
 #include "constants/main_menu.h"
 #include "debug_menu1.h"

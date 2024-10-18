@@ -5,6 +5,7 @@
 #include "code_801B3C0.h"
 #include "code_80227B8.h"
 #include "code_8098BDC.h"
+#include "code_8099360.h"
 #include "code_80118A4.h"
 #include "common_strings.h"
 #include "constants/colors.h"
