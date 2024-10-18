@@ -593,7 +593,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         gDungeon->unkB = 1;
         gDungeon->unkD = 1;
         gDungeon->unkE = 0;
-        gDungeon->unk1C05E = 0;
+        gDungeon->unk1BDD4.unk1C05E = 0;
         if (!r6) {
             gDungeon->unk679 = 0;
             gDungeon->unk68C = 0;

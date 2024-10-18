@@ -86,9 +86,9 @@ void sub_803E490(u32 unused)
     sub_803EDF0();
 
 
-    if(gDungeon->unk181e8.unk18215 != 0 && gDungeon->unk1C06C != 3)
+    if(gDungeon->unk181e8.unk18215 != 0 && gDungeon->unk1BDD4.unk1C06C != 3)
         sub_8004AF0(gUnknown_203B40D, gUnknown_202EE8C, 0xA0, 0x20, gUnknown_202EDC8, (u8 *)gDungeon->unk17C);
-    
+
     nullsub_8(gGameOptionsRef->unkA);
     sub_8005180();
     nullsub_12();
@@ -103,13 +103,13 @@ void sub_803E490(u32 unused)
     nullsub_13();
     sub_8005304();
     nullsub_14();
-    
+
     TransferBGPaletteBuffer();
     sub_8009908();
     xxx_call_update_bg_vram();
     sub_8040788();
     xxx_call_update_bg_sound_input();
-    
+
     gDungeon->unk181e8.unk18213 = 0;
     UpdateDungeonMusic();
     sub_8011860();
@@ -156,7 +156,7 @@ void sub_803E708(s32 a0, u32 a1)
 
 void sub_803E724(s32 r0)
 {
-    do 
+    do
     {
         sub_803E46C(r0);
     } while (gRealInputs.held & 0xF0);
@@ -225,7 +225,7 @@ void sub_803E7C8(void)
     gUnknown_203B40D = 0;
 }
 
-void sub_803E830(void) 
+void sub_803E830(void)
 {
     s32 index;
 

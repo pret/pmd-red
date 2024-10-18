@@ -101,7 +101,7 @@ void sub_803E874(bool8 r10, s32 r9)
         index++;
     }
 
-    if (gDungeon->unk181e8.unk18215 == 0 || gDungeon->unk1C06C == 3) {
+    if (gDungeon->unk181e8.unk18215 == 0 || gDungeon->unk1BDD4.unk1C06C == 3) {
         sub_8004AF0(TRUE, gUnknown_202EE8C, 0xA0, 0x20, gUnknown_202EDC8, (void *) &gDungeon->unk17C);
     }
 
@@ -169,7 +169,7 @@ void sub_803EA10(void)
         index++;
     }
 
-    if (gDungeon->unk181e8.unk18215 == 0 || gDungeon->unk1C06C == 3) {
+    if (gDungeon->unk181e8.unk18215 == 0 || gDungeon->unk1BDD4.unk1C06C == 3) {
         sub_8004AF0(TRUE, gUnknown_202EE8C, 0xA0, 0x20, gUnknown_202EDC8, (void *) &gDungeon->unk17C);
     }
 
