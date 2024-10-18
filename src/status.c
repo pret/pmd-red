@@ -1092,8 +1092,7 @@ void SnatchStatusTarget(Entity * pokemon, Entity * target)
 {
   Entity * entity;
   s32 index;
-  EntityInfo * targetEntityInfo;
-  EntityInfo * targetEntityInfo2;
+  EntityInfo *targetEntityInfo;
 
   if (EntityExists(target)) {
     SendWaitingEndMessage(pokemon,target,STATUS_SNATCH);
@@ -1107,8 +1106,7 @@ void SnatchStatusTarget(Entity * pokemon, Entity * target)
     }
     nullsub_81(target);
 
-    targetEntityInfo = target->info;
-    targetEntityInfo2 = targetEntityInfo;
+    targetEntityInfo = GetEntInfo(target);
     if (targetEntityInfo->waitingStruct.waitingStatus != STATUS_SNATCH) {
       targetEntityInfo->waitingStruct.waitingStatus = STATUS_SNATCH;
       targetEntityInfo->waitingStruct.waitingStatusTurns= CalculateStatusTurns(target,gUnknown_80F4EA8,FALSE) + 1;
@@ -1116,7 +1114,7 @@ void SnatchStatusTarget(Entity * pokemon, Entity * target)
     }
 
     gDungeon->snatchPokemon = target;
-    gDungeon->unk17B3C = targetEntityInfo2->unk98;
+    gDungeon->unk17B3C = targetEntityInfo->unk98;
     SetMessageArgument(gAvailablePokemonNames,target,0);
     sub_80522F4(pokemon,target,*gUnknown_80FB01C);
     EntityUpdateStatusSprites(target);
@@ -1313,7 +1311,7 @@ void sub_8078B5C(Entity *pokemon, Entity *target, u32 bellyIncrement, s32 maxBel
         {
             bellySizeIncreased = TRUE;
         }
-        if (bellyIncrement == 999) 
+        if (bellyIncrement == 999)
         {
             bellySizeIncreased = TRUE;
         }
@@ -1360,7 +1358,7 @@ void sub_8078B5C(Entity *pokemon, Entity *target, u32 bellyIncrement, s32 maxBel
         }
         else {
             if (FixedPointToInt(*bellyPtr) >= FixedPointToInt(*puVar8)) {
-                if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBE64); // $m0's belly filled up full! 
+                if (displayMessage) sub_80522F4(pokemon,target,*gUnknown_80FBE64); // $m0's belly filled up full!
             }
             else
             {

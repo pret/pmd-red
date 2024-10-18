@@ -407,7 +407,7 @@ void HandleStickyTrap(Entity *pokemon,Entity *target)
     int newIndex;
     Item *itemStack[21];
 
-    info = target->info;
+    info = GetEntInfo(target);
     if (HasHeldItem(target,0xe)) {
         sub_80522F4(pokemon,target,*gUnknown_80FDC7C);
     }
@@ -416,32 +416,29 @@ void HandleStickyTrap(Entity *pokemon,Entity *target)
         itemCount = 0;
         if (info->isTeamLeader) {
             for (index = 0; index < INVENTORY_SIZE; index++) {
-                struct Item *items;
-                DUMMY_TEAM_ITEMS_ASM_MATCH(index);
-
-                items = gTeamInventoryRef->teamItems;
-                if ((items[index].flags & ITEM_FLAG_EXISTS)
-                    && IsNotSpecialItem(items[index].id)
-                    && !(gTeamInventoryRef->teamItems[index].flags & ITEM_FLAG_STICKY)) {
-                        itemStack[itemCount] = &gTeamInventoryRef->teamItems[index];
+                if (ItemExists(&gTeamInventoryRef->teamItems[index]) && IsNotSpecialItem(gTeamInventoryRef->teamItems[index].id)) {
+                    Item *item = &gTeamInventoryRef->teamItems[index];
+                    if (!ItemSticky(item)) {
+                        itemStack[itemCount] = item;
                         itemCount++;
                     }
+                }
             }
         }
-        if ((info->heldItem.flags & ITEM_FLAG_EXISTS) && IsNotSpecialItem((info->heldItem).id) && !(info->heldItem.flags & ITEM_FLAG_STICKY)) {
-              itemStack[itemCount] = &info->heldItem;
-              itemCount++;
+        if (ItemExists(&info->heldItem) && IsNotSpecialItem((info->heldItem).id) && !ItemSticky(&info->heldItem)) {
+            itemStack[itemCount] = &info->heldItem;
+            itemCount++;
         }
 
         if (itemCount == 0) {
             sub_80522F4(pokemon,target,*gUnknown_80FDC40);
         }
         else {
-          newIndex = DungeonRandInt(itemCount);
-          sub_8045BF8(gFormatItems, itemStack[newIndex]);
-          itemStack[newIndex]->flags |= ITEM_FLAG_STICKY;
-          sub_80421C0(target, 0x192);
-          sub_80522F4(pokemon,target,*gUnknown_80FDC18);
+            newIndex = DungeonRandInt(itemCount);
+            sub_8045BF8(gFormatItems, itemStack[newIndex]);
+            itemStack[newIndex]->flags |= ITEM_FLAG_STICKY;
+            sub_80421C0(target, 0x192);
+            sub_80522F4(pokemon,target,*gUnknown_80FDC18);
         }
     }
 }

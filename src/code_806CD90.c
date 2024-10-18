@@ -171,21 +171,18 @@ void sub_806CE94(Entity *entity, u32 newDir)
 u8 sub_806CEBC(Entity *entity)
 {
     u8 sleep;
-    EntityInfo *entityInfo1;
-    EntityInfo *entityInfo2;
+    EntityInfo *entityInfo;
 
-    // NOTE: copy needed to match
-    entityInfo1 = entity->info;
-    entityInfo2 = entity->info;
-    sleep = entityInfo1->sleep.sleep;
+    entityInfo = GetEntInfo(entity);
+    sleep = entityInfo->sleep.sleep;
 
     if (sleep == STATUS_SLEEP || sleep == STATUS_NAPPING || sleep == STATUS_NIGHTMARE) {
-        if (entityInfo2->apparentID != MONSTER_SUDOWOODO || entityInfo2->sleep.sleepTurns != 0x7F)
+        if (entityInfo->apparentID != MONSTER_SUDOWOODO || entityInfo->sleep.sleepTurns != 0x7F)
             return 5;
         else
             return 7;
     }
-    if (entityInfo2->charging.chargingStatus == STATUS_BIDE)
+    if (entityInfo->charging.chargingStatus == STATUS_BIDE)
         return 11;
     return 7;
 }
@@ -924,12 +921,12 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     if (GetEntityType(attacker) == ENTITY_MONSTER) {
         EntityInfo *attackerData = GetEntInfo(attacker);
         s32 exp  = CalculateEXPGain(targetData->id, targetData->level);
-        switch (targetData->unkFB) {
-            case 2:
+        switch (targetData->expMultiplier) {
+            case EXP_BOOSTED:
                 exp *= 3;
                 exp /= 2;
                 break;
-            case 0:
+            case EXP_HALVED:
                 exp /= 2;
                 break;
         }

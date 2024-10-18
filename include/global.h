@@ -23,6 +23,13 @@
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
 
+// Sometimes incrementing and decrementing a variable changes how registers are allocated, which helps with matching functions. Functionality-wise this doesn't do anything.
+#ifdef NONMATCHING
+#define ASM_MATCH_TRICK(a) {;}
+#else
+#define ASM_MATCH_TRICK(a) {a++;a--;}
+#endif // NONMATCHING
+
 // to help in decompiling
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
 

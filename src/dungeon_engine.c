@@ -25,7 +25,7 @@ extern void sub_8086AC0(void);
 extern void sub_8043ED0(u32);
 extern void sub_8071DA4(Entity *);
 extern void TriggerWeatherAbilities(void);
-extern void sub_805D8C8(void);
+extern void DungeonHandlePlayerInput(void);
 extern void sub_805F02C(void);
 
 static void sub_8044454(void);
@@ -140,7 +140,7 @@ static bool8 xxx_dungeon_80442D0(bool8 param_1)
             if (sub_8044B28()) return FALSE;
             sub_8071DA4(entity);
             gDungeon->noActionInProgress = TRUE;
-            sub_805D8C8();
+            DungeonHandlePlayerInput();
             gDungeon->noActionInProgress = FALSE;
             if (sub_8044B28()) break;
             sub_8072CF4(entity);

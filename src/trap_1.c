@@ -382,7 +382,7 @@ void SaveEntity(unkStruct_8094924 *param_1, Entity *param_2)
     pbStack_50 = &info->stairSpotter;
     puStack_4c = &info->unkF3;
     pbStack_48 = &info->grudge;
-    puStack_34 = &info->unkFB;
+    puStack_34 = &info->expMultiplier;
     pbStack_44 = &info->exposed;
     pbStack_40 = &info->isColorChanged;
     pbStack_3c = &info->bossFlag;

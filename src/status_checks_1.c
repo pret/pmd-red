@@ -179,14 +179,13 @@ bool8 IsSleeping(Entity *pokemon)
 
 bool8 HasLowHealth(Entity *pokemon)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
-    EntityInfo *pokemonInfo2 = pokemon->info;
+    EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     s32 maxHPStat = pokemonInfo->maxHPStat;
     if (maxHPStat < 0)
     {
         maxHPStat += 3;
     }
-    if (pokemonInfo2->HP <= maxHPStat >> 2)
+    if (pokemonInfo->HP <= maxHPStat >> 2)
     {
         return TRUE;
     }
