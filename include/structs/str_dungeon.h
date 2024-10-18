@@ -211,6 +211,22 @@ struct unkStruct_Dungeon64C
     u32 unk4;
 };
 
+#define UNK_1BBD4_STR_COUNT 10
+
+struct UnkStructDungeon1BDD4
+{
+    u8 unk0[UNK_1BBD4_STR_COUNT][64];
+    u8 unk1C054[UNK_1BBD4_STR_COUNT]; // 0x280
+    u8 unk1C05E; // 0x28A
+    u8 fill1C05F; // 0x28B
+    s16 unk1C060; // 0x28C
+    s16 unk1C062; // 0x29E
+    s16 unk1C064; // 0x290
+    s16 unk1C066; // 0x292
+    s16 unk1C068; // 0x294
+    u32 unk1C06C; // 0x298
+};
+
 // size: 0x1CEDC
 typedef struct Dungeon
 {
@@ -379,10 +395,8 @@ typedef struct Dungeon
     /* 0x17B44 */ OpenedFile *sprites[MONSTER_MAX];
     /* 0x181E4 */ OpenedFile *paletFile;
     /* 0x181E8 */ UnkDungeonGlobal_unk181E8_sub unk181e8;
-    u8 fill18220[0x1C05E - 0x1822C];
-    u8 unk1C05E;
-    u8 fill1C05F[0x1C06C - 0x1C05F];
-    u32 unk1C06C;
+    u8 fill18220[0x1BDD4 - 0x1822C];
+    struct UnkStructDungeon1BDD4 unk1BDD4;
     u8 fill1C070[0x1C570 - 0x1C070];
     /* 0x1C570 */ DungeonLocation unk1C570;
     /* 0x1C574 */ UnkDungeonGlobal_unk1C574 unk1C574;
