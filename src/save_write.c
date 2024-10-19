@@ -14,30 +14,29 @@ void PrepareSavePakWrite(s16 pokemonID)
 {
     OpenedFile *file;
     s32 id_s32;
-    OpenedFile **preload_face;
 
     id_s32 = pokemonID; // had to cast for asr shift
 
     sub_80993D8();
     sSavePakWrite = MemoryAlloc(sizeof(SavePakWrite), 5);
     sSavePakWrite->pokeID = id_s32;
-    sSavePakWrite->faceFile = NULL;
-    sSavePakWrite->faceData = NULL;
+    sSavePakWrite->faceInfo.faceFile = NULL;
+    sSavePakWrite->faceInfo.faceData = NULL;
 
     if (pokemonID != MONSTER_NONE) {
         file = GetDialogueSpriteDataPtr(pokemonID);
-        sSavePakWrite->faceFile = file;
-        sSavePakWrite->faceData = file->data;
-        sSavePakWrite->unk18 = 0;
-        sSavePakWrite->unk19 = 0;
-        sSavePakWrite->unk1A = 0;
-        sSavePakWrite->unk14 = 2;
-        sSavePakWrite->unk16 = 8;
+        sSavePakWrite->faceInfo.faceFile = file;
+        sSavePakWrite->faceInfo.faceData = file->data;
+        sSavePakWrite->faceInfo.unkC = 0;
+        sSavePakWrite->faceInfo.unkD = 0;
+        sSavePakWrite->faceInfo.unkE = 0;
+        sSavePakWrite->faceInfo.unk8 = 2;
+        sSavePakWrite->faceInfo.unkA = 8;
     }
 
-    if (sSavePakWrite->faceFile != 0) {
-        preload_face = &sSavePakWrite->faceFile;
-        xxx_info_box_80141B4(sSavingAdventure, 0, preload_face, 0x20);
+    if (sSavePakWrite->faceInfo.faceFile != 0) {
+        struct UnkPrintFieldMsgStruct *faceInfoPtr = &sSavePakWrite->faceInfo;
+        xxx_info_box_80141B4(sSavingAdventure, 0, faceInfoPtr, 0x20);
     }
     else
         xxx_info_box_80141B4(sSavingAdventure, 0, NULL, 0x20);
@@ -47,13 +46,13 @@ void PrepareSavePakWrite(s16 pokemonID)
 
 bool8 WriteSavePak(void)
 {
-    OpenedFile **faceFile;
+    struct UnkPrintFieldMsgStruct *faceInfoPtr;
     u32 local_14;
     u32 other_stack;
 
-    faceFile = NULL;
-    if (sSavePakWrite->faceFile != NULL)
-        faceFile = &sSavePakWrite->faceFile;
+    faceInfoPtr = NULL;
+    if (sSavePakWrite->faceInfo.faceFile != NULL)
+        faceInfoPtr = &sSavePakWrite->faceInfo;
 
     switch (sSavePakWrite->state) {
         case 0:
@@ -78,10 +77,10 @@ bool8 WriteSavePak(void)
 
             switch (sSavePakWrite->saveStatus) {
                 case SAVE_COMPLETED:
-                    if (sSavePakWrite->faceFile != NULL)
-                        xxx_info_box_80141B4(sSaveCompleted, 0, faceFile, 0x101);
+                    if (sSavePakWrite->faceInfo.faceFile != NULL)
+                        xxx_info_box_80141B4(sSaveCompleted, 0, faceInfoPtr, 0x101);
                     else
-                        xxx_info_box_80141B4(sSaveCompleted, 0, faceFile, 0x101);
+                        xxx_info_box_80141B4(sSaveCompleted, 0, faceInfoPtr, 0x101);
 
                     sSavePakWrite->state = 5;
                     break;
@@ -90,10 +89,10 @@ bool8 WriteSavePak(void)
                     sSavePakWrite->state = 6;
                     break;
                 default:
-                    if (sSavePakWrite->faceFile != NULL)
-                        xxx_info_box_80141B4(sSaveFailed, 0, faceFile, 0x101);
+                    if (sSavePakWrite->faceInfo.faceFile != NULL)
+                        xxx_info_box_80141B4(sSaveFailed, 0, faceInfoPtr, 0x101);
                     else
-                        xxx_info_box_80141B4(sSaveFailed, 0, faceFile, 0x101);
+                        xxx_info_box_80141B4(sSaveFailed, 0, faceInfoPtr, 0x101);
 
                     sSavePakWrite->state = 5;
                     break;
@@ -120,8 +119,8 @@ u32 GetSavePakStatus(void)
 void FinishWriteSavePak(void)
 {
     if (sSavePakWrite != NULL) {
-        if (sSavePakWrite->faceFile != NULL)
-            CloseFile(sSavePakWrite->faceFile);
+        if (sSavePakWrite->faceInfo.faceFile != NULL)
+            CloseFile(sSavePakWrite->faceInfo.faceFile);
         MemoryFree(sSavePakWrite);
         sSavePakWrite = NULL;
     }

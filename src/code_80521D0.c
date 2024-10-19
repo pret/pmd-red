@@ -5,9 +5,13 @@
 #include "code_803E46C.h"
 #include "code_80130A8.h"
 #include "code_800E9E4.h"
+#include "code_803E668.h"
+#include "input.h"
 #include "text2.h"
+#include "pokemon.h"
+#include "file_system.h"
 
-extern void sub_80526D0(u8 r0);
+void sub_80526D0(s32 r0);
 extern bool8 sub_8045888(Entity *r0);
 void sub_80523A8(Entity *r0, const char *str, u8 r2);
 extern u8 sub_8052DC0(Entity *);
@@ -228,5 +232,99 @@ void xxx_draw_string_80524F0(void)
         sub_803EAF0(0, 0);
         sub_8052210(0);
     }
+}
+
+void sub_80526D0(s32 r0)
+{
+    struct UnkStructDungeon1BDD4 *strPtr = &gDungeon->unk1BDD4;
+    while (strPtr->unk1C06C != 0 || gDungeon->unk1BDD4.unk1C060 != gDungeon->unk1BDD4.unk1C062) {
+        sub_803E46C(r0);
+    }
+}
+
+void sub_8052740(s32 a0)
+{
+    s32 i;
+    struct UnkStructDungeon1BDD4 *strPtr = &gDungeon->unk1BDD4;
+
+    sub_80526D0(a0);
+    for (i = 0; i < 240; i++) {
+        if (strPtr->unk1C064 < 180)
+            break;
+        if ((gRealInputs.held & AB_BUTTONS) == AB_BUTTONS)
+            break;
+        if (gRealInputs.pressed & JOY_EXCL_DPAD)
+            break;
+        sub_803E46C(a0);
+    }
+}
+
+extern u8 gUnknown_203B40C;
+extern u8 gUnknown_202EE01;
+
+struct MonDialogueSpriteInfo
+{
+    s16 species;
+    u8 unk2;
+};
+
+extern void sub_8040238(void);
+
+void PrintFieldMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, bool8 a2)
+{
+    s32 unkPrintRet;
+    struct UnkPrintFieldMsgStruct unkStruct, *unkstructPtr;
+    s32 unkSpVar;
+
+    if (gUnknown_203B40C) {
+        sub_8052740(10);
+    }
+
+    sub_803EAF0(2, 0);
+    sub_8052210(0);
+
+    unkstructPtr = NULL;
+    unkStruct.faceFile = NULL;
+    unkStruct.faceData = NULL;
+    if (!gDungeon->unk181e8.blinded
+        && !gDungeon->unk181e8.hallucinating
+        && monSpriteInfo != NULL
+        && IsPokemonDialogueSpriteAvail(monSpriteInfo->species, monSpriteInfo->unk2))
+    {
+        unkStruct.faceFile = GetDialogueSpriteDataPtr(monSpriteInfo->species);
+        unkStruct.faceData = unkStruct.faceFile->data;
+        unkStruct.unk8 = 2;
+        unkStruct.unkA = 9;
+        unkStruct.unkC = monSpriteInfo->unk2;
+        unkStruct.unkD = 0;
+        unkStruct.unkE = 0;
+        unkstructPtr = &unkStruct;
+    }
+
+    sub_8014248(str, 0, 0, NULL, NULL, 3, 0, unkstructPtr, (a2 != FALSE) ? 0x701 : 0x400);
+    gDungeon->unk1BDD4.unk1C05F = 1;
+    do {
+        xxx_draw_string_80144C4();
+        sub_803E46C(9);
+        unkPrintRet = sub_80144A4(&unkSpVar);
+    } while (unkPrintRet != 0);
+    gDungeon->unk1BDD4.unk1C05F = 0;
+
+    if (unkStruct.faceFile != NULL) {
+        CloseFile(unkStruct.faceFile);
+    }
+
+    if (a2) {
+        sub_805E804();
+        sub_8040238();
+        if (gUnknown_202EE01) {
+            sub_803EAF0(0, 0);
+        }
+        else {
+            sub_803EAF0(1, 0);
+        }
+    }
+
+    sub_803E708(8, 9);
 }
 

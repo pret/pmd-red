@@ -33,14 +33,8 @@ typedef struct unkStruct_203B27C
     u16 unkBC[8];
     MenuStruct unkCC;
     u8 fill11C[0x16C - 0x11C];
-    /* 0x16C */ OpenedFile *faceFile;
-    /* 0x170 */ u8 *faceData;
-    u16 unk174;
-    u16 unk176;
-    u8 unk178;
-    u8 unk179;
-    u8 unk17A;
-    OpenedFile **unk17C;
+    /* 0x16C */ struct UnkPrintFieldMsgStruct faceInfo;
+    struct UnkPrintFieldMsgStruct *unk17C;
     UnkTextStruct2 unk180[4];
 } unkStruct_203B27C;
 

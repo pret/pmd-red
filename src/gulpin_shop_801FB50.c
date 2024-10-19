@@ -101,16 +101,16 @@ bool8 sub_801FB50(u32 mode)
     if (gUnknown_203B27C->mode == GULPIN_SHOP_MODE_ASLEEP)
         gUnknown_203B27C->unk17C = NULL;
     else
-        gUnknown_203B27C->unk17C = &gUnknown_203B27C->faceFile;
+        gUnknown_203B27C->unk17C = &gUnknown_203B27C->faceInfo;
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
-    gUnknown_203B27C->faceFile = faceFile;
-    gUnknown_203B27C->faceData = faceFile->data;
-    gUnknown_203B27C->unk178 = 0;
-    gUnknown_203B27C->unk179 = 0;
-    gUnknown_203B27C->unk17A = 0;
-    gUnknown_203B27C->unk174 = 2;
-    gUnknown_203B27C->unk176 = 8;
+    gUnknown_203B27C->faceInfo.faceFile = faceFile;
+    gUnknown_203B27C->faceInfo.faceData = faceFile->data;
+    gUnknown_203B27C->faceInfo.unkC = 0;
+    gUnknown_203B27C->faceInfo.unkD = 0;
+    gUnknown_203B27C->faceInfo.unkE = 0;
+    gUnknown_203B27C->faceInfo.unk8 = 2;
+    gUnknown_203B27C->faceInfo.unkA = 8;
     sub_801FDA8(0);
     return TRUE;
 }
@@ -184,7 +184,7 @@ u32 sub_801FC40(void)
 void sub_801FD7C(void)
 {
     if (gUnknown_203B27C) {
-        CloseFile(gUnknown_203B27C->faceFile);
+        CloseFile(gUnknown_203B27C->faceInfo.faceFile);
         MemoryFree(gUnknown_203B27C);
         gUnknown_203B27C = NULL;
     }
@@ -414,7 +414,7 @@ static void sub_801FF28(void)
         case 0x23:
             gUnknown_203B27C->fallbackState = 0x1f;
             sub_8092C84(gUnknown_202DFE8,gUnknown_203B27C->unk20);
-            if (gUnknown_203B27C->isNextMoveLinked) 
+            if (gUnknown_203B27C->isNextMoveLinked)
             {
                 xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_20],0,gUnknown_203B27C->unk17C,0x10d);
             }
@@ -546,15 +546,15 @@ static void CreateGulpinLinkMenu(void)
         }
         gUnknown_203B27C->unk7C[loopMax].menuAction = 7;
     }
-    
+
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gGulpinLink;
     gUnknown_203B27C->unk7C[loopMax].menuAction = LINK_ACTION;
-    
+
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gGulpinDelink;
     gUnknown_203B27C->unk7C[loopMax].menuAction = DE_LINK_ACTION;
-    
+
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gGulpinForget;
     gUnknown_203B27C->unk7C[loopMax].menuAction = FORGET_ACTION;
@@ -978,12 +978,12 @@ static void sub_8020EB4(void)
             if(gTeamInventoryRef->teamMoney < 150)
             {
                 PlayMenuSoundEffect(2);
-                sub_801FDA8(0x3);        
+                sub_801FDA8(0x3);
             }
             else if(!sub_8093318(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves))
             {
                 PlayMenuSoundEffect(2);
-                sub_801FDA8(0x4);        
+                sub_801FDA8(0x4);
             }
             else
             {
@@ -1004,7 +1004,7 @@ static void sub_8020EB4(void)
             if(!sub_809333C(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves))
             {
                 PlayMenuSoundEffect(2);
-                sub_801FDA8(0x5);     
+                sub_801FDA8(0x5);
             }
             else
             {

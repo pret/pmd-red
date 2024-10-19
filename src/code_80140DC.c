@@ -61,12 +61,12 @@ u32 sub_8014128(void) {
 }
 
 u32 sub_801413C(void)
-{ 
+{
     return 0;
 }
 
 u32 sub_8014140(void)
-{ 
+{
     return 0;
 }
 
@@ -91,18 +91,18 @@ void sub_801416C(s32 param_1,s32 param_2)
     gUnknown_202E73C = (param_2 < 0 ) ? 0 : param_2;
 }
 
-void xxx_info_box_80141B4(const u8 *text, u32 param_2, OpenedFile **file, u16 param_4)
+void xxx_info_box_80141B4(const u8 *text, u32 param_2, struct UnkPrintFieldMsgStruct *unkStructPtr, u16 param_4)
 {
-    sub_8014248(text, param_2, -1, NULL, NULL, 3, 0, file, param_4);
+    sub_8014248(text, param_2, -1, NULL, NULL, 3, 0, unkStructPtr, param_4);
 }
 
-void sub_80141E0(const u8 *text, OpenedFile **file, u16 param_3)
+void sub_80141E0(const u8 *text, struct UnkPrintFieldMsgStruct *unkStructPtr, u16 param_3)
 {
-    sub_8014248(text, 0, -1, gUnknown_80D485C, NULL, 3, 0, file, param_3 | 0x300);
+    sub_8014248(text, 0, -1, gUnknown_80D485C, NULL, 3, 0, unkStructPtr, param_3 | 0x300);
 }
 
-void sub_8014214(const u8 *text, OpenedFile **file, u16 param_3)
+void sub_8014214(const u8 *text, struct UnkPrintFieldMsgStruct *unkStructPtr, u16 param_3)
 {
-    sub_8014248(text, 0, -1, gUnknown_80D4880, NULL, 3, 0, file, param_3 | 0x300);
+    sub_8014248(text, 0, -1, gUnknown_80D4880, NULL, 3, 0, unkStructPtr, param_3 | 0x300);
 }
 

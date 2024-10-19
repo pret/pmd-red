@@ -218,7 +218,7 @@ struct UnkStructDungeon1BDD4
     u8 unk0[UNK_1BBD4_STR_COUNT][64];
     u8 unk1C054[UNK_1BBD4_STR_COUNT]; // 0x280
     u8 unk1C05E; // 0x28A
-    u8 fill1C05F; // 0x28B
+    u8 unk1C05F; // 0x28B
     s16 unk1C060; // 0x28C
     s16 unk1C062; // 0x29E
     s16 unk1C064; // 0x290

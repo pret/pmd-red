@@ -53,20 +53,20 @@ bool8 CreateHelperPelipperMenu(s16 speciesID)
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, speciesID);
     monName = GetMonSpecies(speciesID);
     strcpy(gAvailablePokemonNames, monName);
-    sPostOfficeHelper->faceFile = NULL;
-    sPostOfficeHelper->faceData = NULL;
+    sPostOfficeHelper->faceInfo.faceFile = NULL;
+    sPostOfficeHelper->faceInfo.faceData = NULL;
 
     if (speciesID != MONSTER_NONE) {
         faceFile = GetDialogueSpriteDataPtr(species_32);
-        sPostOfficeHelper->faceFile = faceFile;
-        sPostOfficeHelper->unk14 = 0;
-        sPostOfficeHelper->unk15 = 0;
-        sPostOfficeHelper->unk16 = 0;
-        sPostOfficeHelper->unk10 = 2;
-        sPostOfficeHelper->unk12 = 8;
+        sPostOfficeHelper->faceInfo.faceFile = faceFile;
+        sPostOfficeHelper->faceInfo.unkC = 0;
+        sPostOfficeHelper->faceInfo.unkD = 0;
+        sPostOfficeHelper->faceInfo.unkE = 0;
+        sPostOfficeHelper->faceInfo.unk8 = 2;
+        sPostOfficeHelper->faceInfo.unkA = 8;
 
-        if (sPostOfficeHelper->faceFile != NULL)
-            sPostOfficeHelper->faceData = sPostOfficeHelper->faceFile->data;
+        if (sPostOfficeHelper->faceInfo.faceFile != NULL)
+            sPostOfficeHelper->faceInfo.faceData = sPostOfficeHelper->faceInfo.faceFile->data;
     }
 
     sPostOfficeHelper->currMenuChoice = 0;
@@ -111,8 +111,8 @@ u32 HelperPelipperCallback(void)
 void CleanHelperPelipper(void)
 {
     if (sPostOfficeHelper != NULL) {
-        if (sPostOfficeHelper->faceFile != NULL)
-            CloseFile(sPostOfficeHelper->faceFile);
+        if (sPostOfficeHelper->faceInfo.faceFile != NULL)
+            CloseFile(sPostOfficeHelper->faceInfo.faceFile);
         MemoryFree(sPostOfficeHelper);
         sPostOfficeHelper = NULL;
     }
@@ -124,89 +124,89 @@ static void nullsub_39(void)
 
 static void UpdateHelperPelipperText(void)
 {
-    OpenedFile **faceFile;
-    faceFile = NULL;
+    struct UnkPrintFieldMsgStruct *faceInfoPtr;
+    faceInfoPtr = NULL;
 
-    if (sPostOfficeHelper->faceFile != NULL)
-        faceFile = &sPostOfficeHelper->faceFile;
+    if (sPostOfficeHelper->faceInfo.faceFile != NULL)
+        faceInfoPtr = &sPostOfficeHelper->faceInfo;
 
     switch (sPostOfficeHelper->state) {
         case DISPLAY_GET_HELP_MENU:
-            sub_8014248(sWhatdYouWantToKnow, 0, sPostOfficeHelper->currMenuChoice, sPostOfficeHelpGetHelpMenu, 0, 4, 0, faceFile, 12);
+            sub_8014248(sWhatdYouWantToKnow, 0, sPostOfficeHelper->currMenuChoice, sPostOfficeHelpGetHelpMenu, 0, 4, 0, faceInfoPtr, 12);
             break;
         case RETURN_TO_GET_HELP:
             switch (sPostOfficeHelper->currMenuChoice) {
                 case GETTING_HELP:
-                    xxx_info_box_80141B4(sGettingHelpExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sGettingHelpExplanation, 0, faceInfoPtr, 0x10d);
                     break;
                 case SEND_SOS_MAIL:
-                    xxx_info_box_80141B4(sSendSOSMailExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sSendSOSMailExplanation, 0, faceInfoPtr, 0x10d);
                     break;
                 case RECEIVE_AOK_MAIL:
-                    xxx_info_box_80141B4(sReceiveAOKMailExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sReceiveAOKMailExplanation, 0, faceInfoPtr, 0x10d);
                     break;
                 case SEND_THANK_YOU_MAIL:
-                    xxx_info_box_80141B4(sSendThankYouMailExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sSendThankYouMailExplanation, 0, faceInfoPtr, 0x10d);
                     break;
                 default:
                     break;
             }
             break;
         case DISPLAY_GO_RESCUE_MENU:
-            sub_8014248(sWhatdYouWantToKnow, 0, sPostOfficeHelper->currMenuChoice, sPostOfficeHelpGoRescueMenu, 0, 4, 0, faceFile, 12);
+            sub_8014248(sWhatdYouWantToKnow, 0, sPostOfficeHelper->currMenuChoice, sPostOfficeHelpGoRescueMenu, 0, 4, 0, faceInfoPtr, 12);
             break;
         case RETURN_TO_GO_RESCUE:
             switch (sPostOfficeHelper->currMenuChoice) {
                 case RESCUE_PROCEDURES:
-                    xxx_info_box_80141B4(sRescueProceduresExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sRescueProceduresExplanation, 0, faceInfoPtr, 0x10d);
                     break;
                 case RECEIVE_SOS_MAIL:
-                    xxx_info_box_80141B4(sReceiveSOSMailExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sReceiveSOSMailExplanation, 0, faceInfoPtr, 0x10d);
                     break;
                 case SEND_AOK_MAIL:
-                    xxx_info_box_80141B4(sSendAOKMailExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sSendAOKMailExplanation, 0, faceInfoPtr, 0x10d);
                     break;
                 case LEAVE_FOR_RESCUE:
-                    xxx_info_box_80141B4(sLeaveForRescueExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sLeaveForRescueExplanation, 0, faceInfoPtr, 0x10d);
                     break;
                 case GET_THANK_YOU_MAIL:
-                    xxx_info_box_80141B4(sGetThankYouMailExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sGetThankYouMailExplanation, 0, faceInfoPtr, 0x10d);
                     break;
                 default:
                     break;
             }
             break;
         case IM_GUIDE_START_MENU:
-            sub_8014248(sImYourGuide, 0, sPostOfficeHelper->currMenuChoice, sPostOfficeHelpStartMenu, 0, 4, 0, faceFile, 12);
+            sub_8014248(sImYourGuide, 0, sPostOfficeHelper->currMenuChoice, sPostOfficeHelpStartMenu, 0, 4, 0, faceInfoPtr, 12);
             break;
         case ANYTHING_ELSE_START_MENU:
-            sub_8014248(sAnythingElse, 0, sPostOfficeHelper->currMenuChoice, sPostOfficeHelpStartMenu, 0, 4, 0, faceFile, 12);
+            sub_8014248(sAnythingElse, 0, sPostOfficeHelper->currMenuChoice, sPostOfficeHelpStartMenu, 0, 4, 0, faceInfoPtr, 12);
             break;
         case RETURN_TO_START_MENU:
             switch (sPostOfficeHelper->currMenuChoice) {
                 case POST_OFFICE:
-                    xxx_info_box_80141B4(sPostOfficeExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sPostOfficeExplanation, 0, faceInfoPtr, 0x10d);
                     break;
                 case BULLETIN_BOARD:
-                    xxx_info_box_80141B4(sBulletinBoardExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sBulletinBoardExplanation, 0, faceInfoPtr, 0x10d);
                     break;
                 case DELIVERY:
-                    xxx_info_box_80141B4(sDeliveryExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sDeliveryExplanation, 0, faceInfoPtr, 0x10d);
                     break;
                 default:
                     break;
             }
             break;
         case DISPLAY_FRIEND_RESCUE_MENU:
-            sub_8014248(sWhatdYouWantToKnow, 0, sPostOfficeHelper->currMenuChoice, gPostOfficeHelpFriendRescueMenu, 0, 4, 0, faceFile, 12);
+            sub_8014248(sWhatdYouWantToKnow, 0, sPostOfficeHelper->currMenuChoice, gPostOfficeHelpFriendRescueMenu, 0, 4, 0, faceInfoPtr, 12);
             break;
         case RETURN_TO_FRIEND_RESCUE:
             switch (sPostOfficeHelper->currMenuChoice) {
                 case FRIEND_RESCUE_INFO:
-                    xxx_info_box_80141B4(sFriendRescueExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sFriendRescueExplanation, 0, faceInfoPtr, 0x10d);
                     break;
                 case DELETING_MAIL:
-                    xxx_info_box_80141B4(sDeletingMailExplanation, 0, faceFile, 0x10d);
+                    xxx_info_box_80141B4(sDeletingMailExplanation, 0, faceInfoPtr, 0x10d);
                     break;
                 default:
                     break;

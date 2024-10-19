@@ -23,14 +23,7 @@ struct unkStruct_203B2C8
     // size: 0x140
     /* 0x0 */ u8 currState;
     /* 0x1 */ u8 unk1;
-    /* 0x4 */ OpenedFile *faceFile;
-    /* 0x8 */ u8 *faceData;
-    /* 0xC */ u16 unkC;
-    /* 0xE */ u16 unkE;
-    /* 0x10 */ u8 unk10;
-    /* 0x11 */ u8 unk11;
-    /* 0x12 */ u8 unk12;
-    /* 0x13 */ u8 unk13;
+    /* 0x4 */ struct UnkPrintFieldMsgStruct faceInfo;
     /* 0x14 */ u8 teamName[4]; // Figure out size of this buffer
     u8 fill18[0x114 - 0x18];
     unkStruct_802F204 unk114;
@@ -94,13 +87,13 @@ s32 sub_802B2D4(void)
   sUnknown_203B2C8->unk1 = -1;
   CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
-  sUnknown_203B2C8->faceFile = faceFile;
-  sUnknown_203B2C8->faceData  = faceFile->data;
-  sUnknown_203B2C8->unk10 = 0;
-  sUnknown_203B2C8->unk11 = 0;
-  sUnknown_203B2C8->unk12 = 0;
-  sUnknown_203B2C8->unkC = 2;
-  sUnknown_203B2C8->unkE = 8;
+  sUnknown_203B2C8->faceInfo.faceFile = faceFile;
+  sUnknown_203B2C8->faceInfo.faceData  = faceFile->data;
+  sUnknown_203B2C8->faceInfo.unkC = 0;
+  sUnknown_203B2C8->faceInfo.unkD = 0;
+  sUnknown_203B2C8->faceInfo.unkE = 0;
+  sUnknown_203B2C8->faceInfo.unk8 = 2;
+  sUnknown_203B2C8->faceInfo.unkA = 8;
   if (sub_8099394(&sUnknown_203B2C8->unk1) != 1) {
     return 0;
   }
@@ -139,7 +132,7 @@ void sub_802B3B8(void)
 {
     if(sUnknown_203B2C8 != NULL)
     {
-        CloseFile(sUnknown_203B2C8->faceFile);
+        CloseFile(sUnknown_203B2C8->faceInfo.faceFile);
         MemoryFree(sUnknown_203B2C8);
         sUnknown_203B2C8 = NULL;
     }
@@ -168,7 +161,7 @@ void sub_802B3E0(void)
         // Print and expand placeholders?
         sprintfStatic(sUnknown_203B2C8->teamName,gUnknown_80DF9F8,teamNameBuffer);
         // Display to screen with Pelipper face
-        xxx_info_box_80141B4(sUnknown_203B2C8->teamName, 0, &sUnknown_203B2C8->faceFile, 0x10d);
+        xxx_info_box_80141B4(sUnknown_203B2C8->teamName, 0, &sUnknown_203B2C8->faceInfo, 0x10d);
         break;
       case 1:
         monName = GetMonSpecies(MONSTER_PELIPPER);
@@ -189,12 +182,12 @@ void sub_802B3E0(void)
       case 2:
         // I hope you will keep on rescuing your friends
         // I must save your adventure
-        xxx_info_box_80141B4(gUnknown_80DFAA8, 0, &sUnknown_203B2C8->faceFile, 0x10d);
+        xxx_info_box_80141B4(gUnknown_80DFAA8, 0, &sUnknown_203B2C8->faceInfo, 0x10d);
         break;
       case 4:
         // Oh yes, that's right. Please don't forget to send an A-OK Mail
         // to the friend you just rescued
-        xxx_info_box_80141B4(gUnknown_80DFB14, 0, &sUnknown_203B2C8->faceFile, 0x10d);
+        xxx_info_box_80141B4(gUnknown_80DFB14, 0, &sUnknown_203B2C8->faceInfo, 0x10d);
       case 3:
       case 5:
         break;

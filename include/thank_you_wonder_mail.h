@@ -25,13 +25,7 @@ typedef struct WonderMailStruct_203B2C4
     UnkTextStruct2 unk35C[4];
     UnkTextStruct2 unk3BC[4];
     Item unk41C;
-    /* 0x420 */ OpenedFile *faceFile;
-    /* 0x424 */ u8 *faceData;
-    u16 unk428;
-    u16 unk42A;
-    u8 unk42C;
-    u8 unk42D;
-    u8 unk42E;
+    /* 0x420 */ struct UnkPrintFieldMsgStruct faceInfo;
     u32 unk430;
     /* 0x434 */ u8 formattedString[0x100];
     /* 0x534 */ s32 wonderMailMethod;

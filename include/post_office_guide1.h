@@ -8,13 +8,7 @@ typedef struct PostOfficeWork
 {
     /* 0x0 */ u8 state;
     /* 0x4 */ s32 currMenuChoice;
-    /* 0x8 */ OpenedFile *faceFile;
-    /* 0xC */ u8 *faceData;
-    u16 unk10;
-    u16 unk12;
-    u8 unk14;
-    u8 unk15;
-    u8 unk16;
+    /* 0x8 */ struct UnkPrintFieldMsgStruct faceInfo;
 } PostOfficeWork;
 
 void CleanHelperPelipper(void);

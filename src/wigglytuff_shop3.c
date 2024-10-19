@@ -74,16 +74,16 @@ bool8 CreateWigglytuffShop(u32 mode)
     if (sWigglytuffShop3Work->mode == 1)
         sWigglytuffShop3Work->unkCC = NULL;
     else
-        sWigglytuffShop3Work->unkCC = &sWigglytuffShop3Work->faceFile;
+        sWigglytuffShop3Work->unkCC = &sWigglytuffShop3Work->faceInfo;
 
     file = GetDialogueSpriteDataPtr(MONSTER_WIGGLYTUFF);
-    sWigglytuffShop3Work->faceFile = file;
-    sWigglytuffShop3Work->faceData = file->data;
-    sWigglytuffShop3Work->unkC8 = 0;
-    sWigglytuffShop3Work->unkC9 = 0;
-    sWigglytuffShop3Work->unkCA = 0;
-    sWigglytuffShop3Work->unkC4 = 2;
-    sWigglytuffShop3Work->unkC6 = 8;
+    sWigglytuffShop3Work->faceInfo.faceFile = file;
+    sWigglytuffShop3Work->faceInfo.faceData = file->data;
+    sWigglytuffShop3Work->faceInfo.unkC = 0;
+    sWigglytuffShop3Work->faceInfo.unkD = 0;
+    sWigglytuffShop3Work->faceInfo.unkE = 0;
+    sWigglytuffShop3Work->faceInfo.unk8 = 2;
+    sWigglytuffShop3Work->faceInfo.unkA = 8;
     SetWigglytuffState(WIGGLYTUFF_INIT);
     return TRUE;
 }
@@ -130,7 +130,7 @@ u32 sub_8021C5C(void)
 void CleanWigglytuffShop(void)
 {
     if (sWigglytuffShop3Work) {
-        CloseFile(sWigglytuffShop3Work->faceFile);
+        CloseFile(sWigglytuffShop3Work->faceInfo.faceFile);
         MemoryFree(sWigglytuffShop3Work);
         sWigglytuffShop3Work = NULL;
     }

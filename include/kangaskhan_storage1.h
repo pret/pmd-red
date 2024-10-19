@@ -18,7 +18,7 @@ enum KangaskhanStorageStates
     KANGASKHAN_STORAGE_IS_MONEY_USED_TM = 9,
 };
 
-enum KangaskhanStorageMenuActions 
+enum KangaskhanStorageMenuActions
 {
     MENU_CANCEL = 1,
     MENU_STORE = 2,
@@ -45,14 +45,8 @@ struct KangaskhanStorageWork
     u16 unk4C[5];
     MenuStruct unk58;
     unkStructFor8013AA0 unkA8;
-    /* 0xD8 */ OpenedFile *faceFile;
-    /* 0xDC */ u8 *faceData; // Written to but never read
-    u16 unkE0; // Written to but never read
-    u16 unkE2; // Written to but never read
-    bool8 unkE4;
-    u8 unkE5; // Written to but never read
-    u8 unkE6; // Written to but never read
-    OpenedFile **unkE8;
+    /* 0xD8 */ struct UnkPrintFieldMsgStruct faceInfo;
+    struct UnkPrintFieldMsgStruct *unkE8;
     UnkTextStruct2 unkEC[4];
 };
 

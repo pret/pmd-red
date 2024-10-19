@@ -69,16 +69,16 @@ bool8 CreateFelicityBank(s32 mode)
     if (sFelicityBankWork->mode == FEL_MODE_ASLEEP)
         sFelicityBankWork->unkA4 = NULL;
     else
-        sFelicityBankWork->unkA4 = &sFelicityBankWork->faceFile;
+        sFelicityBankWork->unkA4 = &sFelicityBankWork->faceInfo;
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_PERSIAN);
-    sFelicityBankWork->faceFile = faceFile;
-    sFelicityBankWork->faceData = faceFile->data;
-    sFelicityBankWork->unkA0 = 0;
-    sFelicityBankWork->unkA1 = 0;
-    sFelicityBankWork->unkA2 = 0;
-    sFelicityBankWork->unk9C = 2;
-    sFelicityBankWork->unk9E = 8;
+    sFelicityBankWork->faceInfo.faceFile = faceFile;
+    sFelicityBankWork->faceInfo.faceData = faceFile->data;
+    sFelicityBankWork->faceInfo.unkC = 0;
+    sFelicityBankWork->faceInfo.unkD = 0;
+    sFelicityBankWork->faceInfo.unkE = 0;
+    sFelicityBankWork->faceInfo.unk8 = 2;
+    sFelicityBankWork->faceInfo.unkA = 8;
     UpdateFelicityBankState(FELICITY_BANK_INIT);
     return TRUE;
 }
@@ -118,7 +118,7 @@ u32 FelicityBankCallback(void)
 void DestroyFelicityBank(void)
 {
     if (sFelicityBankWork != NULL) {
-        CloseFile(sFelicityBankWork->faceFile);
+        CloseFile(sFelicityBankWork->faceInfo.faceFile);
         MemoryFree(sFelicityBankWork);
         sFelicityBankWork = NULL;
     }
@@ -424,7 +424,7 @@ static void CreateFelicityMoneySavingsHeader(u32 param_1)
 }
 
 void DrawTeamMoneyBox(u32 param_1)
-{ 
+{
     CallPrepareTextbox_8008C54(param_1);
     sub_80073B8(param_1);
     PrintStringOnWindow(6, 0, sMoney, param_1, 0);

@@ -5,6 +5,7 @@
 #include "structs/menu.h"
 #include "structs/str_text.h"
 #include "structs/str_moves.h"
+#include "code_80130A8.h"
 
 // size: 0x18C
 typedef struct GulpinShopWork
@@ -24,15 +25,8 @@ typedef struct GulpinShopWork
     u16 unk68[8];
     MenuStruct unk78;
     u8 fillC8[0x118 - 0xC8];
-    /* 0x118 */ OpenedFile *faceFile;
-    /* 0x11C */ u8 *faceData;
-    u16 unk120;
-    u16 unk122;
-    u8 unk124;
-    u8 unk125;
-    u8 unk126;
-    u8 unk127;
-    OpenedFile **unk128;
+    /* 0x118 */ struct UnkPrintFieldMsgStruct faceInfo;
+    struct UnkPrintFieldMsgStruct *unk128;
     UnkTextStruct2 unk12C[4];
 } GulpinShopWork;
 

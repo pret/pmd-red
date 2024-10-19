@@ -45,20 +45,20 @@ bool8 CreateGulpinShop(u32 mode, s16 pokeSpecies, Move *moves)
     sGulpinShopWork->unk1C = moves[4].id; // 5th move..?
 
     if (mode == GULPIN_SHOP_MODE_AWAKE)
-        sGulpinShopWork->unk128 = &sGulpinShopWork->faceFile;
+        sGulpinShopWork->unk128 = &sGulpinShopWork->faceInfo;
     else
         sGulpinShopWork->unk128 = NULL;
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
-    sGulpinShopWork->faceFile = faceFile;
-    sGulpinShopWork->faceData = faceFile->data;
+    sGulpinShopWork->faceInfo.faceFile = faceFile;
+    sGulpinShopWork->faceInfo.faceData = faceFile->data;
 
-    sGulpinShopWork->unk124 = 0;
-    sGulpinShopWork->unk125 = 0;
-    sGulpinShopWork->unk126 = 0;
+    sGulpinShopWork->faceInfo.unkC = 0;
+    sGulpinShopWork->faceInfo.unkD = 0;
+    sGulpinShopWork->faceInfo.unkE = 0;
 
-    sGulpinShopWork->unk120 = 2;
-    sGulpinShopWork->unk122 = 8;
+    sGulpinShopWork->faceInfo.unk8 = 2;
+    sGulpinShopWork->faceInfo.unkA = 8;
     SetGulpinShopState(0);
     return TRUE;
 }
@@ -97,7 +97,7 @@ bool8 GulpinIsNextMoveLinked(void)
 void DestroyGulpinShop(void)
 {
     if (sGulpinShopWork != NULL) {
-        CloseFile(sGulpinShopWork->faceFile);
+        CloseFile(sGulpinShopWork->faceInfo.faceFile);
         MemoryFree(sGulpinShopWork);
         sGulpinShopWork = NULL;
     }
@@ -180,15 +180,15 @@ static void sub_801EBC4(void)
     s32 which;
     s32 i;
     which = 0;
-    
+
     MemoryFill16(sGulpinShopWork->unk68, 0, sizeof(sGulpinShopWork->unk68));
-    
+
     sGulpinShopWork->unk28[which].text = sForget;
     sGulpinShopWork->unk28[which].menuAction = 2;
-    
+
     if (!IsAnyMoveLinked(sGulpinShopWork->unk1E, sGulpinShopWork->moves) || (s32)sGulpinShopWork->unk20 >= 4)
         sGulpinShopWork->unk68[0] = 1;
-    
+
     which++;
     sGulpinShopWork->unk28[which].text = gCommonInfo[0];
     sGulpinShopWork->unk28[which].menuAction = 3;
@@ -216,7 +216,7 @@ static void sub_801EC7C(void)
 {
     s32 which;
     which = 0;
-    
+
     MemoryFill16(sGulpinShopWork->unk68, 0, sizeof(sGulpinShopWork->unk68));
     sGulpinShopWork->unk28[which].text = gCommonYes[0];
     sGulpinShopWork->unk28[which].menuAction = 4;

@@ -74,7 +74,7 @@ bool8 CreateKecleonBros(u32 mode)
     switch (mode) {
         case KECLEON_BROS_MODE_ITEMS_AWAKE:
             sKecleonBrosWork1->isKecleonItemShop = TRUE;
-            sKecleonBrosWork1->unkE4 = &sKecleonBrosWork1->faceFile;
+            sKecleonBrosWork1->unkE4 = &sKecleonBrosWork1->faceInfo;
             CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
             CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);
             monName = GetMonSpecies(MONSTER_KECLEON);
@@ -90,7 +90,7 @@ bool8 CreateKecleonBros(u32 mode)
             break;
         case KECLEON_BROS_MODE_WARES_AWAKE:
             sKecleonBrosWork1->isKecleonItemShop = FALSE;
-            sKecleonBrosWork1->unkE4 = &sKecleonBrosWork1->faceFile;
+            sKecleonBrosWork1->unkE4 = &sKecleonBrosWork1->faceInfo;
             CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
             CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);
             monName = GetMonSpecies(MONSTER_KECLEON);
@@ -109,13 +109,13 @@ bool8 CreateKecleonBros(u32 mode)
     }
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_KECLEON);
-    sKecleonBrosWork1->faceFile = faceFile;
-    sKecleonBrosWork1->faceData = faceFile->data;
-    sKecleonBrosWork1->unkE0 = 0;
-    sKecleonBrosWork1->unkE1 = 0;
-    sKecleonBrosWork1->unkE2 = 0;
-    sKecleonBrosWork1->unkDC = 2;
-    sKecleonBrosWork1->unkDE = 8;
+    sKecleonBrosWork1->faceInfo.faceFile = faceFile;
+    sKecleonBrosWork1->faceInfo.faceData = faceFile->data;
+    sKecleonBrosWork1->faceInfo.unkC = 0;
+    sKecleonBrosWork1->faceInfo.unkD = 0;
+    sKecleonBrosWork1->faceInfo.unkE = 0;
+    sKecleonBrosWork1->faceInfo.unk8 = 2;
+    sKecleonBrosWork1->faceInfo.unkA = 8;
     SetKecleonBrosState(KECLEON_STORE_INIT);
     return TRUE;
 }
@@ -168,7 +168,7 @@ u32 KecleonBrosCallback(void)
 void DeleteKecleonBros(void)
 {
     if (sKecleonBrosWork1 != NULL) {
-        CloseFile(sKecleonBrosWork1->faceFile);
+        CloseFile(sKecleonBrosWork1->faceInfo.faceFile);
         MemoryFree(sKecleonBrosWork1);
         sKecleonBrosWork1 = NULL;
     }
@@ -243,7 +243,7 @@ static void UpdateKecleonStoreDialogue(void)
             sub_8019E04(FALSE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_22], 0, sKecleonBrosWork1->unkE4, 0x10D);
             break;
-        case 3:         
+        case 3:
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_EXIT;
             sub_8019E04(FALSE);
             xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_02], 0, sKecleonBrosWork1->unkE4, 0x30D);
@@ -899,14 +899,14 @@ static void sub_8019E04(bool32 a0)
 {
     if (sKecleonBrosWork1->isKecleonItemShop) {
         if (a0 == TRUE)
-            sKecleonBrosWork1->unkE0 = 1;
+            sKecleonBrosWork1->faceInfo.unkC = 1;
         else
-            sKecleonBrosWork1->unkE0 = 0;
+            sKecleonBrosWork1->faceInfo.unkC = 0;
     }
     else {
         if (a0 == TRUE)
-            sKecleonBrosWork1->unkE0 = 7;
+            sKecleonBrosWork1->faceInfo.unkC = 7;
         else
-            sKecleonBrosWork1->unkE0  = 6;
+            sKecleonBrosWork1->faceInfo.unkC  = 6;
     }
 }
