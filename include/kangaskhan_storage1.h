@@ -45,8 +45,8 @@ struct KangaskhanStorageWork
     u16 unk4C[5];
     MenuStruct unk58;
     unkStructFor8013AA0 unkA8;
-    /* 0xD8 */ struct UnkPrintFieldMsgStruct faceInfo;
-    struct UnkPrintFieldMsgStruct *unkE8;
+    /* 0xD8 */ struct MonPortraitMsg monPortrait;
+    struct MonPortraitMsg *monPortraitPtr;
     UnkTextStruct2 unkEC[4];
 };
 

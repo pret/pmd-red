@@ -33,8 +33,8 @@ typedef struct unkStruct_203B27C
     u16 unkBC[8];
     MenuStruct unkCC;
     u8 fill11C[0x16C - 0x11C];
-    /* 0x16C */ struct UnkPrintFieldMsgStruct faceInfo;
-    struct UnkPrintFieldMsgStruct *unk17C;
+    /* 0x16C */ struct MonPortraitMsg monPortrait;
+    struct MonPortraitMsg *monPortraitPtr;
     UnkTextStruct2 unk180[4];
 } unkStruct_203B27C;
 

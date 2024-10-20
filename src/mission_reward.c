@@ -23,7 +23,7 @@ struct unkStruct_203B310
     /* 0x9 */ u8 currTeamRank; // team rank
     /* 0xC */ s32 itemRewardIndex;
     unkStruct_802F204 *unk10;
-    /* 0x14 */ struct UnkPrintFieldMsgStruct faceInfo;
+    /* 0x14 */ struct MonPortraitMsg monPortrait;
     UnkTextStruct2 unk24[4];
 };
 
@@ -132,18 +132,18 @@ u32 sub_802F204(unkStruct_802F204 *r0, bool8 displayClientSprite)
     strcpy(gUnknown_202E5D8, preload->unk10->clientName);
     PrintPokeNameToBuffer(gAvailablePokemonNames, GetPlayerPokemonStruct());
 
-    gUnknown_203B310->faceInfo.faceFile = GetDialogueSpriteDataPtr(gUnknown_203B310->unk10->clientSpecies);
-    gUnknown_203B310->faceInfo.faceData = NULL;
+    gUnknown_203B310->monPortrait.faceFile = GetDialogueSpriteDataPtr(gUnknown_203B310->unk10->clientSpecies);
+    gUnknown_203B310->monPortrait.faceData = NULL;
 
-    gUnknown_203B310->faceInfo.unkC = 0;
-    gUnknown_203B310->faceInfo.unkD = 0;
-    gUnknown_203B310->faceInfo.unkE = 0;
-    gUnknown_203B310->faceInfo.unk8 = 2;
-    gUnknown_203B310->faceInfo.unkA = 8;
+    gUnknown_203B310->monPortrait.spriteId = 0;
+    gUnknown_203B310->monPortrait.flip = FALSE;
+    gUnknown_203B310->monPortrait.unkE = 0;
+    gUnknown_203B310->monPortrait.pos.x = 2;
+    gUnknown_203B310->monPortrait.pos.y = 8;
 
-    if(gUnknown_203B310->faceInfo.faceFile != NULL)
+    if(gUnknown_203B310->monPortrait.faceFile != NULL)
     {
-        gUnknown_203B310->faceInfo.faceData = gUnknown_203B310->faceInfo.faceFile->data;
+        gUnknown_203B310->monPortrait.faceData = gUnknown_203B310->monPortrait.faceFile->data;
     }
 
     SetRewardSceneState(PREP_MONEY_REWARD);
@@ -169,8 +169,8 @@ void sub_802F2C0(void)
 {
     if(gUnknown_203B310 != NULL)
     {
-        if(gUnknown_203B310->faceInfo.faceFile != 0)
-            CloseFile(gUnknown_203B310->faceInfo.faceFile);
+        if(gUnknown_203B310->monPortrait.faceFile != 0)
+            CloseFile(gUnknown_203B310->monPortrait.faceFile);
         MemoryFree(gUnknown_203B310);
         gUnknown_203B310 = NULL;
     }
@@ -218,7 +218,7 @@ void HandleMissionReward(void)
         else {
             gFormatData_202DE30 = moneyReward;
             if (gUnknown_203B310->displayClientDialogueSprite) {
-                xxx_info_box_80141B4(gUnknown_80E0434,0,&gUnknown_203B310->faceInfo,0x10d);
+                xxx_info_box_80141B4(gUnknown_80E0434,0,&gUnknown_203B310->monPortrait,0x10d);
                 gUnknown_203B310->nextState = MONEY_REWARD;
             }
             else {
@@ -244,7 +244,7 @@ void HandleMissionReward(void)
         else {
             WriteFriendAreaName(gUnknown_202E628,gUnknown_203B310->unk10->friendAreaReward,FALSE);
             if (gUnknown_203B310->displayClientDialogueSprite) {
-                xxx_info_box_80141B4(gUnknown_80E04B4,0,&gUnknown_203B310->faceInfo,0x10d);
+                xxx_info_box_80141B4(gUnknown_80E04B4,0,&gUnknown_203B310->monPortrait,0x10d);
                 gUnknown_203B310->nextState = UNLOCK_FRIEND_AREA;
             }
             else {
@@ -292,7 +292,7 @@ void HandleMissionReward(void)
                 local_20.unk8 = 1;
                 sub_8090E14(gUnknown_202DEA8,&item,&local_20);
                 if (gUnknown_203B310->displayClientDialogueSprite) {
-                    xxx_info_box_80141B4(gUnknown_80E0640,0,&gUnknown_203B310->faceInfo,0x10d);
+                    xxx_info_box_80141B4(gUnknown_80E0640,0,&gUnknown_203B310->monPortrait,0x10d);
                     gUnknown_203B310->nextState = GIVE_ITEM_REWARD;
                 }
                 else

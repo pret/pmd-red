@@ -25,7 +25,7 @@ typedef struct WonderMailStruct_203B2C0
     UnkTextStruct2 unk35C[4];
     UnkTextStruct2 unk3BC[4];
     /* 0x41C */ u32 unkfill; // ItemSlot?
-    /* 0x420 */ struct UnkPrintFieldMsgStruct faceInfo;
+    /* 0x420 */ struct MonPortraitMsg monPortrait;
     /* 0x430 */ u8 padding3[0x534 - 0x430];
     u32 unk534;
     s32 unk538; // A7 << 3

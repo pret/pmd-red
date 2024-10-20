@@ -25,7 +25,7 @@ typedef struct WonderMailStruct_203B2C4
     UnkTextStruct2 unk35C[4];
     UnkTextStruct2 unk3BC[4];
     Item unk41C;
-    /* 0x420 */ struct UnkPrintFieldMsgStruct faceInfo;
+    /* 0x420 */ struct MonPortraitMsg monPortrait;
     u32 unk430;
     /* 0x434 */ u8 formattedString[0x100];
     /* 0x534 */ s32 wonderMailMethod;

@@ -14,7 +14,7 @@ struct unkStruct_203B2FC
     unkStruct_802F204 unk8;
     /* 0x30 */ u8 jobSlotIndex;
     /* 0x34 */ WonderMail *jobInfo;
-    /* 0x38 */ struct UnkPrintFieldMsgStruct faceInfo;
+    /* 0x38 */ struct MonPortraitMsg monPortrait;
     UnkTextStruct2 unk48[4];
 };
 

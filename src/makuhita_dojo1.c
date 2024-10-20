@@ -92,7 +92,7 @@ bool8 MakuhitaDojo_New(u32 mode)
     if (sMakuhitaDojoWork1->dlgMode == MAKUHITA_DOJO_MODE_ASLEEP)
         sMakuhitaDojoWork1->unk68 = NULL;
     else
-        sMakuhitaDojoWork1->unk68 = &sMakuhitaDojoWork1->faceInfo;
+        sMakuhitaDojoWork1->unk68 = &sMakuhitaDojoWork1->monPortrait;
 
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_MAKUHITA);
     CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_MAKUHITA);
@@ -100,13 +100,13 @@ bool8 MakuhitaDojo_New(u32 mode)
     strcpy(gUnknown_202E1C8 - 0x50, monName);
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_MAKUHITA);
-    sMakuhitaDojoWork1->faceInfo.faceFile = faceFile;
-    sMakuhitaDojoWork1->faceInfo.faceData = faceFile->data;
-    sMakuhitaDojoWork1->faceInfo.unkC = 0;
-    sMakuhitaDojoWork1->faceInfo.unkD = 0;
-    sMakuhitaDojoWork1->faceInfo.unkE = 0;
-    sMakuhitaDojoWork1->faceInfo.unk8 = 2;
-    sMakuhitaDojoWork1->faceInfo.unkA = 8;
+    sMakuhitaDojoWork1->monPortrait.faceFile = faceFile;
+    sMakuhitaDojoWork1->monPortrait.faceData = faceFile->data;
+    sMakuhitaDojoWork1->monPortrait.spriteId = 0;
+    sMakuhitaDojoWork1->monPortrait.flip = FALSE;
+    sMakuhitaDojoWork1->monPortrait.unkE = 0;
+    sMakuhitaDojoWork1->monPortrait.pos.x = 2;
+    sMakuhitaDojoWork1->monPortrait.pos.y = 8;
     MakuhitaDojo_SetState(initialState);
     return TRUE;
 }
@@ -141,7 +141,7 @@ s16 sub_802FED0(void)
 void MakuhitaDojo_Delete(void)
 {
     if (sMakuhitaDojoWork1 != NULL) {
-        CloseFile(sMakuhitaDojoWork1->faceInfo.faceFile);
+        CloseFile(sMakuhitaDojoWork1->monPortrait.faceFile);
         MemoryFree(sMakuhitaDojoWork1);
         sMakuhitaDojoWork1 = NULL;
     }

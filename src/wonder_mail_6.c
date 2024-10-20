@@ -19,7 +19,7 @@ struct unkStruct_203B328
     MenuStruct unk8;
     MenuStruct unk58;
     UnkTextStruct2 unkA8[4];
-    /* 0x108 */ struct UnkPrintFieldMsgStruct faceInfo;
+    /* 0x108 */ struct MonPortraitMsg monPortrait;
     u32 wonderMailType;
 };
 static EWRAM_DATA_2 struct unkStruct_203B328 *gUnknown_203B328 = {0};
@@ -109,24 +109,24 @@ bool8 sub_8030F58(u32 wonderMailType)
   }
   gUnknown_203B328->wonderMailType = wonderMailType;
   file = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
-  gUnknown_203B328->faceInfo.faceFile = file;
-  gUnknown_203B328->faceInfo.faceData = file->data;
-  gUnknown_203B328->faceInfo.unkC = 0;
-  gUnknown_203B328->faceInfo.unkD = 0;
-  gUnknown_203B328->faceInfo.unkE = 0;
-  gUnknown_203B328->faceInfo.unk8 = 2;
-  gUnknown_203B328->faceInfo.unkA = 8;
+  gUnknown_203B328->monPortrait.faceFile = file;
+  gUnknown_203B328->monPortrait.faceData = file->data;
+  gUnknown_203B328->monPortrait.spriteId = 0;
+  gUnknown_203B328->monPortrait.flip = FALSE;
+  gUnknown_203B328->monPortrait.unkE = 0;
+  gUnknown_203B328->monPortrait.pos.x = 2;
+  gUnknown_203B328->monPortrait.pos.y = 8;
 
   if (HasNoWonderMailType(wonderMailType)) {
     switch(wonderMailType)
     {
         case WONDER_MAIL_TYPE_SOS_1:
             // "You don't have any {COLOR CYAN_G}SOS Mail{RESET}.\0"
-            xxx_info_box_80141B4(gUnknown_80E09D8,0,&gUnknown_203B328->faceInfo,0x101);
+            xxx_info_box_80141B4(gUnknown_80E09D8,0,&gUnknown_203B328->monPortrait,0x101);
             break;
         case WONDER_MAIL_TYPE_AOK:
             // "You don't have any {COLOR CYAN_G}A-OK Mail{RESET}.\0"
-            xxx_info_box_80141B4(gUnknown_80E0A0C,0,&gUnknown_203B328->faceInfo,0x101);
+            xxx_info_box_80141B4(gUnknown_80E0A0C,0,&gUnknown_203B328->monPortrait,0x101);
             break;
     }
     gUnknown_203B328->state = 5;
@@ -166,7 +166,7 @@ void sub_80310B4(void)
 {
     sub_803084C();
     if (gUnknown_203B328 != NULL) {
-        CloseFile(gUnknown_203B328->faceInfo.faceFile);
+        CloseFile(gUnknown_203B328->monPortrait.faceFile);
         MemoryFree(gUnknown_203B328);
         gUnknown_203B328 = NULL;
     }

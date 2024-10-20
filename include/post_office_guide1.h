@@ -8,7 +8,7 @@ typedef struct PostOfficeWork
 {
     /* 0x0 */ u8 state;
     /* 0x4 */ s32 currMenuChoice;
-    /* 0x8 */ struct UnkPrintFieldMsgStruct faceInfo;
+    /* 0x8 */ struct MonPortraitMsg monPortrait;
 } PostOfficeWork;
 
 void CleanHelperPelipper(void);

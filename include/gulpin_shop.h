@@ -25,8 +25,8 @@ typedef struct GulpinShopWork
     u16 unk68[8];
     MenuStruct unk78;
     u8 fillC8[0x118 - 0xC8];
-    /* 0x118 */ struct UnkPrintFieldMsgStruct faceInfo;
-    struct UnkPrintFieldMsgStruct *unk128;
+    /* 0x118 */ struct MonPortraitMsg monPortrait;
+    struct MonPortraitMsg *monPortraitPtr;
     UnkTextStruct2 unk12C[4];
 } GulpinShopWork;
 

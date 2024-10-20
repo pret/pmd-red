@@ -45,16 +45,16 @@ bool8 sub_802DB28(u8 jobSlotIndex, u8 dungeon)
     sub_8096EEC(sUnknown_203B2FC->jobInfo);
     sub_803C21C(sUnknown_203B2FC->jobInfo, &sUnknown_203B2FC->unk8);
 
-    sUnknown_203B2FC->faceInfo.faceFile = GetDialogueSpriteDataPtr(sUnknown_203B2FC->jobInfo->clientSpecies);
-    sUnknown_203B2FC->faceInfo.faceData = NULL;
-    sUnknown_203B2FC->faceInfo.unkC = 0;
-    sUnknown_203B2FC->faceInfo.unkD = 0;
-    sUnknown_203B2FC->faceInfo.unkE = 0;
-    sUnknown_203B2FC->faceInfo.unk8 = 2;
-    sUnknown_203B2FC->faceInfo.unkA = 8;
+    sUnknown_203B2FC->monPortrait.faceFile = GetDialogueSpriteDataPtr(sUnknown_203B2FC->jobInfo->clientSpecies);
+    sUnknown_203B2FC->monPortrait.faceData = NULL;
+    sUnknown_203B2FC->monPortrait.spriteId = 0;
+    sUnknown_203B2FC->monPortrait.flip = FALSE;
+    sUnknown_203B2FC->monPortrait.unkE = 0;
+    sUnknown_203B2FC->monPortrait.pos.x = 2;
+    sUnknown_203B2FC->monPortrait.pos.y = 8;
 
-    if (sUnknown_203B2FC->faceInfo.faceFile != NULL)
-        sUnknown_203B2FC->faceInfo.faceData = sUnknown_203B2FC->faceInfo.faceFile->data;
+    if (sUnknown_203B2FC->monPortrait.faceFile != NULL)
+        sUnknown_203B2FC->monPortrait.faceData = sUnknown_203B2FC->monPortrait.faceFile->data;
 
     sub_802DC28(0);
     return TRUE;
@@ -78,8 +78,8 @@ u32 sub_802DBD4(void)
 void sub_802DC00(void)
 {
     if (sUnknown_203B2FC != NULL) {
-        if (sUnknown_203B2FC->faceInfo.faceFile != NULL)
-            CloseFile(sUnknown_203B2FC->faceInfo.faceFile);
+        if (sUnknown_203B2FC->monPortrait.faceFile != NULL)
+            CloseFile(sUnknown_203B2FC->monPortrait.faceFile);
 
         MemoryFree(sUnknown_203B2FC);
         sUnknown_203B2FC = NULL;
@@ -150,16 +150,16 @@ static void sub_802DC9C(void)
             }
             break;
         case 1:
-            xxx_info_box_80141B4(sThanksForRescuingMe, 0, &sUnknown_203B2FC->faceInfo, 0x10D);
+            xxx_info_box_80141B4(sThanksForRescuingMe, 0, &sUnknown_203B2FC->monPortrait, 0x10D);
             break;
         case 2:
-            xxx_info_box_80141B4(sThanksForRescuingThem, 0, &sUnknown_203B2FC->faceInfo, 0x10D);
+            xxx_info_box_80141B4(sThanksForRescuingThem, 0, &sUnknown_203B2FC->monPortrait, 0x10D);
             break;
         case 3:
-            xxx_info_box_80141B4(sThanksForEscortingMe, 0, &sUnknown_203B2FC->faceInfo, 0x10D);
+            xxx_info_box_80141B4(sThanksForEscortingMe, 0, &sUnknown_203B2FC->monPortrait, 0x10D);
             break;
         case 5:
-            xxx_info_box_80141B4(sThanksForDelivering, 0, &sUnknown_203B2FC->faceInfo, 0x10D);
+            xxx_info_box_80141B4(sThanksForDelivering, 0, &sUnknown_203B2FC->monPortrait, 0x10D);
             break;
         case 4:
             index = FindItemInInventory(sUnknown_203B2FC->jobInfo->targetItem);
@@ -167,7 +167,7 @@ static void sub_802DC9C(void)
                 ShiftItemsDownFrom(index);
                 FillInventoryGaps();
             }
-            xxx_info_box_80141B4(sThanksForGetting, 0, &sUnknown_203B2FC->faceInfo, 0x10D);
+            xxx_info_box_80141B4(sThanksForGetting, 0, &sUnknown_203B2FC->monPortrait, 0x10D);
             break;
         case 6:
             sub_802F204(&sUnknown_203B2FC->unk8, 1);

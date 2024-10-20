@@ -203,13 +203,13 @@ u32 sub_8027F88(void)
   monName = GetMonSpecies(MONSTER_PELIPPER);
   strcpy(gAvailablePokemonNames, monName);
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
-  sUnknown_203B2C0->faceInfo.faceFile = faceFile;
-  sUnknown_203B2C0->faceInfo.faceData = faceFile->data;
-  sUnknown_203B2C0->faceInfo.unkC = 0;
-  sUnknown_203B2C0->faceInfo.unkD = 0;
-  sUnknown_203B2C0->faceInfo.unkE = 0;
-  sUnknown_203B2C0->faceInfo.unk8 = 2;
-  sUnknown_203B2C0->faceInfo.unkA = 8;
+  sUnknown_203B2C0->monPortrait.faceFile = faceFile;
+  sUnknown_203B2C0->monPortrait.faceData = faceFile->data;
+  sUnknown_203B2C0->monPortrait.spriteId = 0;
+  sUnknown_203B2C0->monPortrait.flip = FALSE;
+  sUnknown_203B2C0->monPortrait.unkE = 0;
+  sUnknown_203B2C0->monPortrait.pos.x = 2;
+  sUnknown_203B2C0->monPortrait.pos.y = 8;
   for(counter = 0; counter < PASSWORD_BUFFER_SIZE; counter++){
     sUnknown_203B2C0->passwordBuffer[counter] = 0;
   }
@@ -403,7 +403,7 @@ s32 sub_80282DC(u8 *r0)
 void sub_80282FC(void)
 {
   if (sUnknown_203B2C0 != NULL) {
-    CloseFile(sUnknown_203B2C0->faceInfo.faceFile);
+    CloseFile(sUnknown_203B2C0->monPortrait.faceFile);
     MemoryFree(sUnknown_203B2C0);
     sUnknown_203B2C0 = NULL;
     sub_8031E10();
@@ -432,13 +432,13 @@ void sub_8028348(void)
             sub_8031D70(sUnknown_203B2C0->mailIndex, 0);
             break;
         case 0x3C:
-            xxx_info_box_80141B4(gUnknown_80DDBA8, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DDBA8, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case AOK_PASSWORD_DISPLAY:
-            xxx_info_box_80141B4(gUnknown_80DDBFC, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DDBFC, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case 0x38:
-            xxx_info_box_80141B4(gUnknown_80DDC30, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DDC30, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case SENT_AOK_MAIL:
             switch(sUnknown_203B2C0->unk534)
@@ -447,14 +447,14 @@ void sub_8028348(void)
                 case 0x10:
                 case 0xF:
                 case 0xD:
-                    xxx_info_box_80141B4(gUnknown_80DDC70, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+                    xxx_info_box_80141B4(gUnknown_80DDC70, 0, &sUnknown_203B2C0->monPortrait,0x10d);
                     break;
                 case 0xE:
                     break;
             }
             break;
         case SENT_AOK_MAIL_SAVE_COMPLETE:
-            xxx_info_box_80141B4(gUnknown_80DDC30, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DDC30, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case PROMPT_SELECT_HELPER_POKEMON:
             xxx_info_box_80141B4(gUnknown_80DDCBC, 0, 0,0x101);
@@ -474,16 +474,16 @@ void sub_8028348(void)
             sub_8035CF4(sUnknown_203B2C0->unk21C, 3, TRUE);
             break;
         case NO_POKEMON_IN_FRIEND_AREA:
-            sub_8014248(gUnknown_80DDD2C, 0, 0xA, gUnknown_80DDAA0, 0, 4, 0, &sUnknown_203B2C0->faceInfo,0xC);
+            sub_8014248(gUnknown_80DDD2C, 0, 0xA, gUnknown_80DDAA0, 0, 4, 0, &sUnknown_203B2C0->monPortrait,0xC);
             break;
         case CONFIRM_SEND_HELPER_POKEMON:
-            sub_8014248(gUnknown_80DDD88, 0, 8, gUnknown_80DDA80, 0, 4, 0, &sUnknown_203B2C0->faceInfo,0xC);
+            sub_8014248(gUnknown_80DDD88, 0, 8, gUnknown_80DDA80, 0, 4, 0, &sUnknown_203B2C0->monPortrait,0xC);
             break;
         case 0x2D:
-            sub_8014248(gUnknown_80DDDBC, 0, 8, gUnknown_80DDA64, 0, 4, 0, &sUnknown_203B2C0->faceInfo,0xC);
+            sub_8014248(gUnknown_80DDDBC, 0, 8, gUnknown_80DDA64, 0, 4, 0, &sUnknown_203B2C0->monPortrait,0xC);
             break;
         case PROMPT_CHOOSE_AOK_MAIL:
-            xxx_info_box_80141B4(gUnknown_80DDDD8, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DDDD8, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case 0x2A:
             if(sub_8030894() == 0)
@@ -494,19 +494,19 @@ void sub_8028348(void)
             }
             break;
         case NO_AOK_MAIL_TO_SEND:
-            xxx_info_box_80141B4(gUnknown_80DDE20, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DDE20, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case 0x30:
-            xxx_info_box_80141B4(gUnknown_80DDE58, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DDE58, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case 0x2E:
-            sub_8014248(gUnknown_80DDEC0, 0, 0x11, gUnknown_80DDB60, 0, 4, 0, &sUnknown_203B2C0->faceInfo,0xC);
+            sub_8014248(gUnknown_80DDEC0, 0, 0x11, gUnknown_80DDB60, 0, 4, 0, &sUnknown_203B2C0->monPortrait,0xC);
             break;
         case NO_MAIL_ROOM:
-            xxx_info_box_80141B4(gUnknown_80DDF2C, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DDF2C, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case 4:
-            sub_8014248(gUnknown_80DDFB8, 0, 8, gUnknown_80DDA48, 0, 4, 0, &sUnknown_203B2C0->faceInfo,0xC);
+            sub_8014248(gUnknown_80DDFB8, 0, 8, gUnknown_80DDA48, 0, 4, 0, &sUnknown_203B2C0->monPortrait,0xC);
             break;
         case FRIEND_RESCUE_COMMUNICATING_PRE:
             nullsub_23(FALSE);
@@ -565,17 +565,17 @@ void sub_8028348(void)
                 case 0x10:
                 case 0xF:
                 case 0xD:
-                    xxx_info_box_80141B4(gUnknown_80DE06C, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+                    xxx_info_box_80141B4(gUnknown_80DE06C, 0, &sUnknown_203B2C0->monPortrait,0x10d);
                     break;
                 case 0xE:
                     break;
             }
             break;
         case RECEIVED_FRIEND_SOS_MAIL_SAVE_COMPLETE:
-            xxx_info_box_80141B4(gUnknown_80DE0C0, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE0C0, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case PROMPT_SOS_MAIL_PASSWORD:
-            xxx_info_box_80141B4(gUnknown_80DE124, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE124, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case 0x27:
             RestoreUnkTextStruct_8006518(sUnknown_203B2C0->unk3BC);
@@ -587,30 +587,30 @@ void sub_8028348(void)
             switch(sUnknown_203B2C0->unk538)
             {
                 case 0:
-                    sub_8014248(gUnknown_80DE178, 0, 0xD, gUnknown_80DDB24, 0, 4, 0, &sUnknown_203B2C0->faceInfo,0xC);
+                    sub_8014248(gUnknown_80DE178, 0, 0xD, gUnknown_80DDB24, 0, 4, 0, &sUnknown_203B2C0->monPortrait,0xC);
                     break;
                 case 2:
-                    sub_8014248(gUnknown_80DE1B4, 0, 0xD, gUnknown_80DDB24, 0, 4, 0, &sUnknown_203B2C0->faceInfo,0xC);
+                    sub_8014248(gUnknown_80DE1B4, 0, 0xD, gUnknown_80DDB24, 0, 4, 0, &sUnknown_203B2C0->monPortrait,0xC);
                     break;
             }
             break;
         case NO_SOS_MAIL_TO_SEND:
-            xxx_info_box_80141B4(gUnknown_80DE1E4, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE1E4, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case 0x1B:
-            xxx_info_box_80141B4(gUnknown_80DE280, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE280, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case CANT_GO_TO_DUNGEON:
-            xxx_info_box_80141B4(gUnknown_80DE2B0, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE2B0, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case FRIEND_RESCUE_FAILED:
-            xxx_info_box_80141B4(gUnknown_80DE368, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE368, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case 0x22:
-            sub_8014248(gUnknown_80DDDBC, 0, 8, gUnknown_80DDA64, 0, 4, 0, &sUnknown_203B2C0->faceInfo,0xC);
+            sub_8014248(gUnknown_80DDDBC, 0, 8, gUnknown_80DDA64, 0, 4, 0, &sUnknown_203B2C0->monPortrait,0xC);
             break;
         case PROMPT_CHOOSE_SOS_MAIL:
-            xxx_info_box_80141B4(gUnknown_80DE430, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE430, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case 0x1F:
             if(sub_8030894() == 0)
@@ -644,58 +644,58 @@ void sub_8028348(void)
             }
             break;
         case 0xB:
-            sub_8014248(gUnknown_80DE48C, 0, 5, gUnknown_80DD9EC, 0, 4, 0, &sUnknown_203B2C0->faceInfo,0xC);
+            sub_8014248(gUnknown_80DE48C, 0, 5, gUnknown_80DD9EC, 0, 4, 0, &sUnknown_203B2C0->monPortrait,0xC);
             break;
         case CHOOSE_DELETE_SOS_MAIL:
-            xxx_info_box_80141B4(gUnknown_80DE4B8, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE4B8, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case NO_SOS_MAIL:
-            xxx_info_box_80141B4(gUnknown_80DE4F0, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE4F0, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case CHOOSE_DELETE_AOK_MAIL:
-            xxx_info_box_80141B4(gUnknown_80DE524, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE524, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case NO_AOK_MAIL:
-            xxx_info_box_80141B4(gUnknown_80DE614, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE614, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case CHOOSE_DELETE_ALL_MAIL:
-            xxx_info_box_80141B4(gUnknown_80DE648, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE648, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case NO_MAIL:
-            xxx_info_box_80141B4(gUnknown_80DE694, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE694, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case PROMPT_DELETE_ALL_MAIL:
-            sub_8014248(gUnknown_80DE6D4, 0, 8, gUnknown_80DDA48, 0, 4, 0, &sUnknown_203B2C0->faceInfo,0xC);
+            sub_8014248(gUnknown_80DE6D4, 0, 8, gUnknown_80DDA48, 0, 4, 0, &sUnknown_203B2C0->monPortrait,0xC);
             break;
         case CONFIRM_DELETE_ALL_MAIL_1:
-            sub_8014248(gUnknown_80DE754, 0, 8, gUnknown_80DDA48, 0, 4, 0, &sUnknown_203B2C0->faceInfo,0xC);
+            sub_8014248(gUnknown_80DE754, 0, 8, gUnknown_80DDA48, 0, 4, 0, &sUnknown_203B2C0->monPortrait,0xC);
             break;
         case SAVING_ADVENTURE:
-            xxx_info_box_80141B4(gUnknown_80DE7B8, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE7B8, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case FINISH_SAVING_ADVENTURE:
-            xxx_info_box_80141B4(gUnknown_80DE7E8, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE7E8, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case PROMPT_DELETE_ANY_OTHER_MAIL:
-            sub_8014248(gUnknown_80DE808, 0, 8, gUnknown_80DDA64, 0, 4, 0, &sUnknown_203B2C0->faceInfo,0xC);
+            sub_8014248(gUnknown_80DE808, 0, 8, gUnknown_80DDA64, 0, 4, 0, &sUnknown_203B2C0->monPortrait,0xC);
             break;
         case CONFIRM_DELETE_ALL_MAIL_2:
-            xxx_info_box_80141B4(gUnknown_80DE830, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE830, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case DELETE_ALL_MAIL_SAVE_PRE:
-            xxx_info_box_80141B4(gUnknown_80DE864, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE864, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case 0x16:
-            xxx_info_box_80141B4(gUnknown_80DE7E8, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE7E8, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case INITIALIZE_FRIEND_RESCUE:
-            sub_8014248(gUnknown_80DE8B4, 0, 0, gUnknown_80DD970, 0, 4, 0, &sUnknown_203B2C0->faceInfo,0xC);
+            sub_8014248(gUnknown_80DE8B4, 0, 0, gUnknown_80DD970, 0, 4, 0, &sUnknown_203B2C0->monPortrait,0xC);
             break;
         case FRIEND_RESCUE_MAIN:
-            sub_8014248(gUnknown_80DE918, 0, 0, gUnknown_80DD970, 0, 4, 0, &sUnknown_203B2C0->faceInfo,0xC);
+            sub_8014248(gUnknown_80DE918, 0, 0, gUnknown_80DD970, 0, 4, 0, &sUnknown_203B2C0->monPortrait,0xC);
             break;
         case 2:
-            xxx_info_box_80141B4(gUnknown_80DE93C, 0, &sUnknown_203B2C0->faceInfo,0x10d);
+            xxx_info_box_80141B4(gUnknown_80DE93C, 0, &sUnknown_203B2C0->monPortrait,0x10d);
             break;
         case FRIEND_RESCUE_COUNTER_EXIT:
             break;
@@ -719,37 +719,37 @@ void PrintFriendRescueCounterError(u32 errorCode)
             break;
         case 1:
         case COMMS_NO_RESPONSE:
-            xxx_info_box_80141B4(gWonderMailErrorText, 0, &sUnknown_203B2C0->faceInfo, 0x10d);
+            xxx_info_box_80141B4(gWonderMailErrorText, 0, &sUnknown_203B2C0->monPortrait, 0x10d);
             break;
         case COMMS_INCORRECT_NUM_SYSTEMS:
-            xxx_info_box_80141B4(gWonderMailNumGBAsText, 0, &sUnknown_203B2C0->faceInfo, 0x10d);
+            xxx_info_box_80141B4(gWonderMailNumGBAsText, 0, &sUnknown_203B2C0->monPortrait, 0x10d);
             break;
         case COMMS_DIFFERENT_MODES:
-            xxx_info_box_80141B4(gWonderMailWrongModeText, 0, &sUnknown_203B2C0->faceInfo, 0x10d);
+            xxx_info_box_80141B4(gWonderMailWrongModeText, 0, &sUnknown_203B2C0->monPortrait, 0x10d);
             break;
         case 5:
-            xxx_info_box_80141B4(gWonderMailErrorText, 0, &sUnknown_203B2C0->faceInfo, 0x10d);
+            xxx_info_box_80141B4(gWonderMailErrorText, 0, &sUnknown_203B2C0->monPortrait, 0x10d);
             break;
         case COMMS_NO_ROOM_STORAGE:
-            xxx_info_box_80141B4(gWonderMailStorageFullText, 0, &sUnknown_203B2C0->faceInfo, 0x10d);
+            xxx_info_box_80141B4(gWonderMailStorageFullText, 0, &sUnknown_203B2C0->monPortrait, 0x10d);
             break;
         case COMMS_DUPLICATE_MAIL:
-            xxx_info_box_80141B4(gWonderMailDuplicateText, 0, &sUnknown_203B2C0->faceInfo, 0x10d);
+            xxx_info_box_80141B4(gWonderMailDuplicateText, 0, &sUnknown_203B2C0->monPortrait, 0x10d);
             break;
         case COMMS_NOT_ELIGIBLE_1:
-            xxx_info_box_80141B4(gWonderMailNotEligibleReceiveText, 0, &sUnknown_203B2C0->faceInfo, 0x10d);
+            xxx_info_box_80141B4(gWonderMailNotEligibleReceiveText, 0, &sUnknown_203B2C0->monPortrait, 0x10d);
             break;
         case COMMS_NOT_ELIGIBLE_2:
-            xxx_info_box_80141B4(gWonderMailNotEligibleReceiveText, 0, &sUnknown_203B2C0->faceInfo, 0x10d);
+            xxx_info_box_80141B4(gWonderMailNotEligibleReceiveText, 0, &sUnknown_203B2C0->monPortrait, 0x10d);
             break;
         case COMMS_NO_ROOM_MAIL:
-            xxx_info_box_80141B4(gWonderMailNoRoomText, 0, &sUnknown_203B2C0->faceInfo, 0x10d);
+            xxx_info_box_80141B4(gWonderMailNoRoomText, 0, &sUnknown_203B2C0->monPortrait, 0x10d);
             break;
         case 14:
-            xxx_info_box_80141B4(gWonderMailErrorText, 0, &sUnknown_203B2C0->faceInfo, 0x10d);
+            xxx_info_box_80141B4(gWonderMailErrorText, 0, &sUnknown_203B2C0->monPortrait, 0x10d);
             break;
         case COMMS_NOT_READY:
-            xxx_info_box_80141B4(gWonderMailFriendErrorText, 0, &sUnknown_203B2C0->faceInfo, 0x10d);
+            xxx_info_box_80141B4(gWonderMailFriendErrorText, 0, &sUnknown_203B2C0->monPortrait, 0x10d);
             break;
         default:
             break;
@@ -1370,22 +1370,22 @@ void sub_80293F4(void)
                 switch(sub_8039068(PASSWORD_ENTRY_SOS_MAIL_MODE, (sUnknown_203B2C0->passwordBuffer), &mail))
                 {
                     case PASSWORD_ENTRY_INCORRECT_PASSWORD:
-                        sub_8014248(gWonderMailPasswordIncorrectText, 0, 8, gUnknown_80DDA48, 0, 4, 0, &sUnknown_203B2C0->faceInfo, 0xC);
+                        sub_8014248(gWonderMailPasswordIncorrectText, 0, 8, gUnknown_80DDA48, 0, 4, 0, &sUnknown_203B2C0->monPortrait, 0xC);
                         SetFriendRescueCounterState(0x28);
                         break;
                     case PASSWORD_ENTRY_NOT_SOS_MAIL:
-                        xxx_info_box_80141B4(gWonderMailSOSPasswordIncorrectText, 0, &sUnknown_203B2C0->faceInfo, 0x10d);
+                        xxx_info_box_80141B4(gWonderMailSOSPasswordIncorrectText, 0, &sUnknown_203B2C0->monPortrait, 0x10d);
                         SetFriendRescueCounterState(FRIEND_RESCUE_ERROR);
                         break;
                     case PASSWORD_ENTRY_DUPLICATE_SOS_MAIL:
-                        xxx_info_box_80141B4(gWonderMailDuplicateText, 0, &sUnknown_203B2C0->faceInfo, 0x10d);
+                        xxx_info_box_80141B4(gWonderMailDuplicateText, 0, &sUnknown_203B2C0->monPortrait, 0x10d);
                         SetFriendRescueCounterState(FRIEND_RESCUE_ERROR);
                         break;
                     case PASSWORD_ENTRY_SOS_MAIL_SUCCESS:
                         sub_8095274(mail.unk10.unk10);
                         mail.mailType = 2;
                         sub_80951BC(&mail);
-                        xxx_info_box_80141B4(gWonderMailAOKMailReceivedText, 0, &sUnknown_203B2C0->faceInfo, 0x101);
+                        xxx_info_box_80141B4(gWonderMailAOKMailReceivedText, 0, &sUnknown_203B2C0->monPortrait, 0x101);
                         SetFriendRescueCounterState(RECEIVED_FRIEND_SOS_MAIL);
                         break;
                     case 23:

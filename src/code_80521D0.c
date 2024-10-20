@@ -265,7 +265,7 @@ extern u8 gUnknown_202EE01;
 struct MonDialogueSpriteInfo
 {
     s16 species;
-    u8 unk2;
+    u8 spriteId;
 };
 
 extern void sub_8040238(void);
@@ -273,7 +273,7 @@ extern void sub_8040238(void);
 void PrintFieldMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, bool8 a2)
 {
     s32 unkPrintRet;
-    struct UnkPrintFieldMsgStruct unkStruct, *unkstructPtr;
+    struct MonPortraitMsg monPortrait, *monPortraitPtr;
     s32 unkSpVar;
 
     if (gUnknown_203B40C) {
@@ -283,25 +283,25 @@ void PrintFieldMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *st
     sub_803EAF0(2, 0);
     sub_8052210(0);
 
-    unkstructPtr = NULL;
-    unkStruct.faceFile = NULL;
-    unkStruct.faceData = NULL;
+    monPortraitPtr = NULL;
+    monPortrait.faceFile = NULL;
+    monPortrait.faceData = NULL;
     if (!gDungeon->unk181e8.blinded
         && !gDungeon->unk181e8.hallucinating
         && monSpriteInfo != NULL
-        && IsPokemonDialogueSpriteAvail(monSpriteInfo->species, monSpriteInfo->unk2))
+        && IsPokemonDialogueSpriteAvail(monSpriteInfo->species, monSpriteInfo->spriteId))
     {
-        unkStruct.faceFile = GetDialogueSpriteDataPtr(monSpriteInfo->species);
-        unkStruct.faceData = unkStruct.faceFile->data;
-        unkStruct.unk8 = 2;
-        unkStruct.unkA = 9;
-        unkStruct.unkC = monSpriteInfo->unk2;
-        unkStruct.unkD = 0;
-        unkStruct.unkE = 0;
-        unkstructPtr = &unkStruct;
+        monPortrait.faceFile = GetDialogueSpriteDataPtr(monSpriteInfo->species);
+        monPortrait.faceData = monPortrait.faceFile->data;
+        monPortrait.pos.x = 2;
+        monPortrait.pos.y = 9;
+        monPortrait.spriteId = monSpriteInfo->spriteId;
+        monPortrait.flip = FALSE;
+        monPortrait.unkE = 0;
+        monPortraitPtr = &monPortrait;
     }
 
-    sub_8014248(str, 0, 0, NULL, NULL, 3, 0, unkstructPtr, (a2 != FALSE) ? 0x701 : 0x400);
+    sub_8014248(str, 0, 0, NULL, NULL, 3, 0, monPortraitPtr, (a2 != FALSE) ? 0x701 : 0x400);
     gDungeon->unk1BDD4.unk1C05F = 1;
     do {
         xxx_draw_string_80144C4();
@@ -310,8 +310,8 @@ void PrintFieldMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *st
     } while (unkPrintRet != 0);
     gDungeon->unk1BDD4.unk1C05F = 0;
 
-    if (unkStruct.faceFile != NULL) {
-        CloseFile(unkStruct.faceFile);
+    if (monPortrait.faceFile != NULL) {
+        CloseFile(monPortrait.faceFile);
     }
 
     if (a2) {

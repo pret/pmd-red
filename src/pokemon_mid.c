@@ -547,10 +547,10 @@ OpenedFile *GetDialogueSpriteDataPtr(s16 index)
     return OpenFileAndGetFileDataPtr(buffer, &gMonsterFileArchive);
 }
 
-bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 r1)
+bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 spriteId)
 {
     // checking to see if dialogue sprite is available??
-    return (gMonsterParameters[index].dialogueSprites >> r1) & 1;
+    return (gMonsterParameters[index].dialogueSprites >> spriteId) & 1;
 }
 
 void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1)

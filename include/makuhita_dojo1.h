@@ -28,8 +28,8 @@ typedef struct MakuhitaDojoWork1
     /* 0x14 */ s32 menuAction;
     MenuItem unk18[4];
     u8 fill38[0x58 - 0x38];
-    /* 0x58 */ struct UnkPrintFieldMsgStruct faceInfo;
-    struct UnkPrintFieldMsgStruct* unk68;
+    /* 0x58 */ struct MonPortraitMsg monPortrait;
+    struct MonPortraitMsg* unk68;
     UnkTextStruct2 unk6C[4];
 } MakuhitaDojoWork1;
 

@@ -52,8 +52,8 @@ typedef struct WigglytuffShop3Work
     MenuItem unk1C[8];
     u16 unk5C[8];
     MenuStruct unk6C;
-    /* 0xBC */ struct UnkPrintFieldMsgStruct faceInfo;
-    struct UnkPrintFieldMsgStruct *unkCC;
+    /* 0xBC */ struct MonPortraitMsg monPortrait;
+    struct MonPortraitMsg *monPortraitPtr;
     UnkTextStruct2 unkD0[4];
     u32 unk130;
     u32 unk134;

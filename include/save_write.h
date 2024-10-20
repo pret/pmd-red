@@ -9,7 +9,7 @@ typedef struct SavePakWrite
     /* 0x0 */ u32 state;
     s32 unk4;
     /* 0x8 */ u32 saveStatus;
-    /* 0xC */ struct UnkPrintFieldMsgStruct faceInfo;
+    /* 0xC */ struct MonPortraitMsg monPortrait;
     /* 0x1C */ u16 pokeID;
 } SavePakWrite;
 

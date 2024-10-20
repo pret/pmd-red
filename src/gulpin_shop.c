@@ -45,20 +45,20 @@ bool8 CreateGulpinShop(u32 mode, s16 pokeSpecies, Move *moves)
     sGulpinShopWork->unk1C = moves[4].id; // 5th move..?
 
     if (mode == GULPIN_SHOP_MODE_AWAKE)
-        sGulpinShopWork->unk128 = &sGulpinShopWork->faceInfo;
+        sGulpinShopWork->monPortraitPtr = &sGulpinShopWork->monPortrait;
     else
-        sGulpinShopWork->unk128 = NULL;
+        sGulpinShopWork->monPortraitPtr = NULL;
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
-    sGulpinShopWork->faceInfo.faceFile = faceFile;
-    sGulpinShopWork->faceInfo.faceData = faceFile->data;
+    sGulpinShopWork->monPortrait.faceFile = faceFile;
+    sGulpinShopWork->monPortrait.faceData = faceFile->data;
 
-    sGulpinShopWork->faceInfo.unkC = 0;
-    sGulpinShopWork->faceInfo.unkD = 0;
-    sGulpinShopWork->faceInfo.unkE = 0;
+    sGulpinShopWork->monPortrait.spriteId = 0;
+    sGulpinShopWork->monPortrait.flip = FALSE;
+    sGulpinShopWork->monPortrait.unkE = 0;
 
-    sGulpinShopWork->faceInfo.unk8 = 2;
-    sGulpinShopWork->faceInfo.unkA = 8;
+    sGulpinShopWork->monPortrait.pos.x = 2;
+    sGulpinShopWork->monPortrait.pos.y = 8;
     SetGulpinShopState(0);
     return TRUE;
 }
@@ -97,7 +97,7 @@ bool8 GulpinIsNextMoveLinked(void)
 void DestroyGulpinShop(void)
 {
     if (sGulpinShopWork != NULL) {
-        CloseFile(sGulpinShopWork->faceInfo.faceFile);
+        CloseFile(sGulpinShopWork->monPortrait.faceFile);
         MemoryFree(sGulpinShopWork);
         sGulpinShopWork = NULL;
     }
@@ -160,9 +160,9 @@ static void sub_801EA28(void)
                 case GULPIN_SHOP_MODE_AWAKE:
                 case GULPIN_SHOP_MODE_ASLEEP:
                     if (sGulpinShopWork->isNextMoveLinked)
-                        sub_8014248(gCommonGulpin[sGulpinShopWork->mode][GULPIN_DLG_12], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
+                        sub_8014248(gCommonGulpin[sGulpinShopWork->mode][GULPIN_DLG_12], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->monPortraitPtr, 12);
                     else
-                        sub_8014248(gCommonGulpin[sGulpinShopWork->mode][GULPIN_DLG_11], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
+                        sub_8014248(gCommonGulpin[sGulpinShopWork->mode][GULPIN_DLG_11], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->monPortraitPtr, 12);
                     break;
                 case GULPIN_SHOP_MODE_UNK2:
                     if (sGulpinShopWork->isNextMoveLinked)

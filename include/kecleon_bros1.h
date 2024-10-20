@@ -63,8 +63,8 @@ typedef struct KecleonBrosWork1
     /* 0x34 */ MenuItem menuItems[8];
     u16 unk74[8];
     /* 0x84 */ MenuStruct menu;
-    /* 0xD4 */ struct UnkPrintFieldMsgStruct faceInfo;
-    struct UnkPrintFieldMsgStruct *unkE4;
+    /* 0xD4 */ struct MonPortraitMsg monPortrait;
+    struct MonPortraitMsg *monPortraitPtr;
     UnkTextStruct2 unkE8[4];
 } KecleonBrosWork1;
 

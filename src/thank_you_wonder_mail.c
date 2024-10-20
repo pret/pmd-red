@@ -252,13 +252,13 @@ u32 CreateThankYouMailPelipper(void)
   strcpy(gAvailablePokemonNames, monName);
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
 
-  sUnknown_203B2C4->faceInfo.faceFile = faceFile;
-  sUnknown_203B2C4->faceInfo.faceData = faceFile->data;
-  sUnknown_203B2C4->faceInfo.unkC = 0;
-  sUnknown_203B2C4->faceInfo.unkD = 0;
-  sUnknown_203B2C4->faceInfo.unkE = 0;
-  sUnknown_203B2C4->faceInfo.unk8 = 2;
-  sUnknown_203B2C4->faceInfo.unkA = 8;
+  sUnknown_203B2C4->monPortrait.faceFile = faceFile;
+  sUnknown_203B2C4->monPortrait.faceData = faceFile->data;
+  sUnknown_203B2C4->monPortrait.spriteId = 0;
+  sUnknown_203B2C4->monPortrait.flip = FALSE;
+  sUnknown_203B2C4->monPortrait.unkE = 0;
+  sUnknown_203B2C4->monPortrait.pos.x = 2;
+  sUnknown_203B2C4->monPortrait.pos.y = 8;
 
   for(counter = 0; counter < PASSWORD_BUFFER_SIZE; counter++){
     sUnknown_203B2C4->passwordBuffer[counter] = 0;
@@ -419,7 +419,7 @@ void CleanThankYouMailPelipper(void)
 {
     if(sUnknown_203B2C4 != NULL)
     {
-        CloseFile(sUnknown_203B2C4->faceInfo.faceFile);
+        CloseFile(sUnknown_203B2C4->monPortrait.faceFile);
         MemoryFree(sUnknown_203B2C4);
         sUnknown_203B2C4 = NULL;
         sub_8030DE4();
@@ -445,34 +445,34 @@ void PrintThankYouMailLinkError(u32 errorCode)
 {
   switch(errorCode) {
     case COMMS_INCORRECT_NUM_SYSTEMS:
-        xxx_info_box_80141B4(gUnknown_80DEF28, 0, &sUnknown_203B2C4->faceInfo, 0x10d);
+        xxx_info_box_80141B4(gUnknown_80DEF28, 0, &sUnknown_203B2C4->monPortrait, 0x10d);
         break;
     case COMMS_DIFFERENT_MODES:
-        xxx_info_box_80141B4(gUnknown_80DEF80, 0, &sUnknown_203B2C4->faceInfo, 0x10d);
+        xxx_info_box_80141B4(gUnknown_80DEF80, 0, &sUnknown_203B2C4->monPortrait, 0x10d);
         break;
     case COMMS_NO_ROOM_STORAGE:
-        xxx_info_box_80141B4(gUnknown_80DEFDC, 0, &sUnknown_203B2C4->faceInfo, 0x10d);
+        xxx_info_box_80141B4(gUnknown_80DEFDC, 0, &sUnknown_203B2C4->monPortrait, 0x10d);
         break;
     case COMMS_DUPLICATE_MAIL:
-        xxx_info_box_80141B4(gUnknown_80DF044, 0, &sUnknown_203B2C4->faceInfo, 0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF044, 0, &sUnknown_203B2C4->monPortrait, 0x10d);
         break;
     case COMMS_NOT_ELIGIBLE_1:
-        xxx_info_box_80141B4(gUnknown_80DF0A0, 0, &sUnknown_203B2C4->faceInfo, 0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF0A0, 0, &sUnknown_203B2C4->monPortrait, 0x10d);
         break;
     case COMMS_NOT_ELIGIBLE_2:
-        xxx_info_box_80141B4(gUnknown_80DF0A0, 0, &sUnknown_203B2C4->faceInfo, 0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF0A0, 0, &sUnknown_203B2C4->monPortrait, 0x10d);
         break;
     case COMMS_NO_ROOM_MAIL:
-        xxx_info_box_80141B4(gUnknown_80DF0E0, 0, &sUnknown_203B2C4->faceInfo, 0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF0E0, 0, &sUnknown_203B2C4->monPortrait, 0x10d);
         break;
     case 1:
     case COMMS_NO_RESPONSE:
     case 5:
     case 14:
-        xxx_info_box_80141B4(gUnknown_80DEF04, 0, &sUnknown_203B2C4->faceInfo, 0x10d);
+        xxx_info_box_80141B4(gUnknown_80DEF04, 0, &sUnknown_203B2C4->monPortrait, 0x10d);
         break;
     case COMMS_NOT_READY:
-        xxx_info_box_80141B4(gUnknown_80DF138, 0, &sUnknown_203B2C4->faceInfo, 0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF138, 0, &sUnknown_203B2C4->monPortrait, 0x10d);
         break;
     case COMMS_GOOD:
     default:
@@ -501,7 +501,7 @@ void DisplayThankYouMailCommsOutcome(void)
                     case WONDER_MAIL_PASSWORD:
                     case 6:
                         // "Thank-You Mail has been sent"
-                        xxx_info_box_80141B4(gUnknown_80DF194, 0, &sUnknown_203B2C4->faceInfo, 0x10d);
+                        xxx_info_box_80141B4(gUnknown_80DF194, 0, &sUnknown_203B2C4->monPortrait, 0x10d);
                         break;
                     case 4:
                     default:
@@ -810,15 +810,15 @@ void HandleThankYouMailPasswordMenu(void)
         switch(sub_8039068(PASSWORD_ENTRY_THANK_YOU_MAIL_MODE,sUnknown_203B2C4->passwordBuffer,&mail1))
         {
             case PASSWORD_ENTRY_INCORRECT_PASSWORD:
-                sub_8014248(gUnknown_80DF1C0, 0, 7, gUnknown_80DEE44, 0, 4, 0, &sUnknown_203B2C4->faceInfo, 0xc);
+                sub_8014248(gUnknown_80DF1C0, 0, 7, gUnknown_80DEE44, 0, 4, 0, &sUnknown_203B2C4->monPortrait, 0xc);
                 SetThankYouMailMenuState(THANK_YOU_PASSWORD_WRONG);
                 break;
             case PASSWORD_ENTRY_NOT_THANK_YOU_MAIL:
-                xxx_info_box_80141B4(gUnknown_80DF208, 0, &sUnknown_203B2C4->faceInfo, 0x10d);
+                xxx_info_box_80141B4(gUnknown_80DF208, 0, &sUnknown_203B2C4->monPortrait, 0x10d);
                 SetThankYouMailMenuState(PRINT_THANK_YOU_ERROR);
                 break;
             case PASSWORD_ENTRY_DUPLICATE_THANK_YOU_MAIL:
-                xxx_info_box_80141B4(gUnknown_80DF0A0, 0, &sUnknown_203B2C4->faceInfo, 0x10d);
+                xxx_info_box_80141B4(gUnknown_80DF0A0, 0, &sUnknown_203B2C4->monPortrait, 0x10d);
                 SetThankYouMailMenuState(PRINT_THANK_YOU_ERROR);
                 break;
             case PASSWORD_ENTRY_THANK_YOU_MAIL_SUCCESS:
@@ -1261,15 +1261,15 @@ void UpdateThankYouMailText(void)
         pokeStruct = GetPlayerPokemonStruct();
         sub_80922B4(buffer1,pokeStruct->name, POKEMON_NAME_LENGTH);
         sprintfStatic(sUnknown_203B2C4->formattedString,gUnknown_80DF250,buffer1);
-        xxx_info_box_80141B4(sUnknown_203B2C4->formattedString,0,&sUnknown_203B2C4->faceInfo,0x10d);
+        xxx_info_box_80141B4(sUnknown_203B2C4->formattedString,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
     case 0xe:
         // Is it OK to send this Thank-You Mail?
-        sub_8014248(gUnknown_80DF304,0,7,gUnknown_80DEE60,0,4,0,&sUnknown_203B2C4->faceInfo,0xc);
+        sub_8014248(gUnknown_80DF304,0,7,gUnknown_80DEE60,0,4,0,&sUnknown_203B2C4->monPortrait,0xc);
         break;
     case PROMPT_THANK_YOU_TO_SEND:
         // Please choose the Thank-You Mail that you want to send to your friend
-        xxx_info_box_80141B4(gUnknown_80DF330,0,&sUnknown_203B2C4->faceInfo,0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF330,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
     case 0x10:
         if (sub_8030894() != 0)
@@ -1339,7 +1339,7 @@ void UpdateThankYouMailText(void)
         break;
     case PROMPT_THANK_YOU_PASSWORD:
         // OK. Please enter the Thank-You Mail Password
-        xxx_info_box_80141B4(gUnknown_80DF380,0,&sUnknown_203B2C4->faceInfo,0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF380,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
     case PROCESS_THANK_YOU_PASSWORD:
         RestoreUnkTextStruct_8006518(sUnknown_203B2C4->unk3BC);
@@ -1355,19 +1355,19 @@ void UpdateThankYouMailText(void)
         break;
     case 0x1b:
         // Please give this password to the friend that rescued your team. I also must save your adventure
-        xxx_info_box_80141B4(gUnknown_80DF3B4,0,&sUnknown_203B2C4->faceInfo,0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF3B4,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
     case DISPLAY_THANK_YOU_PASSWORD:
         // Ok. Here is your Thank You Mail Password
-        xxx_info_box_80141B4(gUnknown_80DF418,0,&sUnknown_203B2C4->faceInfo,0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF418,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
     case 0x24:
         // I need to save your adventure
-        xxx_info_box_80141B4(gUnknown_80DF44C,0,&sUnknown_203B2C4->faceInfo,0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF44C,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
     case 0x20:
         // There we go. I'm all done.
-        xxx_info_box_80141B4(gUnknown_80DF46C,0,&sUnknown_203B2C4->faceInfo,0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF46C,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
     case THANK_YOU_PASSWORD_SUCCESS:
         switch(sUnknown_203B2C4->wonderMailMethod)
@@ -1376,7 +1376,7 @@ void UpdateThankYouMailText(void)
             case WONDER_MAIL_PASSWORD:
             case 6:
                 // A Thank You Mail has arrived from your friend
-                xxx_info_box_80141B4(gUnknown_80DF4F4,0,&sUnknown_203B2C4->faceInfo,0x10d);
+                xxx_info_box_80141B4(gUnknown_80DF4F4,0,&sUnknown_203B2C4->monPortrait,0x10d);
                 break;
             case 4:
                 break;
@@ -1409,75 +1409,75 @@ void UpdateThankYouMailText(void)
         break;
     case 0x17:
         // There. I've sent your thank-you mail. I need to save your adventure.
-        xxx_info_box_80141B4(gUnknown_80DF594,0,&sUnknown_203B2C4->faceInfo,0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF594,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
     case PROMPT_CONNECT_GAME_LINK:
         // Please connect the GBA systems with a Game Link Cable
-        sub_8014248(gUnknown_80DF5E4,0,7,gUnknown_80DEE44,0,4,0,&sUnknown_203B2C4->faceInfo,0xc);
+        sub_8014248(gUnknown_80DF5E4,0,7,gUnknown_80DEE44,0,4,0,&sUnknown_203B2C4->monPortrait,0xc);
         break;
     case THANK_YOU_MAIL_COMMS_CLEANUP:
         pokeStruct2 = GetPlayerPokemonStruct();
         sub_80922B4(buffer2, pokeStruct2->name, POKEMON_NAME_LENGTH);
         sprintfStatic(sUnknown_203B2C4->formattedString,gUnknown_80DF63C,buffer2);
-        xxx_info_box_80141B4(sUnknown_203B2C4->formattedString,0,&sUnknown_203B2C4->faceInfo,0x10d);
+        xxx_info_box_80141B4(sUnknown_203B2C4->formattedString,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
     case CONFIRM_ITEM_TO_SEND:
         // The item you've chosen can't be exchanged later. Is that OK?
-        sub_8014248(gUnknown_80DF694,0,7,gUnknown_80DEEE4,0,4,0,&sUnknown_203B2C4->faceInfo,0xc);
+        sub_8014248(gUnknown_80DF694,0,7,gUnknown_80DEEE4,0,4,0,&sUnknown_203B2C4->monPortrait,0xc);
         break;
     case 0x29:
         // I need to save your adventure
-        xxx_info_box_80141B4(gUnknown_80DF44C,0,&sUnknown_203B2C4->faceInfo,0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF44C,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
     case 0x2a:
         // I've saved your adventure
-        xxx_info_box_80141B4(gUnknown_80DF6F0,0,&sUnknown_203B2C4->faceInfo,0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF6F0,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
     case PROMPT_ITEM_TO_SEND:
         // Ok, please choose the item to be sent
-        xxx_info_box_80141B4(gUnknown_80DF710,0,&sUnknown_203B2C4->faceInfo,0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF710,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
     case THANK_YOU_MAIL_STORAGE_EMPTY:
         // Oh? Your storage space is empty
-        sub_8014248(gUnknown_80DF73C,0,0,gUnknown_80DEEBC,0,4,0,&sUnknown_203B2C4->faceInfo,0xc);
+        sub_8014248(gUnknown_80DF73C,0,0,gUnknown_80DEEBC,0,4,0,&sUnknown_203B2C4->monPortrait,0xc);
         break;
     case PROMPT_REWARD_ITEM_TO_SEND:
         // Would you like to choose a reward item from storage and send it with your mail?
-        sub_8014248(gUnknown_80DF77C,0,0,gUnknown_80DEE7C,0,4,0,&sUnknown_203B2C4->faceInfo,0xc);
+        sub_8014248(gUnknown_80DF77C,0,0,gUnknown_80DEE7C,0,4,0,&sUnknown_203B2C4->monPortrait,0xc);
         break;
     case ITEM_EXISTS_ON_THANK_YOU_MAIL:
         // Oh? You've already attached a reward item on this mail.
-        xxx_info_box_80141B4(gUnknown_80DF7D4,0,&sUnknown_203B2C4->faceInfo,0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF7D4,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
     case PROMPT_RESEND_WITH_ATTACHED_ITEM:
         // Would you like to send it again with the item you chose before?
-        sub_8014248(gUnknown_80DF870,0,7,gUnknown_80DEE44,0,4,0,&sUnknown_203B2C4->faceInfo,0xc);
+        sub_8014248(gUnknown_80DF870,0,7,gUnknown_80DEE44,0,4,0,&sUnknown_203B2C4->monPortrait,0xc);
         break;
     case NO_THANK_YOU_MAIL:
         // You don't seem to have a Thank-You Mail
-        xxx_info_box_80141B4(gUnknown_80DF8B4,0,&sUnknown_203B2C4->faceInfo,0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF8B4,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
     case THANK_YOU_MAIL_MAIN_MENU:
         // Hello. I handle Thank You Mail. How may I help You?
-        sub_8014248(gUnknown_80DF8EC,0,1,gThankYouMailMainMenuItems,0,4,0,&sUnknown_203B2C4->faceInfo,0xc);
+        sub_8014248(gUnknown_80DF8EC,0,1,gThankYouMailMainMenuItems,0,4,0,&sUnknown_203B2C4->monPortrait,0xc);
         break;
     case ANYTHING_ELSE_THANK_YOU_MAIN_MENU:
         // May I help you with anything else?
-        sub_8014248(gUnknown_80DF928,0,1,gThankYouMailMainMenuItems,0,4,0,&sUnknown_203B2C4->faceInfo,0xc);
+        sub_8014248(gUnknown_80DF928,0,1,gThankYouMailMainMenuItems,0,4,0,&sUnknown_203B2C4->monPortrait,0xc);
         break;
     case EXIT_THANK_YOU_MAIL_PRE:
         // Please come see me anytime
-        xxx_info_box_80141B4(gUnknown_80DF94C,0,&sUnknown_203B2C4->faceInfo,0x10d);
+        xxx_info_box_80141B4(gUnknown_80DF94C,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
     case SELECT_THANK_YOU_MAIL_COMMS:
         switch(sUnknown_203B2C4->wonderMailMode){
             case WONDER_MAIL_MODE_SEND:
                 // How would you like to send your thank you mail?
-                sub_8014248(gUnknown_80DF96C,0,3,gUnknown_80DEE08,0,4,0,&sUnknown_203B2C4->faceInfo,0xc);
+                sub_8014248(gUnknown_80DF96C,0,3,gUnknown_80DEE08,0,4,0,&sUnknown_203B2C4->monPortrait,0xc);
                 break;
             case WONDER_MAIL_MODE_RECEIVE:
                 // How would you like to recieve your friend's thank you mail?
-                sub_8014248(gUnknown_80DF9A4,0,3,gUnknown_80DEE08,0,4,0,&sUnknown_203B2C4->faceInfo,0xc);
+                sub_8014248(gUnknown_80DF9A4,0,3,gUnknown_80DEE08,0,4,0,&sUnknown_203B2C4->monPortrait,0xc);
                 break;
         }
         break;

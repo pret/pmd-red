@@ -20,8 +20,8 @@ typedef struct FelicityBankWork
     MenuItem unk14[8];
     u16 unk54[8];
     unkStructFor8013AA0 unk64;
-    /* 0x94 */ struct UnkPrintFieldMsgStruct faceInfo;
-    struct UnkPrintFieldMsgStruct *unkA4;
+    /* 0x94 */ struct MonPortraitMsg monPortrait;
+    struct MonPortraitMsg *monPortraitPtr;
     UnkTextStruct2 unkA8[4];
 } FelicityBankWork;
 
