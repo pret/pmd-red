@@ -321,7 +321,7 @@ void DungeonHandlePlayerInput(void)
                 }
                 else {
                     if (!sub_805EF60(leader, leaderInfo)) {
-                        SetMonsterActionFields(&leaderInfo->action, 0x32);
+                        SetMonsterActionFields(&leaderInfo->action, ACTION_REGULAR_ATTACK);
                     }
                     break;
                 }
