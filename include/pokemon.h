@@ -78,7 +78,7 @@ s16 GetPokemonEvolveConditons(s16 index, unkEvolve *);
 u8 GetPokemonOverworldPalette(s16 index, u32 r1);
 bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 spriteId);
 OpenedFile *OpenPokemonDialogueSpriteFile(s16 index);
-OpenedFile *GetDialogueSpriteDataPtr(s16 index);
+OpenedFile *GetDialogueSpriteDataPtr(s32 index);
 s32 GetUnownIndex(s16 index);
 void GenerateHiddenPower(HiddenPower *);
 s32 GetEvolutionSequence(PokemonStruct1 *pokemon, EvolveStage *);

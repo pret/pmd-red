@@ -10,6 +10,8 @@
 #include "text2.h"
 #include "pokemon.h"
 #include "file_system.h"
+#include "dungeon_util_1.h"
+#include "code_800D090.h"
 
 void sub_80526D0(s32 r0);
 extern bool8 sub_8045888(Entity *r0);
@@ -22,23 +24,23 @@ void sub_805229C(void)
     return sub_80526D0(0x50);
 }
 
-void SendMessage(Entity *pokemon, const char message[])
+void SendMessage(Entity *pokemon, const char *str)
 {
     if (sub_8045888(pokemon)){
-        sub_80523A8(pokemon, message, 1);
+        sub_80523A8(pokemon, str, TRUE);
     }
 }
 
 void sub_80522C8(Entity *r0, const char *str)
 {
     if (sub_8045888(r0)){
-        sub_80523A8(r0, str, 0);
+        sub_80523A8(r0, str, FALSE);
     }
 }
 
 void sub_80522E8(Entity *r0, const char *str)
 {
-    sub_80523A8(r0, str, 0);
+    sub_80523A8(r0, str, FALSE);
 }
 
 void sub_80522F4(Entity *r0, Entity *r1, const char *str)
@@ -51,7 +53,7 @@ void sub_80522F4(Entity *r0, Entity *r1, const char *str)
     }
     if(flag)
     {
-        sub_80523A8(r0, str, 1);
+        sub_80523A8(r0, str, TRUE);
     }
 }
 
@@ -65,7 +67,7 @@ void sub_805232C(Entity *r0, Entity *r1, const char *str)
     }
     if(flag)
     {
-        sub_80523A8(r0, str, 0);
+        sub_80523A8(r0, str, FALSE);
     }
 }
 
@@ -79,13 +81,13 @@ void sub_8052364(Entity *r0, Position *pos, const char *str)
     }
     if(flag)
     {
-        sub_80523A8(r0, str, 1);
+        sub_80523A8(r0, str, TRUE);
     }
 }
 
 void sub_805239C(Entity *r0, const char *str)
 {
-    sub_80523A8(r0, str, 1);
+    sub_80523A8(r0, str, TRUE);
 }
 
 void sub_8053210(u8 *txt, u32 a1, u32 a2);
@@ -328,3 +330,151 @@ void PrintFieldMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *st
     sub_803E708(8, 9);
 }
 
+void sub_80528F4(Entity *a0, const u8 *str)
+{
+    PrintFieldMessage(NULL, str, TRUE);
+    sub_80522E8(a0, str);
+}
+
+extern const u8 gUnknown_80F7AF8[];
+extern const u8 gUnknown_80F7AFC[];
+extern const u8 gUnknown_80F7B04[];
+
+struct DungeonDialogueStruct
+{
+    u16 unk0;
+    u8 unk2;
+    u8 unk3;
+    s16 unk4;
+    s16 unk6;
+    const u8 *str;
+};
+
+struct Struct_sub_808CDB0
+{
+    Position pos;
+    bool8 flip;
+};
+
+extern const struct Struct_sub_808CDB0 *sub_808CDB0(s32 a0);
+extern const u16 gUnknown_80F7AEA[];
+
+extern u8 gAvailablePokemonNames[];
+extern u8 gUnknown_202E5D8[];
+extern u8 gUnknown_202DFE8[];
+
+void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
+{
+    s32 unkPrintRet;
+    struct MonPortraitMsg monPortrait;
+    s32 unkSpVar;
+    s32 leaderId, partnerId, dialogueMonId;
+    Entity *leader = xxx_call_GetLeader();
+    Entity *partner = GetPartnerEntity();
+    struct MonPortraitMsg *monPortraitPtr = NULL;
+
+    if (leader != NULL) {
+        EntityInfo *leaderInfo = GetEntInfo(leader);
+        PokemonStruct2 *monStruct2 = &gRecruitedPokemonRef->pokemon2[leaderInfo->teamIndex];
+
+        sub_808DA0C(gAvailablePokemonNames, monStruct2);
+        leaderId = leaderInfo->apparentID;
+    }
+    else {
+        leaderId = MONSTER_NONE;
+        strcpy(gAvailablePokemonNames, gUnknown_80F7AF8); // ??
+    }
+
+    if (partner != NULL) {
+        EntityInfo *partnerInfo = GetEntInfo(partner);
+        PokemonStruct2 *monStruct2 = &gRecruitedPokemonRef->pokemon2[partnerInfo->teamIndex];
+
+        sub_808DA0C(gUnknown_202DFE8, monStruct2);
+        partnerId = partnerInfo->apparentID;
+    }
+    else {
+        partnerId = MONSTER_NONE;
+        strcpy(gUnknown_202DFE8, gUnknown_80F7AF8); // ??
+    }
+
+    switch (dialogueInfo->unk4) {
+        case 425:
+            dialogueMonId = leaderId;
+            sprintfStatic(gUnknown_202E5D8, gUnknown_80F7AFC, gAvailablePokemonNames);
+            break;
+        case 426:
+            dialogueMonId = partnerId;
+            sprintfStatic(gUnknown_202E5D8, gUnknown_80F7AFC, gUnknown_202DFE8);
+            break;
+        case 427:
+            dialogueMonId = MONSTER_NONE;
+            strcpy(gUnknown_202E5D8, gUnknown_80F7B04);
+            break;
+        default:
+            dialogueMonId = dialogueInfo->unk4;
+            CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, dialogueMonId);
+            break;
+    }
+
+    if (dialogueInfo->unk0 == 2 || dialogueInfo->unk0 == 3) {
+        strcpy(gUnknown_202E5D8, gUnknown_80F7B04);
+    }
+
+    while (1) {
+        if (dialogueInfo->unk6 == 0)
+            break;
+        if (dialogueInfo->unk6 == 7   && (dialogueMonId == MONSTER_SQUIRTLE || dialogueMonId == MONSTER_TOTODILE))
+            break;
+        if (dialogueInfo->unk6 == 1   && (dialogueMonId == MONSTER_BULBASAUR || dialogueMonId == MONSTER_CYNDAQUIL || dialogueMonId == MONSTER_MUDKIP || dialogueMonId == MONSTER_PIKACHU || dialogueMonId == MONSTER_CHARMANDER || dialogueMonId == MONSTER_TREECKO))
+            break;
+        if (dialogueInfo->unk6 == 280 && (dialogueMonId == MONSTER_TORCHIC || dialogueMonId == MONSTER_CHIKORITA))
+            break;
+        dialogueInfo++;
+    }
+
+    if (!gDungeon->unk181e8.blinded
+        && !gDungeon->unk181e8.hallucinating
+        && dialogueInfo->unk0 != 4
+        && dialogueInfo->unk2 != 0x80
+        && dialogueMonId != MONSTER_NONE)
+    {
+        const struct Struct_sub_808CDB0 *strPtr = sub_808CDB0(dialogueInfo->unk3);
+
+        monPortraitPtr = &monPortrait;
+        monPortraitPtr->faceFile = GetDialogueSpriteDataPtr(dialogueMonId);
+        if (monPortraitPtr->faceFile != NULL) {
+            monPortraitPtr->faceData = monPortraitPtr->faceFile->data;
+            monPortraitPtr->unkE = 0;
+            monPortraitPtr->spriteId = dialogueInfo->unk2;
+            monPortraitPtr->flip = strPtr->flip;
+            monPortraitPtr->pos.x = strPtr->pos.x;
+            monPortraitPtr->pos.y = strPtr->pos.y;
+            if (monPortraitPtr->pos.y < 2) {
+                monPortraitPtr->pos.y = 2;
+            }
+        }
+        else {
+            monPortraitPtr = NULL;
+        }
+    }
+
+    sub_8052740(10);
+    sub_803EAF0(2, 0);
+    sub_8052210(0);
+    xxx_info_box_80141B4(dialogueInfo->str, 0, monPortraitPtr, gUnknown_80F7AEA[dialogueInfo->unk0]);
+    do {
+        xxx_draw_string_80144C4();
+        sub_803E46C(9);
+        unkPrintRet = sub_80144A4(&unkSpVar);
+    } while (unkPrintRet != 0);
+
+    if (monPortraitPtr != NULL) {
+        CloseFile(monPortraitPtr->faceFile);
+    }
+
+    if (dialogueInfo->unk0 != 1 && dialogueInfo->unk0 != 3) {
+        sub_8040238();
+        sub_803EAF0(0, 0);
+    }
+    sub_803E708(8, 9);
+}

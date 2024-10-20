@@ -534,16 +534,18 @@ OpenedFile *OpenPokemonDialogueSpriteFile(s16 index)
     return OpenFile(buffer, &gMonsterFileArchive);
 }
 
-OpenedFile *GetDialogueSpriteDataPtr(s16 index)
+OpenedFile *GetDialogueSpriteDataPtr(s32 index)
 {
     // Looks like this loads the dialogue sprite for the pokemon
-
     char buffer[0xC];
-    if(gMonsterParameters[index].dialogueSprites == 0)
+    // TODO: Use the static inline function for indexing
+    s16 index_ = index;
+
+    if(gMonsterParameters[index_].dialogueSprites == 0)
     {
         return NULL;
     }
-    sprintf(buffer, gUnknown_8107684, index); // "kao%03d"
+    sprintf(buffer, gUnknown_8107684, index_); // "kao%03d"
     return OpenFileAndGetFileDataPtr(buffer, &gMonsterFileArchive);
 }
 
