@@ -295,7 +295,7 @@ void DungeonHandlePlayerInput(void)
                         }
                     }
                     if (j == MAX_MON_MOVES) {
-                        SetMonsterActionFields(&leaderInfo->action, 0x17);
+                        SetMonsterActionFields(&leaderInfo->action, ACTION_STRUGGLE);
                         break;
                     }
 
