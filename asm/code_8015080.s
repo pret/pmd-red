@@ -1725,41 +1725,4 @@ _08015F34:
 _08015F40: .4byte gUnknown_80DB098
 	thumb_func_end sub_8015EB4
 
-	thumb_func_start sub_8015F44
-sub_8015F44:
-	push {r4,lr}
-	movs r2, 0
-	ldr r0, _08015F78
-	ldr r0, [r0]
-	ldrb r4, [r0, 0x1B]
-	cmp r2, r4
-	bge _08015F7C
-	adds r3, r0, 0
-	adds r3, 0xF8
-	ldr r0, [r3]
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _08015F7C
-	movs r2, 0x1
-	movs r1, 0x1
-_08015F62:
-	cmp r1, r4
-	bge _08015F7C
-	ldr r0, [r3]
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _08015F7C
-	adds r2, r1, 0x1
-	adds r1, r2, 0
-	b _08015F62
-	.align 2, 0
-_08015F78: .4byte gUnknown_203B1FC
-_08015F7C:
-	adds r0, r2, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8015F44
-
     .align 2,0
