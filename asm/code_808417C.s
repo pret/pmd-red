@@ -350,7 +350,7 @@ _08084484:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8052B8C
+	bl PrintYesNoFieldMessage
 	cmp r0, 0x1
 	beq _080844A4
 	b _080845D4
@@ -432,7 +432,7 @@ _08084540:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8052B8C
+	bl PrintYesNoFieldMessage
 	cmp r0, 0x1
 	bne _080845D4
 	ldr r0, _080845B4
@@ -460,14 +460,14 @@ _08084582:
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_8052B8C
+	bl PrintYesNoFieldMessage
 	cmp r0, 0x1
 	bne _080845C4
 	ldr r0, _080845C0
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0
-	bl sub_8052B8C
+	bl PrintYesNoFieldMessage
 	adds r1, r0, 0
 	cmp r1, 0x1
 	bne _08084582
@@ -488,7 +488,7 @@ _080845C4:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0
-	bl sub_8052B8C
+	bl PrintYesNoFieldMessage
 	cmp r0, 0x1
 	bne _08084582
 _080845D4:
@@ -651,14 +651,14 @@ _08084716:
 	movs r0, 0
 	ldr r1, [r4]
 	movs r2, 0x1
-	bl sub_8052B8C
+	bl PrintYesNoFieldMessage
 	cmp r0, 0x1
 	bne _08084758
 	ldr r0, _08084754
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0
-	bl sub_8052B8C
+	bl PrintYesNoFieldMessage
 	adds r1, r0, 0
 	cmp r1, 0x1
 	bne _08084716
@@ -679,7 +679,7 @@ _08084758:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0
-	bl sub_8052B8C
+	bl PrintYesNoFieldMessage
 	cmp r0, 0x1
 	bne _08084716
 _08084768:

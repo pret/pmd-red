@@ -1257,7 +1257,7 @@ _08067834:
 	movs r0, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8052B8C
+	bl PrintYesNoFieldMessage
 	cmp r0, 0x1
 	bne _0806786C
 	ldr r4, _0806787C
@@ -1869,7 +1869,7 @@ _08067D20:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8052B8C
+	bl PrintYesNoFieldMessage
 	cmp r0, 0x1
 	bne _08067D32
 	b _08067ED8

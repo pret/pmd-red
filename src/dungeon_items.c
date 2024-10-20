@@ -20,7 +20,7 @@ extern u8 *gUnknown_8105360[];
 extern u8 *gUnknown_81053A8[];
 extern u8 *gUnknown_8105434[];
 
-extern s32 sub_8052B8C(u32, u8 *, u32);
+extern s32 PrintYesNoFieldMessage(u32, u8 *, u32);
 extern void PrintFieldMessage(u32, u8 *, u32);
 extern void sub_80416E0(Position32 *r0, u32, bool8);
 extern void sub_80421C0(Entity *, u32);
@@ -75,7 +75,7 @@ void sub_8046D20(void)
   cVar1 = gDungeon->unk8;
   gDungeon->unk8 = sub_8046D70();
   if (((gDungeon->unk8 == 1) && (cVar1 == 0)) &&
-     (sub_8052B8C(0, *gUnknown_80FA408, 1) == 1)) {
+     (PrintYesNoFieldMessage(0, *gUnknown_80FA408, 1) == 1)) {
     gDungeon->unk4 = 1;
     gDungeon->unk11 = 2;
   }

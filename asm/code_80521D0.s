@@ -5,113 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8052B8C
-sub_8052B8C:
-	push {r4-r7,lr}
-	sub sp, 0x14
-	adds r4, r0, 0
-	adds r6, r1, 0
-	adds r7, r2, 0
-	movs r0, 0xA
-	bl sub_8052740
-	movs r0, 0x2
-	movs r1, 0
-	bl sub_803EAF0
-	movs r0, 0
-	bl sub_8052210
-	movs r5, 0
-	str r5, [sp]
-	str r5, [sp, 0x4]
-	ldr r0, _08052C14
-	ldr r1, [r0]
-	ldr r2, _08052C18
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _08052C02
-	adds r2, 0x6
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _08052C02
-	cmp r4, 0
-	beq _08052C02
-	movs r1, 0
-	ldrsh r0, [r4, r1]
-	ldrb r1, [r4, 0x2]
-	bl IsPokemonDialogueSpriteAvail
-	lsls r0, 24
-	cmp r0, 0
-	beq _08052C02
-	movs r2, 0
-	ldrsh r0, [r4, r2]
-	bl GetDialogueSpriteDataPtr
-	str r0, [sp]
-	ldr r0, [r0, 0x4]
-	str r0, [sp, 0x4]
-	mov r1, sp
-	movs r2, 0
-	movs r0, 0x2
-	strh r0, [r1, 0x8]
-	movs r0, 0x9
-	strh r0, [r1, 0xA]
-	ldrb r0, [r4, 0x2]
-	strb r0, [r1, 0xC]
-	mov r0, sp
-	strb r2, [r0, 0xD]
-	strb r2, [r0, 0xE]
-	mov r5, sp
-_08052C02:
-	cmp r7, 0x1
-	bne _08052C1C
-	movs r2, 0xC0
-	lsls r2, 2
-	adds r0, r6, 0
-	adds r1, r5, 0
-	bl sub_80141E0
-	b _08052C28
-	.align 2, 0
-_08052C14: .4byte gDungeon
-_08052C18: .4byte 0x0001820a
-_08052C1C:
-	movs r2, 0xC0
-	lsls r2, 2
-	adds r0, r6, 0
-	adds r1, r5, 0
-	bl sub_8014214
-_08052C28:
-	add r4, sp, 0x10
-_08052C2A:
-	bl xxx_draw_string_80144C4
-	movs r0, 0x9
-	bl sub_803E46C
-	adds r0, r4, 0
-	bl sub_80144A4
-	cmp r0, 0
-	bne _08052C2A
-	ldr r0, [sp]
-	cmp r0, 0
-	beq _08052C48
-	bl CloseFile
-_08052C48:
-	bl sub_8040238
-	movs r0, 0
-	movs r1, 0
-	bl sub_803EAF0
-	ldr r0, [sp, 0x10]
-	cmp r0, 0x1
-	beq _08052C5E
-	movs r0, 0
-	b _08052C60
-_08052C5E:
-	movs r0, 0x1
-_08052C60:
-	add sp, 0x14
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8052B8C
-
 	thumb_func_start sub_8052C68
 sub_8052C68:
 	push {r4-r7,lr}
@@ -187,7 +80,7 @@ _08052CE6:
 	bl CreateMenuDialogueBoxAndPortrait
 	add r4, sp, 0x24
 _08052D02:
-	bl xxx_draw_string_80144C4
+	bl DrawDialogueBoxString
 	movs r0, 0x9
 	bl sub_803E46C
 	adds r0, r4, 0
@@ -653,7 +546,7 @@ _080530BE:
 	cmp r0, 0
 	bne _080530F4
 _080530CA:
-	bl xxx_draw_string_80144C4
+	bl DrawDialogueBoxString
 	movs r0, 0x9
 	bl sub_803E46C
 	b _08053002
@@ -690,7 +583,7 @@ _0805310C:
 	adds r5, 0x1
 	cmp r5, 0x7
 	ble _0805310C
-	bl xxx_draw_string_80144C4
+	bl DrawDialogueBoxString
 	movs r0, 0x9
 	bl sub_803E46C
 	mov r8, r7

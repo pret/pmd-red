@@ -1681,7 +1681,7 @@ _0809B578: .4byte gUnknown_3001B64
 sub_809B57C:
 	push {r4,r5,lr}
 	sub sp, 0x8
-	bl xxx_draw_string_80144C4
+	bl DrawDialogueBoxString
 	ldr r5, _0809B5C8
 	ldr r0, [r5]
 	ldr r1, [r0]

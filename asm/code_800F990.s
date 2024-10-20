@@ -2327,7 +2327,7 @@ sub_8010C10:
 	movs r3, 0
 	bl CreateMenuDialogueBoxAndPortrait
 _08010C2C:
-	bl xxx_draw_string_80144C4
+	bl DrawDialogueBoxString
 	bl sub_8010960
 	add r0, sp, 0x14
 	bl sub_80144A4

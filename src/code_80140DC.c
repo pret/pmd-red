@@ -96,12 +96,12 @@ void CreateDialogueBoxAndPortrait(const u8 *text, u32 param_2, struct MonPortrai
     CreateMenuDialogueBoxAndPortrait(text, param_2, -1, NULL, NULL, 3, 0, monPortraitPtr, param_4);
 }
 
-void sub_80141E0(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 param_3)
+void CreateYesNoDialogueBoxAndPortrait_DefaultYes(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 param_3)
 {
     CreateMenuDialogueBoxAndPortrait(text, 0, -1, gUnknown_80D485C, NULL, 3, 0, monPortraitPtr, param_3 | 0x300);
 }
 
-void sub_8014214(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 param_3)
+void CreateYesNoDialogueBoxAndPortrait_DefaultNo(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 param_3)
 {
     CreateMenuDialogueBoxAndPortrait(text, 0, -1, gUnknown_80D4880, NULL, 3, 0, monPortraitPtr, param_3 | 0x300);
 }

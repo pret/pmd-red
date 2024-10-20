@@ -45,7 +45,7 @@ extern u8 *gUnknown_80FA090[];
 void sub_8068FE0(Entity *, u32, Entity *);
 u8 sub_806B8CC();
 bool8 sub_805FBE8(u8 *a0);
-extern s32 sub_8052B8C(u32, const u8 *, u32);
+extern s32 PrintYesNoFieldMessage(u32, const u8 *, u32);
 extern void PrintFieldMessage(u32, const u8 *, u32);
 void sub_8083D88();
 u8 sub_808529C(s32);
@@ -749,7 +749,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
     sub_806CE68(entity2, direction);
     CopyCyanMonsterNametoBuffer(gAvailablePokemonNames,param_3->id);
 
-    if (sub_8052B8C(0,*gUnknown_80F9FE8,1) == 0) {
+    if (PrintYesNoFieldMessage(0,*gUnknown_80F9FE8,1) == 0) {
         if (param_3->id != MONSTER_JIRACHI) {
             SendMessage(entity1,*gUnknown_80FA004);
         }
@@ -811,7 +811,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
             else {
                 sub_8083D88();
                 sub_803E708(0xa0,0x46);
-                if (sub_8052B8C(0,*gUnknown_80FA090,1) == 1) {
+                if (PrintYesNoFieldMessage(0,*gUnknown_80FA090,1) == 1) {
                     while (sub_805FBE8(pokeStruct2->name) == 0) {
                         PrintFieldMessage(0,*gUnknown_80FA0C8,1);
                     }
@@ -1072,7 +1072,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
       pokeStruct2->unk0 = 0;
     }
     else {
-      if (sub_8052B8C(0,*gUnknown_80FA090,1) == 1) {
+      if (PrintYesNoFieldMessage(0,*gUnknown_80FA090,1) == 1) {
         while (!sub_805FBE8(buffer)) {
           PrintFieldMessage(0,*gUnknown_80FA0C8,1);
         }

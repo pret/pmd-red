@@ -272,11 +272,22 @@ struct MonDialogueSpriteInfo
 
 extern void sub_8040238(void);
 
+// Prints string in dialogue box and waits for A/B button press
+#define PRINT_STRING_WAIT_PRESS(chosenMenuIndex)   \
+{                                           \
+    s32 unkPrintRet;                        \
+                                            \
+    do {                                    \
+        DrawDialogueBoxString();            \
+        sub_803E46C(9);                     \
+        unkPrintRet = sub_80144A4(chosenMenuIndex);\
+    } while (unkPrintRet != 0);             \
+}
+
 void PrintFieldMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, bool8 a2)
 {
-    s32 unkPrintRet;
     struct MonPortraitMsg monPortrait, *monPortraitPtr;
-    s32 unkSpVar;
+    s32 chosenMenuIndex;
 
     if (gUnknown_203B40C) {
         sub_8052740(10);
@@ -305,11 +316,7 @@ void PrintFieldMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *st
 
     CreateMenuDialogueBoxAndPortrait(str, 0, 0, NULL, NULL, 3, 0, monPortraitPtr, (a2 != FALSE) ? 0x701 : 0x400);
     gDungeon->unk1BDD4.unk1C05F = 1;
-    do {
-        xxx_draw_string_80144C4();
-        sub_803E46C(9);
-        unkPrintRet = sub_80144A4(&unkSpVar);
-    } while (unkPrintRet != 0);
+    PRINT_STRING_WAIT_PRESS(&chosenMenuIndex);
     gDungeon->unk1BDD4.unk1C05F = 0;
 
     if (monPortrait.faceFile != NULL) {
@@ -365,10 +372,9 @@ extern u8 gUnknown_202DFE8[];
 
 void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
 {
-    s32 unkPrintRet;
     struct MonPortraitMsg monPortrait;
-    s32 unkSpVar;
     s32 leaderId, partnerId, dialogueMonId;
+    s32 chosenMenuIndex;
     Entity *leader = xxx_call_GetLeader();
     Entity *partner = GetPartnerEntity();
     struct MonPortraitMsg *monPortraitPtr = NULL;
@@ -462,11 +468,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
     sub_803EAF0(2, 0);
     sub_8052210(0);
     CreateDialogueBoxAndPortrait(dialogueInfo->str, 0, monPortraitPtr, gUnknown_80F7AEA[dialogueInfo->unk0]);
-    do {
-        xxx_draw_string_80144C4();
-        sub_803E46C(9);
-        unkPrintRet = sub_80144A4(&unkSpVar);
-    } while (unkPrintRet != 0);
+    PRINT_STRING_WAIT_PRESS(&chosenMenuIndex);
 
     if (monPortraitPtr != NULL) {
         CloseFile(monPortraitPtr->faceFile);
@@ -478,3 +480,54 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
     }
     sub_803E708(8, 9);
 }
+
+bool32 PrintYesNoFieldMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, bool32 defaultYes)
+{
+    struct MonPortraitMsg monPortrait, *monPortraitPtr;
+    s32 chosenMenuIndex;
+
+    sub_8052740(10);
+    sub_803EAF0(2, 0);
+    sub_8052210(0);
+
+    monPortraitPtr = NULL;
+    monPortrait.faceFile = NULL;
+    monPortrait.faceData = NULL;
+    if (!gDungeon->unk181e8.blinded
+        && !gDungeon->unk181e8.hallucinating
+        && monSpriteInfo != NULL
+        && IsPokemonDialogueSpriteAvail(monSpriteInfo->species, monSpriteInfo->spriteId))
+    {
+        monPortrait.faceFile = GetDialogueSpriteDataPtr(monSpriteInfo->species);
+        monPortrait.faceData = monPortrait.faceFile->data;
+        monPortrait.pos.x = 2;
+        monPortrait.pos.y = 9;
+        monPortrait.spriteId = monSpriteInfo->spriteId;
+        monPortrait.flip = FALSE;
+        monPortrait.unkE = 0;
+        monPortraitPtr = &monPortrait;
+    }
+
+    if (defaultYes == TRUE) {
+        CreateYesNoDialogueBoxAndPortrait_DefaultYes(str, monPortraitPtr, 0x300); // Yes/No - cursor starts at Yes
+    }
+    else {
+        CreateYesNoDialogueBoxAndPortrait_DefaultNo(str, monPortraitPtr, 0x300); // Yes/No - cursor starts at NO
+    }
+
+    PRINT_STRING_WAIT_PRESS(&chosenMenuIndex)
+
+    if (monPortrait.faceFile != NULL) {
+        CloseFile(monPortrait.faceFile);
+    }
+
+    sub_8040238();
+    sub_803EAF0(0, 0);
+
+    if (chosenMenuIndex == 1)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+

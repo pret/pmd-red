@@ -1244,7 +1244,7 @@ _0807F036:
 	ldr r1, [r0]
 	mov r0, sp
 	movs r2, 0x1
-	bl sub_8052B8C
+	bl PrintYesNoFieldMessage
 	cmp r0, 0x1
 	beq _0807F04E
 	b _0807F158
@@ -1440,7 +1440,7 @@ _0807F1CE:
 	ldr r1, [r0]
 	mov r0, sp
 	movs r2, 0x1
-	bl sub_8052B8C
+	bl PrintYesNoFieldMessage
 	cmp r0, 0x1
 	beq _0807F204
 _0807F1E6:

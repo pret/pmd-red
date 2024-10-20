@@ -22,12 +22,14 @@ void sub_80140B4(UnkTextStruct2 *);
 void sub_80140DC(void);
 void sub_8014114(void);
 void CreateDialogueBoxAndPortrait(const u8 *, u32, struct MonPortraitMsg *, u16);
+void CreateYesNoDialogueBoxAndPortrait_DefaultYes(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 param_3);
+void CreateYesNoDialogueBoxAndPortrait_DefaultNo(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 param_3);
 void CreateMenuDialogueBoxAndPortrait(const u8 *, u32, u32, const MenuItem *, void *, u32, u32, struct MonPortraitMsg *, u32);
 s32 sub_80144A4(s32 *);
 void sub_80151C0(u32, u8 *);
 u32 sub_80154F0(void);
 void sub_80155F0(void);
-void xxx_draw_string_80144C4(void);
+void DrawDialogueBoxString(void);
 void PrintFormatStringOnWindow(u32, u32, const u8 *, u32 windowId, u32);
 u8 *xxx_format_string(const u8 *, u8 *, u8 *, u32);
 

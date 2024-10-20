@@ -301,7 +301,7 @@ _0809959A:
 _080995AE:
 	bl sub_809D25C
 	bl sub_80A59DC
-	bl xxx_draw_string_80144C4
+	bl DrawDialogueBoxString
 	movs r0, 0
 	movs r1, 0
 	bl sub_8005838
