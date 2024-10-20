@@ -45,8 +45,8 @@ extern u8 *gUnknown_80FA090[];
 void sub_8068FE0(Entity *, u32, Entity *);
 u8 sub_806B8CC();
 bool8 sub_805FBE8(u8 *a0);
-extern s32 PrintYesNoFieldMessage(u32, const u8 *, u32);
-extern void PrintFieldMessage(u32, const u8 *, u32);
+extern s32 DisplayDungeonYesNoMessage(u32, const u8 *, u32);
+extern void DisplayDungeonMessage(u32, const u8 *, u32);
 void sub_8083D88();
 u8 sub_808529C(s32);
 extern u8 GetBodySize(s16 index);
@@ -749,7 +749,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
     sub_806CE68(entity2, direction);
     CopyCyanMonsterNametoBuffer(gAvailablePokemonNames,param_3->id);
 
-    if (PrintYesNoFieldMessage(0,*gUnknown_80F9FE8,1) == 0) {
+    if (DisplayDungeonYesNoMessage(0,*gUnknown_80F9FE8,1) == 0) {
         if (param_3->id != MONSTER_JIRACHI) {
             SendMessage(entity1,*gUnknown_80FA004);
         }
@@ -811,9 +811,9 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
             else {
                 sub_8083D88();
                 sub_803E708(0xa0,0x46);
-                if (PrintYesNoFieldMessage(0,*gUnknown_80FA090,1) == 1) {
+                if (DisplayDungeonYesNoMessage(0,*gUnknown_80FA090,1) == 1) {
                     while (sub_805FBE8(pokeStruct2->name) == 0) {
-                        PrintFieldMessage(0,*gUnknown_80FA0C8,1);
+                        DisplayDungeonMessage(0,*gUnknown_80FA0C8,1);
                     }
                 }
                 sub_808D9DC(gAvailablePokemonNames,pokeStruct2,0);
@@ -823,7 +823,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
                     SetMessageArgument(gAvailablePokemonNames,leader,0);
                     sub_8092558(gUnknown_202E628,friendArea);
                     PlaySound(0xce);
-                    PrintFieldMessage(0,*gUnknown_80FA120,1);
+                    DisplayDungeonMessage(0,*gUnknown_80FA120,1);
                 }
                 if (param_3->id == MONSTER_MEW) {
                     gDungeon->unk4 = 1;
@@ -1072,9 +1072,9 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
       pokeStruct2->unk0 = 0;
     }
     else {
-      if (PrintYesNoFieldMessage(0,*gUnknown_80FA090,1) == 1) {
+      if (DisplayDungeonYesNoMessage(0,*gUnknown_80FA090,1) == 1) {
         while (!sub_805FBE8(buffer)) {
-          PrintFieldMessage(0,*gUnknown_80FA0C8,1);
+          DisplayDungeonMessage(0,*gUnknown_80FA0C8,1);
         }
       }
       if (flag) {
@@ -1082,7 +1082,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
         SetMessageArgument(gAvailablePokemonNames,leader,0);
         sub_8092558(gUnknown_202E628,friendArea);
         PlaySound(0xce);
-        PrintFieldMessage(0,*gUnknown_80FA120,1);
+        DisplayDungeonMessage(0,*gUnknown_80FA120,1);
       }
       sub_808D9DC(gUnknown_202E088,pokeStruct2,0);
       *entityPtr = local_2c;

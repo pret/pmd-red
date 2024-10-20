@@ -202,7 +202,7 @@ _080728D4:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 _08072902:
 	movs r2, 0x1
 	str r2, [sp, 0xCC]
@@ -387,7 +387,7 @@ _08072A50:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	mov r0, r9
 	mov r1, sp
 	movs r2, 0x1

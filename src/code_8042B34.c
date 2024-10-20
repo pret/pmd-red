@@ -335,7 +335,7 @@ extern void sub_803F27C(u8);
 extern void sub_807E7FC(u8);
 extern void sub_80095CC(u32, u32);
 extern void sub_8081BF4(u8 *r0, u32 r1);
-extern void PrintFieldMessage(u32, const u8 *, u32);
+extern void DisplayDungeonMessage(u32, const u8 *, u32);
 extern bool8 IsLevelResetTo1(u8 dungeon);
 extern u8 sub_8099394(u8 *);
 extern void sub_8068A84(PokemonStruct1 *pokemon);
@@ -516,10 +516,10 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
     if (r9) {
         gFormatData_202DE30 = gDungeon->unk67B;
         if (gFormatData_202DE30 != 0) {
-            PrintFieldMessage(0, gUnknown_80FEC48, 1);
+            DisplayDungeonMessage(0, gUnknown_80FEC48, 1);
         }
         else {
-            PrintFieldMessage(0, gUnknown_80FEC7C, 1);
+            DisplayDungeonMessage(0, gUnknown_80FEC7C, 1);
         }
     }
 
@@ -540,10 +540,10 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             unkStruct_203B480 *mailStr = GetMailatIndex(sp);
             if (mailStr->rescuesAllowed) {
                 gFormatData_202DE30 = mailStr->rescuesAllowed;
-                PrintFieldMessage(0, gUnknown_81002B8, 1);
+                DisplayDungeonMessage(0, gUnknown_81002B8, 1);
             }
             else {
-                PrintFieldMessage(0, gPtrFinalChanceMessage, 1);
+                DisplayDungeonMessage(0, gPtrFinalChanceMessage, 1);
             }
         }
     }
@@ -820,7 +820,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         gDungeon->unk181e8.unk18218 = 1;
         if ((gDungeon->unk10 == 2 || gDungeon->unk10 == 3) && gDungeon->unk6 != 0) {
             leader = GetLeader();
-            PrintFieldMessage(0, gPtrClientFaintedMessage, 1);
+            DisplayDungeonMessage(0, gPtrClientFaintedMessage, 1);
             gDungeon->unk6 = 0;
             sub_8083AB0(0x222, leader, leader);
         }
@@ -1089,7 +1089,7 @@ bool8 sub_8043ED0(bool8 a0)
         if (EntityExists(leader)) {
             if (!a0) {
                 strcpy(gAvailablePokemonNames, gDungeon->faintStringBuffer);
-                PrintFieldMessage(0, gUnknown_80F89B4, 1);
+                DisplayDungeonMessage(0, gUnknown_80F89B4, 1);
             }
             sub_8042B0C(leader);
             sub_8068FE0(leader, 0x21F, leader);
@@ -1101,7 +1101,7 @@ bool8 sub_8043ED0(bool8 a0)
         if (EntityExists(leader)) {
             if (!a0) {
                 strcpy(gAvailablePokemonNames, gDungeon->faintStringBuffer);
-                PrintFieldMessage(0, gUnknown_80F89D4, 1);
+                DisplayDungeonMessage(0, gUnknown_80F89D4, 1);
             }
             sub_8042B0C(leader);
             sub_8068FE0(leader, 0x222, leader);
@@ -1113,7 +1113,7 @@ bool8 sub_8043ED0(bool8 a0)
         if (EntityExists(leader)) {
             if (!a0) {
                 strcpy(gAvailablePokemonNames, gDungeon->faintStringBuffer);
-                PrintFieldMessage(0, gUnknown_80F89D8, 1);
+                DisplayDungeonMessage(0, gUnknown_80F89D8, 1);
             }
             sub_8042B0C(leader);
             sub_8068FE0(leader, 0x222, leader);

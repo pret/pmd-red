@@ -5,109 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8052C68
-sub_8052C68:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x28
-	adds r4, r0, 0
-	adds r7, r1, 0
-	mov r8, r2
-	lsls r3, 16
-	lsrs r6, r3, 16
-	movs r0, 0xA
-	bl sub_8052740
-	movs r0, 0x2
-	movs r1, 0
-	bl sub_803EAF0
-	movs r0, 0
-	bl sub_8052210
-	movs r5, 0
-	str r5, [sp, 0x14]
-	str r5, [sp, 0x18]
-	ldr r0, _08052D3C
-	ldr r1, [r0]
-	ldr r2, _08052D40
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _08052CE6
-	adds r2, 0x6
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _08052CE6
-	cmp r4, 0
-	beq _08052CE6
-	movs r1, 0
-	ldrsh r0, [r4, r1]
-	ldrb r1, [r4, 0x2]
-	bl IsPokemonDialogueSpriteAvail
-	lsls r0, 24
-	cmp r0, 0
-	beq _08052CE6
-	movs r2, 0
-	ldrsh r0, [r4, r2]
-	bl GetDialogueSpriteDataPtr
-	str r0, [sp, 0x14]
-	ldr r0, [r0, 0x4]
-	str r0, [sp, 0x18]
-	add r1, sp, 0x14
-	movs r2, 0
-	movs r0, 0x2
-	strh r0, [r1, 0x8]
-	movs r0, 0x9
-	strh r0, [r1, 0xA]
-	ldrb r0, [r4, 0x2]
-	strb r0, [r1, 0xC]
-	adds r0, r1, 0
-	strb r2, [r0, 0xD]
-	strb r2, [r0, 0xE]
-	adds r5, r0, 0
-_08052CE6:
-	movs r2, 0x1
-	negs r2, r2
-	movs r1, 0
-	str r1, [sp]
-	movs r0, 0x3
-	str r0, [sp, 0x4]
-	str r1, [sp, 0x8]
-	str r5, [sp, 0xC]
-	str r6, [sp, 0x10]
-	adds r0, r7, 0
-	mov r3, r8
-	bl CreateMenuDialogueBoxAndPortrait
-	add r4, sp, 0x24
-_08052D02:
-	bl DrawDialogueBoxString
-	movs r0, 0x9
-	bl sub_803E46C
-	adds r0, r4, 0
-	bl sub_80144A4
-	cmp r0, 0
-	bne _08052D02
-	ldr r0, [sp, 0x14]
-	cmp r0, 0
-	beq _08052D20
-	bl CloseFile
-_08052D20:
-	bl sub_8040238
-	movs r0, 0
-	movs r1, 0
-	bl sub_803EAF0
-	ldr r0, [sp, 0x24]
-	add sp, 0x28
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08052D3C: .4byte gDungeon
-_08052D40: .4byte 0x0001820a
-	thumb_func_end sub_8052C68
-
 	thumb_func_start sub_8052D44
 sub_8052D44:
 	push {r4-r7,lr}
@@ -240,7 +137,7 @@ _08052E46:
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_80522E8
@@ -269,7 +166,7 @@ _08052E88:
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_80522E8
@@ -349,7 +246,7 @@ _08052F22:
 	ldr r1, [r5, 0x4]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	b _08052F74
 	.align 2, 0
 _08052F48: .4byte gSleepSeedTutorial
@@ -369,7 +266,7 @@ _08052F4C:
 	ldr r1, [r5, 0x4]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 _08052F74:
 	pop {r4,r5}
 	pop {r0}
@@ -390,7 +287,7 @@ sub_8052F80:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	b _08052FB0
 	.align 2, 0
 _08052F9C: .4byte gDungeon
@@ -400,7 +297,7 @@ _08052FA4:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 _08052FB0:
 	pop {r0}
 	bx r0

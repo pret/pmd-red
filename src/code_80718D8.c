@@ -64,7 +64,7 @@ bool8 sub_80723D0(Entity *, Entity *, u8, u8);
 void sub_807218C(Entity *);
 void sub_806A2BC(Entity *, u32);
 void sub_806A3D4(u8 *, s32, s32, s32);
-extern void PrintFieldMessage(u32, u8 *, u32);
+extern void DisplayDungeonMessage(u32, u8 *, u32);
 extern Entity* sub_806B7F8(struct unkStruct_806B7F8 *, bool8);
 extern void sub_805239C(struct Entity *r0, const char r1[]);
 extern void sub_8042920(struct Entity *r0);
@@ -603,7 +603,7 @@ void sub_807218C(Entity *pokemon)
     {
         strcpy(buffer, *gUnknown_80FCF18);
     }
-    PrintFieldMessage(0, buffer, 1);
+    DisplayDungeonMessage(0, buffer, 1);
     buffer[0] = 0;
 
 
@@ -642,7 +642,7 @@ void sub_807218C(Entity *pokemon)
     }
 
     if(buffer[0])
-        PrintFieldMessage(0, buffer, 1);
+        DisplayDungeonMessage(0, buffer, 1);
 
     sub_806A2BC(GetLeader(), 0);
 }

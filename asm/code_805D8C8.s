@@ -4914,7 +4914,7 @@ _0806414E:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0
-	bl PrintYesNoFieldMessage
+	bl DisplayDungeonYesNoMessage
 	adds r3, r0, 0
 	b _08064162
 	.align 2, 0
@@ -6817,7 +6817,7 @@ _08065062:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintYesNoFieldMessage
+	bl DisplayDungeonYesNoMessage
 	cmp r0, 0x1
 	bne _08065088
 	ldr r0, _08065094
@@ -6846,7 +6846,7 @@ sub_806509C:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0
-	bl PrintYesNoFieldMessage
+	bl DisplayDungeonYesNoMessage
 	cmp r0, 0x1
 	bne _080650B8
 	movs r0, 0
@@ -7001,7 +7001,7 @@ sub_80651D0:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0
-	bl PrintYesNoFieldMessage
+	bl DisplayDungeonYesNoMessage
 	cmp r0, 0x1
 	bne _080651F4
 	bl GetLeaderActionContainer
@@ -7025,7 +7025,7 @@ sub_80651FC:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0
-	bl PrintYesNoFieldMessage
+	bl DisplayDungeonYesNoMessage
 	adds r5, r0, 0
 	cmp r5, 0x1
 	bne _08065248
@@ -8730,7 +8730,7 @@ _08065FFE:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	b _08066194
 	.align 2, 0
 _0806600C: .4byte 0x0000065d

@@ -100,11 +100,11 @@ extern void sub_8063CF0(ActionContainer *, u32);
 extern void sub_8063A70(ActionContainer *, u32);
 extern u8 sub_8062F90(Entity *, u32, u32, u32, u32);
 extern void sub_8044DF0(Entity *, u32, u32);
-extern s32 PrintYesNoFieldMessage(u32, u8 *, u32);
+extern s32 DisplayDungeonYesNoMessage(u32, u8 *, u32);
 extern void sub_803EAF0(u32, u32);
 extern void sub_8044C10(bool8);
 Entity *DrawFieldGiveItemMenu(u32, u32);
-extern void PrintFieldMessage(u32, u8 *, u32);
+extern void DisplayDungeonMessage(u32, u8 *, u32);
 extern void sub_8044E24(Entity *, u32, u32);
 extern void sub_804245C(Entity *, Item *);
 extern u8 sub_8072938(Entity *, u16);
@@ -819,11 +819,11 @@ bool8 sub_8048950(Entity *param_1,Item *item)
 
     moveID = GetItemMoveID(item->id);
     if ((item->flags & ITEM_FLAG_STICKY)) {
-        PrintFieldMessage(0,*gItemStickyDoesntWorkText,1);
+        DisplayDungeonMessage(0,*gItemStickyDoesntWorkText,1);
         return FALSE;
     }
     else if (IsHMItem(item->id)) {
-        PrintFieldMessage(0,*gPtrCantUseInDungeonMessage,1);
+        DisplayDungeonMessage(0,*gPtrCantUseInDungeonMessage,1);
         return FALSE;
     }
     else
@@ -870,13 +870,13 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
   PokemonStruct2 *pokemon;
 
   if ((item->flags & ITEM_FLAG_STICKY)) {
-    PrintFieldMessage(0,*gItemStickyDoesntWorkText,1);
+    DisplayDungeonMessage(0,*gItemStickyDoesntWorkText,1);
     return FALSE;
   }
   else
   {
     if (gDungeon->unk65C == 0) {
-        PrintFieldMessage(0,*gUnknown_80F9BD8,1);
+        DisplayDungeonMessage(0,*gUnknown_80F9BD8,1);
         return FALSE;
     }
     else
@@ -946,7 +946,7 @@ bool32 sub_8048B9C(Entity *entity,Item *param_2)
   entityInfo = entity->info;
   actionPointer = &(entityInfo->action);
   if ((param_2->flags & ITEM_FLAG_STICKY)) {
-      PrintFieldMessage(0,*gItemStickyDoesntWorkText,1);
+      DisplayDungeonMessage(0,*gItemStickyDoesntWorkText,1);
       return FALSE;
   }
   else
@@ -1011,7 +1011,7 @@ _clear:
         if (sub_8062F90(entity2,1,0,0,1) != 0) {
           if (bVar2)
           {
-              if (PrintYesNoFieldMessage(0,*gUnknown_80FECA0,1) == 1) {
+              if (DisplayDungeonYesNoMessage(0,*gUnknown_80FECA0,1) == 1) {
                 *actionPointer = actionContainer;
                 sub_8044DF0(entity,0,0x6e);
                 SetMonsterActionFields(actionPointer,0x2c);

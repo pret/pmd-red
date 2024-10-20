@@ -1109,14 +1109,14 @@ _08067708:
 	mov r1, sp
 _08067716:
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	b _0806772A
 _0806771E:
 	ldr r0, _08067738
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 _0806772A:
 	add sp, 0x12C
 	pop {r3,r4}
@@ -1190,7 +1190,7 @@ sub_8067794:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	b _0806786C
 	.align 2, 0
 _080677B0: .4byte gCannotFarewell
@@ -1257,7 +1257,7 @@ _08067834:
 	movs r0, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl PrintYesNoFieldMessage
+	bl DisplayDungeonYesNoMessage
 	cmp r0, 0x1
 	bne _0806786C
 	ldr r4, _0806787C
@@ -1276,7 +1276,7 @@ _08067834:
 	movs r0, 0
 	adds r1, r6, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 _0806786C:
 	add sp, 0x40
 	pop {r4-r7}
@@ -1869,7 +1869,7 @@ _08067D20:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintYesNoFieldMessage
+	bl DisplayDungeonYesNoMessage
 	cmp r0, 0x1
 	bne _08067D32
 	b _08067ED8

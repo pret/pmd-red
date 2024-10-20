@@ -284,7 +284,7 @@ extern void sub_8040238(void);
     } while (unkPrintRet != 0);             \
 }
 
-void PrintFieldMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, bool8 a2)
+void DisplayDungeonMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, bool8 a2)
 {
     struct MonPortraitMsg monPortrait, *monPortraitPtr;
     s32 chosenMenuIndex;
@@ -339,7 +339,7 @@ void PrintFieldMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *st
 
 void sub_80528F4(Entity *a0, const u8 *str)
 {
-    PrintFieldMessage(NULL, str, TRUE);
+    DisplayDungeonMessage(NULL, str, TRUE);
     sub_80522E8(a0, str);
 }
 
@@ -481,7 +481,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
     sub_803E708(8, 9);
 }
 
-bool32 PrintYesNoFieldMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, bool32 defaultYes)
+bool32 DisplayDungeonYesNoMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, bool32 defaultYes)
 {
     struct MonPortraitMsg monPortrait, *monPortraitPtr;
     s32 chosenMenuIndex;
@@ -515,7 +515,7 @@ bool32 PrintYesNoFieldMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
         CreateYesNoDialogueBoxAndPortrait_DefaultNo(str, monPortraitPtr, 0x300); // Yes/No - cursor starts at NO
     }
 
-    PRINT_STRING_WAIT_PRESS(&chosenMenuIndex)
+    PRINT_STRING_WAIT_PRESS(&chosenMenuIndex);
 
     if (monPortrait.faceFile != NULL) {
         CloseFile(monPortrait.faceFile);
@@ -530,4 +530,41 @@ bool32 PrintYesNoFieldMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
         return FALSE;
 }
 
+s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, const MenuItem *menuItems, u16 unkArg)
+{
+    struct MonPortraitMsg monPortrait, *monPortraitPtr;
+    s32 chosenMenuIndex;
 
+    sub_8052740(10);
+    sub_803EAF0(2, 0);
+    sub_8052210(0);
+
+    monPortraitPtr = NULL;
+    monPortrait.faceFile = NULL;
+    monPortrait.faceData = NULL;
+    if (!gDungeon->unk181e8.blinded
+        && !gDungeon->unk181e8.hallucinating
+        && monSpriteInfo != NULL
+        && IsPokemonDialogueSpriteAvail(monSpriteInfo->species, monSpriteInfo->spriteId))
+    {
+        monPortrait.faceFile = GetDialogueSpriteDataPtr(monSpriteInfo->species);
+        monPortrait.faceData = monPortrait.faceFile->data;
+        monPortrait.pos.x = 2;
+        monPortrait.pos.y = 9;
+        monPortrait.spriteId = monSpriteInfo->spriteId;
+        monPortrait.flip = FALSE;
+        monPortrait.unkE = 0;
+        monPortraitPtr = &monPortrait;
+    }
+
+    CreateMenuDialogueBoxAndPortrait(str, 0, -1, menuItems, NULL, 3, 0, monPortraitPtr, unkArg);
+    PRINT_STRING_WAIT_PRESS(&chosenMenuIndex);
+
+    if (monPortrait.faceFile != NULL) {
+        CloseFile(monPortrait.faceFile);
+    }
+
+    sub_8040238();
+    sub_803EAF0(0, 0);
+    return chosenMenuIndex;
+}

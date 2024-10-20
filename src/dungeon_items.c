@@ -20,8 +20,8 @@ extern u8 *gUnknown_8105360[];
 extern u8 *gUnknown_81053A8[];
 extern u8 *gUnknown_8105434[];
 
-extern s32 PrintYesNoFieldMessage(u32, u8 *, u32);
-extern void PrintFieldMessage(u32, u8 *, u32);
+extern s32 DisplayDungeonYesNoMessage(u32, u8 *, u32);
+extern void DisplayDungeonMessage(u32, u8 *, u32);
 extern void sub_80416E0(Position32 *r0, u32, bool8);
 extern void sub_80421C0(Entity *, u32);
 extern void sub_80855E4(void *);
@@ -75,7 +75,7 @@ void sub_8046D20(void)
   cVar1 = gDungeon->unk8;
   gDungeon->unk8 = sub_8046D70();
   if (((gDungeon->unk8 == 1) && (cVar1 == 0)) &&
-     (PrintYesNoFieldMessage(0, *gUnknown_80FA408, 1) == 1)) {
+     (DisplayDungeonYesNoMessage(0, *gUnknown_80FA408, 1) == 1)) {
     gDungeon->unk4 = 1;
     gDungeon->unk11 = 2;
   }
@@ -145,18 +145,18 @@ void MusicBoxCreation(void)
     entity = GetLeader();
     sub_80855E4(sub_80861A8);
     gDungeon->unk1356C = 1;
-    PrintFieldMessage(0,*gUnknown_810531C,1);
+    DisplayDungeonMessage(0,*gUnknown_810531C,1);
     sub_803E708(0x3c,0x41);
-    PrintFieldMessage(0,*gUnknown_8105360,1);
+    DisplayDungeonMessage(0,*gUnknown_8105360,1);
     sub_80869E4(entity,4,10,0);
     sub_80416E0(&entity->pixelPos,0x10c,FALSE);
     sub_80421C0(entity,0xd7);
     sub_803E708(0x3c,0x41);
     SetMessageArgument(gAvailablePokemonNames,entity,0);
-    PrintFieldMessage(0,*gUnknown_81053A8,1);
+    DisplayDungeonMessage(0,*gUnknown_81053A8,1);
     sub_803E708(10,0x41);
     PlaySoundEffect(0xd4);
-    PrintFieldMessage(0,*gUnknown_8105434,1);
+    DisplayDungeonMessage(0,*gUnknown_8105434,1);
     sub_803E708(10,0x41);
     sub_804178C(1);
     gDungeon->unk1356C = 0;

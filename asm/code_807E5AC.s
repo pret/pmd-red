@@ -856,7 +856,7 @@ _0807ED3A:
 	ldr r1, [r0]
 	mov r0, sp
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	b _0807EF32
 	.align 2, 0
 _0807ED48: .4byte gDungeon
@@ -1100,7 +1100,7 @@ _0807EF04:
 	ldr r1, [r0]
 	mov r0, sp
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 _0807EF32:
 	add sp, 0x1C
 	pop {r3-r5}
@@ -1180,7 +1180,7 @@ sub_807EF84:
 	ldr r1, [r0]
 	mov r0, sp
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	b _0807EFEE
 	.align 2, 0
 _0807EFD0: .4byte 0xffff0000
@@ -1194,7 +1194,7 @@ _0807EFE2:
 	ldr r1, [r0]
 	mov r0, sp
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 _0807EFEE:
 	add sp, 0x4
 	pop {r4}
@@ -1244,7 +1244,7 @@ _0807F036:
 	ldr r1, [r0]
 	mov r0, sp
 	movs r2, 0x1
-	bl PrintYesNoFieldMessage
+	bl DisplayDungeonYesNoMessage
 	cmp r0, 0x1
 	beq _0807F04E
 	b _0807F158
@@ -1378,7 +1378,7 @@ _0807F134:
 	ldr r1, [r0]
 	mov r0, sp
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 _0807F158:
 	add sp, 0x10
 	pop {r3-r5}
@@ -1440,7 +1440,7 @@ _0807F1CE:
 	ldr r1, [r0]
 	mov r0, sp
 	movs r2, 0x1
-	bl PrintYesNoFieldMessage
+	bl DisplayDungeonYesNoMessage
 	cmp r0, 0x1
 	beq _0807F204
 _0807F1E6:
@@ -1466,7 +1466,7 @@ _0807F204:
 	ldr r1, [r0]
 	mov r0, sp
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	movs r0, 0x2
 	b _0807F31C
 	.align 2, 0
@@ -1588,7 +1588,7 @@ _0807F2F8:
 	ldr r1, [r0]
 	mov r0, sp
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 _0807F31A:
 	movs r0, 0
 _0807F31C:

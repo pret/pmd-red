@@ -55,7 +55,7 @@ struct UnkMenuBitsStruct {
     u8 a0_32;
 };
 
-extern void PrintFieldMessage(u32, const u8 *, u32);
+extern void DisplayDungeonMessage(u32, const u8 *, u32);
 extern void HandleSetItemAction(Entity *,bool8);
 extern void HandleUnsetItemAction(Entity *,bool8);
 extern bool8 sub_8048A68(Entity *param_1,Item *item);
@@ -70,7 +70,7 @@ extern void sub_806A6E8(Entity *);
 extern bool8 sub_8047084(s32 itemFlag);
 extern void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4);
 extern void sub_8045DB4(Position *, u32);
-extern s32 PrintYesNoFieldMessage(u32, const u8 *, u32);
+extern s32 DisplayDungeonYesNoMessage(u32, const u8 *, u32);
 bool8 sub_807EF48(void);
 void sub_806A2BC(Entity *a0, u8 a1);
 bool8 sub_805E874(void);
@@ -2663,7 +2663,7 @@ bool8 sub_805EC4C(Entity *a0, u8 a1)
     if (IsChargingAnyTwoTurnMove(tileMonster, FALSE)) return FALSE;
     if (!sub_8070F80(a0, entityInfo->action.direction)) return FALSE;
 
-    if (a1 != 0 && sub_807049C(tileMonster, &a0->pos) && !PrintYesNoFieldMessage(0, gUnknown_8100208, 0)) return FALSE;
+    if (a1 != 0 && sub_807049C(tileMonster, &a0->pos) && !DisplayDungeonYesNoMessage(0, gUnknown_8100208, 0)) return FALSE;
 
     SetMonsterActionFields(&entityInfo->action, ACTION_WALK);
     if (gRealInputs.held & B_BUTTON) {
@@ -3200,7 +3200,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
                 }
                 else {
                     SetMessageArgument(gAvailablePokemonNames, GetLeader(), 0);
-                    PrintFieldMessage(0, gUnknown_80FDE18, 1);
+                    DisplayDungeonMessage(0, gUnknown_80FDE18, 1);
                 }
             }
             r10 = -1;
@@ -3516,7 +3516,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
 
     gUnknown_202F258 = sub_8060D64(gUnknown_202F248, var_30, var_34, var_28, a0);
     if (gUnknown_202F258 == 0) {
-        PrintFieldMessage(0, gUnknown_80F8B24, 1);
+        DisplayDungeonMessage(0, gUnknown_80F8B24, 1);
         return TRUE;
     }
 
