@@ -163,46 +163,23 @@ bool8 sub_8098134(s16 pokeID)
     return ((ptr->unk4[(index >> 5)] & (1 << (s16)(pokeID_s32_1 - ((index >> 5) * 0x20)))) != 0) ? TRUE : FALSE;
 }
 
-void SetTutorialFlag(s32 param_1)
+void SetTutorialFlag(s32 index)
 {
-  s32 index;
-  struct ExclusivePokemonData *ptr;
-
-    ptr =  gUnknown_203B498;
-    if (param_1 < 0) {
-        index = param_1 + 0x1f;
-    }
-    else
-    {
-        index = param_1;
-    }
-    ptr->unk54[(index >> 5)] |= 1 << (param_1 - ((index >> 5) * 0x20));
+    gUnknown_203B498->unk54[(index / 32)] |= (1 << (index - ((index / 32) * 32)));
 }
 
-bool32 GetTutorialFlag(s32 param_1)
+bool32 GetTutorialFlag(s32 index)
 {
-  s32 index;
-  bool32 flag;
-  struct ExclusivePokemonData *ptr;
-
-  if (param_1 > 0x1e) {
-    return FALSE;
-  }
-  else {
-    ptr =  gUnknown_203B498;
-    if (param_1 < 0) {
-        index = param_1 + 0x1f;
+    if (index > 0x1e) {
+        return FALSE;
     }
-    else
-    {
-        index = param_1;
+    else {
+        bool32 flag = gUnknown_203B498->unk54[(index / 32)] & (1 << (index - ((index / 32) * 32)));
+        if (flag != 0) {
+            flag = TRUE;
+        }
+        return flag;
     }
-    flag = ptr->unk54[(index >> 5)] & 1 << (param_1 - ((index >> 5) * 0x20));
-    if (flag != 0) {
-      flag = TRUE;
-    }
-    return flag;
-  }
 }
 
 bool8 IsExclusivePokemonUnlocked(s16 pokeID)

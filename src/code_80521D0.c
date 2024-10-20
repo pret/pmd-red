@@ -12,6 +12,10 @@
 #include "file_system.h"
 #include "dungeon_util_1.h"
 #include "code_800D090.h"
+#include "dungeon_util.h"
+#include "code_8045A00.h"
+#include "exclusive_pokemon.h"
+#include "dungeon_leader.h"
 
 void sub_80526D0(s32 r0);
 extern bool8 sub_8045888(Entity *r0);
@@ -567,4 +571,131 @@ s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
     sub_8040238();
     sub_803EAF0(0, 0);
     return chosenMenuIndex;
+}
+
+void sub_8052D44(s16 *ids, Entity *leader, Entity *partner)
+{
+    if (EntityExists(leader)) {
+        SetMessageArgument(gAvailablePokemonNames, leader, 0);
+        ids[0] = GetEntInfo(leader)->apparentID;
+    }
+    else {
+        strcpy(gAvailablePokemonNames, gUnknown_80F7AF8);
+        ids[0] = 0;
+    }
+
+    if (EntityExists(partner)) {
+        SetMessageArgument(gUnknown_202DFE8, partner, 0);
+        ids[1] = GetEntInfo(partner)->apparentID;
+    }
+    else {
+        strcpy(gUnknown_202DFE8, gUnknown_80F7AF8);
+        ids[1] = 0;
+    }
+}
+
+bool8 sub_8052DC0(Entity *entity)
+{
+    return sub_8045888(entity);
+}
+
+struct TutorialFlagMsg
+{
+    s32 flagId;
+    const u8 *str;
+};
+
+extern const struct TutorialFlagMsg gUnknown_80FF020;
+extern const struct TutorialFlagMsg gUnknown_80FF080;
+extern const struct TutorialFlagMsg gUnknown_80FF0D8;
+extern const struct TutorialFlagMsg gUnknown_80FF13C;
+extern const struct TutorialFlagMsg gUnknown_80FF1B4;
+extern const struct TutorialFlagMsg gMovementTutorial;
+extern const struct TutorialFlagMsg gHungerTutorial;
+extern const struct TutorialFlagMsg gFoodTutorial;
+extern const struct TutorialFlagMsg gOranTutorial;
+extern const struct TutorialFlagMsg gCheriTutorial;
+extern const struct TutorialFlagMsg gBlastSeedTutorial;
+extern const struct TutorialFlagMsg gUnknown_80FF4A0;
+extern const struct TutorialFlagMsg gPechaTutorial;
+extern const struct TutorialFlagMsg gSleepSeedTutorial;
+extern const struct TutorialFlagMsg gMoneyTutorial;
+
+extern void sub_8083E28(void);
+
+static inline bool32 DislayTutorialMsg(Entity *leader, const struct TutorialFlagMsg *tutorial, bool32 unkFunctionCall)
+{
+    const u8 *str;
+    s32 flag = tutorial->flagId;
+    bool8 flagDone = GetTutorialFlag(flag);
+
+    if (!flagDone) {
+        SetTutorialFlag(flag);
+        sub_8083E28();
+        str = tutorial->str;
+        DisplayDungeonMessage(NULL, str, TRUE);
+        if (unkFunctionCall) {
+            sub_80522E8(leader, str);
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_8052DD0(void)
+{
+    Entity *leader = GetLeader();
+
+    if (DislayTutorialMsg(leader, &gUnknown_80FF020, TRUE)) return;
+    if (DislayTutorialMsg(leader, &gUnknown_80FF080, TRUE)) return;
+    if (DislayTutorialMsg(leader, &gUnknown_80FF0D8, TRUE)) return;
+    if (gDungeon->dungeonLocation.id == DUNGEON_THUNDERWAVE_CAVE) {
+        if (DislayTutorialMsg(leader, &gUnknown_80FF13C, TRUE)) return;
+        if (DislayTutorialMsg(leader, &gUnknown_80FF1B4, TRUE)) return;
+        if (DislayTutorialMsg(leader, &gMovementTutorial, TRUE)) return;
+        if (DislayTutorialMsg(leader, &gHungerTutorial, TRUE)) return;
+    }
+}
+
+void HandleOnPickupTutorial(u8 itemId)
+{
+    u8 itemCategory = GetItemCategory(itemId);
+
+    if (itemCategory == CATEGORY_FOOD_GUMMIES) {
+        DislayTutorialMsg(NULL, &gFoodTutorial, FALSE);
+    }
+    else if (itemId == ITEM_ORAN_BERRY) {
+        DislayTutorialMsg(NULL, &gOranTutorial, FALSE);
+    }
+    else if (itemId == ITEM_CHERI_BERRY) {
+        DislayTutorialMsg(NULL, &gCheriTutorial, FALSE);
+    }
+    else if (itemId == ITEM_BLAST_SEED) {
+        DislayTutorialMsg(NULL, &gBlastSeedTutorial, FALSE);
+    }
+    else if (itemId == ITEM_GRAVELEROCK) {
+        DislayTutorialMsg(NULL, &gUnknown_80FF4A0, FALSE);
+    }
+    else if (itemId == ITEM_PECHA_BERRY) {
+        DislayTutorialMsg(NULL, &gPechaTutorial, FALSE);
+    }
+    else if (itemId == ITEM_SLEEP_SEED) {
+        DislayTutorialMsg(NULL, &gSleepSeedTutorial, FALSE);
+    }
+    else if (itemId == ITEM_POKE) {
+        DislayTutorialMsg(NULL, &gMoneyTutorial, FALSE);
+    }
+}
+
+extern const u8 *const gUnknown_80FF6F8;
+extern const u8 *const gUnknown_80FF6A4;
+
+void DisplayYouReachedDestFloorStr(void)
+{
+    if (gDungeon->unkA != 0) {
+        DisplayDungeonMessage(NULL, gUnknown_80FF6F8, 1); // But the pokemon you seek isn't here...
+    }
+    else {
+        DisplayDungeonMessage(NULL, gUnknown_80FF6A4, 1);
+    }
 }

@@ -321,7 +321,7 @@ extern void DisplayPreFightDialogue(void);
 extern void sub_8071DA4(Entity *);
 extern void sub_803E748(void);
 extern void sub_8083D68(void);
-extern void sub_8052F80(void);
+extern void DisplayYouReachedDestFloorStr(void);
 extern void sub_803E7C8(void);
 extern void sub_8040A84(void);
 extern void sub_807E5AC(void);
@@ -723,7 +723,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             if (gDungeon->unk9 != 0) {
                 gDungeon->unk9 = 0;
                 sub_8083D68();
-                sub_8052F80();
+                DisplayYouReachedDestFloorStr();
             }
         }
         gLeaderPointer = NULL;
