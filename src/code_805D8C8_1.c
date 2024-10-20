@@ -313,7 +313,7 @@ void DungeonHandlePlayerInput(void)
                         SendMessage(leader, gUnknown_80F8A4C);
                     }
                     else {
-                        SetMonsterActionFields(&leaderInfo->action, 0x14);
+                        SetMonsterActionFields(&leaderInfo->action, ACTION_USE_MOVE_PLAYER);
                         leaderInfo->action.unk4[0].actionUseIndex = GetTeamMemberEntityIndex(leader);
                         leaderInfo->action.unk4[1].actionUseIndex = i;
                     }
