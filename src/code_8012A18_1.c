@@ -26,6 +26,37 @@ struct unkStruct_203B1FC
 
 extern struct unkStruct_203B1FC *gUnknown_203B1FC;
 
+// https://decomp.me/scratch/6BUMI - Seth
+s32 sub_8015F44(void) 
+{
+
+#ifndef NONMATCHING
+    register s32 index asm("r2");
+#else
+    s32 index;
+#endif
+    s32 counter;
+    index = 0;
+
+    if(index < gUnknown_203B1FC->unk1B)
+    {
+        if(gUnknown_203B1FC->unkF8[0] == '\0') 
+            return index;
+        index = 1;
+        counter = 1;
+        while (1) {
+
+            if(counter >= gUnknown_203B1FC->unk1B)
+                return index;
+            if(gUnknown_203B1FC->unkF8[counter] == '\0')
+                return index;
+            index = counter + 1;
+            counter = index;
+        }
+    }
+    return index;
+}
+
 void sub_8015F84(void)
 {
     u32 uVar2;
