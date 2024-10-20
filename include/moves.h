@@ -22,7 +22,7 @@ typedef struct MoveDataFile
 } MoveDataFile;
 
 bool8 CanBeSnatched(u16 moveID);
-void CopyAndResetMoves(Move *destMoves, Move *srcMoves);
+void CopyAndResetMoves(Moves *destMoves, Move *srcMoves);
 void CopyBareMoveData(Move *destMoves, Move *srcMoves);
 bool8 DoesMoveCharge(u16 move);
 bool8 FailsWhileMuzzled(u16 moveID);
@@ -92,6 +92,16 @@ void sub_80941FC(struct unkStruct_8094924 *, struct Moves *);
 static inline bool8 MoveFlagExists(Move *move)
 {
     return (move->moveFlags & MOVE_FLAG_EXISTS);
+}
+
+static inline bool8 MoveFlagSet(Move *move)
+{
+    return (move->moveFlags & MOVE_FLAG_SET);
+}
+
+static inline bool8 MoveFlagLastUsed(Move *move)
+{
+    return (move->moveFlags & MOVE_FLAG_LAST_USED);
 }
 
 static inline bool8 MoveFlagLinkChain(Move *move)

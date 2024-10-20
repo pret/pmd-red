@@ -508,14 +508,11 @@ void RaiseAtkStatTarget(Entity * pokemon, Entity *target, s32 increment)
   u32 oldStat1;
   s32 newStat;
   EntityInfo *entityInfo;
-  EntityInfo *entityInfo1;
 
   if (EntityExists(target)) {
     SetMessageArgument(gAvailablePokemonNames,target,0);
 
-    // NOTE: had to have duplicates to match..
-    entityInfo = target->info;
-    entityInfo1 = entityInfo;
+    entityInfo = GetEntInfo(target);
     oldStat = entityInfo->atk;
     oldStat1 = oldStat;
 
@@ -523,7 +520,7 @@ void RaiseAtkStatTarget(Entity * pokemon, Entity *target, s32 increment)
     if (0xfe < newStat) {
       newStat = 0xff;
     }
-    entityInfo1->atk = newStat;
+    entityInfo->atk = newStat;
     if (oldStat1 < (u8)newStat) {
       sub_8041E60(target);
       sub_80522F4(pokemon,target,*gUnknown_80FC33C);
@@ -541,14 +538,11 @@ void RaiseSpAtkStatTarget(Entity * pokemon, Entity *target, s32 increment)
   u32 oldStat1;
   s32 newStat;
   EntityInfo *entityInfo;
-  EntityInfo *entityInfo1;
 
   if (EntityExists(target)) {
     SetMessageArgument(gAvailablePokemonNames,target,0);
 
-    // NOTE: had to have duplicates to match..
-    entityInfo = target->info;
-    entityInfo1 = entityInfo;
+    entityInfo = GetEntInfo(target);
     oldStat = entityInfo->spAtk;
     oldStat1 = oldStat;
 
@@ -556,7 +550,7 @@ void RaiseSpAtkStatTarget(Entity * pokemon, Entity *target, s32 increment)
     if (0xfe < newStat) {
       newStat = 0xff;
     }
-    entityInfo1->spAtk = newStat;
+    entityInfo->spAtk = newStat;
     if (oldStat1 < (u8)newStat) {
       sub_8041E74(target);
       sub_80522F4(pokemon,target,*gUnknown_80FC388);
@@ -574,14 +568,11 @@ void RaiseDefStatTarget(Entity * pokemon, Entity *target, s32 increment)
   u32 oldStat1;
   s32 newStat;
   EntityInfo *entityInfo;
-  EntityInfo *entityInfo1;
 
   if (EntityExists(target)) {
     SetMessageArgument(gAvailablePokemonNames,target,0);
 
-    // NOTE: had to have duplicates to match..
-    entityInfo = target->info;
-    entityInfo1 = entityInfo;
+    entityInfo = GetEntInfo(target);
     oldStat = entityInfo->def;
     oldStat1 = oldStat;
 
@@ -589,7 +580,7 @@ void RaiseDefStatTarget(Entity * pokemon, Entity *target, s32 increment)
     if (0xfe < newStat) {
       newStat = 0xff;
     }
-    entityInfo1->def = newStat;
+    entityInfo->def = newStat;
     if (oldStat1 < (u8)newStat) {
       sub_8041E84(target);
       sub_80522F4(pokemon,target,*gUnknown_80FC3D8);
@@ -607,14 +598,11 @@ void RaiseSpDefStatTarget(Entity * pokemon, Entity *target, s32 increment)
   u32 oldStat1;
   s32 newStat;
   EntityInfo *entityInfo;
-  EntityInfo *entityInfo1;
 
   if (EntityExists(target)) {
     SetMessageArgument(gAvailablePokemonNames,target,0);
 
-    // NOTE: had to have duplicates to match..
-    entityInfo = target->info;
-    entityInfo1 = entityInfo;
+    entityInfo = GetEntInfo(target);
     oldStat = entityInfo->spDef;
     oldStat1 = oldStat;
 
@@ -622,7 +610,7 @@ void RaiseSpDefStatTarget(Entity * pokemon, Entity *target, s32 increment)
     if (0xfe < newStat) {
       newStat = 0xff;
     }
-    entityInfo1->spDef = newStat;
+    entityInfo->spDef = newStat;
     if (oldStat1 < (u8)newStat) {
       sub_8041E94(target);
       sub_80522F4(pokemon,target,*gUnknown_80FC428);

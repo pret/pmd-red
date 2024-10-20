@@ -491,12 +491,6 @@ void sub_803D8F0(void)
     }
 }
 
-// Hmm...
-static inline s16 SpeciesId(s32 id)
-{
-    return id;
-}
-
 bool8 sub_803D930(s16 speciesToFind)
 {
     s32 i;

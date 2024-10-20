@@ -10,6 +10,8 @@
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "pokemon.h"
+#include "moves.h"
+#include "items.h"
 #include "dungeon_music.h"
 #include "dungeon_ai_movement.h"
 #include "code_8045A00.h"
@@ -93,7 +95,7 @@ void sub_8044C10(u8 a0);
 u16 GetLeaderActionId(void);
 void sub_80978C8(s16 a0);
 void sub_8044C50(u16 a0);
-void sub_805E2C4(Entity *leader);
+static void TryCreateModeArrows(Entity *leader);
 bool8 sub_8094C48(void);
 void sub_8052210(u8 a0);
 bool8 sub_805EC4C(Entity *a0, u8 a1);
@@ -125,14 +127,8 @@ extern bool8 sub_8071A8C(Entity *pokemon);
 extern void sub_80643AC(Entity *pokemon);
 extern u8 sub_8062F90(Entity *, u32, u32, u32, u32);
 
-extern Entity *gLeaderPointer;
-
-extern u8 gUnknown_202F22D;
-extern u8 gUnknown_202F22C;
-extern u8 gUnknown_202F230;
-extern u8 gUnknown_202F231;
 extern u8 gUnknown_202EE00;
-extern u16 gUnknown_202F22E;
+extern Entity *gLeaderPointer;
 
 extern const u8 *gUnknown_80F8A84;
 extern const u8 *gUnknown_80F8A6C;
@@ -155,28 +151,21 @@ extern const u8 *gFieldItemMenuGroundTextPtr;
 extern const u8 *gUnknown_80FE940;
 extern const u8 *gWhichTextPtr1;
 
-#ifdef NONMATCHING
-void sub_805D8C8(void) // https://decomp.me/scratch/96Sci
+static EWRAM_DATA bool8 sInDiagonalMode = 0;
+static EWRAM_DATA bool8 sInRotateMode = 0;
+// Frames counter for arrows in diagonal/rotate mode.
+static EWRAM_DATA s16 sArrowsFrames = 0;
+// If both of these are set to TRUE, there are 3 arrows visible instead of 1 in rotate mode
+static EWRAM_DATA bool8 sShowThreeArrows1 = 0;
+static EWRAM_DATA bool8 sShowThreeArrows2 = 0;
+
+void DungeonHandlePlayerInput(void)
 {
     struct UnkMenuBitsStruct r6;
-    s32 i; //r4
-    s32 j; // r3
-    u32 r7;
-    s32 r9;
-    s32 r5;
-    Entity *leader; // r10
-    EntityInfo *leaderInfo; // r8
-    u32 buttonsR1, buttonsR2; // r1 r2
-    const u8 *msg; // r3
-    bool32 r3;
-    s32 r4;
-    s32 prevMapOption; // r4
-
-    // Stack
-    u8 sp0[5];
+    bool8 triggers[5]; // Always FALSE, if one of these is TRUE - they can open various menus or cause an item throw. Most likely used for debugging/testing.
     s32 frames;
     s32 var_38;
-    unkDungeonGlobal_unk181E8_sub *unkPtr;
+    UnkDungeonGlobal_unk181E8_sub *unkPtr;
 
     unkPtr = &gDungeon->unk181e8;
     var_38 = 3;
@@ -205,9 +194,8 @@ void sub_805D8C8(void) // https://decomp.me/scratch/96Sci
 
     sub_806A914(1, 1, 1);
     while (1) {
-
-        leader = GetLeader();
-        leaderInfo = leader->info;
+        Entity *leader = GetLeader();
+        EntityInfo *leaderInfo = GetEntInfo(leader);
 
         sub_80978C8(leaderInfo->id);
         if (gDungeon->unk66C != 0) {
@@ -218,25 +206,31 @@ void sub_805D8C8(void) // https://decomp.me/scratch/96Sci
             }
             sub_805E804();
         }
-        gUnknown_202F22D = 0;
-        gUnknown_202F22C = 0;
+        sInRotateMode = FALSE;
+        sInDiagonalMode = FALSE;
         if (gDungeon->unk5C0 >= 0) {
             r6.a0_8 = 1;
+            r6.a0_16 = 0;
+            r6.a0_24 = 0;
         }
         else {
             r6.a0_8 = 0;
+            r6.a0_16 = 0;
+            r6.a0_24 = 0;
         }
-        r6.a0_16 = 0;
-        r6.a0_24 = 0;
 
         frames = 0;
         sub_8044C50(0);
-        gUnknown_202F230 = 0;
-        gUnknown_202F231 = 0;
-        while (r6.a0_8 == 0) {
-            bool32 alwaysFalse = FALSE;
+        sShowThreeArrows1 = FALSE;
+        sShowThreeArrows2 = FALSE;
 
-            gUnknown_202F22E++;
+        while (r6.a0_8 == 0) {
+            u32 dpadDiagonal, dpadSimple;
+            bool32 highlightTiles, tryItemThrow;
+            bool32 bPress, rPress, unkBool; // Always FALSE, might've been used as debug variables.
+            s32 directionNew;
+
+            sArrowsFrames++;
             if (unkPtr->unk1821A != 0) {
                 frames = 0;
             }
@@ -248,12 +242,12 @@ void sub_805D8C8(void) // https://decomp.me/scratch/96Sci
                 sub_8075680(0);
             }
 
-            sub_805E2C4(leader);
-            r7 = 0;
+            TryCreateModeArrows(leader);
+            unkBool = FALSE;
             {
                 s32 i;
                 for (i = 0; i < 5; i++) {
-                    sp0[i] = 0;
+                    triggers[i] = FALSE;
                 }
             }
 
@@ -263,7 +257,9 @@ void sub_805D8C8(void) // https://decomp.me/scratch/96Sci
                 break;
             }
 
-            r9 = 0;
+            bPress = FALSE;
+            rPress = FALSE;
+
             if (gRealInputs.pressed & A_BUTTON) {
                 if (gRealInputs.held & B_BUTTON) {
                     if (FixedPointToInt(leaderInfo->belly) != 0) {
@@ -278,57 +274,54 @@ void sub_805D8C8(void) // https://decomp.me/scratch/96Sci
                     gDungeon->unk673 = 1;
                     break;
                 }
-                else {
-                    if (gRealInputs.held & L_BUTTON) {
-                        register bool32 r7;
+                else if (gRealInputs.held & L_BUTTON) {
+                    bool32 canUseMove;
+                    s32 i, j;
 
-                        for (i = 0; i < MAX_MON_MOVES; i++) {
-                            if (!(leaderInfo->moves[i].moveFlags & 1))
-                                continue;
-                            if (leaderInfo->moves[i].moveFlags & 8)
-                                break;
-                        }
-                        if (i == MAX_MON_MOVES) {
-                            SendMessage(leader, gUnknown_80F8A28);
+                    for (i = 0; i < MAX_MON_MOVES; i++) {
+                        if (MoveFlagExists(&leaderInfo->moves.moves[i]) && MoveFlagSet(&leaderInfo->moves.moves[i])) {
                             break;
                         }
-
-                        for (j = 0; j < MAX_MON_MOVES; j++) {
-
-                            if (!(leaderInfo->moves[j].moveFlags & 1))
-                                continue;
-                            if (leaderInfo->moves[j].PP != 0)
-                                break;
-                        }
-                        if (j == MAX_MON_MOVES) {
-                            SetMonsterActionFields(&leaderInfo->action, 0x17);
-                            break;
-                        }
-
-                        r7 = 0;
-                        for (j = i; j < MAX_MON_MOVES; j++) {
-                            if (j != i && !(leaderInfo->moves[j].moveFlags & 2))
-                                break;
-                            if (leaderInfo->moves[j].PP != 0) {
-                                r7 = 1;
-                                break;
-                            }
-                        }
-                        if (r7 == 0) {
-                            SendMessage(leader, gUnknown_80F8A4C);
-                        }
-                        else {
-                            SetMonsterActionFields(&leaderInfo->action, 0x14);
-                            leaderInfo->action.unk4[0].actionUseIndex = GetTeamMemberEntityIndex(leader);
-                            leaderInfo->action.unk4[1].actionUseIndex = i;
-                        }
+                    }
+                    if (i == MAX_MON_MOVES) {
+                        SendMessage(leader, gUnknown_80F8A28);
                         break;
                     }
-                    else {
-                        if (!sub_805EF60(leader, leaderInfo)) {
-                            SetMonsterActionFields(&leaderInfo->action, 0x32);
+
+                    for (j = 0; j < MAX_MON_MOVES; j++) {
+                        if (MoveFlagExists(&leaderInfo->moves.moves[j])) {
+                            if (leaderInfo->moves.moves[j].PP != 0)
+                                break;
                         }
+                    }
+                    if (j == MAX_MON_MOVES) {
+                        SetMonsterActionFields(&leaderInfo->action, ACTION_STRUGGLE);
                         break;
+                    }
+
+                    canUseMove = FALSE;
+                    for (j = i; j < MAX_MON_MOVES; j++) {
+                        if (j != i && !(leaderInfo->moves.moves[j].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)) {
+                            break;
+                        }
+                        if (leaderInfo->moves.moves[j].PP != 0) {
+                            canUseMove = TRUE;
+                            break;
+                        }
+                    }
+                    if (!canUseMove) {
+                        SendMessage(leader, gUnknown_80F8A4C);
+                    }
+                    else {
+                        SetMonsterActionFields(&leaderInfo->action, ACTION_USE_MOVE_PLAYER);
+                        leaderInfo->action.unk4[0].actionUseIndex = GetTeamMemberEntityIndex(leader);
+                        leaderInfo->action.unk4[1].actionUseIndex = i;
+                    }
+                    break;
+                }
+                else {
+                    if (!sub_805EF60(leader, leaderInfo)) {
+                        SetMonsterActionFields(&leaderInfo->action, ACTION_REGULAR_ATTACK);
                     }
                     break;
                 }
@@ -340,53 +333,50 @@ void sub_805D8C8(void) // https://decomp.me/scratch/96Sci
                 r6.a0_24 = 0;
                 break;
             }
-            else if (sp0[1] != 0) { // Opens moves menu
+            else if (triggers[1]) { // Opens moves menu
                 gDungeon->unk5C0 = 0;
                 r6.a0_8 = 1;
                 r6.a0_16 = 0;
                 r6.a0_24 = 1;
                 break;
             }
-            else if (sp0[2] != 0) { // Opens item menu
+            else if (triggers[2]) { // Opens item menu
                 gDungeon->unk5C0 = 1;
                 r6.a0_8 = 1;
                 r6.a0_16 = 0;
                 r6.a0_24 = 1;
                 break;
             }
-            else if (sp0[3] != 0) { // Opens pokemon menu
+            else if (triggers[3]) { // Opens pokemon menu
                 gDungeon->unk5C0 = 2;
                 r6.a0_8 = 1;
                 r6.a0_16 = 0;
                 r6.a0_24 = 1;
                 break;
             }
-            else if (sp0[4] != 0) { // Opens regular menu
-
+            else if (triggers[4]) { // Opens regular menu
                 r6.a0_8 = 1;
                 r6.a0_16 = 0;
                 r6.a0_24 = 1;
                 break;
             }
             else if (frames > 0x707) { // Opens simple menu when idling
-
                 r6.a0_8 = 1;
                 r6.a0_16 = 1;
                 r6.a0_24 = 0;
                 break;
             }
 
-            r4 = gGameOptionsRef->unk9;
-            if (r4 == 0) {
-
-                // 0 != 0 comparision here...
-                if ((gRealInputs.pressed & B_BUTTON || (r7 == 0 && alwaysFalse != FALSE)) && unkPtr->unk1821A != 0) {
-                    sub_804AA60();
-                    gUnknown_202F22D = r4;
-                    ResetRepeatTimers();
-                    ResetUnusedInputStruct();
-                }
+            if (gGameOptionsRef->unk9 == 0
+                && (gRealInputs.pressed & B_BUTTON || (!unkBool && bPress))
+                && unkPtr->unk1821A != 0)
+            {
+                sub_804AA60();
+                sInRotateMode = FALSE;
+                ResetRepeatTimers();
+                ResetUnusedInputStruct();
             }
+
             if (gRealInputs.held & L_BUTTON) {
                 if (gRealInputs.pressed & B_BUTTON) {
                     sub_80532B4();
@@ -394,44 +384,44 @@ void sub_805D8C8(void) // https://decomp.me/scratch/96Sci
                     ResetUnusedInputStruct();
                 }
             }
-            r4 = 0;
+
+            tryItemThrow = FALSE;
             if (gRealInputs.held & R_BUTTON) {
-                if (gUnknown_202F22C == 0) {
-                    gUnknown_202F22E = 0;
+                if (!sInDiagonalMode) {
+                    sArrowsFrames = 0;
                 }
-                gUnknown_202F22C = 1;
+                sInDiagonalMode = TRUE;
             }
             else {
-                gUnknown_202F22C = 0;
+                sInDiagonalMode = FALSE;
             }
 
-            r3 = FALSE;
+            highlightTiles = FALSE;
             if (gGameOptionsRef->unk9 == 0) {
-                if (gRealInputs.shortPress & R_BUTTON || r9 != 0 || gRealInputs.pressed & START_BUTTON) {
-                    r3 = TRUE;
+                if (gRealInputs.shortPress & R_BUTTON || rPress || gRealInputs.pressed & START_BUTTON) {
+                    highlightTiles = TRUE;
                 }
             }
-            if (r3) {
+            if (highlightTiles) {
                 sub_805E738(leader);
-                gUnknown_202F22D = 1;
+                sInRotateMode = TRUE;
                 unkPtr->unk1821B = leaderInfo->action.direction;
                 unkPtr->unk1821C = 0xFF;
                 ResetRepeatTimers();
             }
 
             if ((gRealInputs.held & L_BUTTON) == L_BUTTON && (gRealInputs.pressed & R_BUTTON) == R_BUTTON) {
-                r4 = 1;
+                tryItemThrow = TRUE;
             }
-            if (sp0[0] != 0) {
-                r4 = 1;
+            if (triggers[0]) {
+                tryItemThrow = TRUE;
             }
-            if (r4) {
+            if (tryItemThrow) {
+                s32 i;
                 for (i = 0; i < INVENTORY_SIZE; i++) {
-                    if (!(gTeamInventoryRef->teamItems[i].flags & ITEM_FLAG_EXISTS))
-                        continue;
-                    if (gTeamInventoryRef->teamItems[i].flags & ITEM_FLAG_SET) {
+                    if (ItemExists(&gTeamInventoryRef->teamItems[i]) && ItemSet(&gTeamInventoryRef->teamItems[i])) {
                         sub_8044C50(11);
-                        leaderInfo->action.unk4[0].actionUseIndex = i + 1;
+                        leaderInfo->action.unk4[0].actionUseIndex = i +1;
                         leaderInfo->action.unk4[0].lastItemThrowPosition.x = 0;
                         leaderInfo->action.unk4[0].lastItemThrowPosition.y = 0;
                         break;
@@ -444,7 +434,7 @@ void sub_805D8C8(void) // https://decomp.me/scratch/96Sci
 
             // SELECT button
             if (!gDungeon->unk181e8.blinded && gGameOptionsRef->mapOption != 6 && gRealInputs.pressed & SELECT_BUTTON) {
-                prevMapOption = gGameOptionsRef->mapOption;
+                s32 prevMapOption = gGameOptionsRef->mapOption;
                 gUnknown_202EE00 = 1;
                 gDungeon->unk181e8.unk18214 = 1;
                 if (!sub_8094C48()) {
@@ -462,7 +452,7 @@ void sub_805D8C8(void) // https://decomp.me/scratch/96Sci
                         break;
 
                     if (gRealInputs.pressed & A_BUTTON) {
-                        gUnknown_202EE00 = (gUnknown_202EE00 == 0) ? 1 : 0;
+                        gUnknown_202EE00 = (gUnknown_202EE00 == 0) ? 1 : 0; // Flip
                         sub_8040A84();
                     }
                 }
@@ -475,104 +465,100 @@ void sub_805D8C8(void) // https://decomp.me/scratch/96Sci
                 sub_803E46C(0x2F);
             }
 
-            if (gDungeon->unk66D != 0 && gUnknown_202F22C == 0) {
-                buttonsR1 = buttonsR2 = gRealInputs.pressed;
+            if (gDungeon->unk66D != 0 && !sInDiagonalMode) {
+                dpadDiagonal = dpadSimple = gRealInputs.pressed;
             }
             else {
-                buttonsR1 = gRealInputs.held;
-                buttonsR2 = (unkPtr->unk1821A == 0) ? gRealInputs.held : gRealInputs.pressed;
+                dpadDiagonal = gRealInputs.held;
+                dpadSimple = (unkPtr->unk1821A == 0) ? gRealInputs.held : gRealInputs.pressed;
             }
 
-            buttonsR1 &= DPAD_ANY;
-            buttonsR2 &= DPAD_ANY;
-            r5 = -1;
-            if (buttonsR1 == (DPAD_UP | DPAD_RIGHT))
-                r5 = 3;
-            if (buttonsR1 == (DPAD_UP | DPAD_LEFT))
-                r5 = 5;
-            if (buttonsR1 == (DPAD_DOWN | DPAD_RIGHT))
-                r5 = 1;
-            if (buttonsR1 == (DPAD_DOWN | DPAD_LEFT))
-                r5 = 7;
+            dpadDiagonal &= DPAD_ANY;
+            dpadSimple &= DPAD_ANY;
+            directionNew = -1;
+            if (dpadDiagonal == (DPAD_UP | DPAD_RIGHT))
+                directionNew = DIRECTION_NORTHEAST;
+            if (dpadDiagonal == (DPAD_UP | DPAD_LEFT))
+                directionNew = DIRECTION_NORTHWEST;
+            if (dpadDiagonal == (DPAD_DOWN | DPAD_RIGHT))
+                directionNew = DIRECTION_SOUTHEAST;
+            if (dpadDiagonal == (DPAD_DOWN | DPAD_LEFT))
+                directionNew = DIRECTION_SOUTHWEST;
 
-            if (buttonsR2 == DPAD_UP)
-                r5 = 4;
-            if (buttonsR2 == DPAD_DOWN)
-                r5 = 0;
-            if (buttonsR2 == DPAD_RIGHT)
-                r5 = 2;
-            if (buttonsR2 == DPAD_LEFT)
-                r5 = 6;
+            if (dpadSimple == DPAD_UP)
+                directionNew = DIRECTION_NORTH;
+            if (dpadSimple == DPAD_DOWN)
+                directionNew = DIRECTION_SOUTH;
+            if (dpadSimple == DPAD_RIGHT)
+                directionNew = DIRECTION_EAST;
+            if (dpadSimple == DPAD_LEFT)
+                directionNew = DIRECTION_WEST;
 
-            if (r5 >= 0 && (gUnknown_202F22C == 0 || (r5 & 1))) {
-                bool32 aaa = 0;
-                bool32 register r7 = (leaderInfo->action.direction != r5);
-                leaderInfo->action.direction = r5 & 7;
-                if (gUnknown_202F22D != 0) {
-                    unkPtr->unk1821B = r5;
-                    sub_806CDD4(leader, sub_806CEBC(leader), r5);
+            if (directionNew >= 0 && (!sInDiagonalMode || (directionNew & 1))) {
+                bool32 directionChanged = (leaderInfo->action.direction != directionNew);
+                leaderInfo->action.direction = directionNew & DIRECTION_MASK;
+                if (sInRotateMode) {
+                    unkPtr->unk1821B = directionNew;
+                    sub_806CDD4(leader, sub_806CEBC(leader), directionNew);
                 }
                 else {
+                    u8 canMoveFlags = 0;
+                    const u8 *immobilizedMsg = NULL;
 
-                    r4 = 0;
-
-                    msg = NULL;
                     if (sub_805EC4C(leader, 1))
                         break;
 
-                    if (leaderInfo->immobilize.immobilizeStatus == 2) {
-                        msg = gUnknown_80F8A84, r4 = 1;
+                    if (leaderInfo->immobilize.immobilizeStatus == STATUS_SHADOW_HOLD) {
+                        immobilizedMsg = gUnknown_80F8A84, canMoveFlags |= 1;
                     }
-                    else if (leaderInfo->immobilize.immobilizeStatus == 7) {
-                        msg = gUnknown_80F8A6C, r4 = 1;
+                    else if (leaderInfo->immobilize.immobilizeStatus == STATUS_CONSTRICTION) {
+                        immobilizedMsg = gUnknown_80F8A6C, canMoveFlags |= 1;
                     }
-                    else if (leaderInfo->immobilize.immobilizeStatus == 5) {
-                        msg = gUnknown_80F8AB0, r4 = 1;
+                    else if (leaderInfo->immobilize.immobilizeStatus == STATUS_INGRAIN) {
+                        immobilizedMsg = gUnknown_80F8AB0, canMoveFlags |= 1;
                     }
-                    else if (leaderInfo->immobilize.immobilizeStatus == 3) {
-                        msg = gUnknown_80F8ADC, r4 = 1;
+                    else if (leaderInfo->immobilize.immobilizeStatus == STATUS_WRAP) {
+                        immobilizedMsg = gUnknown_80F8ADC, canMoveFlags |= 1;
                     }
-                    else if (leaderInfo->immobilize.immobilizeStatus == 4) {
-                        msg = gUnknown_80F8B0C, r4 = 1;
+                    else if (leaderInfo->immobilize.immobilizeStatus == STATUS_WRAPPED) {
+                        immobilizedMsg = gUnknown_80F8B0C, canMoveFlags |= 1;
                     }
-                    if (!CanMoveInDirection(leader, r5))
-                        r4 |= 2;
 
-                    if (r7) {
-                        sub_806CDD4(leader, sub_806CEBC(leader), r5);
-                    }
-                    // Note to self: r7 is set to 2, but I guess it's because the variable is not used anymore?
-                    //r7 = 2;
-                    if (!(r4 & 2)) {
+                    if (!CanMoveInDirection(leader, directionNew))
+                        canMoveFlags |= 2;
 
-                        //r9 = 1;
-                        if (r4 & 1) {
-                            if (msg != NULL) {
-                                SendMessage(leader, msg);
+                    if (directionChanged) {
+                        sub_806CDD4(leader, sub_806CEBC(leader), directionNew);
+                    }
+
+                    if (!(canMoveFlags & 2)) {
+                        if (canMoveFlags & 1) {
+                            if (immobilizedMsg != NULL) {
+                                SendMessage(leader, immobilizedMsg);
                             }
                             sub_8044C50(1);
-                            gDungeon->unk673 = 1; // or r9?
-                            break;
+                            gDungeon->unk673 = 1;
                         }
-                        sub_8044C50(2);
-
-                        // mov r0, cmp r0, #0 wtf
-                        if ((gRealInputs.held & B_BUTTON || aaa != 0) && FixedPointToInt(leaderInfo->belly) != 0) {
-                            if (leader->info->volatileStatus.volatileStatus != 2) {
-                                gDungeon->unk66C = 1; // or r9?
+                        else {
+                            sub_8044C50(2);
+                            if ((gRealInputs.held & B_BUTTON || bPress) && FixedPointToInt(leaderInfo->belly) != 0) {
+                                if (GetEntInfo(leader)->volatileStatus.volatileStatus != STATUS_CONFUSED) {
+                                    gDungeon->unk66C = 1;
+                                }
+                                leaderInfo->action.unk4[0].actionUseIndex = 0;
                             }
-                            leaderInfo->action.unk4[0].actionUseIndex = 0;
-                            break;
+                            else {
+                                leaderInfo->action.unk4[0].actionUseIndex = 1;
+                            }
                         }
-                        leaderInfo->action.unk4[0].actionUseIndex = 1;
                         break;
                     }
-
-                    if (r4 & 1)
+                    else if (canMoveFlags & 1) {
                         sub_803E724(0x23);
+                    }
+
                 }
             }
-
             sub_803E46C(0xF);
         }
 
@@ -597,14 +583,12 @@ void sub_805D8C8(void) // https://decomp.me/scratch/96Sci
             sub_803E46C(0xF);
         }
         else {
-            u8 r2;
             sub_803E46C(0xF);
             sub_8047158();
-            r2 = (r6.a0_16 == 0) ? 1 : 0;
-            ShowFieldMenu(r2, r6.a0_24);
+            ShowFieldMenu((r6.a0_16 == 0) ? 1 : 0, r6.a0_24);
             ResetRepeatTimers();
             ResetUnusedInputStruct();
-            gUnknown_202F22D = 0;
+            sInRotateMode = FALSE;
             unkPtr->unk1821A = 0;
             sub_804AA60();
             if (sub_8044B28())
@@ -627,1267 +611,195 @@ void sub_805D8C8(void) // https://decomp.me/scratch/96Sci
     }
 }
 
-#else
-NAKED void sub_805D8C8(void)
+struct UnkStruct_8106AC8
 {
-    asm_unified("push {r4-r7,lr}\n"
-"mov r7, r10\n"
-"mov r6, r9\n"
-"mov r5, r8\n"
-"push {r5-r7}\n"
-"sub sp, 0x24\n"
-"ldr r4, _0805D90C\n"
-"ldr r1, [r4]\n"
-"ldr r0, _0805D910\n"
-"adds r0, r1, r0\n"
-"str r0, [sp, 0x10]\n"
-"movs r2, 0x3\n"
-"str r2, [sp, 0xC]\n"
-"movs r5, 0\n"
-"movs r0, 0\n"
-"strh r0, [r1, 0x12]\n"
-"bl GetLeader\n"
-"movs r1, 0x1\n"
-"bl sub_806A2BC\n"
-"bl GetLeader\n"
-"bl sub_80701A4\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _0805D928\n"
-"movs r0, 0x3C\n"
-"movs r1, 0x10\n"
-"bl sub_803E708\n"
-"bl _0805E2B0\n"
-".align 2, 0\n"
-"_0805D90C: .4byte gDungeon\n"
-"_0805D910: .4byte 0x000181e8\n"
-"_0805D914:\n"
-"mov r1, r8\n"
-"adds r1, 0x44\n"
-"movs r2, 0\n"
-"movs r0, 0x2\n"
-"strh r0, [r1]\n"
-"mov r0, r8\n"
-"adds r0, 0x48\n"
-"strb r2, [r0]\n"
-"bl _0805E2B0\n"
-"_0805D928:\n"
-"ldr r0, [r4]\n"
-"ldr r3, _0805D9D4\n"
-"adds r0, r3\n"
-"strb r5, [r0]\n"
-"bl sub_8040A78\n"
-"ldr r1, [r4]\n"
-"ldrb r0, [r1, 0x1]\n"
-"cmp r0, 0\n"
-"beq _0805D976\n"
-"strb r5, [r1, 0x1]\n"
-"bl GetLeader\n"
-"movs r1, 0x1\n"
-"bl ShouldMonsterRunAwayAndShowEffect\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"bne _0805D976\n"
-"movs r0, 0x1\n"
-"bl sub_8044C10\n"
-"bl sub_805E804\n"
-"bl GetLeader\n"
-"bl sub_80647F0\n"
-"bl ResetRepeatTimers\n"
-"bl ResetUnusedInputStruct\n"
-"bl GetLeaderActionId\n"
-"lsls r0, 16\n"
-"cmp r0, 0\n"
-"beq _0805D976\n"
-"bl _0805E2B0\n"
-"_0805D976:\n"
-"movs r0, 0x1\n"
-"movs r1, 0x1\n"
-"movs r2, 0x1\n"
-"bl sub_806A914\n"
-"_0805D980:\n"
-"bl GetLeader\n"
-"mov r10, r0\n"
-"ldr r5, [r0, 0x70]\n"
-"mov r8, r5\n"
-"movs r1, 0x2\n"
-"ldrsh r0, [r5, r1]\n"
-"bl sub_80978C8\n"
-"ldr r2, _0805D9D8\n"
-"ldr r0, [r2]\n"
-"ldr r3, _0805D9DC\n"
-"adds r0, r3\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0\n"
-"beq _0805D9AE\n"
-"bl sub_805E874\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"bne _0805D914\n"
-"bl sub_805E804\n"
-"_0805D9AE:\n"
-"ldr r0, _0805D9E0\n"
-"movs r1, 0\n"
-"strb r1, [r0]\n"
-"ldr r0, _0805D9E4\n"
-"strb r1, [r0]\n"
-"ldr r5, _0805D9D8\n"
-"ldr r0, [r5]\n"
-"movs r1, 0xB8\n"
-"lsls r1, 3\n"
-"adds r0, r1\n"
-"ldr r0, [r0]\n"
-"cmp r0, 0\n"
-"bge _0805D9CA\n"
-"b _0805DAE8\n"
-"_0805D9CA:\n"
-"ldr r0, _0805D9E8\n"
-"ands r6, r0\n"
-"movs r2, 0x1\n"
-"orrs r6, r2\n"
-"b _0805DAEC\n"
-".align 2, 0\n"
-"_0805D9D4: .4byte 0x00000673\n"
-"_0805D9D8: .4byte gDungeon\n"
-"_0805D9DC: .4byte 0x0000066c\n"
-"_0805D9E0: .4byte gUnknown_202F22D\n"
-"_0805D9E4: .4byte gUnknown_202F22C\n"
-"_0805D9E8: .4byte 0xffffff00\n"
-"_0805D9EC:\n"
-"movs r0, 0x1\n"
-"bl sub_8044C50\n"
-"ldr r3, _0805DA00\n"
-"ldr r0, [r3]\n"
-"ldr r5, _0805DA04\n"
-"adds r0, r5\n"
-"strb r4, [r0]\n"
-"b _0805E1AE\n"
-".align 2, 0\n"
-"_0805DA00: .4byte gDungeon\n"
-"_0805DA04: .4byte 0x00000673\n"
-"_0805DA08:\n"
-"ldr r0, _0805DA14\n"
-"ldr r1, [r0]\n"
-"mov r0, r10\n"
-"bl SendMessage\n"
-"b _0805DBDA\n"
-".align 2, 0\n"
-"_0805DA14: .4byte gUnknown_80FD4B0\n"
-"_0805DA18:\n"
-"ldr r0, _0805DA1C\n"
-"b _0805DCBC\n"
-".align 2, 0\n"
-"_0805DA1C: .4byte gUnknown_80F8A28\n"
-"_0805DA20:\n"
-"ldr r0, [sp, 0x1C]\n"
-"movs r1, 0x17\n"
-"bl SetMonsterActionFields\n"
-"b _0805E1AE\n"
-"_0805DA2A:\n"
-"ldr r0, _0805DA38\n"
-"ands r6, r0\n"
-"movs r3, 0x1\n"
-"orrs r6, r3\n"
-"ldr r0, _0805DA3C\n"
-"ands r6, r0\n"
-"b _0805DAD6\n"
-".align 2, 0\n"
-"_0805DA38: .4byte 0xffffff00\n"
-"_0805DA3C: .4byte 0xffff00ff\n"
-"_0805DA40:\n"
-"ldr r5, _0805DA58\n"
-"ldr r0, [r5]\n"
-"movs r2, 0xB8\n"
-"lsls r2, 3\n"
-"adds r0, r2\n"
-"str r1, [r0]\n"
-"ldr r0, _0805DA5C\n"
-"ands r6, r0\n"
-"movs r3, 0x1\n"
-"orrs r6, r3\n"
-"b _0805DAA8\n"
-".align 2, 0\n"
-"_0805DA58: .4byte gDungeon\n"
-"_0805DA5C: .4byte 0xffffff00\n"
-"_0805DA60:\n"
-"ldr r5, _0805DA78\n"
-"ldr r0, [r5]\n"
-"movs r1, 0xB8\n"
-"lsls r1, 3\n"
-"adds r0, r1\n"
-"movs r2, 0x1\n"
-"str r2, [r0]\n"
-"ldr r0, _0805DA7C\n"
-"ands r6, r0\n"
-"orrs r6, r2\n"
-"b _0805DAA8\n"
-".align 2, 0\n"
-"_0805DA78: .4byte gDungeon\n"
-"_0805DA7C: .4byte 0xffffff00\n"
-"_0805DA80:\n"
-"ldr r3, _0805DA98\n"
-"ldr r0, [r3]\n"
-"movs r5, 0xB8\n"
-"lsls r5, 3\n"
-"adds r0, r5\n"
-"str r2, [r0]\n"
-"ldr r0, _0805DA9C\n"
-"ands r6, r0\n"
-"movs r0, 0x1\n"
-"orrs r6, r0\n"
-"b _0805DAA8\n"
-".align 2, 0\n"
-"_0805DA98: .4byte gDungeon\n"
-"_0805DA9C: .4byte 0xffffff00\n"
-"_0805DAA0:\n"
-"ldr r0, _0805DAB8\n"
-"ands r6, r0\n"
-"movs r1, 0x1\n"
-"orrs r6, r1\n"
-"_0805DAA8:\n"
-"ldr r0, _0805DABC\n"
-"ands r6, r0\n"
-"ldr r0, _0805DAC0\n"
-"ands r6, r0\n"
-"movs r0, 0x80\n"
-"lsls r0, 9\n"
-"orrs r6, r0\n"
-"b _0805E1AE\n"
-".align 2, 0\n"
-"_0805DAB8: .4byte 0xffffff00\n"
-"_0805DABC: .4byte 0xffff00ff\n"
-"_0805DAC0: .4byte 0xff00ffff\n"
-"_0805DAC4:\n"
-"ldr r0, _0805DADC\n"
-"ands r6, r0\n"
-"movs r2, 0x1\n"
-"orrs r6, r2\n"
-"ldr r0, _0805DAE0\n"
-"ands r6, r0\n"
-"movs r0, 0x80\n"
-"lsls r0, 1\n"
-"orrs r6, r0\n"
-"_0805DAD6:\n"
-"ldr r0, _0805DAE4\n"
-"ands r6, r0\n"
-"b _0805E1AE\n"
-".align 2, 0\n"
-"_0805DADC: .4byte 0xffffff00\n"
-"_0805DAE0: .4byte 0xffff00ff\n"
-"_0805DAE4: .4byte 0xff00ffff\n"
-"_0805DAE8:\n"
-"ldr r0, _0805DB3C\n"
-"ands r6, r0\n"
-"_0805DAEC:\n"
-"ldr r0, _0805DB40\n"
-"ands r6, r0\n"
-"ldr r0, _0805DB44\n"
-"ands r6, r0\n"
-"movs r3, 0\n"
-"str r3, [sp, 0x8]\n"
-"movs r0, 0\n"
-"bl sub_8044C50\n"
-"ldr r0, _0805DB48\n"
-"mov r5, sp\n"
-"ldrb r5, [r5, 0x8]\n"
-"strb r5, [r0]\n"
-"ldr r0, _0805DB4C\n"
-"mov r1, sp\n"
-"ldrb r1, [r1, 0x8]\n"
-"strb r1, [r0]\n"
-"lsls r0, r6, 24\n"
-"mov r2, r8\n"
-"adds r2, 0x44\n"
-"str r2, [sp, 0x1C]\n"
-"str r0, [sp, 0x14]\n"
-"ldr r3, [sp, 0x10]\n"
-"adds r3, 0x32\n"
-"str r3, [sp, 0x18]\n"
-"cmp r0, 0\n"
-"beq _0805DB24\n"
-"b _0805E1AE\n"
-"_0805DB24:\n"
-"ldr r0, _0805DB50\n"
-"ldrh r1, [r0]\n"
-"adds r1, 0x1\n"
-"strh r1, [r0]\n"
-"ldr r5, [sp, 0x18]\n"
-"ldrb r0, [r5]\n"
-"cmp r0, 0\n"
-"beq _0805DB54\n"
-"movs r0, 0\n"
-"str r0, [sp, 0x8]\n"
-"b _0805DB5A\n"
-".align 2, 0\n"
-"_0805DB3C: .4byte 0xffffff00\n"
-"_0805DB40: .4byte 0xffff00ff\n"
-"_0805DB44: .4byte 0xff00ffff\n"
-"_0805DB48: .4byte gUnknown_202F230\n"
-"_0805DB4C: .4byte gUnknown_202F231\n"
-"_0805DB50: .4byte gUnknown_202F22E\n"
-"_0805DB54:\n"
-"ldr r1, [sp, 0x8]\n"
-"adds r1, 0x1\n"
-"str r1, [sp, 0x8]\n"
-"_0805DB5A:\n"
-"ldr r2, [sp, 0xC]\n"
-"cmp r2, 0\n"
-"beq _0805DB6E\n"
-"subs r2, 0x1\n"
-"str r2, [sp, 0xC]\n"
-"cmp r2, 0\n"
-"bne _0805DB6E\n"
-"movs r0, 0\n"
-"bl sub_8075680\n"
-"_0805DB6E:\n"
-"mov r0, r10\n"
-"bl sub_805E2C4\n"
-"movs r7, 0\n"
-"movs r1, 0\n"
-"add r0, sp, 0x4\n"
-"_0805DB7A:\n"
-"strb r1, [r0]\n"
-"subs r0, 0x1\n"
-"cmp r0, sp\n"
-"bge _0805DB7A\n"
-"ldr r0, _0805DBEC\n"
-"ldrh r1, [r0]\n"
-"movs r4, 0x1\n"
-"movs r0, 0x1\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"beq _0805DBAA\n"
-"movs r0, 0x2\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"beq _0805DBAA\n"
-"movs r0, 0x9E\n"
-"lsls r0, 1\n"
-"add r0, r8\n"
-"ldr r0, [r0]\n"
-"bl FixedPointToInt\n"
-"cmp r0, 0\n"
-"beq _0805DBAA\n"
-"b _0805D9EC\n"
-"_0805DBAA:\n"
-"movs r3, 0\n"
-"mov r9, r3\n"
-"ldr r4, _0805DBEC\n"
-"ldrh r1, [r4, 0x2]\n"
-"movs r5, 0x1\n"
-"movs r0, 0x1\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"bne _0805DBBE\n"
-"b _0805DD02\n"
-"_0805DBBE:\n"
-"ldrh r1, [r4]\n"
-"movs r0, 0x2\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"beq _0805DBF8\n"
-"movs r0, 0x9E\n"
-"lsls r0, 1\n"
-"add r0, r8\n"
-"ldr r0, [r0]\n"
-"bl FixedPointToInt\n"
-"cmp r0, 0\n"
-"bne _0805DBDA\n"
-"b _0805DD02\n"
-"_0805DBDA:\n"
-"movs r0, 0x1\n"
-"bl sub_8044C50\n"
-"ldr r1, _0805DBF0\n"
-"ldr r0, [r1]\n"
-"ldr r2, _0805DBF4\n"
-"adds r0, r2\n"
-"strb r5, [r0]\n"
-"b _0805E1AE\n"
-".align 2, 0\n"
-"_0805DBEC: .4byte gRealInputs\n"
-"_0805DBF0: .4byte gDungeon\n"
-"_0805DBF4: .4byte 0x00000673\n"
-"_0805DBF8:\n"
-"mov r0, r10\n"
-"movs r1, 0x1\n"
-"bl ShouldMonsterRunAwayAndShowEffect\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _0805DC08\n"
-"b _0805DA08\n"
-"_0805DC08:\n"
-"ldrh r0, [r4]\n"
-"movs r3, 0x80\n"
-"lsls r3, 2\n"
-"adds r1, r3, 0\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"beq _0805DCE8\n"
-"movs r4, 0\n"
-"movs r2, 0x8C\n"
-"lsls r2, 1\n"
-"add r2, r8\n"
-"movs r3, 0x8\n"
-"_0805DC20:\n"
-"ldrb r1, [r2]\n"
-"movs r0, 0x1\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"beq _0805DC32\n"
-"adds r0, r3, 0\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"bne _0805DC3A\n"
-"_0805DC32:\n"
-"adds r2, 0x8\n"
-"adds r4, 0x1\n"
-"cmp r4, 0x3\n"
-"ble _0805DC20\n"
-"_0805DC3A:\n"
-"cmp r4, 0x4\n"
-"bne _0805DC40\n"
-"b _0805DA18\n"
-"_0805DC40:\n"
-"movs r3, 0\n"
-"movs r5, 0x8C\n"
-"lsls r5, 1\n"
-"movs r7, 0x1\n"
-"mov r2, r8\n"
-"_0805DC4A:\n"
-"lsls r0, r3, 3\n"
-"add r0, r8\n"
-"adds r0, r5\n"
-"ldrb r1, [r0]\n"
-"adds r0, r7, 0\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"beq _0805DC66\n"
-"movs r1, 0x8E\n"
-"lsls r1, 1\n"
-"adds r0, r2, r1\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0\n"
-"bne _0805DC6E\n"
-"_0805DC66:\n"
-"adds r2, 0x8\n"
-"adds r3, 0x1\n"
-"cmp r3, 0x3\n"
-"ble _0805DC4A\n"
-"_0805DC6E:\n"
-"cmp r3, 0x4\n"
-"bne _0805DC74\n"
-"b _0805DA20\n"
-"_0805DC74:\n"
-"movs r7, 0\n"
-"adds r3, r4, 0\n"
-"cmp r4, 0x3\n"
-"bgt _0805DCB6\n"
-"lsls r0, r4, 3\n"
-"adds r2, r0, 0\n"
-"add r2, r8\n"
-"mov r12, r2\n"
-"movs r5, 0x8E\n"
-"lsls r5, 1\n"
-"adds r0, r5\n"
-"mov r1, r8\n"
-"adds r2, r0, r1\n"
-"movs r5, 0x2\n"
-"_0805DC90:\n"
-"ldrb r0, [r2]\n"
-"cmp r0, 0\n"
-"bne _0805DCCC\n"
-"movs r0, 0x8\n"
-"add r12, r0\n"
-"adds r2, 0x8\n"
-"adds r3, 0x1\n"
-"cmp r3, 0x3\n"
-"bgt _0805DCB6\n"
-"cmp r3, r4\n"
-"beq _0805DC90\n"
-"movs r0, 0x8C\n"
-"lsls r0, 1\n"
-"add r0, r12\n"
-"ldrb r1, [r0]\n"
-"adds r0, r5, 0\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"bne _0805DC90\n"
-"_0805DCB6:\n"
-"cmp r7, 0\n"
-"bne _0805DCCC\n"
-"ldr r0, _0805DCC8\n"
-"_0805DCBC:\n"
-"ldr r1, [r0]\n"
-"mov r0, r10\n"
-"bl SendMessage\n"
-"b _0805E1AE\n"
-".align 2, 0\n"
-"_0805DCC8: .4byte gUnknown_80F8A4C\n"
-"_0805DCCC:\n"
-"ldr r0, [sp, 0x1C]\n"
-"movs r1, 0x14\n"
-"bl SetMonsterActionFields\n"
-"mov r0, r10\n"
-"bl GetTeamMemberEntityIndex\n"
-"mov r1, r8\n"
-"adds r1, 0x48\n"
-"strb r0, [r1]\n"
-"mov r0, r8\n"
-"adds r0, 0x50\n"
-"strb r4, [r0]\n"
-"b _0805E1AE\n"
-"_0805DCE8:\n"
-"mov r0, r10\n"
-"mov r1, r8\n"
-"bl sub_805EF60\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _0805DCF8\n"
-"b _0805E1AE\n"
-"_0805DCF8:\n"
-"ldr r0, [sp, 0x1C]\n"
-"movs r1, 0x32\n"
-"bl SetMonsterActionFields\n"
-"b _0805E1AE\n"
-"_0805DD02:\n"
-"ldr r3, _0805DDC8\n"
-"ldrh r1, [r3, 0x6]\n"
-"movs r2, 0x2\n"
-"adds r0, r2, 0\n"
-"ands r0, r1\n"
-"lsls r0, 16\n"
-"lsrs r1, r0, 16\n"
-"cmp r1, 0\n"
-"beq _0805DD16\n"
-"b _0805DA2A\n"
-"_0805DD16:\n"
-"mov r0, sp\n"
-"ldrb r0, [r0, 0x1]\n"
-"cmp r0, 0\n"
-"beq _0805DD20\n"
-"b _0805DA40\n"
-"_0805DD20:\n"
-"mov r0, sp\n"
-"ldrb r0, [r0, 0x2]\n"
-"cmp r0, 0\n"
-"beq _0805DD2A\n"
-"b _0805DA60\n"
-"_0805DD2A:\n"
-"mov r0, sp\n"
-"ldrb r0, [r0, 0x3]\n"
-"cmp r0, 0\n"
-"beq _0805DD34\n"
-"b _0805DA80\n"
-"_0805DD34:\n"
-"mov r0, sp\n"
-"ldrb r0, [r0, 0x4]\n"
-"cmp r0, 0\n"
-"beq _0805DD3E\n"
-"b _0805DAA0\n"
-"_0805DD3E:\n"
-"ldr r0, _0805DDCC\n"
-"ldr r1, [sp, 0x8]\n"
-"cmp r1, r0\n"
-"ble _0805DD48\n"
-"b _0805DAC4\n"
-"_0805DD48:\n"
-"ldr r0, _0805DDD0\n"
-"ldr r0, [r0]\n"
-"ldrb r4, [r0, 0x9]\n"
-"cmp r4, 0\n"
-"bne _0805DD7E\n"
-"ldrh r1, [r3, 0x2]\n"
-"adds r0, r2, 0\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"bne _0805DD66\n"
-"cmp r7, 0\n"
-"bne _0805DD7E\n"
-"movs r2, 0\n"
-"cmp r2, 0\n"
-"beq _0805DD7E\n"
-"_0805DD66:\n"
-"ldr r3, [sp, 0x18]\n"
-"ldrb r0, [r3]\n"
-"cmp r0, 0\n"
-"beq _0805DD7E\n"
-"bl sub_804AA60\n"
-"ldr r0, _0805DDD4\n"
-"strb r4, [r0]\n"
-"bl ResetRepeatTimers\n"
-"bl ResetUnusedInputStruct\n"
-"_0805DD7E:\n"
-"ldr r2, _0805DDC8\n"
-"ldrh r0, [r2]\n"
-"movs r5, 0x80\n"
-"lsls r5, 2\n"
-"adds r1, r5, 0\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"beq _0805DDA4\n"
-"ldrh r1, [r2, 0x2]\n"
-"movs r0, 0x2\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"beq _0805DDA4\n"
-"bl sub_80532B4\n"
-"bl ResetRepeatTimers\n"
-"bl ResetUnusedInputStruct\n"
-"_0805DDA4:\n"
-"movs r4, 0\n"
-"ldr r0, _0805DDC8\n"
-"ldrh r0, [r0]\n"
-"movs r2, 0x80\n"
-"lsls r2, 1\n"
-"adds r1, r2, 0\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"beq _0805DDFA\n"
-"ldr r1, _0805DDD8\n"
-"ldrb r0, [r1]\n"
-"cmp r0, 0\n"
-"bne _0805DDC2\n"
-"ldr r0, _0805DDDC\n"
-"strh r4, [r0]\n"
-"_0805DDC2:\n"
-"movs r3, 0x1\n"
-"strb r3, [r1]\n"
-"b _0805DDFE\n"
-".align 2, 0\n"
-"_0805DDC8: .4byte gRealInputs\n"
-"_0805DDCC: .4byte 0x00000707\n"
-"_0805DDD0: .4byte gGameOptionsRef\n"
-"_0805DDD4: .4byte gUnknown_202F22D\n"
-"_0805DDD8: .4byte gUnknown_202F22C\n"
-"_0805DDDC: .4byte gUnknown_202F22E\n"
-"_0805DDE0:\n"
-"movs r0, 0xB\n"
-"bl sub_8044C50\n"
-"adds r2, r4, 0x1\n"
-"mov r0, r8\n"
-"adds r0, 0x48\n"
-"movs r1, 0\n"
-"strb r2, [r0]\n"
-"adds r0, 0x4\n"
-"strh r1, [r0]\n"
-"adds r0, 0x2\n"
-"strh r1, [r0]\n"
-"b _0805DE92\n"
-"_0805DDFA:\n"
-"ldr r0, _0805DEF8\n"
-"strb r4, [r0]\n"
-"_0805DDFE:\n"
-"movs r3, 0\n"
-"ldr r0, _0805DEFC\n"
-"ldr r0, [r0]\n"
-"ldrb r0, [r0, 0x9]\n"
-"cmp r0, 0\n"
-"bne _0805DE2C\n"
-"ldr r2, _0805DF00\n"
-"ldrh r0, [r2, 0x6]\n"
-"movs r5, 0x80\n"
-"lsls r5, 1\n"
-"adds r1, r5, 0\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"bne _0805DE2A\n"
-"mov r0, r9\n"
-"cmp r0, 0\n"
-"bne _0805DE2A\n"
-"ldrh r1, [r2, 0x2]\n"
-"movs r0, 0x8\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"beq _0805DE2C\n"
-"_0805DE2A:\n"
-"movs r3, 0x1\n"
-"_0805DE2C:\n"
-"cmp r3, 0\n"
-"beq _0805DE54\n"
-"mov r0, r10\n"
-"bl sub_805E738\n"
-"ldr r0, _0805DF04\n"
-"movs r1, 0x1\n"
-"strb r1, [r0]\n"
-"mov r0, r8\n"
-"adds r0, 0x46\n"
-"ldrb r0, [r0]\n"
-"ldr r1, [sp, 0x10]\n"
-"adds r1, 0x33\n"
-"strb r0, [r1]\n"
-"ldr r1, [sp, 0x10]\n"
-"adds r1, 0x34\n"
-"movs r0, 0xFF\n"
-"strb r0, [r1]\n"
-"bl ResetRepeatTimers\n"
-"_0805DE54:\n"
-"ldr r0, _0805DF00\n"
-"ldr r1, [r0]\n"
-"ldr r0, _0805DF08\n"
-"ands r1, r0\n"
-"cmp r1, r0\n"
-"bne _0805DE62\n"
-"movs r4, 0x1\n"
-"_0805DE62:\n"
-"mov r0, sp\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0\n"
-"beq _0805DE6C\n"
-"movs r4, 0x1\n"
-"_0805DE6C:\n"
-"cmp r4, 0\n"
-"beq _0805DE9C\n"
-"movs r4, 0\n"
-"ldr r0, _0805DF0C\n"
-"ldr r2, [r0]\n"
-"movs r3, 0x10\n"
-"_0805DE78:\n"
-"ldrb r1, [r2]\n"
-"movs r0, 0x1\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"beq _0805DE8A\n"
-"adds r0, r3, 0\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"bne _0805DDE0\n"
-"_0805DE8A:\n"
-"adds r2, 0x4\n"
-"adds r4, 0x1\n"
-"cmp r4, 0x13\n"
-"ble _0805DE78\n"
-"_0805DE92:\n"
-"ldr r2, [sp, 0x1C]\n"
-"ldrh r0, [r2]\n"
-"cmp r0, 0\n"
-"beq _0805DE9C\n"
-"b _0805E1AE\n"
-"_0805DE9C:\n"
-"ldr r5, _0805DF10\n"
-"ldr r3, [r5]\n"
-"ldr r1, _0805DF14\n"
-"adds r0, r3, r1\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0\n"
-"bne _0805DF82\n"
-"ldr r0, _0805DEFC\n"
-"ldr r2, [r0]\n"
-"ldrb r0, [r2, 0x4]\n"
-"cmp r0, 0x6\n"
-"beq _0805DF82\n"
-"ldr r0, _0805DF00\n"
-"ldrh r1, [r0, 0x2]\n"
-"movs r0, 0x4\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"beq _0805DF82\n"
-"ldrb r4, [r2, 0x4]\n"
-"ldr r0, _0805DF18\n"
-"movs r2, 0x1\n"
-"strb r2, [r0]\n"
-"ldr r5, _0805DF1C\n"
-"adds r0, r3, r5\n"
-"strb r2, [r0]\n"
-"bl sub_8094C48\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"bne _0805DEDC\n"
-"bl sub_8094C88\n"
-"_0805DEDC:\n"
-"movs r0, 0x1\n"
-"bl sub_8052210\n"
-"bl sub_8040A84\n"
-"movs r0, 0x1E\n"
-"bl SetBGOBJEnableFlags\n"
-"movs r0, 0xA\n"
-"movs r1, 0x2F\n"
-"bl sub_803E708\n"
-"b _0805DF3A\n"
-".align 2, 0\n"
-"_0805DEF8: .4byte gUnknown_202F22C\n"
-"_0805DEFC: .4byte gGameOptionsRef\n"
-"_0805DF00: .4byte gRealInputs\n"
-"_0805DF04: .4byte gUnknown_202F22D\n"
-"_0805DF08: .4byte 0x01000200\n"
-"_0805DF0C: .4byte gTeamInventoryRef\n"
-"_0805DF10: .4byte gDungeon\n"
-"_0805DF14: .4byte 0x0001820a\n"
-"_0805DF18: .4byte gUnknown_202EE00\n"
-"_0805DF1C: .4byte 0x00018214\n"
-"_0805DF20:\n"
-"movs r0, 0x1\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"beq _0805DF3A\n"
-"ldr r2, _0805DFA0\n"
-"movs r1, 0\n"
-"ldrb r0, [r2]\n"
-"cmp r0, 0\n"
-"bne _0805DF34\n"
-"movs r1, 0x1\n"
-"_0805DF34:\n"
-"strb r1, [r2]\n"
-"bl sub_8040A84\n"
-"_0805DF3A:\n"
-"movs r0, 0x2F\n"
-"bl sub_803E46C\n"
-"ldr r0, _0805DFA4\n"
-"ldrh r1, [r0, 0x2]\n"
-"movs r0, 0x4\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"bne _0805DF54\n"
-"movs r0, 0x2\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"beq _0805DF20\n"
-"_0805DF54:\n"
-"ldr r1, _0805DFA8\n"
-"ldr r0, [r1]\n"
-"ldr r2, _0805DFAC\n"
-"adds r0, r2\n"
-"movs r1, 0\n"
-"strb r1, [r0]\n"
-"ldr r0, _0805DFB0\n"
-"ldr r0, [r0]\n"
-"strb r4, [r0, 0x4]\n"
-"ldr r0, _0805DFA0\n"
-"movs r3, 0x1\n"
-"strb r3, [r0]\n"
-"bl sub_8040A84\n"
-"movs r0, 0\n"
-"bl SetBGOBJEnableFlags\n"
-"movs r0, 0x2F\n"
-"bl sub_803E46C\n"
-"movs r0, 0x2F\n"
-"bl sub_803E46C\n"
-"_0805DF82:\n"
-"ldr r5, _0805DFA8\n"
-"ldr r0, [r5]\n"
-"ldr r1, _0805DFB4\n"
-"adds r0, r1\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0\n"
-"beq _0805DFBC\n"
-"ldr r0, _0805DFB8\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0\n"
-"bne _0805DFBC\n"
-"ldr r0, _0805DFA4\n"
-"ldrh r2, [r0, 0x2]\n"
-"adds r1, r2, 0\n"
-"b _0805DFCC\n"
-".align 2, 0\n"
-"_0805DFA0: .4byte gUnknown_202EE00\n"
-"_0805DFA4: .4byte gRealInputs\n"
-"_0805DFA8: .4byte gDungeon\n"
-"_0805DFAC: .4byte 0x00018214\n"
-"_0805DFB0: .4byte gGameOptionsRef\n"
-"_0805DFB4: .4byte 0x0000066d\n"
-"_0805DFB8: .4byte gUnknown_202F22C\n"
-"_0805DFBC:\n"
-"ldr r3, _0805E05C\n"
-"ldrh r1, [r3]\n"
-"ldr r2, [sp, 0x18]\n"
-"ldrb r0, [r2]\n"
-"adds r2, r1, 0\n"
-"cmp r0, 0\n"
-"beq _0805DFCC\n"
-"ldrh r2, [r3, 0x2]\n"
-"_0805DFCC:\n"
-"movs r0, 0xF0\n"
-"ands r1, r0\n"
-"ands r2, r0\n"
-"movs r5, 0x1\n"
-"negs r5, r5\n"
-"cmp r1, 0x50\n"
-"bne _0805DFDC\n"
-"movs r5, 0x3\n"
-"_0805DFDC:\n"
-"cmp r1, 0x60\n"
-"bne _0805DFE2\n"
-"movs r5, 0x5\n"
-"_0805DFE2:\n"
-"cmp r1, 0x90\n"
-"bne _0805DFE8\n"
-"movs r5, 0x1\n"
-"_0805DFE8:\n"
-"cmp r1, 0xA0\n"
-"bne _0805DFEE\n"
-"movs r5, 0x7\n"
-"_0805DFEE:\n"
-"cmp r2, 0x40\n"
-"bne _0805DFF4\n"
-"movs r5, 0x4\n"
-"_0805DFF4:\n"
-"cmp r2, 0x80\n"
-"bne _0805DFFA\n"
-"movs r5, 0\n"
-"_0805DFFA:\n"
-"cmp r2, 0x10\n"
-"bne _0805E000\n"
-"movs r5, 0x2\n"
-"_0805E000:\n"
-"cmp r2, 0x20\n"
-"bne _0805E006\n"
-"movs r5, 0x6\n"
-"_0805E006:\n"
-"cmp r5, 0\n"
-"bge _0805E00C\n"
-"b _0805E1A0\n"
-"_0805E00C:\n"
-"ldr r0, _0805E060\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0\n"
-"beq _0805E020\n"
-"adds r0, r5, 0\n"
-"movs r3, 0x1\n"
-"ands r0, r3\n"
-"cmp r0, 0\n"
-"bne _0805E020\n"
-"b _0805E1A0\n"
-"_0805E020:\n"
-"mov r2, r8\n"
-"adds r2, 0x46\n"
-"ldrb r1, [r2]\n"
-"eors r1, r5\n"
-"negs r0, r1\n"
-"orrs r0, r1\n"
-"lsrs r7, r0, 31\n"
-"movs r1, 0x7\n"
-"adds r0, r5, 0\n"
-"ands r0, r1\n"
-"strb r0, [r2]\n"
-"ldr r0, _0805E064\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0\n"
-"beq _0805E068\n"
-"ldr r0, [sp, 0x10]\n"
-"adds r0, 0x33\n"
-"strb r5, [r0]\n"
-"mov r0, r10\n"
-"bl sub_806CEBC\n"
-"adds r1, r0, 0\n"
-"lsls r1, 24\n"
-"lsrs r1, 24\n"
-"mov r0, r10\n"
-"adds r2, r5, 0\n"
-"bl sub_806CDD4\n"
-"b _0805E1A0\n"
-".align 2, 0\n"
-"_0805E05C: .4byte gRealInputs\n"
-"_0805E060: .4byte gUnknown_202F22C\n"
-"_0805E064: .4byte gUnknown_202F22D\n"
-"_0805E068:\n"
-"movs r4, 0\n"
-"movs r3, 0\n"
-"mov r0, r10\n"
-"movs r1, 0x1\n"
-"str r3, [sp, 0x20]\n"
-"bl sub_805EC4C\n"
-"lsls r0, 24\n"
-"ldr r3, [sp, 0x20]\n"
-"cmp r0, 0\n"
-"beq _0805E080\n"
-"b _0805E1AE\n"
-"_0805E080:\n"
-"mov r0, r8\n"
-"adds r0, 0xB0\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0x2\n"
-"bne _0805E094\n"
-"ldr r0, _0805E090\n"
-"b _0805E0BE\n"
-".align 2, 0\n"
-"_0805E090: .4byte gUnknown_80F8A84\n"
-"_0805E094:\n"
-"cmp r0, 0x7\n"
-"bne _0805E0A0\n"
-"ldr r0, _0805E09C\n"
-"b _0805E0BE\n"
-".align 2, 0\n"
-"_0805E09C: .4byte gUnknown_80F8A6C\n"
-"_0805E0A0:\n"
-"cmp r0, 0x5\n"
-"bne _0805E0AC\n"
-"ldr r0, _0805E0A8\n"
-"b _0805E0BE\n"
-".align 2, 0\n"
-"_0805E0A8: .4byte gUnknown_80F8AB0\n"
-"_0805E0AC:\n"
-"cmp r0, 0x3\n"
-"bne _0805E0B8\n"
-"ldr r0, _0805E0B4\n"
-"b _0805E0BE\n"
-".align 2, 0\n"
-"_0805E0B4: .4byte gUnknown_80F8ADC\n"
-"_0805E0B8:\n"
-"cmp r0, 0x4\n"
-"bne _0805E0C2\n"
-"ldr r0, _0805E128\n"
-"_0805E0BE:\n"
-"ldr r3, [r0]\n"
-"movs r4, 0x1\n"
-"_0805E0C2:\n"
-"mov r0, r10\n"
-"adds r1, r5, 0\n"
-"str r3, [sp, 0x20]\n"
-"bl CanMoveInDirection\n"
-"lsls r0, 24\n"
-"ldr r3, [sp, 0x20]\n"
-"cmp r0, 0\n"
-"bne _0805E0D8\n"
-"movs r0, 0x2\n"
-"orrs r4, r0\n"
-"_0805E0D8:\n"
-"cmp r7, 0\n"
-"beq _0805E0F4\n"
-"mov r0, r10\n"
-"str r3, [sp, 0x20]\n"
-"bl sub_806CEBC\n"
-"adds r1, r0, 0\n"
-"lsls r1, 24\n"
-"lsrs r1, 24\n"
-"mov r0, r10\n"
-"adds r2, r5, 0\n"
-"bl sub_806CDD4\n"
-"ldr r3, [sp, 0x20]\n"
-"_0805E0F4:\n"
-"movs r7, 0x2\n"
-"adds r0, r4, 0\n"
-"ands r0, r7\n"
-"cmp r0, 0\n"
-"bne _0805E192\n"
-"movs r5, 0x1\n"
-"mov r9, r5\n"
-"ands r5, r4\n"
-"cmp r5, 0\n"
-"beq _0805E134\n"
-"cmp r3, 0\n"
-"beq _0805E114\n"
-"mov r0, r10\n"
-"adds r1, r3, 0\n"
-"bl SendMessage\n"
-"_0805E114:\n"
-"movs r0, 0x1\n"
-"bl sub_8044C50\n"
-"ldr r1, _0805E12C\n"
-"ldr r0, [r1]\n"
-"ldr r2, _0805E130\n"
-"adds r0, r2\n"
-"mov r3, r9\n"
-"strb r3, [r0]\n"
-"b _0805E1AE\n"
-".align 2, 0\n"
-"_0805E128: .4byte gUnknown_80F8B0C\n"
-"_0805E12C: .4byte gDungeon\n"
-"_0805E130: .4byte 0x00000673\n"
-"_0805E134:\n"
-"movs r0, 0x2\n"
-"bl sub_8044C50\n"
-"ldr r0, _0805E17C\n"
-"ldrh r1, [r0]\n"
-"adds r0, r7, 0\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"bne _0805E14C\n"
-"movs r0, 0\n"
-"cmp r0, 0\n"
-"beq _0805E188\n"
-"_0805E14C:\n"
-"movs r0, 0x9E\n"
-"lsls r0, 1\n"
-"add r0, r8\n"
-"ldr r0, [r0]\n"
-"bl FixedPointToInt\n"
-"cmp r0, 0\n"
-"beq _0805E188\n"
-"mov r1, r10\n"
-"ldr r0, [r1, 0x70]\n"
-"adds r0, 0xBC\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0x2\n"
-"beq _0805E174\n"
-"ldr r2, _0805E180\n"
-"ldr r0, [r2]\n"
-"ldr r3, _0805E184\n"
-"adds r0, r3\n"
-"mov r1, r9\n"
-"strb r1, [r0]\n"
-"_0805E174:\n"
-"mov r0, r8\n"
-"adds r0, 0x48\n"
-"strb r5, [r0]\n"
-"b _0805E1AE\n"
-".align 2, 0\n"
-"_0805E17C: .4byte gRealInputs\n"
-"_0805E180: .4byte gDungeon\n"
-"_0805E184: .4byte 0x0000066c\n"
-"_0805E188:\n"
-"mov r0, r8\n"
-"adds r0, 0x48\n"
-"movs r2, 0x1\n"
-"strb r2, [r0]\n"
-"b _0805E1AE\n"
-"_0805E192:\n"
-"movs r3, 0x1\n"
-"ands r4, r3\n"
-"cmp r4, 0\n"
-"beq _0805E1A0\n"
-"movs r0, 0x23\n"
-"bl sub_803E724\n"
-"_0805E1A0:\n"
-"movs r0, 0xF\n"
-"bl sub_803E46C\n"
-"ldr r5, [sp, 0x14]\n"
-"cmp r5, 0\n"
-"bne _0805E1AE\n"
-"b _0805DB24\n"
-"_0805E1AE:\n"
-"ldr r1, [sp, 0x18]\n"
-"ldrb r0, [r1]\n"
-"cmp r0, 0\n"
-"beq _0805E1BA\n"
-"bl sub_804AA60\n"
-"_0805E1BA:\n"
-"ldr r4, [sp, 0x1C]\n"
-"ldrh r0, [r4]\n"
-"cmp r0, 0x2D\n"
-"beq _0805E1C6\n"
-"cmp r0, 0x13\n"
-"bne _0805E1E0\n"
-"_0805E1C6:\n"
-"mov r0, r10\n"
-"bl HandleTalkFieldAction\n"
-"bl sub_8044B28\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"bne _0805E2B0\n"
-"movs r0, 0\n"
-"bl sub_8044C50\n"
-"bl _0805D980\n"
-"_0805E1E0:\n"
-"lsls r0, r6, 24\n"
-"lsrs r1, r0, 24\n"
-"cmp r1, 0\n"
-"bne _0805E222\n"
-"ldr r2, _0805E210\n"
-"ldr r0, [r2]\n"
-"ldr r3, _0805E214\n"
-"adds r0, r3\n"
-"strb r1, [r0]\n"
-"ldrh r0, [r4]\n"
-"cmp r0, 0\n"
-"beq _0805E218\n"
-"mov r0, r10\n"
-"movs r1, 0\n"
-"bl IsNotAttacking\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"bne _0805E2B0\n"
-"movs r0, 0xF\n"
-"bl sub_803E46C\n"
-"b _0805E2B0\n"
-".align 2, 0\n"
-"_0805E210: .4byte gDungeon\n"
-"_0805E214: .4byte 0x0000066d\n"
-"_0805E218:\n"
-"movs r0, 0xF\n"
-"bl sub_803E46C\n"
-"bl _0805D980\n"
-"_0805E222:\n"
-"movs r0, 0xF\n"
-"bl sub_803E46C\n"
-"bl sub_8047158\n"
-"movs r2, 0\n"
-"lsrs r0, r6, 8\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"bne _0805E238\n"
-"movs r2, 0x1\n"
-"_0805E238:\n"
-"lsrs r1, r6, 16\n"
-"lsls r1, 24\n"
-"lsrs r1, 24\n"
-"adds r0, r2, 0\n"
-"bl ShowFieldMenu\n"
-"bl ResetRepeatTimers\n"
-"bl ResetUnusedInputStruct\n"
-"ldr r1, _0805E294\n"
-"movs r0, 0\n"
-"strb r0, [r1]\n"
-"movs r0, 0\n"
-"ldr r5, [sp, 0x18]\n"
-"strb r0, [r5]\n"
-"bl sub_804AA60\n"
-"bl sub_8044B28\n"
-"lsls r0, 24\n"
-"lsrs r1, r0, 24\n"
-"cmp r1, 0\n"
-"bne _0805E2B0\n"
-"ldrh r0, [r4]\n"
-"cmp r0, 0\n"
-"beq _0805E29C\n"
-"cmp r0, 0x2B\n"
-"bne _0805E27E\n"
-"ldr r2, _0805E298\n"
-"ldr r0, [r2]\n"
-"movs r3, 0x1\n"
-"strb r3, [r0, 0x4]\n"
-"ldr r0, [r2]\n"
-"strb r3, [r0, 0x3]\n"
-"_0805E27E:\n"
-"ldr r5, [sp, 0x1C]\n"
-"ldrh r0, [r5]\n"
-"cmp r0, 0x2E\n"
-"bne _0805E2B0\n"
-"ldr r2, _0805E298\n"
-"ldr r0, [r2]\n"
-"movs r3, 0x1\n"
-"strb r3, [r0, 0x4]\n"
-"ldr r0, [r2]\n"
-"strb r1, [r0, 0x3]\n"
-"b _0805E2B0\n"
-".align 2, 0\n"
-"_0805E294: .4byte gUnknown_202F22D\n"
-"_0805E298: .4byte gDungeon\n"
-"_0805E29C:\n"
-"movs r0, 0xF\n"
-"bl sub_803E46C\n"
-"ldr r5, _0805E2C0\n"
-"ldr r0, [r5]\n"
-"ldrb r0, [r0, 0x4]\n"
-"cmp r0, 0\n"
-"bne _0805E2B0\n"
-"bl _0805D980\n"
-"_0805E2B0:\n"
-"add sp, 0x24\n"
-"pop {r3-r5}\n"
-"mov r8, r3\n"
-"mov r9, r4\n"
-"mov r10, r5\n"
-"pop {r4-r7}\n"
-"pop {r0}\n"
-"bx r0\n"
-".align 2, 0\n"
-"_0805E2C0: .4byte gDungeon\n");
-}
+    s16 unk0;
+    s16 unk2;
+    u8 unk4;
+    u8 unk5;
+};
 
-#endif
+extern const struct UnkStruct_8106AC8 gUnknown_8106AC8[];
 
-/* TODO: leaving this for now as it uses weird sprite OAM logic
-void sub_805E2C4(Entity *leader)
+struct UnkStruct_8106AE8
 {
-    unkDungeonGlobal_unk181E8_sub *unkPtr;
+    s16 unk0;
+    s16 unk2;
+    u32 unk4;
+    u8 unk8;
+    u8 unk9;
+    u8 unkA;
+};
 
-    unkPtr = &gDungeon->unk181e8;
-    if (gUnknown_202F22C == 0) {
+extern const struct UnkStruct_8106AE8 gUnknown_8106AE8[];
 
+#ifdef NONMATCHING
+// Not even close in terms of matching, but functionally equivalent. Sprite OAM memes break the stack here.
+// Creates arrow sprites which are used when in rotate or diagonal modes.
+static void TryCreateModeArrows(Entity *leader) // https://decomp.me/scratch/gFX1S
+{
+    UnkDungeonGlobal_unk181E8_sub *unkPtr = &gDungeon->unk181e8;
+
+    if (sInDiagonalMode) {
+        s32 i;
+        SpriteOAM sprite;
+
+        for (i = 0; i < 4; i++) {
+            u32 objMode, matrixNum, tileNum, prio, xSprite, unk6;
+            s32 x, xMul, x2;
+            s32 unk1, unk1Mul, unk2;
+
+            sprite.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
+            sprite.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+
+            objMode = 1 << SPRITEOAM_SHIFT_OBJMODE;
+            sprite.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
+            sprite.attrib1 |= objMode;
+
+            sprite.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
+            sprite.attrib1 &= ~SPRITEOAM_MASK_BPP;
+
+            sprite.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
+
+            if (gUnknown_8106AC8[i].unk4 != 0)
+                matrixNum = 8;
+            else
+                matrixNum = 0;
+
+            if (gUnknown_8106AC8[i].unk5)
+                matrixNum += 16;
+
+            matrixNum &= SPRITEOAM_MAX_MATRIXNUM;
+            matrixNum <<= SPRITEOAM_SHIFT_MATRIXNUM;
+            sprite.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
+            sprite.attrib2 |= matrixNum;
+
+            sprite.attrib2 &= ~SPRITEOAM_MASK_SHAPE;
+
+            tileNum = 0x213 << SPRITEOAM_SHIFT_TILENUM;
+            sprite.attrib3 &= ~SPRITEOAM_MASK_TILENUM;
+            sprite.attrib3 |= tileNum;
+
+            prio = 2 << SPRITEOAM_SHIFT_PRIORITY;
+            sprite.attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
+            sprite.attrib3 |= prio;
+
+            sprite.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
+
+            sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_0;
+            sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_1;
+
+            x = gUnknown_8106AC8[i].unk0;
+            xMul = x * 10;
+            x2 = (sArrowsFrames / 2) & 7;
+            xSprite = xMul + 116 + (x2 * x);
+            xSprite &= SPRITEOAM_MAX_X;
+            xSprite <<= SPRITEOAM_SHIFT_X;
+            sprite.attrib2 &= ~SPRITEOAM_MASK_X;
+            sprite.attrib2 |= xSprite;
+
+            unk1 = gUnknown_8106AC8[i].unk2;
+            unk1Mul = unk1 * 10;
+            unk2 = (sArrowsFrames / 2) & 7;
+            unk6 = 82 + unk1Mul + (unk2 * unk1);
+            unk6 &= SPRITEOAM_MAX_UNK6_4;
+            unk6 <<= SPRITEOAM_SHIFT_UNK6_4;
+            sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
+            sprite.unk6 |= unk6;
+
+            AddSprite(&sprite, 0x100, NULL, NULL);
+        }
+    }
+    else if (unkPtr->unk1821A) {
+        s32 i, to;
+        SpriteOAM sprite;
+        s32 var_2C = unkPtr->unk1821B;
+        s32 x, y;
+        s32 x1, x2, xMul;
+        s32 y1, y2, yMul;
+
+        if (var_2C < 8u) {
+            to = (sShowThreeArrows2 != 0 && sShowThreeArrows1 != 0) ? 3 : 1;
+
+            x1 = gUnknown_8106AE8[var_2C].unk0;
+            xMul = x1 * 10;
+            x2 = (sArrowsFrames / 2) & 7;
+            x =  xMul + 116 + (x1 * x2);
+
+            y1 = gUnknown_8106AE8[var_2C].unk2;
+            yMul = y1 * 10;
+            y2 = (sArrowsFrames / 2) & 7;
+            y = 82 + yMul + (y2 * y1);
+            for (i = 0; i < to; i++) {
+                u32 objMode, tileNum, prio, matrixNum, xSprite, ySprite;
+
+                sprite.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
+                sprite.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+
+                objMode = 1 << SPRITEOAM_SHIFT_OBJMODE;
+                sprite.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
+                sprite.attrib1 |= objMode;
+
+                sprite.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
+                sprite.attrib1 &= ~SPRITEOAM_MASK_BPP;
+
+                sprite.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
+
+                if (gUnknown_8106AE8[var_2C].unk8 != 0)
+                    matrixNum = 8;
+                else
+                    matrixNum = 0;
+
+                if (gUnknown_8106AE8[var_2C].unk9)
+                    matrixNum += 16;
+
+                matrixNum &= SPRITEOAM_MAX_MATRIXNUM;
+                matrixNum <<= SPRITEOAM_SHIFT_MATRIXNUM;
+                sprite.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
+                sprite.attrib2 |= matrixNum;
+
+                sprite.attrib2 &= ~SPRITEOAM_MASK_SIZE;
+
+                tileNum = gUnknown_8106AE8[var_2C].unk4;
+                sprite.attrib3 &= ~SPRITEOAM_MASK_TILENUM;
+                sprite.attrib3 |= tileNum;
+
+                prio = 2 << SPRITEOAM_SHIFT_PRIORITY;
+                sprite.attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
+                sprite.attrib3 |= prio;
+
+                sprite.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
+
+                sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_0;
+                sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_1;
+
+                xSprite = x;
+                xSprite &= SPRITEOAM_MAX_X;
+                xSprite <<= SPRITEOAM_SHIFT_X;
+                sprite.attrib2 &= ~SPRITEOAM_MASK_X;
+                sprite.attrib2 |= xSprite;
+
+                ySprite = y;
+                ySprite &= SPRITEOAM_MAX_UNK6_4;
+                ySprite <<= SPRITEOAM_SHIFT_UNK6_4;
+                sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
+                sprite.unk6 |= ySprite;
+
+                AddSprite(&sprite, 0x100, NULL, NULL);
+                x += gUnknown_8106AE8[var_2C].unk0 * 4;
+                y += gUnknown_8106AE8[var_2C].unk2 * 4;
+            }
+        }
+    }
+
+    if (sInRotateMode && unkPtr->unk1821C != unkPtr->unk1821B) {
+        unkPtr->unk1821C = unkPtr->unk1821B;
+        sub_804A728(&leader->pos, unkPtr->unk1821B, 0, sInRotateMode);
     }
 }
-*/
 
-NAKED void sub_805E2C4(Entity *leader)
+#else
+NAKED static void TryCreateModeArrows(Entity *leader)
 {
     asm_unified(	"\n"
 "	push {r4-r7,lr}\n"
@@ -2116,7 +1028,7 @@ NAKED void sub_805E2C4(Entity *leader)
 "	.align 2, 0\n"
 "_0805E47C: .4byte gDungeon\n"
 "_0805E480: .4byte 0x000181e8\n"
-"_0805E484: .4byte gUnknown_202F22C\n"
+"_0805E484: .4byte sInDiagonalMode\n"
 "_0805E488: .4byte 0xffff0000\n"
 "_0805E48C: .4byte 0x0000feff\n"
 "_0805E490: .4byte 0x0000fdff\n"
@@ -2130,7 +1042,7 @@ NAKED void sub_805E2C4(Entity *leader)
 "_0805E4B0: .4byte 0x00000fff\n"
 "_0805E4B4: .4byte 0x0000fffe\n"
 "_0805E4B8: .4byte 0x0000fffd\n"
-"_0805E4BC: .4byte gUnknown_202F22E\n"
+"_0805E4BC: .4byte sArrowsFrames\n"
 "_0805E4C0: .4byte 0x000001ff\n"
 "_0805E4C4:\n"
 "	ldr r3, _0805E6E4\n"
@@ -2414,10 +1326,10 @@ NAKED void sub_805E2C4(Entity *leader)
 "	.align 2, 0\n"
 "_0805E6E4: .4byte 0x0001821a\n"
 "_0805E6E8: .4byte 0x0001821b\n"
-"_0805E6EC: .4byte gUnknown_202F231\n"
-"_0805E6F0: .4byte gUnknown_202F230\n"
+"_0805E6EC: .4byte sShowThreeArrows2\n"
+"_0805E6F0: .4byte sShowThreeArrows1\n"
 "_0805E6F4: .4byte gUnknown_8106AE8\n"
-"_0805E6F8: .4byte gUnknown_202F22E\n"
+"_0805E6F8: .4byte sArrowsFrames\n"
 "_0805E6FC: .4byte 0xffff0000\n"
 "_0805E700: .4byte 0x0000feff\n"
 "_0805E704: .4byte 0x0000fdff\n"
@@ -2426,15 +1338,17 @@ NAKED void sub_805E2C4(Entity *leader)
 "_0805E710: .4byte 0x0000dfff\n"
 "_0805E714: .4byte 0x00003fff\n"
 "_0805E718: .4byte 0x0000c1ff\n"
-"_0805E71C: .4byte gUnknown_8106AEC\n"
+"_0805E71C: .4byte gUnknown_8106AE8 + 4\n"
 "_0805E720: .4byte 0x000003ff\n"
 "_0805E724: .4byte 0x00000fff\n"
 "_0805E728: .4byte 0x0000fffe\n"
 "_0805E72C: .4byte 0x0000fffd\n"
 "_0805E730: .4byte 0x000001ff\n"
-"_0805E734: .4byte gUnknown_202F22D"
+"_0805E734: .4byte sInRotateMode"
 );
 }
+
+#endif // NONMATCHING
 
 void sub_805E738(Entity *a0)
 {
@@ -2622,7 +1536,7 @@ bool8 sub_805EC4C(Entity *a0, u8 a1)
     Tile *tile;
     EntityInfo *tileMonsterInfo;
     Entity *tileMonster;
-    EntityInfo *entityInfo = a0->info;
+    EntityInfo *entityInfo = GetEntInfo(a0);
 
     pos.x = a0->pos.x + gAdjacentTileOffsets[entityInfo->action.direction].x;
     pos.y = a0->pos.y + gAdjacentTileOffsets[entityInfo->action.direction].y;
@@ -2632,11 +1546,11 @@ bool8 sub_805EC4C(Entity *a0, u8 a1)
     if (tileMonster == NULL) return FALSE;
     if (GetEntityType(tileMonster) != ENTITY_MONSTER) return FALSE;
 
-    tileMonsterInfo = tileMonster->info;
+    tileMonsterInfo = GetEntInfo(tileMonster);
     if (tileMonsterInfo->isNotTeamMember
         && (tileMonsterInfo->shopkeeper != 1 && tileMonsterInfo->shopkeeper != 2)
         && !IsClientOrTeamBase(tileMonsterInfo->joinedAt.joinedAt)
-        && tileMonsterInfo->clientType != 1) {
+        && tileMonsterInfo->clientType != CLIENT_TYPE_CLIENT) {
         return FALSE;
     }
 
@@ -2796,7 +1710,6 @@ extern void sub_8083CE0(u8 param_1);
 extern u8 gAvailablePokemonNames[];
 
 extern u8 gUnknown_202749A[];
-extern s32 gUnknown_202F260;
 extern MenuInputStruct gUnknown_202EE10;
 
 void sub_805F02C(void)
@@ -2867,6 +1780,17 @@ u16 GetLeaderActionId(void)
     return GetLeaderInfo()->action.action;
 }
 
+// Could this be a start of a new file?
+static UNUSED EWRAM_DATA u8 sUnused[4] = {0};
+static EWRAM_DATA unkStruct_8044CC8 sUnknownActionUnk4 = {0};
+static EWRAM_DATA s32 sUnknown_202F240 = 0;
+static UNUSED EWRAM_DATA u8 sUnused2[4] = {0};
+static EWRAM_DATA s16 sUnknown_202F248[8] = {0};
+static EWRAM_DATA s32 sUnknown_202F258 = 0;
+static UNUSED EWRAM_DATA u8 sUnused3[4] = {0};
+static EWRAM_DATA s32 sTeamMenuChosenId = 0;
+static UNUSED EWRAM_DATA u8 sUnused4[4] = {0};
+
 void ShowFieldMenu(u8 a0_, bool8 a1)
 {
     Item *item;
@@ -2895,7 +1819,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
     while (1) {
         if (r10 < 0) {
             sub_8044C10(1);
-            gUnknown_202F260 = -1;
+            sTeamMenuChosenId = -1;
             DrawFieldMenu(a0);
             sub_806A2BC(GetLeader(), 0);
             while (1) {
@@ -3020,7 +1944,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
                     Entity *teamMon = gDungeon->teamPokemon[i];
                     if (EntityExists(teamMon)) {
                         if (i == GetLeaderActionContainer()->unk4[0].actionUseIndex) {
-                            gUnknown_202F260 = count;
+                            sTeamMenuChosenId = count;
                             if (GetLeaderActionId() != 0) {
                                 sub_806A2BC(teamMon, 0);
                             }
@@ -3150,7 +2074,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
                     var_30.a0_32 = 1;
                     if (sub_805FD74(GetLeader(), &var_30)) {
                         // This actually doesn't do anything, it's just there to make the code match as the compiler does a `lsl r0, r0, #0x10, mov r0, r4`
-                        leader = 0; leader = leader;
+                        ASM_MATCH_TRICK(leader);
                     }
                     if (sub_805FD3C(&var_30) && sub_805FD74(GetLeader(), &var_30)) {
                         sub_8044C10(1);
@@ -3460,11 +2384,6 @@ bool8 sub_805FD3C(struct UnkMenuBitsStruct *a0)
     return a0->a0_8;
 }
 
-extern unkStruct_8044CC8 gUnknown_202F238;
-extern s32 gUnknown_202F240;
-extern s16 gUnknown_202F248[];
-extern s32 gUnknown_202F258;
-
 s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4);
 
 void sub_8060890(Position *a0);
@@ -3504,9 +2423,9 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
         },
     };
 
-    gUnknown_202F238.actionUseIndex = 0;
-    gUnknown_202F238.lastItemThrowPosition.x = 0;
-    gUnknown_202F238.lastItemThrowPosition.y = 0;
+    sUnknownActionUnk4.actionUseIndex = 0;
+    sUnknownActionUnk4.lastItemThrowPosition.x = 0;
+    sUnknownActionUnk4.lastItemThrowPosition.y = 0;
     if (a1 != NULL) {
         var_2C = (a1->a0_8 != 0);
         var_34 = (a1->a0_16 != 0);
@@ -3514,14 +2433,14 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
         var_28 = (a1->a0_32 != 0);
     }
 
-    gUnknown_202F258 = sub_8060D64(gUnknown_202F248, var_30, var_34, var_28, a0);
-    if (gUnknown_202F258 == 0) {
+    sUnknown_202F258 = sub_8060D64(sUnknown_202F248, var_30, var_34, var_28, a0);
+    if (sUnknown_202F258 == 0) {
         PrintFieldMessage(0, gUnknown_80F8B24, 1);
         return TRUE;
     }
 
     r8 = 0;
-    gUnknown_202F240 = 0;
+    sUnknown_202F240 = 0;
     while (1)
     {
         s32 id;
@@ -3533,7 +2452,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
             if (item->flags & ITEM_FLAG_EXISTS && item->flags & ITEM_FLAG_UNPAID) {
                 item->flags &= ~(ITEM_FLAG_UNPAID);
                 r8 = i / 10;
-                gUnknown_202F240 = i % 10;
+                sUnknown_202F240 = i % 10;
             }
         }
         for (i_r6 = 0; i_r6 < MAX_TEAM_MEMBERS; i_r6++) {
@@ -3542,19 +2461,19 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
                 EntityInfo *monInfo = teamMon->info;
                 if (monInfo->heldItem.flags & ITEM_FLAG_EXISTS && monInfo->heldItem.flags & ITEM_FLAG_UNPAID) {
                     monInfo->heldItem.flags &= ~(ITEM_FLAG_UNPAID);
-                    for (i = 0; i < gUnknown_202F258; i++) {
-                        if (gUnknown_202F248[i] == i_r6 + 4) {
+                    for (i = 0; i < sUnknown_202F258; i++) {
+                        if (sUnknown_202F248[i] == i_r6 + 4) {
                             r8 = i;
                             break;
                         }
                     }
-                    gUnknown_202F240 = 0;
+                    sUnknown_202F240 = 0;
                 }
             }
         }
         CreateFieldItemMenu(r8, a0, var_2C, var_30, &var_FC, &var_3C);
 
-        id = gUnknown_202F248[gUnknown_202EE10.unk1E];
+        id = sUnknown_202F248[gUnknown_202EE10.unk1E];
         if (id >= MAX_TEAM_MEMBERS) {
             r4 = gDungeon->teamPokemon[id - MAX_TEAM_MEMBERS];
         }
@@ -3568,21 +2487,21 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
             AddMenuCursorSprite(&gUnknown_202EE10);
             sub_803E46C(0x14);
             if (!var_30) {
-                if (gUnknown_202F258 > 1) {
+                if (sUnknown_202F258 > 1) {
                     if ((gRealInputs.pressed & DPAD_LEFT) || gUnknown_202EE10.unk28.dpad_left) {
                         sub_8083CE0(0);
                         if (--r8 < 0) {
-                            r8 = gUnknown_202F258 - 1;
+                            r8 = sUnknown_202F258 - 1;
                         }
-                        gUnknown_202F240 = var_30;
+                        sUnknown_202F240 = var_30;
                         break;
                     }
                     if ((gRealInputs.pressed & DPAD_RIGHT) || gUnknown_202EE10.unk28.dpad_right) {
                         sub_8083CE0(0);
-                        if (++r8 == gUnknown_202F258) {
+                        if (++r8 == sUnknown_202F258) {
                             r8 = 0;
                         }
-                        gUnknown_202F240 = var_30;
+                        sUnknown_202F240 = var_30;
                         break;
                     }
                 }
@@ -3594,7 +2513,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
                     sub_8083CE0(1);
                     sub_8013744(&gUnknown_202EE10, 1);
                 }
-                if (gRealInputs.pressed & SELECT_BUTTON && gUnknown_202F248[r8] <= 1) {
+                if (gRealInputs.pressed & SELECT_BUTTON && sUnknown_202F248[r8] <= 1) {
                     s32 r3;
                     bool32 r7 = TRUE;
                     s16 arr[10];
@@ -3602,11 +2521,11 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
                     PlaySoundEffect(0x132);
                     sub_8047158();
                     ConvertMoneyItemToMoney();
-                    gUnknown_202F240 = 0;
+                    sUnknown_202F240 = 0;
                     r3 = sub_8060D64(arr, var_30, var_34, var_28, a0);
-                    if (gUnknown_202F258 == r3) {
+                    if (sUnknown_202F258 == r3) {
                         for (i_r6 = 0; i_r6 < r3; i_r6++) {
-                            if (arr[i_r6] != gUnknown_202F248[i_r6]) {
+                            if (arr[i_r6] != sUnknown_202F248[i_r6]) {
                                 break;
                             }
                         }
@@ -3616,10 +2535,10 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
                     }
                     if (r7) {
                         r8 = 0;
-                        gUnknown_202F240 = 0;
-                        gUnknown_202F258 = r3;
-                        for (i_r6 = 0; i_r6 < gUnknown_202F258; i_r6++) {
-                            gUnknown_202F248[i_r6] = arr[i_r6];
+                        sUnknown_202F240 = 0;
+                        sUnknown_202F258 = r3;
+                        for (i_r6 = 0; i_r6 < sUnknown_202F258; i_r6++) {
+                            sUnknown_202F248[i_r6] = arr[i_r6];
                         }
                     }
                     break;
@@ -3650,7 +2569,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
         }
         AddMenuCursorSprite(&gUnknown_202EE10);
         sub_803E46C(0x14);
-        if (gUnknown_202F248[gUnknown_202EE10.unk1E] <= 1 && !(gTeamInventoryRef->teamItems[0].flags & ITEM_FLAG_EXISTS)) {
+        if (sUnknown_202F248[gUnknown_202EE10.unk1E] <= 1 && !(gTeamInventoryRef->teamItems[0].flags & ITEM_FLAG_EXISTS)) {
             r9 = 2;
         }
 
@@ -3664,15 +2583,15 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
         }
         else if (r9 == 3) {
             SetMonsterActionFields(&a0Info->action, 0xC);
-            a0Info->action.unk4[0] = gUnknown_202F238;
+            a0Info->action.unk4[0] = sUnknownActionUnk4;
             sub_803EAF0(0, NULL);
             r9 = 0;
             break;
         }
         else {
-            gUnknown_202F240 = gUnknown_202EE10.menuIndex;
+            sUnknown_202F240 = gUnknown_202EE10.menuIndex;
             if (var_2C != 0) {
-                a0Info->action.unk4[1] = gUnknown_202F238;
+                a0Info->action.unk4[1] = sUnknownActionUnk4;
                 sub_803EAF0(0, NULL);
                 r9 = 0;
                 break;
@@ -3713,7 +2632,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
             if (r9 != 1 || var_30 != 0) {
                 if (a0Info->action.action == 0x37 || a0Info->action.action == 0x38 || a0Info->action.action == 0x3E) {
                     // Hm...
-                    int newAction = gUnknown_202F238.actionUseIndex - 0x90;
+                    int newAction = sUnknownActionUnk4.actionUseIndex - 0x90;
                     a0Info->action.unk4[0].actionUseIndex = newAction;
                     sub_803EAF0(0, 0);
                     r9 = 0;
@@ -3761,16 +2680,16 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     var_94 = gUnknown_8106B6C;
     a1Info = a1->info;
     r10 = sub_8060800(a5, a0);
-    gUnknown_202EE10.menuIndex = gUnknown_202F240;
+    gUnknown_202EE10.menuIndex = sUnknown_202F240;
     gUnknown_202EE10.unk1A = 0;
     gUnknown_202EE10.unk1E = a0;
-    gUnknown_202EE10.unk20 = gUnknown_202F258;
+    gUnknown_202EE10.unk20 = sUnknown_202F258;
     gUnknown_202EE10.unk4 = 0;
     gUnknown_202EE10.unk0 = 0;
     gUnknown_202EE10.unk14.x = 0;
     sub_801317C(&gUnknown_202EE10.unk28);
     gDungeon->unk181e8.unk18212 = 0;
-    switch (gUnknown_202F248[a0]) {
+    switch (sUnknown_202F248[a0]) {
         case 0:
         case 1:
             a4->a0[0].unk10 = 0x10;
@@ -3814,16 +2733,12 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     sub_80137B0(&gUnknown_202EE10, 0x70);
     sub_80073B8(0);
     x = ((a0 - r10) * 8) + 0xC;
-    switch (gUnknown_202F248[a0])
+    switch (sUnknown_202F248[a0])
     {
     case 0:
         PrintFormatStringOnWindow(x, 0, gTeamToolboxAPtr, 0, 0);
         for (i = 0; i < 10; i++) {
-            Item *items;
-            DUMMY_TEAM_ITEMS_ASM_MATCH(i);
-
-            items = gTeamInventoryRef->teamItems;
-            if (items[i].flags & ITEM_FLAG_EXISTS) {
+            if (ItemExists(&gTeamInventoryRef->teamItems[i])) {
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, &gTeamInventoryRef->teamItems[i], &gUnknown_8106B60);
                 y = sub_8013800(&gUnknown_202EE10, i);
@@ -3837,11 +2752,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     case 1:
         PrintFormatStringOnWindow(x, 0, gTeamToolboxBPtr, 0, 0);
         for (i = 0; i < 10; i++) {
-            Item *items;
-            DUMMY_TEAM_ITEMS_ASM_MATCH(i);
-
-            items = gTeamInventoryRef->teamItems;
-            if (items[i + 10].flags & 1) {
+            if (ItemExists(&gTeamInventoryRef->teamItems[i + 10])) {
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, &gTeamInventoryRef->teamItems[i + 10], &gUnknown_8106B60);
                 y = sub_8013800(&gUnknown_202EE10, i);
@@ -3880,7 +2791,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
         }
         break;
     default: {
-            Entity *chosenTeamMember = gDungeon->teamPokemon[gUnknown_202F248[a0] - MAX_TEAM_MEMBERS];
+            Entity *chosenTeamMember = gDungeon->teamPokemon[sUnknown_202F248[a0] - MAX_TEAM_MEMBERS];
             if (EntityExists(chosenTeamMember)) {
                 Item *item = &chosenTeamMember->info->heldItem;
                 SetMessageArgument_2(gAvailablePokemonNames, chosenTeamMember->info, 0);
@@ -3912,20 +2823,20 @@ s32 sub_8060800(UnkTextStruct2_sub2 *a0, s32 a1)
     s32 i, r1, r2, r3;
 
     r1 = 0;
-    for (i = 0; i < gUnknown_202F258; i++) {
-        if (gUnknown_202F248[i] <= 1) {
+    for (i = 0; i < sUnknown_202F258; i++) {
+        if (sUnknown_202F248[i] <= 1) {
             r1++;
         }
     }
 
-    if (gUnknown_202F248[a1] <= 1) {
+    if (sUnknown_202F248[a1] <= 1) {
         r3 = a1;
         r2 = r1;
         r1 = 0;
     }
     else {
         r3 = a1 - r1;
-        r2 = gUnknown_202F258 - r1;
+        r2 = sUnknown_202F258 - r1;
     }
 
     if (a0 != NULL) {
@@ -3939,7 +2850,7 @@ s32 sub_8060800(UnkTextStruct2_sub2 *a0, s32 a1)
 
 bool8 sub_8060860(s32 a0)
 {
-    if (gUnknown_202EE10.unk1A <= 1 || gUnknown_202F248[a0] > 1)
+    if (gUnknown_202EE10.unk1A <= 1 || sUnknown_202F248[a0] > 1)
         return FALSE;
     else
         return TRUE;
@@ -3947,25 +2858,25 @@ bool8 sub_8060860(s32 a0)
 
 void sub_8060890(Position *a0)
 {
-    s32 var = gUnknown_202F248[gUnknown_202EE10.unk1E];
+    s32 var = sUnknown_202F248[gUnknown_202EE10.unk1E];
     switch (var)
     {
     case 0:
-        gUnknown_202F238.actionUseIndex = gUnknown_202EE10.menuIndex + 1;
+        sUnknownActionUnk4.actionUseIndex = gUnknown_202EE10.menuIndex + 1;
         break;
     case 1:
-        gUnknown_202F238.actionUseIndex = gUnknown_202EE10.menuIndex + 11;
+        sUnknownActionUnk4.actionUseIndex = gUnknown_202EE10.menuIndex + 11;
         break;
     case 2:
-        gUnknown_202F238.actionUseIndex = 128;
+        sUnknownActionUnk4.actionUseIndex = 128;
         break;
     default:
-        gUnknown_202F238.actionUseIndex = var - 116;
+        sUnknownActionUnk4.actionUseIndex = var - 116;
         break;
     }
 
-    gUnknown_202F238.lastItemThrowPosition.x = a0->x;
-    gUnknown_202F238.lastItemThrowPosition.y = a0->y;
+    sUnknownActionUnk4.lastItemThrowPosition.x = a0->x;
+    sUnknownActionUnk4.lastItemThrowPosition.y = a0->y;
 }
 
 extern Item * sub_8044CC8(Entity *param_1, unkStruct_8044CC8 *param_2, UNUSED s32 a3);
@@ -3978,12 +2889,12 @@ extern void sub_8045064(void);
 void sub_8060900(Entity *a0)
 {
     u16 val_sub8044DC8;
-    Item *item = sub_8044CC8(a0, &gUnknown_202F238, 0xA);
+    Item *item = sub_8044CC8(a0, &sUnknownActionUnk4, 0xA);
     EntityInfo *a0Info = a0->info;
 
     gUnknown_202EE6C = 0;
-    if (gUnknown_202F238.actionUseIndex < 144) {
-        if (gUnknown_202F238.actionUseIndex == 128) {
+    if (sUnknownActionUnk4.actionUseIndex < 144) {
+        if (sUnknownActionUnk4.actionUseIndex == 128) {
             sub_8044F5C(9, item->id);
             if (GetItemCategory(item->id) != CATEGORY_POKE) {
                 bool32 r2 = 0;
@@ -4000,10 +2911,9 @@ void sub_8060900(Entity *a0)
                     sub_8044FF0(9);
                 }
             }
-            // Why is it checking actionUseIndex again?
-            if (gUnknown_202F238.actionUseIndex == 128 && gDungeon->unk65B != 0) {
-                sub_8044F5C(10, item->id);
-            }
+        }
+        if (sUnknownActionUnk4.actionUseIndex == 128 && gDungeon->unk65B != 0) {
+            sub_8044F5C(10, item->id);
         }
         val_sub8044DC8 = sub_8044DC8(item);
         if (val_sub8044DC8 != 0) {
@@ -4016,12 +2926,12 @@ void sub_8060900(Entity *a0)
             }
         }
 
-        if (gUnknown_202F238.actionUseIndex <= 20
+        if (sUnknownActionUnk4.actionUseIndex <= 20
             && (GetItemCategory(item->id) == CATEGORY_THROWN_LINE || GetItemCategory(item->id) == CATEGORY_THROWN_ARC))
         {
             s32 i;
 
-            if (item->flags & ITEM_FLAG_SET) {
+            if (ItemSet(item)) {
                 sub_8044F5C(0x3D, item->id);
             }
             else {
@@ -4029,13 +2939,9 @@ void sub_8060900(Entity *a0)
             }
 
             for (i = 0; i < INVENTORY_SIZE; i++) {
-                // Compiler uses r5 without the fakematch trick. It's gTeamInventoryRef causing matching issues again...
-                #ifndef NONMATCHING
-                item++;item--;
-                #endif // NONMATCHING
-                if (gTeamInventoryRef->teamItems[i].flags & ITEM_FLAG_EXISTS
-                    && gTeamInventoryRef->teamItems[i].flags & ITEM_FLAG_SET
-                    && gTeamInventoryRef->teamItems[i].flags & ITEM_FLAG_STICKY)
+                if (ItemExists(&gTeamInventoryRef->teamItems[i])
+                    && ItemSet(&gTeamInventoryRef->teamItems[i])
+                    && ItemSticky(&gTeamInventoryRef->teamItems[i]))
                 {
                     sub_8044FF0(0x3C);
                     sub_8044FF0(0x3D);
@@ -4044,8 +2950,8 @@ void sub_8060900(Entity *a0)
             }
         }
 
-        if (gUnknown_202F238.actionUseIndex != 129) {
-            if (gUnknown_202F238.actionUseIndex != 128) {
+        if (sUnknownActionUnk4.actionUseIndex != 129) {
+            if (sUnknownActionUnk4.actionUseIndex != 128) {
                 s32 i;
                 bool32 r8 = FALSE;
 
@@ -4080,7 +2986,7 @@ void sub_8060900(Entity *a0)
             }
         }
 
-        if (gUnknown_202F238.actionUseIndex <= 20) {
+        if (sUnknownActionUnk4.actionUseIndex <= 20) {
             Entity *tileEntity = GetTile(a0->pos.x, a0->pos.y)->object;
             if (tileEntity == NULL) {
                 sub_8044F5C(8, item->id);
@@ -4107,7 +3013,7 @@ void sub_8060900(Entity *a0)
         }
     }
     else {
-        s32 index = gUnknown_202F238.actionUseIndex - 144;
+        s32 index = sUnknownActionUnk4.actionUseIndex - 144;
         Entity *teamMon = gDungeon->teamPokemon[index];
         if (EntityExists(teamMon)) {
             bool32 r5, r6, r4;
@@ -4169,7 +3075,7 @@ void sub_8060900(Entity *a0)
 void sub_8060CE8(ActionContainer *a0)
 {
     SetMonsterActionFields(a0, gUnknown_202EE44[gUnknown_202EE10.menuIndex].unk0);
-    a0->unk4[0] = gUnknown_202F238;
+    a0->unk4[0] = sUnknownActionUnk4;
     a0->unk4[1].actionUseIndex = 0;
     a0->unk4[1].lastItemThrowPosition.x = 0;
     a0->unk4[1].lastItemThrowPosition.y = 0;
@@ -4330,7 +3236,7 @@ bool8 sub_8060E38(Entity *a0)
         }
 
         sp.unk0 = gUnknown_202EE10.menuIndex;
-        gUnknown_202F260 = gUnknown_202EE10.menuIndex;
+        sTeamMenuChosenId = gUnknown_202EE10.menuIndex;
         sub_806145C(&sp);
         if (r10) {
             EntityInfo *info = a0->info;
@@ -4417,18 +3323,18 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
             a0->unk4[count] = i;
             monInfo = teamMon->info;
             a0->unk14[count] = monInfo->unk157;
-            if (pos.x == teamMon->pos.x && pos.y == teamMon->pos.y && gUnknown_202F260 < 0) {
-                gUnknown_202F260 = count;
+            if (pos.x == teamMon->pos.x && pos.y == teamMon->pos.y && sTeamMenuChosenId < 0) {
+                sTeamMenuChosenId = count;
             }
             count++;
         }
     }
 
-    if (gUnknown_202F260 >= count) {
-        gUnknown_202F260 = count - 1;
+    if (sTeamMenuChosenId >= count) {
+        sTeamMenuChosenId = count - 1;
     }
-    if (gUnknown_202F260 < 0) {
-        gUnknown_202F260 = 0;
+    if (sTeamMenuChosenId < 0) {
+        sTeamMenuChosenId = 0;
     }
 
     for (i = count; i < MAX_TEAM_MEMBERS; i++) {
@@ -4439,7 +3345,7 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
     gUnknown_202F270.f0 = 1;
     gUnknown_202F270.f1 = 0;
     gUnknown_202F270.f3 = 0;
-    gUnknown_202EE10.menuIndex = gUnknown_202F260;
+    gUnknown_202EE10.menuIndex = sTeamMenuChosenId;
     gUnknown_202EE10.unk1A = count;
     gUnknown_202EE10.unk1C = count;
     gUnknown_202EE10.unk1E = 0;
@@ -4535,7 +3441,7 @@ void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
 
     gUnknown_202EE6C = 0;
     teamMon = gDungeon->teamPokemon[a0->unk4[gUnknown_202EE10.menuIndex]];
-    monInfo = teamMon->info;
+    monInfo = GetEntInfo(teamMon);
     sub_8044F5C(0x1B, 0);
     sub_8044F5C(0x19, 0);
     if (!monInfo->isTeamLeader) {
@@ -4547,28 +3453,27 @@ void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
     sub_8044F5C(0x30, 0);
     if (!monInfo->isTeamLeader) {
         sub_8044F5C(0x1A, 0);
-        // Why checking teamLeader again?
-        if (!monInfo->isTeamLeader && gDungeon->unk65C && CanLeaderSwitch(gDungeon->dungeonLocation.id)) {
-            bool32 r5;
+    }
+    if (!monInfo->isTeamLeader && gDungeon->unk65C && CanLeaderSwitch(gDungeon->dungeonLocation.id)) {
+        bool32 r5;
 
-            sub_8044F5C(0x3B, 0);
-            r5 = TRUE;
-            if (monInfo->teamIndex >= MAX_TEAM_MEMBERS) {
+        sub_8044F5C(0x3B, 0);
+        r5 = TRUE;
+        if (monInfo->teamIndex >= MAX_TEAM_MEMBERS) {
+            r5 = FALSE;
+        }
+        else {
+            PokemonStruct2 *mon = &gRecruitedPokemonRef->pokemon2[monInfo->teamIndex];
+            if (sub_806A538(mon->unkA)) {
                 r5 = FALSE;
             }
-            else {
-                PokemonStruct2 *mon = &gRecruitedPokemonRef->pokemon2[monInfo->teamIndex];
-                if (sub_806A538(mon->unkA)) {
-                    r5 = FALSE;
-                }
-            }
+        }
 
-            if (CheckVariousStatuses2(teamMon, FALSE)) {
-                r5 = FALSE;
-            }
-            if (!r5) {
-                sub_8044FF0(0x3B);
-            }
+        if (CheckVariousStatuses2(teamMon, FALSE)) {
+            r5 = FALSE;
+        }
+        if (!r5) {
+            sub_8044FF0(0x3B);
         }
     }
 
