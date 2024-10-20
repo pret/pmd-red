@@ -141,7 +141,7 @@ void sub_8030E48(void)
     case WONDER_MAIL_TYPE_AOK:
         stack.mailDescriptionType = 10;
         break;
-    case 5:
+    case WONDER_MAIL_TYPE_THANK_YOU:
         stack.mailDescriptionType = 11;
         break;
     case WONDER_MAIL_TYPE_NONE:
