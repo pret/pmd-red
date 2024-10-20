@@ -139,7 +139,7 @@ bool8 sub_8098100(u8 param_1)
     }
     else
     {
-        return (gUnknown_203B498->unk3C[param_1 >> 0x5] & (1 << (index & 0x1f))) ? TRUE : FALSE;
+        return (gUnknown_203B498->unk3C[param_1 >> 0x5] & (1 << (index & 0x1f))) != 0;
     }
 }
 
@@ -160,12 +160,12 @@ bool8 sub_8098134(s16 pokeID)
     {
         index = pokeID_s32;
     }
-    return ((ptr->unk4[(index >> 5)] & (1 << (s16)(pokeID_s32_1 - ((index >> 5) * 0x20)))) != 0) ? TRUE : FALSE;
+    return ((ptr->unk4[(index >> 5)] & (1 << (s16)(pokeID_s32_1 - ((index >> 5) * 0x20)))) != 0);
 }
 
 void SetTutorialFlag(s32 index)
 {
-    gUnknown_203B498->unk54[(index / 32)] |= (1 << (index - ((index / 32) * 32)));
+    gUnknown_203B498->unk54[index / 32] |= (1 << (index - ((index / 32) * 32)));
 }
 
 bool32 GetTutorialFlag(s32 index)
@@ -174,11 +174,7 @@ bool32 GetTutorialFlag(s32 index)
         return FALSE;
     }
     else {
-        bool32 flag = gUnknown_203B498->unk54[(index / 32)] & (1 << (index - ((index / 32) * 32)));
-        if (flag != 0) {
-            flag = TRUE;
-        }
-        return flag;
+        return (((gUnknown_203B498->unk54[index / 32]) & (1 << (index - ((index / 32) * 32)))) != 0);
     }
 }
 
