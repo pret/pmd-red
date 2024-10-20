@@ -295,7 +295,7 @@ void DungeonHandlePlayerInput(void)
                         }
                     }
                     if (j == MAX_MON_MOVES) {
-                        SetMonsterActionFields(&leaderInfo->action, 0x17);
+                        SetMonsterActionFields(&leaderInfo->action, ACTION_STRUGGLE);
                         break;
                     }
 
@@ -313,7 +313,7 @@ void DungeonHandlePlayerInput(void)
                         SendMessage(leader, gUnknown_80F8A4C);
                     }
                     else {
-                        SetMonsterActionFields(&leaderInfo->action, 0x14);
+                        SetMonsterActionFields(&leaderInfo->action, ACTION_USE_MOVE_PLAYER);
                         leaderInfo->action.unk4[0].actionUseIndex = GetTeamMemberEntityIndex(leader);
                         leaderInfo->action.unk4[1].actionUseIndex = i;
                     }
@@ -321,7 +321,7 @@ void DungeonHandlePlayerInput(void)
                 }
                 else {
                     if (!sub_805EF60(leader, leaderInfo)) {
-                        SetMonsterActionFields(&leaderInfo->action, 0x32);
+                        SetMonsterActionFields(&leaderInfo->action, ACTION_REGULAR_ATTACK);
                     }
                     break;
                 }
