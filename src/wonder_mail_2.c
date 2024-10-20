@@ -161,7 +161,7 @@ void sub_802B3E0(void)
         // Print and expand placeholders?
         sprintfStatic(sUnknown_203B2C8->teamName,gUnknown_80DF9F8,teamNameBuffer);
         // Display to screen with Pelipper face
-        xxx_info_box_80141B4(sUnknown_203B2C8->teamName, 0, &sUnknown_203B2C8->monPortrait, 0x10d);
+        CreateDialogueBoxAndPortrait(sUnknown_203B2C8->teamName, 0, &sUnknown_203B2C8->monPortrait, 0x10d);
         break;
       case 1:
         monName = GetMonSpecies(MONSTER_PELIPPER);
@@ -182,12 +182,12 @@ void sub_802B3E0(void)
       case 2:
         // I hope you will keep on rescuing your friends
         // I must save your adventure
-        xxx_info_box_80141B4(gUnknown_80DFAA8, 0, &sUnknown_203B2C8->monPortrait, 0x10d);
+        CreateDialogueBoxAndPortrait(gUnknown_80DFAA8, 0, &sUnknown_203B2C8->monPortrait, 0x10d);
         break;
       case 4:
         // Oh yes, that's right. Please don't forget to send an A-OK Mail
         // to the friend you just rescued
-        xxx_info_box_80141B4(gUnknown_80DFB14, 0, &sUnknown_203B2C8->monPortrait, 0x10d);
+        CreateDialogueBoxAndPortrait(gUnknown_80DFB14, 0, &sUnknown_203B2C8->monPortrait, 0x10d);
       case 3:
       case 5:
         break;

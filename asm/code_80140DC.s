@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8014248
-sub_8014248:
+	thumb_func_start CreateMenuDialogueBoxAndPortrait
+CreateMenuDialogueBoxAndPortrait:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -277,7 +277,7 @@ _08014480:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8014248
+	thumb_func_end CreateMenuDialogueBoxAndPortrait
 
 	thumb_func_start sub_8014490
 sub_8014490:

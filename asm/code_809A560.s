@@ -1110,7 +1110,7 @@ _0809B14A:
 	adds r1, r4, 0
 	adds r2, r7, 0
 	mov r3, r8
-	bl sub_8014248
+	bl CreateMenuDialogueBoxAndPortrait
 	ldr r0, _0809B184
 	ldr r0, [r0]
 	ldr r1, _0809B188
@@ -1462,7 +1462,7 @@ _0809B3EA:
 	mov r1, r9
 	mov r2, r12
 	movs r3, 0
-	bl sub_8014248
+	bl CreateMenuDialogueBoxAndPortrait
 _0809B3FA:
 	movs r0, 0x1
 _0809B3FC:

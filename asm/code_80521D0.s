@@ -184,7 +184,7 @@ _08052CE6:
 	str r6, [sp, 0x10]
 	adds r0, r7, 0
 	mov r3, r8
-	bl sub_8014248
+	bl CreateMenuDialogueBoxAndPortrait
 	add r4, sp, 0x24
 _08052D02:
 	bl xxx_draw_string_80144C4
@@ -548,7 +548,7 @@ _08052FD2:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8014248
+	bl CreateMenuDialogueBoxAndPortrait
 	movs r1, 0
 	mov r9, r1
 	ldr r7, _08053034

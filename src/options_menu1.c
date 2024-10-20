@@ -169,7 +169,7 @@ static void sub_801DED0(void)
             break;
         case OPTIONS_MENU_CONFIRM_NEW_OPTIONS:
             CreateChangeSettingsConfirmMenu();
-            sub_8014248(sChangeSettingsPrompt, 0, 4, sUnknown_203B25C->menuItems, 0, 4, 0, 0, 32);
+            CreateMenuDialogueBoxAndPortrait(sChangeSettingsPrompt, 0, 4, sUnknown_203B25C->menuItems, 0, 4, 0, 0, 32);
             break;
     }
 }

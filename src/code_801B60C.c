@@ -212,31 +212,31 @@ store:
             break;
         case 1:
             if (GetUnitSum_808D544(0) < 2)
-                xxx_info_box_80141B4(sFmtReceivedThePromised, 0, 0, 0x101);
+                CreateDialogueBoxAndPortrait(sFmtReceivedThePromised, 0, 0, 0x101);
             else
-                xxx_info_box_80141B4(sFmtTeamReceivedThePromised, 0, 0, 0x101);
+                CreateDialogueBoxAndPortrait(sFmtTeamReceivedThePromised, 0, 0, 0x101);
             break;
         case 2:
-            xxx_info_box_80141B4(sFmtTeamAlsoReceived, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(sFmtTeamAlsoReceived, 0, 0, 0x101);
             break;
         case 3:
             PlaySound(212);
-            xxx_info_box_80141B4(sFmtReceivedStatue, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(sFmtReceivedStatue, 0, 0, 0x101);
             break;
         case 4:
-            xxx_info_box_80141B4(sFmtReceive1000Instead, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(sFmtReceive1000Instead, 0, 0, 0x101);
             break;
         case 5:
             sUnknown_203B234->fallbackState = 16;
-            xxx_info_box_80141B4(sFmtFullSoSentToStorage, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(sFmtFullSoSentToStorage, 0, 0, 0x101);
             break;
         case 6:
             sub_801BB20();
-            sub_8014248(sFmtFullSoPrompt, 0, 4, sUnknown_203B234->unkCC, 0, 4, 0, 0, 0);
+            CreateMenuDialogueBoxAndPortrait(sFmtFullSoPrompt, 0, 4, sUnknown_203B234->unkCC, 0, 4, 0, 0, 0);
             break;
         case 7:
             sub_801BC24();
-            sub_8014248(sFmtConfirmThrowAway, 0, 3, sUnknown_203B234->unkCC, 0, 4, 0, 0, 0);
+            CreateMenuDialogueBoxAndPortrait(sFmtConfirmThrowAway, 0, 3, sUnknown_203B234->unkCC, 0, 4, 0, 0, 0);
             break;
         case 8:
             sub_801A5D8(1, 3, NULL, 10);
@@ -259,15 +259,15 @@ store:
             break;
         case 13:
             sUnknown_203B234->fallbackState = 16;
-            xxx_info_box_80141B4(sFmtThrownAway, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(sFmtThrownAway, 0, 0, 0x101);
             break;
         case 14:
             sUnknown_203B234->fallbackState = 16;
-            xxx_info_box_80141B4(sFmtPutInStorageForReceive, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(sFmtPutInStorageForReceive, 0, 0, 0x101);
             break;
         case 15:
             sUnknown_203B234->fallbackState = 16;
-            xxx_info_box_80141B4(sFmtDiscardedForReceive, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(sFmtDiscardedForReceive, 0, 0, 0x101);
             break;
         case 16:
             break;

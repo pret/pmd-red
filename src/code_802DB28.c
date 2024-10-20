@@ -150,16 +150,16 @@ static void sub_802DC9C(void)
             }
             break;
         case 1:
-            xxx_info_box_80141B4(sThanksForRescuingMe, 0, &sUnknown_203B2FC->monPortrait, 0x10D);
+            CreateDialogueBoxAndPortrait(sThanksForRescuingMe, 0, &sUnknown_203B2FC->monPortrait, 0x10D);
             break;
         case 2:
-            xxx_info_box_80141B4(sThanksForRescuingThem, 0, &sUnknown_203B2FC->monPortrait, 0x10D);
+            CreateDialogueBoxAndPortrait(sThanksForRescuingThem, 0, &sUnknown_203B2FC->monPortrait, 0x10D);
             break;
         case 3:
-            xxx_info_box_80141B4(sThanksForEscortingMe, 0, &sUnknown_203B2FC->monPortrait, 0x10D);
+            CreateDialogueBoxAndPortrait(sThanksForEscortingMe, 0, &sUnknown_203B2FC->monPortrait, 0x10D);
             break;
         case 5:
-            xxx_info_box_80141B4(sThanksForDelivering, 0, &sUnknown_203B2FC->monPortrait, 0x10D);
+            CreateDialogueBoxAndPortrait(sThanksForDelivering, 0, &sUnknown_203B2FC->monPortrait, 0x10D);
             break;
         case 4:
             index = FindItemInInventory(sUnknown_203B2FC->jobInfo->targetItem);
@@ -167,7 +167,7 @@ static void sub_802DC9C(void)
                 ShiftItemsDownFrom(index);
                 FillInventoryGaps();
             }
-            xxx_info_box_80141B4(sThanksForGetting, 0, &sUnknown_203B2FC->monPortrait, 0x10D);
+            CreateDialogueBoxAndPortrait(sThanksForGetting, 0, &sUnknown_203B2FC->monPortrait, 0x10D);
             break;
         case 6:
             sub_802F204(&sUnknown_203B2FC->unk8, 1);

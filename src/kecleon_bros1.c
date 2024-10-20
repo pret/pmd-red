@@ -228,86 +228,86 @@ static void UpdateKecleonStoreDialogue(void)
             KecleonCalcSellPriceForAllItems();
             BuildKecleonBrosMainMenu();
             SetKecleonPortraitSpriteId(FALSE);
-            sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_00], 0, sKecleonBrosWork1->menuAction1,
+            CreateMenuDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_00], 0, sKecleonBrosWork1->menuAction1,
                 sKecleonBrosWork1->menuItems, sKecleonBrosWork1->unk74, 4, 0, sKecleonBrosWork1->monPortraitPtr, 12);
             break;
         case KECLEON_STORE_MAIN_MENU:
             KecleonCalcSellPriceForAllItems();
             BuildKecleonBrosMainMenu();
             SetKecleonPortraitSpriteId(FALSE);
-            sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_01], 0, sKecleonBrosWork1->menuAction1,
+            CreateMenuDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_01], 0, sKecleonBrosWork1->menuAction1,
                 sKecleonBrosWork1->menuItems, sKecleonBrosWork1->unk74, 4, 0, sKecleonBrosWork1->monPortraitPtr, 12);
             break;
         case KECLEON_STORE_INFO:
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_MAIN_MENU;
             SetKecleonPortraitSpriteId(FALSE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_22], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_22], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case 3:
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_EXIT;
             SetKecleonPortraitSpriteId(FALSE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_02], 0, sKecleonBrosWork1->monPortraitPtr, 0x30D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_02], 0, sKecleonBrosWork1->monPortraitPtr, 0x30D);
             break;
         case KECLEON_STORE_NO_STORE_ITEMS:
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_MAIN_MENU;
             SetKecleonPortraitSpriteId(FALSE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_12], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_12], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case KECLEON_STORE_NO_MONEY:
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_BUY_ITEM_MENU;
             SetKecleonPortraitSpriteId(TRUE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_13], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_13], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case KECLEON_STORE_TOO_MUCH_MONEY:
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_MAIN_MENU;
             SetKecleonPortraitSpriteId(TRUE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_14], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_14], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case KECLEON_STORE_NO_ITEMS_TO_SELL:
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_MAIN_MENU;
             SetKecleonPortraitSpriteId(TRUE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_15], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_15], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case KECLEON_STORE_NO_ITEMS:
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_MAIN_MENU;
             SetKecleonPortraitSpriteId(TRUE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_16], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_16], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case KECLEON_STORE_TOO_MANY_ITEMS:
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_MAIN_MENU;
             SetKecleonPortraitSpriteId(TRUE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_17], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_17], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case 11:
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_MAIN_MENU;
             SetKecleonPortraitSpriteId(FALSE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_18], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_18], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case KECLEON_STORE_NOT_ENOUGH_MONEY:
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_BUY_ITEM_MENU;
             SetKecleonPortraitSpriteId(TRUE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_19], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_19], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case KECLEON_STORE_CANT_SELL_ITEM:
             sub_8090E14(gFormatItems, &sKecleonBrosWork1->soldItem, NULL);
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_SELL_ITEM_MENU;
             SetKecleonPortraitSpriteId(TRUE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_20], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_20], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case KECLEON_STORE_SELL_ITEM_TOO_MUCH_MONEY:
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_SELL_ITEM_MENU;
             SetKecleonPortraitSpriteId(TRUE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_21], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_21], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case 15:
             sKecleonBrosWork1->fallbackState = 18;
             SetKecleonPortraitSpriteId(FALSE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_03], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_03], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case KECLEON_STORE_BUY_ITEM_MENU:
             sKecleonBrosWork1->fallbackState = 19;
             SetKecleonPortraitSpriteId(FALSE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_04], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_04], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case 18:
             if (sKecleonBrosWork1->isKecleonItemShop)
@@ -343,7 +343,7 @@ static void UpdateKecleonStoreDialogue(void)
             sub_8090E14(gFormatItems, &sKecleonBrosWork1->soldItem, 0);
             gFormatData_202DE30 = sKecleonBrosWork1->itemSellPrice;
             SetKecleonPortraitSpriteId(FALSE);
-            sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_05], 0, 5,sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->monPortraitPtr, 12);
+            CreateMenuDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_05], 0, 5,sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->monPortraitPtr, 12);
             break;
         case KECLEON_STORE_BUY_ITEM_RECEIPT:
             if (CountKecleonItems() == 0) {
@@ -365,17 +365,17 @@ static void UpdateKecleonStoreDialogue(void)
                     sKecleonBrosWork1->fallbackState = KECLEON_STORE_BUY_ITEM_MENU;
             }
             SetKecleonPortraitSpriteId(FALSE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_06], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_06], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case 23:
             sKecleonBrosWork1->fallbackState = 26;
             SetKecleonPortraitSpriteId(FALSE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_07], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_07], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case KECLEON_STORE_SELL_ITEM_MENU:
             sKecleonBrosWork1->fallbackState = 27;
             SetKecleonPortraitSpriteId(FALSE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_08], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_08], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case 26:
             sub_801A5D8(4, 3, NULL, 10);
@@ -396,7 +396,7 @@ static void UpdateKecleonStoreDialogue(void)
             sub_8090E14(gFormatItems, &sKecleonBrosWork1->soldItem, NULL);
             gFormatData_202DE30 = sKecleonBrosWork1->itemSellPrice;
             SetKecleonPortraitSpriteId(FALSE);
-            sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_09], 0, 5, sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->monPortraitPtr, 12);
+            CreateMenuDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_09], 0, 5, sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->monPortraitPtr, 12);
             break;
         case KECLEON_STORE_BUY_ITEM_INFO:
         case KECLEON_STORE_SELL_ITEM_INFO:
@@ -411,18 +411,18 @@ static void UpdateKecleonStoreDialogue(void)
                 sKecleonBrosWork1->fallbackState = KECLEON_STORE_SELL_ITEM_MENU;
 
             SetKecleonPortraitSpriteId(FALSE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_11], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_11], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case KECLEON_STORE_SELL_ALL_ITEMS:
             BuildKecleonBrosYesNoMenu();
             gFormatData_202DE30 = sKecleonBrosWork1->inventoryItemSellPrice;
             SetKecleonPortraitSpriteId(FALSE);
-            sub_8014248(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_10], 0, 5, sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->monPortraitPtr, 12);
+            CreateMenuDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_10], 0, 5, sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->monPortraitPtr, 12);
             break;
         case KECLEON_STORE_SELL_ALL_ITEMS_RECEIPT:
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_MAIN_MENU;
             SetKecleonPortraitSpriteId(FALSE);
-            xxx_info_box_80141B4(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_11], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_11], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
     }
 }

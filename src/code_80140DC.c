@@ -91,18 +91,18 @@ void sub_801416C(s32 param_1,s32 param_2)
     gUnknown_202E73C = (param_2 < 0 ) ? 0 : param_2;
 }
 
-void xxx_info_box_80141B4(const u8 *text, u32 param_2, struct MonPortraitMsg *unkStructPtr, u16 param_4)
+void CreateDialogueBoxAndPortrait(const u8 *text, u32 param_2, struct MonPortraitMsg *monPortraitPtr, u16 param_4)
 {
-    sub_8014248(text, param_2, -1, NULL, NULL, 3, 0, unkStructPtr, param_4);
+    CreateMenuDialogueBoxAndPortrait(text, param_2, -1, NULL, NULL, 3, 0, monPortraitPtr, param_4);
 }
 
-void sub_80141E0(const u8 *text, struct MonPortraitMsg *unkStructPtr, u16 param_3)
+void sub_80141E0(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 param_3)
 {
-    sub_8014248(text, 0, -1, gUnknown_80D485C, NULL, 3, 0, unkStructPtr, param_3 | 0x300);
+    CreateMenuDialogueBoxAndPortrait(text, 0, -1, gUnknown_80D485C, NULL, 3, 0, monPortraitPtr, param_3 | 0x300);
 }
 
-void sub_8014214(const u8 *text, struct MonPortraitMsg *unkStructPtr, u16 param_3)
+void sub_8014214(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 param_3)
 {
-    sub_8014248(text, 0, -1, gUnknown_80D4880, NULL, 3, 0, unkStructPtr, param_3 | 0x300);
+    CreateMenuDialogueBoxAndPortrait(text, 0, -1, gUnknown_80D4880, NULL, 3, 0, monPortraitPtr, param_3 | 0x300);
 }
 

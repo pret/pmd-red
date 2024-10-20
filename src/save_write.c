@@ -36,10 +36,10 @@ void PrepareSavePakWrite(s16 pokemonID)
 
     if (sSavePakWrite->monPortrait.faceFile != 0) {
         struct MonPortraitMsg *monPortraitPtr = &sSavePakWrite->monPortrait;
-        xxx_info_box_80141B4(sSavingAdventure, 0, monPortraitPtr, 0x20);
+        CreateDialogueBoxAndPortrait(sSavingAdventure, 0, monPortraitPtr, 0x20);
     }
     else
-        xxx_info_box_80141B4(sSavingAdventure, 0, NULL, 0x20);
+        CreateDialogueBoxAndPortrait(sSavingAdventure, 0, NULL, 0x20);
 
     sSavePakWrite->state = 3;
 }
@@ -61,7 +61,7 @@ bool8 WriteSavePak(void)
         case 1:
             sSavePakWrite->unk4++;
             if (sSavePakWrite->unk4 > 8) {
-                xxx_info_box_80141B4(sWriteGamePak, 0, 0, 0x20);
+                CreateDialogueBoxAndPortrait(sWriteGamePak, 0, 0, 0x20);
                 sSavePakWrite->state = 3;
             }
             break;
@@ -78,21 +78,21 @@ bool8 WriteSavePak(void)
             switch (sSavePakWrite->saveStatus) {
                 case SAVE_COMPLETED:
                     if (sSavePakWrite->monPortrait.faceFile != NULL)
-                        xxx_info_box_80141B4(sSaveCompleted, 0, monPortraitPtr, 0x101);
+                        CreateDialogueBoxAndPortrait(sSaveCompleted, 0, monPortraitPtr, 0x101);
                     else
-                        xxx_info_box_80141B4(sSaveCompleted, 0, monPortraitPtr, 0x101);
+                        CreateDialogueBoxAndPortrait(sSaveCompleted, 0, monPortraitPtr, 0x101);
 
                     sSavePakWrite->state = 5;
                     break;
                 case SAVE_NOT_WRTTEN:
-                    xxx_info_box_80141B4(sSaveNotWritten, 0, 0, 0);
+                    CreateDialogueBoxAndPortrait(sSaveNotWritten, 0, 0, 0);
                     sSavePakWrite->state = 6;
                     break;
                 default:
                     if (sSavePakWrite->monPortrait.faceFile != NULL)
-                        xxx_info_box_80141B4(sSaveFailed, 0, monPortraitPtr, 0x101);
+                        CreateDialogueBoxAndPortrait(sSaveFailed, 0, monPortraitPtr, 0x101);
                     else
-                        xxx_info_box_80141B4(sSaveFailed, 0, monPortraitPtr, 0x101);
+                        CreateDialogueBoxAndPortrait(sSaveFailed, 0, monPortraitPtr, 0x101);
 
                     sSavePakWrite->state = 5;
                     break;

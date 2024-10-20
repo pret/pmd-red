@@ -160,15 +160,15 @@ static void sub_801EA28(void)
                 case GULPIN_SHOP_MODE_AWAKE:
                 case GULPIN_SHOP_MODE_ASLEEP:
                     if (sGulpinShopWork->isNextMoveLinked)
-                        sub_8014248(gCommonGulpin[sGulpinShopWork->mode][GULPIN_DLG_12], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->monPortraitPtr, 12);
+                        CreateMenuDialogueBoxAndPortrait(gCommonGulpin[sGulpinShopWork->mode][GULPIN_DLG_12], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->monPortraitPtr, 12);
                     else
-                        sub_8014248(gCommonGulpin[sGulpinShopWork->mode][GULPIN_DLG_11], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->monPortraitPtr, 12);
+                        CreateMenuDialogueBoxAndPortrait(gCommonGulpin[sGulpinShopWork->mode][GULPIN_DLG_11], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->monPortraitPtr, 12);
                     break;
                 case GULPIN_SHOP_MODE_UNK2:
                     if (sGulpinShopWork->isNextMoveLinked)
-                        sub_8014248(sForgetMoveAndLinkedOnes, 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, NULL, 32);
+                        CreateMenuDialogueBoxAndPortrait(sForgetMoveAndLinkedOnes, 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, NULL, 32);
                     else
-                        sub_8014248(sForgetMoveOnly, 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, NULL, 32);
+                        CreateMenuDialogueBoxAndPortrait(sForgetMoveOnly, 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, NULL, 32);
                     break;
             }
             break;

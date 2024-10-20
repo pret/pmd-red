@@ -35,7 +35,7 @@ bool8 ReadQuickSave(void)
                 sQuickSaveRead->state = 3;
             }
             else {
-                xxx_info_box_80141B4(sSaveFailedExplanation, 0, 0, 0x301);
+                CreateDialogueBoxAndPortrait(sSaveFailedExplanation, 0, 0, 0x301);
                 sQuickSaveRead->state = 2;
             }
             break;

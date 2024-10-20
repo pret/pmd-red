@@ -282,30 +282,30 @@ void PrintWonderMailMainMenuError(u32 status)
             break;
         case 1:
             // "Communication Error"
-            xxx_info_box_80141B4(gUnknown_80E7914, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(gUnknown_80E7914, 0, 0, 0x101);
             break;
         case COMMS_INCORRECT_NUM_SYSTEMS:
             // Incorrect number of GBA Systems
-            xxx_info_box_80141B4(gUnknown_80E7938, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(gUnknown_80E7938, 0, 0, 0x101);
             break;
         case COMMS_NO_RESPONSE:
             // No response from friend. Redo from start
-            xxx_info_box_80141B4(gUnknown_80E7994, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(gUnknown_80E7994, 0, 0, 0x101);
             break;
         case COMMS_DIFFERENT_MODES:
             // Sender and receiver in different modes
-            xxx_info_box_80141B4(gUnknown_80E79E4, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(gUnknown_80E79E4, 0, 0, 0x101);
             break;
         case 5:
             // "Communication Error"
-            xxx_info_box_80141B4(gUnknown_80E7914, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(gUnknown_80E7914, 0, 0, 0x101);
             break;
         case 14:
             // "Communication Error"
-            xxx_info_box_80141B4(gUnknown_80E7914, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(gUnknown_80E7914, 0, 0, 0x101);
             break;
         case COMMS_NOT_READY: // "No response from your friend. Make sure sender and receiver are ready"
-            xxx_info_box_80141B4(gUnknown_80E7A48, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(gUnknown_80E7A48, 0, 0, 0x101);
             break;
         case COMMS_NO_ROOM_STORAGE:
         case COMMS_DUPLICATE_MAIL:
@@ -317,7 +317,7 @@ void PrintWonderMailMainMenuError(u32 status)
         case COMMS_NO_ROOM_MAIL:
         default:
             // "Communication Error"
-            xxx_info_box_80141B4(gUnknown_80E7914, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(gUnknown_80E7914, 0, 0, 0x101);
             break;
 
     }
@@ -451,10 +451,10 @@ void WonderMailMainMenuCallback(void)
 
   switch(gUnknown_203B3E8->state) {
     case SELECT_WONDER_MAIL_MODE_MAIN_SCREEN:
-        sub_8014248(gUnknown_80E7AC4,0,1,gSelectWonderMailModeMainMenuItems,0,4,0,0,0x101);
+        CreateMenuDialogueBoxAndPortrait(gUnknown_80E7AC4,0,1,gSelectWonderMailModeMainMenuItems,0,4,0,0,0x101);
         break;
     case SEND_WONDER_MAIL_MAIN_SCREEN:
-        sub_8014248(gUnknown_80E7AE0,0,3,gSendWonderMailMainMenuItems,0,4,0,0,0x101);
+        CreateMenuDialogueBoxAndPortrait(gUnknown_80E7AE0,0,3,gSendWonderMailMainMenuItems,0,4,0,0,0x101);
         break;
     case 3:
         ResetUnusedInputStruct();
@@ -462,7 +462,7 @@ void WonderMailMainMenuCallback(void)
         sub_802EF48();
         break;
     case RECEIVE_WONDER_MAIL_MAIN_SCREEN:
-        sub_8014248(gUnknown_80E7B14,0,3,gReceiveWonderMailMainMenuItems,0,4,0,0,0x101);
+        CreateMenuDialogueBoxAndPortrait(gUnknown_80E7B14,0,3,gReceiveWonderMailMainMenuItems,0,4,0,0,0x101);
         break;
     case PASSWORD_SUCCESS:
         gUnknown_203B3E8->unk474 = gUnknown_203B3E8->unk3C0.mail;
@@ -485,33 +485,33 @@ void WonderMailMainMenuCallback(void)
             {
                 case WONDER_MAIL_GAME_LINK:
                 case WONDER_MAIL_PASSWORD:
-                    xxx_info_box_80141B4(gUnknown_80E7B48,0,0,0x101);
+                    CreateDialogueBoxAndPortrait(gUnknown_80E7B48,0,0,0x101);
                     break;
                 case 4:
                     break;
             }
         }
         else
-            xxx_info_box_80141B4(gUnknown_80E7B48,0,0,0x101);
+            CreateDialogueBoxAndPortrait(gUnknown_80E7B48,0,0,0x101);
         break;
     case WONDER_MAIL_SENT:
-        xxx_info_box_80141B4(gUnknown_80E7B68,0,0,0x101);
+        CreateDialogueBoxAndPortrait(gUnknown_80E7B68,0,0,0x101);
         break;
     case WONDER_MAIL_ADDED:
         if (gUnknown_203B3E8->wonderMailAccepted) {
-            xxx_info_box_80141B4(gUnknown_80E7B88,0,0,0x101);
+            CreateDialogueBoxAndPortrait(gUnknown_80E7B88,0,0,0x101);
         }
         else {
             // Wonder Mail was refused
-            xxx_info_box_80141B4(gUnknown_80E7BC8,0,0,0x101);
+            CreateDialogueBoxAndPortrait(gUnknown_80E7BC8,0,0,0x101);
         }
         break;
     case GAME_LINK_CABLE_MENU:
-        sub_8014248(gUnknown_80E7BEC,0,6,gUnknown_80E78F8,0,4,0,0,0x101);
+        CreateMenuDialogueBoxAndPortrait(gUnknown_80E7BEC,0,6,gUnknown_80E78F8,0,4,0,0,0x101);
         break;
     case 6:
         nullsub_23(FALSE);
-        xxx_info_box_80141B4(gUnknown_80E7C48,0,0,0);
+        CreateDialogueBoxAndPortrait(gUnknown_80E7C48,0,0,0);
         break;
     case 9:
         gUnknown_203B3E8->wonderMailStatus = COMMS_GOOD;
@@ -557,7 +557,7 @@ void WonderMailMainMenuCallback(void)
         xxx_call_start_bg_music();
         break;
     case PROMPT_PASSWORD_ENTRY:
-        xxx_info_box_80141B4(gUnknown_80E7C98,0,0,0x101);
+        CreateDialogueBoxAndPortrait(gUnknown_80E7C98,0,0,0x101);
         break;
     case PASSWORD_ENTRY_SCREEN:
         RestoreUnkTextStruct_8006518(gUnknown_203B3E8->unk1EC);
@@ -566,7 +566,7 @@ void WonderMailMainMenuCallback(void)
         sub_80151C0(5,gUnknown_203B3E8->PasswordEntryBuffer);
         break;
     case PASSWORD_INVALID:
-        sub_8014248(gUnknown_80E7CC4,0,6,gUnknown_80E78F8,0,4,0,0,0x101);
+        CreateMenuDialogueBoxAndPortrait(gUnknown_80E7CC4,0,6,gUnknown_80E78F8,0,4,0,0,0x101);
         break;
   }
 }

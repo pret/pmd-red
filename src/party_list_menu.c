@@ -247,11 +247,11 @@ void HandlePartyListMenuCallback(void)
             break;
         case PARTY_LIST_STATE_SAY_FAREWELL:
             PartyListMenu_BuildYesNoMenu();
-            sub_8014248(sUnknown_80DD388,0,3,sUnknown_203B2B8->unk1BC,0,4,0,0,0x101);
+            CreateMenuDialogueBoxAndPortrait(sUnknown_80DD388,0,3,sUnknown_203B2B8->unk1BC,0,4,0,0,0x101);
             break;
         case PARTY_LIST_STATE_CONFIRM_SAY_FAREWELL:
             PartyListMenu_BuildYesNoMenu();
-            sub_8014248(sUnknown_80DD420,0,3,sUnknown_203B2B8->unk1BC,0,4,0,0,0x101);
+            CreateMenuDialogueBoxAndPortrait(sUnknown_80DD420,0,3,sUnknown_203B2B8->unk1BC,0,4,0,0,0x101);
             break;
         case 0x18:
             GetLinkedSequence(sUnknown_203B2B8->moveIndex, sUnknown_203B2B8->moves,sUnknown_203B2B8->moveIDs);
@@ -260,22 +260,22 @@ void HandlePartyListMenuCallback(void)
         case PARTY_LIST_STATE_JOIN_TEAM:
             sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_EXIT;
             PlaySound(0xcf);
-            xxx_info_box_80141B4(sUnknown_80DD4C4,0,0,0x101);
+            CreateDialogueBoxAndPortrait(sUnknown_80DD4C4,0,0,0x101);
             break;
         case PARTY_LIST_STATE_STANDBY:
             sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_EXIT;
             PlaySound(0xcf);
-            xxx_info_box_80141B4(sUnknown_80DD4F4,0,0,0x101);
+            CreateDialogueBoxAndPortrait(sUnknown_80DD4F4,0,0,0x101);
             break;
         case PARTY_LIST_STATE_MAKE_LEADER:
             sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_EXIT;
             PlaySound(0xcc);
-            xxx_info_box_80141B4(sBecameLeader,0,0,0x101);
+            CreateDialogueBoxAndPortrait(sBecameLeader,0,0,0x101);
             break;
         case PARTY_LIST_STATE_POKEMON_FAREWELL:
             sUnknown_203B2B8->fallbackState = 9;
             PlaySound(0xca);
-            xxx_info_box_80141B4(sUnknown_80DD564,0,0,0x101);
+            CreateDialogueBoxAndPortrait(sUnknown_80DD564,0,0,0x101);
             break;
         case 9:
             sub_8026FA4();
@@ -284,23 +284,23 @@ void HandlePartyListMenuCallback(void)
             break;
         case PARTY_LIST_STATE_GIVEN_ITEM:
             sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_MAIN_MENU_1;
-            xxx_info_box_80141B4(sUnknown_80DD594,0,0,0x101);
+            CreateDialogueBoxAndPortrait(sUnknown_80DD594,0,0,0x101);
             break;
         case PARTY_LIST_STATE_GIVEN_ITEM_HELD_ITEM:
             sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_MAIN_MENU_1;
-            xxx_info_box_80141B4(sUnknown_80DD5B8,0,0,0x101);
+            CreateDialogueBoxAndPortrait(sUnknown_80DD5B8,0,0,0x101);
             break;
         case PARTY_LIST_STATE_TAKE_ITEM:
             sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_MAIN_MENU_1;
-            xxx_info_box_80141B4(sUnknown_80DD60C,0,0,0x101);
+            CreateDialogueBoxAndPortrait(sUnknown_80DD60C,0,0,0x101);
             break;
         case 10:
             sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_EXIT;
-            xxx_info_box_80141B4(sUnknown_80DD60C,0,0,0x101);
+            CreateDialogueBoxAndPortrait(sUnknown_80DD60C,0,0,0x101);
             break;
         case 0xb:
             sUnknown_203B2B8->fallbackState = PARTY_LIST_STATE_EXIT;
-            xxx_info_box_80141B4(sUnknown_80DD63C,0,0,0x101);
+            CreateDialogueBoxAndPortrait(sUnknown_80DD63C,0,0,0x101);
             break;
         case PARTY_LIST_STATE_INIT:
         case PARTY_LIST_STATE_EXIT:

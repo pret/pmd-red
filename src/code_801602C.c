@@ -109,14 +109,14 @@ static void sub_8016110(void)
             else
                 sub_80922B4(gAvailablePokemonNames, sUnknown_203B200->pokeName, POKEMON_NAME_LENGTH);
 
-            sub_8014248(sIsNameOKPrompt, 0, 3, sUnknown_203B200->menus, 0, 4, 0, NULL, 32);
+            CreateMenuDialogueBoxAndPortrait(sIsNameOKPrompt, 0, 3, sUnknown_203B200->menus, 0, 4, 0, NULL, 32);
             break;
 
         case CONFIRM_NAME_MENU_TOO_LONG:
-            xxx_info_box_80141B4(sNameTooLong, 0, 0, 0x121);
+            CreateDialogueBoxAndPortrait(sNameTooLong, 0, 0, 0x121);
             break;
         case CONFIRM_NAME_MENU_EMPTY:
-            xxx_info_box_80141B4(sEnterAName, 0, 0, 0x121);
+            CreateDialogueBoxAndPortrait(sEnterAName, 0, 0, 0x121);
             break;
         default:
             break;

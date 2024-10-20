@@ -217,11 +217,11 @@ void sub_8027274(void)
             break;
         case FRIEND_AREA_ACTION_MENU_SAY_FAREWELL_PROMPT:
             sub_8027794();
-            sub_8014248(sSayFarewellPrompt,0,3,sUnknown_203B2BC->menuItems,0,4,0,0,0x101);
+            CreateMenuDialogueBoxAndPortrait(sSayFarewellPrompt,0,3,sUnknown_203B2BC->menuItems,0,4,0,0,0x101);
             break;
         case FRIEND_AREA_ACTION_MENU_SAY_FAREWELL_CONFIRM:
             sub_8027794();
-            sub_8014248(sSayFarewellConfirm,0,3,sUnknown_203B2BC->menuItems,0,4,0,0,0x101);
+            CreateMenuDialogueBoxAndPortrait(sSayFarewellConfirm,0,3,sUnknown_203B2BC->menuItems,0,4,0,0,0x101);
             break;
         case 0x10:
             GetLinkedSequence(sUnknown_203B2BC->moveIndex,sUnknown_203B2BC->moves,sUnknown_203B2BC->moveIDs);
@@ -229,11 +229,11 @@ void sub_8027274(void)
             break;
         case 6:
             sUnknown_203B2BC->fallbackState = FRIEND_AREA_ACTION_MENU_MAIN_2;
-            xxx_info_box_80141B4(sReturnedToToolbox, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(sReturnedToToolbox, 0, 0, 0x101);
             break;
         case 7:
             sUnknown_203B2BC->fallbackState = FRIEND_AREA_ACTION_MENU_MAIN_2;
-            xxx_info_box_80141B4(sSentToStorage, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(sSentToStorage, 0, 0, 0x101);
             break;
     }
 }

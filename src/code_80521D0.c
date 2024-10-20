@@ -303,7 +303,7 @@ void PrintFieldMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *st
         monPortraitPtr = &monPortrait;
     }
 
-    sub_8014248(str, 0, 0, NULL, NULL, 3, 0, monPortraitPtr, (a2 != FALSE) ? 0x701 : 0x400);
+    CreateMenuDialogueBoxAndPortrait(str, 0, 0, NULL, NULL, 3, 0, monPortraitPtr, (a2 != FALSE) ? 0x701 : 0x400);
     gDungeon->unk1BDD4.unk1C05F = 1;
     do {
         xxx_draw_string_80144C4();
@@ -461,7 +461,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
     sub_8052740(10);
     sub_803EAF0(2, 0);
     sub_8052210(0);
-    xxx_info_box_80141B4(dialogueInfo->str, 0, monPortraitPtr, gUnknown_80F7AEA[dialogueInfo->unk0]);
+    CreateDialogueBoxAndPortrait(dialogueInfo->str, 0, monPortraitPtr, gUnknown_80F7AEA[dialogueInfo->unk0]);
     do {
         xxx_draw_string_80144C4();
         sub_803E46C(9);

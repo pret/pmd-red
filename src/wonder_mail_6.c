@@ -122,11 +122,11 @@ bool8 sub_8030F58(u32 wonderMailType)
     {
         case WONDER_MAIL_TYPE_SOS_1:
             // "You don't have any {COLOR CYAN_G}SOS Mail{RESET}.\0"
-            xxx_info_box_80141B4(gUnknown_80E09D8,0,&gUnknown_203B328->monPortrait,0x101);
+            CreateDialogueBoxAndPortrait(gUnknown_80E09D8,0,&gUnknown_203B328->monPortrait,0x101);
             break;
         case WONDER_MAIL_TYPE_AOK:
             // "You don't have any {COLOR CYAN_G}A-OK Mail{RESET}.\0"
-            xxx_info_box_80141B4(gUnknown_80E0A0C,0,&gUnknown_203B328->monPortrait,0x101);
+            CreateDialogueBoxAndPortrait(gUnknown_80E0A0C,0,&gUnknown_203B328->monPortrait,0x101);
             break;
     }
     gUnknown_203B328->state = 5;

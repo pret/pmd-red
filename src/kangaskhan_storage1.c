@@ -190,65 +190,65 @@ static void sub_8016FF8(void)
         case KANGASKHAN_STORAGE_INIT:
             BuildKangaskhanMainMenu();
             gKangaskhanStorageWork->monPortrait.spriteId = TRUE;
-            sub_8014248(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_WELCOME], 0, gKangaskhanStorageWork->menuAction1, gKangaskhanStorageWork->unk24,
+            CreateMenuDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_WELCOME], 0, gKangaskhanStorageWork->menuAction1, gKangaskhanStorageWork->unk24,
                                     gKangaskhanStorageWork->unk4C, 4, 0, gKangaskhanStorageWork->monPortraitPtr, 12);
             break;
         case KANGASKHAN_STORAGE_MAIN_MENU:
             BuildKangaskhanMainMenu();
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            sub_8014248(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_ANYTHING_ELSE], 0, gKangaskhanStorageWork->menuAction1, gKangaskhanStorageWork->unk24,
+            CreateMenuDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_ANYTHING_ELSE], 0, gKangaskhanStorageWork->menuAction1, gKangaskhanStorageWork->unk24,
                                     gKangaskhanStorageWork->unk4C, 4, 0, gKangaskhanStorageWork->monPortraitPtr, 12);
             break;
         case 2:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_HOW_IT_WORKS], 0, gKangaskhanStorageWork->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_HOW_IT_WORKS], 0, gKangaskhanStorageWork->monPortraitPtr, 0x10D);
             break;
         case 3:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_EXIT;
             gKangaskhanStorageWork->monPortrait.spriteId = TRUE;
-            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_BYE], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
+            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_BYE], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
             break;
         case KANGASKHAN_STORAGE_NO_INV_ITEMS:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_YOU_HAVE_NOTHING], 0, gKangaskhanStorageWork->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_YOU_HAVE_NOTHING], 0, gKangaskhanStorageWork->monPortraitPtr, 0x10D);
             break;
         case KANGASKHAN_STORAGE_TOO_MANY_ITEMS:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_YOU_ARE_FULL], 0, gKangaskhanStorageWork->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_YOU_ARE_FULL], 0, gKangaskhanStorageWork->monPortraitPtr, 0x10D);
             break;
         case 7:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORAGE_HAS_NOTHING], 0, gKangaskhanStorageWork->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORAGE_HAS_NOTHING], 0, gKangaskhanStorageWork->monPortraitPtr, 0x10D);
             break;
         case 8:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORAGE_FULL], 0, gKangaskhanStorageWork->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORAGE_FULL], 0, gKangaskhanStorageWork->monPortraitPtr, 0x10D);
             break;
         case KANGASKHAN_STORAGE_IS_MONEY_USED_TM:
             sub_8090E14(gFormatItems, &gKangaskhanStorageWork->storedItem, 0);
             gKangaskhanStorageWork->fallbackState = 14;
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT__INVALID_ITEM], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
+            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT__INVALID_ITEM], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
             break;
         case 10:
             gKangaskhanStorageWork->fallbackState = 14;
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT__TOO_MANY_OF_ITEM], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
+            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT__TOO_MANY_OF_ITEM], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
             break;
         case 11:
             gKangaskhanStorageWork->fallbackState = 13;
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORE_WHAT], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
+            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORE_WHAT], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
             break;
         case 12:
             gKangaskhanStorageWork->fallbackState = 14;
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORE_MORE], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
+            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORE_MORE], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
             break;
         case 13:
             sub_801A5D8(3, 3, NULL, 10);
@@ -265,13 +265,13 @@ static void sub_8016FF8(void)
             sub_80177F8();
             sub_8090E14(gFormatItems, &gKangaskhanStorageWork->storedItem, 0);
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            sub_8014248(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT_ONE_PROMPT], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
+            CreateMenuDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT_ONE_PROMPT], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
                                     gKangaskhanStorageWork->monPortraitPtr, 12);
             break;
         case 18:
             sub_80177F8();
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            sub_8014248(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT_MANY_PROMPT], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
+            CreateMenuDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT_MANY_PROMPT], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
                                     gKangaskhanStorageWork->monPortraitPtr, 12);
             break;
         case 19:
@@ -283,17 +283,17 @@ static void sub_8016FF8(void)
                 gKangaskhanStorageWork->fallbackState = 12;
 
             gKangaskhanStorageWork->monPortrait.spriteId = TRUE;
-            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT_CONFIRMATION], 0, gKangaskhanStorageWork->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT_CONFIRMATION], 0, gKangaskhanStorageWork->monPortraitPtr, 0x10D);
             break;
         case 20:
             gKangaskhanStorageWork->fallbackState = 22;
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_TAKE_WHAT], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
+            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_TAKE_WHAT], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
             break;
         case 21:
             gKangaskhanStorageWork->fallbackState = 23;
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_TAKE_MORE], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
+            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_TAKE_MORE], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
             break;
         case 22:
             sub_801C8C4(1, 3, 0, 10);
@@ -334,13 +334,13 @@ static void sub_8016FF8(void)
             sub_80177F8();
             sub_8090E14(gFormatItems, &gKangaskhanStorageWork->storedItem, 0);
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            sub_8014248(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_WITHDRAW_ONE_PROMPT], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
+            CreateMenuDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_WITHDRAW_ONE_PROMPT], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
                                     gKangaskhanStorageWork->monPortraitPtr, 12);
             break;
         case 28:
             sub_80177F8();
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            sub_8014248(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_WITHDRAW_MANY_PROMPT], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
+            CreateMenuDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_WITHDRAW_MANY_PROMPT], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
                                     gKangaskhanStorageWork->monPortraitPtr, 12);
             break;
         case 29:
@@ -352,7 +352,7 @@ static void sub_8016FF8(void)
                 gKangaskhanStorageWork->fallbackState = 21;
 
             gKangaskhanStorageWork->monPortrait.spriteId = TRUE;
-            xxx_info_box_80141B4(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_WITHDRAW_CONFIRMATION], 0, gKangaskhanStorageWork->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_WITHDRAW_CONFIRMATION], 0, gKangaskhanStorageWork->monPortraitPtr, 0x10D);
             break;
     }
 }

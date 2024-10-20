@@ -167,19 +167,19 @@ static void sub_8022A10(void)
             sub_801B3C0(&sUnknown_203B294->item);
             break;
         case 5:
-            xxx_info_box_80141B4(sDoesNotAppearHungry, 0, 0, 0x301);
+            CreateDialogueBoxAndPortrait(sDoesNotAppearHungry, 0, 0, 0x301);
             break;
         case 6:
-            xxx_info_box_80141B4(sFmtGummiBigFav, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(sFmtGummiBigFav, 0, 0, 0x101);
             break;
         case 7:
-            xxx_info_box_80141B4(sFmtGummiFav, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(sFmtGummiFav, 0, 0, 0x101);
             break;
         case 8:
-            xxx_info_box_80141B4(sFmtGummiOkay, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(sFmtGummiOkay, 0, 0, 0x101);
             break;
         case 9:
-            xxx_info_box_80141B4(sFmtGummiSatisfied, 0, 0, 0x101);
+            CreateDialogueBoxAndPortrait(sFmtGummiSatisfied, 0, 0, 0x101);
             break;
         case 10:
             do {
@@ -204,7 +204,7 @@ static void sub_8022A10(void)
                     sUnknown_203B294->fallbackState = 10;
                     strcpy(gUnknown_202DEA8, GetIQSkillName(sUnknown_203B294->unk40));
                     PlaySound(203);
-                    xxx_info_box_80141B4(sFmtIQHelpedLearn, 0, 0, 0x101);
+                    CreateDialogueBoxAndPortrait(sFmtIQHelpedLearn, 0, 0, 0x101);
                     sUnknown_203B294->unk40++;
                     break;
                 }
@@ -239,35 +239,35 @@ static void sub_8022A10(void)
             }
             break;
         case 12:
-            xxx_info_box_80141B4(sFmtPlusEverything, 0, 0, 0x301);
+            CreateDialogueBoxAndPortrait(sFmtPlusEverything, 0, 0, 0x301);
             break;
         case 13:
-            xxx_info_box_80141B4(sFmtPlusAtk, 0, 0, 0x301);
+            CreateDialogueBoxAndPortrait(sFmtPlusAtk, 0, 0, 0x301);
             break;
         case 14:
-            xxx_info_box_80141B4(sFmtPlusSpAtk, 0, 0, 0x301);
+            CreateDialogueBoxAndPortrait(sFmtPlusSpAtk, 0, 0, 0x301);
             break;
         case 15:
-            xxx_info_box_80141B4(sFmtPlusDef, 0, 0, 0x301);
+            CreateDialogueBoxAndPortrait(sFmtPlusDef, 0, 0, 0x301);
             break;
         case 16:
-            xxx_info_box_80141B4(sFmtPlusSpDef, 0, 0, 0x301);
+            CreateDialogueBoxAndPortrait(sFmtPlusSpDef, 0, 0, 0x301);
             break;
         case 17:
             sUnknown_203B294->fallbackState = 22;
-            xxx_info_box_80141B4(sNoGummis, 0, 0, 0x301);
+            CreateDialogueBoxAndPortrait(sNoGummis, 0, 0, 0x301);
             break;
         case 18:
             sUnknown_203B294->fallbackState = 22;
-            xxx_info_box_80141B4(sNoItem, 0, 0, 0x301);
+            CreateDialogueBoxAndPortrait(sNoItem, 0, 0, 0x301);
             break;
         case 19:
             sUnknown_203B294->fallbackState = 22;
-            xxx_info_box_80141B4(sGummiGone, 0, 0, 0x301);
+            CreateDialogueBoxAndPortrait(sGummiGone, 0, 0, 0x301);
             break;
         case 20:
             sUnknown_203B294->fallbackState = 22;
-            xxx_info_box_80141B4(sItemGone, 0, 0, 0x301);
+            CreateDialogueBoxAndPortrait(sItemGone, 0, 0, 0x301);
             break;
         case 21:
             sub_801AFA4(sUnknown_203B294->itemIndex);
