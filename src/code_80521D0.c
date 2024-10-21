@@ -707,6 +707,7 @@ extern SpriteOAM gUnknown_202F1F0;
 
 extern u8 gFontPalette[];
 
+// Used only for displaying Frosy Forest's text at floor 6
 void sub_8052FB8(const u8 *str)
 {
     s32 r8 = 0, r9, j;
@@ -851,6 +852,7 @@ extern bool8 sub_8008D8C(u32 strId);
 extern u32 sub_8014140(s32 a0, const void *a1);
 extern void sub_8083D30(void);
 extern void sub_8083D08(void);
+extern void sub_8007334(s32 a0);
 
 extern s32 gUnknown_202F1F8;
 extern u8 gUnknown_202F1FC;
@@ -917,3 +919,175 @@ bool32 sub_80532B4(void)
     sub_803EAF0(0, 0);
     return TRUE;
 }
+
+void sub_80533A4(void)
+{
+    s32 i;
+    s32 arrId = gDungeon->unk16;
+    s32 y = 16;
+
+    arrId -= 8;
+    if (arrId < 0)
+        arrId += UNK_1C070_ARR_COUNT;
+
+    sub_80073B8(0);
+    for (i = 0; i < 8; i++) {
+        struct UnkDungeonStruct1C070 *strPtr = &gDungeon->unk1C070[arrId];
+
+        if (strPtr->unk0) {
+            if (strPtr->unk1) {
+                sub_80078A4(0, 0, y, 0xE0, 7);
+            }
+            PrintStringOnWindow(8, y + 3, strPtr->unk3, 0, 0xD);
+            y += 14;
+        }
+        if (++arrId >= UNK_1C070_ARR_COUNT)
+            arrId = 0;
+    }
+
+    sub_80073E0(0);
+    sub_8007334(0);
+}
+
+extern void sub_80087EC(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4);
+extern void (*gUnknown_203B084)(s32 a0);
+extern void (*gUnknown_203B080)(s32 a0);
+extern void sub_8083CE0(u8 param_1);
+
+bool8 sub_8053430(s32 a0)
+{
+    s32 i;
+    struct UnkDungeonStruct1C070 *strPtr;
+    s32 y;
+    s32 arrId;
+
+    while (1)
+    {
+        arrId = gDungeon->unk16 + gUnknown_202F1F8;
+        y = 2;
+        arrId -= 9;
+        while (arrId < 0) {
+            arrId += UNK_1C070_ARR_COUNT;
+        }
+        while (arrId >= UNK_1C070_ARR_COUNT) {
+            arrId -= UNK_1C070_ARR_COUNT;
+        }
+
+        if (gDungeon->unk1C070[arrId].unk0 && gUnknown_202F1F8 > -12) {
+            gUnknown_202F1FC |= 1;
+            if (gRealInputs.repeated & DPAD_UP)
+                break;
+            if (a0 == 1)
+                break;
+        }
+
+        return FALSE;
+    }
+    sub_8083CE0(0);
+    sub_80073B8(0);
+    strPtr = &gDungeon->unk1C070[arrId];
+    if (strPtr->unk0) {
+        sub_80087EC(0, 0, 0, 0xD0, 0x10);
+        if (strPtr->unk1) {
+            sub_80078A4(0, 0, y, 0xE0, 7);
+        }
+        PrintStringOnWindow(8, y + 3, strPtr->unk3, 0, 0xD);
+    }
+    sub_80073E0(0);
+    sub_803E46C(0xD);
+
+    for (i = 0; i < 7; i++) {
+        gUnknown_203B084(0);
+        sub_803E46C(0xD);
+    }
+
+    gUnknown_202F1F8--;
+    return TRUE;
+}
+
+bool8 sub_8053540(s32 a0)
+{
+    s32 i;
+    struct UnkDungeonStruct1C070 *strPtr;
+    s32 y;
+    s32 arrId;
+
+    while (1)
+    {
+        arrId = gDungeon->unk16 + gUnknown_202F1F8;
+        y = 128;
+        while (arrId < 0) {
+            arrId += UNK_1C070_ARR_COUNT;
+        }
+        while (arrId >= UNK_1C070_ARR_COUNT) {
+            arrId -= UNK_1C070_ARR_COUNT;
+        }
+
+        if (gUnknown_202F1F8 < 0) {
+            gUnknown_202F1FC |= 2;
+            if (gRealInputs.repeated & DPAD_DOWN)
+                break;
+            if (a0 == 2)
+                break;
+        }
+
+        return FALSE;
+    }
+    sub_8083CE0(0);
+    sub_80073B8(0);
+    strPtr = &gDungeon->unk1C070[arrId];
+    if (strPtr->unk0) {
+        sub_80087EC(0, 0, y, 0x68, 0x10);
+        if (strPtr->unk1) {
+            sub_80078A4(0, 0, y, 0xE0, 7);
+        }
+        PrintStringOnWindow(8, y + 3, strPtr->unk3, 0, 0xD);
+    }
+    sub_80073E0(0);
+    sub_803E46C(0xD);
+
+    for (i = 0; i < 7; i++) {
+        gUnknown_203B080(0);
+        sub_803E46C(0xD);
+    }
+
+    gUnknown_202F1F8++;
+    return TRUE;
+}
+
+extern s16 gUnknown_2027370[];
+
+/*
+void sub_805363C(u8 a0, s32 a1)
+{
+    s16 *unkArr = gUnknown_2027370;
+    if (gUnknown_202EDCC & 8) {
+        u32 shape, size, xSprite;
+
+        gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
+        gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+        gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
+        gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
+        gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_BPP;
+
+        gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
+        shape = (a0 == 1) ? 2 : 0;
+        shape <<= SPRITEOAM_SHIFT_SHAPE;
+        gUnknown_202F1F0.attrib1 |= shape;
+
+        gUnknown_202F1F0.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
+
+        xSprite = (unkArr[0] * 8) + 92;
+        gUnknown_202F1F0.attrib2 &= ~SPRITEOAM_MASK_X;
+        gUnknown_202F1F0.attrib2 |= xSprite;
+
+        size = 2 << SPRITEOAM_SHIFT_SIZE;
+        gUnknown_202F1F0.attrib2 &= ~SPRITEOAM_MASK_SIZE;
+        gUnknown_202F1F0.attrib2 |= size;
+
+        gUnknown_202F1F0.attrib3 = 0xF3F0;
+
+        AddSprite(&gUnknown_202F1F0, 127, NULL, NULL);
+    }
+}
+*/
