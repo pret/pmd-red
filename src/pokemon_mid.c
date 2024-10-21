@@ -508,16 +508,14 @@ s16 GetPokemonEvolveConditions(s16 index, unkEvolve *r1)
 
 u8 GetPokemonOverworldPalette(s16 index, u32 r1)
 {
-    // Had to have this cast to match
-    u32 temp;
-    temp = index;
+    s32 id = SpeciesId(index);
     if (r1 != 0)
     {
         return 10;
     }
     else
     {
-        return gMonsterParameters[temp].overworldPalette;
+        return gMonsterParameters[id].overworldPalette;
     }
 }
 
@@ -538,14 +536,13 @@ OpenedFile *GetDialogueSpriteDataPtr(s32 index)
 {
     // Looks like this loads the dialogue sprite for the pokemon
     char buffer[0xC];
-    // TODO: Use the static inline function for indexing
-    s16 index_ = index;
+    s16 id = SpeciesId(index);
 
-    if(gMonsterParameters[index_].dialogueSprites == 0)
+    if(gMonsterParameters[id].dialogueSprites == 0)
     {
         return NULL;
     }
-    sprintf(buffer, gUnknown_8107684, index_); // "kao%03d"
+    sprintf(buffer, gUnknown_8107684, id); // "kao%03d"
     return OpenFileAndGetFileDataPtr(buffer, &gMonsterFileArchive);
 }
 

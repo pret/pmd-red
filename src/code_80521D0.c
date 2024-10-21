@@ -6,6 +6,7 @@
 #include "code_80130A8.h"
 #include "code_800E9E4.h"
 #include "code_803E668.h"
+#include "bg_palette_buffer.h"
 #include "input.h"
 #include "text2.h"
 #include "pokemon.h"
@@ -16,6 +17,7 @@
 #include "code_8045A00.h"
 #include "exclusive_pokemon.h"
 #include "dungeon_leader.h"
+#include "text1.h"
 
 void sub_80526D0(s32 r0);
 extern bool8 sub_8045888(Entity *r0);
@@ -146,7 +148,7 @@ void sub_80523A8(Entity *r0, const char *str, bool8 r2)
 
             r9 = TRUE;
             dst = gDungeon->unk1BDD4.unk0[gDungeon->unk1BDD4.unk1C060];
-            dst++;dst--; // TODO: use ASM_MATCH_TRICK
+            ASM_MATCH_TRICK(dst);
             strncpy(dst, txt, 64);
             if (++gDungeon->unk1BDD4.unk1C060 == UNK_1BBD4_STR_COUNT) {
                 gDungeon->unk1BDD4.unk1C060 = 0;
@@ -659,7 +661,7 @@ void sub_8052DD0(void)
 
 void HandleOnPickupTutorial(u8 itemId)
 {
-    u8 itemCategory = GetItemCategory(itemId);
+    u32 itemCategory = GetItemCategory(itemId);
 
     if (itemCategory == CATEGORY_FOOD_GUMMIES) {
         DislayTutorialMsg(NULL, &gFoodTutorial, FALSE);
@@ -698,4 +700,93 @@ void DisplayYouReachedDestFloorStr(void)
     else {
         DisplayDungeonMessage(NULL, gUnknown_80FF6A4, 1);
     }
+}
+
+extern SpriteOAM gUnknown_202F1F0;
+
+extern u8 gFontPalette[];
+
+void sub_8052FB8(const u8 *str)
+{
+    s32 r8 = 0, r9, j;
+    {
+        s32 i;
+        for (i = 1; i < 30; i++) {
+            gUnknown_202B038[0][0][i] = 0;
+        }
+    }
+
+    CreateMenuDialogueBoxAndPortrait(str, 0, 0, NULL, NULL, 2, 0, NULL, 0x30);
+    r9 = 0;
+    while (1) {
+        if (r8 < 62) {
+            r8++;
+            for (j = 0; j < 8; j++) {
+                SetBGPaletteBufferColorRGB(240 + j, &gFontPalette[j * 4], r8 / 2, NULL);
+            }
+        }
+        else {
+            r9++;
+            if (r9 & 8) {
+                u32 shape, tileNum, unk6, spriteX, mask, palNum;
+
+                gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
+                gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+                gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
+                gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
+                gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_BPP;
+
+                gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
+                shape = 1;
+                shape <<= SPRITEOAM_SHIFT_SHAPE;
+                ASM_MATCH_TRICK(shape);
+                gUnknown_202F1F0.attrib1 |= shape;
+
+                tileNum = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
+                gUnknown_202F1F0.attrib3 &= ~SPRITEOAM_MASK_TILENUM;
+                gUnknown_202F1F0.attrib3 |= tileNum;
+
+                gUnknown_202F1F0.attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
+
+                mask = 0xF;
+                palNum = (15 & SPRITEOAM_MAX_PALETTENUM) << SPRITEOAM_SHIFT_PALETTENUM;
+                gUnknown_202F1F0.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
+                gUnknown_202F1F0.attrib3 |= palNum;
+
+                unk6 = 0x78 << SPRITEOAM_SHIFT_UNK6_4;
+                gUnknown_202F1F0.unk6 &= mask;
+                gUnknown_202F1F0.unk6 |= unk6;
+
+                gUnknown_202F1F0.attrib2 &= ~SPRITEOAM_MASK_X;
+                gUnknown_202F1F0.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
+
+                spriteX = 0x70 & SPRITEOAM_MAX_X;
+                gUnknown_202F1F0.attrib2 &= ~SPRITEOAM_MASK_SIZE;
+                gUnknown_202F1F0.attrib2 |= spriteX;
+
+                AddSprite(&gUnknown_202F1F0, 0x100, NULL, NULL);
+            }
+            if (gRealInputs.pressed & AB_BUTTONS)
+                break;
+        }
+        DrawDialogueBoxString();
+        sub_803E46C(9);
+    }
+
+    while (r8 >= 0) {
+        for (j = 0; j < 8; j++) {
+            SetBGPaletteBufferColorRGB(240 + j, &gFontPalette[j * 4], r8 / 2, NULL);
+        }
+        DrawDialogueBoxString();
+        sub_803E46C(9);
+        r8--;
+    }
+
+    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+    sub_803E46C(9);
+    sub_8040238();
+    for (j = 0; j < 8; j++) {
+        SetBGPaletteBufferColorArray(240 + j, &gFontPalette[j * 4]);
+    }
+    sub_803E708(8, 9);
 }

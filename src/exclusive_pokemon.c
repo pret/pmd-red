@@ -145,22 +145,12 @@ bool8 sub_8098100(u8 param_1)
 
 bool8 sub_8098134(s16 pokeID)
 {
-    s32 index;
     s32 pokeID_s32;
     s32 pokeID_s32_1;
-    struct ExclusivePokemonData *ptr;
 
     pokeID_s32 = pokeID;
     pokeID_s32_1 = pokeID_s32;
-    ptr =  gUnknown_203B498;
-    if (pokeID < 0) {
-        index = pokeID_s32 + 0x1f;
-    }
-    else
-    {
-        index = pokeID_s32;
-    }
-    return ((ptr->unk4[(index >> 5)] & (1 << (s16)(pokeID_s32_1 - ((index >> 5) * 0x20)))) != 0);
+    return ((gUnknown_203B498->unk4[pokeID_s32 / 32] & (1 << (s16)(pokeID_s32_1 - ((pokeID_s32 / 32) * 0x20)))) != 0);
 }
 
 void SetTutorialFlag(s32 index)
