@@ -5,6 +5,7 @@
 #include "code_803E46C.h"
 #include "code_80130A8.h"
 #include "code_800E9E4.h"
+#include "menu_input.h"
 #include "code_803E668.h"
 #include "bg_palette_buffer.h"
 #include "input.h"
@@ -789,4 +790,130 @@ void sub_8052FB8(const u8 *str)
         SetBGPaletteBufferColorArray(240 + j, &gFontPalette[j * 4]);
     }
     sub_803E708(8, 9);
+}
+
+const u8 *GetCurrentDungeonName(void)
+{
+    if (gDungeon->unk678 == 1) {
+        return GetDungeonName1(DUNGEON_OUT_ON_RESCUE);
+    }
+    else {
+        return GetDungeonName1(gDungeon->dungeonLocation.id);
+    }
+}
+
+void sub_80531A8(void)
+{
+    s32 i;
+
+    gDungeon->unk16 = 0;
+    gDungeon->unkB = 1;
+    for (i = 0; i < UNK_1C070_ARR_COUNT; i++) {
+        gDungeon->unk1C070[i].unk3[0] = 0;
+        gDungeon->unk1C070[i].unk0 = 0;
+        gDungeon->unk1C070[i].unk1 = 0;
+        gDungeon->unk1C070[i].unk2 = 0;
+    }
+}
+
+UNUSED void sub_8053200(void)
+{
+    gDungeon->unkB = 1;
+}
+
+void sub_8053210(u8 *txt, u32 a1, u32 a2)
+{
+    u8 *dst = &gDungeon->unk1C070[gDungeon->unk16].unk3[0];
+    u8 *maxDst = &gDungeon->unk1C070[gDungeon->unk16].unk3[UNK_1C070_BUFFER_SIZE - 1];
+    gDungeon->unk1C070[gDungeon->unk16].unk0 = 1;
+    gDungeon->unk1C070[gDungeon->unk16].unk1 = a1;
+    gDungeon->unk1C070[gDungeon->unk16].unk2 = a2;
+
+    while (*txt != '\0') {
+        if (*txt == '\r') break;
+        if (dst < maxDst) {
+            *(dst++) = *txt;
+        }
+        txt++;
+    }
+
+    *dst = '\0';
+    if (++gDungeon->unk16 >= UNK_1C070_ARR_COUNT) {
+        gDungeon->unk16 = 0;
+    }
+
+    gDungeon->unkB = 1;
+}
+
+extern const u8 gUnknown_8106990[]; // Possibly something menu related?
+
+extern bool8 sub_8008D8C(u32 strId);
+extern u32 sub_8014140(s32 a0, const void *a1);
+extern void sub_8083D30(void);
+extern void sub_8083D08(void);
+
+extern s32 gUnknown_202F1F8;
+extern u8 gUnknown_202F1FC;
+
+void sub_80533A4(void);
+bool8 sub_8053540(s32 a0);
+bool8 sub_8053430(s32 a0);
+void sub_805363C(s32 a0, s32 a1);
+
+bool32 sub_80532B4(void)
+{
+    bool8 unkRet;
+    MenuInputStructSub menuInput;
+
+    sub_801317C(&menuInput);
+    sub_803EAF0(9, 0);
+    do {
+        sub_803E46C(13);
+        unkRet = sub_8008D8C(0);
+    } while (unkRet);
+
+    gUnknown_202F1F8 = 0;
+    gUnknown_202F1FC = 0;
+    sub_80533A4();
+
+    while (1) {
+        s32 unkVar;
+        bool8 unkBool = FALSE;
+
+        gUnknown_202F1FC = 0;
+        nullsub_34(&menuInput, 0);
+        unkVar = sub_8014140(0, gUnknown_8106990);
+        if (sub_8053430(unkVar))
+            unkBool = TRUE;
+        else
+            unkBool = FALSE;
+
+        if (sub_8053540(unkVar))
+            unkBool = TRUE;
+
+        if (!unkBool) {
+            sub_803E46C(0xD);
+        }
+
+        if (gUnknown_202F1FC & 1) {
+            sub_805363C(1, -8);
+        }
+        if (gUnknown_202F1FC & 2) {
+            sub_805363C(0, 114);
+        }
+
+        if (!sub_80048C8()) {
+            if (gRealInputs.pressed & B_BUTTON || menuInput.b_button) {
+                sub_8083D30();
+                break;
+            }
+            else if (gRealInputs.pressed & A_BUTTON) {
+                sub_8083D08();
+                break;
+            }
+        }
+    }
+
+    sub_803EAF0(0, 0);
+    return TRUE;
 }

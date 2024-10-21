@@ -2168,7 +2168,7 @@ extern const u8 *const gUnknown_80F91E0;
 extern const u8 *const gUnknown_80F91A8;
 extern const u8 *const gUnknown_80FE954;
 
-const u8 *sub_805317C(void);
+const u8 *GetCurrentDungeonName(void);
 void GetWeatherName(u8 *dst, u8 weatherId);
 
 extern s32 gFormatData_202DE30[];
@@ -2232,7 +2232,7 @@ void DrawFieldMenu(u8 a0)
     if (a0) {
         u32 hours, minutes, seconds;
         EntityInfo *leaderInfo = GetLeader()->info;
-        const u8 *dungeonName = sub_805317C();
+        const u8 *dungeonName = GetCurrentDungeonName();
 
         x = (136 - sub_8008ED0(dungeonName)) / 2;
         sub_80073B8(1);
