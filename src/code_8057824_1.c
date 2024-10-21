@@ -432,7 +432,7 @@ void MoltresScreenDarken(void);
 void ZapdosDropInEffect(Entity *param_1);
 void ZapdosScreenFlash(int param_1);
 
-extern s32 sub_8052C68(u32, const u8 *, const u8 *, u32);
+extern s32 DisplayDungeonMenuMessage(u32, const u8 *, const u8 *, u32);
 extern void sub_8045C28(Item *, u8 , u8 *);
 extern void EnableJirachiWishWarpTile(void);
 extern void sub_808BB3C(Position *);
@@ -3532,7 +3532,7 @@ void JirachiWish(void)
 #else
         s32 r0 = 0;
 #endif
-        wishChoice = sub_8052C68(r0,*gUnknown_8105798,gUnknown_810579C,0x705);
+        wishChoice = DisplayDungeonMenuMessage(r0,*gUnknown_8105798,gUnknown_810579C,0x705);
         if (wishChoice >= 1) break;
     }
     sub_803E708(10,0x46);
@@ -4292,7 +4292,7 @@ void CelebiJoinDialogue(void)
             case 0:
                 do
                 {
-                    menuChoice = sub_8052C68(0,gPtrPurityForestAllowCelebiToJoinText, &gPurityForestAllowCelebiToJoinPrompt,0x701);
+                    menuChoice = DisplayDungeonMenuMessage(0,gPtrPurityForestAllowCelebiToJoinText, &gPurityForestAllowCelebiToJoinPrompt,0x701);
                 } while (menuChoice < 1);
 
                 sub_803E708(10,0x46);
@@ -4337,7 +4337,7 @@ void CelebiJoinDialogue(void)
             case 1:
                 do
                 {
-                    menuChoice = sub_8052C68(0,gPtrPurityForestRefuseCelebiConfirmText, &gPurityForestRefuseCelebiConfirmPrompt,0x701);
+                    menuChoice = DisplayDungeonMenuMessage(0,gPtrPurityForestRefuseCelebiConfirmText, &gPurityForestRefuseCelebiConfirmPrompt,0x701);
                 } while (menuChoice < 1);
                 if (menuChoice == 1)
                 {

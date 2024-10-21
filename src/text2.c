@@ -3408,38 +3408,6 @@ UNUSED void sub_8008FF0(s32 x, u32 y, const u8 *str, u32 windowId, u32 a4)
 
 UNUSED void nullsub_171(void) {}
 
-struct UnkDrawStringStruct;
-
-struct UnkDrawStringStruct
-{
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6;
-    s16 unk8;
-    s16 unkA;
-    s32 unkC;
-    u32 unk10;
-    u32 unk14;
-    u32 unk18;
-    u32 unk1C;
-    u8 unk20;
-    u8 unk21;
-    u8 fill22;
-    u8 fill23;
-    const u8* (*unk24)(const u8 *, const u8 *, struct UnkDrawStringStruct*);
-    u8 fill28;
-    u8 fill29;
-    u8 fill2A;
-    u8 fill2B;
-    u32 unk2C;
-    u8 fill30;
-    u8 fill31;
-    u8 fill32;
-    u8 fill33;
-    u32 unk34;
-};
-
 const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct UnkDrawStringStruct *sp);
 
 void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 windowId, s32 a5, s32 a6, s32 a7)

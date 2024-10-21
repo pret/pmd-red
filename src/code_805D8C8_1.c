@@ -57,7 +57,7 @@ struct UnkMenuBitsStruct {
     u8 a0_32;
 };
 
-extern void PrintFieldMessage(u32, const u8 *, u32);
+extern void DisplayDungeonMessage(u32, const u8 *, u32);
 extern void HandleSetItemAction(Entity *,bool8);
 extern void HandleUnsetItemAction(Entity *,bool8);
 extern bool8 sub_8048A68(Entity *param_1,Item *item);
@@ -72,7 +72,7 @@ extern void sub_806A6E8(Entity *);
 extern bool8 sub_8047084(s32 itemFlag);
 extern void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4);
 extern void sub_8045DB4(Position *, u32);
-extern s32 sub_8052B8C(u32, const u8 *, u32);
+extern s32 DisplayDungeonYesNoMessage(u32, const u8 *, u32);
 bool8 sub_807EF48(void);
 void sub_806A2BC(Entity *a0, u8 a1);
 bool8 sub_805E874(void);
@@ -1577,7 +1577,7 @@ bool8 sub_805EC4C(Entity *a0, u8 a1)
     if (IsChargingAnyTwoTurnMove(tileMonster, FALSE)) return FALSE;
     if (!sub_8070F80(a0, entityInfo->action.direction)) return FALSE;
 
-    if (a1 != 0 && sub_807049C(tileMonster, &a0->pos) && !sub_8052B8C(0, gUnknown_8100208, 0)) return FALSE;
+    if (a1 != 0 && sub_807049C(tileMonster, &a0->pos) && !DisplayDungeonYesNoMessage(0, gUnknown_8100208, 0)) return FALSE;
 
     SetMonsterActionFields(&entityInfo->action, ACTION_WALK);
     if (gRealInputs.held & B_BUTTON) {
@@ -2124,7 +2124,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
                 }
                 else {
                     SetMessageArgument(gAvailablePokemonNames, GetLeader(), 0);
-                    PrintFieldMessage(0, gUnknown_80FDE18, 1);
+                    DisplayDungeonMessage(0, gUnknown_80FDE18, 1);
                 }
             }
             r10 = -1;
@@ -2168,7 +2168,7 @@ extern const u8 *const gUnknown_80F91E0;
 extern const u8 *const gUnknown_80F91A8;
 extern const u8 *const gUnknown_80FE954;
 
-const u8 *sub_805317C(void);
+const u8 *GetCurrentDungeonName(void);
 void GetWeatherName(u8 *dst, u8 weatherId);
 
 extern s32 gFormatData_202DE30[];
@@ -2232,7 +2232,7 @@ void DrawFieldMenu(u8 a0)
     if (a0) {
         u32 hours, minutes, seconds;
         EntityInfo *leaderInfo = GetLeader()->info;
-        const u8 *dungeonName = sub_805317C();
+        const u8 *dungeonName = GetCurrentDungeonName();
 
         x = (136 - sub_8008ED0(dungeonName)) / 2;
         sub_80073B8(1);
@@ -2279,7 +2279,7 @@ bool8 sub_805FBE8(u8 *a0)
     do
     {
         sub_803E46C(0xE);
-        xxx_draw_string_80144C4();
+        DrawDialogueBoxString();
         r4 = sub_8016080();
     } while (r4 == 0);
     CleanConfirmNameMenu();
@@ -2435,7 +2435,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
 
     sUnknown_202F258 = sub_8060D64(sUnknown_202F248, var_30, var_34, var_28, a0);
     if (sUnknown_202F258 == 0) {
-        PrintFieldMessage(0, gUnknown_80F8B24, 1);
+        DisplayDungeonMessage(0, gUnknown_80F8B24, 1);
         return TRUE;
     }
 

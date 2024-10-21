@@ -14,46 +14,45 @@ void PrepareSavePakWrite(s16 pokemonID)
 {
     OpenedFile *file;
     s32 id_s32;
-    OpenedFile **preload_face;
 
     id_s32 = pokemonID; // had to cast for asr shift
 
     sub_80993D8();
     sSavePakWrite = MemoryAlloc(sizeof(SavePakWrite), 5);
     sSavePakWrite->pokeID = id_s32;
-    sSavePakWrite->faceFile = NULL;
-    sSavePakWrite->faceData = NULL;
+    sSavePakWrite->monPortrait.faceFile = NULL;
+    sSavePakWrite->monPortrait.faceData = NULL;
 
     if (pokemonID != MONSTER_NONE) {
         file = GetDialogueSpriteDataPtr(pokemonID);
-        sSavePakWrite->faceFile = file;
-        sSavePakWrite->faceData = file->data;
-        sSavePakWrite->unk18 = 0;
-        sSavePakWrite->unk19 = 0;
-        sSavePakWrite->unk1A = 0;
-        sSavePakWrite->unk14 = 2;
-        sSavePakWrite->unk16 = 8;
+        sSavePakWrite->monPortrait.faceFile = file;
+        sSavePakWrite->monPortrait.faceData = file->data;
+        sSavePakWrite->monPortrait.spriteId = 0;
+        sSavePakWrite->monPortrait.flip = FALSE;
+        sSavePakWrite->monPortrait.unkE = 0;
+        sSavePakWrite->monPortrait.pos.x = 2;
+        sSavePakWrite->monPortrait.pos.y = 8;
     }
 
-    if (sSavePakWrite->faceFile != 0) {
-        preload_face = &sSavePakWrite->faceFile;
-        xxx_info_box_80141B4(sSavingAdventure, 0, preload_face, 0x20);
+    if (sSavePakWrite->monPortrait.faceFile != 0) {
+        struct MonPortraitMsg *monPortraitPtr = &sSavePakWrite->monPortrait;
+        CreateDialogueBoxAndPortrait(sSavingAdventure, 0, monPortraitPtr, 0x20);
     }
     else
-        xxx_info_box_80141B4(sSavingAdventure, 0, NULL, 0x20);
+        CreateDialogueBoxAndPortrait(sSavingAdventure, 0, NULL, 0x20);
 
     sSavePakWrite->state = 3;
 }
 
 bool8 WriteSavePak(void)
 {
-    OpenedFile **faceFile;
+    struct MonPortraitMsg *monPortraitPtr;
     u32 local_14;
     u32 other_stack;
 
-    faceFile = NULL;
-    if (sSavePakWrite->faceFile != NULL)
-        faceFile = &sSavePakWrite->faceFile;
+    monPortraitPtr = NULL;
+    if (sSavePakWrite->monPortrait.faceFile != NULL)
+        monPortraitPtr = &sSavePakWrite->monPortrait;
 
     switch (sSavePakWrite->state) {
         case 0:
@@ -62,7 +61,7 @@ bool8 WriteSavePak(void)
         case 1:
             sSavePakWrite->unk4++;
             if (sSavePakWrite->unk4 > 8) {
-                xxx_info_box_80141B4(sWriteGamePak, 0, 0, 0x20);
+                CreateDialogueBoxAndPortrait(sWriteGamePak, 0, 0, 0x20);
                 sSavePakWrite->state = 3;
             }
             break;
@@ -78,22 +77,22 @@ bool8 WriteSavePak(void)
 
             switch (sSavePakWrite->saveStatus) {
                 case SAVE_COMPLETED:
-                    if (sSavePakWrite->faceFile != NULL)
-                        xxx_info_box_80141B4(sSaveCompleted, 0, faceFile, 0x101);
+                    if (sSavePakWrite->monPortrait.faceFile != NULL)
+                        CreateDialogueBoxAndPortrait(sSaveCompleted, 0, monPortraitPtr, 0x101);
                     else
-                        xxx_info_box_80141B4(sSaveCompleted, 0, faceFile, 0x101);
+                        CreateDialogueBoxAndPortrait(sSaveCompleted, 0, monPortraitPtr, 0x101);
 
                     sSavePakWrite->state = 5;
                     break;
                 case SAVE_NOT_WRTTEN:
-                    xxx_info_box_80141B4(sSaveNotWritten, 0, 0, 0);
+                    CreateDialogueBoxAndPortrait(sSaveNotWritten, 0, 0, 0);
                     sSavePakWrite->state = 6;
                     break;
                 default:
-                    if (sSavePakWrite->faceFile != NULL)
-                        xxx_info_box_80141B4(sSaveFailed, 0, faceFile, 0x101);
+                    if (sSavePakWrite->monPortrait.faceFile != NULL)
+                        CreateDialogueBoxAndPortrait(sSaveFailed, 0, monPortraitPtr, 0x101);
                     else
-                        xxx_info_box_80141B4(sSaveFailed, 0, faceFile, 0x101);
+                        CreateDialogueBoxAndPortrait(sSaveFailed, 0, monPortraitPtr, 0x101);
 
                     sSavePakWrite->state = 5;
                     break;
@@ -120,8 +119,8 @@ u32 GetSavePakStatus(void)
 void FinishWriteSavePak(void)
 {
     if (sSavePakWrite != NULL) {
-        if (sSavePakWrite->faceFile != NULL)
-            CloseFile(sSavePakWrite->faceFile);
+        if (sSavePakWrite->monPortrait.faceFile != NULL)
+            CloseFile(sSavePakWrite->monPortrait.faceFile);
         MemoryFree(sSavePakWrite);
         sSavePakWrite = NULL;
     }

@@ -193,27 +193,27 @@ static void sub_802D2A8(void)
             break;
         case 1:
             sub_802D73C();
-            sub_8014248(sReplaceOldMailPrompt, 0, sUnknown_203B2F8->menuAction2, sUnknown_203B2F8->unk158, 0, 4, 0, NULL, 0);
+            CreateMenuDialogueBoxAndPortrait(sReplaceOldMailPrompt, 0, sUnknown_203B2F8->menuAction2, sUnknown_203B2F8->unk158, 0, 4, 0, NULL, 0);
             break;
         case DUPLICATE_WONDER_MAIL:
             sUnknown_203B2F8->fallbackState = WONDER_MAIL_EXIT;
-            xxx_info_box_80141B4(sMailAlreadyReceived, 0, NULL, 0x101);
+            CreateDialogueBoxAndPortrait(sMailAlreadyReceived, 0, NULL, 0x101);
             break;
         case DUPLICATE_WONDER_MAIL_1:
             sUnknown_203B2F8->fallbackState = WONDER_MAIL_EXIT;
-            xxx_info_box_80141B4(sMailAlreadyReceivedMayNotReceiveAgain, 0, NULL, 0x101);
+            CreateDialogueBoxAndPortrait(sMailAlreadyReceivedMayNotReceiveAgain, 0, NULL, 0x101);
             break;
         case 5:
             sUnknown_203B2F8->fallbackState = WONDER_MAIL_EXIT;
-            xxx_info_box_80141B4(sOnlyOneMailCanBeHeldPleaseCompleteFirst, 0, NULL, 0x101);
+            CreateDialogueBoxAndPortrait(sOnlyOneMailCanBeHeldPleaseCompleteFirst, 0, NULL, 0x101);
             break;
         case 6:
             sUnknown_203B2F8->fallbackState = WONDER_MAIL_EXIT;
-            xxx_info_box_80141B4(sTeamQuicksavedCompleteFirst, 0, NULL, 0x101);
+            CreateDialogueBoxAndPortrait(sTeamQuicksavedCompleteFirst, 0, NULL, 0x101);
             break;
         case 7:
             sUnknown_203B2F8->fallbackState = DRAW_JOB_LIST_1;
-            xxx_info_box_80141B4(sTeamQuicksavedCannotDelete, 0, NULL, 0x101);
+            CreateDialogueBoxAndPortrait(sTeamQuicksavedCannotDelete, 0, NULL, 0x101);
             break;
         case RECEIVE_WONDER_MAIL:
             sUnknown_203B2F8->wonderMailAccepted = TRUE;
@@ -242,15 +242,15 @@ static void sub_802D2A8(void)
             }
 
             sUnknown_203B2F8->fallbackState = WONDER_MAIL_EXIT;
-            xxx_info_box_80141B4(sReceivedWonderMail, 0, NULL, 0x101);
+            CreateDialogueBoxAndPortrait(sReceivedWonderMail, 0, NULL, 0x101);
             break;
         case 9:
             sub_802D690();
-            sub_8014248(sOnlyOneMailCanBeHeldSoReplacePrompt,0,sUnknown_203B2F8->menuAction3,sUnknown_203B2F8->unk158,0,4,0,0,0);
+            CreateMenuDialogueBoxAndPortrait(sOnlyOneMailCanBeHeldSoReplacePrompt,0,sUnknown_203B2F8->menuAction3,sUnknown_203B2F8->unk158,0,4,0,0,0);
             break;
         case JOB_LIST_FULL:
             sUnknown_203B2F8->fallbackState = DRAW_JOB_LIST;
-            xxx_info_box_80141B4(sJobListFullPleaseDelete, 0, NULL, 0x101);
+            CreateDialogueBoxAndPortrait(sJobListFullPleaseDelete, 0, NULL, 0x101);
             break;
         case DRAW_JOB_LIST:
             sub_802C4C8(0, NULL, 4);

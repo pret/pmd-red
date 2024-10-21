@@ -4,6 +4,7 @@
 #include "file_system.h"
 #include "structs/str_text.h"
 #include "structs/str_wonder_mail.h"
+#include "code_80130A8.h"
 
 // size: 0xA8
 struct unkStruct_203B2FC
@@ -13,13 +14,7 @@ struct unkStruct_203B2FC
     unkStruct_802F204 unk8;
     /* 0x30 */ u8 jobSlotIndex;
     /* 0x34 */ WonderMail *jobInfo;
-    /* 0x38 */ OpenedFile *faceFile;
-    /* 0x3C */ u8 *faceData;
-    u16 unk40;
-    u16 unk42;
-    u8 unk44;
-    u8 unk45;
-    u8 unk46;
+    /* 0x38 */ struct MonPortraitMsg monPortrait;
     UnkTextStruct2 unk48[4];
 };
 
