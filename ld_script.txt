@@ -342,6 +342,7 @@ SECTIONS {
         src/ground_main.o(.text);
         asm/code_8098BDC.o(.text);
         src/code_8099328.o(.text);
+        src/code_8099360.o(.text);
         asm/code_8099360.o(.text);
         src/code_809A560.o(.text);
         asm/code_809A560.o(.text);

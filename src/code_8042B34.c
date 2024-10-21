@@ -28,6 +28,7 @@
 #include "weather.h"
 #include "moves.h"
 #include "code_8094F88.h"
+#include "code_8099360.h"
 #include "bg_palette_buffer.h"
 #include "exclusive_pokemon.h"
 #include "constants/dungeon.h"
@@ -337,7 +338,6 @@ extern void sub_80095CC(u32, u32);
 extern void sub_8081BF4(u8 *r0, u32 r1);
 extern void PrintFieldMessage(u32, const u8 *, u32);
 extern bool8 IsLevelResetTo1(u8 dungeon);
-extern u8 sub_8099394(u8 *);
 extern void sub_8068A84(PokemonStruct1 *pokemon);
 extern void sub_807EAA0(u32, u32);
 extern void sub_803D4D0(void);
