@@ -5,6 +5,7 @@
 #include "code_8094F88.h"
 #include "code_80958E8.h"
 #include "code_80972F4.h"
+#include "code_8099360.h"
 #include "code_80A26CC.h"
 #include "constants/mailbox.h"
 #include "constants/wonder_mail.h"
@@ -25,8 +26,6 @@ static EWRAM_DATA_2 unkStruct_203B330 *sUnknown_203B330 = {0};
 
 // code_8098BDC.s
 extern u8 sub_80992E0(s16 *, s16 *);
-extern u8 sub_8099360(u8 *);
-extern u8 sub_8099394(volatile u8 *);
 
 static void DisplayMissionObjectives(void);
 
@@ -114,7 +113,7 @@ static void DisplayMissionObjectives(void)
 
     switch (sUnknown_203B330->unkC) {
         case 1:
-            sub_8099394(&local_94);
+            sub_8099394((u8*)&local_94);
             mail = GetMailatIndex(local_94);
             sub_803B6B0(10, 16, 3, sUnknown_203B330->unk10);
             // %dF

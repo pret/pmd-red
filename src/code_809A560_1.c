@@ -2,6 +2,7 @@
 #include "structs/str_3001B64.h"
 #include "code_80118A4.h"
 #include "code_801D014.h"
+#include "code_8099360.h"
 #include "credits2.h"
 #include "event_flag.h"
 #include "flash.h"
@@ -16,9 +17,7 @@ void sub_802E918();
 u32 sub_80282DC(u8 *r0);
 void sub_809927C(u8);
 void sub_80282FC(void);
-void sub_80993C0(u32);
 void sub_8001064(void);
-void sub_809965C(void);
 
 void sub_809C39C(void) {
     gUnknown_3001B64->unk430 = sub_801D178();
