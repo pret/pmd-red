@@ -120,4 +120,11 @@ static inline bool8 IsMonPartner(PokemonStruct1 *mon)
     return (mon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER);
 }
 
+// Needed to match a couple of functions which use species id.
+// The theory is that there was some internal species conversion which got scrapped later on.
+static inline s16 SpeciesId(s32 id)
+{
+    return id;
+}
+
 #endif // GUARD_POKEMON_H

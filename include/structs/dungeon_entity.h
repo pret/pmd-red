@@ -260,7 +260,7 @@ typedef struct EntityInfo
     /* 0xF8 */ bool8 speedStageChanged; // Toggled when pokemon is movement speed is sped up
     /* 0xF9 */ u8 unkF9;
     /* 0xFA */ u8 terrifiedTurns; // Doubles as a bool for whether the Pokémon is terrified.
-    u8 unkFB;
+    u8 expMultiplier;
     // Set to true if the player makes a teammate use their held item.
     // This is done by going to the teammate's held item in the toolbox and selecting "Use".
     /* 0xFC */ bool8 useHeldItem;
@@ -417,6 +417,31 @@ enum VisualFlag
     // Prevents the effect from showing again if the Pokémon stops running away and then starts running away again.
     VISUAL_FLAG_RUN_AWAY = 2
 };
+
+enum ExpMultiplier
+{
+    EXP_HALVED, // 0.5x when fainting a mon with only the regular attack and no moves
+    EXP_REGULAR, // 1x
+    EXP_BOOSTED, // 1.5x so far use not found, but most likely linked moves ; to be confirmed once more code is decompiled
+};
+
+static inline bool8 ExpMultiplierChanged(EntityInfo *info)
+{
+    return (info->expMultiplier != EXP_HALVED);
+}
+
+static inline void SetRegularExpMultiplier(EntityInfo *info)
+{
+    info->expMultiplier = EXP_REGULAR;
+}
+
+// After using a move, pokemon will get more experience than
+// This inline is needed to match one function - sub_805AD54
+static inline void SetExpMultplier(EntityInfo *info)
+{
+    if (!ExpMultiplierChanged(info))
+        SetRegularExpMultiplier(info);
+}
 
 static inline EntityInfo *GetEntInfo(Entity *ent)
 {

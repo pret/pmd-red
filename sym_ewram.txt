@@ -433,28 +433,8 @@ gUnknown_202F224: /* 202F224 (sub_8040DA0 - sub_805B264) */
 gUnknown_202F228: /* 202F228 (sub_8055FA0 - sub_805B618) */
 	.space 0x4
 
-gUnknown_202F22C: /* 202F22C (sub_805D8C8 - sub_805E2C4) */
-	.space 0x1
-gUnknown_202F22D: /* 202F22D (sub_805D8C8 - sub_805E2C4) */
-	.space 0x1
-gUnknown_202F22E: /* 202F22E (sub_805D8C8 - sub_805E2C4) */
-	.space 0x2
-gUnknown_202F230: /* 202F230 (sub_805D8C8 - sub_805E2C4) */
-	.space 0x1
-gUnknown_202F231: /* 202F231 (sub_805D8C8 - sub_805E2C4) */
-	.space 0x7
+    .include "src/code_805D8C8_1.o"
 
-gUnknown_202F238: /* 202F238 (sub_805FD74 - sub_8060CE8) */
-	.space 0x8
-gUnknown_202F240: /* 202F240 (sub_805FD74 - CreateFieldItemMenu) */
-	.space 0x8
-gUnknown_202F248: /* 202F248 (sub_805FD74 - sub_8060890) */
-	.space 0x10
-gUnknown_202F258: /* 202F258 (sub_805FD74 - sub_8060800) */
-	.space 0x8
-
-gUnknown_202F260: /* 202F260 (ShowFieldMenu - DrawFieldTeamMenu) */
-	.space 0x8
 gUnknown_202F268: /* 202F268 (sub_8062500) */
 	.space 0x8
 gUnknown_202F270: /* 202F270 (sub_8060E38 - sub_8061A38) */

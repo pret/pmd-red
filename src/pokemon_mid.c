@@ -585,7 +585,7 @@ void xxx_pokemonstruct_to_pokemon2_808DE50(PokemonStruct2 * a1, PokemonStruct1 *
     }
 
     a1->currExp = pokemon->currExp;
-    CopyAndResetMoves(a1->moves.moves, pokemon->moves);
+    CopyAndResetMoves(&a1->moves, pokemon->moves);
 
     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
         a1->name[i] = pokemon->name[i];

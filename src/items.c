@@ -484,14 +484,7 @@ void FillInventoryGaps()
 
   // clear out the rest of the slots
   for (; last_filled < INVENTORY_SIZE; last_filled++) {
-      struct Item *items;
-
-      DUMMY_TEAM_ITEMS_ASM_MATCH(last_filled);
-      items = gTeamInventoryRef->teamItems;
-
-      items[last_filled].id = ITEM_NOTHING;
-      items[last_filled].quantity = 0;
-      items[last_filled].flags = 0;
+      ZeroOutItem(&gTeamInventoryRef->teamItems[last_filled]);
   }
 }
 
@@ -510,11 +503,11 @@ s32 GetItemCountInInventory(u8 id)
 {
     s32 i;
     s32 count = 0;
-    struct Item *item = &gTeamInventoryRef->teamItems[0];
 
-    for (i = 0; i < INVENTORY_SIZE; item++, i++) {
-        if (item->flags & 1 && item->id == id)
+    for (i = 0; i < INVENTORY_SIZE; i++) {
+        if (ItemExists(&gTeamInventoryRef->teamItems[i]) && gTeamInventoryRef->teamItems[i].id == id) {
             count++;
+        }
     }
 
     return count;
@@ -522,20 +515,20 @@ s32 GetItemCountInInventory(u8 id)
 
 s32 GetItemPossessionCount(u8 id)
 {
-  s32 item_count = GetItemCountInInventory(id);
-  s32 i = 0;
+    s32 count = GetItemCountInInventory(id);
+    s32 i = 0;
 
-  unkStruct_203B45C *_gRecruitedPokemonRef = gRecruitedPokemonRef;
-  for (i = 0; i < NUM_MONSTERS; i++) {
-     PokemonStruct1* pokemon = &_gRecruitedPokemonRef->pokemon[i];
-    if ((1 & pokemon->unk0)
-          && ((pokemon->unk0 >> 1) % 2)
-          && (pokemon->heldItem.id != ITEM_NOTHING)
-          && (pokemon->heldItem.id == id)) {
-      item_count++;
+    for (i = 0; i < NUM_MONSTERS; i++) {
+        PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[i];
+        if (PokemonFlag1(mon)
+        && PokemonFlag2(mon)
+        && (mon->heldItem.id != ITEM_NOTHING)
+        && (mon->heldItem.id == id))
+        {
+            count++;
+        }
     }
-  }
-  return item_count;
+    return count;
 }
 
 void ShiftItemsDownFrom(s32 start)
@@ -575,12 +568,8 @@ bool8 AddItemToInventory(const Item* slot)
 
     // try to add item to inventory, return 1 if failed
     for (i = 0; i < INVENTORY_SIZE; i++) {
-        Item *items;
-        DUMMY_TEAM_ITEMS_ASM_MATCH(i);
-
-        items = gTeamInventoryRef->teamItems;
-        if (!(items[i].flags & ITEM_FLAG_EXISTS)) {
-            items[i] = *slot;
+        if (!ItemExists(&gTeamInventoryRef->teamItems[i])) {
+            gTeamInventoryRef->teamItems[i] = *slot;
             return FALSE;
         }
     }
@@ -589,55 +578,39 @@ bool8 AddItemToInventory(const Item* slot)
 
 void ConvertMoneyItemToMoney(void)
 {
-  s32 i = 0;
+    s32 i, j;
 
-  do {
-    UNUSED TeamInventory * _gTeamInventoryRef = gTeamInventoryRef;
-    UNUSED size_t offs = offsetof(TeamInventory, teamItems[i]);
-
-    Item* current_slot = &gTeamInventoryRef->teamItems[i];
-    if ((current_slot->flags & ITEM_FLAG_EXISTS) && (current_slot->id == ITEM_POKE)) {
-      u32 result;
-
-      result = GetMoneyValue(current_slot);
-      AddToTeamMoney(result);
-      current_slot->id = ITEM_NOTHING;
-      current_slot->quantity = 0;
-      current_slot->flags = 0;
-    }
-  } while (++i < INVENTORY_SIZE);
-  FillInventoryGaps();
-
-  i = 0;
-  do {
-    s32 lowest_index = -1;
-    UNUSED size_t offs = offsetof(TeamInventory, teamItems[i]);
-
-    bool8 item_occupied = i[gTeamInventoryRef->teamItems].flags & ITEM_FLAG_EXISTS;
-    s32 next = i + 1;
-
-    if (item_occupied) {
-      s32 lowest_order = GetItemOrder(gTeamInventoryRef->teamItems[i].id);
-      s32 j;
-
-      // find next lowest
-      for (j = next; j < INVENTORY_SIZE; j++) {
-        UNUSED size_t offs = offsetof(TeamInventory, teamItems[j]);
-        if ((j[gTeamInventoryRef->teamItems].flags & ITEM_FLAG_EXISTS) && (lowest_order > GetItemOrder(gTeamInventoryRef->teamItems[j].id))) {
-          lowest_index = j;
-          lowest_order = GetItemOrder(gTeamInventoryRef->teamItems[j].id);
+    for (i = 0; i < INVENTORY_SIZE; i++) {
+        Item *item = &gTeamInventoryRef->teamItems[i];
+        if (ItemExists(item) && item->id == ITEM_POKE) {
+            AddToTeamMoney(GetMoneyValue(item));
+            ZeroOutItem(item);
         }
-      }
-
-      if (lowest_index >= 0) {
-        // swap the slots
-        Item current = gTeamInventoryRef->teamItems[i];
-        gTeamInventoryRef->teamItems[i] = gTeamInventoryRef->teamItems[lowest_index];
-        gTeamInventoryRef->teamItems[lowest_index] = current;
-      }
     }
-  } while (++i < INVENTORY_SIZE);
-  FillInventoryGaps();
+    FillInventoryGaps();
+
+    for (i = 0; i < INVENTORY_SIZE; i++) {
+        s32 lowestIndex = -1;
+
+        if (ItemExists(&gTeamInventoryRef->teamItems[i])) {
+            s32 lowestOrder = GetItemOrder(gTeamInventoryRef->teamItems[i].id);
+
+            for (j = i + 1; j < INVENTORY_SIZE; j++) {
+                if (ItemExists(&gTeamInventoryRef->teamItems[j]) && lowestOrder > GetItemOrder(gTeamInventoryRef->teamItems[j].id)) {
+                    lowestIndex = j;
+                    lowestOrder = GetItemOrder(gTeamInventoryRef->teamItems[j].id);
+                }
+            }
+
+            if (lowestIndex >= 0) {
+                // swap the slots
+                Item temp = gTeamInventoryRef->teamItems[i];
+                gTeamInventoryRef->teamItems[i] = gTeamInventoryRef->teamItems[lowestIndex];
+                gTeamInventoryRef->teamItems[lowestIndex] = temp;
+            }
+        }
+    }
+    FillInventoryGaps();
 }
 
 void AddToTeamMoney(s32 amount)
@@ -908,12 +881,9 @@ bool8 IsGummiItem(u8 id)
 
 bool8 HasGummiItem(void)
 {
-    Item *items;
     s32 i;
     for (i = 0; i < INVENTORY_SIZE; i++) {
-        DUMMY_TEAM_ITEMS_ASM_MATCH(i);
-        items = gTeamInventoryRef->teamItems;
-        if ((items[i].flags & ITEM_FLAG_EXISTS) && IsGummiItem(items[i].id)) {
+        if (ItemExists(&gTeamInventoryRef->teamItems[i]) && IsGummiItem(gTeamInventoryRef->teamItems[i].id)) {
             return TRUE;
         }
     }
@@ -1444,42 +1414,32 @@ s32 sub_8091E94(s32 a1, s32 a2, s32 a3)
 #endif
 }
 
-void ClearAllItems_8091FB4() {
-  s32 i;
+void ClearAllItems_8091FB4(void)
+{
+    s32 i;
 
-  for (i = 0; i < INVENTORY_SIZE; i++) {
-    Item* slot = &gTeamInventoryRef->teamItems[i];
-    if (slot->flags & ITEM_FLAG_EXISTS) {
-      slot->flags &= 0xf7;
-      if (slot->id == ITEM_POKE) {
-        AddToTeamMoney(GetMoneyValue(slot));
-        slot->id = ITEM_NOTHING;
-        slot->quantity = 0;
-        slot->flags = 0;
-      }
-    }
-  }
-  FillInventoryGaps();
-  for (i = 0; i < NUM_MONSTERS; i++) {
-    PokemonStruct1* pokemon;
-#ifdef NONMATCHING
-    pokemon = &i[gRecruitedPokemonRef->pokemon];
-#else
-    register size_t offset asm("r1") = offsetof(unkStruct_203B45C, pokemon[i]);
-    PokemonStruct1* p = gRecruitedPokemonRef->pokemon;
-    size_t addr = offset + (size_t)p;
-    pokemon = (PokemonStruct1*)addr;
-#endif
-
-    if ((u8)pokemon->unk0 & 1) {
-      if (pokemon->heldItem.id) {
-        if (pokemon->heldItem.id == ITEM_POKE) {
-          AddToTeamMoney(GetMoneyValueHeld(&pokemon->heldItem));
-          pokemon->heldItem.id = ITEM_NOTHING;
+    for (i = 0; i < INVENTORY_SIZE; i++) {
+        Item* slot = &gTeamInventoryRef->teamItems[i];
+        if (ItemExists(slot)) {
+            slot->flags &= ~(ITEM_FLAG_STICKY);
+            if (slot->id == ITEM_POKE) {
+                AddToTeamMoney(GetMoneyValue(slot));
+                ZeroOutItem(slot);
+            }
         }
-      }
     }
-  }
+    FillInventoryGaps();
+    for (i = 0; i < NUM_MONSTERS; i++) {
+        if (PokemonFlag1(&gRecruitedPokemonRef->pokemon[i])) {
+            PokemonStruct1 *pokemon = &gRecruitedPokemonRef->pokemon[i];
+            if (pokemon->heldItem.id) {
+                if (pokemon->heldItem.id == ITEM_POKE) {
+                    AddToTeamMoney(GetMoneyValueHeld(&pokemon->heldItem));
+                    pokemon->heldItem.id = ITEM_NOTHING;
+                }
+            }
+        }
+    }
 }
 
 bool8 IsInvalidItemReward(u8 itemID)

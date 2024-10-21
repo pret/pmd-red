@@ -759,7 +759,7 @@ void FrozenStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
            }
         else
         {
-            if ((u8)(entityInfo->immobilize.immobilizeStatus - 3) <=  1) {
+            if (entityInfo->immobilize.immobilizeStatus == STATUS_WRAP || entityInfo->immobilize.immobilizeStatus == STATUS_WRAPPED) {
                 sub_8076CB4(entityInfo->unk9C);
             }
             sub_8041F08(target);
@@ -781,8 +781,8 @@ void SqueezedStatusTarget(Entity * pokemon, Entity * target, s16 param_3, bool32
   bool8 displayMessage_u8 = displayMessage;
 
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,displayMessage_u8))) {
-    entityInfo = target->info;
-    if ((u8)(entityInfo->immobilize.immobilizeStatus - 3U) < 2) {
+    entityInfo = GetEntInfo(target);
+    if (entityInfo->immobilize.immobilizeStatus == STATUS_WRAP || entityInfo->immobilize.immobilizeStatus == STATUS_WRAPPED) {
       sub_8076CB4(entityInfo->unk9C);
     }
     else if (entityInfo->immobilize.immobilizeStatus == STATUS_INGRAIN) {
@@ -811,8 +811,8 @@ void ImmobilizedStatusTarget(Entity * pokemon, Entity * target)
   EntityInfo *entityInfo;
 
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
-    entityInfo = target->info;
-    if ((u8)(entityInfo->immobilize.immobilizeStatus - 3U) < 2) {
+    entityInfo = GetEntInfo(target);
+    if (entityInfo->immobilize.immobilizeStatus == STATUS_WRAP || entityInfo->immobilize.immobilizeStatus == STATUS_WRAPPED) {
       sub_8076CB4(entityInfo->unk9C);
     }
     else if (entityInfo->immobilize.immobilizeStatus == STATUS_INGRAIN) {
@@ -838,19 +838,17 @@ void ImmobilizedStatusTarget(Entity * pokemon, Entity * target)
 void IngrainedStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
-  EntityInfo *entityInfo2;
 
   if (EntityExists(target)) {
-    entityInfo = target->info;
-    entityInfo2 = entityInfo;
-    if ((u8)(entityInfo->immobilize.immobilizeStatus - 3U) < 2) {
+    entityInfo = GetEntInfo(target);
+    if (entityInfo->immobilize.immobilizeStatus == STATUS_WRAP || entityInfo->immobilize.immobilizeStatus == STATUS_WRAPPED) {
       sub_8076CB4(entityInfo->unk9C);
     }
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    if (entityInfo2->immobilize.immobilizeStatus != STATUS_INGRAIN) {
-      entityInfo2->immobilize.immobilizeStatus = STATUS_INGRAIN;
-      entityInfo2->immobilize.immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E60,TRUE) + 1;
-      entityInfo2->immobilize.immobilizeStatusDamageCountdown = 0;
+    if (entityInfo->immobilize.immobilizeStatus != STATUS_INGRAIN) {
+      entityInfo->immobilize.immobilizeStatus = STATUS_INGRAIN;
+      entityInfo->immobilize.immobilizeStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E60,TRUE) + 1;
+      entityInfo->immobilize.immobilizeStatusDamageCountdown = 0;
       nullsub_90(target);
       sub_80522F4(pokemon,target,*gUnknown_80FB6A4);
     }

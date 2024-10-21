@@ -45,18 +45,18 @@ bool8 CreateHelperPelipperMenu(s16 speciesID)
     OpenedFile *faceFile;
     s32 species_32;
 
-    species_32 = speciesID;
+    species_32 = SpeciesId(speciesID);
     ResetUnusedInputStruct();
     xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
 
     sPostOfficeHelper = MemoryAlloc(sizeof(PostOfficeWork), 8);
-    CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, speciesID);
-    monName = GetMonSpecies(speciesID);
+    CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, species_32);
+    monName = GetMonSpecies(species_32);
     strcpy(gAvailablePokemonNames, monName);
     sPostOfficeHelper->monPortrait.faceFile = NULL;
     sPostOfficeHelper->monPortrait.faceData = NULL;
 
-    if (speciesID != MONSTER_NONE) {
+    if (species_32 != MONSTER_NONE) {
         faceFile = GetDialogueSpriteDataPtr(species_32);
         sPostOfficeHelper->monPortrait.faceFile = faceFile;
         sPostOfficeHelper->monPortrait.spriteId = 0;
