@@ -3,7 +3,7 @@
 
 
 bool8 sub_8099360(u8 *);
-u8 sub_8099394(volatile u8 *);
+u8 sub_8099394(u8 *);
 void sub_80993C0(bool8);
 void sub_80993D8(void);
 void sub_80993E4(void);

@@ -113,7 +113,7 @@ static void DisplayMissionObjectives(void)
 
     switch (sUnknown_203B330->unkC) {
         case 1:
-            sub_8099394(&local_94);
+            sub_8099394((u8*)&local_94);
             mail = GetMailatIndex(local_94);
             sub_803B6B0(10, 16, 3, sUnknown_203B330->unk10);
             // %dF

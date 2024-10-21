@@ -30,13 +30,13 @@ bool8 sub_8099360(u8 *dungeonId) {
     return FALSE;
 }
 
-u8 sub_8099394(volatile u8 *param) {
+u8 sub_8099394(u8 *param) {
     s16 script_disc;
 
     script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER);
     if (script_disc == 0x50) {
         script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER_INDEX);
-        *(u8 *)param = script_disc;
+        *param = script_disc;
         return TRUE;
     }
     return FALSE;
