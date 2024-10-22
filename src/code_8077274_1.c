@@ -169,7 +169,6 @@ extern u8 *gUnknown_80FBF84[];
 
 extern void sub_8049ED4();
 extern void sub_8040A84();
-extern void TryDisplayDungeonLoggableMessage3(Entity *pokemon, Entity *r1, const char[]);
 extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_8042A74(Entity *r0);
 extern void sub_807EC28(bool8);

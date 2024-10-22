@@ -13,6 +13,7 @@
 #include "dungeon_ai_targeting.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
+#include "dungeon_message.h"
 #include "dungeon_movement.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
@@ -176,7 +177,6 @@ extern void sub_8041C1C(Entity *r0);
 extern void sub_8042060(Entity *, s32);
 extern void sub_8041FB4(Entity *r0, u32 r1);
 extern void sub_8041FD8(Entity *r0, u32 r1);
-extern void TryDisplayDungeonLoggableMessage3(Entity *r1, Entity *r2, u8 *);
 extern void sub_804201C(Entity *r0, u32 r1);
 extern void sub_8041FFC(Entity *r0, u32 r1);
 extern void sub_8041C58(Entity *r0);

@@ -7,6 +7,7 @@
 #include "code_800DAC0.h"
 #include "code_800E9A8.h"
 #include "dungeon_util.h"
+#include "dungeon_message.h"
 #include "bg_control.h"
 #include "random.h"
 #include "file_system.h"
@@ -278,8 +279,6 @@ extern s16 GetTurnLimit(u8 dungeon);
 extern void sub_8041888(u8 param_1);
 extern void sub_8040150(bool8 param_1);
 extern void sub_8052210(u32);
-extern void sub_80526D0(u32);
-extern void sub_8052740(u32);
 extern void sub_803D4AC(void);
 extern void sub_804513C(void);
 extern void sub_8043CD8(void);
@@ -316,12 +315,10 @@ extern void sub_803E178(void);
 extern void sub_80848F0(void);
 extern void sub_8097890(void);
 extern void sub_806AB2C(void);
-extern void TryDisplayGeneralTutorialMessage(void);
 extern void DisplayPreFightDialogue(void);
 extern void sub_8071DA4(Entity *);
 extern void sub_803E748(void);
 extern void sub_8083D68(void);
-extern void DisplayYouReachedDestFloorStr(void);
 extern void sub_803E7C8(void);
 extern void sub_8040A84(void);
 extern void sub_807E5AC(void);
@@ -330,12 +327,10 @@ extern void sub_807E88C(void);
 extern void InitDungeonPokemonSprites(void);
 extern void nullsub_16(void);
 extern void sub_80521D0(void);
-extern void ResetMessageLog(void);
 extern void sub_803F27C(u8);
 extern void sub_807E7FC(u8);
 extern void sub_80095CC(u32, u32);
 extern void sub_8081BF4(u8 *r0, u32 r1);
-extern void DisplayDungeonMessage(u32, const u8 *, u32);
 extern bool8 IsLevelResetTo1(u8 dungeon);
 extern u8 sub_8099394(u8 *);
 extern void sub_8068A84(PokemonStruct1 *pokemon);

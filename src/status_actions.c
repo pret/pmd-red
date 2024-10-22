@@ -40,7 +40,6 @@ extern u32 sub_803D73C(u32);
 extern void sub_8045C28(Item *, u8 , u8);
 extern void sub_80464C8(Entity *, Position *, Item *);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
-extern void TryDisplayDungeonLoggableMessage3(Entity *r1, Entity *r2, const char []);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern void sub_807FC3C(Position *, u32, u32);
 extern void sub_8042A64(Position *);

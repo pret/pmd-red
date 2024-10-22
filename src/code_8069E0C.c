@@ -10,6 +10,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
+#include "dungeon_message.h"
 #include "dungeon_util.h"
 #include "game_options.h"
 #include "move_effects_target.h"
@@ -35,7 +36,6 @@ extern u8 *gUnknown_80FCC7C[];
 extern u8 *gUnknown_80FCCAC[];
 extern u8 *gUnknown_80FDCC8[];
 
-void TryDisplayDungeonLoggableMessage3(Entity *r0, Entity *r1, const char r2[]);
 extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);
 extern void sub_806ABAC(Entity *, Entity *);

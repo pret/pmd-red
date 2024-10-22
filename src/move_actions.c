@@ -14,6 +14,7 @@
 #include "dungeon_ai_targeting.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
+#include "dungeon_message.h"
 #include "dungeon_movement.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
@@ -212,7 +213,6 @@ extern void sub_807DF38(Entity *pokemon, Entity *target, Position *pos, u32, u8 
 extern void nullsub_92(Entity *);
 extern u32 sub_8055864(Entity *pokemon, Entity *target, Move *param_3, s32 param_4, s32 param_5);
 extern u8 sub_807EAA0(u32, u32);
-extern void TryDisplayDungeonLoggableMessage3(Entity *r1, Entity *r2, const char[]);
 extern s32 sub_80556BC(Entity *, Entity *, u8, Move *, u32, u32);
 
 // move_util.h

@@ -5,6 +5,7 @@
 #include "constants/status.h"
 #include "constants/weather.h"
 #include "structs/str_dungeon.h"
+#include "dungeon_message.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
 #include "status.h"
@@ -25,7 +26,7 @@ u8 gUnknown_8106F44[] = {0x00, 0x00, 0x00, 0x00, 0x66, 0xe6, 0x00, 0x00};
 u8 gUnknown_8106F4C[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x01, 0x00};
 
 
-struct dumb_struct 
+struct dumb_struct
 {
     u8 *unk0[NUM_EFFECTIVENESS];
 };
@@ -42,7 +43,7 @@ u32 gTypeEffectivenessMultipliers[] = {0, 1, 2, 4};
 
 
 struct unkStruct_806D010
-{   
+{
     s32 unk0;
     u32 unk4;
     u32 effectiveness;
@@ -57,9 +58,8 @@ extern u8 *gUnknown_80FEDC8[];
 extern u8 *gUnknown_80FEDA8[];
 extern u8 *gUnknown_80FED88[];
 
-extern s32 gUnknown_80F54B4[NUM_EFFECTIVENESS][NUM_EFFECTIVENESS];
+extern const s32 gUnknown_80F54B4[NUM_EFFECTIVENESS][NUM_EFFECTIVENESS];
 
-void TryDisplayDungeonLoggableMessage3(Entity *, Entity *, u8 *);
 void sub_80428D8(Entity *);
 void sub_8042978(Entity *);
 void sub_804298C(Entity *);
@@ -117,7 +117,7 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
             gDungeon->unk134.pokemonExposed = TRUE;
       }
       else {
-            effectiveness = gTypeEffectivenessChart[type][targetInfo->types[index]];  
+            effectiveness = gTypeEffectivenessChart[type][targetInfo->types[index]];
       }
       if (effectiveness != EFFECTIVENESS_NEUTRAL) {
         sub_800A34C(param_1,param_1,local_48.unk0[effectiveness]);
@@ -133,7 +133,7 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
       param_1[0] = gUnknown_8106EFC[0];
       param_1[1] = temp;
     }
-      
+
     if (((type == TYPE_FIRE) || (type == TYPE_ICE)) && (HasAbility(target,ABILITY_THICK_FAT))) {
       gDungeon->unk134.unk16D = TRUE;
       sub_800A34C(param_1,param_1,gUnknown_8106F1C);
@@ -206,7 +206,7 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
       gDungeon->unk134.fill16E[6] = TRUE;
       sub_800A34C(param_1,param_1,gUnknown_8106F14);
     }
-    weather = GetApparentWeather(pokemon);      
+    weather = GetApparentWeather(pokemon);
     if (weather == WEATHER_SUNNY) {
       if (type == TYPE_FIRE) {
         gDungeon->unk134.unk16C = TRUE;

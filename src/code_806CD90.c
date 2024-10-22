@@ -34,12 +34,12 @@
 #include "dungeon_pokemon_attributes.h"
 #include "code_8041AD0.h"
 #include "type_chart.h"
+#include "dungeon_message.h"
 
 extern u8 gUnknown_202F221;
 extern u8 gUnknown_202DFE8[];
 
 extern void sub_806BFC0(EntityInfo *, u32);
-extern void DisplayDungeonLoggableMessageTrue(Entity *, const u8 *);
 
 const u8 gUnknown_8106EEF[] = {0x03, 0x04, 0x05, 0x00, 0x00, 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00 };
 
@@ -259,7 +259,6 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 extern void sub_807F43C(Entity *, Entity *);
 extern void sub_8041B18(Entity *pokemon);
 extern void sub_8041B90(Entity *pokemon);
-extern void TryDisplayDungeonLoggableMessage3(Entity *, Entity *, const u8 *);
 extern void sub_8041D00(Entity *pokemon, Entity *target);
 extern void DealDamageToEntity(Entity *, s32, u32, u32);
 extern void SetShopkeeperAggression(Entity *, Entity *);

@@ -8,6 +8,7 @@
 #include "dungeon.h"
 #include "dungeon_engine.h"
 #include "dungeon_leader.h"
+#include "dungeon_message.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
 #include "structs/str_dungeon.h"
@@ -33,7 +34,6 @@ extern void sub_8042D7C(void);
 extern u8 sub_8043D10(void);
 extern bool8 sub_8045888(Entity *);
 extern void sub_8052210(u32);
-extern void DisplayDungeonLoggableMessageTrue(Entity *, const u8 *);
 
 // This func plays the appropriate ascend/descend SFX for stairs depending on the direction
 void PlayStairsSound(void)

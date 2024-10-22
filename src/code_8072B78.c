@@ -4,6 +4,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_movement.h"
 #include "dungeon_random.h"
+#include "dungeon_message.h"
 #include "moves.h"
 #include "pokemon_mid.h"
 #include "pokemon_mid.h"
@@ -31,7 +32,6 @@ struct unkStruct_806B7F8
 extern Entity* sub_806B7F8(struct unkStruct_806B7F8 *, bool8);
 extern void sub_806BFC0(EntityInfo *, u32);
 void sub_8069E0C(Entity *pokemon);
-void TryDisplayDungeonLoggableMessage3(Entity *r0, Entity *r1, const char r2[]);
 void sub_8042A44(Entity *r0);
 void sub_8083D78(void);
 extern bool8 sub_803D930(u32);

@@ -23,7 +23,6 @@ s8 sub_8002984(s8, u8);
 extern void BgColorCallNullsub4(void);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern void PlaySoundEffect(u32);
-extern void DisplayDungeonDialogue(const u8 *);
 
 
 extern void sub_8085EB0(void);
@@ -292,7 +291,7 @@ void sub_8086690(void)
     sub_80855E4(sub_8086404);
 }
 
-void sub_80866C4(const u8 *dialogue)
+void sub_80866C4(const struct DungeonDialogueStruct *dialogue)
 {
     SpriteLookAroundEffect(xxx_call_GetLeader());
     sub_803E708(10, 70);

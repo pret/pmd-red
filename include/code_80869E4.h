@@ -2,6 +2,7 @@
 #define GUARD_CODE_80869E4_H
 
 #include "structs/dungeon_entity.h"
+#include "dungeon_message.h"
 
 // size: 0x8
 typedef struct unkStruct_202F3D0
@@ -24,7 +25,7 @@ void sub_8086598(void);
 void sub_80865E8(void);
 void sub_808663C(void);
 void sub_8086690(void);
-void sub_80866C4(const u8 *dialogue);
+void sub_80866C4(const struct DungeonDialogueStruct *dialogue);
 void sub_8086738(void);
 void sub_8086764(void);
 void sub_8086794(void);

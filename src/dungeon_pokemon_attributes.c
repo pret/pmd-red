@@ -1,6 +1,6 @@
 #include "global.h"
 #include "dungeon_pokemon_attributes.h"
-
+#include "dungeon_message.h"
 #include "code_8045A00.h"
 #include "constants/ability.h"
 #include "constants/dungeon.h"
@@ -20,11 +20,10 @@
 const s16 gItemMasterMinWildLevel[] = {16};
 
 extern u8 gAvailablePokemonNames[];
-extern u32 gUnknown_80FC31C;
-extern u32 gUnknown_80FCEFC;
-extern u32 gUnknown_80FC2FC;
+extern const u8 *gUnknown_80FC31C;
+extern const u8 * gUnknown_80FCEFC;
+extern const u8 * gUnknown_80FC2FC;
 extern bool8 sub_805744C(Entity *, Move *, u32);
-extern void TryDisplayDungeonLoggableMessage3(Entity *r1, Entity *r2, u32);
 
 bool8 HasSafeguardStatus(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
