@@ -322,7 +322,7 @@ extern const u8 *const gUnknown_80F9D28[];
 extern u8 gAvailablePokemonNames[];
 extern u32 gFormatData_202DE30;
 
-void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, s32 giveExp, s16 arg4, bool32 arg8, s32 argC)
+void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC)
 {
     bool32 r9;
     // Some compiler weirdness, because it won't match without creating arg4 again
@@ -601,8 +601,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         gFormatData_202DE30 = dmgStruct->dmg;
         str = gUnknown_80F9764[dmgStruct->residualDmgType];
 
-        // Needed to match - the line can be safely removed
-        dmgStruct++;dmgStruct--;
+        ASM_MATCH_TRICK(dmgStruct);
 
         targetData->unkA0 += dmgStruct->dmg;
         if (targetData->unkA0 > 999)
