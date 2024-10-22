@@ -59,7 +59,7 @@ extern u8 *gUnknown_80FED88[];
 
 extern s32 gUnknown_80F54B4[NUM_EFFECTIVENESS][NUM_EFFECTIVENESS];
 
-void sub_80522F4(Entity *, Entity *, u8 *);
+void TryDisplayDungeonLoggableMessage3(Entity *, Entity *, u8 *);
 void sub_80428D8(Entity *);
 void sub_8042978(Entity *);
 void sub_804298C(Entity *);
@@ -163,7 +163,7 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
       }
       if (torrentVisualFlag) {
         sub_80428EC(pokemon);
-        sub_80522F4(pokemon,target,*gUnknown_80FEDA8);
+        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FEDA8);
       }
     }
     if ((type == TYPE_GRASS) && (HasAbility(pokemon, ABILITY_OVERGROW))) {
@@ -175,7 +175,7 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
       }
       if (overgrowVisualFlag) {
         sub_80428D8(pokemon);
-        sub_80522F4(pokemon,target,*gUnknown_80FED88);
+        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FED88);
       }
     }
     if ((type == TYPE_BUG) && (HasAbility(pokemon, ABILITY_SWARM))) {
@@ -187,7 +187,7 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
       }
       if (swarmVisualFlag) {
         sub_8042978(pokemon);
-        sub_80522F4(pokemon,target,*gUnknown_80FEDC8);
+        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FEDC8);
       }
     }
     if ((type == TYPE_FIRE) && (HasAbility(pokemon, ABILITY_BLAZE))) {
@@ -199,7 +199,7 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
       }
       if (blazeVisualFlag) {
         sub_804298C(pokemon);
-        sub_80522F4(pokemon,target,*gUnknown_80FEDE8);
+        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FEDE8);
       }
     }
     if (!(sub_800A2A0(param_1)) && (MonsterIsType(pokemon, type))) {

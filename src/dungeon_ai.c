@@ -57,7 +57,7 @@ void sub_8075900(Entity *pokemon, u8 r1)
                     if((GetTileAtEntitySafe(pokemon)->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE))
                     {
                         // It's a monster house!
-                        SendMessage(GetLeader(), gPtrItsaMonsterHouseMessage);
+                        TryDisplayDungeonLoggableMessage(GetLeader(), gPtrItsaMonsterHouseMessage);
                         gDungeon->monsterHouseTriggeredEvent = TRUE;
                         sub_807AB38(pokemon, r1);
                         sub_8041888(0);
@@ -91,7 +91,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                 {
                     pokemonInfo->useHeldItem = FALSE;
                     SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
-                    SendMessage(pokemon, gPtrCouldntBeUsedMessage);
+                    TryDisplayDungeonLoggableMessage(pokemon, gPtrCouldntBeUsedMessage);
                     return;
                 }
                 AIDecideUseItem(pokemon);

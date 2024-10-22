@@ -31,7 +31,7 @@ struct unkStruct_806B7F8
 extern Entity* sub_806B7F8(struct unkStruct_806B7F8 *, bool8);
 extern void sub_806BFC0(EntityInfo *, u32);
 void sub_8069E0C(Entity *pokemon);
-void sub_80522F4(Entity *r0, Entity *r1, const char r2[]);
+void TryDisplayDungeonLoggableMessage3(Entity *r0, Entity *r1, const char r2[]);
 void sub_8042A44(Entity *r0);
 void sub_8083D78(void);
 extern bool8 sub_803D930(u32);
@@ -121,7 +121,7 @@ void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
   sub_806BFC0(entityInfo,0);
   sub_8069E0C(target);
   sub_806CCB4(target,7);
-  sub_80522F4(pokemon,target,*gUnknown_80FE2EC);
+  TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE2EC);
   sub_8042A44(target);
   sub_8083D78();
   if (id_s32 == MONSTER_NINJASK) {

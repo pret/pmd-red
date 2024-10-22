@@ -388,7 +388,7 @@ void sub_8074094(Entity *entity)
         if (str != NULL) {
             if (sound)
                 PlaySoundEffect(0x153);
-            SendMessage(entity, str);
+            TryDisplayDungeonLoggableMessage(entity, str);
             sub_803E708(0x1E, 0x32);
         }
     }
@@ -577,10 +577,10 @@ void sub_8074094(Entity *entity)
             if (!EntityExists(entity) || sub_8044B28())
                 return;
             SetMessageArgument(gUnknown_202DFE8, entity, 0);
-            SendMessage(entity, gUnknown_80FEB30);
+            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEB30);
             TrySendImmobilizeSleepEndMsg(entity, entity);
             if (entityInfo->protection.protectionStatus == STATUS_PROTECT) {
-                SendMessage(entity, gPtrProtectSavedItMessage);
+                TryDisplayDungeonLoggableMessage(entity, gPtrProtectSavedItMessage);
             }
             else {
                 DealDamageToEntity(entity, 0x270F, 0xB, 0x20E);
@@ -617,7 +617,7 @@ void sub_8074094(Entity *entity)
             entityInfo->charging.chargingStatus = 0;
             entityInfo->unk14A = 0;
             SetMessageArgument(gAvailablePokemonNames, entity, 0);
-            SendMessage(entity, gUnknown_80FABD8);
+            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FABD8);
         }
     }
 
@@ -773,7 +773,7 @@ void TickStatusHeal(Entity *entity)
         sub_80838EC(&entityInfo->terrifiedTurns);
         if (entityInfo->terrifiedTurns == 0) {
             SetMessageArgument(gAvailablePokemonNames, entity, 0);
-            SendMessage(entity, gPtrStenchWavedOffMessage);
+            TryDisplayDungeonLoggableMessage(entity, gPtrStenchWavedOffMessage);
         }
     }
 
@@ -797,7 +797,7 @@ void TickStatusHeal(Entity *entity)
 
         if (oldSpdStage != newSpdStage) {
             SetMessageArgument(gAvailablePokemonNames, entity, 0);
-            SendMessage(entity, gUnknown_80FA124[newSpdStage]);
+            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FA124[newSpdStage]);
         }
     }
 }

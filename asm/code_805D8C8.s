@@ -4122,7 +4122,7 @@ _08063AEC:
 	ldr r0, _08063B2C
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _08063B3A
 	.align 2, 0
 _08063B1C: .4byte gDungeon
@@ -4134,7 +4134,7 @@ _08063B30:
 	ldr r0, _08063B50
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _08063B3A:
 	movs r0, 0x78
 	movs r1, 0x1F
@@ -4442,7 +4442,7 @@ _08063D70:
 	ldr r0, _08063DAC
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _08063DBA
 	.align 2, 0
 _08063D98: .4byte gDungeon
@@ -4455,7 +4455,7 @@ _08063DB0:
 	ldr r0, _08063DD0
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _08063DBA:
 	movs r0, 0x78
 	movs r1, 0x1F
@@ -6385,7 +6385,7 @@ _08064CF2:
 	ldr r0, [r5]
 	cmp r0, 0x2
 	bne _08064CFC
-	bl sub_80532B4
+	bl DisplayMessageLog
 _08064CFC:
 	ldr r0, [r5]
 	cmp r0, 0x3

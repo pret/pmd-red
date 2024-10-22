@@ -751,7 +751,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
 
     if (DisplayDungeonYesNoMessage(0,*gUnknown_80F9FE8,1) == 0) {
         if (param_3->id != MONSTER_JIRACHI) {
-            SendMessage(entity1,*gUnknown_80FA004);
+            TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA004);
         }
         return 0;
     }
@@ -764,7 +764,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
         }
 
         if (pokeIndex == MAX_TEAM_MEMBERS) {
-            SendMessage(entity1,*gUnknown_80FA030);
+            TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA030);
             return FALSE;
         }
         else {
@@ -805,7 +805,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
             sub_8097848();
 
             if (sub_806B8CC(param_3->id,param_3->pos.x,param_3->pos.y,pokeStruct2,&local_2c,0,1) == 0) {
-                SendMessage(entity1,*gUnknown_80FA058);
+                TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA058);
                 pokeStruct2->unk0 = 0;
             }
             else {
@@ -817,7 +817,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
                     }
                 }
                 sub_808D9DC(gAvailablePokemonNames,pokeStruct2,0);
-                SendMessage(entity1,*gUnknown_80FA0F0);
+                TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA0F0);
                 if (flag) {
                     leader = xxx_call_GetLeader();
                     SetMessageArgument(gAvailablePokemonNames,leader,0);

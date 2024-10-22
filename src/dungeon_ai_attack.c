@@ -995,14 +995,14 @@ void HandleUseOrbAction(Entity *pokemon)
 
     if (item->flags & ITEM_FLAG_STICKY) {
         sub_8045BF8(gFormatItems, item);
-        SendMessage(pokemon, *gItemStickyDoesntWorkText);
+        TryDisplayDungeonLoggableMessage(pokemon, *gItemStickyDoesntWorkText);
         return;
     }
 
     act = entityInfo->action;
 
     if (IsBossFight()) {
-        SendMessage(pokemon, *gPtrMysteriousPowerPreventedUseMessage);
+        TryDisplayDungeonLoggableMessage(pokemon, *gPtrMysteriousPowerPreventedUseMessage);
         r4 = TRUE;
     }
     else {
@@ -1022,20 +1022,20 @@ void HandleUseOrbAction(Entity *pokemon)
 
         if (entityInfo->volatileStatus.volatileStatus == 1) {
             SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
-            SendMessage(pokemon, *gUnknown_80FC714);
+            TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC714);
             r4 = FALSE;
             r8 = FALSE;
         }
         else if (entityInfo->volatileStatus.volatileStatus == 7) {
             SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
-            SendMessage(pokemon, *gUnknown_80FC718);
+            TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC718);
             r4 = FALSE;
             r8 = FALSE;
         }
         else if (entityInfo->nonVolatile.nonVolatileStatus == 4)
         {
             SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
-            SendMessage(pokemon, *gUnknown_80FC6A8);
+            TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC6A8);
             r4 = FALSE;
             r8 = FALSE;
         }

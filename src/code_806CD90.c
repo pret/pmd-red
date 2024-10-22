@@ -259,7 +259,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 extern void sub_807F43C(Entity *, Entity *);
 extern void sub_8041B18(Entity *pokemon);
 extern void sub_8041B90(Entity *pokemon);
-extern void sub_80522F4(Entity *, Entity *, const u8 *);
+extern void TryDisplayDungeonLoggableMessage3(Entity *, Entity *, const u8 *);
 extern void sub_8041D00(Entity *pokemon, Entity *target);
 extern void DealDamageToEntity(Entity *, s32, u32, u32);
 extern void SetShopkeeperAggression(Entity *, Entity *);
@@ -383,7 +383,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
         if (returnDmg) {
             struct DamageStruct sp;
 
-            sub_80522F4(attacker, target, gUnknown_80FCFA4);
+            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FCFA4);
             sp.dmg = (dmgStruct->dmg * returnDmg) / 4;
             sp.type = dmgStruct->type;
             sp.residualDmgType = 6;
@@ -519,14 +519,14 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 
     if (arg4 != 0x20E && HasAbility(target, ABILITY_STURDY) && dmgStruct->dmg == 9999) {
         SetMessageArgument(gUnknown_202DFE8, target, 0);
-        sub_80522F4(attacker, target, gUnknown_80FCA90);
+        TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FCA90);
         sub_8042238(attacker, target);
         dmgStruct->unkF = 1;
         return FALSE;
     }
     if (targetData->immobilize.immobilizeStatus == STATUS_FROZEN) {
         SetMessageArgument(gUnknown_202DFE8, target, 0);
-        sub_80522F4(attacker, target, gUnknown_80F9600);
+        TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9600);
         sub_8042238(attacker, target);
         dmgStruct->unkF = 1;
         return FALSE;
@@ -551,17 +551,17 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 
     if (targetData->unk152 == 0) {
         if (dmgStruct->isCrit) {
-            sub_80522F4(attacker, target, gUnknown_80F9614);
+            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9614);
         }
         switch (dmgStruct->typeEffectiveness) {
             case EFFECTIVENESS_IMMUNE:
-                sub_80522F4(attacker, target, gUnknown_80F9630);
+                TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9630);
                 break;
             case EFFECTIVENESS_RESIST:
-                sub_80522F4(attacker, target, gUnknown_80F9654);
+                TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9654);
                 break;
             case EFFECTIVENESS_SUPER:
-                sub_80522F4(attacker, target, gUnknown_80F9670);
+                TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9670);
                 break;
         }
     }
@@ -571,13 +571,13 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     if (dmgStruct->dmg == 0) {
         if (sub_8045888(attacker) && sub_8045888(target)) {
             if (targetData->unk152 == 0) {
-                sub_80522F4(attacker, target, gUnknown_80F9688);
+                TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9688);
             }
             sub_8042238(attacker, target);
         }
         else {
             if (targetData->unk152 == 0) {
-                sub_80522F4(attacker, target, gUnknown_80F9688);
+                TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9688);
             }
             sub_803E708(0x1E, 0x18);
         }
@@ -592,7 +592,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             sub_8049ED4();
         }
         if (targetData->unk152 == 0) {
-            sub_80522F4(attacker, target, gUnknown_80F96A8);
+            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F96A8);
         }
         targetData->unkA0 = 999;
     }
@@ -614,12 +614,12 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 sub_803ED30(-dmgStruct->dmg, target, 1, -1);
             }
             if (targetData->unk152 == 0 && str != NULL) {
-                sub_80522F4(attacker, target, str);
+                TryDisplayDungeonLoggableMessage3(attacker, target, str);
             }
         }
         else {
             if (targetData->unk152 == 0 && str != NULL) {
-                sub_80522F4(attacker, target, str);
+                TryDisplayDungeonLoggableMessage3(attacker, target, str);
             }
         }
     }
@@ -661,12 +661,12 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     if (targetData->protection.protectionStatus == STATUS_ENDURING) {
         if (targetData->HP == 0) {
             targetData->HP = 1;
-            sub_80522F4(attacker, target, gUnknown_8100548);
+            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_8100548);
         }
     }
     else if (isFalseSwipe == TRUE && targetData->HP == 0) {
         targetData->HP = 1;
-        sub_80522F4(attacker, target, gUnknown_810056C);
+        TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_810056C);
     }
 
     hpChange = hpBefore - targetData->HP;
@@ -718,7 +718,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     SetMessageArgument(gAvailablePokemonNames + 0x50, target, 0);
     if (dmgStruct->residualDmgType == 19 || dmgStruct->residualDmgType == 20) {
         if (targetData->isNotTeamMember) {
-            sub_80522F4(attacker, target, gUnknown_80F9E44);
+            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9E44);
         }
         else {
             sub_805239C(attacker, gUnknown_80F9E44);
@@ -730,7 +730,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             sub_805239C(attacker, gUnknown_80F9DF0[r8]);
         }
         else {
-            sub_80522F4(attacker, target, gUnknown_80F9CC0[r8]);
+            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9CC0[r8]);
         }
     }
     else {

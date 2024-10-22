@@ -6,96 +6,6 @@
 	.text
 
 
-	thumb_func_start sub_805363C
-sub_805363C:
-	push {r4-r7,lr}
-	mov r12, r1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r7, _080536D0
-	ldr r0, _080536D4
-	ldr r0, [r0]
-	movs r1, 0x8
-	ands r0, r1
-	cmp r0, 0
-	bne _080536C8
-	ldr r0, _080536D8
-	ldrh r1, [r0]
-	ldr r3, _080536DC
-	ands r3, r1
-	ldr r1, _080536E0
-	ands r3, r1
-	ldr r1, _080536E4
-	ands r3, r1
-	ldr r1, _080536E8
-	ands r3, r1
-	ldr r1, _080536EC
-	ands r3, r1
-	negs r1, r2
-	orrs r1, r2
-	asrs r1, 31
-	movs r2, 0x80
-	lsls r2, 6
-	ands r2, r1
-	ldrh r1, [r0, 0x2]
-	ldr r4, _080536F0
-	ands r4, r1
-	orrs r4, r2
-	movs r5, 0xF
-	ldr r2, _080536F4
-	movs r6, 0x2
-	ldrsh r1, [r7, r6]
-	lsls r1, 3
-	add r1, r12
-	ands r1, r2
-	lsls r1, 4
-	ldrh r2, [r0, 0x6]
-	ands r5, r2
-	orrs r5, r1
-	strh r5, [r0, 0x6]
-	movs r2, 0
-	ldrsh r1, [r7, r2]
-	lsls r1, 3
-	adds r1, 0x5C
-	ldr r2, _080536F8
-	ands r1, r2
-	movs r2, 0xFE
-	lsls r2, 8
-	ands r4, r2
-	orrs r4, r1
-	movs r2, 0x80
-	lsls r2, 7
-	ldr r1, _080536FC
-	ands r3, r1
-	orrs r3, r2
-	strh r3, [r0]
-	ands r4, r1
-	strh r4, [r0, 0x2]
-	ldr r1, _08053700
-	strh r1, [r0, 0x4]
-	movs r1, 0x7F
-	movs r2, 0
-	movs r3, 0
-	bl AddSprite
-_080536C8:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080536D0: .4byte gUnknown_2027370
-_080536D4: .4byte gUnknown_202EDCC
-_080536D8: .4byte gUnknown_202F200
-_080536DC: .4byte 0x0000feff
-_080536E0: .4byte 0x0000fdff
-_080536E4: .4byte 0x0000f3ff
-_080536E8: .4byte 0x0000efff
-_080536EC: .4byte 0x0000dfff
-_080536F0: .4byte 0x0000c1ff
-_080536F4: .4byte 0x00000fff
-_080536F8: .4byte 0x000001ff
-_080536FC: .4byte 0x00003fff
-_08053700: .4byte 0x0000f3f0
-	thumb_func_end sub_805363C
 
 	thumb_func_start sub_8053704
 sub_8053704:
@@ -175,7 +85,7 @@ _08053792:
 	ldr r2, [r0]
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	adds r5, r4, 0
 	b _08053A1C
 	.align 2, 0
@@ -250,7 +160,7 @@ _08053828:
 	ldr r2, [r0]
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	adds r5, r4, 0
 	movs r3, 0x1
 	str r3, [sp, 0x2C]
@@ -427,7 +337,7 @@ _0805397C:
 	ldr r2, [r0]
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	b _080539D0
 	.align 2, 0
 _080539B4: .4byte gAdjacentTileOffsets
@@ -439,7 +349,7 @@ _080539C4:
 	ldr r2, [r0]
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 _080539D0:
 	str r5, [sp, 0x20]
 	ldr r5, [sp, 0x38]
@@ -467,7 +377,7 @@ _080539FA:
 	ldr r2, [r0]
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	b _08053A1C
 	.align 2, 0
 _08053A08: .4byte 0x00000163
@@ -477,7 +387,7 @@ _08053A10:
 	ldr r2, [r0]
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 _08053A1C:
 	ldr r1, _08053ADC
 	ldr r0, [r1]
@@ -551,7 +461,7 @@ _08053A86:
 	ldr r2, [r0]
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	adds r0, r5, 0
 	bl sub_8041B48
 	adds r0, r5, 0
@@ -611,7 +521,7 @@ _08053B20:
 	ldr r2, [r0]
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	adds r0, r5, 0
 	bl sub_8041BA8
 	adds r0, r5, 0
@@ -664,7 +574,7 @@ _08053B90:
 	ldr r2, [r0]
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	movs r3, 0
 	str r3, [sp, 0x28]
 _08053BAE:
@@ -699,7 +609,7 @@ _08053BC0:
 	ldr r2, [r0]
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	movs r2, 0
 	str r2, [sp, 0x28]
 _08053BFA:
@@ -797,7 +707,7 @@ _08053CA8:
 	ldr r2, [r0]
 	adds r0, r7, 0
 	adds r1, r7, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	b _08053D10
 	.align 2, 0
 _08053CC4: .4byte 0x00000157
@@ -825,7 +735,7 @@ _08053CF4:
 	ldr r2, [r0]
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	b _08053D10
 	.align 2, 0
 _08053D00: .4byte gUnknown_80F93A4
@@ -834,7 +744,7 @@ _08053D04:
 	ldr r2, [r0]
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 _08053D10:
 	adds r0, r5, 0
 	bl sub_8045888
@@ -3732,7 +3642,7 @@ _080557C0:
 	ldr r2, [r0]
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_805232C
+	bl TryDisplayDungeonLoggableMessage4
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl sub_8042238
@@ -3746,7 +3656,7 @@ _08055814:
 	ldr r2, [r0]
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 _08055820:
 	movs r0, 0x1
 	mov r2, r8
@@ -4077,7 +3987,7 @@ _08055A74:
 _08055A8A:
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	movs r0, 0
 	b _08055DB4
 	.align 2, 0
@@ -4226,7 +4136,7 @@ _08055BA0:
 	ldr r0, _08055C0C
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	movs r2, 0
 _08055BBA:
 	cmp r2, 0
@@ -4259,7 +4169,7 @@ _08055BBA:
 	ldr r0, _08055C1C
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	ldr r0, [sp, 0x28]
 	str r0, [sp]
 	add r1, sp, 0x8
@@ -4313,7 +4223,7 @@ _08055C56:
 	ldr r0, _08055C74
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _08055C82
 	.align 2, 0
 _08055C70: .4byte gUnknown_202F208
@@ -4322,7 +4232,7 @@ _08055C78:
 	ldr r0, _08055DC4
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _08055C82:
 	movs r0, 0x1
 	bl sub_804178C
@@ -4406,7 +4316,7 @@ _08055CDC:
 	ldr r0, _08055DD0
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _08055D36:
 	ldr r1, [sp, 0x28]
 	str r1, [sp]
@@ -4507,7 +4417,7 @@ _08055DEC:
 	ldr r0, _08055F68
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	adds r0, r4, 0
 	adds r1, r4, 0
 	bl ImmobilizedStatusTarget
@@ -4520,7 +4430,7 @@ _08055E10:
 	ldr r0, _08055F6C
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	adds r0, r4, 0
 	adds r1, r4, 0
 	bl ImmobilizedStatusTarget
@@ -4533,7 +4443,7 @@ _08055E2C:
 	ldr r0, _08055F70
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	adds r0, r4, 0
 	adds r1, r4, 0
 	bl ImmobilizedStatusTarget
@@ -4546,7 +4456,7 @@ _08055E48:
 	ldr r0, _08055F74
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -4560,7 +4470,7 @@ _08055E66:
 	ldr r0, _08055F78
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -4574,7 +4484,7 @@ _08055E84:
 	ldr r0, _08055F7C
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -4588,7 +4498,7 @@ _08055EA2:
 	ldr r0, _08055F80
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -4602,7 +4512,7 @@ _08055EC0:
 	ldr r0, _08055F84
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	ldr r1, _08055F88
 	adds r0, r4, 0
 	movs r2, 0x1
@@ -4622,7 +4532,7 @@ _08055EEA:
 	ldr r0, _08055F8C
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -4638,7 +4548,7 @@ _08055F0C:
 	ldr r0, _08055F90
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -4658,7 +4568,7 @@ _08055F2C:
 	ldr r0, _08055F98
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	adds r0, r4, 0
 	bl sub_80428A0
 	ldr r0, _08055F9C
@@ -4913,7 +4823,7 @@ _08056156:
 	bl SetMessageArgument
 	adds r0, r5, 0
 	mov r1, r8
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	movs r0, 0xA
 	movs r1, 0x3F
 	bl sub_803E708
@@ -4921,7 +4831,7 @@ _08056156:
 _08056188:
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _08056190:
 	movs r0, 0
 	b _08056446
@@ -4945,7 +4855,7 @@ _080561A0:
 	bl sub_80928C0
 	adds r0, r5, 0
 	mov r1, r8
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	movs r0, 0xA
 	movs r1, 0x3F
 	bl sub_803E708
@@ -4964,14 +4874,14 @@ _080561E0:
 	bl BufferItemName
 	adds r0, r5, 0
 	mov r1, r8
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	movs r0, 0xA
 	movs r1, 0x3F
 	bl sub_803E708
 	ldr r0, _08056210
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _08056190
 	.align 2, 0
 _0805620C: .4byte gFormatItems

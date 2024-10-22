@@ -695,7 +695,7 @@ _0806F036:
 	ldr r2, [r0]
 	ldr r0, [sp, 0x70]
 	mov r1, r9
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	b _0806F0BC
 	.align 2, 0
 _0806F098: .4byte gDungeon
@@ -709,7 +709,7 @@ _0806F0B0:
 	ldr r2, [r0]
 	ldr r0, [sp, 0x70]
 	mov r1, r9
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 _0806F0BC:
 	ldr r1, [sp, 0x78]
 	cmp r1, 0

@@ -484,7 +484,7 @@ _0806A6C4:
 	beq _0806A6D2
 	adds r0, r6, 0
 	mov r1, r8
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _0806A6D2:
 	add sp, 0x4
 	pop {r3}
@@ -902,7 +902,7 @@ _0806A9E0:
 _0806A9E6:
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _0806AA02
 	.align 2, 0
 _0806A9F0: .4byte gPtrLinkMoveOneUseWarningMessage
@@ -912,7 +912,7 @@ _0806A9F4:
 	ldr r0, _0806AA08
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _0806AA02:
 	pop {r4,r5}
 	pop {r0}

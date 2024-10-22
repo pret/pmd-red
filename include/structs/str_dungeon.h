@@ -227,15 +227,15 @@ struct UnkStructDungeon1BDD4
     u32 unk1C06C; // 0x298
 };
 
-#define UNK_1C070_ARR_COUNT     20
-#define UNK_1C070_BUFFER_SIZE   60
+#define MESSAGE_LOG_STRINGS_COUNT 20
+#define MESSAGE_LOG_BUFFER_SIZE   60
 
-struct UnkDungeonStruct1C070
+struct MessageLogString
 {
     u8 unk0;
     u8 unk1;
     u8 unk2;
-    u8 unk3[UNK_1C070_BUFFER_SIZE];
+    u8 str[MESSAGE_LOG_BUFFER_SIZE];
 };
 
 // size: 0x1CEDC
@@ -409,7 +409,7 @@ typedef struct Dungeon
     /* 0x181E8 */ UnkDungeonGlobal_unk181E8_sub unk181e8;
     u8 fill18220[0x1BDD4 - 0x1822C];
     struct UnkStructDungeon1BDD4 unk1BDD4;
-    struct UnkDungeonStruct1C070 unk1C070[UNK_1C070_ARR_COUNT];
+    struct MessageLogString messageLogStrings[MESSAGE_LOG_STRINGS_COUNT];
     /* 0x1C570 */ DungeonLocation unk1C570;
     /* 0x1C574 */ UnkDungeonGlobal_unk1C574 unk1C574;
     /* 0x1C590 */ UnkDungeonGlobal_unk1C590 unk1C590[4];

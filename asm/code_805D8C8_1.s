@@ -1028,7 +1028,7 @@ _08069104:
 	movs r0, 0x3C
 	movs r1, 0x49
 	bl sub_803E708
-	bl sub_80532B4
+	bl DisplayMessageLog
 	ldr r5, _08069198
 	ldr r2, [r5]
 	ldrb r0, [r2, 0x6]

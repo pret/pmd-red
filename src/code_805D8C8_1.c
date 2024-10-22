@@ -89,7 +89,7 @@ void sub_8094C88(void);
 void sub_8040A84(void);
 void sub_8047158(void);
 void sub_804AA60(void);
-void sub_80532B4(void);
+void DisplayMessageLog(void);
 void sub_806A914(u8 a0, u8 a1, u8 a2);
 void sub_8044C10(u8 a0);
 u16 GetLeaderActionId(void);
@@ -269,7 +269,7 @@ void DungeonHandlePlayerInput(void)
                     }
                 }
                 else if (ShouldMonsterRunAwayAndShowEffect(leader, TRUE)) {
-                    SendMessage(leader, gUnknown_80FD4B0);
+                    TryDisplayDungeonLoggableMessage(leader, gUnknown_80FD4B0);
                     sub_8044C50(1);
                     gDungeon->unk673 = 1;
                     break;
@@ -284,7 +284,7 @@ void DungeonHandlePlayerInput(void)
                         }
                     }
                     if (i == MAX_MON_MOVES) {
-                        SendMessage(leader, gUnknown_80F8A28);
+                        TryDisplayDungeonLoggableMessage(leader, gUnknown_80F8A28);
                         break;
                     }
 
@@ -310,7 +310,7 @@ void DungeonHandlePlayerInput(void)
                         }
                     }
                     if (!canUseMove) {
-                        SendMessage(leader, gUnknown_80F8A4C);
+                        TryDisplayDungeonLoggableMessage(leader, gUnknown_80F8A4C);
                     }
                     else {
                         SetMonsterActionFields(&leaderInfo->action, ACTION_USE_MOVE_PLAYER);
@@ -379,7 +379,7 @@ void DungeonHandlePlayerInput(void)
 
             if (gRealInputs.held & L_BUTTON) {
                 if (gRealInputs.pressed & B_BUTTON) {
-                    sub_80532B4();
+                    DisplayMessageLog();
                     ResetRepeatTimers();
                     ResetUnusedInputStruct();
                 }
@@ -534,7 +534,7 @@ void DungeonHandlePlayerInput(void)
                     if (!(canMoveFlags & 2)) {
                         if (canMoveFlags & 1) {
                             if (immobilizedMsg != NULL) {
-                                SendMessage(leader, immobilizedMsg);
+                                TryDisplayDungeonLoggableMessage(leader, immobilizedMsg);
                             }
                             sub_8044C50(1);
                             gDungeon->unk673 = 1;
@@ -1761,7 +1761,7 @@ void sub_805F02C(void)
         sub_8041AD0(leader);
         sub_8041AE0(GetLeader());
         SetMessageArgument(gAvailablePokemonNames, r7, 0);
-        SendMessage(r7, gUnknown_80F9BB0);
+        TryDisplayDungeonLoggableMessage(r7, gUnknown_80F9BB0);
         sub_807EC28(FALSE);
         r8->unk64 = 0;
         leaderInfo->unk64 = 0;

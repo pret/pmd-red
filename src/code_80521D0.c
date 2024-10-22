@@ -21,36 +21,81 @@
 #include "text1.h"
 
 void sub_80526D0(s32 r0);
+static void PutStringsOnMessageLog(void);
+static bool8 TryScrollLogDown(s32 a0);
+static bool8 TryScrollLogUp(s32 a0);
+static void CopyStringToMessageLog(const u8 *src, u32 a1, u32 a2);
+static void CreateMessageLogArrow(bool8 upArrow, s32 y);
+static void DisplayMessageAddToLog(Entity *r0, const char *str, u8 r2);
+
 extern bool8 sub_8045888(Entity *r0);
-void sub_80523A8(Entity *r0, const char *str, u8 r2);
 extern u8 sub_8052DC0(Entity *);
 extern u8 sub_803F428(Position *);
+extern void sub_805E804(void);
+extern void sub_803EAF0(s32, s32);
+extern void sub_8052210(u32);
+extern void sub_8040238(void);
+extern void sub_8083E28(void);
+extern bool8 sub_8008D8C(u32 strId);
+extern u32 sub_8014140(s32 a0, const void *a1);
+extern void sub_8083D30(void);
+extern void sub_8083D08(void);
+extern void sub_8007334(s32 a0);
+extern void sub_80087EC(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4);
+extern void sub_8083CE0(u8 param_1);
+
+extern u8 gUnknown_203B40C;
+extern u8 gUnknown_202EE01;
+extern Entity *gUnknown_202F1E8;
+extern u8 gUnknown_203B434;
+extern void (*gUnknown_203B08C)(s32);
+extern void (*gUnknown_203B084)(s32 a0);
+extern void (*gUnknown_203B080)(s32 a0);
+extern u8 gAvailablePokemonNames[];
+extern u8 gUnknown_202E5D8[];
+extern u8 gUnknown_202DFE8[];
+extern SpriteOAM gUnknown_202F1F0;
+extern SpriteOAM gUnknown_202F200;
+extern s32 gUnknown_202F1F8;
+extern u8 gUnknown_202F1FC;
+extern UnkTextStruct1 gUnknown_2027370[4];
+extern s32 gUnknown_202EDCC;
+extern u8 gFontPalette[];
+
+extern const u8 gUnknown_80F7AF8[];
+extern const u8 gUnknown_80F7AFC[];
+extern const u8 gUnknown_80F7B04[];
+extern const u16 gUnknown_80F7AEA[];
+
+// Used for gUnknown_202F1FC
+#define FLAG_CAN_SCROLL_UP      0x1
+#define FLAG_CAN_SCROLL_DOWN    0x2
 
 void sub_805229C(void)
 {
     return sub_80526D0(0x50);
 }
 
-void SendMessage(Entity *pokemon, const char *str)
+void TryDisplayDungeonLoggableMessage(Entity *pokemon, const char *str)
 {
     if (sub_8045888(pokemon)){
-        sub_80523A8(pokemon, str, TRUE);
+        DisplayMessageAddToLog(pokemon, str, TRUE);
     }
 }
 
-void sub_80522C8(Entity *r0, const char *str)
+UNUSED void TryDisplayDungeonLoggableMessage2(Entity *r0, const char *str)
 {
     if (sub_8045888(r0)){
-        sub_80523A8(r0, str, FALSE);
+        DisplayMessageAddToLog(r0, str, FALSE);
     }
 }
 
 void sub_80522E8(Entity *r0, const char *str)
 {
-    sub_80523A8(r0, str, FALSE);
+    DisplayMessageAddToLog(r0, str, FALSE);
 }
 
-void sub_80522F4(Entity *r0, Entity *r1, const char *str)
+void TryDisplayDungeonLoggableMessage3(Entity *r0, Entity *r1, const char *str)
 {
     u8 flag;
     flag = sub_8045888(r0) ? TRUE : FALSE;
@@ -60,11 +105,11 @@ void sub_80522F4(Entity *r0, Entity *r1, const char *str)
     }
     if(flag)
     {
-        sub_80523A8(r0, str, TRUE);
+        DisplayMessageAddToLog(r0, str, TRUE);
     }
 }
 
-void sub_805232C(Entity *r0, Entity *r1, const char *str)
+void TryDisplayDungeonLoggableMessage4(Entity *r0, Entity *r1, const char *str)
 {
     u8 flag;
     flag = sub_8045888(r0) ? TRUE : FALSE;
@@ -74,11 +119,11 @@ void sub_805232C(Entity *r0, Entity *r1, const char *str)
     }
     if(flag)
     {
-        sub_80523A8(r0, str, FALSE);
+        DisplayMessageAddToLog(r0, str, FALSE);
     }
 }
 
-void sub_8052364(Entity *r0, Position *pos, const char *str)
+void TryDisplayDungeonLoggableMessage5(Entity *r0, Position *pos, const char *str)
 {
     u8 flag;
     flag = sub_8045888(r0) ? TRUE : FALSE;
@@ -88,23 +133,16 @@ void sub_8052364(Entity *r0, Position *pos, const char *str)
     }
     if(flag)
     {
-        sub_80523A8(r0, str, TRUE);
+        DisplayMessageAddToLog(r0, str, TRUE);
     }
 }
 
 void sub_805239C(Entity *r0, const char *str)
 {
-    sub_80523A8(r0, str, TRUE);
+    DisplayMessageAddToLog(r0, str, TRUE);
 }
 
-void sub_8053210(u8 *txt, u32 a1, u32 a2);
-
-extern Entity *gUnknown_202F1E8;
-extern u8 gUnknown_203B434;
-
-extern void sub_805E804(void);
-
-void sub_80523A8(Entity *r0, const char *str, bool8 r2)
+static void DisplayMessageAddToLog(Entity *r0, const char *str, bool8 r2)
 {
     u8 txt[64];
     u32 r7;
@@ -141,7 +179,7 @@ void sub_80523A8(Entity *r0, const char *str, bool8 r2)
         str = xxx_format_string(str, txt, txt + 62, 128);
         if (*str == '\r') str++;
         if (*str == '\n') str++;
-        sub_8053210(txt, r7, r8);
+        CopyStringToMessageLog(txt, r7, r8);
         r7 = 0;
         r8 = 0;
         if (r2) {
@@ -165,11 +203,6 @@ void sub_80523A8(Entity *r0, const char *str, bool8 r2)
         sub_805E804();
     }
 }
-
-extern void (*gUnknown_203B08C)(s32);
-
-extern void sub_803EAF0(s32, s32);
-extern void sub_8052210(u32);
 
 void xxx_draw_string_80524F0(void)
 {
@@ -268,16 +301,11 @@ void sub_8052740(s32 a0)
     }
 }
 
-extern u8 gUnknown_203B40C;
-extern u8 gUnknown_202EE01;
-
 struct MonDialogueSpriteInfo
 {
     s16 species;
     u8 spriteId;
 };
-
-extern void sub_8040238(void);
 
 // Prints string in dialogue box and waits for A/B button press
 #define PRINT_STRING_WAIT_PRESS(chosenMenuIndex)   \
@@ -350,10 +378,6 @@ void sub_80528F4(Entity *a0, const u8 *str)
     sub_80522E8(a0, str);
 }
 
-extern const u8 gUnknown_80F7AF8[];
-extern const u8 gUnknown_80F7AFC[];
-extern const u8 gUnknown_80F7B04[];
-
 struct DungeonDialogueStruct
 {
     u16 unk0;
@@ -371,11 +395,6 @@ struct Struct_sub_808CDB0
 };
 
 extern const struct Struct_sub_808CDB0 *sub_808CDB0(s32 a0);
-extern const u16 gUnknown_80F7AEA[];
-
-extern u8 gAvailablePokemonNames[];
-extern u8 gUnknown_202E5D8[];
-extern u8 gUnknown_202DFE8[];
 
 void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
 {
@@ -624,7 +643,9 @@ extern const struct TutorialFlagMsg gPechaTutorial;
 extern const struct TutorialFlagMsg gSleepSeedTutorial;
 extern const struct TutorialFlagMsg gMoneyTutorial;
 
-extern void sub_8083E28(void);
+extern const u8 *const gUnknown_80FF6F8;
+extern const u8 *const gUnknown_80FF6A4;
+extern const u8 gUnknown_8106990[]; // Possibly something menu related?
 
 static inline bool32 DislayTutorialMsg(Entity *leader, const struct TutorialFlagMsg *tutorial, bool32 unkFunctionCall)
 {
@@ -690,9 +711,6 @@ void HandleOnPickupTutorial(u8 itemId)
     }
 }
 
-extern const u8 *const gUnknown_80FF6F8;
-extern const u8 *const gUnknown_80FF6A4;
-
 void DisplayYouReachedDestFloorStr(void)
 {
     if (gDungeon->unkA != 0) {
@@ -702,10 +720,6 @@ void DisplayYouReachedDestFloorStr(void)
         DisplayDungeonMessage(NULL, gUnknown_80FF6A4, 1);
     }
 }
-
-extern SpriteOAM gUnknown_202F1F0;
-
-extern u8 gFontPalette[];
 
 // Used only for displaying Frosy Forest's text at floor 6
 void sub_8052FB8(const u8 *str)
@@ -809,11 +823,11 @@ void sub_80531A8(void)
 
     gDungeon->unk16 = 0;
     gDungeon->unkB = 1;
-    for (i = 0; i < UNK_1C070_ARR_COUNT; i++) {
-        gDungeon->unk1C070[i].unk3[0] = 0;
-        gDungeon->unk1C070[i].unk0 = 0;
-        gDungeon->unk1C070[i].unk1 = 0;
-        gDungeon->unk1C070[i].unk2 = 0;
+    for (i = 0; i < MESSAGE_LOG_STRINGS_COUNT; i++) {
+        gDungeon->messageLogStrings[i].str[0] = 0;
+        gDungeon->messageLogStrings[i].unk0 = 0;
+        gDungeon->messageLogStrings[i].unk1 = 0;
+        gDungeon->messageLogStrings[i].unk2 = 0;
     }
 }
 
@@ -822,47 +836,33 @@ UNUSED void sub_8053200(void)
     gDungeon->unkB = 1;
 }
 
-void sub_8053210(u8 *txt, u32 a1, u32 a2)
+static void CopyStringToMessageLog(const u8 *src, u32 a1, u32 a2)
 {
-    u8 *dst = &gDungeon->unk1C070[gDungeon->unk16].unk3[0];
-    u8 *maxDst = &gDungeon->unk1C070[gDungeon->unk16].unk3[UNK_1C070_BUFFER_SIZE - 1];
-    gDungeon->unk1C070[gDungeon->unk16].unk0 = 1;
-    gDungeon->unk1C070[gDungeon->unk16].unk1 = a1;
-    gDungeon->unk1C070[gDungeon->unk16].unk2 = a2;
+    u8 *dst = &gDungeon->messageLogStrings[gDungeon->unk16].str[0];
+    u8 *maxDst = &gDungeon->messageLogStrings[gDungeon->unk16].str[MESSAGE_LOG_BUFFER_SIZE - 1];
+    gDungeon->messageLogStrings[gDungeon->unk16].unk0 = 1;
+    gDungeon->messageLogStrings[gDungeon->unk16].unk1 = a1;
+    gDungeon->messageLogStrings[gDungeon->unk16].unk2 = a2;
 
-    while (*txt != '\0') {
-        if (*txt == '\r') break;
+    while (*src != '\0') {
+        if (*src == '\r') break;
         if (dst < maxDst) {
-            *(dst++) = *txt;
+            *(dst++) = *src;
         }
-        txt++;
+        src++;
     }
 
     *dst = '\0';
-    if (++gDungeon->unk16 >= UNK_1C070_ARR_COUNT) {
+    if (++gDungeon->unk16 >= MESSAGE_LOG_STRINGS_COUNT) {
         gDungeon->unk16 = 0;
     }
 
     gDungeon->unkB = 1;
 }
 
-extern const u8 gUnknown_8106990[]; // Possibly something menu related?
+#define MESSAGE_LOG_ROW_COUNT 8 // How many log messages are shown
 
-extern bool8 sub_8008D8C(u32 strId);
-extern u32 sub_8014140(s32 a0, const void *a1);
-extern void sub_8083D30(void);
-extern void sub_8083D08(void);
-extern void sub_8007334(s32 a0);
-
-extern s32 gUnknown_202F1F8;
-extern u8 gUnknown_202F1FC;
-
-void sub_80533A4(void);
-bool8 sub_8053540(s32 a0);
-bool8 sub_8053430(s32 a0);
-void sub_805363C(s32 a0, s32 a1);
-
-bool32 sub_80532B4(void)
+bool32 DisplayMessageLog(void)
 {
     bool8 unkRet;
     MenuInputStructSub menuInput;
@@ -876,32 +876,30 @@ bool32 sub_80532B4(void)
 
     gUnknown_202F1F8 = 0;
     gUnknown_202F1FC = 0;
-    sub_80533A4();
+    PutStringsOnMessageLog();
 
     while (1) {
         s32 unkVar;
-        bool8 unkBool = FALSE;
+        bool32 scroll = FALSE;
 
         gUnknown_202F1FC = 0;
         nullsub_34(&menuInput, 0);
         unkVar = sub_8014140(0, gUnknown_8106990);
-        if (sub_8053430(unkVar))
-            unkBool = TRUE;
-        else
-            unkBool = FALSE;
 
-        if (sub_8053540(unkVar))
-            unkBool = TRUE;
+        if (TryScrollLogUp(unkVar))
+            scroll = TRUE;
+        if (TryScrollLogDown(unkVar))
+            scroll = TRUE;
 
-        if (!unkBool) {
+        if (!scroll) {
             sub_803E46C(0xD);
         }
 
-        if (gUnknown_202F1FC & 1) {
-            sub_805363C(1, -8);
+        if (gUnknown_202F1FC & FLAG_CAN_SCROLL_UP) {
+            CreateMessageLogArrow(TRUE, -8);
         }
-        if (gUnknown_202F1FC & 2) {
-            sub_805363C(0, 114);
+        if (gUnknown_202F1FC & FLAG_CAN_SCROLL_DOWN) {
+            CreateMessageLogArrow(FALSE, 114);
         }
 
         if (!sub_80048C8()) {
@@ -920,7 +918,7 @@ bool32 sub_80532B4(void)
     return TRUE;
 }
 
-void sub_80533A4(void)
+static void PutStringsOnMessageLog(void)
 {
     s32 i;
     s32 arrId = gDungeon->unk16;
@@ -928,20 +926,20 @@ void sub_80533A4(void)
 
     arrId -= 8;
     if (arrId < 0)
-        arrId += UNK_1C070_ARR_COUNT;
+        arrId += MESSAGE_LOG_STRINGS_COUNT;
 
     sub_80073B8(0);
-    for (i = 0; i < 8; i++) {
-        struct UnkDungeonStruct1C070 *strPtr = &gDungeon->unk1C070[arrId];
+    for (i = 0; i < MESSAGE_LOG_ROW_COUNT; i++) {
+        struct MessageLogString *msgLogString = &gDungeon->messageLogStrings[arrId];
 
-        if (strPtr->unk0) {
-            if (strPtr->unk1) {
+        if (msgLogString->unk0) {
+            if (msgLogString->unk1) {
                 sub_80078A4(0, 0, y, 0xE0, 7);
             }
-            PrintStringOnWindow(8, y + 3, strPtr->unk3, 0, 0xD);
+            PrintStringOnWindow(8, y + 3, msgLogString->str, 0, 0xD);
             y += 14;
         }
-        if (++arrId >= UNK_1C070_ARR_COUNT)
+        if (++arrId >= MESSAGE_LOG_STRINGS_COUNT)
             arrId = 0;
     }
 
@@ -949,15 +947,10 @@ void sub_80533A4(void)
     sub_8007334(0);
 }
 
-extern void sub_80087EC(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4);
-extern void (*gUnknown_203B084)(s32 a0);
-extern void (*gUnknown_203B080)(s32 a0);
-extern void sub_8083CE0(u8 param_1);
-
-bool8 sub_8053430(s32 a0)
+static bool8 TryScrollLogUp(s32 a0)
 {
     s32 i;
-    struct UnkDungeonStruct1C070 *strPtr;
+    struct MessageLogString *msgLogString;
     s32 y;
     s32 arrId;
 
@@ -967,14 +960,14 @@ bool8 sub_8053430(s32 a0)
         y = 2;
         arrId -= 9;
         while (arrId < 0) {
-            arrId += UNK_1C070_ARR_COUNT;
+            arrId += MESSAGE_LOG_STRINGS_COUNT;
         }
-        while (arrId >= UNK_1C070_ARR_COUNT) {
-            arrId -= UNK_1C070_ARR_COUNT;
+        while (arrId >= MESSAGE_LOG_STRINGS_COUNT) {
+            arrId -= MESSAGE_LOG_STRINGS_COUNT;
         }
 
-        if (gDungeon->unk1C070[arrId].unk0 && gUnknown_202F1F8 > -12) {
-            gUnknown_202F1FC |= 1;
+        if (gDungeon->messageLogStrings[arrId].unk0 && gUnknown_202F1F8 > -12) {
+            gUnknown_202F1FC |= FLAG_CAN_SCROLL_UP;
             if (gRealInputs.repeated & DPAD_UP)
                 break;
             if (a0 == 1)
@@ -985,13 +978,13 @@ bool8 sub_8053430(s32 a0)
     }
     sub_8083CE0(0);
     sub_80073B8(0);
-    strPtr = &gDungeon->unk1C070[arrId];
-    if (strPtr->unk0) {
+    msgLogString = &gDungeon->messageLogStrings[arrId];
+    if (msgLogString->unk0) {
         sub_80087EC(0, 0, 0, 0xD0, 0x10);
-        if (strPtr->unk1) {
+        if (msgLogString->unk1) {
             sub_80078A4(0, 0, y, 0xE0, 7);
         }
-        PrintStringOnWindow(8, y + 3, strPtr->unk3, 0, 0xD);
+        PrintStringOnWindow(8, y + 3, msgLogString->str, 0, 0xD);
     }
     sub_80073E0(0);
     sub_803E46C(0xD);
@@ -1005,10 +998,10 @@ bool8 sub_8053430(s32 a0)
     return TRUE;
 }
 
-bool8 sub_8053540(s32 a0)
+static bool8 TryScrollLogDown(s32 a0)
 {
     s32 i;
-    struct UnkDungeonStruct1C070 *strPtr;
+    struct MessageLogString *msgLogString;
     s32 y;
     s32 arrId;
 
@@ -1017,14 +1010,14 @@ bool8 sub_8053540(s32 a0)
         arrId = gDungeon->unk16 + gUnknown_202F1F8;
         y = 128;
         while (arrId < 0) {
-            arrId += UNK_1C070_ARR_COUNT;
+            arrId += MESSAGE_LOG_STRINGS_COUNT;
         }
-        while (arrId >= UNK_1C070_ARR_COUNT) {
-            arrId -= UNK_1C070_ARR_COUNT;
+        while (arrId >= MESSAGE_LOG_STRINGS_COUNT) {
+            arrId -= MESSAGE_LOG_STRINGS_COUNT;
         }
 
         if (gUnknown_202F1F8 < 0) {
-            gUnknown_202F1FC |= 2;
+            gUnknown_202F1FC |= FLAG_CAN_SCROLL_DOWN;
             if (gRealInputs.repeated & DPAD_DOWN)
                 break;
             if (a0 == 2)
@@ -1035,13 +1028,13 @@ bool8 sub_8053540(s32 a0)
     }
     sub_8083CE0(0);
     sub_80073B8(0);
-    strPtr = &gDungeon->unk1C070[arrId];
-    if (strPtr->unk0) {
+    msgLogString = &gDungeon->messageLogStrings[arrId];
+    if (msgLogString->unk0) {
         sub_80087EC(0, 0, y, 0x68, 0x10);
-        if (strPtr->unk1) {
+        if (msgLogString->unk1) {
             sub_80078A4(0, 0, y, 0xE0, 7);
         }
-        PrintStringOnWindow(8, y + 3, strPtr->unk3, 0, 0xD);
+        PrintStringOnWindow(8, y + 3, msgLogString->str, 0, 0xD);
     }
     sub_80073E0(0);
     sub_803E46C(0xD);
@@ -1055,39 +1048,44 @@ bool8 sub_8053540(s32 a0)
     return TRUE;
 }
 
-extern s16 gUnknown_2027370[];
-
-/*
-void sub_805363C(u8 a0, s32 a1)
+static void CreateMessageLogArrow(bool8 upArrow, s32 y)
 {
-    s16 *unkArr = gUnknown_2027370;
-    if (gUnknown_202EDCC & 8) {
-        u32 shape, size, xSprite;
+    struct UnkTextStruct1 *unkStr = &gUnknown_2027370[0];
+    if (!(gUnknown_202EDCC & 8)) {
+        u32 matrixNum, xSprite, mask, ySprite, shape, yMask;
 
-        gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
-        gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
-        gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
-        gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
-        gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_BPP;
+        gUnknown_202F200.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
+        gUnknown_202F200.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+        gUnknown_202F200.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
+        gUnknown_202F200.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
+        gUnknown_202F200.attrib1 &= ~SPRITEOAM_MASK_BPP;
 
-        gUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
-        shape = (a0 == 1) ? 2 : 0;
+        matrixNum = (upArrow != FALSE) ? (16) : 0;
+        // You may be thinking what is this empty loop doing here, but the better question is: Why do these unholy sprite macros exist?
+        do {} while (0);
+        matrixNum <<= 9;
+        gUnknown_202F200.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
+        gUnknown_202F200.attrib2 |= matrixNum;
+
+        mask = 0xF;
+        yMask = 0xFFF;
+        ySprite = (yMask & (unkStr->unk2 * 8 + y)) << 4;
+        gUnknown_202F200.unk6 &= mask;
+        gUnknown_202F200.unk6 |= ySprite;
+
+        xSprite = 0x1FF & ((unkStr->unk0 * 8) + 92);
+        gUnknown_202F200.attrib2 &= ~SPRITEOAM_MASK_X;
+        gUnknown_202F200.attrib2 |= xSprite;
+
+        shape = 1;
         shape <<= SPRITEOAM_SHIFT_SHAPE;
-        gUnknown_202F1F0.attrib1 |= shape;
+        gUnknown_202F200.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
+        gUnknown_202F200.attrib1 |= shape;
 
-        gUnknown_202F1F0.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
+        gUnknown_202F200.attrib2 &= ~SPRITEOAM_MASK_SIZE;
 
-        xSprite = (unkArr[0] * 8) + 92;
-        gUnknown_202F1F0.attrib2 &= ~SPRITEOAM_MASK_X;
-        gUnknown_202F1F0.attrib2 |= xSprite;
+        gUnknown_202F200.attrib3 = 0xF3F0;
 
-        size = 2 << SPRITEOAM_SHIFT_SIZE;
-        gUnknown_202F1F0.attrib2 &= ~SPRITEOAM_MASK_SIZE;
-        gUnknown_202F1F0.attrib2 |= size;
-
-        gUnknown_202F1F0.attrib3 = 0xF3F0;
-
-        AddSprite(&gUnknown_202F1F0, 127, NULL, NULL);
+        AddSprite(&gUnknown_202F200, 127, NULL, NULL);
     }
 }
-*/

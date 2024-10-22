@@ -135,7 +135,7 @@ _08066ECC:
 _08066F1E:
 	ldr r1, [r0]
 	mov r0, r9
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _08066F7E
 	.align 2, 0
 _08066F28: .4byte 0xffffff00
@@ -167,7 +167,7 @@ _08066F46:
 	ldr r0, _08066F98
 	ldr r1, [r0]
 	mov r0, r9
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	ldr r0, _08066F9C
 	ldr r0, [r0]
 	ldr r2, _08066FA0
@@ -314,7 +314,7 @@ _08067040:
 _0806709E:
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _080670EE
 	.align 2, 0
 _080670A8: .4byte gUnknown_202DEA8
@@ -339,7 +339,7 @@ _080670CA:
 	ldr r0, _08067104
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	ldr r0, _08067108
 	ldr r0, [r0]
 	ldr r1, _0806710C
@@ -390,7 +390,7 @@ sub_8067110:
 	bl sub_80464AC
 	adds r1, r0, 0
 	adds r0, r5, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	ldr r0, [r6]
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
@@ -498,7 +498,7 @@ _08067220:
 _08067230:
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	movs r0, 0x14
 	movs r1, 0x4C
 	bl sub_803E708
@@ -677,7 +677,7 @@ _08067384:
 	ldr r0, _080673B8
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _080673C6
 	.align 2, 0
 _080673B0: .4byte gFormatItems
@@ -687,7 +687,7 @@ _080673BC:
 	ldr r0, _080673F8
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _080673C6:
 	add r0, sp, 0x4
 	ldrb r0, [r0, 0x2]
@@ -1401,7 +1401,7 @@ _0806794C:
 _08067962:
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _08067A56
 	.align 2, 0
 _0806796C: .4byte gAvailablePokemonNames
@@ -1477,7 +1477,7 @@ _080679DE:
 	ldr r0, _08067A70
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _08067A04:
 	ldrb r0, [r6, 0x7]
 	cmp r0, 0

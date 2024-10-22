@@ -20,7 +20,7 @@ void sub_806A2BC(Entity *pokemon, u8 param_2);
 extern u8 sub_8044B28(void);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
 extern void nullsub_93(Position *);
-extern void sub_80522F4(Entity *, Entity *, u8 *);
+extern void TryDisplayDungeonLoggableMessage3(Entity *, Entity *, u8 *);
 extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 extern void sub_807EC28(bool8);
@@ -77,12 +77,12 @@ void sub_807E254(Entity *pokemon,Entity *target)
 
   if (HasAbility(pokemon, ABILITY_SUCTION_CUPS)) {
     SetMessageArgument(gAvailablePokemonNames,pokemon,0);
-    sub_80522F4(pokemon,target,*gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
+    TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
   }
   else if(HasAbility(target, ABILITY_SUCTION_CUPS))
   {
     SetMessageArgument(gAvailablePokemonNames,target,0);
-    sub_80522F4(pokemon,target,*gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
+    TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
   }
   else
   {
@@ -137,7 +137,7 @@ void sub_807E378(void)
         sub_806A2BC(leader,1);
         UseAttack(leader);
         if (sub_8044B28() == 0) {
-          SendMessage(leader,*gUnknown_80F9C4C);
+          TryDisplayDungeonLoggableMessage(leader,*gUnknown_80F9C4C);
           sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],0);
           gDungeon->unk67A = 1;
         }
@@ -149,7 +149,7 @@ void sub_807E378(void)
         sub_806A2BC(leader,1);
         UseAttack(leader);
         if (sub_8044B28() == 0) {
-          SendMessage(leader,*gUnknown_80F9C70);
+          TryDisplayDungeonLoggableMessage(leader,*gUnknown_80F9C70);
           sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],1);
           gDungeon->unk67A = 2;
         }
@@ -161,7 +161,7 @@ void sub_807E378(void)
         sub_806A2BC(leader,1);
         UseAttack(leader);
         if (sub_8044B28() == 0) {
-          SendMessage(leader,*gUnknown_80F9C8C);
+          TryDisplayDungeonLoggableMessage(leader,*gUnknown_80F9C8C);
           sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],2);
           gDungeon->unk67A = 3;
         }
@@ -172,7 +172,7 @@ void sub_807E378(void)
       sub_806A2BC(leader,1);
       UseAttack(leader);
       if (sub_8044B28() == 0) {
-        SendMessage(leader,*gUnknown_80F9CBC);
+        TryDisplayDungeonLoggableMessage(leader,*gUnknown_80F9CBC);
         sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],3);
         gDungeon->unk67A = 4;
         sub_8068FE0(leader,0x21e,leader);

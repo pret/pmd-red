@@ -228,7 +228,7 @@ _0807E816:
 	ldr r0, _0807E884
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _0807E844:
 	movs r5, 0
 _0807E846:
@@ -494,7 +494,7 @@ MudWaterSportEffect:
 	bl GetLeader
 	ldr r1, _0807EA68
 	ldr r1, [r1]
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _0807EA8C
 	.align 2, 0
 _0807EA5C: .4byte gUnknown_80F4EAC
@@ -514,7 +514,7 @@ _0807EA6C:
 	bl GetLeader
 	ldr r1, _0807EA9C
 	ldr r1, [r1]
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _0807EA8C:
 	pop {r0}
 	bx r0
@@ -677,7 +677,7 @@ _0807EBA6:
 	bl GetLeader
 	ldr r1, _0807EC1C
 	ldr r1, [r1]
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _0807EBD4:
 	ldr r4, _0807EC14
 	ldr r0, [r4]
@@ -697,7 +697,7 @@ _0807EBD4:
 	bl GetLeader
 	ldr r1, _0807EC24
 	ldr r1, [r1]
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _0807EC00:
 	ldr r0, [sp, 0x8]
 	add sp, 0xC
@@ -1621,7 +1621,7 @@ sub_807F33C:
 	bl GetLeader
 	ldr r1, _0807F428
 	ldr r1, [r1]
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	movs r6, 0
 _0807F360:
 	movs r5, 0
@@ -2037,7 +2037,7 @@ _0807F694:
 	ldr r0, [sp, 0xEC]
 _0807F698:
 	mov r1, r8
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	b _0807F99C
 	.align 2, 0
 _0807F6A0: .4byte 0xffff0000
@@ -2051,7 +2051,7 @@ _0807F6A8:
 	ldr r2, [r0]
 	ldr r0, [sp, 0xEC]
 	mov r1, r8
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	mov r0, r8
 	bl sub_8045888
 	lsls r0, 24
