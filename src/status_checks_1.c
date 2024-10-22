@@ -2,7 +2,7 @@
 #include "status_checks_1.h"
 
 #include "code_800D090.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "constants/ability.h"
 #include "constants/iq_skill.h"
 #include "constants/status.h"

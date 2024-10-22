@@ -1,6 +1,6 @@
 #include "global.h"
 #include "code_8045A00.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "code_807CD9C.h"
 #include "dungeon_map_access.h"
 #include "dungeon_movement.h"

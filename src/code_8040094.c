@@ -2,7 +2,7 @@
 #include "code_800558C.h"
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
