@@ -291,7 +291,7 @@ _08045FE8:
 	bl TryDisplayDungeonLoggableMessage
 _08045FF2:
 	ldrb r0, [r5, 0x2]
-	bl HandleOnPickupTutorial
+	bl TryDisplayItemPickupTutorialMessage
 	b _080460E0
 	.align 2, 0
 _08045FFC: .4byte gPickedUpItemToolbox
@@ -397,7 +397,7 @@ _080460C0:
 	bl TryDisplayDungeonLoggableMessage
 _080460DA:
 	ldrb r0, [r5, 0x2]
-	bl HandleOnPickupTutorial
+	bl TryDisplayItemPickupTutorialMessage
 _080460E0:
 	add sp, 0xB8
 	pop {r3-r5}

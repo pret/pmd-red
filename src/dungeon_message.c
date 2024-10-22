@@ -1,7 +1,7 @@
 #include "global.h"
+#include "dungeon_message.h"
 #include "dungeon.h"
 #include "structs/dungeon_entity.h"
-#include "code_80521D0.h"
 #include "code_803E46C.h"
 #include "code_80130A8.h"
 #include "code_800E9E4.h"
@@ -27,9 +27,9 @@ static bool8 TryScrollLogUp(s32 a0);
 static void CopyStringToMessageLog(const u8 *src, u32 a1, u32 a2);
 static void CreateMessageLogArrow(bool8 upArrow, s32 y);
 static void DisplayMessageAddToLog(Entity *r0, const char *str, u8 r2);
+static bool8 sub_8052DC0(Entity *);
 
 extern bool8 sub_8045888(Entity *r0);
-extern u8 sub_8052DC0(Entity *);
 extern u8 sub_803F428(Position *);
 extern void sub_805E804(void);
 extern void sub_803EAF0(s32, s32);
@@ -90,7 +90,7 @@ UNUSED void TryDisplayDungeonLoggableMessage2(Entity *r0, const char *str)
     }
 }
 
-void sub_80522E8(Entity *r0, const char *str)
+void DisplayDungeonLoggableMessageFalse(Entity *r0, const char *str)
 {
     DisplayMessageAddToLog(r0, str, FALSE);
 }
@@ -137,7 +137,7 @@ void TryDisplayDungeonLoggableMessage5(Entity *r0, Position *pos, const char *st
     }
 }
 
-void sub_805239C(Entity *r0, const char *str)
+void DisplayDungeonLoggableMessageTrue(Entity *r0, const char *str)
 {
     DisplayMessageAddToLog(r0, str, TRUE);
 }
@@ -301,12 +301,6 @@ void sub_8052740(s32 a0)
     }
 }
 
-struct MonDialogueSpriteInfo
-{
-    s16 species;
-    u8 spriteId;
-};
-
 // Prints string in dialogue box and waits for A/B button press
 #define PRINT_STRING_WAIT_PRESS(chosenMenuIndex)   \
 {                                           \
@@ -372,21 +366,11 @@ void DisplayDungeonMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8
     sub_803E708(8, 9);
 }
 
-void sub_80528F4(Entity *a0, const u8 *str)
+void DisplayDungeonLoggableMessage(Entity *a0, const u8 *str)
 {
     DisplayDungeonMessage(NULL, str, TRUE);
-    sub_80522E8(a0, str);
+    DisplayDungeonLoggableMessageFalse(a0, str);
 }
-
-struct DungeonDialogueStruct
-{
-    u16 unk0;
-    u8 unk2;
-    u8 unk3;
-    s16 unk4;
-    s16 unk6;
-    const u8 *str;
-};
 
 struct Struct_sub_808CDB0
 {
@@ -616,7 +600,7 @@ void sub_8052D44(s16 *ids, Entity *leader, Entity *partner)
     }
 }
 
-bool8 sub_8052DC0(Entity *entity)
+static bool8 sub_8052DC0(Entity *entity)
 {
     return sub_8045888(entity);
 }
@@ -659,14 +643,14 @@ static inline bool32 DislayTutorialMsg(Entity *leader, const struct TutorialFlag
         str = tutorial->str;
         DisplayDungeonMessage(NULL, str, TRUE);
         if (unkFunctionCall) {
-            sub_80522E8(leader, str);
+            DisplayDungeonLoggableMessageFalse(leader, str);
         }
         return TRUE;
     }
     return FALSE;
 }
 
-void sub_8052DD0(void)
+void TryDisplayGeneralTutorialMessage(void)
 {
     Entity *leader = GetLeader();
 
@@ -681,7 +665,7 @@ void sub_8052DD0(void)
     }
 }
 
-void HandleOnPickupTutorial(u8 itemId)
+void TryDisplayItemPickupTutorialMessage(u8 itemId)
 {
     u32 itemCategory = GetItemCategory(itemId);
 
@@ -817,14 +801,14 @@ const u8 *GetCurrentDungeonName(void)
     }
 }
 
-void sub_80531A8(void)
+void ResetMessageLog(void)
 {
     s32 i;
 
     gDungeon->unk16 = 0;
     gDungeon->unkB = 1;
     for (i = 0; i < MESSAGE_LOG_STRINGS_COUNT; i++) {
-        gDungeon->messageLogStrings[i].str[0] = 0;
+        gDungeon->messageLogStrings[i].str[0] = '\0';
         gDungeon->messageLogStrings[i].unk0 = 0;
         gDungeon->messageLogStrings[i].unk1 = 0;
         gDungeon->messageLogStrings[i].unk2 = 0;

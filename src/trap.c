@@ -3,7 +3,7 @@
 
 #include "code_803E668.h"
 #include "code_8045A00.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "code_8077274_1.h"
 #include "code_807CD9C.h"
 #include "code_808417C.h"
@@ -78,7 +78,6 @@ void sub_80421EC(Position *, u32);
 bool8 sub_8045888(Entity *);
 u8 sub_8043D10(void);
 void sub_8068FE0(Entity *, u32, Entity *);
-void sub_805239C(Entity *, u8 *);
 void sub_8045C28(Item *, u8 , u8);
 void sub_8045BF8(u8 *, Item *);
 void DealDamageToEntity(Entity *,s16,u32,u32);
@@ -88,9 +87,7 @@ void sub_804225C(Entity *, Position *, u8);
 void sub_8071DA4(Entity *);
 extern u8 sub_803F428(Position *pos);
 void sub_806A1E8(Entity *pokemon);
-void TryDisplayDungeonLoggableMessage5(Entity *, Position *, u8 *);
 void sub_8049ED4(void);
-void TryDisplayDungeonLoggableMessage3(Entity *pokemon, Entity *target, const char r2[]);
 u8 sub_803D6FC(void);
 Entity *sub_8045684(u8, Position *, u8);
 extern void sub_807DF38(Entity *pokemon, Entity *target, Position *pos, u32, u8 moveType, s16);
@@ -574,7 +571,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
                     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80F970C); // $m0 fell into the pitfall!
                 }
                 else {
-                    sub_805239C(pokemon,*gUnknown_80F970C); // $m0 fell into the pitfall!
+                    DisplayDungeonLoggableMessageTrue(pokemon,*gUnknown_80F970C); // $m0 fell into the pitfall!
                 }
                 sub_8068FE0(target,0x215,pokemon);
             }

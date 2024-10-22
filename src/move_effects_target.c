@@ -2,7 +2,7 @@
 #include "move_effects_target.h"
 
 #include "code_8045A00.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
 #include "code_808417C.h"
@@ -142,7 +142,6 @@ extern void sub_8041EC8(Entity *);
 extern void sub_8041ED8(Entity *);
 extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_8041AF4(Entity *);
-extern void TryDisplayDungeonLoggableMessage3(Entity *r1, Entity *r2, u8 *);
 extern void nullsub_91(Entity *);
 extern void nullsub_90(Entity *);
 extern void nullsub_72(Entity *);

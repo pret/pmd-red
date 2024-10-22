@@ -5,7 +5,7 @@
 #include "code_80118A4.h"
 #include "code_803E668.h"
 #include "code_8045A00.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
 #include "code_8097670.h"
@@ -45,8 +45,6 @@ extern u8 *gUnknown_80FA090[];
 void sub_8068FE0(Entity *, u32, Entity *);
 u8 sub_806B8CC();
 bool8 sub_805FBE8(u8 *a0);
-extern s32 DisplayDungeonYesNoMessage(u32, const u8 *, u32);
-extern void DisplayDungeonMessage(u32, const u8 *, u32);
 void sub_8083D88();
 u8 sub_808529C(s32);
 extern u8 GetBodySize(s16 index);

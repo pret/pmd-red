@@ -3,7 +3,7 @@
 #include "constants/ability.h"
 #include "code_803E46C.h"
 #include "code_8045A00.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "code_807CD9C.h"
 #include "structs/str_dungeon.h"
@@ -39,7 +39,6 @@ bool8 ExposeTrap(s32 x, s32 y);
 void sub_8040A84();
 void sub_8049ED4();
 void sub_806A5B8(Entity *);
-void TryDisplayDungeonLoggableMessage3(Entity *, Entity *, u8 *);
 void sub_80421C0(Entity *, u32);
 u8 sub_8045888(Entity *);
 void sub_807EC28(u32);

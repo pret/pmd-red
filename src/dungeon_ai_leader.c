@@ -5,7 +5,7 @@
 #include "code_803E46C.h"
 #include "code_804267C.h"
 #include "code_8045A00.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "code_8077274_1.h"
 #include "code_807CD9C.h"
 #include "constants/dungeon_action.h"
@@ -71,7 +71,6 @@ void HandleSetItemAction(Entity *,bool8);
 void HandleUnsetItemAction(Entity *,bool8);
 extern u8 sub_8044B28(void);
 extern u8 UseAttack(Entity *);
-void sub_8052740(u32);
 void sub_806A1E8(Entity *pokemon);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 bool8 sub_804AE08(Position *pos);

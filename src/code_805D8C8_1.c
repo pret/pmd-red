@@ -3,7 +3,7 @@
 #include "number_util.h"
 #include "input.h"
 #include "structs/map.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_pokemon_attributes.h"
@@ -57,7 +57,6 @@ struct UnkMenuBitsStruct {
     u8 a0_32;
 };
 
-extern void DisplayDungeonMessage(u32, const u8 *, u32);
 extern void HandleSetItemAction(Entity *,bool8);
 extern void HandleUnsetItemAction(Entity *,bool8);
 extern bool8 sub_8048A68(Entity *param_1,Item *item);
@@ -67,12 +66,10 @@ extern Item *sub_8044D90(Entity *, s32, u32);
 extern void sub_8083D44(void);
 extern void sub_8083D30(void);
 extern void sub_8083D08(void);
-extern void sub_805239C(Entity *, const u8 *);
 extern void sub_806A6E8(Entity *);
 extern bool8 sub_8047084(s32 itemFlag);
 extern void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4);
 extern void sub_8045DB4(Position *, u32);
-extern s32 DisplayDungeonYesNoMessage(u32, const u8 *, u32);
 bool8 sub_807EF48(void);
 void sub_806A2BC(Entity *a0, u8 a1);
 bool8 sub_805E874(void);
@@ -89,7 +86,6 @@ void sub_8094C88(void);
 void sub_8040A84(void);
 void sub_8047158(void);
 void sub_804AA60(void);
-void DisplayMessageLog(void);
 void sub_806A914(u8 a0, u8 a1, u8 a2);
 void sub_8044C10(u8 a0);
 u16 GetLeaderActionId(void);
@@ -1721,13 +1717,13 @@ void sub_805F02C(void)
     EntityInfo *leaderInfo = leader->info;
 
     if (r8->isTeamLeader) {
-        sub_805239C(r7, gUnknown_80F9BD8);
+        DisplayDungeonLoggableMessageTrue(r7, gUnknown_80F9BD8);
     }
     else if (sub_8047084(ITEM_FLAG_IN_SHOP) || sub_807EF48()) {
-        sub_805239C(r7, gUnknown_80F9C08);
+        DisplayDungeonLoggableMessageTrue(r7, gUnknown_80F9C08);
     }
     else if (gDungeon->unk66E) {
-        sub_805239C(r7, gUnknown_80F9C2C);
+        DisplayDungeonLoggableMessageTrue(r7, gUnknown_80F9C2C);
     }
     else {
         gDungeon->unk679 = 0;

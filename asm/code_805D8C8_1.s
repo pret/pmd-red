@@ -1353,7 +1353,7 @@ _08069384:
 	ldr r0, _080694A4
 	ldr r1, [r0]
 	mov r0, r8
-	bl sub_805239C
+	bl DisplayDungeonLoggableMessageTrue
 	bl sub_803E178
 	bl sub_8049ED4
 _080693C6:

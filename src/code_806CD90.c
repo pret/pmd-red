@@ -39,7 +39,7 @@ extern u8 gUnknown_202F221;
 extern u8 gUnknown_202DFE8[];
 
 extern void sub_806BFC0(EntityInfo *, u32);
-extern void sub_805239C(Entity *, const u8 *);
+extern void DisplayDungeonLoggableMessageTrue(Entity *, const u8 *);
 
 const u8 gUnknown_8106EEF[] = {0x03, 0x04, 0x05, 0x00, 0x00, 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00 };
 
@@ -721,13 +721,13 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9E44);
         }
         else {
-            sub_805239C(attacker, gUnknown_80F9E44);
+            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9E44);
         }
     }
     else if (targetData->isNotTeamMember)
     {
         if (targetData->clientType == CLIENT_TYPE_CLIENT) {
-            sub_805239C(attacker, gUnknown_80F9DF0[r8]);
+            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DF0[r8]);
         }
         else {
             TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9CC0[r8]);
@@ -736,24 +736,24 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     else {
         PokemonStruct2 *recruitedMon = &gRecruitedPokemonRef->pokemon2[targetData->teamIndex];
         if (targetData->isTeamLeader || (targetData->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER && gDungeon->unk65C == 0)) {
-            sub_805239C(attacker, gUnknown_80F9CEC[r8]);
+            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9CEC[r8]);
         }
         else if (IsClientOrTeamBase(targetData->joinedAt.joinedAt)) {
-            sub_805239C(attacker, gUnknown_80F9DAC[r8]);
+            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DAC[r8]);
         }
         else if (targetData->clientType == CLIENT_TYPE_CLIENT) {
-            sub_805239C(attacker, gUnknown_80F9DF0[r8]);
+            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DF0[r8]);
         }
         else if (sub_806A58C(recruitedMon->unkA)) {
             if (gDungeon->unk65D != 0) {
-                sub_805239C(attacker, gUnknown_80F9D8C[r8]);
+                DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9D8C[r8]);
             }
             else {
-                sub_805239C(attacker, gUnknown_80F9D84[r8]);
+                DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9D84[r8]);
             }
         }
         else {
-            sub_805239C(attacker, gUnknown_80F9D28[r8]);
+            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9D28[r8]);
         }
     }
 
@@ -791,7 +791,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 sub_806CCB4(target, sub_806CEBC(target));
                 EntityUpdateStatusSprites(target);
                 SetMessageArgument(gUnknown_202DFE8, target, 0);
-                sub_805239C(attacker, gUnknown_80FD46C);
+                DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD46C);
                 sub_806F63C(target);
                 return FALSE;
             }
@@ -849,7 +849,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 EntityUpdateStatusSprites(target);
                 SetMessageArgument(gAvailablePokemonNames, target, 0);
                 SetMessageArgument(gAvailablePokemonNames + 0x50, teamMember, 0);
-                sub_805239C(attacker, gUnknown_80FD484);
+                DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD484);
                 sub_806F63C(target);
                 return FALSE;
             }
@@ -902,7 +902,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             sub_806CCB4(target, sub_806CEBC(target));
             EntityUpdateStatusSprites(target);
             SetMessageArgument(gUnknown_202DFE8, target, 0);
-            sub_805239C(attacker, gUnknown_80FD46C);
+            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD46C);
             sub_806F63C(target);
             return FALSE;
         }

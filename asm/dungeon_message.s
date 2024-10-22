@@ -5250,7 +5250,7 @@ _080564F2:
 	beq _08056510
 	adds r0, r6, 0
 	mov r1, r9
-	bl sub_805239C
+	bl DisplayDungeonLoggableMessageTrue
 	b _08056518
 	.align 2, 0
 _08056508: .4byte gFormatItems
@@ -5258,7 +5258,7 @@ _0805650C: .4byte 0x00000163
 _08056510:
 	adds r0, r6, 0
 	mov r1, r9
-	bl sub_80522E8
+	bl DisplayDungeonLoggableMessageFalse
 _08056518:
 	cmp r7, 0
 	beq _08056544

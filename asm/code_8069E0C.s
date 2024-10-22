@@ -706,7 +706,7 @@ _0806A85C:
 	ldr r0, _0806A894
 	ldr r1, [r0]
 	movs r0, 0
-	bl sub_805239C
+	bl DisplayDungeonLoggableMessageTrue
 _0806A87A:
 	adds r2, r4, 0
 	cmp r2, 0x17

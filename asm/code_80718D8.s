@@ -175,7 +175,7 @@ _08072894:
 	ldr r0, _080728D0
 	ldr r1, [r0]
 	mov r0, r9
-	bl sub_80528F4
+	bl DisplayDungeonLoggableMessage
 	b _08072928
 	.align 2, 0
 _080728C8: .4byte gAvailablePokemonNames
@@ -370,7 +370,7 @@ _08072A0C:
 	ldr r0, _08072A4C
 	ldr r1, [r0]
 	mov r0, r9
-	bl sub_80528F4
+	bl DisplayDungeonLoggableMessage
 	b _08072A8C
 	.align 2, 0
 _08072A44: .4byte gAvailablePokemonNames
@@ -421,7 +421,7 @@ _08072A92:
 	ldr r0, _08072AC4
 	ldr r1, [r0]
 	mov r0, r9
-	bl sub_80528F4
+	bl DisplayDungeonLoggableMessage
 _08072AAE:
 	movs r0, 0x1
 _08072AB0:

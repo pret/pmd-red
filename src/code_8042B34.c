@@ -316,7 +316,7 @@ extern void sub_803E178(void);
 extern void sub_80848F0(void);
 extern void sub_8097890(void);
 extern void sub_806AB2C(void);
-extern void sub_8052DD0(void);
+extern void TryDisplayGeneralTutorialMessage(void);
 extern void DisplayPreFightDialogue(void);
 extern void sub_8071DA4(Entity *);
 extern void sub_803E748(void);
@@ -330,7 +330,7 @@ extern void sub_807E88C(void);
 extern void InitDungeonPokemonSprites(void);
 extern void nullsub_16(void);
 extern void sub_80521D0(void);
-extern void sub_80531A8(void);
+extern void ResetMessageLog(void);
 extern void sub_803F27C(u8);
 extern void sub_807E7FC(u8);
 extern void sub_80095CC(u32, u32);
@@ -552,7 +552,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         sub_8098080();
         nullsub_16();
         sub_80521D0();
-        sub_80531A8();
+        ResetMessageLog();
         InitDungeonPokemonSprites();
         if (!r6) {
             sub_804513C();
@@ -719,7 +719,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         gDungeon->unk0 = 1;
 
         if (!r6) {
-            sub_8052DD0();
+            TryDisplayGeneralTutorialMessage();
             if (gDungeon->unk9 != 0) {
                 gDungeon->unk9 = 0;
                 sub_8083D68();

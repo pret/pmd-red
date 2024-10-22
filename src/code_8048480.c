@@ -1,7 +1,7 @@
 #include "global.h"
 #include "code_803E668.h"
 #include "code_8045A00.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "code_8077274_1.h"
 #include "code_807CD9C.h"
 #include "code_808417C.h"
@@ -100,17 +100,14 @@ extern void sub_8063CF0(ActionContainer *, u32);
 extern void sub_8063A70(ActionContainer *, u32);
 extern u8 sub_8062F90(Entity *, u32, u32, u32, u32);
 extern void sub_8044DF0(Entity *, u32, u32);
-extern s32 DisplayDungeonYesNoMessage(u32, u8 *, u32);
 extern void sub_803EAF0(u32, u32);
 extern void sub_8044C10(bool8);
 Entity *DrawFieldGiveItemMenu(u32, u32);
-extern void DisplayDungeonMessage(u32, u8 *, u32);
 extern void sub_8044E24(Entity *, u32, u32);
 extern void sub_804245C(Entity *, Item *);
 extern u8 sub_8072938(Entity *, u16);
 extern void sub_8072008(Entity *pokemon, Entity *r1, u32 r2, u8 r3, u32);
 extern void LevelDownTarget(Entity *pokemon, Entity *r1, u32 r2);
-extern void TryDisplayDungeonLoggableMessage3(Entity *pokemon, Entity *r1, const u8[]);
 extern void sub_806F370(Entity *pokemon, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern s32 sub_8042520(Entity *);
 Entity *sub_80696FC(Entity *);
