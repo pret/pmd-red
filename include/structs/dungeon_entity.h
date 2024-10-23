@@ -260,7 +260,7 @@ typedef struct EntityInfo
     /* 0xF8 */ bool8 speedStageChanged; // Toggled when pokemon is movement speed is sped up
     /* 0xF9 */ u8 unkF9;
     /* 0xFA */ u8 terrifiedTurns; // Doubles as a bool for whether the Pokémon is terrified.
-    u8 expMultiplier;
+    /* 0xFB */ u8 expMultiplier;
     // Set to true if the player makes a teammate use their held item.
     // This is done by going to the teammate's held item in the toolbox and selecting "Use".
     /* 0xFC */ bool8 useHeldItem;

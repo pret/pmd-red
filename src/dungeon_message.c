@@ -1082,6 +1082,7 @@ static void CreateMessageLogArrow(bool8 upArrow, s32 y)
 #include "structs/str_damage.h"
 #include "constants/ability.h"
 #include "constants/status.h"
+#include "constants/weather.h"
 #include "type_chart.h"
 #include "position_util.h"
 #include "code_806CD90.h"
@@ -1090,9 +1091,14 @@ static void CreateMessageLogArrow(bool8 upArrow, s32 y)
 #include "dungeon_capabilities.h"
 #include "move_effects_target.h"
 #include "status.h"
+#include "weather.h"
+#include "code_8077274_1.h"
 #include "charge_move.h"
+#include "dungeon_random.h"
+#include "targeting_flags.h"
+#include "targeting.h"
 
-NAKED void sub_8053704(void)
+NAKED void sub_8053704(s32 *sp, Entity *entity, Move *move, s32 itemId, s32 a4)
 {
     asm_unified("\n"
 	"	push {r4-r7,lr}\n"
@@ -4504,6 +4510,7 @@ NAKED void sub_8053704(void)
 s32 sub_8055640(Entity *, Entity *, Move *, s32, s32);
 s32 sub_8055728(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk);
 bool8 sub_8056B34(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 unkBool);
+bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg_0, struct Move *move);
 
 UNUSED bool32 sub_8055620(Entity *a0, Entity *a1, Move *a2, s32 a3)
 {
@@ -4515,6 +4522,8 @@ extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, struct DamageStruct *d
 extern s16 sub_8057600(Move *move, s32 itemID);
 extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern void sub_8042238(Entity *pokemon, Entity *target);
+extern void sub_806A1E8(Entity *pokemon);
+extern void sub_80574C4(s32 *a0, s32 a1);
 
 extern const u8 *const gUnknown_80F9688;
 
@@ -4673,13 +4682,13 @@ extern u8 gUnknown_202F221;
 extern u8 gUnknown_202F222;
 extern s32 gUnknown_202F208;
 
-extern bool8 sub_8055FA0(struct Entity *, u32, u32, u32, u32, struct Move *);
+
 extern bool8 sub_8044B28(void);
 extern void sub_804178C(u32);
 extern void sub_8071DA4(Entity *);
 extern void sub_80428A0(Entity *r0);
 
-bool32 sub_8055A00(Entity *entity, s32 firstMoveId, s32 var_34, bool32 isOrb, s32 arg_0)
+bool32 sub_8055A00(Entity *entity, s32 firstMoveId, s32 var_34, s32 itemId, s32 arg_0)
 {
     s32 i, j;
     s32 moveId;
@@ -4774,10 +4783,10 @@ bool32 sub_8055A00(Entity *entity, s32 firstMoveId, s32 var_34, bool32 isOrb, s3
                     assistMove.id = sub_8057144(entity);
                     sub_80928C0(gFormatItems, &assistMove, NULL);
                     TryDisplayDungeonLoggableMessage(entity, gUnknown_80FD2DC); // Assist:
-                    r0 = sub_8055FA0(entity, var_34, isOrb, arg_0, var_2C, &assistMove);
+                    r0 = sub_8055FA0(entity, var_34, itemId, arg_0, var_2C, &assistMove);
                 }
                 else {
-                    r0 = sub_8055FA0(entity, var_34, isOrb, arg_0, var_2C, currMove);
+                    r0 = sub_8055FA0(entity, var_34, itemId, arg_0, var_2C, currMove);
                 }
 
                 if (var_28 && r0) {
@@ -4790,7 +4799,7 @@ bool32 sub_8055A00(Entity *entity, s32 firstMoveId, s32 var_34, bool32 isOrb, s3
                 }
 
                 if (unkBefore == gUnknown_202F208) {
-                    if (!isOrb) {
+                    if (!itemId) {
                         TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC690); // The currMove failed!
                     }
                     else {
@@ -4825,7 +4834,7 @@ bool32 sub_8055A00(Entity *entity, s32 firstMoveId, s32 var_34, bool32 isOrb, s3
                         sub_80928C0(gFormatItems, &assistMove, NULL);
                         TryDisplayDungeonLoggableMessage(entity, gUnknown_80FD2DC); // Assist:
                     }
-                    sub_8055FA0(entity, 0, isOrb, arg_0, var_2C, movePtr);
+                    sub_8055FA0(entity, 0, itemId, arg_0, var_2C, movePtr);
                 }
                 sub_804178C(1);
             }
@@ -4860,6 +4869,15 @@ extern const u8 *const gUnknown_80FEF54;
 extern const u8 *const gUnknown_80FEF74;
 extern const u8 *const gUnknown_80FEF98;
 extern const u8 *const gUnknown_80FEFD0;
+extern const u8 *const gUnknown_80FECA4;
+extern const u8 *const gUnknown_80F9158;
+extern const u8 *const gUnknown_80FC72C;
+extern const u8 *const gUnknown_80FC700;
+extern const u8 *const gUnknown_80FC6D0;
+extern const u8 *const gUnknown_80FC710;
+extern const u8 *const gUnknown_80FC6FC;
+extern const u8 *const gUnknown_80FECBC;
+extern const u8 *const gUnknown_80FECE0;
 
 void TriggerAbilityEffect(Entity *entity)
 {
@@ -4916,3 +4934,231 @@ void TriggerAbilityEffect(Entity *entity)
         entInfo->abilityEffectFlags = 0;
     }
 }
+
+extern s32 gUnknown_202F228;
+
+// Todo: unify
+typedef bool8 (*MoveCallback)(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+struct NaturePowerMove
+{
+    u16 moveID;
+    u16 unk2;
+    MoveCallback move;
+};
+extern const struct NaturePowerMove gUnknown_80F59C8[];
+extern const struct NaturePowerMove gNaturePowerMoveTable[];
+
+extern void sub_806ACE8(Entity *entity, Move *move);
+extern s32 sub_8057070(Move *move);
+
+bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, s32 *unkArray, bool32 itemId, bool8 arg_4, bool32 unused);
+bool8 sub_805744C(Entity * pokemon, Move *move, bool8 param_3);
+void sub_8056CE8(s32 *, Entity * pokemon, Move *move);
+void sub_80566F8(Entity*, Move *, s32 a2, bool8 a3, s32 a4, s32 a5);
+
+extern s32 gUnknown_202F214;
+extern s32 gUnknown_202F20C;
+extern s32 gUnknown_202F210;
+extern s32 gUnknown_202F21C;
+extern Entity *gUnknown_203B438;
+extern u8 gUnknown_202F218;
+extern u8 gUnknown_202F219;
+extern u8 gUnknown_202F21A;
+extern u8 gUnknown_202F220;
+extern u8 gUnknown_202F221;
+
+bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg_0, struct Move *move)
+{
+    s32 i;
+    s32 var_144[65]; //????
+    const u8 *msg;
+    Move metronomeMove, naturePwrMove;
+    s32 var_2C;
+    s32 var_28;
+    s32 var_24;
+    bool8 moveUsable;
+
+    msg = NULL;
+    var_144[0] = 0;
+
+    sub_804178C(1);
+    if (move->id == MOVE_METRONOME) {
+        gUnknown_202F228 = DungeonRandInt(105);
+        InitPokemonMove(&metronomeMove, gUnknown_80F59C8[gUnknown_202F228].moveID);
+        metronomeMove.moveFlags = move->moveFlags;
+        metronomeMove.moveFlags2 = move->moveFlags2;
+        sub_8056468(entity, move, gUnknown_80FECBC, var_144, itemId, TRUE, FALSE);
+        sub_804178C(1);
+        move = &metronomeMove;
+    }
+    else if (move->id == MOVE_NATURE_POWER)
+    {
+        s32 tileset = gDungeon->tileset;
+
+        if (tileset < 0)
+            tileset = 0;
+        if (tileset > 74)
+            tileset = 74;
+
+        InitPokemonMove(&naturePwrMove, gNaturePowerMoveTable[tileset].moveID);
+        naturePwrMove.moveFlags = move->moveFlags;
+        naturePwrMove.moveFlags2 = move->moveFlags2;
+        sub_8056468(entity, move, gUnknown_80FECE0, var_144, itemId, TRUE, FALSE);
+        sub_804178C(1);
+        move = &naturePwrMove;
+    }
+
+    var_28 = 0;
+    if ((GetMoveTargetAndRangeForPokemon(entity, move, TRUE)
+         & (0xF0)) == TARGETING_FLAG_TARGET_LINE)
+    {
+        var_28 = 10;
+    }
+    if ((GetMoveTargetAndRangeForPokemon(entity, move, TRUE)
+         & (0xF0)) == TARGETING_FLAG_CUT_CORNERS)
+        {
+        var_28 = 1;
+        if ((move->id != MOVE_SOLARBEAM || GetApparentWeather(entity) != WEATHER_SUNNY) && DoesMoveCharge(move->id)) {
+            if (!MoveMatchesChargingStatus(entity, move)) {
+                var_28 = 0;
+            }
+        }
+    }
+
+    SetMessageArgument_2(gAvailablePokemonNames, GetEntInfo(entity), 0);
+    sub_80928C0(gFormatItems, move, NULL);
+    if (MoveMatchesChargingStatus(entity, move)) {
+        msg = gUnknown_80FC72C; // mon loosed move
+        GetEntInfo(entity)->unkFF = 0;
+        moveUsable = sub_805744C(entity, move, TRUE);
+    }
+    else {
+        if (!itemId) {
+            msg = GetMoveUseText(move->id);
+        }
+        else {
+            msg = gUnknown_80F9158;
+        }
+        moveUsable = CanMonsterUseMove(entity, move, TRUE);
+    }
+
+    if (moveUsable && r6) {
+        sub_806ACE8(entity, move);
+    }
+
+    if (GetEntInfo(entity)->muzzled.muzzled == TRUE && FailsWhileMuzzled(move->id)) {
+        SetMessageArgument(gAvailablePokemonNames, entity, 0);
+        TryDisplayDungeonLoggableMessage(entity, msg);
+        sub_803E708(0xA, 0x3F);
+        TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC710); // is muzzled!
+        return FALSE;
+    }
+    else if (!moveUsable) {
+        SetMessageArgument_2(gAvailablePokemonNames, GetEntInfo(entity), 0);
+        if (!itemId) {
+            sub_80928C0(gFormatItems, move, NULL);
+            TryDisplayDungeonLoggableMessage(entity, msg);
+            sub_803E708(0xA, 0x3F);
+            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC6D0); // But the move couldn't be used!
+        }
+        else {
+            BufferItemName(gFormatItems, itemId, NULL);
+            TryDisplayDungeonLoggableMessage(entity, msg);
+            sub_803E708(0xA, 0x3F);
+            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC6FC); // But Orbs are prevented from being used!
+        }
+        return FALSE;
+    }
+
+    gUnknown_202F214 = 0;
+    gUnknown_202F20C = 0;
+    gUnknown_202F210 = 0;
+    gUnknown_202F218 = 0;
+    gUnknown_202F219 = 0;
+    gUnknown_202F21A = 0;
+    gUnknown_202F21C = 0;
+    gUnknown_202F220 = 0;
+    if (arg_0 && GetEntInfo(entity)->unk153 <= 3) {
+        GetEntInfo(entity)->unk153++;
+    }
+
+    var_2C = sub_8057070(move);
+    for (i = 0; i < var_2C; i++) {
+        u8 r4;
+        EntityInfo *entInfo;
+
+        var_24 = 1;
+        if (gUnknown_202F220 != 0 || gUnknown_202F221 != 0)
+            break;
+        if (!EntityExists(entity) || sub_8044B28())
+            return TRUE;
+
+        entInfo = GetEntInfo(entity);
+        if (var_30 != 0 || move->id == MOVE_SNORE || move->id == MOVE_SLEEP_TALK) {
+            if (!IsSleeping(entity) && CannotAttack(entity, TRUE))
+                break;
+        }
+        else {
+            if (CannotAttack(entity, FALSE))
+                break;
+        }
+        entInfo->unk14A = 0;
+        if (move->id == MOVE_THRASH) {
+            GetEntInfo(entity)->action.direction = DungeonRandInt(NUM_DIRECTIONS);
+            TargetTileInFront(entity);
+            var_24 = 0;
+        }
+        gUnknown_203B438 = NULL;
+        var_144[0] = 0;
+        if (var_28 == 0 || var_28 == 1) {
+            sub_8056CE8(var_144, entity, move);
+            sub_80574C4(var_144, (s32) entity); // Todo fix sub_80574C4
+            if (i != 0 && var_24 != 0 && var_144[0] == 0)
+                break;
+        }
+        r4 = sub_8056468(entity, move, msg, var_144, itemId, (i == 0), var_28);
+        msg = NULL;
+        if (gUnknown_203B438 != 0) {
+            sub_806A1E8(gUnknown_203B438);
+        }
+
+        if (GetEntInfo(entity)->volatileStatus.volatileStatus != STATUS_CONFUSED && GetEntInfo(entity)->volatileStatus.volatileStatus != STATUS_COWERING) {
+            EntityInfo *entInfo = GetEntInfo(entity);
+            entInfo->targetPos.x = 0;
+            entInfo->targetPos.y = 0;
+        }
+
+        gUnknown_202F214++;
+        if (var_28 != 0) {
+            sub_80566F8(entity, move, var_28, r4, itemId, arg_0);
+        }
+        else {
+            sub_8053704(var_144, entity, move, itemId, arg_0);
+        }
+
+        if (!EntityExists(entity))
+            break;
+
+        sub_806CF18(entity);
+        if (GetEntInfo(entity)->unk14A == 0) {
+            GetEntInfo(entity)->unk14A = 0; // Redundant as it's already 0
+            sub_8079764(entity);
+        }
+    }
+
+
+    if (gUnknown_202F21A != 0) {
+        SendImmobilizeEndMessage(entity, entity);
+        SendLinkedEndMessage(entity, entity);
+    }
+
+    if (gUnknown_202F219 != 0 && EntityExists(entity)) {
+        EntityInfo *entInfo = GetEntInfo(entity);
+
+        ConfuseStatusTarget(entity, entity, FALSE);
+        SetExpMultplier(entInfo);
+    }
+    return TRUE;
+}
+
+//
