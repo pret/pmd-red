@@ -555,6 +555,7 @@ SECTIONS {
         src/move_checks.o(.rodata);
         data/data_80F5668.o(.rodata);
         src/dungeon_pokemon_attributes.o(.rodata);
+        src/called_move_data.o(.rodata);
         data/data_80F59C8.o(.rodata);
         src/charge_move.o(.rodata);
         data/data_8106A4C.o(.rodata);

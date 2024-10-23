@@ -1097,6 +1097,7 @@ static void CreateMessageLogArrow(bool8 upArrow, s32 y)
 #include "dungeon_random.h"
 #include "targeting_flags.h"
 #include "targeting.h"
+#include "called_move_data.h"
 
 NAKED void sub_8053704(s32 *sp, Entity *entity, Move *move, s32 itemId, s32 a4)
 {
@@ -4935,18 +4936,7 @@ void TriggerAbilityEffect(Entity *entity)
     }
 }
 
-extern s32 gUnknown_202F228;
-
-// Todo: unify
-typedef bool8 (*MoveCallback)(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-struct NaturePowerMove
-{
-    u16 moveID;
-    u16 unk2;
-    MoveCallback move;
-};
-extern const struct NaturePowerMove gUnknown_80F59C8[];
-extern const struct NaturePowerMove gNaturePowerMoveTable[];
+extern s32 gMetronomeCalledArrayId;
 
 extern void sub_806ACE8(Entity *entity, Move *move);
 extern s32 sub_8057070(Move *move);
@@ -4983,8 +4973,8 @@ bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg
 
     sub_804178C(1);
     if (move->id == MOVE_METRONOME) {
-        gUnknown_202F228 = DungeonRandInt(105);
-        InitPokemonMove(&metronomeMove, gUnknown_80F59C8[gUnknown_202F228].moveID);
+        gMetronomeCalledArrayId = DungeonRandInt(METRONOME_AVAILABLE_CALLED_MOVES);
+        InitPokemonMove(&metronomeMove, gMetronomeCalledMoves[gMetronomeCalledArrayId].moveID);
         metronomeMove.moveFlags = move->moveFlags;
         metronomeMove.moveFlags2 = move->moveFlags2;
         sub_8056468(entity, move, gUnknown_80FECBC, var_144, itemId, TRUE, FALSE);
@@ -5000,7 +4990,7 @@ bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg
         if (tileset > 74)
             tileset = 74;
 
-        InitPokemonMove(&naturePwrMove, gNaturePowerMoveTable[tileset].moveID);
+        InitPokemonMove(&naturePwrMove, gNaturePowerCalledMoves[tileset].moveID);
         naturePwrMove.moveFlags = move->moveFlags;
         naturePwrMove.moveFlags2 = move->moveFlags2;
         sub_8056468(entity, move, gUnknown_80FECE0, var_144, itemId, TRUE, FALSE);

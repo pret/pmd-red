@@ -31,17 +31,7 @@
 #include "structs/str_dungeon.h"
 #include "tile_types.h"
 #include "weather.h"
-
-typedef bool8 (*MoveCallback)(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-struct NaturePowerMove
-{
-    u16 moveID;
-    u16 unk2;
-    MoveCallback move;
-};
-
-extern struct NaturePowerMove gNaturePowerMoveTable[10];
-
+#include "called_move_data.h"
 
 extern u8 gFormatItems[];
 extern u8 gAvailablePokemonNames[];
@@ -1551,8 +1541,8 @@ bool8 NaturePowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 par
   if (0x4a < tileset) {
     tileset = 0x4a;
   }
-  InitPokemonMove(&natureMove, gNaturePowerMoveTable[tileset].moveID);
-  flag = gNaturePowerMoveTable[tileset].move(pokemon,target,&natureMove,param_4);
+  InitPokemonMove(&natureMove, gNaturePowerCalledMoves[tileset].moveID);
+  flag = gNaturePowerCalledMoves[tileset].callback(pokemon,target,&natureMove,param_4);
   return flag;
 }
 

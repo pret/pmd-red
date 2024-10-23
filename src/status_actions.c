@@ -33,6 +33,7 @@
 #include "tile_types.h"
 #include "trap.h"
 #include "weather.h"
+#include "called_move_data.h"
 
 extern void sub_807F43C(Entity *, Entity *);
 extern void sub_807DC68(Entity *, Entity *);
@@ -139,22 +140,12 @@ extern u8 *gUnknown_80FEB08[];
 extern u8 gFormatItems[];
 extern s16 gUnknown_80F4E08;
 extern u8 gDungeonCamouflageTypes[76];
-extern u32 gUnknown_202F228;
+extern u32 gMetronomeCalledArrayId;
 
 extern s16 gUnknown_80F4DC6;
 extern u8 *gUnknown_80FEFF4[];
 
 extern u32 gUnknown_80F51C4[];
-
-typedef bool8 (*MoveCallback)(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-
-struct NaturePowerMove
-{
-    u16 moveID;
-    u16 unk2;
-    MoveCallback move;
-};
-extern struct NaturePowerMove gUnknown_80F59C8[10];
 
 bool8 sub_805AFA4(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
@@ -505,10 +496,10 @@ bool8 sub_805B618(Entity * pokemon, Entity * target, Move *move, s32 param_4)
   Move natureMove;
   u32 index;
 
-  index = gUnknown_202F228;
+  index = gMetronomeCalledArrayId;
 
-  InitPokemonMove(&natureMove, gUnknown_80F59C8[index].moveID);
-  flag = gUnknown_80F59C8[index].move(pokemon, target, &natureMove, param_4);
+  InitPokemonMove(&natureMove, gMetronomeCalledMoves[index].moveID);
+  flag = gMetronomeCalledMoves[index].callback(pokemon, target, &natureMove, param_4);
   return flag;
 }
 

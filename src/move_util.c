@@ -9,20 +9,12 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "structs/str_dungeon.h"
+#include "called_move_data.h"
 
 
 extern bool8 sub_8044B28(void);
 extern void sub_80429C8(Entity *r0);
 
-typedef bool8 (*MoveCallback)(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-struct NaturePowerMove
-{
-    u16 moveID;
-    u16 unk2;
-    MoveCallback move;
-};
-
-extern struct NaturePowerMove gNaturePowerMoveTable[76];
 bool8 sub_805755C(Entity* pokemon,u16 param_2);
 
 u32 sub_8057144(Entity * pokemon)
@@ -86,7 +78,7 @@ bool8 sub_80571F0(Entity * pokemon, Move *move)
                 if (0x4a < tileset) {
                     tileset = 0x4a;
                 }
-                if (gNaturePowerMoveTable[tileset].moveID == MOVE_EARTHQUAKE) return FALSE;
+                if (gNaturePowerCalledMoves[tileset].moveID == MOVE_EARTHQUAKE) return FALSE;
             }
         }
         return TRUE;
