@@ -6,6 +6,7 @@ extern u32 gUnknown_80B7F88;
 extern const char gLocateSetErrorMessage[];
 extern struct HeapDescriptor gMainHeapDescriptor;
 extern const char gLocalCreateErrorMessage[];
+
 extern s32 MemorySearchFromBack(struct HeapDescriptor *heap, s32, s32);
 extern s32 MemorySearchFromFront(struct HeapDescriptor *heap, s32, s32);
 extern struct unkMemoryStruct2 * _LocateSetBack(struct HeapDescriptor *, u32, u32, u32, u32);
@@ -101,4 +102,35 @@ struct HeapDescriptor *DoCreateSubHeap(struct unkMemoryStruct *a, u32 b)
     s2.size = end - sizeof(struct HeapDescriptor);
     InitSubHeap(a1, &s2, b);
     return a1;
+}
+
+void xxx_unused_memory_free(struct HeapDescriptor *a1)
+{
+    bool8 b;
+    s32 i;
+    bool8 temp;
+
+    if (a1 == NULL)
+        return;
+
+    b = FALSE;
+    if (a1->freeCount == 1 && a1->freeList->atb == 0)
+        b = TRUE;
+
+    if (b) {
+        temp = FALSE;
+        i = 0;
+        for (; i < gHeapCount; i++) {
+            if (gHeapDescriptorList[i] == a1) {
+                gHeapCount--;
+                for (; i < gHeapCount; i++) {
+                    gHeapDescriptorList[i] = gHeapDescriptorList[i + 1];
+                }
+                temp = TRUE;
+                break;
+            }
+        }
+        if (temp && a1->parentHeap != NULL)
+            DoFree(a1->parentHeap, a1);
+    }
 }
