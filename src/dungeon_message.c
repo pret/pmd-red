@@ -1081,9 +1081,16 @@ static void CreateMessageLogArrow(bool8 upArrow, s32 y)
 #include "dungeon_ai_targeting.h"
 #include "structs/str_damage.h"
 #include "constants/ability.h"
+#include "constants/status.h"
 #include "type_chart.h"
 #include "position_util.h"
 #include "code_806CD90.h"
+#include "move_util.h"
+#include "code_808417C.h"
+#include "dungeon_capabilities.h"
+#include "move_effects_target.h"
+#include "status.h"
+#include "charge_move.h"
 
 NAKED void sub_8053704(void)
 {
@@ -4394,7 +4401,7 @@ NAKED void sub_8053704(void)
 	"	cmp r1, 0x89\n"
 	"	beq _08055568\n"
 	"	adds r0, r7, 0\n"
-	"	bl sub_8055DDC\n"
+	"	bl TriggerAbilityEffect\n"
 	"	adds r0, r7, 0\n"
 	"	adds r1, r5, 0\n"
 	"	mov r2, r8\n"
@@ -4647,4 +4654,265 @@ void sub_80559DC(Entity *entity1, Entity *entity2)
 
     entInfo->action.direction = direction & DIRECTION_MASK;
     sub_806CE68(entity1, direction);
+}
+
+extern const u8 *const gUnknown_80FC714;
+extern const u8 *const gUnknown_80FC718;
+extern const u8 *const gUnknown_80FC6A8;
+extern const u8 *const gUnknown_80FD2D0;
+extern const u8 *const gUnknown_80FD2DC;
+extern const u8 *const gUnknown_80F93C8;
+extern const u8 *const gUnknown_80FC690;
+extern const u8 *const gUnknown_80FC6A4;
+
+extern const s16 gUnknown_80F4E70[];
+extern const s16 gUnknown_80F4E74[];
+
+extern u8 gFormatItems[];
+extern u8 gUnknown_202F221;
+extern u8 gUnknown_202F222;
+extern s32 gUnknown_202F208;
+
+extern bool8 sub_8055FA0(struct Entity *, u32, u32, u32, u32, struct Move *);
+extern bool8 sub_8044B28(void);
+extern void sub_804178C(u32);
+extern void sub_8071DA4(Entity *);
+extern void sub_80428A0(Entity *r0);
+
+bool32 sub_8055A00(Entity *entity, s32 firstMoveId, s32 var_34, bool32 isOrb, s32 arg_0)
+{
+    s32 i, j;
+    s32 moveId;
+    EntityInfo *entInfo = GetEntInfo(entity);
+    bool32 var_2C;
+
+    moveId = firstMoveId;
+    if (firstMoveId >= MAX_MON_MOVES)
+        return FALSE;
+
+    entInfo->abilityEffectFlags = 0;
+    entInfo->unk159 = 0;
+    if (entInfo->volatileStatus.volatileStatus == STATUS_CRINGE) {
+        SetMessageArgument(gAvailablePokemonNames, entity, 0);
+        TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC714); // is cringing!
+        return FALSE;
+    }
+    else if (entInfo->volatileStatus.volatileStatus == STATUS_INFATUATED) {
+        SetMessageArgument(gAvailablePokemonNames, entity, 0);
+        TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC718); // is infatuated!
+        return FALSE;
+    }
+    else if (entInfo->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS) {
+        SetMessageArgument(gAvailablePokemonNames, entity, 0);
+        TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC6A8); // is paralyzed!
+        return FALSE;
+    }
+
+    gUnknown_202F222 = 0;
+    gUnknown_202F208 = 0;
+    gUnknown_202F221 = 0;
+    for (i = 0; i < MAX_MON_MOVES; i++) {
+        entInfo->mimicMoveIDs[i] = 0;
+    }
+
+    for (i = 0, j = 0; i < MAX_MON_MOVES; i++) {
+        j++;
+        if (++moveId >= MAX_MON_MOVES)
+            break;
+        if (!(entInfo->moves.moves[moveId].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+            break;
+    }
+
+    var_2C = (j > 1);
+    moveId = firstMoveId;
+
+    while (1) {
+        Move *currMove = &entInfo->moves.moves[moveId];
+        if (!EntityExists(entity) || sub_8044B28())
+            break;
+
+        if (currMove->id == MOVE_SNORE || currMove->id == MOVE_SLEEP_TALK) {
+            if (!IsSleeping(entity)) {
+                if (CannotAttack(entity, TRUE))
+                    break;
+            }
+        }
+        else {
+            if (CannotAttack(entity, FALSE))
+                break;
+        }
+
+        if (gUnknown_202F221 != 0)
+            break;
+
+        if (MoveFlagExists(currMove)) {
+            bool32 moveUsable = TRUE;
+            bool32 var_28 = FALSE;
+            bool32 statusMoveMatch = MoveMatchesChargingStatus(entity, currMove);
+
+            if (currMove->PP != 0) {
+                if (!statusMoveMatch) {
+                    var_28 = TRUE;
+                }
+            }
+            else {
+                if (!statusMoveMatch) {
+                    sub_80928C0(gFormatItems,  currMove, NULL);
+                    TryDisplayDungeonLoggableMessage(entity, gUnknown_80F93C8); // The move can't be used!
+                    moveUsable = FALSE;
+                }
+            }
+
+            if (moveUsable) {
+                bool32 r0;
+                s32 unkBefore = gUnknown_202F208;
+
+                entInfo->unk159 = statusMoveMatch;
+                if (currMove->id == MOVE_ASSIST) {
+                    Move assistMove = *currMove;
+
+                    assistMove.id = sub_8057144(entity);
+                    sub_80928C0(gFormatItems, &assistMove, NULL);
+                    TryDisplayDungeonLoggableMessage(entity, gUnknown_80FD2DC); // Assist:
+                    r0 = sub_8055FA0(entity, var_34, isOrb, arg_0, var_2C, &assistMove);
+                }
+                else {
+                    r0 = sub_8055FA0(entity, var_34, isOrb, arg_0, var_2C, currMove);
+                }
+
+                if (var_28 && r0) {
+                    if (currMove->moveFlags2 & MOVE_FLAG2_UNK4) {
+                        currMove->moveFlags2 &= ~(MOVE_FLAG2_UNK4);
+                    }
+                    else {
+                        currMove->moveFlags2 |= MOVE_FLAG_TEMPORARY;
+                    }
+                }
+
+                if (unkBefore == gUnknown_202F208) {
+                    if (!isOrb) {
+                        TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC690); // The currMove failed!
+                    }
+                    else {
+                        TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC6A4); // The Orb failed!
+                    }
+                }
+            }
+        }
+
+        sub_804178C(1);
+        if (!EntityExists(entity) || sub_8044B28())
+            break;
+        if (++moveId >= MAX_MON_MOVES)
+            break;
+        if (!MoveFlagLinkChain(&entInfo->moves.moves[moveId]))
+            break;
+    }
+
+    if (EntityExists(entity)) {
+        for (i = 0; i < MAX_MON_MOVES; i++) {
+            if (entInfo->mimicMoveIDs[i] != 0) {
+                Move mimicMove, assistMove;
+                Move *movePtr;
+
+                movePtr = &mimicMove;
+                sub_8092AA8(&mimicMove, entInfo->mimicMoveIDs[i]);
+                if (MoveFlagExists(&mimicMove)) {
+                    if (mimicMove.id == MOVE_ASSIST) {
+                        assistMove = mimicMove;
+                        assistMove.id = sub_8057144(entity);
+                        movePtr = &assistMove;
+                        sub_80928C0(gFormatItems, &assistMove, NULL);
+                        TryDisplayDungeonLoggableMessage(entity, gUnknown_80FD2DC); // Assist:
+                    }
+                    sub_8055FA0(entity, 0, isOrb, arg_0, var_2C, movePtr);
+                }
+                sub_804178C(1);
+            }
+        }
+    }
+
+    if (EntityExists(entity)) {
+        sub_8071DA4(entity);
+        if (EntityExists(entity) && gUnknown_202F222 != 0) {
+            gUnknown_202F222 = 0;
+            if (EntityExists(entity)) {
+                EntityInfo *entInfo = GetEntInfo(entity);
+                s32 statusTurns = CalculateStatusTurns(entity, gUnknown_80F4E70, TRUE);
+                PausedStatusTarget(entity, entity, 1, statusTurns, FALSE);
+                SetExpMultplier(entInfo);
+            }
+        }
+    }
+
+    return TRUE;
+}
+
+extern const u16 gUnknown_80F5004;
+extern const u8 *const gUnknown_80FEEA4;
+extern const u8 *const gUnknown_80FEEC8;
+extern const u8 *const gUnknown_80FEEEC;
+extern const u8 *const gUnknown_80FEF0C;
+extern const u8 *const gUnknown_80FEF30;
+extern const u8 *const gUnknown_80FEF4C;
+extern const u8 *const gUnknown_80FEF50;
+extern const u8 *const gUnknown_80FEF54;
+extern const u8 *const gUnknown_80FEF74;
+extern const u8 *const gUnknown_80FEF98;
+extern const u8 *const gUnknown_80FEFD0;
+
+void TriggerAbilityEffect(Entity *entity)
+{
+    if (EntityExists(entity)) {
+        EntityInfo *entInfo = GetEntInfo(entity);
+
+        if (entInfo->abilityEffectFlags & ABILITY_FLAG_ARENA_TRAP) {
+            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEEA4); // Arena Trap prevents movement!
+            ImmobilizedStatusTarget(entity, entity);
+        }
+        if (entInfo->abilityEffectFlags & ABILITY_FLAG_SHADOW_TAG) {
+            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEEC8); // Shadow Tag prevents movement!
+            ImmobilizedStatusTarget(entity, entity);
+        }
+        if (entInfo->abilityEffectFlags & ABILITY_FLAG_MAGNET_PULL) {
+            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEEEC); // Magnet Pull prevents movement!
+            ImmobilizedStatusTarget(entity, entity);
+        }
+        if (entInfo->abilityEffectFlags & ABILITY_FLAG_STATIC) {
+            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEF0C); // Static caused paralysis!
+            ParalyzeStatusTarget(entity, entity, TRUE);
+        }
+        if (entInfo->abilityEffectFlags & ABILITY_FLAG_EFFECT_SPORE_PRLZ) {
+            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEF30); // Effect Spore scattered spores
+            ParalyzeStatusTarget(entity, entity, TRUE);
+        }
+        if (entInfo->abilityEffectFlags & ABILITY_FLAG_POISON_POINT) {
+            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEF4C); // Poison Point struck!
+            PoisonedStatusTarget(entity, entity, TRUE);
+        }
+        if (entInfo->abilityEffectFlags & ABILITY_FLAG_EFFECT_SPORE_PSN) {
+            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEF50); // Effect Spore scattered spores!
+            PoisonedStatusTarget(entity, entity, TRUE);
+        }
+        if (entInfo->abilityEffectFlags & ABILITY_FLAG_EFFECT_SPORE_SLP) {
+            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEF54); // Effect Spore scattered spores!
+            sub_8075C58(entity, entity, CalculateStatusTurns(entity, gUnknown_80F4E74, TRUE), TRUE);
+        }
+        if (entInfo->abilityEffectFlags & ABILITY_FLAG_FLAME_BODY) {
+            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEF74); // Flame Body caused a burn!
+            BurnedStatusTarget(entity, entity, TRUE, TRUE);
+        }
+        if (entInfo->abilityEffectFlags & ABILITY_FLAG_CUTE_CHARM) {
+            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEF98); // Cute Charm caused infatuation
+            InfatuateStatusTarget(entity, entity, TRUE);
+        }
+        if (entInfo->abilityEffectFlags & ABILITY_FLAG_STENCH) {
+            SetMessageArgument(gAvailablePokemonNames, entity, 0);
+            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEFD0); // A horrid stench billowed out
+            sub_80428A0(entity);
+            entInfo->terrifiedTurns = gUnknown_80F5004;
+        }
+
+        entInfo->abilityEffectFlags = 0;
+    }
 }

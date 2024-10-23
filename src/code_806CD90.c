@@ -409,30 +409,30 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
             && !HasAbility(attacker, ABILITY_LEVITATE)
             && DungeonRandInt(100) < gUnknown_80F4E10)
         {
-            attackerInfo->unk178 |= 1;
+            attackerInfo->abilityEffectFlags |= ABILITY_FLAG_ARENA_TRAP;
         }
         if (HasAbility(target, ABILITY_SHADOW_TAG)
             && DungeonRandInt(100) < gUnknown_80F4E12)
         {
-            attackerInfo->unk178 |= 2;
+            attackerInfo->abilityEffectFlags |= ABILITY_FLAG_SHADOW_TAG;
         }
         if (HasAbility(target, ABILITY_MAGNET_PULL)
             && MonsterIsType(attacker, TYPE_STEEL)
             && DungeonRandInt(100) < gUnknown_80F4E14)
         {
-            attackerInfo->unk178 |= 4;
+            attackerInfo->abilityEffectFlags |= ABILITY_FLAG_MAGNET_PULL;
         }
 
         if (HasAbility(target, ABILITY_STATIC)
             && isPhysical
             && DungeonRandInt(100) < gUnknown_80F4E16)
         {
-            attackerInfo->unk178 |= 8;
+            attackerInfo->abilityEffectFlags |= ABILITY_FLAG_STATIC;
         }
         if (HasAbility(target, ABILITY_POISON_POINT)
             && DungeonRandInt(100) < gUnknown_80F4E18)
         {
-            attackerInfo->unk178 |= 0x20;
+            attackerInfo->abilityEffectFlags |= ABILITY_FLAG_POISON_POINT;
         }
         if (HasAbility(target, ABILITY_EFFECT_SPORE)
             && isPhysical
@@ -440,27 +440,27 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
         {
             s32 rnd = DungeonRandInt(3);
             if (rnd < 1)
-                attackerInfo->unk178 |= 0x40;
+                attackerInfo->abilityEffectFlags |= ABILITY_FLAG_EFFECT_SPORE_PSN;
             else if (rnd < 2)
-                attackerInfo->unk178 |= 0x10;
+                attackerInfo->abilityEffectFlags |= ABILITY_FLAG_EFFECT_SPORE_PRLZ;
             else
-                attackerInfo->unk178 |= 0x80;
+                attackerInfo->abilityEffectFlags |= ABILITY_FLAG_EFFECT_SPORE_SLP;
         }
         if (HasAbility(target, ABILITY_FLAME_BODY)
             && DungeonRandInt(100) < gUnknown_80F4E1C)
         {
-            attackerInfo->unk178 |= 0x100;
+            attackerInfo->abilityEffectFlags |= ABILITY_FLAG_FLAME_BODY;
         }
         if (HasAbility(target, ABILITY_CUTE_CHARM)
             && isPhysical
             && DungeonRandInt(100) < gUnknown_80F4E1E)
         {
-            attackerInfo->unk178 |= 0x200;
+            attackerInfo->abilityEffectFlags |= ABILITY_FLAG_CUTE_CHARM;
         }
         if (HasAbility(target, ABILITY_STENCH)
             && DungeonRandInt(100) < gUnknown_80F4E20)
         {
-            attackerInfo->unk178 |= 0x400;
+            attackerInfo->abilityEffectFlags |= ABILITY_FLAG_STENCH;
         }
     }
     if (!EntityExists(attacker) || !EntityExists(target))

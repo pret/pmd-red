@@ -318,7 +318,7 @@ typedef struct EntityInfo
     /* 0x16C */ Position targetPos;
     /* 0x170 */ Position pixelPos;
     u32 unk174;
-    u16 unk178;
+    u16 abilityEffectFlags; // See enum AbilityEffectFlags
     /* 0x17A */ u16 mimicMoveIDs[MAX_MON_MOVES]; // All moves that Mimic has copied (not sure on size...)
     // Previous value of targetPosition for movement, 1 and 2 moves ago.
     /* 0x184 */ Unk_Entity_x184 unk184[4];
@@ -379,6 +379,21 @@ enum MovementFlag
     MOVEMENT_FLAG_WALKING = 1 << 9,
     MOVEMENT_FLAG_UNK_14 = 1 << 14,
     MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY = 1 << 15 // Set if the Pokémon is petrified and the leader cures them by swapping places.
+};
+
+enum AbilityEffectFlags
+{
+    ABILITY_FLAG_ARENA_TRAP = 1 << 0,
+    ABILITY_FLAG_SHADOW_TAG = 1 << 1,
+    ABILITY_FLAG_MAGNET_PULL = 1 << 2,
+    ABILITY_FLAG_STATIC = 1 << 3,
+    ABILITY_FLAG_EFFECT_SPORE_PRLZ = 1 << 4,
+    ABILITY_FLAG_POISON_POINT = 1 << 5,
+    ABILITY_FLAG_EFFECT_SPORE_PSN = 1 << 6,
+    ABILITY_FLAG_EFFECT_SPORE_SLP = 1 << 7,
+    ABILITY_FLAG_FLAME_BODY = 1 << 8,
+    ABILITY_FLAG_CUTE_CHARM = 1 << 9,
+    ABILITY_FLAG_STENCH = 1 << 10,
 };
 
 enum ShopkeeperMode
