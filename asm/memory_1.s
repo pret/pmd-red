@@ -5,18 +5,6 @@
 
 	.text
 
-	thumb_func_start DoAlloc
-DoAlloc:
-	push {lr}
-	movs r3, 0x80
-	lsls r3, 1
-	orrs r3, r2
-	adds r2, r3, 0
-	bl _LocateSet
-	pop {r1}
-	bx r1
-	thumb_func_end DoAlloc
-
 	thumb_func_start DoFree
 DoFree:
 	push {r4-r7,lr}

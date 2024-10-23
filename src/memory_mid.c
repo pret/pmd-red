@@ -89,7 +89,6 @@ struct HeapDescriptor *MemoryLocate_LocalCreate(struct HeapDescriptor *parentHea
   return iVar3;
 }
 
-// Note: This is called after _LocateSetBack which currently returns a HeapDescriptor* which is incorrect
 struct HeapDescriptor *DoCreateSubHeap(struct unkMemoryStruct *a, u32 b)
 {
     struct HeapMemoryBlock2 s2;
@@ -133,4 +132,9 @@ void xxx_unused_memory_free(struct HeapDescriptor *a1)
         if (temp && a1->parentHeap != NULL)
             DoFree(a1->parentHeap, a1);
     }
+}
+
+void *DoAlloc(struct HeapDescriptor *heap, s32 size, u32 a2)
+{
+    return _LocateSet(heap, size, a2 | 0x100);
 }

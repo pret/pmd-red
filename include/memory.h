@@ -87,5 +87,6 @@ void *MemoryAlloc(s32 size, s32 group);
 void MemoryFree(void *a);
 struct HeapDescriptor *DoCreateSubHeap(struct unkMemoryStruct *a, u32 b);
 void xxx_unused_memory_free(struct HeapDescriptor *a1);
+void *DoAlloc(struct HeapDescriptor *heap, s32 size, u32 a2);
 
 #endif // GUARD_MEMORY_H
