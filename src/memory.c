@@ -127,7 +127,7 @@ void DoInitHeap(struct HeapDescriptor *descriptor, struct HeapSettings *settings
     freeList->grp = 0;
 }
 
-void InitSubHeap(struct HeapDescriptor *parentHeap, struct HeapMemoryBlock *block, u32 freeListMax)
+void InitSubHeap(struct HeapDescriptor *parentHeap, struct HeapMemoryBlock2 *block, u32 freeListMax)
 {
     u32 freeListSize;
     u32 aligned_size;
@@ -171,7 +171,7 @@ u8 xxx_memory_attr_related(u32 r0)
     {
         return_var = 3;
     }
-    else 
+    else
     {
         return_var = 5;
     }

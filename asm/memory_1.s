@@ -5,28 +5,6 @@
 
 	.text
 
-	thumb_func_start DoCreateSubHeap
-DoCreateSubHeap:
-	push {r4,lr}
-	sub sp, 0x8
-	adds r2, r1, 0
-	ldr r4, [r0]
-	adds r1, r4, 0
-	adds r1, 0x1C
-	str r1, [sp]
-	ldr r0, [r0, 0x4]
-	subs r0, 0x1C
-	str r0, [sp, 0x4]
-	adds r0, r4, 0
-	mov r1, sp
-	bl InitSubHeap
-	adds r0, r4, 0
-	add sp, 0x8
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end DoCreateSubHeap
-
 	thumb_func_start xxx_unused_memory_free
 xxx_unused_memory_free:
 	push {r4-r7,lr}
@@ -77,7 +55,7 @@ _080034D2:
 	blt _080034D2
 	b _080034F8
 	.align 2, 0
-	.pool 
+	.pool
 _080034E8:
 	adds r2, 0x4
 	adds r3, 0x1
