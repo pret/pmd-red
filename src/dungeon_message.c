@@ -1098,8 +1098,11 @@ static void CreateMessageLogArrow(bool8 upArrow, s32 y)
 #include "targeting_flags.h"
 #include "targeting.h"
 #include "called_move_data.h"
+#include "dungeon_map_access.h"
+#include "math.h"
+#include "code_800DAC0.h"
 
-NAKED void sub_8053704(s32 *sp, Entity *entity, Move *move, s32 itemId, s32 a4)
+NAKED void sub_8053704(Entity **unkArray, Entity *entity, Move *move, s32 itemId, s32 a4)
 {
     asm_unified("\n"
 	"	push {r4-r7,lr}\n"
@@ -4524,7 +4527,7 @@ extern s16 sub_8057600(Move *move, s32 itemID);
 extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern void sub_8042238(Entity *pokemon, Entity *target);
 extern void sub_806A1E8(Entity *pokemon);
-extern void sub_80574C4(s32 *a0, s32 a1);
+extern void sub_80574C4(Entity **a0, Entity *a1);
 
 extern const u8 *const gUnknown_80F9688;
 
@@ -4800,7 +4803,7 @@ bool32 sub_8055A00(Entity *entity, s32 firstMoveId, s32 var_34, s32 itemId, s32 
                 }
 
                 if (unkBefore == gUnknown_202F208) {
-                    if (!itemId) {
+                    if (itemId == 0) {
                         TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC690); // The currMove failed!
                     }
                     else {
@@ -4941,9 +4944,9 @@ extern s32 gMetronomeCalledArrayId;
 extern void sub_806ACE8(Entity *entity, Move *move);
 extern s32 sub_8057070(Move *move);
 
-bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, s32 *unkArray, bool32 itemId, bool8 arg_4, bool32 unused);
+bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **unkArray, bool32 itemId, bool8 arg_4, bool32 unused);
 bool8 sub_805744C(Entity * pokemon, Move *move, bool8 param_3);
-void sub_8056CE8(s32 *, Entity * pokemon, Move *move);
+void sub_8056CE8(Entity **, Entity * pokemon, Move *move);
 void sub_80566F8(Entity*, Move *, s32 a2, bool8 a3, s32 a4, s32 a5);
 
 extern s32 gUnknown_202F214;
@@ -4957,10 +4960,12 @@ extern u8 gUnknown_202F21A;
 extern u8 gUnknown_202F220;
 extern u8 gUnknown_202F221;
 
+bool8 sub_805755C(Entity* pokemon,u16 param_2);
+
 bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg_0, struct Move *move)
 {
     s32 i;
-    s32 var_144[65]; //????
+    Entity *var_144[65]; //????
     const u8 *msg;
     Move metronomeMove, naturePwrMove;
     s32 var_2C;
@@ -4969,7 +4974,7 @@ bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg
     bool8 moveUsable;
 
     msg = NULL;
-    var_144[0] = 0;
+    var_144[0] = NULL;
 
     sub_804178C(1);
     if (move->id == MOVE_METRONOME) {
@@ -5023,7 +5028,7 @@ bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg
         moveUsable = sub_805744C(entity, move, TRUE);
     }
     else {
-        if (!itemId) {
+        if (itemId == 0) {
             msg = GetMoveUseText(move->id);
         }
         else {
@@ -5045,7 +5050,7 @@ bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg
     }
     else if (!moveUsable) {
         SetMessageArgument_2(gAvailablePokemonNames, GetEntInfo(entity), 0);
-        if (!itemId) {
+        if (itemId == 0) {
             sub_80928C0(gFormatItems, move, NULL);
             TryDisplayDungeonLoggableMessage(entity, msg);
             sub_803E708(0xA, 0x3F);
@@ -5102,7 +5107,7 @@ bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg
         var_144[0] = 0;
         if (var_28 == 0 || var_28 == 1) {
             sub_8056CE8(var_144, entity, move);
-            sub_80574C4(var_144, (s32) entity); // Todo fix sub_80574C4
+            sub_80574C4(var_144, entity); // Todo fix sub_80574C4
             if (i != 0 && var_24 != 0 && var_144[0] == 0)
                 break;
         }
@@ -5149,6 +5154,497 @@ bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg
         SetExpMultplier(entInfo);
     }
     return TRUE;
+}
+
+extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
+extern void sub_8040DA0(Entity *entity, Move *move);
+
+bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **unkArray, bool32 itemId, bool8 arg_4, bool32 unused)
+{
+    s32 i;
+    bool8 ret = FALSE;
+    bool32 r7 = (sub_8045888(entity) != FALSE);
+
+    if (str != NULL) {
+        for (i = 0; i < 65; i++) {
+            if (unkArray[i] == NULL) {
+                break;
+            }
+            if (sub_8045888(unkArray[i])) {
+                r7 = TRUE;
+                break;
+            }
+        }
+
+        if (r7) {
+            SetMessageArgument_2(gAvailablePokemonNames, GetEntInfo(entity), 0);
+            if (itemId == 0) {
+                sub_80928C0(gFormatItems, move, NULL);
+            }
+            else {
+                BufferItemName(gFormatItems, itemId, NULL);
+            }
+        }
+
+        if (move->id != MOVE_REGULAR_ATTACK) {
+            DisplayDungeonLoggableMessageTrue(entity, str);
+        }
+        else {
+            DisplayDungeonLoggableMessageFalse(entity, str);
+        }
+    }
+
+    if (r7) {
+        if (arg_4) {
+            ret = sub_8040BB0(entity, move, TRUE);
+        }
+        else {
+            ret = sub_8040BB0(entity, move, FALSE);
+        }
+        sub_8040DA0(entity, move);
+    }
+    else {
+        sub_806CE68(entity, GetEntInfo(entity)->action.direction);
+    }
+
+    return ret;
+}
+
+extern u16 sub_80412E0(u16 moveId, u8 weather, u8 a2);
+extern void sub_800569C(Position *, EntitySpriteInfo *, u8);
+
+struct UnkStruct_sub_800E308_1
+{
+    s16 unk0;
+    s16 unk2;
+    Position unk4;
+    Position unk8;
+    s32 unkC;
+    s32 unk10;
+};
+
+// Maybe Position? Maybe not, sub_800E308 is called only by sub_8056564, so :shrug:
+struct UnkStruct_sub_800E308_2
+{
+    s16 u0;
+    s16 u2;
+};
+
+extern s32 sub_800E308(struct UnkStruct_sub_800E308_1 *, struct UnkStruct_sub_800E308_2 *);
+extern u8 GetBodySize(s16 index);
+extern void sub_800EF10(u16 r0);
+extern s32 sub_800E710(s16 a0, u16 a1);
+
+#ifdef NONMATCHING // https://decomp.me/scratch/fTUsI
+s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
+{
+    struct UnkStruct_sub_800E308_1 unkSp1;
+    struct UnkStruct_sub_800E308_2 unkSp2;
+    EntityInfo *entInfo = GetEntInfo(entity);
+
+    if (!gDungeon->unk181e8.blinded && (GetBodySize(entInfo->apparentID) < 4 || r4 == 1)) {
+        unkStruct_80BDBC4 *unkStruct = sub_800ECB8(sub_80412E0(move->id, GetApparentWeather(entity), 1));
+        s32 unk6 = unkStruct->unk6;
+        // This part with unkPos doesn't match
+        Position32 unkPos = {pos->x * 0x1800, pos->y * 0x1800};
+
+        unkPos.x += 0x1000;
+        unkPos.y += 0xC00;
+
+        unkSp2.u0 = unkPos.x / 256;
+        unkSp2.u2 = unkPos.y / 256;
+
+        if (unk6 != 0) {
+            s32 someRetVal;
+
+            sub_800EF10(sub_80412E0(move->id, GetApparentWeather(entity), 1));
+            sub_803E46C(0x5E);
+            someRetVal = sub_800E710(entInfo->apparentID, sub_80412E0(move->id, GetApparentWeather(entity), 1));
+            if (someRetVal != -1) {
+                sub_800569C(&unkSp1.unk8, &entity->spriteInfo, someRetVal);
+            }
+            else {
+                unkSp1.unk8 = (Position) {0};
+            }
+            unkSp1.unk0 = sub_80412E0(move->id, GetApparentWeather(entity), 1);
+            unkSp1.unk2 = entInfo->apparentID;
+            unkSp1.unk4.x = entity->pixelPos.x / 256;
+            unkSp1.unk4.y = entity->pixelPos.y / 256;
+            unkSp1.unkC = entInfo->action.direction;
+            unkSp1.unk10 = 0;
+
+            return sub_800E308(&unkSp1, &unkSp2);
+        }
+    }
+
+    return -1;
+}
+#else
+NAKED s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
+{
+    asm_unified("push {r4-r7,lr}\n"
+	"	mov r7, r9\n"
+	"	mov r6, r8\n"
+	"	push {r6,r7}\n"
+	"	sub sp, 0x18\n"
+	"	adds r6, r0, 0\n"
+	"	adds r5, r1, 0\n"
+	"	adds r7, r2, 0\n"
+	"	adds r4, r3, 0\n"
+	"	ldr r0, [r6, 0x70]\n"
+	"	mov r8, r0\n"
+	"	ldr r0, _08056680\n"
+	"	ldr r0, [r0]\n"
+	"	ldr r1, _08056684\n"
+	"	adds r0, r1\n"
+	"	ldrb r0, [r0]\n"
+	"	mov r9, r0\n"
+	"	cmp r0, 0\n"
+	"	beq _0805658C\n"
+	"	b _080566E4\n"
+	"_0805658C:\n"
+	"	mov r2, r8\n"
+	"	movs r1, 0x4\n"
+	"	ldrsh r0, [r2, r1]\n"
+	"	bl GetBodySize\n"
+	"	lsls r0, 24\n"
+	"	lsrs r0, 24\n"
+	"	cmp r0, 0x3\n"
+	"	bls _080565A4\n"
+	"	cmp r4, 0x1\n"
+	"	bne _080565A4\n"
+	"	b _080566E4\n"
+	"_080565A4:\n"
+	"	ldrh r4, [r7, 0x2]\n"
+	"	adds r0, r6, 0\n"
+	"	bl GetApparentWeather\n"
+	"	adds r1, r0, 0\n"
+	"	lsls r1, 24\n"
+	"	lsrs r1, 24\n"
+	"	adds r0, r4, 0\n"
+	"	movs r2, 0x1\n"
+	"	bl sub_80412E0\n"
+	"	lsls r0, 16\n"
+	"	lsrs r0, 16\n"
+	"	bl sub_800ECB8\n"
+	"	movs r2, 0x6\n"
+	"	ldrsh r4, [r0, r2]\n"
+	"	movs r1, 0\n"
+	"	ldrsh r0, [r5, r1]\n"
+	"	lsls r1, r0, 1\n"
+	"	adds r1, r0\n"
+	"	lsls r1, 11\n"
+	"	movs r0, 0x2\n"
+	"	ldrsh r2, [r5, r0]\n"
+	"	lsls r0, r2, 1\n"
+	"	adds r0, r2\n"
+	"	lsls r0, 11\n"
+	"	movs r2, 0x80\n"
+	"	lsls r2, 5\n"
+	"	adds r3, r0, r2\n"
+	"	movs r2, 0xC0\n"
+	"	lsls r2, 4\n"
+	"	adds r0, r1, r2\n"
+	"	cmp r0, 0\n"
+	"	bge _080565EC\n"
+	"	adds r0, 0xFF\n"
+	"_080565EC:\n"
+	"	lsls r0, 8\n"
+	"	lsrs r0, 16\n"
+	"	ldr r1, _08056688\n"
+	"	ldr r2, [sp, 0x14]\n"
+	"	ands r2, r1\n"
+	"	orrs r2, r0\n"
+	"	str r2, [sp, 0x14]\n"
+	"	adds r0, r3, 0\n"
+	"	cmp r0, 0\n"
+	"	bge _08056602\n"
+	"	adds r0, 0xFF\n"
+	"_08056602:\n"
+	"	lsls r0, 8\n"
+	"	lsrs r0, 16\n"
+	"	lsls r0, 16\n"
+	"	ldr r1, _0805668C\n"
+	"	ands r2, r1\n"
+	"	orrs r2, r0\n"
+	"	str r2, [sp, 0x14]\n"
+	"	cmp r4, 0\n"
+	"	beq _080566E4\n"
+	"	ldrh r4, [r7, 0x2]\n"
+	"	adds r0, r6, 0\n"
+	"	bl GetApparentWeather\n"
+	"	adds r1, r0, 0\n"
+	"	lsls r1, 24\n"
+	"	lsrs r1, 24\n"
+	"	adds r0, r4, 0\n"
+	"	movs r2, 0x1\n"
+	"	bl sub_80412E0\n"
+	"	lsls r0, 16\n"
+	"	lsrs r0, 16\n"
+	"	bl sub_800EF10\n"
+	"	bl sub_800EF64\n"
+	"	movs r0, 0x5E\n"
+	"	bl sub_803E46C\n"
+	"	mov r0, r8\n"
+	"	movs r1, 0x4\n"
+	"	ldrsh r5, [r0, r1]\n"
+	"	ldrh r4, [r7, 0x2]\n"
+	"	adds r0, r6, 0\n"
+	"	bl GetApparentWeather\n"
+	"	adds r1, r0, 0\n"
+	"	lsls r1, 24\n"
+	"	lsrs r1, 24\n"
+	"	adds r0, r4, 0\n"
+	"	movs r2, 0x1\n"
+	"	bl sub_80412E0\n"
+	"	adds r1, r0, 0\n"
+	"	lsls r1, 16\n"
+	"	lsrs r1, 16\n"
+	"	adds r0, r5, 0\n"
+	"	bl sub_800E710\n"
+	"	adds r2, r0, 0\n"
+	"	movs r0, 0x1\n"
+	"	negs r0, r0\n"
+	"	cmp r2, r0\n"
+	"	beq _08056690\n"
+	"	add r0, sp, 0x8\n"
+	"	adds r1, r6, 0\n"
+	"	adds r1, 0x28\n"
+	"	lsls r2, 24\n"
+	"	lsrs r2, 24\n"
+	"	bl sub_800569C\n"
+	"	b _08056694\n"
+	"	.align 2, 0\n"
+	"_08056680: .4byte gDungeon\n"
+	"_08056684: .4byte 0x0001820a\n"
+	"_08056688: .4byte 0xffff0000\n"
+	"_0805668C: .4byte 0x0000ffff\n"
+	"_08056690:\n"
+	"	mov r2, r9\n"
+	"	str r2, [sp, 0x8]\n"
+	"_08056694:\n"
+	"	ldrh r4, [r7, 0x2]\n"
+	"	adds r0, r6, 0\n"
+	"	bl GetApparentWeather\n"
+	"	adds r1, r0, 0\n"
+	"	lsls r1, 24\n"
+	"	lsrs r1, 24\n"
+	"	adds r0, r4, 0\n"
+	"	movs r2, 0x1\n"
+	"	bl sub_80412E0\n"
+	"	mov r1, sp\n"
+	"	strh r0, [r1]\n"
+	"	mov r2, r8\n"
+	"	ldrh r0, [r2, 0x4]\n"
+	"	strh r0, [r1, 0x2]\n"
+	"	ldr r0, [r6, 0xC]\n"
+	"	cmp r0, 0\n"
+	"	bge _080566BC\n"
+	"	adds r0, 0xFF\n"
+	"_080566BC:\n"
+	"	asrs r0, 8\n"
+	"	strh r0, [r1, 0x4]\n"
+	"	mov r1, sp\n"
+	"	ldr r0, [r6, 0x10]\n"
+	"	cmp r0, 0\n"
+	"	bge _080566CA\n"
+	"	adds r0, 0xFF\n"
+	"_080566CA:\n"
+	"	asrs r0, 8\n"
+	"	strh r0, [r1, 0x6]\n"
+	"	mov r0, r8\n"
+	"	adds r0, 0x46\n"
+	"	ldrb r0, [r0]\n"
+	"	str r0, [sp, 0xC]\n"
+	"	movs r0, 0\n"
+	"	str r0, [sp, 0x10]\n"
+	"	add r1, sp, 0x14\n"
+	"	mov r0, sp\n"
+	"	bl sub_800E308\n"
+	"	b _080566E8\n"
+	"_080566E4:\n"
+	"	movs r0, 0x1\n"
+	"	negs r0, r0\n"
+	"_080566E8:\n"
+	"	add sp, 0x18\n"
+	"	pop {r3,r4}\n"
+	"	mov r8, r3\n"
+	"	mov r9, r4\n"
+	"	pop {r4-r7}\n"
+	"	pop {r1}\n"
+	"	bx r1");
+}
+#endif // NONMATCHING
+
+extern s32 sub_800ED20(u16 param_1);
+
+extern const s32 gUnknown_81069D4[];
+
+extern void sub_800E3AC(s32 a0, Position *pos, s32 a2);
+extern void sub_8041168(Entity *entity, Entity *entity2, Move *,Position *);
+
+s32 sub_8056F80(s32 a0, Entity **entitiesArray, s16 target, Entity *entity1, Entity *entity2, Move *move, bool8 arg8);
+
+void sub_80566F8(Entity *entity, Move *move, s32 a2, bool8 a3, s32 itemId, s32 a5)
+{
+    Position var_68;
+    Position var_64;
+    Entity *var_60[2];
+    s32 var_4C, var_48;
+    s32 i, j;
+    s32 var_40;
+    s32 var_3C;
+    s32 var_38;
+    s32 var_34;
+    s32 var_30;
+    s32 var_2C;
+    s32 var_28, var_24;
+    s32 someCount;
+    EntityInfo *entInfo;
+    s32 unkRetVal;
+    s32 divResult;
+    s32 r9;
+
+    var_40 = 0;
+    someCount = 0;
+    entInfo = GetEntInfo(entity);
+    unkRetVal = sub_800ED20(move->id);
+    var_30 = 2;
+    if (unkRetVal != 1) {
+        var_30 = 6;
+        if (unkRetVal == 2) {
+            var_30 = 3;
+        }
+    }
+
+    var_68.x = entity->pos.x;
+    var_68.y = entity->pos.y;
+    var_4C = gAdjacentTileOffsets[entInfo->action.direction].x;
+    var_48 = gAdjacentTileOffsets[entInfo->action.direction].y;
+    for (i = 0; i < a2; i++)
+    {
+        Tile *tile;
+
+        if (var_68.x < 0 || var_68.y < 0 || var_68.x > 55 || var_68.y > 31)
+            break;
+
+        var_68.x += var_4C;
+        var_68.y += var_48;
+        someCount++;
+        tile = GetTile(var_68.x, var_68.y);
+        if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
+            break;
+        if (tile->monster != NULL && GetEntityType(tile->monster) == ENTITY_MONSTER)
+            break;
+    }
+
+    if (sub_805755C(entity, move->id) && !MoveMatchesChargingStatus(entity, move)) {
+        var_34 = -1;
+    }
+    else {
+        var_34 = sub_8056564(entity, &var_68, move, a2);
+    }
+
+    var_68.x = entity->pos.x;
+    var_68.y = entity->pos.y;
+    var_4C = gAdjacentTileOffsets[entInfo->action.direction].x;
+    var_48 = gAdjacentTileOffsets[entInfo->action.direction].y;
+    divResult = someCount * (24 / var_30);
+    if (a2 > 1) {
+        var_3C = divResult + 8;
+        if (var_3C >= 64) {
+            var_3C = 64;
+        }
+    }
+    else {
+        var_3C = 32;
+    }
+
+    r9 = 0;
+    var_2C = 0x80000 / divResult;
+    var_38 = gUnknown_81069D4[entInfo->action.direction];
+    gDungeon->unk1BDD4.unk1C05E = 1;
+
+    for (i = 0; i < a2; i++)
+    {
+        Position var_68Before;
+        Tile *tile;
+
+        if (var_68.x < 0 || var_68.y < 0 || var_68.x > 55 || var_68.y > 31)
+            break;
+
+        var_68Before = var_68;
+        var_68.x += var_4C;
+        var_68.y += var_48;
+        if (sub_803F428(&var_68) && !gDungeon->unk181e8.blinded) {
+            Position32 pos32;
+            pos32.x = (var_68Before.x * 0x1800) + 0xC00;
+            pos32.y = (var_68Before.y * 0x1800) + 0x1000;
+            var_28 = var_30 * (var_4C << 8);
+            var_24 = var_30 * (var_48 << 8);
+            for (j = 0; j < 24 / var_30; j++) {
+                if (var_34 >= 0) {
+                    s32 r3;
+                    s32 r2;
+
+                    if (a3 != 0) {
+                        r3 = sin_abs_4096(r9 / 256) * var_3C;
+                    }
+                    else {
+                        r3 = 0;
+                    }
+                    var_64.x = pos32.x / 256;
+                    var_64.y = (pos32.y - r3) / 256;
+                    r2 = pos32.y / 256;
+                    r2 -= gDungeon->unk181e8.cameraPixelPos.y;
+                    r2 /= 2;
+                    sub_800E3AC(var_34, &var_64, r2 + var_38);
+                }
+                sub_803E46C(0x30);
+                pos32.x += var_28;
+                pos32.y += var_24;
+                r9 += var_2C;
+            }
+        }
+        else {
+            r9 += (24 / var_30) * var_2C;
+        }
+
+        tile = GetTile(var_68.x, var_68.y);
+        if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
+            break;
+        if (tile->monster != NULL && GetEntityType(tile->monster) == ENTITY_MONSTER && !sub_80571F0(tile->monster, move)) {
+            if (var_40 <= 0) {
+                bool8 r4 = FALSE;
+                s32 target;
+                EntityInfo *entInfo = GetEntInfo(entity);
+                if (entInfo->volatileStatus.volatileStatus == STATUS_CONFUSED
+                    || entInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER
+                    || entInfo->volatileStatus.volatileStatus == STATUS_COWERING)
+                {
+                    r4 = TRUE;
+                }
+                target = GetMoveTargetAndRangeForPokemon(entity, move, FALSE);
+                var_40 = sub_8056F80(var_40, var_60, target, entity, tile->monster, move, r4);
+            }
+            break;
+        }
+    }
+
+    if (var_34 >= 0) {
+        sub_800DC14(var_34);
+    }
+    sub_804178C(1);
+    gDungeon->unk1BDD4.unk1C05E = 0;
+
+    if (var_40 > 0) {
+        var_60[var_40] = NULL;
+        sub_8053704(var_60, entity, move, itemId, a5);
+    }
+    else if (a2 == 1 && sub_803F428(&var_68)) {
+        sub_803E708(1, 0x4A);
+        sub_8041168(entity, NULL, move, &var_68);
+    }
 }
 
 //
