@@ -1083,8 +1083,10 @@ static void CreateMessageLogArrow(bool8 upArrow, s32 y)
 #include "constants/ability.h"
 #include "constants/status.h"
 #include "constants/weather.h"
+#include "constants/iq_skill.h"
 #include "type_chart.h"
 #include "position_util.h"
+#include "dungeon_items.h"
 #include "code_806CD90.h"
 #include "move_util.h"
 #include "code_808417C.h"
@@ -1101,6 +1103,8 @@ static void CreateMessageLogArrow(bool8 upArrow, s32 y)
 #include "dungeon_map_access.h"
 #include "math.h"
 #include "code_800DAC0.h"
+#include "text_util.h"
+#include "dungeon_visibility.h"
 
 NAKED void sub_8053704(Entity **unkArray, Entity *entity, Move *move, s32 itemId, s32 a4)
 {
@@ -1737,7 +1741,7 @@ NAKED void sub_8053704(Entity **unkArray, Entity *entity, Move *move, s32 itemId
 	"	adds r1, r5, 0\n"
 	"	mov r2, r8\n"
 	"	movs r3, 0\n"
-	"	bl sub_8056B34\n"
+	"	bl CalcIfMoveHits\n"
 	"	lsls r0, 24\n"
 	"	cmp r0, 0\n"
 	"	bne _08053C3A\n"
@@ -4513,7 +4517,7 @@ NAKED void sub_8053704(Entity **unkArray, Entity *entity, Move *move, s32 itemId
 
 s32 sub_8055640(Entity *, Entity *, Move *, s32, s32);
 s32 sub_8055728(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk);
-bool8 sub_8056B34(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 unkBool);
+static bool8 CalcIfMoveHits(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 selfAlwaysHits);
 bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg_0, struct Move *move);
 
 UNUSED bool32 sub_8055620(Entity *a0, Entity *a1, Move *a2, s32 a3)
@@ -4559,7 +4563,7 @@ s32 sub_80556BC(Entity *attacker, Entity *target, u8 moveType, Move *move, s32 r
 s32 sub_8055728(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk_)
 {
     s32 unk = unk_; // It's happening again...
-    if (sub_8056B34(attacker, target, move, ACCURACY_2, TRUE)) {
+    if (CalcIfMoveHits(attacker, target, move, ACCURACY_2, TRUE)) {
         bool32 isFalseSwipe = (move->id == MOVE_FALSE_SWIPE);
 
         if (HasAbility(target, ABILITY_ILLUMINATE)) {
@@ -5483,8 +5487,9 @@ extern const s32 gUnknown_81069D4[];
 extern void sub_800E3AC(s32 a0, Position *pos, s32 a2);
 extern void sub_8041168(Entity *entity, Entity *entity2, Move *,Position *);
 
-s32 sub_8056F80(s32 a0, Entity **entitiesArray, s16 target, Entity *entity1, Entity *entity2, Move *move, bool8 arg8);
+s32 sub_8056F80(s32 a0, Entity **entitiesArray, s32 target, Entity *entity1, Entity *entity2, Move *move, bool8 arg8);
 
+// This function looks important, but what does it do?
 void sub_80566F8(Entity *entity, Move *move, s32 a2, bool8 a3, s32 itemId, s32 a5)
 {
     Position var_68;
@@ -5645,6 +5650,207 @@ void sub_80566F8(Entity *entity, Move *move, s32 a2, bool8 a3, s32 itemId, s32 a
         sub_803E708(1, 0x4A);
         sub_8041168(entity, NULL, move, &var_68);
     }
+}
+
+extern const s32 gUnknown_80F519C;
+extern const s32 gUnknown_80F51A0;
+extern const s32 gUnknown_80F50F4[2][21];
+
+static bool8 CalcIfMoveHits(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 selfAlwaysHits)
+{
+    s32 statStageAccuracy, statStageEvasion;
+    s32 statStageMul;
+    s32 accuracy = GetMoveAccuracyOrAIChance(move, accuracyType);
+    s32 rand = DungeonRandInt(100);
+    EntityInfo *attackerInfo = GetEntInfo(attacker);
+    EntityInfo *targetInfo = GetEntInfo(target);
+
+    if (selfAlwaysHits && attacker == target)
+        return TRUE;
+    if (move->id == MOVE_REGULAR_ATTACK && IQSkillIsEnabled(attacker, IQ_SURE_HIT_ATTACKER))
+        return TRUE;
+    if (attackerInfo->moveStatus.moveStatus == STATUS_SURE_SHOT)
+        return TRUE;
+    if (attackerInfo->moveStatus.moveStatus == STATUS_WHIFFER)
+        return FALSE;
+    if (accuracy > 100)
+        return TRUE;
+
+    if (HasHeldItem(target, ITEM_DETECT_BAND)) {
+        accuracy -= gUnknown_80F519C;
+    }
+    if (IQSkillIsEnabled(target, IQ_QUICK_DODGER)) {
+        accuracy -= gUnknown_80F51A0;
+    }
+
+    statStageAccuracy = attackerInfo->hitChanceStages[0];
+    if (HasAbility(attacker, ABILITY_COMPOUNDEYES)) {
+        statStageAccuracy += 2;
+    }
+    if (move->id == MOVE_THUNDER) {
+        s32 weather = GetApparentWeather(attacker);
+        if (weather == WEATHER_RAIN) {
+            return TRUE;
+        }
+        else if (weather == WEATHER_SUNNY) {
+            statStageAccuracy -= 2;
+        }
+    }
+
+    if (statStageAccuracy < 0) statStageAccuracy = 0;
+    if (statStageAccuracy > 20) statStageAccuracy = 20;
+
+    statStageMul = gUnknown_80F50F4[0][statStageAccuracy];
+    if (statStageMul < 0) statStageMul = 0;
+    if (statStageMul > (256 * 100)) statStageMul = (256 * 100);
+
+    accuracy *= statStageMul;
+    accuracy /= 256;
+
+    statStageEvasion = targetInfo->hitChanceStages[1];
+    if (targetInfo->exposed) {
+        statStageEvasion = 10;
+    }
+    if (GetApparentWeather(target) == WEATHER_SANDSTORM && HasAbility(target, ABILITY_SAND_VEIL)) {
+        statStageEvasion += 2;
+    }
+    if (HasAbility(attacker, ABILITY_HUSTLE)) {
+        bool32 specialMove = (IsTypePhysical(GetMoveType(move)) == FALSE);
+        if (!specialMove) {
+            statStageEvasion += 2;
+        }
+    }
+
+    if (statStageEvasion < 0) statStageEvasion = 0;
+    if (statStageEvasion > 20) statStageEvasion = 20;
+
+    statStageMul = gUnknown_80F50F4[1][statStageEvasion];
+    if (statStageMul < 0) statStageMul = 0;
+    if (statStageMul > (256 * 100)) statStageMul = (256 * 100);
+
+    accuracy *= statStageMul;
+    accuracy /= 256;
+    if (rand < accuracy)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+extern Entity *sub_80696A8(Entity *a0);
+extern Entity *sub_804AD0C(Position *pos);
+extern Entity *sub_80696FC(Entity *);
+extern Entity *sub_806977C(Entity *);
+
+void sub_8056CE8(Entity **entitiesArray, Entity *entity, Move *move)
+{
+    s32 target;
+    s32 targetFlags;
+    s32 arrId = 0;
+    bool8 r10 = (GetEntInfo(entity)->volatileStatus.volatileStatus == STATUS_CONFUSED
+                    || GetEntInfo(entity)->eyesightStatus.eyesightStatus == STATUS_BLINKER
+                    || GetEntInfo(entity)->volatileStatus.volatileStatus == STATUS_COWERING);
+    bool8 var_24 = (GetEntInfo(entity)->volatileStatus.volatileStatus == STATUS_CONFUSED || GetEntInfo(entity)->volatileStatus.volatileStatus == STATUS_COWERING);
+
+    if (IQSkillIsEnabled(entity, IQ_NONTRAITOR)) {
+        var_24 = FALSE;
+        r10 = FALSE;
+    }
+    target = GetMoveTargetAndRangeForPokemon(entity, move, FALSE);
+    if ((target & 0xF) == 4) {
+        bool32 usable = MoveMatchesChargingStatus(entity, move);
+        if (move->id == MOVE_SOLARBEAM && GetApparentWeather(entity) == WEATHER_SUNNY) {
+            usable = TRUE;
+        }
+        if (usable)
+            target = 0;
+        else
+            target = 0x73;
+    }
+
+    targetFlags = target & 0xF0;
+    if (targetFlags == 0) {
+        Entity *targetEntity = sub_80696A8(entity);
+        if (targetEntity != NULL) {
+            arrId = sub_8056F80(arrId, entitiesArray, target, entity, targetEntity, move, r10);
+        }
+    }
+    else if (targetFlags == 0x10 || targetFlags == 0x20) {
+        s32 i;
+        s32 direction, to;
+        EntityInfo *entInfo = GetEntInfo(entity);
+        if (targetFlags == 0x20) {
+            direction = entInfo->action.direction;
+            to = 8;
+        }
+        else {
+            direction = entInfo->action.direction - 1;
+            to = 3;
+        }
+        for (i = 0; i < to; i++, direction++) {
+            Entity *targetEntity;
+            Position unkPositon;
+
+            direction &= DIRECTION_MASK;
+            unkPositon.x = entity->pos.x + gAdjacentTileOffsets[direction].x ;
+            unkPositon.y = entity->pos.y + gAdjacentTileOffsets[direction].y;
+            targetEntity = sub_804AD0C(&unkPositon);
+            if (targetEntity != NULL) {
+                arrId = sub_8056F80(arrId, entitiesArray, target, entity, targetEntity, move, r10);
+            }
+        }
+    }
+    else if (targetFlags == 0x30) {
+        s32 i;
+        for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
+            Entity *dungeonMon = gDungeon->allPokemon[i];
+            if (EntityExists(dungeonMon) && sub_8045A70(entity, dungeonMon)) {
+                if (dungeonMon == entity) {
+                    arrId = sub_8056F80(arrId, entitiesArray, target, entity, entity, move, var_24);
+                }
+                else {
+                    arrId = sub_8056F80(arrId, entitiesArray, target, entity, dungeonMon, move, r10);
+                }
+            }
+        }
+    }
+    else if (targetFlags == 0x40) {
+        bool32 r4 = FALSE;
+        Entity *targetEntity = sub_80696FC(entity);
+        if (targetEntity != NULL) {
+            s32 arrIdBefore = arrId;
+            arrId = sub_8056F80(arrId, entitiesArray, target, entity, targetEntity, move, r10);
+            r4 = (arrId != arrIdBefore);
+        }
+        if (!r4) {
+            targetEntity = sub_806977C(entity);
+            if (targetEntity != NULL) {
+                arrId = sub_8056F80(arrId, entitiesArray, target, entity, targetEntity, move, r10);
+            }
+        }
+    }
+    else if (targetFlags == 0x50) {
+        // Nothing happens here
+    }
+    else if (targetFlags == 0x80) {
+        Entity *targetEntity = sub_80696FC(entity);
+        if (targetEntity != NULL) {
+            arrId = sub_8056F80(arrId, entitiesArray, target, entity, targetEntity, move, r10);
+        }
+    }
+    else if (targetFlags == 0x60) {
+        s32 i;
+        for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
+            Entity *dungeonMon = gDungeon->allPokemon[i];
+            if (EntityExists(dungeonMon)) {
+                arrId = sub_8056F80(arrId, entitiesArray, target, entity, dungeonMon, move, r10);
+            }
+        }
+    }
+    else if (targetFlags == 0x70) {
+        arrId = sub_8056F80(arrId, entitiesArray, target, entity, entity, move, r10);
+    }
+
+    entitiesArray[arrId] = NULL;
 }
 
 //
