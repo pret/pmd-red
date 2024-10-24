@@ -5,6 +5,7 @@
 #include "code_802F204.h"
 #include "code_8094F88.h"
 #include "code_8097670.h"
+#include "code_8099360.h"
 #include "constants/item.h"
 #include "constants/wonder_mail.h"
 #include "event_flag.h"
@@ -40,7 +41,6 @@ static EWRAM_DATA_2 struct unkStruct_203B2C8 *sUnknown_203B2C8 = {0};
 extern void sub_80920D8(u8 *buffer);
 extern char gUnknown_202E5D8[0x50];
 extern char gAvailablePokemonNames[0x50];
-extern u8 sub_8099394(u8 *);
 extern void sub_802B548(u32);
 
 extern void sub_802B560(void);
