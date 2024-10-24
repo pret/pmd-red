@@ -3,7 +3,7 @@
 #include "memory.h"
 
 EWRAM_DATA struct HeapDescriptor *gHeapDescriptorList[8] = {0}; // 2000E88
-EWRAM_DATA u32 gHeapCount = {0}; // 2000EA8
+EWRAM_DATA s32 gHeapCount = {0}; // 2000EA8
 UNUSED static EWRAM_DATA u32 sUnused1 = {0}; // 2000EAC
 EWRAM_DATA struct HeapDescriptor gMainHeapDescriptor = {0}; // 2000EB0
 UNUSED static EWRAM_DATA u32 sUnused2 = {0}; // 2000ECC
@@ -127,7 +127,7 @@ void DoInitHeap(struct HeapDescriptor *descriptor, struct HeapSettings *settings
     freeList->grp = 0;
 }
 
-void InitSubHeap(struct HeapDescriptor *parentHeap, struct HeapMemoryBlock *block, u32 freeListMax)
+void InitSubHeap(struct HeapDescriptor *parentHeap, struct HeapMemoryBlock2 *block, u32 freeListMax)
 {
     u32 freeListSize;
     u32 aligned_size;
@@ -171,7 +171,7 @@ u8 xxx_memory_attr_related(u32 r0)
     {
         return_var = 3;
     }
-    else 
+    else
     {
         return_var = 5;
     }
