@@ -1106,6 +1106,100 @@ static void CreateMessageLogArrow(bool8 upArrow, s32 y)
 #include "text_util.h"
 #include "dungeon_visibility.h"
 
+extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
+extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, u32, u16, u32);
+extern s16 sub_8057600(Move *move, s32 itemID);
+extern void sub_803ED30(s32, Entity *r0, u8, s32);
+extern void sub_8042238(Entity *pokemon, Entity *target);
+extern void sub_806A1E8(Entity *pokemon);
+extern void sub_80574C4(Entity **a0, Entity *a1);
+extern bool8 sub_8044B28(void);
+extern void sub_804178C(u32);
+extern void sub_8071DA4(Entity *);
+extern void sub_80428A0(Entity *r0);
+extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
+extern void sub_8040DA0(Entity *entity, Move *move);
+extern u16 sub_80412E0(u16 moveId, u8 weather, u8 a2);
+extern void sub_800569C(Position *, EntitySpriteInfo *, u8);
+extern u8 GetBodySize(s16 index);
+extern void sub_800EF10(u16 r0);
+extern s32 sub_800E710(s16 a0, u16 a1);
+extern void sub_800E3AC(s32 a0, Position *pos, s32 a2);
+extern void sub_8041168(Entity *entity, Entity *entity2, Move *,Position *);
+extern Entity *sub_80696A8(Entity *a0);
+extern Entity *sub_804AD0C(Position *pos);
+extern Entity *sub_80696FC(Entity *);
+extern Entity *sub_806977C(Entity *);
+extern void sub_806F2BC(Entity *attacker, Entity *target, u8 moveType, s32 a2, struct DamageStruct *dmgStruct);
+extern void sub_806ACE8(Entity *entity, Move *move);
+extern s32 sub_8057070(Move *move);
+extern bool8 sub_805755C(Entity* pokemon,u16 param_2);
+extern s32 sub_800ED20(u16 param_1);
+
+s32 sub_8055640(Entity *, Entity *, Move *, s32, s32);
+s32 sub_8055728(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk);
+static bool8 CalcIfMoveHits(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 selfAlwaysHits);
+bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg_0, struct Move *move);
+bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **unkArray, bool32 itemId, bool8 arg_4, bool32 unused);
+bool8 sub_805744C(Entity * pokemon, Move *move, bool8 param_3);
+void sub_8056CE8(Entity **, Entity * pokemon, Move *move);
+void sub_80566F8(Entity*, Move *, s32 a2, bool8 a3, s32 a4, s32 a5);
+s32 sub_8056F80(s32 a0, Entity **entitiesArray, s32 target, Entity *entity1, Entity *entity2, Move *move, bool32 arg8);
+
+extern const s32 gUnknown_80F519C;
+extern const s32 gUnknown_80F51A0;
+extern const s32 gUnknown_80F50F4[2][21];
+extern const s32 gUnknown_81069D4[];
+extern const s32 gUnknown_81069BC[];
+extern const s16 gUnknown_80F4E70[];
+extern const s16 gUnknown_80F4E74[];
+extern const u16 gUnknown_80F5004;
+extern const u8 *const gUnknown_80FEEA4;
+extern const u8 *const gUnknown_80FEEC8;
+extern const u8 *const gUnknown_80FEEEC;
+extern const u8 *const gUnknown_80FEF0C;
+extern const u8 *const gUnknown_80FEF30;
+extern const u8 *const gUnknown_80FEF4C;
+extern const u8 *const gUnknown_80FEF50;
+extern const u8 *const gUnknown_80FEF54;
+extern const u8 *const gUnknown_80FEF74;
+extern const u8 *const gUnknown_80FEF98;
+extern const u8 *const gUnknown_80FEFD0;
+extern const u8 *const gUnknown_80FECA4;
+extern const u8 *const gUnknown_80F9158;
+extern const u8 *const gUnknown_80FC72C;
+extern const u8 *const gUnknown_80FC700;
+extern const u8 *const gUnknown_80FC6D0;
+extern const u8 *const gUnknown_80FC710;
+extern const u8 *const gUnknown_80FC6FC;
+extern const u8 *const gUnknown_80FECBC;
+extern const u8 *const gUnknown_80FECE0;
+extern const u8 *const gUnknown_80F9688;
+extern const u8 *const gUnknown_80FC714;
+extern const u8 *const gUnknown_80FC718;
+extern const u8 *const gUnknown_80FC6A8;
+extern const u8 *const gUnknown_80FD2D0;
+extern const u8 *const gUnknown_80FD2DC;
+extern const u8 *const gUnknown_80F93C8;
+extern const u8 *const gUnknown_80FC690;
+extern const u8 *const gUnknown_80FC6A4;
+
+extern u8 gFormatItems[];
+extern u8 gUnknown_202F221;
+extern u8 gUnknown_202F222;
+extern s32 gUnknown_202F208;
+extern s32 gMetronomeCalledArrayId;
+extern s32 gUnknown_202F214;
+extern s32 gUnknown_202F20C;
+extern s32 gUnknown_202F210;
+extern s32 gUnknown_202F21C;
+extern Entity *gUnknown_203B438;
+extern u8 gUnknown_202F218;
+extern u8 gUnknown_202F219;
+extern u8 gUnknown_202F21A;
+extern u8 gUnknown_202F220;
+extern u8 gUnknown_202F221;
+
 NAKED void sub_8053704(Entity **unkArray, Entity *entity, Move *move, s32 itemId, s32 a4)
 {
     asm_unified("\n"
@@ -4515,25 +4609,10 @@ NAKED void sub_8053704(Entity **unkArray, Entity *entity, Move *move, s32 itemId
 	"_0805561C: .4byte gUnknown_8106A50\n");
 }
 
-s32 sub_8055640(Entity *, Entity *, Move *, s32, s32);
-s32 sub_8055728(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk);
-static bool8 CalcIfMoveHits(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 selfAlwaysHits);
-bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg_0, struct Move *move);
-
 UNUSED bool32 sub_8055620(Entity *a0, Entity *a1, Move *a2, s32 a3)
 {
     return (sub_8055640(a0, a1, a2, 0x100, a3) != FALSE);
 }
-
-extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
-extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, u32, u16, u32);
-extern s16 sub_8057600(Move *move, s32 itemID);
-extern void sub_803ED30(s32, Entity *r0, u8, s32);
-extern void sub_8042238(Entity *pokemon, Entity *target);
-extern void sub_806A1E8(Entity *pokemon);
-extern void sub_80574C4(Entity **a0, Entity *a1);
-
-extern const u8 *const gUnknown_80F9688;
 
 s32 sub_8055640(Entity *attacker, Entity *target, Move *move, s32 r9, s32 itemId)
 {
@@ -4598,8 +4677,6 @@ s32 sub_8055728(Entity *attacker, Entity *target, Move *move, struct DamageStruc
     return dmgStruct->dmg;
 }
 
-extern void sub_806F2BC(Entity *attacker, Entity *target, u8 moveType, s32 a2, struct DamageStruct *dmgStruct);
-
 s32 sub_8055864(Entity *attacker, Entity *target, Move *move, s32 param_4, s32 itemId)
 {
     struct DamageStruct dmgStruct;
@@ -4616,8 +4693,6 @@ s32 sub_8055864(Entity *attacker, Entity *target, Move *move, s32 param_4, s32 i
     }
     return dmgStruct.dmg;
 }
-
-extern const s32 gUnknown_81069BC[];
 
 // This unused function returns FALSE if target's typing makes it immune to move's type.
 UNUSED bool32 TargetNotImmuneTo(Move *move, Entity *target)
@@ -4672,29 +4747,6 @@ void sub_80559DC(Entity *entity1, Entity *entity2)
     entInfo->action.direction = direction & DIRECTION_MASK;
     sub_806CE68(entity1, direction);
 }
-
-extern const u8 *const gUnknown_80FC714;
-extern const u8 *const gUnknown_80FC718;
-extern const u8 *const gUnknown_80FC6A8;
-extern const u8 *const gUnknown_80FD2D0;
-extern const u8 *const gUnknown_80FD2DC;
-extern const u8 *const gUnknown_80F93C8;
-extern const u8 *const gUnknown_80FC690;
-extern const u8 *const gUnknown_80FC6A4;
-
-extern const s16 gUnknown_80F4E70[];
-extern const s16 gUnknown_80F4E74[];
-
-extern u8 gFormatItems[];
-extern u8 gUnknown_202F221;
-extern u8 gUnknown_202F222;
-extern s32 gUnknown_202F208;
-
-
-extern bool8 sub_8044B28(void);
-extern void sub_804178C(u32);
-extern void sub_8071DA4(Entity *);
-extern void sub_80428A0(Entity *r0);
 
 bool32 sub_8055A00(Entity *entity, s32 firstMoveId, s32 var_34, s32 itemId, s32 arg_0)
 {
@@ -4865,28 +4917,6 @@ bool32 sub_8055A00(Entity *entity, s32 firstMoveId, s32 var_34, s32 itemId, s32 
     return TRUE;
 }
 
-extern const u16 gUnknown_80F5004;
-extern const u8 *const gUnknown_80FEEA4;
-extern const u8 *const gUnknown_80FEEC8;
-extern const u8 *const gUnknown_80FEEEC;
-extern const u8 *const gUnknown_80FEF0C;
-extern const u8 *const gUnknown_80FEF30;
-extern const u8 *const gUnknown_80FEF4C;
-extern const u8 *const gUnknown_80FEF50;
-extern const u8 *const gUnknown_80FEF54;
-extern const u8 *const gUnknown_80FEF74;
-extern const u8 *const gUnknown_80FEF98;
-extern const u8 *const gUnknown_80FEFD0;
-extern const u8 *const gUnknown_80FECA4;
-extern const u8 *const gUnknown_80F9158;
-extern const u8 *const gUnknown_80FC72C;
-extern const u8 *const gUnknown_80FC700;
-extern const u8 *const gUnknown_80FC6D0;
-extern const u8 *const gUnknown_80FC710;
-extern const u8 *const gUnknown_80FC6FC;
-extern const u8 *const gUnknown_80FECBC;
-extern const u8 *const gUnknown_80FECE0;
-
 void TriggerAbilityEffect(Entity *entity)
 {
     if (EntityExists(entity)) {
@@ -4942,29 +4972,6 @@ void TriggerAbilityEffect(Entity *entity)
         entInfo->abilityEffectFlags = 0;
     }
 }
-
-extern s32 gMetronomeCalledArrayId;
-
-extern void sub_806ACE8(Entity *entity, Move *move);
-extern s32 sub_8057070(Move *move);
-
-bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **unkArray, bool32 itemId, bool8 arg_4, bool32 unused);
-bool8 sub_805744C(Entity * pokemon, Move *move, bool8 param_3);
-void sub_8056CE8(Entity **, Entity * pokemon, Move *move);
-void sub_80566F8(Entity*, Move *, s32 a2, bool8 a3, s32 a4, s32 a5);
-
-extern s32 gUnknown_202F214;
-extern s32 gUnknown_202F20C;
-extern s32 gUnknown_202F210;
-extern s32 gUnknown_202F21C;
-extern Entity *gUnknown_203B438;
-extern u8 gUnknown_202F218;
-extern u8 gUnknown_202F219;
-extern u8 gUnknown_202F21A;
-extern u8 gUnknown_202F220;
-extern u8 gUnknown_202F221;
-
-bool8 sub_805755C(Entity* pokemon,u16 param_2);
 
 bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg_0, struct Move *move)
 {
@@ -5160,9 +5167,6 @@ bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg
     return TRUE;
 }
 
-extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
-extern void sub_8040DA0(Entity *entity, Move *move);
-
 bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **unkArray, bool32 itemId, bool8 arg_4, bool32 unused)
 {
     s32 i;
@@ -5214,9 +5218,6 @@ bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **unkArray, 
     return ret;
 }
 
-extern u16 sub_80412E0(u16 moveId, u8 weather, u8 a2);
-extern void sub_800569C(Position *, EntitySpriteInfo *, u8);
-
 struct UnkStruct_sub_800E308_1
 {
     s16 unk0;
@@ -5235,9 +5236,6 @@ struct UnkStruct_sub_800E308_2
 };
 
 extern s32 sub_800E308(struct UnkStruct_sub_800E308_1 *, struct UnkStruct_sub_800E308_2 *);
-extern u8 GetBodySize(s16 index);
-extern void sub_800EF10(u16 r0);
-extern s32 sub_800E710(s16 a0, u16 a1);
 
 #ifdef NONMATCHING // https://decomp.me/scratch/fTUsI
 s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
@@ -5480,15 +5478,6 @@ NAKED s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
 }
 #endif // NONMATCHING
 
-extern s32 sub_800ED20(u16 param_1);
-
-extern const s32 gUnknown_81069D4[];
-
-extern void sub_800E3AC(s32 a0, Position *pos, s32 a2);
-extern void sub_8041168(Entity *entity, Entity *entity2, Move *,Position *);
-
-s32 sub_8056F80(s32 a0, Entity **entitiesArray, s32 target, Entity *entity1, Entity *entity2, Move *move, bool8 arg8);
-
 // This function looks important, but what does it do?
 void sub_80566F8(Entity *entity, Move *move, s32 a2, bool8 a3, s32 itemId, s32 a5)
 {
@@ -5652,10 +5641,6 @@ void sub_80566F8(Entity *entity, Move *move, s32 a2, bool8 a3, s32 itemId, s32 a
     }
 }
 
-extern const s32 gUnknown_80F519C;
-extern const s32 gUnknown_80F51A0;
-extern const s32 gUnknown_80F50F4[2][21];
-
 static bool8 CalcIfMoveHits(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 selfAlwaysHits)
 {
     s32 statStageAccuracy, statStageEvasion;
@@ -5735,11 +5720,6 @@ static bool8 CalcIfMoveHits(Entity *attacker, Entity *target, Move *move, s32 ac
     else
         return FALSE;
 }
-
-extern Entity *sub_80696A8(Entity *a0);
-extern Entity *sub_804AD0C(Position *pos);
-extern Entity *sub_80696FC(Entity *);
-extern Entity *sub_806977C(Entity *);
 
 void sub_8056CE8(Entity **entitiesArray, Entity *entity, Move *move)
 {
@@ -5853,4 +5833,68 @@ void sub_8056CE8(Entity **entitiesArray, Entity *entity, Move *move)
     entitiesArray[arrId] = NULL;
 }
 
-//
+s32 sub_8056F80(s32 a0, Entity **entitiesArray, s32 target_, Entity *entity1, Entity *entity2, Move *move, bool32 arg8_)
+{
+    bool32 r6;
+    EntityInfo *ent2Info;
+
+    // It's happening again, all over the codebase there are problems with s16 arguments, where the lsl/asr asm can't be matched. What is going on with that?
+    s32 target = (s16)target_;
+    bool8 arg8 = arg8_;
+    r6 = FALSE;
+    ent2Info = GetEntInfo(entity2);
+
+    if (move->id == MOVE_BATON_PASS && entity1 == entity2)
+        return a0;
+    if (ent2Info->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER)
+        return a0;
+    if (ent2Info->clientType == CLIENT_TYPE_DONT_MOVE || ent2Info->clientType == CLIENT_TYPE_CLIENT)
+        return a0;
+
+    if (arg8) {
+        r6 = TRUE;
+    }
+    else {
+        s32 targetFlags = target & 0xF;
+        if (targetFlags == 0 || targetFlags == 4) {
+            if (GetTreatmentBetweenMonsters(entity1, entity2, TRUE, FALSE) == 1) {
+                r6 = TRUE;
+            }
+        }
+        else if (targetFlags == 1) {
+            if (GetTreatmentBetweenMonsters(entity1, entity2, TRUE, FALSE) == 0) {
+                r6 = TRUE;
+            }
+        }
+        else if (targetFlags == 2) {
+            r6 = TRUE;
+        }
+        else if (targetFlags == 5) {
+            if (entity1 != entity2) {
+                r6 = TRUE;
+            }
+        }
+        else if (targetFlags == 6) {
+            if (GetTreatmentBetweenMonsters(entity1, entity2, TRUE, FALSE) == 0 && entity1 != entity2) {
+                r6 = TRUE;
+            }
+        }
+        else if (targetFlags == 3) {
+            r6 = TRUE;
+        }
+    }
+
+    if (sub_80571F0(entity2, move)) {
+        r6 = FALSE;
+    }
+
+    if (r6 && a0 < 64) {
+        entitiesArray[a0] = entity2;
+        if (!GetEntInfo(entity2)->isNotTeamMember && gUnknown_203B438 == NULL) {
+            gUnknown_203B438 = entity2;
+        }
+        a0++;
+    }
+
+    return a0;
+}

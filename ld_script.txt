@@ -235,7 +235,6 @@ SECTIONS {
         src/code_804AFAC.o(.text);
         asm/code_804FD30.o(.text);
         src/dungeon_message.o(.text);
-        asm/dungeon_message.o(.text);
         src/charge_move.o(.text);
         src/move_util.o(.text);
         src/move_actions.o(.text);
