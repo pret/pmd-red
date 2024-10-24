@@ -29,7 +29,7 @@ typedef struct MakuhitaDojoWork1
     MenuItem unk18[4];
     u8 fill38[0x58 - 0x38];
     /* 0x58 */ struct MonPortraitMsg monPortrait;
-    struct MonPortraitMsg* unk68;
+    struct MonPortraitMsg *monPortraitPtr;
     UnkTextStruct2 unk6C[4];
 } MakuhitaDojoWork1;
 

@@ -90,9 +90,9 @@ bool8 MakuhitaDojo_New(u32 mode)
     }
 
     if (sMakuhitaDojoWork1->dlgMode == MAKUHITA_DOJO_MODE_ASLEEP)
-        sMakuhitaDojoWork1->unk68 = NULL;
+        sMakuhitaDojoWork1->monPortraitPtr = NULL;
     else
-        sMakuhitaDojoWork1->unk68 = &sMakuhitaDojoWork1->monPortrait;
+        sMakuhitaDojoWork1->monPortraitPtr = &sMakuhitaDojoWork1->monPortrait;
 
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_MAKUHITA);
     CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_MAKUHITA);
@@ -182,18 +182,18 @@ static void MakuhitaDojo_UpdateDialogue(void)
     switch (sMakuhitaDojoWork1->state) {
         case 0:
             MakuhitaDojo_DrawMainMenu();
-            CreateMenuDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_0], 0, sMakuhitaDojoWork1->menuAction, sMakuhitaDojoWork1->unk18, NULL, 4, 0, sMakuhitaDojoWork1->unk68, 12);
+            CreateMenuDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_0], 0, sMakuhitaDojoWork1->menuAction, sMakuhitaDojoWork1->unk18, NULL, 4, 0, sMakuhitaDojoWork1->monPortraitPtr, 12);
             break;
         case 1:
-            CreateMenuDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_1], 0, sMakuhitaDojoWork1->menuAction, sMakuhitaDojoWork1->unk18, NULL, 4, 0, sMakuhitaDojoWork1->unk68, 12);
+            CreateMenuDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_1], 0, sMakuhitaDojoWork1->menuAction, sMakuhitaDojoWork1->unk18, NULL, 4, 0, sMakuhitaDojoWork1->monPortraitPtr, 12);
             break;
         case 2:
             sMakuhitaDojoWork1->fallbackState = 13;
-            CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_2], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_2], 0, sMakuhitaDojoWork1->monPortraitPtr, 0x10D);
             break;
         case 3:
             sMakuhitaDojoWork1->fallbackState = 4;
-            CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_3], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_3], 0, sMakuhitaDojoWork1->monPortraitPtr, 0x10D);
             break;
         case 4:
             sub_80302E8(3, NULL, 10);
@@ -203,19 +203,19 @@ static void MakuhitaDojo_UpdateDialogue(void)
             dLoc.id = sub_80A2740(sMakuhitaDojoWork1->unk10);
             dLoc.floor = 1;
             PrintYellowDungeonNametoBuffer(gAvailablePokemonNames, &dLoc);
-            CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_4], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_4], 0, sMakuhitaDojoWork1->monPortraitPtr, 0x10D);
             break;
         case 7:
             sMakuhitaDojoWork1->fallbackState = 13;
-            CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_6], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_6], 0, sMakuhitaDojoWork1->monPortraitPtr, 0x10D);
             break;
         case 6:
             sMakuhitaDojoWork1->fallbackState = 13;
-            CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_5], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_5], 0, sMakuhitaDojoWork1->monPortraitPtr, 0x10D);
             break;
         case 8:
             sMakuhitaDojoWork1->fallbackState = 9;
-            CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_7], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_7], 0, sMakuhitaDojoWork1->monPortraitPtr, 0x10D);
             break;
         case 9:
             PrintColoredPokeNameToBuffer(gPlayerName, GetPlayerPokemonStruct(), COLOR_YELLOW);
@@ -225,14 +225,14 @@ static void MakuhitaDojo_UpdateDialogue(void)
             break;
         case 10:
             sMakuhitaDojoWork1->fallbackState = 13;
-            CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_8], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_8], 0, sMakuhitaDojoWork1->monPortraitPtr, 0x10D);
             break;
         case 11:
             sub_801B60C(1, ITEM_GINSENG, 1);
             break;
         case 12:
             sMakuhitaDojoWork1->fallbackState = 1;
-            CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_9], 0, sMakuhitaDojoWork1->unk68, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_9], 0, sMakuhitaDojoWork1->monPortraitPtr, 0x10D);
             break;
         case 13:
             return;

@@ -1138,7 +1138,7 @@ extern s32 sub_800ED20(u16 param_1);
 
 s32 sub_8055640(Entity *, Entity *, Move *, s32, s32);
 s32 sub_8055728(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk);
-static bool8 CalcIfMoveHits(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 selfAlwaysHits);
+static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 selfAlwaysHits);
 bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg_0, struct Move *move);
 bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **unkArray, bool32 itemId, bool8 arg_4, bool32 unused);
 bool8 sub_805744C(Entity * pokemon, Move *move, bool8 param_3);
@@ -1835,7 +1835,7 @@ NAKED void sub_8053704(Entity **unkArray, Entity *entity, Move *move, s32 itemId
 	"	adds r1, r5, 0\n"
 	"	mov r2, r8\n"
 	"	movs r3, 0\n"
-	"	bl CalcIfMoveHits\n"
+	"	bl AccuracyCalc\n"
 	"	lsls r0, 24\n"
 	"	cmp r0, 0\n"
 	"	bne _08053C3A\n"
@@ -4642,7 +4642,7 @@ s32 sub_80556BC(Entity *attacker, Entity *target, u8 moveType, Move *move, s32 r
 s32 sub_8055728(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk_)
 {
     s32 unk = unk_; // It's happening again...
-    if (CalcIfMoveHits(attacker, target, move, ACCURACY_2, TRUE)) {
+    if (AccuracyCalc(attacker, target, move, ACCURACY_2, TRUE)) { // Move hits
         bool32 isFalseSwipe = (move->id == MOVE_FALSE_SWIPE);
 
         if (HasAbility(target, ABILITY_ILLUMINATE)) {
@@ -5641,7 +5641,7 @@ void sub_80566F8(Entity *entity, Move *move, s32 a2, bool8 a3, s32 itemId, s32 a
     }
 }
 
-static bool8 CalcIfMoveHits(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 selfAlwaysHits)
+static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 selfAlwaysHits)
 {
     s32 statStageAccuracy, statStageEvasion;
     s32 statStageMul;
