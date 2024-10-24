@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8014248
-sub_8014248:
+	thumb_func_start CreateMenuDialogueBoxAndPortrait
+CreateMenuDialogueBoxAndPortrait:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -277,7 +277,7 @@ _08014480:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8014248
+	thumb_func_end CreateMenuDialogueBoxAndPortrait
 
 	thumb_func_start sub_8014490
 sub_8014490:
@@ -311,8 +311,8 @@ _080144BC: .4byte gUnknown_202EC1C
 _080144C0: .4byte gUnknown_202E744
 	thumb_func_end sub_80144A4
 
-	thumb_func_start xxx_draw_string_80144C4
-xxx_draw_string_80144C4:
+	thumb_func_start DrawDialogueBoxString
+DrawDialogueBoxString:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1018,7 +1018,7 @@ _08014A72:
 	bx r0
 	.align 2, 0
 _08014A84: .4byte gUnknown_202E744
-	thumb_func_end xxx_draw_string_80144C4
+	thumb_func_end DrawDialogueBoxString
 
 	thumb_func_start sub_8014A88
 sub_8014A88:

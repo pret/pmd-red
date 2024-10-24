@@ -204,7 +204,7 @@ s32 UpdateSaveMenu(void)
                 sUnknown_203B364->unk4 = 1;
                 break;
             case SAVE_NOT_WRTTEN:
-                xxx_info_box_80141B4(gUnknown_80E7178,0,0,0);
+                CreateDialogueBoxAndPortrait(gUnknown_80E7178,0,0,0);
                 sUnknown_203B364->unk4 = 5;
                 break;
             default:

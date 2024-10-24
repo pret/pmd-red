@@ -34,12 +34,12 @@
 #include "dungeon_pokemon_attributes.h"
 #include "code_8041AD0.h"
 #include "type_chart.h"
+#include "dungeon_message.h"
 
 extern u8 gUnknown_202F221;
 extern u8 gUnknown_202DFE8[];
 
 extern void sub_806BFC0(EntityInfo *, u32);
-extern void sub_805239C(Entity *, const u8 *);
 
 const u8 gUnknown_8106EEF[] = {0x03, 0x04, 0x05, 0x00, 0x00, 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00 };
 
@@ -259,7 +259,6 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 extern void sub_807F43C(Entity *, Entity *);
 extern void sub_8041B18(Entity *pokemon);
 extern void sub_8041B90(Entity *pokemon);
-extern void sub_80522F4(Entity *, Entity *, const u8 *);
 extern void sub_8041D00(Entity *pokemon, Entity *target);
 extern void DealDamageToEntity(Entity *, s32, u32, u32);
 extern void SetShopkeeperAggression(Entity *, Entity *);
@@ -323,7 +322,7 @@ extern const u8 *const gUnknown_80F9D28[];
 extern u8 gAvailablePokemonNames[];
 extern u32 gFormatData_202DE30;
 
-void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, s32 giveExp, s16 arg4, bool32 arg8, s32 argC)
+void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC)
 {
     bool32 r9;
     // Some compiler weirdness, because it won't match without creating arg4 again
@@ -383,7 +382,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
         if (returnDmg) {
             struct DamageStruct sp;
 
-            sub_80522F4(attacker, target, gUnknown_80FCFA4);
+            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FCFA4);
             sp.dmg = (dmgStruct->dmg * returnDmg) / 4;
             sp.type = dmgStruct->type;
             sp.residualDmgType = 6;
@@ -410,30 +409,30 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
             && !HasAbility(attacker, ABILITY_LEVITATE)
             && DungeonRandInt(100) < gUnknown_80F4E10)
         {
-            attackerInfo->unk178 |= 1;
+            attackerInfo->abilityEffectFlags |= ABILITY_FLAG_ARENA_TRAP;
         }
         if (HasAbility(target, ABILITY_SHADOW_TAG)
             && DungeonRandInt(100) < gUnknown_80F4E12)
         {
-            attackerInfo->unk178 |= 2;
+            attackerInfo->abilityEffectFlags |= ABILITY_FLAG_SHADOW_TAG;
         }
         if (HasAbility(target, ABILITY_MAGNET_PULL)
             && MonsterIsType(attacker, TYPE_STEEL)
             && DungeonRandInt(100) < gUnknown_80F4E14)
         {
-            attackerInfo->unk178 |= 4;
+            attackerInfo->abilityEffectFlags |= ABILITY_FLAG_MAGNET_PULL;
         }
 
         if (HasAbility(target, ABILITY_STATIC)
             && isPhysical
             && DungeonRandInt(100) < gUnknown_80F4E16)
         {
-            attackerInfo->unk178 |= 8;
+            attackerInfo->abilityEffectFlags |= ABILITY_FLAG_STATIC;
         }
         if (HasAbility(target, ABILITY_POISON_POINT)
             && DungeonRandInt(100) < gUnknown_80F4E18)
         {
-            attackerInfo->unk178 |= 0x20;
+            attackerInfo->abilityEffectFlags |= ABILITY_FLAG_POISON_POINT;
         }
         if (HasAbility(target, ABILITY_EFFECT_SPORE)
             && isPhysical
@@ -441,27 +440,27 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
         {
             s32 rnd = DungeonRandInt(3);
             if (rnd < 1)
-                attackerInfo->unk178 |= 0x40;
+                attackerInfo->abilityEffectFlags |= ABILITY_FLAG_EFFECT_SPORE_PSN;
             else if (rnd < 2)
-                attackerInfo->unk178 |= 0x10;
+                attackerInfo->abilityEffectFlags |= ABILITY_FLAG_EFFECT_SPORE_PRLZ;
             else
-                attackerInfo->unk178 |= 0x80;
+                attackerInfo->abilityEffectFlags |= ABILITY_FLAG_EFFECT_SPORE_SLP;
         }
         if (HasAbility(target, ABILITY_FLAME_BODY)
             && DungeonRandInt(100) < gUnknown_80F4E1C)
         {
-            attackerInfo->unk178 |= 0x100;
+            attackerInfo->abilityEffectFlags |= ABILITY_FLAG_FLAME_BODY;
         }
         if (HasAbility(target, ABILITY_CUTE_CHARM)
             && isPhysical
             && DungeonRandInt(100) < gUnknown_80F4E1E)
         {
-            attackerInfo->unk178 |= 0x200;
+            attackerInfo->abilityEffectFlags |= ABILITY_FLAG_CUTE_CHARM;
         }
         if (HasAbility(target, ABILITY_STENCH)
             && DungeonRandInt(100) < gUnknown_80F4E20)
         {
-            attackerInfo->unk178 |= 0x400;
+            attackerInfo->abilityEffectFlags |= ABILITY_FLAG_STENCH;
         }
     }
     if (!EntityExists(attacker) || !EntityExists(target))
@@ -519,14 +518,14 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 
     if (arg4 != 0x20E && HasAbility(target, ABILITY_STURDY) && dmgStruct->dmg == 9999) {
         SetMessageArgument(gUnknown_202DFE8, target, 0);
-        sub_80522F4(attacker, target, gUnknown_80FCA90);
+        TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FCA90);
         sub_8042238(attacker, target);
         dmgStruct->unkF = 1;
         return FALSE;
     }
     if (targetData->immobilize.immobilizeStatus == STATUS_FROZEN) {
         SetMessageArgument(gUnknown_202DFE8, target, 0);
-        sub_80522F4(attacker, target, gUnknown_80F9600);
+        TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9600);
         sub_8042238(attacker, target);
         dmgStruct->unkF = 1;
         return FALSE;
@@ -551,17 +550,17 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 
     if (targetData->unk152 == 0) {
         if (dmgStruct->isCrit) {
-            sub_80522F4(attacker, target, gUnknown_80F9614);
+            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9614);
         }
         switch (dmgStruct->typeEffectiveness) {
             case EFFECTIVENESS_IMMUNE:
-                sub_80522F4(attacker, target, gUnknown_80F9630);
+                TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9630);
                 break;
             case EFFECTIVENESS_RESIST:
-                sub_80522F4(attacker, target, gUnknown_80F9654);
+                TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9654);
                 break;
             case EFFECTIVENESS_SUPER:
-                sub_80522F4(attacker, target, gUnknown_80F9670);
+                TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9670);
                 break;
         }
     }
@@ -571,13 +570,13 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     if (dmgStruct->dmg == 0) {
         if (sub_8045888(attacker) && sub_8045888(target)) {
             if (targetData->unk152 == 0) {
-                sub_80522F4(attacker, target, gUnknown_80F9688);
+                TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9688);
             }
             sub_8042238(attacker, target);
         }
         else {
             if (targetData->unk152 == 0) {
-                sub_80522F4(attacker, target, gUnknown_80F9688);
+                TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9688);
             }
             sub_803E708(0x1E, 0x18);
         }
@@ -592,7 +591,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             sub_8049ED4();
         }
         if (targetData->unk152 == 0) {
-            sub_80522F4(attacker, target, gUnknown_80F96A8);
+            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F96A8);
         }
         targetData->unkA0 = 999;
     }
@@ -602,8 +601,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         gFormatData_202DE30 = dmgStruct->dmg;
         str = gUnknown_80F9764[dmgStruct->residualDmgType];
 
-        // Needed to match - the line can be safely removed
-        dmgStruct++;dmgStruct--;
+        ASM_MATCH_TRICK(dmgStruct);
 
         targetData->unkA0 += dmgStruct->dmg;
         if (targetData->unkA0 > 999)
@@ -614,12 +612,12 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 sub_803ED30(-dmgStruct->dmg, target, 1, -1);
             }
             if (targetData->unk152 == 0 && str != NULL) {
-                sub_80522F4(attacker, target, str);
+                TryDisplayDungeonLoggableMessage3(attacker, target, str);
             }
         }
         else {
             if (targetData->unk152 == 0 && str != NULL) {
-                sub_80522F4(attacker, target, str);
+                TryDisplayDungeonLoggableMessage3(attacker, target, str);
             }
         }
     }
@@ -661,12 +659,12 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     if (targetData->protection.protectionStatus == STATUS_ENDURING) {
         if (targetData->HP == 0) {
             targetData->HP = 1;
-            sub_80522F4(attacker, target, gUnknown_8100548);
+            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_8100548);
         }
     }
     else if (isFalseSwipe == TRUE && targetData->HP == 0) {
         targetData->HP = 1;
-        sub_80522F4(attacker, target, gUnknown_810056C);
+        TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_810056C);
     }
 
     hpChange = hpBefore - targetData->HP;
@@ -718,42 +716,42 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     SetMessageArgument(gAvailablePokemonNames + 0x50, target, 0);
     if (dmgStruct->residualDmgType == 19 || dmgStruct->residualDmgType == 20) {
         if (targetData->isNotTeamMember) {
-            sub_80522F4(attacker, target, gUnknown_80F9E44);
+            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9E44);
         }
         else {
-            sub_805239C(attacker, gUnknown_80F9E44);
+            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9E44);
         }
     }
     else if (targetData->isNotTeamMember)
     {
         if (targetData->clientType == CLIENT_TYPE_CLIENT) {
-            sub_805239C(attacker, gUnknown_80F9DF0[r8]);
+            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DF0[r8]);
         }
         else {
-            sub_80522F4(attacker, target, gUnknown_80F9CC0[r8]);
+            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9CC0[r8]);
         }
     }
     else {
         PokemonStruct2 *recruitedMon = &gRecruitedPokemonRef->pokemon2[targetData->teamIndex];
         if (targetData->isTeamLeader || (targetData->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER && gDungeon->unk65C == 0)) {
-            sub_805239C(attacker, gUnknown_80F9CEC[r8]);
+            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9CEC[r8]);
         }
         else if (IsClientOrTeamBase(targetData->joinedAt.joinedAt)) {
-            sub_805239C(attacker, gUnknown_80F9DAC[r8]);
+            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DAC[r8]);
         }
         else if (targetData->clientType == CLIENT_TYPE_CLIENT) {
-            sub_805239C(attacker, gUnknown_80F9DF0[r8]);
+            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DF0[r8]);
         }
         else if (sub_806A58C(recruitedMon->unkA)) {
             if (gDungeon->unk65D != 0) {
-                sub_805239C(attacker, gUnknown_80F9D8C[r8]);
+                DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9D8C[r8]);
             }
             else {
-                sub_805239C(attacker, gUnknown_80F9D84[r8]);
+                DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9D84[r8]);
             }
         }
         else {
-            sub_805239C(attacker, gUnknown_80F9D28[r8]);
+            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9D28[r8]);
         }
     }
 
@@ -791,7 +789,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 sub_806CCB4(target, sub_806CEBC(target));
                 EntityUpdateStatusSprites(target);
                 SetMessageArgument(gUnknown_202DFE8, target, 0);
-                sub_805239C(attacker, gUnknown_80FD46C);
+                DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD46C);
                 sub_806F63C(target);
                 return FALSE;
             }
@@ -849,7 +847,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 EntityUpdateStatusSprites(target);
                 SetMessageArgument(gAvailablePokemonNames, target, 0);
                 SetMessageArgument(gAvailablePokemonNames + 0x50, teamMember, 0);
-                sub_805239C(attacker, gUnknown_80FD484);
+                DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD484);
                 sub_806F63C(target);
                 return FALSE;
             }
@@ -902,7 +900,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             sub_806CCB4(target, sub_806CEBC(target));
             EntityUpdateStatusSprites(target);
             SetMessageArgument(gUnknown_202DFE8, target, 0);
-            sub_805239C(attacker, gUnknown_80FD46C);
+            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD46C);
             sub_806F63C(target);
             return FALSE;
         }

@@ -22,7 +22,6 @@ extern u8 sub_8044B28(void);
 extern u8 gUnknown_202E038[];
 extern void sub_8085374();
 extern void sub_8068FE0(Entity *, u32, u32);
-extern void DisplayDungeonDialogue(const u8 *);
 extern void sub_8086448(void);
 extern void SkarmoryEntry(Entity *);
 extern void sub_8086A54(Entity *);
@@ -34,33 +33,33 @@ extern const u8 gUnknown_810739C[];
 extern const u8 gUnknown_81073D4[];
 extern const u8 gUnknown_810740C[];
 extern const s16 gUnknown_80F57CC;
-extern const u8 gUnknown_8101440[];
-extern const u8 gSkarmoryPreFightDialogue_1[];
-extern const u8 gSkarmoryPreFightDialogue_2[];
-extern const u8 gSkarmoryPreFightDialogue_3[];
-extern const u8 gSkarmoryPreFightDialogue_4[];
-extern const u8 gSkarmoryPreFightDialogue_5[];
-extern const u8 gSkarmoryPreFightDialogue_6[];
-extern const u8 gSkarmoryPreFightDialogue_7[];
-extern const u8 gSkarmoryPreFightDialogue_8[];
-extern const u8 gSkarmoryPreFightDialogue_9[];
-extern const u8 gSkarmoryReFightDialogue_1[];
-extern const u8 gSkarmoryReFightDialogue_2[];
-extern const u8 gSkarmoryReFightDialogue_3[];
-extern const u8 gTeamMeaniesPreFightDialogue_1[];
-extern const u8 gTeamMeaniesPreFightDialogue_2[];
-extern const u8 gTeamMeaniesPreFightDialogue_3[];
-extern const u8 gTeamMeaniesPreFightDialogue_4[];
-extern const u8 gTeamMeaniesPreFightDialogue_5[];
-extern const u8 gTeamMeaniesPreFightDialogue_6[];
-extern const u8 gTeamMeaniesPreFightDialogue_7[];
-extern const u8 gTeamMeaniesReFightDialogue_1[];
-extern const u8 gTeamMeaniesReFightDialogue_2[];
-extern const u8 gTeamMeaniesReFightDialogue_3[];
-extern const u8 gTeamMeaniesReFightDialogue_4[];
-extern const u8 gTeamMeaniesReFightDialogue_5[];
+extern const struct DungeonDialogueStruct gUnknown_8101440;
+extern const struct DungeonDialogueStruct gSkarmoryPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gSkarmoryPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gSkarmoryPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gSkarmoryPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gSkarmoryPreFightDialogue_5;
+extern const struct DungeonDialogueStruct gSkarmoryPreFightDialogue_6;
+extern const struct DungeonDialogueStruct gSkarmoryPreFightDialogue_7;
+extern const struct DungeonDialogueStruct gSkarmoryPreFightDialogue_8;
+extern const struct DungeonDialogueStruct gSkarmoryPreFightDialogue_9;
+extern const struct DungeonDialogueStruct gSkarmoryReFightDialogue_1;
+extern const struct DungeonDialogueStruct gSkarmoryReFightDialogue_2;
+extern const struct DungeonDialogueStruct gSkarmoryReFightDialogue_3;
+extern const struct DungeonDialogueStruct gTeamMeaniesPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gTeamMeaniesPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gTeamMeaniesPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gTeamMeaniesPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gTeamMeaniesPreFightDialogue_5;
+extern const struct DungeonDialogueStruct gTeamMeaniesPreFightDialogue_6;
+extern const struct DungeonDialogueStruct gTeamMeaniesPreFightDialogue_7;
+extern const struct DungeonDialogueStruct gTeamMeaniesReFightDialogue_1;
+extern const struct DungeonDialogueStruct gTeamMeaniesReFightDialogue_2;
+extern const struct DungeonDialogueStruct gTeamMeaniesReFightDialogue_3;
+extern const struct DungeonDialogueStruct gTeamMeaniesReFightDialogue_4;
+extern const struct DungeonDialogueStruct gTeamMeaniesReFightDialogue_5;
 
-extern const u8 gUnknown_8100D3C[];
+extern const struct DungeonDialogueStruct gUnknown_8100D3C;
 
 void sub_8086A3C(Entity *pokemon)
 {
@@ -184,33 +183,33 @@ void SkarmoryPreFightDialogue(void)
   SpriteShockEffect(PartnerEntity);
   sub_803E708(0x20,0x46);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(gSkarmoryPreFightDialogue_1);
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_1);
   ShiftCameraToPosition(&pos1,0x40);
   sub_803E708(0x40,0x46);
   ShiftCameraToPosition(&pos2,0x30);
-  DisplayDungeonDialogue(gSkarmoryPreFightDialogue_2);
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_2);
   sub_803E708(10,0x46);
   DiglettEntity->info->unk15D = 1;
   ShiftCameraToPosition(&pos1,0x30);
-  DisplayDungeonDialogue(gSkarmoryPreFightDialogue_3); // Diglett: ...I...\nI'm scared.
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_3); // Diglett: ...I...\nI'm scared.
   sub_803E708(10,0x46);
   ShiftCameraToPosition(&pos2,0x20);
   sub_803E708(0x20,0x46);
   SkarmoryEntry(SkarmoryEntity);
-  DisplayDungeonDialogue(gSkarmoryPreFightDialogue_4); // Skarmory: You!\nWhat do you think you're doing here?!
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_4); // Skarmory: You!\nWhat do you think you're doing here?!
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(gSkarmoryPreFightDialogue_5);
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_5);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(gSkarmoryPreFightDialogue_6);
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_6);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(gSkarmoryPreFightDialogue_7);
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_7);
   sub_803E708(10,0x46);
   sub_806CDD4(SkarmoryEntity,0xd,0);
-  DisplayDungeonDialogue(gSkarmoryPreFightDialogue_8);
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_8);
   sub_803E708(10,0x46);
   sub_80869E4(PartnerEntity,4,1,2);
   sub_80869E4(LeaderEntity,4,2,6);
-  DisplayDungeonDialogue(gSkarmoryPreFightDialogue_9);
+  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_9);
   sub_80869E4(PartnerEntity,4,2,4);
   sub_80869E4(LeaderEntity,4,1,4);
   sub_803E708(10,0x46);
@@ -232,12 +231,12 @@ void SkarmoryReFightDialogue(void)
   sub_803E708(10,0x46);
   SkarmoryEntry(SkarmoryEntity);
   ShiftCameraToPosition(&pos,0x10);
-  DisplayDungeonDialogue(gSkarmoryReFightDialogue_1);
+  DisplayDungeonDialogue(&gSkarmoryReFightDialogue_1);
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(gSkarmoryReFightDialogue_2);
+  DisplayDungeonDialogue(&gSkarmoryReFightDialogue_2);
   sub_803E708(10,0x46);
   sub_806CDD4(SkarmoryEntity,0xd,0);
-  DisplayDungeonDialogue(gSkarmoryReFightDialogue_3);
+  DisplayDungeonDialogue(&gSkarmoryReFightDialogue_3);
   sub_803E708(10,0x46);
   ShiftCameraToPosition(&LeaderEntity->pixelPos,0x10);
   DungeonStartNewBGM(MUS_BOSS_BATTLE);
@@ -247,7 +246,7 @@ void sub_8086E40(void)
 {
   SpriteLookAroundEffect(xxx_call_GetLeader());
   sub_803E708(10,0x46);
-  DisplayDungeonDialogue(gUnknown_8100D3C);
+  DisplayDungeonDialogue(&gUnknown_8100D3C);
   sub_803E708(10,0x46);
   gDungeon->unk2 = 1;
 }
@@ -328,21 +327,21 @@ void TeamMeaniesPreFightDialogue(void)
     LeaderEntity = xxx_call_GetLeader();
     sub_8086448();
     sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(gTeamMeaniesPreFightDialogue_1);
+    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_1);
     sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(gTeamMeaniesPreFightDialogue_2);
+    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_2);
     sub_803E708(10, 0x46);
     sub_8087144();
     DungeonStartNewBGM(MUS_THERES_TROUBLE);
-    DisplayDungeonDialogue(gTeamMeaniesPreFightDialogue_3);
+    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_3);
     sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(gTeamMeaniesPreFightDialogue_4);
+    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_4);
     sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(gTeamMeaniesPreFightDialogue_5);
+    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_5);
     sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(gTeamMeaniesPreFightDialogue_6);
+    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_6);
     sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(gTeamMeaniesPreFightDialogue_7);
+    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_7);
     sub_803E708(10, 0x46);
     ShiftCameraToPosition(&LeaderEntity->pixelPos, 0x10);
 }
@@ -355,15 +354,15 @@ void TeamMeaniesReFightDialogue(void)
     LeaderEntity = xxx_call_GetLeader();
     PartnerEntity = GetPartnerEntity();
     sub_8086448();
-    DisplayDungeonDialogue(gTeamMeaniesReFightDialogue_1);
+    DisplayDungeonDialogue(&gTeamMeaniesReFightDialogue_1);
     sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(gTeamMeaniesPreFightDialogue_2);
+    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_2);
     sub_803E708(10, 0x46);
     sub_8087144();
     sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(gTeamMeaniesReFightDialogue_2);
+    DisplayDungeonDialogue(&gTeamMeaniesReFightDialogue_2);
     sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(gTeamMeaniesReFightDialogue_3);
+    DisplayDungeonDialogue(&gTeamMeaniesReFightDialogue_3);
     sub_803E708(10, 0x46);
     sub_806CDD4(LeaderEntity, 6, 4);
     sub_806CDD4(PartnerEntity, 6, 4);
@@ -371,8 +370,8 @@ void TeamMeaniesReFightDialogue(void)
     sub_806CDD4(LeaderEntity, 7, 4);
     sub_806CDD4(PartnerEntity, 7, 4);
     sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(gTeamMeaniesReFightDialogue_4);
-    DisplayDungeonDialogue(gTeamMeaniesReFightDialogue_5);
+    DisplayDungeonDialogue(&gTeamMeaniesReFightDialogue_4);
+    DisplayDungeonDialogue(&gTeamMeaniesReFightDialogue_5);
     sub_803E708(10, 0x46);
     ShiftCameraToPosition(&LeaderEntity->pixelPos, 0x10);
 }
@@ -380,7 +379,7 @@ void TeamMeaniesReFightDialogue(void)
 void sub_8087130(void)
 {
     sub_8086448();
-    sub_80866C4(gUnknown_8101440);
+    sub_80866C4(&gUnknown_8101440);
 }
 
 void sub_8087144(void)

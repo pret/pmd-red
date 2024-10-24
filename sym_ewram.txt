@@ -430,7 +430,7 @@ gUnknown_202F222: /* 202F222 (sub_8053704 - sub_8072CF4) */
 	.space 0x2
 gUnknown_202F224: /* 202F224 (sub_8040DA0 - sub_805B264) */
 	.space 0x4
-gUnknown_202F228: /* 202F228 (sub_8055FA0 - sub_805B618) */
+gMetronomeCalledArrayId: /* 202F228 (sub_8055FA0 - sub_805B618) */
 	.space 0x4
 
     .include "src/code_805D8C8_1.o"

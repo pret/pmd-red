@@ -179,7 +179,7 @@ void GameLoop(void)
 
 void xxx_update_stuff(u32 r0)
 {
-    xxx_draw_string_80144C4();
+    DrawDialogueBoxString();
     sub_8005838(NULL, 0);
     nullsub_8(gGameOptionsRef->unkA);
     sub_8005180();

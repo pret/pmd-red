@@ -10,6 +10,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
+#include "dungeon_message.h"
 #include "dungeon_util.h"
 #include "game_options.h"
 #include "move_effects_target.h"
@@ -35,7 +36,6 @@ extern u8 *gUnknown_80FCC7C[];
 extern u8 *gUnknown_80FCCAC[];
 extern u8 *gUnknown_80FDCC8[];
 
-void sub_80522F4(Entity *r0, Entity *r1, const char r2[]);
 extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);
 extern void sub_806ABAC(Entity *, Entity *);
@@ -174,7 +174,7 @@ void sub_8069F9C(Entity *pokemon,Entity * target,Move *move)
       iVar6->abilities[abilityIndex] = local_20[randomIndex];
       gDungeon->unkC = 1;
       SetMessageArgument(gAvailablePokemonNames,target,0);
-      sub_80522F4(pokemon,target,*gUnknown_80FCC7C);
+      TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCC7C);
       sub_8042900(target);
       sub_806ABAC(pokemon,target);
     }
@@ -194,7 +194,7 @@ _0806A068:
         SetMessageArgument(gAvailablePokemonNames,target,0);
         __src = GetUnformattedTypeString(iVar6->types[0]);
         strcpy(gFormatItems,__src);
-        sub_80522F4(pokemon,target,*gUnknown_80FCCAC);
+        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCCAC);
         sub_8042968(target);
       }
     }
@@ -219,7 +219,7 @@ void sub_806A120(Entity * pokemon, Entity * target, Move* move)
       SetMessageArgument(gAvailablePokemonNames,target,0);
       typeString = GetUnformattedTypeString(uVar2_u32);
       strcpy(gFormatItems,typeString);
-      sub_80522F4(pokemon,target,*gUnknown_80FDCC8);
+      TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FDCC8);
     }
   }
 }

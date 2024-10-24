@@ -499,14 +499,14 @@ void sub_8036B28(void)
   switch(sTradeItemsMenu->currMenu) {
     case TRADE_ITEMS_MAIN_MENU:
         if (sub_801CF14(0)) {
-            sub_8014248(sWhatDoPrompt,0,1,sUnknown_80E60D4,0,4,0,0,0x101);
+            CreateMenuDialogueBoxAndPortrait(sWhatDoPrompt,0,1,sUnknown_80E60D4,0,4,0,0,0x101);
         }
         else {
-            sub_8014248(sWhatDoPrompt,0,1,sUnknown_80E60A0,0,4,0,0,0x101);
+            CreateMenuDialogueBoxAndPortrait(sWhatDoPrompt,0,1,sUnknown_80E60A0,0,4,0,0,0x101);
         }
         break;
     case TRADE_ITEMS_SEND_ITEM:
-        xxx_info_box_80141B4(sPleaseChooseItem,0,0,0x101);
+        CreateDialogueBoxAndPortrait(sPleaseChooseItem,0,0,0x101);
         break;
     case TRADE_ITEMS_SEND_ITEM_SELECTION:
         if (sub_801D008() == NULL) {
@@ -531,17 +531,17 @@ void sub_8036B28(void)
     case TRADE_ITEMS_SEND_ITEM_CONFIRM:
         gFormatData_202DE30 = sTradeItemsMenu->unk14.unk0;
         BufferItemName(gFormatItems,sTradeItemsMenu->itemToSend.id,NULL);
-        sub_8014248(sFmtWillBeSentPrompt,0,5, sUnknown_80E6154,0,4,0,0,0x101);
+        CreateMenuDialogueBoxAndPortrait(sFmtWillBeSentPrompt,0,5, sUnknown_80E6154,0,4,0,0,0x101);
         break;
     case TRADE_ITEMS_RECEIVE_ITEM:
-        sub_8014248(sFriendWillSendAnItem,0,5,sUnknown_80E618C,0,4,0,0,0x101);
+        CreateMenuDialogueBoxAndPortrait(sFriendWillSendAnItem,0,5,sUnknown_80E618C,0,4,0,0,0x101);
         break;
     case 8:
-        sub_8014248(sPreparingToSendItem,0,5,sUnknown_80E618C,0,4,0,0,0x101);
+        CreateMenuDialogueBoxAndPortrait(sPreparingToSendItem,0,5,sUnknown_80E618C,0,4,0,0,0x101);
         break;
     case TRADE_ITEMS_IN_COMMUNICATION:
         nullsub_23(FALSE);
-        xxx_info_box_80141B4(sInCommunication,0,0,0);
+        CreateDialogueBoxAndPortrait(sInCommunication,0,0,0);
         break;
     case 10:
         sTradeItemsMenu->linkStatus = COMMS_GOOD;
@@ -595,12 +595,12 @@ void sub_8036B28(void)
             gFormatData_202DE30 = sTradeItemsMenu->unk24C.quantity;
             BufferItemName(gFormatItems,sTradeItemsMenu->unk24C.itemIdx.id,NULL);
         }
-        xxx_info_box_80141B4(sFmtYouReceived,0,0,0x101);
+        CreateDialogueBoxAndPortrait(sFmtYouReceived,0,0,0x101);
         break;
     case 0xd:
         gFormatData_202DE30 = sTradeItemsMenu->unk14.unk0;
         BufferItemName(gFormatItems,sTradeItemsMenu->itemToSend.id,NULL);
-        xxx_info_box_80141B4(sFmtYouSent,0,0,0x101);
+        CreateDialogueBoxAndPortrait(sFmtYouSent,0,0,0x101);
         break;
     case 0xB:
     case 0xC:
@@ -619,28 +619,28 @@ void PrintTradeItemsLinkError(u32 errorNum)
     case COMMS_GOOD:
         break;
     case 1:
-        xxx_info_box_80141B4(sCommunicationError, 0, 0, 0x101);
+        CreateDialogueBoxAndPortrait(sCommunicationError, 0, 0, 0x101);
         break;
     case COMMS_INCORRECT_NUM_SYSTEMS:
-        xxx_info_box_80141B4(sInvalidGBACount, 0, 0, 0x101);
+        CreateDialogueBoxAndPortrait(sInvalidGBACount, 0, 0, 0x101);
         break;
     case COMMS_NO_RESPONSE:
-        xxx_info_box_80141B4(sNoResponseSoRedo, 0, 0, 0x101);
+        CreateDialogueBoxAndPortrait(sNoResponseSoRedo, 0, 0, 0x101);
         break;
     case COMMS_DIFFERENT_MODES:
-        xxx_info_box_80141B4(sUnequalModes, 0, 0, 0x101);
+        CreateDialogueBoxAndPortrait(sUnequalModes, 0, 0, 0x101);
         break;
     case 5:
-        xxx_info_box_80141B4(sCommunicationError, 0, 0, 0x101);
+        CreateDialogueBoxAndPortrait(sCommunicationError, 0, 0, 0x101);
         break;
     case 0xe:
-        xxx_info_box_80141B4(sCommunicationError, 0, 0, 0x101);
+        CreateDialogueBoxAndPortrait(sCommunicationError, 0, 0, 0x101);
         break;
     case COMMS_NOT_READY:
-        xxx_info_box_80141B4(sNoResponseCheckSenderReceiver, 0, 0, 0x101);
+        CreateDialogueBoxAndPortrait(sNoResponseCheckSenderReceiver, 0, 0, 0x101);
         break;
     default:
-        xxx_info_box_80141B4(sCommunicationError, 0, 0, 0x101);
+        CreateDialogueBoxAndPortrait(sCommunicationError, 0, 0, 0x101);
         break;
   }
 }

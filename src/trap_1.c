@@ -469,7 +469,7 @@ void SaveEntity(unkStruct_8094924 *param_1, Entity *param_2)
     sub_8083060(param_1,info->turnsSinceWarpScarfActivation);
     SavePosition(param_1,&(info->targetPos));
     sub_80830A0(param_1,info->unk174);
-    sub_8083030(param_1,info->unk178);
+    sub_8083030(param_1,info->abilityEffectFlags);
     sub_8083048(param_1,info->unk1F8);
     sub_8083048(param_1,info->mobileTurnTimer);
     sub_8083078(param_1,info->expGainedInTurn);

@@ -45,20 +45,20 @@ bool8 CreateGulpinShop(u32 mode, s16 pokeSpecies, Move *moves)
     sGulpinShopWork->unk1C = moves[4].id; // 5th move..?
 
     if (mode == GULPIN_SHOP_MODE_AWAKE)
-        sGulpinShopWork->unk128 = &sGulpinShopWork->faceFile;
+        sGulpinShopWork->monPortraitPtr = &sGulpinShopWork->monPortrait;
     else
-        sGulpinShopWork->unk128 = NULL;
+        sGulpinShopWork->monPortraitPtr = NULL;
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
-    sGulpinShopWork->faceFile = faceFile;
-    sGulpinShopWork->faceData = faceFile->data;
+    sGulpinShopWork->monPortrait.faceFile = faceFile;
+    sGulpinShopWork->monPortrait.faceData = faceFile->data;
 
-    sGulpinShopWork->unk124 = 0;
-    sGulpinShopWork->unk125 = 0;
-    sGulpinShopWork->unk126 = 0;
+    sGulpinShopWork->monPortrait.spriteId = 0;
+    sGulpinShopWork->monPortrait.flip = FALSE;
+    sGulpinShopWork->monPortrait.unkE = 0;
 
-    sGulpinShopWork->unk120 = 2;
-    sGulpinShopWork->unk122 = 8;
+    sGulpinShopWork->monPortrait.pos.x = 2;
+    sGulpinShopWork->monPortrait.pos.y = 8;
     SetGulpinShopState(0);
     return TRUE;
 }
@@ -97,7 +97,7 @@ bool8 GulpinIsNextMoveLinked(void)
 void DestroyGulpinShop(void)
 {
     if (sGulpinShopWork != NULL) {
-        CloseFile(sGulpinShopWork->faceFile);
+        CloseFile(sGulpinShopWork->monPortrait.faceFile);
         MemoryFree(sGulpinShopWork);
         sGulpinShopWork = NULL;
     }
@@ -160,15 +160,15 @@ static void sub_801EA28(void)
                 case GULPIN_SHOP_MODE_AWAKE:
                 case GULPIN_SHOP_MODE_ASLEEP:
                     if (sGulpinShopWork->isNextMoveLinked)
-                        sub_8014248(gCommonGulpin[sGulpinShopWork->mode][GULPIN_DLG_12], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
+                        CreateMenuDialogueBoxAndPortrait(gCommonGulpin[sGulpinShopWork->mode][GULPIN_DLG_12], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->monPortraitPtr, 12);
                     else
-                        sub_8014248(gCommonGulpin[sGulpinShopWork->mode][GULPIN_DLG_11], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->unk128, 12);
+                        CreateMenuDialogueBoxAndPortrait(gCommonGulpin[sGulpinShopWork->mode][GULPIN_DLG_11], 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, sGulpinShopWork->monPortraitPtr, 12);
                     break;
                 case GULPIN_SHOP_MODE_UNK2:
                     if (sGulpinShopWork->isNextMoveLinked)
-                        sub_8014248(sForgetMoveAndLinkedOnes, 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, NULL, 32);
+                        CreateMenuDialogueBoxAndPortrait(sForgetMoveAndLinkedOnes, 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, NULL, 32);
                     else
-                        sub_8014248(sForgetMoveOnly, 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, NULL, 32);
+                        CreateMenuDialogueBoxAndPortrait(sForgetMoveOnly, 0, 5, &sGulpinShopWork->unk28[0], &sGulpinShopWork->unk68, 4, 0, NULL, 32);
                     break;
             }
             break;
@@ -180,15 +180,15 @@ static void sub_801EBC4(void)
     s32 which;
     s32 i;
     which = 0;
-    
+
     MemoryFill16(sGulpinShopWork->unk68, 0, sizeof(sGulpinShopWork->unk68));
-    
+
     sGulpinShopWork->unk28[which].text = sForget;
     sGulpinShopWork->unk28[which].menuAction = 2;
-    
+
     if (!IsAnyMoveLinked(sGulpinShopWork->unk1E, sGulpinShopWork->moves) || (s32)sGulpinShopWork->unk20 >= 4)
         sGulpinShopWork->unk68[0] = 1;
-    
+
     which++;
     sGulpinShopWork->unk28[which].text = gCommonInfo[0];
     sGulpinShopWork->unk28[which].menuAction = 3;
@@ -216,7 +216,7 @@ static void sub_801EC7C(void)
 {
     s32 which;
     which = 0;
-    
+
     MemoryFill16(sGulpinShopWork->unk68, 0, sizeof(sGulpinShopWork->unk68));
     sGulpinShopWork->unk28[which].text = gCommonYes[0];
     sGulpinShopWork->unk28[which].menuAction = 4;

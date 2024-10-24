@@ -59,10 +59,10 @@ void sub_80993E4(void) {
     and is very long. I didn't want to split up the
     file or spend time decomping so here it is in
     asm();
-*/ 
+*/
 void sub_8099648(void);
 
-NAKED void sub_80993F0(void) 
+NAKED void sub_80993F0(void)
 {
     asm_unified("	.text\n"
 "	push {r4-r7,lr}\n"
@@ -272,7 +272,7 @@ NAKED void sub_80993F0(void)
 "_080995AE:\n"
 "	bl sub_809D25C\n"
 "	bl sub_80A59DC\n"
-"	bl xxx_draw_string_80144C4\n"
+"	bl DrawDialogueBoxString\n"
 "	movs r0, 0\n"
 "	movs r1, 0\n"
 "	bl sub_8005838\n"

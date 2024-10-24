@@ -3,7 +3,7 @@
 
 #include "charge_move.h"
 #include "code_8045A00.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "code_8077274_1.h"
 #include "constants/direction.h"
 #include "constants/dungeon_action.h"
@@ -40,13 +40,13 @@ bool8 HasStatusAffectingActions(Entity *pokemon)
     switch (pokemonInfo->immobilize.immobilizeStatus)
     {
         case STATUS_FROZEN:
-            SendMessage(pokemon, *gPtrFrozenMessage);
+            TryDisplayDungeonLoggableMessage(pokemon, *gPtrFrozenMessage);
             return TRUE;
         case STATUS_WRAP:
-            SendMessage(pokemon, *gPtrWrappedAroundMessage);
+            TryDisplayDungeonLoggableMessage(pokemon, *gPtrWrappedAroundMessage);
             return TRUE;
         case STATUS_WRAPPED:
-            SendMessage(pokemon, *gPtrWrappedByMessage);
+            TryDisplayDungeonLoggableMessage(pokemon, *gPtrWrappedByMessage);
             return TRUE;
         case STATUS_PETRIFIED:
             return TRUE;
@@ -54,15 +54,15 @@ bool8 HasStatusAffectingActions(Entity *pokemon)
     switch (pokemonInfo->volatileStatus.volatileStatus)
     {
         case STATUS_PAUSED:
-            SendMessage(pokemon, *gPtrPausedMessage);
+            TryDisplayDungeonLoggableMessage(pokemon, *gPtrPausedMessage);
             return TRUE;
         case STATUS_INFATUATED:
-            SendMessage(pokemon, *gPtrInfatuatedMessage);
+            TryDisplayDungeonLoggableMessage(pokemon, *gPtrInfatuatedMessage);
             return TRUE;
     }
     if (pokemonInfo->charging.chargingStatus == STATUS_BIDE)
     {
-        SendMessage(pokemon, *gPtrBideMessage);
+        TryDisplayDungeonLoggableMessage(pokemon, *gPtrBideMessage);
         return TRUE;
     }
     if (pokemonInfo->waitingStruct.waitingStatus == STATUS_DECOY)
@@ -125,20 +125,20 @@ bool8 sub_80701A4(Entity *pokemon)
       case STATUS_SLEEP:
       case STATUS_NIGHTMARE:
       case STATUS_NAPPING:
-          SendMessage(pokemon,*gUnknown_80F95EC);
+          TryDisplayDungeonLoggableMessage(pokemon,*gUnknown_80F95EC);
           return TRUE;
   }
 
   switch(pokemonInfo->immobilize.immobilizeStatus)
   {
     case STATUS_FROZEN:
-        SendMessage(pokemon,*gPtrFrozenMessage);
+        TryDisplayDungeonLoggableMessage(pokemon,*gPtrFrozenMessage);
         return TRUE;
     case STATUS_WRAP:
-        SendMessage(pokemon,*gPtrWrappedAroundMessage);
+        TryDisplayDungeonLoggableMessage(pokemon,*gPtrWrappedAroundMessage);
         return TRUE;
     case STATUS_WRAPPED:
-        SendMessage(pokemon,*gPtrWrappedByMessage);
+        TryDisplayDungeonLoggableMessage(pokemon,*gPtrWrappedByMessage);
         return TRUE;
     case STATUS_PETRIFIED:
         return TRUE;
@@ -149,10 +149,10 @@ bool8 sub_80701A4(Entity *pokemon)
         flag = TRUE;
         goto _0807026C;
     case STATUS_PAUSED:
-        SendMessage(pokemon,*gPtrPausedMessage);
+        TryDisplayDungeonLoggableMessage(pokemon,*gPtrPausedMessage);
         return TRUE;
     case STATUS_INFATUATED:
-        SendMessage(pokemon,*gPtrInfatuatedMessage);
+        TryDisplayDungeonLoggableMessage(pokemon,*gPtrInfatuatedMessage);
         return TRUE;
     default:
     case STATUS_NONE:
@@ -160,12 +160,12 @@ bool8 sub_80701A4(Entity *pokemon)
     case 8:
     _0807026C:
         if (pokemonInfo->charging.chargingStatus == STATUS_BIDE) {
-             SendMessage(pokemon,*gPtrBideMessage);
+             TryDisplayDungeonLoggableMessage(pokemon,*gPtrBideMessage);
              return TRUE;
         }
         else if (((pokemonInfo->charging.chargingStatus != STATUS_NONE) && (pokemonInfo->charging.chargingStatus != STATUS_CHARGING)) && (pokemonInfo->charging.chargingStatus != STATUS_ENRAGED)) {
             if (flag) {
-                SendMessage(pokemon,*gPtrMoveInterruptedMessage);
+                TryDisplayDungeonLoggableMessage(pokemon,*gPtrMoveInterruptedMessage);
             }
             else {
                 for(index = 0, move = pokemonInfo->moves.moves; index < MAX_MON_MOVES; move++, index++) {

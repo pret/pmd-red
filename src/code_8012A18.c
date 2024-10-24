@@ -13,7 +13,7 @@ extern void xxx_call_update_bg_vram();
 void sub_8012A18()
 {
     sub_8011860();
-    xxx_draw_string_80144C4();
+    DrawDialogueBoxString();
     nullsub_8(gGameOptionsRef->unkA);
     sub_8005180();
     sub_80060EC();

@@ -3,7 +3,7 @@
 #include "constants/ability.h"
 #include "code_803E46C.h"
 #include "code_8045A00.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "code_807CD9C.h"
 #include "structs/str_dungeon.h"
@@ -39,7 +39,6 @@ bool8 ExposeTrap(s32 x, s32 y);
 void sub_8040A84();
 void sub_8049ED4();
 void sub_806A5B8(Entity *);
-void sub_80522F4(Entity *, Entity *, u8 *);
 void sub_80421C0(Entity *, u32);
 u8 sub_8045888(Entity *);
 void sub_807EC28(u32);
@@ -66,19 +65,19 @@ void sub_807CD9C(Entity *pokemon, Entity *target, u32 direction)
 
     sp_0x24 = 10;
     if (IsCurrentFixedRoomBossFight()) {
-        sub_80522F4(pokemon,target,*gUnknown_80FC9E8); // It couldn't be knocked flying!
+        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC9E8); // It couldn't be knocked flying!
         return;
     }
     else
     {
         if (pokemon == target) {
             SetMessageArgument(gAvailablePokemonNames,target,0);
-            sub_80522F4(pokemon,target,*gUnknown_80FCA10); // {POKEMON_0} couldn't be knocked flying!
+            TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCA10); // {POKEMON_0} couldn't be knocked flying!
             return;
         }
         SetMessageArgument(gAvailablePokemonNames,target,0);
         if (HasAbility(target,ABILITY_SUCTION_CUPS)) {
-            sub_80522F4(pokemon,target,*gUnknown_80FCBCC); // {POKEMON_0} is anchored! It can't be knocked flying!
+            TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCBCC); // {POKEMON_0} is anchored! It can't be knocked flying!
             return;
         }
         else
@@ -86,7 +85,7 @@ void sub_807CD9C(Entity *pokemon, Entity *target, u32 direction)
             (target->info->action).direction = (direction + 4) & DIRECTION_MASK;
             sub_806CDD4(target, 6, (direction + 4) & DIRECTION_MASK);
             sub_80421C0(target,0x1a3);
-            sub_80522F4(pokemon,target,*gUnknown_80F8A0C); // {POKEMON_0} was blown away!
+            TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80F8A0C); // {POKEMON_0} was blown away!
             flag = TRUE;
             sp_0x28 = NULL;
 
@@ -230,24 +229,24 @@ void sub_807D148(Entity *pokemon, Entity *target, u32 param_3, Position *pos)
 
     SetMessageArgument(gAvailablePokemonNames,target,0);
     if (HasAbility(target,ABILITY_SUCTION_CUPS)) {
-        sub_80522F4(pokemon,target,*gUnknown_80FCAE8);
+        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCAE8);
         return;
     }
     if (IsCurrentFixedRoomBossFight()) {
-        sub_80522F4(pokemon,target,*gUnknown_80FC97C);
+        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC97C);
         return;
     }
     if (param_3 == 1)
     {
         pos2 = gDungeon->unkE21C;
         if(pos2.x == target->pos.x && pos2.y == target->pos.y) {
-            sub_80522F4(pokemon,target,*gUnknown_80FC9A0); // It's already on the stairs!
+            TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC9A0); // It's already on the stairs!
             PetrifiedStatusTarget(pokemon,target);
             return;
         }
     }
 
-    sub_80522F4(pokemon,target,*gUnknown_80FC584); // $m0 warped!
+    TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC584); // $m0 warped!
     TrySendImmobilizeSleepEndMsg(target,target);
     sub_80421AC(pokemon,target);
     if (sub_8045888(target)) {
@@ -312,7 +311,7 @@ void sub_807D148(Entity *pokemon, Entity *target, u32 param_3, Position *pos)
     target->unk1C = 0;
     sub_803E46C(0x22);
     if (flag) {
-        sub_80522F4(pokemon,target,*gUnknown_80FCB14); // But it dropped back at the same spot!
+        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCB14); // But it dropped back at the same spot!
     }
     if (param_3 == 1) {
         PetrifiedStatusTarget(pokemon,target);
@@ -360,12 +359,12 @@ void sub_807D3CC(Entity *param_1)
         }
     }
     if (flag) {
-        SendMessage(param_1,*gUnknown_80FD2F8); // All traps were exposed
+        TryDisplayDungeonLoggableMessage(param_1,*gUnknown_80FD2F8); // All traps were exposed
         sub_8040A84();
         sub_8049ED4();
     }
     else {
-        SendMessage(param_1,*gUnknown_80FD320); // There appears to be no hidden traps.
+        TryDisplayDungeonLoggableMessage(param_1,*gUnknown_80FD320); // There appears to be no hidden traps.
     }
 }
 

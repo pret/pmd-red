@@ -699,6 +699,7 @@
 #define KEY_OR_INTR     0x0000
 #define KEY_AND_INTR    0x8000
 #define DPAD_ANY        ((DPAD_RIGHT | DPAD_LEFT | DPAD_UP | DPAD_DOWN)) // 0xF0
+#define AB_BUTTONS      (A_BUTTON | B_BUTTON)
 #define JOY_EXCL_DPAD   0x030F
 
 // interrupt flags

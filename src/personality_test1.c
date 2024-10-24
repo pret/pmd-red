@@ -183,7 +183,7 @@ static void GenerateNewQuestionOrGender(void)
     sPersonalityTestTracker->QuestionCounter++;
 
     if (sPersonalityTestTracker->QuestionCounter > MAX_ASKED_QUESTIONS) {
-        sub_8014248(gGenderText, 0, 0, gGenderMenu, 0, 3, 0, 0, 257);
+        CreateMenuDialogueBoxAndPortrait(gGenderText, 0, 0, gGenderMenu, 0, 3, 0, 0, 257);
         sPersonalityTestTracker->TestState = PERSONALITY_PLAYER_GENDER;
     }
     else {
@@ -285,7 +285,7 @@ static void RevealStarter(void)
     s32 temp;
 
     if (sub_80144A4(&temp) == 0) {
-        xxx_info_box_80141B4(gStarterReveal, 0, 0, 0x101);
+        CreateDialogueBoxAndPortrait(gStarterReveal, 0, 0, 0x101);
         PersonalityTest_DisplayStarterSprite();
         sPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_PARTNER_SELECTION_1;
     }
@@ -301,7 +301,7 @@ static void AdvanceToPickPartnerPrompt(void)
 
 static void PromptPickPartner(void)
 {
-    xxx_info_box_80141B4(gPartnerPrompt, 0, 0, 0x301);
+    CreateDialogueBoxAndPortrait(gPartnerPrompt, 0, 0, 0x301);
     sPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_PARTNER_SELECTION_3;
 }
 
@@ -329,7 +329,7 @@ static void PromptForPartnerNickname(void)
         if (selectedPartner != 0xFFFE) {
             sub_803CE6C();
             sPersonalityTestTracker->PartnerID = selectedPartner;
-            xxx_info_box_80141B4(gPartnerNickPrompt, 0, 0, 0x301);
+            CreateDialogueBoxAndPortrait(gPartnerNickPrompt, 0, 0, 0x301);
             sPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_PARTNER_NICKNAME_2;
         }
     }
@@ -354,7 +354,7 @@ static void PrintEndIntroText(void)
 {
     if (sub_8016080()) {
         CleanConfirmNameMenu();
-        xxx_info_box_80141B4(gEndIntroText, 0, 0, 0x301);
+        CreateDialogueBoxAndPortrait(gEndIntroText, 0, 0, 0x301);
         sPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_TEST_END;
     }
 }
@@ -369,7 +369,7 @@ static void AdvanceToTestEnd(void)
 
 static void PromptNewQuestion(void)
 {
-    sub_8014248(gPersonalityQuestionPointerTable[sPersonalityTestTracker->currQuestionIndex]->question,
+    CreateMenuDialogueBoxAndPortrait(gPersonalityQuestionPointerTable[sPersonalityTestTracker->currQuestionIndex]->question,
         0, 0,
         gPersonalityQuestionPointerTable[sPersonalityTestTracker->currQuestionIndex]->answers,
         0, 3, 0, 0, 0x101);
@@ -378,7 +378,7 @@ static void PromptNewQuestion(void)
 static void PrintPersonalityTypeDescription(void)
 {
     CopyMonsterNametoBuffer(gAvailablePokemonNames, sPersonalityTestTracker->StarterID);
-    xxx_info_box_80141B4(sPersonalityTypeDescriptionTable[sPersonalityTestTracker->playerNature], 0, 0, 0x101);
+    CreateDialogueBoxAndPortrait(sPersonalityTypeDescriptionTable[sPersonalityTestTracker->playerNature], 0, 0, 0x101);
 }
 
 static void PersonalityTest_DisplayStarterSprite(void)

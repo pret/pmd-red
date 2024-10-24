@@ -4,6 +4,7 @@
 #include "dungeon_pokemon_attributes.h"
 #include "status_checks_1.h"
 #include "text_util.h"
+#include "dungeon_message.h"
 
 extern u8 *gUnknown_80FEE04[];
 extern u8 *gUnknown_80FEE2C[];
@@ -12,7 +13,6 @@ extern u8 *gUnknown_80FEE54[];
 void sub_8042940(Entity *r0);
 void sub_80428B0(Entity *r0);
 void sub_80428C4(Entity *r0);
-void sub_80522F4(Entity *r0, Entity *r1, const char r2[]);
 
 void sub_806E8B0(Entity * pokemon, Entity * target, u8 param_3, s32 *param_4, s32 *param_5, s32 param_6)
 {
@@ -30,13 +30,13 @@ void sub_806E8B0(Entity * pokemon, Entity * target, u8 param_3, s32 *param_4, s3
   s32 r10;
   s32 sp_0x4;
   s32 sp_0x8;
-  
+
   r7 = 1;
   r8 = 1;
   sp_0x4 = 1;
   sp_0x8 = 1;
   r10 = IsTypePhysical(param_3) == 0;
-  
+
 
   if (HasAbility(pokemon, ABILITY_GUTS)) {
     entityInfo = pokemon->info;
@@ -47,7 +47,7 @@ void sub_806E8B0(Entity * pokemon, Entity * target, u8 param_3, s32 *param_4, s3
     }
     if (visFlags_pokemon_1) {
       sub_80428B0(pokemon);
-      sub_80522F4(pokemon,target,*gUnknown_80FEE04); // Guts boosted its power
+      TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FEE04); // Guts boosted its power
     }
   }
 
@@ -64,7 +64,7 @@ void sub_806E8B0(Entity * pokemon, Entity * target, u8 param_3, s32 *param_4, s3
     }
     if (visFlags_pokemon_2) {
       sub_80428C4(pokemon);
-      sub_80522F4(pokemon,target,*gUnknown_80FEE2C); // It's special ability boosted Attack
+      TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FEE2C); // It's special ability boosted Attack
     }
   }
 
@@ -108,7 +108,7 @@ void sub_806E8B0(Entity * pokemon, Entity * target, u8 param_3, s32 *param_4, s3
     }
     if (visFlags_target) {
       sub_8042940(target);
-      sub_80522F4(pokemon,target,*gUnknown_80FEE54); // Its special ability quickened attacks!
+      TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FEE54); // Its special ability quickened attacks!
     }
   }
 

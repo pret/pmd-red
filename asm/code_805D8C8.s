@@ -4122,7 +4122,7 @@ _08063AEC:
 	ldr r0, _08063B2C
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _08063B3A
 	.align 2, 0
 _08063B1C: .4byte gDungeon
@@ -4134,7 +4134,7 @@ _08063B30:
 	ldr r0, _08063B50
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _08063B3A:
 	movs r0, 0x78
 	movs r1, 0x1F
@@ -4442,7 +4442,7 @@ _08063D70:
 	ldr r0, _08063DAC
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _08063DBA
 	.align 2, 0
 _08063D98: .4byte gDungeon
@@ -4455,7 +4455,7 @@ _08063DB0:
 	ldr r0, _08063DD0
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _08063DBA:
 	movs r0, 0x78
 	movs r1, 0x1F
@@ -4914,7 +4914,7 @@ _0806414E:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0
-	bl sub_8052B8C
+	bl DisplayDungeonYesNoMessage
 	adds r3, r0, 0
 	b _08064162
 	.align 2, 0
@@ -6385,7 +6385,7 @@ _08064CF2:
 	ldr r0, [r5]
 	cmp r0, 0x2
 	bne _08064CFC
-	bl sub_80532B4
+	bl DisplayMessageLog
 _08064CFC:
 	ldr r0, [r5]
 	cmp r0, 0x3
@@ -6817,7 +6817,7 @@ _08065062:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8052B8C
+	bl DisplayDungeonYesNoMessage
 	cmp r0, 0x1
 	bne _08065088
 	ldr r0, _08065094
@@ -6846,7 +6846,7 @@ sub_806509C:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0
-	bl sub_8052B8C
+	bl DisplayDungeonYesNoMessage
 	cmp r0, 0x1
 	bne _080650B8
 	movs r0, 0
@@ -7001,7 +7001,7 @@ sub_80651D0:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0
-	bl sub_8052B8C
+	bl DisplayDungeonYesNoMessage
 	cmp r0, 0x1
 	bne _080651F4
 	bl GetLeaderActionContainer
@@ -7025,7 +7025,7 @@ sub_80651FC:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0
-	bl sub_8052B8C
+	bl DisplayDungeonYesNoMessage
 	adds r5, r0, 0
 	cmp r5, 0x1
 	bne _08065248
@@ -8730,7 +8730,7 @@ _08065FFE:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	b _08066194
 	.align 2, 0
 _0806600C: .4byte 0x0000065d

@@ -53,20 +53,20 @@ bool8 CreateHelperPelipperMenu(s16 speciesID)
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, species_32);
     monName = GetMonSpecies(species_32);
     strcpy(gAvailablePokemonNames, monName);
-    sPostOfficeHelper->faceFile = NULL;
-    sPostOfficeHelper->faceData = NULL;
+    sPostOfficeHelper->monPortrait.faceFile = NULL;
+    sPostOfficeHelper->monPortrait.faceData = NULL;
 
     if (species_32 != MONSTER_NONE) {
         faceFile = GetDialogueSpriteDataPtr(species_32);
-        sPostOfficeHelper->faceFile = faceFile;
-        sPostOfficeHelper->unk14 = 0;
-        sPostOfficeHelper->unk15 = 0;
-        sPostOfficeHelper->unk16 = 0;
-        sPostOfficeHelper->unk10 = 2;
-        sPostOfficeHelper->unk12 = 8;
+        sPostOfficeHelper->monPortrait.faceFile = faceFile;
+        sPostOfficeHelper->monPortrait.spriteId = 0;
+        sPostOfficeHelper->monPortrait.flip = FALSE;
+        sPostOfficeHelper->monPortrait.unkE = 0;
+        sPostOfficeHelper->monPortrait.pos.x = 2;
+        sPostOfficeHelper->monPortrait.pos.y = 8;
 
-        if (sPostOfficeHelper->faceFile != NULL)
-            sPostOfficeHelper->faceData = sPostOfficeHelper->faceFile->data;
+        if (sPostOfficeHelper->monPortrait.faceFile != NULL)
+            sPostOfficeHelper->monPortrait.faceData = sPostOfficeHelper->monPortrait.faceFile->data;
     }
 
     sPostOfficeHelper->currMenuChoice = 0;
@@ -111,8 +111,8 @@ u32 HelperPelipperCallback(void)
 void CleanHelperPelipper(void)
 {
     if (sPostOfficeHelper != NULL) {
-        if (sPostOfficeHelper->faceFile != NULL)
-            CloseFile(sPostOfficeHelper->faceFile);
+        if (sPostOfficeHelper->monPortrait.faceFile != NULL)
+            CloseFile(sPostOfficeHelper->monPortrait.faceFile);
         MemoryFree(sPostOfficeHelper);
         sPostOfficeHelper = NULL;
     }
@@ -124,89 +124,89 @@ static void nullsub_39(void)
 
 static void UpdateHelperPelipperText(void)
 {
-    OpenedFile **faceFile;
-    faceFile = NULL;
+    struct MonPortraitMsg *monPortraitPtr;
+    monPortraitPtr = NULL;
 
-    if (sPostOfficeHelper->faceFile != NULL)
-        faceFile = &sPostOfficeHelper->faceFile;
+    if (sPostOfficeHelper->monPortrait.faceFile != NULL)
+        monPortraitPtr = &sPostOfficeHelper->monPortrait;
 
     switch (sPostOfficeHelper->state) {
         case DISPLAY_GET_HELP_MENU:
-            sub_8014248(sWhatdYouWantToKnow, 0, sPostOfficeHelper->currMenuChoice, sPostOfficeHelpGetHelpMenu, 0, 4, 0, faceFile, 12);
+            CreateMenuDialogueBoxAndPortrait(sWhatdYouWantToKnow, 0, sPostOfficeHelper->currMenuChoice, sPostOfficeHelpGetHelpMenu, 0, 4, 0, monPortraitPtr, 12);
             break;
         case RETURN_TO_GET_HELP:
             switch (sPostOfficeHelper->currMenuChoice) {
                 case GETTING_HELP:
-                    xxx_info_box_80141B4(sGettingHelpExplanation, 0, faceFile, 0x10d);
+                    CreateDialogueBoxAndPortrait(sGettingHelpExplanation, 0, monPortraitPtr, 0x10d);
                     break;
                 case SEND_SOS_MAIL:
-                    xxx_info_box_80141B4(sSendSOSMailExplanation, 0, faceFile, 0x10d);
+                    CreateDialogueBoxAndPortrait(sSendSOSMailExplanation, 0, monPortraitPtr, 0x10d);
                     break;
                 case RECEIVE_AOK_MAIL:
-                    xxx_info_box_80141B4(sReceiveAOKMailExplanation, 0, faceFile, 0x10d);
+                    CreateDialogueBoxAndPortrait(sReceiveAOKMailExplanation, 0, monPortraitPtr, 0x10d);
                     break;
                 case SEND_THANK_YOU_MAIL:
-                    xxx_info_box_80141B4(sSendThankYouMailExplanation, 0, faceFile, 0x10d);
+                    CreateDialogueBoxAndPortrait(sSendThankYouMailExplanation, 0, monPortraitPtr, 0x10d);
                     break;
                 default:
                     break;
             }
             break;
         case DISPLAY_GO_RESCUE_MENU:
-            sub_8014248(sWhatdYouWantToKnow, 0, sPostOfficeHelper->currMenuChoice, sPostOfficeHelpGoRescueMenu, 0, 4, 0, faceFile, 12);
+            CreateMenuDialogueBoxAndPortrait(sWhatdYouWantToKnow, 0, sPostOfficeHelper->currMenuChoice, sPostOfficeHelpGoRescueMenu, 0, 4, 0, monPortraitPtr, 12);
             break;
         case RETURN_TO_GO_RESCUE:
             switch (sPostOfficeHelper->currMenuChoice) {
                 case RESCUE_PROCEDURES:
-                    xxx_info_box_80141B4(sRescueProceduresExplanation, 0, faceFile, 0x10d);
+                    CreateDialogueBoxAndPortrait(sRescueProceduresExplanation, 0, monPortraitPtr, 0x10d);
                     break;
                 case RECEIVE_SOS_MAIL:
-                    xxx_info_box_80141B4(sReceiveSOSMailExplanation, 0, faceFile, 0x10d);
+                    CreateDialogueBoxAndPortrait(sReceiveSOSMailExplanation, 0, monPortraitPtr, 0x10d);
                     break;
                 case SEND_AOK_MAIL:
-                    xxx_info_box_80141B4(sSendAOKMailExplanation, 0, faceFile, 0x10d);
+                    CreateDialogueBoxAndPortrait(sSendAOKMailExplanation, 0, monPortraitPtr, 0x10d);
                     break;
                 case LEAVE_FOR_RESCUE:
-                    xxx_info_box_80141B4(sLeaveForRescueExplanation, 0, faceFile, 0x10d);
+                    CreateDialogueBoxAndPortrait(sLeaveForRescueExplanation, 0, monPortraitPtr, 0x10d);
                     break;
                 case GET_THANK_YOU_MAIL:
-                    xxx_info_box_80141B4(sGetThankYouMailExplanation, 0, faceFile, 0x10d);
+                    CreateDialogueBoxAndPortrait(sGetThankYouMailExplanation, 0, monPortraitPtr, 0x10d);
                     break;
                 default:
                     break;
             }
             break;
         case IM_GUIDE_START_MENU:
-            sub_8014248(sImYourGuide, 0, sPostOfficeHelper->currMenuChoice, sPostOfficeHelpStartMenu, 0, 4, 0, faceFile, 12);
+            CreateMenuDialogueBoxAndPortrait(sImYourGuide, 0, sPostOfficeHelper->currMenuChoice, sPostOfficeHelpStartMenu, 0, 4, 0, monPortraitPtr, 12);
             break;
         case ANYTHING_ELSE_START_MENU:
-            sub_8014248(sAnythingElse, 0, sPostOfficeHelper->currMenuChoice, sPostOfficeHelpStartMenu, 0, 4, 0, faceFile, 12);
+            CreateMenuDialogueBoxAndPortrait(sAnythingElse, 0, sPostOfficeHelper->currMenuChoice, sPostOfficeHelpStartMenu, 0, 4, 0, monPortraitPtr, 12);
             break;
         case RETURN_TO_START_MENU:
             switch (sPostOfficeHelper->currMenuChoice) {
                 case POST_OFFICE:
-                    xxx_info_box_80141B4(sPostOfficeExplanation, 0, faceFile, 0x10d);
+                    CreateDialogueBoxAndPortrait(sPostOfficeExplanation, 0, monPortraitPtr, 0x10d);
                     break;
                 case BULLETIN_BOARD:
-                    xxx_info_box_80141B4(sBulletinBoardExplanation, 0, faceFile, 0x10d);
+                    CreateDialogueBoxAndPortrait(sBulletinBoardExplanation, 0, monPortraitPtr, 0x10d);
                     break;
                 case DELIVERY:
-                    xxx_info_box_80141B4(sDeliveryExplanation, 0, faceFile, 0x10d);
+                    CreateDialogueBoxAndPortrait(sDeliveryExplanation, 0, monPortraitPtr, 0x10d);
                     break;
                 default:
                     break;
             }
             break;
         case DISPLAY_FRIEND_RESCUE_MENU:
-            sub_8014248(sWhatdYouWantToKnow, 0, sPostOfficeHelper->currMenuChoice, gPostOfficeHelpFriendRescueMenu, 0, 4, 0, faceFile, 12);
+            CreateMenuDialogueBoxAndPortrait(sWhatdYouWantToKnow, 0, sPostOfficeHelper->currMenuChoice, gPostOfficeHelpFriendRescueMenu, 0, 4, 0, monPortraitPtr, 12);
             break;
         case RETURN_TO_FRIEND_RESCUE:
             switch (sPostOfficeHelper->currMenuChoice) {
                 case FRIEND_RESCUE_INFO:
-                    xxx_info_box_80141B4(sFriendRescueExplanation, 0, faceFile, 0x10d);
+                    CreateDialogueBoxAndPortrait(sFriendRescueExplanation, 0, monPortraitPtr, 0x10d);
                     break;
                 case DELETING_MAIL:
-                    xxx_info_box_80141B4(sDeletingMailExplanation, 0, faceFile, 0x10d);
+                    CreateDialogueBoxAndPortrait(sDeletingMailExplanation, 0, monPortraitPtr, 0x10d);
                     break;
                 default:
                     break;
