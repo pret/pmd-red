@@ -219,65 +219,6 @@ extern void DealDamageToEntity(Entity *, s32, u32, u32);
 extern s16 gUnknown_80F4DB4;
 extern u32 gUnknown_8106A4C;
 
-// TODO: WTF are these loops? https://decomp.me/scratch/svYTQ
-void sub_80574C4(s32 *a0, s32 a1)
-{
-    s32 r2;
-    s32 r3;
-    s32 temp;
-    s32 buffer[0x41];
-
-    r3 = 0;
-    r2 = 0;
-    if (a0[0] != 0) {
-        if (a0[0] == a1)
-            goto continue1;
-itsmol1:
-        buffer[r3] = a0[r2];
-        r3++;
-continue1:
-        r2++;
-        if (r2 >= 0x41)
-            goto break1;
-        if (a0[r2] == 0)
-            goto break1;
-        if (a0[r2] == a1)
-            goto continue1;
-        if (r3 < 0x40)
-            goto itsmol1;
-    }
-break1:
-
-    r2 = 0;
-    temp = a0[r2];
-    goto for2;
-itsmol2:
-    buffer[r3] = a0[r2];
-    r3++;
-continue2:
-    r2++;
-    if (r2 > 0x40)
-        goto break2;
-    temp = a0[r2];
-for2:
-    if (temp == 0)
-        goto break2;
-    if (temp != a1)
-        goto continue2;
-    if (r3 < 0x40)
-        goto itsmol2;
-break2:
-
-    while (r3 < 0x41) {
-        buffer[r3] = 0;
-        r3++;
-    }
-
-    for (r2 = 0; r2 < 0x41; r2++) {
-        a0[r2] = buffer[r2];
-    }
-}
-
 bool8 sub_805755C(Entity* pokemon, u16 moveID)
 {
     if ((moveID == MOVE_SOLARBEAM) && (GetApparentWeather(pokemon) == WEATHER_SUNNY)) {
