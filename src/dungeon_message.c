@@ -1107,6 +1107,7 @@ static void CreateMessageLogArrow(bool8 upArrow, s32 y)
 #include "dungeon_visibility.h"
 #include "code_807CD9C.h"
 #include "dungeon_engine.h"
+#include "status_actions.h"
 
 extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
 extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, u32, u16, u32);
@@ -1137,9 +1138,240 @@ extern void sub_806ACE8(Entity *entity, Move *move);
 extern s32 sub_8057070(Move *move);
 extern bool8 sub_805755C(Entity* pokemon,u16 param_2);
 extern s32 sub_800ED20(u16 param_1);
+extern bool32 sub_8058F04(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern void sub_8042930(Entity *r0);
+extern void sub_8041B48(Entity *pokemon);
+extern void sub_8041BA8(Entity *pokemon);
+extern void sub_8042950(Entity *r0);
+extern void sub_80421C0(Entity *pokemon, u16 r1);
+extern bool8 sub_8057634(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 YawnMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 NightmareMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805783C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 EncoreMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8057974(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 PainSplitMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 TormentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8057BC4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8057C88(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 WhirlpoolMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SurfMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805889C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8057D7C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8057D9C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SmokescreenMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8057FCC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8057FF4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805805C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805816C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80581D0(Entity *pokemon, Entity *target, Move *move, u32 param_4);
+extern bool8 sub_8058B3C(Entity *pokemon, Entity *target, Move *move, u32 param_4);
+extern bool8 sub_8058270(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80582C4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80583D8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058430(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058478(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80584C0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058548(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058580(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 BrickBreakMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058638(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80586DC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058770(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80587E8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058838(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058858(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80588B8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80588F4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058930(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058C00(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058A18(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058BF0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058E5C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058FBC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80590D4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059190(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80591E4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SkillSwapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059424(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805946C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059528(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059540(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80595A0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80595EC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805C138(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80598CC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059928(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059988(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059A2C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059AA8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059AB8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059AF8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059D00(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059D48(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059D98(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059DA4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059DB4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059DC4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059E0C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 TriAttackMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805A120(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805A210(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805A258(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805A2A0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 RolePlayMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805A3DC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805A464(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 CurseMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805A568(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 FocusEnergyMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 TickleMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805A688(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SecretPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805AC90(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805AD04(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805AD34(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805AD54(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805AE3C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805AE74(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805AECC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 PresentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805AFA4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B028(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B074(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B0BC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B17C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 WrapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B264(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B324(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 DestinyBondMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B388(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B3E0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B454(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 MimicMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B53C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 LeechSeedMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B668(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B910(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B808(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805A408(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059050(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059FC8(Entity * pokemon,Entity * target,Move * move,u32 param_4,u8 param_5);
+extern bool8 sub_8059E54(Entity * pokemon,Entity * target,Move * move,u32 param_4,u8 param_5);
+extern void SetShopkeeperAggression(Entity *, Entity *);
+extern bool8 MoveCausesPaused(Move *move);
+extern void sub_8069F9C(Entity *pokemon,Entity * target,Move *move);
+extern void sub_806A120(Entity *pokemon,Entity * target,Move *move);
+extern bool8 sub_8058C98(Entity *pokemon, Entity *target, Move *move, u32 param_4, u32 param_5);
+extern bool8 sub_805B3FC(Entity *pokemon, Entity *target, Move *move, u32 param_4, u32 param_5);
+extern bool8 sub_805A5E8(Entity *pokemon, Entity *target, Move *move, u32 param_4, u32 param_5);
+extern bool8 sub_8058B84(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059714(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80576F8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059080(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059D58(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B164(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059A18(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 BulkUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80582D4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 RageMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059B94(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B3B4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059588(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805A2B0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B2FC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059CD8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058A7C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8057F7C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8057ED0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058CEC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805A2C8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8057C68(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SolarBeamMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SkyAttackMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058D38(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SandstormMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SafeguardMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 MistMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 LightScreenMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805768C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8057F24(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80599EC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80589D4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059AC4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805A4D4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058EE0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058A08(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 CounterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 BideMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805836C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 TrapperOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805A450(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 RazorWindMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 FocusPunchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 MagicCoatMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8057748(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 MudWaterSportMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805A4FC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058C48(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SpikesMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80578EC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80588A8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 WishMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8057E6C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059CF0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80582AC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058A54(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 VitalThrowMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 FlyMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059F38(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 DiveMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 DigMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8057824(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805825C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 GrudgeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805A4C0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805AAD0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B314(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ProtectMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8059004(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80597F0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ChargeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058D44(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 StockpileMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SpitUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SwallowMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 RainDanceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 InvisifyOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 MirrorCoatMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 PerishSongMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8057CD0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SunnyDayMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 EndureMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 HelpingHandMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 BellyDrumMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_80578FC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8057BB4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 TransformMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 HailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8058234(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805A85C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ReboundOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 NaturePowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SketchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_8057E50(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ConversionMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SnatchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 HandleColorChange(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 PsychUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SnoreMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 sub_805B618(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 Conversion2MoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 
 s32 sub_8055640(Entity *, Entity *, Move *, s32, s32);
 s32 sub_8055728(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk);
+static void TriggerAbilityEffect(Entity *entity);
 static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 selfAlwaysHits);
 bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg_0, struct Move *move);
 bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **unkArray, bool32 itemId, bool8 arg_4, bool32 unused);
@@ -1150,6 +1382,9 @@ s32 sub_8056F80(s32 a0, Entity **entitiesArray, s32 target, Entity *entity1, Ent
 bool8 sub_8055988(Entity *r2, Entity *r4);
 void sub_80559DC(Entity *entity1, Entity *entity2);
 
+extern const s32 gUnknown_8106A50;
+extern const s32 gUnknown_8106A4C;
+extern const s16 gUnknown_80F5006;
 extern const s32 gUnknown_80F519C;
 extern const s32 gUnknown_80F51A0;
 extern const s32 gUnknown_80F50F4[2][21];
@@ -1187,6 +1422,21 @@ extern const u8 *const gUnknown_80FD2DC;
 extern const u8 *const gUnknown_80F93C8;
 extern const u8 *const gUnknown_80FC690;
 extern const u8 *const gUnknown_80FC6A4;
+extern const u8 *const gUnknown_80FCD28;
+extern const u8 *const gUnknown_80FCD0C;
+extern const u8 *const gUnknown_80FDD88;
+extern const u8 *const gUnknown_80FDD20;
+extern const u8 *const gUnknown_80FDDA8;
+extern const u8 *const gUnknown_80FDD48;
+extern const u8 *const gUnknown_80FDDAC;
+extern const u8 *const gUnknown_80FC52C;
+extern const u8 *const gUnknown_80FC558;
+extern const u8 *const gUnknown_80FC574;
+extern const u8 *const gUnknown_8100524;
+extern const u8 *const gUnknown_80F9364;
+extern const u8 *const gUnknown_80F93A4;
+extern const u8 *const gUnknown_80F9384;
+extern const u8 *const gUnknown_80F9380;
 
 extern u8 gFormatItems[];
 extern u8 gUnknown_202F221;
@@ -1204,3453 +1454,23 @@ extern u8 gUnknown_202F21A;
 extern u8 gUnknown_202F220;
 extern u8 gUnknown_202F221;
 
-#ifdef NONMATCHING
-NAKED void sub_8053704(Entity **unkArray, Entity *entity, Move *move, s32 itemId, s32 a4)
-{
-    asm_unified("\n"
-	"	push {r4-r7,lr}\n"
-	"	mov r7, r10\n"
-	"	mov r6, r9\n"
-	"	mov r5, r8\n"
-	"	push {r5-r7}\n"
-	"	sub sp, 0x48\n"
-	"	str r0, [sp, 0x10]\n"
-	"	adds r7, r1, 0\n"
-	"	mov r8, r2\n"
-	"	mov r9, r3\n"
-	"	movs r0, 0\n"
-	"	str r0, [sp, 0x14]\n"
-	"	ldrh r1, [r2, 0x2]\n"
-	"	str r1, [sp, 0x18]\n"
-	"	bl _08055570\n"
-	"_08053724:\n"
-	"	adds r0, r5, 0\n"
-	"	bl EntityExists\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	bne _08053734\n"
-	"	bl _0805556A\n"
-	"_08053734:\n"
-	"	str r7, [sp, 0x1C]\n"
-	"	ldr r2, [r5, 0x70]\n"
-	"	str r2, [sp, 0x24]\n"
-	"	movs r3, 0xAD\n"
-	"	lsls r3, 1\n"
-	"	adds r0, r2, r3\n"
-	"	add r1, sp, 0x20\n"
-	"	ldrb r1, [r1]\n"
-	"	strb r1, [r0]\n"
-	"	ldr r0, [sp, 0x18]\n"
-	"	bl CanBeSnatched\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _080537B4\n"
-	"	ldr r6, _080537A4\n"
-	"	ldr r0, [r6]\n"
-	"	ldr r2, _080537A8\n"
-	"	adds r0, r2\n"
-	"	ldr r4, [r0]\n"
-	"	cmp r4, 0\n"
-	"	beq _080537B4\n"
-	"	adds r0, r4, 0\n"
-	"	bl GetEntityType\n"
-	"	cmp r0, 0x1\n"
-	"	beq _0805376C\n"
-	"	b _08053A1C\n"
-	"_0805376C:\n"
-	"	cmp r4, r7\n"
-	"	bne _08053772\n"
-	"	b _08053A1C\n"
-	"_08053772:\n"
-	"	ldr r1, [r4, 0x70]\n"
-	"	adds r1, 0x98\n"
-	"	ldr r0, [r6]\n"
-	"	ldr r3, _080537AC\n"
-	"	adds r0, r3\n"
-	"	ldr r1, [r1]\n"
-	"	ldr r0, [r0]\n"
-	"	cmp r1, r0\n"
-	"	beq _08053786\n"
-	"	b _08053A1C\n"
-	"_08053786:\n"
-	"	ldr r0, [sp, 0x24]\n"
-	"	adds r0, 0xFF\n"
-	"	ldrb r0, [r0]\n"
-	"	cmp r0, 0\n"
-	"	beq _08053792\n"
-	"	b _08053A1C\n"
-	"_08053792:\n"
-	"	ldr r0, _080537B0\n"
-	"	ldr r2, [r0]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	bl TryDisplayDungeonLoggableMessage3\n"
-	"	adds r5, r4, 0\n"
-	"	b _08053A1C\n"
-	"	.align 2, 0\n"
-	"_080537A4: .4byte gDungeon\n"
-	"_080537A8: .4byte 0x00017b30\n"
-	"_080537AC: .4byte 0x00017b3c\n"
-	"_080537B0: .4byte gUnknown_80FCD28\n"
-	"_080537B4:\n"
-	"	adds r0, r7, 0\n"
-	"	mov r1, r8\n"
-	"	bl GetMoveTypeForMonster\n"
-	"	lsls r0, 24\n"
-	"	lsrs r0, 24\n"
-	"	cmp r0, 0x5\n"
-	"	bne _08053854\n"
-	"	ldr r2, _08053844\n"
-	"	ldr r0, [r2]\n"
-	"	ldr r1, _08053848\n"
-	"	adds r0, r1\n"
-	"	ldr r0, [r0]\n"
-	"	cmp r0, 0\n"
-	"	beq _08053854\n"
-	"	adds r4, r0, 0\n"
-	"	str r2, [sp, 0x44]\n"
-	"	bl GetEntityType\n"
-	"	ldr r2, [sp, 0x44]\n"
-	"	cmp r0, 0x1\n"
-	"	beq _080537E2\n"
-	"	b _08053A1C\n"
-	"_080537E2:\n"
-	"	ldr r6, [r4, 0x70]\n"
-	"	adds r1, r6, 0\n"
-	"	adds r1, 0x98\n"
-	"	ldr r0, [r2]\n"
-	"	ldr r2, _0805384C\n"
-	"	adds r0, r2\n"
-	"	ldr r1, [r1]\n"
-	"	ldr r0, [r0]\n"
-	"	cmp r1, r0\n"
-	"	beq _080537F8\n"
-	"	b _08053A1C\n"
-	"_080537F8:\n"
-	"	adds r0, r4, 0\n"
-	"	adds r1, r7, 0\n"
-	"	movs r2, 0x1\n"
-	"	movs r3, 0\n"
-	"	bl GetTreatmentBetweenMonsters\n"
-	"	lsls r0, 24\n"
-	"	lsrs r0, 24\n"
-	"	cmp r0, 0x1\n"
-	"	beq _0805380E\n"
-	"	b _08053A1C\n"
-	"_0805380E:\n"
-	"	ldr r0, [sp, 0x24]\n"
-	"	adds r0, 0xFF\n"
-	"	ldrb r0, [r0]\n"
-	"	cmp r0, 0\n"
-	"	bne _08053822\n"
-	"	adds r0, r6, 0\n"
-	"	adds r0, 0xFF\n"
-	"	ldrb r0, [r0]\n"
-	"	cmp r0, 0\n"
-	"	beq _08053828\n"
-	"_08053822:\n"
-	"	cmp r5, r4\n"
-	"	beq _08053828\n"
-	"	b _08053A1C\n"
-	"_08053828:\n"
-	"	adds r0, r4, 0\n"
-	"	bl sub_8042930\n"
-	"	ldr r0, _08053850\n"
-	"	ldr r2, [r0]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	bl TryDisplayDungeonLoggableMessage3\n"
-	"	adds r5, r4, 0\n"
-	"	movs r3, 0x1\n"
-	"	str r3, [sp, 0x2C]\n"
-	"	b _08053A1C\n"
-	"	.align 2, 0\n"
-	"_08053844: .4byte gDungeon\n"
-	"_08053848: .4byte 0x00017b2c\n"
-	"_0805384C: .4byte 0x00017b38\n"
-	"_08053850: .4byte gUnknown_80FCD0C\n"
-	"_08053854:\n"
-	"	adds r0, r5, 0\n"
-	"	movs r1, 0x2C\n"
-	"	bl HasHeldItem\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	bne _08053864\n"
-	"	b _08053A1C\n"
-	"_08053864:\n"
-	"	adds r0, r5, 0\n"
-	"	movs r1, 0\n"
-	"	bl CannotAttack\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08053874\n"
-	"	b _08053A1C\n"
-	"_08053874:\n"
-	"	adds r0, r7, 0\n"
-	"	mov r1, r8\n"
-	"	movs r2, 0\n"
-	"	bl GetMoveTargetAndRangeForPokemon\n"
-	"	movs r1, 0xF0\n"
-	"	ands r1, r0\n"
-	"	cmp r1, 0\n"
-	"	beq _08053888\n"
-	"	b _08053A1C\n"
-	"_08053888:\n"
-	"	ldr r1, [sp, 0x24]\n"
-	"	movs r2, 0x9E\n"
-	"	lsls r2, 1\n"
-	"	adds r0, r1, r2\n"
-	"	ldr r0, [r0]\n"
-	"	bl FixedPointToInt\n"
-	"	ldr r1, _080538C4\n"
-	"	movs r3, 0\n"
-	"	ldrsh r1, [r1, r3]\n"
-	"	cmp r0, r1\n"
-	"	bge _080538A2\n"
-	"	b _08053A1C\n"
-	"_080538A2:\n"
-	"	ldr r0, [sp, 0x24]\n"
-	"	adds r0, 0xFF\n"
-	"	ldrb r0, [r0]\n"
-	"	cmp r0, 0\n"
-	"	beq _080538AE\n"
-	"	b _08053A1C\n"
-	"_080538AE:\n"
-	"	ldr r0, [sp, 0x24]\n"
-	"	adds r0, 0x46\n"
-	"	ldrb r4, [r0]\n"
-	"	mov r10, r4\n"
-	"	bl IsBossFight\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _080538CC\n"
-	"	ldr r0, _080538C8\n"
-	"	b _080539FA\n"
-	"	.align 2, 0\n"
-	"_080538C4: .4byte gUnknown_80F5006\n"
-	"_080538C8: .4byte gUnknown_80FDD88\n"
-	"_080538CC:\n"
-	"	movs r0, 0\n"
-	"	str r0, [sp, 0x34]\n"
-	"	movs r2, 0x9E\n"
-	"	lsls r2, 1\n"
-	"	ldr r1, [sp, 0x24]\n"
-	"	adds r2, r1, r2\n"
-	"	str r2, [sp, 0x3C]\n"
-	"_080538DA:\n"
-	"	movs r3, 0x1\n"
-	"	add r10, r3\n"
-	"	movs r0, 0x7\n"
-	"	mov r1, r10\n"
-	"	ands r1, r0\n"
-	"	mov r10, r1\n"
-	"	movs r2, 0x4\n"
-	"	ldrsh r0, [r5, r2]\n"
-	"	ldr r1, _080539B4\n"
-	"	mov r3, r10\n"
-	"	lsls r2, r3, 2\n"
-	"	adds r2, r1\n"
-	"	movs r3, 0\n"
-	"	ldrsh r1, [r2, r3]\n"
-	"	adds r0, r1\n"
-	"	movs r3, 0x6\n"
-	"	ldrsh r1, [r5, r3]\n"
-	"	movs r3, 0x2\n"
-	"	ldrsh r2, [r2, r3]\n"
-	"	adds r1, r2\n"
-	"	bl GetTile\n"
-	"	ldr r0, [r0, 0x10]\n"
-	"	str r0, [sp, 0x38]\n"
-	"	bl EntityExists\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _080539DC\n"
-	"	ldr r0, [sp, 0x38]\n"
-	"	bl GetEntityType\n"
-	"	cmp r0, 0x1\n"
-	"	bne _080539DC\n"
-	"	adds r0, r5, 0\n"
-	"	bl sub_8045888\n"
-	"	lsls r0, 24\n"
-	"	mov r1, sp\n"
-	"	adds r1, 0xC\n"
-	"	str r1, [sp, 0x40]\n"
-	"	cmp r0, 0\n"
-	"	beq _0805397C\n"
-	"	movs r6, 0x17\n"
-	"_08053932:\n"
-	"	adds r0, r5, 0\n"
-	"	adds r1, r4, 0\n"
-	"	bl sub_806CE68\n"
-	"	movs r0, 0x2\n"
-	"	movs r1, 0x43\n"
-	"	bl sub_803E708\n"
-	"	adds r4, 0x1\n"
-	"	movs r2, 0x7\n"
-	"	ands r4, r2\n"
-	"	subs r6, 0x1\n"
-	"	cmp r6, 0\n"
-	"	bge _08053932\n"
-	"	cmp r4, r10\n"
-	"	beq _0805396C\n"
-	"	movs r6, 0x7\n"
-	"_08053954:\n"
-	"	adds r0, r5, 0\n"
-	"	adds r1, r4, 0\n"
-	"	bl sub_806CE68\n"
-	"	movs r0, 0x2\n"
-	"	movs r1, 0x43\n"
-	"	bl sub_803E708\n"
-	"	adds r4, 0x1\n"
-	"	ands r4, r6\n"
-	"	cmp r4, r10\n"
-	"	bne _08053954\n"
-	"_0805396C:\n"
-	"	adds r0, r5, 0\n"
-	"	adds r1, r4, 0\n"
-	"	bl sub_806CE68\n"
-	"	movs r0, 0x2\n"
-	"	movs r1, 0x43\n"
-	"	bl sub_803E708\n"
-	"_0805397C:\n"
-	"	ldr r3, [sp, 0x3C]\n"
-	"	ldr r4, [r3]\n"
-	"	ldr r0, _080539B8\n"
-	"	movs r2, 0\n"
-	"	ldrsh r1, [r0, r2]\n"
-	"	add r0, sp, 0x8\n"
-	"	bl IntToFixedPoint\n"
-	"	ldr r2, [sp, 0x8]\n"
-	"	ldr r0, [sp, 0x40]\n"
-	"	adds r1, r4, 0\n"
-	"	bl FixedPoint_Subtract\n"
-	"	ldr r0, [sp, 0xC]\n"
-	"	ldr r3, [sp, 0x3C]\n"
-	"	str r0, [r3]\n"
-	"	mov r0, r8\n"
-	"	ldrh r1, [r0, 0x2]\n"
-	"	ldr r0, _080539BC\n"
-	"	cmp r1, r0\n"
-	"	bne _080539C4\n"
-	"	ldr r0, _080539C0\n"
-	"	ldr r2, [r0]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	bl TryDisplayDungeonLoggableMessage3\n"
-	"	b _080539D0\n"
-	"	.align 2, 0\n"
-	"_080539B4: .4byte gAdjacentTileOffsets\n"
-	"_080539B8: .4byte gUnknown_80F5006\n"
-	"_080539BC: .4byte 0x00000163\n"
-	"_080539C0: .4byte gUnknown_80FDDA8\n"
-	"_080539C4:\n"
-	"	ldr r0, _080539D8\n"
-	"	ldr r2, [r0]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	bl TryDisplayDungeonLoggableMessage3\n"
-	"_080539D0:\n"
-	"	str r5, [sp, 0x20]\n"
-	"	ldr r5, [sp, 0x38]\n"
-	"	b _080539E8\n"
-	"	.align 2, 0\n"
-	"_080539D8: .4byte gUnknown_80FDD20\n"
-	"_080539DC:\n"
-	"	ldr r1, [sp, 0x34]\n"
-	"	adds r1, 0x1\n"
-	"	str r1, [sp, 0x34]\n"
-	"	cmp r1, 0x7\n"
-	"	bgt _080539E8\n"
-	"	b _080538DA\n"
-	"_080539E8:\n"
-	"	ldr r2, [sp, 0x34]\n"
-	"	cmp r2, 0x8\n"
-	"	bne _08053A1C\n"
-	"	mov r3, r8\n"
-	"	ldrh r1, [r3, 0x2]\n"
-	"	ldr r0, _08053A08\n"
-	"	cmp r1, r0\n"
-	"	bne _08053A10\n"
-	"	ldr r0, _08053A0C\n"
-	"_080539FA:\n"
-	"	ldr r2, [r0]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	bl TryDisplayDungeonLoggableMessage3\n"
-	"	b _08053A1C\n"
-	"	.align 2, 0\n"
-	"_08053A08: .4byte 0x00000163\n"
-	"_08053A0C: .4byte gUnknown_80FDDAC\n"
-	"_08053A10:\n"
-	"	ldr r0, _08053AD8\n"
-	"	ldr r2, [r0]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	bl TryDisplayDungeonLoggableMessage3\n"
-	"_08053A1C:\n"
-	"	ldr r1, _08053ADC\n"
-	"	ldr r0, [r1]\n"
-	"	adds r0, 0x1\n"
-	"	str r0, [r1]\n"
-	"	ldr r1, _08053AE0\n"
-	"	ldr r0, [r1]\n"
-	"	adds r0, 0x1\n"
-	"	str r0, [r1]\n"
-	"	ldr r0, [r5, 0x70]\n"
-	"	str r0, [sp, 0x24]\n"
-	"	movs r6, 0xAD\n"
-	"	lsls r6, 1\n"
-	"	adds r1, r0, r6\n"
-	"	movs r0, 0\n"
-	"	strb r0, [r1]\n"
-	"	ldr r1, [sp, 0x24]\n"
-	"	ldrb r0, [r1, 0x6]\n"
-	"	cmp r0, 0\n"
-	"	beq _08053A4C\n"
-	"	movs r2, 0xB6\n"
-	"	lsls r2, 1\n"
-	"	adds r1, r2\n"
-	"	ldr r0, [r7, 0x4]\n"
-	"	str r0, [r1]\n"
-	"_08053A4C:\n"
-	"	adds r0, r5, 0\n"
-	"	bl sub_806A1E8\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	bl TrySendImmobilizeSleepEndMsg\n"
-	"	movs r4, 0\n"
-	"	adds r0, r7, 0\n"
-	"	mov r1, r8\n"
-	"	bl MoveMatchesChargingStatus\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	bne _08053A7E\n"
-	"	mov r3, r8\n"
-	"	ldrh r1, [r3, 0x2]\n"
-	"	adds r0, r7, 0\n"
-	"	bl sub_805755C\n"
-	"	lsls r0, 24\n"
-	"	lsrs r0, 24\n"
-	"	negs r1, r0\n"
-	"	orrs r1, r0\n"
-	"	lsrs r4, r1, 31\n"
-	"_08053A7E:\n"
-	"	ldr r0, [sp, 0x2C]\n"
-	"	cmp r0, 0\n"
-	"	beq _08053A86\n"
-	"	b _08053BAE\n"
-	"_08053A86:\n"
-	"	ldr r0, [sp, 0x24]\n"
-	"	adds r0, 0xC4\n"
-	"	ldrb r0, [r0]\n"
-	"	cmp r0, 0x5\n"
-	"	bne _08053AE8\n"
-	"	ldr r0, [sp, 0x18]\n"
-	"	bl IsReflectedByMagicCoat\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08053B5C\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	bl sub_8055988\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08053B5C\n"
-	"	ldr r0, _08053AE4\n"
-	"	ldr r2, [r0]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	bl TryDisplayDungeonLoggableMessage3\n"
-	"	adds r0, r5, 0\n"
-	"	bl sub_8041B48\n"
-	"	adds r0, r5, 0\n"
-	"	adds r1, r7, 0\n"
-	"	bl sub_80559DC\n"
-	"	adds r5, r7, 0\n"
-	"	ldr r1, [r7, 0x70]\n"
-	"	str r1, [sp, 0x24]\n"
-	"	adds r0, r1, r6\n"
-	"	add r2, sp, 0x2C\n"
-	"	ldrb r2, [r2]\n"
-	"	strb r2, [r0]\n"
-	"	movs r3, 0x1\n"
-	"	str r3, [sp, 0x30]\n"
-	"	b _08053B5C\n"
-	"	.align 2, 0\n"
-	"_08053AD8: .4byte gUnknown_80FDD48\n"
-	"_08053ADC: .4byte gUnknown_202F208\n"
-	"_08053AE0: .4byte gUnknown_202F20C\n"
-	"_08053AE4: .4byte gUnknown_80FC52C\n"
-	"_08053AE8:\n"
-	"	cmp r0, 0xB\n"
-	"	bne _08053B5C\n"
-	"	adds r0, r7, 0\n"
-	"	mov r1, r8\n"
-	"	movs r2, 0\n"
-	"	bl GetMoveTargetAndRangeForPokemon\n"
-	"	lsls r0, 16\n"
-	"	asrs r1, r0, 16\n"
-	"	ldr r0, _08053C88\n"
-	"	ldr r2, [sp, 0x18]\n"
-	"	cmp r2, r0\n"
-	"	beq _08053B5C\n"
-	"	adds r0, 0x32\n"
-	"	cmp r2, r0\n"
-	"	beq _08053B5C\n"
-	"	cmp r4, 0\n"
-	"	bne _08053B5C\n"
-	"	movs r0, 0xF\n"
-	"	ands r0, r1\n"
-	"	cmp r0, 0\n"
-	"	beq _08053B20\n"
-	"	cmp r0, 0x4\n"
-	"	beq _08053B20\n"
-	"	cmp r0, 0x5\n"
-	"	beq _08053B20\n"
-	"	cmp r0, 0x2\n"
-	"	bne _08053B5C\n"
-	"_08053B20:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	bl sub_8055988\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08053B5C\n"
-	"	ldr r0, _08053C8C\n"
-	"	ldr r2, [r0]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	bl TryDisplayDungeonLoggableMessage3\n"
-	"	adds r0, r5, 0\n"
-	"	bl sub_8041BA8\n"
-	"	adds r0, r5, 0\n"
-	"	adds r1, r7, 0\n"
-	"	bl sub_80559DC\n"
-	"	adds r5, r7, 0\n"
-	"	ldr r3, [r7, 0x70]\n"
-	"	str r3, [sp, 0x24]\n"
-	"	movs r0, 0xAD\n"
-	"	lsls r0, 1\n"
-	"	adds r1, r3, r0\n"
-	"	movs r0, 0\n"
-	"	strb r0, [r1]\n"
-	"	movs r1, 0x1\n"
-	"	str r1, [sp, 0x30]\n"
-	"_08053B5C:\n"
-	"	ldr r2, [sp, 0x2C]\n"
-	"	cmp r2, 0\n"
-	"	bne _08053BAE\n"
-	"	ldr r0, [sp, 0x24]\n"
-	"	adds r0, 0xC4\n"
-	"	ldrb r0, [r0]\n"
-	"	cmp r0, 0x7\n"
-	"	bne _08053BAE\n"
-	"	adds r0, r7, 0\n"
-	"	mov r1, r8\n"
-	"	movs r2, 0\n"
-	"	bl GetMoveTargetAndRangeForPokemon\n"
-	"	lsls r0, 16\n"
-	"	movs r1, 0xF0\n"
-	"	lsls r1, 12\n"
-	"	ands r1, r0\n"
-	"	asrs r1, 16\n"
-	"	cmp r1, 0\n"
-	"	beq _08053B90\n"
-	"	cmp r1, 0x4\n"
-	"	beq _08053B90\n"
-	"	cmp r1, 0x5\n"
-	"	beq _08053B90\n"
-	"	cmp r1, 0x2\n"
-	"	bne _08053BAE\n"
-	"_08053B90:\n"
-	"	cmp r4, 0\n"
-	"	bne _08053BAE\n"
-	"	ldr r0, _08053C90\n"
-	"	adds r1, r5, 0\n"
-	"	movs r2, 0\n"
-	"	bl SetMessageArgument\n"
-	"	ldr r0, _08053C94\n"
-	"	ldr r2, [r0]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	bl TryDisplayDungeonLoggableMessage3\n"
-	"	movs r3, 0\n"
-	"	str r3, [sp, 0x28]\n"
-	"_08053BAE:\n"
-	"	adds r0, r5, 0\n"
-	"	mov r1, r8\n"
-	"	bl sub_80571F0\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08053BC0\n"
-	"	movs r0, 0\n"
-	"	str r0, [sp, 0x28]\n"
-	"_08053BC0:\n"
-	"	ldr r1, [sp, 0x28]\n"
-	"	cmp r1, 0\n"
-	"	beq _08053C4A\n"
-	"	adds r0, r5, 0\n"
-	"	movs r1, 0x3C\n"
-	"	bl HasAbility\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08053BFA\n"
-	"	mov r0, r8\n"
-	"	bl IsSoundMove\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08053BFA\n"
-	"	ldr r0, _08053C90\n"
-	"	adds r1, r5, 0\n"
-	"	movs r2, 0\n"
-	"	bl SetMessageArgument\n"
-	"	ldr r0, _08053C98\n"
-	"	ldr r2, [r0]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	bl TryDisplayDungeonLoggableMessage3\n"
-	"	movs r2, 0\n"
-	"	str r2, [sp, 0x28]\n"
-	"_08053BFA:\n"
-	"	ldr r3, [sp, 0x28]\n"
-	"	cmp r3, 0\n"
-	"	beq _08053C4A\n"
-	"	movs r0, 0\n"
-	"	ldr r1, [sp, 0x30]\n"
-	"	cmp r1, 0\n"
-	"	bne _08053C0A\n"
-	"	movs r0, 0x1\n"
-	"_08053C0A:\n"
-	"	adds r2, r0, 0\n"
-	"	mov r3, r8\n"
-	"	ldrh r1, [r3, 0x2]\n"
-	"	cmp r1, 0x68\n"
-	"	beq _08053C20\n"
-	"	ldr r0, _08053C9C\n"
-	"	cmp r1, r0\n"
-	"	beq _08053C20\n"
-	"	subs r0, 0x4\n"
-	"	cmp r1, r0\n"
-	"	bne _08053C22\n"
-	"_08053C20:\n"
-	"	movs r2, 0\n"
-	"_08053C22:\n"
-	"	str r2, [sp]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	movs r3, 0\n"
-	"	bl AccuracyCalc\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	bne _08053C3A\n"
-	"	movs r0, 0\n"
-	"	str r0, [sp, 0x28]\n"
-	"_08053C3A:\n"
-	"	ldr r1, [sp, 0x28]\n"
-	"	cmp r1, 0\n"
-	"	beq _08053C4A\n"
-	"	ldr r2, [sp, 0x2C]\n"
-	"	cmp r2, 0\n"
-	"	beq _08053C4A\n"
-	"	movs r3, 0\n"
-	"	str r3, [sp, 0x28]\n"
-	"_08053C4A:\n"
-	"	adds r0, r5, 0\n"
-	"	bl sub_8045888\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08053C6A\n"
-	"	movs r0, 0x4\n"
-	"	movs r1, 0x4A\n"
-	"	bl sub_803E708\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	movs r3, 0\n"
-	"	bl sub_8041168\n"
-	"_08053C6A:\n"
-	"	ldr r0, [sp, 0x28]\n"
-	"	cmp r0, 0\n"
-	"	beq _08053C72\n"
-	"	b _08053D72\n"
-	"_08053C72:\n"
-	"	ldr r0, [r7, 0x70]\n"
-	"	ldrb r0, [r0, 0x7]\n"
-	"	cmp r0, 0\n"
-	"	beq _08053CA0\n"
-	"	movs r1, 0xAB\n"
-	"	lsls r1, 1\n"
-	"	adds r0, r7, 0\n"
-	"	bl sub_80421C0\n"
-	"	b _08053CA8\n"
-	"	.align 2, 0\n"
-	"_08053C88: .4byte 0x00000163\n"
-	"_08053C8C: .4byte gUnknown_80FC558\n"
-	"_08053C90: .4byte gUnknown_202DFE8\n"
-	"_08053C94: .4byte gUnknown_80FC574\n"
-	"_08053C98: .4byte gUnknown_8100524\n"
-	"_08053C9C: .4byte 0x00000131\n"
-	"_08053CA0:\n"
-	"	ldr r1, _08053CC4\n"
-	"	adds r0, r7, 0\n"
-	"	bl sub_80421C0\n"
-	"_08053CA8:\n"
-	"	ldr r0, _08053CC8\n"
-	"	ldr r1, [r5, 0x70]\n"
-	"	movs r2, 0\n"
-	"	bl SetMessageArgument_2\n"
-	"	cmp r7, r5\n"
-	"	bne _08053CD0\n"
-	"	ldr r0, _08053CCC\n"
-	"	ldr r2, [r0]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r7, 0\n"
-	"	bl TryDisplayDungeonLoggableMessage3\n"
-	"	b _08053D10\n"
-	"	.align 2, 0\n"
-	"_08053CC4: .4byte 0x00000157\n"
-	"_08053CC8: .4byte gUnknown_202DFE8\n"
-	"_08053CCC: .4byte gUnknown_80F9380\n"
-	"_08053CD0:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	movs r2, 0x1\n"
-	"	movs r3, 0\n"
-	"	bl GetTreatmentBetweenMonsters\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	bne _08053CEC\n"
-	"	ldr r0, _08053CE8\n"
-	"	b _08053CF4\n"
-	"	.align 2, 0\n"
-	"_08053CE8: .4byte gUnknown_80F9384\n"
-	"_08053CEC:\n"
-	"	ldr r1, [sp, 0x2C]\n"
-	"	cmp r1, 0\n"
-	"	beq _08053D04\n"
-	"	ldr r0, _08053D00\n"
-	"_08053CF4:\n"
-	"	ldr r2, [r0]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	bl TryDisplayDungeonLoggableMessage3\n"
-	"	b _08053D10\n"
-	"	.align 2, 0\n"
-	"_08053D00: .4byte gUnknown_80F93A4\n"
-	"_08053D04:\n"
-	"	ldr r0, _08053D48\n"
-	"	ldr r2, [r0]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	bl TryDisplayDungeonLoggableMessage3\n"
-	"_08053D10:\n"
-	"	adds r0, r5, 0\n"
-	"	bl sub_8045888\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08053D2A\n"
-	"	ldr r0, _08053D4C\n"
-	"	movs r3, 0x1\n"
-	"	negs r3, r3\n"
-	"	adds r1, r5, 0\n"
-	"	movs r2, 0x1\n"
-	"	bl sub_803ED30\n"
-	"_08053D2A:\n"
-	"	ldr r2, [sp, 0x18]\n"
-	"	cmp r2, 0xCC\n"
-	"	beq _08053D50\n"
-	"	cmp r2, 0xCE\n"
-	"	bne _08053D60\n"
-	"	movs r0, 0x1\n"
-	"	str r0, [sp]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059FC8\n"
-	"	b _08053D60\n"
-	"	.align 2, 0\n"
-	"_08053D48: .4byte gUnknown_80F9364\n"
-	"_08053D4C: .4byte 0x0000270f\n"
-	"_08053D50:\n"
-	"	movs r0, 0x1\n"
-	"	str r0, [sp]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059E54\n"
-	"_08053D60:\n"
-	"	bl sub_8044B28\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08053D6E\n"
-	"	bl _080555A2\n"
-	"_08053D6E:\n"
-	"	bl _08055568\n"
-	"_08053D72:\n"
-	"	ldr r0, [sp, 0x24]\n"
-	"	adds r0, 0xFB\n"
-	"	ldrb r3, [r0]\n"
-	"	mov r10, r3\n"
-	"	ldr r2, [sp, 0x24]\n"
-	"	ldrb r1, [r2, 0x6]\n"
-	"	adds r6, r0, 0\n"
-	"	cmp r1, 0\n"
-	"	beq _08053DA8\n"
-	"	mov r3, r8\n"
-	"	ldrh r1, [r3, 0x2]\n"
-	"	ldr r0, _08053E88\n"
-	"	cmp r1, r0\n"
-	"	beq _08053D9E\n"
-	"	mov r0, r9\n"
-	"	cmp r0, 0\n"
-	"	bne _08053D9E\n"
-	"	mov r1, r10\n"
-	"	cmp r1, 0\n"
-	"	bne _08053D9E\n"
-	"	movs r0, 0x1\n"
-	"	strb r0, [r6]\n"
-	"_08053D9E:\n"
-	"	ldr r2, [sp, 0x68]\n"
-	"	cmp r2, 0x1\n"
-	"	bne _08053DA8\n"
-	"	movs r0, 0x2\n"
-	"	strb r0, [r6]\n"
-	"_08053DA8:\n"
-	"	ldr r3, [sp, 0x24]\n"
-	"	movs r0, 0xB2\n"
-	"	lsls r0, 1\n"
-	"	adds r4, r3, r0\n"
-	"	ldrb r0, [r4]\n"
-	"	cmp r0, 0xFF\n"
-	"	bne _08053DCE\n"
-	"	adds r0, r5, 0\n"
-	"	movs r1, 0xE3\n"
-	"	bl sub_80717A4\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08053DCE\n"
-	"	adds r0, r5, 0x4\n"
-	"	adds r1, r7, 0x4\n"
-	"	bl GetDirectionTowardsPosition\n"
-	"	strb r0, [r4]\n"
-	"_08053DCE:\n"
-	"	ldr r1, [sp, 0x24]\n"
-	"	ldr r2, _08053E8C\n"
-	"	adds r4, r1, r2\n"
-	"	ldrb r0, [r4]\n"
-	"	cmp r0, 0xFF\n"
-	"	bne _08053DF2\n"
-	"	adds r0, r5, 0\n"
-	"	movs r1, 0x19\n"
-	"	bl sub_80717A4\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08053DF2\n"
-	"	adds r0, r5, 0x4\n"
-	"	adds r1, r7, 0x4\n"
-	"	bl GetDirectionTowardsPosition\n"
-	"	strb r0, [r4]\n"
-	"_08053DF2:\n"
-	"	adds r0, r5, 0\n"
-	"	movs r1, 0x39\n"
-	"	bl HasAbility\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08053E4A\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	movs r2, 0x1\n"
-	"	movs r3, 0\n"
-	"	bl GetTreatmentBetweenMonsters\n"
-	"	lsls r0, 24\n"
-	"	lsrs r0, 24\n"
-	"	cmp r0, 0x1\n"
-	"	bne _08053E4A\n"
-	"	mov r3, r8\n"
-	"	ldrh r1, [r3, 0x2]\n"
-	"	ldr r0, _08053E88\n"
-	"	cmp r1, r0\n"
-	"	beq _08053E4A\n"
-	"	subs r0, 0x3\n"
-	"	cmp r1, r0\n"
-	"	beq _08053E4A\n"
-	"	mov r0, r9\n"
-	"	cmp r0, 0\n"
-	"	bne _08053E4A\n"
-	"	ldrb r0, [r3, 0x4]\n"
-	"	cmp r0, 0\n"
-	"	beq _08053E4A\n"
-	"	ldrb r1, [r3, 0x1]\n"
-	"	movs r4, 0x10\n"
-	"	movs r0, 0x10\n"
-	"	ands r0, r1\n"
-	"	cmp r0, 0\n"
-	"	bne _08053E42\n"
-	"	adds r0, r7, 0\n"
-	"	bl sub_8042950\n"
-	"_08053E42:\n"
-	"	mov r1, r8\n"
-	"	ldrb r0, [r1, 0x1]\n"
-	"	orrs r0, r4\n"
-	"	strb r0, [r1, 0x1]\n"
-	"_08053E4A:\n"
-	"	adds r0, r7, 0\n"
-	"	mov r1, r8\n"
-	"	movs r2, 0\n"
-	"	bl GetMoveTargetAndRangeForPokemon\n"
-	"	movs r1, 0xF\n"
-	"	ands r1, r0\n"
-	"	cmp r1, 0\n"
-	"	bne _08053E64\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	bl SetShopkeeperAggression\n"
-	"_08053E64:\n"
-	"	ldr r2, [sp, 0x24]\n"
-	"	movs r3, 0xAC\n"
-	"	lsls r3, 1\n"
-	"	adds r0, r2, r3\n"
-	"	movs r1, 0x1\n"
-	"	strb r1, [r0]\n"
-	"	movs r0, 0xCE\n"
-	"	lsls r0, 1\n"
-	"	ldr r1, [sp, 0x18]\n"
-	"	cmp r1, r0\n"
-	"	bls _08053E7E\n"
-	"	bl _080554C0\n"
-	"_08053E7E:\n"
-	"	lsls r0, r1, 2\n"
-	"	ldr r1, _08053E90\n"
-	"	adds r0, r1\n"
-	"	ldr r0, [r0]\n"
-	"	mov pc, r0\n"
-	"	.align 2, 0\n"
-	"_08053E88: .4byte 0x00000163\n"
-	"_08053E8C: .4byte 0x00000165\n"
-	"_08053E90: .4byte _08053E94\n"
-	"	.align 2, 0\n"
-	"_08053E94:\n"
-	"	.4byte _08054520\n"
-	"	.4byte _08054DB8\n"
-	"	.4byte _08054C18\n"
-	"	.4byte _08054888\n"
-	"	.4byte _08054878\n"
-	"	.4byte _08054D80\n"
-	"	.4byte _08054D8E\n"
-	"	.4byte _08054FB0\n"
-	"	.4byte _08054FE8\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054FF6\n"
-	"	.4byte _08055270\n"
-	"	.4byte _08055190\n"
-	"	.4byte _080548C8\n"
-	"	.4byte _080552B6\n"
-	"	.4byte _08054E1A\n"
-	"	.4byte _0805527E\n"
-	"	.4byte _080551F2\n"
-	"	.4byte _08054508\n"
-	"	.4byte _080549C8\n"
-	"	.4byte _08054EEC\n"
-	"	.4byte _08054968\n"
-	"	.4byte _08054EDE\n"
-	"	.4byte _0805528C\n"
-	"	.4byte _08054B18\n"
-	"	.4byte _08055422\n"
-	"	.4byte _08054E1A\n"
-	"	.4byte _08054AB8\n"
-	"	.4byte _08054508\n"
-	"	.4byte _0805529A\n"
-	"	.4byte _080547A8\n"
-	"	.4byte _08055200\n"
-	"	.4byte _0805460A\n"
-	"	.4byte _08054948\n"
-	"	.4byte _08054878\n"
-	"	.4byte _0805519E\n"
-	"	.4byte _080545AE\n"
-	"	.4byte _0805514A\n"
-	"	.4byte _08054CD4\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08055396\n"
-	"	.4byte _08054EB4\n"
-	"	.4byte _08054A68\n"
-	"	.4byte _08054C28\n"
-	"	.4byte _08054A58\n"
-	"	.4byte _08054E8A\n"
-	"	.4byte _080547A8\n"
-	"	.4byte _08054DD4\n"
-	"	.4byte _080553DC\n"
-	"	.4byte _0805504A\n"
-	"	.4byte _080554A0\n"
-	"	.4byte _08054CD4\n"
-	"	.4byte _0805455E\n"
-	"	.4byte _0805456E\n"
-	"	.4byte _080552D2\n"
-	"	.4byte _080549B8\n"
-	"	.4byte _08055004\n"
-	"	.4byte _0805453E\n"
-	"	.4byte _08054F94\n"
-	"	.4byte _08054818\n"
-	"	.4byte _08054D56\n"
-	"	.4byte _08054CE2\n"
-	"	.4byte _080547B8\n"
-	"	.4byte _08054788\n"
-	"	.4byte _08054868\n"
-	"	.4byte _08054868\n"
-	"	.4byte _08054F16\n"
-	"	.4byte _08055112\n"
-	"	.4byte _080545AE\n"
-	"	.4byte _080545FA\n"
-	"	.4byte _08054F94\n"
-	"	.4byte _080546D8\n"
-	"	.4byte _08054F86\n"
-	"	.4byte _08054928\n"
-	"	.4byte _0805459E\n"
-	"	.4byte _08054D64\n"
-	"	.4byte _08054AD8\n"
-	"	.4byte _080550DA\n"
-	"	.4byte _08054E52\n"
-	"	.4byte _08054878\n"
-	"	.4byte _08054AD8\n"
-	"	.4byte _080545AE\n"
-	"	.4byte _080546E8\n"
-	"	.4byte _08054ED0\n"
-	"	.4byte _08054878\n"
-	"	.4byte _080550CC\n"
-	"	.4byte _0805462A\n"
-	"	.4byte _080545AE\n"
-	"	.4byte _08054E28\n"
-	"	.4byte _0805462A\n"
-	"	.4byte _080545AE\n"
-	"	.4byte _08054B78\n"
-	"	.4byte _08055120\n"
-	"	.4byte _080546E8\n"
-	"	.4byte _08054C48\n"
-	"	.4byte _08054CC6\n"
-	"	.4byte _080551D6\n"
-	"	.4byte _08054928\n"
-	"	.4byte _08054FA2\n"
-	"	.4byte _08054A38\n"
-	"	.4byte _08054B58\n"
-	"	.4byte _0805457E\n"
-	"	.4byte _08055090\n"
-	"	.4byte _080547E8\n"
-	"	.4byte _08055238\n"
-	"	.4byte _08054C18\n"
-	"	.4byte _08054A88\n"
-	"	.4byte _080546F8\n"
-	"	.4byte _08054DF0\n"
-	"	.4byte _0805464A\n"
-	"	.4byte _08054A78\n"
-	"	.4byte _08054878\n"
-	"	.4byte _08054B98\n"
-	"	.4byte _0805512E\n"
-	"	.4byte _080546F8\n"
-	"	.4byte _08055414\n"
-	"	.4byte _08054AF8\n"
-	"	.4byte _08054C78\n"
-	"	.4byte _0805452E\n"
-	"	.4byte _0805536C\n"
-	"	.4byte _08054768\n"
-	"	.4byte _080550DA\n"
-	"	.4byte _08054DC6\n"
-	"	.4byte _080550E8\n"
-	"	.4byte _08054858\n"
-	"	.4byte _080545FA\n"
-	"	.4byte _08054508\n"
-	"	.4byte _080547B8\n"
-	"	.4byte _08055104\n"
-	"	.4byte _08054898\n"
-	"	.4byte _08054BF8\n"
-	"	.4byte _080545CA\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054778\n"
-	"	.4byte _08054BE8\n"
-	"	.4byte _08054B08\n"
-	"	.4byte _08054508\n"
-	"	.4byte _080553B2\n"
-	"	.4byte _08055388\n"
-	"	.4byte _08054798\n"
-	"	.4byte _08054AE8\n"
-	"	.4byte _08054BD8\n"
-	"	.4byte _08054EA6\n"
-	"	.4byte _080545FA\n"
-	"	.4byte _08054768\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054EA6\n"
-	"	.4byte _08054738\n"
-	"	.4byte _080549F8\n"
-	"	.4byte _08054748\n"
-	"	.4byte _080545DA\n"
-	"	.4byte _08054B48\n"
-	"	.4byte _08054838\n"
-	"	.4byte _08054FBE\n"
-	"	.4byte _08054508\n"
-	"	.4byte _080550F6\n"
-	"	.4byte _08054FDA\n"
-	"	.4byte _0805456E\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054A48\n"
-	"	.4byte _08055166\n"
-	"	.4byte _08054508\n"
-	"	.4byte _080546C8\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054B38\n"
-	"	.4byte _08054C38\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054988\n"
-	"	.4byte _08054AC8\n"
-	"	.4byte _080548C8\n"
-	"	.4byte _080550BE\n"
-	"	.4byte _08054C58\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054508\n"
-	"	.4byte _080548B8\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054508\n"
-	"	.4byte _080549D8\n"
-	"	.4byte _08054508\n"
-	"	.4byte _080553C0\n"
-	"	.4byte _08055468\n"
-	"	.4byte _08055246\n"
-	"	.4byte _08054A28\n"
-	"	.4byte _08054F5C\n"
-	"	.4byte _08054758\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054508\n"
-	"	.4byte _080548C8\n"
-	"	.4byte _080548E8\n"
-	"	.4byte _08054908\n"
-	"	.4byte _080548A8\n"
-	"	.4byte _080549B8\n"
-	"	.4byte _080548D8\n"
-	"	.4byte _08054EC2\n"
-	"	.4byte _08054BA8\n"
-	"	.4byte _080548D8\n"
-	"	.4byte _0805463A\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054A28\n"
-	"	.4byte _08054AF8\n"
-	"	.4byte _0805509E\n"
-	"	.4byte _08054FCC\n"
-	"	.4byte _08054D28\n"
-	"	.4byte _080547D8\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054C98\n"
-	"	.4byte _08054B28\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054DAA\n"
-	"	.4byte _08054E98\n"
-	"	.4byte _08054CB8\n"
-	"	.4byte _08054A08\n"
-	"	.4byte _08054AC8\n"
-	"	.4byte _08054A98\n"
-	"	.4byte _08054C78\n"
-	"	.4byte _0805461A\n"
-	"	.4byte _080553A4\n"
-	"	.4byte _08054788\n"
-	"	.4byte _08054508\n"
-	"	.4byte _0805520E\n"
-	"	.4byte _08054DC6\n"
-	"	.4byte _08054E7C\n"
-	"	.4byte _08054828\n"
-	"	.4byte _08054D0C\n"
-	"	.4byte _0805521C\n"
-	"	.4byte _08055066\n"
-	"	.4byte _0805456E\n"
-	"	.4byte _08054878\n"
-	"	.4byte _08054C68\n"
-	"	.4byte _08054DE2\n"
-	"	.4byte _080546F8\n"
-	"	.4byte _08054768\n"
-	"	.4byte _08055182\n"
-	"	.4byte _08054D1A\n"
-	"	.4byte _0805458E\n"
-	"	.4byte _0805458E\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054508\n"
-	"	.4byte _0805458E\n"
-	"	.4byte _08054918\n"
-	"	.4byte _0805469C\n"
-	"	.4byte _08055174\n"
-	"	.4byte _08054938\n"
-	"	.4byte _080545DA\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08055012\n"
-	"	.4byte _08054508\n"
-	"	.4byte _080545AE\n"
-	"	.4byte _08054F24\n"
-	"	.4byte _08054B78\n"
-	"	.4byte _080552E0\n"
-	"	.4byte _080546D8\n"
-	"	.4byte _08055074\n"
-	"	.4byte _08055254\n"
-	"	.4byte _08054A28\n"
-	"	.4byte _08054C08\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054778\n"
-	"	.4byte _0805456E\n"
-	"	.4byte _0805535E\n"
-	"	.4byte _080547C8\n"
-	"	.4byte _080549A8\n"
-	"	.4byte _08055326\n"
-	"	.4byte _08054AA8\n"
-	"	.4byte _08054958\n"
-	"	.4byte _0805530A\n"
-	"	.4byte _0805457E\n"
-	"	.4byte _08054788\n"
-	"	.4byte _08054D3A\n"
-	"	.4byte _08054EA6\n"
-	"	.4byte _080548C8\n"
-	"	.4byte _08054728\n"
-	"	.4byte _080547F8\n"
-	"	.4byte _08054BB8\n"
-	"	.4byte _0805513C\n"
-	"	.4byte _0805463A\n"
-	"	.4byte _0805463A\n"
-	"	.4byte _080548F8\n"
-	"	.4byte _080552A8\n"
-	"	.4byte _080546B8\n"
-	"	.4byte _08054958\n"
-	"	.4byte _08054508\n"
-	"	.4byte _080553F8\n"
-	"	.4byte _08054CB8\n"
-	"	.4byte _08054978\n"
-	"	.4byte _08054778\n"
-	"	.4byte _08054508\n"
-	"	.4byte _080545FA\n"
-	"	.4byte _0805456E\n"
-	"	.4byte _080551C8\n"
-	"	.4byte _08054B88\n"
-	"	.4byte _08054E0C\n"
-	"	.4byte _08054E60\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054D72\n"
-	"	.4byte _08054928\n"
-	"	.4byte _08054508\n"
-	"	.4byte _080550B0\n"
-	"	.4byte _08054A18\n"
-	"	.4byte _08054788\n"
-	"	.4byte _08055090\n"
-	"	.4byte _080550B0\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054DAA\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054708\n"
-	"	.4byte _080547C8\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054508\n"
-	"	.4byte _080551E4\n"
-	"	.4byte _08054EFA\n"
-	"	.4byte _080552D2\n"
-	"	.4byte _080551BA\n"
-	"	.4byte _08055074\n"
-	"	.4byte _08054C38\n"
-	"	.4byte _080549E8\n"
-	"	.4byte _08054AD8\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054D48\n"
-	"	.4byte _08054680\n"
-	"	.4byte _08054808\n"
-	"	.4byte _08055492\n"
-	"	.4byte _08055406\n"
-	"	.4byte _08054DFE\n"
-	"	.4byte _0805544C\n"
-	"	.4byte _08054F32\n"
-	"	.4byte _08054664\n"
-	"	.4byte _080549B8\n"
-	"	.4byte _080553EA\n"
-	"	.4byte _08054718\n"
-	"	.4byte _080545AE\n"
-	"	.4byte _08055430\n"
-	"	.4byte _08054BC8\n"
-	"	.4byte _08054E1A\n"
-	"	.4byte _08054CE2\n"
-	"	.4byte _08054848\n"
-	"	.4byte _08054768\n"
-	"	.4byte _08054998\n"
-	"	.4byte _0805457E\n"
-	"	.4byte _0805457E\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054E6E\n"
-	"	.4byte _08054FA2\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054A88\n"
-	"	.4byte _0805454E\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054AF8\n"
-	"	.4byte _08054512\n"
-	"	.4byte _080554C0\n"
-	"	.4byte _08054CF0\n"
-	"	.4byte _080554C0\n"
-	"	.4byte _080554C0\n"
-	"	.4byte _08054508\n"
-	"	.4byte _0805529A\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08055158\n"
-	"	.4byte _08054CA8\n"
-	"	.4byte _08055318\n"
-	"	.4byte _08054508\n"
-	"	.4byte _08054F24\n"
-	"	.4byte _08054958\n"
-	"	.4byte _08054F5C\n"
-	"	.4byte _080552EE\n"
-	"	.4byte _08054B68\n"
-	"	.4byte _08054CC6\n"
-	"	.4byte _08054F40\n"
-	"	.4byte _08055058\n"
-	"	.4byte _080552FC\n"
-	"	.4byte _08055476\n"
-	"	.4byte _08055484\n"
-	"	.4byte _080553CE\n"
-	"	.4byte _08055326\n"
-	"	.4byte _08055090\n"
-	"	.4byte _08054E44\n"
-	"	.4byte _080548C8\n"
-	"	.4byte _08054F08\n"
-	"	.4byte _0805543E\n"
-	"	.4byte _08055350\n"
-	"	.4byte _08054C88\n"
-	"	.4byte _08054E36\n"
-	"	.4byte _08054F6A\n"
-	"	.4byte _08055020\n"
-	"	.4byte _08055334\n"
-	"	.4byte _080551AC\n"
-	"	.4byte _080545EA\n"
-	"	.4byte _0805545A\n"
-	"	.4byte _08054D9C\n"
-	"	.4byte _08055342\n"
-	"	.4byte _08055082\n"
-	"	.4byte _080554AE\n"
-	"	.4byte _08055262\n"
-	"	.4byte _0805522A\n"
-	"	.4byte _08054F4E\n"
-	"	.4byte _08054CFE\n"
-	"	.4byte _080554C0\n"
-	"	.4byte _0805537A\n"
-	"	.4byte _080554C0\n"
-	"	.4byte _080554C0\n"
-	"	.4byte _080554A0\n"
-	"	.4byte _080552C4\n"
-	"	.4byte _080554C0\n"
-	"	.4byte _08054F78\n"
-	"	.4byte _0805502E\n"
-	"	.4byte _080554C0\n"
-	"	.4byte _0805503C\n"
-	"_08054508:\n"
-	"	movs r3, 0x80\n"
-	"	lsls r3, 1\n"
-	"	mov r2, r9\n"
-	"	str r2, [sp]\n"
-	"	b _080545B6\n"
-	"_08054512:\n"
-	"	mov r3, r9\n"
-	"	str r3, [sp]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	movs r3, 0x80\n"
-	"	b _080545BC\n"
-	"_08054520:\n"
-	"	mov r0, r9\n"
-	"	str r0, [sp]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	movs r3, 0\n"
-	"	b _080545BC\n"
-	"_0805452E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058F04\n"
-	"	bl _080554BA\n"
-	"_0805453E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058270\n"
-	"	bl _080554BA\n"
-	"_0805454E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B968\n"
-	"	bl _080554BA\n"
-	"_0805455E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805816C\n"
-	"	bl _080554BA\n"
-	"_0805456E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80581D0\n"
-	"	bl _080554BA\n"
-	"_0805457E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058B3C\n"
-	"	bl _080554BA\n"
-	"_0805458E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805A568\n"
-	"	bl _080554BA\n"
-	"_0805459E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl FocusEnergyMoveAction\n"
-	"	bl _080554BA\n"
-	"_080545AE:\n"
-	"	movs r3, 0x80\n"
-	"	lsls r3, 1\n"
-	"	mov r1, r9\n"
-	"	str r1, [sp]\n"
-	"_080545B6:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"_080545BC:\n"
-	"	bl sub_8055640\n"
-	"	negs r1, r0\n"
-	"	orrs r1, r0\n"
-	"	lsrs r4, r1, 31\n"
-	"	bl _080554C2\n"
-	"_080545CA:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80590D4\n"
-	"	bl _080554BA\n"
-	"_080545DA:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80595EC\n"
-	"	bl _080554BA\n"
-	"_080545EA:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805C138\n"
-	"	bl _080554BA\n"
-	"_080545FA:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B17C\n"
-	"	bl _080554BA\n"
-	"_0805460A:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl WhirlpoolMoveAction\n"
-	"	bl _080554BA\n"
-	"_0805461A:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl SurfMoveAction\n"
-	"	bl _080554BA\n"
-	"_0805462A:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805889C\n"
-	"	bl _080554BA\n"
-	"_0805463A:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059E0C\n"
-	"	bl _080554BA\n"
-	"_0805464A:\n"
-	"	ldr r0, _08054660\n"
-	"	ldr r3, [r0]\n"
-	"	mov r2, r9\n"
-	"	str r2, [sp]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	bl sub_8058C98\n"
-	"	bl _080554BA\n"
-	"	.align 2, 0\n"
-	"_08054660: .4byte gUnknown_8106A50\n"
-	"_08054664:\n"
-	"	ldr r0, _0805467C\n"
-	"	ldr r3, [r0]\n"
-	"	mov r0, r9\n"
-	"	str r0, [sp]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	bl sub_8058C98\n"
-	"	bl _080554BA\n"
-	"	.align 2, 0\n"
-	"_0805467C: .4byte gUnknown_8106A4C\n"
-	"_08054680:\n"
-	"	ldr r0, _08054698\n"
-	"	ldr r3, [r0]\n"
-	"	mov r1, r9\n"
-	"	str r1, [sp]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	bl sub_805B3FC\n"
-	"	bl _080554BA\n"
-	"	.align 2, 0\n"
-	"_08054698: .4byte gUnknown_8106A4C\n"
-	"_0805469C:\n"
-	"	ldr r0, _080546B4\n"
-	"	ldr r3, [r0]\n"
-	"	mov r2, r9\n"
-	"	str r2, [sp]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	bl sub_805A5E8\n"
-	"	bl _080554BA\n"
-	"	.align 2, 0\n"
-	"_080546B4: .4byte gUnknown_8106A4C\n"
-	"_080546B8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B074\n"
-	"	bl _080554BA\n"
-	"_080546C8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059928\n"
-	"	bl _080554BA\n"
-	"_080546D8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058580\n"
-	"	bl _080554BA\n"
-	"_080546E8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058930\n"
-	"	bl _080554BA\n"
-	"_080546F8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058C00\n"
-	"	bl _080554BA\n"
-	"_08054708:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B324\n"
-	"	bl _080554BA\n"
-	"_08054718:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B910\n"
-	"	bl _080554BA\n"
-	"_08054728:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805AE74\n"
-	"	bl _080554BA\n"
-	"_08054738:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059540\n"
-	"	bl _080554BA\n"
-	"_08054748:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80595A0\n"
-	"	bl _080554BA\n"
-	"_08054758:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059D00\n"
-	"	bl _080554BA\n"
-	"_08054768:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058FBC\n"
-	"	bl _080554BA\n"
-	"_08054778:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059190\n"
-	"	bl _080554BA\n"
-	"_08054788:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058430\n"
-	"	bl _080554BA\n"
-	"_08054798:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059424\n"
-	"	bl _080554BA\n"
-	"_080547A8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057C88\n"
-	"	bl _080554BA\n"
-	"_080547B8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80583D8\n"
-	"	bl _080554BA\n"
-	"_080547C8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805AC90\n"
-	"	bl _080554BA\n"
-	"_080547D8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl TriAttackMoveAction\n"
-	"	bl _080554BA\n"
-	"_080547E8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058B84\n"
-	"	bl _080554BA\n"
-	"_080547F8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805AECC\n"
-	"	bl _080554BA\n"
-	"_08054808:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B454\n"
-	"	bl _080554BA\n"
-	"_08054818:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80582C4\n"
-	"	bl _080554BA\n"
-	"_08054828:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805A408\n"
-	"	bl _080554BA\n"
-	"_08054838:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059714\n"
-	"	bl _080554BA\n"
-	"_08054848:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B808\n"
-	"	bl _080554BA\n"
-	"_08054858:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059050\n"
-	"	bl _080554BA\n"
-	"_08054868:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058478\n"
-	"	bl _080554BA\n"
-	"_08054878:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80576F8\n"
-	"	bl _080554BA\n"
-	"_08054888:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl YawnMoveAction\n"
-	"	bl _080554BA\n"
-	"_08054898:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059080\n"
-	"	bl _080554BA\n"
-	"_080548A8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059D98\n"
-	"	bl _080554BA\n"
-	"_080548B8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059AF8\n"
-	"	bl _080554BA\n"
-	"_080548C8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059AA8\n"
-	"	bl _080554BA\n"
-	"_080548D8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059DA4\n"
-	"	bl _080554BA\n"
-	"_080548E8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059D48\n"
-	"	bl _080554BA\n"
-	"_080548F8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B028\n"
-	"	bl _080554BA\n"
-	"_08054908:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059D58\n"
-	"	bl _080554BA\n"
-	"_08054918:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl TickleMoveAction\n"
-	"	bl _080554BA\n"
-	"_08054928:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058638\n"
-	"	bl _080554BA\n"
-	"_08054938:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805A688\n"
-	"	bl _080554BA\n"
-	"_08054948:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057D7C\n"
-	"	bl _080554BA\n"
-	"_08054958:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B0BC\n"
-	"	bl _080554BA\n"
-	"_08054968:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl PainSplitMoveAction\n"
-	"	bl _080554BA\n"
-	"_08054978:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B164\n"
-	"	bl _080554BA\n"
-	"_08054988:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059A18\n"
-	"	bl _080554BA\n"
-	"_08054998:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B884\n"
-	"	bl _080554BA\n"
-	"_080549A8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl BulkUpMoveAction\n"
-	"	bl _080554BA\n"
-	"_080549B8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80582D4\n"
-	"	bl _080554BA\n"
-	"_080549C8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl RageMoveAction\n"
-	"	bl _080554BA\n"
-	"_080549D8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059B94\n"
-	"	bl _080554BA\n"
-	"_080549E8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B3B4\n"
-	"	bl _080554BA\n"
-	"_080549F8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059588\n"
-	"	bl _080554BA\n"
-	"_08054A08:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805A2B0\n"
-	"	bl _080554BA\n"
-	"_08054A18:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B2FC\n"
-	"	bl _080554BA\n"
-	"_08054A28:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059CD8\n"
-	"	bl _080554BA\n"
-	"_08054A38:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058A7C\n"
-	"	bl _080554BA\n"
-	"_08054A48:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80598CC\n"
-	"	bl _080554BA\n"
-	"_08054A58:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057F7C\n"
-	"	bl _080554BA\n"
-	"_08054A68:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057ED0\n"
-	"	bl _080554BA\n"
-	"_08054A78:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058CEC\n"
-	"	bl _080554BA\n"
-	"_08054A88:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058BF0\n"
-	"	bl _080554BA\n"
-	"_08054A98:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805A2C8\n"
-	"	bl _080554BA\n"
-	"_08054AA8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805AD34\n"
-	"	bl _080554BA\n"
-	"_08054AB8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057C68\n"
-	"	bl _080554BA\n"
-	"_08054AC8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059A2C\n"
-	"	bl _080554BA\n"
-	"_08054AD8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80586DC\n"
-	"	bl _080554BA\n"
-	"_08054AE8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805946C\n"
-	"	bl _080554BA\n"
-	"_08054AF8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058E5C\n"
-	"	bl _080554BA\n"
-	"_08054B08:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80591E4\n"
-	"	bl _080554BA\n"
-	"_08054B18:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057BC4\n"
-	"	bl _080554BA\n"
-	"_08054B28:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805A210\n"
-	"	bl _080554BA\n"
-	"_08054B38:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059988\n"
-	"	bl _080554BA\n"
-	"_08054B48:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl SolarBeamMoveAction\n"
-	"	bl _080554BA\n"
-	"_08054B58:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl SkyAttackMoveAction\n"
-	"	bl _080554BA\n"
-	"_08054B68:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805BE90\n"
-	"	bl _080554BA\n"
-	"_08054B78:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80588B8\n"
-	"	bl _080554BA\n"
-	"_08054B88:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl WrapMoveAction\n"
-	"	bl _080554BA\n"
-	"_08054B98:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058D38\n"
-	"	bl _080554BA\n"
-	"_08054BA8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059DC4\n"
-	"	bl _080554BA\n"
-	"_08054BB8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl PresentMoveAction\n"
-	"	bl _080554BA\n"
-	"_08054BC8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl ReflectMoveAction\n"
-	"	bl _080554BA\n"
-	"_08054BD8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl SandstormMoveAction\n"
-	"	bl _080554BA\n"
-	"_08054BE8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl SafeguardMoveAction\n"
-	"	bl _080554BA\n"
-	"_08054BF8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl MistMoveAction\n"
-	"	bl _080554BA\n"
-	"_08054C08:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl LightScreenMoveAction\n"
-	"	bl _080554BA\n"
-	"_08054C18:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805768C\n"
-	"	bl _080554BA\n"
-	"_08054C28:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057F24\n"
-	"	bl _080554BA\n"
-	"_08054C38:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80599EC\n"
-	"	bl _080554BA\n"
-	"_08054C48:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80589D4\n"
-	"	bl _080554BA\n"
-	"_08054C58:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059AC4\n"
-	"	bl _080554BA\n"
-	"_08054C68:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805A4D4\n"
-	"	bl _080554BA\n"
-	"_08054C78:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058EE0\n"
-	"	bl _080554BA\n"
-	"_08054C88:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl ScannerOrbAction\n"
-	"	bl _080554BA\n"
-	"_08054C98:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805A120\n"
-	"	bl _080554BA\n"
-	"_08054CA8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805BA50\n"
-	"	bl _080554BA\n"
-	"_08054CB8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805A2A0\n"
-	"	b _080554BA\n"
-	"_08054CC6:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058A08\n"
-	"	b _080554BA\n"
-	"_08054CD4:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl CounterMoveAction\n"
-	"	b _080554BA\n"
-	"_08054CE2:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl BideMoveAction\n"
-	"	b _080554BA\n"
-	"_08054CF0:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805836C\n"
-	"	b _080554BA\n"
-	"_08054CFE:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl TrapperOrbAction\n"
-	"	b _080554BA\n"
-	"_08054D0C:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805A450\n"
-	"	b _080554BA\n"
-	"_08054D1A:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl CurseMoveAction\n"
-	"	b _080554BA\n"
-	"_08054D28:\n"
-	"	movs r0, 0\n"
-	"	str r0, [sp]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059FC8\n"
-	"	b _080554BA\n"
-	"_08054D3A:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805AE3C\n"
-	"	b _080554BA\n"
-	"_08054D48:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B3E0\n"
-	"	b _080554BA\n"
-	"_08054D56:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl RazorWindMoveAction\n"
-	"	b _080554BA\n"
-	"_08054D64:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl FocusPunchMoveAction\n"
-	"	b _080554BA\n"
-	"_08054D72:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl MagicCoatMoveAction\n"
-	"	b _080554BA\n"
-	"_08054D80:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl NightmareMoveAction\n"
-	"	b _080554BA\n"
-	"_08054D8E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057748\n"
-	"	b _080554BA\n"
-	"_08054D9C:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805C1BC\n"
-	"	b _080554BA\n"
-	"_08054DAA:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl MudWaterSportMoveAction\n"
-	"	b _080554BA\n"
-	"_08054DB8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057634\n"
-	"	b _080554BA\n"
-	"_08054DC6:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805A3DC\n"
-	"	b _080554BA\n"
-	"_08054DD4:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057FF4\n"
-	"	b _080554BA\n"
-	"_08054DE2:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805A4FC\n"
-	"	b _080554BA\n"
-	"_08054DF0:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058C48\n"
-	"	b _080554BA\n"
-	"_08054DFE:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl LeechSeedMoveAction\n"
-	"	b _080554BA\n"
-	"_08054E0C:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl SpikesMoveAction\n"
-	"	b _080554BA\n"
-	"_08054E1A:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80578EC\n"
-	"	b _080554BA\n"
-	"_08054E28:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80588A8\n"
-	"	b _080554BA\n"
-	"_08054E36:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl RadarOrbAction\n"
-	"	b _080554BA\n"
-	"_08054E44:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805BC70\n"
-	"	b _080554BA\n"
-	"_08054E52:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80587E8\n"
-	"	b _080554BA\n"
-	"_08054E60:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B264\n"
-	"	b _080554BA\n"
-	"_08054E6E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl SkullBashMoveAction\n"
-	"	b _080554BA\n"
-	"_08054E7C:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl WishMoveAction\n"
-	"	b _080554BA\n"
-	"_08054E8A:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057FCC\n"
-	"	b _080554BA\n"
-	"_08054E98:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805A258\n"
-	"	b _080554BA\n"
-	"_08054EA6:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059528\n"
-	"	b _080554BA\n"
-	"_08054EB4:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057E6C\n"
-	"	b _080554BA\n"
-	"_08054EC2:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059DB4\n"
-	"	b _080554BA\n"
-	"_08054ED0:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058838\n"
-	"	b _080554BA\n"
-	"_08054EDE:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl TormentMoveAction\n"
-	"	b _080554BA\n"
-	"_08054EEC:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057974\n"
-	"	b _080554BA\n"
-	"_08054EFA:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B388\n"
-	"	b _080554BA\n"
-	"_08054F08:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805BC98\n"
-	"	b _080554BA\n"
-	"_08054F16:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80584C0\n"
-	"	b _080554BA\n"
-	"_08054F24:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805BB74\n"
-	"	b _080554BA\n"
-	"_08054F32:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B668\n"
-	"	b _080554BA\n"
-	"_08054F40:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl LuminousOrbAction\n"
-	"	b _080554BA\n"
-	"_08054F4E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl FillInOrbAction\n"
-	"	b _080554BA\n"
-	"_08054F5C:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059CF0\n"
-	"	b _080554BA\n"
-	"_08054F6A:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805BF34\n"
-	"	b _080554BA\n"
-	"_08054F78:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl StairsOrbAction\n"
-	"	b _080554BA\n"
-	"_08054F86:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl BrickBreakMoveAction\n"
-	"	b _080554BA\n"
-	"_08054F94:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80582AC\n"
-	"	b _080554BA\n"
-	"_08054FA2:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058A54\n"
-	"	b _080554BA\n"
-	"_08054FB0:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl VitalThrowMoveAction\n"
-	"	b _080554BA\n"
-	"_08054FBE:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl FlyMoveAction\n"
-	"	b _080554BA\n"
-	"_08054FCC:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059F38\n"
-	"	b _080554BA\n"
-	"_08054FDA:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl DiveMoveAction\n"
-	"	b _080554BA\n"
-	"_08054FE8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl DigMoveAction\n"
-	"	b _080554BA\n"
-	"_08054FF6:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057824\n"
-	"	b _080554BA\n"
-	"_08055004:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805825C\n"
-	"	b _080554BA\n"
-	"_08055012:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl KnockOffMoveAction\n"
-	"	b _080554BA\n"
-	"_08055020:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl TrapbustOrbAction\n"
-	"	b _080554BA\n"
-	"_0805502E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl LongtossOrbAction\n"
-	"	b _080554BA\n"
-	"_0805503C:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl PierceOrbAction\n"
-	"	b _080554BA\n"
-	"_0805504A:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl GrudgeMoveAction\n"
-	"	b _080554BA\n"
-	"_08055058:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl PetrifyOrbAction\n"
-	"	b _080554BA\n"
-	"_08055066:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805A4C0\n"
-	"	b _080554BA\n"
-	"_08055074:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805AAD0\n"
-	"	b _080554BA\n"
-	"_08055082:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl ShockerOrbAction\n"
-	"	b _080554BA\n"
-	"_08055090:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B314\n"
-	"	b _080554BA\n"
-	"_0805509E:\n"
-	"	movs r0, 0\n"
-	"	str r0, [sp]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059E54\n"
-	"	b _080554BA\n"
-	"_080550B0:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl ProtectMoveAction\n"
-	"	b _080554BA\n"
-	"_080550BE:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059AB8\n"
-	"	b _080554BA\n"
-	"_080550CC:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058858\n"
-	"	b _080554BA\n"
-	"_080550DA:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058770\n"
-	"	b _080554BA\n"
-	"_080550E8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8059004\n"
-	"	b _080554BA\n"
-	"_080550F6:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80597F0\n"
-	"	b _080554BA\n"
-	"_08055104:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl ChargeMoveAction\n"
-	"	b _080554BA\n"
-	"_08055112:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058548\n"
-	"	b _080554BA\n"
-	"_08055120:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80588F4\n"
-	"	b _080554BA\n"
-	"_0805512E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058D44\n"
-	"	b _080554BA\n"
-	"_0805513C:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805AFA4\n"
-	"	b _080554BA\n"
-	"_0805514A:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl SmokescreenMoveAction\n"
-	"	b _080554BA\n"
-	"_08055158:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805BA44\n"
-	"	b _080554BA\n"
-	"_08055166:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl StockpileMoveAction\n"
-	"	b _080554BA\n"
-	"_08055174:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl SpitUpMoveAction\n"
-	"	b _080554BA\n"
-	"_08055182:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl SwallowMoveAction\n"
-	"	b _080554BA\n"
-	"_08055190:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl RainDanceMoveAction\n"
-	"	b _080554BA\n"
-	"_0805519E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057D9C\n"
-	"	b _080554BA\n"
-	"_080551AC:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl InvisifyOrbAction\n"
-	"	b _080554BA\n"
-	"_080551BA:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl MirrorCoatMoveAction\n"
-	"	b _080554BA\n"
-	"_080551C8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl PerishSongMoveAction\n"
-	"	b _080554BA\n"
-	"_080551D6:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058A18\n"
-	"	b _080554BA\n"
-	"_080551E4:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl DestinyBondMoveAction\n"
-	"	b _080554BA\n"
-	"_080551F2:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl EncoreMoveAction\n"
-	"	b _080554BA\n"
-	"_08055200:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057CD0\n"
-	"	b _080554BA\n"
-	"_0805520E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl SunnyDayMoveAction\n"
-	"	b _080554BA\n"
-	"_0805521C:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805A464\n"
-	"	b _080554BA\n"
-	"_0805522A:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805C2A0\n"
-	"	b _080554BA\n"
-	"_08055238:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl EndureMoveAction\n"
-	"	b _080554BA\n"
-	"_08055246:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl HelpingHandMoveAction\n"
-	"	b _080554BA\n"
-	"_08055254:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl BellyDrumMoveAction\n"
-	"	b _080554BA\n"
-	"_08055262:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805C288\n"
-	"	b _080554BA\n"
-	"_08055270:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805783C\n"
-	"	b _080554BA\n"
-	"_0805527E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_80578FC\n"
-	"	b _080554BA\n"
-	"_0805528C:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057BB4\n"
-	"	b _080554BA\n"
-	"_0805529A:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl RockSmashMoveAction\n"
-	"	b _080554BA\n"
-	"_080552A8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl TransformMoveAction\n"
-	"	b _080554BA\n"
-	"_080552B6:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl HailMoveAction\n"
-	"	b _080554BA\n"
-	"_080552C4:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl MobileOrbAction\n"
-	"	b _080554BA\n"
-	"_080552D2:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8058234\n"
-	"	b _080554BA\n"
-	"_080552E0:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805A85C\n"
-	"	b _080554BA\n"
-	"_080552EE:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl TransferOrbAction\n"
-	"	b _080554BA\n"
-	"_080552FC:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805BB98\n"
-	"	b _080554BA\n"
-	"_0805530A:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805AD54\n"
-	"	b _080554BA\n"
-	"_08055318:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl ReboundOrbAction\n"
-	"	b _080554BA\n"
-	"_08055326:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805AD04\n"
-	"	b _080554BA\n"
-	"_08055334:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805C080\n"
-	"	b _080554BA\n"
-	"_08055342:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805C1E4\n"
-	"	b _080554BA\n"
-	"_08055350:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl EscapeOrbAction\n"
-	"	b _080554BA\n"
-	"_0805535E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl SecretPowerMoveAction\n"
-	"	b _080554BA\n"
-	"_0805536C:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl NaturePowerMoveAction\n"
-	"	b _080554BA\n"
-	"_0805537A:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805C3F8\n"
-	"	b _080554BA\n"
-	"_08055388:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl SketchMoveAction\n"
-	"	b _080554BA\n"
-	"_08055396:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_8057E50\n"
-	"	b _080554BA\n"
-	"_080553A4:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl RolePlayMoveAction\n"
-	"	b _080554BA\n"
-	"_080553B2:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl SkillSwapMoveAction\n"
-	"	b _080554BA\n"
-	"_080553C0:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl ConversionMoveAction\n"
-	"	b _080554BA\n"
-	"_080553CE:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl CleanseOrbAction\n"
-	"	b _080554BA\n"
-	"_080553DC:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805805C\n"
-	"	b _080554BA\n"
-	"_080553EA:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl SnatchMoveAction\n"
-	"	b _080554BA\n"
-	"_080553F8:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl HandleColorChange\n"
-	"	b _080554BA\n"
-	"_08055406:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B53C\n"
-	"	b _080554BA\n"
-	"_08055414:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl PsychUpMoveAction\n"
-	"	b _080554BA\n"
-	"_08055422:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl SnoreMoveAction\n"
-	"	b _080554BA\n"
-	"_08055430:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl RecycleMoveAction\n"
-	"	b _080554BA\n"
-	"_0805543E:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl SilenceOrbAction\n"
-	"	b _080554BA\n"
-	"_0805544C:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805B618\n"
-	"	b _080554BA\n"
-	"_0805545A:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl IdentifyOrbAction\n"
-	"	b _080554BA\n"
-	"_08055468:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl Conversion2MoveAction\n"
-	"	b _080554BA\n"
-	"_08055476:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805BEB8\n"
-	"	b _080554BA\n"
-	"_08055484:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805BEC8\n"
-	"	b _080554BA\n"
-	"_08055492:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl MimicMoveAction\n"
-	"	b _080554BA\n"
-	"_080554A0:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805C45C\n"
-	"	b _080554BA\n"
-	"_080554AE:\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	mov r3, r9\n"
-	"	bl sub_805C208\n"
-	"_080554BA:\n"
-	"	lsls r0, 24\n"
-	"	lsrs r4, r0, 24\n"
-	"	b _080554C2\n"
-	"_080554C0:\n"
-	"	movs r4, 0\n"
-	"_080554C2:\n"
-	"	bl sub_8044B28\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	bne _080555A2\n"
-	"	ldr r0, [sp, 0x20]\n"
-	"	bl EntityExists\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _080554E6\n"
-	"	ldr r3, [sp, 0x20]\n"
-	"	ldr r0, [r3, 0x70]\n"
-	"	adds r0, 0x46\n"
-	"	ldrb r1, [r0]\n"
-	"	adds r0, r3, 0\n"
-	"	bl sub_806CE68\n"
-	"_080554E6:\n"
-	"	cmp r4, 0\n"
-	"	bne _08055510\n"
-	"	adds r0, r7, 0\n"
-	"	bl EntityExists\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08055530\n"
-	"	adds r0, r5, 0\n"
-	"	bl EntityExists\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08055530\n"
-	"	ldr r1, [sp, 0x24]\n"
-	"	ldrb r0, [r1, 0x6]\n"
-	"	cmp r0, 0\n"
-	"	beq _08055530\n"
-	"	mov r2, r10\n"
-	"	strb r2, [r6]\n"
-	"	b _08055530\n"
-	"_08055510:\n"
-	"	mov r0, r8\n"
-	"	bl MoveCausesPaused\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08055530\n"
-	"	adds r0, r7, 0\n"
-	"	movs r1, 0\n"
-	"	bl sub_8057308\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08055530\n"
-	"	ldr r1, _08055614\n"
-	"	movs r0, 0x1\n"
-	"	strb r0, [r1]\n"
-	"_08055530:\n"
-	"	adds r0, r5, 0\n"
-	"	bl EntityExists\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08055548\n"
-	"	ldr r3, [sp, 0x24]\n"
-	"	movs r0, 0xAC\n"
-	"	lsls r0, 1\n"
-	"	adds r1, r3, r0\n"
-	"	movs r0, 0x1\n"
-	"	strb r0, [r1]\n"
-	"_08055548:\n"
-	"	ldr r1, [sp, 0x18]\n"
-	"	cmp r1, 0x89\n"
-	"	beq _08055568\n"
-	"	adds r0, r7, 0\n"
-	"	bl TriggerAbilityEffect\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	bl sub_8069F9C\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r5, 0\n"
-	"	mov r2, r8\n"
-	"	bl sub_806A120\n"
-	"_08055568:\n"
-	"	ldr r7, [sp, 0x1C]\n"
-	"_0805556A:\n"
-	"	ldr r2, [sp, 0x14]\n"
-	"	adds r2, 0x1\n"
-	"	str r2, [sp, 0x14]\n"
-	"_08055570:\n"
-	"	ldr r3, [sp, 0x14]\n"
-	"	cmp r3, 0x3F\n"
-	"	bgt _080555A2\n"
-	"	movs r0, 0\n"
-	"	str r0, [sp, 0x20]\n"
-	"	lsls r0, r3, 2\n"
-	"	ldr r1, [sp, 0x10]\n"
-	"	adds r0, r1\n"
-	"	ldr r5, [r0]\n"
-	"	movs r2, 0x1\n"
-	"	str r2, [sp, 0x28]\n"
-	"	movs r3, 0\n"
-	"	str r3, [sp, 0x2C]\n"
-	"	movs r0, 0\n"
-	"	str r0, [sp, 0x30]\n"
-	"	cmp r5, 0\n"
-	"	beq _080555A2\n"
-	"	adds r0, r7, 0\n"
-	"	bl EntityExists\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _080555A2\n"
-	"	bl _08053724\n"
-	"_080555A2:\n"
-	"	bl sub_8044B28\n"
-	"	lsls r0, 24\n"
-	"	lsrs r4, r0, 24\n"
-	"	cmp r4, 0\n"
-	"	bne _08055604\n"
-	"	adds r0, r7, 0\n"
-	"	bl EntityExists\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _080555D6\n"
-	"	ldr r0, [r7, 0x70]\n"
-	"	movs r2, 0xAA\n"
-	"	lsls r2, 1\n"
-	"	adds r1, r0, r2\n"
-	"	ldrb r0, [r1]\n"
-	"	cmp r0, 0\n"
-	"	beq _080555D6\n"
-	"	strb r4, [r1]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r7, 0\n"
-	"	movs r2, 0\n"
-	"	movs r3, 0\n"
-	"	bl sub_807D148\n"
-	"_080555D6:\n"
-	"	adds r0, r7, 0\n"
-	"	bl EntityExists\n"
-	"	lsls r0, 24\n"
-	"	cmp r0, 0\n"
-	"	beq _08055604\n"
-	"	ldr r0, [r7, 0x70]\n"
-	"	ldr r3, _08055618\n"
-	"	adds r1, r0, r3\n"
-	"	ldrb r0, [r1]\n"
-	"	cmp r0, 0\n"
-	"	beq _08055604\n"
-	"	movs r0, 0\n"
-	"	strb r0, [r1]\n"
-	"	ldr r1, _0805561C\n"
-	"	ldr r2, [r1]\n"
-	"	str r0, [sp]\n"
-	"	str r0, [sp, 0x4]\n"
-	"	adds r0, r7, 0\n"
-	"	adds r1, r7, 0\n"
-	"	movs r3, 0x2\n"
-	"	bl LowerAttackStageTarget\n"
-	"_08055604:\n"
-	"	add sp, 0x48\n"
-	"	pop {r3-r5}\n"
-	"	mov r8, r3\n"
-	"	mov r9, r4\n"
-	"	mov r10, r5\n"
-	"	pop {r4-r7}\n"
-	"	pop {r0}\n"
-	"	bx r0\n"
-	"	.align 2, 0\n"
-	"_08055614: .4byte gUnknown_202F222\n"
-	"_08055618: .4byte 0x00000155\n"
-	"_0805561C: .4byte gUnknown_8106A50\n");
-}
-
-#else
-extern const s32 gUnknown_8106A50;
-extern const s16 gUnknown_80F5006;
-
-extern const u8 *const gUnknown_80FCD28;
-extern const u8 *const gUnknown_80FCD0C;
-extern const u8 *const gUnknown_80FDD88;
-extern const u8 *const gUnknown_80FDD20;
-extern const u8 *const gUnknown_80FDDA8;
-extern const u8 *const gUnknown_80FDD48;
-extern const u8 *const gUnknown_80FDDAC;
-extern const u8 *const gUnknown_80FC52C;
-extern const u8 *const gUnknown_80FC558;
-extern const u8 *const gUnknown_80FC574;
-extern const u8 *const gUnknown_8100524;
-extern const u8 *const gUnknown_80F9364;
-extern const u8 *const gUnknown_80F93A4;
-extern const u8 *const gUnknown_80F9384;
-extern const u8 *const gUnknown_80F9380;
-
-extern void sub_8042930(Entity *r0);
-extern void sub_8041B48(Entity *pokemon);
-
 void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId, s32 a4)
 {
-    s32 i;
-    s32 var_48;
+    s32 i = 0;
+    u16 moveId;
+    Entity *originalEntity; //x4C
+    Entity *var_48;
     EntityInfo *loopEntInfo; // x44
     s32 var_40;
     s32 var_3C;
     s32 var_38;
-    s32 j; // var_34 maybe local?
+    s32 j;
 
+    moveId = move->id;
     for (i = 0; i < 64; i++) {
         Entity *loopEntity;
 
-        var_48 = 0;
+        var_48 = NULL;
         loopEntity = entitiesArray[i];
         var_40 = 1;
         var_3C = 0;
@@ -4661,17 +1481,20 @@ void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId,
             break;
         if (EntityExists(loopEntity)) {
             bool8 r4;
+            bool8 unkBoolRet;
 
+            originalEntity = entity;
             loopEntInfo = GetEntInfo(loopEntity);
-            loopEntInfo->unk15A = var_48;
-            if (CanBeSnatched(move->id) && gDungeon->snatchPokemon != NULL) {
+            loopEntInfo->unk15A = 0;
+            if (CanBeSnatched(moveId) && gDungeon->snatchPokemon != NULL) {
                 Entity *snatchMon = gDungeon->snatchPokemon;
                 if (GetEntityType(snatchMon) == ENTITY_MONSTER
                     && snatchMon != entity
-                    && gDungeon->unk17B3C == GetEntInfo(snatchMon)->unk98
+                    &&  GetEntInfo(snatchMon)->unk98 == gDungeon->unk17B3C
                     && loopEntInfo->unkFF == 0)
                 {
                     TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80FCD28); // The move was snatched.
+                    loopEntity = snatchMon;
                 }
             }
             else if (GetMoveTypeForMonster(entity, move) == TYPE_ELECTRIC && gDungeon->lightningRodPokemon != NULL) {
@@ -4710,7 +1533,7 @@ void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId,
                             if (EntityExists(tileEntity) && GetEntityType(tileEntity) == ENTITY_MONSTER) {
                                 if (sub_8045888(loopEntity)) {
                                     s32 k;
-                                    for (k = 0; k < 23; k++) {
+                                    for (k = 0; k < 24; k++) {
                                         sub_806CE68(loopEntity, direction1);
                                         sub_803E708(2, 0x43);
                                         direction1++;
@@ -4725,14 +1548,14 @@ void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId,
                                     sub_806CE68(loopEntity, direction1);
                                     sub_803E708(2, 0x43);
                                 }
-                                loopEntInfo->belly = FixedPoint_Subtract(IntToFixedPoint(gUnknown_80F5006), loopEntInfo->belly);
+                                loopEntInfo->belly = FixedPoint_Subtract(loopEntInfo->belly, IntToFixedPoint(gUnknown_80F5006));
                                 if (move->id == MOVE_REGULAR_ATTACK) {
                                     TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80FDDA8); // Attack was passed off
                                 }
                                 else {
                                     TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80FDD20); // Move was passed off
                                 }
-                                var_48 = loopEntity; // wut?
+                                var_48 = loopEntity;
                                 loopEntity = tileEntity;
                                 break;
                             }
@@ -4756,16 +1579,16 @@ void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId,
             if (loopEntInfo->isNotTeamMember) {
                 loopEntInfo->targetPos = entity->pos;
             }
-            sub_806A1E8(entity);
+            sub_806A1E8(loopEntity);
             TrySendImmobilizeSleepEndMsg(entity, loopEntity);
             r4 = FALSE;
-            if (MoveMatchesChargingStatus(entity, move)) {
+            if (!MoveMatchesChargingStatus(entity, move)) {
                 r4 = (sub_805755C(entity, move->id) != 0);
             }
 
             if (var_3C == 0) {
                 if (loopEntInfo->protection.protectionStatus == STATUS_MAGIC_COAT) {
-                    if (IsReflectedByMagicCoat(move->id) && sub_8055988(entity, loopEntity)) {
+                    if (IsReflectedByMagicCoat(moveId) && sub_8055988(entity, loopEntity)) {
                         TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80FC52C); // The target~27s Magic Coat bounced it back!
                         sub_8041B48(loopEntity);
                         sub_80559DC(loopEntity, entity);
@@ -4776,15 +1599,15 @@ void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId,
                     }
                 }
                 else if (loopEntInfo->protection.protectionStatus == STATUS_MIRROR_MOVE) {
-                    s16 target = GetMoveTargetAndRangeForPokemon(entity, move, FALSE);
-                    if (move->id != MOVE_REGULAR_ATTACK
-                        && move->id != MOVE_PROJECTILE
+                    s32 target = GetMoveTargetAndRangeForPokemon(entity, move, FALSE);
+                    if (moveId != MOVE_REGULAR_ATTACK
+                        && moveId != MOVE_PROJECTILE
                         && !r4
                         && ((target & 0xF) == 0 || (target & 0xF) == 4 || (target & 0xF) == 5 || (target & 0xF) == 2)
                         && sub_8055988(entity, loopEntity))
                     {
                         TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80FC558); // The target~27s Mirror Move returned it!
-                        sub_8041B48(loopEntity);
+                        sub_8041BA8(loopEntity);
                         sub_80559DC(loopEntity, entity);
                         loopEntity = entity;
                         loopEntInfo = entity->info;
@@ -4796,7 +1619,7 @@ void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId,
             if (var_3C == 0) {
                 if (loopEntInfo->protection.protectionStatus == STATUS_PROTECT) {
                     s16 target = GetMoveTargetAndRangeForPokemon(entity, move, FALSE);
-                    s32 targetFlags = target & 0xF0;
+                    s32 targetFlags = target & 0xF;
                     if ((targetFlags == 0 || targetFlags == 4 || targetFlags == 5 || targetFlags == 2) && !r4) {
                         SetMessageArgument(gUnknown_202DFE8, loopEntity, 0);
                         TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80FC574); // protected itself!
@@ -4821,7 +1644,7 @@ void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId,
                 if (move->id == MOVE_ENDURE || move->id == MOVE_DETECT || move->id == MOVE_PROTECT) {
                     selfAlwaysHits = FALSE;
                 }
-                if (AccuracyCalc(entity, loopEntity, move, ACCURACY_1, selfAlwaysHits)) {
+                if (!AccuracyCalc(entity, loopEntity, move, ACCURACY_1, selfAlwaysHits)) {
                     var_40 = 0;
                 }
                 if (var_40 != 0 && var_3C != 0) {
@@ -4834,7 +1657,7 @@ void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId,
                 sub_8041168(entity, loopEntity, move, NULL);
             }
 
-            if (var_40 != 0) {
+            if (var_40 == 0) {
                 if (GetEntInfo(entity)->isTeamLeader) {
                     sub_80421C0(entity, 0x156);
                 }
@@ -4849,7 +1672,7 @@ void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId,
                 else if (GetTreatmentBetweenMonsters(entity, loopEntity, TRUE, FALSE) == 0) {
                     TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80F9384); // The move missed
                 }
-                else if (GetTreatmentBetweenMonsters(entity, loopEntity, TRUE, FALSE) == 0) {
+                else if (var_3C != 0) {
                     TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80F93A4); // The move missed
                 }
                 else {
@@ -4860,19 +1683,1030 @@ void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId,
                     sub_803ED30(9999, loopEntity, 1, -1);
                 }
 
-                if (move->id != MOVE_JUMP_KICK && move->id != MOVE_HI_JUMP_KICK) {
-                    sub_8059FC8(entity, loopEntity, move, itemId, 1);
-                }
-                else {
-                    sub_8059E54(entity, loopEntity, move, itemId, 1);
+                switch (moveId) {
+                    case MOVE_HI_JUMP_KICK:
+                        sub_8059FC8(entity, loopEntity, move, itemId, 1);
+                        break;
+                    case MOVE_JUMP_KICK:
+                        sub_8059E54(entity, loopEntity, move, itemId, 1);
+                        break;
+
                 }
 
                 if (sub_8044B28())
                     break; // breaks out of the loop
-                continue; // otherwise, check next target
+            }
+            else {
+                s32 expMultiplierBeforeMove = loopEntInfo->expMultiplier;
+                if (loopEntInfo->isNotTeamMember) {
+                    if (move->id != MOVE_REGULAR_ATTACK && itemId == 0 && expMultiplierBeforeMove == EXP_HALVED) {
+                        loopEntInfo->expMultiplier = EXP_REGULAR;
+                    }
+                    if (a4 == 1) {
+                        loopEntInfo->expMultiplier = EXP_BOOSTED; // Is a4 whether the move was linked?
+                    }
+                }
+
+                if (loopEntInfo->unk164 == 0xFF && sub_80717A4(loopEntity, MOVE_SLEEP_TALK)) {
+                    loopEntInfo->unk164 = GetDirectionTowardsPosition(&loopEntity->pos, &entity->pos);
+                }
+                if (loopEntInfo->unk165 == 0xFF && sub_80717A4(loopEntity, MOVE_SNORE)) {
+                    loopEntInfo->unk165 = GetDirectionTowardsPosition(&loopEntity->pos, &entity->pos);
+                }
+
+                if (HasAbility(loopEntity, ABILITY_PRESSURE)
+                    && GetTreatmentBetweenMonsters(entity, loopEntity, TRUE, FALSE) == 1
+                    && move->id != MOVE_REGULAR_ATTACK
+                    && move->id != MOVE_STRUGGLE
+                    && itemId == 0
+                    && move->PP != 0)
+                {
+                    if (!(move->moveFlags2 & MOVE_FLAG2_x10)) {
+                        sub_8042950(entity);
+                    }
+                    move->moveFlags2 |= MOVE_FLAG2_x10;
+                }
+
+                if ((GetMoveTargetAndRangeForPokemon(entity, move, FALSE) & 0xF) == 0) {
+                    SetShopkeeperAggression(entity, loopEntity);
+                }
+                loopEntInfo->unk158 = 1;
+
+                // They really must've had a soft spot for all these giant switches
+                switch (moveId) {
+                    case 9:
+                    case 18:
+                    case 28:
+                    case 39:
+                    case 126:
+                    case 132:
+                    case 136:
+                    case 145:
+                    case 154:
+                    case 158:
+                    case 161:
+                    case 163:
+                    case 166:
+                    case 167:
+                    case 168:
+                    case 174:
+                    case 175:
+                    case 176:
+                    case 178:
+                    case 179:
+                    case 180:
+                    case 182:
+                    case 189:
+                    case 190:
+                    case 201:
+                    case 208:
+                    case 211:
+                    case 222:
+                    case 240:
+                    case 241:
+                    case 248:
+                    case 250:
+                    case 260:
+                    case 285:
+                    case 290:
+                    case 297:
+                    case 300:
+                    case 306:
+                    case 308:
+                    case 311:
+                    case 312:
+                    case 321:
+                    case 322:
+                    case 323:
+                    case 346:
+                    case 347:
+                    case 350:
+                    case 353:
+                    case 360:
+                    case 362:
+                    case 366:
+                        unkBoolRet = (sub_8055640(entity, loopEntity, move, 0x100, itemId) != 0);
+                        break;
+                    case MOVE_REGULAR_ATTACK:
+                        unkBoolRet = (sub_8055640(entity, loopEntity, move, 0x80, itemId) != 0);
+                        break;
+                    case MOVE_NOTHING:
+                        unkBoolRet = (sub_8055640(entity, loopEntity, move, 0, itemId) != 0);
+                        break;
+                    case MOVE_EARTHQUAKE:
+                        unkBoolRet = sub_8058F04(entity, loopEntity, move, itemId);
+                        break;
+                    case MOVE_GUST:
+                        unkBoolRet = sub_8058270(entity, loopEntity, move, itemId);
+                        break;
+                    case MOVE_STRUGGLE:
+                        unkBoolRet = sub_805B968(entity, loopEntity, move, itemId);
+                        break;
+                    case MOVE_FLAME_WHEEL:
+                        unkBoolRet = sub_805816C(entity, loopEntity, move, itemId);
+                        break;
+                    case 53:
+                    case 157:
+                    case 230:
+                    case 262:
+                    case 292:
+                        unkBoolRet = sub_80581D0(entity, loopEntity, move, itemId);
+                        break;
+                    case 101:
+                    case 270:
+                    case 344:
+                    case 345:
+                        unkBoolRet = sub_8058B3C(entity, loopEntity, move, itemId);
+                        break;
+                    case 238:
+                    case 239:
+                    case 242:
+                        unkBoolRet = sub_805A568(entity, loopEntity, move, itemId);
+                        break;
+                    case MOVE_FOCUS_ENERGY:
+                        unkBoolRet = FocusEnergyMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 36:
+                    case 68:
+                    case 81:
+                    case 87:
+                    case 90:
+                    case 251:
+                    case MOVE_LEAF_BLADE:
+                        unkBoolRet = (sub_8055640(entity, loopEntity, move, 0x100, itemId) != 0);
+                        break;
+                    case MOVE_FISSURE:
+                        unkBoolRet = sub_80590D4(entity, loopEntity, move, itemId);
+                        break;
+                    case 150:
+                    case 247:
+                        unkBoolRet = sub_80595EC(entity, loopEntity, move, itemId);
+                        break;
+                    case 392:
+                        unkBoolRet = sub_805C138(entity, loopEntity, move, itemId);
+                        break;
+                    case 69:
+                    case 125:
+                    case 143:
+                    case 291:
+                        unkBoolRet = sub_805B17C(entity, loopEntity, move, itemId);
+                        break;
+                    case MOVE_WHIRLPOOL:
+                        unkBoolRet = WhirlpoolMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case MOVE_SURF:
+                        unkBoolRet = SurfMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 86:
+                    case 89:
+                        unkBoolRet = sub_805889C(entity, loopEntity, move, itemId);
+                        break;
+                    case 200:
+                    case 279:
+                    case 280:
+                        unkBoolRet = sub_8059E0C(entity, loopEntity, move, itemId);
+                        break;
+                    case MOVE_PSYCHIC:
+                        unkBoolRet = sub_8058C98(entity, loopEntity, move, gUnknown_8106A50, itemId);
+                        break;
+                    case 332:
+                        unkBoolRet = sub_8058C98(entity, loopEntity, move, gUnknown_8106A4C, itemId);
+                        break;
+                    case 325:
+                        unkBoolRet = sub_805B3FC(entity, loopEntity, move, gUnknown_8106A4C, itemId);
+                        break;
+                    case 244:
+                        unkBoolRet = sub_805A5E8(entity, loopEntity, move, gUnknown_8106A4C, itemId);
+                        break;
+                    case 283:
+                        unkBoolRet = sub_805B074(entity, loopEntity, move, itemId);
+                        break;
+                    case 162:
+                        unkBoolRet = sub_8059928(entity, loopEntity, move, itemId);
+                        break;
+                    case 71:
+                    case 255:
+                        unkBoolRet = sub_8058580(entity, loopEntity, move, itemId);
+                        break;
+                    case 82:
+                    case 93:
+                        unkBoolRet = sub_8058930(entity, loopEntity, move, itemId);
+                        break;
+                    case 107:
+                    case 114:
+                    case 234:
+                        unkBoolRet = sub_8058C00(entity, loopEntity, move, itemId);
+                        break;
+                    case 309:
+                        unkBoolRet = sub_805B324(entity, loopEntity, move, itemId);
+                        break;
+                    case 335:
+                        unkBoolRet = sub_805B910(entity, loopEntity, move, itemId);
+                        break;
+                    case 275:
+                        unkBoolRet = sub_805AE74(entity, loopEntity, move, itemId);
+                        break;
+                    case 147:
+                        unkBoolRet = sub_8059540(entity, loopEntity, move, itemId);
+                        break;
+                    case 149:
+                        unkBoolRet = sub_80595A0(entity, loopEntity, move, itemId);
+                        break;
+                    case 188:
+                        unkBoolRet = sub_8059D00(entity, loopEntity, move, itemId);
+                        break;
+                    case 120:
+                    case 144:
+                    case 235:
+                    case 342:
+                        unkBoolRet = sub_8058FBC(entity, loopEntity, move, itemId);
+                        break;
+                    case 133:
+                    case 261:
+                    case 289:
+                        unkBoolRet = sub_8059190(entity, loopEntity, move, itemId);
+                        break;
+                    case 63:
+                    case 221:
+                    case 271:
+                    case 303:
+                        unkBoolRet = sub_8058430(entity, loopEntity, move, itemId);
+                        break;
+                    case 139:
+                        unkBoolRet = sub_8059424(entity, loopEntity, move, itemId);
+                        break;
+                    case 30:
+                    case 46:
+                        unkBoolRet = sub_8057C88(entity, loopEntity, move, itemId);
+                        break;
+                    case 62:
+                    case 127:
+                        unkBoolRet = sub_80583D8(entity, loopEntity, move, itemId);
+                        break;
+                    case 264:
+                    case 310:
+                        unkBoolRet = sub_805AC90(entity, loopEntity, move, itemId);
+                        break;
+                    case MOVE_TRI_ATTACK:
+                        unkBoolRet = TriAttackMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 103:
+                        unkBoolRet = sub_8058B84(entity, loopEntity, move, itemId);
+                        break;
+                    case 276:
+                        unkBoolRet = sub_805AECC(entity, loopEntity, move, itemId);
+                        break;
+                    case 326:
+                        unkBoolRet = sub_805B454(entity, loopEntity, move, itemId);
+                        break;
+                    case 59:
+                        unkBoolRet = sub_80582C4(entity, loopEntity, move, itemId);
+                        break;
+                    case 226:
+                        unkBoolRet = sub_805A408(entity, loopEntity, move, itemId);
+                        break;
+                    case 152:
+                        unkBoolRet = sub_8059714(entity, loopEntity, move, itemId);
+                        break;
+                    case 341:
+                        unkBoolRet = sub_805B808(entity, loopEntity, move, itemId);
+                        break;
+                    case 124:
+                        unkBoolRet = sub_8059050(entity, loopEntity, move, itemId);
+                        break;
+                    case 64:
+                    case 65:
+                        unkBoolRet = sub_8058478(entity, loopEntity, move, itemId);
+                        break;
+                    case 4:
+                    case 34:
+                    case 79:
+                    case 84:
+                    case 111:
+                    case 231:
+                        unkBoolRet = sub_80576F8(entity, loopEntity, move, itemId);
+                        break;
+                    case MOVE_YAWN:
+                        unkBoolRet = YawnMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 129:
+                        unkBoolRet = sub_8059080(entity, loopEntity, move, itemId);
+                        break;
+                    case 194:
+                        unkBoolRet = sub_8059D98(entity, loopEntity, move, itemId);
+                        break;
+                    case 177:
+                        unkBoolRet = sub_8059AF8(entity, loopEntity, move, itemId);
+                        break;
+                    case 13:
+                    case 171:
+                    case 191:
+                    case 274:
+                    case 382:
+                        unkBoolRet = sub_8059AA8(entity, loopEntity, move, itemId);
+                        break;
+                    case 196:
+                    case 199:
+                        unkBoolRet = sub_8059DA4(entity, loopEntity, move, itemId);
+                        break;
+                    case 192:
+                        unkBoolRet = sub_8059D48(entity, loopEntity, move, itemId);
+                        break;
+                    case 281:
+                        unkBoolRet = sub_805B028(entity, loopEntity, move, itemId);
+                        break;
+                    case 193:
+                        unkBoolRet = sub_8059D58(entity, loopEntity, move, itemId);
+                        break;
+                    case MOVE_SUPERPOWER:
+                        unkBoolRet = TickleMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 73:
+                    case 97:
+                    case 299:
+                        unkBoolRet = sub_8058638(entity, loopEntity, move, itemId);
+                        break;
+                    case 246:
+                        unkBoolRet = sub_805A688(entity, loopEntity, move, itemId);
+                        break;
+                    case 33:
+                        unkBoolRet = sub_8057D7C(entity, loopEntity, move, itemId);
+                        break;
+                    case 268:
+                    case 284:
+                    case 368:
+                        unkBoolRet = sub_805B0BC(entity, loopEntity, move, itemId);
+                        break;
+                    case MOVE_PAIN_SPLIT:
+                        unkBoolRet = PainSplitMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 288:
+                        unkBoolRet = sub_805B164(entity, loopEntity, move, itemId);
+                        break;
+                    case 169:
+                        unkBoolRet = sub_8059A18(entity, loopEntity, move, itemId);
+                        break;
+                    case 343:
+                        unkBoolRet = sub_805B884(entity, loopEntity, move, itemId);
+                        break;
+                    case 265:
+                        unkBoolRet = BulkUpMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 55:
+                    case 195:
+                    case 333:
+                        unkBoolRet = sub_80582D4(entity, loopEntity, move, itemId);
+                        break;
+                    case 19:
+                        unkBoolRet = RageMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 181:
+                        unkBoolRet = sub_8059B94(entity, loopEntity, move, itemId);
+                        break;
+                    case 319:
+                        unkBoolRet = sub_805B3B4(entity, loopEntity, move, itemId);
+                        break;
+                    case 148:
+                        unkBoolRet = sub_8059588(entity, loopEntity, move, itemId);
+                        break;
+                    case 215:
+                        unkBoolRet = sub_805A2B0(entity, loopEntity, move, itemId);
+                        break;
+                    case 302:
+                        unkBoolRet = sub_805B2FC(entity, loopEntity, move, itemId);
+                        break;
+                    case 186:
+                    case 202:
+                    case 258:
+                        unkBoolRet = sub_8059CD8(entity, loopEntity, move, itemId);
+                        break;
+                    case 99:
+                        unkBoolRet = sub_8058A7C(entity, loopEntity, move, itemId);
+                        break;
+                    case 159:
+                        unkBoolRet = sub_80598CC(entity, loopEntity, move, itemId);
+                        break;
+                    case 44:
+                        unkBoolRet = sub_8057F7C(entity, loopEntity, move, itemId);
+                        break;
+                    case 42:
+                        unkBoolRet = sub_8057ED0(entity, loopEntity, move, itemId);
+                        break;
+                    case 110:
+                        unkBoolRet = sub_8058CEC(entity, loopEntity, move, itemId);
+                        break;
+                    case 106:
+                    case 351:
+                        unkBoolRet = sub_8058BF0(entity, loopEntity, move, itemId);
+                        break;
+                    case 217:
+                        unkBoolRet = sub_805A2C8(entity, loopEntity, move, itemId);
+                        break;
+                    case 267:
+                        unkBoolRet = sub_805AD34(entity, loopEntity, move, itemId);
+                        break;
+                    case 27:
+                        unkBoolRet = sub_8057C68(entity, loopEntity, move, itemId);
+                        break;
+                    case 170:
+                    case 216:
+                        unkBoolRet = sub_8059A2C(entity, loopEntity, move, itemId);
+                        break;
+                    case 76:
+                    case 80:
+                    case 320:
+                        unkBoolRet = sub_80586DC(entity, loopEntity, move, itemId);
+                        break;
+                    case 140:
+                        unkBoolRet = sub_805946C(entity, loopEntity, move, itemId);
+                        break;
+                    case 116:
+                    case 203:
+                    case 354:
+                        unkBoolRet = sub_8058E5C(entity, loopEntity, move, itemId);
+                        break;
+                    case 135:
+                        unkBoolRet = sub_80591E4(entity, loopEntity, move, itemId);
+                        break;
+                    case 24:
+                        unkBoolRet = sub_8057BC4(entity, loopEntity, move, itemId);
+                        break;
+                    case 210:
+                        unkBoolRet = sub_805A210(entity, loopEntity, move, itemId);
+                        break;
+                    case 164:
+                        unkBoolRet = sub_8059988(entity, loopEntity, move, itemId);
+                        break;
+                    case 151:
+                        unkBoolRet = SolarBeamMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 100:
+                        unkBoolRet = SkyAttackMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 371:
+                        unkBoolRet = sub_805BE90(entity, loopEntity, move, itemId);
+                        break;
+                    case 91:
+                    case 253:
+                        unkBoolRet = sub_80588B8(entity, loopEntity, move, itemId);
+                        break;
+                    case 294:
+                        unkBoolRet = WrapMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 112:
+                        unkBoolRet = sub_8058D38(entity, loopEntity, move, itemId);
+                        break;
+                    case 198:
+                        unkBoolRet = sub_8059DC4(entity, loopEntity, move, itemId);
+                        break;
+                    case 277:
+                        unkBoolRet = PresentMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 338:
+                        unkBoolRet = ReflectMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 141:
+                        unkBoolRet = SandstormMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 134:
+                        unkBoolRet = SafeguardMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 130:
+                        unkBoolRet = MistMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 259:
+                        unkBoolRet = LightScreenMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 2:
+                    case 105:
+                        unkBoolRet = sub_805768C(entity, loopEntity, move, itemId);
+                        break;
+                    case 43:
+                        unkBoolRet = sub_8057F24(entity, loopEntity, move, itemId);
+                        break;
+                    case 165:
+                    case 318:
+                        unkBoolRet = sub_80599EC(entity, loopEntity, move, itemId);
+                        break;
+                    case 94:
+                        unkBoolRet = sub_80589D4(entity, loopEntity, move, itemId);
+                        break;
+                    case 173:
+                        unkBoolRet = sub_8059AC4(entity, loopEntity, move, itemId);
+                        break;
+                    case 232:
+                        unkBoolRet = sub_805A4D4(entity, loopEntity, move, itemId);
+                        break;
+                    case 117:
+                    case 218:
+                        unkBoolRet = sub_8058EE0(entity, loopEntity, move, itemId);
+                        break;
+                    case 386:
+                        unkBoolRet = ScannerOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 209:
+                        unkBoolRet = sub_805A120(entity, loopEntity, move, itemId);
+                        break;
+                    case 364:
+                        unkBoolRet = sub_805BA50(entity, loopEntity, move, itemId);
+                        break;
+                    case 214:
+                    case 287:
+                        unkBoolRet = sub_805A2A0(entity, loopEntity, move, itemId);
+                        break;
+                    case 95:
+                    case 372:
+                        unkBoolRet = sub_8058A08(entity, loopEntity, move, itemId);
+                        break;
+                    case 38:
+                    case 51:
+                        unkBoolRet = CounterMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 61:
+                    case 340:
+                        unkBoolRet = BideMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 357:
+                        unkBoolRet = sub_805836C(entity, loopEntity, move, itemId);
+                        break;
+                    case 401:
+                        unkBoolRet = TrapperOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 227:
+                        unkBoolRet = sub_805A450(entity, loopEntity, move, itemId);
+                        break;
+                    case 237:
+                        unkBoolRet = CurseMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 206:
+                        unkBoolRet = sub_8059FC8(entity, loopEntity, move, itemId, 0);
+                        break;
+                    case 272:
+                        unkBoolRet = sub_805AE3C(entity, loopEntity, move, itemId);
+                        break;
+                    case 324:
+                        unkBoolRet = sub_805B3E0(entity, loopEntity, move, itemId);
+                        break;
+                    case 60:
+                        unkBoolRet = RazorWindMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 75:
+                        unkBoolRet = FocusPunchMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 298:
+                        unkBoolRet = MagicCoatMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 5:
+                        unkBoolRet = NightmareMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 6:
+                        unkBoolRet = sub_8057748(entity, loopEntity, move, itemId);
+                        break;
+                    case 394:
+                        unkBoolRet = sub_805C1BC(entity, loopEntity, move, itemId);
+                        break;
+                    case 212:
+                    case 307:
+                        unkBoolRet = MudWaterSportMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 1:
+                        unkBoolRet = sub_8057634(entity, loopEntity, move, itemId);
+                        break;
+                    case 122:
+                    case 224:
+                        unkBoolRet = sub_805A3DC(entity, loopEntity, move, itemId);
+                        break;
+                    case 47:
+                        unkBoolRet = sub_8057FF4(entity, loopEntity, move, itemId);
+                        break;
+                    case 233:
+                        unkBoolRet = sub_805A4FC(entity, loopEntity, move, itemId);
+                        break;
+                    case 108:
+                        unkBoolRet = sub_8058C48(entity, loopEntity, move, itemId);
+                        break;
+                    case 329:
+                        unkBoolRet = LeechSeedMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 295:
+                        unkBoolRet = SpikesMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 15:
+                    case 26:
+                    case 339:
+                        unkBoolRet = sub_80578EC(entity, loopEntity, move, itemId);
+                        break;
+                    case 88:
+                        unkBoolRet = sub_80588A8(entity, loopEntity, move, itemId);
+                        break;
+                    case 387:
+                        unkBoolRet = RadarOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 381:
+                        unkBoolRet = sub_805BC70(entity, loopEntity, move, itemId);
+                        break;
+                    case 78:
+                        unkBoolRet = sub_80587E8(entity, loopEntity, move, itemId);
+                        break;
+                    case 296:
+                        unkBoolRet = sub_805B264(entity, loopEntity, move, itemId);
+                        break;
+                    case 348:
+                        unkBoolRet = SkullBashMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 225:
+                        unkBoolRet = WishMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 45:
+                        unkBoolRet = sub_8057FCC(entity, loopEntity, move, itemId);
+                        break;
+                    case 213:
+                        unkBoolRet = sub_805A258(entity, loopEntity, move, itemId);
+                        break;
+                    case 142:
+                    case 146:
+                    case 273:
+                        unkBoolRet = sub_8059528(entity, loopEntity, move, itemId);
+                        break;
+                    case 41:
+                        unkBoolRet = sub_8057E6C(entity, loopEntity, move, itemId);
+                        break;
+                    case 197:
+                        unkBoolRet = sub_8059DB4(entity, loopEntity, move, itemId);
+                        break;
+                    case 83:
+                        unkBoolRet = sub_8058838(entity, loopEntity, move, itemId);
+                        break;
+                    case 22:
+                        unkBoolRet = TormentMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 20:
+                        unkBoolRet = sub_8057974(entity, loopEntity, move, itemId);
+                        break;
+                    case 314:
+                        unkBoolRet = sub_805B388(entity, loopEntity, move, itemId);
+                        break;
+                    case 383:
+                        unkBoolRet = sub_805BC98(entity, loopEntity, move, itemId);
+                        break;
+                    case 66:
+                        unkBoolRet = sub_80584C0(entity, loopEntity, move, itemId);
+                        break;
+                    case 252:
+                    case 367:
+                        unkBoolRet = sub_805BB74(entity, loopEntity, move, itemId);
+                        break;
+                    case 331:
+                        unkBoolRet = sub_805B668(entity, loopEntity, move, itemId);
+                        break;
+                    case 373:
+                        unkBoolRet = LuminousOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 400:
+                        unkBoolRet = FillInOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 187:
+                    case 369:
+                        unkBoolRet = sub_8059CF0(entity, loopEntity, move, itemId);
+                        break;
+                    case 388:
+                        unkBoolRet = sub_805BF34(entity, loopEntity, move, itemId);
+                        break;
+                    case 409:
+                        unkBoolRet = StairsOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 72:
+                        unkBoolRet = BrickBreakMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 58:
+                    case 70:
+                        unkBoolRet = sub_80582AC(entity, loopEntity, move, itemId);
+                        break;
+                    case 98:
+                    case 349:
+                        unkBoolRet = sub_8058A54(entity, loopEntity, move, itemId);
+                        break;
+                    case 7:
+                        unkBoolRet = VitalThrowMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 153:
+                        unkBoolRet = FlyMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 205:
+                        unkBoolRet = sub_8059F38(entity, loopEntity, move, itemId);
+                        break;
+                    case 156:
+                        unkBoolRet = DiveMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 8:
+                        unkBoolRet = DigMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 10:
+                        unkBoolRet = sub_8057824(entity, loopEntity, move, itemId);
+                        break;
+                    case 56:
+                        unkBoolRet = sub_805825C(entity, loopEntity, move, itemId);
+                        break;
+                    case 249:
+                        unkBoolRet = KnockOffMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 389:
+                        unkBoolRet = TrapbustOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 410:
+                        unkBoolRet = LongtossOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 412:
+                        unkBoolRet = PierceOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 49:
+                        unkBoolRet = GrudgeMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 374:
+                        unkBoolRet = PetrifyOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 229:
+                        unkBoolRet = sub_805A4C0(entity, loopEntity, move, itemId);
+                        break;
+                    case 256:
+                    case 317:
+                        unkBoolRet = sub_805AAD0(entity, loopEntity, move, itemId);
+                        break;
+                    case 396:
+                        unkBoolRet = ShockerOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 102:
+                    case 304:
+                    case 380:
+                        unkBoolRet = sub_805B314(entity, loopEntity, move, itemId);
+                        break;
+                    case 204:
+                        unkBoolRet = sub_8059E54(entity, loopEntity, move, itemId, 0);
+                        break;
+                    case 301:
+                    case 305:
+                        unkBoolRet = ProtectMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 172:
+                        unkBoolRet = sub_8059AB8(entity, loopEntity, move, itemId);
+                        break;
+                    case 85:
+                        unkBoolRet = sub_8058858(entity, loopEntity, move, itemId);
+                        break;
+                    case 77:
+                    case 121:
+                        unkBoolRet = sub_8058770(entity, loopEntity, move, itemId);
+                        break;
+                    case 123:
+                        unkBoolRet = sub_8059004(entity, loopEntity, move, itemId);
+                        break;
+                    case 155:
+                        unkBoolRet = sub_80597F0(entity, loopEntity, move, itemId);
+                        break;
+                    case 128:
+                        unkBoolRet = ChargeMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 67:
+                        unkBoolRet = sub_8058548(entity, loopEntity, move, itemId);
+                        break;
+                    case 92:
+                        unkBoolRet = sub_80588F4(entity, loopEntity, move, itemId);
+                        break;
+                    case 113:
+                        unkBoolRet = sub_8058D44(entity, loopEntity, move, itemId);
+                        break;
+                    case 278:
+                        unkBoolRet = sub_805AFA4(entity, loopEntity, move, itemId);
+                        break;
+                    case 37:
+                        unkBoolRet = SmokescreenMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 363:
+                        unkBoolRet = sub_805BA44(entity, loopEntity, move, itemId);
+                        break;
+                    case 160:
+                        unkBoolRet = StockpileMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 245:
+                        unkBoolRet = SpitUpMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 236:
+                        unkBoolRet = SwallowMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 12:
+                        unkBoolRet = RainDanceMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 35:
+                        unkBoolRet = sub_8057D9C(entity, loopEntity, move, itemId);
+                        break;
+                    case 391:
+                        unkBoolRet = InvisifyOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 316:
+                        unkBoolRet = MirrorCoatMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 293:
+                        unkBoolRet = PerishSongMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 96:
+                        unkBoolRet = sub_8058A18(entity, loopEntity, move, itemId);
+                        break;
+                    case 313:
+                        unkBoolRet = DestinyBondMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 17:
+                        unkBoolRet = EncoreMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 31:
+                        unkBoolRet = sub_8057CD0(entity, loopEntity, move, itemId);
+                        break;
+                    case 223:
+                        unkBoolRet = SunnyDayMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 228:
+                        unkBoolRet = sub_805A464(entity, loopEntity, move, itemId);
+                        break;
+                    case 399:
+                        unkBoolRet = sub_805C2A0(entity, loopEntity, move, itemId);
+                        break;
+                    case 104:
+                        unkBoolRet = EndureMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 185:
+                        unkBoolRet = HelpingHandMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 257:
+                        unkBoolRet = BellyDrumMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 398:
+                        unkBoolRet = sub_805C288(entity, loopEntity, move, itemId);
+                        break;
+                    case 11:
+                        unkBoolRet = sub_805783C(entity, loopEntity, move, itemId);
+                        break;
+                    case 16:
+                        unkBoolRet = sub_80578FC(entity, loopEntity, move, itemId);
+                        break;
+                    case 23:
+                        unkBoolRet = sub_8057BB4(entity, loopEntity, move, itemId);
+                        break;
+                    case 29:
+                    case 361:
+                        unkBoolRet = RockSmashMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 282:
+                        unkBoolRet = TransformMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 14:
+                        unkBoolRet = HailMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 407:
+                        unkBoolRet = MobileOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 54:
+                    case 315:
+                        unkBoolRet = sub_8058234(entity, loopEntity, move, itemId);
+                        break;
+                    case 254:
+                        unkBoolRet = sub_805A85C(entity, loopEntity, move, itemId);
+                        break;
+                    case 370:
+                        unkBoolRet = TransferOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 375:
+                        unkBoolRet = sub_805BB98(entity, loopEntity, move, itemId);
+                        break;
+                    case 269:
+                        unkBoolRet = sub_805AD54(entity, loopEntity, move, itemId);
+                        break;
+                    case 365:
+                        unkBoolRet = ReboundOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 266:
+                    case 379:
+                        unkBoolRet = sub_805AD04(entity, loopEntity, move, itemId);
+                        break;
+                    case 390:
+                        unkBoolRet = sub_805C080(entity, loopEntity, move, itemId);
+                        break;
+                    case 395:
+                        unkBoolRet = sub_805C1E4(entity, loopEntity, move, itemId);
+                        break;
+                    case 385:
+                        unkBoolRet = EscapeOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 263:
+                        unkBoolRet = SecretPowerMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 119:
+                        unkBoolRet = NaturePowerMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 403:
+                        unkBoolRet = sub_805C3F8(entity, loopEntity, move, itemId);
+                        break;
+                    case 138:
+                        unkBoolRet = SketchMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 40:
+                        unkBoolRet = sub_8057E50(entity, loopEntity, move, itemId);
+                        break;
+                    case 220:
+                        unkBoolRet = RolePlayMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 137:
+                        unkBoolRet = SkillSwapMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 183:
+                        unkBoolRet = ConversionMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 378:
+                        unkBoolRet = CleanseOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 48:
+                        unkBoolRet = sub_805805C(entity, loopEntity, move, itemId);
+                        break;
+                    case 334:
+                        unkBoolRet = SnatchMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 286:
+                        unkBoolRet = HandleColorChange(entity, loopEntity, move, itemId);
+                        break;
+                    case 328:
+                        unkBoolRet = sub_805B53C(entity, loopEntity, move, itemId);
+                        break;
+                    case 115:
+                        unkBoolRet = PsychUpMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 25:
+                        unkBoolRet = SnoreMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 337:
+                        unkBoolRet = RecycleMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 384:
+                        unkBoolRet = SilenceOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 330:
+                        unkBoolRet = sub_805B618(entity, loopEntity, move, itemId);
+                        break;
+                    case 393:
+                        unkBoolRet = IdentifyOrbAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 184:
+                        unkBoolRet = Conversion2MoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 376:
+                        unkBoolRet = sub_805BEB8(entity, loopEntity, move, itemId);
+                        break;
+                    case 377:
+                        unkBoolRet = sub_805BEC8(entity, loopEntity, move, itemId);
+                        break;
+                    case 327:
+                        unkBoolRet = MimicMoveAction(entity, loopEntity, move, itemId);
+                        break;
+                    case 50:
+                    case 406:
+                        unkBoolRet = sub_805C45C(entity, loopEntity, move, itemId);
+                        break;
+                    case 397:
+                        unkBoolRet = sub_805C208(entity, loopEntity, move, itemId);
+                        break;
+                    default:
+                        unkBoolRet = FALSE;
+                        break;
+                }
+
+                if (sub_8044B28()) {
+                    break;
+                }
+
+                if (EntityExists(var_48)) {
+                    sub_806CE68(var_48, GetEntInfo(var_48)->action.direction);
+                }
+
+                if (!unkBoolRet) {
+                    if (EntityExists(entity) && EntityExists(loopEntity) && loopEntInfo->isNotTeamMember) {
+                        loopEntInfo->expMultiplier = expMultiplierBeforeMove;
+                    }
+                }
+                else {
+                    if (MoveCausesPaused(move) && sub_8057308(entity, 0)) {
+                        gUnknown_202F222 = 1;
+                    }
+                }
+
+                if (EntityExists(loopEntity)) {
+                    loopEntInfo->unk158 = 1;
+                }
+
+                if (moveId != MOVE_SKILL_SWAP) {
+                    TriggerAbilityEffect(entity);
+                    sub_8069F9C(entity, loopEntity, move);
+                    sub_806A120(entity, loopEntity, move);
+                }
             }
 
-
+            entity = originalEntity;
         }
     }
 
@@ -4888,10 +2722,9 @@ void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId,
     }
 }
 
-#endif // NONMATCHING
 UNUSED bool32 sub_8055620(Entity *a0, Entity *a1, Move *a2, s32 a3)
 {
-    return (sub_8055640(a0, a1, a2, 0x100, a3) != FALSE);
+    return (sub_8055640(a0, a1, a2, 0x100, a3) != 0);
 }
 
 s32 sub_8055640(Entity *attacker, Entity *target, Move *move, s32 r9, s32 itemId)
@@ -5197,7 +3030,7 @@ bool32 sub_8055A00(Entity *entity, s32 firstMoveId, s32 var_34, s32 itemId, s32 
     return TRUE;
 }
 
-void TriggerAbilityEffect(Entity *entity)
+static void TriggerAbilityEffect(Entity *entity)
 {
     if (EntityExists(entity)) {
         EntityInfo *entInfo = GetEntInfo(entity);
