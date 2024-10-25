@@ -320,8 +320,6 @@ extern const s16 gUnknown_80F5006;
 extern const s32 gUnknown_80F519C;
 extern const s32 gUnknown_80F51A0;
 extern const s32 gUnknown_80F50F4[2][21];
-extern const s32 gUnknown_81069D4[];
-extern const s32 gUnknown_81069BC[];
 extern const s16 gUnknown_80F4E70[];
 extern const s16 gUnknown_80F4E74[];
 extern const u16 gUnknown_80F5004;
@@ -1758,10 +1756,9 @@ UNUSED bool32 TargetNotImmuneTo(Move *move, Entity *target)
     }
 
     for (i = 0; i < 2; i++) {
-        s32 multiplier[4]; // 0, 1, 1, 1 ; 0 is for EFFECTIVENESS_IMMUNE
+        s32 multiplier[4] = {0, 1, 1, 1}; // EFFECTIVENESS_IMMUNE is 0, others are 1
         s32 effectiveness;
 
-        memcpy(multiplier, &gUnknown_81069BC, sizeof(multiplier));
         if (ghostImmunity && targetInfo->types[i] == TYPE_GHOST && !targetInfo->exposed) {
             effectiveness = EFFECTIVENESS_IMMUNE;
         }
@@ -2527,6 +2524,21 @@ NAKED s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
 	"	bx r1");
 }
 #endif // NONMATCHING
+
+// This would signify a new file starts here, but it makes little sense tbh.
+UNUSED static const char sPksDirMeme[] = "pksdir0";
+
+static const s32 gUnknown_81069D4[NUM_DIRECTIONS] =
+{
+    [DIRECTION_SOUTH] = 1,
+    [DIRECTION_SOUTHEAST] = 1,
+    [DIRECTION_EAST] = 1,
+    [DIRECTION_NORTHEAST] = 0,
+    [DIRECTION_NORTH] = 0,
+    [DIRECTION_NORTHWEST] = 0,
+    [DIRECTION_WEST] = 1,
+    [DIRECTION_SOUTHWEST] = 1
+};
 
 // This function looks important, but what does it do?
 void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32 isLinkedMove)
@@ -3298,3 +3310,5 @@ static void SortTargets(Entity **targetsArray, Entity *attacker)
         targetsArray[i] = localArray[i];
     }
 }
+
+// TODO: This file could(should?) be merged with move_actions.c, status_actions.c and move_checks.c into one.

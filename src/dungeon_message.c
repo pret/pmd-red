@@ -671,7 +671,6 @@ extern const struct TutorialFlagMsg gMoneyTutorial;
 
 extern const u8 *const gUnknown_80FF6F8;
 extern const u8 *const gUnknown_80FF6A4;
-extern const u8 gUnknown_8106990[]; // Possibly something menu related?
 
 static inline bool32 DislayTutorialMsg(Entity *leader, const struct TutorialFlagMsg *tutorial, bool32 unkFunctionCall)
 {
@@ -888,6 +887,16 @@ static void CopyStringToMessageLog(const u8 *src, u32 a1, u32 a2)
 
 #define MESSAGE_LOG_ROW_COUNT 8 // How many log messages are shown
 
+UNUSED static const char sPksDirMeme[] = "pksdir0";
+// Possibly something menu related?
+// Unfortunately, this is passed to sub_8014140 which is a nullsub. It could be used for Blue and Nintendo DS' touch screen.
+static const u8 sUnknownMessageLogData[] =
+{
+    0x01, 0x00, 0x54, 0x00, 0xf0, 0xff, 0x18, 0x00, 0x18, 0x00, 0x00, 0x00, 0x02, 0x00, 0x54, 0x00,
+    0x6a, 0x00, 0x18, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00
+};
+
 bool32 DisplayMessageLog(void)
 {
     bool8 unkRet;
@@ -910,7 +919,7 @@ bool32 DisplayMessageLog(void)
 
         sMessageLogFlags = 0;
         nullsub_34(&menuInput, 0);
-        unkVar = sub_8014140(0, gUnknown_8106990);
+        unkVar = sub_8014140(0, sUnknownMessageLogData);
 
         if (TryScrollLogUp(unkVar))
             scroll = TRUE;
