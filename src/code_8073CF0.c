@@ -50,7 +50,7 @@ extern void sub_80420B8(Entity *pokemon);
 extern void sub_8041C4C(Entity *pokemon, u32 r1);
 extern void sub_805E804(void);
 extern void sub_80838EC(u8 *a);
-extern bool8 sub_8055FA0(struct Entity *, u32, u32, u32, u32, struct Move *);
+extern bool8 TryUseChosenMove(struct Entity *, u32, u32, u32, u32, struct Move *);
 extern bool8 sub_8045888(Entity *);
 extern void nullsub_97(Entity *entity);
 extern void sub_805EE30(void);
@@ -598,7 +598,7 @@ void sub_8074094(Entity *entity)
                 UseAttack(NULL);
                 InitPokemonMove(&bideMove, MOVE_BIDE_2);
                 bideMove.moveFlags |= MOVE_FLAG_LAST_USED;
-                sub_8055FA0(entity, 0, 0, 0, 0, &bideMove);
+                TryUseChosenMove(entity, 0, 0, 0, 0, &bideMove);
                 if (!EntityExists(entity) || sub_8044B28())
                     return;
                 entityInfo->unkA0 = 0;

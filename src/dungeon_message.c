@@ -1369,16 +1369,16 @@ extern bool8 SnoreMoveAction(Entity *pokemon, Entity *target, Move *move, s32 pa
 extern bool8 sub_805B618(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 Conversion2MoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 
-s32 sub_8055640(Entity *, Entity *, Move *, s32, s32);
-s32 sub_8055728(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk);
-static void TriggerAbilityEffect(Entity *entity);
+s32 HandleDamagingMove(Entity *, Entity *, Move *, s32, s32);
+static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk);
+static void TriggerTargetAbilityEffect(Entity *attacker);
 static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 selfAlwaysHits);
-bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg_0, struct Move *move);
+bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, bool32 isLinkedMove, struct Move *move);
 bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **unkArray, bool32 itemId, bool8 arg_4, bool32 unused);
 bool8 sub_805744C(Entity * pokemon, Move *move, bool8 param_3);
-void sub_8056CE8(Entity **, Entity * pokemon, Move *move);
-void sub_80566F8(Entity*, Move *, s32 a2, bool8 a3, s32 a4, s32 a5);
-s32 sub_8056F80(s32 a0, Entity **entitiesArray, s32 target, Entity *entity1, Entity *entity2, Move *move, bool32 arg8);
+static void SetTargetsForMove(Entity **targetsArray, Entity *attacker, Move *move);
+void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32 isLinkedMove);
+static s32 SetNewTarget(s32 targetArrId, Entity **targetsArray, s32 targetFlags_, Entity *attacker, Entity *target, Move *move, bool32 canHitAnyone_);
 bool8 sub_8055988(Entity *r2, Entity *r4);
 void sub_80559DC(Entity *entity1, Entity *entity2);
 
@@ -1454,118 +1454,119 @@ extern u8 gUnknown_202F21A;
 extern u8 gUnknown_202F220;
 extern u8 gUnknown_202F221;
 
-void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId, s32 a4)
+#define MAX_MOVE_TARGETS 64
+
+static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, s32 itemId, bool32 isLinkedMove)
 {
     s32 i = 0;
     u16 moveId;
-    Entity *originalEntity; //x4C
-    Entity *var_48;
-    EntityInfo *loopEntInfo; // x44
-    s32 var_40;
-    s32 var_3C;
-    s32 var_38;
-    s32 j;
+    Entity *originalAttacker;
+    Entity *currTargetSaved;
+    Entity *currTarget;
+    EntityInfo *targetInfo;
+    bool32 moveHits;
+    bool32 lightRodRedirect;
+    bool32 moveRedirected;
 
     moveId = move->id;
-    for (i = 0; i < 64; i++) {
-        Entity *loopEntity;
-
-        var_48 = NULL;
-        loopEntity = entitiesArray[i];
-        var_40 = 1;
-        var_3C = 0;
-        var_38 = 0;
-        if (loopEntity == NULL)
+    for (i = 0; i < MAX_MOVE_TARGETS; i++) {
+        currTargetSaved = NULL; // Only for Pass Scarf
+        currTarget = targetsArray[i];
+        moveHits = TRUE;
+        lightRodRedirect = FALSE;
+        moveRedirected = FALSE;
+        if (currTarget == NULL)
             break;
-        if (!EntityExists(entity))
+        if (!EntityExists(attacker))
             break;
-        if (EntityExists(loopEntity)) {
-            bool8 r4;
-            bool8 unkBoolRet;
+        if (EntityExists(currTarget)) {
+            bool32 r4;
+            bool8 moveHadEffect;
 
-            originalEntity = entity;
-            loopEntInfo = GetEntInfo(loopEntity);
-            loopEntInfo->unk15A = 0;
+            originalAttacker = attacker;
+            targetInfo = GetEntInfo(currTarget);
+            targetInfo->unk15A = 0;
             if (CanBeSnatched(moveId) && gDungeon->snatchPokemon != NULL) {
                 Entity *snatchMon = gDungeon->snatchPokemon;
                 if (GetEntityType(snatchMon) == ENTITY_MONSTER
-                    && snatchMon != entity
+                    && snatchMon != attacker
                     &&  GetEntInfo(snatchMon)->unk98 == gDungeon->unk17B3C
-                    && loopEntInfo->unkFF == 0)
+                    && targetInfo->unkFF == 0)
                 {
-                    TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80FCD28); // The move was snatched.
-                    loopEntity = snatchMon;
+                    TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FCD28); // The move was snatched.
+                    currTarget = snatchMon;
                 }
             }
-            else if (GetMoveTypeForMonster(entity, move) == TYPE_ELECTRIC && gDungeon->lightningRodPokemon != NULL) {
+            else if (GetMoveTypeForMonster(attacker, move) == TYPE_ELECTRIC && gDungeon->lightningRodPokemon != NULL) {
                 Entity *lightRodMon = gDungeon->lightningRodPokemon;
                 if (GetEntityType(lightRodMon) == ENTITY_MONSTER) {
                     EntityInfo *lightRodInfo = GetEntInfo(lightRodMon);
                     if (lightRodInfo->unk98 == gDungeon->unk17B38
-                        && GetTreatmentBetweenMonsters(lightRodMon, entity, TRUE, FALSE) == 1
-                        && ((loopEntInfo->unkFF == 0 && lightRodInfo->unkFF == 0) || loopEntity == lightRodMon))
+                        && GetTreatmentBetweenMonsters(lightRodMon, attacker, TRUE, FALSE) == 1
+                        && ((targetInfo->unkFF == 0 && lightRodInfo->unkFF == 0) || currTarget == lightRodMon))
                     {
                         sub_8042930(lightRodMon);
-                        TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80FCD0C); // A Lightningrod took the move
-                        loopEntity = lightRodMon;
-                        var_3C = 1;
+                        TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FCD0C); // A Lightningrod took the move
+                        currTarget = lightRodMon;
+                        lightRodRedirect = TRUE;
                     }
                 }
             }
-            else if (HasHeldItem(loopEntity, ITEM_PASS_SCARF)) {
-                if (!CannotAttack(loopEntity, FALSE)
-                    && (GetMoveTargetAndRangeForPokemon(entity, move, FALSE) & 0xF0) == 0
-                    && FixedPointToInt(loopEntInfo->belly) >= gUnknown_80F5006
-                    && loopEntInfo->unkFF == 0)
+            else if (HasHeldItem(currTarget, ITEM_PASS_SCARF)) {
+                if (!CannotAttack(currTarget, FALSE)
+                    && (GetMoveTargetAndRangeForPokemon(attacker, move, FALSE) & 0xF0) == 0
+                    && FixedPointToInt(targetInfo->belly) >= gUnknown_80F5006
+                    && targetInfo->unkFF == 0)
                 {
-                    s32 direction1 = loopEntInfo->action.direction;
-                    s32 direction2 = loopEntInfo->action.direction;
+                    s32 direction1 = targetInfo->action.direction;
+                    s32 direction2 = targetInfo->action.direction;
                     if (IsBossFight()) {
-                        TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80FDD88); // A mysterious force prevents moves from being passed off!
+                        TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FDD88); // A mysterious force prevents moves from being passed off!
                     }
                     else {
-                        for (j = 0; j < 8; j++) {
-                            Entity *tileEntity;
+                        s32 j;
+                        Entity *tileEntity;
 
+                        for (j = 0; j < 8; j++) {
                             direction2++;
                             direction2 &= DIRECTION_MASK;
-                            tileEntity = GetTile(loopEntity->pos.x + gAdjacentTileOffsets[direction2].x, loopEntity->pos.y + gAdjacentTileOffsets[direction2].y)->monster;
+                            tileEntity = GetTile(currTarget->pos.x + gAdjacentTileOffsets[direction2].x, currTarget->pos.y + gAdjacentTileOffsets[direction2].y)->monster;
                             if (EntityExists(tileEntity) && GetEntityType(tileEntity) == ENTITY_MONSTER) {
-                                if (sub_8045888(loopEntity)) {
+                                if (sub_8045888(currTarget)) {
                                     s32 k;
                                     for (k = 0; k < 24; k++) {
-                                        sub_806CE68(loopEntity, direction1);
+                                        sub_806CE68(currTarget, direction1);
                                         sub_803E708(2, 0x43);
                                         direction1++;
                                         direction1 &= DIRECTION_MASK;
                                     }
                                     while (direction1 != direction2) {
-                                        sub_806CE68(loopEntity, direction1);
+                                        sub_806CE68(currTarget, direction1);
                                         sub_803E708(2, 0x43);
                                         direction1++;
                                         direction1 &= DIRECTION_MASK;
                                     }
-                                    sub_806CE68(loopEntity, direction1);
+                                    sub_806CE68(currTarget, direction1);
                                     sub_803E708(2, 0x43);
                                 }
-                                loopEntInfo->belly = FixedPoint_Subtract(loopEntInfo->belly, IntToFixedPoint(gUnknown_80F5006));
+                                targetInfo->belly = FixedPoint_Subtract(targetInfo->belly, IntToFixedPoint(gUnknown_80F5006));
                                 if (move->id == MOVE_REGULAR_ATTACK) {
-                                    TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80FDDA8); // Attack was passed off
+                                    TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FDDA8); // Attack was passed off
                                 }
                                 else {
-                                    TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80FDD20); // Move was passed off
+                                    TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FDD20); // Move was passed off
                                 }
-                                var_48 = loopEntity;
-                                loopEntity = tileEntity;
+                                currTargetSaved = currTarget;
+                                currTarget = tileEntity;
                                 break;
                             }
                         }
                         if (j == 8) {
                             if (move->id == MOVE_REGULAR_ATTACK) {
-                                TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80FDDAC); // There's no one to pass off to!
+                                TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FDDAC); // There's no one to pass off to!
                             }
                             else {
-                                TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80FDD48); //There's no one to pass off to!
+                                TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FDD48); //There's no one to pass off to!
                             }
                         }
                     }
@@ -1574,121 +1575,122 @@ void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId,
 
             gUnknown_202F208++;
             gUnknown_202F20C++;
-            loopEntInfo = loopEntity->info; // loopEntity could've been changed, hence info pointers needs to be reloaded
-            loopEntInfo->unk15A = 0;
-            if (loopEntInfo->isNotTeamMember) {
-                loopEntInfo->targetPos = entity->pos;
+            targetInfo = currTarget->info; // currTarget could've been changed, hence info pointers needs to be reloaded
+            targetInfo->unk15A = 0;
+            if (targetInfo->isNotTeamMember) {
+                targetInfo->targetPos = attacker->pos;
             }
-            sub_806A1E8(loopEntity);
-            TrySendImmobilizeSleepEndMsg(entity, loopEntity);
+            sub_806A1E8(currTarget);
+            TrySendImmobilizeSleepEndMsg(attacker, currTarget);
             r4 = FALSE;
-            if (!MoveMatchesChargingStatus(entity, move)) {
-                r4 = (sub_805755C(entity, move->id) != 0);
+            if (!MoveMatchesChargingStatus(attacker, move)) {
+                r4 = (sub_805755C(attacker, move->id) != 0);
             }
 
-            if (var_3C == 0) {
-                if (loopEntInfo->protection.protectionStatus == STATUS_MAGIC_COAT) {
-                    if (IsReflectedByMagicCoat(moveId) && sub_8055988(entity, loopEntity)) {
-                        TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80FC52C); // The target~27s Magic Coat bounced it back!
-                        sub_8041B48(loopEntity);
-                        sub_80559DC(loopEntity, entity);
-                        loopEntity = entity;
-                        loopEntInfo = entity->info;
-                        loopEntInfo->unk15A = 0;
-                        var_38 = 1;
+            if (!lightRodRedirect) {
+                if (targetInfo->protection.protectionStatus == STATUS_MAGIC_COAT) {
+                    if (IsReflectedByMagicCoat(moveId) && sub_8055988(attacker, currTarget)) {
+                        TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FC52C); // The target~27s Magic Coat bounced it back!
+                        sub_8041B48(currTarget);
+                        sub_80559DC(currTarget, attacker);
+                        currTarget = attacker;
+                        targetInfo = attacker->info;
+                        targetInfo->unk15A = 0;
+                        moveRedirected = TRUE;
                     }
                 }
-                else if (loopEntInfo->protection.protectionStatus == STATUS_MIRROR_MOVE) {
-                    s32 target = GetMoveTargetAndRangeForPokemon(entity, move, FALSE);
+                else if (targetInfo->protection.protectionStatus == STATUS_MIRROR_MOVE) {
+                    s32 target = GetMoveTargetAndRangeForPokemon(attacker, move, FALSE);
                     if (moveId != MOVE_REGULAR_ATTACK
                         && moveId != MOVE_PROJECTILE
                         && !r4
                         && ((target & 0xF) == 0 || (target & 0xF) == 4 || (target & 0xF) == 5 || (target & 0xF) == 2)
-                        && sub_8055988(entity, loopEntity))
+                        && sub_8055988(attacker, currTarget))
                     {
-                        TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80FC558); // The target~27s Mirror Move returned it!
-                        sub_8041BA8(loopEntity);
-                        sub_80559DC(loopEntity, entity);
-                        loopEntity = entity;
-                        loopEntInfo = entity->info;
-                        loopEntInfo->unk15A = 0;
-                        var_38 = 1;
+                        TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FC558); // The target~27s Mirror Move returned it!
+                        sub_8041BA8(currTarget);
+                        sub_80559DC(currTarget, attacker);
+                        currTarget = attacker;
+                        targetInfo = attacker->info;
+                        targetInfo->unk15A = 0;
+                        moveRedirected = TRUE;
                     }
                 }
             }
-            if (var_3C == 0) {
-                if (loopEntInfo->protection.protectionStatus == STATUS_PROTECT) {
-                    s16 target = GetMoveTargetAndRangeForPokemon(entity, move, FALSE);
-                    s32 targetFlags = target & 0xF;
-                    if ((targetFlags == 0 || targetFlags == 4 || targetFlags == 5 || targetFlags == 2) && !r4) {
-                        SetMessageArgument(gUnknown_202DFE8, loopEntity, 0);
-                        TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80FC574); // protected itself!
-                        var_40 = 0;
+            if (!lightRodRedirect) {
+                if (targetInfo->protection.protectionStatus == STATUS_PROTECT) {
+                    s16 targetFlags = GetMoveTargetAndRangeForPokemon(attacker, move, FALSE);
+                    s32 targetFlagsAnd = targetFlags & 0xF;
+                    if ((targetFlagsAnd == 0 || targetFlagsAnd == 4 || targetFlagsAnd == 5 || targetFlagsAnd == 2) && !r4) {
+                        SetMessageArgument(gUnknown_202DFE8, currTarget, 0);
+                        TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FC574); // protected itself!
+                        moveHits = FALSE;
                     }
                 }
             }
 
-            if (sub_80571F0(loopEntity, move)) {
-                var_40 = 0;
+            if (sub_80571F0(currTarget, move)) {
+                moveHits = FALSE;
             }
 
-            if (var_40 != 0) {
-                if (HasAbility(loopEntity, ABILITY_SOUNDPROOF) && IsSoundMove(move)) {
-                    SetMessageArgument(gUnknown_202DFE8, loopEntity, 0);
-                    TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_8100524); // Soundproof suppressed the sound move!
-                    var_40 = 0;
+            if (moveHits) {
+                if (HasAbility(currTarget, ABILITY_SOUNDPROOF) && IsSoundMove(move)) {
+                    SetMessageArgument(gUnknown_202DFE8, currTarget, 0);
+                    TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_8100524); // Soundproof suppressed the sound move!
+                    moveHits = FALSE;
                 }
             }
-            if (var_40 != 0) {
-                bool8 selfAlwaysHits = (var_38 == 0);
+            if (moveHits) {
+                bool8 selfAlwaysHits = (moveRedirected == FALSE);
                 if (move->id == MOVE_ENDURE || move->id == MOVE_DETECT || move->id == MOVE_PROTECT) {
                     selfAlwaysHits = FALSE;
                 }
-                if (!AccuracyCalc(entity, loopEntity, move, ACCURACY_1, selfAlwaysHits)) {
-                    var_40 = 0;
-                }
-                if (var_40 != 0 && var_3C != 0) {
-                    var_40 = 0;
+                if (!AccuracyCalc(attacker, currTarget, move, ACCURACY_1, selfAlwaysHits)) {
+                    moveHits = FALSE;
                 }
             }
 
-            if (sub_8045888(loopEntity)) {
+            if (moveHits && lightRodRedirect) {
+                moveHits = FALSE;
+            }
+
+            if (sub_8045888(currTarget)) {
                 sub_803E708(4, 0x4A);
-                sub_8041168(entity, loopEntity, move, NULL);
+                sub_8041168(attacker, currTarget, move, NULL);
             }
 
-            if (var_40 == 0) {
-                if (GetEntInfo(entity)->isTeamLeader) {
-                    sub_80421C0(entity, 0x156);
+            if (!moveHits) {
+                if (GetEntInfo(attacker)->isTeamLeader) {
+                    sub_80421C0(attacker, 0x156);
                 }
                 else {
-                    sub_80421C0(entity, 0x157);
+                    sub_80421C0(attacker, 0x157);
                 }
-                SetMessageArgument_2(gUnknown_202DFE8, GetEntInfo(loopEntity), 0);
+                SetMessageArgument_2(gUnknown_202DFE8, GetEntInfo(currTarget), 0);
                 // Interesting that these 3 strings are the same. Curious if that's the case in Blue/Europe versions.
-                if (entity == loopEntity) {
-                    TryDisplayDungeonLoggableMessage3(entity, entity, gUnknown_80F9380); // The move missed
+                if (attacker == currTarget) {
+                    TryDisplayDungeonLoggableMessage3(attacker, attacker, gUnknown_80F9380); // The move missed
                 }
-                else if (GetTreatmentBetweenMonsters(entity, loopEntity, TRUE, FALSE) == 0) {
-                    TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80F9384); // The move missed
+                else if (GetTreatmentBetweenMonsters(attacker, currTarget, TRUE, FALSE) == 0) {
+                    TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80F9384); // The move missed
                 }
-                else if (var_3C != 0) {
-                    TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80F93A4); // The move missed
+                else if (lightRodRedirect) {
+                    TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80F93A4); // The move missed
                 }
                 else {
-                    TryDisplayDungeonLoggableMessage3(entity, loopEntity, gUnknown_80F9364); // is unaffected!
+                    TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80F9364); // is unaffected!
                 }
 
-                if (sub_8045888(loopEntity)) {
-                    sub_803ED30(9999, loopEntity, 1, -1);
+                if (sub_8045888(currTarget)) {
+                    sub_803ED30(9999, currTarget, 1, -1);
                 }
 
                 switch (moveId) {
                     case MOVE_HI_JUMP_KICK:
-                        sub_8059FC8(entity, loopEntity, move, itemId, 1);
+                        sub_8059FC8(attacker, currTarget, move, itemId, 1);
                         break;
                     case MOVE_JUMP_KICK:
-                        sub_8059E54(entity, loopEntity, move, itemId, 1);
+                        sub_8059E54(attacker, currTarget, move, itemId, 1);
                         break;
 
                 }
@@ -1697,40 +1699,40 @@ void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId,
                     break; // breaks out of the loop
             }
             else {
-                s32 expMultiplierBeforeMove = loopEntInfo->expMultiplier;
-                if (loopEntInfo->isNotTeamMember) {
+                s32 expMultiplierBeforeMove = targetInfo->expMultiplier;
+                if (targetInfo->isNotTeamMember) {
                     if (move->id != MOVE_REGULAR_ATTACK && itemId == 0 && expMultiplierBeforeMove == EXP_HALVED) {
-                        loopEntInfo->expMultiplier = EXP_REGULAR;
+                        targetInfo->expMultiplier = EXP_REGULAR;
                     }
-                    if (a4 == 1) {
-                        loopEntInfo->expMultiplier = EXP_BOOSTED; // Is a4 whether the move was linked?
+                    if (isLinkedMove == TRUE) {
+                        targetInfo->expMultiplier = EXP_BOOSTED;
                     }
                 }
 
-                if (loopEntInfo->unk164 == 0xFF && sub_80717A4(loopEntity, MOVE_SLEEP_TALK)) {
-                    loopEntInfo->unk164 = GetDirectionTowardsPosition(&loopEntity->pos, &entity->pos);
+                if (targetInfo->unk164 == 0xFF && sub_80717A4(currTarget, MOVE_SLEEP_TALK)) {
+                    targetInfo->unk164 = GetDirectionTowardsPosition(&currTarget->pos, &attacker->pos);
                 }
-                if (loopEntInfo->unk165 == 0xFF && sub_80717A4(loopEntity, MOVE_SNORE)) {
-                    loopEntInfo->unk165 = GetDirectionTowardsPosition(&loopEntity->pos, &entity->pos);
+                if (targetInfo->unk165 == 0xFF && sub_80717A4(currTarget, MOVE_SNORE)) {
+                    targetInfo->unk165 = GetDirectionTowardsPosition(&currTarget->pos, &attacker->pos);
                 }
 
-                if (HasAbility(loopEntity, ABILITY_PRESSURE)
-                    && GetTreatmentBetweenMonsters(entity, loopEntity, TRUE, FALSE) == 1
+                if (HasAbility(currTarget, ABILITY_PRESSURE)
+                    && GetTreatmentBetweenMonsters(attacker, currTarget, TRUE, FALSE) == 1
                     && move->id != MOVE_REGULAR_ATTACK
                     && move->id != MOVE_STRUGGLE
                     && itemId == 0
                     && move->PP != 0)
                 {
                     if (!(move->moveFlags2 & MOVE_FLAG2_x10)) {
-                        sub_8042950(entity);
+                        sub_8042950(attacker);
                     }
                     move->moveFlags2 |= MOVE_FLAG2_x10;
                 }
 
-                if ((GetMoveTargetAndRangeForPokemon(entity, move, FALSE) & 0xF) == 0) {
-                    SetShopkeeperAggression(entity, loopEntity);
+                if ((GetMoveTargetAndRangeForPokemon(attacker, move, FALSE) & 0xF) == 0) {
+                    SetShopkeeperAggression(attacker, currTarget);
                 }
-                loopEntInfo->unk158 = 1;
+                targetInfo->unk158 = 1;
 
                 // They really must've had a soft spot for all these giant switches
                 switch (moveId) {
@@ -1785,46 +1787,46 @@ void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId,
                     case 360:
                     case 362:
                     case 366:
-                        unkBoolRet = (sub_8055640(entity, loopEntity, move, 0x100, itemId) != 0);
+                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, 0x100, itemId) != 0);
                         break;
                     case MOVE_REGULAR_ATTACK:
-                        unkBoolRet = (sub_8055640(entity, loopEntity, move, 0x80, itemId) != 0);
+                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, 0x80, itemId) != 0);
                         break;
                     case MOVE_NOTHING:
-                        unkBoolRet = (sub_8055640(entity, loopEntity, move, 0, itemId) != 0);
+                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, 0, itemId) != 0);
                         break;
                     case MOVE_EARTHQUAKE:
-                        unkBoolRet = sub_8058F04(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058F04(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_GUST:
-                        unkBoolRet = sub_8058270(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058270(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_STRUGGLE:
-                        unkBoolRet = sub_805B968(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B968(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_FLAME_WHEEL:
-                        unkBoolRet = sub_805816C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805816C(attacker, currTarget, move, itemId);
                         break;
                     case 53:
                     case 157:
                     case 230:
                     case 262:
                     case 292:
-                        unkBoolRet = sub_80581D0(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80581D0(attacker, currTarget, move, itemId);
                         break;
                     case 101:
                     case 270:
                     case 344:
                     case 345:
-                        unkBoolRet = sub_8058B3C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058B3C(attacker, currTarget, move, itemId);
                         break;
                     case 238:
                     case 239:
                     case 242:
-                        unkBoolRet = sub_805A568(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805A568(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_FOCUS_ENERGY:
-                        unkBoolRet = FocusEnergyMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = FocusEnergyMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 36:
                     case 68:
@@ -1833,150 +1835,150 @@ void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId,
                     case 90:
                     case 251:
                     case MOVE_LEAF_BLADE:
-                        unkBoolRet = (sub_8055640(entity, loopEntity, move, 0x100, itemId) != 0);
+                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, 0x100, itemId) != 0);
                         break;
                     case MOVE_FISSURE:
-                        unkBoolRet = sub_80590D4(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80590D4(attacker, currTarget, move, itemId);
                         break;
                     case 150:
                     case 247:
-                        unkBoolRet = sub_80595EC(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80595EC(attacker, currTarget, move, itemId);
                         break;
                     case 392:
-                        unkBoolRet = sub_805C138(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805C138(attacker, currTarget, move, itemId);
                         break;
                     case 69:
                     case 125:
                     case 143:
                     case 291:
-                        unkBoolRet = sub_805B17C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B17C(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_WHIRLPOOL:
-                        unkBoolRet = WhirlpoolMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = WhirlpoolMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SURF:
-                        unkBoolRet = SurfMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = SurfMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 86:
                     case 89:
-                        unkBoolRet = sub_805889C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805889C(attacker, currTarget, move, itemId);
                         break;
                     case 200:
                     case 279:
                     case 280:
-                        unkBoolRet = sub_8059E0C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059E0C(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_PSYCHIC:
-                        unkBoolRet = sub_8058C98(entity, loopEntity, move, gUnknown_8106A50, itemId);
+                        moveHadEffect = sub_8058C98(attacker, currTarget, move, gUnknown_8106A50, itemId);
                         break;
                     case 332:
-                        unkBoolRet = sub_8058C98(entity, loopEntity, move, gUnknown_8106A4C, itemId);
+                        moveHadEffect = sub_8058C98(attacker, currTarget, move, gUnknown_8106A4C, itemId);
                         break;
                     case 325:
-                        unkBoolRet = sub_805B3FC(entity, loopEntity, move, gUnknown_8106A4C, itemId);
+                        moveHadEffect = sub_805B3FC(attacker, currTarget, move, gUnknown_8106A4C, itemId);
                         break;
                     case 244:
-                        unkBoolRet = sub_805A5E8(entity, loopEntity, move, gUnknown_8106A4C, itemId);
+                        moveHadEffect = sub_805A5E8(attacker, currTarget, move, gUnknown_8106A4C, itemId);
                         break;
                     case 283:
-                        unkBoolRet = sub_805B074(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B074(attacker, currTarget, move, itemId);
                         break;
                     case 162:
-                        unkBoolRet = sub_8059928(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059928(attacker, currTarget, move, itemId);
                         break;
                     case 71:
                     case 255:
-                        unkBoolRet = sub_8058580(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058580(attacker, currTarget, move, itemId);
                         break;
                     case 82:
                     case 93:
-                        unkBoolRet = sub_8058930(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058930(attacker, currTarget, move, itemId);
                         break;
                     case 107:
                     case 114:
                     case 234:
-                        unkBoolRet = sub_8058C00(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058C00(attacker, currTarget, move, itemId);
                         break;
                     case 309:
-                        unkBoolRet = sub_805B324(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B324(attacker, currTarget, move, itemId);
                         break;
                     case 335:
-                        unkBoolRet = sub_805B910(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B910(attacker, currTarget, move, itemId);
                         break;
                     case 275:
-                        unkBoolRet = sub_805AE74(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805AE74(attacker, currTarget, move, itemId);
                         break;
                     case 147:
-                        unkBoolRet = sub_8059540(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059540(attacker, currTarget, move, itemId);
                         break;
                     case 149:
-                        unkBoolRet = sub_80595A0(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80595A0(attacker, currTarget, move, itemId);
                         break;
                     case 188:
-                        unkBoolRet = sub_8059D00(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059D00(attacker, currTarget, move, itemId);
                         break;
                     case 120:
                     case 144:
                     case 235:
                     case 342:
-                        unkBoolRet = sub_8058FBC(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058FBC(attacker, currTarget, move, itemId);
                         break;
                     case 133:
                     case 261:
                     case 289:
-                        unkBoolRet = sub_8059190(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059190(attacker, currTarget, move, itemId);
                         break;
                     case 63:
                     case 221:
                     case 271:
                     case 303:
-                        unkBoolRet = sub_8058430(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058430(attacker, currTarget, move, itemId);
                         break;
                     case 139:
-                        unkBoolRet = sub_8059424(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059424(attacker, currTarget, move, itemId);
                         break;
                     case 30:
                     case 46:
-                        unkBoolRet = sub_8057C88(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8057C88(attacker, currTarget, move, itemId);
                         break;
                     case 62:
                     case 127:
-                        unkBoolRet = sub_80583D8(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80583D8(attacker, currTarget, move, itemId);
                         break;
                     case 264:
                     case 310:
-                        unkBoolRet = sub_805AC90(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805AC90(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_TRI_ATTACK:
-                        unkBoolRet = TriAttackMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = TriAttackMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 103:
-                        unkBoolRet = sub_8058B84(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058B84(attacker, currTarget, move, itemId);
                         break;
                     case 276:
-                        unkBoolRet = sub_805AECC(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805AECC(attacker, currTarget, move, itemId);
                         break;
                     case 326:
-                        unkBoolRet = sub_805B454(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B454(attacker, currTarget, move, itemId);
                         break;
                     case 59:
-                        unkBoolRet = sub_80582C4(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80582C4(attacker, currTarget, move, itemId);
                         break;
                     case 226:
-                        unkBoolRet = sub_805A408(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805A408(attacker, currTarget, move, itemId);
                         break;
                     case 152:
-                        unkBoolRet = sub_8059714(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059714(attacker, currTarget, move, itemId);
                         break;
                     case 341:
-                        unkBoolRet = sub_805B808(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B808(attacker, currTarget, move, itemId);
                         break;
                     case 124:
-                        unkBoolRet = sub_8059050(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059050(attacker, currTarget, move, itemId);
                         break;
                     case 64:
                     case 65:
-                        unkBoolRet = sub_8058478(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058478(attacker, currTarget, move, itemId);
                         break;
                     case 4:
                     case 34:
@@ -1984,695 +1986,695 @@ void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId,
                     case 84:
                     case 111:
                     case 231:
-                        unkBoolRet = sub_80576F8(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80576F8(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_YAWN:
-                        unkBoolRet = YawnMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = YawnMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 129:
-                        unkBoolRet = sub_8059080(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059080(attacker, currTarget, move, itemId);
                         break;
                     case 194:
-                        unkBoolRet = sub_8059D98(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059D98(attacker, currTarget, move, itemId);
                         break;
                     case 177:
-                        unkBoolRet = sub_8059AF8(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059AF8(attacker, currTarget, move, itemId);
                         break;
                     case 13:
                     case 171:
                     case 191:
                     case 274:
                     case 382:
-                        unkBoolRet = sub_8059AA8(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059AA8(attacker, currTarget, move, itemId);
                         break;
                     case 196:
                     case 199:
-                        unkBoolRet = sub_8059DA4(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059DA4(attacker, currTarget, move, itemId);
                         break;
                     case 192:
-                        unkBoolRet = sub_8059D48(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059D48(attacker, currTarget, move, itemId);
                         break;
                     case 281:
-                        unkBoolRet = sub_805B028(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B028(attacker, currTarget, move, itemId);
                         break;
                     case 193:
-                        unkBoolRet = sub_8059D58(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059D58(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SUPERPOWER:
-                        unkBoolRet = TickleMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = TickleMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 73:
                     case 97:
                     case 299:
-                        unkBoolRet = sub_8058638(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058638(attacker, currTarget, move, itemId);
                         break;
                     case 246:
-                        unkBoolRet = sub_805A688(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805A688(attacker, currTarget, move, itemId);
                         break;
                     case 33:
-                        unkBoolRet = sub_8057D7C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8057D7C(attacker, currTarget, move, itemId);
                         break;
                     case 268:
                     case 284:
                     case 368:
-                        unkBoolRet = sub_805B0BC(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B0BC(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_PAIN_SPLIT:
-                        unkBoolRet = PainSplitMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = PainSplitMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 288:
-                        unkBoolRet = sub_805B164(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B164(attacker, currTarget, move, itemId);
                         break;
                     case 169:
-                        unkBoolRet = sub_8059A18(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059A18(attacker, currTarget, move, itemId);
                         break;
                     case 343:
-                        unkBoolRet = sub_805B884(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B884(attacker, currTarget, move, itemId);
                         break;
                     case 265:
-                        unkBoolRet = BulkUpMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = BulkUpMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 55:
                     case 195:
                     case 333:
-                        unkBoolRet = sub_80582D4(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80582D4(attacker, currTarget, move, itemId);
                         break;
                     case 19:
-                        unkBoolRet = RageMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = RageMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 181:
-                        unkBoolRet = sub_8059B94(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059B94(attacker, currTarget, move, itemId);
                         break;
                     case 319:
-                        unkBoolRet = sub_805B3B4(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B3B4(attacker, currTarget, move, itemId);
                         break;
                     case 148:
-                        unkBoolRet = sub_8059588(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059588(attacker, currTarget, move, itemId);
                         break;
                     case 215:
-                        unkBoolRet = sub_805A2B0(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805A2B0(attacker, currTarget, move, itemId);
                         break;
                     case 302:
-                        unkBoolRet = sub_805B2FC(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B2FC(attacker, currTarget, move, itemId);
                         break;
                     case 186:
                     case 202:
                     case 258:
-                        unkBoolRet = sub_8059CD8(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059CD8(attacker, currTarget, move, itemId);
                         break;
                     case 99:
-                        unkBoolRet = sub_8058A7C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058A7C(attacker, currTarget, move, itemId);
                         break;
                     case 159:
-                        unkBoolRet = sub_80598CC(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80598CC(attacker, currTarget, move, itemId);
                         break;
                     case 44:
-                        unkBoolRet = sub_8057F7C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8057F7C(attacker, currTarget, move, itemId);
                         break;
                     case 42:
-                        unkBoolRet = sub_8057ED0(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8057ED0(attacker, currTarget, move, itemId);
                         break;
                     case 110:
-                        unkBoolRet = sub_8058CEC(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058CEC(attacker, currTarget, move, itemId);
                         break;
                     case 106:
                     case 351:
-                        unkBoolRet = sub_8058BF0(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058BF0(attacker, currTarget, move, itemId);
                         break;
                     case 217:
-                        unkBoolRet = sub_805A2C8(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805A2C8(attacker, currTarget, move, itemId);
                         break;
                     case 267:
-                        unkBoolRet = sub_805AD34(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805AD34(attacker, currTarget, move, itemId);
                         break;
                     case 27:
-                        unkBoolRet = sub_8057C68(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8057C68(attacker, currTarget, move, itemId);
                         break;
                     case 170:
                     case 216:
-                        unkBoolRet = sub_8059A2C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059A2C(attacker, currTarget, move, itemId);
                         break;
                     case 76:
                     case 80:
                     case 320:
-                        unkBoolRet = sub_80586DC(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80586DC(attacker, currTarget, move, itemId);
                         break;
                     case 140:
-                        unkBoolRet = sub_805946C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805946C(attacker, currTarget, move, itemId);
                         break;
                     case 116:
                     case 203:
                     case 354:
-                        unkBoolRet = sub_8058E5C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058E5C(attacker, currTarget, move, itemId);
                         break;
                     case 135:
-                        unkBoolRet = sub_80591E4(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80591E4(attacker, currTarget, move, itemId);
                         break;
                     case 24:
-                        unkBoolRet = sub_8057BC4(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8057BC4(attacker, currTarget, move, itemId);
                         break;
                     case 210:
-                        unkBoolRet = sub_805A210(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805A210(attacker, currTarget, move, itemId);
                         break;
                     case 164:
-                        unkBoolRet = sub_8059988(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059988(attacker, currTarget, move, itemId);
                         break;
                     case 151:
-                        unkBoolRet = SolarBeamMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = SolarBeamMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 100:
-                        unkBoolRet = SkyAttackMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = SkyAttackMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 371:
-                        unkBoolRet = sub_805BE90(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805BE90(attacker, currTarget, move, itemId);
                         break;
                     case 91:
                     case 253:
-                        unkBoolRet = sub_80588B8(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80588B8(attacker, currTarget, move, itemId);
                         break;
                     case 294:
-                        unkBoolRet = WrapMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = WrapMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 112:
-                        unkBoolRet = sub_8058D38(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058D38(attacker, currTarget, move, itemId);
                         break;
                     case 198:
-                        unkBoolRet = sub_8059DC4(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059DC4(attacker, currTarget, move, itemId);
                         break;
                     case 277:
-                        unkBoolRet = PresentMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = PresentMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 338:
-                        unkBoolRet = ReflectMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = ReflectMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 141:
-                        unkBoolRet = SandstormMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = SandstormMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 134:
-                        unkBoolRet = SafeguardMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = SafeguardMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 130:
-                        unkBoolRet = MistMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = MistMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 259:
-                        unkBoolRet = LightScreenMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = LightScreenMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 2:
                     case 105:
-                        unkBoolRet = sub_805768C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805768C(attacker, currTarget, move, itemId);
                         break;
                     case 43:
-                        unkBoolRet = sub_8057F24(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8057F24(attacker, currTarget, move, itemId);
                         break;
                     case 165:
                     case 318:
-                        unkBoolRet = sub_80599EC(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80599EC(attacker, currTarget, move, itemId);
                         break;
                     case 94:
-                        unkBoolRet = sub_80589D4(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80589D4(attacker, currTarget, move, itemId);
                         break;
                     case 173:
-                        unkBoolRet = sub_8059AC4(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059AC4(attacker, currTarget, move, itemId);
                         break;
                     case 232:
-                        unkBoolRet = sub_805A4D4(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805A4D4(attacker, currTarget, move, itemId);
                         break;
                     case 117:
                     case 218:
-                        unkBoolRet = sub_8058EE0(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058EE0(attacker, currTarget, move, itemId);
                         break;
                     case 386:
-                        unkBoolRet = ScannerOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = ScannerOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 209:
-                        unkBoolRet = sub_805A120(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805A120(attacker, currTarget, move, itemId);
                         break;
                     case 364:
-                        unkBoolRet = sub_805BA50(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805BA50(attacker, currTarget, move, itemId);
                         break;
                     case 214:
                     case 287:
-                        unkBoolRet = sub_805A2A0(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805A2A0(attacker, currTarget, move, itemId);
                         break;
                     case 95:
                     case 372:
-                        unkBoolRet = sub_8058A08(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058A08(attacker, currTarget, move, itemId);
                         break;
                     case 38:
                     case 51:
-                        unkBoolRet = CounterMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = CounterMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 61:
                     case 340:
-                        unkBoolRet = BideMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = BideMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 357:
-                        unkBoolRet = sub_805836C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805836C(attacker, currTarget, move, itemId);
                         break;
                     case 401:
-                        unkBoolRet = TrapperOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = TrapperOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 227:
-                        unkBoolRet = sub_805A450(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805A450(attacker, currTarget, move, itemId);
                         break;
                     case 237:
-                        unkBoolRet = CurseMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = CurseMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 206:
-                        unkBoolRet = sub_8059FC8(entity, loopEntity, move, itemId, 0);
+                        moveHadEffect = sub_8059FC8(attacker, currTarget, move, itemId, 0);
                         break;
                     case 272:
-                        unkBoolRet = sub_805AE3C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805AE3C(attacker, currTarget, move, itemId);
                         break;
                     case 324:
-                        unkBoolRet = sub_805B3E0(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B3E0(attacker, currTarget, move, itemId);
                         break;
                     case 60:
-                        unkBoolRet = RazorWindMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = RazorWindMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 75:
-                        unkBoolRet = FocusPunchMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = FocusPunchMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 298:
-                        unkBoolRet = MagicCoatMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = MagicCoatMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 5:
-                        unkBoolRet = NightmareMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = NightmareMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 6:
-                        unkBoolRet = sub_8057748(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8057748(attacker, currTarget, move, itemId);
                         break;
                     case 394:
-                        unkBoolRet = sub_805C1BC(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805C1BC(attacker, currTarget, move, itemId);
                         break;
                     case 212:
                     case 307:
-                        unkBoolRet = MudWaterSportMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = MudWaterSportMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 1:
-                        unkBoolRet = sub_8057634(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8057634(attacker, currTarget, move, itemId);
                         break;
                     case 122:
                     case 224:
-                        unkBoolRet = sub_805A3DC(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805A3DC(attacker, currTarget, move, itemId);
                         break;
                     case 47:
-                        unkBoolRet = sub_8057FF4(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8057FF4(attacker, currTarget, move, itemId);
                         break;
                     case 233:
-                        unkBoolRet = sub_805A4FC(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805A4FC(attacker, currTarget, move, itemId);
                         break;
                     case 108:
-                        unkBoolRet = sub_8058C48(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058C48(attacker, currTarget, move, itemId);
                         break;
                     case 329:
-                        unkBoolRet = LeechSeedMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = LeechSeedMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 295:
-                        unkBoolRet = SpikesMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = SpikesMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 15:
                     case 26:
                     case 339:
-                        unkBoolRet = sub_80578EC(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80578EC(attacker, currTarget, move, itemId);
                         break;
                     case 88:
-                        unkBoolRet = sub_80588A8(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80588A8(attacker, currTarget, move, itemId);
                         break;
                     case 387:
-                        unkBoolRet = RadarOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = RadarOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 381:
-                        unkBoolRet = sub_805BC70(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805BC70(attacker, currTarget, move, itemId);
                         break;
                     case 78:
-                        unkBoolRet = sub_80587E8(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80587E8(attacker, currTarget, move, itemId);
                         break;
                     case 296:
-                        unkBoolRet = sub_805B264(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B264(attacker, currTarget, move, itemId);
                         break;
                     case 348:
-                        unkBoolRet = SkullBashMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = SkullBashMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 225:
-                        unkBoolRet = WishMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = WishMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 45:
-                        unkBoolRet = sub_8057FCC(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8057FCC(attacker, currTarget, move, itemId);
                         break;
                     case 213:
-                        unkBoolRet = sub_805A258(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805A258(attacker, currTarget, move, itemId);
                         break;
                     case 142:
                     case 146:
                     case 273:
-                        unkBoolRet = sub_8059528(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059528(attacker, currTarget, move, itemId);
                         break;
                     case 41:
-                        unkBoolRet = sub_8057E6C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8057E6C(attacker, currTarget, move, itemId);
                         break;
                     case 197:
-                        unkBoolRet = sub_8059DB4(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059DB4(attacker, currTarget, move, itemId);
                         break;
                     case 83:
-                        unkBoolRet = sub_8058838(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058838(attacker, currTarget, move, itemId);
                         break;
                     case 22:
-                        unkBoolRet = TormentMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = TormentMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 20:
-                        unkBoolRet = sub_8057974(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8057974(attacker, currTarget, move, itemId);
                         break;
                     case 314:
-                        unkBoolRet = sub_805B388(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B388(attacker, currTarget, move, itemId);
                         break;
                     case 383:
-                        unkBoolRet = sub_805BC98(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805BC98(attacker, currTarget, move, itemId);
                         break;
                     case 66:
-                        unkBoolRet = sub_80584C0(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80584C0(attacker, currTarget, move, itemId);
                         break;
                     case 252:
                     case 367:
-                        unkBoolRet = sub_805BB74(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805BB74(attacker, currTarget, move, itemId);
                         break;
                     case 331:
-                        unkBoolRet = sub_805B668(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B668(attacker, currTarget, move, itemId);
                         break;
                     case 373:
-                        unkBoolRet = LuminousOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = LuminousOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 400:
-                        unkBoolRet = FillInOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = FillInOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 187:
                     case 369:
-                        unkBoolRet = sub_8059CF0(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059CF0(attacker, currTarget, move, itemId);
                         break;
                     case 388:
-                        unkBoolRet = sub_805BF34(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805BF34(attacker, currTarget, move, itemId);
                         break;
                     case 409:
-                        unkBoolRet = StairsOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = StairsOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 72:
-                        unkBoolRet = BrickBreakMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = BrickBreakMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 58:
                     case 70:
-                        unkBoolRet = sub_80582AC(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80582AC(attacker, currTarget, move, itemId);
                         break;
                     case 98:
                     case 349:
-                        unkBoolRet = sub_8058A54(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058A54(attacker, currTarget, move, itemId);
                         break;
                     case 7:
-                        unkBoolRet = VitalThrowMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = VitalThrowMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 153:
-                        unkBoolRet = FlyMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = FlyMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 205:
-                        unkBoolRet = sub_8059F38(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059F38(attacker, currTarget, move, itemId);
                         break;
                     case 156:
-                        unkBoolRet = DiveMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = DiveMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 8:
-                        unkBoolRet = DigMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = DigMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 10:
-                        unkBoolRet = sub_8057824(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8057824(attacker, currTarget, move, itemId);
                         break;
                     case 56:
-                        unkBoolRet = sub_805825C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805825C(attacker, currTarget, move, itemId);
                         break;
                     case 249:
-                        unkBoolRet = KnockOffMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = KnockOffMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 389:
-                        unkBoolRet = TrapbustOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = TrapbustOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 410:
-                        unkBoolRet = LongtossOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = LongtossOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 412:
-                        unkBoolRet = PierceOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = PierceOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 49:
-                        unkBoolRet = GrudgeMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = GrudgeMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 374:
-                        unkBoolRet = PetrifyOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = PetrifyOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 229:
-                        unkBoolRet = sub_805A4C0(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805A4C0(attacker, currTarget, move, itemId);
                         break;
                     case 256:
                     case 317:
-                        unkBoolRet = sub_805AAD0(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805AAD0(attacker, currTarget, move, itemId);
                         break;
                     case 396:
-                        unkBoolRet = ShockerOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = ShockerOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 102:
                     case 304:
                     case 380:
-                        unkBoolRet = sub_805B314(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B314(attacker, currTarget, move, itemId);
                         break;
                     case 204:
-                        unkBoolRet = sub_8059E54(entity, loopEntity, move, itemId, 0);
+                        moveHadEffect = sub_8059E54(attacker, currTarget, move, itemId, 0);
                         break;
                     case 301:
                     case 305:
-                        unkBoolRet = ProtectMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = ProtectMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 172:
-                        unkBoolRet = sub_8059AB8(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059AB8(attacker, currTarget, move, itemId);
                         break;
                     case 85:
-                        unkBoolRet = sub_8058858(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058858(attacker, currTarget, move, itemId);
                         break;
                     case 77:
                     case 121:
-                        unkBoolRet = sub_8058770(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058770(attacker, currTarget, move, itemId);
                         break;
                     case 123:
-                        unkBoolRet = sub_8059004(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8059004(attacker, currTarget, move, itemId);
                         break;
                     case 155:
-                        unkBoolRet = sub_80597F0(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80597F0(attacker, currTarget, move, itemId);
                         break;
                     case 128:
-                        unkBoolRet = ChargeMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = ChargeMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 67:
-                        unkBoolRet = sub_8058548(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058548(attacker, currTarget, move, itemId);
                         break;
                     case 92:
-                        unkBoolRet = sub_80588F4(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80588F4(attacker, currTarget, move, itemId);
                         break;
                     case 113:
-                        unkBoolRet = sub_8058D44(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058D44(attacker, currTarget, move, itemId);
                         break;
                     case 278:
-                        unkBoolRet = sub_805AFA4(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805AFA4(attacker, currTarget, move, itemId);
                         break;
                     case 37:
-                        unkBoolRet = SmokescreenMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = SmokescreenMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 363:
-                        unkBoolRet = sub_805BA44(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805BA44(attacker, currTarget, move, itemId);
                         break;
                     case 160:
-                        unkBoolRet = StockpileMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = StockpileMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 245:
-                        unkBoolRet = SpitUpMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = SpitUpMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 236:
-                        unkBoolRet = SwallowMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = SwallowMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 12:
-                        unkBoolRet = RainDanceMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = RainDanceMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 35:
-                        unkBoolRet = sub_8057D9C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8057D9C(attacker, currTarget, move, itemId);
                         break;
                     case 391:
-                        unkBoolRet = InvisifyOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = InvisifyOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 316:
-                        unkBoolRet = MirrorCoatMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = MirrorCoatMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 293:
-                        unkBoolRet = PerishSongMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = PerishSongMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 96:
-                        unkBoolRet = sub_8058A18(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058A18(attacker, currTarget, move, itemId);
                         break;
                     case 313:
-                        unkBoolRet = DestinyBondMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = DestinyBondMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 17:
-                        unkBoolRet = EncoreMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = EncoreMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 31:
-                        unkBoolRet = sub_8057CD0(entity, loopEntity, move, itemId);
+                    case MOVE_WEATHER_BALL:
+                        moveHadEffect = sub_8057CD0(attacker, currTarget, move, itemId);
                         break;
                     case 223:
-                        unkBoolRet = SunnyDayMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = SunnyDayMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 228:
-                        unkBoolRet = sub_805A464(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805A464(attacker, currTarget, move, itemId);
                         break;
                     case 399:
-                        unkBoolRet = sub_805C2A0(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805C2A0(attacker, currTarget, move, itemId);
                         break;
                     case 104:
-                        unkBoolRet = EndureMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = EndureMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 185:
-                        unkBoolRet = HelpingHandMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = HelpingHandMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 257:
-                        unkBoolRet = BellyDrumMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = BellyDrumMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 398:
-                        unkBoolRet = sub_805C288(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805C288(attacker, currTarget, move, itemId);
                         break;
                     case 11:
-                        unkBoolRet = sub_805783C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805783C(attacker, currTarget, move, itemId);
                         break;
                     case 16:
-                        unkBoolRet = sub_80578FC(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_80578FC(attacker, currTarget, move, itemId);
                         break;
                     case 23:
-                        unkBoolRet = sub_8057BB4(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8057BB4(attacker, currTarget, move, itemId);
                         break;
                     case 29:
                     case 361:
-                        unkBoolRet = RockSmashMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = RockSmashMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 282:
-                        unkBoolRet = TransformMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = TransformMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 14:
-                        unkBoolRet = HailMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = HailMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 407:
-                        unkBoolRet = MobileOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = MobileOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 54:
                     case 315:
-                        unkBoolRet = sub_8058234(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8058234(attacker, currTarget, move, itemId);
                         break;
                     case 254:
-                        unkBoolRet = sub_805A85C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805A85C(attacker, currTarget, move, itemId);
                         break;
                     case 370:
-                        unkBoolRet = TransferOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = TransferOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 375:
-                        unkBoolRet = sub_805BB98(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805BB98(attacker, currTarget, move, itemId);
                         break;
                     case 269:
-                        unkBoolRet = sub_805AD54(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805AD54(attacker, currTarget, move, itemId);
                         break;
                     case 365:
-                        unkBoolRet = ReboundOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = ReboundOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 266:
                     case 379:
-                        unkBoolRet = sub_805AD04(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805AD04(attacker, currTarget, move, itemId);
                         break;
                     case 390:
-                        unkBoolRet = sub_805C080(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805C080(attacker, currTarget, move, itemId);
                         break;
                     case 395:
-                        unkBoolRet = sub_805C1E4(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805C1E4(attacker, currTarget, move, itemId);
                         break;
                     case 385:
-                        unkBoolRet = EscapeOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = EscapeOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 263:
-                        unkBoolRet = SecretPowerMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = SecretPowerMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 119:
-                        unkBoolRet = NaturePowerMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = NaturePowerMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 403:
-                        unkBoolRet = sub_805C3F8(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805C3F8(attacker, currTarget, move, itemId);
                         break;
                     case 138:
-                        unkBoolRet = SketchMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = SketchMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 40:
-                        unkBoolRet = sub_8057E50(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_8057E50(attacker, currTarget, move, itemId);
                         break;
                     case 220:
-                        unkBoolRet = RolePlayMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = RolePlayMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 137:
-                        unkBoolRet = SkillSwapMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = SkillSwapMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 183:
-                        unkBoolRet = ConversionMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = ConversionMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 378:
-                        unkBoolRet = CleanseOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = CleanseOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 48:
-                        unkBoolRet = sub_805805C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805805C(attacker, currTarget, move, itemId);
                         break;
                     case 334:
-                        unkBoolRet = SnatchMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = SnatchMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 286:
-                        unkBoolRet = HandleColorChange(entity, loopEntity, move, itemId);
+                        moveHadEffect = HandleColorChange(attacker, currTarget, move, itemId);
                         break;
                     case 328:
-                        unkBoolRet = sub_805B53C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B53C(attacker, currTarget, move, itemId);
                         break;
                     case 115:
-                        unkBoolRet = PsychUpMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = PsychUpMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 25:
-                        unkBoolRet = SnoreMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = SnoreMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 337:
-                        unkBoolRet = RecycleMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = RecycleMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 384:
-                        unkBoolRet = SilenceOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = SilenceOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 330:
-                        unkBoolRet = sub_805B618(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805B618(attacker, currTarget, move, itemId);
                         break;
                     case 393:
-                        unkBoolRet = IdentifyOrbAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = IdentifyOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case 184:
-                        unkBoolRet = Conversion2MoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = Conversion2MoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 376:
-                        unkBoolRet = sub_805BEB8(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805BEB8(attacker, currTarget, move, itemId);
                         break;
                     case 377:
-                        unkBoolRet = sub_805BEC8(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805BEC8(attacker, currTarget, move, itemId);
                         break;
                     case 327:
-                        unkBoolRet = MimicMoveAction(entity, loopEntity, move, itemId);
+                        moveHadEffect = MimicMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case 50:
                     case 406:
-                        unkBoolRet = sub_805C45C(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805C45C(attacker, currTarget, move, itemId);
                         break;
                     case 397:
-                        unkBoolRet = sub_805C208(entity, loopEntity, move, itemId);
+                        moveHadEffect = sub_805C208(attacker, currTarget, move, itemId);
                         break;
                     default:
-                        unkBoolRet = FALSE;
+                        moveHadEffect = FALSE;
                         break;
                 }
 
@@ -2680,54 +2682,54 @@ void sub_8053704(Entity **entitiesArray, Entity *entity, Move *move, s32 itemId,
                     break;
                 }
 
-                if (EntityExists(var_48)) {
-                    sub_806CE68(var_48, GetEntInfo(var_48)->action.direction);
+                if (EntityExists(currTargetSaved)) {
+                    sub_806CE68(currTargetSaved, GetEntInfo(currTargetSaved)->action.direction);
                 }
 
-                if (!unkBoolRet) {
-                    if (EntityExists(entity) && EntityExists(loopEntity) && loopEntInfo->isNotTeamMember) {
-                        loopEntInfo->expMultiplier = expMultiplierBeforeMove;
+                if (!moveHadEffect) {
+                    if (EntityExists(attacker) && EntityExists(currTarget) && targetInfo->isNotTeamMember) {
+                        targetInfo->expMultiplier = expMultiplierBeforeMove;
                     }
                 }
                 else {
-                    if (MoveCausesPaused(move) && sub_8057308(entity, 0)) {
+                    if (MoveCausesPaused(move) && sub_8057308(attacker, 0)) {
                         gUnknown_202F222 = 1;
                     }
                 }
 
-                if (EntityExists(loopEntity)) {
-                    loopEntInfo->unk158 = 1;
+                if (EntityExists(currTarget)) {
+                    targetInfo->unk158 = 1;
                 }
 
                 if (moveId != MOVE_SKILL_SWAP) {
-                    TriggerAbilityEffect(entity);
-                    sub_8069F9C(entity, loopEntity, move);
-                    sub_806A120(entity, loopEntity, move);
+                    TriggerTargetAbilityEffect(attacker);
+                    sub_8069F9C(attacker, currTarget, move);
+                    sub_806A120(attacker, currTarget, move);
                 }
             }
 
-            entity = originalEntity;
+            attacker = originalAttacker;
         }
     }
 
     if (!sub_8044B28()) {
-        if (EntityExists(entity) && GetEntInfo(entity)->unk154 != 0) {
-            GetEntInfo(entity)->unk154 = 0;
-            sub_807D148(entity, entity, 0, NULL);
+        if (EntityExists(attacker) && GetEntInfo(attacker)->unk154 != 0) {
+            GetEntInfo(attacker)->unk154 = 0;
+            sub_807D148(attacker, attacker, 0, NULL);
         }
-        if (EntityExists(entity) && GetEntInfo(entity)->unk155 != 0) {
-            GetEntInfo(entity)->unk155 = 0;
-            LowerAttackStageTarget(entity, entity, gUnknown_8106A50, 2, 0, FALSE);
+        if (EntityExists(attacker) && GetEntInfo(attacker)->unk155 != 0) {
+            GetEntInfo(attacker)->unk155 = 0;
+            LowerAttackStageTarget(attacker, attacker, gUnknown_8106A50, 2, 0, FALSE);
         }
     }
 }
 
-UNUSED bool32 sub_8055620(Entity *a0, Entity *a1, Move *a2, s32 a3)
+bool32 HandleRegularDamagingMove(Entity *attacker, Entity *target, Move *move, s32 itemId)
 {
-    return (sub_8055640(a0, a1, a2, 0x100, a3) != 0);
+    return (HandleDamagingMove(attacker, target, move, 0x100, itemId) != 0);
 }
 
-s32 sub_8055640(Entity *attacker, Entity *target, Move *move, s32 r9, s32 itemId)
+s32 HandleDamagingMove(Entity *attacker, Entity *target, Move *move, s32 r9, s32 itemId)
 {
     struct DamageStruct dmgStruct;
     s16 unk;
@@ -2737,7 +2739,7 @@ s32 sub_8055640(Entity *attacker, Entity *target, Move *move, s32 r9, s32 itemId
 
     sub_806EAF4(attacker, target, moveType, movePower, critChance, &dmgStruct, r9, move->id, 1);
     unk = sub_8057600(move, itemId);
-    return sub_8055728(attacker, target, move, &dmgStruct, unk);
+    return TryHitTarget(attacker, target, move, &dmgStruct, unk);
 }
 
 s32 sub_80556BC(Entity *attacker, Entity *target, u8 moveType, Move *move, s32 r9, s32 itemId)
@@ -2749,10 +2751,10 @@ s32 sub_80556BC(Entity *attacker, Entity *target, u8 moveType, Move *move, s32 r
 
     sub_806EAF4(attacker, target, moveType, movePower, critChance, &dmgStruct, r9, move->id, 1);
     unk = sub_8057600(move, itemId);
-    return sub_8055728(attacker, target, move, &dmgStruct, unk);
+    return TryHitTarget(attacker, target, move, &dmgStruct, unk);
 }
 
-s32 sub_8055728(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk_)
+static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk_)
 {
     s32 unk = unk_; // It's happening again...
     if (AccuracyCalc(attacker, target, move, ACCURACY_2, TRUE)) { // Move hits
@@ -2861,32 +2863,32 @@ void sub_80559DC(Entity *entity1, Entity *entity2)
     sub_806CE68(entity1, direction);
 }
 
-bool32 sub_8055A00(Entity *entity, s32 firstMoveId, s32 var_34, s32 itemId, s32 arg_0)
+bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s32 arg_0)
 {
     s32 i, j;
     s32 moveId;
-    EntityInfo *entInfo = GetEntInfo(entity);
-    bool32 var_2C;
+    EntityInfo *attackerInfo = GetEntInfo(attacker);
+    bool32 isLinkedMove;
 
     moveId = firstMoveId;
     if (firstMoveId >= MAX_MON_MOVES)
         return FALSE;
 
-    entInfo->abilityEffectFlags = 0;
-    entInfo->unk159 = 0;
-    if (entInfo->volatileStatus.volatileStatus == STATUS_CRINGE) {
-        SetMessageArgument(gAvailablePokemonNames, entity, 0);
-        TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC714); // is cringing!
+    attackerInfo->abilityEffectFlags = 0;
+    attackerInfo->unk159 = 0;
+    if (attackerInfo->volatileStatus.volatileStatus == STATUS_CRINGE) {
+        SetMessageArgument(gAvailablePokemonNames, attacker, 0);
+        TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC714); // is cringing!
         return FALSE;
     }
-    else if (entInfo->volatileStatus.volatileStatus == STATUS_INFATUATED) {
-        SetMessageArgument(gAvailablePokemonNames, entity, 0);
-        TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC718); // is infatuated!
+    else if (attackerInfo->volatileStatus.volatileStatus == STATUS_INFATUATED) {
+        SetMessageArgument(gAvailablePokemonNames, attacker, 0);
+        TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC718); // is infatuated!
         return FALSE;
     }
-    else if (entInfo->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS) {
-        SetMessageArgument(gAvailablePokemonNames, entity, 0);
-        TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC6A8); // is paralyzed!
+    else if (attackerInfo->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS) {
+        SetMessageArgument(gAvailablePokemonNames, attacker, 0);
+        TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC6A8); // is paralyzed!
         return FALSE;
     }
 
@@ -2894,33 +2896,33 @@ bool32 sub_8055A00(Entity *entity, s32 firstMoveId, s32 var_34, s32 itemId, s32 
     gUnknown_202F208 = 0;
     gUnknown_202F221 = 0;
     for (i = 0; i < MAX_MON_MOVES; i++) {
-        entInfo->mimicMoveIDs[i] = 0;
+        attackerInfo->mimicMoveIDs[i] = 0;
     }
 
     for (i = 0, j = 0; i < MAX_MON_MOVES; i++) {
         j++;
         if (++moveId >= MAX_MON_MOVES)
             break;
-        if (!(entInfo->moves.moves[moveId].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+        if (!(attackerInfo->moves.moves[moveId].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
             break;
     }
 
-    var_2C = (j > 1);
+    isLinkedMove = (j > 1);
     moveId = firstMoveId;
 
     while (1) {
-        Move *currMove = &entInfo->moves.moves[moveId];
-        if (!EntityExists(entity) || sub_8044B28())
+        Move *currMove = &attackerInfo->moves.moves[moveId];
+        if (!EntityExists(attacker) || sub_8044B28())
             break;
 
         if (currMove->id == MOVE_SNORE || currMove->id == MOVE_SLEEP_TALK) {
-            if (!IsSleeping(entity)) {
-                if (CannotAttack(entity, TRUE))
+            if (!IsSleeping(attacker)) {
+                if (CannotAttack(attacker, TRUE))
                     break;
             }
         }
         else {
-            if (CannotAttack(entity, FALSE))
+            if (CannotAttack(attacker, FALSE))
                 break;
         }
 
@@ -2930,7 +2932,7 @@ bool32 sub_8055A00(Entity *entity, s32 firstMoveId, s32 var_34, s32 itemId, s32 
         if (MoveFlagExists(currMove)) {
             bool32 moveUsable = TRUE;
             bool32 var_28 = FALSE;
-            bool32 statusMoveMatch = MoveMatchesChargingStatus(entity, currMove);
+            bool32 statusMoveMatch = MoveMatchesChargingStatus(attacker, currMove);
 
             if (currMove->PP != 0) {
                 if (!statusMoveMatch) {
@@ -2940,29 +2942,29 @@ bool32 sub_8055A00(Entity *entity, s32 firstMoveId, s32 var_34, s32 itemId, s32 
             else {
                 if (!statusMoveMatch) {
                     sub_80928C0(gFormatItems,  currMove, NULL);
-                    TryDisplayDungeonLoggableMessage(entity, gUnknown_80F93C8); // The move can't be used!
+                    TryDisplayDungeonLoggableMessage(attacker, gUnknown_80F93C8); // The move can't be used!
                     moveUsable = FALSE;
                 }
             }
 
             if (moveUsable) {
-                bool32 r0;
+                bool32 moveWasUsed;
                 s32 unkBefore = gUnknown_202F208;
 
-                entInfo->unk159 = statusMoveMatch;
+                attackerInfo->unk159 = statusMoveMatch;
                 if (currMove->id == MOVE_ASSIST) {
                     Move assistMove = *currMove;
 
-                    assistMove.id = sub_8057144(entity);
+                    assistMove.id = sub_8057144(attacker);
                     sub_80928C0(gFormatItems, &assistMove, NULL);
-                    TryDisplayDungeonLoggableMessage(entity, gUnknown_80FD2DC); // Assist:
-                    r0 = sub_8055FA0(entity, var_34, itemId, arg_0, var_2C, &assistMove);
+                    TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FD2DC); // Assist:
+                    moveWasUsed = TryUseChosenMove(attacker, var_34, itemId, arg_0, isLinkedMove, &assistMove);
                 }
                 else {
-                    r0 = sub_8055FA0(entity, var_34, itemId, arg_0, var_2C, currMove);
+                    moveWasUsed = TryUseChosenMove(attacker, var_34, itemId, arg_0, isLinkedMove, currMove);
                 }
 
-                if (var_28 && r0) {
+                if (var_28 && moveWasUsed) {
                     if (currMove->moveFlags2 & MOVE_FLAG2_UNK4) {
                         currMove->moveFlags2 &= ~(MOVE_FLAG2_UNK4);
                     }
@@ -2973,56 +2975,56 @@ bool32 sub_8055A00(Entity *entity, s32 firstMoveId, s32 var_34, s32 itemId, s32 
 
                 if (unkBefore == gUnknown_202F208) {
                     if (itemId == 0) {
-                        TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC690); // The currMove failed!
+                        TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC690); // The currMove failed!
                     }
                     else {
-                        TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC6A4); // The Orb failed!
+                        TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC6A4); // The Orb failed!
                     }
                 }
             }
         }
 
         sub_804178C(1);
-        if (!EntityExists(entity) || sub_8044B28())
+        if (!EntityExists(attacker) || sub_8044B28())
             break;
         if (++moveId >= MAX_MON_MOVES)
             break;
-        if (!MoveFlagLinkChain(&entInfo->moves.moves[moveId]))
+        if (!MoveFlagLinkChain(&attackerInfo->moves.moves[moveId]))
             break;
     }
 
-    if (EntityExists(entity)) {
+    if (EntityExists(attacker)) {
         for (i = 0; i < MAX_MON_MOVES; i++) {
-            if (entInfo->mimicMoveIDs[i] != 0) {
+            if (attackerInfo->mimicMoveIDs[i] != 0) {
                 Move mimicMove, assistMove;
                 Move *movePtr;
 
                 movePtr = &mimicMove;
-                sub_8092AA8(&mimicMove, entInfo->mimicMoveIDs[i]);
+                sub_8092AA8(&mimicMove, attackerInfo->mimicMoveIDs[i]);
                 if (MoveFlagExists(&mimicMove)) {
                     if (mimicMove.id == MOVE_ASSIST) {
                         assistMove = mimicMove;
-                        assistMove.id = sub_8057144(entity);
+                        assistMove.id = sub_8057144(attacker);
                         movePtr = &assistMove;
                         sub_80928C0(gFormatItems, &assistMove, NULL);
-                        TryDisplayDungeonLoggableMessage(entity, gUnknown_80FD2DC); // Assist:
+                        TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FD2DC); // Assist:
                     }
-                    sub_8055FA0(entity, 0, itemId, arg_0, var_2C, movePtr);
+                    TryUseChosenMove(attacker, 0, itemId, arg_0, isLinkedMove, movePtr);
                 }
                 sub_804178C(1);
             }
         }
     }
 
-    if (EntityExists(entity)) {
-        sub_8071DA4(entity);
-        if (EntityExists(entity) && gUnknown_202F222 != 0) {
+    if (EntityExists(attacker)) {
+        sub_8071DA4(attacker);
+        if (EntityExists(attacker) && gUnknown_202F222 != 0) {
             gUnknown_202F222 = 0;
-            if (EntityExists(entity)) {
-                EntityInfo *entInfo = GetEntInfo(entity);
-                s32 statusTurns = CalculateStatusTurns(entity, gUnknown_80F4E70, TRUE);
-                PausedStatusTarget(entity, entity, 1, statusTurns, FALSE);
-                SetExpMultplier(entInfo);
+            if (EntityExists(attacker)) {
+                EntityInfo *attackerInfo = GetEntInfo(attacker);
+                s32 statusTurns = CalculateStatusTurns(attacker, gUnknown_80F4E70, TRUE);
+                PausedStatusTarget(attacker, attacker, 1, statusTurns, FALSE);
+                SetExpMultplier(attackerInfo);
             }
         }
     }
@@ -3030,55 +3032,55 @@ bool32 sub_8055A00(Entity *entity, s32 firstMoveId, s32 var_34, s32 itemId, s32 
     return TRUE;
 }
 
-static void TriggerAbilityEffect(Entity *entity)
+static void TriggerTargetAbilityEffect(Entity *attacker)
 {
-    if (EntityExists(entity)) {
-        EntityInfo *entInfo = GetEntInfo(entity);
+    if (EntityExists(attacker)) {
+        EntityInfo *entInfo = GetEntInfo(attacker);
 
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_ARENA_TRAP) {
-            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEEA4); // Arena Trap prevents movement!
-            ImmobilizedStatusTarget(entity, entity);
+            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEEA4); // Arena Trap prevents movement!
+            ImmobilizedStatusTarget(attacker, attacker);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_SHADOW_TAG) {
-            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEEC8); // Shadow Tag prevents movement!
-            ImmobilizedStatusTarget(entity, entity);
+            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEEC8); // Shadow Tag prevents movement!
+            ImmobilizedStatusTarget(attacker, attacker);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_MAGNET_PULL) {
-            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEEEC); // Magnet Pull prevents movement!
-            ImmobilizedStatusTarget(entity, entity);
+            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEEEC); // Magnet Pull prevents movement!
+            ImmobilizedStatusTarget(attacker, attacker);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_STATIC) {
-            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEF0C); // Static caused paralysis!
-            ParalyzeStatusTarget(entity, entity, TRUE);
+            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEF0C); // Static caused paralysis!
+            ParalyzeStatusTarget(attacker, attacker, TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_EFFECT_SPORE_PRLZ) {
-            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEF30); // Effect Spore scattered spores
-            ParalyzeStatusTarget(entity, entity, TRUE);
+            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEF30); // Effect Spore scattered spores
+            ParalyzeStatusTarget(attacker, attacker, TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_POISON_POINT) {
-            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEF4C); // Poison Point struck!
-            PoisonedStatusTarget(entity, entity, TRUE);
+            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEF4C); // Poison Point struck!
+            PoisonedStatusTarget(attacker, attacker, TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_EFFECT_SPORE_PSN) {
-            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEF50); // Effect Spore scattered spores!
-            PoisonedStatusTarget(entity, entity, TRUE);
+            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEF50); // Effect Spore scattered spores!
+            PoisonedStatusTarget(attacker, attacker, TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_EFFECT_SPORE_SLP) {
-            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEF54); // Effect Spore scattered spores!
-            sub_8075C58(entity, entity, CalculateStatusTurns(entity, gUnknown_80F4E74, TRUE), TRUE);
+            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEF54); // Effect Spore scattered spores!
+            sub_8075C58(attacker, attacker, CalculateStatusTurns(attacker, gUnknown_80F4E74, TRUE), TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_FLAME_BODY) {
-            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEF74); // Flame Body caused a burn!
-            BurnedStatusTarget(entity, entity, TRUE, TRUE);
+            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEF74); // Flame Body caused a burn!
+            BurnedStatusTarget(attacker, attacker, TRUE, TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_CUTE_CHARM) {
-            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEF98); // Cute Charm caused infatuation
-            InfatuateStatusTarget(entity, entity, TRUE);
+            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEF98); // Cute Charm caused infatuation
+            InfatuateStatusTarget(attacker, attacker, TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_STENCH) {
-            SetMessageArgument(gAvailablePokemonNames, entity, 0);
-            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEFD0); // A horrid stench billowed out
-            sub_80428A0(entity);
+            SetMessageArgument(gAvailablePokemonNames, attacker, 0);
+            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEFD0); // A horrid stench billowed out
+            sub_80428A0(attacker);
             entInfo->terrifiedTurns = gUnknown_80F5004;
         }
 
@@ -3086,10 +3088,10 @@ static void TriggerAbilityEffect(Entity *entity)
     }
 }
 
-bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg_0, struct Move *move)
+bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, bool32 isLinkedMove, struct Move *move)
 {
     s32 i;
-    Entity *var_144[65]; //????
+    Entity *targetsArray[MAX_MOVE_TARGETS + 1];
     const u8 *msg;
     Move metronomeMove, naturePwrMove;
     s32 var_2C;
@@ -3098,7 +3100,7 @@ bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg
     bool8 moveUsable;
 
     msg = NULL;
-    var_144[0] = NULL;
+    targetsArray[0] = NULL;
 
     sub_804178C(1);
     if (move->id == MOVE_METRONOME) {
@@ -3106,7 +3108,7 @@ bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg
         InitPokemonMove(&metronomeMove, gMetronomeCalledMoves[gMetronomeCalledArrayId].moveID);
         metronomeMove.moveFlags = move->moveFlags;
         metronomeMove.moveFlags2 = move->moveFlags2;
-        sub_8056468(entity, move, gUnknown_80FECBC, var_144, itemId, TRUE, FALSE);
+        sub_8056468(attacker, move, gUnknown_80FECBC, targetsArray, itemId, TRUE, FALSE);
         sub_804178C(1);
         move = &metronomeMove;
     }
@@ -3122,34 +3124,34 @@ bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg
         InitPokemonMove(&naturePwrMove, gNaturePowerCalledMoves[tileset].moveID);
         naturePwrMove.moveFlags = move->moveFlags;
         naturePwrMove.moveFlags2 = move->moveFlags2;
-        sub_8056468(entity, move, gUnknown_80FECE0, var_144, itemId, TRUE, FALSE);
+        sub_8056468(attacker, move, gUnknown_80FECE0, targetsArray, itemId, TRUE, FALSE);
         sub_804178C(1);
         move = &naturePwrMove;
     }
 
     var_28 = 0;
-    if ((GetMoveTargetAndRangeForPokemon(entity, move, TRUE)
+    if ((GetMoveTargetAndRangeForPokemon(attacker, move, TRUE)
          & (0xF0)) == TARGETING_FLAG_TARGET_LINE)
     {
         var_28 = 10;
     }
-    if ((GetMoveTargetAndRangeForPokemon(entity, move, TRUE)
+    if ((GetMoveTargetAndRangeForPokemon(attacker, move, TRUE)
          & (0xF0)) == TARGETING_FLAG_CUT_CORNERS)
         {
         var_28 = 1;
-        if ((move->id != MOVE_SOLARBEAM || GetApparentWeather(entity) != WEATHER_SUNNY) && DoesMoveCharge(move->id)) {
-            if (!MoveMatchesChargingStatus(entity, move)) {
+        if ((move->id != MOVE_SOLARBEAM || GetApparentWeather(attacker) != WEATHER_SUNNY) && DoesMoveCharge(move->id)) {
+            if (!MoveMatchesChargingStatus(attacker, move)) {
                 var_28 = 0;
             }
         }
     }
 
-    SetMessageArgument_2(gAvailablePokemonNames, GetEntInfo(entity), 0);
+    SetMessageArgument_2(gAvailablePokemonNames, GetEntInfo(attacker), 0);
     sub_80928C0(gFormatItems, move, NULL);
-    if (MoveMatchesChargingStatus(entity, move)) {
+    if (MoveMatchesChargingStatus(attacker, move)) {
         msg = gUnknown_80FC72C; // mon loosed move
-        GetEntInfo(entity)->unkFF = 0;
-        moveUsable = sub_805744C(entity, move, TRUE);
+        GetEntInfo(attacker)->unkFF = 0;
+        moveUsable = sub_805744C(attacker, move, TRUE);
     }
     else {
         if (itemId == 0) {
@@ -3158,33 +3160,33 @@ bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg
         else {
             msg = gUnknown_80F9158;
         }
-        moveUsable = CanMonsterUseMove(entity, move, TRUE);
+        moveUsable = CanMonsterUseMove(attacker, move, TRUE);
     }
 
     if (moveUsable && r6) {
-        sub_806ACE8(entity, move);
+        sub_806ACE8(attacker, move);
     }
 
-    if (GetEntInfo(entity)->muzzled.muzzled == TRUE && FailsWhileMuzzled(move->id)) {
-        SetMessageArgument(gAvailablePokemonNames, entity, 0);
-        TryDisplayDungeonLoggableMessage(entity, msg);
+    if (GetEntInfo(attacker)->muzzled.muzzled == TRUE && FailsWhileMuzzled(move->id)) {
+        SetMessageArgument(gAvailablePokemonNames, attacker, 0);
+        TryDisplayDungeonLoggableMessage(attacker, msg);
         sub_803E708(0xA, 0x3F);
-        TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC710); // is muzzled!
+        TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC710); // is muzzled!
         return FALSE;
     }
     else if (!moveUsable) {
-        SetMessageArgument_2(gAvailablePokemonNames, GetEntInfo(entity), 0);
+        SetMessageArgument_2(gAvailablePokemonNames, GetEntInfo(attacker), 0);
         if (itemId == 0) {
             sub_80928C0(gFormatItems, move, NULL);
-            TryDisplayDungeonLoggableMessage(entity, msg);
+            TryDisplayDungeonLoggableMessage(attacker, msg);
             sub_803E708(0xA, 0x3F);
-            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC6D0); // But the move couldn't be used!
+            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC6D0); // But the move couldn't be used!
         }
         else {
             BufferItemName(gFormatItems, itemId, NULL);
-            TryDisplayDungeonLoggableMessage(entity, msg);
+            TryDisplayDungeonLoggableMessage(attacker, msg);
             sub_803E708(0xA, 0x3F);
-            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FC6FC); // But Orbs are prevented from being used!
+            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC6FC); // But Orbs are prevented from being used!
         }
         return FALSE;
     }
@@ -3197,8 +3199,8 @@ bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg
     gUnknown_202F21A = 0;
     gUnknown_202F21C = 0;
     gUnknown_202F220 = 0;
-    if (arg_0 && GetEntInfo(entity)->unk153 <= 3) {
-        GetEntInfo(entity)->unk153++;
+    if (isLinkedMove && GetEntInfo(attacker)->unk153 <= 3) {
+        GetEntInfo(attacker)->unk153++;
     }
 
     var_2C = sub_8057070(move);
@@ -3209,72 +3211,72 @@ bool8 sub_8055FA0(struct Entity *entity, u32 r6, s32 itemId, u32 var_30, u32 arg
         var_24 = 1;
         if (gUnknown_202F220 != 0 || gUnknown_202F221 != 0)
             break;
-        if (!EntityExists(entity) || sub_8044B28())
+        if (!EntityExists(attacker) || sub_8044B28())
             return TRUE;
 
-        entInfo = GetEntInfo(entity);
+        entInfo = GetEntInfo(attacker);
         if (var_30 != 0 || move->id == MOVE_SNORE || move->id == MOVE_SLEEP_TALK) {
-            if (!IsSleeping(entity) && CannotAttack(entity, TRUE))
+            if (!IsSleeping(attacker) && CannotAttack(attacker, TRUE))
                 break;
         }
         else {
-            if (CannotAttack(entity, FALSE))
+            if (CannotAttack(attacker, FALSE))
                 break;
         }
         entInfo->unk14A = 0;
         if (move->id == MOVE_THRASH) {
-            GetEntInfo(entity)->action.direction = DungeonRandInt(NUM_DIRECTIONS);
-            TargetTileInFront(entity);
+            GetEntInfo(attacker)->action.direction = DungeonRandInt(NUM_DIRECTIONS);
+            TargetTileInFront(attacker);
             var_24 = 0;
         }
         gUnknown_203B438 = NULL;
-        var_144[0] = 0;
+        targetsArray[0] = 0;
         if (var_28 == 0 || var_28 == 1) {
-            sub_8056CE8(var_144, entity, move);
-            sub_80574C4(var_144, entity); // Todo fix sub_80574C4
-            if (i != 0 && var_24 != 0 && var_144[0] == 0)
+            SetTargetsForMove(targetsArray, attacker, move);
+            sub_80574C4(targetsArray, attacker); // Todo fix sub_80574C4
+            if (i != 0 && var_24 != 0 && targetsArray[0] == NULL)
                 break;
         }
-        r4 = sub_8056468(entity, move, msg, var_144, itemId, (i == 0), var_28);
+        r4 = sub_8056468(attacker, move, msg, targetsArray, itemId, (i == 0), var_28);
         msg = NULL;
         if (gUnknown_203B438 != 0) {
             sub_806A1E8(gUnknown_203B438);
         }
 
-        if (GetEntInfo(entity)->volatileStatus.volatileStatus != STATUS_CONFUSED && GetEntInfo(entity)->volatileStatus.volatileStatus != STATUS_COWERING) {
-            EntityInfo *entInfo = GetEntInfo(entity);
+        if (GetEntInfo(attacker)->volatileStatus.volatileStatus != STATUS_CONFUSED && GetEntInfo(attacker)->volatileStatus.volatileStatus != STATUS_COWERING) {
+            EntityInfo *entInfo = GetEntInfo(attacker);
             entInfo->targetPos.x = 0;
             entInfo->targetPos.y = 0;
         }
 
         gUnknown_202F214++;
         if (var_28 != 0) {
-            sub_80566F8(entity, move, var_28, r4, itemId, arg_0);
+            sub_80566F8(attacker, move, var_28, r4, itemId, isLinkedMove);
         }
         else {
-            sub_8053704(var_144, entity, move, itemId, arg_0);
+            UseMoveAgainstTargets(targetsArray, attacker, move, itemId, isLinkedMove);
         }
 
-        if (!EntityExists(entity))
+        if (!EntityExists(attacker))
             break;
 
-        sub_806CF18(entity);
-        if (GetEntInfo(entity)->unk14A == 0) {
-            GetEntInfo(entity)->unk14A = 0; // Redundant as it's already 0
-            sub_8079764(entity);
+        sub_806CF18(attacker);
+        if (GetEntInfo(attacker)->unk14A == 0) {
+            GetEntInfo(attacker)->unk14A = 0; // Redundant as it's already 0
+            sub_8079764(attacker);
         }
     }
 
 
     if (gUnknown_202F21A != 0) {
-        SendImmobilizeEndMessage(entity, entity);
-        SendLinkedEndMessage(entity, entity);
+        SendImmobilizeEndMessage(attacker, attacker);
+        SendLinkedEndMessage(attacker, attacker);
     }
 
-    if (gUnknown_202F219 != 0 && EntityExists(entity)) {
-        EntityInfo *entInfo = GetEntInfo(entity);
+    if (gUnknown_202F219 != 0 && EntityExists(attacker)) {
+        EntityInfo *entInfo = GetEntInfo(attacker);
 
-        ConfuseStatusTarget(entity, entity, FALSE);
+        ConfuseStatusTarget(attacker, attacker, FALSE);
         SetExpMultplier(entInfo);
     }
     return TRUE;
@@ -3592,14 +3594,14 @@ NAKED s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
 #endif // NONMATCHING
 
 // This function looks important, but what does it do?
-void sub_80566F8(Entity *entity, Move *move, s32 a2, bool8 a3, s32 itemId, s32 a5)
+void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32 isLinkedMove)
 {
     Position var_68;
     Position var_64;
-    Entity *var_60[2];
+    Entity *targetsArray[2]; // Only 2 hmm
     s32 var_4C, var_48;
     s32 i, j;
-    s32 var_40;
+    s32 targetArrId;
     s32 var_3C;
     s32 var_38;
     s32 var_34;
@@ -3607,14 +3609,14 @@ void sub_80566F8(Entity *entity, Move *move, s32 a2, bool8 a3, s32 itemId, s32 a
     s32 var_2C;
     s32 var_28, var_24;
     s32 someCount;
-    EntityInfo *entInfo;
+    EntityInfo *attackerInfo;
     s32 unkRetVal;
     s32 divResult;
     s32 r9;
 
-    var_40 = 0;
+    targetArrId = 0;
     someCount = 0;
-    entInfo = GetEntInfo(entity);
+    attackerInfo = GetEntInfo(attacker);
     unkRetVal = sub_800ED20(move->id);
     var_30 = 2;
     if (unkRetVal != 1) {
@@ -3624,10 +3626,10 @@ void sub_80566F8(Entity *entity, Move *move, s32 a2, bool8 a3, s32 itemId, s32 a
         }
     }
 
-    var_68.x = entity->pos.x;
-    var_68.y = entity->pos.y;
-    var_4C = gAdjacentTileOffsets[entInfo->action.direction].x;
-    var_48 = gAdjacentTileOffsets[entInfo->action.direction].y;
+    var_68.x = attacker->pos.x;
+    var_68.y = attacker->pos.y;
+    var_4C = gAdjacentTileOffsets[attackerInfo->action.direction].x;
+    var_48 = gAdjacentTileOffsets[attackerInfo->action.direction].y;
     for (i = 0; i < a2; i++)
     {
         Tile *tile;
@@ -3645,17 +3647,17 @@ void sub_80566F8(Entity *entity, Move *move, s32 a2, bool8 a3, s32 itemId, s32 a
             break;
     }
 
-    if (sub_805755C(entity, move->id) && !MoveMatchesChargingStatus(entity, move)) {
+    if (sub_805755C(attacker, move->id) && !MoveMatchesChargingStatus(attacker, move)) {
         var_34 = -1;
     }
     else {
-        var_34 = sub_8056564(entity, &var_68, move, a2);
+        var_34 = sub_8056564(attacker, &var_68, move, a2);
     }
 
-    var_68.x = entity->pos.x;
-    var_68.y = entity->pos.y;
-    var_4C = gAdjacentTileOffsets[entInfo->action.direction].x;
-    var_48 = gAdjacentTileOffsets[entInfo->action.direction].y;
+    var_68.x = attacker->pos.x;
+    var_68.y = attacker->pos.y;
+    var_4C = gAdjacentTileOffsets[attackerInfo->action.direction].x;
+    var_48 = gAdjacentTileOffsets[attackerInfo->action.direction].y;
     divResult = someCount * (24 / var_30);
     if (a2 > 1) {
         var_3C = divResult + 8;
@@ -3669,7 +3671,7 @@ void sub_80566F8(Entity *entity, Move *move, s32 a2, bool8 a3, s32 itemId, s32 a
 
     r9 = 0;
     var_2C = 0x80000 / divResult;
-    var_38 = gUnknown_81069D4[entInfo->action.direction];
+    var_38 = gUnknown_81069D4[attackerInfo->action.direction];
     gDungeon->unk1BDD4.unk1C05E = 1;
 
     for (i = 0; i < a2; i++)
@@ -3721,18 +3723,18 @@ void sub_80566F8(Entity *entity, Move *move, s32 a2, bool8 a3, s32 itemId, s32 a
         if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
             break;
         if (tile->monster != NULL && GetEntityType(tile->monster) == ENTITY_MONSTER && !sub_80571F0(tile->monster, move)) {
-            if (var_40 <= 0) {
-                bool8 r4 = FALSE;
-                s32 target;
-                EntityInfo *entInfo = GetEntInfo(entity);
-                if (entInfo->volatileStatus.volatileStatus == STATUS_CONFUSED
-                    || entInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER
-                    || entInfo->volatileStatus.volatileStatus == STATUS_COWERING)
+            if (targetArrId <= 0) {
+                bool8 canHitAnyone = FALSE;
+                s32 targetFlags;
+                EntityInfo *attackerInfo = GetEntInfo(attacker);
+                if (attackerInfo->volatileStatus.volatileStatus == STATUS_CONFUSED
+                    || attackerInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER
+                    || attackerInfo->volatileStatus.volatileStatus == STATUS_COWERING)
                 {
-                    r4 = TRUE;
+                    canHitAnyone = TRUE;
                 }
-                target = GetMoveTargetAndRangeForPokemon(entity, move, FALSE);
-                var_40 = sub_8056F80(var_40, var_60, target, entity, tile->monster, move, r4);
+                targetFlags = GetMoveTargetAndRangeForPokemon(attacker, move, FALSE);
+                targetArrId = SetNewTarget(targetArrId, targetsArray, targetFlags, attacker, tile->monster, move, canHitAnyone);
             }
             break;
         }
@@ -3744,13 +3746,13 @@ void sub_80566F8(Entity *entity, Move *move, s32 a2, bool8 a3, s32 itemId, s32 a
     sub_804178C(1);
     gDungeon->unk1BDD4.unk1C05E = 0;
 
-    if (var_40 > 0) {
-        var_60[var_40] = NULL;
-        sub_8053704(var_60, entity, move, itemId, a5);
+    if (targetArrId > 0) {
+        targetsArray[targetArrId] = NULL;
+        UseMoveAgainstTargets(targetsArray, attacker, move, itemId, isLinkedMove);
     }
     else if (a2 == 1 && sub_803F428(&var_68)) {
         sub_803E708(1, 0x4A);
-        sub_8041168(entity, NULL, move, &var_68);
+        sub_8041168(attacker, NULL, move, &var_68);
     }
 }
 
@@ -3834,44 +3836,44 @@ static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accu
         return FALSE;
 }
 
-void sub_8056CE8(Entity **entitiesArray, Entity *entity, Move *move)
+static void SetTargetsForMove(Entity **targetsArray, Entity *attacker, Move *move)
 {
-    s32 target;
     s32 targetFlags;
+    s32 targetFlagsAnd;
     s32 arrId = 0;
-    bool8 r10 = (GetEntInfo(entity)->volatileStatus.volatileStatus == STATUS_CONFUSED
-                    || GetEntInfo(entity)->eyesightStatus.eyesightStatus == STATUS_BLINKER
-                    || GetEntInfo(entity)->volatileStatus.volatileStatus == STATUS_COWERING);
-    bool8 var_24 = (GetEntInfo(entity)->volatileStatus.volatileStatus == STATUS_CONFUSED || GetEntInfo(entity)->volatileStatus.volatileStatus == STATUS_COWERING);
+    bool8 canHitPartner = (GetEntInfo(attacker)->volatileStatus.volatileStatus == STATUS_CONFUSED
+                    || GetEntInfo(attacker)->eyesightStatus.eyesightStatus == STATUS_BLINKER
+                    || GetEntInfo(attacker)->volatileStatus.volatileStatus == STATUS_COWERING);
+    bool8 canHitSelf = (GetEntInfo(attacker)->volatileStatus.volatileStatus == STATUS_CONFUSED || GetEntInfo(attacker)->volatileStatus.volatileStatus == STATUS_COWERING);
 
-    if (IQSkillIsEnabled(entity, IQ_NONTRAITOR)) {
-        var_24 = FALSE;
-        r10 = FALSE;
+    if (IQSkillIsEnabled(attacker, IQ_NONTRAITOR)) {
+        canHitSelf = FALSE;
+        canHitPartner = FALSE;
     }
-    target = GetMoveTargetAndRangeForPokemon(entity, move, FALSE);
-    if ((target & 0xF) == 4) {
-        bool32 usable = MoveMatchesChargingStatus(entity, move);
-        if (move->id == MOVE_SOLARBEAM && GetApparentWeather(entity) == WEATHER_SUNNY) {
+    targetFlags = GetMoveTargetAndRangeForPokemon(attacker, move, FALSE);
+    if ((targetFlags & 0xF) == 4) {
+        bool32 usable = MoveMatchesChargingStatus(attacker, move);
+        if (move->id == MOVE_SOLARBEAM && GetApparentWeather(attacker) == WEATHER_SUNNY) {
             usable = TRUE;
         }
         if (usable)
-            target = 0;
+            targetFlags = 0;
         else
-            target = 0x73;
+            targetFlags = 0x73;
     }
 
-    targetFlags = target & 0xF0;
-    if (targetFlags == 0) {
-        Entity *targetEntity = sub_80696A8(entity);
+    targetFlagsAnd = targetFlags & 0xF0;
+    if (targetFlagsAnd == 0) {
+        Entity *targetEntity = sub_80696A8(attacker);
         if (targetEntity != NULL) {
-            arrId = sub_8056F80(arrId, entitiesArray, target, entity, targetEntity, move, r10);
+            arrId = SetNewTarget(arrId, targetsArray, targetFlags, attacker, targetEntity, move, canHitPartner);
         }
     }
-    else if (targetFlags == 0x10 || targetFlags == 0x20) {
+    else if (targetFlagsAnd == 0x10 || targetFlagsAnd == 0x20) {
         s32 i;
         s32 direction, to;
-        EntityInfo *entInfo = GetEntInfo(entity);
-        if (targetFlags == 0x20) {
+        EntityInfo *entInfo = GetEntInfo(attacker);
+        if (targetFlagsAnd == 0x20) {
             direction = entInfo->action.direction;
             to = 8;
         }
@@ -3884,130 +3886,130 @@ void sub_8056CE8(Entity **entitiesArray, Entity *entity, Move *move)
             Position unkPositon;
 
             direction &= DIRECTION_MASK;
-            unkPositon.x = entity->pos.x + gAdjacentTileOffsets[direction].x ;
-            unkPositon.y = entity->pos.y + gAdjacentTileOffsets[direction].y;
+            unkPositon.x = attacker->pos.x + gAdjacentTileOffsets[direction].x ;
+            unkPositon.y = attacker->pos.y + gAdjacentTileOffsets[direction].y;
             targetEntity = sub_804AD0C(&unkPositon);
             if (targetEntity != NULL) {
-                arrId = sub_8056F80(arrId, entitiesArray, target, entity, targetEntity, move, r10);
+                arrId = SetNewTarget(arrId, targetsArray, targetFlags, attacker, targetEntity, move, canHitPartner);
             }
         }
     }
-    else if (targetFlags == 0x30) {
+    else if (targetFlagsAnd == 0x30) {
         s32 i;
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
             Entity *dungeonMon = gDungeon->allPokemon[i];
-            if (EntityExists(dungeonMon) && sub_8045A70(entity, dungeonMon)) {
-                if (dungeonMon == entity) {
-                    arrId = sub_8056F80(arrId, entitiesArray, target, entity, entity, move, var_24);
+            if (EntityExists(dungeonMon) && sub_8045A70(attacker, dungeonMon)) {
+                if (dungeonMon == attacker) {
+                    arrId = SetNewTarget(arrId, targetsArray, targetFlags, attacker, attacker, move, canHitSelf);
                 }
                 else {
-                    arrId = sub_8056F80(arrId, entitiesArray, target, entity, dungeonMon, move, r10);
+                    arrId = SetNewTarget(arrId, targetsArray, targetFlags, attacker, dungeonMon, move, canHitPartner);
                 }
             }
         }
     }
-    else if (targetFlags == 0x40) {
+    else if (targetFlagsAnd == 0x40) {
         bool32 r4 = FALSE;
-        Entity *targetEntity = sub_80696FC(entity);
+        Entity *targetEntity = sub_80696FC(attacker);
         if (targetEntity != NULL) {
             s32 arrIdBefore = arrId;
-            arrId = sub_8056F80(arrId, entitiesArray, target, entity, targetEntity, move, r10);
+            arrId = SetNewTarget(arrId, targetsArray, targetFlags, attacker, targetEntity, move, canHitPartner);
             r4 = (arrId != arrIdBefore);
         }
         if (!r4) {
-            targetEntity = sub_806977C(entity);
+            targetEntity = sub_806977C(attacker);
             if (targetEntity != NULL) {
-                arrId = sub_8056F80(arrId, entitiesArray, target, entity, targetEntity, move, r10);
+                arrId = SetNewTarget(arrId, targetsArray, targetFlags, attacker, targetEntity, move, canHitPartner);
             }
         }
     }
-    else if (targetFlags == 0x50) {
+    else if (targetFlagsAnd == 0x50) {
         // Nothing happens here
     }
-    else if (targetFlags == 0x80) {
-        Entity *targetEntity = sub_80696FC(entity);
+    else if (targetFlagsAnd == 0x80) {
+        Entity *targetEntity = sub_80696FC(attacker);
         if (targetEntity != NULL) {
-            arrId = sub_8056F80(arrId, entitiesArray, target, entity, targetEntity, move, r10);
+            arrId = SetNewTarget(arrId, targetsArray, targetFlags, attacker, targetEntity, move, canHitPartner);
         }
     }
-    else if (targetFlags == 0x60) {
+    else if (targetFlagsAnd == 0x60) {
         s32 i;
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
             Entity *dungeonMon = gDungeon->allPokemon[i];
             if (EntityExists(dungeonMon)) {
-                arrId = sub_8056F80(arrId, entitiesArray, target, entity, dungeonMon, move, r10);
+                arrId = SetNewTarget(arrId, targetsArray, targetFlags, attacker, dungeonMon, move, canHitPartner);
             }
         }
     }
-    else if (targetFlags == 0x70) {
-        arrId = sub_8056F80(arrId, entitiesArray, target, entity, entity, move, r10);
+    else if (targetFlagsAnd == 0x70) {
+        arrId = SetNewTarget(arrId, targetsArray, targetFlags, attacker, attacker, move, canHitPartner);
     }
 
-    entitiesArray[arrId] = NULL;
+    targetsArray[arrId] = NULL;
 }
 
-s32 sub_8056F80(s32 a0, Entity **entitiesArray, s32 target_, Entity *entity1, Entity *entity2, Move *move, bool32 arg8_)
+static s32 SetNewTarget(s32 targetArrId, Entity **targetsArray, s32 targetFlags_, Entity *attacker, Entity *target, Move *move, bool32 canHitAnyone_)
 {
-    bool32 r6;
-    EntityInfo *ent2Info;
+    bool32 canHitTarget;
+    EntityInfo *targetInfo;
 
     // It's happening again, all over the codebase there are problems with s16 arguments, where the lsl/asr asm can't be matched. What is going on with that?
-    s32 target = (s16)target_;
-    bool8 arg8 = arg8_;
-    r6 = FALSE;
-    ent2Info = GetEntInfo(entity2);
+    s32 targetFlags = (s16)targetFlags_;
+    bool8 canHitAnyone = canHitAnyone_;
+    canHitTarget = FALSE;
+    targetInfo = GetEntInfo(target);
 
-    if (move->id == MOVE_BATON_PASS && entity1 == entity2)
-        return a0;
-    if (ent2Info->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER)
-        return a0;
-    if (ent2Info->clientType == CLIENT_TYPE_DONT_MOVE || ent2Info->clientType == CLIENT_TYPE_CLIENT)
-        return a0;
+    if (move->id == MOVE_BATON_PASS && attacker == target)
+        return targetArrId;
+    if (targetInfo->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER)
+        return targetArrId;
+    if (targetInfo->clientType == CLIENT_TYPE_DONT_MOVE || targetInfo->clientType == CLIENT_TYPE_CLIENT)
+        return targetArrId;
 
-    if (arg8) {
-        r6 = TRUE;
+    if (canHitAnyone) {
+        canHitTarget = TRUE;
     }
     else {
-        s32 targetFlags = target & 0xF;
-        if (targetFlags == 0 || targetFlags == 4) {
-            if (GetTreatmentBetweenMonsters(entity1, entity2, TRUE, FALSE) == 1) {
-                r6 = TRUE;
+        s32 targetFlagsAnd = targetFlags & 0xF;
+        if (targetFlagsAnd == 0 || targetFlagsAnd == 4) {
+            if (GetTreatmentBetweenMonsters(attacker, target, TRUE, FALSE) == 1) {
+                canHitTarget = TRUE;
             }
         }
-        else if (targetFlags == 1) {
-            if (GetTreatmentBetweenMonsters(entity1, entity2, TRUE, FALSE) == 0) {
-                r6 = TRUE;
+        else if (targetFlagsAnd == 1) {
+            if (GetTreatmentBetweenMonsters(attacker, target, TRUE, FALSE) == 0) {
+                canHitTarget = TRUE;
             }
         }
-        else if (targetFlags == 2) {
-            r6 = TRUE;
+        else if (targetFlagsAnd == 2) {
+            canHitTarget = TRUE;
         }
-        else if (targetFlags == 5) {
-            if (entity1 != entity2) {
-                r6 = TRUE;
+        else if (targetFlagsAnd == 5) {
+            if (attacker != target) {
+                canHitTarget = TRUE;
             }
         }
-        else if (targetFlags == 6) {
-            if (GetTreatmentBetweenMonsters(entity1, entity2, TRUE, FALSE) == 0 && entity1 != entity2) {
-                r6 = TRUE;
+        else if (targetFlagsAnd == 6) {
+            if (GetTreatmentBetweenMonsters(attacker, target, TRUE, FALSE) == 0 && attacker != target) {
+                canHitTarget = TRUE;
             }
         }
-        else if (targetFlags == 3) {
-            r6 = TRUE;
+        else if (targetFlagsAnd == 3) {
+            canHitTarget = TRUE;
         }
     }
 
-    if (sub_80571F0(entity2, move)) {
-        r6 = FALSE;
+    if (sub_80571F0(target, move)) {
+        canHitTarget = FALSE;
     }
 
-    if (r6 && a0 < 64) {
-        entitiesArray[a0] = entity2;
-        if (!GetEntInfo(entity2)->isNotTeamMember && gUnknown_203B438 == NULL) {
-            gUnknown_203B438 = entity2;
+    if (canHitTarget && targetArrId < MAX_MOVE_TARGETS) {
+        targetsArray[targetArrId] = target;
+        if (!GetEntInfo(target)->isNotTeamMember && gUnknown_203B438 == NULL) {
+            gUnknown_203B438 = target;
         }
-        a0++;
+        targetArrId++;
     }
 
-    return a0;
+    return targetArrId;
 }

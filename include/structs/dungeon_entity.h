@@ -437,7 +437,7 @@ enum ExpMultiplier
 {
     EXP_HALVED, // 0.5x when fainting a mon with only the regular attack and no moves
     EXP_REGULAR, // 1x
-    EXP_BOOSTED, // 1.5x so far use not found, but most likely linked moves ; to be confirmed once more code is decompiled
+    EXP_BOOSTED, // 1.5x when using linked moves
 };
 
 static inline bool8 ExpMultiplierChanged(EntityInfo *info)

@@ -60,7 +60,7 @@ extern void sub_8057588(Entity *, u32);
 extern void sub_806A1B0(Entity *);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8044D40(ActionContainer *, u32);
-extern bool8 sub_8055FA0(struct Entity *, u32, u32, u32, u32, struct Move *);
+extern bool8 TryUseChosenMove(struct Entity *, u32, u32, u32, u32, struct Move *);
 extern void sub_8045BF8(u8 *, struct Item *);
 extern void sub_8044DF0(struct Entity *, u32, u32);
 extern void sub_8071DA4(struct Entity *);
@@ -1046,11 +1046,11 @@ void HandleUseOrbAction(Entity *pokemon)
                 move.moveFlags |= MOVE_FLAG_SET;
                 move.moveFlags |= MOVE_FLAG_ENABLED_FOR_AI;
                 move.PP = 10;
-                sub_8055FA0(pokemon, 0, IVar5.id, 0, 0, &move);
+                TryUseChosenMove(pokemon, 0, IVar5.id, 0, 0, &move);
                 r4 = FALSE;
             }
             else {
-                r4 = sub_8055FA0(pokemon, 0, IVar5.id, 0, 0, &move);
+                r4 = TryUseChosenMove(pokemon, 0, IVar5.id, 0, 0, &move);
             }
         }
         else {

@@ -1441,7 +1441,7 @@ _0806798E:
 	mov r1, r10
 	movs r2, 0
 	movs r3, 0
-	bl sub_8055FA0
+	bl TryUseChosenMove
 	adds r0, r5, 0
 	bl EntityExists
 	lsls r0, 24

@@ -166,7 +166,7 @@ _080733FC:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8055FA0
+	bl TryUseChosenMove
 	movs r5, 0x1
 	b _08073456
 	.align 2, 0
@@ -378,7 +378,7 @@ _0807359C:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8055FA0
+	bl TryUseChosenMove
 	ldr r2, _08073608
 	adds r1, r6, r2
 	ldrb r0, [r1]

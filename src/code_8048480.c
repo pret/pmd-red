@@ -112,7 +112,7 @@ extern void sub_806F370(Entity *pokemon, Entity *r1, u32, u32, u8 *, u8, s32, u3
 extern s32 sub_8042520(Entity *);
 Entity *sub_80696FC(Entity *);
 extern void sub_806A7E8(EntityInfo *, s32);
-extern u32 sub_8055640(struct Entity *, struct Entity *, struct Move *, u32, u32);
+extern u32 HandleDamagingMove(struct Entity *, struct Entity *, struct Move *, u32, u32);
 
 void StunSeedItemAction(Entity *, Entity *);
 void MaxElixirAction(Entity *, Entity *);
@@ -485,7 +485,7 @@ void sub_80482FC(Entity *pokemon, Entity *target, u32 pp, u8 param_4)
 
     InitPokemonMove(&move, MOVE_PROJECTILE);
     move.PP = pp;
-    sub_8055640(pokemon, target, &move, 0x100, param_4);
+    HandleDamagingMove(pokemon, target, &move, 0x100, param_4);
 }
 
 void sub_8048340(Entity *pokemon, Entity *target, u32 r2)
