@@ -279,7 +279,6 @@ extern void sub_8068BDC(u8 r0);
 extern s16 GetTurnLimit(u8 dungeon);
 extern void sub_8041888(u8 param_1);
 extern void sub_8040150(bool8 param_1);
-extern void sub_8052210(u32);
 extern void sub_803D4AC(void);
 extern void sub_804513C(void);
 extern void sub_8043CD8(void);

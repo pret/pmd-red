@@ -33,7 +33,6 @@ extern bool8 sub_8042CC0(void);
 extern void sub_8042D7C(void);
 extern u8 sub_8043D10(void);
 extern bool8 sub_8045888(Entity *);
-extern void sub_8052210(u32);
 
 // This func plays the appropriate ascend/descend SFX for stairs depending on the direction
 void PlayStairsSound(void)

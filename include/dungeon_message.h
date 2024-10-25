@@ -20,6 +20,9 @@ struct DungeonDialogueStruct
     const u8 *str;
 };
 
+void sub_80521D0(void);
+void sub_8052210(bool8 a0);
+
 // These functions display the string if certain conditions are met. The conditions differ depending on the function. The string is then saved to the message log.
 void TryDisplayDungeonLoggableMessage(Entity *pokemon, const char *str);
 void TryDisplayDungeonLoggableMessage2(Entity *r0, const char *str);

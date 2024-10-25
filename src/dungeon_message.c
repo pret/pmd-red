@@ -33,7 +33,6 @@ extern bool8 sub_8045888(Entity *r0);
 extern u8 sub_803F428(Position *);
 extern void sub_805E804(void);
 extern void sub_803EAF0(s32, s32);
-extern void sub_8052210(u32);
 extern void sub_8040238(void);
 extern void sub_8083E28(void);
 extern bool8 sub_8008D8C(u32 strId);
@@ -44,9 +43,9 @@ extern void sub_8007334(s32 a0);
 extern void sub_80087EC(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4);
 extern void sub_8083CE0(u8 param_1);
 
+extern u32 gUnknown_202EDD0;
 extern u8 gUnknown_203B40C;
 extern u8 gUnknown_202EE01;
-extern Entity *gUnknown_202F1E8;
 extern u8 gUnknown_203B434;
 extern void (*gUnknown_203B08C)(s32);
 extern void (*gUnknown_203B084)(s32 a0);
@@ -54,22 +53,68 @@ extern void (*gUnknown_203B080)(s32 a0);
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202DFE8[];
-extern SpriteOAM gUnknown_202F1F0;
 extern SpriteOAM gUnknown_202F200;
-extern s32 gUnknown_202F1F8;
 extern u8 gUnknown_202F1FC;
 extern UnkTextStruct1 gUnknown_2027370[4];
 extern s32 gUnknown_202EDCC;
 extern u8 gFontPalette[];
 
+extern const u8 gUnknown_80F7AE8[];
 extern const u8 gUnknown_80F7AF8[];
 extern const u8 gUnknown_80F7AFC[];
 extern const u8 gUnknown_80F7B04[];
 extern const u16 gUnknown_80F7AEA[];
 
+extern Entity *gUnknown_202F1E8;
+extern SpriteOAM gUnknown_202F1F0;
+extern s32 gUnknown_202F1F8;
+
 // Used for gUnknown_202F1FC
 #define FLAG_CAN_SCROLL_UP      0x1
 #define FLAG_CAN_SCROLL_DOWN    0x2
+
+// Needed to match :shrug:
+static inline void InlineStrcpy(u8 *dst, const u8 *src)
+{
+    strcpy(dst, src);
+}
+
+static inline void InlineStrncpy(u8 *dst, const u8 *src, s32 n)
+{
+    strncpy(dst, src, n);
+}
+
+void sub_80521D0(void)
+{
+    s32 i;
+
+    for (i = 0; i < UNK_1BBD4_STR_COUNT; i++) {
+        gDungeon->unk1BDD4.unk1C054[i] = 0;
+    }
+    gUnknown_202F1E8 = 0;
+    gUnknown_203B434 = 1;
+    sub_8052210(FALSE);
+}
+
+void sub_8052210(bool8 a0)
+{
+    s32 i;
+
+    for (i = 0; i < UNK_1BBD4_STR_COUNT; i++) {
+        InlineStrcpy(gDungeon->unk1BDD4.unk0[i], gUnknown_80F7AE8);
+    }
+    gDungeon->unk1BDD4.unk1C05F = 0;
+    gDungeon->unk1BDD4.unk1C060 = 0;
+    gDungeon->unk1BDD4.unk1C062 = 0;
+    gDungeon->unk1BDD4.unk1C064 = 0;
+    gDungeon->unk1BDD4.unk1C066 = 4;
+    gDungeon->unk1BDD4.unk1C06C = 0;
+
+    if (a0 && gUnknown_202EDD0 == 3) {
+        sub_803EAF0(0, 0);
+        sub_803E46C(11);
+    }
+}
 
 void sub_805229C(void)
 {
@@ -183,12 +228,8 @@ static void DisplayMessageAddToLog(Entity *r0, const char *str, bool8 r2)
         r7 = 0;
         r8 = 0;
         if (r2) {
-            u8 *dst;
-
             r9 = TRUE;
-            dst = gDungeon->unk1BDD4.unk0[gDungeon->unk1BDD4.unk1C060];
-            ASM_MATCH_TRICK(dst);
-            strncpy(dst, txt, 64);
+            InlineStrncpy(gDungeon->unk1BDD4.unk0[gDungeon->unk1BDD4.unk1C060], txt, 64);
             if (++gDungeon->unk1BDD4.unk1C060 == UNK_1BBD4_STR_COUNT) {
                 gDungeon->unk1BDD4.unk1C060 = 0;
             }
@@ -272,7 +313,7 @@ void xxx_draw_string_80524F0(void)
     if (strPtr->unk1C05E == 0 && strPtr->unk1C064 != 0 && --strPtr->unk1C064 == 0) {
         strPtr->unk1C06C = 0;
         sub_803EAF0(0, 0);
-        sub_8052210(0);
+        sub_8052210(FALSE);
     }
 }
 
@@ -323,7 +364,7 @@ void DisplayDungeonMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8
     }
 
     sub_803EAF0(2, 0);
-    sub_8052210(0);
+    sub_8052210(FALSE);
 
     monPortraitPtr = NULL;
     monPortrait.faceFile = NULL;
@@ -476,7 +517,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
 
     sub_8052740(10);
     sub_803EAF0(2, 0);
-    sub_8052210(0);
+    sub_8052210(FALSE);
     CreateDialogueBoxAndPortrait(dialogueInfo->str, 0, monPortraitPtr, gUnknown_80F7AEA[dialogueInfo->unk0]);
     PRINT_STRING_WAIT_PRESS(&chosenMenuIndex);
 
@@ -498,7 +539,7 @@ bool32 DisplayDungeonYesNoMessage(struct MonDialogueSpriteInfo *monSpriteInfo, c
 
     sub_8052740(10);
     sub_803EAF0(2, 0);
-    sub_8052210(0);
+    sub_8052210(FALSE);
 
     monPortraitPtr = NULL;
     monPortrait.faceFile = NULL;
@@ -547,7 +588,7 @@ s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
 
     sub_8052740(10);
     sub_803EAF0(2, 0);
-    sub_8052210(0);
+    sub_8052210(FALSE);
 
     monPortraitPtr = NULL;
     monPortrait.faceFile = NULL;

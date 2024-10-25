@@ -93,7 +93,6 @@ void sub_80978C8(s16 a0);
 void sub_8044C50(u16 a0);
 static void TryCreateModeArrows(Entity *leader);
 bool8 sub_8094C48(void);
-void sub_8052210(u8 a0);
 bool8 sub_805EC4C(Entity *a0, u8 a1);
 void sub_803E724(s32 a0);
 void HandleTalkFieldAction(Entity *);
