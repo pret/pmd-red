@@ -26,10 +26,10 @@ static bool8 TryScrollLogDown(s32 a0);
 static bool8 TryScrollLogUp(s32 a0);
 static void CopyStringToMessageLog(const u8 *src, u32 a1, u32 a2);
 static void CreateMessageLogArrow(bool8 upArrow, s32 y);
-static void DisplayMessageAddToLog(Entity *r0, const char *str, u8 r2);
+static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, u8 r2);
 static bool8 sub_8052DC0(Entity *);
 
-extern bool8 sub_8045888(Entity *r0);
+extern bool8 sub_8045888(Entity *pokemon);
 extern u8 sub_803F428(Position *);
 extern void sub_805E804(void);
 extern void sub_803EAF0(s32, s32);
@@ -122,26 +122,26 @@ void sub_805229C(void)
     return sub_80526D0(0x50);
 }
 
-void TryDisplayDungeonLoggableMessage(Entity *pokemon, const char *str)
+void TryDisplayDungeonLoggableMessage(Entity *pokemon, const u8 *str)
 {
     if (sub_8045888(pokemon)){
         DisplayMessageAddToLog(pokemon, str, TRUE);
     }
 }
 
-UNUSED void TryDisplayDungeonLoggableMessage2(Entity *r0, const char *str)
+UNUSED void TryDisplayDungeonLoggableMessage2(Entity *pokemon, const u8 *str)
 {
-    if (sub_8045888(r0)){
-        DisplayMessageAddToLog(r0, str, FALSE);
+    if (sub_8045888(pokemon)){
+        DisplayMessageAddToLog(pokemon, str, FALSE);
     }
 }
 
-void DisplayDungeonLoggableMessageFalse(Entity *r0, const char *str)
+void DisplayDungeonLoggableMessageFalse(Entity *pokemon, const u8 *str)
 {
-    DisplayMessageAddToLog(r0, str, FALSE);
+    DisplayMessageAddToLog(pokemon, str, FALSE);
 }
 
-void TryDisplayDungeonLoggableMessage3(Entity *attacker, Entity *target, const char *str)
+void TryDisplayDungeonLoggableMessage3(Entity *attacker, Entity *target, const u8 *str)
 {
     u8 flag;
     flag = sub_8045888(attacker) ? TRUE : FALSE;
@@ -155,7 +155,7 @@ void TryDisplayDungeonLoggableMessage3(Entity *attacker, Entity *target, const c
     }
 }
 
-void TryDisplayDungeonLoggableMessage4(Entity *attacker, Entity *target, const char *str)
+void TryDisplayDungeonLoggableMessage4(Entity *attacker, Entity *target, const u8 *str)
 {
     u8 flag;
     flag = sub_8045888(attacker) ? TRUE : FALSE;
@@ -169,32 +169,32 @@ void TryDisplayDungeonLoggableMessage4(Entity *attacker, Entity *target, const c
     }
 }
 
-void TryDisplayDungeonLoggableMessage5(Entity *r0, Position *pos, const char *str)
+void TryDisplayDungeonLoggableMessage5(Entity *pokemon, Position *pos, const u8 *str)
 {
     u8 flag;
-    flag = sub_8045888(r0) ? TRUE : FALSE;
+    flag = sub_8045888(pokemon) ? TRUE : FALSE;
     if(sub_803F428(pos) != 0)
     {
         flag = TRUE;
     }
     if(flag)
     {
-        DisplayMessageAddToLog(r0, str, TRUE);
+        DisplayMessageAddToLog(pokemon, str, TRUE);
     }
 }
 
-void DisplayDungeonLoggableMessageTrue(Entity *r0, const char *str)
+void DisplayDungeonLoggableMessageTrue(Entity *pokemon, const u8 *str)
 {
-    DisplayMessageAddToLog(r0, str, TRUE);
+    DisplayMessageAddToLog(pokemon, str, TRUE);
 }
 
-static void DisplayMessageAddToLog(Entity *r0, const char *str, bool8 r2)
+static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2)
 {
     u8 txt[64];
     u32 r7;
     bool32 r8, r9;
 
-    if (sLastLogMsgEntity != r0) {
+    if (sLastLogMsgEntity != pokemon) {
         r7 = 1;
     }
     else {
@@ -202,7 +202,7 @@ static void DisplayMessageAddToLog(Entity *r0, const char *str, bool8 r2)
     }
 
     r8 = 1;
-    sLastLogMsgEntity = r0;
+    sLastLogMsgEntity = pokemon;
     gUnknown_203B434 = 0;
     r9 = FALSE;
     while (1) {
@@ -408,10 +408,10 @@ void DisplayDungeonMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8
     sub_803E708(8, 9);
 }
 
-void DisplayDungeonLoggableMessage(Entity *a0, const u8 *str)
+void DisplayDungeonLoggableMessage(Entity *pokemon, const u8 *str)
 {
     DisplayDungeonMessage(NULL, str, TRUE);
-    DisplayDungeonLoggableMessageFalse(a0, str);
+    DisplayDungeonLoggableMessageFalse(pokemon, str);
 }
 
 struct Struct_sub_808CDB0
