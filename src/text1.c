@@ -150,17 +150,11 @@ void xxx_call_save_unk_text_struct_800641C(const UnkTextStruct2 *a0, bool8 a1, b
     SaveUnkTextStructAndXXX_8006438(a0, a1, a2, &r3);
 }
 
+// https://decomp.me/scratch/xF5Y1
 static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct2 *a0, bool8 a1, bool8 a2, UnkTextStruct2_sub *a3)
 {
     s32 i;
     u32 r9;
-    #ifdef NONMATCHING // Simple regswap: https://decomp.me/scratch/EN6n0 99.79%
-    s16 **ptr2; // r2
-    #else
-    register s16 **ptr2 asm("r2");
-    #endif
-    s16 *ptr0; // r0
-    u8 *ptr1; // r1
 
     r9 = 2;
 
@@ -181,9 +175,11 @@ static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct2 *a0, bool8 a1, 
         }
     }
 
-    ptr2 = &gUnknown_203B078;
-    ptr0 = gUnknown_3000E94;
-    ptr1 = &gUnknown_20274A5;
-    *ptr2 = ptr0;
-    *ptr1 = 1;
+    // Needed to account for weird compiler LDRs
+    ASM_MATCH_TRICK(gUnknown_203B078);
+    ASM_MATCH_TRICK(gUnknown_3000E94[0]);
+    ASM_MATCH_TRICK(gUnknown_20274A5);
+
+    gUnknown_203B078 = gUnknown_3000E94;
+    gUnknown_20274A5 = 1;
 }
