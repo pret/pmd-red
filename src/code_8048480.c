@@ -1,7 +1,7 @@
 #include "global.h"
 #include "code_803E668.h"
 #include "code_8045A00.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "code_8077274_1.h"
 #include "code_807CD9C.h"
 #include "code_808417C.h"
@@ -100,22 +100,19 @@ extern void sub_8063CF0(ActionContainer *, u32);
 extern void sub_8063A70(ActionContainer *, u32);
 extern u8 sub_8062F90(Entity *, u32, u32, u32, u32);
 extern void sub_8044DF0(Entity *, u32, u32);
-extern s32 sub_8052B8C(u32, u8 *, u32);
 extern void sub_803EAF0(u32, u32);
 extern void sub_8044C10(bool8);
 Entity *DrawFieldGiveItemMenu(u32, u32);
-extern void PrintFieldMessage(u32, u8 *, u32);
 extern void sub_8044E24(Entity *, u32, u32);
 extern void sub_804245C(Entity *, Item *);
 extern u8 sub_8072938(Entity *, u16);
 extern void sub_8072008(Entity *pokemon, Entity *r1, u32 r2, u8 r3, u32);
 extern void LevelDownTarget(Entity *pokemon, Entity *r1, u32 r2);
-extern void sub_80522F4(Entity *pokemon, Entity *r1, const u8[]);
 extern void sub_806F370(Entity *pokemon, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern s32 sub_8042520(Entity *);
 Entity *sub_80696FC(Entity *);
 extern void sub_806A7E8(EntityInfo *, s32);
-extern u32 sub_8055640(struct Entity *, struct Entity *, struct Move *, u32, u32);
+extern u32 HandleDamagingMove(struct Entity *, struct Entity *, struct Move *, u32, u32);
 
 void StunSeedItemAction(Entity *, Entity *);
 void MaxElixirAction(Entity *, Entity *);
@@ -227,7 +224,7 @@ void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity
         PlaySoundEffect(0x14d);
         sub_8045BF8(gFormatItems,item);
         SetMessageArgument(gAvailablePokemonNames,target,0);
-        sub_80522F4(pokemon,target,*gUnknown_80FDBB8); // $m0 caught the $i0
+        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FDBB8); // $m0 caught the $i0
         info->heldItem = *item;
         sub_806A6E8(target);
         return;
@@ -240,7 +237,7 @@ void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity
   }
   if ((item->flags & ITEM_FLAG_STICKY)) {
     sub_8045BF8(gFormatItems,item);
-    sub_80522F4(pokemon,target,*gItemStickyDoesntWorkText);
+    TryDisplayDungeonLoggableMessage3(pokemon,target,*gItemStickyDoesntWorkText);
     if (param_1 != '\0') {
       sub_806F370(pokemon,target,gUnknown_80F4FAE,1,&uStack_24,0,0x217,0,0,0);
       sub_8071DA4(pokemon);
@@ -263,7 +260,7 @@ _jump:
     }
     else
     {
-        sub_80522F4(pokemon,target,*gUnknown_80FE458);
+        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE458);
         goto _080482B4;
     }
   }
@@ -467,7 +464,7 @@ _jump:
         }
         else
         {
-            sub_80522F4(pokemon,target,*gUnknown_80FE458);
+            TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE458);
         }
         break;
   }
@@ -488,7 +485,7 @@ void sub_80482FC(Entity *pokemon, Entity *target, u32 pp, u8 param_4)
 
     InitPokemonMove(&move, MOVE_PROJECTILE);
     move.PP = pp;
-    sub_8055640(pokemon, target, &move, 0x100, param_4);
+    HandleDamagingMove(pokemon, target, &move, 0x100, param_4);
 }
 
 void sub_8048340(Entity *pokemon, Entity *target, u32 r2)
@@ -547,7 +544,7 @@ void CheriBerryItemAction(Entity *pokemon, Entity *target)
         SendNonVolatileEndMessage(pokemon, target);
     else
         // Pointer to "But nothing happened!"
-        sub_80522F4(pokemon, target, *gUnknown_80F89F4);
+        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F89F4);
 }
 
 void PechaBerryItemAction(Entity *pokemon, Entity *target)
@@ -556,7 +553,7 @@ void PechaBerryItemAction(Entity *pokemon, Entity *target)
         SendNonVolatileEndMessage(pokemon, target);
     else
         // Pointer to "But nothing happened!"
-        sub_80522F4(pokemon, target, *gUnknown_80F89F4);
+        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F89F4);
 }
 
 void WarpSeedItemAction(Entity *pokemon, Entity *target)
@@ -587,7 +584,7 @@ void StunSeedItemAction(Entity *pokemon, Entity *target)
 void PlainSeedItemAction(Entity *pokemon, Entity *target)
 {
     // Pointer to "But nothing happened!"
-    sub_80522F4(pokemon, target, *gUnknown_80F89F4);
+    TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F89F4);
 }
 
 void DoomSeedItemAction(Entity *pokemon, Entity *target)
@@ -603,7 +600,7 @@ void RawstBerryItemAction(Entity *pokemon, Entity *target)
     {
         SetMessageArgument(gAvailablePokemonNames, target, 0);
         // Pointer to "But nothing happened!"
-        sub_80522F4(pokemon, target, *gUnknown_80FB580);
+        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FB580);
     }
 }
 
@@ -617,15 +614,15 @@ void HungerSeedItemAction(Entity *pokemon, Entity * target)
     entityInfo = target->info;
     SetMessageArgument(gAvailablePokemonNames, target, 0);
     if (IQSkillIsEnabled(target, IQ_SELF_CURER))
-        sub_80522F4(pokemon, target, *gPtrSelfHealPreventedHungerMessage);
+        TryDisplayDungeonLoggableMessage3(pokemon, target, *gPtrSelfHealPreventedHungerMessage);
     else
     {
       if (FixedPointToInt(entityInfo->belly) != 0) {
         entityInfo->belly = IntToFixedPoint(0);
-        sub_80522F4(pokemon, target, *gUnknown_80F9740);
+        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F9740);
       }
       else
-        sub_80522F4(pokemon, target, *gUnknown_80F9760);
+        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F9760);
     }
   }
 }
@@ -668,17 +665,17 @@ void GinsengItemAction(Entity *pokemon, Entity * target)
     }
 
     if (isMoveBoosted) {
-      sub_80522F4(pokemon,target,*gUnknown_80FE454);
+      TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE454);
       if (moveBoost != 1) {
         sub_803E708(10,0x40);
-        sub_80522F4(pokemon,target,*gUnknown_80FE434);
+        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE434);
      }
     }
     else
-      sub_80522F4(pokemon,target,*gUnknown_80FE40C);
+      TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE40C);
   }
   else
-     sub_80522F4(pokemon,target,*gUnknown_80FE40C);
+     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE40C);
 }
 
 void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
@@ -694,7 +691,7 @@ void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
     entityInfo_1 = entityInfo;
     if (gDungeon->unk675 != 0) {
         uVar1 = gUnknown_80F4FA8;
-        sub_80522F4(pokemon, target, *gUnknown_80FEAE8);
+        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FEAE8);
     }
     else {
         uVar1 = gUnknown_80F4FA4;
@@ -710,14 +707,14 @@ void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
     entity = sub_80696FC(pokemon);
     if (entity == NULL)
     {
-      sub_80522F4(pokemon, target, *gUnknown_80FDBA0);
+      TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FDBA0);
     }
     else
     {
       entityInfo = entity->info;
       if (gDungeon->unk675 != 0) {
         uVar1 = gUnknown_80F4FAA;
-        sub_80522F4(pokemon, target, *gUnknown_80FEAE8);
+        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FEAE8);
       }
       else {
         uVar1 = gUnknown_80F4FA6;
@@ -763,7 +760,7 @@ void HandleGummiItemAction(Entity *pokemon, Entity *target, u8 gummiIndex)
         targetInfo->IQ = 999;
       }
       if (baseIQ == targetInfo->IQ) {
-        sub_80522F4(pokemon,target,*gUnknown_80FD644);
+        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD644);
       }
       else {
         iVar5 = currIQ - baseIQ;
@@ -776,8 +773,8 @@ void HandleGummiItemAction(Entity *pokemon, Entity *target, u8 gummiIndex)
         if (((iVar5 < 9) && (iVar3 = 1, iVar5 < 5)) && (iVar3 = 3, 2 < iVar5)) {
           iVar3 = 2;
         }
-        sub_80522F4(pokemon,target,gUnknown_80FD648[iVar4]);
-        sub_80522F4(pokemon,target,gUnknown_80FD6E8[iVar3]);
+        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD648[iVar4]);
+        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD6E8[iVar3]);
         LoadIQSkills(target);
         sub_806A7E8(targetInfo,baseIQ);
       }
@@ -819,11 +816,11 @@ bool8 sub_8048950(Entity *param_1,Item *item)
 
     moveID = GetItemMoveID(item->id);
     if ((item->flags & ITEM_FLAG_STICKY)) {
-        PrintFieldMessage(0,*gItemStickyDoesntWorkText,1);
+        DisplayDungeonMessage(0,*gItemStickyDoesntWorkText,1);
         return FALSE;
     }
     else if (IsHMItem(item->id)) {
-        PrintFieldMessage(0,*gPtrCantUseInDungeonMessage,1);
+        DisplayDungeonMessage(0,*gPtrCantUseInDungeonMessage,1);
         return FALSE;
     }
     else
@@ -870,13 +867,13 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
   PokemonStruct2 *pokemon;
 
   if ((item->flags & ITEM_FLAG_STICKY)) {
-    PrintFieldMessage(0,*gItemStickyDoesntWorkText,1);
+    DisplayDungeonMessage(0,*gItemStickyDoesntWorkText,1);
     return FALSE;
   }
   else
   {
     if (gDungeon->unk65C == 0) {
-        PrintFieldMessage(0,*gUnknown_80F9BD8,1);
+        DisplayDungeonMessage(0,*gUnknown_80F9BD8,1);
         return FALSE;
     }
     else
@@ -946,7 +943,7 @@ bool32 sub_8048B9C(Entity *entity,Item *param_2)
   entityInfo = entity->info;
   actionPointer = &(entityInfo->action);
   if ((param_2->flags & ITEM_FLAG_STICKY)) {
-      PrintFieldMessage(0,*gItemStickyDoesntWorkText,1);
+      DisplayDungeonMessage(0,*gItemStickyDoesntWorkText,1);
       return FALSE;
   }
   else
@@ -1011,7 +1008,7 @@ _clear:
         if (sub_8062F90(entity2,1,0,0,1) != 0) {
           if (bVar2)
           {
-              if (sub_8052B8C(0,*gUnknown_80FECA0,1) == 1) {
+              if (DisplayDungeonYesNoMessage(0,*gUnknown_80FECA0,1) == 1) {
                 *actionPointer = actionContainer;
                 sub_8044DF0(entity,0,0x6e);
                 SetMonsterActionFields(actionPointer,0x2c);
@@ -1039,14 +1036,14 @@ bool8 sub_8048D50(Entity * pokemon, Item *item)
 
   if ((item->flags & ITEM_FLAG_STICKY) != 0) {
     sub_8045BF8(gFormatItems, item);
-    SendMessage(pokemon,*gItemStickyDoesntWorkText);
+    TryDisplayDungeonLoggableMessage(pokemon,*gItemStickyDoesntWorkText);
     return FALSE;
   }
   else
   {
     if ((entityInfo->muzzled.muzzled == TRUE) && (IsEdibleItem(item->id))) {
         SetMessageArgument(gAvailablePokemonNames,pokemon,0);
-        SendMessage(pokemon,*gUnknown_80FDCA4);
+        TryDisplayDungeonLoggableMessage(pokemon,*gUnknown_80FDCA4);
         return FALSE;
     }
   }
@@ -1088,27 +1085,27 @@ void GrimyFoodItemAction(Entity *pokemon, Entity * target)
 
 void IcePartItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
-    SendMessage(pokemon, *gPtrIcePartCrumbledMessage);
+    TryDisplayDungeonLoggableMessage(pokemon, *gPtrIcePartCrumbledMessage);
 }
 
 void RockPartItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
-    SendMessage(pokemon, *gPtrRockPartCrumbledMessage);
+    TryDisplayDungeonLoggableMessage(pokemon, *gPtrRockPartCrumbledMessage);
 }
 
 void SteelPartItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
-    SendMessage(pokemon, *gPtrSteelPartCrumbledMessage);
+    TryDisplayDungeonLoggableMessage(pokemon, *gPtrSteelPartCrumbledMessage);
 }
 
 void WishStoneItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
-    SendMessage(pokemon, *gPtrWishStoneCrumbledMessage);
+    TryDisplayDungeonLoggableMessage(pokemon, *gPtrWishStoneCrumbledMessage);
 }
 
 void MusicBoxItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
     sub_80421C0(pokemon, 0xD6);
-    SendMessage(pokemon, *gPtrMusicBoxPlayedCrumbledMessage);
+    TryDisplayDungeonLoggableMessage(pokemon, *gPtrMusicBoxPlayedCrumbledMessage);
     sub_803E708(0x3C, 0x46);
 }

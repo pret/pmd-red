@@ -5,7 +5,7 @@
 #include "code_80118A4.h"
 #include "code_803E668.h"
 #include "code_8045A00.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
 #include "code_8097670.h"
@@ -45,8 +45,6 @@ extern u8 *gUnknown_80FA090[];
 void sub_8068FE0(Entity *, u32, Entity *);
 u8 sub_806B8CC();
 bool8 sub_805FBE8(u8 *a0);
-extern s32 sub_8052B8C(u32, const u8 *, u32);
-extern void PrintFieldMessage(u32, const u8 *, u32);
 void sub_8083D88();
 u8 sub_808529C(s32);
 extern u8 GetBodySize(s16 index);
@@ -749,9 +747,9 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
     sub_806CE68(entity2, direction);
     CopyCyanMonsterNametoBuffer(gAvailablePokemonNames,param_3->id);
 
-    if (sub_8052B8C(0,*gUnknown_80F9FE8,1) == 0) {
+    if (DisplayDungeonYesNoMessage(0,*gUnknown_80F9FE8,1) == 0) {
         if (param_3->id != MONSTER_JIRACHI) {
-            SendMessage(entity1,*gUnknown_80FA004);
+            TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA004);
         }
         return 0;
     }
@@ -764,7 +762,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
         }
 
         if (pokeIndex == MAX_TEAM_MEMBERS) {
-            SendMessage(entity1,*gUnknown_80FA030);
+            TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA030);
             return FALSE;
         }
         else {
@@ -805,25 +803,25 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
             sub_8097848();
 
             if (sub_806B8CC(param_3->id,param_3->pos.x,param_3->pos.y,pokeStruct2,&local_2c,0,1) == 0) {
-                SendMessage(entity1,*gUnknown_80FA058);
+                TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA058);
                 pokeStruct2->unk0 = 0;
             }
             else {
                 sub_8083D88();
                 sub_803E708(0xa0,0x46);
-                if (sub_8052B8C(0,*gUnknown_80FA090,1) == 1) {
+                if (DisplayDungeonYesNoMessage(0,*gUnknown_80FA090,1) == 1) {
                     while (sub_805FBE8(pokeStruct2->name) == 0) {
-                        PrintFieldMessage(0,*gUnknown_80FA0C8,1);
+                        DisplayDungeonMessage(0,*gUnknown_80FA0C8,1);
                     }
                 }
                 sub_808D9DC(gAvailablePokemonNames,pokeStruct2,0);
-                SendMessage(entity1,*gUnknown_80FA0F0);
+                TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA0F0);
                 if (flag) {
                     leader = xxx_call_GetLeader();
                     SetMessageArgument(gAvailablePokemonNames,leader,0);
                     sub_8092558(gUnknown_202E628,friendArea);
                     PlaySound(0xce);
-                    PrintFieldMessage(0,*gUnknown_80FA120,1);
+                    DisplayDungeonMessage(0,*gUnknown_80FA120,1);
                 }
                 if (param_3->id == MONSTER_MEW) {
                     gDungeon->unk4 = 1;
@@ -1072,9 +1070,9 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
       pokeStruct2->unk0 = 0;
     }
     else {
-      if (sub_8052B8C(0,*gUnknown_80FA090,1) == 1) {
+      if (DisplayDungeonYesNoMessage(0,*gUnknown_80FA090,1) == 1) {
         while (!sub_805FBE8(buffer)) {
-          PrintFieldMessage(0,*gUnknown_80FA0C8,1);
+          DisplayDungeonMessage(0,*gUnknown_80FA0C8,1);
         }
       }
       if (flag) {
@@ -1082,7 +1080,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
         SetMessageArgument(gAvailablePokemonNames,leader,0);
         sub_8092558(gUnknown_202E628,friendArea);
         PlaySound(0xce);
-        PrintFieldMessage(0,*gUnknown_80FA120,1);
+        DisplayDungeonMessage(0,*gUnknown_80FA120,1);
       }
       sub_808D9DC(gUnknown_202E088,pokeStruct2,0);
       *entityPtr = local_2c;

@@ -187,7 +187,7 @@ void sub_8025518(void)
   {
     case 0:
         gUnknown_203B2B4->fallbackState = 1;
-        xxx_info_box_80141B4(sVisitWhoPrompt,0,0,0x301);
+        CreateDialogueBoxAndPortrait(sVisitWhoPrompt,0,0,0x301);
         break;
     case 1:
         uVar3 = 4;
@@ -230,20 +230,20 @@ void sub_8025518(void)
         break;
     case FRIEND_LIST_MENU_STATE_ITEM_GIVEN:
         gUnknown_203B2B4->fallbackState = 2;
-        xxx_info_box_80141B4(sItemHandedOver,0,0,0x101);
+        CreateDialogueBoxAndPortrait(sItemHandedOver,0,0,0x101);
         break;
     case FRIEND_LIST_MENU_STATE_ITEM_EXCHANGE:
         gUnknown_203B2B4->fallbackState = 2;
-        xxx_info_box_80141B4(sItemExchanged,0,0,0x101);
+        CreateDialogueBoxAndPortrait(sItemExchanged,0,0,0x101);
         break;
     case FRIEND_LIST_MENU_STATE_TAKE:
         gUnknown_203B2B4->fallbackState = 2;
-        xxx_info_box_80141B4(sReturnedToToolbox,0,0,0x101);
+        CreateDialogueBoxAndPortrait(sReturnedToToolbox,0,0,0x101);
         break;
     case FRIEND_LIST_MENU_STATE_STANDBY:
         gUnknown_203B2B4->fallbackState = 1;
         PlaySound(0xcf);
-        xxx_info_box_80141B4(sLeftOnStandby,0,0,0x101);
+        CreateDialogueBoxAndPortrait(sLeftOnStandby,0,0,0x101);
         break;
     case FRIEND_LIST_MENU_STATE_MOVES:
         unk_CopyMoves4To8(gUnknown_203B2B4->moves,gUnknown_203B2B4->pokeStruct->moves);

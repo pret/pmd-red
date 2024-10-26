@@ -206,7 +206,7 @@ _08080A26:
 _08080A2E:
 	ldr r1, [r0]
 	ldr r0, [sp, 0x14]
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _08080A46
 	.align 2, 0
 _08080A38: .4byte gUnknown_80FDACC
@@ -214,7 +214,7 @@ _08080A3C:
 	ldr r0, _08080A58
 	ldr r1, [r0]
 	ldr r0, [sp, 0x14]
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _08080A46:
 	add sp, 0x30
 	pop {r3-r5}

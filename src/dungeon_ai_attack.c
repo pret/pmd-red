@@ -3,7 +3,7 @@
 
 #include "charge_move.h"
 #include "code_8045A00.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "constants/direction.h"
 #include "constants/dungeon_action.h"
@@ -60,7 +60,7 @@ extern void sub_8057588(Entity *, u32);
 extern void sub_806A1B0(Entity *);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8044D40(ActionContainer *, u32);
-extern bool8 sub_8055FA0(struct Entity *, u32, u32, u32, u32, struct Move *);
+extern bool8 TryUseChosenMove(struct Entity *, u32, u32, u32, u32, struct Move *);
 extern void sub_8045BF8(u8 *, struct Item *);
 extern void sub_8044DF0(struct Entity *, u32, u32);
 extern void sub_8071DA4(struct Entity *);
@@ -995,14 +995,14 @@ void HandleUseOrbAction(Entity *pokemon)
 
     if (item->flags & ITEM_FLAG_STICKY) {
         sub_8045BF8(gFormatItems, item);
-        SendMessage(pokemon, *gItemStickyDoesntWorkText);
+        TryDisplayDungeonLoggableMessage(pokemon, *gItemStickyDoesntWorkText);
         return;
     }
 
     act = entityInfo->action;
 
     if (IsBossFight()) {
-        SendMessage(pokemon, *gPtrMysteriousPowerPreventedUseMessage);
+        TryDisplayDungeonLoggableMessage(pokemon, *gPtrMysteriousPowerPreventedUseMessage);
         r4 = TRUE;
     }
     else {
@@ -1022,20 +1022,20 @@ void HandleUseOrbAction(Entity *pokemon)
 
         if (entityInfo->volatileStatus.volatileStatus == 1) {
             SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
-            SendMessage(pokemon, *gUnknown_80FC714);
+            TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC714);
             r4 = FALSE;
             r8 = FALSE;
         }
         else if (entityInfo->volatileStatus.volatileStatus == 7) {
             SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
-            SendMessage(pokemon, *gUnknown_80FC718);
+            TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC718);
             r4 = FALSE;
             r8 = FALSE;
         }
         else if (entityInfo->nonVolatile.nonVolatileStatus == 4)
         {
             SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
-            SendMessage(pokemon, *gUnknown_80FC6A8);
+            TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC6A8);
             r4 = FALSE;
             r8 = FALSE;
         }
@@ -1046,11 +1046,11 @@ void HandleUseOrbAction(Entity *pokemon)
                 move.moveFlags |= MOVE_FLAG_SET;
                 move.moveFlags |= MOVE_FLAG_ENABLED_FOR_AI;
                 move.PP = 10;
-                sub_8055FA0(pokemon, 0, IVar5.id, 0, 0, &move);
+                TryUseChosenMove(pokemon, 0, IVar5.id, 0, 0, &move);
                 r4 = FALSE;
             }
             else {
-                r4 = sub_8055FA0(pokemon, 0, IVar5.id, 0, 0, &move);
+                r4 = TryUseChosenMove(pokemon, 0, IVar5.id, 0, 0, &move);
             }
         }
         else {

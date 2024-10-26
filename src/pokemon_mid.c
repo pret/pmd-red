@@ -508,16 +508,14 @@ s16 GetPokemonEvolveConditions(s16 index, unkEvolve *r1)
 
 u8 GetPokemonOverworldPalette(s16 index, u32 r1)
 {
-    // Had to have this cast to match
-    u32 temp;
-    temp = index;
+    s32 id = SpeciesId(index);
     if (r1 != 0)
     {
         return 10;
     }
     else
     {
-        return gMonsterParameters[temp].overworldPalette;
+        return gMonsterParameters[id].overworldPalette;
     }
 }
 
@@ -534,23 +532,24 @@ OpenedFile *OpenPokemonDialogueSpriteFile(s16 index)
     return OpenFile(buffer, &gMonsterFileArchive);
 }
 
-OpenedFile *GetDialogueSpriteDataPtr(s16 index)
+OpenedFile *GetDialogueSpriteDataPtr(s32 index)
 {
     // Looks like this loads the dialogue sprite for the pokemon
-
     char buffer[0xC];
-    if(gMonsterParameters[index].dialogueSprites == 0)
+    s16 id = SpeciesId(index);
+
+    if(gMonsterParameters[id].dialogueSprites == 0)
     {
         return NULL;
     }
-    sprintf(buffer, gUnknown_8107684, index); // "kao%03d"
+    sprintf(buffer, gUnknown_8107684, id); // "kao%03d"
     return OpenFileAndGetFileDataPtr(buffer, &gMonsterFileArchive);
 }
 
-bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 r1)
+bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 spriteId)
 {
     // checking to see if dialogue sprite is available??
-    return (gMonsterParameters[index].dialogueSprites >> r1) & 1;
+    return (gMonsterParameters[index].dialogueSprites >> spriteId) & 1;
 }
 
 void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1)

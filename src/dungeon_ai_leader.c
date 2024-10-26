@@ -5,7 +5,7 @@
 #include "code_803E46C.h"
 #include "code_804267C.h"
 #include "code_8045A00.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "code_8077274_1.h"
 #include "code_807CD9C.h"
 #include "constants/dungeon_action.h"
@@ -71,7 +71,6 @@ void HandleSetItemAction(Entity *,bool8);
 void HandleUnsetItemAction(Entity *,bool8);
 extern u8 sub_8044B28(void);
 extern u8 UseAttack(Entity *);
-void sub_8052740(u32);
 void sub_806A1E8(Entity *pokemon);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 bool8 sub_804AE08(Position *pos);
@@ -226,7 +225,7 @@ bool8 sub_8072CF4(Entity *entity)
             break;
         case ACTION_STAIRS:
             if ((gDungeon->dungeonLocation.id == DUNGEON_METEOR_CAVE) && (!gDungeon->deoxysDefeat)) {
-                SendMessage(entity,*gUnknown_80FA5B4); // It's impossible to go down the stairs now!
+                TryDisplayDungeonLoggableMessage(entity,*gUnknown_80FA5B4); // It's impossible to go down the stairs now!
             }
             else
             {
@@ -285,7 +284,7 @@ bool8 sub_8072CF4(Entity *entity)
                 break;
             }
             SetMessageArgument(gAvailablePokemonNames,entity,0);
-            SendMessage(entity,*gUnknown_80FE6D4);
+            TryDisplayDungeonLoggableMessage(entity,*gUnknown_80FE6D4);
             break;
         case ACTION_TALK_FIELD:
             HandleTalkFieldAction(entity);
@@ -313,7 +312,7 @@ bool8 sub_8072CF4(Entity *entity)
             break;
         case ACTION_SECOND_THOUGHTS:
             SetMessageArgument(gAvailablePokemonNames,entity,0);
-            SendMessage(entity,*gUnknown_80FE478);
+            TryDisplayDungeonLoggableMessage(entity,*gUnknown_80FE478);
             break;
         default:
             info->action.action = ACTION_PASS_TURN;
@@ -341,7 +340,7 @@ bool8 sub_8072CF4(Entity *entity)
                     }
                 }
                 if (bVar4) {
-                    SendMessage(entity,*gUnknown_80FD2CC);
+                    TryDisplayDungeonLoggableMessage(entity,*gUnknown_80FD2CC);
                 }
             }
             sub_807360C();

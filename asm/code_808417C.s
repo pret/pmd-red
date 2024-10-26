@@ -350,7 +350,7 @@ _08084484:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8052B8C
+	bl DisplayDungeonYesNoMessage
 	cmp r0, 0x1
 	beq _080844A4
 	b _080845D4
@@ -399,7 +399,7 @@ _080844F0:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	b _080845D4
 	.align 2, 0
 _080844FC: .4byte gDungeon
@@ -421,7 +421,7 @@ _08084514:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	ldr r0, _0808453C
 	b _0808455E
 	.align 2, 0
@@ -432,14 +432,14 @@ _08084540:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8052B8C
+	bl DisplayDungeonYesNoMessage
 	cmp r0, 0x1
 	bne _080845D4
 	ldr r0, _080845B4
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	ldr r0, _080845B8
 _0808455E:
 	ldr r4, [r0]
@@ -460,14 +460,14 @@ _08084582:
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_8052B8C
+	bl DisplayDungeonYesNoMessage
 	cmp r0, 0x1
 	bne _080845C4
 	ldr r0, _080845C0
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0
-	bl sub_8052B8C
+	bl DisplayDungeonYesNoMessage
 	adds r1, r0, 0
 	cmp r1, 0x1
 	bne _08084582
@@ -488,7 +488,7 @@ _080845C4:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0
-	bl sub_8052B8C
+	bl DisplayDungeonYesNoMessage
 	cmp r0, 0x1
 	bne _08084582
 _080845D4:
@@ -608,7 +608,7 @@ _080846B4:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	b _08084768
 	.align 2, 0
 _080846C0: .4byte gUnknown_80FA500
@@ -617,7 +617,7 @@ _080846C4:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	mov r1, r8
 	movs r2, 0x2
 	ldrsh r0, [r1, r2]
@@ -651,14 +651,14 @@ _08084716:
 	movs r0, 0
 	ldr r1, [r4]
 	movs r2, 0x1
-	bl sub_8052B8C
+	bl DisplayDungeonYesNoMessage
 	cmp r0, 0x1
 	bne _08084758
 	ldr r0, _08084754
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0
-	bl sub_8052B8C
+	bl DisplayDungeonYesNoMessage
 	adds r1, r0, 0
 	cmp r1, 0x1
 	bne _08084716
@@ -679,7 +679,7 @@ _08084758:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0
-	bl sub_8052B8C
+	bl DisplayDungeonYesNoMessage
 	cmp r0, 0x1
 	bne _08084716
 _08084768:

@@ -8,6 +8,7 @@
 #include "dungeon.h"
 #include "dungeon_engine.h"
 #include "dungeon_leader.h"
+#include "dungeon_message.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
 #include "structs/str_dungeon.h"
@@ -32,8 +33,6 @@ extern bool8 sub_8042CC0(void);
 extern void sub_8042D7C(void);
 extern u8 sub_8043D10(void);
 extern bool8 sub_8045888(Entity *);
-extern void sub_8052210(u32);
-extern void sub_805239C(Entity *, const u8 *);
 
 // This func plays the appropriate ascend/descend SFX for stairs depending on the direction
 void PlayStairsSound(void)
@@ -115,7 +114,7 @@ void sub_80427AC(void)
                 sub_80429A0(entity);
                 if (!enInfo->isNotTeamMember) {
                     SetMessageArgument(gAvailablePokemonNames, entity, 0);
-                    sub_805239C(entity, *gPtrFeralFoundItemMessage);
+                    DisplayDungeonLoggableMessageTrue(entity, *gPtrFeralFoundItemMessage);
                 }
             }
         }

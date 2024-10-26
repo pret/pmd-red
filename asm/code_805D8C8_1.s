@@ -341,7 +341,7 @@ _08068BB2:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	b _08068BD0
 	.align 2, 0
 _08068BC0: .4byte gUnknown_80FE168
@@ -350,7 +350,7 @@ _08068BC4:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 _08068BD0:
 	pop {r4-r7}
 	pop {r0}
@@ -653,7 +653,7 @@ _08068E1C:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	add r4, sp, 0x3C
 _08068E34:
 	add r0, sp, 0x214
@@ -709,7 +709,7 @@ _08068E8E:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8052B8C
+	bl DisplayDungeonYesNoMessage
 	cmp r0, 0x1
 	bne _08068E34
 _08068EA2:
@@ -1028,7 +1028,7 @@ _08069104:
 	movs r0, 0x3C
 	movs r1, 0x49
 	bl sub_803E708
-	bl sub_80532B4
+	bl DisplayMessageLog
 	ldr r5, _08069198
 	ldr r2, [r5]
 	ldrb r0, [r2, 0x6]
@@ -1071,7 +1071,7 @@ _08069104:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8052B8C
+	bl DisplayDungeonYesNoMessage
 	adds r4, r0, 0
 	cmp r4, 0x1
 	bne _080691E0
@@ -1079,7 +1079,7 @@ _08069104:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	ldr r0, [r5]
 	strb r4, [r0, 0x4]
 	ldr r0, [r5]
@@ -1107,7 +1107,7 @@ _080691B4:
 	ldr r1, [r0]
 	movs r0, 0
 	movs r2, 0x1
-	bl PrintFieldMessage
+	bl DisplayDungeonMessage
 	b _080691E0
 	.align 2, 0
 _080691C4: .4byte gUnknown_80FE2D0
@@ -1353,7 +1353,7 @@ _08069384:
 	ldr r0, _080694A4
 	ldr r1, [r0]
 	mov r0, r8
-	bl sub_805239C
+	bl DisplayDungeonLoggableMessageTrue
 	bl sub_803E178
 	bl sub_8049ED4
 _080693C6:

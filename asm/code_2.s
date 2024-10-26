@@ -169,7 +169,7 @@ QuickSave:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x20
-	bl xxx_info_box_80141B4
+	bl CreateDialogueBoxAndPortrait
 	b _08000892
 	.align 2, 0
 _080007AC: .4byte gUnknown_2026E4E
@@ -234,7 +234,7 @@ _08000822:
 	movs r1, 0
 	movs r2, 0
 	ldr r3, _08000838
-	bl xxx_info_box_80141B4
+	bl CreateDialogueBoxAndPortrait
 	movs r6, 0x3C
 	movs r4, 0x1
 	b _08000892
@@ -248,7 +248,7 @@ _0800083C:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl xxx_info_box_80141B4
+	bl CreateDialogueBoxAndPortrait
 	movs r4, 0x3
 	b _08000892
 	.align 2, 0
@@ -258,7 +258,7 @@ _08000854:
 	movs r1, 0
 	movs r2, 0
 	ldr r3, _08000868
-	bl xxx_info_box_80141B4
+	bl CreateDialogueBoxAndPortrait
 _08000860:
 	movs r4, 0x2
 	b _08000892
@@ -358,7 +358,7 @@ _08000934:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x20
-	bl xxx_info_box_80141B4
+	bl CreateDialogueBoxAndPortrait
 	movs r4, 0x2
 	b _080009A2
 	.align 2, 0
@@ -374,7 +374,7 @@ _08000952:
 	ldr r3, _08000964
 	movs r1, 0
 	movs r2, 0
-	bl xxx_info_box_80141B4
+	bl CreateDialogueBoxAndPortrait
 _0800095C:
 	movs r4, 0x1
 	b _080009A2

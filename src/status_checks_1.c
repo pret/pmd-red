@@ -2,7 +2,7 @@
 #include "status_checks_1.h"
 
 #include "code_800D090.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "constants/ability.h"
 #include "constants/iq_skill.h"
 #include "constants/status.h"
@@ -44,7 +44,7 @@ s32 sub_8070828(Entity *pokemon, bool8 displayMessage)
         }
         if (displayMessage && SetVisualFlags(pokemon->info, 0x40, flag)) {
             sub_80429B4(pokemon);
-            SendMessage(pokemon, *gUnknown_80FEE80);
+            TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FEE80);
         }
         if (flag) {
             return 2;

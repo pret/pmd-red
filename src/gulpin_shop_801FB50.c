@@ -99,18 +99,18 @@ bool8 sub_801FB50(u32 mode)
     PrintPokeNameToBuffer(gUnknown_202E1C8 - 0xF0, GetPlayerPokemonStruct());
 
     if (gUnknown_203B27C->mode == GULPIN_SHOP_MODE_ASLEEP)
-        gUnknown_203B27C->unk17C = NULL;
+        gUnknown_203B27C->monPortraitPtr = NULL;
     else
-        gUnknown_203B27C->unk17C = &gUnknown_203B27C->faceFile;
+        gUnknown_203B27C->monPortraitPtr = &gUnknown_203B27C->monPortrait;
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
-    gUnknown_203B27C->faceFile = faceFile;
-    gUnknown_203B27C->faceData = faceFile->data;
-    gUnknown_203B27C->unk178 = 0;
-    gUnknown_203B27C->unk179 = 0;
-    gUnknown_203B27C->unk17A = 0;
-    gUnknown_203B27C->unk174 = 2;
-    gUnknown_203B27C->unk176 = 8;
+    gUnknown_203B27C->monPortrait.faceFile = faceFile;
+    gUnknown_203B27C->monPortrait.faceData = faceFile->data;
+    gUnknown_203B27C->monPortrait.spriteId = 0;
+    gUnknown_203B27C->monPortrait.flip = FALSE;
+    gUnknown_203B27C->monPortrait.unkE = 0;
+    gUnknown_203B27C->monPortrait.pos.x = 2;
+    gUnknown_203B27C->monPortrait.pos.y = 8;
     sub_801FDA8(0);
     return TRUE;
 }
@@ -184,7 +184,7 @@ u32 sub_801FC40(void)
 void sub_801FD7C(void)
 {
     if (gUnknown_203B27C) {
-        CloseFile(gUnknown_203B27C->faceFile);
+        CloseFile(gUnknown_203B27C->monPortrait.faceFile);
         MemoryFree(gUnknown_203B27C);
         gUnknown_203B27C = NULL;
     }
@@ -254,63 +254,63 @@ static void sub_801FF28(void)
             gUnknown_203B27C->menuAction1 = 2;
             CreateGulpinShopMenu();
             gUnknown_203B27C->fallbackState = 2;
-            sub_8014248(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_00],0,gUnknown_203B27C->menuAction1,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,gUnknown_203B27C->unk17C,0xc);
+            CreateMenuDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_00],0,gUnknown_203B27C->menuAction1,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,gUnknown_203B27C->monPortraitPtr,0xc);
             break;
         case 1:
             CreateGulpinShopMenu();
             gUnknown_203B27C->fallbackState = 2;
-            sub_8014248(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_01],0,gUnknown_203B27C->menuAction1,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,gUnknown_203B27C->unk17C,0xc);
+            CreateMenuDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_01],0,gUnknown_203B27C->menuAction1,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,gUnknown_203B27C->monPortraitPtr,0xc);
             break;
         case 2:
             DrawTeamMoneyBox(3);
             break;
         case 3:
             gUnknown_203B27C->fallbackState = 0x1f;
-            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_02],0,gUnknown_203B27C->unk17C,0x10d);
+            CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_02],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             break;
         case 4:
             gUnknown_203B27C->fallbackState = 0x1f;
-            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_03],0,gUnknown_203B27C->unk17C,0x10d);
+            CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_03],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             break;
         case 5:
             gUnknown_203B27C->fallbackState = 0x1f;
-            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_04],0,gUnknown_203B27C->unk17C,0x10d);
+            CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_04],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             break;
         case 6:
             gUnknown_203B27C->fallbackState = 0x1f;
-            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_05],0,gUnknown_203B27C->unk17C,0x10d);
+            CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_05],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             break;
         case 7:
             sub_8020900();
-            sub_8014248(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_06],0,0x10,
+            CreateMenuDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_06],0,0x10,
                         gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,
-                        gUnknown_203B27C->unk17C,0xc);
+                        gUnknown_203B27C->monPortraitPtr,0xc);
             break;
         case 8:
             sub_8020950();
-            sub_8014248(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_21],0,0xd,
+            CreateMenuDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_21],0,0xd,
                         gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,
-                        gUnknown_203B27C->unk17C,0xc);
+                        gUnknown_203B27C->monPortraitPtr,0xc);
             break;
         case 9:
             gUnknown_203B27C->fallbackState = 1;
-            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_22],0,gUnknown_203B27C->unk17C,0x10d);
+            CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_22],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             break;
         case 10:
             gUnknown_203B27C->fallbackState = 1;
-            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_23],0,gUnknown_203B27C->unk17C,0x10d);
+            CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_23],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             break;
         case 0xb:
             gUnknown_203B27C->fallbackState = 1;
-            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_24],0,gUnknown_203B27C->unk17C,0x10d);
+            CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_24],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             break;
         case 0xc:
             gUnknown_203B27C->fallbackState = 0xd;
-            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_07],0,gUnknown_203B27C->unk17C,0x10d);
+            CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_07],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             break;
         case 0xe:
             gUnknown_203B27C->fallbackState = 0xf;
-            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_08],0,gUnknown_203B27C->unk17C,0x10d);
+            CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_08],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             break;
         case 0xf:
             sub_8023868(2,0,0,10);
@@ -330,7 +330,7 @@ static void sub_801FF28(void)
             break;
         case 0x14:
             gUnknown_203B27C->fallbackState = 0x15;
-            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_09],0,gUnknown_203B27C->unk17C,0x10d);
+            CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_09],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             break;
         case 0x15:
             sub_801F428(gUnknown_203B27C->speciesNum,0);
@@ -354,17 +354,17 @@ static void sub_801FF28(void)
             sub_8094060(gUnknown_203B27C->moves,gUnknown_203B27C->pokeStruct->moves);
             gUnknown_203B27C->fallbackState = 0x10;
             sub_8092C84(gAvailablePokemonNames,gUnknown_203B27C->unk1E);
-            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_10],0,gUnknown_203B27C->unk17C,0x10d);
+            CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_10],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             break;
         case 0x1a:
             sub_8094060(gUnknown_203B27C->moves,gUnknown_203B27C->pokeStruct->moves);
             gUnknown_203B27C->fallbackState = 0x10;
             if (gUnknown_203B27C->isNextMoveLinked) {
-                xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_14],0,gUnknown_203B27C->unk17C,0x10d);
+                CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_14],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             }
             else
         {
-                xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_13],0,gUnknown_203B27C->unk17C,0x10d);
+                CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_13],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             }
             break;
         case 0x1d:
@@ -377,11 +377,11 @@ static void sub_801FF28(void)
             break;
         case 0x1b:
             gUnknown_203B27C->fallbackState = 0x10;
-            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_15],0,gUnknown_203B27C->unk17C,0x10d);
+            CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_15],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             break;
         case 0x1c:
             gUnknown_203B27C->fallbackState = 0x10;
-            xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_16],0,gUnknown_203B27C->unk17C,0x10d);
+            CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_16],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             break;
 
         case 0x1e:
@@ -403,24 +403,24 @@ static void sub_801FF28(void)
             sub_80208B0();
             sub_8092C84(gUnknown_202DFE8,gUnknown_203B27C->unk20);
             if (gUnknown_203B27C->isNextMoveLinked) {
-                sub_8014248(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_18],0,0x11,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,
-                            gUnknown_203B27C->unk17C,0xc);
+                CreateMenuDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_18],0,0x11,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,
+                            gUnknown_203B27C->monPortraitPtr,0xc);
             }
             else {
-                sub_8014248(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_17],0,0x11,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,
-                            gUnknown_203B27C->unk17C,0xc);
+                CreateMenuDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_17],0,0x11,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,
+                            gUnknown_203B27C->monPortraitPtr,0xc);
             }
             break;
         case 0x23:
             gUnknown_203B27C->fallbackState = 0x1f;
             sub_8092C84(gUnknown_202DFE8,gUnknown_203B27C->unk20);
-            if (gUnknown_203B27C->isNextMoveLinked) 
+            if (gUnknown_203B27C->isNextMoveLinked)
             {
-                xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_20],0,gUnknown_203B27C->unk17C,0x10d);
+                CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_20],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             }
             else
         {
-                xxx_info_box_80141B4(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_19],0,gUnknown_203B27C->unk17C,0x10d);
+                CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_19],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             }
             break;
     }
@@ -546,15 +546,15 @@ static void CreateGulpinLinkMenu(void)
         }
         gUnknown_203B27C->unk7C[loopMax].menuAction = 7;
     }
-    
+
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gGulpinLink;
     gUnknown_203B27C->unk7C[loopMax].menuAction = LINK_ACTION;
-    
+
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gGulpinDelink;
     gUnknown_203B27C->unk7C[loopMax].menuAction = DE_LINK_ACTION;
-    
+
     loopMax++;
     gUnknown_203B27C->unk7C[loopMax].text = gGulpinForget;
     gUnknown_203B27C->unk7C[loopMax].menuAction = FORGET_ACTION;
@@ -978,12 +978,12 @@ static void sub_8020EB4(void)
             if(gTeamInventoryRef->teamMoney < 150)
             {
                 PlayMenuSoundEffect(2);
-                sub_801FDA8(0x3);        
+                sub_801FDA8(0x3);
             }
             else if(!sub_8093318(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves))
             {
                 PlayMenuSoundEffect(2);
-                sub_801FDA8(0x4);        
+                sub_801FDA8(0x4);
             }
             else
             {
@@ -1004,7 +1004,7 @@ static void sub_8020EB4(void)
             if(!sub_809333C(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves))
             {
                 PlayMenuSoundEffect(2);
-                sub_801FDA8(0x5);     
+                sub_801FDA8(0x5);
             }
             else
             {

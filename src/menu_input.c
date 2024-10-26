@@ -77,7 +77,7 @@ u32 sub_8012A64(MenuInputStructSub *r0, s32 r1)
         return sub_8012AE8();
 
     if (r1 != -1)
-        nullsub_34(r0);
+        nullsub_34(r0, r1);
 
     if (r0->a_button != 0) {
         r0->a_button = 0;
@@ -712,7 +712,7 @@ void AddMenuCursorSprite_(MenuInputStruct *a0, u8 *a1)
     a0->unk24++;
 }
 
-void nullsub_34(MenuInputStructSub *a0)
+void nullsub_34(MenuInputStructSub *a0, s32 a1)
 {
 }
 

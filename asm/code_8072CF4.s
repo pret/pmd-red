@@ -152,7 +152,7 @@ _080733FC:
 	ldr r0, _0807343C
 	ldr r1, [r0]
 	mov r0, r8
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	movs r0, 0x7
 	mov r1, r9
 	ands r1, r0
@@ -166,7 +166,7 @@ _080733FC:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8055FA0
+	bl TryUseChosenMove
 	movs r5, 0x1
 	b _08073456
 	.align 2, 0
@@ -364,7 +364,7 @@ _0807359C:
 	ldr r0, _08073604
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	movs r0, 0x7
 	mov r1, r8
 	ands r1, r0
@@ -378,7 +378,7 @@ _0807359C:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8055FA0
+	bl TryUseChosenMove
 	ldr r2, _08073608
 	adds r1, r6, r2
 	ldrb r0, [r1]

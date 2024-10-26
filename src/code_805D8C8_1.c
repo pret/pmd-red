@@ -3,7 +3,7 @@
 #include "number_util.h"
 #include "input.h"
 #include "structs/map.h"
-#include "code_80521D0.h"
+#include "dungeon_message.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_pokemon_attributes.h"
@@ -57,7 +57,6 @@ struct UnkMenuBitsStruct {
     u8 a0_32;
 };
 
-extern void PrintFieldMessage(u32, const u8 *, u32);
 extern void HandleSetItemAction(Entity *,bool8);
 extern void HandleUnsetItemAction(Entity *,bool8);
 extern bool8 sub_8048A68(Entity *param_1,Item *item);
@@ -67,12 +66,10 @@ extern Item *sub_8044D90(Entity *, s32, u32);
 extern void sub_8083D44(void);
 extern void sub_8083D30(void);
 extern void sub_8083D08(void);
-extern void sub_805239C(Entity *, const u8 *);
 extern void sub_806A6E8(Entity *);
 extern bool8 sub_8047084(s32 itemFlag);
 extern void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4);
 extern void sub_8045DB4(Position *, u32);
-extern s32 sub_8052B8C(u32, const u8 *, u32);
 bool8 sub_807EF48(void);
 void sub_806A2BC(Entity *a0, u8 a1);
 bool8 sub_805E874(void);
@@ -89,7 +86,6 @@ void sub_8094C88(void);
 void sub_8040A84(void);
 void sub_8047158(void);
 void sub_804AA60(void);
-void sub_80532B4(void);
 void sub_806A914(u8 a0, u8 a1, u8 a2);
 void sub_8044C10(u8 a0);
 u16 GetLeaderActionId(void);
@@ -97,7 +93,6 @@ void sub_80978C8(s16 a0);
 void sub_8044C50(u16 a0);
 static void TryCreateModeArrows(Entity *leader);
 bool8 sub_8094C48(void);
-void sub_8052210(u8 a0);
 bool8 sub_805EC4C(Entity *a0, u8 a1);
 void sub_803E724(s32 a0);
 void HandleTalkFieldAction(Entity *);
@@ -269,7 +264,7 @@ void DungeonHandlePlayerInput(void)
                     }
                 }
                 else if (ShouldMonsterRunAwayAndShowEffect(leader, TRUE)) {
-                    SendMessage(leader, gUnknown_80FD4B0);
+                    TryDisplayDungeonLoggableMessage(leader, gUnknown_80FD4B0);
                     sub_8044C50(1);
                     gDungeon->unk673 = 1;
                     break;
@@ -284,7 +279,7 @@ void DungeonHandlePlayerInput(void)
                         }
                     }
                     if (i == MAX_MON_MOVES) {
-                        SendMessage(leader, gUnknown_80F8A28);
+                        TryDisplayDungeonLoggableMessage(leader, gUnknown_80F8A28);
                         break;
                     }
 
@@ -310,7 +305,7 @@ void DungeonHandlePlayerInput(void)
                         }
                     }
                     if (!canUseMove) {
-                        SendMessage(leader, gUnknown_80F8A4C);
+                        TryDisplayDungeonLoggableMessage(leader, gUnknown_80F8A4C);
                     }
                     else {
                         SetMonsterActionFields(&leaderInfo->action, ACTION_USE_MOVE_PLAYER);
@@ -379,7 +374,7 @@ void DungeonHandlePlayerInput(void)
 
             if (gRealInputs.held & L_BUTTON) {
                 if (gRealInputs.pressed & B_BUTTON) {
-                    sub_80532B4();
+                    DisplayMessageLog();
                     ResetRepeatTimers();
                     ResetUnusedInputStruct();
                 }
@@ -534,7 +529,7 @@ void DungeonHandlePlayerInput(void)
                     if (!(canMoveFlags & 2)) {
                         if (canMoveFlags & 1) {
                             if (immobilizedMsg != NULL) {
-                                SendMessage(leader, immobilizedMsg);
+                                TryDisplayDungeonLoggableMessage(leader, immobilizedMsg);
                             }
                             sub_8044C50(1);
                             gDungeon->unk673 = 1;
@@ -1577,7 +1572,7 @@ bool8 sub_805EC4C(Entity *a0, u8 a1)
     if (IsChargingAnyTwoTurnMove(tileMonster, FALSE)) return FALSE;
     if (!sub_8070F80(a0, entityInfo->action.direction)) return FALSE;
 
-    if (a1 != 0 && sub_807049C(tileMonster, &a0->pos) && !sub_8052B8C(0, gUnknown_8100208, 0)) return FALSE;
+    if (a1 != 0 && sub_807049C(tileMonster, &a0->pos) && !DisplayDungeonYesNoMessage(0, gUnknown_8100208, 0)) return FALSE;
 
     SetMonsterActionFields(&entityInfo->action, ACTION_WALK);
     if (gRealInputs.held & B_BUTTON) {
@@ -1721,13 +1716,13 @@ void sub_805F02C(void)
     EntityInfo *leaderInfo = leader->info;
 
     if (r8->isTeamLeader) {
-        sub_805239C(r7, gUnknown_80F9BD8);
+        DisplayDungeonLoggableMessageTrue(r7, gUnknown_80F9BD8);
     }
     else if (sub_8047084(ITEM_FLAG_IN_SHOP) || sub_807EF48()) {
-        sub_805239C(r7, gUnknown_80F9C08);
+        DisplayDungeonLoggableMessageTrue(r7, gUnknown_80F9C08);
     }
     else if (gDungeon->unk66E) {
-        sub_805239C(r7, gUnknown_80F9C2C);
+        DisplayDungeonLoggableMessageTrue(r7, gUnknown_80F9C2C);
     }
     else {
         gDungeon->unk679 = 0;
@@ -1761,7 +1756,7 @@ void sub_805F02C(void)
         sub_8041AD0(leader);
         sub_8041AE0(GetLeader());
         SetMessageArgument(gAvailablePokemonNames, r7, 0);
-        SendMessage(r7, gUnknown_80F9BB0);
+        TryDisplayDungeonLoggableMessage(r7, gUnknown_80F9BB0);
         sub_807EC28(FALSE);
         r8->unk64 = 0;
         leaderInfo->unk64 = 0;
@@ -2124,7 +2119,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
                 }
                 else {
                     SetMessageArgument(gAvailablePokemonNames, GetLeader(), 0);
-                    PrintFieldMessage(0, gUnknown_80FDE18, 1);
+                    DisplayDungeonMessage(0, gUnknown_80FDE18, 1);
                 }
             }
             r10 = -1;
@@ -2168,7 +2163,7 @@ extern const u8 *const gUnknown_80F91E0;
 extern const u8 *const gUnknown_80F91A8;
 extern const u8 *const gUnknown_80FE954;
 
-const u8 *sub_805317C(void);
+const u8 *GetCurrentDungeonName(void);
 void GetWeatherName(u8 *dst, u8 weatherId);
 
 extern s32 gFormatData_202DE30[];
@@ -2232,7 +2227,7 @@ void DrawFieldMenu(u8 a0)
     if (a0) {
         u32 hours, minutes, seconds;
         EntityInfo *leaderInfo = GetLeader()->info;
-        const u8 *dungeonName = sub_805317C();
+        const u8 *dungeonName = GetCurrentDungeonName();
 
         x = (136 - sub_8008ED0(dungeonName)) / 2;
         sub_80073B8(1);
@@ -2279,7 +2274,7 @@ bool8 sub_805FBE8(u8 *a0)
     do
     {
         sub_803E46C(0xE);
-        xxx_draw_string_80144C4();
+        DrawDialogueBoxString();
         r4 = sub_8016080();
     } while (r4 == 0);
     CleanConfirmNameMenu();
@@ -2435,7 +2430,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
 
     sUnknown_202F258 = sub_8060D64(sUnknown_202F248, var_30, var_34, var_28, a0);
     if (sUnknown_202F258 == 0) {
-        PrintFieldMessage(0, gUnknown_80F8B24, 1);
+        DisplayDungeonMessage(0, gUnknown_80F8B24, 1);
         return TRUE;
     }
 

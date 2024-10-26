@@ -87,7 +87,7 @@ static void sub_801B080(void)
     switch (sUnknown_203B22C->state) {
         case 0:
             sub_801B178();
-            sub_8014248(sFmtWhoWillLearnTheMove, 0, sUnknown_203B22C->unk60, sUnknown_203B22C->menuItems, 0, 4, 0, NULL, 32);
+            CreateMenuDialogueBoxAndPortrait(sFmtWhoWillLearnTheMove, 0, sUnknown_203B22C->unk60, sUnknown_203B22C->menuItems, 0, 4, 0, NULL, 32);
             break;
         case 1:
             CreateGulpinShop(2, sUnknown_203B22C->chosenPokemon, sUnknown_203B22C->moves);
@@ -99,10 +99,10 @@ static void sub_801B080(void)
                 gTeamInventoryRef->teamItems[sUnknown_203B22C->teamItemIndex].id = ITEM_TM_USED_TM;
             }
             PlaySound(312);
-            xxx_info_box_80141B4(sFmtLearnedTheMove, 0, 0, 0x121);
+            CreateDialogueBoxAndPortrait(sFmtLearnedTheMove, 0, 0, 0x121);
             break;
         case 3:
-            xxx_info_box_80141B4(sFmtNoOneCanLearnThisMove, 0, 0, 0x121);
+            CreateDialogueBoxAndPortrait(sFmtNoOneCanLearnThisMove, 0, 0, 0x121);
             break;
         default:
         case 4:

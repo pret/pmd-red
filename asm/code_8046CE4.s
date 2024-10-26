@@ -418,7 +418,7 @@ _08047462:
 	ldr r2, [r0]
 	mov r0, r9
 	adds r1, r4, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	mov r0, r9
 	adds r1, r4, 0
 	bl TrySendImmobilizeSleepEndMsg
@@ -475,7 +475,7 @@ _080474E2:
 	ldr r2, [r0]
 	mov r0, r9
 	adds r1, r4, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	b _08047524
 	.align 2, 0
 _0804750C: .4byte gAvailablePokemonNames
@@ -486,7 +486,7 @@ _08047518:
 	ldr r2, [r0]
 	mov r0, r9
 	adds r1, r4, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 _08047524:
 	adds r5, 0x8
 	subs r6, 0x1
@@ -552,7 +552,7 @@ _08047596:
 	ldr r0, _080475C0
 	ldr r1, [r0]
 	mov r0, r9
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _080475A8:
 	movs r3, 0x90
 	lsls r3, 2
@@ -924,7 +924,7 @@ _0804786E:
 	ldr r2, [r0]
 	ldr r0, [sp, 0x10]
 	adds r1, r5, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	ldr r0, [sp, 0x10]
 	adds r1, r5, 0
 	bl TrySendImmobilizeSleepEndMsg
@@ -962,7 +962,7 @@ _080478DC:
 	ldr r2, [r0]
 	ldr r0, [sp, 0x10]
 	adds r1, r5, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	b _08047900
 	.align 2, 0
 _080478F0: .4byte gUnknown_80F9510
@@ -971,7 +971,7 @@ _080478F4:
 	ldr r2, [r0]
 	ldr r0, [sp, 0x10]
 	adds r1, r5, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 _08047900:
 	movs r2, 0x1
 	str r2, [sp, 0x20]

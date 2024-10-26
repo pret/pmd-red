@@ -67,18 +67,18 @@ bool8 CreateFelicityBank(s32 mode)
     strcpy(gUnknown_202E1C8 - 80, monName);
 
     if (sFelicityBankWork->mode == FEL_MODE_ASLEEP)
-        sFelicityBankWork->unkA4 = NULL;
+        sFelicityBankWork->monPortraitPtr = NULL;
     else
-        sFelicityBankWork->unkA4 = &sFelicityBankWork->faceFile;
+        sFelicityBankWork->monPortraitPtr = &sFelicityBankWork->monPortrait;
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_PERSIAN);
-    sFelicityBankWork->faceFile = faceFile;
-    sFelicityBankWork->faceData = faceFile->data;
-    sFelicityBankWork->unkA0 = 0;
-    sFelicityBankWork->unkA1 = 0;
-    sFelicityBankWork->unkA2 = 0;
-    sFelicityBankWork->unk9C = 2;
-    sFelicityBankWork->unk9E = 8;
+    sFelicityBankWork->monPortrait.faceFile = faceFile;
+    sFelicityBankWork->monPortrait.faceData = faceFile->data;
+    sFelicityBankWork->monPortrait.spriteId = 0;
+    sFelicityBankWork->monPortrait.flip = FALSE;
+    sFelicityBankWork->monPortrait.unkE = 0;
+    sFelicityBankWork->monPortrait.pos.x = 2;
+    sFelicityBankWork->monPortrait.pos.y = 8;
     UpdateFelicityBankState(FELICITY_BANK_INIT);
     return TRUE;
 }
@@ -118,7 +118,7 @@ u32 FelicityBankCallback(void)
 void DestroyFelicityBank(void)
 {
     if (sFelicityBankWork != NULL) {
-        CloseFile(sFelicityBankWork->faceFile);
+        CloseFile(sFelicityBankWork->monPortrait.faceFile);
         MemoryFree(sFelicityBankWork);
         sFelicityBankWork = NULL;
     }
@@ -170,49 +170,49 @@ static void UpdateFelicityBankDialogue(void)
     switch (sFelicityBankWork->currState) {
         case FELICITY_BANK_INIT:
             sFelicityBankWork->fallbackState = 1;
-            xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WELCOME], 0, sFelicityBankWork->unkA4, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WELCOME], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             break;
         case 1:
             CreateFelicityBankShopMenu();
             sFelicityBankWork->fallbackState = 2;
             if (gTeamInventoryRef->teamSavings == 0)
-                sub_8014248(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_HOW_MAY_I_SERVE__NO_MONEY], 0, sFelicityBankWork->menuAction,
-                    sFelicityBankWork->unk14, sFelicityBankWork->unk54, 4, 0, sFelicityBankWork->unkA4, 0xC);
+                CreateMenuDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_HOW_MAY_I_SERVE__NO_MONEY], 0, sFelicityBankWork->menuAction,
+                    sFelicityBankWork->unk14, sFelicityBankWork->unk54, 4, 0, sFelicityBankWork->monPortraitPtr, 0xC);
             else {
                 gFormatData_202DE30 = gTeamInventoryRef->teamSavings;
-                sub_8014248(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_HOW_MAY_I_SERVE__HAS_MONEY], 0, sFelicityBankWork->menuAction,
-                    sFelicityBankWork->unk14, sFelicityBankWork->unk54, 4, 0, sFelicityBankWork->unkA4, 0xC);
+                CreateMenuDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_HOW_MAY_I_SERVE__HAS_MONEY], 0, sFelicityBankWork->menuAction,
+                    sFelicityBankWork->unk14, sFelicityBankWork->unk54, 4, 0, sFelicityBankWork->monPortraitPtr, 0xC);
             }
             break;
         case FELICITY_BANK_INFO:
             sFelicityBankWork->fallbackState = 1;
-            xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_HOW_IT_WORKS], 0, sFelicityBankWork->unkA4, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_HOW_IT_WORKS], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             break;
         case 4:
             sFelicityBankWork->fallbackState = FELICITY_BANK_EXIT;
             if (gTeamInventoryRef->teamSavings == 0)
-                xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_BYE__NO_MONEY], 0, sFelicityBankWork->unkA4, 0x10D);
+                CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_BYE__NO_MONEY], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             else {
                 gFormatData_202DE30 = gTeamInventoryRef->teamSavings;
-                xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_BYE__HAS_MONEY], 0, sFelicityBankWork->unkA4, 0x10D);
+                CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_BYE__HAS_MONEY], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             }
             break;
         case 5:
             sFelicityBankWork->fallbackState = 1;
-            xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_VERY_WELL], 0, sFelicityBankWork->unkA4, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_VERY_WELL], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             break;
         case FELICITY_BANK_STORE:
             if (gTeamInventoryRef->teamMoney == 0) {
                 sFelicityBankWork->fallbackState = 1;
-                xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_DEPOSIT__NO_MONEY], 0, sFelicityBankWork->unkA4, 0x10D);
+                CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_DEPOSIT__NO_MONEY], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             }
             else if (gTeamInventoryRef->teamSavings >= MAX_TEAM_SAVINGS) {
                 sFelicityBankWork->fallbackState = 1;
-                xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_DEPOSIT__BANK_FULL], 0, sFelicityBankWork->unkA4, 0x10D);
+                CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_DEPOSIT__BANK_FULL], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             }
             else {
                 sFelicityBankWork->fallbackState = FELICITY_BANK_STORE_HOW_MUCH;
-                xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_DEPOSIT__HOW_MUCH], 0, sFelicityBankWork->unkA4, 0x10D);
+                CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_DEPOSIT__HOW_MUCH], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             }
             break;
         case FELICITY_BANK_STORE_HOW_MUCH:
@@ -233,21 +233,21 @@ static void UpdateFelicityBankDialogue(void)
         case FELICITY_BANK_STORE_RECEIPT:
             sFelicityBankWork->fallbackState = 1;
             gFormatData_202DE30 = sFelicityBankWork->chosenAmount;
-            xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_DEPOSIT__RECEIPT], 0, sFelicityBankWork->unkA4, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_DEPOSIT__RECEIPT], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             break;
         case FELICITY_BANK_TAKE:
             if (gTeamInventoryRef->teamMoney >= MAX_TEAM_MONEY) {
                 sFelicityBankWork->fallbackState = 1;
-                xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WITHDRAW__WALLET_FULL], 0, sFelicityBankWork->unkA4, 0x10D);
+                CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WITHDRAW__WALLET_FULL], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             }
             else if (gTeamInventoryRef->teamSavings == 0) {
                 sFelicityBankWork->fallbackState = 1;
-                xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WITHDRAW__NO_MONEY], 0, sFelicityBankWork->unkA4, 0x10D);
+                CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WITHDRAW__NO_MONEY], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             }
             else {
                 sFelicityBankWork->fallbackState = FELICITY_BANK_TAKE_HOW_MUCH;
                 gFormatData_202DE30 = gTeamInventoryRef->teamSavings;
-                xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WITHDRAW__HOW_MUCH], 0, sFelicityBankWork->unkA4, 0x10D);
+                CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WITHDRAW__HOW_MUCH], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             }
             break;
         case FELICITY_BANK_TAKE_HOW_MUCH:
@@ -271,7 +271,7 @@ static void UpdateFelicityBankDialogue(void)
         case FELICITY_BANK_TAKE_DEPOSIT:
             sFelicityBankWork->fallbackState = 1;
             gFormatData_202DE30 = sFelicityBankWork->chosenAmount;
-            xxx_info_box_80141B4(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WITHDRAW__RECEIPT], 0, sFelicityBankWork->unkA4, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WITHDRAW__RECEIPT], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             break;
     }
 }
@@ -424,7 +424,7 @@ static void CreateFelicityMoneySavingsHeader(u32 param_1)
 }
 
 void DrawTeamMoneyBox(u32 param_1)
-{ 
+{
     CallPrepareTextbox_8008C54(param_1);
     sub_80073B8(param_1);
     PrintStringOnWindow(6, 0, sMoney, param_1, 0);

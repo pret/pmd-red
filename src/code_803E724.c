@@ -17,6 +17,7 @@
 #include "game_options.h"
 #include "code_800558C.h"
 #include "dungeon_range.h"
+#include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "dungeon_items.h"
 #include "constants/item.h"
@@ -63,10 +64,8 @@ extern u8 gUnknown_202D068[];
 extern s32 gUnknown_202EDCC;
 extern u32 gUnknown_3001018[];
 
-extern void sub_8052210(u32);
 extern void sub_8040A84();
 extern void sub_8083D44(void);
-extern void sub_8052210(u32);
 extern void sub_8049ED4(void);
 extern void sub_8040A84(void);
 extern void sub_80400D4(void);
@@ -101,7 +100,7 @@ void sub_803E874(bool8 r10, s32 r9)
         index++;
     }
 
-    if (gDungeon->unk181e8.unk18215 == 0 || gDungeon->unk1C06C == 3) {
+    if (gDungeon->unk181e8.unk18215 == 0 || gDungeon->unk1BDD4.unk1C06C == 3) {
         sub_8004AF0(TRUE, gUnknown_202EE8C, 0xA0, 0x20, gUnknown_202EDC8, (void *) &gDungeon->unk17C);
     }
 
@@ -169,7 +168,7 @@ void sub_803EA10(void)
         index++;
     }
 
-    if (gDungeon->unk181e8.unk18215 == 0 || gDungeon->unk1C06C == 3) {
+    if (gDungeon->unk181e8.unk18215 == 0 || gDungeon->unk1BDD4.unk1C06C == 3) {
         sub_8004AF0(TRUE, gUnknown_202EE8C, 0xA0, 0x20, gUnknown_202EDC8, (void *) &gDungeon->unk17C);
     }
 

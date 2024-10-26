@@ -278,7 +278,7 @@ _08045FAC:
 _08045FD0:
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _08045FF2
 	.align 2, 0
 _08045FDC: .4byte 0x00ff0008
@@ -288,10 +288,10 @@ _08045FE8:
 	ldr r0, _08045FFC
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _08045FF2:
 	ldrb r0, [r5, 0x2]
-	bl HandleOnPickupTutorial
+	bl TryDisplayItemPickupTutorialMessage
 	b _080460E0
 	.align 2, 0
 _08045FFC: .4byte gPickedUpItemToolbox
@@ -336,7 +336,7 @@ _0804602E:
 _08046048:
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _080460E0
 	.align 2, 0
 _08046054: .4byte gFormatItems
@@ -379,7 +379,7 @@ _08046094:
 _080460AC:
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _080460DA
 	.align 2, 0
 _080460B8: .4byte gAvailablePokemonNames
@@ -394,10 +394,10 @@ _080460C0:
 	ldr r0, _080460F4
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _080460DA:
 	ldrb r0, [r5, 0x2]
-	bl HandleOnPickupTutorial
+	bl TryDisplayItemPickupTutorialMessage
 _080460E0:
 	add sp, 0xB8
 	pop {r3-r5}
@@ -996,7 +996,7 @@ sub_804652C:
 	ldr r0, _080465A4
 	ldr r1, [r0]
 	mov r0, r10
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	mov r0, r9
 	ldrb r1, [r0]
 	movs r0, 0x1
@@ -1156,7 +1156,7 @@ _080466B6:
 	ldr r2, [r0]
 	mov r0, r10
 	mov r1, sp
-	bl sub_8052364
+	bl TryDisplayDungeonLoggableMessage5
 	b _0804671E
 	.align 2, 0
 _080466C4: .4byte gItemFellOutOfSight
@@ -1202,7 +1202,7 @@ _0804670C:
 	ldr r2, [r0]
 	mov r0, r10
 	mov r1, sp
-	bl sub_8052364
+	bl TryDisplayDungeonLoggableMessage5
 _0804671E:
 	add sp, 0x10
 	pop {r3-r5}
@@ -1721,7 +1721,7 @@ _08046B0A:
 	ldr r4, _08046B38
 	add r4, sp
 	ldr r0, [r4]
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _08046C7C
 	.align 2, 0
 _08046B2C: .4byte 0x0000052c
@@ -1734,7 +1734,7 @@ _08046B3C:
 	ldr r5, _08046B50
 	add r5, sp
 	ldr r0, [r5]
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _08046C7C
 	.align 2, 0
 _08046B4C: .4byte gItemLost
@@ -1748,7 +1748,7 @@ _08046B54:
 	ldr r2, _08046C94
 	add r2, sp
 	ldr r0, [r2]
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _08046B68:
 	movs r3, 0
 	mov r9, r3

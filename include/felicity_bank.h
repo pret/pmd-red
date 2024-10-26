@@ -4,6 +4,7 @@
 #include "file_system.h"
 #include "structs/menu.h"
 #include "structs/str_text.h"
+#include "code_80130A8.h"
 
 #define FELICITY_BANK_ACTION_WITHDRAW 0
 #define FELICITY_BANK_ACTION_DEPOSIT 1
@@ -19,15 +20,8 @@ typedef struct FelicityBankWork
     MenuItem unk14[8];
     u16 unk54[8];
     unkStructFor8013AA0 unk64;
-    /* 0x94 */ OpenedFile *faceFile;
-    /* 0x98 */ u8 *faceData;
-    u16 unk9C;
-    u16 unk9E;
-    u8 unkA0;
-    u8 unkA1;
-    u8 unkA2;
-    u8 unkA3;
-    OpenedFile **unkA4;
+    /* 0x94 */ struct MonPortraitMsg monPortrait;
+    struct MonPortraitMsg *monPortraitPtr;
     UnkTextStruct2 unkA8[4];
 } FelicityBankWork;
 

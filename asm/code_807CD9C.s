@@ -165,7 +165,7 @@ _0807D634:
 	ldr r2, _0807D650
 	add r2, sp
 	ldr r0, [r2]
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _0807D9F4
 	.align 2, 0
 _0807D650: .4byte 0x00000d08
@@ -585,7 +585,7 @@ _0807D996:
 	ldr r2, _0807D9C4
 	add r2, sp
 	ldr r0, [r2]
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _0807D9EE
 	.align 2, 0
 _0807D9B4: .4byte gUnknown_80F4468
@@ -605,7 +605,7 @@ _0807D9E0:
 	ldr r3, _0807DA0C
 	add r3, sp
 	ldr r0, [r3]
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _0807D9EE:
 	movs r0, 0x1
 	bl sub_807EC28
@@ -663,7 +663,7 @@ _0807DA5C:
 	ldr r2, [r0]
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	b _0807DB5E
 	.align 2, 0
 _0807DA68: .4byte gUnknown_80FC9C0
@@ -818,7 +818,7 @@ _0807DB94:
 _0807DBA0:
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _0807DC54
 	.align 2, 0
 _0807DBAC: .4byte gUnknown_80FD08C
@@ -878,7 +878,7 @@ _0807DBF4:
 	ldr r0, _0807DC2C
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _0807DC3A
 	.align 2, 0
 _0807DC24: .4byte 0x0000fffc
@@ -888,7 +888,7 @@ _0807DC30:
 	ldr r0, _0807DC60
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 _0807DC3A:
 	ldr r0, _0807DC64
 	ldr r0, [r0]
@@ -953,7 +953,7 @@ _0807DCAC:
 _0807DCB8:
 	ldr r1, [r0]
 	mov r0, r9
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	b _0807DF0E
 	.align 2, 0
 _0807DCC4: .4byte gUnknown_80FD3D0
@@ -1192,7 +1192,7 @@ _0807DE74:
 	ldr r0, _0807DF30
 	ldr r1, [r0]
 	mov r0, r9
-	bl SendMessage
+	bl TryDisplayDungeonLoggableMessage
 	movs r0, 0x28
 	movs r1, 0x2B
 	bl sub_803E708
@@ -1334,7 +1334,7 @@ _0807DFC2:
 	ldr r2, [r0]
 	ldr r0, [sp, 0x8]
 	mov r1, r10
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	b _0807E174
 	.align 2, 0
 _0807DFD0: .4byte gUnknown_80F96EC
@@ -1351,7 +1351,7 @@ _0807DFD4:
 	ldr r2, [r0]
 	ldr r0, [sp, 0x8]
 	mov r1, r10
-	bl sub_80522F4
+	bl TryDisplayDungeonLoggableMessage3
 	movs r5, 0
 	ldr r0, _0807E18C
 	lsls r1, r6, 2

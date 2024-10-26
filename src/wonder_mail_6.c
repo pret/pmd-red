@@ -19,13 +19,7 @@ struct unkStruct_203B328
     MenuStruct unk8;
     MenuStruct unk58;
     UnkTextStruct2 unkA8[4];
-    /* 0x108 */ OpenedFile *faceFile;
-    /* 0x10C */ u8 *faceData;
-    u16 unk110;
-    u16 unk112;
-    /* 0x114 */ u8 unk114;
-    /* 0x115 */ u8 unk115;
-    /* 0x116 */ u8 unk116;
+    /* 0x108 */ struct MonPortraitMsg monPortrait;
     u32 wonderMailType;
 };
 static EWRAM_DATA_2 struct unkStruct_203B328 *gUnknown_203B328 = {0};
@@ -41,14 +35,14 @@ enum MenuActions {
    DELETE_ALL_MAIL_ACTION, // Unused
 };
 
-const MenuItem gUnknown_80E0948[] = 
+const MenuItem gUnknown_80E0948[] =
 {
     {"Yes", YES_ACTION},
     {"No", NO_ACTION},
     {NULL, CANCEL_ACTION}
 };
 
-const MenuItem gUnknown_80E0968[] = 
+const MenuItem gUnknown_80E0968[] =
 {
     {"Delete", DELETE_ACTION},
     {"Info", INFO_ACTION},
@@ -106,7 +100,7 @@ enum States {
 bool8 sub_8030F58(u32 wonderMailType)
 {
   OpenedFile *file;
-  
+
   ResetUnusedInputStruct();
   xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
   if (gUnknown_203B328 == NULL) {
@@ -115,24 +109,24 @@ bool8 sub_8030F58(u32 wonderMailType)
   }
   gUnknown_203B328->wonderMailType = wonderMailType;
   file = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
-  gUnknown_203B328->faceFile = file;
-  gUnknown_203B328->faceData = file->data;
-  gUnknown_203B328->unk114 = 0;
-  gUnknown_203B328->unk115 = 0;
-  gUnknown_203B328->unk116 = 0;
-  gUnknown_203B328->unk110 = 2;
-  gUnknown_203B328->unk112 = 8;
+  gUnknown_203B328->monPortrait.faceFile = file;
+  gUnknown_203B328->monPortrait.faceData = file->data;
+  gUnknown_203B328->monPortrait.spriteId = 0;
+  gUnknown_203B328->monPortrait.flip = FALSE;
+  gUnknown_203B328->monPortrait.unkE = 0;
+  gUnknown_203B328->monPortrait.pos.x = 2;
+  gUnknown_203B328->monPortrait.pos.y = 8;
 
   if (HasNoWonderMailType(wonderMailType)) {
     switch(wonderMailType)
     {
         case WONDER_MAIL_TYPE_SOS_1:
             // "You don't have any {COLOR CYAN_G}SOS Mail{RESET}.\0"
-            xxx_info_box_80141B4(gUnknown_80E09D8,0,&gUnknown_203B328->faceFile,0x101);
+            CreateDialogueBoxAndPortrait(gUnknown_80E09D8,0,&gUnknown_203B328->monPortrait,0x101);
             break;
         case WONDER_MAIL_TYPE_AOK:
             // "You don't have any {COLOR CYAN_G}A-OK Mail{RESET}.\0"
-            xxx_info_box_80141B4(gUnknown_80E0A0C,0,&gUnknown_203B328->faceFile,0x101);
+            CreateDialogueBoxAndPortrait(gUnknown_80E0A0C,0,&gUnknown_203B328->monPortrait,0x101);
             break;
     }
     gUnknown_203B328->state = 5;
@@ -172,7 +166,7 @@ void sub_80310B4(void)
 {
     sub_803084C();
     if (gUnknown_203B328 != NULL) {
-        CloseFile(gUnknown_203B328->faceFile);
+        CloseFile(gUnknown_203B328->monPortrait.faceFile);
         MemoryFree(gUnknown_203B328);
         gUnknown_203B328 = NULL;
     }
@@ -274,7 +268,7 @@ static void sub_8031300(void)
 static void HandleWonderMail6MainMenu(void)
 {
   s32 menuAction;
-  
+
   menuAction = 0;
   sub_8030768(0);
   if (!sub_8012FD8(&gUnknown_203B328->unk8)) {
@@ -304,7 +298,7 @@ static void HandleWonderMail6DeleteMailMenu(u32 state)
   s32 index;
   s32 menuAction;
   unkStruct_203B480 *unused;
-  
+
   menuAction = 0;
   sub_8030768(0);
   sub_8012FD8(&gUnknown_203B328->unk8);

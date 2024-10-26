@@ -32,6 +32,39 @@ struct unkStruct_80B8848
 
 u32 xxx_call_draw_char(s32, s32, u32, u32, u32);
 
+struct UnkDrawStringStruct;
+
+struct UnkDrawStringStruct
+{
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6;
+    s16 unk8;
+    s16 unkA;
+    s32 unkC;
+    u32 unk10;
+    u32 unk14;
+    u32 unk18;
+    u32 unk1C;
+    u8 unk20;
+    u8 unk21;
+    u8 fill22;
+    u8 fill23;
+    const u8* (*unk24)(const u8 *, const u8 *, struct UnkDrawStringStruct*);
+    u8 fill28;
+    u8 fill29;
+    u8 fill2A;
+    u8 fill2B;
+    u32 unk2C;
+    u8 fill30;
+    u8 fill31;
+    u8 fill32;
+    u8 fill33;
+    u32 unk34;
+};
+
+
 void RestoreUnkTextStruct_8006518(UnkTextStruct2 *);
 void sub_8006554(UnkTextStruct1 *, u32 *, u32 *, u16 *, u32, const UnkTextStruct2 *, u8, u32, UnkTextStruct2_sub *, u8);
 void sub_80073B8(s32);
@@ -41,6 +74,8 @@ void sub_800792C(u32, s32, s32, s32, u32);
 void sub_8007A78(u32, s32, s32, s32, u32);
 void sub_8007B7C(u32, s32, s32, s32, u32);
 void sub_8007E20(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 *a5, u32 a6);
+const u8 *xxx_get_next_char_from_string(const u8 *a1, u32 *a0);
+const u8 *xxx_handle_format_global(const u8 *str, struct UnkDrawStringStruct *unkStrPtr);
 
 // text.s
 extern const struct unkChar *GetCharacter(s32);
