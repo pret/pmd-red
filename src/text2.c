@@ -1181,104 +1181,23 @@ void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const UnkTextStruct2_sub2 *
 "_08007330: .4byte 0x0000f6d8");
 }
 
-#ifdef NONMATCHING // https://decomp.me/scratch/zVTOf
 void sub_8007334(s32 a0)
 {
-    s32 r1;
-    s32 r2;
-    UnkTextStruct1 *r3;
-    s32 r4;
-    u32 r5;
-    s32 r6;
-    s16 typeCheater;
-
-    r3 = &gUnknown_2027370[a0];
-    r5 = r3->unk14;
-    r6 = r3->unk2;
-    for (r2 = 0; r2 < r3->unk6; r6++, r2++) {
-        typeCheater = r3->unk0;
-        r1 = typeCheater;
-        for (r4 = 0; r4 < r3->unk4; r4++) {
-            typeCheater = r1;
-            gUnknown_202B038[0][r6][typeCheater + r4] &= 0xFC00;
-            gUnknown_202B038[0][r6][typeCheater + r4] |= r5++;
+    s32 i, j;
+    struct UnkTextStruct1 *textStructPtr = &gUnknown_2027370[a0];
+    s32 r5 = textStructPtr->unk14;
+    s32 r6 = textStructPtr->unk2;
+    for (i = 0; i < textStructPtr->unk6; i++) {
+        s32 id = textStructPtr->unk0;
+        for (j = 0; j < textStructPtr->unk4; j++) {
+            gUnknown_202B038[0][r6][id] &= ~0x3ff;
+            gUnknown_202B038[0][r6][id] |= r5;
+            id++;
+            r5++;
         }
+        r6++;
     }
 }
-#else
-NAKED
-void sub_8007334(s32 a0)
-{
-    asm_unified(
-    "\tpush {r4-r7,lr}\n"
-    "\tmov r7, r9\n"
-    "\tmov r6, r8\n"
-    "\tpush {r6,r7}\n"
-    "\tlsls r1, r0, 3\n"
-    "\tadds r1, r0\n"
-    "\tlsls r1, 3\n"
-    "\tldr r0, _080073AC\n"
-    "\tadds r3, r1, r0\n"
-    "\tldr r5, [r3, 0x14]\n"
-    "\tmovs r0, 0x2\n"
-    "\tldrsh r6, [r3, r0]\n"
-    "\tmovs r2, 0\n"
-    "\tmovs r1, 0x6\n"
-    "\tldrsh r0, [r3, r1]\n"
-    "\tcmp r2, r0\n"
-    "\tbge _080073A0\n"
-    "\tldr r7, _080073B0\n"
-    "\tmov r9, r7\n"
-"_0800735A:\n"
-    "\tmovs r0, 0\n"
-    "\tldrsh r1, [r3, r0]\n"
-    "\tmovs r4, 0\n"
-    "\tmovs r7, 0x4\n"
-    "\tldrsh r0, [r3, r7]\n"
-    "\tadds r7, r6, 0x1\n"
-    "\tadds r2, 0x1\n"
-    "\tmov r12, r2\n"
-    "\tcmp r4, r0\n"
-    "\tbge _08007394\n"
-    "\tmovs r0, 0xFC\n"
-    "\tlsls r0, 8\n"
-    "\tmov r8, r0\n"
-    "\tlsls r1, 1\n"
-    "\tlsls r0, r6, 6\n"
-    "\tadd r0, r9\n"
-    "\tadds r2, r1, r0\n"
-"_0800737C:\n"
-    "\tldrh r0, [r2]\n"
-    "\tmov r1, r8\n"
-    "\tands r1, r0\n"
-    "\torrs r1, r5\n"
-    "\tstrh r1, [r2]\n"
-    "\tadds r2, 0x2\n"
-    "\tadds r5, 0x1\n"
-    "\tadds r4, 0x1\n"
-    "\tmovs r1, 0x4\n"
-    "\tldrsh r0, [r3, r1]\n"
-    "\tcmp r4, r0\n"
-    "\tblt _0800737C\n"
-"_08007394:\n"
-    "\tadds r6, r7, 0\n"
-    "\tmov r2, r12\n"
-    "\tmovs r7, 0x6\n"
-    "\tldrsh r0, [r3, r7]\n"
-    "\tcmp r2, r0\n"
-    "\tblt _0800735A\n"
-"_080073A0:\n"
-    "\tpop {r3,r4}\n"
-    "\tmov r8, r3\n"
-    "\tmov r9, r4\n"
-    "\tpop {r4-r7}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-"_080073AC: .4byte gUnknown_2027370\n"
-"_080073B0: .4byte gUnknown_202B038");
-}
-#endif // NONMATCHING
 
 UNUSED static void nullsub_154(void)
 {
