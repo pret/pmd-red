@@ -121,130 +121,37 @@ void sub_800EAE4(s32 param_1, s32 *param_2, unkStruct_800EAE4 *param_3)
     }
 }
 
-#ifdef NONMATCHING // 99,32% match, r4/r5 regswap https://decomp.me/scratch/0cu86
-void sub_800EB24(s32 param_1, s32 *param_2, unkStruct_800EAE4 *param_3, s32 param_4, s32 param_5)
+void sub_800EB24(s32 param_1, s32 *param_2, unkStruct_800EAE4 *param_3, s32 r5, s32 r4)
 {
-    s32 idx;
-    idx = sub_800E2C0(param_1);
-    if (idx != -1)
-    {
+    s32 idx = sub_800E2C0(param_1);
+    if (idx != -1) {
         struct unkStruct_203B0CC_sub *curStruct;
         curStruct = &gUnknown_203B0CC->unk0[idx];
-        if (curStruct->unkCC == 0)
-        {
+        if (curStruct->unkCC == 0) {
             curStruct->unk18 = param_2[0];
         }
 
-        if (curStruct->unk0 != 6 && (curStruct->unk8 & 0x7) == 0)
-        {
+        if (curStruct->unk0 == 6) {
+            curStruct->unk24 = r5 + 1;
+        }
+        else if ((curStruct->unk8 & 0x7) == 0) {
             s32 newStruct[8];
             memcpy(newStruct, gUnknown_80B9C9C, sizeof(s32) * 8);
-            param_4 += newStruct[param_5 & 0x7];
+            curStruct->unk24 = r5 + newStruct[r4 & 7];
         }
-        else
-        {
-            param_4 += 1;
+        else {
+            curStruct->unk24 = r5 + 1;
         }
 
-        curStruct->unk24 = param_4;
-
-        if (curStruct->unk20 != -1)
-        {
+        if (curStruct->unk20 != -1) {
             curStruct->unk1c = *param_3;
         }
-        else
-        {
+        else {
             curStruct->unk1c.unk0 = 0;
             curStruct->unk1c.unk2 = 0;
         }
     }
 }
-#else
-NAKED
-void sub_800EB24(s32 param_1, s32 *param_2, unkStruct_800EAE4 *param_3, s32 param_4, s32 param_5)
-{
-    asm_unified(	"\n"
-"	push {r4-r7,lr}\n"
-"	mov r7, r8\n"
-"	push {r7}\n"
-"	sub sp, 0x20\n"
-"	adds r6, r1, 0\n"
-"	mov r8, r2\n"
-"	adds r5, r3, 0\n"
-"	ldr r4, [sp, 0x38]\n"
-"	bl sub_800E2C0\n"
-"	adds r1, r0, 0\n"
-"	movs r0, 0x1\n"
-"	negs r0, r0\n"
-"	cmp r1, r0\n"
-"	beq _0800EBB0\n"
-"	ldr r2, _0800EB8C\n"
-"	movs r0, 0xD0\n"
-"	muls r1, r0\n"
-"	ldr r0, [r2]\n"
-"	adds r2, r0, r1\n"
-"	adds r0, r2, 0\n"
-"	adds r0, 0xCC\n"
-"	ldr r0, [r0]\n"
-"	cmp r0, 0\n"
-"	bne _0800EB5A\n"
-"	ldr r0, [r6]\n"
-"	str r0, [r2, 0x18]\n"
-"_0800EB5A:\n"
-"	ldr r0, [r2]\n"
-"	cmp r0, 0x6\n"
-"	beq _0800EB94\n"
-"	ldr r0, [r2, 0x8]\n"
-"	movs r1, 0x7\n"
-"	mov r12, r1\n"
-"	ands r0, r1\n"
-"	cmp r0, 0\n"
-"	bne _0800EB94\n"
-"	mov r1, sp\n"
-"	ldr r0, _0800EB90\n"
-"	ldm r0!, {r3,r6,r7}\n"
-"	stm r1!, {r3,r6,r7}\n"
-"	ldm r0!, {r3,r6,r7}\n"
-"	stm r1!, {r3,r6,r7}\n"
-"	ldm r0!, {r3,r6}\n"
-"	stm r1!, {r3,r6}\n"
-"	mov r7, r12\n"
-"	ands r4, r7\n"
-"	lsls r0, r4, 2\n"
-"	add r0, sp\n"
-"	ldr r0, [r0]\n"
-"	adds r0, r5, r0\n"
-"	b _0800EB96\n"
-"	.align 2, 0\n"
-"_0800EB8C: .4byte gUnknown_203B0CC\n"
-"_0800EB90: .4byte gUnknown_80B9C9C\n"
-"_0800EB94:\n"
-"	adds r0, r5, 0x1\n"
-"_0800EB96:\n"
-"	str r0, [r2, 0x24]\n"
-"	ldr r1, [r2, 0x20]\n"
-"	movs r0, 0x1\n"
-"	negs r0, r0\n"
-"	cmp r1, r0\n"
-"	beq _0800EBAA\n"
-"	mov r1, r8\n"
-"	ldr r0, [r1]\n"
-"	str r0, [r2, 0x1C]\n"
-"	b _0800EBB0\n"
-"_0800EBAA:\n"
-"	movs r0, 0\n"
-"	strh r0, [r2, 0x1C]\n"
-"	strh r0, [r2, 0x1E]\n"
-"_0800EBB0:\n"
-"	add sp, 0x20\n"
-"	pop {r3}\n"
-"	mov r8, r3\n"
-"	pop {r4-r7}\n"
-"	pop {r0}\n"
-"	bx r0\n"
-);
-}
-#endif // NONMATCHING
 
 s32 sub_800EBBC(s32 param_1)
 {
