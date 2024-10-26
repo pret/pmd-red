@@ -173,97 +173,86 @@ bool8 ValidateWonderMail(WonderMail *data)
     }
 }
 
-
-// https://decomp.me/scratch/1XsHS (99.96% matching - Seth)
-#ifdef NONMATCHING
-bool8 GenerateMailJobInfo(WonderMail *mail)
+bool8 GenerateMailJobInfo(struct WonderMail *mail)
 {
-  u8 uVar3;
-  u32 uVar4;
-  s16 species;
-  s32 index;
-  s32 iVar6;
-  s32 numPokemon;
-  s16 speciesStack [424];
-  register s32 itemCount asm("r1");
-  
- 
-  if (!GenerateMailJobDungeonInfo(mail)) {
-    return FALSE;
-  }
-  mail->mailType = 5;
-  iVar6 = RandInt(8);
-  uVar3 = (gUnknown_8109984)[iVar6];
-  mail->missionType = uVar3;
-  if ((uVar3 == 2) && (GetRescueTeamRank() == 0)) {
-    mail->missionType = 0;
-  }
-  mail->unk2 = 0;
-  mail->unk4.seed = Rand32Bit() & 0xffffff;
-  numPokemon = 0;
+    s32 missionType;
+    s32 i;
+    s32 rand;
+    s32 numPokemon;
+    s16 speciesStack[MONSTER_MAX];
+    s32 itemCount;
 
-
-  for(index = 1; index < 0x1A8; index++)
-  {
-    if (sub_803C110(index) != 0) {
-      speciesStack[numPokemon] = index;
-      numPokemon++;
+    if (!GenerateMailJobDungeonInfo(mail)) {
+        return FALSE;
     }
-  }
-    
-  if (numPokemon != 0) {
-    mail->clientSpecies = speciesStack[RandInt(numPokemon)];
-    species = speciesStack[RandInt(numPokemon)];
-  }
-  else {
-    mail->clientSpecies = 0x10;
-    species = 0x122;
-  }
-  mail->targetSpecies = species;
+    mail->mailType = MAIL_TYPE_SUSPENDED_JOB;
+    rand = RandInt(8);
+    missionType = gUnknown_8109984[rand];
+    mail->missionType = missionType;
+    if (missionType == MISSION_TYPE_DELIVER_ITEM && GetRescueTeamRank() == 0) {
+        mail->missionType = MISSION_TYPE_FRIEND_RESCUE;
+    }
+    mail->unk2 = 0;
+    mail->unk4.seed = Rand32Bit() & 0xffffff;
+    numPokemon = 0;
 
-  if (1 < (u8)(mail->missionType - 1)) {
-    mail->targetSpecies = mail->clientSpecies;
-  }
-    
-  uVar4 = sub_8095F28((mail->unk4.dungeon).id);
-  mail->targetItem = uVar4;
-  if ((u8)mail->targetItem  == 0) {
-    mail->missionType = mail->targetItem;
-    mail->targetSpecies = mail->clientSpecies;
-    sub_803C37C(&mail->unk4.dungeon,0,&mail->targetItem);
-  }
-  itemCount = GetMaxItemsAllowed((mail->unk4.dungeon).id);    
-  if ((itemCount == 0) && (mail->missionType == 4)) {
-    mail->missionType = itemCount;
-    mail->targetSpecies = mail->clientSpecies;
-  }
-  do { 
-    sub_803C37C(&mail->unk4.dungeon,mail->missionType,&mail->itemReward);
-  } while (mail->targetItem == mail->itemReward);
-  mail->friendAreaReward = 0;
+    for (i = 1; i < MONSTER_MAX; i++) {
+        if (sub_803C110(i) != 0) {
+            speciesStack[numPokemon] = i;
+            numPokemon++;
+        }
+    }
 
-  switch(mail->missionType)
-  {
-      case 1:
-        switch(Rand32Bit() & 0x70)
-        {
-            case 0x10:
-                sub_803C3E0(mail);
-                break;
-            case 0x30:
-                sub_803C45C(mail);
-                break;
-        }
-        break;
-      case 2:
-        if ((Rand32Bit() & 0x3000) == 0x1000) {
-          sub_803C4F0(mail);
-        }
-        break;
-      case 3:
-      case 4:
-        switch(Rand32Bit() & 0x700)
-        {
+    if (numPokemon != 0) {
+        mail->clientSpecies = speciesStack[RandInt(numPokemon)];
+        mail->targetSpecies = speciesStack[RandInt(numPokemon)];
+    }
+    else {
+        mail->clientSpecies = 0x10;
+        mail->targetSpecies = 0x122;
+    }
+
+    if (mail->missionType != MISSION_TYPE_FIND_ITEM && mail->missionType != MISSION_TYPE_DELIVER_ITEM) {
+        mail->targetSpecies = mail->clientSpecies;
+    }
+
+    mail->targetItem = sub_8095F28(mail->unk4.dungeon.id);
+    if (mail->targetItem == 0) {
+        mail->missionType = MISSION_TYPE_FRIEND_RESCUE;
+        mail->targetSpecies = mail->clientSpecies;
+        sub_803C37C(&mail->unk4.dungeon,0,&mail->targetItem);
+    }
+    itemCount = GetMaxItemsAllowed(mail->unk4.dungeon.id);
+    if (itemCount == 0 && mail->missionType == MISSION_TYPE_RESCUE_TARGET) {
+        mail->missionType = MISSION_TYPE_FRIEND_RESCUE;
+        mail->targetSpecies = mail->clientSpecies;
+    }
+
+    do {
+        sub_803C37C(&mail->unk4.dungeon,mail->missionType,&mail->itemReward);
+    } while (mail->targetItem == mail->itemReward);
+    mail->friendAreaReward = 0;
+
+    switch (mail->missionType) {
+        case MISSION_TYPE_FIND_ITEM:
+            switch(Rand32Bit() & 0x70) {
+                case 0x10:
+                    sub_803C3E0(mail);
+                    break;
+                case 0x30:
+                    sub_803C45C(mail);
+                    break;
+            }
+            break;
+        case MISSION_TYPE_DELIVER_ITEM:
+            if ((Rand32Bit() & 0x3000) == 0x1000) {
+                sub_803C4F0(mail);
+            }
+            break;
+        case MISSION_TYPE_RESCUE_CLIENT:
+        case MISSION_TYPE_RESCUE_TARGET:
+            switch(Rand32Bit() & 0x700)
+            {
             case 0x100:
             case 0x600:
                 sub_803C580(mail);
@@ -271,235 +260,11 @@ bool8 GenerateMailJobInfo(WonderMail *mail)
             case 0x300:
                 sub_803C610(mail);
                 break;
-        }
-  }
-  return TRUE;
+            }
+            break;
+    }
+    return TRUE;
 }
-#else
-NAKED
-bool8 GenerateMailJobInfo(WonderMail *mail)
-{
-    asm_unified(
-	"\tpush {r4-r7,lr}\n"
-	"\tmov r7, r9\n"
-	"\tmov r6, r8\n"
-	"\tpush {r6,r7}\n"
-	"\tldr r4, _08095B44\n"
-	"\tadd sp, r4\n"
-	"\tadds r4, r0, 0\n"
-	"\tbl GenerateMailJobDungeonInfo\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbne _08095B48\n"
-	"\tmovs r0, 0\n"
-	"\tb _08095CCC\n"
-	"\t.align 2, 0\n"
-"_08095B44: .4byte 0xfffffcb0\n"
-"_08095B48:\n"
-	"\tmovs r0, 0x5\n"
-	"\tstrb r0, [r4]\n"
-	"\tmovs r0, 0x8\n"
-	"\tbl RandInt\n"
-	"\tldr r1, _08095BC8\n"
-	"\tadds r0, r1\n"
-	"\tldrb r0, [r0]\n"
-	"\tstrb r0, [r4, 0x1]\n"
-	"\tcmp r0, 0x2\n"
-	"\tbne _08095B6C\n"
-	"\tbl GetRescueTeamRank\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbne _08095B6C\n"
-	"\tstrb r0, [r4, 0x1]\n"
-"_08095B6C:\n"
-	"\tmovs r0, 0\n"
-	"\tstrb r0, [r4, 0x2]\n"
-	"\tbl Rand32Bit\n"
-	"\tldr r1, _08095BCC\n"
-	"\tands r1, r0\n"
-	"\tstr r1, [r4, 0x8]\n"
-	"\tmovs r7, 0\n"
-	"\tmovs r5, 0x1\n"
-	"\tadds r0, r4, 0x4\n"
-	"\tmov r8, r0\n"
-	"\tmovs r1, 0x12\n"
-	"\tadds r1, r4\n"
-	"\tmov r9, r1\n"
-	"\tmov r6, sp\n"
-"_08095B8A:\n"
-	"\tlsls r0, r5, 16\n"
-	"\tasrs r0, 16\n"
-	"\tbl sub_803C110\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _08095B9E\n"
-	"\tstrh r5, [r6]\n"
-	"\tadds r6, 0x2\n"
-	"\tadds r7, 0x1\n"
-"_08095B9E:\n"
-	"\tadds r5, 0x1\n"
-	"\tldr r0, _08095BD0\n"
-	"\tcmp r5, r0\n"
-	"\tble _08095B8A\n"
-	"\tcmp r7, 0\n"
-	"\tbeq _08095BD4\n"
-	"\tadds r0, r7, 0\n"
-	"\tbl RandInt\n"
-	"\tlsls r0, 1\n"
-	"\tadd r0, sp\n"
-	"\tldrh r0, [r0]\n"
-	"\tstrh r0, [r4, 0xC]\n"
-	"\tadds r0, r7, 0\n"
-	"\tbl RandInt\n"
-	"\tlsls r0, 1\n"
-	"\tadd r0, sp\n"
-	"\tldrh r0, [r0]\n"
-	"\tb _08095BDC\n"
-	"\t.align 2, 0\n"
-"_08095BC8: .4byte gUnknown_8109984\n"
-"_08095BCC: .4byte 0x00ffffff\n"
-"_08095BD0: .4byte 0x000001a7\n"
-"_08095BD4:\n"
-	"\tmovs r0, 0x10\n"
-	"\tstrh r0, [r4, 0xC]\n"
-	"\tmovs r0, 0x91\n"
-	"\tlsls r0, 1\n"
-"_08095BDC:\n"
-	"\tstrh r0, [r4, 0xE]\n"
-	"\tldrb r0, [r4, 0x1]\n"
-	"\tsubs r0, 0x1\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tcmp r0, 0x1\n"
-	"\tbls _08095BEE\n"
-	"\tldrh r0, [r4, 0xC]\n"
-	"\tstrh r0, [r4, 0xE]\n"
-"_08095BEE:\n"
-	"\tldrb r0, [r4, 0x4]\n"
-	"\tbl sub_8095F28\n"
-	"\tstrb r0, [r4, 0x10]\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbne _08095C10\n"
-	"\tstrb r0, [r4, 0x1]\n"
-	"\tldrh r0, [r4, 0xC]\n"
-	"\tstrh r0, [r4, 0xE]\n"
-	"\tadds r2, r4, 0\n"
-	"\tadds r2, 0x10\n"
-	"\tmov r0, r8\n"
-	"\tmovs r1, 0\n"
-	"\tbl sub_803C37C\n"
-"_08095C10:\n"
-	"\tldrb r0, [r4, 0x4]\n"
-	"\tbl GetMaxItemsAllowed\n"
-	"\tadds r1, r0, 0\n"
-	"\tcmp r1, 0\n"
-	"\tbne _08095C28\n"
-	"\tldrb r0, [r4, 0x1]\n"
-	"\tcmp r0, 0x4\n"
-	"\tbne _08095C28\n"
-	"\tstrb r1, [r4, 0x1]\n"
-	"\tldrh r0, [r4, 0xC]\n"
-	"\tstrh r0, [r4, 0xE]\n"
-"_08095C28:\n"
-	"\tldrb r1, [r4, 0x1]\n"
-	"\tmov r0, r8\n"
-	"\tmov r2, r9\n"
-	"\tbl sub_803C37C\n"
-	"\tldrb r0, [r4, 0x10]\n"
-	"\tldrb r1, [r4, 0x12]\n"
-	"\tcmp r0, r1\n"
-	"\tbeq _08095C28\n"
-	"\tmovs r0, 0\n"
-	"\tstrb r0, [r4, 0x13]\n"
-	"\tldrb r0, [r4, 0x1]\n"
-	"\tcmp r0, 0x2\n"
-	"\tbeq _08095C90\n"
-	"\tcmp r0, 0x2\n"
-	"\tbgt _08095C4E\n"
-	"\tcmp r0, 0x1\n"
-	"\tbeq _08095C6C\n"
-	"\tb _08095CCA\n"
-"_08095C4E:\n"
-	"\tcmp r0, 0x4\n"
-	"\tbgt _08095CCA\n"
-	"\tbl Rand32Bit\n"
-	"\tadds r1, r0, 0\n"
-	"\tmovs r0, 0xE0\n"
-	"\tlsls r0, 3\n"
-	"\tands r1, r0\n"
-	"\tmovs r0, 0xC0\n"
-	"\tlsls r0, 2\n"
-	"\tcmp r1, r0\n"
-	"\tbeq _08095CC4\n"
-	"\tcmp r1, r0\n"
-	"\tbgt _08095CB4\n"
-	"\tb _08095CAA\n"
-"_08095C6C:\n"
-	"\tbl Rand32Bit\n"
-	"\tadds r1, r0, 0\n"
-	"\tmovs r0, 0x70\n"
-	"\tands r1, r0\n"
-	"\tcmp r1, 0x10\n"
-	"\tbeq _08095C80\n"
-	"\tcmp r1, 0x30\n"
-	"\tbeq _08095C88\n"
-	"\tb _08095CCA\n"
-"_08095C80:\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sub_803C3E0\n"
-	"\tb _08095CCA\n"
-"_08095C88:\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sub_803C45C\n"
-	"\tb _08095CCA\n"
-"_08095C90:\n"
-	"\tbl Rand32Bit\n"
-	"\tmovs r1, 0xC0\n"
-	"\tlsls r1, 6\n"
-	"\tands r1, r0\n"
-	"\tmovs r0, 0x80\n"
-	"\tlsls r0, 5\n"
-	"\tcmp r1, r0\n"
-	"\tbne _08095CCA\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sub_803C4F0\n"
-	"\tb _08095CCA\n"
-"_08095CAA:\n"
-	"\tmovs r0, 0x80\n"
-	"\tlsls r0, 1\n"
-	"\tcmp r1, r0\n"
-	"\tbeq _08095CBC\n"
-	"\tb _08095CCA\n"
-"_08095CB4:\n"
-	"\tmovs r0, 0xC0\n"
-	"\tlsls r0, 3\n"
-	"\tcmp r1, r0\n"
-	"\tbne _08095CCA\n"
-"_08095CBC:\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sub_803C580\n"
-	"\tb _08095CCA\n"
-"_08095CC4:\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sub_803C610\n"
-"_08095CCA:\n"
-	"\tmovs r0, 0x1\n"
-"_08095CCC:\n"
-	"\tmovs r3, 0xD4\n"
-	"\tlsls r3, 2\n"
-	"\tadd sp, r3\n"
-	"\tpop {r3,r4}\n"
-	"\tmov r8, r3\n"
-	"\tmov r9, r4\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r1}\n"
-	"\tbx r1"
-    );
-}
-#endif
 
 bool8 GenerateMailJobDungeonInfo(WonderMail *mail)
 {
