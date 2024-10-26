@@ -669,57 +669,57 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
 
                 // They really must've had a soft spot for all these giant switches
                 switch (moveId) {
-                    case 9:
-                    case 18:
-                    case 28:
-                    case 39:
-                    case 126:
-                    case 132:
-                    case 136:
-                    case 145:
-                    case 154:
-                    case 158:
-                    case 161:
-                    case 163:
-                    case 166:
-                    case 167:
-                    case 168:
-                    case 174:
-                    case 175:
-                    case 176:
-                    case 178:
-                    case 179:
-                    case 180:
-                    case 182:
-                    case 189:
-                    case 190:
-                    case 201:
-                    case 208:
-                    case 211:
-                    case 222:
-                    case 240:
-                    case 241:
-                    case 248:
-                    case 250:
-                    case 260:
-                    case 285:
-                    case 290:
-                    case 297:
-                    case 300:
-                    case 306:
-                    case 308:
-                    case 311:
-                    case 312:
-                    case 321:
-                    case 322:
-                    case 323:
-                    case 346:
-                    case 347:
-                    case 350:
-                    case 353:
-                    case 360:
-                    case 362:
-                    case 366:
+                    case MOVE_THRASH:
+                    case MOVE_CUT:
+                    case MOVE_ROCK_THROW:
+                    case MOVE_DOUBLESLAP:
+                    case MOVE_SHADOW_PUNCH:
+                    case MOVE_EXTREMESPEED:
+                    case MOVE_SKY_UPPERCUT:
+                    case MOVE_SWIFT:
+                    case MOVE_TACKLE:
+                    case MOVE_WATERFALL:
+                    case MOVE_SLAM:
+                    case MOVE_BULLET_SEED:
+                    case MOVE_EGG_BOMB:
+                    case MOVE_FAINT_ATTACK:
+                    case MOVE_BARRAGE:
+                    case MOVE_PECK:
+                    case MOVE_ARM_THRUST:
+                    case MOVE_HORN_ATTACK:
+                    case MOVE_WING_ATTACK:
+                    case MOVE_AERIAL_ACE:
+                    case MOVE_ICICLE_SPEAR:
+                    case MOVE_VINE_WHIP:
+                    case MOVE_SHOCK_WAVE:
+                    case MOVE_QUICK_ATTACK:
+                    case MOVE_SPIKE_CANNON:
+                    case MOVE_DRAGON_CLAW:
+                    case MOVE_DRILL_PECK:
+                    case MOVE_DOUBLE_KICK:
+                    case MOVE_HYDRO_PUMP:
+                    case MOVE_HYPER_VOICE:
+                    case MOVE_VICEGRIP:
+                    case MOVE_POUND:
+                    case MOVE_SCRATCH:
+                    case MOVE_BONE_RUSH:
+                    case MOVE_BONEMERANG:
+                    case MOVE_MAGICAL_LEAF:
+                    case MOVE_MACH_PUNCH:
+                    case MOVE_PIN_MISSILE:
+                    case MOVE_WATER_GUN:
+                    case MOVE_FURY_ATTACK:
+                    case MOVE_FURY_SWIPES:
+                    case MOVE_MEGA_KICK:
+                    case MOVE_MEGA_PUNCH:
+                    case MOVE_MEGAHORN:
+                    case MOVE_FURY_CUTTER:
+                    case MOVE_COMET_PUNCH:
+                    case MOVE_ROCK_BLAST:
+                    case MOVE_AEROBLAST:
+                    case MOVE_WIDE_SLASH:
+                    case MOVE_SPIN_SLASH:
+                    case MOVE_BLOOP_SLASH:
                         moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, 0x100, itemId) != 0);
                         break;
                     case MOVE_REGULAR_ATTACK:
@@ -740,50 +740,50 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     case MOVE_FLAME_WHEEL:
                         moveHadEffect = sub_805816C(attacker, currTarget, move, itemId);
                         break;
-                    case 53:
-                    case 157:
-                    case 230:
-                    case 262:
-                    case 292:
+                    case MOVE_FLAMETHROWER:
+                    case MOVE_FIRE_BLAST:
+                    case MOVE_HEAT_WAVE:
+                    case MOVE_EMBER:
+                    case MOVE_FIRE_PUNCH:
                         moveHadEffect = sub_80581D0(attacker, currTarget, move, itemId);
                         break;
-                    case 101:
-                    case 270:
-                    case 344:
-                    case 345:
+                    case MOVE_POWDER_SNOW:
+                    case MOVE_BLIZZARD:
+                    case MOVE_ICE_PUNCH:
+                    case MOVE_ICE_BEAM:
                         moveHadEffect = sub_8058B3C(attacker, currTarget, move, itemId);
                         break;
-                    case 238:
-                    case 239:
-                    case 242:
+                    case MOVE_FRENZY_PLANT:
+                    case MOVE_HYDRO_CANNON:
+                    case MOVE_HYPER_BEAM:
                         moveHadEffect = sub_805A568(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_FOCUS_ENERGY:
                         moveHadEffect = FocusEnergyMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 36:
-                    case 68:
-                    case 81:
-                    case 87:
-                    case 90:
-                    case 251:
+                    case MOVE_AIR_CUTTER:
+                    case MOVE_KARATE_CHOP:
+                    case MOVE_SLASH:
+                    case MOVE_CRABHAMMER:
+                    case MOVE_CROSS_CHOP:
+                    case MOVE_RAZOR_LEAF:
                     case MOVE_LEAF_BLADE:
                         moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, 0x100, itemId) != 0);
                         break;
                     case MOVE_FISSURE:
                         moveHadEffect = sub_80590D4(attacker, currTarget, move, itemId);
                         break;
-                    case 150:
-                    case 247:
+                    case MOVE_SHEER_COLD:
+                    case MOVE_GUILLOTINE:
                         moveHadEffect = sub_80595EC(attacker, currTarget, move, itemId);
                         break;
-                    case 392:
+                    case MOVE_ONE_SHOT:
                         moveHadEffect = sub_805C138(attacker, currTarget, move, itemId);
                         break;
-                    case 69:
-                    case 125:
-                    case 143:
-                    case 291:
+                    case MOVE_CLAMP:
+                    case MOVE_BIND:
+                    case MOVE_SAND_TOMB:
+                    case MOVE_FIRE_SPIN:
                         moveHadEffect = sub_805B17C(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_WHIRLPOOL:
@@ -792,818 +792,818 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     case MOVE_SURF:
                         moveHadEffect = SurfMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 86:
-                    case 89:
+                    case MOVE_SPIDER_WEB:
+                    case MOVE_MEAN_LOOK:
                         moveHadEffect = sub_805889C(attacker, currTarget, move, itemId);
                         break;
-                    case 200:
-                    case 279:
-                    case 280:
+                    case MOVE_POISON_STING:
+                    case MOVE_SLUDGE:
+                    case MOVE_SLUDGE_BOMB:
                         moveHadEffect = sub_8059E0C(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_PSYCHIC:
                         moveHadEffect = sub_8058C98(attacker, currTarget, move, gUnknown_8106A50, itemId);
                         break;
-                    case 332:
+                    case MOVE_ACID:
                         moveHadEffect = sub_8058C98(attacker, currTarget, move, gUnknown_8106A4C, itemId);
                         break;
-                    case 325:
+                    case MOVE_METAL_CLAW:
                         moveHadEffect = sub_805B3FC(attacker, currTarget, move, gUnknown_8106A4C, itemId);
                         break;
-                    case 244:
+                    case MOVE_STEEL_WING:
                         moveHadEffect = sub_805A5E8(attacker, currTarget, move, gUnknown_8106A4C, itemId);
                         break;
-                    case 283:
+                    case MOVE_POISON_TAIL:
                         moveHadEffect = sub_805B074(attacker, currTarget, move, itemId);
                         break;
-                    case 162:
+                    case MOVE_TWISTER:
                         moveHadEffect = sub_8059928(attacker, currTarget, move, itemId);
                         break;
-                    case 71:
-                    case 255:
+                    case MOVE_CONSTRICT:
+                    case MOVE_BUBBLEBEAM:
                         moveHadEffect = sub_8058580(attacker, currTarget, move, itemId);
                         break;
-                    case 82:
-                    case 93:
+                    case MOVE_SILVER_WIND:
+                    case MOVE_ANCIENTPOWER:
                         moveHadEffect = sub_8058930(attacker, currTarget, move, itemId);
                         break;
-                    case 107:
-                    case 114:
-                    case 234:
+                    case MOVE_PSYBEAM:
+                    case MOVE_SIGNAL_BEAM:
+                    case MOVE_CONFUSION:
                         moveHadEffect = sub_8058C00(attacker, currTarget, move, itemId);
                         break;
-                    case 309:
+                    case MOVE_MIST_BALL:
                         moveHadEffect = sub_805B324(attacker, currTarget, move, itemId);
                         break;
-                    case 335:
+                    case MOVE_LUSTER_PURGE:
                         moveHadEffect = sub_805B910(attacker, currTarget, move, itemId);
                         break;
-                    case 275:
+                    case MOVE_CRUSH_CLAW:
                         moveHadEffect = sub_805AE74(attacker, currTarget, move, itemId);
                         break;
-                    case 147:
+                    case MOVE_SMOG:
                         moveHadEffect = sub_8059540(attacker, currTarget, move, itemId);
                         break;
-                    case 149:
+                    case MOVE_SACRED_FIRE:
                         moveHadEffect = sub_80595A0(attacker, currTarget, move, itemId);
                         break;
-                    case 188:
+                    case MOVE_THUNDERSHOCK:
                         moveHadEffect = sub_8059D00(attacker, currTarget, move, itemId);
                         break;
-                    case 120:
-                    case 144:
-                    case 235:
-                    case 342:
+                    case MOVE_LICK:
+                    case MOVE_SPARK:
+                    case MOVE_BODY_SLAM:
+                    case MOVE_DRAGONBREATH:
                         moveHadEffect = sub_8058FBC(attacker, currTarget, move, itemId);
                         break;
-                    case 133:
-                    case 261:
-                    case 289:
+                    case MOVE_EXTRASENSORY:
+                    case MOVE_HYPER_FANG:
+                    case MOVE_BONE_CLUB:
                         moveHadEffect = sub_8059190(attacker, currTarget, move, itemId);
                         break;
-                    case 63:
-                    case 221:
-                    case 271:
-                    case 303:
+                    case MOVE_BITE:
+                    case MOVE_NEEDLE_ARM:
+                    case MOVE_STOMP:
+                    case MOVE_ROLLING_KICK:
                         moveHadEffect = sub_8058430(attacker, currTarget, move, itemId);
                         break;
-                    case 139:
+                    case MOVE_HEADBUTT:
                         moveHadEffect = sub_8059424(attacker, currTarget, move, itemId);
                         break;
-                    case 30:
-                    case 46:
+                    case MOVE_ROCK_SLIDE:
+                    case MOVE_ASTONISH:
                         moveHadEffect = sub_8057C88(attacker, currTarget, move, itemId);
                         break;
-                    case 62:
-                    case 127:
+                    case MOVE_CRUNCH:
+                    case MOVE_SHADOW_BALL:
                         moveHadEffect = sub_80583D8(attacker, currTarget, move, itemId);
                         break;
-                    case 264:
-                    case 310:
+                    case MOVE_DIZZY_PUNCH:
+                    case MOVE_WATER_PULSE:
                         moveHadEffect = sub_805AC90(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_TRI_ATTACK:
                         moveHadEffect = TriAttackMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 103:
+                    case MOVE_METEOR_MASH:
                         moveHadEffect = sub_8058B84(attacker, currTarget, move, itemId);
                         break;
-                    case 276:
+                    case MOVE_BLAZE_KICK:
                         moveHadEffect = sub_805AECC(attacker, currTarget, move, itemId);
                         break;
-                    case 326:
+                    case MOVE_ATTRACT:
                         moveHadEffect = sub_805B454(attacker, currTarget, move, itemId);
                         break;
-                    case 59:
+                    case MOVE_DISABLE:
                         moveHadEffect = sub_80582C4(attacker, currTarget, move, itemId);
                         break;
-                    case 226:
+                    case MOVE_FAKE_OUT:
                         moveHadEffect = sub_805A408(attacker, currTarget, move, itemId);
                         break;
-                    case 152:
+                    case MOVE_SONICBOOM:
                         moveHadEffect = sub_8059714(attacker, currTarget, move, itemId);
                         break;
-                    case 341:
+                    case MOVE_DRAGON_RAGE:
                         moveHadEffect = sub_805B808(attacker, currTarget, move, itemId);
                         break;
-                    case 124:
+                    case MOVE_STUN_SPORE:
                         moveHadEffect = sub_8059050(attacker, currTarget, move, itemId);
                         break;
-                    case 64:
-                    case 65:
+                    case MOVE_THUNDER:
+                    case MOVE_THUNDERPUNCH:
                         moveHadEffect = sub_8058478(attacker, currTarget, move, itemId);
                         break;
-                    case 4:
-                    case 34:
-                    case 79:
-                    case 84:
-                    case 111:
-                    case 231:
+                    case MOVE_LOVELY_KISS:
+                    case MOVE_SING:
+                    case MOVE_SPORE:
+                    case MOVE_GRASSWHISTLE:
+                    case MOVE_HYPNOSIS:
+                    case MOVE_SLEEP_POWDER:
                         moveHadEffect = sub_80576F8(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_YAWN:
                         moveHadEffect = YawnMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 129:
+                    case MOVE_THUNDERBOLT:
                         moveHadEffect = sub_8059080(attacker, currTarget, move, itemId);
                         break;
-                    case 194:
+                    case MOVE_BLOCK:
                         moveHadEffect = sub_8059D98(attacker, currTarget, move, itemId);
                         break;
-                    case 177:
+                    case MOVE_HORN_DRILL:
                         moveHadEffect = sub_8059AF8(attacker, currTarget, move, itemId);
                         break;
-                    case 13:
-                    case 171:
-                    case 191:
-                    case 274:
-                    case 382:
+                    case MOVE_CONFUSE_RAY:
+                    case MOVE_SUPERSONIC:
+                    case MOVE_SWEET_KISS:
+                    case MOVE_TEETER_DANCE:
+                    case MOVE_TOTTER:
                         moveHadEffect = sub_8059AA8(attacker, currTarget, move, itemId);
                         break;
-                    case 196:
-                    case 199:
+                    case MOVE_POISON_GAS:
+                    case MOVE_POISONPOWDER:
                         moveHadEffect = sub_8059DA4(attacker, currTarget, move, itemId);
                         break;
-                    case 192:
+                    case MOVE_THUNDER_WAVE:
                         moveHadEffect = sub_8059D48(attacker, currTarget, move, itemId);
                         break;
-                    case 281:
+                    case MOVE_GLARE:
                         moveHadEffect = sub_805B028(attacker, currTarget, move, itemId);
                         break;
-                    case 193:
+                    case MOVE_ZAP_CANNON:
                         moveHadEffect = sub_8059D58(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SUPERPOWER:
                         moveHadEffect = TickleMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 73:
-                    case 97:
-                    case 299:
+                    case MOVE_ROCK_TOMB:
+                    case MOVE_ICY_WIND:
+                    case MOVE_MUD_SHOT:
                         moveHadEffect = sub_8058638(attacker, currTarget, move, itemId);
                         break;
-                    case 246:
+                    case MOVE_DYNAMICPUNCH:
                         moveHadEffect = sub_805A688(attacker, currTarget, move, itemId);
                         break;
-                    case 33:
+                    case MOVE_FAKE_TEARS:
                         moveHadEffect = sub_8057D7C(attacker, currTarget, move, itemId);
                         break;
-                    case 268:
-                    case 284:
-                    case 368:
+                    case MOVE_WHIRLWIND:
+                    case MOVE_ROAR:
+                    case MOVE_BLOWBACK:
                         moveHadEffect = sub_805B0BC(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_PAIN_SPLIT:
                         moveHadEffect = PainSplitMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 288:
+                    case MOVE_TAIL_GLOW:
                         moveHadEffect = sub_805B164(attacker, currTarget, move, itemId);
                         break;
-                    case 169:
+                    case MOVE_MINIMIZE:
                         moveHadEffect = sub_8059A18(attacker, currTarget, move, itemId);
                         break;
-                    case 343:
+                    case MOVE_DRAGON_DANCE:
                         moveHadEffect = sub_805B884(attacker, currTarget, move, itemId);
                         break;
-                    case 265:
+                    case MOVE_BULK_UP:
                         moveHadEffect = BulkUpMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 55:
-                    case 195:
-                    case 333:
+                    case MOVE_SHARPEN:
+                    case MOVE_HOWL:
+                    case MOVE_MEDITATE:
                         moveHadEffect = sub_80582D4(attacker, currTarget, move, itemId);
                         break;
-                    case 19:
+                    case MOVE_RAGE:
                         moveHadEffect = RageMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 181:
+                    case MOVE_SWORDS_DANCE:
                         moveHadEffect = sub_8059B94(attacker, currTarget, move, itemId);
                         break;
-                    case 319:
+                    case MOVE_CALM_MIND:
                         moveHadEffect = sub_805B3B4(attacker, currTarget, move, itemId);
                         break;
-                    case 148:
+                    case MOVE_GROWTH:
                         moveHadEffect = sub_8059588(attacker, currTarget, move, itemId);
                         break;
-                    case 215:
+                    case MOVE_AMNESIA:
                         moveHadEffect = sub_805A2B0(attacker, currTarget, move, itemId);
                         break;
-                    case 302:
+                    case MOVE_DEFENSE_CURL:
                         moveHadEffect = sub_805B2FC(attacker, currTarget, move, itemId);
                         break;
-                    case 186:
-                    case 202:
-                    case 258:
+                    case MOVE_IRON_DEFENSE:
+                    case MOVE_ACID_ARMOR:
+                    case MOVE_BARRIER:
                         moveHadEffect = sub_8059CD8(attacker, currTarget, move, itemId);
                         break;
-                    case 99:
+                    case MOVE_COSMIC_POWER:
                         moveHadEffect = sub_8058A7C(attacker, currTarget, move, itemId);
                         break;
-                    case 159:
+                    case MOVE_MUDDY_WATER:
                         moveHadEffect = sub_80598CC(attacker, currTarget, move, itemId);
                         break;
-                    case 44:
+                    case MOVE_OCTAZOOKA:
                         moveHadEffect = sub_8057F7C(attacker, currTarget, move, itemId);
                         break;
-                    case 42:
+                    case MOVE_AURORA_BEAM:
                         moveHadEffect = sub_8057ED0(attacker, currTarget, move, itemId);
                         break;
-                    case 110:
+                    case MOVE_PSYCHO_BOOST:
                         moveHadEffect = sub_8058CEC(attacker, currTarget, move, itemId);
                         break;
-                    case 106:
-                    case 351:
+                    case MOVE_SCARY_FACE:
+                    case MOVE_COTTON_SPORE:
                         moveHadEffect = sub_8058BF0(attacker, currTarget, move, itemId);
                         break;
-                    case 217:
+                    case MOVE_GROWL:
                         moveHadEffect = sub_805A2C8(attacker, currTarget, move, itemId);
                         break;
-                    case 267:
+                    case MOVE_FEATHERDANCE:
                         moveHadEffect = sub_805AD34(attacker, currTarget, move, itemId);
                         break;
-                    case 27:
+                    case MOVE_SCREECH:
                         moveHadEffect = sub_8057C68(attacker, currTarget, move, itemId);
                         break;
-                    case 170:
-                    case 216:
+                    case MOVE_SEISMIC_TOSS:
+                    case MOVE_NIGHT_SHADE:
                         moveHadEffect = sub_8059A2C(attacker, currTarget, move, itemId);
                         break;
-                    case 76:
-                    case 80:
-                    case 320:
+                    case MOVE_GIGA_DRAIN:
+                    case MOVE_LEECH_LIFE:
+                    case MOVE_MEGA_DRAIN:
                         moveHadEffect = sub_80586DC(attacker, currTarget, move, itemId);
                         break;
-                    case 140:
+                    case MOVE_DOUBLE_EDGE:
                         moveHadEffect = sub_805946C(attacker, currTarget, move, itemId);
                         break;
-                    case 116:
-                    case 203:
-                    case 354:
+                    case MOVE_SUBMISSION:
+                    case MOVE_TAKE_DOWN:
+                    case MOVE_VOLT_TACKLE:
                         moveHadEffect = sub_8058E5C(attacker, currTarget, move, itemId);
                         break;
-                    case 135:
+                    case MOVE_ABSORB:
                         moveHadEffect = sub_80591E4(attacker, currTarget, move, itemId);
                         break;
-                    case 24:
+                    case MOVE_SWAGGER:
                         moveHadEffect = sub_8057BC4(attacker, currTarget, move, itemId);
                         break;
-                    case 210:
+                    case MOVE_TRIPLE_KICK:
                         moveHadEffect = sub_805A210(attacker, currTarget, move, itemId);
                         break;
-                    case 164:
+                    case MOVE_TWINEEDLE:
                         moveHadEffect = sub_8059988(attacker, currTarget, move, itemId);
                         break;
-                    case 151:
+                    case MOVE_SOLARBEAM:
                         moveHadEffect = SolarBeamMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 100:
+                    case MOVE_SKY_ATTACK:
                         moveHadEffect = SkyAttackMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 371:
+                    case MOVE_SLOW_DOWN:
                         moveHadEffect = sub_805BE90(attacker, currTarget, move, itemId);
                         break;
-                    case 91:
-                    case 253:
+                    case MOVE_OUTRAGE:
+                    case MOVE_PETAL_DANCE:
                         moveHadEffect = sub_80588B8(attacker, currTarget, move, itemId);
                         break;
-                    case 294:
+                    case MOVE_WRAP:
                         moveHadEffect = WrapMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 112:
+                    case MOVE_UPROAR:
                         moveHadEffect = sub_8058D38(attacker, currTarget, move, itemId);
                         break;
-                    case 198:
+                    case MOVE_POISON_FANG:
                         moveHadEffect = sub_8059DC4(attacker, currTarget, move, itemId);
                         break;
-                    case 277:
+                    case MOVE_PRESENT:
                         moveHadEffect = PresentMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 338:
+                    case MOVE_REFLECT:
                         moveHadEffect = ReflectMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 141:
+                    case MOVE_SANDSTORM:
                         moveHadEffect = SandstormMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 134:
+                    case MOVE_SAFEGUARD:
                         moveHadEffect = SafeguardMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 130:
+                    case MOVE_MIST:
                         moveHadEffect = MistMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 259:
+                    case MOVE_LIGHT_SCREEN:
                         moveHadEffect = LightScreenMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 2:
-                    case 105:
+                    case MOVE_ICE_BALL:
+                    case MOVE_ROLLOUT:
                         moveHadEffect = sub_805768C(attacker, currTarget, move, itemId);
                         break;
-                    case 43:
+                    case MOVE_MEMENTO:
                         moveHadEffect = sub_8057F24(attacker, currTarget, move, itemId);
                         break;
-                    case 165:
-                    case 318:
+                    case MOVE_SOFTBOILED:
+                    case MOVE_MILK_DRINK:
                         moveHadEffect = sub_80599EC(attacker, currTarget, move, itemId);
                         break;
-                    case 94:
+                    case MOVE_SYNTHESIS:
                         moveHadEffect = sub_80589D4(attacker, currTarget, move, itemId);
                         break;
-                    case 173:
+                    case MOVE_MOONLIGHT:
                         moveHadEffect = sub_8059AC4(attacker, currTarget, move, itemId);
                         break;
-                    case 232:
+                    case MOVE_REST:
                         moveHadEffect = sub_805A4D4(attacker, currTarget, move, itemId);
                         break;
-                    case 117:
-                    case 218:
+                    case MOVE_RECOVER:
+                    case MOVE_SLACK_OFF:
                         moveHadEffect = sub_8058EE0(attacker, currTarget, move, itemId);
                         break;
-                    case 386:
+                    case MOVE_SCAN:
                         moveHadEffect = ScannerOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 209:
+                    case MOVE_TRICK:
                         moveHadEffect = sub_805A120(attacker, currTarget, move, itemId);
                         break;
-                    case 364:
+                    case MOVE_TAKEAWAY:
                         moveHadEffect = sub_805BA50(attacker, currTarget, move, itemId);
                         break;
-                    case 214:
-                    case 287:
+                    case MOVE_THIEF:
+                    case MOVE_COVET:
                         moveHadEffect = sub_805A2A0(attacker, currTarget, move, itemId);
                         break;
-                    case 95:
-                    case 372:
+                    case MOVE_AGILITY:
+                    case MOVE_SPEED_BOOST:
                         moveHadEffect = sub_8058A08(attacker, currTarget, move, itemId);
                         break;
-                    case 38:
-                    case 51:
+                    case MOVE_PURSUIT:
+                    case MOVE_COUNTER:
                         moveHadEffect = CounterMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 61:
-                    case 340:
+                    case MOVE_BIDE:
+                    case MOVE_REVENGE:
                         moveHadEffect = BideMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 357:
+                    case MOVE_BIDE_2:
                         moveHadEffect = sub_805836C(attacker, currTarget, move, itemId);
                         break;
-                    case 401:
+                    case MOVE_TRAPPER:
                         moveHadEffect = TrapperOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 227:
+                    case MOVE_SLEEP_TALK:
                         moveHadEffect = sub_805A450(attacker, currTarget, move, itemId);
                         break;
-                    case 237:
+                    case MOVE_CURSE:
                         moveHadEffect = CurseMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 206:
+                    case MOVE_HI_JUMP_KICK:
                         moveHadEffect = sub_8059FC8(attacker, currTarget, move, itemId, 0);
                         break;
-                    case 272:
+                    case MOVE_BLAST_BURN:
                         moveHadEffect = sub_805AE3C(attacker, currTarget, move, itemId);
                         break;
-                    case 324:
+                    case MOVE_HIDDEN_POWER:
                         moveHadEffect = sub_805B3E0(attacker, currTarget, move, itemId);
                         break;
-                    case 60:
+                    case MOVE_RAZOR_WIND:
                         moveHadEffect = RazorWindMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 75:
+                    case MOVE_FOCUS_PUNCH:
                         moveHadEffect = FocusPunchMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 298:
+                    case MOVE_MAGIC_COAT:
                         moveHadEffect = MagicCoatMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 5:
+                    case MOVE_NIGHTMARE:
                         moveHadEffect = NightmareMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 6:
+                    case MOVE_MORNING_SUN:
                         moveHadEffect = sub_8057748(attacker, currTarget, move, itemId);
                         break;
-                    case 394:
+                    case MOVE_VACUUM_CUT:
                         moveHadEffect = sub_805C1BC(attacker, currTarget, move, itemId);
                         break;
-                    case 212:
-                    case 307:
+                    case MOVE_MUD_SPORT:
+                    case MOVE_WATER_SPORT:
                         moveHadEffect = MudWaterSportMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 1:
+                    case MOVE_IRON_TAIL:
                         moveHadEffect = sub_8057634(attacker, currTarget, move, itemId);
                         break;
-                    case 122:
-                    case 224:
+                    case MOVE_TAIL_WHIP:
+                    case MOVE_LEER:
                         moveHadEffect = sub_805A3DC(attacker, currTarget, move, itemId);
                         break;
-                    case 47:
+                    case MOVE_WILL_O_WISP:
                         moveHadEffect = sub_8057FF4(attacker, currTarget, move, itemId);
                         break;
-                    case 233:
+                    case MOVE_INGRAIN:
                         moveHadEffect = sub_805A4FC(attacker, currTarget, move, itemId);
                         break;
-                    case 108:
+                    case MOVE_PSYWAVE:
                         moveHadEffect = sub_8058C48(attacker, currTarget, move, itemId);
                         break;
-                    case 329:
+                    case MOVE_LEECH_SEED:
                         moveHadEffect = LeechSeedMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 295:
+                    case MOVE_SPIKES:
                         moveHadEffect = SpikesMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 15:
-                    case 26:
-                    case 339:
+                    case MOVE_AROMATHERAPY:
+                    case MOVE_HEAL_BELL:
+                    case MOVE_REFRESH:
                         moveHadEffect = sub_80578EC(attacker, currTarget, move, itemId);
                         break;
-                    case 88:
+                    case MOVE_HAZE:
                         moveHadEffect = sub_80588A8(attacker, currTarget, move, itemId);
                         break;
-                    case 387:
+                    case MOVE_POWER_EARS:
                         moveHadEffect = RadarOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 381:
+                    case MOVE_SIESTA:
                         moveHadEffect = sub_805BC70(attacker, currTarget, move, itemId);
                         break;
-                    case 78:
+                    case MOVE_SMELLINGSALT:
                         moveHadEffect = sub_80587E8(attacker, currTarget, move, itemId);
                         break;
-                    case 296:
+                    case MOVE_MAGNITUDE:
                         moveHadEffect = sub_805B264(attacker, currTarget, move, itemId);
                         break;
-                    case 348:
+                    case MOVE_SKULL_BASH:
                         moveHadEffect = SkullBashMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 225:
+                    case MOVE_WISH:
                         moveHadEffect = WishMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 45:
+                    case MOVE_FLATTER:
                         moveHadEffect = sub_8057FCC(attacker, currTarget, move, itemId);
                         break;
-                    case 213:
+                    case MOVE_MUD_SLAP:
                         moveHadEffect = sub_805A258(attacker, currTarget, move, itemId);
                         break;
-                    case 142:
-                    case 146:
-                    case 273:
+                    case MOVE_SAND_ATTACK:
+                    case MOVE_KINESIS:
+                    case MOVE_FLASH:
                         moveHadEffect = sub_8059528(attacker, currTarget, move, itemId);
                         break;
-                    case 41:
+                    case MOVE_OVERHEAT:
                         moveHadEffect = sub_8057E6C(attacker, currTarget, move, itemId);
                         break;
-                    case 197:
+                    case MOVE_TOXIC:
                         moveHadEffect = sub_8059DB4(attacker, currTarget, move, itemId);
                         break;
-                    case 83:
+                    case MOVE_METAL_SOUND:
                         moveHadEffect = sub_8058838(attacker, currTarget, move, itemId);
                         break;
-                    case 22:
+                    case MOVE_TORMENT:
                         moveHadEffect = TormentMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 20:
+                    case MOVE_SUPER_FANG:
                         moveHadEffect = sub_8057974(attacker, currTarget, move, itemId);
                         break;
-                    case 314:
+                    case MOVE_FALSE_SWIPE:
                         moveHadEffect = sub_805B388(attacker, currTarget, move, itemId);
                         break;
-                    case 383:
+                    case MOVE_TWO_EDGE:
                         moveHadEffect = sub_805BC98(attacker, currTarget, move, itemId);
                         break;
-                    case 66:
+                    case MOVE_ENDEAVOR:
                         moveHadEffect = sub_80584C0(attacker, currTarget, move, itemId);
                         break;
-                    case 252:
-                    case 367:
+                    case MOVE_BATON_PASS:
+                    case MOVE_SWITCHER:
                         moveHadEffect = sub_805BB74(attacker, currTarget, move, itemId);
                         break;
-                    case 331:
+                    case MOVE_DREAM_EATER:
                         moveHadEffect = sub_805B668(attacker, currTarget, move, itemId);
                         break;
-                    case 373:
+                    case MOVE_SEARCHLIGHT:
                         moveHadEffect = LuminousOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 400:
+                    case MOVE_FILL_IN:
                         moveHadEffect = FillInOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 187:
-                    case 369:
+                    case MOVE_TELEPORT:
+                    case MOVE_WARP:
                         moveHadEffect = sub_8059CF0(attacker, currTarget, move, itemId);
                         break;
-                    case 388:
+                    case MOVE_DROUGHT:
                         moveHadEffect = sub_805BF34(attacker, currTarget, move, itemId);
                         break;
-                    case 409:
+                    case MOVE_SEE_STAIRS:
                         moveHadEffect = StairsOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 72:
+                    case MOVE_BRICK_BREAK:
                         moveHadEffect = BrickBreakMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 58:
-                    case 70:
+                    case MOVE_HARDEN:
+                    case MOVE_WITHDRAW:
                         moveHadEffect = sub_80582AC(attacker, currTarget, move, itemId);
                         break;
-                    case 98:
-                    case 349:
+                    case MOVE_MIND_READER:
+                    case MOVE_LOCK_ON:
                         moveHadEffect = sub_8058A54(attacker, currTarget, move, itemId);
                         break;
-                    case 7:
+                    case MOVE_VITAL_THROW:
                         moveHadEffect = VitalThrowMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 153:
+                    case MOVE_FLY:
                         moveHadEffect = FlyMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 205:
+                    case MOVE_BOUNCE:
                         moveHadEffect = sub_8059F38(attacker, currTarget, move, itemId);
                         break;
-                    case 156:
+                    case MOVE_DIVE:
                         moveHadEffect = DiveMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 8:
+                    case MOVE_DIG:
                         moveHadEffect = DigMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 10:
+                    case MOVE_SWEET_SCENT:
                         moveHadEffect = sub_8057824(attacker, currTarget, move, itemId);
                         break;
-                    case 56:
+                    case MOVE_DOUBLE_TEAM:
                         moveHadEffect = sub_805825C(attacker, currTarget, move, itemId);
                         break;
-                    case 249:
+                    case MOVE_KNOCK_OFF:
                         moveHadEffect = KnockOffMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 389:
+                    case MOVE_TRAP_BUSTER:
                         moveHadEffect = TrapbustOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 410:
+                    case MOVE_LONG_TOSS:
                         moveHadEffect = LongtossOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 412:
+                    case MOVE_PIERCE:
                         moveHadEffect = PierceOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 49:
+                    case MOVE_GRUDGE:
                         moveHadEffect = GrudgeMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 374:
+                    case MOVE_PETRIFY:
                         moveHadEffect = PetrifyOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 229:
+                    case MOVE_ASSIST:
                         moveHadEffect = sub_805A4C0(attacker, currTarget, move, itemId);
                         break;
-                    case 256:
-                    case 317:
+                    case MOVE_DOOM_DESIRE:
+                    case MOVE_FUTURE_SIGHT:
                         moveHadEffect = sub_805AAD0(attacker, currTarget, move, itemId);
                         break;
-                    case 396:
+                    case MOVE_SHOCKER:
                         moveHadEffect = ShockerOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 102:
-                    case 304:
-                    case 380:
+                    case MOVE_FOLLOW_ME:
+                    case MOVE_SUBSTITUTE:
+                    case MOVE_DECOY_MAKER:
                         moveHadEffect = sub_805B314(attacker, currTarget, move, itemId);
                         break;
-                    case 204:
+                    case MOVE_JUMP_KICK:
                         moveHadEffect = sub_8059E54(attacker, currTarget, move, itemId, 0);
                         break;
-                    case 301:
-                    case 305:
+                    case MOVE_PROTECT:
+                    case MOVE_DETECT:
                         moveHadEffect = ProtectMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 172:
+                    case MOVE_TAUNT:
                         moveHadEffect = sub_8059AB8(attacker, currTarget, move, itemId);
                         break;
-                    case 85:
+                    case MOVE_TICKLE:
                         moveHadEffect = sub_8058858(attacker, currTarget, move, itemId);
                         break;
-                    case 77:
-                    case 121:
+                    case MOVE_REVERSAL:
+                    case MOVE_FLAIL:
                         moveHadEffect = sub_8058770(attacker, currTarget, move, itemId);
                         break;
-                    case 123:
+                    case MOVE_SELFDESTRUCT:
                         moveHadEffect = sub_8059004(attacker, currTarget, move, itemId);
                         break;
-                    case 155:
+                    case MOVE_EXPLOSION:
                         moveHadEffect = sub_80597F0(attacker, currTarget, move, itemId);
                         break;
-                    case 128:
+                    case MOVE_CHARGE:
                         moveHadEffect = ChargeMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 67:
+                    case MOVE_FACADE:
                         moveHadEffect = sub_8058548(attacker, currTarget, move, itemId);
                         break;
-                    case 92:
+                    case MOVE_LOW_KICK:
                         moveHadEffect = sub_80588F4(attacker, currTarget, move, itemId);
                         break;
-                    case 113:
+                    case MOVE_WATER_SPOUT:
                         moveHadEffect = sub_8058D44(attacker, currTarget, move, itemId);
                         break;
-                    case 278:
+                    case MOVE_ERUPTION:
                         moveHadEffect = sub_805AFA4(attacker, currTarget, move, itemId);
                         break;
-                    case 37:
+                    case MOVE_SMOKESCREEN:
                         moveHadEffect = SmokescreenMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 363:
+                    case MOVE_SEE_TRAP:
                         moveHadEffect = sub_805BA44(attacker, currTarget, move, itemId);
                         break;
-                    case 160:
+                    case MOVE_STOCKPILE:
                         moveHadEffect = StockpileMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 245:
+                    case MOVE_SPIT_UP:
                         moveHadEffect = SpitUpMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 236:
+                    case MOVE_SWALLOW:
                         moveHadEffect = SwallowMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 12:
+                    case MOVE_RAIN_DANCE:
                         moveHadEffect = RainDanceMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 35:
+                    case MOVE_SPITE:
                         moveHadEffect = sub_8057D9C(attacker, currTarget, move, itemId);
                         break;
-                    case 391:
+                    case MOVE_INVISIFY:
                         moveHadEffect = InvisifyOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 316:
+                    case MOVE_MIRROR_COAT:
                         moveHadEffect = MirrorCoatMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 293:
+                    case MOVE_PERISH_SONG:
                         moveHadEffect = PerishSongMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 96:
+                    case MOVE_RAPID_SPIN:
                         moveHadEffect = sub_8058A18(attacker, currTarget, move, itemId);
                         break;
-                    case 313:
+                    case MOVE_DESTINY_BOND:
                         moveHadEffect = DestinyBondMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 17:
+                    case MOVE_ENCORE:
                         moveHadEffect = EncoreMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_WEATHER_BALL:
                         moveHadEffect = sub_8057CD0(attacker, currTarget, move, itemId);
                         break;
-                    case 223:
+                    case MOVE_SUNNY_DAY:
                         moveHadEffect = SunnyDayMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 228:
+                    case MOVE_PAY_DAY:
                         moveHadEffect = sub_805A464(attacker, currTarget, move, itemId);
                         break;
-                    case 399:
+                    case MOVE_ONE_ROOM:
                         moveHadEffect = sub_805C2A0(attacker, currTarget, move, itemId);
                         break;
-                    case 104:
+                    case MOVE_ENDURE:
                         moveHadEffect = EndureMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 185:
+                    case MOVE_HELPING_HAND:
                         moveHadEffect = HelpingHandMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 257:
+                    case MOVE_BELLY_DRUM:
                         moveHadEffect = BellyDrumMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 398:
+                    case MOVE_FAMISH:
                         moveHadEffect = sub_805C288(attacker, currTarget, move, itemId);
                         break;
-                    case 11:
+                    case MOVE_CHARM:
                         moveHadEffect = sub_805783C(attacker, currTarget, move, itemId);
                         break;
-                    case 16:
+                    case MOVE_BUBBLE:
                         moveHadEffect = sub_80578FC(attacker, currTarget, move, itemId);
                         break;
-                    case 23:
+                    case MOVE_STRING_SHOT:
                         moveHadEffect = sub_8057BB4(attacker, currTarget, move, itemId);
                         break;
-                    case 29:
-                    case 361:
+                    case MOVE_ROCK_SMASH:
+                    case MOVE_EXCAVATE:
                         moveHadEffect = RockSmashMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 282:
+                    case MOVE_TRANSFORM:
                         moveHadEffect = TransformMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 14:
+                    case MOVE_HAIL:
                         moveHadEffect = HailMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 407:
+                    case MOVE_MOBILE:
                         moveHadEffect = MobileOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 54:
-                    case 315:
+                    case MOVE_ODOR_SLEUTH:
+                    case MOVE_FORESIGHT:
                         moveHadEffect = sub_8058234(attacker, currTarget, move, itemId);
                         break;
-                    case 254:
+                    case MOVE_SPLASH:
                         moveHadEffect = sub_805A85C(attacker, currTarget, move, itemId);
                         break;
-                    case 370:
+                    case MOVE_TRANSFER:
                         moveHadEffect = TransferOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 375:
+                    case MOVE_STAY_AWAY:
                         moveHadEffect = sub_805BB98(attacker, currTarget, move, itemId);
                         break;
-                    case 269:
+                    case MOVE_BEAT_UP:
                         moveHadEffect = sub_805AD54(attacker, currTarget, move, itemId);
                         break;
-                    case 365:
+                    case MOVE_REBOUND:
                         moveHadEffect = ReboundOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 266:
-                    case 379:
+                    case MOVE_IMPRISON:
+                    case MOVE_OBSERVER:
                         moveHadEffect = sub_805AD04(attacker, currTarget, move, itemId);
                         break;
-                    case 390:
+                    case MOVE_WILD_CALL:
                         moveHadEffect = sub_805C080(attacker, currTarget, move, itemId);
                         break;
-                    case 395:
+                    case MOVE_REVIVER:
                         moveHadEffect = sub_805C1E4(attacker, currTarget, move, itemId);
                         break;
-                    case 385:
+                    case MOVE_ESCAPE:
                         moveHadEffect = EscapeOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 263:
+                    case MOVE_SECRET_POWER:
                         moveHadEffect = SecretPowerMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 119:
+                    case MOVE_NATURE_POWER:
                         moveHadEffect = NaturePowerMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 403:
+                    case MOVE_ITEMIZE:
                         moveHadEffect = sub_805C3F8(attacker, currTarget, move, itemId);
                         break;
-                    case 138:
+                    case MOVE_SKETCH:
                         moveHadEffect = SketchMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 40:
+                    case MOVE_MIRROR_MOVE:
                         moveHadEffect = sub_8057E50(attacker, currTarget, move, itemId);
                         break;
-                    case 220:
+                    case MOVE_ROLE_PLAY:
                         moveHadEffect = RolePlayMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 137:
+                    case MOVE_SKILL_SWAP:
                         moveHadEffect = SkillSwapMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 183:
+                    case MOVE_CONVERSION:
                         moveHadEffect = ConversionMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 378:
+                    case MOVE_CLEANSE:
                         moveHadEffect = CleanseOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 48:
+                    case MOVE_RETURN:
                         moveHadEffect = sub_805805C(attacker, currTarget, move, itemId);
                         break;
-                    case 334:
+                    case MOVE_SNATCH:
                         moveHadEffect = SnatchMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 286:
+                    case MOVE_CAMOUFLAGE:
                         moveHadEffect = HandleColorChange(attacker, currTarget, move, itemId);
                         break;
-                    case 328:
+                    case MOVE_FRUSTRATION:
                         moveHadEffect = sub_805B53C(attacker, currTarget, move, itemId);
                         break;
-                    case 115:
+                    case MOVE_PSYCH_UP:
                         moveHadEffect = PsychUpMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 25:
+                    case MOVE_SNORE:
                         moveHadEffect = SnoreMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 337:
+                    case MOVE_RECYCLE:
                         moveHadEffect = RecycleMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 384:
+                    case MOVE_NO_MOVE:
                         moveHadEffect = SilenceOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 330:
+                    case MOVE_METRONOME:
                         moveHadEffect = sub_805B618(attacker, currTarget, move, itemId);
                         break;
-                    case 393:
+                    case MOVE_HP_GAUGE:
                         moveHadEffect = IdentifyOrbAction(attacker, currTarget, move, itemId);
                         break;
-                    case 184:
+                    case MOVE_CONVERSION_2:
                         moveHadEffect = Conversion2MoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 376:
+                    case MOVE_POUNCE:
                         moveHadEffect = sub_805BEB8(attacker, currTarget, move, itemId);
                         break;
-                    case 377:
+                    case MOVE_TRAWL:
                         moveHadEffect = sub_805BEC8(attacker, currTarget, move, itemId);
                         break;
-                    case 327:
+                    case MOVE_MIMIC:
                         moveHadEffect = MimicMoveAction(attacker, currTarget, move, itemId);
                         break;
-                    case 50:
-                    case 406:
+                    case MOVE_STRENGTH:
+                    case MOVE_HURL:
                         moveHadEffect = sub_805C45C(attacker, currTarget, move, itemId);
                         break;
-                    case 397:
+                    case MOVE_ECHO:
                         moveHadEffect = sub_805C208(attacker, currTarget, move, itemId);
                         break;
                     default:
