@@ -110,7 +110,7 @@ bool8 sub_8030F58(u32 wonderMailType)
   gUnknown_203B328->wonderMailType = wonderMailType;
   file = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
   gUnknown_203B328->monPortrait.faceFile = file;
-  gUnknown_203B328->monPortrait.faceData = file->data;
+  gUnknown_203B328->monPortrait.faceData = (void *) file->data;
   gUnknown_203B328->monPortrait.spriteId = 0;
   gUnknown_203B328->monPortrait.flip = FALSE;
   gUnknown_203B328->monPortrait.unkE = 0;

@@ -66,7 +66,7 @@ bool8 CreateHelperPelipperMenu(s16 speciesID)
         sPostOfficeHelper->monPortrait.pos.y = 8;
 
         if (sPostOfficeHelper->monPortrait.faceFile != NULL)
-            sPostOfficeHelper->monPortrait.faceData = sPostOfficeHelper->monPortrait.faceFile->data;
+            sPostOfficeHelper->monPortrait.faceData = (void *) sPostOfficeHelper->monPortrait.faceFile->data;
     }
 
     sPostOfficeHelper->currMenuChoice = 0;

@@ -204,7 +204,7 @@ u32 sub_8027F88(void)
   strcpy(gAvailablePokemonNames, monName);
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
   sUnknown_203B2C0->monPortrait.faceFile = faceFile;
-  sUnknown_203B2C0->monPortrait.faceData = faceFile->data;
+  sUnknown_203B2C0->monPortrait.faceData = (void *) faceFile->data;
   sUnknown_203B2C0->monPortrait.spriteId = 0;
   sUnknown_203B2C0->monPortrait.flip = FALSE;
   sUnknown_203B2C0->monPortrait.unkE = 0;

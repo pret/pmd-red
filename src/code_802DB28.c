@@ -54,7 +54,7 @@ bool8 sub_802DB28(u8 jobSlotIndex, u8 dungeon)
     sUnknown_203B2FC->monPortrait.pos.y = 8;
 
     if (sUnknown_203B2FC->monPortrait.faceFile != NULL)
-        sUnknown_203B2FC->monPortrait.faceData = sUnknown_203B2FC->monPortrait.faceFile->data;
+        sUnknown_203B2FC->monPortrait.faceData = (void *) sUnknown_203B2FC->monPortrait.faceFile->data;
 
     sub_802DC28(0);
     return TRUE;

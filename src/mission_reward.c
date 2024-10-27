@@ -143,7 +143,7 @@ u32 sub_802F204(unkStruct_802F204 *r0, bool8 displayClientSprite)
 
     if(gUnknown_203B310->monPortrait.faceFile != NULL)
     {
-        gUnknown_203B310->monPortrait.faceData = gUnknown_203B310->monPortrait.faceFile->data;
+        gUnknown_203B310->monPortrait.faceData = (void *) gUnknown_203B310->monPortrait.faceFile->data;
     }
 
     SetRewardSceneState(PREP_MONEY_REWARD);
