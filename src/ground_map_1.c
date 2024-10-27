@@ -1,5 +1,6 @@
 #include "global.h"
 #include "debug.h"
+#include "event_flag.h"
 #include "ground_main.h"
 #include "ground_map_1.h"
 #include "ground_script.h"
@@ -93,4 +94,28 @@ bool8 sub_80A4D48(s16 index)
     if (gGroundConversion_811BAF4[index].unk0 == 5) return FALSE;
     if (gGroundConversion_811BAF4[index].unk0 != 8) return TRUE;
     return FALSE;
+}
+
+s32 GetAdjustedGroundMap(s16 param_1)
+{
+    s32 iVar5;
+
+    iVar5 = param_1;
+
+    switch(iVar5)
+    {
+        case 9:
+        case 0xC:
+            iVar5 = (s16)(iVar5 + ((GetScriptVarValue(NULL, BASE_KIND) * 6) + GetScriptVarValue(NULL, BASE_LEVEL)));
+            break;
+        case 2:
+            if (sub_80023E4(6)) {
+                iVar5 = 3;
+            }
+            break;
+        default:
+            break;
+    }
+
+    return iVar5;
 }

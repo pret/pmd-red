@@ -166,8 +166,6 @@ SECTIONS {
         src/wonder_mail_3_mid.o(.text);
         src/mission_reward.o(.text);
         src/code_8072F3C.o(.text);
-        asm/wonder_mail_3_mid.o(.text);
-        src/wonder_mail_3_1.o(.text);
         src/makuhita_dojo1.o(.text);
         src/makuhita_dojo2.o(.text);
         src/wonder_mail_4.o(.text);
@@ -302,9 +300,7 @@ SECTIONS {
         src/code_8085E98.o(.text);
         src/code_80861A8.o(.text);
         src/code_80869E4.o(.text);
-        src/code_8086A3C.o(.text);
-        asm/code_8086A3C.o(.text);
-        src/code_8057824_1.o(.text);
+        src/dungeon_cutscenes.o(.text);
         src/pokemon.o(.text);
         asm/pokemon.o(.text);
         src/pokemon_mid.o(.text);

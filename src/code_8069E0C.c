@@ -14,6 +14,7 @@
 #include "dungeon_util.h"
 #include "game_options.h"
 #include "move_effects_target.h"
+#include "moves.h"
 #include "pokemon.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
@@ -294,3 +295,42 @@ void sub_806A2BC(Entity *pokemon, u8 param_2)
 
 void nullsub_95(void)
 {}
+
+void sub_806A338(void)
+{
+    Entity *entity;
+    s32 index;
+
+    for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
+    {
+        entity = gDungeon->allPokemon[index];
+        if (EntityExists(entity) && (GetEntInfo(entity)->waitingStruct.waitingStatus == STATUS_SNATCH))
+        {
+            gDungeon->snatchPokemon = entity;
+            ASM_MATCH_TRICK(entity);
+            gDungeon->unk17B3C = GetEntInfo(entity)->unk98;
+            break;
+        }
+    }
+}
+
+void sub_806A390(Entity *pokemon)
+{
+    s32 index;
+    EntityInfo *info;
+    Move *move;
+    
+    info = pokemon->info;
+    for(index = 0; index < MAX_MON_MOVES; index++)
+    {
+        move = &info->moves.moves[index];
+
+        if(move->moveFlags & MOVE_FLAG_EXISTS)
+        {
+            move->moveFlags2 &= 0xF7;
+            move->moveFlags2 &= 0xEF;
+            move->moveFlags2 |= MOVE_FLAG2_UNK4;
+            move->PP = GetMoveBasePP(move);
+        }
+    }
+}
