@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_800DAC0.h"
 #include "code_800E9A8.h"
 #include "code_803E46C.h"
 #include "code_803E668.h"
@@ -34,16 +35,209 @@ extern u8 gUnknown_202E038[0x50];
 extern u8 gAvailablePokemonNames[0x58];
 extern u8 gFormatItems[];
 
-
-extern const u8 gUnknown_810739C[];
-extern const u8 gUnknown_81073D4[];
-extern const u8 gUnknown_810740C[];
 extern const s16 gUnknown_80F57CA;
-extern const s16 gUnknown_80F57D2;
-extern const s16 gUnknown_80F57D0;
-extern const s16 gUnknown_80F57CE;
 extern const s16 gUnknown_80F57CC;
-extern const struct DungeonDialogueStruct gUnknown_8101440;
+extern const s16 gUnknown_80F57CE;
+extern const s16 gUnknown_80F57D0;
+extern const s16 gUnknown_80F57D2;
+extern const struct DungeonDialogueStruct GroudonPreFightDialogue_10;
+extern const struct DungeonDialogueStruct GroudonPreFightDialogue_11;
+extern const struct DungeonDialogueStruct GroudonPreFightDialogue_12;
+extern const struct DungeonDialogueStruct GroudonPreFightDialogue_13;
+extern const struct DungeonDialogueStruct GroudonPreFightDialogue_14;
+extern const struct DungeonDialogueStruct GroudonPreFightDialogue_1;
+extern const struct DungeonDialogueStruct GroudonPreFightDialogue_2;
+extern const struct DungeonDialogueStruct GroudonPreFightDialogue_3;
+extern const struct DungeonDialogueStruct GroudonPreFightDialogue_4;
+extern const struct DungeonDialogueStruct GroudonPreFightDialogue_5;
+extern const struct DungeonDialogueStruct GroudonPreFightDialogue_6;
+extern const struct DungeonDialogueStruct GroudonPreFightDialogue_7;
+extern const struct DungeonDialogueStruct GroudonPreFightDialogue_8;
+extern const struct DungeonDialogueStruct GroudonPreFightDialogue_9;
+extern const struct DungeonDialogueStruct HoOhReFightDialogue_1;
+extern const struct DungeonDialogueStruct HoOhReFightDialogue_2;
+extern const struct DungeonDialogueStruct HoOhReFightDialogue_3;
+extern const struct DungeonDialogueStruct HoOhReFightDialogue_4;
+extern const struct DungeonDialogueStruct HoOhReFightDialogue_5;
+extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_10;
+extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_11;
+extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_12;
+extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_13;
+extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_14;
+extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_15;
+extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_1;
+extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_2;
+extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_3;
+extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_4;
+extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_5;
+extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_6;
+extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_7;
+extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_8;
+extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_9;
+extern const struct DungeonDialogueStruct gArticunoPostStoryPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gArticunoPostStoryPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gArticunoPostStoryPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gArticunoPostStoryPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gArticunoPostStoryPreFightDialogue_5;
+extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_10;
+extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_11;
+extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_12;
+extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_5;
+extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_6;
+extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_7;
+extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_8;
+extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_9;
+extern const struct DungeonDialogueStruct gArticunoReFightDialogue_1;
+extern const struct DungeonDialogueStruct gArticunoReFightDialogue_2;
+extern const struct DungeonDialogueStruct gArticunoReFightDialogue_3;
+extern const struct DungeonDialogueStruct gCelebiJoinDialogue_10;
+extern const struct DungeonDialogueStruct gCelebiJoinDialogue_1;
+extern const struct DungeonDialogueStruct gCelebiJoinDialogue_2;
+extern const struct DungeonDialogueStruct gCelebiJoinDialogue_3;
+extern const struct DungeonDialogueStruct gCelebiJoinDialogue_4;
+extern const struct DungeonDialogueStruct gCelebiJoinDialogue_5;
+extern const struct DungeonDialogueStruct gCelebiJoinDialogue_6;
+extern const struct DungeonDialogueStruct gCelebiJoinDialogue_7;
+extern const struct DungeonDialogueStruct gCelebiJoinDialogue_8;
+extern const struct DungeonDialogueStruct gCelebiJoinDialogue_9;
+extern const struct DungeonDialogueStruct gDeoxysPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gDeoxysPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gDeoxysPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gDeoxysPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gDeoxysPreFightDialogue_5;
+extern const struct DungeonDialogueStruct gEnteiPostStoryPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gEnteiPostStoryPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gEnteiPostStoryPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gEnteiPostStoryPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gEnteiPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gEnteiPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gEnteiPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gEnteiReFightDialogue_1;
+extern const struct DungeonDialogueStruct gEnteiReFightDialogue_2;
+extern const struct DungeonDialogueStruct gEnteiReFightDialogue_3;
+extern const struct DungeonDialogueStruct gGroudonPostStoryPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gGroudonPostStoryPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gGroudonPostStoryPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gGroudonPostStoryPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gGroudonReFightDialogue_1;
+extern const struct DungeonDialogueStruct gGroudonReFightDialogue_2;
+extern const struct DungeonDialogueStruct gGroudonReFightDialogue_3;
+extern const struct DungeonDialogueStruct gGroudonReFightDialogue_4;
+extern const struct DungeonDialogueStruct gHoOhPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gHoOhPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gHoOhPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gHoOhPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gHoOhPreFightDialogue_5;
+extern const struct DungeonDialogueStruct gHoOhPreFightDialogue_6;
+extern const struct DungeonDialogueStruct gJirachiPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gJirachiPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gJirachiPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gJirachiPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gJirachiReFightDialogue_1;
+extern const struct DungeonDialogueStruct gKyogrePreFightDialogue_1;
+extern const struct DungeonDialogueStruct gKyogrePreFightDialogue_2;
+extern const struct DungeonDialogueStruct gKyogrePreFightDialogue_3;
+extern const struct DungeonDialogueStruct gKyogrePreFightDialogue_4;
+extern const struct DungeonDialogueStruct gKyogrePreFightDialogue_5;
+extern const struct DungeonDialogueStruct gKyogrePreFightDialogue_6;
+extern const struct DungeonDialogueStruct gKyogrePreFightDialogue_7;
+extern const struct DungeonDialogueStruct gKyogrePreFightDialogue_8;
+extern const struct DungeonDialogueStruct gLatiosPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gLatiosPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gLatiosPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gLatiosReFightDialogue_1;
+extern const struct DungeonDialogueStruct gLugiaPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gLugiaPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gLugiaPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gLugiaPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gLugiaPreFightDialogue_5;
+extern const struct DungeonDialogueStruct gLugiaPreFightDialogue_6;
+extern const struct DungeonDialogueStruct gLugiaPreFightDialogue_7;
+extern const struct DungeonDialogueStruct gLugiaPreFightDialogue_8;
+extern const struct DungeonDialogueStruct gMedichamRescueDialogue_1;
+extern const struct DungeonDialogueStruct gMedichamRescueDialogue_2;
+extern const struct DungeonDialogueStruct gMedichamRescueDialogue_3;
+extern const struct DungeonDialogueStruct gMedichamRescueDialogue_4;
+extern const struct DungeonDialogueStruct gMewtwoPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gMewtwoPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gMewtwoPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gMewtwoPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gMewtwoPreFightDialogue_5;
+extern const struct DungeonDialogueStruct gMewtwoReFightDialogue_1;
+extern const struct DungeonDialogueStruct gMewtwoReFightDialogue_2;
+extern const struct DungeonDialogueStruct gMewtwoReFightDialogue_3;
+extern const struct DungeonDialogueStruct gMewtwoReFightDialogue_4;
+extern const struct DungeonDialogueStruct gMewtwoReFightDialogue_5;
+extern const struct DungeonDialogueStruct gMoltresPostStoryPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gMoltresPostStoryPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gMoltresPostStoryPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gMoltresPostStoryPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gMoltresPostStoryPreFightDialogue_5;
+extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_10;
+extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_11;
+extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_12;
+extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_5;
+extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_6;
+extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_7;
+extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_8;
+extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_9;
+extern const struct DungeonDialogueStruct gMoltresReFightDialogue_1;
+extern const struct DungeonDialogueStruct gMoltresReFightDialogue_2;
+extern const struct DungeonDialogueStruct gMoltresReFightDialogue_3;
+extern const struct DungeonDialogueStruct gMoltresReFightDialogue_4;
+extern const struct DungeonDialogueStruct gMoltresReFightDialogue_5;
+extern const struct DungeonDialogueStruct gRaikouPostStoryPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gRaikouPostStoryPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gRaikouPostStoryPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gRaikouPostStoryPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gRaikouPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gRaikouPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gRaikouPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gRaikouPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gRaikouPreFightDialogue_5;
+extern const struct DungeonDialogueStruct gRaikouPreFightDialogue_6;
+extern const struct DungeonDialogueStruct gRaikouReFightDialogue_1;
+extern const struct DungeonDialogueStruct gRaikouReFightDialogue_2;
+extern const struct DungeonDialogueStruct gRaikouReFightDialogue_3;
+extern const struct DungeonDialogueStruct gRayquazaPostStoryPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gRayquazaPostStoryPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gRayquazaPostStoryPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gRayquazaPostStoryPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gRayquazaPostStoryPreFightDialogue_5;
+extern const struct DungeonDialogueStruct gRayquazaPostStoryPreFightDialogue_6;
+extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_10;
+extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_11;
+extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_5;
+extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_6;
+extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_7;
+extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_7;
+extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_8;
+extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_9;
+extern const struct DungeonDialogueStruct gRayquazaReFightDialogue_1;
+extern const struct DungeonDialogueStruct gRayquazaReFightDialogue_2;
+extern const struct DungeonDialogueStruct gRayquazaReFightDialogue_3;
+extern const struct DungeonDialogueStruct gRayquazaReFightDialogue_4;
+extern const struct DungeonDialogueStruct gRegicePostFightDialogue_1;
+extern const struct DungeonDialogueStruct gRegicePostFightDialogue_2;
+extern const struct DungeonDialogueStruct gRegicePreFightDialogue_1;
+extern const struct DungeonDialogueStruct gRegirockPostFightDialogue_1;
+extern const struct DungeonDialogueStruct gRegirockPostFightDialogue_2;
+extern const struct DungeonDialogueStruct gRegirockPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gRegisteelPostFightDialogue_1;
+extern const struct DungeonDialogueStruct gRegisteelPostFightDialogue_2;
+extern const struct DungeonDialogueStruct gRegisteelPreFightDialogue_1;
 extern const struct DungeonDialogueStruct gSkarmoryPreFightDialogue_1;
 extern const struct DungeonDialogueStruct gSkarmoryPreFightDialogue_2;
 extern const struct DungeonDialogueStruct gSkarmoryPreFightDialogue_3;
@@ -56,6 +250,24 @@ extern const struct DungeonDialogueStruct gSkarmoryPreFightDialogue_9;
 extern const struct DungeonDialogueStruct gSkarmoryReFightDialogue_1;
 extern const struct DungeonDialogueStruct gSkarmoryReFightDialogue_2;
 extern const struct DungeonDialogueStruct gSkarmoryReFightDialogue_3;
+extern const struct DungeonDialogueStruct gSmeargleRescueDialogue_1;
+extern const struct DungeonDialogueStruct gSmeargleRescueDialogue_2;
+extern const struct DungeonDialogueStruct gSmeargleRescueDialogue_3;
+extern const struct DungeonDialogueStruct gSmeargleRescueDialogue_4;
+extern const struct DungeonDialogueStruct gSuicunePostStoryPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gSuicunePostStoryPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gSuicunePostStoryPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gSuicunePostStoryPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gSuicunePreFightDialogue_1;
+extern const struct DungeonDialogueStruct gSuicunePreFightDialogue_2;
+extern const struct DungeonDialogueStruct gSuicunePreFightDialogue_3;
+extern const struct DungeonDialogueStruct gSuicunePreFightDialogue_4;
+extern const struct DungeonDialogueStruct gSuicunePreFightDialogue_5;
+extern const struct DungeonDialogueStruct gSuicunePreFightDialogue_6;
+extern const struct DungeonDialogueStruct gSuicunePreFightDialogue_7;
+extern const struct DungeonDialogueStruct gSuicuneReFightDialogue_1;
+extern const struct DungeonDialogueStruct gSuicuneReFightDialogue_2;
+extern const struct DungeonDialogueStruct gSuicuneReFightDialogue_3;
 extern const struct DungeonDialogueStruct gTeamMeaniesPreFightDialogue_1;
 extern const struct DungeonDialogueStruct gTeamMeaniesPreFightDialogue_2;
 extern const struct DungeonDialogueStruct gTeamMeaniesPreFightDialogue_3;
@@ -68,292 +280,12 @@ extern const struct DungeonDialogueStruct gTeamMeaniesReFightDialogue_2;
 extern const struct DungeonDialogueStruct gTeamMeaniesReFightDialogue_3;
 extern const struct DungeonDialogueStruct gTeamMeaniesReFightDialogue_4;
 extern const struct DungeonDialogueStruct gTeamMeaniesReFightDialogue_5;
-
 extern const struct DungeonDialogueStruct gUnknown_8100D3C;
-
-extern const struct DungeonDialogueStruct gUnknown_8103D8C;
-extern const struct DungeonDialogueStruct gUnknown_8103D98;
-extern const struct DungeonDialogueStruct gUnknown_8103DD8;
-extern const struct DungeonDialogueStruct gUnknown_8103E28;
-extern const struct DungeonDialogueStruct gUnknown_8103BD8;
-extern const struct DungeonDialogueStruct gUnknown_8103C00;
-extern const struct DungeonDialogueStruct gUnknown_8103C3C;
-extern const struct DungeonDialogueStruct gUnknown_8103C74;
-extern const struct DungeonDialogueStruct gUnknown_8103CC4;
-extern const struct DungeonDialogueStruct gUnknown_8103D0C;
-extern const struct DungeonDialogueStruct gUnknown_8103D50;
-extern const struct DungeonDialogueStruct gRayquazaPostStoryPreFightDialogue_6;
-extern const struct DungeonDialogueStruct gRayquazaPostStoryPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gRayquazaPostStoryPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gRayquazaPostStoryPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gRayquazaPostStoryPreFightDialogue_4;
-extern const struct DungeonDialogueStruct gRayquazaPostStoryPreFightDialogue_5;
-extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_7;
-extern const struct DungeonDialogueStruct gRayquazaReFightDialogue_1;
-extern const struct DungeonDialogueStruct gRayquazaReFightDialogue_2;
-extern const struct DungeonDialogueStruct gRayquazaReFightDialogue_3;
-extern const struct DungeonDialogueStruct gRayquazaReFightDialogue_4;
-extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_4;
-extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_5;
-extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_6;
-extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_7;
-extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_8;
-extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_9;
-extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_10;
-extern const struct DungeonDialogueStruct gRayquazaPreFightDialogue_11;
-extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_5;
-extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_6;
-extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_7;
-extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_8;
-extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_9;
-extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_10;
-extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_11;
-extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_12;
-extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_13;
-extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_14;
-extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_15;
-extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_4;
-extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_3;
-extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_2;
-extern const struct DungeonDialogueStruct MagmaCavernMidDialogue_1;
-extern const struct DungeonDialogueStruct gUnknown_8103488;
-extern const struct DungeonDialogueStruct gGroudonPostStoryPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gGroudonPostStoryPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gGroudonPostStoryPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gGroudonPostStoryPreFightDialogue_4;
-extern const struct DungeonDialogueStruct gGroudonReFightDialogue_1;
-extern const struct DungeonDialogueStruct gGroudonReFightDialogue_2;
-extern const struct DungeonDialogueStruct gGroudonReFightDialogue_3;
-extern const struct DungeonDialogueStruct gGroudonReFightDialogue_4;
-extern const struct DungeonDialogueStruct GroudonPreFightDialogue_1;
-extern const struct DungeonDialogueStruct GroudonPreFightDialogue_2;
-extern const struct DungeonDialogueStruct GroudonPreFightDialogue_3;
-extern const struct DungeonDialogueStruct GroudonPreFightDialogue_4;
-extern const struct DungeonDialogueStruct GroudonPreFightDialogue_5;
-extern const struct DungeonDialogueStruct GroudonPreFightDialogue_6;
-extern const struct DungeonDialogueStruct GroudonPreFightDialogue_7;
-extern const struct DungeonDialogueStruct GroudonPreFightDialogue_8;
-extern const struct DungeonDialogueStruct GroudonPreFightDialogue_9;
-extern const struct DungeonDialogueStruct GroudonPreFightDialogue_10;
-extern const struct DungeonDialogueStruct GroudonPreFightDialogue_11;
-extern const struct DungeonDialogueStruct GroudonPreFightDialogue_12;
-extern const struct DungeonDialogueStruct GroudonPreFightDialogue_13;
-extern const struct DungeonDialogueStruct GroudonPreFightDialogue_14;
-extern const struct DungeonDialogueStruct gUnknown_8102B10;
-extern const struct DungeonDialogueStruct gRegisteelPostFightDialogue_2;
-extern const struct DungeonDialogueStruct gRegicePostFightDialogue_2;
-extern const struct DungeonDialogueStruct gRegirockPostFightDialogue_2;
-extern const struct DungeonDialogueStruct gRegisteelPostFightDialogue_1;
-extern const struct DungeonDialogueStruct gRegicePostFightDialogue_1;
-extern const struct DungeonDialogueStruct gRegirockPostFightDialogue_1;
-extern const struct DungeonDialogueStruct gUnknown_810554C;
-extern const struct DungeonDialogueStruct gUnknown_8105558;
-extern const struct DungeonDialogueStruct gUnknown_81055F4;
-extern const struct DungeonDialogueStruct gRegicePreFightDialogue_1;
-extern const struct DungeonDialogueStruct gRegirockPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gSuicuneReFightDialogue_1;
-extern const struct DungeonDialogueStruct gSuicuneReFightDialogue_2;
-extern const struct DungeonDialogueStruct gSuicuneReFightDialogue_3;
-extern const struct DungeonDialogueStruct gRegisteelPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gJirachiPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gJirachiPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gJirachiPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gJirachiPreFightDialogue_4;
-extern const struct DungeonDialogueStruct gLatiosReFightDialogue_1;
-extern const struct DungeonDialogueStruct gLatiosPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gLatiosPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gLatiosPreFightDialogue_1;
-extern const struct DungeonDialogueStruct HoOhReFightDialogue_1;
-extern const struct DungeonDialogueStruct HoOhReFightDialogue_2;
-extern const struct DungeonDialogueStruct HoOhReFightDialogue_3;
-extern const struct DungeonDialogueStruct HoOhReFightDialogue_4;
-extern const struct DungeonDialogueStruct HoOhReFightDialogue_5;
-extern const struct DungeonDialogueStruct gHoOhPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gHoOhPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gHoOhPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gHoOhPreFightDialogue_4;
-extern const struct DungeonDialogueStruct gHoOhPreFightDialogue_5;
-extern const struct DungeonDialogueStruct gHoOhPreFightDialogue_6;
-extern const struct DungeonDialogueStruct gSuicunePostStoryPreFightDialogue_4;
-extern const struct DungeonDialogueStruct gSuicunePostStoryPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gSuicunePostStoryPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gSuicunePostStoryPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gSuicunePreFightDialogue_1;
-extern const struct DungeonDialogueStruct gSuicunePreFightDialogue_2;
-extern const struct DungeonDialogueStruct gSuicunePreFightDialogue_3;
-extern const struct DungeonDialogueStruct gSuicunePreFightDialogue_4;
-extern const struct DungeonDialogueStruct gSuicunePreFightDialogue_5;
-extern const struct DungeonDialogueStruct gSuicunePreFightDialogue_6;
-extern const struct DungeonDialogueStruct gSuicunePreFightDialogue_7;
-extern const struct DungeonDialogueStruct gRaikouPostStoryPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gRaikouPostStoryPreFightDialogue_4;
-extern const struct DungeonDialogueStruct gRaikouPostStoryPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gRaikouPostStoryPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gRaikouReFightDialogue_1;
-extern const struct DungeonDialogueStruct gRaikouReFightDialogue_2;
-extern const struct DungeonDialogueStruct gRaikouReFightDialogue_3;
-extern const struct DungeonDialogueStruct gRaikouPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gRaikouPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gRaikouPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gRaikouPreFightDialogue_4;
-extern const struct DungeonDialogueStruct gRaikouPreFightDialogue_5;
-extern const struct DungeonDialogueStruct gRaikouPreFightDialogue_6;
-extern const struct DungeonDialogueStruct gEnteiPostStoryPreFightDialogue_4;
-extern const struct DungeonDialogueStruct gEnteiPostStoryPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gEnteiPostStoryPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gEnteiPostStoryPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gEnteiReFightDialogue_1;
-extern const struct DungeonDialogueStruct gEnteiReFightDialogue_2;
-extern const struct DungeonDialogueStruct gEnteiReFightDialogue_3;
-extern const struct DungeonDialogueStruct gUnknown_8104FC8;
-extern const struct DungeonDialogueStruct gEnteiPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gEnteiPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gEnteiPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gMewtwoReFightDialogue_5;
-extern const struct DungeonDialogueStruct gMewtwoReFightDialogue_4;
-extern const struct DungeonDialogueStruct gMewtwoReFightDialogue_3;
-extern const struct DungeonDialogueStruct gMewtwoReFightDialogue_2;
-extern const struct DungeonDialogueStruct gMewtwoReFightDialogue_1;
-extern const struct DungeonDialogueStruct gMewtwoPreFightDialogue_5;
-extern const struct DungeonDialogueStruct gMewtwoPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gMewtwoPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gMewtwoPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gMewtwoPreFightDialogue_4;
-extern const struct DungeonDialogueStruct gUnknown_8103E34;
-extern const struct DungeonDialogueStruct gUnknown_8102A9C;
-extern const struct DungeonDialogueStruct gArticunoPostStoryPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gArticunoPostStoryPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gArticunoPostStoryPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gArticunoPostStoryPreFightDialogue_4;
-extern const struct DungeonDialogueStruct gArticunoPostStoryPreFightDialogue_5;
-extern const struct DungeonDialogueStruct gArticunoReFightDialogue_1;
-extern const struct DungeonDialogueStruct gArticunoReFightDialogue_2;
-extern const struct DungeonDialogueStruct gArticunoReFightDialogue_3;
-extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_4;
-extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_5;
-extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_6;
-extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_7;
-extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_8;
-extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_9;
-extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_10;
-extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_11;
-extern const struct DungeonDialogueStruct gArticunoPreFightDialogue_12;
-extern const struct DungeonDialogueStruct gMoltresPostStoryPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gMoltresPostStoryPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gMoltresPostStoryPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gMoltresPostStoryPreFightDialogue_4;
-extern const struct DungeonDialogueStruct gMoltresPostStoryPreFightDialogue_5;
 extern const struct DungeonDialogueStruct gUnknown_8100D3C;
-extern const struct DungeonDialogueStruct gMoltresReFightDialogue_1;
-extern const struct DungeonDialogueStruct gMoltresReFightDialogue_2;
-extern const struct DungeonDialogueStruct gMoltresReFightDialogue_3;
-extern const struct DungeonDialogueStruct gMoltresReFightDialogue_4;
-extern const struct DungeonDialogueStruct gMoltresReFightDialogue_5;
-extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_4;
-extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_5;
-extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_6;
-extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_7;
-extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_8;
-extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_9;
-extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_10;
-extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_11;
-extern const struct DungeonDialogueStruct gMoltresPreFightDialogue_12;
-extern const struct DungeonDialogueStruct gZapdosPostStoryPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gZapdosPostStoryPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gZapdosPostStoryPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gZapdosPostStoryPreFightDialogue_4;
-extern const struct DungeonDialogueStruct gZapdosPostStoryPreFightDialogue_5;
-extern const struct DungeonDialogueStruct gZapdosPostStoryPreFightDialogue_6;
-extern const struct DungeonDialogueStruct gUnknown_8105668;
-extern const struct DungeonDialogueStruct gUnknown_8105674;
-extern const struct DungeonDialogueStruct gUnknown_81056B8;
-extern const struct DungeonDialogueStruct gUnknown_81056DC;
-extern const struct MenuItem gUnknown_810579C[];
-extern const struct DungeonDialogueStruct gUnknown_8105974;
-extern const struct DungeonDialogueStruct gUnknown_810581C;
-
-extern const struct DungeonDialogueStruct gUnknown_8105BF4;
-extern const struct DungeonDialogueStruct gUnknown_8105D2C;
-extern const struct DungeonDialogueStruct gUnknown_8105D80;
-extern const struct DungeonDialogueStruct gUnknown_8105D9C;
-extern const struct DungeonDialogueStruct gUnknown_81058E0;
-extern const struct DungeonDialogueStruct gUnknown_810593C;
-extern const struct DungeonDialogueStruct gUnknown_8105A08;
-extern const struct DungeonDialogueStruct gUnknown_8105AD4;
-extern const struct DungeonDialogueStruct gUnknown_8105B20;
-extern const struct DungeonDialogueStruct gUnknown_8105B68;
-extern const struct DungeonDialogueStruct gUnknown_8105BA8;
-extern const u8 *const gUnknown_8105798;
-extern const struct DungeonDialogueStruct gJirachiReFightDialogue_1;
-
-extern const struct DungeonDialogueStruct gKyogrePreFightDialogue_8;
-extern const struct DungeonDialogueStruct gKyogrePreFightDialogue_1;
-extern const struct DungeonDialogueStruct gKyogrePreFightDialogue_2;
-extern const struct DungeonDialogueStruct gKyogrePreFightDialogue_3;
-extern const struct DungeonDialogueStruct gKyogrePreFightDialogue_4;
-extern const struct DungeonDialogueStruct gKyogrePreFightDialogue_5;
-extern const struct DungeonDialogueStruct gKyogrePreFightDialogue_6;
-extern const struct DungeonDialogueStruct gKyogrePreFightDialogue_7;
-extern const struct DungeonDialogueStruct gUnknown_810697C;
-extern const u64 gUnknown_8107544[];
-extern const struct DungeonDialogueStruct gMedichamRescueDialogue_1;
-extern const struct DungeonDialogueStruct gMedichamRescueDialogue_2;
-extern const struct DungeonDialogueStruct gMedichamRescueDialogue_3;
-extern const struct DungeonDialogueStruct gMedichamRescueDialogue_4;
-extern const struct DungeonDialogueStruct gSmeargleRescueDialogue_1;
-extern const struct DungeonDialogueStruct gSmeargleRescueDialogue_2;
-extern const struct DungeonDialogueStruct gSmeargleRescueDialogue_3;
-extern const struct DungeonDialogueStruct gSmeargleRescueDialogue_4;
-extern const struct DungeonDialogueStruct gUnknown_8106720;
-
-extern const struct DungeonDialogueStruct gCelebiJoinDialogue_10;
-extern const struct DungeonDialogueStruct gCelebiJoinDialogue_1;
-extern const struct DungeonDialogueStruct gCelebiJoinDialogue_2;
-extern const struct DungeonDialogueStruct gCelebiJoinDialogue_3;
-extern const struct DungeonDialogueStruct gCelebiJoinDialogue_4;
-extern const struct DungeonDialogueStruct gCelebiJoinDialogue_5;
-extern const struct DungeonDialogueStruct gCelebiJoinDialogue_6;
-extern const struct DungeonDialogueStruct gCelebiJoinDialogue_7;
-extern const struct DungeonDialogueStruct gCelebiJoinDialogue_8;
-extern const struct DungeonDialogueStruct gCelebiJoinDialogue_9;
-extern const u8 *const gPtrPurityForestAllowCelebiToJoinText;
-extern const struct MenuItem gPurityForestAllowCelebiToJoinPrompt[];
-extern const u8 *const gPtrPurityForestRefuseCelebiConfirmText;
-extern const struct MenuItem gPurityForestRefuseCelebiConfirmPrompt[];
-extern const struct DungeonDialogueStruct gDeoxysPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gDeoxysPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gDeoxysPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gDeoxysPreFightDialogue_4;
-extern const struct DungeonDialogueStruct gDeoxysPreFightDialogue_5;
-extern const struct DungeonDialogueStruct gLugiaPreFightDialogue_8;
-extern const struct DungeonDialogueStruct gLugiaPreFightDialogue_1;
-extern const struct DungeonDialogueStruct gLugiaPreFightDialogue_2;
-extern const struct DungeonDialogueStruct gLugiaPreFightDialogue_3;
-extern const struct DungeonDialogueStruct gLugiaPreFightDialogue_4;
-extern const struct DungeonDialogueStruct gLugiaPreFightDialogue_5;
-extern const struct DungeonDialogueStruct gLugiaPreFightDialogue_6;
-extern const struct DungeonDialogueStruct gLugiaPreFightDialogue_7;
-extern const struct DungeonDialogueStruct gZapdosReFightDialogue_1;
-extern const struct DungeonDialogueStruct gUnknown_81015A0;
-extern const struct DungeonDialogueStruct gZapdosReFightDialogue_2;
-extern const struct DungeonDialogueStruct gZapdosReFightDialogue_3;
-extern const struct DungeonDialogueStruct gZapdosReFightDialogue_4;
-
-extern const struct DungeonDialogueStruct gUnknown_81058C4;
-extern const struct DungeonDialogueStruct gUnknown_81058A8;
-
-extern const u8 gUnknown_81074FC[];
+extern const struct DungeonDialogueStruct gUnknown_8101440;
 extern const struct DungeonDialogueStruct gUnknown_81014B0;
 extern const struct DungeonDialogueStruct gUnknown_8101504;
+extern const struct DungeonDialogueStruct gUnknown_81015A0;
 extern const struct DungeonDialogueStruct gUnknown_81015D4;
 extern const struct DungeonDialogueStruct gUnknown_81015E8;
 extern const struct DungeonDialogueStruct gUnknown_8101624;
@@ -361,6 +293,67 @@ extern const struct DungeonDialogueStruct gUnknown_810165C;
 extern const struct DungeonDialogueStruct gUnknown_8101750;
 extern const struct DungeonDialogueStruct gUnknown_810178C;
 extern const struct DungeonDialogueStruct gUnknown_81017B4;
+extern const struct DungeonDialogueStruct gUnknown_8102A9C;
+extern const struct DungeonDialogueStruct gUnknown_8102B10;
+extern const struct DungeonDialogueStruct gUnknown_8103488;
+extern const struct DungeonDialogueStruct gUnknown_8103BD8;
+extern const struct DungeonDialogueStruct gUnknown_8103C00;
+extern const struct DungeonDialogueStruct gUnknown_8103C3C;
+extern const struct DungeonDialogueStruct gUnknown_8103C74;
+extern const struct DungeonDialogueStruct gUnknown_8103CC4;
+extern const struct DungeonDialogueStruct gUnknown_8103D0C;
+extern const struct DungeonDialogueStruct gUnknown_8103D50;
+extern const struct DungeonDialogueStruct gUnknown_8103D8C;
+extern const struct DungeonDialogueStruct gUnknown_8103D98;
+extern const struct DungeonDialogueStruct gUnknown_8103DD8;
+extern const struct DungeonDialogueStruct gUnknown_8103E28;
+extern const struct DungeonDialogueStruct gUnknown_8103E34;
+extern const struct DungeonDialogueStruct gUnknown_8104FC8;
+extern const struct DungeonDialogueStruct gUnknown_810554C;
+extern const struct DungeonDialogueStruct gUnknown_8105558;
+extern const struct DungeonDialogueStruct gUnknown_81055F4;
+extern const struct DungeonDialogueStruct gUnknown_8105668;
+extern const struct DungeonDialogueStruct gUnknown_8105674;
+extern const struct DungeonDialogueStruct gUnknown_81056B8;
+extern const struct DungeonDialogueStruct gUnknown_81056DC;
+extern const struct DungeonDialogueStruct gUnknown_810581C;
+extern const struct DungeonDialogueStruct gUnknown_81058A8;
+extern const struct DungeonDialogueStruct gUnknown_81058C4;
+extern const struct DungeonDialogueStruct gUnknown_81058E0;
+extern const struct DungeonDialogueStruct gUnknown_810593C;
+extern const struct DungeonDialogueStruct gUnknown_8105974;
+extern const struct DungeonDialogueStruct gUnknown_8105A08;
+extern const struct DungeonDialogueStruct gUnknown_8105AD4;
+extern const struct DungeonDialogueStruct gUnknown_8105B20;
+extern const struct DungeonDialogueStruct gUnknown_8105B68;
+extern const struct DungeonDialogueStruct gUnknown_8105BA8;
+extern const struct DungeonDialogueStruct gUnknown_8105BF4;
+extern const struct DungeonDialogueStruct gUnknown_8105D2C;
+extern const struct DungeonDialogueStruct gUnknown_8105D80;
+extern const struct DungeonDialogueStruct gUnknown_8105D9C;
+extern const struct DungeonDialogueStruct gUnknown_8106720;
+extern const struct DungeonDialogueStruct gUnknown_810697C;
+extern const struct DungeonDialogueStruct gZapdosPostStoryPreFightDialogue_1;
+extern const struct DungeonDialogueStruct gZapdosPostStoryPreFightDialogue_2;
+extern const struct DungeonDialogueStruct gZapdosPostStoryPreFightDialogue_3;
+extern const struct DungeonDialogueStruct gZapdosPostStoryPreFightDialogue_4;
+extern const struct DungeonDialogueStruct gZapdosPostStoryPreFightDialogue_5;
+extern const struct DungeonDialogueStruct gZapdosPostStoryPreFightDialogue_6;
+extern const struct DungeonDialogueStruct gZapdosReFightDialogue_1;
+extern const struct DungeonDialogueStruct gZapdosReFightDialogue_2;
+extern const struct DungeonDialogueStruct gZapdosReFightDialogue_3;
+extern const struct DungeonDialogueStruct gZapdosReFightDialogue_4;
+extern const struct MenuItem gPurityForestAllowCelebiToJoinPrompt[];
+extern const struct MenuItem gPurityForestRefuseCelebiConfirmPrompt[];
+extern const struct MenuItem gUnknown_810579C[];
+extern const u64 gUnknown_8107544[];
+extern const u8 *const gPtrPurityForestAllowCelebiToJoinText;
+extern const u8 *const gPtrPurityForestRefuseCelebiConfirmText;
+extern const u8 *const gUnknown_8105798;
+extern const u8 gUnknown_810739C[];
+extern const u8 gUnknown_81073D4[];
+extern const u8 gUnknown_810740C[];
+extern const u8 gUnknown_81074FC[];
 
 struct Zapdos1
 {
@@ -375,26 +368,43 @@ struct Zapdos2
 extern const struct Zapdos1 gUnknown_810744C;
 extern struct Zapdos2 gUnknown_8107464;
 
-void ZapdosScreenFlash(s32 numFlashes);
-void ZapdosDropInEffect(Entity *);
-
-extern void sub_800DC14(u32);
-
-extern void sub_8086A3C(Entity *r0);
 extern void sub_8068FE0(Entity *, u32, u32);
-
-extern void sub_8086448(void);
 extern void sub_8042B0C(Entity *);
 extern u8 sub_806FD18(Entity *);
 extern void sub_806FDF4(Entity *, Entity *, Entity **);
-extern u32 sub_80861F8(u32, Entity *, u32);
-extern s32 GetCameraXPos();
-extern s32 GetCameraYPos();
+extern s32 GetCameraXPos(void);
+extern s32 GetCameraYPos(void);
 extern void sub_803F878(u32, s32);
 extern void BgColorCallNullsub4(void);
 extern void DeoxysScreenFlash(void);
-extern void sub_8085EB0();
+extern void sub_8085EB0(void);
+extern void sub_8049884(void);
+extern void sub_8049B8C(void);
+extern void sub_8049ED4(void);
+extern void sub_8040A84(void);
+extern void sub_8086A54(Entity *);
+extern void sub_806BFC0(EntityInfo *, u32);
+extern void sub_808BBA8(Entity * );
+extern void sub_8041888(u32);
+extern u32 sub_80861F8(u32, Entity *, u32);
+extern u8 sub_80860A8(u32);
+extern void sub_8052D44(s16 *, Entity *, Entity *);
+extern void sub_80421C0(Entity *, u32);
+extern void sub_80464C8(Entity *, Position *, Item *);
+extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
+extern u32 sub_8085EC8(u32, u32, u32, Position *, u32);
+extern void sub_807EAA0(u32, u32);
+extern void sub_8072008(Entity *, Entity *, s16, u32, u32);
+extern void sub_8085374(void);
+extern void sub_8045C28(Item *, u8 , u8 *);
+extern void sub_8046860(Entity *, Position *, Item *, u32);
+extern u32 sub_803D73C(u32);
+extern void sub_80460F8(Position *, Item *, u8);
+extern u8 sub_8044B28(void);
+extern bool8 sub_8085B80(struct_8085B80 *);
 
+void ZapdosScreenFlash(s32 numFlashes);
+void ZapdosDropInEffect(Entity *);
 void SetupDeoxysFightHP(Entity *r0);
 void sub_808C550(void);
 void sub_808C590(Entity *r0);
@@ -402,106 +412,52 @@ void SetupDeoxysFacingDirection(Entity *r0);
 void sub_808C9B0(Entity *);
 void sub_808C8E0(Entity *param_1);
 void sub_808C360(void);
-void KyogreScreenFlash();
-
-void sub_808C0CC();
-void LugiaScreenFlash();
-void LugiaScreenFlash2();
-
-void nullsub_99();
-
-extern void sub_8049884();
-extern void sub_8049B8C();
-extern void sub_8049ED4();
-extern void sub_8040A84();
-extern void sub_8086A54(Entity *);
-
-extern void sub_806BFC0(EntityInfo *, u32);
-
-extern void sub_808BBA8(Entity * );
-extern void sub_8041888(u32);
-
-extern u32 sub_80861F8(u32, Entity *, u32);
-
-
-extern void JirachiWish();
-extern void JirachiSpinEffect(Entity *);
-extern void JirachiWishGrantDialogue(Entity *jirachiEntity);
-extern void JirachiWishGrantFlash();
-extern void JirachiDropInEffect(Entity *param_1);
-extern u8 JirachiFriendAreaSearch(void);
-
-extern u8 sub_80860A8(u32);
-extern void sub_8049ED4();
-extern void sub_8052D44(s16 *, Entity *, Entity *);
-extern void sub_80421C0(Entity *, u32);
-extern void sub_808B1CC(u8);
-extern void sub_80464C8(Entity *, u32 *, Item *);
-extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
-
-extern u32 sub_8085EC8(u32, u32, u32, Position *, u32);
-extern void sub_807EAA0(u32, u32);
-
-extern void CreateJirachiWishWarpTile(void);
-
+void KyogreScreenFlash(void);
+void sub_808C0CC(void);
+void LugiaScreenFlash(void);
+void LugiaScreenFlash2(void);
+void nullsub_99(void);
+void JirachiWish(void);
+void JirachiSpinEffect(Entity *jirachiEntity);
+void JirachiWishGrantDialogue(Entity *jirachiEntity);
+void JirachiDropInEffect(Entity *jirachiEntity);
+u8 JirachiFriendAreaSearch(void);
+void sub_808B1CC(u8 itemID);
+void CreateJirachiWishWarpTile(void);
 void EnteiScreenFlash(void);
 void RaikouScreenFlash(void);
 void sub_808A528(Entity * param_1);
-void SuicuneScreenFlash();
+void SuicuneScreenFlash(void);
 void HoOhDropInEffect(Entity * param_1);
 void HoOhScreenFlash(void);
 void LatiosScreenFlash(void);
-void SetupRegiFacingDirection(Entity *r0);
-void SetupRegirockFightHP(Entity *r0);
-void SetupRegiceFightHP(Entity *r0);
-void SetupRegisteelFightHP(Entity *r0);
+void SetupRegiFacingDirection(Entity *entity);
+void SetupRegirockFightHP(Entity *entity);
+void SetupRegiceFightHP(Entity *entity);
+void SetupRegisteelFightHP(Entity *entity);
 void sub_808B50C(void);
 void MewtwoDropInEffect(Entity *param_1);
 void MewtwoScreenFlash(void);
-void sub_80898F8(Entity *r0);
-void sub_8089908(Entity *r0);
+void sub_80898F8(Entity *entity);
+void sub_8089908(Entity *entity);
 void RayquazaDropInEffect(Entity *param_1);
 void RayquazaScreenFlash(void);
 void sub_80891F0(void);
 void sub_8089294(void);
 void GroudonScreenFlash2(void);
-
-extern u8 sub_8086AE4(s16);
-
-extern void sub_8072008(Entity *, Entity *, s16, u32, u32);
-extern void sub_8085374();
-
-extern void sub_803F878(u32,s32);
-
 void SceneGroudonMovement(Entity * param_1);
 void GroudonScreenFlash(void);
 void ArticunoScreenFlash(void);
 void sub_8088484(Entity *param_1);
 void sub_8088574(void);
-
 void MoltresDropInEffect(Entity * param_1);
 void MoltresScreenFlash1(s32 r0, s32 r1);
 void MoltresScreenFlash2(s32 r0, s32 r1);
 void MoltresScreenFlash3(void);
 void MoltresScreenDarken(void);
-
-extern void sub_8045C28(Item *, u8 , u8 *);
-extern void EnableJirachiWishWarpTile(void);
-extern void sub_808BB3C(Position *);
-extern void sub_8046860(Entity *, Position *, Item *, u32);
-extern u32 sub_803D73C(u32);
-
-extern void sub_80460F8(Position *, Item *, u8);
-
-extern u8 sub_8044B28(void);
-extern u8 gUnknown_202E038[];
-extern void sub_8085374();
-extern void sub_8068FE0(Entity *, u32, u32);
-extern void sub_8086448(void);
-extern void sub_8086A54(Entity *);
-extern void sub_8087144();
-extern bool8 sub_8085B80(struct_8085B80 *);
-
+void EnableJirachiWishWarpTile(void);
+void sub_808BB3C(Position *pos);
+void sub_8087144();
 void SkarmoryEntry(Entity *);
 
 void sub_8086A3C(Entity *pokemon)
@@ -592,7 +548,8 @@ void sub_8086B94(void)
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
 }
 
-void sub_8086BDC(char param_1, s32 param_2)
+// TODO: fix this function as param_2 should be u8
+void sub_8086BDC(u8 param_1, s32 param_2)
 {
   if ((((param_2 * 0x1000000) - 0x1000000U) >> 0x18 < 2) && (param_1 == 3)) {
     sub_8097FA8(1);
@@ -3698,7 +3655,7 @@ void sub_808ADCC(void)
   }
 }
 
-void sub_808AE54(char param_1,char param_2,u32 *param_3)
+void sub_808AE54(u8 param_1,u8 param_2,Position *param_3)
 {
   Entity * leaderEntity;
   s16 IDStack[2];
@@ -3707,9 +3664,9 @@ void sub_808AE54(char param_1,char param_2,u32 *param_3)
 
   leaderEntity = xxx_call_GetLeader();
   sub_8052D44(IDStack,leaderEntity,0);
-  if ((sub_8098100(0x22) == 0) && (param_2 == 0x2E) && (param_1 == 0x17)) {
+  if (!sub_8098100(0x22) && (param_2 == 0x2E) && (param_1 == 0x17)) {
     sub_808B1CC(ITEM_NOTHING);
-    if (sub_8098100(0x1d) == 0) {
+    if (!sub_8098100(0x1d)) {
       xxx_init_itemslot_8090A8C(&item,ITEM_ROCK_PART,0);
       sub_80464C8(GetLeader(),param_3,&item);
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
@@ -3721,7 +3678,7 @@ void sub_808AE54(char param_1,char param_2,u32 *param_3)
 }
 
 
-void sub_808AEC8(char param_1,char param_2,u32 *param_3)
+void sub_808AEC8(u8 param_1,u8 param_2,Position *param_3)
 {
   Entity * leaderEntity;
   s16 IDStack[2];
@@ -3730,9 +3687,9 @@ void sub_808AEC8(char param_1,char param_2,u32 *param_3)
 
   leaderEntity = xxx_call_GetLeader();
   sub_8052D44(IDStack,leaderEntity,0);
-  if ((sub_8098100(0x22) == 0) && (param_2 == 0x2F) && (param_1 == 0x18)) {
+  if (!sub_8098100(0x22) && (param_2 == 0x2F) && (param_1 == 0x18)) {
     sub_808B1CC(ITEM_NOTHING);
-    if (sub_8098100(0x1d) == 0) {
+    if (!sub_8098100(0x1d)) {
       xxx_init_itemslot_8090A8C(&item,ITEM_ICE_PART,0);
       sub_80464C8(GetLeader(),param_3,&item);
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
@@ -3743,7 +3700,7 @@ void sub_808AEC8(char param_1,char param_2,u32 *param_3)
   }
 }
 
-void sub_808AF3C(char param_1,char param_2,u32 *param_3)
+void sub_808AF3C(u8 param_1,u8 param_2,Position *param_3)
 {
   Entity * leaderEntity;
   s16 IDStack[2];
@@ -3752,9 +3709,9 @@ void sub_808AF3C(char param_1,char param_2,u32 *param_3)
 
   leaderEntity = xxx_call_GetLeader();
   sub_8052D44(IDStack,leaderEntity,0);
-  if ((sub_8098100(0x22) == 0) && (param_2 == 0x30) && (param_1 == 0x19)) {
+  if (!sub_8098100(0x22) && (param_2 == 0x30) && (param_1 == 0x19)) {
     sub_808B1CC(ITEM_NOTHING);
-    if (sub_8098100(0x1d) == 0) {
+    if (!sub_8098100(0x1d)) {
       xxx_init_itemslot_8090A8C(&item,ITEM_STEEL_PART,0);
       sub_80464C8(GetLeader(),param_3, &item);
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
@@ -3765,14 +3722,14 @@ void sub_808AF3C(char param_1,char param_2,u32 *param_3)
   }
 }
 
-void sub_808AFB0(char param_1)
+void sub_808AFB0(u8 param_1)
 {
   Entity * leaderEntity;
   s16 IDStack [2];
 
   leaderEntity = xxx_call_GetLeader();
   sub_8052D44(IDStack,leaderEntity,0);
-  if ((sub_8098100(0x22) == 0) && (param_1 == 0x2E) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ROCK_PART) != 0)) {
+  if (!sub_8098100(0x22) && (param_1 == 0x2E) && (!sub_8098100(0x1d)) && (sub_80860A8(ITEM_ROCK_PART) != 0)) {
     sub_8097FD0(0x1d);
     SetMessageArgument(gAvailablePokemonNames,GetLeader(),0);
     // {POKEMON_0} obtained the Rock Part that Regirock was guarding
@@ -3783,14 +3740,14 @@ void sub_808AFB0(char param_1)
   }
 }
 
-void sub_808B030(char param_1)
+void sub_808B030(u8 param_1)
 {
   Entity * leaderEntity;
   s16 IDStack [2];
 
   leaderEntity = xxx_call_GetLeader();
   sub_8052D44(IDStack,leaderEntity,0);
-  if ((sub_8098100(0x22) == 0) && (param_1 == 0x2F) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_ICE_PART) != 0)) {
+  if (!sub_8098100(0x22) && (param_1 == 0x2F) && (!sub_8098100(0x1d)) && (sub_80860A8(ITEM_ICE_PART) != 0)) {
     sub_8097FD0(0x1d);
     SetMessageArgument(gAvailablePokemonNames,GetLeader(),0);
     // {POKEMON_0} obtained the Ice Part that Regice was guarding
@@ -3801,14 +3758,14 @@ void sub_808B030(char param_1)
   }
 }
 
-void sub_808B0B0(char param_1)
+void sub_808B0B0(u8 param_1)
 {
   Entity * leaderEntity;
   s16 IDStack [2];
 
   leaderEntity = xxx_call_GetLeader();
   sub_8052D44(IDStack,leaderEntity,0);
-  if ((sub_8098100(0x22) == 0) && (param_1 == 0x30) && (sub_8098100(0x1d) == 0) && (sub_80860A8(ITEM_STEEL_PART) != 0)) {
+  if (!sub_8098100(0x22) && (param_1 == 0x30) && (!sub_8098100(0x1d)) && (sub_80860A8(ITEM_STEEL_PART) != 0)) {
     sub_8097FD0(0x1d);
     SetMessageArgument(gAvailablePokemonNames, GetLeader(), 0);
     // {POKEMON_0} obtained the Steel Part that Registeel was guarding
@@ -3821,7 +3778,7 @@ void sub_808B0B0(char param_1)
 
 void RegirockPreFightDialogue(void)
 {
-  if (sub_8098100(0x22) == '\0') {
+  if (!sub_8098100(0x22)) {
     sub_8085930(DIRECTION_NORTH);
     // INTRUDER ALERT
     // EXTERMINATE
@@ -3833,7 +3790,7 @@ void RegirockPreFightDialogue(void)
 
 void RegicePreFightDialogue(void)
 {
-  if (sub_8098100(0x22) == '\0') {
+  if (!sub_8098100(0x22)) {
     sub_8085930(DIRECTION_NORTH);
     // INTRUDER ALERT
     // EXTERMINATE
@@ -3845,7 +3802,7 @@ void RegicePreFightDialogue(void)
 
 void RegisteelPreFightDialogue(void)
 {
-  if (sub_8098100(0x22) == '\0') {
+  if (!sub_8098100(0x22)) {
     sub_8085930(DIRECTION_NORTH);
     // INTRUDER ALERT
     // EXTERMINATE
@@ -4266,22 +4223,22 @@ void JirachiWishGrantFlash(void)
   sub_8085EB0();
 }
 
-void sub_808BB3C(Position *param_1)
+void sub_808BB3C(Position *pos1)
 {
 #ifndef NONMATCHING
   register s32 iVar1 asm("r0");
 #else
   s32 iVar1;
 #endif
-  Position local_8;
+  Position newPos;
 
-  iVar1 = param_1->x * 0x1800 + 0xc00;
-  local_8.x = iVar1 / 256;
+  iVar1 = pos1->x * 0x1800 + 0xc00;
+  newPos.x = iVar1 / 256;
 
-  iVar1 = param_1->y * 0x1800 + 0x1000;
+  iVar1 = pos1->y * 0x1800 + 0x1000;
 
-  local_8.y = iVar1 / 256;
-  sub_8085EC8(100,0,0,&local_8,0);
+  newPos.y = iVar1 / 256;
+  sub_8085EC8(100,0,0,&newPos,0);
 }
 
 void sub_808BBA8(Entity *jirachiEntity)
@@ -4433,7 +4390,7 @@ void sub_808BDEC(void)
   CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_LUGIA);
 }
 
-void sub_808BE70(u8 param_1,u8 param_2)
+void sub_808BE70(u8 param_1,u8 param_2,u8 param_3)
 {
   if ((param_2 == 0x33) && (param_1 == 0x1B)) {
     gDungeon->unk2 = 1;
@@ -4576,7 +4533,7 @@ void sub_808C10C(void)
   CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_GROUDON);
 }
 
-void sub_808C1A4(u8 param_1,u8 param_2)
+void sub_808C1A4(u8 param_1,u8 param_2,u8 param_3)
 {
   if ((param_2 == 0x34) && (param_1 == 0x1C)) {
     gDungeon->unk2 = 1;
@@ -4689,7 +4646,7 @@ void sub_808C3A0(void)
   CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_DEOXYS_NORMAL);
 }
 
-void sub_808C414(u8 param_1,u8 param_2)
+void sub_808C414(u8 param_1,u8 param_2,u8 param_3)
 {
   if ((param_2 == 0x35) && (param_1 == 0x1D)) {
     gDungeon->unk2 = 1;
@@ -4792,7 +4749,7 @@ void sub_808C5C0(void)
   CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_CELEBI);
 }
 
-void nullsub_100(u8 r0, u8 r1, u32 r2)
+void nullsub_100(u8 r0, u8 r1, u8 r3)
 {
 }
 
@@ -5152,7 +5109,7 @@ void sub_808CD44(void)
     CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_SMEARGLE);
 }
 
-void sub_808CD9C(u8 r0)
+void sub_808CD9C(void)
 {
     sub_8086448();
     // There appears to be no one here.

@@ -1,150 +1,12 @@
 #include "global.h"
 #include "constants/weather.h"
 #include "structs/str_dungeon.h"
+#include "dungeon_cutscenes.h"
 #include "dungeon_music.h"
+#include "dungeon_util_1.h"
 #include "exclusive_pokemon.h"
 #include "weather.h"
 
-extern void SkarmoryPreFightDialogue();
-extern void SkarmoryReFightDialogue();
-extern void sub_8086E40();
-extern void TeamMeaniesPreFightDialogue();
-extern void TeamMeaniesReFightDialogue();
-extern void sub_8087130();
-extern void ZapdosPreFightDialogue();
-extern void ZapdosReFightDialogue();
-extern void ZapdosPostStoryPreFightDialogue();
-extern void MoltresPreFightDialogue();
-extern void MoltresReFightDialogue();
-extern void MoltresPostStoryPreFightDialogue();
-extern void ArticunoPreFightDialogue();
-extern void ArticunoReFightDialogue();
-extern void ArticunoPostStoryPreFightDialogue();
-extern void sub_8088608();
-extern void sub_8088618();
-extern void GroudonPreFightDialogue();
-extern void GroudonReFightDialogue();
-extern void GroudonPostStoryPreFightDialogue();
-extern void MagmaCavernMidDialogue();
-extern void sub_8089168();
-extern void RayquazaPreFightDialogue();
-extern void RayquazaReFightDialogue();
-extern void RayquazaPostStoryPreFightDialogue();
-extern void sub_80897F0();
-extern void sub_8089878();
-extern void sub_80898E4();
-extern void MewtwoPreFightDialogue();
-extern void MewtwoReFightDialogue();
-extern void EnteiPreFightDialogue();
-extern void EnteiReFightDialogue();
-extern void EnteiPostStoryPreFightDialogue();
-extern void RaikouPreFightDialogue();
-extern void RaikouReFightDialogue();
-extern void RaikouPostStoryPreFightDialogue();
-extern void SuicunePreFightDialogue();
-extern void SuicuneReFightDialogue();
-extern void SuicunePostStoryPreFightDialogue();
-extern void HoOhPreFightDialogue();
-extern void HoOhReFightDialogue();
-extern void LatiosPreFightDialogue();
-extern void LatiosReFightDialogue();
-extern void sub_808AC3C();
-extern void RegirockPreFightDialogue();
-extern void RegicePreFightDialogue();
-extern void RegisteelPreFightDialogue();
-extern void JirachiPreFightDialogue();
-extern void JirachiReFightDialogue();
-extern void LugiaPreFightDialogue();
-extern void KyogrePreFightDialogue();
-extern void DeoxysPreFightDialogue();
-extern void CelebiJoinDialogue();
-extern void sub_808C998();
-extern void MedichamRescueDialogue();
-extern void DummyFightDialogue();
-extern void SmeargleRescueDialogue();
-extern void sub_808CD9C();
-extern void sub_8085764();
-extern void sub_80857B8();
-
-extern void sub_8086BDC(u32,u8);
-extern void sub_8086F54(u32,u8);
-extern void sub_8087334(u32,u8);
-extern void sub_80878F4(u32,u8);
-extern void sub_8088088(u32,u8);
-extern void sub_8088818(u32,u8);
-extern void sub_80893B4(u32,u8);
-extern void sub_8089788(Entity *,u32,u8);
-extern void sub_8089A00(u32,u8);
-extern void sub_8089CFC(u32,u8);
-extern void sub_8089FF0(u32,u8);
-extern void sub_808A36C(u32,u8);
-extern void sub_808A6E8(u32,u8);
-extern void sub_808AAF0(u32,u8);
-extern void sub_808AE54(u32,u8,s16 *);
-extern void sub_808AEC8(u32,u8,s16 *);
-extern void sub_808AF3C(u32,u8,s16 *);
-extern void sub_808B3E4(u32,u8,u8);
-extern void sub_808BE70(u32,u8,u8);
-extern void sub_808C1A4(u32,u8,u8);
-extern void sub_808C414(u32,u8,u8);
-extern void nullsub_100(u32,u8,u8);
-extern void sub_808C948(Entity *,u8);
-
-extern void sub_808AFB0(u8);
-extern void sub_808B030(u8);
-extern void sub_808B0B0(u8);
-
-extern void sub_8086B14(void);
-extern void sub_8086B94(void);
-extern void sub_8086E9C(void);
-extern void sub_8086F00(void);
-extern void sub_8087230(void);
-extern void sub_808729C(void);
-extern void sub_80877E8(void);
-extern void sub_8087848(void);
-extern void sub_8087F54(void);
-extern void sub_8087FB4(void);
-extern void sub_8087FF8(void);
-extern void sub_80885A0(void);
-extern void sub_80885C4(void);
-extern void sub_808862C(void);
-extern void sub_80886C4(void);
-extern void sub_808875C(void);
-extern void sub_8088DC0(void);
-extern void sub_8088E5C(void);
-extern void sub_80892C8(void);
-extern void sub_8089328(void);
-extern void sub_808970C(void);
-extern void sub_808974C(void);
-extern void sub_8089914(void);
-extern void sub_8089978(void);
-extern void sub_8089C44(void);
-extern void sub_8089C90(void);
-extern void sub_8089EFC(void);
-extern void sub_8089F44(void);
-extern void sub_8089F8C(void);
-extern void sub_808A264(void);
-extern void sub_808A2C0(void);
-extern void sub_808A308(void);
-extern void sub_808A608(void);
-extern void sub_808A668(void);
-extern void sub_808A9E4(void);
-extern void sub_808AA3C(void);
-extern void sub_808AA94(void);
-extern void sub_808ACC0(void);
-extern void sub_808AD48(void);
-extern void sub_808ADCC(void);
-extern void sub_808B2F4(void);
-extern void sub_808B35C(void);
-extern void sub_808BDEC(void);
-extern void sub_808C10C(void);
-extern void sub_808C3A0(void);
-extern void sub_808C5C0(void);
-extern void sub_808C938(void);
-extern void sub_808C9C4(void);
-extern void sub_808CB5C(void);
-extern void sub_808CBB0(void);
-extern void sub_808CD44(void);
 extern void sub_8040A84(void);
 
 struct unkData_8107234
@@ -155,7 +17,6 @@ struct unkData_8107234
 extern struct unkData_8107234 gUnknown_8107234[];
 
 void sub_8084854(struct unkData_8107234 *);
-
 
 void sub_80847D4(void)
 {
@@ -647,13 +508,13 @@ void sub_8084E00(Entity *entity, u8 param_2, u8 param_3)
             sub_808AAF0(param_2,gDungeon->unk3A0D);
             break;
         case 0x2e:
-            sub_808AE54(param_2,gDungeon->unk3A0D,&entity->pos.x);
+            sub_808AE54(param_2,gDungeon->unk3A0D,&entity->pos);
             break;
         case 0x2f:
-            sub_808AEC8(param_2,gDungeon->unk3A0D,&entity->pos.x);
+            sub_808AEC8(param_2,gDungeon->unk3A0D,&entity->pos);
             break;
         case 0x30:
-            sub_808AF3C(param_2,gDungeon->unk3A0D,&entity->pos.x);
+            sub_808AF3C(param_2,gDungeon->unk3A0D,&entity->pos);
             break;
         case 0x31:
         case 0x32:
