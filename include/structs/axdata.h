@@ -87,21 +87,29 @@ struct axObject
     /* 0x48 */ struct EntityInfo* info;
 };
 
-// size: ?
+// size: 0x80? (assuming it's the last sub-struct of GroundLives)
 struct axPokemon
 {
     struct axObject obj;
     /* 0x4C */ axmain *axmain;
-    u8 flags_0x50;
-    u8 fill51;
+    u16 flags_0x50;
     s16 unk52;
-    u8 fill54[0x66 - 0x54];
+    u8 fill54[0x58 - 0x54];
+    u16 unk58;
+    u8 unk5A;
+    // 1b padding
+    s32 unk5C;
+    s32 unk60;
+    u8 fill64[0x66 - 0x64];
     s16 unk66;
-    u8 fill68[0x6C - 0x68];
+    s16 unk68;
+    s16 unk6A;
     u16 unk6C;
     u16 unk6E;
     u8 unk70;
-    u8 fill71[0x7C - 0x71];
+    u8 fill71[0x74 - 0x71];
+    s32 unk74;
+    s32 unk78;
     s32 unk7C;
 };
 
