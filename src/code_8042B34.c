@@ -108,7 +108,7 @@ void sub_8042B34(s32 a0, s32 a1, s32 a2)
             r8 = 0;
         }
 
-        sub_800F15C(sub_800ECA4(spStruct.unk0)->unk4);
+        sub_800F15C(sub_800ECA4(spStruct.unk0)->effectId);
     }
 }
 
