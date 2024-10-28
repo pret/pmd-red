@@ -964,49 +964,49 @@ static inline s16 check_flag_for_80054BC(u16 flags) {
 }
 
 
-void RunAxAnimationFrame(struct axPokemon *a0)
+void RunAxAnimationFrame(struct axObject *a0)
 {
     ax_anim *aData;
 
-    if (!check_flag_for_80054BC(a0->obj.axdata.flags))
+    if (!check_flag_for_80054BC(a0->axdata.flags))
         return;
 
-    if (a0->obj.axdata.sub1.poseId >= 0) {
-        if (a0->obj.axdata.flags & 0x4000)
+    if (a0->axdata.sub1.poseId >= 0) {
+        if (a0->axdata.flags & 0x4000)
             return;
 
-        if (a0->obj.axdata.totalFrames < 30000)
-            a0->obj.axdata.totalFrames++;
+        if (a0->axdata.totalFrames < 30000)
+            a0->axdata.totalFrames++;
 
-        if (a0->obj.axdata.animWaitFrames != 0) {
-            a0->obj.axdata.animWaitFrames--;
-            return;
-        }
-
-        if (a0->obj.axdata.animFrames != 0 && --a0->obj.axdata.animFrames > 0)
-            return;
-    }
-
-    if (a0->obj.axdata.activeAnimData->frames == 0) {
-        if (!(a0->obj.axdata.flags & 0x1000)) {
-            a0->obj.axdata.flags |= 0x2000;
+        if (a0->axdata.animWaitFrames != 0) {
+            a0->axdata.animWaitFrames--;
             return;
         }
 
-        a0->obj.axdata.activeAnimData = a0->obj.axdata.nextAnimData;
-        a0->obj.axdata.animWaitFrames = Rand32Bit() & 1;
+        if (a0->axdata.animFrames != 0 && --a0->axdata.animFrames > 0)
+            return;
     }
 
-    a0->obj.axdata.flags |= 0x800;
+    if (a0->axdata.activeAnimData->frames == 0) {
+        if (!(a0->axdata.flags & 0x1000)) {
+            a0->axdata.flags |= 0x2000;
+            return;
+        }
 
-    aData = a0->obj.axdata.activeAnimData;
-    a0->obj.axdata.animFrames = aData->frames;
-    a0->obj.axdata.sub1.poseId = aData->poseId;
-    a0->obj.axdata.sub1.offset.x = aData->offset.x;
-    a0->obj.axdata.sub1.offset.y = aData->offset.y;
-    a0->obj.axdata.sub1.shadow.x = aData->shadow.x;
-    a0->obj.axdata.sub1.shadow.y = aData->shadow.y;
-    a0->obj.axdata.sub1.unkC = aData->unkFlags;
-    a0->obj.axdata.sub1.unk10 |= aData->unkFlags;
-    a0->obj.axdata.activeAnimData = aData + 1;
+        a0->axdata.activeAnimData = a0->axdata.nextAnimData;
+        a0->axdata.animWaitFrames = Rand32Bit() & 1;
+    }
+
+    a0->axdata.flags |= 0x800;
+
+    aData = a0->axdata.activeAnimData;
+    a0->axdata.animFrames = aData->frames;
+    a0->axdata.sub1.poseId = aData->poseId;
+    a0->axdata.sub1.offset.x = aData->offset.x;
+    a0->axdata.sub1.offset.y = aData->offset.y;
+    a0->axdata.sub1.shadow.x = aData->shadow.x;
+    a0->axdata.sub1.shadow.y = aData->shadow.y;
+    a0->axdata.sub1.unkC = aData->unkFlags;
+    a0->axdata.sub1.unk10 |= aData->unkFlags;
+    a0->axdata.activeAnimData = aData + 1;
 }
