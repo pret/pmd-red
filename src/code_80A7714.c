@@ -8,8 +8,8 @@ extern void ResetCurrentScriptFile();
 
 static EWRAM_DATA s16 sUnknown_2039DE0 = {0};
 
-extern const u32 gNullGroundScript;
-extern const u32 *gMapScriptTable[]; // 811E2F8
+extern const struct GroundScriptHeader gNullGroundScript;
+extern const struct GroundScriptHeader *gMapScriptTable[]; // 811E2F8
 
 void sub_80A7714(u32 a0)
 {
@@ -64,8 +64,7 @@ bool8 ChangeScriptFile(s16 a0)
     return FALSE;
 }
 
-// TODO review this later
-const u32 *GetGroundScript(s16 a0)
+const struct GroundScriptHeader *GetGroundScript(s16 a0)
 {
     if (a0 != -1)
         return gMapScriptTable[a0];
