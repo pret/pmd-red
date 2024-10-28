@@ -92,8 +92,8 @@ bool8 sub_806E100(s32 *param_1, Entity *pokemon, Entity *target, u8 type, struct
 
   bVar4 = FALSE;
   normalOrFightingType = FALSE;
-  pokemonInfo = pokemon->info;
-  targetInfo = target->info;
+  pokemonInfo = pokemon->axObj.info;
+  targetInfo = target->axObj.info;
   sub_800A020(param_1,1);
   param_5->unkD = 0;
   param_5->unkE = 0;
@@ -264,8 +264,8 @@ s32 WeightWeakTypePicker(Entity *user, Entity *target, u8 moveType)
     {
         checkExposed = TRUE;
     }
-    userData = user->info;
-    targetData = target->info;
+    userData = user->axObj.info;
+    targetData = target->axObj.info;
     if (moveType == TYPE_FIRE && GetFlashFireStatus(target) != FLASH_FIRE_STATUS_NONE)
     {
         return 0;

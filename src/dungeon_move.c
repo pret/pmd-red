@@ -54,7 +54,7 @@ extern void sub_80428A0(Entity *r0);
 extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
 extern void sub_8040DA0(Entity *entity, Move *move);
 extern u16 sub_80412E0(u16 moveId, u8 weather, u8 a2);
-extern void sub_800569C(Position *, EntitySpriteInfo *, u8);
+extern void sub_800569C(Position *, axdata *, u8);
 extern u8 GetBodySize(s16 index);
 extern void sub_800EF10(u16 r0);
 extern s32 sub_800E710(s16 a0, u16 a1);
@@ -508,7 +508,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
 
             gUnknown_202F208++;
             gUnknown_202F20C++;
-            targetInfo = currTarget->info; // currTarget could've been changed, hence info pointers needs to be reloaded
+            targetInfo = currTarget->axObj.info; // currTarget could've been changed, hence info pointers needs to be reloaded
             targetInfo->unk15A = 0;
             if (targetInfo->isNotTeamMember) {
                 targetInfo->targetPos = attacker->pos;
@@ -527,7 +527,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         sub_8041B48(currTarget);
                         sub_80559DC(currTarget, attacker);
                         currTarget = attacker;
-                        targetInfo = attacker->info;
+                        targetInfo = attacker->axObj.info;
                         targetInfo->unk15A = 0;
                         moveRedirected = TRUE;
                     }
@@ -544,7 +544,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         sub_8041BA8(currTarget);
                         sub_80559DC(currTarget, attacker);
                         currTarget = attacker;
-                        targetInfo = attacker->info;
+                        targetInfo = attacker->axObj.info;
                         targetInfo->unk15A = 0;
                         moveRedirected = TRUE;
                     }
@@ -2310,7 +2310,9 @@ s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
             sub_803E46C(0x5E);
             someRetVal = sub_800E710(entInfo->apparentID, sub_80412E0(move->id, GetApparentWeather(entity), 1));
             if (someRetVal != -1) {
-                sub_800569C(&unkSp1.unk8, &entity->spriteInfo, someRetVal);
+                sub_800569C(&unkSp1.unk8,
+                            &entity->axObj.axdata,
+                            someRetVal);
             }
             else {
                 unkSp1.unk8 = (Position) {0};
@@ -3020,7 +3022,7 @@ bool8 MoveMatchesChargingStatus(Entity *pokemon, Move *move)
     }
     else
     {
-        EntityInfo *pokemonInfo = pokemon->info;
+        EntityInfo *pokemonInfo = pokemon->axObj.info;
         s32 i;
         for (i = 0; i < 100; i++)
         {
@@ -3046,7 +3048,7 @@ bool8 IsChargingAnyTwoTurnMove(Entity *pokemon, bool8 checkCharge)
     }
     else
     {
-        EntityInfo *pokemonInfo = pokemon->info;
+        EntityInfo *pokemonInfo = pokemon->axObj.info;
         int i = 0;
         u8 *chargingStatusPointer = &pokemonInfo->charging.chargingStatus;
         u8 *chargingStatusPointer2;
@@ -3085,7 +3087,7 @@ u32 sub_8057144(Entity * pokemon)
     {
         Entity *dungeonMon = gDungeon->allPokemon[i];
         if (EntityExists(dungeonMon)) {
-            Move *moves = dungeonMon->info->moves.moves;
+            Move *moves = dungeonMon->axObj.info->moves.moves;
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 if (moves[j].moveFlags & MOVE_FLAG_EXISTS
@@ -3112,7 +3114,7 @@ bool8 sub_80571F0(Entity * pokemon, Move *move)
     s32 tileset;
     EntityInfo *entityInfo;
 
-    entityInfo = pokemon->info;
+    entityInfo = pokemon->axObj.info;
 
     if (entityInfo->unkFF == 1) {
         moveID = move->id;
@@ -3151,7 +3153,7 @@ bool8 sub_805727C(Entity * pokemon, Entity * target, s32 chance)
         return FALSE;
     if (!EntityExists(pokemon) || !EntityExists(target))
         return FALSE;
-    if (target->info->unk158 == 0 || target->info->HP == 0)
+    if (target->axObj.info->unk158 == 0 || target->axObj.info->HP == 0)
         return FALSE;
 
     if (chance != 0) {
@@ -3214,7 +3216,7 @@ bool8 CanAIUseMove(Entity *pokemon, s32 moveIndex, bool8 hasPPChecker)
 
 bool8 CanMonsterUseMove(Entity *pokemon, Move *move, bool8 hasPPChecker)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     if (move->id == MOVE_REGULAR_ATTACK)
     {
         return TRUE;
@@ -3255,7 +3257,7 @@ bool8 sub_805744C(Entity * pokemon, Move *move, bool8 param_3)
 {
   EntityInfo *entityInfo;
 
-  entityInfo = pokemon->info;
+  entityInfo = pokemon->axObj.info;
   if (move->id != MOVE_REGULAR_ATTACK) {
     if (((move->moveFlags & MOVE_FLAG_DISABLED)) || ((move->moveFlags2 & MOVE_FLAG_EXISTS))) {
         return FALSE;

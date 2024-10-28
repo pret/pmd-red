@@ -23,7 +23,7 @@ void sub_8068768(void)
         entity = gDungeon->allPokemon[i];
 
         if (entity != NULL && EntityExists(entity))
-            LoadPokemonSprite(entity->info->apparentID, FALSE);
+            LoadPokemonSprite(entity->axObj.info->apparentID, FALSE);
     }
 }
 

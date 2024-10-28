@@ -123,12 +123,15 @@ void sub_800EE5C(s32 r0)
     ret = sub_800ECA4(r0);
     if(r0 != 0)
     {
-        if((u32)(ret->unk0 - 1) > 1)
-        {
-            file = sub_800F1C0(ret->unk0, ret->unk4);
+        switch (ret->animType - 1) {
+        case 1 - 1:
+        case 2 - 1:
+            return;
+        default:
+            file = sub_800F1C0(ret->animType, ret->effectId);
             if(file)
             {
-                ret2 = sub_800F0F4(ret->unk0, ret->unk4);
+                ret2 = sub_800F0F4(ret->animType, ret->effectId);
                 if(ret2 == -1)
                 {
                     sub_800F204(file);
@@ -138,12 +141,11 @@ void sub_800EE5C(s32 r0)
                 {
                     sub_800F13C(ret2, file, ret);
                     sub_800EDF0(ret2, (void *)file);
-                    
                 }
                 else {
                     sub_800F204(file);
                 }
-                sub_800F15C(ret->unk4);
+                sub_800F15C(ret->effectId);
             }
         }
     }

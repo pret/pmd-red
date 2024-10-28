@@ -2,6 +2,7 @@
 #define GUARD_AXDATA_H
 
 #include "file_system.h"
+#include "structs/str_position.h"
 
 // size: 0x8
 typedef struct UnkSpriteMem
@@ -13,12 +14,9 @@ typedef struct UnkSpriteMem
 // size: 0x20
 typedef struct axdata1
 {
-    /* 0x0 */ s16 xPos;
-    /* 0x2 */ s16 yPos;
-    /* 0x4 */ u16 xOffset;
-    /* 0x6 */ u16 yOffset;
-    /* 0x8 */ u16 xShadow;
-    /* 0xA */ u16 yShadow;
+    /* 0x0 */ Position pos;
+    /* 0x4 */ Position offset;
+    /* 0x8 */ Position shadow;
     u32 unkC;
     u32 unk10;
     /* 0x14 */ s16 vramTileOrMaybeAnimTimer;
@@ -45,10 +43,8 @@ typedef struct ax_anim
     /* 0x0 */ u8 frames;
     /* 0x1 */ u8 unkFlags;
     /* 0x2 */ s16 poseId;
-    /* 0x4 */ s16 xOffset;
-    /* 0x6 */ s16 yOffset;
-    /* 0x8 */ s16 xShadow;
-    /* 0xA */ s16 yShadow;
+    /* 0x4 */ Position offset;
+    /* 0x8 */ Position shadow;
 } ax_anim;
 
 // size: 0x3C
@@ -70,37 +66,50 @@ typedef struct axdata
 typedef struct axmain
 {
     /* 0x0 */ ax_pose **poses;
-    /* 0x4 */ ax_anim ****animations;
+    /* 0x4 */ ax_anim ***animations;
     /* 0x8 */ u32 animCount;
     /* 0xC */ void *spriteData; // ?
     /* 0x10 */ void *palettes; // ?
 } axmain;
 
-// size: ?
-struct axPokemon
+// size: 0x4C
+struct axObject
 {
     /* 0x0 */ axdata axdata;
     /* 0x3C */ OpenedFile *spriteFile; // This might be a unkStruct_202EE8C instead and unkStruct_202EE8C.unk0 might be a OpenedFile* etc. See sub_8010F28
-    u16 unk40_maybeAnimTimer;
+    s16 unk40_maybeAnimTimer;
     u8 unk42_animId1;
     u8 unk43_animId2;
-    u8 unk44;
+    u8 unk44_direction1;
     u8 unk45_orientation;
     u8 unk46;
     u8 unk47;
-    u8 unk48;
-    u8 fill49[0x4C - 0x49];
+    /* 0x48 */ struct EntityInfo* info;
+};
+
+// size: 0x80? (assuming it's the last sub-struct of GroundLives)
+struct axPokemon
+{
+    struct axObject obj;
     /* 0x4C */ axmain *axmain;
-    u8 flags_0x50;
-    u8 fill51;
+    u16 flags_0x50;
     s16 unk52;
-    u8 fill54[0x66 - 0x54];
+    u8 fill54[0x58 - 0x54];
+    u16 unk58;
+    u8 unk5A;
+    // 1b padding
+    s32 unk5C;
+    s32 unk60;
+    u8 fill64[0x66 - 0x64];
     s16 unk66;
-    u8 fill68[0x6C - 0x68];
+    s16 unk68;
+    s16 unk6A;
     u16 unk6C;
     u16 unk6E;
     u8 unk70;
-    u8 fill71[0x7C - 0x71];
+    u8 fill71[0x74 - 0x71];
+    s32 unk74;
+    s32 unk78;
     s32 unk7C;
 };
 

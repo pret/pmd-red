@@ -497,7 +497,7 @@ void HandleGrimyTrap(Entity *pokemon, Entity *target)
 
     badFoodCount = 0;
     if (target != NULL) {
-        info = target->info;
+        info = target->axObj.info;
         counter = 0;
         if (info->isTeamLeader) {
             for(index = 0; index < INVENTORY_SIZE; index++)
@@ -546,7 +546,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
         }
         else
         {
-            info = target->info;
+            info = target->axObj.info;
             if (sub_8045888(target)) {
                 SetTrap(tile, 0x1B);
                 flag = TRUE;
@@ -645,7 +645,7 @@ void HandlePPZeroTrap(Entity *param_1,Entity *param_2)
 
 
   if (param_2 != NULL) {
-    info = param_2->info;
+    info = param_2->axObj.info;
     counter = 0;
     for(i = 0;  i < MAX_MON_MOVES; move++, i++)
     {
@@ -687,7 +687,7 @@ void HandleSealTrap(Entity *param_1,Entity *param_2)
 
 
     if (param_2 != NULL && !HasSafeguardStatus(param_1, param_2, TRUE)) {
-        info = param_2->info;
+        info = param_2->axObj.info;
         counter = 0;
         for(i = 0;  i < MAX_MON_MOVES;i++)
         {

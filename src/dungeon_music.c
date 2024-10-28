@@ -41,9 +41,9 @@ void sub_8083AB0(s16 param_0, Entity * target, Entity * entity)
   temp = &gDungeon->unk1CE98;
   targetEntityInfo = NULL;
   if ((EntityExists(target)) && (GetEntityType(target) == ENTITY_MONSTER)) {
-    targetEntityInfo = target->info;
+    targetEntityInfo = target->axObj.info;
   }
-  entityInfo = entity->info;
+  entityInfo = entity->axObj.info;
   if (targetEntityInfo != NULL) {
     sub_80709C8(buffer, targetEntityInfo);
     CopyStringtoBuffer(temp->buffer1, buffer);

@@ -45,7 +45,7 @@ const s32 gFaceDirectionIncrements[] = {0, 1, -1, 2, -2, 3, -3, 4, 0, -1, 1, -2,
 
 void MoveIfPossible(Entity *pokemon, bool8 showRunAwayEffect)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     pokemonInfo->aiTarget.aiNotNextToTarget = FALSE;
     pokemonInfo->aiTarget.aiTargetingEnemy = FALSE;
     pokemonInfo->aiTarget.aiTurningAround = FALSE;
@@ -103,7 +103,7 @@ void MoveIfPossible(Entity *pokemon, bool8 showRunAwayEffect)
 
 bool8 CanTakeItem(Entity *pokemon)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     struct Tile *mapTile;
     Entity *object;
     if (!EntityExists(pokemon) || CheckVariousConditions(pokemon))
@@ -139,7 +139,7 @@ bool8 CanTakeItem(Entity *pokemon)
 
 bool8 ChooseTargetPosition(Entity *pokemon)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     if (!TargetLeader(pokemon))
     {
         Entity **possibleTargets;
@@ -169,7 +169,7 @@ bool8 ChooseTargetPosition(Entity *pokemon)
         for (i = 0; i < maxPossibleTargets; i++)
         {
             Entity *target = possibleTargets[i];
-            if (EntityExists(target) && target->info->clientType == CLIENT_TYPE_NONE)
+            if (EntityExists(target) && target->axObj.info->clientType == CLIENT_TYPE_NONE)
             {
                 if (gDungeon->decoyActive)
                 {
@@ -178,11 +178,11 @@ bool8 ChooseTargetPosition(Entity *pokemon)
                         continue;
                     }
                 }
-                else if (!pokemonInfo->isNotTeamMember && target->info->immobilize.immobilizeStatus == STATUS_PETRIFIED)
+                else if (!pokemonInfo->isNotTeamMember && target->axObj.info->immobilize.immobilizeStatus == STATUS_PETRIFIED)
                 {
                     continue;
                 }
-                if (target->info->shopkeeper != SHOPKEEPER_MODE_SHOPKEEPER)
+                if (target->axObj.info->shopkeeper != SHOPKEEPER_MODE_SHOPKEEPER)
                 {
                     s32 currentDistance;
                     if (canCrossWalls)
@@ -330,7 +330,7 @@ bool8 ChooseTargetPosition(Entity *pokemon)
         {
             if (pokemonInfo->aiTarget.aiTarget->spawnGenID == pokemonInfo->aiTarget.aiTargetSpawnGenID)
             {
-                EntityInfo *targetData = pokemonInfo->aiTarget.aiTarget->info;
+                EntityInfo *targetData = pokemonInfo->aiTarget.aiTarget->axObj.info;
                 s32 i;
                 for (i = 0; i < NUM_PREV_POS; i++)
                 {
@@ -357,7 +357,7 @@ bool8 ChooseTargetPosition(Entity *pokemon)
 
 void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     s32 direction;
     s32 turnLimit;
     s32 i;
@@ -506,7 +506,7 @@ bool8 AvoidEnemies(Entity *pokemon)
     u8 closestTargetRoom;
     s32 closestTargetDistance = INFINITY_2;
     Entity *closestTarget;
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     u8 room = GetEntityRoom(pokemon);
     Entity **possibleTargets;
     s32 numPossibleTargets;
@@ -701,7 +701,7 @@ bool8 AvoidEnemies(Entity *pokemon)
 
 bool8 Wander(Entity *pokemon)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     s32 room = GetEntityRoom(pokemon);
     s32 targetFacingDir = 0;
     if (room == CORRIDOR_ROOM)
@@ -808,7 +808,7 @@ void sub_807BB78(Entity *pokemon)
 {
     EntityInfo *entityInfo;
 
-    entityInfo = pokemon->info;
+    entityInfo = pokemon->axObj.info;
     entityInfo->aiTarget.aiObjective = 0;
     entityInfo->aiTarget.aiTargetPos = pokemon->pos;
     entityInfo->aiTarget.aiTarget = 0;

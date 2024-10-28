@@ -110,7 +110,7 @@ void HandleTripTrap(Entity *pokemon, Entity *target)
         sub_806CDD4(target, 6, NUM_DIRECTIONS);
         sub_803E708(0x10, 0x55);
         sub_806CE68(target, NUM_DIRECTIONS);
-        info = target->info;
+        info = target->axObj.info;
         if ((info->heldItem).flags & ITEM_FLAG_EXISTS) {
             item =  (info->heldItem);
             (info->heldItem).flags = 0;
@@ -304,7 +304,7 @@ void SaveEntity(unkStruct_8094924 *param_1, Entity *param_2)
     sub_8083060(param_1,0xaa);
     sub_8083060(param_1,0x55);
     if (EntityExists(param_2)) {
-        info = param_2->info;
+        info = param_2->axObj.info;
         sub_8082FA8(param_1,&uStack_ac,1);
         sub_8082FA8(param_1,&param_2->pos.x,1);
         sub_8082FA8(param_1,&param_2->pos.y,1);

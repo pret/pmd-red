@@ -135,7 +135,7 @@ void sub_8073D14(Entity *entity)
 {
     Item *groundItem;
     EntityInfo *_entityInfo;
-    EntityInfo *entityInfo = entity->info;
+    EntityInfo *entityInfo = entity->axObj.info;
     Entity *tileObject = GetTileAtEntitySafe(entity)->object;
     if (tileObject == NULL)
         return;
@@ -148,10 +148,10 @@ void sub_8073D14(Entity *entity)
         return;
     if (IsClientOrTeamBase(entityInfo->joinedAt.joinedAt))
         return;
-    if (entityInfo->clientType == 1)
+    if (entityInfo->clientType == CLIENT_TYPE_CLIENT)
         return;
 
-    _entityInfo = entity->info; // Reloaded as a new variable for some reason.
+    _entityInfo = entity->axObj.info; // Reloaded as a new variable for some reason.
     groundItem = GetItemData(tileObject);
     if (groundItem->flags & ITEM_FLAG_IN_SHOP)
         return;
@@ -290,7 +290,7 @@ void sub_8074094(Entity *entity)
     if (!EntityExists(entity) || sub_8044B28())
         return;
 
-    entityInfo = entity->info;
+    entityInfo = entity->axObj.info;
     entityInfo->unk146 = 0;
     sub_805229C();
     sub_807E8F0(entity);
@@ -539,7 +539,7 @@ void sub_8074094(Entity *entity)
                 entityInfo->linked.linkedStatus = 0;
             }
             else {
-                EntityInfo *targetInfo = target->info;
+                EntityInfo *targetInfo = target->axObj.info;
                 if (targetInfo->unk98 != entityInfo->linked.unkD4) {
                     entityInfo->linked.linkedStatus = 0;
                 }
@@ -635,7 +635,7 @@ void TickStatusHeal(Entity *entity)
         return;
 
     sub_805229C();
-    entityInfo = entity->info;
+    entityInfo = entity->axObj.info;
 
     // HP heal
     if (entityInfo->unk146 == 0 && entityInfo->nonVolatile.nonVolatileStatus != STATUS_POISONED && entityInfo->nonVolatile.nonVolatileStatus != STATUS_BADLY_POISONED) {
@@ -790,7 +790,7 @@ void TickStatusHeal(Entity *entity)
         }
     }
     if (spdChange) {
-        s32 oldSpdStage = entity->info->speedStage;
+        s32 oldSpdStage = entity->axObj.info->speedStage;
         s32 newSpdStage = CalcSpeedStage(entity);
 
         if (oldSpdStage != newSpdStage) {
@@ -803,7 +803,7 @@ void TickStatusHeal(Entity *entity)
 void sub_8074FB0(Entity *entity, s32 a1, Position *pos)
 {
     Unk_Entity_x184 *strPtr;
-    EntityInfo *entityInfo = entity->info;
+    EntityInfo *entityInfo = entity->axObj.info;
 
     if (entityInfo->numMoveTiles > 3) {
         entityInfo->action.action = 0;
@@ -999,7 +999,7 @@ bool8 UseAttack(Entity *a0)
             monPosBefore = mon->pos;
 
             // Statement with no effect needed to match.
-            mon->info->isTeamLeader = mon->info->isTeamLeader;
+            mon->axObj.info->isTeamLeader = mon->axObj.info->isTeamLeader;
 
             if (monInfo->flags & 0x2000) {
                 monInfo->flags &= ~(0x2000);
