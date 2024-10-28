@@ -1668,7 +1668,7 @@ bool8 sub_805EF60(Entity *a0, EntityInfo *a1)
         return FALSE;
     if (!sub_8070BC0(a0))
         return FALSE;
-    if (r4->axObj.info->isNotTeamMember && r4->axObj.info->clientType != 1 && r4->axObj.info->shopkeeper != 1)
+    if (r4->axObj.info->isNotTeamMember && r4->axObj.info->clientType != CLIENT_TYPE_CLIENT && r4->axObj.info->shopkeeper != 1)
         return FALSE;
 
     SetMonsterActionFields(&a1->action, ACTION_TALK_FIELD);

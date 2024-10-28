@@ -148,7 +148,7 @@ void sub_8073D14(Entity *entity)
         return;
     if (IsClientOrTeamBase(entityInfo->joinedAt.joinedAt))
         return;
-    if (entityInfo->clientType == 1)
+    if (entityInfo->clientType == CLIENT_TYPE_CLIENT)
         return;
 
     _entityInfo = entity->axObj.info; // Reloaded as a new variable for some reason.

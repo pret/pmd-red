@@ -166,7 +166,7 @@ bool8 sub_8047930(Entity *pokemon, Entity *target)
   bool8 flag;
 
   if (((target->axObj.info->shopkeeper == TRUE) ||
-       (target->axObj.info->clientType == 4)) || (target->axObj.info->clientType == CLIENT_TYPE_CLIENT)) {
+       (target->axObj.info->clientType == CLIENT_TYPE_DONT_MOVE)) || (target->axObj.info->clientType == CLIENT_TYPE_CLIENT)) {
     return FALSE;
   }
   else {
