@@ -322,7 +322,7 @@ void sub_8012D34(UnkTextStruct2 *a0, s32 a1)
 	"\tbx r0");
 }
 
-void sub_8012D60(MenuStruct *param_1, const MenuItem *menuItems, u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
+void sub_8012D60(MenuStruct *param_1, const MenuItem *menuItems, const u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
 {
     const u8 *textPtr;
     s32 counter;
@@ -369,7 +369,7 @@ void sub_8012D60(MenuStruct *param_1, const MenuItem *menuItems, u32 *colorArray
     param_1->menuAction = -1;
 }
 
-void sub_8012E04(MenuStruct *param_1, const MenuItem *menuItems, u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
+void sub_8012E04(MenuStruct *param_1, const MenuItem *menuItems, const u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
 {
     const u8 *textPtr;
     s32 counter;

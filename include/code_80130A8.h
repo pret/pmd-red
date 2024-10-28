@@ -32,16 +32,16 @@ void sub_8013F84(void);
 void sub_80140B4(UnkTextStruct2 *);
 void sub_80140DC(void);
 void sub_8014114(void);
-void CreateDialogueBoxAndPortrait(const u8 *, u32, struct MonPortraitMsg *, u16);
+void CreateDialogueBoxAndPortrait(const u8 *text, void *param_2, struct MonPortraitMsg *monPortraitPtr, u16 param_4);
 void CreateYesNoDialogueBoxAndPortrait_DefaultYes(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 param_3);
 void CreateYesNoDialogueBoxAndPortrait_DefaultNo(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 param_3);
-void CreateMenuDialogueBoxAndPortrait(const u8 *text, u32 a1, u32 r9, const MenuItem *menuItems, void *arg_0, u32 a5, u32 unknownUnused, struct MonPortraitMsg *monPortraitPtr, u16 r10);
+void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const MenuItem *menuItems, void *arg_0, u32 a5, u32 unknownUnused, struct MonPortraitMsg *monPortraitPtr, u16 r10);
 s32 sub_80144A4(s32 *);
 void sub_80151C0(u32, u8 *);
 u32 sub_80154F0(void);
 void sub_80155F0(void);
 void DrawDialogueBoxString(void);
 void PrintFormatStringOnWindow(u32, u32, const u8 *, u32 windowId, u32);
-u8 *xxx_format_string(const u8 *, u8 *, u8 *, u32);
+const u8 *xxx_format_string(const u8 *str, u8 *a1, u8 *r7, u16 r8);
 
 #endif // GUARD_CODE_80130A8_H

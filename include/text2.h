@@ -52,15 +52,9 @@ struct UnkDrawStringStruct
     u8 fill22;
     u8 fill23;
     const u8* (*unk24)(const u8 *, const u8 *, struct UnkDrawStringStruct*);
-    u8 fill28;
-    u8 fill29;
-    u8 fill2A;
-    u8 fill2B;
-    u32 unk2C;
-    u8 fill30;
-    u8 fill31;
-    u8 fill32;
-    u8 fill33;
+    s32 unk28;
+    s32 unk2C;
+    s32 unk30;
     u32 unk34;
 };
 
