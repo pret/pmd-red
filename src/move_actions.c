@@ -2644,7 +2644,7 @@ void sub_805A7D4(Entity * pokemon, Entity * target, Item *item, Position *pos)
   stackEntity.unk24 = 0;
   stackEntity.isVisible = TRUE;
   stackEntity.unk22 = 0;
-  stackEntity.axObj.info = (EntityInfo*) item; // This seems wrong!
+  stackEntity.axObj.info = (EntityInfo*) item;
   stackEntity.pos.x = target->pos.x + pos->x;
   stackEntity.pos.y = target->pos.y + pos->y;
   SetEntityPixelPos(&stackEntity,(target->pos.x * 0x18 + 4) * 0x100,
