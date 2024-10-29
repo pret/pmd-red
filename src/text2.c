@@ -3332,6 +3332,7 @@ const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct UnkDraw
 void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 characterSpacing, s32 lineSpacing)
 {
     struct UnkDrawStringStruct sp;
+    u32 currChr;
 
     sp.unk0 = x;
     sp.unk2 = y;
@@ -3339,40 +3340,40 @@ void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 wi
     sp.unk10 = 7;
     while (1) {
         str = HandleTextFormat(strArr, str, &sp);
-        str = xxx_get_next_char_from_string(str, &sp.unk34);
-        if (sp.unk34 == '\0' || sp.unk34 == terminatingChr)
+        str = xxx_get_next_char_from_string(str, &currChr);
+        if (currChr == '\0' || currChr == terminatingChr)
             break;
 
-        if (sp.unk34 == 0x82A0) {
+        if (currChr == 0x82A0) {
             gCurrentCharmap = 0;
         }
-        else if (sp.unk34 == 0x82A2) {
+        else if (currChr == 0x82A2) {
             gCurrentCharmap = 1;
         }
-        else if (sp.unk34 == '\e') {
+        else if (currChr == '\e') {
             break;
         }
-        else if (sp.unk34 == '\r' || sp.unk34 == '\n') {
+        else if (currChr == '\r' || currChr == '\n') {
             sp.unk0 = sp.unkC;
             sp.unk2 += lineSpacing;
         }
-        else if (sp.unk34 == '\x1D') { // ASCII group separator.
+        else if (currChr == '\x1D') { // ASCII group separator.
             sp.unk0 = sp.unkC;
             sp.unk2 += 5;
         }
-        else if (sp.unk34 == '`') {
+        else if (currChr == '`') {
             sp.unk0 += 6;
         }
         else if (characterSpacing == 0) {
-            sp.unk0 += xxx_draw_char(strArr, sp.unk0, sp.unk2, sp.unk34, sp.unk10, windowId);
+            sp.unk0 += xxx_draw_char(strArr, sp.unk0, sp.unk2, currChr, sp.unk10, windowId);
         }
         else {
-            const struct unkChar *chrPtr = GetCharacter(sp.unk34);
+            const struct unkChar *chrPtr = GetCharacter(currChr);
             if (chrPtr != NULL) {
                 s32 x = sp.unk0;
                 s32 x2 = gCharacterSpacing + 10;
                 x +=((x2 - chrPtr->unk6) / 2);
-                xxx_draw_char(strArr, x, sp.unk2, sp.unk34, sp.unk10, windowId);
+                xxx_draw_char(strArr, x, sp.unk2, currChr, sp.unk10, windowId);
                 sp.unk0 += characterSpacing;
             }
         }

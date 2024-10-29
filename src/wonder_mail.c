@@ -31,9 +31,6 @@ extern void sub_8011C28(u32);
 extern void sub_809927C(u8);
 extern u32 sub_8031050();
 extern void sub_80310B4();
-
-extern char gUnknown_202E5D8[0x50];
-
 extern void nullsub_130(void);
 extern void sub_8028348(void);
 

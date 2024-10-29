@@ -30,7 +30,6 @@
 
 extern void SetFriendRescueMenuState(u32);
 
-extern char gUnknown_202E5D8[0x50];
 extern TeamInventory *gTeamInventoryRef;
 
 

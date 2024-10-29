@@ -15,7 +15,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gPlayerName[]; // 202E2B8
 extern u8 gUnknown_202E5D8[];
 
 static EWRAM_DATA_2 MakuhitaDojoWork1 *sMakuhitaDojoWork1 = {0};
@@ -216,7 +215,7 @@ static void MakuhitaDojo_UpdateDialogue(void)
             CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_7], 0, sMakuhitaDojoWork1->monPortraitPtr, 0x10D);
             break;
         case 9:
-            PrintColoredPokeNameToBuffer(gPlayerName, GetPlayerPokemonStruct(), COLOR_YELLOW);
+            PrintColoredPokeNameToBuffer(gPlayerName[0], GetPlayerPokemonStruct(), COLOR_YELLOW);
             sMakuhitaDojoWork1->fallbackState = 11;
             PlaySound(203);
             CreateDialogueBoxAndPortrait(sReceivedBonslyDoll, 0, 0, 0x101);

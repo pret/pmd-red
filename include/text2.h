@@ -55,7 +55,6 @@ struct UnkDrawStringStruct
     s32 unk28;
     s32 unk2C;
     s32 unk30;
-    u32 unk34;
 };
 
 

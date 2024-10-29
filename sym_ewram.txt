@@ -184,27 +184,6 @@ gUnknown_202DE19: /* 202DE19 (sub_800F990 - sub_8010014) */
 	.align 4
     .include "src/code_80140DC.o"
 
-gPlayerName: /* 202E2B8 (UpdateLuminousCaveDialogue - sub_80A14E8) */
-	.space 800
-gUnknown_202E5D8: /* 202E5D8 [used everywhere tbh] */
-	.space 80
-gUnknown_202E628: /* 202E628 (HandleMissionReward - sub_80A14E8) */
-	.space 0xB8
-
-gUnknown_202E6E0: /* 202E6E0 (xxx_draw_string_80144C4) */
-	.space 0x8
-gTeamName: /* 202E6E8 (xxx_format_string) */
-	.space 80
-gUnknown_202E738: /* 202E738 (sub_8014144 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E73C: /* 202E73C (sub_8014144 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E740: /* 202E740 (sub_8014144 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E744: /* 202E744 (sub_8014144 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E748: /* 202E748 (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x34
 gUnknown_202E77C: /* 202E77C (sub_8014248 - xxx_draw_string_80144C4) */
 	.space 0x4
 gUnknown_202E780: /* 202E780 (xxx_draw_string_80144C4) */

@@ -258,6 +258,8 @@ void xxx_draw_string_80524F0(void)
         // fall through
         case 2: {
             struct UnkDrawStringStruct sp;
+            u32 currChr;
+
             s32 id = strPtr->unk1C062;
             if (id == strPtr->unk1C060) {
                 strPtr->unk1C06C = 0;
@@ -277,12 +279,12 @@ void xxx_draw_string_80524F0(void)
                     txtPtr = xxx_handle_format_global(txtPtr, &sp);
                     if (*txtPtr == '\0' || *txtPtr == '\r' || *txtPtr == '\n')
                         break;
-                    txtPtr = xxx_get_next_char_from_string(txtPtr, &sp.unk34);
-                    if (sp.unk34 == 96) {
+                    txtPtr = xxx_get_next_char_from_string(txtPtr, &currChr);
+                    if (currChr == '`') {
                         sp.unk0 += 6;
                     }
                     else {
-                        sp.unk0 += xxx_call_draw_char(sp.unk0, sp.unk2, sp.unk34, sp.unk10, 0);
+                        sp.unk0 += xxx_call_draw_char(sp.unk0, sp.unk2, currChr, sp.unk10, 0);
                     }
                 }
                 sub_80073E0(0);

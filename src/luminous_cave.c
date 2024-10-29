@@ -61,8 +61,6 @@ enum LuminousCaveMenuActions
 
 };
 
-extern u8 gPlayerName[]; // 202E2B8
-
 static EWRAM_DATA_2 LuminousCaveWork *sLuminousCaveWork = {0};
 
 #include "data/luminous_cave.h"
@@ -305,7 +303,7 @@ static void UpdateLuminousCaveDialogue(void)
             CreateDialogueBoxAndPortrait(sLetUsBegin,0,0,0x105);
             break;
         case LUMINOUS_CAVE_CHANGED_APPEARANCE:
-            PrintColoredPokeNameToBuffer(gPlayerName,sLuminousCaveWork->pokeStruct, COLOR_CYAN);
+            PrintColoredPokeNameToBuffer(gPlayerName[0],sLuminousCaveWork->pokeStruct, COLOR_CYAN);
             PlaySound(0x1ff);
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_EVOLVED;
             CreateDialogueBoxAndPortrait(sFmtChangedAppearance,0,0,0x105);

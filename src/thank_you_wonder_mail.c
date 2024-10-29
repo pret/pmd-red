@@ -76,8 +76,6 @@ const Item gUnknown_80DED44 =
     ITEM_FLAG_EXISTS, 0, ITEM_NOTHING
 };
 
-extern char gUnknown_202E5D8[0x50];
-
 const UnkTextStruct2 gUnknown_80DED48 =
 {
     0x00, 0x00, 0x00, 0x00,

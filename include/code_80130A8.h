@@ -26,9 +26,15 @@ struct MonPortraitMsg
     u8 unkE;
 };
 
+#define FORMAT_BUFFER_LEN 80
+#define FRIEND_AREA_BUFFER_LEN 184
+
 extern s32 gFormatData_202DE30[10];
-extern u8 gFormatItems[4][80];
-extern u8 gAvailablePokemonNames[10][80];
+extern u8 gFormatItems[4][FORMAT_BUFFER_LEN];
+extern u8 gAvailablePokemonNames[10][FORMAT_BUFFER_LEN];
+extern u8 gPlayerName[10][FORMAT_BUFFER_LEN];
+extern u8 gUnknown_202E5D8[FORMAT_BUFFER_LEN];
+extern u8 gUnknown_202E628[FRIEND_AREA_BUFFER_LEN];
 
 // code_80130A8.s
 void sub_8013E54(void);

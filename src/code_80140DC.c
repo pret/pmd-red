@@ -101,11 +101,6 @@ struct UnkStruct_203B198
     struct SubStruct_203B198 unk48;
 };
 
-extern s32 gUnknown_202E738;
-extern s32 gUnknown_202E73C;
-extern s32 gUnknown_202E740;
-extern s32 gUnknown_202E744;
-extern struct UnkDrawStringStruct gUnknown_202E748;
 extern u32 gUnknown_202EC10;
 extern const MenuItem *gUnknown_202EC14;
 extern void *gUnknown_202EC18;
@@ -122,14 +117,9 @@ extern u32 gUnknown_202E788;
 extern u32 gUnknown_202E78C;
 extern u32 gUnknown_202E784;
 extern s32 gUnknown_202E780;
-extern SpriteOAM gUnknown_202E6E0;
 extern void (*gUnknown_203B088)(s32 a0);
 extern MenuStruct gUnknown_202EBC0;
 extern u8 gUnknown_202EB80[];
-extern u8 gUnknown_202E628[];
-extern u8 gPlayerName[][80];
-extern u8 gTeamName[];
-extern u8 gUnknown_202E5D8[];
 
 // Only read, but never written to. Possibly used in Blue?
 struct NeverWrittenToStruct202EC20
@@ -164,9 +154,26 @@ bool8 AppendString_8014FA8(const u8 *, u8 **, u8 *, u16 r3);
 // 'd', 'v' and 'V'
 EWRAM_DATA s32 gFormatData_202DE30[10] = {0};
 // 'i', apparently only i0 and i1 are actually used though it's yet to be verified
-EWRAM_DATA u8 gFormatItems[4][80] = {0};
+EWRAM_DATA u8 gFormatItems[4][FORMAT_BUFFER_LEN] = {0};
 // 'm' which probably stands for 'monster', available through m0 to m9
-EWRAM_DATA u8 gAvailablePokemonNames[10][80] = {0};
+EWRAM_DATA u8 gAvailablePokemonNames[10][FORMAT_BUFFER_LEN] = {0};
+// 'n' which probably stands for 'name', available through n0 to n9
+EWRAM_DATA u8 gPlayerName[10][FORMAT_BUFFER_LEN] = {0};
+// Seems to be a general buffer
+EWRAM_DATA u8 gUnknown_202E5D8[FORMAT_BUFFER_LEN] = {0};
+// 'h' - Friend Area buffer. This buffer seems larger than others. It's possible it actually has the same length, but there were some unused buffers right after it.
+EWRAM_DATA u8 gUnknown_202E628[FRIEND_AREA_BUFFER_LEN] = {0};
+
+static EWRAM_DATA SpriteOAM sDialogueBoxArrowSprite = {0};
+
+// 't' - team name. This buffer seems wastefully large, given team name can be max 10(or so) characters.
+static EWRAM_DATA u8 sFormatBuffer_TeamName[FORMAT_BUFFER_LEN] = {0};
+
+static EWRAM_DATA s32 gUnknown_202E738 = 0;
+static EWRAM_DATA s32 gUnknown_202E73C = 0;
+static EWRAM_DATA s32 gUnknown_202E740 = 0;
+static EWRAM_DATA s32 gUnknown_202E744 = 0;
+static EWRAM_DATA struct UnkDrawStringStruct gUnknown_202E748 = {0};
 
 void sub_8014144(void)
 {
@@ -481,51 +488,51 @@ void DrawDialogueBoxString(void)
                     if (!(gUnknown_202E77C & 0x2) && gUnknown_202E791 & 8) {
                         u32 shape, tileNum, palNum, pal;
 
-                        gUnknown_202E6E0.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
-                        gUnknown_202E6E0.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
-                        gUnknown_202E6E0.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
-                        gUnknown_202E6E0.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
-                        gUnknown_202E6E0.attrib1 &= ~SPRITEOAM_MASK_BPP;
+                        sDialogueBoxArrowSprite.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
+                        sDialogueBoxArrowSprite.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+                        sDialogueBoxArrowSprite.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
+                        sDialogueBoxArrowSprite.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
+                        sDialogueBoxArrowSprite.attrib1 &= ~SPRITEOAM_MASK_BPP;
 
                         shape = 1;
                         shape <<= SPRITEOAM_SHIFT_SHAPE;
-                        gUnknown_202E6E0.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
-                        gUnknown_202E6E0.attrib1 |= shape;
+                        sDialogueBoxArrowSprite.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
+                        sDialogueBoxArrowSprite.attrib1 |= shape;
 
-                        gUnknown_202E6E0.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
-                        gUnknown_202E6E0.attrib2 &= ~SPRITEOAM_MASK_SIZE;
+                        sDialogueBoxArrowSprite.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
+                        sDialogueBoxArrowSprite.attrib2 &= ~SPRITEOAM_MASK_SIZE;
 
                         tileNum = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
-                        gUnknown_202E6E0.attrib3 &= ~SPRITEOAM_MASK_TILENUM;
-                        gUnknown_202E6E0.attrib3 |= tileNum;
+                        sDialogueBoxArrowSprite.attrib3 &= ~SPRITEOAM_MASK_TILENUM;
+                        sDialogueBoxArrowSprite.attrib3 |= tileNum;
 
-                        gUnknown_202E6E0.attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
+                        sDialogueBoxArrowSprite.attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
 
                         pal = 15;
                         palNum = (pal & SPRITEOAM_MAX_PALETTENUM) << SPRITEOAM_SHIFT_PALETTENUM;
-                        gUnknown_202E6E0.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-                        gUnknown_202E6E0.attrib3 |= palNum;
+                        sDialogueBoxArrowSprite.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
+                        sDialogueBoxArrowSprite.attrib3 |= palNum;
 
 
                         if (gUnknown_202E77C & 0x10) {
                             u32 var = 0x780;
-                            gUnknown_202E6E0.unk6 &= 0xF;
-                            gUnknown_202E6E0.unk6 |= var;
-                            gUnknown_202E6E0.attrib2 &= ~SPRITEOAM_MASK_X;
-                            gUnknown_202E6E0.attrib2 |= 0x70;
+                            sDialogueBoxArrowSprite.unk6 &= 0xF;
+                            sDialogueBoxArrowSprite.unk6 |= var;
+                            sDialogueBoxArrowSprite.attrib2 &= ~SPRITEOAM_MASK_X;
+                            sDialogueBoxArrowSprite.attrib2 |= 0x70;
                         }
                         else {
                             s16 x;
 
                             u32 var = ((gUnknown_202E748.unkA + 1) & 0xFFF) << 4;
-                            gUnknown_202E6E0.unk6 &= 0xF;
-                            gUnknown_202E6E0.unk6 |= var;
+                            sDialogueBoxArrowSprite.unk6 &= 0xF;
+                            sDialogueBoxArrowSprite.unk6 |= var;
                             x = gUnknown_202E748.unk8;
-                            gUnknown_202E6E0.attrib2 &= ~SPRITEOAM_MASK_X;
-                            gUnknown_202E6E0.attrib2 |= x & 0x1FF;
+                            sDialogueBoxArrowSprite.attrib2 &= ~SPRITEOAM_MASK_X;
+                            sDialogueBoxArrowSprite.attrib2 |= x & 0x1FF;
                         }
 
-                        AddSprite(&gUnknown_202E6E0, 0x100, NULL, NULL);
+                        AddSprite(&sDialogueBoxArrowSprite, 0x100, NULL, NULL);
                     }
                 }
                 else {
@@ -748,12 +755,12 @@ const u8 *xxx_format_string(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
                 case 't':
                     str++;
                     if (sub_80023E4(0)) {
-                        sub_80920D8(gTeamName);
+                        sub_80920D8(sFormatBuffer_TeamName);
                     }
                     else {
-                        strcpy(gTeamName, gUnknown_80D48F8); // ????
+                        strcpy(sFormatBuffer_TeamName, gUnknown_80D48F8); // ????
                     }
-                    txtPtr = gTeamName;
+                    txtPtr = sFormatBuffer_TeamName;
                     break;
                 case 'h':
                     str++;
