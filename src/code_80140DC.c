@@ -101,34 +101,9 @@ struct UnkStruct_203B198
     struct SubStruct_203B198 unk48;
 };
 
-extern u32 gUnknown_202EC10;
-extern const MenuItem *gUnknown_202EC14;
-extern void *gUnknown_202EC18;
-extern s32 gUnknown_202EC1C;
-extern u8 gUnknown_202E798[];
-extern const u8 *gUnknown_202E794;
-extern MenuInputStructSub gUnknown_202EC28;
 extern struct UnkStruct_203B198 gUnknown_203B198;
 extern UnkTextStruct1 gUnknown_2027370[4];
-extern u16 gUnknown_202E77C;
-extern u8 gUnknown_202E790;
-extern u8 gUnknown_202E791;
-extern u32 gUnknown_202E788;
-extern u32 gUnknown_202E78C;
-extern u32 gUnknown_202E784;
-extern s32 gUnknown_202E780;
 extern void (*gUnknown_203B088)(s32 a0);
-extern MenuStruct gUnknown_202EBC0;
-extern u8 gUnknown_202EB80[];
-
-// Only read, but never written to. Possibly used in Blue?
-struct NeverWrittenToStruct202EC20
-{
-    struct SubStruct_203B198 unk0;
-    const u8 *unk18;
-};
-
-extern struct NeverWrittenToStruct202EC20 *gUnknown_202EC20;
 
 extern const struct SubStruct_203B198 gUnknown_80D48AC;
 extern const struct UnkTextStruct2 gUnknown_80D48DC;
@@ -174,6 +149,34 @@ static EWRAM_DATA s32 gUnknown_202E73C = 0;
 static EWRAM_DATA s32 gUnknown_202E740 = 0;
 static EWRAM_DATA s32 gUnknown_202E744 = 0;
 static EWRAM_DATA struct UnkDrawStringStruct gUnknown_202E748 = {0};
+static EWRAM_DATA u16 sUnknownTextFlags = 0;
+static EWRAM_DATA s32 gUnknown_202E780 = 0;
+static EWRAM_DATA s32 gUnknown_202E784 = 0;
+static EWRAM_DATA s32 gUnknown_202E788 = 0;
+static EWRAM_DATA s32 gUnknown_202E78C = 0;
+static EWRAM_DATA bool8 gUnknown_202E790 = FALSE;
+static EWRAM_DATA u8 sArrowFrames = 0;
+static EWRAM_DATA const u8 *gUnknown_202E794 = NULL;
+
+#define DIALOGUE_TEXT_BUFFER_SIZE 1000
+static EWRAM_DATA u8 sDialogueTextBuffer[DIALOGUE_TEXT_BUFFER_SIZE] = {0};
+static EWRAM_DATA u8 sFormatBuffer_UnknownMonster[64] = {0};
+static EWRAM_DATA MenuStruct gUnknown_202EBC0 = {0};
+static EWRAM_DATA u32 gUnknown_202EC10 = 0;
+static EWRAM_DATA const MenuItem *sDialogueMenuItems = NULL;
+static EWRAM_DATA void *gUnknown_202EC18 = NULL;
+static EWRAM_DATA s32 gUnknown_202EC1C = 0;
+
+// Only read, but never written to. Possibly used in Blue?
+struct NeverWrittenToStruct202EC20
+{
+    struct SubStruct_203B198 unk0;
+    const u8 *unk18;
+};
+static EWRAM_DATA struct NeverWrittenToStruct202EC20 *sNeverWrittenToUnknownStructPtr = NULL;
+static UNUSED EWRAM_DATA u8 sUnusedEwram1[4] = {0};
+
+static EWRAM_DATA MenuInputStructSub gUnknown_202EC28 = {0};
 
 void sub_8014144(void)
 {
@@ -211,19 +214,19 @@ void CreateYesNoDialogueBoxAndPortrait_DefaultNo(const u8 *text, struct MonPortr
     CreateMenuDialogueBoxAndPortrait(text, NULL, -1, gUnknown_80D4880, NULL, 3, 0, monPortraitPtr, param_3 | 0x300);
 }
 
-void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const MenuItem *menuItems, void *arg_0, u32 a5, u32 unknownUnused, struct MonPortraitMsg *monPortraitPtr, u16 r10)
+void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const MenuItem *menuItems, void *arg_0, u32 a5, u32 unknownUnused, struct MonPortraitMsg *monPortraitPtr, u16 flags)
 {
     bool8 portraitOn = FALSE;
 
-    xxx_format_string(text, gUnknown_202E798, gUnknown_202E798 + 999, r10);
-    gUnknown_202E794 = gUnknown_202E798;
+    xxx_format_string(text, sDialogueTextBuffer, sDialogueTextBuffer + DIALOGUE_TEXT_BUFFER_SIZE - 1, flags);
+    gUnknown_202E794 = sDialogueTextBuffer;
     gUnknown_202E748.unk24 = a1;
     gUnknown_202EC10 = a5;
-    gUnknown_202EC14 = menuItems;
+    sDialogueMenuItems = menuItems;
     gUnknown_202EC18 = arg_0;
     gUnknown_202EC1C = r9;
     sub_801317C(&gUnknown_202EC28);
-    if (r10 & 0x10) {
+    if (flags & 0x10) {
         gUnknown_203B198.unk0 = gUnknown_80D48DC;
     }
     else {
@@ -266,23 +269,23 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     gUnknown_202E748.unk10 = 7;
     gUnknown_202E748.unk1C = 0;
     gUnknown_202E748.unk20 = 0;
-    SetCharacterMask((r10 & 0x10) ? 8 : 3);
+    SetCharacterMask((flags & 0x10) ? 8 : 3);
     gUnknown_202E744 = 1;
-    gUnknown_202E77C = r10;
-    if (r10 & 0x20) {
-        gUnknown_202E790 = 1;
+    sUnknownTextFlags = flags;
+    if (flags & 0x20) {
+        gUnknown_202E790 = TRUE;
     }
     else {
-        gUnknown_202E790 = 0;
+        gUnknown_202E790 = FALSE;
     }
 
-    if (r10 & 0x400) {
+    if (flags & 0x400) {
         SetWindowBGColor();
     }
     gUnknown_202E788 = 1;
     gUnknown_202E78C = 1;
     UnpressButtons();
-    gUnknown_202E791 = 0;
+    sArrowFrames = 0;
     gUnknown_202E784 = 0;
     if (portraitOn) {
         const u8 *data = monPortraitPtr->faceData->sprites[monPortraitPtr->spriteId].gfx;
@@ -327,7 +330,7 @@ void DrawDialogueBoxString(void)
                 const u8 *str = gUnknown_202E794;
                 s32 r7;
 
-                if (gUnknown_202E790 != 0) {
+                if (gUnknown_202E790) {
                     r7 = 99999;
                 }
                 else {
@@ -349,7 +352,7 @@ void DrawDialogueBoxString(void)
                             gUnknown_202E744 = 7;
                             gUnknown_202E780 = gUnknown_202E73C;
                         }
-                        gUnknown_202E791 = 0;
+                        sArrowFrames = 0;
                         break;
                      }
                      if (*str == '\0') {
@@ -370,11 +373,11 @@ void DrawDialogueBoxString(void)
                      }
 
                      if (gUnknown_202E748.unk2 > 34) {
-                        if (!(gUnknown_202E77C & 0x10)) {
+                        if (!(sUnknownTextFlags & 0x10)) {
                             gUnknown_202E748.unk1C = 0;
                             gUnknown_202E748.unk20 = 1;
                             gUnknown_202E744 = 8;
-                            gUnknown_202E791 = 0;
+                            sArrowFrames = 0;
                             gUnknown_202E780 = gUnknown_202E738;
                             break;
                         }
@@ -388,7 +391,7 @@ void DrawDialogueBoxString(void)
                 gUnknown_202E794 = str;
                 sub_801317C(&gUnknown_202EC28);
                 if (gUnknown_202E794[0] == '\0') {
-                    if (gUnknown_202EC14 != NULL) {
+                    if (sDialogueMenuItems != NULL) {
                         gUnknown_202E744 = 3;
                     }
                     else {
@@ -401,7 +404,7 @@ void DrawDialogueBoxString(void)
                     if (gUnknown_202E748.unk20 != 0) {
                         if (gUnknown_202E744 == 1) {
                             gUnknown_202E744 = 7;
-                            gUnknown_202E791 = 0;
+                            sArrowFrames = 0;
                             gUnknown_202E780 = gUnknown_202E738;
                         }
                         keepLooping = FALSE;
@@ -413,12 +416,12 @@ void DrawDialogueBoxString(void)
             }
             break;
             case 2: {
-                if (gUnknown_202E77C & 4) {
+                if (sUnknownTextFlags & 4) {
                     sub_8011A04();
                 }
-                if (!(gUnknown_202E77C & 2)) {
-                    if (gUnknown_202E77C & 0x40 && gRealInputs.pressed & AB_BUTTONS) {
-                        gUnknown_202E790 = 1;
+                if (!(sUnknownTextFlags & 2)) {
+                    if (sUnknownTextFlags & 0x40 && gRealInputs.pressed & AB_BUTTONS) {
+                        gUnknown_202E790 = TRUE;
                         gUnknown_202E748.unk30 = 99999;
                     }
                 }
@@ -433,9 +436,9 @@ void DrawDialogueBoxString(void)
             }
             break;
             case 6: {
-                if (gUnknown_202E77C & 0x100) {
+                if (sUnknownTextFlags & 0x100) {
                     gUnknown_202E744 = 9;
-                    gUnknown_202E791 = 0;
+                    sArrowFrames = 0;
                     if (gUnknown_202E740 > 0) {
                         gUnknown_202E780 = gUnknown_202E740 - gUnknown_202E784;
                         if (gUnknown_202E780 < 0) {
@@ -458,12 +461,12 @@ void DrawDialogueBoxString(void)
                 bool8 buttonPress = FALSE;
                 gUnknown_202E748.unk20 = 0;
                 nullsub_34(&gUnknown_202EC28, 0);
-                if (!(gUnknown_202E77C & 1)) {
+                if (!(sUnknownTextFlags & 1)) {
                     buttonPress = TRUE;
                 }
                 else
                 {
-                    if (gUnknown_202E77C & 2)
+                    if (sUnknownTextFlags & 2)
                     {
                         if (gUnknown_202E780 > 0) {
                             gUnknown_202E780--;
@@ -484,8 +487,8 @@ void DrawDialogueBoxString(void)
                 }
 
                 if (!buttonPress) {
-                    gUnknown_202E791++;
-                    if (!(gUnknown_202E77C & 0x2) && gUnknown_202E791 & 8) {
+                    sArrowFrames++;
+                    if (!(sUnknownTextFlags & 0x2) && sArrowFrames & 8) {
                         u32 shape, tileNum, palNum, pal;
 
                         sDialogueBoxArrowSprite.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
@@ -513,8 +516,7 @@ void DrawDialogueBoxString(void)
                         sDialogueBoxArrowSprite.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
                         sDialogueBoxArrowSprite.attrib3 |= palNum;
 
-
-                        if (gUnknown_202E77C & 0x10) {
+                        if (sUnknownTextFlags & 0x10) {
                             u32 var = 0x780;
                             sDialogueBoxArrowSprite.unk6 &= 0xF;
                             sDialogueBoxArrowSprite.unk6 |= var;
@@ -546,7 +548,7 @@ void DrawDialogueBoxString(void)
                         gUnknown_202E748.unk0 = 4;
                         if (gUnknown_202E748.unk2 > 34) {
                             gUnknown_202E748.unk2 = 4;
-                            if (gUnknown_202E77C & 0x10) {
+                            if (sUnknownTextFlags & 0x10) {
                                 CallPrepareTextbox_8008C54(0);
                                 gUnknown_202E744 = 1;
                             }
@@ -583,7 +585,7 @@ void DrawDialogueBoxString(void)
             }
             break;
             case 11: {
-                if (gUnknown_202E77C & 0x200) {
+                if (sUnknownTextFlags & 0x200) {
                     ResetUnusedInputStruct();
                     xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
                     gUnknown_202E744 = 0;
@@ -620,7 +622,7 @@ void sub_8014A88(void)
 {
     s32 r2, r1;
     u8 text[128];
-    const MenuItem *menuItem = gUnknown_202EC14;
+    const MenuItem *menuItem = sDialogueMenuItems;
     s32 r5 = 0;
     s32 r7 = 0;
     s32 i;
@@ -653,15 +655,15 @@ void sub_8014A88(void)
     gUnknown_203B198.unk30.unkA = 14 - r2;
     gUnknown_203B198.unk0.unk0 = 0x80;
     gUnknown_203B198.unk18 = 0xC0;
-    if (gUnknown_202EC20 != NULL) {
-        gUnknown_203B198.unk48 = gUnknown_202EC20->unk0;
+    if (sNeverWrittenToUnknownStructPtr != NULL) {
+        gUnknown_203B198.unk48 = sNeverWrittenToUnknownStructPtr->unk0;
     }
     ResetUnusedInputStruct();
     xxx_call_save_unk_text_struct_800641C(&gUnknown_203B198.unk0, TRUE, FALSE);
-    sub_8012D60(&gUnknown_202EBC0, gUnknown_202EC14, gUnknown_80D48A0, gUnknown_202EC18, gUnknown_202EC1C, 2);
-    if (gUnknown_202EC20 != NULL) {
+    sub_8012D60(&gUnknown_202EBC0, sDialogueMenuItems, gUnknown_80D48A0, gUnknown_202EC18, gUnknown_202EC1C, 2);
+    if (sNeverWrittenToUnknownStructPtr != NULL) {
         sub_80073B8(3);
-        PrintStringOnWindow(4, 2, gUnknown_202EC20->unk18, 3, 0);
+        PrintStringOnWindow(4, 2, sNeverWrittenToUnknownStructPtr->unk18, 3, 0);
         sub_80073E0(3);
     }
 }
@@ -739,8 +741,8 @@ const u8 *xxx_format_string(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
                     str++;
                     if (*str == 'm') {
                         PokemonStruct1 *monStruct = sub_808D3BC();
-                        txtPtr = gUnknown_202EB80;
-                        PrintColoredPokeNameToBuffer(gUnknown_202EB80, monStruct, 0);
+                        txtPtr = sFormatBuffer_UnknownMonster;
+                        PrintColoredPokeNameToBuffer(sFormatBuffer_UnknownMonster, monStruct, 0);
                     }
                     else {
                         txtPtr = gAvailablePokemonNames[*str - '0'];

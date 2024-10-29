@@ -181,43 +181,10 @@ gUnknown_202DE19: /* 202DE19 (sub_800F990 - sub_8010014) */
     .space 0x2
 
     .include "src/save.o"
-	.align 4
+	.space 4
     .include "src/code_80140DC.o"
+	.space 4
 
-gUnknown_202E77C: /* 202E77C (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E780: /* 202E780 (xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E784: /* 202E784 (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E788: /* 202E788 (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E78C: /* 202E78C (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E790: /* 202E790 (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x1
-gUnknown_202E791: /* 202E791 (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x3
-gUnknown_202E794: /* 202E794 (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E798: /* 202E798 (sub_8014248) [on screen dialogue text] */
-	.space 1000
-gUnknown_202EB80: /* 202EB80 (xxx_format_string) */
-	.space 0x40
-gUnknown_202EBC0: /* 202EBC0 (sub_8014A88 - sub_8014B94) */
-	.space 80
-gUnknown_202EC10: /* 202EC10 (sub_8014248 - sub_8014A88) */
-	.space 0x4
-gUnknown_202EC14: /* 202EC14 (sub_8014248 - sub_8014A88) */
-	.space 0x4
-gUnknown_202EC18: /* 202EC18 (sub_8014248 - sub_8014A88) */
-	.space 0x4
-gUnknown_202EC1C: /* 202EC1C (sub_8014248 - sub_8014B94) */
-	.space 0x4
-gUnknown_202EC20: /* 202EC20 (sub_8014A88) */
-	.space 0x8
-gUnknown_202EC28: /* 202EC28 (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x10
 
 gUnknown_202EC38: /* 202EC38 (sub_8037B28) */
 	.space 0x8
