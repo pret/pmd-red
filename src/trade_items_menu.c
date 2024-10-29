@@ -18,7 +18,6 @@
 #include "trade_items_menu.h"
 
 extern u32 gFormatData_202DE30;
-extern u8 gFormatItems[];
 
 static EWRAM_DATA_2 struct TradeItemsMenu *sTradeItemsMenu = {0};
 
@@ -530,7 +529,7 @@ void sub_8036B28(void)
         break;
     case TRADE_ITEMS_SEND_ITEM_CONFIRM:
         gFormatData_202DE30 = sTradeItemsMenu->unk14.unk0;
-        BufferItemName(gFormatItems,sTradeItemsMenu->itemToSend.id,NULL);
+        BufferItemName(gFormatItems[0],sTradeItemsMenu->itemToSend.id,NULL);
         CreateMenuDialogueBoxAndPortrait(sFmtWillBeSentPrompt,0,5, sUnknown_80E6154,0,4,0,0,0x101);
         break;
     case TRADE_ITEMS_RECEIVE_ITEM:
@@ -589,17 +588,17 @@ void sub_8036B28(void)
     case 0xe:
         if (sTradeItemsMenu->unk24C.quantity == 0) {
             gFormatData_202DE30 = sTradeItemsMenu->unk244.quantity;
-            BufferItemName(gFormatItems,sTradeItemsMenu->unk244.itemIdx.id,NULL);
+            BufferItemName(gFormatItems[0],sTradeItemsMenu->unk244.itemIdx.id,NULL);
         }
         else {
             gFormatData_202DE30 = sTradeItemsMenu->unk24C.quantity;
-            BufferItemName(gFormatItems,sTradeItemsMenu->unk24C.itemIdx.id,NULL);
+            BufferItemName(gFormatItems[0],sTradeItemsMenu->unk24C.itemIdx.id,NULL);
         }
         CreateDialogueBoxAndPortrait(sFmtYouReceived,0,0,0x101);
         break;
     case 0xd:
         gFormatData_202DE30 = sTradeItemsMenu->unk14.unk0;
-        BufferItemName(gFormatItems,sTradeItemsMenu->itemToSend.id,NULL);
+        BufferItemName(gFormatItems[0],sTradeItemsMenu->itemToSend.id,NULL);
         CreateDialogueBoxAndPortrait(sFmtYouSent,0,0,0x101);
         break;
     case 0xB:

@@ -52,7 +52,6 @@ extern void SetFriendAreaActionMenuState(u32);
 extern void PlaySound(u32);
 
 extern void sub_808D31C(PokemonStruct1 *);
-extern u8 gFormatItems[];
 extern bool8 sub_808D750(s16 index_);
 extern void sub_808ED00(void);
 
@@ -703,7 +702,7 @@ void sub_8027D40(u32 r0, BulkItem *heldItem)
     a3.unk4 = 0;
     a3.unk8 = 1;
     slot.flags = ITEM_FLAG_EXISTS;
-    sub_8090E14(gFormatItems, &slot, &a3);
+    sub_8090E14(gFormatItems[0], &slot, &a3);
     PrintFormatStringOnWindow(4, 3, sItemBuffered, r0, 0);
     sub_80073E0(r0);
 }

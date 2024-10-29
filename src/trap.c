@@ -23,7 +23,6 @@
 #include "structs/str_dungeon.h"
 
 extern u8 gAvailablePokemonNames[];
-extern u8 gFormatItems[];
 
 extern u8 *gTrapNames[];
 extern u8 *gUnknown_80FC5FC[];
@@ -432,7 +431,7 @@ void HandleStickyTrap(Entity *pokemon,Entity *target)
         }
         else {
             newIndex = DungeonRandInt(itemCount);
-            sub_8045BF8(gFormatItems, itemStack[newIndex]);
+            sub_8045BF8(gFormatItems[0], itemStack[newIndex]);
             itemStack[newIndex]->flags |= ITEM_FLAG_STICKY;
             sub_80421C0(target, 0x192);
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FDC18);
@@ -659,7 +658,7 @@ void HandlePPZeroTrap(Entity *param_1,Entity *param_2)
     if (counter != 0) {
       moveIndex = DungeonRandInt(counter);
       moveStack[moveIndex]->PP = 0;
-      sub_80928C0(gFormatItems,moveStack[moveIndex],0);
+      sub_80928C0(gFormatItems[0],moveStack[moveIndex],0);
       sub_806A9B4(param_2, indexStack[moveIndex]);
       flag = TRUE;
     }
@@ -700,7 +699,7 @@ void HandleSealTrap(Entity *param_1,Entity *param_2)
         if (counter != 0) {
             moveIndex = DungeonRandInt(counter);
             moveStack[moveIndex]->moveFlags2 |= MOVE_FLAG_SEALED;
-            sub_80928C0(gFormatItems,moveStack[moveIndex], NULL);
+            sub_80928C0(gFormatItems[0],moveStack[moveIndex], NULL);
             flag = TRUE;
         }
         if(flag)

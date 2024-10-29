@@ -111,8 +111,6 @@ extern u8 *gUnknown_80FC0B8[];
 extern u8 *gUnknown_80FC0C8[];
 extern u8 *gUnknown_80FC0E4[];
 extern u8 *gUnknown_80FC0D4[];
-extern u8 gUnknown_202DEA8[];
-extern u8 gFormatItems[];
 extern u8 *gUnknown_80FC274[];
 extern u8 *gUnknown_80FC15C[];
 extern u8 *gUnknown_80FCA60[];
@@ -996,10 +994,10 @@ void LowerAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 de
     return;
   }
   if (index != STAT_STAGE_ATK) {
-    strcpy(gFormatItems,*gUnknown_80FC0C8);
+    strcpy(gFormatItems[0],*gUnknown_80FC0C8);
   }
   else {
-    strcpy(gFormatItems,*gUnknown_80FC0B8);
+    strcpy(gFormatItems[0],*gUnknown_80FC0B8);
   }
   if (param_5) {
     if (sub_8071728(pokemon,target,displayMessage)) {
@@ -1021,10 +1019,10 @@ _08076EE4:
     SetMessageArgument(gAvailablePokemonNames,target,0);
     sub_8041F28(target,index);
     if (decrement == 1) {
-      strcpy(gUnknown_202DEA8,*gUnknown_80FC0E4);
+      strcpy(gFormatItems[1],*gUnknown_80FC0E4);
     }
     else {
-      strcpy(gUnknown_202DEA8,*gUnknown_80FC0D4);
+      strcpy(gFormatItems[1],*gUnknown_80FC0D4);
     }
     attackStage = entityInfo->offensiveStages[index];
     attackStage -= decrement;
@@ -1051,20 +1049,20 @@ void LowerDefenseStageTarget(Entity * pokemon, Entity * target, s32 index, s32 d
         return;
     }
     if (index != STAT_STAGE_DEF) {
-        strcpy(gFormatItems,*gUnknown_80FC0AC);
+        strcpy(gFormatItems[0],*gUnknown_80FC0AC);
     }
     else {
-        strcpy(gFormatItems,*gUnknown_80FC09C);
+        strcpy(gFormatItems[0],*gUnknown_80FC09C);
     }
     if (!param_5 || !sub_8071728(pokemon,target,displayMessage)) {
         entityInfo = target->info;
         SetMessageArgument(gAvailablePokemonNames,target,0);
         sub_8041F4C(target,index);
         if (decrement == 1) {
-            strcpy(gUnknown_202DEA8,*gUnknown_80FC0E4);
+            strcpy(gFormatItems[1],*gUnknown_80FC0E4);
         }
         else {
-            strcpy(gUnknown_202DEA8,*gUnknown_80FC0D4);
+            strcpy(gFormatItems[1],*gUnknown_80FC0D4);
         }
         defenseStage = entityInfo->defensiveStages[index];
         defenseStage = defenseStage - decrement;
@@ -1094,17 +1092,17 @@ void RaiseAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 in
     SetMessageArgument(gAvailablePokemonNames,target,0);
     sub_8041F70(target,index);
     if (index != STAT_STAGE_ATK) {
-        strcpy(gFormatItems,*gUnknown_80FC0C8);
+        strcpy(gFormatItems[0],*gUnknown_80FC0C8);
     }
     else {
-        strcpy(gFormatItems,*gUnknown_80FC0B8);
+        strcpy(gFormatItems[0],*gUnknown_80FC0B8);
     }
 
     if (increment == 1) {
-        strcpy(gUnknown_202DEA8,*gUnknown_80FC0E4);
+        strcpy(gFormatItems[1],*gUnknown_80FC0E4);
     }
     else {
-        strcpy(gUnknown_202DEA8,*gUnknown_80FC0D4);
+        strcpy(gFormatItems[1],*gUnknown_80FC0D4);
     }
 
     attackStage = entityInfo->offensiveStages[index];
@@ -1134,17 +1132,17 @@ void RaiseDefenseStageTarget(Entity * pokemon, Entity * target, s32 index, s32 i
     SetMessageArgument(gAvailablePokemonNames,target,0);
     sub_8041F94(target,index);
     if (index != STAT_STAGE_DEF) {
-        strcpy(gFormatItems,*gUnknown_80FC0AC);
+        strcpy(gFormatItems[0],*gUnknown_80FC0AC);
     }
     else {
-        strcpy(gFormatItems,*gUnknown_80FC09C);
+        strcpy(gFormatItems[0],*gUnknown_80FC09C);
     }
 
     if (increment == 1) {
-        strcpy(gUnknown_202DEA8,*gUnknown_80FC0E4);
+        strcpy(gFormatItems[1],*gUnknown_80FC0E4);
     }
     else {
-        strcpy(gUnknown_202DEA8,*gUnknown_80FC0D4);
+        strcpy(gFormatItems[1],*gUnknown_80FC0D4);
     }
 
     defenseStage = entityInfo->defensiveStages[index];

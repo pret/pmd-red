@@ -499,7 +499,7 @@ _0808FB94:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8015034
+	bl PrintFormatStringOnWindow2
 	movs r2, 0x21
 	add r9, r2
 	mov r3, r10
@@ -515,7 +515,7 @@ _0808FBD2:
 	movs r0, 0x4
 	mov r1, r9
 	ldr r3, [sp, 0x50]
-	bl sub_8015034
+	bl PrintFormatStringOnWindow2
 	b _0808FED6
 	.align 2, 0
 _0808FBE8: .4byte gUnknown_810775C
@@ -611,7 +611,7 @@ _0808FC96:
 	b _0808FD98
 	.align 2, 0
 _0808FCA0: .4byte gStatusNames
-_0808FCA4: .4byte gUnknown_202DEA8
+_0808FCA4: .4byte gFormatItems + 0x50
 _0808FCA8: .4byte gUnknown_8107784
 _0808FCAC: .4byte gUnknown_810DF78
 _0808FCB0:
@@ -680,7 +680,7 @@ _0808FCFC:
 	bl strcpy
 	b _0808FD4E
 	.align 2, 0
-_0808FD3C: .4byte gUnknown_202DEA8
+_0808FD3C: .4byte gFormatItems + 0x50
 _0808FD40: .4byte gUnknown_8107788
 _0808FD44:
 	adds r0, r6, 0

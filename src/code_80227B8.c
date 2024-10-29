@@ -17,8 +17,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gUnknown_202DEA8[];
-extern u8 gFormatItems[];
 extern u8 gAvailablePokemonNames[]; // 202DF98
 
 static EWRAM_DATA_2 unkStruct_203B294 *sUnknown_203B294 = {0};
@@ -202,7 +200,7 @@ static void sub_8022A10(void)
 
                 if (r5 != r6) {
                     sUnknown_203B294->fallbackState = 10;
-                    strcpy(gUnknown_202DEA8, GetIQSkillName(sUnknown_203B294->unk40));
+                    strcpy(gFormatItems[1], GetIQSkillName(sUnknown_203B294->unk40));
                     PlaySound(203);
                     CreateDialogueBoxAndPortrait(sFmtIQHelpedLearn, 0, 0, 0x101);
                     sUnknown_203B294->unk40++;
@@ -376,7 +374,7 @@ static void sub_8022EF4(void)
             sUnknown_203B294->unk40 = 1;
             boostAmount = sUnknown_203B294->gummi.boostAmount;
 
-            sub_8090E14(gFormatItems, &gTeamInventoryRef->teamItems[sUnknown_203B294->itemIndex], NULL);
+            sub_8090E14(gFormatItems[0], &gTeamInventoryRef->teamItems[sUnknown_203B294->itemIndex], NULL);
 
             if (boostAmount != -1)
                 ShiftItemsDownFrom(sUnknown_203B294->itemIndex);

@@ -31,7 +31,6 @@ EWRAM_DATA_2 struct unkStruct_203B310 *gUnknown_203B310 = {0};
 
 extern u8 gUnknown_202E038[];
 extern u8 gUnknown_202E628[];
-extern u8 gUnknown_202DEA8[];
 extern u8 gUnknown_202E5D8[];
 extern u8 gAvailablePokemonNames[];
 extern u32 gFormatData_202DE30;
@@ -290,7 +289,7 @@ void HandleMissionReward(void)
                 local_20.unk0 = 0;
                 local_20.unk4 = 0;
                 local_20.unk8 = 1;
-                sub_8090E14(gUnknown_202DEA8,&item,&local_20);
+                sub_8090E14(gFormatItems[1],&item,&local_20);
                 if (gUnknown_203B310->displayClientDialogueSprite) {
                     CreateDialogueBoxAndPortrait(gUnknown_80E0640,0,&gUnknown_203B310->monPortrait,0x10d);
                     gUnknown_203B310->nextState = GIVE_ITEM_REWARD;

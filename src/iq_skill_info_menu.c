@@ -12,7 +12,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gFormatItems[];
 extern u8 gAvailablePokemonNames[]; // 202DF98
 
 static EWRAM_DATA_2 struct IQSkillInfoMenu *sIQSkillInfoMenu = {0};
@@ -87,7 +86,7 @@ static void sub_801C6E4(void)
             CallPrepareTextbox_8008C54(sIQSkillInfoMenu->unk24);
             sub_80073B8(sIQSkillInfoMenu->unk24);
             skillName = GetIQSkillName(sIQSkillInfoMenu->chosenIQSkill);
-            strcpy(gFormatItems, skillName);
+            strcpy(gFormatItems[0], skillName);
             PrintFormatStringOnWindow(16, 0, sFmtMoveItem0, 0, 0); // {MOVE_ITEM_0}
             PrintStringOnWindow(8, 16, GetIQSkillDescription(sIQSkillInfoMenu->chosenIQSkill), sIQSkillInfoMenu->unk24, 0);
             sub_80073E0(sIQSkillInfoMenu->unk24);

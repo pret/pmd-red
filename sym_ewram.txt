@@ -182,17 +182,9 @@ gUnknown_202DE19: /* 202DE19 (sub_800F990 - sub_8010014) */
 
     .include "src/save.o"
 	.align 4
+    .include "src/code_80140DC.o"
 
-/* gFormatData_202DE30[0] seems to be the s32 value to insert in place of "$d0" (ARG_VALUE_0) in strings */
-/* gFormatData_202DE30[1] through gFormatData_202DE30[4] are for "$d1" (ARG_VALUE_1) through "$d4" (ARG_VALUE_4) */
-/* No known occurences after those (in pmd red) */
-gFormatData_202DE30: /* 202DE30 [used everywhere tbh] */
-	.space 0x28
-/* Seems to be a general u8 buffer for text, mostly used with item names */
-gFormatItems: /* 202DE58 [used everywhere tbh] */
-	.space 80
-gUnknown_202DEA8: /* 202DEA8 [used everywhere tbh] */
-	.space 240
+
 gAvailablePokemonNames: /* 202DF98 [used everywhere tbh] gAvailablePokemonNames[80][] */
 	.space 80
 gUnknown_202DFE8: /* 202DFE8 (sub_801FF28 - PierceStatusTarget) */

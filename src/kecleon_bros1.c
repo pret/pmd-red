@@ -19,7 +19,6 @@
 #include "text2.h"
 
 extern u32 gFormatData_202DE30;
-extern u8 gFormatItems[];
 extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
@@ -289,7 +288,7 @@ static void UpdateKecleonStoreDialogue(void)
             CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_19], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
             break;
         case KECLEON_STORE_CANT_SELL_ITEM:
-            sub_8090E14(gFormatItems, &sKecleonBrosWork1->soldItem, NULL);
+            sub_8090E14(gFormatItems[0], &sKecleonBrosWork1->soldItem, NULL);
             sKecleonBrosWork1->fallbackState = KECLEON_STORE_SELL_ITEM_MENU;
             SetKecleonPortraitSpriteId(TRUE);
             CreateDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_20], 0, sKecleonBrosWork1->monPortraitPtr, 0x10D);
@@ -340,7 +339,7 @@ static void UpdateKecleonStoreDialogue(void)
             break;
         case KECLEON_STORE_BUY_ITEM:
             BuildKecleonBrosYesNoMenu();
-            sub_8090E14(gFormatItems, &sKecleonBrosWork1->soldItem, 0);
+            sub_8090E14(gFormatItems[0], &sKecleonBrosWork1->soldItem, 0);
             gFormatData_202DE30 = sKecleonBrosWork1->itemSellPrice;
             SetKecleonPortraitSpriteId(FALSE);
             CreateMenuDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_05], 0, 5,sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->monPortraitPtr, 12);
@@ -393,7 +392,7 @@ static void UpdateKecleonStoreDialogue(void)
             break;
         case KECLEON_STORE_SELL_ITEM:
             BuildKecleonBrosYesNoMenu();
-            sub_8090E14(gFormatItems, &sKecleonBrosWork1->soldItem, NULL);
+            sub_8090E14(gFormatItems[0], &sKecleonBrosWork1->soldItem, NULL);
             gFormatData_202DE30 = sKecleonBrosWork1->itemSellPrice;
             SetKecleonPortraitSpriteId(FALSE);
             CreateMenuDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_09], 0, 5, sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->monPortraitPtr, 12);

@@ -31,7 +31,6 @@ struct unkStruct_80F520C
 extern struct unkStruct_80F520C gUnknown_80F520C[];
 
 extern u8 gAvailablePokemonNames[];
-extern u8 gFormatItems[];
 extern u8 gUnknown_80F51E4[];
 extern u8 *gUnknown_80FCC7C[];
 extern u8 *gUnknown_80FCCAC[];
@@ -194,7 +193,7 @@ _0806A068:
         iVar6->isColorChanged = TRUE;
         SetMessageArgument(gAvailablePokemonNames,target,0);
         __src = GetUnformattedTypeString(iVar6->types[0]);
-        strcpy(gFormatItems,__src);
+        strcpy(gFormatItems[0],__src);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCCAC);
         sub_8042968(target);
       }
@@ -219,7 +218,7 @@ void sub_806A120(Entity * pokemon, Entity * target, Move* move)
       sub_8041BBC(target);
       SetMessageArgument(gAvailablePokemonNames,target,0);
       typeString = GetUnformattedTypeString(uVar2_u32);
-      strcpy(gFormatItems,typeString);
+      strcpy(gFormatItems[0],typeString);
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FDCC8);
     }
   }
@@ -319,7 +318,7 @@ void sub_806A390(Entity *pokemon)
     s32 index;
     EntityInfo *info;
     Move *move;
-    
+
     info = pokemon->info;
     for(index = 0; index < MAX_MON_MOVES; index++)
     {

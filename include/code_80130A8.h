@@ -26,6 +26,8 @@ struct MonPortraitMsg
     u8 unkE;
 };
 
+extern u8 gFormatItems[4][80];
+
 // code_80130A8.s
 void sub_8013E54(void);
 void sub_8013F84(void);

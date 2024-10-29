@@ -17,8 +17,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gFormatItems[];
-extern u8 gUnknown_202DEA8[];
 extern u8 gAvailablePokemonNames[]; // 202DF98
 
 static EWRAM_DATA_2 unkStruct_203B234 *sUnknown_203B234 = {0};
@@ -60,7 +58,7 @@ bool8 sub_801B60C(u32 r0, u8 id, u8 quantity)
     sUnknown_203B234->unk14.unk4 = 0;
     sUnknown_203B234->unk14.unk8 = 1;
     PrintColoredPokeNameToBuffer(gAvailablePokemonNames, GetPlayerPokemonStruct(), COLOR_YELLOW);
-    sub_8090E14(gFormatItems, &sUnknown_203B234->unk10, &sUnknown_203B234->unk14);
+    sub_8090E14(gFormatItems[0], &sUnknown_203B234->unk10, &sUnknown_203B234->unk14);
     sub_801B748(0);
     return TRUE;
 }
@@ -389,13 +387,13 @@ static void sub_801BCCC(void)
         case 3:
             sUnknown_203B234->unk24 = sub_801A8AC();
             sUnknown_203B234->unk20 = gTeamInventoryRef->teamItems[sUnknown_203B234->unk24];
-            sub_8090E14(gUnknown_202DEA8, &sUnknown_203B234->unk20, &sUnknown_203B234->unk14);
+            sub_8090E14(gFormatItems[1], &sUnknown_203B234->unk20, &sUnknown_203B234->unk14);
             sub_801B748(10);
             break;
         case 4:
             sUnknown_203B234->unk24 = sub_801A8AC();
             sUnknown_203B234->unk20 = gTeamInventoryRef->teamItems[sUnknown_203B234->unk24];
-            sub_8090E14(gUnknown_202DEA8, &sUnknown_203B234->unk20, &sUnknown_203B234->unk14);
+            sub_8090E14(gFormatItems[1], &sUnknown_203B234->unk20, &sUnknown_203B234->unk14);
             sub_8099690(0);
             sub_801B748(11);
             break;

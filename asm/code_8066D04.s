@@ -73,7 +73,7 @@ _08066E80:
 	ldr r0, _08066EA4
 	b _08066F1E
 	.align 2, 0
-_08066EA0: .4byte gUnknown_202DEA8
+_08066EA0: .4byte gFormatItems + 0x50
 _08066EA4: .4byte gItemStickyCannotMove3
 _08066EA8:
 	mov r2, r9
@@ -317,7 +317,7 @@ _0806709E:
 	bl TryDisplayDungeonLoggableMessage
 	b _080670EE
 	.align 2, 0
-_080670A8: .4byte gUnknown_202DEA8
+_080670A8: .4byte gFormatItems + 0x50
 _080670AC: .4byte 0xffffff00
 _080670B0: .4byte gNothingCanBePutDownHere
 _080670B4:

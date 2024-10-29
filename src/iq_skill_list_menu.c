@@ -11,8 +11,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gUnknown_202DEA8[];
-
 static EWRAM_DATA_2 struct IQSkillListMenu *sIQSkillListMenu = {0};
 
 #include "data/iq_skill_list_menu.h"
@@ -142,12 +140,12 @@ void BuildIQSkillList(void)
         skillIndex = sIQSkillListMenu->iqSkills[(sIQSkillListMenu->s24.s0.input.unk1E * sIQSkillListMenu->s24.s0.input.unk1C) + counter];
 
         y = sub_8013800(&sIQSkillListMenu->s24.s0.input, counter);
-        strncpy(gUnknown_202DEA8, GetIQSkillName(skillIndex), 80);
+        strncpy(gFormatItems[1], GetIQSkillName(skillIndex), 80);
 
         if (IsIQSkillSet((u8 *)&sIQSkillListMenu->pokeStruct->IQSkills, 1 << skillIndex))
-            strcpy(gUnknown_202DEA8 - 80, sStarBullet);
+            strcpy(gFormatItems[1] - 80, sStarBullet);
         else
-            strcpy(gUnknown_202DEA8 - 80, sUnknown_80DBE18);
+            strcpy(gFormatItems[1] - 80, sUnknown_80DBE18);
 
         PrintFormatStringOnWindow(12, y, sFmt01, sIQSkillListMenu->s24.s0.unk34, 0);
     }

@@ -31,7 +31,6 @@ EWRAM_DATA s32 gUnknown_202F324[2] = {0, 0};
 
 extern s32 gFormatData_202DE30[5];
 extern u8 gAvailablePokemonNames[];
-extern u8 gFormatItems[];
 
 extern s16 gUnknown_80F4DA6;
 extern s16 gUnknown_80F4DA8;
@@ -550,7 +549,7 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
             {
                 if ((tacticsBuffer1[tacticIndex] == 0) && (tacticsBuffer2[tacticIndex] == 1)) {
                     SetMessageArgument(gAvailablePokemonNames,target,0);
-                    CopyTacticsNameToBuffer(gFormatItems,tacticIndex);
+                    CopyTacticsNameToBuffer(gFormatItems[0],tacticIndex);
                     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FF730);
                 }
             }

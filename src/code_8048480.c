@@ -27,7 +27,6 @@
 #include "structs/str_position.h"
 
 extern u8 gAvailablePokemonNames[];
-extern u8 gFormatItems[];
 
 extern s16 gTypeGummiIQBoost[NUM_TYPES][NUMBER_OF_GUMMIS];
 
@@ -222,7 +221,7 @@ void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity
           return;
         }
         PlaySoundEffect(0x14d);
-        sub_8045BF8(gFormatItems,item);
+        sub_8045BF8(gFormatItems[0],item);
         SetMessageArgument(gAvailablePokemonNames,target,0);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FDBB8); // $m0 caught the $i0
         info->heldItem = *item;
@@ -236,7 +235,7 @@ void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity
     }
   }
   if ((item->flags & ITEM_FLAG_STICKY)) {
-    sub_8045BF8(gFormatItems,item);
+    sub_8045BF8(gFormatItems[0],item);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gItemStickyDoesntWorkText);
     if (param_1 != '\0') {
       sub_806F370(pokemon,target,gUnknown_80F4FAE,1,&uStack_24,0,0x217,0,0,0);
@@ -1035,7 +1034,7 @@ bool8 sub_8048D50(Entity * pokemon, Item *item)
   entityInfo = pokemon->info;
 
   if ((item->flags & ITEM_FLAG_STICKY) != 0) {
-    sub_8045BF8(gFormatItems, item);
+    sub_8045BF8(gFormatItems[0], item);
     TryDisplayDungeonLoggableMessage(pokemon,*gItemStickyDoesntWorkText);
     return FALSE;
   }

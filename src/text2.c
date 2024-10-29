@@ -3307,7 +3307,7 @@ s32 sub_8008ED0(const u8 *str)
 
 void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 characterSpacing, s32 lineSpacing);
 
-void sub_8008F8C(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing)
+void PrintStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing)
 {
     xxx_draw_string(gUnknown_2027370, x, y, str, windowId, terminatingChr, 0, lineSpacing);
 }

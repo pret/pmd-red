@@ -15,11 +15,6 @@
 #include "rescue_team_info.h"
 #include "event_flag.h"
 
-extern s32 gUnknown_202E738;
-extern s32 gUnknown_202E73C;
-extern s32 gUnknown_202E740;
-extern s32 gUnknown_202E744;
-
 #include "data/code_80140DC.h"
 
 // TODO: move to menu_input
@@ -79,6 +74,99 @@ u32 sub_8014140(void)
     return 0;
 }
 
+// This kinda looks like the 'true' beginning of the file
+struct SubStruct_203B198
+{
+    u8 unk0;
+    u32 unk4; // x34
+    u16 unk8; // x38
+    u16 unkA; // x3A
+    u16 unkC; // x3C
+    u16 unkE; // x3E
+    u16 unk10; // x40
+    u8 fill12[0x48-0x42]; // x42
+};
+
+struct UnkStruct_203B198
+{
+    UnkTextStruct2 unk0;
+    u8 unk18;
+    u32 unk1C;
+    Position unk20;
+    u16 unk24;
+    u16 unk26;
+    u16 unk28;
+    u8 fill2A[4];
+    struct SubStruct_203B198 unk30;
+    struct SubStruct_203B198 unk48;
+};
+
+extern s32 gUnknown_202E738;
+extern s32 gUnknown_202E73C;
+extern s32 gUnknown_202E740;
+extern s32 gUnknown_202E744;
+extern struct UnkDrawStringStruct gUnknown_202E748;
+extern u32 gUnknown_202EC10;
+extern const MenuItem *gUnknown_202EC14;
+extern void *gUnknown_202EC18;
+extern s32 gUnknown_202EC1C;
+extern u8 gUnknown_202E798[];
+extern const u8 *gUnknown_202E794;
+extern MenuInputStructSub gUnknown_202EC28;
+extern struct UnkStruct_203B198 gUnknown_203B198;
+extern UnkTextStruct1 gUnknown_2027370[4];
+extern u16 gUnknown_202E77C;
+extern u8 gUnknown_202E790;
+extern u8 gUnknown_202E791;
+extern u32 gUnknown_202E788;
+extern u32 gUnknown_202E78C;
+extern u32 gUnknown_202E784;
+extern s32 gUnknown_202E780;
+extern SpriteOAM gUnknown_202E6E0;
+extern void (*gUnknown_203B088)(s32 a0);
+extern MenuStruct gUnknown_202EBC0;
+extern u8 gUnknown_202EB80[];
+extern u8 gUnknown_202E628[];
+extern u8 gAvailablePokemonNames[][80];
+extern u8 gPlayerName[][80];
+extern u8 gTeamName[];
+extern u8 gUnknown_202E5D8[];
+
+// Only read, but never written to. Possibly used in Blue?
+struct NeverWrittenToStruct202EC20
+{
+    struct SubStruct_203B198 unk0;
+    const u8 *unk18;
+};
+
+extern struct NeverWrittenToStruct202EC20 *gUnknown_202EC20;
+
+extern const struct SubStruct_203B198 gUnknown_80D48AC;
+extern const struct UnkTextStruct2 gUnknown_80D48DC;
+extern const struct UnkTextStruct2 gUnknown_80D48C4;
+extern const u32 gUnknown_80D48A0[];
+extern const u8 gUnknown_80D48F8[];
+extern const u8 gUnknown_80D4900[];
+extern const u8 gUnknown_80D4904[];
+extern const u8 gUnknown_80D4908[];
+extern const u8 gUnknown_80D4910[];
+extern const u8 gUnknown_80D48F4[];
+
+extern void SetCharacterMask(int a0);
+extern void sub_8008274(s32 a0, const u8 *compressedData, s32 a2);
+extern void sub_80073E0(s32 a0);
+extern void sub_8011A04(void);
+
+void sub_8014A88(void);
+bool8 sub_8014B94(void);
+static void nullsub_35(void);
+bool8 AppendString_8014FA8(const u8 *, u8 **, u8 *, u16 r3);
+
+// 'd', 'v' and 'V'
+EWRAM_DATA s32 gFormatData_202DE30[10] = {0};
+// 'i', apparently only i0 and i1 are actually used though it's yet to be verified
+EWRAM_DATA u8 gFormatItems[4][80] = {0};
+
 void sub_8014144(void)
 {
     gUnknown_202E744 = 0;
@@ -114,63 +202,6 @@ void CreateYesNoDialogueBoxAndPortrait_DefaultNo(const u8 *text, struct MonPortr
 {
     CreateMenuDialogueBoxAndPortrait(text, NULL, -1, gUnknown_80D4880, NULL, 3, 0, monPortraitPtr, param_3 | 0x300);
 }
-
-extern u8 gUnknown_202E798[];
-
-extern const u8 *gUnknown_202E794;
-
-extern struct UnkDrawStringStruct gUnknown_202E748;
-extern u32 gUnknown_202EC10;
-extern const MenuItem *gUnknown_202EC14;
-extern void *gUnknown_202EC18;
-extern s32 gUnknown_202EC1C;
-
-extern MenuInputStructSub gUnknown_202EC28;
-
-struct SubStruct_203B198
-{
-    u8 unk0;
-    u32 unk4; // x34
-    u16 unk8; // x38
-    u16 unkA; // x3A
-    u16 unkC; // x3C
-    u16 unkE; // x3E
-    u16 unk10; // x40
-    u8 fill12[0x48-0x42]; // x42
-};
-
-struct UnkStruct_203B198
-{
-    UnkTextStruct2 unk0;
-    u8 unk18;
-    u32 unk1C;
-    Position unk20;
-    u16 unk24;
-    u16 unk26;
-    u16 unk28;
-    u8 fill2A[4];
-    struct SubStruct_203B198 unk30;
-    struct SubStruct_203B198 unk48;
-};
-
-extern struct UnkStruct_203B198 gUnknown_203B198;
-
-extern const struct SubStruct_203B198 gUnknown_80D48AC;
-
-extern const struct UnkTextStruct2 gUnknown_80D48DC;
-extern const struct UnkTextStruct2 gUnknown_80D48C4;
-
-extern UnkTextStruct1 gUnknown_2027370[4];
-extern u16 gUnknown_202E77C;
-extern u8 gUnknown_202E790;
-extern u8 gUnknown_202E791;
-extern u32 gUnknown_202E788;
-extern u32 gUnknown_202E78C;
-extern u32 gUnknown_202E784;
-
-extern void SetCharacterMask(int a0);
-extern void sub_8008274(s32 a0, const u8 *compressedData, s32 a2);
-extern void sub_80073E0(s32 a0);
 
 void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const MenuItem *menuItems, void *arg_0, u32 a5, u32 unknownUnused, struct MonPortraitMsg *monPortraitPtr, u16 r10)
 {
@@ -272,17 +303,6 @@ s32 sub_80144A4(s32 *a0)
     }
     return gUnknown_202E744;
 }
-
-extern s32 gUnknown_202E780;
-extern void sub_8011A04(void);
-
-extern SpriteOAM gUnknown_202E6E0;
-
-extern void (*gUnknown_203B088)(s32 a0);
-
-void sub_8014A88(void);
-bool8 sub_8014B94(void);
-static void nullsub_35(void);
 
 void DrawDialogueBoxString(void)
 {
@@ -588,17 +608,6 @@ void DrawDialogueBoxString(void)
     }
 }
 
-// Only read, but never written to. Possibly used in Blue?
-struct NeverWrittenToStruct202EC20
-{
-    struct SubStruct_203B198 unk0;
-    const u8 *unk18;
-};
-
-extern struct NeverWrittenToStruct202EC20 *gUnknown_202EC20;
-extern MenuStruct gUnknown_202EBC0;
-extern const u32 gUnknown_80D48A0[];
-
 void sub_8014A88(void)
 {
     s32 r2, r1;
@@ -660,25 +669,9 @@ bool8 sub_8014B94(void)
     }
 }
 
-static void UNUSED nullsub_35(void) {}
-
-extern u8 gUnknown_202E5D8[];
-extern const u8 gUnknown_80D48F4[];
-bool8 AppendString_8014FA8(const u8 *, u8 **, u8 *, u16 r3);
-
-extern u8 gUnknown_202EB80[];
-extern u8 gUnknown_202E628[];
-extern u8 gFormatItems[][80];
-extern u8 gAvailablePokemonNames[][80];
-extern u8 gPlayerName[][80];
-extern s32 gFormatData_202DE30[];
-extern u8 gTeamName[];
-
-extern const u8 gUnknown_80D48F8[];
-extern const u8 gUnknown_80D4900[];
-extern const u8 gUnknown_80D4904[];
-extern const u8 gUnknown_80D4908[];
-extern const u8 gUnknown_80D4910[];
+static void UNUSED nullsub_35(void)
+{
+}
 
 const u8 *xxx_format_string(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
 {
@@ -876,13 +869,13 @@ void PrintFormatStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 te
     PrintStringOnWindow(x, y, formatString, windowId, terminatingChr);
 }
 
-void sub_8015034(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing)
+void PrintFormatStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing)
 {
     u8 formatString[FORMAT_STR_MAX_LEN];
 
     xxx_format_string(str, formatString, formatString + FORMAT_STR_MAX_LEN, 0);
     formatString[FORMAT_STR_MAX_LEN - 1] = '\0';
-    sub_8008F8C(x, y, formatString, windowId, terminatingChr, lineSpacing);
+    PrintStringOnWindow2(x, y, formatString, windowId, terminatingChr, lineSpacing);
 }
 
 //

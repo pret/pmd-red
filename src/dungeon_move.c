@@ -368,7 +368,6 @@ extern const u8 *const gUnknown_80F93A4;
 extern const u8 *const gUnknown_80F9384;
 extern const u8 *const gUnknown_80F9380;
 
-extern u8 gFormatItems[];
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DFE8[];
 extern Entity *gUnknown_203B438;
@@ -1873,7 +1872,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
             }
             else {
                 if (!statusMoveMatch) {
-                    sub_80928C0(gFormatItems,  currMove, NULL);
+                    sub_80928C0(gFormatItems[0],  currMove, NULL);
                     TryDisplayDungeonLoggableMessage(attacker, gUnknown_80F93C8); // The move can't be used!
                     moveUsable = FALSE;
                 }
@@ -1888,7 +1887,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
                     Move assistMove = *currMove;
 
                     assistMove.id = sub_8057144(attacker);
-                    sub_80928C0(gFormatItems, &assistMove, NULL);
+                    sub_80928C0(gFormatItems[0], &assistMove, NULL);
                     TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FD2DC); // Assist:
                     moveWasUsed = TryUseChosenMove(attacker, var_34, itemId, arg_0, isLinkedMove, &assistMove);
                 }
@@ -1938,7 +1937,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
                         assistMove = mimicMove;
                         assistMove.id = sub_8057144(attacker);
                         movePtr = &assistMove;
-                        sub_80928C0(gFormatItems, &assistMove, NULL);
+                        sub_80928C0(gFormatItems[0], &assistMove, NULL);
                         TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FD2DC); // Assist:
                     }
                     TryUseChosenMove(attacker, 0, itemId, arg_0, isLinkedMove, movePtr);
@@ -2079,7 +2078,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
     }
 
     SetMessageArgument_2(gAvailablePokemonNames, GetEntInfo(attacker), 0);
-    sub_80928C0(gFormatItems, move, NULL);
+    sub_80928C0(gFormatItems[0], move, NULL);
     if (MoveMatchesChargingStatus(attacker, move)) {
         msg = gUnknown_80FC72C; // mon loosed move
         GetEntInfo(attacker)->unkFF = 0;
@@ -2109,13 +2108,13 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
     else if (!moveUsable) {
         SetMessageArgument_2(gAvailablePokemonNames, GetEntInfo(attacker), 0);
         if (itemId == 0) {
-            sub_80928C0(gFormatItems, move, NULL);
+            sub_80928C0(gFormatItems[0], move, NULL);
             TryDisplayDungeonLoggableMessage(attacker, msg);
             sub_803E708(0xA, 0x3F);
             TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC6D0); // But the move couldn't be used!
         }
         else {
-            BufferItemName(gFormatItems, itemId, NULL);
+            BufferItemName(gFormatItems[0], itemId, NULL);
             TryDisplayDungeonLoggableMessage(attacker, msg);
             sub_803E708(0xA, 0x3F);
             TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC6FC); // But Orbs are prevented from being used!
@@ -2234,10 +2233,10 @@ bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **unkArray, 
         if (r7) {
             SetMessageArgument_2(gAvailablePokemonNames, GetEntInfo(entity), 0);
             if (itemId == 0) {
-                sub_80928C0(gFormatItems, move, NULL);
+                sub_80928C0(gFormatItems[0], move, NULL);
             }
             else {
-                BufferItemName(gFormatItems, itemId, NULL);
+                BufferItemName(gFormatItems[0], itemId, NULL);
             }
         }
 

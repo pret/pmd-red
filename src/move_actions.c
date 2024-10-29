@@ -33,7 +33,6 @@
 #include "weather.h"
 #include "called_move_data.h"
 
-extern u8 gFormatItems[];
 extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202DFE8[];
 
@@ -174,8 +173,6 @@ extern u8 *gUnknown_80FE330[];
 extern u8 *gUnknown_80FE36C[];
 extern u8 *gPtrForecastPreventsTypeSwitchMessage[];
 
-
-extern u8 gFormatItems[];
 extern u32 gUnknown_202F210;
 extern u32 gUnknown_202F214;
 extern u8 gUnknown_202F218;
@@ -483,7 +480,7 @@ bool8 TormentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4
     if ((movePtr->moveFlags & MOVE_FLAG_EXISTS) != 0) {
       if ((movePtr->moveFlags & MOVE_FLAG_DISABLED) == 0) {
         if ((movePtr->moveFlags & MOVE_FLAG_LAST_USED) != 0) {
-          sub_80928C0(gFormatItems,movePtr,0);
+          sub_80928C0(gFormatItems[0],movePtr,0);
           // $i0 was tormented
           TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCFBC);
           movePtr->moveFlags |= MOVE_FLAG_DISABLED;
@@ -501,7 +498,7 @@ bool8 TormentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4
       InitPokemonMove(&struggleMove, MOVE_STRUGGLE);
       entityInfo->moves.struggleMoveFlags |= MOVE_FLAG_DISABLED;
       isTormented = TRUE;
-      sub_80928C0(gFormatItems,&struggleMove,0);
+      sub_80928C0(gFormatItems[0],&struggleMove,0);
       // $i0 was tormented
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCFBC);
     }
@@ -1676,7 +1673,7 @@ bool32 SketchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4
     }
     else {
         InitPokemonMove(move, moveId);
-        sub_80928C0(gFormatItems, move, 0);
+        sub_80928C0(gFormatItems[0], move, 0);
         move->moveFlags2 |= MOVE_FLAG2_UNK4;
         move->moveFlags2 |= MOVE_FLAG_REPLACE;
         TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FE38C);
@@ -2033,7 +2030,7 @@ bool8 ConversionMoveAction(Entity * pokemon,Entity * target,Move * move,u32 para
       info->types[0] = moveType;
       info->types[1] = TYPE_NONE;
       info->isColorChanged = TRUE;
-      sub_80928C0(gFormatItems, moveStack[newIndex], NULL);
+      sub_80928C0(gFormatItems[0], moveStack[newIndex], NULL);
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE330);
       return TRUE;
     }
@@ -2650,7 +2647,7 @@ void sub_805A7D4(Entity * pokemon, Entity * target, Item *item, Position *pos)
   SetEntityPixelPos(&stackEntity,(target->pos.x * 0x18 + 4) * 0x100,
               (target->pos.y * 0x18 + 4) * 0x100);
   stackEntity.spawnGenID = 0;
-  SetMessageArgument(gFormatItems,&stackEntity,0);
+  SetMessageArgument(gFormatItems[0],&stackEntity,0);
   sub_804652C(pokemon,&stackEntity,item,1,0);
 }
 

@@ -13,7 +13,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gFormatItems[];
 extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
@@ -125,7 +124,7 @@ static void sub_802DC9C(void)
             speciesText = GetMonSpecies(sUnknown_203B2FC->jobInfo->targetSpecies);
             strcpy(gUnknown_202E1C8 - 480, speciesText);
             UnlockExclusivePokemon(sUnknown_203B2FC->jobInfo->clientSpecies);
-            BufferItemName(gFormatItems, sUnknown_203B2FC->jobInfo->targetItem, NULL);
+            BufferItemName(gFormatItems[0], sUnknown_203B2FC->jobInfo->targetItem, NULL);
             sUnknown_203B2FC->fallbackState = 6;
 
             switch (sUnknown_203B2FC->jobInfo->missionType) {

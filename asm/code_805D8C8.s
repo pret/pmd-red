@@ -4296,7 +4296,7 @@ _08063C70: .4byte gDungeon
 _08063C74: .4byte 0x0001357c
 _08063C78: .4byte gFormatItems
 _08063C7C: .4byte 0x00000119
-_08063C80: .4byte gUnknown_202DEA8
+_08063C80: .4byte gFormatItems + 0x50
 _08063C84: .4byte 0x00000133
 	thumb_func_end sub_8063BB4
 

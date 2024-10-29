@@ -45,7 +45,6 @@ extern const u8 *const gUnknown_80FC6A8[];
 extern const u8 *const gUnknown_80FC714[];
 extern const u8 *const gUnknown_80FC718[];
 
-extern u8 gFormatItems[];
 extern u8 gAvailablePokemonNames[];
 
 EWRAM_DATA bool8 gCanAttackInDirection[NUM_DIRECTIONS] = {0};
@@ -994,7 +993,7 @@ void HandleUseOrbAction(Entity *pokemon)
     IVar5 = *item;
 
     if (item->flags & ITEM_FLAG_STICKY) {
-        sub_8045BF8(gFormatItems, item);
+        sub_8045BF8(gFormatItems[0], item);
         TryDisplayDungeonLoggableMessage(pokemon, *gItemStickyDoesntWorkText);
         return;
     }

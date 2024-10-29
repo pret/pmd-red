@@ -28,8 +28,6 @@
 
 // TODO: Clean this
 
-extern u8 gFormatItems[];
-extern u8 gUnknown_202DEA8[];
 extern u8 gAvailablePokemonNames[]; // 202DF98
 
 static EWRAM_DATA_2 unkStruct_203B2B8 *sUnknown_203B2B8 = {0};
@@ -695,7 +693,7 @@ void PartyListMenu_HandleMenu2(void)
         temp.unk4 = 0;
         temp.unk8 = 1;
         slot.flags = ITEM_FLAG_EXISTS;
-        sub_8090E14(gUnknown_202DEA8,&slot,&temp);
+        sub_8090E14(gFormatItems[1],&slot,&temp);
         GivePokemonItem(sUnknown_203B2B8->pokeSpecies,&sUnknown_203B2B8->item1);
         sub_801A928();
         nullsub_104();
@@ -783,7 +781,7 @@ void sub_8026DAC(u32 r0, BulkItem *item)
     temp.unk4 = 0;
     temp.unk8 = 1;
     slot.flags = ITEM_FLAG_EXISTS;
-    sub_8090E14(gFormatItems, &slot, &temp);
+    sub_8090E14(gFormatItems[0], &slot, &temp);
     PrintFormatStringOnWindow(4, 3, sPartyMenuItemPlaceholder, r0, 0);
     sub_80073E0(r0);
 }

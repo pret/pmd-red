@@ -20,7 +20,6 @@ extern const char gUnknown_81097A4[];
 extern s32 gPowersOfTen[];
 extern u8 gHighDigits[];
 extern u16 gGummiStatBoostLUT[];
-extern u8 gFormatItems[];
 extern u32 gFormatData_202DE30;
 extern u8* gPtrTypeText;  // ptr to "Type\0"
 extern u8* gPtrPPD0Text;  // ptr to "PP {VALUE_0} \0"
@@ -642,7 +641,7 @@ u32 sub_80913E0(Item* slot, u32 a2, struct subStruct_203B240 ** a3)
   BufferItemName(buffer88, slot->id, NULL);
   if (slot->id == ITEM_TM_USED_TM) {
     // empty TM
-    BufferItemName(gFormatItems, (u8)(slot->quantity + 125), NULL);
+    BufferItemName(gFormatItems[0], (u8)(slot->quantity + 125), NULL);
   }
   sub_80073B8(a2);
   PrintFormatStringOnWindow(16, 0, buffer88, a2, 0);

@@ -65,7 +65,6 @@ extern void sub_807EC28(bool8);
 
 extern s32 gUnknown_202F378;
 extern u8 gUnknown_202F32D;
-extern u8 gFormatItems[];
 extern u8 gUnknown_202DFE8[];
 extern u8 gAvailablePokemonNames[];
 
@@ -157,7 +156,7 @@ void sub_8073D14(Entity *entity)
         return;
 
     if (ShouldMonsterRunAwayAndShowEffect(entity, TRUE)) {
-        sub_8045BF8(gFormatItems, groundItem);
+        sub_8045BF8(gFormatItems[0], groundItem);
         SetMessageArgument(gAvailablePokemonNames, entity, 0);
         DisplayDungeonLoggableMessageTrue(entity, gMonTerrifiedCouldntPickUpItem);
     }
@@ -170,7 +169,7 @@ void sub_8073D14(Entity *entity)
             PlaySoundEffect(0x14C);
         }
         AddToTeamMoney(GetMoneyValue(groundItem));
-        sub_8045BF8(gFormatItems, groundItem);
+        sub_8045BF8(gFormatItems[0], groundItem);
         sub_80461C8(&entity->pos, 1);
         DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItem);
     }
@@ -232,7 +231,7 @@ void sub_8073D14(Entity *entity)
                 if (groundItem->flags & ITEM_FLAG_STICKY)
                     carriedItems[newInventoryId]->flags |= ITEM_FLAG_STICKY;
 
-                sub_8045BF8(gFormatItems, groundItem);
+                sub_8045BF8(gFormatItems[0], groundItem);
                 sub_80461C8(&entity->pos, 1);
                 PlaySoundEffect(0x14A);
                 if (inventoryIds[newInventoryId] <= -1)
@@ -250,7 +249,7 @@ void sub_8073D14(Entity *entity)
         }
 
         if (i == nItems) {
-            sub_8045BF8(gFormatItems, groundItem);
+            sub_8045BF8(gFormatItems[0], groundItem);
             DisplayDungeonLoggableMessageTrue(entity, gMonSteppedOnItem);
         }
         else {
@@ -263,7 +262,7 @@ void sub_8073D14(Entity *entity)
 
             if (inventoryIds[i] <= -1) {
                 _entityInfo->heldItem = *groundItem;
-                sub_8045BF8(gFormatItems, groundItem);
+                sub_8045BF8(gFormatItems[0], groundItem);
                 sub_80461C8(&entity->pos, 1);
                 DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItem2);
             }
@@ -272,7 +271,7 @@ void sub_8073D14(Entity *entity)
                 DisplayDungeonLoggableMessageTrue(entity, gMonCouldntPickUpItem);
             }
             else {
-                sub_8045BF8(gFormatItems, groundItem);
+                sub_8045BF8(gFormatItems[0], groundItem);
                 sub_80461C8(&entity->pos, 1);
                 DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItemToolbox);
             }

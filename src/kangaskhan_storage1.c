@@ -14,7 +14,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gFormatItems[];
 extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
@@ -230,7 +229,7 @@ static void sub_8016FF8(void)
             CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORAGE_FULL], 0, gKangaskhanStorageWork->monPortraitPtr, 0x10D);
             break;
         case KANGASKHAN_STORAGE_IS_MONEY_USED_TM:
-            sub_8090E14(gFormatItems, &gKangaskhanStorageWork->storedItem, 0);
+            sub_8090E14(gFormatItems[0], &gKangaskhanStorageWork->storedItem, 0);
             gKangaskhanStorageWork->fallbackState = 14;
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
             CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT__INVALID_ITEM], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
@@ -263,7 +262,7 @@ static void sub_8016FF8(void)
             break;
         case 17:
             sub_80177F8();
-            sub_8090E14(gFormatItems, &gKangaskhanStorageWork->storedItem, 0);
+            sub_8090E14(gFormatItems[0], &gKangaskhanStorageWork->storedItem, 0);
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
             CreateMenuDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT_ONE_PROMPT], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
                                     gKangaskhanStorageWork->monPortraitPtr, 12);
@@ -332,7 +331,7 @@ static void sub_8016FF8(void)
             break;
         case 27:
             sub_80177F8();
-            sub_8090E14(gFormatItems, &gKangaskhanStorageWork->storedItem, 0);
+            sub_8090E14(gFormatItems[0], &gKangaskhanStorageWork->storedItem, 0);
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
             CreateMenuDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_WITHDRAW_ONE_PROMPT], 0, 4, gKangaskhanStorageWork->unk24, NULL, 4, 0,
                                     gKangaskhanStorageWork->monPortraitPtr, 12);

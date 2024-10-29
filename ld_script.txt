@@ -104,7 +104,6 @@ SECTIONS {
         src/menu_input.o(.text);
         asm/code_80130A8.o(.text);
         src/code_80140DC.o(.text);
-        asm/code_80140DC.o(.text);
         src/code_8015080.o(.text);
         asm/code_8015080.o(.text);
         src/code_8012A18_1.o(.text);
