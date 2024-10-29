@@ -109,8 +109,8 @@ void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
 
   id_s32 = id;
   entityInfo = target->info;
-  SetMessageArgument_2(gAvailablePokemonNames[0],entityInfo,0);
-  CopyCyanMonsterNametoBuffer(gAvailablePokemonNames[1],id_s32);
+  SetMessageArgument_2(gFormatBuffer_Monsters[0],entityInfo,0);
+  CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[1],id_s32);
   file = GetSpriteData(id_s32);
   fu(entityInfo, id_s32);
   GetPokemonLevelData(&levelData,id_s32,entityInfo->level);

@@ -240,7 +240,7 @@ _08068AB2:
 	.align 2, 0
 _08068AE0: .4byte gRecruitedPokemonRef
 _08068AE4: .4byte 0x00008df8
-_08068AE8: .4byte gAvailablePokemonNames
+_08068AE8: .4byte gFormatBuffer_Monsters
 _08068AEC: .4byte gUnknown_80FE0F4
 _08068AF0:
 	cmp r0, 0x47
@@ -310,7 +310,7 @@ _08068B3E:
 _08068B6C: .4byte gRecruitedPokemonRef
 _08068B70: .4byte 0x00008df8
 _08068B74: .4byte 0x000055aa
-_08068B78: .4byte gAvailablePokemonNames
+_08068B78: .4byte gFormatBuffer_Monsters
 _08068B7C: .4byte gUnknown_80FE134
 _08068B80:
 	adds r5, 0x1
@@ -326,7 +326,7 @@ _08068B80:
 	ldr r0, _08068BA0
 	b _08068BB2
 	.align 2, 0
-_08068B9C: .4byte gAvailablePokemonNames
+_08068B9C: .4byte gFormatBuffer_Monsters
 _08068BA0: .4byte gUnknown_80FE0F4
 _08068BA4:
 	cmp r0, 0x47
@@ -690,7 +690,7 @@ _08068E52:
 	movs r0, 0x1
 	b _08068E82
 	.align 2, 0
-_08068E78: .4byte gFormatItems
+_08068E78: .4byte gFormatBuffer_Items
 _08068E7C: .4byte gUnknown_80FE1A4
 _08068E80:
 	movs r0, 0

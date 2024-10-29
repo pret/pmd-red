@@ -303,16 +303,16 @@ static void UpdateLuminousCaveDialogue(void)
             CreateDialogueBoxAndPortrait(sLetUsBegin,0,0,0x105);
             break;
         case LUMINOUS_CAVE_CHANGED_APPEARANCE:
-            PrintColoredPokeNameToBuffer(gPlayerName[0],sLuminousCaveWork->pokeStruct, COLOR_CYAN);
+            PrintColoredPokeNameToBuffer(gFormatBuffer_Names[0],sLuminousCaveWork->pokeStruct, COLOR_CYAN);
             PlaySound(0x1ff);
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_EVOLVED;
             CreateDialogueBoxAndPortrait(sFmtChangedAppearance,0,0,0x105);
             break;
         case LUMINOUS_CAVE_EVOLVED:
             monName = GetMonSpecies(sLuminousCaveWork->pokeStruct->speciesNum);
-            strcpy(gAvailablePokemonNames[0],monName);
+            strcpy(gFormatBuffer_Monsters[0],monName);
             monName = GetMonSpecies(sLuminousCaveWork->evolveStatus.targetEvolveSpecies);
-            strcpy(gAvailablePokemonNames[1],monName);
+            strcpy(gFormatBuffer_Monsters[1],monName);
             sLuminousCaveWork->evolutionComplete = TRUE;
             sub_80977D0();
             sub_808F734(sLuminousCaveWork->pokeStruct,sLuminousCaveWork->evolveStatus.targetEvolveSpecies);

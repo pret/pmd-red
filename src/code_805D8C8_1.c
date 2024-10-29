@@ -1753,7 +1753,7 @@ void sub_805F02C(void)
         sub_803F508(r7);
         sub_8041AD0(leader);
         sub_8041AE0(GetLeader());
-        SetMessageArgument(gAvailablePokemonNames[0], r7, 0);
+        SetMessageArgument(gFormatBuffer_Monsters[0], r7, 0);
         TryDisplayDungeonLoggableMessage(r7, gUnknown_80F9BB0);
         sub_807EC28(FALSE);
         r8->unk64 = 0;
@@ -2116,7 +2116,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
                         break;
                 }
                 else {
-                    SetMessageArgument(gAvailablePokemonNames[0], GetLeader(), 0);
+                    SetMessageArgument(gFormatBuffer_Monsters[0], GetLeader(), 0);
                     DisplayDungeonMessage(0, gUnknown_80FDE18, 1);
                 }
             }
@@ -2164,7 +2164,7 @@ extern const u8 *const gUnknown_80FE954;
 const u8 *GetCurrentDungeonName(void);
 void GetWeatherName(u8 *dst, u8 weatherId);
 
-extern s32 gFormatData_202DE30[];
+extern s32 gFormatArgs[];
 
 void DrawFieldMenu(u8 a0)
 {
@@ -2234,27 +2234,27 @@ void DrawFieldMenu(u8 a0)
         sub_80073B8(2);
         DeconstructPlayTime(gPlayTimeRef, &hours, &minutes, &seconds);
 
-        gFormatData_202DE30[0] = FixedPointToInt(leaderInfo->belly);
-        gFormatData_202DE30[1] = FixedPointToInt(leaderInfo->maxBelly);
+        gFormatArgs[0] = FixedPointToInt(leaderInfo->belly);
+        gFormatArgs[1] = FixedPointToInt(leaderInfo->maxBelly);
         PrintFormatStringOnWindow(0x73, 0, gUnknown_80F9174, 2, 0);
 
-        gFormatData_202DE30[0] = gTeamInventoryRef->teamMoney;
+        gFormatArgs[0] = gTeamInventoryRef->teamMoney;
         PrintFormatStringOnWindow(0x73, 12, gUnknown_80F9190, 2, 0);
 
-        GetWeatherName(gAvailablePokemonNames[0], GetApparentWeather(NULL));
+        GetWeatherName(gFormatBuffer_Monsters[0], GetApparentWeather(NULL));
         PrintFormatStringOnWindow(0x73, 24, gUnknown_80F91A8, 2, 0);
 
-        gFormatData_202DE30[0] = hours;
-        gFormatData_202DE30[1] = minutes;
-        gFormatData_202DE30[2] = seconds;
+        gFormatArgs[0] = hours;
+        gFormatArgs[1] = minutes;
+        gFormatArgs[2] = seconds;
         PrintFormatStringOnWindow(0x73, 36, gUnknown_80F91C8, 2, 0);
         for (yLoop = 0, i = 0; i < MAX_TEAM_MEMBERS; i++) {
             Entity *teamMon = gDungeon->teamPokemon[i];
             if (EntityExists(teamMon)) {
                 EntityInfo *monInfo = teamMon->info;
-                SetMessageArgument(gAvailablePokemonNames[0], teamMon, 0);
-                gFormatData_202DE30[0] = monInfo->HP;
-                gFormatData_202DE30[1] = monInfo->maxHPStat;
+                SetMessageArgument(gFormatBuffer_Monsters[0], teamMon, 0);
+                gFormatArgs[0] = monInfo->HP;
+                gFormatArgs[1] = monInfo->maxHPStat;
                 PrintFormatStringOnWindow(4, yLoop, gUnknown_80F91E0, 2, 0);
                 yLoop += 12;
                 if (yLoop >= 12 * MAX_TEAM_MEMBERS)
@@ -2773,7 +2773,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
         break;
     case 3: {
             Item *item = &a1->info->heldItem;
-            SetMessageArgument_2(gAvailablePokemonNames[0], a1Info, 0);
+            SetMessageArgument_2(gFormatBuffer_Monsters[0], a1Info, 0);
             PrintFormatStringOnWindow(x, 0, gUnknown_80FE940, 0, 0);
             if (item->flags & ITEM_FLAG_EXISTS) {
                 gUnknown_202EE10.unk1A++;
@@ -2787,7 +2787,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
             Entity *chosenTeamMember = gDungeon->teamPokemon[sUnknown_202F248[a0] - MAX_TEAM_MEMBERS];
             if (EntityExists(chosenTeamMember)) {
                 Item *item = &chosenTeamMember->info->heldItem;
-                SetMessageArgument_2(gAvailablePokemonNames[0], chosenTeamMember->info, 0);
+                SetMessageArgument_2(gFormatBuffer_Monsters[0], chosenTeamMember->info, 0);
                 PrintFormatStringOnWindow(x, 0, gUnknown_80FE940, 0, 0);
                 if (item->flags & ITEM_FLAG_EXISTS) {
                     gUnknown_202EE10.unk1A++;
@@ -3379,38 +3379,38 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
                 EntityInfo *monInfo = teamMon->info;
                 s32 color = (a0->unk14[i] != 0) ? 6 : 2;
 
-                sub_8070968(gAvailablePokemonNames[0], monInfo, color);
+                sub_8070968(gFormatBuffer_Monsters[0], monInfo, color);
                 if (sub_806A538(gRecruitedPokemonRef->pokemon2[monInfo->teamIndex].unkA)) {
                     if (monInfo->HP <= monInfo->maxHPStat / 4) {
-                        strcpy(gAvailablePokemonNames[1], gHeartRedTiny);
+                        strcpy(gFormatBuffer_Monsters[1], gHeartRedTiny);
                     }
                     else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 2) {
-                        strcpy(gAvailablePokemonNames[1], gHeartRedSmall);
+                        strcpy(gFormatBuffer_Monsters[1], gHeartRedSmall);
                     }
                     else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 3) {
-                        strcpy(gAvailablePokemonNames[1], gHeartRedMedium);
+                        strcpy(gFormatBuffer_Monsters[1], gHeartRedMedium);
                     }
                     else {
-                        strcpy(gAvailablePokemonNames[1], gHeartRedLarge);
+                        strcpy(gFormatBuffer_Monsters[1], gHeartRedLarge);
                     }
                 }
                 else {
                     if (monInfo->HP <= monInfo->maxHPStat / 4) {
-                        strcpy(gAvailablePokemonNames[1], gHeartYellowTiny);
+                        strcpy(gFormatBuffer_Monsters[1], gHeartYellowTiny);
                     }
                     else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 2) {
-                        strcpy(gAvailablePokemonNames[1], gHeartYellowSmall);
+                        strcpy(gFormatBuffer_Monsters[1], gHeartYellowSmall);
                     }
                     else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 3) {
-                        strcpy(gAvailablePokemonNames[1], gHeartYellowMedium);
+                        strcpy(gFormatBuffer_Monsters[1], gHeartYellowMedium);
                     }
                     else {
-                        strcpy(gAvailablePokemonNames[1], gHeartYellowLarge);
+                        strcpy(gFormatBuffer_Monsters[1], gHeartYellowLarge);
                     }
                 }
 
-                gFormatData_202DE30[0] = monInfo->HP;
-                gFormatData_202DE30[1] = monInfo->maxHPStat;
+                gFormatArgs[0] = monInfo->HP;
+                gFormatArgs[1] = monInfo->maxHPStat;
                 y = sub_8013800(&gUnknown_202EE10, i);
                 if (monInfo->isTeamLeader) {
                     PrintFormatStringOnWindow(9, y, gUnknown_8106BD4, 0, 0);
@@ -3709,7 +3709,7 @@ void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 windowId)
         if (tactic == TACTIC_UNUSED)
             break;
 
-        CopyTacticsNameToBuffer(gAvailablePokemonNames[0], tactic);
+        CopyTacticsNameToBuffer(gFormatBuffer_Monsters[0], tactic);
         if (mon->tactic == tactic) {
             PrintFormatStringOnWindow(0x10, y, gUnknown_8106BEC, windowId, 0);
         }

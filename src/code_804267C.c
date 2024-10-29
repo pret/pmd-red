@@ -111,7 +111,7 @@ void sub_80427AC(void)
                 enInfo->unkF3 = FALSE;
                 sub_80429A0(entity);
                 if (!enInfo->isNotTeamMember) {
-                    SetMessageArgument(gAvailablePokemonNames[0], entity, 0);
+                    SetMessageArgument(gFormatBuffer_Monsters[0], entity, 0);
                     DisplayDungeonLoggableMessageTrue(entity, *gPtrFeralFoundItemMessage);
                 }
             }

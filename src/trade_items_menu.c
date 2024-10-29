@@ -526,8 +526,8 @@ void sub_8036B28(void)
         sub_8036F74();
         break;
     case TRADE_ITEMS_SEND_ITEM_CONFIRM:
-        gFormatData_202DE30[0] = sTradeItemsMenu->unk14.unk0;
-        BufferItemName(gFormatItems[0],sTradeItemsMenu->itemToSend.id,NULL);
+        gFormatArgs[0] = sTradeItemsMenu->unk14.unk0;
+        BufferItemName(gFormatBuffer_Items[0],sTradeItemsMenu->itemToSend.id,NULL);
         CreateMenuDialogueBoxAndPortrait(sFmtWillBeSentPrompt,0,5, sUnknown_80E6154,0,4,0,0,0x101);
         break;
     case TRADE_ITEMS_RECEIVE_ITEM:
@@ -585,18 +585,18 @@ void sub_8036B28(void)
         break;
     case 0xe:
         if (sTradeItemsMenu->unk24C.quantity == 0) {
-            gFormatData_202DE30[0] = sTradeItemsMenu->unk244.quantity;
-            BufferItemName(gFormatItems[0],sTradeItemsMenu->unk244.itemIdx.id,NULL);
+            gFormatArgs[0] = sTradeItemsMenu->unk244.quantity;
+            BufferItemName(gFormatBuffer_Items[0],sTradeItemsMenu->unk244.itemIdx.id,NULL);
         }
         else {
-            gFormatData_202DE30[0] = sTradeItemsMenu->unk24C.quantity;
-            BufferItemName(gFormatItems[0],sTradeItemsMenu->unk24C.itemIdx.id,NULL);
+            gFormatArgs[0] = sTradeItemsMenu->unk24C.quantity;
+            BufferItemName(gFormatBuffer_Items[0],sTradeItemsMenu->unk24C.itemIdx.id,NULL);
         }
         CreateDialogueBoxAndPortrait(sFmtYouReceived,0,0,0x101);
         break;
     case 0xd:
-        gFormatData_202DE30[0] = sTradeItemsMenu->unk14.unk0;
-        BufferItemName(gFormatItems[0],sTradeItemsMenu->itemToSend.id,NULL);
+        gFormatArgs[0] = sTradeItemsMenu->unk14.unk0;
+        BufferItemName(gFormatBuffer_Items[0],sTradeItemsMenu->itemToSend.id,NULL);
         CreateDialogueBoxAndPortrait(sFmtYouSent,0,0,0x101);
         break;
     case 0xB:

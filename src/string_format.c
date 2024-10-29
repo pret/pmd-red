@@ -127,17 +127,17 @@ static void nullsub_35(void);
 static bool8 AppendString(const u8 *, u8 **, u8 *, u16 r3);
 
 // 'd', 'v' and 'V'
-EWRAM_DATA s32 gFormatData_202DE30[10] = {0};
+EWRAM_DATA s32 gFormatArgs[10] = {0};
 // 'i', apparently only i0 and i1 are actually used though it's yet to be verified
-EWRAM_DATA u8 gFormatItems[4][FORMAT_BUFFER_LEN] = {0};
+EWRAM_DATA u8 gFormatBuffer_Items[4][FORMAT_BUFFER_LEN] = {0};
 // 'm' which probably stands for 'monster', available through m0 to m9
-EWRAM_DATA u8 gAvailablePokemonNames[10][FORMAT_BUFFER_LEN] = {0};
+EWRAM_DATA u8 gFormatBuffer_Monsters[10][FORMAT_BUFFER_LEN] = {0};
 // 'n' which probably stands for 'name', available through n0 to n9
-EWRAM_DATA u8 gPlayerName[10][FORMAT_BUFFER_LEN] = {0};
+EWRAM_DATA u8 gFormatBuffer_Names[10][FORMAT_BUFFER_LEN] = {0};
 // Seems to be a general buffer
 EWRAM_DATA u8 gUnknown_202E5D8[FORMAT_BUFFER_LEN] = {0};
 // 'h' - Friend Area buffer. This buffer seems larger than others. It's possible it actually has the same length, but there were some unused buffers right after it.
-EWRAM_DATA u8 gUnknown_202E628[FRIEND_AREA_BUFFER_LEN] = {0};
+EWRAM_DATA u8 gFormatBuffer_FriendArea[FRIEND_AREA_BUFFER_LEN] = {0};
 
 static EWRAM_DATA SpriteOAM sDialogueBoxArrowSprite = {0};
 
@@ -218,7 +218,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
 {
     bool8 portraitOn = FALSE;
 
-    xxx_format_string(text, sDialogueTextBuffer, sDialogueTextBuffer + DIALOGUE_TEXT_BUFFER_SIZE - 1, flags);
+    CopyFormatString(text, sDialogueTextBuffer, sDialogueTextBuffer + DIALOGUE_TEXT_BUFFER_SIZE - 1, flags);
     gUnknown_202E794 = sDialogueTextBuffer;
     gUnknown_202E748.unk24 = a1;
     gUnknown_202EC10 = a5;
@@ -634,7 +634,7 @@ static void sub_8014A88(void)
             break;
 
         r5 += 12;;
-        xxx_format_string(menuItem->text, text, text + sizeof(text), 0);
+        CopyFormatString(menuItem->text, text, text + sizeof(text), 0);
         val = sub_8008ED0(text);
         if (r7 < val) {
             r7 = val;
@@ -683,7 +683,7 @@ static void UNUSED nullsub_35(void)
 {
 }
 
-const u8 *xxx_format_string(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
+const u8 *CopyFormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
 {
     u8 txtArray[60];
     bool8 r10 = TRUE;
@@ -734,7 +734,7 @@ const u8 *xxx_format_string(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
             switch (*str) {
                 case 'i':
                     str++;
-                    txtPtr = gFormatItems[*str - '0'];
+                    txtPtr = gFormatBuffer_Items[*str - '0'];
                     str++;
                     break;
                 case 'm':
@@ -745,13 +745,13 @@ const u8 *xxx_format_string(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
                         PrintColoredPokeNameToBuffer(sFormatBuffer_UnknownMonster, monStruct, 0);
                     }
                     else {
-                        txtPtr = gAvailablePokemonNames[*str - '0'];
+                        txtPtr = gFormatBuffer_Monsters[*str - '0'];
                         str++;
                     }
                     break;
                 case 'n':
                     str++;
-                    txtPtr = gPlayerName[*str - '0'];
+                    txtPtr = gFormatBuffer_Names[*str - '0'];
                     str++;
                     break;
                 case 't':
@@ -766,11 +766,11 @@ const u8 *xxx_format_string(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
                     break;
                 case 'h':
                     str++;
-                    txtPtr = gUnknown_202E628;
+                    txtPtr = gFormatBuffer_FriendArea;
                     break;
                 case 'd':
                     str++;
-                    sprintfStatic(txtArray, gUnknown_80D4900, gFormatData_202DE30[*(str++) - '0']);
+                    sprintfStatic(txtArray, gUnknown_80D4900, gFormatArgs[*(str++) - '0']);
                     txtPtr = txtArray;
                     break;
                 case 'v': {
@@ -778,7 +778,7 @@ const u8 *xxx_format_string(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
                     u8 *unkTxtPtr;
 
                     str++;
-                    a = gFormatData_202DE30[*(str++) - '0'];
+                    a = gFormatArgs[*(str++) - '0'];
                     sprintfStatic(txtArray, gUnknown_80D4904, *(str++) - '0', a);
                     unkTxtPtr = txtArray;
                     while (*unkTxtPtr != '\0') {
@@ -796,7 +796,7 @@ const u8 *xxx_format_string(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
                     u8 *unkTxtPtr;
 
                     str++;
-                    a = gFormatData_202DE30[*(str++) - '0'];
+                    a = gFormatArgs[*(str++) - '0'];
                     sprintfStatic(txtArray, gUnknown_80D4908, *(str++) - '0', a);
                     unkTxtPtr = txtArray;
                     while (*unkTxtPtr != '\0') {
@@ -874,7 +874,7 @@ void PrintFormatStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 te
 {
     u8 formatString[FORMAT_STR_MAX_LEN];
 
-    xxx_format_string(str, formatString, formatString + FORMAT_STR_MAX_LEN, 0);
+    CopyFormatString(str, formatString, formatString + FORMAT_STR_MAX_LEN, 0);
     formatString[FORMAT_STR_MAX_LEN - 1] = '\0';
     PrintStringOnWindow(x, y, formatString, windowId, terminatingChr);
 }
@@ -883,7 +883,7 @@ void PrintFormatStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 t
 {
     u8 formatString[FORMAT_STR_MAX_LEN];
 
-    xxx_format_string(str, formatString, formatString + FORMAT_STR_MAX_LEN, 0);
+    CopyFormatString(str, formatString, formatString + FORMAT_STR_MAX_LEN, 0);
     formatString[FORMAT_STR_MAX_LEN - 1] = '\0';
     PrintStringOnWindow2(x, y, formatString, windowId, terminatingChr, lineSpacing);
 }

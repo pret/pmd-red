@@ -1084,7 +1084,7 @@ sub_80101F8:
 	adds r2, 0x50
 	adds r1, r3, 0
 	movs r3, 0
-	bl xxx_format_string
+	bl CopyFormatString
 	b _08010220
 	.align 2, 0
 _08010214: .4byte gUnknown_80D3EFC
@@ -2307,7 +2307,7 @@ _08010BD0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08010C08: .4byte gAvailablePokemonNames
+_08010C08: .4byte gFormatBuffer_Monsters
 _08010C0C: .4byte gUnknown_80D4074
 	thumb_func_end sub_8010B74
 

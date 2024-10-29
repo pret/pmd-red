@@ -89,7 +89,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                 if (CheckVariousConditions(pokemon))
                 {
                     pokemonInfo->useHeldItem = FALSE;
-                    SetMessageArgument(gAvailablePokemonNames[0], pokemon, 0);
+                    SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
                     TryDisplayDungeonLoggableMessage(pokemon, gPtrCouldntBeUsedMessage);
                     return;
                 }

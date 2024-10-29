@@ -41,12 +41,12 @@ struct MonPortraitMsg
 #define FORMAT_BUFFER_LEN 80
 #define FRIEND_AREA_BUFFER_LEN 184
 
-extern s32 gFormatData_202DE30[10];
-extern u8 gFormatItems[4][FORMAT_BUFFER_LEN];
-extern u8 gAvailablePokemonNames[10][FORMAT_BUFFER_LEN];
-extern u8 gPlayerName[10][FORMAT_BUFFER_LEN];
+extern s32 gFormatArgs[10];
+extern u8 gFormatBuffer_Items[4][FORMAT_BUFFER_LEN];
+extern u8 gFormatBuffer_Monsters[10][FORMAT_BUFFER_LEN];
+extern u8 gFormatBuffer_Names[10][FORMAT_BUFFER_LEN];
 extern u8 gUnknown_202E5D8[FORMAT_BUFFER_LEN];
-extern u8 gUnknown_202E628[FRIEND_AREA_BUFFER_LEN];
+extern u8 gFormatBuffer_FriendArea[FRIEND_AREA_BUFFER_LEN];
 
 void sub_8014144(void);
 void sub_801416C(s32 param_1,s32 param_2);
@@ -57,7 +57,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
 void sub_8014490(void);
 s32 sub_80144A4(s32 *a0);
 void DrawDialogueBoxString(void);
-const u8 *xxx_format_string(const u8 *str, u8 *dst, u8 *dstMax, u16 flags);
+const u8 *CopyFormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags);
 void PrintFormatStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr);
 void PrintFormatStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing);
 

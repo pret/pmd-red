@@ -216,7 +216,7 @@ void sub_802B57C(void)
     sub_802F2C0();
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
     monName = GetMonSpecies(MONSTER_PELIPPER);
-    strcpy(gAvailablePokemonNames[0], monName);
+    strcpy(gFormatBuffer_Monsters[0], monName);
     sub_802B548(2);
   }
 }

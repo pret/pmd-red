@@ -640,7 +640,7 @@ u32 sub_80913E0(Item* slot, u32 a2, struct subStruct_203B240 ** a3)
   BufferItemName(buffer88, slot->id, NULL);
   if (slot->id == ITEM_TM_USED_TM) {
     // empty TM
-    BufferItemName(gFormatItems[0], (u8)(slot->quantity + 125), NULL);
+    BufferItemName(gFormatBuffer_Items[0], (u8)(slot->quantity + 125), NULL);
   }
   sub_80073B8(a2);
   PrintFormatStringOnWindow(16, 0, buffer88, a2, 0);
@@ -660,7 +660,7 @@ u32 sub_80913E0(Item* slot, u32 a2, struct subStruct_203B240 ** a3)
     typestring = GetUnformattedTypeString(moves_data);
     PrintFormatStringOnWindow(64, 84, typestring, a2, 0);
     result = GetMoveBasePP(buffer8);
-    gFormatData_202DE30[0] = result;
+    gFormatArgs[0] = result;
     PrintFormatStringOnWindow(128, 84, gPtrPPD0Text, a2, 0);
   }
 

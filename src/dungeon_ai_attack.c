@@ -991,7 +991,7 @@ void HandleUseOrbAction(Entity *pokemon)
     IVar5 = *item;
 
     if (item->flags & ITEM_FLAG_STICKY) {
-        sub_8045BF8(gFormatItems[0], item);
+        sub_8045BF8(gFormatBuffer_Items[0], item);
         TryDisplayDungeonLoggableMessage(pokemon, *gItemStickyDoesntWorkText);
         return;
     }
@@ -1018,20 +1018,20 @@ void HandleUseOrbAction(Entity *pokemon)
         }
 
         if (entityInfo->volatileStatus.volatileStatus == 1) {
-            SetMessageArgument(gAvailablePokemonNames[0], pokemon, 0);
+            SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
             TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC714);
             r4 = FALSE;
             r8 = FALSE;
         }
         else if (entityInfo->volatileStatus.volatileStatus == 7) {
-            SetMessageArgument(gAvailablePokemonNames[0], pokemon, 0);
+            SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
             TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC718);
             r4 = FALSE;
             r8 = FALSE;
         }
         else if (entityInfo->nonVolatile.nonVolatileStatus == 4)
         {
-            SetMessageArgument(gAvailablePokemonNames[0], pokemon, 0);
+            SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
             TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC6A8);
             r4 = FALSE;
             r8 = FALSE;

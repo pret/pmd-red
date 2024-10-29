@@ -13,12 +13,12 @@ void sub_8084778(void)
     s32 i;
     WonderMail *wm;
 
-    strcpy(gAvailablePokemonNames[3], gUnknown_8107224);
+    strcpy(gFormatBuffer_Monsters[3], gUnknown_8107224);
 
     for (i = 0; i < MAX_ACCEPTED_JOBS; i++) {
         wm = GetJobSlotInfo(i);
         if (wm->mailType == MAIL_TYPE_TAKEN_JOB && gDungeon->dungeonLocation.id == wm->unk4.dungeon.id && wm->missionType == WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT) {
-            CopyCyanMonsterNametoBuffer(gAvailablePokemonNames[3], wm->targetSpecies);
+            CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[3], wm->targetSpecies);
             break;
         }
     }

@@ -74,12 +74,12 @@ void sub_807E254(Entity *pokemon,Entity *target)
 
 
   if (HasAbility(pokemon, ABILITY_SUCTION_CUPS)) {
-    SetMessageArgument(gAvailablePokemonNames[0],pokemon,0);
+    SetMessageArgument(gFormatBuffer_Monsters[0],pokemon,0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
   }
   else if(HasAbility(target, ABILITY_SUCTION_CUPS))
   {
-    SetMessageArgument(gAvailablePokemonNames[0],target,0);
+    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
   }
   else

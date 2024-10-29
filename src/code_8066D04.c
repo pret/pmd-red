@@ -53,14 +53,14 @@ void HandleSetItemAction(Entity *param_1, bool8 param_2)
     itemPtr = &gTeamInventoryRef->teamItems[index];
     if (((itemPtr->flags & ITEM_FLAG_EXISTS)) && ((itemPtr->flags & ITEM_FLAG_SET))) {
       if ((itemPtr->flags & ITEM_FLAG_STICKY)) {
-        sub_8045BF8(gFormatItems[0],itemPtr);
+        sub_8045BF8(gFormatBuffer_Items[0],itemPtr);
         TryDisplayDungeonLoggableMessage(param_1,*gItemStickyCannotEquip);
         return;
       }
       itemPtr->flags &= ~(ITEM_FLAG_SET);
     }
   }
-  sub_8045BF8(gFormatItems[0],item);
+  sub_8045BF8(gFormatBuffer_Items[0],item);
   PlaySoundEffect(0x133);
   if (param_2 != 0) {
     if ((item->flags & ITEM_FLAG_STICKY)) {
@@ -78,7 +78,7 @@ void HandleSetItemAction(Entity *param_1, bool8 param_2)
   }
   item->flags |= ITEM_FLAG_SET;
   if (((item->flags & ITEM_FLAG_STICKY)) && (param_2 != 0)) {
-    sub_8045BF8(gFormatItems[0],item);
+    sub_8045BF8(gFormatBuffer_Items[0],item);
     TryDisplayDungeonLoggableMessage(param_1,*gUnknown_80F8BE0);
   }
 }
@@ -94,12 +94,12 @@ void HandleUnsetItemAction(Entity *entity,bool8 enableMessage)
     item = &gTeamInventoryRef->teamItems[index];
     if (((item->flags & ITEM_FLAG_EXISTS)) && ((item->flags & ITEM_FLAG_SET))) {
       if ((item->flags & ITEM_FLAG_STICKY)) {
-        sub_8045BF8(gFormatItems[0],item);
+        sub_8045BF8(gFormatBuffer_Items[0],item);
         TryDisplayDungeonLoggableMessage(entity,*gItemStickyCannotEquip);
         return;
       }
       item->flags &= ~(ITEM_FLAG_SET);
-      sub_8045BF8(gFormatItems[0],item);
+      sub_8045BF8(gFormatBuffer_Items[0],item);
       PlaySoundEffect(0x133);
       if (enableMessage) {
         TryDisplayDungeonLoggableMessage(entity,*gUnknown_80F8D20);
@@ -131,15 +131,15 @@ void HandleGiveItemAction(Entity *param_1)
       bVar3 = FALSE;
 
   if ((!bVar3) && ((item->flags & (ITEM_FLAG_STICKY | ITEM_FLAG_SET)) == (ITEM_FLAG_STICKY | ITEM_FLAG_SET))) {
-    sub_8045BF8(gFormatItems[1],item);
+    sub_8045BF8(gFormatBuffer_Items[1],item);
     TryDisplayDungeonLoggableMessage(param_1,*gItemStickyCannotMove2);
   }
   else
   {
-    SetMessageArgument(gAvailablePokemonNames[1],entity,0);
+    SetMessageArgument(gFormatBuffer_Monsters[1],entity,0);
     if (((info2->heldItem).flags & ITEM_FLAG_EXISTS)) {
      if (((info2->heldItem).flags & ITEM_FLAG_STICKY)) {
-        sub_8045BF8(gFormatItems[1],&info2->heldItem);
+        sub_8045BF8(gFormatBuffer_Items[1],&info2->heldItem);
         TryDisplayDungeonLoggableMessage(param_1,*gItemStickyCannotMove1);
         return;
       }
@@ -155,8 +155,8 @@ void HandleGiveItemAction(Entity *param_1)
         AddItemToInventory(&item1);
       }
       info2->heldItem = item2;
-      sub_8045BF8(gFormatItems[0],&item2);
-      sub_8045BF8(gFormatItems[1],&item1);
+      sub_8045BF8(gFormatBuffer_Items[0],&item2);
+      sub_8045BF8(gFormatBuffer_Items[1],&item1);
       PlaySoundEffect(0x14d);
       TryDisplayDungeonLoggableMessage(param_1,*gMonTookAndReturnedItem);
       if ((item2.flags & ITEM_FLAG_STICKY)) {
@@ -168,7 +168,7 @@ void HandleGiveItemAction(Entity *param_1)
       item3.flags &= ~(ITEM_FLAG_SET);
       sub_8044DF0(param_1, 0, 101);
       info2->heldItem = item3;
-      sub_8045BF8(gFormatItems[0],&item3);
+      sub_8045BF8(gFormatBuffer_Items[0],&item3);
       PlaySoundEffect(0x14d);
       TryDisplayDungeonLoggableMessage(param_1,*gUnknown_80F8D44);
       if ((item3.flags & ITEM_FLAG_STICKY)) {
@@ -205,15 +205,15 @@ void HandleTakeItemAction(Entity *param_1)
   else
   {
     if ((heldItem->flags & ITEM_FLAG_STICKY)) {
-        sub_8045BF8(gFormatItems[0],heldItem);
+        sub_8045BF8(gFormatBuffer_Items[0],heldItem);
         TryDisplayDungeonLoggableMessage(param_1,*gUnknown_80F8BE0);
     }
     else
     {
       item = *heldItem;
       item.flags &= ~(ITEM_FLAG_SET);
-      sub_8045BF8(gFormatItems[0],&item);
-      SetMessageArgument(gAvailablePokemonNames[0],entity,0);
+      sub_8045BF8(gFormatBuffer_Items[0],&item);
+      SetMessageArgument(gFormatBuffer_Monsters[0],entity,0);
       heldItem->id = ITEM_NOTHING;
       heldItem->quantity = 0;
       heldItem->flags = 0;
@@ -246,20 +246,20 @@ void sub_8066BD4(Entity *param_1)
   item = sub_8044D90(param_1,1,0x1565);
   if (heldItem->flags & ITEM_FLAG_STICKY)
   {
-    sub_8045BF8(gFormatItems[0],heldItem);
+    sub_8045BF8(gFormatBuffer_Items[0],heldItem);
     TryDisplayDungeonLoggableMessage(param_1,*gUnknown_80F8BE0);
   }
   else if ((item->flags & (ITEM_FLAG_STICKY | ITEM_FLAG_SET)) == (ITEM_FLAG_STICKY | ITEM_FLAG_SET)) {
-    sub_8045BF8(gFormatItems[0],item);
+    sub_8045BF8(gFormatBuffer_Items[0],item);
     TryDisplayDungeonLoggableMessage(param_1,*gUnknown_80F8BE0);
   }
   else
   {
     heldItem->flags &= ~(ITEM_FLAG_SET);
     item->flags &= ~(ITEM_FLAG_SET);
-    sub_8045BF8(gFormatItems[0],heldItem);
-    sub_8045BF8(gFormatItems[1],item);
-    SetMessageArgument(gAvailablePokemonNames[1],entity,0);
+    sub_8045BF8(gFormatBuffer_Items[0],heldItem);
+    sub_8045BF8(gFormatBuffer_Items[1],item);
+    SetMessageArgument(gFormatBuffer_Monsters[1],entity,0);
     temp = info->heldItem;
     info->heldItem = *item;
     *item = temp;
@@ -298,7 +298,7 @@ void HandlePlaceItemAction(Entity *param_1)
 
     info = entity->info;
     item = sub_8044D90(entity,0,4);
-    sub_8045BF8(gFormatItems[0],item);
+    sub_8045BF8(gFormatBuffer_Items[0],item);
     if (info->action.unk4[0].actionUseIndex == 0x80) {
         TryDisplayDungeonLoggableMessage(entity,*gUnknown_80F8DE0);
     }
@@ -315,7 +315,7 @@ void HandlePlaceItemAction(Entity *param_1)
             if(((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL) &&
                 (tile->object == NULL)) {
                 item->flags &= ~(ITEM_FLAG_SET);
-                sub_8045BF8(gFormatItems[0],item);
+                sub_8045BF8(gFormatBuffer_Items[0],item);
                 if (sub_80460F8(&entity->pos,item,1) == 0) {
                 _message:
                     TryDisplayDungeonLoggableMessage(entity,*gUnknown_80F8E04);
@@ -327,7 +327,7 @@ void HandlePlaceItemAction(Entity *param_1)
                     item->flags = 0;
                     FillInventoryGaps();
                     PlaySoundEffect(0x14d);
-                    SetMessageArgument(gAvailablePokemonNames[0],entity,0);
+                    SetMessageArgument(gFormatBuffer_Monsters[0],entity,0);
                     TryDisplayDungeonLoggableMessage(entity,*gUnknown_80F8E28);
                     sub_807AB38(entity,gDungeon->unk3A08);
                 }

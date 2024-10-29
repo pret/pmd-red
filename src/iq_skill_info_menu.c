@@ -84,7 +84,7 @@ static void sub_801C6E4(void)
             CallPrepareTextbox_8008C54(sIQSkillInfoMenu->unk24);
             sub_80073B8(sIQSkillInfoMenu->unk24);
             skillName = GetIQSkillName(sIQSkillInfoMenu->chosenIQSkill);
-            strcpy(gFormatItems[0], skillName);
+            strcpy(gFormatBuffer_Items[0], skillName);
             PrintFormatStringOnWindow(16, 0, sFmtMoveItem0, 0, 0); // {MOVE_ITEM_0}
             PrintStringOnWindow(8, 16, GetIQSkillDescription(sIQSkillInfoMenu->chosenIQSkill), sIQSkillInfoMenu->unk24, 0);
             sub_80073E0(sIQSkillInfoMenu->unk24);
@@ -95,7 +95,7 @@ static void sub_801C6E4(void)
             CallPrepareTextbox_8008C54(sIQSkillInfoMenu->unk24);
             sub_80073B8(sIQSkillInfoMenu->unk24);
             preload = sIQSkillInfoMenu->unk10[sIQSkillInfoMenu->unk8];
-            strcpy(gAvailablePokemonNames[0], preload->pokeName);
+            strcpy(gFormatBuffer_Monsters[0], preload->pokeName);
             PrintFormatStringOnWindow(16, 0, sFmtPkmn0, sIQSkillInfoMenu->unk24, 0); // {POKEMON_0}
             PrintFormatStringOnWindow(4, 16, sIQSkillInfoMenu->unk10[sIQSkillInfoMenu->unk8]->unk4, sIQSkillInfoMenu->unk24, 0);
             sub_80073E0(sIQSkillInfoMenu->unk24);

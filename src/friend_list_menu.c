@@ -199,8 +199,8 @@ void sub_8025518(void)
             sub_8025E68(3,&gUnknown_203B2B4->item2);
         }
         sub_8023DA4();
-        PrintColoredPokeNameToBuffer(gAvailablePokemonNames[0],gUnknown_203B2B4->pokeStruct,7);
-        PrintColoredPokeNameToBuffer(gAvailablePokemonNames[1],gUnknown_203B2B4->pokeStruct,6);
+        PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0],gUnknown_203B2B4->pokeStruct,7);
+        PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[1],gUnknown_203B2B4->pokeStruct,6);
         sub_8012D60(&gUnknown_203B2B4->unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->menuAction1,2);
         break;
     case FRIEND_LIST_MENU_STATE_SUMMARY:
@@ -540,7 +540,7 @@ void sub_8025CB4(void)
             a3.unk4 = 0;
             a3.unk8 = 1;
             item.flags = ITEM_FLAG_EXISTS;
-            sub_8090E14(gFormatItems[1],&item,&a3);
+            sub_8090E14(gFormatBuffer_Items[1],&item,&a3);
             GivePokemonItem(gUnknown_203B2B4->species,&gUnknown_203B2B4->item1);
             sub_801A928();
             nullsub_104();
@@ -640,7 +640,7 @@ void sub_8025E68(u32 r0, BulkItem *heldItem)
     a3.unk4 = 0;
     a3.unk8 = 1;
     item.flags = ITEM_FLAG_EXISTS;
-    sub_8090E14(gFormatItems[0], &item, &a3);
+    sub_8090E14(gFormatBuffer_Items[0], &item, &a3);
     PrintFormatStringOnWindow(4, 3, sItemBuffered, r0, 0);
     sub_80073E0(r0);
 }

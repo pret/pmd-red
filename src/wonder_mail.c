@@ -197,7 +197,7 @@ u32 sub_8027F88(void)
   sUnknown_203B2C0->speciesNum = -1;
   CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
   monName = GetMonSpecies(MONSTER_PELIPPER);
-  strcpy(gAvailablePokemonNames[0], monName);
+  strcpy(gFormatBuffer_Monsters[0], monName);
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
   sUnknown_203B2C0->monPortrait.faceFile = faceFile;
   sUnknown_203B2C0->monPortrait.faceData = (void *) faceFile->data;

@@ -42,8 +42,8 @@ bool8 sub_80227B8(PokemonStruct1 *pkmn)
     sUnknown_203B294->pokeStruct = pkmn;
 
     if (pkmn != NULL) {
-        PrintColoredPokeNameToBuffer(gAvailablePokemonNames[0], pkmn, COLOR_WHITE_2);
-        PrintColoredPokeNameToBuffer(gAvailablePokemonNames[1], pkmn, COLOR_YELLOW);
+        PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0], pkmn, COLOR_WHITE_2);
+        PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[1], pkmn, COLOR_YELLOW);
 
         if (HasGummiItem())
             sub_8022924(0);
@@ -51,8 +51,8 @@ bool8 sub_80227B8(PokemonStruct1 *pkmn)
             sub_8022924(17);
     }
     else {
-        strcpy(gAvailablePokemonNames[0], sTripleQuestionMark);
-        strcpy(gAvailablePokemonNames[1], sTripleQuestionMark);
+        strcpy(gFormatBuffer_Monsters[0], sTripleQuestionMark);
+        strcpy(gFormatBuffer_Monsters[1], sTripleQuestionMark);
 
         if (GetNumberOfFilledInventorySlots() == 0)
             sub_8022924(18);
@@ -198,7 +198,7 @@ static void sub_8022A10(void)
 
                 if (r5 != r6) {
                     sUnknown_203B294->fallbackState = 10;
-                    strcpy(gFormatItems[1], GetIQSkillName(sUnknown_203B294->unk40));
+                    strcpy(gFormatBuffer_Items[1], GetIQSkillName(sUnknown_203B294->unk40));
                     PlaySound(203);
                     CreateDialogueBoxAndPortrait(sFmtIQHelpedLearn, 0, 0, 0x101);
                     sUnknown_203B294->unk40++;
@@ -372,7 +372,7 @@ static void sub_8022EF4(void)
             sUnknown_203B294->unk40 = 1;
             boostAmount = sUnknown_203B294->gummi.boostAmount;
 
-            sub_8090E14(gFormatItems[0], &gTeamInventoryRef->teamItems[sUnknown_203B294->itemIndex], NULL);
+            sub_8090E14(gFormatBuffer_Items[0], &gTeamInventoryRef->teamItems[sUnknown_203B294->itemIndex], NULL);
 
             if (boostAmount != -1)
                 ShiftItemsDownFrom(sUnknown_203B294->itemIndex);

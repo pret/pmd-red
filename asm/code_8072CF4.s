@@ -171,7 +171,7 @@ _080733FC:
 	b _08073456
 	.align 2, 0
 _08073434: .4byte 0x00000147
-_08073438: .4byte gAvailablePokemonNames
+_08073438: .4byte gFormatBuffer_Monsters
 _0807343C: .4byte gUnknown_80FCF38
 _08073440:
 	adds r0, r5, 0x4
@@ -408,7 +408,7 @@ _080735EE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08073600: .4byte gAvailablePokemonNames
+_08073600: .4byte gFormatBuffer_Monsters
 _08073604: .4byte gUnknown_80FCF50
 _08073608: .4byte 0x00000165
 	thumb_func_end sub_807348C

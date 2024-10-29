@@ -151,8 +151,8 @@ static void sub_801EA28(void)
             break;
         case 4:
             sub_801EC7C();
-            sub_8092C84(gAvailablePokemonNames[0], sGulpinShopWork->unk1C);
-            sub_8092C84(gAvailablePokemonNames[1], sGulpinShopWork->unk1E);
+            sub_8092C84(gFormatBuffer_Monsters[0], sGulpinShopWork->unk1C);
+            sub_8092C84(gFormatBuffer_Monsters[1], sGulpinShopWork->unk1E);
 
             switch (sGulpinShopWork->mode) {
                 case GULPIN_SHOP_MODE_AWAKE:

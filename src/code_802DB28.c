@@ -117,13 +117,13 @@ static void sub_802DC9C(void)
     switch (sUnknown_203B2FC->state) {
         case 0:
             CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, sUnknown_203B2FC->jobInfo->clientSpecies);
-            CopyYellowMonsterNametoBuffer(gAvailablePokemonNames[7], sUnknown_203B2FC->jobInfo->clientSpecies);
+            CopyYellowMonsterNametoBuffer(gFormatBuffer_Monsters[7], sUnknown_203B2FC->jobInfo->clientSpecies);
             speciesText = GetMonSpecies(sUnknown_203B2FC->jobInfo->clientSpecies);
-            strcpy(gAvailablePokemonNames[0], speciesText);
+            strcpy(gFormatBuffer_Monsters[0], speciesText);
             speciesText = GetMonSpecies(sUnknown_203B2FC->jobInfo->targetSpecies);
-            strcpy(gAvailablePokemonNames[1], speciesText);
+            strcpy(gFormatBuffer_Monsters[1], speciesText);
             UnlockExclusivePokemon(sUnknown_203B2FC->jobInfo->clientSpecies);
-            BufferItemName(gFormatItems[0], sUnknown_203B2FC->jobInfo->targetItem, NULL);
+            BufferItemName(gFormatBuffer_Items[0], sUnknown_203B2FC->jobInfo->targetItem, NULL);
             sUnknown_203B2FC->fallbackState = 6;
 
             switch (sUnknown_203B2FC->jobInfo->missionType) {

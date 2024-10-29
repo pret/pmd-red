@@ -200,15 +200,15 @@ void HandlePartyListMenuCallback(void)
         case PARTY_LIST_STATE_MAIN_MENU:
             sub_8026E08(3);
             sub_8026DAC(0,&sUnknown_203B2B8->item2);
-            PrintColoredPokeNameToBuffer(gAvailablePokemonNames[0],sUnknown_203B2B8->pokeStruct,7);
-            PrintColoredPokeNameToBuffer(gAvailablePokemonNames[1],sUnknown_203B2B8->pokeStruct,6);
+            PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0],sUnknown_203B2B8->pokeStruct,7);
+            PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[1],sUnknown_203B2B8->pokeStruct,6);
             sub_8012D60(&sUnknown_203B2B8->unk7C,sUnknown_203B2B8->unk16C,0,sUnknown_203B2B8->unk20C,sUnknown_203B2B8->menuAction1,2);
             break;
         case PARTY_LIST_STATE_MAIN_MENU_1:
             sub_8026E08(3);
             sub_8026DAC(0,&sUnknown_203B2B8->item2);
-            PrintColoredPokeNameToBuffer(gAvailablePokemonNames[0],sUnknown_203B2B8->pokeStruct,7);
-            PrintColoredPokeNameToBuffer(gAvailablePokemonNames[1],sUnknown_203B2B8->pokeStruct,6);
+            PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0],sUnknown_203B2B8->pokeStruct,7);
+            PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[1],sUnknown_203B2B8->pokeStruct,6);
             sub_8012EA4(&sUnknown_203B2B8->unk7C,1);
             break;
         case PARTY_LIST_STATE_SUMMARY:
@@ -691,7 +691,7 @@ void PartyListMenu_HandleMenu2(void)
         temp.unk4 = 0;
         temp.unk8 = 1;
         slot.flags = ITEM_FLAG_EXISTS;
-        sub_8090E14(gFormatItems[1],&slot,&temp);
+        sub_8090E14(gFormatBuffer_Items[1],&slot,&temp);
         GivePokemonItem(sUnknown_203B2B8->pokeSpecies,&sUnknown_203B2B8->item1);
         sub_801A928();
         nullsub_104();
@@ -779,7 +779,7 @@ void sub_8026DAC(u32 r0, BulkItem *item)
     temp.unk4 = 0;
     temp.unk8 = 1;
     slot.flags = ITEM_FLAG_EXISTS;
-    sub_8090E14(gFormatItems[0], &slot, &temp);
+    sub_8090E14(gFormatBuffer_Items[0], &slot, &temp);
     PrintFormatStringOnWindow(4, 3, sPartyMenuItemPlaceholder, r0, 0);
     sub_80073E0(r0);
 }
@@ -792,9 +792,9 @@ void sub_8026E08(u32 r0)
 
     CallPrepareTextbox_8008C54(r0);
     sub_80073B8(r0);
-    sub_80922B4(gAvailablePokemonNames[0], sUnknown_203B2B8->pokeStruct->name, POKEMON_NAME_LENGTH);
+    sub_80922B4(gFormatBuffer_Monsters[0], sUnknown_203B2B8->pokeStruct->name, POKEMON_NAME_LENGTH);
     sub_808D930(buffer, sUnknown_203B2B8->pokeStruct->speciesNum);
-    sprintfStatic(buffer1, sUnknown_80DD6E0, gAvailablePokemonNames[0]);
+    sprintfStatic(buffer1, sUnknown_80DD6E0, gFormatBuffer_Monsters[0]);
     x = sub_8008ED0(buffer1);
     PrintStringOnWindow(((sUnknown_80DD370.unkC << 3) - x) / 2, 3, buffer1, r0, 0);
     sub_80073E0(r0);

@@ -506,8 +506,8 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
     }
 
     if (r9) {
-        gFormatData_202DE30[0] = gDungeon->unk67B;
-        if (gFormatData_202DE30[0] != 0) {
+        gFormatArgs[0] = gDungeon->unk67B;
+        if (gFormatArgs[0] != 0) {
             DisplayDungeonMessage(0, gUnknown_80FEC48, 1);
         }
         else {
@@ -531,7 +531,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         if (sub_8099394(&sp)) {
             unkStruct_203B480 *mailStr = GetMailatIndex(sp);
             if (mailStr->rescuesAllowed) {
-                gFormatData_202DE30[0] = mailStr->rescuesAllowed;
+                gFormatArgs[0] = mailStr->rescuesAllowed;
                 DisplayDungeonMessage(0, gUnknown_81002B8, 1);
             }
             else {
@@ -1080,7 +1080,7 @@ bool8 sub_8043ED0(bool8 a0)
         Entity *leader = GetLeader();
         if (EntityExists(leader)) {
             if (!a0) {
-                strcpy(gAvailablePokemonNames[0], gDungeon->faintStringBuffer);
+                strcpy(gFormatBuffer_Monsters[0], gDungeon->faintStringBuffer);
                 DisplayDungeonMessage(0, gUnknown_80F89B4, 1);
             }
             sub_8042B0C(leader);
@@ -1092,7 +1092,7 @@ bool8 sub_8043ED0(bool8 a0)
         Entity *leader = GetLeader();
         if (EntityExists(leader)) {
             if (!a0) {
-                strcpy(gAvailablePokemonNames[0], gDungeon->faintStringBuffer);
+                strcpy(gFormatBuffer_Monsters[0], gDungeon->faintStringBuffer);
                 DisplayDungeonMessage(0, gUnknown_80F89D4, 1);
             }
             sub_8042B0C(leader);
@@ -1104,7 +1104,7 @@ bool8 sub_8043ED0(bool8 a0)
         Entity *leader = GetLeader();
         if (EntityExists(leader)) {
             if (!a0) {
-                strcpy(gAvailablePokemonNames[0], gDungeon->faintStringBuffer);
+                strcpy(gFormatBuffer_Monsters[0], gDungeon->faintStringBuffer);
                 DisplayDungeonMessage(0, gUnknown_80F89D8, 1);
             }
             sub_8042B0C(leader);

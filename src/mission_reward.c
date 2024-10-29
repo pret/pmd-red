@@ -29,7 +29,7 @@ struct unkStruct_203B310
 
 EWRAM_DATA_2 struct unkStruct_203B310 *gUnknown_203B310 = {0};
 
-extern u8 gUnknown_202E628[];
+extern u8 gFormatBuffer_FriendArea[];
 extern u8 gUnknown_202E5D8[];
 
 enum FriendRewardStates
@@ -126,7 +126,7 @@ u32 sub_802F204(unkStruct_802F204 *r0, bool8 displayClientSprite)
     // NOTE: dumb var to get correct ordering
     preload = gUnknown_203B310;
     strcpy(gUnknown_202E5D8, preload->unk10->clientName);
-    PrintPokeNameToBuffer(gAvailablePokemonNames[0], GetPlayerPokemonStruct());
+    PrintPokeNameToBuffer(gFormatBuffer_Monsters[0], GetPlayerPokemonStruct());
 
     gUnknown_203B310->monPortrait.faceFile = GetDialogueSpriteDataPtr(gUnknown_203B310->unk10->clientSpecies);
     gUnknown_203B310->monPortrait.faceData = NULL;
@@ -212,7 +212,7 @@ void HandleMissionReward(void)
             SetRewardSceneState(PREP_FRIEND_AREA_REWARD);
         }
         else {
-            gFormatData_202DE30[0] = moneyReward;
+            gFormatArgs[0] = moneyReward;
             if (gUnknown_203B310->displayClientDialogueSprite) {
                 CreateDialogueBoxAndPortrait(gUnknown_80E0434,0,&gUnknown_203B310->monPortrait,0x10d);
                 gUnknown_203B310->nextState = MONEY_REWARD;
@@ -238,7 +238,7 @@ void HandleMissionReward(void)
             SetRewardSceneState(PREP_ITEM_REWARD);
         }
         else {
-            WriteFriendAreaName(gUnknown_202E628,gUnknown_203B310->unk10->friendAreaReward,FALSE);
+            WriteFriendAreaName(gFormatBuffer_FriendArea,gUnknown_203B310->unk10->friendAreaReward,FALSE);
             if (gUnknown_203B310->displayClientDialogueSprite) {
                 CreateDialogueBoxAndPortrait(gUnknown_80E04B4,0,&gUnknown_203B310->monPortrait,0x10d);
                 gUnknown_203B310->nextState = UNLOCK_FRIEND_AREA;
@@ -286,7 +286,7 @@ void HandleMissionReward(void)
                 local_20.unk0 = 0;
                 local_20.unk4 = 0;
                 local_20.unk8 = 1;
-                sub_8090E14(gFormatItems[1],&item,&local_20);
+                sub_8090E14(gFormatBuffer_Items[1],&item,&local_20);
                 if (gUnknown_203B310->displayClientDialogueSprite) {
                     CreateDialogueBoxAndPortrait(gUnknown_80E0640,0,&gUnknown_203B310->monPortrait,0x10d);
                     gUnknown_203B310->nextState = GIVE_ITEM_REWARD;
@@ -338,7 +338,7 @@ void HandleMissionReward(void)
             else {
                 gUnknown_203B310->nextState = REWARD_EXIT;
             }
-            gFormatData_202DE30[0] = gUnknown_203B310->unk10->teamRankPtsReward;
+            gFormatArgs[0] = gUnknown_203B310->unk10->teamRankPtsReward;
             CreateDialogueBoxAndPortrait(gUnknown_80E0670,0,0,0x101);
         }
         break;
@@ -346,9 +346,9 @@ void HandleMissionReward(void)
         PlaySound(0xc9);
         gUnknown_203B310->nextState = REWARD_EXIT;
         rankString = GetTeamRankString(gUnknown_203B310->currTeamRank);
-        strcpy(gAvailablePokemonNames[2],rankString);
+        strcpy(gFormatBuffer_Monsters[2],rankString);
         rankString = GetTeamRankString(GetRescueTeamRank());
-        strcpy(gAvailablePokemonNames[3],rankString);
+        strcpy(gFormatBuffer_Monsters[3],rankString);
         CreateDialogueBoxAndPortrait(gUnknown_80E06A8,0,0,0x101);
         break;
     case REWARD_EXIT:

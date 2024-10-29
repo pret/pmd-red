@@ -64,7 +64,7 @@ bool8 sub_8015080(u8 *buffer, const MenuItem *menuItems)
     ResetUnusedInputStruct();
     xxx_call_save_unk_text_struct_800641C(gUnknown_203B1F8->unk54, 1, 1);
     sub_80073B8(0);
-    xxx_format_string(buffer, gUnknown_203B1F8->buffer, gUnknown_203B1F8->buffer + 0x400, 0);
+    CopyFormatString(buffer, gUnknown_203B1F8->buffer, gUnknown_203B1F8->buffer + 0x400, 0);
     PrintStringOnWindow(4, 4, gUnknown_203B1F8->buffer, 0, 0);
     sub_80073E0(0);
     sub_8012D60(&gUnknown_203B1F8->unk4, menuItems, 0, 0, -1, 2);

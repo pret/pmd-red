@@ -103,7 +103,7 @@ _080903F2:
 	mov r1, sp
 	add r2, sp, 0xC8
 	movs r3, 0
-	bl xxx_format_string
+	bl CopyFormatString
 	b _08090430
 	.align 2, 0
 _0809040C: .4byte gUnknown_8108F40
@@ -119,7 +119,7 @@ _0809041C:
 	mov r1, sp
 	add r2, sp, 0xC8
 	movs r3, 0
-	bl xxx_format_string
+	bl CopyFormatString
 _08090430:
 	adds r0, r7, 0
 	mov r1, sp
@@ -147,7 +147,7 @@ _0809043C:
 	ldr r0, _08090470
 	b _08090476
 	.align 2, 0
-_08090464: .4byte gFormatData_202DE30
+_08090464: .4byte gFormatArgs
 _08090468: .4byte gUnknown_81159DC
 _0809046C: .4byte gDungeons
 _08090470: .4byte gUnknown_8115A80
@@ -158,7 +158,7 @@ _08090476:
 	mov r1, sp
 	add r2, sp, 0xC8
 	movs r3, 0
-	bl xxx_format_string
+	bl CopyFormatString
 	adds r0, r7, 0
 	mov r1, sp
 	bl sub_8090888
@@ -180,7 +180,7 @@ _0809048E:
 	b _080904BA
 	.align 2, 0
 _080904AC: .4byte gUnknown_8115ADC
-_080904B0: .4byte gAvailablePokemonNames
+_080904B0: .4byte gFormatBuffer_Monsters
 _080904B4: .4byte gUnknown_8115B3C
 _080904B8:
 	ldr r0, _08090528
@@ -189,7 +189,7 @@ _080904BA:
 	mov r1, sp
 	add r2, sp, 0xC8
 	movs r3, 0
-	bl xxx_format_string
+	bl CopyFormatString
 	adds r0, r7, 0
 	mov r1, sp
 	bl sub_8090888
@@ -250,7 +250,7 @@ _08090536:
 	mov r1, sp
 	add r2, sp, 0xC8
 	movs r3, 0
-	bl xxx_format_string
+	bl CopyFormatString
 	adds r0, r7, 0
 	mov r1, sp
 	bl sub_8090888
@@ -323,7 +323,7 @@ _080905D0: .4byte gUnknown_8115C4C
 _080905D4: .4byte gUnknown_8108F42
 _080905D8: .4byte gUnknown_8108F4A
 _080905DC: .4byte gDungeons
-_080905E0: .4byte gFormatItems
+_080905E0: .4byte gFormatBuffer_Items
 _080905E4: .4byte gUnknown_8115CB8
 _080905E8:
 	ldr r0, _080906A0
@@ -332,7 +332,7 @@ _080905EA:
 	mov r1, sp
 	add r2, sp, 0xC8
 	movs r3, 0
-	bl xxx_format_string
+	bl CopyFormatString
 	adds r0, r7, 0
 	mov r1, sp
 	bl sub_8090888
@@ -432,7 +432,7 @@ _080906B6:
 	mov r1, sp
 	add r2, sp, 0xC8
 	movs r3, 0
-	bl xxx_format_string
+	bl CopyFormatString
 	adds r0, r7, 0
 	mov r1, sp
 	bl sub_8090888

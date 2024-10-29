@@ -74,7 +74,7 @@ _0801F2E0:
 	b _0801F31A
 	.align 2, 0
 _0801F30C: .4byte gUnknown_203B270
-_0801F310: .4byte gAvailablePokemonNames
+_0801F310: .4byte gFormatBuffer_Monsters
 _0801F314: .4byte gUnknown_80DC28C
 _0801F318:
 	movs r0, 0x4
@@ -182,7 +182,7 @@ _0801F3DC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801F3EC: .4byte gFormatItems
+_0801F3EC: .4byte gFormatBuffer_Items
 _0801F3F0: .4byte gUnknown_203B270
 _0801F3F4: .4byte gUnknown_80DC2A0
 	thumb_func_end sub_801F280

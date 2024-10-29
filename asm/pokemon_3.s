@@ -128,7 +128,7 @@ _0808F874:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0808F880: .4byte gAvailablePokemonNames
+_0808F880: .4byte gFormatBuffer_Monsters
 _0808F884: .4byte _0808F888
 	.align 2, 0
 _0808F888:
@@ -258,7 +258,7 @@ _0808F964:
 	b _0808F9D8
 	.align 2, 0
 _0808F998: .4byte gUnknown_8107754
-_0808F99C: .4byte gFormatData_202DE30
+_0808F99C: .4byte gFormatArgs
 _0808F9A0: .4byte gLevel810DD6C_Ptr
 _0808F9A4: .4byte gExpPts810DD9C_Ptr
 _0808F9A8: .4byte gUnknown_810DDB8
@@ -335,7 +335,7 @@ _0808FA0E:
 _0808FA44: .4byte gUnknown_810DE38
 _0808FA48: .4byte gUnknown_810DDFC
 _0808FA4C: .4byte gUnknown_810DE24
-_0808FA50: .4byte gFormatData_202DE30
+_0808FA50: .4byte gFormatArgs
 _0808FA54: .4byte gUnknown_810DE28
 _0808FA58: .4byte gUnknown_810DE54
 _0808FA5C:
@@ -367,7 +367,7 @@ _0808FA74:
 	b _0808FAA6
 	.align 2, 0
 _0808FA94: .4byte gUnknown_810DE50
-_0808FA98: .4byte gFormatItems
+_0808FA98: .4byte gFormatBuffer_Items
 _0808FA9C:
 	ldr r0, _0808FB24
 	ldr r1, _0808FB28
@@ -435,12 +435,12 @@ _0808FB10:
 	str r4, [sp]
 	b _0808FECC
 	.align 2, 0
-_0808FB24: .4byte gFormatItems
+_0808FB24: .4byte gFormatBuffer_Items
 _0808FB28: .4byte gUnknown_810DE58
 _0808FB2C: .4byte gUnknown_810DE6C
-_0808FB30: .4byte gFormatData_202DE30
+_0808FB30: .4byte gFormatArgs
 _0808FB34: .4byte gUnknown_8115718
-_0808FB38: .4byte gAvailablePokemonNames
+_0808FB38: .4byte gFormatBuffer_Monsters
 _0808FB3C: .4byte gUnknown_810DE80
 _0808FB40: .4byte gUnknown_810DE98
 _0808FB44:
@@ -611,7 +611,7 @@ _0808FC96:
 	b _0808FD98
 	.align 2, 0
 _0808FCA0: .4byte gStatusNames
-_0808FCA4: .4byte gFormatItems + 0x50
+_0808FCA4: .4byte gFormatBuffer_Items + 0x50
 _0808FCA8: .4byte gUnknown_8107784
 _0808FCAC: .4byte gUnknown_810DF78
 _0808FCB0:
@@ -680,7 +680,7 @@ _0808FCFC:
 	bl strcpy
 	b _0808FD4E
 	.align 2, 0
-_0808FD3C: .4byte gFormatItems + 0x50
+_0808FD3C: .4byte gFormatBuffer_Items + 0x50
 _0808FD40: .4byte gUnknown_8107788
 _0808FD44:
 	adds r0, r6, 0
@@ -883,10 +883,10 @@ _0808FED6:
 	bx r0
 	.align 2, 0
 _0808FEEC: .4byte gUnknown_8107798
-_0808FEF0: .4byte gAvailablePokemonNames
-_0808FEF4: .4byte gFormatData_202DE30
+_0808FEF0: .4byte gFormatBuffer_Monsters
+_0808FEF4: .4byte gFormatArgs
 _0808FEF8: .4byte gUnknown_810DEB4
-_0808FEFC: .4byte gFormatItems
+_0808FEFC: .4byte gFormatBuffer_Items
 _0808FF00: .4byte gUnknown_810DEC8
 _0808FF04: .4byte gUnknown_810DEDC
 _0808FF08: .4byte gUnknown_810DFB4

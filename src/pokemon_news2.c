@@ -143,12 +143,12 @@ static void sub_802BC08(void)
 
 void sub_802BC7C(void)
 {
-    PrintPokeNameToBuffer(gAvailablePokemonNames[0], sub_808D3BC());
+    PrintPokeNameToBuffer(gFormatBuffer_Monsters[0], sub_808D3BC());
 
     if (gGameOptionsRef->playerGender == FEMALE)
-        strcpy(gAvailablePokemonNames[1], sShe);
+        strcpy(gFormatBuffer_Monsters[1], sShe);
     else
-        strcpy(gAvailablePokemonNames[1], sHe);
+        strcpy(gFormatBuffer_Monsters[1], sHe);
 }
 
 static void sub_802BCC4(void)

@@ -1587,7 +1587,7 @@ _08062650:
 	adds r5, r0, 0
 	b _080626EA
 	.align 2, 0
-_080626CC: .4byte gFormatItems
+_080626CC: .4byte gFormatBuffer_Items
 _080626D0: .4byte gUnknown_80FE95C
 _080626D4:
 	movs r0, 0x2
@@ -1717,7 +1717,7 @@ _0806276C:
 	adds r5, r0, 0
 	b _080627FE
 	.align 2, 0
-_080627E0: .4byte gFormatItems
+_080627E0: .4byte gFormatBuffer_Items
 _080627E4: .4byte gUnknown_80FE960
 _080627E8:
 	movs r0, 0x2
@@ -1866,7 +1866,7 @@ sub_806285C:
 	add r4, sp, 0x4
 	b _08062938
 	.align 2, 0
-_0806291C: .4byte gFormatItems
+_0806291C: .4byte gFormatBuffer_Items
 _08062920: .4byte gUnknown_80FE964
 _08062924:
 	movs r0, 0x2
@@ -2198,7 +2198,7 @@ _08062BCA:
 	movs r0, 0x1
 	b _08062BDA
 	.align 2, 0
-_08062BD0: .4byte gAvailablePokemonNames
+_08062BD0: .4byte gFormatBuffer_Monsters
 _08062BD4: .4byte gUnknown_80FE978
 _08062BD8:
 	movs r0, 0
@@ -2305,7 +2305,7 @@ _08062C8A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062CA0: .4byte gFormatItems
+_08062CA0: .4byte gFormatBuffer_Items
 _08062CA4: .4byte gUnknown_8106C98
 	thumb_func_end sub_8062B74
 
@@ -2349,7 +2349,7 @@ _08062CF4:
 	movs r0, 0x1
 	b _08062D02
 	.align 2, 0
-_08062CF8: .4byte gAvailablePokemonNames
+_08062CF8: .4byte gFormatBuffer_Monsters
 _08062CFC: .4byte gUnknown_80FE940
 _08062D00:
 	movs r0, 0
@@ -2401,7 +2401,7 @@ _08062D52:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062D60: .4byte gFormatItems
+_08062D60: .4byte gFormatBuffer_Items
 _08062D64: .4byte gUnknown_8106C98
 	thumb_func_end sub_8062CA8
 
@@ -3359,7 +3359,7 @@ _08063508: .4byte gUnknown_8106CAC
 _0806350C: .4byte gUnknown_202EE10
 _08063510: .4byte gUnknown_202F2D8
 _08063514: .4byte gUnknown_2027370
-_08063518: .4byte gAvailablePokemonNames
+_08063518: .4byte gFormatBuffer_Monsters
 _0806351C:
 	movs r0, 0x2
 	ands r0, r1
@@ -3472,7 +3472,7 @@ _080635D0:
 	movs r0, 0x2
 	b _08063606
 	.align 2, 0
-_080635FC: .4byte gAvailablePokemonNames
+_080635FC: .4byte gFormatBuffer_Monsters
 _08063600: .4byte gUnknown_80FE978
 _08063604:
 	movs r0, 0x4
@@ -3543,7 +3543,7 @@ _08063676:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806368C: .4byte gFormatItems
+_0806368C: .4byte gFormatBuffer_Items
 _08063690: .4byte gUnknown_202EE10
 _08063694: .4byte gUnknown_8106CC4
 	thumb_func_end sub_8063578
@@ -4032,7 +4032,7 @@ sub_80639E4:
 	.align 2, 0
 _08063A5C: .4byte gUnknown_202F278
 _08063A60: .4byte gUnknown_8106CC8
-_08063A64: .4byte gAvailablePokemonNames
+_08063A64: .4byte gFormatBuffer_Monsters
 _08063A68: .4byte gUnknown_8106CCC
 _08063A6C: .4byte gUnknown_202EE10
 	thumb_func_end sub_80639E4
@@ -4127,7 +4127,7 @@ _08063AEC:
 	.align 2, 0
 _08063B1C: .4byte gDungeon
 _08063B20: .4byte 0x0001357c
-_08063B24: .4byte gFormatItems
+_08063B24: .4byte gFormatBuffer_Items
 _08063B28: .4byte 0x00000133
 _08063B2C: .4byte gUnknown_80F8B40
 _08063B30:
@@ -4192,7 +4192,7 @@ sub_8063B54:
 	.align 2, 0
 _08063BA4: .4byte gDungeon
 _08063BA8: .4byte 0x0001357c
-_08063BAC: .4byte gFormatItems
+_08063BAC: .4byte gFormatBuffer_Items
 _08063BB0: .4byte 0x00000133
 	thumb_func_end sub_8063B54
 
@@ -4294,9 +4294,9 @@ _08063C5C:
 	.align 2, 0
 _08063C70: .4byte gDungeon
 _08063C74: .4byte 0x0001357c
-_08063C78: .4byte gFormatItems
+_08063C78: .4byte gFormatBuffer_Items
 _08063C7C: .4byte 0x00000119
-_08063C80: .4byte gFormatItems + 0x50
+_08063C80: .4byte gFormatBuffer_Items + 0x50
 _08063C84: .4byte 0x00000133
 	thumb_func_end sub_8063BB4
 
@@ -4447,7 +4447,7 @@ _08063D70:
 	.align 2, 0
 _08063D98: .4byte gDungeon
 _08063D9C: .4byte 0x0001357c
-_08063DA0: .4byte gFormatItems
+_08063DA0: .4byte gFormatBuffer_Items
 _08063DA4: .4byte 0x00000119
 _08063DA8: .4byte 0x00000133
 _08063DAC: .4byte gUnknown_80F8B88
@@ -4906,7 +4906,7 @@ _08064130:
 	b _0806414E
 	.align 2, 0
 _08064140: .4byte gUnknown_202F2D8
-_08064144: .4byte gFormatItems
+_08064144: .4byte gFormatBuffer_Items
 _08064148: .4byte gUnknown_80FDF00
 _0806414C:
 	ldr r0, _0806415C
@@ -5143,7 +5143,7 @@ _08064262:
 	.align 2, 0
 _08064304: .4byte gUnknown_202EE10
 _08064308: .4byte gUnknown_202F2D8
-_0806430C: .4byte gAvailablePokemonNames
+_0806430C: .4byte gFormatBuffer_Monsters
 	thumb_func_end sub_8064228
 
 	thumb_func_start sub_8064310
@@ -9017,7 +9017,7 @@ _08066244:
 	.align 2, 0
 _08066254: .4byte gUnknown_80FEA80
 _08066258: .4byte gUnknown_8106D8C
-_0806625C: .4byte gAvailablePokemonNames
+_0806625C: .4byte gFormatBuffer_Monsters
 _08066260:
 	ldr r0, _08066284
 	ldr r2, [r0]
@@ -9130,7 +9130,7 @@ _0806633E:
 	bx r1
 	.align 2, 0
 _08066348: .4byte gUnknown_8106D8C
-_0806634C: .4byte gAvailablePokemonNames
+_0806634C: .4byte gFormatBuffer_Monsters
 _08066350: .4byte gUnknown_203B084
 _08066354: .4byte gUnknown_202F2F8
 	thumb_func_end sub_8066288
@@ -9232,7 +9232,7 @@ _0806641A:
 	bx r1
 	.align 2, 0
 _08066424: .4byte gUnknown_8106D8C
-_08066428: .4byte gAvailablePokemonNames
+_08066428: .4byte gFormatBuffer_Monsters
 _0806642C: .4byte gUnknown_203B080
 _08066430: .4byte gUnknown_202F2F8
 	thumb_func_end sub_8066358

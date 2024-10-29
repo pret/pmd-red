@@ -8,8 +8,8 @@ IWRAM_DATA struct unkStruct_3001B64 *gUnknown_3001B64 = {0};
 extern u16 gUnknown_20399DC;
 extern u16 gUnknown_20399DE;
 extern u8 gInvalidityText[];
-extern u8 gAvailablePokemonNames[];
-extern u8 gPlayerName[];
+extern u8 gFormatBuffer_Monsters[];
+extern u8 gFormatBuffer_Names[];
 
 extern u8 ScriptPrintText_809B2B8(u32 *, u32, u32, u32);
 extern u32 IsTextboxOpen_809B40C(u32 *); 
@@ -217,8 +217,8 @@ void sub_809A83C(s16 param_1)
     temp->unk10 = 0;
     temp->faceData = NULL;
     temp->unk1C = 0;
-    strcpy(gAvailablePokemonNames + (param_1 * 0x50), gInvalidityText);
-    strcpy(gPlayerName + (param_1 * 0x50), gInvalidityText);
+    strcpy(gFormatBuffer_Monsters + (param_1 * 0x50), gInvalidityText);
+    strcpy(gFormatBuffer_Names + (param_1 * 0x50), gInvalidityText);
     if(temp->faceFile)
     {
         CloseFile(temp->faceFile);

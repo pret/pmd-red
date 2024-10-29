@@ -282,7 +282,7 @@ bool8 sub_8072CF4(Entity *entity)
                 sub_80671A0(entity);
                 break;
             }
-            SetMessageArgument(gAvailablePokemonNames[0],entity,0);
+            SetMessageArgument(gFormatBuffer_Monsters[0],entity,0);
             TryDisplayDungeonLoggableMessage(entity,*gUnknown_80FE6D4);
             break;
         case ACTION_TALK_FIELD:
@@ -310,7 +310,7 @@ bool8 sub_8072CF4(Entity *entity)
             HandleThrowItemAIAction(entity);
             break;
         case ACTION_SECOND_THOUGHTS:
-            SetMessageArgument(gAvailablePokemonNames[0],entity,0);
+            SetMessageArgument(gFormatBuffer_Monsters[0],entity,0);
             TryDisplayDungeonLoggableMessage(entity,*gUnknown_80FE478);
             break;
         default:
