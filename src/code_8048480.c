@@ -26,8 +26,6 @@
 #include "structs/str_dungeon.h"
 #include "structs/str_position.h"
 
-extern u8 gAvailablePokemonNames[];
-
 extern s16 gTypeGummiIQBoost[NUM_TYPES][NUMBER_OF_GUMMIS];
 
 extern u8 *gUnknown_80F89F4[];
@@ -222,7 +220,7 @@ void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity
         }
         PlaySoundEffect(0x14d);
         sub_8045BF8(gFormatItems[0],item);
-        SetMessageArgument(gAvailablePokemonNames,target,0);
+        SetMessageArgument(gAvailablePokemonNames[0],target,0);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FDBB8); // $m0 caught the $i0
         info->heldItem = *item;
         sub_806A6E8(target);
@@ -597,7 +595,7 @@ void RawstBerryItemAction(Entity *pokemon, Entity *target)
         SendNonVolatileEndMessage(pokemon, target);
     else
     {
-        SetMessageArgument(gAvailablePokemonNames, target, 0);
+        SetMessageArgument(gAvailablePokemonNames[0], target, 0);
         // Pointer to "But nothing happened!"
         TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FB580);
     }
@@ -611,7 +609,7 @@ void HungerSeedItemAction(Entity *pokemon, Entity * target)
   else
   {
     entityInfo = target->info;
-    SetMessageArgument(gAvailablePokemonNames, target, 0);
+    SetMessageArgument(gAvailablePokemonNames[0], target, 0);
     if (IQSkillIsEnabled(target, IQ_SELF_CURER))
         TryDisplayDungeonLoggableMessage3(pokemon, target, *gPtrSelfHealPreventedHungerMessage);
     else
@@ -1041,7 +1039,7 @@ bool8 sub_8048D50(Entity * pokemon, Item *item)
   else
   {
     if ((entityInfo->muzzled.muzzled == TRUE) && (IsEdibleItem(item->id))) {
-        SetMessageArgument(gAvailablePokemonNames,pokemon,0);
+        SetMessageArgument(gAvailablePokemonNames[0],pokemon,0);
         TryDisplayDungeonLoggableMessage(pokemon,*gUnknown_80FDCA4);
         return FALSE;
     }

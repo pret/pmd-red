@@ -13,8 +13,6 @@
 
 static EWRAM_DATA_2 FelicityBankWork *sFelicityBankWork = {0};
 
-extern u32 gFormatData_202DE30;
-extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
 #include "data/felicity_bank.h"
@@ -62,9 +60,9 @@ bool8 CreateFelicityBank(s32 mode)
     sFelicityBankWork->menuAction = 0;
     sFelicityBankWork->mode = mode;
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PERSIAN);
-    CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_PERSIAN);
+    CopyYellowMonsterNametoBuffer(gAvailablePokemonNames[7], MONSTER_PERSIAN);
     monName = GetMonSpecies(MONSTER_PERSIAN);
-    strcpy(gUnknown_202E1C8 - 80, monName);
+    strcpy(gAvailablePokemonNames[6], monName);
 
     if (sFelicityBankWork->mode == FEL_MODE_ASLEEP)
         sFelicityBankWork->monPortraitPtr = NULL;
@@ -179,7 +177,7 @@ static void UpdateFelicityBankDialogue(void)
                 CreateMenuDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_HOW_MAY_I_SERVE__NO_MONEY], 0, sFelicityBankWork->menuAction,
                     sFelicityBankWork->unk14, sFelicityBankWork->unk54, 4, 0, sFelicityBankWork->monPortraitPtr, 0xC);
             else {
-                gFormatData_202DE30 = gTeamInventoryRef->teamSavings;
+                gFormatData_202DE30[0] = gTeamInventoryRef->teamSavings;
                 CreateMenuDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_HOW_MAY_I_SERVE__HAS_MONEY], 0, sFelicityBankWork->menuAction,
                     sFelicityBankWork->unk14, sFelicityBankWork->unk54, 4, 0, sFelicityBankWork->monPortraitPtr, 0xC);
             }
@@ -193,7 +191,7 @@ static void UpdateFelicityBankDialogue(void)
             if (gTeamInventoryRef->teamSavings == 0)
                 CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_BYE__NO_MONEY], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             else {
-                gFormatData_202DE30 = gTeamInventoryRef->teamSavings;
+                gFormatData_202DE30[0] = gTeamInventoryRef->teamSavings;
                 CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_BYE__HAS_MONEY], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             }
             break;
@@ -232,7 +230,7 @@ static void UpdateFelicityBankDialogue(void)
             break;
         case FELICITY_BANK_STORE_RECEIPT:
             sFelicityBankWork->fallbackState = 1;
-            gFormatData_202DE30 = sFelicityBankWork->chosenAmount;
+            gFormatData_202DE30[0] = sFelicityBankWork->chosenAmount;
             CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_DEPOSIT__RECEIPT], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             break;
         case FELICITY_BANK_TAKE:
@@ -246,7 +244,7 @@ static void UpdateFelicityBankDialogue(void)
             }
             else {
                 sFelicityBankWork->fallbackState = FELICITY_BANK_TAKE_HOW_MUCH;
-                gFormatData_202DE30 = gTeamInventoryRef->teamSavings;
+                gFormatData_202DE30[0] = gTeamInventoryRef->teamSavings;
                 CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WITHDRAW__HOW_MUCH], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             }
             break;
@@ -270,7 +268,7 @@ static void UpdateFelicityBankDialogue(void)
             break;
         case FELICITY_BANK_TAKE_DEPOSIT:
             sFelicityBankWork->fallbackState = 1;
-            gFormatData_202DE30 = sFelicityBankWork->chosenAmount;
+            gFormatData_202DE30[0] = sFelicityBankWork->chosenAmount;
             CreateDialogueBoxAndPortrait(gCommonFelicity[sFelicityBankWork->mode][FEL_DLG_WITHDRAW__RECEIPT], 0, sFelicityBankWork->monPortraitPtr, 0x10D);
             break;
     }

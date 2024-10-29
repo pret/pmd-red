@@ -40,7 +40,6 @@ static EWRAM_DATA_2 struct unkStruct_203B2C8 *sUnknown_203B2C8 = {0};
 
 extern void sub_80920D8(u8 *buffer);
 extern char gUnknown_202E5D8[0x50];
-extern char gAvailablePokemonNames[0x50];
 extern void sub_802B548(u32);
 
 extern void sub_802B560(void);
@@ -218,7 +217,7 @@ void sub_802B57C(void)
     sub_802F2C0();
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
     monName = GetMonSpecies(MONSTER_PELIPPER);
-    strcpy(gAvailablePokemonNames, monName);
+    strcpy(gAvailablePokemonNames[0], monName);
     sub_802B548(2);
   }
 }

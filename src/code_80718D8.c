@@ -28,10 +28,6 @@ struct unkStruct_806B7F8
 EWRAM_DATA s32 gUnknown_202F31C[2] = {0, 0};
 EWRAM_DATA s32 gUnknown_202F324[2] = {0, 0};
 
-
-extern s32 gFormatData_202DE30[5];
-extern u8 gAvailablePokemonNames[];
-
 extern s16 gUnknown_80F4DA6;
 extern s16 gUnknown_80F4DA8;
 extern s16 gUnknown_80F4DAA;
@@ -103,7 +99,7 @@ void sub_8071B48(void)
     if (dungeon->unk662 > 900) {
       entity2 = dungeon->unk17B34;
       if ((EntityExists(entity2)) && (entity2->spawnGenID == dungeon->unk17B40)) {
-        SetMessageArgument(gAvailablePokemonNames,entity2,0);
+        SetMessageArgument(gAvailablePokemonNames[0],entity2,0);
         entityPtr = entity2;
       }
     }
@@ -548,7 +544,7 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
             for(tacticIndex = 0; tacticIndex < NUM_TACTICS; tacticIndex++)
             {
                 if ((tacticsBuffer1[tacticIndex] == 0) && (tacticsBuffer2[tacticIndex] == 1)) {
-                    SetMessageArgument(gAvailablePokemonNames,target,0);
+                    SetMessageArgument(gAvailablePokemonNames[0],target,0);
                     CopyTacticsNameToBuffer(gFormatItems[0],tacticIndex);
                     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FF730);
                 }
@@ -557,7 +553,7 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
         info->expGainedInTurn = 0;
         info->unk149 = 0;
         if ((flag == 0) && (param_4 != 0)) {
-            SetMessageArgument(gAvailablePokemonNames,target,0);
+            SetMessageArgument(gAvailablePokemonNames[0],target,0);
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80F9B74);
         }
     }
@@ -575,7 +571,7 @@ void sub_807218C(Entity *pokemon)
     info = pokemon->info;
 
     sub_806A2BC(pokemon, 0);
-    SetMessageArgument_2(gAvailablePokemonNames, info, 0);
+    SetMessageArgument_2(gAvailablePokemonNames[0], info, 0);
     if(sub_8070BC0(pokemon))
     {
         r3 = 0;
@@ -672,7 +668,7 @@ void LevelDownTarget(Entity *pokemon, Entity *target, u32 level)
 
         if(!flag)
         {
-            SetMessageArgument(gAvailablePokemonNames, target, 0);
+            SetMessageArgument(gAvailablePokemonNames[0], target, 0);
             TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F9B94);
         }
     }
@@ -713,7 +709,7 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
                     sub_8083D58();
                 gFormatData_202DE30[0] = level;
 
-                SetMessageArgument_2(gAvailablePokemonNames, info, 0);
+                SetMessageArgument_2(gAvailablePokemonNames[0], info, 0);
                 DisplayDungeonLoggableMessage(target, *gUnknown_80F9E80);
             }
             else
@@ -721,7 +717,7 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
                 if(!flag)
                     sub_8083D58();
                 gFormatData_202DE30[0] = level;
-                SetMessageArgument_2(gAvailablePokemonNames, info, 0);
+                SetMessageArgument_2(gAvailablePokemonNames[0], info, 0);
                 DisplayDungeonLoggableMessageTrue(target, *gUnknown_80F9E80);
             }
         }
@@ -863,7 +859,7 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
     }
 
 
-    SetMessageArgument_2(gAvailablePokemonNames, info, 0);
+    SetMessageArgument_2(gAvailablePokemonNames[0], info, 0);
 
     if(info->level != oldLevel)
     {

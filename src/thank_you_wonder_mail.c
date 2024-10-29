@@ -77,8 +77,6 @@ const Item gUnknown_80DED44 =
 };
 
 extern char gUnknown_202E5D8[0x50];
-extern char gAvailablePokemonNames[0x50];
-
 
 const UnkTextStruct2 gUnknown_80DED48 =
 {
@@ -249,7 +247,7 @@ u32 CreateThankYouMailPelipper(void)
 
   CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
   monName = GetMonSpecies(MONSTER_PELIPPER);
-  strcpy(gAvailablePokemonNames, monName);
+  strcpy(gAvailablePokemonNames[0], monName);
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
 
   sUnknown_203B2C4->monPortrait.faceFile = faceFile;
@@ -1231,7 +1229,7 @@ void sub_802AB98(void)
             sub_802F2C0();
             CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
             monName = GetMonSpecies(MONSTER_PELIPPER);
-            strcpy(gAvailablePokemonNames, monName);
+            strcpy(gAvailablePokemonNames[0], monName);
             DeleteMailAtIndex(GetMailIndex(6, sUnknown_203B2C4->unk430));
             SetThankYouMailMenuState(0x24);
             break;

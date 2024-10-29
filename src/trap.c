@@ -22,8 +22,6 @@
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 
-extern u8 gAvailablePokemonNames[];
-
 extern u8 *gTrapNames[];
 extern u8 *gUnknown_80FC5FC[];
 extern u8 *gUnknown_80FC5F8[];
@@ -248,7 +246,7 @@ void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4)
         return;
     }
     trapData = GetTrapData(entity);
-    GetTrapName(gAvailablePokemonNames,trapData->id);
+    GetTrapName(gAvailablePokemonNames[0],trapData->id);
     target = tile->monster;
     if ((target != NULL) && (GetEntityType(target) != ENTITY_MONSTER)) {
         target = NULL;
@@ -565,7 +563,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
             }
             else
             {
-                SetMessageArgument(gAvailablePokemonNames,target,0);
+                SetMessageArgument(gAvailablePokemonNames[0],target,0);
                 if (info->isNotTeamMember) {
                     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80F970C); // $m0 fell into the pitfall!
                 }

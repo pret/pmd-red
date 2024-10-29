@@ -20,7 +20,6 @@ extern const char gUnknown_81097A4[];
 extern s32 gPowersOfTen[];
 extern u8 gHighDigits[];
 extern u16 gGummiStatBoostLUT[];
-extern u32 gFormatData_202DE30;
 extern u8* gPtrTypeText;  // ptr to "Type\0"
 extern u8* gPtrPPD0Text;  // ptr to "PP {VALUE_0} \0"
 extern u32 gUnknown_81097E8[4];  // some sort of lookup table (16, 18, 20, 22)
@@ -661,7 +660,7 @@ u32 sub_80913E0(Item* slot, u32 a2, struct subStruct_203B240 ** a3)
     typestring = GetUnformattedTypeString(moves_data);
     PrintFormatStringOnWindow(64, 84, typestring, a2, 0);
     result = GetMoveBasePP(buffer8);
-    gFormatData_202DE30 = result;
+    gFormatData_202DE30[0] = result;
     PrintFormatStringOnWindow(128, 84, gPtrPPD0Text, a2, 0);
   }
 

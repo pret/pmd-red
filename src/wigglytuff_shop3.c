@@ -18,9 +18,6 @@
 #include "wigglytuff_shop2.h"
 #include "wigglytuff_shop3.h"
 
-extern u32 gFormatData_202DE30[2];
-extern u8 gAvailablePokemonNames[]; // 202DF98
-extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 extern u8 gUnknown_202E628[];
 
@@ -67,9 +64,9 @@ bool8 CreateWigglytuffShop(u32 mode)
     sWigglytuffShop3Work->menuAction2 = 0;
     sWigglytuffShop3Work->mode = mode;
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_WIGGLYTUFF);
-    CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_WIGGLYTUFF);
+    CopyYellowMonsterNametoBuffer(gAvailablePokemonNames[7], MONSTER_WIGGLYTUFF);
     str = GetMonSpecies(MONSTER_WIGGLYTUFF);
-    strcpy(gUnknown_202E1C8 - 80, str);
+    strcpy(gAvailablePokemonNames[6], str);
 
     if (sWigglytuffShop3Work->mode == 1)
         sWigglytuffShop3Work->monPortraitPtr = NULL;
@@ -305,7 +302,7 @@ static void UpdateWigglytuffDialogue(void)
             }
 
             string = GetMonSpecies(sWigglytuffShop3Work->chosenSpecies);
-            strcpy(gAvailablePokemonNames, string);
+            strcpy(gAvailablePokemonNames[0], string);
             WriteFriendAreaName(gUnknown_202E628, sWigglytuffShop3Work->chosenFriendArea, FALSE);
             CreateDialogueBoxAndPortrait(gCommonWigglytuff[sWigglytuffShop3Work->mode][WIGGLY_DLG_14], 0, sWigglytuffShop3Work->monPortraitPtr, 0x10d);
             break;

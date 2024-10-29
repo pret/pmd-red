@@ -17,8 +17,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gAvailablePokemonNames[]; // 202DF98
-
 static EWRAM_DATA_2 unkStruct_203B234 *sUnknown_203B234 = {0};
 
 #include "data/code_801B60C.h" // 80DBA58
@@ -57,7 +55,7 @@ bool8 sub_801B60C(u32 r0, u8 id, u8 quantity)
     sUnknown_203B234->unk14.unk0 = 0;
     sUnknown_203B234->unk14.unk4 = 0;
     sUnknown_203B234->unk14.unk8 = 1;
-    PrintColoredPokeNameToBuffer(gAvailablePokemonNames, GetPlayerPokemonStruct(), COLOR_YELLOW);
+    PrintColoredPokeNameToBuffer(gAvailablePokemonNames[0], GetPlayerPokemonStruct(), COLOR_YELLOW);
     sub_8090E14(gFormatItems[0], &sUnknown_203B234->unk10, &sUnknown_203B234->unk14);
     sub_801B748(0);
     return TRUE;

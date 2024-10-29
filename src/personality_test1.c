@@ -39,8 +39,6 @@ enum
     PERSONALITY_TEST_END,
 };
 
-extern u8 gAvailablePokemonNames[]; // 202DF98
-
 static EWRAM_DATA_2 struct PersonalityTestTracker *sPersonalityTestTracker = {0};
 
 #include "data/personality_test1.h"
@@ -377,7 +375,7 @@ static void PromptNewQuestion(void)
 
 static void PrintPersonalityTypeDescription(void)
 {
-    CopyMonsterNametoBuffer(gAvailablePokemonNames, sPersonalityTestTracker->StarterID);
+    CopyMonsterNametoBuffer(gAvailablePokemonNames[0], sPersonalityTestTracker->StarterID);
     CreateDialogueBoxAndPortrait(sPersonalityTypeDescriptionTable[sPersonalityTestTracker->playerNature], 0, 0, 0x101);
 }
 

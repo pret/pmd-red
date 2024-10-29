@@ -12,8 +12,6 @@
 #include "text2.h"
 #include "structs/struct_sub80095e4.h"
 
-extern u32 gFormatData_202DE30;
-
 static EWRAM_DATA_2 struct_Sub80095E4_2 *sAdventureLog = {0};
 
 #include "data/adventure_log.h"
@@ -110,32 +108,32 @@ static void DisplayAdventureLog(void)
             switch (temp) {
                 case 12:
                     v1 = sub_80978B8();
-                    gFormatData_202DE30 = (s16)v1;
+                    gFormatData_202DE30[0] = (s16)v1;
                     PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 7:
                     v2 = sub_8097880();
-                    gFormatData_202DE30 = (s16)v2;
+                    gFormatData_202DE30[0] = (s16)v2;
                     PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 11:
                     v3 = sub_8097838();
-                    gFormatData_202DE30 = (s16)v3;
+                    gFormatData_202DE30[0] = (s16)v3;
                     PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 8:
                     v4 = sub_80977B8();
-                    gFormatData_202DE30 = v4;
+                    gFormatData_202DE30[0] = v4;
                     PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 9:
                     v5 = sub_80977F8();
-                    gFormatData_202DE30 = v5;
+                    gFormatData_202DE30[0] = v5;
                     PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 10:
                     v6 = sub_8097870();
-                    gFormatData_202DE30 = (s16)v6;
+                    gFormatData_202DE30[0] = (s16)v6;
                     // fallthrough
                 default:
                     PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);

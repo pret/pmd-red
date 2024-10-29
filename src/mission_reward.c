@@ -29,11 +29,8 @@ struct unkStruct_203B310
 
 EWRAM_DATA_2 struct unkStruct_203B310 *gUnknown_203B310 = {0};
 
-extern u8 gUnknown_202E038[];
 extern u8 gUnknown_202E628[];
 extern u8 gUnknown_202E5D8[];
-extern u8 gAvailablePokemonNames[];
-extern u32 gFormatData_202DE30;
 
 enum FriendRewardStates
 {
@@ -129,7 +126,7 @@ u32 sub_802F204(unkStruct_802F204 *r0, bool8 displayClientSprite)
     // NOTE: dumb var to get correct ordering
     preload = gUnknown_203B310;
     strcpy(gUnknown_202E5D8, preload->unk10->clientName);
-    PrintPokeNameToBuffer(gAvailablePokemonNames, GetPlayerPokemonStruct());
+    PrintPokeNameToBuffer(gAvailablePokemonNames[0], GetPlayerPokemonStruct());
 
     gUnknown_203B310->monPortrait.faceFile = GetDialogueSpriteDataPtr(gUnknown_203B310->unk10->clientSpecies);
     gUnknown_203B310->monPortrait.faceData = NULL;
@@ -215,7 +212,7 @@ void HandleMissionReward(void)
             SetRewardSceneState(PREP_FRIEND_AREA_REWARD);
         }
         else {
-            gFormatData_202DE30 = moneyReward;
+            gFormatData_202DE30[0] = moneyReward;
             if (gUnknown_203B310->displayClientDialogueSprite) {
                 CreateDialogueBoxAndPortrait(gUnknown_80E0434,0,&gUnknown_203B310->monPortrait,0x10d);
                 gUnknown_203B310->nextState = MONEY_REWARD;
@@ -341,7 +338,7 @@ void HandleMissionReward(void)
             else {
                 gUnknown_203B310->nextState = REWARD_EXIT;
             }
-            gFormatData_202DE30 = gUnknown_203B310->unk10->teamRankPtsReward;
+            gFormatData_202DE30[0] = gUnknown_203B310->unk10->teamRankPtsReward;
             CreateDialogueBoxAndPortrait(gUnknown_80E0670,0,0,0x101);
         }
         break;
@@ -349,9 +346,9 @@ void HandleMissionReward(void)
         PlaySound(0xc9);
         gUnknown_203B310->nextState = REWARD_EXIT;
         rankString = GetTeamRankString(gUnknown_203B310->currTeamRank);
-        strcpy(gUnknown_202E038,rankString);
+        strcpy(gAvailablePokemonNames[2],rankString);
         rankString = GetTeamRankString(GetRescueTeamRank());
-        strcpy(gUnknown_202E038 + 0x50,rankString);
+        strcpy(gAvailablePokemonNames[3],rankString);
         CreateDialogueBoxAndPortrait(gUnknown_80E06A8,0,0,0x101);
         break;
     case REWARD_EXIT:

@@ -127,7 +127,6 @@ extern void (*gUnknown_203B088)(s32 a0);
 extern MenuStruct gUnknown_202EBC0;
 extern u8 gUnknown_202EB80[];
 extern u8 gUnknown_202E628[];
-extern u8 gAvailablePokemonNames[][80];
 extern u8 gPlayerName[][80];
 extern u8 gTeamName[];
 extern u8 gUnknown_202E5D8[];
@@ -166,6 +165,8 @@ bool8 AppendString_8014FA8(const u8 *, u8 **, u8 *, u16 r3);
 EWRAM_DATA s32 gFormatData_202DE30[10] = {0};
 // 'i', apparently only i0 and i1 are actually used though it's yet to be verified
 EWRAM_DATA u8 gFormatItems[4][80] = {0};
+// 'm' which probably stands for 'monster', available through m0 to m9
+EWRAM_DATA u8 gAvailablePokemonNames[10][80] = {0};
 
 void sub_8014144(void)
 {

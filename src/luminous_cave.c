@@ -61,7 +61,6 @@ enum LuminousCaveMenuActions
 
 };
 
-extern u8 gAvailablePokemonNames[]; // 202DF98
 extern u8 gPlayerName[]; // 202E2B8
 
 static EWRAM_DATA_2 LuminousCaveWork *sLuminousCaveWork = {0};
@@ -313,9 +312,9 @@ static void UpdateLuminousCaveDialogue(void)
             break;
         case LUMINOUS_CAVE_EVOLVED:
             monName = GetMonSpecies(sLuminousCaveWork->pokeStruct->speciesNum);
-            strcpy(gAvailablePokemonNames,monName);
+            strcpy(gAvailablePokemonNames[0],monName);
             monName = GetMonSpecies(sLuminousCaveWork->evolveStatus.targetEvolveSpecies);
-            strcpy(gAvailablePokemonNames + 0x50,monName);
+            strcpy(gAvailablePokemonNames[1],monName);
             sLuminousCaveWork->evolutionComplete = TRUE;
             sub_80977D0();
             sub_808F734(sLuminousCaveWork->pokeStruct,sLuminousCaveWork->evolveStatus.targetEvolveSpecies);

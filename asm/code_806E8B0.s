@@ -702,7 +702,7 @@ _0806F098: .4byte gDungeon
 _0806F09C: .4byte 0x00000ccc
 _0806F0A0: .4byte gUnknown_8106F24
 _0806F0A4: .4byte gUnknown_8106F04
-_0806F0A8: .4byte gUnknown_202DFE8
+_0806F0A8: .4byte gAvailablePokemonNames + 0x50
 _0806F0AC: .4byte gUnknown_80FAE00
 _0806F0B0:
 	ldr r0, _0806F15C

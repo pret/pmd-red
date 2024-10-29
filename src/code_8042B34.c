@@ -382,7 +382,6 @@ extern void sub_8042B0C(Entity *);
 extern s16 gUnknown_2026E4E;
 extern u8 gUnknown_202F32C;
 extern u8 gUnknown_202F1A8;
-extern s32 gFormatData_202DE30;
 extern s32 gUnknown_202EDC8;
 extern Entity *gLeaderPointer;
 
@@ -403,7 +402,6 @@ extern const u8 *const gUnknown_80F89D8;
 extern const s16 gUnknown_80F6850[];
 extern const s16 gDungeonMusic[];
 
-extern u8 gAvailablePokemonNames[];
 extern OpenedFile *gDungeonNameBannerPalette;
 
 void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
@@ -508,8 +506,8 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
     }
 
     if (r9) {
-        gFormatData_202DE30 = gDungeon->unk67B;
-        if (gFormatData_202DE30 != 0) {
+        gFormatData_202DE30[0] = gDungeon->unk67B;
+        if (gFormatData_202DE30[0] != 0) {
             DisplayDungeonMessage(0, gUnknown_80FEC48, 1);
         }
         else {
@@ -533,7 +531,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         if (sub_8099394(&sp)) {
             unkStruct_203B480 *mailStr = GetMailatIndex(sp);
             if (mailStr->rescuesAllowed) {
-                gFormatData_202DE30 = mailStr->rescuesAllowed;
+                gFormatData_202DE30[0] = mailStr->rescuesAllowed;
                 DisplayDungeonMessage(0, gUnknown_81002B8, 1);
             }
             else {
@@ -1082,7 +1080,7 @@ bool8 sub_8043ED0(bool8 a0)
         Entity *leader = GetLeader();
         if (EntityExists(leader)) {
             if (!a0) {
-                strcpy(gAvailablePokemonNames, gDungeon->faintStringBuffer);
+                strcpy(gAvailablePokemonNames[0], gDungeon->faintStringBuffer);
                 DisplayDungeonMessage(0, gUnknown_80F89B4, 1);
             }
             sub_8042B0C(leader);
@@ -1094,7 +1092,7 @@ bool8 sub_8043ED0(bool8 a0)
         Entity *leader = GetLeader();
         if (EntityExists(leader)) {
             if (!a0) {
-                strcpy(gAvailablePokemonNames, gDungeon->faintStringBuffer);
+                strcpy(gAvailablePokemonNames[0], gDungeon->faintStringBuffer);
                 DisplayDungeonMessage(0, gUnknown_80F89D4, 1);
             }
             sub_8042B0C(leader);
@@ -1106,7 +1104,7 @@ bool8 sub_8043ED0(bool8 a0)
         Entity *leader = GetLeader();
         if (EntityExists(leader)) {
             if (!a0) {
-                strcpy(gAvailablePokemonNames, gDungeon->faintStringBuffer);
+                strcpy(gAvailablePokemonNames[0], gDungeon->faintStringBuffer);
                 DisplayDungeonMessage(0, gUnknown_80F89D8, 1);
             }
             sub_8042B0C(leader);

@@ -28,8 +28,6 @@
 
 // TODO: Clean this
 
-extern u8 gAvailablePokemonNames[]; // 202DF98
-
 static EWRAM_DATA_2 unkStruct_203B2B8 *sUnknown_203B2B8 = {0};
 
 #include "data/party_list_menu.h"
@@ -202,15 +200,15 @@ void HandlePartyListMenuCallback(void)
         case PARTY_LIST_STATE_MAIN_MENU:
             sub_8026E08(3);
             sub_8026DAC(0,&sUnknown_203B2B8->item2);
-            PrintColoredPokeNameToBuffer(gAvailablePokemonNames,sUnknown_203B2B8->pokeStruct,7);
-            PrintColoredPokeNameToBuffer(gAvailablePokemonNames + 0x50,sUnknown_203B2B8->pokeStruct,6);
+            PrintColoredPokeNameToBuffer(gAvailablePokemonNames[0],sUnknown_203B2B8->pokeStruct,7);
+            PrintColoredPokeNameToBuffer(gAvailablePokemonNames[1],sUnknown_203B2B8->pokeStruct,6);
             sub_8012D60(&sUnknown_203B2B8->unk7C,sUnknown_203B2B8->unk16C,0,sUnknown_203B2B8->unk20C,sUnknown_203B2B8->menuAction1,2);
             break;
         case PARTY_LIST_STATE_MAIN_MENU_1:
             sub_8026E08(3);
             sub_8026DAC(0,&sUnknown_203B2B8->item2);
-            PrintColoredPokeNameToBuffer(gAvailablePokemonNames,sUnknown_203B2B8->pokeStruct,7);
-            PrintColoredPokeNameToBuffer(gAvailablePokemonNames + 0x50,sUnknown_203B2B8->pokeStruct,6);
+            PrintColoredPokeNameToBuffer(gAvailablePokemonNames[0],sUnknown_203B2B8->pokeStruct,7);
+            PrintColoredPokeNameToBuffer(gAvailablePokemonNames[1],sUnknown_203B2B8->pokeStruct,6);
             sub_8012EA4(&sUnknown_203B2B8->unk7C,1);
             break;
         case PARTY_LIST_STATE_SUMMARY:
@@ -794,9 +792,9 @@ void sub_8026E08(u32 r0)
 
     CallPrepareTextbox_8008C54(r0);
     sub_80073B8(r0);
-    sub_80922B4(gAvailablePokemonNames, sUnknown_203B2B8->pokeStruct->name, POKEMON_NAME_LENGTH);
+    sub_80922B4(gAvailablePokemonNames[0], sUnknown_203B2B8->pokeStruct->name, POKEMON_NAME_LENGTH);
     sub_808D930(buffer, sUnknown_203B2B8->pokeStruct->speciesNum);
-    sprintfStatic(buffer1, sUnknown_80DD6E0, gAvailablePokemonNames);
+    sprintfStatic(buffer1, sUnknown_80DD6E0, gAvailablePokemonNames[0]);
     x = sub_8008ED0(buffer1);
     PrintStringOnWindow(((sUnknown_80DD370.unkC << 3) - x) / 2, 3, buffer1, r0, 0);
     sub_80073E0(r0);

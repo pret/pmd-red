@@ -20,7 +20,6 @@
 #include "move_util.h"
 
 extern u32 gUnknown_202EDCC;
-extern u8 gAvailablePokemonNames[];
 
 extern s16 gUnknown_80F4F90;
 extern u8 *gUnknown_80FCA10[];
@@ -71,11 +70,11 @@ void sub_807CD9C(Entity *pokemon, Entity *target, u32 direction)
     else
     {
         if (pokemon == target) {
-            SetMessageArgument(gAvailablePokemonNames,target,0);
+            SetMessageArgument(gAvailablePokemonNames[0],target,0);
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCA10); // {POKEMON_0} couldn't be knocked flying!
             return;
         }
-        SetMessageArgument(gAvailablePokemonNames,target,0);
+        SetMessageArgument(gAvailablePokemonNames[0],target,0);
         if (HasAbility(target,ABILITY_SUCTION_CUPS)) {
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCBCC); // {POKEMON_0} is anchored! It can't be knocked flying!
             return;
@@ -227,7 +226,7 @@ void sub_807D148(Entity *pokemon, Entity *target, u32 param_3, Position *pos)
     info = target->info;
     flag = FALSE;
 
-    SetMessageArgument(gAvailablePokemonNames,target,0);
+    SetMessageArgument(gAvailablePokemonNames[0],target,0);
     if (HasAbility(target,ABILITY_SUCTION_CUPS)) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCAE8);
         return;

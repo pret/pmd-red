@@ -15,9 +15,6 @@ struct unkStruct_8113080
     u8 *text;
 };
 
-extern u8 gAvailablePokemonNames[];
-extern s32 gFormatData_202DE30[2];
-
 extern const u8 *gUnknown_811383C[];
 extern const u8 *gUnknown_8113850[];
 extern const u8 *gUnknown_8113868[];
@@ -87,11 +84,11 @@ void sub_8094558(u32 param_1,u8 *param_2,UnkDungeonGlobal_unk1CE98_sub *param_3)
 
     sub_80073B8(param_1);
     PrintFormatStringOnWindow(0x10,0,param_2,param_1,0);
-    PrintYellowDungeonNametoBuffer(gAvailablePokemonNames, &param_3->dungeonLocation);
+    PrintYellowDungeonNametoBuffer(gAvailablePokemonNames[0], &param_3->dungeonLocation);
     PrintFormatStringOnWindow(4,0x10,*gUnknown_8113850,param_1,0); // #+Place: $m0
     y = 0x1A;
-    sub_80922B4(gAvailablePokemonNames, param_3->buffer1, POKEMON_NAME_LENGTH);
-    sub_80922B4(gAvailablePokemonNames + 0x50, param_3->buffer2, POKEMON_NAME_LENGTH);
+    sub_80922B4(gAvailablePokemonNames[0], param_3->buffer1, POKEMON_NAME_LENGTH);
+    sub_80922B4(gAvailablePokemonNames[1], param_3->buffer2, POKEMON_NAME_LENGTH);
     if (sub_8094528(param_3->moveID) != 0) {
         // $m1 was defeated by
         xxx_format_string(*gUnknown_8113868,buffer,(u8*)((u32 **)&buffer + 50),0); // TODO: fix this hack

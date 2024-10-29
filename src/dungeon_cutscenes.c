@@ -31,8 +31,6 @@
 #include "trap.h"
 
 extern u32 gUnknown_202EDC8;
-extern u8 gUnknown_202E038[0x50];
-extern u8 gAvailablePokemonNames[0x58];
 
 extern const s16 gUnknown_80F57CA;
 extern const s16 gUnknown_80F57CC;
@@ -526,8 +524,8 @@ void sub_8086B14(void)
   sub_8086A3C(skarmoryEntity);
   diglettEntity->info->unk15C = 1;
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 2);
-  CopyMonsterNametoBuffer(gUnknown_202E038,MONSTER_DIGLETT);
-  CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_SKARMORY);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2],MONSTER_DIGLETT);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[3], MONSTER_SKARMORY);
 }
 
 void sub_8086B94(void)
@@ -670,9 +668,9 @@ void sub_8086E9C(void)
   sub_80855E4(sub_8086A3C);
   sub_808563C(sub_8086A3C);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_METAPOD);
-  CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_GENGAR);
-  CopyMonsterNametoBuffer(gUnknown_202E038 + 0xA0, MONSTER_CATERPIE);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_METAPOD);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[3], MONSTER_GENGAR);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[4], MONSTER_CATERPIE);
 }
 
 void sub_8086F00(void)
@@ -684,9 +682,9 @@ void sub_8086F00(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_METAPOD);
-  CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_GENGAR);
-  CopyMonsterNametoBuffer(gUnknown_202E038 + 0xA0, MONSTER_CATERPIE);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_METAPOD);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[3], MONSTER_GENGAR);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[4], MONSTER_CATERPIE);
 }
 
 // From @jiangzhengwenjz:
@@ -837,8 +835,8 @@ void sub_8087230(void)
     SetFacingDirection(zapdosEntity, DIRECTION_SOUTH);
     sub_8086A3C(zapdosEntity);
     sub_8085860(leaderEntity->pos.x, leaderEntity->pos.y - 3);
-    CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_SHIFTRY);
-    CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_ZAPDOS);
+    CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_SHIFTRY);
+    CopyMonsterNametoBuffer(gAvailablePokemonNames[3], MONSTER_ZAPDOS);
 }
 
 void sub_808729C(void)
@@ -860,8 +858,8 @@ void sub_808729C(void)
     sub_8086A3C(zapdosEntity);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_SHIFTRY);
-  CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_ZAPDOS);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_SHIFTRY);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[3], MONSTER_ZAPDOS);
 }
 
 void sub_8087334(u8 param_1, u8 param_2)
@@ -1068,7 +1066,7 @@ void sub_80877E8(void)
   SetFacingDirection(moltresEntity, DIRECTION_SOUTH);
   sub_8086A3C(moltresEntity);
   sub_8085860(leaderEntity->pos.x + -3,leaderEntity->pos.y + -2);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_MOLTRES);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_MOLTRES);
 }
 
 void sub_8087848(void)
@@ -1097,7 +1095,7 @@ void sub_8087848(void)
   XPos = GetCameraXPos();
   YPos = GetCameraYPos();
   sub_803F878(XPos, YPos + -0x1000);
-  CopyMonsterNametoBuffer(gUnknown_202E038,MONSTER_MOLTRES);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2],MONSTER_MOLTRES);
 }
 
 void sub_80878F4(u8 param_1, u8 param_2)
@@ -1477,7 +1475,7 @@ void sub_8087F54(void)
   SetFacingDirection(articunoEntity, DIRECTION_SOUTH);
   sub_8086A3C(articunoEntity);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y + -3);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_ARTICUNO);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_ARTICUNO);
 }
 
 void sub_8087FB4(void)
@@ -1491,7 +1489,7 @@ void sub_8087FB4(void)
   sub_8085930(DIRECTION_NORTH);
   SetFacingDirection(articunoEntity, DIRECTION_SOUTH);
   sub_806CDD4(articunoEntity, 0xF, DIRECTION_SOUTH);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_ARTICUNO);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_ARTICUNO);
 }
 
 void sub_8087FF8(void)
@@ -1514,7 +1512,7 @@ void sub_8087FF8(void)
     sub_8086A3C(articunoEntity);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y + -3);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_ARTICUNO);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_ARTICUNO);
 }
 
 void sub_8088088(u8 param_1, u8 param_2)
@@ -1770,8 +1768,8 @@ void sub_808862C(void)
   SetFacingDirection(groudonEntity, DIRECTION_SOUTH);
   sub_8086A3C(groudonEntity);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y -3);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_GROUDON);
-  CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_ALAKAZAM);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_GROUDON);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[3], MONSTER_ALAKAZAM);
 }
 
 void sub_80886C4(void)
@@ -1798,8 +1796,8 @@ void sub_80886C4(void)
   XPos = GetCameraXPos();
   YPos = GetCameraYPos();
   sub_803F878(XPos,YPos + -0x1000);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_GROUDON);
-  CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_ALAKAZAM);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_GROUDON);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[3], MONSTER_ALAKAZAM);
 }
 
 void sub_808875C(void)
@@ -1825,8 +1823,8 @@ void sub_808875C(void)
     sub_80861D4(groudonEntity,0xf,DIRECTION_SOUTH);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_GROUDON);
-  CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_ALAKAZAM);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_GROUDON);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[3], MONSTER_ALAKAZAM);
 }
 
 void sub_8088818(u8 param_1, u8 param_2)
@@ -2087,8 +2085,8 @@ void sub_8088DC0(void)
   sub_8086A3C(alakazamEntity);
   sub_806CDD4(alakazamEntity,0xe,DIRECTION_SOUTH);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_GROUDON);
-  CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_ALAKAZAM);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_GROUDON);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[3], MONSTER_ALAKAZAM);
 }
 
 void sub_8088E5C(void)
@@ -2108,8 +2106,8 @@ void sub_8088E5C(void)
   sub_8068FE0(groudonEntity,0x21c,0);
   sub_8068FE0(alakazamEntity,0x21c,0);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y + -3);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_GROUDON);
-  CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_ALAKAZAM);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_GROUDON);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[3], MONSTER_ALAKAZAM);
 }
 
 void sub_8088EE8(void)
@@ -2353,7 +2351,7 @@ void sub_80892C8(void)
   SetFacingDirection(RayquazaEntity, DIRECTION_SOUTH);
   sub_8086A3C(RayquazaEntity);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gUnknown_202E038,MONSTER_RAYQUAZA);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2],MONSTER_RAYQUAZA);
 }
 
 void sub_8089328(void)
@@ -2375,7 +2373,7 @@ void sub_8089328(void)
     sub_8086A3C(rayquazaEntity);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gUnknown_202E038,MONSTER_RAYQUAZA);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2],MONSTER_RAYQUAZA);
 }
 
 void sub_80893B4(u8 param_1, u8 param_2)
@@ -2662,7 +2660,7 @@ void sub_8089914(void)
   SetFacingDirection(MewtwoEntity, DIRECTION_SOUTH);
   sub_8086A3C(MewtwoEntity);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gUnknown_202E038,MONSTER_MEWTWO);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2],MONSTER_MEWTWO);
 }
 
 void sub_8089978(void)
@@ -2686,7 +2684,7 @@ void sub_8089978(void)
     sub_8086A3C(MewtwoEntity);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gUnknown_202E038,MONSTER_MEWTWO);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2],MONSTER_MEWTWO);
 }
 
 void sub_8089A00(u8 param_1, u8 param_2)
@@ -2811,7 +2809,7 @@ void sub_8089C44(void)
   sub_8085930(DIRECTION_NORTH);
   SetFacingDirection(EnteiEntity, DIRECTION_SOUTH);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_ENTEI);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_ENTEI);
 }
 
 
@@ -2832,7 +2830,7 @@ void sub_8089C90(void)
       SetFacingDirection(EnteiEntity, DIRECTION_SOUTH);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_ENTEI);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_ENTEI);
 }
 
 void sub_8089CFC(u8 param_1, u8 param_2)
@@ -2940,7 +2938,7 @@ void sub_8089EFC(void)
   sub_8085930(DIRECTION_NORTH);
   SetFacingDirection(RaikouEntity, DIRECTION_SOUTH);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_RAIKOU);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_RAIKOU);
 }
 
 
@@ -2956,7 +2954,7 @@ void sub_8089F44(void)
   sub_8085930(DIRECTION_NORTH);
   SetFacingDirection(RaikouEntity, DIRECTION_SOUTH);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_RAIKOU);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_RAIKOU);
 }
 
 
@@ -2977,7 +2975,7 @@ void sub_8089F8C(void)
       SetFacingDirection(RaikouEntity, DIRECTION_SOUTH);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_RAIKOU);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_RAIKOU);
 }
 
 void sub_8089FF0(u8 param_1, u8 param_2)
@@ -3097,7 +3095,7 @@ void sub_808A264(void)
   SetFacingDirection(SuicuneEntity, DIRECTION_SOUTH);
   sub_8086A3C(SuicuneEntity);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_SUICUNE);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_SUICUNE);
 }
 
 void sub_808A2C0(void)
@@ -3112,7 +3110,7 @@ void sub_808A2C0(void)
   sub_8085930(DIRECTION_NORTH);
   SetFacingDirection(SuicuneEntity, DIRECTION_SOUTH);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_SUICUNE);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_SUICUNE);
 }
 
 void sub_808A308(void)
@@ -3132,7 +3130,7 @@ void sub_808A308(void)
      SetFacingDirection(SuicuneEntity, DIRECTION_SOUTH);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_SUICUNE);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_SUICUNE);
 }
 
 void sub_808A36C(u8 param_1, u8 param_2)
@@ -3273,7 +3271,7 @@ void sub_808A608(void)
   SetFacingDirection(HoOhEntity, DIRECTION_SOUTH);
   sub_8086A3C(HoOhEntity);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y + -6);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_HO_OH);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_HO_OH);
 }
 
 void sub_808A668(void)
@@ -3296,7 +3294,7 @@ void sub_808A668(void)
     sub_8086A3C(HoOhEntity);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 6);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_HO_OH);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_HO_OH);
 }
 
 void sub_808A6E8(u8 param_1, u8 param_2)
@@ -3449,7 +3447,7 @@ void sub_808A9E4(void)
   sub_80855E4(sub_8086A3C);
   SetFacingDirection(LatiosEntity, DIRECTION_NORTH);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 4);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_LATIOS);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_LATIOS);
 }
 
 void sub_808AA3C(void)
@@ -3465,7 +3463,7 @@ void sub_808AA3C(void)
   sub_80855E4(sub_8086A3C);
   SetFacingDirection(LatiosEntity, DIRECTION_NORTH);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_LATIOS);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_LATIOS);
 }
 
 void sub_808AA94(void)
@@ -3481,7 +3479,7 @@ void sub_808AA94(void)
   sub_80855E4(sub_8086A3C);
   sub_8068FE0(LatiosEntity,0x21c,0);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_LATIOS);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_LATIOS);
 }
 
 void sub_808AAF0(u8 param_1, u8 param_2)
@@ -3595,7 +3593,7 @@ void sub_808ACC0(void)
         sub_8098044(0x22);
         sub_8098044(0x1d);
         sub_80855E4(SetupRegiFacingDirection);
-        CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_REGIROCK);
+        CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_REGIROCK);
   }
 }
 
@@ -3622,7 +3620,7 @@ void sub_808AD48(void)
         sub_8098044(0x22);
         sub_8098044(0x1d);
         sub_80855E4(SetupRegiFacingDirection);
-        CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_REGICE);
+        CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_REGICE);
   }
 }
 
@@ -3650,7 +3648,7 @@ void sub_808ADCC(void)
         sub_8098044(0x22);
         sub_8098044(0x1d);
         sub_80855E4(SetupRegiFacingDirection);
-        CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_REGISTEEL);
+        CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_REGISTEEL);
   }
 }
 
@@ -3730,7 +3728,7 @@ void sub_808AFB0(u8 param_1)
   sub_8052D44(IDStack,leaderEntity,0);
   if (!sub_8098100(0x22) && (param_1 == 0x2E) && (!sub_8098100(0x1d)) && (sub_80860A8(ITEM_ROCK_PART) != 0)) {
     sub_8097FD0(0x1d);
-    SetMessageArgument(gAvailablePokemonNames,GetLeader(),0);
+    SetMessageArgument(gAvailablePokemonNames[0],GetLeader(),0);
     // {POKEMON_0} obtained the Rock Part that Regirock was guarding
     DisplayDungeonDialogue(&gRegirockPostFightDialogue_2);
     sub_80421C0(0,0xd4);
@@ -3748,7 +3746,7 @@ void sub_808B030(u8 param_1)
   sub_8052D44(IDStack,leaderEntity,0);
   if (!sub_8098100(0x22) && (param_1 == 0x2F) && (!sub_8098100(0x1d)) && (sub_80860A8(ITEM_ICE_PART) != 0)) {
     sub_8097FD0(0x1d);
-    SetMessageArgument(gAvailablePokemonNames,GetLeader(),0);
+    SetMessageArgument(gAvailablePokemonNames[0],GetLeader(),0);
     // {POKEMON_0} obtained the Ice Part that Regice was guarding
     DisplayDungeonDialogue(&gRegicePostFightDialogue_2);
     sub_80421C0(0,0xd4);
@@ -3766,7 +3764,7 @@ void sub_808B0B0(u8 param_1)
   sub_8052D44(IDStack,leaderEntity,0);
   if (!sub_8098100(0x22) && (param_1 == 0x30) && (!sub_8098100(0x1d)) && (sub_80860A8(ITEM_STEEL_PART) != 0)) {
     sub_8097FD0(0x1d);
-    SetMessageArgument(gAvailablePokemonNames, GetLeader(), 0);
+    SetMessageArgument(gAvailablePokemonNames[0], GetLeader(), 0);
     // {POKEMON_0} obtained the Steel Part that Registeel was guarding
     DisplayDungeonDialogue(&gRegisteelPostFightDialogue_2);
     sub_80421C0(0,0xd4);
@@ -3882,7 +3880,7 @@ void sub_808B2F4(void)
   SetFacingDirection(jirachiEntity, DIRECTION_SOUTH);
   sub_8086A3C(jirachiEntity);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_JIRACHI);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_JIRACHI);
 }
 
 void sub_808B35C(void)
@@ -3907,7 +3905,7 @@ void sub_808B35C(void)
 
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_JIRACHI);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_JIRACHI);
 }
 
 void sub_808B3E4(u8 param_1, u8 param_2, u8 param_3)
@@ -3967,7 +3965,7 @@ void sub_808B50C(void)
   Entity * jirachiEntity;
 
   jirachiEntity = GetEntityFromClientType(0x1a);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_JIRACHI);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_JIRACHI);
   sub_80855E4(sub_808BBA8);
   sub_808BBA8(jirachiEntity);
   sub_8041888(0);
@@ -4008,7 +4006,7 @@ void JirachiWish(void)
   Position pos3;
 
   jirachiEntity = GetEntityFromClientType(0x1a);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_JIRACHI);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_JIRACHI);
   sub_80855E4(sub_808BBA8);
   sub_808BBA8(jirachiEntity);
   sub_8041888(0);
@@ -4119,7 +4117,7 @@ void JirachiWish(void)
           UnlockFriendArea(friendArea);
           PlaySoundEffect(0xd4);
           leaderEntity = GetLeader();
-          SetMessageArgument(gAvailablePokemonNames,leaderEntity,0);
+          SetMessageArgument(gAvailablePokemonNames[0],leaderEntity,0);
           WriteFriendAreaName(gFormatItems[0],friendArea,FALSE);
           // Obtained the friend area!
           DisplayDungeonDialogue(&gUnknown_8105B68);
@@ -4386,7 +4384,7 @@ void sub_808BDEC(void)
     SetFacingDirection(lugiaEntity, DIRECTION_SOUTH);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_LUGIA);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_LUGIA);
 }
 
 void sub_808BE70(u8 param_1,u8 param_2,u8 param_3)
@@ -4527,9 +4525,8 @@ void sub_808C10C(void)
   XPos = GetCameraXPos();
   YPos = GetCameraYPos();
   sub_803F878(XPos,YPos + -0x1000);
-  CopyMonsterNametoBuffer(gUnknown_202E038,MONSTER_KYOGRE);
-  // TODO: gUnknown_202E088 doesn't match but gUnknown_202E038 + 0x50 does
-  CopyMonsterNametoBuffer(gUnknown_202E038 + 0x50, MONSTER_GROUDON);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2],MONSTER_KYOGRE);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[3], MONSTER_GROUDON);
 }
 
 void sub_808C1A4(u8 param_1,u8 param_2,u8 param_3)
@@ -4642,7 +4639,7 @@ void sub_808C3A0(void)
     sub_808563C(SetupDeoxysFacingDirection);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_DEOXYS_NORMAL);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_DEOXYS_NORMAL);
 }
 
 void sub_808C414(u8 param_1,u8 param_2,u8 param_3)
@@ -4745,7 +4742,7 @@ void sub_808C5C0(void)
   XPos = GetCameraXPos();
   YPos = GetCameraYPos();
   sub_803F878(XPos,YPos - 0x1000);
-  CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_CELEBI);
+  CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_CELEBI);
 }
 
 void nullsub_100(u8 r0, u8 r1, u8 r3)
@@ -4947,7 +4944,7 @@ void sub_808C9C4(void)
     sub_80855E4(sub_8086A3C);
     SetFacingDirection(medichamEntity, DIRECTION_SOUTH);
     sub_8085860(leaderEntity->pos.x, leaderEntity->pos.y - 3);
-    CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_MEDICHAM);
+    CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_MEDICHAM);
 }
 
 void MedichamRescueDialogue(void)
@@ -5014,7 +5011,7 @@ void sub_808CB5C(void)
     sub_8085930(DIRECTION_NORTH);
     sub_8068FE0(medichamEntity, 0x21C, 0);
     sub_8085860(leaderEntity->pos.x, leaderEntity->pos.y);
-    CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_MEDICHAM);
+    CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_MEDICHAM);
 }
 
 void DummyFightDialogue(void)
@@ -5034,7 +5031,7 @@ void sub_808CBB0(void)
     sub_80855E4(sub_8086A3C);
     SetFacingDirection(smeargleEntity, DIRECTION_SOUTH);
     sub_8085860(leaderEntity->pos.x, leaderEntity->pos.y - 3);
-    CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_SMEARGLE);
+    CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_SMEARGLE);
 }
 
 void SmeargleRescueDialogue(void)
@@ -5105,7 +5102,7 @@ void sub_808CD44(void)
     sub_80855E4(sub_8086A3C);
     sub_8068FE0(smeargleEntity, 540, 0);
     sub_8085860(leaderEntity->pos.x, leaderEntity->pos.y - 3);
-    CopyMonsterNametoBuffer(gUnknown_202E038, MONSTER_SMEARGLE);
+    CopyMonsterNametoBuffer(gAvailablePokemonNames[2], MONSTER_SMEARGLE);
 }
 
 void sub_808CD9C(void)

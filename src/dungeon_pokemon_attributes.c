@@ -19,7 +19,6 @@
 
 const s16 gItemMasterMinWildLevel[] = {16};
 
-extern u8 gAvailablePokemonNames[];
 extern const u8 *gUnknown_80FC31C;
 extern const u8 * gUnknown_80FCEFC;
 extern const u8 * gUnknown_80FC2FC;
@@ -29,7 +28,7 @@ bool8 HasSafeguardStatus(Entity * pokemon, Entity * target, bool8 displayMessage
 {
   if (target->info->protection.protectionStatus == STATUS_SAFEGUARD) {
     if (displayMessage) {
-      SetMessageArgument(gAvailablePokemonNames,target,0);
+      SetMessageArgument(gAvailablePokemonNames[0],target,0);
       TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC2FC);
     }
     return TRUE;
@@ -41,7 +40,7 @@ bool8 sub_8071728(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
   if (target->info->protection.protectionStatus == STATUS_MIST) {
     if (displayMessage) {
-      SetMessageArgument(gAvailablePokemonNames, target, 0);
+      SetMessageArgument(gAvailablePokemonNames[0], target, 0);
       TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FC31C);
     }
     return TRUE;
@@ -49,7 +48,7 @@ bool8 sub_8071728(Entity * pokemon, Entity * target, bool8 displayMessage)
   else {
     if (HasAbility(target, ABILITY_CLEAR_BODY) || HasAbility(target, ABILITY_WHITE_SMOKE)) {
         if (displayMessage) {
-            SetMessageArgument(gAvailablePokemonNames, target, 0);
+            SetMessageArgument(gAvailablePokemonNames[0], target, 0);
             TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FCEFC);
         }
         return TRUE;

@@ -14,7 +14,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
 EWRAM_DATA_2 struct KangaskhanStorageWork *gKangaskhanStorageWork = {0};
@@ -57,9 +56,9 @@ bool8 CreateKangaskhanStorage(u32 mode)
     gKangaskhanStorageWork->menuAction3 = 0;
     gKangaskhanStorageWork->mode = mode;
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KANGASKHAN);
-    CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KANGASKHAN);
+    CopyYellowMonsterNametoBuffer(gAvailablePokemonNames[7], MONSTER_KANGASKHAN);
     monName = GetMonSpecies(MONSTER_KANGASKHAN);
-    strcpy(gUnknown_202E1C8 - 0x50, monName);
+    strcpy(gAvailablePokemonNames[6], monName);
 
     if (gKangaskhanStorageWork->mode == KANG_MODE_ASLEEP)
         gKangaskhanStorageWork->monPortraitPtr = NULL;

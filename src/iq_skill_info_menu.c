@@ -12,8 +12,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gAvailablePokemonNames[]; // 202DF98
-
 static EWRAM_DATA_2 struct IQSkillInfoMenu *sIQSkillInfoMenu = {0};
 
 #include "data/iq_skill_info_menu.h"
@@ -97,7 +95,7 @@ static void sub_801C6E4(void)
             CallPrepareTextbox_8008C54(sIQSkillInfoMenu->unk24);
             sub_80073B8(sIQSkillInfoMenu->unk24);
             preload = sIQSkillInfoMenu->unk10[sIQSkillInfoMenu->unk8];
-            strcpy(gAvailablePokemonNames, preload->pokeName);
+            strcpy(gAvailablePokemonNames[0], preload->pokeName);
             PrintFormatStringOnWindow(16, 0, sFmtPkmn0, sIQSkillInfoMenu->unk24, 0); // {POKEMON_0}
             PrintFormatStringOnWindow(4, 16, sIQSkillInfoMenu->unk10[sIQSkillInfoMenu->unk8]->unk4, sIQSkillInfoMenu->unk24, 0);
             sub_80073E0(sIQSkillInfoMenu->unk24);

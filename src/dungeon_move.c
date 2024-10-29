@@ -368,8 +368,6 @@ extern const u8 *const gUnknown_80F93A4;
 extern const u8 *const gUnknown_80F9384;
 extern const u8 *const gUnknown_80F9380;
 
-extern u8 gAvailablePokemonNames[];
-extern u8 gUnknown_202DFE8[];
 extern Entity *gUnknown_203B438;
 
 EWRAM_DATA s32 gUnknown_202F208 = 0;
@@ -554,7 +552,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     s16 targetFlags = GetMoveTargetAndRangeForPokemon(attacker, move, FALSE);
                     s32 targetFlagsAnd = targetFlags & 0xF;
                     if ((targetFlagsAnd == 0 || targetFlagsAnd == 4 || targetFlagsAnd == 5 || targetFlagsAnd == 2) && !r4) {
-                        SetMessageArgument(gUnknown_202DFE8, currTarget, 0);
+                        SetMessageArgument(gAvailablePokemonNames[1], currTarget, 0);
                         TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FC574); // protected itself!
                         moveHits = FALSE;
                     }
@@ -567,7 +565,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
 
             if (moveHits) {
                 if (HasAbility(currTarget, ABILITY_SOUNDPROOF) && IsSoundMove(move)) {
-                    SetMessageArgument(gUnknown_202DFE8, currTarget, 0);
+                    SetMessageArgument(gAvailablePokemonNames[1], currTarget, 0);
                     TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_8100524); // Soundproof suppressed the sound move!
                     moveHits = FALSE;
                 }
@@ -598,7 +596,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                 else {
                     sub_80421C0(attacker, 0x157);
                 }
-                SetMessageArgument_2(gUnknown_202DFE8, GetEntInfo(currTarget), 0);
+                SetMessageArgument_2(gAvailablePokemonNames[1], GetEntInfo(currTarget), 0);
                 // Interesting that these 3 strings are the same. Curious if that's the case in Blue/Europe versions.
                 if (attacker == currTarget) {
                     TryDisplayDungeonLoggableMessage3(attacker, attacker, gUnknown_80F9380); // The move missed
@@ -1701,7 +1699,7 @@ static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct Dam
         HandleDealingDamage(attacker, target, dmgStruct, isFalseSwipe, TRUE, unk, TRUE, 0);
     }
     else {
-        SetMessageArgument_2(gUnknown_202DFE8, GetEntInfo(target), 0);
+        SetMessageArgument_2(gAvailablePokemonNames[1], GetEntInfo(target), 0);
         if (sub_8045888(attacker) && sub_8045888(target)) {
             sub_803ED30(9999, target, 1, -1);
             TryDisplayDungeonLoggableMessage4(attacker, target, gUnknown_80F9688); // It took no damage!
@@ -1808,17 +1806,17 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
     attackerInfo->abilityEffectFlags = 0;
     attackerInfo->unk159 = 0;
     if (attackerInfo->volatileStatus.volatileStatus == STATUS_CRINGE) {
-        SetMessageArgument(gAvailablePokemonNames, attacker, 0);
+        SetMessageArgument(gAvailablePokemonNames[0], attacker, 0);
         TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC714); // is cringing!
         return FALSE;
     }
     else if (attackerInfo->volatileStatus.volatileStatus == STATUS_INFATUATED) {
-        SetMessageArgument(gAvailablePokemonNames, attacker, 0);
+        SetMessageArgument(gAvailablePokemonNames[0], attacker, 0);
         TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC718); // is infatuated!
         return FALSE;
     }
     else if (attackerInfo->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS) {
-        SetMessageArgument(gAvailablePokemonNames, attacker, 0);
+        SetMessageArgument(gAvailablePokemonNames[0], attacker, 0);
         TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC6A8); // is paralyzed!
         return FALSE;
     }
@@ -2009,7 +2007,7 @@ static void TriggerTargetAbilityEffect(Entity *attacker)
             InfatuateStatusTarget(attacker, attacker, TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_STENCH) {
-            SetMessageArgument(gAvailablePokemonNames, attacker, 0);
+            SetMessageArgument(gAvailablePokemonNames[0], attacker, 0);
             TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEFD0); // A horrid stench billowed out
             sub_80428A0(attacker);
             entInfo->terrifiedTurns = gUnknown_80F5004;
@@ -2077,7 +2075,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
         }
     }
 
-    SetMessageArgument_2(gAvailablePokemonNames, GetEntInfo(attacker), 0);
+    SetMessageArgument_2(gAvailablePokemonNames[0], GetEntInfo(attacker), 0);
     sub_80928C0(gFormatItems[0], move, NULL);
     if (MoveMatchesChargingStatus(attacker, move)) {
         msg = gUnknown_80FC72C; // mon loosed move
@@ -2099,14 +2097,14 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
     }
 
     if (GetEntInfo(attacker)->muzzled.muzzled == TRUE && FailsWhileMuzzled(move->id)) {
-        SetMessageArgument(gAvailablePokemonNames, attacker, 0);
+        SetMessageArgument(gAvailablePokemonNames[0], attacker, 0);
         TryDisplayDungeonLoggableMessage(attacker, msg);
         sub_803E708(0xA, 0x3F);
         TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC710); // is muzzled!
         return FALSE;
     }
     else if (!moveUsable) {
-        SetMessageArgument_2(gAvailablePokemonNames, GetEntInfo(attacker), 0);
+        SetMessageArgument_2(gAvailablePokemonNames[0], GetEntInfo(attacker), 0);
         if (itemId == 0) {
             sub_80928C0(gFormatItems[0], move, NULL);
             TryDisplayDungeonLoggableMessage(attacker, msg);
@@ -2231,7 +2229,7 @@ bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **unkArray, 
         }
 
         if (r7) {
-            SetMessageArgument_2(gAvailablePokemonNames, GetEntInfo(entity), 0);
+            SetMessageArgument_2(gAvailablePokemonNames[0], GetEntInfo(entity), 0);
             if (itemId == 0) {
                 sub_80928C0(gFormatItems[0], move, NULL);
             }

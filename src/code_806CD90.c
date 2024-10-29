@@ -37,7 +37,6 @@
 #include "dungeon_message.h"
 
 extern u8 gUnknown_202F221;
-extern u8 gUnknown_202DFE8[];
 
 extern void sub_806BFC0(EntityInfo *, u32);
 
@@ -319,9 +318,6 @@ extern const u8 *const gUnknown_80F9D8C[];
 extern const u8 *const gUnknown_80F9D84[];
 extern const u8 *const gUnknown_80F9D28[];
 
-extern u8 gAvailablePokemonNames[];
-extern u32 gFormatData_202DE30;
-
 void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC)
 {
     bool32 r9;
@@ -517,14 +513,14 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     }
 
     if (arg4 != 0x20E && HasAbility(target, ABILITY_STURDY) && dmgStruct->dmg == 9999) {
-        SetMessageArgument(gUnknown_202DFE8, target, 0);
+        SetMessageArgument(gAvailablePokemonNames[1], target, 0);
         TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FCA90);
         sub_8042238(attacker, target);
         dmgStruct->unkF = 1;
         return FALSE;
     }
     if (targetData->immobilize.immobilizeStatus == STATUS_FROZEN) {
-        SetMessageArgument(gUnknown_202DFE8, target, 0);
+        SetMessageArgument(gAvailablePokemonNames[1], target, 0);
         TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9600);
         sub_8042238(attacker, target);
         dmgStruct->unkF = 1;
@@ -565,8 +561,8 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         }
     }
 
-    SetMessageArgument(gAvailablePokemonNames, attacker, 0);
-    SetMessageArgument(gAvailablePokemonNames + 0x50, target, 0);
+    SetMessageArgument(gAvailablePokemonNames[0], attacker, 0);
+    SetMessageArgument(gAvailablePokemonNames[1], target, 0);
     if (dmgStruct->dmg == 0) {
         if (sub_8045888(attacker) && sub_8045888(target)) {
             if (targetData->unk152 == 0) {
@@ -598,7 +594,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     else {
         const u8 *str;
 
-        gFormatData_202DE30 = dmgStruct->dmg;
+        gFormatData_202DE30[0] = dmgStruct->dmg;
         str = gUnknown_80F9764[dmgStruct->residualDmgType];
 
         ASM_MATCH_TRICK(dmgStruct);
@@ -712,8 +708,8 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         r8 = 0;
 
     targetData->unk14C = 0;
-    SetMessageArgument(gAvailablePokemonNames, attacker, 0);
-    SetMessageArgument(gAvailablePokemonNames + 0x50, target, 0);
+    SetMessageArgument(gAvailablePokemonNames[0], attacker, 0);
+    SetMessageArgument(gAvailablePokemonNames[1], target, 0);
     if (dmgStruct->residualDmgType == 19 || dmgStruct->residualDmgType == 20) {
         if (targetData->isNotTeamMember) {
             TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9E44);
@@ -788,7 +784,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 sub_806A390(target);
                 sub_806CCB4(target, sub_806CEBC(target));
                 EntityUpdateStatusSprites(target);
-                SetMessageArgument(gUnknown_202DFE8, target, 0);
+                SetMessageArgument(gAvailablePokemonNames[1], target, 0);
                 DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD46C);
                 sub_806F63C(target);
                 return FALSE;
@@ -845,8 +841,8 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 sub_806A390(target);
                 sub_806CCB4(target, sub_806CEBC(target));
                 EntityUpdateStatusSprites(target);
-                SetMessageArgument(gAvailablePokemonNames, target, 0);
-                SetMessageArgument(gAvailablePokemonNames + 0x50, teamMember, 0);
+                SetMessageArgument(gAvailablePokemonNames[0], target, 0);
+                SetMessageArgument(gAvailablePokemonNames[1], teamMember, 0);
                 DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD484);
                 sub_806F63C(target);
                 return FALSE;
@@ -899,7 +895,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             sub_806A390(target);
             sub_806CCB4(target, sub_806CEBC(target));
             EntityUpdateStatusSprites(target);
-            SetMessageArgument(gUnknown_202DFE8, target, 0);
+            SetMessageArgument(gAvailablePokemonNames[1], target, 0);
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD46C);
             sub_806F63C(target);
             return FALSE;

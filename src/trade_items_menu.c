@@ -17,8 +17,6 @@
 #include "text2.h"
 #include "trade_items_menu.h"
 
-extern u32 gFormatData_202DE30;
-
 static EWRAM_DATA_2 struct TradeItemsMenu *sTradeItemsMenu = {0};
 
 #include "data/trade_items_menu.h"
@@ -528,7 +526,7 @@ void sub_8036B28(void)
         sub_8036F74();
         break;
     case TRADE_ITEMS_SEND_ITEM_CONFIRM:
-        gFormatData_202DE30 = sTradeItemsMenu->unk14.unk0;
+        gFormatData_202DE30[0] = sTradeItemsMenu->unk14.unk0;
         BufferItemName(gFormatItems[0],sTradeItemsMenu->itemToSend.id,NULL);
         CreateMenuDialogueBoxAndPortrait(sFmtWillBeSentPrompt,0,5, sUnknown_80E6154,0,4,0,0,0x101);
         break;
@@ -587,17 +585,17 @@ void sub_8036B28(void)
         break;
     case 0xe:
         if (sTradeItemsMenu->unk24C.quantity == 0) {
-            gFormatData_202DE30 = sTradeItemsMenu->unk244.quantity;
+            gFormatData_202DE30[0] = sTradeItemsMenu->unk244.quantity;
             BufferItemName(gFormatItems[0],sTradeItemsMenu->unk244.itemIdx.id,NULL);
         }
         else {
-            gFormatData_202DE30 = sTradeItemsMenu->unk24C.quantity;
+            gFormatData_202DE30[0] = sTradeItemsMenu->unk24C.quantity;
             BufferItemName(gFormatItems[0],sTradeItemsMenu->unk24C.itemIdx.id,NULL);
         }
         CreateDialogueBoxAndPortrait(sFmtYouReceived,0,0,0x101);
         break;
     case 0xd:
-        gFormatData_202DE30 = sTradeItemsMenu->unk14.unk0;
+        gFormatData_202DE30[0] = sTradeItemsMenu->unk14.unk0;
         BufferItemName(gFormatItems[0],sTradeItemsMenu->itemToSend.id,NULL);
         CreateDialogueBoxAndPortrait(sFmtYouSent,0,0,0x101);
         break;

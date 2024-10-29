@@ -50,9 +50,7 @@ extern u8 gUnknown_203B434;
 extern void (*gUnknown_203B08C)(s32);
 extern void (*gUnknown_203B084)(s32 a0);
 extern void (*gUnknown_203B080)(s32 a0);
-extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202E5D8[];
-extern u8 gUnknown_202DFE8[];
 extern UnkTextStruct1 gUnknown_2027370[4];
 extern s32 gUnknown_202EDCC;
 extern u8 gFontPalette[];
@@ -435,24 +433,24 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
         EntityInfo *leaderInfo = GetEntInfo(leader);
         PokemonStruct2 *monStruct2 = &gRecruitedPokemonRef->pokemon2[leaderInfo->teamIndex];
 
-        sub_808DA0C(gAvailablePokemonNames, monStruct2);
+        sub_808DA0C(gAvailablePokemonNames[0], monStruct2);
         leaderId = leaderInfo->apparentID;
     }
     else {
         leaderId = MONSTER_NONE;
-        strcpy(gAvailablePokemonNames, gUnknown_80F7AF8); // ??
+        strcpy(gAvailablePokemonNames[0], gUnknown_80F7AF8); // ??
     }
 
     if (partner != NULL) {
         EntityInfo *partnerInfo = GetEntInfo(partner);
         PokemonStruct2 *monStruct2 = &gRecruitedPokemonRef->pokemon2[partnerInfo->teamIndex];
 
-        sub_808DA0C(gUnknown_202DFE8, monStruct2);
+        sub_808DA0C(gAvailablePokemonNames[1], monStruct2);
         partnerId = partnerInfo->apparentID;
     }
     else {
         partnerId = MONSTER_NONE;
-        strcpy(gUnknown_202DFE8, gUnknown_80F7AF8); // ??
+        strcpy(gAvailablePokemonNames[1], gUnknown_80F7AF8); // ??
     }
 
     switch (dialogueInfo->unk4) {
@@ -462,7 +460,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
             break;
         case 426:
             dialogueMonId = partnerId;
-            sprintfStatic(gUnknown_202E5D8, gUnknown_80F7AFC, gUnknown_202DFE8);
+            sprintfStatic(gUnknown_202E5D8, gUnknown_80F7AFC, gAvailablePokemonNames[1]);
             break;
         case 427:
             dialogueMonId = MONSTER_NONE;
@@ -624,20 +622,20 @@ s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
 void sub_8052D44(s16 *ids, Entity *leader, Entity *partner)
 {
     if (EntityExists(leader)) {
-        SetMessageArgument(gAvailablePokemonNames, leader, 0);
+        SetMessageArgument(gAvailablePokemonNames[0], leader, 0);
         ids[0] = GetEntInfo(leader)->apparentID;
     }
     else {
-        strcpy(gAvailablePokemonNames, gUnknown_80F7AF8);
+        strcpy(gAvailablePokemonNames[0], gUnknown_80F7AF8);
         ids[0] = 0;
     }
 
     if (EntityExists(partner)) {
-        SetMessageArgument(gUnknown_202DFE8, partner, 0);
+        SetMessageArgument(gAvailablePokemonNames[1], partner, 0);
         ids[1] = GetEntInfo(partner)->apparentID;
     }
     else {
-        strcpy(gUnknown_202DFE8, gUnknown_80F7AF8);
+        strcpy(gAvailablePokemonNames[1], gUnknown_80F7AF8);
         ids[1] = 0;
     }
 }

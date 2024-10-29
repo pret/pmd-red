@@ -26,8 +26,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gAvailablePokemonNames[];
-
 EWRAM_DATA_2 unkStruct_203B2B4 *gUnknown_203B2B4 = {0};
 
 #include "data/friend_list_menu.h"
@@ -201,8 +199,8 @@ void sub_8025518(void)
             sub_8025E68(3,&gUnknown_203B2B4->item2);
         }
         sub_8023DA4();
-        PrintColoredPokeNameToBuffer(gAvailablePokemonNames,gUnknown_203B2B4->pokeStruct,7);
-        PrintColoredPokeNameToBuffer(gAvailablePokemonNames + 0x50,gUnknown_203B2B4->pokeStruct,6);
+        PrintColoredPokeNameToBuffer(gAvailablePokemonNames[0],gUnknown_203B2B4->pokeStruct,7);
+        PrintColoredPokeNameToBuffer(gAvailablePokemonNames[1],gUnknown_203B2B4->pokeStruct,6);
         sub_8012D60(&gUnknown_203B2B4->unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->menuAction1,2);
         break;
     case FRIEND_LIST_MENU_STATE_SUMMARY:

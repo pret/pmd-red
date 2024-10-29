@@ -12,8 +12,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gAvailablePokemonNames[]; // 202DF98
-
 static EWRAM_DATA_2 struct unkStruct_203B2D4 *sUnknown_203B2D4 = {0};
 
 #include "data/pokemon_news2.h"
@@ -145,12 +143,12 @@ static void sub_802BC08(void)
 
 void sub_802BC7C(void)
 {
-    PrintPokeNameToBuffer(gAvailablePokemonNames, sub_808D3BC());
+    PrintPokeNameToBuffer(gAvailablePokemonNames[0], sub_808D3BC());
 
     if (gGameOptionsRef->playerGender == FEMALE)
-        strcpy(gAvailablePokemonNames + 80, sShe);
+        strcpy(gAvailablePokemonNames[1], sShe);
     else
-        strcpy(gAvailablePokemonNames + 80, sHe);
+        strcpy(gAvailablePokemonNames[1], sHe);
 }
 
 static void sub_802BCC4(void)

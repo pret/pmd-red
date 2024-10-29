@@ -35,7 +35,6 @@
 #include "targeting.h"
 #include "tile_types.h"
 
-extern char gAvailablePokemonNames[];
 extern char *gPtrCouldntBeUsedMessage;
 extern char *gPtrItsaMonsterHouseMessage;
 
@@ -90,7 +89,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                 if (CheckVariousConditions(pokemon))
                 {
                     pokemonInfo->useHeldItem = FALSE;
-                    SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
+                    SetMessageArgument(gAvailablePokemonNames[0], pokemon, 0);
                     TryDisplayDungeonLoggableMessage(pokemon, gPtrCouldntBeUsedMessage);
                     return;
                 }

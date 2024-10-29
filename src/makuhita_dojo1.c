@@ -15,8 +15,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gAvailablePokemonNames[]; // 202DF98
-extern u8 gUnknown_202E1C8[];
 extern u8 gPlayerName[]; // 202E2B8
 extern u8 gUnknown_202E5D8[];
 
@@ -95,9 +93,9 @@ bool8 MakuhitaDojo_New(u32 mode)
         sMakuhitaDojoWork1->monPortraitPtr = &sMakuhitaDojoWork1->monPortrait;
 
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_MAKUHITA);
-    CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_MAKUHITA);
+    CopyYellowMonsterNametoBuffer(gAvailablePokemonNames[7], MONSTER_MAKUHITA);
     monName = GetMonSpecies(MONSTER_MAKUHITA);
-    strcpy(gUnknown_202E1C8 - 0x50, monName);
+    strcpy(gAvailablePokemonNames[6], monName);
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_MAKUHITA);
     sMakuhitaDojoWork1->monPortrait.faceFile = faceFile;
@@ -202,7 +200,7 @@ static void MakuhitaDojo_UpdateDialogue(void)
             sMakuhitaDojoWork1->fallbackState = 13;
             dLoc.id = sub_80A2740(sMakuhitaDojoWork1->unk10);
             dLoc.floor = 1;
-            PrintYellowDungeonNametoBuffer(gAvailablePokemonNames, &dLoc);
+            PrintYellowDungeonNametoBuffer(gAvailablePokemonNames[0], &dLoc);
             CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_4], 0, sMakuhitaDojoWork1->monPortraitPtr, 0x10D);
             break;
         case 7:

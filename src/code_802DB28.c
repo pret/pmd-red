@@ -13,7 +13,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
 static EWRAM_DATA_2 struct unkStruct_203B2FC *sUnknown_203B2FC = {0};
@@ -118,11 +117,11 @@ static void sub_802DC9C(void)
     switch (sUnknown_203B2FC->state) {
         case 0:
             CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, sUnknown_203B2FC->jobInfo->clientSpecies);
-            CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, sUnknown_203B2FC->jobInfo->clientSpecies);
+            CopyYellowMonsterNametoBuffer(gAvailablePokemonNames[7], sUnknown_203B2FC->jobInfo->clientSpecies);
             speciesText = GetMonSpecies(sUnknown_203B2FC->jobInfo->clientSpecies);
-            strcpy(gUnknown_202E1C8 - 560, speciesText);
+            strcpy(gAvailablePokemonNames[0], speciesText);
             speciesText = GetMonSpecies(sUnknown_203B2FC->jobInfo->targetSpecies);
-            strcpy(gUnknown_202E1C8 - 480, speciesText);
+            strcpy(gAvailablePokemonNames[1], speciesText);
             UnlockExclusivePokemon(sUnknown_203B2FC->jobInfo->clientSpecies);
             BufferItemName(gFormatItems[0], sUnknown_203B2FC->jobInfo->targetItem, NULL);
             sUnknown_203B2FC->fallbackState = 6;

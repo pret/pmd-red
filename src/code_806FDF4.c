@@ -25,8 +25,6 @@
 #include "type_chart.h"
 
 extern u8 gUnknown_202E628[];
-extern u8 gUnknown_202E088[];
-extern u8 gAvailablePokemonNames[];
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
 extern s16 gUnknown_80F5008;
 extern s16 gUnknown_80F5700[];
@@ -38,7 +36,6 @@ extern u8 *gUnknown_80FA030[];
 extern u8 *gUnknown_80F9FE8[];
 extern u8 *gUnknown_80FA004[];
 extern u8 *gUnknown_80FA0C8[];
-extern u8 gUnknown_202E088[];
 extern u8 *gUnknown_80FA120[];
 extern u8 *gUnknown_80FA090[];
 
@@ -745,7 +742,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
     entity2->unk22 = 0;
     sub_807A0CC(entity1, entity2);
     sub_806CE68(entity2, direction);
-    CopyCyanMonsterNametoBuffer(gAvailablePokemonNames,param_3->id);
+    CopyCyanMonsterNametoBuffer(gAvailablePokemonNames[0],param_3->id);
 
     if (DisplayDungeonYesNoMessage(0,*gUnknown_80F9FE8,1) == 0) {
         if (param_3->id != MONSTER_JIRACHI) {
@@ -814,11 +811,11 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
                         DisplayDungeonMessage(0,*gUnknown_80FA0C8,1);
                     }
                 }
-                sub_808D9DC(gAvailablePokemonNames,pokeStruct2,0);
+                sub_808D9DC(gAvailablePokemonNames[0],pokeStruct2,0);
                 TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA0F0);
                 if (flag) {
                     leader = xxx_call_GetLeader();
-                    SetMessageArgument(gAvailablePokemonNames,leader,0);
+                    SetMessageArgument(gAvailablePokemonNames[0],leader,0);
                     sub_8092558(gUnknown_202E628,friendArea);
                     PlaySound(0xce);
                     DisplayDungeonMessage(0,*gUnknown_80FA120,1);
@@ -1077,12 +1074,12 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
       }
       if (flag) {
         leader = xxx_call_GetLeader();
-        SetMessageArgument(gAvailablePokemonNames,leader,0);
+        SetMessageArgument(gAvailablePokemonNames[0],leader,0);
         sub_8092558(gUnknown_202E628,friendArea);
         PlaySound(0xce);
         DisplayDungeonMessage(0,*gUnknown_80FA120,1);
       }
-      sub_808D9DC(gUnknown_202E088,pokeStruct2,0);
+      sub_808D9DC(gAvailablePokemonNames[3],pokeStruct2,0);
       *entityPtr = local_2c;
     }
    return TRUE;

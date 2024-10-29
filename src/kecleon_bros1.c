@@ -18,8 +18,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u32 gFormatData_202DE30;
-extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
 static EWRAM_DATA_2 KecleonBrosWork1 *sKecleonBrosWork1 = {0};
@@ -75,33 +73,33 @@ bool8 CreateKecleonBros(u32 mode)
             sKecleonBrosWork1->isKecleonItemShop = TRUE;
             sKecleonBrosWork1->monPortraitPtr = &sKecleonBrosWork1->monPortrait;
             CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
-            CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);
+            CopyYellowMonsterNametoBuffer(gAvailablePokemonNames[7], MONSTER_KECLEON);
             monName = GetMonSpecies(MONSTER_KECLEON);
-            strcpy(gUnknown_202E1C8 - 0x50, monName);
+            strcpy(gAvailablePokemonNames[6], monName);
             break;
         case KECLEON_BROS_MODE_ITEMS_ASLEEP:
             sKecleonBrosWork1->isKecleonItemShop = TRUE;
             sKecleonBrosWork1->monPortraitPtr = NULL;
             CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
-            CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);
+            CopyYellowMonsterNametoBuffer(gAvailablePokemonNames[7], MONSTER_KECLEON);
             monName = GetMonSpecies(MONSTER_KECLEON);
-            strcpy(gUnknown_202E1C8 - 0x50, monName);
+            strcpy(gAvailablePokemonNames[6], monName);
             break;
         case KECLEON_BROS_MODE_WARES_AWAKE:
             sKecleonBrosWork1->isKecleonItemShop = FALSE;
             sKecleonBrosWork1->monPortraitPtr = &sKecleonBrosWork1->monPortrait;
             CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
-            CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);
+            CopyYellowMonsterNametoBuffer(gAvailablePokemonNames[7], MONSTER_KECLEON);
             monName = GetMonSpecies(MONSTER_KECLEON);
-            strcpy(gUnknown_202E1C8 - 0x50, monName);
+            strcpy(gAvailablePokemonNames[6], monName);
             break;
         case KECLEON_BROS_MODE_WARES_ASLEEP:
             sKecleonBrosWork1->isKecleonItemShop = FALSE;
             sKecleonBrosWork1->monPortraitPtr = NULL;
             CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
-            CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_KECLEON);
+            CopyYellowMonsterNametoBuffer(gAvailablePokemonNames[7], MONSTER_KECLEON);
             monName = GetMonSpecies(MONSTER_KECLEON);
-            strcpy(gUnknown_202E1C8 - 0x50, monName);
+            strcpy(gAvailablePokemonNames[6], monName);
             break;
         default:
             break;
@@ -340,7 +338,7 @@ static void UpdateKecleonStoreDialogue(void)
         case KECLEON_STORE_BUY_ITEM:
             BuildKecleonBrosYesNoMenu();
             sub_8090E14(gFormatItems[0], &sKecleonBrosWork1->soldItem, 0);
-            gFormatData_202DE30 = sKecleonBrosWork1->itemSellPrice;
+            gFormatData_202DE30[0] = sKecleonBrosWork1->itemSellPrice;
             SetKecleonPortraitSpriteId(FALSE);
             CreateMenuDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_05], 0, 5,sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->monPortraitPtr, 12);
             break;
@@ -393,7 +391,7 @@ static void UpdateKecleonStoreDialogue(void)
         case KECLEON_STORE_SELL_ITEM:
             BuildKecleonBrosYesNoMenu();
             sub_8090E14(gFormatItems[0], &sKecleonBrosWork1->soldItem, NULL);
-            gFormatData_202DE30 = sKecleonBrosWork1->itemSellPrice;
+            gFormatData_202DE30[0] = sKecleonBrosWork1->itemSellPrice;
             SetKecleonPortraitSpriteId(FALSE);
             CreateMenuDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_09], 0, 5, sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->monPortraitPtr, 12);
             break;
@@ -414,7 +412,7 @@ static void UpdateKecleonStoreDialogue(void)
             break;
         case KECLEON_STORE_SELL_ALL_ITEMS:
             BuildKecleonBrosYesNoMenu();
-            gFormatData_202DE30 = sKecleonBrosWork1->inventoryItemSellPrice;
+            gFormatData_202DE30[0] = sKecleonBrosWork1->inventoryItemSellPrice;
             SetKecleonPortraitSpriteId(FALSE);
             CreateMenuDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_10], 0, 5, sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->monPortraitPtr, 12);
             break;

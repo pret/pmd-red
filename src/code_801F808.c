@@ -12,8 +12,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gAvailablePokemonNames[];
-
 // TODO: UNIFY WITH struct_Sub80095E4
 struct unkStruct_203B278
 {
@@ -149,7 +147,7 @@ void sub_801F9A4(void)
             CallPrepareTextbox_8008C54(gUnknown_203B278->unk5C);
             sub_80073B8(gUnknown_203B278->unk5C);
             name = &(gUnknown_203B278->unk14[gUnknown_203B278->unkC]->pokeName);
-            strcpy(gAvailablePokemonNames, *name);
+            strcpy(gAvailablePokemonNames[0], *name);
             PrintFormatStringOnWindow(0x10,0,gUnknown_80DC310,gUnknown_203B278->unk5C,0); // $m0
             PrintFormatStringOnWindow(4,0x10,gUnknown_203B278->unk14[gUnknown_203B278->unkC]->unk4,gUnknown_203B278->unk5C,0);
             sub_80073E0(gUnknown_203B278->unk5C);

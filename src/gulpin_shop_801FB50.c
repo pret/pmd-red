@@ -22,10 +22,6 @@
 
 EWRAM_DATA_2 unkStruct_203B27C *gUnknown_203B27C = {0};
 
-extern u8 gAvailablePokemonNames[]; // 202DF98
-extern u8 gUnknown_202DFE8[];
-extern u8 gUnknown_202E128[];
-extern u8 gUnknown_202E1C8[];
 extern u8 gUnknown_202E5D8[];
 
 #include "data/gulpin_shop_801FB50.h"
@@ -93,10 +89,10 @@ bool8 sub_801FB50(u32 mode)
     gUnknown_203B27C->mode = mode;
     gUnknown_203B27C->unk15 = FALSE;
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_GULPIN);
-    CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_GULPIN);
+    CopyYellowMonsterNametoBuffer(gAvailablePokemonNames[7], MONSTER_GULPIN);
     name = GetMonSpecies(MONSTER_GULPIN);
-    strcpy(gUnknown_202E1C8 - 80, name);
-    PrintPokeNameToBuffer(gUnknown_202E1C8 - 0xF0, GetPlayerPokemonStruct());
+    strcpy(gAvailablePokemonNames[6], name);
+    PrintPokeNameToBuffer(gAvailablePokemonNames[4], GetPlayerPokemonStruct());
 
     if (gUnknown_203B27C->mode == GULPIN_SHOP_MODE_ASLEEP)
         gUnknown_203B27C->monPortraitPtr = NULL;
@@ -353,7 +349,7 @@ static void sub_801FF28(void)
         case 0x19:
             sub_8094060(gUnknown_203B27C->moves,gUnknown_203B27C->pokeStruct->moves);
             gUnknown_203B27C->fallbackState = 0x10;
-            sub_8092C84(gAvailablePokemonNames,gUnknown_203B27C->unk1E);
+            sub_8092C84(gAvailablePokemonNames[0],gUnknown_203B27C->unk1E);
             CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_10],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             break;
         case 0x1a:
@@ -401,7 +397,7 @@ static void sub_801FF28(void)
             break;
         case 0x22:
             sub_80208B0();
-            sub_8092C84(gUnknown_202DFE8,gUnknown_203B27C->unk20);
+            sub_8092C84(gAvailablePokemonNames[1],gUnknown_203B27C->unk20);
             if (gUnknown_203B27C->isNextMoveLinked) {
                 CreateMenuDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_18],0,0x11,gUnknown_203B27C->unk7C,gUnknown_203B27C->unkBC,4,0,
                             gUnknown_203B27C->monPortraitPtr,0xc);
@@ -413,7 +409,7 @@ static void sub_801FF28(void)
             break;
         case 0x23:
             gUnknown_203B27C->fallbackState = 0x1f;
-            sub_8092C84(gUnknown_202DFE8,gUnknown_203B27C->unk20);
+            sub_8092C84(gAvailablePokemonNames[1],gUnknown_203B27C->unk20);
             if (gUnknown_203B27C->isNextMoveLinked)
             {
                 CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_20],0,gUnknown_203B27C->monPortraitPtr,0x10d);
@@ -695,14 +691,14 @@ static void sub_8020A80(void)
             gUnknown_203B27C->speciesNum = sub_8023B44();
             gUnknown_203B27C->pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B27C->speciesNum];
             gUnknown_203B27C->isTeamLeader = gUnknown_203B27C->pokeStruct->isTeamLeader;
-            PrintPokeNameToBuffer(gUnknown_202E128, gUnknown_203B27C->pokeStruct);
+            PrintPokeNameToBuffer(gAvailablePokemonNames[5], gUnknown_203B27C->pokeStruct);
             sub_801FDA8(0x11);
             break;
         case 4:
             gUnknown_203B27C->speciesNum = sub_8023B44();
             gUnknown_203B27C->pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B27C->speciesNum];
             gUnknown_203B27C->isTeamLeader = gUnknown_203B27C->pokeStruct->isTeamLeader;
-            PrintPokeNameToBuffer(gUnknown_202E128, gUnknown_203B27C->pokeStruct);
+            PrintPokeNameToBuffer(gAvailablePokemonNames[5], gUnknown_203B27C->pokeStruct);
             sub_801FDA8(0x12);
             break;
         case 0:

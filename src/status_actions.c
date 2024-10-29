@@ -100,10 +100,8 @@ extern u8 *gUnknown_80FAFF0[];
 extern u32 gUnknown_80F4F58;
 extern u32 gUnknown_8106A4C;
 extern s16 gUnknown_80F4E74[];
-extern u8 gAvailablePokemonNames[];
 extern u8 *gUnknown_80FD450[];
 extern u8 *gUnknown_80FD434[];
-extern u8 gUnknown_202DFE8[];
 extern s16 gUnknown_80F4F80;
 extern u8 *gUnknown_80FF678[];
 extern u8 *gUnknown_80FD0B8[];
@@ -228,7 +226,7 @@ bool8 HandleColorChange(Entity * pokemon, Entity * target)
         entityInfo->types[0] = newType;
         entityInfo->types[1] = TYPE_NONE;
         entityInfo->isColorChanged = TRUE;
-        SetMessageArgument(gUnknown_202DFE8,target,0);
+        SetMessageArgument(gAvailablePokemonNames[1],target,0);
         typeString = GetUnformattedTypeString(newType);
         strcpy(gFormatItems[0], typeString);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FEB08);
@@ -441,7 +439,7 @@ bool8 MimicMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4
             }
         }
     }
-    SetMessageArgument(gAvailablePokemonNames,pokemon,0);
+    SetMessageArgument(gAvailablePokemonNames[0],pokemon,0);
     if (moveCounter != 0) {
         SetExpMultplier(entityInfo);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FDCE4);
@@ -699,8 +697,8 @@ bool8 sub_805BA50(Entity * pokemon, Entity * target, Move *move, s32 param_4)
             iVar3 = pokemon->info;
             iVar5 = target->info;
             iVar6 = target->info;
-            SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
-            SetMessageArgument(gAvailablePokemonNames + 0x50, target, 0);
+            SetMessageArgument(gAvailablePokemonNames[0], pokemon, 0);
+            SetMessageArgument(gAvailablePokemonNames[1], target, 0);
             if (HasAbility(target, ABILITY_STICKY_HOLD)) {
                 return TRUE;
             }
@@ -860,7 +858,7 @@ bool8 TransferOrbAction(Entity *pokemon, Entity * target, Move *move, s32 param_
         entityInfo = target->info;
         targetID = entityInfo->id;
         oldID = entityInfo->id;
-        SetMessageArgument(gAvailablePokemonNames,target,0);
+        SetMessageArgument(gAvailablePokemonNames[0],target,0);
         if (entityInfo->clientType != CLIENT_TYPE_NONE) {
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD450);
             return FALSE;
@@ -877,7 +875,7 @@ bool8 TransferOrbAction(Entity *pokemon, Entity * target, Move *move, s32 param_
                 TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD450);
             }
             else {
-                CopyCyanMonsterNametoBuffer(gUnknown_202DFE8, targetID);
+                CopyCyanMonsterNametoBuffer(gAvailablePokemonNames[1], targetID);
                 TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD434);
                 sub_806BB6C(target, targetID);
                 didTransfer = TRUE;
@@ -885,7 +883,7 @@ bool8 TransferOrbAction(Entity *pokemon, Entity * target, Move *move, s32 param_
         }
     }
     else {
-        SetMessageArgument(gAvailablePokemonNames,target,0);
+        SetMessageArgument(gAvailablePokemonNames[0],target,0);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD450);
     }
     return didTransfer;
@@ -923,7 +921,7 @@ bool8 sub_805BEC8(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 
 bool8 EscapeOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    SetMessageArgument(gAvailablePokemonNames,pokemon,0);
+    SetMessageArgument(gAvailablePokemonNames[0],pokemon,0);
     if (gDungeon->unk66E != 0) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD4DC); // $m0 can't escape!
     }

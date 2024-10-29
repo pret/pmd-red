@@ -14,8 +14,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gAvailablePokemonNames[]; // 202DF98
-
 static EWRAM_DATA_2 GulpinShopWork *sGulpinShopWork = {0};
 
 #include "data/gulpin_shop.h"
@@ -153,8 +151,8 @@ static void sub_801EA28(void)
             break;
         case 4:
             sub_801EC7C();
-            sub_8092C84(gAvailablePokemonNames, sGulpinShopWork->unk1C);
-            sub_8092C84(&gAvailablePokemonNames[0x50], sGulpinShopWork->unk1E);
+            sub_8092C84(gAvailablePokemonNames[0], sGulpinShopWork->unk1C);
+            sub_8092C84(gAvailablePokemonNames[1], sGulpinShopWork->unk1E);
 
             switch (sGulpinShopWork->mode) {
                 case GULPIN_SHOP_MODE_AWAKE:

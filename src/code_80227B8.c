@@ -17,8 +17,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gAvailablePokemonNames[]; // 202DF98
-
 static EWRAM_DATA_2 unkStruct_203B294 *sUnknown_203B294 = {0};
 
 #include "data/code_80227B8.h"
@@ -44,8 +42,8 @@ bool8 sub_80227B8(PokemonStruct1 *pkmn)
     sUnknown_203B294->pokeStruct = pkmn;
 
     if (pkmn != NULL) {
-        PrintColoredPokeNameToBuffer(gAvailablePokemonNames, pkmn, COLOR_WHITE_2);
-        PrintColoredPokeNameToBuffer(gAvailablePokemonNames + 80, pkmn, COLOR_YELLOW);
+        PrintColoredPokeNameToBuffer(gAvailablePokemonNames[0], pkmn, COLOR_WHITE_2);
+        PrintColoredPokeNameToBuffer(gAvailablePokemonNames[1], pkmn, COLOR_YELLOW);
 
         if (HasGummiItem())
             sub_8022924(0);
@@ -53,8 +51,8 @@ bool8 sub_80227B8(PokemonStruct1 *pkmn)
             sub_8022924(17);
     }
     else {
-        strcpy(gAvailablePokemonNames, sTripleQuestionMark);
-        strcpy(gAvailablePokemonNames + 80, sTripleQuestionMark);
+        strcpy(gAvailablePokemonNames[0], sTripleQuestionMark);
+        strcpy(gAvailablePokemonNames[1], sTripleQuestionMark);
 
         if (GetNumberOfFilledInventorySlots() == 0)
             sub_8022924(18);

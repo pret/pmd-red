@@ -184,21 +184,6 @@ gUnknown_202DE19: /* 202DE19 (sub_800F990 - sub_8010014) */
 	.align 4
     .include "src/code_80140DC.o"
 
-
-gAvailablePokemonNames: /* 202DF98 [used everywhere tbh] gAvailablePokemonNames[80][] */
-	.space 80
-gUnknown_202DFE8: /* 202DFE8 (sub_801FF28 - PierceStatusTarget) */
-	.space 80
-gUnknown_202E038: /* 202E038 (HandleMissionReward - sub_808CD44) [{ARG_POKEMON_2}] */
-	.space 80
-gUnknown_202E088: /* 202E088 (sub_806FDF4 - sub_808C10C) [{ARG_POKEMON_3}]? */
-	.space 160
-gUnknown_202E128: /* 202E128 (sub_8020A80) */
-	.space 160
-gUnknown_202E1C8: /* 202E1C8 (CreateFelicityBank - MakuhitaDojo_New) */
-	.space 80
-gUnknown_202E218: /* 202E218 (sub_801B200) */
-	.space 160
 gPlayerName: /* 202E2B8 (UpdateLuminousCaveDialogue - sub_80A14E8) */
 	.space 800
 gUnknown_202E5D8: /* 202E5D8 [used everywhere tbh] */

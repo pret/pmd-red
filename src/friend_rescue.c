@@ -31,7 +31,6 @@
 extern void SetFriendRescueMenuState(u32);
 
 extern char gUnknown_202E5D8[0x50];
-extern char gAvailablePokemonNames[0x50];
 extern TeamInventory *gTeamInventoryRef;
 
 
@@ -327,7 +326,7 @@ u32 CreateFriendRescueMenu(void)
   gUnknown_203B33C->speciesNum = -1;
   CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
   monName = GetMonSpecies(MONSTER_PELIPPER);
-  strcpy(gAvailablePokemonNames,monName);
+  strcpy(gAvailablePokemonNames[0],monName);
   for(counter = 0; counter < 0x36; counter++){
     gUnknown_203B33C->passwordBuffer[counter] = 0;
   }
@@ -2918,7 +2917,7 @@ void sub_80352A4(void)
     sub_802F2C0();
     CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
     monName = GetMonSpecies(MONSTER_PELIPPER);
-    strcpy(gAvailablePokemonNames, monName);
+    strcpy(gAvailablePokemonNames[0], monName);
     mailIndex = GetMailIndex(6, gUnknown_203B33C->unk420);
     DeleteMailAtIndex(mailIndex);
     SetFriendRescueMenuState(0x70);

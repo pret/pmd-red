@@ -1702,8 +1702,6 @@ extern void sub_8041AE0(Entity *pokemon);
 extern void sub_807EC28(bool8);
 extern void sub_8083CE0(u8 param_1);
 
-extern u8 gAvailablePokemonNames[];
-
 extern u8 gUnknown_202749A[];
 extern MenuInputStruct gUnknown_202EE10;
 
@@ -1755,7 +1753,7 @@ void sub_805F02C(void)
         sub_803F508(r7);
         sub_8041AD0(leader);
         sub_8041AE0(GetLeader());
-        SetMessageArgument(gAvailablePokemonNames, r7, 0);
+        SetMessageArgument(gAvailablePokemonNames[0], r7, 0);
         TryDisplayDungeonLoggableMessage(r7, gUnknown_80F9BB0);
         sub_807EC28(FALSE);
         r8->unk64 = 0;
@@ -2118,7 +2116,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
                         break;
                 }
                 else {
-                    SetMessageArgument(gAvailablePokemonNames, GetLeader(), 0);
+                    SetMessageArgument(gAvailablePokemonNames[0], GetLeader(), 0);
                     DisplayDungeonMessage(0, gUnknown_80FDE18, 1);
                 }
             }
@@ -2243,7 +2241,7 @@ void DrawFieldMenu(u8 a0)
         gFormatData_202DE30[0] = gTeamInventoryRef->teamMoney;
         PrintFormatStringOnWindow(0x73, 12, gUnknown_80F9190, 2, 0);
 
-        GetWeatherName(gAvailablePokemonNames, GetApparentWeather(NULL));
+        GetWeatherName(gAvailablePokemonNames[0], GetApparentWeather(NULL));
         PrintFormatStringOnWindow(0x73, 24, gUnknown_80F91A8, 2, 0);
 
         gFormatData_202DE30[0] = hours;
@@ -2254,7 +2252,7 @@ void DrawFieldMenu(u8 a0)
             Entity *teamMon = gDungeon->teamPokemon[i];
             if (EntityExists(teamMon)) {
                 EntityInfo *monInfo = teamMon->info;
-                SetMessageArgument(gAvailablePokemonNames, teamMon, 0);
+                SetMessageArgument(gAvailablePokemonNames[0], teamMon, 0);
                 gFormatData_202DE30[0] = monInfo->HP;
                 gFormatData_202DE30[1] = monInfo->maxHPStat;
                 PrintFormatStringOnWindow(4, yLoop, gUnknown_80F91E0, 2, 0);
@@ -2775,7 +2773,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
         break;
     case 3: {
             Item *item = &a1->info->heldItem;
-            SetMessageArgument_2(gAvailablePokemonNames, a1Info, 0);
+            SetMessageArgument_2(gAvailablePokemonNames[0], a1Info, 0);
             PrintFormatStringOnWindow(x, 0, gUnknown_80FE940, 0, 0);
             if (item->flags & ITEM_FLAG_EXISTS) {
                 gUnknown_202EE10.unk1A++;
@@ -2789,7 +2787,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
             Entity *chosenTeamMember = gDungeon->teamPokemon[sUnknown_202F248[a0] - MAX_TEAM_MEMBERS];
             if (EntityExists(chosenTeamMember)) {
                 Item *item = &chosenTeamMember->info->heldItem;
-                SetMessageArgument_2(gAvailablePokemonNames, chosenTeamMember->info, 0);
+                SetMessageArgument_2(gAvailablePokemonNames[0], chosenTeamMember->info, 0);
                 PrintFormatStringOnWindow(x, 0, gUnknown_80FE940, 0, 0);
                 if (item->flags & ITEM_FLAG_EXISTS) {
                     gUnknown_202EE10.unk1A++;
@@ -3381,33 +3379,33 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
                 EntityInfo *monInfo = teamMon->info;
                 s32 color = (a0->unk14[i] != 0) ? 6 : 2;
 
-                sub_8070968(gAvailablePokemonNames, monInfo, color);
+                sub_8070968(gAvailablePokemonNames[0], monInfo, color);
                 if (sub_806A538(gRecruitedPokemonRef->pokemon2[monInfo->teamIndex].unkA)) {
                     if (monInfo->HP <= monInfo->maxHPStat / 4) {
-                        strcpy(gAvailablePokemonNames + 0x50, gHeartRedTiny);
+                        strcpy(gAvailablePokemonNames[1], gHeartRedTiny);
                     }
                     else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 2) {
-                        strcpy(gAvailablePokemonNames + 0x50, gHeartRedSmall);
+                        strcpy(gAvailablePokemonNames[1], gHeartRedSmall);
                     }
                     else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 3) {
-                        strcpy(gAvailablePokemonNames + 0x50, gHeartRedMedium);
+                        strcpy(gAvailablePokemonNames[1], gHeartRedMedium);
                     }
                     else {
-                        strcpy(gAvailablePokemonNames + 0x50, gHeartRedLarge);
+                        strcpy(gAvailablePokemonNames[1], gHeartRedLarge);
                     }
                 }
                 else {
                     if (monInfo->HP <= monInfo->maxHPStat / 4) {
-                        strcpy(gAvailablePokemonNames + 0x50, gHeartYellowTiny);
+                        strcpy(gAvailablePokemonNames[1], gHeartYellowTiny);
                     }
                     else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 2) {
-                        strcpy(gAvailablePokemonNames + 0x50, gHeartYellowSmall);
+                        strcpy(gAvailablePokemonNames[1], gHeartYellowSmall);
                     }
                     else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 3) {
-                        strcpy(gAvailablePokemonNames + 0x50, gHeartYellowMedium);
+                        strcpy(gAvailablePokemonNames[1], gHeartYellowMedium);
                     }
                     else {
-                        strcpy(gAvailablePokemonNames + 0x50, gHeartYellowLarge);
+                        strcpy(gAvailablePokemonNames[1], gHeartYellowLarge);
                     }
                 }
 
@@ -3711,7 +3709,7 @@ void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 windowId)
         if (tactic == TACTIC_UNUSED)
             break;
 
-        CopyTacticsNameToBuffer(gAvailablePokemonNames, tactic);
+        CopyTacticsNameToBuffer(gAvailablePokemonNames[0], tactic);
         if (mon->tactic == tactic) {
             PrintFormatStringOnWindow(0x10, y, gUnknown_8106BEC, windowId, 0);
         }

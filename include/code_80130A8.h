@@ -26,7 +26,9 @@ struct MonPortraitMsg
     u8 unkE;
 };
 
+extern s32 gFormatData_202DE30[10];
 extern u8 gFormatItems[4][80];
+extern u8 gAvailablePokemonNames[10][80];
 
 // code_80130A8.s
 void sub_8013E54(void);

@@ -45,8 +45,6 @@ extern const u8 *const gUnknown_80FC6A8[];
 extern const u8 *const gUnknown_80FC714[];
 extern const u8 *const gUnknown_80FC718[];
 
-extern u8 gAvailablePokemonNames[];
-
 EWRAM_DATA bool8 gCanAttackInDirection[NUM_DIRECTIONS] = {0};
 EWRAM_DATA u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS] = {0};
 EWRAM_DATA s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS] = {0};
@@ -1020,20 +1018,20 @@ void HandleUseOrbAction(Entity *pokemon)
         }
 
         if (entityInfo->volatileStatus.volatileStatus == 1) {
-            SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
+            SetMessageArgument(gAvailablePokemonNames[0], pokemon, 0);
             TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC714);
             r4 = FALSE;
             r8 = FALSE;
         }
         else if (entityInfo->volatileStatus.volatileStatus == 7) {
-            SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
+            SetMessageArgument(gAvailablePokemonNames[0], pokemon, 0);
             TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC718);
             r4 = FALSE;
             r8 = FALSE;
         }
         else if (entityInfo->nonVolatile.nonVolatileStatus == 4)
         {
-            SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
+            SetMessageArgument(gAvailablePokemonNames[0], pokemon, 0);
             TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC6A8);
             r4 = FALSE;
             r8 = FALSE;

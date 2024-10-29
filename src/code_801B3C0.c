@@ -11,8 +11,6 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gAvailablePokemonNames[]; // 202DF98
-
 static EWRAM_DATA_2 unkStruct_203B230 *sUnknown_203B230 = {0};
 
 #include "data/code_801B3C0.h" // 80DBA4C
@@ -83,7 +81,7 @@ static void sub_801B480(void)
             CallPrepareTextbox_8008C54(sUnknown_203B230->unk24);
             sub_80073B8(sUnknown_203B230->unk24);
             preload = sUnknown_203B230->unk10[sUnknown_203B230->unk8];
-            strcpy(gAvailablePokemonNames, preload->pokeName);
+            strcpy(gAvailablePokemonNames[0], preload->pokeName);
             PrintFormatStringOnWindow(16, 0, sFmtPkmn0, sUnknown_203B230->unk24, 0); // {POKEMON_0}
             PrintFormatStringOnWindow(4, 16, sUnknown_203B230->unk10[sUnknown_203B230->unk8]->unk4, sUnknown_203B230->unk24, 0);
             sub_80073E0(sUnknown_203B230->unk24);

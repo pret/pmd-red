@@ -9,9 +9,6 @@
 #include "items.h"
 #include "code_80130A8.h"
 
-extern u8 gAvailablePokemonNames[];
-extern u8 gUnknown_202DFE8[];
-
 extern u8 *gUnknown_80F8BE0[];
 extern u8 *gItemStickyCannotMove1[];
 extern u8 *gItemStickyCannotMove2[];
@@ -139,7 +136,7 @@ void HandleGiveItemAction(Entity *param_1)
   }
   else
   {
-    SetMessageArgument(gUnknown_202DFE8,entity,0);
+    SetMessageArgument(gAvailablePokemonNames[1],entity,0);
     if (((info2->heldItem).flags & ITEM_FLAG_EXISTS)) {
      if (((info2->heldItem).flags & ITEM_FLAG_STICKY)) {
         sub_8045BF8(gFormatItems[1],&info2->heldItem);
@@ -216,7 +213,7 @@ void HandleTakeItemAction(Entity *param_1)
       item = *heldItem;
       item.flags &= ~(ITEM_FLAG_SET);
       sub_8045BF8(gFormatItems[0],&item);
-      SetMessageArgument(gAvailablePokemonNames,entity,0);
+      SetMessageArgument(gAvailablePokemonNames[0],entity,0);
       heldItem->id = ITEM_NOTHING;
       heldItem->quantity = 0;
       heldItem->flags = 0;
@@ -262,7 +259,7 @@ void sub_8066BD4(Entity *param_1)
     item->flags &= ~(ITEM_FLAG_SET);
     sub_8045BF8(gFormatItems[0],heldItem);
     sub_8045BF8(gFormatItems[1],item);
-    SetMessageArgument(gUnknown_202DFE8,entity,0);
+    SetMessageArgument(gAvailablePokemonNames[1],entity,0);
     temp = info->heldItem;
     info->heldItem = *item;
     *item = temp;
@@ -330,7 +327,7 @@ void HandlePlaceItemAction(Entity *param_1)
                     item->flags = 0;
                     FillInventoryGaps();
                     PlaySoundEffect(0x14d);
-                    SetMessageArgument(gAvailablePokemonNames,entity,0);
+                    SetMessageArgument(gAvailablePokemonNames[0],entity,0);
                     TryDisplayDungeonLoggableMessage(entity,*gUnknown_80F8E28);
                     sub_807AB38(entity,gDungeon->unk3A08);
                 }

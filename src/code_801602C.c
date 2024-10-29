@@ -9,8 +9,6 @@
 #include "text_util.h"
 #include "text1.h"
 
-extern u8 gAvailablePokemonNames[]; // 202DF98
-
 static EWRAM_DATA_2 struct unkStruct_203B200 *sUnknown_203B200 = {0};
 
 #include "data/code_801602C.h"
@@ -105,9 +103,9 @@ static void sub_8016110(void)
         case CONFIRM_NAME_MENU_PROMPT:
             BuildConfirmNameMenu();
             if (sUnknown_203B200->unk4 == 1)
-                sub_80922B4(gAvailablePokemonNames, sUnknown_203B200->pokeName, POKEMON_NAME_LENGTH);
+                sub_80922B4(gAvailablePokemonNames[0], sUnknown_203B200->pokeName, POKEMON_NAME_LENGTH);
             else
-                sub_80922B4(gAvailablePokemonNames, sUnknown_203B200->pokeName, POKEMON_NAME_LENGTH);
+                sub_80922B4(gAvailablePokemonNames[0], sUnknown_203B200->pokeName, POKEMON_NAME_LENGTH);
 
             CreateMenuDialogueBoxAndPortrait(sIsNameOKPrompt, 0, 3, sUnknown_203B200->menus, 0, 4, 0, NULL, 32);
             break;

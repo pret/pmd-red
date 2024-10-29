@@ -594,7 +594,7 @@ _08084680:
 	ldr r0, _080846A0
 	b _080846B4
 	.align 2, 0
-_0808469C: .4byte gUnknown_202E038
+_0808469C: .4byte gAvailablePokemonNames + 160
 _080846A0: .4byte gUnknown_80FA54C
 _080846A4:
 	adds r0, r6, 0

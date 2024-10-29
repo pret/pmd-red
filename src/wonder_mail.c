@@ -33,7 +33,6 @@ extern u32 sub_8031050();
 extern void sub_80310B4();
 
 extern char gUnknown_202E5D8[0x50];
-extern char gAvailablePokemonNames[0x50];
 
 extern void nullsub_130(void);
 extern void sub_8028348(void);
@@ -201,7 +200,7 @@ u32 sub_8027F88(void)
   sUnknown_203B2C0->speciesNum = -1;
   CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
   monName = GetMonSpecies(MONSTER_PELIPPER);
-  strcpy(gAvailablePokemonNames, monName);
+  strcpy(gAvailablePokemonNames[0], monName);
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
   sUnknown_203B2C0->monPortrait.faceFile = faceFile;
   sUnknown_203B2C0->monPortrait.faceData = (void *) faceFile->data;
