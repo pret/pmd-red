@@ -680,12 +680,12 @@ extern const u8 gUnknown_80D4904[];
 extern const u8 gUnknown_80D4908[];
 extern const u8 gUnknown_80D4910[];
 
-const u8 *xxx_format_string(const u8 *str, u8 *a1, u8 *r7, u16 r8)
+const u8 *xxx_format_string(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
 {
     u8 txtArray[60];
     bool8 r10 = TRUE;
     bool8 r9 = TRUE;
-    r7--;
+    dstMax--;
 
     while (1) {
         u8 currChar = *str;
@@ -693,7 +693,7 @@ const u8 *xxx_format_string(const u8 *str, u8 *a1, u8 *r7, u16 r8)
         if (currChar == '\0')
             break;
         if (currChar == '\r' || currChar == '\n') {
-            if (r8 & 0x80)
+            if (flags & 0x80)
                 break;
             r9 = TRUE;
         }
@@ -701,9 +701,9 @@ const u8 *xxx_format_string(const u8 *str, u8 *a1, u8 *r7, u16 r8)
             if (r10) {
                 r10 = FALSE;
                 r9 = FALSE;
-                if (r8 & 8) {
-                    AppendString_8014FA8(gUnknown_202E5D8, &a1, r7, r8);
-                    AppendString_8014FA8(gUnknown_80D48F4, &a1, r7, r8);
+                if (flags & 8) {
+                    AppendString_8014FA8(gUnknown_202E5D8, &dst, dstMax, flags);
+                    AppendString_8014FA8(gUnknown_80D48F4, &dst, dstMax, flags);
                 }
             }
             else if (r9) {
@@ -717,9 +717,9 @@ const u8 *xxx_format_string(const u8 *str, u8 *a1, u8 *r7, u16 r8)
                 r10 = TRUE;
                 r9 = TRUE;
             }
-            if (a1 + 1 < r7) {
-                *(a1++) = '#';
-                *(a1++) = chrPls1;
+            if (dst + 1 < dstMax) {
+                *(dst++) = '#';
+                *(dst++) = chrPls1;
             }
 
             str += 2;
@@ -815,54 +815,74 @@ const u8 *xxx_format_string(const u8 *str, u8 *a1, u8 *r7, u16 r8)
 
             if (txtPtr != NULL) {
 
-                if (AppendString_8014FA8(txtPtr, &a1, r7, r8))
+                if (AppendString_8014FA8(txtPtr, &dst, dstMax, flags))
                     break;
             }
         }
         else if (currChar == 0x81 || currChar == 0x82 || currChar == 0x83 || currChar == 0x84 || currChar == 0x87) {
-            if (a1 < r7) {
-                *(a1++) = currChar;
+            if (dst < dstMax) {
+                *(dst++) = currChar;
             }
             str++;
             if (*str == '\0')
                 break;
-            if (a1 < r7) {
-                *(a1++) = *str;
+            if (dst < dstMax) {
+                *(dst++) = *str;
             }
             str++;
         }
         else {
-            if (a1 < r7) {
-                *(a1++) = currChar;
+            if (dst < dstMax) {
+                *(dst++) = currChar;
             }
             str++;
         }
     }
 
-    *a1 = 0;
+    *dst = 0;
     if (*str == '\r') str++;
     if (*str == '\n') str++;
 
     return str;
 }
 
-bool8 AppendString_8014FA8(const u8 *str, u8 **r5, u8 *r6, u16 r3)
+bool8 AppendString_8014FA8(const u8 *str, u8 **dstPtr, u8 *dstMax, u16 flags)
 {
-    u8 *r2 = *r5;
+    u8 *dst = *dstPtr;
     while (*str != '\0') {
-        if (r3 & 0x80 && *str == '\r') {
-            *r5 = r2;
+        if (flags & 0x80 && *str == '\r') {
+            *dstPtr = dst;
             return TRUE;
         }
-        if (r2 < r6) {
-            *r2 = *str;
-            r2++;
+        if (dst < dstMax) {
+            *dst = *str;
+            dst++;
         }
         str++;
     }
 
-    *r5 = r2;
+    *dstPtr = dst;
     return FALSE;
+}
+
+#define FORMAT_STR_MAX_LEN 500
+
+void PrintFormatStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr)
+{
+    u8 formatString[FORMAT_STR_MAX_LEN];
+
+    xxx_format_string(str, formatString, formatString + FORMAT_STR_MAX_LEN, 0);
+    formatString[FORMAT_STR_MAX_LEN - 1] = '\0';
+    PrintStringOnWindow(x, y, formatString, windowId, terminatingChr);
+}
+
+void sub_8015034(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing)
+{
+    u8 formatString[FORMAT_STR_MAX_LEN];
+
+    xxx_format_string(str, formatString, formatString + FORMAT_STR_MAX_LEN, 0);
+    formatString[FORMAT_STR_MAX_LEN - 1] = '\0';
+    sub_8008F8C(x, y, formatString, windowId, terminatingChr, lineSpacing);
 }
 
 //

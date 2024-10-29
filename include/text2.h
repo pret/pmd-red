@@ -80,6 +80,7 @@ extern void sub_80089AC(const UnkTextStruct2 *, UnkTextStruct2_sub *);
 extern void CallPrepareTextbox_8008C54(u32);
 extern s32 sub_8008ED0(const u8 *);
 extern void sub_8009388(void);
-extern void PrintStringOnWindow(s32 x, u32 y, const u8 *str, u32 windowId, u32);
+void sub_8008F8C(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing);
+void PrintStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr);
 
 #endif // GUARD_TEXT2_H

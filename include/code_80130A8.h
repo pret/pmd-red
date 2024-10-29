@@ -41,7 +41,7 @@ void sub_80151C0(u32, u8 *);
 u32 sub_80154F0(void);
 void sub_80155F0(void);
 void DrawDialogueBoxString(void);
-void PrintFormatStringOnWindow(u32, u32, const u8 *, u32 windowId, u32);
+void PrintFormatStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 arg_0);
 const u8 *xxx_format_string(const u8 *str, u8 *a1, u8 *r7, u16 r8);
 
 #endif // GUARD_CODE_80130A8_H
