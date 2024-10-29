@@ -145,7 +145,7 @@ void sub_804178C(u8 param_1)
 
 u32 EntityGetStatusSprites(Entity *entity)
 {
-    return entity->axObj.info->statusIcons;
+    return GetEntInfo(entity)->statusIcons;
 }
 
 void sub_8041888(u8 param_1)
@@ -158,7 +158,7 @@ void sub_8041888(u8 param_1)
         entity = gDungeon->allPokemon[index];
         if(EntityExists(entity))
         {
-            entityInfo = entity->axObj.info;
+            entityInfo = GetEntInfo(entity);
             if(param_1)
             {
                 entityInfo->unk14C = 1;
@@ -177,7 +177,7 @@ void EntityUpdateStatusSprites(Entity *entity)
   u8 temp;
 
   if (EntityExists(entity)) {
-    entityInfo = entity->axObj.info;
+    entityInfo = GetEntInfo(entity);
     spriteStatus = 0;
     flag = TRUE;
 
@@ -501,7 +501,7 @@ void sub_8041D5C(Entity *pokemon)
     if (!sub_8042768(pokemon))
         return;
 
-    sub_803ED30(pokemon->axObj.info->stockpileStage, pokemon, 1, 11);
+    sub_803ED30(GetEntInfo(pokemon)->stockpileStage, pokemon, 1, 11);
 }
 
 void sub_8041D84(Entity *pokemon)
@@ -886,7 +886,7 @@ void sub_8042208(Entity *pokemon, u8 r1)
 
 void sub_8042238(Entity *pokemon, Entity *target)
 {
-    if(target->axObj.info->isNotTeamMember)
+    if(GetEntInfo(target)->isNotTeamMember)
         PlaySoundEffect(0x157);
     else
         PlaySoundEffect(0x156);
