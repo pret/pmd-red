@@ -103,7 +103,7 @@ SECTIONS {
         src/code_8012A18.o(.text);
         src/menu_input.o(.text);
         asm/code_80130A8.o(.text);
-        src/code_80140DC.o(.text);
+        src/string_format.o(.text);
         src/code_8015080.o(.text);
         asm/code_8015080.o(.text);
         src/code_8012A18_1.o(.text);
@@ -443,7 +443,7 @@ SECTIONS {
         src/quick_save_read.o(.rodata);
         src/quick_save_write.o(.rodata);
         src/menu_input.o(.rodata);
-        src/code_80140DC.o(.rodata);
+        src/string_format.o(.rodata);
         data/data_80D47B8.o(.rodata);
         src/common_strings.o(.rodata);
         src/code_8015080.o(.rodata);

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_800D090.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_802F204.h"
 #include "code_8094F88.h"
 #include "code_8097670.h"

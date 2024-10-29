@@ -4,7 +4,7 @@
 #include "menu_input.h"
 #include "sprite.h"
 #include "code_80118A4.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "bg_palette_buffer.h"
 #include "input.h"
 #include "text1.h"
@@ -121,10 +121,10 @@ extern void sub_8008274(s32 a0, const u8 *compressedData, s32 a2);
 extern void sub_80073E0(s32 a0);
 extern void sub_8011A04(void);
 
-void sub_8014A88(void);
-bool8 sub_8014B94(void);
+static void sub_8014A88(void);
+static bool8 sub_8014B94(void);
 static void nullsub_35(void);
-bool8 AppendString_8014FA8(const u8 *, u8 **, u8 *, u16 r3);
+static bool8 AppendString(const u8 *, u8 **, u8 *, u16 r3);
 
 // 'd', 'v' and 'V'
 EWRAM_DATA s32 gFormatData_202DE30[10] = {0};
@@ -199,19 +199,19 @@ void sub_801416C(s32 param_1,s32 param_2)
     gUnknown_202E73C = (param_2 < 0 ) ? 0 : param_2;
 }
 
-void CreateDialogueBoxAndPortrait(const u8 *text, void *param_2, struct MonPortraitMsg *monPortraitPtr, u16 param_4)
+void CreateDialogueBoxAndPortrait(const u8 *text, void *param_2, struct MonPortraitMsg *monPortraitPtr, u16 flags)
 {
-    CreateMenuDialogueBoxAndPortrait(text, param_2, -1, NULL, NULL, 3, 0, monPortraitPtr, param_4);
+    CreateMenuDialogueBoxAndPortrait(text, param_2, -1, NULL, NULL, 3, 0, monPortraitPtr, flags);
 }
 
-void CreateYesNoDialogueBoxAndPortrait_DefaultYes(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 param_3)
+void CreateYesNoDialogueBoxAndPortrait_DefaultYes(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 flags)
 {
-    CreateMenuDialogueBoxAndPortrait(text, NULL, -1, gUnknown_80D485C, NULL, 3, 0, monPortraitPtr, param_3 | 0x300);
+    CreateMenuDialogueBoxAndPortrait(text, NULL, -1, gUnknown_80D485C, NULL, 3, 0, monPortraitPtr, flags | 0x300);
 }
 
-void CreateYesNoDialogueBoxAndPortrait_DefaultNo(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 param_3)
+void CreateYesNoDialogueBoxAndPortrait_DefaultNo(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 flags)
 {
-    CreateMenuDialogueBoxAndPortrait(text, NULL, -1, gUnknown_80D4880, NULL, 3, 0, monPortraitPtr, param_3 | 0x300);
+    CreateMenuDialogueBoxAndPortrait(text, NULL, -1, gUnknown_80D4880, NULL, 3, 0, monPortraitPtr, flags | 0x300);
 }
 
 void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const MenuItem *menuItems, void *arg_0, u32 a5, u32 unknownUnused, struct MonPortraitMsg *monPortraitPtr, u16 flags)
@@ -618,7 +618,7 @@ void DrawDialogueBoxString(void)
     }
 }
 
-void sub_8014A88(void)
+static void sub_8014A88(void)
 {
     s32 r2, r1;
     u8 text[128];
@@ -668,7 +668,7 @@ void sub_8014A88(void)
     }
 }
 
-bool8 sub_8014B94(void)
+static bool8 sub_8014B94(void)
 {
     if (!sub_8012FD8(&gUnknown_202EBC0)) {
         sub_8013114(&gUnknown_202EBC0, &gUnknown_202EC1C);
@@ -705,8 +705,8 @@ const u8 *xxx_format_string(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
                 r10 = FALSE;
                 r9 = FALSE;
                 if (flags & 8) {
-                    AppendString_8014FA8(gUnknown_202E5D8, &dst, dstMax, flags);
-                    AppendString_8014FA8(gUnknown_80D48F4, &dst, dstMax, flags);
+                    AppendString(gUnknown_202E5D8, &dst, dstMax, flags);
+                    AppendString(gUnknown_80D48F4, &dst, dstMax, flags);
                 }
             }
             else if (r9) {
@@ -818,7 +818,7 @@ const u8 *xxx_format_string(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
 
             if (txtPtr != NULL) {
 
-                if (AppendString_8014FA8(txtPtr, &dst, dstMax, flags))
+                if (AppendString(txtPtr, &dst, dstMax, flags))
                     break;
             }
         }
@@ -849,7 +849,7 @@ const u8 *xxx_format_string(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
     return str;
 }
 
-bool8 AppendString_8014FA8(const u8 *str, u8 **dstPtr, u8 *dstMax, u16 flags)
+static bool8 AppendString(const u8 *str, u8 **dstPtr, u8 *dstMax, u16 flags)
 {
     u8 *dst = *dstPtr;
     while (*str != '\0') {

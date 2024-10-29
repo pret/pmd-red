@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_801B3C0.h"
 #include "iq_skill_menu.h"
 #include "code_801EE10.h"

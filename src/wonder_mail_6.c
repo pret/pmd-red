@@ -7,7 +7,7 @@
 #include "pokemon.h"
 #include "code_8094F88.h"
 #include "menu_input.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
 

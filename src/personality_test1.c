@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "bg_palette_buffer.h"
 #include "code_2.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_801602C.h"
 #include "code_8094D28.h"
 #include "code_8099360.h"

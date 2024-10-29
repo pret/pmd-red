@@ -2,7 +2,7 @@
 #define GUARD_DUNGEON_MESSAGE_H
 
 #include "structs/dungeon_entity.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 
 struct MonDialogueSpriteInfo
 {

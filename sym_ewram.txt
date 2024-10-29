@@ -182,7 +182,7 @@ gUnknown_202DE19: /* 202DE19 (sub_800F990 - sub_8010014) */
 
     .include "src/save.o"
 	.space 4
-    .include "src/code_80140DC.o"
+    .include "src/string_format.o"
 	.space 4
 
 

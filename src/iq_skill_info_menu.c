@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80118A4.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "iq_skill_info_menu.h"
 #include "code_8097DD0.h"
 #include "input.h"

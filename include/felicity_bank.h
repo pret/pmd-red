@@ -4,7 +4,7 @@
 #include "file_system.h"
 #include "structs/menu.h"
 #include "structs/str_text.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 
 #define FELICITY_BANK_ACTION_WITHDRAW 0
 #define FELICITY_BANK_ACTION_DEPOSIT 1

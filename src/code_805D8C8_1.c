@@ -15,7 +15,7 @@
 #include "dungeon_music.h"
 #include "dungeon_ai_movement.h"
 #include "code_8045A00.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_803E46C.h"
 #include "code_801602C.h"
 #include "code_800D090.h"

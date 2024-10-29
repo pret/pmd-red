@@ -4,7 +4,7 @@
 #include "file_system.h"
 #include "structs/str_text.h"
 #include "structs/str_wonder_mail.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 
 // size: 0xA8
 struct unkStruct_203B2FC

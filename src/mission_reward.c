@@ -8,7 +8,7 @@
 #include "input.h"
 #include "items.h"
 #include "memory.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_80118A4.h"
 #include "code_801B60C.h"
 #include "text1.h"

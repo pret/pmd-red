@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "bg_palette_buffer.h"
 #include "code_800D090.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "iq_skill_menu.h"
 #include "code_801D014.h"
 #include "code_80227B8.h"

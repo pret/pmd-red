@@ -5,7 +5,7 @@
 #include "structs/menu.h"
 #include "structs/str_text.h"
 #include "structs/str_moves.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 
 // size: 0x18C
 typedef struct GulpinShopWork

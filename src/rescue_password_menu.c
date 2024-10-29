@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_803D0D8.h"
 #include "code_8094F88.h"
 #include "constants/main_menu.h"

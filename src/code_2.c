@@ -5,7 +5,7 @@
 #include "code_8009804.h"
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_8094F88.h"
 #include "code_8097670.h"
 #include "constants/bg_music.h"

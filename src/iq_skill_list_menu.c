@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "constants/input.h"
 #include "code_80118A4.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "iq_skill_list_menu.h"
 #include "input.h"
 #include "memory.h"

@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "memory.h"
 #include "save.h"
 #include "save_read.h"

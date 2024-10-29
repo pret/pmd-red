@@ -3,7 +3,7 @@
 #include "code_80118A4.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "common_strings.h"
 #include "gulpin_shop.h"
 #include "input.h"

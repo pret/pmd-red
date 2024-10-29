@@ -3,7 +3,7 @@
 #include "dungeon.h"
 #include "structs/dungeon_entity.h"
 #include "code_803E46C.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_800E9E4.h"
 #include "menu_input.h"
 #include "code_803E668.h"

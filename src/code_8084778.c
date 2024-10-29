@@ -1,6 +1,6 @@
 #include "global.h"
 #include "code_8084778.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_80958E8.h"
 #include "mailbox.h"
 #include "pokemon_mid.h"

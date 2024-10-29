@@ -7,7 +7,7 @@
 #include "dungeon_music.h"
 #include "dungeon_util.h"
 #include "items.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 
 extern u8 *gUnknown_80F8BE0[];
 extern u8 *gItemStickyCannotMove1[];

@@ -10,7 +10,7 @@
 #include "code_800D090.h"
 #include "text_util.h"
 #include "text2.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include <stddef.h>
 
 extern struct FileArchive gSystemFileArchive;

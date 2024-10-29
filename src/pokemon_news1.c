@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80118A4.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_80958E8.h"
 #include "constants/input.h"
 #include "input.h"
