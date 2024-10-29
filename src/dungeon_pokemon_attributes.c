@@ -219,8 +219,8 @@ u8 GetMoveTypeForMonster(Entity *pokemon, Move *pokeMove)
 {
     if (pokeMove->id == MOVE_HIDDEN_POWER)
         return GetEntInfo(pokemon)->hiddenPower.hiddenPowerType;
-        else
-            return GetMoveType(pokeMove);
+    else
+        return GetMoveType(pokeMove);
 }
 
 s32 GetMovePower(Entity *pokemon, Move *pokeMove)
