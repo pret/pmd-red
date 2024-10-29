@@ -487,7 +487,7 @@ void sub_8049ED4(void)
             Entity *tileObject = tile->object;
             if (tileObject != NULL) {
                 if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || unk1820F)) {
-                    u8 trapType = tileObject->info->flags;
+                    u8 trapType = tileObject->axObj.info->flags;
                     src = &dungeon->unk12A18[trapType][r7];
                 }
                 else {
@@ -532,7 +532,7 @@ void sub_8049ED4(void)
                     Entity *tileObject = tile->object;
                     if (tileObject != NULL) {
                         if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || unk1820F)) {
-                            u8 trapType = tileObject->info->flags;
+                            u8 trapType = tileObject->axObj.info->flags;
                             src = &dungeon->unk12A18[trapType][r7];
                         }
                         else {
@@ -602,7 +602,7 @@ void sub_804A1F0(s32 a0, s32 a1)
         Entity *tileObject = tile->object;
         if (tileObject != NULL) {
             if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || unk1820F)) {
-                u8 trapType = tileObject->info->flags;
+                u8 trapType = tileObject->axObj.info->flags;
                 src = &dungeon->unk12A18[trapType][r6];
             }
             else {
@@ -643,7 +643,7 @@ void sub_804A1F0(s32 a0, s32 a1)
                 Entity *tileObject = tile->object;
                 if (tileObject != NULL) {
                     if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || unk1820F)) {
-                        u8 trapType = tileObject->info->flags;
+                        u8 trapType = tileObject->axObj.info->flags;
                         src = &dungeon->unk12A18[trapType][r6];
                     }
                     else {
@@ -703,7 +703,7 @@ void sub_804A49C(s32 a0, s32 a1)
         Entity *tileObject = tile->object;
         if (tileObject != NULL) {
             if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || unk1820F)) {
-                u8 trapType = tileObject->info->flags;
+                u8 trapType = tileObject->axObj.info->flags;
                 src = &dungeon->unk12A18[trapType][r6];
             }
             else {
@@ -744,7 +744,7 @@ void sub_804A49C(s32 a0, s32 a1)
                 Entity *tileObject = tile->object;
                 if (tileObject != NULL) {
                     if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || unk1820F)) {
-                        u8 trapType = tileObject->info->flags;
+                        u8 trapType = tileObject->axObj.info->flags;
                         src = &dungeon->unk12A18[trapType][r6];
                     }
                     else {

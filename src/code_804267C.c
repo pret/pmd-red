@@ -79,7 +79,7 @@ void sub_8042730(Entity *a0, void *unused)
     sub_806CDD4(a0, 8, 8);
     for (i = 0; i < 100; i++) {
         sub_803E46C(0x51);
-        if ((a0->spriteInfo.unk18 & 3) != 0 || a0->unk6B != 8)
+        if ((a0->axObj.axdata.sub1.unk10 & 3) != 0 || a0->axObj.unk43_animId2 != 8)
             break;
     }
 }
@@ -106,7 +106,7 @@ void sub_80427AC(void)
     for (i = 0; i < 20; i++) {
         entity = gDungeon->allPokemon[i];
         if (EntityExists(entity)) {
-            enInfo = entity->info;
+            enInfo = entity->axObj.info;
             if (enInfo->unkF3) {
                 enInfo->unkF3 = FALSE;
                 sub_80429A0(entity);

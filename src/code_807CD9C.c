@@ -81,7 +81,7 @@ void sub_807CD9C(Entity *pokemon, Entity *target, u32 direction)
         }
         else
         {
-            (target->info->action).direction = (direction + 4) & DIRECTION_MASK;
+            (target->axObj.info->action).direction = (direction + 4) & DIRECTION_MASK;
             sub_806CDD4(target, 6, (direction + 4) & DIRECTION_MASK);
             sub_80421C0(target,0x1a3);
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80F8A0C); // {POKEMON_0} was blown away!
@@ -150,7 +150,7 @@ void sub_807CD9C(Entity *pokemon, Entity *target, u32 direction)
                 return;
             }
             sub_806CE68(target,8);
-            if (target->info->isTeamLeader) {
+            if (target->axObj.info->isTeamLeader) {
                 gDungeon->unk1 = 0;
                 gDungeon->unk5C0 = -1;
                 sub_804AC20(&target->pos);
@@ -223,7 +223,7 @@ void sub_807D148(Entity *pokemon, Entity *target, u32 param_3, Position *pos)
     Position pos2;
     bool8 flag;
 
-    info = target->info;
+    info = target->axObj.info;
     flag = FALSE;
 
     SetMessageArgument(gFormatBuffer_Monsters[0],target,0);

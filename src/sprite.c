@@ -34,7 +34,7 @@ UNUSED // TODO: Remove the "UNUSED" attribute after AddAxSprite is done
 #endif
 static void RegisterSpriteParts_80052BC(UnkSpriteMem *);
 
-static void AxResInitUnoriented(EntitySpriteInfo *, Dungeon_ax *, u32, u32, u32, bool8);
+static void AxResInitUnoriented(axdata *, axmain *, u32, u32, u32, bool8);
 
 void InitSprites(void)
 {
@@ -223,7 +223,7 @@ static void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, u16 *spriteM
     sprite->attrib3 = tileNum | (sprite->attrib3 & 0xFC00);
 
     x = (sprite->attrib2 & 0x1FF) - 256;
-    x += a1->xPos;
+    x += a1->pos.x;
     if (x < -64)
         return;
     if (x >= DISPLAY_WIDTH)
@@ -236,7 +236,7 @@ static void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, u16 *spriteM
     earlyMask = 0xFFF;
 
     y = (uVar9 >> 20) - 512;
-    y += a1->yPos;
+    y += a1->pos.y;
     if (y < -64)
         return;
     if (y >= DISPLAY_HEIGHT)
@@ -901,59 +901,59 @@ void sub_800533C(ax_pose **a0, UnkSpriteMem **a1, axdata1 *a2, u16 *spriteMasks,
     }
 }
 
-void AxResInitFile(EntitySpriteInfo *a0, OpenedFile *a1, u32 a2, u32 a3, u32 a4, u32 spriteAnimIndex, bool8 a6)
+void AxResInitFile(axdata *a0, OpenedFile *a1, u32 a2, u32 a3, u32 a4, u32 spriteAnimIndex, bool8 a6)
 {
-    AxResInit(a0, (Dungeon_ax *)a1->data, a2, a3, a4, spriteAnimIndex, a6);
+    AxResInit(a0, (axmain *)a1->data, a2, a3, a4, spriteAnimIndex, a6);
 }
 
-void AxResInit(EntitySpriteInfo *a0, Dungeon_ax *a1, u32 a2, u32 direction, u32 a4, u32 spriteAnimIndex, bool8 a6)
+void AxResInit(axdata *a0, axmain *a1, u32 a2, u32 direction, u32 a4, u32 spriteAnimIndex, bool8 a6)
 {
-    a0->unk0 = 0x8000;
+    a0->flags = 0x8000;
     if (a6)
-        a0->unk0 |= 0x1000;
+        a0->flags |= 0x1000;
 
-    a0->spriteAnimationCounter = 0;
-    a0->spriteAnimationIndex = spriteAnimIndex;
-    a0->spritePosOffset.x = 0;
-    a0->spritePosOffset.y = 0;
-    a0->unk1C = a4;
-    a0->spriteIndexForEntity = 0xFFFF;
-    a0->spriteIndexForEntity2 = 0xFFFF;
-    a0->unk14 = 0;
-    a0->unk18 = 0;
-    a0->spriteAnimationCounter2 = 0;
-    a0->spriteBaseForDirection = a1->unk4[a2][direction];
-    a0->spriteGlobalIndex = a0->spriteBaseForDirection;
-    a0->unk34 = a1->unk0;
-    a0->unk38 = a1->unkC;
-    a0->unk30 = a1->unk10;
+    a0->animFrames = 0;
+    a0->animWaitFrames = spriteAnimIndex;
+    a0->sub1.offset.x = 0;
+    a0->sub1.offset.y = 0;
+    a0->sub1.vramTileOrMaybeAnimTimer = a4;
+    a0->sub1.poseId = 0xFFFF;
+    a0->sub1.lastPoseId = 0xFFFF;
+    a0->sub1.unkC = 0;
+    a0->sub1.unk10 = 0;
+    a0->totalFrames = 0;
+    a0->nextAnimData = a1->animations[a2][direction];
+    a0->activeAnimData = a0->nextAnimData;
+    a0->poseData = a1->poses;
+    a0->spriteData = a1->spriteData;
+    a0->paletteData = a1->palettes;
 }
 
-void AxResInitUnorientedFile(EntitySpriteInfo *a0, OpenedFile *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
+void AxResInitUnorientedFile(axdata *a0, OpenedFile *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
 {
-    AxResInitUnoriented(a0, (Dungeon_ax *)a1->data, a2, a3, spriteAnimIndex, a5);
+    AxResInitUnoriented(a0, (axmain *)a1->data, a2, a3, spriteAnimIndex, a5);
 }
 
-static void AxResInitUnoriented(EntitySpriteInfo *a0, Dungeon_ax *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
+static void AxResInitUnoriented(axdata *a0, axmain *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
 {
-    a0->unk0 = 0x8000;
+    a0->flags = 0x8000;
     if (a5)
-        a0->unk0 |= 0x1000;
+        a0->flags |= 0x1000;
 
-    a0->spriteAnimationCounter = 0;
-    a0->spriteAnimationIndex = spriteAnimIndex;
-    a0->spritePosOffset.x = 0;
-    a0->spritePosOffset.y = 0;
-    a0->unk1C = a3;
-    a0->spriteIndexForEntity = 0xFFFF;
-    a0->spriteIndexForEntity2 = 0xFFFF;
-    a0->unk14 = 0;
-    a0->unk18 = 0;
-    a0->spriteAnimationCounter2 = 0;
-    a0->spriteBaseForDirection = a1->unk4[a2][0];
-    a0->spriteGlobalIndex = a0->spriteBaseForDirection;
-    a0->unk34 = a1->unk0;
-    a0->unk30 = 0;
+    a0->animFrames = 0;
+    a0->animWaitFrames = spriteAnimIndex;
+    a0->sub1.offset.x = 0;
+    a0->sub1.offset.y = 0;
+    a0->sub1.vramTileOrMaybeAnimTimer = a3;
+    a0->sub1.poseId = 0xFFFF;
+    a0->sub1.lastPoseId = 0xFFFF;
+    a0->sub1.unkC = 0;
+    a0->sub1.unk10 = 0;
+    a0->totalFrames = 0;
+    a0->nextAnimData = a1->animations[a2][0];
+    a0->activeAnimData = a0->nextAnimData;
+    a0->poseData = a1->poses;
+    a0->paletteData = 0;
 }
 
 static inline s16 check_flag_for_80054BC(u16 flags) {
@@ -964,7 +964,7 @@ static inline s16 check_flag_for_80054BC(u16 flags) {
 }
 
 
-void RunAxAnimationFrame(struct axPokemon *a0)
+void RunAxAnimationFrame(struct axObject *a0)
 {
     ax_anim *aData;
 
@@ -1002,10 +1002,10 @@ void RunAxAnimationFrame(struct axPokemon *a0)
     aData = a0->axdata.activeAnimData;
     a0->axdata.animFrames = aData->frames;
     a0->axdata.sub1.poseId = aData->poseId;
-    a0->axdata.sub1.xOffset = aData->xOffset;
-    a0->axdata.sub1.yOffset = aData->yOffset;
-    a0->axdata.sub1.xShadow = aData->xShadow;
-    a0->axdata.sub1.yShadow = aData->yShadow;
+    a0->axdata.sub1.offset.x = aData->offset.x;
+    a0->axdata.sub1.offset.y = aData->offset.y;
+    a0->axdata.sub1.shadow.x = aData->shadow.x;
+    a0->axdata.sub1.shadow.y = aData->shadow.y;
     a0->axdata.sub1.unkC = aData->unkFlags;
     a0->axdata.sub1.unk10 |= aData->unkFlags;
     a0->axdata.activeAnimData = aData + 1;

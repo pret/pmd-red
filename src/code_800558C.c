@@ -34,7 +34,7 @@ extern s32 cos_4096(s32);
 static void sub_800561C(struct unkStructFor800561C *, s32, s32, u8 *);
 s32 *sub_8005674(struct unkStructFor800561C *, s32);
 
-void DoAxFrame_800558C(struct axPokemon *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, u16 *spriteMasks)
+void DoAxFrame_800558C(struct axObject *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, u16 *spriteMasks)
 {
     if (!(a0->axdata.flags >> 15))
         return;
@@ -45,8 +45,8 @@ void DoAxFrame_800558C(struct axPokemon *a0, s32 spriteX, s32 spriteY, u32 a3, u
     if (!(a0->axdata.flags >> 15))
         return;
 
-    a0->axdata.sub1.xPos = a0->axdata.sub1.xOffset + spriteX;
-    a0->axdata.sub1.yPos = a0->axdata.sub1.yOffset + spriteY;
+    a0->axdata.sub1.pos.x = a0->axdata.sub1.offset.x + spriteX;
+    a0->axdata.sub1.pos.y = a0->axdata.sub1.offset.y + spriteY;
     a0->axdata.sub1.paletteNum = paletteNum;
     a0->axdata.sub1.unk16 = a3;
     sub_800533C(a0->axdata.poseData, a0->axdata.spriteData, &a0->axdata.sub1, spriteMasks, !!(a0->axdata.sub1.lastPoseId ^ a0->axdata.sub1.poseId));
@@ -87,68 +87,64 @@ s32 *sub_8005674(struct unkStructFor800561C *a0, s32 a1)
     return a0->unk18;
 }
 
-// a0 is an s16[2] and a1 is not confirmed to be (struct axPokemon *) yet
-void sub_800569C(s16 *a0, struct axPokemon *a1, u8 a2)
+void sub_800569C(Position *a0, struct axObject *a1, u8 a2)
 {
-    s16 *ptr;
-    s16 *ptr2;
-    s16 *ptr3;
+    Position *ptr;
+    Position *ptr2;
+    Position *ptr3;
 
-    a0[0] = 0;
-    a0[1] = 0;
+    a0->x = 0;
+    a0->y = 0;
 
     if (!(a1->axdata.flags >> 15) || a2 >= 4)
         return;
 
     if (a1->axdata.paletteData != NULL) {
-        ptr = (s16 *)a1->axdata.paletteData;
-        ptr += a1->axdata.sub1.poseId * 8;
-        ptr2 = ptr + (a2 * 2);
-        if (ptr2[0] == 99 && ptr2[1] == 99) {
-            a0[0] = 99;
-            a0[1] = 99;
+        ptr = &((Position*)a1->axdata.paletteData)[a1->axdata.sub1.poseId * 4];
+        ptr2 = &ptr[a2];
+        if (*&ptr2->x == 99 && *&ptr2->y == 99) {
+            a0->x = 99;
+            a0->y = 99;
         }
         else {
-            ptr3 = ptr + (a2 * 2);
-            a0[0] = a1->axdata.sub1.xOffset + ptr3[0];
-            a0[1] = a1->axdata.sub1.yOffset + ptr3[1];
+            ptr3 = &ptr[a2];
+            a0->x = a1->axdata.sub1.offset.x + ptr3->x;
+            a0->y = a1->axdata.sub1.offset.y + ptr3->y;
         }
     }
     else {
-        a0[0] = 99;
-        a0[1] = 99;
+        a0->x = 99;
+        a0->y = 99;
     }
 }
 
-// a0 is an s16[12] and a1 is not confirmed to be (struct axPokemon *) yet
-void sub_8005700(s16 *a0, struct axPokemon *a1)
+void sub_8005700(Position *a0, struct axObject *a1)
 {
     s32 i;
-    s16 *ptr;
+    Position *ptr;
 
     if (!(a1->axdata.flags >> 15))
         return;
 
     if (a1->axdata.paletteData != NULL) {
-        ptr = (s16 *)a1->axdata.paletteData;
-        ptr += a1->axdata.sub1.poseId * 8;
-        for (i = 0; i <= 6; i += 2) {
-            if (ptr[i] == 99 && ptr[i + 1] == 99) {
-                a0[0] = 99;
-                a0[1] = 99;
+        ptr = &((Position*)a1->axdata.paletteData)[a1->axdata.sub1.poseId * 4];
+        for (i = 0; i < 4; i++) {
+            if (*&ptr[i].x == 99 && *&ptr[i].y == 99) {
+                a0->x = 99;
+                a0->y = 99;
             }
             else {
-                a0[0] = a1->axdata.sub1.xOffset + ptr[i];
-                a0[1] = a1->axdata.sub1.yOffset + ptr[i + 1];
+                a0->x = a1->axdata.sub1.offset.x + ptr[i].x;
+                a0->y = a1->axdata.sub1.offset.y + ptr[i].y;
             }
-            a0 += 2;
+            a0++;
         }
     }
     else {
         for (i = 0; i < 4; i++) {
-            a0[0] = 99;
-            a0[1] = 99;
-            a0 += 2;
+            a0->x = 99;
+            a0->y = 99;
+            a0++;
         }
     }
 }

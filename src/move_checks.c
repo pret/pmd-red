@@ -104,7 +104,7 @@ const u8 gDungeonCamouflageTypes[76] = {
 
 bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
 {
-    EntityInfo *pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemon->axObj.info;
     switch (move->id)
     {
         case MOVE_HAIL:
@@ -172,7 +172,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
 #else
             r1 = 0;
 #endif
-            if (pokemon->info->speedStage >= MAX_SPEED_STAGE)
+            if (pokemon->axObj.info->speedStage >= MAX_SPEED_STAGE)
             {
                 r1 = !r1;
                 return FALSE;
@@ -284,7 +284,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_DRAGON_DANCE:
-            if (pokemonInfo->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE && pokemon->info->speedStage >= MAX_SPEED_STAGE)
+            if (pokemonInfo->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE && pokemon->axObj.info->speedStage >= MAX_SPEED_STAGE)
             {
                 return FALSE;
             }
@@ -497,11 +497,11 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
                     Entity *target = gDungeon->wildPokemon[i];
                     if (EntityExists(target) && target != pokemon && CanSeeTarget(pokemon, target))
                     {
-                        if (target->info->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE)
+                        if (target->axObj.info->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE)
                         {
                             continue;
                         }
-                        if (target->info->offensiveStages[STAT_STAGE_SP_ATK] < MAX_STAT_STAGE)
+                        if (target->axObj.info->offensiveStages[STAT_STAGE_SP_ATK] < MAX_STAT_STAGE)
                         {
                             break;
                         }
@@ -521,11 +521,11 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
                     Entity *target = gDungeon->teamPokemon[i];
                     if (EntityExists(target) && target != pokemon && CanSeeTarget(pokemon, target))
                     {
-                        if (target->info->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE)
+                        if (target->axObj.info->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE)
                         {
                             continue;
                         }
-                        if (target->info->offensiveStages[STAT_STAGE_SP_ATK] < MAX_STAT_STAGE)
+                        if (target->axObj.info->offensiveStages[STAT_STAGE_SP_ATK] < MAX_STAT_STAGE)
                         {
                             break;
                         }
@@ -543,8 +543,8 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
 
 bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
 {
-    EntityInfo *userData = user->info;
-    EntityInfo *targetData = target->info;
+    EntityInfo *userData = user->axObj.info;
+    EntityInfo *targetData = target->axObj.info;
     s32 i;
     if (targetData->immobilize.immobilizeStatus == STATUS_FROZEN && MoveCannotHitFrozen(move))
     {
@@ -622,7 +622,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
         case MOVE_COTTON_SPORE:
         case MOVE_SCARY_FACE:
         case MOVE_STRING_SHOT:
-            if (target->info->speedStage <= 0)
+            if (target->axObj.info->speedStage <= 0)
             {
                 return FALSE;
             }

@@ -32,7 +32,7 @@ static u8 sub_8046D70(void);
 bool8 HasHeldItem(Entity *pokemon, u8 id)
 {
     // Weird assignment to fix a regswap.
-    EntityInfo *pokemonInfo = pokemonInfo = pokemon->info;
+    EntityInfo *pokemonInfo = pokemonInfo = pokemon->axObj.info;
     if (!(pokemonInfo->heldItem.flags & ITEM_FLAG_EXISTS))
     {
         return FALSE;
@@ -176,7 +176,7 @@ bool8 sub_8046F00(Item *item)
       {
         entity = gDungeon->teamPokemon[index];
         if (EntityExists(entity)) {
-          canLearnMove = CanMonLearnMove(moveID, entity->info->id);
+          canLearnMove = CanMonLearnMove(moveID, entity->axObj.info->id);
           cannotMove = CheckVariousStatuses2(entity, FALSE);
           if (cannotMove) {
             canLearnMove = FALSE;
@@ -213,7 +213,7 @@ void sub_8046F84(s32 itemFlag)
   {
     entity = gDungeon->teamPokemon[index];
     if (EntityExists(entity)) {
-      entityInfo = entity->info;
+      entityInfo = entity->axObj.info;
       item = &entityInfo->heldItem;
       if ((item->flags & ITEM_FLAG_EXISTS) && (item->flags & itemFlag)) {
         item->id = 0;
@@ -244,7 +244,7 @@ void sub_804700C(void)
   {
     entity = gDungeon->teamPokemon[index];
     if (EntityExists(entity)) {
-      entityInfo = entity->info;
+      entityInfo = entity->axObj.info;
       item = &entityInfo->heldItem;
       if ((item->flags & ITEM_FLAG_EXISTS)) {
         xxx_init_itemslot_8090A8C(item, ITEM_PLAIN_SEED, 0);

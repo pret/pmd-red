@@ -49,7 +49,7 @@ void sub_8069E0C(Entity *pokemon)
   s32 index;
   EntityInfo *entityInfo;
 
-  entityInfo = pokemon->info;
+  entityInfo = pokemon->axObj.info;
   if (HasAbility(pokemon, ABILITY_FORECAST)) {
     entityInfo->types[0] = gUnknown_80F520C[GetApparentWeather(pokemon)].unk0;
     entityInfo->types[1] = TYPE_NONE;
@@ -140,9 +140,9 @@ void sub_8069F9C(Entity *pokemon,Entity * target,Move *move)
     return;
   }
 
-  iVar7 = pokemon->info;
+  iVar7 = pokemon->axObj.info;
   iVar8 = iVar7;
-  iVar6 = target->info;
+  iVar6 = target->axObj.info;
   abilityIndex = -1;
   if (iVar6->abilities[0] == ABILITY_TRACE) {
     abilityIndex = 0;
@@ -208,7 +208,7 @@ void sub_806A120(Entity * pokemon, Entity * target, Move* move)
   EntityInfo *entityInfo;
 
   if ((((EntityExists(pokemon)) && (EntityExists(target))) && (pokemon != target))
-     && (entityInfo = target->info, entityInfo->protection.protectionStatus == STATUS_CONVERSION2)) {
+     && (entityInfo = target->axObj.info, entityInfo->protection.protectionStatus == STATUS_CONVERSION2)) {
     moveType = GetMoveTypeForMonster(pokemon, move);
     uVar2_u32 = sub_8092364(moveType);
     if (uVar2_u32 != TYPE_NONE) {
@@ -238,7 +238,7 @@ void sub_806A1E8(Entity *pokemon)
   bVar3 = FALSE;
   if (EntityExists(pokemon)) {
     if (GetEntityType(pokemon) == ENTITY_MONSTER) {
-      entityInfo = pokemon->info;
+      entityInfo = pokemon->axObj.info;
       bVar3 = (!entityInfo->isNotTeamMember);
     }
     if (gGameOptionsRef->FarOffPals == '\0') {
@@ -258,7 +258,7 @@ void sub_806A240(Entity *pokemon, Entity *target)
   isNotTeamMember = FALSE;
   if (EntityExists(pokemon)){
     if (GetEntityType(pokemon) == ENTITY_MONSTER) {
-        entityInfo = pokemon->info;
+        entityInfo = pokemon->axObj.info;
         isNotTeamMember = (!entityInfo->isNotTeamMember);
     }
     if (isNotTeamMember && (!sub_8045888(pokemon))) {
@@ -266,7 +266,7 @@ void sub_806A240(Entity *pokemon, Entity *target)
         return;
     }
     else if (GetEntityType(target) == ENTITY_MONSTER) {
-        entityInfo = target->info;
+        entityInfo = target->axObj.info;
         isNotTeamMember = (!entityInfo->isNotTeamMember);
     }
     if (isNotTeamMember && (!sub_8045888(target))) {
@@ -318,7 +318,7 @@ void sub_806A390(Entity *pokemon)
     EntityInfo *info;
     Move *move;
 
-    info = pokemon->info;
+    info = pokemon->axObj.info;
     for(index = 0; index < MAX_MON_MOVES; index++)
     {
         move = &info->moves.moves[index];

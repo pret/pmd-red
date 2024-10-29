@@ -4,11 +4,18 @@
 typedef struct unkStruct_80B9CC4
 {
     // size: 0x24
-    s32 unk0;
-    s32 unk4;
-    u8 fill8[0x1c - 0x8];
+    u32 animType;
+    s32 effectId;
+    s32 unk8;
+    s32 animId;
+    s32 unk10;
+    s32 unk14;
+    s8 unk18;
+    // padding: 3 bytes
     s32 unk1c;
-    u8 fill20[0x24 - 0x20];
+    s8 unk20;
+    s8 loop;
+    // padding: 2 bytes
 } unkStruct_80B9CC4;
 
 typedef struct unkStruct_80BDBC4

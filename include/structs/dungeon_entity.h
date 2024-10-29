@@ -6,6 +6,7 @@
 #include "sprite.h"
 #include "structs/str_items.h"
 #include "structs/str_moves.h"
+#include "structs/axdata.h"
 
 #include "number_util.h"
 
@@ -351,16 +352,7 @@ typedef struct Entity
     // The global spawn index counter starts at 10. Each Pokémon that spawns increments the counter and
     // gets assigned the current counter value as its spawn index.
     /* 0x26 */ u16 spawnGenID;
-    /* 0x28*/ EntitySpriteInfo spriteInfo;
-    OpenedFile *sprite;
-    s16 unk68;
-    u8 unk6A;
-    u8 unk6B;
-    /* 0x6C */ u8 direction;
-    /* 0x6D */ u8 direction2; // Duplicate of 0x6C?
-    u8 unk6E;
-    u8 unk6F;
-    /* 0x70 */ EntityInfo *info;
+    /* 0x28 */ struct axObject axObj;
 } Entity;
 
 enum EntityType
@@ -460,7 +452,7 @@ static inline void SetExpMultplier(EntityInfo *info)
 
 static inline EntityInfo *GetEntInfo(Entity *ent)
 {
-    return ent->info;
+    return ent->axObj.info;
 }
 
 #endif
