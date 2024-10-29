@@ -41,7 +41,7 @@ extern void sub_8045DB4(Position *, u32);
 
 void HandlePickUpPlayerAction(Entity *entity)
 {
-  entity->axObj.info->action.unk4[0].actionUseIndex = 1;
+  GetEntInfo(entity)->action.unk4[0].actionUseIndex = 1;
   sub_8045DB4(&entity->pos,0);
 }
 
@@ -125,8 +125,8 @@ void HandleGiveItemAction(Entity *param_1)
   Item item3;
 
   entity = sub_8044DA4(param_1,1);
-  info1 = param_1->axObj.info;
-  info2 = entity->axObj.info;
+  info1 = GetEntInfo(param_1);
+  info2 = GetEntInfo(entity);
   item = sub_8044D90(param_1,0,2);
 
   if((info1->action).unk4[0].actionUseIndex == 0x80)
@@ -200,7 +200,7 @@ void HandleTakeItemAction(Entity *param_1)
   Item item;
 
   entity = sub_8044DA4(param_1,0);
-  info = entity->axObj.info;
+  info = entity->axObj.info; // GetEntInfo doesn't work here, probably fixable
   info2 = entity->axObj.info;
   heldItem = &info->heldItem;
   if ((gTeamInventoryRef->teamItems[ITEM_POWER_BAND].flags & ITEM_FLAG_EXISTS)) {
@@ -284,7 +284,7 @@ void HandleUseItemAction(Entity *param_1)
   Entity *entity;
 
   entity = sub_8044DA4(param_1,0);
-  entity->axObj.info->useHeldItem = TRUE;
+  GetEntInfo(entity)->useHeldItem = TRUE;
 }
 
 void HandlePlaceItemAction(Entity *param_1)
@@ -300,7 +300,7 @@ void HandlePlaceItemAction(Entity *param_1)
 
     entity = param_1;
 
-    info = entity->axObj.info;
+    info = GetEntInfo(entity);
     item = sub_8044D90(entity,0,4);
     sub_8045BF8(gFormatItems,item);
     if (info->action.unk4[0].actionUseIndex == 0x80) {

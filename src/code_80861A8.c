@@ -27,7 +27,7 @@ void sub_8052FB8(const u8 *);
 
 void sub_8086124(Entity *entity, u8 param_2)
 {
-    entity->axObj.info->unk160 = param_2;
+    GetEntInfo(entity)->unk160 = param_2;
 }
 
 void sub_8086130(void)
@@ -55,7 +55,7 @@ void sub_80861B8(Entity *a0, u8 r1, s32 direction)
 {
     EntityInfo *info;
 
-    info = a0->axObj.info;
+    info = GetEntInfo(a0);
 
     sub_806CDD4(a0, r1, direction);
     info->unkFE = r1;
@@ -69,7 +69,7 @@ void sub_80861D4(Entity *a0, u8 r1, s32 direction)
 
 void sub_80861EC(Entity *a0)
 {
-    a0->axObj.info->unkFE = 0x63;
+    GetEntInfo(a0)->unkFE = 0x63;
 }
 
 s32 sub_80861F8(s16 param_1,Entity *param_2,bool32 param_3)
@@ -91,7 +91,7 @@ s32 sub_80861F8(s16 param_1,Entity *param_2,bool32 param_3)
   sub_800EE5C(param_1);
   sub_800EF64();
   sub_803E46C(0x46);
-  info = param_2->axObj.info;
+  info = GetEntInfo(param_2);
   pos.x = 0;
   pos.y = 0;
   uStack_38 = sub_800E700(param_1_s32);

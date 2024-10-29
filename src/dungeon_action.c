@@ -53,7 +53,7 @@ void sub_8044820(void)
     entity = gDungeon->wildPokemon[index];
     if (EntityExists(entity)) {
       if (sub_8044B28()) break;
-      entityInfo = entity->axObj.info;
+      entityInfo = GetEntInfo(entity);
       gDungeon->unkB8 = entity;
       TriggerWeatherAbilities();
       if ((entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY) == 0) {
@@ -88,7 +88,7 @@ void sub_8044820(void)
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
       entity2 = gDungeon->wildPokemon[index];
-      if ((EntityExists(entity2)) && (entityInfo2 = entity2->axObj.info, entityInfo2->aiNextToTarget))
+      if ((EntityExists(entity2)) && (entityInfo2 = GetEntInfo(entity2), entityInfo2->aiNextToTarget))
       {
         sub_8074094(entity2);
         if (EntityExists(entity2)) {
@@ -103,7 +103,6 @@ void sub_8044820(void)
 void TrySpawnMonsterAndActivatePlusMinus(void)
 {
   EntityInfo * entityInfo;
-  EntityInfo * entityInfo2;
   Entity *entity;
   u32 isNotEnemy;
   s32 index;
@@ -121,8 +120,7 @@ void TrySpawnMonsterAndActivatePlusMinus(void)
     {
         entity = gDungeon->allPokemon[index];
         if (EntityExists(entity)) {
-            entityInfo = entity->axObj.info;
-            entityInfo2 = entityInfo;
+            entityInfo = GetEntInfo(entity);
             entityInfo->attacking = FALSE;
 
             if(entityInfo->isNotTeamMember)
@@ -135,7 +133,7 @@ void TrySpawnMonsterAndActivatePlusMinus(void)
 
             if (HasAbility(entity, ABILITY_LIGHTNINGROD)) {
                 gDungeon->lightningRodPokemon = entity;
-                gDungeon->unk17B38 = entityInfo2->unk98;
+                gDungeon->unk17B38 = entityInfo->unk98;
             }
             if (HasAbility(entity, ABILITY_MINUS)) {
                 gDungeon->minusIsActive[isNotEnemy] = TRUE;

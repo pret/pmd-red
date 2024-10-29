@@ -108,7 +108,7 @@ void sub_80427AC(void)
     for (i = 0; i < 20; i++) {
         entity = gDungeon->allPokemon[i];
         if (EntityExists(entity)) {
-            enInfo = entity->axObj.info;
+            enInfo = GetEntInfo(entity);
             if (enInfo->unkF3) {
                 enInfo->unkF3 = FALSE;
                 sub_80429A0(entity);
