@@ -2,7 +2,6 @@
 #include "globaldata.h"
 #include "code_80118A4.h"
 #include "string_format.h"
-#include "string_format.h"
 #include "code_801602C.h"
 #include "code_801B3C0.h"
 #include "code_8097670.h"

@@ -26,8 +26,6 @@
 #include "text1.h"
 #include "text2.h"
 
-// TODO: Clean this
-
 static EWRAM_DATA_2 unkStruct_203B2B8 *sUnknown_203B2B8 = {0};
 
 #include "data/party_list_menu.h"
