@@ -108,7 +108,7 @@ void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
   struct unkStruct_806B7F8 local_2c;
 
   id_s32 = id;
-  entityInfo = target->axObj.info;
+  entityInfo = GetEntInfo(target);
   SetMessageArgument_2(gFormatBuffer_Monsters[0],entityInfo,0);
   CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[1],id_s32);
   file = GetSpriteData(id_s32);

@@ -52,7 +52,7 @@ void sub_806CC10(void)
         entity = gDungeon->allPokemon[i];
 
         if (EntityExists(entity)) {
-            entityInfo = entity->axObj.info;
+            entityInfo = GetEntInfo(entity);
 
             if (entityInfo->unk166 != 0) {
                 entityInfo->unk166--;
@@ -82,7 +82,7 @@ void sub_806CCB4(Entity *entity, u8 a1)
     bool8 flag;
     EntityInfo *info;
 
-    info = entity->axObj.info;
+    info = GetEntInfo(entity);
     flag = gDungeon->unk181e8.hallucinating;
 
     if (entity == gDungeon->unk181e8.cameraTarget)
@@ -148,7 +148,7 @@ void sub_806CE34(Entity *entity, u32 newDir)
         entity->axObj.unk42_animId1 = sub_806CEBC(entity);
 
         if (newDir < NUM_DIRECTIONS) {
-            entity->axObj.info->action.direction = newDir & DIRECTION_MASK;
+            GetEntInfo(entity)->action.direction = newDir & DIRECTION_MASK;
             entity->axObj.unk44_direction1 = newDir & DIRECTION_MASK;
         }
     }
@@ -195,7 +195,7 @@ u8 sub_806CEBC(Entity *entity)
 
 void sub_806CEFC(Entity *entity, u32 newDir)
 {
-    entity->axObj.info->action.direction = newDir & DIRECTION_MASK;
+    GetEntInfo(entity)->action.direction = newDir & DIRECTION_MASK;
     sub_806CE68(entity, newDir & DIRECTION_MASK);
 }
 
@@ -207,7 +207,7 @@ void sub_806CF18(Entity *entity)
     if (!EntityExists(entity))
         return;
 
-    entityInfo = entity->axObj.info;
+    entityInfo = GetEntInfo(entity);
     for (i = 0; i < 100; i++) {
         sub_803E46C(33);
 
@@ -218,7 +218,7 @@ void sub_806CF18(Entity *entity)
 
 u8 sub_806CF54(Entity *entity)
 {
-    return entity->axObj.info->unk204;
+    return GetEntInfo(entity)->unk204;
 }
 
 void sub_806CF60(void)
@@ -243,7 +243,7 @@ u32 sub_806CF98(Entity *entity)
 
     mapTile = GetTileAtEntitySafe(entity);
     terrainType = mapTile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    entityInfo = entity->axObj.info;
+    entityInfo = GetEntInfo(entity);
     shadowSize = GetShadowSize(entityInfo->apparentID);
 
     if (terrainType == (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY))
@@ -342,19 +342,19 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
         return;
 
     r9 = arg8;
-    if (CheckVariousStatuses(target) || target->axObj.info->charging.chargingStatus != 0)
+    if (CheckVariousStatuses(target) || GetEntInfo(target)->charging.chargingStatus != 0)
         r9 = FALSE;
     if (r9
         && abs(attacker->pos.x - target->pos.x) <= 1 && abs(attacker->pos.y - target->pos.y) <= 1
         && attacker != target
         && IsTypePhysical(dmgStruct->type)
-        && target->axObj.info->protection.protectionStatus == STATUS_VITAL_THROW)
+        && GetEntInfo(target)->protection.protectionStatus == STATUS_VITAL_THROW)
     {
         sub_8042730(target, attacker);
         sub_807F43C(target, attacker);
     }
 
-    if (target->axObj.info->charging.chargingStatus == STATUS_ENRAGED) {
+    if (GetEntInfo(target)->charging.chargingStatus == STATUS_ENRAGED) {
         RaiseAttackStageTarget(attacker, target, gUnknown_8106A4C, 1);
     }
 
@@ -366,15 +366,15 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
         && abs(attacker->pos.x - target->pos.x) <= 1 && abs(attacker->pos.y - target->pos.y) <= 1)
     {
         bool32 isPhysical = IsTypePhysical(dmgStruct->type);
-        if (target->axObj.info->protection.protectionStatus == STATUS_COUNTER && isPhysical) {
+        if (GetEntInfo(target)->protection.protectionStatus == STATUS_COUNTER && isPhysical) {
             sub_8041B18(target);
             returnDmg += 4;
         }
-        if (target->axObj.info->protection.protectionStatus == STATUS_MINI_COUNTER && isPhysical) {
+        if (GetEntInfo(target)->protection.protectionStatus == STATUS_MINI_COUNTER && isPhysical) {
             sub_8041B18(target);
             returnDmg += 1;
         }
-        if (target->axObj.info->protection.protectionStatus == STATUS_MIRROR_COAT && !isPhysical) {
+        if (GetEntInfo(target)->protection.protectionStatus == STATUS_MIRROR_COAT && !isPhysical) {
             sub_8041B90(target);
             returnDmg += 4;
         }
@@ -405,7 +405,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
         && abs(attacker->pos.x - target->pos.x) <= 1 && abs(attacker->pos.y - target->pos.y) <= 1)
     {
         bool32 isPhysical = IsTypePhysical(dmgStruct->type);
-        EntityInfo *attackerInfo = attacker->axObj.info;
+        EntityInfo *attackerInfo = GetEntInfo(attacker);
 
         if (HasAbility(target, ABILITY_ARENA_TRAP)
             && !MonsterIsType(attacker, TYPE_FLYING)
@@ -477,7 +477,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
             if (destBondTarget == NULL) {
                 targetInfo->linked.linkedStatus = 0;
             }
-            else if (destBondTarget->axObj.info->unk98 != targetInfo->linked.unkD4) {
+            else if (GetEntInfo(destBondTarget)->unk98 != targetInfo->linked.unkD4) {
                 targetInfo->linked.linkedStatus = 0;
             }
             else {
@@ -513,7 +513,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     TrySendImmobilizeSleepEndMsg(attacker, target);
     SetShopkeeperAggression(attacker, target);
     if (GetEntityType(attacker) == ENTITY_MONSTER
-        && attacker->axObj.info->moveStatus.moveStatus == STATUS_SET_DAMAGE
+        && GetEntInfo(attacker)->moveStatus.moveStatus == STATUS_SET_DAMAGE
         && dmgStruct->unkE == 0)
     {
         dmgStruct->dmg = gUnknown_80F4F8C;
@@ -647,7 +647,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             }
             TargetTileInFront(target);
         }
-        sub_806CDD4(target, 6, target->axObj.info->action.direction);
+        sub_806CDD4(target, 6, GetEntInfo(target)->action.direction);
         sub_80420E8(target, dmgStruct);
         var_24 = TRUE;
     }
@@ -964,7 +964,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         }
     }
 
-    if (EntityExists(attacker) && GetEntityType(attacker) == ENTITY_MONSTER && !attacker->axObj.info->isTeamLeader)
+    if (EntityExists(attacker) && GetEntityType(attacker) == ENTITY_MONSTER && !GetEntInfo(attacker)->isTeamLeader)
         r10 = FALSE;
 
     if (r10) {

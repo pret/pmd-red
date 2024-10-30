@@ -162,8 +162,8 @@ bool8 sub_8047930(Entity *pokemon, Entity *target)
 {
   bool8 flag;
 
-  if (((target->axObj.info->shopkeeper == TRUE) ||
-       (target->axObj.info->clientType == CLIENT_TYPE_DONT_MOVE)) || (target->axObj.info->clientType == CLIENT_TYPE_CLIENT)) {
+  if (((GetEntInfo(target)->shopkeeper == TRUE) ||
+       (GetEntInfo(target)->clientType == CLIENT_TYPE_DONT_MOVE)) || (GetEntInfo(target)->clientType == CLIENT_TYPE_CLIENT)) {
     return FALSE;
   }
   else {
@@ -199,7 +199,7 @@ void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity
   if (param_1 != '\0') {
     if (param_2 == '\0') {
       flag = FALSE;
-      info = target->axObj.info;
+      info = GetEntInfo(target);
       if (info->isNotTeamMember) {
         if ((GetItemCategory(item->id) != CATEGORY_THROWN_LINE) && (GetItemCategory(item->id) != CATEGORY_BERRIES_SEEDS_VITAMINS)) {
           flag = GetItemCategory(item->id) == CATEGORY_THROWN_ARC ? FALSE : TRUE;
@@ -537,7 +537,7 @@ void EyedropSeedItemAction(Entity *pokemon, Entity *target)
 
 void CheriBerryItemAction(Entity *pokemon, Entity *target)
 {
-    if(target->axObj.info->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS)
+    if(GetEntInfo(target)->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS)
         SendNonVolatileEndMessage(pokemon, target);
     else
         // Pointer to "But nothing happened!"
@@ -546,7 +546,7 @@ void CheriBerryItemAction(Entity *pokemon, Entity *target)
 
 void PechaBerryItemAction(Entity *pokemon, Entity *target)
 {
-    if((u8)(target->axObj.info->nonVolatile.nonVolatileStatus - 2) <= 1)
+    if((u8)(GetEntInfo(target)->nonVolatile.nonVolatileStatus - 2) <= 1)
         SendNonVolatileEndMessage(pokemon, target);
     else
         // Pointer to "But nothing happened!"
@@ -591,7 +591,7 @@ void DoomSeedItemAction(Entity *pokemon, Entity *target)
 
 void RawstBerryItemAction(Entity *pokemon, Entity *target)
 {
-    if(target->axObj.info->nonVolatile.nonVolatileStatus == STATUS_BURN)
+    if(GetEntInfo(target)->nonVolatile.nonVolatileStatus == STATUS_BURN)
         SendNonVolatileEndMessage(pokemon, target);
     else
     {
@@ -603,12 +603,12 @@ void RawstBerryItemAction(Entity *pokemon, Entity *target)
 
 void HungerSeedItemAction(Entity *pokemon, Entity * target)
 {
-  EntityInfo *entityInfo = target->axObj.info;
-  if (target->axObj.info->isTeamLeader)
+  EntityInfo *entityInfo = GetEntInfo(target);
+  if (GetEntInfo(target)->isTeamLeader)
     sub_8078A58(pokemon, target, 0, 5);
   else
   {
-    entityInfo = target->axObj.info;
+    entityInfo = GetEntInfo(target);
     SetMessageArgument(gFormatBuffer_Monsters[0], target, 0);
     if (IQSkillIsEnabled(target, IQ_SELF_CURER))
         TryDisplayDungeonLoggableMessage3(pokemon, target, *gPtrSelfHealPreventedHungerMessage);
@@ -642,7 +642,7 @@ void GinsengItemAction(Entity *pokemon, Entity * target)
 
   isMoveBoosted = FALSE;
   moveBoost = 1;
-  entityInfo = target->axObj.info;
+  entityInfo = GetEntInfo(target);
   if (DungeonRandInt(100) < gUnknown_80F4F46)
     moveBoost = 3;
   if (entityInfo->isTeamLeader) {
@@ -684,7 +684,7 @@ void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
   u8 auStack28 [4];
 
   if (param_3 != 0) {
-    entityInfo = target->axObj.info;
+    entityInfo = GetEntInfo(target);
     entityInfo_1 = entityInfo;
     if (gDungeon->unk675 != 0) {
         uVar1 = gUnknown_80F4FA8;
@@ -708,7 +708,7 @@ void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
     }
     else
     {
-      entityInfo = entity->axObj.info;
+      entityInfo = GetEntInfo(entity);
       if (gDungeon->unk675 != 0) {
         uVar1 = gUnknown_80F4FAA;
         TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FEAE8);
@@ -739,7 +739,7 @@ void HandleGummiItemAction(Entity *pokemon, Entity *target, u8 gummiIndex)
   s32 iVar5;
   s32 currIQ;
 
-  targetInfo = target->axObj.info;
+  targetInfo = GetEntInfo(target);
   gummiBoost = gTypeGummiIQBoost[targetInfo->types[0]][gummiIndex];
   gummiBoost += gTypeGummiIQBoost[targetInfo->types[1]][gummiIndex];
   sub_8078B5C(pokemon,target,
@@ -826,7 +826,7 @@ bool8 sub_8048950(Entity *param_1,Item *item)
         {
             entity = gDungeon->teamPokemon[index];
             if (EntityExists(entity)) {
-                entityInfo = entity->axObj.info;
+                entityInfo = GetEntInfo(entity);
                 flag = CanMonLearnMove(moveID, entityInfo->id);
                 if (CheckVariousStatuses2(entity, FALSE)) {
                     flag = FALSE;
@@ -879,7 +879,7 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
       {
         entity = gDungeon->teamPokemon[index];
         if (EntityExists(entity)) {
-          pEVar6 = entity->axObj.info;
+          pEVar6 = GetEntInfo(entity);
           flag = TRUE;
           if(((MAX_TEAM_MEMBERS - 1) < pEVar6->teamIndex))
              flag =  FALSE;
@@ -937,7 +937,7 @@ bool32 sub_8048B9C(Entity *entity,Item *param_2)
   u16 action;
 
   bVar2 = FALSE;
-  entityInfo = entity->axObj.info;
+  entityInfo = GetEntInfo(entity);
   actionPointer = &(entityInfo->action);
   if ((param_2->flags & ITEM_FLAG_STICKY)) {
       DisplayDungeonMessage(0,*gItemStickyDoesntWorkText,1);
@@ -949,7 +949,7 @@ bool32 sub_8048B9C(Entity *entity,Item *param_2)
     {
       entity1 = gDungeon->teamPokemon[index];
       if (EntityExists(entity1)) {
-        entity1Info = entity1->axObj.info;
+        entity1Info = GetEntInfo(entity1);
         flag = TRUE;
         if(CheckVariousStatuses2(entity1, FALSE))
         {
@@ -973,7 +973,7 @@ bool32 sub_8048B9C(Entity *entity,Item *param_2)
     else
     {
       while( TRUE ) {
-        entityInfo = entity2->axObj.info;
+        entityInfo = GetEntInfo(entity2);
         actionContainer = *actionPointer;
         goto _clear;
 _load:
@@ -1029,7 +1029,7 @@ bool8 sub_8048D50(Entity * pokemon, Item *item)
 {
   EntityInfo *entityInfo;
 
-  entityInfo = pokemon->axObj.info;
+  entityInfo = GetEntInfo(pokemon);
 
   if ((item->flags & ITEM_FLAG_STICKY) != 0) {
     sub_8045BF8(gFormatBuffer_Items[0], item);

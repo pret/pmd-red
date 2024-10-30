@@ -505,7 +505,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
 
             gUnknown_202F208++;
             gUnknown_202F20C++;
-            targetInfo = currTarget->axObj.info; // currTarget could've been changed, hence info pointers needs to be reloaded
+            targetInfo = GetEntInfo(currTarget); // currTarget could've been changed, hence info pointers needs to be reloaded
             targetInfo->unk15A = 0;
             if (targetInfo->isNotTeamMember) {
                 targetInfo->targetPos = attacker->pos;
@@ -524,7 +524,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         sub_8041B48(currTarget);
                         sub_80559DC(currTarget, attacker);
                         currTarget = attacker;
-                        targetInfo = attacker->axObj.info;
+                        targetInfo = GetEntInfo(attacker);
                         targetInfo->unk15A = 0;
                         moveRedirected = TRUE;
                     }
@@ -541,7 +541,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         sub_8041BA8(currTarget);
                         sub_80559DC(currTarget, attacker);
                         currTarget = attacker;
-                        targetInfo = attacker->axObj.info;
+                        targetInfo = GetEntInfo(attacker);
                         targetInfo->unk15A = 0;
                         moveRedirected = TRUE;
                     }
@@ -3019,7 +3019,7 @@ bool8 MoveMatchesChargingStatus(Entity *pokemon, Move *move)
     }
     else
     {
-        EntityInfo *pokemonInfo = pokemon->axObj.info;
+        EntityInfo *pokemonInfo = GetEntInfo(pokemon);
         s32 i;
         for (i = 0; i < 100; i++)
         {
@@ -3045,7 +3045,7 @@ bool8 IsChargingAnyTwoTurnMove(Entity *pokemon, bool8 checkCharge)
     }
     else
     {
-        EntityInfo *pokemonInfo = pokemon->axObj.info;
+        EntityInfo *pokemonInfo = GetEntInfo(pokemon);
         int i = 0;
         u8 *chargingStatusPointer = &pokemonInfo->charging.chargingStatus;
         u8 *chargingStatusPointer2;
@@ -3084,7 +3084,7 @@ u32 sub_8057144(Entity * pokemon)
     {
         Entity *dungeonMon = gDungeon->allPokemon[i];
         if (EntityExists(dungeonMon)) {
-            Move *moves = dungeonMon->axObj.info->moves.moves;
+            Move *moves = GetEntInfo(dungeonMon)->moves.moves;
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 if (moves[j].moveFlags & MOVE_FLAG_EXISTS
@@ -3111,7 +3111,7 @@ bool8 sub_80571F0(Entity * pokemon, Move *move)
     s32 tileset;
     EntityInfo *entityInfo;
 
-    entityInfo = pokemon->axObj.info;
+    entityInfo = GetEntInfo(pokemon);
 
     if (entityInfo->unkFF == 1) {
         moveID = move->id;
@@ -3150,7 +3150,7 @@ bool8 sub_805727C(Entity * pokemon, Entity * target, s32 chance)
         return FALSE;
     if (!EntityExists(pokemon) || !EntityExists(target))
         return FALSE;
-    if (target->axObj.info->unk158 == 0 || target->axObj.info->HP == 0)
+    if (GetEntInfo(target)->unk158 == 0 || GetEntInfo(target)->HP == 0)
         return FALSE;
 
     if (chance != 0) {
@@ -3213,7 +3213,7 @@ bool8 CanAIUseMove(Entity *pokemon, s32 moveIndex, bool8 hasPPChecker)
 
 bool8 CanMonsterUseMove(Entity *pokemon, Move *move, bool8 hasPPChecker)
 {
-    EntityInfo *pokemonInfo = pokemon->axObj.info;
+    EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     if (move->id == MOVE_REGULAR_ATTACK)
     {
         return TRUE;
@@ -3254,7 +3254,7 @@ bool8 sub_805744C(Entity * pokemon, Move *move, bool8 param_3)
 {
   EntityInfo *entityInfo;
 
-  entityInfo = pokemon->axObj.info;
+  entityInfo = GetEntInfo(pokemon);
   if (move->id != MOVE_REGULAR_ATTACK) {
     if (((move->moveFlags & MOVE_FLAG_DISABLED)) || ((move->moveFlags2 & MOVE_FLAG_EXISTS))) {
         return FALSE;

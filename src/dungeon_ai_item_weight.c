@@ -13,7 +13,7 @@
 
 u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
 {
-    EntityInfo *pokemonInfo = targetPokemon->axObj.info;
+    EntityInfo *pokemonInfo = GetEntInfo(targetPokemon);
     s32 itemWeight = 0;
     bool8 targetOther = itemTargetFlags & 1;
     u16 targetAlly = (itemTargetFlags >> 1) & 1;
@@ -185,7 +185,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_QUICK_SEED:
-            if (targetPokemon->axObj.info->speedStage < MAX_SPEED_STAGE)
+            if (GetEntInfo(targetPokemon)->speedStage < MAX_SPEED_STAGE)
             {
                 if (IsAdjacentToEnemy(targetPokemon))
                 {

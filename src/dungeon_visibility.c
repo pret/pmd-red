@@ -16,16 +16,16 @@ bool8 CanSeeTarget(Entity *entity, Entity *targetEntity)
     {
         if (entity->type == ENTITY_MONSTER)
         {
-            if (!CanSeeInvisibleMonsters(entity) && targetEntity->axObj.info->transformStatus.transformStatus == STATUS_INVISIBLE)
+            if (!CanSeeInvisibleMonsters(entity) && GetEntInfo(targetEntity)->transformStatus.transformStatus == STATUS_INVISIBLE)
             {
                 return FALSE;
             }
-            if (entity->axObj.info->eyesightStatus.eyesightStatus == STATUS_BLINKER)
+            if (GetEntInfo(entity)->eyesightStatus.eyesightStatus == STATUS_BLINKER)
             {
                 return FALSE;
             }
         }
-        else if (targetEntity->axObj.info->transformStatus.transformStatus == STATUS_INVISIBLE)
+        else if (GetEntInfo(targetEntity)->transformStatus.transformStatus == STATUS_INVISIBLE)
         {
             return FALSE;
         }
@@ -43,16 +43,16 @@ bool8 CanTargetEntity(Entity *entity, Entity *targetEntity)
     {
         if (entity->type == ENTITY_MONSTER)
         {
-            if (!CanSeeInvisibleMonsters(entity) && targetEntity->axObj.info->transformStatus.transformStatus == STATUS_INVISIBLE)
+            if (!CanSeeInvisibleMonsters(entity) && GetEntInfo(targetEntity)->transformStatus.transformStatus == STATUS_INVISIBLE)
             {
                 return FALSE;
             }
-            if (entity->axObj.info->eyesightStatus.eyesightStatus == STATUS_BLINKER)
+            if (GetEntInfo(entity)->eyesightStatus.eyesightStatus == STATUS_BLINKER)
             {
                 return FALSE;
             }
         }
-        else if (targetEntity->axObj.info->transformStatus.transformStatus == STATUS_INVISIBLE)
+        else if (GetEntInfo(targetEntity)->transformStatus.transformStatus == STATUS_INVISIBLE)
         {
             return FALSE;
         }

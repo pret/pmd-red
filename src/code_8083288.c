@@ -31,7 +31,7 @@ void sub_8082B40(void)
   {
     entity = gDungeon->allPokemon[index];
     if (EntityExists(entity)) {
-      info = entity->axObj.info;
+      info = GetEntInfo(entity);
       entity->axObj.spriteFile = GetSpriteData(info->apparentID);
       sub_806CCB4(entity,sub_806CEBC(entity));
       pos = entity->pos;

@@ -83,20 +83,20 @@ u32 sub_8075818(Entity *entity);
 
 bool8 TargetLeader(Entity *pokemon)
 {
-    if (pokemon->axObj.info->isNotTeamMember)
+    if (GetEntInfo(pokemon)->isNotTeamMember)
     {
         return FALSE;
     }
-    return TacticsTargetLeader(pokemon->axObj.info->tactic);
+    return TacticsTargetLeader(GetEntInfo(pokemon)->tactic);
 }
 
 Entity* GetLeaderIfVisible(Entity *pokemon)
 {
-    if (!pokemon->axObj.info->isNotTeamMember)
+    if (!GetEntInfo(pokemon)->isNotTeamMember)
     {
         Entity *leader = GetLeader();
         if (leader &&
-            leader->axObj.info->waitingStruct.waitingStatus != STATUS_DECOY &&
+            GetEntInfo(leader)->waitingStruct.waitingStatus != STATUS_DECOY &&
             GetTreatmentBetweenMonsters(pokemon, leader, FALSE, FALSE) == TREATMENT_TREAT_AS_ALLY &&
             CanTargetEntity(pokemon, leader))
         {
@@ -119,7 +119,7 @@ bool8 sub_8072CF4(Entity *entity)
 
     sub_804178C(1);
     gUnknown_203B434 = 1;
-    info = entity->axObj.info;
+    info = GetEntInfo(entity);
     info->useHeldItem = FALSE;
     info->unkF3 = FALSE;
     gDungeon->unkB8 = entity;
@@ -319,8 +319,8 @@ bool8 sub_8072CF4(Entity *entity)
     }
     sub_807FD84(entity);
     if (EntityExists(entity)) {
-        if (entity->axObj.info->unk14A == 0) {
-            entity->axObj.info->unk14A = 0;
+        if (GetEntInfo(entity)->unk14A == 0) {
+            GetEntInfo(entity)->unk14A = 0;
             sub_8079764(entity);
         }
         sub_8041888(0);

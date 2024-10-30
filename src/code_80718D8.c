@@ -170,7 +170,7 @@ void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp)
   s32 expDiff;
   EntityInfo *info;
 
-  info = target->axObj.info;
+  info = GetEntInfo(target);
   if (info->level != 100) {
     if (!IsClientOrTeamBase(info->joinedAt.joinedAt)) {
       newExp = info->exp + exp;
@@ -509,7 +509,7 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
 
     if (EntityExists(target)) {
         flag = 0;
-        info = target->axObj.info;
+        info = GetEntInfo(target);
         if (info->isTeamLeader) {
             GetAvailTacticsforLvl_Bool(tacticsBuffer1,info->level);
         }
@@ -568,7 +568,7 @@ void sub_807218C(Entity *pokemon)
     s32 r3;
 
     r6 = 0;
-    info = pokemon->axObj.info;
+    info = GetEntInfo(pokemon);
 
     sub_806A2BC(pokemon, 0);
     SetMessageArgument_2(gFormatBuffer_Monsters[0], info, 0);
@@ -649,7 +649,7 @@ void LevelDownTarget(Entity *pokemon, Entity *target, u32 level)
     if(EntityExists(target))
     {
         flag = FALSE;
-        info = target->axObj.info;
+        info = GetEntInfo(target);
         if(!IsClientOrTeamBase(info->joinedAt.joinedAt))
         {
             newLevel = info->level - level;
@@ -684,7 +684,7 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
     s32 exp;
 
     if(!EntityExists(target)) return FALSE;
-    info = target->axObj.info;
+    info = GetEntInfo(target);
     id = info->id;
     exp = info->exp;
 
@@ -780,7 +780,7 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
 
 
     if(!EntityExists(target)) return FALSE;
-    info = target->axObj.info;
+    info = GetEntInfo(target);
     id = info->id;
     exp = info->exp;
     oldLevel = info->level;
