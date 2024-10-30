@@ -549,7 +549,8 @@ void CheriBerryItemAction(Entity *pokemon, Entity *target)
 
 void PechaBerryItemAction(Entity *pokemon, Entity *target)
 {
-    if((u8)(GetEntInfo(target)->nonVolatile.nonVolatileStatus - 2) <= 1)
+    EntityInfo *entInfo = GetEntInfo(target);
+    if(entInfo->nonVolatile.nonVolatileStatus == STATUS_POISONED || entInfo->nonVolatile.nonVolatileStatus == STATUS_BADLY_POISONED)
         SendNonVolatileEndMessage(pokemon, target);
     else
         // Pointer to "But nothing happened!"
