@@ -145,7 +145,7 @@ static void CreatePKMNNewsMenu(void)
         mailIndex = sUnknown_203B2CC->receivedNewsletters[new_index];
         sub_803B6B0(10, y, 6, sUnknown_203B2CC->s38.unk34);
         sub_802BC7C();
-        PrintFormatStringOnWindow(21, y, GetPokemonMailHeadline(mailIndex), sUnknown_203B2CC->s38.unk34, 0);
+        PrintFormattedStringOnWindow(21, y, GetPokemonMailHeadline(mailIndex), sUnknown_203B2CC->s38.unk34, 0);
     }
 
     sub_80073E0(sUnknown_203B2CC->s38.unk34);

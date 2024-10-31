@@ -148,8 +148,8 @@ void sub_801F9A4(void)
             sub_80073B8(gUnknown_203B278->unk5C);
             name = &(gUnknown_203B278->unk14[gUnknown_203B278->unkC]->pokeName);
             strcpy(gFormatBuffer_Monsters[0], *name);
-            PrintFormatStringOnWindow(0x10,0,gUnknown_80DC310,gUnknown_203B278->unk5C,0); // $m0
-            PrintFormatStringOnWindow(4,0x10,gUnknown_203B278->unk14[gUnknown_203B278->unkC]->unk4,gUnknown_203B278->unk5C,0);
+            PrintFormattedStringOnWindow(0x10,0,gUnknown_80DC310,gUnknown_203B278->unk5C,0); // $m0
+            PrintFormattedStringOnWindow(4,0x10,gUnknown_203B278->unk14[gUnknown_203B278->unkC]->unk4,gUnknown_203B278->unk5C,0);
             sub_80073E0(gUnknown_203B278->unk5C);
             break;
         case 2:

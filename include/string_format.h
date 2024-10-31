@@ -58,7 +58,7 @@ void sub_8014490(void);
 s32 sub_80144A4(s32 *a0);
 void DrawDialogueBoxString(void);
 const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags);
-void PrintFormatStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr);
-void PrintFormatStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing);
+void PrintFormattedStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr);
+void PrintFormattedStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing);
 
 #endif // GUARD_STRING_FORMAT_H

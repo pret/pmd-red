@@ -2236,18 +2236,18 @@ void DrawFieldMenu(u8 a0)
 
         gFormatArgs[0] = FixedPointToInt(leaderInfo->belly);
         gFormatArgs[1] = FixedPointToInt(leaderInfo->maxBelly);
-        PrintFormatStringOnWindow(0x73, 0, gUnknown_80F9174, 2, 0);
+        PrintFormattedStringOnWindow(0x73, 0, gUnknown_80F9174, 2, 0);
 
         gFormatArgs[0] = gTeamInventoryRef->teamMoney;
-        PrintFormatStringOnWindow(0x73, 12, gUnknown_80F9190, 2, 0);
+        PrintFormattedStringOnWindow(0x73, 12, gUnknown_80F9190, 2, 0);
 
         GetWeatherName(gFormatBuffer_Monsters[0], GetApparentWeather(NULL));
-        PrintFormatStringOnWindow(0x73, 24, gUnknown_80F91A8, 2, 0);
+        PrintFormattedStringOnWindow(0x73, 24, gUnknown_80F91A8, 2, 0);
 
         gFormatArgs[0] = hours;
         gFormatArgs[1] = minutes;
         gFormatArgs[2] = seconds;
-        PrintFormatStringOnWindow(0x73, 36, gUnknown_80F91C8, 2, 0);
+        PrintFormattedStringOnWindow(0x73, 36, gUnknown_80F91C8, 2, 0);
         for (yLoop = 0, i = 0; i < MAX_TEAM_MEMBERS; i++) {
             Entity *teamMon = gDungeon->teamPokemon[i];
             if (EntityExists(teamMon)) {
@@ -2255,7 +2255,7 @@ void DrawFieldMenu(u8 a0)
                 SetMessageArgument(gFormatBuffer_Monsters[0], teamMon, 0);
                 gFormatArgs[0] = monInfo->HP;
                 gFormatArgs[1] = monInfo->maxHPStat;
-                PrintFormatStringOnWindow(4, yLoop, gUnknown_80F91E0, 2, 0);
+                PrintFormattedStringOnWindow(4, yLoop, gUnknown_80F91E0, 2, 0);
                 yLoop += 12;
                 if (yLoop >= 12 * MAX_TEAM_MEMBERS)
                     break;
@@ -2729,13 +2729,13 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     switch (sUnknown_202F248[a0])
     {
     case 0:
-        PrintFormatStringOnWindow(x, 0, gTeamToolboxAPtr, 0, 0);
+        PrintFormattedStringOnWindow(x, 0, gTeamToolboxAPtr, 0, 0);
         for (i = 0; i < 10; i++) {
             if (ItemExists(&gTeamInventoryRef->teamItems[i])) {
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, &gTeamInventoryRef->teamItems[i], &gUnknown_8106B60);
                 y = sub_8013800(&gUnknown_202EE10, i);
-                PrintFormatStringOnWindow(8, y, txtBuff, 0, 0);
+                PrintFormattedStringOnWindow(8, y, txtBuff, 0, 0);
             }
             else {
                 break;
@@ -2743,13 +2743,13 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
         }
         break;
     case 1:
-        PrintFormatStringOnWindow(x, 0, gTeamToolboxBPtr, 0, 0);
+        PrintFormattedStringOnWindow(x, 0, gTeamToolboxBPtr, 0, 0);
         for (i = 0; i < 10; i++) {
             if (ItemExists(&gTeamInventoryRef->teamItems[i + 10])) {
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, &gTeamInventoryRef->teamItems[i + 10], &gUnknown_8106B60);
                 y = sub_8013800(&gUnknown_202EE10, i);
-                PrintFormatStringOnWindow(8, y, txtBuff, 0, 0);
+                PrintFormattedStringOnWindow(8, y, txtBuff, 0, 0);
             }
             else {
                 break;
@@ -2759,12 +2759,12 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     case 2: {
             Tile *tile = GetTile(a1->pos.x, a1->pos.y);
             Item *item = GetItemData(tile->object);
-            PrintFormatStringOnWindow(x, 0, gFieldItemMenuGroundTextPtr, 0, 0);
+            PrintFormattedStringOnWindow(x, 0, gFieldItemMenuGroundTextPtr, 0, 0);
             if (item->flags & ITEM_FLAG_EXISTS) {
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, item, &gUnknown_8106B60);
                 y = sub_8013800(&gUnknown_202EE10, 0);
-                PrintFormatStringOnWindow(8, y, txtBuff, 0, 0);
+                PrintFormattedStringOnWindow(8, y, txtBuff, 0, 0);
             }
             if (a3) {
                 gUnknown_202EE10.unk8.x = gUnknown_202EE10.unk8.y = 0;
@@ -2774,12 +2774,12 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     case 3: {
             Item *item = &GetEntInfo(a1)->heldItem;
             SetMessageArgument_2(gFormatBuffer_Monsters[0], a1Info, 0);
-            PrintFormatStringOnWindow(x, 0, gUnknown_80FE940, 0, 0);
+            PrintFormattedStringOnWindow(x, 0, gUnknown_80FE940, 0, 0);
             if (item->flags & ITEM_FLAG_EXISTS) {
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, item, &gUnknown_8106B60);
                 y = sub_8013800(&gUnknown_202EE10, 0);
-                PrintFormatStringOnWindow(8, y, txtBuff, 0, 0);
+                PrintFormattedStringOnWindow(8, y, txtBuff, 0, 0);
             }
         }
         break;
@@ -2788,12 +2788,12 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
             if (EntityExists(chosenTeamMember)) {
                 Item *item = &GetEntInfo(chosenTeamMember)->heldItem;
                 SetMessageArgument_2(gFormatBuffer_Monsters[0], chosenTeamMember->axObj.info, 0);
-                PrintFormatStringOnWindow(x, 0, gUnknown_80FE940, 0, 0);
+                PrintFormattedStringOnWindow(x, 0, gUnknown_80FE940, 0, 0);
                 if (item->flags & ITEM_FLAG_EXISTS) {
                     gUnknown_202EE10.unk1A++;
                     sub_8090E14(txtBuff, item, &gUnknown_8106B60);
                     y = sub_8013800(&gUnknown_202EE10, 0);
-                    PrintFormatStringOnWindow(8, y, txtBuff, 0, 0);
+                    PrintFormattedStringOnWindow(8, y, txtBuff, 0, 0);
                 }
             }
         }
@@ -2806,7 +2806,7 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     sub_80073E0(0);
     if (a2) {
         sub_80073B8(1);
-        PrintFormatStringOnWindow(4, 2, gWhichTextPtr1, 1, 0);
+        PrintFormattedStringOnWindow(4, 2, gWhichTextPtr1, 1, 0);
         sub_80073E0(1);
     }
 }
@@ -3365,7 +3365,7 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
     sub_80137B0(&gUnknown_202EE10, 0);
     sub_80073B8(0);
     if (r10) {
-        PrintFormatStringOnWindow(0xC, 0, gTeamFormat, 0, 0);
+        PrintFormattedStringOnWindow(0xC, 0, gTeamFormat, 0, 0);
     }
 
     // Print hp/max hp
@@ -3413,10 +3413,10 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
                 gFormatArgs[1] = monInfo->maxHPStat;
                 y = sub_8013800(&gUnknown_202EE10, i);
                 if (monInfo->isTeamLeader) {
-                    PrintFormatStringOnWindow(9, y, gUnknown_8106BD4, 0, 0);
+                    PrintFormattedStringOnWindow(9, y, gUnknown_8106BD4, 0, 0);
                 }
                 else {
-                    PrintFormatStringOnWindow(9, y, gUnknown_8106BE0, 0, 0);
+                    PrintFormattedStringOnWindow(9, y, gUnknown_8106BE0, 0, 0);
                 }
             }
         }
@@ -3711,10 +3711,10 @@ void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 windowId)
 
         CopyTacticsNameToBuffer(gFormatBuffer_Monsters[0], tactic);
         if (mon->tactic == tactic) {
-            PrintFormatStringOnWindow(0x10, y, gUnknown_8106BEC, windowId, 0);
+            PrintFormattedStringOnWindow(0x10, y, gUnknown_8106BEC, windowId, 0);
         }
         else {
-            PrintFormatStringOnWindow(0x10, y, gUnknown_8106BF4, windowId, 0);
+            PrintFormattedStringOnWindow(0x10, y, gUnknown_8106BF4, windowId, 0);
         }
     }
 

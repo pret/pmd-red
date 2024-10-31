@@ -109,34 +109,34 @@ static void DisplayAdventureLog(void)
                 case 12:
                     v1 = sub_80978B8();
                     gFormatArgs[0] = (s16)v1;
-                    PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 7:
                     v2 = sub_8097880();
                     gFormatArgs[0] = (s16)v2;
-                    PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 11:
                     v3 = sub_8097838();
                     gFormatArgs[0] = (s16)v3;
-                    PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 8:
                     v4 = sub_80977B8();
                     gFormatArgs[0] = v4;
-                    PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 9:
                     v5 = sub_80977F8();
                     gFormatArgs[0] = v5;
-                    PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
                 case 10:
                     v6 = sub_8097870();
                     gFormatArgs[0] = (s16)v6;
                     // fallthrough
                 default:
-                    PrintFormatStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
                     break;
             }
         }

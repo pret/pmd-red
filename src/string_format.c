@@ -870,22 +870,22 @@ static bool8 AppendString(const u8 *str, u8 **dstPtr, u8 *dstMax, u16 flags)
 
 #define FORMAT_STR_MAX_LEN 500
 
-void PrintFormatStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr)
+void PrintFormattedStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr)
 {
-    u8 formatString[FORMAT_STR_MAX_LEN];
+    u8 formattedString[FORMAT_STR_MAX_LEN];
 
-    FormatString(str, formatString, formatString + FORMAT_STR_MAX_LEN, 0);
-    formatString[FORMAT_STR_MAX_LEN - 1] = '\0';
-    PrintStringOnWindow(x, y, formatString, windowId, terminatingChr);
+    FormatString(str, formattedString, formattedString + FORMAT_STR_MAX_LEN, 0);
+    formattedString[FORMAT_STR_MAX_LEN - 1] = '\0';
+    PrintStringOnWindow(x, y, formattedString, windowId, terminatingChr);
 }
 
-void PrintFormatStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing)
+void PrintFormattedStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing)
 {
-    u8 formatString[FORMAT_STR_MAX_LEN];
+    u8 formattedString[FORMAT_STR_MAX_LEN];
 
-    FormatString(str, formatString, formatString + FORMAT_STR_MAX_LEN, 0);
-    formatString[FORMAT_STR_MAX_LEN - 1] = '\0';
-    PrintStringOnWindow2(x, y, formatString, windowId, terminatingChr, lineSpacing);
+    FormatString(str, formattedString, formattedString + FORMAT_STR_MAX_LEN, 0);
+    formattedString[FORMAT_STR_MAX_LEN - 1] = '\0';
+    PrintStringOnWindow2(x, y, formattedString, windowId, terminatingChr, lineSpacing);
 }
 
 //

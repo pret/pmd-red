@@ -778,7 +778,7 @@ void sub_8026DAC(u32 r0, BulkItem *item)
     temp.unk8 = 1;
     slot.flags = ITEM_FLAG_EXISTS;
     sub_8090E14(gFormatBuffer_Items[0], &slot, &temp);
-    PrintFormatStringOnWindow(4, 3, sPartyMenuItemPlaceholder, r0, 0);
+    PrintFormattedStringOnWindow(4, 3, sPartyMenuItemPlaceholder, r0, 0);
     sub_80073E0(r0);
 }
 

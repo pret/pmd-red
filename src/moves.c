@@ -1383,7 +1383,7 @@ s32 unk_PrintMoveDescription(s32 x, Move *move, s32 a3, struct subStruct_203B240
 
     sub_80073B8(a3);
     sub_80928C0(gFormatBuffer_Monsters[0], move, 0);
-    PrintFormatStringOnWindow(8 * x + 16, 0, gUnknown_8109930, a3, 0);
+    PrintFormattedStringOnWindow(8 * x + 16, 0, gUnknown_8109930, a3, 0);
     y = 19;
     moveDescription = sMovesData[move->id].description;
 
@@ -1392,7 +1392,7 @@ s32 unk_PrintMoveDescription(s32 x, Move *move, s32 a3, struct subStruct_203B240
         ++moveDescription;
     }
 
-    PrintFormatStringOnWindow(4, y, moveDescription, a3, 0);
+    PrintFormattedStringOnWindow(4, y, moveDescription, a3, 0);
     unk_MovePrintData(move, a3);
     sub_80073E0(a3);
     strcpy(buffer, sMovesData[move->id].description);
@@ -1407,11 +1407,11 @@ static void unk_MovePrintData(Move *move, s32 y)
 
     sub_80078A4(y, 4, 72, 200, COLOR_WHITE_2);
     sub_8092D54(gFormatBuffer_Monsters[0], move);
-    PrintFormatStringOnWindow(4, 74, gUnknown_810CF00, y, 0);
-    PrintFormatStringOnWindow(4, 86, gPtrTypeText, y, 0);
+    PrintFormattedStringOnWindow(4, 74, gUnknown_810CF00, y, 0);
+    PrintFormattedStringOnWindow(4, 86, gPtrTypeText, y, 0);
     type = GetMoveType(move);
     text = GetUnformattedTypeString(type);
-    PrintFormatStringOnWindow(64, 86, text, y, 0);
+    PrintFormattedStringOnWindow(64, 86, text, y, 0);
     power = GetMoveBasePower(move);
     gFormatArgs[0] = power;
 }

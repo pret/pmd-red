@@ -703,7 +703,7 @@ void sub_8027D40(u32 r0, BulkItem *heldItem)
     a3.unk8 = 1;
     slot.flags = ITEM_FLAG_EXISTS;
     sub_8090E14(gFormatBuffer_Items[0], &slot, &a3);
-    PrintFormatStringOnWindow(4, 3, sItemBuffered, r0, 0);
+    PrintFormattedStringOnWindow(4, 3, sItemBuffered, r0, 0);
     sub_80073E0(r0);
 }
 

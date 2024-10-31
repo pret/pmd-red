@@ -2125,7 +2125,7 @@ sub_8067F00:
 	movs r0, 0xC
 	movs r1, 0
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r1, 0
 	mov r10, r1
 	b _08067FF6
@@ -2188,7 +2188,7 @@ _08067FA4:
 	movs r0, 0x7
 	mov r1, r8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	b _08067FE6
 	.align 2, 0
 _08067FCC: .4byte gFormatBuffer_Items
@@ -2200,7 +2200,7 @@ _08067FD8:
 	movs r0, 0x7
 	mov r1, r8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 _08067FE6:
 	movs r2, 0x1
 	add r10, r2
@@ -2232,7 +2232,7 @@ _08068000:
 	movs r0, 0x8
 	movs r1, 0x2
 	movs r3, 0x1
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	b _0806804C
 	.align 2, 0
 _08068028: .4byte gUnknown_8106E48
@@ -2249,7 +2249,7 @@ _08068034:
 	movs r0, 0x8
 	movs r1, 0x2
 	movs r3, 0x1
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 _0806804C:
 	movs r0, 0x1
 	bl sub_80073E0

@@ -449,7 +449,7 @@ void sub_8012EBC(MenuStruct *param_1)
             ptr_text2 = &textStack[index];
             RestoreUnkTextStruct_8006518(textStack);
             x = sub_8008ED0(param_1->unk0);
-            PrintFormatStringOnWindow(((ptr_text2->unk14->f2 * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
+            PrintFormattedStringOnWindow(((ptr_text2->unk14->f2 * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
         }
 
         colorArray = param_1->menuTextColorArray;
@@ -474,7 +474,7 @@ void sub_8012EBC(MenuStruct *param_1)
 
                 sprintfStatic(buffer,gUnknown_80D4828, color, textPtr);
                 y = sub_8013800(&param_1->input, counter);
-                PrintFormatStringOnWindow(8, y, buffer, param_1->index, 0);
+                PrintFormattedStringOnWindow(8, y, buffer, param_1->index, 0);
                 menuItemsPtr++;
                 counter++;
             } while (menuItemsPtr->text != NULL);

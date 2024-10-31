@@ -147,7 +147,7 @@ void BuildIQSkillList(void)
         else
             strcpy(gFormatBuffer_Items[1] - 80, sUnknown_80DBE18);
 
-        PrintFormatStringOnWindow(12, y, sFmt01, sIQSkillListMenu->s24.s0.unk34, 0);
+        PrintFormattedStringOnWindow(12, y, sFmt01, sIQSkillListMenu->s24.s0.unk34, 0);
     }
 
     sub_80073E0(sIQSkillListMenu->s24.s0.unk34);

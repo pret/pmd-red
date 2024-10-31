@@ -82,8 +82,8 @@ static void sub_801B480(void)
             sub_80073B8(sUnknown_203B230->unk24);
             preload = sUnknown_203B230->unk10[sUnknown_203B230->unk8];
             strcpy(gFormatBuffer_Monsters[0], preload->pokeName);
-            PrintFormatStringOnWindow(16, 0, sFmtPkmn0, sUnknown_203B230->unk24, 0); // {POKEMON_0}
-            PrintFormatStringOnWindow(4, 16, sUnknown_203B230->unk10[sUnknown_203B230->unk8]->unk4, sUnknown_203B230->unk24, 0);
+            PrintFormattedStringOnWindow(16, 0, sFmtPkmn0, sUnknown_203B230->unk24, 0); // {POKEMON_0}
+            PrintFormattedStringOnWindow(4, 16, sUnknown_203B230->unk10[sUnknown_203B230->unk8]->unk4, sUnknown_203B230->unk24, 0);
             sub_80073E0(sUnknown_203B230->unk24);
             break;
         case 2:

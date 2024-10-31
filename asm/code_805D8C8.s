@@ -1568,7 +1568,7 @@ _08062650:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	mov r0, r10
 	bl GetIQSkillDescription
 	adds r2, r0, 0
@@ -1577,7 +1577,7 @@ _08062650:
 	movs r0, 0x8
 	movs r1, 0x10
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	mov r0, r10
@@ -1698,7 +1698,7 @@ _0806276C:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	mov r0, r10
 	bl GetTacticsDescription
 	adds r2, r0, 0
@@ -1707,7 +1707,7 @@ _0806276C:
 	movs r0, 0x8
 	movs r1, 0x10
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	mov r0, r10
@@ -1851,7 +1851,7 @@ sub_806285C:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	mov r0, r10
 	bl sub_808E51C
 	adds r2, r0, 0
@@ -1860,7 +1860,7 @@ sub_806285C:
 	movs r0, 0x8
 	movs r1, 0x10
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	add r4, sp, 0x4
@@ -2179,7 +2179,7 @@ sub_8062B74:
 	movs r0, 0xC
 	movs r1, 0
 	movs r3, 0x2
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r1, 0x10
 	mov r8, r1
 	mov r0, r9
@@ -2212,7 +2212,7 @@ _08062BDE:
 	movs r0, 0xC
 	mov r1, r8
 	movs r3, 0x2
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	b _08062C8A
 	.align 2, 0
 _08062BF0: .4byte gUnknown_8106C90
@@ -2284,7 +2284,7 @@ _08062C6C:
 	mov r1, r8
 	ldr r2, _08062CA4
 	movs r3, 0x2
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r0, 0xC
 	add r8, r0
 _08062C80:
@@ -2330,7 +2330,7 @@ sub_8062CA8:
 	movs r0, 0xC
 	movs r1, 0
 	movs r3, 0x2
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r7, 0x8
 	movs r6, 0x12
 	adds r0, r5, 0
@@ -2379,7 +2379,7 @@ _08062D18:
 _08062D2C:
 	adds r1, r6, 0
 	movs r3, 0x2
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	b _08062D52
 	.align 2, 0
 _08062D38: .4byte gUnknown_8106C9C
@@ -2392,7 +2392,7 @@ _08062D3C:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	movs r3, 0x2
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 _08062D52:
 	movs r0, 0x2
 	bl sub_80073E0
@@ -3390,7 +3390,7 @@ _08063526:
 	movs r0, 0x4
 	movs r1, 0
 	movs r3, 0x2
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r0, 0x2
 	bl sub_80073E0
 	add sp, 0x24
@@ -3439,7 +3439,7 @@ sub_8063578:
 	adds r0, r4, 0
 	movs r1, 0
 	mov r3, r8
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r1, 0
 	mov r9, r1
 	ldr r0, [sp, 0x10]
@@ -3522,7 +3522,7 @@ _08063658:
 	adds r1, r4, 0
 	ldr r2, _08063694
 	mov r3, r8
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 _08063668:
 	adds r7, 0x8
 	adds r5, 0x8
@@ -4001,13 +4001,13 @@ sub_80639E4:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	ldr r2, [r5, 0x4]
 	str r4, [sp]
 	movs r0, 0x4
 	movs r1, 0x10
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	ldr r0, _08063A6C
@@ -7168,7 +7168,7 @@ _080652D2:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_8013800
@@ -7178,7 +7178,7 @@ _080652D2:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_8013800
@@ -7188,7 +7188,7 @@ _080652D2:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl sub_8013800
@@ -7198,7 +7198,7 @@ _080652D2:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r5, 0x4
 	adds r0, r4, 0
 	movs r1, 0x3
@@ -7209,7 +7209,7 @@ _080652D2:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	ldr r1, _080653D8
 	ldr r0, [r1]
 	movs r1, 0xCB
@@ -7232,7 +7232,7 @@ _080652D2:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	b _0806540E
 	.align 2, 0
 _080653D0: .4byte gUnknown_202EE10
@@ -7255,7 +7255,7 @@ _080653F4:
 	str r7, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 _0806540E:
 	ldr r0, _08065444
 	adds r1, r5, 0
@@ -7267,7 +7267,7 @@ _0806540E:
 	str r0, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	add sp, 0xC8
@@ -7378,7 +7378,7 @@ sub_806544C:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_8013800
@@ -7391,7 +7391,7 @@ sub_806544C:
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_8013800
@@ -7403,7 +7403,7 @@ sub_806544C:
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	add sp, 0xC8
@@ -7530,28 +7530,28 @@ CreateFieldGameOptionsMenu:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	ldr r1, [sp, 0x4]
 	ldr r0, _080656B4
 	ldr r2, [r0]
 	str r6, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	ldr r1, [sp, 0x8]
 	ldr r0, _080656B8
 	ldr r2, [r0]
 	str r6, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	ldr r1, [sp, 0xC]
 	ldr r0, _080656BC
 	ldr r2, [r0]
 	str r6, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	add sp, 0xD4
@@ -7692,42 +7692,42 @@ CreateFieldDungeonMenu:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	ldr r1, [sp, 0x4]
 	ldr r0, _08065848
 	ldr r2, [r0]
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	ldr r1, [sp, 0x8]
 	ldr r0, _0806584C
 	ldr r2, [r0]
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	ldr r1, [sp, 0xC]
 	ldr r0, _08065850
 	ldr r2, [r0]
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	ldr r1, [sp, 0x10]
 	ldr r0, _08065854
 	ldr r2, [r0]
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	ldr r1, [sp, 0x14]
 	ldr r0, _08065858
 	ldr r2, [r0]
 	str r5, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	ldr r0, _0806585C
 	ldrb r0, [r0]
 	adds r4, r7, 0
@@ -7975,14 +7975,14 @@ _08065A0A:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	ldr r1, [r6]
 	ldr r0, _08065A84
 	ldr r2, [r0]
 	str r4, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	ldr r0, _08065A88
 	ldrb r1, [r0, 0x8]
 	lsls r3, r1, 2
@@ -8412,7 +8412,7 @@ sub_8065CAC:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r4, 0
 	ldr r5, _08065DB8
 _08065D7A:
@@ -8425,7 +8425,7 @@ _08065D7A:
 	str r0, [sp]
 	movs r0, 0x8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	adds r4, 0x1
 	cmp r4, 0x6
 	ble _08065D7A
@@ -8581,7 +8581,7 @@ _08065E0C:
 	str r7, [sp]
 	movs r1, 0
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	ldr r1, _08065F38
 	ldr r2, [sp, 0xC8]
 	lsls r0, r2, 5
@@ -8592,7 +8592,7 @@ _08065E0C:
 	movs r0, 0x8
 	movs r1, 0x10
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 _08065EF4:
@@ -9004,7 +9004,7 @@ _08066208:
 	mov r1, r8
 	add r2, sp, 0x4
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 _08066244:
 	subs r7, 0x1
 	adds r5, 0x2
@@ -9102,7 +9102,7 @@ _080662C4:
 	movs r1, 0x14
 	add r2, sp, 0x4
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	movs r0, 0x45
@@ -9204,7 +9204,7 @@ _080663A0:
 	adds r1, r6, 0
 	add r2, sp, 0x4
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	movs r0, 0xD
