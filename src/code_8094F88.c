@@ -272,21 +272,10 @@ s32 sub_8095400(u32 param_1)
 
 void sub_809542C(WonderMailSub *param_1)
 {
-  u32 seed;
-
-#ifndef NONMATCHING
-  register unkStruct_203B480 *preload asm("r2");
-#else
-  unkStruct_203B480 *preload;
-#endif
-
-  u8 buffer [20];
+  u8 buffer[20];
 
   gUnknown_203B480->mailType = 1;
-  preload = gUnknown_203B480;
-  seed = param_1->seed;
-  preload->unk4.dungeon = param_1->dungeon;
-  preload->unk4.seed = seed;
+  gUnknown_203B480->unk4 = *param_1;
   sub_8094D28(Rand32Bit());
   gUnknown_203B480->unk10.unk10 = sub_8094E4C();
   gUnknown_203B480->clientSpecies = GetPlayerPokemonStruct()->speciesNum;

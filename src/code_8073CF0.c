@@ -943,10 +943,7 @@ bool8 UseAttack(Entity *a0)
                     EntityInfo *monInfo = GetEntInfo(mon);
                     Unk_Entity_x184 *strPtr = &monInfo->unk184[monInfo->notMoving];
 
-                    #ifndef NONMATCHING
-                    // Dummy needed to match, feel free to remove if you do not care about matching.
-                    i++;i--;
-                    #endif // NONMATCHING
+                    ASM_MATCH_TRICK(i);
                     if (monInfo->numMoveTiles != 0) {
                         IncreaseEntityPixelPos(mon, strPtr->lastMoveIncrement.x, strPtr->lastMoveIncrement.y);
                         if (--strPtr->walkAnimFramesLeft == 0) {

@@ -771,21 +771,17 @@ bool8 IsAITargetEligible(s32 targetingFlags, Entity *user, Entity *target, Move 
 
 s32 WeightMove(Entity *user, s32 targetingFlags, Entity *target, u32 moveType)
 {
-#ifndef NONMATCHING
-    register EntityInfo *targetData asm("r4");
-#else
     EntityInfo *targetData;
-#endif
     s32 targetingFlags2 = (s16) targetingFlags;
     u8 moveType2 = moveType;
     u8 weight = 1;
-    EntityInfo *targetData2;
-    targetData2 = targetData = GetEntInfo(target);
-    if (!targetData->isNotTeamMember || (targetingFlags2 & 0xF) != TARGETING_FLAG_TARGET_OTHER)
-    {
+    targetData = GetEntInfo(target);
+    if (!targetData->isNotTeamMember)
         return 1;
-    }
-    else if (IQSkillIsEnabled(user, IQ_EXP_GO_GETTER))
+    if ((targetingFlags2 & 0xF) != TARGETING_FLAG_TARGET_OTHER)
+        return 1;
+
+    if (IQSkillIsEnabled(user, IQ_EXP_GO_GETTER))
     {
         // BUG: expYieldRankings has lower values as the Pokémon's experience yield increases.
         // This causes Exp. Go-Getter to prioritize Pokémon worth less experience
@@ -794,7 +790,7 @@ s32 WeightMove(Entity *user, s32 targetingFlags, Entity *target, u32 moveType)
     }
     else if (IQSkillIsEnabled(user, IQ_EFFICIENCY_EXPERT))
     {
-        weight = -12 - targetData2->HP;
+        weight = -12 - targetData->HP;
         if (weight == 0)
         {
             weight = 1;
