@@ -50,7 +50,7 @@ extern u8 gUnknown_203B434;
 extern void (*gUnknown_203B08C)(s32);
 extern void (*gUnknown_203B084)(s32 a0);
 extern void (*gUnknown_203B080)(s32 a0);
-extern u8 gUnknown_202E5D8[];
+extern u8 gSpeakerNameBuffer[];
 extern UnkTextStruct1 gUnknown_2027370[4];
 extern s32 gUnknown_202EDCC;
 extern u8 gFontPalette[];
@@ -458,24 +458,24 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
     switch (dialogueInfo->unk4) {
         case 425:
             dialogueMonId = leaderId;
-            sprintfStatic(gUnknown_202E5D8, gUnknown_80F7AFC, gFormatBuffer_Monsters);
+            sprintfStatic(gSpeakerNameBuffer, gUnknown_80F7AFC, gFormatBuffer_Monsters);
             break;
         case 426:
             dialogueMonId = partnerId;
-            sprintfStatic(gUnknown_202E5D8, gUnknown_80F7AFC, gFormatBuffer_Monsters[1]);
+            sprintfStatic(gSpeakerNameBuffer, gUnknown_80F7AFC, gFormatBuffer_Monsters[1]);
             break;
         case 427:
             dialogueMonId = MONSTER_NONE;
-            strcpy(gUnknown_202E5D8, gUnknown_80F7B04);
+            strcpy(gSpeakerNameBuffer, gUnknown_80F7B04);
             break;
         default:
             dialogueMonId = dialogueInfo->unk4;
-            CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, dialogueMonId);
+            CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, dialogueMonId);
             break;
     }
 
     if (dialogueInfo->unk0 == 2 || dialogueInfo->unk0 == 3) {
-        strcpy(gUnknown_202E5D8, gUnknown_80F7B04);
+        strcpy(gSpeakerNameBuffer, gUnknown_80F7B04);
     }
 
     while (1) {

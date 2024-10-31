@@ -45,7 +45,7 @@ extern s32 gFormatArgs[10];
 extern u8 gFormatBuffer_Items[4][FORMAT_BUFFER_LEN];
 extern u8 gFormatBuffer_Monsters[10][FORMAT_BUFFER_LEN];
 extern u8 gFormatBuffer_Names[10][FORMAT_BUFFER_LEN];
-extern u8 gUnknown_202E5D8[FORMAT_BUFFER_LEN];
+extern u8 gSpeakerNameBuffer[FORMAT_BUFFER_LEN];
 extern u8 gFormatBuffer_FriendArea[FRIEND_AREA_BUFFER_LEN];
 
 void sub_8014144(void);

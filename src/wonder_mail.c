@@ -195,7 +195,7 @@ u32 sub_8027F88(void)
   sUnknown_203B2C0->unk53C = 0;
   sUnknown_203B2C0->mailIndex = -1;
   sUnknown_203B2C0->speciesNum = -1;
-  CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
+  CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PELIPPER);
   monName = GetMonSpecies(MONSTER_PELIPPER);
   strcpy(gFormatBuffer_Monsters[0], monName);
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);

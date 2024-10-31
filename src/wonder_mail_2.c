@@ -83,7 +83,7 @@ s32 sub_802B2D4(void)
   sUnknown_203B2C8 = MemoryAlloc(sizeof(struct unkStruct_203B2C8),8);
   MemoryFill8((u8 *)sUnknown_203B2C8,0,sizeof(struct unkStruct_203B2C8));
   sUnknown_203B2C8->unk1 = -1;
-  CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
+  CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PELIPPER);
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
   sUnknown_203B2C8->monPortrait.faceFile = faceFile;
   sUnknown_203B2C8->monPortrait.faceData = (void *) faceFile->data;
@@ -214,7 +214,7 @@ void sub_802B57C(void)
 
   if (sub_802F298() == 3) {
     sub_802F2C0();
-    CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
+    CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PELIPPER);
     monName = GetMonSpecies(MONSTER_PELIPPER);
     strcpy(gFormatBuffer_Monsters[0], monName);
     sub_802B548(2);

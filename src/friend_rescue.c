@@ -323,7 +323,7 @@ u32 CreateFriendRescueMenu(void)
   gUnknown_203B33C->unk530 = 0;
   gUnknown_203B33C->unk218 = -1;
   gUnknown_203B33C->speciesNum = -1;
-  CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
+  CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PELIPPER);
   monName = GetMonSpecies(MONSTER_PELIPPER);
   strcpy(gFormatBuffer_Monsters[0],monName);
   for(counter = 0; counter < 0x36; counter++){
@@ -2914,7 +2914,7 @@ void sub_80352A4(void)
 
   if ( sub_802F298() == 3) {
     sub_802F2C0();
-    CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
+    CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PELIPPER);
     monName = GetMonSpecies(MONSTER_PELIPPER);
     strcpy(gFormatBuffer_Monsters[0], monName);
     mailIndex = GetMailIndex(6, gUnknown_203B33C->unk420);

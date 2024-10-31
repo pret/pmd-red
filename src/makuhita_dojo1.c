@@ -15,7 +15,7 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gUnknown_202E5D8[];
+extern u8 gSpeakerNameBuffer[];
 
 static EWRAM_DATA_2 MakuhitaDojoWork1 *sMakuhitaDojoWork1 = {0};
 
@@ -91,7 +91,7 @@ bool8 MakuhitaDojo_New(u32 mode)
     else
         sMakuhitaDojoWork1->monPortraitPtr = &sMakuhitaDojoWork1->monPortrait;
 
-    CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_MAKUHITA);
+    CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_MAKUHITA);
     CopyYellowMonsterNametoBuffer(gFormatBuffer_Monsters[7], MONSTER_MAKUHITA);
     monName = GetMonSpecies(MONSTER_MAKUHITA);
     strcpy(gFormatBuffer_Monsters[6], monName);

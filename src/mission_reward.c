@@ -30,7 +30,7 @@ struct unkStruct_203B310
 EWRAM_DATA_2 struct unkStruct_203B310 *gUnknown_203B310 = {0};
 
 extern u8 gFormatBuffer_FriendArea[];
-extern u8 gUnknown_202E5D8[];
+extern u8 gSpeakerNameBuffer[];
 
 enum FriendRewardStates
 {
@@ -125,7 +125,7 @@ u32 sub_802F204(unkStruct_802F204 *r0, bool8 displayClientSprite)
 
     // NOTE: dumb var to get correct ordering
     preload = gUnknown_203B310;
-    strcpy(gUnknown_202E5D8, preload->unk10->clientName);
+    strcpy(gSpeakerNameBuffer, preload->unk10->clientName);
     PrintPokeNameToBuffer(gFormatBuffer_Monsters[0], GetPlayerPokemonStruct());
 
     gUnknown_203B310->monPortrait.faceFile = GetDialogueSpriteDataPtr(gUnknown_203B310->unk10->clientSpecies);

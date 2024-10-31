@@ -22,7 +22,7 @@ enum PostOfficeStates
     RETURN_TO_GET_HELP,
 };
 
-extern u8 gUnknown_202E5D8[];
+extern u8 gSpeakerNameBuffer[];
 
 static EWRAM_DATA_2 PostOfficeWork *sPostOfficeHelper = {0};
 
@@ -49,7 +49,7 @@ bool8 CreateHelperPelipperMenu(s16 speciesID)
     xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
 
     sPostOfficeHelper = MemoryAlloc(sizeof(PostOfficeWork), 8);
-    CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, species_32);
+    CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, species_32);
     monName = GetMonSpecies(species_32);
     strcpy(gFormatBuffer_Monsters[0], monName);
     sPostOfficeHelper->monPortrait.faceFile = NULL;

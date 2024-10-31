@@ -18,7 +18,7 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gUnknown_202E5D8[];
+extern u8 gSpeakerNameBuffer[];
 
 static EWRAM_DATA_2 KecleonBrosWork1 *sKecleonBrosWork1 = {0};
 
@@ -72,7 +72,7 @@ bool8 CreateKecleonBros(u32 mode)
         case KECLEON_BROS_MODE_ITEMS_AWAKE:
             sKecleonBrosWork1->isKecleonItemShop = TRUE;
             sKecleonBrosWork1->monPortraitPtr = &sKecleonBrosWork1->monPortrait;
-            CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
+            CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_KECLEON);
             CopyYellowMonsterNametoBuffer(gFormatBuffer_Monsters[7], MONSTER_KECLEON);
             monName = GetMonSpecies(MONSTER_KECLEON);
             strcpy(gFormatBuffer_Monsters[6], monName);
@@ -80,7 +80,7 @@ bool8 CreateKecleonBros(u32 mode)
         case KECLEON_BROS_MODE_ITEMS_ASLEEP:
             sKecleonBrosWork1->isKecleonItemShop = TRUE;
             sKecleonBrosWork1->monPortraitPtr = NULL;
-            CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
+            CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_KECLEON);
             CopyYellowMonsterNametoBuffer(gFormatBuffer_Monsters[7], MONSTER_KECLEON);
             monName = GetMonSpecies(MONSTER_KECLEON);
             strcpy(gFormatBuffer_Monsters[6], monName);
@@ -88,7 +88,7 @@ bool8 CreateKecleonBros(u32 mode)
         case KECLEON_BROS_MODE_WARES_AWAKE:
             sKecleonBrosWork1->isKecleonItemShop = FALSE;
             sKecleonBrosWork1->monPortraitPtr = &sKecleonBrosWork1->monPortrait;
-            CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
+            CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_KECLEON);
             CopyYellowMonsterNametoBuffer(gFormatBuffer_Monsters[7], MONSTER_KECLEON);
             monName = GetMonSpecies(MONSTER_KECLEON);
             strcpy(gFormatBuffer_Monsters[6], monName);
@@ -96,7 +96,7 @@ bool8 CreateKecleonBros(u32 mode)
         case KECLEON_BROS_MODE_WARES_ASLEEP:
             sKecleonBrosWork1->isKecleonItemShop = FALSE;
             sKecleonBrosWork1->monPortraitPtr = NULL;
-            CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KECLEON);
+            CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_KECLEON);
             CopyYellowMonsterNametoBuffer(gFormatBuffer_Monsters[7], MONSTER_KECLEON);
             monName = GetMonSpecies(MONSTER_KECLEON);
             strcpy(gFormatBuffer_Monsters[6], monName);

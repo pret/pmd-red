@@ -243,7 +243,7 @@ u32 CreateThankYouMailPelipper(void)
   sUnknown_203B2C4 = MemoryAlloc(sizeof(WonderMailStruct_203B2C4), 8);
   MemoryFill8((u8 *)sUnknown_203B2C4, 0, sizeof(WonderMailStruct_203B2C4));
 
-  CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
+  CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PELIPPER);
   monName = GetMonSpecies(MONSTER_PELIPPER);
   strcpy(gFormatBuffer_Monsters[0], monName);
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
@@ -1225,7 +1225,7 @@ void sub_802AB98(void)
     {
         case 3:
             sub_802F2C0();
-            CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
+            CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PELIPPER);
             monName = GetMonSpecies(MONSTER_PELIPPER);
             strcpy(gFormatBuffer_Monsters[0], monName);
             DeleteMailAtIndex(GetMailIndex(6, sUnknown_203B2C4->unk430));

@@ -114,7 +114,7 @@ extern const u8 gUnknown_80D4900[];
 extern const u8 gUnknown_80D4904[];
 extern const u8 gUnknown_80D4908[];
 extern const u8 gUnknown_80D4910[];
-extern const u8 gUnknown_80D48F4[];
+extern const u8 gSpeakerNameSeparator[];
 
 extern void SetCharacterMask(int a0);
 extern void sub_8008274(s32 a0, const u8 *compressedData, s32 a2);
@@ -134,8 +134,8 @@ EWRAM_DATA u8 gFormatBuffer_Items[4][FORMAT_BUFFER_LEN] = {0};
 EWRAM_DATA u8 gFormatBuffer_Monsters[10][FORMAT_BUFFER_LEN] = {0};
 // 'n' which probably stands for 'name', available through n0 to n9
 EWRAM_DATA u8 gFormatBuffer_Names[10][FORMAT_BUFFER_LEN] = {0};
-// Seems to be a general buffer
-EWRAM_DATA u8 gUnknown_202E5D8[FORMAT_BUFFER_LEN] = {0};
+// Current textbox's speaker's name
+EWRAM_DATA u8 gSpeakerNameBuffer[FORMAT_BUFFER_LEN] = {0};
 // 'h' - Friend Area buffer. This buffer seems larger than others. It's possible it actually has the same length, but there were some unused buffers right after it.
 EWRAM_DATA u8 gFormatBuffer_FriendArea[FRIEND_AREA_BUFFER_LEN] = {0};
 
@@ -705,8 +705,8 @@ const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
                 r10 = FALSE;
                 r9 = FALSE;
                 if (flags & 8) {
-                    AppendString(gUnknown_202E5D8, &dst, dstMax, flags);
-                    AppendString(gUnknown_80D48F4, &dst, dstMax, flags);
+                    AppendString(gSpeakerNameBuffer, &dst, dstMax, flags);
+                    AppendString(gSpeakerNameSeparator, &dst, dstMax, flags);
                 }
             }
             else if (r9) {

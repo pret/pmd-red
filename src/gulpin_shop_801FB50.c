@@ -22,7 +22,7 @@
 
 EWRAM_DATA_2 unkStruct_203B27C *gUnknown_203B27C = {0};
 
-extern u8 gUnknown_202E5D8[];
+extern u8 gSpeakerNameBuffer[];
 
 #include "data/gulpin_shop_801FB50.h"
 
@@ -88,7 +88,7 @@ bool8 sub_801FB50(u32 mode)
     gUnknown_203B27C->menuAction4 = 0;
     gUnknown_203B27C->mode = mode;
     gUnknown_203B27C->unk15 = FALSE;
-    CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_GULPIN);
+    CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_GULPIN);
     CopyYellowMonsterNametoBuffer(gFormatBuffer_Monsters[7], MONSTER_GULPIN);
     name = GetMonSpecies(MONSTER_GULPIN);
     strcpy(gFormatBuffer_Monsters[6], name);

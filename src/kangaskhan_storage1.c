@@ -14,7 +14,7 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gUnknown_202E5D8[];
+extern u8 gSpeakerNameBuffer[];
 
 EWRAM_DATA_2 struct KangaskhanStorageWork *gKangaskhanStorageWork = {0};
 
@@ -55,7 +55,7 @@ bool8 CreateKangaskhanStorage(u32 mode)
     gKangaskhanStorageWork->menuAction2 = 0;
     gKangaskhanStorageWork->menuAction3 = 0;
     gKangaskhanStorageWork->mode = mode;
-    CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_KANGASKHAN);
+    CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_KANGASKHAN);
     CopyYellowMonsterNametoBuffer(gFormatBuffer_Monsters[7], MONSTER_KANGASKHAN);
     monName = GetMonSpecies(MONSTER_KANGASKHAN);
     strcpy(gFormatBuffer_Monsters[6], monName);

@@ -1049,7 +1049,7 @@ _0809B09A:
 	.align 2, 0
 _0809B0D4: .4byte gUnknown_3001B64
 _0809B0D8: .4byte gUnknown_8116148
-_0809B0DC: .4byte gUnknown_202E5D8
+_0809B0DC: .4byte gSpeakerNameBuffer
 _0809B0E0: .4byte gFormattedSpeechBubble
 _0809B0E4:
 	ldr r0, _0809B134
@@ -1094,7 +1094,7 @@ _0809B128:
 	movs r0, 0x21
 	b _0809B14A
 	.align 2, 0
-_0809B134: .4byte gUnknown_202E5D8
+_0809B134: .4byte gSpeakerNameBuffer
 _0809B138: .4byte gUnknown_8116188
 _0809B13C: .4byte gFormatBuffer_Names
 _0809B140: .4byte sub_809B428
@@ -1346,7 +1346,7 @@ _0809B2F6:
 	bl strcpy
 	b _0809B32A
 	.align 2, 0
-_0809B310: .4byte gUnknown_202E5D8
+_0809B310: .4byte gSpeakerNameBuffer
 _0809B314: .4byte gFormattedSpeechBubble
 _0809B318:
 	ldr r0, _0809B3D0
@@ -1447,7 +1447,7 @@ _0809B3C0:
 	lsls r0, 16
 	b _0809B3EA
 	.align 2, 0
-_0809B3D0: .4byte gUnknown_202E5D8
+_0809B3D0: .4byte gSpeakerNameBuffer
 _0809B3D4: .4byte gUnknown_8116188
 _0809B3D8: .4byte gFormatBuffer_Names
 _0809B3DC: .4byte gUnknown_3001B64

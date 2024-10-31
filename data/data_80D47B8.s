@@ -36,8 +36,8 @@ gUnknown_80D48DC: @ 80D48DC
         .byte 0x07, 0x00, 0x00, 0x00
         .byte 0x00, 0x00, 0x00, 0x00
 
-	.global gUnknown_80D48F4
-gUnknown_80D48F4: @ 80D48F4
+	.global gSpeakerNameSeparator
+gSpeakerNameSeparator: @ 80D48F4
         .byte 0x3A, 0x20, 0x00, 0x00 @ maybe just a colon and space
 
 	.global gUnknown_80D48F8

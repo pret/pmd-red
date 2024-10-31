@@ -13,7 +13,7 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gUnknown_202E5D8[];
+extern u8 gSpeakerNameBuffer[];
 
 static EWRAM_DATA_2 struct unkStruct_203B2FC *sUnknown_203B2FC = {0};
 
@@ -116,7 +116,7 @@ static void sub_802DC9C(void)
 
     switch (sUnknown_203B2FC->state) {
         case 0:
-            CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, sUnknown_203B2FC->jobInfo->clientSpecies);
+            CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, sUnknown_203B2FC->jobInfo->clientSpecies);
             CopyYellowMonsterNametoBuffer(gFormatBuffer_Monsters[7], sUnknown_203B2FC->jobInfo->clientSpecies);
             speciesText = GetMonSpecies(sUnknown_203B2FC->jobInfo->clientSpecies);
             strcpy(gFormatBuffer_Monsters[0], speciesText);

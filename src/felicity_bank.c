@@ -13,7 +13,7 @@
 
 static EWRAM_DATA_2 FelicityBankWork *sFelicityBankWork = {0};
 
-extern u8 gUnknown_202E5D8[];
+extern u8 gSpeakerNameBuffer[];
 
 #include "data/felicity_bank.h"
 
@@ -59,7 +59,7 @@ bool8 CreateFelicityBank(s32 mode)
     sFelicityBankWork = MemoryAlloc(sizeof(FelicityBankWork), 8);
     sFelicityBankWork->menuAction = 0;
     sFelicityBankWork->mode = mode;
-    CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PERSIAN);
+    CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PERSIAN);
     CopyYellowMonsterNametoBuffer(gFormatBuffer_Monsters[7], MONSTER_PERSIAN);
     monName = GetMonSpecies(MONSTER_PERSIAN);
     strcpy(gFormatBuffer_Monsters[6], monName);

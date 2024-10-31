@@ -18,7 +18,7 @@
 #include "wigglytuff_shop2.h"
 #include "wigglytuff_shop3.h"
 
-extern u8 gUnknown_202E5D8[];
+extern u8 gSpeakerNameBuffer[];
 extern u8 gFormatBuffer_FriendArea[];
 
 static EWRAM_DATA_2 WigglytuffShop3Work *sWigglytuffShop3Work = {0};
@@ -63,7 +63,7 @@ bool8 CreateWigglytuffShop(u32 mode)
     sWigglytuffShop3Work->menuAction1 = 0;
     sWigglytuffShop3Work->menuAction2 = 0;
     sWigglytuffShop3Work->mode = mode;
-    CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_WIGGLYTUFF);
+    CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_WIGGLYTUFF);
     CopyYellowMonsterNametoBuffer(gFormatBuffer_Monsters[7], MONSTER_WIGGLYTUFF);
     str = GetMonSpecies(MONSTER_WIGGLYTUFF);
     strcpy(gFormatBuffer_Monsters[6], str);
