@@ -103,7 +103,7 @@ _080903F2:
 	mov r1, sp
 	add r2, sp, 0xC8
 	movs r3, 0
-	bl CopyFormatString
+	bl FormatString
 	b _08090430
 	.align 2, 0
 _0809040C: .4byte gUnknown_8108F40
@@ -119,7 +119,7 @@ _0809041C:
 	mov r1, sp
 	add r2, sp, 0xC8
 	movs r3, 0
-	bl CopyFormatString
+	bl FormatString
 _08090430:
 	adds r0, r7, 0
 	mov r1, sp
@@ -158,7 +158,7 @@ _08090476:
 	mov r1, sp
 	add r2, sp, 0xC8
 	movs r3, 0
-	bl CopyFormatString
+	bl FormatString
 	adds r0, r7, 0
 	mov r1, sp
 	bl sub_8090888
@@ -189,7 +189,7 @@ _080904BA:
 	mov r1, sp
 	add r2, sp, 0xC8
 	movs r3, 0
-	bl CopyFormatString
+	bl FormatString
 	adds r0, r7, 0
 	mov r1, sp
 	bl sub_8090888
@@ -250,7 +250,7 @@ _08090536:
 	mov r1, sp
 	add r2, sp, 0xC8
 	movs r3, 0
-	bl CopyFormatString
+	bl FormatString
 	adds r0, r7, 0
 	mov r1, sp
 	bl sub_8090888
@@ -332,7 +332,7 @@ _080905EA:
 	mov r1, sp
 	add r2, sp, 0xC8
 	movs r3, 0
-	bl CopyFormatString
+	bl FormatString
 	adds r0, r7, 0
 	mov r1, sp
 	bl sub_8090888
@@ -432,7 +432,7 @@ _080906B6:
 	mov r1, sp
 	add r2, sp, 0xC8
 	movs r3, 0
-	bl CopyFormatString
+	bl FormatString
 	adds r0, r7, 0
 	mov r1, sp
 	bl sub_8090888

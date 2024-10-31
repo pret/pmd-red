@@ -1084,7 +1084,7 @@ sub_80101F8:
 	adds r2, 0x50
 	adds r1, r3, 0
 	movs r3, 0
-	bl CopyFormatString
+	bl FormatString
 	b _08010220
 	.align 2, 0
 _08010214: .4byte gUnknown_80D3EFC

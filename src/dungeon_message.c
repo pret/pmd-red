@@ -220,7 +220,7 @@ static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2)
             break;
 
         gDungeon->unk1BDD4.unk1C054[gDungeon->unk1BDD4.unk1C060] = r7;
-        str = CopyFormatString(str, txt, txt + 62, 128);
+        str = FormatString(str, txt, txt + 62, 128);
         if (*str == '\r') str++;
         if (*str == '\n') str++;
         CopyStringToMessageLog(txt, r7, r8);

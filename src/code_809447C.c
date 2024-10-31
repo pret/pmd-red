@@ -58,7 +58,7 @@ static void sub_80944BC(s16 moveID, u8 *buffer)
         moveID_u16 = moveID_s32;
         sub_8092AA8(&move, moveID_u16);
         sub_80928C0(gFormatBuffer_Items[0], &move, NULL);
-        CopyFormatString(*gUnknown_811383C, buffer, buffer + 200, 0); // $m0's $i0
+        FormatString(*gUnknown_811383C, buffer, buffer + 200, 0); // $m0's $i0
     } else {
         strncpy(buffer, gUnknown_8113080[moveID - 0x1F4].text, 200);
     }
@@ -91,11 +91,11 @@ void sub_8094558(u32 param_1,u8 *param_2,UnkDungeonGlobal_unk1CE98_sub *param_3)
     sub_80922B4(gFormatBuffer_Monsters[1], param_3->buffer2, POKEMON_NAME_LENGTH);
     if (sub_8094528(param_3->moveID) != 0) {
         // $m1 was defeated by
-        CopyFormatString(*gUnknown_8113868,buffer, buffer + sizeof(buffer),0);
+        FormatString(*gUnknown_8113868,buffer, buffer + sizeof(buffer),0);
     }
     else {
         // $m1
-        CopyFormatString(*gUnknown_8113870,buffer, buffer + sizeof(buffer),0);
+        FormatString(*gUnknown_8113870,buffer, buffer + sizeof(buffer),0);
     }
 
     x = (0xb0 - sub_8008ED0(buffer)) / 2;

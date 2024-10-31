@@ -57,7 +57,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
 void sub_8014490(void);
 s32 sub_80144A4(s32 *a0);
 void DrawDialogueBoxString(void);
-const u8 *CopyFormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags);
+const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags);
 void PrintFormatStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr);
 void PrintFormatStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing);
 

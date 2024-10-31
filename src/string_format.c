@@ -218,7 +218,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
 {
     bool8 portraitOn = FALSE;
 
-    CopyFormatString(text, sDialogueTextBuffer, sDialogueTextBuffer + DIALOGUE_TEXT_BUFFER_SIZE - 1, flags);
+    FormatString(text, sDialogueTextBuffer, sDialogueTextBuffer + DIALOGUE_TEXT_BUFFER_SIZE - 1, flags);
     gUnknown_202E794 = sDialogueTextBuffer;
     gUnknown_202E748.unk24 = a1;
     gUnknown_202EC10 = a5;
@@ -634,7 +634,7 @@ static void sub_8014A88(void)
             break;
 
         r5 += 12;;
-        CopyFormatString(menuItem->text, text, text + sizeof(text), 0);
+        FormatString(menuItem->text, text, text + sizeof(text), 0);
         val = sub_8008ED0(text);
         if (r7 < val) {
             r7 = val;
@@ -683,7 +683,7 @@ static void UNUSED nullsub_35(void)
 {
 }
 
-const u8 *CopyFormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
+const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
 {
     u8 txtArray[60];
     bool8 r10 = TRUE;
@@ -874,7 +874,7 @@ void PrintFormatStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 te
 {
     u8 formatString[FORMAT_STR_MAX_LEN];
 
-    CopyFormatString(str, formatString, formatString + FORMAT_STR_MAX_LEN, 0);
+    FormatString(str, formatString, formatString + FORMAT_STR_MAX_LEN, 0);
     formatString[FORMAT_STR_MAX_LEN - 1] = '\0';
     PrintStringOnWindow(x, y, formatString, windowId, terminatingChr);
 }
@@ -883,7 +883,7 @@ void PrintFormatStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 t
 {
     u8 formatString[FORMAT_STR_MAX_LEN];
 
-    CopyFormatString(str, formatString, formatString + FORMAT_STR_MAX_LEN, 0);
+    FormatString(str, formatString, formatString + FORMAT_STR_MAX_LEN, 0);
     formatString[FORMAT_STR_MAX_LEN - 1] = '\0';
     PrintStringOnWindow2(x, y, formatString, windowId, terminatingChr, lineSpacing);
 }

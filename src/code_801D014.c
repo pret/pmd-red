@@ -579,7 +579,7 @@ static void sub_801D894(void)
         location = GetFriendAreaName(sUnknown_203B250->currFriendAreaLocation);
 
     // TODO this is def a hack
-    CopyFormatString(location, buffer, (u8 *)(&preload_string + 1), 0);
+    FormatString(location, buffer, (u8 *)(&preload_string + 1), 0);
     location_length = sub_8008ED0(buffer);
     x_coord = (128 - location_length) / 2; // Centers the location name
     CallPrepareTextbox_8008C54(1);

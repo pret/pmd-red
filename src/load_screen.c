@@ -312,7 +312,7 @@ void DrawLoadScreenText(void)
             {
                 default:
                     sprintfStatic(auStack356,gUnknown_80E7804,sub_8098FB4());
-                    CopyFormatString(auStack356,gLoadScreen->formattedLocation,gLoadScreen->formattedPlayTime,0);
+                    FormatString(auStack356,gLoadScreen->formattedLocation,gLoadScreen->formattedPlayTime,0);
                     break;
                 case 0x7:
                 case 0xB:
