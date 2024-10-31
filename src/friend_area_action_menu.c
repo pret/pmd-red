@@ -416,8 +416,7 @@ void sub_80277FC(void)
 void sub_80278B4(void)
 {
   PokemonStruct1 *playerStruct;
-  PokemonStruct1 *pokeStruct1;
-  PokemonStruct1 *pokeStruct2;
+  PokemonStruct1 *newLeader;
   u32 menuAction;
 
   menuAction = 0;
@@ -428,15 +427,7 @@ void sub_80278B4(void)
   switch(menuAction) {
       case FRIEND_AREA_ACTION_MENU_ACTION_JOIN_TEAM:
         if (sub_808D750(sUnknown_203B2BC->targetPoke)) {
-#ifdef NONMATCHING
-            pokeStruct1 = &gRecruitedPokemonRef->pokemon[sUnknown_203B2BC->targetPoke];
-#else
-        register size_t offset asm("r1") = offsetof(unkStruct_203B45C, pokemon[sUnknown_203B2BC->targetPoke]);
-        PokemonStruct1* p = gRecruitedPokemonRef->pokemon;
-        size_t addr = offset + (size_t)p;
-        pokeStruct1 = (PokemonStruct1*)addr;
-#endif
-          pokeStruct1->unk0 |= FLAG_ON_TEAM;
+          SetPokemonFlag2(&gRecruitedPokemonRef->pokemon[sUnknown_203B2BC->targetPoke]);
           nullsub_104();
         }
         sub_808ED00();
@@ -449,11 +440,11 @@ void sub_80278B4(void)
         SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_MAIN_2);
         break;
       case FRIEND_AREA_ACTION_MENU_ACTION_MAKE_LEADER:
-        pokeStruct2 = &gRecruitedPokemonRef->pokemon[sUnknown_203B2BC->targetPoke];
+        newLeader = &gRecruitedPokemonRef->pokemon[sUnknown_203B2BC->targetPoke];
         playerStruct = GetPlayerPokemonStruct();
-        if (!pokeStruct2->isTeamLeader) {
+        if (!newLeader->isTeamLeader) {
           playerStruct->isTeamLeader = FALSE;
-          pokeStruct2->isTeamLeader = TRUE;
+          newLeader->isTeamLeader = TRUE;
           nullsub_104();
         }
         sub_808ED00();

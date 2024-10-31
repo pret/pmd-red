@@ -912,9 +912,7 @@ s32 sub_80935B8(Move *moves, s32 index)
     }
 
     // this is so stupid but it works
-    #ifndef NONMATCHING
-    isNonTrivialLinkSequence++; isNonTrivialLinkSequence--;
-    #endif
+    ASM_MATCH_TRICK(isNonTrivialLinkSequence);
 
     for (i = linkSequenceStart + 1; i < MAX_MON_MOVES; i++) {
         Move *move = &moves[i];

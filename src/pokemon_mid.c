@@ -679,31 +679,21 @@ void GetPokemonLevelData(LevelData* a1, s16 _id, s32 level)
    *a1 = gLevelCurrentData[level];
 }
 
-const u8* DecompressMoveID(const u8* a1, u16* moveID)
+const u8* DecompressMoveID(const u8* src, u16* moveID)
 {
-    u32 r1 = *a1++;
-    u32 r3;
-    if (r1 & 0x80) {
-        r3 = *a1++;
+    u32 byte0;
+    u32 byte1 = *src++;
+    // If move >= 127 which means it uses 2 bytes and not one
+    if (byte1 & 0x80) {
+        byte0 = *src++;
     }
     else {
-        r3 = r1;
-        r1 = 0;
+        byte0 = byte1;
+        byte1 = 0;
     }
-#ifdef NONMATCHING
-    // wrong order
-    r1 &= 0x7f;
-    r3 &= 0x7f;
-    *moveID = (r1 << 7) | r3;
-#else
-    {
-        register u32 mask asm("r0") = 0x7f;
-        r3 &= mask;
-        r1 &= mask;
-        *moveID = (r1 << 7) | r3;
-    }
-#endif
-    return a1;
+
+    *moveID = (byte0 & 0x7F) | ((byte1 & 0x7F) << 7);
+    return src;
 }
 
 s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 IQPoints)
@@ -711,9 +701,9 @@ s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 IQPoints)
   const u8* stream;
   u16 moveID;  // moveID
   s32 count;
-  register s32 _species asm("r2");  // weird regalloc
+  s32 _species;
 
-  _species = (s16)species;
+  _species = SpeciesId(species);
   count = 0;
 
   if (species == MONSTER_DECOY) return 0;

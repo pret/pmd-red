@@ -14,13 +14,12 @@ typedef struct MissionText
 } MissionText;
 
 const u8 *GetCurrentMissionText(s16 index);
-// TODO: this should probably be bool8 but can't get a match just yet
-bool32 IsMazeCompleted(s16 mazeIndex);
+bool8 IsMazeCompleted(s16 mazeIndex);
 
 bool8 sub_8096F50(WonderMail *mail);
 void sub_8097418(s16 index, bool32);
 bool8 sub_8097504(s16 mazeIndex);
-const u8 *sub_80975DC(u32);
+const u8 *sub_80975DC(s16);
 
 // These two are definitely bool8 but can't get them to match with it yet
 //bool8 sub_8097384(s16);

@@ -4,29 +4,25 @@
 #include "dungeon.h"
 #include "event_flag.h"
 #include "code_80A26CC.h"
+#include "code_80972F4.h"
 
 ALIGNED(4) const char gMeetNinetalesText[] =  "Meet Ninetales.";
 ALIGNED(4) const char gAvoidCaptureText[] = "Avoid capture.";
 ALIGNED(4) const char gFinalScenarioText[] = _("Defeat the final Pokémon.");
 
+// Needed to match
+static inline s16 Self(s16 a)
+{
+    return a;
+}
 
 bool8 sub_8097504(s16 mazeIndex)
 {
-    s32 mazeIndex_s32;
-
-#ifndef NONMATCHING
-    register s32 mazeIndex_s32_1 asm("r1");
-#else
-    s32 mazeIndex_s32_1;
-#endif
     s32 uVar3;
-
-    mazeIndex_s32 = mazeIndex;
-    mazeIndex_s32_1 = mazeIndex_s32;
-
-    if(mazeIndex_s32 < 17)
+    s32 mazeIndex_ = Self(mazeIndex);
+    if(mazeIndex < 17)
     {
-        switch(mazeIndex_s32) {
+        switch(mazeIndex) {
             case 2:
             case 10:
             case 11:
@@ -55,9 +51,9 @@ bool8 sub_8097504(s16 mazeIndex)
     }
     else
     {
-        if (mazeIndex_s32_1 > 22)  return FALSE;
-        if (mazeIndex_s32_1 == 22) return FALSE;
-        if (mazeIndex_s32_1 == 21) return FALSE;
+        if (mazeIndex_ > 22)  return FALSE;
+        if (mazeIndex_ == 22) return FALSE;
+        if (mazeIndex_ == 21) return FALSE;
         uVar3 = 6;
     }
 
@@ -69,16 +65,9 @@ bool8 sub_8097504(s16 mazeIndex)
     }
 }
 
-// TODO: this should probably be bool8 but can't get a match just yet
-bool32 IsMazeCompleted(s16 mazeIndex)
+bool8 IsMazeCompleted(s16 mazeIndex)
 {
-    bool32 mazeCompletion;
-
-    mazeCompletion = GetScriptVarArrayValue(NULL, TRAINING_CONQUEST_LIST, mazeIndex);
-    if (mazeCompletion) {
-        mazeCompletion = TRUE;
-    }
-    return mazeCompletion;
+    return (GetScriptVarArrayValue(NULL, TRAINING_CONQUEST_LIST, mazeIndex) != 0);
 }
 
 void sub_80975A8(s16 param_1,u8 param_2)
@@ -92,15 +81,14 @@ const u8 *sub_80975C4(s16 index)
     return GetDungeonName1(sub_80A2728(index));
 }
 
-const u8 *sub_80975DC(u32 r0)
+const u8 *sub_80975DC(s16 r0)
 {
-    // TODO: slight hack but matches
-    r0 <<= 16;
-    if((0xffe90000 + r0) >> 16 < 2)
+    if(r0 == 23 || r0 == 24) {
         if(ScriptVarScenarioEqual(SCENARIO_MAIN, 0xE, -1))
             return gMeetNinetalesText;
         else
             return gAvoidCaptureText;
+    }
     else
         return gFinalScenarioText;
 }
