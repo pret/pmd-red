@@ -3,6 +3,7 @@
 #include "pokemon.h"
 #include "file_system.h"
 #include "code_803E46C.h"
+#include "code_8009804.h"
 #include "cpu.h"
 #include "dungeon_random.h"
 #include "bg_palette_buffer.h"
@@ -40,7 +41,7 @@ extern OpenedFile *gUnknown_202EC98;
 extern OpenedFile *gUnknown_202EC94;
 extern s32 gDungeonNameBannerFont;
 extern u8 gUnknown_20274A5;
-extern u8 gFontPalette[];
+extern Palette32 gFontPalette[8];
 
 struct UnkDungeonFileData
 {
@@ -537,6 +538,17 @@ s32 sub_803DA20(s32 species)
     return 1;
 }
 
+struct DungeonNameFontFileData
+{
+    /* 0x0 */ u8 unk0;
+    /* 0x4 */ s32 font;
+};
+
+struct DungeonNamePaletteFileData
+{
+    Rgb32 pal[16];
+};
+
 void ShowDungeonNameBanner(void)
 {
     u8 text[100];
@@ -546,9 +558,9 @@ void ShowDungeonNameBanner(void)
 
     gDungeonNameBannerPalette = OpenFileAndGetFileDataPtr(gUnknown_80F60F8, &gDungeonFileArchive);
     gDungeonNameBannerFontFile = OpenFileAndGetFileDataPtr(gUnknown_80F6100, &gDungeonFileArchive);
-    gDungeonNameBannerFont = (s32)(((u8**) gDungeonNameBannerFontFile->data)[1]);
+    gDungeonNameBannerFont =  ((struct DungeonNameFontFileData *)(gDungeonNameBannerFontFile->data))->font;
     for (i = 0; i < 16; i++) {
-        SetBGPaletteBufferColorArray(i + 224, (void*) &((u8**) gDungeonNameBannerPalette->data)[i]); // Todo: Fix when there is a better idea what to do with structs from opened files
+        SetBGPaletteBufferColorArray(i + 224, &((struct DungeonNamePaletteFileData *)(gDungeonNameBannerPalette->data))->pal[i]);
     }
     CpuClear((void *)(VRAM + 0x140), 0x1C00);
     if (sub_80848EC()) {
@@ -1038,17 +1050,17 @@ NAKED void sub_803E02C(void)
 void sub_803E13C(void)
 {
     s32 i;
-    u8 *pal;
+    Rgb32 *pal;
 
     SetWindowBGColor();
     if (gGameOptionsRef->playerGender != 0)
-        pal = gFontPalette + 256;
+        pal = gFontPalette[4].pal;
     else
-        pal = gFontPalette;
+        pal = gFontPalette[0].pal;
 
     for (i = 0; i < 16; i++) {
         SetBGPaletteBufferColorArray(240 + i, pal);
-        pal += 4;
+        pal++;
     }
 }
 

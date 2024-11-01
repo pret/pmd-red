@@ -12,6 +12,7 @@
 #include "pokemon.h"
 #include "text1.h"
 #include "text2.h"
+#include "string_format.h"
 
 EWRAM_DATA_2 struct PersonalityStruct_203B404 *gUnknown_203B404 = {0};
 
@@ -243,22 +244,22 @@ static void RedrawPartnerSelectionMenu(void)
 static void PersonalityTest_DisplayPartnerSprite(void)
 {
     s32 partnerID;
-    OpenedFile *faceFile;
+    struct OpenedFile *faceFile;
     s32 palleteIndex;
-    u8 *r6;
-    u32 faceIndex;
+    const u8 *gfx;
+    s32 emotionId;
 
     partnerID = gUnknown_203B404->PartnerArray[gUnknown_203B404->s18.s0.input.menuIndex];
     CallPrepareTextbox_8008C54(1);
     sub_80073B8(1);
     faceFile = GetDialogueSpriteDataPtr(partnerID);
-    r6 = ((struct FaceData *)faceFile->data)->unk0[1 + EMOTION_NORMAL];
-    faceIndex = EMOTION_NORMAL;
+    gfx = ((struct PortraitGfx *)(faceFile->data))->sprites[EMOTION_NORMAL].gfx;
+    emotionId = EMOTION_NORMAL;
+    for (palleteIndex = 0; palleteIndex < 0x10; palleteIndex++) {
+        SetBGPaletteBufferColorArray(palleteIndex + 0xE0, &((struct PortraitGfx *)(faceFile->data))->sprites[emotionId].pal[palleteIndex]);
+    }
 
-    for (palleteIndex = 0; palleteIndex < 0x10; palleteIndex++)
-        SetBGPaletteBufferColorArray(palleteIndex + 0xE0, &((struct FaceData *)faceFile->data)->unk0[faceIndex][palleteIndex * 4]);
-
-    sub_800836C(1, r6, 14);
+    DisplayMonPortraitSpriteFlipped(1, gfx, 14);
     CloseFile(faceFile);
     sub_80073E0(1);
     gUnknown_203B404->unk16 = 1;

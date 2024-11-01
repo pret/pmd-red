@@ -366,7 +366,12 @@ void DrawLoadScreenText(void)
 }
 
 // Think structure of clmkFile is like Team Rank Badges except each pic has a diff pallete
-// TODO clean up but it matches so yea
+struct ClmkFileData
+{
+    /* 0x0 */ u32 *pics;
+    /* 0x4 */ Rgb32 *pallete;
+};
+
 void sub_80397B4(void)
 {
   OpenedFile *clmkFile;
@@ -378,7 +383,7 @@ void sub_80397B4(void)
 
   for(index = 0; index < 64; index++)
   {
-    SetBGPaletteBufferColorArray(index + 176, (u8 *)(*(s32 *)((clmkFile->data) + 4) + index * 4));
+    SetBGPaletteBufferColorArray(index + 176, &((struct ClmkFileData *)(clmkFile->data))->pallete[index]);
   }
 
   x = 8;
@@ -388,7 +393,7 @@ void sub_80397B4(void)
   for(index = 0; index < 12; index++)
   {
     if (sub_80023E4(gUnknown_203B3B8[index])) {
-      sub_8007E20(0,x,y,0x10,0x10,(u32 *)(*((s32*)clmkFile->data) + index * 0x80), gUnknown_203B388[index]);
+      sub_8007E20(0,x,y,0x10,0x10,(&((struct ClmkFileData *)(clmkFile->data))->pics[index * 32]), gUnknown_203B388[index]);
       x += 16;
     }
   }

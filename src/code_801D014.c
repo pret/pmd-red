@@ -563,23 +563,17 @@ static void sub_801D878(void)
 
 static void sub_801D894(void)
 {
-    u8 rank;
     const u8 *location;
     s32 location_length;
     s32 x_coord;
-
-    // Stored on stack
-    u32 *preload_string;
-    const u8 *r5; // R5
-    u8 buffer[96]; // sp +4
+    u8 buffer[100]; // sp +4
 
     if (sUnknown_203B250->currFriendAreaLocation == FRIEND_AREA_NONE)
         location = sub_8098FB4();
     else
         location = GetFriendAreaName(sUnknown_203B250->currFriendAreaLocation);
 
-    // TODO this is def a hack
-    FormatString(location, buffer, (u8 *)(&preload_string + 1), 0);
+    FormatString(location, buffer, buffer + sizeof(buffer), 0);
     location_length = sub_8008ED0(buffer);
     x_coord = (128 - location_length) / 2; // Centers the location name
     CallPrepareTextbox_8008C54(1);
@@ -590,10 +584,8 @@ static void sub_801D894(void)
     sub_80073B8(2);
     LoadTeamRankBadge(2, 8, 6);
 
-    // Have to load before TeamRank funcs
-    r5 = sFmtPointsCyan; // %s {COLOR CYAN}%d{RESET} Pts.
-    rank = GetRescueTeamRank();
-    sprintfStatic(buffer, r5, GetTeamRankString(rank), GetTeamRankPts());
+    // %s {COLOR CYAN}%d{RESET} Pts.
+    sprintfStatic(buffer, sFmtPointsCyan, GetTeamRankString(GetRescueTeamRank()), GetTeamRankPts());
     PrintStringOnWindow(32, 4, buffer, 2, 0);
     sprintfStatic(buffer, sFmtMoneyCyan, gTeamInventoryRef->teamMoney);
     PrintStringOnWindow(32, 18, buffer, 2, 0);
@@ -605,7 +597,7 @@ static void LoadTeamRankBadge(u32 a0, u32 a1, u32 a2)
     OpenedFile *teamBadgeFile;
     s32 palleteIndex;
     u8 rank;
-    u8 *colorArray;
+    Rgb32 *colorArray;
     u8 *teamBadgePic;
 
     teamBadgeFile = OpenFileAndGetFileDataPtr(sTeamRankBadgeFileName, &gTitleMenuFileArchive);
@@ -614,7 +606,7 @@ static void LoadTeamRankBadge(u32 a0, u32 a1, u32 a2)
 
     for (palleteIndex = 0; palleteIndex < 16; palleteIndex++) {
         SetBGPaletteBufferColorArray(palleteIndex + 224, colorArray);
-        colorArray = colorArray + 4;
+        colorArray++;
     }
 
     rank = GetRescueTeamRank();

@@ -117,7 +117,7 @@ extern const u8 gUnknown_80D4910[];
 extern const u8 gSpeakerNameSeparator[];
 
 extern void SetCharacterMask(int a0);
-extern void sub_8008274(s32 a0, const u8 *compressedData, s32 a2);
+extern void DisplayMonPortraitSprite(s32 a0, const u8 *compressedData, s32 a2);
 extern void sub_80073E0(s32 a0);
 extern void sub_8011A04(void);
 
@@ -247,7 +247,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
         gUnknown_203B198.unk26 = 5;
         gUnknown_203B198.unk28 = 5;
         for (i = 0; i < 16; i++) {
-            SetBGPaletteBufferColorArray(224 + i, &monPortraitPtr->faceData->sprites[monPortraitPtr->spriteId].pal[i * 4]);
+            SetBGPaletteBufferColorArray(224 + i, &monPortraitPtr->faceData->sprites[monPortraitPtr->spriteId].pal[i]);
         }
         portraitOn = TRUE;
         if (monPortraitPtr->unkE) {
@@ -292,10 +292,10 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
 
         sub_80073B8(1);
         if (!monPortraitPtr->flip) {
-            sub_8008274(1, data, 0xE);
+            DisplayMonPortraitSprite(1, data, 0xE);
         }
         else {
-            sub_800836C(1, data, 0xE);
+            DisplayMonPortraitSpriteFlipped(1, data, 0xE);
         }
         sub_80073E0(1);
     }

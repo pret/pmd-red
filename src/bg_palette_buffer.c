@@ -43,10 +43,10 @@ void SetBGPaletteBufferColorRGB(s32 index, const u8 *colorArray, s32 a1, u8 *a2)
         sBGPaletteBuffer[index] = var = ((a2[4 * colorArray[2] + 2] * a1 / 256 & 0x1F) << 10) | ((a2[4 * colorArray[1] + 1] * a1 / 256 & 0x1F) << 5) | (a2[4 * colorArray[0]] * a1 / 256 & 0x1F);
 }
 
-void SetBGPaletteBufferColorArray(s32 index, const u8 *colorArray)
+void SetBGPaletteBufferColorArray(s32 index, const Rgb32 *color32)
 {
     sBGPaletteUsed[index / BG_PALETTE_BUFFER_CHUNK_SIZE] = TRUE;
-    sBGPaletteBuffer[index] = (colorArray[2] >> 3) << 10 | (colorArray[1] >> 3) << 5 | colorArray[0] >> 3;
+    sBGPaletteBuffer[index] = RGB2(color32->r >> 3, color32->g >> 3, color32->b >> 3);
 }
 
 void SetBGPaletteBufferColor(s32 index, u16 *color)
@@ -59,7 +59,7 @@ void nullsub_4(s32 index, const u8 *colorArray, s32 a1, u8 *a2)
 {
 }
 
-void nullsub_5(s32 index, const u8 *colorArray)
+void nullsub_5(s32 index, const Rgb32 *colorArray)
 {
 }
 

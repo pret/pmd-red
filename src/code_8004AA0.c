@@ -124,9 +124,9 @@ bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 a3, u8 *a4, s16 *a5
             ret = TRUE;
         }
 
-        r1 = a5[0] + a0->unk14.unk0;
-        r3 = a5[1] + a0->unk14.unk1;
-        r5 = a5[2] + a0->unk14.unk2;
+        r1 = a5[0] + a0->unk14.r;
+        r3 = a5[1] + a0->unk14.g;
+        r5 = a5[2] + a0->unk14.b;
 
         if (r1 > 0xFF)
             r1 = 0xFF;

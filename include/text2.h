@@ -73,7 +73,7 @@ const u8 *xxx_handle_format_global(const u8 *str, struct UnkDrawStringStruct *un
 // text.s
 extern const struct unkChar *GetCharacter(s32);
 extern void InitGraphics(void);
-void sub_800836C(s32 a0, const u8 *compressedData, s32 a1);
+void DisplayMonPortraitSpriteFlipped(s32 a0, const u8 *compressedData, s32 a1);
 extern void sub_800898C(void);
 extern void sub_80089AC(const UnkTextStruct2 *, UnkTextStruct2_sub *);
 extern void CallPrepareTextbox_8008C54(u32);

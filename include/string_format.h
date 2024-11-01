@@ -4,6 +4,7 @@
 #include "file_system.h"
 #include "structs/menu.h"
 #include "structs/str_text.h"
+#include "structs/rgb.h"
 
 // TODO: once the files close to string_format.c are decompiled, check if these should be included here. Most likely, they should be declared elsewhere.
 // code_80130A8.s
@@ -19,7 +20,7 @@ void sub_80155F0(void);
 
 struct PortraitGfxSub
 {
-    const u8 *pal;
+    const Rgb32 *pal;
     const u8 *gfx;
 };
 

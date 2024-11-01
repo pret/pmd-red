@@ -4,6 +4,7 @@
 #include "structs/menu.h"
 #include "pokemon.h"
 #include "structs/str_text.h"
+#include "structs/rgb.h"
 
 // size: 0x118
 struct unk_203B250
@@ -27,7 +28,7 @@ struct unk_203B250
 struct TeamBadgeData
 {
     /* 0x0 */ u8 *pics; // probably a pointer to an arrays of pixels?
-    /* 0x4 */ u8 *pallete; // Pics share common pallete
+    /* 0x4 */ Rgb32 *pallete; // Pics share common pallete
 };
 
 bool8 sub_801D014(PokemonStruct1 *);
