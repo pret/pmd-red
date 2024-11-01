@@ -383,7 +383,7 @@ static void PrintPersonalityTypeDescription(void)
 static void PersonalityTest_DisplayStarterSprite(void)
 {
     s32 starterID;
-    struct FileMonPortraits *faceFile;
+    struct OpenedFile *faceFile;
     s32 palleteIndex;
     s32 emotionId;
     const u8 *gfx;
@@ -397,14 +397,14 @@ static void PersonalityTest_DisplayStarterSprite(void)
     CallPrepareTextbox_8008C54(1);
     sub_80073B8(1);
 
-    faceFile = (void*) GetDialogueSpriteDataPtr(starterID);
-    gfx = faceFile->data->sprites[EMOTION_HAPPY].gfx;
+    faceFile = GetDialogueSpriteDataPtr(starterID);
+    gfx = ((struct PortraitGfx *)(faceFile->data))->sprites[EMOTION_HAPPY].gfx;
     emotionId = EMOTION_HAPPY;
     for (palleteIndex = 0; palleteIndex < 0x10; palleteIndex++) {
-        SetBGPaletteBufferColorArray(palleteIndex + 0xE0, &faceFile->data->sprites[emotionId].pal[palleteIndex]);
+        SetBGPaletteBufferColorArray(palleteIndex + 0xE0, &((struct PortraitGfx *)(faceFile->data))->sprites[emotionId].pal[palleteIndex]);
     }
 
     DisplayMonPortraitSpriteFlipped(1, gfx, 14);
-    CloseFile((void*)faceFile);
+    CloseFile(faceFile);
     sub_80073E0(1);
 }

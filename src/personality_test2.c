@@ -244,7 +244,7 @@ static void RedrawPartnerSelectionMenu(void)
 static void PersonalityTest_DisplayPartnerSprite(void)
 {
     s32 partnerID;
-    struct FileMonPortraits *faceFile;
+    struct OpenedFile *faceFile;
     s32 palleteIndex;
     const u8 *gfx;
     s32 emotionId;
@@ -252,15 +252,15 @@ static void PersonalityTest_DisplayPartnerSprite(void)
     partnerID = gUnknown_203B404->PartnerArray[gUnknown_203B404->s18.s0.input.menuIndex];
     CallPrepareTextbox_8008C54(1);
     sub_80073B8(1);
-    faceFile = (void*) GetDialogueSpriteDataPtr(partnerID);
-    gfx = faceFile->data->sprites[EMOTION_NORMAL].gfx;
+    faceFile = GetDialogueSpriteDataPtr(partnerID);
+    gfx = ((struct PortraitGfx *)(faceFile->data))->sprites[EMOTION_NORMAL].gfx;
     emotionId = EMOTION_NORMAL;
     for (palleteIndex = 0; palleteIndex < 0x10; palleteIndex++) {
-        SetBGPaletteBufferColorArray(palleteIndex + 0xE0, &faceFile->data->sprites[emotionId].pal[palleteIndex]);
+        SetBGPaletteBufferColorArray(palleteIndex + 0xE0, &((struct PortraitGfx *)(faceFile->data))->sprites[emotionId].pal[palleteIndex]);
     }
 
     DisplayMonPortraitSpriteFlipped(1, gfx, 14);
-    CloseFile((void*)faceFile);
+    CloseFile(faceFile);
     sub_80073E0(1);
     gUnknown_203B404->unk16 = 1;
 }

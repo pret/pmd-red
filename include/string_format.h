@@ -39,12 +39,6 @@ struct MonPortraitMsg
     u8 unkE;
 };
 
-struct FileMonPortraits
-{
-    /* 0x0 */ File *file;
-    /* 0x4 */ struct PortraitGfx *data;
-};
-
 #define FORMAT_BUFFER_LEN 80
 #define FRIEND_AREA_BUFFER_LEN 184
 
