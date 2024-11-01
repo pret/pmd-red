@@ -71,7 +71,7 @@ bool8 CreateFelicityBank(s32 mode)
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_PERSIAN);
     sFelicityBankWork->monPortrait.faceFile = faceFile;
-    sFelicityBankWork->monPortrait.faceData = (void *) faceFile->data;
+    sFelicityBankWork->monPortrait.faceData = (struct PortraitGfx *) faceFile->data;
     sFelicityBankWork->monPortrait.spriteId = 0;
     sFelicityBankWork->monPortrait.flip = FALSE;
     sFelicityBankWork->monPortrait.unkE = 0;

@@ -18,7 +18,7 @@
 
 extern u8 gUnknown_203B40C;
 extern u8 gUnknown_203B40D;
-extern s32 gUnknown_202EDC8;
+extern s32 gDungeonBrightness;
 extern s32 gUnknown_202EDCC;
 extern u32 gUnknown_202EDD0;
 extern s32 gUnknown_202EDD4;
@@ -87,7 +87,7 @@ void sub_803E490(u32 unused)
 
 
     if(gDungeon->unk181e8.unk18215 != 0 && gDungeon->unk1BDD4.unk1C06C != 3)
-        sub_8004AF0(gUnknown_203B40D, gUnknown_202EE8C, 0xA0, 0x20, gUnknown_202EDC8, (u8 *)gDungeon->unk17C);
+        sub_8004AF0(gUnknown_203B40D, gUnknown_202EE8C, 0xA0, 0x20, gDungeonBrightness, gDungeon->colorRamp);
 
     nullsub_8(gGameOptionsRef->unkA);
     sub_8005180();
@@ -169,7 +169,7 @@ void sub_803E748(void) {
 
     index2 = 0x1F;
     gUnknown_203B40D = 1;
-    gUnknown_202EDC8 = 0;
+    gDungeonBrightness = 0;
 
     sub_803E874(1, 0x1F);
 
@@ -186,13 +186,13 @@ void sub_803E748(void) {
             }
         }
         if(index1 > 0xB)
-            if(gUnknown_202EDC8 <= 0x1E)
-                gUnknown_202EDC8++;
+            if(gDungeonBrightness <= 0x1E)
+                gDungeonBrightness++;
         sub_803E874(1, index2);
         sub_803E46C(5);
     }
     gUnknown_203B40D = 0;
-    gUnknown_202EDC8 = 0x1F;
+    gDungeonBrightness = 0x1F;
 }
 
 void sub_803E7C8(void)
@@ -203,7 +203,7 @@ void sub_803E7C8(void)
 
     index2 = 0x1F;
     gUnknown_203B40D = 1;
-    gUnknown_202EDC8 = 0;
+    gDungeonBrightness = 0;
 
     sub_803E46C(5);
 
@@ -234,9 +234,9 @@ void sub_803E830(void)
     {
         sub_803E874(0, 0);
         sub_803E46C(5);
-        if(gUnknown_202EDC8 > 0)
-            gUnknown_202EDC8--;
+        if(gDungeonBrightness > 0)
+            gDungeonBrightness--;
     }
-    gUnknown_202EDC8 = 0;
+    gDungeonBrightness = 0;
     gUnknown_203B40D = 0;
 }

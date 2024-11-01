@@ -376,7 +376,7 @@ void DisplayDungeonMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8
         && IsPokemonDialogueSpriteAvail(monSpriteInfo->species, monSpriteInfo->spriteId))
     {
         monPortrait.faceFile = GetDialogueSpriteDataPtr(monSpriteInfo->species);
-        monPortrait.faceData = (void *) monPortrait.faceFile->data;
+        monPortrait.faceData = (struct PortraitGfx *) monPortrait.faceFile->data;
         monPortrait.pos.x = 2;
         monPortrait.pos.y = 9;
         monPortrait.spriteId = monSpriteInfo->spriteId;
@@ -501,7 +501,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
         monPortraitPtr = &monPortrait;
         monPortraitPtr->faceFile = GetDialogueSpriteDataPtr(dialogueMonId);
         if (monPortraitPtr->faceFile != NULL) {
-            monPortraitPtr->faceData = (void *) monPortraitPtr->faceFile->data;
+            monPortraitPtr->faceData = (struct PortraitGfx *) monPortraitPtr->faceFile->data;
             monPortraitPtr->unkE = 0;
             monPortraitPtr->spriteId = dialogueInfo->unk2;
             monPortraitPtr->flip = strPtr->flip;
@@ -551,7 +551,7 @@ bool32 DisplayDungeonYesNoMessage(struct MonDialogueSpriteInfo *monSpriteInfo, c
         && IsPokemonDialogueSpriteAvail(monSpriteInfo->species, monSpriteInfo->spriteId))
     {
         monPortrait.faceFile = GetDialogueSpriteDataPtr(monSpriteInfo->species);
-        monPortrait.faceData = (void *) monPortrait.faceFile->data;
+        monPortrait.faceData = (struct PortraitGfx *) monPortrait.faceFile->data;
         monPortrait.pos.x = 2;
         monPortrait.pos.y = 9;
         monPortrait.spriteId = monSpriteInfo->spriteId;
@@ -600,7 +600,7 @@ s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
         && IsPokemonDialogueSpriteAvail(monSpriteInfo->species, monSpriteInfo->spriteId))
     {
         monPortrait.faceFile = GetDialogueSpriteDataPtr(monSpriteInfo->species);
-        monPortrait.faceData = (void *) monPortrait.faceFile->data;
+        monPortrait.faceData = (struct PortraitGfx *) monPortrait.faceFile->data;
         monPortrait.pos.x = 2;
         monPortrait.pos.y = 9;
         monPortrait.spriteId = monSpriteInfo->spriteId;
@@ -763,7 +763,7 @@ void sub_8052FB8(const u8 *str)
         if (r8 < 62) {
             r8++;
             for (j = 0; j < 8; j++) {
-                SetBGPaletteBufferColorRGB(240 + j, (void*) &gFontPalette[0].pal[j], r8 / 2, NULL);
+                SetBGPaletteBufferColorRGB(240 + j, &gFontPalette[0].pal[j], r8 / 2, NULL);
             }
         }
         else {
@@ -816,7 +816,7 @@ void sub_8052FB8(const u8 *str)
 
     while (r8 >= 0) {
         for (j = 0; j < 8; j++) {
-            SetBGPaletteBufferColorRGB(240 + j, (void*) &gFontPalette[0].pal[j], r8 / 2, NULL);
+            SetBGPaletteBufferColorRGB(240 + j, &gFontPalette[0].pal[j], r8 / 2, NULL);
         }
         DrawDialogueBoxString();
         sub_803E46C(9);

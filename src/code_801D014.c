@@ -595,17 +595,17 @@ static void sub_801D894(void)
 static void LoadTeamRankBadge(u32 a0, u32 a1, u32 a2)
 {
     OpenedFile *teamBadgeFile;
-    s32 palleteIndex;
+    s32 paletteIndex;
     u8 rank;
-    Rgb32 *colorArray;
+    RGB *colorArray;
     u8 *teamBadgePic;
 
     teamBadgeFile = OpenFileAndGetFileDataPtr(sTeamRankBadgeFileName, &gTitleMenuFileArchive);
     teamBadgePic = ((struct TeamBadgeData *)(teamBadgeFile->data))->pics;
-    colorArray = ((struct TeamBadgeData *)(teamBadgeFile->data))->pallete;
+    colorArray = ((struct TeamBadgeData *)(teamBadgeFile->data))->palette;
 
-    for (palleteIndex = 0; palleteIndex < 16; palleteIndex++) {
-        SetBGPaletteBufferColorArray(palleteIndex + 224, colorArray);
+    for (paletteIndex = 0; paletteIndex < 16; paletteIndex++) {
+        SetBGPaletteBufferColorArray(paletteIndex + 224, colorArray);
         colorArray++;
     }
 

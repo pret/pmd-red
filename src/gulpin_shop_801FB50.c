@@ -101,7 +101,7 @@ bool8 sub_801FB50(u32 mode)
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
     gUnknown_203B27C->monPortrait.faceFile = faceFile;
-    gUnknown_203B27C->monPortrait.faceData = (void *) faceFile->data;
+    gUnknown_203B27C->monPortrait.faceData = (struct PortraitGfx *) faceFile->data;
     gUnknown_203B27C->monPortrait.spriteId = 0;
     gUnknown_203B27C->monPortrait.flip = FALSE;
     gUnknown_203B27C->monPortrait.unkE = 0;

@@ -20,7 +20,7 @@ void sub_80155F0(void);
 
 struct PortraitGfxSub
 {
-    const Rgb32 *pal;
+    const RGB *pal;
     const u8 *gfx;
 };
 

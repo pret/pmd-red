@@ -86,7 +86,7 @@ s32 sub_802B2D4(void)
   CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PELIPPER);
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
   sUnknown_203B2C8->monPortrait.faceFile = faceFile;
-  sUnknown_203B2C8->monPortrait.faceData = (void *) faceFile->data;
+  sUnknown_203B2C8->monPortrait.faceData = (struct PortraitGfx *) faceFile->data;
   sUnknown_203B2C8->monPortrait.spriteId = 0;
   sUnknown_203B2C8->monPortrait.flip = FALSE;
   sUnknown_203B2C8->monPortrait.unkE = 0;

@@ -75,7 +75,7 @@ bool8 CreateWigglytuffShop(u32 mode)
 
     file = GetDialogueSpriteDataPtr(MONSTER_WIGGLYTUFF);
     sWigglytuffShop3Work->monPortrait.faceFile = file;
-    sWigglytuffShop3Work->monPortrait.faceData = (void *) file->data;
+    sWigglytuffShop3Work->monPortrait.faceData = (struct PortraitGfx *) file->data;
     sWigglytuffShop3Work->monPortrait.spriteId = 0;
     sWigglytuffShop3Work->monPortrait.flip = FALSE;
     sWigglytuffShop3Work->monPortrait.unkE = 0;

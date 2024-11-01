@@ -5,6 +5,7 @@
 #include "structs/dungeon_entity.h"
 #include "file_system.h"
 #include "structs/map.h"
+#include "structs/rgb.h"
 #include "structs/str_position.h"
 #include "sprite.h"
 
@@ -22,15 +23,6 @@ typedef struct DungeonLocation
     /* 0x0 */ u8 id;
     /* 0x1 */ u8 floor;
 } DungeonLocation;
-
-// size: 0x4
-// This might be "RGB"... see `SetDungeonBGColorRGB()`
-typedef struct Dungeon_sub
-{
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-} Dungeon_sub;
 
 typedef struct Weather
 {
@@ -267,7 +259,7 @@ typedef struct Dungeon
     Entity *unkBC;
     u8 fillC0[0x134 - 0xC0];
     struct unkStruct_Dungeon134_sub unk134;
-    Dungeon_sub unk17C[0x100];
+    RGB colorRamp[0x100];
     /* 0x57C */ u8 fill57C[0x5C0 - 0x57c];
     /* 0x5C0 */ s32 unk5C0;
     /* 0x5C4 */ struct unkStruct_Dungeon5C4_sub unk5C4[3];

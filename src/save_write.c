@@ -26,7 +26,7 @@ void PrepareSavePakWrite(s16 pokemonID)
     if (pokemonID != MONSTER_NONE) {
         file = GetDialogueSpriteDataPtr(pokemonID);
         sSavePakWrite->monPortrait.faceFile = file;
-        sSavePakWrite->monPortrait.faceData = (void *) file->data;
+        sSavePakWrite->monPortrait.faceData = (struct PortraitGfx *) file->data;
         sSavePakWrite->monPortrait.spriteId = 0;
         sSavePakWrite->monPortrait.flip = FALSE;
         sSavePakWrite->monPortrait.unkE = 0;

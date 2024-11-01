@@ -191,7 +191,7 @@ void ReadGameOptions(struct unkStruct_8094924 *param_1)
 
 void SetWindowBGColor(void)
 {
-    struct Rgb32 winColors[] = {
+    struct RGB winColors[] = {
         {0x20, 0x48, 0x68}, // Blue
         {0x80, 0x38, 0x20}, // Red
         {0x28, 0x80, 0x48}, // Green

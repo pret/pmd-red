@@ -20,7 +20,7 @@ void InitFontPalette(void)
 {
     OpenedFile *fontpalFile;
     s32 i;
-    Rgb32 *ptr;
+    RGB *ptr;
 
     fontpalFile = OpenFileAndGetFileDataPtr(gUnknown_80B88CC, &gSystemFileArchive); // fontpal
     CpuCopy(gFontPalette, fontpalFile->data, sizeof(gFontPalette));
@@ -126,7 +126,7 @@ void sub_80099C0(void)
     CpuCopy(BG_SCREEN_ADDR(13), gUnknown_202B038[1], BG_SCREEN_SIZE);
 }
 
-void sub_80099F0(Rgb32 a0)
+void sub_80099F0(RGB a0)
 {
     s32 i;
 

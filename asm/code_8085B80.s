@@ -411,7 +411,7 @@ _08085E70: .4byte gDungeonPaletteFile
 _08085E74: .4byte 0xffffff00
 _08085E78: .4byte 0xffff00ff
 _08085E7C: .4byte 0xff00ffff
-_08085E80: .4byte gUnknown_202EDC8
+_08085E80: .4byte gDungeonBrightness
 _08085E84: .4byte gDungeon
 _08085E88: .4byte 0xffff0000
 _08085E8C: .4byte gUnknown_202EE8C

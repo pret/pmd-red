@@ -31,7 +31,7 @@ void sub_8004AA4(unkStruct_202EE8C *a0, OpenedFile *a1, s32 a2)
     }
 }
 
-bool8 sub_8004AF0(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, u8 *a5)
+bool8 sub_8004AF0(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, const RGB *a5)
 {
     bool8 bVar3;
     bool8 ret;
@@ -57,13 +57,13 @@ bool8 sub_8004AF0(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, u8 *a
         }
 
         if (bVar3)
-            SetBGPaletteBufferColorRGB(a2, (u8 *)&a1->unk14, a4, a5);
+            SetBGPaletteBufferColorRGB(a2, &a1->unk14, a4, a5);
     }
 
     return ret;
 }
 
-UNUSED static bool8 sub_8004B78(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, u8 *a5)
+UNUSED static bool8 sub_8004B78(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, const RGB *a5)
 {
     bool8 bVar3;
     bool8 ret;
@@ -89,23 +89,20 @@ UNUSED static bool8 sub_8004B78(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3,
         }
 
         if (bVar3)
-            nullsub_4(a2, (u8 *)&a1->unk14, a4, a5);
+            nullsub_4(a2, &a1->unk14, a4, a5);
     }
 
     return ret;
 }
 
-bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 a3, u8 *a4, s16 *a5)
+bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB *ramp, s16 *a5)
 {
     bool8 ret;
     s32 i;
-    s32 r1;
-    s32 r3;
-    s32 r5;
-    u32 color32;
-    u32 val;
-    u32 val2;
-    u32 val3;
+    s32 r;
+    s32 g;
+    s32 b;
+    RGB color;
 
     ret = FALSE;
 
@@ -124,36 +121,28 @@ bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 a3, u8 *a4, s16 *a5
             ret = TRUE;
         }
 
-        r1 = a5[0] + a0->unk14.r;
-        r3 = a5[1] + a0->unk14.g;
-        r5 = a5[2] + a0->unk14.b;
+        r = a5[0] + a0->unk14.r;
+        g = a5[1] + a0->unk14.g;
+        b = a5[2] + a0->unk14.b;
 
-        if (r1 > 0xFF)
-            r1 = 0xFF;
-        if (r3 > 0xFF)
-            r3 = 0xFF;
-        if (r5 > 0xFF)
-            r5 = 0xFF;
-        if (r1 < 0)
-            r1 = 0;
-        if (r3 < 0)
-            r3 = 0;
-        if (r5 < 0)
-            r5 = 0;
+        if (r > 0xFF)
+            r = 0xFF;
+        if (g > 0xFF)
+            g = 0xFF;
+        if (b > 0xFF)
+            b = 0xFF;
+        if (r < 0)
+            r = 0;
+        if (g < 0)
+            g = 0;
+        if (b < 0)
+            b = 0;
 
-        val = (u8)r1;
-        color32 &= 0xFFFFFF00;
-        color32 |= val;
+        color.r = r;
+        color.g = g;
+        color.b = b;
 
-        val2 = (u8)r3 << 8;
-        color32 &= 0xFFFF00FF;
-        color32 |= val2;
-
-        val3 = (u8)r5 << 16;
-        color32 &= 0xFF00FFFF;
-        color32 |= val3;
-
-        SetBGPaletteBufferColorRGB(a1, (u8 *)&color32, a3, a4);
+        SetBGPaletteBufferColorRGB(a1, &color, brightness, ramp);
     }
 
     return ret;

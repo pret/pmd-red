@@ -12,7 +12,7 @@
 // This file may originally be merged with code_8086A3C.c and code_8057824_1.c
 
 // ???
-extern u32 gUnknown_202EDC8;
+extern u32 gDungeonBrightness;
 
 EWRAM_DATA unkStruct_202F3D0 gUnknown_202F3D0 = {0};
 
@@ -342,7 +342,7 @@ void sub_8086794(void)
 {
     s32 i;
 
-    gUnknown_202EDC8 = 0;
+    gDungeonBrightness = 0;
 
     for (i = 0; i < 200; i++) {
         SetDungeonBGColorRGB(0, 0, 0, 1, 0);
@@ -350,8 +350,8 @@ void sub_8086794(void)
         sub_803E46C(70);
 
         if ((i & 3) == 0) {
-            gUnknown_202EDC8++;
-            if (gUnknown_202EDC8 == 31)
+            gDungeonBrightness++;
+            if (gDungeonBrightness == 31)
                 break;
         }
     }

@@ -1,7 +1,7 @@
 
     .include "src/m4a.o"
 
-gUnknown_2000A80: /* 2000A80 (GameLoop) */
+gTitleBrightness: /* 2000A80 (GameLoop) */
 	.space 0x8
 
 gScriptVarBuffer: /* 2000A88 (ThoroughlyResetScriptVars - RestoreGlobalScriptVars) */
@@ -221,7 +221,7 @@ gUnknown_202EDB8: /* 202EDB8 (sub_803E250) */
 	.space 0x8
 gUnknown_202EDC0: /* 202EDC0 (sub_803E250 - sub_80462AC) */
 	.space 0x8
-gUnknown_202EDC8: /* 202EDC8 (sub_803E250 - sub_8086794) */
+gDungeonBrightness: /* 202EDC8 (sub_803E250 - sub_8086794) */
 	.space 0x4
 gUnknown_202EDCC: /* 202EDCC (sub_803E490 - sub_807D148) */
 	.space 0x4

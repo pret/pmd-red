@@ -98,7 +98,7 @@ bool8 MakuhitaDojo_New(u32 mode)
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_MAKUHITA);
     sMakuhitaDojoWork1->monPortrait.faceFile = faceFile;
-    sMakuhitaDojoWork1->monPortrait.faceData = (void *) faceFile->data;
+    sMakuhitaDojoWork1->monPortrait.faceData = (struct PortraitGfx *) faceFile->data;
     sMakuhitaDojoWork1->monPortrait.spriteId = 0;
     sMakuhitaDojoWork1->monPortrait.flip = FALSE;
     sMakuhitaDojoWork1->monPortrait.unkE = 0;

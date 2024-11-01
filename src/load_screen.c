@@ -365,11 +365,11 @@ void DrawLoadScreenText(void)
   sub_80073E0(0);
 }
 
-// Think structure of clmkFile is like Team Rank Badges except each pic has a diff pallete
+// Think structure of clmkFile is like Team Rank Badges except each pic has a diff palette
 struct ClmkFileData
 {
     /* 0x0 */ u32 *pics;
-    /* 0x4 */ Rgb32 *pallete;
+    /* 0x4 */ RGB *palette;
 };
 
 void sub_80397B4(void)
@@ -383,7 +383,7 @@ void sub_80397B4(void)
 
   for(index = 0; index < 64; index++)
   {
-    SetBGPaletteBufferColorArray(index + 176, &((struct ClmkFileData *)(clmkFile->data))->pallete[index]);
+    SetBGPaletteBufferColorArray(index + 176, &((struct ClmkFileData *)(clmkFile->data))->palette[index]);
   }
 
   x = 8;

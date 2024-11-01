@@ -51,8 +51,8 @@ void sub_807E5E4(u8 weather)
   gDungeon->weather.waterSportTurns = 0;
   for(index = 0; index < 0x100; index++)
   {
-    gDungeon->unk17C[index].unk0 = index;
-    gDungeon->unk17C[index].unk1 = index;
-    gDungeon->unk17C[index].unk2 = index;
+    gDungeon->colorRamp[index].r = index;
+    gDungeon->colorRamp[index].g = index;
+    gDungeon->colorRamp[index].b = index;
   }
 }

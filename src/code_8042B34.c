@@ -384,7 +384,7 @@ extern void sub_8042B0C(Entity *);
 extern s16 gUnknown_2026E4E;
 extern u8 gUnknown_202F32C;
 extern u8 gUnknown_202F1A8;
-extern s32 gUnknown_202EDC8;
+extern s32 gDungeonBrightness;
 extern Entity *gLeaderPointer;
 
 void sub_8044124(void);
@@ -416,7 +416,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
     bool8 r9;
     bool8 r10;
     u8 sp;
-    Rgb32 colorArray;
+    RGB color;
 
     gUnknown_203B40C = 0;
     r6 = r8->unk8;
@@ -631,7 +631,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         }
         sub_8049840();
         sub_803E178();
-        gUnknown_202EDC8 = 0;
+        gDungeonBrightness = 0;
         sub_8040124();
         sub_803EAF0(4, 0);
         sub_8052210(0);
@@ -806,10 +806,10 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         }
 
         SetBGOBJEnableFlags(0);
-        colorArray.r = 0x60;
-        colorArray.g = 0x80;
-        colorArray.b = 0xF8;
-        SetBGPaletteBufferColorRGB(253, (void*) &colorArray, gUnknown_202EDC8, 0); // Todo: Fix SetBGPaletteBufferColorRGB to take RGB*
+        color.r = 0x60;
+        color.g = 0x80;
+        color.b = 0xF8;
+        SetBGPaletteBufferColorRGB(253, &color, gDungeonBrightness, NULL);
         sub_8040094(1);
         gDungeon->unk181e8.unk18218 = 1;
         if ((gDungeon->unk10 == 2 || gDungeon->unk10 == 3) && gDungeon->unk6 != 0) {

@@ -249,7 +249,7 @@ u32 CreateThankYouMailPelipper(void)
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
 
   sUnknown_203B2C4->monPortrait.faceFile = faceFile;
-  sUnknown_203B2C4->monPortrait.faceData = (void *) faceFile->data;
+  sUnknown_203B2C4->monPortrait.faceData = (struct PortraitGfx *) faceFile->data;
   sUnknown_203B2C4->monPortrait.spriteId = 0;
   sUnknown_203B2C4->monPortrait.flip = FALSE;
   sUnknown_203B2C4->monPortrait.unkE = 0;

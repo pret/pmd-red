@@ -49,7 +49,7 @@ bool8 CreateGulpinShop(u32 mode, s16 pokeSpecies, Move *moves)
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
     sGulpinShopWork->monPortrait.faceFile = faceFile;
-    sGulpinShopWork->monPortrait.faceData = (void *) faceFile->data;
+    sGulpinShopWork->monPortrait.faceData = (struct PortraitGfx *) faceFile->data;
 
     sGulpinShopWork->monPortrait.spriteId = 0;
     sGulpinShopWork->monPortrait.flip = FALSE;

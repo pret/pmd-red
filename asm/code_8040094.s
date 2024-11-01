@@ -1566,7 +1566,7 @@ _08040D48:
 _08040D58: .4byte gUnknown_203B40D
 _08040D5C: .4byte gUnknown_2026E4E
 _08040D60: .4byte 0x00000101
-_08040D64: .4byte gUnknown_202EDC8
+_08040D64: .4byte gDungeonBrightness
 _08040D68:
 	movs r0, 0
 	str r0, [r1]
