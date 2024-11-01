@@ -31,7 +31,7 @@ void sub_8004AA4(unkStruct_202EE8C *a0, OpenedFile *a1, s32 a2)
     }
 }
 
-bool8 sub_8004AF0(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, const Rgb32 *a5)
+bool8 sub_8004AF0(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, const RGB *a5)
 {
     bool8 bVar3;
     bool8 ret;
@@ -63,7 +63,7 @@ bool8 sub_8004AF0(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, const
     return ret;
 }
 
-UNUSED static bool8 sub_8004B78(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, const Rgb32 *a5)
+UNUSED static bool8 sub_8004B78(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, const RGB *a5)
 {
     bool8 bVar3;
     bool8 ret;
@@ -95,14 +95,14 @@ UNUSED static bool8 sub_8004B78(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3,
     return ret;
 }
 
-bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const Rgb32 *ramp, s16 *a5)
+bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB *ramp, s16 *a5)
 {
     bool8 ret;
     s32 i;
     s32 r;
     s32 g;
     s32 b;
-    Rgb32 color;
+    RGB color;
 
     ret = FALSE;
 

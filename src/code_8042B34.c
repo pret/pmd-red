@@ -416,7 +416,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
     bool8 r9;
     bool8 r10;
     u8 sp;
-    Rgb32 colorArray;
+    RGB colorArray;
 
     gUnknown_203B40C = 0;
     r6 = r8->unk8;

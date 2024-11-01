@@ -108,7 +108,7 @@ void GameLoop(void)
             s32 i;
             gTitleBrightness++;
             for (i = 0; i < 240; i++)
-                SetBGPaletteBufferColorRGB(i, &((Rgb32*)gTitlePaletteFile->data)[i], gTitleBrightness, NULL);
+                SetBGPaletteBufferColorRGB(i, &((RGB*)gTitlePaletteFile->data)[i], gTitleBrightness, NULL);
             xxx_update_stuff(0);
         }
         if (tmp3) {
@@ -149,7 +149,7 @@ void GameLoop(void)
             s32 i;
             gTitleBrightness--;
             for (i = 0; i < 240; i++)
-                SetBGPaletteBufferColorRGB(i, &((Rgb32*)gTitlePaletteFile->data)[i], gTitleBrightness, NULL);
+                SetBGPaletteBufferColorRGB(i, &((RGB*)gTitlePaletteFile->data)[i], gTitleBrightness, NULL);
             xxx_update_stuff(0);
         }
         CloseFile(gTitlePaletteFile);

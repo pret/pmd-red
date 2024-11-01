@@ -10,7 +10,7 @@ struct axMapSprite
 {
     axmain axmain;
     const u32 *tiles;
-    const Rgb32 *pal;
+    const RGB *pal;
     s32 tileCount;
 };
 
@@ -23,8 +23,8 @@ void nullsub_10(bool8);
 void nullsub_12(void);
 void nullsub_13(void);
 void nullsub_14(void);
-void sub_8005610(OpenedFile *, s32, s32, const Rgb32 *);
-void sub_8005770(s32, const Rgb32 *color, s32, const Rgb32 *ramp);
+void sub_8005610(OpenedFile *, s32, s32, const RGB *);
+void sub_8005770(s32, const RGB *color, s32, const RGB *ramp);
 void sub_80057E8(void);
 void sub_8005838(s32 *, u8 kind);
 void sub_80060EC(void);

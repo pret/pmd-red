@@ -21,7 +21,7 @@ void InitBGPaletteBuffer(void)
     }
 }
 
-void SetBGPaletteBufferColorRGB(s32 index, const Rgb32 *color, s32 brightnessRaw, const Rgb32 *ramp)
+void SetBGPaletteBufferColorRGB(s32 index, const RGB *color, s32 brightnessRaw, const RGB *ramp)
 {
     s32 brightness = brightnessRaw;
 
@@ -44,7 +44,7 @@ void SetBGPaletteBufferColorRGB(s32 index, const Rgb32 *color, s32 brightnessRaw
             ramp[color->b].b * brightness / 256 & 0x1F);
 }
 
-void SetBGPaletteBufferColorArray(s32 index, const Rgb32 *color32)
+void SetBGPaletteBufferColorArray(s32 index, const RGB *color32)
 {
     sBGPaletteRowDirty[index / BG_PALETTE_ROW_SIZE] = TRUE;
     sBGPaletteBuffer[index] = RGB2(color32->r >> 3, color32->g >> 3, color32->b >> 3);
@@ -56,11 +56,11 @@ void SetBGPaletteBufferColor(s32 index, u16 *color)
     sBGPaletteBuffer[index] = *color;
 }
 
-void nullsub_4(s32 index, const Rgb32 *colorArray, s32 brightness, const Rgb32 *ramp)
+void nullsub_4(s32 index, const RGB *colorArray, s32 brightness, const RGB *ramp)
 {
 }
 
-void nullsub_5(s32 index, const Rgb32 *colorArray)
+void nullsub_5(s32 index, const RGB *colorArray)
 {
 }
 

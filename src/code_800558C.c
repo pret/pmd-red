@@ -31,8 +31,8 @@ extern const s16 gUnknown_80B83EA[16 * 10];
 extern s32 sin_abs_4096(s32);
 extern s32 cos_4096(s32);
 
-static void sub_800561C(struct axMapSprite *, s32, s32, const Rgb32 *);
-const Rgb32 *sub_8005674(struct axMapSprite *, s32);
+static void sub_800561C(struct axMapSprite *, s32, s32, const RGB *);
+const RGB *sub_8005674(struct axMapSprite *, s32);
 
 void DoAxFrame_800558C(struct axObject *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, u16 *spriteMasks)
 {
@@ -56,12 +56,12 @@ void DoAxFrame_800558C(struct axObject *a0, s32 spriteX, s32 spriteY, u32 a3, u3
         a0->axdata.flags &= 0xF7FF;
 }
 
-void sub_8005610(OpenedFile *a0, s32 vramIdx, s32 brightness, const Rgb32 *ramp)
+void sub_8005610(OpenedFile *a0, s32 vramIdx, s32 brightness, const RGB *ramp)
 {
     sub_800561C((struct axMapSprite *)a0->data, vramIdx, brightness, ramp);
 }
 
-static void sub_800561C(struct axMapSprite *a0, s32 vramIdx, s32 brightness, const Rgb32 *ramp)
+static void sub_800561C(struct axMapSprite *a0, s32 vramIdx, s32 brightness, const RGB *ramp)
 {
     s32 i;
 
@@ -74,12 +74,12 @@ static void sub_800561C(struct axMapSprite *a0, s32 vramIdx, s32 brightness, con
     }
 }
 
-UNUSED static const Rgb32 *sub_8005668(OpenedFile *a0, s32 vramIdx)
+UNUSED static const RGB *sub_8005668(OpenedFile *a0, s32 vramIdx)
 {
     return sub_8005674((struct axMapSprite *)a0->data, vramIdx);
 }
 
-const Rgb32 *sub_8005674(struct axMapSprite *a0, s32 vramIdx)
+const RGB *sub_8005674(struct axMapSprite *a0, s32 vramIdx)
 {
     if (a0->tiles != NULL)
         CpuCopy(OBJ_VRAM0 + vramIdx * 0x20, a0->tiles, a0->tileCount * 0x20);
@@ -149,12 +149,12 @@ void sub_8005700(Position *a0, struct axObject *a1)
     }
 }
 
-UNUSED static void sub_8005764(s32 a0, OpenedFile *file, s32 a2, const Rgb32 *a3)
+UNUSED static void sub_8005764(s32 a0, OpenedFile *file, s32 a2, const RGB *a3)
 {
-    sub_8005770(a0, (const Rgb32*)file->data, a2, a3);
+    sub_8005770(a0, (const RGB*)file->data, a2, a3);
 }
 
-void sub_8005770(s32 param_1, const Rgb32 *color, s32 brightness, const Rgb32 *ramp)
+void sub_8005770(s32 param_1, const RGB *color, s32 brightness, const RGB *ramp)
 {
     s32 i;
 

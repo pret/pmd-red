@@ -37,13 +37,13 @@ struct DungeonPalFile
 extern struct DungeonPalFile *gDungeonPaletteFile;
 extern struct DungeonPalFile *gDungeonNameBannerPalette;
 extern struct DungeonPalFile *gUnknown_202EC94;
-extern Rgb32 gUnknown_202ECA4[];
-extern Rgb32 gUnknown_202D058;
+extern RGB gUnknown_202ECA4[];
+extern RGB gUnknown_202D058;
 extern u8 gUnknown_203B40C;
 extern MenuInputStruct gUnknown_202EE10;
 extern SpriteOAM gUnknown_202EDDC;
 
-extern const Rgb32 gUnknown_80F62AC;
+extern const RGB gUnknown_80F62AC;
 extern const struct UnkTextStruct2 gUnknown_80F62B0[];
 extern const struct UnkTextStruct2 gUnknown_80F6310[];
 extern const struct UnkTextStruct2 gUnknown_80F6370[];
@@ -85,7 +85,7 @@ void sub_803FF18(s32 a0, u16 *a1, bool8 a2);
 void sub_803E874(bool8 r10, s32 r9)
 {
     s32 i, index, count;
-    const Rgb32 *color;
+    const RGB *color;
 
     color = gDungeonPaletteFile->unk4;
     SetBGPaletteBufferColorRGB(0, &gUnknown_80F62AC, gUnknown_202EDC8, gDungeon->colorRamp);
@@ -138,7 +138,7 @@ void sub_803E874(bool8 r10, s32 r9)
 void BgColorCallNullsub4(void)
 {
     s32 i, index, count;
-    const Rgb32 *color;
+    const RGB *color;
 
     color = ((struct DungeonPalFile*) gDungeon->paletFile)->unk4;
     index = 256;
@@ -153,7 +153,7 @@ void BgColorCallNullsub4(void)
 void sub_803EA10(void)
 {
     s32 i, index, count;
-    const Rgb32 *color;
+    const RGB *color;
 
     color= gDungeonPaletteFile->unk4;
     SetBGPaletteBufferColorRGB(0, &gUnknown_80F62AC, gUnknown_202EDC8, gDungeon->colorRamp);

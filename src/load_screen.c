@@ -369,7 +369,7 @@ void DrawLoadScreenText(void)
 struct ClmkFileData
 {
     /* 0x0 */ u32 *pics;
-    /* 0x4 */ Rgb32 *palette;
+    /* 0x4 */ RGB *palette;
 };
 
 void sub_80397B4(void)

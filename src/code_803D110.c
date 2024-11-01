@@ -546,7 +546,7 @@ struct DungeonNameFontFileData
 
 struct DungeonNamePaletteFileData
 {
-    Rgb32 pal[16];
+    RGB pal[16];
 };
 
 void ShowDungeonNameBanner(void)
@@ -1050,7 +1050,7 @@ NAKED void sub_803E02C(void)
 void sub_803E13C(void)
 {
     s32 i;
-    Rgb32 *pal;
+    RGB *pal;
 
     SetWindowBGColor();
     if (gGameOptionsRef->playerGender != 0)

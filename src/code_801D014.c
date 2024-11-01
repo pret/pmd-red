@@ -597,7 +597,7 @@ static void LoadTeamRankBadge(u32 a0, u32 a1, u32 a2)
     OpenedFile *teamBadgeFile;
     s32 paletteIndex;
     u8 rank;
-    Rgb32 *colorArray;
+    RGB *colorArray;
     u8 *teamBadgePic;
 
     teamBadgeFile = OpenFileAndGetFileDataPtr(sTeamRankBadgeFileName, &gTitleMenuFileArchive);

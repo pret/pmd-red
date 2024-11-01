@@ -1,16 +1,16 @@
 #ifndef GUARD_RGB_H
 #define GUARD_RGB_H
 
-typedef struct Rgb32
+typedef struct RGB
 {
     u8 r;
     u8 g;
     u8 b;
-} Rgb32;
+} RGB;
 
 typedef struct Palette32
 {
-    Rgb32 pal[16];
+    RGB pal[16];
 } Palette32;
 
 #endif // GUARD_RGB_H
