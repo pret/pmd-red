@@ -57,9 +57,7 @@ extern const u16 gUnknown_80F6544[][9];
 
 extern u8 gUnknown_20274A5;
 
-extern u8 gUnknown_202D06C[];
-// 2d array? possibly the same as gUnknown_202D06C TODO: merge the variables
-extern u8 gUnknown_202D068[];
+extern Palette32 gFontPalette[8];
 
 extern s32 gUnknown_202EDCC;
 extern u32 gUnknown_3001018[];
@@ -880,7 +878,7 @@ void sub_803F27C(bool8 a0)
 
 void sub_803F38C(void)
 {
-    s32 palAdd;
+    s32 palId;
     UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
 
     strPtr->unk3A = -1;
@@ -890,15 +888,15 @@ void sub_803F38C(void)
     strPtr->unk36 = -1;
     strPtr->unk38 = -1;
 
-    palAdd = (gGameOptionsRef->playerGender != MALE) ? 256 : 0;
+    palId = (gGameOptionsRef->playerGender != MALE) ? 4 : 0;
 
-    SetBGPaletteBufferColorArray(0xFD, &gUnknown_202D06C[0 + palAdd]);
-    SetBGPaletteBufferColorArray(0xFE, &gUnknown_202D06C[4 + palAdd]);
-    SetBGPaletteBufferColorArray(0xFF, &gUnknown_202D06C[8 + palAdd]);
+    SetBGPaletteBufferColorArray(0xFD, &gFontPalette[palId].pal[13]);
+    SetBGPaletteBufferColorArray(0xFE, &gFontPalette[palId].pal[14]);
+    SetBGPaletteBufferColorArray(0xFF, &gFontPalette[palId].pal[15]);
 
-    nullsub_5(0xFD, &gUnknown_202D06C[0 + palAdd]);
-    nullsub_5(0xFE, &gUnknown_202D06C[4 + palAdd]);
-    nullsub_5(0xFF, &gUnknown_202D06C[8 + palAdd]);
+    nullsub_5(0xFD, &gFontPalette[palId].pal[13]);
+    nullsub_5(0xFE, &gFontPalette[palId].pal[14]);
+    nullsub_5(0xFF, &gFontPalette[palId].pal[15]);
 }
 
 bool8 sub_803F428(Position *pos)
@@ -1300,18 +1298,18 @@ void sub_803FB74(void)
 
     if (strPtr->unk36 != r5) {
         strPtr->unk36 = r5;
-        SetBGPaletteBufferColorArray(0xFC, &gUnknown_202D068[0 + r5 * 4]);
-        SetBGPaletteBufferColorArray(0xFD, &gUnknown_202D068[4 + r5 * 4]);
-        SetBGPaletteBufferColorArray(0xFE, &gUnknown_202D068[8 + r5 * 4]);
-        SetBGPaletteBufferColorArray(0xFF, &gUnknown_202D068[12 + r5 * 4]);
+        SetBGPaletteBufferColorArray(0xFC, &gFontPalette[0].pal[12 + r5]);
+        SetBGPaletteBufferColorArray(0xFD, &gFontPalette[0].pal[13 + r5]);
+        SetBGPaletteBufferColorArray(0xFE, &gFontPalette[0].pal[14 + r5]);
+        SetBGPaletteBufferColorArray(0xFF, &gFontPalette[0].pal[15 + r5]);
     }
 
     if (strPtr->unk38 != r6) {
         strPtr->unk38 = r6;
-        nullsub_5(0xFC, &gUnknown_202D068[0 + r6 * 4]);
-        nullsub_5(0xFD, &gUnknown_202D068[4 + r6 * 4]);
-        nullsub_5(0xFE, &gUnknown_202D068[8 + r6 * 4]);
-        nullsub_5(0xFF, &gUnknown_202D068[12 + r6 * 4]);
+        nullsub_5(0xFC, &gFontPalette[0].pal[12 + r6]);
+        nullsub_5(0xFD, &gFontPalette[0].pal[13 + r6]);
+        nullsub_5(0xFE, &gFontPalette[0].pal[14 + r6]);
+        nullsub_5(0xFF, &gFontPalette[0].pal[15 + r6]);
     }
 
     arrPtr = gUnknown_202B038[0][0];

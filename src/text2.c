@@ -2569,16 +2569,16 @@ UNUSED void sub_80081A4(s32 a0, s32 a3, s32 a4, s32 a7Id)
     }
 }
 
-void sub_800829C(UnkTextStruct1 *a0, u16 a1[32][32], s32 a2, const u8 *compressedData, u32 a4);
+static void DisplayMonPortrait(UnkTextStruct1 *a0, u16 a1[32][32], s32 a2, const u8 *compressedData, u32 a4);
 
-void sub_8008274(s32 a0, const u8 *compressedData, s32 a2)
+void DisplayMonPortraitSprite(s32 a0, const u8 *compressedData, s32 a2)
 {
-    sub_800829C(gUnknown_2027370, gUnknown_202B038[0], a0, compressedData, a2);
+    DisplayMonPortrait(gUnknown_2027370, gUnknown_202B038[0], a0, compressedData, a2);
 }
 
 UNUSED void nullsub_162() {}
 
-void sub_800829C(UnkTextStruct1 *a0, u16 a1[32][32], s32 a2, const u8 *compressedData, u32 a4)
+static void DisplayMonPortrait(UnkTextStruct1 *a0, u16 a1[32][32], s32 a2, const u8 *compressedData, u32 a4)
 {
     s32 i, j;
     UnkTextStruct1 *strPtr = &a0[a2];
@@ -2621,21 +2621,21 @@ void sub_8008334(u32 *r7, u32 *r12)
     *r12 = r2;
 }
 
-void sub_800838C(UnkTextStruct1 *a0, s32 a1, const u8 *compressedData, s32 a3);
+static void DisplayMonPortraitFlipped(UnkTextStruct1 *a0, s32 a1, const u8 *compressedData, s32 a3);
 
-void sub_800836C(s32 a0, const u8 *compressedData, s32 a1)
+void DisplayMonPortraitSpriteFlipped(s32 a0, const u8 *compressedData, s32 a1)
 {
-    sub_800838C(gUnknown_2027370, a0, compressedData, a1);
+    DisplayMonPortraitFlipped(gUnknown_2027370, a0, compressedData, a1);
 }
 
 UNUSED void nullsub_163(void) {}
 
-void sub_800838C(UnkTextStruct1 *a0, s32 a1, const u8 *compressedData, s32 a3)
+static void DisplayMonPortraitFlipped(UnkTextStruct1 *a0, s32 a1, const u8 *compressedData, s32 a3)
 {
     s32 i, j;
     UnkTextStruct1 *strPtr = &a0[a1];
 
-    sub_8008274(a1, compressedData, a3);
+    DisplayMonPortraitSprite(a1, compressedData, a3);
     for (i = 0; i < strPtr->unk8; i++) {
         s32 r8 = strPtr->unk4 / 2;
         if (strPtr->unk4 & 1)

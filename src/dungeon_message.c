@@ -53,7 +53,7 @@ extern void (*gUnknown_203B080)(s32 a0);
 extern u8 gSpeakerNameBuffer[];
 extern UnkTextStruct1 gUnknown_2027370[4];
 extern s32 gUnknown_202EDCC;
-extern u8 gFontPalette[];
+extern Palette32 gFontPalette[];
 
 extern const u8 gUnknown_80F7AE8[];
 extern const u8 gUnknown_80F7AF8[];
@@ -763,7 +763,7 @@ void sub_8052FB8(const u8 *str)
         if (r8 < 62) {
             r8++;
             for (j = 0; j < 8; j++) {
-                SetBGPaletteBufferColorRGB(240 + j, &gFontPalette[j * 4], r8 / 2, NULL);
+                SetBGPaletteBufferColorRGB(240 + j, (void*) &gFontPalette[0].pal[j], r8 / 2, NULL);
             }
         }
         else {
@@ -816,7 +816,7 @@ void sub_8052FB8(const u8 *str)
 
     while (r8 >= 0) {
         for (j = 0; j < 8; j++) {
-            SetBGPaletteBufferColorRGB(240 + j, &gFontPalette[j * 4], r8 / 2, NULL);
+            SetBGPaletteBufferColorRGB(240 + j, (void*) &gFontPalette[0].pal[j], r8 / 2, NULL);
         }
         DrawDialogueBoxString();
         sub_803E46C(9);
@@ -827,7 +827,7 @@ void sub_8052FB8(const u8 *str)
     sub_803E46C(9);
     sub_8040238();
     for (j = 0; j < 8; j++) {
-        SetBGPaletteBufferColorArray(240 + j, &gFontPalette[j * 4]);
+        SetBGPaletteBufferColorArray(240 + j, &gFontPalette[0].pal[j]);
     }
     sub_803E708(8, 9);
 }

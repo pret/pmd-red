@@ -416,7 +416,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
     bool8 r9;
     bool8 r10;
     u8 sp;
-    RGB colorArray;
+    Rgb32 colorArray;
 
     gUnknown_203B40C = 0;
     r6 = r8->unk8;
@@ -806,9 +806,9 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         }
 
         SetBGOBJEnableFlags(0);
-        colorArray.unk0 = 0x60;
-        colorArray.unk1 = 0x80;
-        colorArray.unk2 = 0xF8;
+        colorArray.r = 0x60;
+        colorArray.g = 0x80;
+        colorArray.b = 0xF8;
         SetBGPaletteBufferColorRGB(253, (void*) &colorArray, gUnknown_202EDC8, 0); // Todo: Fix SetBGPaletteBufferColorRGB to take RGB*
         sub_8040094(1);
         gDungeon->unk181e8.unk18218 = 1;

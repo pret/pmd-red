@@ -18,6 +18,7 @@
 #include "text_util.h"
 #include "text1.h"
 #include "text2.h"
+#include "string_format.h"
 
 enum
 {
@@ -382,10 +383,10 @@ static void PrintPersonalityTypeDescription(void)
 static void PersonalityTest_DisplayStarterSprite(void)
 {
     s32 starterID;
-    OpenedFile *faceFile;
+    struct FileMonPortraits *faceFile;
     s32 palleteIndex;
-    u8 *r6;
-    u32 faceIndex;
+    s32 emotionId;
+    const u8 *gfx;
     UnkTextStruct2 stackArray[4];
 
     starterID = sPersonalityTestTracker->StarterID;
@@ -396,13 +397,14 @@ static void PersonalityTest_DisplayStarterSprite(void)
     CallPrepareTextbox_8008C54(1);
     sub_80073B8(1);
 
-    faceFile = GetDialogueSpriteDataPtr(starterID);
-    r6 = ((struct FaceData *)faceFile->data)->unk0[1 + EMOTION_HAPPY];
-    faceIndex = EMOTION_HAPPY;
-    for (palleteIndex = 0; palleteIndex < 0x10; palleteIndex++)
-        SetBGPaletteBufferColorArray(palleteIndex + 0xE0, &((struct FaceData *)faceFile->data)->unk0[faceIndex][palleteIndex * 4]);
+    faceFile = (void*) GetDialogueSpriteDataPtr(starterID);
+    gfx = faceFile->data->sprites[1].gfx;
+    emotionId = 1;
+    for (palleteIndex = 0; palleteIndex < 0x10; palleteIndex++) {
+        SetBGPaletteBufferColorArray(palleteIndex + 0xE0, &faceFile->data->sprites[emotionId].pal[palleteIndex]);
+    }
 
-    sub_800836C(1, r6, 14);
-    CloseFile(faceFile);
+    DisplayMonPortraitSpriteFlipped(1, gfx, 14);
+    CloseFile((void*)faceFile);
     sub_80073E0(1);
 }

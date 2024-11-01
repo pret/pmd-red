@@ -10,19 +10,6 @@ struct unkStruct_8094CB0
     s16 unk2;
 };
 
-struct WindowBG
-{
-    // size: 0x10
-    u32 hexBG[4];
-};
-
-const struct WindowBG gWindowBGColors = {
-    RGB_U32(0x20, 0x48, 0x68), // Blue 
-    RGB_U32(0x80, 0x38, 0x20), // Red 
-    RGB_U32(0x28, 0x80, 0x48), // Green
-    RGB_U32(0x28, 0x80, 0x48) // Green
-};
-
 EWRAM_DATA_2 GameOptions *gGameOptionsRef = {0};
 EWRAM_DATA GameOptions gGameOptions = {0};
 
@@ -45,7 +32,7 @@ void InitializeGameOptions(bool8 initializeGender)
     }
     gGameOptionsRef->unk9 = 0;
     gGameOptionsRef->unkA = 0;
-    gGameOptionsRef->dungeonSpeed = DUNGEON_SPEED_SLOW; 
+    gGameOptionsRef->dungeonSpeed = DUNGEON_SPEED_SLOW;
     gGameOptionsRef->FarOffPals = FAROFFPALS_LOCK;
     gGameOptionsRef->damageTurn = TRUE;
     gGameOptionsRef->gridEnable = TRUE;
@@ -56,23 +43,32 @@ void InitializeGameOptions(bool8 initializeGender)
 
 bool8 GameOptionsNotChange(GameOptions *r0)
 {
-    // NOTE: had to nest to match
-    if(gGameOptionsRef->windowColor == r0->windowColor)
-        if(gGameOptionsRef->unk9 == r0->unk9)
-            if(gGameOptionsRef->unkA == r0->unkA) 
-                if(gGameOptionsRef->playerGender == r0->playerGender)
-                    if(gGameOptionsRef->dungeonSpeed == r0->dungeonSpeed)
-                        if(gGameOptionsRef->FarOffPals == r0->FarOffPals) 
-                            if(gGameOptionsRef->damageTurn == r0->damageTurn)
-                                if(gGameOptionsRef->gridEnable == r0->gridEnable)
-                                    if(gGameOptionsRef->mapOption == r0->mapOption)
-                                        if(gGameOptionsRef->unkC == r0->unkC)
-                                            return TRUE;
-    return FALSE;
+    if (gGameOptionsRef->windowColor != r0->windowColor)
+        return FALSE;
+    if (gGameOptionsRef->unk9 != r0->unk9)
+        return FALSE;
+    if (gGameOptionsRef->unkA != r0->unkA)
+        return FALSE;
+    if (gGameOptionsRef->playerGender != r0->playerGender)
+        return FALSE;
+    if (gGameOptionsRef->dungeonSpeed != r0->dungeonSpeed)
+        return FALSE;
+    if (gGameOptionsRef->FarOffPals != r0->FarOffPals)
+        return FALSE;
+    if (gGameOptionsRef->damageTurn != r0->damageTurn)
+        return FALSE;
+    if (gGameOptionsRef->gridEnable != r0->gridEnable)
+        return FALSE;
+    if (gGameOptionsRef->mapOption != r0->mapOption)
+        return FALSE;
+    if (gGameOptionsRef->unkC != r0->unkC)
+        return FALSE;
+
+    return TRUE;
 }
 
 void WriteGameOptions(struct unkStruct_8094924 *param_1)
-{  
+{
     u8 zero;
     u8 neg_1;
     u8 *puVar2;
@@ -195,11 +191,14 @@ void ReadGameOptions(struct unkStruct_8094924 *param_1)
 
 void SetWindowBGColor(void)
 {
-    struct WindowBG temp;
+    struct Rgb32 winColors[] = {
+        {0x20, 0x48, 0x68}, // Blue
+        {0x80, 0x38, 0x20}, // Red
+        {0x28, 0x80, 0x48}, // Green
+        {0x28, 0x80, 0x48} // Green
+    };
 
-    temp = gWindowBGColors;
-
-    sub_80099F0(temp.hexBG[gGameOptionsRef->windowColor & NUM_WINDOW_COLORS]);
+    sub_80099F0(winColors[gGameOptionsRef->windowColor & NUM_WINDOW_COLORS]);
 }
 
 bool8 sub_8094C48(void)
@@ -228,15 +227,10 @@ bool8 DoesNotHaveShadedMap(void)
 
 void sub_8094C88(void)
 {
-    if(gGameOptionsRef->mapOption < 3)
+    if (gGameOptionsRef->mapOption == 0 || gGameOptionsRef->mapOption == 1 || gGameOptionsRef->mapOption == 2)
         gGameOptionsRef->mapOption = 1;
-    else
-        {
-            if((u8)(gGameOptionsRef->mapOption - 3) > 2)
-                return;
-            else
-                gGameOptionsRef->mapOption = 4;
-        }
+    else if (gGameOptionsRef->mapOption == 3 || gGameOptionsRef->mapOption == 4 || gGameOptionsRef->mapOption == 5)
+        gGameOptionsRef->mapOption = 4;
 }
 
 void sub_8094CB0(struct unkStruct_8094CB0 *r0)

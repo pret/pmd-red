@@ -4,6 +4,7 @@
 #include "file_system.h"
 #include "structs/menu.h"
 #include "structs/str_text.h"
+#include "structs/rgb.h"
 
 // TODO: once the files close to string_format.c are decompiled, check if these should be included here. Most likely, they should be declared elsewhere.
 // code_80130A8.s
@@ -19,7 +20,7 @@ void sub_80155F0(void);
 
 struct PortraitGfxSub
 {
-    const u8 *pal;
+    const Rgb32 *pal;
     const u8 *gfx;
 };
 
@@ -36,6 +37,12 @@ struct MonPortraitMsg
     u8 spriteId; // Which mon's sprite to use. For example Kecleon has multiple sprites depending on whether it's green or purple.
     bool8 flip; // Whether the mon's sprite is flipped.
     u8 unkE;
+};
+
+struct FileMonPortraits
+{
+    /* 0x0 */ File *file;
+    /* 0x4 */ struct PortraitGfx *data;
 };
 
 #define FORMAT_BUFFER_LEN 80
