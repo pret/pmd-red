@@ -384,7 +384,7 @@ static void PersonalityTest_DisplayStarterSprite(void)
 {
     s32 starterID;
     struct OpenedFile *faceFile;
-    s32 palleteIndex;
+    s32 paletteIndex;
     s32 emotionId;
     const u8 *gfx;
     UnkTextStruct2 stackArray[4];
@@ -400,8 +400,8 @@ static void PersonalityTest_DisplayStarterSprite(void)
     faceFile = GetDialogueSpriteDataPtr(starterID);
     gfx = ((struct PortraitGfx *)(faceFile->data))->sprites[EMOTION_HAPPY].gfx;
     emotionId = EMOTION_HAPPY;
-    for (palleteIndex = 0; palleteIndex < 0x10; palleteIndex++) {
-        SetBGPaletteBufferColorArray(palleteIndex + 0xE0, &((struct PortraitGfx *)(faceFile->data))->sprites[emotionId].pal[palleteIndex]);
+    for (paletteIndex = 0; paletteIndex < 0x10; paletteIndex++) {
+        SetBGPaletteBufferColorArray(paletteIndex + 0xE0, &((struct PortraitGfx *)(faceFile->data))->sprites[emotionId].pal[paletteIndex]);
     }
 
     DisplayMonPortraitSpriteFlipped(1, gfx, 14);

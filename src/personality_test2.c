@@ -245,7 +245,7 @@ static void PersonalityTest_DisplayPartnerSprite(void)
 {
     s32 partnerID;
     struct OpenedFile *faceFile;
-    s32 palleteIndex;
+    s32 paletteIndex;
     const u8 *gfx;
     s32 emotionId;
 
@@ -255,8 +255,8 @@ static void PersonalityTest_DisplayPartnerSprite(void)
     faceFile = GetDialogueSpriteDataPtr(partnerID);
     gfx = ((struct PortraitGfx *)(faceFile->data))->sprites[EMOTION_NORMAL].gfx;
     emotionId = EMOTION_NORMAL;
-    for (palleteIndex = 0; palleteIndex < 0x10; palleteIndex++) {
-        SetBGPaletteBufferColorArray(palleteIndex + 0xE0, &((struct PortraitGfx *)(faceFile->data))->sprites[emotionId].pal[palleteIndex]);
+    for (paletteIndex = 0; paletteIndex < 0x10; paletteIndex++) {
+        SetBGPaletteBufferColorArray(paletteIndex + 0xE0, &((struct PortraitGfx *)(faceFile->data))->sprites[emotionId].pal[paletteIndex]);
     }
 
     DisplayMonPortraitSpriteFlipped(1, gfx, 14);

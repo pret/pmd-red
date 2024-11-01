@@ -28,7 +28,7 @@ struct unk_203B250
 struct TeamBadgeData
 {
     /* 0x0 */ u8 *pics; // probably a pointer to an arrays of pixels?
-    /* 0x4 */ Rgb32 *pallete; // Pics share common pallete
+    /* 0x4 */ Rgb32 *palette; // Pics share common palette
 };
 
 bool8 sub_801D014(PokemonStruct1 *);
