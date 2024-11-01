@@ -23,7 +23,7 @@
 #include "constants/item.h"
 #include "constants/status.h"
 
-extern s32 gUnknown_202EDC8;
+extern s32 gDungeonBrightness;
 extern u32 gUnknown_202EDD0;
 extern s32 gUnknown_202EDD8;
 extern u32 gUnknown_202EDFC;
@@ -88,25 +88,25 @@ void sub_803E874(bool8 r10, s32 r9)
     const RGB *color;
 
     color = gDungeonPaletteFile->unk4;
-    SetBGPaletteBufferColorRGB(0, &gUnknown_80F62AC, gUnknown_202EDC8, gDungeon->colorRamp);
+    SetBGPaletteBufferColorRGB(0, &gUnknown_80F62AC, gDungeonBrightness, gDungeon->colorRamp);
     color++;
     index = 1;
     count = 159;
     for (i = 0; i < count; i++) {
-        SetBGPaletteBufferColorRGB(index, color, gUnknown_202EDC8, gDungeon->colorRamp);
+        SetBGPaletteBufferColorRGB(index, color, gDungeonBrightness, gDungeon->colorRamp);
         color++;
         index++;
     }
 
     if (gDungeon->unk181e8.unk18215 == 0 || gDungeon->unk1BDD4.unk1C06C == 3) {
-        sub_8004AF0(TRUE, gUnknown_202EE8C, 0xA0, 0x20, gUnknown_202EDC8, gDungeon->colorRamp);
+        sub_8004AF0(TRUE, gUnknown_202EE8C, 0xA0, 0x20, gDungeonBrightness, gDungeon->colorRamp);
     }
 
     index += 32;
     color = gUnknown_202ECA4;
     count = 32;
     for (i = 0; i < count; i++) {
-        SetBGPaletteBufferColorRGB(index, color, gUnknown_202EDC8, gDungeon->colorRamp);
+        SetBGPaletteBufferColorRGB(index, color, gDungeonBrightness, gDungeon->colorRamp);
         color++;
         index++;
     }
@@ -122,14 +122,14 @@ void sub_803E874(bool8 r10, s32 r9)
         }
     }
 
-    SetBGPaletteBufferColorRGB(248, &gUnknown_202D058, gUnknown_202EDC8, NULL);
+    SetBGPaletteBufferColorRGB(248, &gUnknown_202D058, gDungeonBrightness, NULL);
 
     color = ((struct DungeonPalFile*) gDungeon->paletFile)->unk4;
     index = 256;
     count = 208;
     for (i = 0; i < count; i++) {
-        SetBGPaletteBufferColorRGB(index, color, gUnknown_202EDC8, gDungeon->colorRamp);
-        nullsub_4(index, color, gUnknown_202EDC8, NULL);
+        SetBGPaletteBufferColorRGB(index, color, gDungeonBrightness, gDungeon->colorRamp);
+        nullsub_4(index, color, gDungeonBrightness, NULL);
         color++;
         index++;
     }
@@ -144,7 +144,7 @@ void BgColorCallNullsub4(void)
     index = 256;
     count = 208;
     for (i = 0; i < count; i++) {
-        nullsub_4(index, color, gUnknown_202EDC8, NULL);
+        nullsub_4(index, color, gDungeonBrightness, NULL);
         color++;
         index++;
     }
@@ -156,30 +156,30 @@ void sub_803EA10(void)
     const RGB *color;
 
     color= gDungeonPaletteFile->unk4;
-    SetBGPaletteBufferColorRGB(0, &gUnknown_80F62AC, gUnknown_202EDC8, gDungeon->colorRamp);
+    SetBGPaletteBufferColorRGB(0, &gUnknown_80F62AC, gDungeonBrightness, gDungeon->colorRamp);
     color++;
     index = 1;
     count = 159;
     for (i = 0; i < count; i++) {
-        SetBGPaletteBufferColorRGB(index, color, gUnknown_202EDC8, gDungeon->colorRamp);
+        SetBGPaletteBufferColorRGB(index, color, gDungeonBrightness, gDungeon->colorRamp);
         color++;
         index++;
     }
 
     if (gDungeon->unk181e8.unk18215 == 0 || gDungeon->unk1BDD4.unk1C06C == 3) {
-        sub_8004AF0(TRUE, gUnknown_202EE8C, 0xA0, 0x20, gUnknown_202EDC8, gDungeon->colorRamp);
+        sub_8004AF0(TRUE, gUnknown_202EE8C, 0xA0, 0x20, gDungeonBrightness, gDungeon->colorRamp);
     }
 
     index += 32;
     color = gUnknown_202ECA4;
     count = 32;
     for (i = 0; i < count; i++) {
-        SetBGPaletteBufferColorRGB(index, color, gUnknown_202EDC8, gDungeon->colorRamp);
+        SetBGPaletteBufferColorRGB(index, color, gDungeonBrightness, gDungeon->colorRamp);
         color++;
         index++;
     }
 
-    SetBGPaletteBufferColorRGB(248, &gUnknown_202D058, gUnknown_202EDC8, NULL);
+    SetBGPaletteBufferColorRGB(248, &gUnknown_202D058, gDungeonBrightness, NULL);
 }
 
 void sub_803EAF0(u32 a0, u8 *a1)

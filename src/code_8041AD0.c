@@ -40,7 +40,7 @@ extern void sub_8041550(Entity *pokemon, u32, u32, u32, u32, u32);
 void sub_80421C0(Entity *pokemon, u16 r1);
 void EntityUpdateStatusSprites(Entity *entity);
 
-extern s32 gUnknown_202EDC8;
+extern s32 gDungeonBrightness;
 extern u8 gUnknown_203B40D;
 extern s16 gUnknown_2026E4E;
 
@@ -119,23 +119,23 @@ void sub_804178C(u8 param_1)
   if ((counter == 1000) || (param_1 != 0)) {
     sub_800DBBC();
   }
-  if (gUnknown_202EDC8 < 0x1f) {
+  if (gDungeonBrightness < 0x1f) {
     temp = gUnknown_203B40D;
     gUnknown_203B40D = 1;
     for(counter = 0; counter < 1000; counter++)
     {
-      if (gUnknown_202EDC8 < 0x1f) {
-        gUnknown_202EDC8 += 4;
+      if (gDungeonBrightness < 0x1f) {
+        gDungeonBrightness += 4;
         if (gUnknown_2026E4E != 0x808) {
           gUnknown_2026E4E -= 0x101;
         }
       }
       else {
-        gUnknown_202EDC8 = 0x1f;
+        gDungeonBrightness = 0x1f;
       }
       sub_803EA10();
       sub_803E46C(0x4a);
-      if(gUnknown_202EDC8 == 0x1f) break;
+      if(gDungeonBrightness == 0x1f) break;
     };
     gUnknown_2026E4E = 0x808;
     gUnknown_203B40D = temp;

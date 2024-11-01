@@ -107,7 +107,7 @@ bool8 CreateKecleonBros(u32 mode)
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_KECLEON);
     sKecleonBrosWork1->monPortrait.faceFile = faceFile;
-    sKecleonBrosWork1->monPortrait.faceData = (void *) faceFile->data;
+    sKecleonBrosWork1->monPortrait.faceData = (struct PortraitGfx *) faceFile->data;
     sKecleonBrosWork1->monPortrait.spriteId = 0;
     sKecleonBrosWork1->monPortrait.flip = FALSE;
     sKecleonBrosWork1->monPortrait.unkE = 0;

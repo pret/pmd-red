@@ -67,7 +67,7 @@ bool8 CreateKangaskhanStorage(u32 mode)
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_KANGASKHAN);
     gKangaskhanStorageWork->monPortrait.faceFile = faceFile;
-    gKangaskhanStorageWork->monPortrait.faceData = (void *) faceFile->data;
+    gKangaskhanStorageWork->monPortrait.faceData = (struct PortraitGfx *) faceFile->data;
     gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
     gKangaskhanStorageWork->monPortrait.flip = FALSE;
     gKangaskhanStorageWork->monPortrait.unkE = 0;

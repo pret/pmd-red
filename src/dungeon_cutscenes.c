@@ -30,7 +30,7 @@
 #include "exclusive_pokemon.h"
 #include "trap.h"
 
-extern u32 gUnknown_202EDC8;
+extern u32 gDungeonBrightness;
 
 extern const s16 gUnknown_80F57CA;
 extern const s16 gUnknown_80F57CC;
@@ -3554,7 +3554,7 @@ void LatiosScreenFlash(void)
   s32 iVar1;
 
   PlaySoundEffect(0x1ee);
-  gUnknown_202EDC8 = 0x1f;
+  gDungeonBrightness = 0x1f;
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
@@ -4195,7 +4195,7 @@ void JirachiWishGrantFlash(void)
   s32 iVar1;
 
   PlaySoundEffect(0x2c1);
-  gUnknown_202EDC8 = 0x1f;
+  gDungeonBrightness = 0x1f;
 
   for(iVar1 = 0xFA; iVar1 > 0x95; iVar1 -= 10)
   {
@@ -4493,7 +4493,7 @@ void LugiaScreenFlash2(void)
 
 void sub_808C0CC(void)
 {
-  gUnknown_202EDC8 = 0x1f;
+  gDungeonBrightness = 0x1f;
   SetDungeonBGColorRGB(0,0,0,1,1);
   BgColorCallNullsub4();
   sub_803E46C(0x46);
@@ -4614,7 +4614,7 @@ void KyogreScreenFlash(void)
 
 void sub_808C360(void)
 {
-  gUnknown_202EDC8 = 0x1f;
+  gDungeonBrightness = 0x1f;
   SetDungeonBGColorRGB(0,0,0,1,1);
   BgColorCallNullsub4();
   sub_803E46C(0x46);
@@ -4701,7 +4701,7 @@ void DeoxysScreenFlash(void)
 
 void sub_808C550(void)
 {
-  gUnknown_202EDC8 = 0x1f;
+  gDungeonBrightness = 0x1f;
   SetDungeonBGColorRGB(0,0,0,1,1);
   BgColorCallNullsub4();
   sub_803E46C(0x46);
