@@ -5,7 +5,7 @@
 #include "structs/axdata.h"
 #include "file_system.h"
 
-// size: ? 0x20 for now
+// size: 0x20
 struct axMapSprite
 {
     axmain axmain;
