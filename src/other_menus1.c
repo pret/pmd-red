@@ -5,7 +5,7 @@
 #include "code_8009804.h"
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "constants/communication_error_codes.h"
 #include "constants/main_menu.h"
 #include "structs/str_dungeon.h"

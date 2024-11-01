@@ -1,17 +1,13 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80118A4.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_801AFA4.h"
 #include "code_8099360.h"
 #include "gulpin_shop.h"
 #include "memory.h"
 #include "moves.h"
 #include "pokemon_mid.h"
-
-extern u8 gAvailablePokemonNames[]; // 202DF98
-extern u8 gUnknown_202E1C8[];
-extern u8 gUnknown_202E218[160];
 
 static EWRAM_DATA_2 unkStruct_203B22C *sUnknown_203B22C = {0};
 
@@ -33,7 +29,7 @@ bool8 sub_801AFA4(u32 index)
     sUnknown_203B22C->teamItemIndex = index;
     sUnknown_203B22C->id = gTeamInventoryRef->teamItems[index].id;
     sUnknown_203B22C->moveID = GetItemMoveID(sUnknown_203B22C->id);
-    sub_8092C84(gUnknown_202E1C8, sUnknown_203B22C->moveID);
+    sub_8092C84(gFormatBuffer_Monsters[7], sUnknown_203B22C->moveID);
     sub_8099690(0);
 
     if (GetNumMonsAbleToLearnItemMove() == 0)
@@ -116,7 +112,7 @@ static void sub_801B178(void)
     u8 *bufferPtr;
 
     for (monIndex = 0; monIndex < sUnknown_203B22C->monsAbleToLearnMove; monIndex++) {
-        bufferPtr = gAvailablePokemonNames + (80 * monIndex);
+        bufferPtr = gFormatBuffer_Monsters[monIndex];
         PrintPokeNameToBuffer(bufferPtr, &gRecruitedPokemonRef->pokemon[sUnknown_203B22C->unk50[monIndex]]);
         sUnknown_203B22C->menuItems[monIndex].text = bufferPtr;
         sUnknown_203B22C->menuItems[monIndex].menuAction = monIndex + 4;
@@ -143,7 +139,7 @@ static void sub_801B200(void)
         default:
             sUnknown_203B22C->chosenPokemon = sUnknown_203B22C->unk50[temp - 4];
             sUnknown_203B22C->pokeStruct = &gRecruitedPokemonRef->pokemon[sUnknown_203B22C->chosenPokemon];
-            PrintPokeNameToBuffer(gUnknown_202E218, sUnknown_203B22C->pokeStruct);
+            PrintPokeNameToBuffer(gFormatBuffer_Monsters[8], sUnknown_203B22C->pokeStruct);
             unk_CopyMoves4To8(sUnknown_203B22C->moves, sUnknown_203B22C->pokeStruct->moves);
 
             for (moveIndex = 0; moveIndex < MAX_MON_MOVES * 2; moveIndex++) {

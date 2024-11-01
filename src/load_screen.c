@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "bg_palette_buffer.h"
 #include "code_800D090.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_8094F88.h"
 #include "code_8097670.h"
 #include "constants/main_menu.h"
@@ -312,7 +312,7 @@ void DrawLoadScreenText(void)
             {
                 default:
                     sprintfStatic(auStack356,gUnknown_80E7804,sub_8098FB4());
-                    xxx_format_string(auStack356,gLoadScreen->formattedLocation,gLoadScreen->formattedPlayTime,0);
+                    FormatString(auStack356,gLoadScreen->formattedLocation,gLoadScreen->formattedPlayTime,0);
                     break;
                 case 0x7:
                 case 0xB:

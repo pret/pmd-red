@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "bg_palette_buffer.h"
 #include "code_2.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_801602C.h"
 #include "code_8094D28.h"
 #include "code_8099360.h"
@@ -38,8 +38,6 @@ enum
     PERSONALITY_ADVANCE_TO_TEST_END,
     PERSONALITY_TEST_END,
 };
-
-extern u8 gAvailablePokemonNames[]; // 202DF98
 
 static EWRAM_DATA_2 struct PersonalityTestTracker *sPersonalityTestTracker = {0};
 
@@ -377,7 +375,7 @@ static void PromptNewQuestion(void)
 
 static void PrintPersonalityTypeDescription(void)
 {
-    CopyMonsterNametoBuffer(gAvailablePokemonNames, sPersonalityTestTracker->StarterID);
+    CopyMonsterNametoBuffer(gFormatBuffer_Monsters[0], sPersonalityTestTracker->StarterID);
     CreateDialogueBoxAndPortrait(sPersonalityTypeDescriptionTable[sPersonalityTestTracker->playerNature], 0, 0, 0x101);
 }
 

@@ -649,7 +649,7 @@ _08011406:
 	movs r1, 0x2
 	add r2, sp, 0x4
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	ldr r0, _08011480
@@ -846,7 +846,7 @@ _0801152A:
 	movs r0, 0x10
 	movs r1, 0
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r6, 0
 	cmp r6, r9
 	bge _08011678
@@ -875,7 +875,7 @@ _080115DC:
 	adds r1, r4, 0
 	ldr r2, _0801163C
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	b _08011672
 	.align 2, 0
 _08011610: .4byte gUnknown_203B0E4
@@ -887,8 +887,8 @@ _08011624: .4byte 0x00004df8
 _08011628: .4byte 0x00004ddc
 _0801162C: .4byte 0x00004de0
 _08011630: .4byte gUnknown_80D4104
-_08011634: .4byte gFormatData_202DE30
-_08011638: .4byte gFormatItems
+_08011634: .4byte gFormatArgs
+_08011638: .4byte gFormatBuffer_Items
 _0801163C: .4byte gUnknown_80D4120
 _08011640:
 	ldr r1, _08011690
@@ -913,7 +913,7 @@ _08011640:
 	adds r1, r4, 0
 	ldr r2, _08011698
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 _08011672:
 	adds r6, 0x1
 	cmp r6, r9

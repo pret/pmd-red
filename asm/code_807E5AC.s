@@ -257,7 +257,7 @@ _0807E866:
 _0807E874: .4byte gDungeon
 _0807E878: .4byte 0x000181f8
 _0807E87C: .4byte 0x0001356c
-_0807E880: .4byte gAvailablePokemonNames
+_0807E880: .4byte gFormatBuffer_Monsters
 _0807E884: .4byte gUnknown_80FC5E0
 _0807E888: .4byte 0x000135cc
 	thumb_func_end sub_807E7FC
@@ -1392,7 +1392,7 @@ _0807F158:
 _0807F168: .4byte gDungeon
 _0807F16C: .4byte 0xffff0000
 _0807F170: .4byte 0xff00ffff
-_0807F174: .4byte gFormatData_202DE30
+_0807F174: .4byte gFormatArgs
 _0807F178: .4byte gUnknown_80FE5C0
 _0807F17C: .4byte 0x0000068c
 _0807F180: .4byte 0x0000e240
@@ -1451,7 +1451,7 @@ _0807F1EC: .4byte 0xffff0000
 _0807F1F0: .4byte 0xff00ffff
 _0807F1F4: .4byte gDungeon
 _0807F1F8: .4byte 0x00000694
-_0807F1FC: .4byte gFormatData_202DE30
+_0807F1FC: .4byte gFormatArgs
 _0807F200: .4byte gUnknown_80FE568
 _0807F204:
 	ldr r0, _0807F224
@@ -1752,7 +1752,7 @@ sub_807F43C:
 	ldr r0, _0807F46C
 	b _0807F694
 	.align 2, 0
-_0807F468: .4byte gAvailablePokemonNames
+_0807F468: .4byte gFormatBuffer_Monsters
 _0807F46C: .4byte gUnknown_80FCB40
 _0807F470:
 	ldr r0, [sp, 0xEC]
@@ -1767,7 +1767,7 @@ _0807F470:
 	mov r0, r8
 	b _0807F698
 	.align 2, 0
-_0807F488: .4byte gAvailablePokemonNames
+_0807F488: .4byte gFormatBuffer_Monsters
 _0807F48C: .4byte gUnknown_80FCB70
 _0807F490:
 	mov r1, r8
@@ -2249,7 +2249,7 @@ _0807F7FC:
 	bl sub_807F9BC
 	b _0807F99C
 	.align 2, 0
-_0807F860: .4byte gAvailablePokemonNames
+_0807F860: .4byte gFormatBuffer_Monsters
 _0807F864: .4byte gUnknown_80FE690
 _0807F868: .4byte 0x000001a3
 _0807F86C: .4byte gAdjacentTileOffsets

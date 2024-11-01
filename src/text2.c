@@ -3305,33 +3305,34 @@ s32 sub_8008ED0(const u8 *str)
     return ret;
 }
 
-void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 windowId, s32 a5, s32 a6, s32 a7);
+void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 characterSpacing, s32 lineSpacing);
 
-void sub_8008F8C(s32 x, s32 y, const u8 *str, u32 windowId, s32 a4, s32 a5)
+void PrintStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing)
 {
-    xxx_draw_string(gUnknown_2027370, x, y, str, windowId, a4, 0, a5);
+    xxx_draw_string(gUnknown_2027370, x, y, str, windowId, terminatingChr, 0, lineSpacing);
 }
 
-void PrintStringOnWindow(s32 x, u32 y, const u8 *str, u32 windowId, u32 a4)
+void PrintStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr)
 {
-    xxx_draw_string(gUnknown_2027370, x, y, str, windowId, a4, 0, 0xD);
+    xxx_draw_string(gUnknown_2027370, x, y, str, windowId, terminatingChr, 0, 13);
 }
 
 UNUSED void nullsub_170(void) {}
 
 // Identical to PrintStringOnWindow
-UNUSED void sub_8008FF0(s32 x, u32 y, const u8 *str, u32 windowId, u32 a4)
+UNUSED void sub_8008FF0(s32 x, u32 y, const u8 *str, u32 windowId, u32 terminatingChr)
 {
-    xxx_draw_string(gUnknown_2027370, x, y, str, windowId, a4, 0, 0xD);
+    xxx_draw_string(gUnknown_2027370, x, y, str, windowId, terminatingChr, 0, 13);
 }
 
 UNUSED void nullsub_171(void) {}
 
 const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct UnkDrawStringStruct *sp);
 
-void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 windowId, s32 a5, s32 a6, s32 a7)
+void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 characterSpacing, s32 lineSpacing)
 {
     struct UnkDrawStringStruct sp;
+    u32 currChr;
 
     sp.unk0 = x;
     sp.unk2 = y;
@@ -3339,41 +3340,41 @@ void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 wi
     sp.unk10 = 7;
     while (1) {
         str = HandleTextFormat(strArr, str, &sp);
-        str = xxx_get_next_char_from_string(str, &sp.unk34);
-        if (sp.unk34 == '\0' || sp.unk34 == a5)
+        str = xxx_get_next_char_from_string(str, &currChr);
+        if (currChr == '\0' || currChr == terminatingChr)
             break;
 
-        if (sp.unk34 == 0x82A0) {
+        if (currChr == 0x82A0) {
             gCurrentCharmap = 0;
         }
-        else if (sp.unk34 == 0x82A2) {
+        else if (currChr == 0x82A2) {
             gCurrentCharmap = 1;
         }
-        else if (sp.unk34 == '\e') {
+        else if (currChr == '\e') {
             break;
         }
-        else if (sp.unk34 == '\r' || sp.unk34 == '\n') {
+        else if (currChr == '\r' || currChr == '\n') {
             sp.unk0 = sp.unkC;
-            sp.unk2 += a7;
+            sp.unk2 += lineSpacing;
         }
-        else if (sp.unk34 == '\x1D') { // ASCII group separator.
+        else if (currChr == '\x1D') { // ASCII group separator.
             sp.unk0 = sp.unkC;
             sp.unk2 += 5;
         }
-        else if (sp.unk34 == '`') {
+        else if (currChr == '`') {
             sp.unk0 += 6;
         }
-        else if (a6 == 0) {
-            sp.unk0 += xxx_draw_char(strArr, sp.unk0, sp.unk2, sp.unk34, sp.unk10, windowId);
+        else if (characterSpacing == 0) {
+            sp.unk0 += xxx_draw_char(strArr, sp.unk0, sp.unk2, currChr, sp.unk10, windowId);
         }
         else {
-            const struct unkChar *chrPtr = GetCharacter(sp.unk34);
+            const struct unkChar *chrPtr = GetCharacter(currChr);
             if (chrPtr != NULL) {
                 s32 x = sp.unk0;
                 s32 x2 = gCharacterSpacing + 10;
                 x +=((x2 - chrPtr->unk6) / 2);
-                xxx_draw_char(strArr, x, sp.unk2, sp.unk34, sp.unk10, windowId);
-                sp.unk0 += a6;
+                xxx_draw_char(strArr, x, sp.unk2, currChr, sp.unk10, windowId);
+                sp.unk0 += characterSpacing;
             }
         }
     }

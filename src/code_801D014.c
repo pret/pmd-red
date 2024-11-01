@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "bg_palette_buffer.h"
 #include "code_800D090.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "iq_skill_menu.h"
 #include "code_801D014.h"
 #include "code_80227B8.h"
@@ -29,8 +29,6 @@
 #include "wigglytuff_shop2.h"
 #include "wonder_mail_802C4C8.h"
 #include "wonder_mail_802C860.h"
-
-extern u8 gAvailablePokemonNames[]; // 202DF98
 
 static EWRAM_DATA_2 struct unk_203B250 *sUnknown_203B250 = {0};
 static EWRAM_DATA_2 u32 sUnknown_203B254 = {0};
@@ -248,8 +246,8 @@ static void sub_801D3A8(void)
         case 0:
         case 1:
             if (sUnknown_203B250->pokeStruct != NULL) {
-                PrintColoredPokeNameToBuffer(gAvailablePokemonNames, sUnknown_203B250->pokeStruct, 7);
-                sUnknown_203B250->unk18.unk0 = gAvailablePokemonNames;
+                PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0], sUnknown_203B250->pokeStruct, 7);
+                sUnknown_203B250->unk18.unk0 = gFormatBuffer_Monsters[0];
                 sub_8012D60(&sUnknown_203B250->unk18, sUnknown_203B250->unk68, 0, sUnknown_203B250->unkA8, sUnknown_203B250->menuAction, 0);
             }
             else {
@@ -325,7 +323,7 @@ static void sub_801D4C0(void)
         loopMax++;
     }
     else {
-        strcpy(gAvailablePokemonNames, sTripleQuestionMark);
+        strcpy(gFormatBuffer_Monsters[0], sTripleQuestionMark);
 
         if (sub_8096E2C()) {
             sUnknown_203B250->unk68[loopMax].text = gCommonFriend[0];
@@ -581,7 +579,7 @@ static void sub_801D894(void)
         location = GetFriendAreaName(sUnknown_203B250->currFriendAreaLocation);
 
     // TODO this is def a hack
-    xxx_format_string(location, buffer, (u8 *)(&preload_string + 1), 0);
+    FormatString(location, buffer, (u8 *)(&preload_string + 1), 0);
     location_length = sub_8008ED0(buffer);
     x_coord = (128 - location_length) / 2; // Centers the location name
     CallPrepareTextbox_8008C54(1);

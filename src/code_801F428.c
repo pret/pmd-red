@@ -21,7 +21,7 @@ struct unkStruct_203B274
 };
 EWRAM_DATA_2 struct unkStruct_203B274 *gUnknown_203B274 = {0};
 
-extern u8 gAvailablePokemonNames[];
+extern u8 gFormatBuffer_Monsters[];
 
 static const UnkTextStruct2 sUnknown_80DC2AC = {
     0, 0, 0, 0,

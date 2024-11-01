@@ -21,14 +21,13 @@ extern const char *gPtrWrappedByMessage[];
 extern const char *gPtrBideMessage[];
 extern const char *gPtrPausedMessage[];
 extern const char *gPtrInfatuatedMessage[];
-extern u8 gAvailablePokemonNames[];
 extern u8 *gUnknown_80F95EC[];
 extern char *gPtrMoveInterruptedMessage[];
 
 bool8 HasStatusAffectingActions(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
-    SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
+    SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
     SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
     switch (pokemonInfo->sleep.sleep)
     {
@@ -118,7 +117,7 @@ bool8 sub_80701A4(Entity *pokemon)
 
   pokemonInfo = GetEntInfo(pokemon);
   flag = FALSE;
-  SetMessageArgument(gAvailablePokemonNames, pokemon, 0);
+  SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
   SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
   switch(pokemonInfo->sleep.sleep)
   {

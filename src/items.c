@@ -10,7 +10,7 @@
 #include "code_800D090.h"
 #include "text_util.h"
 #include "text2.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include <stddef.h>
 
 extern struct FileArchive gSystemFileArchive;
@@ -20,8 +20,6 @@ extern const char gUnknown_81097A4[];
 extern s32 gPowersOfTen[];
 extern u8 gHighDigits[];
 extern u16 gGummiStatBoostLUT[];
-extern u8 gFormatItems[];
-extern u32 gFormatData_202DE30;
 extern u8* gPtrTypeText;  // ptr to "Type\0"
 extern u8* gPtrPPD0Text;  // ptr to "PP {VALUE_0} \0"
 extern u32 gUnknown_81097E8[4];  // some sort of lookup table (16, 18, 20, 22)
@@ -642,12 +640,12 @@ u32 sub_80913E0(Item* slot, u32 a2, struct subStruct_203B240 ** a3)
   BufferItemName(buffer88, slot->id, NULL);
   if (slot->id == ITEM_TM_USED_TM) {
     // empty TM
-    BufferItemName(gFormatItems, (u8)(slot->quantity + 125), NULL);
+    BufferItemName(gFormatBuffer_Items[0], (u8)(slot->quantity + 125), NULL);
   }
   sub_80073B8(a2);
-  PrintFormatStringOnWindow(16, 0, buffer88, a2, 0);
+  PrintFormattedStringOnWindow(16, 0, buffer88, a2, 0);
 
-  PrintFormatStringOnWindow(8, 24, GetItemDescription(slot->id), a2, 0);
+  PrintFormattedStringOnWindow(8, 24, GetItemDescription(slot->id), a2, 0);
   if (GetItemCategory(slot->id) == CATEGORY_TMS_HMS) {
     Move *buffer8 = (Move*) (buffer88 + 80);  // field in struct
     u16 move = GetItemMoveID(slot->id);
@@ -657,13 +655,13 @@ u32 sub_80913E0(Item* slot, u32 a2, struct subStruct_203B240 ** a3)
 
     InitPokemonMove(buffer8, move);
     sub_80078A4(a2, 4, 82, 200, COLOR_WHITE_2);
-    PrintFormatStringOnWindow(4, 84, gPtrTypeText, a2, 0);
+    PrintFormattedStringOnWindow(4, 84, gPtrTypeText, a2, 0);
     moves_data = GetMoveType(buffer8);
     typestring = GetUnformattedTypeString(moves_data);
-    PrintFormatStringOnWindow(64, 84, typestring, a2, 0);
+    PrintFormattedStringOnWindow(64, 84, typestring, a2, 0);
     result = GetMoveBasePP(buffer8);
-    gFormatData_202DE30 = result;
-    PrintFormatStringOnWindow(128, 84, gPtrPPD0Text, a2, 0);
+    gFormatArgs[0] = result;
+    PrintFormattedStringOnWindow(128, 84, gPtrPPD0Text, a2, 0);
   }
 
   sub_80073E0(a2);

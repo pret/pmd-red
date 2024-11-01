@@ -181,87 +181,10 @@ gUnknown_202DE19: /* 202DE19 (sub_800F990 - sub_8010014) */
     .space 0x2
 
     .include "src/save.o"
-	.align 4
+	.space 4
+    .include "src/string_format.o"
+	.space 4
 
-/* gFormatData_202DE30[0] seems to be the s32 value to insert in place of "$d0" (ARG_VALUE_0) in strings */
-/* gFormatData_202DE30[1] through gFormatData_202DE30[4] are for "$d1" (ARG_VALUE_1) through "$d4" (ARG_VALUE_4) */
-/* No known occurences after those (in pmd red) */
-gFormatData_202DE30: /* 202DE30 [used everywhere tbh] */
-	.space 0x28
-/* Seems to be a general u8 buffer for text, mostly used with item names */
-gFormatItems: /* 202DE58 [used everywhere tbh] */
-	.space 80
-gUnknown_202DEA8: /* 202DEA8 [used everywhere tbh] */
-	.space 240
-gAvailablePokemonNames: /* 202DF98 [used everywhere tbh] gAvailablePokemonNames[80][] */
-	.space 80
-gUnknown_202DFE8: /* 202DFE8 (sub_801FF28 - PierceStatusTarget) */
-	.space 80
-gUnknown_202E038: /* 202E038 (HandleMissionReward - sub_808CD44) [{ARG_POKEMON_2}] */
-	.space 80
-gUnknown_202E088: /* 202E088 (sub_806FDF4 - sub_808C10C) [{ARG_POKEMON_3}]? */
-	.space 160
-gUnknown_202E128: /* 202E128 (sub_8020A80) */
-	.space 160
-gUnknown_202E1C8: /* 202E1C8 (CreateFelicityBank - MakuhitaDojo_New) */
-	.space 80
-gUnknown_202E218: /* 202E218 (sub_801B200) */
-	.space 160
-gPlayerName: /* 202E2B8 (UpdateLuminousCaveDialogue - sub_80A14E8) */
-	.space 800
-gUnknown_202E5D8: /* 202E5D8 [used everywhere tbh] */
-	.space 80
-gUnknown_202E628: /* 202E628 (HandleMissionReward - sub_80A14E8) */
-	.space 0xB8
-
-gUnknown_202E6E0: /* 202E6E0 (xxx_draw_string_80144C4) */
-	.space 0x8
-gTeamName: /* 202E6E8 (xxx_format_string) */
-	.space 80
-gUnknown_202E738: /* 202E738 (sub_8014144 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E73C: /* 202E73C (sub_8014144 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E740: /* 202E740 (sub_8014144 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E744: /* 202E744 (sub_8014144 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E748: /* 202E748 (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x34
-gUnknown_202E77C: /* 202E77C (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E780: /* 202E780 (xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E784: /* 202E784 (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E788: /* 202E788 (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E78C: /* 202E78C (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E790: /* 202E790 (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x1
-gUnknown_202E791: /* 202E791 (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x3
-gUnknown_202E794: /* 202E794 (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x4
-gUnknown_202E798: /* 202E798 (sub_8014248) [on screen dialogue text] */
-	.space 1000
-gUnknown_202EB80: /* 202EB80 (xxx_format_string) */
-	.space 0x40
-gUnknown_202EBC0: /* 202EBC0 (sub_8014A88 - sub_8014B94) */
-	.space 80
-gUnknown_202EC10: /* 202EC10 (sub_8014248 - sub_8014A88) */
-	.space 0x4
-gUnknown_202EC14: /* 202EC14 (sub_8014248 - sub_8014A88) */
-	.space 0x4
-gUnknown_202EC18: /* 202EC18 (sub_8014248 - sub_8014A88) */
-	.space 0x4
-gUnknown_202EC1C: /* 202EC1C (sub_8014248 - sub_8014B94) */
-	.space 0x4
-gUnknown_202EC20: /* 202EC20 (sub_8014A88) */
-	.space 0x8
-gUnknown_202EC28: /* 202EC28 (sub_8014248 - xxx_draw_string_80144C4) */
-	.space 0x10
 
 gUnknown_202EC38: /* 202EC38 (sub_8037B28) */
 	.space 0x8

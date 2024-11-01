@@ -289,9 +289,9 @@ _0809AAE6:
 	movs r0, 0x1
 	b _0809AB3C
 	.align 2, 0
-_0809AB28: .4byte gAvailablePokemonNames
+_0809AB28: .4byte gFormatBuffer_Monsters
 _0809AB2C: .4byte gUndefineText
-_0809AB30: .4byte gPlayerName
+_0809AB30: .4byte gFormatBuffer_Names
 _0809AB34:
 	mov r0, r9
 	bl sub_809A83C
@@ -352,8 +352,8 @@ _0809ABA0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809ABA8: .4byte gAvailablePokemonNames
-_0809ABAC: .4byte gPlayerName
+_0809ABA8: .4byte gFormatBuffer_Monsters
+_0809ABAC: .4byte gFormatBuffer_Names
 _0809ABB0: .4byte gSpeechBubbleChar
 	thumb_func_end sub_809AB4C
 
@@ -403,8 +403,8 @@ _0809AC0A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809AC10: .4byte gAvailablePokemonNames
-_0809AC14: .4byte gPlayerName
+_0809AC10: .4byte gFormatBuffer_Monsters
+_0809AC14: .4byte gFormatBuffer_Names
 	thumb_func_end sub_809ABB4
 
 	thumb_func_start sub_809AC18
@@ -453,8 +453,8 @@ _0809AC6E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809AC74: .4byte gAvailablePokemonNames
-_0809AC78: .4byte gPlayerName
+_0809AC74: .4byte gFormatBuffer_Monsters
+_0809AC78: .4byte gFormatBuffer_Names
 	thumb_func_end sub_809AC18
 
 	thumb_func_start sub_809AC7C
@@ -1049,7 +1049,7 @@ _0809B09A:
 	.align 2, 0
 _0809B0D4: .4byte gUnknown_3001B64
 _0809B0D8: .4byte gUnknown_8116148
-_0809B0DC: .4byte gUnknown_202E5D8
+_0809B0DC: .4byte gSpeakerNameBuffer
 _0809B0E0: .4byte gFormattedSpeechBubble
 _0809B0E4:
 	ldr r0, _0809B134
@@ -1094,9 +1094,9 @@ _0809B128:
 	movs r0, 0x21
 	b _0809B14A
 	.align 2, 0
-_0809B134: .4byte gUnknown_202E5D8
+_0809B134: .4byte gSpeakerNameBuffer
 _0809B138: .4byte gUnknown_8116188
-_0809B13C: .4byte gPlayerName
+_0809B13C: .4byte gFormatBuffer_Names
 _0809B140: .4byte sub_809B428
 _0809B144: .4byte gUnknown_8116148
 _0809B148:
@@ -1346,7 +1346,7 @@ _0809B2F6:
 	bl strcpy
 	b _0809B32A
 	.align 2, 0
-_0809B310: .4byte gUnknown_202E5D8
+_0809B310: .4byte gSpeakerNameBuffer
 _0809B314: .4byte gFormattedSpeechBubble
 _0809B318:
 	ldr r0, _0809B3D0
@@ -1447,9 +1447,9 @@ _0809B3C0:
 	lsls r0, 16
 	b _0809B3EA
 	.align 2, 0
-_0809B3D0: .4byte gUnknown_202E5D8
+_0809B3D0: .4byte gSpeakerNameBuffer
 _0809B3D4: .4byte gUnknown_8116188
-_0809B3D8: .4byte gPlayerName
+_0809B3D8: .4byte gFormatBuffer_Names
 _0809B3DC: .4byte gUnknown_3001B64
 _0809B3E0: .4byte gUnknown_8116190
 _0809B3E4: .4byte sub_809B428
@@ -3272,7 +3272,7 @@ _0809C2CA:
 	b _0809C318
 	.align 2, 0
 _0809C304: .4byte gTeamInventoryRef
-_0809C308: .4byte gFormatItems
+_0809C308: .4byte gFormatBuffer_Items
 _0809C30C:
 	ldr r0, [r6]
 	movs r3, 0x86

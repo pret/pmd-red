@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80118A4.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "game_options.h"
 #include "input.h"
 #include "pokemon_mail.h"
@@ -11,8 +11,6 @@
 #include "menu_input.h"
 #include "text1.h"
 #include "text2.h"
-
-extern u8 gAvailablePokemonNames[]; // 202DF98
 
 static EWRAM_DATA_2 struct unkStruct_203B2D4 *sUnknown_203B2D4 = {0};
 
@@ -86,8 +84,8 @@ static void sub_802BB28(void)
         case 1:
             CallPrepareTextbox_8008C54(sUnknown_203B2D4->unk24);
             sub_80073B8(sUnknown_203B2D4->unk24);
-            PrintFormatStringOnWindow(10, 0, GetPokemonMailHeadline(sUnknown_203B2D4->currMailIndex), sUnknown_203B2D4->unk24, 0);
-            PrintFormatStringOnWindow(6, 20, sUnknown_203B2D4->unk10[sUnknown_203B2D4->unk8], sUnknown_203B2D4->unk24, 0);
+            PrintFormattedStringOnWindow(10, 0, GetPokemonMailHeadline(sUnknown_203B2D4->currMailIndex), sUnknown_203B2D4->unk24, 0);
+            PrintFormattedStringOnWindow(6, 20, sUnknown_203B2D4->unk10[sUnknown_203B2D4->unk8], sUnknown_203B2D4->unk24, 0);
             sub_80073E0(sUnknown_203B2D4->unk24);
             sUnknown_203B2D4->unk8++;
             break;
@@ -145,12 +143,12 @@ static void sub_802BC08(void)
 
 void sub_802BC7C(void)
 {
-    PrintPokeNameToBuffer(gAvailablePokemonNames, sub_808D3BC());
+    PrintPokeNameToBuffer(gFormatBuffer_Monsters[0], sub_808D3BC());
 
     if (gGameOptionsRef->playerGender == FEMALE)
-        strcpy(gAvailablePokemonNames + 80, sShe);
+        strcpy(gFormatBuffer_Monsters[1], sShe);
     else
-        strcpy(gAvailablePokemonNames + 80, sHe);
+        strcpy(gFormatBuffer_Monsters[1], sHe);
 }
 
 static void sub_802BCC4(void)

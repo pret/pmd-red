@@ -8,7 +8,7 @@
 #include "input.h"
 #include "items.h"
 #include "memory.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_80118A4.h"
 #include "code_801B60C.h"
 #include "text1.h"
@@ -29,12 +29,8 @@ struct unkStruct_203B310
 
 EWRAM_DATA_2 struct unkStruct_203B310 *gUnknown_203B310 = {0};
 
-extern u8 gUnknown_202E038[];
-extern u8 gUnknown_202E628[];
-extern u8 gUnknown_202DEA8[];
-extern u8 gUnknown_202E5D8[];
-extern u8 gAvailablePokemonNames[];
-extern u32 gFormatData_202DE30;
+extern u8 gFormatBuffer_FriendArea[];
+extern u8 gSpeakerNameBuffer[];
 
 enum FriendRewardStates
 {
@@ -129,8 +125,8 @@ u32 sub_802F204(unkStruct_802F204 *r0, bool8 displayClientSprite)
 
     // NOTE: dumb var to get correct ordering
     preload = gUnknown_203B310;
-    strcpy(gUnknown_202E5D8, preload->unk10->clientName);
-    PrintPokeNameToBuffer(gAvailablePokemonNames, GetPlayerPokemonStruct());
+    strcpy(gSpeakerNameBuffer, preload->unk10->clientName);
+    PrintPokeNameToBuffer(gFormatBuffer_Monsters[0], GetPlayerPokemonStruct());
 
     gUnknown_203B310->monPortrait.faceFile = GetDialogueSpriteDataPtr(gUnknown_203B310->unk10->clientSpecies);
     gUnknown_203B310->monPortrait.faceData = NULL;
@@ -143,7 +139,7 @@ u32 sub_802F204(unkStruct_802F204 *r0, bool8 displayClientSprite)
 
     if(gUnknown_203B310->monPortrait.faceFile != NULL)
     {
-        gUnknown_203B310->monPortrait.faceData = gUnknown_203B310->monPortrait.faceFile->data;
+        gUnknown_203B310->monPortrait.faceData = (void *) gUnknown_203B310->monPortrait.faceFile->data;
     }
 
     SetRewardSceneState(PREP_MONEY_REWARD);
@@ -216,7 +212,7 @@ void HandleMissionReward(void)
             SetRewardSceneState(PREP_FRIEND_AREA_REWARD);
         }
         else {
-            gFormatData_202DE30 = moneyReward;
+            gFormatArgs[0] = moneyReward;
             if (gUnknown_203B310->displayClientDialogueSprite) {
                 CreateDialogueBoxAndPortrait(gUnknown_80E0434,0,&gUnknown_203B310->monPortrait,0x10d);
                 gUnknown_203B310->nextState = MONEY_REWARD;
@@ -242,7 +238,7 @@ void HandleMissionReward(void)
             SetRewardSceneState(PREP_ITEM_REWARD);
         }
         else {
-            WriteFriendAreaName(gUnknown_202E628,gUnknown_203B310->unk10->friendAreaReward,FALSE);
+            WriteFriendAreaName(gFormatBuffer_FriendArea,gUnknown_203B310->unk10->friendAreaReward,FALSE);
             if (gUnknown_203B310->displayClientDialogueSprite) {
                 CreateDialogueBoxAndPortrait(gUnknown_80E04B4,0,&gUnknown_203B310->monPortrait,0x10d);
                 gUnknown_203B310->nextState = UNLOCK_FRIEND_AREA;
@@ -290,7 +286,7 @@ void HandleMissionReward(void)
                 local_20.unk0 = 0;
                 local_20.unk4 = 0;
                 local_20.unk8 = 1;
-                sub_8090E14(gUnknown_202DEA8,&item,&local_20);
+                sub_8090E14(gFormatBuffer_Items[1],&item,&local_20);
                 if (gUnknown_203B310->displayClientDialogueSprite) {
                     CreateDialogueBoxAndPortrait(gUnknown_80E0640,0,&gUnknown_203B310->monPortrait,0x10d);
                     gUnknown_203B310->nextState = GIVE_ITEM_REWARD;
@@ -342,7 +338,7 @@ void HandleMissionReward(void)
             else {
                 gUnknown_203B310->nextState = REWARD_EXIT;
             }
-            gFormatData_202DE30 = gUnknown_203B310->unk10->teamRankPtsReward;
+            gFormatArgs[0] = gUnknown_203B310->unk10->teamRankPtsReward;
             CreateDialogueBoxAndPortrait(gUnknown_80E0670,0,0,0x101);
         }
         break;
@@ -350,9 +346,9 @@ void HandleMissionReward(void)
         PlaySound(0xc9);
         gUnknown_203B310->nextState = REWARD_EXIT;
         rankString = GetTeamRankString(gUnknown_203B310->currTeamRank);
-        strcpy(gUnknown_202E038,rankString);
+        strcpy(gFormatBuffer_Monsters[2],rankString);
         rankString = GetTeamRankString(GetRescueTeamRank());
-        strcpy(gUnknown_202E038 + 0x50,rankString);
+        strcpy(gFormatBuffer_Monsters[3],rankString);
         CreateDialogueBoxAndPortrait(gUnknown_80E06A8,0,0,0x101);
         break;
     case REWARD_EXIT:

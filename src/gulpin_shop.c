@@ -3,7 +3,7 @@
 #include "code_80118A4.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "common_strings.h"
 #include "gulpin_shop.h"
 #include "input.h"
@@ -13,8 +13,6 @@
 #include "moves.h"
 #include "text1.h"
 #include "text2.h"
-
-extern u8 gAvailablePokemonNames[]; // 202DF98
 
 static EWRAM_DATA_2 GulpinShopWork *sGulpinShopWork = {0};
 
@@ -51,7 +49,7 @@ bool8 CreateGulpinShop(u32 mode, s16 pokeSpecies, Move *moves)
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
     sGulpinShopWork->monPortrait.faceFile = faceFile;
-    sGulpinShopWork->monPortrait.faceData = faceFile->data;
+    sGulpinShopWork->monPortrait.faceData = (void *) faceFile->data;
 
     sGulpinShopWork->monPortrait.spriteId = 0;
     sGulpinShopWork->monPortrait.flip = FALSE;
@@ -153,8 +151,8 @@ static void sub_801EA28(void)
             break;
         case 4:
             sub_801EC7C();
-            sub_8092C84(gAvailablePokemonNames, sGulpinShopWork->unk1C);
-            sub_8092C84(&gAvailablePokemonNames[0x50], sGulpinShopWork->unk1E);
+            sub_8092C84(gFormatBuffer_Monsters[0], sGulpinShopWork->unk1C);
+            sub_8092C84(gFormatBuffer_Monsters[1], sGulpinShopWork->unk1E);
 
             switch (sGulpinShopWork->mode) {
                 case GULPIN_SHOP_MODE_AWAKE:

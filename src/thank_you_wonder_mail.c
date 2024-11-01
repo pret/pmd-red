@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
 #include "code_802F204.h"
@@ -75,10 +75,6 @@ const Item gUnknown_80DED44 =
 {
     ITEM_FLAG_EXISTS, 0, ITEM_NOTHING
 };
-
-extern char gUnknown_202E5D8[0x50];
-extern char gAvailablePokemonNames[0x50];
-
 
 const UnkTextStruct2 gUnknown_80DED48 =
 {
@@ -247,13 +243,13 @@ u32 CreateThankYouMailPelipper(void)
   sUnknown_203B2C4 = MemoryAlloc(sizeof(WonderMailStruct_203B2C4), 8);
   MemoryFill8((u8 *)sUnknown_203B2C4, 0, sizeof(WonderMailStruct_203B2C4));
 
-  CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
+  CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PELIPPER);
   monName = GetMonSpecies(MONSTER_PELIPPER);
-  strcpy(gAvailablePokemonNames, monName);
+  strcpy(gFormatBuffer_Monsters[0], monName);
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
 
   sUnknown_203B2C4->monPortrait.faceFile = faceFile;
-  sUnknown_203B2C4->monPortrait.faceData = faceFile->data;
+  sUnknown_203B2C4->monPortrait.faceData = (void *) faceFile->data;
   sUnknown_203B2C4->monPortrait.spriteId = 0;
   sUnknown_203B2C4->monPortrait.flip = FALSE;
   sUnknown_203B2C4->monPortrait.unkE = 0;
@@ -1229,9 +1225,9 @@ void sub_802AB98(void)
     {
         case 3:
             sub_802F2C0();
-            CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
+            CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PELIPPER);
             monName = GetMonSpecies(MONSTER_PELIPPER);
-            strcpy(gAvailablePokemonNames, monName);
+            strcpy(gFormatBuffer_Monsters[0], monName);
             DeleteMailAtIndex(GetMailIndex(6, sUnknown_203B2C4->unk430));
             SetThankYouMailMenuState(0x24);
             break;
