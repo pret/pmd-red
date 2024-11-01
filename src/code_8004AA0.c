@@ -31,7 +31,7 @@ void sub_8004AA4(unkStruct_202EE8C *a0, OpenedFile *a1, s32 a2)
     }
 }
 
-bool8 sub_8004AF0(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, u8 *a5)
+bool8 sub_8004AF0(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, const Rgb32 *a5)
 {
     bool8 bVar3;
     bool8 ret;
@@ -57,13 +57,13 @@ bool8 sub_8004AF0(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, u8 *a
         }
 
         if (bVar3)
-            SetBGPaletteBufferColorRGB(a2, (u8 *)&a1->unk14, a4, a5);
+            SetBGPaletteBufferColorRGB(a2, &a1->unk14, a4, a5);
     }
 
     return ret;
 }
 
-UNUSED static bool8 sub_8004B78(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, u8 *a5)
+UNUSED static bool8 sub_8004B78(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, const Rgb32 *a5)
 {
     bool8 bVar3;
     bool8 ret;
@@ -89,13 +89,13 @@ UNUSED static bool8 sub_8004B78(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3,
         }
 
         if (bVar3)
-            nullsub_4(a2, (u8 *)&a1->unk14, a4, a5);
+            nullsub_4(a2, &a1->unk14, a4, a5);
     }
 
     return ret;
 }
 
-bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 a3, u8 *a4, s16 *a5)
+bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 a3, const Rgb32 *a4, s16 *a5)
 {
     bool8 ret;
     s32 i;
@@ -153,7 +153,7 @@ bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 a3, u8 *a4, s16 *a5
         color32 &= 0xFF00FFFF;
         color32 |= val3;
 
-        SetBGPaletteBufferColorRGB(a1, (u8 *)&color32, a3, a4);
+        SetBGPaletteBufferColorRGB(a1, (Rgb32 *)&color32, a3, a4);
     }
 
     return ret;

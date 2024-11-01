@@ -87,7 +87,7 @@ void sub_803E490(u32 unused)
 
 
     if(gDungeon->unk181e8.unk18215 != 0 && gDungeon->unk1BDD4.unk1C06C != 3)
-        sub_8004AF0(gUnknown_203B40D, gUnknown_202EE8C, 0xA0, 0x20, gUnknown_202EDC8, (u8 *)gDungeon->unk17C);
+        sub_8004AF0(gUnknown_203B40D, gUnknown_202EE8C, 0xA0, 0x20, gUnknown_202EDC8, gDungeon->colorRamp);
 
     nullsub_8(gGameOptionsRef->unkA);
     sub_8005180();

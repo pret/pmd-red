@@ -42,7 +42,7 @@ typedef struct unkDataFor8004AA4
 
 void nullsub_6(void);
 void sub_8004AA4(unkStruct_202EE8C *, OpenedFile *, s32);
-bool8 sub_8004AF0(bool8, unkStruct_202EE8C *, s32, s32, s32, u8 *);
+bool8 sub_8004AF0(bool8, unkStruct_202EE8C *, s32, s32, s32, const Rgb32 *);
 bool8 sub_8004D14(unkStruct_202EE8C *, s32);
 bool8 sub_8004D40(unkStruct_202EE8C *, s32);
 

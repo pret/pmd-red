@@ -1,7 +1,7 @@
 
     .include "src/m4a.o"
 
-gUnknown_2000A80: /* 2000A80 (GameLoop) */
+gTitleBrightness: /* 2000A80 (GameLoop) */
 	.space 0x8
 
 gScriptVarBuffer: /* 2000A88 (ThoroughlyResetScriptVars - RestoreGlobalScriptVars) */

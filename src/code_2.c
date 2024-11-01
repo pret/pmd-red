@@ -44,7 +44,7 @@ extern void xxx_call_update_bg_vram(void);
 
 extern u32 gUnknown_203B03C;
 extern u16 gUnknown_2026E4E;
-extern s32 gUnknown_2000A80;
+extern s32 gTitleBrightness;
 extern OpenedFile *gTitlePaletteFile;
 
 extern char gPMDBuildVersion[];
@@ -103,12 +103,12 @@ void GameLoop(void)
         LoadTitleScreen();
         SetBG2RegOffsets(0, 0);
         SetBG3RegOffsets(0, 0);
-        gUnknown_2000A80 = 0;
-        while (gUnknown_2000A80 < 32) {
+        gTitleBrightness = 0;
+        while (gTitleBrightness < 32) {
             s32 i;
-            gUnknown_2000A80++;
+            gTitleBrightness++;
             for (i = 0; i < 240; i++)
-                SetBGPaletteBufferColorRGB(i, &gTitlePaletteFile->data[i * 4], gUnknown_2000A80, 0);
+                SetBGPaletteBufferColorRGB(i, &((Rgb32*)gTitlePaletteFile->data)[i], gTitleBrightness, NULL);
             xxx_update_stuff(0);
         }
         if (tmp3) {
@@ -145,11 +145,11 @@ void GameLoop(void)
             if (nextMenu == MENU_NEW_GAME) break;
         }
         DeleteMainMenu();
-        while (gUnknown_2000A80 > 0) {
+        while (gTitleBrightness > 0) {
             s32 i;
-            gUnknown_2000A80--;
+            gTitleBrightness--;
             for (i = 0; i < 240; i++)
-                SetBGPaletteBufferColorRGB(i, &gTitlePaletteFile->data[i * 4], gUnknown_2000A80, 0);
+                SetBGPaletteBufferColorRGB(i, &((Rgb32*)gTitlePaletteFile->data)[i], gTitleBrightness, NULL);
             xxx_update_stuff(0);
         }
         CloseFile(gTitlePaletteFile);

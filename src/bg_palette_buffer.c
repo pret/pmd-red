@@ -3,9 +3,9 @@
 #include "cpu.h"
 
 #define BG_PALETTE_BUFFER_SIZE 512
-#define BG_PALETTE_BUFFER_CHUNK_SIZE 16
+#define BG_PALETTE_ROW_SIZE 16
 
-static EWRAM_DATA bool8 sBGPaletteUsed[BG_PALETTE_BUFFER_SIZE / BG_PALETTE_BUFFER_CHUNK_SIZE] = {0};
+static EWRAM_DATA bool8 sBGPaletteRowDirty[BG_PALETTE_BUFFER_SIZE / BG_PALETTE_ROW_SIZE] = {0};
 static EWRAM_DATA u16 sBGPaletteBuffer[BG_PALETTE_BUFFER_SIZE] = {0};
 
 void InitBGPaletteBuffer(void)
@@ -16,46 +16,47 @@ void InitBGPaletteBuffer(void)
         sBGPaletteBuffer[i] = 0;
     }
 
-    for (i = 0; i < BG_PALETTE_BUFFER_SIZE / BG_PALETTE_BUFFER_CHUNK_SIZE; i++) {
-        sBGPaletteUsed[i] = TRUE;
+    for (i = 0; i < BG_PALETTE_BUFFER_SIZE / BG_PALETTE_ROW_SIZE; i++) {
+        sBGPaletteRowDirty[i] = TRUE;
     }
 }
 
-// 99.48% (r3/r4 regswap) https://decomp.me/scratch/7Yc8i
-void SetBGPaletteBufferColorRGB(s32 index, const u8 *colorArray, s32 a1, u8 *a2)
+void SetBGPaletteBufferColorRGB(s32 index, const Rgb32 *color, s32 brightnessRaw, const Rgb32 *ramp)
 {
-    #ifdef NONMATCHING
-    s32 var;
-    #else
-    register s32 var asm("r1");
-    #endif // NONMATCHING
+    s32 brightness = brightnessRaw;
 
-    if (a1 < 0)
-        a1 = 0;
-    if (a1 > 31)
-        a1 = 31;
+    if (brightness < 0)
+        brightness = 0;
+    if (brightness > 31)
+        brightness = 31;
 
-    sBGPaletteUsed[index / 16] = 1;
+    sBGPaletteRowDirty[index / BG_PALETTE_ROW_SIZE] = TRUE;
 
-    if (a2 == NULL)
-        sBGPaletteBuffer[index] = var = ((colorArray[2] * a1 / 256 & 0x1F) << 10) | ((colorArray[1] * a1 / 256 & 0x1F) << 5) | (colorArray[0] * a1 / 256 & 0x1F);
+    if (ramp == NULL)
+        sBGPaletteBuffer[index] = RGB2(
+            color->r * brightness / 256 & 0x1F,
+            color->g * brightness / 256 & 0x1F,
+            color->b * brightness / 256 & 0x1F);
     else
-        sBGPaletteBuffer[index] = var = ((a2[4 * colorArray[2] + 2] * a1 / 256 & 0x1F) << 10) | ((a2[4 * colorArray[1] + 1] * a1 / 256 & 0x1F) << 5) | (a2[4 * colorArray[0]] * a1 / 256 & 0x1F);
+        sBGPaletteBuffer[index] = RGB2(
+            ramp[color->r].r * brightness / 256 & 0x1F,
+            ramp[color->g].g * brightness / 256 & 0x1F,
+            ramp[color->b].b * brightness / 256 & 0x1F);
 }
 
 void SetBGPaletteBufferColorArray(s32 index, const Rgb32 *color32)
 {
-    sBGPaletteUsed[index / BG_PALETTE_BUFFER_CHUNK_SIZE] = TRUE;
+    sBGPaletteRowDirty[index / BG_PALETTE_ROW_SIZE] = TRUE;
     sBGPaletteBuffer[index] = RGB2(color32->r >> 3, color32->g >> 3, color32->b >> 3);
 }
 
 void SetBGPaletteBufferColor(s32 index, u16 *color)
 {
-    sBGPaletteUsed[index / BG_PALETTE_BUFFER_CHUNK_SIZE] = TRUE;
+    sBGPaletteRowDirty[index / BG_PALETTE_ROW_SIZE] = TRUE;
     sBGPaletteBuffer[index] = *color;
 }
 
-void nullsub_4(s32 index, const u8 *colorArray, s32 a1, u8 *a2)
+void nullsub_4(s32 index, const Rgb32 *colorArray, s32 brightness, const Rgb32 *ramp)
 {
 }
 
@@ -78,14 +79,14 @@ void TransferBGPaletteBuffer(void)
     dest = (u16 *)PLTT;
     do
     {
-        if (sBGPaletteUsed[i])
+        if (sBGPaletteRowDirty[i])
         {
-            sBGPaletteUsed[i] = 0;
-            CpuCopy(dest, &sBGPaletteBuffer[paletteBufferIndex], sizeof(u16) * 16);
+            sBGPaletteRowDirty[i] = 0;
+            CpuCopy(dest, &sBGPaletteBuffer[paletteBufferIndex], sizeof(u16) * BG_PALETTE_ROW_SIZE);
         }
         ++i;
-        dest += 16;
-        paletteBufferIndex += 16;
+        dest += BG_PALETTE_ROW_SIZE;
+        paletteBufferIndex += BG_PALETTE_ROW_SIZE;
     }
     while (paletteBufferIndex < BG_PALETTE_BUFFER_SIZE);
 }

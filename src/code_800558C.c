@@ -31,8 +31,8 @@ extern const s16 gUnknown_80B83EA[16 * 10];
 extern s32 sin_abs_4096(s32);
 extern s32 cos_4096(s32);
 
-static void sub_800561C(struct unkStructFor800561C *, s32, s32, u8 *);
-s32 *sub_8005674(struct unkStructFor800561C *, s32);
+static void sub_800561C(struct axMapSprite *, s32, s32, const Rgb32 *);
+const Rgb32 *sub_8005674(struct axMapSprite *, s32);
 
 void DoAxFrame_800558C(struct axObject *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, u16 *spriteMasks)
 {
@@ -56,35 +56,35 @@ void DoAxFrame_800558C(struct axObject *a0, s32 spriteX, s32 spriteY, u32 a3, u3
         a0->axdata.flags &= 0xF7FF;
 }
 
-void sub_8005610(OpenedFile *a0, s32 a1, s32 a2, u8 *a3)
+void sub_8005610(OpenedFile *a0, s32 vramIdx, s32 brightness, const Rgb32 *ramp)
 {
-    sub_800561C((struct unkStructFor800561C *)a0->data, a1, a2, a3);
+    sub_800561C((struct axMapSprite *)a0->data, vramIdx, brightness, ramp);
 }
 
-static void sub_800561C(struct unkStructFor800561C *a0, s32 a1, s32 a2, u8 *a3)
+static void sub_800561C(struct axMapSprite *a0, s32 vramIdx, s32 brightness, const Rgb32 *ramp)
 {
     s32 i;
 
-    if (a0->unk14 != NULL)
-        CpuCopy(OBJ_VRAM0 + a1 * 0x20, a0->unk14, a0->unk1C << 5);
+    if (a0->tiles != NULL)
+        CpuCopy(OBJ_VRAM0 + vramIdx * 0x20, a0->tiles, a0->tileCount * 0x20);
 
-    if (a0->unk18 != NULL) {
+    if (a0->pal != NULL) {
         for (i = 0; i < 16; i++)
-            SetBGPaletteBufferColorRGB(i + 480, (u8 *)&a0->unk18[i], a2, a3);
+            SetBGPaletteBufferColorRGB(i + 480, &a0->pal[i], brightness, ramp);
     }
 }
 
-UNUSED static s32 *sub_8005668(OpenedFile *a0, s32 a1)
+UNUSED static const Rgb32 *sub_8005668(OpenedFile *a0, s32 vramIdx)
 {
-    return sub_8005674((struct unkStructFor800561C *)a0->data, a1);
+    return sub_8005674((struct axMapSprite *)a0->data, vramIdx);
 }
 
-s32 *sub_8005674(struct unkStructFor800561C *a0, s32 a1)
+const Rgb32 *sub_8005674(struct axMapSprite *a0, s32 vramIdx)
 {
-    if (a0->unk14 != NULL)
-        CpuCopy(OBJ_VRAM0 + a1 * 0x20, a0->unk14, a0->unk1C << 5);
+    if (a0->tiles != NULL)
+        CpuCopy(OBJ_VRAM0 + vramIdx * 0x20, a0->tiles, a0->tileCount * 0x20);
 
-    return a0->unk18;
+    return a0->pal;
 }
 
 void sub_800569C(Position *a0, struct axObject *a1, u8 a2)
@@ -149,17 +149,17 @@ void sub_8005700(Position *a0, struct axObject *a1)
     }
 }
 
-UNUSED static void sub_8005764(s32 a0, OpenedFile *file, s32 a2, u8 *a3)
+UNUSED static void sub_8005764(s32 a0, OpenedFile *file, s32 a2, const Rgb32 *a3)
 {
-    sub_8005770(a0, file->data, a2, a3);
+    sub_8005770(a0, (const Rgb32*)file->data, a2, a3);
 }
 
-void sub_8005770(s32 param_1, u8 *colorArray, s32 a1, u8 *a2)
+void sub_8005770(s32 param_1, const Rgb32 *color, s32 brightness, const Rgb32 *ramp)
 {
     s32 i;
 
     for (i = 0; i < 16; i++)
-        SetBGPaletteBufferColorRGB((param_1 + 0x10) * 0x10 + i, &colorArray[i * 4], a1, a2);
+        SetBGPaletteBufferColorRGB((param_1 + 0x10) * 0x10 + i, &color[i], brightness, ramp);
 }
 
 // Maybe Position
