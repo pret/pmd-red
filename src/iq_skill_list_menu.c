@@ -19,13 +19,7 @@ static void sub_801C440(void);
 
 bool8 CreateIQSkillListMenu(s16 species, u32 index, u32 a2)
 {
-#ifndef NONMATCHING
-    register s32 species_s32 asm("r4");
-#else
-    s32 species_s32;
-#endif
-
-    species_s32 = species;
+    s32 species_s32 = SpeciesId(species);
 
     if (HasNoAvailIQSkills(species))
         return FALSE;

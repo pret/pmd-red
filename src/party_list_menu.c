@@ -458,8 +458,7 @@ void PartyListMenu_BuildYesNoMenu(void) {
 void PartyListMenu_HandleMenu1(void)
 {
   PokemonStruct1 *playerPokemon;
-  PokemonStruct1 *pokeStruct;
-  PokemonStruct1 *pokeStruct2;
+  PokemonStruct1 *newLeader;
   s32 choice;
 
   choice = 0;
@@ -469,17 +468,7 @@ void PartyListMenu_HandleMenu1(void)
   switch(choice) {
     case PARTY_LIST_MENU_JOIN_TEAM:
         if (sub_808D750(sUnknown_203B2B8->pokeSpecies)) {
-
-#ifdef NONMATCHING
-            pokeStruct = &sUnknown_203B2B8->pokeSpecies[gRecruitedPokemonRef->pokemon];
-#else
-            register size_t offset asm("r1") = offsetof(unkStruct_203B45C, pokemon[sUnknown_203B2B8->pokeSpecies]);
-            PokemonStruct1* p = gRecruitedPokemonRef->pokemon;
-            size_t addr = offset + (size_t)p;
-            pokeStruct = (PokemonStruct1*)addr;
-#endif
-
-            pokeStruct->unk0 |= FLAG_ON_TEAM;
+            SetPokemonFlag2(&sUnknown_203B2B8->pokeSpecies[gRecruitedPokemonRef->pokemon]);
             nullsub_104();
         }
         sub_808ED00();
@@ -492,12 +481,12 @@ void PartyListMenu_HandleMenu1(void)
         SetPartyListMenuState(PARTY_LIST_STATE_STANDBY);
         break;
     case PARTY_LIST_MENU_MAKE_LEADER:
-        pokeStruct2 = &gRecruitedPokemonRef->pokemon[sUnknown_203B2B8->pokeSpecies];
+        newLeader = &gRecruitedPokemonRef->pokemon[sUnknown_203B2B8->pokeSpecies];
         playerPokemon = GetPlayerPokemonStruct();
 
-        if (!pokeStruct2->isTeamLeader) {
+        if (!newLeader->isTeamLeader) {
             playerPokemon->isTeamLeader = FALSE;
-            pokeStruct2->isTeamLeader = TRUE;
+            newLeader->isTeamLeader = TRUE;
             nullsub_104();
         }
         sub_808ED00();

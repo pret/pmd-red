@@ -105,7 +105,12 @@ static inline bool8 PokemonFlag1(PokemonStruct1 *mon)
 
 static inline bool8 PokemonFlag2(PokemonStruct1 *mon)
 {
-    return (((mon->unk0 >> 1) & 1));
+    return (((mon->unk0 >> (FLAG_ON_TEAM - 1)) & 1));
+}
+
+static inline void SetPokemonFlag2(PokemonStruct1 *mon)
+{
+    mon->unk0 |= FLAG_ON_TEAM;
 }
 
 static inline bool8 IsMonTeamLeader(PokemonStruct1 *pokemon)
