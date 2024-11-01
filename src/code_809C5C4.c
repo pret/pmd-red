@@ -6,32 +6,32 @@
 #include "ground_main.h"
 #include "code_80A26CC.h"
 
-struct unkStruct_3001B68  
-{ 
+struct unkStruct_3001B68
+{
      u32 unk0;
-     u32 unk4;     
-     u16 unk8;     
-     u16 unkA;     
-     u8  unkC;                   
+     u32 unk4;
+     u16 unk8;
+     u16 unkA;
+     u8  unkC;
      u8  unkD;
-     u8  unkE;     
-     u32 unk10;   
-     s16 unk14;   
-     s16 unk16;   
+     u8  unkE;
+     u32 unk10;
+     s16 unk14;
+     s16 unk16;
      u8  unk18;
-     u8  unk19;   
-     u32 unk1C;   
-     u8  unk20;   
+     u8  unk19;
+     u32 unk1C;
+     u8  unk20;
 };
 
 IWRAM_DATA struct unkStruct_3001B68 *gUnknown_3001B68 = {0};
 
 
 struct unkStruct_20399E0
-{ 
+{
      u32 unk0;
-     s32 unk4;     
-     u32 unk8;     
+     s32 unk4;
+     u32 unk8;
 };
 
 extern struct unkStruct_20399E0 *gUnknown_20399E0;
@@ -157,6 +157,7 @@ u8 sub_809C740(void)
         return 0;
 }
 
+// Called in a number of places, like when the player changes the team leader in sub_80278B4().
 void nullsub_104(void)
 { }
 
