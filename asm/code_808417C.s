@@ -336,7 +336,7 @@ sub_8084448:
 	ldr r0, _08084480
 	b _080844F0
 	.align 2, 0
-_0808447C: .4byte gAvailablePokemonNames
+_0808447C: .4byte gFormatBuffer_Monsters
 _08084480: .4byte gUnknown_80FA464
 _08084484:
 	ldr r4, _080844FC
@@ -405,7 +405,7 @@ _080844F0:
 _080844FC: .4byte gDungeon
 _08084500: .4byte 0x0000068a
 _08084504: .4byte gUnknown_80FA32C
-_08084508: .4byte gFormatItems
+_08084508: .4byte gFormatBuffer_Items
 _0808450C: .4byte gTeamInventoryRef
 _08084510: .4byte gUnknown_80FA448
 _08084514:
@@ -530,7 +530,7 @@ sub_80845E0:
 	ldr r0, _08084624
 	b _080846B4
 	.align 2, 0
-_08084620: .4byte gAvailablePokemonNames
+_08084620: .4byte gFormatBuffer_Monsters
 _08084624: .4byte gUnknown_80FA530
 _08084628:
 	adds r7, r4, 0
@@ -594,7 +594,7 @@ _08084680:
 	ldr r0, _080846A0
 	b _080846B4
 	.align 2, 0
-_0808469C: .4byte gUnknown_202E038
+_0808469C: .4byte gFormatBuffer_Monsters + 160
 _080846A0: .4byte gUnknown_80FA54C
 _080846A4:
 	adds r0, r6, 0

@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_802DB28.h"
 #include "code_802F204.h"
 #include "code_803C1D0.h"
@@ -13,9 +13,7 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gFormatItems[];
-extern u8 gUnknown_202E1C8[];
-extern u8 gUnknown_202E5D8[];
+extern u8 gSpeakerNameBuffer[];
 
 static EWRAM_DATA_2 struct unkStruct_203B2FC *sUnknown_203B2FC = {0};
 
@@ -54,7 +52,7 @@ bool8 sub_802DB28(u8 jobSlotIndex, u8 dungeon)
     sUnknown_203B2FC->monPortrait.pos.y = 8;
 
     if (sUnknown_203B2FC->monPortrait.faceFile != NULL)
-        sUnknown_203B2FC->monPortrait.faceData = sUnknown_203B2FC->monPortrait.faceFile->data;
+        sUnknown_203B2FC->monPortrait.faceData = (void *) sUnknown_203B2FC->monPortrait.faceFile->data;
 
     sub_802DC28(0);
     return TRUE;
@@ -118,14 +116,14 @@ static void sub_802DC9C(void)
 
     switch (sUnknown_203B2FC->state) {
         case 0:
-            CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, sUnknown_203B2FC->jobInfo->clientSpecies);
-            CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, sUnknown_203B2FC->jobInfo->clientSpecies);
+            CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, sUnknown_203B2FC->jobInfo->clientSpecies);
+            CopyYellowMonsterNametoBuffer(gFormatBuffer_Monsters[7], sUnknown_203B2FC->jobInfo->clientSpecies);
             speciesText = GetMonSpecies(sUnknown_203B2FC->jobInfo->clientSpecies);
-            strcpy(gUnknown_202E1C8 - 560, speciesText);
+            strcpy(gFormatBuffer_Monsters[0], speciesText);
             speciesText = GetMonSpecies(sUnknown_203B2FC->jobInfo->targetSpecies);
-            strcpy(gUnknown_202E1C8 - 480, speciesText);
+            strcpy(gFormatBuffer_Monsters[1], speciesText);
             UnlockExclusivePokemon(sUnknown_203B2FC->jobInfo->clientSpecies);
-            BufferItemName(gFormatItems, sUnknown_203B2FC->jobInfo->targetItem, NULL);
+            BufferItemName(gFormatBuffer_Items[0], sUnknown_203B2FC->jobInfo->targetItem, NULL);
             sUnknown_203B2FC->fallbackState = 6;
 
             switch (sUnknown_203B2FC->jobInfo->missionType) {

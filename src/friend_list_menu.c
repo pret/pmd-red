@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80118A4.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_801602C.h"
 #include "code_801B3C0.h"
 #include "friend_list_menu.h"
@@ -25,11 +25,6 @@
 #include "pokemon.h"
 #include "text1.h"
 #include "text2.h"
-
-
-extern u8 gFormatItems[];
-extern u8 gUnknown_202DEA8[];
-extern u8 gAvailablePokemonNames[];
 
 EWRAM_DATA_2 unkStruct_203B2B4 *gUnknown_203B2B4 = {0};
 
@@ -204,8 +199,8 @@ void sub_8025518(void)
             sub_8025E68(3,&gUnknown_203B2B4->item2);
         }
         sub_8023DA4();
-        PrintColoredPokeNameToBuffer(gAvailablePokemonNames,gUnknown_203B2B4->pokeStruct,7);
-        PrintColoredPokeNameToBuffer(gAvailablePokemonNames + 0x50,gUnknown_203B2B4->pokeStruct,6);
+        PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0],gUnknown_203B2B4->pokeStruct,7);
+        PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[1],gUnknown_203B2B4->pokeStruct,6);
         sub_8012D60(&gUnknown_203B2B4->unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->menuAction1,2);
         break;
     case FRIEND_LIST_MENU_STATE_SUMMARY:
@@ -341,7 +336,7 @@ void sub_802591C(void)
 {
   int index;
   s32 loopMax = 0;
-  
+
 
   MemoryFill16(gUnknown_203B2B4->unk108,0, sizeof(gUnknown_203B2B4->unk108));
 
@@ -522,7 +517,7 @@ void sub_8025CB4(void)
   s32 menuAction;
   struct unkStruct_8090F58 a3;
   Item item;
-  
+
   menuAction = 0;
   sub_801A6E8(FALSE);
   if ((!sub_8012FD8(&gUnknown_203B2B4->unk78)) && (sub_8013114(&gUnknown_203B2B4->unk78,&menuAction), menuAction != FRIEND_LIST_MENU_NULL)) {
@@ -545,7 +540,7 @@ void sub_8025CB4(void)
             a3.unk4 = 0;
             a3.unk8 = 1;
             item.flags = ITEM_FLAG_EXISTS;
-            sub_8090E14(gUnknown_202DEA8,&item,&a3);
+            sub_8090E14(gFormatBuffer_Items[1],&item,&a3);
             GivePokemonItem(gUnknown_203B2B4->species,&gUnknown_203B2B4->item1);
             sub_801A928();
             nullsub_104();
@@ -645,8 +640,8 @@ void sub_8025E68(u32 r0, BulkItem *heldItem)
     a3.unk4 = 0;
     a3.unk8 = 1;
     item.flags = ITEM_FLAG_EXISTS;
-    sub_8090E14(gFormatItems, &item, &a3);
-    PrintFormatStringOnWindow(4, 3, sItemBuffered, r0, 0);
+    sub_8090E14(gFormatBuffer_Items[0], &item, &a3);
+    PrintFormattedStringOnWindow(4, 3, sItemBuffered, r0, 0);
     sub_80073E0(r0);
 }
 

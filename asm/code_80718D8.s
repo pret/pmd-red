@@ -178,8 +178,8 @@ _08072894:
 	bl DisplayDungeonLoggableMessage
 	b _08072928
 	.align 2, 0
-_080728C8: .4byte gAvailablePokemonNames
-_080728CC: .4byte gFormatItems
+_080728C8: .4byte gFormatBuffer_Monsters
+_080728CC: .4byte gFormatBuffer_Items
 _080728D0: .4byte gUnknown_80F9F04
 _080728D4:
 	mov r1, r8
@@ -373,8 +373,8 @@ _08072A0C:
 	bl DisplayDungeonLoggableMessage
 	b _08072A8C
 	.align 2, 0
-_08072A44: .4byte gAvailablePokemonNames
-_08072A48: .4byte gFormatItems
+_08072A44: .4byte gFormatBuffer_Monsters
+_08072A48: .4byte gFormatBuffer_Items
 _08072A4C: .4byte gUnknown_80F9F04
 _08072A50:
 	movs r0, 0
@@ -434,7 +434,7 @@ _08072AB0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08072AC0: .4byte gAvailablePokemonNames
+_08072AC0: .4byte gFormatBuffer_Monsters
 _08072AC4: .4byte gUnknown_80F9F2C
 	thumb_func_end sub_8072938
 

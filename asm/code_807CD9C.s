@@ -651,7 +651,7 @@ sub_807DA14:
 	ldr r0, _0807DA4C
 	b _0807DA5C
 	.align 2, 0
-_0807DA48: .4byte gAvailablePokemonNames
+_0807DA48: .4byte gFormatBuffer_Monsters
 _0807DA4C: .4byte gUnknown_80FCB98
 _0807DA50:
 	bl IsCurrentFixedRoomBossFight
@@ -1321,7 +1321,7 @@ _0807DF8E:
 	.align 2, 0
 _0807DFA8: .4byte gDungeon
 _0807DFAC: .4byte 0x000135cc
-_0807DFB0: .4byte gAvailablePokemonNames
+_0807DFB0: .4byte gFormatBuffer_Monsters
 _0807DFB4:
 	mov r0, r10
 	bl GetApparentWeather
@@ -1552,7 +1552,7 @@ _0807E174:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E184: .4byte gAvailablePokemonNames
+_0807E184: .4byte gFormatBuffer_Monsters
 _0807E188: .4byte gUnknown_80F96BC
 _0807E18C: .4byte gUnknown_8107178
 _0807E190: .4byte 0xffff0000

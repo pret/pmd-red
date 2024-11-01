@@ -1,8 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80118A4.h"
-#include "code_80130A8.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_801602C.h"
 #include "code_801B3C0.h"
 #include "code_8097670.h"
@@ -60,9 +59,6 @@ enum LuminousCaveMenuActions
     LUMINOUS_CAVE_YES,
 
 };
-
-extern u8 gAvailablePokemonNames[]; // 202DF98
-extern u8 gPlayerName[]; // 202E2B8
 
 static EWRAM_DATA_2 LuminousCaveWork *sLuminousCaveWork = {0};
 
@@ -306,16 +302,16 @@ static void UpdateLuminousCaveDialogue(void)
             CreateDialogueBoxAndPortrait(sLetUsBegin,0,0,0x105);
             break;
         case LUMINOUS_CAVE_CHANGED_APPEARANCE:
-            PrintColoredPokeNameToBuffer(gPlayerName,sLuminousCaveWork->pokeStruct, COLOR_CYAN);
+            PrintColoredPokeNameToBuffer(gFormatBuffer_Names[0],sLuminousCaveWork->pokeStruct, COLOR_CYAN);
             PlaySound(0x1ff);
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_EVOLVED;
             CreateDialogueBoxAndPortrait(sFmtChangedAppearance,0,0,0x105);
             break;
         case LUMINOUS_CAVE_EVOLVED:
             monName = GetMonSpecies(sLuminousCaveWork->pokeStruct->speciesNum);
-            strcpy(gAvailablePokemonNames,monName);
+            strcpy(gFormatBuffer_Monsters[0],monName);
             monName = GetMonSpecies(sLuminousCaveWork->evolveStatus.targetEvolveSpecies);
-            strcpy(gAvailablePokemonNames + 0x50,monName);
+            strcpy(gFormatBuffer_Monsters[1],monName);
             sLuminousCaveWork->evolutionComplete = TRUE;
             sub_80977D0();
             sub_808F734(sLuminousCaveWork->pokeStruct,sLuminousCaveWork->evolveStatus.targetEvolveSpecies);

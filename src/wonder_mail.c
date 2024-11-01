@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80118A4.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_8023868.h"
 #include "code_8024458.h"
 #include "code_8094F88.h"
@@ -31,10 +31,6 @@ extern void sub_8011C28(u32);
 extern void sub_809927C(u8);
 extern u32 sub_8031050();
 extern void sub_80310B4();
-
-extern char gUnknown_202E5D8[0x50];
-extern char gAvailablePokemonNames[0x50];
-
 extern void nullsub_130(void);
 extern void sub_8028348(void);
 
@@ -199,12 +195,12 @@ u32 sub_8027F88(void)
   sUnknown_203B2C0->unk53C = 0;
   sUnknown_203B2C0->mailIndex = -1;
   sUnknown_203B2C0->speciesNum = -1;
-  CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_PELIPPER);
+  CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PELIPPER);
   monName = GetMonSpecies(MONSTER_PELIPPER);
-  strcpy(gAvailablePokemonNames, monName);
+  strcpy(gFormatBuffer_Monsters[0], monName);
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
   sUnknown_203B2C0->monPortrait.faceFile = faceFile;
-  sUnknown_203B2C0->monPortrait.faceData = faceFile->data;
+  sUnknown_203B2C0->monPortrait.faceData = (void *) faceFile->data;
   sUnknown_203B2C0->monPortrait.spriteId = 0;
   sUnknown_203B2C0->monPortrait.flip = FALSE;
   sUnknown_203B2C0->monPortrait.unkE = 0;

@@ -17,8 +17,8 @@
 #include "text_util.h"
 #include "text2.h"
 
-extern u8 gFormatItems[];
-extern u8 gAvailablePokemonNames[]; // 202DF98
+extern u8 gFormatBuffer_Items[];
+extern u8 gFormatBuffer_Monsters[]; // 202DF98
 
 #include "data/pokemon_mail.h"
 
@@ -57,13 +57,13 @@ void CreateRescueTitle(unkStruct_802C39C *param_1)
             PrintStringOnWindow(21, param_1->y, buf_1, param_1->unk0[0], 0);
             break;
         case 12:
-            BufferItemName(gFormatItems, param_1->targetItem, NULL);
-            sprintfStatic(buf_1, gUnknown_80E8830, gFormatItems);
+            BufferItemName(gFormatBuffer_Items, param_1->targetItem, NULL);
+            sprintfStatic(buf_1, gUnknown_80E8830, gFormatBuffer_Items);
             PrintStringOnWindow(21, param_1->y, buf_1, param_1->unk0[0], 0);
             break;
         case 11:
-            BufferItemName(gFormatItems, param_1->targetItem, NULL);
-            sprintfStatic(buf_1, gUnknown_80E8848, gFormatItems);
+            BufferItemName(gFormatBuffer_Items, param_1->targetItem, NULL);
+            sprintfStatic(buf_1, gUnknown_80E8848, gFormatBuffer_Items);
             PrintStringOnWindow(21, param_1->y, buf_1, param_1->unk0[0], 0);
             break;
         case 4:
@@ -78,24 +78,24 @@ void CreateRescueTitle(unkStruct_802C39C *param_1)
         case 10: {
             u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
             monName = GetMonSpecies(param_1->targetSpecies);
-            strcpy(gAvailablePokemonNames, monName);
-            sprintfStatic(buf_1, gUnknown_80EAE5C[bVar2 % 4], gAvailablePokemonNames);
+            strcpy(gFormatBuffer_Monsters, monName);
+            sprintfStatic(buf_1, gUnknown_80EAE5C[bVar2 % 4], gFormatBuffer_Monsters);
             PrintStringOnWindow(21, param_1->y, buf_1, param_1->unk0[0], 0);
             break;
         }
         case 9: {
             u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
             monName = GetMonSpecies(param_1->targetSpecies);
-            strcpy(gAvailablePokemonNames, monName);
-            sprintfStatic(buf_1, gUnknown_80E910C[bVar2 % 10], gAvailablePokemonNames);
+            strcpy(gFormatBuffer_Monsters, monName);
+            sprintfStatic(buf_1, gUnknown_80E910C[bVar2 % 10], gFormatBuffer_Monsters);
             PrintStringOnWindow(21, param_1->y, buf_1, param_1->unk0[0], 0);
             break;
         }
         default: {
             u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
             monName = GetMonSpecies(param_1->targetSpecies);
-            strcpy(gAvailablePokemonNames, monName);
-            sprintfStatic(buf_1, gUnknown_80E8C98[bVar2 % 15], gAvailablePokemonNames);
+            strcpy(gFormatBuffer_Monsters, monName);
+            sprintfStatic(buf_1, gUnknown_80E8C98[bVar2 % 15], gFormatBuffer_Monsters);
             PrintStringOnWindow(21, param_1->y, buf_1, param_1->unk0[0], 0);
             break;
         }
@@ -163,13 +163,13 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             PrintStringOnWindow(10, y, gMedichamMissionDescription, param_1->unk0[0], 0);
             break;
         case 4:
-            BufferItemName(gFormatItems, param_1->targetItem, NULL);
-            sprintfStatic(buf_1, gUnknown_80E8968, gFormatItems);
+            BufferItemName(gFormatBuffer_Items, param_1->targetItem, NULL);
+            sprintfStatic(buf_1, gUnknown_80E8968, gFormatBuffer_Items);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
             break;
         case 5:
-            BufferItemName(gFormatItems, param_1->targetItem, NULL);
-            sprintfStatic(buf_1, gUnknown_80E89B0, gFormatItems);
+            BufferItemName(gFormatBuffer_Items, param_1->targetItem, NULL);
+            sprintfStatic(buf_1, gUnknown_80E89B0, gFormatBuffer_Items);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
             break;
         case 6:
@@ -177,8 +177,8 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             break;
         case 7:
             monName = GetMonSpecies(param_1->targetSpecies);
-            strcpy(gAvailablePokemonNames, monName);
-            sprintfStatic(buf_1, gUnknown_80E9F8C[param_1->unk0[1]].text, gAvailablePokemonNames, gAvailablePokemonNames);
+            strcpy(gFormatBuffer_Monsters, monName);
+            sprintfStatic(buf_1, gUnknown_80E9F8C[param_1->unk0[1]].text, gFormatBuffer_Monsters, gFormatBuffer_Monsters);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
             break;
         case 9:
@@ -194,12 +194,12 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
         case 16: {
             u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
             u8 bVar3 = param_1->unk8->seed + param_1->unk8->dungeon.floor;
-            BufferItemName(gFormatItems, param_1->targetItem, NULL);
-            sprintfStatic(buf_1, gUnknown_80EB3F8[bVar2 % 22], gFormatItems);
+            BufferItemName(gFormatBuffer_Items, param_1->targetItem, NULL);
+            sprintfStatic(buf_1, gUnknown_80EB3F8[bVar2 % 22], gFormatBuffer_Items);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
             y += 12;
 
-            sprintfStatic(buf_1, gUnknown_80EB72C[bVar3 % 22], gFormatItems);
+            sprintfStatic(buf_1, gUnknown_80EB72C[bVar3 % 22], gFormatBuffer_Items);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
             y -= 12;
             break;
@@ -208,12 +208,12 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
             u8 bVar3 = param_1->unk8->seed + param_1->unk8->dungeon.floor;
             monName = GetMonSpecies(param_1->targetSpecies);
-            strcpy(gAvailablePokemonNames, monName);
-            sprintfStatic(buf_1, gUnknown_80EAEB8[bVar2 % 20], gAvailablePokemonNames);
+            strcpy(gFormatBuffer_Monsters, monName);
+            sprintfStatic(buf_1, gUnknown_80EAEB8[bVar2 % 20], gFormatBuffer_Monsters);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
             y += 12;
 
-            sprintfStatic(buf_1, gUnknown_80EB198[bVar3 % 4], gAvailablePokemonNames);
+            sprintfStatic(buf_1, gUnknown_80EB198[bVar3 % 4], gFormatBuffer_Monsters);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
             y -= 12;
             break;
@@ -222,12 +222,12 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
             u8 bVar3 = param_1->unk8->seed + param_1->unk8->dungeon.floor;
             monName = GetMonSpecies(param_1->targetSpecies);
-            strcpy(gAvailablePokemonNames, monName);
-            sprintfStatic(buf_1, gUnknown_80EB220[bVar2 % 6], gAvailablePokemonNames);
+            strcpy(gFormatBuffer_Monsters, monName);
+            sprintfStatic(buf_1, gUnknown_80EB220[bVar2 % 6], gFormatBuffer_Monsters);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
             y += 12;
 
-            sprintfStatic(buf_1, gUnknown_80EB2F0[bVar3 % 6], gAvailablePokemonNames);
+            sprintfStatic(buf_1, gUnknown_80EB2F0[bVar3 % 6], gFormatBuffer_Monsters);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
             y -= 12;
             break;
@@ -236,12 +236,12 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
             u8 bVar3 = param_1->unk8->seed + param_1->unk8->dungeon.floor;
             monName = GetMonSpecies(param_1->targetSpecies);
-            strcpy(gAvailablePokemonNames, monName);
-            sprintfStatic(buf_1, gUnknown_80E91D4[bVar2 % 45], gAvailablePokemonNames);
+            strcpy(gFormatBuffer_Monsters, monName);
+            sprintfStatic(buf_1, gUnknown_80E91D4[bVar2 % 45], gFormatBuffer_Monsters);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
             y += 12;
 
-            sprintfStatic(buf_1, gUnknown_80E9820[bVar3 % 10], gAvailablePokemonNames);
+            sprintfStatic(buf_1, gUnknown_80E9820[bVar3 % 10], gFormatBuffer_Monsters);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
             y -= 12;
             break;
@@ -250,12 +250,12 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
             u8 bVar3 = param_1->unk8->seed + param_1->unk8->dungeon.floor;
             monName = GetMonSpecies(param_1->clientSpecies);
-            strcpy(gAvailablePokemonNames, monName);
-            sprintfStatic(buf_1, gUnknown_80E8DE4[bVar2 % 13], gAvailablePokemonNames);
+            strcpy(gFormatBuffer_Monsters, monName);
+            sprintfStatic(buf_1, gUnknown_80E8DE4[bVar2 % 13], gFormatBuffer_Monsters);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
             y += 12;
 
-            sprintfStatic(buf_1, gUnknown_80E8FB0[bVar3 % 13], gAvailablePokemonNames);
+            sprintfStatic(buf_1, gUnknown_80E8FB0[bVar3 % 13], gFormatBuffer_Monsters);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
             y -= 12;
             break;
@@ -282,13 +282,13 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             PrintStringOnWindow(68, y, gUnknown_80E8AEC, param_1->unk0[0], 0);
             break;
         case MISSION_TYPE_DELIVER_ITEM:
-            BufferItemName(gFormatItems, param_1->targetItem, NULL);
-            sprintfStatic(buf_1, gUnknown_80E8AFC, gFormatItems);
+            BufferItemName(gFormatBuffer_Items, param_1->targetItem, NULL);
+            sprintfStatic(buf_1, gUnknown_80E8AFC, gFormatBuffer_Items);
             PrintStringOnWindow(68, y, buf_1, param_1->unk0[0], 0);
             break;
         case MISSION_TYPE_FIND_ITEM:
-            BufferItemName(gFormatItems, param_1->targetItem, NULL);
-            sprintfStatic(buf_1, gUnknown_80E8B10, gFormatItems);
+            BufferItemName(gFormatBuffer_Items, param_1->targetItem, NULL);
+            sprintfStatic(buf_1, gUnknown_80E8B10, gFormatBuffer_Items);
             PrintStringOnWindow(68, y, buf_1, param_1->unk0[0], 0);
             break;
         case MISSION_TYPE_RESCUE_CLIENT:
@@ -296,14 +296,14 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             break;
         case MISSION_TYPE_ESCORT_CLIENT:
             monName = GetMonSpecies(param_1->targetSpecies);
-            strcpy(gAvailablePokemonNames, monName);
-            sprintfStatic(buf_1, gUnknown_80E8B2C, gAvailablePokemonNames);
+            strcpy(gFormatBuffer_Monsters, monName);
+            sprintfStatic(buf_1, gUnknown_80E8B2C, gFormatBuffer_Monsters);
             PrintStringOnWindow(68, y, buf_1, param_1->unk0[0], 0);
             break;
         case MISSION_TYPE_RESCUE_TARGET:
             monName = GetMonSpecies(param_1->targetSpecies);
-            strcpy(gAvailablePokemonNames, monName);
-            sprintfStatic(buf_1, gUnknown_80E8B40, gAvailablePokemonNames);
+            strcpy(gFormatBuffer_Monsters, monName);
+            sprintfStatic(buf_1, gUnknown_80E8B40, gFormatBuffer_Monsters);
             PrintStringOnWindow(68, y, buf_1, param_1->unk0[0], 0);
             break;
         case MISSION_TYPE_SPECIAL_MISSION:
@@ -347,8 +347,8 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             break;
         case ITEM: // Item
         case ITEM_EXTRA: // Item + ?
-            BufferItemName(gFormatItems, param_1->rewardItem, NULL);
-            sprintfStatic(buf_1, gMissionRewardText[param_1->rewardType], gFormatItems);
+            BufferItemName(gFormatBuffer_Items, param_1->rewardItem, NULL);
+            sprintfStatic(buf_1, gMissionRewardText[param_1->rewardType], gFormatBuffer_Items);
             PrintStringOnWindow(68, y, buf_1, param_1->unk0[0], 0);
             break;
         case 4: // Friend Area

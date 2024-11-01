@@ -1,5 +1,5 @@
 #include "global.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "constants/main_menu.h"
 #include "input.h"
 #include "main_menu1.h"

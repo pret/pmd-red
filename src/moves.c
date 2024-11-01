@@ -1,6 +1,6 @@
 #include "global.h"
 #include "code_800D090.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_8092334.h"
 #include "code_8097DD0.h"
 #include "constants/colors.h"
@@ -13,10 +13,6 @@
 static EWRAM_DATA OpenedFile *sWazaParametersFile = {0};
 static EWRAM_DATA MoveDataEntry *sMovesData = {0};
 static EWRAM_DATA MoveLearnset *sMoveLearnsets = {0}; // 420 entries, aka (MONSTER_DEOXYS_SPEED + 1), aka (MONSTER_MUNCHLAX)
-
-// ???
-extern u32 gFormatData_202DE30;
-extern u8 gAvailablePokemonNames[]; // 202DF98
 
 // data_8107010.s
 extern const unkStruct_80928C0 gUnknown_81098C4;
@@ -1386,8 +1382,8 @@ s32 unk_PrintMoveDescription(s32 x, Move *move, s32 a3, struct subStruct_203B240
     u8 buffer[800];
 
     sub_80073B8(a3);
-    sub_80928C0(gAvailablePokemonNames, move, 0);
-    PrintFormatStringOnWindow(8 * x + 16, 0, gUnknown_8109930, a3, 0);
+    sub_80928C0(gFormatBuffer_Monsters[0], move, 0);
+    PrintFormattedStringOnWindow(8 * x + 16, 0, gUnknown_8109930, a3, 0);
     y = 19;
     moveDescription = sMovesData[move->id].description;
 
@@ -1396,7 +1392,7 @@ s32 unk_PrintMoveDescription(s32 x, Move *move, s32 a3, struct subStruct_203B240
         ++moveDescription;
     }
 
-    PrintFormatStringOnWindow(4, y, moveDescription, a3, 0);
+    PrintFormattedStringOnWindow(4, y, moveDescription, a3, 0);
     unk_MovePrintData(move, a3);
     sub_80073E0(a3);
     strcpy(buffer, sMovesData[move->id].description);
@@ -1410,14 +1406,14 @@ static void unk_MovePrintData(Move *move, s32 y)
     const u8 *text;
 
     sub_80078A4(y, 4, 72, 200, COLOR_WHITE_2);
-    sub_8092D54(gAvailablePokemonNames, move);
-    PrintFormatStringOnWindow(4, 74, gUnknown_810CF00, y, 0);
-    PrintFormatStringOnWindow(4, 86, gPtrTypeText, y, 0);
+    sub_8092D54(gFormatBuffer_Monsters[0], move);
+    PrintFormattedStringOnWindow(4, 74, gUnknown_810CF00, y, 0);
+    PrintFormattedStringOnWindow(4, 86, gPtrTypeText, y, 0);
     type = GetMoveType(move);
     text = GetUnformattedTypeString(type);
-    PrintFormatStringOnWindow(64, 86, text, y, 0);
+    PrintFormattedStringOnWindow(64, 86, text, y, 0);
     power = GetMoveBasePower(move);
-    gFormatData_202DE30 = power;
+    gFormatArgs[0] = power;
 }
 
 static void CopyAndResetMove(Move *dest, Move *src)

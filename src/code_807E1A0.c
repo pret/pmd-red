@@ -30,7 +30,6 @@ extern u8 *gUnknown_80F9C4C[];
 extern u8 *gUnknown_80F9C70[];
 extern u8 *gUnknown_80F9C8C[];
 extern u8 *gUnknown_80F9CBC[];
-extern u8 gAvailablePokemonNames[];
 extern u8 *gUnknown_80FCAC0[];
 
 void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s16 param_4,s32 param_5)
@@ -75,12 +74,12 @@ void sub_807E254(Entity *pokemon,Entity *target)
 
 
   if (HasAbility(pokemon, ABILITY_SUCTION_CUPS)) {
-    SetMessageArgument(gAvailablePokemonNames,pokemon,0);
+    SetMessageArgument(gFormatBuffer_Monsters[0],pokemon,0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
   }
   else if(HasAbility(target, ABILITY_SUCTION_CUPS))
   {
-    SetMessageArgument(gAvailablePokemonNames,target,0);
+    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
   }
   else

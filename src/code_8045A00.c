@@ -64,7 +64,7 @@ s32 GetTeamMemberEntityIndex(Entity *pokemon)
   return -1;
 }
 
-void SetMessageArgument(char buffer[], Entity *entity, u32 param_3)
+void SetMessageArgument(u8 *buffer, Entity *entity, u32 param_3)
 {
   switch(GetEntityType(entity))
   {

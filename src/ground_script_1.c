@@ -129,7 +129,7 @@ void DeleteGroundEffects(void);
 u32 sub_80A14E8(u32, u8, u32, u32);
 s16 HandleAction(void *, DebugLocation *);
 
-extern int gFormatData_202DE30[10];
+extern int gFormatArgs[10];
 
 extern s16 gCurrentMap;
 extern s16 gUnknown_2039A32;
@@ -707,7 +707,7 @@ s32 ExecuteScriptCommand(Action *action) {
                             case 0: o = 1; break;
                             case 2: o = -1; break;
                         }
-                        gFormatData_202DE30[curCmd.argShort] = GetDungeonFloorCount(a) + o;
+                        gFormatArgs[curCmd.argShort] = GetDungeonFloorCount(a) + o;
                         break;
                     }
                 }

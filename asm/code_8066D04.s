@@ -54,7 +54,7 @@ _08066E54:
 	ldr r0, _08066E7C
 	b _08066F1E
 	.align 2, 0
-_08066E78: .4byte gFormatItems
+_08066E78: .4byte gFormatBuffer_Items
 _08066E7C: .4byte gUnknown_80F8BE0
 _08066E80:
 	ldr r1, [sp, 0x8]
@@ -73,7 +73,7 @@ _08066E80:
 	ldr r0, _08066EA4
 	b _08066F1E
 	.align 2, 0
-_08066EA0: .4byte gUnknown_202DEA8
+_08066EA0: .4byte gFormatBuffer_Items + 0x50
 _08066EA4: .4byte gItemStickyCannotMove3
 _08066EA8:
 	mov r2, r9
@@ -185,7 +185,7 @@ _08066F7E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08066F90: .4byte gFormatItems
+_08066F90: .4byte gFormatBuffer_Items
 _08066F94: .4byte 0x0000014d
 _08066F98: .4byte gSwappedGroundItem
 _08066F9C: .4byte gDungeon
@@ -236,7 +236,7 @@ sub_8066FA4:
 	ldr r0, _08067004
 	b _0806709E
 	.align 2, 0
-_08067000: .4byte gFormatItems
+_08067000: .4byte gFormatBuffer_Items
 _08067004: .4byte gItemStickyCannotMove3
 _08067008:
 	mov r0, r9
@@ -317,7 +317,7 @@ _0806709E:
 	bl TryDisplayDungeonLoggableMessage
 	b _080670EE
 	.align 2, 0
-_080670A8: .4byte gUnknown_202DEA8
+_080670A8: .4byte gFormatBuffer_Items + 0x50
 _080670AC: .4byte 0xffffff00
 _080670B0: .4byte gNothingCanBePutDownHere
 _080670B4:
@@ -421,8 +421,8 @@ _08067188:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08067190: .4byte gFormatItems
-_08067194: .4byte gAvailablePokemonNames
+_08067190: .4byte gFormatBuffer_Items
+_08067194: .4byte gFormatBuffer_Monsters
 _08067198: .4byte gDungeon
 _0806719C: .4byte 0x00003a08
 	thumb_func_end sub_8067110
@@ -459,7 +459,7 @@ sub_80671A0:
 	ldr r0, _080671E4
 	b _08067230
 	.align 2, 0
-_080671E0: .4byte gFormatItems
+_080671E0: .4byte gFormatBuffer_Items
 _080671E4: .4byte gUnknown_80F8BE0
 _080671E8:
 	ldrb r0, [r4, 0x2]
@@ -485,7 +485,7 @@ _08067202:
 	ldr r0, _0806721C
 	b _08067230
 	.align 2, 0
-_08067218: .4byte gFormatItems
+_08067218: .4byte gFormatBuffer_Items
 _0806721C: .4byte gUnknown_80F8BE0
 _08067220:
 	adds r0, r6, 0
@@ -680,8 +680,8 @@ _08067384:
 	bl TryDisplayDungeonLoggableMessage
 	b _080673C6
 	.align 2, 0
-_080673B0: .4byte gFormatItems
-_080673B4: .4byte gAvailablePokemonNames
+_080673B0: .4byte gFormatBuffer_Items
+_080673B4: .4byte gFormatBuffer_Monsters
 _080673B8: .4byte gMonThrewItem2
 _080673BC:
 	ldr r0, _080673F8
@@ -976,7 +976,7 @@ _08067600:
 	movs r0, 0
 	b _08067716
 	.align 2, 0
-_08067608: .4byte gAvailablePokemonNames
+_08067608: .4byte gFormatBuffer_Monsters
 _0806760C: .4byte gUnknown_80FE008
 _08067610:
 	adds r0, r6, 0x4
@@ -1224,7 +1224,7 @@ _080677B4:
 	ldr r0, _08067808
 	b _08067832
 	.align 2, 0
-_080677F0: .4byte gAvailablePokemonNames
+_080677F0: .4byte gFormatBuffer_Monsters
 _080677F4: .4byte gSayFarewellQ
 _080677F8: .4byte gUnknown_80F913C
 _080677FC: .4byte gRecruitedPokemonRef
@@ -1285,7 +1285,7 @@ _0806786C:
 	.align 2, 0
 _08067874: .4byte gSendMonBackWithItemQ
 _08067878: .4byte gMonWentBack
-_0806787C: .4byte gAvailablePokemonNames
+_0806787C: .4byte gFormatBuffer_Monsters
 _08067880: .4byte 0x0000021d
 	thumb_func_end sub_8067794
 
@@ -1385,7 +1385,7 @@ sub_8067904:
 	b _08067962
 	.align 2, 0
 _08067940: .4byte gUnknown_202F208
-_08067944: .4byte gAvailablePokemonNames
+_08067944: .4byte gFormatBuffer_Monsters
 _08067948: .4byte gMonCringing
 _0806794C:
 	adds r0, r6, 0
@@ -1404,7 +1404,7 @@ _08067962:
 	bl TryDisplayDungeonLoggableMessage
 	b _08067A56
 	.align 2, 0
-_0806796C: .4byte gAvailablePokemonNames
+_0806796C: .4byte gFormatBuffer_Monsters
 _08067970: .4byte gMonParalyzed
 _08067974:
 	movs r0, 0xB0
@@ -2125,12 +2125,12 @@ sub_8067F00:
 	movs r0, 0xC
 	movs r1, 0
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r1, 0
 	mov r10, r1
 	b _08067FF6
 	.align 2, 0
-_08067F44: .4byte gAvailablePokemonNames
+_08067F44: .4byte gFormatBuffer_Monsters
 _08067F48: .4byte gUnknown_8106E28
 _08067F4C:
 	ldr r4, _08067F8C
@@ -2162,9 +2162,9 @@ _08067F4C:
 	bl strcpy
 	b _08067FA4
 	.align 2, 0
-_08067F8C: .4byte gAvailablePokemonNames
-_08067F90: .4byte gFormatData_202DE30
-_08067F94: .4byte gFormatItems
+_08067F8C: .4byte gFormatBuffer_Monsters
+_08067F90: .4byte gFormatArgs
+_08067F94: .4byte gFormatBuffer_Items
 _08067F98: .4byte gUnknown_8106E2C
 _08067F9C:
 	ldr r0, _08067FCC
@@ -2188,10 +2188,10 @@ _08067FA4:
 	movs r0, 0x7
 	mov r1, r8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	b _08067FE6
 	.align 2, 0
-_08067FCC: .4byte gFormatItems
+_08067FCC: .4byte gFormatBuffer_Items
 _08067FD0: .4byte gUnknown_8106E30
 _08067FD4: .4byte gUnknown_8106E34
 _08067FD8:
@@ -2200,7 +2200,7 @@ _08067FD8:
 	movs r0, 0x7
 	mov r1, r8
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 _08067FE6:
 	movs r2, 0x1
 	add r10, r2
@@ -2232,7 +2232,7 @@ _08068000:
 	movs r0, 0x8
 	movs r1, 0x2
 	movs r3, 0x1
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	b _0806804C
 	.align 2, 0
 _08068028: .4byte gUnknown_8106E48
@@ -2249,7 +2249,7 @@ _08068034:
 	movs r0, 0x8
 	movs r1, 0x2
 	movs r3, 0x1
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 _0806804C:
 	movs r0, 0x1
 	bl sub_80073E0
@@ -2262,7 +2262,7 @@ _0806804C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08068064: .4byte gFormatData_202DE30
+_08068064: .4byte gFormatArgs
 _08068068: .4byte gUnknown_8106E6C
 	thumb_func_end sub_8067F00
 

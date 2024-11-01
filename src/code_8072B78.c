@@ -13,8 +13,6 @@
 #include "structs/map.h"
 #include "structs/str_pokemon.h"
 
-extern u8 gAvailablePokemonNames[];
-extern u8 gUnknown_202DFE8[];
 extern Position gAdjacentTileOffsets[];
 extern u8 *gUnknown_80FE2EC[];
 
@@ -111,8 +109,8 @@ void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
 
   id_s32 = id;
   entityInfo = GetEntInfo(target);
-  SetMessageArgument_2(gAvailablePokemonNames,entityInfo,0);
-  CopyCyanMonsterNametoBuffer(gAvailablePokemonNames + 0x50,id_s32);
+  SetMessageArgument_2(gFormatBuffer_Monsters[0],entityInfo,0);
+  CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[1],id_s32);
   file = GetSpriteData(id_s32);
   fu(entityInfo, id_s32);
   GetPokemonLevelData(&levelData,id_s32,entityInfo->level);

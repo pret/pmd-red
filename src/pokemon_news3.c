@@ -17,7 +17,7 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gAvailablePokemonNames[]; // 202DF98
+extern u8 gFormatBuffer_Monsters[]; // 202DF98
 
 static EWRAM_DATA_2 struct unkStruct_203B2D8 *sUnknown_203B2D8 = {0};
 static EWRAM_DATA_2 u16 sUnknown_203B2DC = {0};
@@ -143,8 +143,8 @@ void CreateMailMenu(void)
         if (mail->mailType == MAIL_TYPE_UNK1) {
             y = sub_8013800(&sUnknown_203B2D8->unk4.s0.input, i);
             sub_803B6B0(10, y, 6, sUnknown_203B2D8->unk4.s0.unk34);
-            PrintPokeNameToBuffer(gAvailablePokemonNames, GetPlayerPokemonStruct());
-            sprintfStatic(buffer, GetPokemonMailHeadline(mail->unk4.dungeon.floor), gAvailablePokemonNames);
+            PrintPokeNameToBuffer(gFormatBuffer_Monsters, GetPlayerPokemonStruct());
+            sprintfStatic(buffer, GetPokemonMailHeadline(mail->unk4.dungeon.floor), gFormatBuffer_Monsters);
             PrintStringOnWindow(21, y, buffer, sUnknown_203B2D8->unk4.s0.unk34, 0);
         }
         else {

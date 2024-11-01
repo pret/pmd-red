@@ -52,16 +52,9 @@ struct UnkDrawStringStruct
     u8 fill22;
     u8 fill23;
     const u8* (*unk24)(const u8 *, const u8 *, struct UnkDrawStringStruct*);
-    u8 fill28;
-    u8 fill29;
-    u8 fill2A;
-    u8 fill2B;
-    u32 unk2C;
-    u8 fill30;
-    u8 fill31;
-    u8 fill32;
-    u8 fill33;
-    u32 unk34;
+    s32 unk28;
+    s32 unk2C;
+    s32 unk30;
 };
 
 
@@ -86,6 +79,7 @@ extern void sub_80089AC(const UnkTextStruct2 *, UnkTextStruct2_sub *);
 extern void CallPrepareTextbox_8008C54(u32);
 extern s32 sub_8008ED0(const u8 *);
 extern void sub_8009388(void);
-extern void PrintStringOnWindow(s32 x, u32 y, const u8 *str, u32 windowId, u32);
+void PrintStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing);
+void PrintStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr);
 
 #endif // GUARD_TEXT2_H

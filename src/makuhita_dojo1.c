@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80118A4.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_801B60C.h"
 #include "code_80A26CC.h"
 #include "common_strings.h"
@@ -15,10 +15,7 @@
 #include "text1.h"
 #include "text2.h"
 
-extern u8 gAvailablePokemonNames[]; // 202DF98
-extern u8 gUnknown_202E1C8[];
-extern u8 gPlayerName[]; // 202E2B8
-extern u8 gUnknown_202E5D8[];
+extern u8 gSpeakerNameBuffer[];
 
 static EWRAM_DATA_2 MakuhitaDojoWork1 *sMakuhitaDojoWork1 = {0};
 
@@ -94,14 +91,14 @@ bool8 MakuhitaDojo_New(u32 mode)
     else
         sMakuhitaDojoWork1->monPortraitPtr = &sMakuhitaDojoWork1->monPortrait;
 
-    CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, MONSTER_MAKUHITA);
-    CopyYellowMonsterNametoBuffer(gUnknown_202E1C8, MONSTER_MAKUHITA);
+    CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_MAKUHITA);
+    CopyYellowMonsterNametoBuffer(gFormatBuffer_Monsters[7], MONSTER_MAKUHITA);
     monName = GetMonSpecies(MONSTER_MAKUHITA);
-    strcpy(gUnknown_202E1C8 - 0x50, monName);
+    strcpy(gFormatBuffer_Monsters[6], monName);
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_MAKUHITA);
     sMakuhitaDojoWork1->monPortrait.faceFile = faceFile;
-    sMakuhitaDojoWork1->monPortrait.faceData = faceFile->data;
+    sMakuhitaDojoWork1->monPortrait.faceData = (void *) faceFile->data;
     sMakuhitaDojoWork1->monPortrait.spriteId = 0;
     sMakuhitaDojoWork1->monPortrait.flip = FALSE;
     sMakuhitaDojoWork1->monPortrait.unkE = 0;
@@ -202,7 +199,7 @@ static void MakuhitaDojo_UpdateDialogue(void)
             sMakuhitaDojoWork1->fallbackState = 13;
             dLoc.id = sub_80A2740(sMakuhitaDojoWork1->unk10);
             dLoc.floor = 1;
-            PrintYellowDungeonNametoBuffer(gAvailablePokemonNames, &dLoc);
+            PrintYellowDungeonNametoBuffer(gFormatBuffer_Monsters[0], &dLoc);
             CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_4], 0, sMakuhitaDojoWork1->monPortraitPtr, 0x10D);
             break;
         case 7:
@@ -218,7 +215,7 @@ static void MakuhitaDojo_UpdateDialogue(void)
             CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_7], 0, sMakuhitaDojoWork1->monPortraitPtr, 0x10D);
             break;
         case 9:
-            PrintColoredPokeNameToBuffer(gPlayerName, GetPlayerPokemonStruct(), COLOR_YELLOW);
+            PrintColoredPokeNameToBuffer(gFormatBuffer_Names[0], GetPlayerPokemonStruct(), COLOR_YELLOW);
             sMakuhitaDojoWork1->fallbackState = 11;
             PlaySound(203);
             CreateDialogueBoxAndPortrait(sReceivedBonslyDoll, 0, 0, 0x101);

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "text1.h"
 #include "memory.h"
+#include "string_format.h"
 #include "structs/str_3001B64.h"
 
 IWRAM_DATA struct unkStruct_3001B64 *gUnknown_3001B64 = {0};
@@ -8,11 +9,9 @@ IWRAM_DATA struct unkStruct_3001B64 *gUnknown_3001B64 = {0};
 extern u16 gUnknown_20399DC;
 extern u16 gUnknown_20399DE;
 extern u8 gInvalidityText[];
-extern u8 gAvailablePokemonNames[];
-extern u8 gPlayerName[];
 
 extern u8 ScriptPrintText_809B2B8(u32 *, u32, u32, u32);
-extern u32 IsTextboxOpen_809B40C(u32 *); 
+extern u32 IsTextboxOpen_809B40C(u32 *);
 extern void sub_801416C(s32, s32);
 extern void sub_80095CC(u32, u32);
 extern void sub_8009408(u32, u32);
@@ -180,7 +179,7 @@ void sub_809A7EC(void)
     temp = &gUnknown_3001B64->unk43C[0];
 
     for(counter = 0; counter < 10; counter++, temp++)
-    { 
+    {
         temp->unk0 |= -1;
         temp->speciesID = MONSTER_NONE;
         temp->unk4 = 0;
@@ -217,8 +216,8 @@ void sub_809A83C(s16 param_1)
     temp->unk10 = 0;
     temp->faceData = NULL;
     temp->unk1C = 0;
-    strcpy(gAvailablePokemonNames + (param_1 * 0x50), gInvalidityText);
-    strcpy(gPlayerName + (param_1 * 0x50), gInvalidityText);
+    strcpy(gFormatBuffer_Monsters[param_1], gInvalidityText);
+    strcpy(gFormatBuffer_Names[param_1], gInvalidityText);
     if(temp->faceFile)
     {
         CloseFile(temp->faceFile);

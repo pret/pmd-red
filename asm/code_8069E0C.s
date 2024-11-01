@@ -579,7 +579,7 @@ _0806A818:
 	mov r0, sp
 	b _0806A836
 	.align 2, 0
-_0806A828: .4byte gAvailablePokemonNames
+_0806A828: .4byte gFormatBuffer_Monsters
 _0806A82C:
 	adds r1, 0x1
 	cmp r1, r9
@@ -634,7 +634,7 @@ _0806A87A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806A890: .4byte gFormatItems
+_0806A890: .4byte gFormatBuffer_Items
 _0806A894: .4byte gUnknown_80FEAC4
 	thumb_func_end sub_806A7E8
 

@@ -1084,7 +1084,7 @@ sub_80101F8:
 	adds r2, 0x50
 	adds r1, r3, 0
 	movs r3, 0
-	bl xxx_format_string
+	bl FormatString
 	b _08010220
 	.align 2, 0
 _08010214: .4byte gUnknown_80D3EFC
@@ -2299,7 +2299,7 @@ _08010BD0:
 	movs r0, 0xC
 	movs r1, 0x2
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	add sp, 0x64
@@ -2307,7 +2307,7 @@ _08010BD0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08010C08: .4byte gAvailablePokemonNames
+_08010C08: .4byte gFormatBuffer_Monsters
 _08010C0C: .4byte gUnknown_80D4074
 	thumb_func_end sub_8010B74
 
@@ -2397,7 +2397,7 @@ _08010C86:
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r0, 0
 	bl sub_80073E0
 	movs r0, 0x1
@@ -2407,13 +2407,13 @@ _08010C86:
 	movs r0, 0xA
 	movs r1, 0
 	movs r3, 0x1
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	ldr r2, _08010D78
 	str r4, [sp]
 	movs r0, 0xA
 	movs r1, 0xC
 	movs r3, 0x1
-	bl PrintFormatStringOnWindow
+	bl PrintFormattedStringOnWindow
 	movs r0, 0x1
 	bl sub_80073E0
 	add r0, sp, 0x4

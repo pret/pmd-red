@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_8099360.h"
 #include "memory.h"
 #include "save.h"
@@ -26,7 +26,7 @@ void PrepareSavePakWrite(s16 pokemonID)
     if (pokemonID != MONSTER_NONE) {
         file = GetDialogueSpriteDataPtr(pokemonID);
         sSavePakWrite->monPortrait.faceFile = file;
-        sSavePakWrite->monPortrait.faceData = file->data;
+        sSavePakWrite->monPortrait.faceData = (void *) file->data;
         sSavePakWrite->monPortrait.spriteId = 0;
         sSavePakWrite->monPortrait.flip = FALSE;
         sSavePakWrite->monPortrait.unkE = 0;

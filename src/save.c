@@ -1,6 +1,6 @@
 #include "global.h"
 #include "code_80118A4.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_8097670.h"
 #include "event_flag.h"
 #include "exclusive_pokemon.h"

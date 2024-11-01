@@ -55,7 +55,7 @@ s32 sub_8070828(Entity *pokemon, bool8 displayMessage)
     }
 }
 
-void SetMessageArgument_2(char buffer[], EntityInfo *param_2, s32 colorNum)
+void SetMessageArgument_2(u8 *buffer, EntityInfo *param_2, s32 colorNum)
 {
     if (((gDungeon->unk181e8.blinded ||
         gDungeon->unk181e8.hallucinating) ||

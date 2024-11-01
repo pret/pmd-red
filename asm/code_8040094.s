@@ -1739,7 +1739,7 @@ _08040EB8: .4byte gUnknown_202F224
 _08040EBC: .4byte gDungeon
 _08040EC0: .4byte 0x00018204
 _08040EC4: .4byte gUnknown_8106A8C
-_08040EC8: .4byte gFormatData_202DE30
+_08040EC8: .4byte gFormatArgs
 _08040ECC: .4byte gPtrMagnitudeMessage
 _08040ED0:
 	cmp r1, 0x76

@@ -3,7 +3,7 @@
 #include "code_800558C.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "constants/colors.h"
 #include "constants/input.h"
 #include "input.h"
@@ -322,7 +322,7 @@ void sub_8012D34(UnkTextStruct2 *a0, s32 a1)
 	"\tbx r0");
 }
 
-void sub_8012D60(MenuStruct *param_1, const MenuItem *menuItems, u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
+void sub_8012D60(MenuStruct *param_1, const MenuItem *menuItems, const u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
 {
     const u8 *textPtr;
     s32 counter;
@@ -369,7 +369,7 @@ void sub_8012D60(MenuStruct *param_1, const MenuItem *menuItems, u32 *colorArray
     param_1->menuAction = -1;
 }
 
-void sub_8012E04(MenuStruct *param_1, const MenuItem *menuItems, u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
+void sub_8012E04(MenuStruct *param_1, const MenuItem *menuItems, const u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
 {
     const u8 *textPtr;
     s32 counter;
@@ -449,7 +449,7 @@ void sub_8012EBC(MenuStruct *param_1)
             ptr_text2 = &textStack[index];
             RestoreUnkTextStruct_8006518(textStack);
             x = sub_8008ED0(param_1->unk0);
-            PrintFormatStringOnWindow(((ptr_text2->unk14->f2 * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
+            PrintFormattedStringOnWindow(((ptr_text2->unk14->f2 * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
         }
 
         colorArray = param_1->menuTextColorArray;
@@ -474,7 +474,7 @@ void sub_8012EBC(MenuStruct *param_1)
 
                 sprintfStatic(buffer,gUnknown_80D4828, color, textPtr);
                 y = sub_8013800(&param_1->input, counter);
-                PrintFormatStringOnWindow(8, y, buffer, param_1->index, 0);
+                PrintFormattedStringOnWindow(8, y, buffer, param_1->index, 0);
                 menuItemsPtr++;
                 counter++;
             } while (menuItemsPtr->text != NULL);

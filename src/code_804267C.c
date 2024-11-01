@@ -13,8 +13,6 @@
 #include "dungeon_util.h"
 #include "structs/str_dungeon.h"
 
-extern u8 gAvailablePokemonNames[]; // 202DF98
-
 extern const u16 gUnknown_80F67DC[4];
 extern const u16 gUnknown_80F67E4[4];
 extern const s32 gUnknown_80F67EC[8];
@@ -113,7 +111,7 @@ void sub_80427AC(void)
                 enInfo->unkF3 = FALSE;
                 sub_80429A0(entity);
                 if (!enInfo->isNotTeamMember) {
-                    SetMessageArgument(gAvailablePokemonNames, entity, 0);
+                    SetMessageArgument(gFormatBuffer_Monsters[0], entity, 0);
                     DisplayDungeonLoggableMessageTrue(entity, *gPtrFeralFoundItemMessage);
                 }
             }

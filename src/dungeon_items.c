@@ -12,7 +12,6 @@
 #include "pokemon.h"
 #include "structs/str_dungeon.h"
 
-extern u8 gAvailablePokemonNames[];
 extern s32 gUnknown_810A3F0[];
 extern u8 *gUnknown_80FA408[];
 extern u8 *gUnknown_810531C[];
@@ -150,7 +149,7 @@ void MusicBoxCreation(void)
     sub_80416E0(&entity->pixelPos,0x10c,FALSE);
     sub_80421C0(entity,0xd7);
     sub_803E708(0x3c,0x41);
-    SetMessageArgument(gAvailablePokemonNames,entity,0);
+    SetMessageArgument(gFormatBuffer_Monsters[0],entity,0);
     DisplayDungeonMessage(0,*gUnknown_81053A8,1);
     sub_803E708(10,0x41);
     PlaySoundEffect(0xd4);

@@ -107,7 +107,7 @@ _0809CC82:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809CC8C: .4byte gFormatItems
+_0809CC8C: .4byte gFormatBuffer_Items
 	thumb_func_end sub_809CBBC
 
 	thumb_func_start sub_809CC90

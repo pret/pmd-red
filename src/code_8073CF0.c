@@ -65,9 +65,6 @@ extern void sub_807EC28(bool8);
 
 extern s32 gUnknown_202F378;
 extern u8 gUnknown_202F32D;
-extern u8 gFormatItems[];
-extern u8 gUnknown_202DFE8[];
-extern u8 gAvailablePokemonNames[];
 
 extern const u8 *gMonTerrifiedCouldntPickUpItem;
 extern const u8 *gMonPickedUpItem;
@@ -141,7 +138,7 @@ void sub_8073D14(Entity *entity)
         return;
     if (sub_8044B28())
         return;
-    SetMessageArgument(gAvailablePokemonNames, entity, 0);
+    SetMessageArgument(gFormatBuffer_Monsters[0], entity, 0);
     if (entityInfo->isTeamLeader)
         return;
     if (entityInfo->shopkeeper == 1)
@@ -157,8 +154,8 @@ void sub_8073D14(Entity *entity)
         return;
 
     if (ShouldMonsterRunAwayAndShowEffect(entity, TRUE)) {
-        sub_8045BF8(gFormatItems, groundItem);
-        SetMessageArgument(gAvailablePokemonNames, entity, 0);
+        sub_8045BF8(gFormatBuffer_Items[0], groundItem);
+        SetMessageArgument(gFormatBuffer_Monsters[0], entity, 0);
         DisplayDungeonLoggableMessageTrue(entity, gMonTerrifiedCouldntPickUpItem);
     }
     else if (!_entityInfo->isNotTeamMember && GetItemCategory(groundItem->id) == CATEGORY_POKE) {
@@ -170,7 +167,7 @@ void sub_8073D14(Entity *entity)
             PlaySoundEffect(0x14C);
         }
         AddToTeamMoney(GetMoneyValue(groundItem));
-        sub_8045BF8(gFormatItems, groundItem);
+        sub_8045BF8(gFormatBuffer_Items[0], groundItem);
         sub_80461C8(&entity->pos, 1);
         DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItem);
     }
@@ -232,7 +229,7 @@ void sub_8073D14(Entity *entity)
                 if (groundItem->flags & ITEM_FLAG_STICKY)
                     carriedItems[newInventoryId]->flags |= ITEM_FLAG_STICKY;
 
-                sub_8045BF8(gFormatItems, groundItem);
+                sub_8045BF8(gFormatBuffer_Items[0], groundItem);
                 sub_80461C8(&entity->pos, 1);
                 PlaySoundEffect(0x14A);
                 if (inventoryIds[newInventoryId] <= -1)
@@ -250,7 +247,7 @@ void sub_8073D14(Entity *entity)
         }
 
         if (i == nItems) {
-            sub_8045BF8(gFormatItems, groundItem);
+            sub_8045BF8(gFormatBuffer_Items[0], groundItem);
             DisplayDungeonLoggableMessageTrue(entity, gMonSteppedOnItem);
         }
         else {
@@ -263,16 +260,16 @@ void sub_8073D14(Entity *entity)
 
             if (inventoryIds[i] <= -1) {
                 _entityInfo->heldItem = *groundItem;
-                sub_8045BF8(gFormatItems, groundItem);
+                sub_8045BF8(gFormatBuffer_Items[0], groundItem);
                 sub_80461C8(&entity->pos, 1);
                 DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItem2);
             }
             else if (AddItemToInventory(groundItem)) {
-                SetMessageArgument(gAvailablePokemonNames, entity, 0);
+                SetMessageArgument(gFormatBuffer_Monsters[0], entity, 0);
                 DisplayDungeonLoggableMessageTrue(entity, gMonCouldntPickUpItem);
             }
             else {
-                sub_8045BF8(gFormatItems, groundItem);
+                sub_8045BF8(gFormatBuffer_Items[0], groundItem);
                 sub_80461C8(&entity->pos, 1);
                 DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItemToolbox);
             }
@@ -574,7 +571,7 @@ void sub_8074094(Entity *entity)
             UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
-            SetMessageArgument(gUnknown_202DFE8, entity, 0);
+            SetMessageArgument(gFormatBuffer_Monsters[1], entity, 0);
             TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEB30);
             TrySendImmobilizeSleepEndMsg(entity, entity);
             if (entityInfo->protection.protectionStatus == STATUS_PROTECT) {
@@ -614,7 +611,7 @@ void sub_8074094(Entity *entity)
         if (entityInfo->charging.chargingStatusTurns == 0) {
             entityInfo->charging.chargingStatus = 0;
             entityInfo->unk14A = 0;
-            SetMessageArgument(gAvailablePokemonNames, entity, 0);
+            SetMessageArgument(gFormatBuffer_Monsters[0], entity, 0);
             TryDisplayDungeonLoggableMessage(entity, gUnknown_80FABD8);
         }
     }
@@ -770,7 +767,7 @@ void TickStatusHeal(Entity *entity)
     if (entityInfo->terrifiedTurns != 0) {
         sub_80838EC(&entityInfo->terrifiedTurns);
         if (entityInfo->terrifiedTurns == 0) {
-            SetMessageArgument(gAvailablePokemonNames, entity, 0);
+            SetMessageArgument(gFormatBuffer_Monsters[0], entity, 0);
             TryDisplayDungeonLoggableMessage(entity, gPtrStenchWavedOffMessage);
         }
     }
@@ -794,7 +791,7 @@ void TickStatusHeal(Entity *entity)
         s32 newSpdStage = CalcSpeedStage(entity);
 
         if (oldSpdStage != newSpdStage) {
-            SetMessageArgument(gAvailablePokemonNames, entity, 0);
+            SetMessageArgument(gFormatBuffer_Monsters[0], entity, 0);
             TryDisplayDungeonLoggableMessage(entity, gUnknown_80FA124[newSpdStage]);
         }
     }

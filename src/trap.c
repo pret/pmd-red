@@ -22,9 +22,6 @@
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 
-extern u8 gAvailablePokemonNames[];
-extern u8 gFormatItems[];
-
 extern u8 *gTrapNames[];
 extern u8 *gUnknown_80FC5FC[];
 extern u8 *gUnknown_80FC5F8[];
@@ -249,7 +246,7 @@ void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4)
         return;
     }
     trapData = GetTrapData(entity);
-    GetTrapName(gAvailablePokemonNames,trapData->id);
+    GetTrapName(gFormatBuffer_Monsters[0],trapData->id);
     target = tile->monster;
     if ((target != NULL) && (GetEntityType(target) != ENTITY_MONSTER)) {
         target = NULL;
@@ -432,7 +429,7 @@ void HandleStickyTrap(Entity *pokemon,Entity *target)
         }
         else {
             newIndex = DungeonRandInt(itemCount);
-            sub_8045BF8(gFormatItems, itemStack[newIndex]);
+            sub_8045BF8(gFormatBuffer_Items[0], itemStack[newIndex]);
             itemStack[newIndex]->flags |= ITEM_FLAG_STICKY;
             sub_80421C0(target, 0x192);
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FDC18);
@@ -566,7 +563,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
             }
             else
             {
-                SetMessageArgument(gAvailablePokemonNames,target,0);
+                SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
                 if (info->isNotTeamMember) {
                     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80F970C); // $m0 fell into the pitfall!
                 }
@@ -659,7 +656,7 @@ void HandlePPZeroTrap(Entity *param_1,Entity *param_2)
     if (counter != 0) {
       moveIndex = DungeonRandInt(counter);
       moveStack[moveIndex]->PP = 0;
-      sub_80928C0(gFormatItems,moveStack[moveIndex],0);
+      sub_80928C0(gFormatBuffer_Items[0],moveStack[moveIndex],0);
       sub_806A9B4(param_2, indexStack[moveIndex]);
       flag = TRUE;
     }
@@ -700,7 +697,7 @@ void HandleSealTrap(Entity *param_1,Entity *param_2)
         if (counter != 0) {
             moveIndex = DungeonRandInt(counter);
             moveStack[moveIndex]->moveFlags2 |= MOVE_FLAG_SEALED;
-            sub_80928C0(gFormatItems,moveStack[moveIndex], NULL);
+            sub_80928C0(gFormatBuffer_Items[0],moveStack[moveIndex], NULL);
             flag = TRUE;
         }
         if(flag)

@@ -492,7 +492,7 @@ _080A1968:
 	.align 2, 0
 _080A1970: .4byte gUnknown_8116710
 _080A1974: .4byte gUnknown_2039D98
-_080A1978: .4byte gPlayerName
+_080A1978: .4byte gFormatBuffer_Names
 _080A197C:
 	ldr r0, _080A1984
 	movs r1, 0x53
@@ -608,7 +608,7 @@ _080A1A52:
 	.align 2, 0
 _080A1A64: .4byte gUnknown_8116760
 _080A1A68: .4byte gUnknown_2039D98
-_080A1A6C: .4byte gPlayerName
+_080A1A6C: .4byte gFormatBuffer_Names
 _080A1A70:
 	movs r0, 0x9E
 	movs r1, 0x1
@@ -1023,7 +1023,7 @@ _080A1DA8:
 	.align 2, 0
 _080A1DE0: .4byte 0x000001a3
 _080A1DE4: .4byte 0x0000019b
-_080A1DE8: .4byte gUnknown_202E628
+_080A1DE8: .4byte gFormatBuffer_FriendArea
 _080A1DEC:
 	movs r0, 0
 	movs r1, 0x1F
@@ -1053,7 +1053,7 @@ _080A1E14:
 	bne _080A1EBE
 	b _080A203C
 	.align 2, 0
-_080A1E2C: .4byte gUnknown_202E628
+_080A1E2C: .4byte gFormatBuffer_FriendArea
 _080A1E30:
 	ldr r0, _080A1E38
 	movs r1, 0x20
@@ -1126,7 +1126,7 @@ _080A1EBE:
 	movs r0, 0x1
 	b _080A236C
 	.align 2, 0
-_080A1EC4: .4byte gUnknown_202E628
+_080A1EC4: .4byte gFormatBuffer_FriendArea
 _080A1EC8: .4byte gUnknown_81167E8
 _080A1ECC: .4byte gUnknown_2039D98
 _080A1ED0:
@@ -1171,7 +1171,7 @@ _080A1F28:
 	bl AddToTeamMoney
 	b _080A236A
 	.align 2, 0
-_080A1F30: .4byte gFormatItems
+_080A1F30: .4byte gFormatBuffer_Items
 _080A1F34: .4byte gUnknown_81167EC
 _080A1F38: .4byte 0x00002710
 _080A1F3C:

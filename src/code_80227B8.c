@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_801AFA4.h"
 #include "code_801B3C0.h"
 #include "code_80227B8.h"
@@ -16,10 +16,6 @@
 #include "pokemon_3.h"
 #include "text1.h"
 #include "text2.h"
-
-extern u8 gUnknown_202DEA8[];
-extern u8 gFormatItems[];
-extern u8 gAvailablePokemonNames[]; // 202DF98
 
 static EWRAM_DATA_2 unkStruct_203B294 *sUnknown_203B294 = {0};
 
@@ -46,8 +42,8 @@ bool8 sub_80227B8(PokemonStruct1 *pkmn)
     sUnknown_203B294->pokeStruct = pkmn;
 
     if (pkmn != NULL) {
-        PrintColoredPokeNameToBuffer(gAvailablePokemonNames, pkmn, COLOR_WHITE_2);
-        PrintColoredPokeNameToBuffer(gAvailablePokemonNames + 80, pkmn, COLOR_YELLOW);
+        PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0], pkmn, COLOR_WHITE_2);
+        PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[1], pkmn, COLOR_YELLOW);
 
         if (HasGummiItem())
             sub_8022924(0);
@@ -55,8 +51,8 @@ bool8 sub_80227B8(PokemonStruct1 *pkmn)
             sub_8022924(17);
     }
     else {
-        strcpy(gAvailablePokemonNames, sTripleQuestionMark);
-        strcpy(gAvailablePokemonNames + 80, sTripleQuestionMark);
+        strcpy(gFormatBuffer_Monsters[0], sTripleQuestionMark);
+        strcpy(gFormatBuffer_Monsters[1], sTripleQuestionMark);
 
         if (GetNumberOfFilledInventorySlots() == 0)
             sub_8022924(18);
@@ -202,7 +198,7 @@ static void sub_8022A10(void)
 
                 if (r5 != r6) {
                     sUnknown_203B294->fallbackState = 10;
-                    strcpy(gUnknown_202DEA8, GetIQSkillName(sUnknown_203B294->unk40));
+                    strcpy(gFormatBuffer_Items[1], GetIQSkillName(sUnknown_203B294->unk40));
                     PlaySound(203);
                     CreateDialogueBoxAndPortrait(sFmtIQHelpedLearn, 0, 0, 0x101);
                     sUnknown_203B294->unk40++;
@@ -376,7 +372,7 @@ static void sub_8022EF4(void)
             sUnknown_203B294->unk40 = 1;
             boostAmount = sUnknown_203B294->gummi.boostAmount;
 
-            sub_8090E14(gFormatItems, &gTeamInventoryRef->teamItems[sUnknown_203B294->itemIndex], NULL);
+            sub_8090E14(gFormatBuffer_Items[0], &gTeamInventoryRef->teamItems[sUnknown_203B294->itemIndex], NULL);
 
             if (boostAmount != -1)
                 ShiftItemsDownFrom(sUnknown_203B294->itemIndex);

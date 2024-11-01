@@ -69,8 +69,8 @@ _08045E1E:
 	ldr r0, _08045E3C
 	b _08046048
 	.align 2, 0
-_08045E34: .4byte gFormatItems
-_08045E38: .4byte gAvailablePokemonNames
+_08045E34: .4byte gFormatBuffer_Items
+_08045E38: .4byte gFormatBuffer_Monsters
 _08045E3C: .4byte gMonTerrifiedCouldntPickUpItem
 _08045E40:
 	ldrb r0, [r5, 0x2]
@@ -94,7 +94,7 @@ _08045E40:
 	ldr r0, _08045E78
 	b _08045FD0
 	.align 2, 0
-_08045E74: .4byte gFormatItems
+_08045E74: .4byte gFormatBuffer_Items
 _08045E78: .4byte gPickedUpItem
 _08045E7C:
 	ldr r0, _08045EA8
@@ -282,7 +282,7 @@ _08045FD0:
 	b _08045FF2
 	.align 2, 0
 _08045FDC: .4byte 0x00ff0008
-_08045FE0: .4byte gFormatItems
+_08045FE0: .4byte gFormatBuffer_Items
 _08045FE4: .4byte gPickedUpItem2
 _08045FE8:
 	ldr r0, _08045FFC
@@ -339,8 +339,8 @@ _08046048:
 	bl TryDisplayDungeonLoggableMessage
 	b _080460E0
 	.align 2, 0
-_08046054: .4byte gFormatItems
-_08046058: .4byte gAvailablePokemonNames
+_08046054: .4byte gFormatBuffer_Items
+_08046058: .4byte gFormatBuffer_Monsters
 _0804605C: .4byte gMonSteppedOnItem
 _08046060:
 	movs r0, 0xA5
@@ -363,7 +363,7 @@ _08046060:
 	ldr r0, _08046090
 	b _080460AC
 	.align 2, 0
-_0804608C: .4byte gFormatItems
+_0804608C: .4byte gFormatBuffer_Items
 _08046090: .4byte gPickedUpItem2
 _08046094:
 	adds r0, r5, 0
@@ -382,7 +382,7 @@ _080460AC:
 	bl TryDisplayDungeonLoggableMessage
 	b _080460DA
 	.align 2, 0
-_080460B8: .4byte gAvailablePokemonNames
+_080460B8: .4byte gFormatBuffer_Monsters
 _080460BC: .4byte gMonCouldntPickUpItem
 _080460C0:
 	ldr r0, _080460F0
@@ -408,7 +408,7 @@ _080460E0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080460F0: .4byte gFormatItems
+_080460F0: .4byte gFormatBuffer_Items
 _080460F4: .4byte gPickedUpItemToolbox
 	thumb_func_end sub_8045DB4
 
@@ -1128,7 +1128,7 @@ _08046644:
 	b _0804671E
 	.align 2, 0
 _08046688: .4byte gUnknown_80F4468
-_0804668C: .4byte gFormatItems
+_0804668C: .4byte gFormatBuffer_Items
 _08046690:
 	cmp r0, 0x2
 	beq _080466A4

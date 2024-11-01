@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_8099360.h"
 #include "constants/input.h"
 #include "input.h"
@@ -12,8 +12,6 @@
 #include "menu_input.h"
 #include "text1.h"
 #include "text2.h"
-
-extern u8 gFormatItems[];
 
 static EWRAM_DATA_2 unkStruct_203B224 *gUnknown_203B224 = {0};
 static EWRAM_DATA_2 u16 gUnknown_203B228 = {0};
@@ -236,8 +234,8 @@ void sub_801A9E0(void)
                 if (gUnknown_203B224->unk4[teamItemIndex] != 0 || sub_801ADA0(teamItemIndex))
                     PrintStringOnWindow(8,sub_8013800(&gUnknown_203B224->unk54.s0.input,r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
                 else {
-                    strncpy(gFormatItems, buf1, 80);
-                    PrintFormatStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
+                    strncpy(gFormatBuffer_Items[0], buf1, 80);
+                    PrintFormattedStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
                 }
                 break;
             }
@@ -262,8 +260,8 @@ void sub_801A9E0(void)
                 }
                 else {
                     sub_8090E14(buf1, &item, 0);
-                    strncpy(gFormatItems, buf1, 80);
-                    PrintFormatStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
+                    strncpy(gFormatBuffer_Items[0], buf1, 80);
+                    PrintFormattedStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
                 }
                 break;
             }
@@ -280,8 +278,8 @@ void sub_801A9E0(void)
                 if (IsGummiItem(item.id))
                     PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
                 else {
-                    strncpy(gFormatItems, buf1, 80);
-                    PrintFormatStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
+                    strncpy(gFormatBuffer_Items[0], buf1, 80);
+                    PrintFormattedStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
                 }
                 break;
             }

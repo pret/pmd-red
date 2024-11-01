@@ -13,7 +13,8 @@ typedef struct MenuInputStructSub
     /* 0x2 */ u8 b_button;
     /* 0x3 */ u8 dpad_right;
     /* 0x4 */ u8 dpad_left;
-    u8 fill5[3];
+    /* 0x5 */ u8 unk5;
+    u8 fill6[2];
     u16 unk8;
     s16 unkA;
 } MenuInputStructSub;

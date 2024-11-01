@@ -3,7 +3,7 @@
 #include "dungeon.h"
 #include "structs/dungeon_entity.h"
 #include "code_803E46C.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "code_800E9E4.h"
 #include "menu_input.h"
 #include "code_803E668.h"
@@ -50,9 +50,7 @@ extern u8 gUnknown_203B434;
 extern void (*gUnknown_203B08C)(s32);
 extern void (*gUnknown_203B084)(s32 a0);
 extern void (*gUnknown_203B080)(s32 a0);
-extern u8 gAvailablePokemonNames[];
-extern u8 gUnknown_202E5D8[];
-extern u8 gUnknown_202DFE8[];
+extern u8 gSpeakerNameBuffer[];
 extern UnkTextStruct1 gUnknown_2027370[4];
 extern s32 gUnknown_202EDCC;
 extern u8 gFontPalette[];
@@ -222,7 +220,7 @@ static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2)
             break;
 
         gDungeon->unk1BDD4.unk1C054[gDungeon->unk1BDD4.unk1C060] = r7;
-        str = xxx_format_string(str, txt, txt + 62, 128);
+        str = FormatString(str, txt, txt + 62, 128);
         if (*str == '\r') str++;
         if (*str == '\n') str++;
         CopyStringToMessageLog(txt, r7, r8);
@@ -260,6 +258,8 @@ void xxx_draw_string_80524F0(void)
         // fall through
         case 2: {
             struct UnkDrawStringStruct sp;
+            u32 currChr;
+
             s32 id = strPtr->unk1C062;
             if (id == strPtr->unk1C060) {
                 strPtr->unk1C06C = 0;
@@ -279,12 +279,12 @@ void xxx_draw_string_80524F0(void)
                     txtPtr = xxx_handle_format_global(txtPtr, &sp);
                     if (*txtPtr == '\0' || *txtPtr == '\r' || *txtPtr == '\n')
                         break;
-                    txtPtr = xxx_get_next_char_from_string(txtPtr, &sp.unk34);
-                    if (sp.unk34 == 96) {
+                    txtPtr = xxx_get_next_char_from_string(txtPtr, &currChr);
+                    if (currChr == '`') {
                         sp.unk0 += 6;
                     }
                     else {
-                        sp.unk0 += xxx_call_draw_char(sp.unk0, sp.unk2, sp.unk34, sp.unk10, 0);
+                        sp.unk0 += xxx_call_draw_char(sp.unk0, sp.unk2, currChr, sp.unk10, 0);
                     }
                 }
                 sub_80073E0(0);
@@ -376,7 +376,7 @@ void DisplayDungeonMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8
         && IsPokemonDialogueSpriteAvail(monSpriteInfo->species, monSpriteInfo->spriteId))
     {
         monPortrait.faceFile = GetDialogueSpriteDataPtr(monSpriteInfo->species);
-        monPortrait.faceData = monPortrait.faceFile->data;
+        monPortrait.faceData = (void *) monPortrait.faceFile->data;
         monPortrait.pos.x = 2;
         monPortrait.pos.y = 9;
         monPortrait.spriteId = monSpriteInfo->spriteId;
@@ -435,47 +435,47 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
         EntityInfo *leaderInfo = GetEntInfo(leader);
         PokemonStruct2 *monStruct2 = &gRecruitedPokemonRef->pokemon2[leaderInfo->teamIndex];
 
-        sub_808DA0C(gAvailablePokemonNames, monStruct2);
+        sub_808DA0C(gFormatBuffer_Monsters[0], monStruct2);
         leaderId = leaderInfo->apparentID;
     }
     else {
         leaderId = MONSTER_NONE;
-        strcpy(gAvailablePokemonNames, gUnknown_80F7AF8); // ??
+        strcpy(gFormatBuffer_Monsters[0], gUnknown_80F7AF8); // ??
     }
 
     if (partner != NULL) {
         EntityInfo *partnerInfo = GetEntInfo(partner);
         PokemonStruct2 *monStruct2 = &gRecruitedPokemonRef->pokemon2[partnerInfo->teamIndex];
 
-        sub_808DA0C(gUnknown_202DFE8, monStruct2);
+        sub_808DA0C(gFormatBuffer_Monsters[1], monStruct2);
         partnerId = partnerInfo->apparentID;
     }
     else {
         partnerId = MONSTER_NONE;
-        strcpy(gUnknown_202DFE8, gUnknown_80F7AF8); // ??
+        strcpy(gFormatBuffer_Monsters[1], gUnknown_80F7AF8); // ??
     }
 
     switch (dialogueInfo->unk4) {
         case 425:
             dialogueMonId = leaderId;
-            sprintfStatic(gUnknown_202E5D8, gUnknown_80F7AFC, gAvailablePokemonNames);
+            sprintfStatic(gSpeakerNameBuffer, gUnknown_80F7AFC, gFormatBuffer_Monsters);
             break;
         case 426:
             dialogueMonId = partnerId;
-            sprintfStatic(gUnknown_202E5D8, gUnknown_80F7AFC, gUnknown_202DFE8);
+            sprintfStatic(gSpeakerNameBuffer, gUnknown_80F7AFC, gFormatBuffer_Monsters[1]);
             break;
         case 427:
             dialogueMonId = MONSTER_NONE;
-            strcpy(gUnknown_202E5D8, gUnknown_80F7B04);
+            strcpy(gSpeakerNameBuffer, gUnknown_80F7B04);
             break;
         default:
             dialogueMonId = dialogueInfo->unk4;
-            CopyYellowMonsterNametoBuffer(gUnknown_202E5D8, dialogueMonId);
+            CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, dialogueMonId);
             break;
     }
 
     if (dialogueInfo->unk0 == 2 || dialogueInfo->unk0 == 3) {
-        strcpy(gUnknown_202E5D8, gUnknown_80F7B04);
+        strcpy(gSpeakerNameBuffer, gUnknown_80F7B04);
     }
 
     while (1) {
@@ -501,7 +501,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
         monPortraitPtr = &monPortrait;
         monPortraitPtr->faceFile = GetDialogueSpriteDataPtr(dialogueMonId);
         if (monPortraitPtr->faceFile != NULL) {
-            monPortraitPtr->faceData = monPortraitPtr->faceFile->data;
+            monPortraitPtr->faceData = (void *) monPortraitPtr->faceFile->data;
             monPortraitPtr->unkE = 0;
             monPortraitPtr->spriteId = dialogueInfo->unk2;
             monPortraitPtr->flip = strPtr->flip;
@@ -551,7 +551,7 @@ bool32 DisplayDungeonYesNoMessage(struct MonDialogueSpriteInfo *monSpriteInfo, c
         && IsPokemonDialogueSpriteAvail(monSpriteInfo->species, monSpriteInfo->spriteId))
     {
         monPortrait.faceFile = GetDialogueSpriteDataPtr(monSpriteInfo->species);
-        monPortrait.faceData = monPortrait.faceFile->data;
+        monPortrait.faceData = (void *) monPortrait.faceFile->data;
         monPortrait.pos.x = 2;
         monPortrait.pos.y = 9;
         monPortrait.spriteId = monSpriteInfo->spriteId;
@@ -600,7 +600,7 @@ s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
         && IsPokemonDialogueSpriteAvail(monSpriteInfo->species, monSpriteInfo->spriteId))
     {
         monPortrait.faceFile = GetDialogueSpriteDataPtr(monSpriteInfo->species);
-        monPortrait.faceData = monPortrait.faceFile->data;
+        monPortrait.faceData = (void *) monPortrait.faceFile->data;
         monPortrait.pos.x = 2;
         monPortrait.pos.y = 9;
         monPortrait.spriteId = monSpriteInfo->spriteId;
@@ -624,20 +624,20 @@ s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
 void sub_8052D44(s16 *ids, Entity *leader, Entity *partner)
 {
     if (EntityExists(leader)) {
-        SetMessageArgument(gAvailablePokemonNames, leader, 0);
+        SetMessageArgument(gFormatBuffer_Monsters[0], leader, 0);
         ids[0] = GetEntInfo(leader)->apparentID;
     }
     else {
-        strcpy(gAvailablePokemonNames, gUnknown_80F7AF8);
+        strcpy(gFormatBuffer_Monsters[0], gUnknown_80F7AF8);
         ids[0] = 0;
     }
 
     if (EntityExists(partner)) {
-        SetMessageArgument(gUnknown_202DFE8, partner, 0);
+        SetMessageArgument(gFormatBuffer_Monsters[1], partner, 0);
         ids[1] = GetEntInfo(partner)->apparentID;
     }
     else {
-        strcpy(gUnknown_202DFE8, gUnknown_80F7AF8);
+        strcpy(gFormatBuffer_Monsters[1], gUnknown_80F7AF8);
         ids[1] = 0;
     }
 }

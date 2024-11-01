@@ -7,7 +7,7 @@
 #include "pokemon.h"
 #include "code_8094F88.h"
 #include "menu_input.h"
-#include "code_80130A8.h"
+#include "string_format.h"
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
 
@@ -110,7 +110,7 @@ bool8 sub_8030F58(u32 wonderMailType)
   gUnknown_203B328->wonderMailType = wonderMailType;
   file = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
   gUnknown_203B328->monPortrait.faceFile = file;
-  gUnknown_203B328->monPortrait.faceData = file->data;
+  gUnknown_203B328->monPortrait.faceData = (void *) file->data;
   gUnknown_203B328->monPortrait.spriteId = 0;
   gUnknown_203B328->monPortrait.flip = FALSE;
   gUnknown_203B328->monPortrait.unkE = 0;
