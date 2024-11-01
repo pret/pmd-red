@@ -253,8 +253,8 @@ static void PersonalityTest_DisplayPartnerSprite(void)
     CallPrepareTextbox_8008C54(1);
     sub_80073B8(1);
     faceFile = (void*) GetDialogueSpriteDataPtr(partnerID);
-    gfx = faceFile->data->sprites[0].gfx;
-    emotionId = 0;
+    gfx = faceFile->data->sprites[EMOTION_NORMAL].gfx;
+    emotionId = EMOTION_NORMAL;
     for (palleteIndex = 0; palleteIndex < 0x10; palleteIndex++) {
         SetBGPaletteBufferColorArray(palleteIndex + 0xE0, &faceFile->data->sprites[emotionId].pal[palleteIndex]);
     }

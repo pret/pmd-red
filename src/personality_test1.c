@@ -398,8 +398,8 @@ static void PersonalityTest_DisplayStarterSprite(void)
     sub_80073B8(1);
 
     faceFile = (void*) GetDialogueSpriteDataPtr(starterID);
-    gfx = faceFile->data->sprites[1].gfx;
-    emotionId = 1;
+    gfx = faceFile->data->sprites[EMOTION_HAPPY].gfx;
+    emotionId = EMOTION_HAPPY;
     for (palleteIndex = 0; palleteIndex < 0x10; palleteIndex++) {
         SetBGPaletteBufferColorArray(palleteIndex + 0xE0, &faceFile->data->sprites[emotionId].pal[palleteIndex]);
     }
