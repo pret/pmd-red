@@ -191,20 +191,18 @@ void HandleTakeItemAction(Entity *param_1)
 {
   Entity *entity;
   EntityInfo *info;
-  EntityInfo *info2;
   Item *heldItem;
   Item item;
 
   entity = sub_8044DA4(param_1,0);
-  info = entity->axObj.info; // GetEntInfo doesn't work here, probably fixable
-  info2 = entity->axObj.info;
+  info = GetEntInfo(entity);
   heldItem = &info->heldItem;
-  if ((gTeamInventoryRef->teamItems[ITEM_POWER_BAND].flags & ITEM_FLAG_EXISTS)) {
+  if (ItemExists(&gTeamInventoryRef->teamItems[ITEM_POWER_BAND])) {
     TryDisplayDungeonLoggableMessage(param_1,*gUnknown_80F8D60);
   }
   else
   {
-    if ((heldItem->flags & ITEM_FLAG_STICKY)) {
+    if (ItemSticky(heldItem)) {
         sub_8045BF8(gFormatBuffer_Items[0],heldItem);
         TryDisplayDungeonLoggableMessage(param_1,*gUnknown_80F8BE0);
     }
@@ -214,9 +212,7 @@ void HandleTakeItemAction(Entity *param_1)
       item.flags &= ~(ITEM_FLAG_SET);
       sub_8045BF8(gFormatBuffer_Items[0],&item);
       SetMessageArgument(gFormatBuffer_Monsters[0],entity,0);
-      heldItem->id = ITEM_NOTHING;
-      heldItem->quantity = 0;
-      heldItem->flags = 0;
+      ZeroOutItem(heldItem);
       AddItemToInventory(&item);
       PlaySoundEffect(0x14d);
       TryDisplayDungeonLoggableMessage(param_1,*gUnknown_80F8D7C);
@@ -224,8 +220,8 @@ void HandleTakeItemAction(Entity *param_1)
       if (sub_80706A4(entity,&entity->pos) != 0) {
         sub_807D148(param_1,entity,0,0);
       }
-      if (!info2->isTeamLeader) {
-        info2->flags = info2->flags | MOVEMENT_FLAG_UNK_14;
+      if (!info->isTeamLeader) {
+        info->flags |= MOVEMENT_FLAG_UNK_14;
       }
       sub_807AB38(param_1,gDungeon->unk3A08);
     }

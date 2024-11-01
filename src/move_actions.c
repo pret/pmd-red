@@ -848,9 +848,11 @@ bool8 sub_8058270(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
   u32 r3;
+  EntityInfo *targetInfo;
 
   r3 = 1;
-  if((u8)(GetEntInfo(target)->charging.chargingStatus - 7) <= 1)
+  targetInfo = GetEntInfo(target);
+  if(targetInfo->charging.chargingStatus == STATUS_FLYING || targetInfo->charging.chargingStatus == STATUS_BOUNCING)
     r3 = 2;
   flag =  HandleDamagingMove(pokemon,target,move,r3 << 8,param_4) ? TRUE : FALSE;
   return flag;

@@ -22,17 +22,16 @@ const u8 gDirectionBitMasks_1[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
 // These functions could use better names if someone figures out a clear pattern/reasoning.
 bool8 CheckVariousStatuses2(Entity *pokemon, bool8 checkBlinker)
 {
-    EntityInfo *pokemonInfo = pokemon->axObj.info; // GetEntInfo doesn't work here
+    EntityInfo *pokemonInfo = GetEntInfo(pokemon);
 
-    if ((checkBlinker && pokemonInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER)
-        || pokemonInfo->sleep.sleep == STATUS_SLEEP
-        || pokemonInfo->sleep.sleep == STATUS_NAPPING
-        || pokemonInfo->sleep.sleep == STATUS_NIGHTMARE
-        || pokemonInfo->volatileStatus.volatileStatus == STATUS_PAUSED
-        || pokemonInfo->volatileStatus.volatileStatus == STATUS_INFATUATED
-        || pokemonInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED)
+    if ((checkBlinker && pokemonInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER))
         return TRUE;
-
+    if (pokemonInfo->sleep.sleep == STATUS_SLEEP || pokemonInfo->sleep.sleep == STATUS_NAPPING || pokemonInfo->sleep.sleep == STATUS_NIGHTMARE)
+        return TRUE;
+    if (pokemonInfo->volatileStatus.volatileStatus == STATUS_PAUSED || pokemonInfo->volatileStatus.volatileStatus == STATUS_INFATUATED)
+        return TRUE;
+    if (pokemonInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED)
+        return TRUE;
     if (pokemonInfo->terrifiedTurns != 0)
         return TRUE;
 
@@ -96,14 +95,12 @@ bool8 CheckVariousConditions(Entity *pokemon)
 
 bool8 CheckVariousStatuses(Entity *pokemon)
 {
-    EntityInfo *pokemonInfo = pokemon->axObj.info; // GetEntInfo doesn't work here
+    EntityInfo *pokemonInfo = GetEntInfo(pokemon);
 
-    if ((pokemonInfo->sleep.sleep != STATUS_SLEEPLESS
-        && pokemonInfo->sleep.sleep != STATUS_NONE)
-        || pokemonInfo->immobilize.immobilizeStatus == STATUS_FROZEN
-        || pokemonInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED)
+    if ((pokemonInfo->sleep.sleep != STATUS_SLEEPLESS && pokemonInfo->sleep.sleep != STATUS_NONE))
         return TRUE;
-
+    if (pokemonInfo->immobilize.immobilizeStatus == STATUS_FROZEN || pokemonInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED)
+        return TRUE;
     if (pokemonInfo->charging.chargingStatus == STATUS_BIDE)
         return TRUE;
 

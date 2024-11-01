@@ -68,15 +68,18 @@ u8 sub_807034C(s16 id, struct Tile *tile)
 
 u8 sub_80703A0(Entity *pokemon, Position *pos)
 {
-    u8 crossableTerrain;
     struct Tile *tile;
+    u8 crossableTerrain;
     u16 tileFlags;
     EntityInfo *entityInfo;
 
-    entityInfo = pokemon->axObj.info; // GetEntInfo doesn't work here, replacing uses of entityInfo with a call *almost* works
+    entityInfo = GetEntInfo(pokemon);
     tile = GetTile(pos->x,pos->y);
-    if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
-        (DUNGEON_MAX_SIZE_Y > pos->y) && (tile->monster == NULL) && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) {
+    if (pos->x < 0 || pos->y < 0)
+        return TRUE;
+    if (pos->x >= DUNGEON_MAX_SIZE_X || pos->y >= DUNGEON_MAX_SIZE_Y)
+        return TRUE;
+    if (tile->monster == NULL && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) {
         if ((IsCurrentFixedRoomBossFight()) || ((entityInfo->transformStatus.transformStatus != STATUS_MOBILE && (!HasHeldItem(pokemon, ITEM_MOBILE_SCARF))))) {
             crossableTerrain = GetCrossableTerrain(entityInfo->id);
             tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
@@ -99,7 +102,10 @@ u8 sub_80703A0(Entity *pokemon, Position *pos)
                 case CROSSABLE_TERRAIN_CREVICE:
                     if(tileFlags != 0) return FALSE;
             }
-        } else return FALSE;
+        }
+        else {
+            return FALSE;
+        }
     }
     return TRUE;
 }
@@ -129,11 +135,13 @@ bool8 sub_807049C(Entity *pokemon, Position *pos)
     u16 tileFlags;
     EntityInfo *entityInfo;
 
-    entityInfo = pokemon->axObj.info; // GetEntInfo doesn't work here
-    tile = GetTile(pos->x, pos->y);
-    if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
-        (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) &&
-        (tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))) {
+    entityInfo = GetEntInfo(pokemon);
+    tile = GetTile(pos->x,pos->y);
+    if (pos->x < 0 || pos->y < 0)
+        return TRUE;
+    if (pos->x >= DUNGEON_MAX_SIZE_X || pos->y >= DUNGEON_MAX_SIZE_Y)
+        return TRUE;
+    if (((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0) && (tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))) {
         if (IsCurrentFixedRoomBossFight() || (entityInfo->transformStatus.transformStatus != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
             crossableTerrain = GetCrossableTerrain(entityInfo->id);
             tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
@@ -177,10 +185,12 @@ bool8 sub_8070564(Entity *pokemon, Position *pos)
 #endif
 
     entityInfo = GetEntInfo(pokemon);
-    tile = GetTile(pos->x, pos->y);
-    if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
-        (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) &&
-        (tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))) {
+    tile = GetTile(pos->x,pos->y);
+    if (pos->x < 0 || pos->y < 0)
+        return TRUE;
+    if (pos->x >= DUNGEON_MAX_SIZE_X || pos->y >= DUNGEON_MAX_SIZE_Y)
+        return TRUE;
+    if ((((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) && (tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))) {
         crossableTerrain2 = crossableTerrain = GetCrossableTerrain(entityInfo->id);
         tileFlags_0 = tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
         switch(crossableTerrain)
@@ -213,11 +223,13 @@ bool8 sub_80705F0(Entity *pokemon, Position *pos)
     u16 tileFlags;
     EntityInfo *entityInfo;
 
-    entityInfo = pokemon->axObj.info; // GetEntInfo doesn't work here
-    tile = GetTile(pos->x, pos->y);
-    if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
-        (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) &&
-        ((tile->monster == NULL) || ((GetEntityType(tile->monster) == ENTITY_MONSTER)))) {
+    entityInfo = GetEntInfo(pokemon);
+    tile = GetTile(pos->x,pos->y);
+    if (pos->x < 0 || pos->y < 0)
+        return TRUE;
+    if (pos->x >= DUNGEON_MAX_SIZE_X || pos->y >= DUNGEON_MAX_SIZE_Y)
+        return TRUE;
+    if (((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0) && (tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))) {
         if (IsCurrentFixedRoomBossFight() || (entityInfo->transformStatus.transformStatus != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
             crossableTerrain = GetCrossableTerrain(entityInfo->id);
             tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
@@ -251,11 +263,14 @@ bool8 sub_80706A4(Entity *pokemon, Position *pos)
     u16 tileFlags;
     EntityInfo *entityInfo;
 
-    entityInfo = pokemon->axObj.info; // GetEntInfo doesn't work here
-    tile = GetTile(pos->x, pos->y);
-    if ((pos->x >= 0) && (pos->y >= 0) && (DUNGEON_MAX_SIZE_X > pos->x) &&
-        (DUNGEON_MAX_SIZE_Y > pos->y && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) &&
-        ((tile->monster == NULL) || ((GetEntityType(tile->monster) == ENTITY_MONSTER) && (GetEntInfo(tile->monster) == entityInfo)))) {
+    entityInfo = GetEntInfo(pokemon);
+    tile = GetTile(pos->x,pos->y);
+    if (pos->x < 0 || pos->y < 0)
+        return TRUE;
+    if (pos->x >= DUNGEON_MAX_SIZE_X || pos->y >= DUNGEON_MAX_SIZE_Y)
+        return TRUE;
+    if ((((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0))
+        && (tile->monster == NULL || ((GetEntityType(tile->monster) == ENTITY_MONSTER) && (GetEntInfo(tile->monster) == entityInfo)))) {
         if (IsCurrentFixedRoomBossFight() || (entityInfo->transformStatus.transformStatus != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
             crossableTerrain = GetCrossableTerrain(entityInfo->id);
             tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
