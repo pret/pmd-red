@@ -622,7 +622,6 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     case MOVE_JUMP_KICK:
                         sub_8059E54(attacker, currTarget, move, itemId, 1);
                         break;
-
                 }
 
                 if (sub_8044B28())

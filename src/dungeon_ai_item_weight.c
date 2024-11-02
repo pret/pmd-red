@@ -111,7 +111,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_PROTEIN:
-            if (pokemonInfo->atk > 249)
+            if (pokemonInfo->atk[0] > 249)
             {
                 itemWeight = 0;
             }
@@ -121,7 +121,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_CALCIUM:
-            if (pokemonInfo->spAtk > 249)
+            if (pokemonInfo->atk[1] > 249)
             {
                 itemWeight = 0;
             }
@@ -131,7 +131,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_IRON:
-            if (pokemonInfo->def > 249)
+            if (pokemonInfo->def[0] > 249)
             {
                 itemWeight = 0;
             }
@@ -141,7 +141,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_ZINC:
-            if (pokemonInfo->spDef > 249)
+            if (pokemonInfo->def[1] > 249)
             {
                 itemWeight = 0;
             }

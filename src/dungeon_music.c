@@ -58,10 +58,10 @@ void sub_8083AB0(s16 param_0, Entity * target, Entity * entity)
   temp->exp = entityInfo->exp;
   temp->level = entityInfo->level;
   temp->maxHPStat = entityInfo->maxHPStat;
-  temp->atk = entityInfo->atk;
-  temp->spAtk = entityInfo->spAtk;
-  temp->def = entityInfo->def;
-  temp->spDef = entityInfo->spDef;
+  temp->atk = entityInfo->atk[0];
+  temp->spAtk = entityInfo->atk[1];
+  temp->def = entityInfo->def[0];
+  temp->spDef = entityInfo->def[1];
   temp->dungeonLocation = gDungeon->dungeonLocation;
   attackPtr = &temp->attBoost;
   *attackPtr = 0;
