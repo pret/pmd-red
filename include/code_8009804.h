@@ -19,6 +19,6 @@ void sub_80098BC(u32 *, const u32 *, u32);
 void sub_80098F8(u32);
 void sub_8009908(void);
 void sub_80099C0(void);
-void sub_80099F0(RGB);
+void SetFontsBaseColor(RGB);
 
 #endif // GUARD_CODE_8009804_H

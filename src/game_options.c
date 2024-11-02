@@ -198,7 +198,7 @@ void SetWindowBGColor(void)
         {0x28, 0x80, 0x48} // Green
     };
 
-    sub_80099F0(winColors[gGameOptionsRef->windowColor & NUM_WINDOW_COLORS]);
+    SetFontsBaseColor(winColors[gGameOptionsRef->windowColor & NUM_WINDOW_COLORS]);
 }
 
 bool8 sub_8094C48(void)

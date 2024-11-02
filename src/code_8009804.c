@@ -126,7 +126,7 @@ void sub_80099C0(void)
     CpuCopy(BG_SCREEN_ADDR(13), gUnknown_202B038[1], BG_SCREEN_SIZE);
 }
 
-void sub_80099F0(RGB a0)
+void SetFontsBaseColor(RGB a0)
 {
     s32 i;
 
