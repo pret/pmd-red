@@ -80,7 +80,7 @@ bool8 CheckVariousConditions(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
 
-    if (pokemonInfo->clientType == CLIENT_TYPE_CLIENT
+    if (pokemonInfo->monsterBehavior == BEHAVIOR_RESCUE_TARGET
         || IsClientOrTeamBase(pokemonInfo->joinedAt.joinedAt)
         || (!pokemonInfo->isTeamLeader && ShouldMonsterRunAway(pokemon))
         || CheckVariousStatuses2(pokemon, FALSE)

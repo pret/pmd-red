@@ -26,10 +26,10 @@ void sub_8082B40(void)
   Entity *entity;
   int index;
   Position pos;
-  
+
   for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
   {
-    entity = gDungeon->allPokemon[index];
+    entity = gDungeon->activeMonsterPtrs[index];
     if (EntityExists(entity)) {
       info = GetEntInfo(entity);
       entity->axObj.spriteFile = GetSpriteData(info->apparentID);
@@ -202,7 +202,7 @@ void sub_8082DE8(unkStruct_8094924 *param_1, Protection *protect)
 void sub_8082E04(unkStruct_8094924 *param_1, Waiting *waiting)
 {
     sub_8082FE0(param_1, &waiting->waitingStatus, 1);
-    waiting->enemyDecoy = sub_80831DC(param_1);
+    waiting->decoyApplierNonTeamMemberFlag = sub_80831DC(param_1);
     waiting->unkCA = sub_80831DC(param_1);
     waiting->waitingStatusTurns = sub_8083188(param_1);
     waiting->curseDamageCountdown = sub_8083188(param_1);
@@ -301,7 +301,7 @@ void sub_8082FA8(unkStruct_8094924 *param_1, u8 *param_2, s32 size)
         param_2++;
         size--;
         param_1->unk8++;
-    } 
+    }
 }
 
 void sub_8082FD4(unkStruct_8094924 *param_1, u8 *r1, u32 r2)
@@ -319,7 +319,7 @@ void sub_8082FE0(unkStruct_8094924 *param_1, u8 *param_2, s32 size)
         param_2++;
         size--;
         param_1->unk8++;
-    } 
+    }
 }
 
 void nullsub_98(unkStruct_8094924 *param_1)

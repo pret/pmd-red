@@ -138,14 +138,14 @@ void sub_8073D14(Entity *entity)
         return;
     if (sub_8044B28())
         return;
-    SetMessageArgument(gFormatBuffer_Monsters[0], entity, 0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
     if (entityInfo->isTeamLeader)
         return;
     if (entityInfo->shopkeeper == 1)
         return;
     if (IsClientOrTeamBase(entityInfo->joinedAt.joinedAt))
         return;
-    if (entityInfo->clientType == CLIENT_TYPE_CLIENT)
+    if (entityInfo->monsterBehavior == BEHAVIOR_RESCUE_TARGET)
         return;
 
     _entityInfo = GetEntInfo(entity); // Reloaded as a new variable for some reason.
@@ -155,7 +155,7 @@ void sub_8073D14(Entity *entity)
 
     if (ShouldMonsterRunAwayAndShowEffect(entity, TRUE)) {
         sub_8045BF8(gFormatBuffer_Items[0], groundItem);
-        SetMessageArgument(gFormatBuffer_Monsters[0], entity, 0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
         DisplayDungeonLoggableMessageTrue(entity, gMonTerrifiedCouldntPickUpItem);
     }
     else if (!_entityInfo->isNotTeamMember && GetItemCategory(groundItem->id) == CATEGORY_POKE) {
@@ -265,7 +265,7 @@ void sub_8073D14(Entity *entity)
                 DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItem2);
             }
             else if (AddItemToInventory(groundItem)) {
-                SetMessageArgument(gFormatBuffer_Monsters[0], entity, 0);
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
                 DisplayDungeonLoggableMessageTrue(entity, gMonCouldntPickUpItem);
             }
             else {
@@ -383,7 +383,7 @@ void sub_8074094(Entity *entity)
         if (str != NULL) {
             if (sound)
                 PlaySoundEffect(0x153);
-            TryDisplayDungeonLoggableMessage(entity, str);
+            LogMessageByIdWithPopupCheckUser(entity, str);
             sub_803E708(0x1E, 0x32);
         }
     }
@@ -529,7 +529,7 @@ void sub_8074094(Entity *entity)
     if (entityInfo->linked.linkedStatus == STATUS_LEECH_SEED) {
         if (entityInfo->linked.linkedStatusDamageCountdown == 0 || --entityInfo->linked.linkedStatusDamageCountdown == 0) {
             s32 hp = gUnknown_80F4FB4;
-            Entity *target = gDungeon->allPokemon[entityInfo->linked.unkD8];
+            Entity *target = gDungeon->activeMonsterPtrs[entityInfo->linked.unkD8];
 
             entityInfo->linked.linkedStatusDamageCountdown = gUnknown_80F4F40;
             if (target == NULL) {
@@ -571,11 +571,11 @@ void sub_8074094(Entity *entity)
             UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
-            SetMessageArgument(gFormatBuffer_Monsters[1], entity, 0);
-            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FEB30);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], entity, 0);
+            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80FEB30);
             TrySendImmobilizeSleepEndMsg(entity, entity);
             if (entityInfo->protection.protectionStatus == STATUS_PROTECT) {
-                TryDisplayDungeonLoggableMessage(entity, gPtrProtectSavedItMessage);
+                LogMessageByIdWithPopupCheckUser(entity, gPtrProtectSavedItMessage);
             }
             else {
                 DealDamageToEntity(entity, 0x270F, 0xB, 0x20E);
@@ -611,8 +611,8 @@ void sub_8074094(Entity *entity)
         if (entityInfo->charging.chargingStatusTurns == 0) {
             entityInfo->charging.chargingStatus = 0;
             entityInfo->unk14A = 0;
-            SetMessageArgument(gFormatBuffer_Monsters[0], entity, 0);
-            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FABD8);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
+            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80FABD8);
         }
     }
 
@@ -686,7 +686,7 @@ void TickStatusHeal(Entity *entity)
     if (entityInfo->immobilize.immobilizeStatus != 0) {
         sub_80838EC(&entityInfo->immobilize.immobilizeStatusTurns);
         if (entityInfo->immobilize.immobilizeStatusTurns == 0) {
-            SendImmobilizeEndMessage(entity, entity);
+            EndFrozenClassStatus(entity, entity);
         }
     }
     if (!EntityExists(entity) || sub_8044B28())
@@ -767,8 +767,8 @@ void TickStatusHeal(Entity *entity)
     if (entityInfo->terrifiedTurns != 0) {
         sub_80838EC(&entityInfo->terrifiedTurns);
         if (entityInfo->terrifiedTurns == 0) {
-            SetMessageArgument(gFormatBuffer_Monsters[0], entity, 0);
-            TryDisplayDungeonLoggableMessage(entity, gPtrStenchWavedOffMessage);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
+            LogMessageByIdWithPopupCheckUser(entity, gPtrStenchWavedOffMessage);
         }
     }
 
@@ -791,8 +791,8 @@ void TickStatusHeal(Entity *entity)
         s32 newSpdStage = CalcSpeedStage(entity);
 
         if (oldSpdStage != newSpdStage) {
-            SetMessageArgument(gFormatBuffer_Monsters[0], entity, 0);
-            TryDisplayDungeonLoggableMessage(entity, gUnknown_80FA124[newSpdStage]);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
+            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80FA124[newSpdStage]);
         }
     }
 }
@@ -893,7 +893,7 @@ bool8 UseAttack(Entity *a0)
         gUnknown_202F378 = 1;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-        Entity *mon = gDungeon->allPokemon[i];
+        Entity *mon = gDungeon->activeMonsterPtrs[i];
         if (EntityExists(mon)) {
             EntityInfo *monInfo = GetEntInfo(mon);
             if (monInfo->numMoveTiles == 0) {
@@ -935,7 +935,7 @@ bool8 UseAttack(Entity *a0)
         for (loop = 0; loop < 24 / gUnknown_202F378; loop++) {
             sub_803E46C(7);
             for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-                Entity *mon = gDungeon->allPokemon[i];
+                Entity *mon = gDungeon->activeMonsterPtrs[i];
                 if (EntityExists(mon)) {
                     EntityInfo *monInfo = GetEntInfo(mon);
                     Unk_Entity_x184 *strPtr = &monInfo->unk184[monInfo->notMoving];
@@ -963,7 +963,7 @@ bool8 UseAttack(Entity *a0)
     }
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-        Entity *mon = gDungeon->allPokemon[i];
+        Entity *mon = gDungeon->activeMonsterPtrs[i];
         if (EntityExists(mon)) {
             EntityInfo *monInfo = GetEntInfo(mon);
             monInfo->numMoveTiles = 0;
@@ -979,7 +979,7 @@ bool8 UseAttack(Entity *a0)
         for (loop = 0; loop < DUNGEON_MAX_POKEMON; loop++) {
             Position monPosBefore;
             EntityInfo *monInfo;
-            Entity *mon = gDungeon->allPokemon[loop];
+            Entity *mon = gDungeon->activeMonsterPtrs[loop];
 
             if (!EntityExists(mon))
                 continue;

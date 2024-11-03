@@ -74,12 +74,12 @@ void sub_807E254(Entity *pokemon,Entity *target)
 
 
   if (HasAbility(pokemon, ABILITY_SUCTION_CUPS)) {
-    SetMessageArgument(gFormatBuffer_Monsters[0],pokemon,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
   }
   else if(HasAbility(target, ABILITY_SUCTION_CUPS))
   {
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
   }
   else
@@ -135,7 +135,7 @@ void sub_807E378(void)
         sub_806A2BC(leader,1);
         UseAttack(leader);
         if (sub_8044B28() == 0) {
-          TryDisplayDungeonLoggableMessage(leader,*gUnknown_80F9C4C);
+          LogMessageByIdWithPopupCheckUser(leader,*gUnknown_80F9C4C);
           sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],0);
           gDungeon->unk67A = 1;
         }
@@ -147,7 +147,7 @@ void sub_807E378(void)
         sub_806A2BC(leader,1);
         UseAttack(leader);
         if (sub_8044B28() == 0) {
-          TryDisplayDungeonLoggableMessage(leader,*gUnknown_80F9C70);
+          LogMessageByIdWithPopupCheckUser(leader,*gUnknown_80F9C70);
           sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],1);
           gDungeon->unk67A = 2;
         }
@@ -159,7 +159,7 @@ void sub_807E378(void)
         sub_806A2BC(leader,1);
         UseAttack(leader);
         if (sub_8044B28() == 0) {
-          TryDisplayDungeonLoggableMessage(leader,*gUnknown_80F9C8C);
+          LogMessageByIdWithPopupCheckUser(leader,*gUnknown_80F9C8C);
           sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],2);
           gDungeon->unk67A = 3;
         }
@@ -170,7 +170,7 @@ void sub_807E378(void)
       sub_806A2BC(leader,1);
       UseAttack(leader);
       if (sub_8044B28() == 0) {
-        TryDisplayDungeonLoggableMessage(leader,*gUnknown_80F9CBC);
+        LogMessageByIdWithPopupCheckUser(leader,*gUnknown_80F9CBC);
         sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],3);
         gDungeon->unk67A = 4;
         sub_8068FE0(leader,0x21e,leader);

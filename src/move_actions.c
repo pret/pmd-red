@@ -451,8 +451,8 @@ bool8 PainSplitMoveAction(Entity *attacker, Entity *target, Move *move, s32 para
     if (targetInfo->HP > targetInfo->maxHPStat) {
         targetInfo->HP = targetInfo->maxHPStat;
     }
-    SetMessageArgument(gFormatBuffer_Monsters[0],attacker,0);
-    SetMessageArgument(gFormatBuffer_Monsters[1],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],attacker,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1],target,0);
     SetExpMultplier(attackerInfo);
 
     // $m0 and $m1 shared their HP
@@ -624,7 +624,7 @@ bool8 sub_8057D9C(Entity * pokemon, Entity * target, Move *move, s32 param_4)
         }
     }
 
-    SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
     if (flag) {
         TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FD350);
     }
@@ -728,7 +728,7 @@ bool8 sub_8057FF4(Entity *pokemon, Entity *target, Move *move, s32 param_4)
   if (flashFireStatus != FLASH_FIRE_STATUS_NONE) {
     if (GetEntInfo(target)->unk152 == 0) {
       GetEntInfo(target)->unk152 = 1;
-      SetMessageArgument(gFormatBuffer_Monsters[1],target,0);
+      SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1],target,0);
       if (flashFireStatus == FLASH_FIRE_STATUS_MAXED) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FAE00); // Fire moves won't become stronger
       }
@@ -780,7 +780,7 @@ bool8 GrudgeMoveAction(Entity *pokemon, Entity * target, Move *move, s32 param_4
 
   hasGrudge = FALSE;
   entityInfo = GetEntInfo(target);
-  SetMessageArgument(gFormatBuffer_Monsters[1],target,0);
+  SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1],target,0);
   if (entityInfo->grudge) {
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD2B4);
   }
@@ -1409,7 +1409,7 @@ bool8 PsychUpMoveAction(Entity * pokemon, Entity * target, Move * move, u32 para
     iVar4->offensiveMultipliers[index] = iVar3->offensiveMultipliers[index];
     iVar4->defensiveMultipliers[index] = iVar3->defensiveMultipliers[index];
   }
-  SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+  SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
   TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FBD58); // It psyched itself up!
   SetExpMultplier(iVar4);
   return TRUE;
@@ -2278,8 +2278,8 @@ bool8 sub_805A120(Entity * pokemon,Entity * target, Move *move, u32 param_4)
     r8 = GetEntInfo(target);
     sp = r8;
 
-    SetMessageArgument(gFormatBuffer_Monsters[0],pokemon,0);
-    SetMessageArgument(gFormatBuffer_Monsters[1],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1],target,0);
     if (HasAbility(target, ABILITY_STICKY_HOLD)) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCCE4);
         return FALSE;
@@ -2596,8 +2596,8 @@ bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
 
     entityInfo = GetEntInfo(pokemon);
     targetEntityInfo = GetEntInfo(target);
-    SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
-    SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
     if (HasAbility(target, ABILITY_STICKY_HOLD))
     {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCCE8);
@@ -2646,7 +2646,7 @@ void sub_805A7D4(Entity * pokemon, Entity * target, Item *item, Position *pos)
   SetEntityPixelPos(&stackEntity,(target->pos.x * 0x18 + 4) * 0x100,
               (target->pos.y * 0x18 + 4) * 0x100);
   stackEntity.spawnGenID = 0;
-  SetMessageArgument(gFormatBuffer_Items[0],&stackEntity,0);
+  SubstitutePlaceholderStringTags(gFormatBuffer_Items[0],&stackEntity,0);
   sub_804652C(pokemon,&stackEntity,item,1,0);
 }
 
@@ -2774,7 +2774,7 @@ bool8 BellyDrumMoveAction(Entity * pokemon,Entity * target, Move *move, u32 para
     flag = TRUE;
   }
   else {
-    SetMessageArgument(gFormatBuffer_Monsters[0],pokemon,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC5CC);
   }
   return flag;
@@ -2887,7 +2887,7 @@ bool32 sub_805AD54(Entity * pokemon, Entity * target, Move *move, u32 param_4)
              && GetTreatmentBetweenMonsters(pokemon,targetEntity,FALSE,FALSE) == TREATMENT_TREAT_AS_ALLY)
         {
             EntityInfo *targetInfo = GetEntInfo(targetEntity);
-            if (targetInfo->clientType != CLIENT_TYPE_CLIENT && !IsClientOrTeamBase(targetInfo->joinedAt.joinedAt)) {
+            if (targetInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET && !IsClientOrTeamBase(targetInfo->joinedAt.joinedAt)) {
                 sub_807D148(pokemon,targetEntity,2,&target->pos);
                 flag = TRUE;
                 SetExpMultplier(info);

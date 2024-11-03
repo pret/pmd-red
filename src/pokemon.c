@@ -33,7 +33,7 @@ unkStruct_203B45C *GetRecruitedPokemon(void)
 void InitializeRecruitedPokemon(void)
 {
   s32 index;
-  
+
   for(index = 0; index < NUM_MONSTERS; index++)
   {
     gRecruitedPokemonRef->pokemon[index].unk0 = 0;
@@ -51,7 +51,7 @@ void InitializeRecruitedPokemon(void)
   }
 }
 
-// https://decomp.me/scratch/wQbZB 
+// https://decomp.me/scratch/wQbZB
 
 NAKED
 void sub_808CE74(s16 species, bool8 isLeader, u8 *name)
@@ -140,7 +140,7 @@ void sub_808CE74(s16 species, bool8 isLeader, u8 *name)
 	"\tadd r4, sp, 0x58\n"
 	"\tadds r0, r4, 0\n"
 	"\tadds r1, r7, 0\n"
-	"\tbl CopyMonsterNametoBuffer\n"
+	"\tbl CopyMonsterNameToBuffer\n"
 	"\tadd r0, sp, 0x4C\n"
 	"\tadds r1, r4, 0\n"
 	"\tmovs r2, 0xA\n"
@@ -228,7 +228,7 @@ void sub_808CE74(s16 species, bool8 isLeader, u8 *name)
 "_0808CFCC: .4byte gRecruitedPokemonRef");
 }
 
-void sub_808CFD0(PokemonStruct1 *pokemon, s16 _species, u8* name, u32 _itemID, DungeonLocation *location, u16 *moveID)  
+void sub_808CFD0(PokemonStruct1 *pokemon, s16 _species, u8* name, u32 _itemID, DungeonLocation *location, u16 *moveID)
 {
     u8 name_buffer[20];
     s32 i;
@@ -276,7 +276,7 @@ void sub_808CFD0(PokemonStruct1 *pokemon, s16 _species, u8* name, u32 _itemID, D
     if (name == NULL) {
         // HACK
         register u8 *buffer asm("r0") = name_buffer;
-        CopyMonsterNametoBuffer(buffer, species);
+        CopyMonsterNameToBuffer(buffer, species);
         BoundedCopyStringtoBuffer(pokemon->name, name_buffer, POKEMON_NAME_LENGTH);
     }
     else {
@@ -353,6 +353,6 @@ void sub_808D144(PokemonStruct1 *pokemon, struct unkStruct_808D144 *r1)
     for(i = 0; i < POKEMON_NAME_LENGTH; i++)
     {
         pokemon->name[i] = r1->name[i];
-    } 
+    }
 }
 

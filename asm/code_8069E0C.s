@@ -306,7 +306,7 @@ _0806A5CE:
 	bne _0806A608
 	adds r0, r6, 0
 	adds r1, r6, 0
-	bl SendImmobilizeEndMessage
+	bl EndFrozenClassStatus
 _0806A608:
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
@@ -399,7 +399,7 @@ _0806A6C4:
 	beq _0806A6D2
 	adds r0, r6, 0
 	mov r1, r8
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _0806A6D2:
 	add sp, 0x4
 	pop {r3}
@@ -663,7 +663,7 @@ sub_806A898:
 	b _0806A8C8
 _0806A8C2:
 	adds r0, r4, 0
-	bl MoveIfPossible
+	bl AIMovement
 _0806A8C8:
 	movs r0, 0xB6
 	lsls r0, 1
@@ -817,7 +817,7 @@ _0806A9E0:
 _0806A9E6:
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	b _0806AA02
 	.align 2, 0
 _0806A9F0: .4byte gPtrLinkMoveOneUseWarningMessage
@@ -827,7 +827,7 @@ _0806A9F4:
 	ldr r0, _0806AA08
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _0806AA02:
 	pop {r4,r5}
 	pop {r0}
@@ -1162,7 +1162,7 @@ _0806AC72:
 	bne _0806AC92
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl SendImmobilizeEndMessage
+	bl EndFrozenClassStatus
 _0806AC92:
 	adds r0, r4, 0
 	movs r1, 0x45

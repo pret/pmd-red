@@ -44,7 +44,7 @@ void HandleLuminousOrbAction(Entity *pokemon)
   sub_803F580(0);
   sub_8049ED4();
   sub_8040A84();
-  TryDisplayDungeonLoggableMessage(pokemon, gUnknown_80FD040);
+  LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FD040);
 }
 
 void sub_8040094(u8 r0)

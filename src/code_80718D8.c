@@ -99,7 +99,7 @@ void sub_8071B48(void)
     if (dungeon->unk662 > 900) {
       entity2 = dungeon->unk17B34;
       if ((EntityExists(entity2)) && (entity2->spawnGenID == dungeon->unk17B40)) {
-        SetMessageArgument(gFormatBuffer_Monsters[0],entity2,0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity2,0);
         entityPtr = entity2;
       }
     }
@@ -449,7 +449,7 @@ void sub_8071DA4(Entity *entity)
 "	ldr r0, _08071FF8\n"
 "	mov r1, r8\n"
 "	movs r2, 0\n"
-"	bl SetMessageArgument\n"
+"	bl SubstitutePlaceholderStringTags\n"
 "	lsls r1, r4, 24\n"
 "	lsrs r1, 24\n"
 "	ldr r0, _08071FFC\n"
@@ -544,7 +544,7 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
             for(tacticIndex = 0; tacticIndex < NUM_TACTICS; tacticIndex++)
             {
                 if ((tacticsBuffer1[tacticIndex] == 0) && (tacticsBuffer2[tacticIndex] == 1)) {
-                    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+                    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
                     CopyTacticsNameToBuffer(gFormatBuffer_Items[0],tacticIndex);
                     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FF730);
                 }
@@ -553,7 +553,7 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
         info->expGainedInTurn = 0;
         info->unk149 = 0;
         if ((flag == 0) && (param_4 != 0)) {
-            SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80F9B74);
         }
     }
@@ -668,7 +668,7 @@ void LevelDownTarget(Entity *pokemon, Entity *target, u32 level)
 
         if(!flag)
         {
-            SetMessageArgument(gFormatBuffer_Monsters[0], target, 0);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
             TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F9B94);
         }
     }

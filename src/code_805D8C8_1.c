@@ -264,7 +264,7 @@ void DungeonHandlePlayerInput(void)
                     }
                 }
                 else if (ShouldMonsterRunAwayAndShowEffect(leader, TRUE)) {
-                    TryDisplayDungeonLoggableMessage(leader, gUnknown_80FD4B0);
+                    LogMessageByIdWithPopupCheckUser(leader, gUnknown_80FD4B0);
                     sub_8044C50(1);
                     gDungeon->unk673 = 1;
                     break;
@@ -279,7 +279,7 @@ void DungeonHandlePlayerInput(void)
                         }
                     }
                     if (i == MAX_MON_MOVES) {
-                        TryDisplayDungeonLoggableMessage(leader, gUnknown_80F8A28);
+                        LogMessageByIdWithPopupCheckUser(leader, gUnknown_80F8A28);
                         break;
                     }
 
@@ -305,7 +305,7 @@ void DungeonHandlePlayerInput(void)
                         }
                     }
                     if (!canUseMove) {
-                        TryDisplayDungeonLoggableMessage(leader, gUnknown_80F8A4C);
+                        LogMessageByIdWithPopupCheckUser(leader, gUnknown_80F8A4C);
                     }
                     else {
                         SetMonsterActionFields(&leaderInfo->action, ACTION_USE_MOVE_PLAYER);
@@ -529,7 +529,7 @@ void DungeonHandlePlayerInput(void)
                     if (!(canMoveFlags & 2)) {
                         if (canMoveFlags & 1) {
                             if (immobilizedMsg != NULL) {
-                                TryDisplayDungeonLoggableMessage(leader, immobilizedMsg);
+                                LogMessageByIdWithPopupCheckUser(leader, immobilizedMsg);
                             }
                             sub_8044C50(1);
                             gDungeon->unk673 = 1;
@@ -1545,7 +1545,7 @@ bool8 sub_805EC4C(Entity *a0, u8 a1)
     if (tileMonsterInfo->isNotTeamMember
         && (tileMonsterInfo->shopkeeper != 1 && tileMonsterInfo->shopkeeper != 2)
         && !IsClientOrTeamBase(tileMonsterInfo->joinedAt.joinedAt)
-        && tileMonsterInfo->clientType != CLIENT_TYPE_CLIENT) {
+        && tileMonsterInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET) {
         return FALSE;
     }
 
@@ -1668,7 +1668,7 @@ bool8 sub_805EF60(Entity *a0, EntityInfo *a1)
         return FALSE;
     if (!sub_8070BC0(a0))
         return FALSE;
-    if (GetEntInfo(r4)->isNotTeamMember && GetEntInfo(r4)->clientType != CLIENT_TYPE_CLIENT && GetEntInfo(r4)->shopkeeper != 1)
+    if (GetEntInfo(r4)->isNotTeamMember && GetEntInfo(r4)->monsterBehavior != BEHAVIOR_RESCUE_TARGET && GetEntInfo(r4)->shopkeeper != 1)
         return FALSE;
 
     SetMonsterActionFields(&a1->action, ACTION_TALK_FIELD);
@@ -1753,8 +1753,8 @@ void sub_805F02C(void)
         sub_803F508(r7);
         sub_8041AD0(leader);
         sub_8041AE0(GetLeader());
-        SetMessageArgument(gFormatBuffer_Monsters[0], r7, 0);
-        TryDisplayDungeonLoggableMessage(r7, gUnknown_80F9BB0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], r7, 0);
+        LogMessageByIdWithPopupCheckUser(r7, gUnknown_80F9BB0);
         sub_807EC28(FALSE);
         r8->unk64 = 0;
         leaderInfo->unk64 = 0;
@@ -2116,7 +2116,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
                         break;
                 }
                 else {
-                    SetMessageArgument(gFormatBuffer_Monsters[0], GetLeader(), 0);
+                    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], GetLeader(), 0);
                     DisplayDungeonMessage(0, gUnknown_80FDE18, 1);
                 }
             }
@@ -2252,7 +2252,7 @@ void DrawFieldMenu(u8 a0)
             Entity *teamMon = gDungeon->teamPokemon[i];
             if (EntityExists(teamMon)) {
                 EntityInfo *monInfo = GetEntInfo(teamMon);
-                SetMessageArgument(gFormatBuffer_Monsters[0], teamMon, 0);
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], teamMon, 0);
                 gFormatArgs[0] = monInfo->HP;
                 gFormatArgs[1] = monInfo->maxHPStat;
                 PrintFormattedStringOnWindow(4, yLoop, gUnknown_80F91E0, 2, 0);
@@ -3652,7 +3652,7 @@ void ShowTacticsMenu(ActionContainer *a0)
                         monInfo->aiTarget.unkC = 0;
                         monInfo->aiTarget.aiTargetSpawnGenID = 0;
                         if (!monInfo->isTeamLeader) {
-                            MoveIfPossible(teamMon, TRUE);
+                            AIMovement(teamMon, TRUE);
                         }
                     }
                     else {

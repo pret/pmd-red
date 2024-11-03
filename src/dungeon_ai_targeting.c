@@ -462,7 +462,7 @@ u8 GetTreatmentBetweenMonsters(Entity *pokemon, Entity *targetPokemon, bool8 ign
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     EntityInfo *targetData = GetEntInfo(targetPokemon);
-    u8 targetingDecoy;
+    u8 decoyAITracker;
     u8 pokemonTargetingDecoy;
     bool8 pokemonIsEnemy;
     bool8 targetIsEnemy;
@@ -473,23 +473,23 @@ u8 GetTreatmentBetweenMonsters(Entity *pokemon, Entity *targetPokemon, bool8 ign
     }
     if (pokemonInfo->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER ||
         targetData->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER ||
-        pokemonInfo->clientType == CLIENT_TYPE_DONT_MOVE ||
-        targetData->clientType == CLIENT_TYPE_DONT_MOVE ||
-        pokemonInfo->clientType == CLIENT_TYPE_CLIENT ||
-        targetData->clientType == CLIENT_TYPE_CLIENT ||
+        pokemonInfo->monsterBehavior == BEHAVIOR_DIGLETT ||
+        targetData->monsterBehavior == BEHAVIOR_DIGLETT ||
+        pokemonInfo->monsterBehavior == BEHAVIOR_RESCUE_TARGET ||
+        targetData->monsterBehavior == BEHAVIOR_RESCUE_TARGET ||
         (checkPetrified && !pokemonInfo->isNotTeamMember && targetData->immobilize.immobilizeStatus == STATUS_PETRIFIED) ||
         (!ignoreInvisible && targetData->transformStatus.transformStatus == STATUS_INVISIBLE && !CanSeeInvisibleMonsters(pokemon)))
     {
         return TREATMENT_IGNORE;
     }
-    pokemonTargetingDecoy = pokemonInfo->targetingDecoy;
-    targetingDecoy = TARGETING_DECOY_NONE;
-    if (pokemonTargetingDecoy != TARGETING_DECOY_NONE)
+    pokemonTargetingDecoy = pokemonInfo->decoyAITracker;
+    decoyAITracker = DECOY_AI_NONE;
+    if (pokemonTargetingDecoy != DECOY_AI_NONE)
     {
-        targetingDecoy = TARGETING_DECOY_WILD;
-        if (pokemonTargetingDecoy == TARGETING_DECOY_TEAM)
+        decoyAITracker = DECOY_AI_WILD;
+        if (pokemonTargetingDecoy == DECOY_AI_TEAM)
         {
-            targetingDecoy = TARGETING_DECOY_TEAM;
+            decoyAITracker = DECOY_AI_TEAM;
         }
     }
     if (pokemonInfo->shopkeeper != SHOPKEEPER_MODE_NORMAL)
@@ -521,7 +521,7 @@ u8 GetTreatmentBetweenMonsters(Entity *pokemon, Entity *targetPokemon, bool8 ign
     {
         targetIsDecoy = TRUE;
     }
-    return gTreatmentData[targetingDecoy][pokemonIsEnemy][targetIsEnemy][targetIsDecoy];
+    return gTreatmentData[decoyAITracker][pokemonIsEnemy][targetIsEnemy][targetIsDecoy];
 }
 
 u8 sub_807167C(Entity * pokemon, Entity * target)
@@ -532,9 +532,9 @@ u8 sub_807167C(Entity * pokemon, Entity * target)
 
   pokemonEntityData = GetEntInfo(pokemon);
   targetEntityInfo = GetEntInfo(target);
-  if (pokemonEntityData->clientType != CLIENT_TYPE_CLIENT) {
+  if (pokemonEntityData->monsterBehavior != BEHAVIOR_RESCUE_TARGET) {
     cannotUseItems = IsClientOrTeamBase(pokemonEntityData->joinedAt.joinedAt);
-    if (!cannotUseItems && (pokemonEntityData->shopkeeper == SHOPKEEPER_MODE_NORMAL) && (targetEntityInfo->clientType != CLIENT_TYPE_CLIENT)) {
+    if (!cannotUseItems && (pokemonEntityData->shopkeeper == SHOPKEEPER_MODE_NORMAL) && (targetEntityInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET)) {
       cannotUseItems = IsClientOrTeamBase(targetEntityInfo->joinedAt.joinedAt);
       if (cannotUseItems || (targetEntityInfo->shopkeeper != SHOPKEEPER_MODE_NORMAL)) {
 error:

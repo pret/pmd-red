@@ -37,7 +37,7 @@ void sub_8079F20(Entity * pokemon, Entity * target, u8 param_3, u8 param_4);
 void sub_807A0CC(Entity * pokemon, Entity * target);
 void SendSleepEndMessage(Entity * pokemon, Entity * target, bool8 param_3, bool8 param_4);
 void SendNonVolatileEndMessage(Entity * pokemon, Entity * target);
-void SendImmobilizeEndMessage(Entity * pokemon, Entity *target);
+void EndFrozenClassStatus(Entity * pokemon, Entity *target);
 void SendVolatileEndMessage(Entity * pokemon, Entity *target);
 void SendProtectionEndMessage(Entity * pokemon, Entity *target);
 void SendWaitingEndMessage(Entity * pokemon, Entity * target, u8 waitingStatus);

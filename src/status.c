@@ -213,7 +213,7 @@ void UpdateFlashFireBoost(Entity * pokemon, Entity *target)
 
   if (EntityExists(target)) {
     entityInfo = GetEntInfo(target);
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     flashFireBoost = UpdateFlashFireBoost_sub(entityInfo);
     if (entityInfo->flashFireBoost != flashFireBoost) {
       entityInfo->flashFireBoost = flashFireBoost;
@@ -243,21 +243,21 @@ void ChangeAttackMultiplierTarget(Entity *pokemon, Entity *target, u32 statStage
   }
 
   if ((HasHeldItem(target,ITEM_TWIST_BAND)) && (param_4 < 0x100)) {
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD550);
     return;
   }
 
   if (HasAbility(target, ABILITY_HYPER_CUTTER) && (statStage == STAT_STAGE_ATK) && (param_4 < 0x100)) {
     if (displayMessage) {
-        SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCA60);
     }
     return;
   }
 
   entityInfo = GetEntInfo(target);
-  SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+  SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
   oldMulti = entityInfo->offensiveMultipliers[statStage];
 
   if (param_4 < 0x100) {
@@ -308,7 +308,7 @@ void ChangeDefenseMultiplierTarget(Entity *pokemon, Entity *target, u32 statStag
   }
 
   entityInfo = GetEntInfo(target);
-  SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+  SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
   oldMulti = entityInfo->defensiveMultipliers[statStage];
 
   if (param_4 < 0x100) {
@@ -345,7 +345,7 @@ void RaiseAccuracyStageTarget(Entity * pokemon, Entity * target, s32 statStage)
 
   if (EntityExists(target)) {
     entityInfo = GetEntInfo(target);
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     sub_8042040(target,statStage);
     if (statStage != STAT_STAGE_ACCURACY) {
         strcpy(gFormatBuffer_Items[0],*gUnknown_80FC090);
@@ -379,13 +379,13 @@ void LowerAccuracyStageTarget(Entity * pokemon, Entity * target, s32 statStage, 
       if (HasAbility(target, ABILITY_KEEN_EYE) && (statStage == STAT_STAGE_ACCURACY)){
         if(displayMessage)
         {
-            SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCA64);
         }
       }
       else {
         entityInfo = GetEntInfo(target);
-        SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
         sub_8042060(target,statStage);
         if (entityInfo->hitChanceStages[statStage] != 0) {
           entityInfo->hitChanceStages[statStage]--;
@@ -407,13 +407,13 @@ void CringeStatusTarget(Entity * pokemon,Entity * target, bool8 displayMessage)
   if (EntityExists(target)) {
     if (!HasSafeguardStatus(pokemon, target, displayMessage)) {
       if (HasAbility(target, ABILITY_INNER_FOCUS)){
-            SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
             if(displayMessage)
                 TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCC18);
       }
       else {
         entityInfo = GetEntInfo(target);
-        SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
         if(entityInfo->volatileStatus.volatileStatus != STATUS_CRINGE)
         {
             entityInfo->volatileStatus.volatileStatus = STATUS_CRINGE;
@@ -442,7 +442,7 @@ void ParalyzeStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
 
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,displayMessage))) {
     if (HasAbility(target, ABILITY_LIMBER)) {
-      SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+      SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       if (displayMessage) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCBF8);
       }
@@ -451,7 +451,7 @@ void ParalyzeStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
     {
       bVar6 = TRUE;
       entityInfo = GetEntInfo(target);
-      SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+      SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       if (entityInfo->nonVolatile.nonVolatileStatus != STATUS_PARALYSIS) {
         entityInfo->nonVolatile.nonVolatileStatus = STATUS_PARALYSIS;
         entityInfo->nonVolatile.nonVolatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4E50,TRUE) + 1;
@@ -503,7 +503,7 @@ void RaiseMovementSpeedTarget(Entity * pokemon, Entity * target, s32 turns, bool
     turns = CalculateStatusTurns(target,gUnknown_80F4E40,FALSE) + 1;
   }
   entityInfo = GetEntInfo(target);
-  SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+  SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
   movSpeed = CalcSpeedStage(target);
   if (movSpeed == MAX_SPEED_STAGE) {
     if (displayMessage)
@@ -548,7 +548,7 @@ void LowerMovementSpeedTarget(Entity * pokemon, Entity * target, s32 levels, boo
     return;
   }
   entityInfo = GetEntInfo(target);
-  SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+  SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
   movSpeed = CalcSpeedStage(target);
   if (movSpeed == 0) {
     if (displayMessage)
@@ -591,7 +591,7 @@ void ConfuseStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage
     return;
   }
 
-  SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+  SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
   if (HasHeldItem(target,ITEM_PERSIM_BAND)) {
     if (displayMessage)
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD500);
@@ -625,7 +625,7 @@ void CowerStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
 
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,displayMessage))) {
     entityInfo = GetEntInfo(target);
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (entityInfo->volatileStatus.volatileStatus != STATUS_COWERING) {
       entityInfo->volatileStatus.volatileStatus = STATUS_COWERING;
       entityInfo->volatileStatus.volatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4ECC,TRUE) + 1;
@@ -682,7 +682,7 @@ void HealTargetHP(Entity *pokemon, Entity *target, s32 param_3, s32 param_4, boo
     EntityUpdateStatusSprites(target);
     gFormatArgs[0] = HP;
     gFormatArgs[1] = maxHPStat;
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if ((HP == 0) && (maxHPStat == 0)) {
         if (displayMessage_u8)
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB204); // $m0's HP remained unchanged
@@ -729,7 +729,7 @@ void HandleScannerOrb(Entity* pokemon, Entity* target)
     {
         GetEntInfo(target)->scanning = TRUE;
         nullsub_75(target);
-        SetMessageArgument(gFormatBuffer_Monsters[0], target, 0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FAEA0); // Item locations became evident
         sub_803F580(0);
         sub_8040A84();
@@ -754,7 +754,7 @@ void HandleStairsOrb(Entity* pokemon, Entity* target)
         {
             GetEntInfo(target)->stairSpotter = TRUE;
             nullsub_76(target);
-            SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FAEC8);
             sub_803F580(0);
             sub_8040A84();
@@ -774,7 +774,7 @@ void HandleRadarOrb(Entity* pokemon, Entity* target)
     {
         GetEntInfo(target)->powerEars = TRUE;
         nullsub_77(target);
-        SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FAFAC);
         sub_803F580(0);
         sub_8040A84();
@@ -800,7 +800,7 @@ void HandleLeechSeed(Entity * pokemon, Entity * target, bool8 displayMessage)
       if (HasSafeguardStatus(pokemon,target,displayMessage)) {
         return;
       }
-      SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+      SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       if (MonsterIsType(target, TYPE_GRASS)) {
         if (displayMessage)
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gPtrCantLeechSeedMonMessage);
@@ -824,7 +824,7 @@ void HandleLeechSeed(Entity * pokemon, Entity * target, bool8 displayMessage)
             }
             for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
             {
-                if (pokemon == gDungeon->allPokemon[index]) {
+                if (pokemon == gDungeon->activeMonsterPtrs[index]) {
                     entityInfo->linked.unkD8 = index;
                     entityInfo2 = GetEntInfo(pokemon);
                     entityInfo->linked.unkD4 = entityInfo2->unk98;
@@ -847,7 +847,7 @@ void sub_8078084(Entity * pokemon)
     entityInfo = GetEntInfo(pokemon);
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        target = gDungeon->allPokemon[index];
+        target = gDungeon->activeMonsterPtrs[index];
         if (EntityExists(target)) {
             entityInfo2 = GetEntInfo(target);
             if((u8)(entityInfo2->linked.linkedStatus - 1) <= 1)
@@ -873,7 +873,7 @@ void DestinyBondStatusTarget(Entity * pokemon, Entity * target)
   if (((EntityExists(target)) && (GetEntityType(pokemon) == ENTITY_MONSTER)) &&
      (GetEntityType(target) == ENTITY_MONSTER)) {
         entityInfo = GetEntInfo(pokemon);
-        SetMessageArgument(gFormatBuffer_Monsters[0],pokemon,0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
         linkedStatus = &entityInfo->linked.linkedStatus;
         if (entityInfo->linked.linkedStatus != STATUS_DESTINY_BOND)
         {
@@ -893,7 +893,7 @@ void DestinyBondStatusTarget(Entity * pokemon, Entity * target)
         }
         for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
         {
-            if (target == gDungeon->allPokemon[index]) {
+            if (target == gDungeon->activeMonsterPtrs[index]) {
                 entityInfo->linked.unkD8 = index;
                 entityInfo2 = GetEntInfo(target);
                 entityInfo->linked.unkD4 = entityInfo2->unk98;
@@ -910,7 +910,7 @@ void SureShotStatusTarget(Entity *pokemon, Entity * target, s32 turns)
 
   if (EntityExists(target)) {
     entityInfo = GetEntInfo(target);
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (entityInfo->moveStatus.moveStatus != STATUS_SURE_SHOT) {
       entityInfo->moveStatus.moveStatus = STATUS_SURE_SHOT;
       entityInfo->moveStatus.moveStatusTurns = turns + 1;
@@ -930,7 +930,7 @@ void WhifferStatusTarget(Entity *pokemon, Entity * target, s32 turns)
 
   if (EntityExists(target) && !HasSafeguardStatus(pokemon, target, TRUE)) {
     entityInfo = GetEntInfo(target);
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (entityInfo->moveStatus.moveStatus != STATUS_WHIFFER) {
       entityInfo->moveStatus.moveStatus = STATUS_WHIFFER;
       entityInfo->moveStatus.moveStatusTurns = turns + 1;
@@ -950,7 +950,7 @@ void FixedDamageStatusTarget(Entity *pokemon, Entity * target)
 
   if (EntityExists(target)) {
     entityInfo = GetEntInfo(target);
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (entityInfo->moveStatus.moveStatus != STATUS_SET_DAMAGE) {
       entityInfo->moveStatus.moveStatus = STATUS_SET_DAMAGE;
       entityInfo->moveStatus.moveStatusTurns = CalculateStatusTurns(target, gUnknown_80F4EC4, FALSE) + 1;
@@ -970,7 +970,7 @@ void FocusEnergyStatusTarget(Entity *pokemon, Entity * target)
 
   if (EntityExists(target)) {
     entityInfo = GetEntInfo(target);
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (entityInfo->moveStatus.moveStatus != STATUS_FOCUS_ENERGY) {
       entityInfo->moveStatus.moveStatus = STATUS_FOCUS_ENERGY;
       entityInfo->moveStatus.moveStatusTurns = CalculateStatusTurns(target, gUnknown_80F4EC8, FALSE) + 1;
@@ -995,14 +995,14 @@ void sub_80783C4(Entity * pokemon, Entity * target, u8 param_3)
 
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon, target, TRUE))) {
     targetEntityInfo = GetEntInfo(target);
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (targetEntityInfo->waitingStruct.waitingStatus == STATUS_DECOY) {
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB994);
     }
     else {
       for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
       {
-        entity = gDungeon->allPokemon[index];
+        entity = gDungeon->activeMonsterPtrs[index];
         if ((((EntityExists(entity)) && (target != entity)) &&
            (u8)(GetEntInfo(entity)->waitingStruct.waitingStatus - 2U) < 2)) {
           SendWaitingEndMessage(pokemon,entity,STATUS_NONE);
@@ -1010,22 +1010,22 @@ void sub_80783C4(Entity * pokemon, Entity * target, u8 param_3)
         }
       }
       sub_8041D38(target);
-      SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+      SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       if (targetEntityInfo->waitingStruct.waitingStatus != STATUS_NONE) {
         SendWaitingEndMessage(pokemon,target, STATUS_DECOY);
       }
       targetEntityInfo->waitingStruct.waitingStatus = STATUS_DECOY;
-      targetEntityInfo->waitingStruct.enemyDecoy = GetEntInfo(pokemon)->isNotTeamMember;
+      targetEntityInfo->waitingStruct.decoyApplierNonTeamMemberFlag = GetEntInfo(pokemon)->isNotTeamMember;
       targetEntityInfo->waitingStruct.unkCA = param_3;
       targetEntityInfo->waitingStruct.waitingStatusTurns = CalculateStatusTurns(target,gUnknown_80F4ED0,TRUE) + 1;
       targetEntityInfo->waitingStruct.curseDamageCountdown = 0;
       sub_806CCB4(target,sub_806CEBC(target));
-      gDungeon->decoyActive = TRUE;
+      gDungeon->decoyIsActive = TRUE;
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB978);
 
       for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
       {
-        entity2 = gDungeon->allPokemon[index];
+        entity2 = gDungeon->activeMonsterPtrs[index];
         if (EntityExists(entity2)) {
           entityInfo = GetEntInfo(entity2);
           entityInfo->aiTarget.aiObjective = AI_STAND_STILL;
@@ -1033,7 +1033,7 @@ void sub_80783C4(Entity * pokemon, Entity * target, u8 param_3)
           entityInfo->aiTarget.aiTargetSpawnGenID = 0;
           if (!entityInfo->isTeamLeader) {
             action = entityInfo->action;
-            MoveIfPossible(entity2, TRUE);
+            AIMovement(entity2, TRUE);
             entityInfo->action = action;
           }
         }
@@ -1070,7 +1070,7 @@ void CurseStatusTarget(Entity *pokemon, Entity * target)
         targetEntityInfo->waitingStruct.waitingStatusTurns = CalculateStatusTurns(target,gUnknown_80F4EA4,TRUE) + 1;
         targetEntityInfo->waitingStruct.curseDamageCountdown = 0;
       }
-      SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+      SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB004);
     }
     else {
@@ -1094,7 +1094,7 @@ void SnatchStatusTarget(Entity * pokemon, Entity * target)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-      entity = gDungeon->allPokemon[index];
+      entity = gDungeon->activeMonsterPtrs[index];
       if ((EntityExists(entity)) && (GetEntInfo(entity)->waitingStruct.waitingStatus == STATUS_SNATCH)) {
         SendWaitingEndMessage(pokemon, entity, STATUS_NONE);
       }
@@ -1110,7 +1110,7 @@ void SnatchStatusTarget(Entity * pokemon, Entity * target)
 
     gDungeon->snatchPokemon = target;
     gDungeon->unk17B3C = targetEntityInfo->unk98;
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB01C);
     EntityUpdateStatusSprites(target);
   }
@@ -1122,7 +1122,7 @@ void TauntStatusTarget(Entity * pokemon, Entity * target)
 
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
     entityInfo = GetEntInfo(target);
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (entityInfo->volatileStatus.volatileStatus != STATUS_TAUNTED) {
       entityInfo->volatileStatus.volatileStatus = STATUS_TAUNTED;
       entityInfo->volatileStatus.volatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4ED8,TRUE) + 1;
@@ -1142,7 +1142,7 @@ void HandleStockpile(Entity * pokemon, Entity * target)
 
   if ((EntityExists(target))) {
     entityInfo = GetEntInfo(target);
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (entityInfo->stockpileStage < MAX_STOCKPILE_STAGE) {
       entityInfo->stockpileStage++;
       sub_804178C(1);
@@ -1166,7 +1166,7 @@ void InvisibleStatusTarget(Entity * pokemon, Entity * target)
     if (targetEntityInfo->transformStatus.transformStatus == STATUS_TRANSFORMED) {
       SendTransformEndMessage(pokemon,target);
     }
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (targetEntityInfo->transformStatus.transformStatus != STATUS_INVISIBLE) {
       targetEntityInfo->transformStatus.transformStatus = STATUS_INVISIBLE;
       targetEntityInfo->transformStatus.transformStatusTurns = CalculateStatusTurns(target,gUnknown_80F4EE4,FALSE) + 1;
@@ -1187,7 +1187,7 @@ void PerishSongTarget(Entity * pokemon, Entity * target)
   if (EntityExists(target) && !HasSafeguardStatus(pokemon, target, TRUE)) {
     nullsub_82(target);
     entityInfo = GetEntInfo(target);
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (entityInfo->perishSongTurns == 0) {
       entityInfo->perishSongTurns = CalculateStatusTurns(target,gUnknown_80F4EEC,FALSE) + 1;
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FBB04);
@@ -1213,11 +1213,11 @@ void EncoreStatusTarget(Entity *pokemon,Entity *target)
       if ((EntityInfo->moves.moves[index].moveFlags & MOVE_FLAG_EXISTS) && (movePtr->moveFlags & MOVE_FLAG_LAST_USED)) break;
     }
     if ((index == MAX_MON_MOVES) && ((EntityInfo->moves.struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0)) {
-      SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+      SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FBBD4);
     }
     else {
-      SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+      SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       if (EntityInfo->volatileStatus.volatileStatus != STATUS_ENCORE) {
         EntityInfo->volatileStatus.volatileStatus = STATUS_ENCORE;
         EntityInfo->volatileStatus.volatileStatusTurns = CalculateStatusTurns(target,gUnknown_80F4EF4,TRUE) + 1;
@@ -1247,7 +1247,7 @@ void sub_8078A58(Entity *pokemon, Entity *target, s32 param_3, s32 param_4)
         bellyBefore = targetInfo->maxBelly;
         targetInfo->maxBelly = FixedPoint_Subtract(bellyBefore, sp0);
         targetInfo->belly = FixedPoint_Min(targetInfo->belly, targetInfo->maxBelly);
-        SetMessageArgument(gFormatBuffer_Monsters[0], target, 0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
 
         if (FixedPointToInt(bellyBefore) != FixedPointToInt(targetInfo->maxBelly)) {
             sub_8041D9C(target);
@@ -1261,7 +1261,7 @@ void sub_8078A58(Entity *pokemon, Entity *target, s32 param_3, s32 param_4)
         bellyBefore = targetInfo->belly;
         targetInfo->belly = FixedPoint_Subtract(bellyBefore, sp8);
 
-        SetMessageArgument(gFormatBuffer_Monsters[0], target, 0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
 
         if (FixedPointToInt(bellyBefore) != FixedPointToInt(targetInfo->belly)) {
             nullsub_84(target);
@@ -1323,12 +1323,12 @@ void sub_8078B5C(Entity *pokemon, Entity *target, u32 bellyIncrement, s32 maxBel
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FBE64); // $m0's belly filled up full!
         }
         if (FixedPointToInt(sp_0x20) == FixedPointToInt(targetInfo->maxBelly)) {
-            SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
             if (displayMessage) TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FBDF0); // $m0's belly won't get any bigger!
         }
         else {
             sub_8041DB0(target);
-            SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
             if (displayMessage) TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FBDC4); // m0's max belly size increased!
         }
     }
@@ -1345,7 +1345,7 @@ void sub_8078B5C(Entity *pokemon, Entity *target, u32 bellyIncrement, s32 maxBel
             *bellyPtr = *puVar8;
         }
         nullsub_85(target);
-        SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
         if (FixedPointToInt(oldBelly) ==  FixedPointToInt(*bellyPtr)) {
             if (displayMessage) TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FBE14); // $m0's belly didn't change!
         }

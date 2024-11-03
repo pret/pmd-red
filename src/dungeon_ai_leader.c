@@ -224,7 +224,7 @@ bool8 sub_8072CF4(Entity *entity)
             break;
         case ACTION_STAIRS:
             if ((gDungeon->dungeonLocation.id == DUNGEON_METEOR_CAVE) && (!gDungeon->deoxysDefeat)) {
-                TryDisplayDungeonLoggableMessage(entity,*gUnknown_80FA5B4); // It's impossible to go down the stairs now!
+                LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80FA5B4); // It's impossible to go down the stairs now!
             }
             else
             {
@@ -282,8 +282,8 @@ bool8 sub_8072CF4(Entity *entity)
                 sub_80671A0(entity);
                 break;
             }
-            SetMessageArgument(gFormatBuffer_Monsters[0],entity,0);
-            TryDisplayDungeonLoggableMessage(entity,*gUnknown_80FE6D4);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity,0);
+            LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80FE6D4);
             break;
         case ACTION_TALK_FIELD:
             HandleTalkFieldAction(entity);
@@ -310,8 +310,8 @@ bool8 sub_8072CF4(Entity *entity)
             HandleThrowItemAIAction(entity);
             break;
         case ACTION_SECOND_THOUGHTS:
-            SetMessageArgument(gFormatBuffer_Monsters[0],entity,0);
-            TryDisplayDungeonLoggableMessage(entity,*gUnknown_80FE478);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity,0);
+            LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80FE478);
             break;
         default:
             info->action.action = ACTION_PASS_TURN;
@@ -339,7 +339,7 @@ bool8 sub_8072CF4(Entity *entity)
                     }
                 }
                 if (bVar4) {
-                    TryDisplayDungeonLoggableMessage(entity,*gUnknown_80FD2CC);
+                    LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80FD2CC);
                 }
             }
             sub_807360C();
@@ -358,7 +358,7 @@ bool8 sub_8072CF4(Entity *entity)
                     sub_8046D20();
                 }
                 sub_8041888(0);
-                if (((EntityExists(entity)) && (!info->aiNextToTarget)) && (!bVar14)) {
+                if (((EntityExists(entity)) && (!info->aiAllySkip)) && (!bVar14)) {
                     if (sub_80706A4(entity,&entity->pos) != '\0') {
                         sub_807D148(entity,entity,0,0);
                     }

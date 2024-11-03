@@ -30,7 +30,7 @@ void sub_8075680(void)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeon->allPokemon[index];
+        entity = gDungeon->activeMonsterPtrs[index];
         if ((EntityExists(entity)) && (info = GetEntInfo(entity), !info->isTeamLeader)) {
             targetPos = &(info->targetPos);
 

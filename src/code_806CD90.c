@@ -49,7 +49,7 @@ void sub_806CC10(void)
     s32 i;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-        entity = gDungeon->allPokemon[i];
+        entity = gDungeon->activeMonsterPtrs[i];
 
         if (EntityExists(entity)) {
             entityInfo = GetEntInfo(entity);
@@ -69,7 +69,7 @@ void sub_806CC70(void)
     Entity *entity;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-        entity = gDungeon->allPokemon[i];
+        entity = gDungeon->activeMonsterPtrs[i];
 
         if (EntityExists(entity))
             sub_806CCB4(entity, sub_806CEBC(entity));
@@ -116,7 +116,7 @@ void sub_806CD90(void)
     Entity *entity;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-        entity = gDungeon->allPokemon[i];
+        entity = gDungeon->activeMonsterPtrs[i];
 
         if (EntityExists(entity))
             sub_806CCB4(entity, sub_806CEBC(entity));
@@ -227,7 +227,7 @@ void sub_806CF60(void)
     s32 i;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-        entity = gDungeon->allPokemon[i];
+        entity = gDungeon->activeMonsterPtrs[i];
 
         if (EntityExists(entity))
             sub_806CF98(entity);
@@ -473,7 +473,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
     if (r9) {
         EntityInfo *targetInfo = GetEntInfo(target);
         if (targetInfo->linked.linkedStatus == STATUS_DESTINY_BOND) {
-            Entity *destBondTarget = gDungeon->allPokemon[targetInfo->linked.unkD8];
+            Entity *destBondTarget = gDungeon->activeMonsterPtrs[targetInfo->linked.unkD8];
             if (destBondTarget == NULL) {
                 targetInfo->linked.linkedStatus = 0;
             }
@@ -520,14 +520,14 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     }
 
     if (arg4 != 0x20E && HasAbility(target, ABILITY_STURDY) && dmgStruct->dmg == 9999) {
-        SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
         TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FCA90);
         sub_8042238(attacker, target);
         dmgStruct->tookNoDamage = TRUE;
         return FALSE;
     }
     if (targetData->immobilize.immobilizeStatus == STATUS_FROZEN) {
-        SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
         TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9600);
         sub_8042238(attacker, target);
         dmgStruct->tookNoDamage = TRUE;
@@ -568,8 +568,8 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         }
     }
 
-    SetMessageArgument(gFormatBuffer_Monsters[0], attacker, 0);
-    SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
     if (dmgStruct->dmg == 0) {
         if (sub_8045888(attacker) && sub_8045888(target)) {
             if (targetData->unk152 == 0) {
@@ -715,8 +715,8 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         r8 = 0;
 
     targetData->unk14C = 0;
-    SetMessageArgument(gFormatBuffer_Monsters[0], attacker, 0);
-    SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
     if (dmgStruct->residualDmgType == 19 || dmgStruct->residualDmgType == 20) {
         if (targetData->isNotTeamMember) {
             TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9E44);
@@ -727,7 +727,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     }
     else if (targetData->isNotTeamMember)
     {
-        if (targetData->clientType == CLIENT_TYPE_CLIENT) {
+        if (targetData->monsterBehavior == BEHAVIOR_RESCUE_TARGET) {
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DF0[r8]);
         }
         else {
@@ -742,7 +742,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         else if (IsClientOrTeamBase(targetData->joinedAt.joinedAt)) {
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DAC[r8]);
         }
-        else if (targetData->clientType == CLIENT_TYPE_CLIENT) {
+        else if (targetData->monsterBehavior == BEHAVIOR_RESCUE_TARGET) {
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DF0[r8]);
         }
         else if (sub_806A58C(recruitedMon->unkA)) {
@@ -791,7 +791,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 sub_806A390(target);
                 sub_806CCB4(target, sub_806CEBC(target));
                 EntityUpdateStatusSprites(target);
-                SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
                 DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD46C);
                 sub_806F63C(target);
                 return FALSE;
@@ -848,8 +848,8 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 sub_806A390(target);
                 sub_806CCB4(target, sub_806CEBC(target));
                 EntityUpdateStatusSprites(target);
-                SetMessageArgument(gFormatBuffer_Monsters[0], target, 0);
-                SetMessageArgument(gFormatBuffer_Monsters[1], teamMember, 0);
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], teamMember, 0);
                 DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD484);
                 sub_806F63C(target);
                 return FALSE;
@@ -902,7 +902,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             sub_806A390(target);
             sub_806CCB4(target, sub_806CEBC(target));
             EntityUpdateStatusSprites(target);
-            SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD46C);
             sub_806F63C(target);
             return FALSE;

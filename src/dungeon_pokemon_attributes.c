@@ -28,7 +28,7 @@ bool8 HasSafeguardStatus(Entity * pokemon, Entity * target, bool8 displayMessage
 {
   if (GetEntInfo(target)->protection.protectionStatus == STATUS_SAFEGUARD) {
     if (displayMessage) {
-      SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+      SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC2FC);
     }
     return TRUE;
@@ -40,7 +40,7 @@ bool8 sub_8071728(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
   if (GetEntInfo(target)->protection.protectionStatus == STATUS_MIST) {
     if (displayMessage) {
-      SetMessageArgument(gFormatBuffer_Monsters[0], target, 0);
+      SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
       TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FC31C);
     }
     return TRUE;
@@ -48,7 +48,7 @@ bool8 sub_8071728(Entity * pokemon, Entity * target, bool8 displayMessage)
   else {
     if (HasAbility(target, ABILITY_CLEAR_BODY) || HasAbility(target, ABILITY_WHITE_SMOKE)) {
         if (displayMessage) {
-            SetMessageArgument(gFormatBuffer_Monsters[0], target, 0);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
             TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FCEFC);
         }
         return TRUE;
@@ -252,7 +252,7 @@ bool8 sub_8071A8C(Entity *pokemon)
     if(EntityExists(pokemon))
     {
         pokemonInfo = GetEntInfo(pokemon);
-        if(pokemonInfo->clientType != CLIENT_TYPE_CLIENT)
+        if(pokemonInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET)
         {
             if(!sub_8071A8C_sub(pokemonInfo))
                 return TRUE;

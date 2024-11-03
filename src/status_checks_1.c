@@ -44,7 +44,7 @@ s32 sub_8070828(Entity *pokemon, bool8 displayMessage)
         }
         if (displayMessage && SetVisualFlags(GetEntInfo(pokemon), 0x40, flag)) {
             sub_80429B4(pokemon);
-            TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FEE80);
+            LogMessageByIdWithPopupCheckUser(pokemon, *gUnknown_80FEE80);
         }
         if (flag) {
             return 2;
@@ -72,7 +72,7 @@ void SetMessageArgument_2(u8 *buffer, EntityInfo *param_2, s32 colorNum)
         else
         {
             if (param_2->isNotTeamMember) {
-                if ((param_2->joinedAt.joinedAt == 0x4A) || (param_2->clientType == CLIENT_TYPE_CLIENT)) {
+                if ((param_2->joinedAt.joinedAt == 0x4A) || (param_2->monsterBehavior == BEHAVIOR_RESCUE_TARGET)) {
                     CopyYellowMonsterNametoBuffer(buffer, param_2->apparentID);
                 }
                 else
@@ -116,7 +116,7 @@ void sub_80709C8(u8 *buffer, EntityInfo *entityInfo)
         else
         {
             if (entityInfo->isNotTeamMember) {
-                CopyMonsterNametoBuffer(buffer, entityInfo->apparentID);
+                CopyMonsterNameToBuffer(buffer, entityInfo->apparentID);
             }
             else
             {

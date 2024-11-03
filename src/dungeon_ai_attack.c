@@ -65,7 +65,7 @@ extern void sub_804AC20(struct Position *);
 extern void sub_807EC28(bool8);
 extern void sub_806A5B8(struct Entity *entity);
 
-void DecideAttack(Entity *pokemon)
+void ChooseAIMove(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     s32 i;
@@ -422,7 +422,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
         s32 i;
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
         {
-            Entity *target = gDungeon->allPokemon[i];
+            Entity *target = gDungeon->activeMonsterPtrs[i];
             if (EntityExists(target) && CanSeeTarget(pokemon, target))
             {
                 numPotentialTargets = TryAddTargetToAITargetList(numPotentialTargets, targetingFlags, pokemon, target, move, hasStatusChecker);
@@ -467,7 +467,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
         }
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
         {
-            Entity *target = gDungeon->allPokemon[i];
+            Entity *target = gDungeon->activeMonsterPtrs[i];
             if (EntityExists(target) && pokemon != target)
             {
                 s32 direction = GetDirectionTowardsPosition(&pokemon->pos, &target->pos);
@@ -491,7 +491,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
         s32 i;
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
         {
-            Entity *target = gDungeon->allPokemon[i];
+            Entity *target = gDungeon->activeMonsterPtrs[i];
             if (EntityExists(target))
             {
                 numPotentialTargets = TryAddTargetToAITargetList(numPotentialTargets, targetingFlags, pokemon, target, move, hasStatusChecker);
@@ -674,8 +674,8 @@ bool8 IsAITargetEligible(s32 targetingFlags, Entity *user, Entity *target, Move 
         checkThirdParty:
         hasTarget = TRUE;
         if (targetData->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER ||
-            targetData->clientType == CLIENT_TYPE_DONT_MOVE ||
-            targetData->clientType == CLIENT_TYPE_CLIENT)
+            targetData->monsterBehavior == BEHAVIOR_DIGLETT ||
+            targetData->monsterBehavior == BEHAVIOR_RESCUE_TARGET)
         {
             returnFalse:
             return FALSE;
@@ -988,14 +988,14 @@ void HandleUseOrbAction(Entity *pokemon)
 
     if (item->flags & ITEM_FLAG_STICKY) {
         sub_8045BF8(gFormatBuffer_Items[0], item);
-        TryDisplayDungeonLoggableMessage(pokemon, *gItemStickyDoesntWorkText);
+        LogMessageByIdWithPopupCheckUser(pokemon, *gItemStickyDoesntWorkText);
         return;
     }
 
     act = entityInfo->action;
 
     if (IsBossFight()) {
-        TryDisplayDungeonLoggableMessage(pokemon, *gPtrMysteriousPowerPreventedUseMessage);
+        LogMessageByIdWithPopupCheckUser(pokemon, *gPtrMysteriousPowerPreventedUseMessage);
         r4 = TRUE;
     }
     else {
@@ -1014,21 +1014,21 @@ void HandleUseOrbAction(Entity *pokemon)
         }
 
         if (entityInfo->volatileStatus.volatileStatus == 1) {
-            SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
-            TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC714);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
+            LogMessageByIdWithPopupCheckUser(pokemon, *gUnknown_80FC714);
             r4 = FALSE;
             r8 = FALSE;
         }
         else if (entityInfo->volatileStatus.volatileStatus == 7) {
-            SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
-            TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC718);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
+            LogMessageByIdWithPopupCheckUser(pokemon, *gUnknown_80FC718);
             r4 = FALSE;
             r8 = FALSE;
         }
         else if (entityInfo->nonVolatile.nonVolatileStatus == 4)
         {
-            SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
-            TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC6A8);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
+            LogMessageByIdWithPopupCheckUser(pokemon, *gUnknown_80FC6A8);
             r4 = FALSE;
             r8 = FALSE;
         }

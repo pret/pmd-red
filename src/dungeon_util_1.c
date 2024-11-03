@@ -42,7 +42,7 @@ Entity *GetPartnerEntity(void)
             return entity;
         }
     }
-    return GetEntityFromClientType(CLIENT_TYPE_PARTNER);
+    return GetEntityFromMonsterBehavior(BEHAVIOR_ALLY);
 }
 
 void sub_80854D4(void)
@@ -150,15 +150,15 @@ void sub_808563C(DungeonCallback func)
     }
 }
 
-Entity *GetEntityFromClientType(u8 entityType)
+Entity *GetEntityFromMonsterBehavior(u8 entityType)
 {
     Entity * entity;
     s32 index;
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeon->allPokemon[index];
-        if ((EntityExists(entity)) && (GetEntInfo(entity)->clientType == entityType)) return entity;
+        entity = gDungeon->activeMonsterPtrs[index];
+        if ((EntityExists(entity)) && (GetEntInfo(entity)->monsterBehavior == entityType)) return entity;
     }
     return NULL;
 }
@@ -204,7 +204,7 @@ void sub_8085764(void)
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
         entity = gDungeon->wildPokemon[index];
-        if ((EntityExists(entity)) && (GetEntInfo(entity)->clientType == CLIENT_TYPE_PARTNER)) {
+        if ((EntityExists(entity)) && (GetEntInfo(entity)->monsterBehavior == BEHAVIOR_ALLY)) {
             sub_8068FE0(entity,0x207,&stackEntity);
         }
     }
@@ -219,7 +219,7 @@ void sub_80857B8(void)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeon->allPokemon[index];
+        entity = gDungeon->activeMonsterPtrs[index];
         if (EntityExists(entity)) {
             entityInfo = GetEntInfo(entity);
             if ((gDungeon->unk4 == 0) && (gDungeon->unk2 == 0)) {
@@ -303,7 +303,7 @@ void sub_8085930(s32 direction)
         entity = gDungeon->wildPokemon[index];
         if(EntityExists(entity))
         {
-            if(GetEntInfo(entity)->clientType == CLIENT_TYPE_PARTNER)
+            if(GetEntInfo(entity)->monsterBehavior == BEHAVIOR_ALLY)
             {
                 if(direction >= NUM_DIRECTIONS)
                 {
@@ -341,49 +341,49 @@ void sub_80859F0(s32 direction)
     }
 }
 
-bool8 IsMovingClient(Entity *pokemon)
+bool8 ShouldRunMonsterAI(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
-    switch (pokemonInfo->clientType)
+    switch (pokemonInfo->monsterBehavior)
     {
-        case CLIENT_TYPE_CLIENT:
-        case 0x3:
-        case 0x5:
-        case 0x6:
-        case 0x7:
-        case 0x8:
-        case 0x9:
-        case 0xD:
-        case 0xE:
-        case 0xF:
-        case 0x10:
-        case 0x11:
-        case 0x12:
-        case 0x13:
-        case 0x14:
-        case 0x15:
-        case 0x16:
-        case 0x17:
-        case 0x18:
-        case 0x19:
-        case 0x1A:
-        case 0x1B:
-        case 0x1C:
-        case 0x1D:
-        case 0x1E:
-        case 0x1F:
-        case 0x20:
-        case 0x21:
-        case 0x22:
-        case 0x23:
-        case 0x24:
+        case BEHAVIOR_RESCUE_TARGET:
+        case BEHAVIOR_SKARMORY:
+        case BEHAVIOR_5:
+        case BEHAVIOR_6:
+        case BEHAVIOR_MEDICHAM:
+        case BEHAVIOR_ZAPDOS:
+        case BEHAVIOR_MOLTRES:
+        case BEHAVIOR_ARTICUNO:
+        case BEHAVIOR_GROUDON_2:
+        case BEHAVIOR_RAYQUAZA:
+        case BEHAVIOR_16:
+        case BEHAVIOR_MEWTWO:
+        case BEHAVIOR_ENTEI:
+        case BEHAVIOR_RAIKOU:
+        case BEHAVIOR_SUICUNE:
+        case BEHAVIOR_HO_OH:
+        case BEHAVIOR_LATIOS:
+        case BEHAVIOR_REGIROCK:
+        case BEHAVIOR_REGICE:
+        case BEHAVIOR_REGISTEEL:
+        case BEHAVIOR_JIRACHI:
+        case BEHAVIOR_LUGIA:
+        case BEHAVIOR_KYOGRE:
+        case BEHAVIOR_29:
+        case BEHAVIOR_CELEBI:
+        case BEHAVIOR_SMEARGLE:
+        case BEHAVIOR_32:
+        case BEHAVIOR_33:
+        case BEHAVIOR_34:
+        case BEHAVIOR_35:
+        case BEHAVIOR_36:
             return TRUE;
-        case CLIENT_TYPE_NONE:
-        case CLIENT_TYPE_PARTNER:
-        case CLIENT_TYPE_DONT_MOVE:
-        case 0xA:
-        case 0xB:
-        case 0xC:
+        case BEHAVIOR_FIXED_ENEMY:
+        case BEHAVIOR_ALLY:
+        case BEHAVIOR_DIGLETT:
+        case BEHAVIOR_ALAKAZAM_1:
+        case BEHAVIOR_GROUDON_1:
+        case BEHAVIOR_ALAKAZAM_2:
         default:
             return FALSE;
     }

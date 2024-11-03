@@ -238,7 +238,7 @@ void sub_8080CF0(unkStruct_8094924 *param_1)
     sub_80830B4(param_1,gDungeon->plusIsActive[1]);
     sub_80830B4(param_1,gDungeon->minusIsActive[0]);
     sub_80830B4(param_1,gDungeon->minusIsActive[1]);
-    sub_80830B4(param_1,gDungeon->decoyActive);
+    sub_80830B4(param_1,gDungeon->decoyIsActive);
     sub_80830B4(param_1,gDungeon->unk37FD);
     sub_80830B4(param_1,gDungeon->deoxysDefeat);
     sub_80830B4(param_1,gDungeon->unk37FF);
@@ -391,7 +391,7 @@ void SaveEntity(unkStruct_8094924 *param_1, Entity *param_2)
     puStack_2c = &info->perishSongTurns;
     puStack_28 = &info->unkFE;
     puStack_24 = &info->unkFF;
-    puStack_90 = &info->clientType;
+    puStack_90 = &info->monsterBehavior;
 
     pos = info->prevPos;
     for(counter = 0; counter < NUM_PREV_POS; counter++)
@@ -435,7 +435,7 @@ void SaveEntity(unkStruct_8094924 *param_1, Entity *param_2)
     sub_8083060(param_1,*puStack_2c);
     sub_8083060(param_1,*puStack_28);
     sub_808183C(param_1,*puStack_24);
-    sub_8081854(param_1,info->targetingDecoy);
+    sub_8081854(param_1,info->decoyAITracker);
     SaveSpeedStage(param_1,info->speedStage);
     SaveSpeedCounters(param_1,info->speedUpCounters,NUM_SPEED_COUNTERS);
     SaveSpeedCounters(param_1,info->speedDownCounters,NUM_SPEED_COUNTERS);
@@ -445,7 +445,7 @@ void SaveEntity(unkStruct_8094924 *param_1, Entity *param_2)
     SaveEntityMoves(param_1,&info->moves);
     sub_8081B34(param_1,(s16 *)&info->belly);
     sub_8081B34(param_1,(s16 *)&info->maxBelly);
-    sub_80830B4(param_1,info->aiNextToTarget);
+    sub_80830B4(param_1,info->aiAllySkip);
     sub_80830B4(param_1,info->recalculateFollow);
     sub_80830B4(param_1,info->waiting);
     sub_80830B4(param_1,info->unk146);
@@ -690,7 +690,7 @@ void SaveProtectionStatus(unkStruct_8094924 *param_1, Protection *param_2)
 void SaveWaitingStatus(unkStruct_8094924 *param_1, Waiting *param_2)
 {
     sub_8082FA8(param_1, &param_2->waitingStatus, 1);
-    sub_80830B4(param_1, param_2->enemyDecoy);
+    sub_80830B4(param_1, param_2->decoyApplierNonTeamMemberFlag);
     sub_80830B4(param_1, param_2->unkCA);
     sub_8083060(param_1, param_2->waitingStatusTurns);
     sub_8083060(param_1, param_2->curseDamageCountdown);
@@ -984,7 +984,7 @@ void sub_808217C(unkStruct_8094924 *param_1)
     gDungeon->plusIsActive[1] = sub_80831DC(param_1);
     gDungeon->minusIsActive[0] = sub_80831DC(param_1);
     gDungeon->minusIsActive[1] = sub_80831DC(param_1);
-    gDungeon->decoyActive = sub_80831DC(param_1);
+    gDungeon->decoyIsActive = sub_80831DC(param_1);
     gDungeon->unk37FD = sub_80831DC(param_1);
     gDungeon->deoxysDefeat = sub_80831DC(param_1);
     gDungeon->unk37FF = sub_80831DC(param_1);

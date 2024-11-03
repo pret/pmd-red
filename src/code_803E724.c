@@ -1066,7 +1066,7 @@ void sub_803F580(u8 a0)
 
         if (strPtr->cameraPos.x != strPtr->cameraPosMirror.x || strPtr->cameraPos.y != strPtr->cameraPosMirror.y) {
             for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-                Entity *mon = gDungeon->allPokemon[i];
+                Entity *mon = gDungeon->activeMonsterPtrs[i];
                 if (EntityExists(mon)) {
                     sub_80402AC(mon->pos.x, mon->pos.y);
                 }

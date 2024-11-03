@@ -322,7 +322,7 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
             s32 flashFireStatus = GetFlashFireStatus(target);
             if (flashFireStatus != FLASH_FIRE_STATUS_NONE && targetInfo->unk152 == 0 && arg_10) {
                 targetInfo->unk152 = 1;
-                SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
                 if (flashFireStatus == FLASH_FIRE_STATUS_MAXED) {
                     TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FAE00); // Fire moves won't become stronger!
                 }

@@ -561,7 +561,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         if (!r6) {
             s32 rnd;
 
-            gDungeon->decoyActive = FALSE;
+            gDungeon->decoyIsActive = FALSE;
             rnd = DungeonRandInt(4);
             gDungeon->unk37FD = 0;
             gDungeon->deoxysDefeat = FALSE;
@@ -1022,7 +1022,7 @@ void sub_8043D60(void)
                 unk = FALSE;
             if (IsClientOrTeamBase(monInfo->joinedAt.joinedAt))
                 unk = FALSE;
-            if (monInfo->clientType == CLIENT_TYPE_CLIENT)
+            if (monInfo->monsterBehavior == BEHAVIOR_RESCUE_TARGET)
                 unk = FALSE;
 
             if (unk) {

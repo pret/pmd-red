@@ -13,7 +13,7 @@ struct AIPossibleMove
     s32 weight;
 };
 
-void DecideAttack(Entity *pokemon);
+void ChooseAIMove(Entity *pokemon);
 s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move *move);
 bool8 IsTargetInLineRange(Entity *user, Entity *target, s32 range);
 s32 TryAddTargetToAITargetList(s32 numPotentialTargets, s32 targetingFlags, Entity *user, Entity *target, Move *move, u32 hasStatusChecker);

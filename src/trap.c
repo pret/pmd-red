@@ -280,10 +280,10 @@ void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4)
         sub_8049ED4();
         sub_804225C(pokemon,pos,trapData->id);
         if (gDungeon->unk181e8.blinded) {
-            TryDisplayDungeonLoggableMessage(pokemon,*gUnknown_80FD7F4);
+            LogMessageByIdWithPopupCheckUser(pokemon,*gUnknown_80FD7F4);
         }
         else {
-            TryDisplayDungeonLoggableMessage(pokemon,(gUnknown_80FD7F8)[trapData->id]);
+            LogMessageByIdWithPopupCheckUser(pokemon,(gUnknown_80FD7F8)[trapData->id]);
         }
     }
     if (target != NULL) {
@@ -539,7 +539,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
     flag = FALSE;
     if (target != NULL) {
         if (IsBossFight()) {
-            TryDisplayDungeonLoggableMessage(pokemon,*gUnknown_80FED0C); // But nothing happened...
+            LogMessageByIdWithPopupCheckUser(pokemon,*gUnknown_80FED0C); // But nothing happened...
         }
         else
         {
@@ -559,11 +559,11 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
                     gDungeon->unk2 = 2;
                     return;
                 }
-                TryDisplayDungeonLoggableMessage(pokemon,*gUnknown_80F9728);
+                LogMessageByIdWithPopupCheckUser(pokemon,*gUnknown_80F9728);
             }
             else
             {
-                SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
                 if (info->isNotTeamMember) {
                     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80F970C); // $m0 fell into the pitfall!
                 }
@@ -620,11 +620,11 @@ void HandleSummonTrap(Entity *pokemon,Position *pos)
     sub_80421EC(pos,0x194);
     if (pokemonSummonCount == 0) {
 _ret:
-        TryDisplayDungeonLoggableMessage(pokemon,*gUnknown_80FED04);
+        LogMessageByIdWithPopupCheckUser(pokemon,*gUnknown_80FED04);
     }
     else
     {
-        TryDisplayDungeonLoggableMessage(pokemon,*gUnknown_80FED00);
+        LogMessageByIdWithPopupCheckUser(pokemon,*gUnknown_80FED00);
     }
   }
 }

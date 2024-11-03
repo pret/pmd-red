@@ -410,7 +410,7 @@ _08047462:
 	ldr r0, _080474C4
 	adds r1, r4, 0
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	ldr r0, _080474C8
 	ldr r1, [sp, 0x214]
 	bl sub_8045C08
@@ -463,7 +463,7 @@ _080474E2:
 	ldr r0, _0804750C
 	adds r1, r4, 0
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	ldr r0, _08047510
 	ldr r1, [sp, 0x214]
 	bl sub_8045BF8
@@ -552,7 +552,7 @@ _08047596:
 	ldr r0, _080475C0
 	ldr r1, [r0]
 	mov r0, r9
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _080475A8:
 	movs r3, 0x90
 	lsls r3, 2
@@ -913,7 +913,7 @@ _0804786E:
 	ldr r0, _080478D4
 	adds r1, r5, 0
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	lsls r0, r6, 24
 	cmp r0, 0
 	beq _080478DC

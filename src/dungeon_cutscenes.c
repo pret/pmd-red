@@ -514,8 +514,8 @@ void sub_8086B14(void)
   Entity * skarmoryEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  diglettEntity = GetEntityFromClientType(4);
-  skarmoryEntity = GetEntityFromClientType(3);
+  diglettEntity = GetEntityFromMonsterBehavior(BEHAVIOR_DIGLETT);
+  skarmoryEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SKARMORY);
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_8085374();
   sub_80854D4();
@@ -524,8 +524,8 @@ void sub_8086B14(void)
   sub_8086A3C(skarmoryEntity);
   GetEntInfo(diglettEntity)->unk15C = 1;
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 2);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2],MONSTER_DIGLETT);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[3], MONSTER_SKARMORY);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2],MONSTER_DIGLETT);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_SKARMORY);
 }
 
 void sub_8086B94(void)
@@ -535,8 +535,8 @@ void sub_8086B94(void)
   Entity * skarmoryEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  diglettEntity = GetEntityFromClientType(4);
-  skarmoryEntity = GetEntityFromClientType(3);
+  diglettEntity = GetEntityFromMonsterBehavior(BEHAVIOR_DIGLETT);
+  skarmoryEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SKARMORY);
 
   sub_8068FE0(skarmoryEntity,0x21c,0);
   sub_8068FE0(diglettEntity,0x21c,0);
@@ -566,8 +566,8 @@ void SkarmoryPreFightDialogue(void)
 
   leaderEntity = xxx_call_GetLeader(); // Player
   partnerEntity = GetPartnerEntity(); // Partner
-  diglettEntity = GetEntityFromClientType(4); // Diglett
-  skarmoryEntity = GetEntityFromClientType(3); // Skarmory
+  diglettEntity = GetEntityFromMonsterBehavior(BEHAVIOR_DIGLETT); // Diglett
+  skarmoryEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SKARMORY); // Skarmory
 
   pos1.x = diglettEntity->pixelPos.x;
   pos1.y = diglettEntity->pixelPos.y + 0x3000;
@@ -621,7 +621,7 @@ void SkarmoryReFightDialogue(void)
   Position32 pos;
 
   leaderEntity = xxx_call_GetLeader();
-  skarmoryEntity = GetEntityFromClientType(3);
+  skarmoryEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SKARMORY);
   pos.x = skarmoryEntity->pixelPos.x;
   pos.y = skarmoryEntity->pixelPos.y + 0x2000;
   sub_8086448();
@@ -668,9 +668,9 @@ void sub_8086E9C(void)
   sub_80855E4(sub_8086A3C);
   sub_808563C(sub_8086A3C);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_METAPOD);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[3], MONSTER_GENGAR);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[4], MONSTER_CATERPIE);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_METAPOD);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_GENGAR);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[4], MONSTER_CATERPIE);
 }
 
 void sub_8086F00(void)
@@ -682,9 +682,9 @@ void sub_8086F00(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_METAPOD);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[3], MONSTER_GENGAR);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[4], MONSTER_CATERPIE);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_METAPOD);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_GENGAR);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[4], MONSTER_CATERPIE);
 }
 
 // From @jiangzhengwenjz:
@@ -704,7 +704,7 @@ void sub_8086F54(u8 param_1, u8 param_2)
     for(index = 0; index < 0x10; index++)
     {
       entity = gDungeon->wildPokemon[index];
-      if ((EntityExists(entity)) && (GetEntInfo(entity)->clientType != param_1)) {
+      if ((EntityExists(entity)) && (GetEntInfo(entity)->monsterBehavior != param_1)) {
         return;
       }
     }
@@ -791,9 +791,9 @@ void sub_8087144(void)
     Entity *pEStack_58[3];
     struct_8085B80 auStack_4c[3];
 
-    iVar2 = GetEntityFromClientType(5);
-    iVar3 = GetEntityFromClientType(6);
-    iVar4 = GetEntityFromClientType(7);
+    iVar2 = GetEntityFromMonsterBehavior(BEHAVIOR_5);
+    iVar3 = GetEntityFromMonsterBehavior(BEHAVIOR_6);
+    iVar4 = GetEntityFromMonsterBehavior(BEHAVIOR_MEDICHAM);
     memcpy(auStack_10c,gUnknown_810739C, 0x38);
     memcpy(puStack_60, gUnknown_81073D4, 0x38);
     memcpy(puStack_5c, gUnknown_810740C, 0x38);
@@ -826,7 +826,7 @@ void sub_8087230(void)
     Entity *zapdosEntity;
 
     leaderEntity = xxx_call_GetLeader();
-    zapdosEntity = GetEntityFromClientType(0x8);
+    zapdosEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ZAPDOS);
     DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
     sub_8085374();
     sub_80854D4();
@@ -835,8 +835,8 @@ void sub_8087230(void)
     SetFacingDirection(zapdosEntity, DIRECTION_SOUTH);
     sub_8086A3C(zapdosEntity);
     sub_8085860(leaderEntity->pos.x, leaderEntity->pos.y - 3);
-    CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_SHIFTRY);
-    CopyMonsterNametoBuffer(gFormatBuffer_Monsters[3], MONSTER_ZAPDOS);
+    CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_SHIFTRY);
+    CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_ZAPDOS);
 }
 
 void sub_808729C(void)
@@ -845,7 +845,7 @@ void sub_808729C(void)
   Entity *zapdosEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  zapdosEntity = GetEntityFromClientType(8);
+  zapdosEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ZAPDOS);
   sub_80854D4();
   sub_8085930(4);
   sub_80855E4(sub_8086A3C);
@@ -858,8 +858,8 @@ void sub_808729C(void)
     sub_8086A3C(zapdosEntity);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_SHIFTRY);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[3], MONSTER_ZAPDOS);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_SHIFTRY);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_ZAPDOS);
 }
 
 void sub_8087334(u8 param_1, u8 param_2)
@@ -886,7 +886,7 @@ void ZapdosPreFightDialogue(void)
 
     leaderEntity = xxx_call_GetLeader();
     partnerEntity = GetPartnerEntity();
-    zapdosEntity = GetEntityFromClientType(8);
+    zapdosEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ZAPDOS);
     sub_8086448();
     sub_803E708(10,0x46);
     SpriteLookAroundEffect(partnerEntity);
@@ -959,7 +959,7 @@ void ZapdosReFightDialogue(void)
   Entity *zapdosEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  zapdosEntity = GetEntityFromClientType(8);
+  zapdosEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ZAPDOS);
   sub_8086448();
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(&gZapdosReFightDialogue_1);
@@ -984,7 +984,7 @@ void ZapdosPostStoryPreFightDialogue(void)
   Entity * zapdosEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  zapdosEntity = GetEntityFromClientType(8);
+  zapdosEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ZAPDOS);
   sub_8086448();
   if (sub_8086AE4(MONSTER_ZAPDOS)) {
     sub_80866C4(&gZapdosPostStoryPreFightDialogue_6);
@@ -1057,7 +1057,7 @@ void sub_80877E8(void)
   Entity * moltresEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  moltresEntity = GetEntityFromClientType(9);
+  moltresEntity = GetEntityFromMonsterBehavior(BEHAVIOR_MOLTRES);
   DungeonStartNewBGM(MUS_THE_MOUNTAIN_OF_FIRE);
   sub_8085374();
   sub_80854D4();
@@ -1066,7 +1066,7 @@ void sub_80877E8(void)
   SetFacingDirection(moltresEntity, DIRECTION_SOUTH);
   sub_8086A3C(moltresEntity);
   sub_8085860(leaderEntity->pos.x + -3,leaderEntity->pos.y + -2);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_MOLTRES);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_MOLTRES);
 }
 
 void sub_8087848(void)
@@ -1078,7 +1078,7 @@ void sub_8087848(void)
   s32 YPos;
 
   leaderEntity = xxx_call_GetLeader();
-  moltresEntity = GetEntityFromClientType(9);
+  moltresEntity = GetEntityFromMonsterBehavior(BEHAVIOR_MOLTRES);
   DungeonStartNewBGM(MUS_THE_MOUNTAIN_OF_FIRE);
   sub_80854D4();
   sub_8085930(DIRECTION_WEST);
@@ -1095,7 +1095,7 @@ void sub_8087848(void)
   XPos = GetCameraXPos();
   YPos = GetCameraYPos();
   sub_803F878(XPos, YPos + -0x1000);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2],MONSTER_MOLTRES);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2],MONSTER_MOLTRES);
 }
 
 void sub_80878F4(u8 param_1, u8 param_2)
@@ -1114,7 +1114,7 @@ void MoltresPreFightDialogue(void)
 
   leaderEntity = xxx_call_GetLeader();
   partnerEntity = GetPartnerEntity();
-  moltresEntity = GetEntityFromClientType(9);
+  moltresEntity = GetEntityFromMonsterBehavior(BEHAVIOR_MOLTRES);
   MoltresScreenFlash1(0xc,5);
   sub_8086500();
   sub_803E708(10,0x46);
@@ -1184,7 +1184,7 @@ void MoltresReFightDialogue(void)
 
   leaderEntity = xxx_call_GetLeader();
   partnerEntity = GetPartnerEntity();
-  moltresEntity = GetEntityFromClientType(9);
+  moltresEntity = GetEntityFromMonsterBehavior(BEHAVIOR_MOLTRES);
   MoltresScreenFlash1(10,5);
   sub_8086500();
   sub_803E708(10,0x46);
@@ -1224,7 +1224,7 @@ void MoltresPostStoryPreFightDialogue(void)
   Entity * moltresEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  moltresEntity = GetEntityFromClientType(9);
+  moltresEntity = GetEntityFromMonsterBehavior(BEHAVIOR_MOLTRES);
   MoltresScreenFlash1(0xc,5);
   sub_808654C();
   if (sub_8086AE4(MONSTER_MOLTRES)) {
@@ -1466,7 +1466,7 @@ void sub_8087F54(void)
   Entity *articunoEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  articunoEntity = GetEntityFromClientType(0xd);
+  articunoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ARTICUNO);
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_8085374();
   sub_80854D4();
@@ -1475,21 +1475,21 @@ void sub_8087F54(void)
   SetFacingDirection(articunoEntity, DIRECTION_SOUTH);
   sub_8086A3C(articunoEntity);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y + -3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_ARTICUNO);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_ARTICUNO);
 }
 
 void sub_8087FB4(void)
 {
   Entity  *articunoEntity;
 
-  articunoEntity = GetEntityFromClientType(0xd);
+  articunoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ARTICUNO);
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_8085374();
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   SetFacingDirection(articunoEntity, DIRECTION_SOUTH);
   sub_806CDD4(articunoEntity, 0xF, DIRECTION_SOUTH);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_ARTICUNO);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_ARTICUNO);
 }
 
 void sub_8087FF8(void)
@@ -1498,7 +1498,7 @@ void sub_8087FF8(void)
   Entity *articunoEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  articunoEntity = GetEntityFromClientType(0xd);
+  articunoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ARTICUNO);
   sub_8085374();
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
@@ -1512,7 +1512,7 @@ void sub_8087FF8(void)
     sub_8086A3C(articunoEntity);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y + -3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_ARTICUNO);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_ARTICUNO);
 }
 
 void sub_8088088(u8 param_1, u8 param_2)
@@ -1531,7 +1531,7 @@ void ArticunoPreFightDialogue(void)
 
   leaderEntity = xxx_call_GetLeader();
   partnerEntity = GetPartnerEntity();
-  articunoEntity = GetEntityFromClientType(0xd);
+  articunoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ARTICUNO);
   sub_8086448();
   SpriteLookAroundEffect(partnerEntity);
   DisplayDungeonDialogue(&gArticunoPreFightDialogue_1);
@@ -1607,7 +1607,7 @@ void ArticunoReFightDialogue(void)
   Entity *articunoEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  articunoEntity = GetEntityFromClientType(0xd);
+  articunoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ARTICUNO);
   gDungeon->weather.unkE265 = WEATHER_SNOW;
   sub_807EAA0(0,1);
   sub_803E708(10,0x46);
@@ -1629,7 +1629,7 @@ void ArticunoPostStoryPreFightDialogue(void)
   Entity *articunoEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  articunoEntity = GetEntityFromClientType(0xd);
+  articunoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ARTICUNO);
   sub_8086448();
   if (sub_8086AE4(MONSTER_ARTICUNO)) {
     sub_80866C4(&gUnknown_8102A9C);
@@ -1755,8 +1755,8 @@ void sub_808862C(void)
   Entity * groudonEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  alakazamEntity = GetEntityFromClientType(10);
-  groudonEntity = GetEntityFromClientType(0xe);
+  alakazamEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ALAKAZAM_1);
+  groudonEntity = GetEntityFromMonsterBehavior(BEHAVIOR_GROUDON_2);
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_80867F4();
   sub_8085374();
@@ -1768,8 +1768,8 @@ void sub_808862C(void)
   SetFacingDirection(groudonEntity, DIRECTION_SOUTH);
   sub_8086A3C(groudonEntity);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y -3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_GROUDON);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[3], MONSTER_ALAKAZAM);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_GROUDON);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_ALAKAZAM);
 }
 
 void sub_80886C4(void)
@@ -1782,8 +1782,8 @@ void sub_80886C4(void)
   s32 YPos;
 
   leaderEntity = xxx_call_GetLeader();
-  alakazamEntity = GetEntityFromClientType(10);
-  groudonEntity = GetEntityFromClientType(0xe);
+  alakazamEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ALAKAZAM_1);
+  groudonEntity = GetEntityFromMonsterBehavior(BEHAVIOR_GROUDON_2);
   PlaySoundEffect(0x3e5);
   sub_80867F4();
   sub_8085374();
@@ -1796,8 +1796,8 @@ void sub_80886C4(void)
   XPos = GetCameraXPos();
   YPos = GetCameraYPos();
   sub_803F878(XPos,YPos + -0x1000);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_GROUDON);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[3], MONSTER_ALAKAZAM);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_GROUDON);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_ALAKAZAM);
 }
 
 void sub_808875C(void)
@@ -1807,8 +1807,8 @@ void sub_808875C(void)
   Entity * groudonEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  alakazamEntity = GetEntityFromClientType(10);
-  groudonEntity = GetEntityFromClientType(0xe);
+  alakazamEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ALAKAZAM_1);
+  groudonEntity = GetEntityFromMonsterBehavior(BEHAVIOR_GROUDON_2);
   sub_80867F4();
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
@@ -1823,8 +1823,8 @@ void sub_808875C(void)
     sub_80861D4(groudonEntity,0xf,DIRECTION_SOUTH);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_GROUDON);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[3], MONSTER_ALAKAZAM);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_GROUDON);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_ALAKAZAM);
 }
 
 void sub_8088818(u8 param_1, u8 param_2)
@@ -1849,8 +1849,8 @@ void GroudonPreFightDialogue(void)
 
   leaderEntity = xxx_call_GetLeader();
   partnerEntity = GetPartnerEntity();
-  alakazamEntity = GetEntityFromClientType(10);
-  groudonEntity = GetEntityFromClientType(0xe);
+  alakazamEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ALAKAZAM_1);
+  groudonEntity = GetEntityFromMonsterBehavior(BEHAVIOR_GROUDON_2);
   sub_8086448();
   DisplayDungeonDialogue(&GroudonPreFightDialogue_1);
   sub_803E708(10,0x46);
@@ -1928,7 +1928,7 @@ void GroudonReFightDialogue(void)
   Entity * groudonEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  groudonEntity = GetEntityFromClientType(0xe);
+  groudonEntity = GetEntityFromMonsterBehavior(BEHAVIOR_GROUDON_2);
   sub_8086838(1,1,1);
   sub_808680C();
   sub_803E708(0x3c,0x46);
@@ -1960,7 +1960,7 @@ void GroudonPostStoryPreFightDialogue(void)
   Entity * groudonEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  groudonEntity = GetEntityFromClientType(0xe);
+  groudonEntity = GetEntityFromMonsterBehavior(BEHAVIOR_GROUDON_2);
   sub_8086448();
   if (sub_8086AE4(MONSTER_GROUDON)) {
       sub_80866C4(&gUnknown_8103488);
@@ -2072,8 +2072,8 @@ void sub_8088DC0(void)
   Entity * alakazamEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  groudonEntity = GetEntityFromClientType(0xb);
-  alakazamEntity = GetEntityFromClientType(0xc);
+  groudonEntity = GetEntityFromMonsterBehavior(BEHAVIOR_GROUDON_1);
+  alakazamEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ALAKAZAM_2);
   sub_80867F4();
   sub_8086838(0,1,0);
   sub_8085374();
@@ -2085,8 +2085,8 @@ void sub_8088DC0(void)
   sub_8086A3C(alakazamEntity);
   sub_806CDD4(alakazamEntity,0xe,DIRECTION_SOUTH);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_GROUDON);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[3], MONSTER_ALAKAZAM);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_GROUDON);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_ALAKAZAM);
 }
 
 void sub_8088E5C(void)
@@ -2096,8 +2096,8 @@ void sub_8088E5C(void)
   Entity * alakazamEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  groudonEntity = GetEntityFromClientType(0xb);
-  alakazamEntity = GetEntityFromClientType(0xc);
+  groudonEntity = GetEntityFromMonsterBehavior(BEHAVIOR_GROUDON_1);
+  alakazamEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ALAKAZAM_2);
   sub_80867F4();
   sub_8086838(0,1,0);
   sub_80854D4();
@@ -2106,8 +2106,8 @@ void sub_8088E5C(void)
   sub_8068FE0(groudonEntity,0x21c,0);
   sub_8068FE0(alakazamEntity,0x21c,0);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y + -3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_GROUDON);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[3], MONSTER_ALAKAZAM);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_GROUDON);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_ALAKAZAM);
 }
 
 void sub_8088EE8(void)
@@ -2127,8 +2127,8 @@ void MagmaCavernMidDialogue(void)
 
   leaderEntity = xxx_call_GetLeader();
   partnerEntity = GetPartnerEntity();
-  groudonEntity = GetEntityFromClientType(0xb);
-  alakazamEntity = GetEntityFromClientType(0xc);
+  groudonEntity = GetEntityFromMonsterBehavior(BEHAVIOR_GROUDON_1);
+  alakazamEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ALAKAZAM_2);
   sub_8052D44(IDStack,leaderEntity,partnerEntity);
   sub_8086448();
   SpriteLookAroundEffect(partnerEntity);
@@ -2342,7 +2342,7 @@ void sub_80892C8(void)
   Entity * RayquazaEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  RayquazaEntity = GetEntityFromClientType(0xf);
+  RayquazaEntity = GetEntityFromMonsterBehavior(BEHAVIOR_RAYQUAZA);
   DungeonStartNewBGM(MUS_RAYQUAZAS_DOMAIN);
   sub_8085374();
   sub_80854D4();
@@ -2351,7 +2351,7 @@ void sub_80892C8(void)
   SetFacingDirection(RayquazaEntity, DIRECTION_SOUTH);
   sub_8086A3C(RayquazaEntity);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2],MONSTER_RAYQUAZA);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2],MONSTER_RAYQUAZA);
 }
 
 void sub_8089328(void)
@@ -2360,7 +2360,7 @@ void sub_8089328(void)
   Entity * rayquazaEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  rayquazaEntity = GetEntityFromClientType(0xf);
+  rayquazaEntity = GetEntityFromMonsterBehavior(BEHAVIOR_RAYQUAZA);
   DungeonStartNewBGM(MUS_RAYQUAZAS_DOMAIN);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
@@ -2373,7 +2373,7 @@ void sub_8089328(void)
     sub_8086A3C(rayquazaEntity);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2],MONSTER_RAYQUAZA);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2],MONSTER_RAYQUAZA);
 }
 
 void sub_80893B4(u8 param_1, u8 param_2)
@@ -2392,7 +2392,7 @@ void RayquazaPreFightDialogue(void)
 
   leaderEntity = xxx_call_GetLeader();
   partnerEntity = GetPartnerEntity();
-  rayquazaEntity = GetEntityFromClientType(0xf);
+  rayquazaEntity = GetEntityFromMonsterBehavior(BEHAVIOR_RAYQUAZA);
   sub_8086448();
   DisplayDungeonDialogue(&gRayquazaPreFightDialogue_1);
   RayquazaScreenFlash();
@@ -2431,7 +2431,7 @@ void RayquazaReFightDialogue(void)
   Entity *rayquazaEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  rayquazaEntity = GetEntityFromClientType(0xf);
+  rayquazaEntity = GetEntityFromMonsterBehavior(BEHAVIOR_RAYQUAZA);
   sub_8086448();
   RayquazaScreenFlash();
   PlaySoundEffect(0x1da); // Rayquaza Cry
@@ -2455,7 +2455,7 @@ void RayquazaPostStoryPreFightDialogue(void)
   Entity *rayquazaEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  rayquazaEntity = GetEntityFromClientType(0xf);
+  rayquazaEntity = GetEntityFromMonsterBehavior(BEHAVIOR_RAYQUAZA);
   sub_8086448();
   if (sub_8086AE4(MONSTER_RAYQUAZA)) {
     sub_80866C4(&gRayquazaPostStoryPreFightDialogue_6);
@@ -2562,7 +2562,7 @@ void sub_8089788(Entity *entity, u8 param_2, u8 param_3)
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
       monEntity = gDungeon->wildPokemon[index];
-      if ((EntityExists(monEntity)) && (monEntity != entity) && (GetEntInfo(monEntity)->clientType == param_2)) {
+      if ((EntityExists(monEntity)) && (monEntity != entity) && (GetEntInfo(monEntity)->monsterBehavior == param_2)) {
         return;
       }
     }
@@ -2651,7 +2651,7 @@ void sub_8089914(void)
   Entity *MewtwoEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  MewtwoEntity = GetEntityFromClientType(0x11);
+  MewtwoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_MEWTWO);
   DungeonStopBGM();
   gDungeon->unk7 = 1;
   sub_80854D4();
@@ -2660,7 +2660,7 @@ void sub_8089914(void)
   SetFacingDirection(MewtwoEntity, DIRECTION_SOUTH);
   sub_8086A3C(MewtwoEntity);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2],MONSTER_MEWTWO);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2],MONSTER_MEWTWO);
 }
 
 void sub_8089978(void)
@@ -2669,7 +2669,7 @@ void sub_8089978(void)
   Entity *MewtwoEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  MewtwoEntity = GetEntityFromClientType(0x11);
+  MewtwoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_MEWTWO);
   DungeonStopBGM();
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
@@ -2684,7 +2684,7 @@ void sub_8089978(void)
     sub_8086A3C(MewtwoEntity);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2],MONSTER_MEWTWO);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2],MONSTER_MEWTWO);
 }
 
 void sub_8089A00(u8 param_1, u8 param_2)
@@ -2701,7 +2701,7 @@ void MewtwoPreFightDialogue(void)
   Entity *MewtwoEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  MewtwoEntity = GetEntityFromClientType(0x11);
+  MewtwoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_MEWTWO);
   sub_8086448();
   DisplayDungeonDialogue(&gMewtwoPreFightDialogue_1);
   sub_803E708(10,0x46);
@@ -2728,7 +2728,7 @@ void MewtwoReFightDialogue(void)
   Entity *MewtwoEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  MewtwoEntity = GetEntityFromClientType(0x11);
+  MewtwoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_MEWTWO);
   sub_8086448();
   if(HasRecruitedMon(MONSTER_MEWTWO)) {
     sub_80866C4(&gMewtwoReFightDialogue_5);
@@ -2803,13 +2803,13 @@ void sub_8089C44(void)
   Entity * EnteiEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  EnteiEntity = GetEntityFromClientType(0x12);
+  EnteiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ENTEI);
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   SetFacingDirection(EnteiEntity, DIRECTION_SOUTH);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_ENTEI);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_ENTEI);
 }
 
 
@@ -2819,7 +2819,7 @@ void sub_8089C90(void)
   Entity * EnteiEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  EnteiEntity = GetEntityFromClientType(0x12);
+  EnteiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ENTEI);
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
@@ -2830,7 +2830,7 @@ void sub_8089C90(void)
       SetFacingDirection(EnteiEntity, DIRECTION_SOUTH);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_ENTEI);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_ENTEI);
 }
 
 void sub_8089CFC(u8 param_1, u8 param_2)
@@ -2847,7 +2847,7 @@ void EnteiPreFightDialogue(void)
   Entity * EnteiEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  EnteiEntity = GetEntityFromClientType(0x12);
+  EnteiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ENTEI);
   EnteiScreenFlash();
   DisplayDungeonDialogue(&gEnteiPreFightDialogue_1);
   EnteiScreenFlash();
@@ -2865,7 +2865,7 @@ void EnteiReFightDialogue(void)
   Entity * EnteiEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  EnteiEntity = GetEntityFromClientType(0x12);
+  EnteiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ENTEI);
   EnteiScreenFlash();
   DisplayDungeonDialogue(&gEnteiReFightDialogue_1);
   EnteiScreenFlash();
@@ -2883,7 +2883,7 @@ void EnteiPostStoryPreFightDialogue(void)
   Entity * EnteiEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  EnteiEntity = GetEntityFromClientType(0x12);
+  EnteiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ENTEI);
   if (HasRecruitedMon(MONSTER_ENTEI)) {
     sub_80866C4(&gEnteiPostStoryPreFightDialogue_4);
   }
@@ -2932,13 +2932,13 @@ void sub_8089EFC(void)
   Entity * RaikouEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  RaikouEntity = GetEntityFromClientType(0x13);
+  RaikouEntity = GetEntityFromMonsterBehavior(BEHAVIOR_RAIKOU);
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   SetFacingDirection(RaikouEntity, DIRECTION_SOUTH);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_RAIKOU);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_RAIKOU);
 }
 
 
@@ -2948,13 +2948,13 @@ void sub_8089F44(void)
   Entity * RaikouEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  RaikouEntity = GetEntityFromClientType(0x13);
+  RaikouEntity = GetEntityFromMonsterBehavior(BEHAVIOR_RAIKOU);
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   SetFacingDirection(RaikouEntity, DIRECTION_SOUTH);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_RAIKOU);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_RAIKOU);
 }
 
 
@@ -2964,7 +2964,7 @@ void sub_8089F8C(void)
   Entity * RaikouEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  RaikouEntity = GetEntityFromClientType(0x13);
+  RaikouEntity = GetEntityFromMonsterBehavior(BEHAVIOR_RAIKOU);
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
@@ -2975,7 +2975,7 @@ void sub_8089F8C(void)
       SetFacingDirection(RaikouEntity, DIRECTION_SOUTH);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_RAIKOU);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_RAIKOU);
 }
 
 void sub_8089FF0(u8 param_1, u8 param_2)
@@ -2992,7 +2992,7 @@ void RaikouPreFightDialogue(void)
   Entity * RaikouEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  RaikouEntity = GetEntityFromClientType(0x13);
+  RaikouEntity = GetEntityFromMonsterBehavior(BEHAVIOR_RAIKOU);
   DisplayDungeonDialogue(&gRaikouPreFightDialogue_1);
   RaikouScreenFlash();
   DisplayDungeonDialogue(&gRaikouPreFightDialogue_2);
@@ -3017,7 +3017,7 @@ void RaikouReFightDialogue(void)
   Entity * RaikouEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  RaikouEntity = GetEntityFromClientType(0x13);
+  RaikouEntity = GetEntityFromMonsterBehavior(BEHAVIOR_RAIKOU);
   gDungeon->weather.unkE265 = WEATHER_RAIN;
   sub_807EAA0(0,1);
   RaikouScreenFlash();
@@ -3037,7 +3037,7 @@ void RaikouPostStoryPreFightDialogue(void)
   Entity * RaikouEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  RaikouEntity = GetEntityFromClientType(0x13);
+  RaikouEntity = GetEntityFromMonsterBehavior(BEHAVIOR_RAIKOU);
   if (HasRecruitedMon(MONSTER_RAIKOU)) {
     sub_80866C4(&gRaikouPostStoryPreFightDialogue_4);
   }
@@ -3087,7 +3087,7 @@ void sub_808A264(void)
   Entity * SuicuneEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  SuicuneEntity = GetEntityFromClientType(0x14);
+  SuicuneEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SUICUNE);
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
@@ -3095,7 +3095,7 @@ void sub_808A264(void)
   SetFacingDirection(SuicuneEntity, DIRECTION_SOUTH);
   sub_8086A3C(SuicuneEntity);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_SUICUNE);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_SUICUNE);
 }
 
 void sub_808A2C0(void)
@@ -3104,13 +3104,13 @@ void sub_808A2C0(void)
   Entity * SuicuneEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  SuicuneEntity = GetEntityFromClientType(0x14);
+  SuicuneEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SUICUNE);
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   SetFacingDirection(SuicuneEntity, DIRECTION_SOUTH);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_SUICUNE);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_SUICUNE);
 }
 
 void sub_808A308(void)
@@ -3119,7 +3119,7 @@ void sub_808A308(void)
   Entity * SuicuneEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  SuicuneEntity = GetEntityFromClientType(0x14);
+  SuicuneEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SUICUNE);
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
@@ -3130,7 +3130,7 @@ void sub_808A308(void)
      SetFacingDirection(SuicuneEntity, DIRECTION_SOUTH);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_SUICUNE);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_SUICUNE);
 }
 
 void sub_808A36C(u8 param_1, u8 param_2)
@@ -3147,7 +3147,7 @@ void SuicunePreFightDialogue(void)
   Entity * SuicuneEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  SuicuneEntity = GetEntityFromClientType(0x14);
+  SuicuneEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SUICUNE);
   sub_8086448();
   DisplayDungeonDialogue(&gSuicunePreFightDialogue_1);
   sub_803E708(10,70);
@@ -3175,7 +3175,7 @@ void SuicuneReFightDialogue(void)
   Entity * SuicuneEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  SuicuneEntity = GetEntityFromClientType(0x14);
+  SuicuneEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SUICUNE);
   DisplayDungeonDialogue(&gSuicuneReFightDialogue_1);
   SuicuneScreenFlash();
   DisplayDungeonDialogue(&gSuicuneReFightDialogue_2);
@@ -3192,7 +3192,7 @@ void SuicunePostStoryPreFightDialogue(void)
   Entity * SuicuneEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  SuicuneEntity = GetEntityFromClientType(0x14);
+  SuicuneEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SUICUNE);
   if (HasRecruitedMon(MONSTER_SUICUNE)) {
     sub_80866C4(&gSuicunePostStoryPreFightDialogue_4);
   }
@@ -3262,7 +3262,7 @@ void sub_808A608(void)
   Entity * HoOhEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  HoOhEntity = GetEntityFromClientType(0x15);
+  HoOhEntity = GetEntityFromMonsterBehavior(BEHAVIOR_HO_OH);
   DungeonStartNewBGM(MUS_FRIEND_AREA_RAINBOW_PEAK);
   sub_80867F4();
   sub_8086838(0,0,0);
@@ -3271,7 +3271,7 @@ void sub_808A608(void)
   SetFacingDirection(HoOhEntity, DIRECTION_SOUTH);
   sub_8086A3C(HoOhEntity);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y + -6);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_HO_OH);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_HO_OH);
 }
 
 void sub_808A668(void)
@@ -3280,7 +3280,7 @@ void sub_808A668(void)
   Entity * HoOhEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  HoOhEntity = GetEntityFromClientType(0x15);
+  HoOhEntity = GetEntityFromMonsterBehavior(BEHAVIOR_HO_OH);
   DungeonStartNewBGM(MUS_FRIEND_AREA_RAINBOW_PEAK);
   sub_80867F4();
   sub_8086838(0,0,0);
@@ -3294,7 +3294,7 @@ void sub_808A668(void)
     sub_8086A3C(HoOhEntity);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 6);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_HO_OH);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_HO_OH);
 }
 
 void sub_808A6E8(u8 param_1, u8 param_2)
@@ -3317,7 +3317,7 @@ void HoOhPreFightDialogue(void)
   Position32 local_14;
 
   leaderEntity = xxx_call_GetLeader();
-  HoOhEntity = GetEntityFromClientType(0x15);
+  HoOhEntity = GetEntityFromMonsterBehavior(BEHAVIOR_HO_OH);
   local_14.x = leaderEntity->pixelPos.x;
   local_14.y = leaderEntity->pixelPos.y + -0x1000;
   ShiftCameraToPosition(&local_14,0x88);
@@ -3356,7 +3356,7 @@ void HoOhReFightDialogue(void)
   Position32 local_14;
 
   leaderEntity = xxx_call_GetLeader();
-  HoOhEntity = GetEntityFromClientType(0x15);
+  HoOhEntity = GetEntityFromMonsterBehavior(BEHAVIOR_HO_OH);
 
   local_14.x = leaderEntity->pixelPos.x;
   local_14.y = leaderEntity->pixelPos.y + -0x1000;
@@ -3440,14 +3440,14 @@ void sub_808A9E4(void)
   Entity * LatiosEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  LatiosEntity = GetEntityFromClientType(0x16);
+  LatiosEntity = GetEntityFromMonsterBehavior(BEHAVIOR_LATIOS);
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   SetFacingDirection(LatiosEntity, DIRECTION_NORTH);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 4);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_LATIOS);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_LATIOS);
 }
 
 void sub_808AA3C(void)
@@ -3456,14 +3456,14 @@ void sub_808AA3C(void)
   Entity * LatiosEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  LatiosEntity = GetEntityFromClientType(0x16);
+  LatiosEntity = GetEntityFromMonsterBehavior(BEHAVIOR_LATIOS);
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   SetFacingDirection(LatiosEntity, DIRECTION_NORTH);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_LATIOS);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_LATIOS);
 }
 
 void sub_808AA94(void)
@@ -3472,14 +3472,14 @@ void sub_808AA94(void)
   Entity * LatiosEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  LatiosEntity = GetEntityFromClientType(0x16);
+  LatiosEntity = GetEntityFromMonsterBehavior(BEHAVIOR_LATIOS);
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   sub_8068FE0(LatiosEntity,0x21c,0);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_LATIOS);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_LATIOS);
 }
 
 void sub_808AAF0(u8 param_1, u8 param_2)
@@ -3498,7 +3498,7 @@ void LatiosPreFightDialogue(void)
   Position local_19;
 
   leaderEntity = xxx_call_GetLeader();
-  LatiosEntity = GetEntityFromClientType(0x16);
+  LatiosEntity = GetEntityFromMonsterBehavior(BEHAVIOR_LATIOS);
 
   local_18.x = LatiosEntity->pixelPos.x;
   local_18.y = LatiosEntity->pixelPos.y + (0x80 << 6);
@@ -3529,7 +3529,7 @@ void LatiosReFightDialogue(void)
   Entity * LatiosEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  LatiosEntity = GetEntityFromClientType(0x16);
+  LatiosEntity = GetEntityFromMonsterBehavior(BEHAVIOR_LATIOS);
   sub_8086448();
   sub_808692C();
   DisplayDungeonDialogue(&gLatiosReFightDialogue_1);
@@ -3575,7 +3575,7 @@ void sub_808ACC0(void)
   Entity * entity;
 
   if (HasRecruitedMon(MONSTER_REGIROCK)) {
-    entity = GetEntityFromClientType(0x17);
+    entity = GetEntityFromMonsterBehavior(BEHAVIOR_REGIROCK);
     sub_8068FE0(entity,0x21c,0);
     sub_8097FA8(0x22);
     sub_8097FA8(0x1d);
@@ -3593,7 +3593,7 @@ void sub_808ACC0(void)
         sub_8098044(0x22);
         sub_8098044(0x1d);
         sub_80855E4(SetupRegiFacingDirection);
-        CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_REGIROCK);
+        CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_REGIROCK);
   }
 }
 
@@ -3602,7 +3602,7 @@ void sub_808AD48(void)
   Entity * entity;
 
   if (HasRecruitedMon(MONSTER_REGICE)) {
-    entity = GetEntityFromClientType(0x18);
+    entity = GetEntityFromMonsterBehavior(BEHAVIOR_REGICE);
     sub_8068FE0(entity,0x21c,0);
     sub_8097FA8(0x22);
     sub_8097FA8(0x1d);
@@ -3620,7 +3620,7 @@ void sub_808AD48(void)
         sub_8098044(0x22);
         sub_8098044(0x1d);
         sub_80855E4(SetupRegiFacingDirection);
-        CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_REGICE);
+        CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_REGICE);
   }
 }
 
@@ -3630,7 +3630,7 @@ void sub_808ADCC(void)
   Entity * entity;
 
   if (HasRecruitedMon(MONSTER_REGISTEEL)) {
-    entity = GetEntityFromClientType(0x19);
+    entity = GetEntityFromMonsterBehavior(BEHAVIOR_REGISTEEL);
     sub_8068FE0(entity,0x21c,0);
     sub_8097FA8(0x22);
     sub_8097FA8(0x1d);
@@ -3648,7 +3648,7 @@ void sub_808ADCC(void)
         sub_8098044(0x22);
         sub_8098044(0x1d);
         sub_80855E4(SetupRegiFacingDirection);
-        CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_REGISTEEL);
+        CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_REGISTEEL);
   }
 }
 
@@ -3728,7 +3728,7 @@ void sub_808AFB0(u8 param_1)
   sub_8052D44(IDStack,leaderEntity,0);
   if (!sub_8098100(0x22) && (param_1 == 0x2E) && (!sub_8098100(0x1d)) && (sub_80860A8(ITEM_ROCK_PART) != 0)) {
     sub_8097FD0(0x1d);
-    SetMessageArgument(gFormatBuffer_Monsters[0],GetLeader(),0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],GetLeader(),0);
     // {POKEMON_0} obtained the Rock Part that Regirock was guarding
     DisplayDungeonDialogue(&gRegirockPostFightDialogue_2);
     sub_80421C0(0,0xd4);
@@ -3746,7 +3746,7 @@ void sub_808B030(u8 param_1)
   sub_8052D44(IDStack,leaderEntity,0);
   if (!sub_8098100(0x22) && (param_1 == 0x2F) && (!sub_8098100(0x1d)) && (sub_80860A8(ITEM_ICE_PART) != 0)) {
     sub_8097FD0(0x1d);
-    SetMessageArgument(gFormatBuffer_Monsters[0],GetLeader(),0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],GetLeader(),0);
     // {POKEMON_0} obtained the Ice Part that Regice was guarding
     DisplayDungeonDialogue(&gRegicePostFightDialogue_2);
     sub_80421C0(0,0xd4);
@@ -3764,7 +3764,7 @@ void sub_808B0B0(u8 param_1)
   sub_8052D44(IDStack,leaderEntity,0);
   if (!sub_8098100(0x22) && (param_1 == 0x30) && (!sub_8098100(0x1d)) && (sub_80860A8(ITEM_STEEL_PART) != 0)) {
     sub_8097FD0(0x1d);
-    SetMessageArgument(gFormatBuffer_Monsters[0], GetLeader(), 0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], GetLeader(), 0);
     // {POKEMON_0} obtained the Steel Part that Registeel was guarding
     DisplayDungeonDialogue(&gRegisteelPostFightDialogue_2);
     sub_80421C0(0,0xd4);
@@ -3870,7 +3870,7 @@ void sub_808B2F4(void)
   Entity * jirachiEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  jirachiEntity = GetEntityFromClientType(0x1a);
+  jirachiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_JIRACHI);
   DungeonStartNewBGM(MUS_FRIEND_AREA_FOREST);
   CreateJirachiWishWarpTile();
   sub_8049ED4();
@@ -3880,7 +3880,7 @@ void sub_808B2F4(void)
   SetFacingDirection(jirachiEntity, DIRECTION_SOUTH);
   sub_8086A3C(jirachiEntity);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_JIRACHI);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_JIRACHI);
 }
 
 void sub_808B35C(void)
@@ -3889,7 +3889,7 @@ void sub_808B35C(void)
   Entity * jirachiEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  jirachiEntity = GetEntityFromClientType(0x1a);
+  jirachiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_JIRACHI);
   DungeonStartNewBGM(MUS_FRIEND_AREA_FOREST);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
@@ -3905,7 +3905,7 @@ void sub_808B35C(void)
 
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_JIRACHI);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_JIRACHI);
 }
 
 void sub_808B3E4(u8 param_1, u8 param_2, u8 param_3)
@@ -3939,7 +3939,7 @@ void JirachiPreFightDialogue(void)
   Entity * jirachiEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  jirachiEntity = GetEntityFromClientType(0x1a);
+  jirachiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_JIRACHI);
   sub_8086448();
   sub_803E708(0x40,70);
   DisplayDungeonDialogue(&gJirachiPreFightDialogue_1);
@@ -3964,8 +3964,8 @@ void sub_808B50C(void)
 {
   Entity * jirachiEntity;
 
-  jirachiEntity = GetEntityFromClientType(0x1a);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_JIRACHI);
+  jirachiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_JIRACHI);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_JIRACHI);
   sub_80855E4(sub_808BBA8);
   sub_808BBA8(jirachiEntity);
   sub_8041888(0);
@@ -4005,8 +4005,8 @@ void JirachiWish(void)
   Position pos2;
   Position pos3;
 
-  jirachiEntity = GetEntityFromClientType(0x1a);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_JIRACHI);
+  jirachiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_JIRACHI);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_JIRACHI);
   sub_80855E4(sub_808BBA8);
   sub_808BBA8(jirachiEntity);
   sub_8041888(0);
@@ -4117,7 +4117,7 @@ void JirachiWish(void)
           UnlockFriendArea(friendArea);
           PlaySoundEffect(0xd4);
           leaderEntity = GetLeader();
-          SetMessageArgument(gFormatBuffer_Monsters[0],leaderEntity,0);
+          SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leaderEntity,0);
           WriteFriendAreaName(gFormatBuffer_Items[0],friendArea,FALSE);
           // Obtained the friend area!
           DisplayDungeonDialogue(&gUnknown_8105B68);
@@ -4370,7 +4370,7 @@ void sub_808BDEC(void)
   Entity * lugiaEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  lugiaEntity = GetEntityFromClientType(0x1b);
+  lugiaEntity = GetEntityFromMonsterBehavior(BEHAVIOR_LUGIA);
   DungeonStopBGM();
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
@@ -4384,7 +4384,7 @@ void sub_808BDEC(void)
     SetFacingDirection(lugiaEntity, DIRECTION_SOUTH);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_LUGIA);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_LUGIA);
 }
 
 void sub_808BE70(u8 param_1,u8 param_2,u8 param_3)
@@ -4401,7 +4401,7 @@ void LugiaPreFightDialogue(void)
   Entity * lugiaEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  lugiaEntity = GetEntityFromClientType(0x1b);
+  lugiaEntity = GetEntityFromMonsterBehavior(BEHAVIOR_LUGIA);
   if (HasRecruitedMon(MONSTER_LUGIA)) {
     sub_8086448();
     sub_80866C4(&gLugiaPreFightDialogue_8);
@@ -4510,7 +4510,7 @@ void sub_808C10C(void)
   s32 YPos;
 
   leaderEntity = xxx_call_GetLeader();
-  kyogreEntity = GetEntityFromClientType(0x1c);
+  kyogreEntity = GetEntityFromMonsterBehavior(BEHAVIOR_KYOGRE);
   DungeonStopBGM();
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
@@ -4525,8 +4525,8 @@ void sub_808C10C(void)
   XPos = GetCameraXPos();
   YPos = GetCameraYPos();
   sub_803F878(XPos,YPos + -0x1000);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2],MONSTER_KYOGRE);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[3], MONSTER_GROUDON);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2],MONSTER_KYOGRE);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_GROUDON);
 }
 
 void sub_808C1A4(u8 param_1,u8 param_2,u8 param_3)
@@ -4543,7 +4543,7 @@ void KyogrePreFightDialogue(void)
   Entity *KyogreEntity;
 
   leaderEntity = xxx_call_GetLeader();
-  KyogreEntity = GetEntityFromClientType(0x1c);
+  KyogreEntity = GetEntityFromMonsterBehavior(BEHAVIOR_KYOGRE);
   DungeonStopBGM();
   if (HasRecruitedMon(MONSTER_KYOGRE)) {
     DungeonFadeInNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE,0x3c);
@@ -4639,7 +4639,7 @@ void sub_808C3A0(void)
     sub_808563C(SetupDeoxysFacingDirection);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_DEOXYS_NORMAL);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_DEOXYS_NORMAL);
 }
 
 void sub_808C414(u8 param_1,u8 param_2,u8 param_3)
@@ -4733,7 +4733,7 @@ void sub_808C5C0(void)
   s32 YPos;
 
   leaderEntity = xxx_call_GetLeader();
-  celebiEntity = GetEntityFromClientType(0x1e);
+  celebiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_CELEBI);
   DungeonStartNewBGM(MUS_FRIEND_AREA_HEALING_FOREST);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
@@ -4742,7 +4742,7 @@ void sub_808C5C0(void)
   XPos = GetCameraXPos();
   YPos = GetCameraYPos();
   sub_803F878(XPos,YPos - 0x1000);
-  CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_CELEBI);
+  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_CELEBI);
 }
 
 void nullsub_100(u8 r0, u8 r1, u8 r3)
@@ -4757,7 +4757,7 @@ void CelebiJoinDialogue(void)
     Entity *celebiEntity;
 
     leaderEntity = xxx_call_GetLeader();
-    celebiEntity = GetEntityFromClientType(0x1e);
+    celebiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_CELEBI);
     if ((HasRecruitedMon(MONSTER_CELEBI)) || (!sub_806FD18(celebiEntity)))
     {
         sub_8068FE0(celebiEntity,0x21c,0);
@@ -4937,14 +4937,14 @@ void sub_808C9C4(void)
     Entity *medichamEntity;
 
     leaderEntity = xxx_call_GetLeader();
-    medichamEntity = GetEntityFromClientType(7);
+    medichamEntity = GetEntityFromMonsterBehavior(BEHAVIOR_MEDICHAM);
     DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
     sub_80854D4();
     sub_8085930(DIRECTION_NORTH);
     sub_80855E4(sub_8086A3C);
     SetFacingDirection(medichamEntity, DIRECTION_SOUTH);
     sub_8085860(leaderEntity->pos.x, leaderEntity->pos.y - 3);
-    CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_MEDICHAM);
+    CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_MEDICHAM);
 }
 
 void MedichamRescueDialogue(void)
@@ -4952,7 +4952,7 @@ void MedichamRescueDialogue(void)
     Entity *medichamEntity;
     s32 counter;
 
-    medichamEntity = GetEntityFromClientType(7);
+    medichamEntity = GetEntityFromMonsterBehavior(BEHAVIOR_MEDICHAM);
     SpriteLookAroundEffect(medichamEntity);
     sub_803E708(0xA, 0x46);
     // Oh my I can't seem to find a way out...
@@ -5005,13 +5005,13 @@ void sub_808CB5C(void)
     Entity *medichamEntity;
 
     leaderEntity = xxx_call_GetLeader();
-    medichamEntity = GetEntityFromClientType(7);
+    medichamEntity = GetEntityFromMonsterBehavior(BEHAVIOR_MEDICHAM);
     DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
     sub_80854D4();
     sub_8085930(DIRECTION_NORTH);
     sub_8068FE0(medichamEntity, 0x21C, 0);
     sub_8085860(leaderEntity->pos.x, leaderEntity->pos.y);
-    CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_MEDICHAM);
+    CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_MEDICHAM);
 }
 
 void DummyFightDialogue(void)
@@ -5024,14 +5024,14 @@ void sub_808CBB0(void)
     Entity *smeargleEntity;
 
     leaderEntity = xxx_call_GetLeader();
-    smeargleEntity = GetEntityFromClientType(0x1F);
+    smeargleEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SMEARGLE);
     DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
     sub_80854D4();
     sub_8085930(DIRECTION_NORTH);
     sub_80855E4(sub_8086A3C);
     SetFacingDirection(smeargleEntity, DIRECTION_SOUTH);
     sub_8085860(leaderEntity->pos.x, leaderEntity->pos.y - 3);
-    CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_SMEARGLE);
+    CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_SMEARGLE);
 }
 
 void SmeargleRescueDialogue(void)
@@ -5039,7 +5039,7 @@ void SmeargleRescueDialogue(void)
     Entity *smeargleEntity;
     s32 counter;
 
-    smeargleEntity = GetEntityFromClientType(0x1F);
+    smeargleEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SMEARGLE);
     SpriteLookAroundEffect(smeargleEntity);
     sub_803E708(0xA, 0x46);
     // Ohhh...
@@ -5095,14 +5095,14 @@ void sub_808CD44(void)
     Entity *smeargleEntity;
 
     leaderEntity = xxx_call_GetLeader();
-    smeargleEntity = GetEntityFromClientType(0x1F);
+    smeargleEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SMEARGLE);
     DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
     sub_80854D4();
     sub_8085930(DIRECTION_NORTH);
     sub_80855E4(sub_8086A3C);
     sub_8068FE0(smeargleEntity, 540, 0);
     sub_8085860(leaderEntity->pos.x, leaderEntity->pos.y - 3);
-    CopyMonsterNametoBuffer(gFormatBuffer_Monsters[2], MONSTER_SMEARGLE);
+    CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_SMEARGLE);
 }
 
 void sub_808CD9C(void)

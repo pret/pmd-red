@@ -4118,7 +4118,7 @@ sub_8051E7C:
 	ldr r0, _08051EB4
 	ldr r1, [r0]
 	mov r0, r9
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	b _080520F6
 	.align 2, 0
 _08051EB4: .4byte gUnknown_80FDDF0
@@ -4378,7 +4378,7 @@ _0805207A:
 	ldr r0, _080520E8
 	ldr r1, [r0]
 	mov r0, r9
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	movs r0, 0x14
 	movs r1, 0x3C
 	bl sub_803E708
@@ -4399,7 +4399,7 @@ _080520EC:
 	ldr r0, _08052108
 	ldr r1, [r0]
 	mov r0, r9
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _080520F6:
 	add sp, 0x14
 	pop {r3-r5}

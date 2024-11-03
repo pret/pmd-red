@@ -395,7 +395,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
         case MOVE_DECOY_MAKER:
         case MOVE_FOLLOW_ME:
         case MOVE_SUBSTITUTE:
-            if (gDungeon->decoyActive)
+            if (gDungeon->decoyIsActive)
             {
                 return FALSE;
             }

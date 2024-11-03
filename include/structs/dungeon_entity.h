@@ -113,7 +113,7 @@ typedef struct Protection
 typedef struct Waiting
 {
     /* 0xC8 */ u8 waitingStatus;
-    /* 0xC9 */ bool8 enemyDecoy; // True if the Pokémon is a decoy and a wild Pokémon (i.e., not an allied Pokémon).
+    /* 0xC9 */ bool8 decoyApplierNonTeamMemberFlag; // True if the Pokémon is a decoy and a wild Pokémon (i.e., not an allied Pokémon).
     u8 unkCA;
     /* 0xCB */ u8 waitingStatusTurns;
     /* 0xCC */ u8 curseDamageCountdown;
@@ -231,7 +231,7 @@ typedef struct EntityInfo
     /* 0x98 */ u32 unk98;
     /* 0x9C */ u32 unk9C;
     /* 0xA0 */ s32 unkA0;
-    /* 0xA4 */ u8 clientType;
+    /* 0xA4 */ u8 monsterBehavior;
     u8 fillA5[0xA8 - 0xA5];
     // Statuses are split into groups based on which ones can't overlap.
     // See status.h for which statuses are in each group.
@@ -266,7 +266,7 @@ typedef struct EntityInfo
     /* 0xFD */ u8 perishSongTurns; // When this reaches 0, the Pokémon faints from Perish Song. Doubles as a bool for whether the Pokémon is afflicted by Perish Song.
     u8 unkFE;
     u8 unkFF;
-    /* 0x100 */ u8 targetingDecoy; // If the Pokémon is targeting a decoy, this indicates whether the decoy target is a team or wild Pokémon.
+    /* 0x100 */ u8 decoyAITracker; // If the Pokémon is targeting a decoy, this indicates whether the decoy target is a team or wild Pokémon.
     /* 0x104 */ s32 speedStage;
     // The turn counter for movement speed up/down is split into five timers each. Multiple timers are used if the Pokémon is affected by multiple
     // speed-up/slow effects at once, like using Agility twice.
@@ -280,7 +280,7 @@ typedef struct EntityInfo
     /* 0x118 */ Moves moves;
     /* 0x13C */ FixedPoint belly;
     /* 0x140 */ FixedPoint maxBelly;
-    /* 0x144 */ bool8 aiNextToTarget; // True if an AI Pokémon is following another Pokémon and is already adjacent to them.
+    /* 0x144 */ bool8 aiAllySkip; // True if an AI Pokémon is following another Pokémon and is already adjacent to them.
     /* 0x145 */ bool8 recalculateFollow; // Used by the AI to defer a movement decision until after all other Pokémon have moved.
     /* 0x146 */ u8 unk146;
     /* 0x147 */ bool8 waiting; // True if an AI Pokémon decided to do nothing this turn.
@@ -407,13 +407,45 @@ enum AIObjective
     AI_TAKE_ITEM
 };
 
-enum ClientType
+enum MonsterBehavior
 {
-    CLIENT_TYPE_NONE,
-    CLIENT_TYPE_CLIENT, // Used for mission clients that need rescuing.
-    CLIENT_TYPE_PARTNER,
-    // 3
-    CLIENT_TYPE_DONT_MOVE = 4 // Used for Diglett in the Skarmory boss fight.
+    BEHAVIOR_FIXED_ENEMY,
+    BEHAVIOR_RESCUE_TARGET, // Used for mission clients that need rescuing.
+    BEHAVIOR_ALLY,
+    BEHAVIOR_SKARMORY,
+    BEHAVIOR_DIGLETT, // Used for Diglett in the Skarmory boss fight.
+    BEHAVIOR_5, // 5 and 6 are probably Gengar and Ekans, but not sure which is which.
+    BEHAVIOR_6,
+    BEHAVIOR_MEDICHAM,
+    BEHAVIOR_ZAPDOS,
+    BEHAVIOR_MOLTRES,
+    BEHAVIOR_ALAKAZAM_1,
+    BEHAVIOR_GROUDON_1,
+    BEHAVIOR_ALAKAZAM_2,
+    BEHAVIOR_ARTICUNO,
+    BEHAVIOR_GROUDON_2,
+    BEHAVIOR_RAYQUAZA,
+    BEHAVIOR_16,
+    BEHAVIOR_MEWTWO,
+    BEHAVIOR_ENTEI,
+    BEHAVIOR_RAIKOU,
+    BEHAVIOR_SUICUNE,
+    BEHAVIOR_HO_OH,
+    BEHAVIOR_LATIOS,
+    BEHAVIOR_REGIROCK,
+    BEHAVIOR_REGICE,
+    BEHAVIOR_REGISTEEL,
+    BEHAVIOR_JIRACHI,
+    BEHAVIOR_LUGIA,
+    BEHAVIOR_KYOGRE,
+    BEHAVIOR_29,
+    BEHAVIOR_CELEBI,
+    BEHAVIOR_SMEARGLE,
+    BEHAVIOR_32,
+    BEHAVIOR_33,
+    BEHAVIOR_34,
+    BEHAVIOR_35,
+    BEHAVIOR_36,
 };
 
 enum VisualFlag
