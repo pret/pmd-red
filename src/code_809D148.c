@@ -1,5 +1,6 @@
 #include "global.h"
 #include "other_random.h"
+#include "math.h"
 #include "memory.h"
 
 struct unkStruct_809D158
@@ -261,7 +262,6 @@ extern s32 sub_80AC448(s16 a0, struct unkStruct_809D158 *a1);
 extern s32 sub_80AD360(s16 a0, struct unkStruct_809D158 *a1);
 extern void sub_800290C(struct unkStruct_809D158 *a0, s32 a1);
 extern void sub_8002934(struct unkStruct_809D158 *a0, struct unkStruct_809D158 *a1, struct unkStruct_809D158 *a2, u32 a3, u32 a4);
-extern s32 sub_8009FB8(s32 a0, s32 a1);
 extern bool8 sub_80A579C(struct unkStruct_809D158 *a0, struct unkStruct_809D158 *a1);
 
 void sub_809D25C(void)

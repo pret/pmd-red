@@ -4,14 +4,34 @@
 
 #include "data/math.h"
 
-u32 fast_mod_3(s32 x) {
+u24_8 u24_8_div(u24_8, u24_8);
+u24_8 u24_8_mul(u24_8, u24_8);
+bool8 u32_pair_less_than(u32, u32, u32, u32);
+
+void sub_800A5A4(unkStruct_80943A8 *, unkStruct_80943A8 *, unkStruct_80943A8 *);
+void sub_800A4E4(unkStruct_80943A8 *, unkStruct_80943A8 *, unkStruct_80943A8 *);
+
+/**
+ * This function computes a value modulo 3, using a lookup table for values less
+ * than 0x100.
+ *
+ * @warning This function performs an invalid memory access if x < 0.
+ * Hopefully it's never actually used.
+ *
+ * @param[in] x     The value to get modulo 3. Must be non-negative.
+ *
+ * @return          The value of x modulo 3.
+ */
+UNUSED u32 fast_mod_3(s32 x)
+{
     if (x < 0x100) {
         return gFastMod3Lookup[x];
     }
     return x % 3;
 }
 
-s32 sin_abs_4096(s32 x) {
+s32 sin_abs_4096(s32 x)
+{
     switch (x & 0xc00) {
         case 0x000:
             return gFastSinLookup[x & 0x3ff];
@@ -25,7 +45,8 @@ s32 sin_abs_4096(s32 x) {
     return 0;
 }
 
-s32 cos_4096(s32 x) {
+s32 cos_4096(s32 x)
+{
     switch (x & 0xc00) {
         case 0x000:
             return gFastSinLookup[0x3ff - (x & 0x3ff)];
@@ -39,19 +60,34 @@ s32 cos_4096(s32 x) {
     return 0;
 }
 
-bool8 u32_pair_less_than(u32 x_hi, u32 x_lo, u32 y_hi, u32 y_lo) {
-    if ((u32)x_hi < (u32)y_hi) {
+/**
+ * This function lexicographically compares two pairs of u32s.
+ *
+ * @note The call signature of this might change if it makes sense to pack the
+ *       inputs into a struct representing, say, a 64-bit unsigned integer. Doing
+ *       so does affect the generated assembly; the current approach is the simplest
+ *       match.
+ *
+ * @param[in] x_hi  The high 32 bits of the first pair.
+ * @param[in] x_lo  The low 32 bits of the first pair.
+ * @param[in] y_hi  The high 32 bits of the second pair.
+ * @param[in] y_lo  The low 32 bits of the second pair.
+ *
+ * @return          `TRUE` if `x < y`, `FALSE` otherwise.
+ */
+bool8 u32_pair_less_than(u32 x_hi, u32 x_lo, u32 y_hi, u32 y_lo)
+{
+    if (x_hi < y_hi)
         return TRUE;
-    } else if ((u32)x_hi > (u32)y_hi) {
+    if (x_hi > y_hi)
         return FALSE;
-    } else if (x_lo >= y_lo) {
+    if (x_lo >= y_lo)
         return FALSE;
-    } else {
-        return TRUE;
-    }
+    return TRUE;
 }
 
-s24_8 s24_8_mul(s24_8 x, s24_8 y) {
+s24_8 s24_8_mul(s24_8 x, s24_8 y)
+{
     s24_8 ret;
     bool8 sgn0 = x < 0;
     bool8 sgn1 = y < 0;
@@ -76,7 +112,16 @@ s24_8 s24_8_mul(s24_8 x, s24_8 y) {
     return ret;
 }
 
-s24_8 s24_8_div(s24_8 x, s24_8 y) { // signed division
+/**
+ * This function divides two signed 24.8 fixed-point numbers.
+ *
+ * @param[in] x   The dividend.
+ * @param[in] y   The divisor.
+ *
+ * @returns       The quotient `x/y` as a signed 24.8 fixed-point number.
+ */
+s24_8 s24_8_div(s24_8 x, s24_8 y)
+{
     s24_8 ret;
     bool8 sgn0 = x < 0;
     bool8 sgn1 = y < 0;
@@ -101,7 +146,16 @@ s24_8 s24_8_div(s24_8 x, s24_8 y) { // signed division
     return ret;
 }
 
-u24_8 u24_8_mul(u24_8 x, u24_8 y) {
+/**
+ * This function multiplies two unsigned 24.8 fixed-point numbers.
+ *
+ * @param[in] x   The first factor.
+ * @param[in] y   The second factor.
+ *
+ * @return        The product `x*y` as an unsigned 24.8 fixed-point number.
+ */
+u24_8 u24_8_mul(u24_8 x, u24_8 y)
+{
     // We need 64 bits for intermediate steps of the multiplication.
     u32 x_h, x_l;
     u32 y_h, y_l;
@@ -158,6 +212,14 @@ u24_8 u24_8_mul(u24_8 x, u24_8 y) {
     return out_l;
 }
 
+/**
+ * This function divides two unsigned 24.8 fixed-point numbers.
+ *
+ * @param[in] x   The first factor.
+ * @param[in] y   The second factor.
+ *
+ * @return        The quotient `x/y` as an unsigned 24.8 fixed-point number.
+ */
 u24_8 u24_8_div(u24_8 x, u24_8 y)
 {
   bool8 bVar1;
@@ -174,7 +236,7 @@ u24_8 u24_8_div(u24_8 x, u24_8 y)
   s32 save;
   
   if (y == 0) {
-    return 0x7fffffff;
+    return INT32_MAX;
   }
   else if (x == 0) {
     return 0;
@@ -228,7 +290,7 @@ u24_8 u24_8_div(u24_8 x, u24_8 y)
   return r9;
 }
 
-s32 sub_8009F68(s32 x, s32 y)
+UNUSED s32 sub_8009F68(s32 x, s32 y)
 {
     s32 uVar1;
     s32 sVar1;
@@ -286,7 +348,7 @@ s32 sub_8009FB8(s32 x, s32 y)
     return r5;
 }
 
-void sub_800A020(s32 *param_1, u32 param_2)
+void sub_800A020(unkStruct_80943A8 *param_1, u32 param_2)
 {
 #ifndef NONMATCHING
   register u32 temp asm("r4");
@@ -295,10 +357,10 @@ void sub_800A020(s32 *param_1, u32 param_2)
 #endif
     
   temp = 0xffff0000;
-  param_1[0] = param_2 >> 0x10;
-  param_1[1] = param_2 << 0x10;
+  param_1->s0 = param_2 >> 0x10;
+  param_1->s4 = param_2 << 0x10;
   if ((param_2 & 0x8000) != 0) {
-    param_1[0] |= temp;
+    param_1->s0 |= temp;
   }
 }
 
@@ -322,4 +384,297 @@ UNUSED u32 sub_800A068(u32 *param_1)
     uVar1++;
   }
   return uVar1;
+}
+
+void sub_800A088(u32 *a, s32 b)
+{
+    a[1] = b << 8;
+    a[0] = b >> 24;
+
+    if (a[0] & 0x80)
+        a[0] |= ~0x7F;
+    else
+        a[0] &= 0x7f;
+}
+
+s32 sub_800A0B0(unkStruct_80943A8 *a)
+{
+    s32 r2;
+    s32 r3;
+    s32 idx;
+    s32 divi;
+
+    r2 = a->s4;
+    r3 = a->s0;
+    if (r2 == 0 && r3 == 0)
+        return 0;
+
+    if (r2 > 0) {
+        if (r3 > 0) {
+            if (r2 < r3) {
+                divi = r3 / 256;
+                if (divi == 0)
+                    return 0x200;
+
+                idx = r2 / divi;
+                if (idx > 0xFF)
+                    idx = 0xFF;
+            
+                return gFastUnknownFn1Lookup[idx] << 4;
+            }
+            else { // r2 >= r3
+                divi = r2 / 256;
+                if (divi == 0)
+                    return 0x200;
+
+                idx = r3 / divi;
+                if (idx > 0xFF)
+                    idx = 0xFF;
+            
+                return (0x40 - gFastUnknownFn1Lookup[idx]) << 4;
+            }
+        }
+        else { // r3 <= 0
+            r3 = -r3;
+            if (r2 < r3) {
+                divi = r3 / 256;
+                if (divi == 0)
+                    return 0x600;
+
+                idx = r2 / divi;
+                if (idx > 0xFF)
+                    idx = 0xFF;
+            
+                return (0x80 - gFastUnknownFn1Lookup[idx]) << 4;
+            }
+            else { // r2 >= r3
+                divi = r2 / 256;
+                if (divi == 0)
+                    return 0x600;
+
+                idx = r3 / divi;
+                if (idx > 0xFF)
+                    idx = 0xFF;
+            
+                return (gFastUnknownFn1Lookup[idx] + 0x40) << 4;
+            }
+        }
+    }
+    else { // r2 <= 0
+        r2 = -r2;
+        if (r3 > 0) {
+            if (r2 < r3) {
+                divi = r3 / 256;
+                if (divi == 0)
+                    return 0xE00;
+
+                idx = r2 / divi;
+                if (idx > 0xFF)
+                    idx = 0xFF;
+            
+                return (0x100 - gFastUnknownFn1Lookup[idx]) << 4;
+            }
+            else { // r2 >= r3
+                divi = r2 / 256;
+                if (divi == 0)
+                    return 0xE00;
+
+                idx = r3 / divi;
+                if (idx > 0xFF)
+                    idx = 0xFF;
+            
+                return (gFastUnknownFn1Lookup[idx] + 0xC0) << 4;
+            }
+        }
+        else { // r3 <= 0
+            r3 = -r3;
+            if (r2 < r3) {
+                divi = r3 / 256;
+                if (divi == 0)
+                    return 0xA00;
+
+                idx = r2 / divi;
+                if (idx > 0xFF)
+                    idx = 0xFF;
+            
+                return (gFastUnknownFn1Lookup[idx] + 0x80) << 4;
+            }
+            else { // r2 >= r3
+                divi = r2 / 256;
+                if (divi == 0)
+                    return 0xA00;
+
+                idx = r3 / divi;
+                if (idx > 0xFF)
+                    idx = 0xFF;
+            
+                return (0xC0 - gFastUnknownFn1Lookup[idx]) << 4;
+            }
+        }
+    }
+}
+
+static void sub_800A25C(unkStruct_80943A8 *a)
+{
+    a->s0 = ~a->s0;
+    a->s4 = ~a->s4 + 1;
+    if (a->s4 == 0) {
+        a->s0++;
+    }
+}
+
+void sub_800A27C(unkStruct_80943A8 *a)
+{
+    if (a->s0 < 0) {
+        a->s0 = ~a->s0;
+        a->s4 = ~a->s4 + 1;
+        if (a->s4 == 0) {
+            a->s0++;
+        }
+    }
+}
+
+bool8 sub_800A2A0(unkStruct_80943A8 *a)
+{
+    if (a->s0 == 0 && a->s4 == 0)
+        return TRUE;
+    return FALSE;
+}
+
+UNUSED bool8 F48_16_AreEqual(unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+{
+    if (a->s0 == b->s0 && a->s4 == b->s4)
+        return TRUE;
+    return FALSE;
+}
+
+static bool8 sub_800A2DC(unkStruct_80943A8 *a)
+{
+    if (a->s0 < 0)
+        return TRUE;
+    return FALSE;
+}
+
+bool8 sub_800A2F0(unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+{
+    s32 r1;
+    u32 a0;
+    s32 b0;
+
+    a0 = a->s0;
+    r1 = a0 >> 31;
+
+    b0 = b->s0;
+    if (b0 < 0)
+        r1 |= 2;
+
+    switch (r1) {
+        case 0:
+        default:
+            return u32_pair_less_than(a0, a->s4, b0, b->s4);
+        case 1:
+            return TRUE;
+        case 2:
+            return FALSE;
+        case 3:
+            return !u32_pair_less_than(a0, a->s4, b0, b->s4);
+    }
+}
+
+void sub_800A34C(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+{
+    bool8 aIsNegative;
+    bool8 bIsNegative;
+    unkStruct_80943A8 aa;
+    unkStruct_80943A8 bb;
+    unkStruct_80943A8 res;
+
+    aa.s0 = a->s0;
+    aa.s4 = a->s4;
+    bb.s0 = b->s0;
+    bb.s4 = b->s4;
+    aIsNegative = sub_800A2DC(&aa);
+    bIsNegative = sub_800A2DC(&bb);
+
+    if (sub_800A2A0(&aa)) {
+        dst->s0 = 0;
+        dst->s4 = 0;
+    }
+    else if (sub_800A2A0(&bb)) {
+        dst->s0 = 0;
+        dst->s4 = 0;
+    }
+    else {
+        if (aIsNegative)
+            sub_800A25C(&aa);
+
+        if (bIsNegative)
+            sub_800A25C(&bb);
+
+        sub_800A4E4(&res, &aa, &bb);
+        if (aIsNegative != bIsNegative)
+            sub_800A25C(&res);
+
+        dst->s0 = res.s0;
+        dst->s4 = res.s4;
+    }
+}
+
+void sub_800A3F0(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+{
+    bool8 aIsNegative;
+    bool8 bIsNegative;
+    unkStruct_80943A8 aa;
+    unkStruct_80943A8 bb;
+    unkStruct_80943A8 res;
+
+    aa.s0 = a->s0;
+    aa.s4 = a->s4;
+    bb.s0 = b->s0;
+    bb.s4 = b->s4;
+    aIsNegative = sub_800A2DC(&aa);
+    bIsNegative = sub_800A2DC(&bb);
+
+    if (sub_800A2A0(&bb)) {
+        dst->s0 = INT32_MAX;
+        dst->s4 = -1;
+    }
+    else if (sub_800A2A0(&aa)) {
+        dst->s0 = 0;
+        dst->s4 = 0;
+    }
+    else {
+        if (aIsNegative)
+            sub_800A25C(&aa);
+
+        if (bIsNegative)
+            sub_800A25C(&bb);
+
+        sub_800A5A4(&res, &aa, &bb);
+        if (aIsNegative != bIsNegative)
+            sub_800A25C(&res);
+
+        dst->s0 = res.s0;
+        dst->s4 = res.s4;
+    }
+}
+
+void sub_800A4A0(unkStruct_80943A8 *a)
+{
+    unkStruct_80943A8 aa;
+    unkStruct_80943A8 res;
+
+    aa.s0 = a->s0;
+    aa.s4 = a->s4;
+
+    if (sub_800A2A0(&aa)) {
+        a->s0 = 0;
+        a->s4 = 0;
+    }
+    else {
+        sub_800A27C(&aa);
+        sub_800A4E4(&res, &aa, &aa);
+        a->s0 = res.s0;
+        a->s4 = res.s4;
+    }
 }
