@@ -38,9 +38,9 @@ typedef struct ActionContainer
     /* 0x0 */ u16 action;
     /* 0x2 */ u8 direction;
     u8 fill3;
-    // Additional parameter alongside actionIndex. Used for things like indicating which move a Pokémon should use from its moveset.
+    // Additional parameter alongside actionIndex. Used for things like indicating which move a PokÃ©mon should use from its moveset.
     /* 0x4 */ unkStruct_8044CC8 unk4[2];
-    // Position of the target that the Pokémon wants throw an item at.
+    // Position of the target that the PokÃ©mon wants throw an item at.
     /* 0x14 */ Position itemTargetPosition;
 } ActionContainer;
 
@@ -101,7 +101,7 @@ typedef struct Charging
 {
     /* 0x0 */ u8 chargingStatus;
     /* 0x1 */ u8 chargingStatusTurns;
-    /* 0x2 */ u8 chargingStatusMoveIndex; // The position of the move in the Pokémon's moveset that triggered the status.
+    /* 0x2 */ u8 chargingStatusMoveIndex; // The position of the move in the PokÃ©mon's moveset that triggered the status.
 } Charging;
 
 typedef struct Protection
@@ -113,7 +113,7 @@ typedef struct Protection
 typedef struct Waiting
 {
     /* 0xC8 */ u8 waitingStatus;
-    /* 0xC9 */ bool8 enemyDecoy; // True if the Pokémon is a decoy and a wild Pokémon (i.e., not an allied Pokémon).
+    /* 0xC9 */ bool8 enemyDecoy; // True if the PokÃ©mon is a decoy and a wild PokÃ©mon (i.e., not an allied PokÃ©mon).
     u8 unkCA;
     /* 0xCB */ u8 waitingStatusTurns;
     /* 0xCC */ u8 curseDamageCountdown;
@@ -162,10 +162,10 @@ typedef struct Unk_Entity_x184
 {
     /* 0x184 - 0x0 */ Position previousTargetMovePosition1;
     /* 0x188 - 0x4 */ Position32 previousTargetMovePosition2;
-    /* 0x190 - 0xC */ s32 lastMoveDirection; // The last direction that the Pokémon moved in.
-    // Number of tiles that the Pokémon moved last, multiplied by 0x100.
+    /* 0x190 - 0xC */ s32 lastMoveDirection; // The last direction that the PokÃ©mon moved in.
+    // Number of tiles that the PokÃ©mon moved last, multiplied by 0x100.
     /* 0x194 - 0x10*/ Position32 lastMoveIncrement;
-    /* 0x19C - 0x18 */ s16 walkAnimFramesLeft; // Set when the Pokémon starts moving, and counts down until the Pokémon's walk animation stops.
+    /* 0x19C - 0x18 */ s16 walkAnimFramesLeft; // Set when the PokÃ©mon starts moving, and counts down until the PokÃ©mon's walk animation stops.
     /* 0x19e - 0x1a */ u8 unk1A;
 } Unk_Entity_x184 ;
 
@@ -178,14 +178,14 @@ typedef struct Moves
 // size: 0x208
 typedef struct EntityInfo
 {
-    // This has different purposes for Pokémon, items, and traps.
+    // This has different purposes for PokÃ©mon, items, and traps.
     // Pokemon: MovementFlag
     // Items: ItemFlag
     // Traps: TrapType
     /* 0x0 */ u16 flags;
-    /* 0x2 */ s16 id; // Pokémon species or item ID.
-    // Everything from here on only applies to Pokémon.
-    /* 0x4 */ s16 apparentID; // Shows a different Pokémon when using Transform.
+    /* 0x2 */ s16 id; // PokÃ©mon species or item ID.
+    // Everything from here on only applies to PokÃ©mon.
+    /* 0x4 */ s16 apparentID; // Shows a different PokÃ©mon when using Transform.
     /* 0x6 */ bool8 isNotTeamMember;
     /* 0x7 */ bool8 isTeamLeader;
     /* 0x8 */ u8 shopkeeper;
@@ -207,7 +207,7 @@ typedef struct EntityInfo
     /* 0x20 */ s16 defensiveStages[2];
     // Index 0 is accuracy. Index 1 is evasion.
     /* 0x24 */ s16 hitChanceStages[2];
-    // // When a Fire-type move is used on a Pokémon with Flash Fire, this value increases the power of the Pokémon's Fire-type moves.
+    // // When a Fire-type move is used on a PokÃ©mon with Flash Fire, this value increases the power of the PokÃ©mon's Fire-type moves.
     /* 0x28 */ s16 flashFireBoost;
     // These start at 0x1000, and are halved by certain moves like Screech to lower the corresponding stat.
     // Index 0 is Attack. Index 1 is Special Attack.
@@ -258,32 +258,32 @@ typedef struct EntityInfo
     /* 0xF7 */ bool8 bossFlag;
     /* 0xF8 */ bool8 speedStageChanged; // Toggled when pokemon is movement speed is sped up
     /* 0xF9 */ u8 unkF9;
-    /* 0xFA */ u8 terrifiedTurns; // Doubles as a bool for whether the Pokémon is terrified.
+    /* 0xFA */ u8 terrifiedTurns; // Doubles as a bool for whether the PokÃ©mon is terrified.
     /* 0xFB */ u8 expMultiplier;
     // Set to true if the player makes a teammate use their held item.
     // This is done by going to the teammate's held item in the toolbox and selecting "Use".
     /* 0xFC */ bool8 useHeldItem;
-    /* 0xFD */ u8 perishSongTurns; // When this reaches 0, the Pokémon faints from Perish Song. Doubles as a bool for whether the Pokémon is afflicted by Perish Song.
+    /* 0xFD */ u8 perishSongTurns; // When this reaches 0, the PokÃ©mon faints from Perish Song. Doubles as a bool for whether the PokÃ©mon is afflicted by Perish Song.
     u8 unkFE;
     u8 unkFF;
-    /* 0x100 */ u8 targetingDecoy; // If the Pokémon is targeting a decoy, this indicates whether the decoy target is a team or wild Pokémon.
+    /* 0x100 */ u8 targetingDecoy; // If the PokÃ©mon is targeting a decoy, this indicates whether the decoy target is a team or wild PokÃ©mon.
     /* 0x104 */ s32 speedStage;
-    // The turn counter for movement speed up/down is split into five timers each. Multiple timers are used if the Pokémon is affected by multiple
+    // The turn counter for movement speed up/down is split into five timers each. Multiple timers are used if the PokÃ©mon is affected by multiple
     // speed-up/slow effects at once, like using Agility twice.
     /* 0x108 */ u8 speedUpCounters[NUM_SPEED_COUNTERS];
     /* 0x10D */ u8 speedDownCounters[NUM_SPEED_COUNTERS];
     /* 0x112 */ u8 stockpileStage;
     /* 0x113 */ u8 unk113;
-    // When non-zero, an AI Pokémon will move in a random direction every turn when it is a room.
-    // There is a chance of this flag being set when a wild Pokémon spawns. The chance depends on the dungeon's randomMovementChance.
+    // When non-zero, an AI PokÃ©mon will move in a random direction every turn when it is a room.
+    // There is a chance of this flag being set when a wild PokÃ©mon spawns. The chance depends on the dungeon's randomMovementChance.
     /* 0x114 */ u32 moveRandomly;
     /* 0x118 */ Moves moves;
     /* 0x13C */ FixedPoint belly;
     /* 0x140 */ FixedPoint maxBelly;
-    /* 0x144 */ bool8 aiNextToTarget; // True if an AI Pokémon is following another Pokémon and is already adjacent to them.
-    /* 0x145 */ bool8 recalculateFollow; // Used by the AI to defer a movement decision until after all other Pokémon have moved.
+    /* 0x144 */ bool8 aiNextToTarget; // True if an AI PokÃ©mon is following another PokÃ©mon and is already adjacent to them.
+    /* 0x145 */ bool8 recalculateFollow; // Used by the AI to defer a movement decision until after all other PokÃ©mon have moved.
     /* 0x146 */ u8 unk146;
-    /* 0x147 */ bool8 waiting; // True if an AI Pokémon decided to do nothing this turn.
+    /* 0x147 */ bool8 waiting; // True if an AI PokÃ©mon decided to do nothing this turn.
     /* 0x148 */ bool8 attacking;
     /* 0x149 */ u8 unk149;
     /* 0x14A */ u8 unk14A;
@@ -324,13 +324,13 @@ typedef struct EntityInfo
     /* 0x1F4 */ s16 numMoveTiles; // Number of tiles to move in a turn. Can be greater than 1 if the user's movement speed is boosted.
     /* 0x1F6 */ s16 notMoving;
     /* 0x1F8 */ s16 unk1F8;
-    /* 0x1FA */ s16 mobileTurnTimer; // When a Pokémon can pass through walls in a hallway, this counts up to 200 before the Pokémon turns in a random direction.
+    /* 0x1FA */ s16 mobileTurnTimer; // When a PokÃ©mon can pass through walls in a hallway, this counts up to 200 before the PokÃ©mon turns in a random direction.
     /* 0x1FC */ u32 expGainedInTurn; // Used to accumulate experience when multiple enemies are defeated in one turn.
     /* 0x200 */ u32 statusIcons;
     u8 unk204;
 } EntityInfo;
 
-// size: 0x74 | Used for Pokémon, items, and traps.
+// size: 0x74 | Used for PokÃ©mon, items, and traps.
 typedef struct Entity
 {
     /* 0x0 */ u32 type;
@@ -341,13 +341,13 @@ typedef struct Entity
     /* 0xC */ Position32 pixelPos;
     /* 0x14 */ Position32 prevPixelPos;
     s32 unk1C;
-    /* 0x20 */ bool8 isVisible; // Turned off when a Pokémon faints.
+    /* 0x20 */ bool8 isVisible; // Turned off when a PokÃ©mon faints.
     u8 fill21;
     u8 unk22;
     u8 fill23;
     u8 unk24;
     /* 0x25 */ u8 room;
-    // The global spawn index counter starts at 10. Each Pokémon that spawns increments the counter and
+    // The global spawn index counter starts at 10. Each PokÃ©mon that spawns increments the counter and
     // gets assigned the current counter value as its spawn index.
     /* 0x26 */ u16 spawnGenID;
     /* 0x28 */ struct axObject axObj;
@@ -368,7 +368,7 @@ enum MovementFlag
     MOVEMENT_FLAG_SWAPPING_PLACES = 1 << 5,
     MOVEMENT_FLAG_WALKING = 1 << 9,
     MOVEMENT_FLAG_UNK_14 = 1 << 14,
-    MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY = 1 << 15 // Set if the Pokémon is petrified and the leader cures them by swapping places.
+    MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY = 1 << 15 // Set if the PokÃ©mon is petrified and the leader cures them by swapping places.
 };
 
 enum AbilityEffectFlags
@@ -419,7 +419,7 @@ enum ClientType
 enum VisualFlag
 {
     // Set if Run Away's visual effect (green smoke cloud) has been triggered on this floor.
-    // Prevents the effect from showing again if the Pokémon stops running away and then starts running away again.
+    // Prevents the effect from showing again if the PokÃ©mon stops running away and then starts running away again.
     VISUAL_FLAG_RUN_AWAY = 2
 };
 
