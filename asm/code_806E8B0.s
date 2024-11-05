@@ -496,7 +496,7 @@ _0806EE7C:
 	adds r0, r5, 0
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_800A3F0
+	bl F48_16_SDiv
 	mov r1, r10
 	ldrb r6, [r1, 0x6]
 	mov r8, r5
@@ -512,7 +512,7 @@ _0806EE7C:
 	str r0, [r2, 0x4]
 	adds r0, r7, 0
 	adds r1, r7, 0
-	bl sub_800A34C
+	bl F48_16_SMul
 	mov r2, r10
 	ldrb r0, [r2, 0x9]
 	lsls r0, 1
@@ -555,7 +555,7 @@ _0806EF20:
 	adds r0, r7, 0
 	adds r1, r7, 0
 	adds r2, r4, 0
-	bl sub_800A3F0
+	bl F48_16_SDiv
 	ldr r0, [sp, 0x28]
 _0806EF60:
 	movs r1, 0x3
@@ -591,7 +591,7 @@ _0806EF60:
 	adds r0, r6, 0
 	adds r1, r6, 0
 	adds r2, r6, 0
-	bl sub_800A34C
+	bl F48_16_SMul
 	mov r0, r8
 	str r0, [sp, 0x40]
 	ldr r0, _0806F09C
@@ -600,7 +600,7 @@ _0806EF60:
 	adds r0, r6, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl sub_800A34C
+	bl F48_16_SMul
 	adds r0, r5, 0
 	movs r1, 0x2
 	bl sub_800A020
@@ -608,7 +608,7 @@ _0806EF60:
 	adds r0, r4, 0
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_800A34C
+	bl F48_16_SMul
 	ldr r1, [sp, 0xC]
 	adds r0, r5, 0
 	bl sub_800A020
@@ -727,7 +727,7 @@ _0806F0BC:
 	ldr r2, _0806F160
 	adds r0, r7, 0
 	adds r1, r7, 0
-	bl sub_800A34C
+	bl F48_16_SMul
 	ldr r0, _0806F164
 	ldr r0, [r0]
 	movs r3, 0xB3
@@ -748,7 +748,7 @@ _0806F0EE:
 	ldr r2, _0806F160
 	adds r0, r7, 0
 	adds r1, r7, 0
-	bl sub_800A34C
+	bl F48_16_SMul
 	ldr r0, _0806F164
 	ldr r0, [r0]
 	ldr r1, _0806F168
@@ -855,7 +855,7 @@ _0806F1DA:
 	ldr r2, _0806F2B8
 	adds r0, r7, 0
 	adds r1, r7, 0
-	bl sub_800A34C
+	bl F48_16_SMul
 	movs r0, 0x1
 	ldr r3, [sp, 0xB0]
 	strb r0, [r3, 0xD]
@@ -871,7 +871,7 @@ _0806F1F4:
 	mov r0, r8
 	mov r1, r8
 	adds r2, r7, 0
-	bl sub_800A34C
+	bl F48_16_SMul
 	ldr r0, [r5]
 	movs r1, 0xAE
 	lsls r1, 1
@@ -885,7 +885,7 @@ _0806F1F4:
 	mov r0, r8
 	mov r1, r8
 	adds r2, r4, 0
-	bl sub_800A34C
+	bl F48_16_SMul
 	mov r0, r8
 	bl sub_800A048
 	ldr r1, [r5]
@@ -905,7 +905,7 @@ _0806F1F4:
 	mov r0, r8
 	mov r1, r8
 	adds r2, r7, 0
-	bl sub_800A34C
+	bl F48_16_SMul
 	add r4, sp, 0x68
 	adds r0, r4, 0
 	movs r1, 0x64
@@ -913,7 +913,7 @@ _0806F1F4:
 	adds r0, r7, 0
 	adds r1, r4, 0
 	adds r2, r7, 0
-	bl sub_800A34C
+	bl F48_16_SMul
 	adds r0, r7, 0
 	bl sub_800A048
 	ldr r1, [r5]
@@ -984,7 +984,7 @@ _0806F2DE:
 	adds r0, r4, 0
 	adds r1, r4, 0
 	add r2, sp, 0x4
-	bl sub_800A34C
+	bl F48_16_SMul
 	adds r0, r4, 0
 	bl sub_800A048
 	str r0, [r7]

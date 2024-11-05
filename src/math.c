@@ -4,11 +4,10 @@
 
 #include "data/math.h"
 
+static void F48_16_UDiv(unkStruct_80943A8 *, unkStruct_80943A8 *, unkStruct_80943A8 *);
+static void F48_16_UMul(unkStruct_80943A8 *, unkStruct_80943A8 *, unkStruct_80943A8 *);
 static u24_8 u24_8_div(u24_8, u24_8);
 static u24_8 u24_8_mul(u24_8, u24_8);
-
-static void sub_800A5A4(unkStruct_80943A8 *, unkStruct_80943A8 *, unkStruct_80943A8 *);
-static void sub_800A4E4(unkStruct_80943A8 *, unkStruct_80943A8 *, unkStruct_80943A8 *);
 
 /**
  * This function computes a value modulo 3, using a lookup table for values less
@@ -516,7 +515,7 @@ s32 sub_800A0B0(unkStruct_80943A8 *a)
     }
 }
 
-static void sub_800A25C(unkStruct_80943A8 *a)
+static void F48_16_Negate(unkStruct_80943A8 *a)
 {
     a->s0 = ~a->s0;
     a->s4 = ~a->s4 + 1;
@@ -525,7 +524,7 @@ static void sub_800A25C(unkStruct_80943A8 *a)
         a->s0++;
 }
 
-static void sub_800A27C(unkStruct_80943A8 *a)
+static void F48_16_Abs(unkStruct_80943A8 *a)
 {
     if (a->s0 < 0) {
         a->s0 = ~a->s0;
@@ -536,21 +535,21 @@ static void sub_800A27C(unkStruct_80943A8 *a)
     }
 }
 
-bool8 sub_800A2A0(unkStruct_80943A8 *a)
+bool8 F48_16_IsZero(unkStruct_80943A8 *a)
 {
     if (a->s0 == 0 && a->s4 == 0)
         return TRUE;
     return FALSE;
 }
 
-UNUSED bool8 F48_16_AreEqual(unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+UNUSED bool8 F48_16_IsEqual(unkStruct_80943A8 *a, unkStruct_80943A8 *b)
 {
     if (a->s0 == b->s0 && a->s4 == b->s4)
         return TRUE;
     return FALSE;
 }
 
-static bool8 sub_800A2DC(unkStruct_80943A8 *a)
+static bool8 F48_16_IsNegative(unkStruct_80943A8 *a)
 {
     if (a->s0 < 0)
         return TRUE;
@@ -583,7 +582,7 @@ bool8 sub_800A2F0(unkStruct_80943A8 *a, unkStruct_80943A8 *b)
     }
 }
 
-void sub_800A34C(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+void F48_16_SMul(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
 {
     bool8 aIsNegative;
     bool8 bIsNegative;
@@ -595,34 +594,34 @@ void sub_800A34C(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8
     aa.s4 = a->s4;
     bb.s0 = b->s0;
     bb.s4 = b->s4;
-    aIsNegative = sub_800A2DC(&aa);
-    bIsNegative = sub_800A2DC(&bb);
+    aIsNegative = F48_16_IsNegative(&aa);
+    bIsNegative = F48_16_IsNegative(&bb);
 
-    if (sub_800A2A0(&aa)) {
+    if (F48_16_IsZero(&aa)) {
         dst->s0 = 0;
         dst->s4 = 0;
     }
-    else if (sub_800A2A0(&bb)) {
+    else if (F48_16_IsZero(&bb)) {
         dst->s0 = 0;
         dst->s4 = 0;
     }
     else {
         if (aIsNegative)
-            sub_800A25C(&aa);
+            F48_16_Negate(&aa);
 
         if (bIsNegative)
-            sub_800A25C(&bb);
+            F48_16_Negate(&bb);
 
-        sub_800A4E4(&res, &aa, &bb);
+        F48_16_UMul(&res, &aa, &bb);
         if (aIsNegative != bIsNegative)
-            sub_800A25C(&res);
+            F48_16_Negate(&res);
 
         dst->s0 = res.s0;
         dst->s4 = res.s4;
     }
 }
 
-void sub_800A3F0(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+void F48_16_SDiv(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
 {
     bool8 aIsNegative;
     bool8 bIsNegative;
@@ -634,34 +633,34 @@ void sub_800A3F0(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8
     aa.s4 = a->s4;
     bb.s0 = b->s0;
     bb.s4 = b->s4;
-    aIsNegative = sub_800A2DC(&aa);
-    bIsNegative = sub_800A2DC(&bb);
+    aIsNegative = F48_16_IsNegative(&aa);
+    bIsNegative = F48_16_IsNegative(&bb);
 
-    if (sub_800A2A0(&bb)) {
+    if (F48_16_IsZero(&bb)) {
         dst->s0 = INT32_MAX;
         dst->s4 = UINT32_MAX;
     }
-    else if (sub_800A2A0(&aa)) {
+    else if (F48_16_IsZero(&aa)) {
         dst->s0 = 0;
         dst->s4 = 0;
     }
     else {
         if (aIsNegative)
-            sub_800A25C(&aa);
+            F48_16_Negate(&aa);
 
         if (bIsNegative)
-            sub_800A25C(&bb);
+            F48_16_Negate(&bb);
 
-        sub_800A5A4(&res, &aa, &bb);
+        F48_16_UDiv(&res, &aa, &bb);
         if (aIsNegative != bIsNegative)
-            sub_800A25C(&res);
+            F48_16_Negate(&res);
 
         dst->s0 = res.s0;
         dst->s4 = res.s4;
     }
 }
 
-static void sub_800A4A0(unkStruct_80943A8 *a)
+static void F48_16_Square(unkStruct_80943A8 *a)
 {
     unkStruct_80943A8 aa;
     unkStruct_80943A8 res;
@@ -669,20 +668,20 @@ static void sub_800A4A0(unkStruct_80943A8 *a)
     aa.s0 = a->s0;
     aa.s4 = a->s4;
 
-    if (sub_800A2A0(&aa)) {
+    if (F48_16_IsZero(&aa)) {
         a->s0 = 0;
         a->s4 = 0;
     }
     else {
-        sub_800A27C(&aa);
-        sub_800A4E4(&res, &aa, &aa);
+        F48_16_Abs(&aa);
+        F48_16_UMul(&res, &aa, &aa);
         a->s0 = res.s0;
         a->s4 = res.s4;
     }
 }
 
 // Regswap https://decomp.me/scratch/HNmlz
-static void sub_800A4E4(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+static void F48_16_UMul(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
 {
     u32 sl;
     u32 r1;
@@ -697,11 +696,11 @@ static void sub_800A4E4(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_
     u32 r6;
     s32 i;
     
-    if (sub_800A2A0(a)) {
+    if (F48_16_IsZero(a)) {
         dst->s0 = 0;
         dst->s4 = 0;
     }
-    else if (sub_800A2A0(b)) {
+    else if (F48_16_IsZero(b)) {
         dst->s0 = 0;
         dst->s4 = 0;
     }
@@ -752,7 +751,7 @@ static void sub_800A4E4(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_
 }
 
 // Similar to u24_8_div
-static void sub_800A5A4(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+static void F48_16_UDiv(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
 {
     s32 temp;
     bool8 r1;
@@ -766,11 +765,11 @@ static void sub_800A5A4(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_
     u32 spC;
     s32 i;
 
-    if (sub_800A2A0(b)) {
+    if (F48_16_IsZero(b)) {
         dst->s0 = INT32_MAX;
         dst->s4 = UINT32_MAX;
     }
-    else if (sub_800A2A0(a)) {
+    else if (F48_16_IsZero(a)) {
         dst->s0 = 0;
         dst->s4 = 0;
     }
@@ -854,7 +853,7 @@ void sub_800A6F0(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8
 }
 
 // Similar to sub_8009F68
-UNUSED void sub_800A710(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, s32 b)
+UNUSED void F48_16_Pow(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, s32 b)
 {
     unkStruct_80943A8 aa;
     s32 bb;
@@ -871,16 +870,16 @@ UNUSED void sub_800A710(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, s32 b)
 
     for (; bb != 0; bb >>= 1) {
         if (bb & 1)
-            sub_800A34C(&res, &res, &aa);
+            F48_16_SMul(&res, &res, &aa);
 
-        sub_800A4A0(&aa);
+        F48_16_Square(&aa);
     }
 
     if (b < 0) {
         unkStruct_80943A8 idk;
         idk.s0 = 0;
         idk.s4 = 0x10000;
-        sub_800A3F0(&res, &idk, &res);
+        F48_16_SDiv(&res, &idk, &res);
     }
 
     dst->s0 = res.s0;
@@ -899,8 +898,8 @@ UNUSED void sub_800A78C(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_
 
     sp0 = *a;
     sp8 = *b;
-    sub_800A27C(&sp0);
-    sub_800A27C(&sp8);
+    F48_16_Abs(&sp0);
+    F48_16_Abs(&sp8);
 
     if (sub_800A2F0(&sp0, &sp8)) {
         sp10 = sp0;
@@ -908,25 +907,25 @@ UNUSED void sub_800A78C(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_
         sp8 = sp10;
     }
 
-    if (!sub_800A2A0(&sp8)) {
+    if (!F48_16_IsZero(&sp8)) {
         i = 0;
         goto deez; // Fakematch cuz ya (https://decomp.me/scratch/2TCrJ)
 
         while (i != 2) {
-            sub_800A34C(&sp8, &sp8, &sp10);
+            F48_16_SMul(&sp8, &sp8, &sp10);
             i++;
 deez:
 
-            sub_800A3F0(&sp10, &sp8, &sp0);
-            sub_800A4A0(&sp10);
+            F48_16_SDiv(&sp10, &sp8, &sp0);
+            F48_16_Square(&sp10);
             sp18.s0 = sp10.s0;
             sp18.s4 = sp10.s4 + 0x40000;
 
             if (sp18.s4 < sp10.s4)
                 sp18.s0++;
 
-            sub_800A3F0(&sp10, &sp10, &sp18);
-            sub_800A34C(&sp18, &sp0, &sp10);
+            F48_16_SDiv(&sp10, &sp10, &sp18);
+            F48_16_SMul(&sp18, &sp0, &sp10);
             sp18.s0 <<= 1;
             if ((s32)sp18.s4 < 0)
                 sp18.s0 |= 0x1;

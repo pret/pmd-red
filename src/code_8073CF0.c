@@ -336,7 +336,7 @@ void sub_8074094(Entity *entity)
 
         sp8.s0 = 0;
         sp8.s4 = 6554;
-        sub_800A34C(&sp10, &sp8, &gUnknown_80F54F4[r4]);
+        F48_16_SMul(&sp10, &sp8, &gUnknown_80F54F4[r4]);
         if (entityInfo->unk153 > 1)
             sp10.s4 += (gUnknown_80F60DC[entityInfo->unk153] << 0x10);
         entityInfo->unk153 = 0;

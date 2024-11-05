@@ -109,7 +109,7 @@ bool8 sub_806E100(unkStruct_80943A8 *param_1, Entity *pokemon, Entity *target, u
     param_5->effectiveness = EFFECTIVENESS_NEUTRAL;
     for (index = 0; index < 2; index++) {
       local_48 = gUnknown_8106F54;
-      if (sub_800A2A0(param_1)) break;
+      if (F48_16_IsZero(param_1)) break;
       if (((normalOrFightingType) && (targetInfo->types[index] == TYPE_GHOST)) && (targetInfo->exposed == FALSE)) {
             effectiveness = EFFECTIVENESS_IMMUNE;
             gDungeon->unk134.pokemonExposed = TRUE;
@@ -118,7 +118,7 @@ bool8 sub_806E100(unkStruct_80943A8 *param_1, Entity *pokemon, Entity *target, u
             effectiveness = gTypeEffectivenessChart[type][targetInfo->types[index]];
       }
       if (effectiveness != EFFECTIVENESS_NEUTRAL) {
-        sub_800A34C(param_1,param_1,local_48.unk0[effectiveness]);
+        F48_16_SMul(param_1,param_1,local_48.unk0[effectiveness]);
       }
       local_38[index] = effectiveness;
       gDungeon->unk134.unk13C[index] = effectiveness;
@@ -134,7 +134,7 @@ bool8 sub_806E100(unkStruct_80943A8 *param_1, Entity *pokemon, Entity *target, u
 
     if (((type == TYPE_FIRE) || (type == TYPE_ICE)) && (HasAbility(target,ABILITY_THICK_FAT))) {
       gDungeon->unk134.unk16D = TRUE;
-      sub_800A34C(param_1,param_1, &gUnknown_8106F1C);
+      F48_16_SMul(param_1,param_1, &gUnknown_8106F1C);
     }
     if ((type == TYPE_FIRE) && (GetFlashFireStatus(target) != FLASH_FIRE_STATUS_NONE)) {
       gDungeon->unk134.fill16E[0] = TRUE;
@@ -157,7 +157,7 @@ bool8 sub_806E100(unkStruct_80943A8 *param_1, Entity *pokemon, Entity *target, u
       torrentVisualFlag = SetVisualFlags(pokemonInfo,0x80,torrentFlag);
       if (torrentFlag) {
         gDungeon->unk134.fill16E[2] = TRUE;
-        sub_800A34C(param_1,param_1, &gUnknown_8106F0C);
+        F48_16_SMul(param_1,param_1, &gUnknown_8106F0C);
       }
       if (torrentVisualFlag) {
         sub_80428EC(pokemon);
@@ -169,7 +169,7 @@ bool8 sub_806E100(unkStruct_80943A8 *param_1, Entity *pokemon, Entity *target, u
       overgrowVisualFlag = SetVisualFlags(pokemonInfo,2,overgrowFlag);
       if (overgrowFlag) {
         gDungeon->unk134.fill16E[3] = TRUE;
-        sub_800A34C(param_1,param_1, &gUnknown_8106F0C);
+        F48_16_SMul(param_1,param_1, &gUnknown_8106F0C);
       }
       if (overgrowVisualFlag) {
         sub_80428D8(pokemon);
@@ -181,7 +181,7 @@ bool8 sub_806E100(unkStruct_80943A8 *param_1, Entity *pokemon, Entity *target, u
       swarmVisualFlag = SetVisualFlags(pokemonInfo,0x10,swarmFlag);
       if (swarmFlag) {
         gDungeon->unk134.fill16E[4] = TRUE;
-        sub_800A34C(param_1,param_1, &gUnknown_8106F0C);
+        F48_16_SMul(param_1,param_1, &gUnknown_8106F0C);
       }
       if (swarmVisualFlag) {
         sub_8042978(pokemon);
@@ -193,53 +193,53 @@ bool8 sub_806E100(unkStruct_80943A8 *param_1, Entity *pokemon, Entity *target, u
       blazeVisualFlag = SetVisualFlags(pokemonInfo,0x20,blazeFlag);
       if (blazeFlag) {
         gDungeon->unk134.fill16E[5] = TRUE;
-        sub_800A34C(param_1,param_1, &gUnknown_8106F0C);
+        F48_16_SMul(param_1,param_1, &gUnknown_8106F0C);
       }
       if (blazeVisualFlag) {
         sub_804298C(pokemon);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FEDE8);
       }
     }
-    if (!(sub_800A2A0(param_1)) && (MonsterIsType(pokemon, type))) {
+    if (!(F48_16_IsZero(param_1)) && (MonsterIsType(pokemon, type))) {
       gDungeon->unk134.fill16E[6] = TRUE;
-      sub_800A34C(param_1,param_1, &gUnknown_8106F14);
+      F48_16_SMul(param_1,param_1, &gUnknown_8106F14);
     }
     weather = GetApparentWeather(pokemon);
     if (weather == WEATHER_SUNNY) {
       if (type == TYPE_FIRE) {
         gDungeon->unk134.unk16C = TRUE;
-        sub_800A34C(param_1,param_1, &gUnknown_8106F14);
+        F48_16_SMul(param_1,param_1, &gUnknown_8106F14);
       }
       else if (type == TYPE_WATER) {
         gDungeon->unk134.unk16C = TRUE;
-        sub_800A34C(param_1,param_1, &gUnknown_8106F1C);
+        F48_16_SMul(param_1,param_1, &gUnknown_8106F1C);
       }
     }
     if (weather == WEATHER_RAIN) {
       if (type == TYPE_FIRE) {
         gDungeon->unk134.unk16B = TRUE;
-        sub_800A34C(param_1,param_1, &gUnknown_8106F1C);
+        F48_16_SMul(param_1,param_1, &gUnknown_8106F1C);
       }
       else if (type == TYPE_WATER) {
         gDungeon->unk134.unk16B = TRUE;
-        sub_800A34C(param_1,param_1, &gUnknown_8106F14);
+        F48_16_SMul(param_1,param_1, &gUnknown_8106F14);
       }
     }
     if ((weather == WEATHER_CLOUDY) && (type != TYPE_NORMAL)) {
-      sub_800A34C(param_1,param_1, &gUnknown_8106F64);
+      F48_16_SMul(param_1,param_1, &gUnknown_8106F64);
       gDungeon->unk134.unk16A = TRUE;
     }
     if (((gDungeon->weather.mudSportTurns != 0) || (weather == WEATHER_FOG)) && (type == TYPE_ELECTRIC)) {
       gDungeon->unk134.fill16E[7] = TRUE;
-      sub_800A34C(param_1,param_1, &gUnknown_8106F1C);
+      F48_16_SMul(param_1,param_1, &gUnknown_8106F1C);
     }
     if ((gDungeon->weather.waterSportTurns != 0) && (type == TYPE_FIRE)) {
       gDungeon->unk134.fill16E[8] = TRUE;
-      sub_800A34C(param_1,param_1, &gUnknown_8106F1C);
+      F48_16_SMul(param_1,param_1, &gUnknown_8106F1C);
     }
     if ((type == TYPE_ELECTRIC) && (pokemonInfo->charging.chargingStatus == STATUS_CHARGING)) {
       gDungeon->unk134.fill16E[9] = TRUE;
-      sub_800A34C(param_1,param_1, &gUnknown_8106F0C);
+      F48_16_SMul(param_1,param_1, &gUnknown_8106F0C);
     }
   }
   return bVar4;
