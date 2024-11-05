@@ -6,7 +6,6 @@
 
 static u24_8 u24_8_div(u24_8, u24_8);
 static u24_8 u24_8_mul(u24_8, u24_8);
-static bool8 u32_pair_less_than(u32, u32, u32, u32);
 
 static void sub_800A5A4(unkStruct_80943A8 *, unkStruct_80943A8 *, unkStruct_80943A8 *);
 static void sub_800A4E4(unkStruct_80943A8 *, unkStruct_80943A8 *, unkStruct_80943A8 *);
@@ -24,9 +23,9 @@ static void sub_800A4E4(unkStruct_80943A8 *, unkStruct_80943A8 *, unkStruct_8094
  */
 UNUSED u32 fast_mod_3(s32 x)
 {
-    if (x < 0x100) {
+    if (x < 0x100)
         return gFastMod3Lookup[x];
-    }
+
     return x % 3;
 }
 
@@ -42,6 +41,7 @@ s32 sin_abs_4096(s32 x)
         case 0xc00:
             return -gFastSinLookup[0x3ff - (x & 0x3ff)];
     }
+
     return 0;
 }
 
@@ -57,6 +57,7 @@ s32 cos_4096(s32 x)
         case 0xc00:
             return gFastSinLookup[x & 0x3ff];
     }
+
     return 0;
 }
 
@@ -89,26 +90,29 @@ static bool8 u32_pair_less_than(u32 x_hi, u32 x_lo, u32 y_hi, u32 y_lo)
 s24_8 s24_8_mul(s24_8 x, s24_8 y)
 {
     s24_8 ret;
-    bool8 sgn0 = x < 0;
-    bool8 sgn1 = y < 0;
+    bool8 sgn0;
+    bool8 sgn1;
 
-    if (x == 0) {
-        return 0;
-    }
-    if (y == 0) {
-        return 0;
-    }
+    sgn0 = x < 0;
+    sgn1 = y < 0;
 
-    if (sgn0) {
+    if (x == 0)
+        return 0;
+
+    if (y == 0)
+        return 0;
+
+    if (sgn0)
         x = -x;
-    }
-    if (sgn1) {
+
+    if (sgn1)
         y = -y;
-    }
+
     ret = u24_8_mul(x, y);
-    if (sgn0 != sgn1) {
+
+    if (sgn0 != sgn1)
         ret = -ret;
-    }
+
     return ret;
 }
 
@@ -120,29 +124,32 @@ s24_8 s24_8_mul(s24_8 x, s24_8 y)
  *
  * @returns       The quotient `x/y` as a signed 24.8 fixed-point number.
  */
-s24_8 s24_8_div(s24_8 x, s24_8 y)
+static s24_8 s24_8_div(s24_8 x, s24_8 y)
 {
     s24_8 ret;
-    bool8 sgn0 = x < 0;
-    bool8 sgn1 = y < 0;
+    bool8 sgn0;
+    bool8 sgn1;
 
-    if (y == 0) {
+    sgn0 = x < 0;
+    sgn1 = y < 0;
+
+    if (y == 0)
         return INT32_MAX;
-    }
-    if (x == 0) {
-        return 0;
-    }
 
-    if (sgn0) {
+    if (x == 0)
+        return 0;
+
+    if (sgn0)
         x = -x;
-    }
-    if (sgn1) {
+
+    if (sgn1)
         y = -y;
-    }
+
     ret = u24_8_div(x, y);
-    if (sgn0 != sgn1) {
+
+    if (sgn0 != sgn1)
         ret = -ret;
-    }
+
     return ret;
 }
 
@@ -165,9 +172,8 @@ static u24_8 u24_8_mul(u24_8 x, u24_8 y)
     u32 high_bit_mask;
     u32 round_up;
 
-    if (x == 0 || y == 0) {
+    if (x == 0 || y == 0)
         return 0;
-    }
 
     x_h = 0;
     x_l = x;
@@ -175,35 +181,36 @@ static u24_8 u24_8_mul(u24_8 x, u24_8 y)
     y_l = y;
     out_h = 0;
     out_l = 0;
-    high_bit_mask = 0x80 << 0x18; // high bit of u32
+    high_bit_mask = 0x80 << 24; // high bit of u32
 
     for (i = 0; i < 64; ++i) {
         u32 prev_out_l = out_l;
         u32 y_bit = 1;
         y_bit &= y_l;
+
         if (y_bit) {
             out_l += x_l;
             out_h += x_h;
-            if (prev_out_l > out_l) {
+
+            if (prev_out_l > out_l)
                 ++out_h;
-            }
         }
 
         y_l >>= 1;
-        if (y_h & 1) {
+        if (y_h & 1)
             y_l |= high_bit_mask;
-        }
+
         y_h >>= 1;
 
         x_h <<= 1;
-        if (x_l & high_bit_mask) {
+        if (x_l & high_bit_mask)
             x_h |= 1;
-        }
-        do {x_l <<= 1;} while(0); // wtf moment
+
+        do {x_l <<= 1;} while(0); // Fakematch?
     }
 
-    round_up = (out_l >> 0x7) & 1;
-    out_l = (out_l >> 0x8) | (out_h << 0x18);
+    round_up = (out_l >> 7) & 1;
+    out_l = (out_l >> 8) | (out_h << 24);
 
     if (round_up) {
         ++out_l;
@@ -222,27 +229,25 @@ static u24_8 u24_8_mul(u24_8 x, u24_8 y)
  */
 static u24_8 u24_8_div(u24_8 x, u24_8 y)
 {
-  bool8 bVar1;
-  u32 r9;
-  u32 r2;
-  u32 r4;
-  u32 r5;
-  u32 r6;
-  u32 r7;
-  u32 r8;
-  int counter;
-  s32 sl;
-  s32 flag;
-  s32 save;
-  
-  if (y == 0) {
-    return INT32_MAX;
-  }
-  else if (x == 0) {
-    return 0;
-  }
-  else {
-    r7 = x >> 0x18;
+    bool8 bVar1;
+    u32 r9;
+    u32 r2;
+    u32 r4;
+    u32 r5;
+    u32 r6;
+    u32 r7;
+    u32 r8;
+    s32 i;
+    s32 sl;
+    s32 temp;
+
+    if (y == 0)
+        return INT32_MAX;
+
+    if (x == 0)
+        return 0;
+
+    r7 = x >> 24;
     r6 = x << 8;
     sl = y;
     r9 = 0;
@@ -251,43 +256,38 @@ static u24_8 u24_8_div(u24_8 x, u24_8 y)
     r2 = 0;
     r8 = 1;
 
-      
-    for(counter = 0x3f; counter >= 0; counter--)
-    {
-      r5 <<= 1;
-      if ((r4 & 0x80000000) != 0) {
-        r5 |= r8;
-      }
-      flag = -2;
-      r4 <<= 1;
-      if ((r7 & 0x80000000) != 0) {
-        r4 |= r8;
-      }
-      r7 <<= 1;
-      if ((r6 & 0x80000000) != 0) {
-        r7 |= r8;
-      }
-      r6 <<= 1;
-      r6 &= flag;
-      if (u32_pair_less_than(r5,r4,0,sl) == 0) {
-        save = r4;
-        bVar1 = 1;
-        r4 = r4 - sl;
-        r5 = r5 - r2;  // WHY????
-        if (save < r4) {
-          r5--;
+    for (i = 0; i < 64; i++) {
+        r5 <<= 1;
+        if (r4 & 0x80000000)
+            r5 |= r8;
+
+        r4 = (r4 << 1) & ~0x1;
+        if (r7 & 0x80000000)
+            r4 |= r8;
+
+        r7 <<= 1;
+        if (r6 & 0x80000000)
+            r7 |= r8;
+
+        r6 = (r6 << 1) & ~0x1;
+
+        if (!u32_pair_less_than(r5, r4, 0, sl)) {
+            temp = r4;
+            bVar1 = TRUE;
+            r4 -= sl;
+            r5 -= r2;
+            if (temp < r4)
+                r5--;
         }
-      }
-      else {
-        bVar1 = 0;
-      }
-      r9 <<= 1;
-      if (bVar1) {
-        r9 |= r8;
-      }
+        else
+            bVar1 = FALSE;
+
+        r9 <<= 1;
+        if (bVar1)
+            r9 |= r8;
     }
-  }
-  return r9;
+
+    return r9;
 }
 
 UNUSED s32 sub_8009F68(s32 x, s32 y)
@@ -296,55 +296,56 @@ UNUSED s32 sub_8009F68(s32 x, s32 y)
     s32 sVar1;
 
     uVar1 = y;
-    if (y < 0) {
-        uVar1 = -y;
-    }
+    if (uVar1 < 0)
+        uVar1 = -uVar1;
+
     sVar1 = 0x100;
+
     for (; uVar1 != 0; uVar1 >>= 1) {
-        if ((uVar1 & 1) != 0) {
+        if (uVar1 & 1)
             sVar1 = s24_8_mul(sVar1, x);
-        }
+
         x = s24_8_mul(x, x);
     }
-    if (y >= 0) {
+
+    if (y >= 0)
         return sVar1;
-    }
-    else
-        return s24_8_div(0x100,sVar1);
+
+    return s24_8_div(0x100, sVar1);
 }
 
 s32 sub_8009FB8(s32 x, s32 y)
 {
     s32 r4;
-    s32 counter;
-
+    s32 i;
     s32 r5;
     s32 r6;
 
     r5 = x;
     r6 = y;
 
-    if (r5 < 0) {
+    if (r5 < 0)
         r5 = -r5;
-    }
-    if (r6 < 0) {
+
+    if (r6 < 0)
         r6 = -r6;
-    }
+
     if (r5 < r6) {
         r4 = r5;
         r5 = r6;
         r6 = r4;
     }
+
     if (r6 != 0) {
-        for(counter = 2; counter >= 0; counter--)
-        {
-            r4 = s24_8_div(r6,r5);
-            r4 = s24_8_mul(r4,r4);
-            r4 = s24_8_div(r4,r4 + 0x400);
-            r5 = r5 + s24_8_mul(r5,r4) * 2;
-            r6 = s24_8_mul(r6,r4);
+        for (i = 2; i >= 0; i--) {
+            r4 = s24_8_div(r6, r5);
+            r4 = s24_8_mul(r4, r4);
+            r4 = s24_8_div(r4, r4 + 0x400);
+            r5 += s24_8_mul(r5, r4) * 2;
+            r6 = s24_8_mul(r6, r4);
         }
     }
+
     return r5;
 }
 
@@ -524,7 +525,7 @@ static void sub_800A25C(unkStruct_80943A8 *a)
         a->s0++;
 }
 
-void sub_800A27C(unkStruct_80943A8 *a)
+static void sub_800A27C(unkStruct_80943A8 *a)
 {
     if (a->s0 < 0) {
         a->s0 = ~a->s0;
@@ -660,7 +661,7 @@ void sub_800A3F0(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8
     }
 }
 
-void sub_800A4A0(unkStruct_80943A8 *a)
+static void sub_800A4A0(unkStruct_80943A8 *a)
 {
     unkStruct_80943A8 aa;
     unkStruct_80943A8 res;
@@ -750,6 +751,7 @@ static void sub_800A4E4(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_
     }
 }
 
+// Similar to u24_8_div
 static void sub_800A5A4(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
 {
     s32 temp;
@@ -821,4 +823,122 @@ static void sub_800A5A4(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_
         dst->s0 = spC;
         dst->s4 = r9;
     }
+}
+
+void sub_800A6D0(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+{
+    s32 s0;
+    u32 s4;
+
+    s0 = a->s0 + b->s0;
+    s4 = a->s4 + b->s4;
+    if (s4 < a->s4)
+        s0++;
+
+    dst->s0 = s0;
+    dst->s4 = s4;
+}
+
+void sub_800A6F0(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+{
+    s32 s0;
+    u32 s4;
+
+    s0 = a->s0 - b->s0;
+    s4 = a->s4 - b->s4;
+    if (s4 > a->s4)
+        s0--;
+
+    dst->s0 = s0;
+    dst->s4 = s4;
+}
+
+// Similar to sub_8009F68
+UNUSED void sub_800A710(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, s32 b)
+{
+    unkStruct_80943A8 aa;
+    s32 bb;
+    unkStruct_80943A8 res;
+
+    aa.s0 = a->s0;
+    aa.s4 = a->s4;
+    bb = b;
+    if (bb < 0)
+        bb = -bb;
+
+    res.s0 = 0;
+    res.s4 = 0x10000;
+
+    for (; bb != 0; bb >>= 1) {
+        if (bb & 1)
+            sub_800A34C(&res, &res, &aa);
+
+        sub_800A4A0(&aa);
+    }
+
+    if (b < 0) {
+        unkStruct_80943A8 idk;
+        idk.s0 = 0;
+        idk.s4 = 0x10000;
+        sub_800A3F0(&res, &idk, &res);
+    }
+
+    dst->s0 = res.s0;
+    dst->s4 = res.s4;
+}
+
+// Similar to sub_8009FB8
+UNUSED void sub_800A78C(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+{
+    u32 temp;
+    s32 i;
+    unkStruct_80943A8 sp0;
+    unkStruct_80943A8 sp8;
+    unkStruct_80943A8 sp10;
+    unkStruct_80943A8 sp18;
+
+    sp0 = *a;
+    sp8 = *b;
+    sub_800A27C(&sp0);
+    sub_800A27C(&sp8);
+
+    if (sub_800A2F0(&sp0, &sp8)) {
+        sp10 = sp0;
+        sp0 = sp8;
+        sp8 = sp10;
+    }
+
+    if (!sub_800A2A0(&sp8)) {
+        i = 0;
+        goto deez; // Fakematch cuz ya (https://decomp.me/scratch/2TCrJ)
+
+        while (i != 2) {
+            sub_800A34C(&sp8, &sp8, &sp10);
+            i++;
+deez:
+
+            sub_800A3F0(&sp10, &sp8, &sp0);
+            sub_800A4A0(&sp10);
+            sp18.s0 = sp10.s0;
+            sp18.s4 = sp10.s4 + 0x40000;
+
+            if (sp18.s4 < sp10.s4)
+                sp18.s0++;
+
+            sub_800A3F0(&sp10, &sp10, &sp18);
+            sub_800A34C(&sp18, &sp0, &sp10);
+            sp18.s0 <<= 1;
+            if ((s32)sp18.s4 < 0)
+                sp18.s0 |= 0x1;
+
+            sp18.s4 <<= 1;
+            temp = sp0.s4;
+            sp0.s0 += sp18.s0;
+            sp0.s4 = temp + sp18.s4;
+            if (temp > sp0.s4)
+                sp0.s0++;
+        }
+    }
+
+    *dst = sp0;
 }

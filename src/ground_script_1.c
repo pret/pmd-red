@@ -12,6 +12,7 @@
 #include "code_8097670.h"
 #include "exclusive_pokemon.h"
 #include "items.h"
+#include "math.h"
 
 #ifndef NONMATCHING
 #define GROUND_SCRIPT_INCOMPLETE_DECLARATIONS
@@ -52,7 +53,6 @@ char sub_8002984(s32, u8);
 u32 VecDirection8Radial();
 u32 SizedDeltaDirection4();
 u8 SizedDeltaDirection8(Position32*, Position32*, Position32*, Position32*);
-s32 sub_8009FB8();
 
 bool8 sub_8021700(s32);
 bool8 sub_802FCF0(void);
