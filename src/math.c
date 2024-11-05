@@ -909,13 +909,8 @@ UNUSED void sub_800A78C(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_
 
     if (!F48_16_IsZero(&sp8)) {
         i = 0;
-        goto deez; // Fakematch cuz ya (https://decomp.me/scratch/2TCrJ)
 
-        while (i != 2) {
-            F48_16_SMul(&sp8, &sp8, &sp10);
-            i++;
-deez:
-
+        do {
             F48_16_SDiv(&sp10, &sp8, &sp0);
             F48_16_Square(&sp10);
             sp18.s0 = sp10.s0;
@@ -936,7 +931,13 @@ deez:
             sp0.s4 = temp + sp18.s4;
             if (temp > sp0.s4)
                 sp0.s0++;
-        }
+
+            if (i == 2)
+                break;
+
+            F48_16_SMul(&sp8, &sp8, &sp10);
+            i++;
+        } while (TRUE);
     }
 
     *dst = sp0;
