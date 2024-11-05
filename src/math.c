@@ -9,7 +9,7 @@ u24_8 u24_8_mul(u24_8, u24_8);
 bool8 u32_pair_less_than(u32, u32, u32, u32);
 
 void sub_800A5A4(unkStruct_80943A8 *, unkStruct_80943A8 *, unkStruct_80943A8 *);
-void sub_800A4E4(unkStruct_80943A8 *, unkStruct_80943A8 *, unkStruct_80943A8 *);
+static void sub_800A4E4(unkStruct_80943A8 *, unkStruct_80943A8 *, unkStruct_80943A8 *);
 
 /**
  * This function computes a value modulo 3, using a lookup table for values less
@@ -676,5 +676,75 @@ void sub_800A4A0(unkStruct_80943A8 *a)
         sub_800A4E4(&res, &aa, &aa);
         a->s0 = res.s0;
         a->s4 = res.s4;
+    }
+}
+
+// Regswap https://decomp.me/scratch/HNmlz
+static void sub_800A4E4(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+{
+    u32 sl;
+    u32 r1;
+    u32 r2;
+    u32 r3;
+    u32 r4;
+    #ifdef NONMATCHING
+    u32 r5;
+    #else
+    register u32 r5 asm("r5");
+    #endif
+    u32 r6;
+    s32 i;
+    
+    if (sub_800A2A0(a)) {
+        dst->s0 = 0;
+        dst->s4 = 0;
+    }
+    else if (sub_800A2A0(b)) {
+        dst->s0 = 0;
+        dst->s4 = 0;
+    }
+    else {
+        r1 = a->s0;
+        r4 = a->s4;
+        sl = b->s0;
+        r2 = b->s4;
+        r6 = 0;
+        r5 = 0;
+
+        for (i = 0; i < 64; i++) {
+            r3 = r5;
+
+            if (r2 & 1) {
+                r5 += r4;
+                r6 += r1;
+
+                if (r3 > r5)
+                    r6++;
+            }
+
+            r2 >>= 1;
+
+            if (sl & 1)
+                r2 |= 0x80000000;
+
+            sl >>= 1;
+            r1 <<= 1;
+
+            if (r4 & 0x80000000)
+                r1 |= 1;
+
+            r4 <<= 1;
+        }
+
+        r1 = (r5 >> 15) & 1;
+        r5 >>= 16;
+        r5 |= (r6 << 16);
+        r6 >>= 16;
+
+        if (r1 != 0)
+            r5++;
+
+        dst->s0 = r6;
+        dst->s4 = r5;
     }
 }
