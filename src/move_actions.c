@@ -184,11 +184,11 @@ extern u8 sub_803F428(Position *pos);
 extern void sub_807EC28(bool8);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern void sub_804652C(Entity *, Entity *, Item *, u32, Position *);
-extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
+extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_8045C28(Item *, u8 , u8);
 extern void sub_805A7D4(Entity *, Entity *, Item *, Position *);
 extern void MudWaterSportEffect(u32);
-extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
+extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_806A6E8(Entity *);
 
 extern void sub_806ABAC(Entity *, Entity *);
@@ -2171,7 +2171,7 @@ bool8 sub_8059E54(Entity * pokemon,Entity * target,Move * move,u32 param_4,u8 pa
     moveType = GetMoveTypeForMonster(pokemon,move);
     movePower = GetMovePower(pokemon,move);
     moveCritChance = GetMoveCritChance(move);
-    sub_806EAF4(pokemon,target,moveType,movePower,moveCritChance,local_30,0x100,move->id,0);
+    CalcDamage(pokemon,target,moveType,movePower,moveCritChance,local_30,0x100,move->id,0);
     SetMessageArgument_2(gFormatBuffer_Monsters[0],GetEntInfo(pokemon),0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC7C8);
     local_30[0] = local_30[0] / 2;
@@ -2221,7 +2221,7 @@ bool8 sub_8059FC8(Entity * pokemon,Entity * target,Move * move,u32 param_4,u8 pa
     moveType = GetMoveTypeForMonster(pokemon,move);
     movePower = GetMovePower(pokemon,move);
     moveCritChance = GetMoveCritChance(move);
-    sub_806EAF4(pokemon,target,moveType,movePower,moveCritChance,local_30,0x200,move->id,0);
+    CalcDamage(pokemon,target,moveType,movePower,moveCritChance,local_30,0x200,move->id,0);
     SetMessageArgument_2(gFormatBuffer_Monsters[0],GetEntInfo(pokemon),0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC7C8);
     local_30[0] = local_30[0] / 2;
