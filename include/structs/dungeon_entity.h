@@ -196,10 +196,8 @@ typedef struct EntityInfo
     /* 0x10 */ s16 maxHPStat;
     // Bosses have higher HP than normal for their level. This is the max HP they would normally have given their level.
     /* 0x12 */ s16 originalHP;
-    /* 0x14 */ u8 atk;
-    /* 0x15 */ u8 spAtk;
-    /* 0x16 */ u8 def;
-    /* 0x17 */ u8 spDef;
+    /* 0x14 */ u8 atk[2]; // Index 0 is Attack. Index 1 is Special Attack.
+    /* 0x16 */ u8 def[2]; // Index 0 is Defense. Index 1 is Special Defense.
     /* 0x18 */ u32 exp;
     // Temporary stat boosts/drops from effects like Growl or Swords Dance.
     // These start at 10 and are in the range [1, 19].

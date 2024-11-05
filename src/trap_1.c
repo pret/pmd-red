@@ -333,10 +333,10 @@ void SaveEntity(unkStruct_8094924 *param_1, Entity *param_2)
     sub_8083048(param_1,info->HP);
     sub_8083048(param_1,info->maxHPStat);
     sub_8083048(param_1,info->originalHP);
-    sub_8083060(param_1,info->atk);
-    sub_8083060(param_1,info->spAtk);
-    sub_8083060(param_1,info->def);
-    sub_8083060(param_1,info->spDef);
+    sub_8083060(param_1,info->atk[0]);
+    sub_8083060(param_1,info->atk[1]);
+    sub_8083060(param_1,info->def[0]);
+    sub_8083060(param_1,info->def[1]);
     sub_8083078(param_1,info->exp);
     sub_8083048(param_1,info->offensiveStages[0]);
     sub_8083048(param_1,info->offensiveStages[1]);

@@ -514,10 +514,10 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
             GetAvailTacticsforLvl_Bool(tacticsBuffer1,info->level);
         }
         maxHP = info->maxHPStat;
-        atk[0] = info->atk;
-        atk[1] = info->spAtk;
-        def[0] = info->def;
-        def[1] = info->spDef;
+        atk[0] = info->atk[0];
+        atk[1] = info->atk[1];
+        def[0] = info->def[0];
+        def[1] = info->def[1];
         if (!IsClientOrTeamBase(info->joinedAt.joinedAt)) {
             newLevel = info->level + level;
             if (99 < newLevel) {
@@ -529,10 +529,10 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
                 flag |= (sub_80723D0(pokemon,target,param_4,param_5));
                 if ((flag != 0) && (!info->isNotTeamMember)) {
                     gFormatArgs[0] = info->maxHPStat - maxHP;
-                    gFormatArgs[1] = info->atk - atk[0];
-                    gFormatArgs[2] = info->def - def[0];
-                    gFormatArgs[3] = info->spAtk - atk[1];
-                    gFormatArgs[4] = info->spDef - def[1];
+                    gFormatArgs[1] = info->atk[0] - atk[0];
+                    gFormatArgs[2] = info->def[0] - def[0];
+                    gFormatArgs[3] = info->atk[1] - atk[1];
+                    gFormatArgs[4] = info->def[1] - def[1];
                     if (param_4 != 0) {
                         sub_807218C(target);
                     }
@@ -734,10 +734,10 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
             info->HP = info->maxHPStat;
         }
 
-        gUnknown_202F31C[0] = info->atk;
-        gUnknown_202F31C[1] = info->spAtk;
-        gUnknown_202F324[0] = info->def;
-        gUnknown_202F324[1] = info->spDef;
+        gUnknown_202F31C[0] = info->atk[0];
+        gUnknown_202F31C[1] = info->atk[1];
+        gUnknown_202F324[0] = info->def[0];
+        gUnknown_202F324[1] = info->def[1];
 
         gUnknown_202F31C[0] += leveldata.gainAtt;
         gUnknown_202F31C[1] += leveldata.gainSPAtt;
@@ -757,10 +757,10 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
         LoadIQSkills(target);
         sub_8079764(target);
 
-        info->atk = gUnknown_202F31C[0];
-        info->spAtk = gUnknown_202F31C[1];
-        info->def = gUnknown_202F324[0];
-        info->spDef = gUnknown_202F324[1];
+        info->atk[0] = gUnknown_202F31C[0];
+        info->atk[1] = gUnknown_202F31C[1];
+        info->def[0] = gUnknown_202F324[0];
+        info->def[1] = gUnknown_202F324[1];
 
         sub_8072778(pokemon, target, param_3, param_4);
     }
@@ -828,10 +828,10 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
                 info->HP = info->maxHPStat;
             }
 
-            gUnknown_202F31C[0] = info->atk;
-            gUnknown_202F31C[1] = info->spAtk;
-            gUnknown_202F324[0] = info->def;
-            gUnknown_202F324[1] = info->spDef;
+            gUnknown_202F31C[0] = info->atk[0];
+            gUnknown_202F31C[1] = info->atk[1];
+            gUnknown_202F324[0] = info->def[0];
+            gUnknown_202F324[1] = info->def[1];
 
             gUnknown_202F31C[0] -= leveldata.gainAtt;
             gUnknown_202F31C[1] -= leveldata.gainSPAtt;
@@ -851,10 +851,10 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
             LoadIQSkills(target);
             sub_8079764(target);
 
-            info->atk = gUnknown_202F31C[0];
-            info->spAtk = gUnknown_202F31C[1];
-            info->def = gUnknown_202F324[0];
-            info->spDef = gUnknown_202F324[1];
+            info->atk[0] = gUnknown_202F31C[0];
+            info->atk[1] = gUnknown_202F31C[1];
+            info->def[0] = gUnknown_202F324[0];
+            info->def[1] = gUnknown_202F324[1];
         }
     }
 
