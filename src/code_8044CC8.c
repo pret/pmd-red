@@ -5,26 +5,39 @@
 #include "code_8044CC8.h"
 #include "items.h"
 
+// size: 0x8
 typedef struct ItemText
 {
     u8 *desc;
     u8 *useText;
 } ItemText;
-extern const ItemText gActions[];
 
-extern u16 gUnknown_80F6964[NUM_ITEM_CATEGORIES];
-extern u8 gUnknown_80F697C[];
-extern u8 *gUnknown_80F91EC[];
-extern u8 *gUnknown_80F7C50[10];
+// size: 0x8
+typedef struct unkStr_80F7C54
+{
+    u32 unk0;
+    u8 *text;
+} unkStr_80F7C54;
+
+
+
+EWRAM_DATA unkStruct_202EE44 gUnknown_202EE44[10] = {0};
 
 extern s32 gUnknown_202EE6C;
 
-bool8 sub_80461C8(Position *, u32);
-void sub_80460F8(Position *, Item *, u32);
+
+
+extern const ItemText gActions[];
+extern u16 gUnknown_80F6964[NUM_ITEM_CATEGORIES];
+extern u8 gUnknown_80F697C[];
+extern u8 *gUnknown_80F7C50[10];
+extern const unkStr_80F7C54 gUnknown_80F7C54[65];
+extern u8 *gUnknown_80F91EC[];
+
 extern u8 sub_8043D10(void);
 extern bool8 sub_8045888(Entity *);
-
-EWRAM_DATA struct unkStruct_202EE44 gUnknown_202EE44[10] = {0};
+void sub_80460F8(Position *, Item *, u32);
+bool8 sub_80461C8(Position *, u32);
 
 Item * sub_8044CC8(Entity *param_1, unkStruct_8044CC8 *param_2)
 {
@@ -247,5 +260,26 @@ bool8 IsNotAttacking(Entity *param_1, bool8 param_2)
     }
     else {
         return TRUE;
+    }
+}
+
+void sub_8045064(void)
+{
+    s32 i;
+    s32 j;
+    unkStruct_202EE44 *iPtr;
+    unkStruct_202EE44 *jPtr;
+    unkStruct_202EE44 temp;
+
+    for (i = 0; i < gUnknown_202EE6C; i++) {
+        for (j = i + 1; j < gUnknown_202EE6C; j++) {
+            iPtr = &gUnknown_202EE44[i];
+            jPtr = &gUnknown_202EE44[j];
+            if ((s32)gUnknown_80F7C54[iPtr->unk0].unk0 > (s32)gUnknown_80F7C54[jPtr->unk0].unk0) {
+                temp = *iPtr;
+                *iPtr = *jPtr;
+                *jPtr = temp;
+            }
+        }
     }
 }

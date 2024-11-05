@@ -215,7 +215,6 @@ SECTIONS {
         asm/code_8044210.o(.text);
         src/dungeon_action.o(.text);
         src/code_8044CC8.o(.text);
-        asm/code_8044CC8.o(.text);
         src/dungeon_util.o(.text);
         asm/code_80450F8.o(.text);
         src/dungeon_visibility.o(.text);
