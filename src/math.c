@@ -4,11 +4,11 @@
 
 #include "data/math.h"
 
-u24_8 u24_8_div(u24_8, u24_8);
-u24_8 u24_8_mul(u24_8, u24_8);
-bool8 u32_pair_less_than(u32, u32, u32, u32);
+static u24_8 u24_8_div(u24_8, u24_8);
+static u24_8 u24_8_mul(u24_8, u24_8);
+static bool8 u32_pair_less_than(u32, u32, u32, u32);
 
-void sub_800A5A4(unkStruct_80943A8 *, unkStruct_80943A8 *, unkStruct_80943A8 *);
+static void sub_800A5A4(unkStruct_80943A8 *, unkStruct_80943A8 *, unkStruct_80943A8 *);
 static void sub_800A4E4(unkStruct_80943A8 *, unkStruct_80943A8 *, unkStruct_80943A8 *);
 
 /**
@@ -75,7 +75,7 @@ s32 cos_4096(s32 x)
  *
  * @return          `TRUE` if `x < y`, `FALSE` otherwise.
  */
-bool8 u32_pair_less_than(u32 x_hi, u32 x_lo, u32 y_hi, u32 y_lo)
+static bool8 u32_pair_less_than(u32 x_hi, u32 x_lo, u32 y_hi, u32 y_lo)
 {
     if (x_hi < y_hi)
         return TRUE;
@@ -154,7 +154,7 @@ s24_8 s24_8_div(s24_8 x, s24_8 y)
  *
  * @return        The product `x*y` as an unsigned 24.8 fixed-point number.
  */
-u24_8 u24_8_mul(u24_8 x, u24_8 y)
+static u24_8 u24_8_mul(u24_8 x, u24_8 y)
 {
     // We need 64 bits for intermediate steps of the multiplication.
     u32 x_h, x_l;
@@ -220,7 +220,7 @@ u24_8 u24_8_mul(u24_8 x, u24_8 y)
  *
  * @return        The quotient `x/y` as an unsigned 24.8 fixed-point number.
  */
-u24_8 u24_8_div(u24_8 x, u24_8 y)
+static u24_8 u24_8_div(u24_8 x, u24_8 y)
 {
   bool8 bVar1;
   u32 r9;
@@ -351,39 +351,40 @@ s32 sub_8009FB8(s32 x, s32 y)
 void sub_800A020(unkStruct_80943A8 *param_1, u32 param_2)
 {
 #ifndef NONMATCHING
-  register u32 temp asm("r4");
+    register u32 temp asm("r4");
 #else
-  u32 temp;
+    u32 temp;
 #endif
-    
-  temp = 0xffff0000;
-  param_1->s0 = param_2 >> 0x10;
-  param_1->s4 = param_2 << 0x10;
-  if ((param_2 & 0x8000) != 0) {
-    param_1->s0 |= temp;
-  }
+
+    temp = 0xFFFF0000;
+    param_1->s0 = param_2 >> 16;
+    param_1->s4 = param_2 << 16;
+
+    if (param_2 & 0x8000)
+        param_1->s0 |= temp;
+
 }
 
-u32 sub_800A048(u32 *param_1)
+u32 sub_800A048(u32 *a)
 {
-  u32 uVar1;
-  
-  uVar1 = ((u16)param_1[0] << 0x10) | (param_1[1] >> 0x10);
-  if ((param_1[1] & 0x8000) != 0) {
-    uVar1++;
-  }
-  return uVar1;
+    u32 uVar1;
+
+    uVar1 = ((u16)a[0] << 16) | (a[1] >> 16);
+    if (a[1] & 0x8000)
+        uVar1++;
+
+    return uVar1;
 }
 
-UNUSED u32 sub_800A068(u32 *param_1)
+UNUSED u32 sub_800A068(u32 *a)
 {
-  u32 uVar1;
-  
-  uVar1 = ((u8)param_1[0] << 0x18) | param_1[1] >> 8;
-  if ((param_1[1] & 0x8000) != 0) {
-    uVar1++;
-  }
-  return uVar1;
+    u32 uVar1;
+
+    uVar1 = ((u8)a[0] << 24) | a[1] >> 8;
+    if (a[1] & 0x8000)
+        uVar1++;
+
+    return uVar1;
 }
 
 void sub_800A088(u32 *a, s32 b)
@@ -518,9 +519,9 @@ static void sub_800A25C(unkStruct_80943A8 *a)
 {
     a->s0 = ~a->s0;
     a->s4 = ~a->s4 + 1;
-    if (a->s4 == 0) {
+
+    if (a->s4 == 0)
         a->s0++;
-    }
 }
 
 void sub_800A27C(unkStruct_80943A8 *a)
@@ -528,9 +529,9 @@ void sub_800A27C(unkStruct_80943A8 *a)
     if (a->s0 < 0) {
         a->s0 = ~a->s0;
         a->s4 = ~a->s4 + 1;
-        if (a->s4 == 0) {
+
+        if (a->s4 == 0)
             a->s0++;
-        }
     }
 }
 
@@ -566,7 +567,7 @@ bool8 sub_800A2F0(unkStruct_80943A8 *a, unkStruct_80943A8 *b)
 
     b0 = b->s0;
     if (b0 < 0)
-        r1 |= 2;
+        r1 |= 0x2;
 
     switch (r1) {
         case 0:
@@ -637,7 +638,7 @@ void sub_800A3F0(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8
 
     if (sub_800A2A0(&bb)) {
         dst->s0 = INT32_MAX;
-        dst->s4 = -1;
+        dst->s4 = UINT32_MAX;
     }
     else if (sub_800A2A0(&aa)) {
         dst->s0 = 0;
@@ -746,5 +747,78 @@ static void sub_800A4E4(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_
 
         dst->s0 = r6;
         dst->s4 = r5;
+    }
+}
+
+static void sub_800A5A4(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+{
+    s32 temp;
+    bool8 r1;
+    u32 r4;
+    u32 r5;
+    u32 r6;
+    u32 r7;
+    u32 r9;
+    s32 sp4;
+    u32 sp8;
+    u32 spC;
+    s32 i;
+
+    if (sub_800A2A0(b)) {
+        dst->s0 = INT32_MAX;
+        dst->s4 = UINT32_MAX;
+    }
+    else if (sub_800A2A0(a)) {
+        dst->s0 = 0;
+        dst->s4 = 0;
+    }
+    else {
+        r7 = (a->s0 << 16) | (a->s4 >> 16);
+        r6 = (a->s4 << 16) | 0x8000;
+        sp4 = b->s0;
+        sp8 = b->s4;
+        spC = 0; // Effectively unused
+        r9 = 0;
+        r5 = 0;
+        r4 = 0;
+
+        for (i = 0; i < 64; i++) {
+            r5 <<= 1;
+            if (r4 & 0x80000000)
+                r5 |= 0x1;
+
+            r4 = (r4 << 1) & ~0x1;
+            if (r7 & 0x80000000)
+                r4 |= 0x1;
+
+            r7 <<= 1;
+            if (r6 & 0x80000000)
+                r7 |= 0x1;
+
+            r6 = (r6 << 1) & ~0x1;
+
+            if (!u32_pair_less_than(r5, r4, sp4, sp8)) {
+                temp = r4;
+                r1 = TRUE;
+                r4 -= sp8;
+                r5 -= sp4;
+
+                if (temp < r4)
+                    r5--;
+            }
+            else
+                r1 = FALSE;
+
+            spC <<= 1;
+            if (r9 & 0x80000000)
+                spC |= 0x1;
+
+            r9 = (r9 << 1) & ~0x1;
+            if (r1)
+                r9 |= 0x1;
+        }
+
+        dst->s0 = spC;
+        dst->s4 = r9;
     }
 }

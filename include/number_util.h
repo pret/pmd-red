@@ -10,7 +10,7 @@ typedef struct FixedPoint
 typedef struct unkStruct_80943A8
 {
     s32 s0;
-    s32 s4;
+    u32 s4; // sub_800A5A4 requires this to be a u32, but other funcs check if it's negative...
 } unkStruct_80943A8;
 
 FixedPoint FixedPoint_Add(FixedPoint a, FixedPoint b);
