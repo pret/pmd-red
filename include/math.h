@@ -51,9 +51,15 @@ s32 sin_abs_4096(s32 x);
 s24_8 s24_8_mul(s24_8 x, s24_8 y);
 
 bool8 F48_16_IsZero(unkStruct_80943A8 *a);
+void F48_16_SDiv(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b);
 void F48_16_SMul(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b);
 
 s32 sub_8009FB8(s32 x, s32 y);
-void sub_800A020(unkStruct_80943A8 *, u32);
+void sub_800A020(unkStruct_80943A8 *dst, u32);
+u32 sub_800A048(unkStruct_80943A8 *a);
+void sub_800A088(unkStruct_80943A8 *a, s32 b);
+bool8 sub_800A2F0(unkStruct_80943A8 *a, unkStruct_80943A8 *b);
+void sub_800A6D0(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b);
+void sub_800A6F0(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b);
 
 #endif // GUARD_MATH_H

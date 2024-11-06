@@ -365,12 +365,12 @@ void sub_800A020(unkStruct_80943A8 *param_1, u32 param_2)
 
 }
 
-u32 sub_800A048(u32 *a)
+u32 sub_800A048(unkStruct_80943A8 *a)
 {
     u32 uVar1;
 
-    uVar1 = ((u16)a[0] << 16) | (a[1] >> 16);
-    if (a[1] & 0x8000)
+    uVar1 = ((u16)a->s0 << 16) | (a->s4 >> 16);
+    if (a->s4 & 0x8000)
         uVar1++;
 
     return uVar1;
@@ -387,15 +387,15 @@ UNUSED u32 sub_800A068(u32 *a)
     return uVar1;
 }
 
-void sub_800A088(u32 *a, s32 b)
+void sub_800A088(unkStruct_80943A8 *a, s32 b)
 {
-    a[1] = b << 8;
-    a[0] = b >> 24;
+    a->s4 = b << 8;
+    a->s0 = b >> 24;
 
-    if (a[0] & 0x80)
-        a[0] |= ~0x7F;
+    if (a->s0 & 0x80)
+        a->s0 |= ~0x7F;
     else
-        a[0] &= 0x7f;
+        a->s0 &= 0x7f;
 }
 
 s32 sub_800A0B0(unkStruct_80943A8 *a)
