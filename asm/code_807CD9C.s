@@ -485,7 +485,7 @@ _0807D8B0:
 	adds r0, r4, 0
 	bl IncreaseEntityPixelPos
 	mov r0, r10
-	bl sin_abs_4096
+	bl sin_4096
 	add r2, sp, 0x20
 	adds r2, r5
 	lsls r1, r0, 1

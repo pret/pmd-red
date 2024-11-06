@@ -22,7 +22,7 @@ typedef u32 u24_8;
  * This function computes the cosine of of `x` using a lookup table. The period of
  * the function is `4096`, and the range is `[-256, 256]`.
  *
- * @note Mathematically, `cos(abs(t)) = cos(t)`, unlike the case in `sin_abs_4096()` above.
+ * @note Mathematically, `cos(abs(t)) = cos(t)`, unlike the case in `sin_4096()` above.
  *
  * @param[in] x     The value to get the cosine of.
  *
@@ -38,7 +38,7 @@ s32 cos_4096(s32 x);
  *
  * @return          `floor(256 * sin(pi * abs(x) / 2048))` as a signed 32-bit integer.
  */
-s32 sin_abs_4096(s32 x);
+s32 sin_4096(s32 x);
 
 /**
  * This function multiplies two signed 24.8 fixed-point numbers.

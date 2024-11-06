@@ -536,7 +536,7 @@ void sub_8005838(s32 *a0, u8 kind)
                 k = iVar11;
                 j = iVar11;
                 for (sp10 = 0; sp10 < 0x400; sp10 += spC) {
-                    s32 tmp1 = sin_abs_4096(sp10) * val3 / 256;
+                    s32 tmp1 = sin_4096(sp10) * val3 / 256;
 
                     sp14 = (val2 + tmp1) / 256;
                     r8 = (val2 - tmp1) / 256;

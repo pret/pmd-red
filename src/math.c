@@ -28,7 +28,7 @@ UNUSED u32 fast_mod_3(s32 x)
     return x % 3;
 }
 
-s32 sin_abs_4096(s32 x)
+s32 sin_4096(s32 x)
 {
     switch (x & 0xc00) {
         case 0x000:

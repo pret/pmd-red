@@ -200,7 +200,7 @@ void sub_807D068(Entity *pokemon, Position *pos)
         pixelY += incrementY;
         local_34.x = pixelX;
         local_34.y = pixelY;
-        pokemon->unk1C = sin_abs_4096(iVar8) * 0xc;
+        pokemon->unk1C = sin_4096(iVar8) * 0xc;
         sub_804535C(pokemon, &local_34);
         if (sub_8045888(pokemon)) {
             sub_803E46C(0x1a);
