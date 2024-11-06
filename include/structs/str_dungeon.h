@@ -372,7 +372,8 @@ typedef struct Dungeon
     u16 unk12BEC[9];
     u16 unk12BFE[19];
     u8 unk12C24[0x930];
-    u16 unk13554[12];
+    u16 unk13554[10];
+    OpenedFile *unk13568;
     u8 unk1356C;
     u8 fill1356D[0x13570 - 0x1356D];
     /* 0x13570 */ u8 unk13570;
