@@ -3,6 +3,7 @@
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
 #include "cpu.h"
+#include "math.h"
 #include "sprite.h"
 
 extern u8 gUnknown_2026E38;
@@ -26,10 +27,6 @@ extern const s16 gUnknown_80B802A[16 * 10];
 extern const s16 gUnknown_80B816A[16 * 10];
 extern const s16 gUnknown_80B82AA[16 * 10];
 extern const s16 gUnknown_80B83EA[16 * 10];
-
-// code_8009804.s
-extern s32 sin_abs_4096(s32);
-extern s32 cos_4096(s32);
 
 static void sub_800561C(struct axMapSprite *, s32, s32, const RGB *);
 const RGB *sub_8005674(struct axMapSprite *, s32);
@@ -539,7 +536,7 @@ void sub_8005838(s32 *a0, u8 kind)
                 k = iVar11;
                 j = iVar11;
                 for (sp10 = 0; sp10 < 0x400; sp10 += spC) {
-                    s32 tmp1 = sin_abs_4096(sp10) * val3 / 256;
+                    s32 tmp1 = sin_4096(sp10) * val3 / 256;
 
                     sp14 = (val2 + tmp1) / 256;
                     r8 = (val2 - tmp1) / 256;

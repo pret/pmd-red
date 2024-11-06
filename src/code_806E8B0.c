@@ -26,14 +26,6 @@ void sub_80428B0(Entity *r0);
 void sub_80428C4(Entity *r0);
 
 extern void sub_806F500(void);
-extern void sub_800A020(struct unkStruct_80943A8 *param_1, u32 param_2);
-extern void sub_800A3F0(struct unkStruct_80943A8 *param_1, struct unkStruct_80943A8 *param_2, struct unkStruct_80943A8 *);
-extern void sub_800A6D0(struct unkStruct_80943A8 *param_1, struct unkStruct_80943A8 *param_2, struct unkStruct_80943A8 *);
-extern void sub_800A34C(struct unkStruct_80943A8 *param_1, struct unkStruct_80943A8 *param_2, const struct unkStruct_80943A8 *param3);
-extern void sub_800A6F0(struct unkStruct_80943A8 *param_1, struct unkStruct_80943A8 *param_2, struct unkStruct_80943A8 *param3);
-extern void sub_800A088(struct unkStruct_80943A8 *param_1, u32 param_2);
-extern u32 sub_800A048(struct unkStruct_80943A8 *param_1);
-extern bool8 sub_800A2F0(const struct unkStruct_80943A8*, const struct unkStruct_80943A8*);
 extern bool8 sub_806E100(struct unkStruct_80943A8 *param_1, Entity *pokemon, Entity *target, u8 type, struct DamageStruct *dmgStruct);
 extern void sub_8041B74(Entity *pokemon);
 extern void sub_8041B5C(Entity *pokemon);
@@ -51,10 +43,10 @@ extern const s16 gUnknown_810AC68;
 extern const s16 gUnknown_810AC62;
 extern const s16 gUnknown_80F4DAE;
 extern const s16 gUnknown_80F4DB0;
-extern const struct unkStruct_80943A8 gUnknown_8106F24;
-extern const struct unkStruct_80943A8 gUnknown_8106F04;
-extern const struct unkStruct_80943A8 gUnknown_8106F1C;
-extern const struct unkStruct_80943A8 gUnknown_8106F14;
+extern struct unkStruct_80943A8 gUnknown_8106F24;
+extern struct unkStruct_80943A8 gUnknown_8106F04;
+extern struct unkStruct_80943A8 gUnknown_8106F1C;
+extern struct unkStruct_80943A8 gUnknown_8106F14;
 extern const u8 *const gUnknown_80FAE00;
 extern const u8 *const gUnknown_80FADD8;
 extern const u8 *const gUnknown_80FEE04;
@@ -285,12 +277,12 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         ApplyAtkDefStatBoosts(attacker, target, moveType, &atkStat, &defStat, rand);
         sub_800A020(&unkSp1, atkStat - defStat);
         sub_800A020(&unkSp2, 8);
-        sub_800A3F0(&unkSp1, &unkSp1, &unkSp2);
+        F48_16_SDiv(&unkSp1, &unkSp1, &unkSp2);
         if (!attackerInfo->isNotTeamMember) {
             sub_800A020(&unkSp2, attackerInfo->level);
             unkSp3.s0 = 0;
             unkSp3.s4 = 0xAAAA;
-            sub_800A34C(&unkSp2, &unkSp2, &unkSp3);
+            F48_16_SMul(&unkSp2, &unkSp2, &unkSp3);
             r6 = (attackerInfo->level * 2) / 3;
         }
         else {
@@ -299,7 +291,7 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
             ApplyAtkDefStatBoosts(attacker, target, moveType, &unkAtkStat2, &unkDefStat2, rand);
             sub_800A020(&unkSp2, unkAtkStat2);
             sub_800A020(&unkSp3, 3);
-            sub_800A3F0(&unkSp2, &unkSp2, &unkSp3);
+            F48_16_SDiv(&unkSp2, &unkSp2, &unkSp3);
             r6 = unkAtkStat2 / 3;
         }
         sub_800A6D0(&unkSp4, &unkSp1, &unkSp2);
@@ -307,12 +299,12 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         gDungeon->unk134.unk140[6] = sub_800A048(&unkSp4);
         unkSp5 = unkSp4;
         unkSp7 = unkSp4;
-        sub_800A34C(&unkSp5, &unkSp5, &unkSp5);
+        F48_16_SMul(&unkSp5, &unkSp5, &unkSp5);
         unkSp6.s0 = 0;
         unkSp6.s4 = 0xCCC;
-        sub_800A34C(&unkSp5, &unkSp5, &unkSp6);
+        F48_16_SMul(&unkSp5, &unkSp5, &unkSp6);
         sub_800A020(&unkSp6, 2);
-        sub_800A34C(&unkSp7, &unkSp7, &unkSp6);
+        F48_16_SMul(&unkSp7, &unkSp7, &unkSp6);
         sub_800A020(&unkSp6, defStat);
         sub_800A6F0(&unkSp7, &unkSp7, &unkSp6);
         sub_800A020(&unkSp6, 10);
@@ -342,12 +334,12 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         if (arg_10) {
             if (splitIndex == 0 && targetInfo->protection.protectionStatus == STATUS_REFLECT) {
                 sub_8041B74(target);
-                sub_800A34C(&unkSp9, &unkSp9, &gUnknown_8106F1C);
+                F48_16_SMul(&unkSp9, &unkSp9, &gUnknown_8106F1C);
                 gDungeon->unk134.unk166 = 1;
             }
             if (splitIndex == 1 && targetInfo->protection.protectionStatus == STATUS_LIGHT_SCREEN) {
                 sub_8041B5C(target);
-                sub_800A34C(&unkSp9, &unkSp9, &gUnknown_8106F1C);
+                F48_16_SMul(&unkSp9, &unkSp9, &gUnknown_8106F1C);
                 gDungeon->unk134.unk167 = 1;
             }
         }
@@ -382,13 +374,13 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
                 }
             }
             if (DungeonRandInt(100) < critOdds) {
-                sub_800A34C(&unkSp9, &unkSp9, &gUnknown_8106F14);
+                F48_16_SMul(&unkSp9, &unkSp9, &gUnknown_8106F14);
                 dmgStruct->isCrit = TRUE;
             }
         }
 
         gDungeon->unk134.unk154 = sub_800A048(&unkSp8);
-        sub_800A34C(&unkSp8, &unkSp8, &unkSp9);
+        F48_16_SMul(&unkSp8, &unkSp8, &unkSp9);
         {
             // Ugly hack needed to match
             #ifdef NONMATCHING
@@ -400,7 +392,7 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
             gDungeon->unk134.unk15C = arg8_Match = arg8;
             ASM_MATCH_TRICK(arg8);
             sub_800A088(&unkSp10, arg8_Match);
-            sub_800A34C(&unkSp8, &unkSp8, &unkSp10);
+            F48_16_SMul(&unkSp8, &unkSp8, &unkSp10);
         }
 
         // ALSO needed to match. unk694 chosen randomly and it worked with matching.
@@ -411,10 +403,10 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
             unkSp9.s0 = 0;
             unkSp9.s4 = 0xE000 + rnd;
         }
-        sub_800A34C(&unkSp8, &unkSp8, &unkSp9);
+        F48_16_SMul(&unkSp8, &unkSp8, &unkSp9);
         sub_800A020(&unkSp11, 100);
 
-        sub_800A34C(&unkSp9, &unkSp11, &unkSp9);
+        F48_16_SMul(&unkSp9, &unkSp11, &unkSp9);
         gDungeon->unk134.unk158 = sub_800A048(&unkSp9);
 
         dmgStruct->dmg = sub_800A048(&unkSp8);
@@ -437,7 +429,7 @@ void sub_806F2BC(Entity *attacker, Entity *target, u8 moveType, s32 a2, struct D
     dmgStruct->type = moveType;
     sub_806E100(&unkSp1, attacker, target, moveType, dmgStruct);
     sub_800A020(&unkSp2, a2New);
-    sub_800A34C(&unkSp2, &unkSp2, &unkSp1);
+    F48_16_SMul(&unkSp2, &unkSp2, &unkSp1);
     dmgStruct->dmg = sub_800A048(&unkSp2);
     dmgStruct->residualDmgType = 0;
 }

@@ -32,6 +32,7 @@
 #include "dungeon_message.h"
 #include "code_8077274_1.h"
 #include "dungeon_pokemon_attributes.h"
+#include "math.h"
 
 extern bool8 sub_8044B28(void);
 extern void sub_8075708(Entity *entity);
@@ -45,7 +46,6 @@ extern void sub_805229C(void);
 extern void sub_807E8F0(Entity *);
 extern void sub_80444F4(Entity *pokemon);
 extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, Position *r3);
-extern void sub_800A34C(struct unkStruct_80943A8 *, struct unkStruct_80943A8 *, const u8 *);
 extern void sub_80420B8(Entity *pokemon);
 extern void sub_8041C4C(Entity *pokemon, u32 r1);
 extern void sub_805E804(void);
@@ -105,7 +105,7 @@ extern const s16 gUnknown_80F4F74;
 extern const s16 gUnknown_80F4FC2;
 extern const s16 gUnknown_80F4F76;
 extern const s16 gUnknown_80F4F36;
-extern const u8 gUnknown_80F54F4[][8];
+extern unkStruct_80943A8 gUnknown_80F54F4[8];
 extern const s32 gUnknown_80F60DC[];
 
 extern const Position gUnknown_80F4D44[];
@@ -309,7 +309,7 @@ void sub_8074094(Entity *entity)
     }
 
     if (entityInfo->isTeamLeader) {
-        struct unkStruct_80943A8 sp8, sp10;
+        unkStruct_80943A8 sp8, sp10;
         FixedPoint var_38;
         FixedPoint bellyBefore;
         bool8 sound;
@@ -336,7 +336,7 @@ void sub_8074094(Entity *entity)
 
         sp8.s0 = 0;
         sp8.s4 = 6554;
-        sub_800A34C(&sp10, &sp8, gUnknown_80F54F4[r4]);
+        F48_16_SMul(&sp10, &sp8, &gUnknown_80F54F4[r4]);
         if (entityInfo->unk153 > 1)
             sp10.s4 += (gUnknown_80F60DC[entityInfo->unk153] << 0x10);
         entityInfo->unk153 = 0;

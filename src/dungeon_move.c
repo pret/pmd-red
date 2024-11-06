@@ -2642,7 +2642,7 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
                     s32 r2;
 
                     if (a3 != 0) {
-                        r3 = sin_abs_4096(r9 / 256) * var_3C;
+                        r3 = sin_4096(r9 / 256) * var_3C;
                     }
                     else {
                         r3 = 0;
