@@ -508,14 +508,14 @@ void RaiseAtkStatTarget(Entity * pokemon, Entity *target, s32 increment)
     SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
 
     entityInfo = GetEntInfo(target);
-    oldStat = entityInfo->atk;
+    oldStat = entityInfo->atk[0];
     oldStat1 = oldStat;
 
-    newStat = entityInfo->atk + increment;
+    newStat = entityInfo->atk[0] + increment;
     if (0xfe < newStat) {
       newStat = 0xff;
     }
-    entityInfo->atk = newStat;
+    entityInfo->atk[0] = newStat;
     if (oldStat1 < (u8)newStat) {
       sub_8041E60(target);
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC33C);
@@ -538,14 +538,14 @@ void RaiseSpAtkStatTarget(Entity * pokemon, Entity *target, s32 increment)
     SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
 
     entityInfo = GetEntInfo(target);
-    oldStat = entityInfo->spAtk;
+    oldStat = entityInfo->atk[1];
     oldStat1 = oldStat;
 
-    newStat = entityInfo->spAtk + increment;
+    newStat = entityInfo->atk[1] + increment;
     if (0xfe < newStat) {
       newStat = 0xff;
     }
-    entityInfo->spAtk = newStat;
+    entityInfo->atk[1] = newStat;
     if (oldStat1 < (u8)newStat) {
       sub_8041E74(target);
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC388);
@@ -568,14 +568,14 @@ void RaiseDefStatTarget(Entity * pokemon, Entity *target, s32 increment)
     SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
 
     entityInfo = GetEntInfo(target);
-    oldStat = entityInfo->def;
+    oldStat = entityInfo->def[0];
     oldStat1 = oldStat;
 
-    newStat = entityInfo->def + increment;
+    newStat = entityInfo->def[0] + increment;
     if (0xfe < newStat) {
       newStat = 0xff;
     }
-    entityInfo->def = newStat;
+    entityInfo->def[0] = newStat;
     if (oldStat1 < (u8)newStat) {
       sub_8041E84(target);
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC3D8);
@@ -598,14 +598,14 @@ void RaiseSpDefStatTarget(Entity * pokemon, Entity *target, s32 increment)
     SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
 
     entityInfo = GetEntInfo(target);
-    oldStat = entityInfo->spDef;
+    oldStat = entityInfo->def[1];
     oldStat1 = oldStat;
 
-    newStat = entityInfo->spDef + increment;
+    newStat = entityInfo->def[1] + increment;
     if (0xfe < newStat) {
       newStat = 0xff;
     }
-    entityInfo->spDef = newStat;
+    entityInfo->def[1] = newStat;
     if (oldStat1 < (u8)newStat) {
       sub_8041E94(target);
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC428);

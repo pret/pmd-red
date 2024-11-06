@@ -42,7 +42,7 @@ extern void sub_80429C8(Entity *r0);
 extern u8 sub_803F428(Position *);
 extern bool8 sub_8045888(Entity *r0);
 extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
-extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, u32, u16, u32);
+extern void CalcDamage(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, u32, u16, u32);
 extern s16 sub_8057600(Move *move, s32 itemID);
 extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern void sub_8042238(Entity *pokemon, Entity *target);
@@ -622,7 +622,6 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     case MOVE_JUMP_KICK:
                         sub_8059E54(attacker, currTarget, move, itemId, 1);
                         break;
-
                 }
 
                 if (sub_8044B28())
@@ -1667,7 +1666,7 @@ s32 HandleDamagingMove(Entity *attacker, Entity *target, Move *move, s32 r9, s32
     s32 movePower = GetMovePower(attacker, move);
     s32 critChance = GetMoveCritChance(move);
 
-    sub_806EAF4(attacker, target, moveType, movePower, critChance, &dmgStruct, r9, move->id, 1);
+    CalcDamage(attacker, target, moveType, movePower, critChance, &dmgStruct, r9, move->id, 1);
     unk = sub_8057600(move, itemId);
     return TryHitTarget(attacker, target, move, &dmgStruct, unk);
 }
@@ -1679,7 +1678,7 @@ s32 sub_80556BC(Entity *attacker, Entity *target, u8 moveType, Move *move, s32 r
     s32 movePower = GetMovePower(attacker, move);
     s32 critChance = GetMoveCritChance(move);
 
-    sub_806EAF4(attacker, target, moveType, movePower, critChance, &dmgStruct, r9, move->id, 1);
+    CalcDamage(attacker, target, moveType, movePower, critChance, &dmgStruct, r9, move->id, 1);
     unk = sub_8057600(move, itemId);
     return TryHitTarget(attacker, target, move, &dmgStruct, unk);
 }
