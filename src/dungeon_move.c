@@ -61,13 +61,13 @@ extern s32 sub_800E710(s16 a0, u16 a1);
 extern void sub_800E3AC(s32 a0, Position *pos, s32 a2);
 extern void sub_8041168(Entity *entity, Entity *entity2, Move *,Position *);
 extern Entity *sub_80696A8(Entity *a0);
-extern Entity *sub_804AD0C(Position *pos);
+extern Entity *GetMonsterAtPos(Position *pos);
 extern Entity *sub_80696FC(Entity *);
 extern Entity *sub_806977C(Entity *);
 extern void sub_806F2BC(Entity *attacker, Entity *target, u8 moveType, s32 a2, struct DamageStruct *dmgStruct);
 extern void sub_806ACE8(Entity *entity, Move *move);
 extern s32 sub_8057070(Move *move);
-extern bool8 sub_805755C(Entity* pokemon,u16 param_2);
+extern bool8 MoveRequiresCharging(Entity* pokemon,u16 param_2);
 extern s32 sub_800ED20(u16 param_1);
 extern bool32 sub_8058F04(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern void sub_8042930(Entity *r0);
@@ -514,7 +514,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
             TrySendImmobilizeSleepEndMsg(attacker, currTarget);
             r4 = FALSE;
             if (!MoveMatchesChargingStatus(attacker, move)) {
-                r4 = (sub_805755C(attacker, move->id) != 0);
+                r4 = (MoveRequiresCharging(attacker, move->id) != 0);
             }
 
             if (!lightRodRedirect) {
@@ -1621,7 +1621,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     }
                 }
                 else {
-                    if (MoveCausesPaused(move) && sub_8057308(attacker, 0)) {
+                    if (MoveCausesPaused(move) && RollSecondaryEffect(attacker, 0)) {
                         gUnknown_202F222 = 1;
                     }
                 }
@@ -1707,10 +1707,10 @@ static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct Dam
         else {
             TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9688); // It took no damage!
         }
-        dmgStruct->unkF = 1;
+        dmgStruct->tookNoDamage = TRUE;
     }
 
-    if (dmgStruct->unkF != 0) {
+    if (dmgStruct->tookNoDamage) {
         return 0;
     }
 
@@ -1728,7 +1728,7 @@ s32 sub_8055864(Entity *attacker, Entity *target, Move *move, s32 param_4, s32 i
 
     sub_806F2BC(attacker, target, moveType, param_4, &dmgStruct);
     HandleDealingDamage(attacker, target, &dmgStruct, FALSE, TRUE, sub_8057600(move, itemId), TRUE, 0);
-    if (dmgStruct.unkF != 0) {
+    if (dmgStruct.tookNoDamage) {
         return 0;
     }
 
@@ -2592,7 +2592,7 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
             break;
     }
 
-    if (sub_805755C(attacker, move->id) && !MoveMatchesChargingStatus(attacker, move)) {
+    if (MoveRequiresCharging(attacker, move->id) && !MoveMatchesChargingStatus(attacker, move)) {
         var_34 = -1;
     }
     else {
@@ -2833,7 +2833,7 @@ static void SetTargetsForMove(Entity **targetsArray, Entity *attacker, Move *mov
             direction &= DIRECTION_MASK;
             unkPositon.x = attacker->pos.x + gAdjacentTileOffsets[direction].x ;
             unkPositon.y = attacker->pos.y + gAdjacentTileOffsets[direction].y;
-            targetEntity = sub_804AD0C(&unkPositon);
+            targetEntity = GetMonsterAtPos(&unkPositon);
             if (targetEntity != NULL) {
                 arrId = SetNewTarget(arrId, targetsArray, targetFlags, attacker, targetEntity, move, canHitPartner);
             }
@@ -3087,7 +3087,7 @@ u32 sub_8057144(Entity * pokemon)
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 if (moves[j].moveFlags & MOVE_FLAG_EXISTS
-                    && !sub_805755C(pokemon, moves[j].id)
+                    && !MoveRequiresCharging(pokemon, moves[j].id)
                     && moves[j].id != MOVE_SKETCH
                     && nMoves < 80) {
                     moveStack[nMoves++] = &moves[j];
@@ -3175,7 +3175,7 @@ bool8 sub_805727C(Entity * pokemon, Entity * target, s32 chance)
     return uVar2;
 }
 
-bool8 sub_8057308(Entity *pokemon, s32 chance)
+bool8 RollSecondaryEffect(Entity *pokemon, s32 chance)
 {
     if(!EntityExists(pokemon))
         return FALSE;

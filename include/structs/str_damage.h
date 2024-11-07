@@ -9,7 +9,7 @@ struct DamageStruct
     u8 type;
     bool8 isCrit;
     u8 unkE;
-    u8 unkF;
+    bool8 tookNoDamage;
 };
 
 #endif

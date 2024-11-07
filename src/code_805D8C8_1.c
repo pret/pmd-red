@@ -3088,7 +3088,7 @@ void sub_8060D24(UNUSED ActionContainer *a0)
     sub_803EAF0(0, NULL);
 }
 
-extern bool8 sub_804ACE4(Position *pos);
+extern bool8 PosHasItem(Position *pos);
 
 s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4)
 {
@@ -3104,7 +3104,7 @@ s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4)
         }
     }
 
-    if (a2 && sub_804ACE4(&a4->pos)) {
+    if (a2 && PosHasItem(&a4->pos)) {
         a0[count++] = 2;
     }
 

@@ -334,7 +334,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
 
     if (HandleDealingDamageInternal(attacker, target, dmgStruct, isFalseSwipe, giveExp, r10, argC))
         return;
-    if (dmgStruct->unkF)
+    if (dmgStruct->tookNoDamage)
         return;
     if (!EntityExists(attacker) || !EntityExists(target))
         return;
@@ -392,7 +392,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
             sp.typeEffectiveness = 2;
             sp.isCrit = FALSE;
             sp.unkE = 0;
-            sp.unkF = 0;
+            sp.tookNoDamage = FALSE;
             HandleDealingDamageInternal(target, attacker, &sp, FALSE, giveExp, r10, argC);
         }
     }
@@ -503,9 +503,9 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     s32 r8  = 0;
     Tile *unkTile = NULL;
 
-    dmgStruct->unkF = 0;
+    dmgStruct->tookNoDamage = FALSE;
     if (GetEntityType(target) != ENTITY_MONSTER) {
-        dmgStruct->unkF = 1;
+        dmgStruct->tookNoDamage = TRUE;
         return FALSE;
     }
 
@@ -523,14 +523,14 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
         TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FCA90);
         sub_8042238(attacker, target);
-        dmgStruct->unkF = 1;
+        dmgStruct->tookNoDamage = TRUE;
         return FALSE;
     }
     if (targetData->immobilize.immobilizeStatus == STATUS_FROZEN) {
         SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
         TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9600);
         sub_8042238(attacker, target);
-        dmgStruct->unkF = 1;
+        dmgStruct->tookNoDamage = TRUE;
         return FALSE;
     }
 
@@ -542,12 +542,12 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 
     if ((HasAbility(target, ABILITY_VOLT_ABSORB) && dmgStruct->type == TYPE_ELECTRIC)) {
         HealTargetHP(attacker, target, dmgStruct->dmg, 0, 0);
-        dmgStruct->unkF = 1;
+        dmgStruct->tookNoDamage = TRUE;
         return FALSE;
     }
     else if (HasAbility(target, ABILITY_WATER_ABSORB) && dmgStruct->type == TYPE_WATER) {
         HealTargetHP(attacker, target, dmgStruct->dmg, 0, 0);
-        dmgStruct->unkF = 1;
+        dmgStruct->tookNoDamage = TRUE;
         return FALSE;
     }
 
@@ -583,7 +583,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             }
             sub_803E708(0x1E, 0x18);
         }
-        dmgStruct->unkF = 1;
+        dmgStruct->tookNoDamage = TRUE;
         return FALSE;
     }
     else if (dmgStruct->dmg == 9999) {

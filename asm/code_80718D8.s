@@ -39,7 +39,7 @@ _080727A8:
 	movs r4, 0xC
 	ldrsh r3, [r0, r4]
 	mov r0, sp
-	bl sub_808E0AC
+	bl GetMovesLearnedAtLevel
 	adds r7, r0, 0
 	add r4, sp, 0x20
 	movs r1, 0x8C

@@ -376,8 +376,7 @@ extern void sub_8046F84(s32 itemFlag);
 extern bool8 sub_8083C50(void);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
 extern void sub_806BFC0(EntityInfo *, u32);
-extern s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 IQPoints);
-extern s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 IQPoints);
+extern s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
 extern bool8 IsKeepMoney(u8 dungeon);
 extern void sub_8042B0C(Entity *);
 
@@ -387,7 +386,7 @@ extern u8 gUnknown_202F1A8;
 extern s32 gDungeonBrightness;
 extern Entity *gLeaderPointer;
 
-void sub_8044124(void);
+void EnforceMaxItemsAndMoney(void);
 void sub_8043FD0(void);
 void sub_806B404(void);
 u8 sub_8043D10(void);
@@ -489,7 +488,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         }
 
         gDungeon->unk674 = 0;
-        sub_8044124();
+        EnforceMaxItemsAndMoney();
     }
     if (!r6) {
         if (gDungeon->unk678 == 1) {
@@ -1163,7 +1162,7 @@ void sub_8043FD0(void)
                 monStruct->offense.def[0] = def;
                 monStruct->offense.def[1] = spDef;
 
-                movesCount = sub_808E0AC(learnedMoves, monStruct->speciesNum, monStruct->level, 999);
+                movesCount = GetMovesLearnedAtLevel(learnedMoves, monStruct->speciesNum, monStruct->level, 999);
                 if (movesCount == 0)
                     continue;
 
@@ -1181,7 +1180,7 @@ void sub_8043FD0(void)
     }
 }
 
-void sub_8044124(void)
+void EnforceMaxItemsAndMoney(void)
 {
     s32 i;
 
