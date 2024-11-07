@@ -39,4 +39,7 @@
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
+#define min(a, b) ((a) < (b) ? (a) : (b))
+#define max(a, b) ((a) > (b) ? (a) : (b))
+
 #endif // GUARD_GLOBAL_H

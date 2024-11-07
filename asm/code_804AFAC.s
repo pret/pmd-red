@@ -6,8 +6,8 @@
   	.text
   
 
-	thumb_func_start sub_804CBEC
-sub_804CBEC:
+	thumb_func_start GenerateExtraHallways
+GenerateExtraHallways:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -552,7 +552,7 @@ _0804D006:
 _0804D018: .4byte 0x0000fffc
 _0804D01C: .4byte gAdjacentTileOffsets
 _0804D020: .4byte gUnknown_202F1AE
-	thumb_func_end sub_804CBEC
+	thumb_func_end GenerateExtraHallways
 
 	thumb_func_start sub_804D024
 sub_804D024:
@@ -607,8 +607,8 @@ _0804D072:
 	bx r0
 	thumb_func_end sub_804D024
 
-	thumb_func_start sub_804D084
-sub_804D084:
+	thumb_func_start InitDungeonGrid
+InitDungeonGrid:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -720,10 +720,10 @@ _0804D144:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804D084
+	thumb_func_end InitDungeonGrid
 
-	thumb_func_start sub_804D154
-sub_804D154:
+	thumb_func_start AssignRooms
+AssignRooms:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -933,10 +933,10 @@ _0804D2BC:
 	bx r0
 	.align 2, 0
 _0804D2CC: .4byte gUnknown_202F1AD
-	thumb_func_end sub_804D154
+	thumb_func_end AssignRooms
 
-	thumb_func_start sub_804D2D0
-sub_804D2D0:
+	thumb_func_start CreateRoomsAndAnchors
+CreateRoomsAndAnchors:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1257,7 +1257,7 @@ _0804D520:
 	bx r0
 	.align 2, 0
 _0804D530: .4byte 0x0000fffc
-	thumb_func_end sub_804D2D0
+	thumb_func_end CreateRoomsAndAnchors
 
 	thumb_func_start sub_804D534
 sub_804D534:
@@ -1772,8 +1772,8 @@ _0804D8B8:
 	bx r0
 	thumb_func_end sub_804D5F0
 
-	thumb_func_start sub_804D8C8
-sub_804D8C8:
+	thumb_func_start CreateGridCellConnections
+CreateGridCellConnections:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2801,10 +2801,10 @@ _0804E026:
 	bx r0
 	.align 2, 0
 _0804E038: .4byte 0x0000fffc
-	thumb_func_end sub_804D8C8
+	thumb_func_end CreateGridCellConnections
 
-	thumb_func_start sub_804E03C
-sub_804E03C:
+	thumb_func_start GenerateRoomImperfections
+GenerateRoomImperfections:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3217,7 +3217,7 @@ _0804E318:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804E03C
+	thumb_func_end GenerateRoomImperfections
 
 	thumb_func_start sub_804E328
 sub_804E328:
@@ -3557,8 +3557,8 @@ _0804E57E:
 	bx r0
 	thumb_func_end sub_804E328
 
-	thumb_func_start sub_804E590
-sub_804E590:
+	thumb_func_start EnsureConnectedGrid
+EnsureConnectedGrid:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4096,7 +4096,7 @@ _0804E98A:
 _0804E99C: .4byte 0x0000fffc
 _0804E9A0: .4byte 0x0000fffe
 _0804E9A4: .4byte 0x0000fffd
-	thumb_func_end sub_804E590
+	thumb_func_end EnsureConnectedGrid
 
 	thumb_func_start sub_804E9A8
 sub_804E9A8:
@@ -4381,8 +4381,8 @@ _0804EBC0: .4byte 0x00010884
 _0804EBC4: .4byte 0x00010886
 	thumb_func_end sub_804EB30
 
-	thumb_func_start sub_804EBC8
-sub_804EBC8:
+	thumb_func_start GenerateKecleonShop
+GenerateKecleonShop:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4799,10 +4799,10 @@ _0804EED4:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804EBC8
+	thumb_func_end GenerateKecleonShop
 
-	thumb_func_start sub_804EEE4
-sub_804EEE4:
+	thumb_func_start GenerateMonsterHouse
+GenerateMonsterHouse:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -5062,7 +5062,7 @@ _0804F0C0:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804EEE4
+	thumb_func_end GenerateMonsterHouse
 
 	thumb_func_start sub_804F0D0
 sub_804F0D0:
