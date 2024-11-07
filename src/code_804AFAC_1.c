@@ -59,6 +59,12 @@ void sub_80506F0(s32 a0, UnkDungeonGlobal_unk1C574 *a1);
 void sub_804FF08(UnkDungeonGlobal_unk1C574 *a0, bool8 a1);
 void sub_8050438(UnkDungeonGlobal_unk1C574 *a0, bool8 a1);
 
+struct FileFixedmapPosStruct
+{
+    u8 x;
+    u8 y;
+};
+
 // Some weird-ass regswap prevents the function from being matched - https://decomp.me/scratch/9SUV3
 #ifdef NONMATCHING
 void sub_804AFAC(void)
@@ -969,12 +975,7 @@ void sub_804B534(s32 xStart, s32 yStart, s32 maxX, s32 maxY)
     }
 }
 
-// Note: 15 seems to determine the array size, give it a better name and a define.
-
-
-// Size 480 = 32 * 15
-
-struct UnkHugeSpStructSubUnk0
+struct GridCell
 {
     Position unk0;
     Position unk4;
@@ -1004,46 +1005,42 @@ struct UnkHugeSpStructSubUnk0
     u8 unk31;
 };
 
-// Size 7200, however this struct is usually put at sp+8, so 8 needs to be added to these fields(in decimal)
-struct UnkHugeSpStruct
-{
-    struct UnkHugeSpStructSubUnk0 unk0[15][15];
-};
+#define GRID_CELL_LEN 15
 
 void sub_804D024(s32 *a0, s32 *a1, s32 x, s32 y);
-void sub_804D084(struct UnkHugeSpStruct *a0, s32 x, s32 y);
-void sub_804E03C(struct UnkHugeSpStruct *a0, s32 x, s32 y);
-void sub_804D534(struct UnkHugeSpStruct *a0, s32 x, s32 y);
-void sub_804D154(struct UnkHugeSpStruct *a0, s32 x, s32 y, s32 a3);
-void sub_804D2D0(struct UnkHugeSpStruct *a0, s32 x, s32 y, s32 *a3, s32 *a4, s32 a5);
-void sub_804D8C8(struct UnkHugeSpStruct *a0, s32 x, s32 y, s32 *a3, s32 *a4, s32 a5);
-void sub_804E590(struct UnkHugeSpStruct *a0, s32 x, s32 y, s32 *a3, s32 *a4);
-void sub_804D5B0(struct UnkHugeSpStruct *a0, s32 x, s32 y, UnkDungeonGlobal_unk1C574 *unkPtr);
-void sub_804F0D0(struct UnkHugeSpStruct *a0, s32 x, s32 y, s32 a3);
-void sub_804EBC8(struct UnkHugeSpStruct *a0, s32 x, s32 y, s32 a3);
-void sub_804EEE4(struct UnkHugeSpStruct *a0, s32 x, s32 y, s32 a3);
-void sub_804CBEC(struct UnkHugeSpStruct *a0, s32 x, s32 y, s32 a3);
-void sub_804C43C(s32 a0, s32 a1, s32 a2, struct UnkHugeSpStructSubUnk0 sp[15][15]);
+void sub_804D084(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x, s32 y);
+void sub_804E03C(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x, s32 y);
+void sub_804D534(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x, s32 y);
+void sub_804D154(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x, s32 y, s32 a3);
+void sub_804D2D0(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x, s32 y, s32 *a3, s32 *a4, s32 a5);
+void sub_804D8C8(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x, s32 y, s32 *a3, s32 *a4, s32 a5);
+void sub_804E590(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x, s32 y, s32 *a3, s32 *a4);
+void sub_804D5B0(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x, s32 y, UnkDungeonGlobal_unk1C574 *unkPtr);
+void sub_804F0D0(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x, s32 y, s32 a3);
+void sub_804EBC8(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x, s32 y, s32 a3);
+void sub_804EEE4(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x, s32 y, s32 a3);
+void sub_804CBEC(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x, s32 y, s32 a3);
+void sub_804C43C(s32 a0, s32 a1, s32 a2, struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN]);
 
 void sub_804B634(s32 x, s32 y, UnkDungeonGlobal_unk1C574 *unkPtr)
 {
-    struct UnkHugeSpStruct sp;
-    s32 unk7200[15];
-    s32 unk7260[15];
+    struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
+    s32 unk7200[GRID_CELL_LEN];
+    s32 unk7260[GRID_CELL_LEN];
 
     sub_804D024(unk7200, unk7260, x, y);
-    sub_804D084(&sp, x, y);
-    sub_804D154(&sp, x, y, unkPtr->unk1);
-    sub_804D2D0(&sp, x, y, unk7200, unk7260, unkPtr->unkD);
-    sub_804D5B0(&sp, x, y, unkPtr);
-    sub_804D8C8(&sp, x, y, unk7200, unk7260, 0);
-    sub_804E590(&sp, x, y, unk7200, unk7260);
-    sub_804F0D0(&sp, x, y, unkPtr->unk9);
-    sub_804EBC8(&sp, x, y, gUnknown_202F1B0);
-    sub_804EEE4(&sp, x, y, gUnknown_202F1B2);
-    sub_804CBEC(&sp, x, y, unkPtr->unk13);
-    sub_804E03C(&sp, x, y);
-    sub_804D534(&sp, x, y);
+    sub_804D084(grid, x, y);
+    sub_804D154(grid, x, y, unkPtr->unk1);
+    sub_804D2D0(grid, x, y, unk7200, unk7260, unkPtr->unkD);
+    sub_804D5B0(grid, x, y, unkPtr);
+    sub_804D8C8(grid, x, y, unk7200, unk7260, 0);
+    sub_804E590(grid, x, y, unk7200, unk7260);
+    sub_804F0D0(grid, x, y, unkPtr->unk9);
+    sub_804EBC8(grid, x, y, gUnknown_202F1B0);
+    sub_804EEE4(grid, x, y, gUnknown_202F1B2);
+    sub_804CBEC(grid, x, y, unkPtr->unk13);
+    sub_804E03C(grid, x, y);
+    sub_804D534(grid, x, y);
 }
 
 // Decompile once data structure is better understood
@@ -1051,7 +1048,7 @@ void sub_804B634(s32 x, s32 y, UnkDungeonGlobal_unk1C574 *unkPtr)
 #ifdef NONMATCHING
 void sub_804B72C(UnkDungeonGlobal_unk1C574 *unkPtr)
 {
-    struct UnkHugeSpStruct sp;
+    struct GridCell grid[15][15];
 
     sp.unk7200[0] = 0;
     sp.unk7200[1] = 5;
@@ -1067,7 +1064,7 @@ void sub_804B72C(UnkDungeonGlobal_unk1C574 *unkPtr)
     sp.unk7260[3] = 25;
     sp.unk7260[4] = 30;
 
-    sub_804D084(&sp, 6, 4);
+    sub_804D084(grid, 6, 4);
 }
 #else
 NAKED void sub_804B72C(UnkDungeonGlobal_unk1C574 *unkPtr)
@@ -2235,9 +2232,9 @@ NAKED void sub_804BC80(UnkDungeonGlobal_unk1C574 *a0)
 
 void sub_804C0A8(UnkDungeonGlobal_unk1C574 *unkPtr)
 {
-    struct UnkHugeSpStruct sp;
-    s32 unk7200[15];
-    s32 unk7260[15];
+    struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
+    s32 unk7200[GRID_CELL_LEN];
+    s32 unk7260[GRID_CELL_LEN];
     s32 x, y, unk;
 
     unk7200[0] = 0;
@@ -2252,23 +2249,23 @@ void sub_804C0A8(UnkDungeonGlobal_unk1C574 *unkPtr)
 
     unk = 1;
     x = 5, y = 1;
-    sub_804D084(&sp, x, y);
-    sub_804D154(&sp, x, y, unkPtr->unk1);
-    sub_804D2D0(&sp, x, y, unk7200, unk7260, unkPtr->unkD);
-    sub_804D5B0(&sp, x, y, unkPtr);
-    sub_804D8C8(&sp, x, y, unk7200, unk7260, unk);
-    sub_804E590(&sp, x, y, unk7200, unk7260);
-    sub_804EBC8(&sp, x, y, gUnknown_202F1B0);
-    sub_804EEE4(&sp, x, y, gUnknown_202F1B2);
-    sub_804CBEC(&sp, x, y, unkPtr->unk13);
-    sub_804E03C(&sp, x, y);
+    sub_804D084(grid, x, y);
+    sub_804D154(grid, x, y, unkPtr->unk1);
+    sub_804D2D0(grid, x, y, unk7200, unk7260, unkPtr->unkD);
+    sub_804D5B0(grid, x, y, unkPtr);
+    sub_804D8C8(grid, x, y, unk7200, unk7260, unk);
+    sub_804E590(grid, x, y, unk7200, unk7260);
+    sub_804EBC8(grid, x, y, gUnknown_202F1B0);
+    sub_804EEE4(grid, x, y, gUnknown_202F1B2);
+    sub_804CBEC(grid, x, y, unkPtr->unk13);
+    sub_804E03C(grid, x, y);
 }
 
 void sub_804C190(UnkDungeonGlobal_unk1C574 *unkPtr)
 {
-    struct UnkHugeSpStruct sp;
-    s32 unk7200[15];
-    s32 unk7260[15];
+    struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
+    s32 unk7200[GRID_CELL_LEN];
+    s32 unk7260[GRID_CELL_LEN];
     s32 i, j, x, y;
 
     unk7200[0] = 11;
@@ -2282,40 +2279,40 @@ void sub_804C190(UnkDungeonGlobal_unk1C574 *unkPtr)
     unk7260[3] = 30;
 
     x = 3, y = 3;
-    sub_804D084(&sp, x, y);
+    sub_804D084(grid, x, y);
     for (i = 0; i < x; i++) {
         for (j = 0; j < y; j++) {
-            sp.unk0[i][j].unk10 = 1;
+            grid[i][j].unk10 = 1;
         }
     }
-    sp.unk0[0][0].unk8 = 1;
-    sp.unk0[2][0].unk8 = 1;
-    sp.unk0[0][2].unk8 = 1;
-    sp.unk0[2][2].unk8 = 1;
+    grid[0][0].unk8 = 1;
+    grid[2][0].unk8 = 1;
+    grid[0][2].unk8 = 1;
+    grid[2][2].unk8 = 1;
 
-    sub_804D2D0(&sp, x, y, unk7200, unk7260, unkPtr->unkD);
+    sub_804D2D0(grid, x, y, unk7200, unk7260, unkPtr->unkD);
 
-    sp.unk0[0][1].unk22 = 1;
-    sp.unk0[1][1].unk21 = 1;
-    sp.unk0[1][1].unk22 = 1;
-    sp.unk0[2][1].unk21 = 1;
-    sp.unk0[1][0].unk20 = 1;
-    sp.unk0[1][1].unk19 = 1;
-    sp.unk0[1][1].unk20 = 1;
-    sp.unk0[1][2].unk19 = 1;
-    sub_804D8C8(&sp, x, y, unk7200, unk7260, 1);
-    sub_804E590(&sp, x, y, unk7200, unk7260);
-    sub_804EBC8(&sp, x, y, gUnknown_202F1B0);
-    sub_804EEE4(&sp, x, y, gUnknown_202F1B2);
-    sub_804CBEC(&sp, x, y, unkPtr->unk13);
-    sub_804E03C(&sp, x, y);
+    grid[0][1].unk22 = 1;
+    grid[1][1].unk21 = 1;
+    grid[1][1].unk22 = 1;
+    grid[2][1].unk21 = 1;
+    grid[1][0].unk20 = 1;
+    grid[1][1].unk19 = 1;
+    grid[1][1].unk20 = 1;
+    grid[1][2].unk19 = 1;
+    sub_804D8C8(grid, x, y, unk7200, unk7260, 1);
+    sub_804E590(grid, x, y, unk7200, unk7260);
+    sub_804EBC8(grid, x, y, gUnknown_202F1B0);
+    sub_804EEE4(grid, x, y, gUnknown_202F1B2);
+    sub_804CBEC(grid, x, y, unkPtr->unk13);
+    sub_804E03C(grid, x, y);
 }
 
 void sub_804C2F4(UnkDungeonGlobal_unk1C574 *unkPtr)
 {
-    struct UnkHugeSpStruct sp;
-    s32 unk7200[15];
-    s32 unk7260[15];
+    struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
+    s32 unk7200[GRID_CELL_LEN];
+    s32 unk7260[GRID_CELL_LEN];
     s32 i, j, x, y;
 
     unk7200[0] = 5;
@@ -2329,38 +2326,38 @@ void sub_804C2F4(UnkDungeonGlobal_unk1C574 *unkPtr)
     unk7260[3] = 30;
 
     x = 3, y = 3;
-    sub_804D084(&sp, x, y);
+    sub_804D084(grid, x, y);
     for (i = 0; i < x; i++) {
         for (j = 0; j < y; j++) {
-            sp.unk0[i][j].unk10 = 1;
+            grid[i][j].unk10 = 1;
         }
     }
 
-    sub_804D2D0(&sp, x, y, unk7200, unk7260, unkPtr->unkD);
+    sub_804D2D0(grid, x, y, unk7200, unk7260, unkPtr->unkD);
     for (j = 0; j < 3; j++) {
-        sp.unk0[0][j].unk22 = 1;
-        sp.unk0[1][j].unk21 = 1;
-        sp.unk0[1][j].unk22 = 1;
-        sp.unk0[2][j].unk21 = 1;
+        grid[0][j].unk22 = 1;
+        grid[1][j].unk21 = 1;
+        grid[1][j].unk22 = 1;
+        grid[2][j].unk21 = 1;
     }
-    sub_804D8C8(&sp, x, y, unk7200, unk7260, 1);
-    sub_804C43C(1, 0, 1, sp.unk0);
-    sub_804C43C(1, 0, 2, sp.unk0);
-    sub_804E590(&sp, x, y, unk7200, unk7260);
-    sub_804EBC8(&sp, x, y, gUnknown_202F1B0);
-    sub_804EEE4(&sp, x, y, gUnknown_202F1B2);
-    sub_804CBEC(&sp, x, y, unkPtr->unk13);
-    sub_804E03C(&sp, x, y);
+    sub_804D8C8(grid, x, y, unk7200, unk7260, 1);
+    sub_804C43C(1, 0, 1, grid);
+    sub_804C43C(1, 0, 2, grid);
+    sub_804E590(grid, x, y, unk7200, unk7260);
+    sub_804EBC8(grid, x, y, gUnknown_202F1B0);
+    sub_804EEE4(grid, x, y, gUnknown_202F1B2);
+    sub_804CBEC(grid, x, y, unkPtr->unk13);
+    sub_804E03C(grid, x, y);
 }
 
-void sub_804C43C(s32 a0, s32 a1, s32 a2, struct UnkHugeSpStructSubUnk0 sp[15][15])
+void sub_804C43C(s32 a0, s32 a1, s32 a2, struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN])
 {
     s32 x, y;
-    s32 xStart = (sp[a0][a1].unk0.x < sp[a0][a1+a2].unk0.x) ? sp[a0][a1].unk0.x : sp[a0][a1+a2].unk0.x;
-    s32 yStart = sp[a0][a1].unk0.y;
-    s32 xMax = (sp[a0][a1].unk4.x > sp[a0][a1+a2].unk4.x) ? sp[a0][a1].unk4.x : sp[a0][a1+a2].unk4.x;
-    s32 yMax = sp[a0][a1 + a2].unk4.y;
-    u8 room = GetTile(sp[a0][a1].unk0.x, sp[a0][a1].unk0.y)->room;
+    s32 xStart = (grid[a0][a1].unk0.x < grid[a0][a1+a2].unk0.x) ? grid[a0][a1].unk0.x : grid[a0][a1+a2].unk0.x;
+    s32 yStart = grid[a0][a1].unk0.y;
+    s32 xMax = (grid[a0][a1].unk4.x > grid[a0][a1+a2].unk4.x) ? grid[a0][a1].unk4.x : grid[a0][a1+a2].unk4.x;
+    s32 yMax = grid[a0][a1 + a2].unk4.y;
+    u8 room = GetTile(grid[a0][a1].unk0.x, grid[a0][a1].unk0.y)->room;
 
     for (x = xStart; x < xMax; x++) {
         for (y = yStart; y < yMax; y++) {
@@ -2371,14 +2368,217 @@ void sub_804C43C(s32 a0, s32 a1, s32 a2, struct UnkHugeSpStructSubUnk0 sp[15][15
         }
     }
 
-    sp[a0][a1].unk0.x = xStart;
-    sp[a0][a1].unk4.x = xMax;
-    sp[a0][a1].unk0.y = yStart;
-    sp[a0][a1].unk4.y = yMax;
-    sp[a0][a1 + a2].unk18 = 1;
-    sp[a0][a1].unk18 = 1;
-    sp[a0][a1 + a2].unk11 = 0;
-    sp[a0][a1 + a2].unk17 = 1;
+    grid[a0][a1].unk0.x = xStart;
+    grid[a0][a1].unk4.x = xMax;
+    grid[a0][a1].unk0.y = yStart;
+    grid[a0][a1].unk4.y = yMax;
+    grid[a0][a1 + a2].unk18 = 1;
+    grid[a0][a1].unk18 = 1;
+    grid[a0][a1 + a2].unk11 = 0;
+    grid[a0][a1 + a2].unk17 = 1;
+}
+
+void sub_804C53C(s32 x_, s32 y_, UnkDungeonGlobal_unk1C574 *unkPtr)
+{
+    struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
+    s32 unk7200[GRID_CELL_LEN];
+    s32 unk7260[GRID_CELL_LEN];
+    s32 i, j;
+    s32 x = x_;
+    s32 y = y_;
+
+    sub_804D024(unk7200, unk7260, x, y);
+    sub_804D084(grid, x, y);
+    for (i = 0; i < x; i++) {
+        for (j = 0; j < y; j++) {
+            grid[i][j].unk10 = 1;
+        }
+    }
+
+    for (i = 1; i < x - 1; i++) {
+        for (j = 1; j < y - 1; j++) {
+            grid[i][j].unk8 = 1;
+        }
+    }
+
+    sub_804D2D0(grid, x, y, unk7200, unk7260, unkPtr->unkD);
+    for (i = 0; i < x - 1; i++) {
+        if (i != 0) {
+            grid[i][0].unk22 = 1;
+            grid[i][y-1].unk22 = 1;
+        }
+        if (i < x - 2) {
+            grid[i+1][0].unk21 = 1;
+            grid[i+1][y-1].unk21 = 1;
+        }
+    }
+
+    for (j = 0; j < y - 1; j++) {
+        if (j != 0) {
+            grid[0][j].unk19 = 1;
+            grid[x-1][j].unk19 = 1;
+        }
+        if (j < y - 2) {
+            grid[0][j].unk20 = 1;
+            grid[x-1][j].unk20 = 1;
+        }
+    }
+
+    sub_804D8C8(grid, x, y, unk7200, unk7260, 0);
+    sub_804E590(grid, x, y, unk7200, unk7260);
+    sub_804F0D0(grid, x, y, unkPtr->unk9);
+    sub_804EBC8(grid, x, y, gUnknown_202F1B0);
+    sub_804EEE4(grid, x, y, gUnknown_202F1B2);
+    sub_804CBEC(grid, x, y, unkPtr->unk13);
+    sub_804E03C(grid, x, y);
+    sub_804D534(grid, x, y);
+}
+
+void sub_804C790(s32 x1, s32 y1, s32 x2, s32 y2, s32 a4, UnkDungeonGlobal_unk1C574 *unkPtr);
+extern void sub_8051288(s32 a0);
+
+bool8 sub_804C70C(s32 a0, UnkDungeonGlobal_unk1C574 *unkPtr)
+{
+    struct FileFixedmapPosStruct **fileData = (void *) gDungeon->unk13568->data;
+    s32 x1 = fileData[a0]->x;
+    s32 y1 = fileData[a0]->y;
+    s32 x2, y2;
+
+    if (x1 == 0 || y1 == 0) {
+        sub_804C918();
+        return FALSE;
+    }
+    else if (a0 < 50) {
+        sub_8051288(a0);
+        return TRUE;
+    }
+    else {
+        x2 = DUNGEON_MAX_SIZE_X / (x1 + 4);
+        if (x2 <= 1)
+            x2 = 1;
+        y2 = DUNGEON_MAX_SIZE_Y / (y1 + 4);
+        if (y2 <= 1)
+            y2 = 1;
+        sub_804C790(x2, y2, x1, y1, a0, unkPtr);
+        return FALSE;
+    }
+}
+
+void sub_8050F90(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x1, s32 y1, s32 *a3, s32 *a4, s32 a5, s32 x2, s32 y2);
+void sub_804D5F0(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x, s32 y, s32 x2, s32 y2, UnkDungeonGlobal_unk1C574 *unkPtr);
+void sub_8051438(struct GridCell *cell, s32 a1);
+
+void sub_804C790(s32 x1, s32 y1, s32 x2, s32 y2, s32 a4, UnkDungeonGlobal_unk1C574 *unkPtr)
+{
+    s32 tries;
+    struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
+    s32 unk7200[GRID_CELL_LEN];
+    s32 unk7260[GRID_CELL_LEN];
+    s32 r10 = 0;
+    s32 x3 = 0, y3 = 0;
+
+    sub_804D024(unk7200, unk7260, x1, y1);
+    sub_804D084(grid, x1, y1);
+    sub_804D154(grid, x1, y1, unkPtr->unk1);
+    for (x3 = 0; x3 < x1; x3++) {
+        for (y3 = 0; y3 < y1; y3++) {
+            grid[x3][y3].unk27 = 1;
+        }
+    }
+
+    for (tries = 0; tries < 64; tries++) {
+        x3 = DungeonRandInt(x1);
+        y3 = DungeonRandInt(y1);
+        r10 = y3 * x1 + x3;
+        if (grid[x3][y3].unk10)
+            break;
+    }
+    sub_8050F90(grid, x1, y1, unk7200, unk7260, r10, x2, y2);
+    if (x1 != 1 || y1 != 1) {
+        sub_804D5F0(grid, x1, y1, x3, y3, unkPtr);
+        sub_804D8C8(grid, x1, y1, unk7200, unk7260, 1);
+        sub_804E590(grid, x1, y1, unk7200, unk7260);
+    }
+    sub_8051438(&grid[x3][y3], a4);
+}
+
+void sub_804C918(void)
+{
+    s32 i, j;
+    struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
+
+    sub_804D084(grid, 1, 1);
+    grid[0][0].unk0.x = 2;
+    grid[0][0].unk4.x = DUNGEON_MAX_SIZE_X - 2;
+    grid[0][0].unk0.y = 2;
+    grid[0][0].unk4.y = DUNGEON_MAX_SIZE_Y - 2;
+    grid[0][0].unk10 = 1;
+    grid[0][0].unk11 = 1;
+    grid[0][0].unk8 = 0;
+    for (i = grid[0][0].unk0.x; i < grid[0][0].unk4.x; i++) {
+        for (j = grid[0][0].unk0.y; j < grid[0][0].unk4.y; j++) {
+            Tile *tile = GetTileSafe(i, j);
+            tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+            tile->terrainType |= TERRAIN_TYPE_NORMAL;
+            // Unnecessary call again
+            GetTileSafe(i, j)->room = 0;
+        }
+    }
+    sub_804EEE4(grid, 1, 1, 999);
+}
+
+void sub_804C9D0(void)
+{
+    struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
+    s32 listX[GRID_CELL_LEN];
+    s32 listY[GRID_CELL_LEN];
+    s32 currRoomId = 0;
+    s32 x, y;
+
+    listX[0] = 2;
+    listX[1] = 28;
+    listX[2] = 54;
+    listY[0] = 2;
+    listY[1] = 30;
+    sub_804D084(grid, 2, 1);
+
+    for (y = 0; y < 1; y++) {
+        for (x = 0; x < 2; x++) {
+            s32 currX, currY;
+            s32 minX = listX[x] + 1;
+            s32 minY = listY[y] + 1;
+            s32 rangeX = listX[x + 1] - listX[x] - 3;
+            s32 rangeY = listY[y + 1] - listY[y] - 3;
+            s32 roomSizeX = DungeonRandRange(10, rangeX);
+            s32 roomSizeY = DungeonRandRange(16, rangeY);
+            s32 startX = DungeonRandInt(rangeX - roomSizeX) + minX;
+            s32 startY = DungeonRandInt(rangeY - roomSizeY) + minY;
+            s32 endX = startX + roomSizeX;
+            s32 endY = startY + roomSizeY;
+
+            grid[x][y].unk10 = 1;
+            grid[x][y].unk0.x = startX;
+            grid[x][y].unk4.x = endX;
+            grid[x][y].unk0.y = startY;
+            grid[x][y].unk4.y = endY;
+
+            for (currX = startX; currX < endX; currX++) {
+                for (currY = startY; currY < endY; currY++) {
+                    Tile *tile = GetTileSafe(currX, currY);
+                    tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+                    tile->terrainType |= TERRAIN_TYPE_NORMAL;
+                    // Unnecessary call again
+                    GetTileSafe(currX, currY)->room = currRoomId;
+                }
+            }
+            currRoomId++;
+        }
+    }
+
+    grid[0][0].unk22 = 1;
+	grid[1][0].unk21 = 1;
+	sub_804D8C8(grid, 2, 1, listX, listY, 0);
+	sub_804EEE4(grid, 2, 1, 999);
 }
 
 //
