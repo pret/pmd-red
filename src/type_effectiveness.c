@@ -15,21 +15,21 @@
 
 
 u32 gUnknown_8106EFC[] = { 0x00, 0x00  };
-unkStruct_80943A8 gUnknown_8106F04 = { 0x0, 0x10000 };
-unkStruct_80943A8 gUnknown_8106F0C = { 0x0, 0x20000 };
-unkStruct_80943A8 gUnknown_8106F14 = { 0x0, 0x18000 };
-unkStruct_80943A8 gUnknown_8106F1C = { 0x0, 0x8000 };
+s48_16 gUnknown_8106F04 = { 0x0, 0x10000 };
+s48_16 gUnknown_8106F0C = { 0x0, 0x20000 };
+s48_16 gUnknown_8106F14 = { 0x0, 0x18000 };
+s48_16 gUnknown_8106F1C = { 0x0, 0x8000 };
 u8 gUnknown_8106F24[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe7, 0x03,
                           0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x00, 0x00,
                          0x00, 0x00, 0x00, 0x00, 0xfe, 0x7f, 0x01, 0x00 };
-unkStruct_80943A8 gUnknown_8106F3C = {0x0, 0x8000};
-unkStruct_80943A8 gUnknown_8106F44 = {0x0, 0xE666};
-unkStruct_80943A8 gUnknown_8106F4C = {0x0, 0x18000};
+s48_16 gUnknown_8106F3C = {0x0, 0x8000};
+s48_16 gUnknown_8106F44 = {0x0, 0xE666};
+s48_16 gUnknown_8106F4C = {0x0, 0x18000};
 
 
 struct dumb_struct
 {
-    unkStruct_80943A8 *unk0[NUM_EFFECTIVENESS];
+    s48_16 *unk0[NUM_EFFECTIVENESS];
 };
 
 struct dumb_struct gUnknown_8106F54 = {
@@ -39,7 +39,7 @@ struct dumb_struct gUnknown_8106F54 = {
         &gUnknown_8106F4C, // SUPER
 };
 
-unkStruct_80943A8 gUnknown_8106F64 = {0x0, 0xC000};
+s48_16 gUnknown_8106F64 = {0x0, 0xC000};
 u32 gTypeEffectivenessMultipliers[] = {0, 1, 2, 4};
 
 
@@ -66,7 +66,7 @@ void sub_8042978(Entity *);
 void sub_804298C(Entity *);
 void sub_80428EC(Entity *);
 
-bool8 sub_806E100(unkStruct_80943A8 *param_1, Entity *pokemon, Entity *target, u8 type, struct unkStruct_806D010 *param_5)
+bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, struct unkStruct_806D010 *param_5)
 {
   bool8 torrentFlag;
   bool8 overgrowFlag;
@@ -128,8 +128,8 @@ bool8 sub_806E100(unkStruct_80943A8 *param_1, Entity *pokemon, Entity *target, u
     bVar4 = TRUE;
     if ((param_5->effectiveness != EFFECTIVENESS_SUPER) && (bVar4 = FALSE, hasWonderGuard)) {
       temp = gUnknown_8106EFC[1];
-      param_1->s0 = gUnknown_8106EFC[0];
-      param_1->s4 = temp;
+      param_1->hi = gUnknown_8106EFC[0];
+      param_1->lo = temp;
     }
 
     if (((type == TYPE_FIRE) || (type == TYPE_ICE)) && (HasAbility(target,ABILITY_THICK_FAT))) {

@@ -105,7 +105,7 @@ extern const s16 gUnknown_80F4F74;
 extern const s16 gUnknown_80F4FC2;
 extern const s16 gUnknown_80F4F76;
 extern const s16 gUnknown_80F4F36;
-extern unkStruct_80943A8 gUnknown_80F54F4[8];
+extern s48_16 gUnknown_80F54F4[8];
 extern const s32 gUnknown_80F60DC[];
 
 extern const Position gUnknown_80F4D44[];
@@ -309,7 +309,7 @@ void sub_8074094(Entity *entity)
     }
 
     if (entityInfo->isTeamLeader) {
-        unkStruct_80943A8 sp8, sp10;
+        s48_16 sp8, sp10;
         FixedPoint var_38;
         FixedPoint bellyBefore;
         bool8 sound;
@@ -334,11 +334,11 @@ void sub_8074094(Entity *entity)
         if (r4 > 19)
             r4 = 19;
 
-        sp8.s0 = 0;
-        sp8.s4 = 6554;
+        sp8.hi = 0;
+        sp8.lo = 6554;
         F48_16_SMul(&sp10, &sp8, &gUnknown_80F54F4[r4]);
         if (entityInfo->unk153 > 1)
-            sp10.s4 += (gUnknown_80F60DC[entityInfo->unk153] << 0x10);
+            sp10.lo += (gUnknown_80F60DC[entityInfo->unk153] << 0x10);
         entityInfo->unk153 = 0;
 
         bellyBefore = entityInfo->belly;

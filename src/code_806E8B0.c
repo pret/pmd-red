@@ -28,7 +28,7 @@ void sub_80428B0(Entity *r0);
 void sub_80428C4(Entity *r0);
 
 extern void sub_806F500(void);
-extern bool8 sub_806E100(struct unkStruct_80943A8 *param_1, Entity *pokemon, Entity *target, u8 type, struct DamageStruct *dmgStruct);
+extern bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, struct DamageStruct *dmgStruct);
 extern void sub_8041B74(Entity *pokemon);
 extern void sub_8041B5C(Entity *pokemon);
 extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
@@ -44,10 +44,10 @@ extern const s16 gUnknown_810AC68;
 extern const s16 gUnknown_810AC62;
 extern const s16 gUnknown_80F4DAE;
 extern const s16 gUnknown_80F4DB0;
-extern struct unkStruct_80943A8 gUnknown_8106F24;
-extern struct unkStruct_80943A8 gUnknown_8106F04;
-extern struct unkStruct_80943A8 gUnknown_8106F1C;
-extern struct unkStruct_80943A8 gUnknown_8106F14;
+extern s48_16 gUnknown_8106F24;
+extern s48_16 gUnknown_8106F04;
+extern s48_16 gUnknown_8106F1C;
+extern s48_16 gUnknown_8106F14;
 extern const u8 *const gUnknown_80FAE00;
 extern const u8 *const gUnknown_80FADD8;
 extern const u8 *const gUnknown_80FEE04;
@@ -173,17 +173,17 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         s32 atkStat, defStat;
         s32 rand;
         s32 r6;
-        struct unkStruct_80943A8 unkSp1;
-        struct unkStruct_80943A8 unkSp2;
-        struct unkStruct_80943A8 unkSp3;
-        struct unkStruct_80943A8 unkSp4;
-        struct unkStruct_80943A8 unkSp5;
-        struct unkStruct_80943A8 unkSp6;
-        struct unkStruct_80943A8 unkSp7;
-        struct unkStruct_80943A8 unkSp8;
-        struct unkStruct_80943A8 unkSp9;
-        struct unkStruct_80943A8 unkSp10;
-        struct unkStruct_80943A8 unkSp11;
+        s48_16 unkSp1;
+        s48_16 unkSp2;
+        s48_16 unkSp3;
+        s48_16 unkSp4;
+        s48_16 unkSp5;
+        s48_16 unkSp6;
+        s48_16 unkSp7;
+        s48_16 unkSp8;
+        s48_16 unkSp9;
+        s48_16 unkSp10;
+        s48_16 unkSp11;
         bool8 r5;
 
         dmgStruct->type = moveType;
@@ -281,8 +281,8 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         F48_16_SDiv(&unkSp1, &unkSp1, &unkSp2);
         if (!attackerInfo->isNotTeamMember) {
             sub_800A020(&unkSp2, attackerInfo->level);
-            unkSp3.s0 = 0;
-            unkSp3.s4 = 0xAAAA;
+            unkSp3.hi = 0;
+            unkSp3.lo = 0xAAAA;
             F48_16_SMul(&unkSp2, &unkSp2, &unkSp3);
             r6 = (attackerInfo->level * 2) / 3;
         }
@@ -301,8 +301,8 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         unkSp5 = unkSp4;
         unkSp7 = unkSp4;
         F48_16_SMul(&unkSp5, &unkSp5, &unkSp5);
-        unkSp6.s0 = 0;
-        unkSp6.s4 = 0xCCC;
+        unkSp6.hi = 0;
+        unkSp6.lo = 0xCCC;
         F48_16_SMul(&unkSp5, &unkSp5, &unkSp6);
         sub_800A020(&unkSp6, 2);
         F48_16_SMul(&unkSp7, &unkSp7, &unkSp6);
@@ -401,8 +401,8 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         gDungeon->unk134.unk150 = sub_800A048(&unkSp8);
         {
             s32 rnd = DungeonRandInt(0x4000);
-            unkSp9.s0 = 0;
-            unkSp9.s4 = 0xE000 + rnd;
+            unkSp9.hi = 0;
+            unkSp9.lo = 0xE000 + rnd;
         }
         F48_16_SMul(&unkSp8, &unkSp8, &unkSp9);
         sub_800A020(&unkSp11, 100);
@@ -420,8 +420,8 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
 
 void sub_806F2BC(Entity *attacker, Entity *target, u8 moveType, s32 a2, struct DamageStruct *dmgStruct)
 {
-    struct unkStruct_80943A8 unkSp1;
-    struct unkStruct_80943A8 unkSp2;
+    s48_16 unkSp1;
+    s48_16 unkSp2;
     s32 a2New = a2;
 
     if (a2New <= 0) a2New = 1;

@@ -50,16 +50,16 @@ s32 sin_4096(s32 x);
  */
 s24_8 s24_8_mul(s24_8 x, s24_8 y);
 
-bool8 F48_16_IsZero(unkStruct_80943A8 *a);
-void F48_16_SDiv(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b);
-void F48_16_SMul(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b);
+bool8 F48_16_IsZero(s48_16 *a);
+void F48_16_SDiv(s48_16 *dst, s48_16 *a, s48_16 *b);
+void F48_16_SMul(s48_16 *dst, s48_16 *a, s48_16 *b);
 
 s32 sub_8009FB8(s32 x, s32 y);
-void sub_800A020(unkStruct_80943A8 *dst, u32);
-u32 sub_800A048(unkStruct_80943A8 *a);
-void sub_800A088(unkStruct_80943A8 *a, s32 b);
-bool8 sub_800A2F0(unkStruct_80943A8 *a, unkStruct_80943A8 *b);
-void sub_800A6D0(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b);
-void sub_800A6F0(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b);
+void sub_800A020(s48_16 *dst, u32);
+u32 sub_800A048(s48_16 *a);
+void sub_800A088(s48_16 *a, s32 b);
+bool8 sub_800A2F0(s48_16 *a, s48_16 *b);
+void sub_800A6D0(s48_16 *dst, s48_16 *a, s48_16 *b);
+void sub_800A6F0(s48_16 *dst, s48_16 *a, s48_16 *b);
 
 #endif // GUARD_MATH_H

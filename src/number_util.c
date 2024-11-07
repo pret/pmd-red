@@ -84,12 +84,12 @@ FixedPoint IntToFixedPoint(s32 a)
     return p;
 }
 
-FixedPoint FixedPoint_SetFromUnk(unkStruct_80943A8* param_1)
+FixedPoint FixedPoint_SetFromUnk(s48_16* param_1)
 {
     FixedPoint s;
 
-    s.unk0 = param_1->s4 >> 0x10;
-    s.unk2 = (1000 * (param_1->s4 & 0xffff)) >> 0x10;
+    s.unk0 = param_1->lo >> 0x10;
+    s.unk2 = (1000 * (param_1->lo & 0xffff)) >> 0x10;
 
     return s;
 }
