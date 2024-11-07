@@ -117,7 +117,7 @@ typedef struct UnkDungeonGlobal_unk181E8_sub
 typedef struct UnkDungeonGlobal_unk1C574
 {
     u8 unk0;
-    u8 unk1;
+    s8 unk1;
     u8 unk2;
     u8 unk3;
     u8 unk4;

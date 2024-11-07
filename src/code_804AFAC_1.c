@@ -17,7 +17,8 @@ extern u8 gUnknown_202F1B4;
 extern u8 gUnknown_202F1AE;
 extern u8 gUnknown_202F1AD;
 extern u8 gUnknown_202F1A9;
-extern u16 gUnknown_202F1B0;
+extern s16 gUnknown_202F1B0;
+extern s16 gUnknown_202F1B2;
 extern s32 gUnknown_202F1C8;
 extern s32 gUnknown_202F1D0;
 extern Position gUnknown_202F1D8;
@@ -44,8 +45,8 @@ extern void sub_804C9D0(void);
 extern u8 sub_8043D10();
 extern bool8 sub_8050C30(s32 a0, s32 a1, u8 a2);
 extern void sub_806C330(s32 a0, s32 a1, s16 a2, u8 a3);
-extern void sub_804B534(s32 a0, s32 a1, s32 a2, s32 a3);
 
+void sub_804B534(s32 a0, s32 a1, s32 a2, s32 a3);
 bool8 sub_804C70C(s32, UnkDungeonGlobal_unk1C574 *);
 void sub_804B634(s32 a0, s32 a1, UnkDungeonGlobal_unk1C574 *a2);
 void sub_804B72C(UnkDungeonGlobal_unk1C574 *a0);
@@ -966,6 +967,1418 @@ void sub_804B534(s32 xStart, s32 yStart, s32 maxX, s32 maxY)
             }
         }
     }
+}
+
+// Note: 15 seems to determine the array size, give it a better name and a define.
+
+
+// Size 480 = 32 * 15
+
+struct UnkHugeSpStructSubUnk0
+{
+    Position unk0;
+    Position unk4;
+    u8 unk8;
+    u8 unk9;
+    u8 unk10;
+    u8 unk11;
+    u8 unk12;
+    u8 unk13;
+    u8 unk14;
+    u8 unk15;
+    u8 unk16;
+    u8 unk17;
+    u8 unk18;
+    u8 unk19;
+    u8 unk20;
+    u8 unk21;
+    u8 unk22;
+    u8 unk23;
+    u8 unk24;
+    u8 unk25;
+    u8 unk26;
+    u8 unk27;
+    u8 unk28;
+    u8 unk29;
+    u8 unk30;
+    u8 unk31;
+};
+
+// Size 7200, however this struct is usually put at sp+8, so 8 needs to be added to these fields(in decimal)
+struct UnkHugeSpStruct
+{
+    struct UnkHugeSpStructSubUnk0 unk0[15][15];
+};
+
+void sub_804D024(s32 *a0, s32 *a1, s32 x, s32 y);
+void sub_804D084(struct UnkHugeSpStruct *a0, s32 x, s32 y);
+void sub_804E03C(struct UnkHugeSpStruct *a0, s32 x, s32 y);
+void sub_804D534(struct UnkHugeSpStruct *a0, s32 x, s32 y);
+void sub_804D154(struct UnkHugeSpStruct *a0, s32 x, s32 y, s32 a3);
+void sub_804D2D0(struct UnkHugeSpStruct *a0, s32 x, s32 y, s32 *a3, s32 *a4, s32 a5);
+void sub_804D8C8(struct UnkHugeSpStruct *a0, s32 x, s32 y, s32 *a3, s32 *a4, s32 a5);
+void sub_804E590(struct UnkHugeSpStruct *a0, s32 x, s32 y, s32 *a3, s32 *a4);
+void sub_804D5B0(struct UnkHugeSpStruct *a0, s32 x, s32 y, UnkDungeonGlobal_unk1C574 *unkPtr);
+void sub_804F0D0(struct UnkHugeSpStruct *a0, s32 x, s32 y, s32 a3);
+void sub_804EBC8(struct UnkHugeSpStruct *a0, s32 x, s32 y, s32 a3);
+void sub_804EEE4(struct UnkHugeSpStruct *a0, s32 x, s32 y, s32 a3);
+void sub_804CBEC(struct UnkHugeSpStruct *a0, s32 x, s32 y, s32 a3);
+void sub_804C43C(s32 a0, s32 a1, s32 a2, struct UnkHugeSpStructSubUnk0 sp[15][15]);
+
+void sub_804B634(s32 x, s32 y, UnkDungeonGlobal_unk1C574 *unkPtr)
+{
+    struct UnkHugeSpStruct sp;
+    s32 unk7200[15];
+    s32 unk7260[15];
+
+    sub_804D024(unk7200, unk7260, x, y);
+    sub_804D084(&sp, x, y);
+    sub_804D154(&sp, x, y, unkPtr->unk1);
+    sub_804D2D0(&sp, x, y, unk7200, unk7260, unkPtr->unkD);
+    sub_804D5B0(&sp, x, y, unkPtr);
+    sub_804D8C8(&sp, x, y, unk7200, unk7260, 0);
+    sub_804E590(&sp, x, y, unk7200, unk7260);
+    sub_804F0D0(&sp, x, y, unkPtr->unk9);
+    sub_804EBC8(&sp, x, y, gUnknown_202F1B0);
+    sub_804EEE4(&sp, x, y, gUnknown_202F1B2);
+    sub_804CBEC(&sp, x, y, unkPtr->unk13);
+    sub_804E03C(&sp, x, y);
+    sub_804D534(&sp, x, y);
+}
+
+// Decompile once data structure is better understood
+
+#ifdef NONMATCHING
+void sub_804B72C(UnkDungeonGlobal_unk1C574 *unkPtr)
+{
+    struct UnkHugeSpStruct sp;
+
+    sp.unk7200[0] = 0;
+    sp.unk7200[1] = 5;
+    sp.unk7200[3] = 28;
+    sp.unk7200[5] = 51
+    sp.unk7200[6] = 56;
+    sp.unk7200[2] = 16;
+    sp.unk7200[4] = 29;
+
+    sp.unk7260[0] = 2;
+    sp.unk7260[1] = 7;
+    sp.unk7260[2] = 16;
+    sp.unk7260[3] = 25;
+    sp.unk7260[4] = 30;
+
+    sub_804D084(&sp, 6, 4);
+}
+#else
+NAKED void sub_804B72C(UnkDungeonGlobal_unk1C574 *unkPtr)
+{
+    asm_unified("push {r4-r7,lr}\n"
+"	mov r7, r10\n"
+"	mov r6, r9\n"
+"	mov r5, r8\n"
+"	push {r5-r7}\n"
+"	ldr r4, _0804B9AC\n"
+"	add sp, r4\n"
+"	movs r1, 0xE5\n"
+"	lsls r1, 5\n"
+"	add r1, sp\n"
+"	str r0, [r1]\n"
+"	movs r5, 0\n"
+"	movs r6, 0x1\n"
+"	ldr r1, _0804B9B0\n"
+"	add r1, sp\n"
+"	str r5, [r1]\n"
+"	movs r0, 0x5\n"
+"	str r0, [r1, 0x4]\n"
+"	movs r0, 0x1C\n"
+"	str r0, [r1, 0xC]\n"
+"	movs r0, 0x33\n"
+"	str r0, [r1, 0x14]\n"
+"	movs r0, 0x38\n"
+"	str r0, [r1, 0x18]\n"
+"	movs r2, 0x10\n"
+"	str r2, [r1, 0x8]\n"
+"	movs r0, 0x27\n"
+"	str r0, [r1, 0x10]\n"
+"	ldr r1, _0804B9B4\n"
+"	add r1, sp\n"
+"	movs r0, 0x2\n"
+"	str r0, [r1]\n"
+"	movs r0, 0x7\n"
+"	str r0, [r1, 0x4]\n"
+"	str r2, [r1, 0x8]\n"
+"	movs r0, 0x19\n"
+"	str r0, [r1, 0xC]\n"
+"	movs r0, 0x1E\n"
+"	str r0, [r1, 0x10]\n"
+"	add r0, sp, 0x8\n"
+"	movs r1, 0x6\n"
+"	movs r2, 0x4\n"
+"	bl sub_804D084\n"
+"	mov r2, sp\n"
+"	adds r2, 0x3B\n"
+"	ldr r3, _0804B9B8\n"
+"	add r3, sp\n"
+"	str r2, [r3]\n"
+"	mov r4, sp\n"
+"	adds r4, 0x3C\n"
+"	ldr r0, _0804B9BC\n"
+"	add r0, sp\n"
+"	str r4, [r0]\n"
+"	mov r1, sp\n"
+"	adds r1, 0x5B\n"
+"	ldr r2, _0804B9C0\n"
+"	add r2, sp\n"
+"	str r1, [r2]\n"
+"	mov r3, sp\n"
+"	adds r3, 0x5C\n"
+"	movs r4, 0xE6\n"
+"	lsls r4, 5\n"
+"	add r4, sp\n"
+"	str r3, [r4]\n"
+"	mov r0, sp\n"
+"	adds r0, 0x7B\n"
+"	ldr r1, _0804B9C4\n"
+"	add r1, sp\n"
+"	str r0, [r1]\n"
+"	mov r2, sp\n"
+"	adds r2, 0x7E\n"
+"	ldr r3, _0804B9C8\n"
+"	add r3, sp\n"
+"	str r2, [r3]\n"
+"	add r1, sp, 0x68\n"
+"	add r0, sp, 0x8\n"
+"	movs r2, 0xF0\n"
+"	lsls r2, 1\n"
+"	movs r4, 0x6\n"
+"_0804B7CC:\n"
+"	strb r5, [r0, 0xA]\n"
+"	strb r5, [r1, 0xA]\n"
+"	adds r1, r2\n"
+"	adds r0, r2\n"
+"	subs r4, 0x1\n"
+"	cmp r4, 0\n"
+"	bne _0804B7CC\n"
+"	movs r2, 0x6\n"
+"	subs r2, 0x1\n"
+"	movs r4, 0x4\n"
+"	cmp r4, 0\n"
+"	beq _0804B80C\n"
+"	lsls r0, r2, 4\n"
+"	subs r0, r2\n"
+"	lsls r0, 5\n"
+"	add r0, sp\n"
+"	adds r0, 0x8\n"
+"	add r1, sp, 0x8\n"
+"	ldr r3, _0804B9CC\n"
+"	add r3, sp\n"
+"	str r4, [r3]\n"
+"_0804B7F6:\n"
+"	strb r5, [r1, 0xA]\n"
+"	strb r5, [r0, 0xA]\n"
+"	adds r0, 0x20\n"
+"	adds r1, 0x20\n"
+"	ldr r3, _0804B9CC\n"
+"	add r3, sp\n"
+"	ldr r4, [r3]\n"
+"	subs r4, 0x1\n"
+"	str r4, [r3]\n"
+"	cmp r4, 0\n"
+"	bne _0804B7F6\n"
+"_0804B80C:\n"
+"	movs r4, 0x1\n"
+"	cmp r4, r2\n"
+"	bge _0804B848\n"
+"	movs r1, 0x3\n"
+"_0804B814:\n"
+"	adds r5, r4, 0x1\n"
+"	mov r8, r5\n"
+"	cmp r1, 0x1\n"
+"	ble _0804B842\n"
+"	lsls r0, r4, 4\n"
+"	subs r0, r4\n"
+"	lsls r0, 5\n"
+"	add r0, sp\n"
+"	adds r0, 0x8\n"
+"	adds r0, 0x20\n"
+"	subs r3, r1, 0x1\n"
+"	ldr r4, _0804B9CC\n"
+"	add r4, sp\n"
+"	str r3, [r4]\n"
+"_0804B830:\n"
+"	strb r6, [r0, 0xA]\n"
+"	adds r0, 0x20\n"
+"	ldr r3, _0804B9CC\n"
+"	add r3, sp\n"
+"	ldr r5, [r3]\n"
+"	subs r5, 0x1\n"
+"	str r5, [r3]\n"
+"	cmp r5, 0\n"
+"	bne _0804B830\n"
+"_0804B842:\n"
+"	mov r4, r8\n"
+"	cmp r4, r2\n"
+"	blt _0804B814\n"
+"_0804B848:\n"
+"	movs r4, 0\n"
+"	ldr r5, _0804B9D0\n"
+"	add r5, sp\n"
+"	str r4, [r5]\n"
+"	ldr r0, _0804B9CC\n"
+"	add r0, sp\n"
+"	str r4, [r0]\n"
+"	cmp r4, 0x4\n"
+"	blt _0804B85C\n"
+"	b _0804BA8C\n"
+"_0804B85C:\n"
+"	movs r4, 0\n"
+"	ldr r2, _0804B9CC\n"
+"	add r2, sp\n"
+"	ldr r1, [r2]\n"
+"	adds r1, 0x1\n"
+"	ldr r2, _0804B9D4\n"
+"	add r2, sp\n"
+"	str r1, [r2]\n"
+"	cmp r4, 0x6\n"
+"	blt _0804B872\n"
+"	b _0804BA7A\n"
+"_0804B872:\n"
+"	ldr r3, _0804B9B0\n"
+"	add r3, sp\n"
+"	ldr r5, _0804B9D8\n"
+"	add r5, sp\n"
+"	str r3, [r5]\n"
+"	ldr r0, _0804B9B4\n"
+"	add r0, sp\n"
+"	ldr r1, _0804B9DC\n"
+"	add r1, sp\n"
+"	str r0, [r1]\n"
+"	ldr r2, _0804B9CC\n"
+"	add r2, sp\n"
+"	ldr r2, [r2]\n"
+"	lsls r0, r2, 2\n"
+"	ldr r3, [r1]\n"
+"	adds r0, r3, r0\n"
+"	ldr r3, _0804B9E0\n"
+"	add r3, sp\n"
+"	str r0, [r3]\n"
+"_0804B898:\n"
+"	lsls r0, r4, 4\n"
+"	subs r0, r4\n"
+"	ldr r5, _0804B9CC\n"
+"	add r5, sp\n"
+"	ldr r5, [r5]\n"
+"	adds r0, r5\n"
+"	lsls r0, 5\n"
+"	mov r7, sp\n"
+"	adds r7, r0\n"
+"	adds r7, 0x8\n"
+"	ldrb r0, [r7, 0xA]\n"
+"	cmp r0, 0\n"
+"	bne _0804B8B4\n"
+"	b _0804B9F4\n"
+"_0804B8B4:\n"
+"	lsls r0, r4, 2\n"
+"	ldr r1, _0804B9D8\n"
+"	add r1, sp\n"
+"	ldr r1, [r1]\n"
+"	adds r0, r1, r0\n"
+"	ldr r1, [r0]\n"
+"	adds r2, r1, 0x2\n"
+"	mov r10, r2\n"
+"	ldr r3, _0804B9E0\n"
+"	add r3, sp\n"
+"	ldr r3, [r3]\n"
+"	ldr r2, [r3]\n"
+"	adds r5, r2, 0x2\n"
+"	ldr r0, _0804B9E4\n"
+"	add r0, sp\n"
+"	str r5, [r0]\n"
+"	adds r4, 0x1\n"
+"	mov r9, r4\n"
+"	lsls r0, r4, 2\n"
+"	ldr r3, _0804B9D8\n"
+"	add r3, sp\n"
+"	ldr r3, [r3]\n"
+"	adds r0, r3, r0\n"
+"	ldr r4, [r0]\n"
+"	subs r4, r1\n"
+"	subs r4, 0x3\n"
+"	ldr r5, _0804B9D4\n"
+"	add r5, sp\n"
+"	ldr r5, [r5]\n"
+"	lsls r0, r5, 2\n"
+"	ldr r1, _0804B9DC\n"
+"	add r1, sp\n"
+"	ldr r1, [r1]\n"
+"	adds r0, r1, r0\n"
+"	ldr r5, [r0]\n"
+"	subs r5, r2\n"
+"	subs r5, 0x3\n"
+"	movs r0, 0x5\n"
+"	adds r1, r4, 0\n"
+"	bl DungeonRandRange\n"
+"	mov r8, r0\n"
+"	movs r0, 0x4\n"
+"	adds r1, r5, 0\n"
+"	bl DungeonRandRange\n"
+"	adds r6, r0, 0\n"
+"	mov r2, r8\n"
+"	subs r4, r2\n"
+"	adds r0, r4, 0\n"
+"	bl DungeonRandInt\n"
+"	adds r4, r0, 0\n"
+"	add r4, r10\n"
+"	subs r5, r6\n"
+"	adds r0, r5, 0\n"
+"	bl DungeonRandInt\n"
+"	ldr r5, _0804B9E4\n"
+"	add r5, sp\n"
+"	ldr r3, [r5]\n"
+"	adds r3, r0\n"
+"	mov r10, r3\n"
+"	mov r0, r8\n"
+"	adds r3, r4, r0\n"
+"	add r6, r10\n"
+"	strh r4, [r7]\n"
+"	strh r3, [r7, 0x4]\n"
+"	mov r1, r10\n"
+"	strh r1, [r7, 0x2]\n"
+"	strh r6, [r7, 0x6]\n"
+"	mov r8, r9\n"
+"	ldr r5, _0804B9D0\n"
+"	add r5, sp\n"
+"	ldr r2, [r5]\n"
+"	adds r2, 0x1\n"
+"	ldr r5, _0804B9E8\n"
+"	add r5, sp\n"
+"	str r2, [r5]\n"
+"	cmp r4, r3\n"
+"	bge _0804B99E\n"
+"_0804B956:\n"
+"	mov r5, r10\n"
+"	adds r7, r4, 0x1\n"
+"	cmp r5, r6\n"
+"	bge _0804B998\n"
+"	ldr r0, _0804B9EC\n"
+"	mov r9, r0\n"
+"_0804B962:\n"
+"	adds r0, r4, 0\n"
+"	adds r1, r5, 0\n"
+"	ldr r2, _0804B9F0\n"
+"	add r2, sp\n"
+"	str r3, [r2]\n"
+"	bl GetTileSafe\n"
+"	ldrh r1, [r0]\n"
+"	mov r2, r9\n"
+"	ands r1, r2\n"
+"	movs r2, 0x1\n"
+"	orrs r1, r2\n"
+"	strh r1, [r0]\n"
+"	adds r0, r4, 0\n"
+"	adds r1, r5, 0\n"
+"	bl GetTileSafe\n"
+"	ldr r1, _0804B9D0\n"
+"	add r1, sp\n"
+"	ldrb r1, [r1]\n"
+"	strb r1, [r0, 0x9]\n"
+"	adds r5, 0x1\n"
+"	ldr r2, _0804B9F0\n"
+"	add r2, sp\n"
+"	ldr r3, [r2]\n"
+"	cmp r5, r6\n"
+"	blt _0804B962\n"
+"_0804B998:\n"
+"	adds r4, r7, 0\n"
+"	cmp r4, r3\n"
+"	blt _0804B956\n"
+"_0804B99E:\n"
+"	ldr r3, _0804B9E8\n"
+"	add r3, sp\n"
+"	ldr r3, [r3]\n"
+"	ldr r4, _0804B9D0\n"
+"	add r4, sp\n"
+"	str r3, [r4]\n"
+"	b _0804BA72\n"
+"	.align 2, 0\n"
+"_0804B9AC: .4byte 0xffffe320\n"
+"_0804B9B0: .4byte 0x00001c28\n"
+"_0804B9B4: .4byte 0x00001c64\n"
+"_0804B9B8: .4byte 0x00001cd4\n"
+"_0804B9BC: .4byte 0x00001cd8\n"
+"_0804B9C0: .4byte 0x00001cbc\n"
+"_0804B9C4: .4byte 0x00001cc4\n"
+"_0804B9C8: .4byte 0x00001cc8\n"
+"_0804B9CC: .4byte 0x00001ca4\n"
+"_0804B9D0: .4byte 0x00001ca8\n"
+"_0804B9D4: .4byte 0x00001ccc\n"
+"_0804B9D8: .4byte 0x00001cac\n"
+"_0804B9DC: .4byte 0x00001cb4\n"
+"_0804B9E0: .4byte 0x00001cb8\n"
+"_0804B9E4: .4byte 0x00001cb0\n"
+"_0804B9E8: .4byte 0x00001cd0\n"
+"_0804B9EC: .4byte 0x0000fffc\n"
+"_0804B9F0: .4byte 0x00001cdc\n"
+"_0804B9F4:\n"
+"	lsls r0, r4, 2\n"
+"	ldr r5, _0804BBE8\n"
+"	add r5, sp\n"
+"	ldr r5, [r5]\n"
+"	adds r0, r5, r0\n"
+"	ldr r2, [r0]\n"
+"	adds r0, r2, 0x1\n"
+"	ldr r1, _0804BBEC\n"
+"	add r1, sp\n"
+"	ldr r1, [r1]\n"
+"	ldr r3, [r1]\n"
+"	adds r6, r3, 0x1\n"
+"	adds r4, 0x1\n"
+"	mov r8, r4\n"
+"	lsls r1, r4, 2\n"
+"	adds r1, r5, r1\n"
+"	ldr r1, [r1]\n"
+"	subs r1, r2\n"
+"	subs r1, 0x3\n"
+"	ldr r5, _0804BBF0\n"
+"	add r5, sp\n"
+"	ldr r5, [r5]\n"
+"	lsls r2, r5, 2\n"
+"	ldr r4, _0804BBF4\n"
+"	add r4, sp\n"
+"	ldr r4, [r4]\n"
+"	adds r2, r4, r2\n"
+"	ldr r4, [r2]\n"
+"	subs r4, r3\n"
+"	subs r4, 0x3\n"
+"	adds r1, r0, r1\n"
+"	bl DungeonRandRange\n"
+"	adds r5, r0, 0\n"
+"	adds r4, r6, r4\n"
+"	adds r0, r6, 0\n"
+"	adds r1, r4, 0\n"
+"	bl DungeonRandRange\n"
+"	adds r4, r0, 0\n"
+"	strh r5, [r7]\n"
+"	adds r0, r5, 0x1\n"
+"	strh r0, [r7, 0x4]\n"
+"	strh r4, [r7, 0x2]\n"
+"	adds r0, r4, 0x1\n"
+"	strh r0, [r7, 0x6]\n"
+"	adds r0, r5, 0\n"
+"	adds r1, r4, 0\n"
+"	bl GetTileSafe\n"
+"	ldrh r1, [r0]\n"
+"	ldr r3, _0804BBF8\n"
+"	adds r2, r3, 0\n"
+"	ands r1, r2\n"
+"	movs r2, 0x1\n"
+"	orrs r1, r2\n"
+"	strh r1, [r0]\n"
+"	adds r0, r5, 0\n"
+"	adds r1, r4, 0\n"
+"	bl GetTileSafe\n"
+"	movs r1, 0xFF\n"
+"	strb r1, [r0, 0x9]\n"
+"_0804BA72:\n"
+"	mov r4, r8\n"
+"	cmp r4, 0x6\n"
+"	bge _0804BA7A\n"
+"	b _0804B898\n"
+"_0804BA7A:\n"
+"	ldr r4, _0804BBF0\n"
+"	add r4, sp\n"
+"	ldr r4, [r4]\n"
+"	ldr r5, _0804BBFC\n"
+"	add r5, sp\n"
+"	str r4, [r5]\n"
+"	cmp r4, 0x4\n"
+"	bge _0804BA8C\n"
+"	b _0804B85C\n"
+"_0804BA8C:\n"
+"	add r1, sp, 0x8\n"
+"	movs r6, 0\n"
+"	movs r0, 0x1\n"
+"	strb r0, [r1, 0x16]\n"
+"	ldr r1, _0804BC00\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	movs r1, 0xFF\n"
+"	lsls r1, 1\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC04\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC08\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC0C\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC10\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC14\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC18\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC1C\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	add r1, sp, 0x8\n"
+"	strb r0, [r1, 0x14]\n"
+"	ldr r5, _0804BC20\n"
+"	add r5, sp\n"
+"	ldr r5, [r5]\n"
+"	strb r0, [r5]\n"
+"	ldr r1, _0804BC24\n"
+"	add r1, sp\n"
+"	ldr r1, [r1]\n"
+"	strb r0, [r1]\n"
+"	ldr r2, _0804BC28\n"
+"	add r2, sp\n"
+"	ldr r2, [r2]\n"
+"	strb r0, [r2]\n"
+"	movs r3, 0xE6\n"
+"	lsls r3, 5\n"
+"	add r3, sp\n"
+"	ldr r3, [r3]\n"
+"	strb r0, [r3]\n"
+"	ldr r4, _0804BC2C\n"
+"	add r4, sp\n"
+"	ldr r4, [r4]\n"
+"	strb r0, [r4]\n"
+"	ldr r5, _0804BC30\n"
+"	add r5, sp\n"
+"	ldr r5, [r5]\n"
+"	strb r0, [r5]\n"
+"	ldr r1, _0804BC34\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC38\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC3C\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC40\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC44\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC48\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC4C\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC50\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC54\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC58\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC5C\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC60\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC64\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC68\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	ldr r1, _0804BC6C\n"
+"	add r1, sp\n"
+"	strb r0, [r1]\n"
+"	add r0, sp, 0x8\n"
+"	movs r1, 0x6\n"
+"	movs r2, 0x4\n"
+"	movs r4, 0xE5\n"
+"	lsls r4, 5\n"
+"	add r4, sp\n"
+"	ldr r3, [r4]\n"
+"	bl sub_804D5B0\n"
+"	ldr r5, _0804BC70\n"
+"	add r5, sp\n"
+"	ldr r4, _0804BC74\n"
+"	add r4, sp\n"
+"	str r4, [sp]\n"
+"	str r6, [sp, 0x4]\n"
+"	add r0, sp, 0x8\n"
+"	movs r1, 0x6\n"
+"	movs r2, 0x4\n"
+"	adds r3, r5, 0\n"
+"	bl sub_804D8C8\n"
+"	str r4, [sp]\n"
+"	add r0, sp, 0x8\n"
+"	movs r1, 0x6\n"
+"	movs r2, 0x4\n"
+"	adds r3, r5, 0\n"
+"	bl sub_804E590\n"
+"	ldr r0, _0804BC78\n"
+"	movs r5, 0\n"
+"	ldrsh r3, [r0, r5]\n"
+"	add r0, sp, 0x8\n"
+"	movs r1, 0x6\n"
+"	movs r2, 0x4\n"
+"	bl sub_804EBC8\n"
+"	ldr r0, _0804BC7C\n"
+"	movs r1, 0\n"
+"	ldrsh r3, [r0, r1]\n"
+"	add r0, sp, 0x8\n"
+"	movs r1, 0x6\n"
+"	movs r2, 0x4\n"
+"	bl sub_804EEE4\n"
+"	movs r2, 0xE5\n"
+"	lsls r2, 5\n"
+"	add r2, sp\n"
+"	ldr r2, [r2]\n"
+"	ldrb r3, [r2, 0x13]\n"
+"	add r0, sp, 0x8\n"
+"	movs r1, 0x6\n"
+"	movs r2, 0x4\n"
+"	bl sub_804CBEC\n"
+"	add r0, sp, 0x8\n"
+"	movs r1, 0x6\n"
+"	movs r2, 0x4\n"
+"	bl sub_804E03C\n"
+"	movs r3, 0xE7\n"
+"	lsls r3, 5\n"
+"	add sp, r3\n"
+"	pop {r3-r5}\n"
+"	mov r8, r3\n"
+"	mov r9, r4\n"
+"	mov r10, r5\n"
+"	pop {r4-r7}\n"
+"	pop {r0}\n"
+"	bx r0\n"
+"	.align 2, 0\n"
+"_0804BBE8: .4byte 0x00001cac\n"
+"_0804BBEC: .4byte 0x00001cb8\n"
+"_0804BBF0: .4byte 0x00001ccc\n"
+"_0804BBF4: .4byte 0x00001cb4\n"
+"_0804BBF8: .4byte 0x0000fffc\n"
+"_0804BBFC: .4byte 0x00001ca4\n"
+"_0804BC00: .4byte 0x000001fd\n"
+"_0804BC04: .4byte 0x000003dd\n"
+"_0804BC08: .4byte 0x000003de\n"
+"_0804BC0C: .4byte 0x000005bd\n"
+"_0804BC10: .4byte 0x000005be\n"
+"_0804BC14: .4byte 0x0000079d\n"
+"_0804BC18: .4byte 0x0000079e\n"
+"_0804BC1C: .4byte 0x0000097d\n"
+"_0804BC20: .4byte 0x00001cd4\n"
+"_0804BC24: .4byte 0x00001cd8\n"
+"_0804BC28: .4byte 0x00001cbc\n"
+"_0804BC2C: .4byte 0x00001cc4\n"
+"_0804BC30: .4byte 0x00001cc8\n"
+"_0804BC34: .4byte 0x0000025d\n"
+"_0804BC38: .4byte 0x0000025e\n"
+"_0804BC3C: .4byte 0x0000043d\n"
+"_0804BC40: .4byte 0x0000043e\n"
+"_0804BC44: .4byte 0x0000061d\n"
+"_0804BC48: .4byte 0x0000061e\n"
+"_0804BC4C: .4byte 0x000007fd\n"
+"_0804BC50: .4byte 0x000007fe\n"
+"_0804BC54: .4byte 0x000009dd\n"
+"_0804BC58: .4byte 0x0000097c\n"
+"_0804BC5C: .4byte 0x0000099b\n"
+"_0804BC60: .4byte 0x0000099c\n"
+"_0804BC64: .4byte 0x000009bb\n"
+"_0804BC68: .4byte 0x000009bc\n"
+"_0804BC6C: .4byte 0x000009db\n"
+"_0804BC70: .4byte 0x00001c28\n"
+"_0804BC74: .4byte 0x00001c64\n"
+"_0804BC78: .4byte gUnknown_202F1B0\n"
+"_0804BC7C: .4byte gUnknown_202F1B2");
+}
+#endif // NONMATCHING
+
+#ifdef NONMATCHING
+void sub_804BC80(UnkDungeonGlobal_unk1C574 *a0)
+{
+
+}
+#else
+NAKED void sub_804BC80(UnkDungeonGlobal_unk1C574 *a0)
+{
+    asm_unified("push {r4-r7,lr}\n"
+"	mov r7, r10\n"
+"	mov r6, r9\n"
+"	mov r5, r8\n"
+"	push {r5-r7}\n"
+"	ldr r4, _0804BED0\n"
+"	add sp, r4\n"
+"	movs r1, 0xE5\n"
+"	lsls r1, 5\n"
+"	add r1, sp\n"
+"	str r0, [r1]\n"
+"	movs r4, 0x1\n"
+"	movs r5, 0\n"
+"	ldr r1, _0804BED4\n"
+"	add r1, sp\n"
+"	str r5, [r1]\n"
+"	movs r0, 0xB\n"
+"	str r0, [r1, 0x4]\n"
+"	movs r0, 0x16\n"
+"	str r0, [r1, 0x8]\n"
+"	movs r0, 0x21\n"
+"	str r0, [r1, 0xC]\n"
+"	movs r0, 0x2C\n"
+"	str r0, [r1, 0x10]\n"
+"	movs r0, 0x38\n"
+"	str r0, [r1, 0x14]\n"
+"	ldr r1, _0804BED8\n"
+"	add r1, sp\n"
+"	str r4, [r1]\n"
+"	movs r0, 0x9\n"
+"	str r0, [r1, 0x4]\n"
+"	movs r0, 0x10\n"
+"	str r0, [r1, 0x8]\n"
+"	movs r0, 0x17\n"
+"	str r0, [r1, 0xC]\n"
+"	movs r0, 0x1F\n"
+"	str r0, [r1, 0x10]\n"
+"	add r0, sp, 0x8\n"
+"	movs r1, 0x5\n"
+"	movs r2, 0x4\n"
+"	bl sub_804D084\n"
+"	add r6, sp, 0x70\n"
+"	add r1, sp, 0x68\n"
+"	add r0, sp, 0x8\n"
+"	movs r3, 0xF0\n"
+"	lsls r3, 1\n"
+"	movs r2, 0x5\n"
+"_0804BCE0:\n"
+"	strb r4, [r0, 0xA]\n"
+"	strb r4, [r1, 0xA]\n"
+"	adds r1, r3\n"
+"	adds r0, r3\n"
+"	subs r2, 0x1\n"
+"	cmp r2, 0\n"
+"	bne _0804BCE0\n"
+"	movs r3, 0x5\n"
+"	subs r3, 0x1\n"
+"	movs r2, 0x4\n"
+"	cmp r2, 0\n"
+"	beq _0804BD1A\n"
+"	lsls r0, r3, 4\n"
+"	subs r0, r3\n"
+"	lsls r0, 5\n"
+"	add r0, sp\n"
+"	adds r0, 0x8\n"
+"	add r1, sp, 0x8\n"
+"	mov r10, r2\n"
+"_0804BD06:\n"
+"	strb r4, [r1, 0xA]\n"
+"	strb r4, [r0, 0xA]\n"
+"	adds r0, 0x20\n"
+"	adds r1, 0x20\n"
+"	movs r2, 0x1\n"
+"	negs r2, r2\n"
+"	add r10, r2\n"
+"	mov r2, r10\n"
+"	cmp r2, 0\n"
+"	bne _0804BD06\n"
+"_0804BD1A:\n"
+"	movs r2, 0x1\n"
+"	cmp r2, r3\n"
+"	bge _0804BD58\n"
+"	movs r1, 0x3\n"
+"_0804BD22:\n"
+"	adds r4, r2, 0x1\n"
+"	ldr r0, _0804BEDC\n"
+"	add r0, sp\n"
+"	str r4, [r0]\n"
+"	cmp r1, 0x1\n"
+"	ble _0804BD4E\n"
+"	lsls r0, r2, 4\n"
+"	subs r0, r2\n"
+"	lsls r0, 5\n"
+"	add r0, sp\n"
+"	adds r0, 0x8\n"
+"	adds r0, 0x20\n"
+"	subs r2, r1, 0x1\n"
+"	mov r10, r2\n"
+"_0804BD3E:\n"
+"	strb r5, [r0, 0xA]\n"
+"	adds r0, 0x20\n"
+"	movs r4, 0x1\n"
+"	negs r4, r4\n"
+"	add r10, r4\n"
+"	mov r2, r10\n"
+"	cmp r2, 0\n"
+"	bne _0804BD3E\n"
+"_0804BD4E:\n"
+"	ldr r4, _0804BEDC\n"
+"	add r4, sp\n"
+"	ldr r2, [r4]\n"
+"	cmp r2, r3\n"
+"	blt _0804BD22\n"
+"_0804BD58:\n"
+"	add r0, sp, 0x8\n"
+"	movs r1, 0x1\n"
+"	strb r1, [r0, 0x8]\n"
+"	movs r0, 0xF2\n"
+"	lsls r0, 3\n"
+"	add r0, sp\n"
+"	strb r1, [r0]\n"
+"	strb r1, [r6]\n"
+"	movs r0, 0xFE\n"
+"	lsls r0, 3\n"
+"	add r0, sp\n"
+"	strb r1, [r0]\n"
+"	movs r5, 0\n"
+"	ldr r6, _0804BEE0\n"
+"	add r6, sp\n"
+"	str r5, [r6]\n"
+"	mov r10, r5\n"
+"	cmp r5, 0x4\n"
+"	blt _0804BD80\n"
+"	b _0804BFAC\n"
+"_0804BD80:\n"
+"	movs r0, 0x4\n"
+"	movs r1, 0xE6\n"
+"	lsls r1, 5\n"
+"	add r1, sp\n"
+"	str r0, [r1]\n"
+"_0804BD8A:\n"
+"	movs r2, 0\n"
+"	cmp r2, 0x5\n"
+"	blt _0804BD92\n"
+"	b _0804BF94\n"
+"_0804BD92:\n"
+"	ldr r3, _0804BED4\n"
+"	add r3, sp\n"
+"	ldr r4, _0804BEE4\n"
+"	add r4, sp\n"
+"	str r3, [r4]\n"
+"	ldr r5, _0804BED8\n"
+"	add r5, sp\n"
+"	ldr r6, _0804BEE8\n"
+"	add r6, sp\n"
+"	str r5, [r6]\n"
+"	mov r1, r10\n"
+"	lsls r0, r1, 2\n"
+"	adds r0, r5, r0\n"
+"	ldr r3, _0804BEEC\n"
+"	add r3, sp\n"
+"	str r0, [r3]\n"
+"_0804BDB2:\n"
+"	lsls r0, r2, 4\n"
+"	subs r0, r2\n"
+"	add r0, r10\n"
+"	lsls r0, 5\n"
+"	mov r7, sp\n"
+"	adds r7, r0\n"
+"	adds r7, 0x8\n"
+"	ldrb r0, [r7, 0x8]\n"
+"	adds r4, r2, 0x1\n"
+"	ldr r5, _0804BEDC\n"
+"	add r5, sp\n"
+"	str r4, [r5]\n"
+"	cmp r0, 0\n"
+"	beq _0804BDD0\n"
+"	b _0804BF88\n"
+"_0804BDD0:\n"
+"	ldrb r0, [r7, 0xA]\n"
+"	cmp r0, 0\n"
+"	bne _0804BDD8\n"
+"	b _0804BF00\n"
+"_0804BDD8:\n"
+"	lsls r0, r2, 2\n"
+"	ldr r6, _0804BEE4\n"
+"	add r6, sp\n"
+"	ldr r6, [r6]\n"
+"	adds r0, r6, r0\n"
+"	ldr r1, [r0]\n"
+"	adds r0, r1, 0x2\n"
+"	mov r9, r0\n"
+"	ldr r3, _0804BEEC\n"
+"	add r3, sp\n"
+"	ldr r3, [r3]\n"
+"	ldr r2, [r3]\n"
+"	adds r4, r2, 0x2\n"
+"	ldr r5, _0804BEF0\n"
+"	add r5, sp\n"
+"	str r4, [r5]\n"
+"	ldr r6, _0804BEDC\n"
+"	add r6, sp\n"
+"	ldr r6, [r6]\n"
+"	lsls r0, r6, 2\n"
+"	ldr r3, _0804BEE4\n"
+"	add r3, sp\n"
+"	ldr r3, [r3]\n"
+"	adds r0, r3, r0\n"
+"	ldr r4, [r0]\n"
+"	subs r4, r1\n"
+"	subs r4, 0x3\n"
+"	ldr r5, _0804BEE8\n"
+"	add r5, sp\n"
+"	ldr r5, [r5]\n"
+"	movs r6, 0xE6\n"
+"	lsls r6, 5\n"
+"	add r6, sp\n"
+"	ldr r6, [r6]\n"
+"	adds r0, r5, r6\n"
+"	ldr r5, [r0]\n"
+"	subs r5, r2\n"
+"	subs r5, 0x3\n"
+"	movs r0, 0x5\n"
+"	adds r1, r4, 0\n"
+"	bl DungeonRandRange\n"
+"	mov r8, r0\n"
+"	movs r0, 0x4\n"
+"	adds r1, r5, 0\n"
+"	bl DungeonRandRange\n"
+"	adds r6, r0, 0\n"
+"	mov r0, r8\n"
+"	subs r4, r0\n"
+"	adds r0, r4, 0\n"
+"	bl DungeonRandInt\n"
+"	adds r4, r0, 0\n"
+"	add r4, r9\n"
+"	subs r5, r6\n"
+"	adds r0, r5, 0\n"
+"	bl DungeonRandInt\n"
+"	ldr r2, _0804BEF0\n"
+"	add r2, sp\n"
+"	ldr r1, [r2]\n"
+"	adds r1, r0\n"
+"	mov r9, r1\n"
+"	mov r5, r8\n"
+"	adds r3, r4, r5\n"
+"	add r6, r9\n"
+"	strh r4, [r7]\n"
+"	strh r3, [r7, 0x4]\n"
+"	strh r1, [r7, 0x2]\n"
+"	strh r6, [r7, 0x6]\n"
+"	ldr r1, _0804BEE0\n"
+"	add r1, sp\n"
+"	ldr r0, [r1]\n"
+"	adds r0, 0x1\n"
+"	ldr r1, _0804BEF4\n"
+"	add r1, sp\n"
+"	str r0, [r1]\n"
+"	cmp r4, r3\n"
+"	bge _0804BEC0\n"
+"_0804BE78:\n"
+"	mov r5, r9\n"
+"	adds r7, r4, 0x1\n"
+"	cmp r5, r6\n"
+"	bge _0804BEBA\n"
+"	ldr r2, _0804BEF8\n"
+"	mov r8, r2\n"
+"_0804BE84:\n"
+"	adds r0, r4, 0\n"
+"	adds r1, r5, 0\n"
+"	ldr r2, _0804BEFC\n"
+"	add r2, sp\n"
+"	str r3, [r2]\n"
+"	bl GetTileSafe\n"
+"	ldrh r1, [r0]\n"
+"	mov r2, r8\n"
+"	ands r1, r2\n"
+"	movs r2, 0x1\n"
+"	orrs r1, r2\n"
+"	strh r1, [r0]\n"
+"	adds r0, r4, 0\n"
+"	adds r1, r5, 0\n"
+"	bl GetTileSafe\n"
+"	ldr r1, _0804BEE0\n"
+"	add r1, sp\n"
+"	ldrb r1, [r1]\n"
+"	strb r1, [r0, 0x9]\n"
+"	adds r5, 0x1\n"
+"	ldr r2, _0804BEFC\n"
+"	add r2, sp\n"
+"	ldr r3, [r2]\n"
+"	cmp r5, r6\n"
+"	blt _0804BE84\n"
+"_0804BEBA:\n"
+"	adds r4, r7, 0\n"
+"	cmp r4, r3\n"
+"	blt _0804BE78\n"
+"_0804BEC0:\n"
+"	ldr r3, _0804BEF4\n"
+"	add r3, sp\n"
+"	ldr r3, [r3]\n"
+"	ldr r4, _0804BEE0\n"
+"	add r4, sp\n"
+"	str r3, [r4]\n"
+"	b _0804BF88\n"
+"	.align 2, 0\n"
+"_0804BED0: .4byte 0xffffe338\n"
+"_0804BED4: .4byte 0x00001c28\n"
+"_0804BED8: .4byte 0x00001c64\n"
+"_0804BEDC: .4byte 0x00001cb8\n"
+"_0804BEE0: .4byte 0x00001ca4\n"
+"_0804BEE4: .4byte 0x00001ca8\n"
+"_0804BEE8: .4byte 0x00001cb0\n"
+"_0804BEEC: .4byte 0x00001cb4\n"
+"_0804BEF0: .4byte 0x00001cac\n"
+"_0804BEF4: .4byte 0x00001cbc\n"
+"_0804BEF8: .4byte 0x0000fffc\n"
+"_0804BEFC: .4byte 0x00001cc4\n"
+"_0804BF00:\n"
+"	lsls r0, r2, 2\n"
+"	ldr r4, _0804C080\n"
+"	add r4, sp\n"
+"	ldr r4, [r4]\n"
+"	adds r0, r4, r0\n"
+"	ldr r2, [r0]\n"
+"	adds r0, r2, 0x1\n"
+"	ldr r5, _0804C084\n"
+"	add r5, sp\n"
+"	ldr r5, [r5]\n"
+"	ldr r3, [r5]\n"
+"	adds r6, r3, 0x1\n"
+"	mov r8, r6\n"
+"	ldr r4, _0804C088\n"
+"	add r4, sp\n"
+"	ldr r4, [r4]\n"
+"	lsls r1, r4, 2\n"
+"	ldr r5, _0804C080\n"
+"	add r5, sp\n"
+"	ldr r5, [r5]\n"
+"	adds r1, r5, r1\n"
+"	ldr r1, [r1]\n"
+"	subs r1, r2\n"
+"	subs r1, 0x3\n"
+"	ldr r6, _0804C08C\n"
+"	add r6, sp\n"
+"	ldr r6, [r6]\n"
+"	movs r4, 0xE6\n"
+"	lsls r4, 5\n"
+"	add r4, sp\n"
+"	ldr r4, [r4]\n"
+"	adds r2, r6, r4\n"
+"	ldr r4, [r2]\n"
+"	subs r4, r3\n"
+"	subs r4, 0x3\n"
+"	adds r1, r0, r1\n"
+"	bl DungeonRandRange\n"
+"	adds r5, r0, 0\n"
+"	add r4, r8\n"
+"	mov r0, r8\n"
+"	adds r1, r4, 0\n"
+"	bl DungeonRandRange\n"
+"	adds r4, r0, 0\n"
+"	strh r5, [r7]\n"
+"	adds r0, r5, 0x1\n"
+"	strh r0, [r7, 0x4]\n"
+"	strh r4, [r7, 0x2]\n"
+"	adds r0, r4, 0x1\n"
+"	strh r0, [r7, 0x6]\n"
+"	adds r0, r5, 0\n"
+"	adds r1, r4, 0\n"
+"	bl GetTileSafe\n"
+"	ldrh r1, [r0]\n"
+"	ldr r6, _0804C090\n"
+"	adds r2, r6, 0\n"
+"	ands r1, r2\n"
+"	movs r2, 0x1\n"
+"	orrs r1, r2\n"
+"	strh r1, [r0]\n"
+"	adds r0, r5, 0\n"
+"	adds r1, r4, 0\n"
+"	bl GetTileSafe\n"
+"	movs r1, 0xFF\n"
+"	strb r1, [r0, 0x9]\n"
+"_0804BF88:\n"
+"	ldr r0, _0804C088\n"
+"	add r0, sp\n"
+"	ldr r2, [r0]\n"
+"	cmp r2, 0x5\n"
+"	bge _0804BF94\n"
+"	b _0804BDB2\n"
+"_0804BF94:\n"
+"	movs r2, 0xE6\n"
+"	lsls r2, 5\n"
+"	add r2, sp\n"
+"	ldr r1, [r2]\n"
+"	adds r1, 0x4\n"
+"	str r1, [r2]\n"
+"	movs r3, 0x1\n"
+"	add r10, r3\n"
+"	mov r4, r10\n"
+"	cmp r4, 0x4\n"
+"	bge _0804BFAC\n"
+"	b _0804BD8A\n"
+"_0804BFAC:\n"
+"	movs r2, 0x1\n"
+"	movs r1, 0x1\n"
+"	movs r3, 0xF\n"
+"	add r4, sp, 0x1C\n"
+"_0804BFB4:\n"
+"	movs r5, 0\n"
+"	mov r10, r5\n"
+"	lsls r0, r3, 5\n"
+"	adds r0, r4\n"
+"_0804BFBC:\n"
+"	strb r1, [r0]\n"
+"	strb r1, [r0, 0x1F]\n"
+"	adds r0, 0x20\n"
+"	movs r6, 0x1\n"
+"	add r10, r6\n"
+"	mov r5, r10\n"
+"	cmp r5, 0x2\n"
+"	ble _0804BFBC\n"
+"	movs r0, 0xF0\n"
+"	lsls r0, 1\n"
+"	adds r3, 0xF\n"
+"	adds r2, 0x1\n"
+"	cmp r2, 0x3\n"
+"	ble _0804BFB4\n"
+"	mov r10, r6\n"
+"	movs r5, 0x1\n"
+"	adds r4, r0, 0\n"
+"	mov r6, sp\n"
+"	adds r6, r4\n"
+"	adds r6, 0x8\n"
+"_0804BFE4:\n"
+"	movs r2, 0\n"
+"	mov r1, r10\n"
+"	lsls r0, r1, 5\n"
+"	mov r3, r10\n"
+"	adds r3, 0x1\n"
+"	adds r1, r0, r6\n"
+"	add r0, sp\n"
+"	adds r0, 0x8\n"
+"_0804BFF4:\n"
+"	strb r5, [r0, 0x16]\n"
+"	strb r5, [r1, 0x15]\n"
+"	adds r1, r4\n"
+"	adds r0, r4\n"
+"	adds r2, 0x1\n"
+"	cmp r2, 0x3\n"
+"	ble _0804BFF4\n"
+"	mov r10, r3\n"
+"	cmp r3, 0x2\n"
+"	ble _0804BFE4\n"
+"	ldr r5, _0804C094\n"
+"	add r5, sp\n"
+"	ldr r4, _0804C098\n"
+"	add r4, sp\n"
+"	str r4, [sp]\n"
+"	movs r0, 0x1\n"
+"	str r0, [sp, 0x4]\n"
+"	add r0, sp, 0x8\n"
+"	movs r1, 0x5\n"
+"	movs r2, 0x4\n"
+"	adds r3, r5, 0\n"
+"	bl sub_804D8C8\n"
+"	str r4, [sp]\n"
+"	add r0, sp, 0x8\n"
+"	movs r1, 0x5\n"
+"	movs r2, 0x4\n"
+"	adds r3, r5, 0\n"
+"	bl sub_804E590\n"
+"	ldr r0, _0804C09C\n"
+"	movs r2, 0\n"
+"	ldrsh r3, [r0, r2]\n"
+"	add r0, sp, 0x8\n"
+"	movs r1, 0x5\n"
+"	movs r2, 0x4\n"
+"	bl sub_804EBC8\n"
+"	ldr r0, _0804C0A0\n"
+"	movs r4, 0\n"
+"	ldrsh r3, [r0, r4]\n"
+"	add r0, sp, 0x8\n"
+"	movs r1, 0x5\n"
+"	movs r2, 0x4\n"
+"	bl sub_804EEE4\n"
+"	movs r5, 0xE5\n"
+"	lsls r5, 5\n"
+"	add r5, sp\n"
+"	ldr r5, [r5]\n"
+"	ldrb r3, [r5, 0x13]\n"
+"	add r0, sp, 0x8\n"
+"	movs r1, 0x5\n"
+"	movs r2, 0x4\n"
+"	bl sub_804CBEC\n"
+"	add r0, sp, 0x8\n"
+"	movs r1, 0x5\n"
+"	movs r2, 0x4\n"
+"	bl sub_804E03C\n"
+"	ldr r3, _0804C0A4\n"
+"	add sp, r3\n"
+"	pop {r3-r5}\n"
+"	mov r8, r3\n"
+"	mov r9, r4\n"
+"	mov r10, r5\n"
+"	pop {r4-r7}\n"
+"	pop {r0}\n"
+"	bx r0\n"
+"	.align 2, 0\n"
+"_0804C080: .4byte 0x00001ca8\n"
+"_0804C084: .4byte 0x00001cb4\n"
+"_0804C088: .4byte 0x00001cb8\n"
+"_0804C08C: .4byte 0x00001cb0\n"
+"_0804C090: .4byte 0x0000fffc\n"
+"_0804C094: .4byte 0x00001c28\n"
+"_0804C098: .4byte 0x00001c64\n"
+"_0804C09C: .4byte gUnknown_202F1B0\n"
+"_0804C0A0: .4byte gUnknown_202F1B2\n"
+"_0804C0A4: .4byte 0x00001cc8");
+}
+#endif // NONMATCHING
+
+void sub_804C0A8(UnkDungeonGlobal_unk1C574 *unkPtr)
+{
+    struct UnkHugeSpStruct sp;
+    s32 unk7200[15];
+    s32 unk7260[15];
+    s32 x, y, unk;
+
+    unk7200[0] = 0;
+    unk7200[1] = 11;
+    unk7200[2] = 22;
+    unk7200[3] = 33;
+    unk7200[4] = 44;
+    unk7200[5] = 56;
+
+    unk7260[0] = 4;
+    unk7260[1] = 15;
+
+    unk = 1;
+    x = 5, y = 1;
+    sub_804D084(&sp, x, y);
+    sub_804D154(&sp, x, y, unkPtr->unk1);
+    sub_804D2D0(&sp, x, y, unk7200, unk7260, unkPtr->unkD);
+    sub_804D5B0(&sp, x, y, unkPtr);
+    sub_804D8C8(&sp, x, y, unk7200, unk7260, unk);
+    sub_804E590(&sp, x, y, unk7200, unk7260);
+    sub_804EBC8(&sp, x, y, gUnknown_202F1B0);
+    sub_804EEE4(&sp, x, y, gUnknown_202F1B2);
+    sub_804CBEC(&sp, x, y, unkPtr->unk13);
+    sub_804E03C(&sp, x, y);
+}
+
+void sub_804C190(UnkDungeonGlobal_unk1C574 *unkPtr)
+{
+    struct UnkHugeSpStruct sp;
+    s32 unk7200[15];
+    s32 unk7260[15];
+    s32 i, j, x, y;
+
+    unk7200[0] = 11;
+    unk7200[1] = 22;
+    unk7200[2] = 33;
+    unk7200[3] = 44;
+
+    unk7260[0] = 2;
+    unk7260[1] = 11;
+    unk7260[2] = 20;
+    unk7260[3] = 30;
+
+    x = 3, y = 3;
+    sub_804D084(&sp, x, y);
+    for (i = 0; i < x; i++) {
+        for (j = 0; j < y; j++) {
+            sp.unk0[i][j].unk10 = 1;
+        }
+    }
+    sp.unk0[0][0].unk8 = 1;
+    sp.unk0[2][0].unk8 = 1;
+    sp.unk0[0][2].unk8 = 1;
+    sp.unk0[2][2].unk8 = 1;
+
+    sub_804D2D0(&sp, x, y, unk7200, unk7260, unkPtr->unkD);
+
+    sp.unk0[0][1].unk22 = 1;
+    sp.unk0[1][1].unk21 = 1;
+    sp.unk0[1][1].unk22 = 1;
+    sp.unk0[2][1].unk21 = 1;
+    sp.unk0[1][0].unk20 = 1;
+    sp.unk0[1][1].unk19 = 1;
+    sp.unk0[1][1].unk20 = 1;
+    sp.unk0[1][2].unk19 = 1;
+    sub_804D8C8(&sp, x, y, unk7200, unk7260, 1);
+    sub_804E590(&sp, x, y, unk7200, unk7260);
+    sub_804EBC8(&sp, x, y, gUnknown_202F1B0);
+    sub_804EEE4(&sp, x, y, gUnknown_202F1B2);
+    sub_804CBEC(&sp, x, y, unkPtr->unk13);
+    sub_804E03C(&sp, x, y);
+}
+
+void sub_804C2F4(UnkDungeonGlobal_unk1C574 *unkPtr)
+{
+    struct UnkHugeSpStruct sp;
+    s32 unk7200[15];
+    s32 unk7260[15];
+    s32 i, j, x, y;
+
+    unk7200[0] = 5;
+    unk7200[1] = 15;
+    unk7200[2] = 35;
+    unk7200[3] = 50;
+
+    unk7260[0] = 2;
+    unk7260[1] = 11;
+    unk7260[2] = 20;
+    unk7260[3] = 30;
+
+    x = 3, y = 3;
+    sub_804D084(&sp, x, y);
+    for (i = 0; i < x; i++) {
+        for (j = 0; j < y; j++) {
+            sp.unk0[i][j].unk10 = 1;
+        }
+    }
+
+    sub_804D2D0(&sp, x, y, unk7200, unk7260, unkPtr->unkD);
+    for (j = 0; j < 3; j++) {
+        sp.unk0[0][j].unk22 = 1;
+        sp.unk0[1][j].unk21 = 1;
+        sp.unk0[1][j].unk22 = 1;
+        sp.unk0[2][j].unk21 = 1;
+    }
+    sub_804D8C8(&sp, x, y, unk7200, unk7260, 1);
+    sub_804C43C(1, 0, 1, sp.unk0);
+    sub_804C43C(1, 0, 2, sp.unk0);
+    sub_804E590(&sp, x, y, unk7200, unk7260);
+    sub_804EBC8(&sp, x, y, gUnknown_202F1B0);
+    sub_804EEE4(&sp, x, y, gUnknown_202F1B2);
+    sub_804CBEC(&sp, x, y, unkPtr->unk13);
+    sub_804E03C(&sp, x, y);
+}
+
+void sub_804C43C(s32 a0, s32 a1, s32 a2, struct UnkHugeSpStructSubUnk0 sp[15][15])
+{
+    s32 x, y;
+    s32 xStart = (sp[a0][a1].unk0.x < sp[a0][a1+a2].unk0.x) ? sp[a0][a1].unk0.x : sp[a0][a1+a2].unk0.x;
+    s32 yStart = sp[a0][a1].unk0.y;
+    s32 xMax = (sp[a0][a1].unk4.x > sp[a0][a1+a2].unk4.x) ? sp[a0][a1].unk4.x : sp[a0][a1+a2].unk4.x;
+    s32 yMax = sp[a0][a1 + a2].unk4.y;
+    u8 room = GetTile(sp[a0][a1].unk0.x, sp[a0][a1].unk0.y)->room;
+
+    for (x = xStart; x < xMax; x++) {
+        for (y = yStart; y < yMax; y++) {
+            Tile *tile = GetTileSafe(x, y);
+            tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+            tile->terrainType |= TERRAIN_TYPE_NORMAL;
+            tile->room = room;
+        }
+    }
+
+    sp[a0][a1].unk0.x = xStart;
+    sp[a0][a1].unk4.x = xMax;
+    sp[a0][a1].unk0.y = yStart;
+    sp[a0][a1].unk4.y = yMax;
+    sp[a0][a1 + a2].unk18 = 1;
+    sp[a0][a1].unk18 = 1;
+    sp[a0][a1 + a2].unk11 = 0;
+    sp[a0][a1 + a2].unk17 = 1;
 }
 
 //
