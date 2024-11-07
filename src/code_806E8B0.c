@@ -150,7 +150,7 @@ static inline void SetDamageOne(struct DamageStruct *dmgStruct, u8 moveType)
     dmgStruct->type = moveType;
     dmgStruct->isCrit = FALSE;
     dmgStruct->unkE = 0;
-    dmgStruct->unkF = 0;
+    dmgStruct->tookNoDamage = FALSE;
 }
 
 void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s32 critChance, struct DamageStruct *dmgStruct, s32 arg8, u16 moveId, bool8 arg_10)
@@ -447,11 +447,11 @@ void DealDamageToEntity(Entity *entity, s32 dmg, s32 r6, s16 r4)
     dmgStruct.residualDmgType = r6;
     dmgStruct.isCrit = FALSE;
     dmgStruct.unkE = 0;
-    dmgStruct.unkF = 0;
+    dmgStruct.tookNoDamage = FALSE;
     HandleDealingDamage(&spEntity, entity, &dmgStruct, FALSE, FALSE, r4_, FALSE, 0);
 }
 
-void sub_806F370(Entity *pokemon, Entity *target, s32 dmg, s32 r9, u8 *arg_0, u8 moveType, s16 arg_8, s32 arg_C, s32 arg_10, s32 arg_14)
+void sub_806F370(Entity *pokemon, Entity *target, s32 dmg, s32 giveExp, bool8 *tookNoDamage, u8 moveType, s16 arg_8, s32 residualDmgType, s32 arg_10, s32 arg_14)
 {
     s32 i;
     struct DamageStruct dmgStruct;
@@ -459,7 +459,7 @@ void sub_806F370(Entity *pokemon, Entity *target, s32 dmg, s32 r9, u8 *arg_0, u8
     s32 dmgNew = dmg;
 
     dmgStruct.typeEffectiveness = EFFECTIVENESS_NEUTRAL;
-    dmgStruct.residualDmgType = arg_C;
+    dmgStruct.residualDmgType = residualDmgType;
     dmgStruct.type = moveType;
     dmgStruct.isCrit = FALSE;
     dmgStruct.unkE = 0;
@@ -480,14 +480,14 @@ void sub_806F370(Entity *pokemon, Entity *target, s32 dmg, s32 r9, u8 *arg_0, u8
 
     dmgStruct.dmg = dmgNew;
     if (dmgNew == 0) {
-        dmgStruct.unkF = 1;
+        dmgStruct.tookNoDamage = TRUE;
     }
     else {
-        dmgStruct.unkF = 0;
+        dmgStruct.tookNoDamage = FALSE;
     }
 
-    HandleDealingDamage(pokemon, target, &dmgStruct, FALSE, r9, arg_8_, arg_10, arg_14);
-    if (arg_0 != NULL) {
-        *arg_0 = dmgStruct.unkF;
+    HandleDealingDamage(pokemon, target, &dmgStruct, FALSE, giveExp, arg_8_, arg_10, arg_14);
+    if (tookNoDamage != NULL) {
+        *tookNoDamage = dmgStruct.tookNoDamage;
     }
 }

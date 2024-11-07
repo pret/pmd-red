@@ -90,7 +90,7 @@ extern void sub_8049BB0(s32, s32);
 void sub_8042A14(Position *);
 extern void sub_8049ED4(void);
 
-bool8 sub_804ACE4(Position *pos)
+bool8 PosHasItem(Position *pos)
 {
   struct Tile *tile;
   Entity *entity;
@@ -103,7 +103,7 @@ bool8 sub_804ACE4(Position *pos)
   return FALSE;
 }
 
-Entity *sub_804AD0C(Position *pos)
+Entity *GetMonsterAtPos(Position *pos)
 {
   struct Tile *tile;
   Entity *entity;

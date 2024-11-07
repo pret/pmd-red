@@ -201,19 +201,19 @@ extern s32 sub_80556BC(Entity *, Entity *, u8, Move *, u32, u32);
 
 // move_util.h
 extern bool8 sub_805727C(Entity *, Entity *, s16);
-bool8 sub_8057308(Entity *pokemon, s32 chance);
+bool8 RollSecondaryEffect(Entity *pokemon, s32 chance);
 bool8 sub_80571F0(Entity * pokemon, Move *move);
 
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern u32 HandleDamagingMove(Entity *, Entity *, Move *, u32, u32);
-u8 sub_8057620(u32 param_1);
+u8 ToItemID(u32 param_1);
 extern s16 sub_8094828(u16, u8);
 extern void DealDamageToEntity(Entity *, s32, u32, u32);
 
 extern s16 gUnknown_80F4DB4;
 extern u32 gUnknown_8106A4C;
 
-bool8 sub_805755C(Entity* pokemon, u16 moveID)
+bool8 MoveRequiresCharging(Entity* pokemon, u16 moveID)
 {
     if ((moveID == MOVE_SOLARBEAM) && (GetApparentWeather(pokemon) == WEATHER_SUNNY)) {
         return FALSE;
@@ -261,10 +261,10 @@ void sub_8057588(Entity * pokemon, u8 param_2)
 
 s16 sub_8057600(Move *move, s32 itemID)
 {
-    return sub_8094828(move->id, sub_8057620(itemID));
+    return sub_8094828(move->id, ToItemID(itemID));
 }
 
-u8 sub_8057620(u32 itemID)
+u8 ToItemID(u32 itemID)
 {
     if(itemID == ITEM_NOTHING)
         return ITEM_NOTHING;
@@ -664,7 +664,7 @@ bool8 sub_8057E6C(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   SendThawedMessage(pokemon,target);
   if (HandleDamagingMove(pokemon,target,move,0x100,param_4) != 0) {
     flag = TRUE;
-    if (sub_8057308(pokemon, 0)) {
+    if (RollSecondaryEffect(pokemon, 0)) {
       entityInfo->unk155 = 1;
     }
   }
@@ -1062,7 +1062,7 @@ bool8 sub_80586DC(Entity * pokemon, Entity * target, Move * move, u32 param_4)
   hasLiquidOoze = HasAbility(target, ABILITY_LIQUID_OOZE);
   uVar3 = HandleDamagingMove(pokemon,target,move,0x100,param_4);
   flag = uVar3 != 0 ? TRUE : FALSE;
-  if (flag && sub_8057308(pokemon, 0)) {
+  if (flag && RollSecondaryEffect(pokemon, 0)) {
     newHP = uVar3 / 2;
     entityInfo = GetEntInfo(pokemon);
     flag = TRUE;
@@ -1151,7 +1151,7 @@ bool8 sub_80588B8(Entity *pokemon, Entity *target, Move *move, u32 param_4)
     if(HandleDamagingMove(pokemon, target, move, 0x80 << 1, param_4) != 0)
     {
         flag = TRUE;
-        if(sub_8057308(pokemon, 0))
+        if(RollSecondaryEffect(pokemon, 0))
         {
             gUnknown_202F219 = 1;
         }
@@ -1178,7 +1178,7 @@ bool8 sub_8058930(Entity *pokemon, Entity *target, Move *move, u32 param_4)
     if(HandleDamagingMove(pokemon, target, move, 0x80 << 1, param_4) != 0)
     {
         flag = TRUE;
-        if(sub_8057308(pokemon, gUnknown_80F4DD6))
+        if(RollSecondaryEffect(pokemon, gUnknown_80F4DD6))
         {
             entityInfo = GetEntInfo(pokemon);
             RaiseMovementSpeedTarget(pokemon, pokemon, 0, TRUE);
@@ -1212,7 +1212,7 @@ bool8 sub_8058A18(Entity *pokemon, Entity *target, Move *move, u32 param_4)
     if(HandleDamagingMove(pokemon, target, move, 0x80 << 1, param_4) != 0)
     {
         flag = TRUE;
-        if(sub_8057308(pokemon, 0))
+        if(RollSecondaryEffect(pokemon, 0))
         {
             gUnknown_202F21A = 1;
         }
@@ -1351,7 +1351,7 @@ bool8 sub_8058CEC(Entity *pokemon, Entity *target, Move *move, u32 param_4)
     if(HandleDamagingMove(pokemon, target, move, 0x80 << 1, param_4) != 0)
     {
         flag = TRUE;
-        if(sub_8057308(pokemon, 0))
+        if(RollSecondaryEffect(pokemon, 0))
         {
             LowerAttackStageTarget(pokemon, pokemon, gUnknown_8106A50, 2, 0, FALSE);
         }
@@ -1432,7 +1432,7 @@ bool8 sub_8058E5C(Entity *pokemon, Entity *target, Move *move, s32 param_4)
       iVar3 = 1;
     }
     flag = TRUE;
-    if ((!HasAbility(pokemon, ABILITY_ROCK_HEAD)) && sub_8057308(pokemon, 0)) {
+    if ((!HasAbility(pokemon, ABILITY_ROCK_HEAD)) && RollSecondaryEffect(pokemon, 0)) {
       sub_806F370(pokemon,pokemon,iVar3,0,0,0,0x1fd,0x14,1,0);
     }
   }
@@ -1601,7 +1601,7 @@ bool8 sub_80591E4(Entity *pokemon, Entity *target, Move *move, s32 param_4)
       EntityInfo *entityInfo = GetEntInfo(pokemon);
       flag = TRUE;
       SetExpMultplier(entityInfo);
-      if (sub_8057308(pokemon,0)) {
+      if (RollSecondaryEffect(pokemon,0)) {
         if (hasLiquidOoze) {
             DealDamageToEntity(pokemon,iVar4,0xd,0x1fa);
         }
@@ -1707,7 +1707,7 @@ bool8 sub_805946C(Entity * pokemon,Entity * target,Move * move,u32 param_4)
   flag = FALSE;
   if (HandleDamagingMove(pokemon, target, move, 0x100, param_4) != 0) {
     flag = TRUE;
-    if ((!HasAbility(pokemon, ABILITY_ROCK_HEAD)) && (sub_8057308(pokemon,0) != 0)) {
+    if ((!HasAbility(pokemon, ABILITY_ROCK_HEAD)) && (RollSecondaryEffect(pokemon,0) != 0)) {
       HP = GetEntInfo(pokemon)->maxHPStat;
       if (HP < 0) {
         HP = HP + 7;
@@ -2464,7 +2464,7 @@ bool8 sub_805A464(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   flag = FALSE;
   if (HandleDamagingMove(pokemon, target, move, 0x100, param_4) != 0) {
     flag = TRUE;
-    if (sub_8057308(pokemon, 0) != 0) {
+    if (RollSecondaryEffect(pokemon, 0) != 0) {
       if (!EntityExists(target)) {
         pos.x = 0;
         pos.y = 0;

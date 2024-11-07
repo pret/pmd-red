@@ -36,6 +36,7 @@ void xxx_init_struct_8094924_save_809486C(struct unkStruct_8094924 *r0, u8 *r1, 
     MemoryClear8(r1, size);
 }
 
+// Related to reading/writing bits
 void nullsub_102(struct unkStruct_8094924 *r0)
 {
 
