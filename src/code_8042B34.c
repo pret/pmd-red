@@ -376,8 +376,7 @@ extern void sub_8046F84(s32 itemFlag);
 extern bool8 sub_8083C50(void);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
 extern void sub_806BFC0(EntityInfo *, u32);
-extern s32 GetMovesLearnedAtLevel(u16* a1, s16 species, s32 a3, s32 IQPoints);
-extern s32 GetMovesLearnedAtLevel(u16* a1, s16 species, s32 a3, s32 IQPoints);
+extern s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
 extern bool8 IsKeepMoney(u8 dungeon);
 extern void sub_8042B0C(Entity *);
 
