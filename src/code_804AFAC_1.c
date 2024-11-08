@@ -3,6 +3,7 @@
 #include "tile_types.h"
 #include "dungeon_map_access.h"
 #include "dungeon_random.h"
+#include "constants/direction.h"
 #include "structs/str_dungeon.h"
 #include "structs/map.h"
 
@@ -37,23 +38,26 @@ extern void sub_804FD30(void);
 extern void sub_804FD30(void);
 extern void sub_80518F0(void);
 extern void sub_804FCCC(void);
-extern void sub_804C918(void);
+extern void GenerateOneRoomMonsterHouseFloor(void);
 extern void sub_804FBE8(void);
 extern void sub_804FC74(void);
 extern void sub_804E9DC(void);
-extern void sub_804C9D0(void);
+extern void GenerateTwoRoomsWithMonsterHouseFloor(void);
 extern u8 sub_8043D10();
 extern bool8 sub_8050C30(s32 a0, s32 a1, u8 a2);
 extern void sub_806C330(s32 a0, s32 a1, s16 a2, u8 a3);
 
+extern const Position gAdjacentTileOffsets[];
+
 void sub_804B534(s32 a0, s32 a1, s32 a2, s32 a3);
 bool8 sub_804C70C(s32, UnkDungeonGlobal_unk1C574 *);
-void sub_804B634(s32 a0, s32 a1, UnkDungeonGlobal_unk1C574 *a2);
+void GenerateStandardFloor(s32 a0, s32 a1, UnkDungeonGlobal_unk1C574 *a2);
 void sub_804B72C(UnkDungeonGlobal_unk1C574 *a0);
 void sub_804BC80(UnkDungeonGlobal_unk1C574 *a0);
 void GenerateLineFloor(UnkDungeonGlobal_unk1C574 *a0);
 void GenerateCrossFloor(UnkDungeonGlobal_unk1C574 *a0);
 void GenerateBeetleFloor(UnkDungeonGlobal_unk1C574 *a0);
+void GenerateOuterRoomsFloor(s32 sizeX_, s32 sizeY_, UnkDungeonGlobal_unk1C574 *unkPtr);
 void sub_8051654(UnkDungeonGlobal_unk1C574 *a0);
 void sub_80506F0(s32 a0, UnkDungeonGlobal_unk1C574 *a1);
 void sub_804FF08(UnkDungeonGlobal_unk1C574 *a0, bool8 a1);
@@ -160,22 +164,22 @@ void sub_804AFAC(void)
                     case 1:
                         y = DungeonRandInt(2) + 2;
                         gUnknown_202F1AE = 1;
-                        sub_804B634(4, y, unkPtr);
+                        GenerateStandardFloor(4, y, unkPtr);
                         r10 = TRUE;
                         break;
                     case 11:
                         y = DungeonRandInt(2) + 2;
                         gUnknown_202F1AE = 2;
-                        sub_804B634(4, y, unkPtr);
+                        GenerateStandardFloor(4, y, unkPtr);
                         r10 = TRUE;
                         break;
                     case 0:
                     default:
-                        sub_804B634(x, y, unkPtr);
+                        GenerateStandardFloor(x, y, unkPtr);
                         r10 = TRUE;
                         break;
                     case 2:
-                        sub_804C918();
+                        GenerateOneRoomMonsterHouseFloor();
                         gDungeon->unk3A08 = 1;
                         break;
                     case 3:
@@ -187,7 +191,7 @@ void sub_804AFAC(void)
                         r10 = TRUE;
                         break;
                     case 5:
-                        sub_804C9D0();
+                        GenerateTwoRoomsWithMonsterHouseFloor();
                         gDungeon->unk3A08 = 1;
                         break;
                     case 6:
@@ -201,7 +205,7 @@ void sub_804AFAC(void)
                         GenerateBeetleFloor(unkPtr);
                         break;
                     case 10:
-                        sub_804B634(x, y, unkPtr);
+                        GenerateOuterRoomsFloor(x, y, unkPtr);
                         r10 = TRUE;
                         break;
                 }
@@ -247,7 +251,7 @@ void sub_804AFAC(void)
         if (j == 10) {
             gUnknown_202F1D8.x = -1;
             gUnknown_202F1D8.y = -1;
-            sub_804C918();
+            GenerateOneRoomMonsterHouseFloor();
             gDungeon->unk3A08 = 1;
         }
         sub_804E9DC();
@@ -271,7 +275,7 @@ void sub_804AFAC(void)
         gUnknown_202F1D8.x = -1;
         gUnknown_202F1D8.y = -1;
         sub_804FD30();
-        sub_804C918();
+        GenerateOneRoomMonsterHouseFloor();
         gDungeon->unk3A08 = 1;
         sub_804E9DC();
         sub_804FF08(unkPtr, FALSE);
@@ -592,7 +596,7 @@ void NAKED sub_804AFAC(void)
 "	movs r0, 0x4\n"
 "	adds r1, r4, 0\n"
 "	mov r2, r8\n"
-"	bl sub_804B634\n"
+"	bl GenerateStandardFloor\n"
 "	b _0804B2AA\n"
 "	.align 2, 0\n"
 "_0804B24C: .4byte gUnknown_202F1AE\n"
@@ -606,7 +610,7 @@ void NAKED sub_804AFAC(void)
 "	movs r0, 0x4\n"
 "	adds r1, r4, 0\n"
 "	mov r2, r8\n"
-"	bl sub_804B634\n"
+"	bl GenerateStandardFloor\n"
 "	movs r6, 0x1\n"
 "	mov r10, r6\n"
 "	b _0804B2F6\n"
@@ -616,10 +620,10 @@ void NAKED sub_804AFAC(void)
 "	adds r0, r5, 0\n"
 "	adds r1, r4, 0\n"
 "	mov r2, r8\n"
-"	bl sub_804B634\n"
+"	bl GenerateStandardFloor\n"
 "	b _0804B2D2\n"
 "_0804B280:\n"
-"	bl sub_804C918\n"
+"	bl GenerateOneRoomMonsterHouseFloor\n"
 "	ldr r0, _0804B290\n"
 "	ldr r0, [r0]\n"
 "	ldr r1, _0804B294\n"
@@ -642,7 +646,7 @@ void NAKED sub_804AFAC(void)
 "	mov r10, r3\n"
 "	b _0804B2F6\n"
 "_0804B2B0:\n"
-"	bl sub_804C9D0\n"
+"	bl GenerateTwoRoomsWithMonsterHouseFloor\n"
 "	ldr r0, _0804B2C4\n"
 "	ldr r0, [r0]\n"
 "	ldr r6, _0804B2C8\n"
@@ -673,7 +677,7 @@ void NAKED sub_804AFAC(void)
 "	adds r0, r5, 0\n"
 "	adds r1, r4, 0\n"
 "	mov r2, r8\n"
-"	bl sub_804C53C\n"
+"	bl GenerateOuterRoomsFloor\n"
 "	movs r1, 0x1\n"
 "	mov r10, r1\n"
 "_0804B2F6:\n"
@@ -755,7 +759,7 @@ void NAKED sub_804AFAC(void)
 "	movs r0, 0x1\n"
 "	negs r0, r0\n"
 "	strh r0, [r1, 0x2]\n"
-"	bl sub_804C918\n"
+"	bl GenerateOneRoomMonsterHouseFloor\n"
 "	ldr r0, _0804B4C0\n"
 "	ldr r0, [r0]\n"
 "	ldr r1, _0804B4C4\n"
@@ -848,7 +852,7 @@ void NAKED sub_804AFAC(void)
 "	negs r0, r0\n"
 "	strh r0, [r1, 0x2]\n"
 "	bl sub_804FD30\n"
-"	bl sub_804C918\n"
+"	bl GenerateOneRoomMonsterHouseFloor\n"
 "	ldr r0, _0804B4C0\n"
 "	ldr r0, [r0]\n"
 "	ldr r1, _0804B4C4\n"
@@ -977,8 +981,8 @@ void sub_804B534(s32 xStart, s32 yStart, s32 maxX, s32 maxY)
 
 struct GridCell
 {
-    Position unk0;
-    Position unk4;
+    Position start;
+    Position end;
     u8 unk8;
     u8 unk9;
     u8 unk10;
@@ -1007,40 +1011,59 @@ struct GridCell
 
 #define GRID_CELL_LEN 15
 
-void sub_804D024(s32 *a0, s32 *a1, s32 x, s32 y);
+void GetGridPositions(s32 *listX, s32 *listY, s32 sizeX, s32 sizeY);
 void InitDungeonGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 sizeX, s32 sizeY);
 void GenerateRoomImperfections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 sizeX, s32 sizeY);
-void sub_804D534(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x, s32 y);
+void GenerateSecondaryStructures(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 sizeX, s32 sizeY);
 void AssignRooms(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 sizeX, s32 sizeY, s32 roomsNumber);
 void CreateRoomsAndAnchors(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 sizeX, s32 sizeY, s32 *listX, s32 *listY, u32 roomFlags);
 void CreateGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 sizeX, s32 sizeY, s32 *listX, s32 *listY, bool8 disableRoomMerging);
 void EnsureConnectedGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 sizeX, s32 sizeY, s32 *listX, s32 *listY);
 void sub_804D5B0(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x, s32 y, UnkDungeonGlobal_unk1C574 *unkPtr);
-void sub_804F0D0(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x, s32 y, s32 a3);
+void GenerateMazeRoom(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 sizeX, s32 sizeY, s32 chance);
 void GenerateKecleonShop(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 sizeX, s32 sizeY, s32 chance);
 void GenerateMonsterHouse(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 sizeX, s32 sizeY, s32 chance);
 void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 sizeX, s32 sizeY, s32 numExtraHallways);
 static void MergeRoomsVertically(s32 roomX, s32 room_y1, s32 room_dy, struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN]);
 
-void sub_804B634(s32 sizeX, s32 sizeY, UnkDungeonGlobal_unk1C574 *unkPtr)
+/*
+ * GenerateStandardFloor - Generates a standard, typical floor layout.
+ *
+ * Overview:
+ * 1. Determine the grid based on sizeX, sizeY
+ * 2. Assign and create rooms and hallway anchors to each grid cell
+ * 3. Assign and create connections between grid cells (these are traditional hallways connecting the map together)
+ * 4. Fix any unconnected grid cells by adding more connections or removing their rooms/hallway anchors
+ * 5. Generate special rooms like a Maze Room (unused in vanilla?), Kecleon Shop, or Monster House
+ * 6. Create additional "extra hallways" with random walks outside of existing rooms
+ * 7. Finalize extra room details with imperfections (unused in vanilla?), and structures with secondary terrain
+ */
+void GenerateStandardFloor(s32 sizeX, s32 sizeY, UnkDungeonGlobal_unk1C574 *unkPtr)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
     s32 listY[GRID_CELL_LEN];
 
-    sub_804D024(listX, listY, sizeX, sizeY);
+    GetGridPositions(listX, listY, sizeX, sizeY);
+
     InitDungeonGrid(grid, sizeX, sizeY);
+
     AssignRooms(grid, sizeX, sizeY, unkPtr->unk1);
+
     CreateRoomsAndAnchors(grid, sizeX, sizeY, listX, listY, unkPtr->unkD);
+
     sub_804D5B0(grid, sizeX, sizeY, unkPtr);
     CreateGridCellConnections(grid, sizeX, sizeY, listX, listY, FALSE);
+
     EnsureConnectedGrid(grid, sizeX, sizeY, listX, listY);
-    sub_804F0D0(grid, sizeX, sizeY, unkPtr->unk9);
+
+    GenerateMazeRoom(grid, sizeX, sizeY, unkPtr->unk9);
     GenerateKecleonShop(grid, sizeX, sizeY, gUnknown_202F1B0);
     GenerateMonsterHouse(grid, sizeX, sizeY, gUnknown_202F1B2);
+
     GenerateExtraHallways(grid, sizeX, sizeY, unkPtr->unk13);
     GenerateRoomImperfections(grid, sizeX, sizeY);
-    sub_804D534(grid, sizeX, sizeY);
+    GenerateSecondaryStructures(grid, sizeX, sizeY);
 }
 
 // Decompile once data structure is better understood
@@ -2379,13 +2402,13 @@ void GenerateBeetleFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
 static void MergeRoomsVertically(s32 roomX, s32 room_y1, s32 room_dy, struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN])
 {
     s32 x, y;
-    s32 xStart = min(grid[roomX][room_y1].unk0.x, grid[roomX][room_y1+room_dy].unk0.x);
-    s32 yStart = grid[roomX][room_y1].unk0.y;
-    s32 xEnd = max(grid[roomX][room_y1].unk4.x, grid[roomX][room_y1+room_dy].unk4.x);
-    s32 yEnd = grid[roomX][room_y1 + room_dy].unk4.y;
+    s32 xStart = min(grid[roomX][room_y1].start.x, grid[roomX][room_y1+room_dy].start.x);
+    s32 yStart = grid[roomX][room_y1].start.y;
+    s32 xEnd = max(grid[roomX][room_y1].end.x, grid[roomX][room_y1+room_dy].end.x);
+    s32 yEnd = grid[roomX][room_y1 + room_dy].end.y;
 
     // Carve out the new larger room, retaining the index of the first room
-    u8 roomId = GetTile(grid[roomX][room_y1].unk0.x, grid[roomX][room_y1].unk0.y)->room;
+    u8 roomId = GetTile(grid[roomX][room_y1].start.x, grid[roomX][room_y1].start.y)->room;
 
     for (x = xStart; x < xEnd; x++) {
         for (y = yStart; y < yEnd; y++) {
@@ -2396,70 +2419,94 @@ static void MergeRoomsVertically(s32 roomX, s32 room_y1, s32 room_dy, struct Gri
         }
     }
 
-    grid[roomX][room_y1].unk0.x = xStart;
-    grid[roomX][room_y1].unk4.x = xEnd;
-    grid[roomX][room_y1].unk0.y = yStart;
-    grid[roomX][room_y1].unk4.y = yEnd;
+    grid[roomX][room_y1].start.x = xStart;
+    grid[roomX][room_y1].end.x = xEnd;
+    grid[roomX][room_y1].start.y = yStart;
+    grid[roomX][room_y1].end.y = yEnd;
     grid[roomX][room_y1 + room_dy].unk18 = TRUE;
     grid[roomX][room_y1].unk18 = TRUE;
     grid[roomX][room_y1 + room_dy].unk11 = FALSE;
     grid[roomX][room_y1 + room_dy].unk17 = TRUE;
 }
 
-void sub_804C53C(s32 x_, s32 y_, UnkDungeonGlobal_unk1C574 *unkPtr)
+// GenerateOuterRoomsFloor - Generates a floor layout with a ring of rooms and nothing on the interior.
+// This layout is bugged and will not properly connect rooms for sizeX < 3.
+void GenerateOuterRoomsFloor(s32 sizeX_, s32 sizeY_, UnkDungeonGlobal_unk1C574 *unkPtr)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
     s32 listY[GRID_CELL_LEN];
-    s32 i, j;
-    s32 x = x_;
-    s32 y = y_;
+    s32 x, y;
+    s32 sizeX = sizeX_;
+    s32 sizeY = sizeY_;
 
-    sub_804D024(listX, listY, x, y);
-    InitDungeonGrid(grid, x, y);
-    for (i = 0; i < x; i++) {
-        for (j = 0; j < y; j++) {
-            grid[i][j].unk10 = 1;
+    GetGridPositions(listX, listY, sizeX, sizeY);
+    InitDungeonGrid(grid, sizeX, sizeY);
+
+    // Make all cells rooms
+    for (x = 0; x < sizeX; x++) {
+        for (y = 0; y < sizeY; y++) {
+            grid[x][y].unk10 = TRUE;
         }
     }
 
-    for (i = 1; i < x - 1; i++) {
-        for (j = 1; j < y - 1; j++) {
-            grid[i][j].unk8 = 1;
+    // Invalidate all interior cells
+    for (x = 1; x < sizeX - 1; x++) {
+        for (y = 1; y < sizeY - 1; y++) {
+            grid[x][y].unk8 = TRUE;
         }
     }
 
-    CreateRoomsAndAnchors(grid, x, y, listX, listY, unkPtr->unkD);
-    for (i = 0; i < x - 1; i++) {
-        if (i != 0) {
-            grid[i][0].unk22 = 1;
-            grid[i][y-1].unk22 = 1;
+    CreateRoomsAndAnchors(grid, sizeX, sizeY, listX, listY, unkPtr->unkD);
+
+    // Maybe Todo: Add EpicYoshiMaster's fixed implementation of this function
+
+    // The original implementation fails for sizeX <= 2, as one of the branches
+    // is never taken, and the other branch does not provide a backup connection, leaving the two sides unconnected.
+    // Additionally, there is a minor issue for top/bottom connections which results in hallways being connected from the bottom
+    // instead of from the top, but this does not affect the connectivity of the map.
+    for (x = 0; x < sizeX - 1; x++) {
+        if (x != 0) {
+            grid[x][0].unk22 = TRUE;
+            grid[x][sizeY-1].unk22 = TRUE;
         }
-        if (i < x - 2) {
-            grid[i+1][0].unk21 = 1;
-            grid[i+1][y-1].unk21 = 1;
+
+        // Bug: if sizeX <= 2, this branch will never be run.
+        // Additionally, because the branch above this has no meaningful hallways produced for
+        // sizeX == 1, no connections will be made between columns here.
+        // This results in an unconnected map for sizeX <= 2.
+        if (x < sizeX - 2) {
+            grid[x+1][0].unk21 = TRUE;
+            grid[x+1][sizeY-1].unk21 = TRUE;
         }
     }
 
-    for (j = 0; j < y - 1; j++) {
-        if (j != 0) {
-            grid[0][j].unk19 = 1;
-            grid[x-1][j].unk19 = 1;
+    for (y = 0; y < sizeY - 1; y++) {
+        if (y != 0) {
+            grid[0][y].unk19 = TRUE;
+            grid[sizeX-1][y].unk19 = TRUE;
         }
-        if (j < y - 2) {
-            grid[0][j].unk20 = 1;
-            grid[x-1][j].unk20 = 1;
+
+        // This connection ends up not being set for the bottom row, but this is fine because the other
+        // connection to this room is still correct. The result is that hallways here will be using the opposing end
+        // of the grid cell boundary for their turns compared to top/bottom hallways between other rows.
+        if (y < sizeY - 2) {
+            grid[0][y].unk20 = TRUE;
+            grid[sizeX-1][y].unk20 = TRUE;
         }
     }
 
-    CreateGridCellConnections(grid, x, y, listX, listY, FALSE);
-    EnsureConnectedGrid(grid, x, y, listX, listY);
-    sub_804F0D0(grid, x, y, unkPtr->unk9);
-    GenerateKecleonShop(grid, x, y, gUnknown_202F1B0);
-    GenerateMonsterHouse(grid, x, y, gUnknown_202F1B2);
-    GenerateExtraHallways(grid, x, y, unkPtr->unk13);
-    GenerateRoomImperfections(grid, x, y);
-    sub_804D534(grid, x, y);
+    CreateGridCellConnections(grid, sizeX, sizeY, listX, listY, FALSE);
+
+    EnsureConnectedGrid(grid, sizeX, sizeY, listX, listY);
+
+    GenerateMazeRoom(grid, sizeX, sizeY, unkPtr->unk9);
+    GenerateKecleonShop(grid, sizeX, sizeY, gUnknown_202F1B0);
+    GenerateMonsterHouse(grid, sizeX, sizeY, gUnknown_202F1B2);
+
+    GenerateExtraHallways(grid, sizeX, sizeY, unkPtr->unk13);
+    GenerateRoomImperfections(grid, sizeX, sizeY);
+    GenerateSecondaryStructures(grid, sizeX, sizeY);
 }
 
 void sub_804C790(s32 x1, s32 y1, s32 x2, s32 y2, s32 a4, UnkDungeonGlobal_unk1C574 *unkPtr);
@@ -2473,7 +2520,7 @@ bool8 sub_804C70C(s32 a0, UnkDungeonGlobal_unk1C574 *unkPtr)
     s32 x2, y2;
 
     if (x1 == 0 || y1 == 0) {
-        sub_804C918();
+        GenerateOneRoomMonsterHouseFloor();
         return FALSE;
     }
     else if (a0 < 50) {
@@ -2505,7 +2552,7 @@ void sub_804C790(s32 x1, s32 y1, s32 x2, s32 y2, s32 a4, UnkDungeonGlobal_unk1C5
     s32 r10 = 0;
     s32 x3 = 0, y3 = 0;
 
-    sub_804D024(listX, listY, x1, y1);
+    GetGridPositions(listX, listY, x1, y1);
     InitDungeonGrid(grid, x1, y1);
     AssignRooms(grid, x1, y1, unkPtr->unk1);
     for (x3 = 0; x3 < x1; x3++) {
@@ -2530,36 +2577,45 @@ void sub_804C790(s32 x1, s32 y1, s32 x2, s32 y2, s32 a4, UnkDungeonGlobal_unk1C5
     sub_8051438(&grid[x3][y3], a4);
 }
 
-void sub_804C918(void)
+/*
+ * GenerateOneRoomMonsterHouseFloor - Generates a floor layout with just one large room which is a Monster House.
+ * This generator is used as a fallback in the event generation fails too many times.
+ */
+void GenerateOneRoomMonsterHouseFloor(void)
 {
-    s32 i, j;
+    s32 x, y;
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
 
     InitDungeonGrid(grid, 1, 1);
-    grid[0][0].unk0.x = 2;
-    grid[0][0].unk4.x = DUNGEON_MAX_SIZE_X - 2;
-    grid[0][0].unk0.y = 2;
-    grid[0][0].unk4.y = DUNGEON_MAX_SIZE_Y - 2;
-    grid[0][0].unk10 = 1;
-    grid[0][0].unk11 = 1;
-    grid[0][0].unk8 = 0;
-    for (i = grid[0][0].unk0.x; i < grid[0][0].unk4.x; i++) {
-        for (j = grid[0][0].unk0.y; j < grid[0][0].unk4.y; j++) {
-            Tile *tile = GetTileSafe(i, j);
+
+    grid[0][0].start.x = 2;
+    grid[0][0].end.x = DUNGEON_MAX_SIZE_X - 2;
+    grid[0][0].start.y = 2;
+    grid[0][0].end.y = DUNGEON_MAX_SIZE_Y - 2;
+    grid[0][0].unk10 = TRUE;
+    grid[0][0].unk11 = TRUE;
+    grid[0][0].unk8 = FALSE;
+
+    for (x = grid[0][0].start.x; x < grid[0][0].end.x; x++) {
+        for (y = grid[0][0].start.y; y < grid[0][0].end.y; y++) {
+            Tile *tile = GetTileSafe(x, y);
             tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
             tile->terrainType |= TERRAIN_TYPE_NORMAL;
             // Unnecessary call again
-            GetTileSafe(i, j)->room = 0;
+            GetTileSafe(x, y)->room = 0;
         }
     }
     GenerateMonsterHouse(grid, 1, 1, 999);
 }
 
-void sub_804C9D0(void)
+// GenerateTwoRoomsWithMonsterHouseFloor - Generates a floor layout with two rooms (left and right), with one being a Monster House.
+void GenerateTwoRoomsWithMonsterHouseFloor(void)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
     s32 listY[GRID_CELL_LEN];
+    const s32 sizeX = 2;
+    const s32 sizeY = 1;
     s32 currRoomId = 0;
     s32 x, y;
 
@@ -2568,10 +2624,10 @@ void sub_804C9D0(void)
     listX[2] = 54;
     listY[0] = 2;
     listY[1] = 30;
-    InitDungeonGrid(grid, 2, 1);
+    InitDungeonGrid(grid, sizeX, sizeY);
 
-    for (y = 0; y < 1; y++) {
-        for (x = 0; x < 2; x++) {
+    for (y = 0; y < sizeY; y++) {
+        for (x = 0; x < sizeX; x++) {
             s32 currX, currY;
             s32 minX = listX[x] + 1;
             s32 minY = listY[y] + 1;
@@ -2585,10 +2641,10 @@ void sub_804C9D0(void)
             s32 endY = startY + roomSizeY;
 
             grid[x][y].unk10 = 1;
-            grid[x][y].unk0.x = startX;
-            grid[x][y].unk4.x = endX;
-            grid[x][y].unk0.y = startY;
-            grid[x][y].unk4.y = endY;
+            grid[x][y].start.x = startX;
+            grid[x][y].end.x = endX;
+            grid[x][y].start.y = startY;
+            grid[x][y].end.y = endY;
 
             for (currX = startX; currX < endX; currX++) {
                 for (currY = startY; currY < endY; currY++) {
@@ -2603,10 +2659,237 @@ void sub_804C9D0(void)
         }
     }
 
-    grid[0][0].unk22 = 1;
-	grid[1][0].unk21 = 1;
-	CreateGridCellConnections(grid, 2, 1, listX, listY, FALSE);
-	GenerateMonsterHouse(grid, 2, 1, 999);
+    grid[0][0].unk22 = TRUE;
+	grid[1][0].unk21 = TRUE;
+
+	CreateGridCellConnections(grid, sizeX, sizeY, listX, listY, FALSE);
+	GenerateMonsterHouse(grid, sizeX, sizeY, 999);
+}
+
+/*
+ * GenerateExtraHallways - Generate extra hallways on the floor via a series of random walks.
+ *
+ * These paths are often visibly dead-end hallways, or hallways which loop on themselves.
+ *
+ * Each walk begin at a random tile in a random room, leaving in a random cardinal direction, tunneling
+ * through obstacles until it reaches open terrain, is out of bounds, or reaches an impassable obstruction.
+ *
+ * For each hallway the following steps are done:
+ *
+ * 1. Select a room, tile, and cardinal direction (specific conditions documented below)
+ *
+ * 2. Walk from the tile in that direction until we are out of the room, and reach an obstacle (could traverse hallways on the way)
+ *
+ * 3. Check we're safe to proceed (not at map borders, counterclockwise/clockwise tiles are not open)
+ *
+ * Begin our random-length walk strides:
+ *
+ * 4. Check we're safe to proceed (not at borders, not open tile, not impassable wall, will not make a 2x2 open square)
+ *
+ * 5. Place Open Terrain at this tile
+ *
+ * 6. Check we're safe to proceed (counterclockwise/clockwise tiles are not open)
+ *
+ * 7. Check if we've reached the end of the current stride (steps at 0), if so, turn left or right at random and start a new stride.
+ *
+ * 8. Move in the current direction.
+ *
+ * Repeat 4-8 until a check fails.
+ */
+void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 sizeX, s32 sizeY, s32 numExtraHallways)
+{
+    s32 i, j;
+
+    if (numExtraHallways == 0)
+        return;
+
+	for (i = 0; i < numExtraHallways; i++) {
+        s32 currX, currY;
+        s32 direction;
+        u8 roomId;
+        bool8 invalid;
+	    s32 checkX, checkY, checkX2, checkY2;
+        s32 xLoop, yLoop;
+		// Select a random grid cell
+		s32 x = DungeonRandInt(sizeX);
+		s32 y = DungeonRandInt(sizeY);
+
+		// To generate extra hallways the cell must be:
+		// - a room
+		// - connected
+		// - valid
+		// - not a maze room
+		if (!grid[x][y].unk10 || !grid[x][y].unk11 || grid[x][y].unk8 || grid[x][y].unk16) continue;
+
+		// Choose a random tile in the room
+        currX = DungeonRandRange(grid[x][y].start.x, grid[x][y].end.x);
+        currY = DungeonRandRange(grid[x][y].start.y, grid[x][y].end.y);
+
+		// Choose a random cardinal direction
+        direction = DungeonRandInt(4) * 2;
+
+		// If invalid, rotate counter-clockwise until one works
+		for (j = 0; j < 3; j++) {
+			if (direction == DIRECTION_SOUTH && y >= sizeY - 1) {
+				direction = DIRECTION_EAST;
+			}
+
+			if (direction == DIRECTION_EAST && x >= sizeX - 1) {
+				direction = DIRECTION_NORTH;
+			}
+
+			if (direction == DIRECTION_NORTH && y <= 0) {
+				direction = DIRECTION_WEST;
+			}
+
+			if (direction == DIRECTION_WEST && x <= 0) {
+				direction = DIRECTION_SOUTH;
+			}
+		}
+
+        roomId = GetTile(currX, currY)->room;
+		// Walk in the random direction until out of the room
+		while (1) {
+			if (roomId != GetTile(currX, currY)->room)
+                break;
+            // gAdjacentTileOffsets gives us the proper (x,y) offset to move one tile in the given direction.
+            currX += gAdjacentTileOffsets[direction].x;
+            currY += gAdjacentTileOffsets[direction].y;
+		}
+
+		// Keep walking until an obstacle is encountered
+		while (1) {
+			if ((GetTile(currX, currY)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_NORMAL)
+                break;
+
+            currX += gAdjacentTileOffsets[direction].x;
+            currY += gAdjacentTileOffsets[direction].y;
+		}
+
+		// Abort if we reached secondary terrain
+		if ((GetTile(currX, currY)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_SECONDARY)
+            continue;
+
+		// Check that the current tile is at least 2 away from the map border
+        invalid = FALSE;
+		for (xLoop = currX - 2; xLoop <= currX + 2; xLoop++) {
+			for (yLoop = currY - 2; yLoop <= currY + 2; yLoop++) {
+				if (xLoop < 0 || xLoop >= DUNGEON_MAX_SIZE_X || yLoop < 0 || yLoop >= DUNGEON_MAX_SIZE_Y) {
+					invalid = TRUE;
+					break;
+				}
+			}
+
+			if (invalid) break;
+		}
+
+		if (invalid) continue;
+
+		// Make sure the direction 90 degrees counterclockwise isn't an open tile
+		checkX = gAdjacentTileOffsets[(direction + 2) & DIRECTION_MASK_CARDINAL].x;
+		checkY = gAdjacentTileOffsets[(direction + 2) & DIRECTION_MASK_CARDINAL].y;
+		if ((GetTile(currX + checkX, currY + checkY)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL)
+            continue;
+
+		// Do the same for 90 degrees clockwise (or 270 counterclockwise) and make sure it's not an open tile
+		checkX2 = gAdjacentTileOffsets[(direction - 2) & DIRECTION_MASK_CARDINAL].x;
+		checkY2 = gAdjacentTileOffsets[(direction - 2) & DIRECTION_MASK_CARDINAL].y;
+		if ((GetTile(currX + checkX2, currY + checkY2)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL)
+            continue;
+
+		// Number of steps to walk in one direction before turning
+        j = DungeonRandInt(3) + 3;
+		while (TRUE) {
+            s32 checkX, checkY, checkX2, checkY2;
+            bool8 willNotMakeSquare;
+			// Check for stopping conditions:
+			// - Out of bounds or on the 1-tile border of impassable walls
+			// - Reached an open tile
+			// - Reached an impassable wall
+			// - Would result in carving out a 2x2 square (not a hallway at that point)
+
+			if (currX <= 1 || currY <= 1 || currX >= DUNGEON_MAX_SIZE_X - 1 || currY >= DUNGEON_MAX_SIZE_Y - 1) break;
+			if ((GetTile(currX, currY)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL) break;
+			if (GetTile(currX, currY)->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) break;
+
+            willNotMakeSquare = TRUE;
+
+			// Check Bottom to Right
+			if (((GetTile(currX + 1, currY)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL) &&
+                ((GetTile(currX + 1, currY + 1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL) &&
+				((GetTile(currX, currY + 1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL))
+			{
+				willNotMakeSquare = FALSE;
+			}
+
+			// Check Top to Right
+			if (((GetTile(currX + 1, currY)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL) &&
+				((GetTile(currX + 1, currY - 1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL) &&
+				((GetTile(currX, currY - 1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL))
+            {
+				willNotMakeSquare = FALSE;
+			}
+
+			// Check Bottom to Left
+			if (((GetTile(currX - 1, currY)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL) &&
+				((GetTile(currX - 1, currY + 1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL) &&
+				((GetTile(currX, currY + 1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL))
+            {
+				willNotMakeSquare = FALSE;
+			}
+
+			// Check Top to Left
+			if (((GetTile(currX - 1, currY)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL) &&
+				((GetTile(currX - 1, currY - 1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL) &&
+				((GetTile(currX, currY - 1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL))
+			{
+				willNotMakeSquare = FALSE;
+			}
+
+			// If TRUE, make the tile open, it will not produce a 2x2 opening
+			// If FALSE, it will abort from neighbor checks so we don't break here
+			if (willNotMakeSquare) {
+				Tile *tile = GetTileSafe(currX, currY);
+                tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+                tile->terrainType |= TERRAIN_TYPE_NORMAL;
+			}
+
+			// Make sure the direction 90 degrees counterclockwise isn't an open tile
+			checkX = gAdjacentTileOffsets[(direction + 2) & DIRECTION_MASK_CARDINAL].x;
+			checkY = gAdjacentTileOffsets[(direction + 2) & DIRECTION_MASK_CARDINAL].y;
+			if ((GetTile(currX + checkX, currY + checkY)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL)
+                break;
+
+			// Do the same for 90 degrees clockwise (or 270 counterclockwise) and make sure it's not an open tile
+			checkX2 = gAdjacentTileOffsets[(direction - 2) & DIRECTION_MASK_CARDINAL].x;
+			checkY2 = gAdjacentTileOffsets[(direction - 2) & DIRECTION_MASK_CARDINAL].y;
+			if ((GetTile(currX + checkX2, currY + checkY2)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL)
+                break;
+
+			j--;
+			if (j == 0) {
+				j = DungeonRandInt(3) + 3;
+
+				// Turn left or right with an equal chance
+				if (DungeonRandInt(100) < 50) {
+					direction += 2;
+				}
+                else {
+					direction -= 2;
+				}
+
+				// If we'd step into an invalid grid cell, stop
+				// (We don't always utilize the entire floor space)
+				direction &= DIRECTION_MASK_CARDINAL;
+				if (currX >= 32 && gUnknown_202F1AE == 1 && direction == DIRECTION_EAST) break;
+				if (currX >= 48 && gUnknown_202F1AE == 2 && direction == DIRECTION_EAST) break;
+			}
+
+			// Move in the current direction
+			currX += gAdjacentTileOffsets[direction].x;
+			currY += gAdjacentTileOffsets[direction].y;
+		}
+	}
 }
 
 //
